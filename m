@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDAB9E7C6FA
-	for <u-boot@archiver.kernel.org>; Sat, 31 Jan 2026 23:40:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93AEFE7C6F6
+	for <u-boot@archiver.kernel.org>; Sat, 31 Jan 2026 23:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1880D83D0F;
-	Sun,  1 Feb 2026 00:39:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7D2C783CF3;
+	Sun,  1 Feb 2026 00:39:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KWZ6OsK2";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="SNRdbX0N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B18DF83C01; Sun,  1 Feb 2026 00:39:26 +0100 (CET)
+ id 8CD9583CF3; Sun,  1 Feb 2026 00:39:30 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDE3783D0F
- for <u-boot@lists.denx.de>; Sun,  1 Feb 2026 00:39:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE10283C01
+ for <u-boot@lists.denx.de>; Sun,  1 Feb 2026 00:39:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1769902760; bh=B8T5H3ID4qtQU4XdokLnhM1O6E7hO+FiFfK+8BgNyrM=;
- b=KWZ6OsK2z7WUbYrEcx3UtT0jZyl35Jxt8cB9AXRocrwADdDi0GeMlbb6klxhLygW4TLFDdGCZ
- xN8jfzeVIqIYrcPVfh+6EkoIUvx3R10bfiGOrgkKFbKfPPi7G/F+XHcIzjJCW1v/WBR7iLMhH6D
- vRwvn8XVrYdNhssPV1vctc38NF7Mf6w6UE7mfoqevFoFwokFhMiht2SqA/0MDwnxSR95fVHHnSQ
- boWj76TNfUGtKy8aEhiwliW82JUS02WzUlFTvzpgAcgxUBmcLgB5mpqDPHePzchNngphA8kVqj5
- CbquoEOxdPh3V5Qn0CFxbetaP3hJgKS2tbra1YYQvQ8A==
-X-Forward-Email-ID: 697e92a6de426c19931e0591
+ t=1769902765; bh=S7PCVJ/REMMlfjN8zDoViOYRXXjtzy0VUngCg/4+6oo=;
+ b=SNRdbX0NvO/em1TgSmbfFYCNkU/+HDy1kWwkpIauN+uhtz5oJY4FrOM1svsHcn5GAhj0puesU
+ bBPPUPXNdJESiqcPALQMyRm3vhCLt6og3jxHgi5vgXkXD8TD5lL34GFDqhw+B8iHWp7ETqRYIkq
+ T8Ap5acXW3BpgUc3i3zl2Gey+kWMTkG8+kh8cGpGYFaGSJ+7LALu5lcg+X4yZg2XXbxlSRhHg3l
+ GJdkAYsooz0qXGv1Lto8oWuKLnJvY2H5CvcwfMiOCaUptYjF5Sjm09VhW0Gfsbnnl72M0aTR7nf
+ P6tar7ohVKf8iuKnSacQvdA5mctPPXrpVQjRGYy0ozCw==
+X-Forward-Email-ID: 697e92acde426c19931e05b0
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 2.5.4
@@ -45,15 +45,12 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>,
- Finley Xiao <finley.xiao@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>
+ Lukasz Majewski <lukma@denx.de>
 Cc: Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Elaine Zhang <zhangqing@rock-chips.com>,
- Conor Dooley <conor.dooley@microchip.com>
-Subject: [PATCH v2 05/12] dt-bindings: clock: rockchip: Add RK3506 clock and
- reset unit
-Date: Sat, 31 Jan 2026 23:38:16 +0000
-Message-ID: <20260131233843.3419737-6-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>, Finley Xiao <finley.xiao@rock-chips.com>
+Subject: [PATCH v2 06/12] clk: rockchip: Add support for RK3506
+Date: Sat, 31 Jan 2026 23:38:17 +0000
+Message-ID: <20260131233843.3419737-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260131233843.3419737-1-jonas@kwiboo.se>
 References: <20260131233843.3419737-1-jonas@kwiboo.se>
@@ -77,599 +74,1663 @@ X-Virus-Status: Clean
 
 From: Finley Xiao <finley.xiao@rock-chips.com>
 
-Add device tree bindings for clock and reset unit on RK3506 SoC.
-Add clock and reset IDs for RK3506 SoC.
+Add clock driver for RK3506.
+
+Imported from vendor U-Boot linux-6.1-stan-rkr6 tag with minor
+adjustments and fixes for mainline.
 
 Signed-off-by: Finley Xiao <finley.xiao@rock-chips.com>
-Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
-Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
-Link: https://patch.msgid.link/20251121075350.2564860-2-zhangqing@rock-chips.com
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: 84898f8e9cea06f8178fc5ca53f068180f7bfba0 ]
-
-(cherry picked from commit 516951213a82094f7f49f149cbf3c66dfb14c65d)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-v2: No change
+Changes in v2:
+- Drop use of struct rk3506_cru and of_to_plat() ops
+- Define LOG_CATEGORY and use log_debug()
+- Extract rk3506_clk_init_xpl() from bind() ops
 ---
- .../Bindings/clock/rockchip,rk3506-cru.yaml   |  55 ++++
- .../dt-bindings/clock/rockchip,rk3506-cru.h   | 285 ++++++++++++++++++
- .../dt-bindings/reset/rockchip,rk3506-cru.h   | 211 +++++++++++++
- 3 files changed, 551 insertions(+)
- create mode 100644 dts/upstream/Bindings/clock/rockchip,rk3506-cru.yaml
- create mode 100644 dts/upstream/include/dt-bindings/clock/rockchip,rk3506-cru.h
- create mode 100644 dts/upstream/include/dt-bindings/reset/rockchip,rk3506-cru.h
+ arch/arm/include/asm/arch-rockchip/clock.h    |   10 +
+ .../include/asm/arch-rockchip/cru_rk3506.h    |  181 +++
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_rk3506.c             | 1166 +++++++++++++++++
+ drivers/reset/Makefile                        |    2 +-
+ drivers/reset/rst-rk3506.c                    |  222 ++++
+ 6 files changed, 1581 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+ create mode 100644 drivers/clk/rockchip/clk_rk3506.c
+ create mode 100644 drivers/reset/rst-rk3506.c
 
-diff --git a/dts/upstream/Bindings/clock/rockchip,rk3506-cru.yaml b/dts/upstream/Bindings/clock/rockchip,rk3506-cru.yaml
-new file mode 100644
-index 000000000000..ca940475336c
---- /dev/null
-+++ b/dts/upstream/Bindings/clock/rockchip,rk3506-cru.yaml
-@@ -0,0 +1,55 @@
-+# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/clock/rockchip,rk3506-cru.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Rockchip RK3506 Clock and Reset Unit (CRU)
-+
-+maintainers:
-+  - Finley Xiao <finley.xiao@rock-chips.com>
-+  - Heiko Stuebner <heiko@sntech.de>
-+
-+description:
-+  The RK3506 CRU generates the clock and also implements reset for SoC
-+  peripherals.
-+
-+properties:
-+  compatible:
-+    const: rockchip,rk3506-cru
-+
-+  reg:
-+    maxItems: 1
-+
-+  "#clock-cells":
-+    const: 1
-+
-+  "#reset-cells":
-+    const: 1
-+
-+  clocks:
-+    maxItems: 1
-+
-+  clock-names:
-+    const: xin
-+
-+required:
-+  - compatible
-+  - reg
-+  - "#clock-cells"
-+  - "#reset-cells"
-+  - clocks
-+  - clock-names
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    clock-controller@ff9a0000 {
-+      compatible = "rockchip,rk3506-cru";
-+      reg = <0xff9a0000 0x20000>;
-+      #clock-cells = <1>;
-+      #reset-cells = <1>;
-+      clocks = <&xin24m>;
-+      clock-names = "xin";
-+    };
-diff --git a/dts/upstream/include/dt-bindings/clock/rockchip,rk3506-cru.h b/dts/upstream/include/dt-bindings/clock/rockchip,rk3506-cru.h
-new file mode 100644
-index 000000000000..71d7dda23cc9
---- /dev/null
-+++ b/dts/upstream/include/dt-bindings/clock/rockchip,rk3506-cru.h
-@@ -0,0 +1,285 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+diff --git a/arch/arm/include/asm/arch-rockchip/clock.h b/arch/arm/include/asm/arch-rockchip/clock.h
+index 3c204501f709..95b08bfd046f 100644
+--- a/arch/arm/include/asm/arch-rockchip/clock.h
++++ b/arch/arm/include/asm/arch-rockchip/clock.h
+@@ -214,6 +214,16 @@ int rockchip_reset_bind(struct udevice *pdev, u32 reg_offset, u32 reg_number);
+  */
+ int rockchip_reset_bind_lut(struct udevice *pdev, const int *lookup_table,
+ 			    u32 reg_offset, u32 reg_number);
 +/*
-+ * Copyright (c) 2023-2025 Rockchip Electronics Co., Ltd.
++ * rk3506_reset_bind_lut() - Bind soft reset device as child of clock device
++ *			     using dedicated RK3506 lookup table
++ *
++ * @pdev: clock udevice
++ * @reg_offset: the first offset in cru for softreset registers
++ * @reg_number: the reg numbers of softreset registers
++ * Return: 0 success, or error value
++ */
++int rk3506_reset_bind_lut(struct udevice *pdev, u32 reg_offset, u32 reg_number);
+ /*
+  * rk3528_reset_bind_lut() - Bind soft reset device as child of clock device
+  *			     using dedicated RK3528 lookup table
+diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3506.h b/arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+new file mode 100644
+index 000000000000..2f79e5eaf09d
+--- /dev/null
++++ b/arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+@@ -0,0 +1,181 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
 + * Author: Finley Xiao <finley.xiao@rock-chips.com>
 + */
 +
-+#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3506_H
-+#define _DT_BINDINGS_CLK_ROCKCHIP_RK3506_H
++#ifndef _ASM_ARCH_CRU_RK3506_H
++#define _ASM_ARCH_CRU_RK3506_H
 +
-+/* cru plls */
-+#define PLL_GPLL			0
-+#define PLL_V0PLL			1
-+#define PLL_V1PLL			2
++#include <linux/bitops.h>
++#include <linux/bitfield.h>
 +
-+/* cru-clocks indices */
-+#define ARMCLK				3
-+#define CLK_DDR				4
-+#define XIN24M_GATE			5
-+#define CLK_GPLL_GATE			6
-+#define CLK_V0PLL_GATE			7
-+#define CLK_V1PLL_GATE			8
-+#define CLK_GPLL_DIV			9
-+#define CLK_GPLL_DIV_100M		10
-+#define CLK_V0PLL_DIV			11
-+#define CLK_V1PLL_DIV			12
-+#define CLK_INT_VOICE_MATRIX0		13
-+#define CLK_INT_VOICE_MATRIX1		14
-+#define CLK_INT_VOICE_MATRIX2		15
-+#define CLK_FRAC_UART_MATRIX0_MUX	16
-+#define CLK_FRAC_UART_MATRIX1_MUX	17
-+#define CLK_FRAC_VOICE_MATRIX0_MUX	18
-+#define CLK_FRAC_VOICE_MATRIX1_MUX	19
-+#define CLK_FRAC_COMMON_MATRIX0_MUX	20
-+#define CLK_FRAC_COMMON_MATRIX1_MUX	21
-+#define CLK_FRAC_COMMON_MATRIX2_MUX	22
-+#define CLK_FRAC_UART_MATRIX0		23
-+#define CLK_FRAC_UART_MATRIX1		24
-+#define CLK_FRAC_VOICE_MATRIX0		25
-+#define CLK_FRAC_VOICE_MATRIX1		26
-+#define CLK_FRAC_COMMON_MATRIX0		27
-+#define CLK_FRAC_COMMON_MATRIX1		28
-+#define CLK_FRAC_COMMON_MATRIX2		29
-+#define CLK_REF_USBPHY_TOP		30
-+#define CLK_REF_DPHY_TOP		31
-+#define ACLK_CORE_ROOT			32
-+#define PCLK_CORE_ROOT			33
-+#define PCLK_DBG			34
-+#define PCLK_CORE_GRF			35
-+#define PCLK_CORE_CRU			36
-+#define CLK_CORE_EMA_DETECT		37
-+#define CLK_REF_PVTPLL_CORE		38
-+#define PCLK_GPIO1			39
-+#define DBCLK_GPIO1			40
-+#define ACLK_CORE_PERI_ROOT		41
-+#define HCLK_CORE_PERI_ROOT		42
-+#define PCLK_CORE_PERI_ROOT		43
-+#define CLK_DSMC			44
-+#define ACLK_DSMC			45
-+#define PCLK_DSMC			46
-+#define CLK_FLEXBUS_TX			47
-+#define CLK_FLEXBUS_RX			48
-+#define ACLK_FLEXBUS			49
-+#define HCLK_FLEXBUS			50
-+#define ACLK_DSMC_SLV			51
-+#define HCLK_DSMC_SLV			52
-+#define ACLK_BUS_ROOT			53
-+#define HCLK_BUS_ROOT			54
-+#define PCLK_BUS_ROOT			55
-+#define ACLK_SYSRAM			56
-+#define HCLK_SYSRAM			57
-+#define ACLK_DMAC0			58
-+#define ACLK_DMAC1			59
-+#define HCLK_M0				60
-+#define PCLK_BUS_GRF			61
-+#define PCLK_TIMER			62
-+#define CLK_TIMER0_CH0			63
-+#define CLK_TIMER0_CH1			64
-+#define CLK_TIMER0_CH2			65
-+#define CLK_TIMER0_CH3			66
-+#define CLK_TIMER0_CH4			67
-+#define CLK_TIMER0_CH5			68
-+#define PCLK_WDT0			69
-+#define TCLK_WDT0			70
-+#define PCLK_WDT1			71
-+#define TCLK_WDT1			72
-+#define PCLK_MAILBOX			73
-+#define PCLK_INTMUX			74
-+#define PCLK_SPINLOCK			75
-+#define PCLK_DDRC			76
-+#define HCLK_DDRPHY			77
-+#define PCLK_DDRMON			78
-+#define CLK_DDRMON_OSC			79
-+#define PCLK_STDBY			80
-+#define HCLK_USBOTG0			81
-+#define HCLK_USBOTG0_PMU		82
-+#define CLK_USBOTG0_ADP			83
-+#define HCLK_USBOTG1			84
-+#define HCLK_USBOTG1_PMU		85
-+#define CLK_USBOTG1_ADP			86
-+#define PCLK_USBPHY			87
-+#define ACLK_DMA2DDR			88
-+#define PCLK_DMA2DDR			89
-+#define STCLK_M0			90
-+#define CLK_DDRPHY			91
-+#define CLK_DDRC_SRC			92
-+#define ACLK_DDRC_0			93
-+#define ACLK_DDRC_1			94
-+#define CLK_DDRC			95
-+#define CLK_DDRMON			96
-+#define HCLK_LSPERI_ROOT		97
-+#define PCLK_LSPERI_ROOT		98
-+#define PCLK_UART0			99
-+#define PCLK_UART1			100
-+#define PCLK_UART2			101
-+#define PCLK_UART3			102
-+#define PCLK_UART4			103
-+#define SCLK_UART0			104
-+#define SCLK_UART1			105
-+#define SCLK_UART2			106
-+#define SCLK_UART3			107
-+#define SCLK_UART4			108
-+#define PCLK_I2C0			109
-+#define CLK_I2C0			110
-+#define PCLK_I2C1			111
-+#define CLK_I2C1			112
-+#define PCLK_I2C2			113
-+#define CLK_I2C2			114
-+#define PCLK_PWM1			115
-+#define CLK_PWM1			116
-+#define CLK_OSC_PWM1			117
-+#define CLK_RC_PWM1			118
-+#define CLK_FREQ_PWM1			119
-+#define CLK_COUNTER_PWM1		120
-+#define PCLK_SPI0			121
-+#define CLK_SPI0			122
-+#define PCLK_SPI1			123
-+#define CLK_SPI1			124
-+#define PCLK_GPIO2			125
-+#define DBCLK_GPIO2			126
-+#define PCLK_GPIO3			127
-+#define DBCLK_GPIO3			128
-+#define PCLK_GPIO4			129
-+#define DBCLK_GPIO4			130
-+#define HCLK_CAN0			131
-+#define CLK_CAN0			132
-+#define HCLK_CAN1			133
-+#define CLK_CAN1			134
-+#define HCLK_PDM			135
-+#define MCLK_PDM			136
-+#define CLKOUT_PDM			137
-+#define MCLK_SPDIFTX			138
-+#define HCLK_SPDIFTX			139
-+#define HCLK_SPDIFRX			140
-+#define MCLK_SPDIFRX			141
-+#define MCLK_SAI0			142
-+#define HCLK_SAI0			143
-+#define MCLK_OUT_SAI0			144
-+#define MCLK_SAI1			145
-+#define HCLK_SAI1			146
-+#define MCLK_OUT_SAI1			147
-+#define HCLK_ASRC0			148
-+#define CLK_ASRC0			149
-+#define HCLK_ASRC1			150
-+#define CLK_ASRC1			151
-+#define PCLK_CRU			152
-+#define PCLK_PMU_ROOT			153
-+#define MCLK_ASRC0			154
-+#define MCLK_ASRC1			155
-+#define MCLK_ASRC2			156
-+#define MCLK_ASRC3			157
-+#define LRCK_ASRC0_SRC			158
-+#define LRCK_ASRC0_DST			159
-+#define LRCK_ASRC1_SRC			160
-+#define LRCK_ASRC1_DST			161
-+#define ACLK_HSPERI_ROOT		162
-+#define HCLK_HSPERI_ROOT		163
-+#define PCLK_HSPERI_ROOT		164
-+#define CCLK_SRC_SDMMC			165
-+#define HCLK_SDMMC			166
-+#define HCLK_FSPI			167
-+#define SCLK_FSPI			168
-+#define PCLK_SPI2			169
-+#define ACLK_MAC0			170
-+#define ACLK_MAC1			171
-+#define PCLK_MAC0			172
-+#define PCLK_MAC1			173
-+#define CLK_MAC_ROOT			174
-+#define CLK_MAC0			175
-+#define CLK_MAC1			176
-+#define MCLK_SAI2			177
-+#define HCLK_SAI2			178
-+#define MCLK_OUT_SAI2			179
-+#define MCLK_SAI3_SRC			180
-+#define HCLK_SAI3			181
-+#define MCLK_SAI3			182
-+#define MCLK_OUT_SAI3			183
-+#define MCLK_SAI4_SRC			184
-+#define HCLK_SAI4			185
-+#define MCLK_SAI4			186
-+#define HCLK_DSM			187
-+#define MCLK_DSM			188
-+#define PCLK_AUDIO_ADC			189
-+#define MCLK_AUDIO_ADC			190
-+#define MCLK_AUDIO_ADC_DIV4		191
-+#define PCLK_SARADC			192
-+#define CLK_SARADC			193
-+#define PCLK_OTPC_NS			194
-+#define CLK_SBPI_OTPC_NS		195
-+#define CLK_USER_OTPC_NS		196
-+#define PCLK_UART5			197
-+#define SCLK_UART5			198
-+#define PCLK_GPIO234_IOC		199
-+#define CLK_MAC_PTP_ROOT		200
-+#define CLK_MAC0_PTP			201
-+#define CLK_MAC1_PTP			202
-+#define CLK_SPI2			203
-+#define ACLK_VIO_ROOT			204
-+#define HCLK_VIO_ROOT			205
-+#define PCLK_VIO_ROOT			206
-+#define HCLK_RGA			207
-+#define ACLK_RGA			208
-+#define CLK_CORE_RGA			209
-+#define ACLK_VOP			210
-+#define HCLK_VOP			211
-+#define DCLK_VOP			212
-+#define PCLK_DPHY			213
-+#define PCLK_DSI_HOST			214
-+#define PCLK_TSADC			215
-+#define CLK_TSADC			216
-+#define CLK_TSADC_TSEN			217
-+#define PCLK_GPIO1_IOC			218
-+#define PCLK_OTPC_S			219
-+#define CLK_SBPI_OTPC_S			220
-+#define CLK_USER_OTPC_S			221
-+#define PCLK_OTP_MASK			222
-+#define PCLK_KEYREADER			223
-+#define HCLK_BOOTROM			224
-+#define PCLK_DDR_SERVICE		225
-+#define HCLK_CRYPTO_S			226
-+#define HCLK_KEYLAD			227
-+#define CLK_CORE_CRYPTO			228
-+#define CLK_PKA_CRYPTO			229
-+#define CLK_CORE_CRYPTO_S		230
-+#define CLK_PKA_CRYPTO_S		231
-+#define ACLK_CRYPTO_S			232
-+#define HCLK_RNG_S			233
-+#define CLK_CORE_CRYPTO_NS		234
-+#define CLK_PKA_CRYPTO_NS		235
-+#define ACLK_CRYPTO_NS			236
-+#define HCLK_CRYPTO_NS			237
-+#define HCLK_RNG			238
-+#define CLK_PMU				239
-+#define PCLK_PMU			240
-+#define CLK_PMU_32K			241
-+#define PCLK_PMU_CRU			242
-+#define PCLK_PMU_GRF			243
-+#define PCLK_GPIO0_IOC			244
-+#define PCLK_GPIO0			245
-+#define DBCLK_GPIO0			246
-+#define PCLK_GPIO1_SHADOW		247
-+#define DBCLK_GPIO1_SHADOW		248
-+#define PCLK_PMU_HP_TIMER		249
-+#define CLK_PMU_HP_TIMER		250
-+#define CLK_PMU_HP_TIMER_32K		251
-+#define PCLK_PWM0			252
-+#define CLK_PWM0			253
-+#define CLK_OSC_PWM0			254
-+#define CLK_RC_PWM0			255
-+#define CLK_MAC_OUT			256
-+#define CLK_REF_OUT0			257
-+#define CLK_REF_OUT1			258
-+#define CLK_32K_FRAC			259
-+#define CLK_32K_RC			260
-+#define CLK_32K				261
-+#define CLK_32K_PMU			262
-+#define PCLK_TOUCH_KEY			263
-+#define CLK_TOUCH_KEY			264
-+#define CLK_REF_PHY_PLL			265
-+#define CLK_REF_PHY_PMU_MUX		266
-+#define CLK_WIFI_OUT			267
-+#define CLK_V0PLL_REF			268
-+#define CLK_V1PLL_REF			269
-+#define CLK_32K_FRAC_MUX		270
++#define MHz		1000000
++#define KHz		1000
++#define OSC_HZ		(24 * MHz)
 +
-+#endif
-diff --git a/dts/upstream/include/dt-bindings/reset/rockchip,rk3506-cru.h b/dts/upstream/include/dt-bindings/reset/rockchip,rk3506-cru.h
++/* RK3506 pll id */
++enum rk3506_pll_id {
++	GPLL,
++	V0PLL,
++	V1PLL,
++	PLL_COUNT,
++};
++
++struct rk3506_clk_priv {
++	unsigned long gpll_hz;
++	unsigned long gpll_div_hz;
++	unsigned long gpll_div_100mhz;
++	unsigned long v0pll_hz;
++	unsigned long v0pll_div_hz;
++	unsigned long v1pll_hz;
++	unsigned long v1pll_div_hz;
++};
++
++struct pll_rate_table {
++	unsigned long rate;
++	unsigned int fbdiv;
++	unsigned int postdiv1;
++	unsigned int refdiv;
++	unsigned int postdiv2;
++	unsigned int dsmpd;
++	unsigned int frac;
++};
++
++#define RK3506_CRU_BASE			0xff9a0000
++#define RK3506_MODE_CON			0x0280
++#define RK3506_CLKSEL_CON(x)		(RK3506_CRU_BASE + 0x0300 + (x) * 0x4)
++#define RK3506_SOFTRST_CON0		0x0a00
++#define RK3506_GLB_SRST_FST		0x0c08
++#define RK3506_GLB_SRST_SND		0x0c0c
++#define RK3506_PLL_CON(x)		(0x10000 + (x) * 0x4)
++#define RK3506_SCRU_BASE		0xff9a8000
++#define RK3506_PMU_CRU_BASE		0xff9b0000
++#define RK3506_PMU_CLKSEL_CON(x)	(RK3506_PMU_CRU_BASE + 0x0300 + (x) * 0x4)
++
++enum {
++	/* CRU_CLKSEL_CON00 */
++	CLK_GPLL_DIV_MASK		= GENMASK(9, 6),
++	CLK_GPLL_DIV_100M_MASK		= GENMASK(13, 10),
++
++	/* CRU_CLKSEL_CON01 */
++	CLK_V0PLL_DIV_MASK		= GENMASK(3, 0),
++	CLK_V1PLL_DIV_MASK		= GENMASK(7, 4),
++
++	/* CRU_CLKSEL_CON15 */
++	CLK_CORE_SRC_DIV_MASK		= GENMASK(4, 0),
++	CLK_CORE_SRC_SEL_MASK		= GENMASK(6, 5),
++	CLK_CORE_SEL_GPLL		= 0,
++	CLK_CORE_SEL_V0PLL,
++	CLK_CORE_SEL_V1PLL,
++
++	ACLK_CORE_DIV_MASK		= GENMASK(12, 9),
++
++	/* CRU_CLKSEL_CON16 */
++	PCLK_CORE_DIV_MASK		= GENMASK(3, 0),
++
++	/* CRU_CLKSEL_CON21 */
++	ACLK_BUS_DIV_MASK		= GENMASK(4, 0),
++	ACLK_BUS_SEL_MASK		= GENMASK(6, 5),
++	ACLK_BUS_SEL_GPLL_DIV		= 0,
++	ACLK_BUS_SEL_V0PLL_DIV,
++	ACLK_BUS_SEL_V1PLL_DIV,
++
++	HCLK_BUS_DIV_MASK		= GENMASK(11, 7),
++	HCLK_BUS_SEL_MASK		= GENMASK(13, 12),
++
++	/* CRU_CLKSEL_CON22 */
++	PCLK_BUS_DIV_MASK		= GENMASK(4, 0),
++	PCLK_BUS_SEL_MASK		= GENMASK(6, 5),
++
++	/* CRU_CLKSEL_CON29 */
++	HCLK_LSPERI_DIV_MASK		= GENMASK(4, 0),
++	HCLK_LSPERI_SEL_MASK		= GENMASK(6, 5),
++
++	/* CRU_CLKSEL_CON32 */
++	CLK_I2C0_DIV_MASK		= GENMASK(3, 0),
++	CLK_I2C0_SEL_MASK		= GENMASK(5, 4),
++	CLK_I2C_SEL_GPLL		= 0,
++	CLK_I2C_SEL_V0PLL,
++	CLK_I2C_SEL_V1PLL,
++	CLK_I2C1_DIV_MASK		= GENMASK(9, 6),
++	CLK_I2C1_SEL_MASK		= GENMASK(11, 10),
++
++	/* CRU_CLKSEL_CON33 */
++	CLK_I2C2_DIV_MASK		= GENMASK(3, 0),
++	CLK_I2C2_SEL_MASK		= GENMASK(5, 4),
++	CLK_PWM1_DIV_MASK		= GENMASK(9, 6),
++	CLK_PWM1_SEL_MASK		= GENMASK(11, 10),
++	CLK_PWM1_SEL_GPLL_DIV		= 0,
++	CLK_PWM1_SEL_V0PLL_DIV,
++	CLK_PWM1_SEL_V1PLL_DIV,
++
++	/* CRU_CLKSEL_CON34 */
++	CLK_SPI0_DIV_MASK		= GENMASK(7, 4),
++	CLK_SPI0_SEL_MASK		= GENMASK(9, 8),
++	CLK_SPI_SEL_24M			= 0,
++	CLK_SPI_SEL_GPLL_DIV,
++	CLK_SPI_SEL_V0PLL_DIV,
++	CLK_SPI_SEL_V1PLL_DIV,
++	CLK_SPI1_DIV_MASK		= GENMASK(13, 10),
++	CLK_SPI1_SEL_MASK		= GENMASK(15, 14),
++
++	/* CRU_CLKSEL_CON49 */
++	ACLK_HSPERI_DIV_MASK		= GENMASK(4, 0),
++	ACLK_HSPERI_SEL_MASK		= GENMASK(6, 5),
++	ACLK_HSPERI_SEL_GPLL_DIV	= 0,
++	ACLK_HSPERI_SEL_V0PLL_DIV,
++	ACLK_HSPERI_SEL_V1PLL_DIV,
++
++	CCLK_SDMMC_DIV_MASK		= GENMASK(12, 7),
++	CCLK_SDMMC_SEL_MASK		= GENMASK(14, 13),
++	CCLK_SDMMC_SEL_24M		= 0,
++	CCLK_SDMMC_SEL_GPLL,
++	CCLK_SDMMC_SEL_V0PLL,
++	CCLK_SDMMC_SEL_V1PLL,
++
++	/* CRU_CLKSEL_CON50 */
++	SCLK_FSPI_DIV_MASK		= GENMASK(4, 0),
++	SCLK_FSPI_SEL_MASK		= GENMASK(6, 5),
++	SCLK_FSPI_SEL_24M		= 0,
++	SCLK_FSPI_SEL_GPLL,
++	SCLK_FSPI_SEL_V0PLL,
++	SCLK_FSPI_SEL_V1PLL,
++	CLK_MAC_DIV_MASK		= GENMASK(11, 7),
++
++	/* CRU_CLKSEL_CON54 */
++	CLK_SARADC_DIV_MASK		= GENMASK(3, 0),
++	CLK_SARADC_SEL_MASK		= GENMASK(5, 4),
++	CLK_SARADC_SEL_24M		= 0,
++	CLK_SARADC_SEL_400K,
++	CLK_SARADC_SEL_32K,
++
++	/* CRU_CLKSEL_CON60 */
++	DCLK_VOP_DIV_MASK		= GENMASK(7, 0),
++	DCLK_VOP_SEL_MASK		= GENMASK(10, 8),
++	DCLK_VOP_SEL_24M		= 0,
++	DCLK_VOP_SEL_GPLL,
++	DCLK_VOP_SEL_V0PLL,
++	DCLK_VOP_SEL_V1PLL,
++	DCLK_VOP_SEL_FRAC_VOIC1,
++	DCLK_VOP_SEL_FRAC_COMMON0,
++	DCLK_VOP_SEL_FRAC_COMMON1,
++	DCLK_VOP_SEL_FRAC_COMMON2,
++
++	/* CRU_CLKSEL_CON61 */
++	CLK_TSADC_DIV_MASK		= GENMASK(7, 0),
++	CLK_TSADC_TSEN_DIV_MASK		= GENMASK(10, 8),
++
++	/* PMUCRU_CLKSEL_CON00 */
++	CLK_PWM0_DIV_MASK		= GENMASK(9, 6),
++	CLK_MAC_OUT_DIV_MASK		= GENMASK(15, 10),
++
++	/* SCRU_CLKSEL_CON104 */
++	CLK_PKA_CRYPTO_DIV_MASK		= GENMASK(11, 7),
++	CLK_PKA_CRYPTO_SEL_MASK		= GENMASK(13, 12),
++	CLK_PKA_CRYPTO_SEL_GPLL		= 0,
++	CLK_PKA_CRYPTO_SEL_V0PLL,
++	CLK_PKA_CRYPTO_SEL_V1PLL,
++};
++
++#endif /* _ASM_ARCH_CRU_RK3506_H */
+diff --git a/drivers/clk/rockchip/Makefile b/drivers/clk/rockchip/Makefile
+index 34b63d4df34a..07525c364326 100644
+--- a/drivers/clk/rockchip/Makefile
++++ b/drivers/clk/rockchip/Makefile
+@@ -15,6 +15,7 @@ obj-$(CONFIG_ROCKCHIP_RK3308) += clk_rk3308.o
+ obj-$(CONFIG_ROCKCHIP_RK3328) += clk_rk3328.o
+ obj-$(CONFIG_ROCKCHIP_RK3368) += clk_rk3368.o
+ obj-$(CONFIG_ROCKCHIP_RK3399) += clk_rk3399.o
++obj-$(CONFIG_ROCKCHIP_RK3506) += clk_rk3506.o
+ obj-$(CONFIG_ROCKCHIP_RK3528) += clk_rk3528.o
+ obj-$(CONFIG_ROCKCHIP_RK3568) += clk_rk3568.o
+ obj-$(CONFIG_ROCKCHIP_RK3576) += clk_rk3576.o
+diff --git a/drivers/clk/rockchip/clk_rk3506.c b/drivers/clk/rockchip/clk_rk3506.c
 new file mode 100644
-index 000000000000..31c0d4aa410f
+index 000000000000..38066c5c3e3c
 --- /dev/null
-+++ b/dts/upstream/include/dt-bindings/reset/rockchip,rk3506-cru.h
-@@ -0,0 +1,211 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/drivers/clk/rockchip/clk_rk3506.c
+@@ -0,0 +1,1166 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Copyright (c) 2023-2025 Rockchip Electronics Co., Ltd.
++ * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
 + * Author: Finley Xiao <finley.xiao@rock-chips.com>
 + */
 +
-+#ifndef _DT_BINDINGS_REST_ROCKCHIP_RK3506_H
-+#define _DT_BINDINGS_REST_ROCKCHIP_RK3506_H
++#define LOG_CATEGORY UCLASS_CLK
 +
-+/* CRU-->SOFTRST_CON00 */
-+#define SRST_NCOREPORESET0_AC	0
-+#define SRST_NCOREPORESET1_AC	1
-+#define SRST_NCOREPORESET2_AC	2
-+#define SRST_NCORESET0_AC	3
-+#define SRST_NCORESET1_AC	4
-+#define SRST_NCORESET2_AC	5
-+#define SRST_NL2RESET_AC	6
-+#define SRST_A_CORE_BIU_AC	7
-+#define SRST_H_M0_AC		8
++#include <clk-uclass.h>
++#include <asm/arch-rockchip/clock.h>
++#include <asm/arch-rockchip/cru_rk3506.h>
++#include <asm/arch-rockchip/hardware.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <dt-bindings/clock/rockchip,rk3506-cru.h>
 +
-+/* CRU-->SOFTRST_CON02 */
-+#define SRST_NDBGRESET		9
-+#define SRST_P_CORE_BIU		10
-+#define SRST_PMU		11
++#define DIV_TO_RATE(input_rate, div)    ((input_rate) / ((div) + 1))
 +
-+/* CRU-->SOFTRST_CON03 */
-+#define SRST_P_DBG		12
-+#define SRST_POT_DBG		13
-+#define SRST_P_CORE_GRF		14
-+#define SRST_CORE_EMA_DETECT	15
-+#define SRST_REF_PVTPLL_CORE	16
-+#define SRST_P_GPIO1		17
-+#define SRST_DB_GPIO1		18
++/*
++ * [FRAC PLL]: GPLL, V0PLL, V1PLL
++ *   - VCO Frequency: 950MHz to 3800MHZ
++ *   - Output Frequency: 19MHz to 3800MHZ
++ *   - refdiv: 1 to 63 (Int Mode), 1 to 2 (Frac Mode)
++ *   - fbdiv: 16 to 3800 (Int Mode), 20 to 380 (Frac Mode)
++ *   - post1div: 1 to 7
++ *   - post2div: 1 to 7
++ */
++static struct rockchip_pll_rate_table rk3506_pll_rates[] = {
++	/* _mhz, _refdiv, _fbdiv, _postdiv1, _postdiv2, _dsmpd, _frac */
++	RK3036_PLL_RATE(1896000000, 1, 79, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1800000000, 1, 75, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1704000000, 1, 71, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1608000000, 1, 67, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1512000000, 1, 63, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1500000000, 1, 125, 2, 1, 1, 0),
++	RK3036_PLL_RATE(1416000000, 1, 59, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1350000000, 4, 225, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1296000000, 1, 54, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1200000000, 1, 50, 1, 1, 1, 0),
++	RK3036_PLL_RATE(1188000000, 1, 99, 2, 1, 1, 0),
++	RK3036_PLL_RATE(1179648000, 1, 49, 1, 1, 0, 2550137),
++	RK3036_PLL_RATE(1008000000, 1, 84, 2, 1, 1, 0),
++	RK3036_PLL_RATE(1000000000, 3, 125, 1, 1, 1, 0),
++	RK3036_PLL_RATE(993484800, 1, 41, 1, 1, 0, 6630355),
++	RK3036_PLL_RATE(983040000, 1, 40, 1, 1, 0, 16106127),
++	RK3036_PLL_RATE(960000000, 1, 80, 2, 1, 1, 0),
++	RK3036_PLL_RATE(912000000, 1, 76, 2, 1, 1, 0),
++	RK3036_PLL_RATE(903168000, 1, 75, 2, 1, 0, 4429185),
++	RK3036_PLL_RATE(816000000, 1, 68, 2, 1, 1, 0),
++	RK3036_PLL_RATE(800000000, 3, 200, 2, 1, 1, 0),
++	RK3036_PLL_RATE(600000000, 1, 50, 2, 1, 1, 0),
++	RK3036_PLL_RATE(594000000, 2, 99, 2, 1, 1, 0),
++	RK3036_PLL_RATE(408000000, 1, 68, 2, 2, 1, 0),
++	RK3036_PLL_RATE(312000000, 1, 78, 6, 1, 1, 0),
++	RK3036_PLL_RATE(216000000, 1, 72, 4, 2, 1, 0),
++	RK3036_PLL_RATE(96000000, 1, 48, 6, 2, 1, 0),
++	{ /* sentinel */ },
++};
 +
-+/* CRU-->SOFTRST_CON04 */
-+#define SRST_A_CORE_PERI_BIU	19
-+#define SRST_A_DSMC		20
-+#define SRST_P_DSMC		21
-+#define SRST_FLEXBUS		22
-+#define SRST_A_FLEXBUS		23
-+#define SRST_H_FLEXBUS		24
-+#define SRST_A_DSMC_SLV		25
-+#define SRST_H_DSMC_SLV		26
-+#define SRST_DSMC_SLV		27
++static struct rockchip_pll_clock rk3506_pll_clks[] = {
++	[GPLL] = PLL(pll_rk3328, PLL_GPLL, RK3506_PLL_CON(0),
++		     RK3506_MODE_CON, 0, 10, 0, rk3506_pll_rates),
++	[V0PLL] = PLL(pll_rk3328, PLL_V0PLL, RK3506_PLL_CON(8),
++		      RK3506_MODE_CON, 2, 10, 0, rk3506_pll_rates),
++	[V1PLL] = PLL(pll_rk3328, PLL_V1PLL, RK3506_PLL_CON(16),
++		      RK3506_MODE_CON, 4, 10, 0, rk3506_pll_rates),
++};
 +
-+/* CRU-->SOFTRST_CON05 */
-+#define SRST_A_BUS_BIU		28
-+#define SRST_H_BUS_BIU		29
-+#define SRST_P_BUS_BIU		30
-+#define SRST_A_SYSRAM		31
-+#define SRST_H_SYSRAM		32
-+#define SRST_A_DMAC0		33
-+#define SRST_A_DMAC1		34
-+#define SRST_H_M0		35
-+#define SRST_M0_JTAG		36
-+#define SRST_H_CRYPTO		37
++#define RK3506_CPUCLK_RATE(_rate, _aclk_m_core, _pclk_dbg)	\
++{								\
++	.rate = _rate##U,					\
++	.aclk_div = (_aclk_m_core),				\
++	.pclk_div = (_pclk_dbg),				\
++}
 +
-+/* CRU-->SOFTRST_CON06 */
-+#define SRST_H_RNG		38
-+#define SRST_P_BUS_GRF		39
-+#define SRST_P_TIMER0		40
-+#define SRST_TIMER0_CH0		41
-+#define SRST_TIMER0_CH1		42
-+#define SRST_TIMER0_CH2		43
-+#define SRST_TIMER0_CH3		44
-+#define SRST_TIMER0_CH4		45
-+#define SRST_TIMER0_CH5		46
-+#define SRST_P_WDT0		47
-+#define SRST_T_WDT0		48
-+#define SRST_P_WDT1		49
-+#define SRST_T_WDT1		50
-+#define SRST_P_MAILBOX		51
-+#define SRST_P_INTMUX		52
-+#define SRST_P_SPINLOCK		53
++/* SIGN-OFF: aclk_core: 500M, pclk_core: 125M, */
++static struct rockchip_cpu_rate_table rk3506_cpu_rates[] = {
++	RK3506_CPUCLK_RATE(1179648000, 1, 6),
++	RK3506_CPUCLK_RATE(903168000, 1, 5),
++	RK3506_CPUCLK_RATE(800000000, 1, 4),
++	RK3506_CPUCLK_RATE(589824000, 1, 3),
++	RK3506_CPUCLK_RATE(400000000, 1, 2),
++	RK3506_CPUCLK_RATE(200000000, 1, 1),
++	{ /* sentinel */ },
++};
 +
-+/* CRU-->SOFTRST_CON07 */
-+#define SRST_P_DDRC		54
-+#define SRST_H_DDRPHY		55
-+#define SRST_P_DDRMON		56
-+#define SRST_DDRMON_OSC		57
-+#define SRST_P_DDR_LPC		58
-+#define SRST_H_USBOTG0		59
-+#define SRST_USBOTG0_ADP	60
-+#define SRST_H_USBOTG1		61
-+#define SRST_USBOTG1_ADP	62
-+#define SRST_P_USBPHY		63
-+#define SRST_USBPHY_POR		64
-+#define SRST_USBPHY_OTG0	65
-+#define SRST_USBPHY_OTG1	66
++static int rk3506_armclk_get_rate(struct rk3506_clk_priv *priv)
++{
++	u32 con, div, sel;
++	ulong prate;
 +
-+/* CRU-->SOFTRST_CON08 */
-+#define SRST_A_DMA2DDR		67
-+#define SRST_P_DMA2DDR		68
++	con = readl(RK3506_CLKSEL_CON(15));
++	sel = FIELD_GET(CLK_CORE_SRC_SEL_MASK, con);
++	div = FIELD_GET(CLK_CORE_SRC_DIV_MASK, con);
 +
-+/* CRU-->SOFTRST_CON09 */
-+#define SRST_USBOTG0_UTMI	69
-+#define SRST_USBOTG1_UTMI	70
++	if (sel == CLK_CORE_SEL_GPLL)
++		prate = priv->gpll_hz;
++	else if (sel ==  CLK_CORE_SEL_V0PLL)
++		prate = priv->v0pll_hz;
++	else if (sel ==  CLK_CORE_SEL_V1PLL)
++		prate = priv->v1pll_hz;
++	else
++		return -EINVAL;
 +
-+/* CRU-->SOFTRST_CON10 */
-+#define SRST_A_DDRC_0		71
-+#define SRST_A_DDRC_1		72
-+#define SRST_A_DDR_BIU		73
-+#define SRST_DDRC		74
-+#define SRST_DDRMON		75
++	return DIV_TO_RATE(prate, div);
++}
 +
-+/* CRU-->SOFTRST_CON11 */
-+#define SRST_H_LSPERI_BIU	76
-+#define SRST_P_UART0		77
-+#define SRST_P_UART1		78
-+#define SRST_P_UART2		79
-+#define SRST_P_UART3		80
-+#define SRST_P_UART4		81
-+#define SRST_UART0		82
-+#define SRST_UART1		83
-+#define SRST_UART2		84
-+#define SRST_UART3		85
-+#define SRST_UART4		86
-+#define SRST_P_I2C0		87
-+#define SRST_I2C0		88
++static int rk3506_armclk_set_rate(struct rk3506_clk_priv *priv, ulong new_rate)
++{
++	const struct rockchip_cpu_rate_table *rate;
++	u32 con, div, old_div, sel;
++	ulong old_rate, prate;
 +
-+/* CRU-->SOFTRST_CON12 */
-+#define SRST_P_I2C1		89
-+#define SRST_I2C1		90
-+#define SRST_P_I2C2		91
-+#define SRST_I2C2		92
-+#define SRST_P_PWM1		93
-+#define SRST_PWM1		94
-+#define SRST_P_SPI0		95
-+#define SRST_SPI0		96
-+#define SRST_P_SPI1		97
-+#define SRST_SPI1		98
-+#define SRST_P_GPIO2		99
-+#define SRST_DB_GPIO2		100
++	rate = rockchip_get_cpu_settings(rk3506_cpu_rates, new_rate);
++	if (!rate) {
++		log_debug("unsupported cpu rate %lu\n", new_rate);
++		return -EINVAL;
++	}
 +
-+/* CRU-->SOFTRST_CON13 */
-+#define SRST_P_GPIO3		101
-+#define SRST_DB_GPIO3		102
-+#define SRST_P_GPIO4		103
-+#define SRST_DB_GPIO4		104
-+#define SRST_H_CAN0		105
-+#define SRST_CAN0		106
-+#define SRST_H_CAN1		107
-+#define SRST_CAN1		108
-+#define SRST_H_PDM		109
-+#define SRST_M_PDM		110
-+#define SRST_PDM		111
-+#define SRST_SPDIFTX		112
-+#define SRST_H_SPDIFTX		113
-+#define SRST_H_SPDIFRX		114
-+#define SRST_SPDIFRX		115
-+#define SRST_M_SAI0		116
++	/*
++	 * set up dependent divisors for PCLK and ACLK clocks.
++	 */
++	old_rate = rk3506_armclk_get_rate(priv);
++	if (new_rate >= old_rate) {
++		rk_clrsetreg(RK3506_CLKSEL_CON(15), ACLK_CORE_DIV_MASK,
++			     FIELD_PREP(ACLK_CORE_DIV_MASK, rate->aclk_div));
++		rk_clrsetreg(RK3506_CLKSEL_CON(16), PCLK_CORE_DIV_MASK,
++			     FIELD_PREP(PCLK_CORE_DIV_MASK, rate->pclk_div));
++	}
 +
-+/* CRU-->SOFTRST_CON14 */
-+#define SRST_H_SAI0		117
-+#define SRST_M_SAI1		118
-+#define SRST_H_SAI1		119
-+#define SRST_H_ASRC0		120
-+#define SRST_ASRC0		121
-+#define SRST_H_ASRC1		122
-+#define SRST_ASRC1		123
++	if (new_rate == 589824000 || new_rate == 1179648000) {
++		sel = CLK_CORE_SEL_V0PLL;
++		div = DIV_ROUND_UP(priv->v0pll_hz, new_rate);
++		prate = priv->v0pll_hz;
++	} else if (new_rate == 903168000) {
++		sel = CLK_CORE_SEL_V1PLL;
++		div = DIV_ROUND_UP(priv->v1pll_hz, new_rate);
++		prate = priv->v1pll_hz;
++	} else {
++		sel = CLK_CORE_SEL_GPLL;
++		div = DIV_ROUND_UP(priv->gpll_hz, new_rate);
++		prate = priv->gpll_hz;
++	}
++	assert(div - 1 <= 31);
 +
-+/* CRU-->SOFTRST_CON17 */
-+#define SRST_H_HSPERI_BIU	124
-+#define SRST_H_SDMMC		125
-+#define SRST_H_FSPI		126
-+#define SRST_S_FSPI		127
-+#define SRST_P_SPI2		128
-+#define SRST_A_MAC0		129
-+#define SRST_A_MAC1		130
++	con = readl(RK3506_CLKSEL_CON(15));
++	old_div = FIELD_GET(CLK_CORE_SRC_DIV_MASK, con);
++	if (DIV_TO_RATE(prate, old_div) > new_rate) {
++		rk_clrsetreg(RK3506_CLKSEL_CON(15), CLK_CORE_SRC_DIV_MASK,
++			     FIELD_PREP(CLK_CORE_SRC_DIV_MASK, div - 1));
++		rk_clrsetreg(RK3506_CLKSEL_CON(15), CLK_CORE_SRC_SEL_MASK,
++			     FIELD_PREP(CLK_CORE_SRC_SEL_MASK, sel));
++	} else {
++		rk_clrsetreg(RK3506_CLKSEL_CON(15), CLK_CORE_SRC_SEL_MASK,
++			     FIELD_PREP(CLK_CORE_SRC_SEL_MASK, sel));
++		rk_clrsetreg(RK3506_CLKSEL_CON(15), CLK_CORE_SRC_DIV_MASK,
++			     FIELD_PREP(CLK_CORE_SRC_DIV_MASK, div - 1));
++	}
 +
-+/* CRU-->SOFTRST_CON18 */
-+#define SRST_M_SAI2		131
-+#define SRST_H_SAI2		132
-+#define SRST_H_SAI3		133
-+#define SRST_M_SAI3		134
-+#define SRST_H_SAI4		135
-+#define SRST_M_SAI4		136
-+#define SRST_H_DSM		137
-+#define SRST_M_DSM		138
-+#define SRST_P_AUDIO_ADC	139
-+#define SRST_M_AUDIO_ADC	140
++	if (new_rate < old_rate) {
++		rk_clrsetreg(RK3506_CLKSEL_CON(15), ACLK_CORE_DIV_MASK,
++			     FIELD_PREP(ACLK_CORE_DIV_MASK, rate->aclk_div));
++		rk_clrsetreg(RK3506_CLKSEL_CON(16), PCLK_CORE_DIV_MASK,
++			     FIELD_PREP(PCLK_CORE_DIV_MASK, rate->pclk_div));
++	}
 +
-+/* CRU-->SOFTRST_CON19 */
-+#define SRST_P_SARADC		141
-+#define SRST_SARADC		142
-+#define SRST_SARADC_PHY		143
-+#define SRST_P_OTPC_NS		144
-+#define SRST_SBPI_OTPC_NS	145
-+#define SRST_USER_OTPC_NS	146
-+#define SRST_P_UART5		147
-+#define SRST_UART5		148
-+#define SRST_P_GPIO234_IOC	149
++	return rk3506_armclk_get_rate(priv);
++}
 +
-+/* CRU-->SOFTRST_CON21 */
-+#define SRST_A_VIO_BIU		150
-+#define SRST_H_VIO_BIU		151
-+#define SRST_H_RGA		152
-+#define SRST_A_RGA		153
-+#define SRST_CORE_RGA		154
-+#define SRST_A_VOP		155
-+#define SRST_H_VOP		156
-+#define SRST_VOP		157
-+#define SRST_P_DPHY		158
-+#define SRST_P_DSI_HOST		159
-+#define SRST_P_TSADC		160
-+#define SRST_TSADC		161
++static ulong rk3506_pll_div_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div;
++	ulong prate;
 +
-+/* CRU-->SOFTRST_CON22 */
-+#define SRST_P_GPIO1_IOC	162
++	switch (clk_id) {
++	case CLK_GPLL_DIV:
++		con = readl(RK3506_CLKSEL_CON(0));
++		div = FIELD_GET(CLK_GPLL_DIV_MASK, con);
++		prate = priv->gpll_hz;
++		break;
++	case CLK_GPLL_DIV_100M:
++		con = readl(RK3506_CLKSEL_CON(0));
++		div = FIELD_GET(CLK_GPLL_DIV_100M_MASK, con);
++		prate = priv->gpll_div_hz;
++		break;
++	case CLK_V0PLL_DIV:
++		con = readl(RK3506_CLKSEL_CON(1));
++		div = FIELD_GET(CLK_V0PLL_DIV_MASK, con);
++		prate = priv->v0pll_hz;
++		break;
++	case CLK_V1PLL_DIV:
++		con = readl(RK3506_CLKSEL_CON(1));
++		div = FIELD_GET(CLK_V1PLL_DIV_MASK, con);
++		prate = priv->v1pll_hz;
++		break;
++	default:
++		return -ENOENT;
++	}
 +
-+#endif
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_pll_div_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				     ulong rate)
++{
++	u32 div;
++
++	switch (clk_id) {
++	case CLK_GPLL_DIV:
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++		assert(div - 1 <= 15);
++		rk_clrsetreg(RK3506_CLKSEL_CON(0), CLK_GPLL_DIV_MASK,
++			     FIELD_PREP(CLK_GPLL_DIV_MASK, div - 1));
++		break;
++	case CLK_GPLL_DIV_100M:
++		div = DIV_ROUND_UP(priv->gpll_div_hz, rate);
++		assert(div - 1 <= 15);
++		rk_clrsetreg(RK3506_CLKSEL_CON(0), CLK_GPLL_DIV_100M_MASK,
++			     FIELD_PREP(CLK_GPLL_DIV_100M_MASK, div - 1));
++		break;
++	case CLK_V0PLL_DIV:
++		div = DIV_ROUND_UP(priv->v0pll_hz, rate);
++		assert(div - 1 <= 15);
++		rk_clrsetreg(RK3506_CLKSEL_CON(1), CLK_V0PLL_DIV_MASK,
++			     FIELD_PREP(CLK_V0PLL_DIV_MASK, div - 1));
++		break;
++	case CLK_V1PLL_DIV:
++		div = DIV_ROUND_UP(priv->v1pll_hz, rate);
++		assert(div - 1 <= 15);
++		rk_clrsetreg(RK3506_CLKSEL_CON(1), CLK_V1PLL_DIV_MASK,
++			     FIELD_PREP(CLK_V1PLL_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_pll_div_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_bus_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	switch (clk_id) {
++	case ACLK_BUS_ROOT:
++		con = readl(RK3506_CLKSEL_CON(21));
++		sel = FIELD_GET(ACLK_BUS_SEL_MASK, con);
++		div = FIELD_GET(ACLK_BUS_DIV_MASK, con);
++		break;
++	case HCLK_BUS_ROOT:
++		con = readl(RK3506_CLKSEL_CON(21));
++		sel = FIELD_GET(HCLK_BUS_SEL_MASK, con);
++		div = FIELD_GET(HCLK_BUS_DIV_MASK, con);
++		break;
++	case PCLK_BUS_ROOT:
++		con = readl(RK3506_CLKSEL_CON(22));
++		sel = FIELD_GET(PCLK_BUS_SEL_MASK, con);
++		div = FIELD_GET(PCLK_BUS_DIV_MASK, con);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	if (sel == ACLK_BUS_SEL_GPLL_DIV)
++		prate = priv->gpll_div_hz;
++	else if (sel == ACLK_BUS_SEL_V0PLL_DIV)
++		prate = priv->v0pll_div_hz;
++	else if (sel == ACLK_BUS_SEL_V1PLL_DIV)
++		prate = priv->v1pll_div_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_bus_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				 ulong rate)
++{
++	u32 div, sel;
++
++	if (priv->v0pll_div_hz % rate == 0) {
++		sel = ACLK_BUS_SEL_V0PLL_DIV;
++		div = DIV_ROUND_UP(priv->v0pll_div_hz, rate);
++	} else if (priv->v1pll_div_hz % rate == 0) {
++		sel = ACLK_BUS_SEL_V1PLL_DIV;
++		div = DIV_ROUND_UP(priv->v1pll_div_hz, rate);
++	} else {
++		sel = ACLK_BUS_SEL_GPLL_DIV;
++		div = DIV_ROUND_UP(priv->gpll_div_hz, rate);
++	}
++	assert(div - 1 <= 31);
++
++	switch (clk_id) {
++	case ACLK_BUS_ROOT:
++		rk_clrsetreg(RK3506_CLKSEL_CON(21),
++			     ACLK_BUS_SEL_MASK | ACLK_BUS_DIV_MASK,
++			     FIELD_PREP(ACLK_BUS_SEL_MASK, sel) |
++			     FIELD_PREP(ACLK_BUS_DIV_MASK, div - 1));
++		break;
++	case HCLK_BUS_ROOT:
++		rk_clrsetreg(RK3506_CLKSEL_CON(21),
++			     HCLK_BUS_SEL_MASK | HCLK_BUS_DIV_MASK,
++			     FIELD_PREP(HCLK_BUS_SEL_MASK, sel) |
++			     FIELD_PREP(HCLK_BUS_DIV_MASK, div - 1));
++		break;
++	case PCLK_BUS_ROOT:
++		rk_clrsetreg(RK3506_CLKSEL_CON(22),
++			     PCLK_BUS_SEL_MASK | PCLK_BUS_DIV_MASK,
++			     FIELD_PREP(PCLK_BUS_SEL_MASK, sel) |
++			     FIELD_PREP(PCLK_BUS_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_bus_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_peri_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	switch (clk_id) {
++	case ACLK_HSPERI_ROOT:
++		con = readl(RK3506_CLKSEL_CON(49));
++		sel = FIELD_GET(ACLK_HSPERI_SEL_MASK, con);
++		div = FIELD_GET(ACLK_HSPERI_DIV_MASK, con);
++		break;
++	case HCLK_LSPERI_ROOT:
++		con = readl(RK3506_CLKSEL_CON(29));
++		sel = FIELD_GET(HCLK_LSPERI_SEL_MASK, con);
++		div = FIELD_GET(HCLK_LSPERI_DIV_MASK, con);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	if (sel == ACLK_HSPERI_SEL_GPLL_DIV)
++		prate = priv->gpll_div_hz;
++	else if (sel == ACLK_HSPERI_SEL_V0PLL_DIV)
++		prate = priv->v0pll_div_hz;
++	else if (sel == ACLK_HSPERI_SEL_V1PLL_DIV)
++		prate = priv->v1pll_div_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_peri_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				  ulong rate)
++{
++	u32 div, sel;
++
++	if (priv->v0pll_div_hz % rate == 0) {
++		sel = ACLK_BUS_SEL_V0PLL_DIV;
++		div = DIV_ROUND_UP(priv->v0pll_div_hz, rate);
++	} else if (priv->v1pll_div_hz % rate == 0) {
++		sel = ACLK_BUS_SEL_V1PLL_DIV;
++		div = DIV_ROUND_UP(priv->v1pll_div_hz, rate);
++	} else {
++		sel = ACLK_BUS_SEL_GPLL_DIV;
++		div = DIV_ROUND_UP(priv->gpll_div_hz, rate);
++	}
++	assert(div - 1 <= 31);
++
++	switch (clk_id) {
++	case ACLK_HSPERI_ROOT:
++		rk_clrsetreg(RK3506_CLKSEL_CON(49),
++			     ACLK_HSPERI_SEL_MASK | ACLK_HSPERI_DIV_MASK,
++			     FIELD_PREP(ACLK_HSPERI_SEL_MASK, sel) |
++			     FIELD_PREP(ACLK_HSPERI_DIV_MASK, div - 1));
++		break;
++	case HCLK_LSPERI_ROOT:
++		rk_clrsetreg(RK3506_CLKSEL_CON(29),
++			     HCLK_LSPERI_SEL_MASK | HCLK_LSPERI_DIV_MASK,
++			     FIELD_PREP(HCLK_LSPERI_SEL_MASK, sel) |
++			     FIELD_PREP(HCLK_LSPERI_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_peri_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_sdmmc_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	con = readl(RK3506_CLKSEL_CON(49));
++	sel = FIELD_GET(CCLK_SDMMC_SEL_MASK, con);
++	div = FIELD_GET(CCLK_SDMMC_DIV_MASK, con);
++
++	if (sel == CCLK_SDMMC_SEL_24M)
++		prate = OSC_HZ;
++	else if (sel == CCLK_SDMMC_SEL_GPLL)
++		prate = priv->gpll_hz;
++	else if (sel == CCLK_SDMMC_SEL_V0PLL)
++		prate = priv->v0pll_hz;
++	else if (sel == CCLK_SDMMC_SEL_V1PLL)
++		prate = priv->v1pll_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_sdmmc_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				   ulong rate)
++{
++	u32 div, sel;
++
++	if (OSC_HZ % rate == 0) {
++		sel = CCLK_SDMMC_SEL_24M;
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++	} else if (priv->v0pll_hz % rate == 0) {
++		sel = CCLK_SDMMC_SEL_V0PLL;
++		div = DIV_ROUND_UP(priv->v0pll_hz, rate);
++	} else if (priv->v1pll_hz % rate == 0) {
++		sel = CCLK_SDMMC_SEL_V1PLL;
++		div = DIV_ROUND_UP(priv->v1pll_hz, rate);
++	} else {
++		sel = CCLK_SDMMC_SEL_GPLL;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	}
++	assert(div - 1 <= 63);
++
++	rk_clrsetreg(RK3506_CLKSEL_CON(49),
++		     CCLK_SDMMC_SEL_MASK | CCLK_SDMMC_DIV_MASK,
++		     FIELD_PREP(CCLK_SDMMC_SEL_MASK, sel) |
++		     FIELD_PREP(CCLK_SDMMC_DIV_MASK, div - 1));
++
++	return rk3506_sdmmc_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_saradc_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	con = readl(RK3506_CLKSEL_CON(54));
++	sel = FIELD_GET(CLK_SARADC_SEL_MASK, con);
++	div = FIELD_GET(CLK_SARADC_DIV_MASK, con);
++
++	if (sel == CLK_SARADC_SEL_24M)
++		prate = OSC_HZ;
++	else if (sel == CLK_SARADC_SEL_400K)
++		prate = 400000;
++	else if (sel == CLK_SARADC_SEL_32K)
++		prate = 32000;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_saradc_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				    ulong rate)
++{
++	u32 div, sel;
++
++	if (32000 % rate == 0) {
++		sel = CLK_SARADC_SEL_32K;
++		div = 1;
++	} else if (400000 % rate == 0) {
++		sel = CLK_SARADC_SEL_400K;
++		div = 1;
++	} else {
++		sel = CLK_SARADC_SEL_24M;
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++	}
++	assert(div - 1 <= 15);
++
++	rk_clrsetreg(RK3506_CLKSEL_CON(54),
++		     CLK_SARADC_SEL_MASK | CLK_SARADC_DIV_MASK,
++		     FIELD_PREP(CLK_SARADC_SEL_MASK, sel) |
++		     FIELD_PREP(CLK_SARADC_DIV_MASK, div - 1));
++
++	return rk3506_saradc_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_tsadc_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div;
++
++	con = readl(RK3506_CLKSEL_CON(61));
++	switch (clk_id) {
++	case CLK_TSADC_TSEN:
++		div = FIELD_GET(CLK_TSADC_TSEN_DIV_MASK, con);
++		break;
++	case CLK_TSADC:
++		div = FIELD_GET(CLK_TSADC_DIV_MASK, con);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return DIV_TO_RATE(OSC_HZ, div);
++}
++
++static ulong rk3506_tsadc_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				   ulong rate)
++{
++	u32 div;
++
++	switch (clk_id) {
++	case CLK_TSADC_TSEN:
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++		assert(div - 1 <= 7);
++		rk_clrsetreg(RK3506_CLKSEL_CON(61), CLK_TSADC_TSEN_DIV_MASK,
++			     FIELD_PREP(CLK_TSADC_TSEN_DIV_MASK, div - 1));
++		break;
++	case CLK_TSADC:
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++		assert(div - 1 <= 255);
++		rk_clrsetreg(RK3506_CLKSEL_CON(61), CLK_TSADC_DIV_MASK,
++			     FIELD_PREP(CLK_TSADC_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_tsadc_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_i2c_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	switch (clk_id) {
++	case CLK_I2C0:
++		con = readl(RK3506_CLKSEL_CON(32));
++		sel = FIELD_GET(CLK_I2C0_SEL_MASK, con);
++		div = FIELD_GET(CLK_I2C0_DIV_MASK, con);
++	case CLK_I2C1:
++		con = readl(RK3506_CLKSEL_CON(32));
++		sel = FIELD_GET(CLK_I2C1_SEL_MASK, con);
++		div = FIELD_GET(CLK_I2C1_DIV_MASK, con);
++	case CLK_I2C2:
++		con = readl(RK3506_CLKSEL_CON(33));
++		sel = FIELD_GET(CLK_I2C2_SEL_MASK, con);
++		div = FIELD_GET(CLK_I2C2_DIV_MASK, con);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	if (sel == CLK_I2C_SEL_GPLL)
++		prate = priv->gpll_hz;
++	else if (sel == CLK_I2C_SEL_V0PLL)
++		prate = priv->v0pll_hz;
++	else if (sel == CLK_I2C_SEL_V1PLL)
++		prate = priv->v1pll_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_i2c_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				 ulong rate)
++{
++	u32 div, sel;
++
++	if (priv->v0pll_hz % rate == 0) {
++		sel = CLK_I2C_SEL_V0PLL;
++		div = DIV_ROUND_UP(priv->v0pll_hz, rate);
++	} else if (priv->v1pll_hz % rate == 0) {
++		sel = CLK_I2C_SEL_V1PLL;
++		div = DIV_ROUND_UP(priv->v1pll_hz, rate);
++	} else {
++		sel = CLK_I2C_SEL_GPLL;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	}
++	assert(div - 1 <= 15);
++
++	switch (clk_id) {
++	case CLK_I2C0:
++		rk_clrsetreg(RK3506_CLKSEL_CON(32),
++			     CLK_I2C0_SEL_MASK | CLK_I2C0_DIV_MASK,
++			     FIELD_PREP(CLK_I2C0_SEL_MASK, sel) |
++			     FIELD_PREP(CLK_I2C0_DIV_MASK, div - 1));
++		break;
++	case CLK_I2C1:
++		rk_clrsetreg(RK3506_CLKSEL_CON(32),
++			     CLK_I2C1_SEL_MASK | CLK_I2C1_DIV_MASK,
++			     FIELD_PREP(CLK_I2C1_SEL_MASK, sel) |
++			     FIELD_PREP(CLK_I2C1_DIV_MASK, div - 1));
++		break;
++	case CLK_I2C2:
++		rk_clrsetreg(RK3506_CLKSEL_CON(33),
++			     CLK_I2C2_SEL_MASK | CLK_I2C2_DIV_MASK,
++			     FIELD_PREP(CLK_I2C2_SEL_MASK, sel) |
++			     FIELD_PREP(CLK_I2C2_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_i2c_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_pwm_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	switch (clk_id) {
++	case CLK_PWM0:
++		con = readl(RK3506_PMU_CLKSEL_CON(0));
++		div = FIELD_GET(CLK_PWM0_DIV_MASK, con);
++		prate = priv->gpll_div_100mhz;
++		break;
++	case CLK_PWM1:
++		con = readl(RK3506_CLKSEL_CON(33));
++		sel = FIELD_GET(CLK_PWM1_SEL_MASK, con);
++		div = FIELD_GET(CLK_PWM1_DIV_MASK, con);
++		if (sel == CLK_PWM1_SEL_GPLL_DIV)
++			prate = priv->gpll_div_hz;
++		else if (sel == CLK_PWM1_SEL_V0PLL_DIV)
++			prate = priv->v0pll_div_hz;
++		else if (sel == CLK_PWM1_SEL_V1PLL_DIV)
++			prate = priv->v1pll_div_hz;
++		else
++			return -EINVAL;
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_pwm_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				 ulong rate)
++{
++	u32 div, sel;
++
++	switch (clk_id) {
++	case CLK_PWM0:
++		div = DIV_ROUND_UP(priv->gpll_div_100mhz, rate);
++		assert(div - 1 <= 15);
++		rk_clrsetreg(RK3506_PMU_CLKSEL_CON(0), CLK_PWM0_DIV_MASK,
++			     FIELD_PREP(CLK_PWM0_DIV_MASK, div - 1));
++		break;
++	case CLK_PWM1:
++		if (priv->v0pll_hz % rate == 0) {
++			sel = CLK_PWM1_SEL_V0PLL_DIV;
++			div = DIV_ROUND_UP(priv->v0pll_div_hz, rate);
++		} else if (priv->v1pll_hz % rate == 0) {
++			sel = CLK_PWM1_SEL_V1PLL_DIV;
++			div = DIV_ROUND_UP(priv->v1pll_div_hz, rate);
++		} else {
++			sel = CLK_PWM1_SEL_GPLL_DIV;
++			div = DIV_ROUND_UP(priv->gpll_div_hz, rate);
++		}
++		assert(div - 1 <= 15);
++		rk_clrsetreg(RK3506_CLKSEL_CON(33),
++			     CLK_PWM1_SEL_MASK | CLK_PWM1_DIV_MASK,
++			     FIELD_PREP(CLK_PWM1_SEL_MASK, sel) |
++			     FIELD_PREP(CLK_PWM1_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_pwm_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_spi_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	switch (clk_id) {
++	case CLK_SPI0:
++		con = readl(RK3506_CLKSEL_CON(34));
++		sel = FIELD_GET(CLK_SPI0_SEL_MASK, con);
++		div = FIELD_GET(CLK_SPI0_DIV_MASK, con);
++		break;
++	case CLK_SPI1:
++		con = readl(RK3506_CLKSEL_CON(34));
++		sel = FIELD_GET(CLK_SPI1_SEL_MASK, con);
++		div = FIELD_GET(CLK_SPI1_DIV_MASK, con);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	if (sel == CLK_SPI_SEL_24M)
++		prate = OSC_HZ;
++	else if (sel == CLK_SPI_SEL_GPLL_DIV)
++		prate = priv->gpll_div_hz;
++	else if (sel == CLK_SPI_SEL_V0PLL_DIV)
++		prate = priv->v0pll_div_hz;
++	else if (sel == CLK_SPI_SEL_V1PLL_DIV)
++		prate = priv->v1pll_div_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_spi_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				 ulong rate)
++{
++	u32 div, sel;
++
++	if (OSC_HZ % rate == 0) {
++		sel = CLK_SPI_SEL_24M;
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++	} else if (priv->v0pll_div_hz % rate == 0) {
++		sel = CLK_SPI_SEL_V0PLL_DIV;
++		div = DIV_ROUND_UP(priv->v0pll_div_hz, rate);
++	} else if (priv->v1pll_div_hz % rate == 0) {
++		sel = CLK_SPI_SEL_V1PLL_DIV;
++		div = DIV_ROUND_UP(priv->v1pll_div_hz, rate);
++	} else {
++		sel = CLK_SPI_SEL_GPLL_DIV;
++		div = DIV_ROUND_UP(priv->gpll_div_hz, rate);
++	}
++	assert(div - 1 <= 15);
++
++	switch (clk_id) {
++	case CLK_SPI0:
++		rk_clrsetreg(RK3506_CLKSEL_CON(34),
++			     CLK_SPI0_SEL_MASK | CLK_SPI0_DIV_MASK,
++			     FIELD_PREP(CLK_SPI0_SEL_MASK, sel) |
++			     FIELD_PREP(CLK_SPI0_DIV_MASK, div - 1));
++		break;
++	case CLK_SPI1:
++		rk_clrsetreg(RK3506_CLKSEL_CON(34),
++			     CLK_SPI1_SEL_MASK | CLK_SPI1_DIV_MASK,
++			     FIELD_PREP(CLK_SPI1_SEL_MASK, sel) |
++			     FIELD_PREP(CLK_SPI1_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_spi_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_fspi_get_rate(struct rk3506_clk_priv *priv)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	con = readl(RK3506_CLKSEL_CON(50));
++	sel = FIELD_GET(SCLK_FSPI_SEL_MASK, con);
++	div = FIELD_GET(SCLK_FSPI_DIV_MASK, con);
++
++	if (sel == SCLK_FSPI_SEL_24M)
++		prate = OSC_HZ;
++	else if (sel == SCLK_FSPI_SEL_GPLL)
++		prate = priv->gpll_hz;
++	else if (sel == SCLK_FSPI_SEL_V0PLL)
++		prate = priv->v0pll_hz;
++	else if (sel == SCLK_FSPI_SEL_V1PLL)
++		prate = priv->v1pll_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_fspi_set_rate(struct rk3506_clk_priv *priv, ulong rate)
++{
++	int div, sel;
++
++	if (OSC_HZ % rate == 0) {
++		sel = SCLK_FSPI_SEL_24M;
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++	} else if (priv->v0pll_hz % rate == 0) {
++		sel = SCLK_FSPI_SEL_V0PLL;
++		div = DIV_ROUND_UP(priv->v0pll_hz, rate);
++	} else if (priv->v1pll_hz % rate == 0) {
++		sel = SCLK_FSPI_SEL_V1PLL;
++		div = DIV_ROUND_UP(priv->v1pll_hz, rate);
++	} else {
++		sel = SCLK_FSPI_SEL_GPLL;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	}
++	assert(div - 1 <= 31);
++
++	rk_clrsetreg(RK3506_CLKSEL_CON(50),
++		     SCLK_FSPI_SEL_MASK | SCLK_FSPI_DIV_MASK,
++		     FIELD_PREP(SCLK_FSPI_SEL_MASK, sel) |
++		     FIELD_PREP(SCLK_FSPI_DIV_MASK, div - 1));
++
++	return rk3506_fspi_get_rate(priv);
++}
++
++static ulong rk3506_vop_dclk_get_rate(struct rk3506_clk_priv *priv)
++{
++	u32 con, div, sel;
++	ulong prate;
++
++	con = readl(RK3506_CLKSEL_CON(60));
++	sel = FIELD_GET(DCLK_VOP_SEL_MASK, con);
++	div = FIELD_GET(DCLK_VOP_DIV_MASK, con);
++
++	if (sel == DCLK_VOP_SEL_24M)
++		prate = OSC_HZ;
++	else if (sel == DCLK_VOP_SEL_GPLL)
++		prate = priv->gpll_hz;
++	else if (sel == DCLK_VOP_SEL_V0PLL)
++		prate = priv->v0pll_hz;
++	else if (sel == DCLK_VOP_SEL_V1PLL)
++		prate = priv->v1pll_hz;
++	else
++		return -EINVAL;
++
++	return DIV_TO_RATE(prate, div);
++}
++
++static ulong rk3506_vop_dclk_set_rate(struct rk3506_clk_priv *priv, ulong rate)
++{
++	int div, sel;
++
++	if (OSC_HZ % rate == 0) {
++		sel = DCLK_VOP_SEL_24M;
++		div = DIV_ROUND_UP(OSC_HZ, rate);
++	} else if (priv->v0pll_hz % rate == 0) {
++		sel = DCLK_VOP_SEL_V0PLL;
++		div = DIV_ROUND_UP(priv->v0pll_hz, rate);
++	} else if (priv->v1pll_hz % rate == 0) {
++		sel = DCLK_VOP_SEL_V1PLL;
++		div = DIV_ROUND_UP(priv->v1pll_hz, rate);
++	} else {
++		sel = DCLK_VOP_SEL_GPLL;
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++	}
++	assert(div - 1 <= 255);
++
++	rk_clrsetreg(RK3506_CLKSEL_CON(60),
++		     DCLK_VOP_SEL_MASK | DCLK_VOP_DIV_MASK,
++		     FIELD_PREP(DCLK_VOP_SEL_MASK, sel) |
++		     FIELD_PREP(DCLK_VOP_DIV_MASK, div - 1));
++
++	return rk3506_vop_dclk_get_rate(priv);
++}
++
++static ulong rk3506_mac_get_rate(struct rk3506_clk_priv *priv, ulong clk_id)
++{
++	u32 con, div;
++
++	switch (clk_id) {
++	case CLK_MAC0:
++	case CLK_MAC1:
++		con = readl(RK3506_CLKSEL_CON(50));
++		div = FIELD_GET(CLK_MAC_DIV_MASK, con);
++		break;
++	case CLK_MAC_OUT:
++		con = readl(RK3506_PMU_CLKSEL_CON(0));
++		div = FIELD_GET(CLK_MAC_OUT_DIV_MASK, con);
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return DIV_TO_RATE(priv->gpll_hz, div);
++}
++
++static ulong rk3506_mac_set_rate(struct rk3506_clk_priv *priv, ulong clk_id,
++				 ulong rate)
++{
++	u32 div;
++
++	switch (clk_id) {
++	case CLK_MAC0:
++	case CLK_MAC1:
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++		rk_clrsetreg(RK3506_CLKSEL_CON(50), CLK_MAC_DIV_MASK,
++			     FIELD_PREP(CLK_MAC_DIV_MASK, div - 1));
++		break;
++	case CLK_MAC_OUT:
++		div = DIV_ROUND_UP(priv->gpll_hz, rate);
++		rk_clrsetreg(RK3506_PMU_CLKSEL_CON(0), CLK_MAC_OUT_DIV_MASK,
++			     FIELD_PREP(CLK_MAC_OUT_DIV_MASK, div - 1));
++		break;
++	default:
++		return -ENOENT;
++	}
++
++	return rk3506_mac_get_rate(priv, clk_id);
++}
++
++static ulong rk3506_clk_get_rate(struct clk *clk)
++{
++	struct rk3506_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong rate = 0;
++
++	if (!priv->gpll_hz || !priv->v0pll_hz || !priv->v1pll_hz) {
++		log_debug("gpll=%lu, v0pll=%lu, v1pll=%lu\n",
++			  priv->gpll_hz, priv->v0pll_hz, priv->v1pll_hz);
++		return -ENOENT;
++	}
++
++	switch (clk->id) {
++	case PLL_GPLL:
++		rate = priv->gpll_hz;
++		break;
++	case PLL_V0PLL:
++		rate = priv->v0pll_hz;
++		break;
++	case PLL_V1PLL:
++		rate = priv->v1pll_hz;
++		break;
++	case ARMCLK:
++		rate = rk3506_armclk_get_rate(priv);
++		break;
++	case CLK_GPLL_DIV:
++	case CLK_GPLL_DIV_100M:
++	case CLK_V0PLL_DIV:
++	case CLK_V1PLL_DIV:
++		rate = rk3506_pll_div_get_rate(priv, clk->id);
++		break;
++	case ACLK_BUS_ROOT:
++	case HCLK_BUS_ROOT:
++	case PCLK_BUS_ROOT:
++		rate = rk3506_bus_get_rate(priv, clk->id);
++		break;
++	case ACLK_HSPERI_ROOT:
++	case HCLK_LSPERI_ROOT:
++		rate = rk3506_peri_get_rate(priv, clk->id);
++		break;
++	case HCLK_SDMMC:
++	case CCLK_SRC_SDMMC:
++		rate = rk3506_sdmmc_get_rate(priv, clk->id);
++		break;
++	case CLK_SARADC:
++		rate = rk3506_saradc_get_rate(priv, clk->id);
++		break;
++	case CLK_TSADC:
++	case CLK_TSADC_TSEN:
++		rate = rk3506_tsadc_get_rate(priv, clk->id);
++		break;
++	case CLK_I2C0:
++	case CLK_I2C1:
++	case CLK_I2C2:
++		rate = rk3506_i2c_get_rate(priv, clk->id);
++		break;
++	case CLK_PWM0:
++	case CLK_PWM1:
++		rate = rk3506_pwm_get_rate(priv, clk->id);
++		break;
++	case CLK_SPI0:
++	case CLK_SPI1:
++		rate = rk3506_spi_get_rate(priv, clk->id);
++		break;
++	case SCLK_FSPI:
++		rate = rk3506_fspi_get_rate(priv);
++		break;
++	case DCLK_VOP:
++		rate = rk3506_vop_dclk_get_rate(priv);
++		break;
++	case CLK_MAC0:
++	case CLK_MAC1:
++	case CLK_MAC_OUT:
++		rate = rk3506_mac_get_rate(priv, clk->id);
++		break;
++	default:
++		log_debug("unsupported clk id=%ld\n", clk->id);
++		return -ENOENT;
++	}
++
++	return rate;
++};
++
++static ulong rk3506_clk_set_rate(struct clk *clk, ulong rate)
++{
++	struct rk3506_clk_priv *priv = dev_get_priv(clk->dev);
++	ulong ret = 0;
++
++	if (!priv->gpll_hz || !priv->v0pll_hz || !priv->v1pll_hz) {
++		log_debug("gpll=%lu, v0pll=%lu, v1pll=%lu\n",
++			  priv->gpll_hz, priv->v0pll_hz, priv->v1pll_hz);
++		return -ENOENT;
++	}
++
++	switch (clk->id) {
++	case ARMCLK:
++		ret = rk3506_armclk_set_rate(priv, rate);
++		break;
++	case CLK_GPLL_DIV:
++	case CLK_GPLL_DIV_100M:
++	case CLK_V0PLL_DIV:
++	case CLK_V1PLL_DIV:
++		ret = rk3506_pll_div_set_rate(priv, clk->id, rate);
++		break;
++	case ACLK_BUS_ROOT:
++	case HCLK_BUS_ROOT:
++	case PCLK_BUS_ROOT:
++		ret = rk3506_bus_set_rate(priv, clk->id, rate);
++		break;
++	case ACLK_HSPERI_ROOT:
++	case HCLK_LSPERI_ROOT:
++		ret = rk3506_peri_set_rate(priv, clk->id, rate);
++		break;
++	case HCLK_SDMMC:
++	case CCLK_SRC_SDMMC:
++		ret = rk3506_sdmmc_set_rate(priv, clk->id, rate);
++		break;
++	case CLK_SARADC:
++		ret = rk3506_saradc_set_rate(priv, clk->id, rate);
++		break;
++	case CLK_TSADC:
++	case CLK_TSADC_TSEN:
++		ret = rk3506_tsadc_set_rate(priv, clk->id, rate);
++		break;
++	case CLK_I2C0:
++	case CLK_I2C1:
++	case CLK_I2C2:
++		ret = rk3506_i2c_set_rate(priv, clk->id, rate);
++		break;
++	case CLK_PWM0:
++	case CLK_PWM1:
++		ret = rk3506_pwm_set_rate(priv, clk->id, rate);
++		break;
++	case CLK_SPI0:
++	case CLK_SPI1:
++		ret = rk3506_spi_set_rate(priv, clk->id, rate);
++		break;
++	case SCLK_FSPI:
++		ret = rk3506_fspi_set_rate(priv, rate);
++		break;
++	case DCLK_VOP:
++		ret = rk3506_vop_dclk_set_rate(priv, rate);
++		break;
++	case CLK_MAC0:
++	case CLK_MAC1:
++	case CLK_MAC_OUT:
++		ret = rk3506_mac_set_rate(priv, clk->id, rate);
++		break;
++	default:
++		log_debug("unsupported clk id=%ld rate=%ld\n", clk->id, rate);
++		return -ENOENT;
++	}
++
++	return ret;
++};
++
++static struct clk_ops rk3506_clk_ops = {
++	.get_rate = rk3506_clk_get_rate,
++	.set_rate = rk3506_clk_set_rate,
++};
++
++static void rk3506_clk_init(struct rk3506_clk_priv *priv)
++{
++	static void * const cru_base = (void *)RK3506_CRU_BASE;
++
++	if (!priv->gpll_hz) {
++		priv->gpll_hz = rockchip_pll_get_rate(&rk3506_pll_clks[GPLL],
++						      cru_base, GPLL);
++		priv->gpll_hz = roundup(priv->gpll_hz, 1000);
++	}
++	if (!priv->v0pll_hz) {
++		priv->v0pll_hz = rockchip_pll_get_rate(&rk3506_pll_clks[V0PLL],
++						       cru_base, V0PLL);
++		priv->v0pll_hz = roundup(priv->v0pll_hz, 1000);
++	}
++	if (!priv->v1pll_hz) {
++		priv->v1pll_hz = rockchip_pll_get_rate(&rk3506_pll_clks[V1PLL],
++						       cru_base, V1PLL);
++		priv->v1pll_hz = roundup(priv->v1pll_hz, 1000);
++	}
++	if (!priv->gpll_div_hz) {
++		priv->gpll_div_hz = rk3506_pll_div_get_rate(priv, CLK_GPLL_DIV);
++		priv->gpll_div_hz = roundup(priv->gpll_div_hz, 1000);
++	}
++	if (!priv->gpll_div_100mhz) {
++		priv->gpll_div_100mhz = rk3506_pll_div_get_rate(priv,
++								CLK_GPLL_DIV_100M);
++		priv->gpll_div_100mhz = roundup(priv->gpll_div_100mhz, 1000);
++	}
++	if (!priv->v0pll_div_hz) {
++		priv->v0pll_div_hz = rk3506_pll_div_get_rate(priv, CLK_V0PLL_DIV);
++		priv->v0pll_div_hz = roundup(priv->v0pll_div_hz, 1000);
++	}
++	if (!priv->v1pll_div_hz) {
++		priv->v1pll_div_hz = rk3506_pll_div_get_rate(priv, CLK_V1PLL_DIV);
++		priv->v1pll_div_hz = roundup(priv->v1pll_div_hz, 1000);
++	}
++}
++
++static void rk3506_clk_init_xpl(void)
++{
++	/* Init pka crypto rate, sel=v0pll, div=3 */
++	rk_clrsetreg(RK3506_SCRU_BASE + 0x0010,
++		     CLK_PKA_CRYPTO_SEL_MASK | CLK_PKA_CRYPTO_DIV_MASK,
++		     FIELD_PREP(CLK_PKA_CRYPTO_SEL_MASK, CLK_PKA_CRYPTO_SEL_V0PLL) |
++		     FIELD_PREP(CLK_PKA_CRYPTO_DIV_MASK, 3));
++
++	/* Change clk core src rate, sel=gpll, div=3 */
++	rk_clrsetreg(RK3506_CLKSEL_CON(15),
++		     CLK_CORE_SRC_SEL_MASK | CLK_CORE_SRC_DIV_MASK,
++		     FIELD_PREP(CLK_CORE_SRC_SEL_MASK, CLK_CORE_SEL_GPLL) |
++		     FIELD_PREP(CLK_CORE_SRC_DIV_MASK, 3));
++}
++
++static int rk3506_clk_probe(struct udevice *dev)
++{
++	struct rk3506_clk_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	rk3506_clk_init(priv);
++
++	/* Process 'assigned-{clocks/clock-parents/clock-rates}' properties */
++	ret = clk_set_defaults(dev, 1);
++	if (ret)
++		log_debug("clk_set_defaults failed: ret=%d\n", ret);
++
++	return 0;
++}
++
++static int rk3506_clk_bind(struct udevice *dev)
++{
++	struct udevice *sys_child;
++	struct sysreset_reg *priv;
++	int ret;
++
++	if (IS_ENABLED(CONFIG_XPL_BUILD))
++		rk3506_clk_init_xpl();
++
++	/* The reset driver does not have a device node, so bind it here */
++	ret = device_bind_driver(dev, "rockchip_sysreset", "sysreset",
++				 &sys_child);
++	if (ret) {
++		log_debug("Warning: No sysreset driver: ret=%d\n", ret);
++	} else {
++		priv = malloc(sizeof(struct sysreset_reg));
++		priv->glb_srst_fst_value = RK3506_GLB_SRST_FST;
++		priv->glb_srst_snd_value = RK3506_GLB_SRST_SND;
++		dev_set_priv(sys_child, priv);
++	}
++
++	if (!CONFIG_IS_ENABLED(RESET_ROCKCHIP))
++		return 0;
++
++	ret = rk3506_reset_bind_lut(dev, RK3506_SOFTRST_CON0, 23);
++	if (ret)
++		log_debug("Warning: software reset driver bind failed\n");
++
++	return 0;
++}
++
++static const struct udevice_id rk3506_clk_ids[] = {
++	{ .compatible = "rockchip,rk3506-cru" },
++	{ }
++};
++
++U_BOOT_DRIVER(rockchip_rk3506_cru) = {
++	.name		= "rockchip_rk3506_cru",
++	.id		= UCLASS_CLK,
++	.of_match	= rk3506_clk_ids,
++	.priv_auto	= sizeof(struct rk3506_clk_priv),
++	.ops		= &rk3506_clk_ops,
++	.bind		= rk3506_clk_bind,
++	.probe		= rk3506_clk_probe,
++};
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index ee5b009d1341..088545c64733 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -16,7 +16,7 @@ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
+ obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
+ obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
+ obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
+-obj-$(CONFIG_RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
++obj-$(CONFIG_RESET_ROCKCHIP) += reset-rockchip.o rst-rk3506.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
+ obj-$(CONFIG_RESET_MESON) += reset-meson.o
+ obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
+ obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
+diff --git a/drivers/reset/rst-rk3506.c b/drivers/reset/rst-rk3506.c
+new file mode 100644
+index 000000000000..9c384db0589a
+--- /dev/null
++++ b/drivers/reset/rst-rk3506.c
+@@ -0,0 +1,222 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (c) 2025 Rockchip Electronics Co., Ltd.
++ * Author: Finley Xiao <finley.xiao@rock-chips.com>
++ */
++
++#include <dm.h>
++#include <asm/arch-rockchip/clock.h>
++#include <dt-bindings/reset/rockchip,rk3506-cru.h>
++
++/* 0xFF9A0000 + 0x0A00 */
++#define RK3506_CRU_RESET_OFFSET(id, reg, bit) [id] = (0 + reg * 16 + bit)
++
++/* mapping table for reset ID to register offset */
++static const int rk3506_register_offset[] = {
++	/* CRU-->SOFTRST_CON00 */
++	RK3506_CRU_RESET_OFFSET(SRST_NCOREPORESET0_AC, 0, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_NCOREPORESET1_AC, 0, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_NCOREPORESET2_AC, 0, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_NCORESET0_AC, 0, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_NCORESET1_AC, 0, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_NCORESET2_AC, 0, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_NL2RESET_AC, 0, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_A_CORE_BIU_AC, 0, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_H_M0_AC, 0, 10),
++
++	/* CRU-->SOFTRST_CON02 */
++	RK3506_CRU_RESET_OFFSET(SRST_NDBGRESET, 2, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_P_CORE_BIU, 2, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_PMU, 2, 15),
++
++	/* CRU-->SOFTRST_CON03 */
++	RK3506_CRU_RESET_OFFSET(SRST_P_DBG, 3, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_POT_DBG, 3, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_P_CORE_GRF, 3, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_CORE_EMA_DETECT, 3, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_REF_PVTPLL_CORE, 3, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_P_GPIO1, 3, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_DB_GPIO1, 3, 9),
++
++	/* CRU-->SOFTRST_CON04 */
++	RK3506_CRU_RESET_OFFSET(SRST_A_CORE_PERI_BIU, 4, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_A_DSMC, 4, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_P_DSMC, 4, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_FLEXBUS, 4, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_A_FLEXBUS, 4, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_H_FLEXBUS, 4, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_A_DSMC_SLV, 4, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_H_DSMC_SLV, 4, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_DSMC_SLV, 4, 13),
++
++	/* CRU-->SOFTRST_CON05 */
++	RK3506_CRU_RESET_OFFSET(SRST_A_BUS_BIU, 5, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_H_BUS_BIU, 5, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_P_BUS_BIU, 5, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_A_SYSRAM, 5, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SYSRAM, 5, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_A_DMAC0, 5, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_A_DMAC1, 5, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_H_M0, 5, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_M0_JTAG, 5, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_H_CRYPTO, 5, 15),
++
++	/* CRU-->SOFTRST_CON06 */
++	RK3506_CRU_RESET_OFFSET(SRST_H_RNG, 6, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_P_BUS_GRF, 6, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_P_TIMER0, 6, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_TIMER0_CH0, 6, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_TIMER0_CH1, 6, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_TIMER0_CH2, 6, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_TIMER0_CH3, 6, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_TIMER0_CH4, 6, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_TIMER0_CH5, 6, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_P_WDT0, 6, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_T_WDT0, 6, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_P_WDT1, 6, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_T_WDT1, 6, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_P_MAILBOX, 6, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_P_INTMUX, 6, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_P_SPINLOCK, 6, 15),
++
++	/* CRU-->SOFTRST_CON07 */
++	RK3506_CRU_RESET_OFFSET(SRST_P_DDRC, 7, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_H_DDRPHY, 7, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_P_DDRMON, 7, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_DDRMON_OSC, 7, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_P_DDR_LPC, 7, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_H_USBOTG0, 7, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_USBOTG0_ADP, 7, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_H_USBOTG1, 7, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_USBOTG1_ADP, 7, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_P_USBPHY, 7, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_USBPHY_POR, 7, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_USBPHY_OTG0, 7, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_USBPHY_OTG1, 7, 14),
++
++	/* CRU-->SOFTRST_CON08 */
++	RK3506_CRU_RESET_OFFSET(SRST_A_DMA2DDR, 8, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_P_DMA2DDR, 8, 1),
++
++	/* CRU-->SOFTRST_CON09 */
++	RK3506_CRU_RESET_OFFSET(SRST_USBOTG0_UTMI, 9, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_USBOTG1_UTMI, 9, 1),
++
++	/* CRU-->SOFTRST_CON10 */
++	RK3506_CRU_RESET_OFFSET(SRST_A_DDRC_0, 10, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_A_DDRC_1, 10, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_A_DDR_BIU, 10, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_DDRC, 10, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_DDRMON, 10, 4),
++
++	/* CRU-->SOFTRST_CON11 */
++	RK3506_CRU_RESET_OFFSET(SRST_H_LSPERI_BIU, 11, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_P_UART0, 11, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_P_UART1, 11, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_P_UART2, 11, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_P_UART3, 11, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_P_UART4, 11, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_UART0, 11, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_UART1, 11, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_UART2, 11, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_UART3, 11, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_UART4, 11, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_P_I2C0, 11, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_I2C0, 11, 15),
++
++	/* CRU-->SOFTRST_CON12 */
++	RK3506_CRU_RESET_OFFSET(SRST_P_I2C1, 12, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_I2C1, 12, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_P_I2C2, 12, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_I2C2, 12, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_P_PWM1, 12, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_PWM1, 12, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_P_SPI0, 12, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_SPI0, 12, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_P_SPI1, 12, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_SPI1, 12, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_P_GPIO2, 12, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_DB_GPIO2, 12, 15),
++
++	/* CRU-->SOFTRST_CON13 */
++	RK3506_CRU_RESET_OFFSET(SRST_P_GPIO3, 13, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_DB_GPIO3, 13, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_P_GPIO4, 13, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_DB_GPIO4, 13, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_H_CAN0, 13, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_CAN0, 13, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_H_CAN1, 13, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_CAN1, 13, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_H_PDM, 13, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_M_PDM, 13, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_PDM, 13, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_SPDIFTX, 13, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SPDIFTX, 13, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SPDIFRX, 13, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_SPDIFRX, 13, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_M_SAI0, 13, 15),
++
++	/* CRU-->SOFTRST_CON14 */
++	RK3506_CRU_RESET_OFFSET(SRST_H_SAI0, 14, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_M_SAI1, 14, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SAI1, 14, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_H_ASRC0, 14, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_ASRC0, 14, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_H_ASRC1, 14, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_ASRC1, 14, 8),
++
++	/* CRU-->SOFTRST_CON17 */
++	RK3506_CRU_RESET_OFFSET(SRST_H_HSPERI_BIU, 17, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SDMMC, 17, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_H_FSPI, 17, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_S_FSPI, 17, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_P_SPI2, 17, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_A_MAC0, 17, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_A_MAC1, 17, 12),
++
++	/* CRU-->SOFTRST_CON18 */
++	RK3506_CRU_RESET_OFFSET(SRST_M_SAI2, 18, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SAI2, 18, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SAI3, 18, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_M_SAI3, 18, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_H_SAI4, 18, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_M_SAI4, 18, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_H_DSM, 18, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_M_DSM, 18, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_P_AUDIO_ADC, 18, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_M_AUDIO_ADC, 18, 15),
++
++	/* CRU-->SOFTRST_CON19 */
++	RK3506_CRU_RESET_OFFSET(SRST_P_SARADC, 19, 0),
++	RK3506_CRU_RESET_OFFSET(SRST_SARADC, 19, 1),
++	RK3506_CRU_RESET_OFFSET(SRST_SARADC_PHY, 19, 2),
++	RK3506_CRU_RESET_OFFSET(SRST_P_OTPC_NS, 19, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_SBPI_OTPC_NS, 19, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_USER_OTPC_NS, 19, 5),
++	RK3506_CRU_RESET_OFFSET(SRST_P_UART5, 19, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_UART5, 19, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_P_GPIO234_IOC, 19, 8),
++
++	/* CRU-->SOFTRST_CON21 */
++	RK3506_CRU_RESET_OFFSET(SRST_A_VIO_BIU, 21, 3),
++	RK3506_CRU_RESET_OFFSET(SRST_H_VIO_BIU, 21, 4),
++	RK3506_CRU_RESET_OFFSET(SRST_H_RGA, 21, 6),
++	RK3506_CRU_RESET_OFFSET(SRST_A_RGA, 21, 7),
++	RK3506_CRU_RESET_OFFSET(SRST_CORE_RGA, 21, 8),
++	RK3506_CRU_RESET_OFFSET(SRST_A_VOP, 21, 9),
++	RK3506_CRU_RESET_OFFSET(SRST_H_VOP, 21, 10),
++	RK3506_CRU_RESET_OFFSET(SRST_VOP, 21, 11),
++	RK3506_CRU_RESET_OFFSET(SRST_P_DPHY, 21, 12),
++	RK3506_CRU_RESET_OFFSET(SRST_P_DSI_HOST, 21, 13),
++	RK3506_CRU_RESET_OFFSET(SRST_P_TSADC, 21, 14),
++	RK3506_CRU_RESET_OFFSET(SRST_TSADC, 21, 15),
++
++	/* CRU-->SOFTRST_CON22 */
++	RK3506_CRU_RESET_OFFSET(SRST_P_GPIO1_IOC, 22, 1),
++};
++
++int rk3506_reset_bind_lut(struct udevice *pdev, u32 reg_offset, u32 reg_number)
++{
++	return rockchip_reset_bind_lut(pdev, rk3506_register_offset,
++				       reg_offset, reg_number);
++}
 -- 
 2.52.0
 
