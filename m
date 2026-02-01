@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 721A8E7C6F6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Feb 2026 00:45:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FFFE7C6F6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Feb 2026 00:45:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E32D83B55;
-	Sun,  1 Feb 2026 01:45:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C87F783B85;
+	Sun,  1 Feb 2026 01:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xo6bJVN3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JnD421ix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 394F983AAD; Sun,  1 Feb 2026 01:45:11 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 166F383AA9; Sun,  1 Feb 2026 01:45:17 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0227A83AA9
- for <u-boot@lists.denx.de>; Sun,  1 Feb 2026 01:45:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F5C683AA9
+ for <u-boot@lists.denx.de>; Sun,  1 Feb 2026 01:45:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-79496f0ea3fso26104857b3.0
- for <u-boot@lists.denx.de>; Sat, 31 Jan 2026 16:45:08 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-7927b1620ddso48066637b3.0
+ for <u-boot@lists.denx.de>; Sat, 31 Jan 2026 16:45:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1769906708; x=1770511508; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=52z1EQnOCIF0i9Wf8UcvR0nDRSMIIhDVGSZBEhwPl9g=;
- b=Xo6bJVN35t/Bkb2nGvd3+A43deeejaPsYCyHNZR+aGHv6MXuuk0+lIQiesQc2/djRs
- ynJubE5xsK/SMRV58gBvwGFP4YTNFBV42thEHwgxPatvN+UWjIsBm5X6nTHNsrbPjENc
- HXsgX/Mdaj8/jsSFpNdp5UcHlXGBZwg1DMqHPkxGggmk9tVJjTccSoiJo3Y/armlxUik
- k4qfGkb1IE6dOCTxvDCW2eQcyF6A3rx72FTeYw987wmDK8D1eC6VL6g55lM5kdyv/+jw
- mVvTkN9j2GHgBD1zPXmDZMlic0BJeLJjT/DwoYlLmaqhAqeeQvnNlXIsRqLjsxhNaTM0
- QXQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1769906708; x=1770511508;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1769906710; x=1770511510; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=52z1EQnOCIF0i9Wf8UcvR0nDRSMIIhDVGSZBEhwPl9g=;
- b=Hikyi44ysnB9qGUHKRjIeu23ntZjSz7GW9JH7naFjpD61KbbZiPJlNQaOuHcqGIDI3
- WJdbGF3SBC2nm/go4yjeteMhdL/UsxouDmzU4Q4gtz1mcJ2pWjfcLSqsj++pbSwBroPU
- kh6VP7V1KX/es5daP3JEQSCfXTlzMC63Im+XBr687u5iuHRwMBUWQiFAR2vBR0Evl0FJ
- 58OSVhFJ4wrzHa/1iTSfGDVO906TO54jddf079EMRgODEJm9puvUtVmaVd0GgL9oflCw
- /61gdjLyEYWNIiQndLW0fOIwTaENtJloG3gS81wjfuXI/Y70HEIjVX5TFd+pedzt2ms4
- md+g==
+ bh=71IHb8Zapeh1PQMmWU89I7LCxcSzug2sZyo+upJy2DA=;
+ b=JnD421ixWgJG5XUH+jkhw3h7MUHRbwdZ7geyf5lnU1z1Mf4qPMVicwF2Xxqcir5kxi
+ jE6t251U1iKg7XGc0fUHnVJR1aRMaHG2jqBEyVSfPeqwcIqKbZwo25pRq6GpDG6XRywc
+ 9YALjTHSEof7qu0O36kweHKX04II2jLTZEIQQKGVGDT6ivt1zHFssxN0Cf6VVIIbHjmc
+ Sn9IhU73M9qWaFs+ZG9fvuqAhM+Eo8uN6W8tY7hbcNhWDfDnNFcq7jpx7t1KZ1xwkpWK
+ bMKD+EPB/3LSv77YzzWKPoYWZMOr+l//S0T5OMwYqHyDBZioxAwC1tvg4JjUBCy8b7Qv
+ y+yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1769906710; x=1770511510;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=71IHb8Zapeh1PQMmWU89I7LCxcSzug2sZyo+upJy2DA=;
+ b=jtzowyCaR7yW09jTPWk/2IIGBMtyOP6NMutelkwGE3G/5Gbqg/WrA47onZ6lYiPcje
+ u67sXEhzgnJ1m2HiNyMdPOyL+bxLndmza0mY7lkbCqLu/PtArpDV2CllmC1qnRRX96n3
+ SUvXKB0zmRcR6FZsq2nnrIrqFpkCOQ5dhomCigImejE22TE22gYpBW9NbD2Ovlgg0a/j
+ u1ZRZ2Gv2e77TqzrcYoM4SoDyt0G1J0woXq2wCBOqLS35+ksBuwPuHZiJ4b6jIsBxWIs
+ aJ3dyYEaEtGJhrXvxs5NB3L5FTkMCb5H0poSjOudu1lpT1s/tGpgLmZraATORulMWqiO
+ 0npA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9nz5PtI6pkEaI1hEzXYZGdyVq1Wlkw5w7TuAXqCUIy5cWl2KVmmvjc2v8dICvc0oCoO+VVv0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3IU6a/Kj73IFmnE1lgFiRxy4YyR8I/aoCvMQwjCN3XZTwxywe
- uFw1NH5lwLIBwnD5dXjB9LqElDxbXf7AnA94UGJNpLjcBhj8POZIoe3ew+tPZw==
-X-Gm-Gg: AZuq6aKV8oi0Y8U4qTwrbnQfJs+IeEXNOuJq2gMUlu3xsV/N41GiHb7YoJycTWz9TtQ
- fJCMP7Bbvm3MdTGUx2T2hwVFjZeA4cICujCY5lncONdQJADdphLTbISSwgezPJPvPW2F0G5iJDv
- 3weOJnuPXjz9n/O7itFlVlv2lV+7esxhNOeu6NL/z67GrmJOhhD0XwZFxgXQNnXjT/dsoiTYQBO
- uHMsGSy6x8FuE/kEOippLBc/ujyVlUstM2Udyezr9xP1gezWCWu8kDtJsKmDjaAKxaTfLP+VGZ4
- vfd7UnFr5xg6SO8Ia0PN/91OFMaGW+FbQkfRmMb6MgQj/G2BEtW0Eqpkwou3LeaOcHXRO5V7zEi
- f4t4wDyCcikGHtCS/RBPAuhJudkHrAsyrLrGQknBXijbrGr2HpLt+l22sydamczZB04LgrR2AX/
- gbOy5NH+mWIplNvvmiPNr8MEFC
-X-Received: by 2002:a05:690c:385:b0:794:7866:263b with SMTP id
- 00721157ae682-7949de64fc5mr65342517b3.1.1769906707643; 
- Sat, 31 Jan 2026 16:45:07 -0800 (PST)
+ AJvYcCVPViOYNlBkUNoKuL84se0unJyIjDySbhPxTr92ogPznX8Pc60r/n34FosP/tKp8jIyjGnCKeE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxMxnjtn1s0HQy51WFaNza0mMZpV+AiJrpkjkE0vlb8gJSbIgkK
+ F7i9MLBQRmMdah9F0ZuolNF4kWiNNd4yGrkkFqqn5LDX0ESpo3OR7C5xo0ACMw==
+X-Gm-Gg: AZuq6aIkBGjx1nte3cVbAbxQ569Wm9BrdIJvn75awEqUzSQFFza5dJLREQ+oYBo4PtE
+ u4/9vKe50cRuBwKFAy3wN9K76Ybc7ri/I81HYkmr1woSRfz0Wcgpm65ENUjHWE0WhG4y9NRL+Au
+ ZCZcFqRToMBeF58EoiT+K/8kPedEdQX1EhAyP6xrcoGchxJlE/HqncS0XKn8itOg0GS1mbigYmL
+ dulF06BeYNs3YULFoViaDF7hw7E+j5YfTXPblhl6LV6/nnOu/w2bx3XrME3jSQ5HAeWOouCGsyv
+ 8RnneH35GmmiMkjg3HG78EuANGcHHuWD7l7AYojmxA5UqJ2Bex8z8kDMO+9lvVQxvdiMqDrh6NO
+ v12AQQWeNShvJTlBIrrzC9p7hGVBAIlQM4F8NRD3vTDW0kurAwQ8up4YTWPixoGH7/36AZmNvJ2
+ hqLoQ/4w5I9LhYERhHLQoxwDa5
+X-Received: by 2002:a05:690c:3383:b0:794:c58e:2d97 with SMTP id
+ 00721157ae682-794c58e336amr8407957b3.8.1769906710038; 
+ Sat, 31 Jan 2026 16:45:10 -0800 (PST)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:419e:8d46:1302:65da])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-794828ad9cfsm52105097b3.29.2026.01.31.16.45.05
+ 00721157ae682-794828ad9cfsm52105097b3.29.2026.01.31.16.45.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 31 Jan 2026 16:45:07 -0800 (PST)
+ Sat, 31 Jan 2026 16:45:09 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
 To: kever.yang@rock-chips.com
 Cc: trini@konsulko.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH 0/7] ARM: Add RV1103 Omega4 board support
-Date: Sat, 31 Jan 2026 21:44:49 -0300
-Message-Id: <20260201004456.763107-1-festevam@gmail.com>
+Subject: [PATCH 1/7] pinctrl: rockchip: Add support for RV1103
+Date: Sat, 31 Jan 2026 21:44:50 -0300
+Message-Id: <20260201004456.763107-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260201004456.763107-1-festevam@gmail.com>
+References: <20260201004456.763107-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,94 +102,467 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@nabladev.com>
 
-Hi,
+Add pinctrl driver for RV1103.
 
-This patch series adds support for the Onion RV1103 Omega4 board to U-Boot.
-It covers SPL, SPI NAND boot, and the minimal board devicetree required to
-boot the board.
+Imported from Rockchip U-Boot 2017.09 next-dev branch.
 
-Upstreaming the RV1103 devicetree in Linux is ongoing, but to avoid blocking
-U-Boot support, this series introduces board-specific devicetrees for now.
-Once the Linux RV1103 devicetrees are upstreamed, the OF_UPSTREAM mechanism
-can be enabled.
-
-Fabio Estevam (7):
-  pinctrl: rockchip: Add support for RV1103
-  clk: rockchip: Add support for RV1103
-  tools: rkcommon: Add rv1103 support
-  rockchip: spl-boot-order: Add SPI NAND support
-  spl: Add SPI NAND support via MTD in SPL
-  ARM: dts: Add RV1103 Omega4 support
-  omega4-rv1103: Add initial support
-
- arch/arm/dts/rv1103-omega4-u-boot.dtsi        |   11 +
- arch/arm/dts/rv1103-omega4.dts                |   40 +
- arch/arm/dts/rv1103-u-boot.dtsi               |    4 +
- arch/arm/dts/rv1103.dtsi                      |  267 +++++
- .../include/asm/arch-rockchip/cru_rv1103.h    |  271 +++++
- .../include/asm/arch-rockchip/grf_rv1103.h    |   31 +
- arch/arm/include/asm/arch-rv1103/boot0.h      |   11 +
- arch/arm/mach-rockchip/Kconfig                |   14 +
- arch/arm/mach-rockchip/Makefile               |    1 +
- arch/arm/mach-rockchip/rv1103/Kconfig         |   23 +
- arch/arm/mach-rockchip/rv1103/Makefile        |   12 +
- arch/arm/mach-rockchip/rv1103/boot0.h         |    5 +
- arch/arm/mach-rockchip/rv1103/clk_rv1103.c    |   32 +
- arch/arm/mach-rockchip/rv1103/rv1103.c        |  133 ++
- arch/arm/mach-rockchip/rv1103/syscon_rv1103.c |   19 +
- arch/arm/mach-rockchip/spl-boot-order.c       |   11 +-
- board/onion/omega4_rv1103/Kconfig             |   12 +
- board/onion/omega4_rv1103/MAINTAINERS         |    6 +
- board/onion/omega4_rv1103/Makefile            |    7 +
- board/onion/omega4_rv1103/omega4_rv1103.c     |   19 +
- board/onion/omega4_rv1103/omega4_rv1103.env   |    5 +
- common/spl/Kconfig                            |   10 +-
- common/spl/Makefile                           |    1 +
- common/spl/spl_spi_nand.c                     |   82 ++
- configs/omega4-rv1103_defconfig               |   82 ++
- doc/board/index.rst                           |    1 +
- doc/board/onion/index.rst                     |    9 +
- doc/board/onion/omega4-rv1103.rst             |   56 +
- drivers/clk/rockchip/Makefile                 |    1 +
- drivers/clk/rockchip/clk_rv1103.c             | 1068 +++++++++++++++++
- drivers/mtd/Makefile                          |    1 +
- drivers/mtd/nand/Makefile                     |   13 +-
- drivers/pinctrl/Kconfig                       |   10 +
- drivers/pinctrl/rockchip/Makefile             |    1 +
- drivers/pinctrl/rockchip/pinctrl-rv1103.c     |  411 +++++++
- include/configs/omega4_rv1103.h               |   11 +
- include/configs/rv1103_common.h               |   14 +
- include/dt-bindings/clock/rv1103-cru.h        |  489 ++++++++
- tools/rkcommon.c                              |    1 +
- 39 files changed, 3191 insertions(+), 4 deletions(-)
- create mode 100644 arch/arm/dts/rv1103-omega4-u-boot.dtsi
- create mode 100644 arch/arm/dts/rv1103-omega4.dts
- create mode 100644 arch/arm/dts/rv1103-u-boot.dtsi
- create mode 100644 arch/arm/dts/rv1103.dtsi
- create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rv1103.h
- create mode 100644 arch/arm/include/asm/arch-rockchip/grf_rv1103.h
- create mode 100644 arch/arm/include/asm/arch-rv1103/boot0.h
- create mode 100644 arch/arm/mach-rockchip/rv1103/Kconfig
- create mode 100644 arch/arm/mach-rockchip/rv1103/Makefile
- create mode 100644 arch/arm/mach-rockchip/rv1103/boot0.h
- create mode 100644 arch/arm/mach-rockchip/rv1103/clk_rv1103.c
- create mode 100644 arch/arm/mach-rockchip/rv1103/rv1103.c
- create mode 100644 arch/arm/mach-rockchip/rv1103/syscon_rv1103.c
- create mode 100644 board/onion/omega4_rv1103/Kconfig
- create mode 100644 board/onion/omega4_rv1103/MAINTAINERS
- create mode 100644 board/onion/omega4_rv1103/Makefile
- create mode 100644 board/onion/omega4_rv1103/omega4_rv1103.c
- create mode 100644 board/onion/omega4_rv1103/omega4_rv1103.env
- create mode 100644 common/spl/spl_spi_nand.c
- create mode 100644 configs/omega4-rv1103_defconfig
- create mode 100644 doc/board/onion/index.rst
- create mode 100644 doc/board/onion/omega4-rv1103.rst
- create mode 100644 drivers/clk/rockchip/clk_rv1103.c
+Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+---
+ drivers/pinctrl/Kconfig                   |  10 +
+ drivers/pinctrl/rockchip/Makefile         |   1 +
+ drivers/pinctrl/rockchip/pinctrl-rv1103.c | 411 ++++++++++++++++++++++
+ 3 files changed, 422 insertions(+)
  create mode 100644 drivers/pinctrl/rockchip/pinctrl-rv1103.c
- create mode 100644 include/configs/omega4_rv1103.h
- create mode 100644 include/configs/rv1103_common.h
- create mode 100644 include/dt-bindings/clock/rv1103-cru.h
 
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index ea90713ec6ca..e204d9880d83 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -254,6 +254,16 @@ config PINCTRL_QE
+ 	  This option is to enable the QE pinctrl driver for QE based io
+ 	  controller.
+ 
++config PINCTRL_ROCKCHIP_RV1103
++	bool "Rockchip rv1103 pin control driver"
++	depends on DM
++	help
++	  Support pin multiplexing control on Rockchip rv1103 SoC.
++
++	  The driver is controlled by a device tree node which contains
++	  both the GPIO definitions and pin control functions for each
++	  available multiplex function.
++
+ config PINCTRL_ROCKCHIP_RV1108
+ 	bool "Rockchip rv1108 pin control driver"
+ 	depends on DM
+diff --git a/drivers/pinctrl/rockchip/Makefile b/drivers/pinctrl/rockchip/Makefile
+index e17415e1ca68..f0ffd2b5fe86 100644
+--- a/drivers/pinctrl/rockchip/Makefile
++++ b/drivers/pinctrl/rockchip/Makefile
+@@ -18,5 +18,6 @@ obj-$(CONFIG_ROCKCHIP_RK3528) += pinctrl-rk3528.o
+ obj-$(CONFIG_ROCKCHIP_RK3568) += pinctrl-rk3568.o
+ obj-$(CONFIG_ROCKCHIP_RK3576) += pinctrl-rk3576.o
+ obj-$(CONFIG_ROCKCHIP_RK3588) += pinctrl-rk3588.o
++obj-$(CONFIG_ROCKCHIP_RV1103) += pinctrl-rv1103.o
+ obj-$(CONFIG_ROCKCHIP_RV1108) += pinctrl-rv1108.o
+ obj-$(CONFIG_ROCKCHIP_RV1126) += pinctrl-rv1126.o
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1103.c b/drivers/pinctrl/rockchip/pinctrl-rv1103.c
+new file mode 100644
+index 000000000000..362c520212ee
+--- /dev/null
++++ b/drivers/pinctrl/rockchip/pinctrl-rv1103.c
+@@ -0,0 +1,411 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2024 Rockchip Electronics Co., Ltd
++ */
++
++#include <dm.h>
++#include <log.h>
++#include <dm/pinctrl.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <linux/bitops.h>
++
++#include "pinctrl-rockchip.h"
++
++static int rv1103_set_mux(struct rockchip_pin_bank *bank, int pin, int mux)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++	int iomux_num = (pin / 8);
++	struct regmap *regmap;
++	int reg, ret, mask;
++	u8 bit;
++	u32 data;
++
++	debug("setting mux of GPIO%d-%d to %d\n", bank->bank_num, pin, mux);
++
++	if (bank->bank_num == 2 && pin >= 12)
++		return 0;
++
++	regmap = priv->regmap_base;
++	reg = bank->iomux[iomux_num].offset;
++	if ((pin % 8) >= 4)
++		reg += 0x4;
++	bit = (pin % 4) * 4;
++	mask = 0xf;
++
++	if (bank->recalced_mask & BIT(pin))
++		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
++	data = (mask << (bit + 16));
++	data |= (mux & mask) << bit;
++
++	debug("iomux write reg = %x data = %x\n", reg, data);
++
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++#define RV1103_DRV_BITS_PER_PIN		8
++#define RV1103_DRV_PINS_PER_REG		2
++#define RV1103_DRV_GPIO0_A_OFFSET		0x40100
++#define RV1103_DRV_GPIO0_B_OFFSET		0x50110
++#define RV1103_DRV_GPIO1_A01_OFFSET		0x140
++#define RV1103_DRV_GPIO1_A67_OFFSET		0x1014C
++#define RV1103_DRV_GPIO2_OFFSET		0x30180
++#define RV1103_DRV_GPIO2_SARADC_OFFSET		0x3080C
++
++static int rv1103_calc_drv_reg_and_bit(struct rockchip_pin_bank *bank,
++				       int pin_num, struct regmap **regmap,
++				       int *reg, u8 *bit)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++	int ret = 0;
++
++	*regmap = priv->regmap_base;
++	switch (bank->bank_num) {
++	case 0:
++		if (pin_num < 7)
++			*reg = RV1103_DRV_GPIO0_A_OFFSET;
++		else if (pin_num > 7 && pin_num < 14)
++			*reg = RV1103_DRV_GPIO0_B_OFFSET - 0x10;
++		else
++			ret = -EINVAL;
++		break;
++
++	case 1:
++		if (pin_num < 6)
++			*reg = RV1103_DRV_GPIO1_A01_OFFSET;
++		else if (pin_num >= 6 && pin_num < 23)
++			*reg = RV1103_DRV_GPIO1_A67_OFFSET - 0xc;
++		else if (pin_num >= 24 && pin_num < 30)
++			*reg = RV1103_DRV_GPIO1_A67_OFFSET - 0xc;
++		else
++			ret = -EINVAL;
++		break;
++
++	case 2:
++		if (pin_num < 12) {
++			*reg = RV1103_DRV_GPIO2_OFFSET;
++		} else if (pin_num >= 16) {
++			ret = -EINVAL;
++		} else {
++			*reg = RV1103_DRV_GPIO2_SARADC_OFFSET;
++			*bit = 10;
++
++			return 0;
++		}
++		break;
++
++	default:
++		ret = -EINVAL;
++		break;
++	}
++
++	if (ret) {
++		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
++
++		return ret;
++	}
++
++	*reg += ((pin_num / RV1103_DRV_PINS_PER_REG) * 4);
++	*bit = pin_num % RV1103_DRV_PINS_PER_REG;
++	*bit *= RV1103_DRV_BITS_PER_PIN;
++
++	return 0;
++}
++
++static int rv1103_set_drive(struct rockchip_pin_bank *bank,
++			    int pin_num, int strength)
++{
++	struct regmap *regmap;
++	int reg, ret, i;
++	u32 data;
++	u8 bit;
++	int rmask_bits = RV1103_DRV_BITS_PER_PIN;
++
++	ret = rv1103_calc_drv_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
++	if (ret)
++		return ret;
++
++	for (i = 0, ret = 1; i < strength; i++)
++		ret = (ret << 1) | 1;
++
++	if (bank->bank_num == 2 && pin_num >= 12) {
++		rmask_bits = 2;
++		ret = strength;
++	}
++
++	/* enable the write to the equivalent lower bits */
++	data = ((1 << rmask_bits) - 1) << (bit + 16);
++	data |= (ret << bit);
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++#define RV1103_PULL_BITS_PER_PIN		2
++#define RV1103_PULL_PINS_PER_REG		8
++#define RV1103_PULL_GPIO0_A_OFFSET		0x40200
++#define RV1103_PULL_GPIO0_B_OFFSET		0x50204
++#define RV1103_PULL_GPIO1_A01_OFFSET		0x210
++#define RV1103_PULL_GPIO1_A67_OFFSET		0x10210
++#define RV1103_PULL_GPIO2_OFFSET		0x30220
++#define RV1103_PULL_GPIO2_SARADC_OFFSET	0x3080C
++
++static int rv1103_calc_pull_reg_and_bit(struct rockchip_pin_bank *bank,
++					int pin_num, struct regmap **regmap,
++					int *reg, u8 *bit)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++	int ret = 0;
++
++	*regmap = priv->regmap_base;
++	switch (bank->bank_num) {
++	case 0:
++		if (pin_num < 7)
++			*reg = RV1103_PULL_GPIO0_A_OFFSET;
++		else if (pin_num > 7 && pin_num < 14)
++			*reg = RV1103_PULL_GPIO0_B_OFFSET - 0x4;
++		else
++			ret = -EINVAL;
++		break;
++
++	case 1:
++		if (pin_num < 6)
++			*reg = RV1103_PULL_GPIO1_A01_OFFSET;
++		else if (pin_num >= 6 && pin_num < 23)
++			*reg = RV1103_PULL_GPIO1_A67_OFFSET;
++		else if (pin_num >= 24 && pin_num < 30)
++			*reg = RV1103_PULL_GPIO1_A67_OFFSET;
++		else
++			ret = -EINVAL;
++		break;
++
++	case 2:
++		if (pin_num < 12) {
++			*reg = RV1103_PULL_GPIO2_OFFSET;
++		} else if (pin_num >= 16) {
++			ret = -EINVAL;
++		} else {
++			*reg = RV1103_PULL_GPIO2_SARADC_OFFSET;
++			*bit = 13;
++
++			return 0;
++		}
++		break;
++
++	default:
++		ret = -EINVAL;
++		break;
++	}
++
++	if (ret) {
++		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
++
++		return ret;
++	}
++
++	*reg += ((pin_num / RV1103_PULL_PINS_PER_REG) * 4);
++	*bit = pin_num % RV1103_PULL_PINS_PER_REG;
++	*bit *= RV1103_PULL_BITS_PER_PIN;
++
++	return 0;
++}
++
++static int rv1103_set_pull(struct rockchip_pin_bank *bank,
++			   int pin_num, int pull)
++{
++	struct regmap *regmap;
++	int reg, ret;
++	u8 bit, type;
++	u32 data;
++
++	if (pull == PIN_CONFIG_BIAS_PULL_PIN_DEFAULT)
++		return -EINVAL;
++
++	ret = rv1103_calc_pull_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
++	if (ret)
++		return ret;
++	type = bank->pull_type[pin_num / 8];
++
++	if (bank->bank_num == 2 && pin_num >= 12)
++		type = 1;
++
++	ret = rockchip_translate_pull_value(type, pull);
++	if (ret < 0) {
++		debug("unsupported pull setting %d\n", pull);
++
++		return ret;
++	}
++
++	/* enable the write to the equivalent lower bits */
++	data = ((1 << RV1103_PULL_BITS_PER_PIN) - 1) << (bit + 16);
++
++	data |= (ret << bit);
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++#define RV1103_SMT_BITS_PER_PIN		1
++#define RV1103_SMT_PINS_PER_REG		8
++#define RV1103_SMT_GPIO0_A_OFFSET		0x40400
++#define RV1103_SMT_GPIO0_B_OFFSET		0x50404
++#define RV1103_SMT_GPIO1_A01_OFFSET		0x410
++#define RV1103_SMT_GPIO1_A67_OFFSET		0x10410
++#define RV1103_SMT_GPIO2_OFFSET		0x30420
++#define RV1103_SMT_GPIO2_SARADC_OFFSET		0x3080C
++
++static int rv1103_calc_schmitt_reg_and_bit(struct rockchip_pin_bank *bank,
++					   int pin_num,
++					   struct regmap **regmap,
++					   int *reg, u8 *bit)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++	int ret = 0;
++
++	*regmap = priv->regmap_base;
++	switch (bank->bank_num) {
++	case 0:
++		if (pin_num < 7)
++			*reg = RV1103_SMT_GPIO0_A_OFFSET;
++		else if (pin_num > 7 && pin_num < 14)
++			*reg = RV1103_SMT_GPIO0_B_OFFSET - 0x4;
++		else
++			ret = -EINVAL;
++		break;
++
++	case 1:
++		if (pin_num < 6)
++			*reg = RV1103_SMT_GPIO1_A01_OFFSET;
++		else if (pin_num >= 6 && pin_num < 23)
++			*reg = RV1103_SMT_GPIO1_A67_OFFSET;
++		else if (pin_num >= 24 && pin_num < 30)
++			*reg = RV1103_SMT_GPIO1_A67_OFFSET;
++		else
++			ret = -EINVAL;
++		break;
++
++	case 2:
++		if (pin_num < 12) {
++			*reg = RV1103_SMT_GPIO2_OFFSET;
++		} else if (pin_num >= 16) {
++			ret = -EINVAL;
++		} else {
++			*reg = RV1103_SMT_GPIO2_SARADC_OFFSET;
++			*bit = 8;
++
++			return 0;
++		}
++		break;
++
++	default:
++		ret = -EINVAL;
++		break;
++	}
++
++	if (ret) {
++		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
++
++		return ret;
++	}
++
++	*reg += ((pin_num / RV1103_SMT_PINS_PER_REG) * 4);
++	*bit = pin_num % RV1103_SMT_PINS_PER_REG;
++	*bit *= RV1103_SMT_BITS_PER_PIN;
++
++	return 0;
++}
++
++static int rv1103_set_schmitt(struct rockchip_pin_bank *bank,
++			      int pin_num, int enable)
++{
++	struct regmap *regmap;
++	int reg, ret;
++	u32 data;
++	u8 bit;
++
++	ret = rv1103_calc_schmitt_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
++	if (ret)
++		return ret;
++
++	/* enable the write to the equivalent lower bits */
++	data = ((1 << RV1103_SMT_BITS_PER_PIN) - 1) << (bit + 16);
++	data |= (enable << bit);
++
++	if (bank->bank_num == 2 && pin_num >= 12) {
++		data = 0x3 << (bit + 16);
++		data |= ((enable ? 0x3 : 0) << bit);
++	}
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++static struct rockchip_mux_recalced_data rv1103_mux_recalced_data[] = {
++	{
++		.num = 1,
++		.pin = 6,
++		.reg = 0x10024,
++		.bit = 8,
++		.mask = 0xf
++	}, {
++		.num = 1,
++		.pin = 7,
++		.reg = 0x10024,
++		.bit = 12,
++		.mask = 0xf
++	},
++};
++
++static struct rockchip_pin_bank rv1103_pin_banks[] = {
++	PIN_BANK_IOMUX_FLAGS_OFFSET(0, 32, "gpio0",
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    0x40000, 0x50008, 0x50010, 0x50018),
++	PIN_BANK_IOMUX_FLAGS_OFFSET(1, 32, "gpio1",
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    0x20, 0x10028, 0x10030, 0x10038),
++	PIN_BANK_IOMUX_FLAGS_OFFSET(2, 32, "gpio2",
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    IOMUX_WIDTH_4BIT,
++				    0x30040, 0x30048, 0x30050, 0x30058),
++};
++
++static const struct rockchip_pin_ctrl rv1103_pin_ctrl = {
++	.pin_banks		= rv1103_pin_banks,
++	.nr_banks		= ARRAY_SIZE(rv1103_pin_banks),
++	.iomux_recalced		= rv1103_mux_recalced_data,
++	.niomux_recalced	= ARRAY_SIZE(rv1103_mux_recalced_data),
++	.set_mux		= rv1103_set_mux,
++	.set_pull		= rv1103_set_pull,
++	.set_drive		= rv1103_set_drive,
++	.set_schmitt		= rv1103_set_schmitt,
++};
++
++static const struct udevice_id rv1103_pinctrl_ids[] = {
++	{
++		.compatible = "rockchip,rv1103-pinctrl",
++		.data = (ulong)&rv1103_pin_ctrl
++	},
++	{ }
++};
++
++U_BOOT_DRIVER(pinctrl_rv1103) = {
++	.name		= "rockchip_rv1103_pinctrl",
++	.id		= UCLASS_PINCTRL,
++	.of_match	= rv1103_pinctrl_ids,
++	.priv_auto	= sizeof(struct rockchip_pinctrl_priv),
++	.ops		= &rockchip_pinctrl_ops,
++#if !CONFIG_IS_ENABLED(OF_PLATDATA)
++	.bind		= dm_scan_fdt_dev,
++#endif
++	.probe		= rockchip_pinctrl_probe,
++};
 -- 
 2.34.1
 
