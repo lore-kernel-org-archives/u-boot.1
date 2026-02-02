@@ -4,99 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A866E73140
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 08:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E78E73140
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 08:25:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58AAB83D77;
-	Mon,  2 Feb 2026 09:23:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 728DD83D8A;
+	Mon,  2 Feb 2026 09:25:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PZQ2D55K";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JRl15jdh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56FE583D7A; Mon,  2 Feb 2026 09:23:48 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C95E183D8B; Mon,  2 Feb 2026 09:25:37 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72A3A83CEE
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 09:23:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71A4283D77
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 09:25:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-480706554beso44984265e9.1
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 00:23:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770020625; x=1770625425;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NzP5ijCGNPocNGGZSfaPHIEsRFtLyZVmUwo8L2cSHTs=;
- b=PZQ2D55KxHbNTVDpgoXJHucpdZHCbA3mPugaoU3rdNkValjgX5fm8DZxzN7/nZf24m
- wZNS83oOsksyLd7OKIaUo5GZcG3KKcx5I1/yZMzVa3rvz8wvmz0mfxg5Dvq1NqpXFnD7
- FEeSlo+lDZcE151fv8TqVfeWXYNPb1K/CKYS3mehIS7pek5bVjaBEH8KEL+KGVQWpRjo
- 1F6rQ+kCFs3dJ1ie6y25apa3J8S7YN6Sd0DHklmFUsj7rNihkqpGFMwdqttg83Mjj61G
- +wXOclbC4UN7+GfZwfbCcWlDvU3HZ8iUl9li+l9lC65vMQWfbvovFISH1DhstvTUrv4p
- 93ZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770020625; x=1770625425;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NzP5ijCGNPocNGGZSfaPHIEsRFtLyZVmUwo8L2cSHTs=;
- b=Gcb2tQjudSZs06caFhb3KjFliD7BR3fSmuYr215d/gYopi+1n0+T1rw8HWaejRvIpU
- wRneyiANrZUdK9Byu3BCLrE6YvtWDtT6Ta5V7gEQsWXPy+bbTR+8yVIMscghknG4Z0uw
- YSelrrF/lJy54YFRaW9wi4AAuLh/aq9HxjgjhKlAUMmoOfjVKY0nbGIsGxj7nMNSA4tD
- k27Z7gwaGutq7wOnLTKawDq2PZ4DmNHUXTiOLPYQ4URo8ToQKnpbwWpzvPCjEt6+T+H5
- t3ZCdlI8m8Rf7t7iRd+WPcKcyxEUc3TcVXKv8SrUBU5nSjRKyscu5EZdUAO+LtEHEANS
- j0/w==
-X-Gm-Message-State: AOJu0Yy8AH9WRiURAnonaWhrV2OcyflQxdH7zqmOXDOOtnMgWxEP5RbU
- NCh37GDfi9aPIGaRG2ZcOqeBvxYkYNhSEhYp5csLA0Hhl1LsJ4sHWb6A1NkGYXR9BuU=
-X-Gm-Gg: AZuq6aJVrdfm1up9MMAcHiARF2CN5Z1uGp4Owb7KvZ+iuTIDr5h8Kjk18LjtV2N6tb3
- vLD00qA9rAuJEvxC/b3OOBiGRqFXZOfipgf+jXRQJk2Fj04HzwoZeoTYMfwJa+ZQf929Gpgb7bw
- x2j90mXohwVJwFEKBeQn7OxKGLF5ffl2jPAiCrUmh09cm40xlH/3DDJSdtYYZYMo4/4Y0Z62DoK
- ysbP2rj7jGE4gaUP4jzDp8tRHGRtTBmkJNXPZ6ZL34D4Fz/R3mVaGD2ULN2BVibqgJXmq9N3xUe
- Y3QoDPRb92LlEPrEHRCiuFgfvClRFI/6sZbSMBE64+LCLChwOfrqUYE4RQRireAn7Jdaj3XlqFF
- imkcu49iJEkVD+S+1FLMv33cGgjVewGvMBO0r+AtQVbTh5ighpU0DeRF6tx+bE8uD1DRnnO07AI
- m+QW0vW7UIPobcc81CEL8AaLDJ5aVzi3FCElKSye97I+GuidpzqvZfG4rvta0PQATflJo08oPRx
- YcOzExp5SFhf26xtVrp
-X-Received: by 2002:a05:6000:1863:b0:435:a136:b891 with SMTP id
- ffacd0b85a97d-435f3a6a7e0mr14404424f8f.13.1770020624811; 
- Mon, 02 Feb 2026 00:23:44 -0800 (PST)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-1bf9-06eb-939c-90d1.rev.sfr.net.
- [2a02:842a:d52e:6101:1bf9:6eb:939c:90d1])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-435e10edfccsm40611708f8f.17.2026.02.02.00.23.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 00:23:44 -0800 (PST)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 02 Feb 2026 09:23:42 +0100
-Subject: [PATCH v2] board: mediatek: add MT8390 EVK board support
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ip+5Mq1lLpIIJUMJiGSITF23sRnjHCL4eaywSQym2H9f3jKFTfstyTNMMuRErrhaWrP+fAh20fneBFLiL3KMN977sIT7sTUx3yqQ0zp5OdBMZXtbGWUCyc8MmS3E4csec4i5x3O+IYhn7yd3ogkJrYANDjE0JIzxk5uZ3sIBmKfyXp16qiJ2j83OqT65PO6Htz8wM86djhXA76T4MDDmQwahvYz5VNybRL7ARERpKGZEqtRuiS3CurAkWP0HYbi0tljT1ju7SdWxyBokB2OxwvHfghc50yhIhn4WmmxAuZ0BziPKF5CTZ7/KK/PsA1cXw8zovDbASV7OZ/tikhgGng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=so67ivX2SV+2mMr4JMtDg+K6KDKd0uSOA5ojwNe0FfU=;
+ b=EUa0rPJCfMJzfl8u5PJeWfuLMl0MSPLCO6+9xCsJcMuLdzUGuVkSJyK7alFDGQTxaXmC3HlV69gPN/OhkVG+q4TcAjDqUE0wY4ZiWrBOvzNf7AvbXnrN7+dyOjdtXwqnuLcHR9TH15Dvwqpa4CnwE7eiAr2UUEbk2J2ZzAVtv2cDXlkAHF8zFx2Te5KwBHfHktzIQH1m0rhaCcNOU8CJz53Lpof5pEBFfoTepIAHgKYAxPIeLa0/n6wBfJPN5H6ELmPAdLZrqeJjbuV1j/UQdZeVKlG+1tTpLE79lU7uW66Pc/O0s5kMycC3CoJ9krmszvqCEryz6+DBREURVwn/0A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=toradex.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=so67ivX2SV+2mMr4JMtDg+K6KDKd0uSOA5ojwNe0FfU=;
+ b=JRl15jdhIDOG4DPJGqvPt1AAj+OYixfrjUmKVGUJbrzpuHWo8xPtRCl2KYu95+0iXgXNZ5tyfSNdlZXRMCWXfxV7rvxRuYzRQ4AO44nxNZdbGYaCjN+cISXReAAA+zAFWKdHwuNISin7PwW/au8z2n2Yn2H+1Ca3ZUe8pdfhRHA=
+Received: from CH2PR14CA0040.namprd14.prod.outlook.com (2603:10b6:610:56::20)
+ by IA0PR10MB7207.namprd10.prod.outlook.com (2603:10b6:208:408::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Mon, 2 Feb
+ 2026 08:25:24 +0000
+Received: from CH2PEPF00000148.namprd02.prod.outlook.com
+ (2603:10b6:610:56:cafe::9) by CH2PR14CA0040.outlook.office365.com
+ (2603:10b6:610:56::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend
+ Transport; Mon, 2 Feb 2026 08:25:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CH2PEPF00000148.mail.protection.outlook.com (10.167.244.105) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Mon, 2 Feb 2026 08:25:23 +0000
+Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Feb
+ 2026 02:25:22 -0600
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Feb
+ 2026 02:25:21 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 2 Feb 2026 02:25:21 -0600
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6128PKrN1397480;
+ Mon, 2 Feb 2026 02:25:20 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260202-add-genio-700-board-v2-1-06d375b877e7@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/22Nyw6CMBBFf4V07Zh2REBX/odh0ccIkyjFFomE8
- O9WjHHj8tzknjOLSIEpimM2i0AjR/ZdAtxkwra6awjYJRYosZAKEbRz0FDHHkopwXgdHOwLVCb
- HysqcRHr2gS78XK3n+sOB7o8kH35jy3HwYVrLo3qv38jub2RUoADLXKqDLbBy6mT0dGUTaGv9T
- dTLsrwApx39e84AAAA=
-X-Change-ID: 20260122-add-genio-700-board-5621b428c04e
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Mon, 2 Feb 2026 13:55:19 +0530
+Message-ID: <DG4BZ97UWPF0.FCYZ7RUNHS94@ti.com>
+From: Anshul Dalal <anshuld@ti.com>
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>
+CC: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>, "Francesco
+ Dolcini" <francesco.dolcini@toradex.com>, Garrett Giordano
+ <ggiordano@phytec.com>, Manorit Chawdhry <m-chawdhry@ti.com>, "Bryan
+ Brattlof" <bb@ti.com>, Paresh Bhagat <p-bhagat@ti.com>, Vitor Soares
+ <vitor.soares@toradex.com>, Parth Pancholi <parth.pancholi@toradex.com>,
+ Andrew Davis <afd@ti.com>, Gowtham Tammana <g-tammana@ti.com>, Vignesh R
+ <vigneshr@ti.com>
+Subject: Re: [PATCH master] arch: arm: dts: k3: refactor common nodes to
+ k3-*-r5.dtsi
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260122-r5_dt_refactor-v1-1-5442a4321756@ti.com>
+In-Reply-To: <20260122-r5_dt_refactor-v1-1-5442a4321756@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000148:EE_|IA0PR10MB7207:EE_
+X-MS-Office365-Filtering-Correlation-Id: 083354c1-bb2b-4fbe-d4bc-08de62349c47
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SndZWlpMaHVEQmUrTDB2LzFlOWFHcTN0aFNaR0hWL3BNQlIxVzVlYmRCQXh5?=
+ =?utf-8?B?Rjh0VnA2aE1KTWU3a3N4TGZWVXVUMzhNa2V4VmZDa2ZaQVQ2NmI1ZFRtYlFi?=
+ =?utf-8?B?TFExemF2Ny9nck9FbUl4d2VVczhubFN1cEdwdXpLZDNCbjhJcFk4U294bUx0?=
+ =?utf-8?B?YUZYS0JqWnN5QlJNVW8wUnhGVGVxU3hwOTNWNUNxUkRPa2MvN2kzUUNBNjZt?=
+ =?utf-8?B?Qi9DU1BJaTRWZnNMeGVhQ0U5K3lhYjlBRkxWaXUzRlNXQlNFcjVQMVFDZHEy?=
+ =?utf-8?B?ZUh3Njl5UFhCZFZRZUNWUG5QdXRGcDYxb2JJcUljUjVIdzdrMTQwZE1tYTJi?=
+ =?utf-8?B?YkcvNzlsT3UyNk1XKytzYnBoKzJKL0F4WkNMdHZpeEE5cG5acThHbi9KZDlX?=
+ =?utf-8?B?RDBtTjU3ZUhBQ2ZDTmhIZW4vSkhZd0JDMWFzVm9EMXhFcWRXK1crbURpV3dF?=
+ =?utf-8?B?Sm9OL29tOGpoRkkrMk0wR25GVkJMMklhRDU4bDQwMUdFaW1ucTd6eElLSDdj?=
+ =?utf-8?B?TjFiWGIyQk8ySUtQN3dzazdhTVdCVGhITURKczNtSVh2M1RsMlVXZUx6ZkJx?=
+ =?utf-8?B?OUdGTlZOa200OGc1QWl3cmtRTWZvcGUydjdZblc1Q2JtazZYd01YMEcweElQ?=
+ =?utf-8?B?ZmxIWlRtSVhTQXVkd0w2c3RaRnljdUdDN1JNSC9GNnphY0dTSUdaMmQ4MEEx?=
+ =?utf-8?B?cTRVZ2dvcVJnS3UzeXliTG1lV1B6RFROOExUajlGdVRWL1JVRldlVFc5MW1M?=
+ =?utf-8?B?VE5HcXBWelJMOGVaZm9ydUF5eG1wMkV0L3RWT3JEaWlBcGJEc1NiQlI2V3lN?=
+ =?utf-8?B?T2E5SmNYNmVxODFJeHlXRURwRXVncFNTNlk3KzhBRFJzWm9UaU5qdGF2VDJE?=
+ =?utf-8?B?TGJXUjNhR2VzYzhKSWxSRk5wT3JlbXgwWU42TzBGYVIvVUJieXNheHErL296?=
+ =?utf-8?B?c0lBSm1KcHdhcHdTTGZVTkhLeW1rQlplczJxMmlEZ2d3S0xNSW05MEFtMnNI?=
+ =?utf-8?B?WWxFdnFkV1QvQ29yTFBGRlYvcVExTHJ6aEgvY1FwMHd5cVNZa213RTlPbmsv?=
+ =?utf-8?B?UUtGamdSYUFJM3NRY2QyaG9tZEhlVUtkUmFPcm5pMnRVZTZvTVhZdWdmTXQ1?=
+ =?utf-8?B?TDRIekNnamZIdXUwQ3VvQ1A0aXBoVitLS0pQSzkrVUhkTlpRVmNFdDNBZWtN?=
+ =?utf-8?B?bHJGNkl3S0lEdHFNVFhYOFpEbXJKUHhZeVJReDQxS0IyY2FncVNjNlpCS0lI?=
+ =?utf-8?B?TTBpSWRocUdnSDI4YVRqRDZrZ1VSWUpHQ2Ivb0t1alB6UG1FZ3FOMzVCWW9J?=
+ =?utf-8?B?UzNwOU5MdXFacVdBcDlhQ0toYVYrRU1YLzc3UEt3aUljYm43Qk05OFZtV3NU?=
+ =?utf-8?B?QVFCWXlmeC9NdjFKaGRkSGlQUEdYNGxIUkMzT0hDSjZaTWdLZ3VhMWRVUTFs?=
+ =?utf-8?B?dHlQY1pIMU9uMjJ3MFNEMVVLYmsvdUtCL0ZnVUpiWmJFN05Ccnl0SjNoVjI1?=
+ =?utf-8?B?OFhVRk92dHJ1UHREZnZxUVZxVnJodTExMDJqbWJzaGNESVd3V1Nzc0EvNFVZ?=
+ =?utf-8?B?Q2hsdFRJSWJXdklhMEtUbVlSZDlRN2tBVHZseXdKQVNTMGhpVncraThySWph?=
+ =?utf-8?B?M2VSRzZ0bmlvSFhzQmVIVzN1T2RXRnRFWlQ1S29LdSt1ejdWNDcweDJXQjVN?=
+ =?utf-8?B?Ym94WG93a2Y0NFE2aGRPdzVaOGUxUXRyWW4vVmU4LzNMMnJoR2FjTEEvTjlw?=
+ =?utf-8?B?YWZ5alc4VWR1TWJVWnE5TGlSV2hhSHl2bnF0bWhkSUZHK1lVSnV1cENqTzJG?=
+ =?utf-8?B?eStyV0lLZDEwOWRvTVo2djF0T0JsRE5rZ3JtVkd0QU5Zcmw5KzQ1UkxQU3cx?=
+ =?utf-8?B?WUVJVG4zMHNxbmFWTElDK1lxVzV1eGRmYlFrd1hYSURYWUFHNHh4eE1WSzlP?=
+ =?utf-8?B?dTNEZUlWMGZmaFd1UUJIdXRGM1VZQ0FsU2MybC9tUFdPMHJuVTUrbUh6cVFu?=
+ =?utf-8?B?K3RCQmJRakhSNEZjMy9PQ1k3R1FUdjh1U0dSMmNlR25TR2t5azArVlYrS2RP?=
+ =?utf-8?B?MDkzT0kzdnJuZnFMRWUrOU1PTk1uMlN1dUZ1VmZITE0xRVFHUW1BQ3V4RGhW?=
+ =?utf-8?B?d0N6NFZ4bGxnOGxob0JrenlZS2RocE1BQzBqU3VSVVFwTHhRZU5XTlA0MnI4?=
+ =?utf-8?B?akFwRHdmNm1MYkovTHRrTWxSb2lVN3NXNU5FQm5td2xzUnBuTy9oUHNKcFFq?=
+ =?utf-8?B?TE9RdjBZYTcvNVZkV2FHMnI5dUh3PT0=?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 08DnYU+8YVWoXejY0JlPUBHKtG9FcwdbHEVpRtDuK7rDw19UqwVbrqW/tfAtdlWh0yIDjrsTsluCBFF+QF0zRozC84Fcfkbc6eCbUUTUxb8fGBlw7ZB3aeO/Qk2UCVorwjRMUqbvq9kgXPzrTU4rTtZuqcPYGqasUsfRVpHvOcViD83coCvSGVnWOl+TScHlpbpHwS0YRIayXVF3ysQ4MT/yrh2f4e/QGjZHip3OeoDCxWUIkAJP0GT9I85d6ytdBCA2XckAzAyJBbV2khVc9thNaAio5Ln0blnq5YVj3zIq39SklHeWUfKkiDeaV1eL7cXl8tAwvnfpaPsSKUR1RmgWp4uzkYRoGCoRMUzfvPH8EmhYSnhKJDbZLKV/vxQI5afEFKzpuzSbdl3NtQc1HDVOklHGzxSa9Y1SJIZb/okY7fEPPfS3jdPPoej2ozlE
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2026 08:25:23.2065 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 083354c1-bb2b-4fbe-d4bc-08de62349c47
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000148.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR10MB7207
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,129 +176,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Julien Masson <jmasson@baylibre.com>
+On Thu Jan 22, 2026 at 7:38 PM IST, Anshul Dalal wrote:
+> This patch refactors the nodes in each board's R5 device-tree to common
+> SoC level dtsi. No functional change is intended from this patch.
+>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
 
-This adds support for the MT8390 EVK board with the following
-features enabled/tested: Boot, UART, Watchdog and MMC.
+Any updates on this patch?
 
-MT8390 is based on MT8188.
+> ---
+> I have verified the DT delta before and after the patch and there is
+> no difference except for the addition of "tick-timer" under /aliases and
+> "clock-names" under the a53/a72 cores on some platforms which should
+> cause no functional change. An exhaustive diff for all DTs is provided
+> below[1].
+>
+> The following affected platforms have not been boot tested:
+>  - k3-am625-r5-beagleplay
+>  - k3-am67a-r5-beagley-ai
+>  - k3-am642-r5-phycore-som-2gb
+>  - k3-am625-r5-phycore-som-2gb
+>  - k3-am62a7-r5-phycore-som-2gb
+>  - k3-am625-verdin-r5
+>  - k3-am62p5-verdin-r5
+>
+> Though I'm not sure if the patch should be split per SoC for ease of
+> review?
+>
+> [1]:
+>
+>   k3-am625-r5-beagleplay:
+>    --- build/before/spl/u-boot-spl.dtb
+>    +++ build/after/spl/u-boot-spl.dtb
+>    @@ -31,6 +31,7 @@
+>     		remoteproc0 =3D "/bus@f0000/sysctrler";
+>     		remoteproc1 =3D "/a53@0";
+>     		serial2 =3D "/bus@f0000/serial@2800000";
+>    +		tick-timer =3D "/bus@f0000/timer@2400000";
+>     		usb0 =3D "/bus@f0000/dwc3-usb@f900000/usb@31000000";
+>     	};
+>
+>   k3-am625-r5-phycore-som-2gb:
+>    --- build/before/spl/u-boot-spl.dtb
+>    +++ build/after/spl/u-boot-spl.dtb
+>    @@ -10,6 +10,7 @@
+>     		assigned-clock-parents =3D <0x02 0x3d 0x02>;
+>     		assigned-clock-rates =3D <0xbebc200 0x47868c00>;
+>     		assigned-clocks =3D <0x02 0x3d 0x00 0x02 0x87 0x00>;
+>    +		clock-names =3D "gtc";
+>     		clocks =3D <0x02 0x3d 0x00>;
+>     		compatible =3D "ti,am654-rproc";
+>     		power-domains =3D <0x03 0x3d 0x01 0x03 0x87 0x01 0x03 0xa6 0x01>;
+>    @@ -31,6 +32,7 @@
+>     		serial2 =3D "/bus@f0000/serial@2800000";
+>     		serial3 =3D "/bus@f0000/serial@2810000";
+>     		spi0 =3D "/bus@f0000/bus@fc00000/spi@fc40000";
+>    +		tick-timer =3D "/bus@f0000/timer@2400000";
+>     		usb0 =3D "/bus@f0000/dwc3-usb@f900000/usb@31000000";
+>     	};
+>
+>   k3-am625-verdin-r5:
+>    --- build/before/spl/u-boot-spl.dtb
+>    +++ build/after/spl/u-boot-spl.dtb
+>    @@ -10,6 +10,7 @@
+>     		assigned-clock-parents =3D <0x02 0x3d 0x02 0x00 0x02 0x9d 0x16>;
+>     		assigned-clock-rates =3D <0xbebc200 0x2faf0800 0x17d7840>;
+>     		assigned-clocks =3D <0x02 0x3d 0x00 0x02 0x87 0x00 0x02 0x9d 0x14>;
+>    +		clock-names =3D "gtc", "core";
+>     		clocks =3D <0x02 0x3d 0x00>;
+>     		compatible =3D "ti,am654-rproc";
+>     		power-domains =3D <0x03 0x3d 0x01 0x03 0x87 0x01 0x03 0xa6 0x01>;
+>    @@ -29,6 +30,7 @@
+>     		serial0 =3D "/bus@f0000/serial@2810000";
+>     		serial1 =3D "/bus@f0000/bus@b00000/target-module@2b300050/serial@0"=
+;
+>     		serial2 =3D "/bus@f0000/serial@2800000";
+>    +		tick-timer =3D "/bus@f0000/timer@2400000";
+>     		usb0 =3D "/bus@f0000/dwc3-usb@f900000/usb@31000000";
+>     	};
+>
+>   k3-am62a7-r5-phycore-som-2gb:
+>    --- build/before/spl/u-boot-spl.dtb
+>    +++ build/after/spl/u-boot-spl.dtb
+>    @@ -10,6 +10,7 @@
+>     		assigned-clock-parents =3D <0x02 0x3d 0x02>;
+>     		assigned-clock-rates =3D <0xbebc200 0x47868c00>;
+>     		assigned-clocks =3D <0x02 0x3d 0x00 0x02 0x87 0x00>;
+>    +		clock-names =3D "gtc";
+>     		clocks =3D <0x02 0x3d 0x00>;
+>     		compatible =3D "ti,am654-rproc";
+>
+> power-domains =3D <0x03 0x3d 0x01 0x03 0x87 0x01 0x03 0k3-am642-r5-phycor=
+e-som-2gbxa6 0x01>;:
+>    --- build/before/spl/u-boot-spl.dtb
+>    +++ build/after/spl/u-boot-spl.dtb
+>    @@ -10,6 +10,7 @@
+>     		assigned-clock-parents =3D <0x02 0x3d 0x02>;
+>     		assigned-clock-rates =3D <0xbebc200 0x3b9aca00>;
+>     		assigned-clocks =3D <0x02 0x3d 0x00 0x02 0x87 0x00>;
+>    +		clock-names =3D "gtc";
+>     		clocks =3D <0x02 0x3d 0x00>;
+>     		compatible =3D "ti,am654-rproc";
+>     		power-domains =3D <0x03 0x3d 0x01 0x03 0x87 0x01 0x03 0x89 0x01>;
+> ---
+>  arch/arm/dts/k3-am62-r5-lp-sk.dts              | 82 +-------------------=
+----
+>  arch/arm/dts/k3-am625-r5-beagleplay.dts        | 72 +++-----------------=
+-
+>  arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts   | 76 ++------------------=
+--
+>  arch/arm/dts/k3-am625-r5-sk.dts                | 86 +-------------------=
+-----
+>  arch/arm/dts/k3-am625-r5.dtsi                  | 88 ++++++++++++++++++++=
+++++++
+>  arch/arm/dts/k3-am625-verdin-r5.dts            | 81 ++++++--------------=
+----
+>  arch/arm/dts/k3-am6254atl-r5-sk.dts            | 86 +-------------------=
+-----
+>  arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts  | 58 ++---------------
+>  arch/arm/dts/k3-am62a7-r5-sk.dts               | 60 +-----------------
+>  arch/arm/dts/k3-am62a7-r5.dtsi                 | 69 ++++++++++++++++++++
+>  arch/arm/dts/k3-am62d2-r5-evm.dts              | 72 +-------------------=
+-
+>  arch/arm/dts/k3-am62d2-r5.dtsi                 | 75 ++++++++++++++++++++=
+++
+>  arch/arm/dts/k3-am62p5-r5-sk.dts               | 69 +-------------------
+>  arch/arm/dts/k3-am62p5-r5.dtsi                 | 77 ++++++++++++++++++++=
+++
+>  arch/arm/dts/k3-am62p5-verdin-r5.dts           | 76 ++------------------=
+--
+>  arch/arm/dts/k3-am642-r5-evm.dts               | 81 +-------------------=
+----
+>  arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts   | 76 ++------------------=
+--
+>  arch/arm/dts/k3-am642-r5-sk.dts                | 81 +-------------------=
+----
+>  arch/arm/dts/k3-am642-r5.dtsi                  | 84 ++++++++++++++++++++=
+++++
+>  arch/arm/dts/k3-am654-r5-base-board.dts        | 74 +-------------------=
+--
+>  arch/arm/dts/k3-am654-r5.dtsi                  | 77 ++++++++++++++++++++=
+++
+>  arch/arm/dts/k3-am67a-r5-beagley-ai.dts        | 67 +-------------------
+>  arch/arm/dts/k3-am67a-r5.dtsi                  | 70 ++++++++++++++++++++
+>  arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 82 +-------------------=
+----
+>  arch/arm/dts/k3-j7200-r5.dtsi                  | 86 ++++++++++++++++++++=
++++++
+>  arch/arm/dts/k3-j722s-r5-evm.dts               | 81 +-------------------=
+----
+>  arch/arm/dts/k3-j722s-r5.dtsi                  | 84 ++++++++++++++++++++=
+++++
+>  27 files changed, 768 insertions(+), 1302 deletions(-)
+>
 
-Signed-off-by: Julien Masson <jmasson@baylibre.com>
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
-Changes in v2:
-- Add Macpaul Lin from Mediatek as co-maintainer
-- Rebased on master
-- Removed series dependency, as the pinctrl series for MT8188 was
-  applied on master
-- Link to v1: https://lore.kernel.org/r/20260123-add-genio-700-board-v1-1-274019c628d1@baylibre.com
----
- board/mediatek/mt8390_evk/MAINTAINERS  |  6 ++++++
- board/mediatek/mt8390_evk/Makefile     |  3 +++
- board/mediatek/mt8390_evk/mt8390_evk.c | 34 ++++++++++++++++++++++++++++++++++
- configs/mt8390_evk_defconfig           | 27 +++++++++++++++++++++++++++
- 4 files changed, 70 insertions(+)
+[snip]
 
-diff --git a/board/mediatek/mt8390_evk/MAINTAINERS b/board/mediatek/mt8390_evk/MAINTAINERS
-new file mode 100644
-index 00000000000..d46b8b2e156
---- /dev/null
-+++ b/board/mediatek/mt8390_evk/MAINTAINERS
-@@ -0,0 +1,6 @@
-+MT8390 EVK
-+M:	Julien Masson <jmasson@baylibre.com>
-+M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
-+S:	Maintained
-+F:	board/mediatek/mt8390_evk/
-+F:	configs/mt8390_evk_defconfig
-diff --git a/board/mediatek/mt8390_evk/Makefile b/board/mediatek/mt8390_evk/Makefile
-new file mode 100644
-index 00000000000..a26d46838c4
---- /dev/null
-+++ b/board/mediatek/mt8390_evk/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y += mt8390_evk.o
-diff --git a/board/mediatek/mt8390_evk/mt8390_evk.c b/board/mediatek/mt8390_evk/mt8390_evk.c
-new file mode 100644
-index 00000000000..1ca40366a55
---- /dev/null
-+++ b/board/mediatek/mt8390_evk/mt8390_evk.c
-@@ -0,0 +1,34 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 BayLibre SAS
-+ * Author: Julien Masson <jmasson@baylibre.com>
-+ */
-+
-+#include <linux/types.h>
-+#include <asm/armv8/mmu.h>
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+static struct mm_region mt8390_evk_mem_map[] = {
-+	{
-+		/* DDR */
-+		.virt = 0x40000000UL,
-+		.phys = 0x40000000UL,
-+		.size = 0x200000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
-+	}, {
-+		.virt = 0x00000000UL,
-+		.phys = 0x00000000UL,
-+		.size = 0x20000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		0,
-+	}
-+};
-+
-+struct mm_region *mem_map = mt8390_evk_mem_map;
-diff --git a/configs/mt8390_evk_defconfig b/configs/mt8390_evk_defconfig
-new file mode 100644
-index 00000000000..9bc1d922587
---- /dev/null
-+++ b/configs/mt8390_evk_defconfig
-@@ -0,0 +1,27 @@
-+CONFIG_ARM=y
-+CONFIG_SYS_BOARD="mt8390_evk"
-+CONFIG_COUNTER_FREQUENCY=13000000
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_MEDIATEK=y
-+CONFIG_TEXT_BASE=0x4c000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8390-genio-700-evk"
-+CONFIG_TARGET_MT8188=y
-+CONFIG_SYS_LOAD_ADDR=0x4c000000
-+CONFIG_IDENT_STRING="mt8390-evk"
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_CLK=y
-+CONFIG_MMC_MTK=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_MT8188=y
-+CONFIG_BAUDRATE=921600
-+CONFIG_DM_SERIAL=y
-+CONFIG_MTK_SERIAL=y
-+CONFIG_WDT=y
-+CONFIG_WDT_MTK=y
-+# CONFIG_RANDOM_UUID is not set
-
----
-base-commit: eed514b11d04a2f8a949521ad3bffba3ec98bd2f
-change-id: 20260122-add-genio-700-board-5621b428c04e
-
-Best regards,
--- 
-Julien Stephan <jstephan@baylibre.com>
+> ---
+> base-commit: fd871fc6bb497c6ddd7b39622480b89add78f57b
+> change-id: 20260122-r5_dt_refactor-4535f5177593
+>
+> Best regards,
 
