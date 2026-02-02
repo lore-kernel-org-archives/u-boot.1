@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 644CEE7DEE3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 14:38:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 413C0E7DF0A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 16:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B83CA83E8E;
-	Mon,  2 Feb 2026 15:38:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FD3283EC8;
+	Mon,  2 Feb 2026 17:54:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dtwTl1Vd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oloflQGh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1484F83F00; Mon,  2 Feb 2026 15:38:19 +0100 (CET)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 813A383F15; Mon,  2 Feb 2026 17:54:35 +0100 (CET)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA2E383D8A
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 15:38:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6209B83EC8
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 17:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-662f5c5507cso2637121eaf.3
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 06:38:16 -0800 (PST)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-662f9aeb782so2986742eaf.3
+ for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 08:54:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770043095; x=1770647895; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=X1pR/mHf1ysap6I6aDDK2d21dSAaRJqbCpZFEuvm/ao=;
- b=dtwTl1VdqyKEI/XuRG5vCX+MwjqPOr7xnxYCbwv1MTw/e86nrhoXReOIA/FHVXnsu0
- 2TCd795RyUq/8HXQdZS864mVZFt+hUHGX4eoPc/KQjZ8PA9aVeP0sUnnfvQZRvGwhQna
- 7gkY0HkLHCkF97hnhZmXjM+ZLcF3xad51yhHA=
+ d=konsulko.com; s=google; t=1770051272; x=1770656072; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8S6tjzpXEIM+YM0T9MZW7+lzx/q0ltU4aC+WGjg4YMY=;
+ b=oloflQGhMx8UROQC8izUlrAonsXcK71dqIh1l/sIYIsJr9YpDHb9bGaELW3TpDrIk5
+ kVJnREzWs3WTrruqJ5q1QqW5WYh5+mqbtWHJZRdPhWQnLg8iCLiHf6S5Y2IeTDmUG7yp
+ JD9YIwAivM42X8AmsDwX0WXYgevsPPYJFMD+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770043095; x=1770647895;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=X1pR/mHf1ysap6I6aDDK2d21dSAaRJqbCpZFEuvm/ao=;
- b=si2h9VqtOigxvqOeb4udh7z6ZuRjZnxbbX4koOWMuYDGDo5CfGta2vrfmmTij86q0p
- 1myytoHfsxfWq0A4u0B3s0KHwoMfhewm3lmrca6+zzUmObPFxyIWHM+h4D6+OcfkZEl+
- P9cKaHsjXKFMTGl2s/RBSRT5e8p4jlPbkHOXn8TpUE67hW+797dR5xol3gw3Qfs0ucYk
- HOn3A2UkWasmdEmBq5vOVEBryrW+h+5H/6kYXds4UxOWM3Rvy3kUyo+7zMu5JbmhEVLH
- 39TcnHKhwAsRiF9O6UyW8GidQ1Aq1gq0r2DZ/CR7BTX9t1abHCiphZXLryFIs9/wm+zM
- BJ/w==
-X-Gm-Message-State: AOJu0YwINVi+1fIuy3o+fKe5wteRZfkFfOxbrhmAZRpOgMtfjKZYIR/u
- wcE5kK8T1YyUgkGEgRvGUyE/aeGZzrJLlDPRo0ltTm0sUEqfEWx/aU4dSeAAv+xqeZY=
-X-Gm-Gg: AZuq6aLl69tOgqyz++M4jZ7uvpFCKYnusTWmX4hCeKjrb6TO8k+l/kKg0KWoKi1/1hE
- vq8brtOB6s4KYO/j1zjSPjYCT+MIj6bhERi0cdA3SztTajHdGPHrcrZO7aMU3AGAPX777mwvzG4
- o/YQ0vM5f+pWHqYYwmkKz8vhEAGrOnxvkoRy+dQZ5baZ0HpKIE+QAEAE14NEaYG0iRYsNGk6LwA
- O6Yv0mstds3g9ScGqdBZdxGympotxShiu5U1Nxvbl0DlZ103GR4ORS2kKd4hVUoJ89E4XxR4xjk
- KSIKAL3PLTh+il2USTbXF1eS64eO5EqcnB7gZiAZIzYg1zlIG14BQDtECjDOAC/nL4d35VJB+C2
- iVphaGCQtgPx/uuy42f/IGOhkIZYymAdlHKDGJVn1Odlo3GEIjazl6qDw+rIC+1oZslRioXDhEp
- 9oibHFP5MfbzjDhZXWG0T0HDSeaIjxahn2vLomkX35wg9pRidsoaDj6efwFTySxtOfEYJXDUbdO
- ++iQNfYCeePhC9woXM/4vGBWdA4I97tXT/t9ZM=
-X-Received: by 2002:a05:6820:3098:b0:65d:1697:e6cc with SMTP id
- 006d021491bc7-6630f3b204amr5413186eaf.60.1770043095043; 
- Mon, 02 Feb 2026 06:38:15 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1770051272; x=1770656072;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=8S6tjzpXEIM+YM0T9MZW7+lzx/q0ltU4aC+WGjg4YMY=;
+ b=PI3/W5VJ0cZ+Gg1I6HgC1+mA6fDpCH5pzvene3gtoObl7Bd0Wm3glLii53tzoyFoqH
+ nyNmQXakXxzSt+u+nO9UfOIcjvibIWPcUtwaLlw0fcK9XiDCiGEyMjctaFo5zKqFIFKp
+ +R6AyxykUhStqdwbN26dPUlSFcL6bfqsNi7eenx4BzJhn5ASt0ZTEaQ0XDNW6YTlkYeu
+ FhhoaY7te7teLeApHACoNY5U8VrCT9jErtbN68Pni6n6Ia54f2B4IVid6cZhTQ8yps26
+ nyBpbnEEoCqDE2UuzuFgyXtqTPR9BrAvyVs2GPRbLR7DWmE5q7TqE+rnFGOh4g76aUBI
+ PTgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVdunQf9Oxl+UYsGTQFsvi2wDvS5sGzqiLjdcWpV0I9kkqfR9NMXOdqrn04q6X6iqIb40sFkzU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMJSLPn1iGwS6Nm5vRqrfxW06NuST7tub3gNFGlwW/QKrb04PW
+ fInPIiZ7xk/+l93qNSG40MG3A/KagNjFeo0gkZvYAEnAnT7YMAzVXK6edkOK+9448cLwLrZ7k7I
+ KQ2/OmqE=
+X-Gm-Gg: AZuq6aLplYcw1SuFwMwJpQro/XLJwlGbjJoY+jfGCN/yONU9xsADhUVl0NBnZxDOhtV
+ yDS0gaX6gKPazKga/ncKnZouRn27Nj8EZ5ZgvYlkNpQ4FYT3tI+aVakoqtf1npB/bwNhnSiJ61t
+ emZ/tQz/ovT+K8PbhNQVMbTDJM2j67uEkl/p8Aan35W6cNp0GhHj+FHCJdBPoYXol0bV4tMlPIO
+ oKImkGTdYDKmzSMT6td/85p6hc8Jt5dg9JnMK1+4uerywqflmNs4V//uTDZvESZUjK1MG7Blyet
+ 92vKEEJa6H/CwwFWghtylyqMLSMVEoPMgS9b8EkL5Rn8O5Nwswc4Lgaylyt5A0OkT/QgEqFs+7k
+ TB3ZnJTYaBDcqxkoNSf1xUfdqvtppDg8g8oiS1b8ZpPFcM4PcXwmDMbw6XPkzMM2pQsaom6/3SH
+ 2o8NciEjApxHWfoxBqdcRsS3jQTjK7jTtlZ2bsJAYXqBNXr36bRP5MTdjZwuydAigflI2Pa858q
+ FDxFCvZKNRx3D9I3AxJMFB59I9YkS/zDKf7/Q==
+X-Received: by 2002:a05:6820:1689:b0:663:d1d:5fe6 with SMTP id
+ 006d021491bc7-6630f3a15a4mr5778345eaf.55.1770051271945; 
+ Mon, 02 Feb 2026 08:54:31 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6630606f2dfsm8683499eaf.13.2026.02.02.06.38.13
+ 006d021491bc7-66311d7e446sm5964901eaf.1.2026.02.02.08.54.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 06:38:14 -0800 (PST)
-Date: Mon, 2 Feb 2026 08:38:11 -0600
+ Mon, 02 Feb 2026 08:54:31 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Garrett Giordano <ggiordano@phytec.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>,
- Paresh Bhagat <p-bhagat@ti.com>, Vitor Soares <vitor.soares@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>,
- Andrew Davis <afd@ti.com>, Gowtham Tammana <g-tammana@ti.com>,
- Vignesh R <vigneshr@ti.com>
-Subject: Re: [PATCH master] arch: arm: dts: k3: refactor common nodes to
- k3-*-r5.dtsi
-Message-ID: <20260202143811.GC2603314@bill-the-cat>
-References: <20260122-r5_dt_refactor-v1-1-5442a4321756@ti.com>
- <DG4BZ97UWPF0.FCYZ7RUNHS94@ti.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260129-boot-image-fit-print-error-code-v1-1-20d8edfed856@baylibre.com>
+References: <20260129-boot-image-fit-print-error-code-v1-1-20d8edfed856@baylibre.com>
+Subject: Re: [PATCH] boot/fit: print error name in boot_get_fdt_fit()
+Message-Id: <177005127113.4027196.17907235920694778110.b4-ty@konsulko.com>
+Date: Mon, 02 Feb 2026 10:54:31 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/kPXNrt8l1U3V9J1"
-Content-Disposition: inline
-In-Reply-To: <DG4BZ97UWPF0.FCYZ7RUNHS94@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,35 +99,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 29 Jan 2026 14:03:41 -0600, David Lechner wrote:
 
---/kPXNrt8l1U3V9J1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Print the actual error code in a couple of places in boot_get_fdt_fit().
+> 
+> These are FDT error codes, not errno, so printing the string is more
+> helpful than printing the numeric value.
+> 
+> The only caller of boot_get_fdt_fit() unconditionally replaces the
+> returned error code (fdt_noffset) with ENOENT so the actual error would
+> otherwise be lost.
+> 
+> [...]
 
-On Mon, Feb 02, 2026 at 01:55:19PM +0530, Anshul Dalal wrote:
-> On Thu Jan 22, 2026 at 7:38 PM IST, Anshul Dalal wrote:
-> > This patch refactors the nodes in each board's R5 device-tree to common
-> > SoC level dtsi. No functional change is intended from this patch.
-> >
-> > Signed-off-by: Anshul Dalal <anshuld@ti.com>
->=20
-> Any updates on this patch?
+Applied to u-boot/master, thanks!
 
-I've been letting it collect tags as it's not been quite 2 weeks.
-
---=20
+[1/1] boot/fit: print error name in boot_get_fdt_fit()
+      commit: 8bca63d2ed9d73ec2ff83fa76510245e48e29730
+-- 
 Tom
 
---/kPXNrt8l1U3V9J1
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYC20AAKCRAr4qD1Cr/k
-Ck+JAP9R7ZCUNsdnN4oPOdO+T5kP0vFR1LHZyDpewGExU850qwEAggtonVAdxGAX
-/2LRr5D6oSfHM9YHDrc2pFizFREn2Ak=
-=yGcq
------END PGP SIGNATURE-----
-
---/kPXNrt8l1U3V9J1--
