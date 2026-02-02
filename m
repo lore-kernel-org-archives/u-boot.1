@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F14E73165
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 19:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D12CE7FDC1
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 19:45:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B65DC83E76;
-	Mon,  2 Feb 2026 20:29:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CCF3583F5B;
+	Mon,  2 Feb 2026 20:44:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aiF5T7VG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h7GE1HdY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 860EA83F2D; Mon,  2 Feb 2026 20:29:26 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id F358B83F5D; Mon,  2 Feb 2026 20:44:56 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 779A983E69
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 20:29:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB73283F59
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 20:44:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d1890f7ee4so2957091a34.0
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 11:29:24 -0800 (PST)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-45c87d82bd2so3276122b6e.1
+ for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 11:44:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770060563; x=1770665363; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770061493; x=1770666293; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sibaI65mLM7WcseMyxbEceIMEqcKuGJk9nqvEEmO2/E=;
- b=aiF5T7VGJKoZFtbvYN3oFqCdyiiD1nVKR4laB1OLBxBpdV4LE32169ZzfdgAFsK/tx
- HCVkxvVRsAtWwhXcRa1oizEnOOr7CxWNoZT7kb8YnYe6q7FH6iy+q6+RKbaohknApL8m
- 0qAphjvJKSsDXPExTcUXygsdcSKZ2odXZHTp0=
+ bh=q//uzJbbLBqQUda7Iz29V8vpE3J8pTD5MIs6jkQHel0=;
+ b=h7GE1HdYVM0Nei6w/bhcq1GswCFljcGJq5O0D5heQcceFzHXmvSfAcTrjK9IGZwg2J
+ CNOEMw6mH8pXHZXujvL4UBmKFljRTqZp3nRkMdjIE8iE1JUr8/2q2fGghZD/Zh+20Fwf
+ quiCKTvKt/AKbeVZYlKX/cVWzQ4Uu12t3Wvug=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770060563; x=1770665363;
+ d=1e100.net; s=20230601; t=1770061493; x=1770666293;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sibaI65mLM7WcseMyxbEceIMEqcKuGJk9nqvEEmO2/E=;
- b=NYXLD8WDSO8aK73RyzsjNhy++/pvvVNSm8LTFwQYr+4cKPXOyQEypAIYQ7iTikBx+T
- v1Q45Gpx/Ggo2Mvwc0WlT9AK4Gj0mP96l/TGssbytMXmdrprYZZqok02W6xILzhRfgP7
- TavogNjVc1D3v3ggbYaoimrdTrzg+NwlWRW7bOpSgSpbrv6F0nfJUlR52/y+M6GGdkuo
- 0504E+KyScIrijJzEaAZOosHKi8XOAtFgP/DEi9QXyEESUO+t6bVl33Kgg4qWJpiSRxa
- rpjkC/ylFbD1wsNEbxf6FpIfgUVh4hoGveN35nEc+PQ2E3kTM+RAukx2YoM3lLz6RM9/
- oecg==
-X-Gm-Message-State: AOJu0Yzg3vKS6ETw9aG5cICr0vkFfgymGfNxs1niRsDkBhzZaBypQcwk
- YEjxXapm9Uyu5mm3x4pBbRBidjJPXTLEf1O4J1VZLYb6fKxp/dKAnepIXHnTebmcRZJEufCa6aH
- irgJmZ64=
-X-Gm-Gg: AZuq6aLhAJUdXTXIEWpuqD+68xvE8IhFIzKrS24xyRVhiuS95LxNfYRlK2zLGrU37H2
- 19D8J41vqH2udPamTSrogUCbJTTxb4mdMYD1DFJTKkxMdKvza710QHitvm0I4kMPE0XgJTESLSE
- LZVpf7oaPoz6rC5ZME7Ey6UXdqpTfTF3U9r8IldHBDWatBLmjJlVNlPNevLXoaRx1wt0RCHC95R
- Aps06ZIO2Iu00iwEAPH1uixxwFepdQO7//7N/3jVcmzA/K9lAPsosF+yM0VX0syEUpsHCZla+L0
- kvU5pjQ2JuCLI3NZtn6S/epGAOwWlHpQWdtldKIvytnqNTpDu8SovblqDMrfrnPBGBztsiShExi
- AlLalvXdoGKyNx8n3ZeZhV36WWCRVIhQNv9hctwWITkQIcfLy5Ap6mQG/nxuZ6lwwPh0iX2NNl7
- A+0fiy6wXMv2cv9Qz5euAypLHGGS3CJ23JDCk/x3MmIPgekd7p1/2aPhJVd8Z+orzdlpsddjRmH
- X0GUK0gdiL9CKK/zYMmHCREFC8qDbS8ToW9rc4=
-X-Received: by 2002:a05:6830:828c:b0:7c7:1c91:1258 with SMTP id
- 46e09a7af769-7d1a5328dc4mr6314457a34.26.1770060563138; 
- Mon, 02 Feb 2026 11:29:23 -0800 (PST)
+ bh=q//uzJbbLBqQUda7Iz29V8vpE3J8pTD5MIs6jkQHel0=;
+ b=soMGFTjJPJZM/3vB058TSo6+PuF6c1+Tvg7Ma8iDRefitV5ktA8NsLMuTncuar1Hrn
+ 9X07WcaSsTmLcrf31ZCK3ri1RObXucJGb+nG6Z/Q7N5igu7ji0qvTqAQOeKHHQ2bs+vp
+ mshGhqoovhgFvM12g6GOEcktnoZpuwpuSx41zNCorB8rdvCz1MfFlXvvGeO1G8hcCGFa
+ ttuWKFYR3N9aetjf5fluuXkF/xQCRwniQjMP+SrI7NR3EI3aGxqt5NVxGH8EdwTZrdY1
+ wAt2AO8zioXnm8lic3n+87W+ouWTODlArQga+Eocb0CR7M/1i606XLUWXMJ/7Z+OGf2u
+ oREg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwLlO7LOMx7Ai9uDLbReiDzYATnaEva3XTU+zHtjH2XFk0noTB4IUlb4g8dIrVz/Ssxz2OA2o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwjdaGmXjiQq/DnaOkzvT4LKw6SOl1cM2fOvdiOhJzysFu67j+d
+ YavwFpkwWh4qLjusC0ibm5fHacMKQtlBXcMorV9IJkmZDeGX9QyownXi/qq5BHUN2/g=
+X-Gm-Gg: AZuq6aJu88Zr6VEagOrfv/nmJ48HAeS48TnD3WJD/kvKJ7/lPAN00rlAa7yCzAullHK
+ kPYsolMSLYEj3DPT/3SYY6iTOGF2G11LvP/3jqOBuvyf+UPJxq8Mx5Rjnqh9wsxZ1ojV3EqN4a5
+ Bviefyth5sH4sGylnl3N/UvhUAlwjbYtYMeFI8uK+h9KkqUfF/B6NanyXUk7oTgimR97McYsv/i
+ tUvDSWdZ50Olj58sueSSBYAxmT2ZD3RaZy+jgpX+SsiWcsPFm17icfWr1EFDea6GnTXV1QdKPGz
+ xth+ZoLsL3EyQIn3/oTBd6wpHCnu+ObZn1cbQEv514mXSDwSuOKrGhccbFmWTWVBLcxkKUVzYUs
+ jPEyCJuIYLGWAtixLh/M+oaeXaALmfuCpKf7yoL8fEkl56J89sdrHXIVXHAuVCcnGuuwo7XZXSX
+ tJX9rQhiKqguEu2oiOblDUysDzyYgG154JbAeCXqxI1lCB8wJHcpIil3iwmw4AN3aGtDfDgiriX
+ Ond95vZpAoS8uoAa2XbCEPE7JWEoDkNCIBnoPw=
+X-Received: by 2002:a05:6820:80c3:b0:664:86ce:df3f with SMTP id
+ 006d021491bc7-66486cee41amr3870051eaf.51.1770061492792; 
+ Mon, 02 Feb 2026 11:44:52 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d18c67065esm11083659a34.6.2026.02.02.11.29.22
+ 006d021491bc7-662f994388fsm10233947eaf.4.2026.02.02.11.44.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 11:29:22 -0800 (PST)
-Date: Mon, 2 Feb 2026 13:29:20 -0600
+ Mon, 02 Feb 2026 11:44:52 -0800 (PST)
+Date: Mon, 2 Feb 2026 13:44:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: vagrant@debian.org
-Cc: u-boot@lists.denx.de, Green Wan <green.wan@sifive.com>,
- Paul Walmsley <paul.walmsley@sifive.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH 1/2] env: Provide another work-around for unquoting fdtfile
-Message-ID: <20260202192920.GD2603314@bill-the-cat>
-References: <20260130040424.472735-1-vagrant@debian.org>
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+ u-boot@lists.denx.de
+Subject: Re: [RFC PATCH 0/4] add software ecdsa support
+Message-ID: <20260202194449.GE2603314@bill-the-cat>
+References: <20260202170307.217200-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JenhFH5JuZcIh9jU"
+ protocol="application/pgp-signature"; boundary="C4Vy3SFhK7yzy0u9"
 Content-Disposition: inline
-In-Reply-To: <20260130040424.472735-1-vagrant@debian.org>
+In-Reply-To: <20260202170307.217200-1-philippe.reynes@softathome.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,40 +100,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---JenhFH5JuZcIh9jU
+--C4Vy3SFhK7yzy0u9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 29, 2026 at 08:04:23PM -0800, vagrant@debian.org wrote:
+On Mon, Feb 02, 2026 at 06:03:03PM +0100, Philippe Reynes wrote:
 
-> From: Vagrant Cascadian <vagrant@debian.org>
+> This serie adds the support of ecdsa with software
+> using mbedtls. So boards without ecdsa hardware may
+> also use signature with ecdsa.
 >=20
-> Some boards use CONFIG_DEFAULT_FDT_FILE to specify the value of
-> fdtfile, althugh the quotes get embedded in the value.
+> To add the support of ecdsa with mbedtls, I have:
+> - enabled ecdsa in mbedtls
+> - add a function sw_ecdsa_verify that uses mbedtls
+> - add a driver sw_ecdsa that call sw_ecdsa_verify
 >=20
-> Provide DEFAULT_FDT_FILE with the quotes stripped.
+> I have tested this code with sandbox, and I have
+> followed those steps:
 >=20
-> This is a similar work-around to the one provided in commit
-> d085e692c98d0d7b57cc577ed9befda159cd4a40 for
-> CONFIG_DEFAULT_DEVICE_TREE.
+> 0) build u-boot using sandbox_defconfig and adding those options:
+> CONFIG_ECDSA_SW=3Dy
+> CONFIG_ECDSA_MBEDTLS=3Dy
+> CONFIG_ECDSA=3Dy
+> CONFIG_ECDSA_VERIFY=3Dy
 >=20
-> Signed-off-by: Vagrant Cascadian <vagrant@debian.org>
+> 1) add a signature node to an its file
+> 	signature-256 {
+> 		algo =3D "sha256,ecdsa256";
+> 		key-name-hint =3D "private-key-256";
+> 	};
+>=20
+> 2) generate an ecdsa key
+> openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
+>=20
+> 3) create the itb file
+> ./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb>
+>=20
+> 4) launch sandbox u-boot
+>=20
+> ./u-boot -d arch/sandbox/dts/test.dtb
+>=20
+> 5) on sandbox u-boot prompt, load the itb and launch bootm on it
+>=20
+> =3D> host load hostfs - 1000000 uboot-ecdsa.itb
+> 4628674 bytes read in 1 ms (4.3 GiB/s)
+> =3D> bootm 1000000
+> ...
+> ...
+>    Verifying Hash Integrity ... sha256,ecdsa256:private-key-256+ OK
+>=20
+>=20
+> I have tested with success ecdsa256 and ecdsa384,
+> but there is an issue with secp521r1.=20
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+This is good to see. Please work on adding this to CI automatically
+(which may involve doing something like the sandbox_trace builds/tests
+rather than just being part of the default sandbox suite).
 
 --=20
 Tom
 
---JenhFH5JuZcIh9jU
+--C4Vy3SFhK7yzy0u9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYD7CAAKCRAr4qD1Cr/k
-CgTTAP9Y+HZ7rtwcUdyNTrMp8tOMAZEKB66uT6Lc2mMQdKWQ+QEAp8iqHvroZ6u/
-Ecs4NWqN4a1RwbBBjxvd4KU/tkkWzAw=
-=94ZA
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYD+rgAKCRAr4qD1Cr/k
+CkstAP9UTWDElAbn/ZmaTy/xfyhomnTi/33siSmTGJl4fruPtQD/bW/PWEm9SvaO
+CC0gB49Mi9TGWCPirE3Bt3ELgzUBmQI=
+=v/74
 -----END PGP SIGNATURE-----
 
---JenhFH5JuZcIh9jU--
+--C4Vy3SFhK7yzy0u9--
