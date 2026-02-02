@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 413C0E7DF0A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 16:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B4ADE7DF0C
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 16:54:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FD3283EC8;
-	Mon,  2 Feb 2026 17:54:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A2BEC83F14;
+	Mon,  2 Feb 2026 17:54:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oloflQGh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NHugBbZa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 813A383F15; Mon,  2 Feb 2026 17:54:35 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 9648783AEE; Mon,  2 Feb 2026 17:54:37 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6209B83EC8
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 17:54:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D90183EEF
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 17:54:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-662f9aeb782so2986742eaf.3
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 08:54:33 -0800 (PST)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-65e943048afso2058098eaf.0
+ for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 08:54:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770051272; x=1770656072; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770051273; x=1770656073; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8S6tjzpXEIM+YM0T9MZW7+lzx/q0ltU4aC+WGjg4YMY=;
- b=oloflQGhMx8UROQC8izUlrAonsXcK71dqIh1l/sIYIsJr9YpDHb9bGaELW3TpDrIk5
- kVJnREzWs3WTrruqJ5q1QqW5WYh5+mqbtWHJZRdPhWQnLg8iCLiHf6S5Y2IeTDmUG7yp
- JD9YIwAivM42X8AmsDwX0WXYgevsPPYJFMD+k=
+ bh=fNsh9th+zVq+eJupQpoteR4Kc71Dvhx90SYMyd43jKQ=;
+ b=NHugBbZaGzbIpcuYo+vGX+8yRm3/XdgbZSpjSmuwMXd+8WsFSBRydnJOrqQuuW1Lrj
+ PScroagabmD8gx2Y6bXOKUZeSnMMzhu8W19xeI390JGEMhRpiTmhbPViZqLf3m2K36OQ
+ dP2JVH5XMhphOq5dMLa2PiKPUOfXu+36Isu+w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770051272; x=1770656072;
+ d=1e100.net; s=20230601; t=1770051273; x=1770656073;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=8S6tjzpXEIM+YM0T9MZW7+lzx/q0ltU4aC+WGjg4YMY=;
- b=PI3/W5VJ0cZ+Gg1I6HgC1+mA6fDpCH5pzvene3gtoObl7Bd0Wm3glLii53tzoyFoqH
- nyNmQXakXxzSt+u+nO9UfOIcjvibIWPcUtwaLlw0fcK9XiDCiGEyMjctaFo5zKqFIFKp
- +R6AyxykUhStqdwbN26dPUlSFcL6bfqsNi7eenx4BzJhn5ASt0ZTEaQ0XDNW6YTlkYeu
- FhhoaY7te7teLeApHACoNY5U8VrCT9jErtbN68Pni6n6Ia54f2B4IVid6cZhTQ8yps26
- nyBpbnEEoCqDE2UuzuFgyXtqTPR9BrAvyVs2GPRbLR7DWmE5q7TqE+rnFGOh4g76aUBI
- PTgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVdunQf9Oxl+UYsGTQFsvi2wDvS5sGzqiLjdcWpV0I9kkqfR9NMXOdqrn04q6X6iqIb40sFkzU=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMJSLPn1iGwS6Nm5vRqrfxW06NuST7tub3gNFGlwW/QKrb04PW
- fInPIiZ7xk/+l93qNSG40MG3A/KagNjFeo0gkZvYAEnAnT7YMAzVXK6edkOK+9448cLwLrZ7k7I
- KQ2/OmqE=
-X-Gm-Gg: AZuq6aLplYcw1SuFwMwJpQro/XLJwlGbjJoY+jfGCN/yONU9xsADhUVl0NBnZxDOhtV
- yDS0gaX6gKPazKga/ncKnZouRn27Nj8EZ5ZgvYlkNpQ4FYT3tI+aVakoqtf1npB/bwNhnSiJ61t
- emZ/tQz/ovT+K8PbhNQVMbTDJM2j67uEkl/p8Aan35W6cNp0GhHj+FHCJdBPoYXol0bV4tMlPIO
- oKImkGTdYDKmzSMT6td/85p6hc8Jt5dg9JnMK1+4uerywqflmNs4V//uTDZvESZUjK1MG7Blyet
- 92vKEEJa6H/CwwFWghtylyqMLSMVEoPMgS9b8EkL5Rn8O5Nwswc4Lgaylyt5A0OkT/QgEqFs+7k
- TB3ZnJTYaBDcqxkoNSf1xUfdqvtppDg8g8oiS1b8ZpPFcM4PcXwmDMbw6XPkzMM2pQsaom6/3SH
- 2o8NciEjApxHWfoxBqdcRsS3jQTjK7jTtlZ2bsJAYXqBNXr36bRP5MTdjZwuydAigflI2Pa858q
- FDxFCvZKNRx3D9I3AxJMFB59I9YkS/zDKf7/Q==
-X-Received: by 2002:a05:6820:1689:b0:663:d1d:5fe6 with SMTP id
- 006d021491bc7-6630f3a15a4mr5778345eaf.55.1770051271945; 
- Mon, 02 Feb 2026 08:54:31 -0800 (PST)
+ bh=fNsh9th+zVq+eJupQpoteR4Kc71Dvhx90SYMyd43jKQ=;
+ b=tgvQEBPVVzQe/ZO0NCwZqNKwTVcKNErYDPvOpKG5xlLG3AQ5id+ZnVN2MbpdcUtqJg
+ flrOK6CvaxUxptv2THCksxrWl/baD9KC24dlVJCWfY57rMKwsqN0v6UiLhKuKGAWI3cx
+ 5mS+O+rVmxFJFgXrIioG8NQC0fRfFmJJ++rcFkqlaW7lO0xb4yLm//9Oid6VLoNT4q13
+ Fhs002EYrBfI6AtktsXfFw46bxPfqKUV6pQILqYJUYoJ9+WtENYFmehe1D1c3dffDr1x
+ 39uXduz4oDta2i2WzFKzT/ZvPqNkPf6VQC7nGsqqe7/Jo8Cr5XdW+qjTjOwyyeqrCFAB
+ lCfA==
+X-Gm-Message-State: AOJu0YzCOdf6zvDXyLu3Zg+761JGq3ISP31vv+Znkrn9KXoUWKmc6ZRJ
+ tYI/C9XiB6mKqryp7jd7n5LbKtwuyylm/HhRavU32L74m7b4WuavIXh6lz2dkgcuKAI=
+X-Gm-Gg: AZuq6aLMDgk6tcvxs+6gZI3x5ePnIwj7nowiykyoCAKWr4L0EQctR7tGuV9Bj8peswc
+ baZ0SzmjZgMMcdthmtqKgay58X+deq1hyAwdL6JU1EpBdYQ7XdSkmft+FWO06b78okGWU/W8wyN
+ LFc0aJVokXImbuYTGO/mw6o2M/4vFftF+ac1QQwUkrM2XT+y5rZcJGEkCZAFsnGeJUPmu4QJFJX
+ 37+1rxruQEtlJSXtK2fRY61+Ze603kBq8VlNyVFIFiU+TqEVuACupIlPsVhH2Y2TluoElurV41R
+ fsuLbIcnZPBByANH3AFRPhLHHxmJC5SkgdieOG5sXS2qIcClO2tCcXPbCTFK9DueLHds1KdOklG
+ F26zfkYLlxEmWSm8iixs7G+kLIWJKTc08YmPyAdFu2mJC1JBoT/H+Ml1aJ+sb3M9Yo4vfg1csWa
+ i9tntO2+HLdgkSTK5MuqtH8DHoivInmzR8U0v5HMtzxoOg5augdVKODYaMgGJq2AqEtpZ+L/s7m
+ 4K/n167Ra1QU77yHA/PJXgYQmv6+owBfD2FI+eEJ/W4YyrX
+X-Received: by 2002:a05:6820:229d:b0:662:e066:7397 with SMTP id
+ 006d021491bc7-6630f401402mr5865512eaf.71.1770051273296; 
+ Mon, 02 Feb 2026 08:54:33 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66311d7e446sm5964901eaf.1.2026.02.02.08.54.31
+ 006d021491bc7-66311d7e446sm5964901eaf.1.2026.02.02.08.54.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 08:54:31 -0800 (PST)
+ Mon, 02 Feb 2026 08:54:32 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260129-boot-image-fit-print-error-code-v1-1-20d8edfed856@baylibre.com>
-References: <20260129-boot-image-fit-print-error-code-v1-1-20d8edfed856@baylibre.com>
-Subject: Re: [PATCH] boot/fit: print error name in boot_get_fdt_fit()
-Message-Id: <177005127113.4027196.17907235920694778110.b4-ty@konsulko.com>
-Date: Mon, 02 Feb 2026 10:54:31 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Anshul Dalal <anshuld@ti.com>, Aristo Chen <jj251510319013@gmail.com>, 
+ Beleswar Padhi <b-padhi@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, 
+ Yannic Moog <y.moog@phytec.de>
+In-Reply-To: <20260129035512.639362-1-marek.vasut+renesas@mailbox.org>
+References: <20260129035512.639362-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] mkimage: fit: align DTs in external data to 8 Bytes by
+ default
+Message-Id: <177005127216.4027196.12034492055028566596.b4-ty@konsulko.com>
+Date: Mon, 02 Feb 2026 10:54:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,23 +104,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 29 Jan 2026 14:03:41 -0600, David Lechner wrote:
+On Thu, 29 Jan 2026 04:53:29 +0100, Marek Vasut wrote:
 
-> Print the actual error code in a couple of places in boot_get_fdt_fit().
-> 
-> These are FDT error codes, not errno, so printing the string is more
-> helpful than printing the numeric value.
-> 
-> The only caller of boot_get_fdt_fit() unconditionally replaces the
-> returned error code (fdt_noffset) with ENOENT so the actual error would
-> otherwise be lost.
+> Unless specified otherwise using the mkimage -B n option, align
+> DTs in fitImage external data to 8 Bytes, and retain alignment
+> of everything else to 4 Bytes. This should fulfill the DTspec
+> requirement, that DTs must be placed at 8 Byte aligned addresses,
+> even for DTs that are part of fitImage with external data. For
+> fitImage with embedded data, there is nothing we can do, as the
+> embedded data are aligned to 4 Bytes, just like any other DT
+> property.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] boot/fit: print error name in boot_get_fdt_fit()
-      commit: 8bca63d2ed9d73ec2ff83fa76510245e48e29730
+[1/1] mkimage: fit: align DTs in external data to 8 Bytes by default
+      commit: 22129bf4733d78da046337440e85a9e49ca1a421
 -- 
 Tom
 
