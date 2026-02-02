@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C0C0E7314F
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 09:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DAFFE73151
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 09:34:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ADD583DCA;
-	Mon,  2 Feb 2026 10:28:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF6FB83DCA;
+	Mon,  2 Feb 2026 10:34:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="t1RUj6Hd";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uiWD3l4d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5431483DE0; Mon,  2 Feb 2026 10:28:22 +0100 (CET)
+ id E61E283DEA; Mon,  2 Feb 2026 10:34:37 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36CDB83DA7
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 10:28:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B3F783DA7
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 10:34:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 85C3743D13;
- Mon,  2 Feb 2026 09:28:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2CD6C116C6;
- Mon,  2 Feb 2026 09:28:16 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8B5C3442A0;
+ Mon,  2 Feb 2026 09:34:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD227C2BCB0;
+ Mon,  2 Feb 2026 09:34:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1770024497;
- bh=wh0tjac2V1GuC8hwd8u3/JzEBa1OWkK5xtFmk5e0o7w=;
+ s=k20201202; t=1770024873;
+ bh=Mm4Wn4tLy0mri3ioKYQ5lpXG38o0jn2/rlnBaVYkopA=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=t1RUj6HdR3guyiJSk1q8AjLgpL9saLaK4ubAh+5itECPj4+Ewu0WRhswEjJVU5U3o
- SQpoZNrRGVrKwlSKdvTxHd1H9RyYzYD6FBAuWNDfPqM64MHOoma6S6Lcsp0v/mj2LN
- Vu4w20c37tajOrHW5uFzNmXJWmVCW41FohUx0mp7HgOfE2nRcxpT0wo7kHTkgurbi/
- R0B6gJA4SiquDO5OAZngOOam0/3EVIMcTERjnWkJBwslItObdZ8kgKO7F/uPzP+s4Y
- 690LHMrLbLnwNk6rfCe7a1f6zhM9wqurJHqT4tfYzZ0z3YbmDTGUadsSnzk6+bR1RG
- mU89AhSrdbF7w==
+ b=uiWD3l4dUqD2T1fof314RUJCwTwFzrE2KME4rimbPTmormL1ibcP+P9du5G9IwKeW
+ Z9xz3A64endG0dQ0OsJojP7QMf8ON9TRXHH+2bctmcuy89MMGQe2rLHiTagXkNws+5
+ TT0xzw5n9sVJu0tlC1Y6hSsxOG/to3POT8AJCwBRwQwQUgvb5VOhZfzfRlv83HLFWE
+ 5OEI3ljvtCCpLGPYHPt3Vkomo3RytYk/09zQC4DwnUvcugRrkM715iZQfPVRh7UrYr
+ 1HuD3u2MFCCWic9dB2VkbcrrJY1ai5nPMXECC5JyJFZycoEhIUw6qfKLluedm+qYji
+ FtsvGGvcSsgwg==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Julien Stephan <jstephan@baylibre.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Julien Masson
- <jmasson@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao
- <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>, Igor
- Belwon <igor.belwon@mentallysanemainliners.org>, Tom Rini
- <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, Peng Fan
- <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, David
- Lechner <dlechner@baylibre.com>
-Subject: Re: [PATCH] board: mediatek: add MT8390 EVK board support
-In-Reply-To: <CAEHHSvZaOWBS4gZAdNzHkKdgrH2kHw++zXrZKW7TtCmQn5JKWA@mail.gmail.com>
-References: <20260123-add-genio-700-board-v1-1-274019c628d1@baylibre.com>
- <87343ooh89.fsf@kernel.org>
- <CAEHHSvZaOWBS4gZAdNzHkKdgrH2kHw++zXrZKW7TtCmQn5JKWA@mail.gmail.com>
-Date: Mon, 02 Feb 2026 10:28:14 +0100
-Message-ID: <87y0lblck1.fsf@kernel.org>
+To: Heiko Schocher <hs@nabladev.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>, Dmitrii Merkurev
+ <dimorinny@google.com>, Fabio Estevam <festevam@gmail.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Neil Armstrong <neil.armstrong@linaro.org>, Stefano
+ Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1 0/2] fastboot: mmc: fix bootloader offset
+In-Reply-To: <993992ca-2c6e-ad7a-f9cb-653ef2ca7878@nabladev.com>
+References: <20260124054712.7939-1-hs@nabladev.com> <87y0lkogbt.fsf@kernel.org>
+ <e7917bc9-11b1-18d0-1f04-9d6af003c1cd@nabladev.com>
+ <875x8kohmf.fsf@kernel.org>
+ <7d9a3b43-7a6c-dc97-69ad-b71acd062538@nabladev.com>
+ <87zf5wmrxk.fsf@kernel.org> <877bszm526.fsf@kernel.org>
+ <993992ca-2c6e-ad7a-f9cb-653ef2ca7878@nabladev.com>
+Date: Mon, 02 Feb 2026 10:34:30 +0100
+Message-ID: <87v7gflc9l.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -78,84 +78,232 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 02, 2026 at 09:31, Julien Stephan <jstephan@baylibre.com> wrote:
+On Mon, Feb 02, 2026 at 06:12, Heiko Schocher <hs@nabladev.com> wrote:
 
-> Le jeu. 29 janv. 2026 =C3=A0 11:17, Mattijs Korpershoek
-> <mkorpershoek@kernel.org> a =C3=A9crit :
->>
->> Hi Julien,
->>
->> Thank you for the patch.
->>
->> On Fri, Jan 23, 2026 at 09:37, Julien Stephan <jstephan@baylibre.com> wr=
-ote:
->>
->> > From: Julien Masson <jmasson@baylibre.com>
->> >
->> > This adds support for the MT8390 EVK board with the following
->> > features enabled/tested: Boot, UART, Watchdog and MMC.
->> >
->> > MT8390 is based on MT8188.
->> >
->> > Signed-off-by: Julien Masson <jmasson@baylibre.com>
->> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
->> > ---
->> >  board/mediatek/mt8390_evk/MAINTAINERS  |  5 +++++
->> >  board/mediatek/mt8390_evk/Makefile     |  3 +++
->> >  board/mediatek/mt8390_evk/mt8390_evk.c | 34 +++++++++++++++++++++++++=
-+++++++++
->> >  configs/mt8390_evk_defconfig           | 27 +++++++++++++++++++++++++=
-++
->> >  4 files changed, 69 insertions(+)
->> >
->> > diff --git a/board/mediatek/mt8390_evk/MAINTAINERS b/board/mediatek/mt=
-8390_evk/MAINTAINERS
->> > new file mode 100644
->> > index 00000000000..73fc28b096e
->> > --- /dev/null
->> > +++ b/board/mediatek/mt8390_evk/MAINTAINERS
->> > @@ -0,0 +1,5 @@
->> > +MT8390 EVK
->> > +M:   Julien Masson <jmasson@baylibre.com>
->>
->> Since Julien Masson is marked as maintainer here, can we guarantee he
->> will be doing some testing/reviewing on patches for this particular
->> board?
->>
->> If not, maybe find another maintainer.
->>
+> Hello Mattjis!
 >
-> Hi Mattijs,
+> On 30.01.26 17:35, Mattijs Korpershoek wrote:
+>> Hey Heiko,
+>>=20
+>> On Thu, Jan 29, 2026 at 15:09, Mattijs Korpershoek <mkorpershoek@kernel.=
+org> wrote:
+>>=20
+>>> On Thu, Jan 29, 2026 at 11:41, Heiko Schocher <hs@nabladev.com> wrote:
+>>>
+>>>> Hello Mattijs,
+>>>>
+>>>> On 29.01.26 11:09, Mattijs Korpershoek wrote:
+>>>>> On Mon, Jan 26, 2026 at 16:46, Heiko Schocher <hs@nabladev.com> wrote:
+>>>>>
+>>>>>> Hello Mattijs,
+>>>>>>
+>>>>>> On 26.01.26 10:48, Mattijs Korpershoek wrote:
+>>>>>>> Hi Heiko,
+>>>>>>>
+>>>>>>> Thank you for the patch.
+>>>>>>
+>>>>>> You are welcome!
+>>>>>>
+>>>>>>>
+>>>>>>> On Sat, Jan 24, 2026 at 06:47, Heiko Schocher <hs@nabladev.com> wro=
+te:
+>>>>>>>
+>>>>>>>> Not for all SoCs the bootloader start at offset 0x0,
+>>>>>>>> in a hardware partition of an emmc. So we need the possibility to
+>>>>>>>> set the correct offset, where bootloader starts.
+>>>>>>>>
+>>>>>>>> Example:
+>>>>>>>>
+>>>>>>>> imx8qxp revision C0 emmc Partition layout
+>>>>>>>>
+>>>>>>>> | eMMC block / partition | Offset     | Size  | Purpose           =
+             |
+>>>>>>>> | ---------------------- | ---------- | ----- | ------------------=
+------------ |
+>>>>>>>> | /dev/mmcblk0boot0      | 0x0        | 2MB   | imx-boot-container=
+ A           |
+>>>>>>>> |                        | 0x00220000 | 128kB | secure boot signat=
+ure rootfs A |
+>>>>>>>> | /dev/mmcblk0boot1      | 0x0        | 2MB   | imx-boot-container=
+ B           |
+>>>>>>>> |                        | 0x00200000 | 8kB   | U-Boot env 0      =
+             |
+>>>>>>>> |                        | 0x00202000 | 8kB   | U-Boot env 1      =
+             |
+>>>>>>>> |                        | 0x00220000 | 128kB | secure boot signat=
+ure rootfs B |
+>>>>>>>>
+>>>>>>>> imx8qxp rev B0 emmc Partition layout
+>>>>>>>>
+>>>>>>>> | eMMC block / partition | Offset     | Size  | Purpose           =
+             |
+>>>>>>>> | ---------------------- | ---------- | ----- | ------------------=
+------------ |
+>>>>>>>> | /dev/mmcblk0boot0      | 0x00008000 | 2MB   | imx-boot-container=
+ A           |
+>>>>>>>> |                        | 0x00220000 | 128kB | secure boot signat=
+ure rootfs A |
+>>>>>>>> | /dev/mmcblk0boot1      | 0x0        | 8kB   | U-Boot env 0      =
+             |
+>>>>>>>> |                        | 0x00002000 | 8kB   | U-Boot env 1      =
+             |
+>>>>>>>> |                        | 0x00008000 | 2MB   | imx-boot-container=
+ B           |
+>>>>>>>>
+>>>>>>>
+>>>>>>> Why can't we use raw partition descriptors for this?
+>>>>>>>
+>>>>>>> See:
+>>>>>>> https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partiti=
+on-descriptors
+>>>>>>
+>>>>>> Thanks for this hint!
+>>>>>>
+>>>>>> Possible yes ( I must try)... but this will lead in adding
+>>>>>> complexity to scripts people use all over there and needs
+>>>>>> to adapt CI setups, as siemens has B0 and C0 variants.
+>>>>>
+>>>>> If you try, please let me know.
+>>>>
+>>>> I am sorry, did not find time yet... sorry.
+>>>>
+>>>>> Do the same boards (as in U-Boot board definition) have multiple SoC
+>>>>> variants (B0 and C0) ?
+>>>>
+>>>> Yes there is the capricorn board in U-Boot and it have different
+>>>> variants (not all mainlined yet) with B0 and C0 variants...
+>>>> number of boardvariants grown over the years, started even with A0 SoCs
+>>>> (IIRC)...
+>>>>
+>>>>> In that case I understand it's a pain to add more script complexity.
+>>>>
+>>>> It is. and U-Boot could easily detect the SoC revision... and it is
+>>>> fix ... so no need for having this configurable and making mistakes...
+>>>
+>>> I agree.
+>>>
+>>>>
+>>>>>> If we introduce this series, user has nothing to know about
+>>>>>> offsets for different CPU modules as no change in API for
+>>>>>> them...
+>>>>>
+>>>>> I understand, and I do like this approach as well. I just don't like
+>>>>> having 2 code paths/approaches for the "same thing".
+>>>>
+>>>> Hmm... understandable...
+>>>>
+>>>>>
+>>>>> I am not saying that this is a NAK, but i'd like to iterate a bit to =
+see
+>>>>> if we can either deprecated raw partition descriptors (and migrate
+>>>>> existing boards) or use that everywhere.
+>>>>
+>>>> No idea if this is possible for all boards?
+>>>>
+>>>> May user want to write "some data" to an offset... which is not
+>>>> SoC/board dependent...
+>>>>
+>>>> "flash bootloader" is well defined -> flash the bootloader, so I argue
+>>>> that this should simply burn the bootloader to the correct offset...
+>>>>
+>>>> "raw" interface -> do what you think you need write to wherever you wa=
+nt...
+>>>>
+>>>>> I will try to use this series on VIM3 to see how it behaves. It will
+>>>>> take some time though.
+>>>>
+>>>> VIM3 ? Is this a imx8qxp based hardware?
+>>>
+>>> No VIM3 is a board made by Khadas that has an Amlogic SoC. But they use
+>>> the raw partition description for bootloader offset:
+>>>
+>>> include/configs/khadas-vim3_android.h
+>>> 52:     "fastboot_raw_partition_bootloader=3D0x1 0xfff mmcpart 1\0"    =
+ \
+>>> 53:     "fastboot_raw_partition_bootenv=3D0x0 0xfff mmcpart 2\0"       =
+ \
+>>>
+>>> So i'm wondering if this series can be useful to the VIM3 (so that we
+>>> could drop the fastboot_raw_partition_* from khadas-vim3_android.h)
+>>=20
+>> With some hacking around, I could drop both above fastboot_raw_* from
+>> the vim3 environment and use fb_mmc_get_boot_offset() instead.
 >
-> I checked with Julien Masson and he wants to be maintainers, but I
-> also added Macpaul Lin from Mediatek, as co-maintainer.
+> Cool, thanks!
 >
->> > +S:   Maintained
->> > +F:   board/mediatek/mt8390_evk/
->> > +F:   configs/mt8390_evk_defconfig
->>
->> Could we add this board to the MediaTek board documentation?
->>
->> https://docs.u-boot.org/en/latest/board/mediatek/index.html
->>
->> I know that doc is a bit outdated but it would be nice to improve it and
->> list this board.
->>
->> For me, that can be done in a future series/improvement.
+>>=20
+>> The issue I have is that fb_mmc_get_boot_offset() will return the same
+>> offset for both BOOT1 and BOOT2. I'd like to pass a struct blk_desc* to
+>> fb_mmc_get_boot_offset() so that I can specify the offset based on
+>> desc->hwpart.
+>>=20
+>> Do you think that's reasonable?
 >
-> I forwarded the request to Mediatek internal teams, and they will
-> handle this internally.
-> With the Lunar new year vacation coming they won't be able to do this
-> before end of February.
-> Same for other new coming boards.
+> Of course!
 
-Ok, thank you. looking forward to see some doc updates !
+Great, thank you. I'll go ahead and do a more formal review of your
+series and will build on top once this is merged.
 
 >
-> Cheers,
-> Julien
+> But I wonder, does this hardware boot from different offsets from
+> different hardwarepartitions? Sorry, if dummy question...
+
+It's not a dumb question.
+
+Yes, the boot rom expects the bootloader to be at an offset.
+To quote the docs:
+
+"""
+On GXL and newer boards it expects to find the FIP binary in sector 1, 512 =
+bytes offset from the start.
+"""
+
+Also see:
+https://docs.u-boot.org/en/latest/board/amlogic/boot-flow.html#boot-modes
+https://github.com/LibreELEC/amlogic-boot-fip/pull/8
+
 >
->>
->> Thanks
->> Mattijs
->>
+>> I won't ask you to do this in this series. This will be work I'll do
+>> after this is merged.
+>
+> Fine for me.
+>
+> Thanks!
+>
+> bye,
+> Heiko
+>>=20
+>>>
+>>>
+>>>>
+>>>> Thanks for your time!
+>>>>
+>>>> bye,
+>>>> Heiko
+>>>>>
+>>>>> Thanks
+>>>>> Mattijs
+>>>>>
+>>>>>>
+>>>>>> bye,
+>>>>>> Heiko
+>>>>>> --=20
+>>>>>> Nabla Software Engineering
+>>>>>> HRB 40522 Augsburg
+>>>>>> Phone: +49 821 45592596
+>>>>>> E-Mail: office@nabladev.com
+>>>>>> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
+>>>>
+>>>> --=20
+>>>> Nabla Software Engineering
+>>>> HRB 40522 Augsburg
+>>>> Phone: +49 821 45592596
+>>>> E-Mail: office@nabladev.com
+>>>> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
+>
+> --=20
+> Nabla Software Engineering
+> HRB 40522 Augsburg
+> Phone: +49 821 45592596
+> E-Mail: office@nabladev.com
+> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
