@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20798E7FDC7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 20:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33325E7FDEF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 21:43:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7463683F63;
-	Mon,  2 Feb 2026 21:17:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 93BE683F63;
+	Mon,  2 Feb 2026 22:43:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jYY1xhuX";
+	dkim=pass (2048-bit key; secure) header.d=debian.org header.i=@debian.org header.b="mvknE4r/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F40283F64; Mon,  2 Feb 2026 21:17:12 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4AC7383F6D; Mon,  2 Feb 2026 22:43:34 +0100 (CET)
+Received: from cascadia.aikidev.net (cascadia.aikidev.net
+ [IPv6:2600:3c01:e000:267:0:a171:de7:c])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5504283F59
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 21:17:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E9EC83F59
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 22:43:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-45efe81556fso3300121b6e.2
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 12:17:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770063429; x=1770668229; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nJXc7dE50loloIEG4z78T6H7odzkS6k1JSAcoB1hRsY=;
- b=jYY1xhuXKz8b/PlJXIhb5flziohXwTXVEfokvNjtgrfnzp4RmxEPrSq0Ax6mpnLonZ
- mPuQG8Gs+OQa5/a+UcnDKzZfQfxaP1jVpf3OJtoGGDGH7I65sPOEsAsHt7AsfzXFuTyi
- xiwXZrW8JSCJ6nXHw13wCQR682fnFi6I+GEvg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770063429; x=1770668229;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nJXc7dE50loloIEG4z78T6H7odzkS6k1JSAcoB1hRsY=;
- b=pvPnQxIx/3i2qQXakaVY3H7e38D4AY2FxDUjuoB5UPDrdunsRUwWjlOIQz5WiJiCeH
- JO4lJgP43xuqsVfim8hJM7bXAru4OGGc9OlPj2qkQ5KgUzIMTr6PsaHgUIuxeAZzgQPQ
- ipxP6K6XFsUTfF801/irhLGBuwD7TLSgbhUz7t0+RYjfhbgxECnM2nLD8jph+Fv6DdFQ
- xdR9hPOSPTxSbzULM/Xgh9T11yW9slonTQ3v11JKE9ilPEAZ/SDq1Y4Meat3Re8/8N6J
- OhVEKfYyJRGKSRJCiXDyPQU9kEXE1b7j0DHE1vnH9UdsFZje/r5pJ3Ajq5WhnPG0iYwW
- mAqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU0AILO9OEkteBmIloH1ui/dGGx/9MXD6A/JAn2x6l5sz/7XEeIapdSDJ6dMqvMOkLEq+M4hE0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyS9rxtBPWoUbL8BqNU8JF4dj6GXjbZeQC1X+kb9EPI6E0PGj3j
- JWfJgERgFA7+jaObWeMUDHgOiJ+ySNKNUL7xiFWoKx607zFSaNjfbPsmzWQ0hkhFmXA=
-X-Gm-Gg: AZuq6aL7lwevLg8f/zdJK38Co7IW//Z24P2G57ydg2dMIztcxXBSA2N6XnlYpgghOxN
- S6IhMtwz4VFh8huvXpUY7Q+ov1AQ9DhlnXj4PK6eooMURQJjxFBQvjIlGdLdwv1Y2CIiuBhk7rU
- SjiE1A0W+mFR7g9FQFOSC80Le3OXWvqSieF9fbDwsa/ljQu+NHZe4N5x+kYtEGAU1TVVattAh8H
- nuKHyLNH+k5MF4namN7i2Iu31fbKRK+uxdura5rNhbRsDLyUcL5+f6CScZI/guRga6mMOw4RYNN
- ABYyM5h7270gOWU6Rl8XBwBGEHXYYOlA8Nei6kE9RIqGRCqm6JktBTAG79turKPTiHJUucsxL5n
- 9Xi1JCA6tJ+P5uQ39z4ZUrzYPRa53+XSE4ZIsziTMQAmLZIP28nrkd9Z6d2ZIf+Bf4xI1JDV4TY
- UYO4v0w12xopYDKYN3FX5OctWwZhgPQZzJoOVOXV9xjGDsfYKd1gHZn1uCc6w2lLAfBv17nxOUy
- +ylLmRtY/7V0WLydpLE77RXVhkJNxfQ6BvGb/A=
-X-Received: by 2002:a05:6808:3084:b0:455:7fe4:b215 with SMTP id
- 5614622812f47-45f34d3baedmr6513922b6e.53.1770063429060; 
- Mon, 02 Feb 2026 12:17:09 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45f08fb3887sm9944418b6e.20.2026.02.02.12.17.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 12:17:08 -0800 (PST)
-Date: Mon, 2 Feb 2026 14:17:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yang Xiwen <forbidden405@outlook.com>
-Cc: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- Simon Glass <simon.glass@canonical.com>
-Subject: Re: [PATCH v3 0/6] clk: support arbitrary clk_register() sequence
-Message-ID: <20260202201706.GA4073175@bill-the-cat>
-References: <20260120-clk-reparent-v3-0-0d43d4b362ac@outlook.com>
+ spf=none smtp.mailfrom=vagrant@debian.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=debian.org;
+ s=1.vagrant.user; t=1770068609;
+ bh=9QtmwneOEmQH0e27d6TV7fj/szUzWrmaIuNMWgfYUyU=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=mvknE4r/QOo+w0b30OvgNJe8FSRzuPEe73vQNU6kCaoVifjnXhxphIGTDyxxPDqVE
+ cGUQRkQhdFzlBZjr3/DI2i2/6D6c9AtnFiIABAVLQFS5SkuFTvshf3I/cXhMV+/VAO
+ FQe3Ffi/92a7xiKBzcrLKfgXMBeVEi3Ew+q7MSShgR6HIWp2L46TIcPnE2bAVi4eZN
+ 18hovQNAFfaB18SK03qUZPj0oTWgwC5VatHfItk+Fk5I8oTcwf5ydEo2NPul/sVD1P
+ nwrw8HREKDHOy0nswEa9Re4f1KAjCW5U/lXYJxP34dI9rt77KEAvzaGiV1Ccz2ZQME
+ J5/un+Vl2rJhQ==
+Received: from localhost (unknown [IPv6:2600:3c01:e000:21:7:77:0:20])
+ by cascadia.aikidev.net (Postfix) with UTF8SMTPSA id 1F555D39C;
+ Mon,  2 Feb 2026 13:43:29 -0800 (PST)
+From: Vagrant Cascadian <vagrant@debian.org>
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: rk3588 MNT Reform2 fails to boot from SD card
+In-Reply-To: <cfdccb81-4bc7-4e7b-accd-0524206f4547@cherry.de>
+References: <87ikcjc1oc.fsf@wireframe>
+ <11f467e2-1059-4edb-81a2-8b970b315882@cherry.de>
+ <87bjiabyhz.fsf@wireframe>
+ <cfdccb81-4bc7-4e7b-accd-0524206f4547@cherry.de>
+Date: Mon, 02 Feb 2026 13:43:20 -0800
+Message-ID: <87o6m6lt3b.fsf@contorta>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FgmA9ClJ/K4a+cSi"
-Content-Disposition: inline
-In-Reply-To: <20260120-clk-reparent-v3-0-0d43d4b362ac@outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: multipart/signed; boundary="=-=-=";
+ micalg=pgp-sha512; protocol="application/pgp-signature"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,53 +69,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---FgmA9ClJ/K4a+cSi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-=-=
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 20, 2026 at 03:07:17AM +0800, Yang Xiwen wrote:
+On 2026-02-02, Quentin Schulz wrote:
+> On 1/30/26 10:07 PM, Vagrant Cascadian wrote:
+>> On 2026-01-30, Quentin Schulz wrote:
+>>> On 1/30/26 2:46 AM, Vagrant Cascadian wrote:
+>>>> Thanks for adding support for rk3588 MNT Reform2!
+>>>>
+>>>> I tried using u-boot 2026.01 with the rk3588 MNT Reform2, but it only
+>>>> gets as far as SPL, and then fails:
+>>>>
+>>>>     U-Boot SPL 2026.01 (Jan 01 1970 - 00:00:01 +0000)
+>>>>     Trying to boot from MMC1
+>>>>     mmc_load_image_raw_sector: mmc block read error
+>>>>     Error: -38
+>>>>     SPL: Unsupported Boot Device!
+>>>>     SPL: failed to boot from all boot devices
+>>>>     ### ERROR ### Please RESET the board ###
+>>>>
+>>>> I *think* MMC1 is eMMC, which I currently have blanked, as recovering
+>>>> from a failed install on eMMC is trickier.
+>>>>
+>>>
+>>> It's surprising it isn't trying MMC1 twice as that's what it's supposed
+>>> to do due to u-boot,spl-boot-order containing "same-as-spl" and the eMMC
+>>> controller again later in the chain (see the property).
+>>>
+>>> In any case, no support for the SD controller in SPL according to the
+>>> defconfig, can you try with:
+>>>
+>>> """
+>>> diff --git a/configs/mnt-reform2-rk3588_defconfig
+>>> b/configs/mnt-reform2-rk3588_defconfig
+>>> index 6adc9e4e60c..982e6c6eb20 100644
+>>> --- a/configs/mnt-reform2-rk3588_defconfig
+>>> +++ b/configs/mnt-reform2-rk3588_defconfig
+...
+>>> +CONFIG_MMC_DW=3Dy
+>>> +CONFIG_MMC_DW_ROCKCHIP=3Dy
+...
+>>> and report if it gets you further?
+>>=20
+>> Much further, indeed! With that applied to 2026.04-rc1, I managed to
+>> load the kernel, initrd and dtb from NVMe, and boot all the way to a
+>> rootfs!
+>>=20
+>
+> Good to hear!
+>
+>> With one big downside... no display on linux (eDP? panel, or on
+>> HDMI). Neither upstream u-boot or vendor u-boot provided output on the
+>> display, so that part is not a regression.
+>>=20
+>> I have a slightly older rk3588 module that does not use dsi -> eDP, that
+>> might be an issue... maybe upstream u-boot vs. vendor u-boot is
+>> configuring or not configuring something needed...
+>>=20
+>
+> We should have HDMI support for RK3588 for a few releases in Linux=20
+> already. It works on RK3588 Tiger and Jaguar last time I checked. Maybe=20
+> missing/disabled DT nodes for your module, or drivers not=20
+> selected/installed.
+>
+> There should be eDP support as well, we use those lanes on RK3588 Tiger=20
+> Displayport carrier which uses eDP for the DP connector. I tested that=20
+> with=20
+> https://lore.kernel.org/linux-rockchip/20251009225050.88192-1-heiko@sntec=
+h.de/=20
+> so maybe missing DT nodes for either the eDP controller or the panel for=
+=20
+> your board?
 
-> Currently, the U-Boot clk framework mandates that clock registration
-> begins at the root and proceeds to children. This creates an additional
-> requirement that does not exist in the Linux kernel, making the porting
-> of clk drivers more difficult.
->=20
-> This series handles the dependency entirely within the clk framework,
-> allowing drivers the freedom to register clocks in any order.
->=20
-> This is achieved by assigning the parent "lazily". The framework caches
-> the parent name in the core clk struct and attempts to resolve the
-> actual parent when clk consumers call clk_get_parent(). The process is
-> transparent to clk consumers as long as they use standard clk framework
-> APIs.
->=20
-> I've run `ut dm clk*` and verified these commits do not break any
-> existing test cases. It also passes the new test case.
->=20
-> This feature is disabled for xPLs by default. I have not found a clean
-> way to enable this separately for xPLs without introducing a repetitive
-> Kconfig entry (e.g., xPL_CLK_LAZY_REPARENT), which looks very ugly.
->=20
-> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+Oh, the linux kernel definitely works; with a vendor u-boot both eDP
+panel and HDMI output work, it is only when booted from upstream u-boot
+that I do not get display output in linux.
 
-This, like some previous clk reworks, leads to run-time breakage
-(failure to boot) on TI K3 and likely other platforms (I want to say
-some rockchip was broken last time) as well.
+Unless there is some kernel configuration required when booting from
+upstream u-boot that are not required with the vendor u-boot, but my
+hunch is there is something just not getting configured (or getting
+configured incorrectly or just differently) in u-boot.
 
---=20
-Tom
 
---FgmA9ClJ/K4a+cSi
+>>> I think you'll be missing support for
+>>> the CD gpio as well in SPL.
+>>>
+>>> So probably you need to enable SPL_GPIO:
+>>>
+>>> """
+>>> diff --git a/configs/mnt-reform2-rk3588_defconfig
+>>> b/configs/mnt-reform2-rk3588_defconfig
+>>> index 6adc9e4e60c..7485d03a0cb 100644
+>>> --- a/configs/mnt-reform2-rk3588_defconfig
+>>> +++ b/configs/mnt-reform2-rk3588_defconfig
+>>> +CONFIG_SPL_GPIO=3Dy
+...
+>>> +CONFIG_MMC_DW=3Dy
+>>> +CONFIG_MMC_DW_ROCKCHIP=3Dy
+...
+>>> aaaand also enable it in SPL DT:
+>>>
+>>> """
+>>> diff --git a/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+>>> b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+>>> new file mode 100644
+>>> index 00000000000..47509f4cb37
+>>> --- /dev/null
+>>> +++ b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+>>> @@ -0,0 +1,9 @@
+>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>>> +
+>>> +#include "rk3588-u-boot.dtsi"
+>>> +
+>>> +/* SD CD */
+>>> +&gpio0 {
+>>> +	bootph-pre-ram;
+>>> +	bootph-some-ram;
+>>> +};
+>>> """
+>>>
+>>> I believe?
+>>=20
+>> Do you think it is worth testing this part as well? Or is booting to
+>
+> Likely yes.
+>
+> Can you test having U-Boot TPL+SPL (idbloader.img) on eMMC (block offset=
+=20
+> 64, 32KiB), but not U-Boot proper. Have U-Boot proper (u-boot.itb) on SD=
+=20
+> card (block offset 16384, 8MiB).
+>
+> U-Boot should boot from eMMC first and then fallback to SD card next.
+>
+> You can also try the opposite to verify this is properly setup as well.
+
+Before messing with eMMC, I will have to dig up how to successfully
+recover from if u-boot on the eMMC is good enough to load, but not
+actually work...
+
+At least with some rockchip boards in the past this involved shorting
+pads on the motherboard at just the right timing, which was, let us say,
+not very fun. :)
+
+Hopefully this is a little easier with the mnt/reform! :)
+
+
+> The BootROM initializes various controllers such that if U-Boot doesn't=20
+> need to use another storage controller in SPL (or in proper=20
+> pre-relocation) it'll likely reach U-Boot proper (and Linux) just fine.
+>
+> You can have this split in two commits. One to make it possible to boot=20
+> from SD card, another one for supporting fallbacks.
+
+Sure, will see once I have a better idea how to recover from unfortunate
+surprises. :)
+
+
+live well,
+  vagrant
+
+--=-=-=
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYEGPgAKCRAr4qD1Cr/k
-ChNgAP9fw5UENq+xYD6SJ2hJBOI3hJ6FFynPu21p8tqlyuZRGwD/Xb/W44P7sTjE
-j/XYqogasiYod8zJG6vPswHEngMuOgY=
-=RMAy
+iHUEARYKAB0WIQRlgHNhO/zFx+LkXUXcUY/If5cWqgUCaYEaeQAKCRDcUY/If5cW
+qnL9AQCEPzVJYbR4BZuXvAzq+6cw2eGWvBfewDmyLNA5UxeA6wD+KAYcMcTSXrWQ
+0UaM1yBffM2rNzxYRBXuvV7v32q4eQs=
+=3P1E
 -----END PGP SIGNATURE-----
-
---FgmA9ClJ/K4a+cSi--
+--=-=-=--
