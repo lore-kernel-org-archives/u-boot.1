@@ -4,97 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9BF3E7DF0F
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 19:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F117E7DF1A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 19:09:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33EE083E76;
-	Mon,  2 Feb 2026 20:03:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60F2383E76;
+	Mon,  2 Feb 2026 20:09:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ptzt3fIk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m5G3m3Dg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7201283E83; Mon,  2 Feb 2026 20:03:16 +0100 (CET)
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [IPv6:2607:f8b0:4864:20::a2c])
+ id 1155D83EC8; Mon,  2 Feb 2026 20:09:23 +0100 (CET)
+Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
+ [IPv6:2607:f8b0:4864:20::935])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35CF183E69
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 20:03:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE3F083E69
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 20:09:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-56641b5a471so4377824e0c.2
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 11:03:14 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770058993; cv=none;
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-948ba5ccf54so919993241.1
+ for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 11:09:20 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770059359; cv=none;
  d=google.com; s=arc-20240605;
- b=egQQcIXM683sE+NiQH4JwYg2/2b0S8cBHjeVQoc8cvpyM5ucDAWfbzJAeVx0CNQprb
- zTI25krCkB75+NOsWJ646OYA7q3UnxzPqGk/+HcbAWonocpGSir/W6pb/20jvhcw94Af
- RFerNP6Skmx6kyLqZVlEtjKD0In6s4pDbBRFtTXry3j4DGJzWv/kdisoexCUp2MLsLZC
- b5jOoaK5K4KyRHLVIQsx7DWM2gy5aFRXgi6Q6Ni/she9nTq0DnD/IP/N6Si0Dmu7T2FX
- VZI+iSFir8hYTXXRrJi2d9gBUShAYS/vDArRjT1j/hvcx1VtHMmVwQB2ra111uyEP/dU
- dPxA==
+ b=VY48LiCaHA5z8GVktNmudevDSFN/LUiF9F/rTNU2n6xxegEj0IyausnBY/0E5rVk67
+ YpD07beArulDyQoZaLYhrlmfh97AhcuOWa1w63jycMuPZJ7aohsnigU1VMN5TNL2Ett1
+ 4mQWbvl+qXDHyam8XONjbQPcwSPpWRZRuepyi4pNsYu6RtOv8kTwL50raaZenS169SZs
+ s5zPPcEnGARGIAV5WTWcS4QIlLfdJmAtmDWjFcHeMIuGBqul9s0KTkCGGGJsaAqL29Ew
+ YNpqJxas1SXdd3QcB+mRRCKcsNBEatpuyyD/3EPaaTU5bsAK0rjEw8ra5Qo6cjmUOlEE
+ ie6A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=kqSAjLyiY7v9pZ2k9phL3y0Jp0Q6l5EZ1xVcGlkdY60=;
- fh=v5r7wtvmu5ksc4UlsEeLTQ6wPVTb7MZwCU5YxQkFxKI=;
- b=Qq0QhVvtMHl8DvNP5eYJqocvJ2szkt31CDn7HhicJ9uahyuLvmYiL3WGe2R6IXFRy7
- wjEs22kBVUGTYa2JUPGGuQJH1hI8LhhmyS4oO4WPiRI5Y8+UTOgTL9UYBSFGlPy1naIt
- OYCXzEYOx00OcbD6QbIbnmWDZHdx0EKTP/biD3rdTYYYniHKE3XDkOjZNOlZEuxg0WAs
- ggQGk5ge3OlF2mLiUtYNLF7t9Hyhl6ROURRB46n6ssT+bOlNxHO9t4CHzFWGENWb1cc9
- HwoW6dZ1oPdEjmF4m11qfLbB8BrgjI1JJnfWiP66mcLmhue2Z3YkfNdOJF2TiJ4URV95
- T33w==; darn=lists.denx.de
+ bh=636Nt5FsDOJsP0UNoOXmTzQFXKcKQyKoU+oMZP4hXZ0=;
+ fh=4K556WZTFD9Ha3MgeEZO9JmBFcN0bFURshodY8wtXm4=;
+ b=HKJQDB2n6hXOAp1Kc0UtB4TkUoU7BgjlzK5IngCR6cwQjhYDEeDCOv0qxeD4tw/0TB
+ txMe5fGlRbG9s9yjuUaqq6JYmiQYBAeL0YPRlwZx1ilcwrKqlwmtJBP8jXQMQ6HLezQo
+ Tpz0rbrC03+QSWt2Mf81VX0lElTTZj6oM4Xis86b+RRAU+9TySseX2Xa9F1TNtXNHkta
+ z0gELDwaLbu/1qAQwmNYVFaqweEiEmvEour7sqcWY7WOWKT8ZWVC+8xCrPYvvflAkF/X
+ S8IseM/PH1NVYIUQqYhBVkdY/IOrP7fM+Nz2Iuo1dcai3d9JLeoJjz4UurnBIqq+btSg
+ tFRw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770058993; x=1770663793; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1770059359; x=1770664159; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kqSAjLyiY7v9pZ2k9phL3y0Jp0Q6l5EZ1xVcGlkdY60=;
- b=Ptzt3fIkKCzb0bakjMzG3zQT59m/9U9YpLQ8iwRpjp+PAhMIoXUvGim3JqayIDKirh
- h8PvQJ0GrgmFFq7eWCqwy2d/NUnq4wgEMpwXzzx5VXjJz0FEGq6zx4MQlKBHH7kbmiaE
- vHo1CSNz282maKOFQVHvmVm9hz658z0GKfPUQkqYSy/hGV+SloqXwv8PDA1API+XzxZp
- A3/uIlwe6fXWxOuRU/R+jleUa8jC8CSwqRE/nVzl8EPUj1tzVhB1h0+Kz/0yGsd9pTF5
- d0hmys4UgYA7B7ZYwjRLrFhY5XLYJHvRHQBO4zbKmmiijJjika58gwp/bXI/rhoCtVbN
- hBmg==
+ bh=636Nt5FsDOJsP0UNoOXmTzQFXKcKQyKoU+oMZP4hXZ0=;
+ b=m5G3m3Dg8E6c1yZxFYhaMiaxzUDmhnb6+OEqvWe2kBbLCMjtXTC+qo33ZQmW5//7r1
+ xqZwP7eSEt+8oIQNyQlxZ1c1RMtKSJo3W0hEvdpzVSgZZR5SJLUohRMC1XpCPsml7R9g
+ lrcqOIu1ztUW/j5fYghc42/quEvWcsR+U4fgQZXxs1MuYLmo5Not/TjdJN7gS/IVj7eo
+ mV1eJAlXHo3uMzjVErdR9yfjLup4CcWnGdZM62IpxpW43Aup51r/0Di2kj5r7qu8nAbF
+ /sK5eFSaihO4RIW5DtFZR/06TrLDCxtWzEsyWQWrGUQ1ASPQlbN8zawFGwtZfl1NROTi
+ UamQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770058993; x=1770663793;
+ d=1e100.net; s=20230601; t=1770059359; x=1770664159;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=kqSAjLyiY7v9pZ2k9phL3y0Jp0Q6l5EZ1xVcGlkdY60=;
- b=eokUQDpol6sPaUFPFXPDtuxisM033GASJVuRn2C1eG5CCB+BMee7BWK/VW19If4DA9
- bXydO5X4xSkAhY7eJLgvrBMzlE409C5uklHqzA1Jf+oScm44sS2z1SBkGUmCt74WuzcM
- N4o+9VgLIkJVqe7Fp8atUgfKBRnqFwyoC7M1Gn4Sp0W+8SNdI2FoAcfu1eo4J4FBzS/P
- XB1b4hKyM402YzybIgY7btcG4+0Oo7S3hTDup5KA6MuJl7FzSDiDT3QD8wAs59iEx4Kj
- MjNQcjMviumwEEP5ni6boiYuIcp9lMS9kwng9aegnSXTSvedUbWp2EL9Dp+fsuR/GrGc
- lEsw==
+ bh=636Nt5FsDOJsP0UNoOXmTzQFXKcKQyKoU+oMZP4hXZ0=;
+ b=fkZQvPohHbX3TaAe2DFTOYX3/qT+YAzKeE0NcLUuo5FsWmxv+E7eHAVHwXsCYzg25P
+ DLfYYMhEUyPD9YLUbG27HSKEEqdChEr0OV9uNZBeVdEAFLl+yDJ1rS0HMxTeUaVGtJzA
+ 8DdOq/q+vKbvKcnMeKo4lAXv2sujja7Q70BL8Uel573OQjz8nCkbz7a1MfhihwCqvqjr
+ 0aJS4OCULO1hG4R8NkWVRnZcgbUJOMD2Yy00DKHBlo+SexLHS9ajuMtgrPuJsjfX/ysW
+ xFYymhszi0lzF2HCIxWhpp9YBljzO//KMCGwWfmd6bH4apAEP8S7NAgexhH/2h+Ta/Lf
+ eD4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVtxjoobm/eMmG+ssB7G0t7OSmwEFZNg7iEvDF0AXvdMhcPZm3QRu1KxofVGrgENHZGrAmDYD8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtGKu96WXN5di+vbMwXTj3tZBd43Xdsp3B7gGD0IRrOUl9/Ti0
- ItTjGNrTM+Sylq+uS5+ktXcntXuX5Aledgp/2tvQWGPGtTlsHu6U/YthOS9O2DfT2pCRUBNOX7X
- 93j4yJRpz7/EQh3g4uofRqn9L5iQTjMcTlBz7oLs=
-X-Gm-Gg: AZuq6aKdENcRep2hiIFtVElX7VqlndDCfDeKtVEI9NF0/68SnO+c3C5LR5rPmQgHuwp
- Y+NhIqBw+DJ7dnkXoSuGIshokZ5M18dWigpztwLiwn+icW7bnlx0dU+Ph/VgQvDgRxJHjy4gBdq
- 2ZJuCk9et3R2Zbmx8zfQq8ojnPKY7hA0eqCwx2lEJ7ffNjQRiSRKYuyWvfr97YA92tK/jLgSOSI
- 6XdpZeL++z+I71sjWYxAhAqVOikFNTK8HS14E8Dg0g7Pi3FFwPpFTVyYZ21bgM+wt7KzFFO
-X-Received: by 2002:a05:6122:8603:b0:559:6960:be0d with SMTP id
- 71dfb90a1353d-566a00a537emr3860388e0c.13.1770058992925; Mon, 02 Feb 2026
- 11:03:12 -0800 (PST)
+ AJvYcCXEok0nC185hH6My8rOZJ6Ue0Ba6+N29PpwE5qfFW6Wyq+UhojDBss4+svIdMbade5BDjy+xbg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyoMFWkh5my6sIbZ5vM11W/9enF4GmUlfV2+YOkOKti8M8DH2qA
+ T9OZ9a1JlBeMO+A6U2qRawKY3N6A3TwI/Y706U8XDDsXLL0YCbS/fy/7j12MpcTQ5dDouhEKY/h
+ 6jy2aEE3C1vYlbCsA6AArFNd7RfjtZCo=
+X-Gm-Gg: AZuq6aK0hVSZS74RWMQDU1ZdwX96KfjxFFQelynAXfaqRs9rOQCbGvMZhiTbQUtxXqY
+ VwQKO7n/ZA3L7igQVEGx0buEvnNvbxET0vSuP3bcBJvy66VM19Aguc7ju/mfEfkJY12yCMXzfep
+ yX1ZfKywJ2QC9gH7yxR95JDPvLVuiINDTeTwlwMjxE6zxcI4L3xj7Zo16G2yqJuegEeI5fGdlAI
+ 46K4t6Vyx2AurJJPNLSszDkKlOMZ8K6VvAPgnwjfqOA+sP41ldr1Khr6HdSnwR8kgWWyjra
+X-Received: by 2002:a05:6102:3749:b0:5f1:6c5d:9b28 with SMTP id
+ ada2fe7eead31-5f8e24c2019mr4036350137.15.1770059359303; Mon, 02 Feb 2026
+ 11:09:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20260202170307.217200-1-philippe.reynes@softathome.com>
- <20260202170307.217200-2-philippe.reynes@softathome.com>
-In-Reply-To: <20260202170307.217200-2-philippe.reynes@softathome.com>
+In-Reply-To: <20260202170307.217200-1-philippe.reynes@softathome.com>
 From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Mon, 2 Feb 2026 14:03:02 -0500
-X-Gm-Features: AZwV_Qi2KqcBZi_KyTckBuUUcO4yIk75-yKNBaWEkxCiO6KeGaANOCpKG6nMkto
-Message-ID: <CAMDkj5xOf8ULygSzOaz04FFay3HvJqnHT5rmo6cjr5XmusrPgQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/4] mbedtls: enable support of ecc
+Date: Mon, 2 Feb 2026 14:09:09 -0500
+X-Gm-Features: AZwV_QhcoHMPVr30dB-OcDid0QKUhHPztCWpGULtlh4SRcy1bju2Jv7vn_7sKDw
+Message-ID: <CAMDkj5wmhno4X4ASNwwdqQmi-EnZDq9JWQfAJU+p2pGNK1MW+A@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/4] add software ecdsa support
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -120,119 +119,89 @@ Hi Philippe,
 On Mon, Feb 2, 2026 at 12:05=E2=80=AFPM Philippe Reynes
 <philippe.reynes@softathome.com> wrote:
 >
-> Enables the support of ecc in mbedtls.
+> This serie adds the support of ecdsa with software
+> using mbedtls. So boards without ecdsa hardware may
+> also use signature with ecdsa.
 >
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
->  lib/mbedtls/Kconfig              |  8 ++++++++
->  lib/mbedtls/Makefile             |  7 +++++++
->  lib/mbedtls/mbedtls_def_config.h | 18 ++++++++++++++++++
->  3 files changed, 33 insertions(+)
+> To add the support of ecdsa with mbedtls, I have:
+> - enabled ecdsa in mbedtls
+> - add a function sw_ecdsa_verify that uses mbedtls
+> - add a driver sw_ecdsa that call sw_ecdsa_verify
 >
-> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> index 789721ee6cd..90c007df850 100644
-> --- a/lib/mbedtls/Kconfig
-> +++ b/lib/mbedtls/Kconfig
-> @@ -157,6 +157,7 @@ config MBEDTLS_LIB_CRYPTO
->         select SHA256_MBEDTLS if SHA256
->         select SHA512_MBEDTLS if SHA512
->         select SHA384_MBEDTLS if SHA384
-> +       select ECDSA_MBEDTLS if ECDSA
->         help
->           Enable MbedTLS native crypto libraries.
->           Mutually incompatible with MBEDTLS_LIB_HASHING_ALT.
-> @@ -231,6 +232,13 @@ config HKDF_MBEDTLS
->           This option enables support of key derivation using HKDF algori=
-thm
->           with MbedTLS crypto library.
+> I have tested this code with sandbox, and I have
+> followed those steps:
 >
-> +config ECDSA_MBEDTLS
-> +       bool "Enable ECDSA support with MbedTLS crypto library"
-> +       depends on MBEDTLS_LIB_CRYPTO && ECDSA
-> +       help
-> +         This option enables support of ECDSA with the MbedTLS crypto
-> +         library.
-> +
-
-ECDSA config should be under MBEDTLS_LIB_X509 instead og MBEDTLS_LIB_CRYPTO=
-.
-
->  endif # MBEDTLS_LIB_CRYPTO
+> 0) build u-boot using sandbox_defconfig and adding those options:
+> CONFIG_ECDSA_SW=3Dy
+> CONFIG_ECDSA_MBEDTLS=3Dy
+> CONFIG_ECDSA=3Dy
+> CONFIG_ECDSA_VERIFY=3Dy
 >
->  config MBEDTLS_LIB_X509
-> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-> index c5b445bd85c..54a893609cf 100644
-> --- a/lib/mbedtls/Makefile
-> +++ b/lib/mbedtls/Makefile
-> @@ -35,6 +35,11 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)SHA512_MBEDTLS) +=
-=3D \
->         $(MBEDTLS_LIB_DIR)/sha512.o
->  mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) +=3D \
->         $(MBEDTLS_LIB_DIR)/hkdf.o
-> +mbedtls_lib_crypto-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) +=3D \
-> +       $(MBEDTLS_LIB_DIR)/ecdsa.o \
-> +       $(MBEDTLS_LIB_DIR)/ecp.o \
-> +       $(MBEDTLS_LIB_DIR)/ecp_curves.o \
-> +       $(MBEDTLS_LIB_DIR)/ecp_curves_new.o
-
-Currently these ecp*.o are imported by MBEDTLS_LIB_TLS, refactoring is
-required to avoid duplications when multiple kconfigs are selected.
-
+> 1) add a signature node to an its file
+>         signature-256 {
+>                 algo =3D "sha256,ecdsa256";
+>                 key-name-hint =3D "private-key-256";
+>         };
 >
->  # MbedTLS X509 library
->  obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) +=3D mbedtls_lib_x509.o
-> @@ -52,6 +57,8 @@ mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KE=
-Y_MBEDTLS) +=3D \
->         $(MBEDTLS_LIB_DIR)/pk.o \
->         $(MBEDTLS_LIB_DIR)/pk_wrap.o \
->         $(MBEDTLS_LIB_DIR)/pkparse.o
-> +mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) +=3D \
-> +       $(MBEDTLS_LIB_DIR)/pk_ecc.o
-
-ditto.
-
->  mbedtls_lib_x509-$(CONFIG_$(PHASE_)X509_CERTIFICATE_PARSER_MBEDTLS) +=3D=
- \
->         $(MBEDTLS_LIB_DIR)/x509_crl.o \
->         $(MBEDTLS_LIB_DIR)/x509_crt.o
-> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_c=
-onfig.h
-> index dda3f4dd6e4..8f366c744a5 100644
-> --- a/lib/mbedtls/mbedtls_def_config.h
-> +++ b/lib/mbedtls/mbedtls_def_config.h
-> @@ -60,6 +60,24 @@
->  #define MBEDTLS_HKDF_C
->  #endif
+> 2) generate an ecdsa key
+> openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
 >
-> +#if CONFIG_IS_ENABLED(ECDSA)
-> +#define MBEDTLS_ECDSA_C
-> +#define MBEDTLS_ECP_C
-> +#define MBEDTLS_BIGNUM_C
-> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
-> +#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-> +#define MBEDTLS_ECP_DP_BP256R1_ENABLED
-> +#define MBEDTLS_ECP_DP_BP384R1_ENABLED
-> +#define MBEDTLS_ECP_DP_BP512R1_ENABLED
-> +#endif
-> +
+> 3) create the itb file
+> ./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb=
+>
+>
+> 4) launch sandbox u-boot
+>
+> ./u-boot -d arch/sandbox/dts/test.dtb
+>
+> 5) on sandbox u-boot prompt, load the itb and launch bootm on it
+>
+> =3D> host load hostfs - 1000000 uboot-ecdsa.itb
+> 4628674 bytes read in 1 ms (4.3 GiB/s)
+> =3D> bootm 1000000
+> ...
+> ...
+>    Verifying Hash Integrity ... sha256,ecdsa256:private-key-256+ OK
+>
+>
+> I have tested with success ecdsa256 and ecdsa384,
+> but there is an issue with secp521r1.
+>
+>
+> Philippe Reynes (4):
+>   mbedtls: enable support of ecc
+>   ecdsa: initial support of ecdsa using mbedtls
+>   test: lib: sw_ecdsa: add initial test
+>   drivers: crypto: add software ecdsa support
+>
+>  drivers/crypto/Kconfig             |   2 +
+>  drivers/crypto/Makefile            |   1 +
+>  drivers/crypto/ecdsa/Kconfig       |   6 +
+>  drivers/crypto/ecdsa/Makefile      |   6 +
+>  drivers/crypto/ecdsa/ecdsa-sw.c    |  33 +++
+>  include/crypto/internal/sw_ecdsa.h |  14 +
+>  lib/mbedtls/Kconfig                |   8 +
+>  lib/mbedtls/Makefile               |  10 +
+>  lib/mbedtls/mbedtls_def_config.h   |  18 ++
+>  lib/mbedtls/sw_ecdsa.c             |  94 ++++++
 
-Currently they are enabled by MBEDTLS_LIB_TLS, refactoring is required
-to select ECDSA when MBEDTLS_LIB_TLS is on, to avoid duplicated
-defining macros here.
+Rename it without the "sw_", from the perspective of MbedTLS, HW
+acceleration is controlled by `MBEDTLS_ECDSA_###_ALT`, so the
+interface itself does not imply SW.
 
 Regards,
 Raymond
 
->  #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+>  test/lib/Makefile                  |   1 +
+>  test/lib/sw_ecdsa.c                | 445 +++++++++++++++++++++++++++++
+>  12 files changed, 638 insertions(+)
+>  create mode 100644 drivers/crypto/ecdsa/Kconfig
+>  create mode 100644 drivers/crypto/ecdsa/Makefile
+>  create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+>  create mode 100644 include/crypto/internal/sw_ecdsa.h
+>  create mode 100644 lib/mbedtls/sw_ecdsa.c
+>  create mode 100644 test/lib/sw_ecdsa.c
 >
->  #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
 > --
 > 2.43.0
 >
