@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F125EE7FDF3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 23:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD14E7FDF3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 23:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F33F283F53;
-	Tue,  3 Feb 2026 00:58:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 532F783F59;
+	Tue,  3 Feb 2026 00:58:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b9QAVtfg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bdaNJ7TM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5F3C83F75; Tue,  3 Feb 2026 00:58:46 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 72A6583F7D; Tue,  3 Feb 2026 00:58:48 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7A6483F26
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 00:58:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13E4583F54
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 00:58:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-45f171cb842so173666b6e.1
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 15:58:44 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-45efe81556fso3409610b6e.2
+ for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 15:58:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770076723; x=1770681523; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770076725; x=1770681525; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tGleeV7fdUo/8mVvOIv5yuKKEbe1tIkEkUN0wOxN37s=;
- b=b9QAVtfgQVefoXpxp6xq3cmgWyHgRhGN1rQUQebXsXuO7AHQ0FdsXqRbz3kRaTg0Gh
- Ch9ao85Jkl0FcKm18Dm03CvbwK5Nw2aZAsMpuNrvLgPlXm+wQJA/M3V94gDBJzTwj8MQ
- UqwxtfWVg1QhKbW5loCb6i0zSwxif+/c2mPM8=
+ bh=ftiwpZmzZGZXU4k6lLqeECUO1ob62SbsnGSkSe8PBIQ=;
+ b=bdaNJ7TMWjD9LffWCJEnGsgEYVjxvkApGaMWKc37wnik//vzRu6JOJ9JWliHJGjviJ
+ ru6kyvNw+fReeyIuyZ7QFRtnVGXK9eXLvTg8/06pr2toA+Lw2sfu+1Ov9sXeAIJ415Pt
+ QYN6rw2qY2NUdMQmWYtUDOcM/8YjOidkcXSqY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770076723; x=1770681523;
+ d=1e100.net; s=20230601; t=1770076725; x=1770681525;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=tGleeV7fdUo/8mVvOIv5yuKKEbe1tIkEkUN0wOxN37s=;
- b=nu10T036EVgSXs7Fw2+IZE2PB2aW/Zy7JTZMSyciH3cOLQ2HAM/JB8MJp2wXPoP/gl
- xidQue1crUw97Wl0R9JXHBUsB04/ri33307nwL9hXH/yIKblAqVjctZ9AEqtkT+lfyiD
- NkJ3nfQfZJ0GnIb7uHiL1pGsOdQL+XEb5Zm7Ff6DuEZC6UX7E9fVL9VgEhX1gRZVVodT
- JyTXOs/N4B+34ZPEBAIcaNmznRA4lztPZH6LuG1qcrh+lXvTfUAr0cSocD6Uu0sGMbxZ
- RzCpEXqCHE3X5a8ViLoo0+xOHRqhtXLTuejotci5ROQ1GYv6zNnL0RH9h5RprJYOy7X/
- dpdw==
+ bh=ftiwpZmzZGZXU4k6lLqeECUO1ob62SbsnGSkSe8PBIQ=;
+ b=fE3khvPkM0gPbOUfino8/smIfhhWfTWmhDyzszqgrFY+n8A1D0ZRyhqb/4ULavIn4h
+ F3vwKqtpz/BiJPPimPNGHHbqbk+LnQv4aHwILO/iHwqQYDxOvpZRfmdldvlUDvgEgPUY
+ OseqRTplHyyzFInTrt5xKR8KuL63STgeO8dM0BS+cOTXqs4WwIoPfGR29fQ0U3/YXC95
+ 7ifX/pWwGY7E8QAuOOjjYk1isxOS8JWh/ADumDiw5dPkyTDpsWZWTG9Nz1qfhHvjcRAc
+ 8B9V5xAAVz/mCjY5t1zuMiF5KQwMwSl7+scal/5f559yjKF1waHpILOXZoFSHGyWrW4J
+ bwzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIJV7f7wHnkI9YE+TB7dftW3uSfleXQ3m6sxlG/E0JNfjPbndh7o1MbUYnQVmrLmYdlCNzmmU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/EK8Nqp42HklLULQIIIuhwPr1CKGoVkBtNWTQjvcQKWO10aNZ
- ZChIWxPd/iiDftvBnFrIbeZK0bXk/V0FwQC2bS6FTGqK9H/SGnJOAXuQsdnf8rveUHoyp7s9FCj
- eAW5iIa8=
-X-Gm-Gg: AZuq6aIPO11iVg95OiE83epVHPYyt17HRuGmewJt+6/klTvBmoIKk3vwU7NCUnLXX4J
- GhQlcUk5vc6NBxQTGNt+RIdl+lgDW3wNvHPOPhqT2JR/0W/6o7uNIqGbl/iyzxl4LvG0pFN1bDE
- P6OwcfRd41mNp4eC9a6RmL5JLxZFEeBVNJLATj/WvkgrnyvhL73KMiwQuPNxs9/a2Y6pEd5qknk
- VHa8U1ojOyNcm+qRjVsvrrz7OfnnIkS9FVO5XtV3b4ILsLNAy0As9MIoruK1UfVO14gDiPIJ+Ha
- /gBboH0U/zrbT1a8/0O7mSWqTz/ocgvgE8iJx2QG04XTO9zMC1rAtVFokZbaqeR5fLCmiyyuRHg
- 7T9y92l9SPpadjmPhpmZds7GcuP2if+KdJtwICbsZzQ+MJBUAUjTuwNn71+n7lcopJNYdRqucNa
- I5B18YMK1v830OVNPGzX1wK7ywMNEq4Exbx5L6ZdG2pepSU4T90VF5Pw3PHVU71Occy6fxk8r7H
- 5VPQKzGtkhYUrpJS8VYBK6eKtkmz3JmRcK1tQ==
-X-Received: by 2002:a05:6808:11cb:b0:45e:e070:4733 with SMTP id
- 5614622812f47-462c12a6fc9mr609820b6e.33.1770076723436; 
- Mon, 02 Feb 2026 15:58:43 -0800 (PST)
+ AJvYcCX65sYk+YCubYkMrp4Kpi0VMxLX3TUzWT62pR8BmRo+YcJhqh3AS7aiy85eVlsgeJo7Eg4eZqA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyjsL7nayk3qzB3WToC4qrhDPdiewoTy9+GoDC0tyflimyWQ+Ur
+ H3wkwquh+bXGJJ7f60HQ0ATp9PbAQjQ530M6mKb/YTrOZETje4MfqpR8kL/TIOgqN8iR9gSmVj7
+ jYfKvsmo=
+X-Gm-Gg: AZuq6aLIz2+oWVPnfNW6M7fZWyadtj/Dl7A1kaODkgX+zqWoDVSLdhyzBUv4WjToz6E
+ ZgLao8VEiWIsitHZbHG7GbEAcZJlifcQTsv/BZ00RULA9pgu/iCDCoK23NuWs/FqyXvHJdyvkA+
+ rjZVpr8WWclQTUZOcm4UAq6OtSwrqhc+2yQRS4rPfUAL5taRvhHHi+v9XUO+Iu0JYEdAlvyKQwc
+ faiyEqUC7t3rEtJnMRugTmaDlPUokSkh96hVuxANbd+B5wuzI2ZFx5xkg/VVB5XdHXpKGHZsVYS
+ gjzw/MHTy01GyZ3MbkHcadPzPgIF/4QVj9U9QhdjLyGhklfJAq2pPVVaTj2JTJiJf99x/c/UIqk
+ iDyoFVXv2QgiFHjy3IeVuSf3i7lW1lPzWpdA+AmH5o3jGooL9yNnAyer1Sh9zR9Eh8mw2vXAEGf
+ 6rCEiNnryVYh2TV1oiXmlWPm2kg1FKroRqUmIc4ax7olIyy7JgPsdZdafWDC+md9Ilc4xhxMP9L
+ B8VJQth3k1IJ5IzgiMbD1E23iG1Xc4yhHYkUQ==
+X-Received: by 2002:a05:6808:3846:b0:45e:84be:b3a4 with SMTP id
+ 5614622812f47-45f34bad9f5mr6530160b6e.17.1770076724881; 
+ Mon, 02 Feb 2026 15:58:44 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-45f08fb635csm10081404b6e.21.2026.02.02.15.58.41
+ 5614622812f47-45f08fb635csm10081404b6e.21.2026.02.02.15.58.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 15:58:42 -0800 (PST)
+ Mon, 02 Feb 2026 15:58:44 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Dominik Haller <d.haller@phytec.de>
-Cc: upstream@lists.phytec.de, u-boot@lists.denx.de
-In-Reply-To: <20260116014116.767555-1-d.haller@phytec.de>
-References: <20260116014116.767555-1-d.haller@phytec.de>
-Subject: Re: [PATCH v2 1/3] arm: mach-k3: j721s2: Provide a way to obtain
- boot device for non SPLs
-Message-Id: <177007672182.4123720.15307098187425616366.b4-ty@konsulko.com>
-Date: Mon, 02 Feb 2026 17:58:41 -0600
+To: alison.wang@nxp.com, angelo@kernel-space.org, 
+ Kuan-Wei Chiu <visitorckw@gmail.com>
+Cc: me@ziyao.cc, daniel@0x0f.com, sjg@chromium.org, jserv@ccns.ncku.edu.tw, 
+ eleanor15x@gmail.com, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20260107201838.3448806-1-visitorckw@gmail.com>
+References: <20260107201838.3448806-1-visitorckw@gmail.com>
+Subject: Re: [PATCH v6 0/8] m68k: Add support for QEMU virt machine
+Message-Id: <177007672356.4123720.10843284111217950440.b4-ty@konsulko.com>
+Date: Mon, 02 Feb 2026 17:58:43 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,22 +102,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 15 Jan 2026 17:41:11 -0800, Dominik Haller wrote:
+On Wed, 07 Jan 2026 20:18:29 +0000, Kuan-Wei Chiu wrote:
 
-> Introduce get_boot_device() to obtain the booting device. Make it also
-> available for non SPL builds so u-boot can also know the device it
-> is booting from.
+> Add support for the QEMU 'virt' machine on the m68k architecture. The
+> QEMU virt machine models a generic system utilizing Goldfish virtual
+> peripherals and is capable of emulating various classic 68k CPUs.
 > 
+> Currently, U-Boot's m68k architecture support focuses on ColdFire
+> variants. This series expands support to include the classic M680x0
+> architecture, implementing the necessary exception vectors, startup
+> code, and a bootinfo parser compatible with the QEMU interface.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/3] arm: mach-k3: j721s2: Provide a way to obtain boot device for non SPLs
-      commit: 22d24ee4f6b4d53acd3a56fcd271613e60f66417
-[2/3] board: phytec: Add PHYTEC phyCORE-AM68x/TDA4x SoM
-      commit: e9fa9a2fe325e7030f01f3bd62bf4d571ec6a6c1
-[3/3] doc: board: phytec: Add phyCORE-AM68x/TDA4x
-      commit: 2a6935eee25e09584dbbe4565b00e33de9ef325d
+[1/8] serial: Add Goldfish TTY driver
+      commit: bf55b84736d6b220dae11e3b1e7a670918d9daee
+[2/8] timer: Add Goldfish timer driver
+      commit: 909f717eaf299a97fb87307e8606f3fdc6cb0c14
+[3/8] rtc: goldfish: Support platform data for non-DT probing
+      commit: b41c54488f6f8263c8b38a6cf97d106c3f9a65bb
+[4/8] sysreset: Add QEMU virtual system controller driver
+      commit: 0429298a1a76b971c0b0156918f927d6329e53bc
+[5/8] m68k: Add support for M68040 CPU
+      commit: c69b6aeaa35550d386c142302b852d6b72aea76f
+[6/8] board: Add QEMU m68k virt board support
+      commit: 516afc8f76268fceb98f6b891a653484e931b26a
+[7/8] CI: Add test jobs for QEMU m68k virt machine
+      commit: b21d9acdff871d9113ec8b70d9b12e6dbc4bd0c5
+[8/8] MAINTAINERS: Update m68k entry
+      commit: 838e3be9e1d39e38661a788ae3bcfb9f989450a8
 -- 
 Tom
 
