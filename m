@@ -4,161 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B59FD172C3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 03:33:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB26D172CD
+	for <u-boot@archiver.kernel.org>; Mon,  2 Feb 2026 05:12:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76F2A83C51;
-	Mon,  2 Feb 2026 04:33:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 3DCD683CDF;
+	Mon,  2 Feb 2026 06:12:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="A0tUhSxS";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="JW4U7rmP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B87E83C61; Mon,  2 Feb 2026 04:33:06 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id AF88683CE3; Mon,  2 Feb 2026 06:12:41 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35B6483C23
- for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 04:33:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=K0G5Ckor9Sy9Lctgf8fQkfgBIAQAbMfBZJgY8Qqq75jstjn5R12lkIgBfPG8yZz/WNVatkZ67WjostvnYGjpgTXvx2/GK1Eto+lw7i33MvtMRAStJJGbeSI4SZM+k+AhEZ+bmPoDsrPkd8JCbSgpu2Jx2Gqd3r2Z+nZ2Pw1CYeJiimWnVo0xL05LwlF5BShZ3K6L2YUUlb4d0CSQHa74RKrLKqNCTWNhgHq9+2TG4LLVIZVzqQTMCZkISvNZHEyYLCyRQOtzevxMMQII9S81RlntX5JJtRUV+diZ9bQ23wq8gssT4dc1kISyA3rowvbFEi6ceKtjStGUzMJjraWDBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+Nvt9r2KzeZYSYWemNax0od9qBcvRyoAGjt8yDdbfow=;
- b=xGlo7s/Iea5O5UZft8RRg34JgEWT5yt3HEF+vtUZ1HR4YgFXI1Df6vHfmmNXSEJChWBH562FAk7euo33gqmiPTVvWyqNLTpw3imytg86SdGMAXmHRTIjAzj6r1jeK+E1k7lE9wFoDL7KboNSWxLAkZqR6aotNjxfo4hdz13aM13Q5clcDLI+1PsHAYX7RclnIzcwQW6n3aXzmCAvl4zcw3oGqvVmM/z0WK4I33ifFpiEH6dEdXmr+Qj8yVGgisuL0MJYVwVlpmL5cmOOnlSD/mh9+xTWjBpTmpbQLZv240VEBSrP+ts4w54v+jAwkydLBUJtiI2yc3mVB58X4ovC0Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
- dkim=pass header.d=phytec.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+Nvt9r2KzeZYSYWemNax0od9qBcvRyoAGjt8yDdbfow=;
- b=A0tUhSxSSoKIOx5eS/59byy6x/xhmxfgjdcnaLOysnuoS0VquvyuESxZUz8U/GpQCHfloTAYocD+NJCjFi1uvUyUVIH608E/Te3VFJJyBJSwxFN61ylVwI8wA8gATSTso3k9D/Y13nqK0PjQvnEH63G5QsxXmAcpJTnLO4wneSqHxAxpVwvuBNz8o0JzFPzJMXWTmTp2LNvQql9Uzk+t7+5TU6FC6eKDcUqHM+8BnIpJsfuXwfDc5yBGYpKxWjHynUrbojP51cMbcjJvNVCvKC5WvjPU8v7zEuanDgTwGJUVg8I1UCX2PrcEmAqiFinn9UbiIrIDffR4LYKwzAwXrw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by AM9P195MB0886.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1f6::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.14; Mon, 2 Feb
- 2026 03:33:02 +0000
-Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::295f:9a59:b66a:621a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- ([fe80::295f:9a59:b66a:621a%6]) with mapi id 15.20.9564.007; Mon, 2 Feb 2026
- 03:33:02 +0000
-Message-ID: <6782bbaa-bce2-405d-a5b5-84ff3e399259@phytec.de>
-Date: Mon, 2 Feb 2026 10:31:49 +0700
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-From: Wadim Egorov <w.egorov@phytec.de>
-Subject: U-Boot website?
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: KU1PR03CA0003.apcprd03.prod.outlook.com
- (2603:1096:802:18::15) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:4b3::21)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C79583C51
+ for <u-boot@lists.denx.de>; Mon,  2 Feb 2026 06:12:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id F139210D85A; Mon,  2 Feb 2026 06:12:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1770009157;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=CYNusFAagqVZYBFMSjmAkyce5aD9OXliGVUOBOt2ttg=;
+ b=JW4U7rmP9rORcBH5F3632YX3npyfFMampgv023hKsJL4joPiulpp0qHss+cRYBbhtUKaDm
+ i+SBY4WuSf7jqhh0L/tG5coaZogYHCkzU5f3QbcymqA5Hd/ORPhPfwL5EAxHV3MUxqAaN9
+ Lm3mPRfXkfmsqWURLp18SYvi3TwkPwDiXnAnVE+M8eTqNVdhpN5RC5/UPwy7037DfIzsju
+ k6WKjb7aJAGbqVAme75mIaKkppJQqPaTrDx657BWqp/edSUKM0rbxX0JPIyli6fgy/C5av
+ to6yQRTuO62ohg9Cm8E4wT49iRGKb8AzgLVEIoyfVCrROkJB8Dpfp4tkKSN1KA==
+Message-ID: <993992ca-2c6e-ad7a-f9cb-653ef2ca7878@nabladev.com>
+Date: Mon, 2 Feb 2026 06:12:34 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AM9P195MB0886:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4c33d813-1bd2-4347-a375-08de620bc4e2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WmNQYjJxY1hCU0owS003ZFlISmZYdFR6QXhtZ0FxYU5lS0gzVSt0L1kySlNk?=
- =?utf-8?B?VTlHYU92bm1VMmRCaWNKa0dKSnRpdlJXM2ZwNkJheGxNalhXN2lQVEN1ZTkx?=
- =?utf-8?B?QzErS0k3a3ZwZGVKY0F4aUx1eVRtd2tGUm1WSTJKYkxNd1NTc0RzQUt4a0VX?=
- =?utf-8?B?bkZhQUorS0dZSSt1dTZlOEkrS0ZwNjJaaFZpVTlxTmpwN2F6SDlqanN5Vjc1?=
- =?utf-8?B?Y3B1WVRycFFuR1pJTVV6L1NXZmd1NTN6Tm45cmhOWWlUcVpCbXUrZXFGY092?=
- =?utf-8?B?bGdxNFJWUkFYNFAyUnVnZUp6dU00SzlwSlVNY0Y4UGphTks1RmNubGhiajdW?=
- =?utf-8?B?VEtBOHMySmxOMlUvUXpnK1MvZ2VqK3NqWHZiaEUvclZ4R2tPaUt2bksvcDRP?=
- =?utf-8?B?Y3AxSW9NUzR6K0FtQ3NOcEJ2M1Q5ejdPZ3owYS90bmFqRVMzTnNLWGhjVjlo?=
- =?utf-8?B?TDVWc0lNYmxvbDAzdUt1UXdDUmJuZllWMlV2ZUlOaTZuY0NFMExWWmYyN0Vp?=
- =?utf-8?B?SHlSSldIV29TYm1QRXkwd1kwR1dzL1pUek1tTnlXMzVzdFVQTUdBMkIwUXlj?=
- =?utf-8?B?ZkRVbE9hQ25OZ0xWWXQvRnhnN2hnbnZuU3MvZVpBWHVKZ2JnVmNuRW9VdHpZ?=
- =?utf-8?B?UGpRUytCdHdldTJGOUwvVy9NV0p2R2xuekVHdW5JRys3RlNyaEdUaHZqSE93?=
- =?utf-8?B?TlowNytiSG84U2VxYVBNcGRPd2ZsRkc3TWh0am1DS0hIazZ5QndPRmtTdjN0?=
- =?utf-8?B?M1JoNE14Q25Sb3FMQVN1U0EzUnBVSHhGa0crTjlNYTJoRU1PaEdTYmNQTGVF?=
- =?utf-8?B?QTJpcUlOTjYyZkt1VDZpZXI3bmFmUjQ5V3hDYkk5ZzRMYWQ0MDQwNDJZTS9K?=
- =?utf-8?B?bWU4b01FWlAxcWJ6aGlRVUhJVjNnaXdJREk0UWl3STd3cDEycWs1OWh1MEJO?=
- =?utf-8?B?RGM4TDVKVDZCbC9VWUw5TVVsbUNYdkp3QkF3emppbWdONlpOWE1GMkdvemgy?=
- =?utf-8?B?ZlRjVGM1bXpkZFJobDdkenpUZ1h3Rlg3WHE5a0lVbWFlU1hRMm9OSU1LM1Fj?=
- =?utf-8?B?OGViSU9rWHlTZkhpcDdFUDNUVklneDlJUXNRdG1oOWNtU1BIaFZDSnp2cmUz?=
- =?utf-8?B?OW03MkRQM1hEWnNOSWFGS0xZWVpVRVZTWk1FVE5Tc0IxRzZlQU10YXowOWg3?=
- =?utf-8?B?UmRwajhQWVpIZktxcERtUVNPY0V5Ulc3eFhvcmVhaS9RWVlhQjM3dmFkU2xz?=
- =?utf-8?B?ZVVsbUdvcFNnSXg0anNEb1QrdGh6b3VIa2RBcHRNU3JMMnhmS0xTeUlYYS8z?=
- =?utf-8?B?WDdhcEttTXV5KzhJR1VjVU5VTFkxbnFDV1lSVnppdmY3NmFXcjdzRk11R3dG?=
- =?utf-8?B?OWZ1QklrN2NlOE13UFBoUk93b3pqcldhYWs0L2dyalYvVnBDZEpOZVFIVXRZ?=
- =?utf-8?B?eWZQMEl5MSsyMmNXbzVLYnFEeVhweGtBZzR3c0Q4S3dLS2Q4V041VklPd0Zu?=
- =?utf-8?B?Ym5rYnBDcDFGTlB4MGk2Zk8zVW5TNWZDdkJRUnJKYW16c3RpNnpkNjhNVmRN?=
- =?utf-8?B?NWREVUVWSkMwN2hnQlQzT1crMFg2c1BHdjJzcGZxc3hBK2sxbm1aTDQvN0Qv?=
- =?utf-8?B?dDRQbjVFVFF1RVlaRUtjZTloSkZFQVZEVnFtaUV0c3VBKzFCK2RFTlRxYnQ3?=
- =?utf-8?B?eEhDZmhrc1pHdjE5aWVsZ2xkTkQzWEsyZzdOc2Frak9uckRGa0JIV3hJQStw?=
- =?utf-8?B?dlhJUUt5bWpVVGxwVDNTSHF6NFZyMzlJQklXczBjOStlZU1Sdk5tSzJMTTYx?=
- =?utf-8?B?R0pkUjR1U0cydDJUYnR5a2kvS3Jiem52bFFEQ1BXVi92SXgxN25kSFh0V1Ju?=
- =?utf-8?B?RkRSeDNrK3JHWEI2dk5rVnRpRDhvTHJJb09OV1I4Vk9oeEY4TEl0bDU1Y2ZV?=
- =?utf-8?B?NktTak5reVBDeTVEZ2E0VVNubSszL0pVczBtV0lOeXdQd0hHNU1RVm1kS2Zu?=
- =?utf-8?Q?hzruMPh9V8qbnkDX0sAVtVarq9gRtU=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aVFoZWVMd0o3OFpPbjZIV0NYa3dscTk0ZkhuRW56R2J5bVJ4T0RqcnUrN0tD?=
- =?utf-8?B?K3dLRzNnSDRYUHMwMnFDT29BaVRDZHlXT3BsaVhkREtmNlVnY05aVUlGOVcr?=
- =?utf-8?B?QThOeFlKSCtCUDc2Vm5ab3Q1ZjY2OFVtOHhpeElhQXY4N1VlSVNjS3h0U3Fv?=
- =?utf-8?B?VXdrOWQrNTExc0ljdXUzMllPZ1dkTndET25Xa2VBWHZIZTR0ZEFlS2U2Rkpa?=
- =?utf-8?B?QWkvNTdmaDdwd1dNYnVockh3UG9qSTN6M2VnSExEMGZZZEt0WnFVS05PWHZt?=
- =?utf-8?B?Ri8ydXNiOFdubWZCUlM5QXRlUjMxTGJrNlY1M1FPYlhjRkxZc0pQaTBiQTg2?=
- =?utf-8?B?azlmN2xpNmlOUHhqYnJjck9IS0NPYzlpM3JhNnNSOThiU09YRzRiSnBMektX?=
- =?utf-8?B?OFdEdUxwdkpFSi9vR0dURkhFeG1HQ2ZabEFwR1cwZnZQaHBuN2gxV3R4a0ZW?=
- =?utf-8?B?SWo3VXZxYTBTb3hIQUwvc21UallxTWxsQXRaUm9nc0pmdllVWXEwZEdaUUo1?=
- =?utf-8?B?UnVEdHVxcXJJWjVESEhaeVZ3ay9wYjM0YU9oUWdQM2FsYU93SHI0SXBxdm5C?=
- =?utf-8?B?YnlWZU1nMTNlR083TmljOGx4Vi9IZlJJMnBndXRaUGJ2VFdRMzJiRHhjNWg2?=
- =?utf-8?B?YjA4RDhtU1hRbjdzbmp3MVhMbS9xbkZKZE5PZHN3ZC9JQ3BsSFNsQnNib3FE?=
- =?utf-8?B?VGEyd1d4bmluYWRwZVBDK0ZhMDJsVDI1eTI1UmxPdmJBVHNmc1dIT210RTFh?=
- =?utf-8?B?bjBZMWUybDJwRmdwaXZObXRNTS9nbHN2SnFGNWYrUU1jeFNsd2RFSVg4aXdV?=
- =?utf-8?B?Z3VSMW41RUJlK3BPN0Z4ZEI5SUd0MkQ5aGU1VEhHSzBxQVhVbitQY055cmxw?=
- =?utf-8?B?d2p2NXVVUnVncWhTSjFLWDFvYWJpWEFjUGlpc2I4cVhTNzU1bS9EemZzbUlv?=
- =?utf-8?B?UmUxVkFsYVdjWnh6WXE3YlM4c0svNFMxdkRnaEU0dGl3ZVdGYWYwbG9oSHha?=
- =?utf-8?B?dWVmalVCSmlSZHRJNUMyNzhmdVRBaWdMa1ZaNyt3WnJqOFFMU2doem1VQlY3?=
- =?utf-8?B?YlI1QzdjZWpiemxhOWk2YzhXR1hGdnBTMXI0QW94YklTZlJ2NEpQdlNhRzg1?=
- =?utf-8?B?RjV1WTFFQmUyb1l3OGk3b0RvQTZQelBRT1RqUU52RFdONmRGd21JbFlBQ3lZ?=
- =?utf-8?B?YlV5NGcrUm01YXFaYk9iTmoreWh4dVF4bUZ4dlF2NGx4a2pQWWxSSG9vb0Rr?=
- =?utf-8?B?Y2VqOXAyZUhTcmhFejdsNWRNd3BxVnYwV2VwV1RZbEE2MXMzaGZGdHo2U1JG?=
- =?utf-8?B?UUMrL0FwUHo1MXExOWNSdkQ4UnFpMm9XeWlLYklVaHFBNHg0REN3bDBtWFhE?=
- =?utf-8?B?T3N5WlhhS293emQrV1JMTXljM1lXRGF0a0YveUtqRG4yZTd1TFJIaXBTdjR0?=
- =?utf-8?B?NDNZM3haa0kybElxYnVocWVNQUlCQ25hbWpwS0RsSkJ3WTRlNVhqVEhtdW1n?=
- =?utf-8?B?eU5XTVNOdnhpZnVIZi9kaWw3MDVoT1hiTWxvTWRiYjlaT1R5YTRvMXE2bktG?=
- =?utf-8?B?ckFQY3RyZ3I4ODIwbkhyaFFXdExOdVZzTXJqMFoydTd6Sk05eTRLanVyRWFn?=
- =?utf-8?B?ZnNURjAyU1drakZMSGIvSjZkMmJnb1hSTWVYUkdzMmFHa2RDbUtDbTJmbzYx?=
- =?utf-8?B?VzBvNDZtSlYxYVdMSEpkcStvY0VqZ0QvbWhJTnRyL3dCZndBSllkNWl3OVIr?=
- =?utf-8?B?SDdUTHd4UHo0VHhXbVp3Vkp0RGJ2cUFXV2VjL1RsOFFyOUZEYzVLYmJzaFc5?=
- =?utf-8?B?dzVYaW5ITWk4OXpHRS9lUXlXUVlQZ2hMN2hLZU5Hd002R01kR1VLKzkvMXl4?=
- =?utf-8?B?TVpJenA3SVQwdStmOVR0dEtFb3JJdXNTZjltTzlWVFhVRjdaY045T3Z0d2FW?=
- =?utf-8?B?Y2V1Ymk1azc2WUZVZkt5ZUVVZkdNd1dtdDhYWXZmMmdlNGZFcTU0OFhTZTlv?=
- =?utf-8?B?a0pvcWpYVVRJK293VTRrOGYvcU0xamxzWmQ0RXRwY0F3Q1d4VmNqbGFXWm9v?=
- =?utf-8?B?ajZueHY5OVlRQjNuY3RNYW1EbmppbmQxTkVLNjFrbVA0S0RYazc0S2NINHZr?=
- =?utf-8?B?VnJPa2lFSWlwOHkrRE4yaWtoajdSVEN6QnN5OTJXczdmRzJCMXNkcVVuT2ND?=
- =?utf-8?B?VEdaSGgydENLMjV6Q203NUpTQ3hQREQxUUFwWit4QTEvbTk2SnIrekpBdEFO?=
- =?utf-8?B?OXBCaGk1aUkzNU83Z3NxVjVMOGlmZmtBaldhTXVDUjFyd3hNenVSOFMrbGtG?=
- =?utf-8?Q?ESWxCneLbEX6qq3zFf?=
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c33d813-1bd2-4347-a375-08de620bc4e2
-X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2026 03:33:02.4204 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vFZVwmhdXZqEhglK0+EdJUEChVVJPHIUp4iJ2ydsUOhOlAgJ0AJBCnYAjGY5G4XOstPl2Kw0zo1w9o65Y8L09w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P195MB0886
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v1 0/2] fastboot: mmc: fix bootloader offset
+Content-Language: en-US
+To: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Fabio Estevam <festevam@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+References: <20260124054712.7939-1-hs@nabladev.com> <87y0lkogbt.fsf@kernel.org>
+ <e7917bc9-11b1-18d0-1f04-9d6af003c1cd@nabladev.com>
+ <875x8kohmf.fsf@kernel.org>
+ <7d9a3b43-7a6c-dc97-69ad-b71acd062538@nabladev.com>
+ <87zf5wmrxk.fsf@kernel.org> <877bszm526.fsf@kernel.org>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <877bszm526.fsf@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,11 +78,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hello Mattjis!
 
-is https://u-boot.org an official u-boot website?
+On 30.01.26 17:35, Mattijs Korpershoek wrote:
+> Hey Heiko,
+> 
+> On Thu, Jan 29, 2026 at 15:09, Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
+> 
+>> On Thu, Jan 29, 2026 at 11:41, Heiko Schocher <hs@nabladev.com> wrote:
+>>
+>>> Hello Mattijs,
+>>>
+>>> On 29.01.26 11:09, Mattijs Korpershoek wrote:
+>>>> On Mon, Jan 26, 2026 at 16:46, Heiko Schocher <hs@nabladev.com> wrote:
+>>>>
+>>>>> Hello Mattijs,
+>>>>>
+>>>>> On 26.01.26 10:48, Mattijs Korpershoek wrote:
+>>>>>> Hi Heiko,
+>>>>>>
+>>>>>> Thank you for the patch.
+>>>>>
+>>>>> You are welcome!
+>>>>>
+>>>>>>
+>>>>>> On Sat, Jan 24, 2026 at 06:47, Heiko Schocher <hs@nabladev.com> wrote:
+>>>>>>
+>>>>>>> Not for all SoCs the bootloader start at offset 0x0,
+>>>>>>> in a hardware partition of an emmc. So we need the possibility to
+>>>>>>> set the correct offset, where bootloader starts.
+>>>>>>>
+>>>>>>> Example:
+>>>>>>>
+>>>>>>> imx8qxp revision C0 emmc Partition layout
+>>>>>>>
+>>>>>>> | eMMC block / partition | Offset     | Size  | Purpose                        |
+>>>>>>> | ---------------------- | ---------- | ----- | ------------------------------ |
+>>>>>>> | /dev/mmcblk0boot0      | 0x0        | 2MB   | imx-boot-container A           |
+>>>>>>> |                        | 0x00220000 | 128kB | secure boot signature rootfs A |
+>>>>>>> | /dev/mmcblk0boot1      | 0x0        | 2MB   | imx-boot-container B           |
+>>>>>>> |                        | 0x00200000 | 8kB   | U-Boot env 0                   |
+>>>>>>> |                        | 0x00202000 | 8kB   | U-Boot env 1                   |
+>>>>>>> |                        | 0x00220000 | 128kB | secure boot signature rootfs B |
+>>>>>>>
+>>>>>>> imx8qxp rev B0 emmc Partition layout
+>>>>>>>
+>>>>>>> | eMMC block / partition | Offset     | Size  | Purpose                        |
+>>>>>>> | ---------------------- | ---------- | ----- | ------------------------------ |
+>>>>>>> | /dev/mmcblk0boot0      | 0x00008000 | 2MB   | imx-boot-container A           |
+>>>>>>> |                        | 0x00220000 | 128kB | secure boot signature rootfs A |
+>>>>>>> | /dev/mmcblk0boot1      | 0x0        | 8kB   | U-Boot env 0                   |
+>>>>>>> |                        | 0x00002000 | 8kB   | U-Boot env 1                   |
+>>>>>>> |                        | 0x00008000 | 2MB   | imx-boot-container B           |
+>>>>>>>
+>>>>>>
+>>>>>> Why can't we use raw partition descriptors for this?
+>>>>>>
+>>>>>> See:
+>>>>>> https://docs.u-boot.org/en/latest/android/fastboot.html#raw-partition-descriptors
+>>>>>
+>>>>> Thanks for this hint!
+>>>>>
+>>>>> Possible yes ( I must try)... but this will lead in adding
+>>>>> complexity to scripts people use all over there and needs
+>>>>> to adapt CI setups, as siemens has B0 and C0 variants.
+>>>>
+>>>> If you try, please let me know.
+>>>
+>>> I am sorry, did not find time yet... sorry.
+>>>
+>>>> Do the same boards (as in U-Boot board definition) have multiple SoC
+>>>> variants (B0 and C0) ?
+>>>
+>>> Yes there is the capricorn board in U-Boot and it have different
+>>> variants (not all mainlined yet) with B0 and C0 variants...
+>>> number of boardvariants grown over the years, started even with A0 SoCs
+>>> (IIRC)...
+>>>
+>>>> In that case I understand it's a pain to add more script complexity.
+>>>
+>>> It is. and U-Boot could easily detect the SoC revision... and it is
+>>> fix ... so no need for having this configurable and making mistakes...
+>>
+>> I agree.
+>>
+>>>
+>>>>> If we introduce this series, user has nothing to know about
+>>>>> offsets for different CPU modules as no change in API for
+>>>>> them...
+>>>>
+>>>> I understand, and I do like this approach as well. I just don't like
+>>>> having 2 code paths/approaches for the "same thing".
+>>>
+>>> Hmm... understandable...
+>>>
+>>>>
+>>>> I am not saying that this is a NAK, but i'd like to iterate a bit to see
+>>>> if we can either deprecated raw partition descriptors (and migrate
+>>>> existing boards) or use that everywhere.
+>>>
+>>> No idea if this is possible for all boards?
+>>>
+>>> May user want to write "some data" to an offset... which is not
+>>> SoC/board dependent...
+>>>
+>>> "flash bootloader" is well defined -> flash the bootloader, so I argue
+>>> that this should simply burn the bootloader to the correct offset...
+>>>
+>>> "raw" interface -> do what you think you need write to wherever you want...
+>>>
+>>>> I will try to use this series on VIM3 to see how it behaves. It will
+>>>> take some time though.
+>>>
+>>> VIM3 ? Is this a imx8qxp based hardware?
+>>
+>> No VIM3 is a board made by Khadas that has an Amlogic SoC. But they use
+>> the raw partition description for bootloader offset:
+>>
+>> include/configs/khadas-vim3_android.h
+>> 52:     "fastboot_raw_partition_bootloader=0x1 0xfff mmcpart 1\0"     \
+>> 53:     "fastboot_raw_partition_bootenv=0x0 0xfff mmcpart 2\0"        \
+>>
+>> So i'm wondering if this series can be useful to the VIM3 (so that we
+>> could drop the fastboot_raw_partition_* from khadas-vim3_android.h)
+> 
+> With some hacking around, I could drop both above fastboot_raw_* from
+> the vim3 environment and use fb_mmc_get_boot_offset() instead.
 
-Regards,
-Wadim
+Cool, thanks!
 
+> 
+> The issue I have is that fb_mmc_get_boot_offset() will return the same
+> offset for both BOOT1 and BOOT2. I'd like to pass a struct blk_desc* to
+> fb_mmc_get_boot_offset() so that I can specify the offset based on
+> desc->hwpart.
+> 
+> Do you think that's reasonable?
 
+Of course!
+
+But I wonder, does this hardware boot from different offsets from
+different hardwarepartitions? Sorry, if dummy question...
+
+> I won't ask you to do this in this series. This will be work I'll do
+> after this is merged.
+
+Fine for me.
+
+Thanks!
+
+bye,
+Heiko
+> 
+>>
+>>
+>>>
+>>> Thanks for your time!
+>>>
+>>> bye,
+>>> Heiko
+>>>>
+>>>> Thanks
+>>>> Mattijs
+>>>>
+>>>>>
+>>>>> bye,
+>>>>> Heiko
+>>>>> -- 
+>>>>> Nabla Software Engineering
+>>>>> HRB 40522 Augsburg
+>>>>> Phone: +49 821 45592596
+>>>>> E-Mail: office@nabladev.com
+>>>>> Geschäftsführer : Stefano Babic
+>>>
+>>> -- 
+>>> Nabla Software Engineering
+>>> HRB 40522 Augsburg
+>>> Phone: +49 821 45592596
+>>> E-Mail: office@nabladev.com
+>>> Geschäftsführer : Stefano Babic
+
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
