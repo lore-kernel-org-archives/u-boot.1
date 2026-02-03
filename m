@@ -4,148 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC2B0E8305C
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:58:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C854E8305F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3658783FFA;
-	Tue,  3 Feb 2026 08:58:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FC2B83FF9;
+	Tue,  3 Feb 2026 08:59:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zBHsxI3C";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="JwkX6S+s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52FED83FFA; Tue,  3 Feb 2026 08:58:37 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id AE0A784008; Tue,  3 Feb 2026 08:59:45 +0100 (CET)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazon11012042.outbound.protection.outlook.com [52.101.53.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1A8083FF9
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:58:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B01DF83BC9
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:59:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=parcp3uSkhJCGYg2dBvWT6Pfup9gZ1mbNmcaD0WECRVPGCKs4Bm3Rj7nHR3agqoJD3k+HkeqdVQfxYIrprfTH/FITa0qAl2WBNOuF3L/GuRoiKL1husoFZUzr+WU8rnns/4zSDLkJJ6ApDHJAzbNK2B2GYXeWNpPpbtM6JiSc2gvovEPzEFgg4eq6he473CxKIXTTbL55DpmuxFuqX8xaIww2bRO7rwP+++ZOzD7dsU+wGtRJPd3IOX9obhavfW7r23M57C/gwrWjfMpZVXFgJFlxbjAHHssjOulcFFNWCGBIaoFcUtuRPj9LXeT66LQR71Dvt1BKpASzTvNErDNbA==
+ b=UpteOy1/gyHIi02bh6Sa8X8IQ3QldSrhIFHz3SjQgsyu0/RvbZDvwoFp32uysRlV9udFlnyxFsimR8NTRi3i2S6itQ6TDICIJRyZlQGoWdBWytOqbt3jyc2ZePM9vdZspix89yXgqh9STeUQtcppGafHuNKE/H7gK27uEi4np3pDEkuOV0BVzgy1moeWRCz9WWM2gAl2CL6rOqEMHun/8k9PeVsPurm5U/dyNYWKWoZnOwjg1U0fVvQccFqxR9sj6+3SAKYRJL6hORpqN9EgwYnjO/M9yAk5iCX8MzTMWlycW5JaQ8oVlD8UDNIYY7uKpAI5kCf966W/y5LgamftHg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IPXlb/MGV9xcbwztEgPXiVCib7/ggsN5QuNOHka6M/Q=;
- b=c7I2qaC2IPzJNoHpbeKHlnSh4kT/Zt7V17NBHmcEBOjw/XZYKkPNWxPQ+tuD8y0OkCvnZwjh3zzwuw25Llpoe7RQNzRhYqPrzJH7s/wyi+C9iBR4HF3eqgXvyWno6NRxw9nqqzCXedxPWw1DzJDFQf8QT1FVNaaM5fxvvGByYy+4Gb8qsvVp0WvWkAz3nic6nf+mgVxyqaQ3tncjDoldG3FvJqgyVCLoGGXfAukUULdPKntz2Puq9lAdUyd4QqBxOnEqTK0imxFMMqB2pgQZPdIsZ8Ws4vKZmM3n5T5YZfNbnImQoD381f6owgnrBvDjX1CmvqB2AYLoxtbjKBpa5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=15ACQyKRiDHnQ1zQeVqIuolN+pKchQb8yotRv5NGSSg=;
+ b=PuG/kcj9+VdyS/oJm6yHo1YHaX07+JTnF1t3FD4CGls2MUs4JGRGo4ONMssL+nkXFBn/Idf97HnUqibFZVaNt4n3aApvNQTj/u3D8oL1WiCqU2z0pJn5AX83VMFc/zh/vyEKOCp1vrh3yPVU0j+RJ2tXD5lZYe+3EcIvJUyrlxxWu7WYgNfdccvBhQ22CmsZzZw9p14ZqNNu72xz413xVfeSJNIovlEEJCXiOPo0/dxLHT/3Ty8r+UryzXM1DhZOhOilnv1e0YbVhVNrCj1i0Uquu5uBLgvf4zKhrvGNvNJLQzqYuMU9mscybg5kUa21mAOlHCWZjpvA1QOzhnnbfw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IPXlb/MGV9xcbwztEgPXiVCib7/ggsN5QuNOHka6M/Q=;
- b=zBHsxI3C6YpS8oylorfOEqrCBG2OB50wBjDB6mrYrB9CvVlZMm3NiiyDSNgxTiYZ+JteOIeInTW891fObbSSDAGO5Qi966gHYvocJmlUlrgN/RM6Uih+3+buIv0ZXwzOC/FRVYatnFDL04zCs6JBK1nl5OlMYB6aBFRE06bxEHQ=
-Received: from DM6PR02CA0142.namprd02.prod.outlook.com (2603:10b6:5:332::9) by
- PH8PR12MB7328.namprd12.prod.outlook.com (2603:10b6:510:214::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.16; Tue, 3 Feb 2026 07:58:09 +0000
-Received: from DS3PEPF000099DF.namprd04.prod.outlook.com
- (2603:10b6:5:332:cafe::26) by DM6PR02CA0142.outlook.office365.com
- (2603:10b6:5:332::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
- 3 Feb 2026 07:58:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- DS3PEPF000099DF.mail.protection.outlook.com (10.167.17.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 07:58:09 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 3 Feb
- 2026 01:58:07 -0600
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 3 Feb 2026 01:58:06 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Shantur Rathore <i@shantur.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, "Ying-Chun Liu
- (PaulLiu)" <paul.liu@linaro.org>
-Subject: [PATCH v6 1/3] efi_var_file: refactor to move buffer functions
-Date: Tue, 3 Feb 2026 08:57:53 +0100
-Message-ID: <1f50d76c2370b9b032e73c35c05246cc70255b28.1770105470.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1770105470.git.michal.simek@amd.com>
-References: <cover.1770105470.git.michal.simek@amd.com>
-MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7760; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=EXFizwp1lokcFaR1YlhPZo8DXxYPf67b3fnnHJle93w=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ2rmpaxRHVwa6s0LW7IoijJFrWelmK+aGfZgu/1tUIX
- rnTs9S/o4SFQYyDQVZMkWU6k47Dmm/Xlootj8yHmcPKBDKEgYtTACbCn8TI0PJ7N+/DH6WRLaGV
- ynu2m89gfHY7+nByN8PJpPtP4mX3iDJ8d9YRnXKIdfbf3H2z5Dx2y9/vfyTyf/KPy+2LHXtnXkj
- lBgA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+ bh=15ACQyKRiDHnQ1zQeVqIuolN+pKchQb8yotRv5NGSSg=;
+ b=JwkX6S+sy1u7/KIjB8ze+VIz3hMOER1/WljY399NXrPS3XMcpGXc1xj7vI8l8jmcmxaFOzFX6K04AY8FbRT5MBea/ZHAGj3eIa233B/Tq6xQ1DaaMjN16Jf1K7AvU7McwUZ9RU6yRS4xAyK2BAZBRPKCZjhaMyXGyvm7hP7JwsQSSEzIqYLdak2U7+78OuaHealEZY0cPnBr10PYH5Ezi3RLLDnWqZ6JRQXrUrjaIF3AQTSJdMs3I1UmF7W38m7AYuriJPBvhstfVrxUfJEhQVilg7F3lZXrHgT3OKMC1dIFQkIDpx5qaAqB9RxtzrhguFracspKXO1IJPZB8gy5mA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
+ by CH5PR03MB7791.namprd03.prod.outlook.com (2603:10b6:610:211::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
+ 2026 07:59:28 +0000
+Received: from PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
+ ([fe80::f6cf:4203:1cbc:cd21%5]) with mapi id 15.20.9564.016; Tue, 3 Feb 2026
+ 07:59:28 +0000
+From: alif.zakuan.yuslaimi@altera.com
+To: u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v1] clk: altera: agilex: Exclude AGILEX_L4_SYS_FREE_CLK from
+ enable/disable operations
+Date: Mon,  2 Feb 2026 23:59:24 -0800
+Message-ID: <20260203075924.2492-1-alif.zakuan.yuslaimi@altera.com>
+X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: BY5PR20CA0015.namprd20.prod.outlook.com
+ (2603:10b6:a03:1f4::28) To PH7PR03MB7063.namprd03.prod.outlook.com
+ (2603:10b6:510:2a4::6)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DF:EE_|PH8PR12MB7328:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12259130-8853-4dad-a3a7-08de62f9f8da
+X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|CH5PR03MB7791:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3e87905-1133-49a1-ac79-08de62fa2795
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?U/qdOjNs5fq6oTtHXTqcljztdYf8FGwT0jPd7sRCa+N80BI/cTqIuXq0UjAL?=
- =?us-ascii?Q?eToV8ZxVjkY+thaujRfakjyEbFda4ZLoBgAw/zegLz5O7ZezaO1/nTd/eX+l?=
- =?us-ascii?Q?7krXKCzgjAJQUpRWJ+zTwSIlfLKwaJ/KGVNlUoNmoj/pzRNhm2onducbeWW2?=
- =?us-ascii?Q?fAPDgGMW9qbleZpVZxnG0aLyCjDbunVbo2iGzrqsrYtbwS68VaStlk2+D7GI?=
- =?us-ascii?Q?eTyEJCvmI4c2rJGEx2NzNGZMsHILgiNYS3+vt7kHb0hb9qOR2Izho+rvQapn?=
- =?us-ascii?Q?uxSLoWvPLLseFBgL9hv6HupCWTLW75dNRQqT7pPXh6ZI+AQiyPvF9WbctDfn?=
- =?us-ascii?Q?UDE2oie7iz2efYmIJ9uniGFLNSdalyhPnYcbOVQWJuL90aDJGmgagJS79gs+?=
- =?us-ascii?Q?z+1pHQlk5jk6AvMa1CTnzIEJCYZeAWIjFcFrayLsEFpEYVh5OfRjk4uxPjHH?=
- =?us-ascii?Q?iXI/ugYQwGcxeWa3ay3Y4jWyB/jMUX9rver9sjO+GuQqe8PKAtpjKCxgMiaf?=
- =?us-ascii?Q?fjgqoRAqznvuGr3ZWxRyMgv1LaPkVYA0mM96+yTUqKJCgohN7sWI1+S90YZm?=
- =?us-ascii?Q?V1p4uksqhT3JMmIeLMGnm05PndgzcC/uBhk8VffMaiqL0Y9Qa7gYs9gaVhlJ?=
- =?us-ascii?Q?kxQMgY/9TW+HRDhboFEbVcNIdFxpxKLGBF9nPgX0xjRcJetfyz5fI1VKJmOd?=
- =?us-ascii?Q?/nShPUPyWdsYzms/mreLTypYpmfkk9Zj84KvUzLoaeqTVgE7HzQZg6AVpf5Y?=
- =?us-ascii?Q?5UUyks9sDXiMyl7ttFY/ClMWJdDy/dZTB/sdkA+PTaVKX0lRYocwJbXYf/81?=
- =?us-ascii?Q?zXQV0By1VFzGgARuxwDKDH1G8VIsTQwCqL6MV6oefFhuncei4rGFNcP/kjXk?=
- =?us-ascii?Q?AE0fX7D/ZXFgv2g23mY7fKF2wvMVJkbI3YTJNIJG1cBCLb4WHm7sWi5vpuhg?=
- =?us-ascii?Q?CAXMoDqGHduZYyfFCpvpKsIRXoeFOPzpM0UZLtjf3fj+VABvJ9VSYqszSzwA?=
- =?us-ascii?Q?9XLh5jDf2SFaIwRhTai0R/KL3FHYJNfoTHsiapySIIZf700+h0X5+YaKccwF?=
- =?us-ascii?Q?9IqN9DGauQ2Ab6fExPUoBkov9aBRx3LpTyKOy7YTJNo1egsXm2UbELlkYK//?=
- =?us-ascii?Q?d4p5dVOwXPNn/c95fxUI3P9RDvFfGuGwKq85PcG5eTMCyVr2d4AGn9ZmDIg5?=
- =?us-ascii?Q?/gysyBmBSS7weTkZeu9cHdximQFTTdRRS2pABstEmlCKGYabocOpcUkQGwzT?=
- =?us-ascii?Q?tZKRxV6Am9TuJQ15SQEnL5xDHb/zpAakvGtN9J0poddukgLdI/zSbKLbvNUH?=
- =?us-ascii?Q?E+kFbU0kjMOVT48oQ2fDUhkXlBYk73FiN/43Y45M4JHDuHDEO/bvANTAjm6j?=
- =?us-ascii?Q?QqPKS6JU4eOIEgpVlJO3R/UP5O0xsqzpkBcPy7Y2Cw9AmSehJZU4kDZ7zlO0?=
- =?us-ascii?Q?WDRudjU0Vm4df0dE3B8SSJv30OzPNOEToENI/qePvnYSyI+t48g0Gk4pVVHd?=
- =?us-ascii?Q?gnl4sN0t5IVGsrq1cIW9If90U+RTD/yEzhkFtYzufGtUlOdvdRkNByLkV0O0?=
- =?us-ascii?Q?KimL+pGqcQ5AJ66kDy+OdGNu7HD5SUGujrT0svzzR8jlCgMJ6Kep6sHd9sGi?=
- =?us-ascii?Q?ofpCZTbpKK6M4Uhw6ZSTUJVp/knsqQpTbFgTX+aB/ypGJ5Ey4u50EHsJIyrs?=
- =?us-ascii?Q?YaT91A=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DoRNAWbTK0pJPJyehF+ke/Hq6ajHECh2+xezBSPG1PyT1lP/iTRbB4YUJwjA?=
+ =?us-ascii?Q?numC+yhbDJw8FWcXTt8WjuFr+uOFlZH+MnK/2xwswP6CRyMDqRbvRfNCHbom?=
+ =?us-ascii?Q?h7VYY2F9zbdtgCUIQsNO74Wm0GxcWfOwikWTTDTMjtV9aJvFL0Rxt/opEdor?=
+ =?us-ascii?Q?XY6Z8b+83YU3F33BReLRbkOJhNXUrn+D8d6Pm3LZshnwxp3WucEwaBP68j6m?=
+ =?us-ascii?Q?HOoomtxqM1ubYRnRAFldkj3cqO1C25KbR0mnnFmhcaWjpx9c0MXCuiSA63jX?=
+ =?us-ascii?Q?PbbojtQK/5bH8E5OJt2yqYknO6v6j7f291mYfPKqT58crwLSdf5q2DOjuPcI?=
+ =?us-ascii?Q?g+AmBoM0kr4IdDIO6oc1m2pGE58k/F6/iUi9KGSTtWt/QA4tCkspRwM6vdqN?=
+ =?us-ascii?Q?LO3MJEA4PgbMqItCCEy1JimJZb9a2MgCw03qLh9xwAAVXhGXtIC3EgKfXoIv?=
+ =?us-ascii?Q?KUdbKl86W2gR3BtsOHCjD6YWriw8+m/LOo3g8fXdy3KhTrzc/Qe16KHNuBdq?=
+ =?us-ascii?Q?Mq8tc7PqxEsj2GqNsG+I70XWmwsTJ8poPJFuPGq9UFmAErOYOQUnU5bQ8F3p?=
+ =?us-ascii?Q?fGFQr9jz5cgBr9fuYY2KQvnAvSnpH83hfwu4Blhs2Sx5LOsy+Dh1Ry7NxPeL?=
+ =?us-ascii?Q?4K2MEn87RB1DHLPgXcJX4eVqnZvmU62jm68kFBS1tjAQU4ameFfvqHXoOGoV?=
+ =?us-ascii?Q?qtkVVr3Cus7ZqrxLkFH5sGYDnLdLX7PGdhJjTJQZv9ZVkakVq5lxbsNNn7N/?=
+ =?us-ascii?Q?wpdC3HDyLD8ztTfjUZeu8VUmD/lgHjA9jkwys2sRASo5E0JIWlx2h3bivFHq?=
+ =?us-ascii?Q?8rb8h7rz08OAvXWPSYtWZZVO2Qv61mvXG0p/mIDkh9JJ99Li0KnT2SMqtW+6?=
+ =?us-ascii?Q?tAagyGdlhL6dBttJYiT2Ptk7TFuRjCr+t47Qb7wDdxAPcgz6ivBbqAmWqF1x?=
+ =?us-ascii?Q?kXLoumft+HcZTf8Z9dEhTBOWqTVEzcXnNgO148YVbI7wg3umrWLcaJzLpoxk?=
+ =?us-ascii?Q?DOaZR7Hkj0E9v6YDb4oI2zJrObfSHZ71BbPfTwbpwhGICv8Nj9BypMOb1ZLk?=
+ =?us-ascii?Q?pThIYvoz5+v3GwRzNB1yiMP4nlQvEW5a3gIqwqVvsdSXcpoZtWmt2SXdRxF1?=
+ =?us-ascii?Q?LSvn7qUuZq4RRl3NWv6RDcjuVOAQA8X987waTUhGMH49S3T90Qk+Se+9AhV1?=
+ =?us-ascii?Q?sBfpiJZdyfrmaTPrt2MqMzIoKeTrHp+v0jnx85nF0CiPp0n7wsp+u3PWk6G/?=
+ =?us-ascii?Q?5mLehxyj3ydVyh7XmEsyoiQN0rBeXOatBZw1g94op396bEVFYxp6RD48/Y62?=
+ =?us-ascii?Q?eqmdqhDuFoNSHMDt/2fnMH7Jm2gJdEMqa4rj+7taB4c5A9fMvGuY2yh8B07T?=
+ =?us-ascii?Q?CM3+L0F6Z2o0HMejoLcTQijRSmPKvzmCzPxgRC8b9EyzdKtW9HlDoyg1wasn?=
+ =?us-ascii?Q?Llfp5z7Ri3AbXUMBpXVaQ27RYKih7N0PlPb90GpZ6FdhbaczVb4YC53W0sn9?=
+ =?us-ascii?Q?3BKG1Lu6HHNuQsj6IfKukoEAq1NVudTmW2jCuJAHg/KwQePsXHwSNke9tSuC?=
+ =?us-ascii?Q?trIYw8k4Q/S+QtDpMHI=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: RsB6iY329xEBVPyKJ8mx9XPLeHbC0WMpaW5XHZnIlPHrxqd/cDcDQ7B7WSzgLbhpt8uleD8VNnmULWTU8we7EQOJRQ1wxLvyf7/mSi14Ezd0zrICwpPqb43PPkPs1+LGfJwtAFBBjUoANJ5UVbP+hHLigURXJg1YajmFHooddlYOlTX3nbrWkE1QX/RsV2oDhnjQ16/zTHpGHtmpWApkHq/nszyq+Gbr3OfS5p/+loOnT55aTD9Rz5/jjachweXiuj3uKQfbkOWh9xaiYLOAY0Ole1m40C+SlKqxEG+G7gsaywVgw5IY0RCzjZqi/9miXAG6kIsDdOiuqhaqzN+zKV1NIUJjeeEpjvEAx6EOdi6ihfK1w/zp5VrR/hCP0x3/B8EUJssKDtAEsczhO0L01Njj9YBOfCtTw2BlGYmOhfvH9gbjy3qlU+Z0hJLUsc7D
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:58:09.4149 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12259130-8853-4dad-a3a7-08de62f9f8da
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DF.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7328
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QayMIhRg3oLOP8qUsUldQ2oLWMe/ySAUMFmDgC34t/Wg1xQPl3inda9zJPZk?=
+ =?us-ascii?Q?iJc2KljNcIV8+SH9iaCGb4ojKPZOvsk2pmoAyAGFznQ0S97SD7X5pJcRG+P6?=
+ =?us-ascii?Q?zHOc2ixKl+NOIhqky6Y7uXHA5GqMAZSb0ZEZtyIrPEaMnTMfEbTyfN5shv3j?=
+ =?us-ascii?Q?bpEqbGNkPiJYBkVfUzsZUMZYeBWLkjxLjvfjteidn1IVTjPqS/Wy5t9193/e?=
+ =?us-ascii?Q?5h2evZAzxreQ/jv0vnx5AwnQWj621uYpDQJWWKecQgcrJeCnLMKBPuw7EKMz?=
+ =?us-ascii?Q?3wPWqnKwiaD8cdrNoNRfXZmZ8m7MBkj3590GdCFHH5kDmQ8n5cTRbyihwNW+?=
+ =?us-ascii?Q?xmnW8XdJc6IfeGPNavUaEDVuLVsibvJ41xE3tjgURAEONkkzOtQSEyX5DTKW?=
+ =?us-ascii?Q?QGuNwWodZkrLKGDU9bIGWlj6idec25g7ihq8HC+zVybPCF/vGSeE7xv/iYgp?=
+ =?us-ascii?Q?mlviOuVukmduvUpMBEGqa00+CtsuzTJsgch37c8LAvh1gJdRmoOEvyMf9MSO?=
+ =?us-ascii?Q?k2OJZRuuI3UFqVLEQQrc2Buoov/LP3XRVu53TTIHQO+3XeJ+Hz5H2IRsmAvM?=
+ =?us-ascii?Q?ROLwyPPg8IR8mQ7+mFvJcxTm4AFhV6l0Y2x8uwEmmM7MMDZh5TPUyXbw1QW0?=
+ =?us-ascii?Q?rlGU7hEbq6ed6hN3/4x07wHpigdsiwC2mPN1k3H0imlhsJBuZb0NU3uuQg3e?=
+ =?us-ascii?Q?GPuBDmN3dxc9lrW82SXCXI5xBZupFQSSGNvic1YH5VifkgAZTIWhG1pvUNEA?=
+ =?us-ascii?Q?2pgEvEpYCeAc0Ju95D0zV0W+XuElc/kdMG6fogFsoGVp1O4VjBn6JCzcXmFx?=
+ =?us-ascii?Q?h3uq/zWaEjOd6NpmRGOIAdXB/LfFN+h9tdZMjK82ZvEzZWoNqU4zWmEPk/kO?=
+ =?us-ascii?Q?sm+J1iWralC1hKmv5nnhaPX49JgZ9nsWmR8mLDK/nKC/66fuRewiSVGpL97C?=
+ =?us-ascii?Q?WWh6KPA9ODsWYbFcWPmFHOv+FRUJEJci5uxAWqCcK8dX7jNCTGfvtdmAWj4H?=
+ =?us-ascii?Q?xMDTxDyPSJ8Rq35Wq/6cBY7i7lQlx+8AkKtsqXXrtNxNjSAu4/lPbOI/9n+t?=
+ =?us-ascii?Q?ZXjZKsflvjbnjXOni4oR+8+7R6xA8SLOoZlR6JaBK8Mtb8UJVjNezktc63U2?=
+ =?us-ascii?Q?Yr9t01J4lkvKsxLrjmxB0+bBj2EjY8/yjssmw1drbyfxc2yMKhI3GKO7QLUV?=
+ =?us-ascii?Q?5FMghpM6K+hcY3i6ZLuCPoUg9ol7/cCnslKG1TzzJm++vQl4N3a0Jl+VthXG?=
+ =?us-ascii?Q?WQRtqxcJnUGfbCNdRc3XMSb5q264e2ZWMISx1aTJ9826AtN49gzSK4qVDzc+?=
+ =?us-ascii?Q?+qqFSNpGdib0JgUlZM0gmbVSfhr9ESNhWepuFWi3F3n4EImF2GChHKoahrDd?=
+ =?us-ascii?Q?/1Up491CZRyr9bvvvqNLTTj2kd9mvoyqYZxN6eZUvJF/D7LuVC0Bufeipaaa?=
+ =?us-ascii?Q?oZOnBqspbEaL5Zdyy5exdkRHUXsGexfFquoFVgkAtDfXk4ajxCRXp9dEtnAS?=
+ =?us-ascii?Q?CU4gGoWwYGNs6ID3cS/D7ql81FMa7bP7hsX8k3tTQOMd3J48FsQUroN0rYqz?=
+ =?us-ascii?Q?XuRy8yaVLKTYiPjv7J0zW9l6t/lqUmmtCMVD+B/87fOkbcAm7d5Hjf5PwRUp?=
+ =?us-ascii?Q?ebFt+1qjYinaQLKU/KkNRRIOx17Br4I+4SWwXYgnUzXABPEB+QtWvkvS4TfE?=
+ =?us-ascii?Q?JC7jd9s8+HwOkYTSLAHhDAhs1Ma8DdqPcC046tA94yxt6ucwjkfCjE3opjMH?=
+ =?us-ascii?Q?dHZ+IZbeXKC/UfxPquu0gOhy7qAyuKw=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3e87905-1133-49a1-ac79-08de62fa2795
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:59:27.9926 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8QPJUXA8e3xxLR8lJo8k4xzl5Z344+c/QxMTIEA7kQfXv6kttiUScSgjjs3OpG9f+A4f5fcF73H3AQToCnEPcbXLMzPNLiDDt6yIZndZ6Z8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH5PR03MB7791
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,253 +164,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Shantur Rathore <i@shantur.com>
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Currently efi_var_file.c has functions to store/read
-EFI variables to/from memory buffer. These functions
-can be used with other EFI variable stores so move
-them out to efi_var_common.c
+AGILEX_L4_SYS_FREE_CLK is a free-running clock with no gate control in
+hardware, therefore attempting to enable or disable it is not applicable.
 
-Signed-off-by: Shantur Rathore <i@shantur.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Update the clock driver to explicitly exclude this clock ID from
+enable/disable operations by returning -EOPNOTSUPP in bitmask_from_clk_id()
+and treating this as a no-op in the socfpga_clk_enable() and
+socfpga_clk_disable() functions.
+
+This prevents unnecessary register access for clocks that cannot be gated
+and ensures clean handling when the clock is present in the device tree.
+
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 ---
+ drivers/clk/altera/clk-agilex.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Changes in v6:
-- Return EFI_SUCCESS in efi_set_variable_int() when
-  CONFIG_EFI_VARIABLE_NO_STORE is enabled
-
-Changes in v5:
-- Invert logic in efi_variable.c and avoid #if
-
- include/efi_variable.h          |  5 +++
- lib/efi_loader/Makefile         |  2 +-
- lib/efi_loader/efi_var_common.c | 42 ++++++++++++++++++++++++
- lib/efi_loader/efi_var_file.c   | 57 ---------------------------------
- lib/efi_loader/efi_variable.c   | 17 +++++++---
- 5 files changed, 60 insertions(+), 63 deletions(-)
-
-diff --git a/include/efi_variable.h b/include/efi_variable.h
-index 4065cf45ecaf..ee68fa4a885f 100644
---- a/include/efi_variable.h
-+++ b/include/efi_variable.h
-@@ -161,6 +161,11 @@ efi_status_t efi_var_to_file(void);
- efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
- 					    u32 check_attr_mask);
+diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
+index fdbf834bb2f..88423292c0b 100644
+--- a/drivers/clk/altera/clk-agilex.c
++++ b/drivers/clk/altera/clk-agilex.c
+@@ -728,6 +728,8 @@ static int bitmask_from_clk_id(struct clk *clk)
+ 		plat->pllgrp = CLKMGR_PERPLL_EN;
+ 		plat->bitmask = CLKMGR_PERPLLGRP_EN_NANDCLK_MASK;
+ 		break;
++	case AGILEX_L4_SYS_FREE_CLK:
++		return -EOPNOTSUPP;
+ 	default:
+ 		return -ENXIO;
+ 	}
+@@ -742,6 +744,9 @@ static int socfpga_clk_enable(struct clk *clk)
+ 	int ret;
  
-+/* GUID used by Shim to store the MOK database */
-+#define SHIM_LOCK_GUID \
-+	EFI_GUID(0x605dab50, 0xe046, 0x4300, \
-+		 0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23)
+ 	ret = bitmask_from_clk_id(clk);
++	if (ret == -EOPNOTSUPP)
++		return 0;
 +
- /**
-  * efi_var_restore() - restore EFI variables from buffer
-  *
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index f490081f6542..ca1775eb03be 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -53,7 +53,7 @@ ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
- obj-y += efi_variable_tee.o
- else
- obj-y += efi_variable.o
--obj-y += efi_var_file.o
-+obj-$(CONFIG_EFI_VARIABLE_FILE_STORE) += efi_var_file.o
- obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
- endif
- obj-y += efi_watchdog.o
-diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-index 4b34a58b4cf7..5ea1688dca3d 100644
---- a/lib/efi_loader/efi_var_common.c
-+++ b/lib/efi_loader/efi_var_common.c
-@@ -41,6 +41,7 @@ static const struct efi_auth_var_name_type name_type[] = {
- 
- static bool efi_secure_boot;
- static enum efi_secure_mode efi_secure_mode;
-+static const efi_guid_t shim_lock_guid = SHIM_LOCK_GUID;
- 
- /**
-  * efi_efi_get_variable() - retrieve value of a UEFI variable
-@@ -488,3 +489,44 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
- 
- 	return EFI_SUCCESS;
- }
-+
-+efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
-+{
-+	struct efi_var_entry *var, *last_var;
-+	u16 *data;
-+	efi_status_t ret;
-+
-+	if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
-+	    buf->crc32 != crc32(0, (u8 *)buf->var,
-+				buf->length - sizeof(struct efi_var_file))) {
-+		log_err("Invalid EFI variables file\n");
-+		return EFI_INVALID_PARAMETER;
-+	}
-+
-+	last_var = (struct efi_var_entry *)((u8 *)buf + buf->length);
-+	for (var = buf->var; var < last_var;
-+	     var = (struct efi_var_entry *)ALIGN((uintptr_t)data + var->length, 8)) {
-+		data = var->name + u16_strlen(var->name) + 1;
-+
-+		/*
-+		 * Secure boot related and volatile variables shall only be
-+		 * restored from U-Boot's preseed.
-+		 */
-+		if (!safe &&
-+		    (efi_auth_var_get_type(var->name, &var->guid) !=
-+		     EFI_AUTH_VAR_NONE ||
-+		     !guidcmp(&var->guid, &shim_lock_guid) ||
-+		     !(var->attr & EFI_VARIABLE_NON_VOLATILE)))
-+			continue;
-+		if (!var->length)
-+			continue;
-+		if (efi_var_mem_find(&var->guid, var->name, NULL))
-+			continue;
-+		ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
-+				      var->length, data, 0, NULL,
-+				      var->time);
-+		if (ret != EFI_SUCCESS)
-+			log_err("Failed to set EFI variable %ls\n", var->name);
-+	}
-+	return EFI_SUCCESS;
-+}
-diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-index ba0bf33ffbd1..d32edaac277d 100644
---- a/lib/efi_loader/efi_var_file.c
-+++ b/lib/efi_loader/efi_var_file.c
-@@ -14,17 +14,9 @@
- #include <mapmem.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
--#include <u-boot/crc.h>
- 
- #define PART_STR_LEN 10
- 
--/* GUID used by Shim to store the MOK database */
--#define SHIM_LOCK_GUID \
--	EFI_GUID(0x605dab50, 0xe046, 0x4300, \
--		 0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23)
--
--static const efi_guid_t shim_lock_guid = SHIM_LOCK_GUID;
--
- /**
-  * efi_set_blk_dev_to_system_partition() - select EFI system partition
-  *
-@@ -59,7 +51,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
-  */
- efi_status_t efi_var_to_file(void)
- {
--#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
- 	efi_status_t ret;
- 	struct efi_var_file *buf;
- 	loff_t len;
-@@ -91,52 +82,6 @@ error:
- out:
- 	free(buf);
- 	return ret;
--#else
--	return EFI_SUCCESS;
--#endif
--}
--
--efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
--{
--	struct efi_var_entry *var, *last_var;
--	u16 *data;
--	efi_status_t ret;
--
--	if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
--	    buf->crc32 != crc32(0, (u8 *)buf->var,
--				buf->length - sizeof(struct efi_var_file))) {
--		log_err("Invalid EFI variables file\n");
--		return EFI_INVALID_PARAMETER;
--	}
--
--	last_var = (struct efi_var_entry *)((u8 *)buf + buf->length);
--	for (var = buf->var; var < last_var;
--	     var = (struct efi_var_entry *)
--		   ALIGN((uintptr_t)data + var->length, 8)) {
--
--		data = var->name + u16_strlen(var->name) + 1;
--
--		/*
--		 * Secure boot related and volatile variables shall only be
--		 * restored from U-Boot's preseed.
--		 */
--		if (!safe &&
--		    (efi_auth_var_get_type(var->name, &var->guid) !=
--		     EFI_AUTH_VAR_NONE ||
--		     !guidcmp(&var->guid, &shim_lock_guid) ||
--		     !(var->attr & EFI_VARIABLE_NON_VOLATILE)))
--			continue;
--		if (!var->length)
--			continue;
--		if (efi_var_mem_find(&var->guid, var->name, NULL))
--			continue;
--		ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
--				      var->length, data, 0, NULL,
--				      var->time);
--		if (ret != EFI_SUCCESS)
--			log_err("Failed to set EFI variable %ls\n", var->name);
--	}
--	return EFI_SUCCESS;
- }
- 
- /**
-@@ -155,7 +100,6 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
-  */
- efi_status_t efi_var_from_file(void)
- {
--#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
- 	struct efi_var_file *buf;
- 	loff_t len;
- 	efi_status_t ret;
-@@ -180,6 +124,5 @@ efi_status_t efi_var_from_file(void)
- 		log_err("Invalid EFI variables file\n");
- error:
- 	free(buf);
--#endif
- 	return EFI_SUCCESS;
- }
-diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-index f3533f4def3a..6e45134c61bf 100644
---- a/lib/efi_loader/efi_variable.c
-+++ b/lib/efi_loader/efi_variable.c
-@@ -397,11 +397,15 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 		ret = EFI_SUCCESS;
- 
- 	/*
--	 * Write non-volatile EFI variables to file
-+	 * Write non-volatile EFI variables
- 	 * TODO: check if a value change has occured to avoid superfluous writes
- 	 */
--	if (attributes & EFI_VARIABLE_NON_VOLATILE)
-+	if (attributes & EFI_VARIABLE_NON_VOLATILE) {
-+		if (IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE))
-+			return EFI_SUCCESS;
-+
- 		efi_var_to_file();
-+	}
- 
- 	return EFI_SUCCESS;
- }
-@@ -594,9 +598,12 @@ efi_status_t efi_init_variables(void)
- 	if (ret != EFI_SUCCESS)
+ 	if (ret)
  		return ret;
  
--	ret = efi_var_from_file();
--	if (ret != EFI_SUCCESS)
--		return ret;
-+	if (!IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE)) {
-+		ret = efi_var_from_file();
-+		if (ret != EFI_SUCCESS)
-+			return ret;
-+	}
+@@ -757,6 +762,9 @@ static int socfpga_clk_disable(struct clk *clk)
+ 	int ret;
+ 
+ 	ret = bitmask_from_clk_id(clk);
++	if (ret == -EOPNOTSUPP)
++		return 0;
 +
- 	if (IS_ENABLED(CONFIG_EFI_VARIABLES_PRESEED)) {
- 		ret = efi_var_restore((struct efi_var_file *)
- 				      __efi_var_file_begin, true);
+ 	if (ret)
+ 		return ret;
+ 
 -- 
-2.43.0
+2.43.7
 
