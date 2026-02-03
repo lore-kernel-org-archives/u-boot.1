@@ -4,95 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20AB8E8B36B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 22:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D73FDE8B37E
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 23:34:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65F4C83D9C;
-	Tue,  3 Feb 2026 23:45:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 1875B83DEB;
+	Wed,  4 Feb 2026 00:34:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W9WNXaU0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D6ql994c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6206383DA7; Tue,  3 Feb 2026 23:45:58 +0100 (CET)
-Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
- [IPv6:2607:f8b0:4864:20::1334])
+ id 83DD383DFA; Wed,  4 Feb 2026 00:34:08 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C32A083D77
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 23:45:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 679DE83D9C
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 00:34:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-2b71515d8adso6032602eec.1
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 14:45:55 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770158754; cv=none;
- d=google.com; s=arc-20240605;
- b=iAaCc+5OEp6QgbBPRxQQMFY1qX9fnnVf3jykFfM12eZ3dN2LhIq0sNfjipNI5T9xu0
- SRv7pMH2A3oeZB3jrSbptUlTT/iG171BjlF+niWyVFYQeKV8mr3EUA6PMgOG5fMaApCu
- RkSkCqa/QN6p8OzPynphFswk6UHi4BGLWk9s8cVcQ1kunsvD49kB+5bObb9H0wT3HFPA
- vBH2ZM9FXUzyAHbvgEEHxdM1i0WvB9PB6mU3tK9FOmGxb/3k2e1DJ0AduHOKU+NcRrX7
- KLuztzMAN3/3ajs1GRmZovygIoa1vawpXXsHnDsKIed/hD6fs/c5tKrWbQwwrbwzwsNf
- P1pg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :mime-version:dkim-signature;
- bh=Msn1W9hSyFIqH9nlYQerNqJwzul6/4NsFDE/ZTGYNZo=;
- fh=a5C6O7gonRlZcZREVMRTGhESbYIotQ5/kIdu6lpeZtg=;
- b=aWYafazN7Gch8SZvvZJwWFeT2x3dmWLBXPZMKed1yN/62J2l3mUgJi6p9/3HMqMAd9
- UAlsfsVLvjQWU6K9Y+iGgZTn0xg1/RUJc2d+ozhIsmNJXuH5Xi/Qysqh/QCd7Iov+tp3
- g/ngGw+ixzxZ7yeLx1rgMh8Ub9pzVaDfHwbBRn97wg5IXWl4LOmbPtiN+7eFCLeukOTx
- PvZ4/MpFhR4pbvA0f1w8pWdxfo0jKAqqgLd4tBazEL/AyIFdMoC05HndOFPracymOULH
- LMLVeALLIvLg1O1P1Php/OO2fT3BDuhtsPCg2MVYhKOc8f1EU9SQS3QcY/vd8YHgQmta
- yc2w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7d15b8feca3so5809991a34.3
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 15:34:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1770158754; x=1770763554;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Msn1W9hSyFIqH9nlYQerNqJwzul6/4NsFDE/ZTGYNZo=;
- b=W9WNXaU0sHoeuohhYD3G7G/jvRWky1fGjTT1Y9/FM4BCXKeUFMzziEfw6w4WA60owv
- bz1Jm1GAFZM7fT2TPAx6sW6qGL0WyXDablcrxN39hPV2jh9DJdt8QkNoPKIinCMEM+Uz
- KSWK4v0m7x8ZEbyeguib1qKxNFp/0WIsrgnzU=
+ d=konsulko.com; s=google; t=1770161645; x=1770766445; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zBmzh1J+y5rJso85QPzFj2RfLOQxKoLqFEk079Dbmdo=;
+ b=D6ql994cKTnKwuinvOtlLcUygX/3x3CWtCu1kXjmbxbJ2lD0J0/XaPDXmYLISgHEVc
+ e3LVwOT6ThCvEntqE/RbRMVKblHLj5sy3sVhGJ7K4uqknj3I7x2nzU/SyrYBbgSNkKYi
+ JKpCRaK17QUNdlfwwln8Nqr6+13NfaGdOae8s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770158754; x=1770763554;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Msn1W9hSyFIqH9nlYQerNqJwzul6/4NsFDE/ZTGYNZo=;
- b=Ph1vsHsYeAhJfEWYlwqAYZmJVF6KP+LkGSlO/3lrNfBNDgnfLieAioq8s/2FXz+Yeg
- CmvwfH7JXMDfimi1p8kQJlZtsvhnGedp4WVXolTB3rkCd5GvIL7x81b9T/C/laWgt9KN
- Ac943HjQS1tQunUGq9WxlbthQ/Lg0U134NQrTH9xZjls06svhEW1ot+w/MNSOl8L82oJ
- eJtHPPf0eq8N187ZvipiE8r73i5d4afRxwq56KXPcFC4Zfn7IXWLjjgk0bMw2+WLAciO
- GKSkQyHWh9+c4F/ygqBgA+H1jx87rtSkCegweRqBGnZJ1EXQgoShsJd5sI+w5WcP0y77
- VvOw==
-X-Gm-Message-State: AOJu0YzNCjvExhEmb+zZD1k4w/GBFQLHH5r9+tUMvu3pPM5kx5Q8q1hh
- ocrxzjFhQafK/h/Hi/wgF+/KqzDAtvvjwmdkLtgWtuoCDtVDIxg5dLqyTyDOgQWEP0j3I6r2NW2
- GgJ+kSE8oxQq6A5jTAFhGq3E6XnCyopa+DA8pWH0fHSFQbnyF06AlmaLpHg==
-X-Gm-Gg: AZuq6aJFSSIUiPUzXt76juoY7R2YbAc78ie7kWUD61s5RQH7IH80lgpS0XTL+Nr216X
- 15dHSVMMKL4Cci5R1kTSb0Jn9iYSjlwr9ghZ67gzCmRCfgdYEqwXNA5P7xvIyiBk/nOmAoN10cL
- g1fGOgWo4Gw+8xuCa1v4Tgln2MOW/SOFHnvIhHutj6ft9m1+J+7W/abWnkS+Ph5VgOVJSwdlPXJ
- Oep0JFIyz0Whe7E+QXQVWHQIB0wBSylFmRvkpb9c0Isg9UNvfChYCz3LLPE0agZAgCRMSKMv0Tc
- VyEYK/AC3k5bgROeN4XK3BQ9YEQ=
-X-Received: by 2002:a05:7301:678c:b0:2ae:614a:330e with SMTP id
- 5a478bee46e88-2b832a45b93mr482513eec.41.1770158753540; Tue, 03 Feb 2026
- 14:45:53 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770161645; x=1770766445;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zBmzh1J+y5rJso85QPzFj2RfLOQxKoLqFEk079Dbmdo=;
+ b=ORiT8OrBOAs2/ztD2g7nVUMv114zUmFBzVGi3+LLsWa+GwAzPovNPU393z6AmgeWRe
+ /EEcM40wPstkVqyE50EedziKiLSNIlyihfFPJBgFIrKnQIsPmGHGgp3w5RVP7BNYnbB2
+ TICQ6rvJuYYoa/9lU+5xenGTTCbvh4kgCTueKxmzNZ72KGkNf63+YP0MM4NFqkx/SEr2
+ 3GV1u5EoGNzQySOR4PjfAhg0Eog4lt//kXfzezv7Mr5pv3Xz4YnNaxXTZoz5LMrR+qxT
+ LZi0sypjDrEG+kKD+t4ah68K8rqq0h2N/X3ZOy2SnyQyqHVhQSqvLxlA1oTdqRAs8pBc
+ 2BzQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmpcfME6MmvJ6GP8kP0OG07QJ0Zok9r4IN4Y5DmWD8Ad3vyFDmbsfNpxK3Q17tAOSkUEs0YAo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyt4gJ/ngOLF0VqcKTocsHuLlECKZCYMxCFoT5E8iEUYW/V8FjL
+ ZVyfXDr6DIYFfiiJG2I4Jw3+z5r/c8153qcKn7aXD2EawigUKJmRUOwKjtjmoJJa21g=
+X-Gm-Gg: AZuq6aKEnsbFjR9UvJIXBpai+u7FCyr9x+ZtDpxJ/5V4tT9ZMz6AgRkhvSaBfcuaNG+
+ iPf3ZzoRjlksPpPIl2PtWoBYqfxzRQS06N9JbTf3oh5uEfOml5Z37Fg4XPnZl5QmcLm9dsol5pk
+ vR8i/JXMGaI2D7VTsMRe5R6j/F0lFgnuPgEXKom6AKsXyvPiAR3Pfk9Msi4AJX4tCTYDo8gTBVr
+ GGGZ+gv+9aRGa+wPMOWRy/z8GF1MGI0eg0l6c+dTcomd4RT458u+MgjNhXFFSKYeNRII/7JNGaO
+ +e3L2YXxbDyFqk94+RxhB0O5agBW4gsk1uVREP4QtrrAf8au3xJE55ouaq/JwROMsg/aUFSWkgN
+ a0x32KCwVCexH81t3mJDJiaUtVHcy3Yg2acxsWiNYB7nPncKTrNM8efpzU32ytU7dw3PGVTAqrC
+ KUx/B5HHErgX7DJoUfJtRb16V3OAUHPu9QfiUfa625CZVRh7zWFZY5FHYFEWq32J6WrNultOUBX
+ 7Ff1baKyyDRdBUAxJkeKFe3uE7IdJWUg7XhoVjencsW8zRwbw==
+X-Received: by 2002:a05:6830:6012:b0:7cf:e4e6:2d42 with SMTP id
+ 46e09a7af769-7d44899f658mr974380a34.8.1770161645084; 
+ Tue, 03 Feb 2026 15:34:05 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4490f3591sm662638a34.4.2026.02.03.15.34.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Feb 2026 15:34:04 -0800 (PST)
+Date: Tue, 3 Feb 2026 17:34:02 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Frank Wunderlich <linux@fw-web.de>
+Cc: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: Re: [PATCH v6 2/3] test: cmd: add test for memsize
+Message-ID: <20260203233402.GU2603314@bill-the-cat>
+References: <20260125131254.23210-1-linux@fw-web.de>
+ <20260125131254.23210-3-linux@fw-web.de>
 MIME-Version: 1.0
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 3 Feb 2026 23:45:42 +0100
-X-Gm-Features: AZwV_QjHQSq0U33c9Empw-vwXZXic72lFjqObxYW8FjsIK8_EG3DVzWG2pEvFJ4
-Message-ID: <CAOf5uwnzPQsvaJoQo1F+aAWP7MHbrPfsxiAbesCTfQzmH9oUWA@mail.gmail.com>
-Subject: Pull request for u-boot-nand-03022026 (Take 2)
-To: U-Boot-Denx <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Richard Genoud <richard.genoud@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3yeXisxQ6RWsdUqp"
+Content-Disposition: inline
+In-Reply-To: <20260125131254.23210-3-linux@fw-web.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,89 +100,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 71f2564b178f3986dc89cdaa4558f0caa74fd88c=
-:
 
-  Merge tag 'mmc-for-2026.04-rc2' of
-https://source.denx.de/u-boot/custodians/u-boot-mmc (2026-02-03
-12:46:30 -0600)
+--3yeXisxQ6RWsdUqp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-are available in the Git repository at:
+On Sun, Jan 25, 2026 at 02:12:52PM +0100, Frank Wunderlich wrote:
 
-  https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
-u-boot-nand-03022026
+> From: Frank Wunderlich <frank-w@public-files.de>
+>=20
+> Add a test for memsize command in same way as meminfo.
+>=20
+> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> ---
+> tested via:
+> $ ./u-boot -T -c "ut cmd cmd_test_memsize"
+> ...
+> Test: memsize: meminfo.c
+> Tests run: 1, 0 ms, average: 0 ms, failures: 0
+> ---
+>  cmd/Kconfig        |  1 +
+>  test/cmd/meminfo.c | 17 +++++++++++++++++
+>  2 files changed, 18 insertions(+)
+>=20
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index be79bf0747df..2bafa156ca8a 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -927,6 +927,7 @@ config CMD_MEMINFO_MAP
+> =20
+>  config CMD_MEMSIZE
+>  	bool "memsize"
+> +	default y if SANDBOX
+>  	depends on CMD_MEMINFO
+>  	help
+>  	  Get RAM via command for use in scripts.
+> diff --git a/test/cmd/meminfo.c b/test/cmd/meminfo.c
+> index 53b41e3b49e0..ba772a8b7616 100644
+> --- a/test/cmd/meminfo.c
+> +++ b/test/cmd/meminfo.c
+> @@ -7,6 +7,7 @@
+>   */
+> =20
+>  #include <dm/test.h>
+> +#include <env.h>
+>  #include <test/cmd.h>
+>  #include <test/ut.h>
+> =20
+> @@ -39,4 +40,20 @@ static int cmd_test_meminfo(struct unit_test_state *ut=
+s)
+> =20
+>  	return 0;
+>  }
+> +
+> +/* Test 'memsize' command */
+> +static int cmd_test_memsize(struct unit_test_state *uts)
+> +{
+> +	ut_assertok(run_command("memsize", 0));
+> +	ut_assert_nextline("256 MiB");
+> +	ut_assert_console_end();
+> +
+> +	ut_assertok(run_command("memsize memsz", 0));
+> +	ut_asserteq_str("256", env_get("memsz"));
+> +	ut_assert_console_end();
+> +
+> +	return 0;
+> +}
+> +
+>  CMD_TEST(cmd_test_meminfo, UTF_CONSOLE);
+> +CMD_TEST(cmd_test_memsize, UTF_CONSOLE);
 
-for you to fetch changes up to 800ebf7e94e3a7e375cf915ae21e14514fd81450:
+Since the new test isn't guarded with memsize, this fails on qemu-x86_64
+where meminfo is enabled, but memsize is not.
 
-  tools: sunxi-spl-image-builder: support H6/H616 NAND boot
-(2026-02-03 21:45:27 +0100)
+--=20
+Tom
 
-This series provides a comprehensive cleanup of the Allwinner (sunxi)
-NAND controller drivers and
-introduces full support for the H6 and H616 SoCs in both the main
-U-Boot driver and the SPL.
+--3yeXisxQ6RWsdUqp
+Content-Type: application/pgp-signature; name="signature.asc"
 
-The series successfully deduplicates register maps between
-sunxi_nand.c and sunxi_nand_spl.c
-while migrating to a capability-based architecture. This approach
-allows the driver to handle
-the H616's specific requirements=E2=80=94such as shifted register offsets f=
-or
-ECC/OOB, the removal of
-512B ECC block support, and mandatory MBUS clock gating=E2=80=94without
-breaking compatibility
-for legacy A10/A23 devices.
+-----BEGIN PGP SIGNATURE-----
 
-The patches pass the pipeline CI:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/2918=
-3
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYKF5wAKCRAr4qD1Cr/k
+CjcqAP49vIuyfEYGc/tkqrf2uKK/qL8Z2MG1ozQKvxeBXI5h1wD/dfC++1r2k/Qw
+MMyY57Lg29nWXR92/NAn42Niq4nviQo=
+=NW4j
+-----END PGP SIGNATURE-----
 
-----------------------------------------------------------------
-Richard Genoud (26):
-      mtd: rawnand: sunxi: cosmetic: remove needless comment
-      mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
-      mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
-      mtd: rawnand: sunxi_spl: cosmetic: use definitions from
-linux/mtd/rawnand.h
-      mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
-      mtd: rawnand: sunxi: merge register definitions for sunxi_nand{, _spl=
-}.c
-      mtd: rawnand: sunxi: add per SoC capabilities
-      mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
-      mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
-      mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
-      mtd: rawnand: sunxi: add has_ecc_block_512 capability
-      mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
-      mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
-      mtd: rawnand: sunxi_spl: add per SoC capabilities
-      mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
-      mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
-      mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
-      mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
-      mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
-      sunxi: clock: H6: add NAND controller clock registers
-      clk: sunxi: Add MBUS Master Clock Gating Register
-      mtd: rawnand: sunxi: add support for H6/H616 nand controller
-      mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
-      mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
-      mtd: rawnand: sunxi: fix page size in control register
-      tools: sunxi-spl-image-builder: support H6/H616 NAND boot
-
- arch/arm/include/asm/arch-sunxi/clock_sun4i.h      |   1 +
- arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
- arch/arm/include/asm/arch-sunxi/clock_sun6i.h      |   1 +
- arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
- arch/arm/include/asm/arch-sunxi/clock_sun9i.h      |   2 +
- board/sunxi/board.c                                |  21 +-
- drivers/clk/sunxi/clk_h6.c                         |   2 +
- drivers/clk/sunxi/clk_h616.c                       |   2 +
- drivers/mtd/nand/raw/Kconfig                       |   4 +-
- drivers/mtd/nand/raw/sunxi_nand.c                  | 306 ++++++++++-------=
----
- drivers/mtd/nand/raw/sunxi_nand.h                  | 228 +++++++++++++++
- drivers/mtd/nand/raw/sunxi_nand_spl.c              | 317 +++++++++++++----=
-----
- scripts/Makefile.xpl                               |   1 +
- tools/sunxi-spl-image-builder.c                    |  92 ++++--
- 14 files changed, 700 insertions(+), 302 deletions(-)
- create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+--3yeXisxQ6RWsdUqp--
