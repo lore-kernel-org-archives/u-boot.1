@@ -4,108 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C495EE8306E
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 09:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB0BE83070
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 09:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB9A58405A;
-	Tue,  3 Feb 2026 10:21:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CCE218405A;
+	Tue,  3 Feb 2026 10:34:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OWoF7bnn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xPsRAbuN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADE258405B; Tue,  3 Feb 2026 10:21:41 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 610D68405F; Tue,  3 Feb 2026 10:34:31 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E6818404D
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 10:21:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C02A8404D
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 10:34:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-47edd9024b1so43248355e9.3
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 01:21:34 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-47ee07570deso44806755e9.1
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 01:34:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770110494; x=1770715294;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cZ+5ORdfWmCafySNhXr4cNArS81nqapJ45KtjZE6WjE=;
- b=OWoF7bnn6lX14NoBOOz4W9f9068GmcMLTHtEKdYexJVbMGjKdX2+EpGvjKG/wPWFtp
- VS7+mim9tGlXEHxtM0bHmSR1vY+zG3pDx6vqug1LnpN1e8F5P5kG6auaRpD8xxBQnXQ2
- bIunxunj2aiYTGttaZeFZ32x9dcI6+KuEU8/Pqf7YlJl71cTrO4P74Hcr/MuLMZgchII
- CDpvkKlENByPBU3UMEbrTjiz6s2aSQXc/REnrPgB7NI1Bazuc7o5Ex2DV8YsRf2JPKQI
- Bn0pJSIxPou0FTW2LfEZZZERBOcCd9+rgpW7UGYiREKqeN+5evpNJZ9KLLvLbuRVso0o
- TY5Q==
+ d=linaro.org; s=google; t=1770111266; x=1770716066; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=opsMm4nZKH0W+JQgRf/nEaLRdP9CdHOT56eYL05d38Q=;
+ b=xPsRAbuNJlkBOzrs2kBA9+vzp/2AtTPvnPBrgonVDMsk6o5sRklOcx8wLFXM7m94BX
+ gtRMdmBbAO4HJecGdOV8LRl4D7k9uwfMhsBckwsy/IPZmZjVdj9Jh5hdv+asm6G+I1FP
+ Yh/RRKwOhAjmaCk7pQV5djbV7VnFIG9Hla1VwCNU8mS7dyRLJiOxnDztjRRI5oq3nhEs
+ +CPenJhm1i7hrh1AsNcbqfnYHI9w4JFht0Gak+lAoVWlOAB+KR61gGSupP1a6JEx/o4R
+ s3XIk+5b+0y3Amk5cJO95WkA1eZyk7zcVTxFKOKyLV7NQTBBq7PRF1btmo6d6EyNqZLv
+ j5oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770110494; x=1770715294;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cZ+5ORdfWmCafySNhXr4cNArS81nqapJ45KtjZE6WjE=;
- b=BvXJl8zhGLjDW365ix1SE+ww6Bq30BpiqGVNlvENjciLuPgaRyXT5OjiLoqiplvDqU
- 0lRAp3nJmEpq5fnYVG1VglFw0X2mnCD31AKa78sH9VmBa8GOu9pZfpo1BtbfFXO+jrfD
- G1bAAeMDkXGSylJ9P5Sht60zf/Unf390Zz2J9KakvlOA9hRA5t5g7IDsDG6+CtpRc5cF
- 8/dt5ukLpy0EzKOJi3g22Jv+5R4Eu61KI8PdNZkZ3bk4mFkACILyz6yhNS8pfL0tA3K4
- 9WW+c6jwTJbePmjEYu96K6/iHmcThIfgKvj+aCc8zCo74qUY0LfQ6RFMS6kSkLS4vFwE
- eEHg==
+ d=1e100.net; s=20230601; t=1770111266; x=1770716066;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=opsMm4nZKH0W+JQgRf/nEaLRdP9CdHOT56eYL05d38Q=;
+ b=u2DhADWzQNe5QIaPnyYG0QzEbs9GSAuN8FsPsDEId81hckuwwqJ2FxtI8lskRXgcEv
+ x8FlKzH0R108hoOVUshLDpyMZWoivBnm1Ku/wi0eZSjBoBp4QrA3h7MunH2JcbJu6VM2
+ qeJuVT83ZKgRGOjIk/lri9dP2A337r3X2dp/TyqlcBF+VnSFPZWp3w/4JQQR9ewYZRbC
+ N+JDTJC/HKEckyPb0/PXt5wdwa6TMiFCdV94/tyfAAcNoarwUmF69klcu32BI1IKUjlO
+ BD156W4IbJiWsiK8UioJKWL9h6TCPz4GNMayD78e4zToEF7cJt5tYIAXMBwsvudSAmlT
+ hKXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxUGWVqTBL2tsnrE0DKq/qrmqxi0jccNHBOlt3PJJE6M1Ko03L4x370zlHaXOpdEKzDG51Rqw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0jmsjTpStnudBbN9HHGTvCOq6CRMqzokdjWBMLpibuGioEFYW
- ogKrJonGKQZqtWxOpYyvP1XUe5QzwEDW2QjvXmsGYh0oGHDjX6S/IT5JoaZP8dV/8dM=
-X-Gm-Gg: AZuq6aKCGG3G87aBMVS43/WbjbRPNKpphQGOcs9ookfS3DGTASmZL8Ec2ooSnJ8N3eq
- xA4XGXCPtB4uvI8uX2aOQIOCk4Q7mALTbS69mSvjZAFZzojsKjG2oRpAfehRagdHuQGaxONYTaX
- YvDiBbZi0kuXBPCKJFXyiURtKQSL4pkd6Fkc1WmB190d/LBObypfV825OhN9Z3AINASvQFzEDwi
- F85rTq+3L3Q5xhrZhTMspTngQOEriDIMkh2YdyW2bSBNrl/hoRvlclTVmtnTsCCGMplQJdzH0F2
- FiCyIN4YBbb3TctYPHnM0MP63VApInId7WjhTtx4u/hTUQqK4UaSZ71BlZAsTJhRCZpa1wqnr6A
- AZ6/GkoilIcDcKeeWSeC1hSk3p3Pka6McPyOTaTI1fRT6RuclBcIvQ5piwojNIkHWAh0doSLjRe
- 4nSMEfGoKMn6YgVEiljhA5+OptLtU8ECQ8iRE6Cq3aKXYEFJhxorZM8irqG0gmj4B9Z46AnnZTw
- j3YXZr0Cg==
-X-Received: by 2002:a05:600c:34ce:b0:47d:25ac:3a94 with SMTP id
- 5b1f17b1804b1-482db491e61mr210622415e9.17.1770110493761; 
- Tue, 03 Feb 2026 01:21:33 -0800 (PST)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-1bf9-06eb-939c-90d1.rev.sfr.net.
- [2a02:842a:d52e:6101:1bf9:6eb:939c:90d1])
+ AJvYcCV+4LNAEmRW/W3jow+MfQmbXC3CeuACt7NxfyDhzblhPLEy5FKpaRUF9+ORmbufI2njRnutFMU=@lists.denx.de
+X-Gm-Message-State: AOJu0YweKY/AvSe0/8yh+ga59LyL2yJ5SbAQ6+byW6ZazVYXyUtfZsRX
+ FFBLUbRj5d5YHhm4t5AJY+a7qESlvodzsMjBXinWotztMnALr8xAcOi6d5wwEXy0jIA=
+X-Gm-Gg: AZuq6aKFTdzIAiX6/JXlmSgTVBSIjIShOhe4Imuu/2ClKMRPSjN5oWNnOLeqBqOiaZL
+ jNrNn+FRQc0ENl0g+ErJqFxofxbzHUemUGZ512+cShV4bKI9LCvoJ3gOTJ1EMxoDX1odBjyESKD
+ jMSVvx4NFNpn5QnAQCUC0BKIIix2OrYMkmftl8uD0DxF9/8PEQGoe+h9Sbzo5xfROQkNg4EWlaD
+ 3vuIq0JUK+UQSO81KPHwonXk6MRoTWVCndgE18ogr3GTdL3gEApTbbamdEQpZZkxdCz5JbxSRrj
+ NTHZUUhlUI//tTCK+CQz50Ijj+ZIaeLB06NWG2xzKVzNkhaXhSSpPJRbyljOdKd+jSpwojEmuCx
+ A96SjtTz9AsOdEvM4drEzFoMmjkbGpmmjV02odWm7Uy0f8J73P2KWyIyhBfS9WQ2Lkud5BJMz74
+ MyG4Lb2B8du4EJS0lU66yNXuIkv/UaC98D/8FO70WRL61wSQnQ4JsMCZwXZD7LcT8=
+X-Received: by 2002:a05:600c:4ec7:b0:47d:586e:2fea with SMTP id
+ 5b1f17b1804b1-482db46b38dmr194951925e9.15.1770111266438; 
+ Tue, 03 Feb 2026 01:34:26 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3d9:2080:d283:7a7e:4c57:678d?
+ ([2a01:e0a:3d9:2080:d283:7a7e:4c57:678d])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48305153842sm52432785e9.10.2026.02.03.01.21.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Feb 2026 01:21:33 -0800 (PST)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 03 Feb 2026 10:21:26 +0100
-Subject: [PATCH] drivers: ufs: remove unused ufs_post_bind() declaration
+ 5b1f17b1804b1-4830513730esm53176525e9.14.2026.02.03.01.34.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Feb 2026 01:34:25 -0800 (PST)
+Message-ID: <e4a44f65-4044-4f54-9114-6fc526b5d942@linaro.org>
+Date: Tue, 3 Feb 2026 10:34:24 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] drivers: ufs: remove unused ufs_post_bind() declaration
+To: Julien Stephan <jstephan@baylibre.com>, Sumit Garg
+ <sumit.garg@kernel.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tuyen Dang <tuyen.dang.xa@renesas.com>,
+ Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Shawn Lin <shawn.lin@rock-chips.com>, dlechner@baylibre.com
+References: <20260203-cleanup-ufs-header-v1-1-4c10424485f0@baylibre.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20260203-cleanup-ufs-header-v1-1-4c10424485f0@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260203-cleanup-ufs-header-v1-1-4c10424485f0@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqAIBBG4avErBtQo4iuEi3EfnMgLJQikO6et
- PwW7xXKSIJMU1Mo4ZYsR6zQbUMu2LiBZa0mo8ygjOrY7bDxOvnymQPsisToxh5Ge+u0oxqeCV6
- efzov7/sBpoyWGmQAAAA=
-X-Change-ID: 20260203-cleanup-ufs-header-e385e21fac1c
-To: Sumit Garg <sumit.garg@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- u-boot-qcom@groups.io
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, 
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>, 
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- "Martin K. Petersen" <martin.petersen@oracle.com>, 
- Shawn Lin <shawn.lin@rock-chips.com>, dlechner@baylibre.com, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,155 +138,159 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 067c1b033282 ("ufs: Call ufs_scsi_bind() from uclass .post_bind")
-inlined ufs_scsi_bind() into ufs_post_bind() as trivial
-device_bind_driver() call.
+On 2/3/26 10:21, Julien Stephan wrote:
+> Commit 067c1b033282 ("ufs: Call ufs_scsi_bind() from uclass .post_bind")
+> inlined ufs_scsi_bind() into ufs_post_bind() as trivial
+> device_bind_driver() call.
+> 
+> ufs_scsi_bind() is no longer referenced anywhere in the codebase, so
+> drop its declaration from include/ufs.h.
+> 
+> Drivers used to include <ufs.h> to include prototype of ufs_scsi_bind()
+> function, so we can now safely remove such includes.
+> 
+> Fixes: 067c1b033282 ("ufs: Call ufs_scsi_bind() from uclass .post_bind")
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>   drivers/ufs/cdns-platform.c         | 1 -
+>   drivers/ufs/ufs-amd-versal2.c       | 1 -
+>   drivers/ufs/ufs-pci.c               | 1 -
+>   drivers/ufs/ufs-qcom.c              | 1 -
+>   drivers/ufs/ufs-renesas-rcar-gen5.c | 1 -
+>   drivers/ufs/ufs-renesas.c           | 1 -
+>   drivers/ufs/ufs-rockchip.c          | 1 -
+>   drivers/ufs/ufshcd-dwc.c            | 1 -
+>   include/ufs.h                       | 9 ---------
+>   9 files changed, 17 deletions(-)
+> 
+> diff --git a/drivers/ufs/cdns-platform.c b/drivers/ufs/cdns-platform.c
+> index 87d9c5bad79..40883a187b0 100644
+> --- a/drivers/ufs/cdns-platform.c
+> +++ b/drivers/ufs/cdns-platform.c
+> @@ -7,7 +7,6 @@
+>   
+>   #include <clk.h>
+>   #include <dm.h>
+> -#include <ufs.h>
+>   #include <asm/io.h>
+>   #include <dm/device_compat.h>
+>   #include <linux/bitops.h>
+> diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
+> index dd62c9819ba..6c949b2ca76 100644
+> --- a/drivers/ufs/ufs-amd-versal2.c
+> +++ b/drivers/ufs/ufs-amd-versal2.c
+> @@ -5,7 +5,6 @@
+>   
+>   #include <clk.h>
+>   #include <dm.h>
+> -#include <ufs.h>
+>   #include <asm/io.h>
+>   #include <dm/device_compat.h>
+>   #include <zynqmp_firmware.h>
+> diff --git a/drivers/ufs/ufs-pci.c b/drivers/ufs/ufs-pci.c
+> index 5b9c72a695d..e1e010d027c 100644
+> --- a/drivers/ufs/ufs-pci.c
+> +++ b/drivers/ufs/ufs-pci.c
+> @@ -7,7 +7,6 @@
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <pci.h>
+> -#include <ufs.h>
+>   #include <dm/device_compat.h>
+>   #include "ufs.h"
+>   
+> diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
+> index ee43958d5d8..dc40ee62daf 100644
+> --- a/drivers/ufs/ufs-qcom.c
+> +++ b/drivers/ufs/ufs-qcom.c
+> @@ -14,7 +14,6 @@
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+>   #include <generic-phy.h>
+> -#include <ufs.h>
+>   #include <asm/gpio.h>
+>   #include <interconnect.h>
+>   
+> diff --git a/drivers/ufs/ufs-renesas-rcar-gen5.c b/drivers/ufs/ufs-renesas-rcar-gen5.c
+> index cc53e91449c..a21ae3f390e 100644
+> --- a/drivers/ufs/ufs-renesas-rcar-gen5.c
+> +++ b/drivers/ufs/ufs-renesas-rcar-gen5.c
+> @@ -7,7 +7,6 @@
+>   
+>   #include <clk.h>
+>   #include <dm.h>
+> -#include <ufs.h>
+>   #include <asm/io.h>
+>   #include <dm/device_compat.h>
+>   #include <linux/iopoll.h>
+> diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
+> index 5652309911e..a206e3c6d58 100644
+> --- a/drivers/ufs/ufs-renesas.c
+> +++ b/drivers/ufs/ufs-renesas.c
+> @@ -7,7 +7,6 @@
+>   
+>   #include <clk.h>
+>   #include <dm.h>
+> -#include <ufs.h>
+>   #include <asm/io.h>
+>   #include <dm/device_compat.h>
+>   #include <linux/bitops.h>
+> diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+> index 0384244387d..643a6ffb9bc 100644
+> --- a/drivers/ufs/ufs-rockchip.c
+> +++ b/drivers/ufs/ufs-rockchip.c
+> @@ -13,7 +13,6 @@
+>   #include <linux/err.h>
+>   #include <linux/ioport.h>
+>   #include <reset.h>
+> -#include <ufs.h>
+>   
+>   #include "ufs.h"
+>   #include "unipro.h"
+> diff --git a/drivers/ufs/ufshcd-dwc.c b/drivers/ufs/ufshcd-dwc.c
+> index 3f62e59a060..98422d742a0 100644
+> --- a/drivers/ufs/ufshcd-dwc.c
+> +++ b/drivers/ufs/ufshcd-dwc.c
+> @@ -7,7 +7,6 @@
+>    */
+>   #include <clk.h>
+>   #include <dm.h>
+> -#include <ufs.h>
+>   #include <asm/io.h>
+>   #include <dm/device_compat.h>
+>   #include <linux/bitops.h>
+> diff --git a/include/ufs.h b/include/ufs.h
+> index 702b8359dbd..f6e27d90e43 100644
+> --- a/include/ufs.h
+> +++ b/include/ufs.h
+> @@ -20,13 +20,4 @@ int ufs_probe(void);
+>    */
+>   int ufs_probe_dev(int index);
+>   
+> -/*
+> - * ufs_scsi_bind() - Create a new scsi device as a child of the UFS device and
+> - *		     bind it to the ufs_scsi driver
+> - * @ufs_dev: UFS device
+> - * @scsi_devp: Pointer to scsi device
+> - *
+> - * Return: 0 if Ok, -ve on error
+> - */
+> -int ufs_scsi_bind(struct udevice *ufs_dev, struct udevice **scsi_devp);
+>   #endif
+> 
+> ---
+> base-commit: eed514b11d04a2f8a949521ad3bffba3ec98bd2f
+> change-id: 20260203-cleanup-ufs-header-e385e21fac1c
+> 
+> Best regards,
 
-ufs_scsi_bind() is no longer referenced anywhere in the codebase, so
-drop its declaration from include/ufs.h.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Drivers used to include <ufs.h> to include prototype of ufs_scsi_bind()
-function, so we can now safely remove such includes.
-
-Fixes: 067c1b033282 ("ufs: Call ufs_scsi_bind() from uclass .post_bind")
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- drivers/ufs/cdns-platform.c         | 1 -
- drivers/ufs/ufs-amd-versal2.c       | 1 -
- drivers/ufs/ufs-pci.c               | 1 -
- drivers/ufs/ufs-qcom.c              | 1 -
- drivers/ufs/ufs-renesas-rcar-gen5.c | 1 -
- drivers/ufs/ufs-renesas.c           | 1 -
- drivers/ufs/ufs-rockchip.c          | 1 -
- drivers/ufs/ufshcd-dwc.c            | 1 -
- include/ufs.h                       | 9 ---------
- 9 files changed, 17 deletions(-)
-
-diff --git a/drivers/ufs/cdns-platform.c b/drivers/ufs/cdns-platform.c
-index 87d9c5bad79..40883a187b0 100644
---- a/drivers/ufs/cdns-platform.c
-+++ b/drivers/ufs/cdns-platform.c
-@@ -7,7 +7,6 @@
- 
- #include <clk.h>
- #include <dm.h>
--#include <ufs.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <linux/bitops.h>
-diff --git a/drivers/ufs/ufs-amd-versal2.c b/drivers/ufs/ufs-amd-versal2.c
-index dd62c9819ba..6c949b2ca76 100644
---- a/drivers/ufs/ufs-amd-versal2.c
-+++ b/drivers/ufs/ufs-amd-versal2.c
-@@ -5,7 +5,6 @@
- 
- #include <clk.h>
- #include <dm.h>
--#include <ufs.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <zynqmp_firmware.h>
-diff --git a/drivers/ufs/ufs-pci.c b/drivers/ufs/ufs-pci.c
-index 5b9c72a695d..e1e010d027c 100644
---- a/drivers/ufs/ufs-pci.c
-+++ b/drivers/ufs/ufs-pci.c
-@@ -7,7 +7,6 @@
- #include <dm.h>
- #include <errno.h>
- #include <pci.h>
--#include <ufs.h>
- #include <dm/device_compat.h>
- #include "ufs.h"
- 
-diff --git a/drivers/ufs/ufs-qcom.c b/drivers/ufs/ufs-qcom.c
-index ee43958d5d8..dc40ee62daf 100644
---- a/drivers/ufs/ufs-qcom.c
-+++ b/drivers/ufs/ufs-qcom.c
-@@ -14,7 +14,6 @@
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <generic-phy.h>
--#include <ufs.h>
- #include <asm/gpio.h>
- #include <interconnect.h>
- 
-diff --git a/drivers/ufs/ufs-renesas-rcar-gen5.c b/drivers/ufs/ufs-renesas-rcar-gen5.c
-index cc53e91449c..a21ae3f390e 100644
---- a/drivers/ufs/ufs-renesas-rcar-gen5.c
-+++ b/drivers/ufs/ufs-renesas-rcar-gen5.c
-@@ -7,7 +7,6 @@
- 
- #include <clk.h>
- #include <dm.h>
--#include <ufs.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <linux/iopoll.h>
-diff --git a/drivers/ufs/ufs-renesas.c b/drivers/ufs/ufs-renesas.c
-index 5652309911e..a206e3c6d58 100644
---- a/drivers/ufs/ufs-renesas.c
-+++ b/drivers/ufs/ufs-renesas.c
-@@ -7,7 +7,6 @@
- 
- #include <clk.h>
- #include <dm.h>
--#include <ufs.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <linux/bitops.h>
-diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
-index 0384244387d..643a6ffb9bc 100644
---- a/drivers/ufs/ufs-rockchip.c
-+++ b/drivers/ufs/ufs-rockchip.c
-@@ -13,7 +13,6 @@
- #include <linux/err.h>
- #include <linux/ioport.h>
- #include <reset.h>
--#include <ufs.h>
- 
- #include "ufs.h"
- #include "unipro.h"
-diff --git a/drivers/ufs/ufshcd-dwc.c b/drivers/ufs/ufshcd-dwc.c
-index 3f62e59a060..98422d742a0 100644
---- a/drivers/ufs/ufshcd-dwc.c
-+++ b/drivers/ufs/ufshcd-dwc.c
-@@ -7,7 +7,6 @@
-  */
- #include <clk.h>
- #include <dm.h>
--#include <ufs.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <linux/bitops.h>
-diff --git a/include/ufs.h b/include/ufs.h
-index 702b8359dbd..f6e27d90e43 100644
---- a/include/ufs.h
-+++ b/include/ufs.h
-@@ -20,13 +20,4 @@ int ufs_probe(void);
-  */
- int ufs_probe_dev(int index);
- 
--/*
-- * ufs_scsi_bind() - Create a new scsi device as a child of the UFS device and
-- *		     bind it to the ufs_scsi driver
-- * @ufs_dev: UFS device
-- * @scsi_devp: Pointer to scsi device
-- *
-- * Return: 0 if Ok, -ve on error
-- */
--int ufs_scsi_bind(struct udevice *ufs_dev, struct udevice **scsi_devp);
- #endif
-
----
-base-commit: eed514b11d04a2f8a949521ad3bffba3ec98bd2f
-change-id: 20260203-cleanup-ufs-header-e385e21fac1c
-
-Best regards,
--- 
-Julien Stephan <jstephan@baylibre.com>
-
+Thanks,
+Neil
