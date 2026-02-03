@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42723E87827
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C241DE8782A
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:35:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4B1B8413A;
-	Tue,  3 Feb 2026 14:34:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44D8784150;
+	Tue,  3 Feb 2026 14:34:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="d2TgWIQc";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="lXfd+xzb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A5C383FC8; Tue,  3 Feb 2026 08:48:52 +0100 (CET)
+ id 047C483FC8; Tue,  3 Feb 2026 08:48:57 +0100 (CET)
 Received: from PH7PR06CU001.outbound.protection.outlook.com
  (mail-westus3azlp170100009.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FACA83FF5
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:48:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 032DA83FF8
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:48:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jH/4lj5blzFha50E4QwUG3Sz5aWfIi3XQl5KuNQ/jW14ROYXfwFpeu4mS78H1kAN5ZwpeotI/rBMALLOX+q4iQLgy1PF5WBoIgSkZU+AIsw+DNtWFE5dW90AEYMUqtZJPM046Y67brOnqWMJY/VpVaL+6RXcrHDGxFOSZlZfINMj3f1NIVrgl1IjsC4gFRAx16dOUdGLzH5fXsjBxo94OEfwK3giIH0TwNMRpiz6IT42bJc+0BgRVgdZThWRsQANpDx+mIMPOyiHYNWzQGc/YG0YAc9VTvNhORZgF9WqpdxPoteN7DR2uqtL0gvBNdVMGDQ/47dbWqAExPgWGXCpug==
+ b=hxp+Sxu0ZW3l7YjIipfzKsYNQ9wxIQk62e0HPOHnmYP0yKqM00gqoHyAbYr6hjA3tPRozgnN0auypwkc+xLRgKs56dazw8TZagfftKZtvsfyLHFAulA2fHoSfj8qPWZ2L8p3wJf7feocopSWW65N/Tjk7PYmZL2UhJ2ANgt0eGNz03nVsK3aYwyW9ZhEVwYVb/tPxq1ItAi0azc2TqTe7PwNN6XuQbZUIvVDqJL8KSqVdo+Ug3E1tlZKZqCqJwLz1taD5K7AswJMMEJttk4FZiRwfTpf+9UX2dhl/QFgVzbBB0D64FLESMYuqwSKqzjxwsfEbg4G9/mOacWeSBpC7Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RI4zevinbXkVmDWWbL/PscJtNi1IJ4jD7rDqVKsKung=;
- b=wVEZK4NL9ExETDg6V9yH1jqtNTngh/cOFinBsSNwzbB2wy8XEyrShhk3/OYCNtK3urMZ4tTUgl5iRhf95GaG5LS+zZ0KqzOQ/+HpngMR/g2ZzYBf3vY3RYqQwo7Ocu4+y4kamwi1aze2u+nE/bHvhHVTCRoa6ryRPA9SH0dsGsmAFeOFyXuvLT6c5h3nT8Mp2yCmQWqsvGX0VE5+0BzSHr78brszvH3tGgkRpoP56ObFiYIJpH2BFnlfOB0cejp3aKLbgqTxVF8gsMFMN00NTVjF6XzeLWHQouVubZaADWTNbPTF6JAjYvIRIW1bDI85aX3FVYwHZF35gewcBkKefA==
+ bh=8UqlBZ8tYpsPXy+QtP4LcG/OSZKv+8xBb7167lJRpmE=;
+ b=mdclV29sbHnxL7fZ5PXSpuBPPuW1QrXo0uP+DfVsAZ8zYjwcteqNXtZ9ShOQPsX6gigjqWVCF8E3kG2IXjqMll8IAYENLZXHnZCYIBta9SQ+JNakXKdDzfhkxxUO+Fdq8hzPLmSngKcCgrxFHkkZMxy+vf21iPgKJgYuUuWGoxKkD1cnURQwtcigxUiRHZpPv21K9zDWVvb7m/0Df+eGBis53QL41kMBzAoBZlbilsHZx7MeOuDWCGLDXOdrzKumbToYUpD/nBS0hJEjXw9FbBSPf4VvqTxsqiwxsySh/fqwzLXgu5y2gL57Rxiy2iLYc3fMh+SEezu6pur5zrPBiQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RI4zevinbXkVmDWWbL/PscJtNi1IJ4jD7rDqVKsKung=;
- b=d2TgWIQcTMyc/Uz1JD1DfBtI9w/WhTv5rxHz59Sy+W+vEv7hSz3r5IS011w3D20Iph+WcaqJSQ7u76TAVsBukPzWLDGi+n/4GsHChSevXK7I0i19qmm7yygxHT23G6wwPe7D5JcIJhzZ7b+dWU2rfcRTiLgMJcTxiIL1lr4doJPWp+a+2JBrHbd4kQE2OCrAoEFMwkjXgOuaJGtEN+yNjNbbN1C4Cfg296/jO9Ypj1ZRUqNHDkm6Gjf5Bjyp7GWjfUvQKngWJxQS4qlpwVOkRwjkicfH2/E+wf9B9gLyAhibSLsXOlMaFgm5WXiKOBcBZo5IeHW83w316Fdl9uD03Q==
+ bh=8UqlBZ8tYpsPXy+QtP4LcG/OSZKv+8xBb7167lJRpmE=;
+ b=lXfd+xzbe6TFlq0rc0ojXKh50Kbi4IVtjLKtdq8rGhv4+3jzpWvLLmVaT73HBfnHSgqHzKGB6W3OJHSJ58StO0vz0OMkpQ6QGNKjUOHOUmewojGMTLwDWWy3QUxk+VMcFiX13paMlkRjoEreZKP0XKhfFxd3ohGIY0nLcWNsOjMyZoo7ufvGPr4JeIiEoSxwqXF/YFWRaBhRJv+l02JyLDCI0D75nGDAFUNRmcr43cZF3hg2+8mZg6HUBsGnWIc4wj5LSoS0NVKdsx7c5GaJ8BE0AN7xuppP5xHzEJP8FwqaijWU/sq/sI2VU4PO/7DE2B6qVJofWHx1FHHRh01I/g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
  by LV4PR03MB8236.namprd03.prod.outlook.com (2603:10b6:408:2e0::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Tue, 3 Feb
- 2026 07:48:47 +0000
+ 2026 07:48:52 +0000
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9564.016; Tue, 3 Feb 2026
- 07:48:47 +0000
+ 07:48:52 +0000
 From: dinesh.maniyam@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -63,9 +63,9 @@ Cc: Marek Vasut <marex@denx.de>,
  Jan Kiszka <jan.kiszka@siemens.com>, Tien Fong <tien.fong.chee@altera.com>,
  Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
  Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v2 2/5] mtd: nand: add generic SPL NAND MTD loader
-Date: Tue,  3 Feb 2026 15:47:18 +0800
-Message-ID: <20260203074721.25520-3-dinesh.maniyam@altera.com>
+Subject: [PATCH v2 3/5] mtd: nand: wire SPL NAND MTD loader into SPL build
+Date: Tue,  3 Feb 2026 15:47:19 +0800
+Message-ID: <20260203074721.25520-4-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.43.7
 In-Reply-To: <20260203074721.25520-1-dinesh.maniyam@altera.com>
 References: <20260203074721.25520-1-dinesh.maniyam@altera.com>
@@ -77,81 +77,81 @@ X-ClientProxiedBy: BYAPR05CA0007.namprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|LV4PR03MB8236:EE_
-X-MS-Office365-Filtering-Correlation-Id: d11a169b-3031-4334-4a0c-08de62f8a972
+X-MS-Office365-Filtering-Correlation-Id: 5063db69-e864-4c17-a1c2-08de62f8ac86
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0RqmZAjRlNzStzf46EOB2mm01iLEPkTf1OV2sjqBnw3RxSVnU0SVRtNb431X?=
- =?us-ascii?Q?4jJhUQwvqua077Yr39XuabnJfJxbgfXDexzw0p86QemqzX4HFt0n2M+XbtRX?=
- =?us-ascii?Q?+OQzfWxXVXJfM4fdiDgu9wMUTEUtyBhAAmEnSQnFn1X8LfXb+XvXGNbl07r9?=
- =?us-ascii?Q?hNx2QkVQ40XQzNk21+pgzFP7ZeYXaHg8kGi7Wr/DIhryFa0MrsrZyp1+LLSt?=
- =?us-ascii?Q?b1X8vpx6WlVQ0/22Z4HG5NfG2oasn3NLfRrU5jlNHr4afYPliyYu3KKJPCOp?=
- =?us-ascii?Q?8dI+kiqE8I8DztYYTOPCcLa3N0EUe6kqPo3ZbotMIYsHq+9y8EFmI9PrvZbs?=
- =?us-ascii?Q?6zo4T2BsLcO0H9YuNx1sR261PskgDt91qQTCu2cZY7fr+SOWIXZjsRJBwGv6?=
- =?us-ascii?Q?0bt+5gb0DhAspGDxm91fl9tdNYNnU6/KHF64+7qkhvSuIBB8v0b7/rNFLvfY?=
- =?us-ascii?Q?eet97n9fhuC2nMzfNI74bOAwz+hsQjzGZkczVrSe87qIVSQn/30SKpJe4qtO?=
- =?us-ascii?Q?8V5V5x62/zk8c5dkT7DEJFeNTne36fiEX3HjkAcM71nRD5j6JxqYe87nreEw?=
- =?us-ascii?Q?D6dWGAd1iv1vPOZthZl7E8Ywef3FFy239ToWBZEqI06IY+convSkldvfHnIB?=
- =?us-ascii?Q?lBmZicLzIgSJL68C+15+TvRd1zbhnyP6+13K48T2AC+C7xms8LPczExyf+kI?=
- =?us-ascii?Q?yU3mmrrXq1d4EKK9tx9q3ywTbidZXCwS6ZODoav3W5WJYIT9Hu+Y6fZheNim?=
- =?us-ascii?Q?BG8hWeAtlqyT+IHKZXjD9GfqKBDeL018OVbkpsT+bs3/R7aJsPxfZudy765/?=
- =?us-ascii?Q?CIZzes6lNX6fqiGIHWKVvR5fGqpHSsqVEzQCofZREAUr/VusvKLt3nvcHGIk?=
- =?us-ascii?Q?l8hI2FS6VI6S65FLtCqdrQcGyy551jkLPlC0YlQo5+GXRj/qbGAfdGSQN/Fz?=
- =?us-ascii?Q?NhzlAzaVmNx/QocOWd3dgIq3jcAi9GsAjcibieIYGiS8iL9xnobcQiMmAcnw?=
- =?us-ascii?Q?hUxNRbpA9kR9DggfbwSJEjGTvXBaWUhbsdmL4EyfFTnDZ0wN2i1CRaryXvQ2?=
- =?us-ascii?Q?zVMjnd/i0SfHJcgUjtr+DLgg003H/Zq9B9RYo2i5eECM+4LBHcjdVrBg/+QG?=
- =?us-ascii?Q?3WFTH5cuUQD8mPcuUoWVKDA0DPRT3lewvWbEHBRma+eHx4OEz8lIiMBBm5aD?=
- =?us-ascii?Q?Q0IqHWj1GWuViuUFdUQJ+tkCGNXNlPIZVBoN4ypPRh9y+5lCLU10Jmq4zWgg?=
- =?us-ascii?Q?9IML1GOrg6RW3UC6APCApijuzbYggtjqjVwHJLHaDgOp4vUIJjk2ic/QHrPE?=
- =?us-ascii?Q?6cRgXybQjuq0jr0yaHlPujLkXO/Gwvp6iCdW2TdTTq/tvq7GRfFr0/KwYMRm?=
- =?us-ascii?Q?bWfG4sXPvsY0lYCUX5rhk5oGnou3S6ayMpzCHl5mFe9YbZRk3yh0pWQfqfF0?=
- =?us-ascii?Q?yqHeNFMuR1MuQwwFQ1hMafOcR+dECYE2nCM92orBeQ024A5OBzIXu7rib+82?=
- =?us-ascii?Q?okoKV+uj86PdwNfyfjd2iBTZULBSxii8SoqYK1xkeALBnzNeTQt+NaB77Sii?=
- =?us-ascii?Q?bgQoZctkFHTKA8gsStY=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?shargIJ7K7uCchfqYtJKJI6H/Qmd6xpTL4gRWBVBMANVdHrGjkgb/FACAdqI?=
+ =?us-ascii?Q?SbZUByxcINCNVvq2wNy4Mhcgt9ReyONHrH6z9z2TxCiN79XM4ZAPCoPGPq1R?=
+ =?us-ascii?Q?ldt7SfHG8sbl7RQJRQdWG2LWXbIYJaNpUcfZZlV9ktU3X2MiKEdK0CthI/G3?=
+ =?us-ascii?Q?h1O+PG3w5rtj4TjpRuv/lrjnzdf8XIy75BSAksfFaltnqyIlg1DSshXKTQug?=
+ =?us-ascii?Q?gAr9DeM0I3UsEovBJPEUjuyO9Wnn2GQ44GnvRepAHaJLCgpnmHFYY7PcLXke?=
+ =?us-ascii?Q?QT6fZTbbezFmJe0B9mULC9RmJj+XzcIFeECiqdUzCjqCec+I4Pz5c00xRo4g?=
+ =?us-ascii?Q?Tw4fpREiFujPH9TwNTh9Is5m9HGZbNvvhjvfSAY2tkS6g8u+RGU80RYKytBz?=
+ =?us-ascii?Q?2X5MrU95E8jYAtDuHpCPEczp/wZWGoEp2KmUIrTmoZvBCseI11KLMtSqr9bm?=
+ =?us-ascii?Q?5NaXH0yqyrX1gnfu4UNlsWmi/J2PjYSxywuThqQCnR3r4fd7hhn6lapiwlPM?=
+ =?us-ascii?Q?sO0AkPyvsApAYT4g1QoREmorHPIOA47M3JceisDGkJzUxPD0d7//atxuqjzq?=
+ =?us-ascii?Q?lrVPOd9bGZLffgO00swAdgCbhrOXxDR8va+yMiBZQSISA6xkwu8YF1W9VYQ0?=
+ =?us-ascii?Q?Dk4xwtD8WI8IPTw2mg/G8mTvFAjJCFz8Q4fz1WlbQ/alEQfY+K/E7+u26RFz?=
+ =?us-ascii?Q?EoFsig9rWRUb6TEGpIfgjve1GllHf41a+xUZRiEUMO7s3hgHaBTgRRtEGS3U?=
+ =?us-ascii?Q?DqtqY9dRNuvZqDGPKB//ZbIFD+Q6cU2e0hBz7OqaNEhDigpzYXyYpnJg5iB3?=
+ =?us-ascii?Q?c5iAyxT7EjmlsRB7S3ZW6zVSz2CRVXcmDXEYVBn77R/Q6lTS9MnzHNGux11y?=
+ =?us-ascii?Q?rvcmWx/myhS4H93VzL8Un7JR8MQWYQotMXYe5NqZxV7AtDBPCNeL0Fup6Uiv?=
+ =?us-ascii?Q?RJX1pwqbEGcgscQh5SeEMvM8wia4m7Z/fsZdgyrHKW0t/+uRRpPtX51kPBr3?=
+ =?us-ascii?Q?zlJhQGVBXX+lKeEkmf0gBSoAt2H/tred6a2GIjMNd6LQOAIFC3nnY3BQLhXY?=
+ =?us-ascii?Q?XoeOpvcl1vu9+K11ClL7LKFou6CmXQpEmVs1ouUmyUAuA6XR6sP0C7gmHeBR?=
+ =?us-ascii?Q?eUd4XNba317FGeoqANI5Bp5bdAyHa0XVtpMT90bUtHsSFVw/N3SBTfFt+I+m?=
+ =?us-ascii?Q?scvAN19p5gJWc497fD1KBQ/kMbzF1IcDNqDWuMUguhJ3Trtcu2zKqION3AWW?=
+ =?us-ascii?Q?v8G4KCwgdwu5QQXB8o9oIZgpDVP7PG+1aOlw3qWjT8rfnUCKpztCeFq2RCme?=
+ =?us-ascii?Q?EwGmX7BeF3ZBXeYhJC5ae3uvLDRN5OOFm4hCDwJ3pDMCO7mVoaFMiBsvLdrV?=
+ =?us-ascii?Q?XwSigOm6117qlSIkzwMuEbFDkYYLIUJ5hi1vCwCaj2lmZ7leAX2myzg8x96v?=
+ =?us-ascii?Q?4b2Fz0hYXXK/vN6AsoSv/3T8tfe5vJ3eSqAf/A8GcB7D+0CHR7A03eqWc8YI?=
+ =?us-ascii?Q?KrO0/rzZRUlA8djT6dho5yctXqNgTbtQCPKYjLFJEoRocsMqKQRCgdvJgpGJ?=
+ =?us-ascii?Q?Dp/cKMdxBJL5Gvwhvro=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?wFwf4sg2pOXb7EZfUE2+B/Q4l4vWV8qLdhcIXHG/XGq+h8TJsy+wOUIe1c3l?=
- =?us-ascii?Q?Lm516Zey8jU73JvbKFSEjMKHCP9snt0lNb/oGnCCBo92i8JT8k98afxjZ1g7?=
- =?us-ascii?Q?L6U2sQDZ13GmZJbAybZlSpdJoy2Gks067wSSRGK2e2nkoJHZbcC64R4ce57u?=
- =?us-ascii?Q?xHYtNFh4ZOuYjoPgZFxNJbpEKH+/6oJ/iWVoDazUoLxe7R4xTTdWDfomA73d?=
- =?us-ascii?Q?43LVSXlSpvanPWbMJ2AxjHkoZzr6MPv8PC2OzhcUbyPo1ppaPKQENiAh+Qyt?=
- =?us-ascii?Q?14sJG7bb69vLakaOG04kYTEBm/I0k9M6yPX2exXTMw4qrZI/F9B6yBxX9e2a?=
- =?us-ascii?Q?gqzYbrIYQNYDhZca1ACIidGZTkUfML9ENXd2UvTxkyRMsfmHdhjkAQYETqYD?=
- =?us-ascii?Q?v/qeSOpiXpQEDLYPUo9POp9+VAdjZmSiDpohs9u1+z7Puj+2BfbWQ0glCCoN?=
- =?us-ascii?Q?lSzUfYfyZPQ0BYr31rRkIe8GzBy4FC3JBHfSGrf3GfoDHb7VdH7anQhv9nkZ?=
- =?us-ascii?Q?khU5i4Mn8rMgaO3gwLnJ52wLLQmGDcvgifTbE27H7kRguiHI2oXu4M+wIEGu?=
- =?us-ascii?Q?683huc+HN7SPEV3ehxlZrwHYdUDNHTWYcvHGFN5RQn+yY89WPBvf37Itnc8i?=
- =?us-ascii?Q?vrh/ldLh9n7fe4IGc7uuPOf2iGqC7evR7RUM3LOwgiInDzor/sH5co57DWE4?=
- =?us-ascii?Q?UGSD0bO15s+Xln5P0EDJ1I+9Ij53Li9Xuvtmp9vEUk3mKqMDvacaRfjIxB9A?=
- =?us-ascii?Q?9MvEaa0tFwoyhJ1VAOi/PkKZkL0jKGUi4Iygg3CSXqUuP/oD59J/bF3jy0Ru?=
- =?us-ascii?Q?daQB5OeFMFMsD+B0KGkPtvyXX35Nsy6myA5u1UeZEQ+i3ZzUjIstUQH/z1oW?=
- =?us-ascii?Q?YhJq+ten+ulNRLORcNrbcm++LapfRZzohKUs/zbtycmk75wMr/+RvZbzK8Ti?=
- =?us-ascii?Q?9h+oRe2FuE/LYnA2+7aG2vyfkXszd1KkUEpdMAsPHXvuZuFZgw3QSBIUeDNn?=
- =?us-ascii?Q?e/OzGKOzwo6eOUVCmCKE2GOC5cxot1ZQZ360C8Cu7dzlgyMBuGPDYL7VkFoO?=
- =?us-ascii?Q?TCY+CHs0/8ekjk92atn9Tc4VXrAiwjIhGKHgBpqsj10ScOoWAwA5r83ePZoq?=
- =?us-ascii?Q?I3i7pEnqa811IRZSfQtMfQHB0E32e9Q/9/fbVNaHzvbxYc+KdqupydqkDdRN?=
- =?us-ascii?Q?u9suCLYEsi6CCf7xwE2g+Iw+Jzpr9HfhgHzrhCmHg/SF57j7oxNIXoQNXaG9?=
- =?us-ascii?Q?o+fj+JlONTU9eyOiJennbM4TTDk60aQdyMBZFbhyaDV4uVVkw94FA7zeiftg?=
- =?us-ascii?Q?hgB4dTLuY9wDp2Ir1mIjL+ZtdWZnvINhZMzCkbE3w6z7r3bBdT4A0iuNcRdL?=
- =?us-ascii?Q?lbLPUcp6JCu7lOjtt6D5eyk6eeGvgB/rl9nonQnEjuMCmjV0FNbFvdBjN+Pi?=
- =?us-ascii?Q?iNaXhBfDQUa9v4sswaYItb/fVZBdv59VYBXFDt9AVjh8Hk4vgYI39lMclisC?=
- =?us-ascii?Q?rxblogxuKE5mUPnOPcLGn7P2t1VclO4O21RDfdWRRbICPzqeRT+10XrqS7Xd?=
- =?us-ascii?Q?dNc+oGx4iSJXcoRUZNZ+GT5jJClZCsywYI5awOcMd5yEqw4K1/Fba5wSyCmA?=
- =?us-ascii?Q?vzKhQe34Dp80pdkfsgA6aQk4jsKeHBC6Ju4tjgTV3U8Tl005siOGTmfltLl5?=
- =?us-ascii?Q?Jvb6+OxAOCXSAt21WRNNMXVXDfUSk5hZv9n5xKpTz6aVWX5fMHvk7Ekjdydp?=
- =?us-ascii?Q?7a1Y1LchSImus8i69PVo0Fq4seOnrPM=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?FYI1TGbWMQbfmYi10KG2V/hXH0ZzxVJAQVIPd6Xi5Nds8D1jg6A3+i/T8L7B?=
+ =?us-ascii?Q?Jfuu3RewhWdPaTrs9UhXNkJPjEH9gCSrkVPKLBZDIt2jFCnarXIZEedXqwb6?=
+ =?us-ascii?Q?G+FlqQkzbnBeELQ92YFhHF0Z9yc+GhrDhbUsbYec7ocB7JSHQgwXaknu8Cgg?=
+ =?us-ascii?Q?FJLtsmIIO8Gkt+oBnEtwBe3CccJbpgZ87vk+MHQinyx94W4sMFXv7g/WwXa1?=
+ =?us-ascii?Q?4RXji8mpCmQAeH2jHCZTxVlA9GKuvETqrGZrM5aDziy2OPxbmi1zmfJ9S8U9?=
+ =?us-ascii?Q?8W6DIAZaqx6fT/c60kESYzzQwejqY9/ePkU8Y/mvV8OaMR9sFPpgKQLbyx1g?=
+ =?us-ascii?Q?bL/Efo/1MONd0m6pdVCn9JjLEE7ANRovsgy4nV5ZMD634Dz2mFSVaDmtG7xJ?=
+ =?us-ascii?Q?yStwBmcgdSbqVQlrbhM5xbNQOim4SHt9vkBY4hNGV0DL6vlwAkUiA4KoFjTQ?=
+ =?us-ascii?Q?a8fxtKXFhmBgTKZFbMu06rW8H1xJ4p6/F93Anm2m5ZzcQ3oBidotA7hnblRu?=
+ =?us-ascii?Q?j5+pMLdHji0F/dQDSdZ6GY8SxGywSXOcRMm5s/eswbilwOWSx/mVFpLfqhiG?=
+ =?us-ascii?Q?kG0MwhScw2uLvkQ/HpHtnfHkx+irCRGd5rQrrZtD5j3YWOEm/FucW5d8kfTB?=
+ =?us-ascii?Q?/+yxmDyCzV3cSExrIeMQJP3EikQ1o5mpAQlSiFW0NbBSx3Jj9KQKCM8+377L?=
+ =?us-ascii?Q?vEBzUe3lHapN/LszTdr1riQk9TU732qy8RGnIOVmuDe4UWOA4Mzjx3csL/Lr?=
+ =?us-ascii?Q?0oV9vNqENwT7AD0SZDDDMx4Viahg6UqEs+6sKO0Bb4WGOSJHFxd7RfZmF1Vj?=
+ =?us-ascii?Q?GMmaV7SGVLERPlqKBZ6fyiAxxGrYC1Kw6pl11L6YMgTDkVMhAf34D1yfnvlj?=
+ =?us-ascii?Q?C2dzrgrldu0aFNCI4AZ+sRKmGEDpjaV0YaV3e3dW1SIO8IZq+S9DiBlOvMXj?=
+ =?us-ascii?Q?mRRLoGVVvX1EbbT4JrFKU5u2ISBOYgAFYX6gi2dWhZi81tntRJOMgiTn9BXg?=
+ =?us-ascii?Q?BdtnWn2cuWC74akOxJqs2vxHczBozbYFlb7NvkDIJvhYShf2TDiyIPM6O3FL?=
+ =?us-ascii?Q?BiE3MgPqz6tpLxI1GdiqtL0O6iTGTz/tk/gW77UkTpH3cbLIcCCZK1kskFL9?=
+ =?us-ascii?Q?6jiOUyta+LLmp7r8aR6bj+g3H5BVxHiUjzH/V/evP0Dq7MMxnJ0mPXu/ctFD?=
+ =?us-ascii?Q?fVH0ZA3cBIhEh9Ft1+NfFabtfIgQCVxPv1lIVKXP9OqnLMnYVVIna1DLSaOv?=
+ =?us-ascii?Q?hXejytYqe+gssuMn1rn91chvvFcErA7QzTcN16SKi6GfAhAJ4ktxOkXGRFqu?=
+ =?us-ascii?Q?bC6GlxcoMk6j7A7cTl9AxL/aOtcokIFja20KUbCK2ky2jcoXPzPRDi/0Hrfa?=
+ =?us-ascii?Q?V4ZDhbsR0zYCEvDHBviQDqsbLVXCYoPzbjZTQwpUyOjH3eMmzrow/VbH+T9h?=
+ =?us-ascii?Q?e2SrImaqDr4UBQo7Nk2JskrPKwalZcvV6aT2QFfhgn7QcyTL3+NejzftTUtr?=
+ =?us-ascii?Q?1oCbAU/p0OR0Xr0uAnS8MTkIo19aLbNk9W9C/vyDUvQoG/tsKu55mY1puPkZ?=
+ =?us-ascii?Q?/CladlXI/pSnQVOm+5sQ0cx/BfX7H0u7nd9dUdYyFhIhTHIVKRy45w75VHCQ?=
+ =?us-ascii?Q?p60q7ZN5XIln6Gkf9G+9dwkYFU9Gbxd8MgyMt1YhZsLAeAO5hr3OeGU0h9++?=
+ =?us-ascii?Q?k3K/akrhDthV0aKuVh6SeNpzmKy7w4dxCyuM8H910b8UaBIGwMXTpa2dhhqf?=
+ =?us-ascii?Q?kQPRlVr0x951UTrjFe/U5tlYkdvpIfc=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d11a169b-3031-4334-4a0c-08de62f8a972
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5063db69-e864-4c17-a1c2-08de62f8ac86
 X-MS-Exchange-CrossTenant-AuthSource: MW5PR03MB6929.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:48:47.4822 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:48:52.7124 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PJ1mIuO0i0Ttc3AVE4vkw9XfnNfwTMksGyoVwwA8vFG3jH42R18HhCPU+JitaIH0VleDbROkkFTQg7SnrofiEn5c7UpkJ7EtfvzEv9qkDD4=
+X-MS-Exchange-CrossTenant-UserPrincipalName: EfSvyK8yJozzfNrGpZo9T1+pUNj278yWONnrC/b6b39IX3OCXOlPzgxwzgrXWPwpKaHYILlW9Eb5v75nQUur5Kt1TlKBXyDnPtxx09eh3zA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV4PR03MB8236
 X-Mailman-Approved-At: Tue, 03 Feb 2026 14:34:39 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -172,100 +172,26 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Add a generic SPL NAND MTD loader providing nand_get_mtd() and
-nand_spl_load_image() helpers.
-
-This allows SPL NAND MTD loading logic to be shared across NAND
-controllers instead of being embedded in individual drivers.
+Wire the generic SPL NAND MTD loader into the NAND SPL build when
+SPL_NAND_USE_NAND_FRAMEWORK is enabled.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
- drivers/mtd/nand/raw/spl_nand_mtd.c | 76 +++++++++++++++++++++++++++++
- 1 file changed, 76 insertions(+)
- create mode 100644 drivers/mtd/nand/raw/spl_nand_mtd.c
+ drivers/mtd/nand/raw/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/mtd/nand/raw/spl_nand_mtd.c b/drivers/mtd/nand/raw/spl_nand_mtd.c
-new file mode 100644
-index 00000000000..06bd0b6ec88
---- /dev/null
-+++ b/drivers/mtd/nand/raw/spl_nand_mtd.c
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright Altera Corporation (C) 2026. All rights reserved.
-+ */
-+
-+#include <dm.h>
-+#include <hang.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <nand.h>
-+
-+struct mtd_info *nand_get_mtd(void)
-+{
-+	struct mtd_info *mtd;
-+
-+	mtd = get_nand_dev_by_index(nand_curr_device);
-+	if (!mtd)
-+		hang();
-+
-+	return mtd;
-+}
-+
-+int nand_spl_load_image(u32 offset, u32 len, void *dst)
-+{
-+	size_t count = len, actual = 0, page_align_overhead = 0;
-+	u32 page_align_offset = 0;
-+	u8 *page_buffer = NULL;
-+	int err = 0;
-+	struct mtd_info *mtd;
-+
-+	if (!len || !dst)
-+		return -EINVAL;
-+
-+	mtd = nand_get_mtd();
-+
-+	if (offset & (mtd->writesize - 1)) {
-+		page_buffer = malloc_cache_aligned(mtd->writesize);
-+		if (!page_buffer) {
-+			debug("Error: allocating buffer\n");
-+			return -ENOMEM;
-+		}
-+
-+		page_align_overhead = offset % mtd->writesize;
-+		page_align_offset = offset - page_align_overhead;
-+		count = mtd->writesize;
-+
-+		err = nand_read_skip_bad(mtd, page_align_offset, &count,
-+					 &actual, mtd->size, page_buffer);
-+		if (err)
-+			goto out;
-+
-+		count -= page_align_overhead;
-+		count = min((size_t)len, count);
-+
-+		memcpy(dst, page_buffer + page_align_overhead, count);
-+
-+		len -= count;
-+		if (!len)
-+			goto out;
-+
-+		offset += count;
-+		dst += count;
-+		count = len;
-+	}
-+
-+	err = nand_read_skip_bad(mtd, offset, &count,
-+				 &actual, mtd->size, dst);
-+
-+out:
-+	if (page_buffer)
-+		free(page_buffer);
-+
-+	return err;
-+}
-+
-+void nand_deselect(void) {}
+diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefile
+index 76546a6287b..51a3b9a2aee 100644
+--- a/drivers/mtd/nand/raw/Makefile
++++ b/drivers/mtd/nand/raw/Makefile
+@@ -12,6 +12,7 @@ endif
+ obj-$(CONFIG_SPL_NAND_AM33XX_BCH) += am335x_spl_bch.o
+ obj-$(CONFIG_SPL_NAND_CADENCE) += cadence_spl.o
+ obj-$(CONFIG_SPL_NAND_DENALI) += denali_spl.o
++obj-$(CONFIG_SPL_NAND_USE_NAND_FRAMEWORK) += spl_nand_mtd.o
+ obj-$(CONFIG_SPL_NAND_SIMPLE) += nand_spl_simple.o
+ obj-$(CONFIG_SPL_NAND_LOAD) += nand_spl_load.o
+ obj-$(CONFIG_SPL_NAND_ECC) += nand_ecc.o
 -- 
 2.43.7
 
