@@ -4,147 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 584BAE8305D
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9968E8305F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F0D284008;
-	Tue,  3 Feb 2026 08:58:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B254184027;
+	Tue,  3 Feb 2026 08:58:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AI4EEzGw";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5g4WrO8k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A65BB84016; Tue,  3 Feb 2026 08:58:18 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
+ id 429B684027; Tue,  3 Feb 2026 08:58:24 +0100 (CET)
+Received: from MW6PR02CU001.outbound.protection.outlook.com
+ (mail-westus2azlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c007::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DBC683FF9
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:58:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B9648402F
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jVn6PZ8Sy0jSA9lVBHIArZmxoVXofzZVSkh7YUUwk5vc8IVbyX7rlFGe//5xrYEMDE2WQJy6exj7LudXZuB2skdrGVQBB1l8JBjQ5da4w1BvXWOstZUrP8q+DEh30UsrRj3Tw2oS6Z8ZL6+s9eQrx/rZ0tISFyCg4ftRUApJdokjtVVi8POBPpMz82kzRQNbnhS5a8aYFuom0pCI+4Ol9mE/GQnSKE94TRglZKoP7kcJeOh9h08RSqx5jZvECBnFB4NyMDms/zTfruQl3ZdHq0V/BB1AodEG2sOm7kbcZw8AEdT+b2bibP0ZWhYO0GFMB0Kph6MgFDORScpwp7k+3w==
+ b=k1/G0Xn1f7Crcx6BGEUOyRZ9Fl3iqEI9Fuu48EGQc2FByj95rtF65m46F9sFTeCWcKW09hViHlVfBNb/jV1KRi52VWcUHJ3QV4mQqcyX/v5gMtQN57ri3Vhfa88NxuKYJciAqvFX+1VPW5rIlaX4jYi1nPQvNiGbbpO8hMsF60iQmc3MlK98pf16MQyXwhTEbYyJ0oZcsBY50Qozm7T37gQ2CrPen4JBe2oeObraPC8qPQJZVf2+XlVYEpu9Bu4gUvBrFVGCgq85o9QWq0CDiigAoCF7GXck6NvtgU7DHNvJshF2EiZKzHD4wSitk5IsDxt6/6hPUMfZjDAwEszKmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iUNIJjqFu0yKwr5CPm6UYhUOvn3C89ct+NPY5UuQWyo=;
- b=dLr6ozKRDW/11Rpz1TsWPrDPhOTdctKtdMh9e6DnH8u/YCUynk61BXWNeosqduBkf69Sc4VZDRCTigCJiFhu4qy+7WJdg0d5E9j88FUldRzzf5mJ6noJgHt9Jb/pGNHSRCpgCDf2qRNg5iQLDR1yx0g1gAW8b50IA+17r6Wb+p60qT42dp/BrvODTG50dc93s9i2CWP3B0RPgWDt2ld9tzGlkz0y/ikY/8XPqw7PloDbup+7f6dM+/wQXFbmt65e0gfEyKlwPdGvs1evuGASatmLaK5jj0mvFnXEwbJjBWwN9Nik1iUI7WOLoT2pKPbfIRVyZQm24YKWWzfarVqkhg==
+ bh=7+ATtobR7IL98nm0lKYaGc2WDn7B1Mrbb1MjH2E/AAQ=;
+ b=CChfwHyr4JMPknyDWxIOblnBrx/1QmVrlXLJbdWkDBTlWNybo7bj24DRHstwGMgK9kSLIT04mzzZmp7bk3GhIOKFDpXzP1dKcdWZ4NPB9y2yIQ31v6U3AF/tuSeBU4NxUS+csuTEe0gnibCtAN/7j+t3T7dm947+KM7qE5kZ3L+hx8Ph+l07FvlIFLpaCNziijvYzBJVj57FFOGZePFaOg2DsIun9DmxxTAz2FvJODafGy4qDYYi/nmigSr7NVidSaW8RWQdsUDukPFiRtMBycQ4LgEvXSP3g9srOhAYjMsVdam0QD0jB9I7F1AygU9FqjjYSy6OSFCJGiKtF8otwg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iUNIJjqFu0yKwr5CPm6UYhUOvn3C89ct+NPY5UuQWyo=;
- b=AI4EEzGwtUUGZA0uFtG5SCOPmKqqSMw7WOJdRG5hwULC/CUS+s7TN66cxu0m9SydVga3SIRI9aGPdF1p9m6qxluzWwPsz/4tNX4zmYivHf2dWho1s3V1bkf7iXQiVFjl0zk/JWJKxgWUK65oLylLOwfR0tiHIMcxYDTNCIb/Y3Q=
-Received: from DS7P220CA0027.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:223::19) by
- SA1PR12MB8599.namprd12.prod.outlook.com (2603:10b6:806:254::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9564.16; Tue, 3 Feb 2026 07:58:12 +0000
-Received: from DS3PEPF000099E0.namprd04.prod.outlook.com
- (2603:10b6:8:223:cafe::1b) by DS7P220CA0027.outlook.office365.com
- (2603:10b6:8:223::19) with Microsoft SMTP Server (version=TLS1_3,
+ bh=7+ATtobR7IL98nm0lKYaGc2WDn7B1Mrbb1MjH2E/AAQ=;
+ b=5g4WrO8k/u/C76bynG/41yHW8fEX2YfV7QJCcX+cfXTmik/6UShWC9XNok9B730ZjPFjHNzCn5/5iZaHO4a5CrdTZ3a64JuPuKXARF1JOT99ToO4jEOPLIeH3AvI40PzzFIhVR3d4gbo5AaknmzkCPwDdGG+swqgv5SkanEuV3Q=
+Received: from PH8PR20CA0020.namprd20.prod.outlook.com (2603:10b6:510:23c::21)
+ by DS2PR12MB9685.namprd12.prod.outlook.com (2603:10b6:8:27a::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
+ 2026 07:58:16 +0000
+Received: from CY4PEPF0000E9D1.namprd03.prod.outlook.com
+ (2603:10b6:510:23c:cafe::2d) by PH8PR20CA0020.outlook.office365.com
+ (2603:10b6:510:23c::21) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
- 3 Feb 2026 07:58:12 +0000
+ 3 Feb 2026 07:58:15 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- DS3PEPF000099E0.mail.protection.outlook.com (10.167.17.203) with Microsoft
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D1.mail.protection.outlook.com (10.167.241.136) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 07:58:11 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 3 Feb
- 2026 01:58:10 -0600
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 07:58:15 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Tue, 3 Feb
+ 2026 01:58:15 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Feb
+ 2026 01:58:13 -0600
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 3 Feb 2026 01:58:10 -0600
+ Transport; Tue, 3 Feb 2026 01:58:13 -0600
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Shantur Rathore <i@shantur.com>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH v6 2/3] efi_var: Unify read/write access helper function
-Date: Tue, 3 Feb 2026 08:57:54 +0100
-Message-ID: <620c169fb271be3ca6de3e8aea498fba7aa36d99.1770105470.git.michal.simek@amd.com>
+CC: Shantur Rathore <i@shantur.com>, Gabriel Dalimonte
+ <gabriel.dalimonte@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, "Ying-Chun Liu
+ (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v6 3/3] efi_vars: Implement SPI Flash store
+Date: Tue, 3 Feb 2026 08:57:55 +0100
+Message-ID: <ff757c1bad577d7f4c34b4c2f4d206753c97f5e8.1770105470.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1770105470.git.michal.simek@amd.com>
 References: <cover.1770105470.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3690; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=kqc+D8VsNtOWf+zUd5LAz6KbJpJtkqZA4WdY1CUe0Bc=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ2rmr+8t0o4s60ovXhYRWzyxYeeXlvRYvZtmvPFki12
- HEd2Od5t6OUhUGMg0FWTJFlOpOOw5pv15aKLY/Mh5nDygQyhIGLUwAm4s7O8Ifnyccbi/5LSt3i
- T33vKRfd+DdbufGwywdGzf6Y9xt7TR0YGf55Tjm+49+H789qmNrK9iT/1f25+OPELW4y0+4XKx+
- QXMAHAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6854; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=VZeSgG5S/nzVNdx6gMufkP4xT4WpgnDasN7/vL4aFQQ=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ2rmp5I7rb0kBlpb0p2/r8z527k74ahtcJmCQZ1GoLM
+ 8juutrUUcrCIMbBICumyDKdScdhzbdrS8WWR+bDzGFlAhnCwMUpABORX8HwP3ylueLKde3yT+KX
+ zg6sKtu+b8bE3Nwb26xbPq06uGPn2mmMDC/VZNTKvu84EWV+4hf7E2ezFZ0JKfsnPLjMtFFrzVk
+ vbkYA
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099E0:EE_|SA1PR12MB8599:EE_
-X-MS-Office365-Filtering-Correlation-Id: ad836241-226c-47a0-c2fa-08de62f9fa67
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D1:EE_|DS2PR12MB9685:EE_
+X-MS-Office365-Filtering-Correlation-Id: 00d94d59-b944-44c3-d383-08de62f9fc90
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BdtODMPlyn5aZKdmnGiuiM75VFxsM2Y9wMLKTww+3oqX+JWXm6aRm5HIkujU?=
- =?us-ascii?Q?o3ZbC8vnrcnSq/mvXCrWUF5u4yUVaTwKvOsPuHczf4anGgXLFV7PEhzbHj0T?=
- =?us-ascii?Q?d35jfU48ZHUsLDpcQIPvP1Gi8C5MhxG47SsMiiqEIXovVo0WSOW7T5c7qnzS?=
- =?us-ascii?Q?7sWqU2X4JnpjGnYbnX8aptJM1tCbS3tswa77VbFhKAyxGCqfwFQWMiNRQxC9?=
- =?us-ascii?Q?ADwZhzQVbzx1tiukAfWm4BjlM5qyqAzr8xGMyMm1oKVRBpo12YGuMiL52OxJ?=
- =?us-ascii?Q?fojQqnInMGfFZm5LDjR1seDAnB5uOkymYHW59r0sLv6AO5FktAb1q54vUyQH?=
- =?us-ascii?Q?5N5cNycPlRvZL4pkR19L72gndrig1DEln9npxHXjm838MtQCt3wOxQdvHrkn?=
- =?us-ascii?Q?NPXp3TCmRBv6CdXO1RXdXAnOpmxPbbT5QnKYMZxQEl7MS6pv2Cjbg8zw0Gs2?=
- =?us-ascii?Q?NlyDGC5DlYFzycbMIUCTz4g3mbhc5Ki2natUFPA8an12nsmrIMzrBBPIO6ay?=
- =?us-ascii?Q?ytHnfNOMuIMG5G8YL9XDO/0tXRzgeIYuAjnTIaG2rnDG2x1pKJq50TjZpVMG?=
- =?us-ascii?Q?f4qAGBoV0FhG2sXc2jN4WgXqY57HL5vicbN6edqMw3mAT+yeUkhjLF74ePb2?=
- =?us-ascii?Q?s6cHKUzLIyGOnUBnz0SX5Sh4wtpgG2+Pwd1/vD98mS/YETl9FPJuE8DrVyuW?=
- =?us-ascii?Q?11oe2GwrmlA5UTM1hCOU/sZcHsBdnYIfIVDIgRib9itPuYm/RzxS3iZghonM?=
- =?us-ascii?Q?K208xk2/2kUkBE8UF1/oFV1yX8e6r177nKw9MUtvUuAum/Y2rTTSl10G1tlf?=
- =?us-ascii?Q?bBESvoPP5+YVCIRpAVm58BhvgE4vugQWHHFmd6D9wo308jtE774Nao6iiArk?=
- =?us-ascii?Q?sbSdZ2cegopQYWtBnrtqcrsCb8aprx++7Je0mdkX0Fpx24yL3wHpk6JMcPNS?=
- =?us-ascii?Q?az/52bpOnWh+sxAmRgTkpDWKUFVve3568EZ7ZGdJFr76j5ocvmKaL1Y6tgIC?=
- =?us-ascii?Q?z9K+/GfOZMc88BefpNKgKymqMdBRRTAQ5xEkBmxqMCjCUHSkICc8PDHW+umY?=
- =?us-ascii?Q?7vChHWjork6X9XQDeKbErjPUvENW8VRJKChB0VLM+VUf+RfcNcsAxVkYcWCp?=
- =?us-ascii?Q?0oDqSjf7rrwxC1Mx0D7Zk6CznCdmP5Nj2QRJKUtEcKdqSkG4X9RJirKwO7k0?=
- =?us-ascii?Q?2Dp9Ps0LEqpgO03vTzOCIvKe/4q5+zeUI72Tt3YRg+kK5poT9LWBp6ZH3HOn?=
- =?us-ascii?Q?2PkmjdQGbdFeWwKQr3S5rzDzMEy01PuQ9mfLUTe6TtLoKO3+lyNREAz1jXEh?=
- =?us-ascii?Q?/UsYH9Y+cgwDVK+vK5NzyNfrY2OT0lDnF/9jb6w07jn0qNNEdkvEzWAntoL6?=
- =?us-ascii?Q?knXcbSNz3uBKqdt1tFe4v+BVL6sezVSqVuYDdNrObybNBxjoDpzbHwDWVtAH?=
- =?us-ascii?Q?/E/i2rsMSznNRRZ7x5cSB/vmWJ8EkyeBhXlVXONuZkywdHd3by4v2d2wfSve?=
- =?us-ascii?Q?YT1rO5L1Oejw5el7Xjc7rMnU5AbQEHRyfO55qWOit10qPIaJXdxNKm0cMiF1?=
- =?us-ascii?Q?1Lyc8OfEmrlTXDtYmX4haqAOgH7/27frGg1/T6EtfGwFfRcxjJboyKWy2+10?=
- =?us-ascii?Q?qUs2tSXWMxMzduPcHV0MlMkqWElwgsfOJLKJsIAH7J/7nJQObZ4YT5daaeY3?=
- =?us-ascii?Q?GI/zpA=3D=3D?=
+ ARA:13230040|36860700013|82310400026|7416014|1800799024|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YCHTcu2f6SrV3AGTuv9ACLIkL46nb9TPrCTuz97RxagOmDX8lvKIskEzazWA?=
+ =?us-ascii?Q?c3E50QFR8g2EEs/Tcc06v9WMlE2ZyoRJyYhSTSx/wjoXulpRGRmSyePngpQ2?=
+ =?us-ascii?Q?CNc/V+PN9FphRGIic9X3bh1CmM6/vT3Ftf6+f9ovjsmIQGtkQ8PG1g2mVrVR?=
+ =?us-ascii?Q?gmS++c31yEjrnI1p9jBz6Cqol5lBO9phEB3XVgOAnptABV1IeIilNcYju74Z?=
+ =?us-ascii?Q?7VzPsUXubDC9m5KM4lJlXQZo0ukInW0i/kkMIQP4vbdF5VBCxAXT7GgOifx9?=
+ =?us-ascii?Q?+snJjRRO2lZr7ZiiJJm28N996DIeHn1+q7/+e6XR6TQgnIOa+uLBh4fKSWDX?=
+ =?us-ascii?Q?9MbXivz28aBU9rV1Es4M+oqn6PZ6dDpzc5hsGCipKVozmdYdkHWSAeI/xYrs?=
+ =?us-ascii?Q?da6gEn7mf+TFw3lkJ53u5miwZzZ9fvXQegrXSOKpc49p1DWH7RYavSw13P0r?=
+ =?us-ascii?Q?MtC3qhJSwDBlLXfltzQjFWUe6EahS5ywE+cq976KLq5Bc3id7cIv6k3axjwR?=
+ =?us-ascii?Q?8JrltF087qyHNUgiDsrBp8SSNUI5I4m/EiOaH1LRt+kudd6LrZD2j9cU8Ycp?=
+ =?us-ascii?Q?y6OMW7N0JHc60lgJmtxhgHzmMgKhHJELF0U+nLDhxKY3C8UhniBqovgZcOv9?=
+ =?us-ascii?Q?LKw+8rZ9U9q8UUSIeNu52JTKCchHRga6A5Np5kuDgyTtMWG69Y5w6VBLxI8q?=
+ =?us-ascii?Q?Lbdz+Jmd5skSFnxKjNPCFsI3PuPtFk3m/TX/SvCOTo6rToaF1satkjRvlbGW?=
+ =?us-ascii?Q?xe2aFyVQKGHPQFhMwjrVQZPv5PNn1vK3imj/vgjDXJ3ID9yvb2n5GZ5MD0Ug?=
+ =?us-ascii?Q?29UG9Z0Ish5ldgKOCwdMEdSPXGsQL4/wYdREFz2/JrjfHNC21r4jgbib0QWv?=
+ =?us-ascii?Q?Dp3I03XTlD2dCZtCRUDD3j92OA96sazJ5ZBjMFYWD6w4/En5GjJ/M+TlUONU?=
+ =?us-ascii?Q?92Py6ht3YCNtBiarvwAAabgxIz6/+V09OpS5+fQupt8VT1aJy9sPJZiDgyL7?=
+ =?us-ascii?Q?1W/FzuoshfTLR1InlyWwoWK51LzQJh+C+fPkNAueKsuVZVhC3dDLr/785PqG?=
+ =?us-ascii?Q?gHgC42fNcJq5kn1iaTVTF0hjS7mq89dFXiIvFNzu2rY/RuAUm4LVxRl4cfYp?=
+ =?us-ascii?Q?wPOg9TWph2ONUYx+5o5nflAHpWOEM4Dok/3qiXpQa7C4H0hITdb2rMoKyP3i?=
+ =?us-ascii?Q?LmEJnvTsl4y0ILViv3jiKMhJGVcWxGR/2PTfvxvxHwVcu2Naugp9mhWyeOZ1?=
+ =?us-ascii?Q?um4Du1Yxt6V09Pe1ZSwoc3bILFGSk3vCh9lABRueJOXTfDZyrTlFWe4O55KZ?=
+ =?us-ascii?Q?jD3LOWhgq7yFacge0rkCa9lRi8iRl9B1rpzR6Qb8RAUwH947j05FM8MEpJcn?=
+ =?us-ascii?Q?qH4OuMsvOSuo+6m3G2YfuHT3iFrn21BSjxX9LcLj1adU0pombvFvUPme0e6u?=
+ =?us-ascii?Q?RGPEktSy3Ss+35i8poYQXphGmUildpyJ9jKo+ufdRC1Hg99ph8Q+sw3UE4GJ?=
+ =?us-ascii?Q?2ZfBplrgkHH1U5jZRGJIBO3gBmSXuVu8pRmhl3QOrjKPNJgc1xu241xnpcXC?=
+ =?us-ascii?Q?cn19LULthdJDm5XJvlqqIlH1yISmJOj9q7YEWUvGfNp1jvekYLTdobeiJECz?=
+ =?us-ascii?Q?IMzb46buWBs4clO+OW1PUoJQdyjL3x/AV+FIbp7yd5L7XaBAuXPPHhg3cQSf?=
+ =?us-ascii?Q?zBWOzQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(7416014)(1800799024)(376014)(13003099007);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Uq5+wWAkmRVyk2JiOh9qzavs2v68mxYu01fB9Ldiw5ChOLeyycln0rzz072o94F6DQceIQdOEzPchOCpxUcxoVKbRT0scUtwNLy/h5CAZdQ4JAqoi6qd8TCI8b8lWC/r9F6Z/wO3qwDtr5P8bFcMwFn1q6RrZZMx8DeDolhVxYOzJzHNtvEjZovo80XcExVsDcpQgO+PibbfyW+F/tBBdKYMZUy8mQaq7FSDLGucCjOrrzEpyGyC+TXa21iP9IL2Zl0A1h5SbzCYBCMJrYh97V5MtQ+AQaUSI4o9zBI0wQKssdgLFrvKLVljo55E1lJxEEGQs4l5iGFqyNF+8kPTlJ25z6oGAfQ9C1M4ePVeeSR6t23V/s+WBEq06w8+/pfFdQNndikfpFCeWq7n2vBR+K4QpS7J++ibHovrNL/B9mzYTSb3hqADO+4FLoLD6Jlw
+X-MS-Exchange-AntiSpam-MessageData-0: lXuBO+HkdXA9ynvGlxxyt+sO34TyLsohz84pqKTVuzrsZcZwEauwyWMwKNlSdFbPsaeaZJY050n20Re8Vnx4YXIOvMv7xhLQqKabVqBhcBcOKlFoQzLnAp3vr3mC4hlYnCnydbT6tL1bRhcIjjpaWxNCkeQ9+2a18OT6oRGD3bK+kSPhgrnvnFdgamxMEBenkdFEaqbtH003S7EutlNEBRhEQlbdOYMTEyrzsS7HMzbCby5GOwDdpQqu/oG/9oQoB9VrlhLfut+BjubnTbDXPtlqHY/qjuDfu6qvEiUGiAti+IJGL5ewyDSyjC6Zp+yG18fMN2hRVl2hUYhO9QGX/LXvaFxYtcgvfyTFnXomb/piNExY9mDm2feehVQ6coZqHJKLr49uhHeg8DPOi+oSmaI/j2hXo5C/kbkxmJjd1U2keFD16ketkNLm5r5YjRO4
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:58:11.9873 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad836241-226c-47a0-c2fa-08de62f9fa67
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:58:15.6024 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 00d94d59-b944-44c3-d383-08de62f9fc90
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099E0.namprd04.prod.outlook.com
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D1.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8599
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB9685
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,12 +170,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-efi_var_to/from_file() suggest method where variables are placed. But there
-is no reason for it and generic name can be used to wire also different
-locations for variables.
+From: Shantur Rathore <i@shantur.com>
 
+Currently U-Boot uses ESP as storage for EFI variables.
+Devices with SPI Flash are used for storing environment with this
+commit we allow EFI variables to be stored on SPI Flash.
+
+https://github.com/rhboot/efivar
+is not updated to support this location that's why you can mimic it by
+running:
+dd if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c \
+   of=/tmp/vars skip=4 bs=1
+flashcp /tmp/vars /dev/mtdX
+
+where mtdX should match location defined by
+CONFIG_EFI_VARIABLE_SF_OFFSET/CONFIG_EFI_VAR_BUF_SIZE.
+
+Signed-off-by: Shantur Rathore <i@shantur.com>
 Signed-off-by: Michal Simek <michal.simek@amd.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 Changes in v6:
@@ -174,113 +195,193 @@ Changes in v6:
 - sed -i 's/efi_var_write/efi_var_to_storage/g'
 
 Changes in v4:
-- New patch based on review comments from v3
+- Extend Kconfig description
+- Extend commit message and describe efivar missing part
+- use unify methods for reading/writing variable
 
- include/efi_variable.h        | 13 ++++---------
- lib/efi_loader/efi_var_file.c |  8 ++++----
- lib/efi_loader/efi_variable.c |  4 ++--
- 3 files changed, 10 insertions(+), 15 deletions(-)
+Changes in v3:
+- Fixed compiler warnings.
 
-diff --git a/include/efi_variable.h b/include/efi_variable.h
-index ee68fa4a885f..2b06505b8654 100644
---- a/include/efi_variable.h
-+++ b/include/efi_variable.h
-@@ -137,13 +137,11 @@ struct efi_var_file {
- };
+Changes in v2:
+- Refactored efi_var_file to move common parts out as requested
+- Changed ifdefs to use CONFIG_IS_DEFINED
+- Fixed typos
+
+ lib/efi_loader/Kconfig      | 34 +++++++++++++-
+ lib/efi_loader/Makefile     |  1 +
+ lib/efi_loader/efi_var_sf.c | 92 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 126 insertions(+), 1 deletion(-)
+ create mode 100644 lib/efi_loader/efi_var_sf.c
+
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 13e44be1d067..bb40cc899a13 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -123,6 +123,24 @@ config EFI_VARIABLE_FILE_STORE
+ 	  Select this option if you want non-volatile UEFI variables to be
+ 	  stored as file /ubootefi.var on the EFI system partition.
  
- /**
-- * efi_var_to_file() - save non-volatile variables as file
-- *
-- * File ubootefi.var is created on the EFI system partion.
-+ * efi_var_to_storage() - save non-volatile variables
-  *
-  * Return:	status code
-  */
--efi_status_t efi_var_to_file(void);
-+efi_status_t efi_var_to_storage(void);
++config EFI_VARIABLE_SF_STORE
++	bool "Store non-volatile UEFI variables in SPI Flash"
++	depends on SPI_FLASH
++	help
++	  Select this option if you want non-volatile UEFI variables to be
++	  stored in SPI Flash.
++
++	  Define CONFIG_EFI_VARIABLE_SF_OFFSET as offset in SPI Flash to use as
++	  the storage for variables. CONFIG_EFI_VAR_BUF_SIZE defines the space
++	  needed.
++
++	  Note that SPI Flash devices have a limited number of program/erase
++	  cycles. Frequent updates to UEFI variables may cause excessive wear
++	  and can permanently damage the flash device, particularly on SPI NAND
++	  or low-end SPI NOR parts without wear leveling. This option should be
++	  used with care on such systems, and is not recommended for platforms
++	  where UEFI variables are updated frequently.
++
+ config EFI_MM_COMM_TEE
+ 	bool "UEFI variables storage service via the trusted world"
+ 	depends on OPTEE
+@@ -152,7 +170,7 @@ endchoice
  
- /**
-  * efi_var_collect() - collect variables in buffer
-@@ -178,17 +176,14 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
- efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe);
+ config EFI_RT_VOLATILE_STORE
+ 	bool "Allow variable runtime services in volatile storage (e.g RAM)"
+-	depends on EFI_VARIABLE_FILE_STORE
++	depends on EFI_VARIABLE_FILE_STORE || EFI_VARIABLE_SF_STORE
+ 	help
+ 	  When EFI variables are stored on file we don't allow SetVariableRT,
+ 	  since the OS doesn't know how to write that file. At the same time
+@@ -193,6 +211,20 @@ config FFA_SHARED_MM_BUF_ADDR
+ 	  the MM SP in secure world.
+ 	  It is assumed that the MM SP knows the address of the shared MM communication buffer.
  
- /**
-- * efi_var_from_file() - read variables from file
-- *
-- * File ubootefi.var is read from the EFI system partitions and the variables
-- * stored in the file are created.
-+ * efi_var_from() - read variables
-  *
-  * In case the file does not exist yet or a variable cannot be set EFI_SUCCESS
-  * is returned.
-  *
-  * Return:	status code
-  */
--efi_status_t efi_var_from_file(void);
-+efi_status_t efi_var_from(void);
- 
- /**
-  * efi_var_mem_init() - set-up variable list
-diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-index d32edaac277d..d012d6a18b02 100644
---- a/lib/efi_loader/efi_var_file.c
-+++ b/lib/efi_loader/efi_var_file.c
-@@ -43,13 +43,13 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
- }
- 
- /**
-- * efi_var_to_file() - save non-volatile variables as file
-+ * efi_var_to_storage() - save non-volatile variables as file
-  *
-  * File ubootefi.var is created on the EFI system partion.
-  *
-  * Return:	status code
-  */
--efi_status_t efi_var_to_file(void)
++config EFI_VARIABLE_SF_OFFSET
++	hex "EFI variables in SPI flash offset"
++	depends on EFI_VARIABLE_SF_STORE
++	help
++	  Offset from the start of the SPI Flash where EFI variables will be stored.
++	  This should be aligned to the sector size of SPI Flash.
++
++config EFI_VARIABLE_SF_DEVICE_INDEX
++	int "Device Index for target SPI Flash"
++	default 0
++	help
++	  The index of SPI Flash device used for storing EFI variables. This would be
++	  needed if there are more than 1 SPI Flash devices available to use.
++
+ config EFI_VARIABLES_PRESEED
+ 	bool "Initial values for UEFI variables"
+ 	depends on !COMPILE_TEST
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index ca1775eb03be..d73ad43951b1 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -54,6 +54,7 @@ obj-y += efi_variable_tee.o
+ else
+ obj-y += efi_variable.o
+ obj-$(CONFIG_EFI_VARIABLE_FILE_STORE) += efi_var_file.o
++obj-$(CONFIG_EFI_VARIABLE_SF_STORE) += efi_var_sf.o
+ obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
+ endif
+ obj-y += efi_watchdog.o
+diff --git a/lib/efi_loader/efi_var_sf.c b/lib/efi_loader/efi_var_sf.c
+new file mode 100644
+index 000000000000..81810bbabb68
+--- /dev/null
++++ b/lib/efi_loader/efi_var_sf.c
+@@ -0,0 +1,92 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * SPI Flash interface for UEFI variables
++ *
++ * Copyright (c) 2023, Shantur Rathore
++ * Copyright (C) 2026, Advanced Micro Devices, Inc.
++ */
++
++#define LOG_CATEGORY LOGC_EFI
++
++#include <efi_loader.h>
++#include <efi_variable.h>
++#include <spi_flash.h>
++#include <dm.h>
++
 +efi_status_t efi_var_to_storage(void)
- {
- 	efi_status_t ret;
- 	struct efi_var_file *buf;
-@@ -85,7 +85,7 @@ out:
- }
- 
- /**
-- * efi_var_from_file() - read variables from file
-+ * efi_var_from() - read variables from file
-  *
-  * File ubootefi.var is read from the EFI system partitions and the variables
-  * stored in the file are created.
-@@ -98,7 +98,7 @@ out:
-  *
-  * Return:	status code
-  */
--efi_status_t efi_var_from_file(void)
++{
++	efi_status_t ret;
++	struct efi_var_file *buf;
++	loff_t len;
++	struct udevice *sfdev;
++
++	ret = efi_var_collect(&buf, &len, EFI_VARIABLE_NON_VOLATILE);
++	if (len > EFI_VAR_BUF_SIZE) {
++		log_err("EFI var buffer length more than target SPI Flash size");
++		ret = EFI_OUT_OF_RESOURCES;
++		goto error;
++	}
++
++	log_debug("%s - Got buffer to write buf->len : %d\n", __func__, buf->length);
++
++	if (ret != EFI_SUCCESS)
++		goto error;
++
++	ret = uclass_get_device(UCLASS_SPI_FLASH, CONFIG_EFI_VARIABLE_SF_DEVICE_INDEX, &sfdev);
++	if (ret)
++		goto error;
++
++	ret = spi_flash_erase_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, EFI_VAR_BUF_SIZE);
++	log_debug("%s - Erased SPI Flash offset %x\n", __func__, CONFIG_EFI_VARIABLE_SF_OFFSET);
++	if (ret)
++		goto error;
++
++	ret = spi_flash_write_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, len, buf);
++	log_debug("%s - Wrote buffer to SPI Flash : %ld\n", __func__, ret);
++
++	if (ret)
++		goto error;
++
++	ret = EFI_SUCCESS;
++error:
++	if (ret)
++		log_err("Failed to persist EFI variables in SF\n");
++	free(buf);
++	return ret;
++}
++
 +efi_status_t efi_var_from(void)
- {
- 	struct efi_var_file *buf;
- 	loff_t len;
-diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-index 6e45134c61bf..42f3ba901556 100644
---- a/lib/efi_loader/efi_variable.c
-+++ b/lib/efi_loader/efi_variable.c
-@@ -404,7 +404,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 		if (IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE))
- 			return EFI_SUCCESS;
- 
--		efi_var_to_file();
-+		efi_var_to_storage();
- 	}
- 
- 	return EFI_SUCCESS;
-@@ -599,7 +599,7 @@ efi_status_t efi_init_variables(void)
- 		return ret;
- 
- 	if (!IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE)) {
--		ret = efi_var_from_file();
-+		ret = efi_var_from();
- 		if (ret != EFI_SUCCESS)
- 			return ret;
- 	}
++{
++	struct efi_var_file *buf;
++	efi_status_t ret;
++	struct udevice *sfdev;
++
++	buf = calloc(1, EFI_VAR_BUF_SIZE);
++	if (!buf) {
++		log_err("%s - Unable to allocate buffer\n", __func__);
++		return EFI_OUT_OF_RESOURCES;
++	}
++
++	ret = uclass_get_device(UCLASS_SPI_FLASH, 0, &sfdev);
++	if (ret)
++		goto error;
++
++	ret = spi_flash_read_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET,
++				EFI_VAR_BUF_SIZE, buf);
++
++	log_debug("%s - read buffer buf->length: %x\n", __func__, buf->length);
++
++	if (ret || buf->length < sizeof(struct efi_var_file)) {
++		log_err("%s - buffer read from SPI Flash isn't valid\n", __func__);
++		goto error;
++	}
++
++	ret = efi_var_restore(buf, false);
++	if (ret != EFI_SUCCESS)
++		log_err("%s - Unable to restore EFI variables from buffer\n", __func__);
++
++	ret = EFI_SUCCESS;
++error:
++	free(buf);
++	return ret;
++}
 -- 
 2.43.0
 
