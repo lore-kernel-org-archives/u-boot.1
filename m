@@ -4,83 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E0EE87854
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 18:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E469E8784C
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 18:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A32483C29;
-	Tue,  3 Feb 2026 19:14:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BA98483C39;
+	Tue,  3 Feb 2026 19:35:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ldYO6DYf";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="hAi61Ffu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9716B83C30; Tue,  3 Feb 2026 19:14:51 +0100 (CET)
-Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
- [IPv6:2001:4860:4864:20::44])
+ id 8634683C4B; Tue,  3 Feb 2026 19:35:34 +0100 (CET)
+Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
+ [IPv6:2607:f8b0:4864:20::b135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25E4083BFE
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 19:14:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 096DC83C29
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 19:35:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x44.google.com with SMTP id
- 586e51a60fabf-40866608701so3179922fac.1
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 10:14:49 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yx1-xb135.google.com with SMTP id
+ 956f58d0204a3-6495d592b58so5593555d50.2
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 10:35:31 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770143731; cv=none;
+ d=google.com; s=arc-20240605;
+ b=eX3C2cEBi8x2tLSU6JoGngaywCbMF60DGoK62tSUcRKecHGyrvHLN/7ak5OszQpbHD
+ upP4Y8nne04pIeJiDcDZ4ncjE8aDnFsqr4JykKIeE07b1EOGFbW7ypRP54Efax9BMuu3
+ 1zFFpeAThO35aQjX/SjILC9PnfySWgXNP1o/XjFmu6pwTT7dUkdJI3Nb3ljLOpx6QuTl
+ esQHsxzm/2AiGMUYim3ugb9ra7offTE6UCXy3OEISpemilMFf6nBQBCjtP7nCpxLyjpV
+ Ik3RwSlIRd5ECjihxAKhND3WfRlNOrNyqal78AoI0DT8ravhfso6vbvAf/n6A6izmVSl
+ qbig==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=HaKuRXskk8V+3hA1dqfLEABDQBQF+C+uHzH2rDStwvY=;
+ fh=ulYpyrL7VsLd7n/N8xGGPiyXyVPg6DKYzXyM8wl9IYk=;
+ b=arJYT4ED9hSeGbysugE3RkTZrBkeguC2nEh+W9vW+wRkxEui07eYUe8idcp9f2Ol2Z
+ rGYBXq1atSwZKd7KFsLoDVlytQg/FIEY4y0w24E49h1fWBSH2VpsAlhgk2bBtDqbn1hN
+ PoiIAzMslxc57LO9YKd6sb8mcZCwsbbM3aCFjtPZfmZJail4VWRxvMwXNCBWKY1LgFwJ
+ w9pTXbKfg400qG2Vqs8vExSDlRxn3Sq2h40+vmBfn+j265qFe6OtNh0piEtrOe7PaoAu
+ QskneSO3/Wq1bJcpbTFoCixDpbiJI9l4cx9r5qLZs/muvwMMtXVh7PIL5V//Y00l6ZJU
+ 5g7Q==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770142487; x=1770747287; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3PphesFuuznXjyldpv9C1nH9JjsxsC16mN5zdjDjQZE=;
- b=ldYO6DYf152HeaZpNbFPXrDPY41auhyk13QJaOg1CTuxCcaJ/ZiykV+8ENoB/3yn+v
- ckh1UKDG5kznv6imqHXKGYtuRN4E9PqcIpNtnqX+c4rNjvM2cHtfSlGyi+W6K9aa4UDs
- t62TLjfqPo17UObwZ/J4xL1jnPyQvmGqiZ2Cg=
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1770143731; x=1770748531;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HaKuRXskk8V+3hA1dqfLEABDQBQF+C+uHzH2rDStwvY=;
+ b=hAi61FfuhDM6vFoiPn1SB2DB9mChpcJoQhxXMuwvo4E/QXMxIvMeZl69l6Xfcgw51i
+ AxhlbRA9ymYQyZCnAg57Ik8pEY13biq4vYSFsS5gxUWR2GokVAFSbngwmMlhrlsGQ7b2
+ vEPOobXO5BDP8ZgGaIA+oleOdDd3dnT83prFfjQ8xlH21tVTJJ/8edgX/1Gb/cZg5kqe
+ nMZVgd/Nmh+qZxBWFga7ZvJvwEJ3Q3iNHnfTFhvlIbi8CFQDjTaIqMlWhHh7emUmJq24
+ gwq9ZDrelkQijJNlx3dsPlprMx/ZYDkuoP3+dSA8wBa/9fs7xBmt9OVHcQR7y+zYhQfh
+ xrPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770142487; x=1770747287;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3PphesFuuznXjyldpv9C1nH9JjsxsC16mN5zdjDjQZE=;
- b=DfuwzTCBO++U4ZWEGhmpTz2ZV8ik5iO/l1IO3fCdD7S1vuPxonUaIhngyVNwSknQdA
- 5ZqihPWATfotialpTqoIiblvSs1SBXNDRgg9N1EZaDxVFUNTSwqA0EW4bWPS1hH/e9Qu
- Va0bT2XERzxEuzNbU/vu6x1uAQ39qCKvnLAQzkHHAVjwd4O42s7/cb2S2JcBseu8CpdL
- L4QSkEbUJd049K24PMUZ7XYhqb4tbADXUSXdzR1GeZSxT8QXBMPKWIiQ2Xzv7B1AUw6Q
- 7szcLp43cPr3mjjck+gZKrFk3SHa6jSpS0gQB5elv9X9m1qIEliDW4IwN/67zzM2/AP4
- zCcw==
-X-Gm-Message-State: AOJu0YzfZayldKoNlkk3MePiPkGKHQlUERRZgvrPoASzV9Mu3Y25sEVs
- uycqvo57vFGHBe+m5w1T82VV4es0pnnO37/O1CXSfF/9fSWEvFP9qUXV0l25crDxpzQ=
-X-Gm-Gg: AZuq6aL4QPvAaut0JJK/9BPhilYMsIgp5ZMWhYwUFs/q5Iu5nYGDrcMq/ZYo9pVgsfB
- IJjIP6IiNSqDck7FJ1e6tAHavF3TEsL5z4gUhCRHDTTgY6jox4rWn4HzgvI7p+IWNchol7sC7U3
- R8ibStHG28b5Xs5kMS1ZVkrAQDpmZib7rvhLS7+MhxnmbPgTpwUWb6Ad41oN3V3TMqKRYJqNCs8
- hwwIFiXgQgCb+baYf5XxG9ebY3uIdqrnygF4YM8FvumxHcI64kx/OwRugnmjvhKyE37jevhy++8
- mpvW06feNMhotZ6nvMw4hxUId5MoWpt0xx/im1WdsP1YfkhX3GGMPHBnhdjfxHmNlLO9cEHyZeK
- UBhVUZWHRJheayCojIecYOG1Uctdy99jumgPT5qWupATPkt7tcroNJq68NVaIwiEhI/OcPJZU4O
- WsxD5bg08gB885k6gLfZjgl7iuLLwdfje9MX5nLS+bFsKM0hK+Yb9hPtSfaqfQqkTIYLtjOZDcz
- GQMI6O3MN32hBQgi6blSugVOpcLrGHMbFCULKA=
-X-Received: by 2002:a05:6871:7406:b0:3f4:fed5:d88b with SMTP id
- 586e51a60fabf-40a53f034ecmr114962fac.35.1770142487535; 
- Tue, 03 Feb 2026 10:14:47 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a5448d703sm79646fac.18.2026.02.03.10.14.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Feb 2026 10:14:46 -0800 (PST)
-Date: Tue, 3 Feb 2026 12:14:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Cc: u-boot@lists.denx.de, bmeng.cn@gmail.com
-Subject: Re: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
-Message-ID: <20260203181444.GQ2603314@bill-the-cat>
-References: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
- <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
+ d=1e100.net; s=20230601; t=1770143731; x=1770748531;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=HaKuRXskk8V+3hA1dqfLEABDQBQF+C+uHzH2rDStwvY=;
+ b=s2lZdB2hK4Kxg51WxaZpXDQ4VhkFxgNCxw92yXwCZjNm4XSo/yFcq4y89+ZAocLdef
+ VVUPX0Gl181EGdq8VNBOFXNazdtsF26xUWTi5hm1qpduTP5kMr7QaL8qLEVlhuEhVtm8
+ LabCS3NluX09pkoobmk98aKAdRS6ww9wIU8xDOC3Q34+GgWtQ6ZMjotAHSrku+rbNu7H
+ LQ5UbbiaBOhue+/RuOx5ktq4dVWAtpgvZDPxeDySNTaFQhbPZbGi83h9LQO0qxnSen1u
+ M0h13yrELFUs/2+kbA08IXZmOSUIdJF0DFVkpouKon5UWcvgNq4/5fUHTS1KrfuYXhKV
+ yfoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWwdvyz2MWuwar6J6rujsb1OLnvNR3iSyH4BTwVSocXI5km5Q8Jg+cs5hgesifq7rQyp5bJ8c=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhllfQG9GU3HzfggL81w8QoCK/8+2RhhNuImVQalLfpWXDNTu4
+ oaW2I8Q5n2p54yCcjUDfh33Dt2tV03cHIYzC9ohYva8sRMB5dDBtQ6G6t+2Ac+FbZwNpfOVD7le
+ 6MuH7Nu7PsXZAyFv2AvTnrnDo0n5eOHSKSt94/N36
+X-Gm-Gg: AZuq6aI3jb0a6oI7p9/cBvsTO26iT8nHX7VBk/YoZczm508FQYtzsnfEItPb5nfrxRU
+ gJxjnszU5qao9rYOyqh6xvcKuERsx82lTWhQNw5wPDZUcMbYdvgGGetxXQdg4yhwcwb7n1zJGu5
+ J/SO3eqj/rBvGtS7tTlNBG7jaHEMFgG+MxoneJQ15R+qbA9Hu068HXAY28pjAueFo1JVJABxT+e
+ O10xXTsgf6cvzo+yOIzCgaKzuJ03XIi20P1aMD1oiGY1X8Knvr5z0LvWSlLcI+eituKW1NZ
+X-Received: by 2002:a05:690e:eda:b0:649:5ed9:fb73 with SMTP id
+ 956f58d0204a3-649db4901damr328520d50.50.1770143730699; Tue, 03 Feb 2026
+ 10:35:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ay9Vlab8eYpM0Adl"
-Content-Disposition: inline
-In-Reply-To: <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260114-tftp_fix-v2-0-8de8e6ecf4e8@linaro.org>
+In-Reply-To: <20260114-tftp_fix-v2-0-8de8e6ecf4e8@linaro.org>
+From: Michal Simek <monstr@monstr.eu>
+Date: Tue, 3 Feb 2026 19:35:19 +0100
+X-Gm-Features: AZwV_Qjdas4-5NFEN4cYQ-zlVKx_Bb1TtddS_oGpQA954tPEPVtf5_11Fa9d9F4
+Message-ID: <CAHTX3dK6eybwR+FBcqS=qgFOpX2BVsg3gDQs=mTbshDMDS-imA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] net: lwip: Do not write past end of buffer
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>, 
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Martyn Welch <martyn.welch@collabora.com>, Benjamin Hahn <B.Hahn@phytec.de>, 
+ Simon Glass <sjg@chromium.org>, Tim Harvey <tharvey@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,59 +120,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jerome,
 
---ay9Vlab8eYpM0Adl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+st 14. 1. 2026 v 16:12 odes=C3=ADlatel Andrew Goodbody
+<andrew.goodbody@linaro.org> napsal:
+>
+> Fix some cases where the trailing \0 written by sprintf is not allowed
+> for in the target buffer resulting in writing past the end of the
+> buffer.
+>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+> Changes in v2:
+> - Address review comments from Michal Simek
+> - Add a second patch to address some more instances of sprintf writing
+>   past the end of the target buffer found by code inspection while
+>   looking for an issue.
+> - Link to v1: https://lore.kernel.org/r/20260109-tftp_fix-v1-1-64bd50abc7=
+2b@linaro.org
+>
+> ---
+> Andrew Goodbody (2):
+>       net: lwip: tftp: Do not write past buffer end
+>       net: lwip: dhcp: Do not write past end of buffer
+>
+>  lib/lwip/lwip/src/apps/tftp/tftp.c | 2 +-
+>  net/lwip/dhcp.c                    | 6 +++---
+>  net/lwip/net-lwip.c                | 6 +++---
+>  3 files changed, 7 insertions(+), 7 deletions(-)
+> ---
+> base-commit: c05dba22f1f2b0b2655ee3971644acf1936cd07a
+> change-id: 20260109-tftp_fix-3ab9bd66a6ad
+>
+> Best regards,
+> --
+> Andrew Goodbody <andrew.goodbody@linaro.org>
+>
 
-On Mon, Jul 14, 2025 at 04:02:49PM -0500, Eric Schikschneit wrote:
+Are you going to apply it? I would be good to get it in.
 
-> The VPD has been updated to include additional values found in the Intel
-> FSP_MR5 Integration Guide.
->=20
-> Disable MRC_CACHE for the baytrail platform as this will break the boot f=
-low
-> as well. This issue has not been diagnosed further, but I suspect it is s=
-imilar
-> to my previous patch and related to how modern GCC generates the low level
-> op-codes.
->=20
-> Patch 2 of 2
->=20
-> Upstream-Status: Pending
->=20
-> Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.co=
-m>
-[snip]
-> +	/* Set all values to known good defaults as documented in 	*
-> +	 * Intel FSP_MR5 file: BAYTRAIL_FSP.bsf				*/
-> +
-> +	/* NOTE: This breaks u-boot ability to set board options via	*
-> +	 * device tree, but guarantees specific known values..		*
-> +	 * you wouldnt use an uninitialized variable would you??	*/
+Thanks,
+Michal
 
-/*
- * Multi-line comments like this please per
- * https://docs.u-boot.org/en/latest/develop/codingstyle.html
- */
-
-And we should spell out that device tree can't set these any more in the
-commit message, along with spelling out why we can't do that anymore
-safely (why can't we?). Thanks.
 
 --=20
-Tom
-
---ay9Vlab8eYpM0Adl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYI7CQAKCRAr4qD1Cr/k
-CkEQAQDistLB1s38ymYg7sbR65myuLFiiycU5J9Ti8Nlz3GKMwD8CzuqWqXxNHUR
-kq7jRNv0vaRdegx2rk9k/ubuoWhpBAk=
-=i3ck
------END PGP SIGNATURE-----
-
---ay9Vlab8eYpM0Adl--
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
