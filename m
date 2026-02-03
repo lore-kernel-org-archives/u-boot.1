@@ -4,99 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BC7E7FDF3
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 01:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5D6E7C712
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 01:44:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E555B83F86;
-	Tue,  3 Feb 2026 02:06:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A2DC83F86;
+	Tue,  3 Feb 2026 02:44:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XbpdQxv+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OJeGnyWt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 274AE83F8E; Tue,  3 Feb 2026 02:06:46 +0100 (CET)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id 27B5683F93; Tue,  3 Feb 2026 02:44:34 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B364783F54
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 02:06:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EEB983F54
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 02:44:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7d1959ba05cso2196395a34.2
- for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 17:06:43 -0800 (PST)
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-382fceabddfso40066571fa.1
+ for <u-boot@lists.denx.de>; Mon, 02 Feb 2026 17:44:32 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770083071; cv=none;
+ d=google.com; s=arc-20240605;
+ b=IQJY1eacCxMs9JqfvWfsRv8+yiOdHqATKfSv85wtHoVKNPpudraJhE8IEPg6KE0BYe
+ TCq108P//aE41tY7NkEpdt+fSHQB1PAMGV+Gf2ruv597JH3/qTCIERrTMVn4Olv8j6Wj
+ n3W+8Zgv0NZ9sIx0kJFHjBVA3zIPwWiHjP6p8LTXk2m93MOWhr5g6qAE8rqK+Pj4+BkP
+ TH6sBcr7QAMduuhdYmDW0M8pclCx86crchf3LPpaZtX5kgDcw7tMsHxsdulofLuU9bEo
+ q1agrKgnhRV0VAZbi/xbkEdt3tEZjI79avdexb+Mut2O4HSowrb5HxRrKDPfI7zj/VxB
+ CsQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=j03ku4j1zf7QdtWIYzgaBcW8eL2taulvlqaEQbv3ZQ8=;
+ fh=2xEgSQRlgmkN0vjkLC8hN0dZOJFO9HwEkXzYdbM+Pvo=;
+ b=gFOFL84zFH397G/csvP1wfVY2T+E3ow3La/nej2SqCUmCsvz3ZOJnBB4a+VwzsfIPJ
+ WTDOAVBdeMrvTLz/kyI6irYqNSUqOW+3s6fnY5ENu37fTAhRPopPSGf/ieITU9FJ8X3Y
+ HYmm/SDSRpJ1rUBvLksAZfSwRvAqZFlHldr3tjhCYXR4C1pQ95T+uXCe2JVMkVOdpLDN
+ MjY8zzI1twxhgnnxhjUDbLdi8eGRpALJwkpBCjLU+nepyEqtsjxK2C8M/i3DGzWHwJNs
+ 4csBghD+QXf3WzYVgi+YArqR4Poj23WOnaFIQeWZ8dPqZMSsEDe+pw96J/cAYG5DruDQ
+ Xf6w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770080802; x=1770685602; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gnNEYpkjuEueHUfW6WtSNxiqpw/p7C2dutLz9zUfMrY=;
- b=XbpdQxv+lFrYfSLwGoVSLC+np88PDP/vnBxCJqKtC7HQHpZ2Veq+w3kpHPKJKvxVcR
- 26QPQwej01zo49ygvzMLIoMpT+/avmTeBo0662fkRouod+AXn+z+AZaSLbe2Z/kIgg5F
- YnV1pRRbpCcp4ADJMaJKq+oGm1kox4auDdrUc=
+ d=gmail.com; s=20230601; t=1770083071; x=1770687871; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=j03ku4j1zf7QdtWIYzgaBcW8eL2taulvlqaEQbv3ZQ8=;
+ b=OJeGnyWtrV+d8naYkCjfVji/9yTooYnFCm3UFEVquflyL1+hgxZxV+yzM86SSa/9gn
+ PszESn9ad/fNS5DIbOEDWwhCqRYYCpk6DlXsly8s08DDR+/GNNkI8EzRXdCfll1choH+
+ xCxNkpa+pF9QDLRvzjunuoHdjp4mi06EWxEgqC8gNvdnvKXOVcbvbNfZu1bnSjpVBqxq
+ tDBJOVYtHm4HH5mdqabdIBzQe+GjA0sH4Dcc/yWHj75fqHitR2JpESxug4Hvx4QBQJ31
+ okSPjPdNBFAHdMj57rwMner8b0eRoH5mMOBcNwANqOqWm3qkXZUd3YG79F+zfYaWutZZ
+ itGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770080802; x=1770685602;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gnNEYpkjuEueHUfW6WtSNxiqpw/p7C2dutLz9zUfMrY=;
- b=wdemJfBMlZ+L4spp6vPnhSAdJSWOaEn3xmk4HtlPDUtpr08Fy5imtn5RpUMEfbV1fU
- U93Ccai+rib7JVWOcHaeC7oDc0cS8/yDF9qA73nn4/ah9R78ZXonSNrliRajU2NA6Wgq
- CkHzpY7FGqOXanOArUFtW9HMBw5WkppVIFrCpRxuZaNMy/dduWFRiiAZj/x67ZpfWcJt
- cJ5fyiG1gVILKVtI++OBPAbLNDUO/x6BhHKS0AgxxvFK73FuEQyQEfG+xvCR2VW58VS6
- rjzl8ptRHzDvtzX3LY7t3aLFspTLrxy3MGnPGS4B8TLxyHVXIF8/rWeP4GEFSxhC1Ndd
- NHxA==
+ d=1e100.net; s=20230601; t=1770083071; x=1770687871;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=j03ku4j1zf7QdtWIYzgaBcW8eL2taulvlqaEQbv3ZQ8=;
+ b=rNd975MN0/NbZaPWespkk4Rw+1fTiQ7uuqJX40bOlVRveVQWQFSandzRmdaXXVqyYB
+ ga133JDYIGRVtQn4gd9oizPDNEjkDNcwn+ViGMVi1Nah/IevRUYnUFYCwMSgVTX6Ngio
+ m+84rKAcvP1auxoB6ojBtjcsZUibwsfuG0NS+R3rwOeZGfnB77wnwigEP8hbMc92lapG
+ 2mICT4ca5l9Eg6vnmzs2MTbS3O7QPAnUYdufe8Mh0AvCpM2KKud14omYfQBrcrSY6uM8
+ i/L6RzKNyV7AhMQCyzuj08DtrqZgZvKNRhWrR5qvdSRen8LlDs3u3B6HHuFSvAZiOfRP
+ q9Sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUfBdTaXSsWAXmy35hEDI9+tJJKJmIGwjyo/fbRxZyeLxRbQOcJe3wjhV9nc3wfKm2xNZ+JUMg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3FCJzGD7q+qy56gIKKC2+O9ghWWK+uVBrp4K7WvANavZMQgeN
- N1Zkb3nzZaqsoZ0Gz1W8m77EN3MqXhDvgPYQPNfGfZVPMuDHvVHxmv3eDEJ2P8i5uew=
-X-Gm-Gg: AZuq6aI4TgpgAuR/tyUp3FeGuAvoY7v449xMPn4weUiCHJB5AUcHMY0rcnHV2wqqiSV
- orK9oi4Du2pIHBG1siHsiuxVXWShPyTZzjxszQD0UV+vp9Sl98yCj3Fy1KV+HNoP7zcfnKPeYbj
- 49vQDcc7QVejhkAnP9Co0vWXVsjlqHgWHNJj0uEdMHxwhltt4EvzmBkopVlJMpvGzRuKDDKUqMI
- Ie9DomhMxLG/svZG0TWixx1HOXx95hQPGEROlmsqmqkp3OfG9WMGXyhmv4k96rZGkvQf2gQh9ND
- vF0jTbhwnCNSYZ8N5gSg6kTHsWwD0TQtnnHN5KIdkleLygYMX+GAZcsdHHjDuCoL0ogjFXC4ICe
- IGPxZ8t+p4xPQ7FhUQhxsbCK25Sby0lWkZaynXtCdzSdq7J+h8zQDGhxK7D3lWDaj4huSOVQkDw
- hQ1/5QQhGysZRJ24+n6zuQiRebbQrZEaQ+cHIhni6iT3HaKneewXE+Gs4BjbOoUTVnK4zaBi9Lc
- IPIKr/Bh8DJom2ButWs679SElMI4OLI+sPmxpo=
-X-Received: by 2002:a05:6808:1b2a:b0:45e:f09f:6359 with SMTP id
- 5614622812f47-45f34d405edmr6722342b6e.53.1770080802443; 
- Mon, 02 Feb 2026 17:06:42 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4095752ef7bsm12542004fac.16.2026.02.02.17.06.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Feb 2026 17:06:41 -0800 (PST)
-Date: Mon, 2 Feb 2026 19:06:38 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Eoin Dickson <eoin.dickson@microchip.com>,
- Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Yegor Yefremov <yegorslists@googlemail.com>
-Subject: Re: [PATCH 1/3] gpio: Add GPIO delay driver
-Message-ID: <20260203010638.GF2603314@bill-the-cat>
-References: <cover.1769086229.git.michal.simek@amd.com>
- <6a6cd2da427e13bc69d2e0ae4070b715791be02e.1769086229.git.michal.simek@amd.com>
- <aXxb7L03qQ3jdnuT@shlinux89>
- <de5823b9-2214-47ae-9b4c-77cd413e34f1@amd.com>
- <aYFRE69oIA9Dk1WH@nxa18884-linux.ap.freescale.net>
+ AJvYcCViOz+TXcRy/Wg91m5IBULcyocXzNhSzZci0sUX9WOta3UBo1rMtdePYdUpt/vYXXF4NpUouGo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqFtANBQJJtfr7zje1cistAaVmc8iAfuEHM01T6ymuHKa77X5h
+ E7ZEXqoPYgNWBd909iFo5d9NejdCYTR0rIFkUGzCR3UlJfnPUPrR21NVDDx8ynUDUItDIPoGQpe
+ vVTQ9kQpYX4m8OitdFb/jgOWb+3h5RiY8Cg==
+X-Gm-Gg: AZuq6aIWBuzRiX50Qe5nUGNPGQBSc7232RGdbe8ia4UL7RmAPKLOR+d4TC6CnKF+tGD
+ 9sRphsWeNs1nJiRBeDi8Ku2Rt4KDBG8OimJAxLapO93X2CZPuy3U7vUFvHS5DDXWYrqV8UQ8M67
+ 9qF2WJCKRM2UZLqATuZXx+60KFjoDt8aR2oMoR0XVyP/OSM64+jjJAawcbezv3NFdoTBRlf65uW
+ gvB4iyJixcoTWdBPhoc+E+QPQJSSkEVSqZWJ0h0XOLS+hAnZeDtGvzF94nJSjsN7KwCX4ITphh3
+ YkgmFQiZrw1SYqc=
+X-Received: by 2002:a05:651c:a0a:b0:37e:6031:4e5 with SMTP id
+ 38308e7fff4ca-38646629907mr44026511fa.22.1770083071146; Mon, 02 Feb 2026
+ 17:44:31 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ebMtu0/XPCfv6xKa"
-Content-Disposition: inline
-In-Reply-To: <aYFRE69oIA9Dk1WH@nxa18884-linux.ap.freescale.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250930-video_exynos-v1-1-c29d1bf0eecf@linaro.org>
+In-Reply-To: <20250930-video_exynos-v1-1-c29d1bf0eecf@linaro.org>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Tue, 3 Feb 2026 10:44:18 +0900
+X-Gm-Features: AZwV_QiagBNv8Gh_M5hcmSN-Ob4CA_HF16cJ0a4P8pjN20b3f8nEVYR_52BVdbA
+Message-ID: <CALrBrZ29q6dm7E-ahmHtFnJfQB3kVgPAk5HQjjpjZXh4VFpSFw@mail.gmail.com>
+Subject: Re: [PATCH] video: exynos: node variable should not be unsigned
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,59 +116,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear Andrew Goodbody,
 
---ebMtu0/XPCfv6xKa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2025=EB=85=84 10=EC=9B=94 1=EC=9D=BC (=EC=88=98) 01:43, Andrew Goodbody <an=
+drew.goodbody@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-On Tue, Feb 03, 2026 at 09:36:19AM +0800, Peng Fan wrote:
-> Hi Michal,
->=20
-> On Fri, Jan 30, 2026 at 09:29:49AM +0100, Michal Simek wrote:
-> >
-> >
-> >>=20
-> >> Add an entry for SPL?
-> >
-> >Why? I don't have a need for it and someone should test it if this shoul=
-d be
-> >used in SPL. That can be done on the top of this when tested.
->=20
-> I see.=20
->=20
-> >
-> >
-> >> > #
-> >> > + * Copyright (C) 2025 - 2026, Advanced Micro Devices, Inc.
-> >>=20
-> >> Drop 2025?
-> >
-> >Why? Driver was developed in 2025 but upstreaming happens in 2026.
->=20
-> I think the year should start from the day of upstreaming. Not sure.
-> Tom may comment.
+> THe variable 'node' is assigned a value of an int, tested for being less
+> than or equal to zero then passed as an argument to a function that
+> takes an int so 'node' should not be unsigned. Fix it.
+>
+> This issue was found by Smatch.
+>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/video/exynos/exynos_fb.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/video/exynos/exynos_fb.c
+> b/drivers/video/exynos/exynos_fb.c
+> index
+> 0407a3f51b0d0b3dbb43e2979055208540d5549a..1cc1bd92e5712a8d3b43ac6fac61a45=
+43e4bcca3
+> 100644
+> --- a/drivers/video/exynos/exynos_fb.c
+> +++ b/drivers/video/exynos/exynos_fb.c
+> @@ -350,7 +350,7 @@ void exynos_fimd_window_off(struct exynos_fb_priv
+> *priv, unsigned int win_id)
+>  void exynos_fimd_disable_sysmmu(void)
+>  {
+>         u32 *sysmmufimd;
+> -       unsigned int node;
+> +       int node;
+>         int node_list[2];
+>         int count;
+>         int i;
+>
+> ---
+> base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
+> change-id: 20250930-video_exynos-d69056506545
+>
+> Best regards,
+> --
+> Andrew Goodbody <andrew.goodbody@linaro.org>
+>
 
-I saw https://daniel.haxx.se/blog/2023/01/08/copyright-without-years/ go
-by around January 1st and it's somewhere on my TODO list to ask what SFC
-thinks about it.
+applied to u-boot-samsung.
 
-So to be clear, I don't have an opinion either way on what date this
-uses when upstreaming. But it might be good for the project if we can
-just drop the years, which is very clearly out of scope for this patch.
+Thanks,
+Minkyu Kang.
 
---=20
-Tom
-
---ebMtu0/XPCfv6xKa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYFKGwAKCRAr4qD1Cr/k
-CgV8AP9aQ4tYl05Wk98gRYEjEO0uJRA++RRbDlEXHh+BTXlWkgEA11DwxpVG1Fwm
-cpH7YnaCd178FCyglfcCm/g5DxQEUwA=
-=4wJS
------END PGP SIGNATURE-----
-
---ebMtu0/XPCfv6xKa--
+>
