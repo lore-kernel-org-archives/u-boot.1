@@ -4,99 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2F6E8B365
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 21:31:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20AB8E8B36B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 22:46:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F0BC83DCB;
-	Tue,  3 Feb 2026 22:31:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 65F4C83D9C;
+	Tue,  3 Feb 2026 23:45:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W7pTV8VW";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W9WNXaU0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6323E83DF3; Tue,  3 Feb 2026 22:31:13 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 6206383DA7; Tue,  3 Feb 2026 23:45:58 +0100 (CET)
+Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
+ [IPv6:2607:f8b0:4864:20::1334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB9CD802C1
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 22:31:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C32A083D77
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 23:45:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b8845cb580bso1012098166b.3
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 13:31:10 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770154270; cv=none;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-dy1-x1334.google.com with SMTP id
+ 5a478bee46e88-2b71515d8adso6032602eec.1
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 14:45:55 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770158754; cv=none;
  d=google.com; s=arc-20240605;
- b=G8zCNzlADFUzlAewK9lwnzHIZFG8rcqotyo4bvw/fqC0BA/pobl45FgNMARzTqcY/+
- y7IGBoJ+VCQr8ah+3ifZolKeYYm1RuW1NquolvhuLznwrorjtHMxdbS/Dj0SXEjkifXe
- WqAcPBirZoSM7w1M+yCb/Y/otoEV0X/P1YSEYwgh3MwkSeiWyyvNFPYZ1T68nYPbP2da
- CtjgHrWUo9Y7bglfJ0KhD4BrlWdEDfJcXSlyPdP4x9jWxyySm1HOLWmQ5PBI/rbSqK+X
- rlpfcmyWeGroUhu5YtLNYowqp/BJRXp0ysipalO0yLhF9m3s+nVYOb1SOMnE5tWPn7MM
- PTNw==
+ b=iAaCc+5OEp6QgbBPRxQQMFY1qX9fnnVf3jykFfM12eZ3dN2LhIq0sNfjipNI5T9xu0
+ SRv7pMH2A3oeZB3jrSbptUlTT/iG171BjlF+niWyVFYQeKV8mr3EUA6PMgOG5fMaApCu
+ RkSkCqa/QN6p8OzPynphFswk6UHi4BGLWk9s8cVcQ1kunsvD49kB+5bObb9H0wT3HFPA
+ vBH2ZM9FXUzyAHbvgEEHxdM1i0WvB9PB6mU3tK9FOmGxb/3k2e1DJ0AduHOKU+NcRrX7
+ KLuztzMAN3/3ajs1GRmZovygIoa1vawpXXsHnDsKIed/hD6fs/c5tKrWbQwwrbwzwsNf
+ P1pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :mime-version:dkim-signature;
- bh=/C9kxTHYWwb65ctsgiaTGYjHsLD9fZOt/qoFuwBQ/0c=;
- fh=eU/EAncrzEMdQyccwmHsU7h0eIIa5f1bizQs4TiaiuM=;
- b=BXapXXwV6YwjlVEx/J+Jd3VyF2Zfv/U+BsQlB3T1gmptEJDkmL2m+F9y3OM/HuPV4h
- sgSNiGhzMxI1boIn9l01ytNMmnqdeD57emPfZwVgDXaoRP98ZEgYf1vgqarIJwNKsHEp
- z5u7cePWdt4glIuO3ycDSOCewdDxMYLdIh3+zuPVA0tf0qglnpzyMYnULgUL304v0MRB
- WlqB9P6+KfuHG9ngPgeTBjp5tSQVsakcDRpiSRAzEG60kH4RQd8d0JlysyFT1p4BUUk7
- YtvO0a9TdfPs0yukyWhL7/XQWBD3xuSVIeHowhODRB+nn2ojF/3tml05hJSfUz8mklmv
- LaHw==; darn=lists.denx.de
+ bh=Msn1W9hSyFIqH9nlYQerNqJwzul6/4NsFDE/ZTGYNZo=;
+ fh=a5C6O7gonRlZcZREVMRTGhESbYIotQ5/kIdu6lpeZtg=;
+ b=aWYafazN7Gch8SZvvZJwWFeT2x3dmWLBXPZMKed1yN/62J2l3mUgJi6p9/3HMqMAd9
+ UAlsfsVLvjQWU6K9Y+iGgZTn0xg1/RUJc2d+ozhIsmNJXuH5Xi/Qysqh/QCd7Iov+tp3
+ g/ngGw+ixzxZ7yeLx1rgMh8Ub9pzVaDfHwbBRn97wg5IXWl4LOmbPtiN+7eFCLeukOTx
+ PvZ4/MpFhR4pbvA0f1w8pWdxfo0jKAqqgLd4tBazEL/AyIFdMoC05HndOFPracymOULH
+ LMLVeALLIvLg1O1P1Php/OO2fT3BDuhtsPCg2MVYhKOc8f1EU9SQS3QcY/vd8YHgQmta
+ yc2w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1770154270; x=1770759070; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=amarulasolutions.com; s=google; t=1770158754; x=1770763554;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/C9kxTHYWwb65ctsgiaTGYjHsLD9fZOt/qoFuwBQ/0c=;
- b=W7pTV8VWozMExVS35C0kMvWPhXpRFqLyJF03KV+pxnt8nv0BiNyiGT3Ic+v0tDzI4Y
- 4YQVfxkz4VJ1S1xlhhSgDLFctZCtqTsDZJeb1yspMlmHpKs4cRqqILZxkw0r+ZFOlZ21
- W9QF/uoXkHFMI3riIzF4jGi3bpSgFh+cgRqxo=
+ bh=Msn1W9hSyFIqH9nlYQerNqJwzul6/4NsFDE/ZTGYNZo=;
+ b=W9WNXaU0sHoeuohhYD3G7G/jvRWky1fGjTT1Y9/FM4BCXKeUFMzziEfw6w4WA60owv
+ bz1Jm1GAFZM7fT2TPAx6sW6qGL0WyXDablcrxN39hPV2jh9DJdt8QkNoPKIinCMEM+Uz
+ KSWK4v0m7x8ZEbyeguib1qKxNFp/0WIsrgnzU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770154270; x=1770759070;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1770158754; x=1770763554;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/C9kxTHYWwb65ctsgiaTGYjHsLD9fZOt/qoFuwBQ/0c=;
- b=LXTGdDt+DO5QEjk1ztU6AawLKdY4WquO5ZFVi/zAECU95P18k8DNLLDJRFwZ6755/7
- 9dR0lMk8sI5XVShfADR/hGzPIAShs3atfyFPfSzxVYBHDuhPsvLaQkx4VEKkaahMREqC
- aycvBESJ/m9OIHui+fBci98hhaMVILzVu6enYrzY8a3kPLHIYa+/07X5ES3c/lJRUSDw
- C9lo+M9Q7iZoSoirYWm7wXrAPl5slvKWNwmUqCp66WIEfKZsq6DUPfgRXL6Y7lOBv0Sv
- F7RkT/2KK64XNPmXQTb5IOTEs8oK3VxpGv3BN7EF8a2/aL6SRrUds4sM+2UW6E1eEE3h
- UMHw==
-X-Gm-Message-State: AOJu0YwMZ9w1O699n8EAyRy/9hpKMv4YhF0MO9MU+B6kBIH5++ZNoPBS
- 9kqjsGj6iqPN0xe2vi51GXbxLG2XtG0iL5AFF5WRvTH2D8pSRRNR0m9H1f977Nvr9UOXPqF7n47
- WhAjTFs+KU7hsVFocQGIfsAh9kmpG9Q4ru5DtzkMJ
-X-Gm-Gg: AZuq6aJ7niA/z14+9sPmDwlRln3iVi9/fZnP+peZD0NPEUzV6Ok02/Q721v/heebH7/
- TRF1FILZE/tg41wowbjieWjZiEdzIBYF3fayLhkicEHtBGG6JIuLoP/Cdri6dcpMjCSDyTNpJry
- wCkDQkLZsUyrnwJt8evEzA640z74ZNOivnoqOAlGMMNpky0IBoU8zD3khwegIDwzm6ty1xP/m2/
- PpPjWht8zWRbMpeuhjZzmpqLD7+UNNqUYkOPDKugPXm6SChPATrq14HW7d9nkhoBwgm51c=
-X-Received: by 2002:a17:907:c06:b0:b88:227e:3870 with SMTP id
- a640c23a62f3a-b8e9f070f2fmr55264866b.11.1770154270365; Tue, 03 Feb 2026
- 13:31:10 -0800 (PST)
+ bh=Msn1W9hSyFIqH9nlYQerNqJwzul6/4NsFDE/ZTGYNZo=;
+ b=Ph1vsHsYeAhJfEWYlwqAYZmJVF6KP+LkGSlO/3lrNfBNDgnfLieAioq8s/2FXz+Yeg
+ CmvwfH7JXMDfimi1p8kQJlZtsvhnGedp4WVXolTB3rkCd5GvIL7x81b9T/C/laWgt9KN
+ Ac943HjQS1tQunUGq9WxlbthQ/Lg0U134NQrTH9xZjls06svhEW1ot+w/MNSOl8L82oJ
+ eJtHPPf0eq8N187ZvipiE8r73i5d4afRxwq56KXPcFC4Zfn7IXWLjjgk0bMw2+WLAciO
+ GKSkQyHWh9+c4F/ygqBgA+H1jx87rtSkCegweRqBGnZJ1EXQgoShsJd5sI+w5WcP0y77
+ VvOw==
+X-Gm-Message-State: AOJu0YzNCjvExhEmb+zZD1k4w/GBFQLHH5r9+tUMvu3pPM5kx5Q8q1hh
+ ocrxzjFhQafK/h/Hi/wgF+/KqzDAtvvjwmdkLtgWtuoCDtVDIxg5dLqyTyDOgQWEP0j3I6r2NW2
+ GgJ+kSE8oxQq6A5jTAFhGq3E6XnCyopa+DA8pWH0fHSFQbnyF06AlmaLpHg==
+X-Gm-Gg: AZuq6aJFSSIUiPUzXt76juoY7R2YbAc78ie7kWUD61s5RQH7IH80lgpS0XTL+Nr216X
+ 15dHSVMMKL4Cci5R1kTSb0Jn9iYSjlwr9ghZ67gzCmRCfgdYEqwXNA5P7xvIyiBk/nOmAoN10cL
+ g1fGOgWo4Gw+8xuCa1v4Tgln2MOW/SOFHnvIhHutj6ft9m1+J+7W/abWnkS+Ph5VgOVJSwdlPXJ
+ Oep0JFIyz0Whe7E+QXQVWHQIB0wBSylFmRvkpb9c0Isg9UNvfChYCz3LLPE0agZAgCRMSKMv0Tc
+ VyEYK/AC3k5bgROeN4XK3BQ9YEQ=
+X-Received: by 2002:a05:7301:678c:b0:2ae:614a:330e with SMTP id
+ 5a478bee46e88-2b832a45b93mr482513eec.41.1770158753540; Tue, 03 Feb 2026
+ 14:45:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20260128-legacy-led-sunxi-v3-1-4a528077aeab@cherry.de>
-In-Reply-To: <20260128-legacy-led-sunxi-v3-1-4a528077aeab@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 4 Feb 2026 10:31:10 +1300
-X-Gm-Features: AZwV_QjOMxWIfb700YwyXb2l5RP1kDkbH3lwTq_jxkBJIy2Vx-RJRc2mXSBWB84
-Message-ID: <CAFLszThhrSf2PZU=whHzUJLMmyufw1cOVHnER6yB=7kdOn19aQ@mail.gmail.com>
-Subject: Re: [PATCH v3] sunxi: remove usage of legacy LED API
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>, 
- Hans de Goede <hdegoede@redhat.com>, Samuel Holland <samuel@sholland.org>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>, Paul Kocialkowski <contact@paulk.fr>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Cody Eksal <masterr3c0rd@epochal.quest>, 
- Liya Huang <1425075683@qq.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Bohdan Chubuk <chbgdn@gmail.com>, Quentin Schulz <quentin.schulz@cherry.de>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Tue, 3 Feb 2026 23:45:42 +0100
+X-Gm-Features: AZwV_QjHQSq0U33c9Empw-vwXZXic72lFjqObxYW8FjsIK8_EG3DVzWG2pEvFJ4
+Message-ID: <CAOf5uwnzPQsvaJoQo1F+aAWP7MHbrPfsxiAbesCTfQzmH9oUWA@mail.gmail.com>
+Subject: Pull request for u-boot-nand-03022026 (Take 2)
+To: U-Boot-Denx <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Richard Genoud <richard.genoud@bootlin.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,60 +109,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 29 Jan 2026 at 05:01, Quentin Schulz <foss+uboot@0leil.net> wrote:
->
-> From: Quentin Schulz <quentin.schulz@cherry.de>
->
-> We are trying to get rid of the legacy LED API and PinePhone is one of
-> the last ones requiring it.
->
-> Unlike all other users of the legacy LED API, PinePhone is controlling
-> the GPIO LED in SPL. Unfortunately, Sunxi doesn't enable DM support in
-> SPL because of tight space constraints, so we cannot make use of the
-> modern LED framework as that is based on DM_GPIO.
->
-> Since PinePhone is the last user of this API, I'm moving the logic to
-> Sunxi SPL code and will let this community decide how to handle this hot
-> potato.
->
-> The logic is extremely simplified as only one GPIO LED is currently
-> controlled in SPL by PinePhone. No need for handling multiple LEDs or
-> inverted polarity, let's keep it simple.
->
-> This however allows us to use the modern LED framework once in U-Boot
-> proper since this logic won't collide with the new framework.
->
-> Since the only misc drivers that were compiled in SPL were guarded by
-> CONFIG_LED_STATUS and CONFIG_LED_STATUS_GPIO, we can also disable
-> CONFIG_SPL_DRIVERS_MISC (which does nothing anymore).
->
-> This also saves some space for PinePhone in SPL and proper.
->
-> Tested-by: Andre Przywara <andre.przywara@arm.com>
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Note that I do not own this device so I could only build test it.
->
-> This is to continue the effort of getting rid of the legacy LED API.
-> ---
-> Changes in v3:
-> - rebased on top of master,
-> - Link to v2: https://patch.msgid.link/20251216-legacy-led-sunxi-v2-1-5739a5a524c9@cherry.de
->
-> Changes in v2:
-> - removed printf as suggested by Andre in v1,
-> - removed check of return code of gpio_request() as it'll always be 0
->   with the sunxi_gpio driver, we could technically even remove it as it
->   does nothing but return 0, but it is "more correct" to have it,
->   especially if Sunxi ever decides to move to DM_GPIO where you really
->   need to request the gpio (and check the return value),
-> - Link to v1: https://patch.msgid.link/20251120-legacy-led-sunxi-v1-1-c4c1422fd242@cherry.de
-> ---
->  arch/arm/mach-sunxi/Kconfig | 18 ++++++++++++++++++
->  board/sunxi/board.c         | 16 ++++++++++++----
->  configs/pinephone_defconfig |  9 +++------
->  3 files changed, 33 insertions(+), 10 deletions(-)
+The following changes since commit 71f2564b178f3986dc89cdaa4558f0caa74fd88c=
+:
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+  Merge tag 'mmc-for-2026.04-rc2' of
+https://source.denx.de/u-boot/custodians/u-boot-mmc (2026-02-03
+12:46:30 -0600)
 
-yay
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
+u-boot-nand-03022026
+
+for you to fetch changes up to 800ebf7e94e3a7e375cf915ae21e14514fd81450:
+
+  tools: sunxi-spl-image-builder: support H6/H616 NAND boot
+(2026-02-03 21:45:27 +0100)
+
+This series provides a comprehensive cleanup of the Allwinner (sunxi)
+NAND controller drivers and
+introduces full support for the H6 and H616 SoCs in both the main
+U-Boot driver and the SPL.
+
+The series successfully deduplicates register maps between
+sunxi_nand.c and sunxi_nand_spl.c
+while migrating to a capability-based architecture. This approach
+allows the driver to handle
+the H616's specific requirements=E2=80=94such as shifted register offsets f=
+or
+ECC/OOB, the removal of
+512B ECC block support, and mandatory MBUS clock gating=E2=80=94without
+breaking compatibility
+for legacy A10/A23 devices.
+
+The patches pass the pipeline CI:
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/2918=
+3
+
+----------------------------------------------------------------
+Richard Genoud (26):
+      mtd: rawnand: sunxi: cosmetic: remove needless comment
+      mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
+      mtd: rawnand: sunxi_spl: harmonize register defines with non spl file
+      mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+linux/mtd/rawnand.h
+      mtd: rawnand: sunxi: remove usage of struct sunxi_ccm_reg
+      mtd: rawnand: sunxi: merge register definitions for sunxi_nand{, _spl=
+}.c
+      mtd: rawnand: sunxi: add per SoC capabilities
+      mtd: rawnand: sunxi: move ECC_ERR_CNT register offset in SoC caps
+      mtd: rawnand: sunxi: move USER_DATA register offset in SoC caps
+      mtd: rawnand: sunxi: move ECC_PAT_FOUND register in SoC caps
+      mtd: rawnand: sunxi: add has_ecc_block_512 capability
+      mtd: rawnand: sunxi: move NFC_ECC_MODE offset in SoC caps
+      mtd: rawnand: sunxi: introduce reg_pat_id in sunxi_nfc_caps
+      mtd: rawnand: sunxi_spl: add per SoC capabilities
+      mtd: rawnand: sunxi: move NFC_RANDOM_EN register offset in SoC caps
+      mtd: rawnand: sunxi: introduce reg_spare_area in sunxi_nfc_caps
+      mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
+      mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+      mtd: rawnand: sunxi_spl: use NFC_ECC_MODE and NFC_RANDOM_SEED macros
+      sunxi: clock: H6: add NAND controller clock registers
+      clk: sunxi: Add MBUS Master Clock Gating Register
+      mtd: rawnand: sunxi: add support for H6/H616 nand controller
+      mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
+      mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
+      mtd: rawnand: sunxi: fix page size in control register
+      tools: sunxi-spl-image-builder: support H6/H616 NAND boot
+
+ arch/arm/include/asm/arch-sunxi/clock_sun4i.h      |   1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+ arch/arm/include/asm/arch-sunxi/clock_sun6i.h      |   1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun8i_a83t.h |   1 +
+ arch/arm/include/asm/arch-sunxi/clock_sun9i.h      |   2 +
+ board/sunxi/board.c                                |  21 +-
+ drivers/clk/sunxi/clk_h6.c                         |   2 +
+ drivers/clk/sunxi/clk_h616.c                       |   2 +
+ drivers/mtd/nand/raw/Kconfig                       |   4 +-
+ drivers/mtd/nand/raw/sunxi_nand.c                  | 306 ++++++++++-------=
+---
+ drivers/mtd/nand/raw/sunxi_nand.h                  | 228 +++++++++++++++
+ drivers/mtd/nand/raw/sunxi_nand_spl.c              | 317 +++++++++++++----=
+----
+ scripts/Makefile.xpl                               |   1 +
+ tools/sunxi-spl-image-builder.c                    |  92 ++++--
+ 14 files changed, 700 insertions(+), 302 deletions(-)
+ create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
