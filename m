@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338ADE8782A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01910E87827
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:43:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E6588410C;
+	by phobos.denx.de (Postfix) with ESMTP id BFDC384547;
 	Tue,  3 Feb 2026 14:35:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 472A483FF8; Tue,  3 Feb 2026 08:31:32 +0100 (CET)
+ id 4C12684047; Tue,  3 Feb 2026 09:00:59 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9E33B83FC8
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:31:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id C47F683FF9
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 09:00:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 698DB339;
- Mon,  2 Feb 2026 23:31:22 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BE9E4339;
+ Tue,  3 Feb 2026 00:00:37 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9433F3F778;
- Mon,  2 Feb 2026 23:31:27 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E9E353F740;
+ Tue,  3 Feb 2026 00:00:42 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@arm.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Sughosh Ganu <sughosh.ganu@arm.com>
 Subject: [PATCH] mailmap: Update email address for Sughosh
-Date: Tue,  3 Feb 2026 13:00:46 +0530
-Message-ID: <20260203073046.328159-1-sughosh.ganu@arm.com>
+Date: Tue,  3 Feb 2026 13:30:33 +0530
+Message-ID: <20260203080034.336758-1-sughosh.ganu@arm.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
