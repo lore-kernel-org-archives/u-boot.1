@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37882E8305D
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2272E8305B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:58:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86D288401A;
-	Tue,  3 Feb 2026 08:53:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28F3F83FFA;
+	Tue,  3 Feb 2026 08:58:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kxIRINpG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="a/pivlAB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ABF884011; Tue,  3 Feb 2026 08:53:04 +0100 (CET)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
+ id 20D6683FFF; Tue,  3 Feb 2026 08:58:12 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C781D83FF8
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:53:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACD1783FF9
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:58:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GKY7XurSB0bO8z53VSXqSDRVQqEtJ0DTZYUt1eltOpW/blswBmlx2W96RwTavVtcX5Koinm6Qw37GJJyB6HYBXu2oI1jBGM4T47aAStXPdyfApNPgFtxtywftN9Rv9PZpkafaEoKigvBCswqxTi5P84ZU+dHNDHr6OeUevsOD6EVrB7XjUlbkni02dd1ogxUAvyRdJK7H7UARa/Hgh+pA3w2xgmN7L4zXO2E4zZm4rxfjWktUNiCEHKUbn4/Ck0pmEyKyvlsiiqmc3ZofGpZYZhad0UKNQpm43s0EmH4sWuormXABDiHkiycmL1WNFnFP1t22qH0Y+UAYRSf0v1wjQ==
+ b=TpY51+iDMOsVTsiIy1/2TKb4/DsjodfLul6ki4qJ8sZctnKj9ZKEYRA50b37leO2Y1yZS9nVQ6iZqWnpS7XoLPaESLKb0h2oG6pmOZKVRYiUJ5mDGzo+3vEKwDLQY7WBvNBai3Yco+W8CZImiu5dm70EX7DGOppIFEe7X0NvkHw4IWlAYHP/N8jr19aHfeEU3uTRnlhf/k8T3bIr0aNio8LxS/HJyLmjSOWLCflRVGSl9Oya66A8BM4yrhjvPYeRztxnFWc4AfJ2/fEYacVBPyLZ+0GSCheFhozHtcu3GocN9JWcWAzRi/crip+Hc/cD3nhoJRDQg8xsv5Jz4qxHRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S5LBj1npm9LeirU87Xd4h0mY4ng6uoAYRsoWuwK8Kfs=;
- b=i/Ba6AyA6XDq1GfzLv1gTZS4IytJJizFBLVf7nXAlWg9kDyADAdxrCd6FlOu2dBTKmOmCjBY75+bBhA4BBCmAUsv/cK9oUSFbivGR1PT31SfBRo6dYaIrcl6gSdjj5i/+uTqDeTwOrphQbTvG0dsYNSWmq70kxsmrQbINtDkfOMSQHISL0MhftexEo8IF7MeVgkfIX/jUSSVjai3l9gvm4ixFtUtjmNh6AYJieKzZRM5jH+PCJ5Fnr6acinFvmVAieY/Dh0WT6OseLAKyjPz3fsKouug7TgfnLEweO4HbaUidqzz2R8bCkX2ki0llBMwc1yCn9GS367sElmvJ7cs3g==
+ bh=ICYvko4NqnuL4RbrmncSDUveKV7TpjiAQ3J2E8p2T3s=;
+ b=YpIgW+wfVHvSREavOmpF+Llsu07c4slH0JCmAiq0cbXEu7C90cSrIDEfBsclMccdjgHD3iuU7cGAT3rjRCOlRzvqE9+gpbsO6/FOl5tzLeUjHAgkLD6iDNhv5fQzXBjlUwXUXlPFwPzP6UjUDSFUur53YEwZCY+mxfJX/079zQxSrY+LKCl4cU+I76iJHYRvjib+LjjC8UGAXU5QPgletIlDulCgYctLS4S+cd/o/31w/VACZaDYgsmlC8o6i4/aI3TWdZ9E7v7/h2+HcbK4GQoeeXeNmKZdlPM4IPlqvAfxcAJqw420anm7gcdLZNzQto4/2jsH4Iid6yp0uP4IAQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S5LBj1npm9LeirU87Xd4h0mY4ng6uoAYRsoWuwK8Kfs=;
- b=kxIRINpGMMVG8iAxDeD3RsingsU/1jet2GUGSv8fjrSTuz6mokw0wFF1+hgBr9jXTFXXkM9lGCZX+iAXhhd4ZKn9xcOOmkTn/2oiODGdY8HOhCbWkog8FGbmsz5Tjr87kS0gNxy4qpKo8wK4OtTYytn73+9j9EF2pfWusvD7C1s=
-Received: from SJ0PR13CA0075.namprd13.prod.outlook.com (2603:10b6:a03:2c4::20)
- by DM6PR12MB4074.namprd12.prod.outlook.com (2603:10b6:5:218::11) with
+ bh=ICYvko4NqnuL4RbrmncSDUveKV7TpjiAQ3J2E8p2T3s=;
+ b=a/pivlABTI2xIBhjKhpm2algiGtiCyxAcRw3w6aFFnNfvpI6uKX86dqbpAUImkLdQ9ih6pUasH/dk0g+yVnd4VoW69DDLQi6ioJhTocmBUiF484D6WBR4emUx+q2TJD3Cok/L+VBkj2jlBN0mRiLdoBhRTC89u9KWWN90qKXw8k=
+Received: from DM6PR02CA0144.namprd02.prod.outlook.com (2603:10b6:5:332::11)
+ by SA1PR12MB6749.namprd12.prod.outlook.com (2603:10b6:806:255::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
- 2026 07:52:56 +0000
-Received: from SJ5PEPF00000205.namprd05.prod.outlook.com
- (2603:10b6:a03:2c4:cafe::93) by SJ0PR13CA0075.outlook.office365.com
- (2603:10b6:a03:2c4::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Tue,
- 3 Feb 2026 07:52:52 +0000
+ 2026 07:58:04 +0000
+Received: from DS3PEPF000099DF.namprd04.prod.outlook.com
+ (2603:10b6:5:332:cafe::54) by DM6PR02CA0144.outlook.office365.com
+ (2603:10b6:5:332::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
+ 3 Feb 2026 07:58:04 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,96 +59,98 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF00000205.mail.protection.outlook.com (10.167.244.38) with Microsoft
+ DS3PEPF000099DF.mail.protection.outlook.com (10.167.17.202) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 07:52:56 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 07:58:03 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 3 Feb
- 2026 01:52:55 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 3 Feb
- 2026 01:52:54 -0600
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Tue, 3 Feb
+ 2026 01:58:00 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 3 Feb
+ 2026 01:57:59 -0600
 Received: from localhost (10.180.168.240) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 3 Feb 2026 01:52:53 -0600
+ Transport; Tue, 3 Feb 2026 01:57:58 -0600
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>, Nithish Kumar Naroju
- <nithishkumar.naroju@amd.com>, Rohit Visavalia <rohit.visavalia@amd.com>, Tom
- Rini <trini@konsulko.com>
-Subject: [PATCH v2 3/3] arm64: zynqmp: Wire gpio-delay driver for USB hub reset
-Date: Tue, 3 Feb 2026 08:52:32 +0100
-Message-ID: <e206e3ab2ad266935b81f5e9d3af2ed47b866826.1770105146.git.michal.simek@amd.com>
+CC: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Shantur Rathore <i@shantur.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, "Tom
+ Rini" <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v6 0/3] efi_vars: Implement SPI Flash storage for EFI
+Date: Tue, 3 Feb 2026 08:57:52 +0100
+Message-ID: <cover.1770105470.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1770105146.git.michal.simek@amd.com>
-References: <cover.1770105146.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6658; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=QxZbKyVkmAJoEUHLH+E6o7sLrr8D7K4cpvoPS4QevkE=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQ2rnQR5bUx+7jp4e6kxs49UxYdyl7R9Pth83vNdq+IM
- u9ZvzS2dZSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBErL0ZGa4zLn2V7VAiP8Fm
- Zs79qs+qnVfKl/xPj+P5E8Ep655wRYSR4V/t9vsGX2e3bxNf8VK3vP9haEKw4V5Vppittlv/POJ
- p4gYA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2688; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=/EMkcomMGgmbiJZb5tCGLb4De14Gcp72HgDPwpKTVcQ=;
+ b=kA0DAAgWqwf+8E71EfUByyZiAGmBqoKiFpZ7GIFHGQ2jxyNEfUdP0V72BobYD40aUuKSUWJY8
+ oh1BAAWCAAdFiEElwIsQKz21qUWp1lvqwf+8E71EfUFAmmBqoIACgkQqwf+8E71EfUDxwEA1vPb
+ kN3v58Uqnqi8lire54LF4KR/zFIPtz1ABJhPq5cBAL2Ly98d/3TAit7vXtypU69n9nkJfm8gs7a
+ CxNcZahgE
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000205:EE_|DM6PR12MB4074:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2e072ba0-3408-4a57-37fb-08de62f93e4b
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DF:EE_|SA1PR12MB6749:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9d24c63c-47fa-4a9c-214a-08de62f9f59e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3UOR4DVUXFP6y6/bfQYpCVK0pwx/WtQV3PAxqzpLEiJ+eInbCZ6u8maA5k3b?=
- =?us-ascii?Q?KJTUVC7mxzRXMJk/ocU847nEGLTwnyVNbF0a7ANCjuZRO0EwiAb1PbNNUNM7?=
- =?us-ascii?Q?EDYa6UhqhHSX2XGVxJ1kyK7UTQURTx2QXGiU2wrOHq1kE+077r4HegoMbTbI?=
- =?us-ascii?Q?3jmpTgWbM4r7FrXlVNcx4W6Yv0qtfBjWUNFcisnL4z+fqDb906l734ZqxDqO?=
- =?us-ascii?Q?ma3dl2F5VtBLz62whYS69ZFCLm/mtJ7e3otIGJMXZ333yaswcJaOpuSfM4GD?=
- =?us-ascii?Q?MH3TZ9bmCOlCUmua70ao3mwKkMw/baueHcEatHuenvwndLeOreRXd1kA3+eH?=
- =?us-ascii?Q?9BG54lBLvsPQOMjfez6t0kTKb7nz+jXJO3RCKwxoP79WNRwZTj++KUtaUhS9?=
- =?us-ascii?Q?Sl/L1LSNDprWahcwFSZBCRYfOkUy//3ydh2xh37GLGJ3j3eGvwutvJ7UrXP9?=
- =?us-ascii?Q?WBFRPgISLrcgkJOCRXy5ilvzbUVGlsNhSwQOij7eEyCDxeRKl/qilzG+qvLq?=
- =?us-ascii?Q?2zl4+CGeG8CPu4CCpU8fCvZwneKFZxRULeKsl3DsJEvrQ+VEWGFo2Y0+ApDK?=
- =?us-ascii?Q?DHyNcMBdFQ70iosYCuiev3QMzjDwmMYYYxASdqZ14cjfrwygEA6/juBR20Ak?=
- =?us-ascii?Q?D1q+psilfVttNTYXyWp+j+ZnFNND8YvfR+BINQ91+61a6+rf70E3rjzIs/dW?=
- =?us-ascii?Q?79nYEmYo10RZ73jtXrlbvVfOfZxNJ6A7WovIdkg/jabK4RrzuAZdy8lksA01?=
- =?us-ascii?Q?w1C/LukKD58y7DRNks3sjXq8K0J2TeVSZX5nwZ227ZkX3hBgU7bBqBqcHjeB?=
- =?us-ascii?Q?B8VJ1UDCvUaOnXUSPkmVdP+OyC7xcZBSrCdTDRX3u+FHJIwgPz0bIVaySGqh?=
- =?us-ascii?Q?8ki9zYY2484NmPTasEsRieZDeRVhVc8IKCJlsuqBp/ANCOwEbwFWQY3WPpKn?=
- =?us-ascii?Q?eA0J9PnrlWCGaPrk+otHLzYvRzHYrYojlYQx3mZLgrhTE4Mv4KtB269C+L28?=
- =?us-ascii?Q?vgbRQjm6Gsgdpe6oXqIAntKwgmaRVvFpDWi7oA9dZ+dz2jDuHs+eGQcS83XC?=
- =?us-ascii?Q?razNbkGaX2R1NvP7Bl0lRziCXFqPU6dngv2lfzB/4PTdacSMo119y66GMRST?=
- =?us-ascii?Q?YGiLS7A4zyv86d8gf95V8Zqb/LtATECZici4ci75vnbVxFQZf2hvVmHZ37vN?=
- =?us-ascii?Q?RyV+OzgepljNL1L0/F2s2dcGFpN1m7uvOhwjiP1LOMOYwnav8N71eRLcdxGs?=
- =?us-ascii?Q?mNLFtUUBXXM60ALto3cFR+D6MQW1gDEVNUtXr5/mOs6ej+LKot9TUM+cSgJw?=
- =?us-ascii?Q?/fSS8aup3k7Q37Mzkra9qgUYLaMLq/717iyXRQ4EEG7+TZjLvhsyqOkL5iHZ?=
- =?us-ascii?Q?rVjHydDEKkHgnBuCms5xqEibe1LKh7GaR1OPLIPXe7ypvbxuyRAiZS0j7iPt?=
- =?us-ascii?Q?TGYlX+aOayWyP3CIWjteg6X7/k7xSjHJE+nr1FCCxLoUm6gR7/mArrSfh1He?=
- =?us-ascii?Q?sd7hLzb3DhbLFj/eHpyV3N72Vl1cw3F3dYEJSWCfJIDXaT0J+s0qU6GjHgQv?=
- =?us-ascii?Q?kHrh9vclsOUqRDhE43kM+gicknyxj3F3cxPzjvwHHq0FgFQYmKkx57MvehVU?=
- =?us-ascii?Q?u8jn4cOi6PZewD/Pze2UyTtZVA5F1PjJMOVA+k0BKikg6w7QOvrmLTaTdSqj?=
- =?us-ascii?Q?ig4lcw=3D=3D?=
+ ARA:13230040|36860700013|1800799024|82310400026|7416014|376014|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?p+PJ++0jtSW1CbW1SDYQXMLazRv9TUHokkhl3b8623Ze4PYIHLb1Oq/DmCQM?=
+ =?us-ascii?Q?9aML1qvWFh29+jbGRu716OihFhp847p7JiqqwnjWRx1OlFhdeuOl508oYsM0?=
+ =?us-ascii?Q?Re3TIGU8NvQ2APzmlwr6koxMqu3n3xp7mwjFkVXND4lKYMndO6AnMjW7ssfS?=
+ =?us-ascii?Q?dKj7tuLdRQWbejT67UOuXe3SIRT3ctlNP+D5UUyOR6z+lGj1XYWNuIFcTe2U?=
+ =?us-ascii?Q?A5VACDHN4rea0o5Lmx/gDT4Mo9ipTf32GvUE2yDfrjEsVmyeNs1bOc6X7zUj?=
+ =?us-ascii?Q?LHkj/waXjloIHaREy7DTZgYZD2fxUFTP+U/GXjh93OfkDvWKn6h0fbYP0lkm?=
+ =?us-ascii?Q?hQSfmHpq+05Ekz6mJ4FN/CAabWxCJwyJHJOHw+hhGc/KYl5K7sO8FMXz9k/7?=
+ =?us-ascii?Q?g0zUilihBRY4EChyvFvet4GWJ71SonqoTrOD5+QgRxJzi1nFiIU7sNxTJPiP?=
+ =?us-ascii?Q?iJPjA9y3TkIhsSiAHqD5v5V6sgBzdPd0K2XlFLbtY3vIVQGpoQbvvRF610jm?=
+ =?us-ascii?Q?pVbT4gCY4SezPV6bXesMvZTEgRfd2ZQAx+DmjixoF3dc7v4U61TIDwKRxTHQ?=
+ =?us-ascii?Q?34unxYPOE6d0JWu8F5K2I+KLCIDor0e0+zHjlHrQea4vA75mkXUbkBKJ8pCy?=
+ =?us-ascii?Q?uAJMZ4NnWFfOqeubpGUwJJ9V04miAxwhhQhJ4ZK1byMzmGzQNdX2HgJMWZTV?=
+ =?us-ascii?Q?BOhbP+eppN/IHH0W8kYdV4E3IO/6ENJSHoseJheO/tnGLiRPdKXSiyxnyTRH?=
+ =?us-ascii?Q?v51OIKkjC7+WbDp3Ib5hxUsHFJQaz8D4LaHnpIBaThgyraJFlF2xxYKN2zsi?=
+ =?us-ascii?Q?9JwEl8d6g1pJUJ2Q6RQJT9rYWI+YjPqBjBuwMcaFIL6j7eQyyWNy3V7J9bx4?=
+ =?us-ascii?Q?UAOKR+j0etiV2jU9KdX0t+lgBNmqdGmTtsmZV/KimSmLEsSfUR7pAAdnqP/T?=
+ =?us-ascii?Q?HrPgpGwRtHc33nu1Sy/A+LbW9dxboeuxUGIegPCCIWo7iKZ+RR4acUtxHV3w?=
+ =?us-ascii?Q?/XGDzjJTk4ZikAQwzLBxqzC1m3AchZU9I0FakX8zfTXkaOrIio1Ez4vJP6UH?=
+ =?us-ascii?Q?FnWqkD/ihJ6aw6SYaXt2SdVzhhC4Td7ypUSth5KQIkwB62wNmtVE/pkoEQw7?=
+ =?us-ascii?Q?Wyfw/kJdoK+DZDTFZiKpp2q1p5N868TKUY2W7JpFF9K59n5C4KgG8Cnws9pL?=
+ =?us-ascii?Q?Bx95u5U8crNeBkieLc5zZdbaPfGd0vUKjqdvlv3N2MzzMb+YC01oG7Wpxhb6?=
+ =?us-ascii?Q?YqwT0R91aju6O361gfi1UGNNikSx7I8hZ97PP9/VHmbi2EUCvYqctpji4SIp?=
+ =?us-ascii?Q?Vv6DlPF8vWwDXhy6kToiEEAwrEW76c59laHdX+WYXaKdSAqBpMb9LPCBZL3D?=
+ =?us-ascii?Q?57gkhrESu5irkd4rG0pzcJW1F+GBgTWkb9/PxTVsHqa8qtGXgdBe7Ag/7uPf?=
+ =?us-ascii?Q?Kb5ZsTkvqfCHCLWHGCX5/Vsqr2yAKXOHuo+cpGXPEGsQe+AgVjhbDy4cuRuT?=
+ =?us-ascii?Q?mgfXQ29cP815DOn3mtZgXG5FayxOkmwBhavqJONKoI9iBhvD5zXc4wwLVBB7?=
+ =?us-ascii?Q?u622xKPKVuzUTbh1YeWOh3Ja39Md3g7xHUaStI6oDsO5g8modwx++ntm6dt3?=
+ =?us-ascii?Q?kIvSYbKL0QPqsezCwcXCYb621dWwVDJjW2eCX7IbJCwO/KPkLXq3FJ3wUjzi?=
+ =?us-ascii?Q?NszM2g=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(7416014)(376014)(13003099007);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: V+Q8FDBIxP6Y73SBtuibi0RmKw7kcddumYaKSTM8qhNIIDAJjIxXsnTeTDp5QAhIf9wCB8glk13jVkCUbiNaJDLr6Syb6X0KbZ7/qL7Sa5y82ewGJlISauVPmaacTIfv2Pn+VagYCowIuvQyAUFGJ5pWJZdcWE56rxbbXxd9WPfrUeawwJ05oO7gAUoPAU3RxRvwQ7PBN+tNXEHYBpulPICzJ/c1up+Q/VutXbDrHiN+Blks3pIMYqcotN1P8Mz09FFvLlzO3gQn+OnAJ8dh4iIndBbL1HTT424GxW5oHcZ+WkVAOqw+3X/eHp2+behfpOKIkR0JPEmIlQ7mjCdr6f8cJroHl6x+4UugrhNu+nbFopMBnHtSlEc//tWK+njW5S/dzZIUd4sdtE05JgZ29+cZVvT4jtbFOSzARF5bUp+f/nOBjHt+YYkucZiQi/nN
+X-MS-Exchange-AntiSpam-MessageData-0: p6Dnd8OolJXt1eIeMP/RdbiJGlqcWJ3wtEGvwkQhMfbKCW5k8an973pGQRzTqzwHqtd1Couq5lIBH5wciRqnr5Ex+8ddC31pvWerzaBmnGU5r5Qj+uQ6zXU9XHiN1JLpIyuyeMfow08bxGo06ovMVw0yVwY/Q6MLfzPAXw5eMwe/YiYgesn2RbQR3NJfN/6ZGlnQcE3xLwxLyCK2TaQnChiSPpTKyI5kvC2+Bf7zwPgTWTiPx1AvmNproIIzGLWEGTvQWmHzpaVZEFcGqHrG9s3iACtee8ZwNjgvpt8E3tTyEbLE1SQk7VrzEBkYh3Edq5SiipLVHMfuOaVWXMIgUnMJ7373nw7tvTuUL3akf6xbi0RIDcCRXiA+qk+fi37eZPvRs11Wk4Q2I5X7ZH7cKmrYlD5Dhn8Y9Zy9CP3Aup13DMWdZkbrWo8HQKzEFq1X
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:52:56.3870 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2e072ba0-3408-4a57-37fb-08de62f93e4b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:58:03.9887 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9d24c63c-47fa-4a9c-214a-08de62f9f59e
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF00000205.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DF.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4074
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6749
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,259 +167,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-USB hub requires longer delay to get out of the reset to work properly
-that's why use gpio-delay to ensure enough waiting time.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
-Reviewed-by: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>
----
+This is updated series based on v3 version sent here
+https://lore.kernel.org/all/20231126220836.374956-1-i@shantur.com/
+
+that's why I am continuing on v4 instead of starting from scratch.
+
+Tested on kv260 with saving variables to location where User MTD partition
+is.
+CONFIG_EFI_VARIABLE_SF_STORE=y
+CONFIG_EFI_RT_VOLATILE_STORE=y
+CONFIG_EFI_VARIABLE_SF_OFFSET=0x22a0000
+
+In Linux:
+root@som:~# mount | grep efivars
+none on /sys/firmware/efi/efivars type efivarfs (rw,relatime)
+root@som:~# printf '\x07\x00\x00\x00Hello' \
+  | sudo tee /sys/firmware/efi/efivars/TestVar-12345678-1234-1234-1234-123456789abc
+Helloroot@som:~#
+root@som:~# dd if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c \
+       of=/tmp/vars skip=4 bs=1
+1352+0 records in
+1352+0 records out
+1352 bytes (1.4 kB, 1.3 KiB) copied, 0.380992 s, 3.5 kB/s
+root@som:~# flashcp /tmp/vars /dev/mtd16
+root@som:~# reboot
+
+Reboot and then in U-Boot:
+
+ZynqMP> pri -e
+...
+TestVar:
+    12345678-1234-1234-1234-123456789abc (12345678-1234-1234-1234-123456789abc)
+    NV|BS|RT, DataSize = 0x5
+    00000000: 48 65 6c 6c 6f                                   Hello
+...
+
+Thanks,
+Michal
+
+Changes in v6:
+- Return EFI_SUCCESS in efi_set_variable_int() when
+  CONFIG_EFI_VARIABLE_NO_STORE is enabled
+- sed -i 's/efi_var_read/efi_var_from/g'
+- sed -i 's/efi_var_write/efi_var_to_storage/g'
+- sed -i 's/efi_var_read/efi_var_from/g'
+- sed -i 's/efi_var_write/efi_var_to_storage/g'
+
+Changes in v5:
+- Invert logic in efi_variable.c and avoid #if
+
+Changes in v4:
+- New patch based on review comments from v3
+- Extend Kconfig description
+- Extend commit message and describe efivar missing part
+- use unify methods for reading/writing variable
+
+Changes in v3:
+- Fixed compiler warnings.
 
 Changes in v2:
-- fix commit message
+- Refactored efi_var_file to move common parts out as requested
+- Changed ifdefs to use CONFIG_IS_DEFINED
+- Fixed typos
 
- arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 13 ++++++++++---
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 16 ++++++++++++----
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 16 ++++++++++++----
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 13 ++++++++++---
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 11 +++++++++--
- 5 files changed, 53 insertions(+), 16 deletions(-)
+Michal Simek (1):
+  efi_var: Unify read/write access helper function
 
-diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-index 832dc5ab2458..8342479b108a 100644
---- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
-@@ -3,7 +3,7 @@
-  * dts file for KD240 revA Carrier Card
-  *
-  * Copyright (C) 2021 - 2022, Xilinx, Inc.
-- * Copyright (C) 2022 - 2023, Advanced Micro Devices, Inc.
-+ * Copyright (C) 2022 - 2026, Advanced Micro Devices, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-  */
-@@ -43,6 +43,13 @@
- 		#clock-cells = <0>;
- 		clock-frequency = <25000000>;
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &can0 {
-@@ -116,7 +123,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -125,7 +132,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-index 532f6bf92bc5..db042ffb4f36 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-@@ -77,6 +77,14 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>,
-+			<&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C26/C27 - MIO from SOM */
-@@ -187,7 +195,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -196,7 +204,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-@@ -224,7 +232,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub1_3_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -233,7 +241,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub1_2_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-index 458d79e81192..e3567d0abfe0 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-@@ -78,6 +78,14 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>,
-+			<&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C26/C27 - MIO from SOM */
-@@ -188,7 +196,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -197,7 +205,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub_1>;
--		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-@@ -225,7 +233,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub1_3_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -234,7 +242,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub1_2_0>;
- 		i2c-bus = <&hub_2>;
--		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 1 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-index e7417af8ae01..f93c7460a552 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-@@ -3,7 +3,7 @@
-  * dts file for KV260 revA Carrier Card
-  *
-  * (C) Copyright 2020 - 2022, Xilinx, Inc.
-- * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
-+ * (C) Copyright 2022 - 2026, Advanced Micro Devices, Inc.
-  *
-  * SD level shifter:
-  * "A" - A01 board un-modified (NXP)
-@@ -78,6 +78,13 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C23/C24 - MIO from SOM */
-@@ -161,7 +168,7 @@
- 		compatible = "usb424,2744";
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -169,7 +176,7 @@
- 		compatible = "usb424,5744";
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-index 7a05180e58b4..70de6933600e 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-@@ -74,6 +74,13 @@
- 			};
- 		};
- 	};
-+
-+	slg_delay: enable-delay {
-+		compatible = "gpio-delay";
-+		#gpio-cells = <3>;
-+		gpio-controller;
-+		gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+	};
- };
- 
- &i2c1 { /* I2C_SCK C23/C24 - MIO from SOM */
-@@ -148,7 +155,7 @@
- 		reg = <1>;
- 		peer-hub = <&hub_3_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- 
- 	/* 3.0 hub on port 2 */
-@@ -157,7 +164,7 @@
- 		reg = <2>;
- 		peer-hub = <&hub_2_0>;
- 		i2c-bus = <&hub>;
--		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-+		reset-gpios = <&slg_delay 0 10000 10000>;
- 	};
- };
- 
+Shantur Rathore (2):
+  efi_var_file: refactor to move buffer functions
+  efi_vars: Implement SPI Flash store
+
+ include/efi_variable.h          | 18 +++----
+ lib/efi_loader/Kconfig          | 34 +++++++++++-
+ lib/efi_loader/Makefile         |  3 +-
+ lib/efi_loader/efi_var_common.c | 42 +++++++++++++++
+ lib/efi_loader/efi_var_file.c   | 65 ++---------------------
+ lib/efi_loader/efi_var_sf.c     | 92 +++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_variable.c   | 19 ++++---
+ 7 files changed, 195 insertions(+), 78 deletions(-)
+ create mode 100644 lib/efi_loader/efi_var_sf.c
+
 -- 
 2.43.0
 
+base-commit: e206e3ab2ad266935b81f5e9d3af2ed47b866826
