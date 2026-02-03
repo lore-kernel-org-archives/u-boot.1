@@ -4,96 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17399E8B386
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 00:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE1BE8B37E
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 00:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4E4883F36;
-	Wed,  4 Feb 2026 01:23:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7993A83B55;
+	Wed,  4 Feb 2026 01:30:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oeFC/6Fj";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nMNduJdd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 306EE83F36; Wed,  4 Feb 2026 01:23:41 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5FF1A83B85; Wed,  4 Feb 2026 01:30:16 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3622B83E1E
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 01:23:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 589DD83B03
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 01:30:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-65808bb859cso9228207a12.2
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 16:23:39 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770164619; cv=none;
- d=google.com; s=arc-20240605;
- b=UuGwXwGSSNSHvzcwfdG8FrvMC9BYjBR8575WvLR8fjVYt++Pha3xGAeG8g87I4rLxJ
- WL8LVn5N3SREaPhScJqyO0+YypnpzhuuvaONL1PME2KPrqM4rU5a39B+7EnTV87kfLLM
- mBHWrW/bBhKudVKwVa2HAin9y6DXaVf7VmLwrLBt1pRbea8glWLE9s/5/gGbVoLTIPL9
- cj1AH8h5tXhbDpt+CQBi5weVQYT+0BNUJnrvNzLqaqbqvPDppO6MULdW/vh0UR9UaJ0c
- QM69zqYcMKZ/qICTr9M7Wja7GD3xxmbZTrP3pwOQgEklRrNi8RXr44X5KP8trBxIgHbT
- sIBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=Lp6nVsEy+OfRsj6JJUUib0uGF7JvYlEmEpvHVZTmiMc=;
- fh=bcJ8UPPy/RJul/oAHDGhO8wIbB+cfDqukW6ZaOQSAIM=;
- b=PI4GBtMTovfz1YhT6VFo6WBS5KID12nvfrzAh80Dvy6u11lih9ZVJCu78HY7q+7kj6
- Q4yGHdr6gVC587bZ+Ye8XkRMGrIuGPmdRZf1plwDHUCJjaxexRJnMoEkvywKHnbVHzCh
- Wn47GYANHHJcBVhXwid+pff437jXwlc9j1tYxpxM2CZv9nt8/KHbXFazzKNp3xSjSA+p
- Aa088tbYdkUM5pFGyY6FoKA8VYkh9RWhDpLVY92u9vh42Fg62W48t23xFkzHubegMs4U
- ksUlI/Fj7E2y4awKHl5X7JWI/RaWsY25wzDjaPwE0B615MeOimbSnROHdPmFJj0kdkf9
- XSzw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1770164619; x=1770769419; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Lp6nVsEy+OfRsj6JJUUib0uGF7JvYlEmEpvHVZTmiMc=;
- b=oeFC/6Fj2vyH8XJzQ7q7s115qS8KMnr688sAmf12J7i78mM9ZhpmEP45Q3wUh4XD2H
- glSGKVhuc2vZMtWhNtC3zwh87vBH+I874eYN0Z2V1P8iSfJXNNKOP1bBG6ri5uuIKB8l
- MG5qsmejfyEExQlOROs+ILsyaPKrdBY2Q0C1M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770164619; x=1770769419;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Lp6nVsEy+OfRsj6JJUUib0uGF7JvYlEmEpvHVZTmiMc=;
- b=HFfmsnIeO9MkMy/EnzCT/mP1WLyR0+2uGrBx5UA5zHoIgScxCAjJqqqVHB0KPJq2I2
- IH71LpBTwb/DmwFl2VFqZegrnu8maRwDv9BLvK0nSsc+xzkxwIbTKN5U/d/L6iymDO/t
- YPCg8XAzN8+0wDuXgiQ1BsGuog8Yvm5Sh88YIFTmKwCuPC3C/C3atKzP6KDElieGNcTs
- UrK1ZHKVHcvjI1ELcQesXLMCqGb0djtA0OOa9vTwg0YFWKtFdphZ6xVQhiaUJrxDSOXo
- HEZwNoncvEY+xrSag7dyN19rh0tmispsITn7CkmO2W7+UDDT3ypN34CAw/kGMvv2fbfy
- 6GEA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtNbiPAwy0x4j/47B6E8xClxaVMGOmTG6iEp2iNMnu+WXbmbl5lYCeYEll9aHCl/TJf7e6Hjg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOQiD3Jo85PSNUkCvGRdjjY6PIA5BEvaBM5Jw3FxiOwNrO4BEF
- ARfSFf0F5Jpt/A4KbvAhp3XizQK+GMAKgbIg+WfpZrbeDWAs0GwjZP8C5DjOvNb2/ftjZ7DiwG5
- Ai+EyyG+qfO6BDWUefNF8TjUg3Al09xUTmJp+kLo59eNRQ2e1Gs5cNg==
-X-Gm-Gg: AZuq6aIBgaePbuUHwbnMUHY1GG55rQCTj+o9s2++j5daOWFtHD7U2Gy6kD/RtwWCWuc
- 9AV7xgoc840gyWV08gtV2CT1iIL6mVLyYf3l7D9zVCdpR9L7WKsbb58PsJR55byv3eR/RphUAN0
- jQM9t1RAfVLGyUsKPNpC+TNN64UM6DII3Y6ZmPB+e2c2dfgaoycIlqZhrUaQBMQd5d80qt6Ycgh
- ynTIdW7gcEcf+KOmK+NJ7DsxUURw1sX/6qf7vt8d2TV/39V2IWjbYLlFu7n8HALHUNcjKtU
-X-Received: by 2002:a17:907:2d0d:b0:b88:6fd3:d5fc with SMTP id
- a640c23a62f3a-b8ea68e7c36mr10075266b.46.1770164618615; Tue, 03 Feb 2026
- 16:23:38 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4f5Lpr38gdz9tN7;
+ Wed,  4 Feb 2026 01:30:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770165012;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FLlMTc4aoMQW3MCRY1gGUjTPtonw5fnfeAuq8FiyCcI=;
+ b=nMNduJdduf3FV0IYGwM5DSt/L3Eh8ujl7CdocHXkOmEzra4fc4/y5JD+HXkGbVuBCk3tx6
+ 4/Heu2S//SbRD8ofPYB38Rx84HQvqYFea6/D/i1oCviHf2XjVpefh9f1VEr9u+Qo2Lt53+
+ S4UumD2U4fI3BKvd6e9837qK+pzBwu1ek6bzTOzrhyz1Qbzkx3aMhU8Sm7CMPhElzUgpKd
+ J9Ezhesy36I1zRZT2C0LICDzwv4KkGTSviLiH8yNlsRwyCqAQ+miRQfqAFC50mq3vdCcTI
+ Bzsb1uBRD0sHpVyBrvTW2KbGpYKJv98+e7gc6nTvnpUy59xdJOCgl11bpUMclg==
+Message-ID: <c59d8903-780a-42b1-b69e-b0227cb91380@mailbox.org>
+Date: Tue, 3 Feb 2026 23:49:29 +0100
 MIME-Version: 1.0
-References: <20260117214311.706022-1-linux@fw-web.de>
-In-Reply-To: <20260117214311.706022-1-linux@fw-web.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 4 Feb 2026 13:23:24 +1300
-X-Gm-Features: AZwV_QiOGUFiKuE5FHzVV0dyIP_TQ37D-U55l5H5CuIYXbFqqogA6-JXKfMHoZs
-Message-ID: <CAFLszTjBxGvTPbLXUF8tZQJXyrJmsJTbBx6c4-UfQbeqRfdsew@mail.gmail.com>
-Subject: Re: [PATCH v3] cmd: mem: add function for getting ram size for use in
- scripts
-To: Frank Wunderlich <linux@fw-web.de>
-Cc: Tom Rini <trini@konsulko.com>, Frank Wunderlich <frank-w@public-files.de>,
- u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH 2/6] usb: eth: asix88179: Use a fixed URB buffer size of
+ 16 KiB
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Khoa Hoang <admin@khoahoang.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260130002941.2336252-1-jonas@kwiboo.se>
+ <20260130002941.2336252-3-jonas@kwiboo.se>
+ <b251561f-936f-44be-bd01-eb1d08c0bdfc@mailbox.org>
+ <d578ba21-bf07-4c3c-9e76-567f91ccab15@kwiboo.se>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <d578ba21-bf07-4c3c-9e76-567f91ccab15@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 6a3b995bd4340c978b5
+X-MBO-RS-META: x6jjoj4794d1bjbpgww9ndn58cajrb9c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,141 +79,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frank,
+On 1/30/26 11:54 AM, Jonas Karlman wrote:
 
-On Sun, 18 Jan 2026 at 10:43, Frank Wunderlich <linux@fw-web.de> wrote:
->
-> From: Frank Wunderlich <frank-w@public-files.de>
->
-> Add a command for getting detected ram size with possibility to write
-> to environment variable.
->
-> example usage:
->
-> BPI-R4> msize
-> 4294967296
-> BPI-R4> msize m
-> 4096m
-> BPI-R4> msize g
-> 4g
-> BPI-R4> msize g ramsize
-> BPI-R4> printenv ramsize
-> ramsize=4
-> BPI-R4>
->
-> board with 8GB ram:
->
-> BPI-R4> msize
-> 8589934592
-> BPI-R4> msize m
-> 8192m
-> BPI-R4> msize g
-> 8g
-> BPI-R4> msize g ramsize
-> BPI-R4> printenv ramsize
-> ramsize=8
-> BPI-R4>
->
-> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
-> ---
-> v2: add Kconfig entry
-> ---
->  cmd/Kconfig |  5 +++++
->  cmd/mem.c   | 32 ++++++++++++++++++++++++++++++++
->  2 files changed, 37 insertions(+)
+Hello Jonas,
 
-Please can you add doc/usage/cmd/ and test/cmd
+>>> Change to use a fixed URB buffer size of 16 KiB to fix use of Ethernet,
+>>
+>> Why 16 kiB and not something else ?
+> 
+> Using anything larger than 16 KiB resulted in issues, and a datasheet
+> for the older AX88772 prior to the D revision mention default 16 KiB for
+> "Maximum Frame Burst transfer on USB bus" so 16 KiB seemed like a safe
+> size to use for newer revisions, and this also made it possible to use
+> fragmented packets up to just below 16 KiB.
 
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 5c611fb3016e..b82b17195b7e 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -974,6 +974,11 @@ config CMD_RANDOM
->         help
->           random - fill memory with random data
->
-> +config CMD_MEMSIZE
-> +       bool "memsize"
-> +       help
-> +         Get RAM via command for use in scripts.
+Please include this information in the commit message.
 
-I suggest a little more info in your help, so it is clear what the
-command actually does.
-
-> +
->  config CMD_MEMTEST
->         bool "memtest"
->         help
-> diff --git a/cmd/mem.c b/cmd/mem.c
-> index d5d7ca2790bd..a067740d81c8 100644
-> --- a/cmd/mem.c
-> +++ b/cmd/mem.c
-> @@ -33,6 +33,7 @@
->  #include <linux/compiler.h>
->  #include <linux/ctype.h>
->  #include <linux/delay.h>
-> +#include <linux/sizes.h>
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> @@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, int flag, int argc,
->  }
->  #endif /* CONFIG_LOOPW */
->
-> +#ifdef CONFIG_CMD_MEMSIZE
-> +static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
-> +                      char *const argv[])
-> +{
-> +       u64 memsize = gd->ram_size;
-> +
-> +       if (argc > 1) {
-> +               if (!strcmp(argv[1], "m"))
-> +                       memsize = (memsize + SZ_1M - 1) / SZ_1M;
-> +               else if (!strcmp(argv[1], "g"))
-> +                       memsize = (memsize + SZ_1G - 1) / SZ_1G;
-
-Can you do something like this?
-
-memsize = ALIGN(memsize, SZ_1G)
-
-> +               if (argc > 2)
-> +                       env_set_ulong(argv[2], memsize);
-
-Normally U-Boot uses hex, so it would be worth mentioning that this
-command doesn't. Or even provide a -d flag to select decimal?
-
-> +               else
-> +                       printf("%lld%s\n", memsize, argv[1]);
-> +       } else {
-> +               printf("%lld\n", memsize);
-> +       }
-> +
-> +       return 0;
-> +}
-> +#endif /* CONFIG_CMD_MEMSIZE */
-> +
->  #ifdef CONFIG_CMD_MEMTEST
->  static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulong end_addr,
->                           volatile ulong *dummy)
-> @@ -1404,6 +1428,14 @@ U_BOOT_CMD(
->  );
->  #endif /* CONFIG_LOOPW */
->
-> +#ifdef CONFIG_CMD_MEMSIZE
-> +U_BOOT_CMD(
-> +       msize,  3,      1,      do_mem_size,
-> +       "get detected ram size, optional set env variable with value",
-> +       "[m, g] [envvar]"
-> +);
-> +#endif /* CONFIG_CMD_MEMSIZE */
-> +
->  #ifdef CONFIG_CMD_MEMTEST
->  U_BOOT_CMD(
->         mtest,  5,      1,      do_mem_mtest,
-> --
-> 2.43.0
->
-
-Regards,
-Simon
+>> Is this a USB controller related problem/limitation ? Maybe the DWC2
+>> driver needs fixing instead, to handler larger buffers ?
+> 
+> I accidentally mixed up what host controller was being used, the board in
+> question is using a generic-echi controller not the DWC2 as I stated.
+> 
+> Below follow some debug prints, what can be observed is that when
+> length=26624 is returned from ehci_submit_bulk_msg the ax88179_eth_recv
+> will return len >16 KiB and that result in the rx_hdr at the end of
+> the returned buffer being bogus data, e.g. for following:
+> 
+>    BOOTP broadcast 1
+>    ** asix_send_common(), len 342
+>    ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+>    dev=00000000f9f2c520, pipe=c0018303, buffer=00000000f9ee0680, length=350, req=0000000000000000
+>    TOKEN=0x80008c00
+>    Tx: len = 346, actual = 350, err = 0
+> 
+>    ax88179_eth_recv: first try, len=0
+>    ehci_submit_bulk_msg: dev='usb@ff100000', udev=00000000f9f2c520
+>    dev=00000000f9f2c520, pipe=c0010383, buffer=00000000f9f2cf00, length=26624, req=0000000000000000
+>    TOKEN=0xa7808d00
+>    ax88179_eth_recv: second try, len=16512
+>    ax88179_eth_recv: 2 packets received, pkt header at 112
+>    ax88179_eth_recv: return packet of 106 bytes (1 packets left)
+>    ax88179_eth_recv: return packet of 0 bytes (0 packets left)
+> 
+> The buffers returned from the AX88179 contains something like:
+> 
+>   <packet data N><N+1>... <packet header N><N+1>... <RX HDR>
+> 
+> Above the "2 packets received, pkt header at 112" seem to indicate that
+> the pkt header is in the middle of the packet data, in other instances
+> the rx_hdr seem to indicate that the buffer contains  thousands of
+> packets, i.e. the rx_hdr is likely bogus when more than 16 KiB is
+> returned from ehci_submit_bulk_msg.
+Is this maybe some wrap-around ? 16 kiB x4 is 65536 , which is 16bit limit.
