@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8635FE8782C
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:37:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA6B4E8782A
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:37:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 791088423E;
+	by phobos.denx.de (Postfix) with ESMTP id B799584248;
 	Tue,  3 Feb 2026 14:35:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="fEGTrCPM";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="Q56Dp/Re";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E81898410B; Tue,  3 Feb 2026 14:09:19 +0100 (CET)
+ id 9C931840B1; Tue,  3 Feb 2026 14:09:21 +0100 (CET)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05CA8840B1
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 14:09:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B928483FFA
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 14:09:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kauschluss@disroot.org
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id D04B427637;
- Tue,  3 Feb 2026 14:09:16 +0100 (CET)
+ by disroot.org (Postfix) with ESMTP id 8B11F27673;
+ Tue,  3 Feb 2026 14:09:14 +0100 (CET)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id VAwfiUwsXF3r; Tue,  3 Feb 2026 14:09:16 +0100 (CET)
+ id tZ60vpRdBA46; Tue,  3 Feb 2026 14:09:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1770124156; bh=kjTLkDe8nBjWWKbnHym+aeUd6X5Kd/HQ4RfdjqxvvDI=;
+ t=1770124154; bh=ajz7dNYGtZDQySyuAFhoj1g1MU9h85oJSvIVpIwdLE8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=fEGTrCPM+pTIYE2nVTpM8985pOUWJWwaWZsIdmDF+b9Q+m4Uvjt/DQ6xxJ0LZ4Ajq
- hFyMlNZBr26VJUCzl5MaP8HOOgFjC1mXAni4gKZoM774RLYnYfpnLNCv2c9fe8xbRH
- 0xP+SQ28cSm8nrkR4EPlx2l16GqkD89unO9JLI6ZukJ5V7wYLINEAaOC9/wsnw2+p/
- UthlB+Fegq0s3jTmZphURJimpP1JfNUesIke8gVUrxjrFEpwQLNHjL7LG1swB+blmC
- X8ln2XoKIJspwp5Ewt/PeRTTGYhyLIphQw2mNEksgRXyhuuYcAh0zIEoiLd0rOnUus
- BhOwh5zHdli6g==
+ b=Q56Dp/ReTtXdzxApKit4pSl7bSa37D4Z8upeHcuJgRaDUEd+fd1T/WaLHdpTJlDvH
+ IbXaiuavZSMyRBSbFHdMThCZjmkw3OPj8qxNXbjzR/prCuC3Fidr4Ars1tpNX6Z14U
+ AFG65ToKosv0+ehw+qR9a0KGag+cdOSlV4EKAgQa6XTkMpnJ3PpHOqM/Rs8hboHer5
+ C67cVFqwu9HeorqfzxPiKrGNvcDlK5+5cjT8s2JSbUyojE/sKLBlK08egjWY6wFqVs
+ 0fES/cAHuUozwLLrP8tSw+sPvTvUGyXY0x2o7pcOF4tJFEtlJPT/Oj59c2rhUQUqdT
+ o4Q18kiCF99Ug==
 From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Tue, 03 Feb 2026 18:38:48 +0530
-Subject: [PATCH 10/11] ARM: dts: exynos7870-on7xelte: add properties to
- make S-BOOT happy
+Date: Tue, 03 Feb 2026 18:38:47 +0530
+Subject: [PATCH 09/11] ARM: dts: exynos7870-j6lte: add properties to make
+ S-BOOT happy
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260203-exynos-mobile-external-dtb-v1-10-a16a0e57991c@disroot.org>
+Message-Id: <20260203-exynos-mobile-external-dtb-v1-9-a16a0e57991c@disroot.org>
 References: <20260203-exynos-mobile-external-dtb-v1-0-a16a0e57991c@disroot.org>
 In-Reply-To: <20260203-exynos-mobile-external-dtb-v1-0-a16a0e57991c@disroot.org>
 To: u-boot@lists.denx.de
@@ -80,13 +80,13 @@ the correct bank sizes.
 
 Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
- arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ arch/arm/dts/exynos7870-j6lte-u-boot.dtsi | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi b/arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi
-index c7bd7103e70..01c3e95b0b3 100644
---- a/arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi
-+++ b/arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi
+diff --git a/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi b/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
+index 9d944b127ee..aa499ecf479 100644
+--- a/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
++++ b/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
 @@ -4,6 +4,11 @@
   */
  
@@ -99,7 +99,7 @@ index c7bd7103e70..01c3e95b0b3 100644
  	chosen {
  		#address-cells = <2>;
  		#size-cells = <1>;
-@@ -18,4 +23,19 @@
+@@ -18,4 +23,24 @@
  			format = "a8r8g8b8";
  		};
  	};
@@ -111,12 +111,17 @@ index c7bd7103e70..01c3e95b0b3 100644
 +	 */
 +	memory@40000000 {
 +		device_type = "memory";
-+		reg = <0x0 0x40000000 0x3e400000>;
++		reg = <0x0 0x40000000 0x3d800000>;
 +	};
 +
 +	memory@80000000 {
 +		device_type = "memory";
-+		reg = <0x0 0x80000000 0x80000000>;
++		reg = <0x0 0x80000000 0x40000000>;
++	};
++
++	memory@100000000 {
++		device_type = "memory";
++		reg = <0x1 0x00000000 0x00000000>;
 +	};
  };
 
