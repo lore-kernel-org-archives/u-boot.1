@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8301DE87849
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 16:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A49FE87849
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 16:50:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42CEF83C30;
-	Tue,  3 Feb 2026 17:49:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8CE3E83C14;
+	Tue,  3 Feb 2026 17:49:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZjqEKoZx";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="X8idA2iW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0039839DF; Tue,  3 Feb 2026 17:49:42 +0100 (CET)
+ id 113F5839DF; Tue,  3 Feb 2026 17:49:43 +0100 (CET)
 Received: from AS8PR04CU009.outbound.protection.outlook.com
  (mail-westeuropeazlp170110003.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92F9B83BC9
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 17:49:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20D9183BC8
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 17:49:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FBvWzka20XS9+Gr6k6+Bwk9Zo/MEAfwqY6YHq9BD+p+dOdu7o9a3AUbkBy2pQ7gNnfleadbPTXFq2yeHkRN+W16s1/AzHKVGWCrp2XZef0+4CTZYMFZXhJRmA5/D9FJVAN//hM2dH0keL6r0WrDxRnP7fgth/p19zW9L6pHcWnCgZ12Oi6OAhRpTeJE78lrY4Yv3mkifOGdJ2hlggbPMhuHARKeSbRk8C6kDevywzqaAOXxAZd2+feD5Jn0rSZM+bhhcWlI88fIlCSAaCBsfpZ5xXs4ocdvqUsx8qj7NqC5cDAHND2nFO8zA46Y1tbKjYMxohbE/KCF0P2CIwWrQIg==
+ b=fWWbaXEcAug6MDfGCgF7ve3ogAgyrVJYmY7Mxzd/DadeVELSX1S9dQ5aWy6K2mrzqccWN8ZYTq0nn7+uYD75+32ASwRbyjZDYXiXSSIfP2RQeIakjOuaamBKOANnarEsye3h7SyiTMmfbHDuvH1JrbnMm1tBX9Fzqzi9TpfV8SX64Hbp/uTSMWjHumzDNDkMFEtpu/qczcTcW1yVKwd/cru2DuStWBWBdB76DhRgkudxsZZMoB6LRQ85Ta3/zyS286Jqm5W0TQjCXWoFjFqd4FsjhvJAiPvu2LhC60ckiucZ3YKKyokcwFSbNn5nlRFtrrrVjUF4KkRLE2AhC6WLuw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mGhtjE6InNg1Vl8IinLb6Y0uE7Y1oAUs+K3KTWLEa/8=;
- b=MVzrDCe94uTxpKivtLi3O7rwqYCGznk/uocb/8OI22zyI5AKZtH/qLl9FpU8ZLRO9TG1aK6QTH5d/9XTSiZe1zTKk+idVMm9NvQkxc2Ehp1zVRTJlY+VcjYJjZXhC7O4UKft0kCWJaehgmWFhOy5dYIHCfK6a/bkG/lWQLhAA8G79/Ezi14k7ZPPSojrl6VGrfM9cNWfh12xNjiZtri1KzQ3krj10KJrAs38yozG6y38NSAuMa99mhA1ZgKLf+7ut0doR4H6+hVHZdDhD+v/EMg4n9yFSL8zaCouk6kotDHm7XI9I3uiYHf99rzU7tuQjLH2AjDmzrVnenUgWeb+VQ==
+ bh=cBxG/7RXlxR2L23LLO5kFjKhWpsX7Rxa7Lamp1Rji+A=;
+ b=Ihr72LXXa658RJUL9XO96zIgFQkrjUvklJUUcCkDU4WKOCp9GiBv2UQTTLhjny7KbV9KC6i7gqPoar/DKg09JSSV8JW7IVdz/h6SYP/9OUuBSk2SdAbaEcQ+Me+hLKTJcI8dNPRNiaNM7bznTVuDR9vBJtocvLdtMWqE7v93VZZBAIhzZvQODkPWqYgCDVbVMsIkmTS+EbKhAoK6SGFTG99FyzbeNnEFTZrtznqe/FkoySedtJL5EMj7dwMoCyJfxFbR+45n4kGrG4eJaZ1fjRig9a5u7yw+oBXfklnfedw7+QQParPpCN/r65heDWPGUNfWp1bMS6YwXwG37BrBxw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  164.130.1.59) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mGhtjE6InNg1Vl8IinLb6Y0uE7Y1oAUs+K3KTWLEa/8=;
- b=ZjqEKoZxlthbJzaynvxryI8iNP4EUJXSr+N+PKVf2D8PQeHjtwb+q9MbK809pdxCYMbPPJeURGtb23ZDc22yydblIAc3gycP69TsyHP1WgM9ItD4tNdg1az5CdU6qjSQzEM239O2Tr66sc1kCDnAAHcdAhkxzJAV4vL9kzddJGlvArG1l56zdYE7tCO6wOIQ8AldPqnKffFGY/xLF3JMzGw87Aud5Uu3DsSMYc04E8kJhyS8A1CbRFrzy5zc1DMtr87qLoI1hq2AHBgkdJ5NIiZg3aeeXWwmbhVDKCGK6udaRNo1FHc3CpZmzq7FFkKqi9QGaJjBJBN8dYY+Rglhdw==
-Received: from AS4P190CA0069.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:656::15)
- by AS1PR10MB5700.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:47c::7)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=cBxG/7RXlxR2L23LLO5kFjKhWpsX7Rxa7Lamp1Rji+A=;
+ b=X8idA2iWiUdaPRPax62GuRG1sSyWPxjPCrEeVpzLdc+vEZ0Pvw8Qax5SLFo5gWLcrhE3YrCLARW8rQeVtUDdUrNbLgayjcGTEs07VolfkcMemIjHLiQLH+QFzM/nbvFtQqAnTCfenbbiYfb48Qz72sy28terbwL6M3/LBwTdtDN6LHG1dvWJzkFnZ8lFOvg+aXHJ0Dub8d43aXeZH9idPvmnWDSoEWAkTB4KwB38jbr4M/AllqY+5VbX0AMkEkwB/JViOCd+IzUH4qrdb8pYHpSFaG9h6WJ5TkPBHpesKciHKvBkpDVVps64J9BiL4vDDZMZCp5NOgKHe75Rg3bTtw==
+Received: from CWLP123CA0173.GBRP123.PROD.OUTLOOK.COM (2603:10a6:400:19b::8)
+ by DB9PR10MB5211.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:33f::5) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
- 2026 16:49:35 +0000
-Received: from AM4PEPF00027A69.eurprd04.prod.outlook.com
- (2603:10a6:20b:656:cafe::6) by AS4P190CA0069.outlook.office365.com
- (2603:10a6:20b:656::15) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 16:49:38 +0000
+Received: from AM4PEPF00027A68.eurprd04.prod.outlook.com
+ (2603:10a6:400:19b:cafe::22) by CWLP123CA0173.outlook.office365.com
+ (2603:10a6:400:19b::8) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
- 3 Feb 2026 16:49:35 +0000
+ 3 Feb 2026 16:49:34 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
@@ -60,24 +60,24 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
  designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
  client-ip=164.130.1.59; helo=smtpO365.st.com;
 Received: from smtpO365.st.com (164.130.1.59) by
- AM4PEPF00027A69.mail.protection.outlook.com (10.167.16.87) with Microsoft
+ AM4PEPF00027A68.mail.protection.outlook.com (10.167.16.85) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 16:49:35 +0000
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 16:49:38 +0000
 Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
  (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 3 Feb
- 2026 17:51:21 +0100
+ 2026 17:51:24 +0100
 Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 3 Feb
- 2026 17:49:34 +0100
+ 2026 17:49:37 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Tue, 3 Feb 2026 17:49:22 +0100
-Subject: [PATCH 2/7] reset: stm32mp21: add stm32mp21 reset driver
+Date: Tue, 3 Feb 2026 17:49:26 +0100
+Subject: [PATCH 6/7] ARM: dts: stm32: Add stm32mp215f-dk-u-boot
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260203-upstream_add_stm32mp21_support-v1-2-48ca3409cce1@foss.st.com>
+Message-ID: <20260203-upstream_add_stm32mp21_support-v1-6-48ca3409cce1@foss.st.com>
 References: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
 In-Reply-To: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
 To: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>
@@ -99,65 +99,66 @@ X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
  (10.75.128.132)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A69:EE_|AS1PR10MB5700:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00ffd80f-f54d-40e8-2f1b-08de634436a3
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A68:EE_|DB9PR10MB5211:EE_
+X-MS-Office365-Filtering-Correlation-Id: 20cba8b3-365f-45fc-6004-08de63443809
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?K042cXdQbDIvZmEyNTRNY0hkZ255ZDFUTzV2UHRkZkZCd1JZRmlGOUlNK0Jj?=
- =?utf-8?B?aUpIbG1pU1U2UFpnRkxOMDc1UVcwd3dEYVBNMEJ2bVUxdlBRMnVLbnNIWUt6?=
- =?utf-8?B?cnhONFRDSjlRZWZvOThEcTllc0lMa2dBVnljNjY4NFBUVmFqQW1CbkNTc0FD?=
- =?utf-8?B?Y3NpMSt1SGFzNkRZZjI1dk9qeUhHMzAxUUdKeWFIWlBRWTUyT2QrUXBQWjVX?=
- =?utf-8?B?ZkF2bER2UDlVZC9SaVVOOHFYWXJ6dUJPYmpid09MTzRHSFVMaGEvMnd3N0Vq?=
- =?utf-8?B?dVZOQVEwcmJ4UXNZWVFtTGlUcUxETHJENU9WRDV4dkQyY2FMSnMxYmRmWlFE?=
- =?utf-8?B?NWc3VGNydkRvMXREajdiWkJzWkxKdEM1T2Q4OElZZGR3REZJUmRmZEVXbE1r?=
- =?utf-8?B?d0s0SEJuT1VOSGxTVHAyUDZXYTBFMEJCSHE3Si82blhHTFVkMWl0OEtETGw2?=
- =?utf-8?B?L01kMXZCUXhEaENxYlFWMnhGOEtQajdBWGI2ZnJiejBYQ1IzeGljZFd4M2ZT?=
- =?utf-8?B?Zk9LMkRiTmtnK0kxVDAxcGQvUE1JTjlqUmhpWEszOEJoSUhIR0k5TUdhWmFM?=
- =?utf-8?B?aGpDVkdDUHpsZTBxcFhWSkpYZHpNRkQzc0NhUm4zcjg5VCtlOHlsQW90SjFQ?=
- =?utf-8?B?SFczUlZOb0VSajg0T3hZQWY3Q1hEdFFiT1E1UUdHc1pSR29EeE5vTTJmNkQ2?=
- =?utf-8?B?REtIeUtaKzBWTHVTZTdLQ3duTlJJOE5PcUovUWtwNG4zbzRPZUtEYWJ6RzM2?=
- =?utf-8?B?NjFnREI5ZWNUbkVVWHRScUdKeDkzN3NTc0dTeVdjSnlnZEgvbFhiWE5UZXFY?=
- =?utf-8?B?ZVFzVEdkM0NjcFRUUzNUditQcUlJNmVZeU5qdHh5a083VTRwSUZGS1RVK1BM?=
- =?utf-8?B?T290K1VISWRFK2NsN2VtbHJlVzdJM2hhVzFRRlNCRWMzSmtFQ3RrVytOdUNJ?=
- =?utf-8?B?Zzc3M0NUb3ErcmN2aElPeWZGRWZDMFp6bUpxMVpkbGgwMnZrSDVxdkxjYWEx?=
- =?utf-8?B?aVlqZHFMSlhoQkdualc5THdsWHlacVBxWldUZDRJTndrWUQ4OWRDb3RFWkQz?=
- =?utf-8?B?ZjcxNk8vYTAxQ2FUWkNIUjNkM3JFV28wM0lXWDBUK2tkN0E4RTFnVlUvOTJy?=
- =?utf-8?B?ZTdrckRoSStIRFZyMEJhNkpvWHQ1MG5JeVhFS0dWRllWQmZ5dXY5dzhLVUNa?=
- =?utf-8?B?aU1DU1MzR2I2MXhldjFIMzlUQXRUaGtEeDdKbkRIaFU1VDJVTkhBUm5GQVFO?=
- =?utf-8?B?TytVRWdZZTZjNTdQdTlkOHgra2R3cUd5YkJOc2dySEdRVjFsRUJCVS90a1Av?=
- =?utf-8?B?dFhGR3pQd1hST1dqcklSVXhadEhaZnZWTXhneDJaQW9SM0JvY3FiaFM4Mk1y?=
- =?utf-8?B?ZS9LVkVHYWdid3czdlE2akRBaGNmbWZQWExGZFVQNWJ5Qk8wTVkxOElvWXBD?=
- =?utf-8?B?dEI1Nk9lVjEydTNNRDhvL2Y1UmRhRzFQTzNpdmpaeVc0bzd5Z0NJUFhlRGpO?=
- =?utf-8?B?ektmanFQa1ozWDlibU9oOHVZQS82eVl3emRpb0RlTnJWeENHamNGNTZ1ZFl1?=
- =?utf-8?B?QmFFWXlxOEtneVZJbFdZWkMvc0NuQU82Y1BZa0dyaXRQM2xyNVhtWEJoU2da?=
- =?utf-8?B?SmdCRTlmbVlxcTN3WGFQQnZ3MFdLZFlsQ0xYYStPVi9QSXdLOVBVWTNjZTdw?=
- =?utf-8?B?R3JuUGRoUVhjL2dGMnErTEg4aVVFNnEzTTF4WUlDZlhsMUI4dkpRbGFVcys5?=
- =?utf-8?B?TXJyTG9LeWtidUlyS0FCczV1aVF4bHpva0xRc1RGVXFQZUdyNFUvcDFDTGxt?=
- =?utf-8?B?dEpSdGphZlFIK0Q0M0NGSWM1UnZXb0lha09UY3Z0SFRpVFV5b1lRejhVa0Jz?=
- =?utf-8?B?UFpTZTFZSm5zcmZnOENNVDhhTWZXUW9RdHcyM2NSU3JnM3JqNVE1elJSZWJ2?=
- =?utf-8?B?aXVTQzAyRmlxbkNBd1AxRG5OK2xEUTFSV2NUdk0rWkRiWTM4Qnk4MW9WQ05X?=
- =?utf-8?B?RTNRaTROWllOajhlQXBmalU1UjF0OXlYa0lubnpUTVA1amphK1pONjBvWjQz?=
- =?utf-8?B?SU1JUHZLZXJ6YXhRdldXUWJsRWRxVDhTbDgwNnplQ0kycmpHWHBqNG1Fem4y?=
- =?utf-8?B?dUFDWVV3b3RLTTNHenZYdStvYXBmK0ZGa29RWnFlMW1aYllHWDBVZ3lZUkNT?=
- =?utf-8?Q?FOZZ4Ko6CGC2ZI5GLrDbCqy2bvKJSOv83sHLLmNNCUKt?=
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SmY0YjZNaGNNR1VTZVZlOEJ6Z3kyaTJ3Q1JoZEFLVmYyOThSVUwxV08rS2xX?=
+ =?utf-8?B?amtGbHVrWE9hdW02NUl4bFVSeDlRQzlpQUNvVmsvWXBTWHJPc1pTTktNQjRH?=
+ =?utf-8?B?VHJLRDIybEcxY2F6TkF6aXV5a1hQaU1WeVlSNXZ3RXdVdStmSDVacnNRbERC?=
+ =?utf-8?B?K2NRL2xLSWV6ZDRFZUxPYXBDTFdURjZLVnhBOWxNbWpKVHNCd0RzQU5Fa0NV?=
+ =?utf-8?B?TDE0QUkxcmZmS2s0bWVwdzU0VHRtR3ZsT3VHcjUyNmpPTndBVzJuVjFHcGhU?=
+ =?utf-8?B?TFpPSTFOb1dFaWpuTjdnSzQrTzNodXYzTU1TNlYwUmFxTmFWOTlwYVRNTlMz?=
+ =?utf-8?B?My9OamtRRWEzdWdDRjR4eUZ4YVVQMWllOFEzVkdhbHZtemF0bWlNSVhOczQ5?=
+ =?utf-8?B?M1Y1VE5LS2tQVFNUQXhaUGQxMU9JYmM0MEpvRXVXRXdITEkwS3YxN2FiaVBa?=
+ =?utf-8?B?TmllRjRDM1hlc0g2dEtJcHU5ODFmeUhjRzhQaHNoYzJoQjRDTkpUUVVTYWZi?=
+ =?utf-8?B?WWU1N1pQQkZHbVBMMk5pT2tVekQ3bTlObENhYjhMaytIMUtKUWZRR0JiWTRH?=
+ =?utf-8?B?TDkxYjRLVW1YWkJWNHF4bUtFYmlRenU5MytwUUxvKzZmRmIrUmFQeTNOOU9R?=
+ =?utf-8?B?MGlVVEFRODlzYWpnWmk3L25MUHIzRFN3b2dvU3h2eUZiMzFFNDVsYlVOalVY?=
+ =?utf-8?B?QkF2T1NEaDlhdm1lUmZUUmJlVjBPT0NsQnIyKy9oNm53cjZ3R25RQUtORU9E?=
+ =?utf-8?B?RlRLVSt4bGtqNGc5UjFCUVNpZ3hBZDYzMDA1UEJtNlRnTWRUd2RkUHVjeDlJ?=
+ =?utf-8?B?RHA2MnhuUkRCMkI2MXNlK29icEw1RmJJZGQzUSs3bEplbG5DNHMyOEc1TGZw?=
+ =?utf-8?B?akpXZUxHbnZ3S3lnVktoNjdMY1ZTSzhQSnhsMGRLNlNDWXRRUjNwTmFiRk80?=
+ =?utf-8?B?ZHlQazVjdEtHL3NQaWRuOEJMY0N5Qmwyb3hYdjhWVlNqNncyM3pxVGlmYkhk?=
+ =?utf-8?B?MytIbGhZZ3ZMYjRpVUZyZEdhWFdNYm1YM0tOTHRiZkdGRVkrZWZNNTN4RXY1?=
+ =?utf-8?B?WXZkd3QwU1h4cFM5T2o4NHB1QmY4aHJHd3l5dXNwblBZcEh0MGxqK1c1Z1Jh?=
+ =?utf-8?B?WldqbFhMbE9ablZJemNsREFSNTN2ZCtWcWNsNWFZeUIvOUNHMzBKWWJOdjk2?=
+ =?utf-8?B?bll5by90OG1jdUNSamlGV2xKdmNJN244ZEJhR05qTlJxOU00VDJZNzZBUmFL?=
+ =?utf-8?B?WUs4U3gyZ1ZyQksyZlovRVNqVUcyR3NGQnZxZk9xazF3ditRTkhlQ3VtTytY?=
+ =?utf-8?B?VE42dE5DQkN3cjh2dFo2eTZZaDJaNW1xR2ZFT3FtL0FNd1FmRVVoZDdCYXVD?=
+ =?utf-8?B?dzZySmk0QlBYS2NHSUZmRTNaMmpzeDBWQjVYUG1RWFQ2V2NDQ2orZjdlQytl?=
+ =?utf-8?B?eGZjcWRmbWFycitFMDY2RXIxOXp2TjErV0tvOEdNaTNTZkhaS0hqekd2YVNC?=
+ =?utf-8?B?bkJsLytLSGRHTGJMTHpjdU9zVG4zbXhKNStpV3FVK3MxTDV2T2ZkbWdLSE12?=
+ =?utf-8?B?d0ZMMloyaWpaSk05bkV2NWpPYUdnWVlFU1VaMi9QK3BFRHlUTFRlSVIyT2kz?=
+ =?utf-8?B?QjZBc3NBc2F6Tm5EVFpiQ3Jha1JhSUhRVHJUZXBwZUwzMXdRN3NhZ1h3UVo2?=
+ =?utf-8?B?alBGUVd3enNpNUJLQkNvNzhWVVo0LzZ1UHVTSkVPcFdMV3dVL0hubXhtL1Rs?=
+ =?utf-8?B?UUlOb1d6QjN2UE9zUmNDVjBobG1pWWFiaFhMdHN5Q2dPQjlzbHAwSU5IUmN4?=
+ =?utf-8?B?VnNWRjdsMm9idDBsaG5QdXYvWFVPTWVzVmR4Q21vSVBlSzh3RGhBS2o4NG1I?=
+ =?utf-8?B?bWlPcG9pTnR5MXhPcTI0enN5ampZakVCSDNPQzQzaXVuaFRyNEUyM1YzblR1?=
+ =?utf-8?B?Y1loOVA5UGFzZFROczFvdVIyR0ZjR1NIOVFtOCsxNkJWMnJnc1ZtTUhhS0Jo?=
+ =?utf-8?B?bGhkMStZaDVmaGUyNWUvQUFFbkVaVkF6V3NqL1JqUk1CWUNDcTBSbmpHMVdr?=
+ =?utf-8?B?TnR2L3B1cFJ0Z3JDV3RGazEzdEhWYmd0MDF1VVI1Wk03em8wczJnMTRwYytk?=
+ =?utf-8?B?bVNrcEp4TkRaREVORlU3NmY5b25MOGY0azUzUWpSVlEralBsZWNESXEyL2t1?=
+ =?utf-8?B?WmFrRXUxME9FY0lWYSt2c0tZL3JBZ3FmWWJYcWFZVFlSaWhMb3ZFOWwvdWZa?=
+ =?utf-8?B?Mi90MG1Za1JoaGczTFJ4eUorcnNBPT0=?=
 X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: MuTZoTpmLK/nwQhcK/blFMzLCMjmOEX3w1VlUMnTMUgNazHiK42v6HUHxSqi5bv3kUpVJEEqAHbvzrWV6ThMUQvgu9DU977gb8AB9ExCbZr1bEj96j7Mm8xmRCq80XfYEjlGrvA4FGHXFJK1LYCErV1Zg0zZLLCGl5SNF5T6OW2f3sNcSUbsDQGgcsY5CSH3dToFK4vl+ib2e7rJg6HmtpzjlqMfNTZ2Ea959B/Z9vPhE0LjPqTNU3eDVBWvLdJrfEBqW7+2kTtuAV+PZgrHnCfiBuuqWdoMMo31PDK6kANNK7AexhGcwVIKmyV9Ze70FAxQPQN3468BADNE9x8R2bJ41IFUlfTMa4YBnzBWXdSEZlWEn/dnH/dTj8OZIrhdNFF+ecs1cGf/QAI5p4GOzxoj10SlflzfXtms29jEEus1EqBpRZUqgcoUr6GIDRmZ
+X-MS-Exchange-AntiSpam-MessageData-0: NlgV8rIRb5tmRYLFa8B3vonfn0UBjLcvNZKGB6Q+/skTv3f1GGKo4MZVptBUlr4tdtM8cBjWNLAObJ2InfWXtVaDCU75uv8vOyqn9yIapaF1UZM0rv09V7ORZq5qBOVQHzt2l7Obi65LvrBZQ5/TpTa98BEF3m8PxqhGG5xvr5VakzRJVcGxsh+lgbMMyy0n40/BhpgFYi4a9kR1dzOLXNYvTOUo6BqHe74Rv7hedRbXSqLMHrngL+8uJ2zEfNY/a9/x1QcIKBpfChKtIJc4uhGTw5kgAs6RWZntiIKvcJRfpYIcNKbBNvRam9SsJt4pg6XfqFB9oler9WzXWDtKWWvRP48H6hYv5y7Z7VDoc46oPne89uvadV7tI7HlKNg5aOwAGsBe/Tb/cg5UfV8mSfKhLrfn5VrMcyPyRbJjVdaKHDAk9eEsFfG7+awMAw+z
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:49:35.8001 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00ffd80f-f54d-40e8-2f1b-08de634436a3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:49:38.1429 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 20cba8b3-365f-45fc-6004-08de63443809
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A69.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A68.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR10MB5700
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB5211
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,185 +175,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement STM32MP21 reset drivers using stm32-core-reset API.
+Add U-Boot specific file for stm32mp215f-dk board
 
-Signed-off-by: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- drivers/reset/stm32/Kconfig            |   7 ++
- drivers/reset/stm32/Makefile           |   1 +
- drivers/reset/stm32/stm32-reset-mp21.c | 136 +++++++++++++++++++++++++++++++++
- 3 files changed, 144 insertions(+)
+ arch/arm/dts/stm32mp215f-dk-u-boot.dtsi | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/drivers/reset/stm32/Kconfig b/drivers/reset/stm32/Kconfig
-index fdd88a6bfae..1bafba516af 100644
---- a/drivers/reset/stm32/Kconfig
-+++ b/drivers/reset/stm32/Kconfig
-@@ -14,6 +14,13 @@ config RESET_STM32MP1
- 	  Support for reset controllers on STMicroelectronics STM32MP1 family SoCs.
- 	  This reset driver is compatible with STM32MP13 and STM32MP15 SoCs.
- 
-+config RESET_STM32MP21
-+	bool "Enable the STM32MP21 reset"
-+	default y if STM32MP21X
-+	help
-+	  Support for reset controllers on STMicroelectronics STM32MP21 family SoCs.
-+	  This reset driver is compatible with STM32MP21 SoCs.
-+
- config RESET_STM32MP25
- 	bool "Enable the STM32MP25 reset"
- 	depends on STM32MP23X || STM32MP25X
-diff --git a/drivers/reset/stm32/Makefile b/drivers/reset/stm32/Makefile
-index c31ae524ba1..ac4d3c6fc8f 100644
---- a/drivers/reset/stm32/Makefile
-+++ b/drivers/reset/stm32/Makefile
-@@ -6,4 +6,5 @@ obj-y += stm32-reset-core.o
- 
- obj-$(CONFIG_RESET_STM32) += stm32-reset.o
- obj-$(CONFIG_RESET_STM32MP1) += stm32-reset-mp1.o
-+obj-$(CONFIG_RESET_STM32MP21) += stm32-reset-mp21.o
- obj-$(CONFIG_RESET_STM32MP25) += stm32-reset-mp25.o
-diff --git a/drivers/reset/stm32/stm32-reset-mp21.c b/drivers/reset/stm32/stm32-reset-mp21.c
+diff --git a/arch/arm/dts/stm32mp215f-dk-u-boot.dtsi b/arch/arm/dts/stm32mp215f-dk-u-boot.dtsi
 new file mode 100644
-index 00000000000..7d169d7582f
+index 00000000000..e4b44af6df9
 --- /dev/null
-+++ b/drivers/reset/stm32/stm32-reset-mp21.c
-@@ -0,0 +1,136 @@
++++ b/arch/arm/dts/stm32mp215f-dk-u-boot.dtsi
+@@ -0,0 +1,11 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
 +/*
-+ * Copyright (C) 2026, STMicroelectronics - All Rights Reserved
-+ * Author(s): Gabriel Fernandez, <gabriel.fernandez@foss.st.com> for STMicroelectronics.
++ * Copyright (C) STMicroelectronics 2026 - All Rights Reserved
 + */
 +
-+#include <dm.h>
-+#include <stm32-reset-core.h>
-+#include <stm32mp21_rcc.h>
-+#include <dt-bindings/reset/st,stm32mp21-rcc.h>
-+
-+/* Reset clear offset for STM32MP RCC */
-+#define RCC_CLR_OFFSET			0x4
-+
-+/* Timeout for deassert */
-+#define STM32_DEASSERT_TIMEOUT_US	10000
-+
-+#define RESET(id, _offset, _bit_idx, _set_clr)		\
-+	[id] = &(struct stm32_reset_cfg){		\
-+		.offset		= (_offset),		\
-+		.bit_idx	= (_bit_idx),		\
-+		.set_clr	= (_set_clr),		\
-+	}
-+
-+static const struct stm32_reset_cfg *stm32mp21_reset[] = {
-+	RESET(TIM1_R,		RCC_TIM1CFGR,		0,	0),
-+	RESET(TIM2_R,		RCC_TIM2CFGR,		0,	0),
-+	RESET(TIM3_R,		RCC_TIM3CFGR,		0,	0),
-+	RESET(TIM4_R,		RCC_TIM4CFGR,		0,	0),
-+	RESET(TIM5_R,		RCC_TIM5CFGR,		0,	0),
-+	RESET(TIM6_R,		RCC_TIM6CFGR,		0,	0),
-+	RESET(TIM7_R,		RCC_TIM7CFGR,		0,	0),
-+	RESET(TIM8_R,		RCC_TIM8CFGR,		0,	0),
-+	RESET(TIM10_R,		RCC_TIM10CFGR,		0,	0),
-+	RESET(TIM11_R,		RCC_TIM11CFGR,		0,	0),
-+	RESET(TIM12_R,		RCC_TIM12CFGR,		0,	0),
-+	RESET(TIM13_R,		RCC_TIM13CFGR,		0,	0),
-+	RESET(TIM14_R,		RCC_TIM14CFGR,		0,	0),
-+	RESET(TIM15_R,		RCC_TIM15CFGR,		0,	0),
-+	RESET(TIM16_R,		RCC_TIM16CFGR,		0,	0),
-+	RESET(TIM17_R,		RCC_TIM17CFGR,		0,	0),
-+	RESET(LPTIM1_R,		RCC_LPTIM1CFGR,		0,	0),
-+	RESET(LPTIM2_R,		RCC_LPTIM2CFGR,		0,	0),
-+	RESET(LPTIM3_R,		RCC_LPTIM3CFGR,		0,	0),
-+	RESET(LPTIM4_R,		RCC_LPTIM4CFGR,		0,	0),
-+	RESET(LPTIM5_R,		RCC_LPTIM5CFGR,		0,	0),
-+	RESET(SPI1_R,		RCC_SPI1CFGR,		0,	0),
-+	RESET(SPI2_R,		RCC_SPI2CFGR,		0,	0),
-+	RESET(SPI3_R,		RCC_SPI3CFGR,		0,	0),
-+	RESET(SPI4_R,		RCC_SPI4CFGR,		0,	0),
-+	RESET(SPI5_R,		RCC_SPI5CFGR,		0,	0),
-+	RESET(SPI6_R,		RCC_SPI6CFGR,		0,	0),
-+	RESET(SPDIFRX_R,	RCC_SPDIFRXCFGR,	0,	0),
-+	RESET(USART1_R,		RCC_USART1CFGR,		0,	0),
-+	RESET(USART2_R,		RCC_USART2CFGR,		0,	0),
-+	RESET(USART3_R,		RCC_USART3CFGR,		0,	0),
-+	RESET(UART4_R,		RCC_UART4CFGR,		0,	0),
-+	RESET(UART5_R,		RCC_UART5CFGR,		0,	0),
-+	RESET(USART6_R,		RCC_USART6CFGR,		0,	0),
-+	RESET(UART7_R,		RCC_UART7CFGR,		0,	0),
-+	RESET(LPUART1_R,	RCC_LPUART1CFGR,	0,	0),
-+	RESET(I2C1_R,		RCC_I2C1CFGR,		0,	0),
-+	RESET(I2C2_R,		RCC_I2C2CFGR,		0,	0),
-+	RESET(I2C3_R,		RCC_I2C3CFGR,		0,	0),
-+	RESET(SAI1_R,		RCC_SAI1CFGR,		0,	0),
-+	RESET(SAI2_R,		RCC_SAI2CFGR,		0,	0),
-+	RESET(SAI3_R,		RCC_SAI3CFGR,		0,	0),
-+	RESET(SAI4_R,		RCC_SAI4CFGR,		0,	0),
-+	RESET(MDF1_R,		RCC_MDF1CFGR,		0,	0),
-+	RESET(FDCAN_R,		RCC_FDCANCFGR,		0,	0),
-+	RESET(HDP_R,		RCC_HDPCFGR,		0,	0),
-+	RESET(ADC1_R,		RCC_ADC1CFGR,		0,	0),
-+	RESET(ADC2_R,		RCC_ADC2CFGR,		0,	0),
-+	RESET(ETH1_R,		RCC_ETH1CFGR,		0,	0),
-+	RESET(ETH2_R,		RCC_ETH2CFGR,		0,	0),
-+	RESET(USBH_R,		RCC_USBHCFGR,		0,	0),
-+	RESET(USB2PHY1_R,	RCC_USB2PHY1CFGR,	0,	0),
-+	RESET(USB2PHY2_R,	RCC_USB2PHY2CFGR,	0,	0),
-+	RESET(SDMMC1_R,		RCC_SDMMC1CFGR,		0,	0),
-+	RESET(SDMMC1DLL_R,	RCC_SDMMC1CFGR,		16,	0),
-+	RESET(SDMMC2_R,		RCC_SDMMC2CFGR,		0,	0),
-+	RESET(SDMMC2DLL_R,	RCC_SDMMC2CFGR,		16,	0),
-+	RESET(SDMMC3_R,		RCC_SDMMC3CFGR,		0,	0),
-+	RESET(SDMMC3DLL_R,	RCC_SDMMC3CFGR,		16,	0),
-+	RESET(LTDC_R,		RCC_LTDCCFGR,		0,	0),
-+	RESET(CSI_R,		RCC_CSICFGR,		0,	0),
-+	RESET(DCMIPP_R,		RCC_DCMIPPCFGR,		0,	0),
-+	RESET(DCMIPSSI_R,	RCC_DCMIPSSICFGR,	0,	0),
-+	RESET(WWDG1_R,		RCC_WWDG1CFGR,		0,	0),
-+	RESET(VREF_R,		RCC_VREFCFGR,		0,	0),
-+	RESET(DTS_R,		RCC_DTSCFGR,		0,	0),
-+	RESET(CRC_R,		RCC_CRCCFGR,		0,	0),
-+	RESET(SERC_R,		RCC_SERCCFGR,		0,	0),
-+	RESET(I3C1_R,		RCC_I3C1CFGR,		0,	0),
-+	RESET(I3C2_R,		RCC_I3C2CFGR,		0,	0),
-+	RESET(IWDG2_KER_R,	RCC_IWDGC1CFGSETR,	18,	1),
-+	RESET(IWDG4_KER_R,	RCC_IWDGC2CFGSETR,	18,	1),
-+	RESET(RNG1_R,		RCC_RNG1CFGR,		0,	0),
-+	RESET(RNG2_R,		RCC_RNG2CFGR,		0,	0),
-+	RESET(PKA_R,		RCC_PKACFGR,		0,	0),
-+	RESET(SAES_R,		RCC_SAESCFGR,		0,	0),
-+	RESET(HASH1_R,		RCC_HASH1CFGR,		0,	0),
-+	RESET(HASH2_R,		RCC_HASH2CFGR,		0,	0),
-+	RESET(CRYP1_R,		RCC_CRYP1CFGR,		0,	0),
-+	RESET(CRYP2_R,		RCC_CRYP2CFGR,		0,	0),
-+	RESET(OTG_R,		RCC_OTGCFGR,		0,	0),
-+};
-+
-+static const struct stm32_reset_cfg *stm32_get_reset_line(struct reset_ctl *reset_ctl)
-+{
-+	unsigned long id = reset_ctl->id;
-+
-+	if (id < ARRAY_SIZE(stm32mp21_reset))
-+		return stm32mp21_reset[id];
-+
-+	return NULL;
-+}
-+
-+static const struct stm32_reset_data stm32mp21_reset_data = {
-+	.get_reset_line	= stm32_get_reset_line,
-+	.clear_offset	= RCC_CLR_OFFSET,
-+	.reset_us	= STM32_DEASSERT_TIMEOUT_US,
-+};
-+
-+static int stm32_reset_probe(struct udevice *dev)
-+{
-+	return stm32_reset_core_probe(dev, &stm32mp21_reset_data);
-+}
-+
-+U_BOOT_DRIVER(stm32mp21_rcc_reset) = {
-+	.name		= "stm32mp21_reset",
-+	.id		= UCLASS_RESET,
-+	.probe		= stm32_reset_probe,
-+	.priv_auto	= sizeof(struct stm32_reset_priv),
-+	.ops		= &stm32_reset_ops,
++/ {
++	config {
++		u-boot,boot-led = "led-blue";
++		u-boot,mmc-env-partition = "u-boot-env";
++	};
 +};
 
 -- 
