@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05AE1E87827
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FE58E8782A
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:34:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E886840B1;
+	by phobos.denx.de (Postfix) with ESMTP id 6F0D38410C;
 	Tue,  3 Feb 2026 14:34:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="l+pXt9R2";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="rKox0Qxq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D044C83FF8; Tue,  3 Feb 2026 08:48:42 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id 10E2B83FF9; Tue,  3 Feb 2026 08:48:47 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6392F83FC8
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:48:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB4883FF5
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DfBW4V5jsMCkxGAMsY4o57kqJJb3oDcrH5puXw20A40k7RUlcziUQfxkjSVnvG7mWBSJBoTtoZ079YxtdIU1GF7K60xd/jBvZ3d9YFcN2Ufyznq3amSmIGVKTD3RhLAGlF3rcDERFgkDQiDpDmAX0rsAXP9+aBmZEsKdYQVxKYwICREZRQh/YS3K+fzXc5/B4FmZ1zddR4ljr0D7/rmEjOqExumEhHQplsfc0pclSL7NRl7ArA2oQe7Jo4hLxkGVjJQvNDnG3jtlbTjRZUevieU/kmIbul/d7VXgFiQ5oJLx3FZA9oWtp5lNkNW2BU2yfD+25ThgbQcaNFb0qUH8ew==
+ b=O3obN1t2zWD1m+Y9vyncDPz839trrg1/MT2OIC0BBpIv/P6P7dCOGdueoICsv6UCu8ZRk7mX+bkhU2VxG02/49+J+gTFnLZsTiQHyOHLMBCMs7esxKN9nX0riGhYZJCYgZ7XIj0GCg6M9z/xCJucQRKFg8Wk1dakf6sTduUBK8+WntCWuHxuldauGnVrTUXLAgpt2PGqcurFmvMV9uX2Yv/SsPFGFHtkwD+HSFGWd/y8122R5Ha1hLVhYZdLX6UDxWjiVDwk5sBP1+bkCqht14RpvPfzTasr22ifOx8/ryJEbZeVZPwFEjAr09Nh9V6/ffFYc7sl5RgQa3WePhCX1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fJVF72QN87BXTfJ9UDZCt3XktbBMgnbbhpVg1jxUEWA=;
- b=AM8KXSxFuaM6QOo2s4ge9qN6jevo2Tl3Kg26vgoVQmNFme1QvTyiTHXbYRY8DpuHgWGd1tzI6gJz4N8T+4n3X1nD9fT2C9x0oRE4RQ4UL9B8fpa9NxrURBfsGqqZshPfXtLeedXSXB8BAmODVTGrlWdv7o2pdbmKcxg1jpLLjoAHorAd/iXWVnH3Jyd3B39xMNMthkfnAkzrTTTO1tlYmYUvDa3bDjxO5HqZ3Vl7LoRpACLUSPn6PNkpGLHAcYvdZ0wli2JWWLJDiRlQrkn/i7tt+mnomXmMeJbC5JztP1DoUJFhAgfrdkL9+VHXJDWycFVyKLZjVlGGaP/l1tOKWw==
+ bh=GbqjddlUq7nVDpj8D2MYNjq72Ub3Bfdp2sCZUqhNYuo=;
+ b=d8KyewqioYuu9AsqmWCd61KH41prm2etvtvoeNo7bIAWPsf930k56+D//mcFkDzel+qmHAOEhMqklq5VHzVC8wYjBIvEwUqNZVkxVG/2dIepib851do+87hkHA8nM5fv0NoaG1oBu1xIRDnVOR4Er5qlL0WwZGn3/bcsmxtEHu7WV3BdbSEvFtlDYP3UppRRC08ASeO2vffz89hdOCbU/E62qxbWkbzgIuf5fF8S7Q+CQ6YZkqudzB3WsgKoI06mR8qy7haYdSaiFHczrGOAkmH5ebluxKM2yqVKBva9WII3voWUvSMa71vbcjT1POeZZk9zjaFw/SBQ/zwZP7S7Dg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fJVF72QN87BXTfJ9UDZCt3XktbBMgnbbhpVg1jxUEWA=;
- b=l+pXt9R2mH72H3/crxj9uaXNd5nbDK0GwBh4+HqaQvdvNLf9Nec6H2NvoI9jlnIuC6B9UOoPVGPKcY8mlI+mq0B7AxQz7flQ3VLBLrTKZsEb8TXM1O/qTco2En1anQTHCN7PKbrgi7aU/811LEsyTODqSmBuFPnsb/V3YZPT0T3k5nKmeMvlhwFNmCxNEyy7YXqo0llhuoGY8aLKjyJRP7CmnlorulOmiPw5gVHlEdQ1Dzk8Z/CtjC9y+KAmX1+Bd6PyACVWgiW6+VxOELdqLhiYDyYveE6EzBBt64GarD0JVb5MAuAGMR/bJRVg7JxvGEqu4Qzchl1Cvvvu+IRHHA==
+ bh=GbqjddlUq7nVDpj8D2MYNjq72Ub3Bfdp2sCZUqhNYuo=;
+ b=rKox0QxqUJH7Xil9576ajVzLokbNCXUfon9HAUvpSGNJOz5umFhN0qqJhep71xWXDvjcUNNTbzVCMpAdPvKlNRvE0G7oGm+rlrWJ8D9upLpra8Wh7xjc8uYbEsBCgFW9dsOJuQFrUvDNcU5zbLi+s9GMz5RK9bANSOykARwrIwPqo9qixhzXE4tm2PqhMYd5VtkcB4wUct2IjZkrVqXsAxdAXbBQ8zQxeso3WkxvnU2wcTfr9BXqgEstTJKQHYHoEgkgRIvAvj7YWNVXVVM8OBnLtPb3+vNPFrZQ9QhqCTFtLmdvq21RX5lj1oI35rDqBUWAkYAwy0Z9CVNfsQe3IQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
  by DSWPR03MB989105.namprd03.prod.outlook.com (2603:10b6:8:35e::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
- 2026 07:48:37 +0000
+ 2026 07:48:42 +0000
 Received: from PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
  ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9564.016; Tue, 3 Feb 2026
- 07:48:37 +0000
+ 07:48:42 +0000
 From: dinesh.maniyam@altera.com
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -63,11 +63,13 @@ Cc: Marek Vasut <marex@denx.de>,
  Jan Kiszka <jan.kiszka@siemens.com>, Tien Fong <tien.fong.chee@altera.com>,
  Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
  Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v2 0/5] arm: socfpga: enable NAND boot support on Agilex
- platforms
-Date: Tue,  3 Feb 2026 15:47:16 +0800
-Message-ID: <20260203074721.25520-1-dinesh.maniyam@altera.com>
+Subject: [PATCH v2 1/5] mtd: nand: introduce SPL_NAND_FRAMEWORK_CAPABLE
+ Kconfig option
+Date: Tue,  3 Feb 2026 15:47:17 +0800
+Message-ID: <20260203074721.25520-2-dinesh.maniyam@altera.com>
 X-Mailer: git-send-email 2.43.7
+In-Reply-To: <20260203074721.25520-1-dinesh.maniyam@altera.com>
+References: <20260203074721.25520-1-dinesh.maniyam@altera.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: BYAPR05CA0007.namprd05.prod.outlook.com
@@ -76,81 +78,81 @@ X-ClientProxiedBy: BYAPR05CA0007.namprd05.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|DSWPR03MB989105:EE_
-X-MS-Office365-Filtering-Correlation-Id: 446f26c7-fd66-459d-1011-08de62f8a2be
+X-MS-Office365-Filtering-Correlation-Id: 7d145278-302d-427e-0436-08de62f8a65e
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?U3V8IcLyQF/ZDSoHJwjntijf9+gSnRN2STCeymFW8A2oORo4XgPK2/OK8w7q?=
- =?us-ascii?Q?KD+9CfPczykrh5V4tuWFLGoXBcN9YHqJL80i5R/UcEE9g60yCzVMsK/qhURu?=
- =?us-ascii?Q?VJSjx0WKluH563smlKNRkHWRaOaw70v0UUz7UkJihhJOj59DF0VpzWfCqqwt?=
- =?us-ascii?Q?AiGDwKbotCIbFrLLS4HDVTBpXGRq2MNmEqFvfHoQJzUSZK9idfUjeyys3W8M?=
- =?us-ascii?Q?o1oWczfOkuU08WJS4yTuPDkhk7QyBXKhnnFS2GNCjBKNVHaak0h6UZq1rYZT?=
- =?us-ascii?Q?dwt22mA5LRK2bcTMUanA+yFT4qTYjNOEzPWcBXV6pLhXU8L4GaJxx38Wo/L9?=
- =?us-ascii?Q?OiJM8S+Pu/F7AyWD2h4S8TrlOUjJMUBKItoGnIyoT9vXe45lnUf/kKoSqEB1?=
- =?us-ascii?Q?2t5B/NSqfRLrhaIJbPTTjUIfvCdIk/rwCD9syy0J7G4y/QOnEO6N3v1EDcDZ?=
- =?us-ascii?Q?u7WfrXhCuli7vcwGKlLQQ7Wdi1fg1TOl3swCPtNF+6YHAmEbglcvfgzlp/i3?=
- =?us-ascii?Q?TwJ4DW0z8sTLtBoZ92mdmRDo2i6VRtmM0xpKA2put7WdFXKcXXKOao0QFu/J?=
- =?us-ascii?Q?tPIiVT/B1D8GFDXLQwQuzVIy2WKI5T6zDR4Dq2P1Qq71/TSVULjLq0VASpdp?=
- =?us-ascii?Q?8VKqwEdJwxcZxlW74jO5S+O4E+S/RCl8CKVUyKegqaPtCba/pWbxGavyTzvg?=
- =?us-ascii?Q?xdv/+3ml8qRuFE7uOslwz7HtCSQ0hnFxOUGBx+PfC4MJcixBTW/TJEs2ImnT?=
- =?us-ascii?Q?QyHFa4M80vTFiiLhXi2JdUjoz6E0BfyYQArzeIHCPeYK2e6V0UaO4VPnTcqT?=
- =?us-ascii?Q?85eHT/NuNKuitoPGZtIA2T1sTWemp3IpFcqG3mEogr6GiN8au+Sqk4lnGv0s?=
- =?us-ascii?Q?tB8cFduk4onXEEkJCuKIXs3gH/a95q9cA0s0YXn8dvTbfCefgF8Tm0wtAS0e?=
- =?us-ascii?Q?EwcQWH87Ml6Pc9dmlclNjCTZGIgz9kNSMQUooJj82Bb8MgtRvhnfE6hDrHX0?=
- =?us-ascii?Q?UmXqwY0qEOxX9x5i024z7b7DDhUz1srTxEkZcenJn6LlvcWw9x1alJ283PQJ?=
- =?us-ascii?Q?s3/s5kT6O2WP64mFR8iCWVqdtoOw0SkQakZF04H7Ga1WNhxX+kp6uvDKbv46?=
- =?us-ascii?Q?+6l00E9QQvYF09VmFBNNCf9mhJcE8SNxut9Cly96nItuqmQQP18V1F0n3WRl?=
- =?us-ascii?Q?ORMjl2R/jyaDSfF2cumOCnN9NsxPHNYZE6kf9H7vFRSIulgvAgun5A1ZY/aA?=
- =?us-ascii?Q?Ka6eJ+JiHUWmNgN+pHflwfQH2L6GSQrSxodJ2HWCtlYkkLmG1rC/QBOT6MaL?=
- =?us-ascii?Q?cqGZMYexXkOq6aRBE0CBBtaM7CKniriA4HZJJpxtPAY6Nwe9hx24PL4hry/6?=
- =?us-ascii?Q?Gwu5xf+u4NWL+AuKONYOEQWnKF8wJXI0VcBfCwIhi8/saAiqYurK/HoMoTtO?=
- =?us-ascii?Q?yk/dnUTWZXdzHj2INxscEHpI7C065VfrEs9VVoA0AZHiE1oEprmlcK8n7MmG?=
- =?us-ascii?Q?SLJ3hqDuPy8cawIzITV1QIv0wyu+vQQ/We7N5plnAcBgbscWbzn15Y9g2n4n?=
- =?us-ascii?Q?NGw6tW+RD8hlaFuzjgGHhukN93oa+/wGEjImv99U?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?AzA2adqDtAqwft4QxMJgkpu9MTihCWCimvFPt1XMp3gUa+voG+XD6tS9QhtO?=
+ =?us-ascii?Q?6n6UB+uTtagvuDEEjpFtEwPQlGK4d4rJHAjI9jlbF3oaY5ujbYixZQ5x1qzc?=
+ =?us-ascii?Q?fpit+l55WcuQOvCSHQT5DlE/alQv8C0fqT084N63zZvw21NGwSrkpDGwITOd?=
+ =?us-ascii?Q?agTxILNixOAmKwGI7qRxvj6xENicge0j2olIdW/p5G6m6xOAbXMxrtwxgeX0?=
+ =?us-ascii?Q?80JphafGw+2B4+rDOLaYeBZtW1FcNRWOdlkV4b5zVSz8G13HlTKO+cqANDg/?=
+ =?us-ascii?Q?Tzt8o91X+q0LFqMkaP8h3VoSOySxevYHVibEkuC5LlRbWzSG07xSlxniduyM?=
+ =?us-ascii?Q?JShuDEc1/+psT85tnKuBuM8VZxGdPz6RsgRwnHsMmcpptRDHtxzLKLpRYTEx?=
+ =?us-ascii?Q?+gTqKSwGDWi6SpfImVWdq9JYghKChmk9JA9Gy/lGAk/APbvJJNwkxcWooFjb?=
+ =?us-ascii?Q?CcGEc72pp6b0MveV2M3AyEqQlSTlFEoRQTgwtu1d4zDLjDWNALW3+0ZFudUS?=
+ =?us-ascii?Q?YiDOriysoNjIoBcaIbiCyPh9rZjEoHXgIrgcZ4wzilERkSQySvB94fwsalne?=
+ =?us-ascii?Q?BVJeFtYSXVu536ASEbRtKyJGb2LjcV7ighErGQ/SMRKaiRRZtl7cdCZh0BuD?=
+ =?us-ascii?Q?oakQX6UVjeWZAysgEg8uf3RoQ2305dgofAGc+CxII6nvqD4LIAvBH+kXWAbU?=
+ =?us-ascii?Q?9qGMp7EocVCK/VoD73/+bOBkh3jV1jKFycBx5pjQxdSujtfa/qysErrfe7NG?=
+ =?us-ascii?Q?VgAEFFAbisaOvS1/khEGt878ByvDHuPfq3lKcPizrvbVb4qK1pBo8KGzL56F?=
+ =?us-ascii?Q?Vh8I+oGMIhVIKyw5bakbntWAF/Dd9F3NeAVyHYIyA78Ppwp6l+N7wSirKv8G?=
+ =?us-ascii?Q?S4GdKbKKNG+5sYW7v2K7Zv6TizZSzgu3XCUIBQE3YR/PdJj/8U6TYqZWJyyC?=
+ =?us-ascii?Q?xDBwMhWbHd2TM0jTyVMKCUW9JjMw7UYsvrTQxBVGPezDJjJPG7sBe5MVMEnX?=
+ =?us-ascii?Q?xE46z4+PBUs1ZS7vc2LH7noP6Ng1LOJnwp6hc4NAbvW5ITWZCLtHzXbvFeEk?=
+ =?us-ascii?Q?Pdq3W4UG9/rrKfJ4XHYl/M+h8A5eU0Unpyt+NsOvOTwv4oKAITvGezWqHu1w?=
+ =?us-ascii?Q?t+FylA5D3nTaoMpT3CUSXh4rsPhPGPWgYeyXidHMUZ62MlZ4ZbYOUdGxA6/8?=
+ =?us-ascii?Q?PKLI/eJ92WeYEhJpfcCJaFSsncmXqGkdOaXhBKFFe8fVHeTgNfL6rqRYgALg?=
+ =?us-ascii?Q?lklCDMVPvUmSisvsfWbO9vZTv5qx3UM7izaeQCyoo+SO4jx1C+yoTpMPDvWV?=
+ =?us-ascii?Q?ptpFCDlQKNbgc0JzqJd2OL+LPjCKtY9ZSpnfiuqDAVHVE0AXEceA3GonKpiu?=
+ =?us-ascii?Q?VuDs5b6kGhU1javqDQS6VbznslEX/WmYkmPw6xmyixiWu/Vrgsd7TBlB6Mem?=
+ =?us-ascii?Q?Qp5S78pndUCfX5vOW5pHujyfMp6K7wh65dBceTg+Fnszj9tT3pR/HamhrnxL?=
+ =?us-ascii?Q?6YU3Fy2U+AtuyRybDTGjSAhBIMd7wRgqSZwqZe3vhZd8nsMcShO3c0n6Vpao?=
+ =?us-ascii?Q?euY17v6EJScMJHZcfIk=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QV7JDKAm60tsyKeGDtyuv1v6H6o9SjyDxhdT2egfSQZhlCYkLwGBLqojnYpo?=
- =?us-ascii?Q?u8lnGnuNkvVoPLANlvAq4oER52+eTKOXTXZ/P4OmxLcfONrXqmKXxP40B0N9?=
- =?us-ascii?Q?7IIIrN7Ob/+N5WsM+eMEp1KvM02z/6P2NzjK92uJcZAVrFEePx6TXH4B6LH/?=
- =?us-ascii?Q?LrqfFsFxovl6foImd0hfqUcU4UZVrF8mpmmNda1GHCh2GRMMTxkwhX2IAWXW?=
- =?us-ascii?Q?0cA0ZYTM66mpdhwgGYxJPTKp/m4GA0C7kazIpoJofRls2gd7GwNVOViI6B17?=
- =?us-ascii?Q?h64o0imc1b9QCvAfP6mDC1WfZgkEbOQ5THeWPJqb4pSC9K03ruEK8qnfJZIb?=
- =?us-ascii?Q?hseGT7BQGrK9tdkE/fpd066O6S3loqZtHLzSi2LX6mmZuLuX7bLp7jcuQDk2?=
- =?us-ascii?Q?5Fw9V2wi+IgXDtMlAYIx7FYIRtHHxSLDobfFCWraGHRyza/wjMi60SLTH1/F?=
- =?us-ascii?Q?KTJzLWQnX5RwuRSoqqGBGVLv8WUDiP8MqEGszc0COUktZx7QEdNcTTHf7p3A?=
- =?us-ascii?Q?ZSPSVVXK6nnG5pyEar7J0RD+2+3hDHXcsRiWKDF0q+7bODsKNOW+2nfRDn9O?=
- =?us-ascii?Q?QVhUO9rsTXqUHk3v5v+GvA2+vAiVq6tDiSb3I1Ztx35WXO72Eh94H7qwaGKQ?=
- =?us-ascii?Q?vTQ3VcSCVJjG0ZoIMYT4Jdb9lXDS/PzaxYr6+ZVq8qMXXygJrQjjvEerNLRN?=
- =?us-ascii?Q?dwW66xTFnhT9dTiq4hBRZGZOLmKaVOxPXnqoWOnyOKlmZR09O+zbbacR5mdn?=
- =?us-ascii?Q?lo1IIfizWuTTCMWClhM12aQcTtDc9hdJTZmd6bDzeg02Ev9IWDJzrzBLFWfa?=
- =?us-ascii?Q?UP4mhA08Na9tDrIn0MSrNKAuMXMvUMA5QRnCFHKdwTek1eKqzzyTZ9asEJC8?=
- =?us-ascii?Q?ZMojRW2pWB8pnMKhWaOzaS1ShIp+2AN3/riBtH4rQFxLdMCW3Ai1lWcUxt6p?=
- =?us-ascii?Q?6I+5cYTC8jIV0sNmbtlJZiSfnOKCyHexGe08gckA8eZZDn+K1CSaEwAEgzSD?=
- =?us-ascii?Q?hDK4t4W/+8OgfWxyH5xvTTmRED9HUGMWyvL8k81aFrlAsClU7F/RKaPRKhTL?=
- =?us-ascii?Q?cWSUo9F1Yy7O9kpqWL4D1ZYKhbTPFziqaxJlyUK4nEngg0OfZ28UtJVL32iz?=
- =?us-ascii?Q?EbofSgzVirGjaDLodjyLcXP0XPTkPKLYY6MU9sGvWM7x9SmYWMD55TJfohOW?=
- =?us-ascii?Q?be9QLMvL/aIfBhr+ssLjlL+QFgV6HjkTf42YTdK+zqErrirasXrdJJqPQVtj?=
- =?us-ascii?Q?XIBh2cuT2WeO/ymgJKgrdFPiZUJsq3okGs5hwHAUYPkW2HVWf4Uy4zwG7iHr?=
- =?us-ascii?Q?rzfe12xVh2cvEVQvJGmAwlyTzDii2kzt/p0B/JqU+VDeImHIIhCGxmKzlnIL?=
- =?us-ascii?Q?5B7GcHD3V7I70iIS05Ns0rDUZvABqZmlVN0KgzRl5iMMGtBGZg0Iy1hNJ0WY?=
- =?us-ascii?Q?FOKEgzw+wJdqXYI5kktApqH58COADoejSgBec+iwsTd1cnxfSbjNg5Yfa2B5?=
- =?us-ascii?Q?lpX4/uyD/lLPLSrDLJL2Hrao2vql2TCH7gf+/wrBsXNW1A71Ks/+Fhn1Rc36?=
- =?us-ascii?Q?d5cSJavhR38MYB/H/HfZtgvTOXYIbFxtcIa+m6AlGXD8lLlZpLg5RBxR9p9o?=
- =?us-ascii?Q?xl+PV2ylW6VZ0f+2BqWfRdRh8ddVC/efAjAsVkdTCU4DJE15dWzii97x3Pnz?=
- =?us-ascii?Q?mXbMgDpNFJ0BuBMRL6U+yvXwHZLiXB1uFoj4upANXFkKpI+cw1reCUATfziA?=
- =?us-ascii?Q?h5IZO+t0LV5m+9KXC255MT+jZhvf08Y=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0zRNSUtRlhjlvdbA4WHiS5A5yOP0/uLPzP+4rSmPYXjbroB/ieJ/jq9iOVAN?=
+ =?us-ascii?Q?/NDglobpK/MWiTPBaJjRGsjXs8oeNYLH5VlUXzK86eb3HYvo+PSKuezbDfq9?=
+ =?us-ascii?Q?cV/QjHHhcCs+Ma0SWtK/c/wYCBU1lNNxkmTMna1OY5o0+FOuyNugxwjD3rV3?=
+ =?us-ascii?Q?gHbMcbyvHf55pifRLZ7R1aMtm+A3PXiRXyZmXw4GgTRFBY6RsPMNdJoCJjNg?=
+ =?us-ascii?Q?HNORp2tzF726szllIzdJjEr+vDEiBrvKZb8wxXRurXe+avePdvXDHqrQC8tu?=
+ =?us-ascii?Q?LJxIqqM7PSw0A0sEUefnCZ6TwJqaN/moi9+ZU0nw4qyxgOl0uUW1Xl/bhXdw?=
+ =?us-ascii?Q?zFrlzyWWnHsITk8BUUX6OXtDpc8/M50kL0qOOV3/h2AAlbbBXJvMS6MW6Cfx?=
+ =?us-ascii?Q?AA3mMpz21p2c0n+LmkjfTRNYXZHtOIP4183NbpSrSS4irNi0O73/2ssPxkRU?=
+ =?us-ascii?Q?vXFXkwoxsvxdQw/vOwMFstQ8IVn+rvfBIX348Xg+XHfY+FFFHc0Pw7qpiaVa?=
+ =?us-ascii?Q?I0iBt6/GwYlBbtSwsDaHh6urwO4lfcnz7ITHcapxJsR6Dl/62AvaQUKagzoK?=
+ =?us-ascii?Q?ynNdhqDOuWvpY9aIn4XS/MevokUk7a79dROjZCiyM0X1DOeqDYA70j1pT3bz?=
+ =?us-ascii?Q?ng+NHAD4MsF4aBWPetvKGwqkD+7jnNYiLPk/iKbFfGPE7SyhpP7baOqNrdZV?=
+ =?us-ascii?Q?z2SccMcJguPZNWNrDFxGPYBAfhD1dpi8tLqVMWZLk+0LFbAzOh0yZ7zOICOq?=
+ =?us-ascii?Q?IoM8dlnhpE+qdG9/7wOvQYmgb+qJNBSsCIFrrINAy+jf5s7dFPiTodIVtbpD?=
+ =?us-ascii?Q?xYrKJqc/4bUq6kmtPt7Tt8Um6EyZ29oB5dIgwKWM9cHzgHoulGo851TTvAJW?=
+ =?us-ascii?Q?+qAQjGOQlIiiAbJs8zYPIYZYUNHDBMYwFWrtVCXzFtKtsMrbIKC/rPQWuRJj?=
+ =?us-ascii?Q?Ers3zF65PUhgGkIr+iHE8ArlgSBZeL4Gq518yluiB4jmwSTw8RuupxWy0YD9?=
+ =?us-ascii?Q?tNjpoZQy1uSCKYtMMnbo05A/SrFJkgWQpOeyOzLhxJJHwmxYZG3smwjnqY4G?=
+ =?us-ascii?Q?KtoL+AycUP5LKL4ADxqHKwSjx9CsxOlWPSviItv4Wz9Oc+9WpxppkbjXn9Qe?=
+ =?us-ascii?Q?QebgD5EUvkCr9sO9mTJsyQaB2/6rGhImBDFXu/P5bXqneBcCJOln/+G5ntt0?=
+ =?us-ascii?Q?PtElBsz2DxbdwAtUeXh/TtzoARSOUd4uC6QjVPfwPZZFQsVZ4738aKH1KitG?=
+ =?us-ascii?Q?CdepJ2vmRZ50rQpq0otNbsBR5a30ioEAK+6kMaNfne1FSnH1mA175/fbkkcC?=
+ =?us-ascii?Q?YnxJFS2mLSpKGIoTZHWVlx4V1sxrjrK0X7lD/tmiL2WljNaWqPdZf5Eps8dG?=
+ =?us-ascii?Q?JF6mqhIygo/5cJrBwVVRNd+vDGk/1TEImpY8R3hP4fQ4On7UfQXktDJWwJh6?=
+ =?us-ascii?Q?56cmeaQRpBzYLir9Unr6xbGOfYcwlQJc6j6RDeKFpkWQukLgjLwwAJ0HKIqq?=
+ =?us-ascii?Q?tAcPy7INYSMBKFg/WnDOQGG4SBxWK7vBs+m8wq6XbEVAI1E0/eSdBtodLacB?=
+ =?us-ascii?Q?VYamCrOCqDzJoTgZmapQOstcgSS7htrMMTZWvGdn8jFM+a9gjoEkhMNsN8Fp?=
+ =?us-ascii?Q?LcXmUaHj4IHCAc5xvBGneZonhE0MHeMbW3wx/q6jprfUOed8Q03sa1Wi3y0P?=
+ =?us-ascii?Q?8eW1Eu/EuJ03HyrTVGLmbr4AdNtipHwqZa/4a1Dtg/7kSYAuC5cWO0HuszdZ?=
+ =?us-ascii?Q?LGqZX7BtA55/3Jm34sPVAGdhXCWybnk=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 446f26c7-fd66-459d-1011-08de62f8a2be
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7d145278-302d-427e-0436-08de62f8a65e
 X-MS-Exchange-CrossTenant-AuthSource: MW5PR03MB6929.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:48:37.0998 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:48:42.3411 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0w0Twjx4gIF90ZN3UM2twZ2wSErEnPwZcDiknYeEuE+CK8Gg51PDRnim1txZktOraVaIvYREJMKRhrhUrmVYA4Z6EeAcV87ZKrpSIoQA13E=
+X-MS-Exchange-CrossTenant-UserPrincipalName: i6yFeT7EI71e+2nqomVc2Ju0dsOqtFjL+vrjRdkFSQmI54ZknOwgUWUp37JF0LutWuONUOiE+E1VBsdr/RUfqF53g0B3/dKqudIQP6HIePE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSWPR03MB989105
 X-Mailman-Approved-At: Tue, 03 Feb 2026 14:34:39 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -171,38 +173,64 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-This series enables NAND boot support on SoCFPGA Agilex platforms.
+The SPL NAND MTD framework requires working driver model support
+and sufficient memory resources, which are not available on all
+platforms.
 
-It adds support for loading U-Boot from NAND in SPL using the full
-NAND/MTD framework, cleans up controller-specific SPL helpers, and
-enables the required NAND configuration for Agilex boards.
+Introduce a SPL_NAND_FRAMEWORK_CAPABLE Kconfig option to allow
+platforms to explicitly advertise support for compiling the full
+NAND/MTD framework into SPL.
 
-No functional change is intended for platforms that do not enable
-SPL NAND MTD framework support.
+This avoids accidental enablement of the SPL NAND framework on
+platforms that cannot support it and provides a clear capability
+boundary for platform maintainers.
 
-v1->v2:
---------
-Patch 1: Add SPL_MAX_SIZE dependency
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+---
+ drivers/mtd/nand/raw/Kconfig | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-History:
---------
-[v1]: https://patchwork.ozlabs.org/project/uboot/cover/20260129050446.8858-1-dinesh.maniyam@altera.com/
-
-Dinesh Maniyam (5):
-  mtd: nand: introduce SPL_NAND_FRAMEWORK_CAPABLE Kconfig option
-  mtd: nand: add generic SPL NAND MTD loader
-  mtd: nand: wire SPL NAND MTD loader into SPL build
-  arm: socfpga: imply SPL_NAND_FRAMEWORK_CAPABLE for Agilex platforms
-  arm: socfpga: enable NAND support for Agilex
-
- arch/arm/mach-socfpga/Kconfig       |  2 +
- configs/socfpga_agilex_defconfig    | 11 +++++
- drivers/mtd/nand/raw/Kconfig        | 30 ++++++++++++
- drivers/mtd/nand/raw/Makefile       |  1 +
- drivers/mtd/nand/raw/spl_nand_mtd.c | 76 +++++++++++++++++++++++++++++
- 5 files changed, 120 insertions(+)
- create mode 100644 drivers/mtd/nand/raw/spl_nand_mtd.c
-
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index e0ff28cb21b..d73d8ed4404 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -809,6 +809,36 @@ config SYS_NAND_HW_ECC_OOBFIRST
+ 	bool "In SPL, read the OOB first and then the data from NAND"
+ 	depends on SPL_NAND_SIMPLE
+ 
++config SPL_NAND_FRAMEWORK_CAPABLE
++	bool
++	depends on SPL_DM
++	depends on SPL_HAS_BSS_LINKER_SECTION
++	depends on SPL_MAX_SIZE >= 0x40000
++	help
++	  Indicates that the platform has sufficient SPL capabilities
++	  (driver model, BSS support, and SRAM size) to support the
++	  full NAND/MTD framework in SPL.
++
++config SPL_NAND_USE_NAND_FRAMEWORK
++	bool "Use NAND/MTD framework in SPL"
++	depends on SPL_NAND_SUPPORT && MTD
++	depends on SPL_NAND_FRAMEWORK_CAPABLE
++	depends on SPL_ENV_SUPPORT
++	depends on ENV_IS_IN_NAND
++	select SPL_SYS_NAND_SELF_INIT
++	select SPL_NAND_BASE
++	select SPL_NAND_DRIVERS
++	select SPL_NAND_IDENT
++	select SPL_NAND_INIT
++	select SPL_NAND_ECC
++	help
++		Enable loading U-Boot from NAND in SPL using the full
++		NAND/MTD framework instead of the minimal SPL NAND loaders.
++		This provides bad-block aware reads and flexible offset
++		handling via the common NAND/MTD infrastructure.
++		Platforms enabling this option must also provide working
++		driver model support and sufficient SPL memory resources.
++
+ endif	# if SPL
+ 
+ endif	# if MTD_RAW_NAND
 -- 
 2.43.7
 
