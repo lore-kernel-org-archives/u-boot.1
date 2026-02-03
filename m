@@ -4,161 +4,190 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B76E87849
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 16:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D013E8784C
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 16:57:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D22083BF4;
-	Tue,  3 Feb 2026 17:49:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 9999683BC8;
+	Tue,  3 Feb 2026 17:57:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="RCbhkMZs";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="JwH0BP1U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 921A483CF2; Tue,  3 Feb 2026 17:49:47 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 630FC83BDD; Tue,  3 Feb 2026 17:57:17 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47768839DF
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 17:49:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C795839DF
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 17:57:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ahzf/d4uH7JHq8YMyb8WOBES3Bj9EcX//oUsVuC1lk8x/CoBx6LB5JPawbkn0g1Ks2kHTFFki2uRs0iXxIrUnYaOP5JGXk29jxX7wOnqjbKEH2WVTXtNKvH7d2UIAyL1EhBWh/UENH+++Xr5xgS0kifMBoEO83JNNxRDUzahWTAXQFE494tSS5uQ5M9zLM4DUKhk1ul4PO9iYyO6GzajLE+9qAh6mS1sgZc5ZfLNCklfQ1QdO8rbIDoFWUMusH/BRib6uPeU6QSkLOWuAvyCgKDe4Y5EzGJHYbg046rCFrWdBFVNeH27lp/N3YYtXRtHDujqUt00hX0j+Vj4ktIuuw==
+ b=YE9cBkDh2e+0SUsuPl3tBwgoSYqoHOOBX8KQhVfx1Bq9i83akp8rUAOG597okOiCaX2UrbgA254LUvSuhjoaq6Abvo21L4ZfQI/GMPeYLUbfk13u2vPJGH7C5MQB62NKu5F54JAL/J3jGJIwbHHXXbFkkhfZKZ2IeWOL8FzMqcJHeLym+z+9WG4+hrj/DE8HX/KYTc6i7iWix4u/P5gk2AjhzGaa8tBwUovhgiCDuPN3pEFjChO9h76Q2u02vvGdK+GohQDpyP9AuF9LMterLmzu59d3F1J/GNuh9rPoQYrjCNMnzNfm5NtijZuAjoc0XyArKm4aJ6D0Ucz9kz9QXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4qQWV3gqv/pIsHGXejmwSrH6BEVLz2Xm2qZdtiv0iOc=;
- b=MULxEVTBs/MsGYnlBDBMo7DHnVlvKTro8zZ6L7cJfopp18N1Lj0cJ5rdRPvwRBV5q+ScnuukETjttqQctRR5bL0p3P1+4hxIWLgf+3upO2Ydd8/Mwuy4oBQsX528F37HJpJ9c6a9rHrMDc1XgP10FLpzUk75o+R/fX07NqaJOR32ADxgyjIMRA7+fw716Nn8VD8gtqb6VlIJGKRRCoXMpKxT3WIWjWEm1DhwxF0OUPpPY3s2NBHDNpNGvKn4p5QiksX5QUhLs3+KvEFhamYEfC1CglwAQpaDMfEcgKSG4j9ZY4Zq5Tb0yqdIO/mZmlklemc+/l22HX7TCmkFsE12NA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
+ bh=K9mlvtyj3hWzegh+ssMuijffOCgBWT7dBfFQycik1vY=;
+ b=zPR9nQEG5Yiih5Xez6M/MSnBS/59pqe2t7fo64mICYDxRkt5w5TGc0lUaHtj7jsSIE6+RJx99HeiIpWSixh19Fbhtabj665H3Pa1wphjlYhfrJd+MLXn8ZblL488qWqxIaQ49KRxTjCm9pUSGVX/BzOpPJktNNC+tIX0Am9BphVkfGek6lj7/SG5Re+sGLVaJxW6JJbhZp6u54XinfWFNjvazFaB4SGncEBrlS7W5V1ixVhHKdP3ZSSdMuUB5pY5WhT7VM3BfdsvB81LOxv3xEHo4a7FLBiCgUhESdTt22+Rh7bG6AeSWK1PGlKrSjjmIzo2dWz2i9pLycbU90Oxlg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4qQWV3gqv/pIsHGXejmwSrH6BEVLz2Xm2qZdtiv0iOc=;
- b=RCbhkMZs2UzrAKhxin/8Kb0A6pE0Fjv247fProURDe4xGaQbohqIxhEVZ3I5t42zw8+S4BN6n8H4lXJ3rCzc0FAMcXWzO0vFARhMS0i49q1E4FqDIE8Spp/yMKqKF8G4hQPGofSp25N2ymZTwKRz9McbpeT2BU4Kzf5qyGDnW+HI+CZ+a1AAdTNDm9abCpmUjZolUKpP9tyP2yRKPgJRa73+chY32wCb+A/iCS5lcyrGcNliq9+F+pE8aTSXhgezjVjk6oWNao+ykNaKIZ3pjPtiaP9YiH0KTOI8cZS/UN23B1Iym0IdTLOudo+vH+QeZTbElejui4JdCUEiV+8BLw==
-Received: from DB9PR06CA0018.eurprd06.prod.outlook.com (2603:10a6:10:1db::23)
- by DU2PR10MB7693.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:492::22)
+ bh=K9mlvtyj3hWzegh+ssMuijffOCgBWT7dBfFQycik1vY=;
+ b=JwH0BP1UUKpug+Ce9+jeJb48W2W+LkcvGO4wBWZLUKtkY2rtboVW8viP1b2SxTdmlCobefu+dKesCToSP1mXyJXtssh/r0uGSi+zD/y/aw18tYg9Cu6OyqO7F7RQUvH9scWq8D5LcR7hnNDUnUq+8MyyulV4XAwrS5B4V2R+N2Q=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by VI1PR04MB9881.eurprd04.prod.outlook.com (2603:10a6:800:1e1::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.11; Tue, 3 Feb
- 2026 16:49:38 +0000
-Received: from DB3PEPF0000885F.eurprd02.prod.outlook.com
- (2603:10a6:10:1db:cafe::49) by DB9PR06CA0018.outlook.office365.com
- (2603:10a6:10:1db::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
- 3 Feb 2026 16:49:38 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DB3PEPF0000885F.mail.protection.outlook.com (10.167.242.10) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 16:49:37 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 3 Feb
- 2026 17:51:15 +0100
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 3 Feb
- 2026 17:49:36 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Tue, 3 Feb 2026 17:49:25 +0100
-Subject: [PATCH 5/7] ARM: stm32mp: Add STM32MP21 support
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Tue, 3 Feb
+ 2026 16:57:10 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9564.016; Tue, 3 Feb 2026
+ 16:57:10 +0000
+Message-ID: <c3d83865-c0e4-4478-90b5-0e291ad4e67c@cherry.de>
+Date: Tue, 3 Feb 2026 17:57:01 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/3] gpio: Introduce gpio-delay driver and enable it on
+ Kria
+To: Marek Vasut <marek.vasut@mailbox.org>, Michal Simek
+ <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Anshul Dalal <anshuld@ti.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Eoin Dickson <eoin.dickson@microchip.com>, Fabio Estevam
+ <festevam@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Nithish Kumar Naroju <nithishkumar.naroju@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Rohit Visavalia
+ <rohit.visavalia@amd.com>, Simon Glass <sjg@chromium.org>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>, Tom Rini
+ <trini@konsulko.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+References: <cover.1770105146.git.michal.simek@amd.com>
+ <0097d26f-9e6a-4412-bd74-8c3a3bf19fa6@mailbox.org>
+ <be5256e4-b99c-490c-9217-7671c53914ee@amd.com>
+ <5f9895bd-4786-40b0-988e-e0b843c43fd0@mailbox.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <5f9895bd-4786-40b0-988e-e0b843c43fd0@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0248.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f5::14) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-ID: <20260203-upstream_add_stm32mp21_support-v1-5-48ca3409cce1@foss.st.com>
-References: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
-In-Reply-To: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
-To: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>
-CC: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, "Patrick
- Delaunay" <patrick.delaunay@foss.st.com>, Valentin Caron
- <valentin.caron@foss.st.com>, Nicolas Le Bayon <nicolas.le.bayon@st.com>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, Gatien Chevallier
- <gatien.chevallier@foss.st.com>, Marek Vasut <marek.vasut@mailbox.org>,
- Thomas Bourgoin <thomas.bourgoin@foss.st.com>, Lionel Debieve
- <lionel.debieve@foss.st.com>, Yann Gautier <yann.gautier@foss.st.com>, Simeon
- Marijon <simeon.marijon@foss.st.com>, Fabrice Gasnier
- <fabrice.gasnier@foss.st.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, Patrice Chotard <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.14.3
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885F:EE_|DU2PR10MB7693:EE_
-X-MS-Office365-Filtering-Correlation-Id: 325b1c39-2030-4099-1fff-08de634437b5
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|VI1PR04MB9881:EE_
+X-MS-Office365-Filtering-Correlation-Id: 51ae6433-3370-4fe9-e413-08de6345455e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a0NOZ1ZsZEtkNjBMWWJOVDJjUmxTYVVHRVh5Q2R2OGszRi9TNjZzajI3SmdG?=
- =?utf-8?B?MzV1ejBqaDluc2RlK1lTRUdLYUVyTGJycDhNeXQ4Y3hLL3o2NDQwQjlxbTVW?=
- =?utf-8?B?ZHJVNUxEL2M5aWRIeVpsSkJpQ1d5bU1uZVB1L3RXSW5KMGhPU3dXbkV6WExq?=
- =?utf-8?B?NkZHV1dLeU8yRURFeFVRVDhYd1ZxS3BIblZSREtSMXNwajZXWW4vUkFMUndh?=
- =?utf-8?B?eDl5dkNNeGRpN3RKeC9JRUN3L0ZwSmVhNjVyTXB3a1V4LzVEcGM2U1BwaWV0?=
- =?utf-8?B?bzRuK2xBRStvcWFIY04yNFdTSkgyTDg4TmxJbGp3aU4wWGxlYVFQanJXVEI0?=
- =?utf-8?B?bGtHUmxCWVR2bFJXcWx0UkZzSTRyQ25kY0FuQ3ltdTNWcjF0Y3kvOWU0R0t2?=
- =?utf-8?B?MnR3OE1LaVdqM2JGUzVTTTdSMVJEdnlGYThUYVdDamdueVFIWDllb3kwc2Jl?=
- =?utf-8?B?Kzk5OWNqSjhrblArcDJJTVRrTittejluY3ZOSVhvN0h3OHBoNktLVFAvbC9U?=
- =?utf-8?B?L3ZIaWIrZklVSEhyM2xQb0x0SWpQdm9pSWtCQVdPL0Q3SlpqNUVSdmI3dzBX?=
- =?utf-8?B?WHNFSit5MllZYjdIbWVwQ1NjS0xJeUE3VHd2Um96aUQvR1JBaFFlVnlzS1Qr?=
- =?utf-8?B?aENmeWVvbnlJK050SzdZU3JPOENaMDIvVlNsa0Z5bW5TQklvSktoOFRtYjhk?=
- =?utf-8?B?T3hPa0tablhMd1JkN3NaTDBDbisvTnk1SC9xNzdGMS81NFg0YWhlQWQ0UDZT?=
- =?utf-8?B?OXJ0aU0yNzRXYVdSV2lWeFBtbitjZlQ5ZkcyVDE0VjlpbWd4RldDM2VEK1pt?=
- =?utf-8?B?RmhhUGlqUlJxMUlVQVJjeEl3MFpHcXkvQnkvajFvNWpCbG5Oc1V3and0UFB1?=
- =?utf-8?B?WFlQU21pVVE5VkFtRzVYcktTVWlWRE1oVGliRDJkMFZUSFRBWmpndWZxRlJL?=
- =?utf-8?B?VEkrajVHSkgxU3l1VUR1Z2lBbGxuYTdZSzloeXZLMGJHS0hQWjJ4Wk9kdUdj?=
- =?utf-8?B?NjgrTEdGNzhHaXArd3cvemRLMW1YWm4vdmpRNkkvUUdUY0NDU1RDSzc4em42?=
- =?utf-8?B?TGFPOTdzOHlGQ3RQT3JsakNHUklHYVF0cmFxZVJOeXI2cFEzZWxPWmRnaGx4?=
- =?utf-8?B?ZUNTTXVkRjBBNzhVeUdkQU11OHdRS2dyV2h5cnMvb3AzUlcvbzJCMWtkWHVS?=
- =?utf-8?B?d1NPTG93RG0xUVpiQXA2NHg4Yi9HUm5JUnpTbWxMZkE2YkMrd0EwRXpZOGR5?=
- =?utf-8?B?a3loSEplQ2liVlpPUisrZWRaSHlnaG94ay9nSlc5NHJyS2FsbUVnLzhRaC84?=
- =?utf-8?B?dXZCTTJHSmdLZ3RRZExRSjRwT3QrVHkxQkJtcERPL0xqcVNOTExOK3V3M05U?=
- =?utf-8?B?YW9FYTFXd1Rmam56dkg1KzVRclA5RDRLRzBkaEVwa3owL1FWZDJGSWQzRWx1?=
- =?utf-8?B?M2lYVVRvMitkcVBXOUFWYWYzdk50S25xNmpOSVl5cDU1TDV4NmNjOGM2S2Zq?=
- =?utf-8?B?dmtOcy9TY1FiRWNDd1ErSEUvTXVQNm9YRThmbjFka2h1MFpSVkZlOVBycmE4?=
- =?utf-8?B?bCtlWUkvcnZSaTkrcjA1ZGQrYnpiNlpLd2tFeEZUMDg3Z3drZzJ5eTBSZUdv?=
- =?utf-8?B?R0VTTTl5VVZFeFBqVmxMVzJKK0tmb0h2N2JMcmorNDdyN1JvU3RlNlVYNVFv?=
- =?utf-8?B?d01RQUtDNXRTMytZT2haUEJvZ3dnTFVYR3RGWkR0TEFnOHl4VjBsemJuVWty?=
- =?utf-8?B?eThUaGJjVHlqUE1BZndpTnpVcXlMclVobWQ0Rm4xNU4rbDEvMkZueWg5c2dX?=
- =?utf-8?B?ZlFWQVZBeCs1UlpFa213Vm1JbTBTRW5HR0k5YlBFTjhPL1hkT1VzY0s5ckFo?=
- =?utf-8?B?dTBNUG85eTBhemgxUldkTlZrUVgwK1FZMktDNTZJUjVmaFh6ZDFzVDRNL0ZF?=
- =?utf-8?B?alFrOGdtWXRaTzZZOWxhakFoblRJbUl5MTYxNi9pUHVVSkMrK1FOcjN1SFE3?=
- =?utf-8?B?ZjI5VE1jRW5OaVR5NVBibDFSTmZrU0x2bUw4RS9xYnBETnVoOG5VZXhNNC9L?=
- =?utf-8?B?Y1NFNUJtZFRKZ2FxYzRmSXkyTFV2cFVkbVc2RlM1VzU3a3dsWW4vakpnanhj?=
- =?utf-8?B?bUZkMFE3NWdhV0VyY0Mzd3o5M2V0K1g5VjFGM3U5UW5QVkNFdmUxa1N5NkVo?=
- =?utf-8?B?N1NkeW5Gcm1BNmpYN1hzbGFUZ3phcXRwelFsS1FSMTlrQ25jUVhSRU5KSmFB?=
- =?utf-8?B?TkZkREZUNUdrOUxyOTNZVFRBYmRBPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013)(13003099007);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|1800799024|376014|7416014|366016|10070799003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dy9MaHpHcEEwVnRuVkJFK291SzdHdWtrY1BIS05sR1pZc09SamVkVVQzR1Ey?=
+ =?utf-8?B?Tm9XSEZqbjlJMjBLUnFCYkN6RVZ0SzJSbjkzWmNxOThodDUwMzB6aElCMDJo?=
+ =?utf-8?B?ZE1EdXY1RE91RkJJdXc3NkxtNVhURXMxMzhrTXhFVmlXbENPWUkvM1U4WXY3?=
+ =?utf-8?B?U2EvWG5CYWxTVEdEc2c5VGdoeHAwRi9TOXVKc3dvSUVqaUQ2elViZTcwOXNU?=
+ =?utf-8?B?ODhSWlBUT1ZDRXR6a1k4V3N2ZlNOaXFNVnEraGorT2h6ME1iV2ZaaDdIOG1F?=
+ =?utf-8?B?KzEyZDVDS3crNGNiWXRtL1BUbVJKcGxNSzJDZy9Ib2kyTUJrVjdxRE51UHNO?=
+ =?utf-8?B?elltQlVHcXFUREVtR1ZOa2ovOE5PQUZsN01SWUpnSGdiYnV5WFh2bXp6NHMy?=
+ =?utf-8?B?a05QUFRoVURyaVZZZlBEVUZZZndOcVF2NUU0Zis3Y2xjTnIvZEF5U0xIVW55?=
+ =?utf-8?B?c1VmUGtmeWRNYmZ1WVR6WENpUnZaSk1YNEFLbXI1QkErMC9tejAyMWZEUDVh?=
+ =?utf-8?B?aDBFQnFiZmN2eU1tV2hFTmRjSGpkaE9SemRQS3pieGM1Zkw1R3YyV0RTenF4?=
+ =?utf-8?B?azdaR2xkMnhjSm1QTTR4ZVpCWmFLRHpWYlFUN1hVMXZOK0tFT1hBZ2pmNVZD?=
+ =?utf-8?B?TFRheXA1WTkxRWM0NTJjMForODRxenZzWWdkbGxJWFB0UkIwcWQ5R0NBaFFF?=
+ =?utf-8?B?ZmVYTDhzUGpCUnc1RjViNVhwbVFqVTdpMmc4UG5SNlFBRmM1MHJCRHFMVmt0?=
+ =?utf-8?B?QVQzMUEyWFArZjBoNkRBK1RUaHpNZWxlOWlKUCtQU3VnbnRIbHlYeWVZeGF3?=
+ =?utf-8?B?Qi90ZHF3eEM1KzdadlVmaVBpalZUaGRnOHQ5V24ydTNmaGtzWUZicG14eEFM?=
+ =?utf-8?B?b1VjcFVkeTJoU05hL3dCS05ZdnVmUzJKVnArT0VDdXR3dU02TS9pZUI2bERa?=
+ =?utf-8?B?WElSTDZrZkhoOG4rVE9WQmhLYWhRZk1LVGlKL1VQZm52SGlvazhxbER4UkRG?=
+ =?utf-8?B?V3ZwSDBRb0xOdU9GSUN5TlpLeC9PUEEyYWNzQUJwdWZWNlVYV0UxdXlsNzR4?=
+ =?utf-8?B?UndxSFRteWhaZmxzMzNocCtOZGlCc2V0eDIyZW9xY1VwT2tadlhORHIrUHJI?=
+ =?utf-8?B?VTh2S0NoTlBhZ01nY0tiV0Q1Nzk3WU5udnFVeW94dFRVb0t0cm93VUp0Ykty?=
+ =?utf-8?B?enU3d0FXMm9IZ2tsZUxjdWJMWEhIRnYyaDBUUVBVY09ZdUExc1JHbktOU0ov?=
+ =?utf-8?B?U2RQZGxNNXI2bkVONkl6ZW1DRFIwZ0JNaW1rcDQ0NGFMeWdVbUlodE53cjlJ?=
+ =?utf-8?B?UU5sMzAxQnVURTIxL2g5U1lPd3U5QkkzWHo2bkdYeEdwSVI0cHY0TFQyMGl3?=
+ =?utf-8?B?TzdENkxLam5Bbm5nY0FRdlQvQVp3NVpKOG5yWC9nQW90MXF4SE1ZUUpER0xa?=
+ =?utf-8?B?bWZWS2NDdExOcHNoTkU4ZFlYMnYwYUdKVit5RkNUNjNnM2VubnhsTkl5RTQ4?=
+ =?utf-8?B?bFNzSGlBeGsrQ2JiQmxKNEdadi9KRWlUZ09HWFowQnkzMnl3czNuNnFNM2Fh?=
+ =?utf-8?B?VjRQRDhXajNsZy84Ymk3OFlYcTh4RzBjY3NPaEdiOXROOXlSbnJ6UHBNYnF5?=
+ =?utf-8?B?NUl4RVN5MzA2eUQ5ZVBBajdXT1lHaXZNWEp6V08vVHpITWxjQTNjK3N6YWw1?=
+ =?utf-8?B?YXVvZzdiZEd1Y2M1NVhndDdwT00rQ0pIbS8yRUxiKzdUMGQ0L0hEd20wS1hi?=
+ =?utf-8?B?cTJnTDE2NGMrV2Q4a3F1T2c3TXcvblJ3OW5LRmRRYjZsMnlTTERWWnBNK1Ay?=
+ =?utf-8?B?WmdFY1hRQ294citqY25lVnBHZ05BcG8xQnhES0JmM1RkYTE4d2htK2gxNkNI?=
+ =?utf-8?B?YzlmbGNMUmhYaEZVTUJ3VlJDNE9oNkdsRmVINkJ4NEwxZ01wVXE2QThnVlE1?=
+ =?utf-8?B?UWJlUjRZOC9BdlR5ejRDU2xsTzQ3YkdvZVB5ci9rUzRERGxnN1E4aUl1U0dv?=
+ =?utf-8?B?aDFKTk50eXZpUkZJamYrN1dBL2RsYytWQk9raFhuYVU0SWNOT1lIVDJXT1hX?=
+ =?utf-8?B?aXdzd3NObEFOY2ZjY1lnMGY5VWZuLzZkazczVmNnMWtVa3F3cWZoa1ByVUlj?=
+ =?utf-8?Q?SEQA=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(10070799003); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: usKIyg136whIXAdh5rFLMYQaK0frivJOIidHP8yq1kzb/KtcQlE5Q6Mhb8hTbpsyw+viRapxT3hP6OeJSWyxTsaD3H27fTfMMH2jmq2paJkfxI4jS98rE5rxSiQKm5RButrZ43P2GFgmcpzw/iDfDoIZd+55VWQwQdRxEDEgUNoPCrVtezSQxvdgnp7Zw4yOqHYEGZN5uHWd/raZpFoXhbRhwQV/wVxdeIZuEMRa3LF7i8AzcT9SmUlU+npTg825bCC0Fc3I2v15WyO0lUtiMfNd/1QVkIc7ltXhAzVP3cXuRO434gwGjTnvJSUpc+7AcojIpJEOTCGNetFD+IRwzNUL8vrPH3SZt2w1K8QDRCfN2Efb9dR0iUDmu7evXO/CD7cVey6p4UYTTjxfjE/4PnrdBUFdFI9VONotb9lzpvd0SgO2gumeYvFI5dASrAHD
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:49:37.5654 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 325b1c39-2030-4099-1fff-08de634437b5
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885F.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR10MB7693
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aktzQnMvS050cFRWLzdzaFhmYUdJcStTb1dNYVVMVEtzU1k5UTI0UUxqN0Vq?=
+ =?utf-8?B?SXJ6bFNHOWsvNkZoTjgrVU9waDY5VmRwS0N0N2hYUVlpaDBYTWY4NlBWZ2NX?=
+ =?utf-8?B?a1N2RUZHL1VpV1FXNzhNNnVGK0RCbGRVODlIQWFBYkRZRTdCbnNnaFQrcUNv?=
+ =?utf-8?B?VHZ3YmgzZm02WStva0h0cGYweDdqekVyL1JTSTdzZ0tYcEJWUEpvMGQ1amhs?=
+ =?utf-8?B?MS9vQlZsRksxR2FUNVZvYXFXMzZlcnN1MUNVcElaZjFhTWhVd1dDYXlFMXlt?=
+ =?utf-8?B?M2pXMnRyRTBXQUtoWDZZQTFPY3Q4NnZna05CWlJKTVk1R1BFZXNNQ1pjQzFh?=
+ =?utf-8?B?M1RieWdESkpjUGdtK2JVNlpzWVUxajYzalBqT0dWUU45MEQ2QndHVXM2eXoy?=
+ =?utf-8?B?Smo3dnl3SytreW5QSnJJQ0lCSy9PU0VIdDZhZzloL2J5a1VLSjNVUnBnN1dG?=
+ =?utf-8?B?bkw5YllWMDFVZ3BaTWZYVTk0dW5vaFI5NnFaZVBKa3cvbDBOeEZ3Zk5xSW9m?=
+ =?utf-8?B?cVlMdE5RWnV4VnhGWkdTUVM0emFYTXZuUzdELzNiemZHL2E3TFR1YlMrZGFh?=
+ =?utf-8?B?QjduckFJNUw0d3YrRGxkNE9GSFl4cmpWVWYrdXRQR1dtWVRMT3dnUFpwRGJl?=
+ =?utf-8?B?UHBHQUtGYjd5aWRuR1BaU3A5VnJLUi9TWDBwdnF3cVlQSkFkWXdueTlzZEFa?=
+ =?utf-8?B?VFo0cUw2TDhkck9ha0dLSmdLSHlmVWVGUzNwMUxIb2JtbzRKM1ZIRDVLaXVI?=
+ =?utf-8?B?VmxZWlBVQ1VOdWFhZEU5OTBoT3JPNmRMTUN3OXBCWkNERjZwTEN6SGZ1Y2hY?=
+ =?utf-8?B?L3FNcldUTVVIVWdlMkY3TERtQWFqazZCeEdQUVlMTEU2a0FIazR2RHcyT3Rq?=
+ =?utf-8?B?bjd2cVFGTzlEaklGUTBZdkhUYllkNVZzcTJrdm9nL0c2cTJBTVVBdVRPYVpS?=
+ =?utf-8?B?M2lxS1FDM2dVeUZpTGJUNHliSWs1d2tLTzR3MFdwdnpycnkvYzF5dkFxU2Q3?=
+ =?utf-8?B?SlJtWS9Md1pJcVhZRXloOE5xRzlNK09SMmJJVktaa0Z4VnVpbzRkR1R0OTdo?=
+ =?utf-8?B?MUtWeXhjZG9zV080RUkwRWhsdnBoT0ozUmxzYnMrMDBFV09OMUxtOGFNSXFx?=
+ =?utf-8?B?Q2lQUVpRcDI5eG5ielRRZFdUdndielhYQ1hGVlYrTFpjUXh3R21ObDYwYllQ?=
+ =?utf-8?B?ejVDNWMxNUFmenR3c0NzdlhvLy9YTTl0U0FJK2dObzF1QjNFWXl1TlBZdWg0?=
+ =?utf-8?B?aTBGK3Nheis2QmV6M3VGYTd3WEMyWTlKVFRiQmRQdElRNVBPeW01UHdBcER5?=
+ =?utf-8?B?ZGJsU2RBcnZ4LzFHTlU3Z09PRXdvS1czNThDUGtmdkJLY3RKTUR4c3RudXFw?=
+ =?utf-8?B?VUptZlNucVlNR0pKOVdHbXdOMHcrVnVic00vVTdtWW5kbXl0SU9ZUDl1K0k0?=
+ =?utf-8?B?aVRybURLUUMvSmNKMFR4ME03cWtEd2dVZ1graUlLaWxDNUdXejZWTGEwc3Ex?=
+ =?utf-8?B?NEE2NE4xcDRWdFpUQzA2UEI3NmVRUW9XdlpHWW9DWWlNNWlZUXk0eDZrZ1My?=
+ =?utf-8?B?bjJLa1ZPdzJSS2ZwZlRxY0NFSUdWWUFYdHREU0EwSkdnNFpmWDIwRlJBUHZ6?=
+ =?utf-8?B?R25JSm5IRys3UW5TQnltZFlYdGh4ZU5POXVHcDJIOWxxeEpFVUU4RkhjamNX?=
+ =?utf-8?B?eUdQNXVKMkx3OEZUZEhyb3NQdlliOFVRWDZsTURUcC9aSjIxR0RRd1lhekJ5?=
+ =?utf-8?B?UzBKNzZwdEo1c0NQTW9CZllvNitDci9aOVJWUmpPMzNONTN5Uks4anRxNDNH?=
+ =?utf-8?B?RnNSNmV1VUFtN2hmRElRZk5WTERxTlg4Mk1XaFR4TDJkWm1MWGgvczV4SW0w?=
+ =?utf-8?B?eTZmWFFFNGk1NmhtOHQxUXNldW9nc0dFVHF1d2crWXRsOGJNRVNaZU1FYW9w?=
+ =?utf-8?B?b0lGa3JLMmdVTEVKSFU4Ky9SUm1ybFFXQUZTMzJIOFNncXl3UG9LM3FpZDBH?=
+ =?utf-8?B?Q0lMV0xmQjlJZ3dvVm5JUVZqdlFqbDhtKytxZzE1RTY1U0x6U21KdHUrN3dJ?=
+ =?utf-8?B?L3J2TTI5YkJjSXhhSnJRbVg3Smg3YTVpM0Fpb01DK25HT01ucTlmM3pLN3JR?=
+ =?utf-8?B?SStPbHdEbmZKSVVsU0ZZaWZuVkxudUozWTlrZlZHTGJxaFloODd0TlF3dDM0?=
+ =?utf-8?B?Y1pBVmZxd3ExZEhIRXRjTVVDaG9FNnVENFVJQnVvMWplZXFkMFFOZGJPUStN?=
+ =?utf-8?B?akRoUjdXM3RIaDBLNkh5RkVrSmd2ZmRmRy9PeFlIaFlKSW9rSUpjUGJFNUdk?=
+ =?utf-8?B?SE52K21Nank0WFJURFdsTGFNOVZIelVqQmx6eWRqVndXbFZhYkRUU3l0WEJO?=
+ =?utf-8?Q?6995Mg9X5pRQotVUPE/5n6OV/U4l6kuO5C4xU?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51ae6433-3370-4fe9-e413-08de6345455e
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 16:57:10.1743 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: d6HANzVkY8aJDIkwxKYHwPUFl4s1KBQyKdz/OPdpmxZVuzLwhtA9Ea0azoUUinZy/dGCRHbNuwNzIrFuvopdzYNnbfE4FmDfVQoy8yUMBpo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9881
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,803 +204,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-STM32MP21 application processors (STM32 MPUs) based on a single
-Arm Cortex®-A35 core running up to 1.5 GHz and Cortex®-M33 core
-running at 300 MHz.
+Hi Marek,
 
-It is pin-compatible with the STM32MP2 series in the VFBGA361
-10×10 mm package: the STM32MP21 uses a subset of the STM32MP23
-pinout, which itself is a subset of the STM32MP25.
+On 2/3/26 5:38 PM, Marek Vasut wrote:
+> On 2/3/26 4:32 PM, Michal Simek wrote:
+>>
+>>
+>> On 2/3/26 12:39, Marek Vasut wrote:
+>>> On 2/3/26 8:52 AM, Michal Simek wrote:
+>>>> Hi,
+>>>>
+>>>> we need to wait more time for getting USB hub out of reset to be 
+>>>> able to do
+>>>> initialiation over i2c that's why use gpio-delay driver instead of 
+>>>> changing
+>>>> waiting time in usb hub driver. Waiting time depends on gpio wiring 
+>>>> on the
+>>>> board which is in some of our case going via SLG programmable device.
+>>> Can you not use some regulator or make the reset assert/deassert time 
+>>> configurable via DT property ?
+>>
+>> Sorry not following. delay is configurable via DT now - the patch 3/3 
+>> for example.
+> 
+> 3/3 never arrived in my mailbox, I think I was CCed only on 0 and 2 .
+> 
+>> This avoid a need to change usb5744 driver to wait longer time which 
+>> is what we discussed in past.
+> If the delay is configurable via DT, why would the driver have to be 
+> changed ?
 
-More details available here :
-https://www.st.com/en/microcontrollers-microprocessors/stm32mp2-series.html
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
- arch/arm/mach-stm32mp/Kconfig                  |  27 ++++
- arch/arm/mach-stm32mp/Kconfig.21x              |  37 +++++
- arch/arm/mach-stm32mp/Makefile                 |   3 +-
- arch/arm/mach-stm32mp/include/mach/stm32.h     |  12 +-
- arch/arm/mach-stm32mp/include/mach/sys_proto.h |  22 +++
- arch/arm/mach-stm32mp/stm32mp2/Makefile        |   1 +
- arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c     |   2 +
- arch/arm/mach-stm32mp/stm32mp2/cpu.c           |   2 +
- arch/arm/mach-stm32mp/stm32mp2/rifsc.c         |   1 +
- arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c    | 192 +++++++++++++++++++++++++
- board/st/common/Kconfig                        |   2 +-
- board/st/stm32mp2/Kconfig                      |  14 ++
- configs/stm32mp21_defconfig                    |  78 ++++++++++
- include/configs/stm32mp21_common.h             | 126 ++++++++++++++++
- include/configs/stm32mp21_st_common.h          |  51 +++++++
- 15 files changed, 564 insertions(+), 6 deletions(-)
-
-diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index 2716844b259..31b2746379d 100644
---- a/arch/arm/mach-stm32mp/Kconfig
-+++ b/arch/arm/mach-stm32mp/Kconfig
-@@ -84,6 +84,32 @@ config STM32MP15X
- 		STMicroelectronics MPU with core ARMv7
- 		dual core A7 for STM32MP157/3, monocore for STM32MP151
- 
-+config STM32MP21X
-+	bool "Support STMicroelectronics STM32MP21x Soc"
-+	select ARM64
-+	select CLK_STM32MP21
-+	select OF_BOARD
-+	select PINCTRL_STM32
-+	select STM32_RCC
-+	select STM32_RESET
-+	select STM32_SERIAL
-+	select STM32MP_TAMP_NVMEM
-+	select SYS_ARCH_TIMER
-+	select TFABOOT
-+	imply CLK_SCMI
-+	imply CMD_NVEDIT_INFO
-+	imply DM_REGULATOR
-+	imply DM_REGULATOR_SCMI
-+	imply OF_UPSTREAM
-+	imply OPTEE
-+	imply RESET_SCMI
-+	imply SYSRESET_PSCI
-+	imply TEE
-+	imply VERSION_VARIABLE
-+	help
-+		Support of STMicroelectronics SOC STM32MP21X family
-+		STMicroelectronics MPU with 1 A35 core and 1 M33 core
-+
- config STM32MP23X
- 	bool "Support STMicroelectronics STM32MP23x Soc"
- 	select ARM64
-@@ -195,6 +221,7 @@ config MFD_STM32_TIMERS
- 
- source "arch/arm/mach-stm32mp/Kconfig.13x"
- source "arch/arm/mach-stm32mp/Kconfig.15x"
-+source "arch/arm/mach-stm32mp/Kconfig.21x"
- source "arch/arm/mach-stm32mp/Kconfig.23x"
- source "arch/arm/mach-stm32mp/Kconfig.25x"
- source "arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig"
-diff --git a/arch/arm/mach-stm32mp/Kconfig.21x b/arch/arm/mach-stm32mp/Kconfig.21x
-new file mode 100644
-index 00000000000..dbde3d75ad4
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/Kconfig.21x
-@@ -0,0 +1,37 @@
-+if STM32MP21X
-+
-+choice
-+	prompt "STM32MP21X board select"
-+	optional
-+
-+config TARGET_ST_STM32MP21X
-+	bool "STMicroelectronics STM32MP21X boards"
-+	imply BOOTSTAGE
-+	imply CMD_BOOTSTAGE
-+	help
-+		target the STMicroelectronics board with SOC STM32MP21X
-+		managed by board/st/stm32mp2
-+		The difference between board are managed with devicetree
-+
-+endchoice
-+
-+config TEXT_BASE
-+	default 0x84000000
-+
-+config PRE_CON_BUF_ADDR
-+	default 0x84800000
-+
-+config PRE_CON_BUF_SZ
-+	default 4096
-+
-+if DEBUG_UART
-+
-+# debug on USART2 by default
-+config DEBUG_UART_BASE
-+	default 0x400e0000
-+
-+endif
-+
-+source "board/st/stm32mp2/Kconfig"
-+
-+endif
-diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-index eeb5fdd7b45..853469f3c50 100644
---- a/arch/arm/mach-stm32mp/Makefile
-+++ b/arch/arm/mach-stm32mp/Makefile
-@@ -8,8 +8,9 @@ obj-y += syscon.o
- obj-y += bsec.o
- obj-y += soc.o
- 
--obj-$(CONFIG_STM32MP15X) += stm32mp1/
- obj-$(CONFIG_STM32MP13X) += stm32mp1/
-+obj-$(CONFIG_STM32MP15X) += stm32mp1/
-+obj-$(CONFIG_STM32MP21X) += stm32mp2/
- obj-$(CONFIG_STM32MP23X) += stm32mp2/
- obj-$(CONFIG_STM32MP25X) += stm32mp2/
- 
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 90f06a052d3..7f349f3b68d 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -165,16 +165,20 @@ enum forced_boot_mode {
- #endif /* __ASSEMBLY__ */
- #endif /* CONFIG_STM32MP15X || CONFIG_STM32MP13X */
- 
--#if defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
-+#if defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
- #define STM32_USART2_BASE		0x400E0000
- #define STM32_USART3_BASE		0x400F0000
- #define STM32_UART4_BASE		0x40100000
- #define STM32_UART5_BASE		0x40110000
- #define STM32_USART6_BASE		0x40220000
-+#ifdef CONFIG_STM32MP25X
- #define STM32_UART9_BASE		0x402C0000
-+#endif
- #define STM32_USART1_BASE		0x40330000
- #define STM32_UART7_BASE		0x40370000
-+#ifdef CONFIG_STM32MP25X
- #define STM32_UART8_BASE		0x40380000
-+#endif
- #define STM32_RCC_BASE			0x44200000
- #define STM32_TAMP_BASE			0x46010000
- #define STM32_SDMMC1_BASE		0x48220000
-@@ -194,7 +198,7 @@ enum forced_boot_mode {
- 
- #define TAMP_FWU_BOOT_IDX_MASK		GENMASK(3, 0)
- #define TAMP_FWU_BOOT_IDX_OFFSET	0
--#endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
-+#endif /* defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
- 
- /* offset used for BSEC driver: misc_read and misc_write */
- #define STM32_BSEC_SHADOW_OFFSET	0x0
-@@ -218,14 +222,14 @@ enum forced_boot_mode {
- #define BSEC_OTP_MAC	57
- #define BSEC_OTP_BOARD	60
- #endif
--#if defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
-+#if defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
- #define BSEC_OTP_SERIAL	5
- #define BSEC_OTP_RPN	9
- #define BSEC_OTP_REVID	102
- #define BSEC_OTP_PKG	122
- #define BSEC_OTP_BOARD	246
- #define BSEC_OTP_MAC	247
--#endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
-+#endif /* defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
- 
- #ifndef __ASSEMBLY__
- #include <asm/types.h>
-diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-index 2a4837184fc..47a6db79bca 100644
---- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-+++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-@@ -30,6 +30,20 @@
- #define CPU_STM32MP131Fxx	0x05010EC8
- #define CPU_STM32MP131Dxx	0x05010EC9
- 
-+/* ID for STM32MP21x = Device Part Number (RPN) (bit31:0) */
-+#define CPU_STM32MP211Axx	0x40073E7D
-+#define CPU_STM32MP211Cxx	0x0007307D
-+#define CPU_STM32MP211Dxx	0xC0073E7D
-+#define CPU_STM32MP211Fxx	0x8007307D
-+#define CPU_STM32MP213Axx	0x40073E1D
-+#define CPU_STM32MP213Cxx	0x0007301D
-+#define CPU_STM32MP213Dxx	0xC0073E1D
-+#define CPU_STM32MP213Fxx	0x8007301D
-+#define CPU_STM32MP215Axx	0x40033E0D
-+#define CPU_STM32MP215Cxx	0x0003300D
-+#define CPU_STM32MP215Dxx	0xC0033E0D
-+#define CPU_STM32MP215Fxx	0x80
-+
- /* ID for STM32MP23x = Device Part Number (RPN) (bit31:0) */
- #define CPU_STM32MP235Cxx	0x00082182
- #define CPU_STM32MP233Cxx	0x000B318E
-@@ -67,6 +81,7 @@ u32 get_cpu_type(void);
- 
- #define CPU_DEV_STM32MP15	0x500
- #define CPU_DEV_STM32MP13	0x501
-+#define CPU_DEV_STM32MP21	0x503
- #define CPU_DEV_STM32MP23	0x505
- #define CPU_DEV_STM32MP25	0x505
- 
-@@ -102,6 +117,13 @@ u32 get_cpu_package(void);
- #define STM32MP15_PKG_AD_TFBGA257	1
- #define STM32MP15_PKG_UNKNOWN		0
- 
-+/* package used for STM32MP21x */
-+#define STM32MP21_PKG_CUSTOM		0
-+#define STM32MP21_PKG_AL_VFBGA361	1
-+#define STM32MP21_PKG_AN_VFBGA273	3
-+#define STM32MP21_PKG_AO_VFBGA225	4
-+#define STM32MP21_PKG_AM_TFBGA289	5
-+
- /* package used for STM32MP23x */
- #define STM32MP23_PKG_CUSTOM		0
- #define STM32MP23_PKG_AL_VFBGA361	1
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-index 27fbf3ae728..b25af2e8934 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
-+++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-@@ -7,5 +7,6 @@ obj-y += cpu.o
- obj-y += arm64-mmu.o
- obj-y += rifsc.o
- obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
-+obj-$(CONFIG_STM32MP21X) += stm32mp21x.o
- obj-$(CONFIG_STM32MP23X) += stm32mp23x.o
- obj-$(CONFIG_STM32MP25X) += stm32mp25x.o
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c b/arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c
-index 36c631ef0c2..4f418b65d38 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c
-@@ -16,6 +16,7 @@
- 
- struct mm_region stm32mp2_mem_map[MP2_MEM_MAP_MAX] = {
- 	{
-+#if defined(CONFIG_STM32MP25X)
- 		/* PCIe */
- 		.virt = 0x10000000UL,
- 		.phys = 0x10000000UL,
-@@ -24,6 +25,7 @@ struct mm_region stm32mp2_mem_map[MP2_MEM_MAP_MAX] = {
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
- 	}, {
-+#endif
- 		/* LPSRAMs, VDERAM, RETRAM, SRAMs, SYSRAM: alias1 */
- 		.virt = 0x20000000UL,
- 		.phys = 0x20000000UL,
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-index e081dc605b8..75befecbc2b 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-@@ -128,8 +128,10 @@ static void setup_boot_mode(void)
- 		STM32_UART5_BASE,
- 		STM32_USART6_BASE,
- 		STM32_UART7_BASE,
-+#ifdef CONFIG_STM32MP25X
- 		STM32_UART8_BASE,
- 		STM32_UART9_BASE
-+#endif
- 	};
- 	const u32 sdmmc_addr[] = {
- 		STM32_SDMMC1_BASE,
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-index f8f67af4449..cf8026088f3 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-+++ b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-@@ -367,6 +367,7 @@ static int stm32_rifsc_remove(struct udevice *bus)
- }
- 
- static const struct udevice_id stm32_rifsc_ids[] = {
-+	{ .compatible = "st,stm32mp21-rifsc" },
- 	{ .compatible = "st,stm32mp25-rifsc" },
- 	{},
- };
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c
-new file mode 100644
-index 00000000000..40d0f329496
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c
-@@ -0,0 +1,192 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2026, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#define LOG_CATEGORY LOGC_ARCH
-+
-+#include <log.h>
-+#include <syscon.h>
-+#include <asm/io.h>
-+#include <asm/arch/stm32.h>
-+#include <asm/arch/sys_proto.h>
-+
-+/* SYSCFG register */
-+#define SYSCFG_DEVICEID_OFFSET		0x6400
-+#define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
-+#define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
-+
-+/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
-+#define REVID_SHIFT	0
-+#define REVID_MASK	GENMASK(5, 0)
-+
-+/* Device Part Number (RPN) = OTP9 */
-+#define RPN_SHIFT	0
-+#define RPN_MASK	GENMASK(31, 0)
-+
-+/* Package = bit 0:2 of OTP122 => STM32MP21_PKG defines
-+ * - 000: Custom package
-+ * - 001: VFBGA361 => AL = 10x10, 361 balls pith 0.5mm
-+ * - 011: VFBGA273 => AN = 11x11, 273 balls pith 0.5mm
-+ * - 100: VFBGA225 => AO =   8x8, 225 balls pith 0.5mm
-+ * - 101: TFBGA289 => AM = 14x14, 289 balls pith 0.8mm
-+ * - others: Reserved
-+ */
-+#define PKG_SHIFT	0
-+#define PKG_MASK	GENMASK(2, 0)
-+
-+static u32 read_deviceid(void)
-+{
-+	void *syscfg = syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-+
-+	return readl(syscfg + SYSCFG_DEVICEID_OFFSET);
-+}
-+
-+u32 get_cpu_dev(void)
-+{
-+	return (read_deviceid() & SYSCFG_DEVICEID_DEV_ID_MASK) >> SYSCFG_DEVICEID_DEV_ID_SHIFT;
-+}
-+
-+u32 get_cpu_rev(void)
-+{
-+	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
-+}
-+
-+/* Get Device Part Number (RPN) from OTP */
-+u32 get_cpu_type(void)
-+{
-+	return get_otp(BSEC_OTP_RPN, RPN_SHIFT, RPN_MASK);
-+}
-+
-+/* Get Package options from OTP */
-+u32 get_cpu_package(void)
-+{
-+	return get_otp(BSEC_OTP_PKG, PKG_SHIFT, PKG_MASK);
-+}
-+
-+int get_eth_nb(void)
-+{
-+	int nb_eth;
-+
-+	switch (get_cpu_type()) {
-+	case CPU_STM32MP215Axx:
-+		fallthrough;
-+	case CPU_STM32MP215Cxx:
-+		fallthrough;
-+	case CPU_STM32MP215Dxx:
-+		fallthrough;
-+	case CPU_STM32MP215Fxx:
-+		fallthrough;
-+	case CPU_STM32MP213Axx:
-+		fallthrough;
-+	case CPU_STM32MP213Cxx:
-+		fallthrough;
-+	case CPU_STM32MP213Dxx:
-+		fallthrough;
-+	case CPU_STM32MP213Fxx:
-+		nb_eth = 2; /* dual ETH */
-+		break;
-+	case CPU_STM32MP211Axx:
-+		fallthrough;
-+	case CPU_STM32MP211Cxx:
-+		fallthrough;
-+	case CPU_STM32MP211Dxx:
-+		fallthrough;
-+	case CPU_STM32MP211Fxx:
-+		nb_eth = 1; /* single ETH */
-+		break;
-+	default:
-+		nb_eth = 0;
-+		break;
-+	}
-+
-+	return nb_eth;
-+}
-+
-+void get_soc_name(char name[SOC_NAME_SIZE])
-+{
-+	char *cpu_s, *cpu_r, *package;
-+
-+	cpu_s = "????";
-+	cpu_r = "?";
-+	package = "??";
-+	if (get_cpu_dev() == CPU_DEV_STM32MP21) {
-+		switch (get_cpu_type()) {
-+		case CPU_STM32MP215Fxx:
-+			cpu_s = "215F";
-+			break;
-+		case CPU_STM32MP215Dxx:
-+			cpu_s = "215D";
-+			break;
-+		case CPU_STM32MP215Cxx:
-+			cpu_s = "215C";
-+			break;
-+		case CPU_STM32MP215Axx:
-+			cpu_s = "215A";
-+			break;
-+		case CPU_STM32MP213Fxx:
-+			cpu_s = "213F";
-+			break;
-+		case CPU_STM32MP213Dxx:
-+			cpu_s = "213D";
-+			break;
-+		case CPU_STM32MP213Cxx:
-+			cpu_s = "213C";
-+			break;
-+		case CPU_STM32MP213Axx:
-+			cpu_s = "213A";
-+			break;
-+		case CPU_STM32MP211Fxx:
-+			cpu_s = "211F";
-+			break;
-+		case CPU_STM32MP211Dxx:
-+			cpu_s = "211D";
-+			break;
-+		case CPU_STM32MP211Cxx:
-+			cpu_s = "211C";
-+			break;
-+		case CPU_STM32MP211Axx:
-+			cpu_s = "211A";
-+			break;
-+		default:
-+			cpu_s = "21??";
-+			break;
-+		}
-+		/* REVISION */
-+		switch (get_cpu_rev()) {
-+		case OTP_REVID_1:
-+			cpu_r = "A";
-+			break;
-+		case OTP_REVID_1_1:
-+			cpu_r = "Z";
-+			break;
-+		case OTP_REVID_2:
-+			cpu_r = "B";
-+			break;
-+		default:
-+			break;
-+		}
-+		/* PACKAGE */
-+		switch (get_cpu_package()) {
-+		case STM32MP25_PKG_CUSTOM:
-+			package = "XX";
-+			break;
-+		case STM32MP21_PKG_AL_VFBGA361:
-+			package = "AL";
-+			break;
-+		case STM32MP21_PKG_AN_VFBGA273:
-+			package = "AN";
-+			break;
-+		case STM32MP21_PKG_AO_VFBGA225:
-+			package = "AO";
-+			break;
-+		case STM32MP21_PKG_AM_TFBGA289:
-+			package = "AM";
-+			break;
-+		default:
-+			break;
-+		}
-+	}
-+
-+	snprintf(name, SOC_NAME_SIZE, "STM32MP%s%s Rev.%s", cpu_s, package, cpu_r);
-+}
-diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
-index 94ec806949b..3d00f3f3331 100644
---- a/board/st/common/Kconfig
-+++ b/board/st/common/Kconfig
-@@ -1,7 +1,7 @@
- config CMD_STBOARD
- 	bool "stboard - command for OTP board information"
- 	depends on ARCH_STM32MP
--	default y if TARGET_ST_STM32MP13X || TARGET_ST_STM32MP15X || TARGET_ST_STM32MP23X || TARGET_ST_STM32MP25X
-+	default y if TARGET_ST_STM32MP13X || TARGET_ST_STM32MP15X || TARGET_ST_STM32MP21X || TARGET_ST_STM32MP23X || TARGET_ST_STM32MP25X
- 	help
- 	  This compile the stboard command to
- 	  read and write the board in the OTP.
-diff --git a/board/st/stm32mp2/Kconfig b/board/st/stm32mp2/Kconfig
-index e88c71a278e..d8882f113b6 100644
---- a/board/st/stm32mp2/Kconfig
-+++ b/board/st/stm32mp2/Kconfig
-@@ -1,3 +1,17 @@
-+if TARGET_ST_STM32MP21X
-+
-+config SYS_BOARD
-+	default "stm32mp2"
-+
-+config SYS_VENDOR
-+	default "st"
-+
-+config SYS_CONFIG_NAME
-+	default "stm32mp21_st_common"
-+
-+source "board/st/common/Kconfig"
-+endif
-+
- if TARGET_ST_STM32MP23X
- 
- config SYS_BOARD
-diff --git a/configs/stm32mp21_defconfig b/configs/stm32mp21_defconfig
-new file mode 100644
-index 00000000000..8ad31292579
---- /dev/null
-+++ b/configs/stm32mp21_defconfig
-@@ -0,0 +1,78 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_STM32MP=y
-+CONFIG_SYS_MALLOC_F_LEN=0x600000
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x90000000
-+CONFIG_ENV_OFFSET=0x900000
-+CONFIG_ENV_SECT_SIZE=0x40000
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp215f-dk"
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_SYS_LOAD_ADDR=0x84000000
-+CONFIG_STM32MP21X=y
-+CONFIG_DDR_CACHEABLE_SIZE=0x10000000
-+CONFIG_CMD_STM32KEY=y
-+CONFIG_TARGET_ST_STM32MP21X=y
-+CONFIG_SYS_MEMTEST_START=0x84000000
-+CONFIG_SYS_MEMTEST_END=0x88000000
-+CONFIG_API=y
-+CONFIG_SYS_MMC_MAX_DEVICE=3
-+CONFIG_FIT=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=1
-+CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-+CONFIG_SYS_PROMPT="STM32MP> "
-+# CONFIG_CMD_BDI is not set
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_CMD_ADTIMG=y
-+# CONFIG_CMD_ELF is not set
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+# CONFIG_CMD_LOADB is not set
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_LOG=y
-+CONFIG_CMD_UBI=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
-+CONFIG_OF_UPSTREAM_VENDOR="st"
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_IS_IN_UBI=y
-+CONFIG_ENV_UBI_PART="UBI"
-+CONFIG_ENV_UBI_VOLUME="uboot_config"
-+CONFIG_NO_NET=y
-+CONFIG_SYS_64BIT_LBA=y
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_GPIO=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_STM32F7=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_STM32_SDMMC2=y
-+CONFIG_MTD=y
-+CONFIG_USE_SYS_MAX_FLASH_BANKS=y
-+CONFIG_SPI_FLASH=y
-+CONFIG_PINCONF=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_RAM=y
-+# CONFIG_STM32MP1_DDR is not set
-+CONFIG_DM_RNG=y
-+CONFIG_SERIAL_RX_BUFFER=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+# CONFIG_OPTEE_TA_AVB is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_STM32MP=y
-+CONFIG_WDT_ARM_SMC=y
-+# CONFIG_UBIFS_SILENCE_DEBUG_DUMP is not set
-+CONFIG_ERRNO_STR=y
-diff --git a/include/configs/stm32mp21_common.h b/include/configs/stm32mp21_common.h
-new file mode 100644
-index 00000000000..e5129b13b3e
---- /dev/null
-+++ b/include/configs/stm32mp21_common.h
-@@ -0,0 +1,126 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
-+/*
-+ * Copyright (C) 2026, STMicroelectronics - All Rights Reserved
-+ *
-+ * Configuration settings for the STM32MP21x CPU
-+ */
-+
-+#ifndef __CONFIG_STM32MP21_COMMMON_H
-+#define __CONFIG_STM32MP21_COMMMON_H
-+#include <linux/sizes.h>
-+#include <asm/arch/stm32.h>
-+
-+/*
-+ * Configuration of the external SRAM memory used by U-Boot
-+ */
-+#define CFG_SYS_SDRAM_BASE	STM32_DDR_BASE
-+
-+/*
-+ * For booting Linux, use the first 256 MB of memory, since this is
-+ * the maximum mapped by the Linux kernel during initialization.
-+ */
-+#define CFG_SYS_BOOTMAPSZ	SZ_256M
-+
-+/*****************************************************************************/
-+#ifdef CONFIG_DISTRO_DEFAULTS
-+/*****************************************************************************/
-+
-+#ifdef CONFIG_NET
-+#define BOOT_TARGET_PXE(func)	func(PXE, pxe, na)
-+#else
-+#define BOOT_TARGET_PXE(func)
-+#endif
-+
-+#ifdef CONFIG_CMD_MMC
-+#define BOOT_TARGET_MMC0(func)	func(MMC, mmc, 0)
-+#define BOOT_TARGET_MMC1(func)	func(MMC, mmc, 1)
-+#define BOOT_TARGET_MMC2(func)	func(MMC, mmc, 2)
-+#else
-+#define BOOT_TARGET_MMC0(func)
-+#define BOOT_TARGET_MMC1(func)
-+#define BOOT_TARGET_MMC2(func)
-+#endif
-+
-+#ifdef CONFIG_CMD_UBIFS
-+#define BOOT_TARGET_UBIFS(func)	func(UBIFS, ubifs, 0, UBI, boot)
-+#else
-+#define BOOT_TARGET_UBIFS(func)
-+#endif
-+
-+#ifdef CONFIG_CMD_USB
-+#define BOOT_TARGET_USB(func)	func(USB, usb, 0)
-+#else
-+#define BOOT_TARGET_USB(func)
-+#endif
-+
-+#define BOOT_TARGET_DEVICES(func)	\
-+	BOOT_TARGET_MMC1(func)		\
-+	BOOT_TARGET_UBIFS(func)		\
-+	BOOT_TARGET_MMC0(func)		\
-+	BOOT_TARGET_MMC2(func)		\
-+	BOOT_TARGET_USB(func)		\
-+	BOOT_TARGET_PXE(func)
-+
-+/*
-+ * default bootcmd for stm32mp21:
-+ * for serial/usb: execute the stm32prog command
-+ * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-+ * for NAND or SPI-NAND boot, distro boot with UBIFS on UBI partition
-+ * for other boot, use the default distro order in ${boot_targets}
-+ */
-+#define STM32MP_BOOTCMD "bootcmd_stm32mp=" \
-+	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
-+	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
-+	"then stm32prog ${boot_device} ${boot_instance}; " \
-+	"else " \
-+		"run env_check;" \
-+		"if test ${boot_device} = mmc;" \
-+		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
-+		"if test ${boot_device} = nand ||" \
-+		  " test ${boot_device} = spi-nand ;" \
-+		"then env set boot_targets ubifs0; fi;" \
-+		"run distro_bootcmd;" \
-+	"fi;\0"
-+
-+#ifndef STM32MP_BOARD_EXTRA_ENV
-+#define STM32MP_BOARD_EXTRA_ENV
-+#endif
-+
-+#define STM32MP_EXTRA \
-+	"env_check=if env info -p -d -q; then env save; fi\0" \
-+	"boot_net_usb_start=true\0"
-+/*
-+ * memory layout for 96MB uncompressed/compressed kernel,
-+ * 1M fdt, 1M script, 1M pxe and 1M for overlay
-+ * and the ramdisk at the end.
-+ */
-+#define __KERNEL_COMP_ADDR_R	__stringify(0x84000000)
-+#define __KERNEL_COMP_SIZE_R	__stringify(0x04000000)
-+#define __KERNEL_ADDR_R		__stringify(0x8a000000)
-+#define __FDT_ADDR_R		__stringify(0x90000000)
-+#define __SCRIPT_ADDR_R		__stringify(0x90100000)
-+#define __PXEFILE_ADDR_R	__stringify(0x90200000)
-+#define __FDTOVERLAY_ADDR_R	__stringify(0x90300000)
-+#define __RAMDISK_ADDR_R	__stringify(0x90400000)
-+
-+#define STM32MP_MEM_LAYOUT \
-+	"kernel_addr_r=" __KERNEL_ADDR_R "\0" \
-+	"fdt_addr_r=" __FDT_ADDR_R "\0" \
-+	"scriptaddr=" __SCRIPT_ADDR_R "\0" \
-+	"pxefile_addr_r=" __PXEFILE_ADDR_R "\0" \
-+	"fdtoverlay_addr_r=" __FDTOVERLAY_ADDR_R "\0" \
-+	"ramdisk_addr_r=" __RAMDISK_ADDR_R "\0" \
-+	"kernel_comp_addr_r=" __KERNEL_COMP_ADDR_R "\0"	\
-+	"kernel_comp_size=" __KERNEL_COMP_SIZE_R "\0"
-+
-+#include <config_distro_bootcmd.h>
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	STM32MP_MEM_LAYOUT \
-+	STM32MP_BOOTCMD \
-+	BOOTENV \
-+	STM32MP_EXTRA \
-+	STM32MP_BOARD_EXTRA_ENV
-+
-+#endif
-+
-+#endif /* __CONFIG_STM32MP21_COMMMON_H */
-diff --git a/include/configs/stm32mp21_st_common.h b/include/configs/stm32mp21_st_common.h
-new file mode 100644
-index 00000000000..c601f2d7fb6
---- /dev/null
-+++ b/include/configs/stm32mp21_st_common.h
-@@ -0,0 +1,51 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
-+/*
-+ * Copyright (C) 2026, STMicroelectronics - All Rights Reserved
-+ *
-+ * Configuration settings for the STMicroelectonics STM32MP21x boards
-+ */
-+
-+#ifndef __CONFIG_STM32MP21_ST_COMMON_H__
-+#define __CONFIG_STM32MP21_ST_COMMON_H__
-+
-+#define STM32MP_BOARD_EXTRA_ENV \
-+	"usb_pgood_delay=2000\0" \
-+	"console=ttySTM0\0"
-+
-+#include <configs/stm32mp21_common.h>
-+
-+#ifdef CFG_EXTRA_ENV_SETTINGS
-+/*
-+ * default bootcmd for stm32mp21 STMicroelectronics boards:
-+ * for serial/usb: execute the stm32prog command
-+ * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-+ * for nand or spi-nand boot, distro boot with ubifs on UBI partition or
-+ * sdcard
-+ * for nor boot, distro boot on SD card = mmc0 ONLY !
-+ */
-+#define ST_STM32MP21_BOOTCMD "bootcmd_stm32mp=" \
-+	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
-+	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
-+	"then stm32prog ${boot_device} ${boot_instance}; " \
-+	"else " \
-+		"run env_check;" \
-+		"if test ${boot_device} = mmc;" \
-+		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
-+		"if test ${boot_device} = nand ||" \
-+		  " test ${boot_device} = spi-nand ;" \
-+		"then env set boot_targets ubifs0 mmc0; fi;" \
-+		"if test ${boot_device} = nor;" \
-+		"then env set boot_targets mmc0; fi;" \
-+		"run distro_bootcmd;" \
-+	"fi;\0"
-+
-+#undef CFG_EXTRA_ENV_SETTINGS
-+#define CFG_EXTRA_ENV_SETTINGS \
-+	STM32MP_MEM_LAYOUT \
-+	ST_STM32MP21_BOOTCMD \
-+	BOOTENV \
-+	STM32MP_EXTRA \
-+	STM32MP_BOARD_EXTRA_ENV
-+
-+#endif
-+#endif
-
--- 
-2.43.0
-
+Delay is configurable via DT for the GPIO delay device. The delay is NOT 
+configurable via DT for the USB onboard hub device. Because of the 
+latter, the former is added as GPIO controller for adding delay to the 
+latter driver's reset line.
