@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA86E8B365
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 21:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9A0E8B361
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 21:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC5183DA7;
+	by phobos.denx.de (Postfix) with ESMTP id B83CE83DFF;
 	Tue,  3 Feb 2026 22:12:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hRHXz9Of";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Deok1/NN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 839DA83DEC; Tue,  3 Feb 2026 22:12:35 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 5E49883DF3; Tue,  3 Feb 2026 22:12:36 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6352383DBF
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 22:12:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2ECD683D77
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 22:12:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-662f2fa7e67so2112753eaf.1
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 13:12:33 -0800 (PST)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-40974bf7781so165521fac.0
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 13:12:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770153152; x=1770757952; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770153153; x=1770757953; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4QJ36y+iO24tYXYSFr+68AaPtC8ugLap5gRtN+tSjrk=;
- b=hRHXz9OfCXJpKmjQhSa3gTHzd5s9ODfqruLaSEG7bRNaWmqgYCK6TDw1QghTx7wOWY
- MwE4EwOmILrgJCoTH4FjCCpOawZ4Qc7EgsZFQVriwnXghN1Xjkc/bQn+yppjwD7Ekbvm
- J796kc9+lKLrpHGEV1APysFqZy1yypTVTGC4Q=
+ bh=mLQineA4SAcSVOpyRZTqo7nvAdi2GU2FuGQBnCVaMR4=;
+ b=Deok1/NNuWIpe6liVLosDE8SrEMPxSCM5/p0Fiwlc4ghOjC3vFirbYKMczcne+IyNU
+ G4GDoSB4OpXbD9lcL5YlmkaoTwmU98NS4J+ooJ/EXin3ltNvvC58DJgAs7/YS0fRdmIU
+ wBE+jH4fd7wg9y86VdYrBOP4OaWCzXW+bnd6k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770153152; x=1770757952;
+ d=1e100.net; s=20230601; t=1770153153; x=1770757953;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4QJ36y+iO24tYXYSFr+68AaPtC8ugLap5gRtN+tSjrk=;
- b=sYMFVprmTZZRTIw4XxaBTboIC01I8U33+tzor6raiivz+Du9yI+830nJsiXMPRgjCH
- s9auDNpLyqAGmZ3RSmVrXgZymQJFtO6tpHciL9DGSsuu4AkU5UMqFzsorq2QsIFJrZnS
- wYO+Gx+EuFeGKhvKNsbrriumQtSbLyGNp58qMtxT2CmUZuyvdHdKpyEuodx/yMhc1kou
- v1ynscry4vQI85n0+lRrHKnx5numFzukyRrrGiVTs26IHC6VQ13pk0p0kUKwkX+ydZfz
- ksbyoLEfEC2M4JEiLU8trBJSZI5CuMua/n9F/5/Sr1+S53VpUYvCyDXgBHpuYcgPbU8h
- 2MYQ==
-X-Gm-Message-State: AOJu0Yw+c7DchhE4X64pUz7yIBztQpEq3239HGCdPknV6Eq2gPo1zK8G
- OrazlUUqrUD2IvHy2n4eM6ZPXxzJy/5HCoZVexWfIw4IftRzI1mAtKv4jyQ7CpySLmk=
-X-Gm-Gg: AZuq6aJyYPSVR2LZgWAsEOTHYeSm3+bS3Mf+hsfKibkHrRZd7VFZTDYZ1Ppn8Ftv1QL
- gevlbbrGO/XAetio1Kvh5ItET/fknIMVGYWDxgLApNkFSbub/B+mV7b37rpIoIArDzsykl44t4o
- LHHHiaSmZ1ovlGI9jAapMpAwIK9e01COJeCUT6WbRB7TSoZHcZ+avQsbmGdEX19wHW6UqWrhDPd
- U8H9Yt49tPDlj1KdAymzGb4clQksl2ZWQn2mlNvE3tvnr7dJRax5/Qg9nNUtYgrxqQETEofiwqG
- aisPQfOw5C9lDFfh2zjd0+jVVc97+dGf8YQ0ZAQbbQ2XsgJoWqVw8bp58kE1TVciZy7l227vJEl
- kdf4bZH/TuKQVZhQhZVS6gm985C6HRyJuhGASehrYfN+adI1QKUljNeTmu/KK9HiVPHb3nUa51M
- pF+ATvg+xeKVEGlhpo3i1UAtskPQxMhGFdoTpQX00k3yPp8atCOfrArQc//O/+sTy7OGN+5mT0N
- KdE6EAZePzGBbXuysUUrDiY/foX2tltWULESeY7wVITIpGX
-X-Received: by 2002:a05:6820:201:b0:663:2d3:6d7f with SMTP id
- 006d021491bc7-66a200b8fa9mr445369eaf.10.1770153152140; 
+ bh=mLQineA4SAcSVOpyRZTqo7nvAdi2GU2FuGQBnCVaMR4=;
+ b=exJJBILW+BswCIvlYK7anyEIB9/Q/Ozbbw4wYYIeO3InkMOrtF1u47wASFspdj5Gc6
+ dEOyroPP7WBHLbhvUquXy+5lMxMRXwKrBTk8VlcSW85yeWY5NmgdF6/P0ZjiauSS8p0m
+ wjJjqBCncHkjLM2KsYJnmdM2CLM5ZGgUADKkJV4CUaVng8EhFKaaq3Cjv38baHiDCDmv
+ 2h9aP6OEGxhjvp9CxnN3Qa+mpy0WyLS58797mirJ+UZr/RF9xkj9/QKZId5XxOJ+ynDL
+ 938NUm1GuDYg4hD7wJ5LmHWL98GMfEMFLKUmF+NpHNlF/BMYkGS8cDOhA6bz+HLIOhrI
+ Tfcg==
+X-Gm-Message-State: AOJu0YxbXxhJspJOZfYfJyy9jbFeWEPvQMc+aB/C4CiviB1M0ezJsK2X
+ tHH67JwB8DuZ0eXiawDHDs7+GImvk+Ik9iMEcWWkrfmuRcVnZYHeb8hfi+gy1dBFRGU=
+X-Gm-Gg: AZuq6aIjgQRRVshBL1HuZjOto7kvK55W1Ieir3/6yxjgPC7vI6sfYh8uCAeOCSZ3C+I
+ 6R+dJeGIKhgQLwYSqlrs7mUX2w7gsuJBD9EmwO05pByRmSs7Xr2/Qh7lLg6+s34z3R6Q7pLIBTw
+ iRwtaOoWgPqfX7y0q1C2tD4kYHoKlVVsn3fGMbraO2hwp4E3sF4cSlq/x7VNKTk4B685qMKKgXq
+ eSbBLcgQ3qPXwt07d6MV8eWNnzPv40exz+2+IMy11Mpe6cdkmE12V8jvKKis8pA3o3uUYu9SGic
+ W33eZsvNV44BTroY6XCgLDBaefADHLI9c+Mo7VzP9PBsSMOlRXw+h8dWJ2NVeO44StzcYDAMVo3
+ w5iBIlY8T8uYB74wDpTSGehRIIrCjaoCakZQIIP2sQigdLdOBjsRQu34JaB9AR5FUme2NEBvG2v
+ H2RQ0GRluAgdeDU4gQUZfsquMP8zTA2g3al4XKlcQVii2Ar7k8Q9hB45BJkZSFxkXxfOZQD41i6
+ 1gRQqcU4CbtpUQpc/MCmlT7bgL7djQnMp4He2fdvzVUpw34
+X-Received: by 2002:a05:6820:f06:b0:661:154a:c289 with SMTP id
+ 006d021491bc7-66a357aa1b9mr461216eaf.31.1770153152975; 
  Tue, 03 Feb 2026 13:12:32 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66a35f7a4besm324630eaf.17.2026.02.03.13.12.31
+ 006d021491bc7-66a35f7a4besm324630eaf.17.2026.02.03.13.12.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Feb 2026 13:12:31 -0800 (PST)
+ Tue, 03 Feb 2026 13:12:32 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Shiji Yang <yangshiji66@outlook.com>
-Cc: Weijie Gao <weijie.gao@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-In-Reply-To: <OSBPR01MB1670973BD7364B102A973F79BC5BA@OSBPR01MB1670.jpnprd01.prod.outlook.com>
-References: <OSBPR01MB1670973BD7364B102A973F79BC5BA@OSBPR01MB1670.jpnprd01.prod.outlook.com>
-Subject: Re: [PATCH] mips: mtmips: add CPU reset support for MT7628
-Message-Id: <177015315127.1503561.14171217297455205030.b4-ty@konsulko.com>
-Date: Tue, 03 Feb 2026 15:12:31 -0600
+To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Guillaume Ranquet <ranquet.guillaume@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+References: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+Subject: Re: [PATCH] x86: boot: fix unreachable else branch in boot_prep_linux
+Message-Id: <177015315228.1503561.3567918463826407363.b4-ty@konsulko.com>
+Date: Tue, 03 Feb 2026 15:12:32 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +97,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 27 Jul 2025 13:55:20 +0800, Shiji Yang wrote:
+On Thu, 11 Sep 2025 15:35:41 +0200, Guillaume Ranquet wrote:
 
-> Allow the system to reset the CPU without calling the reset
-> controller. This patch also removed the default SYSRESET controller
-> for MT7628, as it is now optional.
+> The else if branch uses the is_zimage boolean which is initialized to 0
+> and never set before being tested here.
+> 
+> remove the test on is_zimage to make this code reachable.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] mips: mtmips: add CPU reset support for MT7628
-      commit: 80a3572f9bc3fdd8f0b0fa73f2f853da71b059eb
+[1/1] x86: boot: fix unreachable else branch in boot_prep_linux
+      commit: 0cb8a88e7ab7824b7dc857fb6572705f3e19c456
 -- 
 Tom
 
