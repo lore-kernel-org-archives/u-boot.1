@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C12F0E8B365
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 21:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACEB5E8B362
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 21:29:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F0BE83DA7;
-	Tue,  3 Feb 2026 22:28:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 377DA802C1;
+	Tue,  3 Feb 2026 22:29:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="elYs1Su8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AJSrcmy0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF3DE83DBF; Tue,  3 Feb 2026 22:28:26 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 705DC83DA7; Tue,  3 Feb 2026 22:29:36 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 778B183D9C
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 22:28:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 376B983D9C
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 22:29:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b885e8c679bso951507566b.1
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 13:28:24 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770154104; cv=none;
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b8845cb580bso1011865766b.3
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 13:29:34 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770154174; cv=none;
  d=google.com; s=arc-20240605;
- b=cQZnSoK9hk71VEBRxnNbCCQhXMDo8gPOh5lWTLGnIxYCFGAJRf+WMFhsG5OLxJ0EJ0
- 2mwsj4wBaNuOjI25EXgc9SS7WHoLYyQiBtFMaqUj4LJyKRKbBHikjOW8fbpMmfEEl0Yy
- mpmuXP5+y9rq7vYY/2h++jr1F8TO7ehhv70lcNwXkjj5a0MR8AzAQQOzBOhS2DW87RyC
- Jvq2ENJBug/NIL0xGUo9gMAbv4GR7GnPRe775zRIwG5qtdKLOPbT4RTXjJvOa482tyPp
- FyCXkoQR6WOxLwjh3wioQztEUWwUD8a56Eh0jjN/u58wEldWY3fk0rRrpMs6n4mDNw9n
- A19g==
+ b=Zp+MmUu6ng9V9QUnWqoizZjnw/7Q71ytgJdLFDX/h2CFXWtibaP3hUre3GvqufDnqn
+ gk+p8OOk124ji6GUNt8dX8bWIcO/OtE7pDKHhcjHyKs5ZllAO/oN+J7peMz8pIcVLm7W
+ 0lf6G9Uy1hdkfi1RC7zxQCAbRaqeNwehQZdRrmnWAW2XqBvs7bmNXFe2ZcjwqLxoh4Ps
+ WXyFsTCBm4wsFzXRD4zIYg9t0JC/rULT1fAoZwvJtzNbT/ARtPcF2QcOwTqMFriCAvG7
+ 7r1kr9oa8jgGaWOuK1yAm8Lv7DhI1Tbkuw+AWH+1+MZtss/lIYLf76tY97qQupOwf0pu
+ Dsag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Q3MdWVKusWIF8O4uKVbhLBjl58p5gsTQxBqwT8yUb1I=;
- fh=mt6hdikiLjRlkDG5n5V3K+Z/7ENTLphBOIeI1WNZyAE=;
- b=awo9Ek+Rswrah2FPemOwlheOoCeHhVN0V+CXeWHHTaSrcyBCHLwhdv4GMUdGzdlaB7
- HZP+v0wHryeeXSAVdewar9JPrjDojQ/MHJt+uYEaKHTHunPiTH8z9BHexXJPPzWw57t/
- 8Z1p9mUJs3Btz+jwQj22+c0pakDdfn8AHNyILcN0Lk7Ne7emOgrYytEUB8MxMysp+5wc
- zfjrKYqLTm/utAjM2Arl1txFq5EmA4wPR/Lz5y6qQKmt16RXibTp9Hm9iPeIuv2YFYoE
- SmbUGCh9/sgFsdO00pv2pOIj5SQKuEuVdlJKaVx7cir6KQntGTuuDA7rRvAYzJcsnRpv
- 9GWA==; darn=lists.denx.de
+ bh=4GHJgGeiF5aBm23n3mWPMXAvDwCgCxzb1TIJHZa8pqg=;
+ fh=MhOytYmu8ayUQMxNcTtTMAja/xwhNJRqDC9iVEwZvXs=;
+ b=ceCSq6oRxAhrJpJDGDxZ3VnPdPNrPrzti7tKRfhpb8aVpCqtN6edgiS7z5DuHZVBcU
+ ZgtRkgsrR2bGSUojl40bGhGiYR1U3na3NMcz6qr1VtzbgMRENIFWHqh0NxGEp714UawC
+ hhnpXsLCr4xaO1ITinqeOEgJQEsMRsRMxg1oPArbl/RRx+KCbtd2tGiVZnzeECIzFgpB
+ tWcyn0OLN4+YKeXd4JoqtuqLG6UFDfaJ5rvfGRKruDXk2f5RuSmaIuPRVtjBebJsF/qW
+ 4SfPX9UUcOk//ZgQXbXjzHwQB6fXbpJFx2xRffStTefhqwgHXFJn+YxM4ZOZ+TaPkMB3
+ cZug==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1770154104; x=1770758904; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1770154174; x=1770758974; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q3MdWVKusWIF8O4uKVbhLBjl58p5gsTQxBqwT8yUb1I=;
- b=elYs1Su8c/oUtP8z6YGZ5im/BjJvRyp9zD867lycYFtXvmZKLbyVypD0G/KCkD/t9P
- 1ol0wWc6VZj0F2Qd5YJKGVOF5O6jlngFX1fzsSrPD4afNyqF60qWdeAxLB5RNwUca9TN
- cHsPulH0g2N7e7uSVfFaWe/PaHPEjzotVICx8=
+ bh=4GHJgGeiF5aBm23n3mWPMXAvDwCgCxzb1TIJHZa8pqg=;
+ b=AJSrcmy0/51NMgAkiNAXGETL+gTEPPiwUQ1ls4UZp4U2oosG9H7KwuFuzt8t8TvOUg
+ UhEZVhRmE5hyuJPVbCn6KuArL3Z5s/kZui5tFhEwiGNjC3p1qU1EtHkch5L9IkFsR04R
+ 7pnIGOfixqsQPVE/vkqEDj5gmgDXSkVQXiays=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770154104; x=1770758904;
+ d=1e100.net; s=20230601; t=1770154174; x=1770758974;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q3MdWVKusWIF8O4uKVbhLBjl58p5gsTQxBqwT8yUb1I=;
- b=lO8bAyDU60+WlBeuEPMD5MXp/VyiI3iD1ZU7KFJRxJVOXEe4BK2NYNzL3cEwyXdn7x
- y/tvTk8Ur2QlmrmhiesNeFgm0NJ7G5G5BPmoH/lkWAUuS17mx+DiH6rSN6UXNXk5j2gs
- No5TIdOY4l153Btvc6C0mYwCJSkd1j9yHQqbSQjBruHVHPHnmvw6EvZjy7MdrOghGl+b
- zB9We6eWkfBxPYyUpqhSczNXaUKLg8tekcIQdP8ARcrstGzY2xVSNLV7TewgQXgf/XgO
- K4ySCCr2Zkx5eGNM7yiN6h35XX5/3JGBQ89Twk4uziQENDrDl2ILcGu84VKtI41ys8g+
- HCHA==
+ bh=4GHJgGeiF5aBm23n3mWPMXAvDwCgCxzb1TIJHZa8pqg=;
+ b=adkPeQ8PZjMC+D5PI7JGKojcPTxEKwMalxGae0OjYWBXXzTo3BoV3zeCLpqIzuPPY6
+ QB16cTxYjGFbTM441JL95I7ado7QQwWPoH1zjVV7e03T00AoPuiy6G7MXv14RNvZICGx
+ 1Ajccw6FQCBgVSVhkcJNrUnLMqjL8GMLHIWIAMYexRcKx0804Q8np75MGNFAjZLcxDPv
+ fR8x3MLgjOlss+bagcweSl9oLRNrE65TAINwUjx0rek8TXzFTwq/P5FRYTESFmc7/fIx
+ SKUI755pBqnfVBQWX+iZnb9GaLMuYLhoD3qt6nohdu8cjDFLUv8C/XytfXmOBwOimuJC
+ LBkg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNDg8ZbzGL3E/1FM5kkKHQm9g99YG81Cx86mZ+d27uUzz0aUU4qtFXVDXaGJwVjczFvStgtV0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMBCiRw7DExxuMbff+pDdH50bA5sFhvtFE/mKR/BjG3ZibTC7e
- mLxMWCi01lU0IW+7l8hVi9SaCT1Fr5JIwQZ10WWfOR14RJ6rPty0p09ea3JgWNl5nYaMfOftHjs
- n7PYHMK+hIp2d/OfGj7r3c2MGiZwBcriaObnCXJT5
-X-Gm-Gg: AZuq6aKJD72Ew3AM8Tozm/D03kDGXlnYP+lAiu4x7QemzYwsOmwFmw6ht7KanHP8Z8e
- 6yx49opWrFJASZTiQTF+p2gUKOO/RaiSCoCAiN46yEsjvDh21UUC2aWyCwT70ExRb5B7Bgn22bO
- MQQU6wmwNAx92zM0TSrFUvv+DYiA9+C1MJRdTS4B7vI1fvsbuggyLYPcRgeOllVSCu5kyDn2Zdp
- c3t8wLzxqQBrSNy9pQpYQ9nGyiH5X1f5qCL7IaFBq9R8cnG/V4x7n7gvw/B8SOFRtBTiqY=
-X-Received: by 2002:a17:907:72c7:b0:b87:f6fc:aea9 with SMTP id
- a640c23a62f3a-b8e9f04c96fmr55067666b.9.1770154103784; Tue, 03 Feb 2026
- 13:28:23 -0800 (PST)
+ AJvYcCV2DNQoSjP96CNEhL/oOWq6BPrKmkwfR4Ijd1Z+C1lNwfvOWvIiUzWeA69/fyG+EAOh6fYbr0c=@lists.denx.de
+X-Gm-Message-State: AOJu0YwM6vUz4RFiarmftDkjtCmfBRSMFcGi+Vysqlzo5sHMR/+c3bo3
+ gHtKSR8J+MvSCVQwQUubEnolVk71zj5K72aR3kmk3UiOezXW11DC/+N7SoV4QJb9yOm9fYnrXwB
+ 4/LyQq28hv0fyy0UPplJBaanrMo0I0dj2bItWPagz
+X-Gm-Gg: AZuq6aJedndI1sXIdwv3sSsF17vczNgi8T1mbtMm7XGHzM/+MZJd1Aq/QlYlIjoSRvr
+ JNfqorUyfw48YqAdF6XECY7nlJKllqENmonprKbj/XnmCF07/dsmVNnaXmy0pFZL14m6le1uvnn
+ GR3ot7uYKgUTcqoxdLZTdx6AniiqZ+3LmaKRysvhJ6aDvvFLp0uJFztFIFZ5+vb6w5fYlNaBPz6
+ 8MFhV5dPj8NBEUvezWhkad908ch9SHPAsO+Be+5YozjXklde6NVM6Iow93vRm1cwbkBWu9FGWtt
+ /5CjOw==
+X-Received: by 2002:a17:907:fd18:b0:b83:a32f:8106 with SMTP id
+ a640c23a62f3a-b8e9f32ccfamr60226366b.46.1770154173634; Tue, 03 Feb 2026
+ 13:29:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
- <20260203180159.GP2603314@bill-the-cat>
-In-Reply-To: <20260203180159.GP2603314@bill-the-cat>
+ <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
+ <20260203181444.GQ2603314@bill-the-cat>
+In-Reply-To: <20260203181444.GQ2603314@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 4 Feb 2026 10:28:25 +1300
-X-Gm-Features: AZwV_QiYnCxDAnGqOLJo9-4YJaCpQ-7f9TcQZlxB7_SoG8lKdfBWu0MH4FvNWB8
-Message-ID: <CAFLszTi3dFNi0e4C3mSJAMJyh_+Ev1+NmhTtyAXXnHG0MK9e_Q@mail.gmail.com>
-Subject: Re: [PATCH 1/2] Fix x86 baytrail boot flow.
+Date: Wed, 4 Feb 2026 10:29:36 +1300
+X-Gm-Features: AZwV_Qgy3Yfb4Kjn1VaOHuI5VvQsU4KyodqJvry2dfTSqkAq4jN-idSBocJzJWM
+Message-ID: <CAFLszTgLx_TtEO-8qq_9uojLd7PgFdUuhs5_6kYqL7GuzFt7ow@mail.gmail.com>
+Subject: Re: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
 To: Tom Rini <trini@konsulko.com>
 Cc: Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
  u-boot@lists.denx.de, bmeng.cn@gmail.com
@@ -112,110 +114,42 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Wed, 4 Feb 2026 at 07:02, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 4 Feb 2026 at 07:14, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Jul 14, 2025 at 04:02:48PM -0500, Eric Schikschneit wrote:
+> On Mon, Jul 14, 2025 at 04:02:49PM -0500, Eric Schikschneit wrote:
 >
-> > It was found that on modern versions of GCC the transition from low level
-> > assembly into the C function 'fsp_find_header' was no longer valid. A detailed
-> > step by step analysis with GDB showed that various registers were not being
-> > initialized properly which would result in the hardware to fail to setup the
-> > Cache As Ram (CAR) portion. This failure cascades down into later stages of
-> > initialization because there is no valid stack, or memory for later functions.
+> > The VPD has been updated to include additional values found in the Intel
+> > FSP_MR5 Integration Guide.
 > >
-> > The function 'fsp_find_header' has been rewritten in assembly, which should
-> > no longer be dependant on a specific version of GCC in order to be usable on
-> > actual hardware.
+> > Disable MRC_CACHE for the baytrail platform as this will break the boot flow
+> > as well. This issue has not been diagnosed further, but I suspect it is similar
+> > to my previous patch and related to how modern GCC generates the low level
+> > op-codes.
 > >
-> > Testing was done using GCC 11.4.0 on Ubuntu 22.04.
-> > Hardware used for verification: Intel E3845 SoC
-> >
-> > Patch 1 of 2
+> > Patch 2 of 2
 > >
 > > Upstream-Status: Pending
 > >
 > > Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
->
-> Sorry for the delayed response here.
->
 > [snip]
-> > diff --git a/common/board_f.c b/common/board_f.c
-> > index 442b8349d08..3a9ae741d97 100644
-> > --- a/common/board_f.c
-> > +++ b/common/board_f.c
-> > @@ -860,6 +860,7 @@ __weak int clear_bss(void)
-> >  }
-> >
-> >  static const init_fnc_t init_sequence_f[] = {
-> > +     arch_fsp_init,          // FSP on platforms like baytrail MUST be done before memory ops
-> >       setup_mon_len,
-> >  #ifdef CONFIG_OF_CONTROL
-> >       fdtdec_setup,
-> > diff --git a/include/init.h b/include/init.h
-> > index 9a1951d10a0..21d9cea30f6 100644
-> > --- a/include/init.h
-> > +++ b/include/init.h
-> > @@ -68,6 +68,15 @@ int mach_cpu_init(void);
-> >   */
-> >  int arch_fsp_init_r(void);
-> >
-> > +/**
-> > + * arch_fsp_init() - perform firmware support package init
-> > + *
-> > + * Where U-Boot relies on binary blobs to handle part of the system init, this
-> > + * function can be used to set up the blobs. This is used on some Intel
-> > + * platforms.
-> > + */
-> > +int arch_fsp_init(void);
+> > +     /* Set all values to known good defaults as documented in       *
+> > +      * Intel FSP_MR5 file: BAYTRAIL_FSP.bsf                         */
 > > +
-> >  int dram_init(void);
-> >
-> >  /**
+> > +     /* NOTE: This breaks u-boot ability to set board options via    *
+> > +      * device tree, but guarantees specific known values..          *
+> > +      * you wouldnt use an uninitialized variable would you??        */
 >
-> Doing it this way will break other architectures. Can we just call the
-> function needed inside of x86 assembly?
+> /*
+>  * Multi-line comments like this please per
+>  * https://docs.u-boot.org/en/latest/develop/codingstyle.html
+>  */
+>
+> And we should spell out that device tree can't set these any more in the
+> commit message, along with spelling out why we can't do that anymore
+> safely (why can't we?). Thanks.
 
-Also I wonder what is different here. Is it a bug in gcc or something
-else. When I try -next on minnowmax I see some errors, but it does
-boot:
-
-$ ub-int minnowmax
-Building U-Boot in sourcedir for minnowmax
-Bootstrapping U-Boot from dir /tmp/b/minnowmax
-Writing U-Boot using method em100
-Bloblist at 0 not found (err=-2)
-alloc space exhausted ptr 400 limit 0
-Bloblist at 0 not found (err=-2)
-Bloblist at 0 not found (err=-2)
-alloc space exhausted ptr 400 limit 0
-Bloblist at 0 not found (err=-2)
-
-
-U-Boot 2026.01-rc5-00488-g6cdd7597a2fb (Feb 03 2026 - 14:20:37 -0700)
-
-CPU:   Intel(R) Atom(TM) CPU  E3825  @ 1.33GHz
-DRAM:  2 GiB (total 1.9 GiB)
-Core:  25 devices, 16 uclasses, devicetree: separate
-MMC:   pci_mmc: 0, pci_mmc: 1, pci_mmc: 2
-Loading Environment from SPIFlash... SF: Detected w25q64dw with page
-size 256 Bytes, erase size 4 KiB, total 8 MiB
-*** Warning - bad CRC, using default environment
-
-Model: Intel Minnowboard Max
-Net:   eth0: eth_rtl8169
-
-Hit any key to stop autoboot: 0
-=>
-
-This is with ~/..buildman-toolchains/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-
-
-but I also tried with
-~/.buildman-toolchains/gcc-11.1.0-nolibc/i386-linux/bin/i386-linux-
-and got the same result.
-
-I wonder if this is a bug in that particular version. Are you using
-the embedded toolchain, or just the host compiler? Both should
-normally work though...
+Again I am not seeing this problem with minnowmax, so would like a few
+more details.
 
 Regards,
 Simon
