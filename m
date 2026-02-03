@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E7FE8305A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 06:36:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79CDAE8305A
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 06:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44AD483FCF;
-	Tue,  3 Feb 2026 07:36:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8EF0883FD6;
+	Tue,  3 Feb 2026 07:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o0N1ydY5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FNhbC9WC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA5A883FD3; Tue,  3 Feb 2026 07:36:07 +0100 (CET)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id 5AD9B83FDC; Tue,  3 Feb 2026 07:36:15 +0100 (CET)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0300483FA4
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 07:36:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD0B783FA4
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 07:36:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WaqArfDo4y+TNeU2Y7oO6gvFfJNkXaK4fvt60xh+wUdigCT9SLBOH+MVe8rvDm+ZeU/6NEEHHLQ2QJL5G8S3sYjRApQdk228bSYuLe1h3lnVJSmwAk4jDvSTyhfiaSn81Hj2ETVMwmgKJIezXym/7pmwYk2w5zgLXNrZowzBkaJe+dtV9LKpAsE31LRnwXGJgAEBTDT4Un0VJDlKkhxudFoaHfiylrxHfBkd4m377nAx54GQzQXLlVR0p2a7vAGWIR9ojP3p90psn/c6v5I6lgIf4zpT/7wnzoyoFDFRKKHbb4lFhHQOtiFm+CCj/GNegtOAJ90zzpuSOsR1ndTV1g==
+ b=O5F1l7qQfyFV/JBXCii3jr4s0gjbNK6u/Xc9NO6sy4w+GhPBfTB+yDlwVL1UbbrybLdwl3TJRuQblNMYGBmN+CIn8iEG7O26PatdNLJ1CODKcV0s95ZzutYqmXr+JwSRqNxRxqjZgEHP3donNhA0hKJIJ7rJc17QwpATKf/MLMtOabSzZedt2gu8J5S6U57DpYYOrJvrzVTj+tUxIusQ/6wubCHYE7I9tUCLeCTwuViV1iVf37HGCKusFKqsy1Cppz3nf+/4w9KkFipbuI/HAF/1AwhVvoaaescf+xK9K85MNjFI7/VqheGQUdrzZA4+1oWsdkqYNl6w9VGPKmqMyg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OWrm3M9HgfP1K/pmxygCIo5k/jWSjy3d/2txHHCuTiQ=;
- b=pHT9NRyFJpjFHz6j5zG3RgV235kTdetHxgULTveOw3vS1F61+oh0kHgsPgxAgoV8H+6NqUBZUPDBPaKyCaYERtwEQbGVjznFwnPjgnjbJc3ZH/P9+UG/18zqiO17gL8dtw68BUEQNQfyZV9LyafSQaS0WTLNlDnQxSFoumXIId+UmMPhfm9TUZY7dGra8qVj253OVfBhT1mM1qx5YKDHkMS6pmYKTHVrgsvH2fqqVx2KCZt1HivXgF9305Qaiy9aTqszNJTzOcx07kgRg7cunlPsH1+/mjyempI/FeDidFkHT1QrD+qfsJGlQ9HQ98O3grBPA2ri27rWy2QXklaYgw==
+ bh=eVEOOEMDkL+blquSVdoxyF2pIsKxvQelKgSuzGCnZbU=;
+ b=FgJvPV8nHgvuskLvNp8qWHTfP3B4Hq+mffxrzOsplB/c/1otCxQmlIAb6VTvRLqiNfIud6TIlDiOEWjRbkqI6ddwobM/SxfIqZgJsbbF4eNn3LvEHMGkmdyr4IGNxiFuIasSaUPBngvcPrSaHXbsVG/xBEYUsJVwF/kJR1SExUkgKYBit7lz1uILAUtB8CI7Xbc0Q6isAk0kGUWedvRIdgfnPGClvrNjdZIeMIGkpX/MQYSX/K5rGGyr7B2R7034RIW5C93bWlKGnZM2lDKn+TleSZvPz/7qTE9V4GhqukmRf1HL53v2WCMUPsoseWdo9kpwDXxbFbGb2naT3DFtag==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OWrm3M9HgfP1K/pmxygCIo5k/jWSjy3d/2txHHCuTiQ=;
- b=o0N1ydY5HagTeKoSXmM7lKgMt6/bWFFAGB20cXJdfh5CU23hLpaR1Yz4NSEQAuCGCodDh+4gYfTkN0ajvILyV9WlLvwtKSkH4WNKeWcJd+6SIDbJ2gNjrqbLXx4j0hrT+WaIVevW5+dew4zBxZm1lKBVclCAvV7QCmxlJjGppEE=
-Received: from MN2PR05CA0060.namprd05.prod.outlook.com (2603:10b6:208:236::29)
- by PH0PR10MB5682.namprd10.prod.outlook.com (2603:10b6:510:147::19)
+ bh=eVEOOEMDkL+blquSVdoxyF2pIsKxvQelKgSuzGCnZbU=;
+ b=FNhbC9WCMcz0VEQtiKcJLJ3KY6hWSDokZy8q8iWvKXp98gwcDb5cIuGr4K8RzmiZQMzobu2Y4WIB2qTld/idiNk5zz+rD4DL2lwxuxzCSwmqYwxQnhaBE93YdOaRnQSOSknNh4bBga2pwEdDrIJBaPBn2oRZGVpahK4RcBf/EZA=
+Received: from SJ0PR03CA0127.namprd03.prod.outlook.com (2603:10b6:a03:33c::12)
+ by BY5PR10MB4210.namprd10.prod.outlook.com (2603:10b6:a03:201::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
- 2026 06:36:02 +0000
-Received: from BN2PEPF000055E0.namprd21.prod.outlook.com
- (2603:10b6:208:236:cafe::25) by MN2PR05CA0060.outlook.office365.com
- (2603:10b6:208:236::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Tue,
- 3 Feb 2026 06:35:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 2026 06:36:05 +0000
+Received: from SJ5PEPF000001CD.namprd05.prod.outlook.com
+ (2603:10b6:a03:33c:cafe::16) by SJ0PR03CA0127.outlook.office365.com
+ (2603:10b6:a03:33c::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.12 via Frontend Transport; Tue,
+ 3 Feb 2026 06:36:05 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BN2PEPF000055E0.mail.protection.outlook.com (10.167.245.10) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SJ5PEPF000001CD.mail.protection.outlook.com (10.167.242.42) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.0 via Frontend Transport; Tue, 3 Feb 2026 06:36:01 +0000
-Received: from DLEE212.ent.ti.com (157.170.170.114) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 06:36:04 +0000
+Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 3 Feb
- 2026 00:36:01 -0600
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 00:36:03 -0600
+Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 3 Feb
- 2026 00:36:01 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 00:36:03 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 3 Feb 2026 00:36:00 -0600
+ Transport; Tue, 3 Feb 2026 00:36:03 -0600
 Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
  [172.24.233.254])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6136Zn7X3483536;
- Tue, 3 Feb 2026 00:35:59 -0600
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6136Zn7Y3483536;
+ Tue, 3 Feb 2026 00:36:01 -0600
 From: Santhosh Kumar K <s-k6@ti.com>
 To: <trini@konsulko.com>, <vigneshr@ti.com>, <bb@ti.com>
 CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <s-k6@ti.com>
-Subject: [PATCH 4/5] arm: dts: k3-am62a: Update DDR Configurations
-Date: Tue, 3 Feb 2026 12:05:28 +0530
-Message-ID: <20260203063529.1551907-5-s-k6@ti.com>
+Subject: [PATCH 5/5] arm: dts: k3-am62p: Update DDR Configurations
+Date: Tue, 3 Feb 2026 12:05:29 +0530
+Message-ID: <20260203063529.1551907-6-s-k6@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260203063529.1551907-1-s-k6@ti.com>
 References: <20260203063529.1551907-1-s-k6@ti.com>
@@ -92,57 +92,57 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055E0:EE_|PH0PR10MB5682:EE_
-X-MS-Office365-Filtering-Correlation-Id: f64b21f1-5807-445a-0d76-08de62ee7fb4
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CD:EE_|BY5PR10MB4210:EE_
+X-MS-Office365-Filtering-Correlation-Id: d1d5dad9-0cd0-4b8d-fe8d-08de62ee812e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?s9hliaBgX+Ov1UDjYcA906bDvzryjeUzDUDbp/a7ULpEletZdIx7GPJYcYrp?=
- =?us-ascii?Q?bVRVeNUsTYBA+83Cqa99bJTURX02mrlQ1DXUcyAMsoG+PDT+zZzVeCOZI2j8?=
- =?us-ascii?Q?ati6S4OmfylQoXrhggUcUjHEJ8qMabKIRrJldsQTy+alaaFqsCE6yNSme5rA?=
- =?us-ascii?Q?9j2mqURTTk8Qqfsd38+SdEe5hDBE04Waq0/Jj0UXCMij7Da8llrtUYO6afEo?=
- =?us-ascii?Q?+xVUZL6seCnJkWpV4lwULOo5cMaiRCpn09g7E60a21dR9bdoIH1LIEMaYhPz?=
- =?us-ascii?Q?yt5a/fxyBAJKbwLM5andGeJ/icyQyPR9q7v7XDmQ+M5nAsUaVHjWlQLpeYK1?=
- =?us-ascii?Q?XgYDAvQ3fRWZ11T68IqW3PKJSZUkUu7s0uz8e9JEBxy5jGN599Llz2RNnWlb?=
- =?us-ascii?Q?CEtnNCfSY442wY1+QA3/pOkOTHNobetwZTWMBPsPOYvkHoVW1KkFtbNq7wLg?=
- =?us-ascii?Q?wwzEpcL+wM4mT2xvL6dZhsxMTunWh4H8w/P2daKOxhAd0cuaeJ5hTVS/9cjE?=
- =?us-ascii?Q?+zHr57WNIpuhRaDtpqi7PuJ7/ugPHCKHnF7M9tEc0kIDmd6dnnXGGsOHviOq?=
- =?us-ascii?Q?c9gjAlQPvrF3a00H3NcHpZ3i6yCmEL8ydaQtj192q4jEVtZuyMvlEJsRRJ0F?=
- =?us-ascii?Q?c1LMaIocczDfJbou4s8irN6wyR1+Hv0a5aCKaR41C5PSpcRkBl8j4Bi6gwXw?=
- =?us-ascii?Q?KE4O51ZefuD8wMn1UUmk7UlaqkL2CKS3v/InsseWhTs3a+E7z5/ZPqY7lxLY?=
- =?us-ascii?Q?z+g7Z07tkUan8OJGC43aTwJFedujWBIKN0d3+jt3ZXAOFrqufhIVz7nl0CQ7?=
- =?us-ascii?Q?HppxoYkOTImR4iaRYWz/0EY+9ymkRvYbsHVJmnLWtYaboqnkwQnrn1wd5+kG?=
- =?us-ascii?Q?AF/WM/5unN4e+XoFvf4AKo8yxvnpfnBkZ4vekQlap3OgYFCrGxhCAtGSZ+E0?=
- =?us-ascii?Q?Tt+acqxBUYTlOe12Ug6UB6ZfmSsEjem11/tyBIa7CpEJ17Oo6+7IPgz1MfnY?=
- =?us-ascii?Q?3qVClt98LE8vH2ELWUn6AH3Yz+QHzr2wQPi/B8k2dETA/mai7DO6OMzAKalG?=
- =?us-ascii?Q?XLgzpLm0NR58h82T/bGceKlkceyjVLdO6/1s0GybYETahCHupL5ehIl2xc0r?=
- =?us-ascii?Q?zcI+9FUMNEJy+Rwl6Y3L6Am7A7WYuYg74FR2b+QzyXkkiRJTT57g1Q10SiME?=
- =?us-ascii?Q?rtVzLFdCxM5Xwfr+zKuAnwttaCyZe9u60kHBHmTtzLCjkoeokeiEukvLS1Hy?=
- =?us-ascii?Q?6rBewH+Q9hRBEwLwJ5kQWF8kPt042Az+WqTESDQJypwikBVZHkg2U8XMI4n7?=
- =?us-ascii?Q?s1HDCCgpnvo9jdlFFL/QwQtxf0wNpOCmmbi6y+subz/uA7OMCFACJ2EkBxgV?=
- =?us-ascii?Q?j1+XQMbLWVKmBcX5UyNgspfl4kWldoIF6bEJNDz6o/1qlW6EPxLdvR0MXFGQ?=
- =?us-ascii?Q?KkFvTbmZK2XE6YWIT6OcFZtTj5RiHBGXwIYlS/rsOGLFivQNwlF/2xmQmAsB?=
- =?us-ascii?Q?+xRd5d/CxqJh5xBKLvqt1Cv216+mSJqyaizlNWrrFVNDfqYxSNZ35t+W/wAu?=
- =?us-ascii?Q?m9G8WekdrYPdZRsb//bxJvAWwTJ7T1RJEOnMbkrbbd2ifz7vlK/vebyMM3YF?=
- =?us-ascii?Q?fjNdEqRrbhXcitfNnDl5qcdnefCHtVJassrQluM0tnSf2uXY8WgJqZpWVRlz?=
- =?us-ascii?Q?x7fpqQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|82310400026|36860700013|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?r8zbId+SHPm87w46YnIIS6287QjYGeeX6QnAiStvpz1x2CnJx/9ze95ExQUJ?=
+ =?us-ascii?Q?VGMx6Bt7Iwv6gPMwLdzwtSo1jH9OLruln/MbZwl0MBn6/jhKvDXd4shPqgEd?=
+ =?us-ascii?Q?lRVQFF74SPWqBd+lto0Mq8dWD/1jl4Qll2K9kA5dd3QJ4k2NVc1Sk14oaFxj?=
+ =?us-ascii?Q?0wokGehUoQFXgctkNLR6kyAEolH7Hq+cxl8XDV4o1XbbAJy0Qj7/BJGj11nB?=
+ =?us-ascii?Q?t0XLQn4C8UqzpAZZ2cSym/68u4eKuwZpKJpgIhBuz8CbK2eRo3CZ/dOFaf6i?=
+ =?us-ascii?Q?li/E3gsvG5YJAYcbB6AO1YfgCE84EmzdCcutAG0PiT2Z9lHwH/6hSf8YprMn?=
+ =?us-ascii?Q?C0XzMYTXfp8oY1CGd9TNQw0BELsZtjgpI2Fu7qTaSzt4NQOXG5VpTD+SP1nb?=
+ =?us-ascii?Q?BcPMOaAxV93kg8sWt8qPkqi8EkoA8kPUkba4LmYnezpXdvrS/vrRk5gDfPHN?=
+ =?us-ascii?Q?/y4vd6wbpRYTD8swCOfylpzD/7nnHKzmtbG/6XIObT9NfbwXb3G2T5iC+zEF?=
+ =?us-ascii?Q?IyeuxCnodkGFP+qygMoD8Ng2ajo3UMOdZ12B2Nmuj43f1sEiCKlt/f/J88Cp?=
+ =?us-ascii?Q?cjtTcry8gc/lObRRGesCh3HSDKV60BVuNFW6tWt5p+QQU3uiCZGYYW0+G2aI?=
+ =?us-ascii?Q?eYTKFRq55KXZ2kL2lsb8W12fvGzbzY080G+cmJHtVLGhT2lffx2IrZCT5pBS?=
+ =?us-ascii?Q?HXy9NFN1Y9DmhC1bUS6PvC3JU5ssNfqcNO3PxkHu8HCCNFYk97Z9VpA0Vn1Y?=
+ =?us-ascii?Q?JLCgT6ZDwvNcgXMsSGwvOlKV/YOxZPe8AANOasiGsTUzTTNR0WcS3spF6YXM?=
+ =?us-ascii?Q?Vu8O9tcWi3B97lmOAmftIrYk7ov92RiYEupL7pKnHgHwP6nB//tIH6RFvszn?=
+ =?us-ascii?Q?DTz/J8HBaVm4TFHCD0VIQXjc8X8KDOthkVAQfC4CXAnjzXu5X3hes1BexjAy?=
+ =?us-ascii?Q?v52OZsT5aINmbhN1djSsCIc38aIgbcdmWHSV4rMz9hJLGlmISIRmQA5WpY1q?=
+ =?us-ascii?Q?f3IvN5a4wXZaXN40X6MPi/yTmveHWDV8pTHEfWcfZKCKMYeFtLW7dwJ4AMP5?=
+ =?us-ascii?Q?OotoJ/i2/sS8fF9/wP/vVRWzeEN2L3VEZO1Q2IhFQWATGelNVFZ0BZ6Da7Yi?=
+ =?us-ascii?Q?q2h/GX0y7WWZNCfXHuSIMEdVV52sErVV2yVyYUqifzc4O16m6wRm4oJsGH7D?=
+ =?us-ascii?Q?W42sQeWaWx76U25ioFr/ctXZM9lKTpiVYvbLfa9/aFOaCU2abI2wLhItct0x?=
+ =?us-ascii?Q?cWIgd+wyea7vPmZH3mffXHqUd34UJkAJtgYatZpHRlLZJ5zTLr33SL3hcnHx?=
+ =?us-ascii?Q?AzUkof17yReTCRpjMVu1GJm099G0AZHE1O0CRF12ePU5mb/CGwjDIOahmkKV?=
+ =?us-ascii?Q?UowTsrAfi7+Wh0R1je+Ijy6TfBRbrvAW2DCa2F+uZd47B+KlULsNbX2xtrxL?=
+ =?us-ascii?Q?wEws6A44VyLRoPtcjzg/gATiCvfXs331Q3Vu1begnzhWEq+n6+t1a8J9v7qg?=
+ =?us-ascii?Q?UDsIvXHHRywKj/Ixx2bYyiFOhqBrhpCV2tkeQug7EYtVGl5yTNlCElvNkXsm?=
+ =?us-ascii?Q?ItvXP9C6/B9dnvfl4KP+nWDdmuMFSiuAecWFD+b/WocfADAOnl+/ElMWj7oh?=
+ =?us-ascii?Q?hiNoXjJYZIMlfgEjXZTswZxWsEHDJM4CvVQyro8VVe4Hh0PqSyHSfr7/HUqY?=
+ =?us-ascii?Q?t4iz3w=3D=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 9Fw1whtNuCPT5Ccwz0gkFnsDS3cKVCdqlimo11S56d9ZxS44LpT9rrU0v3L954tx6KBR2Vriavw7bpJFVj4H48vA4Y4bWMBd8gqJtH1ZHVorn/WkWxXFApdX/caqmxnX0LycQQbJdGleKpjnbHb8YWjBjrSx/sJo0PfocHQLFaHnz8LG9pYVJQrC8QWTzPBB117CPVmKxuhaupx5e7XDaiZp50Q1ON+ks4k0L9ABtpoSqB8Vorm4+rLrheExq2uaD7e9cjm75H2kqut+o87I556ySraFpCIaqX4WTPRKXTmq1f1axzwP41pyiCQfXjEzLfFi5iG7hPfAIIG7MfiFKIYVaBkqEFbHyAjisS5igK2b438bUew2HsMXSgBWROzVsrEcfvw+KWT6v+5L9QiYO9RR5vcuBYWXgYq7LmKpPxk/jL8K/VngcUCqaEcY+i9/
+X-MS-Exchange-AntiSpam-MessageData-0: vD4W44g21MUP/WoTGVUjYVfyTMEy9IU2SWwUNGJW+A5TTygDNBnrOXPrvMbaAssBfpTQVRJCAF2J6Hy1+2NOGL+YfXOD/nxcRk7T7P7Wh0UUijFvUFUi+W/CggCMKZ6od/R4dODsBiRc+0ywBn71CW6zRh57do7Zd5FeTOVczGVtWuewNOFAc2Wm2Q1AlpBdXw7h6Lo37lLDmwo9UgSQBvj+pgt6aWrjSC12yFtx4ID230s6GEPXeVdZBDNoQTGeXv5ilapP4n+CbBba/ljLebr//kF7NFx+JVJqXi9lHHa6RacE6sKIyFATnta5qjxZoBFCjUsWDapi139Z0iYi/YnO7TmDhoOhjhQTimyBa7XGzk08996b04k61llpp5xHg064cx7g3cuimF8alYEeAnlfomfB6zH7o9MQ4V1GFRiomly5W4n/EwAqGIgkyeLy
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 06:36:01.6327 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f64b21f1-5807-445a-0d76-08de62ee7fb4
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 06:36:04.0998 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1d5dad9-0cd0-4b8d-fe8d-08de62ee812e
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055E0.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CD.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB5682
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4210
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,39 +159,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the DDR Configurations for AM62Ax SK according to the SysConfig
+Update the DDR Configurations for AM62Px SK according to the SysConfig
 DDR Configuration tool v0.10.32. [1]
 
 [1] https://dev.ti.com/tirex/content/Processor_DDR_Config_0.10.32.0000/docs/REVISION_HISTORY.html
 
 Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
 ---
- arch/arm/dts/k3-am62a-ddr-1866mhz-32bit.dtsi | 25 ++++++++++----------
+ arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi | 25 +++++++++++-----------
  1 file changed, 13 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am62a-ddr-1866mhz-32bit.dtsi b/arch/arm/dts/k3-am62a-ddr-1866mhz-32bit.dtsi
-index 35202651221d..f0497029d14b 100644
---- a/arch/arm/dts/k3-am62a-ddr-1866mhz-32bit.dtsi
-+++ b/arch/arm/dts/k3-am62a-ddr-1866mhz-32bit.dtsi
+diff --git a/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi b/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
+index c7e33ba50b99..763498df937b 100644
+--- a/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
++++ b/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
 @@ -1,19 +1,20 @@
  // SPDX-License-Identifier: GPL-2.0+
  /*
   * This file was generated with the
-- * AM62Ax SysConfig DDR Configuration Tool for AM64x, AM625, AM623, AM62Ax, AM62Px v0.10.02
-- * Tue Sep 17 2024 10:55:17 GMT+0530 (India Standard Time)
-+ * AM62Ax SysConfig DDR Configuration Tool for AM64x, AM625, AM623, AM62Ax, AM62Px, AM62Dx, AM62Lx v0.10.32
-+ * Fri Jan 30 2026 13:49:36 GMT+0530 (India Standard Time)
+- * AM62Px SysConfig DDR Configuration Tool for AM64x, AM625, AM623, AM62Ax, AM62Px v0.10.02
+- * Tue Sep 17 2024 11:03:07 GMT+0530 (India Standard Time)
++ * AM62Px SysConfig DDR Configuration Tool for AM64x, AM625, AM623, AM62Ax, AM62Px, AM62Dx, AM62Lx v0.10.32
++ * Fri Jan 30 2026 13:50:37 GMT+0530 (India Standard Time)
   * DDR Type: LPDDR4
-  * F0 = 50MHz    F1 = NA     F2 = 1866MHz
-  * Density (per channel): 8Gb
+  * F0 = 50MHz    F1 = NA     F2 = 1600MHz
+  * Density (per channel): 16Gb
   * Number of Ranks: 2
 - */
 +*/
  
  #define DDRSS_PLL_FHS_CNT 5
- #define DDRSS_PLL_FREQUENCY_1 933000000
- #define DDRSS_PLL_FREQUENCY_2 933000000
- #define DDRSS_SDRAM_IDX 16
+ #define DDRSS_PLL_FREQUENCY_1 800000000
+ #define DDRSS_PLL_FREQUENCY_2 800000000
+ #define DDRSS_SDRAM_IDX 17
  #define DDRSS_REGION_IDX 17
 +#define DDRSS_TOOL_VERSION "0.10.32"
  
@@ -228,16 +228,16 @@ index 35202651221d..f0497029d14b 100644
  #define DDRSS_CTL_369_DATA 0x00000000
  #define DDRSS_CTL_370_DATA 0x00000000
 @@ -669,8 +670,8 @@
- #define DDRSS_PI_216_DATA 0x01D40100
- #define DDRSS_PI_217_DATA 0x010001D4
- #define DDRSS_PI_218_DATA 0x01D401D4
+ #define DDRSS_PI_216_DATA 0x01910100
+ #define DDRSS_PI_217_DATA 0x01000191
+ #define DDRSS_PI_218_DATA 0x01910191
 -#define DDRSS_PI_219_DATA 0x32103200
 -#define DDRSS_PI_220_DATA 0x01013210
-+#define DDRSS_PI_219_DATA 0x200B3200
-+#define DDRSS_PI_220_DATA 0x0101200B
++#define DDRSS_PI_219_DATA 0x301B3200
++#define DDRSS_PI_220_DATA 0x0101301B
  #define DDRSS_PI_221_DATA 0x0A070601
- #define DDRSS_PI_222_DATA 0x1C11090D
- #define DDRSS_PI_223_DATA 0x1C110913
+ #define DDRSS_PI_222_DATA 0x180F090D
+ #define DDRSS_PI_223_DATA 0x180F0911
 -- 
 2.34.1
 
