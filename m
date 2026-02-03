@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA6B4E8782A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:37:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78E02E8782A
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 13:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B799584248;
+	by phobos.denx.de (Postfix) with ESMTP id F153884258;
 	Tue,  3 Feb 2026 14:35:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="Q56Dp/Re";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="jHRT27se";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C931840B1; Tue,  3 Feb 2026 14:09:21 +0100 (CET)
+ id 7B85D84101; Tue,  3 Feb 2026 14:09:25 +0100 (CET)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B928483FFA
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 14:09:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BDD583FFA
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 14:09:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kauschluss@disroot.org
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 8B11F27673;
- Tue,  3 Feb 2026 14:09:14 +0100 (CET)
+ by disroot.org (Postfix) with ESMTP id 6DF2826526;
+ Tue,  3 Feb 2026 14:09:23 +0100 (CET)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id tZ60vpRdBA46; Tue,  3 Feb 2026 14:09:14 +0100 (CET)
+ id tSfmNbCy_TIS; Tue,  3 Feb 2026 14:09:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1770124154; bh=ajz7dNYGtZDQySyuAFhoj1g1MU9h85oJSvIVpIwdLE8=;
+ t=1770124162; bh=RXIYWLUS6YDbG3Y5yG0P3j7NAHFHdpHL3A+Of326rcE=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=Q56Dp/ReTtXdzxApKit4pSl7bSa37D4Z8upeHcuJgRaDUEd+fd1T/WaLHdpTJlDvH
- IbXaiuavZSMyRBSbFHdMThCZjmkw3OPj8qxNXbjzR/prCuC3Fidr4Ars1tpNX6Z14U
- AFG65ToKosv0+ehw+qR9a0KGag+cdOSlV4EKAgQa6XTkMpnJ3PpHOqM/Rs8hboHer5
- C67cVFqwu9HeorqfzxPiKrGNvcDlK5+5cjT8s2JSbUyojE/sKLBlK08egjWY6wFqVs
- 0fES/cAHuUozwLLrP8tSw+sPvTvUGyXY0x2o7pcOF4tJFEtlJPT/Oj59c2rhUQUqdT
- o4Q18kiCF99Ug==
+ b=jHRT27seVIuIDLmokhYzpafWtroQOCoipXf10IOOAlipLni/saIMss9jVmMgW5lKb
+ 7NwtISuVBF+G6YGmyINHDinfdAimDtqQ69IFD2ev1H2Pe7TtyJQaaR1LKLnGVqPjU8
+ LWAJ/U9cUOhf/3qRHRYwk61JfNUvq7E1wszA3AvAuVQDQg3QGvy3PYyFTPUW5mfD7B
+ XD5QBfgpA4QT+vWTGiUdI0gZOPqOykLXjh+OFMX8N9ZiPzY7ooI8AXVFNlNaN1B6/P
+ X2uZOA3zuvq7CZaC+Pyy7OLB3JaaCJkcDb7e6hI9+Q6KnZ+O779LlQPICQkzBQ2mf3
+ VCAbnloXFTWhQ==
 From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Tue, 03 Feb 2026 18:38:47 +0530
-Subject: [PATCH 09/11] ARM: dts: exynos7870-j6lte: add properties to make
- S-BOOT happy
+Date: Tue, 03 Feb 2026 18:38:49 +0530
+Subject: [PATCH 11/11] doc: board: samsung: exynos-mobile: remove
+ requirement of stub device tree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260203-exynos-mobile-external-dtb-v1-9-a16a0e57991c@disroot.org>
+Message-Id: <20260203-exynos-mobile-external-dtb-v1-11-a16a0e57991c@disroot.org>
 References: <20260203-exynos-mobile-external-dtb-v1-0-a16a0e57991c@disroot.org>
 In-Reply-To: <20260203-exynos-mobile-external-dtb-v1-0-a16a0e57991c@disroot.org>
 To: u-boot@lists.denx.de
@@ -70,60 +70,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add properties in the DTSI file which is required for S-BOOT when used
-an external device tree when booting into U-Boot. S-BOOT is Samsung's
-proprietary bootloader, which chainloads U-Boot.
+Flashing U-Boot for Exynos 7870 requires creating a stub device tree,
+where certain properties and nodes are defined which are populated by
+the previous bootloader in the phones.
 
-Since this device has multiple bank nodes, add memory nodes for each RAM
-bank. This is the format S-BOOT recognizes, and (re)populates it with
-the correct bank sizes.
+Since these properties are now available in the U-Boot device tree, it's
+now possible to use the same blob generated by U-Boot in place of the
+stub, when creating boot images. Update the build documentation to
+reflect the same.
 
 Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
- arch/arm/dts/exynos7870-j6lte-u-boot.dtsi | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ doc/board/samsung/exynos-mobile/exynos7870.rst | 40 ++------------------------
+ 1 file changed, 3 insertions(+), 37 deletions(-)
 
-diff --git a/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi b/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
-index 9d944b127ee..aa499ecf479 100644
---- a/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
-+++ b/arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
-@@ -4,6 +4,11 @@
-  */
+diff --git a/doc/board/samsung/exynos-mobile/exynos7870.rst b/doc/board/samsung/exynos-mobile/exynos7870.rst
+index 37562e272b4..702b21244eb 100644
+--- a/doc/board/samsung/exynos-mobile/exynos7870.rst
++++ b/doc/board/samsung/exynos-mobile/exynos7870.rst
+@@ -6,47 +6,13 @@ Samsung Exynos 7870 Boards
  
- / {
-+	/* These properties are required by S-BOOT. */
-+	model_info-chip = <7870>;
-+	model_info-hw_rev = <0>;
-+	model_info-hw_rev_end = <255>;
-+
- 	chosen {
- 		#address-cells = <2>;
- 		#size-cells = <1>;
-@@ -18,4 +23,24 @@
- 			format = "a8r8g8b8";
- 		};
- 	};
-+
-+	/*
-+	 * S-BOOT will populate the memory nodes stated below. Existing
-+	 * values redefine the safe memory requirements as stated in upstream
-+	 * device tree, in separate nodes for each bank.
-+	 */
-+	memory@40000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x40000000 0x3d800000>;
-+	};
-+
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x0 0x80000000 0x40000000>;
-+	};
-+
-+	memory@100000000 {
-+		device_type = "memory";
-+		reg = <0x1 0x00000000 0x00000000>;
-+	};
- };
+ Preparation
+ -----------
+-Create the following device tree (named ``stub.dts``)
+ 
+-.. code-block:: devicetree
+-
+-	/dts-v1/;
+-
+-	/ {
+-		compatible = "samsung,exynos7870";
+-		#address-cells = <2>;
+-		#size-cells = <1>;
+-
+-		model_info-chip = <7870>;
+-		model_info-hw_rev = <0>;
+-		model_info-hw_rev_end = <255>;
+-
+-		chosen {
+-		};
+-
+-		memory@80000000 {
+-			device_type = "memory";
+-			reg = <0x0 0x80000000 0x0>;
+-		};
+-
+-		memory@100000000 {
+-			device_type = "memory";
+-			reg = <0x1 0x00000000 0x0>;
+-		};
+-	};
+-
+-The chosen node and memory ranges are populated by S-BOOT. A certain device
+-model may have multiple variants, with differing amounts of RAM and storage. The
+-RAM capacity information is graciously provided by S-BOOT's device tree
+-overlays.
+-
+-Compile it to a device tree blob, then pack it in the QCDT format [1]_ using
+-``dtbTool-exynos`` [2]_ by issuing the following commands:
++Pack the device tree blob in the QCDT format [1]_ using ``dtbTool-exynos`` [2]_
++by issuing the following commands:
+ 
+ .. prompt:: bash $
+ 
+-	dtc -I dts -O dtb -o stub.dtb stub.dts
+-	dtbTool-exynos -o stub-dt.img stub.dtb
++	dtbTool-exynos -o stub-dt.img .output/u-boot.dtb
+ 
+ Finally, use ``mkbootimg`` by osm0sis [3]_ to generate the boot image:
+ 
 
 -- 
 2.52.0
