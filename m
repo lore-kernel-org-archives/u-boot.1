@@ -4,150 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C854E8305F
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 07:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F1E1E8305D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 08:06:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FC2B83FF9;
-	Tue,  3 Feb 2026 08:59:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id F34138401A;
+	Tue,  3 Feb 2026 09:06:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="JwkX6S+s";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W7c9Luh+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE0A784008; Tue,  3 Feb 2026 08:59:45 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazon11012042.outbound.protection.outlook.com [52.101.53.42])
+ id 63DA984047; Tue,  3 Feb 2026 09:06:11 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B01DF83BC9
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 08:59:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14A8583FFA
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 09:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UpteOy1/gyHIi02bh6Sa8X8IQ3QldSrhIFHz3SjQgsyu0/RvbZDvwoFp32uysRlV9udFlnyxFsimR8NTRi3i2S6itQ6TDICIJRyZlQGoWdBWytOqbt3jyc2ZePM9vdZspix89yXgqh9STeUQtcppGafHuNKE/H7gK27uEi4np3pDEkuOV0BVzgy1moeWRCz9WWM2gAl2CL6rOqEMHun/8k9PeVsPurm5U/dyNYWKWoZnOwjg1U0fVvQccFqxR9sj6+3SAKYRJL6hORpqN9EgwYnjO/M9yAk5iCX8MzTMWlycW5JaQ8oVlD8UDNIYY7uKpAI5kCf966W/y5LgamftHg==
+ b=bwkGEuLKA+Qjq6US9b+qXMMVNpLsBwbMV1a+/9g7LJNha2ufelI7vRsreVnFQaM4KFNYbqTm4erHGZSfta8HTY2102ZKJ5EqMTASCBuTwGK2jKtacgFTw/1lImALW17qc6eafaJhBmo+WYOv1LNPQZJT2VLo0stUiqd47BfKNXh1MVBPtus/KNR+30U7FIwV24j2lGf03NN5w1yFMOmKgN8Xoc/NE8CEWKbjzI/jLTHa2jnt8Pf6OGp2gKKFVg8tE6KIJv8JjDTzMWjWGM0mQhS+ylX/XAchLNkgfVKZKpoehBBoFaApuaPxC8iFsjMiFNVR+5WdFOC3a/MLw+pvFA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=15ACQyKRiDHnQ1zQeVqIuolN+pKchQb8yotRv5NGSSg=;
- b=PuG/kcj9+VdyS/oJm6yHo1YHaX07+JTnF1t3FD4CGls2MUs4JGRGo4ONMssL+nkXFBn/Idf97HnUqibFZVaNt4n3aApvNQTj/u3D8oL1WiCqU2z0pJn5AX83VMFc/zh/vyEKOCp1vrh3yPVU0j+RJ2tXD5lZYe+3EcIvJUyrlxxWu7WYgNfdccvBhQ22CmsZzZw9p14ZqNNu72xz413xVfeSJNIovlEEJCXiOPo0/dxLHT/3Ty8r+UryzXM1DhZOhOilnv1e0YbVhVNrCj1i0Uquu5uBLgvf4zKhrvGNvNJLQzqYuMU9mscybg5kUa21mAOlHCWZjpvA1QOzhnnbfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=og5nUVMlj1aYn3mDdD2By4jPtW+3HqUhjxFQSnDwNqA=;
+ b=yrozOHUAIS6m3Lv8Gb4coAunnootBYOI7KPN4gYDzrgSo4o4iN0D23Xhy2wkwd29OOPE7lapd+W9AjgABgYfXTn8LG7S3Lrds1PJjNlx/AS5tCMRY7Uy6t79QiStIzF9jEz0BJOVlDrfAxFwK5Sh9+hDnnZKSKM62w0RM0MLh29fKOCuDyVKcrXsuL5qh0s0toJLPVZ4oISl56RoOG/N0RvlnZJlUA+tfGrbQYdsLVK4mWEuP39qy4aiUB6P3ahXvN3LML5Jds6SOvF+MyUbjDOby3UwStvOeqv2HX2oKC613d5cluWypWh8d34TilcHgO+HqREf5v1vb974y/FywQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=15ACQyKRiDHnQ1zQeVqIuolN+pKchQb8yotRv5NGSSg=;
- b=JwkX6S+sy1u7/KIjB8ze+VIz3hMOER1/WljY399NXrPS3XMcpGXc1xj7vI8l8jmcmxaFOzFX6K04AY8FbRT5MBea/ZHAGj3eIa233B/Tq6xQ1DaaMjN16Jf1K7AvU7McwUZ9RU6yRS4xAyK2BAZBRPKCZjhaMyXGyvm7hP7JwsQSSEzIqYLdak2U7+78OuaHealEZY0cPnBr10PYH5Ezi3RLLDnWqZ6JRQXrUrjaIF3AQTSJdMs3I1UmF7W38m7AYuriJPBvhstfVrxUfJEhQVilg7F3lZXrHgT3OKMC1dIFQkIDpx5qaAqB9RxtzrhguFracspKXO1IJPZB8gy5mA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com (2603:10b6:510:2a4::6)
- by CH5PR03MB7791.namprd03.prod.outlook.com (2603:10b6:610:211::5)
+ bh=og5nUVMlj1aYn3mDdD2By4jPtW+3HqUhjxFQSnDwNqA=;
+ b=W7c9Luh+wmtdYllTpnueH8IsfB3iLlsLgLRmdOoFoeUaoM64KN7hSK43ZF/5z8t3cWJsVy+JM67Hvy60l4ODjVnwxe9tyQOJxT9TtYTY4q6HeeegDU+2w9PwdN9wj3HDy0sHRRH8Pse66xs7ScjkmbuU+lxNwatQXED1mCNAHuY=
+Received: from CY5PR17CA0006.namprd17.prod.outlook.com (2603:10b6:930:17::30)
+ by IA3PR10MB8186.namprd10.prod.outlook.com (2603:10b6:208:511::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.16; Tue, 3 Feb
- 2026 07:59:28 +0000
-Received: from PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21]) by PH7PR03MB7063.namprd03.prod.outlook.com
- ([fe80::f6cf:4203:1cbc:cd21%5]) with mapi id 15.20.9564.016; Tue, 3 Feb 2026
- 07:59:28 +0000
-From: alif.zakuan.yuslaimi@altera.com
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v1] clk: altera: agilex: Exclude AGILEX_L4_SYS_FREE_CLK from
- enable/disable operations
-Date: Mon,  2 Feb 2026 23:59:24 -0800
-Message-ID: <20260203075924.2492-1-alif.zakuan.yuslaimi@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BY5PR20CA0015.namprd20.prod.outlook.com
- (2603:10b6:a03:1f4::28) To PH7PR03MB7063.namprd03.prod.outlook.com
- (2603:10b6:510:2a4::6)
+ 2026 08:06:04 +0000
+Received: from CY4PEPF0000FCBF.namprd03.prod.outlook.com
+ (2603:10b6:930:17:cafe::9b) by CY5PR17CA0006.outlook.office365.com
+ (2603:10b6:930:17::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
+ 3 Feb 2026 08:06:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CY4PEPF0000FCBF.mail.protection.outlook.com (10.167.242.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 08:06:03 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 3 Feb
+ 2026 02:05:31 -0600
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 3 Feb
+ 2026 02:05:30 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 3 Feb 2026 02:05:30 -0600
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61385TTK3597554;
+ Tue, 3 Feb 2026 02:05:30 -0600
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 3 Feb 2026 13:35:29 +0530
+Message-ID: <DG566LV3E2YH.KI3ZNJP0ZL1Q@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, Anshul Dalal <anshuld@ti.com>
+CC: <trini@konsulko.com>, <joe.hershberger@ni.com>, <afd@ti.com>,
+ <n-francis@ti.com>, <b-padhi@ti.com>, <ilias.apalodimas@linaro.org>,
+ <peng.fan@nxp.com>, <jerome@forissier.org>, <neil.armstrong@linaro.org>,
+ <d-gole@ti.com>, <j-humphreys@ti.com>, <semen.protsenko@linaro.org>,
+ <bb@ti.com>, <m-chawdhry@ti.com>, <mkorpershoek@kernel.org>,
+ <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH] board: ti: j721e,j7200: fix do_main_cpsw0_qsgmii_phyinit
+From: Anshul Dalal <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260202141058.648965-1-s-vadapalli@ti.com>
+ <DG52P91F2IJ0.13IQHK33CRF1E@ti.com>
+ <68206f3ce6dffdf7c42d81d24091426497a5ab91.camel@ti.com>
+ <DG53OSN3N49J.2M9OUUKKK410P@ti.com>
+ <395d53ef43d07361c96422050f3293770ad77f1e.camel@ti.com>
+In-Reply-To: <395d53ef43d07361c96422050f3293770ad77f1e.camel@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB7063:EE_|CH5PR03MB7791:EE_
-X-MS-Office365-Filtering-Correlation-Id: e3e87905-1133-49a1-ac79-08de62fa2795
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCBF:EE_|IA3PR10MB8186:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8ebe9913-dcaa-4b6e-1380-08de62fb134a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DoRNAWbTK0pJPJyehF+ke/Hq6ajHECh2+xezBSPG1PyT1lP/iTRbB4YUJwjA?=
- =?us-ascii?Q?numC+yhbDJw8FWcXTt8WjuFr+uOFlZH+MnK/2xwswP6CRyMDqRbvRfNCHbom?=
- =?us-ascii?Q?h7VYY2F9zbdtgCUIQsNO74Wm0GxcWfOwikWTTDTMjtV9aJvFL0Rxt/opEdor?=
- =?us-ascii?Q?XY6Z8b+83YU3F33BReLRbkOJhNXUrn+D8d6Pm3LZshnwxp3WucEwaBP68j6m?=
- =?us-ascii?Q?HOoomtxqM1ubYRnRAFldkj3cqO1C25KbR0mnnFmhcaWjpx9c0MXCuiSA63jX?=
- =?us-ascii?Q?PbbojtQK/5bH8E5OJt2yqYknO6v6j7f291mYfPKqT58crwLSdf5q2DOjuPcI?=
- =?us-ascii?Q?g+AmBoM0kr4IdDIO6oc1m2pGE58k/F6/iUi9KGSTtWt/QA4tCkspRwM6vdqN?=
- =?us-ascii?Q?LO3MJEA4PgbMqItCCEy1JimJZb9a2MgCw03qLh9xwAAVXhGXtIC3EgKfXoIv?=
- =?us-ascii?Q?KUdbKl86W2gR3BtsOHCjD6YWriw8+m/LOo3g8fXdy3KhTrzc/Qe16KHNuBdq?=
- =?us-ascii?Q?Mq8tc7PqxEsj2GqNsG+I70XWmwsTJ8poPJFuPGq9UFmAErOYOQUnU5bQ8F3p?=
- =?us-ascii?Q?fGFQr9jz5cgBr9fuYY2KQvnAvSnpH83hfwu4Blhs2Sx5LOsy+Dh1Ry7NxPeL?=
- =?us-ascii?Q?4K2MEn87RB1DHLPgXcJX4eVqnZvmU62jm68kFBS1tjAQU4ameFfvqHXoOGoV?=
- =?us-ascii?Q?qtkVVr3Cus7ZqrxLkFH5sGYDnLdLX7PGdhJjTJQZv9ZVkakVq5lxbsNNn7N/?=
- =?us-ascii?Q?wpdC3HDyLD8ztTfjUZeu8VUmD/lgHjA9jkwys2sRASo5E0JIWlx2h3bivFHq?=
- =?us-ascii?Q?8rb8h7rz08OAvXWPSYtWZZVO2Qv61mvXG0p/mIDkh9JJ99Li0KnT2SMqtW+6?=
- =?us-ascii?Q?tAagyGdlhL6dBttJYiT2Ptk7TFuRjCr+t47Qb7wDdxAPcgz6ivBbqAmWqF1x?=
- =?us-ascii?Q?kXLoumft+HcZTf8Z9dEhTBOWqTVEzcXnNgO148YVbI7wg3umrWLcaJzLpoxk?=
- =?us-ascii?Q?DOaZR7Hkj0E9v6YDb4oI2zJrObfSHZ71BbPfTwbpwhGICv8Nj9BypMOb1ZLk?=
- =?us-ascii?Q?pThIYvoz5+v3GwRzNB1yiMP4nlQvEW5a3gIqwqVvsdSXcpoZtWmt2SXdRxF1?=
- =?us-ascii?Q?LSvn7qUuZq4RRl3NWv6RDcjuVOAQA8X987waTUhGMH49S3T90Qk+Se+9AhV1?=
- =?us-ascii?Q?sBfpiJZdyfrmaTPrt2MqMzIoKeTrHp+v0jnx85nF0CiPp0n7wsp+u3PWk6G/?=
- =?us-ascii?Q?5mLehxyj3ydVyh7XmEsyoiQN0rBeXOatBZw1g94op396bEVFYxp6RD48/Y62?=
- =?us-ascii?Q?eqmdqhDuFoNSHMDt/2fnMH7Jm2gJdEMqa4rj+7taB4c5A9fMvGuY2yh8B07T?=
- =?us-ascii?Q?CM3+L0F6Z2o0HMejoLcTQijRSmPKvzmCzPxgRC8b9EyzdKtW9HlDoyg1wasn?=
- =?us-ascii?Q?Llfp5z7Ri3AbXUMBpXVaQ27RYKih7N0PlPb90GpZ6FdhbaczVb4YC53W0sn9?=
- =?us-ascii?Q?3BKG1Lu6HHNuQsj6IfKukoEAq1NVudTmW2jCuJAHg/KwQePsXHwSNke9tSuC?=
- =?us-ascii?Q?trIYw8k4Q/S+QtDpMHI=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB7063.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QTRyZjVaUXpXK3FtaEZDV0JPaVJvRjFYUmdzTmh1aFozanlhK21YcFk3YWJj?=
+ =?utf-8?B?SlhVR2RReHhKV0FlOFhxUzVRV1FVdHNpQjRSNzFVTzR4MnV4bWg2NkVNVVV6?=
+ =?utf-8?B?b1AweEF0a0hBUEhlNGNybXVPbSt2MjU3ZGpCZmlCTDdmVzRHYlJLa3M2ZGhh?=
+ =?utf-8?B?b0ZBQjRUNUdFcnd0N2VING1uUVB6WVhKckltWm9UTWE5VDUxd1F4Z2orQ3hy?=
+ =?utf-8?B?cUJrWllmRCtNaXhzaTF3cHMwcWZJVTZTbzZFUENkZFMwVER4eGpxVGwwQlBu?=
+ =?utf-8?B?cVY1R0kzYlRXaFY4YUZFM1U5R0hCUFFPV2d1Qmx5N1lBZEtGNW83OEJrRWR2?=
+ =?utf-8?B?d2U4TmdYK1RjL3pHZGRFR0pwY0ltamdMQmM3U1pjYWxlUE9FN1FleCtoQ3l1?=
+ =?utf-8?B?NFh3QldQbFc0UGJubmJDcEJieXJhTytMOVF3cDdsbWo5VndVQmJXL2k1Ky9j?=
+ =?utf-8?B?ajFySHRVdzQ5T1VSM3BxeXBscEJJekRibTY4dUE0VitpV1g3Q3dKNTI2U25s?=
+ =?utf-8?B?RVUrYU1OMkV0SjVuMFM0OHdQU1o2SVBSZk4rbEFhUmg3UFdWaVVsa2V3T1d4?=
+ =?utf-8?B?TWdEK3g1V1lWYnNFaGFqNVdnaWFOWnJPOVl3aVBIUUt2QkgvNFhvOXl1NFpI?=
+ =?utf-8?B?QlVyS3J0bzFUbzFhMzhMZk1xRmpnTHJsYWtIWm9KSWNhOHZRVzlrZjNwTnNu?=
+ =?utf-8?B?REFVWmtiYXhLUDlDeklQeFJRS0F0bFc0ZUhndTdCczVZRTY5QlBXRWZzZDVP?=
+ =?utf-8?B?RVJzMUl5RXRYMG8veDA0bU1MYXNKVnN3Zi9qR1J2dTVVbWgxMWVBRzFZUEVl?=
+ =?utf-8?B?MmlUTGltNVk3OWNyVXRvWmpxb21zZlFod2hlMTBPNlI5RzgvRnd3M1dHeFVY?=
+ =?utf-8?B?SzNxTUFGTEVpdG55Q0FTVXMzZGlYalFsT3UxR0Zac283V1B2T1hKaUh1ODNa?=
+ =?utf-8?B?b3FCRE9iK2c0VGRHZXlhVTBIc3lNYlVYVzY1TXdvRHNrRFk4RmNZR2NuM0xG?=
+ =?utf-8?B?dXI3TWZPZnUrTFJrZmNpQnp6Qk9JL2NGUGN0T0t2aENMd1d2bTBlS0NNSldr?=
+ =?utf-8?B?M2NSWnBlN0hOa25ZSTlPZCtKbmJNYTZSZ0lkUlFKTGtJcGtXYjZReFl0Uk5m?=
+ =?utf-8?B?dEZEWno4RG5hNjFMRkZVcmFGUDYyQmtVaU1QWS85QVNvQzQzTUpxTzRtaSsz?=
+ =?utf-8?B?bkhPRDRGV3M3M1M2QWVZY1h2dm9TampzeHNiRURmVnpCenIwL2luanNDQmE4?=
+ =?utf-8?B?R253YStpYjJJNmpHdG9VS1FLTW5NTVFHY3I0c1gxanVYWi9uSDBoQ1VUVWNo?=
+ =?utf-8?B?cjlhRXVoNVZjSER3RUxBYmpmZVhQTStmS0lSS2Z0aURSbHhDOU44WFVIL1JV?=
+ =?utf-8?B?ckRnWHcwaWlsWUhGT1ZkQVhDQWdzRVlZNUYvenZsZFFWZ3BaUDdoOHlud2tC?=
+ =?utf-8?B?cFBqS2pRSi8xZ0FRNEdocDhDZ1dTK3R1eFpyUUJ1RjVUbTBFNUlVSjdjUjha?=
+ =?utf-8?B?dmZnUXB2RkRmeXlKaWdDV1U4U3libG9UOHBucjE2TkE3VFZVYk4yVUlKbDNM?=
+ =?utf-8?B?YUxFWXcvM1BYaHFIWXhBZWRiRUVsS2VBWnAvb0VOakdnZFNxYWdWN1o4RGhQ?=
+ =?utf-8?B?aVZGUkU3RzA3WmVkdnJ5V3hkTnY0cTArMVVHTjlQemtNeGVDZXJZVHBqN1JZ?=
+ =?utf-8?B?SXJlZGxMcTF4T1pUYWdIbXVhV3Axd1dGZzJENHV3K2ZkMmt6bXZjbW1JS2h6?=
+ =?utf-8?B?ajZFN0JOaUVQTXg1cW5tM2E3cnZiY0xGZzBScTNpckVDdHdqTktYOG5qd0Rq?=
+ =?utf-8?B?ZDNuNkZuOGZ1cTVLMlpqYjBqWFYxYWxIYjljQ3NNVVVINkQrWjhxUlEyM1dj?=
+ =?utf-8?B?TFVnNU1MendqK3pCNVhoblRQYXVCTm9Za0hhdVlldVJ2bmhKcDJabHU3aG4y?=
+ =?utf-8?B?dzlCQTczbHBDMlo5alFveGhTYUlkcTA5SGgzbElKSnE0ZnAxQ0piaFBmNVg3?=
+ =?utf-8?B?NVRBMUF0TjUra1VUSWk3UnJJeHM2N1pONDFoR01qR2FOcFo2ZXZnVlMrN0hu?=
+ =?utf-8?B?VnUwUVlrNDZ2RmJDYm53aFBIVkRqVTlWRnZYTFA1am42am1TU3NSQlVFaUZr?=
+ =?utf-8?B?Ukdxczh3a3BFcnFLL3NSQ1dUeGpUOVNUUVN3SFNvYThRL3lVeVYvWkgyelB3?=
+ =?utf-8?Q?XhZZlLYVqXTeDjTXrdCyEKs=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QayMIhRg3oLOP8qUsUldQ2oLWMe/ySAUMFmDgC34t/Wg1xQPl3inda9zJPZk?=
- =?us-ascii?Q?iJc2KljNcIV8+SH9iaCGb4ojKPZOvsk2pmoAyAGFznQ0S97SD7X5pJcRG+P6?=
- =?us-ascii?Q?zHOc2ixKl+NOIhqky6Y7uXHA5GqMAZSb0ZEZtyIrPEaMnTMfEbTyfN5shv3j?=
- =?us-ascii?Q?bpEqbGNkPiJYBkVfUzsZUMZYeBWLkjxLjvfjteidn1IVTjPqS/Wy5t9193/e?=
- =?us-ascii?Q?5h2evZAzxreQ/jv0vnx5AwnQWj621uYpDQJWWKecQgcrJeCnLMKBPuw7EKMz?=
- =?us-ascii?Q?3wPWqnKwiaD8cdrNoNRfXZmZ8m7MBkj3590GdCFHH5kDmQ8n5cTRbyihwNW+?=
- =?us-ascii?Q?xmnW8XdJc6IfeGPNavUaEDVuLVsibvJ41xE3tjgURAEONkkzOtQSEyX5DTKW?=
- =?us-ascii?Q?QGuNwWodZkrLKGDU9bIGWlj6idec25g7ihq8HC+zVybPCF/vGSeE7xv/iYgp?=
- =?us-ascii?Q?mlviOuVukmduvUpMBEGqa00+CtsuzTJsgch37c8LAvh1gJdRmoOEvyMf9MSO?=
- =?us-ascii?Q?k2OJZRuuI3UFqVLEQQrc2Buoov/LP3XRVu53TTIHQO+3XeJ+Hz5H2IRsmAvM?=
- =?us-ascii?Q?ROLwyPPg8IR8mQ7+mFvJcxTm4AFhV6l0Y2x8uwEmmM7MMDZh5TPUyXbw1QW0?=
- =?us-ascii?Q?rlGU7hEbq6ed6hN3/4x07wHpigdsiwC2mPN1k3H0imlhsJBuZb0NU3uuQg3e?=
- =?us-ascii?Q?GPuBDmN3dxc9lrW82SXCXI5xBZupFQSSGNvic1YH5VifkgAZTIWhG1pvUNEA?=
- =?us-ascii?Q?2pgEvEpYCeAc0Ju95D0zV0W+XuElc/kdMG6fogFsoGVp1O4VjBn6JCzcXmFx?=
- =?us-ascii?Q?h3uq/zWaEjOd6NpmRGOIAdXB/LfFN+h9tdZMjK82ZvEzZWoNqU4zWmEPk/kO?=
- =?us-ascii?Q?sm+J1iWralC1hKmv5nnhaPX49JgZ9nsWmR8mLDK/nKC/66fuRewiSVGpL97C?=
- =?us-ascii?Q?WWh6KPA9ODsWYbFcWPmFHOv+FRUJEJci5uxAWqCcK8dX7jNCTGfvtdmAWj4H?=
- =?us-ascii?Q?xMDTxDyPSJ8Rq35Wq/6cBY7i7lQlx+8AkKtsqXXrtNxNjSAu4/lPbOI/9n+t?=
- =?us-ascii?Q?ZXjZKsflvjbnjXOni4oR+8+7R6xA8SLOoZlR6JaBK8Mtb8UJVjNezktc63U2?=
- =?us-ascii?Q?Yr9t01J4lkvKsxLrjmxB0+bBj2EjY8/yjssmw1drbyfxc2yMKhI3GKO7QLUV?=
- =?us-ascii?Q?5FMghpM6K+hcY3i6ZLuCPoUg9ol7/cCnslKG1TzzJm++vQl4N3a0Jl+VthXG?=
- =?us-ascii?Q?WQRtqxcJnUGfbCNdRc3XMSb5q264e2ZWMISx1aTJ9826AtN49gzSK4qVDzc+?=
- =?us-ascii?Q?+qqFSNpGdib0JgUlZM0gmbVSfhr9ESNhWepuFWi3F3n4EImF2GChHKoahrDd?=
- =?us-ascii?Q?/1Up491CZRyr9bvvvqNLTTj2kd9mvoyqYZxN6eZUvJF/D7LuVC0Bufeipaaa?=
- =?us-ascii?Q?oZOnBqspbEaL5Zdyy5exdkRHUXsGexfFquoFVgkAtDfXk4ajxCRXp9dEtnAS?=
- =?us-ascii?Q?CU4gGoWwYGNs6ID3cS/D7ql81FMa7bP7hsX8k3tTQOMd3J48FsQUroN0rYqz?=
- =?us-ascii?Q?XuRy8yaVLKTYiPjv7J0zW9l6t/lqUmmtCMVD+B/87fOkbcAm7d5Hjf5PwRUp?=
- =?us-ascii?Q?ebFt+1qjYinaQLKU/KkNRRIOx17Br4I+4SWwXYgnUzXABPEB+QtWvkvS4TfE?=
- =?us-ascii?Q?JC7jd9s8+HwOkYTSLAHhDAhs1Ma8DdqPcC046tA94yxt6ucwjkfCjE3opjMH?=
- =?us-ascii?Q?dHZ+IZbeXKC/UfxPquu0gOhy7qAyuKw=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3e87905-1133-49a1-ac79-08de62fa2795
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB7063.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 07:59:27.9926 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8QPJUXA8e3xxLR8lJo8k4xzl5Z344+c/QxMTIEA7kQfXv6kttiUScSgjjs3OpG9f+A4f5fcF73H3AQToCnEPcbXLMzPNLiDDt6yIZndZ6Z8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH5PR03MB7791
+X-MS-Exchange-AntiSpam-MessageData-0: QwTC4mQBJfRBjwxFU2KR5Cy80QgjXDvJfomeY3G2Tcbxdxyv5/SImR2On67uBovz1K7xH+V6p4GEgAp/jRNNbQHZRc/7y7JNaYHh7LDceVb9rM18VmmWRE0nv9iAp9dEuedJb4+YsUkVG/l+iNs3IHFH+eqvDazQ0JA0ASZb7ZyqRqmfwiUNhHuQ8GTmpzVBdZtD58uxMQVyNgNU9hMtqGK/paiJ6RY9nhBWXg2znWalysDKfJXx3YfRH/pHlMetP6dxPMwHkjnc17CIxg3y0E9OGp+czwXpK/aawny3e47FAe5BtTXPqrjNucFvBckQHqEpeAP54oMWhI4przZlT5p4VaF8oxTgbi3+UDfg7Dypxr0WItII59G0Io98HxUlTdemJYJONYd0mt8fsgWHyIjiDdYKeNCOUaI5spz5PA6NX8LRprGnvPMO9u4kAfGm
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 08:06:03.2208 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ebe9913-dcaa-4b6e-1380-08de62fb134a
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCBF.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR10MB8186
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,57 +175,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+On Tue Feb 3, 2026 at 12:06 PM IST, Siddharth Vadapalli wrote:
+> On Tue, 2026-02-03 at 11:38 +0530, Anshul Dalal wrote:
+>> On Tue Feb 3, 2026 at 11:11 AM IST, Siddharth Vadapalli wrote:
+>> > On Tue, 2026-02-03 at 10:51 +0530, Anshul Dalal wrote:
+>> > > On Mon Feb 2, 2026 at 7:40 PM IST, Siddharth Vadapalli wrote:
+>> > > > Since commit 27cc5951c862 ("include: env: ti: add default for
+>> > > > do_main_cpsw0_qsgmii_phyinit"), the value of the environment varia=
+ble
+>> > > > do_main_cpsw0_qsgmii_phyinit happened to remain '0' and couldn't b=
+e
+>> > > > changed without user intervention. This behavior is due to the fol=
+lowing
+>> > > > cyclic dependency:
+>> > > > A) ti_common.env sets do_main_cpsw0_qsgmii_phyinit to '0' and its =
+value
+>> > > >    can only be updated automatically by main_cpsw0_qsgmii_phyinit.
+>> > > > B) main_cpsw0_qsgmii_phyinit is defined in j721e.env and it can ru=
+n only
+>> > > >    if 'do_main_cpsw0_qsgmii_phyinit' is already '1' which isn't po=
+ssible
+>> > > >    unless the user manually assigns the value.
+>> > > >=20
+>> > > > Fix the aforementioned cyclic dependency by using board_late_init(=
+) to
+>> > > > detect the QSGMII Daughtercard and set do_main_cpsw0_qsgmii_phyini=
+t.
+>> > > >=20
+>> > > > Additionally, to address the issue of do_main_cpsw0_qsgmii_phyinit=
+ being
+>> > > > 'undefined' for other platforms, replace:
+>> > > > 	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
+>> > > > with:
+>> > > > 	if env exists do_main_cpsw0_qsgmii_phyinit;
+>> > > > in ti_common.env.
+>> > > >=20
+>> > > > Fixes: 27cc5951c862 ("include: env: ti: add default for do_main_cp=
+sw0_qsgmii_phyinit")
+>> > > > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> > > > ---
+>> > > >=20
+>> >=20
+>> > [TRIMMED]
+>> >=20
+>> > > > diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_comm=
+on.env
+>> > > > index 03e3267ef8a..a0ed83f52ac 100644
+>> > > > --- a/include/env/ti/ti_common.env
+>> > > > +++ b/include/env/ti/ti_common.env
+>> > > > @@ -22,11 +22,10 @@ get_fit_overlaystring=3D
+>> > > >  	done;
+>> > > >  get_fit_config=3Dsetexpr name_fit_config gsub / _ conf-${fdtfile}
+>> > > >  run_fit=3Drun get_fit_config; bootm ${addr_fit}#${name_fit_config=
+}${overlaystring}
+>> > > > -do_main_cpsw0_qsgmii_phyinit=3D0
+>> > > >  bootcmd_ti_mmc=3D
+>> > > >  	run init_${boot};
+>> > > >  #if CONFIG_CMD_REMOTEPROC
+>> > > > -	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
+>> > > > +	if env exists do_main_cpsw0_qsgmii_phyinit;
+>> > >=20
+>> > > The patch looks good to me however I wonder if we should factor out
+>> > > cpsw0_qsgmii related envs out of ti_common.env since as far as I can
+>> > > tell we only seem to be using it for the j721e/j7200 devices.
+>> >=20
+>> > Please refer to the following commit from 22 July 2023:
+>> > https://github.com/u-boot/u-boot/commit/4ae1a2470ce7895b747c85a140aaf8=
+b647ae6a32
+>> > The commit added:
+>> > 	run main_cpsw0_qsgmii_phyinit
+>> > in include/environment/ti/ti_armv7_common.env and ti_armv7_common.env
+>> > eventually got renamed to ti_common.env by:
+>> > https://github.com/u-boot/u-boot/commit/bf9c61acb6caed97114029d2dc1e91=
+b148cd9b8a
+>> >=20
+>> > Although I agree with your feedback in that it will make more sense fo=
+r
+>> > do_main_cpsw0_qsgmii_phyinit to be present in the board specific env, =
+given
+>> > the background pointed out above, it seems to me that we are simply go=
+ing
+>> > in circles by undoing the changes that were previously made. Neverthel=
+ess,
+>> > if you think that it should be moved to the board environment, I will =
+do so
+>> > in a future cleanup patch.
+>>=20
+>> The patch that added main_cpsw0_qsgmii_phyinit was actually based on the
+>> commit 14439cd71c1a ("configs: k3: make consistent bootcmd across all k3
+>> socs") where main_cpsw0_qsgmii_phyinit was factored out form the
+>> j721e/j7200 defconfigs to the common env. I think this could be better
+>> handled by having a board level hook such as follows:
+>>=20
+>> 	--- a/include/env/ti/ti_common.env
+>> 	+++ b/include/env/ti/ti_common.env
+>> 	@@ -22,14 +22,10 @@ get_fit_overlaystring=3D
+>> 		done;
+>> 	 get_fit_config=3Dsetexpr name_fit_config gsub / _ conf-${fdtfile}
+>> 	 run_fit=3Drun get_fit_config; bootm ${addr_fit}#${name_fit_config}${ov=
+erlaystring}
+>> 	+init_board=3D
+>> 	 bootcmd_ti_mmc=3D
+>> 		run init_${boot};
+>> 	-#if CONFIG_CMD_REMOTEPROC
+>> 	-       if env exists do_main_cpsw0_qsgmii_phyinit;
+>> 	-               then run main_cpsw0_qsgmii_phyinit;
+>> 	-       fi;
+>> 	-       run boot_rprocs;
+>> 	-#endif
+>> 	+       run init_board;
+>
+> This assumes that it is defined for all boards and we will run into the
+> following error for those boards which don't have it in their env:
+> 	## Error: "init_board" not defined
+> So it needs to be updated to:
+> 	if env exists init_board;
+> 		then run init_board;
+> 	fi;
+>
 
-AGILEX_L4_SYS_FREE_CLK is a free-running clock with no gate control in
-hardware, therefore attempting to enable or disable it is not applicable.
+I thought setting init_board to empty string above would've taken care
+of that but I can incorporate your suggestion as well, thanks :)
 
-Update the clock driver to explicitly exclude this clock ID from
-enable/disable operations by returning -EOPNOTSUPP in bitmask_from_clk_id()
-and treating this as a no-op in the socfpga_clk_enable() and
-socfpga_clk_disable() functions.
+>> 		if test ${boot_fit} -eq 1;
+>> 			then run get_fit_${boot}; run get_fit_overlaystring; run run_fit;
+>> 		else;
+>>=20
+>> with init_board being used as required in the board's env as follows:
+>>=20
+>> 	--- a/board/ti/j7200/j7200.env
+>> 	+++ b/board/ti/j7200/j7200.env
+>> 	@@ -34,6 +34,13 @@ main_cpsw0_qsgmii_phyinit=3D
+>> 		fi;
+>> 	 #endif
+>>=20
+>> 	+#if CONFIG_CMD_REMOTEPROC
+>> 	+init_board=3D
+>> 	+       if env exists do_main_cpsw0_qsgmii_phyinit;
+>> 	+               then run main_cpsw0_qsgmii_phyinit;
+>> 	+       fi;
+>> 	+       run boot_rprocs;
+>> 	+#endif
+>> 	 #if CONFIG_TARGET_J7200_A72_EVM
+>> 	 rproc_fw_binaries=3D 1 /lib/firmware/j7200-mcu-r5f0_1-fw 2 /lib/firmwa=
+re/j7200-main-r5f0_0-fw 3 /lib/firmware/j7200-main-r5f0_1-fw
+>> 	 #endif
+>
+> With the minor comment above, this diff looks good to me. Please let me
+> know if you plan on posting the patch for it.
+>
+> Additionally, since this is unrelated to the current patch, please
+> acknowledge that you have no concerns with the current patch.
+>
 
-This prevents unnecessary register access for clocks that cannot be gated
-and ensures clean handling when the clock is present in the device tree.
+Yeah, I can post the refactor once your patch is merged to which I have
+no objections to.
 
-Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
----
- drivers/clk/altera/clk-agilex.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
-index fdbf834bb2f..88423292c0b 100644
---- a/drivers/clk/altera/clk-agilex.c
-+++ b/drivers/clk/altera/clk-agilex.c
-@@ -728,6 +728,8 @@ static int bitmask_from_clk_id(struct clk *clk)
- 		plat->pllgrp = CLKMGR_PERPLL_EN;
- 		plat->bitmask = CLKMGR_PERPLLGRP_EN_NANDCLK_MASK;
- 		break;
-+	case AGILEX_L4_SYS_FREE_CLK:
-+		return -EOPNOTSUPP;
- 	default:
- 		return -ENXIO;
- 	}
-@@ -742,6 +744,9 @@ static int socfpga_clk_enable(struct clk *clk)
- 	int ret;
- 
- 	ret = bitmask_from_clk_id(clk);
-+	if (ret == -EOPNOTSUPP)
-+		return 0;
-+
- 	if (ret)
- 		return ret;
- 
-@@ -757,6 +762,9 @@ static int socfpga_clk_disable(struct clk *clk)
- 	int ret;
- 
- 	ret = bitmask_from_clk_id(clk);
-+	if (ret == -EOPNOTSUPP)
-+		return 0;
-+
- 	if (ret)
- 		return ret;
- 
--- 
-2.43.7
-
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
