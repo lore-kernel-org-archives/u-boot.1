@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA9A9E83054
-	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 05:22:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F206FE83056
+	for <u-boot@archiver.kernel.org>; Tue,  3 Feb 2026 05:33:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C98F83FA4;
-	Tue,  3 Feb 2026 06:21:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4013F83FA4;
+	Tue,  3 Feb 2026 06:33:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EyxnOF13";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W9KbFgVe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5661783FA5; Tue,  3 Feb 2026 06:21:57 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id 5C07783FA4; Tue,  3 Feb 2026 06:33:01 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62F4483F54
- for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 06:21:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8882183F54
+ for <u-boot@lists.denx.de>; Tue,  3 Feb 2026 06:32:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=d+OFSIB3fpomGH9Y7pnJ2Rj9od940gKGjA1qwOEGt1mbrk7HZIsfD+x61fFu6Optzn+vYxKAWg5XqLUgkY1F7k8/ZKFUBzd2pxf7mljKpDFGXZ+yKbaNGHgGrTaB4Y3NET0fq7GG4lhmwZLq1ChzttF1UsMpFH0C/CjLHwm/FJDCX236vCuT+xRh3vaEt1mmaisKaWrK70tEBce6sEMFNX1iasoStS75aNvUa+oIvSAx9dr2y8wXFg2gsf3W8OUwz5SKkg7Eixxbnse/bj+Ho2vvHNw+f+E/DqOS/9XR/ha6ZyoyLkbgvooAqjGtgPPFIDohmZKowmIr1HU+/tSxxQ==
+ b=ochpExzIkMw8zIsvAbiuZRK3MvzGJRHM+DCHNQA13sgm0FlDNO/mJVF5QlT8PAu1dS8CnhOmR9OQb6B8e90lMvGhLzy1QqPnfO1BWVodymc0Ungf8P0eqv0GJp03b9FoAnd3SopTaMBxOced7A/xsGUjsvkNa/8LmcYudlVbivOe0gql9sE9yNhhUvi+I5uCKdpY7Ge0qzElHdqGDw+MdXSv4zWQY4UIzJrHl6YRSEZu7v2ZqNGwV9MdAkneTVrknW0DhIgW8H9upFhbzJYE0B49C+GhRnbBOWjEJ9/Kowi2QekZZ6HOHzjm+HNUar8oNY/QKxoFwKvgaP/Gjc7heA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QatTfHfUMLAZv54fcvODGcnaL+f8MGSB9ecoVvVNdqs=;
- b=I0KUYTAjr2lpveAmUo29dZt/qC7Ic+BBUOiopka64qE5UKcY1oMuGYKC18Rd6vEqJRFCJ0u+QIgeHPxcVEgKR2Xtf4FJiyLAWmjN5xONChCA4XJGpfvJEGqA7pxGXAT2j03MrsgwCyZfZpisWvFKSj0A+RVaGxCgj+YHHo/aiMG53sBFGxfcgK8ju2MHjJFFB9OvplccVqC3df2xqhfapkBs7rr5D2byEPBNuoquxPcbdcmbBSywSxfOfpZqNcmVOLyLG76cCclIkfZEiQNOIjqv+TSrcugZW0CZ30jPoU/zNia+OifAaGp792nVlXMjfIZFM0Bz1Bv0un01mMy7eQ==
+ bh=N0KA4yt4P+hTdfpVXJBRvspt6YUq5mhySDxLY2MQiw4=;
+ b=ta5g9iW0SpcDXFq3gUr9p8O+nvJtPq3FLXejVfkaSTENwnEiW/v3Iuw0kda8EcBnNElR5hntn1SCJmIIPsGt7SXO1+rv8V8tvV8OSiEmUiVEJW4J9IWJHATlz7ZR1mUTWAfvxqw4OSOVMlfwpFHDWbIRVXTGJZbMVzDas8F6+/ncqWgrtG9HA45fLb0KTu7F6zW3Taf4ikmDFT0gLokAfrONc1QtziBkFp0YOaa+RfLASOqvBMcS8PxqMV4s9CbzAKtKRyBj/r/Po8aiiAaqrQwTDkyMqiRTtBhD6soDPn2H2LkMImGqo7hKYgegSKWHdfpWHxjBTbs3d3lfsamuvA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QatTfHfUMLAZv54fcvODGcnaL+f8MGSB9ecoVvVNdqs=;
- b=EyxnOF13csdUA540depHR/mguREhPwov1kXOEl6mPwMjnaYtXDwZvilVYUnXXgMGeXZMTcFnKbTz45ebB+43KO4VjBbyilaaeSC0b3x1BtjoZ/dORr+8HjslLFZSGQLgP4YpXFDIowb9hRLzK/1l68MXts1R6gKsSsM9y+1kuiE=
-Received: from SA9PR13CA0064.namprd13.prod.outlook.com (2603:10b6:806:23::9)
- by CH3PR10MB7187.namprd10.prod.outlook.com (2603:10b6:610:120::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.14; Tue, 3 Feb
- 2026 05:21:50 +0000
-Received: from SA2PEPF00001507.namprd04.prod.outlook.com
- (2603:10b6:806:23:cafe::77) by SA9PR13CA0064.outlook.office365.com
- (2603:10b6:806:23::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.7 via Frontend Transport; Tue, 3
- Feb 2026 05:21:50 +0000
+ bh=N0KA4yt4P+hTdfpVXJBRvspt6YUq5mhySDxLY2MQiw4=;
+ b=W9KbFgVeNX0aVpAbBEyBrUfz7i1RgsPpysToU+TBTrXR1Z7UkFkSe0kOCgpDB6ThLIK+MohB0TiballyuImYU3YO1Q7YIdntRY4E9tTZN6Qp2h1mvoi6E015czynqEK8i40blWX73iDRB/c/6kJYhTpa4QKpEu5TfsKHbLMhw/w=
+Received: from BYAPR03CA0017.namprd03.prod.outlook.com (2603:10b6:a02:a8::30)
+ by LV3PR10MB7748.namprd10.prod.outlook.com (2603:10b6:408:1b4::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Tue, 3 Feb
+ 2026 05:32:45 +0000
+Received: from SJ5PEPF000001CF.namprd05.prod.outlook.com
+ (2603:10b6:a02:a8:cafe::1c) by BYAPR03CA0017.outlook.office365.com
+ (2603:10b6:a02:a8::30) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9564.16 via Frontend Transport; Tue,
+ 3 Feb 2026 05:32:48 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -58,103 +58,101 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.21.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
 Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SA2PEPF00001507.mail.protection.outlook.com (10.167.242.39) with Microsoft
+ SJ5PEPF000001CF.mail.protection.outlook.com (10.167.242.43) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 05:21:49 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet200.ext.ti.com
+ 15.20.9587.10 via Frontend Transport; Tue, 3 Feb 2026 05:32:44 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet200.ext.ti.com
  (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Feb
- 2026 23:21:47 -0600
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 23:32:43 -0600
+Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Feb
- 2026 23:21:47 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 23:32:42 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 2 Feb 2026 23:21:47 -0600
+ Transport; Mon, 2 Feb 2026 23:32:42 -0600
 Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6135LkAN2953286;
- Mon, 2 Feb 2026 23:21:46 -0600
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6135Wf2F3393708;
+ Mon, 2 Feb 2026 23:32:42 -0600
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 3 Feb 2026 10:51:45 +0530
-Message-ID: <DG52P91F2IJ0.13IQHK33CRF1E@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH] board: ti: j721e,j7200: fix do_main_cpsw0_qsgmii_phyinit
+Date: Tue, 3 Feb 2026 11:02:41 +0530
+Message-ID: <DG52XM98AICT.O5PR7FP4G4BA@ti.com>
 From: Anshul Dalal <anshuld@ti.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
- <joe.hershberger@ni.com>, <afd@ti.com>, <n-francis@ti.com>, <b-padhi@ti.com>, 
- <ilias.apalodimas@linaro.org>, <peng.fan@nxp.com>, <jerome@forissier.org>,
- <neil.armstrong@linaro.org>, <d-gole@ti.com>, <anshuld@ti.com>,
- <j-humphreys@ti.com>, <semen.protsenko@linaro.org>, <bb@ti.com>,
- <m-chawdhry@ti.com>, <mkorpershoek@kernel.org>
+To: =?utf-8?q?Marko_M=C3=A4kel=C3=A4?= <marko.makela@iki.fi>, Anshul Dalal
+ <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>
+Subject: Re: How to use ECDSA for signature verification?
 X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260202141058.648965-1-s-vadapalli@ti.com>
-In-Reply-To: <20260202141058.648965-1-s-vadapalli@ti.com>
+References: <aO1GvGrXUw-co84_@kehys.lan> <aQ98sHenb3G1MQDi@kehys.lan>
+ <DE5KUDXKQ20P.86VFM203YPJS@ti.com> <aRNcq79cr08IN5HE@kehys.lan>
+In-Reply-To: <aRNcq79cr08IN5HE@kehys.lan>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001507:EE_|CH3PR10MB7187:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6594a10d-7458-43d0-bfb3-08de62e421e6
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001CF:EE_|LV3PR10MB7748:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9e7600d1-5390-43f5-26e3-08de62e5a86d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TS9Xb2xCKzVKTlJzeVRRb0F4QkRCNjRyaWtoWE55OHVRRHNVZ0NMZzdVZGsw?=
- =?utf-8?B?UXFESXlWSVQ3YUJRUEhJSXIwUUp2R3NodStIUzJzcmxQeStTZDhPUTA2VGVL?=
- =?utf-8?B?V1ZjRXFBMHJqbHZUMW9jUFUxOVppQ0RhK0VNd0kxWkFybHN3SnovSmQxOU5W?=
- =?utf-8?B?S1BXbVUwRDZUOENuRkZaRE05SkRpalo5aGlwbFFTQ3F2RWlTU3UwdThVZTBZ?=
- =?utf-8?B?VUdkS0xmZ3J0c3dHTTZsQktZdHkvNlNkeHMwaFl0bXZJbWhzaUFidU5lenB0?=
- =?utf-8?B?bVVzWGdMQ3prcUdFc0prTThBMTFyaFV3QXlJQzRwWVBJRWg1OWNITHpXcWFQ?=
- =?utf-8?B?Q096bllGdHBPYytxWFlTbGhQT0UvSVFzc2djNjQ0SlQyVy9wb2kwNXFiNVMr?=
- =?utf-8?B?Tnd6cXRqeXEyZWZxRm9OMXk1RXE4UUVNcjRERHYxM2xFams4ZU9CcXF1THpZ?=
- =?utf-8?B?d0w5cFFBSkc3a1ZvcjJBSitaaVpSYW1mdXNqUnp2K3RpK2VnMUI4SVhCRjBB?=
- =?utf-8?B?R3JjZmdhc3l5SjFTWTJvSzFjOUJXZURVcklNNkhPbVU5RW81YUJ4QUxGU3dB?=
- =?utf-8?B?aEhwcU9aMlIva1kvK1doRXpyc0FBb1RIckd2Z0hQb3JKN2g3WUVRTUJ6UGRy?=
- =?utf-8?B?bllodlZrZWdOQnFUa2FFWkhsUk50UTBjOEZud25sK2cyOGh3RGozU2toM040?=
- =?utf-8?B?NXdGMVlYYnlwMGpWa3M2d2ZaUmhaT0ZHWThhREhUSzNOWHBubURPRjNqaFBY?=
- =?utf-8?B?alhvMnZBMTErUWtuSGVtajc2Q0NrMDlUQXpTdnh5MDIrU0lmYUpBRDdQQlJH?=
- =?utf-8?B?RDZwVUxKSW4wdC9MMkpqT1Z6djJmNmhaUUs3ZTV5RVNVdjdiUGQ5ejk4Ukt4?=
- =?utf-8?B?eWxidjhrSllsT1Ivc3AwOG5pWC9tbnZwaG1YYUNDZ0tuUmRwdERlYzdhSDZR?=
- =?utf-8?B?SlFwU21JTkRVUWNNOHFPOW0yQmx6bzJGS1I4L1NaeExlSmdvQ2pSM084SXZn?=
- =?utf-8?B?SjhHSWJlMUxzVmozKzdtWDNTSFJES2lkVzNaakNZZmc1Nk9DRThGdWFFS2ty?=
- =?utf-8?B?eE1PYUJOWkVSRTkxcXN0UzZucEpiMXZaeVRTZk55ZkJZclduMi9aRlpzcVBE?=
- =?utf-8?B?OUswSDM5RCsvNTlRdGdtaE5EdlNKYjRHQTZLcU15Ny93N0FYeUF2c00xeHpw?=
- =?utf-8?B?T1FpN3V1VFRaS3kzc1RGTkJvMjFKWUdsQnZadHhIZ0JtUjRHR3MzNzI0RHg0?=
- =?utf-8?B?SkdUN3ZvREtqVmdQZ29jczgzYld5U1BUQkd2UDRuMXk2WVFQMmJKeGVDeTVL?=
- =?utf-8?B?RVBVbFJCREtUZmQ3alQ2eGlEVWNFY3JERm54RzVad1V5cnl6RWZuZ3VzVzB1?=
- =?utf-8?B?Nkl0T2xCclgvcTBTeTc3UWRXOTlheUQ3WlpJZzM3TDZvdlc4MFFMMVJ3Y1U4?=
- =?utf-8?B?Tkttd2lvYnhCcEFUampqdU5tU1RjMCt0N3crSUtoL0VFUWpWRmhoNjJ0cWdZ?=
- =?utf-8?B?cGhUNDVCQlVHZG5OMW9kUVluK0ZCZnFzVzIrb3RtZ0hWWHgyZS9TWFNlMkFi?=
- =?utf-8?B?QVg4RU14MUhic3duMFYwZ2tQd2tUQ3dFcGMra3ZzdytiSDM5WEZSc1BKMEJR?=
- =?utf-8?B?dDFONUpPVVoreEtFd0VEb0ZjWHVzVjdjb0hKTmlYbE1sT0NqSlhXNHUrMzIv?=
- =?utf-8?B?Yzl2V2sxUlRGNWtScGU2K01jSTFYbW5aYUd6S05vMHQ2VERsczJ2RGIxTk5V?=
- =?utf-8?B?d0lpM0ZWcFVOenV2M3dPWEhmRldvcDdZZ1NoeUUrK2N3dWhDb0laWldMaEdk?=
- =?utf-8?B?OFJ4N0swUE5FMUc4T3prVnl5dlhtUDYySEttbG45RFdobTlrSGxUWnlyR0Fj?=
- =?utf-8?B?YVZKMFh4YXU4ZnlzR2xzdnNlRHZnOFJIZUFDVXdTdHZmQVhmV2hLRDYzVXZI?=
- =?utf-8?B?L0JWTk1oRUZ5clgvVGNXdWdFZHdMSjU5cUxyWEwrYUpHekxha2tVRjF0RW85?=
- =?utf-8?B?M0gyV3pzeFB5aGtvYTFhODdMcXZ6MkVXQkl0MjVuTDNrUEpFTTlCWlpsb1I4?=
- =?utf-8?B?V2tHR0swSWdRQ09yWGZXMUs4Sk5PRHBJLzFodlNEamg3b1NWbmVIVFhQU0Jm?=
- =?utf-8?B?ZjFFWG5lcFk5ZUVwaWo4Wk9GeXV1NDVwbC9WMGpJVU1odDlYM0dkUWxPM2w2?=
- =?utf-8?Q?ajun+aEzez259rZiNEqfkvXsPCp2fUHuxk9bK6lJkgj6?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aVhlMm1rUm94SjRjdSt3TkRzTXlaREpPYjBFdDdmeE1GZEZQU2ZxQzBiWHp3?=
+ =?utf-8?B?UGhITTRla0VEakZ1N1VjQUZEMWJhUlF2alB6anhzTWowb1FDMFpnQm9kQU9G?=
+ =?utf-8?B?aXd0NXdiaUpjdm5EWXFFSElFSUhKR1NtRGZJeWgvYmxweGs1TE91MzYvR09n?=
+ =?utf-8?B?ck8xMXZDdUZXY1lWN2g5b0tYRG9BbFJqZHBnNFdBQnc5U3QweVhjVFZoc0dt?=
+ =?utf-8?B?ZFRNY1NXeTJhZ0VYcVE5Q25VdnZ2MmRKMFQzQlhyZzVRVit5dFZZOE1hVThZ?=
+ =?utf-8?B?Q1A0dWdIalREV3N1cnBXeEFIYWErME5JZHZyYzQzRTVYa2duK0tWT1k5Vktn?=
+ =?utf-8?B?bWV1b1ZUa3QrL05jdCtrdXBUYWRFK01aSGJmakVxbFhwZXZBT25MZnVkVmdD?=
+ =?utf-8?B?YVpPNnN4bVp6VWNuTldnckNrNHVRVHNIZm5WRnBYcHZRamovNjJFVXk1ZW1T?=
+ =?utf-8?B?aUF6dVFxNy95VkFOTWFhL2NuREk0U2tWU1JNMUYvOTJYMlNUa28rSXdWUHlE?=
+ =?utf-8?B?bUw4UkNkak0vejRYR1RtUUhKUWIweDJwNFU5R1RLMG9Ec0lUS1dycVZ2R1E5?=
+ =?utf-8?B?empaY3ovNzdsTFo5K2JCa0hGdWp0NXJTdEgxMWVZamFZRTREZFVYQW5ZOUFm?=
+ =?utf-8?B?Y0VvenpKeFcza0Rub2wrL0NhZ2loYi95TkxKNndiL1BpS1BwSU14a2VoRXFr?=
+ =?utf-8?B?eVNpR3U3YklBQmpvMnJjNFRzSERncW5MeExpL0hYaWZEVk54Q2lyS1UrMnN0?=
+ =?utf-8?B?bHRGWUQvcTl6SEV4dmNaK2FxTXpkOW4rQ2lCZHBtWG44ZCtmUXhGZXRWVU4w?=
+ =?utf-8?B?QW1WT0MzVXZXN1FoYTVwSkkzUHpETjEzSS84UnlBTVhlUnlBejVpR25KUGNq?=
+ =?utf-8?B?d3ZBbzFYZDZNbnRLVVlxQkQwa3p1NGFlbGRMcnhvcTlkZ3N1ZzFMTzFENHpu?=
+ =?utf-8?B?TktSc09uSEg2bWg0RmZwWWNBUXVHb2FuZzdSbEswTVZEZU8xd2hwR2hkU0Zj?=
+ =?utf-8?B?UWF1VG9mZUdta0pLSG0yVktJLzFoajJiV2R1UHo2Wnh4dm5Pak04Y3dUSlFs?=
+ =?utf-8?B?OTRvUTF1UVBUOG1xZjI2dnIyRE9wbWJzeTBVK0ZLOHE5NzRGNG5EeVhUNE11?=
+ =?utf-8?B?SlJVNlU1Qkt2enN5emsrQm91VWVxMUM3cmpmTlBZamdvRkhoMHlFa0ZrZ3U0?=
+ =?utf-8?B?bU5kbDRueG1rbDhGblhxckNoeitPNWxGY2lYb2FkRXk4Ulh4TXpDYkE2UFpy?=
+ =?utf-8?B?d2ExODA5L0EzZXpISCswb1hDOGk2Rk4yMmwzUEk5RVpLdm91M3FZZExoR3hB?=
+ =?utf-8?B?Qzh4S1ZHcnI3eVVTSXFvMkFtOW4yaHovK3hpWTc0cnB3K0dsZFhaTFE4amJO?=
+ =?utf-8?B?SUZLQmpZUUhKK1JScW5VR1hYdTFhU2d0d2kyVjIrRUxSMkx6OEV4WFR3d3l1?=
+ =?utf-8?B?cU9JRlpWZ3k3U24zRVIvZ0JoZmFiUE8xNzlpT0ExbUJYVzI2cFN3ZUdBQXQ1?=
+ =?utf-8?B?T1dqZ1MxOHhNWGF3VjlNZC9xMnB3Z3RRZS9XTE15bkgvU1phNSthVGZHYjhw?=
+ =?utf-8?B?bk9CSG5HUmFJc05JRkdsV2k2TGRxQXo3TldTK0ZEbzRaTzJuKzVuS0hwbC8y?=
+ =?utf-8?B?TFFMcTY3RlVpdXdiOWwxa0tFL3hvVXNTQXVLNDQwWkp2Ymw1RG5teDBndkFv?=
+ =?utf-8?B?TEpPaWhLL2I3UHhNZzhqZzdjSnR0eEp4Qi9hY0RXdE1KUi80RndCYS83ajNE?=
+ =?utf-8?B?bG0wbzNaYjI5YkpHMmZrZXl6OURSV3dBdVVPQTNIeGVZSmhyNGJpOTZoY3hj?=
+ =?utf-8?B?eXhTbjhoOXRrdXE1ckhLSVF5bEJDWHQyMzZrOEIrYk9CczV0UUphcmRjZGhQ?=
+ =?utf-8?B?SGsvUUphd3hKSDFtOXJGRWt0OXZJU0l2bUFram16ZFlZN3hJdjAwRTNmNEl0?=
+ =?utf-8?B?dHFmR0ZRZlZJYUF3YTU4eS9pRmxGYk1raDRoRzkrU3VCVFo3UUJGMFEyNHhz?=
+ =?utf-8?B?aWFaL2JFZTlIR09laGUxU2pVek5PY01UZFZZZS9MalFQMCtaSTd5VlpIazhr?=
+ =?utf-8?B?K0Vta2F0cDJJc0d4SDdaNnVZVHJGYlpCU0NmcllqQVJoYytreTFjQXhQblZa?=
+ =?utf-8?B?cmFsQ0RlSkw4TUJjR3FPM292MjFocGRkaHZhZjlpek1wVnBnVnUwQm0ycGRi?=
+ =?utf-8?B?d3hiY0lhMXZrM0RudTZrVXRLb2FtM1RmZlBQS2d3d3U4RU1yL093UUJlYktr?=
+ =?utf-8?B?ZlRHMEFIY0ZrRlF4Mjgxa0R1RDFRPT0=?=
 X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013)(921020); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(7142099003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: yaHe6NKIw7aWiawIVBnrvDc8IQEY2p0BqUhEMYMy8apmrW3kHBRVO08RZgEwXCTCtIZioeadSb/SS5UUsjDUgvr35Ah1+f12zj+WhTBVeFr2MGnUU8ZIDuX5kRmYQR81V1cMXV3Q171xNy7bZygLT3t9D2cxeKs9Jf0QOUJhUcBMqqt5i5v9jfsw9T1p88uDzN28uk2vDpqFuAQqb87e7B/HhckDxyJO/7noql7Gmrosuz8PaHIvn9I63UUopr+RaJdTDaSwRVS5e8mt6zjo49mLlT3g9pU/y/M0voFbbQDdonkhyggU6XMbw/26FKc7Fi/0NN6GT7EONZ1Li3T44mCoxm21v7feD/Bw0lHUmK8vQz4Jc2b6sPQUa4kRvcbzbaI6L3oNqlYeknrdgOFC+g+swtmw+1j8pW/vWnLcGzk86xerSIr1rtqpeZA9qO44
+X-MS-Exchange-AntiSpam-MessageData-0: Y1JNDgzauUX758QXAZcnu7tBqoJyyeHO30hDXa3Oxdh8FJP2NUHtcpKXl8/YkVw36jkixN3kHJhxKbLbg4xILWWMckxcUPMJ+UkL8uBPYIhLacY/m2Neo9MDz+CK2UO2jIGUolIKstpf14tpFGoAZYCJrvYIRLm8AMI1uNScUbTsMri22Rx1ACoYzgPQSenMTISE7OVRq7txyXvi1KCYqaL3ugog+FUln+pkY8sQWLGWgiRC1d8AmyAGZ/fb3t5P3Cnssc1EKihgvOUFYM7N9pid3kJdJJo1d3yF2+D4JBo7zucnFnaPuLjS1oEqeLV/YtUvHhV5P4QJKWI9GXiPLSHZHIkTaGcn/WwP/lRxjpZaX9Q7B1Wh/oGcUDmxcogQlHtm+XzDa1+2OMpaCc4AaouPYkg4F7zAfn5H7KqNLnxaYzCTDoUpDyya3cdg30o4
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 05:21:49.3253 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6594a10d-7458-43d0-bfb3-08de62e421e6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2026 05:32:44.4590 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9e7600d1-5390-43f5-26e3-08de62e5a86d
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
  Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001507.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001CF.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7187
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7748
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,143 +169,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon Feb 2, 2026 at 7:40 PM IST, Siddharth Vadapalli wrote:
-> Since commit 27cc5951c862 ("include: env: ti: add default for
-> do_main_cpsw0_qsgmii_phyinit"), the value of the environment variable
-> do_main_cpsw0_qsgmii_phyinit happened to remain '0' and couldn't be
-> changed without user intervention. This behavior is due to the following
-> cyclic dependency:
-> A) ti_common.env sets do_main_cpsw0_qsgmii_phyinit to '0' and its value
->    can only be updated automatically by main_cpsw0_qsgmii_phyinit.
-> B) main_cpsw0_qsgmii_phyinit is defined in j721e.env and it can run only
->    if 'do_main_cpsw0_qsgmii_phyinit' is already '1' which isn't possible
->    unless the user manually assigns the value.
+On Tue Nov 11, 2025 at 9:26 PM IST, Marko M=C3=A4kel=C3=A4 wrote:
+> Hello Anshul,
 >
-> Fix the aforementioned cyclic dependency by using board_late_init() to
-> detect the QSGMII Daughtercard and set do_main_cpsw0_qsgmii_phyinit.
->
-> Additionally, to address the issue of do_main_cpsw0_qsgmii_phyinit being
-> 'undefined' for other platforms, replace:
-> 	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
-> with:
-> 	if env exists do_main_cpsw0_qsgmii_phyinit;
-> in ti_common.env.
->
-> Fixes: 27cc5951c862 ("include: env: ti: add default for do_main_cpsw0_qsg=
-mii_phyinit")
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
->
-> Hello,
->
-> This patch is based on commit
-> eed514b11d0 video: correct label for cyclic video_idle
-> of the master branch of U-Boot.
->
-> Patch has been tested on:
-> 1. J721E-EVM (Has a QSGMII Daughtercard)
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/0b453ca7d9e133263ebe10f=
-79b3f685f
-> 2. J7200-EVM (Has a QSGMII Daughtercard)
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/3f408ec145e71404ef46194=
-b8c1d4f5b
-> 3. AM625-SK (Does not have a QSGMII Daughtercard and the 'undefined
-> variable' error isn't seen):
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/a16d4a02701b7ef594fd1b9=
-8ee015144
->
-> Regards,
-> Siddharth.
->
->  board/ti/j7200/j7200.env     |  1 -
->  board/ti/j721e/evm.c         | 16 ++++++++++++++++
->  board/ti/j721e/j721e.env     |  3 ---
->  include/env/ti/ti_common.env |  3 +--
->  4 files changed, 17 insertions(+), 6 deletions(-)
->
-> diff --git a/board/ti/j7200/j7200.env b/board/ti/j7200/j7200.env
-> index 292fc72fd58..e22a954d8db 100644
-> --- a/board/ti/j7200/j7200.env
-> +++ b/board/ti/j7200/j7200.env
-> @@ -26,7 +26,6 @@ bootdir=3D/boot
->  rd_spec=3D-
-> =20
->  #if CONFIG_TARGET_J7200_A72_EVM
-> -do_main_cpsw0_qsgmii_phyinit=3D1
->  init_main_cpsw0_qsgmii_phy=3Dgpio set gpio@22_17;
->  	gpio clear gpio@22_16
->  main_cpsw0_qsgmii_phyinit=3D
-> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> index e030fe7dc87..d82bf4af7e8 100644
-> --- a/board/ti/j721e/evm.c
-> +++ b/board/ti/j721e/evm.c
-> @@ -403,6 +403,19 @@ static void setup_serial(void)
->  	env_set("serial#", serial_string);
->  }
-> =20
-> +static void qsgmii_daughtercard_env_update(void)
-> +{
-> +	int i;
-> +
-> +	for (i =3D 0; i < ARRAY_SIZE(ext_cards); i++) {
-> +		if (!strcmp(ext_cards[i].card_name, "J7X-VSC8514-ETH") &&
-> +		    daughter_card_detect_flags[i]) {
-> +			env_set("do_main_cpsw0_qsgmii_phyinit", "1");
-> +			return;
-> +		}
-> +	}
-> +}
-> +
->  int board_late_init(void)
->  {
->  	if (IS_ENABLED(CONFIG_TI_I2C_BOARD_DETECT)) {
-> @@ -412,6 +425,9 @@ int board_late_init(void)
->  		/* Check for and probe any plugged-in daughtercards */
->  		if (board_is_j721e_som() || board_is_j7200_som())
->  			probe_daughtercards();
-> +
-> +		/* Update env for power-on-reset of the QSGMII Daughtercard */
-> +		qsgmii_daughtercard_env_update();
->  	}
-> =20
->  	return 0;
-> diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
-> index ead7fbdb212..34f5f63d60a 100644
-> --- a/board/ti/j721e/j721e.env
-> +++ b/board/ti/j721e/j721e.env
-> @@ -29,9 +29,6 @@ rd_spec=3D-
->  init_main_cpsw0_qsgmii_phy=3Dgpio set gpio@22_17;
->  	gpio clear gpio@22_16
->  main_cpsw0_qsgmii_phyinit=3D
-> -	if test $board_name =3D J721EX-PM1-SOM || test $board_name =3D J721EX-P=
-M2-SOM || test $board_name =3D j721e; then
-> -		do_main_cpsw0_qsgmii_phyinit=3D1; else
-> -		do_main_cpsw0_qsgmii_phyinit=3D0; fi;
->  	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1 && test ${dorprocboot} -e=
-q 1 && test ${boot} =3D mmc; then
->  		run init_main_cpsw0_qsgmii_phy;			\
->  	fi;
-> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
-> index 03e3267ef8a..a0ed83f52ac 100644
-> --- a/include/env/ti/ti_common.env
-> +++ b/include/env/ti/ti_common.env
-> @@ -22,11 +22,10 @@ get_fit_overlaystring=3D
->  	done;
->  get_fit_config=3Dsetexpr name_fit_config gsub / _ conf-${fdtfile}
->  run_fit=3Drun get_fit_config; bootm ${addr_fit}#${name_fit_config}${over=
-laystring}
-> -do_main_cpsw0_qsgmii_phyinit=3D0
->  bootcmd_ti_mmc=3D
->  	run init_${boot};
->  #if CONFIG_CMD_REMOTEPROC
-> -	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
-> +	if env exists do_main_cpsw0_qsgmii_phyinit;
+> Tue, Nov 11, 2025 at 09:52:51AM +0530, Anshul Dalal wrote:
+>>Hello Marko,
+>>
+>>On Sat Nov 8, 2025 at 10:54 PM IST, Marko M=C3=A4kel=C3=A4 wrote:
+>>> Hi all,
+>>>
+>>> I am new to u-boot, please bear with me. I got CONFIG_FIT_SIGNATURE=3Dy=
+ to
+>>> work with the RSA algorithm, but not with ECDSA.
+>>>
+>>> My two main questions are:
+>>>
+>>> Is CONFIG_ECDSA_VERIFY only implemented for the two targets:
+>>> rom_api_ops in arch/arm/mach-stm32mp/ecdsa_romapi.c
+>>> cptra_ecdsa_ops in drivers/crypto/aspeed/cptra_ecdsa.c.
+>>>
+>>
+>>Yes, those two seem to be the only one's implementing UCLASS_ECDSA.
+>>
+>>> Is it feasible to support something more modern than RSA signatures on =
+a
+>>> reasonably high-end target, such as ARMv8? Are there any suggestions or
+>>> git commits that you would suggest as a reference?
+>>>
+>>
+>>Should be possible, you can look at the current implementaitons of RSA
+>>and lib/ecdsa/ecdsa-libcrypto.c for reference.
 
-The patch looks good to me however I wonder if we should factor out
-cpsw0_qsgmii related envs out of ti_common.env since as far as I can
-tell we only seem to be using it for the j721e/j7200 devices.
+FYI Phillippe Reynes has posted an RFC for the same[1], you can provide
+feedback there if interested :)
 
->  		then run main_cpsw0_qsgmii_phyinit;
->  	fi;
->  	run boot_rprocs;
+[1]: https://lore.kernel.org/u-boot/20260202170307.217200-1-philippe.reynes=
+@softathome.com/
+
+>
+> Thank you. I will look at that.
+>
+> [snip]
+>
+>>> Rebuilding with CONFIG_ECDSA_VERIFY=3Dy changed the error message to=20
+>>> the
+>>> following:
+>>>
+>>> sha256,ecdsa256:dev-  error!
+>>> Verification failed for '<NULL>' hash node in 'conf-1' config node
+>>> Failed to verify required signature 'dev'
+>>>
+>>
+>>This is probably due to U-Boot failing to find a driver with
+>>UCLASS_ECDSA, you can verify by adding a "#define DEBUG" to the top of
+>>lib/ecdsa/ecdsa-verify.c and check if the following error shows up:
+>>
+>>	ECDSA: Could not find ECDSA implementation: -19
+>
+> Thank you for the tip. So, the #define DEBUG would enable the debug()=20
+> statements. This indeed confirms my hypothesis:
+>
+> ## Executing script at 90000000
+> sha256,ecdsa256:devECDSA: Could not find ECDSA implementation: -19
+> -  error!
+> Verification failed for '<NULL>' hash node in 'conf-1' config node
+> Failed to verify required signature 'dev'
+> Boot failed (err=3D1)
+>
+> I'm working on this on a hobby basis for now, and it may take some time=
+=20
+> before I will submit any patches for review.
+>
+> Best regards,
+>
+> 	Marko
 
