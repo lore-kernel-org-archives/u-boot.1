@@ -4,89 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD29BEA7946
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 21:27:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C68EA7946
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 21:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B1938063E;
-	Wed,  4 Feb 2026 22:27:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
+	by phobos.denx.de (Postfix) with ESMTP id 2C25A8063E;
+	Wed,  4 Feb 2026 22:29:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="LHhBIWA4";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="x0kBNLYl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8334A838FA; Wed,  4 Feb 2026 22:27:21 +0100 (CET)
-Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
+ id 41005839A8; Wed,  4 Feb 2026 22:29:41 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E019800AE
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 22:27:19 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nwl.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
- s=mail2022; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
- Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=tNykEnrb5ye3IYX0FNsgkd4BEH3nEhaBe2Gjm/4pukU=; b=LHhBIWA41+hCTcDW0VzMD6IT5Y
- vpqWY6wLhChHEUpQDazubahzcEVjYQAhCH5s2LLr7pYVkxt3ipkSAxFfmwlKyxWzb70cxu+m5wrHq
- ePXO7bsUBC1eO+qCM38raaQtvwFbG4hUjHkfbqj8hHuXZTCMXes5m6wrgGYSbTO3JQflA9huk5pi9
- quYtUQCFEplPjnE8mujbJ86XiouI13ZD3cXgbZ/ntU0iVgQ9km0ptz+dC05XYxGKHaNV+/Pu5BBMi
- u+COozQl04Q8wGCzhCZeWT6dIznbY5nl5TJ+TvGYzcye8R6hqUXjgCM0m3+53LzpG47xsxl25JTHq
- KAsTphgg==;
-Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.98.2)
- (envelope-from <phil@nwl.cc>) id 1vnkP1-0000000026J-1oWr;
- Wed, 04 Feb 2026 22:27:11 +0100
-Date: Wed, 4 Feb 2026 22:27:11 +0100
-From: Phil Sutter <phil@nwl.cc>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Beleswar Padhi <b-padhi@ti.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Joel Stanley <joel@jms.id.au>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>, Stefano Babic <sbabic@nabladev.com>
-Subject: Re: [PATCH 02/10] arm: Update linker scripts to ensure appended
- device tree is aligned
-Message-ID: <aYO5r8Na5-fRYHgA@orbyte.nwl.cc>
-Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Beleswar Padhi <b-padhi@ti.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Joel Stanley <joel@jms.id.au>,
- Kever Yang <kever.yang@rock-chips.com>,
- Michal Simek <michal.simek@amd.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Stefano Babic <sbabic@nabladev.com>
-References: <20260115222828.3931345-1-trini@konsulko.com>
- <20260115222828.3931345-3-trini@konsulko.com>
- <aYO3HOmFFVAkjfKD@orbyte.nwl.cc>
- <20260204212010.GD2603314@bill-the-cat>
+ by phobos.denx.de (Postfix) with ESMTPS id AFF35800AE
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 22:29:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f2f8=AJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1770240577;
+ bh=sxyPIaE4BDk+GZJUorgBmZWruR2GpYday4Se1+RcanU=;
+ b=x0kBNLYlGzMiArZb5B0ftB8vN+SgIcpqlVUKitW4mPQt3lbXD7cUfGrjGULC1egDSj4nxU6lq
+ M4W5jaqXosM7QUQwNzR7fr8HYJH8wvVltVkdluVHpAqUqpfa9+TJNZdW4+DqPu4qjvf4VyEsNaq
+ kL9P6k8UUVNa32R6NyoYHKotWVQVR+WPNdCihJCSrsTTt0CCf+zIPsEo2NfXpNbZmEQJeHk9UiU
+ YdOrPE7do0ZRGTGsk7m4YXjJjpikCPopUAGtxkm0IxrQmt1qTUYq9m/kj7A4gqi/TYfAkw57q7X
+ OI/f6LFx9ZuXjMhdpqezDijrylmb5gVUSfW0fIm+BevA==
+X-Forward-Email-ID: 6983ba39608a97faabf65e49
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.6.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] rockchip: Reduce size of ramboot usb472 payload
+Date: Wed,  4 Feb 2026 21:29:20 +0000
+Message-ID: <20260204212922.1611383-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260204212010.GD2603314@bill-the-cat>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,96 +69,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Feb 04, 2026 at 03:20:10PM -0600, Tom Rini wrote:
-> On Wed, Feb 04, 2026 at 10:16:12PM +0100, Phil Sutter wrote:
-> > Hi,
-> > 
-> > On Thu, Jan 15, 2026 at 04:19:32PM -0600, Tom Rini wrote:
-> > > With commit 0535e46d55d7 ("scripts/dtc: Update to upstream version
-> > > v1.7.2-35-g52f07dcca47c") it is now a fatal error to U-Boot if our
-> > > device tree is not 8-byte aligned. In commit f613a6e15ef7 ("ARM: OMAP2+:
-> > > Pad SPL binary to 8-byte alignment before DTB") Beleswar Padhi explains
-> > > that we must have ALIGN(x) statements inside of a section to ensure that
-> > > padding is included and not simply that the linker address counter is
-> > > incremented. To that end, this patch:
-> > > - Expands some linker sections to be more readable when adding a second
-> > >   statement to the section.
-> > > - Aligns the final section before _end (for U-Boot) or
-> > >   _image_binary_end or __bss_end (for xPL phases) by 8-bytes by adding
-> > >   '. = ALIGN(8);' to the final section before the symbol.
-> > > - Ensure that we do have alignment by adding an ASSERT so that when not
-> > >   aligned we fail to link (and explain why).
-> > > - Remove now-spurious  '. = ALIGN(x);' statements that were intended to
-> > >   provide the above alignments.
-> > > 
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > 
-> > For unclear reasons, this seems to break boot via xmodem protocol on my
-> > Synology DS414. I found this commit via 'git bisect'. The symptom is:
-> > 
-> > | kwboot version 2026.04-rc1-00098-g6ad0cf8f83db
-> > | Detected kwbimage v1 with SPI boot signature
-> > | Patching image boot signature to UART
-> > | Aligning image header to Xmodem block size
-> > | Sending boot message. Please reboot the target...\
-> > | Sending boot image header (67584 bytes)...
-> > |   0 % [......................................................................]
-> > |  13 % [......................................................................]
-> > |  26 % [......................................................................]
-> > |  39 % [......................................................................]
-> > |  53 % [......................................................................]
-> > |  66 % [......................................................................]
-> > |  79 % [......................................................................]
-> > |  92 % [......................................                                ]
-> > | Done
-> > | Missing DTB
-> > | spl_init() failed: -2
-> > | ### ERROR ### Please RESET the board ###
-> > | 
-> > | 
-> > | xmodem: Connection timed out
-> > 
-> > Debug printf()s in fdtdec_prepare_fdt() show that fdt_check_header()
-> > returns -FDT_ERR_BADMAGIC.
-> > 
-> > With HEAD at a8d982e1f1726 ("x86: cpu: Fix crash on FTRACE enabled
-> > builds"), reverting arch/arm/cpu/u-boot-spl.lds like so:
-> > 
-> > | @@ -41,14 +41,21 @@ SECTIONS
-> > |                 __binman_sym_start = .;
-> > |                 KEEP(*(SORT(.binman_sym*)));
-> > |                 __binman_sym_end = .;
-> > | -               . = ALIGN(8);
-> > |         }
-> > |  
-> > | +       . = ALIGN(4); /* critical! */
-> > |         __image_copy_end = .;
-> > | +       .rel.dyn : {
-> > | +               __rel_dyn_start = .;
-> > | +               *(.rel*)
-> > | +               __rel_dyn_end = .;
-> > | +       }
-> > | +
-> > | +       . = ALIGN(8);
-> > |         _image_binary_end = .;
-> > |         _end = .;
-> > |  
-> > | -       .bss : {
-> > | +       .bss __rel_dyn_start (OVERLAY) : {
-> > |                 __bss_start = .;
-> > |                 *(.bss*)
-> > |                  . = ALIGN(8);
-> > 
-> > The SPL image starts up again and continues loading the real uboot
-> > image. Note that I have no idea what these changes actually do, so I
-> > need instructions if I should dig further.
-> 
-> Does:
-> https://patchwork.ozlabs.org/project/uboot/patch/20260130183635.2612933-1-trini@konsulko.com/
-> fix it?
+Booting into SPL using ramboot can take several seconds on some SoCs due
+to the large size of the usb472 payload sent over USB to BootROM.
 
-Sadly not, same result.
+A large chunk of the usb472 payload, around 1-2 MiB, is padding used to
+avoid overlapping when loading e.g. TF-A to 0x40000.
 
-Thanks for the quick reply!
+BootROM is likely wasting unnecessary time crc16 validating the padding
+of the payload.
 
-Cheers, Phil
+Place the FIT payload directly after SPL and memmove it to the expected
+memory location, SPL_LOAD_FIT_ADDRESS, to avoid excessive padding and
+help speed up ramboot.
+
+Binman symbols are used to get the position and size of the FIT payload
+that is initially loaded into DRAM by the BootROM.
+
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+v2: Drop use of skip-at-start prop, image_pos is already taking
+    SPL_TEXT_BASE into account and was already correct for SoCs not
+    using 0x0 as SPL_TEXT_BASE, e.g. RK3576 and RV1126B
+---
+ arch/arm/dts/rockchip-u-boot.dtsi |  6 ++--
+ arch/arm/mach-rockchip/spl.c      | 51 +++++++++++++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index 71d7623fe2ca..4ba6a87e78ab 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -246,16 +246,18 @@
+ 		pad-byte = <0x00>;
+ 
+ 		u-boot-spl {
+-			no-write-symbols;
+ 		};
+ 
++		payload {
++			type = "section";
++			align = <CONFIG_SYS_CACHELINE_SIZE>;
+ #ifdef HAS_FIT
+ 		fit {
+ 			insert-template = <&fit_template>;
+ #else
+ 		u-boot-img {
+ #endif
+-			offset = <(CONFIG_SPL_LOAD_FIT_ADDRESS - CFG_SYS_SDRAM_BASE)>;
++		};
+ 		};
+ 	};
+ #endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
+diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
+index 1ce3a3b05547..a9155dceedb4 100644
+--- a/arch/arm/mach-rockchip/spl.c
++++ b/arch/arm/mach-rockchip/spl.c
+@@ -3,6 +3,7 @@
+  * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+  */
+ 
++#include <binman_sym.h>
+ #include <cpu_func.h>
+ #include <debug_uart.h>
+ #include <dm.h>
+@@ -10,6 +11,7 @@
+ #include <image.h>
+ #include <init.h>
+ #include <log.h>
++#include <mapmem.h>
+ #include <ram.h>
+ #include <spl.h>
+ #include <asm/arch-rockchip/bootrom.h>
+@@ -140,3 +142,52 @@ void spl_board_prepare_for_boot(void)
+ 
+ 	cleanup_before_linux();
+ }
++
++#if CONFIG_IS_ENABLED(RAM_DEVICE) && IS_ENABLED(CONFIG_SPL_LOAD_FIT)
++binman_sym_declare_optional(ulong, payload, image_pos);
++binman_sym_declare_optional(ulong, payload, size);
++
++static ulong ramboot_load_read(struct spl_load_info *load, ulong sector,
++			       ulong count, void *buf)
++{
++	ulong addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
++				    CONFIG_SPL_LOAD_FIT_ADDRESS);
++
++	memcpy(buf, map_sysmem(addr + sector, 0), count);
++	return count;
++}
++
++static int ramboot_load_image(struct spl_image_info *spl_image,
++			      struct spl_boot_device *bootdev)
++{
++	struct legacy_img_hdr *header;
++	ulong addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
++				    CONFIG_SPL_LOAD_FIT_ADDRESS);
++	ulong image_pos = binman_sym(ulong, payload, image_pos);
++	ulong size = binman_sym(ulong, payload, size);
++
++	if (addr == CFG_SYS_SDRAM_BASE || addr == CONFIG_SPL_TEXT_BASE)
++		return -ENODEV;
++
++	if (image_pos != BINMAN_SYM_MISSING && size != BINMAN_SYM_MISSING) {
++		header = map_sysmem(image_pos, 0);
++		if (image_get_magic(header) == FDT_MAGIC) {
++			memmove(map_sysmem(addr, 0), header, size);
++			memset(header, 0, sizeof(*header));
++		}
++	}
++
++	header = map_sysmem(addr, 0);
++	if (image_get_magic(header) == FDT_MAGIC) {
++		struct spl_load_info load;
++
++		spl_load_init(&load, ramboot_load_read, NULL, 1);
++		return spl_load_simple_fit(spl_image, &load, 0, header);
++	}
++
++	return -ENODEV;
++}
++
++/* Use priority and method name that sort before default spl_ram_load_image */
++SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, ramboot_load_image);
++#endif
+-- 
+2.52.0
+
