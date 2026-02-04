@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FA2EA7942
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 18:41:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54BB2EA7941
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 18:41:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3927983A5A;
+	by phobos.denx.de (Postfix) with ESMTP id 74E6983B03;
 	Wed,  4 Feb 2026 19:41:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m0vvWa3q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qu7AnvkR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8FD083A8E; Wed,  4 Feb 2026 19:41:48 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id B7E4E83A8E; Wed,  4 Feb 2026 19:41:49 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA21D8063E
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 19:41:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B76183A36
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 19:41:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-662f9b82a36so49791eaf.2
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 10:41:46 -0800 (PST)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d1851d85daso58573a34.1
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 10:41:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770230505; x=1770835305; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770230506; x=1770835306; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=74zJg8HmkZsL7/sxvdWIoGeclkPaJdfnSG/jk0YVE1g=;
- b=m0vvWa3qAS6bFwhK+R04wbV7icHB4q0sJkynVS7db/Mcl8c7SqUYP/sL6oBao7gUBf
- 4GOzp85Dat+OjSsY+Ij3JsodEoIJQi/79uffaqf6gpuWrEezbvjbRlBIaAQVc/oH1NDW
- O6qZ7/ez9+0BM4mTdj84x3GWNC8X9gOysPWgQ=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pHGEywbxBc3dSzCYMbxIg7Lj6NWwVAlWj/hyiEhUszI=;
+ b=Qu7AnvkRUh+4gpdOotjBolwVuwlj/KNRjXiw5NgRgIKkXrhDlBrt/ZS+TJj+F5GmWC
+ k3mPDjVpz/VCImg0ygAkU1cSDiPJIXHihp36j0tzC43dHliHl6uDs8XPJAKRSmn6EB1H
+ Q/HRDRUG4E1GS8A1FkJrhSuC963L8PSxMSYnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770230505; x=1770835305;
+ d=1e100.net; s=20230601; t=1770230506; x=1770835306;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=74zJg8HmkZsL7/sxvdWIoGeclkPaJdfnSG/jk0YVE1g=;
- b=Wn4wxo1n8AxsEBwJW7uZ0EkEmuMxag8gFHuthgFlTDqVKhVkepDOy7tmoIjrvWPs6e
- gNx7n22a+H3abqas+cFlLdxKDpWsG/MyreY/SBeiy/iTZHSHRbmuSvlbvm8uEBKfB/08
- Ql8dh53bN6xhiPxzbk2jXNDrt2jLFwmh5d8+3QeJw5dWKk6+I1JnurVIYkOVI+4Tn610
- dG2gcU9EQYfi5657U8INM5/qPCDzXVLkZOl7oAOER+fp4TnzLlIfQW70U4t9ul89OOOx
- sPJZXMPr/k+bwN/z7I98Ay+/bxu8DMZpkIjSVclzZ8GRFku7LLgAcc3wgauF8QWk+EXd
- ZyCQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVkTQuWW/kKMDE+lSULwHJgBiwRtitc6xTI1Bz1+hTLgO+FZY1OnYoLF9hMNZsuSxVL4RbPyTM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYIT08yzksq8YPDhsLTlA00bokuzyYwk1cIJR093Ctgb5bafTq
- SfpvFwy1hG+rbvRtEGYPbjB4YxpVrpNlaladK/gKW1nht8LF2RmIVmHBhm/Orjwb4K09PoGLR9t
- /Qqk1DX4=
-X-Gm-Gg: AZuq6aLUqPnRYHl1hl14/WeiXLUJlC2fJuWBHFepYPb8P9SVE1r0+dKo87iZAm3aTi0
- pVT3+vZhpOk21Nh2/HEy+VJcP2/yf47hfphqDdjjRkOymldLA9mqymr/+fTBSLdlmn5Z9MCdvrH
- oEaRELI/0GCDH86tuw5RqGKfEl6hcLmEnWTN5KXtS1nV8RVJUxW32oP6MvJpBjNljDB75wHhFPD
- EsbLwZcRTnl32tEwCpZiQVNwuimwAnqgBmHGdwpxWYhMR/67MjOF1Nc9vGNOrkFx0YP1fgy7ZTV
- IBw+Pa5eB88Ois0KfWXvEhP/ereO3kzfAKvI4EtRoO1NMktxLD5xFNv+0DqzJMbSHEzooWGDX5H
- jg1eGTkRvhdnmXmlTdUR8grLYpy/C917w8LQ/9v2MjZhX+QhaYAduDM4KlN6LJgHWMts3zpyznm
- vTaYXOgRanhwFj/CNdk4WjdeCFdbKfCyV17rbRkEvAtqiMNNSCDuuf1rwimkrBWqvNjcnlxendb
- ycecLscJL0W0N6UmzB7oC/L2o8kg+KIG5skWQ==
-X-Received: by 2002:a05:6820:1621:b0:663:7a1:8930 with SMTP id
- 006d021491bc7-66a23a02a8fmr1777617eaf.71.1770230504807; 
- Wed, 04 Feb 2026 10:41:44 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=pHGEywbxBc3dSzCYMbxIg7Lj6NWwVAlWj/hyiEhUszI=;
+ b=t16ZF7ARICuZUnowiaR+3Hv8nNRc4oJy0UDjcoD239LDzLBGT11frentyrcDYctAPJ
+ qAQO4HRxgyVk5lqVrFpMNiAqK/wrX/40wxMVXUEvRpdhDyZMa2d0CQoELZTZKMrNpwtw
+ 1kIrjjx7wm3OTiVSPsCk1vGDy+KBoA1z0mwD2dRyVLHBJDwTr+GjJtl1Nk44yaINgohi
+ 9OB056J0ax+PIVBVrcVjmfE0XvfSLgHPBGZpOt6j0uiCKecc8FuWaPRSI5JTdUDan2zc
+ jthezG/rC3IsJEGL66Mqz5tJJwMlZSmQbNEgyTo4yaxdCWtRjaU3x7ifATl5EC4w6O0O
+ myYQ==
+X-Gm-Message-State: AOJu0YyqyIUQvx0MyEpsH16kFEWAoNmfnx4sHm4Qu1blHH9CHCsEUpIR
+ aqcK5DU/buX8WsP7EjXyd24ED3SfawFtDMvjDYNgWM6lB9ylONK2v2zRShtknxZ508A=
+X-Gm-Gg: AZuq6aKqDxYPR73eDEZ6ALDp+5T/k/J7JAtjQ6JedOX8GE1dykNTf2eiQ2QCtsa/bhp
+ H4JpcsAT5J+k0PdiOhBslNdrPy0sMGHL5T+FFHE/keNeo4gCT5FlEEMQG+/u9WX85VrGKzbJf4+
+ mzqqxIbZ//C4jwMWNZHKuYy2uVjmsdbVparYLcjqCpehgp/EcEic9niroH/E42avxAy+u/LWk8u
+ X2m+eE6GBgZfrn5pqpYY0BMcOmzhLYLh5wF/n+8A5zeMPrgRYr5B2uc+xzpRvbA5WNoTbQQ3x6U
+ 8GITpyMvAv2h++5e8Ch8SQguiFdUtyYzwz4duXeCozE0A+v0XKlvzsVhGqM9x5+AFx/qs3GxuUs
+ VaX1swJBhTi+qwtnEg8RULuIfRpGgX1F+rlylDen5oybTlNF9qXvPUmIf4Cb8lsFOEWLQz3YMJZ
+ 6vvHuy3upi4u9eeZjc7e+iBJSgH0+3R1N7E/vpIEeZ5vX0SpKbAnuTfuO8v869uOzLvqTxdagIB
+ J/5lZ7hRfzLvx82C7YEUu4PiOZP37bqIRg4Sg==
+X-Received: by 2002:a05:6820:220d:b0:663:84d:396e with SMTP id
+ 006d021491bc7-66a23146232mr1716182eaf.62.1770230506272; 
+ Wed, 04 Feb 2026 10:41:46 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66a32bb1049sm1785776eaf.2.2026.02.04.10.41.43
+ 006d021491bc7-66a32bb1049sm1785776eaf.2.2026.02.04.10.41.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 10:41:44 -0800 (PST)
+ Wed, 04 Feb 2026 10:41:45 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Rasmus Villemoes <ravi@prevas.dk>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Mike Looijmans <mike.looijmans@topic.nl>, 
- Alexander Stein <alexander.stein@ew.tq-group.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Corneliu Doban <cdoban@broadcom.com>, 
- Alexey Romanov <avromanov@salutedevices.com>, u-boot@lists.denx.de, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20260119223305.3022690-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20260119223305.3022690-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH v3 0/3] part: fix partition searching
-Message-Id: <177023050305.1801114.9341513322484894339.b4-ty@konsulko.com>
-Date: Wed, 04 Feb 2026 12:41:43 -0600
+To: u-boot@lists.denx.de, George McCollister <george.mccollister@konsulko.com>
+Cc: Bryan Brattlof <bb@ti.com>, Andrew Davis <afd@ti.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Anshul Dalal <anshuld@ti.com>, 
+ Hrushikesh Salunke <h-salunke@ti.com>, 
+ Jayesh Choudhary <j-choudhary@ti.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Judith Mendez <jm@ti.com>, 
+ Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>
+In-Reply-To: <20260130153856.2049575-1-george.mccollister@konsulko.com>
+References: <20260130153856.2049575-1-george.mccollister@konsulko.com>
+Subject: Re: [PATCH v2 0/6] arm: k3: j722s: add PCIe support
+Message-Id: <177023050498.1801114.5061617137375248517.b4-ty@konsulko.com>
+Date: Wed, 04 Feb 2026 12:41:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -112,25 +103,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 20 Jan 2026 01:33:02 +0300, Mikhail Kshevetskiy wrote:
+On Fri, 30 Jan 2026 09:38:00 -0600, George McCollister wrote:
 
-> It was noted that a GPT partition with the maximum available partition
-> number (ex: /dev/mmcblk128) can't be read/write from U-Boot using
-> read/write commands. Futher investigation shows that the problem is
-> deeper.
+> This patch series brings over several changes from Linux that are required
+> to get PCIe working on the j722s and also enables PCIe in
+> j722s_evm_a53_defconfig. This allows Linux to be booted from an NVMe drive.
 > 
-> This set of patches fixes uncovered issues.
+> The J722S SoC provides pcie0 (using pcie_cdns_ti) thru serdes1
+> (using phy-cadence-torrent) thru serdes_wiz1 (using phy-j721e-wiz). Changes
+> to the three drivers needed to be ported from Linux to enable the REFCLK
+> output which is used with this SoC. These changes should be tested on other
+> platforms using these drivers by those with the hardware available to make
+> sure no problems were introduced.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/3] disk: part: fix partition search boundaries
-      commit: 0ced9ef07361980d1418eab33ee1f41274d1e0e2
-[2/3] cmd: gpt: fix partition search boundaries
-      commit: 6a1f8c897375d1f673699efdb3664b96f5af8c1c
-[3/3] mtd: mtdpart: fix partitions searching
-      commit: b06a1785b2bbe489a634e3158f82f93491a84328
+[1/6] pci: skip unnecessary PCIe scanning
+      commit: fbde868ba4aa05d6f04d4969a63e86607f725f59
+[2/6] phy: ti: j721e-wiz: Enable reference clock output in cmn_refclk_<p/m>
+      commit: d7817a20c9e59b6a534403e90417b6910bb4a7cc
+[3/6] phy: cadence-torrent: Add support to drive refclk out
+      commit: 88e3fcef7ff0ae96eb2a24affd0f074643499381
+[4/6] pci: pcie_cdns_ti: Add support to provide refclk to PCIe connector
+      commit: 3d07fe1390b352b897683f3eaf7ee62786474144
+[5/6] pci: pcie_cdns_ti: Add PCIe support for J722S SoC
+      commit: 795b1fd2dff8a8abc464c9f9a85e0b11966bbd1b
+[6/6] configs: j722s_evm_a53_defconfig: enable PCIe
+      commit: 0cf1b43dbbb317efbdacf144e050e1d4adf886d8
 -- 
 Tom
 
