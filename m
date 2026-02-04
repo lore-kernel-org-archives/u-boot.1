@@ -4,212 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58EEDE9539C
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 13:25:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97104E83F11
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 13:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7ABD839DF;
-	Wed,  4 Feb 2026 14:25:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id A25F180212;
+	Wed,  4 Feb 2026 14:53:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="to4PK8Vo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lx/WPBpZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6B3A83A3D; Wed,  4 Feb 2026 13:09:11 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD3CB802C1; Wed,  4 Feb 2026 14:53:48 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B3383015
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 13:09:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB48E80086
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 14:53:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id E330B20200;
- Wed,  4 Feb 2026 13:08:59 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1770206946;
- bh=rV8MugSWJElUnNJsq7kkw6TNF2UDbsneM9RTfewRwN4=; h=From:To:Subject;
- b=to4PK8VovRxkk4HB3VrCibnTpWSWGzhQbGd4ORVcP57KdqtI0qRD0zzbFovs2X4Q0
- 6KZu3W912iZZ8/mxZk0q9kb+UTXOQu6JfaioZP6ebtdVmsNjPY3t0e3TIQefpATbw6
- rTvIZ6rKf5IyplVUs7HTfJ8YxgxuucqYdKBJpx8FeDpgvaa4rpw3Bpq5vaY8ARDc82
- +8j56kzaId6Ji+iIzNkUQuV1NbQX/CI6YmFqy1zoI4VeymMCNSG0JZjZcMItpo3HPn
- 7bj1eqAnVkr8zwEGT4mVYVRbJZisT8AbyhvrYlp5dVZaTh6HZR0JojXICbdxqNb37j
- pQ5uU8Ik++fyA==
-Date: Wed, 4 Feb 2026 13:08:55 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Christoph Stoidner <c.stoidner@phytec.de>, kernel@puri.sm,
- Sam Day <me@samcday.com>, Sumit Garg <sumit.garg@kernel.org>,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- uboot-snps-arc@synopsys.com, u-boot-amlogic@groups.io,
- u-boot@dh-electronics.com, upstream@lists.phytec.de,
- u-boot-qcom@groups.io, uboot-stm32@st-md-mailman.stormreply.com,
- adsp-linux@analog.com, Adam Ford <aford173@gmail.com>,
- Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sam Shih <sam.shih@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Anton Moryakov <ant.v.moryakov@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome@forissier.org>,
- Simon Glass <sjg@chromium.org>, Max Filippov <jcmvbkbc@gmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Vitor Soares <vitor.soares@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Stefano Babic <sbabic@nabladev.com>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Stefan Bosch <stefan_b@posteo.net>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Michal Simek <michal.simek@amd.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Lars Povlsen <lars.povlsen@microchip.com>,
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Aaron Williams <awilliams@marvell.com>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Yao Zi <me@ziyao.cc>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Bin Meng <bmeng.cn@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Oliver Graute <oliver.graute@kococonnector.com>,
- Randolph <randolph@andestech.com>, David Feng <fenghua@phytium.com.cn>,
- Linus Walleij <linusw@kernel.org>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Gilles Talis <gilles.talis@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Mario Six <mario.six@gdsys.cc>, Marco Franchi <marcofrk@gmail.com>,
- Alifer Moraes <alifer.wsdm@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heiko Thiery <heiko.thiery@gmail.com>,
- "Lukas F. Hartmann" <lukas@mntre.com>, Patrick Wildt <patrick@blueri.se>,
- Martyn Welch <martyn.welch@collabora.com>,
- Ian Ray <ian.ray@gehealthcare.com>, Teresa Remmet <t.remmet@phytec.de>,
- Mathieu Othacehe <m.othacehe@gmail.com>, Angus Ainslie <angus@akkea.ca>,
- Stephan Gerhold <stephan@gerhold.net>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Ilko Iliev <iliev@ronetix.at>, Kamil Lulko <kamil.lulko@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dillon Min <dillon.minfei@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Heiko Schocher <hs@nabladev.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>,
- Stefan Roese <stefan.roese@mailbox.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Anastasiia Lukianenko <vicooodin@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Brian Sune <briansune@gmail.com>, Tingting Meng <tingting.meng@altera.com>,
- Mahesh Rao <mahesh.rao@altera.com>, Ye Li <ye.li@nxp.com>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
- Jeremy Compostella <jeremy.compostella@intel.com>,
- Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
- Debbie Horsfall <debbie.horsfall@arm.com>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Francesco Valla <francesco@valla.it>,
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>,
- Yannic Moog <y.moog@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
- Primoz Fiser <primoz.fiser@norik.com>, Hai Pham <hai.pham.ud@renesas.com>,
- "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
- Vishal Mahaveer <vishalm@ti.com>, Dhruva Gole <d-gole@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Keerthy <j-keerthy@ti.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Adriano Cordova <adrianox@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Joseph Chen <chenjh@rock-chips.com>,
- Finley Xiao <finley.xiao@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
- Elaine Zhang <zhangqing@rock-chips.com>,
- Viorel Suman <viorel.suman@nxp.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>,
- Markus Niebel <Markus.Niebel@ew.tq-group.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Christoph Fritz <chf.fritz@googlemail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Sai Varun Venkatapuram <saivarun.venkatapuram@amd.com>,
- E Shattow <e@freeshell.de>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Paul Geurts <paul.geurts@prodrive-technologies.com>,
- =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Eoin Dickson <eoin.dickson@microchip.com>,
- David Zang <davidzangcs@gmail.com>,
- Brian Ruley <brian.ruley@gehealthcare.com>,
- Swamil Jain <s-jain1@ti.com>, Zixun LI <admin@hifiphile.com>,
- Antonio Borneo <antonio.borneo@foss.st.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Timo tp =?iso-8859-1?Q?Prei=DFl?= <t.preissl@proton.me>,
- Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Alvin =?utf-8?Q?=C5=A0ipraga?= <alvin@pqrs.dk>,
- Leonard Anderweit <l.anderweit@phytec.de>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Ferass El Hafidi <funderscore@postmarketos.org>,
- Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH 07/14] toradex: common: Add missing headers
-Message-ID: <20260204120855.GA30917@francesco-nb>
-References: <20260203-cleanup-v1-0-4221c13e7558@nxp.com>
- <20260203-cleanup-v1-7-4221c13e7558@nxp.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-4042cd2a336so4235603fac.0
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 05:53:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1770213222; x=1770818022; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=X0mlWcr3SgcCuEdUF95AjUFUcO7aIkhoZSbDDAQFfJY=;
+ b=lx/WPBpZ4780gzWQx1gjXr+vCbtODsGissdjO3SEM3QCdhWlk7k8Fl0tg3SuvWn80F
+ B/O5+WDfFOArbY0IKeAE+h7adYwLoZEembEggbIYVz9n3diwcguU3BtMJ7ug1ATl2JJb
+ DhKI0OScZV03/VA4eB/7Sk1PVD9QkAM3y1T88=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770213222; x=1770818022;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=X0mlWcr3SgcCuEdUF95AjUFUcO7aIkhoZSbDDAQFfJY=;
+ b=RP8GaXKIaRqzTcSP0bo3cKeeGspCZrArthOWVz+v+lGmjo00hkiLYRUnYTNpRY+0uL
+ 0tSX/2Brx3ZCvHtjOnNt0yYtU6/b5OmjrcdLisbBexDLqs/uEjR3mJkpJRiQu0f7VTX9
+ 5gB5MRJ5R7JhDv0n48ECIInnuBrZiYeSaljc6CBD7qL+rKx/ABLCaHfMKtPBZLkHdMXD
+ MtZ3ZWsfKfhUXMU0+Njyy7eAbUCQcWIsyW+MiDthFGPs0C2sOXW9I6KUOc6tEOzAT6Mw
+ h+bExuvxnoNhAe9Y52NGm7D8YogUvmd7aemaoQm1nDh0hwjemqEb3VFsEpdLJkhIfeuH
+ +n8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWwAHvTa58GejX3nPsNs40b7I4V3Z9xJEDdk1lUqmxPsjjQETHzbsJaiz95fXDeN5R1MZ9o3/E=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzbONR+sNjdz3rafj3gv1oCbMiswcDDK0Cat0f98kAvkdn/SaU
+ JhC21ncj3w3AztA5jvsbCkce59pN4hk5inmKXXlnvYG09ozazAz0h9xXfoXS0TWAdadk4oz/1dL
+ OsVdmbM0=
+X-Gm-Gg: AZuq6aL+U6RGv57YEfN6KtMvUIOmeI7PLnFd9MpwPGNNrrGPUlPkJOWv9kdSlp7yD0p
+ USLf9hWuUYlKhEjJcvq8x/bZ1BTU2MkLEGtSN4OJYgkplXNO0+k49m0CKn+E6dTzQ8pxi4WFflb
+ YTVmIkF+czs7W64lXMEj942/DGz62iOVIs0E+W34lmmq7+qEQxkafePFTqDR2T6gdNUM8oBdRln
+ SGXPK4aNI4DWTnYnwE1+j/4Or/OA12kAkNAyy0jQ8nLqIo4LRnKrVrLfxvjCmDORFFp0hL7C/t/
+ t2cyCuQg8E9njhaEDiP2tAPxss7xzOneNFwLDwAguZSTPT2GENzY18/Ngae6Otv909TFYJfUTlI
+ uoHv3O3bJtoPJu6EFhJkm/2VkXBcbNnf/dZzOnKgMuiaP8k1Ge1P2D8pGRvL28O9xDkgpplnLFP
+ z/9enipm+edc+X8NcNfxydWDUO0whckvEjbMOloUWPCilEDXWaeLcBRYLkgkcztzaLzXufKQ7eS
+ cE8rZp0Xhn2KmawHvWPy5EDTYWE0fpe7Raa3xA=
+X-Received: by 2002:a05:6820:2d0a:b0:662:f90e:cdf2 with SMTP id
+ 006d021491bc7-66a203a70d2mr1558789eaf.12.1770213222193; 
+ Wed, 04 Feb 2026 05:53:42 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-66a3318c761sm1296737eaf.8.2026.02.04.05.53.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Feb 2026 05:53:41 -0800 (PST)
+Date: Wed, 4 Feb 2026 07:53:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Frank Wunderlich <frank-w@public-files.de>
+Cc: Frank Wunderlich <linux@fw-web.de>, u-boot@lists.denx.de,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: Re: [PATCH v6 2/3] test: cmd: add test for memsize
+Message-ID: <20260204135338.GV2603314@bill-the-cat>
+References: <20260125131254.23210-1-linux@fw-web.de>
+ <20260125131254.23210-3-linux@fw-web.de>
+ <20260203233402.GU2603314@bill-the-cat>
+ <5E5EDF2D-9CDF-4640-9639-88FD888B688B@public-files.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DtZ9aYde1KsWr9Ny"
 Content-Disposition: inline
-In-Reply-To: <20260203-cleanup-v1-7-4221c13e7558@nxp.com>
-X-Mailman-Approved-At: Wed, 04 Feb 2026 14:25:53 +0100
+In-Reply-To: <5E5EDF2D-9CDF-4640-9639-88FD888B688B@public-files.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -226,46 +103,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 03, 2026 at 06:41:38PM +0800, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
-> 
-> Include linux/types.h and asm-generic/u-boot.h. Missing the two header
-> files will cause building error after cleaning up usage of
-> asm/global_data.h.
-> 
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->  board/toradex/common/tdx-cfg-block.h | 2 ++
->  board/toradex/common/tdx-common.h    | 2 ++
->  2 files changed, 4 insertions(+)
-> 
-> diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-> index b28033d8332e09d063a6a8ad1d4e334703077f00..067daec0d776070b0b53fc26d1043d6eb781a527 100644
-> --- a/board/toradex/common/tdx-cfg-block.h
-> +++ b/board/toradex/common/tdx-cfg-block.h
-> @@ -6,6 +6,8 @@
->  #ifndef _TDX_CFG_BLOCK_H
->  #define _TDX_CFG_BLOCK_H
->  
-> +#include <linux/types.h>
-> +
->  #include "tdx-common.h"
->  
->  struct toradex_hw {
-> diff --git a/board/toradex/common/tdx-common.h b/board/toradex/common/tdx-common.h
-> index d446e9f1d5ca7d3d5a1318b389393d28854e2263..db3369a8f9ef9b409c53c45e94aa5f22933a44fa 100644
-> --- a/board/toradex/common/tdx-common.h
-> +++ b/board/toradex/common/tdx-common.h
-> @@ -6,6 +6,8 @@
->  #ifndef _TDX_COMMON_H
->  #define _TDX_COMMON_H
->  
-> +#include <asm-generic/u-boot.h>
-> +
 
-maybe just have the forward declaration?
+--DtZ9aYde1KsWr9Ny
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  struct bd_info;
+On Wed, Feb 04, 2026 at 07:40:05AM +0100, Frank Wunderlich wrote:
+> Am 4. Februar 2026 00:34:02 MEZ schrieb Tom Rini <trini@konsulko.com>:
+> >On Sun, Jan 25, 2026 at 02:12:52PM +0100, Frank Wunderlich wrote:
+> >
+> >> From: Frank Wunderlich <frank-w@public-files.de>
+> >>=20
+> >> Add a test for memsize command in same way as meminfo.
+> >>=20
+> >> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> >> ---
+> >> tested via:
+> >> $ ./u-boot -T -c "ut cmd cmd_test_memsize"
+> >> ...
+> >> Test: memsize: meminfo.c
+> >> Tests run: 1, 0 ms, average: 0 ms, failures: 0
+> >> ---
+> >>  cmd/Kconfig        |  1 +
+> >>  test/cmd/meminfo.c | 17 +++++++++++++++++
+> >>  2 files changed, 18 insertions(+)
+> >>=20
+> >> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> >> index be79bf0747df..2bafa156ca8a 100644
+> >> --- a/cmd/Kconfig
+> >> +++ b/cmd/Kconfig
+> >> @@ -927,6 +927,7 @@ config CMD_MEMINFO_MAP
+> >> =20
+> >>  config CMD_MEMSIZE
+> >>  	bool "memsize"
+> >> +	default y if SANDBOX
+> >>  	depends on CMD_MEMINFO
+> >>  	help
+> >>  	  Get RAM via command for use in scripts.
+> >> diff --git a/test/cmd/meminfo.c b/test/cmd/meminfo.c
+> >> index 53b41e3b49e0..ba772a8b7616 100644
+> >> --- a/test/cmd/meminfo.c
+> >> +++ b/test/cmd/meminfo.c
+> >> @@ -7,6 +7,7 @@
+> >>   */
+> >> =20
+> >>  #include <dm/test.h>
+> >> +#include <env.h>
+> >>  #include <test/cmd.h>
+> >>  #include <test/ut.h>
+> >> =20
+> >> @@ -39,4 +40,20 @@ static int cmd_test_meminfo(struct unit_test_state =
+*uts)
+> >> =20
+> >>  	return 0;
+> >>  }
+> >> +
+> >> +/* Test 'memsize' command */
+> >> +static int cmd_test_memsize(struct unit_test_state *uts)
+> >> +{
+> >> +	ut_assertok(run_command("memsize", 0));
+> >> +	ut_assert_nextline("256 MiB");
+> >> +	ut_assert_console_end();
+> >> +
+> >> +	ut_assertok(run_command("memsize memsz", 0));
+> >> +	ut_asserteq_str("256", env_get("memsz"));
+> >> +	ut_assert_console_end();
+> >> +
+> >> +	return 0;
+> >> +}
+> >> +
+> >>  CMD_TEST(cmd_test_meminfo, UTF_CONSOLE);
+> >> +CMD_TEST(cmd_test_memsize, UTF_CONSOLE);
+> >
+> >Since the new test isn't guarded with memsize, this fails on qemu-x86_64
+> >where meminfo is enabled, but memsize is not.
+>=20
+> Does x86_64 test not use SANDBOX? Do i need to enable it somewhere else? =
+Imho it should ve tested also there so guarding just prevents the test. But=
+ of course i can add guards for it.
 
-and that's it?
+No, it's qemu-x86_64 which is a different board :)
 
+--=20
+Tom
+
+--DtZ9aYde1KsWr9Ny
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYNPXwAKCRAr4qD1Cr/k
+CgfhAP4gm0jtAmwJTTc7jYkzA7FNFcfYMhW9PZpAb0k6B9G3lgEAy2ajLHrsMJLU
+8EY4Tl1WFmbGdEPUOSOsq2b9NYzg3Qc=
+=Hu2k
+-----END PGP SIGNATURE-----
+
+--DtZ9aYde1KsWr9Ny--
