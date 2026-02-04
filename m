@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AEA6E83F11
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 13:54:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00EAE87840
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 14:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A769D80212;
-	Wed,  4 Feb 2026 14:54:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BDAE80212;
+	Wed,  4 Feb 2026 15:01:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j4mp0JlU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g0s4JBxE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D33D7838FA; Wed,  4 Feb 2026 14:54:43 +0100 (CET)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
+ id 92F2483A36; Wed,  4 Feb 2026 15:01:50 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B33280086
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 14:54:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 789B980086
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 15:01:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7cfdf7e7d19so6171285a34.2
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 05:54:41 -0800 (PST)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-45c9fdf2a06so485751b6e.2
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 06:01:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770213280; x=1770818080; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZBQPxYOs14A8BHiHR3huHv2z1dijzPPW42FLIIFMC6A=;
- b=j4mp0JlU6C9zI2Qm6tjK5o21VnWZlf05+R7rNHBWag9bOVyUPCcoYn5VG4drsAZXre
- sirvbVAtB671lbF4M+ebwAr8Lc22QU3BF9Q4nM73cuw0OEt90on1O8bzvmVjvd4QI8yr
- kbDndrDiOwDpwlgzIo4AtOoL7cecSdAQcW8zk=
+ d=konsulko.com; s=google; t=1770213707; x=1770818507; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5nrR+j51YNOjGFlPoVEY7SGjxhBGYVMlVKeH4RO4Nc0=;
+ b=g0s4JBxE6LHKHLHGI/n6Ci4PhEBDCuExr44nteMsNO0zDWLhAqRYyYdi7YXIA8tzi7
+ YR5gsQmxLDc0fpE4MdGzqZNigxq8VMki/ipCv86xSfsbPSrIHSKbIn6CFBzdR8iZIcs2
+ Np+DWLK+YQTnxa1/xoz6IrXD3VjhAs88F7ODg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770213280; x=1770818080;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZBQPxYOs14A8BHiHR3huHv2z1dijzPPW42FLIIFMC6A=;
- b=X3hgK227k1EsMK2aUJUbInI+/cisdjTr+ks7O5UaAd3bAPQlgpCJGApoAm2ikUbkIY
- EUam1o2esQt1B12PwnZ2sjJV6dkeuoOXXwbcVsEMuwpgUNN/BF3fW7t53In3nOIdLmUF
- rNRUSLCJpNmkFKto203KSFsKbkwreyH2jZbd+oprDuHWHg5D92PgdkPcRFLU9akTgr2A
- hKmDRzdOuGnHTyFBAy7hqi0oFbZuusF3kzIqHX6lMm4Tf5vW+FUJGUqxaKBQaqKe6VlB
- Y1Y7Z5u3e2v3QbLiXSSGfNTbmHOK9FEGc1c0Zp/zGlHLpYW+gbgSAXHYrOq7fRA98LkN
- OcfA==
-X-Gm-Message-State: AOJu0YyO0/q/ZpQj6elxOOB6l2xoEjp8+EEvXGvxpA0l1Lv1dAyQj+co
- bS5Ag3ZsslDAuKBwiW1lHVEHstVUxCiYqVRak/bWS7PdAK1XPZhz22Om+mCRXIaF4xI=
-X-Gm-Gg: AZuq6aLLcu0/WSc7aQCpDN7rd+8DMx9Nv3wmfLo8Hsn9XQC5ZPPL5MCqa5N6n2x9H1U
- wYncJcpJOeTTm5VtbLH9mJtqXAeSwPK5haAcpXK47MspkY7vfOXK0QCZGodN32sFcOCkXfZbOnd
- Q4QJZv9sBOkbT1TYV2xplvf/N09zE9f+Pnb8WObKnCqDbSi2kH178LFtxBb55d7yaAPsks5DXPP
- 9mLfP16ynAQmAdjPEPyozTJVTaxEl/otHjMmMVsa+9Ekn+4NDyiXvZlk58HFtoF3SSlyUgHrBKY
- CwVn6g7GbrhXcxXzHT3KLQ+QQKRaKrKjRc+5A5tqDG9yuP22pDgB3MVcKReGzS3eoBxzh/rNJtc
- V8M5c03FlfW6tZ19TTXEyda0L9Ft5y+CMXIbhcxBmHcK5ZJLSnZt+gL4WXog+oJJoI+J0GP7DQd
- FAvooNO8hA3+oh97cezx6V0fKKbTNIQ/loYUm3YetRCgCR0wTfkLGqG1oO6uAstglKhUqITDG0Z
- W/zTCRanjXDE2/obp7Fp4WJyyngDJednYFqONk2vBY6Ri03jA==
-X-Received: by 2002:a05:6830:82d7:b0:7cb:1287:e3d4 with SMTP id
- 46e09a7af769-7d448af563emr1682784a34.36.1770213279745; 
- Wed, 04 Feb 2026 05:54:39 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1770213707; x=1770818507;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=5nrR+j51YNOjGFlPoVEY7SGjxhBGYVMlVKeH4RO4Nc0=;
+ b=jFR8PJz/hKQ/g0b8jPuJZwmj9Op/gBXEc9q15xj3mURd9fEiWtFIDZ6SCUmWjGwbot
+ rg2X6ybaZE9XU7KFcE+k+XtRI4b7zxbrrpRa2i8F8VqkpZ0CpmVdkxfvbTgUqoGr+0GU
+ zF/rE4Iv6P4pxZSy9/taKZsXpOB8Gax1wVtwtrWzcd+ezBdgJWmg6QtYC4FOUup69UFI
+ e+cRuFpCggPAL8uS5GHVC70djLLNRYyFQhRx1fq1w14HjpZLV2ik8IYyXV9zhguxFzoU
+ h0S0MxxpqHas1BQpWPx9CNvWsdU1mK11AugHq3ZS7+vqJph6y+OWLnu/S5acGZ7z6dLf
+ 6ajQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUqTI1Nrsmu3ay7xASQ15t8ZlUKztDlC7tl5oEl6NwPKCcv5LNKTLKkmjYuxjzAUkhwdMt4UMI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyUB8SE3JqSunPOendqpNVkFfdVWtUrH7vT5xzX8w3hODaDljD7
+ MgXRE/xrrZHaDEdYQ0dHWZkK6Aw3F2QkiddgMTomU0+fSSL+bcYF5arL7Xu0pHxY/dE=
+X-Gm-Gg: AZuq6aI4HcspLKP+EN9Hc7QX5N4J/xKuB0ecz98Fw/s2Y3M6vUsi3VLGWMOakrjJUiG
+ npN0a5Ix+bBIpdpup0PlikzqHD/mLOuVIRdQTZH9v+nTUQF8I2cl0ec5bl+iOCyK7yeARMk9xuG
+ 7Rf6PmRv7ULaYnlM/qI6QhpREAQglqSr9XYs5g8dbzgefTBEuHK1c+h6QAy7FNwRL9WIDIu35BD
+ OFVXy85RI3ForbAO+BjyDFRsuotvoEzRXXUGq5vrz90UnSx05rc13wR/rZ8JRi+7bU+sj8Dpr8d
+ KpcU75UBM93OZFi5GqPRaJBP/T3YILX3MzBv/E2qRXW7Mu3LCtRGlSIzvze08OMVznCm4gZtsM6
+ Go6X2jeIQk34impG2sX0jpbulqf0u+8zoztcjcBY2Z4dtqx6h05goLH5jBLsTJRAuJRtLUn38V0
+ 71nN5lgPLkQ2m1XmDfceeQicxNtUVXE2euZ+Ln2E/VGK07mXmg7IOn5XiqvI+T9HvTre5EvrV1v
+ Ewbjl6Fbm9eANlR2NKzsYXsX4u+RCDoWHMIaA==
+X-Received: by 2002:a05:6808:2396:b0:450:1433:f13a with SMTP id
+ 5614622812f47-462d586f338mr1701471b6e.11.1770213707029; 
+ Wed, 04 Feb 2026 06:01:47 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d449116b51sm1738980a34.8.2026.02.04.05.54.37
+ 586e51a60fabf-40a590fe5f7sm1369437fac.9.2026.02.04.06.01.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 05:54:39 -0800 (PST)
-Date: Wed, 4 Feb 2026 07:54:36 -0600
+ Wed, 04 Feb 2026 06:01:46 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Joseph Guo <qijian.guo@nxp.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Sumit Garg <sumit.garg@kernel.org>, Lei Xu <lei.xu@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Adam Ford <aford173@gmail.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ji Luo <ji.luo@nxp.com>, Simon Glass <sjg@chromium.org>,
- Justin Jiang <justin.jiang@nxp.com>, qijian.guo@oss.nxp.com,
- xinyu.chen@nxp.com
-Subject: Re: [PATCH 1/2] arm64: dts: freescale: add basic dts for FRDM-IMX95
- in u-boot
-Message-ID: <20260204135436.GW2603314@bill-the-cat>
-References: <20260204-imx95_frdm-v1-0-85dc80e98a6d@nxp.com>
- <20260204-imx95_frdm-v1-1-85dc80e98a6d@nxp.com>
+To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Franz Schnyder <franz.schnyder@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20260127101413.2812815-1-ernestvanhoecke@gmail.com>
+References: <20260127101413.2812815-1-ernestvanhoecke@gmail.com>
+Subject: Re: [PATCH v1 0/2] toradex: aquila-am69: fix SPL USB DFU, drop
+ obsolete clock
+Message-Id: <177021370577.1736867.16116664582049382489.b4-ty@konsulko.com>
+Date: Wed, 04 Feb 2026 08:01:45 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5xvY+OtQ/RaRbsuJ"
-Content-Disposition: inline
-In-Reply-To: <20260204-imx95_frdm-v1-1-85dc80e98a6d@nxp.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,38 +104,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 27 Jan 2026 11:14:10 +0100, Ernest Van Hoecke wrote:
 
---5xvY+OtQ/RaRbsuJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+> 
+> This is a small, board-specific series for Aquila AM69.
+> 
+> Patch 1 fixes intermittent SPL USB DFU gadget enumeration.
+> Patch 2 drops a stale MCU_CLKOUT0 enable for ETH_1. V1.1 hardware uses
+> an external 25 MHz crystal, and support for earlier revisions was
+> already removed from the DT before upstreaming.
+> 
+> [...]
 
-On Wed, Feb 04, 2026 at 04:47:12PM +0900, Joseph Guo wrote:
+Applied to u-boot/master, thanks!
 
-> Add the upstream device tree files for the FRDM-IMX95 board:
-> https://lore.kernel.org/all/20260116-127-v3-2-3dc49545a745@nxp.com/
->=20
-> Signed-off-by: Lei Xu <lei.xu@nxp.com>
-> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
-> ---
->  .../src/arm64/freescale/imx95-15x15-frdm.dts       | 964 +++++++++++++++=
-++++++
->  1 file changed, 964 insertions(+)
-
-NAK. Only cherry picks go in there.
-
---=20
+[1/2] arm: dts: k3-am69-aquila: Fix SPL USB DFU gadget failures
+      commit: cdd51332cc87b1964f6b48d1c1d5ac142b0dc7a5
+[2/2] board: toradex: aquila-am69: Remove ETH_1 MCU_CLKOUT0
+      commit: 81cd740838b1fdc6c473580254f0f217df375bcc
+-- 
 Tom
 
---5xvY+OtQ/RaRbsuJ
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYNPnAAKCRAr4qD1Cr/k
-CusKAQCFKbnf10sS+8istNi1zSlhpPOg3x7mrQ63Oop4LrtZKgEAtXEcaewET0IS
-NvjLDVCPiO1YXOMvMIPYsVYmlKDSGQI=
-=81we
------END PGP SIGNATURE-----
-
---5xvY+OtQ/RaRbsuJ--
