@@ -4,90 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86884E9D407
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 16:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B12D2E9D40F
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 16:32:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 149AF83015;
-	Wed,  4 Feb 2026 17:13:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B7CC83015;
+	Wed,  4 Feb 2026 17:32:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y7OlyWHe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J7ycjnwB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6769838FA; Wed,  4 Feb 2026 17:13:52 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id D46948341A; Wed,  4 Feb 2026 17:32:17 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FAE880086
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 17:13:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C88548063E
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 17:32:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-40974bf7781so634817fac.0
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 08:13:49 -0800 (PST)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-8c711959442so94697485a.0
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 08:32:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770221628; x=1770826428; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2bh2vU6tUqcwQc4Dy/nFvr1WyoNQyzDwWCbCigIxfGw=;
- b=Y7OlyWHevPBsMJThuySjBAxPbSUJKt5bRSWaC1s385cMLBMZLW2DmzGrF8yvYkJ9d7
- Cyts0bVeZwQi4Dpj7h6Fdgg1Yj9lBfhzY+zYA+fDy6vV3sdUQtPqDgowjdRUoH4q11gZ
- Fc+SIaRTnv+T1YE11q+ny/we4MdbOGd/wavLE=
+ d=gmail.com; s=20230601; t=1770222734; x=1770827534; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Oic5PCQHbS5sFWDrawcBRYcD3vInAjhdv8UKqW+RjL8=;
+ b=J7ycjnwBDxuHl74ijL+yddT06rzEP85aFkfS/3cZJ9k7qrBv2bwp1dpZo7iAleQCpg
+ 4PyySYY1g8RIeimXtJoaHIR8EaSSo9nLD7DSf7NMsmm7S62DTqlxvfiM99OQppLrqgUX
+ cpkCnS/lqNj/Xi3eoyzk/IU0FyV3j+a2w/6BbaxQafcyHV6BCVdy7FY1p48kmrnDfhVv
+ xJuHES4Y+cWgQmnU0+i5DJ0LsGjs1ovk6+474iKZ+ayM+n69ACekSdSxrU+D3+xU0rZv
+ O7kEgJaGQXMpXH5a/UlZtxDduy/b/UK6VaDHy/jInpcg/SQoWUad10DV5aEHzhjQNSNc
+ nyyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770221628; x=1770826428;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2bh2vU6tUqcwQc4Dy/nFvr1WyoNQyzDwWCbCigIxfGw=;
- b=a0WP0/G7PMD8PASkyg6gY3Psa7+Up4r9UtTsAexjjTYei2a5No3er+aGIzfef6q/Ay
- Do0R5SRlhJVGykGDjeWfHiq54CyAiAA3gK4cXGU+Q2ZK0fhB/PH2NuPH/ukcCrMR8uRC
- ArHknxyMVIYeLvIzW8qg+ya8+b+fnSZoBXtkWQxFRrpX/QIOECP2XDXSNM9gEn3NCl2b
- RB78Us1uFmpnWY7Pt9f938ZP3vhS7XUD5A1UsU6mj5dkSvOTgNTHpFg++6OzARNCg/Jb
- yuz5Q6A/gj7x686JP5ysVyEV5cGAkI8WxnkkbukVIcL0DTnp00YyYORgi4qvuofUf1Sr
- 1SUw==
-X-Gm-Message-State: AOJu0Yw1y5VORzKTvjGMTibWetMPasyN3+appcmwAaLAOYZgD+mw/JYM
- M7C0HaQS5PqmaglstsMHpEht18zYjqY3qdy8kEB0NqIg49s8u+kzXhVtLMenAlUtfG4=
-X-Gm-Gg: AZuq6aJ5wHRrEWfbqEj6aKGYO6AwUTQl/7Du2APKX8FT5O6kZC4KBomjT6fDjwvaO1J
- M55cjTJ1VYGZw8wJkrVWv729G08bTvVmXDi0MNCzUQzDDh06WaUdrpU6oesD+4VUBSxzZICQj76
- CDR83Wstr2+BJ1DauQvg+Llf3dS6wy9s1osolvwfyOP+xjFxSAhGaPy3L2yPmWYxGld5zJCxIKV
- pvCCFqYWw9SV3Y0fQTmFm/6wc6xY6KPpUbP4XOMtqIt1x3hTfD14Rv5oPvKp6z3wOJwUSPOTrEM
- dYYOleBqpvsNiruBc6U0zyx+IBMB7ITTH+8kckDsiLfMiaPfGOs0O1gliNcz+aIiUXj1yTyholQ
- cEt459Sr7ls3R7EX67V/fcmeQN6VWlrBj27JgLHcBhi1KJLaG9eHtVd/Adi6P10qYb26/9jkdHY
- V5TDLRr10W+L9ihC8nzf7CpF30PS2nAJ6jHLt7Pysa5xDnOGLDk+c6sEQuAtgQVYZRF5F0i9l3O
- bmUGbePqBAQ75UNDsq2TrnMKEP5PPA8S+O3hVA=
-X-Received: by 2002:a05:6820:290c:b0:663:1400:1894 with SMTP id
- 006d021491bc7-66a3308db80mr1429370eaf.11.1770221628011; 
- Wed, 04 Feb 2026 08:13:48 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66a35d7b8ddsm1543791eaf.15.2026.02.04.08.13.46
+ d=1e100.net; s=20230601; t=1770222734; x=1770827534;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Oic5PCQHbS5sFWDrawcBRYcD3vInAjhdv8UKqW+RjL8=;
+ b=TGHAe7UbMr6W4JS5GaALcALfsmlPZCMb7RaHJ0aF+BXJdCFOYF1JLsm5EAoh2fvdAY
+ v91hReakr6rliWu1tZSXxkBgTHhyYe/zhk979OOhXzOMemiWHwUIKBewb+b2Kcsc2dJa
+ t/iaIXTsj4FuLH+PkrQJj2i01AXdH18B8yS9z1EA7BmoQXLPmBtRT/cvM3kynD6/ptX/
+ /2Xkbdk1/9rk1CvEpzyDR1+LiHQeDasQzthjM2IYz852PdDRyth/0w5ifOmETJpoAvR+
+ kNLGsBlFjJfc20O++MKCYZUUYdUSnM73K6XqwlQ2CmDEqpDleINLQHxdBiqTt7IMnDgi
+ HSXg==
+X-Gm-Message-State: AOJu0YxZkvtf4/BfRslnLkHqOG+DZd2LwYeFi2QcTxDCBCCMaeKVj5ch
+ y6MJoaxQqEu9qXC+W/TB9gH4f4O6RZZKFEfcA1Pxo4oa4xWHLYDWrvb+64TXfg==
+X-Gm-Gg: AZuq6aIWcRdWC23hftb51+uplGfsZJTxInEwP1D27NBJL5ag5DQTAnathK2e4KGIG6U
+ dbbi0Pv1iTA2pVadzy66Omo996yYv14LG4KNMMctsm+dxAp3cRlqEe50fD4ErTCiRe5fcmO54jC
+ rIl49Yyc8Mm1WO+8xCFX8y/F/JmS2+ckfmf0upA4B+w7YmXhdlywneIEfQQngh1x7IjHxbQC4XQ
+ WA1NUgwPopDtAwDhlhX9OwMV+6X1RU5pbWUY50g70gJnvdfqUX0dh5rtTvmfUWpcrZGvpVo7bHy
+ 3+pSoDgfXBt19PPdcHSASEVTjTIxO4XEk67qRqcBgVLtGWX/ynLLOeQRS2ZDBWfpht+B8ZER36a
+ yHWAEj7Eker/HZIlLI1MY7qJfg5YblTAP2kseYlxZRKQx9kcsKMXII2jWcpqQvu/5THa3DfGl5X
+ Hp/tbP5Q0uQKwHyk4H6do1cd6sdeugoqAmxXDpartWMtMDEZueG1GoRQMe2kafJEjERgXIgws=
+X-Received: by 2002:a05:620a:1983:b0:8b2:e1b5:a4d5 with SMTP id
+ af79cd13be357-8ca401cd551mr2028785a.16.1770222734260; 
+ Wed, 04 Feb 2026 08:32:14 -0800 (PST)
+Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
+ [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8ca2fa80c71sm213746985a.12.2026.02.04.08.32.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 08:13:47 -0800 (PST)
-Date: Wed, 4 Feb 2026 10:13:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymondmaoca@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mark Kettenis <kettenis@openbsd.org>,
- Baocheng Su <baocheng.su@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Peng Fan <peng.fan@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Samuel Holland <samuel.holland@sifive.com>
-Subject: Re: [PATCH v5 0/6] Implement all missing SMBIOS types required by
- distro tooling
-Message-ID: <20260204161345.GY2603314@bill-the-cat>
-References: <20251128163535.2301653-1-raymondmaoca@gmail.com>
- <CAMDkj5zb1qhAR-uf=trSsGEwXmx5TiXc=agX5w5GnjMrP_Nqyg@mail.gmail.com>
+ Wed, 04 Feb 2026 08:32:13 -0800 (PST)
+From: Raymond Mao <raymondmaoca@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@riscstar.com>, Tom Rini <trini@konsulko.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Heiko Schocher <hs@nabladev.com>, Sumit Garg <sumit.garg@kernel.org>
+Subject: [PATCH] MAINTAINERS: Add entry for SMBIOS
+Date: Wed,  4 Feb 2026 11:31:40 -0500
+Message-Id: <20260204163141.2228295-1-raymondmaoca@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="e/X9lIsy7ZzFMH3Y"
-Content-Disposition: inline
-In-Reply-To: <CAMDkj5zb1qhAR-uf=trSsGEwXmx5TiXc=agX5w5GnjMrP_Nqyg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,33 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Raymond Mao <raymond.mao@riscstar.com>
 
---e/X9lIsy7ZzFMH3Y
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add entry for SMBIOS in MAINTAINERS and assign myself as maintainer.
 
-On Wed, Feb 04, 2026 at 11:12:42AM -0500, Raymond Mao wrote:
+Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+---
+ MAINTAINERS | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-> Hi,
->=20
-> Anyone have a chance to review this patch set? It is the last piece of
-> work to support all required SMBIOS types in U-Boot.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 87d2e267dd9..288b892f19b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1732,6 +1732,15 @@ F:	cmd/sm3sum.c
+ F:	include/u-boot/sm3.h
+ F:	lib/sm3.c
+ 
++SMBIOS
++M:	Raymond Mao <raymondmaoca@gmail.com>
++S:	Maintained
++F:	arch/arm/dts/smbios_generic.dtsi
++F:	cmd/smbios.c
++F:	drivers/sysinfo/smbios.c
++F:	include/smbios*
++F:	lib/smbios.c
++
+ SMCCC TRNG
+ M:	Etienne Carriere <etienne.carriere@linaro.org>
+ S:	Maintained
+-- 
+2.25.1
 
-I've been waiting for Ilias or Heinrich to have time to look at this.
-
---=20
-Tom
-
---e/X9lIsy7ZzFMH3Y
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYNwMQAKCRAr4qD1Cr/k
-CuEKAQCdb87cRd0HsQv8EOhKvF+FBNU4+nxZZSMVoPTp+3TsmAD/d6uT47halwrO
-YyemAci7IqoZEt8pegQBBFm2qgCy5Qw=
-=pK6x
------END PGP SIGNATURE-----
-
---e/X9lIsy7ZzFMH3Y--
