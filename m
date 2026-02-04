@@ -4,103 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53793E8B386
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 00:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029F1E8B386
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 00:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A1B183E1E;
+	by phobos.denx.de (Postfix) with ESMTP id C654583E63;
 	Wed,  4 Feb 2026 01:23:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VcQxEzny";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jN26jxDD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A10583BC8; Wed,  4 Feb 2026 01:23:04 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 4074F83BC7; Wed,  4 Feb 2026 01:23:04 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2179A83BC7
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 01:22:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 232AD83E48
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 01:23:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b8871718b00so1065164166b.3
- for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 16:22:57 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770164576; cv=none;
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b8871718b00so1065170266b.3
+ for <u-boot@lists.denx.de>; Tue, 03 Feb 2026 16:23:01 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770164580; cv=none;
  d=google.com; s=arc-20240605;
- b=ZAZwrzRB1fto5B2nLsnr0O7bUJEpSoorb6Bf36OA7awQErqydAKFNArp4tonpNbMwP
- A+DY64Nq/0TXNhl0tAj0NveaC6wPrBvsOyfWewxQ7AWieBlFW5K3To2mmdyJJsbE97CQ
- Wn5rXi0Uu/yFHtXQkiJJle8vtL/Za68WNGoRnsywwpf+ZnFPuq+Mm4s77pl2kJE3iafu
- 2kK1sWq70avezPEjvlwJRU/xA5T5oivyokZMWPIkUOHP7svJdJRISXkrfJaLXJbGr2f9
- u1szc7gpjQvd4QQbliW6SH3UvUACavjrykbeRk3F/dOkTuzBql/72tjyEVYiP/n20k9n
- 8flQ==
+ b=DFqSkjR+/cM1CC432TSNr3fyeLJdsP71BkdCyXOM+plkwfs2Dohc3139LsesNga3+R
+ GXvVYFE33EKfBZwuW3gRWUdZVGwlKTTdjpgL/qZwhZUlZ2TdfVte8RdIF1bUhsbPrPas
+ 5EeqlKlma/i+1tEv1ExOz/uiARoUjE0pQ/rR6knVhayr+tpGcYE7To3Ulxy3mOSAVkaL
+ nTPtB4AptnWtydGBlYfyrn+mwnKMcfF6r7xiccG2Bm6bkxoW/bnd+r2jHpBNsZZjco8b
+ CkbKPmJ2Jps5Shh9tkaJdR5cC+xVCteYuLVEFAFDBq5nyqIDV9yjhOtu0ltVVKUBaPvY
+ WWhQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=QIjV7O75ZnCKyAOyzrDRIrb1pceZjknCn2Yc4nbx22g=;
- fh=awEc8UXt/77v45Pxvjy7Zef1GX5h67k4zGDCkxrh4kg=;
- b=G+/Qj9gtdUsWSLVxKVusvxFbcS3jcZC01/3H3y2wy00jzq8haXKNsst4DU5hFAb5fo
- B281B8lDBZdBHXyf611kq/l2KnUrH7strQNxqyjhd5UP9/b+OhBjvTFuHZnru5IANGL9
- 8cve8Q6EsajBOPH4I1NP8YOPk7Xrk5bRgozgiJhtr2+tBpRfvNdAJBZT4r299yGYKwmA
- CEjBp6tRWXfhZCM3HgkFgS71PcspCbqGo0jAV7reGrqyV7PM8+QrQbkbqtMQ8TQHnrkR
- 06RCUzUw3w8mEO48hfXgH9tH3E07t2HSAbwhusDffL8reahDpIUaB4T87Z6PSX9TCO4b
- yCPA==; darn=lists.denx.de
+ bh=AXreGsgfdAyNb3pU8dq48K2UjFuLatFRPIlz3J3xYFY=;
+ fh=jqt9JMp+v4MWTifdk6dKphd8aNcKwAuxbmthys6m9iw=;
+ b=bmdRZ9RZZpD8TH7wnvTo5R9dDOVAZLLF61f2rl2tUtz1Rpk2ciTTFLYhxejhkKs+Xz
+ 23EM+wpTjIiVRxfYbPC5ZCJ7OhO+5mhgjmvZ37262aPOQ9NSzPvJ5dL08Ohe9+SZQ+pF
+ 4ltJm6Bpqodg8N/jumDOhVuFpieOwsMa0sHUVFmFBGg4NUAv3Fgm0BkSf0s8uDbdSOwE
+ X+M3vV75NqmAo9t8fcminTjhnr31+2ydV5VF6I5jWBEzPxhg6ZqFOjjKLsCLmimwEV0f
+ QVu99PR1g0OXJz/eqo7vfbY/Zt6Eo77nUnaZuM92iWjVQVdqgMm9daJwy4rEWvI5O+Wj
+ 2xxA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1770164576; x=1770769376; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1770164580; x=1770769380; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QIjV7O75ZnCKyAOyzrDRIrb1pceZjknCn2Yc4nbx22g=;
- b=VcQxEznys+c8Zmtv42AGTJBI+MGbG3dKys6CFYu11JjDopMynMCeXKQNLnOcOgxQD9
- yCJ2vmIbzs56PgTuc+XGFuiH90FLtN0fQjf4r7BFoSi84LrU3hE/zsQQ5RRCuU2MZL/m
- Js9JM2Ew9becX5HI/z/hOGEZmEBR/iZkrdOa0=
+ bh=AXreGsgfdAyNb3pU8dq48K2UjFuLatFRPIlz3J3xYFY=;
+ b=jN26jxDDuA93yADsJfzoH/9MSXb4dD0cS0Q9jqU1lzVMoVT3ZKRF58jZDEQNRnBIv8
+ X28qvHpKz54PYxsmimtgeh+5sm5CckHnh8g6Va6O+qRQSCj8UhL18ig60bC9rX7wl/gR
+ Za/ZJ3aIrKXx6LIYgvCVlIww3kv+XN8feSQSg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770164576; x=1770769376;
+ d=1e100.net; s=20230601; t=1770164580; x=1770769380;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QIjV7O75ZnCKyAOyzrDRIrb1pceZjknCn2Yc4nbx22g=;
- b=KwNkgAXI3wPu97FnZBiaTXJ8VqoRfXlsvjyN59QGLWh8dM4WxbSSXHY+qPH8D+duB0
- FDWzOLW4OHgGJPKl/qwVJN2SnRQa1jZEqGFv7WhheiJ8jnaEFDU6TBIsPnTX5FgHqGCh
- mOz0463UCK3nZ8XUpes9w0FeVRbTLPCTYTXWomJImn6LH9f6eHtLFkKL4qpangoKebaA
- lQlazxb2fr9eozwoJSgmP6RZGbtYB3mg2NVtwgK3+L073+DKlx9i5IGAwy8SJCm6d7LD
- lC2kQZkyQauCAjkb12iCA0DI3LFp3xbBsPX+EBANzopiVB47O5KIR9hGlZQi/FubsG1d
- qvXA==
+ bh=AXreGsgfdAyNb3pU8dq48K2UjFuLatFRPIlz3J3xYFY=;
+ b=vm4HgC5z5aTY/9linesRBhhiStXOdMIqOJnEcTe8svLUU+GZBIzCRxUQKT7//M/A5Y
+ vR6QncEqKjGy4yAOkCvGzOvCBLOWf79yUO57zVzANgi7KYQEbjpx3X5+wIP2MicL1F0q
+ PRjgG6CrPcOTnyBId5Wqc5t8YxfWk6SBYWaQSdIqcEj+kFGUQHlun1TpAQPGDBV3CMfR
+ i3rZQAbYIHcIEwktDT9ead0UUoixi8LSKTXL3Azf1Jj4Z7sFyhT8xP4iuxAi1mwm+8nb
+ /1SZL+o1sTwuCuDhvlX0srD0oyNIKfpPi4r1YPzyKOgcXV+lufZpH/jRANBhLI7wZqBw
+ B10Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXV1x6Ia4LTSnZlJJtdgL7Mt+ptjUhxOlisRYwcWJZOEkH973gs08iwoIzooSSfdgzmT+6iQR4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywcula0NXbx1sPBmtfU/n3vT24JMQzMe5qVPACMJ9E5Q6DHAFup
- MDAJuxS2XtuARTfmxrkMRoekOLdWKpwS+mIlVb9mhctChKOwVrvGHkQ1rdEv/Fwo6w6l6Ifue6l
- rch41MQB74W0vCuUZNCEdBsce9CfOs7seT5YJBsuhD8meeWfMy6ERhA==
-X-Gm-Gg: AZuq6aKyLIpzV4i66W7TUKeCI//E3h+Vt3m0/l98ovjzinn8em05WgoE8gZGI6jrf7a
- /U2mySGApU07GRiEQlBEe7DIZ7nb5jpmYPgFoPbHtNghaq7AY8VmIsB5vshqO60z/weKXOGl7xD
- RtTMR/xQ5/teUIYxjEh4mFljpKgaGnu1bmkkB3eHKfuObAY7bRCYa/F5QQ400r/Copasvp4CIgO
- fh/8/0Eg4734NfxF5GeXIlvy9IWXYZ6F0nE90cNlx1GgFE8pE+JonpTvVFTcWINSBbxjBDm
-X-Received: by 2002:a17:906:9fc9:b0:b88:61c3:3701 with SMTP id
- a640c23a62f3a-b8e9f2ab90bmr79387966b.52.1770164576466; Tue, 03 Feb 2026
- 16:22:56 -0800 (PST)
+ AJvYcCX4H7vbzR4YZ1t6P0BXW9vMqGWXCoAJDTz1Ul75pcDRnm/GSpEeyWm2dahc2dvcILPuGXV7Frc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNwxle7UuOdpBjJpCWWppZoQcFNKJwF9rGvCibAVSmkMEukP5W
+ Jw5HNRA/RW53X6mVIzRmVc1NBs9BEjN6tJLIo+2Sf9jA9kgVqS4KcrbYNyvpvteGiiz5qyZZGg/
+ dw8WTF99kXMkvHua8/LKYWUGyXJz1kgOd67Yede4e
+X-Gm-Gg: AZuq6aIYOst7AIglNlPRMoHhvAWXHQbBvHPWnH/T94gE0SBLSjLrJdDny89oIQKplm8
+ 6LRE1lZN0ykMHWULOvYoSN4UuzbGMG4zCU5JkpvKRCPwiT/GwOuZX8nowLrjtHU50HqtHjvYwwX
+ MNKeU5a7ZG+FeZo8UjSkekF4sryIm04x8tmlm1uJ5IlLDOKn82L++NRmkAtsGtCzA0DynokdURD
+ qaRNJ/9xGrY6Jf13SJAB+z/1r9D+cLfyeYiwDAqq8XUcMjf98Djdb2J8Cu/ukN9frmnjk2Q
+X-Received: by 2002:a17:907:72c7:b0:b88:7093:3ca3 with SMTP id
+ a640c23a62f3a-b8e9f04ca7dmr85563466b.23.1770164580574; Tue, 03 Feb 2026
+ 16:23:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20260120081206.251544-1-Wojciech.Dubowik@mt.com>
- <20260120081206.251544-7-Wojciech.Dubowik@mt.com>
- <dc9c88ee-d5a2-49f9-b8d6-629f6ad01c36@cherry.de>
- <aXDJ4PrbO2eL63B-@mt.com> <53afb4f1-ff00-40e7-8aac-3d0bd1275450@cherry.de>
- <CAL6eLbp5DjRMenAkYMH6zU=4NOakhk_7W+aYDeB8MjLtGXgsfg@mail.gmail.com>
- <74ead874-927c-4ece-aafa-808cd054ef3a@cherry.de>
- <CAFLszTjH=Yv72oDucXJHyhGrEvtRLRq_7EO8nRd2B2K6TttiRw@mail.gmail.com>
- <aYGvNb33Eoozx4zk@mt.com>
-In-Reply-To: <aYGvNb33Eoozx4zk@mt.com>
+References: <20250323160107.145749-1-marex@denx.de>
+ <20250323160107.145749-15-marex@denx.de>
+ <f6b85cb6-509c-46a8-984e-3881374ceb02@canonical.com>
+ <9dbccbf2-39a7-48a0-9d2c-79de220c07f3@canonical.com>
+ <CAFLszTh7-9a7F9h+knc1CMNvm8C=gXLZhLZ+W5eJDEZ_e5pc2A@mail.gmail.com>
+ <cb4bdf54-35cd-4638-8ce0-3fa9c0b5260d@freeshell.de>
+In-Reply-To: <cb4bdf54-35cd-4638-8ce0-3fa9c0b5260d@freeshell.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 4 Feb 2026 13:22:56 +1300
-X-Gm-Features: AZwV_Qi_bQHiYE3LE-xNCuw_KoK-osHDXoJBt7TNOcqFT5mqswIRJwMrzYrwmdQ
-Message-ID: <CAFLszThqvz7xvLFAN2f7az5qncP6xbTOf2A5JpFaVxV38i=M+A@mail.gmail.com>
-Subject: Re: EXTERNAL - [PATCH v4 6/6] test: binman: Add test for pkcs11
- signed capsule
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <simon.glass@canonical.com>, 
- u-boot@lists.denx.de, trini@konsulko.com
+Date: Wed, 4 Feb 2026 13:23:00 +1300
+X-Gm-Features: AZwV_Qj5Ti8wk0Aws8J7hKpVqXY2QH0z97PbCgZkQ_06LGHU96rD_gI9c41Uv64
+Message-ID: <CAFLszTijQe-+sxxowGUahG=rtQMJ0RHHkcfagybiPJHxA=-azQ@mail.gmail.com>
+Subject: Re: [PATCH v2 14/24] clk: clk-composite: Resolve parent clock by name
+To: E Shattow <e@freeshell.de>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Marek Vasut <marex@denx.de>, 
+ Hal Feng <hal.feng@starfivetech.com>, Minda Chen <minda.chen@starfivetech.com>,
+ Adam Ford <aford173@gmail.com>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, 
+ Fabio Estevam <festevam@denx.de>, Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ uboot-imx@nxp.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,228 +122,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
+Hi E,
 
-On Tue, 3 Feb 2026 at 21:18, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
+On Tue, 27 Jan 2026 at 17:36, E Shattow <e@freeshell.de> wrote:
 >
-> On Tue, Jan 27, 2026 at 04:00:44PM +1300, Simon Glass wrote:
 > Hi Simon,
-> > Hi Quentin,
-> >
-> > On Tue, 27 Jan 2026 at 00:43, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On 1/22/26 11:46 PM, Simon Glass wrote:
-> > > > Hi,
-> > > >
-> > > > On Thu, 22 Jan 2026 at 02:06, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> > > >>
-> > > >> Hi Wojciech,
-> > > >>
-> > > >> On 1/21/26 1:43 PM, Wojciech Dubowik wrote:
-> > > >>> On Tue, Jan 20, 2026 at 04:53:04PM +0100, Quentin Schulz wrote:
-> > > >>> Hello Quentin,
-> > > >>>> Hi Wojciech,
-> > > >>>>
-> > > >>>> On 1/20/26 9:12 AM, Wojciech Dubowik wrote:
-> > > >> [...]
-> > > >>>>> +        os.environ['SOFTHSM2_CONF'] = softhsm2_conf
-> > > >>>>
-> > > >>>> This is wrong, you'll be messing up with the environment of all tests being
-> > > >>>> run in the same thread. You must use the "with
-> > > >>>> unittest.mock.patch.dict('os.environ'," implementation I used in
-> > > >>>> testFitSignPKCS11Simple.
-> > > >>>
-> > > >>> Well, I have done so in my V2 but has been commented as wrong by the
-> > > >>> first reviewer. I will restore it back.
-> > > >>>
-> > > >>
-> > > >> Indeed, I see Simon asked you to do this in v2 and I missed it. It isn't
-> > > >> how we should be doing it.
-> > > >>
-> > > >> This is likely fine on its own because there's only one test that is now
-> > > >> modifying os.environ's SOFTHSM2_CONF but this will be a problem next
-> > > >> time a test wants to modify it. I actually hit this issue when
-> > > >> developing the PKCS11 fit signing tests as I had two tests modifying the
-> > > >> environment.
-> > > >>
-> > > >> The only trace of it left is the changelog in
-> > > >> https://lore.kernel.org/u-boot/20251121-binman-engine-v3-0-b80180aaa783@cherry.de/
-> > > >>
-> > > >> """
-> > > >> - fixed issues due to modification of the environment in tests failing
-> > > >>     other tests, by using unittest.mock.patch.dict() on os.environ as
-> > > >>     suggested by the unittest.mock doc,
-> > > >> """
-> > > >>
-> > > >> and you can check the diff between the v2 and v3 to check I used to
-> > > >> modify the env directly but now mock it instead.
-> > > >>
-> > > >> Sorry for not catching this, should have answered to Simon in the v2.
-> > > >
-> > > > In practice we try to set values for various which are important, so
-> > > > future tests should explicitly delete the var if needed. But I am OK
-> > >
-> > > This is not working. See this very simple example (too lazy to use
-> > > threading.Lock so synchronization done via time.sleep instead):
-> > >
-> > > """
-> > > #!/usr/bin/env python3
-> > >
-> > > import os
-> > > import time
-> > > import threading
-> > >
-> > >
-> > > def thread_func(n):
-> > >      if n == 1:
-> > >          time.sleep(1)
-> > >      print(f'Thread {n} read environ var FOO={os.environ["FOO"]}')
-> > >      if n == 1:
-> > >          time.sleep(1)
-> > >      print(f'Thread {n} set environ var FOO to foo{n}')
-> > >      os.environ['FOO'] = f'foo{n}'
-> > >      if n == 0:
-> > >          time.sleep(5)
-> > >      print(f'Thread {n} read environ var FOO={os.environ["FOO"]}')
-> > >      if n == 0:
-> > >          print(f'Thread {n} removes environ var FOO')
-> > >          del os.environ["FOO"]
-> > >      else:
-> > >          time.sleep(10)
-> > >          print(f'Thread {n} read environ var FOO={os.environ.get("FOO")}')
-> > >
-> > >
-> > > threads = []
-> > >
-> > > os.environ["FOO"] = "foo"
-> > >
-> > > for i in range(0, 2):
-> > >      t = threading.Thread(target=thread_func, args=(i,))
-> > >      threads.append(t)
-> > >
-> > > for t in threads:
-> > >      t.start()
-> > >
-> > > for t in threads:
-> > >      t.join()
-> > >
-> > > """
-> > >
-> > > This results in:
-> > >
-> > > """
-> > > Thread 0 read environ var FOO=foo
-> > > Thread 0 set environ var FOO to foo0
-> > > Thread 1 read environ var FOO=foo0
-> > > Thread 1 set environ var FOO to foo1
-> > > Thread 1 read environ var FOO=foo1
-> > > Thread 0 read environ var FOO=foo1
-> > > Thread 0 removes environ var FOO
-> > > Thread 1 read environ var FOO=None
-> > > """
-> > >
-> > > You see that modification made to os.environ in a different thread
-> > > impacts the other threads. A test should definitely NOT modify anything
-> > > for another test, especially not when it's already running.
-> > >
-> > > So now, I implemented mocking instead (like in my tests for PKCS11 in
-> > > tools/binman/ftest.py) because I know it works.
-> > >
-> > > See:
-> > >
-> > > """
-> > > #!/usr/bin/env python3
-> > >
-> > > import os
-> > > import time
-> > > import threading
-> > > import unittest.mock
-> > >
-> > >
-> > > def thread_func(n):
-> > >      if n == 1:
-> > >          time.sleep(1)
-> > >      print(f'Thread {n} read environ var FOO={os.environ.get("FOO")}')
-> > >      if n == 1:
-> > >          time.sleep(1)
-> > >      with unittest.mock.patch.dict('os.environ',
-> > >                                    {'FOO': f'foo{n}'}):
-> > >          print(f'Thread {n} set environ var FOO to foo{n}')
-> > >          if n == 0:
-> > >              time.sleep(5)
-> > >          print(f'Thread {n} read mocked environ var
-> > > FOO={os.environ.get("FOO")}')
-> > >          if n == 1:
-> > >              time.sleep(6)
-> > >      print(f'Thread {n} read environ var FOO={os.environ.get("FOO")}')
-> > >
-> > >
-> > > threads = []
-> > >
-> > > for i in range(0, 2):
-> > >      t = threading.Thread(target=thread_func, args=(i,))
-> > >      threads.append(t)
-> > >
-> > > for t in threads:
-> > >      t.start()
-> > >
-> > > for t in threads:
-> > >      t.join()
-> > > """
-> > >
-> > > Lo and behold, it.... does NOT work???????
-> > >
-> > > I get:
-> > >
-> > > """
-> > > Thread 0 read environ var FOO=None
-> > > Thread 0 set environ var FOO to foo0
-> > > Thread 1 read environ var FOO=foo0
-> > > Thread 1 set environ var FOO to foo1
-> > > Thread 1 read mocked environ var FOO=foo1
-> > > Thread 0 read mocked environ var FOO=foo1
-> > > Thread 0 read environ var FOO=None
-> > > Thread 1 read environ var FOO=foo0
-> > > """
-> > >
-> > > I've read that os.environ isn't thread-safe, due to setenv() in glibc
-> > > not being thread-safe:
-> > > https://sourceware.org/glibc/manual/latest/html_node/Environment-Access.html#Environment-Access-1
-> > >
-> > > """
-> > > Modifications of environment variables are not allowed in multi-threaded
-> > > programs.
-> > > """
-> > >
-> > > I'm not sure if this applies to any other Python implementation than
-> > > CPython? But that is likely the one that most people are using.
-> > >
-> > > So... In short, I'm at a loss, no clue how to fix this (if it is even
-> > > fixable). The obvious answer is "spawn multiple processes instead of
-> > > multiple threads" but I can guarantee you, you don't want to be going
-> > > this route as multiprocessing is a lot of headaches in Python. We could
-> > > have the Python thread spawn a subprocess which has a different
-> > > environment if we wanted to (via the `env` command for example), but
-> > > that means not using binman Python API, rather its CLI. We could have
-> > > bintools accept an environment dict that needs to be passed via the
-> > > `env` command or the `env` kwargs of subprocess.Popen().
-> > >
-> > > Headaches, headaches.
-> >
-> > I would argue that requiring a particular environment var for a test
-> > is not a great idea. Better to pass an argument through the call stack
-> > and have the external program run with a new environment containing
-> > what is needed.
-> Would it be ok to call softhsm utils with softhsm_conf like
-> SOFTHSM2_CONF=... softhsm2-util? Then we don't have to mock environment.
-> I would still have to set SOFTHSM install dir location with the env variable
-> for mkeficapsule in binman generation. I guess it doesn't affect other
-> tests as we don't need to change it.
 >
+> On 1/26/26 18:55, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Mon, 31 Mar 2025 at 05:14, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> On 30.03.25 17:15, Heinrich Schuchardt wrote:
+> >>> On 23.03.25 16:58, Marek Vasut wrote:
+> >>>> Use clock-names property which is accessible via parent clock OF node
+> >>>> to look up the parent clock by name instead of depending on unreliable
+> >>>> global clock name to perform look up.
+> >>>>
+> >>>> Signed-off-by: Marek Vasut <marex@denx.de>
+> >>>
+> >>> This patch breaks booting starfive_visionfive2_defconfig in the SPL stage.
+> >>>
+> >>> To dig a bit deeper I enabled the debug UART for SPL with these setting
+> >>> on origin/master (5e74863ad6613df):
+> >>>
+> >>> CONFIG_DEBUG_UART=y
+> >>> CONFIG_DEBUG_UART_NS16550=y
+> >>> CONFIG_DEBUG_UART_BASE=0x10000000
+> >>> CONFIG_DEBUG_UART_CLOCK=24000000
+> >>> CONFIG_SPL_DEBUG_UART_BASE=0x10000000
+> >>> CONFIG_DEBUG_UART_SHIFT=2
+> >>>
+> >>> clk_register: failed to get pll0_out device (parent of perh_root)
+> >>> clk_register: failed to get pll0_out device (parent of qspi_ref_src)
+> >>> clk_register: failed to get pll0_out device (parent of usb_125m)
+> >>> clk_register: failed to get pll0_out device (parent of gmac_src)
+> >>> clk_register: failed to get pll0_out device (parent of gmac1_gtxclk)
+> >>> clk_register: failed to get pll0_out device (parent of gmac0_gtxclk)
+> >>>
+> >>> Marek assumes that property bootph-pre-ram might be missing for some
+> >>> clocks in arch/riscv/dts/jh7110-u-boot.dtsi.
+> >>
+> >> This change suggested by Marek resolves the issue:
+> >>
+> >> diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi
+> >> b/arch/riscv/dts/jh7110-u-boot.dtsi
+> >> index ce7d9e16961..4ed764393bb 100644
+> >> --- a/arch/riscv/dts/jh7110-u-boot.dtsi
+> >> +++ b/arch/riscv/dts/jh7110-u-boot.dtsi
+> >> @@ -113,3 +113,7 @@
+> >>   &sys_syscon {
+> >>          bootph-pre-ram;
+> >>   };
+> >> +
+> >> +&pllclk {
+> >> +       bootph-pre-ram;
+> >> +};
+> >
+> > I just hit this as well, thanks for the post.
+> >
+> > However, -master still does not boot for me on vf2:
+> >
+> > U-Boot SPL 2026.04-rc1 (Jan 26 2026 - 19:52:48 -0700)
+> > DDR version: dc2e84f0.
+> > Trying to boot from MMC2
+> > spl: partition error
+> > Error: -38
+> > SPL: Unsupported Boot Device!
+> > SPL: failed to boot from all boot devices
+> > ### ERROR ### Please RESET the board ###
+> >
+> > Regards,
+> > Simon
+>
+> Is this to be expected? ref:
+> https://docs.u-boot.org/en/latest/board/starfive/visionfive2.html#zero-stage-bootloader
+>
+> The JH-7110 has enough SRAM to contain the unfiltered devicetree if you
+> would like to experiment without filtering to reduce size for the SPL.
+>
+> Meanwhile though the uses of "sd card image" for U-Boot SPL to access
+> MMC are not anymore supported; transition to instead use the remaining
+> supported methods SPI Flash or UART Serial.
 
-So long as it works it seems fine to me.
+I'm not sure that I can make that work in my lab. I have a SPI-flash
+emulator for some boards, but it requires a special probe.
+
+What is wrong with putting U-Boot on the SD card?
 
 Regards,
 Simon
