@@ -4,140 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4C3E8B39F
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 06:53:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BCDFE83EE5
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 07:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26B88839DF;
-	Wed,  4 Feb 2026 07:53:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 5D86A839DF;
+	Wed,  4 Feb 2026 08:37:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="HXQPPcCo";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZSOYflgN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67AAA83A36; Wed,  4 Feb 2026 07:53:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id AAA8E83A8E; Wed,  4 Feb 2026 08:37:24 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D687D839A5
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 07:53:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 84D31839A5
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 08:37:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1770188008; x=1770792808; i=frank-w@public-files.de;
- bh=MksmnARt1IODPvJgOtuwlfZjHwfiaj1Jj1+TnjNn5fw=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:Reply-to:In-Reply-To:
- References:Message-ID:MIME-Version:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=HXQPPcCoe6aV71HTODtRwH0HDbIZuCEvugKQkLnmOadDScTYz122TNtiC0YBKM8X
- yezYGIqIOPHZGduLK0QhhcGA4S+RGCQKuBCXKKVYKDcpFGcOsJGVr0JytGKfBNDR0
- WxGzx8mU/L4//0gamuPnpSUuTXa6FKS50iBQwaQnv2tm5aaAHnf0FB3bImccLwlgA
- 4M6ZQa7uofRfHi+yBGiBuplZDLtAaYb+vbimSTJqBzO/XhUHYiGyzgUidiZxVSvsM
- qX1s11h6EqIfWOnUxMaglkA0wRijHfp1YYAv3Q9eU+baE08qP+euCoERGQzgCKiWo
- maIlgHzCm9DIoGjSVw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from ehlo.thunderbird.net ([80.245.74.171]) by mail.gmx.net
- (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
- 1M2wKq-1vqoYN3SFI-007m6Z; Wed, 04 Feb 2026 07:53:27 +0100
-Date: Wed, 04 Feb 2026 07:53:28 +0100
-From: Frank Wunderlich <frank-w@public-files.de>
-To: Simon Glass <sjg@chromium.org>, Frank Wunderlich <linux@fw-web.de>
-CC: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Daniel Golle <daniel@makrotopia.org>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3=5D_cmd=3A_mem=3A_add_function_?=
- =?US-ASCII?Q?for_getting_ram_size_for_use_in_scripts?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAFLszTjBxGvTPbLXUF8tZQJXyrJmsJTbBx6c4-UfQbeqRfdsew@mail.gmail.com>
-References: <20260117214311.706022-1-linux@fw-web.de>
- <CAFLszTjBxGvTPbLXUF8tZQJXyrJmsJTbBx6c4-UfQbeqRfdsew@mail.gmail.com>
-Message-ID: <301E33D0-D806-434A-BD6F-962A0B513F60@public-files.de>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=pxz25X0Wtv/czC/L1kYO5Luu/1uOcFcDryUiBEKwee07HfZNbK/eB9hMPL/3F2D6E5Rm9y9f0QWC3adq455HXOxCBw6X7sLmZDb2F+y7gSUZG3X+w4q/GV9SbnqkW+i7Ny1oaECPcUcDjjA2xthnAdh05YvIPbJklNFaDn/bo66lE+H7jomhz9Q7UWY0dfKg6xU4XO8acrznjSvveVgDDBETlcXHkUhVnXMV2m5EB4LI+NjuwT/UegoRFnwqR46nA0tS5YhDd1/0BGDqI1DyWgEZUHUQYoPwSJjD7XcSH1iFUfX5aa8PsTEBJfTR8Vm3jS72rah1aRN1ByhWge5+XQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fc0Wohsu6N1h1MBrfkqMu12nCjSpJ8PdXUyyT0Cj3XI=;
+ b=epEOAxSgf0y02HtKOSj56mYwMjDAomIdofRLAwJdBIEYXMi/kNZGpyNOLPfmDGfUfDvlG3Ja/a6Wxzy4bVtZgdqlIhjsbn0UT+AH1y1Siyk2FTzinhGMMqgybkYbkuXcESEUrFotfiKmQLqyTmSxoEjE7yJjXOXQZ4Cyk1B2Oz7fNkJm6un9MOluJTIQ+XTiFGYT07VKteLzdKseO3xeoW949nWOf6a4NxUoNTxUJ9hGc0VQliJ8MCAUaW8/Z2JNH4KtddbJeZ6onN+JmtlI1dOSR1xIXmkwXo/dKFvzeLIbnHCb1sBEl/K+wS9J+2rG6QLEwc+X7AJmq5qfAJh84Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=eds-india.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fc0Wohsu6N1h1MBrfkqMu12nCjSpJ8PdXUyyT0Cj3XI=;
+ b=ZSOYflgNjpMH/06ztid6l7yAdWlGgUPAEbNXTeqSx1Y2aTY3fbTfV0kc3oBoQy5xbSi71x3vrFgzGOvPcTzMldZ3svMDrPloiFvPnMXDfLMa5/OxTDrs5FPoQ4u6kz6bF9Ht95MJZOxl78OFxRErcmAXyqGlKe41Rzce3riPbeQElsMrE4B8sfWDYjEWOtDVgqWzY5z4x5ENEVUFs6NFbiZRO6HNjthveGYQq7tOinLC4GOw+PS3nGm/mazAp2Hv4gZWTedosI+MpB99kc8NhFCYQQqqETHwoBdOuoJs/DIlzindggwUorq21EqiYF4NCLGDvfNWdF49DHTcRwO5Hg==
+Received: from AS4P190CA0056.EURP190.PROD.OUTLOOK.COM (2603:10a6:20b:656::27)
+ by PAWPR10MB6758.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:332::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Wed, 4 Feb
+ 2026 07:37:19 +0000
+Received: from AM3PEPF0000A799.eurprd04.prod.outlook.com
+ (2603:10a6:20b:656:cafe::22) by AS4P190CA0056.outlook.office365.com
+ (2603:10a6:20b:656::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.13 via Frontend Transport; Wed,
+ 4 Feb 2026 07:37:17 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM3PEPF0000A799.mail.protection.outlook.com (10.167.16.104) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Wed, 4 Feb 2026 07:37:18 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 4 Feb
+ 2026 08:38:56 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 4 Feb
+ 2026 08:37:17 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 0/3] ARM: stm32mp: Factorize code for STM32MP2x
+Date: Wed, 4 Feb 2026 08:37:06 +0100
+Message-ID: <20260204-upstream_factorize_and_update_read_idc-v1-0-f41a063c28b9@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:i01dMPOAhj3eCXA9iiAZOYxjz5hzQXcxbY5+ux0+niE3+nNQQJu
- NxO+rpgiNJQAGfsx3shxB6BFK684o6+UfDRWDhm/7eIVkP9I7NF4gis2NuitYkee+vaHGfr
- xYKN8UyI7EBCsFgJEK6u3ImApEG8A9aaJClB0HLTlDERU4opst8OFejt+nmIRknJOuevqYM
- of37djztKTkuG9qVx908g==
-UI-OutboundReport: notjunk:1;M01:P0:EkP3pOC3cPM=;KB9sMGs/9/q9yAFK0uZzrcEk6w6
- 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
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACL3gmkC/2XNwW7DIAyA4VeJOA8JCElDXmWqkMGm40DCgFTTq
+ r77WHvoocfftvzdWKUSqbJ1uLFC11jjvvWQHwPzX7BdiEfszZRQs1Bi5EeurRAkG8C3vcRfsrC
+ hPTJCI9s3aCN67oWf9OInJ83C+rNcKMSfB/R5fnah76N77Tl8cevwjgGirS2NKmUlbT1y3kvjw
+ glCcdKIYNar/HccVOJ+Tym2dZjnxcgQnNRGCRoncAGCBzqZyQc9C43UT1Rg5/v9D6BP5eIKAQA
+ A
+X-Change-ID: 20260203-upstream_factorize_and_update_read_idc-c0c548c5b198
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Gatien Chevallier
+ <gatien.chevallier@foss.st.com>, Asadeds <md.asadullah@eds-india.com>, "Marek
+ Vasut" <marek.vasut@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A799:EE_|PAWPR10MB6758:EE_
+X-MS-Office365-Filtering-Correlation-Id: bfb63176-c80a-4259-f903-08de63c039ee
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?KzBQWXdBeWIyUmdINGZxSUtRcDhaaDRka2FSMFFBMU4wMmZKem9MSzQzV0tG?=
+ =?utf-8?B?UitJbzR5b0IwVHRQNGdlYUJCK1paelRPZFJxbzAzbUd6ZGtqZGxRa2JCamJk?=
+ =?utf-8?B?a1d3NzBQQVhQamJreGgyeTZhQjY1TUFoQ1dUR1VRTjZ2WVdJOEdldjIvTlhn?=
+ =?utf-8?B?Zm4rQWxxWmxTOTY0QitadHpDejhHUi9Zd2pteUtuYU9qOHlKL0pCWUpnbU96?=
+ =?utf-8?B?cUw2WDU2UEJuT2ZmLzhBWDVhUVk1TENCQnY3M3gzbFhHZmo1UHY3Q3h6d3lQ?=
+ =?utf-8?B?ZlNHS3c3andEUi91WjRiSkxwSVU0cm5kdmFTQUZCVncveVp1dUVubkwwa1J1?=
+ =?utf-8?B?SHJvMjAzZS9jT0hNYmYwSUVaMjdsTHJnMXoxRmFWRUdRSVI1eFJDaTc4Q3VG?=
+ =?utf-8?B?QlpDNWlYNW5qc2FlaDI3VDVBcW1LekZWcDNRb1JxT3Q4TDVicnVLRGpmYWlL?=
+ =?utf-8?B?eDJ6enhYWUR3cnRKbll0SzkwbVlKWGY3VUZBeDcvbUpyWjh2UXg2Ny8rRlZO?=
+ =?utf-8?B?N3pRM002aTNyRFMyRm9yYklyYzkzdU9nblBnamllZjZjRjByRmxZdytQUHVI?=
+ =?utf-8?B?ZVFOVzgwT25GRjJ6b2N5QkVUWnJnOHRVb0pPdi9UZDZYWXZxSzJHME5HM24v?=
+ =?utf-8?B?UjRKV0VTRmRrUlQ0b1BuZml1U1NXTnFDMUN4QUZjSUFnZXVDN0pHUnI0R3JB?=
+ =?utf-8?B?eGhJQ0J1cmNNeUkvM0ZCeXBtUkQwTU9Eczh2TkRUQ053QWU2Nnc4MWFwTGJi?=
+ =?utf-8?B?OC9kUXlvV1JoWW5NWVNIbG5WbkRUWGtJcFVJdjJhOUhDdURnamdVMUVUREhQ?=
+ =?utf-8?B?UXlDQUNrclFGb3VhQm1pbW9adzB1V0NDckJSbG5ndCtVaXF3NFlyRVd6VitS?=
+ =?utf-8?B?VDhnbmEraVcrUWVENG1hTXA4aHBwb3B6djFLa2hoRzBIYlRGRHJkVUJtZnp3?=
+ =?utf-8?B?TjlPNVpxVER2cnBlVExRclluUWpyNXJudkZsZ0RjN2NjdkNkcDBNRWVCYVRs?=
+ =?utf-8?B?N2VtVjRkbWZ4U1VZeXE1V0pON203VWZvRFh0S3FEMy93cWJhcG96dFBpZk9p?=
+ =?utf-8?B?dVhzVDdOUkJPTUMxNGU4TkRpSm54RC9GTVBwWkhWdHVDbTdMSW1KMXpiSDFZ?=
+ =?utf-8?B?MGhWcEVzN2RLKzVJYXJJdmVnWEkwQlZlTE5CZzEwNkdvR3JNWDI5R3NIZW5W?=
+ =?utf-8?B?S3pmRlNZMmxrMVh4Q1VGVnVncktldjhJK1A2bE9yeDQrOUJwcmFKNElVRWNn?=
+ =?utf-8?B?SEhrU1AwUmh3L1dFQ2ZOSDNsdVVxU0xkcmdaRWFxK3l0Qm9qMzJwbVdlYTVJ?=
+ =?utf-8?B?cjdMN0tuc1hKYXpaZGkra1A5bHFaa2dGa0F4WGc5VkNkUHp2SG5KQitGREpv?=
+ =?utf-8?B?ZDRncWxrenRlbnlySzFMY1lFYXRsWi8rNi9QQjZuTHh3emZ5ZzdxWllUYUti?=
+ =?utf-8?B?ajFScmZYWkdYN2dtakRkUUhIaVpjbE8yUGRnKzJrdGh0YlFUbzRHMDA5OW5k?=
+ =?utf-8?B?Ym8xY1RMRVBRWE12YVVMSHIxT1RjbU9jazJjamtBZmtKYzgzMHVOcGZxWGlZ?=
+ =?utf-8?B?bFdXZ1EwWHp1ZTAzTWsyTWt3d29QWWpvNWRGRUFBKy95bGRZdVRmczZaalRL?=
+ =?utf-8?B?NUdIaXZ1SDE0ZUh5TWk0R3Q1YXVVdEdkUElNVjRTYUs1VmNMN2ZIaWdDcytJ?=
+ =?utf-8?B?TUlYUDUwZklOVStsQUFSU084UGRhRVAybUlKaldyOEF4aTBYZDZZOGtiT2tE?=
+ =?utf-8?B?S0VxWFlCZFEvR0ZoZTRoeUdlRUpvMnMyL2JpYUg0YzRuYjB6ZktXbG8vZTR1?=
+ =?utf-8?B?UTJoWm5ON1J0QWxpNWJsZDM1RlFwZzlyL2x4amxTdDhDOTg3QUo3TTNyZnJs?=
+ =?utf-8?B?aFpJZTNxa3E2NFlEOWJIakZlNDRmbEtsdTdqUkN0cUg1UUFsZ0lYZURoaGxH?=
+ =?utf-8?B?d1VrYnBSL2lqajBTVDh4QWJpVk82WGFXTHk5Z1JudUNTWjhuL0NGRk5UdFNj?=
+ =?utf-8?B?TnpacEY1ZjNUVGlOekRXa2FiOG1LZy9OS2xSUGVucnB6QUg5eWsvcnlUWkJt?=
+ =?utf-8?B?WXVwUEdCMEhId1J2eWgycGgxSnRuUE5xdnZDNnMreUsxQlVOdzA4UzhtaU51?=
+ =?utf-8?B?Q1ZGWFFyNVQ2ZlBLMUZaOXZkaHN3UFRzQUdTRmptSUtTMDA4ZWpFbmFjNkht?=
+ =?utf-8?B?TXlEM2tFMUQyMy9jb3d3OEpzdzRKUlk1azdkbHc1K3FCck9DenhyUzhEZXNV?=
+ =?utf-8?B?bHA5SkJqT1ArT2NKaE1BR0tzV3BBPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: GusbHwRsPDqGndCjYWX66EiJBIZdWgPNeMye+1v4hy9BF20/ebTtqkcxIWxTHGZ1Jg0tx8hQCpap8PZFdAyppqn2EXfxV3SmNauZdBloanMi2urNOu4XxdC3shdk4JhKLtSkFBgDYwtvnhoYqLwLgbqZVllfmo01K5VSZ5PtYG+0gOZ9oVn4FMT9J1s7NL47akOCMGKQBnLrmJe4Rs4qpkreUsVoBOK97YTRAkYWgNIcoIYxKja4nKfRd7iONT50cj6j+7GbVDnX42NfYRKRMIOblBBYetmhZ/W3s4/m5Z78x0WuEeTrjLMQR59E2l7neeuXzyC4fsoV6q9+Bibsu9zRhWs5HzHtlDURC/QulJMkQXUopbXiBTYfYlGLC23FLRTTsMTkucbjX8XBWLRkbxe9PRYGEOlXA6JzqvvbsOeXl9MYX9HgjGOQroVin9iV
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2026 07:37:18.9109 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bfb63176-c80a-4259-f903-08de63c039ee
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A799.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB6758
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,172 +167,47 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: frank-w@public-files.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
+Functions read_deviceid(), get_cpu_dev(), get_cpu_rev(), get_cpu_type()
+and get_cpu_package() code are duplicated between stm32mp25x.c, 
+stm32mp23x.c and stm32mp21x.c.
 
-Thanks for your review=2E
+Migrate these functions into new stm32mp2x.c file.
 
-Am 4=2E Februar 2026 01:23:24 MEZ schrieb Simon Glass <sjg@chromium=2Eorg>=
-:
->Hi Frank,
->
->On Sun, 18 Jan 2026 at 10:43, Frank Wunderlich <linux@fw-web=2Ede> wrote:
->>
->> From: Frank Wunderlich <frank-w@public-files=2Ede>
->>
->> Add a command for getting detected ram size with possibility to write
->> to environment variable=2E
->>
->> example usage:
->>
->> BPI-R4> msize
->> 4294967296
->> BPI-R4> msize m
->> 4096m
->> BPI-R4> msize g
->> 4g
->> BPI-R4> msize g ramsize
->> BPI-R4> printenv ramsize
->> ramsize=3D4
->> BPI-R4>
->>
->> board with 8GB ram:
->>
->> BPI-R4> msize
->> 8589934592
->> BPI-R4> msize m
->> 8192m
->> BPI-R4> msize g
->> 8g
->> BPI-R4> msize g ramsize
->> BPI-R4> printenv ramsize
->> ramsize=3D8
->> BPI-R4>
->>
->> Signed-off-by: Frank Wunderlich <frank-w@public-files=2Ede>
->> ---
->> v2: add Kconfig entry
->> ---
->>  cmd/Kconfig |  5 +++++
->>  cmd/mem=2Ec   | 32 ++++++++++++++++++++++++++++++++
->>  2 files changed, 37 insertions(+)
->
->Please can you add doc/usage/cmd/ and test/cmd
+Adds also a fix in read_deviceid() for STM32MP13 and STM32MP2x to avoid
+a Synchronous abort.
 
-I already did in v6=2E
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+Patrice Chotard (3):
+      stm322mp2: Migrate duplicated code into stm32mp2x.c
+      stm32mp2: Add check on syscon_get_first_range() return value
+      stm32mp1: Add check on syscon_get_first_range() return value
 
-https://patchwork=2Eozlabs=2Eorg/project/uboot/patch/20260125131254=2E2321=
-0-2-linux@fw-web=2Ede/
+ arch/arm/mach-stm32mp/stm32mp1/stm32mp13x.c |  7 ++++
+ arch/arm/mach-stm32mp/stm32mp2/Makefile     |  1 +
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c | 44 --------------------
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp23x.c | 44 --------------------
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c | 46 ---------------------
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp2x.c  | 63 +++++++++++++++++++++++++++++
+ 6 files changed, 71 insertions(+), 134 deletions(-)
+---
+base-commit: 66891ffb14920e35abfafcae795cf4604de6682f
+change-id: 20260203-upstream_factorize_and_update_read_idc-c0c548c5b198
+prerequisite-change-id: 20260203-upstream_add_stm32mp21_support-0b0ed074dda9:v1
+prerequisite-patch-id: 74f65301011fc90379e04dd25eebdf3cb2a24fe2
+prerequisite-patch-id: cd2da5c9e5f556ca492c91ff76ee91cf939d126e
+prerequisite-patch-id: 2f2d9574cac61f21c1caedf11601b3b79806e5ea
+prerequisite-patch-id: ee473859e76b2783f858e603f0956ed7644192b1
+prerequisite-patch-id: 79f85d5f5eccc0a773f973c2234939916bb84ef1
+prerequisite-patch-id: fe65a2b4f620e362d1a963b00c8c9cda5c4a85f3
+prerequisite-patch-id: 37714354f2763227c1ee72d57626c36687d03fb4
 
->>
->> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index 5c611fb3016e=2E=2Eb82b17195b7e 100644
->> --- a/cmd/Kconfig
->> +++ b/cmd/Kconfig
->> @@ -974,6 +974,11 @@ config CMD_RANDOM
->>         help
->>           random - fill memory with random data
->>
->> +config CMD_MEMSIZE
->> +       bool "memsize"
->> +       help
->> +         Get RAM via command for use in scripts=2E
->
->I suggest a little more info in your help, so it is clear what the
->command actually does=2E
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
 
-Ok something like "print ram size in MiB or set environment variable with =
-same value in decimal notation for use in scripts=2E"
-
->> +
->>  config CMD_MEMTEST
->>         bool "memtest"
->>         help
->> diff --git a/cmd/mem=2Ec b/cmd/mem=2Ec
->> index d5d7ca2790bd=2E=2Ea067740d81c8 100644
->> --- a/cmd/mem=2Ec
->> +++ b/cmd/mem=2Ec
->> @@ -33,6 +33,7 @@
->>  #include <linux/compiler=2Eh>
->>  #include <linux/ctype=2Eh>
->>  #include <linux/delay=2Eh>
->> +#include <linux/sizes=2Eh>
->>
->>  DECLARE_GLOBAL_DATA_PTR;
->>
->> @@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, int=
- flag, int argc,
->>  }
->>  #endif /* CONFIG_LOOPW */
->>
->> +#ifdef CONFIG_CMD_MEMSIZE
->> +static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
->> +                      char *const argv[])
->> +{
->> +       u64 memsize =3D gd->ram_size;
->> +
->> +       if (argc > 1) {
->> +               if (!strcmp(argv[1], "m"))
->> +                       memsize =3D (memsize + SZ_1M - 1) / SZ_1M;
->> +               else if (!strcmp(argv[1], "g"))
->> +                       memsize =3D (memsize + SZ_1G - 1) / SZ_1G;
->
->Can you do something like this?
->
->memsize =3D ALIGN(memsize, SZ_1G)
-
-V6 only does MiB to make code more clear, avoid issues on round and also n=
-ot needing floading point=2E
-
->> +               if (argc > 2)
->> +                       env_set_ulong(argv[2], memsize);
->
->Normally U-Boot uses hex, so it would be worth mentioning that this
->command doesn't=2E Or even provide a -d flag to select decimal?
-
-I can mention that result is in decimal of course similar to help text abo=
-ve=2E=2E=2Eseems i missed this in v6=2E
-
->> +               else
->> +                       printf("%lld%s\n", memsize, argv[1]);
->> +       } else {
->> +               printf("%lld\n", memsize);
->> +       }
->> +
->> +       return 0;
->> +}
->> +#endif /* CONFIG_CMD_MEMSIZE */
->> +
->>  #ifdef CONFIG_CMD_MEMTEST
->>  static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulong=
- end_addr,
->>                           volatile ulong *dummy)
->> @@ -1404,6 +1428,14 @@ U_BOOT_CMD(
->>  );
->>  #endif /* CONFIG_LOOPW */
->>
->> +#ifdef CONFIG_CMD_MEMSIZE
->> +U_BOOT_CMD(
->> +       msize,  3,      1,      do_mem_size,
->> +       "get detected ram size, optional set env variable with value",
->> +       "[m, g] [envvar]"
->> +);
->> +#endif /* CONFIG_CMD_MEMSIZE */
->> +
->>  #ifdef CONFIG_CMD_MEMTEST
->>  U_BOOT_CMD(
->>         mtest,  5,      1,      do_mem_mtest,
->> --
->> 2=2E43=2E0
->>
->
->Regards,
->Simon
-
-
-regards Frank
