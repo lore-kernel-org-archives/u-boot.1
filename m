@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97780E95363
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 09:35:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E96E95360
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 09:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59D3583B55;
-	Wed,  4 Feb 2026 10:34:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 4512B83A24;
+	Wed,  4 Feb 2026 10:43:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="D0zDDw0U";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="qAo+IHHx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3478B83A24; Wed,  4 Feb 2026 03:42:44 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6E57583A3D; Wed,  4 Feb 2026 10:43:31 +0100 (CET)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AC01839D5
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 03:42:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95233839D5
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 10:43:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jeremy.compostella@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1770172961; x=1801708961;
- h=from:to:cc:subject:date:message-id:mime-version;
- bh=H3wNjeunb1xFQApzsfjGkr8qkNZbVeeD7UnaPab/Xow=;
- b=D0zDDw0U9fUanaG87TCf2v8YOhg/zfzki+uf73Zxfi2Uy2ODwvMzk56l
- pJZ+Inw6faSmB3IyheCbohD/vYRONttjG2RETC79R5AChbndiwh+HzLXS
- dPWhDimN1AweY8M0EsLUi1Krdb4Zit3VcwGcbaRamy4F0HT0NBAgEzCqS
- CkuKllA9tAYA/oUl/cGkP0GDynm7YWo8MujFYmODNnvqZvZdfFCxlJU6y
- c8zsccJgAyMTqQXV79zfAiHwAI6rc5pARQL5rov4D4Ydu+9HLXGgIwj+z
- KvRwyrBFQUmOoJJLHsoPM/NMmz5pf3e8MXAL2f7JFgzLLer0EtFj0MQ6l A==;
-X-CSE-ConnectionGUID: EttcW4/ITZW7JycuUIwU6w==
-X-CSE-MsgGUID: VO++Ih7PRRSLztCqsMZ0Hg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11691"; a="58932990"
-X-IronPort-AV: E=Sophos;i="6.21,271,1763452800"; d="scan'208";a="58932990"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Feb 2026 18:42:38 -0800
-X-CSE-ConnectionGUID: 5tMIbtLwTHOde8GV7G+ddw==
-X-CSE-MsgGUID: OXVYGB8SRp+pcjD6WhPT7w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.21,271,1763452800"; d="scan'208";a="209323206"
-Received: from ssimmeri-mobl2.amr.corp.intel.com (HELO
- jcompost-mobl.amr.corp.intel.com) ([10.125.110.217])
- by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Feb 2026 18:42:38 -0800
-From: Jeremy Compostella <jeremy.compostella@intel.com>
-To: <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH] x86/coreboot: Exclude memory regions starting above 4GB
-Date: Tue, 03 Feb 2026 19:42:36 -0700
-Message-ID: <87qzr1z0tf.fsf@jcompost-mobl.amr.corp.intel.com>
-Organization: Intel Corporation - 2200 Mission College Blvd. Santa Clara, CA
- 95052. USA
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 5225A4E423D9;
+ Wed,  4 Feb 2026 09:43:27 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 1FD3F60745;
+ Wed,  4 Feb 2026 09:43:27 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D96B3119A865B; Wed,  4 Feb 2026 10:43:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1770198206; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=Ak3QPTlEOVfdzmwXymVMj5ZL9qlEK7i+zKHGLUC3yWE=;
+ b=qAo+IHHxWzQxlp2CPROQOdFVGHM9srL7IjZXzRD20NJsHCZ4YTjFo979SCFYFIfXnZ4AxU
+ BPeXAslFv4gNjIHAZ/vpYcC1B0rtku4+ZHR8Hly1o8VZBhAQ968B9ScTsdGj0JJIqXGjpT
+ D0Wk8ezJ8qXHqoinj6vXzF67KS8ZC9zj5MVFe146fRUEzybZYHRAYneitUzkldgWdazsh2
+ teQ73czZ2ypC4YNcJJFCQ4DYBz0ttcmhDew9kbEYXYRPPqxrKUqtS0Bj84WIKZF1QgzjOf
+ +FK7BWT5tuyE7ErTUWtj1zg+ghRIlH3EQ3SfZ+6K/8ANhPU87Qh0KwqrCCHtKw==
+Message-ID: <d27c09a5-93a3-44f5-bdf3-ff45fefb442b@bootlin.com>
+Date: Wed, 4 Feb 2026 10:43:23 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Wed, 04 Feb 2026 10:34:46 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: Missing power domain in j722s/dev-data.c
+From: Richard GENOUD <richard.genoud@bootlin.com>
+To: Bryan Brattlof <bb@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Chintan Vankar <c-vankar@ti.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Kumar, Udit"
+ <u-kumar1@ti.com>, "Kumar, Abhash" <a-kumar2@ti.com>,
+ "Mantena, Prasanth" <p-mantena@ti.com>
+References: <cf501633-465c-4024-a728-ec830ab16af0@bootlin.com>
+Content-Language: en-US, fr
+Organization: Bootlin
+In-Reply-To: <cf501633-465c-4024-a728-ec830ab16af0@bootlin.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,58 +77,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit updates the RAM region filtering logic in
-board_get_usable_ram_top() to skip any memory regions whose start address
-is above 4GB. Previously, only the end address was capped at 4GB, but
-regions entirely above this threshold were still considered.
+[Adding Abhash and Prasanth in the loop, sorry for the noise]
 
-Typically, the following memory map entries would cause
-board_get_usable_ram_top() to return 0x100000000, which is incorrect.
-
-    start=00000000, end=00001000, type=16
-    start=00001000, end=000a0000, type=1
-    start=000a0000, end=000f6000, type=2
-    start=000f6000, end=000f7000, type=16
-    start=000f7000, end=00100000, type=2
-    start=00100000, end=6f170000, type=1
-    start=6f170000, end=70000000, type=16
-    start=70000000, end=80800000, type=2
-    start=e0000000, end=f8000000, type=2
-    start=fa000000, end=fc000000, type=2
-    start=fc800000, end=fc880000, type=2
-    start=fd800000, end=fe800000, type=2
-    start=feb00000, end=feb80000, type=2
-    start=fec00000, end=fed00000, type=2
-    start=fed20000, end=fed80000, type=2
-    start=feda1000, end=feda2000, type=2
-    start=fedc0000, end=fede0000, type=2
-    start=100000000, end=102400000, type=2
-    start=102400000, end=47f800000, type=1
-    start=4000000000, end=4020000000, type=2
-
-By adding a check to continue the loop if the region's start address
-exceeds 0xffffffffULL, the function now properly ignores regions that are
-not usable in 32-bit address space.
-
-Change-Id: I8cbe0281aeea67a2f5bb9f6669456f5c7df9b409
-Signed-off-by: Jeremy Compostella <jeremy.compostella@intel.com>
----
- arch/x86/cpu/coreboot/sdram.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/arch/x86/cpu/coreboot/sdram.c b/arch/x86/cpu/coreboot/sdram.c
-index 013225f129a..cc1edd7badd 100644
---- a/arch/x86/cpu/coreboot/sdram.c
-+++ b/arch/x86/cpu/coreboot/sdram.c
-@@ -42,6 +42,8 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 			continue;
- 
- 		/* Filter memory over 4GB. */
-+		if (start > 0xffffffffULL)
-+			continue;
- 		if (end > 0xffffffffULL)
- 			end = 0x100000000ULL;
- 		/* Skip this region if it's too small. */
--- 
-2.52.0
-
+Le 03/02/2026 à 14:49, Richard GENOUD a écrit :
+> Hi Bryan,
+> 
+> When trying to discuss with the PMIC on a J722S-evm board in U-Boot R5 
+> SPL, I got the error:
+> ti_power_domain_of_xlate(power_domain=81fffe2c, id=107)
+> ti_power_domain_of_xlate: invalid dev-id: 107
+> 
+> PMIC device lookup was done with:
+> uclass_get_device_by_name(UCLASS_PMIC, "pmic@48", &pmic);
+> 
+> After checking the file arch/arm/mach-k3/r5/j722s/dev-data.c, the id 107 
+> is indeed missing.
+> 
+> Could the missing dev-id be added it the file?
+> 
+> Regards,
+> Richard
+> 
