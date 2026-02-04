@@ -4,139 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA1BE83045
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 06:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4C3E8B39F
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 06:53:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5353C839DF;
-	Wed,  4 Feb 2026 07:40:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 26B88839DF;
+	Wed,  4 Feb 2026 07:53:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="Q5YDqnxX";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="HXQPPcCo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64906839DF; Wed,  4 Feb 2026 07:40:17 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 67AAA83A36; Wed,  4 Feb 2026 07:53:31 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D2D839A5
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 07:40:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D687D839A5
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 07:53:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=public-files.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=frank-w@public-files.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1770187205; x=1770792005; i=frank-w@public-files.de;
- bh=Il5DT1yHms6CipEU8B3b4e/+aZyiAZ7xSXCMu6E0VYw=;
+ s=s31663417; t=1770188008; x=1770792808; i=frank-w@public-files.de;
+ bh=MksmnARt1IODPvJgOtuwlfZjHwfiaj1Jj1+TnjNn5fw=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:Reply-to:In-Reply-To:
  References:Message-ID:MIME-Version:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=Q5YDqnxXvLqe8OrJq3ey6ChIrudhkaQMZ8shMd9MkbKEHM39T3ojj2LhF+WvWoOI
- KXzPDqi4CKC101ypjy+4lZHjYfm+CIgz6R2yRNfy8cHjg9i8btOpOei3zD5bTL9nS
- YBaozwbeDThe+jir957KhpIX602cs3JFMEFoyO40phADHeifPwqrD5WoI2cEvwCKr
- ezir3db8eJUYCVpJ67Y7zKQku8RbnPGyNKSMDUGQneNsiqQRNwnE25HH+CyQdMkRy
- UkCWnl2x2fXq9KFgcT17gRQqDthPrCt+RzzKZSOQcHgRzOrfnTUghO1yGicBlM2BF
- YbrHS4gJDQLmS6JRZA==
+ b=HXQPPcCoe6aV71HTODtRwH0HDbIZuCEvugKQkLnmOadDScTYz122TNtiC0YBKM8X
+ yezYGIqIOPHZGduLK0QhhcGA4S+RGCQKuBCXKKVYKDcpFGcOsJGVr0JytGKfBNDR0
+ WxGzx8mU/L4//0gamuPnpSUuTXa6FKS50iBQwaQnv2tm5aaAHnf0FB3bImccLwlgA
+ 4M6ZQa7uofRfHi+yBGiBuplZDLtAaYb+vbimSTJqBzO/XhUHYiGyzgUidiZxVSvsM
+ qX1s11h6EqIfWOnUxMaglkA0wRijHfp1YYAv3Q9eU+baE08qP+euCoERGQzgCKiWo
+ maIlgHzCm9DIoGjSVw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from ehlo.thunderbird.net ([80.245.74.171]) by mail.gmx.net
- (mrgmx004 [212.227.17.190]) with ESMTPSA (Nemesis) id
- 1MvbBk-1vWH5O3X1S-013NF0; Wed, 04 Feb 2026 07:40:04 +0100
-Date: Wed, 04 Feb 2026 07:40:05 +0100
+ (mrgmx105 [212.227.17.168]) with ESMTPSA (Nemesis) id
+ 1M2wKq-1vqoYN3SFI-007m6Z; Wed, 04 Feb 2026 07:53:27 +0100
+Date: Wed, 04 Feb 2026 07:53:28 +0100
 From: Frank Wunderlich <frank-w@public-files.de>
-To: Tom Rini <trini@konsulko.com>, Frank Wunderlich <linux@fw-web.de>
-CC: u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>
-Subject: Re: [PATCH v6 2/3] test: cmd: add test for memsize
+To: Simon Glass <sjg@chromium.org>, Frank Wunderlich <linux@fw-web.de>
+CC: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Daniel Golle <daniel@makrotopia.org>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3=5D_cmd=3A_mem=3A_add_function_?=
+ =?US-ASCII?Q?for_getting_ram_size_for_use_in_scripts?=
 User-Agent: K-9 Mail for Android
-In-Reply-To: <20260203233402.GU2603314@bill-the-cat>
-References: <20260125131254.23210-1-linux@fw-web.de>
- <20260125131254.23210-3-linux@fw-web.de>
- <20260203233402.GU2603314@bill-the-cat>
-Message-ID: <5E5EDF2D-9CDF-4640-9639-88FD888B688B@public-files.de>
+In-Reply-To: <CAFLszTjBxGvTPbLXUF8tZQJXyrJmsJTbBx6c4-UfQbeqRfdsew@mail.gmail.com>
+References: <20260117214311.706022-1-linux@fw-web.de>
+ <CAFLszTjBxGvTPbLXUF8tZQJXyrJmsJTbBx6c4-UfQbeqRfdsew@mail.gmail.com>
+Message-ID: <301E33D0-D806-434A-BD6F-962A0B513F60@public-files.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:McMBl3OSQjI+aSt0pVKFhwE6GUgRy0EsDNszehpiKkt1g16xQMd
- XDYxjPau8SQnh6nYn3P7dv2dPhR80k3ic9w0cKMr73UZ0Sl5gDqABNWyWGYfjKT7rSmpiFv
- twgjO9UZilsH7BwbEBGtcXYinZ4z+FjRp1/e+ugQrnM4aoDrBOxtBCEWFwkg04M/ppWjt9C
- 3PsEIZlkZoQxChgvQGOPw==
-UI-OutboundReport: notjunk:1;M01:P0:cJZJINOhJ3Y=;BAfYoA+qJkCHF2b+bmVXGcpLHnq
- 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
- LoxjUhtJ49Ud7CxdmEGH
+X-Provags-ID: V03:K1:i01dMPOAhj3eCXA9iiAZOYxjz5hzQXcxbY5+ux0+niE3+nNQQJu
+ NxO+rpgiNJQAGfsx3shxB6BFK684o6+UfDRWDhm/7eIVkP9I7NF4gis2NuitYkee+vaHGfr
+ xYKN8UyI7EBCsFgJEK6u3ImApEG8A9aaJClB0HLTlDERU4opst8OFejt+nmIRknJOuevqYM
+ of37djztKTkuG9qVx908g==
+UI-OutboundReport: notjunk:1;M01:P0:EkP3pOC3cPM=;KB9sMGs/9/q9yAFK0uZzrcEk6w6
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,78 +155,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 4=2E Februar 2026 00:34:02 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>:
->On Sun, Jan 25, 2026 at 02:12:52PM +0100, Frank Wunderlich wrote:
+Hi Simon
+
+Thanks for your review=2E
+
+Am 4=2E Februar 2026 01:23:24 MEZ schrieb Simon Glass <sjg@chromium=2Eorg>=
+:
+>Hi Frank,
 >
+>On Sun, 18 Jan 2026 at 10:43, Frank Wunderlich <linux@fw-web=2Ede> wrote:
+>>
 >> From: Frank Wunderlich <frank-w@public-files=2Ede>
->>=20
->> Add a test for memsize command in same way as meminfo=2E
->>=20
+>>
+>> Add a command for getting detected ram size with possibility to write
+>> to environment variable=2E
+>>
+>> example usage:
+>>
+>> BPI-R4> msize
+>> 4294967296
+>> BPI-R4> msize m
+>> 4096m
+>> BPI-R4> msize g
+>> 4g
+>> BPI-R4> msize g ramsize
+>> BPI-R4> printenv ramsize
+>> ramsize=3D4
+>> BPI-R4>
+>>
+>> board with 8GB ram:
+>>
+>> BPI-R4> msize
+>> 8589934592
+>> BPI-R4> msize m
+>> 8192m
+>> BPI-R4> msize g
+>> 8g
+>> BPI-R4> msize g ramsize
+>> BPI-R4> printenv ramsize
+>> ramsize=3D8
+>> BPI-R4>
+>>
 >> Signed-off-by: Frank Wunderlich <frank-w@public-files=2Ede>
 >> ---
->> tested via:
->> $ =2E/u-boot -T -c "ut cmd cmd_test_memsize"
->> =2E=2E=2E
->> Test: memsize: meminfo=2Ec
->> Tests run: 1, 0 ms, average: 0 ms, failures: 0
+>> v2: add Kconfig entry
 >> ---
->>  cmd/Kconfig        |  1 +
->>  test/cmd/meminfo=2Ec | 17 +++++++++++++++++
->>  2 files changed, 18 insertions(+)
->>=20
+>>  cmd/Kconfig |  5 +++++
+>>  cmd/mem=2Ec   | 32 ++++++++++++++++++++++++++++++++
+>>  2 files changed, 37 insertions(+)
+>
+>Please can you add doc/usage/cmd/ and test/cmd
+
+I already did in v6=2E
+
+https://patchwork=2Eozlabs=2Eorg/project/uboot/patch/20260125131254=2E2321=
+0-2-linux@fw-web=2Ede/
+
+>>
 >> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index be79bf0747df=2E=2E2bafa156ca8a 100644
+>> index 5c611fb3016e=2E=2Eb82b17195b7e 100644
 >> --- a/cmd/Kconfig
 >> +++ b/cmd/Kconfig
->> @@ -927,6 +927,7 @@ config CMD_MEMINFO_MAP
->> =20
->>  config CMD_MEMSIZE
->>  	bool "memsize"
->> +	default y if SANDBOX
->>  	depends on CMD_MEMINFO
->>  	help
->>  	  Get RAM via command for use in scripts=2E
->> diff --git a/test/cmd/meminfo=2Ec b/test/cmd/meminfo=2Ec
->> index 53b41e3b49e0=2E=2Eba772a8b7616 100644
->> --- a/test/cmd/meminfo=2Ec
->> +++ b/test/cmd/meminfo=2Ec
->> @@ -7,6 +7,7 @@
->>   */
->> =20
->>  #include <dm/test=2Eh>
->> +#include <env=2Eh>
->>  #include <test/cmd=2Eh>
->>  #include <test/ut=2Eh>
->> =20
->> @@ -39,4 +40,20 @@ static int cmd_test_meminfo(struct unit_test_state *=
-uts)
->> =20
->>  	return 0;
->>  }
->> +
->> +/* Test 'memsize' command */
->> +static int cmd_test_memsize(struct unit_test_state *uts)
->> +{
->> +	ut_assertok(run_command("memsize", 0));
->> +	ut_assert_nextline("256 MiB");
->> +	ut_assert_console_end();
->> +
->> +	ut_assertok(run_command("memsize memsz", 0));
->> +	ut_asserteq_str("256", env_get("memsz"));
->> +	ut_assert_console_end();
->> +
->> +	return 0;
->> +}
->> +
->>  CMD_TEST(cmd_test_meminfo, UTF_CONSOLE);
->> +CMD_TEST(cmd_test_memsize, UTF_CONSOLE);
+>> @@ -974,6 +974,11 @@ config CMD_RANDOM
+>>         help
+>>           random - fill memory with random data
+>>
+>> +config CMD_MEMSIZE
+>> +       bool "memsize"
+>> +       help
+>> +         Get RAM via command for use in scripts=2E
 >
->Since the new test isn't guarded with memsize, this fails on qemu-x86_64
->where meminfo is enabled, but memsize is not=2E
+>I suggest a little more info in your help, so it is clear what the
+>command actually does=2E
 
-Does x86_64 test not use SANDBOX? Do i need to enable it somewhere else? I=
-mho it should ve tested also there so guarding just prevents the test=2E Bu=
-t of course i can add guards for it=2E
+Ok something like "print ram size in MiB or set environment variable with =
+same value in decimal notation for use in scripts=2E"
+
+>> +
+>>  config CMD_MEMTEST
+>>         bool "memtest"
+>>         help
+>> diff --git a/cmd/mem=2Ec b/cmd/mem=2Ec
+>> index d5d7ca2790bd=2E=2Ea067740d81c8 100644
+>> --- a/cmd/mem=2Ec
+>> +++ b/cmd/mem=2Ec
+>> @@ -33,6 +33,7 @@
+>>  #include <linux/compiler=2Eh>
+>>  #include <linux/ctype=2Eh>
+>>  #include <linux/delay=2Eh>
+>> +#include <linux/sizes=2Eh>
+>>
+>>  DECLARE_GLOBAL_DATA_PTR;
+>>
+>> @@ -711,6 +712,29 @@ static int do_mem_loopw(struct cmd_tbl *cmdtp, int=
+ flag, int argc,
+>>  }
+>>  #endif /* CONFIG_LOOPW */
+>>
+>> +#ifdef CONFIG_CMD_MEMSIZE
+>> +static int do_mem_size(struct cmd_tbl *cmdtp, int flag, int argc,
+>> +                      char *const argv[])
+>> +{
+>> +       u64 memsize =3D gd->ram_size;
+>> +
+>> +       if (argc > 1) {
+>> +               if (!strcmp(argv[1], "m"))
+>> +                       memsize =3D (memsize + SZ_1M - 1) / SZ_1M;
+>> +               else if (!strcmp(argv[1], "g"))
+>> +                       memsize =3D (memsize + SZ_1G - 1) / SZ_1G;
+>
+>Can you do something like this?
+>
+>memsize =3D ALIGN(memsize, SZ_1G)
+
+V6 only does MiB to make code more clear, avoid issues on round and also n=
+ot needing floading point=2E
+
+>> +               if (argc > 2)
+>> +                       env_set_ulong(argv[2], memsize);
+>
+>Normally U-Boot uses hex, so it would be worth mentioning that this
+>command doesn't=2E Or even provide a -d flag to select decimal?
+
+I can mention that result is in decimal of course similar to help text abo=
+ve=2E=2E=2Eseems i missed this in v6=2E
+
+>> +               else
+>> +                       printf("%lld%s\n", memsize, argv[1]);
+>> +       } else {
+>> +               printf("%lld\n", memsize);
+>> +       }
+>> +
+>> +       return 0;
+>> +}
+>> +#endif /* CONFIG_CMD_MEMSIZE */
+>> +
+>>  #ifdef CONFIG_CMD_MEMTEST
+>>  static ulong mem_test_alt(volatile ulong *buf, ulong start_addr, ulong=
+ end_addr,
+>>                           volatile ulong *dummy)
+>> @@ -1404,6 +1428,14 @@ U_BOOT_CMD(
+>>  );
+>>  #endif /* CONFIG_LOOPW */
+>>
+>> +#ifdef CONFIG_CMD_MEMSIZE
+>> +U_BOOT_CMD(
+>> +       msize,  3,      1,      do_mem_size,
+>> +       "get detected ram size, optional set env variable with value",
+>> +       "[m, g] [envvar]"
+>> +);
+>> +#endif /* CONFIG_CMD_MEMSIZE */
+>> +
+>>  #ifdef CONFIG_CMD_MEMTEST
+>>  U_BOOT_CMD(
+>>         mtest,  5,      1,      do_mem_mtest,
+>> --
+>> 2=2E43=2E0
+>>
+>
+>Regards,
+>Simon
 
 
 regards Frank
