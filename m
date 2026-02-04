@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAAAE83F1F
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 14:02:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF823E9D3E2
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 14:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2268183AAD;
-	Wed,  4 Feb 2026 15:01:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 699CB802C1;
+	Wed,  4 Feb 2026 15:23:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e/EfI9We";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="i0hU3Mlu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="weTyjc6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB28683AA4; Wed,  4 Feb 2026 15:01:54 +0100 (CET)
-Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
- [IPv6:2001:4860:4864:20::44])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5E85D8063E; Wed,  4 Feb 2026 15:23:16 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66ADC8063E
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 15:01:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 275AB80086
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 15:23:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x44.google.com with SMTP id
- 586e51a60fabf-40a62601731so339406fac.0
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 06:01:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770213711; x=1770818511; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uX1+wzogYMNSdqnitJcF07maZb/hkdRE8jAOwGQ3xi0=;
- b=e/EfI9We95aepZIB9pgg7HrfqVyuJ60uCSNys7Fb7nrg+pCNJ9P2mE+B/8FMy6Y9Zv
- Swbr4RbwzYuws4WSZm2k6iiQLRa0uwsenYbULZCwuERNax8oWPe3omueMQuLUzcKP8fG
- ZIVQjHKMncqOxfzbqkl3tTfnTiC8VsLBjXxz0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770213711; x=1770818511;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=uX1+wzogYMNSdqnitJcF07maZb/hkdRE8jAOwGQ3xi0=;
- b=fca1NYBj6ntJbPwNULDeS9VjAxZVItCoyI3my/n1v1LtStqvsx4Jau2smAjai8lAEF
- igljE99qvi+JPL7PAORtCxutmK5d5R5CXbF7ho8+77S2McGzxBcDvwGplMTiId8q74xE
- qv49tbvFLvYTMdJrul89iaUxZaaclhpHVs78jAqvCQ4ZB3nTY161bVKv66MRZqX1DapZ
- nD/4gxM0uWeBOj2q/JS6560SHSW9MZMJ1j3Noq9hVBTxLOHkoRST99PilVXsbkWZ+mPx
- D0JOTe4hQjrTU4tdcZBhjzGOjzkerTZj1r5M89eX8Nqv45sKO9NF9JLseDUmyRyqYudT
- vlpg==
-X-Gm-Message-State: AOJu0YyMfJqUd49wpnDfrIINyEbPpgRGBHNmoQr9jH+mBXnvKS0YGHTT
- z8XkT062JCJyv1mz9cv9kAt/GLbg/bjNS0Ung6s+C1V3PFxQVbY+Tr/qhaV7naBbxLuRn1pGHCr
- 13euD2Xw=
-X-Gm-Gg: AZuq6aKAZebLPQCuOPZWswFSwEe5SJaHYROItaQdPZc3aA2FhSYnvI3DF7cMkeMl73E
- 1lNyf93PDQoTl2tg6UA3wa53fsOsxYCsJxYvWD9KGLMsYuxBl4NdSUxW7Em4xMjigPinje1kRrQ
- IiecyVgqfdGIyZj5hMoP38MNF+9WJW1NcbIpluJuvrgbXqnF79iMRPoGvpiDVbCLPzpbC2K6Qbm
- 9iLudN14fgUSV8yGAM33ZUhvgkq9YcCgiwUr5g5uLcE/htJFww/mKp9cFaMIV4vLSHdyplItSe+
- MMNEQjpKP3UHJ/qeYWEJ4bihUagbze33vDapbDJ8nHepwABWkc9hX8vakuo4a6XcP3CXSf970mI
- 7ptJ7w3v3ak6MByYsk1HU7OqDBFuHzhHVCZVhW/udInbqMc9PYwk2/jhOzqxwp+68zLtZg4Mlio
- 99ihlMCIIhnCSBTeR/Ql9u/34GVclDJ9KZ2ZjY8FjyjzBgsdcljJXe9ePMtlBBqu2RsF97incZp
- MY+tmKLzrmI0eEs3Ps4838o/KxYmtHr3Fefxw==
-X-Received: by 2002:a05:6870:a901:b0:3e7:e420:6229 with SMTP id
- 586e51a60fabf-40a53ae1e73mr1607156fac.6.1770213711007; 
- Wed, 04 Feb 2026 06:01:51 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a590fe5f7sm1369437fac.9.2026.02.04.06.01.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 06:01:50 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot-Denx <u-boot@lists.denx.de>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Richard Genoud <richard.genoud@bootlin.com>
-In-Reply-To: <CAOf5uwnzPQsvaJoQo1F+aAWP7MHbrPfsxiAbesCTfQzmH9oUWA@mail.gmail.com>
-References: <CAOf5uwnzPQsvaJoQo1F+aAWP7MHbrPfsxiAbesCTfQzmH9oUWA@mail.gmail.com>
-Subject: Re: Pull request for u-boot-nand-03022026 (Take 2)
-Message-Id: <177021371025.1736867.13753701570498263687.b4-ty@konsulko.com>
-Date: Wed, 04 Feb 2026 08:01:50 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4f5jJ16CZ7z9tRP;
+ Wed,  4 Feb 2026 15:23:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770214993;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=T2NjgAJwmAs5PLU3n2T407QYP4jBapPK2vDKdO3JBQM=;
+ b=i0hU3Mlu16p18vIfPHl/913w54QBuCunf2B8pATRzkD04/4SW+3zTrhkzkMDj9osF6KRxJ
+ djybmMC5m4X4cuj5nSQqTBLNSlI2BUInbZB6pQ6egkrXTzga2+KojnWPqw4SzU09d+J6ry
+ kpB//OGFOH9D6XG2gJR9oESLf++gH8IlaXfeSytsXgiY1to7nwQVKFTv1Ei8yj6y6dAZPG
+ cVM15nUELypEQpus76s4sOgSydEmEg9xpSxWkdV5W4jYDHyhK/vXVDx5F5LuGWkkVZZPmC
+ KkezjNCPGZf4RRJXV6zU6cj7geey+57X85DeV1hsnlkq/tSl7sQVri+/LzpGzQ==
+Message-ID: <2a4dfbbe-2f3b-44ab-8cd4-4bf7ce5d4403@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770214991;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=T2NjgAJwmAs5PLU3n2T407QYP4jBapPK2vDKdO3JBQM=;
+ b=weTyjc6UAgsfE0+eX231NROBftdFILkUP9IUHiAqmdGuRgX4qnXEu2iwIyrLUG0Agj94vc
+ OqQp+0E7hG1T9nmm8WKwkfCTHDrvPTyAWOsZePkXQ1zhPuFYSPYpS6d5/ECmnnzToB5Rr2
+ DuZ1+T5w2Xk4pbQm8PTLFwg+j39pwooizO2cfWquJAAdXr3E2ete0iRgFVhpY5TN9qv6cP
+ 3Cwu7jpxke4IzAO536/yYqzbr4ZDPgdCzZBUSfAhKPIvaklscjwcWoVwXWfEc0PfsEOFcU
+ REkB+b1GBpmrfwocJKLkez5AB4xAIuKVUmVAgdBqx5OWb5EJNyCgGmCHpMQdNA==
+Date: Wed, 4 Feb 2026 15:23:05 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH 1/2] arm64: dts: freescale: add basic dts for FRDM-IMX95
+ in u-boot
+To: Tom Rini <trini@konsulko.com>, Joseph Guo <qijian.guo@nxp.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Lei Xu <lei.xu@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Adam Ford <aford173@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Ji Luo <ji.luo@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Justin Jiang <justin.jiang@nxp.com>,
+ qijian.guo@oss.nxp.com, xinyu.chen@nxp.com
+References: <20260204-imx95_frdm-v1-0-85dc80e98a6d@nxp.com>
+ <20260204-imx95_frdm-v1-1-85dc80e98a6d@nxp.com>
+ <20260204135436.GW2603314@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260204135436.GW2603314@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MBO-RS-META: 9f3ukdw7gn1grh4ab8nxgkis6bopdnh8
+X-MBO-RS-ID: a5e86fb08c3cfcb3199
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,21 +99,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 03 Feb 2026 23:45:42 +0100, Michael Nazzareno Trimarchi wrote:
-
-> The following changes since commit 71f2564b178f3986dc89cdaa4558f0caa74fd88c:
+On 2/4/26 2:54 PM, Tom Rini wrote:
+> On Wed, Feb 04, 2026 at 04:47:12PM +0900, Joseph Guo wrote:
 > 
->   Merge tag 'mmc-for-2026.04-rc2' of
-> https://source.denx.de/u-boot/custodians/u-boot-mmc (2026-02-03
-> 12:46:30 -0600)
+>> Add the upstream device tree files for the FRDM-IMX95 board:
+>> https://lore.kernel.org/all/20260116-127-v3-2-3dc49545a745@nxp.com/
+>>
+>> Signed-off-by: Lei Xu <lei.xu@nxp.com>
+>> Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
+>> ---
+>>   .../src/arm64/freescale/imx95-15x15-frdm.dts       | 964 +++++++++++++++++++++
+>>   1 file changed, 964 insertions(+)
 > 
-> are available in the Git repository at:
-> 
-> [...]
-
-Merged into u-boot/master, thanks!
-
--- 
-Tom
-
-
+> NAK. Only cherry picks go in there.
+So ... move the .dts into arch/arm/dts/ until there is an upstream DT in 
+Linux and thet gets synced into dts/upstream/ in some future U-Boot 
+version following the Linux release which contains the DT. Once the 
+later happens, remove the DT from arch/arm/dts and enable OF_UPSTREAM 
+for this board.
