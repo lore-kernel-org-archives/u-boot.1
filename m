@@ -4,99 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB29EA7943
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 20:24:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7121EA7944
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 20:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D7F48341A;
-	Wed,  4 Feb 2026 21:24:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 67F008341A;
+	Wed,  4 Feb 2026 21:29:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="J8OCFm04";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d6OV1pZl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83D16839A8; Wed,  4 Feb 2026 21:24:35 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 09831838FA; Wed,  4 Feb 2026 21:29:22 +0100 (CET)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41B6A83015
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 21:24:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C72A483015
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 21:29:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-42fed090e5fso190634f8f.1
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 12:24:33 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-662f2fa7e67so70855eaf.1
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 12:29:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770236672; x=1770841472;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fif/OiTRad0YR8p66Yku7iZKailLnEcd8b3xF2RTj30=;
- b=J8OCFm04QmJYVZW/qPi4jGKTgeQsZviXVgAfVkZO21HIuM4XLaia6mt12wFk6EvNed
- bQN8cCwfQzb+98/+y3aZPGku5hS4rzlCLLOI4u3nmeeBlUiPK3DfyWw6m+QwPQgzRoOc
- v05vbdleXDjrsTm6BMT4TZNuUHQtn8P6b/iKvPnXwvexCBqPfTYarD8xbRMDyLkJp26+
- ffe/emEzNcpl1AXvD0oDdXpI0c7vqgS2bwH3aST+53bmr1I1F7L+ExKkKgg1xuOUttin
- 1afSQ3Mdn3Zf93OfQx0vctoLYSWB9of6J04arEIbaKkc+I5HDjE1ftaVf1FMD1BPBBz8
- b9Bg==
+ d=konsulko.com; s=google; t=1770236958; x=1770841758; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=It6Vbn0BG8QzuTLBtiiLobKhqC3LTWmvYTbetOVIJ+U=;
+ b=d6OV1pZlob9fKYKdntdl8p644a+jPj1R1IAf9BnQo/B4qBuMnJE5lEoWB1qIYKzsgg
+ qqLJnuMRTpgvk312lrbELkNJ9a67MNvCU+mJV1dP3OMEWeVREi/Td7Sky109ZndRFyN0
+ lUXAGYYACFuns69o585XrOaaJGXFFZM8NPrFI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770236672; x=1770841472;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fif/OiTRad0YR8p66Yku7iZKailLnEcd8b3xF2RTj30=;
- b=ENEv+CHkXO9+gkhyoCUyek7jqguuw6dmfNz7kYP9JQR5OtOpHsGyr5A/90VN/RaShP
- Kzbe+k2NroXT4XKzW0APydhHhPHpJnDIfIveM6ABmNth9nJI4kQOq+yoqUCnriEwM3wC
- 6sSf8aVLbxSLt8LEBGjAlrmRM4nupGZrx8ai4IEwaSbWyz1WW/fNaHKKDtBD6s/k8Em/
- cGWBPE6tvGsYzEKsniT2AmsWOSnplb3SrhxqmYxt9OkHAulYXuKYKIe6ddI+u98lu4C3
- PzQkBjtWkOeEXGCmh0Y9Z1TuoRWbrC8EyZ7gfSyKbSMZ0xEnCxdJqtYHieKEVqmTxox2
- Tjmg==
-X-Gm-Message-State: AOJu0YxnFJ7K+BFYoq9oZOG/5fMOkFGqe5xsDiTE3PijacSHVTrj48Mo
- L+LmKwTxIm47FpQClvADt1c5vCNImo6JAm+qFLIkg0o4ALIdSNYuHjgwYBWo/a7NrXU=
-X-Gm-Gg: AZuq6aL+c2xfO45EhWTk/HxvFJV5ircxsN6O9eUIFnklZ+FWhaPRq6xXCI39HmgKSVI
- 9HIX6EwytN5ReIaBgBw53exb3TjX6vL+h31FotWrdl7EoJe77BK0xmxkvLizc75IhfLjqmSGk8I
- hwa8RK6S/Of0qBDS3O6NvyxF8NTq10Fvdby0+wMDEeVnuekZsAiyC+oqlQ6zJ5xM92eOYqCp5bD
- idVUKqPwOoyoGTsHjiVc9e3u+0Gt83sp3H4ow1PNJuaacztmkcFiwcXrZU6WJjlsA3yC3ZxMaCt
- 2+TxS/38MJ5VCD9TAfo7d/UpGqSRGuG17FBB3YdGzk/POh9ZsciUEOS/T9O7w4vFfypSsLHA9ts
- yCjR3lUU5oJmTPpnwLF6Rn+TKmeZu3zlp2RiIDxjI5H0lK/E3qnVd63Q59CjaqyIwQ/OO8xT8W9
- lIK1L9AZgjhdv7gqhCP174tASEmtEBQD4UWarUs8n8/AvJoZlHnEgZqgaDfAzgchCCMS8xNfCrb
- ihf47EKXw==
-X-Received: by 2002:a05:6000:40d9:b0:435:a370:2d7a with SMTP id
- ffacd0b85a97d-43618053444mr6240318f8f.36.1770236672586; 
- Wed, 04 Feb 2026 12:24:32 -0800 (PST)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-56a2-efb9-07f1-cf08.rev.sfr.net.
- [2a02:842a:d52e:6101:56a2:efb9:7f1:cf08])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43617e3a3a9sm8701651f8f.18.2026.02.04.12.24.31
+ d=1e100.net; s=20230601; t=1770236958; x=1770841758;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=It6Vbn0BG8QzuTLBtiiLobKhqC3LTWmvYTbetOVIJ+U=;
+ b=mdNdRneY9Z3xpvddlXzOqUiN9QfknS8zUZ5G47WkYz0z6WNtswxwadjCyVnk9WHEFQ
+ CgwVcTR48zYlh4rfYAI1Hjgd+JBk6hcItKmYPn3hLw1f1xFG43gA7Nh4FW4YEMMEdWeK
+ K9CI91Dll7lB6G8gO16XyFNB485aTYC6+BqXvflAWvPzVgBCqbmQR0wLNjwltICRrmUy
+ 1TEA+RDo5PhqAf+k8ODdkg6/Lk3J0KIA92oNklLhN0Tbx7GWTGsFFujhNRzAaPmHOmgx
+ XGbeV3/GG7ApzBcHO724WKFWdQ47rORkXf8mrBv8w45mhqpAOsf1xYLX0rcLBgSgcLin
+ 55Yg==
+X-Gm-Message-State: AOJu0Ywi9AigD1dQkgvrG4Ycsa0b6PmbBO02UJ2EFcPuj09K/+w5XTbh
+ ThNQMbsjye3msQU6BLx97VcOxNE7U80RttP4ZcXJgje3PrIjPTg5EiyyGIg8HOaPSRA=
+X-Gm-Gg: AZuq6aLNyAPrOLbjeqezpaJbAz1C9yumUxNMicxIlvS0H3iUS23zYfhudrcbJIpsmsz
+ 9dwky4hzItBpfJ6LkMnxNJ8LZJ8kPBwPvnBdL2JYPt7cD1W2Y2GieTA36nALId2evGba5YgE3TH
+ qsq9KkGg5TQDbN9BgAAt0sOK8eOFgzMKaZPG2z57pJmMhG2n9dejr1L89W7rAJ8nQxZWeKYTPaW
+ EVjydr5tjMkdgEaik65GhZd/Zv/IjnT79KXtSiRwKPBloBS8IC4YDQoFhKC1PgdYxnj4KgZ+mNE
+ chU3UfB0OHJzspMR5WqEnHlN1nOlY8xB9fmVUOJey5RzgQ1CBYOD/29BNYf9wMss/oq0iTm5hpb
+ qhh309Xxnu6dpYuVvvXBXgcCfuzblNaDvFHlJKaAiO5GCBbBvcffKIY6cUKxibzqNR02KXaMtNq
+ PogEDnfLbOxFr5OtcXhMLFxrkIO97TiiQwZbyDX+hfZMywgq0a8sVwwXYWl8SlX2y7KEbfOE8t9
+ 2vdaC1Q5TD7g4LNN9DyI0Ffh4CKLjKxgNlS2O12JrwDIGD7qA==
+X-Received: by 2002:a05:6820:468d:b0:662:f30e:d56d with SMTP id
+ 006d021491bc7-66a200b92b9mr1596450eaf.7.1770236958452; 
+ Wed, 04 Feb 2026 12:29:18 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-66a35a94a3asm1735734eaf.14.2026.02.04.12.29.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 12:24:32 -0800 (PST)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Wed, 04 Feb 2026 21:24:30 +0100
-Subject: [PATCH] board: mediatek: add MT8370 EVK board support
+ Wed, 04 Feb 2026 12:29:17 -0800 (PST)
+Date: Wed, 4 Feb 2026 14:29:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Julien Stephan <jstephan@baylibre.com>
+Cc: u-boot@lists.denx.de,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH] board: mediatek: add MT8370 EVK board support
+Message-ID: <20260204202915.GB2603314@bill-the-cat>
+References: <20260204-add-mt8370-evk-board-v1-1-3132f953d845@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260204-add-mt8370-evk-board-v1-1-3132f953d845@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/z2OywqDMBBFf0WybmCcJJPqrxQXeYw2FLWNVgriv
- 1e0dHku3MNZxcQ58STqYhWZlzSlcdihvBQi3N3QsUxxZ4GABAhauhhlP1+VBcnLQ/rR5SgpYlt
- pUuDJiv36zNymz6G9NSdnfr13+3yOwruJZRj7Ps11QZoIfVUFYB8MBbRWBafQITgHxkQ0tqzaQ
- /2vqoujqUQ8mjoe0igtwC/JEJZe4zWA5npB0WzbF9dIuJDtAAAA
-X-Change-ID: 20260204-add-mt8370-evk-board-6d2f94630b67
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Julien Masson <jmasson@baylibre.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9ClA6gAL+LSZ4ihv"
+Content-Disposition: inline
+In-Reply-To: <20260204-add-mt8370-evk-board-v1-1-3132f953d845@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,87 +104,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds support for the MT8370 EVK board with the following
-features enabled/tested: Boot, UART, Watchdog and MMC.
 
-MT8370 is based on MT8188.
+--9ClA6gAL+LSZ4ihv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- board/mediatek/mt8370_evk/MAINTAINERS  |  6 ++++++
- board/mediatek/mt8370_evk/Makefile     |  3 +++
- board/mediatek/mt8370_evk/mt8370_evk.c | 34 ++++++++++++++++++++++++++++++++++
- 3 files changed, 43 insertions(+)
+On Wed, Feb 04, 2026 at 09:24:30PM +0100, Julien Stephan wrote:
 
-diff --git a/board/mediatek/mt8370_evk/MAINTAINERS b/board/mediatek/mt8370_evk/MAINTAINERS
-new file mode 100644
-index 00000000000..ee2b5cd8291
---- /dev/null
-+++ b/board/mediatek/mt8370_evk/MAINTAINERS
-@@ -0,0 +1,6 @@
-+MT8390 EVK
-+M:	Julien Stephan <jstephan@baylibre.com>
-+M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
-+S:	Maintained
-+F:	board/mediatek/mt8370_evk/
-+F:	configs/mt8370_evk_defconfig
-diff --git a/board/mediatek/mt8370_evk/Makefile b/board/mediatek/mt8370_evk/Makefile
-new file mode 100644
-index 00000000000..39b630f981d
---- /dev/null
-+++ b/board/mediatek/mt8370_evk/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier:	GPL-2.0
-+
-+obj-y += mt8370_evk.o
-diff --git a/board/mediatek/mt8370_evk/mt8370_evk.c b/board/mediatek/mt8370_evk/mt8370_evk.c
-new file mode 100644
-index 00000000000..58874a876ef
---- /dev/null
-+++ b/board/mediatek/mt8370_evk/mt8370_evk.c
-@@ -0,0 +1,34 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2026 BayLibre SAS
-+ * Author: Julien Stephan <jstephan@baylibre.com>
-+ */
-+
-+#include <linux/types.h>
-+#include <asm/armv8/mmu.h>
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+static struct mm_region mt8370_evk_mem_map[] = {
-+	{
-+		/* DDR */
-+		.virt = 0x40000000UL,
-+		.phys = 0x40000000UL,
-+		.size = 0x100000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
-+	}, {
-+		.virt = 0x00000000UL,
-+		.phys = 0x00000000UL,
-+		.size = 0x20000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		0,
-+	}
-+};
-+
-+struct mm_region *mem_map = mt8370_evk_mem_map;
+> This adds support for the MT8370 EVK board with the following
+> features enabled/tested: Boot, UART, Watchdog and MMC.
+>=20
+> MT8370 is based on MT8188.
+>=20
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  board/mediatek/mt8370_evk/MAINTAINERS  |  6 ++++++
+>  board/mediatek/mt8370_evk/Makefile     |  3 +++
+>  board/mediatek/mt8370_evk/mt8370_evk.c | 34 ++++++++++++++++++++++++++++=
+++++++
+>  3 files changed, 43 insertions(+)
 
----
-base-commit: 64662b99c0ebc56c2773ca32a20aa055d25719f7
-change-id: 20260204-add-mt8370-evk-board-6d2f94630b67
-prerequisite-change-id: 20260122-add-genio-700-board-5621b428c04e:v2
-prerequisite-patch-id: aa6329af5f80e12578b758eab20e3325303837ee
+I'm wondering now, can we reduce things to be more generic? I'm assuming
+the memory map is not the same but this is basically the tiny bit of
+code for mt8390_evk or mt8365_evk (which doesn't have an empty
+board_init, is there a CONFIG option to disable in 8370 and 8390?).
 
-Best regards,
--- 
-Julien Stephan <jstephan@baylibre.com>
+--=20
+Tom
 
+--9ClA6gAL+LSZ4ihv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYOsFwAKCRAr4qD1Cr/k
+ChW2AP9vGD79tXIprzguHbyGPhFdj/Tu9n9IEu75nPGh1oTmSwD+PtOWklZcqdBn
+Td2iCgD3SmPgACRP11FCVN+OuBIhagE=
+=esey
+-----END PGP SIGNATURE-----
+
+--9ClA6gAL+LSZ4ihv--
