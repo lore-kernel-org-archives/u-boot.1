@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43BF5E87840
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 14:02:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAAAE83F1F
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 14:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB62583015;
-	Wed,  4 Feb 2026 15:01:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2268183AAD;
+	Wed,  4 Feb 2026 15:01:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qAJmpl7k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e/EfI9We";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8596480086; Wed,  4 Feb 2026 15:01:53 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id BB28683AA4; Wed,  4 Feb 2026 15:01:54 +0100 (CET)
+Received: from mail-oa1-x44.google.com (mail-oa1-x44.google.com
+ [IPv6:2001:4860:4864:20::44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7299783A3D
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 15:01:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66ADC8063E
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 15:01:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-4043b909ed4so4328685fac.3
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 06:01:51 -0800 (PST)
+Received: by mail-oa1-x44.google.com with SMTP id
+ 586e51a60fabf-40a62601731so339406fac.0
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 06:01:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770213710; x=1770818510; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770213711; x=1770818511; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a/NgOQV07BU6dke48HAGWojBJ4bE6ObYFSzs2Q0cC5k=;
- b=qAJmpl7kxNT3Jn7iDiQtS3gvY+EzLx87v5zOchHiLR5cckdUt3sAwmD7djE/z0q67O
- l0DDBXm4RGm3NY0TnhMsMSdJ64pP6a8MLGzOH0OT/mG0a5DRNs1pyfWkymZcaQG2ikLf
- c2a6mRHttpqYIIZGSMbmZAiU7zDjVpx9L8JK8=
+ bh=uX1+wzogYMNSdqnitJcF07maZb/hkdRE8jAOwGQ3xi0=;
+ b=e/EfI9We95aepZIB9pgg7HrfqVyuJ60uCSNys7Fb7nrg+pCNJ9P2mE+B/8FMy6Y9Zv
+ Swbr4RbwzYuws4WSZm2k6iiQLRa0uwsenYbULZCwuERNax8oWPe3omueMQuLUzcKP8fG
+ ZIVQjHKMncqOxfzbqkl3tTfnTiC8VsLBjXxz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770213710; x=1770818510;
+ d=1e100.net; s=20230601; t=1770213711; x=1770818511;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=a/NgOQV07BU6dke48HAGWojBJ4bE6ObYFSzs2Q0cC5k=;
- b=FyFXdg4wus1XVIGA8y75l9mEk9FYiQIIyeHJm53dY1fFSxz6cf1HTFOdiYkekNTGvK
- AGMG8gna6fp32J388pe5zcfNq7Z0by315nuZaAacud+Z7U5LJYqO+ojfognQx8FpdDUe
- q+x6D73sppyYymD2+KNvplXLuqekccZT9/+SXYGrGVOlN9vTK4QORQ+xMOUgXcaNlhsB
- 205Juvfhc0wg/sduOOn0ZQYU99uNvTmZo7NHtMnnI1J+LMrfUD+k8Ez5hjZVLeufZzYg
- FHuI3Kdd1wC3wRvzj6d8I86ShSsqTgnUV7TCOmsjVHKdyfQt5kihO1lnKupxm3yab9rl
- eJFQ==
-X-Gm-Message-State: AOJu0YxDqlNtJOTNIHDGidthdXk5TcLOR7xerw2tr6Lif1kWcDIEDiJy
- S/YgnUb06AJhFsliM/Crak1z8XsSONlAUcBajJu9Xmsw1P/7f289YbblkwoIYnFDS6Y=
-X-Gm-Gg: AZuq6aKimXk+XtjQTBPLmIhc12EZVcbgoSUyWQjEyDMRZDjkLnDtf7eCxa5wfI6noS5
- YBZhy0urw/Vh8RmYIkhEy/fGUsMBJymT6RbI6STEvwJ6dQG+cHydx+QnTyxTnJaZLiFaa1DvqGy
- B+iv4cPJ2mresGg0e1oaHoJox+LgZd+7/wl1HOlzRHsuPEZwXDsHlu9ZTuMqFVwxWYrP2vt0FNL
- 57QLKSmL/f9g0xtXloH7L0Tx7eHSjguoHxsV1okMGtmnWY9TIPLpt40eZQbrrzbAb2mfkiwKpZa
- FTXLBwqEFT122ocNP7Mm1Hy/Y7bCqQm3HWNmxbjKUADQFCz/7KLPY6kPYh3blz7Fj/R/f/n2sPQ
- PM14aylvdgdMGN7NcvkhLFpKUoO8WZ8K4Z75V6jtxvEDV+mdQ3yAwMKuoCFe9BpG1xm+RMudthR
- tW8kCLAAkZh41Yea3Qt0RVYnq8mPOVXJM6qXiayXCUJAzISUS+8r5Jwb+Eu9011u1zJX07Gcxno
- SZwopdaQbM2Gqqy/QFA2+JEFc89lvYCGJeY6A==
-X-Received: by 2002:a05:6870:89a9:b0:409:5200:de38 with SMTP id
- 586e51a60fabf-40a53c0f8b7mr1692464fac.24.1770213710058; 
- Wed, 04 Feb 2026 06:01:50 -0800 (PST)
+ bh=uX1+wzogYMNSdqnitJcF07maZb/hkdRE8jAOwGQ3xi0=;
+ b=fca1NYBj6ntJbPwNULDeS9VjAxZVItCoyI3my/n1v1LtStqvsx4Jau2smAjai8lAEF
+ igljE99qvi+JPL7PAORtCxutmK5d5R5CXbF7ho8+77S2McGzxBcDvwGplMTiId8q74xE
+ qv49tbvFLvYTMdJrul89iaUxZaaclhpHVs78jAqvCQ4ZB3nTY161bVKv66MRZqX1DapZ
+ nD/4gxM0uWeBOj2q/JS6560SHSW9MZMJ1j3Noq9hVBTxLOHkoRST99PilVXsbkWZ+mPx
+ D0JOTe4hQjrTU4tdcZBhjzGOjzkerTZj1r5M89eX8Nqv45sKO9NF9JLseDUmyRyqYudT
+ vlpg==
+X-Gm-Message-State: AOJu0YyMfJqUd49wpnDfrIINyEbPpgRGBHNmoQr9jH+mBXnvKS0YGHTT
+ z8XkT062JCJyv1mz9cv9kAt/GLbg/bjNS0Ung6s+C1V3PFxQVbY+Tr/qhaV7naBbxLuRn1pGHCr
+ 13euD2Xw=
+X-Gm-Gg: AZuq6aKAZebLPQCuOPZWswFSwEe5SJaHYROItaQdPZc3aA2FhSYnvI3DF7cMkeMl73E
+ 1lNyf93PDQoTl2tg6UA3wa53fsOsxYCsJxYvWD9KGLMsYuxBl4NdSUxW7Em4xMjigPinje1kRrQ
+ IiecyVgqfdGIyZj5hMoP38MNF+9WJW1NcbIpluJuvrgbXqnF79iMRPoGvpiDVbCLPzpbC2K6Qbm
+ 9iLudN14fgUSV8yGAM33ZUhvgkq9YcCgiwUr5g5uLcE/htJFww/mKp9cFaMIV4vLSHdyplItSe+
+ MMNEQjpKP3UHJ/qeYWEJ4bihUagbze33vDapbDJ8nHepwABWkc9hX8vakuo4a6XcP3CXSf970mI
+ 7ptJ7w3v3ak6MByYsk1HU7OqDBFuHzhHVCZVhW/udInbqMc9PYwk2/jhOzqxwp+68zLtZg4Mlio
+ 99ihlMCIIhnCSBTeR/Ql9u/34GVclDJ9KZ2ZjY8FjyjzBgsdcljJXe9ePMtlBBqu2RsF97incZp
+ MY+tmKLzrmI0eEs3Ps4838o/KxYmtHr3Fefxw==
+X-Received: by 2002:a05:6870:a901:b0:3e7:e420:6229 with SMTP id
+ 586e51a60fabf-40a53ae1e73mr1607156fac.6.1770213711007; 
+ Wed, 04 Feb 2026 06:01:51 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a590fe5f7sm1369437fac.9.2026.02.04.06.01.48
+ 586e51a60fabf-40a590fe5f7sm1369437fac.9.2026.02.04.06.01.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 06:01:49 -0800 (PST)
+ Wed, 04 Feb 2026 06:01:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Masson <jmasson@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260202-add-genio-700-board-v2-1-06d375b877e7@baylibre.com>
-References: <20260202-add-genio-700-board-v2-1-06d375b877e7@baylibre.com>
-Subject: Re: [PATCH v2] board: mediatek: add MT8390 EVK board support
-Message-Id: <177021370810.1736867.14168114799025037743.b4-ty@konsulko.com>
-Date: Wed, 04 Feb 2026 08:01:48 -0600
+To: U-Boot-Denx <u-boot@lists.denx.de>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Richard Genoud <richard.genoud@bootlin.com>
+In-Reply-To: <CAOf5uwnzPQsvaJoQo1F+aAWP7MHbrPfsxiAbesCTfQzmH9oUWA@mail.gmail.com>
+References: <CAOf5uwnzPQsvaJoQo1F+aAWP7MHbrPfsxiAbesCTfQzmH9oUWA@mail.gmail.com>
+Subject: Re: Pull request for u-boot-nand-03022026 (Take 2)
+Message-Id: <177021371025.1736867.13753701570498263687.b4-ty@konsulko.com>
+Date: Wed, 04 Feb 2026 08:01:50 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,19 +99,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 02 Feb 2026 09:23:42 +0100, Julien Stephan wrote:
+On Tue, 03 Feb 2026 23:45:42 +0100, Michael Nazzareno Trimarchi wrote:
 
-> This adds support for the MT8390 EVK board with the following
-> features enabled/tested: Boot, UART, Watchdog and MMC.
+> The following changes since commit 71f2564b178f3986dc89cdaa4558f0caa74fd88c:
 > 
-> MT8390 is based on MT8188.
+>   Merge tag 'mmc-for-2026.04-rc2' of
+> https://source.denx.de/u-boot/custodians/u-boot-mmc (2026-02-03
+> 12:46:30 -0600)
 > 
+> are available in the Git repository at:
 > 
+> [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] board: mediatek: add MT8390 EVK board support
-      commit: ede7198a37019266bfc4a992bdd22292196a97f9
 -- 
 Tom
 
