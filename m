@@ -4,90 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2982EA7941
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 18:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200DEEA7942
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 19:02:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B094083A36;
-	Wed,  4 Feb 2026 19:41:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D9F883015;
+	Wed,  4 Feb 2026 20:02:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VW1PjMS/";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="yhfxU44Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE8DE83B32; Wed,  4 Feb 2026 19:41:50 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0C35F838FA; Wed,  4 Feb 2026 20:02:34 +0100 (CET)
+Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBF158063E
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 19:41:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B8F458063E
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 20:02:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-4042905015cso84894fac.0
- for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 10:41:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770230507; x=1770835307; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qIQCvqQRsHPkPHWb+7y+lYJZmCm9CDWuWyfRbqaPeJU=;
- b=VW1PjMS/IzvUdV0CMxQUvmW3qVPOMTJgRO9oxDKPDa+1/7UDer617KIZnzy/6kKFto
- WUj3kcCcCtIrIzlc2V53+5hDlhqXM5BpmRwFUHoCtX7m01XzgrvNy5XGLCQNItjPKHCO
- 9+LW8+yUJyWRaUz8hHqQIchjbGkLbiMSX7kJY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770230507; x=1770835307;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=qIQCvqQRsHPkPHWb+7y+lYJZmCm9CDWuWyfRbqaPeJU=;
- b=FwIyf45V05VlYeMlNMIcklVwQibQ0u3xAena8sNXIoyL3UkRtnQGTxDDzGqQ4ja1GC
- jUMP5WUmPoXth6GGNZpVnKWgLHRsHWjTEyBQlBSlglllccBsru7uVG3A5nfKpYdpfmB2
- LTOTiWrHtL6a6cpdMZCPG5S1rPONQeaUXqyEkBj/G8WcoySwS2W16xs5jVWATjxXuI51
- H3iGtD3lz2AxXmR1e3piLyV10+t0CZkcALbIVinFU/TYnkuu+Z/yPAQS0G6WUfHta7iQ
- bgnr6/FCh1VL//1v/Itc5z+vfXx47rYJgJ1F8ErRywVdEagoM03SmTd1nlrz9cSPiqgY
- Z/IA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU74jTnpPBDlXugiZ3DT/ulK6AXJBbSHlWIOyfLKKKrjwds0OkJIIdQjeWOgjCrzPWC8ydQSG0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8n9jUms0xWy/3qEVi68F8CCGaBaqyBbap2gvDSmrZplt/+tSF
- Outv6ESuz6+tDaZXy4oIo3c+0FLOW/ScACSAGKaqSVFz1PlOsGdCPosU2IK4hIN7OyQ=
-X-Gm-Gg: AZuq6aLOHsxsoU72czecBG5T23uNDX4h0K4O6Y4icaEb80zPnJii7gs//zCYNhD3Uak
- apkhj465EATxEFkgQt/Y+pYuyhzlQV/BR0kiJ6ZBU5hf58bEaViUGZroeji4S50mw8WJFbyUQiJ
- hu5Xbw6bW2IM4RDavyMdswXJ3KA8HiOtQOESrmrRp/hUxa2Kz0CkJsnT17ROikfDiDpC4gNY4nm
- 1GnKi2gu6yPwaM4oUkjnuR1Hn0cJQjjSMbi5saNWPc5NbmABOztAr9ozPOgK6TGg39SL84wMvLB
- UcDJ+/AUG80hqgR43VBnZTrHU13FDRqybzqa8XtU5YBinD0lPfR22uC1Q31l2NgVSCjq/NPEmmX
- 4Ua9gKuaDCAnhwU4HoXonDjKy9rPZ2pn1QscfcxDDWFWF+lz1Vt1+zfMaOHtEVmNUuNg4LGg7Ko
- VyoQla8l+ETFLog+IPgBB0BE8/LnC7H0cAnZPjPkla8HblrtlpML1i+MEkQWMTZ48TU8e2VIGMz
- iIxyly60/ZQN4Ykd+pBdbEQVfDd2Uui45t2O62PzImR/OnO
-X-Received: by 2002:a05:6820:460c:b0:663:859:c41e with SMTP id
- 006d021491bc7-66a23a07fb6mr1611170eaf.71.1770230507684; 
- Wed, 04 Feb 2026 10:41:47 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66a32bb1049sm1785776eaf.2.2026.02.04.10.41.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Feb 2026 10:41:47 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ion Agorria <ion@agorria.com>,
- Simon Glass <sjg@chromium.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
-References: <20251231141344.64052-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] video: menu "TrueType Fonts" depends on TrueType
- enabled
-Message-Id: <177023050643.1801114.17056220350766042284.b4-ty@konsulko.com>
-Date: Wed, 04 Feb 2026 12:41:46 -0600
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4f5qVG2lgpzyS8;
+ Wed, 04 Feb 2026 21:02:30 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1770231750;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=4SIcoaVqCfROVDQ+2qWhyLARzBQb15EqPVj4fqWgKEk=;
+ b=yhfxU44YjxeyITeJ9F1mX9iICrTtUKwij74gS7OMBoeWWjW3YWAJ7qiC/zdMycjvHxjd49
+ ahc71xOA0Pqw2MUgO/Amg6ALBoiyXtxUHFQ5/ofZMlzLtKhglW56hrzDvHydBacQjZJDfQ
+ bFMa6+dVzEH16whaPyHeDWbPaRHsleg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1770231750;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=4SIcoaVqCfROVDQ+2qWhyLARzBQb15EqPVj4fqWgKEk=;
+ b=qg2GcqXGc9sU/Y63RLDn+D5BFqsA2wRh2tpFnIW+ivT3jG8/Ea7LwoJIVXRU0kRsOd3eHJ
+ H1UsXRslFwpK8k4BC564nxkQFj2Mjs20K6XL40dJ8S3BluR99BHaSVOTMkd94+D/2GiOot
+ dgzVC60uU6JuVkMXlbyIEFK1aRfcKyY=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1770231750;
+ b=l5A846OdTYEWNirRERWhLiSnxQxVewrNXAUTl5ZxMNK9FoeM0iI0wWNUcqduQsVwK8Znet
+ SIuT0zrr00fudSjS3CD/GyUWGY3ryDqUHYGag6KPSFsRB0Ou7pyEt/1b7x9XO8dlmfoQ6q
+ 2xid7bfXKQKruaKld9dH1zOFDwNRMcE=
+Date: Wed, 4 Feb 2026 21:02:28 +0200
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+	u-boot@lists.denx.de
+Subject: Re: [RFC PATCH 0/4] add software ecdsa support
+Message-ID: <aYOXxN-DBm_6LrSE@kehys.lan>
+References: <20260202170307.217200-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20260202170307.217200-1-philippe.reynes@softathome.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,22 +84,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 Dec 2025 15:13:44 +0100, Heinrich Schuchardt wrote:
+Mon, Feb 02, 2026 at 06:03:03PM +0100, Philippe Reynes wrote:
+>This serie adds the support of ecdsa with software
+>using mbedtls. So boards without ecdsa hardware may
+>also use signature with ecdsa.
+>
+>To add the support of ecdsa with mbedtls, I have:
+>- enabled ecdsa in mbedtls
+>- add a function sw_ecdsa_verify that uses mbedtls
+>- add a driver sw_ecdsa that call sw_ecdsa_verify
+>
+>I have tested this code with sandbox, and I have
+>followed those steps:
+>
+>0) build u-boot using sandbox_defconfig and adding those options:
+>CONFIG_ECDSA_SW=y
+>CONFIG_ECDSA_MBEDTLS=y
+>CONFIG_ECDSA=y
+>CONFIG_ECDSA_VERIFY=y
 
-> The Kconfig menu "TrueType Fonts" should only be shown if TrueType is
-> enabled.
-> 
-> Put all TrueType dependent customization within one if statement.
-> Remove `depends TRUETYPE` clauses.
-> 
-> 
-> [...]
+I did "git am" on top of the master branch as of the current 
+eb1562cc3e4c5130c76db1c1ea57156322362a7c and tried to build it as 
+follows:
 
-Applied to u-boot/master, thanks!
+make rpi_4_defconfig
+scripts/config -e FIT_SIGNATURE -e ECDSA -e SHA256 -e ECDSA_VERIFY \
+-d BOOTSTD \
+-e MBEDTLS_LIB -e MBEDTLS_LIB_CRYPTO -e ECDSA_MBEDTLS -e ECDSA_SW \
+-e SHA256_MBEDTLS -e SHA256_SMALLER -e MBEDTLS_LIB_X509 -d HKDF_MBEDTLS \
+-e ASN1_DECODER -e ASN1_DECODER_MBEDTLS \
+-d LEGACY_HASHING_AND_CRYPTO &&
+make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu-
 
-[1/1] video: menu "TrueType Fonts" depends on TrueType enabled
-      commit: b5213bbfdcb1812be510427857827ee8becb9f8f
--- 
-Tom
+No matter which variations of this I try (starting with -e 
+HDKF_MBEDTLS), the build would fail with an #error in
+lib/mbedtls/external/mbedtls/include/mbedtls/check_config.h because 
+MBEDTLS_ECDSA_C is defined but neither MBEDTLS_ASN1_PARSE_C nor 
+MBEDTLS_ASN1_WRITE_C are defined.
 
+By disabling that check I found out that the functions 
+ecdsa_signature_to_asn1() and mbedtls_ecdsa_read_signature_restartable() 
+really depend on these.
 
+I diagnosed this by executing
+make V=1 CROSS_COMPILE=aarch64-linux-gnu-
+
+Then, I edited the compiler command line by replacing "-o *.o -c" with 
+"-E -dD", and redirected the standard output into a file. In that file I 
+found that lib/mbedtls/mbedtls_def_config.h is defining MBEDTLS_ECDSA_C 
+and would also define the ASN1 symbols if CONFIG_ASN1_DECODER were 
+enabled:
+
+#if CONFIG_IS_ENABLED(ASN1_DECODER)
+#define MBEDTLS_OID_C
+#define MBEDTLS_ASN1_PARSE_C
+#define MBEDTLS_ASN1_WRITE_C
+#endif
+
+Something is wiping that out from my .config, also when I execute "make 
+syncconfig" after the scripts/config. When I search for ASN1_DECODER in 
+"make menuconfig", it mentions a large number of other configuration 
+options.
+
+Can someone help me to enable CONFIG_ASN1_DECODER in this configuration?
+
+With best regards,
+
+	Marko
