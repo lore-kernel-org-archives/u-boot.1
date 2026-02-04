@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B1A5E95363
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 09:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63020E95360
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 09:35:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D23A283B03;
-	Wed,  4 Feb 2026 10:34:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 273EB83B30;
+	Wed,  4 Feb 2026 10:34:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08C1383A47; Wed,  4 Feb 2026 08:47:23 +0100 (CET)
+ id 5E2F483A24; Wed,  4 Feb 2026 08:47:24 +0100 (CET)
 Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D5F4839DF
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 08:47:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83D7283A36
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 08:47:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=qijian.guo@nxp.com
 Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 7A3971A0492;
- Wed,  4 Feb 2026 08:47:19 +0100 (CET)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 47E701A049A;
+ Wed,  4 Feb 2026 08:47:21 +0100 (CET)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 12BC01A0425;
- Wed,  4 Feb 2026 08:47:19 +0100 (CET)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id DA1CF1A049E;
+ Wed,  4 Feb 2026 08:47:20 +0100 (CET)
 Received: from lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com
  (lsvm11u0000395.swis.ap-northeast-2.aws.nxp.com [10.52.9.99])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id 668701800097;
- Wed,  4 Feb 2026 15:47:16 +0800 (+08)
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id A08EC180009C;
+ Wed,  4 Feb 2026 15:47:18 +0800 (+08)
 From: Joseph Guo <qijian.guo@nxp.com>
-Date: Wed, 04 Feb 2026 16:47:12 +0900
-Subject: [PATCH 1/2] arm64: dts: freescale: add basic dts for FRDM-IMX95 in
- u-boot
+Date: Wed, 04 Feb 2026 16:47:13 +0900
+Subject: [PATCH 2/2] imx: Add FRDM-IMX95 initial support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260204-imx95_frdm-v1-1-85dc80e98a6d@nxp.com>
+Message-Id: <20260204-imx95_frdm-v1-2-85dc80e98a6d@nxp.com>
 References: <20260204-imx95_frdm-v1-0-85dc80e98a6d@nxp.com>
 In-Reply-To: <20260204-imx95_frdm-v1-0-85dc80e98a6d@nxp.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -55,11 +54,11 @@ Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
  Simon Glass <sjg@chromium.org>, Justin Jiang <justin.jiang@nxp.com>, 
  qijian.guo@oss.nxp.com, xinyu.chen@nxp.com, Joseph Guo <qijian.guo@nxp.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1770191234; l=25324;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1770191234; l=19641;
  i=qijian.guo@nxp.com; s=20250519; h=from:subject:message-id;
- bh=KbXl/eRATtHS4oKx9tgP0wdMxnVXpndJjvBydk5F76A=;
- b=8yPjEsj+RUquFqbY10HrQvISwhL/eVXHOeiS5kdBHYyRRu/3X2JvJxhLz+tY9srMCbap84ZvV
- 0jT1+DG098lBR+KAmfnS6DVeGV9dR0lOWATO7xUyg3KAFlB/oQK1q+A
+ bh=JVIzfaYWaIhxOY4Bjb0iR+ciIyim9sLchcvvJ6AuIAk=;
+ b=l3FOB3nJGf9eRZwFvNybl4cpjuAB7tsbjAf9hIqnpHxGgPDBw3azdrFu64enqbcP5uNyrXO5A
+ XjNBS0kSZyrCLJJhi/F10v+h1b31nKeJgzB/ESCbtwgrb3bUfFXV4oA
 X-Developer-Key: i=qijian.guo@nxp.com; a=ed25519;
  pk=VRjOOFhVecTRwBzK4mt/k3JBnHoYfuXKCm9FM+hHQhs=
 X-Mailman-Approved-At: Wed, 04 Feb 2026 10:34:42 +0100
@@ -79,985 +78,739 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the upstream device tree files for the FRDM-IMX95 board:
-https://lore.kernel.org/all/20260116-127-v3-2-3dc49545a745@nxp.com/
+Add boot support and peripherals like eMMC/SD, UART, I2C, GPIO, ENETC0/1
+and PCIE0/1 for iMX95 15x15 FRDM.
+Updated doc for build instructions.
 
 Signed-off-by: Lei Xu <lei.xu@nxp.com>
 Signed-off-by: Joseph Guo <qijian.guo@nxp.com>
 ---
- .../src/arm64/freescale/imx95-15x15-frdm.dts       | 964 +++++++++++++++++++++
- 1 file changed, 964 insertions(+)
+ arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi |  85 ++++++++++++++++++
+ arch/arm/mach-imx/imx9/Kconfig            |   8 ++
+ board/nxp/imx95_frdm/Kconfig              |  12 +++
+ board/nxp/imx95_frdm/MAINTAINERS          |   6 ++
+ board/nxp/imx95_frdm/Makefile             |  11 +++
+ board/nxp/imx95_frdm/imx95_frdm.c         |  31 +++++++
+ board/nxp/imx95_frdm/imx95_frdm.env       |  91 +++++++++++++++++++
+ board/nxp/imx95_frdm/spl.c                |  79 +++++++++++++++++
+ configs/imx95_15x15_frdm_defconfig        | 143 ++++++++++++++++++++++++++++++
+ doc/board/nxp/imx95_frdm.rst              | 131 +++++++++++++++++++++++++++
+ doc/board/nxp/index.rst                   |   1 +
+ include/configs/imx95_frdm.h              |  25 ++++++
+ 12 files changed, 623 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/freescale/imx95-15x15-frdm.dts b/dts/upstream/src/arm64/freescale/imx95-15x15-frdm.dts
+diff --git a/arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi b/arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi
 new file mode 100644
-index 0000000000000000000000000000000000000000..ca1c4966c8670d4c76c0dd696452481375512e26
+index 0000000000000000000000000000000000000000..651352e0883a6a5213b4173e321448edef97fca9
 --- /dev/null
-+++ b/dts/upstream/src/arm64/freescale/imx95-15x15-frdm.dts
-@@ -0,0 +1,964 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++++ b/arch/arm/dts/imx95-15x15-frdm-u-boot.dtsi
+@@ -0,0 +1,85 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2026 NXP
++ */
++
++#include "imx95-u-boot.dtsi"
++
++/ {
++	aliases {
++		pci0 = &netc_bus0;
++		pci1 = &netc_bus1;
++	};
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-imem} {
++	filename = "lpddr4x_imem_v202409.bin";
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-dmem} {
++	filename = "lpddr4x_dmem_v202409.bin";
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-imem-qb} {
++	filename = "lpddr4x_imem_qb_v202409.bin";
++};
++
++&{/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-dmem-qb} {
++	filename = "lpddr4x_dmem_qb_v202409.bin";
++};
++
++&lpuart1 {
++	bootph-pre-ram;
++};
++
++&reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
++
++&usdhc1 {
++	bootph-pre-ram;
++};
++
++&usdhc2 {
++	bootph-pre-ram;
++};
++
++&wdog3 {
++	status = "disabled";
++};
++
++&pinctrl_uart1 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc1_200mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_200mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_gpio {
++	bootph-pre-ram;
++};
++
++&pinctrl_reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index d9f97e4328c956554c777eebdf64e7024128dd42..bf8608fd838a41c9e235aa44e8c08a4cf7f2c45d 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -142,6 +142,13 @@ config TARGET_IMX95_15X15_EVK
+ 	imply BOOTSTD_FULL
+ 	imply OF_UPSTREAM
+ 
++config TARGET_IMX95_15X15_FRDM
++	bool "imx95_frdm"
++	select IMX95
++	imply BOOTSTD_FULL
++	imply BOOTSTD_BOOTCOMMAND
++	imply OF_UPSTREAM
++
+ config TARGET_IMX943_EVK
+ 	bool "imx943_evk"
+ 	select IMX94
+@@ -165,6 +172,7 @@ source "board/phytec/phycore_imx93/Kconfig"
+ source "board/variscite/imx93_var_som/Kconfig"
+ source "board/nxp/imx94_evk/Kconfig"
+ source "board/nxp/imx95_evk/Kconfig"
++source "board/nxp/imx95_frdm/Kconfig"
+ source "board/toradex/smarc-imx95/Kconfig"
+ 
+ endif
+diff --git a/board/nxp/imx95_frdm/Kconfig b/board/nxp/imx95_frdm/Kconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..0da9a56adadec661792c38b1258e4eb914af5aa5
+--- /dev/null
++++ b/board/nxp/imx95_frdm/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_IMX95_15X15_FRDM
++
++config SYS_BOARD
++	default "imx95_frdm"
++
++config SYS_VENDOR
++	default "nxp"
++
++config SYS_CONFIG_NAME
++	default "imx95_frdm"
++
++endif
+diff --git a/board/nxp/imx95_frdm/MAINTAINERS b/board/nxp/imx95_frdm/MAINTAINERS
+new file mode 100644
+index 0000000000000000000000000000000000000000..33870f054e7452ed3af36f19236163d451c93665
+--- /dev/null
++++ b/board/nxp/imx95_frdm/MAINTAINERS
+@@ -0,0 +1,6 @@
++i.MX95 FRDM BOARD
++M:	Joseph Guo <qijian.guo@nxp.com>
++S:	Maintained
++F:	board/nxp/imx95_frdm/
++F:	include/configs/imx95_frdm.h
++F:	configs/imx95_15x15_frdm_defconfig
+diff --git a/board/nxp/imx95_frdm/Makefile b/board/nxp/imx95_frdm/Makefile
+new file mode 100644
+index 0000000000000000000000000000000000000000..6965c61a281d44950d2619d3bfebceab39351c4d
+--- /dev/null
++++ b/board/nxp/imx95_frdm/Makefile
+@@ -0,0 +1,11 @@
++#
++# Copyright 2026 NXP
++#
++# SPDX-License-Identifier:      GPL-2.0+
++#
++
++obj-y += imx95_frdm.o
++
++ifdef CONFIG_SPL_BUILD
++obj-y += spl.o
++endif
+diff --git a/board/nxp/imx95_frdm/imx95_frdm.c b/board/nxp/imx95_frdm/imx95_frdm.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..fe0111be5081dc1c0e60c9a195fbbf0d3f39321b
+--- /dev/null
++++ b/board/nxp/imx95_frdm/imx95_frdm.c
+@@ -0,0 +1,31 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2025 NXP
 + */
 +
-+/dts-v1/;
-+
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/phy/phy-imx8-pcie.h>
-+#include <dt-bindings/pwm/pwm.h>
-+#include <dt-bindings/usb/pd.h>
-+#include "imx95.dtsi"
-+
-+#define BRD_SM_CTRL_SD3_WAKE		0x8000	/*!< PCAL6408A-0 */
-+#define BRD_SM_CTRL_PCIE1_WAKE		0x8001	/*!< PCAL6408A-4 */
-+#define BRD_SM_CTRL_BT_WAKE		0x8002	/*!< PCAL6408A-5 */
-+#define BRD_SM_CTRL_PCIE2_WAKE		0x8003	/*!< PCAL6408A-6 */
-+#define BRD_SM_CTRL_BUTTON		0x8004	/*!< PCAL6408A-7 */
-+
-+/ {
-+	compatible = "fsl,imx95-15x15-frdm", "fsl,imx95";
-+	model = "NXP i.MX95 15X15 FRDM board";
-+
-+	aliases {
-+		ethernet0 = &enetc_port0;
-+		ethernet1 = &enetc_port1;
-+		gpio0 = &gpio1;
-+		gpio1 = &gpio2;
-+		gpio2 = &gpio3;
-+		gpio3 = &gpio4;
-+		gpio4 = &gpio5;
-+		i2c0 = &lpi2c1;
-+		i2c1 = &lpi2c2;
-+		i2c2 = &lpi2c3;
-+		i2c3 = &lpi2c4;
-+		i2c4 = &lpi2c5;
-+		i2c5 = &lpi2c6;
-+		i2c6 = &lpi2c7;
-+		i2c7 = &lpi2c8;
-+		mmc0 = &usdhc1;
-+		mmc1 = &usdhc2;
-+		mmc2 = &usdhc3;
-+		serial0 = &lpuart1;
-+		serial4 = &lpuart5;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		stdout-path = &lpuart1;
-+	};
-+
-+	dmic: dmic {
-+		compatible = "dmic-codec";
-+		#sound-dai-cells = <0>;
-+		num-channels = <2>;
-+	};
-+
-+	flexcan2_phy: can-phy {
-+		compatible = "nxp,tja1051";
-+		#phy-cells = <0>;
-+		max-bitrate = <5000000>;
-+		/*
-+		 * Shared SILENT GPIO: CAN PHYs enter silent mode
-+		 * together (hardware design).
-+		 */
-+		silent-gpios = <&pcal6524 7 GPIO_ACTIVE_HIGH>;
-+	};
-+
-+	flexcan5_phy: can-phy {
-+		compatible = "nxp,tja1051";
-+		#phy-cells = <0>;
-+		max-bitrate = <5000000>;
-+		silent-gpios = <&pcal6524 7 GPIO_ACTIVE_HIGH>;
-+	};
-+
-+	reg_1p8v: regulator-1p8v {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <1800000>;
-+		regulator-min-microvolt = <1800000>;
-+		regulator-name = "+V1.8_SW";
-+	};
-+
-+	reg_3p3v: regulator-3p3v {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "+V3.3_SW";
-+	};
-+
-+	reg_5p0v: regulator-5p0v {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "+V5.0_SW";
-+	};
-+
-+	reg_ext_3v3: regulator-ext-3v3 {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "VCCEXT_3V3";
-+	};
-+
-+	reg_ext_5v: regulator-ext-5v {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "VCCEXT_5V";
-+		gpio = <&pcal6524 12 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	reg_m2_ekey_pwr: regulator-m2-pwr {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "M.2-power-ekey";
-+		gpio = <&pcal6524 16 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	reg_m2_mkey_pwr: regulator-m2-mkey-pwr {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "M.2-mkey-power";
-+		gpio = <&pcal6524 14 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	reg_usdhc2_vmmc: regulator-usdhc2 {
-+		compatible = "regulator-fixed";
-+		off-on-delay-us = <12000>;
-+		pinctrl-0 = <&pinctrl_reg_usdhc2_vmmc>;
-+		pinctrl-names = "default";
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "VDD_SD2_3V3";
-+		gpio = <&gpio3 7 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	reg_usdhc3_vmmc: regulator-usdhc3 {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <3300000>;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-name = "WLAN_EN";
-+		vin-supply = <&reg_m2_ekey_pwr>;
-+		gpio = <&pcal6524 9 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		/*
-+		 * IW612 wifi chip needs more delay than other wifi chips to complete
-+		 * the host interface initialization after power up, otherwise the
-+		 * internal state of IW612 may be unstable, resulting in the failure of
-+		 * the SDIO3.0 switch voltage.
-+		 */
-+		startup-delay-us = <20000>;
-+	};
-+
-+	reg_usb_vbus: regulator-vbus {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <5000000>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-name = "USB_VBUS";
-+		gpio = <&pcal6524 15 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	reg_vref_1v8: regulator-adc-vref {
-+		compatible = "regulator-fixed";
-+		regulator-max-microvolt = <1800000>;
-+		regulator-min-microvolt = <1800000>;
-+		regulator-name = "vref_1v8";
-+	};
-+
-+	reserved-memory {
-+		ranges;
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+
-+		linux_cma: linux,cma {
-+			compatible = "shared-dma-pool";
-+			alloc-ranges = <0 0x80000000 0 0x7F000000>;
-+			reusable;
-+			size = <0 0x3c000000>;
-+			linux,cma-default;
-+		};
-+
-+		vdev0vring0: memory@88000000 {
-+			reg = <0 0x88000000 0 0x8000>;
-+			no-map;
-+		};
-+
-+		vdev0vring1: memory@88008000 {
-+			reg = <0 0x88008000 0 0x8000>;
-+			no-map;
-+		};
-+
-+		vdev1vring0: memory@88010000 {
-+			reg = <0 0x88010000 0 0x8000>;
-+			no-map;
-+		};
-+
-+		vdev1vring1: memory@88018000 {
-+			reg = <0 0x88018000 0 0x8000>;
-+			no-map;
-+		};
-+
-+		vdevbuffer: memory@88020000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0 0x88020000 0 0x100000>;
-+			no-map;
-+		};
-+
-+		rsc_table: memory@88220000 {
-+			reg = <0 0x88220000 0 0x1000>;
-+			no-map;
-+		};
-+
-+		vpu_boot: memory@a0000000 {
-+			reg = <0 0xa0000000 0 0x100000>;
-+			no-map;
-+		};
-+	};
-+
-+	sound-micfil {
-+		compatible = "fsl,imx-audio-card";
-+		model = "micfil-audio";
-+
-+		pri-dai-link {
-+			link-name = "micfil hifi";
-+			format = "i2s";
-+
-+			cpu {
-+				sound-dai = <&micfil>;
-+			};
-+
-+			codec {
-+				sound-dai = <&dmic>;
-+			};
-+		};
-+	};
-+
-+	usdhc3_pwrseq: usdhc3-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		reset-gpios = <&pcal6524 8 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	memory@80000000 {
-+		reg = <0x0 0x80000000 0 0x80000000>;
-+		device_type = "memory";
-+	};
-+};
-+
-+&adc1 {
-+	vref-supply = <&reg_vref_1v8>;
-+	status = "okay";
-+};
-+
-+&enetc_port0 {
-+	phy-handle = <&ethphy0>;
-+	phy-mode = "rgmii-id";
-+	pinctrl-0 = <&pinctrl_enetc0>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&enetc_port1 {
-+	phy-handle = <&ethphy1>;
-+	phy-mode = "rgmii-id";
-+	pinctrl-0 = <&pinctrl_enetc1>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&flexcan2 {
-+	pinctrl-0 = <&pinctrl_flexcan2>;
-+	pinctrl-names = "default";
-+	phys = <&flexcan2_phy>;
-+	status = "okay";
-+};
-+
-+&flexcan5 {
-+	pinctrl-0 = <&pinctrl_flexcan5>;
-+	pinctrl-names = "default";
-+	phys = <&flexcan5_phy>;
-+	status = "okay";
-+};
-+
-+&lpi2c2 {
-+	clock-frequency = <400000>;
-+	pinctrl-0 = <&pinctrl_lpi2c2>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	pcal6524: gpio@22 {
-+		compatible = "nxp,pcal6524";
-+		reg = <0x22>;
-+		#interrupt-cells = <2>;
-+		interrupt-controller;
-+		interrupt-parent = <&gpio5>;
-+		interrupts = <14 IRQ_TYPE_LEVEL_LOW>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+		pinctrl-0 = <&pinctrl_pcal6524>;
-+		pinctrl-names = "default";
-+		gpio-line-names = "ENET1 PHY reset",
-+				  "ENET2 PHY reset",
-+				  "SPI3/GPIO select",
-+				  "UART3/GPIO select",
-+				  "CAN2&5/GPIO select",
-+				  "PWM/GPIO select",
-+				  "Watch dog enable",
-+				  "CAN1&2&5 silent",
-+				  "SDIO_nRST",
-+				  "WL_nDISABLE1",
-+				  "WL_nDISABLE2",
-+				  "M.2 Mkey NC06",
-+				  "EXT_5V0_PWR_EN",
-+				  "EXT_3V3_PWR_EN",
-+				  "Mkey power control",
-+				  "USB2 power control",
-+				  "Ekey power control",
-+				  "MIPI-DSICSI reset",
-+				  "MIPI-DSI IO2",
-+				  "MIPI-CSI reset",
-+				  "LVDS TP reset",
-+				  "LVDS BL enable",
-+				  "LVDS BL power enable",
-+				  "IT6263 reset";
-+
-+		lpspi-gpio-sel-hog {
-+			gpio-hog;
-+			gpios = <2 GPIO_ACTIVE_HIGH>;
-+			output-low;
-+		};
-+
-+		lpuart-gpio-sel-hog {
-+			gpio-hog;
-+			gpios = <3 GPIO_ACTIVE_HIGH>;
-+			output-low;
-+		};
-+
-+		can-gpio-sel-hog {
-+			gpio-hog;
-+			gpios = <4 GPIO_ACTIVE_HIGH>;
-+			output-low;
-+		};
-+
-+		pwm-gpio-sel-hog {
-+			gpio-hog;
-+			gpios = <5 GPIO_ACTIVE_HIGH>;
-+			output-high;
-+		};
-+	};
-+};
-+
-+&lpi2c3 {
-+	clock-frequency = <400000>;
-+	pinctrl-0 = <&pinctrl_lpi2c3>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	ptn5110: tcpc@50 {
-+		compatible = "nxp,ptn5110", "tcpci";
-+		reg = <0x50>;
-+		interrupt-parent = <&gpio5>;
-+		interrupts = <3 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-0 = <&pinctrl_ptn5110>;
-+		pinctrl-names = "default";
-+
-+		typec_con: connector {
-+			compatible = "usb-c-connector";
-+			data-role = "dual";
-+			label = "USB-C";
-+			op-sink-microwatt = <15000000>;
-+			power-role = "dual";
-+			self-powered;
-+			sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)
-+				     PDO_VAR(5000, 20000, 3000)>;
-+			source-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
-+			try-power-role = "sink";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					typec_con_hs: endpoint {
-+						remote-endpoint = <&usb3_data_hs>;
-+					};
-+				};
-+
-+				port@1 {
-+					reg = <1>;
-+
-+					typec_con_ss: endpoint {
-+						remote-endpoint = <&usb3_data_ss>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&lpi2c4 {
-+	clock-frequency = <400000>;
-+	pinctrl-0 = <&pinctrl_lpi2c4>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	pca9632: led-controller@62 {
-+		compatible = "nxp,pca9632";
-+		reg = <0x62>;
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		nxp,inverted-out;
-+
-+		led_backlight0: led@0 {
-+			reg = <0>;
-+			color = <LED_COLOR_ID_WHITE>;
-+			function = LED_FUNCTION_BACKLIGHT;
-+			function-enumerator = <0>;
-+		};
-+
-+		led_backlight1: led@1 {
-+			reg = <1>;
-+			color = <LED_COLOR_ID_WHITE>;
-+			function = LED_FUNCTION_BACKLIGHT;
-+			function-enumerator = <1>;
-+		};
-+	};
-+};
-+
-+&lpuart1 {
-+	pinctrl-0 = <&pinctrl_uart1>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&lpuart5 {
-+	pinctrl-0 = <&pinctrl_uart5>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	bluetooth {
-+		compatible = "nxp,88w8987-bt";
-+	};
-+};
-+
-+&micfil {
-+	assigned-clocks = <&scmi_clk IMX95_CLK_AUDIOPLL1_VCO>,
-+			  <&scmi_clk IMX95_CLK_AUDIOPLL2_VCO>,
-+			  <&scmi_clk IMX95_CLK_AUDIOPLL1>,
-+			  <&scmi_clk IMX95_CLK_AUDIOPLL2>,
-+			  <&scmi_clk IMX95_CLK_PDM>;
-+	assigned-clock-parents = <0>, <0>, <0>, <0>,
-+				 <&scmi_clk IMX95_CLK_AUDIOPLL1>;
-+	assigned-clock-rates = <3932160000>,
-+			       <3612672000>, <393216000>,
-+			       <361267200>, <49152000>;
-+	#sound-dai-cells = <0>;
-+	pinctrl-0 = <&pinctrl_pdm>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&mu7 {
-+	status = "okay";
-+};
-+
-+&netc_blk_ctrl {
-+	status = "okay";
-+};
-+
-+/* Configure MSI and IOMMU mappings specific to the i.MX95 15x15 FRDM board. */
-+&netc_bus0 {
-+	msi-map = <0x0 &its 0x60 0x1>,	//ENETC0 PF
-+		  <0x10 &its 0x61 0x1>, //ENETC0 VF0
-+		  <0x20 &its 0x62 0x1>, //ENETC0 VF1
-+		  <0x40 &its 0x63 0x1>, //ENETC1 PF
-+		  <0x50 &its 0x65 0x1>, //ENETC1 VF0
-+		  <0x60 &its 0x66 0x1>, //ENETC1 VF1
-+		  <0x80 &its 0x64 0x1>, //ENETC2 PF
-+		  <0xc0 &its 0x67 0x1>; //NETC Timer
-+	iommu-map = <0x0 &smmu 0x20 0x1>,
-+		    <0x10 &smmu 0x21 0x1>,
-+		    <0x20 &smmu 0x22 0x1>,
-+		    <0x40 &smmu 0x23 0x1>,
-+		    <0x50 &smmu 0x25 0x1>,
-+		    <0x60 &smmu 0x26 0x1>,
-+		    <0x80 &smmu 0x24 0x1>,
-+		    <0xc0 &smmu 0x27 0x1>;
-+};
-+
-+&netc_emdio {
-+	pinctrl-0 = <&pinctrl_emdio>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+
-+	ethphy0: ethernet-phy@1 {
-+		reg = <1>;
-+		reset-assert-us = <10000>;
-+		reset-deassert-us = <80000>;
-+		reset-gpios = <&pcal6524 0 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	ethphy1: ethernet-phy@2 {
-+		reg = <2>;
-+		reset-assert-us = <10000>;
-+		reset-deassert-us = <80000>;
-+		reset-gpios = <&pcal6524 1 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&netc_timer {
-+	status = "okay";
-+};
-+
-+&netcmix_blk_ctrl {
-+	status = "okay";
-+};
-+
-+&pcie0 {
-+	pinctrl-0 = <&pinctrl_pcie0>;
-+	pinctrl-names = "default";
-+	reset-gpio = <&gpio5 13 GPIO_ACTIVE_LOW>;
-+	supports-clkreq;
-+	vpcie-supply = <&reg_m2_mkey_pwr>;
-+	status = "okay";
-+};
-+
-+&scmi_iomuxc {
-+	pinctrl_emdio: emdiogrp {
-+		fsl,pins = <
-+			IMX95_PAD_ENET2_MDC__NETCMIX_TOP_NETC_MDC		0x50e
-+			IMX95_PAD_ENET2_MDIO__NETCMIX_TOP_NETC_MDIO		0x90e
-+		>;
-+	};
-+
-+	pinctrl_enetc0: enetc0grp {
-+		fsl,pins = <
-+			IMX95_PAD_ENET1_TD3__NETCMIX_TOP_ETH0_RGMII_TD3		0x50e
-+			IMX95_PAD_ENET1_TD2__NETCMIX_TOP_ETH0_RGMII_TD2		0x50e
-+			IMX95_PAD_ENET1_TD1__NETCMIX_TOP_ETH0_RGMII_TD1		0x50e
-+			IMX95_PAD_ENET1_TD0__NETCMIX_TOP_ETH0_RGMII_TD0		0x50e
-+			IMX95_PAD_ENET1_TX_CTL__NETCMIX_TOP_ETH0_RGMII_TX_CTL	0x57e
-+			IMX95_PAD_ENET1_TXC__NETCMIX_TOP_ETH0_RGMII_TX_CLK	0x58e
-+			IMX95_PAD_ENET1_RX_CTL__NETCMIX_TOP_ETH0_RGMII_RX_CTL	0x57e
-+			IMX95_PAD_ENET1_RXC__NETCMIX_TOP_ETH0_RGMII_RX_CLK	0x58e
-+			IMX95_PAD_ENET1_RD0__NETCMIX_TOP_ETH0_RGMII_RD0		0x57e
-+			IMX95_PAD_ENET1_RD1__NETCMIX_TOP_ETH0_RGMII_RD1		0x57e
-+			IMX95_PAD_ENET1_RD2__NETCMIX_TOP_ETH0_RGMII_RD2		0x57e
-+			IMX95_PAD_ENET1_RD3__NETCMIX_TOP_ETH0_RGMII_RD3		0x57e
-+		>;
-+	};
-+
-+	pinctrl_enetc1: enetc1grp {
-+		fsl,pins = <
-+			IMX95_PAD_ENET2_TD3__NETCMIX_TOP_ETH1_RGMII_TD3		0x50e
-+			IMX95_PAD_ENET2_TD2__NETCMIX_TOP_ETH1_RGMII_TD2		0x50e
-+			IMX95_PAD_ENET2_TD1__NETCMIX_TOP_ETH1_RGMII_TD1		0x50e
-+			IMX95_PAD_ENET2_TD0__NETCMIX_TOP_ETH1_RGMII_TD0		0x50e
-+			IMX95_PAD_ENET2_TX_CTL__NETCMIX_TOP_ETH1_RGMII_TX_CTL	0x57e
-+			IMX95_PAD_ENET2_TXC__NETCMIX_TOP_ETH1_RGMII_TX_CLK	0x58e
-+			IMX95_PAD_ENET2_RX_CTL__NETCMIX_TOP_ETH1_RGMII_RX_CTL	0x57e
-+			IMX95_PAD_ENET2_RXC__NETCMIX_TOP_ETH1_RGMII_RX_CLK	0x58e
-+			IMX95_PAD_ENET2_RD0__NETCMIX_TOP_ETH1_RGMII_RD0		0x57e
-+			IMX95_PAD_ENET2_RD1__NETCMIX_TOP_ETH1_RGMII_RD1		0x57e
-+			IMX95_PAD_ENET2_RD2__NETCMIX_TOP_ETH1_RGMII_RD2		0x57e
-+			IMX95_PAD_ENET2_RD3__NETCMIX_TOP_ETH1_RGMII_RD3		0x57e
-+		>;
-+	};
-+
-+	pinctrl_flexcan2: flexcan2grp {
-+		fsl,pins = <
-+			IMX95_PAD_GPIO_IO25__CAN2_TX				0x39e
-+			IMX95_PAD_GPIO_IO27__CAN2_RX				0x39e
-+		>;
-+	};
-+
-+	pinctrl_flexcan5: flexcan5grp {
-+		fsl,pins = <
-+			IMX95_PAD_GPIO_IO22__CAN5_TX				0x39e
-+			IMX95_PAD_GPIO_IO23__CAN5_RX				0x39e
-+		>;
-+	};
-+
-+	pinctrl_lpi2c1: lpi2c1grp {
-+		fsl,pins = <
-+			IMX95_PAD_I2C1_SCL__AONMIX_TOP_LPI2C1_SCL		0x40000b9e
-+			IMX95_PAD_I2C1_SDA__AONMIX_TOP_LPI2C1_SDA		0x40000b9e
-+		>;
-+	};
-+
-+	pinctrl_lpi2c2: lpi2c2grp {
-+		fsl,pins = <
-+			IMX95_PAD_I2C2_SCL__AONMIX_TOP_LPI2C2_SCL		0x40000b9e
-+			IMX95_PAD_I2C2_SDA__AONMIX_TOP_LPI2C2_SDA		0x40000b9e
-+		>;
-+	};
-+
-+	pinctrl_lpi2c3: lpi2c3grp {
-+		fsl,pins = <
-+			IMX95_PAD_GPIO_IO28__LPI2C3_SDA				0x40000b9e
-+			IMX95_PAD_GPIO_IO29__LPI2C3_SCL				0x40000b9e
-+		>;
-+	};
-+
-+	pinctrl_lpi2c4: lpi2c4grp {
-+		fsl,pins = <
-+			IMX95_PAD_GPIO_IO30__LPI2C4_SDA				0x40000b9e
-+			IMX95_PAD_GPIO_IO31__LPI2C4_SCL				0x40000b9e
-+		>;
-+	};
-+
-+	pinctrl_pcal6524: pcal6524grp {
-+		fsl,pins = <
-+			IMX95_PAD_GPIO_IO34__GPIO5_IO_BIT14			0x31e
-+		>;
-+	};
-+
-+	pinctrl_pcie0: pcie0grp {
-+		fsl,pins = <
-+			IMX95_PAD_GPIO_IO32__HSIOMIX_TOP_PCIE1_CLKREQ_B		0x40000b1e
-+			IMX95_PAD_GPIO_IO33__GPIO5_IO_BIT13			0x31e
-+		>;
-+	};
-+
-+	pinctrl_pdm: pdmgrp {
-+		fsl,pins = <
-+			IMX95_PAD_PDM_CLK__AONMIX_TOP_PDM_CLK				0x31e
-+			IMX95_PAD_PDM_BIT_STREAM0__AONMIX_TOP_PDM_BIT_STREAM_BIT0	0x31e
-+		>;
-+	};
-+
-+	pinctrl_ptn5110: ptn5110grp {
-+		fsl,pins = <
-+			IMX95_PAD_XSPI1_DATA3__GPIO5_IO_BIT3			0x31e
-+		>;
-+	};
-+
-+	pinctrl_reg_usdhc2_vmmc: regusdhc2vmmcgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD2_RESET_B__GPIO3_IO_BIT7			0x31e
-+		>;
-+	};
-+
-+	pinctrl_uart1: uart1grp {
-+		fsl,pins = <
-+			IMX95_PAD_UART1_RXD__AONMIX_TOP_LPUART1_RX		0x31e
-+			IMX95_PAD_UART1_TXD__AONMIX_TOP_LPUART1_TX		0x31e
-+		>;
-+	};
-+
-+	pinctrl_uart5: uart5grp {
-+		fsl,pins = <
-+			IMX95_PAD_DAP_TDO_TRACESWO__LPUART5_TX			0x31e
-+			IMX95_PAD_DAP_TDI__LPUART5_RX				0x31e
-+			IMX95_PAD_DAP_TMS_SWDIO__LPUART5_RTS_B			0x31e
-+			IMX95_PAD_DAP_TCLK_SWCLK__LPUART5_CTS_B			0x31e
-+		>;
-+	};
-+
-+	pinctrl_usdhc1: usdhc1grp {
-+		fsl,pins = <
-+			IMX95_PAD_SD1_CLK__USDHC1_CLK				0x158e
-+			IMX95_PAD_SD1_CMD__USDHC1_CMD				0x138e
-+			IMX95_PAD_SD1_DATA0__USDHC1_DATA0			0x138e
-+			IMX95_PAD_SD1_DATA1__USDHC1_DATA1			0x138e
-+			IMX95_PAD_SD1_DATA2__USDHC1_DATA2			0x138e
-+			IMX95_PAD_SD1_DATA3__USDHC1_DATA3			0x138e
-+			IMX95_PAD_SD1_DATA4__USDHC1_DATA4			0x138e
-+			IMX95_PAD_SD1_DATA5__USDHC1_DATA5			0x138e
-+			IMX95_PAD_SD1_DATA6__USDHC1_DATA6			0x138e
-+			IMX95_PAD_SD1_DATA7__USDHC1_DATA7			0x138e
-+			IMX95_PAD_SD1_STROBE__USDHC1_STROBE			0x158e
-+		>;
-+	};
-+
-+	pinctrl_usdhc1_100mhz: usdhc1-100mhzgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD1_CLK__USDHC1_CLK				0x158e
-+			IMX95_PAD_SD1_CMD__USDHC1_CMD				0x138e
-+			IMX95_PAD_SD1_DATA0__USDHC1_DATA0			0x138e
-+			IMX95_PAD_SD1_DATA1__USDHC1_DATA1			0x138e
-+			IMX95_PAD_SD1_DATA2__USDHC1_DATA2			0x138e
-+			IMX95_PAD_SD1_DATA3__USDHC1_DATA3			0x138e
-+			IMX95_PAD_SD1_DATA4__USDHC1_DATA4			0x138e
-+			IMX95_PAD_SD1_DATA5__USDHC1_DATA5			0x138e
-+			IMX95_PAD_SD1_DATA6__USDHC1_DATA6			0x138e
-+			IMX95_PAD_SD1_DATA7__USDHC1_DATA7			0x138e
-+			IMX95_PAD_SD1_STROBE__USDHC1_STROBE			0x158e
-+		>;
-+	};
-+
-+	pinctrl_usdhc1_200mhz: usdhc1-200mhzgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD1_CLK__USDHC1_CLK				0x15fe
-+			IMX95_PAD_SD1_CMD__USDHC1_CMD				0x13fe
-+			IMX95_PAD_SD1_DATA0__USDHC1_DATA0			0x13fe
-+			IMX95_PAD_SD1_DATA1__USDHC1_DATA1			0x13fe
-+			IMX95_PAD_SD1_DATA2__USDHC1_DATA2			0x13fe
-+			IMX95_PAD_SD1_DATA3__USDHC1_DATA3			0x13fe
-+			IMX95_PAD_SD1_DATA4__USDHC1_DATA4			0x13fe
-+			IMX95_PAD_SD1_DATA5__USDHC1_DATA5			0x13fe
-+			IMX95_PAD_SD1_DATA6__USDHC1_DATA6			0x13fe
-+			IMX95_PAD_SD1_DATA7__USDHC1_DATA7			0x13fe
-+			IMX95_PAD_SD1_STROBE__USDHC1_STROBE			0x15fe
-+		>;
-+	};
-+
-+	pinctrl_usdhc2_gpio: usdhc2gpiogrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD2_CD_B__GPIO3_IO_BIT0			0x31e
-+		>;
-+	};
-+
-+	pinctrl_usdhc2: usdhc2grp {
-+		fsl,pins = <
-+			IMX95_PAD_SD2_CLK__USDHC2_CLK				0x158e
-+			IMX95_PAD_SD2_CMD__USDHC2_CMD				0x138e
-+			IMX95_PAD_SD2_DATA0__USDHC2_DATA0			0x138e
-+			IMX95_PAD_SD2_DATA1__USDHC2_DATA1			0x138e
-+			IMX95_PAD_SD2_DATA2__USDHC2_DATA2			0x138e
-+			IMX95_PAD_SD2_DATA3__USDHC2_DATA3			0x138e
-+			IMX95_PAD_SD2_VSELECT__USDHC2_VSELECT			0x51e
-+		>;
-+	};
-+
-+	pinctrl_usdhc2_100mhz: usdhc2-100mhzgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD2_CLK__USDHC2_CLK				0x158e
-+			IMX95_PAD_SD2_CMD__USDHC2_CMD				0x138e
-+			IMX95_PAD_SD2_DATA0__USDHC2_DATA0			0x138e
-+			IMX95_PAD_SD2_DATA1__USDHC2_DATA1			0x138e
-+			IMX95_PAD_SD2_DATA2__USDHC2_DATA2			0x138e
-+			IMX95_PAD_SD2_DATA3__USDHC2_DATA3			0x138e
-+			IMX95_PAD_SD2_VSELECT__USDHC2_VSELECT			0x51e
-+		>;
-+	};
-+
-+	pinctrl_usdhc2_200mhz: usdhc2-200mhzgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD2_CLK__USDHC2_CLK				0x158e
-+			IMX95_PAD_SD2_CMD__USDHC2_CMD				0x138e
-+			IMX95_PAD_SD2_DATA0__USDHC2_DATA0			0x138e
-+			IMX95_PAD_SD2_DATA1__USDHC2_DATA1			0x138e
-+			IMX95_PAD_SD2_DATA2__USDHC2_DATA2			0x138e
-+			IMX95_PAD_SD2_DATA3__USDHC2_DATA3			0x138e
-+			IMX95_PAD_SD2_VSELECT__USDHC2_VSELECT			0x51e
-+		>;
-+	};
-+
-+	pinctrl_usdhc3: usdhc3grp {
-+		fsl,pins = <
-+			IMX95_PAD_SD3_CLK__USDHC3_CLK				0x158e
-+			IMX95_PAD_SD3_CMD__USDHC3_CMD				0x138e
-+			IMX95_PAD_SD3_DATA0__USDHC3_DATA0			0x138e
-+			IMX95_PAD_SD3_DATA1__USDHC3_DATA1			0x138e
-+			IMX95_PAD_SD3_DATA2__USDHC3_DATA2			0x138e
-+			IMX95_PAD_SD3_DATA3__USDHC3_DATA3			0x138e
-+		>;
-+	};
-+
-+	pinctrl_usdhc3_100mhz: usdhc3-100mhzgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD3_CLK__USDHC3_CLK				0x158e
-+			IMX95_PAD_SD3_CMD__USDHC3_CMD				0x138e
-+			IMX95_PAD_SD3_DATA0__USDHC3_DATA0			0x138e
-+			IMX95_PAD_SD3_DATA1__USDHC3_DATA1			0x138e
-+			IMX95_PAD_SD3_DATA2__USDHC3_DATA2			0x138e
-+			IMX95_PAD_SD3_DATA3__USDHC3_DATA3			0x138e
-+		>;
-+	};
-+
-+	pinctrl_usdhc3_200mhz: usdhc3-200mhzgrp {
-+		fsl,pins = <
-+			IMX95_PAD_SD3_CLK__USDHC3_CLK				0x15fe
-+			IMX95_PAD_SD3_CMD__USDHC3_CMD				0x13fe
-+			IMX95_PAD_SD3_DATA0__USDHC3_DATA0			0x13fe
-+			IMX95_PAD_SD3_DATA1__USDHC3_DATA1			0x13fe
-+			IMX95_PAD_SD3_DATA2__USDHC3_DATA2			0x13fe
-+			IMX95_PAD_SD3_DATA3__USDHC3_DATA3			0x13fe
-+		>;
-+	};
-+};
-+
-+&scmi_misc {
-+	nxp,ctrl-ids = <BRD_SM_CTRL_SD3_WAKE		1
-+			BRD_SM_CTRL_PCIE1_WAKE		1
-+			BRD_SM_CTRL_BT_WAKE		1
-+			BRD_SM_CTRL_PCIE2_WAKE		1
-+			BRD_SM_CTRL_BUTTON		1>;
-+};
-+
-+&thermal_zones {
-+	pf09-thermal {
-+		polling-delay = <2000>;
-+		polling-delay-passive = <250>;
-+		thermal-sensors = <&scmi_sensor 2>;
-+
-+		trips {
-+			pf09_alert: trip0 {
-+				hysteresis = <2000>;
-+				temperature = <140000>;
-+				type = "passive";
-+			};
-+
-+			pf09_crit: trip1 {
-+				hysteresis = <2000>;
-+				temperature = <155000>;
-+				type = "critical";
-+			};
-+		};
-+	};
-+
-+	pf53arm-thermal {
-+		polling-delay = <2000>;
-+		polling-delay-passive = <250>;
-+		thermal-sensors = <&scmi_sensor 4>;
-+
-+		cooling-maps {
-+			map0 {
-+				cooling-device = <&A55_0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+					<&A55_1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+					<&A55_2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+					<&A55_3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+					<&A55_4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+					<&A55_5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				trip = <&pf5301_alert>;
-+			};
-+		};
-+
-+		trips {
-+			pf5301_alert: trip0 {
-+				hysteresis = <2000>;
-+				temperature = <140000>;
-+				type = "passive";
-+			};
-+
-+			pf5301_crit: trip1 {
-+				hysteresis = <2000>;
-+				temperature = <155000>;
-+				type = "critical";
-+			};
-+		};
-+	};
-+
-+	pf53soc-thermal {
-+		polling-delay = <2000>;
-+		polling-delay-passive = <250>;
-+		thermal-sensors = <&scmi_sensor 3>;
-+
-+		trips {
-+			pf5302_alert: trip0 {
-+				hysteresis = <2000>;
-+				temperature = <140000>;
-+				type = "passive";
-+			};
-+
-+			pf5302_crit: trip1 {
-+				hysteresis = <2000>;
-+				temperature = <155000>;
-+				type = "critical";
-+			};
-+		};
-+	};
-+};
-+
-+&usb2 {
-+	disable-over-current;
-+	dr_mode = "host";
-+	vbus-supply = <&reg_usb_vbus>;
-+	status = "okay";
-+};
-+
-+&usb3 {
-+	status = "okay";
-+};
-+
-+&usb3_dwc3 {
-+	adp-disable;
-+	dr_mode = "otg";
-+	hnp-disable;
-+	role-switch-default-mode = "peripheral";
-+	srp-disable;
-+	usb-role-switch;
-+	snps,dis-u1-entry-quirk;
-+	snps,dis-u2-entry-quirk;
-+	status = "okay";
-+
-+	port {
-+		usb3_data_hs: endpoint {
-+			remote-endpoint = <&typec_con_hs>;
-+		};
-+	};
-+};
-+
-+&usb3_phy {
-+	orientation-switch;
-+	fsl,phy-pcs-tx-deemph-3p5db-attenuation-db = <17>;
-+	fsl,phy-pcs-tx-swing-full-percent = <100>;
-+	fsl,phy-tx-preemp-amp-tune-microamp = <600>;
-+	fsl,phy-tx-vboost-level-microvolt = <1156>;
-+	fsl,phy-tx-vref-tune-percent = <100>;
-+	status = "okay";
-+
-+	port {
-+		usb3_data_ss: endpoint {
-+			remote-endpoint = <&typec_con_ss>;
-+		};
-+	};
-+};
-+
-+&usdhc1 {
-+	bus-width = <8>;
-+	non-removable;
-+	no-sd;
-+	no-sdio;
-+	pinctrl-0 = <&pinctrl_usdhc1>;
-+	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
-+	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
-+	pinctrl-3 = <&pinctrl_usdhc1>;
-+	pinctrl-names = "default", "state_100mhz", "state_200mhz", "sleep";
-+	fsl,tuning-step = <1>;
-+	status = "okay";
-+};
-+
-+&usdhc2 {
-+	bus-width = <4>;
-+	cd-gpios = <&gpio3 00 GPIO_ACTIVE_LOW>;
-+	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-3 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-names = "default", "state_100mhz", "state_200mhz", "sleep";
-+	vmmc-supply = <&reg_usdhc2_vmmc>;
-+	fsl,tuning-step = <1>;
-+	status = "okay";
-+};
-+
-+&usdhc3 {
-+	bus-width = <4>;
-+	keep-power-in-suspend;
-+	mmc-pwrseq = <&usdhc3_pwrseq>;
-+	non-removable;
-+	pinctrl-0 = <&pinctrl_usdhc3>;
-+	pinctrl-1 = <&pinctrl_usdhc3_100mhz>;
-+	pinctrl-2 = <&pinctrl_usdhc3_200mhz>;
-+	pinctrl-3 = <&pinctrl_usdhc3>;
-+	pinctrl-names = "default", "state_100mhz", "state_200mhz", "sleep";
-+	vmmc-supply = <&reg_usdhc3_vmmc>;
-+	wakeup-source;
-+	status = "okay";
-+};
-+
-+&wdog3 {
-+	status = "okay";
-+};
++#include <asm/arch/clock.h>
++#include <asm/gpio.h>
++#include <asm/mach-imx/sys_proto.h>
++
++int board_early_init_f(void)
++{
++	/* UART1: A55, UART2: M33, UART3: M7 */
++	init_uart_clk(0);
++
++	return 0;
++}
++
++int board_late_init(void)
++{
++	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
++		board_late_mmc_env_init();
++
++	return 0;
++}
++
++int board_phys_sdram_size(phys_size_t *size)
++{
++	*size = PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE;
++
++	return 0;
++}
+diff --git a/board/nxp/imx95_frdm/imx95_frdm.env b/board/nxp/imx95_frdm/imx95_frdm.env
+new file mode 100644
+index 0000000000000000000000000000000000000000..a7309d734b0d3b98b2dd405a975610c24f7f6a32
+--- /dev/null
++++ b/board/nxp/imx95_frdm/imx95_frdm.env
+@@ -0,0 +1,91 @@
++sec_boot=no
++initrd_addr=0x93800000
++emmc_dev=0
++sd_dev=1
++scriptaddr=0x93500000
++kernel_addr_r=CONFIG_SYS_LOAD_ADDR
++image=Image
++splashimage=0xA0000000
++console=ttyLP0,115200 earlycon
++fdt_addr_r=0x93000000
++fdt_addr=0x93000000
++cntr_addr=0xA8000000
++cntr_file=os_cntr_signed.bin
++boot_fit=no
++fdtfile=CONFIG_DEFAULT_FDT_FILE
++bootm_size=0x10000000
++mmcdev=CONFIG_ENV_MMC_DEVICE_INDEX
++mmcautodetect=yes
++mmcargs=setenv bootargs console=${console} root=${mmcroot}
++loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
++bootscript=echo Running bootscript from mmc ...; source
++loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
++loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
++loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}
++auth_os=auth_cntr ${cntr_addr}
++boot_os=booti ${loadaddr} - ${fdt_addr_r};
++mmcboot=echo Booting from mmc ...;
++		run mmcargs;
++		if test ${sec_boot} = yes; then
++			if run auth_os; then
++				run boot_os;
++			else
++				echo ERR: failed to authenticate;
++			fi;
++		else
++			if test ${boot_fit} = yes || test ${boot_fit} = try; then
++				bootm ${loadaddr};
++			else
++				if run loadfdt; then
++					run boot_os;
++				else
++					echo WARN: Cannot load the DT;
++				fi;
++			fi;
++		fi;
++netargs=setenv bootargs console=${console} root=/dev/nfs
++		ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
++netboot=echo Booting from net ...;
++		run netargs;
++		if test ${ip_dyn} = yes; then
++			setenv get_cmd dhcp;
++		else
++			setenv get_cmd tftp;
++		fi;
++		if test ${sec_boot} = yes; then
++			${get_cmd} ${cntr_addr} ${cntr_file};
++			if run auth_os; then
++				run boot_os;
++			else
++				echo ERR: failed to authenticate;
++			fi;
++		else
++			${get_cmd} ${loadaddr} ${image};
++			if test ${boot_fit} = yes || test ${boot_fit} = try; then
++				bootm ${loadaddr};
++			else
++				if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
++					run boot_os;
++				else
++					echo WARN: Cannot load the DT;
++				fi;
++			fi;
++		fi;
++bsp_bootcmd=echo Running BSP bootcmd ...;
++			mmc dev ${mmcdev}; if mmc rescan; then
++			if run loadbootscript; then
++				run bootscript;
++			else
++				if test ${sec_boot} = yes; then
++					if run loadcntr; then
++						run mmcboot;
++					else run netboot;
++					fi;
++				else
++					if run loadimage; then
++						run mmcboot;
++					else run netboot;
++					fi;
++				fi;
++			fi;
++		fi;
+diff --git a/board/nxp/imx95_frdm/spl.c b/board/nxp/imx95_frdm/spl.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..97e5549c337e66de22a5fc5627185dbe7f9286fd
+--- /dev/null
++++ b/board/nxp/imx95_frdm/spl.c
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2026 NXP
++ */
++
++#include <asm/arch/clock.h>
++#include <asm/arch/mu.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/mach-imx/boot_mode.h>
++#include <asm/mach-imx/ele_api.h>
++#include <asm/sections.h>
++#include <hang.h>
++#include <init.h>
++#include <spl.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int spl_board_boot_device(enum boot_device boot_dev_spl)
++{
++	switch (boot_dev_spl) {
++	case SD1_BOOT:
++	case MMC1_BOOT:
++		return BOOT_DEVICE_MMC1;
++	case SD2_BOOT:
++	case MMC2_BOOT:
++		return BOOT_DEVICE_MMC2;
++	case USB_BOOT:
++		return BOOT_DEVICE_BOARD;
++	default:
++		return BOOT_DEVICE_NONE;
++	}
++}
++
++void spl_board_init(void)
++{
++	int ret;
++
++	puts("Normal Boot\n");
++
++	ret = ele_start_rng();
++	if (ret)
++		printf("Fail to start RNG: %d\n", ret);
++}
++
++void board_init_f(ulong dummy)
++{
++	int ret;
++
++	/* Clear the BSS. */
++	memset(__bss_start, 0, __bss_end - __bss_start);
++
++#ifdef CONFIG_SPL_RECOVER_DATA_SECTION
++	if (IS_ENABLED(CONFIG_SPL_BUILD))
++		spl_save_restore_data();
++#endif
++
++	timer_init();
++
++	/* Need dm_init() to run before any SCMI calls can be made. */
++	spl_early_init();
++
++	/* Need enable SCMI drivers and ELE driver before enabling console */
++	ret = imx9_probe_mu();
++	if (ret)
++		hang(); /* if MU not probed, nothing can output, just hang here */
++
++	arch_cpu_init();
++
++	board_early_init_f();
++
++	preloader_console_init();
++
++	debug("SOC: 0x%x\n", gd->arch.soc_rev);
++	debug("LC: 0x%x\n", gd->arch.lifecycle);
++
++	get_reset_reason(true, false);
++
++	board_init_r(NULL, 0);
++}
+diff --git a/configs/imx95_15x15_frdm_defconfig b/configs/imx95_15x15_frdm_defconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..c3d9819bde454f35216eee189afd86ad3ea7e5b1
+--- /dev/null
++++ b/configs/imx95_15x15_frdm_defconfig
+@@ -0,0 +1,143 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX9=y
++CONFIG_TEXT_BASE=0x90200000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x10000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_ENV_SOURCE_FILE="imx95_frdm"
++CONFIG_NR_DRAM_BANKS=3
++CONFIG_SF_DEFAULT_SPEED=40000000
++CONFIG_ENV_SIZE=0x4000
++CONFIG_ENV_OFFSET=0x700000
++CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx9/scmi/imximage.cfg"
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx95-15x15-frdm"
++CONFIG_TARGET_IMX95_15X15_FRDM=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_MONITOR_LEN=524288
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_TEXT_BASE=0x20480000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x204d6000
++CONFIG_SPL_BSS_MAX_SIZE=0x2000
++CONFIG_SYS_LOAD_ADDR=0x90400000
++CONFIG_SPL=y
++CONFIG_SPL_RECOVER_DATA_SECTION=y
++CONFIG_PCI=y
++CONFIG_SYS_MEMTEST_START=0x90000000
++CONFIG_SYS_MEMTEST_END=0xA0000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
++CONFIG_DEFAULT_FDT_FILE="imx95-15x15-frdm.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2074
++CONFIG_BOARD_EARLY_INIT_F=y
++# CONFIG_BOARD_INIT is not set
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_PCI_INIT_R=y
++CONFIG_SPL_MAX_SIZE=0x20000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_LOAD_IMX_CONTAINER=y
++CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx9/scmi/container.cfg"
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x93200000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_SYS_PROMPT="u-boot=> "
++CONFIG_CMD_ERASEENV=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CRC32_VERIFY=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_SNTP=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_GETTIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_HASH=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ENV_MMC_DEVICE_INDEX=1
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_USE_ETHPRIME=y
++CONFIG_ETHPRIME="eth0"
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SYS_RX_ETH_BUFFER=8
++CONFIG_SPL_DM=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_CLK_SCMI=y
++CONFIG_SPL_CLK_SCMI=y
++CONFIG_CLK_IMX95_BLKCTRL=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_SPL_FIRMWARE=y
++# CONFIG_SCMI_AGENT_SMCCC is not set
++CONFIG_IMX_RGPIO2P=y
++CONFIG_DM_PCA953X=y
++CONFIG_ADP5585_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_IMX_MU_MBOX=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_FSL_USDHC=y
++CONFIG_MTD=y
++CONFIG_PHYLIB=y
++CONFIG_PHY_AQUANTIA=y
++CONFIG_PHY_MOTORCOMM=y
++CONFIG_DM_MDIO=y
++CONFIG_MII=y
++CONFIG_FSL_ENETC=y
++CONFIG_PCIE_ECAM_GENERIC=y
++CONFIG_PCIE_DW_IMX=y
++CONFIG_PHY=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX_SCMI=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_SCMI_POWER_DOMAIN=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RTC=y
++CONFIG_DM_SERIAL=y
++CONFIG_FSL_LPUART=y
++CONFIG_ULP_WATCHDOG=y
++CONFIG_LZO=y
++CONFIG_BZIP2=y
+diff --git a/doc/board/nxp/imx95_frdm.rst b/doc/board/nxp/imx95_frdm.rst
+new file mode 100644
+index 0000000000000000000000000000000000000000..85ef9022e76fc0d8f2a5524128309939f22f4715
+--- /dev/null
++++ b/doc/board/nxp/imx95_frdm.rst
+@@ -0,0 +1,131 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++imx95_frdm
++=======================
++
++U-Boot for the NXP i.MX95 15x15 FRDM board
++
++Quick Start
++-----------
++
++- Get ahab-container.img
++- Get DDR PHY Firmware Images
++- Get and Build OEI Images
++- Get and Build System Manager Image
++- Get and Build the ARM Trusted Firmware
++- Build the Bootloader Image
++- Boot
++
++Get ahab-container.img
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-2.0.2-89161a8.bin
++   $ sh firmware-ele-imx-2.0.2-89161a8.bin --auto-accept
++
++i.MX95 A0 silicon version
++
++.. code-block:: bash
++
++   $ cp firmware-ele-imx-2.0.2-89161a8/mx95a0-ahab-container.img $(srctree)
++
++i.MX95 B0 silicon version
++
++.. code-block:: bash
++
++   $ cp firmware-ele-imx-2.0.2-89161a8/mx95b0-ahab-container.img $(srctree)
++
++Get DDR PHY Firmware Images
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++
++.. code-block:: bash
++
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
++   $ sh firmware-imx-8.28-994fa14.bin --auto-accept
++   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr5*v202409.bin $(srctree)
++   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr4x*v202409.bin $(srctree)
++
++Get and Build OEI Images
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get OEI from: https://github.com/nxp-imx/imx-oei
++branch: master
++
++.. code-block:: bash
++
++   $ sudo apt -y install make gcc g++-multilib srecord
++   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ export TOOLS=$PWD
++   $ git clone -b master https://github.com/nxp-imx/imx-oei.git
++   $ cd imx-oei
++
++i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
++
++.. code-block:: bash
++
++   $ make board=mx95lp4x-15 oei=ddr DEBUG=1 r=B0 all
++   $ cp build/mx95lp4x-15/ddr/oei-m33-ddr.bin $(srctree)
++
++Get and Build System Manager Image
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get System Manager from: https://github.com/nxp-imx/imx-sm
++branch: master
++
++.. code-block:: bash
++
++   $ sudo apt -y install make gcc g++-multilib srecord
++   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ export TOOLS=$PWD
++   $ git clone -b master https://github.com/nxp-imx/imx-sm.git
++   $ cd imx-sm
++   $ make config=mx95evk all
++   $ cp build/mx95evk/m33_image.bin $(srctree)
++
++Get and Build the ARM Trusted Firmware
++--------------------------------------
++
++Note: srctree is U-Boot source directory
++Get ATF from: https://github.com/nxp-imx/imx-atf/
++branch: lf_v2.12
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ unset LDFLAGS
++   $ unset AS
++   $ git clone -b lf_v2.12 https://github.com/nxp-imx/imx-atf.git
++   $ cd imx-atf
++   $ make PLAT=imx95 bl31
++   $ cp build/imx95/release/bl31.bin $(srctree)
++
++Build the Bootloader Image
++--------------------------
++
++i.MX95 B0 silicon version on 15x15 LPDDR4X FRDM Board
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ make imx95_15x15_frdm_defconfig
++   $ make
++
++Copy imx-boot-imx95.bin to the MicroSD card:
++
++.. code-block:: bash
++
++   $ sudo dd if=flash.bin of=/dev/sd[x] bs=1k seek=32 conv=fsync
++
++Boot
++----
++
++Set i.MX95 boot device to MicroSD card
+diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
+index 01d3468a47da8ddd25cf45b52920a35e4e131c48..c7d5bf36f1145186d8bfc77939fdd7d77e5d0953 100644
+--- a/doc/board/nxp/index.rst
++++ b/doc/board/nxp/index.rst
+@@ -17,6 +17,7 @@ NXP Semiconductors
+    imx93_9x9_qsb
+    imx93_11x11_evk
+    imx93_frdm
++   imx95_frdm
+    imx943_evk
+    imx95_evk
+    imxrt1020-evk
+diff --git a/include/configs/imx95_frdm.h b/include/configs/imx95_frdm.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..815b6c4fa66982688825ff20de07c7fe525dc99a
+--- /dev/null
++++ b/include/configs/imx95_frdm.h
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2026 NXP
++ */
++
++#ifndef __IMX95_EVK_H
++#define __IMX95_EVK_H
++
++#include <linux/sizes.h>
++#include <linux/stringify.h>
++#include <asm/arch/imx-regs.h>
++
++#define CFG_SYS_INIT_RAM_ADDR	0x90000000
++#define CFG_SYS_INIT_RAM_SIZE	0x200000
++
++#define CFG_SYS_SDRAM_BASE		0x90000000
++#define PHYS_SDRAM				0x90000000
++
++#define PHYS_SDRAM_SIZE			0x70000000 /* 2GB - 256MB DDR */
++
++#define PHYS_SDRAM_2_SIZE		0x180000000 /* 6GB (Totally 8GB) */
++
++#define WDOG_BASE_ADDR			WDG3_BASE_ADDR
++
++#endif
 
 -- 
 2.34.1
