@@ -4,54 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D589EA7942
-	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 18:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FA2EA7942
+	for <u-boot@archiver.kernel.org>; Wed,  4 Feb 2026 18:41:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A847883AEE;
-	Wed,  4 Feb 2026 19:40:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=fw-web.de
+	by phobos.denx.de (Postfix) with ESMTP id 3927983A5A;
+	Wed,  4 Feb 2026 19:41:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mailerdienst.de header.i=@mailerdienst.de header.b="VaTVbWLg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m0vvWa3q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D507838FA; Wed,  4 Feb 2026 19:40:57 +0100 (CET)
-Received: from mxout2.routing.net (mxout2.routing.net [IPv6:2a03:2900:1:a::b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D8FD083A8E; Wed,  4 Feb 2026 19:41:48 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C024C83A47
- for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 19:40:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA21D8063E
+ for <u-boot@lists.denx.de>; Wed,  4 Feb 2026 19:41:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=fw-web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=linux@fw-web.de
-Received: from mxbulk.masterlogin.de (unknown [192.168.10.85])
- by mxout2.routing.net (Postfix) with ESMTP id 67996600EB;
- Wed,  4 Feb 2026 18:40:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailerdienst.de;
- s=routing; t=1770230453;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PJY2SwMd41F9cXTh6li/l+ebEjuIDW5WswNgvEWOXMM=;
- b=VaTVbWLgsJ9qQEfiIDCkyMjVki9VBr/iiKw4Y5dzLMXX28BIxdZYmOROWYUa2Z3V/xrqr7
- y+EssdwHgdU3CywGfp1vjtegw2/Vwh7ErOU9xAQvYkkAf7e5OuklIDrjA0P6+MxBfJQ+vC
- 6uLVllbcOgnXOg+6SLCQ1/wK/ndKtdo=
-Received: from frank-u24.. (fttx-pool-80.245.74.171.bambit.de [80.245.74.171])
- by mxbulk.masterlogin.de (Postfix) with ESMTPSA id 4E1EE122702;
- Wed,  4 Feb 2026 18:40:53 +0000 (UTC)
-From: Frank Wunderlich <linux@fw-web.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de,
- Daniel Golle <daniel@makrotopia.org>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 3/3] doc: cmd: add usage doc for memsize
-Date: Wed,  4 Feb 2026 19:40:44 +0100
-Message-ID: <20260204184045.111808-4-linux@fw-web.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260204184045.111808-1-linux@fw-web.de>
-References: <20260204184045.111808-1-linux@fw-web.de>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-662f9b82a36so49791eaf.2
+ for <u-boot@lists.denx.de>; Wed, 04 Feb 2026 10:41:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1770230505; x=1770835305; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=74zJg8HmkZsL7/sxvdWIoGeclkPaJdfnSG/jk0YVE1g=;
+ b=m0vvWa3qAS6bFwhK+R04wbV7icHB4q0sJkynVS7db/Mcl8c7SqUYP/sL6oBao7gUBf
+ 4GOzp85Dat+OjSsY+Ij3JsodEoIJQi/79uffaqf6gpuWrEezbvjbRlBIaAQVc/oH1NDW
+ O6qZ7/ez9+0BM4mTdj84x3GWNC8X9gOysPWgQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770230505; x=1770835305;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=74zJg8HmkZsL7/sxvdWIoGeclkPaJdfnSG/jk0YVE1g=;
+ b=Wn4wxo1n8AxsEBwJW7uZ0EkEmuMxag8gFHuthgFlTDqVKhVkepDOy7tmoIjrvWPs6e
+ gNx7n22a+H3abqas+cFlLdxKDpWsG/MyreY/SBeiy/iTZHSHRbmuSvlbvm8uEBKfB/08
+ Ql8dh53bN6xhiPxzbk2jXNDrt2jLFwmh5d8+3QeJw5dWKk6+I1JnurVIYkOVI+4Tn610
+ dG2gcU9EQYfi5657U8INM5/qPCDzXVLkZOl7oAOER+fp4TnzLlIfQW70U4t9ul89OOOx
+ sPJZXMPr/k+bwN/z7I98Ay+/bxu8DMZpkIjSVclzZ8GRFku7LLgAcc3wgauF8QWk+EXd
+ ZyCQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkTQuWW/kKMDE+lSULwHJgBiwRtitc6xTI1Bz1+hTLgO+FZY1OnYoLF9hMNZsuSxVL4RbPyTM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYIT08yzksq8YPDhsLTlA00bokuzyYwk1cIJR093Ctgb5bafTq
+ SfpvFwy1hG+rbvRtEGYPbjB4YxpVrpNlaladK/gKW1nht8LF2RmIVmHBhm/Orjwb4K09PoGLR9t
+ /Qqk1DX4=
+X-Gm-Gg: AZuq6aLUqPnRYHl1hl14/WeiXLUJlC2fJuWBHFepYPb8P9SVE1r0+dKo87iZAm3aTi0
+ pVT3+vZhpOk21Nh2/HEy+VJcP2/yf47hfphqDdjjRkOymldLA9mqymr/+fTBSLdlmn5Z9MCdvrH
+ oEaRELI/0GCDH86tuw5RqGKfEl6hcLmEnWTN5KXtS1nV8RVJUxW32oP6MvJpBjNljDB75wHhFPD
+ EsbLwZcRTnl32tEwCpZiQVNwuimwAnqgBmHGdwpxWYhMR/67MjOF1Nc9vGNOrkFx0YP1fgy7ZTV
+ IBw+Pa5eB88Ois0KfWXvEhP/ereO3kzfAKvI4EtRoO1NMktxLD5xFNv+0DqzJMbSHEzooWGDX5H
+ jg1eGTkRvhdnmXmlTdUR8grLYpy/C917w8LQ/9v2MjZhX+QhaYAduDM4KlN6LJgHWMts3zpyznm
+ vTaYXOgRanhwFj/CNdk4WjdeCFdbKfCyV17rbRkEvAtqiMNNSCDuuf1rwimkrBWqvNjcnlxendb
+ ycecLscJL0W0N6UmzB7oC/L2o8kg+KIG5skWQ==
+X-Received: by 2002:a05:6820:1621:b0:663:7a1:8930 with SMTP id
+ 006d021491bc7-66a23a02a8fmr1777617eaf.71.1770230504807; 
+ Wed, 04 Feb 2026 10:41:44 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-66a32bb1049sm1785776eaf.2.2026.02.04.10.41.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Feb 2026 10:41:44 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Rasmus Villemoes <ravi@prevas.dk>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Javier Tia <javier.tia@linaro.org>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Mike Looijmans <mike.looijmans@topic.nl>, 
+ Alexander Stein <alexander.stein@ew.tq-group.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Corneliu Doban <cdoban@broadcom.com>, 
+ Alexey Romanov <avromanov@salutedevices.com>, u-boot@lists.denx.de, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20260119223305.3022690-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20260119223305.3022690-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: Re: [PATCH v3 0/3] part: fix partition searching
+Message-Id: <177023050305.1801114.9341513322484894339.b4-ty@konsulko.com>
+Date: Wed, 04 Feb 2026 12:41:43 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,68 +112,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Frank Wunderlich <frank-w@public-files.de>
+On Tue, 20 Jan 2026 01:33:02 +0300, Mikhail Kshevetskiy wrote:
 
-Add documentation for memsize command.
+> It was noted that a GPT partition with the maximum available partition
+> number (ex: /dev/mmcblk128) can't be read/write from U-Boot using
+> read/write commands. Futher investigation shows that the problem is
+> deeper.
+> 
+> This set of patches fixes uncovered issues.
+> 
+> [...]
 
-Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
----
-v7:
-- update documentation including decimal notation
----
- doc/usage/cmd/memsize.rst | 43 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
- create mode 100644 doc/usage/cmd/memsize.rst
+Applied to u-boot/master, thanks!
 
-diff --git a/doc/usage/cmd/memsize.rst b/doc/usage/cmd/memsize.rst
-new file mode 100644
-index 000000000000..6e99d7c1d33f
---- /dev/null
-+++ b/doc/usage/cmd/memsize.rst
-@@ -0,0 +1,43 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+.. index::
-+   single: memsize (command)
-+
-+memsize command
-+===============
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    memsize [name]
-+
-+Description
-+-----------
-+
-+The memsize command shows the amount of RAM in MiB in decimal notation.
-+Optionally same value can be assigned to an environment variable.
-+
-+Examples
-+--------
-+
-+This first example shows printing of ram size:
-+
-+::
-+
-+  => memsize
-+  8192 MiB
-+
-+This second example shows assign ram size to environment variable:
-+
-+::
-+
-+  => memsize memsz
-+  => printenv memsz
-+  memsz=8192
-+
-+Return value
-+------------
-+
-+The return value is always 0 except error happens on setting environment variable.
+[1/3] disk: part: fix partition search boundaries
+      commit: 0ced9ef07361980d1418eab33ee1f41274d1e0e2
+[2/3] cmd: gpt: fix partition search boundaries
+      commit: 6a1f8c897375d1f673699efdb3664b96f5af8c1c
+[3/3] mtd: mtdpart: fix partitions searching
+      commit: b06a1785b2bbe489a634e3158f82f93491a84328
 -- 
-2.43.0
+Tom
+
 
