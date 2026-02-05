@@ -4,155 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE14E91294
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 08:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 554FAE9129C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 09:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7426183B03;
-	Thu,  5 Feb 2026 09:50:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 778D583015;
+	Thu,  5 Feb 2026 10:27:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="XFl3XKH2";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="Im6+KWWz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 420C283B1E; Thu,  5 Feb 2026 09:50:46 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 71F2683A47; Thu,  5 Feb 2026 10:27:36 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3240B83015
- for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 09:50:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ABB58063E
+ for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 10:27:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ErpEawxf7nHwD2OdxJ53u59k9hrkXq8GSbue5F1f7hEWipyCBkZkCRWkzBKsQsbb5cjlizzzVy687cZ5LEYD+4F+mA+1tEQsKF/WataSecUZ5JeNWI+W0jd9eeK8wjBiFT8vADOYsrR4oLTma4kKbEf6/NAkzXAkHV06pci7wdGe0/KKg9HRO3eowBpwPuL98Q/xPeggS92r0E8lVwnf5I44nGDEDWvhbc3Xgh+LzEqJzsxdsgW6zzIzIHfSQX/hEg2TBFg1OSOmSbYSnK7hukFJOeySPh59H1ReImdaOFo7qK9mKoQmmYFygeAYZuBZ15R3J8skgQzWx4QC1abXRQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DB4OId1vjz1+1AP0saUTyFY2Yjh5VVFvccXz6TxjrE0=;
- b=bC60GZ836tKi8vR1ZDJ7AWroH5B/yXFfJk2i+py8oHh7mbJJyrlyovblM88xeJ+Mu5q7R7or+i+JtXBqN3gyGhN4u12+HRA+hygqbmkdEHcfmMAdLrJmHAYW523dsjKIM/YisUyPLhVnNin1Dn9qRoAyMDlFUC8RXLWhbiLd4o51hMtmyWIAvo31C2s9URQzOEOp+6sSw3LPAmvUn8huNA/iCk/B5Kb82CzbV5EfraaH/nGq7ciKgp1fcbK6osdQ2ssRLdECVEcM15E5630Wt0x2l0aeez9DCcfM5GOFVkcoRAEoKGtYZMGU47ST+VCERc1TCQv+aLjXgsNWjN4A6Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DB4OId1vjz1+1AP0saUTyFY2Yjh5VVFvccXz6TxjrE0=;
- b=XFl3XKH2grPGqEL+dnsmEijfP311P286EGEXjqHTeViPAFLOeZX4D2WQDGwL+r7yzRu7RGAB+/53ppC8YSfxO5SPMIL9hQqambAcYG5NOhENAZ3fSo0WC90gnwfQ9Delwxs/O2yfAWz5op4hkJrL6hHGBQKqmdOT3nipHBokokfuuFKpvocfNq9rTITSDK8vYXfKuYM7ujS0+tt0iNnEmbbF3IGaLt3SAh0mb8bKEYPT3Nio4QdfoDYNp9XklX2o+OWuMY7Uv70kLoCCVeJjWGxBcYOYRORJNocBfLSDBkqiY15amVT2iJlzhHXpBt1V/0CXF2krEX9Jqb4ANoctyg==
-Received: from AM9P193CA0025.EURP193.PROD.OUTLOOK.COM (2603:10a6:20b:21e::30)
- by PAWPR10MB7867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:35d::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9542.14; Thu, 5 Feb
- 2026 08:50:40 +0000
-Received: from AM3PEPF0000A795.eurprd04.prod.outlook.com
- (2603:10a6:20b:21e:cafe::27) by AM9P193CA0025.outlook.office365.com
- (2603:10a6:20b:21e::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.12 via Frontend Transport; Thu,
- 5 Feb 2026 08:50:38 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AM3PEPF0000A795.mail.protection.outlook.com (10.167.16.100) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Thu, 5 Feb 2026 08:50:40 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 5 Feb
- 2026 09:52:19 +0100
-Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 5 Feb
- 2026 09:50:39 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Thu, 5 Feb 2026 09:50:24 +0100
-Subject: [PATCH] stm32mp: stm32prog: Remove fsbl_nor_detected from
- stm32prog_data struct
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-4359228b7c6so485006f8f.2
+ for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 01:27:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1770283652; x=1770888452; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=h/PMqpST1gcxw2ofeMI+oRTjx8g4/I5dVgVqlYtJ5yc=;
+ b=Im6+KWWztHh5kXkDYfDsJJS5txGxMrrhDC7WAR8MHbEhiKUz+URhLgOoDYOnkL3wIy
+ ZeeXbhHtgrrY++5EXeQ7D76mL//FZe3EFlQgol5oprPyqmPAYmK5pV7DX7JPH0PvFjFL
+ upZFQSdJBeAbb2tPp99XwtY7uOdtizwwij+/orgMg3U2Gc96SrhLpThAquvR/jcN8JF/
+ Hf2aQqO9fCtm89FJAuZw7IQMzqn1Y8+sMrGju1IUNwVtLWvHXQdn0GwYfWk9jyScaeZn
+ Ze8pZmTuh3XNOaF1mdqgY66xJ5XkAaBZrI978OX6soKU9D2kosUCnHdZhrweIwtfpVLu
+ jBZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770283652; x=1770888452;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h/PMqpST1gcxw2ofeMI+oRTjx8g4/I5dVgVqlYtJ5yc=;
+ b=ZRiD4xZdcMLuJo2804YiIWAgljzQ2g52Q0b3jcJI93JLGYixrnBvU4oP4i/Fy1hW+I
+ ch5cIlWjMol0kPLmZ+QfhH0GCEyog0bABuTL39DxL3Sl9v+TU/h08uYUJYhxrihrCn6E
+ LmzSSPfgqP/CFnZ17T1x1cfOAURpDU50k1OlwfuUlv3Mv8OuZLBZGgVthDM5NcHgjTe3
+ UilkvR2DUvGLhLCabCoRe3RL+zy2aIBJfOmq47LFtA+D8MwQdXknZzxx5FXuBggZP+nd
+ sG4c+l84aVj/oWvdLKpOp04+k+1d6QnFK2zTmp2HzxOjsLDCP7haP37l31+Ss35+hS8k
+ Pykw==
+X-Gm-Message-State: AOJu0YxP6wTMOSPyOrK2rcaICAeLQBbHEjFIzqOKJBVFCcsMRwZtFuVe
+ RVzgRc1bFhSjH7Zr52NDJrzlqghOKgkkSuwjzXoKJgWsmtiLTVRezOZ8hnFBfWHYGQg=
+X-Gm-Gg: AZuq6aLtzq9Q2doCzhrlacrI7Nb0GkBrAGWlG3Xd3inDshO1inYoyh/FB2PbaG7l0hf
+ NMtL0ca0JH9NrKoZhPaQtVwyNK8AQnvX4BgFGISzKHim1m4291gUuEb1u1Qh5mklEhyt6nutui0
+ zEiXUnxVoBwr3V8R0EVH64AmC9vpluvL3n/V/PXTF1RZT7OQx9PN6f8+GnOo/cTNUtmjNE/2ZX2
+ 00in/qZWhOpnIKxAugkhzbH/ULox1SDvlv6hH1qbogzVduDtfl9e9U+vjm/UhM40hLAN08U//H4
+ yBJe9+AYItIg6ahIhIrhBxzh0/2YnDpPGI/LJBFuN4I0eWtbZ3w1BWQlad2McrDLR6+pOKUQhLe
+ gB0sVM3lGCSyWH/9c6b4Jm0eI4p8jgmPhtntXw7eTW1IMSzog247/T1SEx8hIvkZJtV2iPgoEEM
+ l5FWdylnkXCs3hWYSftBZhmAkusSwHPHqLnwdSl4OQKtxTT9jPtHeh6rEjqvUFhA==
+X-Received: by 2002:a05:600c:6994:b0:47e:e20e:bba3 with SMTP id
+ 5b1f17b1804b1-4830e924104mr86155365e9.7.1770283652285; 
+ Thu, 05 Feb 2026 01:27:32 -0800 (PST)
+Received: from [192.168.2.177] (241.85-85-167.dynamic.clientes.euskaltel.es.
+ [85.85.167.241]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48317d3f007sm69368615e9.9.2026.02.05.01.27.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Feb 2026 01:27:32 -0800 (PST)
+Message-ID: <ee7320a6-31cc-4ff2-bb4a-22d21c124127@suse.com>
+Date: Thu, 5 Feb 2026 10:27:30 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260205-upstream_stm32prog-v1-1-578f2d835d2c@foss.st.com>
-X-B4-Tracking: v=1; b=H4sIAM9ZhGkC/x3Myw5AQAxA0V+Rrk0yKsbjV0TEo+gCkxaRiH83s
- TyLex9QEiaFKnpA6GLlfQtI4giGpdtmMjwGA1p0Fm1mTq+HULe2eqwpetlng65IXY6Zw76EEHq
- hie9/Wjfv+wFCrzQ7ZAAAAA==
-X-Change-ID: 20260205-upstream_stm32prog-2683672562b9
-To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Jerome Forissier <jerome@forissier.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>
-X-Mailer: b4 0.14.3
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A795:EE_|PAWPR10MB7867:EE_
-X-MS-Office365-Filtering-Correlation-Id: aec5fcaf-7e5b-4907-8f74-08de6493a3b0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QlQxZEMrbjlZOHFiVVhJQWZJQ2J4RlVVTk92UElKVzlLQm5JWjNRbDFhSWgx?=
- =?utf-8?B?L21UQ2wwYkNMSzFzdUYrcVQyU2txVitPNHdoTlUzUkNuNE9TZ0tmNUMvdmlC?=
- =?utf-8?B?eDk5b2NjTVJNT3FMN1NUUWJjaDBvak8vamFYSUUvU1FWTnVWSHU0dkdPaHQ5?=
- =?utf-8?B?b1lDeVh5MlJBZkRIQ05rc0poRFZGenhOYnZzWEJkNStncWQ1T0pNZUk3UEs3?=
- =?utf-8?B?Zyt2YytsYjBBK01RT29CZEZHU00zUTRDMFFlNmRacVdmcGJIN2RlR09Zdkhy?=
- =?utf-8?B?SGp4UUQ1UklLZXlpYjQwOGtoOFJ3RE42MVhpV3FNd2hucEN6dmtRS3l4YUJ6?=
- =?utf-8?B?dTUvV3JQWVhia0s4QUdGT21QSXdLWDMreUEwNXozdGlHdzZxRnQxOGVUWlFp?=
- =?utf-8?B?UGRoM05nWEZITmloSVA0bldObHhhc3BZa285NUNYRW5mUTJ4NWJYQVFsTzZE?=
- =?utf-8?B?NlFBNitxVEh3eUF1N0ovY2oyQjhUcllLT0ttcVNqZTc0TEdvSHFxUGJjM1hp?=
- =?utf-8?B?UzFhQ3kwTjJIZkxOYnBkMGlHRmQ4L0dJNGNzZ3ZwZ0o2NytVaDVjRWtoS05j?=
- =?utf-8?B?TFcvN0Q3NkI1TEFSdEtyMjd6MHhCYldyMEswTUxZemc3UmxrLzN2MnRJdm1X?=
- =?utf-8?B?K2V0UndYdXZqZkREVWNHb2pkL1NRL1BtV0ppQ01CeEZnR2p5QlNKMUQyTXJi?=
- =?utf-8?B?d3g4TktadUd2MHg3c2hDWXRMSFZOdDdFdDdQNXpKZUs3NzZHRVZ3dUZrcGJS?=
- =?utf-8?B?OWRGVDJ0S044ZENhS2kxK09XOERCVXh3RTdlUjYyczJ1U3VrZkdTbGtidVda?=
- =?utf-8?B?U3VNQlBqeW5DblNJMHR4UHZqY2FMb0doTGxyWng2THNHZ1NiQVY5bW5uZ3VH?=
- =?utf-8?B?cnk2dElVN3JPT2RnUlgvMnp5L2RaMjJSd3pTc3VEQUFUdVNMdWxaRDR2dzha?=
- =?utf-8?B?aTY0UWFaSDlrZkMvc1dldE5ZZEp0bnpucjU0WG9mdTJ1emg3UjhweXN4OVVK?=
- =?utf-8?B?OVU4Y3pEZ2J1dnVpK2syekhtUCtTTXNybnJnRzE0NTBCTmRUU0FwQlZCbHQ4?=
- =?utf-8?B?TWxqQ2pmNlFtWFE2blVxQ0VmVDAzWWdTUDA3Mk9MY1hSR3puOGg4aTJ6c2FC?=
- =?utf-8?B?ZmU2T1dSR1J3Z053Ukp0U2ZFZUhzS29HTmVjU3BpL3VteW1CNWczTjI4VXhN?=
- =?utf-8?B?SW5QOURtQ3ZKK1c0NUd0UzZIYVFwaGZYYlVLWUJjeVQ4aW0rMURESkZ3Y3g1?=
- =?utf-8?B?SnJZU3Z5ZVR0eHl1WW5PLzR0WnR1N25TTHBvemI3dUZqTlBDaTFkZlZ4clhF?=
- =?utf-8?B?RWJzWEJLd1o5TnE1ZlV3ODV6cVA0anhiK01VdU1mT1pYNWdMeWl2bUZEci91?=
- =?utf-8?B?SkxvUDkvc3Q5NHhNMjBnWnZqcUllUFRJSVdkUDJMT20xMjRzbEd0WHNzR1U1?=
- =?utf-8?B?VnZJT3JhWlU4KzhVTjczNDhBUlRka0lKb241YTR6VHJuUU9YM1hNaVEveWFS?=
- =?utf-8?B?bW5LWFJ6UkN5NGd4WUw1eVNRYmZ4eWNzOU5KWFprK2Q3SjlNL3B4VytFL3dE?=
- =?utf-8?B?WTVZOFJPTG1nclJQU1dQK2YrK3lYS2w2ZDJ6WkJUR0EyV1B1STNGeFdHSUQ2?=
- =?utf-8?B?bVVnc1pEUGNMZ0RjUXQxTHJVMElPb1FyNm1TSlcvQ1RWRC9HMENFWE4zdjk5?=
- =?utf-8?B?ellxVk9DWmdseDJ3T2hhRkdwUyszUFdzQXB5VGF0Wm1qUGdsM2dHMkNIUWph?=
- =?utf-8?B?cVRZeGszVlNzSGp0eCtrMVVXT25PbThraEpJTWVuYyswK2JtYUJOZnp3Z1di?=
- =?utf-8?B?MmlDN09oMjVJODRDQ0VTS042cWc3UjhWOVJ4OE9UZnR3U0xjZ1J6azRZYkFE?=
- =?utf-8?B?MUVQUnF2ZG4yb2ZzYkpQUmV4OXhiay81UXJWVmZabzNKWkZ2VDFsSkRTZHJP?=
- =?utf-8?B?aVZDU0ZHbDRWU2prQzNvU0dNL3FOVlFobDYwQzl1K3NDNTNraW5ISmwxQkNS?=
- =?utf-8?B?UVV3TjNvYVduQ2gzWUovckhUdXdMWGM3Ukg5OVlxUXZ5Tnp4UU1sM2dvckZu?=
- =?utf-8?B?OUhZRUM4UHNhZWYzYk5tWUJObmNySEdReHFZYlFHRkp1eXUwOEh6SHY1TGRi?=
- =?utf-8?B?VWk4WEl3aWJVNTFpeFFGbS9SMnpNeGJudittNVlrdy9vODRLdm1VazJmMXJN?=
- =?utf-8?Q?bm5T7cuymgZJJyyR8mv5bgYF2X9mZ8GneQm0xl0DNpHF?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: l20OIdPXb5N8WaKEK9mOsH8irNXpr+q9xUa8JVotiY21rpz7Q/dPvZjAvJPARnz7mHLomuXcfA7udniEeSJ9nd30B8stRucygTwSczQCETblaWBQcPkyn1j96ocH7Lo48Mtj1hL/mAs9NVa9/jHxnoY4/Tlz6A32N3JsuEIsTOyhKx07+fbRjC1ixdJtEwOYUZYjM6hOygv+8hvRKE9oJ4r7FECV7kGwmTAb7aZTgrPxjjUHhL28vlwR/EW2Q4Veg524hl1HKUvEhNHsXTCg9l3N0f5d5LNHDYIU+FJdDQDnGLTEHDbtEaklHYcfJdtoj6uHxHvBwI9CKdHxC/7+YjAVY6vG0T2hsXC1hF9hABrZFo0941uNRND7v+719E7YpKs6iAiO8tKpRjtG4GHcQifGFuB2Oe1dzJQ4gnOs96OVrR8YWCdUZRWGf3w32CdU
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 08:50:40.1571 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: aec5fcaf-7e5b-4907-8f74-08de6493a3b0
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A795.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB7867
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] pinctrl: bcm283x: Fix GPIO pull state register values for
+ BCM2711
+To: Cibil Pankiras <cibil.pankiras@egym.com>
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20260129151509.548538-1-cibil.pankiras@egym.com>
+ <c7dea041-832b-4dbd-9d5d-c823b29672ce@suse.com>
+ <CAK3EG+mxL+fTq3SafpNdMwgP0D4TOk5AhWHuQO+tTYXoBdMonA@mail.gmail.com>
+Content-Language: en-US, ca-ES, es-ES
+From: Matthias Brugger <mbrugger@suse.com>
+Autocrypt: addr=mbrugger@suse.com; keydata=
+ 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
+ PVrr2NoUqi/bxI8fFQJD1jVj8K0=
+In-Reply-To: <CAK3EG+mxL+fTq3SafpNdMwgP0D4TOk5AhWHuQO+tTYXoBdMonA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,91 +147,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-No more need to test if a fsbl partition is present on NOR when booting
-from serial or USB. Now MTD devices are automatically populated with
-partition information found in DT. Remove fsbl_nor_detected boolean from
-stm32prog_data struct and all code using it.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
- arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c |  8 --------
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c     | 10 ----------
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h     |  1 -
- arch/arm/mach-stm32mp/include/mach/stm32prog.h      |  2 --
- 4 files changed, 21 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index 506ecac2ef0..24503bbe58c 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -187,11 +187,3 @@ U_BOOT_CMD(stm32prog, 5, 0, do_stm32prog,
- 	   "  <addr> = address of flashlayout\n"
- 	   "  <size> = size of flashlayout (optional for image with STM32 header)\n"
- );
--
--bool stm32prog_get_fsbl_nor(void)
--{
--	if (stm32prog_data)
--		return stm32prog_data->fsbl_nor_detected;
--
--	return false;
--}
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index 9acbc0689a9..835eaf48dfa 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -1010,7 +1010,6 @@ static int treat_partition_list(struct stm32prog_data *data)
- 		INIT_LIST_HEAD(&data->dev[j].part_list);
- 	}
- 
--	data->fsbl_nor_detected = false;
- 	for (i = 0; i < data->part_nb; i++) {
- 		part = &data->part_array[i];
- 		part->alt_id = -1;
-@@ -1055,15 +1054,6 @@ static int treat_partition_list(struct stm32prog_data *data)
- 			stm32prog_err("Layout: too many device");
- 			return -EINVAL;
- 		}
--		switch (part->target)  {
--		case STM32PROG_NOR:
--			if (!data->fsbl_nor_detected &&
--			    !strncmp(part->name, "fsbl", 4))
--				data->fsbl_nor_detected = true;
--			/* fallthrough */
--		default:
--			break;
--		}
- 		part->dev = &data->dev[j];
- 		if (!IS_SELECT(part))
- 			part->dev->full_update = false;
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index bf184c8a884..929e38700e1 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -167,7 +167,6 @@ struct stm32prog_data {
- 	struct stm32prog_dev_t	dev[STM32PROG_MAX_DEV];	/* array of device */
- 	int			part_nb;	/* nb of partition */
- 	struct stm32prog_part_t	*part_array;	/* array of partition */
--	bool			fsbl_nor_detected;
- 
- 	/* command internal information */
- 	unsigned int		phase;
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32prog.h b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-index 23d1adfbad9..c10bff09c84 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-@@ -10,5 +10,3 @@ int stm32prog_write_medium_virt(struct dfu_entity *dfu, u64 offset,
- int stm32prog_read_medium_virt(struct dfu_entity *dfu, u64 offset,
- 			       void *buf, long *len);
- int stm32prog_get_medium_size_virt(struct dfu_entity *dfu, u64 *size);
--
--bool stm32prog_get_fsbl_nor(void);
+On 04/02/2026 21:16, Cibil Pankiras wrote:
+> On Wed, Feb 4, 2026 at 6:34 PM Matthias Brugger <mbrugger@suse.com> wrote:
+>>
+>>
+>>
+>> On 29/01/2026 16:15, Cibil Pankiras wrote:
+>>> BCM2711 has different pull-up/down register values compared to BCM2835
+>>>
+>>> - BCM2835: NONE=0, DOWN=1, UP=2
+>>> - BCM2711: NONE=0, UP=1, DOWN=2
+>>>
+>>> This patch fixes the pull state register values for BCM2711.
+>>>
+>>> Fixes: 2c39d975f87c ("pinctrl: bcm283x: Add GPIO pull-up/down control for BCM2835 and BCM2711")
+>>> Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
+>>> ---
+>>>    drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 20 +++++++++++++++++---
+>>>    1 file changed, 17 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+>>> index 4ecc8bac645a..33638515b5db 100644
+>>> --- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+>>> +++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+>>> @@ -30,6 +30,11 @@ struct bcm283x_pinctrl_priv {
+>>>
+>>>    #define MAX_PINS_PER_BANK 16
+>>>
+>>> +/* pull states for BCM2711 */
+>>> +#define BCM2711_PULL_NONE 0
+>>> +#define BCM2711_PULL_UP   1
+>>> +#define BCM2711_PULL_DOWN 2
+>>> +
+>>>    static void bcm2835_gpio_set_func_id(struct udevice *dev, unsigned int gpio,
+>>>                                     int func)
+>>>    {
+>>> @@ -84,7 +89,7 @@ static void bcm2835_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pu
+>>>     * bcm2711_gpio_set_pull: Set GPIO pull-up/down resistor for BCM2711
+>>>     * @dev: the pinctrl device
+>>>     * @gpio: the GPIO pin number
+>>> - * @pull: pull setting (BCM2835_PUD_OFF, BCM2835_PUD_DOWN, BCM2835_PUD_UP)
+>>> + * @pull: pull setting (BCM2711_PULL_NONE, BCM2711_PULL_DOWN, BCM2711_PULL_UP)
+>>
+>> Why call it BCM2711_PULL_x instead of BCM2711_PUD_x?
+> I referenced the kernel, but it would make more sense to name it
+> BCM2711_PUD_x, just like BCM2835_PUD_x. I will rename it and send v2.
+> 
 
----
-base-commit: 1de103fc29761fa729dffaa15d0cfb2766be05e4
-change-id: 20260205-upstream_stm32prog-2683672562b9
+Yes, sorry didn't saw that. Then I would say let's stay with kernel convention.
 
-Best regards,
--- 
-Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks,
+Matthias
+
+>>
+>>>     */
+>>>    static void bcm2711_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pull)
+>>>    {
+>>> @@ -108,10 +113,19 @@ static void bcm2711_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pu
+>>>
+>>>    static void bcm283x_gpio_set_pull(struct udevice *dev, unsigned int gpio, int pull)
+>>>    {
+>>> -     if (device_is_compatible(dev, "brcm,bcm2835-gpio"))
+>>> +     if (device_is_compatible(dev, "brcm,bcm2835-gpio")) {
+>>>                bcm2835_gpio_set_pull(dev, gpio, pull);
+>>> -     else
+>>> +     } else {
+>>> +             /* BCM2711's pull values differ from BCM2835 */
+>>> +             if (pull == BCM2835_PUD_UP)
+>>> +                     pull = BCM2711_PULL_UP;
+>>> +             else if (pull == BCM2835_PUD_DOWN)
+>>> +                     pull = BCM2711_PULL_DOWN;
+>>> +             else
+>>> +                     pull = BCM2711_PULL_NONE;
+>>> +
+>>
+>> That code should go into bcm2711_gpio_set_pull().
+> I will make the change and send v2.
+> 
+> Warm Regards,
+> Cibil
+> 
 
