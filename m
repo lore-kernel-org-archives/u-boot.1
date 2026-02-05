@@ -4,92 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81FA1ECD9B0
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 23:42:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F38ECD9AA
+	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 23:52:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF90F8382A;
-	Fri,  6 Feb 2026 00:42:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CA9068341A;
+	Fri,  6 Feb 2026 00:52:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KdF+kYlL";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rMOQ6jsW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43546838FA; Fri,  6 Feb 2026 00:42:05 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 4DF28838FA; Fri,  6 Feb 2026 00:52:15 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A74DD800AE
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 00:42:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03EE2800AE
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 00:52:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-45c93313721so1028700b6e.2
- for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 15:42:01 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d189e5b05eso79392a34.0
+ for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 15:52:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770334920; x=1770939720; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5iUXu8bv0lTWHLjdMVLhsOJLXzO7RHxzCt7+pJ5vMc8=;
- b=KdF+kYlLrLfhwx9N9P5t+AN1gfll5zQWowkgnIhSLRUB7vSKk28LVP2L6EIdDaBbTI
- Xf0IsYJ5CMaRbUyYsI3Han3rWbhGdu+Db+bNTUATAYYXS5zsDk9C5hSOOobqoJhknYiM
- lx/k/0UxgOTWctPr1GpgCZoRzYCdaO9s9xQA8=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770335532; x=1770940332;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sMv1KU8gZf18He7Ijqr2jy2hvcBXgDkiJqohHjrZgl4=;
+ b=rMOQ6jsWQdFTnORrUxha5S+NNvgGylAKCpD2jL9lrwNX0UKhwqF684OC06/qlCXWDo
+ Qmt+SqYomFHBFf2inXvxIBbjTFxBVWhX47Ce8PfT+DjJOvLqrnEN/bmLhVA4jBlsrN74
+ EDcy2U7vDFaFkSp8zqleQe1b9+XaqFgUpXmCY1eI1fRUGnhsUcP4Asjg6UKmQmzNp/fN
+ HHDELBpGE5Jh6yTJ3PhJ+MgZNdk1pSFKKfb7s7Bt4lkzCKPXQ5hOP2FbSRwd2SGCpS4X
+ WIxm4feHU2g63xt1DdjlUxb/d6RMxz3nVnOpWYG1siYzxuZII+Soc3IddRUl/MZ5XK6W
+ 5NbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770334920; x=1770939720;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=5iUXu8bv0lTWHLjdMVLhsOJLXzO7RHxzCt7+pJ5vMc8=;
- b=au4etTPhhpkmsOLPxrEYkEOY5Z1pkiJLtVqUQ6CZ8RN5GnyPAjzwDfNvlMHqLdsC79
- VHKDwkqDAxPHZ0lEU+ybXB1BLjhB78sYuwswuw4mfwiJxuV4xpRjTQ9iEe1CHo5efmBw
- OzOQ0O3lhcS4EM0f75c65cOGAMbMoR6hqnijvuJ05yA2dr8xCSMjmkyR+Z1W5fymKG6s
- YiWiTL1uGhl6rblDIrcvZAMTik8OOcr0WmTSzgZBU/n1PQVhI0p3HSRNAhiVaxtBfDyY
- qLG/Zi5nDa5bg6pOrSLhVKE55rEwStyKga0T11MGHLDKDFvEAWLHtoecvyVUwxn6XUgX
- Nd8A==
-X-Gm-Message-State: AOJu0YzQtwgMGIoeTurgUJYWEDhTjj10+fGQvA4SfK+L+Hx8em81jNm9
- O6eChxdS2w0hwHWWa14w870EUuWeB9vQ7dLe+/aDULqXa6Kbgv3mLqVvkhueVJLdRvenSqftpkz
- yHOo3Zl0=
-X-Gm-Gg: AZuq6aKeGrXxkXmG4qGPA2i/O7oJhRMlz1TiBzrREjSWSOwuQX3BrON49AzcMXDhKiG
- XwDoitV1hLyv83Ux9tCD7ER1Ieg3gjq8z7ai9aIFmETRXDrOaGlO6QXOhrmOCWOpGGWiUja9yDv
- f9z/JMOtl61OOqK86vhm6o85qy/UhG1o6FmV6dhbjxhGcvoNyrSXE5rNprguGevXfIKNJIwmPSK
- MZidKoWDoju4Wk6eLlZVZYUHMfCqvSY6sqVzhWPhCi9xWrgs/S2E5qnbZn4VWhMP/9QLdLERTw+
- v5GRMDvppfEseYNmjfisbqtjIPnRavqyFJ4XoFei7DS7dL4qNZgBfKt/yff6GPzzGlQWlxYUoCR
- qHIwysmPXghawka0nIz5Z3aaxzoHlZppCKm6lTDIikDPZVAyxsHcl76TszMTLHUdiztJpe9GhhR
- 7ypFM7qdJlQgHUG1uEMcNqvzcDryJBY0JTBPKtzk60aT6djvuRUJtmvUYaGAHxnmNeoADJPHp0H
- glNIchzHzb549HyPE0i8XllCJITcEbqiShA3O/vwg==
-X-Received: by 2002:a05:6808:13cb:b0:459:9630:3739 with SMTP id
- 5614622812f47-462fcb51059mr573497b6e.18.1770334920052; 
- Thu, 05 Feb 2026 15:42:00 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-462fe9a12d0sm291048b6e.1.2026.02.05.15.41.58
+ d=1e100.net; s=20230601; t=1770335532; x=1770940332;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sMv1KU8gZf18He7Ijqr2jy2hvcBXgDkiJqohHjrZgl4=;
+ b=jZsFN5A0QiYtqcBByzLOMDpf3j9yLJDqPO9rkY7XlNWYjHPYdBviYGcNgX320CRJf3
+ VfuyrExO3jG+mF85rhaN3AzpVgxTf75NwgL664BFocqQMpvIzhJzQGZ1MmgQAlPayebG
+ NBVkxDtXFgJ2AsGiVe71zsHeKRYD+yYTd5OkdKBmW9Ft/thfUE3DGxUvqNqVDG1gSzLE
+ uYCtifqsDHo/TP2/PrhKLN4qcSSFBbiuC2xeq5szK6n1SD/G/r2vvlSfRBC4GM3AeNTk
+ 72dZYP2X3qz/n3dO1KxlUgntNmnSomug3MHUX7wsPDNh+wBIsgQHGgprSdykNSsOR3wX
+ wSdg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX1ZWWT3rjZwvznfadL4qAC3eFnIfpNed7RIToybaL9lcER/RhFVlyeV8KXG9F0Qqk1i7z5RKY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwDXLNla22VE9lxUO/2S7gp6RmZpWnjzfAu4AWMbMMgKMhBGViA
+ kOIHTDzHUeeXYpsAGQo4R1tI6v9xCSe9PF4z9WVB+6urtSk3mKremXXvmYWdUudF3ys=
+X-Gm-Gg: AZuq6aK0pVR5cZf90U7vy1wYn+YxH+ZJGS9ShzYyMpDrzD33xOOofe0RlHAfzO8hlrQ
+ UM88maN7EES7Uxspu+DCuIx48nBZUPiUxyudHbdKCw7zBQJ1VoZXXRlJZfEABsTHcC9R3QZ5viA
+ wudolI43/hMvECSobdPl16uwMcP10HAudaDAOYUuDQoQTcPtgqd2A0iUPaE0AAhXz87q3+DVpo5
+ aRgvA/brdrnEz9qe7pMAYJTbhIlmvyFi60R508TuyzE7Vl2AZQHsSP9TyvkqBdN0Xo7JpXob5Yf
+ nb0mcvX4k9m0U3RFlmFab450O99PcTttgGtPIsTXe7yzAHSEcc97EQj+a8s5NfMeGkAhKlqbGog
+ mtS7QWoh9mlZdReuw+HMxAgSHoY4oaHvofy4y8nFO46NhjnjuDrTLYHFO5+9lTHjdSU9WzcoPMw
+ lQ/Vv//t5odjpUH8U=
+X-Received: by 2002:a05:6820:450e:b0:662:ecc4:2964 with SMTP id
+ 006d021491bc7-66d0bea5853mr436507eaf.53.1770335531688; 
+ Thu, 05 Feb 2026 15:52:11 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:4487:26aa:aa87:6ade])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-66d3adcae3csm312165eaf.9.2026.02.05.15.52.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Feb 2026 15:41:59 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Brian Sune <briansune@gmail.com>, Phil Phil Sutter <phil@nwl.cc>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>, adsp-linux@analog.com
-Subject: [PATCH v2] arm: spl: Ensure 8 byte alignment of appended DTB without
- separate BSS
-Date: Thu,  5 Feb 2026 17:41:58 -0600
-Message-ID: <20260205234158.3768337-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260130183635.2612933-1-trini@konsulko.com>
-References: <20260130183635.2612933-1-trini@konsulko.com>
+ Thu, 05 Feb 2026 15:52:11 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 0/5] arm: mediatek: clean up some redundant board init
+Date: Thu, 05 Feb 2026 17:51:24 -0600
+Message-Id: <20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MSwqDMBAA0KvIrDsQ4yfUqxQXYzLqUI0hiaUg3
+ r2hy7d5FySOwgmG6oLIH0ly+IL6UYFdyS+M4opBK90rrTrc8xt3sivajcnjGdCdYRNLmRNS78x
+ k2q6pzRNKESLP8v33r/G+f84bGW5uAAAA
+X-Change-ID: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2440; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=xUVfZA2Kzxu0acOPjL8YE75mXHrHDw5Xlj3PtYFkWGY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBphS0CUZ3Wu2mBX8e+9AGAXW2TSHKedNt1C6qMR
+ mxBTRomW0qJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYUtAhYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AFkgH/3tLiNuBk6wLRiNFahTEE+G3aYSqz3cJvyE1gy9
+ exyoACUpBtMCM6Ov9FB7nFeEsxPSqivBR2xyRQ08YqRk+5rh2lqQoCnOaRA3LiKO09J6Z8jHucf
+ sMFwiX+icazMGzD0yYCmUgL/6KKebhFPbwwQB9o0i/LmOTyYcuYVyV4QDQneHw2et767GY9AQO0
+ a9PyvHdVvAi7dqSu7/5kc8yscEiW72fK3MYDggMaDlCQ+Y0zsamOXmWOaHHvC+vVySVmKqLyR16
+ kVJgikzo97LFr36u578Kb9kjJrLaWHoGFil4apFrMBClpzCYb4/Y+LO+8cts72jrmLYVn3qxChK
+ un8w=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailman-Approved-At: Fri, 06 Feb 2026 00:52:32 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,155 +121,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Historically, when we have an appended device tree and also our
-resulting binary will contain the BSS section, we have ensured that
-everything will be where it's expected to be by declaring that the BSS
-is overlayed with a symbol matches the end of the port of the ELF binary
-that is objcopy'd to the binary we concatenate with. This in turn means
-that the logic to generate a "pad" file, which is the size found in the
-__bss_size symbol, will be correct and then we can concatenate the
-device tree and it will begin at __bss_size at run time.
+Before adding more targets, we take a moment to clean up some some
+redundant code in existing Mediatek SoC support.
 
-With commit 5ffc1dcc26d3 ("arm: Remove rel.dyn from SPL linker scripts")
-we removed this overlay as part of trying to ensure that we met both the
-requirements of the device tree to be 8 byte aligned as well as that our
-logic to generate the -pad file would match what ended up in the
-resulting binary. While it was correct to remove an unused section it
-did not solve ultimately solve the problem for all cases.
+The first three patches are removing no-op functions. The last patch
+generalizes the mem_map code so that it can be shared between all
+Mediatek ARMv8 SoCs.
 
-To really fix the problem, we need to do two things. First, our final
-section prior to _image_binary_end must be 8 byte aligned (for the case
-of having a separate BSS and so our appended DTB exists at this
-location). This cannot be '.binman_sym_table' as it may be empty, and in
-turn the ELF type would be NOBITS and so not copied with objcopy. The
-__u_boot_list section will never be empty, so it is our final section,
-and ends with a '. = ALIGN(8)' statement. Second, as this is the end of
-our copied data it is safe to declare that the BSS starts here, so use
-the OVERLAY keyword to place the BSS here.
-
-Fixes: 5ffc1dcc26d3 ("arm: Remove rel.dyn from SPL linker scripts")
-Reported-by: Brian Sune <briansune@gmail.com>
-Reported-by: Phil Phil Sutter <phil@nwl.cc>
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Cc: Richard Henderson <richard.henderson@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Cc: Greg Malysa <malysagreg@gmail.com>
-Cc: Ian Roberts <ian.roberts@timesys.com>
-Cc: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Cc: Utsav Agarwal <utsav.agarwal@analog.com>
-Cc: Arturs Artamonovs <arturs.artamonovs@analog.com>
-Cc: adsp-linux@analog.com
+David Lechner (5):
+      arm: mediatek: use default weak mtk_soc_early_init()
+      board: mediatek: mt8390_evk: remove empty board_init()
+      arm: mediatek: mt8183: remove unused function
+      arm: mediatek: make mtk_pll_early_init() static
+      arm: mediatek: consolidate ARMv8 memory maps
 
-So, first, with the exception of:
-axm brppt2 imx28_btt3 imx28_xea mk808 taurus work_92105
-all platforms using arch/arm/cpu/u-boot-spl.lds do NOT enable
-CONFIG_SPL_SEPARATE_BSS. And of those, only brppt2 enables SPL_OF_REAL.
-As an aside, I'm thinking that there is room for a clean-up / merger of
-arch/arm/cpu/u-boot-spl.lds and arch/arm/mach-omap2/u-boot-spl.lds
-(*widely* used outside of mach-omap2). But for this patch, that one case
-is handled correctly, with the first change I explained. All other 32bit
-platforms are handled with the second.
-
-Which means second, 64bit ARM platforms. With the exception of:
-socfpga_agilex7m socfpga_n5x_atf socfpga_n5x_vab socfpga_stratix10_atf
-all ARM64 SPL_FRAMEWORK using platforms use the
-arch/arm/cpu/armv8/u-boot-spl.lds explicitly. These other ones set
-CONFIG_SPL_LDSCRIPT to a non-existant file and then fall back to using
-arch/arm/cpu/armv8/u-boot-spl.lds. There are only 4 platforms which
-don't use a separate BSS section and so could trip up the above as well:
-r8a779g0_whitehawk r8a779g3_sparrowhawk sc598-som-ezkit-spl sc598-som-ezlite-spl
-I have inspected the Renesas platforms manually, and I'm a little unsure
-how this case works on the two sc598 platforms.
+ arch/arm/mach-mediatek/Kconfig                     | 21 +++++++++++++
+ arch/arm/mach-mediatek/Makefile                    |  1 +
+ .../arm/mach-mediatek/armv8-mem-map.c              | 14 ++++-----
+ arch/arm/mach-mediatek/mt7622/init.c               | 20 -------------
+ arch/arm/mach-mediatek/mt7623/init.c               |  5 ----
+ arch/arm/mach-mediatek/mt7629/init.c               |  2 +-
+ arch/arm/mach-mediatek/mt7981/init.c               | 21 -------------
+ arch/arm/mach-mediatek/mt7986/init.c               | 21 -------------
+ arch/arm/mach-mediatek/mt7987/init.c               | 21 -------------
+ arch/arm/mach-mediatek/mt7988/init.c               | 21 -------------
+ arch/arm/mach-mediatek/mt8183/init.c               | 30 -------------------
+ arch/arm/mach-mediatek/mt8188/init.c               |  5 ----
+ arch/arm/mach-mediatek/mt8365/init.c               |  5 ----
+ arch/arm/mach-mediatek/mt8512/init.c               | 21 -------------
+ arch/arm/mach-mediatek/mt8516/init.c               | 22 +-------------
+ arch/arm/mach-mediatek/mt8518/init.c               | 21 -------------
+ arch/arm/mach-mediatek/spl.c                       |  5 ++++
+ board/mediatek/mt8365_evk/MAINTAINERS              |  5 ----
+ board/mediatek/mt8365_evk/Makefile                 |  3 --
+ board/mediatek/mt8390_evk/MAINTAINERS              |  6 ----
+ board/mediatek/mt8390_evk/Makefile                 |  3 --
+ board/mediatek/mt8390_evk/mt8390_evk.c             | 34 ----------------------
+ configs/mt8390_evk_defconfig                       |  1 +
+ 23 files changed, 35 insertions(+), 273 deletions(-)
 ---
- arch/arm/cpu/armv8/u-boot-spl.lds | 15 ++++++++-------
- arch/arm/cpu/u-boot-spl.lds       | 12 ++++++------
- 2 files changed, 14 insertions(+), 13 deletions(-)
+base-commit: b5213bbfdcb1812be510427857827ee8becb9f8f
+change-id: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179
 
-diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-spl.lds
-index b732133ce76d..39020a1fddde 100644
---- a/arch/arm/cpu/armv8/u-boot-spl.lds
-+++ b/arch/arm/cpu/armv8/u-boot-spl.lds
-@@ -49,12 +49,6 @@ SECTIONS
- 	} >.sram
- #endif
- 
--	__u_boot_list : {
--		. = ALIGN(8);
--		KEEP(*(SORT(__u_boot_list*)));
--		. = ALIGN(8);
--	} >.sram
--
- 	.binman_sym_table : {
- 		. = ALIGN(8);
- 		__binman_sym_start = .;
-@@ -63,6 +57,12 @@ SECTIONS
- 		. = ALIGN(8);
- 	} > .sram
- 
-+	__u_boot_list : {
-+		. = ALIGN(8);
-+		KEEP(*(SORT(__u_boot_list*)));
-+		. = ALIGN(8);
-+	} >.sram
-+
- 	__image_copy_end = .;
- 	_end = .;
- 	_image_binary_end = .;
-@@ -75,7 +75,7 @@ SECTIONS
- 		__bss_end = .;
- 	} >.sdram
- #else
--	.bss (NOLOAD) : {
-+	.bss _image_binary_end (OVERLAY) : {
- 		__bss_start = .;
- 		*(.bss*)
- 		 . = ALIGN(8);
-@@ -99,5 +99,6 @@ SECTIONS
- 
- ASSERT(_image_binary_end % 8 == 0, \
-        "_image_binary_end must be 8-byte aligned for device tree");
-+
- ASSERT(ADDR(.bss) % 8 == 0, \
-        ".bss must be 8-byte aligned");
-diff --git a/arch/arm/cpu/u-boot-spl.lds b/arch/arm/cpu/u-boot-spl.lds
-index c578c3ebf821..97083319d39d 100644
---- a/arch/arm/cpu/u-boot-spl.lds
-+++ b/arch/arm/cpu/u-boot-spl.lds
-@@ -31,16 +31,16 @@ SECTIONS
- 		*(.data*)
- 	}
- 
--	. = ALIGN(4);
--	__u_boot_list : {
--		KEEP(*(SORT(__u_boot_list*)));
--	}
--
- 	. = ALIGN(4);
- 	.binman_sym_table : {
- 		__binman_sym_start = .;
- 		KEEP(*(SORT(.binman_sym*)));
- 		__binman_sym_end = .;
-+	}
-+
-+	. = ALIGN(4);
-+	__u_boot_list : {
-+		KEEP(*(SORT(__u_boot_list*)));
- 		. = ALIGN(8);
- 	}
- 
-@@ -48,7 +48,7 @@ SECTIONS
- 	_image_binary_end = .;
- 	_end = .;
- 
--	.bss : {
-+	.bss _image_binary_end (OVERLAY) : {
- 		__bss_start = .;
- 		*(.bss*)
- 		 . = ALIGN(8);
+Best regards,
 -- 
-2.43.0
+David Lechner <dlechner@baylibre.com>
 
