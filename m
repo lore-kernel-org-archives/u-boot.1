@@ -4,106 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E3FECD981
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 15:46:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7206FECD983
+	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 16:21:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF3CA83C02;
-	Thu,  5 Feb 2026 16:46:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 91D4F83AA7;
+	Thu,  5 Feb 2026 17:21:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PrY8byhg";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="aU537WKG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 753DC83C65; Thu,  5 Feb 2026 16:46:03 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0008D83B0B; Thu,  5 Feb 2026 17:21:06 +0100 (CET)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2032F83B95
- for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 16:46:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C37DF83A47
+ for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 17:21:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-4042905015cso758767fac.0
- for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 07:46:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770306360; x=1770911160; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0ltfi1iQ8ymnB4ZNhRGIeuK6sYYHNt8Y60RjEKQ7WzE=;
- b=PrY8byhgFYmbv+ZFpFRimL8en+xkjSnJo0FBZIWZ/j0X4ECa1uJEAVq02bCXvwecjT
- 7+Gk0/RAmFvUNRk54yZCtZiYdevOimOKyVawaHHVYKMJ6QBUwbpSgKVkeMN97tPL/S8k
- U/uBJSSWt/YLUJ8JnMEbMjs4SxkD3laDxlBP0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770306360; x=1770911160;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0ltfi1iQ8ymnB4ZNhRGIeuK6sYYHNt8Y60RjEKQ7WzE=;
- b=H1+ZGqrJ61LNKdgGPWrZhCv3qsjIPSHTDNKYwroO1tSzyFMFLfrAGxFUxVIuAzpUsf
- 0cXEI/HzbH2FXQwkf9DyvHcDrt2HvXO4bfNhdFx7jFJl22LrFO4ptBv+UYK+9uQ+Y3+u
- 4Z9HZjSm1raSXcIAAsOlGBUey4VYJ7b9V0zJwvQLf4MtaHGuDR9pMWVvenKRnxk0tBQv
- /roHCTlUNhGLLHz4lyKohxmlh1pbS+mlVeIaiEnG3os01L7pwTfPRHJcKkiFdnE74Z43
- w1R9mCj/Ug+IZXAyDjg+SXEknsVhFEsfa58UH+G9PNY/gGLZ3FDXgXWlrLmtCZTSMM0l
- S2oA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFdxv/E+Ex3hCIglr2K8i+Ixi2RiRA1byhUbxftOunxXF0vTKrYQ9/4MzzHp4KN5AB9Fh/O5U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw55y+XZb8g6ogwJEHwmeZHj17teokMeySdA1eN+lUzAklkW4TS
- mQHSTIVOuD8krGiJDvqKT7JMLUHwSp4zuWXLNSPt3K+hocih+rNoROzQlFaYi4eTt8w=
-X-Gm-Gg: AZuq6aK25HbDdm1JGhlAOlSHpb+y0tsw8omRUQo/LTBgZTM7HeNM1UTdvbBUcg8TB7S
- lOQD0BrH57FsSeVFiHUp56ufOC2BIpc1dEIaAwyoZb43AwHilQL6IQATca8/jB5thtTXIZ7Z3+K
- 2HVM4GuCq60TIaYvuh8UaD32ARB8P13bOISgev0XmGtZwUXTYI6bQScVsTv+5vCOmCrh8byqyqm
- lUrc/fnpQAy1qr77SOrpPyTbmwOtOAwk+xmq/Pc47grccafzdonhy4rYvWXDldpqknOSxSsSWxR
- uPQp0KU2iSdlA5bylVUMPyOBuXu/wAK0jHyeHDghNvbnKYUwUyL5QE6uCUHD/8Q9EvTsufae79U
- tCZU04arfSN1NijVFPgusQXO3cfP/jdnaQ31maQ8R6tV36G9vtT3+VrhaU11T5R7vf70v4u1lJI
- YsazBS5TuFUAKOjaWDyBxsXR7gbQbd13tUA0ESFv3x7yhkL0C4ddRH3HKOxgWzdQiYAs3MxWbFh
- ns++TqSuXvA+qaAG3P1TCsWSR+I2a+TRV+BKwc=
-X-Received: by 2002:a05:6870:2185:b0:409:81eb:cf56 with SMTP id
- 586e51a60fabf-40a53edf04amr3298813fac.27.1770306359607; 
- Thu, 05 Feb 2026 07:45:59 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a62b4700esm3084162fac.7.2026.02.05.07.45.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Feb 2026 07:45:58 -0800 (PST)
-Date: Thu, 5 Feb 2026 09:45:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: alice.guo@oss.nxp.com
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, Jindong Yue <jindong.yue@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Fedor Ross <fedor.ross@ifm.com>,
- =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
- Ji Luo <ji.luo@nxp.com>, Frank Li <Frank.Li@nxp.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Adam Ford <aford173@gmail.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- David Zang <davidzangcs@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Marek Vasut <marex@nabladev.com>, Joseph Guo <qijian.guo@nxp.com>,
- Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v1 12/12] board: nxp: imx952_evk: Add i.MX952 15x15
- lpddr4x board support
-Message-ID: <20260205154555.GL2603314@bill-the-cat>
-References: <20260205-imx952-v1-0-2103d0222a0b@nxp.com>
- <20260205-imx952-v1-12-2103d0222a0b@nxp.com>
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AWnKoABF65qjkHOhIAOuUNSRdDMiG4IXJOAfEmdnQlDFyFODtZcOFxpKM7R9A+MdgmycNCys5d5uB/myWTo7Xnh9ptGYDXjF8FGvomUmz9+UPKqdAfTLToA18qLHnNr7euF4SfyiZL+2MRoTn4ecQI338mTBYO9Xi3F/2H83u4diSRZZvm35VI1Ce4l17VGV/hqVJ6eLAM7JiGbsJVuTIb/e3QVxa+l3fdTJitv1elrGbTHcWjMEyxbS+NJpqvduNnAEN8m9czTDoKCye750S8yvmloUO6ktPuivCsYY86F/0nBYc6JFiqx8vz8P0+ZhUJ94iCJnkZEsb1HGalNcCw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7Lhnpc8Ak1BbSg0gw9z15fa2ZHuiGg0hVBItCht0aeI=;
+ b=DvtyxP8fwRHibHbopwZdcN0l9+6DkHFCYju60yhVp43glTxxw2HQztzD7bGKyUtAjPhv2OvSvbr9qvVtn1pkhcU9V6y/HqRlwR/hBXTHJ6swHpDj+Lrgi5EoSB5vFa6L4ZstiNNgBqipLWLYRNE8RWEkezyh2dr2Z9Kr4SfbT5B+GFYE4TXRSmafwY6YvBWd9JBRw3cSklK3YO0b+f5kRYkUey6GRMXhupl+qBSUWBvp6ZBCchky5DT70OxsvXPlV2IGpeELRL0+7Tj68XXmKGrJV5Fs00EE7kQUmWYwzSAyTJGC1C4xfy95PANt+3GY/YrKbGffZEAcvMH3eD1Dng==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7Lhnpc8Ak1BbSg0gw9z15fa2ZHuiGg0hVBItCht0aeI=;
+ b=aU537WKG7kjZBmU7EkKjf6Ryhx4FB8/0sB5vSqk6ijlM1t17KQF5lyhX3Xd414J5WE3AgfacU/Y+qgj2hjdWE4Cmuhcp4cYmC3GF1MudeALTEb0INuOZtPrSC79FpRp23lgb4BMEJxbxW3J2u+gkqaiguE0xVvax3kBG59HNftLIpYWxcmFu+suStVn53N2nAZl14PPp046Ds9xrbPk/qTf3kOjpugq0ARO3kZHUc7m+DWuLezrJ9LzzvPl9SCKBCe0pcZmuWUWyCHey7fCla/xchAcDQMtkqsRvj1AzmXbFqNf8d1ytkQVY2J9B7VMDsm2EZdsoGjn62ohfQeJAOQ==
+Received: from AM8P189CA0026.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:218::31)
+ by FRWPR10MB9225.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:d10:17d::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.13; Thu, 5 Feb
+ 2026 16:21:01 +0000
+Received: from AM3PEPF00009BA0.eurprd04.prod.outlook.com
+ (2603:10a6:20b:218:cafe::ff) by AM8P189CA0026.outlook.office365.com
+ (2603:10a6:20b:218::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.14 via Frontend Transport; Thu,
+ 5 Feb 2026 16:20:52 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AM3PEPF00009BA0.mail.protection.outlook.com (10.167.16.25) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Thu, 5 Feb 2026 16:21:01 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 5 Feb
+ 2026 17:22:39 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 5 Feb
+ 2026 17:20:51 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Thu, 5 Feb 2026 17:20:49 +0100
+Subject: [PATCH] stm32mp2: Update size of DDR entry in MMU table
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OrhcTBi989//5Ses"
-Content-Disposition: inline
-In-Reply-To: <20260205-imx952-v1-12-2103d0222a0b@nxp.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260205-upstream_ddr_entry_update_in_mmu-v1-1-5495326f7446@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIAGDDhGkC/x3NQQoCMQxA0asMWVvIFO2gVxEJxUTNorWk7aAMc
+ 3eLy7f5f4MqplLhMm1gsmrVdx6YDxPcXzE/xSkPg0cf0OPJ9VKbSUzEbCS52Zd64diENFNK3aE
+ sPix8no8BYWSKyUM//8X1tu8/zUcl5XIAAAA=
+X-Change-ID: 20260205-upstream_ddr_entry_update_in_mmu-0e7267d91460
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009BA0:EE_|FRWPR10MB9225:EE_
+X-MS-Office365-Filtering-Correlation-Id: b4d32c27-0bdf-42ee-5df7-08de64d28dbb
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZFdvckgyNDJsV3dqdXI1MFlsdWFHMnVrTUlTaHlzbFhOWk9xS2c0S01ORnh6?=
+ =?utf-8?B?WDdkVXEwWFVjOVB2OTFsejdTT0dZa0lGNnFaUmpGWUtjWVFVZzRMaFB3M0Mw?=
+ =?utf-8?B?ajJ0UCt6OWFOb1Z5Yll6RVhPdlQxUjE0eHF2UVZCeTI0Q2tRUnlZUW9NOEJ2?=
+ =?utf-8?B?aExzTUROSEZseWx3TXpaVGJFSWJ1ckhucnN3QlNiK2JrZklxaGUvMWYrQ3ov?=
+ =?utf-8?B?alVrYXl5T0lkU0FFblB0WWpBakpQTW9sS0oyV092aUVTeUdmNEl6T0tUdUE1?=
+ =?utf-8?B?elJvV3hFZW50Q1Vvbkl4T0pEN0pmRVhrMnJCdHppb1hPaFM0cmhQZzI2bzBo?=
+ =?utf-8?B?Z0JVbnpETGo2emJuQzNodXVpb1dCTyswdkhha0RvNDFpWUk2cld5dmludkVr?=
+ =?utf-8?B?ZEZSZ01NUTlISVpCemExRUN5aXVWaGRFSDVBVGxrNHRvb1JZTUFlOGZ2RDdh?=
+ =?utf-8?B?aU9XOEhUbG9oRVhrYThNWHdRK1VnWE9JZGdyRHhVTlJJZGZIREl4REJxcjha?=
+ =?utf-8?B?WDFMZkdGaHc1NVZVYWZDMXUrZ3MzZUVNazM4MDMxZGpxcURRTmkzcTVLeE1u?=
+ =?utf-8?B?bkJPOTZHVXBnbnE0UjAxaVE1L1oxRHVkaE0vVXpXUTl6L0lTUS8rZUlvcGhl?=
+ =?utf-8?B?VWlLRHB0aXN0NVJhMGlFTHQrMkhJU3pUK2Y4dHhtRGpOaUtLR2RhNU1peWlV?=
+ =?utf-8?B?UVBlTFJCR3JnTkFOc2JpQ01JZXRhS2VkZ2lwZzRXMDBTUGpEMThuajlETzhh?=
+ =?utf-8?B?bmVBUHNaSmdaUnpjaUlCdE9NWW9XWDRiS2JUMXk2eWprSGpNNjNQeHc2U1JN?=
+ =?utf-8?B?aXphN3lrdHJrdzRnRlc5Nng1dDB0UWVvanNGcitFaXJYVXpXbWRnNjZrc2k0?=
+ =?utf-8?B?cFNKUkFBZ0dRUzdtNmNoNTBGK21HNWtUdzRiNHBzQkFFcjNQVExocXpKa25v?=
+ =?utf-8?B?aENDR2VwRjNBYkN6QURaR0tqYVdFUld5cWhYWXJzRnM0eDZiM1ljRmpRRkFi?=
+ =?utf-8?B?ZjJCOGo5c1VOdmNhSHJ4VGdwR0dhcEN3NkFIcDlld0w4RzNPemw0QnZsdFlS?=
+ =?utf-8?B?RzJpSE5ocWVoM3RqUHNpMm5LSkljdkhNS1dlVlpRRGlGbHZLZDVydm1EYzJj?=
+ =?utf-8?B?cVJKS3pqZ2d4eDdhUXUrM245aGMvZHM3RWc4Q29EVXN3VFVzSngwRWpGUUJO?=
+ =?utf-8?B?Mkh1MVp5Y0VLRlhzcmVXQ3FDZ1hRSzJ2aTNDTGM2emhPdktKZWpQMk55SEIw?=
+ =?utf-8?B?V0ZhdDFkSVNodjE2dEE1eFRWbjlTYytWaTVyUjV2QTNWTXdoWU9iRCtPaGFs?=
+ =?utf-8?B?QUJLU1lrNGVyY0JPVzIzYldjWk1ycmJIdWwwb1RxTmhCTWhnaUVZQTV3QU5j?=
+ =?utf-8?B?U01DOXg5R0QzQ25FV29jbktuSlBzMXNSY2FVbndNUURRSUN1MlNJQXZLUm4r?=
+ =?utf-8?B?Z1NET2o5dHhYUjUwN05aSTFUUjFvcENNSjdFbk5jL24zT3A4ZGQrNlQrN3pX?=
+ =?utf-8?B?NU1hbVdENWZLKzFmb3dhb2JqMGdrQzI1SUlINUpKZ1JTL1ROUktFK2drMnhT?=
+ =?utf-8?B?V1NUOEJZRUZaVTdueVNuKzhPVWlhd0VKdnBqNHdhVXowZjJtbmgrUFpBVnho?=
+ =?utf-8?B?aVRXNGJza0ZnZGpSeFA3R25UV2FBeFFGZUk2TTZkTGIzNHFFRGFKbjlkNEE0?=
+ =?utf-8?B?NlFlbGwwRXhDVEE0Mnp5b0hWVTZ6eVVqaUZDTnJTbnR0alhWYktjR01wbDMz?=
+ =?utf-8?B?ZVN6MDhmYnZySTBxa2x4V2lYb1NOcmNDNk1FTGt1NzE3b0piWGVvZ3k4bEtM?=
+ =?utf-8?B?bW16Zkc3UjN4bGRZbVBNRFFyNjhRRzhPZTUrTGxjYUp0Ym9BNXdEV1VIcnhz?=
+ =?utf-8?B?aGoxbDI1TzJlL09NWEZjUmFRK3B5MmcrR0FSNGI4NDZ3N1FxNkgxakJYZ1FZ?=
+ =?utf-8?B?KzBCZzc0aGw3b0dGZTM1aGgrTm9MenhaNmI3VWg0cDFHRmVKWjg5TkMrMjdu?=
+ =?utf-8?B?QU1DbEVNOC9IN2svWG5tNjhyRFRUUnBESlloZHE2aml6ZUhTeU9ETVI5elVZ?=
+ =?utf-8?B?SUJNZThJbDdyblVNR1IwMUtuQ1BkeTh0WlVMV3paM1pyVHBQOFdUNnV3TE5p?=
+ =?utf-8?B?U0Vub1dtekIyWlRQNSs1L3EwNEFQRWlzbWYxWGhlR0dyK3BpKzIyQUppWkl0?=
+ =?utf-8?B?RTlmbDBZOWpCeTR6d28wczVjdmlmdVNzQ1lsRTFpMmR4Rm52WnNQaWowWk9B?=
+ =?utf-8?B?NS90NVd1RURzQkdmWVE2ZzYyWW1BPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 3Iw8fMUqOgTcu/3UFdD8zYX1CeRRd0RKum8D6H8OMXATWcQEu3bifqqLmW8MXCND4W6LFSf+3ML0RTioAFh14jIzLhUcy/P7pB9QopowYmsA7KYy8jJKKgDHFzPhjHIkLx4RGUGHXtL2psAUONDo2aJbTfyLLcsOF2KMF090tM8n+TZy1z+4hXH8dPik9x7meiFRXHAxoZvJax/vpV8csccwm7MtyQreI7i1zza1YvbMiG6lPMxRm8uE3C+Q9fVghK4hJ2hW4LIYuLZzUQEUaMkVApp2ioeBpoB5XNgFPlhdaUkvD+vFqzBmvTgivBCXumKqLmrL2qgvG1lTcTeAkLGVym4InuY/NpWlDXbOLfonQjmjMhpbmfcnlMp4FlXJ5DMD2GAfjD8HfzXTn9NaxgLOf7W9bQx5OgsJQUV5xihPjWd/0iyp5h0zMlWP2cGp
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2026 16:21:01.6128 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4d32c27-0bdf-42ee-5df7-08de64d28dbb
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009BA0.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR10MB9225
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,122 +167,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 1GB board, in particular cases, a prefetch operation is done just above
+the 1GB boundary. The DDR size is 1GB (0x80000000 to 0xc0000000), there is
+an access on 0xc00017c0 (ie 0x800017c0).
 
---OrhcTBi989//5Ses
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+As beginning of DDR is protected by MMU until CONFIG_TEXT_BASE
+(0x80000000 to 0x84000000), it triggers the following IAC:
 
-On Thu, Feb 05, 2026 at 09:55:18PM +0800, alice.guo@oss.nxp.com wrote:
+E/TC:0   stm32_iac_itr:192 IAC exceptions [159:128]: 0x200
+E/TC:0   stm32_iac_itr:197 IAC exception ID: 137
+I/TC:
 
-> From: Peng Fan <peng.fan@nxp.com>
->=20
-> Add support for i.MX952 15x15 lpddr4x board support.
->=20
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-[snip]
-> +void board_quiesce_devices(void)
-> +{
-> +	int ret;
-> +	struct uclass *uc_dev;
-> +
-> +	ret =3D imx9_scmi_power_domain_enable(PD_HSIO_TOP, false);
-> +	if (ret) {
-> +		printf("%s: Failed for HSIO MIX: %d\n", __func__, ret);
-> +		return;
-> +	}
-> +
-> +	ret =3D imx9_scmi_power_domain_enable(PD_NETC, false);
-> +	if (ret) {
-> +		printf("%s: Failed for NETC MIX: %d\n", __func__, ret);
-> +		return;
-> +	}
-> +
-> +	ret =3D uclass_get(UCLASS_SPI_FLASH, &uc_dev);
-> +	if (uc_dev)
-> +		ret =3D uclass_destroy(uc_dev);
-> +	if (ret)
-> +		printf("couldn't remove SPI FLASH devices\n");
-> +}
+DUMPING DATA FOR risaf@420d0000
+I/TC: =====================================================
+I/TC: Status register (IAESR0): 0x11
+I/TC: -----------------------------------------------------
+I/TC: Faulty address (IADDR0): 0xc00017c0
+I/TC: =====================================================
+E/TC:0   Panic at /usr/src/debug/optee-os-stm32mp/4.0.0-gitvalid.8>
+E/TC:0   TEE load address @ 0x82000000
+E/TC:0   Call stack:
+E/TC:0    0x82007f30
+E/TC:0    0x820444b4
+E/TC:0    0x8202dc54
+E/TC:0    0x82041fe0
+E/TC:0    0x820143b8
 
-Can we instead handle all of this via setting DM_FLAG_OS_PREPARE in
-drivers as needed, so they're properly cleaned / released before OS
-boot?
+By default, in MMU table, the DDR size is set to 4GB, but not all
+STM32MP2 based board embeds 4GB, some has only 1 or 2GB of DDR.
 
-[snip]
-> diff --git a/doc/board/nxp/imx952_evk.rst b/doc/board/nxp/imx952_evk.rst
-> new file mode 100644
-> index 00000000000..9f20db2403f
-> --- /dev/null
-> +++ b/doc/board/nxp/imx952_evk.rst
-> @@ -0,0 +1,112 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +imx952_evk
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+The MMU table entry dedicated to DDR need to be updated with the real
+DDR size previously read from DT.
+After relocation, in enable_caches(), update the MMU table between the
+dcache_disable() / dcache_enable() with the real DDR size.
 
-This will be a doc warning and fail CI, please either push through CI or
-build the docs locally (see doc/build/documentation.rst) with KDOC_WERROR=
-=3D1
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-[snip]
-> diff --git a/include/configs/imx952_evk.h b/include/configs/imx952_evk.h
-> new file mode 100644
-> index 00000000000..dadc883027f
-> --- /dev/null
-> +++ b/include/configs/imx952_evk.h
-> @@ -0,0 +1,31 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright 2025-2026 NXP
-> + */
-> +
-> +#ifndef __IMX952_EVK_H
-> +#define __IMX952_EVK_H
-> +
-> +#include <linux/sizes.h>
-> +#include <linux/stringify.h>
-> +#include <asm/arch/imx-regs.h>
-> +
-> +#define CFG_SYS_INIT_RAM_ADDR		0x90000000
-> +#define CFG_SYS_INIT_RAM_SIZE		0x200000
-> +
-> +#define CFG_SYS_SDRAM_BASE		0x90000000
-> +#define PHYS_SDRAM			0x90000000
-> +
-> +#define PHYS_SDRAM_SIZE			0x70000000 /* 2GB - 256MB DDR */
-> +#define PHYS_SDRAM_2_SIZE		0x380000000 /* 14GB */
-> +
-> +#define CFG_SYS_SECURE_SDRAM_BASE	0x8A000000 /* Secure DDR region for A5=
-5, SPL could use first 2MB */
-> +#define CFG_SYS_SECURE_SDRAM_SIZE	0x06000000
-> +
-> +#define WDOG_BASE_ADDR			WDG3_BASE_ADDR
-> +
-> +#ifdef CONFIG_ANDROID_SUPPORT
-> +#include "imx952_evk_android.h"
-> +#endif
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+index e081dc605b8..c4cb490a14f 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+@@ -15,6 +15,7 @@
+ #include <asm/io.h>
+ #include <asm/arch/stm32.h>
+ #include <asm/arch/sys_proto.h>
++#include <asm/armv8/mmu.h>
+ #include <asm/system.h>
+ #include <dm/device.h>
+ #include <dm/lists.h>
+@@ -70,8 +71,21 @@ int mach_cpu_init(void)
+ 
+ void enable_caches(void)
+ {
++	struct mm_region *mem = mem_map;
++
+ 	/* deactivate the data cache, early enabled in arch_cpu_init() */
+ 	dcache_disable();
++
++	/* Parse mem_map and find DDR entry */
++	while (mem->size) {
++		if (mem->phys == CONFIG_TEXT_BASE) {
++			/* update DDR entry with real DDR size */
++			mem->size = gd->ram_size;
++			break;
++		}
++		mem++;
++	}
++
+ 	/*
+ 	 * Force the call of setup_all_pgtables() in mmu_setup() by clearing tlb_fillptr
+ 	 * to update the TLB location udpated in board_f.c::reserve_mmu
 
-It's a really bad idea having the board.h file bring in other includes.
-We aren't using SZ macros, and a patch to clean up WDOG_BASE_ADDR so it
-doesn't need to be in the board.h would be a good cleanup to do, but
-maybe for now just make sure the watchdog driver has the regs header
-included?
+---
+base-commit: 1de103fc29761fa729dffaa15d0cfb2766be05e4
+change-id: 20260205-upstream_ddr_entry_update_in_mmu-0e7267d91460
 
---=20
-Tom
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
 
---OrhcTBi989//5Ses
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYS7MwAKCRAr4qD1Cr/k
-CrjgAQDStT/CdUZDD6Tp1L9lQEWkxhRKEZG9KOYPxzXFENd5LQEAw/FJH/YZ2M/t
-lDopbRNoZNa9w3ux/HhkChainhmP8QU=
-=dUCO
------END PGP SIGNATURE-----
-
---OrhcTBi989//5Ses--
