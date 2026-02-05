@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB52EEA7951
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 01:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BF68EA7959
+	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 03:14:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93E56838FA;
-	Thu,  5 Feb 2026 02:42:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3472D83015;
+	Thu,  5 Feb 2026 04:14:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XSV5v70n";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="uxAjXFJY";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="bYXWvpQg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA00683AAD; Thu,  5 Feb 2026 02:42:10 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 0CFB98341A; Thu,  5 Feb 2026 04:14:56 +0100 (CET)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77A648341A
- for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 02:42:08 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4f60MN1R3gz9tqJ;
- Thu,  5 Feb 2026 02:42:08 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770255728;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rpIbVq6GMzv5CurTvERYyDUzP2Tzm2rMAbvnMLpOKvo=;
- b=XSV5v70nMVypfg2BQG8yUyKje8B3AV+PTiB3l2M3+zh33aOkrJq6+A+xvuDadiTmPWTUSS
- zPfTATy6x13la0LWtC3SxnyeE3Hnsqu0JPHnJRerGo8AUbzQQfWwYxMMP3V3GZhVTH8MlJ
- 5QmzEU3KlF72ICB0Q3IWTNTecPyCGGfMXmj2HISAyPn+sR3WA2jufWpzgKqE6b0zGrmQFF
- 27lq41cusVL7Dh2r8L2oIkoQQzymqnXqZBUGafIvctp9T+RaB2+6pBe71w2u7LQJvaxOhx
- O0BurtQeyimcYuGSyJekdTZUsAAjIh0Do6nyWUhfB1bs/qgdZfbaF8/SulrWEQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770255726;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rpIbVq6GMzv5CurTvERYyDUzP2Tzm2rMAbvnMLpOKvo=;
- b=uxAjXFJYhJGlqgNnLpXMuLos532GjtIlpd2HMcxxC54JMH57cRwhNJktizo8Jbm5CUq7Bw
- JZW5zstzof//0+vxpFAE7TRcOjhyKa9Vmef6P9T+QZAP1sUQfgkzC7dZQkauzjLLkGBOgO
- 4Nmr9tkituSyP0RA5z1R7ZLAcuYL1nmqLTIRuFyNmiefGhqDG/y86JgIGu4XIY6YlVqQhq
- Q48A4tjan+D1ZeqNd1o/qKrRoeMMYdxpVaMYGvAPBamtVxJz2cO4O8JAO8eg/2nLwlH/Pq
- ZmKQeV/L0ITS/2zGhzmhhGUeFlaaFFVMg9lUWUE4/9TCLXgInGFcUQYy4UqPXA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: [PATCH v3 2/2] test: cmd: Add test for zip/unzip/gzwrite commands
-Date: Thu,  5 Feb 2026 02:40:45 +0100
-Message-ID: <20260205014153.218621-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260205014153.218621-1-marek.vasut+renesas@mailbox.org>
-References: <20260205014153.218621-1-marek.vasut+renesas@mailbox.org>
+ by phobos.denx.de (Postfix) with ESMTPS id A67CE8063E
+ for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 04:14:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1770261266;
+ bh=lglDbpoZGW7Kalj+MvUXvLAA2M3MJixqQ98l6JZJ2+E=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=bYXWvpQgZca/6qY1Syv6UaYD9fP9NQVDAgFnjLst+uJXi0K6P/dh0/IVoyJqj9MjG
+ qvyng69X8WHNFwZhAnn2nxf3qYhBkKwRJd5oR60KDECVnst7UDNgPTY1/SZaKu/cHz
+ SR6nXNbLjgcc5guskBejA3qeRcs71p866oJ/AQrENL3JecBXIT5Sof/JW5fe8wOlRW
+ EyfygoX4ORNbDnIZ9tld/Sv1Y+VMvvyFWgZcVIc/WHQe+nB0/78wkq0AdEN/xgS//3
+ lj609qADYYkN9E0Y4F5o2iXbcNstfRcOpavBDNpkq6iwZ5rJEppmuJXX2/ol9784o0
+ df+y6n733TcSg==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id E2C04B220123;
+ Thu,  5 Feb 2026 04:14:22 +0100 (CET)
+Message-ID: <cccfa42b-d1cd-4766-a045-3ba322607987@freeshell.de>
+Date: Wed, 4 Feb 2026 19:14:20 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 7d4efe6417fac744e6d
-X-MBO-RS-META: h4tyzt8yg56pz95sz8jeqekq7eekhxat
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 14/24] clk: clk-composite: Resolve parent clock by name
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Marek Vasut <marex@denx.de>, Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Adam Ford <aford173@gmail.com>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Dong Aisheng <aisheng.dong@nxp.com>, Fabio Estevam <festevam@denx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>, Peng Fan
+ <peng.fan@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, uboot-imx@nxp.com, u-boot@lists.denx.de
+References: <20250323160107.145749-1-marex@denx.de>
+ <20250323160107.145749-15-marex@denx.de>
+ <f6b85cb6-509c-46a8-984e-3881374ceb02@canonical.com>
+ <9dbccbf2-39a7-48a0-9d2c-79de220c07f3@canonical.com>
+ <CAFLszTh7-9a7F9h+knc1CMNvm8C=gXLZhLZ+W5eJDEZ_e5pc2A@mail.gmail.com>
+ <cb4bdf54-35cd-4638-8ce0-3fa9c0b5260d@freeshell.de>
+ <CAFLszTijQe-+sxxowGUahG=rtQMJ0RHHkcfagybiPJHxA=-azQ@mail.gmail.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <CAFLszTijQe-+sxxowGUahG=rtQMJ0RHHkcfagybiPJHxA=-azQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,243 +82,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add simple test for zip/unzip/gzwrite commands. The test works as
-follows. First, create three buffers with a bit of space between
-each of them, fill them with random data, then compress data in
-buffer 1 into buffer 2, decompress data in buffer 2 either directly
-into buffer 3 or into MMC 1 and then read them back into buffer 3,
-and finally compare buffer 1 and buffer 3, they have to be identical.
+Hi Simon,
 
-The buffers are filled with random data to detect out of bounds writes.
-Test for various sizes, both small and large and unaligned.
+On 2/3/26 16:23, Simon Glass wrote:
+> Hi E,
+> 
+> On Tue, 27 Jan 2026 at 17:36, E Shattow <e@freeshell.de> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 1/26/26 18:55, Simon Glass wrote:
+>>> Hi Heinrich,
+>>>
+>>> On Mon, 31 Mar 2025 at 05:14, Heinrich Schuchardt
+>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>
+>>>> On 30.03.25 17:15, Heinrich Schuchardt wrote:
+>>>>> On 23.03.25 16:58, Marek Vasut wrote:
+>>>>>> Use clock-names property which is accessible via parent clock OF node
+>>>>>> to look up the parent clock by name instead of depending on unreliable
+>>>>>> global clock name to perform look up.
+>>>>>>
+>>>>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>>>>
+>>>>> This patch breaks booting starfive_visionfive2_defconfig in the SPL stage.
+>>>>>
+>>>>> To dig a bit deeper I enabled the debug UART for SPL with these setting
+>>>>> on origin/master (5e74863ad6613df):
+>>>>>
+>>>>> CONFIG_DEBUG_UART=y
+>>>>> CONFIG_DEBUG_UART_NS16550=y
+>>>>> CONFIG_DEBUG_UART_BASE=0x10000000
+>>>>> CONFIG_DEBUG_UART_CLOCK=24000000
+>>>>> CONFIG_SPL_DEBUG_UART_BASE=0x10000000
+>>>>> CONFIG_DEBUG_UART_SHIFT=2
+>>>>>
+>>>>> clk_register: failed to get pll0_out device (parent of perh_root)
+>>>>> clk_register: failed to get pll0_out device (parent of qspi_ref_src)
+>>>>> clk_register: failed to get pll0_out device (parent of usb_125m)
+>>>>> clk_register: failed to get pll0_out device (parent of gmac_src)
+>>>>> clk_register: failed to get pll0_out device (parent of gmac1_gtxclk)
+>>>>> clk_register: failed to get pll0_out device (parent of gmac0_gtxclk)
+>>>>>
+>>>>> Marek assumes that property bootph-pre-ram might be missing for some
+>>>>> clocks in arch/riscv/dts/jh7110-u-boot.dtsi.
+>>>>
+>>>> This change suggested by Marek resolves the issue:
+>>>>
+>>>> diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi
+>>>> b/arch/riscv/dts/jh7110-u-boot.dtsi
+>>>> index ce7d9e16961..4ed764393bb 100644
+>>>> --- a/arch/riscv/dts/jh7110-u-boot.dtsi
+>>>> +++ b/arch/riscv/dts/jh7110-u-boot.dtsi
+>>>> @@ -113,3 +113,7 @@
+>>>>   &sys_syscon {
+>>>>          bootph-pre-ram;
+>>>>   };
+>>>> +
+>>>> +&pllclk {
+>>>> +       bootph-pre-ram;
+>>>> +};
+>>>
+>>> I just hit this as well, thanks for the post.
+>>>
+>>> However, -master still does not boot for me on vf2:
+>>>
+>>> U-Boot SPL 2026.04-rc1 (Jan 26 2026 - 19:52:48 -0700)
+>>> DDR version: dc2e84f0.
+>>> Trying to boot from MMC2
+>>> spl: partition error
+>>> Error: -38
+>>> SPL: Unsupported Boot Device!
+>>> SPL: failed to boot from all boot devices
+>>> ### ERROR ### Please RESET the board ###
+>>>
+>>> Regards,
+>>> Simon
+>>
+>> Is this to be expected? ref:
+>> https://docs.u-boot.org/en/latest/board/starfive/visionfive2.html#zero-stage-bootloader
+>>
+>> The JH-7110 has enough SRAM to contain the unfiltered devicetree if you
+>> would like to experiment without filtering to reduce size for the SPL.
+>>
+>> Meanwhile though the uses of "sd card image" for U-Boot SPL to access
+>> MMC are not anymore supported; transition to instead use the remaining
+>> supported methods SPI Flash or UART Serial.
+> 
+> I'm not sure that I can make that work in my lab. I have a SPI-flash
+> emulator for some boards, but it requires a special probe.
+> 
+> What is wrong with putting U-Boot on the SD card?
 
-The test uses ut_assert_skip_to_line() to skip over gzwrite progress
-bar. Since the progress bar updates fill up the console record buffer,
-increase the size of it to compensate.
+TL;DR recap the feature is retracted from newer official documentation,
+new board designs do not have this capability, and apparent lack of
+interest yet to press StarFive for GPL2.0+ compliance. The latter is
+necessary else you're depending on "mystery" feature that was dropped
+and is unsupported by the vendor for your testing fixture. I have ~100+
+hours into the JH-7110 BootROM reverse-engineering effort that I'd like
+to hand off for peer review.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Tested-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Alexander Graf <agraf@csgraf.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome@forissier.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Cc: u-boot@lists.denx.de
----
-V2: Use ut_assert_skip_to_line() to skip over the progress bar.
-    Since that fills up the console record buffer, increase the
-    size of it to compensate.
-V3: - Add RB/TB from Mattijs
-    - Call getrandom() directly instead of CMD_RANDOM random command
-    - Use ut_asserteq_mem() instead of cmp.b
-    - Use run_commandf() instead of setting env vars
-    - Move blk_get_device_by_str() into gzwrite test branch
----
- arch/sandbox/dts/test.dts |   7 +++
- common/Kconfig            |   2 +-
- test/cmd/Makefile         |   3 +
- test/cmd/unzip.c          | 124 ++++++++++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py  |   6 ++
- 5 files changed, 141 insertions(+), 1 deletion(-)
- create mode 100644 test/cmd/unzip.c
+> 
+> Regards,
+> Simon
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index b7402d7042a..762c1d9bbe2 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1272,6 +1272,13 @@
- 		filename = "mmc8.img";
- 	};
- 
-+	/* This is used for zip/unzip/gzwrite tests. */
-+	mmc9 {
-+		status = "disabled";
-+		compatible = "sandbox,mmc";
-+		filename = "mmc9.img";
-+	};
-+
- 	pch {
- 		compatible = "sandbox,pch";
- 	};
-diff --git a/common/Kconfig b/common/Kconfig
-index 47d17f4e7c6..63448bdc13b 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -26,7 +26,7 @@ config CONSOLE_RECORD_INIT_F
- config CONSOLE_RECORD_OUT_SIZE
- 	hex "Output buffer size"
- 	depends on CONSOLE_RECORD
--	default 0x6000
-+	default 0x20000
- 	help
- 	  Set the size of the console recording output buffer. When this fills
- 	  up, no more data will be recorded until some is removed. The buffer
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 2476068aee6..8c9f112782d 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -45,3 +45,6 @@ endif
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
- endif
- obj-$(CONFIG_CMD_SPAWN) += spawn.o
-+ifdef CONFIG_CMD_ZIP
-+obj-$(CONFIG_CMD_UNZIP) += unzip.o
-+endif
-diff --git a/test/cmd/unzip.c b/test/cmd/unzip.c
-new file mode 100644
-index 00000000000..b67c5ba1956
---- /dev/null
-+++ b/test/cmd/unzip.c
-@@ -0,0 +1,124 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Tests for zip/unzip/gzwrite commands
-+ *
-+ * Copyright 2026, Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+#include <command.h>
-+#include <env.h>
-+#include <dm.h>
-+#include <dm/lists.h>
-+#include <dm/test.h>
-+#include <linux/sizes.h>
-+#include <mapmem.h>
-+#include <part.h>
-+#include <test/cmd.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <u-boot/crc.h>
-+
-+/* sys/random.h is not accessible */
-+extern ssize_t getrandom(void *buf, size_t size, unsigned int flags);
-+
-+static const ssize_t sizes[] = { 32, SZ_1K, SZ_4K, SZ_1M, SZ_16M, SZ_1M - 1, SZ_1M + 1, 6758401 };
-+
-+static int do_test_cmd_zip_unzip(struct unit_test_state *uts, ssize_t size,
-+				 const bool gzwrite)
-+{
-+	unsigned long loadaddr = env_get_ulong("loadaddr", 16, 0);
-+	unsigned long encaddr = loadaddr + size + 0x10000;
-+	unsigned long decaddr = encaddr + size + 0x10000;
-+	unsigned char *loadmap = map_sysmem(loadaddr, size);
-+	unsigned char *decmap = map_sysmem(decaddr, size);
-+	unsigned char *encmap = map_sysmem(encaddr, size);
-+
-+	/*
-+	 * Prepare three buffers, $loadadd, $encaddr, $decaddr, and
-+	 * fill them all with random data. Add slight space between
-+	 * the compressed buffer 'encaddr' and uncompressed buffer
-+	 * 'decaddr', because the compressed data with gzip header
-+	 * might be longer than uncompressed source data 'loadaddr',
-+	 * and if the uncompressed data buffer 'decaddr' followed
-+	 * 'encaddr', the decompression could corrupt end of 'encaddr'
-+	 * buffer.
-+	 */
-+
-+	ut_assert(getrandom(loadmap, size, 0) == size);
-+	ut_assert(getrandom(decmap, size, 0) == size);
-+	ut_assert(getrandom(encmap, size, 0) == size);
-+
-+	/* Compress data in $loadaddr into $encaddr */
-+	ut_assertok(run_commandf("zip $loadaddr %zx %zx", size, encaddr));
-+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
-+	ut_assert(strstr(uts->actual_str, "Compressed size: "));
-+
-+	if (gzwrite) {
-+		unsigned int sectsize = DIV_ROUND_UP(size, 512);
-+		u32 crc = crc32(0, loadmap, size);
-+		struct blk_desc *mmc_dev_desc;
-+
-+		ut_assertok(run_commandf("gzwrite mmc 9 %zx $filesize", encaddr));
-+		ut_assert_skip_to_line("\t%zu bytes, crc 0x%08x", size, crc);
-+
-+		ut_asserteq(9, blk_get_device_by_str("mmc", "9", &mmc_dev_desc));
-+		ut_assertok(run_commandf("mmc dev 9"));
-+		ut_assert_nextline("switch to partitions #0, OK");
-+		ut_assert_nextline("mmc9 is current device");
-+
-+		ut_assertok(run_commandf("mmc read %zx 0 %x", decaddr, sectsize));
-+		ut_assert_nextline("MMC read: dev # 9, block # 0, count %u ... %u blocks read: OK",
-+				   sectsize, sectsize);
-+	} else {
-+		/* Decompress data in $encaddr into $decaddr */
-+		ut_assertok(run_commandf("unzip %zx %zx $filesize", encaddr, decaddr));
-+		ut_assert_nextline("Uncompressed size: %zu = 0x%zX", size, size);
-+	}
-+
-+	/* Input data and compressed-decompressed data */
-+	ut_asserteq_mem(loadmap, decmap, size);
-+
-+	ut_assert_console_end();
-+
-+	unmap_sysmem(loadmap);
-+	unmap_sysmem(decmap);
-+	unmap_sysmem(encmap);
-+
-+	return 0;
-+}
-+
-+static int dm_test_cmd_zip_unzip(struct unit_test_state *uts)
-+{
-+	int i, ret;
-+
-+	for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-+		ret = do_test_cmd_zip_unzip(uts, sizes[i], false);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_cmd_zip_unzip, UTF_CONSOLE);
-+
-+static int dm_test_cmd_zip_gzwrite(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	ofnode root, node;
-+	int i, ret;
-+
-+	/* Enable the mmc9 node for this test */
-+	root = oftree_root(oftree_default());
-+	node = ofnode_find_subnode(root, "mmc9");
-+	ut_assert(ofnode_valid(node));
-+	ut_assertok(lists_bind_fdt(gd->dm_root, node, &dev, NULL, false));
-+
-+	for (i = 0; i < ARRAY_SIZE(sizes); i++) {
-+		ret = do_test_cmd_zip_unzip(uts, sizes[i], true);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_cmd_zip_gzwrite, UTF_CONSOLE);
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 6d535b5206d..b7166d59943 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -522,6 +522,12 @@ def test_ut_dm_init(ubman):
-     with open(fn, 'wb') as fh:
-         fh.write(data)
- 
-+    mmc_dev = 9
-+    fn = os.path.join(ubman.config.source_dir, f'mmc{mmc_dev}.img')
-+    data = b'\x00' * (32 * 1024 * 1024)
-+    with open(fn, 'wb') as fh:
-+        fh.write(data)
-+
- 
- def setup_efi_image(ubman):
-     """Create a 20MB disk image with an EFI app on it"""
--- 
-2.51.0
+Simon: You personally are one of the copyright holders I have identified
+whose code is being ripped off by StarFive. Concurrently the
+reverse-engineering of JH-7110 BootROM effort has a sizeable chunk ready
+for peer-review but that is another topic;  there may or may not be
+enough usable there but I think it'd be worth your time to review to
+decide what you would like to do. Contact me off-list for discussion
+about the r/e effort specifically.
 
+-E
