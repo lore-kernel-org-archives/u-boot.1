@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F40B9ECD983
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 15:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16E3FECD981
+	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 15:46:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB11D83CD3;
-	Thu,  5 Feb 2026 16:38:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF3CA83C02;
+	Thu,  5 Feb 2026 16:46:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="POant0/8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PrY8byhg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CC7A83D0B; Thu,  5 Feb 2026 16:38:58 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 753DC83C65; Thu,  5 Feb 2026 16:46:03 +0100 (CET)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED2CF83B95
- for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 16:38:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2032F83B95
+ for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 16:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-408199852c5so1003223fac.0
- for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 07:38:55 -0800 (PST)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-4042905015cso758767fac.0
+ for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 07:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770305934; x=1770910734; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770306360; x=1770911160; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KBrovOuTrEmm7c4vtji5Ent/MRktYbBYlNONTERHaY8=;
- b=POant0/8Z5vMn2bybmaviBS2IRcjEnRSAhDEMDpZE4cAd3u4qGU3Z2w2xbDGf5/A1h
- A/5yrL6XymnlzoziNSvNazUgAQYrqP60WoTbHJkW9gmpAb3IVxQ3v1hQzJmz3fAoRLzW
- soYZVv1KZsUOt2KwI0AjXvL879ucHxroOi59M=
+ bh=0ltfi1iQ8ymnB4ZNhRGIeuK6sYYHNt8Y60RjEKQ7WzE=;
+ b=PrY8byhgFYmbv+ZFpFRimL8en+xkjSnJo0FBZIWZ/j0X4ECa1uJEAVq02bCXvwecjT
+ 7+Gk0/RAmFvUNRk54yZCtZiYdevOimOKyVawaHHVYKMJ6QBUwbpSgKVkeMN97tPL/S8k
+ U/uBJSSWt/YLUJ8JnMEbMjs4SxkD3laDxlBP0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770305934; x=1770910734;
+ d=1e100.net; s=20230601; t=1770306360; x=1770911160;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KBrovOuTrEmm7c4vtji5Ent/MRktYbBYlNONTERHaY8=;
- b=fcr+2qgF7zyrLbP7/AvsuoDMzBVhh6nczVchX/9ehrbaqwW6dQ77Q2bFlO0hD5ZcuV
- ROBJRg40gNh/EWnxZuWNBO3E2R2a8mkBk7DqyHfBMcCtfwhPNsCtSpL3D7A90h8M8ssP
- xvoZGPHRujjfZxMc0sH4/Ex0aUe93QsdiNyvaZL1FCExSamqdRUzrzq/3W//aVh0qSbE
- ZK2d9fwQdoHwUbbzwqvLI9IZhC1MciiLFumuqtz48129Iz2UVDcjBR1CkYQYTRbjIr1w
- D1KY/9eQVc5fxDGUVZMB/ayW6y2DoPG60/AvfhOcAp/cQnyNjvlFlmmP0Hs5mTo79Ihc
- M4AQ==
+ bh=0ltfi1iQ8ymnB4ZNhRGIeuK6sYYHNt8Y60RjEKQ7WzE=;
+ b=H1+ZGqrJ61LNKdgGPWrZhCv3qsjIPSHTDNKYwroO1tSzyFMFLfrAGxFUxVIuAzpUsf
+ 0cXEI/HzbH2FXQwkf9DyvHcDrt2HvXO4bfNhdFx7jFJl22LrFO4ptBv+UYK+9uQ+Y3+u
+ 4Z9HZjSm1raSXcIAAsOlGBUey4VYJ7b9V0zJwvQLf4MtaHGuDR9pMWVvenKRnxk0tBQv
+ /roHCTlUNhGLLHz4lyKohxmlh1pbS+mlVeIaiEnG3os01L7pwTfPRHJcKkiFdnE74Z43
+ w1R9mCj/Ug+IZXAyDjg+SXEknsVhFEsfa58UH+G9PNY/gGLZ3FDXgXWlrLmtCZTSMM0l
+ S2oA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFel18n/Xpg6HH4OHzmZk4FSnDADIQKVODZifDy45nR/sXpJLbrhZTEfYD/oFD99LtEqrXe9g=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9KuBpDKMshpKa3eb3wb1nPsw16+aoWB24dtGA+pP0LkdL2j/X
- 5/qtnNoZJB8ZRAXkRgOB0icNwNJwfjsaNOmQRv4xHnLyzONKwW/3wNqw2iH730Rm0Pw=
-X-Gm-Gg: AZuq6aJ2n1K/JPmBv8SYUin0aKux9TRnAph6EbUK18a0H9yRKJDe4V6LANz655UKcHj
- UhhxdesqRU/GrqMdpUBXIv1V9S3DhFFGsE9TIQrlQdYIJGKABHWL6MYcm5RTHuSZcH8QTtnRJOz
- r52UG6MXusFh7Cqpjl19yvjGWL5ZN2dKr3kJenIpsXzuJ8W++d0kLNI4j4o3F2N0WihNGFNif3n
- DfS59ZibQZOwlTbhwTOf8NLvo59GO9CyX6JUH+fm8BtH7z+YfgwgaYj2FBvel6KAW+iqiB0/EpA
- 2g19EPgxukRlvdxxFUlIfpxw8iwFJN7yKggPms9joUqdkmiBd2Vghtjz/W7ds+2nrfrj8NOsZMn
- YWp/Djebxjq/lRVpjnJeQDSOboPtkrw2uZn0TM7pb+SDcbCIDtsT3qyWmE52bN+OAxBlWUjkpfb
- oZPyYu0BWnKpbabAIxCvmymwUZlw1EntCuIHMsabRsTk7azJGbcVcbPqwBQzfgIWu95BwJqRIZ3
- /QJGHxJx9Qm5phoRWXM7DmfssPhdswKWDS5qWg=
-X-Received: by 2002:a05:6870:90d6:b0:409:4c35:a3ca with SMTP id
- 586e51a60fabf-40a53d5dfb5mr3814126fac.15.1770305934567; 
- Thu, 05 Feb 2026 07:38:54 -0800 (PST)
+ AJvYcCXFdxv/E+Ex3hCIglr2K8i+Ixi2RiRA1byhUbxftOunxXF0vTKrYQ9/4MzzHp4KN5AB9Fh/O5U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw55y+XZb8g6ogwJEHwmeZHj17teokMeySdA1eN+lUzAklkW4TS
+ mQHSTIVOuD8krGiJDvqKT7JMLUHwSp4zuWXLNSPt3K+hocih+rNoROzQlFaYi4eTt8w=
+X-Gm-Gg: AZuq6aK25HbDdm1JGhlAOlSHpb+y0tsw8omRUQo/LTBgZTM7HeNM1UTdvbBUcg8TB7S
+ lOQD0BrH57FsSeVFiHUp56ufOC2BIpc1dEIaAwyoZb43AwHilQL6IQATca8/jB5thtTXIZ7Z3+K
+ 2HVM4GuCq60TIaYvuh8UaD32ARB8P13bOISgev0XmGtZwUXTYI6bQScVsTv+5vCOmCrh8byqyqm
+ lUrc/fnpQAy1qr77SOrpPyTbmwOtOAwk+xmq/Pc47grccafzdonhy4rYvWXDldpqknOSxSsSWxR
+ uPQp0KU2iSdlA5bylVUMPyOBuXu/wAK0jHyeHDghNvbnKYUwUyL5QE6uCUHD/8Q9EvTsufae79U
+ tCZU04arfSN1NijVFPgusQXO3cfP/jdnaQ31maQ8R6tV36G9vtT3+VrhaU11T5R7vf70v4u1lJI
+ YsazBS5TuFUAKOjaWDyBxsXR7gbQbd13tUA0ESFv3x7yhkL0C4ddRH3HKOxgWzdQiYAs3MxWbFh
+ ns++TqSuXvA+qaAG3P1TCsWSR+I2a+TRV+BKwc=
+X-Received: by 2002:a05:6870:2185:b0:409:81eb:cf56 with SMTP id
+ 586e51a60fabf-40a53edf04amr3298813fac.27.1770306359607; 
+ Thu, 05 Feb 2026 07:45:59 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a54489544sm4001122fac.16.2026.02.05.07.38.52
+ 586e51a60fabf-40a62b4700esm3084162fac.7.2026.02.05.07.45.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Feb 2026 07:38:53 -0800 (PST)
-Date: Thu, 5 Feb 2026 09:38:50 -0600
+ Thu, 05 Feb 2026 07:45:58 -0800 (PST)
+Date: Thu, 5 Feb 2026 09:45:55 -0600
 From: Tom Rini <trini@konsulko.com>
 To: alice.guo@oss.nxp.com
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
@@ -93,16 +93,16 @@ Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  Sumit Garg <sumit.garg@kernel.org>,
  Marek Vasut <marex@nabladev.com>, Joseph Guo <qijian.guo@nxp.com>,
  Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v1 10/12] dts: upstream: arm64: freescale: Sync i.MX952
- device tree from Linux
-Message-ID: <20260205153850.GK2603314@bill-the-cat>
+Subject: Re: [PATCH v1 12/12] board: nxp: imx952_evk: Add i.MX952 15x15
+ lpddr4x board support
+Message-ID: <20260205154555.GL2603314@bill-the-cat>
 References: <20260205-imx952-v1-0-2103d0222a0b@nxp.com>
- <20260205-imx952-v1-10-2103d0222a0b@nxp.com>
+ <20260205-imx952-v1-12-2103d0222a0b@nxp.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="URR66cggZsxI5Yq4"
+ protocol="application/pgp-signature"; boundary="OrhcTBi989//5Ses"
 Content-Disposition: inline
-In-Reply-To: <20260205-imx952-v1-10-2103d0222a0b@nxp.com>
+In-Reply-To: <20260205-imx952-v1-12-2103d0222a0b@nxp.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -121,49 +121,121 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---URR66cggZsxI5Yq4
+--OrhcTBi989//5Ses
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 05, 2026 at 09:55:16PM +0800, alice.guo@oss.nxp.com wrote:
+On Thu, Feb 05, 2026 at 09:55:18PM +0800, alice.guo@oss.nxp.com wrote:
 
-> From: Alice Guo <alice.guo@nxp.com>
+> From: Peng Fan <peng.fan@nxp.com>
 >=20
-> Sync i.MX952 device tree files from linux-next next-20260202:
-> - Add imx952.dtsi for SoC
-> - Add imx952-evk.dts for i.MX952 EVK board
-> - Add imx952-*.h headers for clock, pinctrl and power
+> Add support for i.MX952 15x15 lpddr4x board support.
 >=20
-> Imported from linux-next commit 193579fe0138 ("Add linux-next specific
-> ifiles for 20260202")
->=20
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
 > Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
->  dts/upstream/src/arm64/freescale/imx952-clock.h   |  215 ++++
->  dts/upstream/src/arm64/freescale/imx952-evk.dts   |  596 ++++++++++
->  dts/upstream/src/arm64/freescale/imx952-pinfunc.h |  867 ++++++++++++++
->  dts/upstream/src/arm64/freescale/imx952-power.h   |   44 +
->  dts/upstream/src/arm64/freescale/imx952.dtsi      | 1266 +++++++++++++++=
-++++++
->  5 files changed, 2988 insertions(+)
+[snip]
+> +void board_quiesce_devices(void)
+> +{
+> +	int ret;
+> +	struct uclass *uc_dev;
+> +
+> +	ret =3D imx9_scmi_power_domain_enable(PD_HSIO_TOP, false);
+> +	if (ret) {
+> +		printf("%s: Failed for HSIO MIX: %d\n", __func__, ret);
+> +		return;
+> +	}
+> +
+> +	ret =3D imx9_scmi_power_domain_enable(PD_NETC, false);
+> +	if (ret) {
+> +		printf("%s: Failed for NETC MIX: %d\n", __func__, ret);
+> +		return;
+> +	}
+> +
+> +	ret =3D uclass_get(UCLASS_SPI_FLASH, &uc_dev);
+> +	if (uc_dev)
+> +		ret =3D uclass_destroy(uc_dev);
+> +	if (ret)
+> +		printf("couldn't remove SPI FLASH devices\n");
+> +}
 
-This needs to be done (as a series of, if needed)
-tools/update-subtree.sh cherry-pick operations. That gives the right
-commit message format that shows these are changes from upstream.
+Can we instead handle all of this via setting DM_FLAG_OS_PREPARE in
+drivers as needed, so they're properly cleaned / released before OS
+boot?
+
+[snip]
+> diff --git a/doc/board/nxp/imx952_evk.rst b/doc/board/nxp/imx952_evk.rst
+> new file mode 100644
+> index 00000000000..9f20db2403f
+> --- /dev/null
+> +++ b/doc/board/nxp/imx952_evk.rst
+> @@ -0,0 +1,112 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +imx952_evk
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+This will be a doc warning and fail CI, please either push through CI or
+build the docs locally (see doc/build/documentation.rst) with KDOC_WERROR=
+=3D1
+
+[snip]
+> diff --git a/include/configs/imx952_evk.h b/include/configs/imx952_evk.h
+> new file mode 100644
+> index 00000000000..dadc883027f
+> --- /dev/null
+> +++ b/include/configs/imx952_evk.h
+> @@ -0,0 +1,31 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright 2025-2026 NXP
+> + */
+> +
+> +#ifndef __IMX952_EVK_H
+> +#define __IMX952_EVK_H
+> +
+> +#include <linux/sizes.h>
+> +#include <linux/stringify.h>
+> +#include <asm/arch/imx-regs.h>
+> +
+> +#define CFG_SYS_INIT_RAM_ADDR		0x90000000
+> +#define CFG_SYS_INIT_RAM_SIZE		0x200000
+> +
+> +#define CFG_SYS_SDRAM_BASE		0x90000000
+> +#define PHYS_SDRAM			0x90000000
+> +
+> +#define PHYS_SDRAM_SIZE			0x70000000 /* 2GB - 256MB DDR */
+> +#define PHYS_SDRAM_2_SIZE		0x380000000 /* 14GB */
+> +
+> +#define CFG_SYS_SECURE_SDRAM_BASE	0x8A000000 /* Secure DDR region for A5=
+5, SPL could use first 2MB */
+> +#define CFG_SYS_SECURE_SDRAM_SIZE	0x06000000
+> +
+> +#define WDOG_BASE_ADDR			WDG3_BASE_ADDR
+> +
+> +#ifdef CONFIG_ANDROID_SUPPORT
+> +#include "imx952_evk_android.h"
+> +#endif
+
+It's a really bad idea having the board.h file bring in other includes.
+We aren't using SZ macros, and a patch to clean up WDOG_BASE_ADDR so it
+doesn't need to be in the board.h would be a good cleanup to do, but
+maybe for now just make sure the watchdog driver has the regs header
+included?
 
 --=20
 Tom
 
---URR66cggZsxI5Yq4
+--OrhcTBi989//5Ses
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYS5hgAKCRAr4qD1Cr/k
-CudpAQCu6w7EVH8lW7kAsbKrYgquedLGDKJ4X+/motQl0T9wegEAzVBJTE1pA9IF
-4ih9ICOMbPFlMXZoHz5MEf5qDopP+AE=
-=YDte
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYS7MwAKCRAr4qD1Cr/k
+CrjgAQDStT/CdUZDD6Tp1L9lQEWkxhRKEZG9KOYPxzXFENd5LQEAw/FJH/YZ2M/t
+lDopbRNoZNa9w3ux/HhkChainhmP8QU=
+=dUCO
 -----END PGP SIGNATURE-----
 
---URR66cggZsxI5Yq4--
+--OrhcTBi989//5Ses--
