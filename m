@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E04DAEA7950
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 01:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1CA3EA7951
+	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 01:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 199F6839A8;
-	Thu,  5 Feb 2026 02:42:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A9A683A64;
+	Thu,  5 Feb 2026 02:42:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="BQknR+5k";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xO3ZKuAm";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xze+gJMZ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PVA24fCe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A4E0839A8; Thu,  5 Feb 2026 02:42:06 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 274A78063E; Thu,  5 Feb 2026 02:42:08 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E54AB8063E
- for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 02:42:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AD0A8341A
+ for <u-boot@lists.denx.de>; Thu,  5 Feb 2026 02:42:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,48 +30,52 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f60MH45NVz9twS;
- Thu,  5 Feb 2026 02:42:03 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4f60MK5gdvz9tCh;
+ Thu,  5 Feb 2026 02:42:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770255725;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bwgkI4qwNg9hLAjyAQBe4ya40f+2ynltovladp3iGQg=;
+ b=xze+gJMZ4Dj1ls9IHLkzlNR9XCwXqsYsWSabWbFeApCAfIRGFu3W02CsFXWcAjsrRWzdu5
+ nGuYEcD80crx72NmFCCZ9XKc9N5cdghxjPHkdYZZtRVSDh98GwQqNtrtLrgi1dLaWJDz5k
+ ZQc4KWusgPWB+82PmpufLZOT1NVw1amCm542NtVSCbd/TLOzAYTRxjCiverhGufBWXS/fw
+ /UDsXKQEQjm7xadEYkIfBSVhSgJDvqVrcsJm6HlwlJO2bQN0O2AQ2fAJi7oSmB99frqH1F
+ 67uYPnWW4MfyweCr0GNdV0evokfGrGnDjZ8kZOzVjr3Yx5CnGU47sniU9SjxRQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1770255723;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Dap5btjaoBr1aG4DxfHKWzHD9SUF+cVEcFkq1+SEQtg=;
- b=BQknR+5kiWARHTwZvpBw0iRMEM+WqglqTv9f2HFHws/MTQCDDHKx5P7dtBYUA6UwS4LaLj
- E81/wlj9LJMzmmzzF1gwCbCM2/zOYESZglJAZ1xCHC+2FXGGbquOOJAVEC8qN0RITtzrRc
- 40chMEvKoqrV9k92P+yUyU3+1vxDSZND3qmdwaspRMIWrbhYszu40wb7/n43fj86nBE5yg
- F3EudEKIuLvX+U7YqNl5m5uqfoUTD8X43tTf6gGgGF1GiiqQRv+rrzS0Z3bxSsUfFPZUrx
- XC8eB0ZzYjO8hqVzwkBXB9OFVx7dHTHk6JExe5umKS0GNomysW04aaWM/akwRw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770255721;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Dap5btjaoBr1aG4DxfHKWzHD9SUF+cVEcFkq1+SEQtg=;
- b=xO3ZKuAm8LE4m2ZC8FFGPOhuuNs1ahuXoaW0Rd6C2yw4UxCJLX/5cwgTjY/Mcahyg6FY2q
- X2H8hyDoozQjTN943eP2cBj6t6/1C5iy6+UnSwBRSXpTuscLHsx5Q64F1TU5FSHrI2Fxf6
- pBdumfwx8b91ibNFR+VsVQq/4bHrcjXGI49aoVsXvsjUCgaKvP2qH9nitkYUGAEIWU60Wt
- Pw6y2Qo6ghNmi+nu20OspirdwW0JtjxiQNyU4XTw+dCfU04UPIrDojYRFQJp2YXWvOhWKR
- V5S7r2Tg0wg2P8rCrSjrNz7GzDAaMX/AXXx1QV538DQSFIKNyMEnJVyMOu/fNg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bwgkI4qwNg9hLAjyAQBe4ya40f+2ynltovladp3iGQg=;
+ b=PVA24fCe738U3y7QZGp0GGgnzAZMZC2QgP8rZZNae6akK95BpZoszbzpOUdInLGJHT6Sbs
+ HgLDCz/J6CCG8FJPWRunTXbb4Gfk/AgfqYRYQDVMq3iPDtiFRCj8exMVKOyqkDBUdP2Dd3
+ Ju1TeOG0XIZZf4g/40W0drMp+wl7X0F128hk4FmTkr6+Wfp089biqxjdAEmSVS1LIlIk/b
+ Raws8d7oTg9WoCNeSgnC/BO018vRfDnDViI2Dxup7jiP6B6HHKXcLC0QHHZ7eTlJOOyLB7
+ 2K20bCypujaaje6JQj3m2Xx29RrxpzcrnAS5CC+16NJr55VMv9s/j+BiYi1UMw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome@forissier.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>,
  Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-Subject: [PATCH v3 0/2] test: cmd: Add test for zip/unzip/gzwrite commands
-Date: Thu,  5 Feb 2026 02:40:43 +0100
-Message-ID: <20260205014153.218621-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 1/2] configs: sandbox: Enable zip command
+Date: Thu,  5 Feb 2026 02:40:44 +0100
+Message-ID: <20260205014153.218621-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260205014153.218621-1-marek.vasut+renesas@mailbox.org>
+References: <20260205014153.218621-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 840aa6bea39d29f4798
-X-MBO-RS-META: xfu3ggyu9hhjegab8z9dzzwgds7e9ugc
+X-MBO-RS-ID: e0acbf7681e9212f5f6
+X-MBO-RS-META: dgi9jj5s9q9g9eqocu16cxd755p6xdh4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,30 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable zip command in sandbox so it is always build tested.
-Add simple test for zip/unzip/gzwrite commands so they are
-unit tested.
+What is not being built and tested in CI, breaks. Enable the 'zip'
+command in sandbox to get it build tested in preparation for an
+actual unit test.
 
-DEPENDS:
-https://patchwork.ozlabs.org/project/uboot/patch/20260128194049.278542-1-marek.vasut+renesas@mailbox.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20260128194117.278566-1-marek.vasut+renesas@mailbox.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20260128194152.278586-1-marek.vasut+renesas@mailbox.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20260128194226.278605-1-marek.vasut+renesas@mailbox.org/
-
-Marek Vasut (2):
-  configs: sandbox: Enable zip command
-  test: cmd: Add test for zip/unzip/gzwrite commands
-
- arch/sandbox/dts/test.dts   |   7 ++
- common/Kconfig              |   2 +-
- configs/sandbox64_defconfig |   1 +
- configs/sandbox_defconfig   |   1 +
- test/cmd/Makefile           |   3 +
- test/cmd/unzip.c            | 124 ++++++++++++++++++++++++++++++++++++
- test/py/tests/test_ut.py    |   6 ++
- 7 files changed, 143 insertions(+), 1 deletion(-)
- create mode 100644 test/cmd/unzip.c
-
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Alexander Graf <agraf@csgraf.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -126,7 +111,38 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
 Cc: u-boot@lists.denx.de
+---
+V2: No change
+V3: Add RB from Mattijs
+---
+ configs/sandbox64_defconfig | 1 +
+ configs/sandbox_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 440e5efa340..60a30d04875 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -47,6 +47,7 @@ CONFIG_LOOPW=y
+ CONFIG_CMD_MD5SUM=y
+ CONFIG_CMD_MX_CYCLIC=y
+ CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_ZIP=y
+ CONFIG_CMD_BCB=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DEMO=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 92fb5f844b1..f9e3c921d3d 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -75,6 +75,7 @@ CONFIG_CMD_MD5SUM=y
+ CONFIG_CMD_MEM_SEARCH=y
+ CONFIG_CMD_MX_CYCLIC=y
+ CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_ZIP=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DEMO=y
+ CONFIG_CMD_FPGA_LOADP=y
 -- 
 2.51.0
 
