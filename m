@@ -4,174 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F5EEE2084
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 11:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DE2EE2091
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 12:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7E39836D3;
-	Fri,  6 Feb 2026 12:32:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 3C2E5836D3;
+	Fri,  6 Feb 2026 13:48:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZY4ySr3A";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="chUdKipV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC929838FA; Fri,  6 Feb 2026 12:32:01 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 52D70838FA; Fri,  6 Feb 2026 13:48:44 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A04B8352B
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 12:31:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id AE5C08352B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 13:48:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VKsxETplW3fC4M1ZlS0ViMToMYnmwwR4y2/JBCIMwEumY2kQyJ02u7EGPc0FS5hvHAF0NW2HOnmyMkD9rJ3p3xUrOLjAcnjRglYC3IZynrjaOkmPGQ1z33nA0Pd1JmBamIJQw7M535C5wWxaL2n4XTGoE737TR4MhxJlHSewjteQb2Hlfrx2K13Or/FJUQB6KZhAdtK+UnputfaYjPas31ZWedozfnleo8FcZTXmmh6FTxOFCF2oItun9s8EWt9oceCHViymg9RFmtZ7zj1D6jgP2ubxyVjDHS2pZq2e9Qaf8bwVURz1ry7jGCjDBhbOFivBzPdHO+cowUfXPUxKcg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/aDVRl400VD5HuCDhtVuxgQM4QMeP2tFT4ut5U2jG30=;
- b=oPzqs6RWWOKpHuoSwipoEo9WnjJXq8qkui3dYuI4aoWXvCN+jnZRM56hQgI2RyRPTt5BXfSWOQ/11gJD0tOCD7xHX5AUVhJqy+gytB4967Qm0mhgND54lCpZuxALwb0r2mr4Uml4ubhQi5RbIwPczSeHmHDnnAnJQVGPPFZZ2MxxU5BFcyUkTwQ8opXUR4VfiWFhySKMjNei2+bZCzyZLo6DEJ1jCxRyJATL+4zuCmhJDxSPZq7kjAVvJHzBi/l+7f7IwmAsmdWFLuP9ySsz9cXVd0JuxXUlx2YCD2S0b6E4wSr5rDGdnsbx/i/Vb7Ro++2uQWyskdQFxJCQdC61Yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/aDVRl400VD5HuCDhtVuxgQM4QMeP2tFT4ut5U2jG30=;
- b=ZY4ySr3ABzI6qMrlnXnsBkRXafQEvMzUczpHjb8S1mqaJUCir7FRWMxeMaHbFsCDoDzrFjQbIKxRJZ1l5+owLlDEI/O271kZAy6gqqTs0tO/KKzfQMad57siuPs/UbI8ZYl/cTt15yQ4S1hHHkmMvS4IxuM+eyleUMYRXbPlmWM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by MRWPR04MB12278.eurprd04.prod.outlook.com (2603:10a6:501:88::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Fri, 6 Feb
- 2026 11:31:55 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9587.013; Fri, 6 Feb 2026
- 11:31:55 +0000
-Message-ID: <3fc12168-7c48-45e0-986a-79acd9dffeb5@cherry.de>
-Date: Fri, 6 Feb 2026 12:31:28 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] Add a build time parameter to accept custom signing
- key
-To: T Pratham <t-pratham@ti.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Shiva Tripathi <s-tripathi1@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
- Praneeth Bajjuri <praneeth@ti.com>, Andrew Davis <afd@ti.com>,
- Ryan Eatmon <reatmon@ti.com>, Neha Francis <n-francis@ti.com>,
- Anshul Dalal <anshuld@ti.com>
-References: <20260206110439.1236201-1-t-pratham@ti.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260206110439.1236201-1-t-pratham@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0023.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:14::10) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b885e8c6727so439973366b.1
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 04:48:41 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770382121; cv=none;
+ d=google.com; s=arc-20240605;
+ b=BDjx/lYZ8f370fdpeDDVVMhSu07mDnLQqcYXwWUlRl1fuVu7jy+Z44ukHgkPYGJE5h
+ ce/ML+cSYTn+DakEFDvT7PBYTE+bbntNS1bcdgLkFchC/OhdTEHH5Bkd7zvhRB9Z74Q2
+ sWzk0js+idGWqTBK+NWjSTb8GDk+WXB2UwzelHz2vi+oB5oSNUcohAmeldxnHLXu3BaP
+ +RmGx2RO+L5hbKQxJWxR7Ngbp9PzZoDUx9gWAM9yXFFS6q5puWGsIDPybVu2MGphDPzR
+ LKsxSr1gol1pYCMeULITf4Tc2TXZeT9bl2yyxMImgAwq+6its5SXN+6cL7Qm3JhvXHeA
+ mnUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=owmpY+iuyw7UVgsnGNXJRfBysimjCQZkNtsnsIqmjvc=;
+ fh=csLC2/FkJfxKpQDeIZ3tg9f+DYUswWLsDoMr6bnRRsU=;
+ b=RKRGERBjhLODG29HpiLcME5ZpD6mNSgGSY9c2hZJ5eYOjvA+ay38Rk4MZ8SU8IpQjy
+ lCjjvopyfHGoLBl43eqtzymtsGN/yFH4dsz+OrStXh4mSR/T6reLtkXdkqA0DuzJn9lh
+ xocliwzHufnI2elpYM04oSF1jzgfPPF5UzGC3FobCFo96M5fH81bRVOiY8VXtYAB/ncx
+ Zs3oZSyY8/hWLoiR5WCPbHRQC07XH1VurKx2Rv0cvfLULm67HJeGiaoGhGZdk/YGNgv8
+ zLiynAhu0KMw9RcMgrWLcpfCawR05zIe2MDHexvorRtiCy0VqIw6nd0wP+4XBWZgaNxB
+ jgfA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770382121; x=1770986921;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=owmpY+iuyw7UVgsnGNXJRfBysimjCQZkNtsnsIqmjvc=;
+ b=chUdKipVKwchP/4PzzVp1BCeQtLrbLt3zf3Zryd0w/vej0tavpFNuaaGch4pNT4lmc
+ Jjg5KokvK80UPBSNoEWRyFel6b9lVntKVjwRAbSAkUEcfdXF1SP1AnwHeAuKEUholGid
+ Agx2gBy2FcxF/dz2PJiK1ljJx/LJ0EPuW8h6B0zXEYhMb8L/kkXlGc7GBCpv4IpIQAi4
+ oHdKORrHvU+e8tgt5y8tWht2r+TNjXt4j6ao7znS/WcM4tSife+GM/cp2i35k0fY+Y3S
+ rEg/ROvOa3z5HXdYEvikOzkgou3UA85oHRpx0s1AkxChsqrlo7EtGyIHNmKw3lVYL+eD
+ tQhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770382121; x=1770986921;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=owmpY+iuyw7UVgsnGNXJRfBysimjCQZkNtsnsIqmjvc=;
+ b=Gq2yqkz7kxnIHtKAHkr5tpkXjw5KTBz1P5qnbZ4yv+vo1L/Hf9GzYGh5KcC9szAC9I
+ IDFOxaCxlWH5tTZ519PYvejPqfm/Z2QOr4gDAYznLcIpwsKWG2LKlZuWLUTMflQue/Og
+ n52l6uEau480WlCEPvy7/nrTXQF/fcLR7cn6y7WgUh/ih0cJamD5xY7xpPp2CcwWcnth
+ R+UJXj+yMiBryfBDrF+Nhh+oxp8pZY0wlAG8BsOjdVmpr1x4kzifKRa4WcBP+C8vXQw5
+ nrMWPCvBw0FfX16Ub++O1S0Lwfj+vHBasctF0XLhtSEfOVxUO5Ih9WXJtLkWHg5fZfPT
+ VtIw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJk5yxizf7nxWMH+JcKxkSe+cfbZug8ykKTvaByj+xHc6fivmkdBx0tiASM0i1oRdZA9SIXsg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+BRkXY3uImvyb7N/X9vmZ1kOxa0NAPBHF3F8zjSkr2ChdW+44
+ 2y/xP0LOBeYBvlbDeJr7GnUquhOBKlj//4GWnHHM+5632eHo9XexgCAicnXVEUf4jW7SU2wtgMB
+ yRXqhDlKsdErlPglYXAPgsCFLgLXix3ZVFPssruwlXg==
+X-Gm-Gg: AZuq6aLTc4nVsb2ohpg+vTypj05XLn/cd4suz+bmlW7/Ub3Vgzy4Pt2PIx4vglq7pog
+ DOiycwpYfUOsEs0qPjr/HWiwO4gASWGKHZYfCqt7tKhSI4mz1wO0Q1E0CApQfZzOzboEhLQ0TEY
+ MT/uMVJYcjMefSWe7Bl52Tu8oUayn+S/R2W/aN2ppJjb1Ov6CehiYCOs4UgYj3KLc5YiMQeX4xk
+ 1TRvqyIrE299+NrgZuiDxGR1e8eTnV8a3Acdk9qd3BUx5/t+r+lyCs/vtYNje2TWWhT4JdIyJn9
+ DlY1Sjsvi+KHpbc/YhG/y1q14nLF
+X-Received: by 2002:a17:906:794b:b0:b8e:2fc5:c44f with SMTP id
+ a640c23a62f3a-b8edb9b8964mr178340866b.21.1770382120740; Fri, 06 Feb 2026
+ 04:48:40 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|MRWPR04MB12278:EE_
-X-MS-Office365-Filtering-Correlation-Id: fd8a7a29-bed5-4ad4-0d35-08de657354a0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|10070799003|376014|7416014|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?a05PQk50Q2Y2ZkNqYXdFMjFFWTZBRHJINW1WWjVCR0RBVzFRMEdUVWNEbWNM?=
- =?utf-8?B?YWMyblVtbUxhV1FFQXBUOFNLZHBTVTMwUnZUc1kzdjVSZTJkNWlLZG9ZKzVp?=
- =?utf-8?B?elBieldlMVJISXVNRWJhd1NCOVVjN09zbHVpRkhwYWZNczJ0OWdBSExFS1gy?=
- =?utf-8?B?Q0ZwdndoSWRZd2d6TGppZ2o5RzVjc3psb1hzWWVvU3J6ajFDbisrL25FZExq?=
- =?utf-8?B?TDJacHM4bXc4eDBtNmdsQ0NPbjVUdVpQNTIxUGxDY2QrVzl3K01iV3JOaDli?=
- =?utf-8?B?ZEYwcFlOMUxJaGIvNWJQcU1ObGJabUt3UXFSUGN4a1pKNFdyeFdjNVhPUTdE?=
- =?utf-8?B?RUlnd1ZkSzBsQWxSVktnc0R4R3lERGF0eXE3alJub0lqOGFpSTdMMXhhK2I0?=
- =?utf-8?B?SzZUUVZabnFyM2U0SHNMZ3BOUXJ0bWJPZFA3Wnd0Qjg2YTdOYVNPZzVkYmVj?=
- =?utf-8?B?VjlsNW5ub1VJZXg5a1ZZaHNlUWR2cnR3dm5tR0NnV1lsSEMzT2NueHlBWTl2?=
- =?utf-8?B?OVFMODR5OWVXWUt3OWVtdzFRc0JRM2xvM1EvbCttMVZhTkFTanp3RTNrMEkw?=
- =?utf-8?B?UXcyRUlQZGlrdFhzd2lCelA1Tk80VERkSjEvdGI0U2ZqZU5pc1RSd0Z3SHpF?=
- =?utf-8?B?WUsxeS84bHU2RGJpMWFNdk1Ra0k2Uko2SklnUWZpbFh0RlVmenFCRTJGWGlG?=
- =?utf-8?B?WXRBUEEwSlFreXRzU1lhWGpXOTFzamxicjZQZWw4dVZZOWRIQ2Z2Sm04OElB?=
- =?utf-8?B?YzRheGFnSlU3Y1I3Qm1oa0M3eTl4czdtQ1hpcHlSSEZIM0pzYlhoMkk5cnpP?=
- =?utf-8?B?bGFMQ2swelg2cHlDMmY4UGhOZUFCc0NCVXkyMFBKV1hzQmpmTW5ZcUFML0hN?=
- =?utf-8?B?YVVIa0o2cDRiRk5uYlBmblk2aUREN2Fqc0VQbDllMmwzNU5IY0J4dlBROUpl?=
- =?utf-8?B?MEd0d1drZXRKUHoxN3QvUE1oZ2Q1N3p5MGR3czN1UmNUb3JpZlJQOHppcjJE?=
- =?utf-8?B?M2dXQzVnOFMrWWgrMk96OHNmdHFnR0loZ3d4SXhJOGhuWUlZMTdvQ1FKRlFE?=
- =?utf-8?B?OTlzdHlyZjJQbFF6NHJMWlVxU2VVTTg4a05vL1ZkWXNmam9zbFpWSTNDOHhs?=
- =?utf-8?B?MjJvMmczSURRRGtST0lHbFR1c0xhTFFHN3VyWjRVOFNZMW55b0RsV0VWQVNq?=
- =?utf-8?B?RDdIcGMwSThxVDcvdmt6RUlCRFh0a09INERmRFQ0VGtTMTlnQWZ0aVpGVlNW?=
- =?utf-8?B?VmxyNkRiNFpvKzBFcnJWeUtKR1V6a0F4WDcyaklqN2pDY0RIQVV2SjVOVllD?=
- =?utf-8?B?dDQ2TWF2eVZNU3Yzd0NwOTN1RHR0bTZEY2pCTTZKdlNFajlBeE9HajJqaHNF?=
- =?utf-8?B?cis0dlpmQWh1SGRqM21iWkJJMFZQOTVUVjkvMC9LWjZrekk3d01HcXR1SkJo?=
- =?utf-8?B?ODcxS2hQRGp4ZTNPb0ltRTV0M29KY2tBL2d4djUvS1R4TTMxY1FnQlZCM3o4?=
- =?utf-8?B?SjcrYVRzM0hQZHJLRXpHNmJpOTJJdXVaMkRzWmNRMC9DbG1HbTczUkxJQnRK?=
- =?utf-8?B?cXJCQVFoNWxONUx0Y1NYUjFjaEJySGo1K0tsQlB2empQRWY3dTd1RUJkNE5N?=
- =?utf-8?B?aVdsK3pZcWlZdFdQTCswWUpzS0RMTXExS1RmZXlSZXVhSzU3eG5EbmpEc1Ay?=
- =?utf-8?B?RmJqYlhBOW9IazdvWHc2alZaMDdxTnQ4cld0WDc0QlgyWEJKeXZLWElWN3lR?=
- =?utf-8?B?V2cvTVJaU0xaTzc1cVBYL09yR1h5Tm0xKzBIUnBzUTNBdThnSHJrRHNQRC9v?=
- =?utf-8?B?SW10ajdvYXc3ZHRxc0xzR09HVlNNR3NpdFdUQ3hQbGI2ZEY3TWxjdVIwcEN5?=
- =?utf-8?B?eFNZTlFWU0FHczY5OUVoV3lOSnVqb3JPQXhTeWNpb250ejhZZzloaTdqaEw4?=
- =?utf-8?B?czBsWjE5YnVUSzFLMWowZC81RlVjVnMxdW42U1lzRkRCVHpadkxOcCs4N2VZ?=
- =?utf-8?B?amcxV052MkxWNmlHWERRUHFYanNDeld3ZCtWcW9HMDZ3eDkrRHd3NlBReHlz?=
- =?utf-8?B?T0grakhobUREbEk2Z1lYN0tXd0pzd005U0NNNmcvY0xCczVoUDdZcXRWcWEv?=
- =?utf-8?Q?SMi8=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(376014)(7416014)(1800799024)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eEd4MFZoU0JaRkpHS2VCS1BwdGZ2UkhoUU01alh4a1N2ZS9wdTlTUlE5STRT?=
- =?utf-8?B?S0JwN0E1NStQdSt1QWRabDNQWG5GVE5SZnhaR1V5a1BYZDBFK1l2djRZNWln?=
- =?utf-8?B?ZXE4WmJ5b3pvMUhnOWxQdG5HZmJHNmtzdmlRTmROV3hmSHBITVJlcTFQSWNO?=
- =?utf-8?B?ODVqT2VmNzVocjI1NHNFc1hxSFBFL1h1T2hJVzcvTUpXTENOYklXcEVTeXNr?=
- =?utf-8?B?bStqT3BkcjRuUUxUV3FGVkZDV1VmZzRIcnVJckFaQ2h0QVJFa2x6L1RxTm10?=
- =?utf-8?B?Vm9IZ2cwcDQwZzBHSk1wQnlNZzI3SUV0WmROeWRBTkdDU3JBbGlBQ1VxT0k2?=
- =?utf-8?B?RXFGSXdqTXlwanJiaUs3b0xoNVcxM3FUenM1ZFhqcTBwSHdaWFMxYjhNVE81?=
- =?utf-8?B?c09LWHdkTkdhbEJWTkU2T1VPWjJSUFFLZXVsVmhva3VTa0gvMmtub1A3TDNL?=
- =?utf-8?B?dGZXZXMwVEhoR29HSTdvUGpEV1MxM0JhdHNlMk5pZHhFckVNT2lMVGMyZjFv?=
- =?utf-8?B?SzJDbTE4cW1hS3R6WXA1NGVRZVJvSDB2R2lyaERFdVBlYXZuZmd1ZmoyRTUw?=
- =?utf-8?B?UmRUYVN4eHdST0ZRekVBZEJwb2x0WGtadHVWU3JPRHhVYzNVcmVvWk1kT1Rm?=
- =?utf-8?B?L3ZDUWt3RWI4cXRDWmZzR2xYYUMreG9yRkRHcUwyU3RQN0Q1ZFZCSittWTFv?=
- =?utf-8?B?cmZPaXI3WGRmSTE1dFB2Z29NM2xXTkMzY09GOGNZVUtoeGhIT2E5K3hXWGVp?=
- =?utf-8?B?RDkwWmdzcisvaE93N1lTUFlnTVZ1bTk5eC9BTVlabnpWVk1BRWJ0ZjlMOFNX?=
- =?utf-8?B?SGY3d0pOT3JESDdLVEhXcitaZDZEYXdxZDR1M3d1UlNkdTZLTjBHK2lsek9m?=
- =?utf-8?B?c0RWYWRMT1lDWnFsdjJPekk0ZHdERTFhQmNSTzFTQWJQUmhWS2MvRUJ4WVZ5?=
- =?utf-8?B?ekhtVU40MTlGdm1uem80c0Rqb05CZVJYYllDdjJlSTV5U3JmeWZoam0zTENH?=
- =?utf-8?B?ZjZ2c2VyR24ydDljSkV3OFZrbEIybGx3akQvaGFaY0ZHWThPb3J5Wm9BN3Zp?=
- =?utf-8?B?ZGE3Y2t0Um5vdkw3SUhOOWRzS2wzeW9aTklOZFBVbUR3KzBCYVdMb21lMVln?=
- =?utf-8?B?czRaN0NDMnhpZFFjbW5rR0JuanRyU1YrTlFxS1ZFNGRkNUVVcWFyNTlmRWk3?=
- =?utf-8?B?N0hxdTg3ZXFIT09xQWNGOGg1ak1jSlp2SmtHWFZnMTkxdEpjdXRoajRPWWlj?=
- =?utf-8?B?cWpjUjMzV2xDbWhZQzQ3MGR3b01mWEYyd0FHTVRhWWhEckNYTTFpU05UcWJE?=
- =?utf-8?B?SVljUFZpNGxVcG9pY1M3SEZLYWhiRlVaQ3h0TEhnVXRQbThQcUZvTDc2Qjlk?=
- =?utf-8?B?a0N1V3NlNlVLOWJaT29sd1JoVnFpdUR3eUpuSEpjV2NPRXhjZTQ2OFliZENh?=
- =?utf-8?B?WmNUVFFYU214dHo4czUxVUI0SStqVVA3cGZTNkJyaGRlUC9OZGE5ckdQMjF1?=
- =?utf-8?B?c3FCRjNmNEFGYlhaVzRBNHlYbndjS1NBc1lmaVNTR01oL3NCZmtoMWt5QVJY?=
- =?utf-8?B?TUE1V3hiRzViQXNrcjA3d1JXbDRucXBZL2Faa1NaV2ROWnZsWm9ucWt3aE9o?=
- =?utf-8?B?K201cmxGaGlycVp4b0JtVnc0Rm9SUVBERU1rd2JoREN6MnFvUG5QVUdqMFZa?=
- =?utf-8?B?ZTFCd0xGVUlndlI4N3dCN1lQZTNaR2F3Mm1uN1lQcldPV3p4NFlKQXE3Ym01?=
- =?utf-8?B?eGlFdmltb1lFeDY4QzA5aUk3N25sb1RhRHM5Lzh4bkN2Smo3dCtWbGdsZUN6?=
- =?utf-8?B?NGlLWTFkQjFsY1I2Rzc0c2ZVTURYMGE3clNZOGdlK3c0ajZoeWNteU5NYkhZ?=
- =?utf-8?B?SEZ6K1VSWjRXOEdHTEwyY3R0WVZtVUl2TStzT2VIYXJ6TWVBclZLUDh6Z0o5?=
- =?utf-8?B?MjhwVFJLalFvSWtRbC9pVmFCZGxLTmxKRUk3T2hSTG8vMlFqdk5VNHlqcFJp?=
- =?utf-8?B?ZXFzSVQvaWVYQTdzRVMwdXBOdSszTW95SFg4a3JBTXluQ2RsSW91WHFOeERX?=
- =?utf-8?B?RWRVUWlaWVlLSlRwVFBWRCthbFN1S3I2TlRZYVBKbUZWTDBjdzFwSXV4RW94?=
- =?utf-8?B?bkVpMXc5VnlhS3kzRUIrWXd0d1puNk9VQ3p3ZHM3SDAzcXgrbnNjbEdJVUdI?=
- =?utf-8?B?NHVZWEdFOGsxalZCaklaQmxQVFVvU2ZsNFU0WUxOV1pVTExZN2l0Yzg0T0pO?=
- =?utf-8?B?ZENVN09UQ28yWCswV1d6dEwzM0NJbWJWK2tTam5naGtyRWdMQzNxZktGbzgw?=
- =?utf-8?B?TFJqZllndFBxdzMrcjRPQ3A5eGc1eVVQZ3BaTys3MTl3Qyt6SWNxVUdmM09k?=
- =?utf-8?Q?ueMatdUNca77fx4Wf477ZZ2aTMYFaRAVn+3k5?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: fd8a7a29-bed5-4ad4-0d35-08de657354a0
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 11:31:54.9937 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LWsAdTn9EuNimpubQZLLm+e2/zapUnxNHPuL7ctM75nCZ5EDNHwEIpdsI+hDl+E/BkaHJsoy0AMd9MPEU5pReYbKMMb5pILl/iMwuXFC+Qo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRWPR04MB12278
+References: <20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com>
+ <20260205-mtk-mach-clean-up-duplicates-v1-5-b7d4a43c18eb@baylibre.com>
+ <CAEHHSvasBSDP8S+v5qbiAgJdNH9bvLcogi3oh8FJMgpfQ9VAOg@mail.gmail.com>
+In-Reply-To: <CAEHHSvasBSDP8S+v5qbiAgJdNH9bvLcogi3oh8FJMgpfQ9VAOg@mail.gmail.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Fri, 6 Feb 2026 13:48:28 +0100
+X-Gm-Features: AZwV_QjqXWUkQOdp9ywpYME7hH8T1sVfVWP5vjp0r2W-JLjXdUtPhOUxdkOGHEQ
+Message-ID: <CAEHHSvZ2bQy+b7kjO0jZyFEo0e2pYsfA9YxBk2m3DCOrcRu2Gg@mail.gmail.com>
+Subject: Re: [PATCH 5/5] arm: mediatek: consolidate ARMv8 memory maps
+To: David Lechner <dlechner@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,33 +122,526 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi T,
+Le ven. 6 f=C3=A9vr. 2026 =C3=A0 11:07, Julien Stephan <jstephan@baylibre.c=
+om> a =C3=A9crit :
+>
+> Le ven. 6 f=C3=A9vr. 2026 =C3=A0 00:52, David Lechner <dlechner@baylibre.=
+com> a =C3=A9crit :
+> >
+> > Consolidate all mem_map definitions for MediaTek ARMv8 platforms into a
+> > single file. The size of the DDR and MMIO regions can vary, so Kconfig
+> > options are added to configure them by target.
+> >
+> > Signed-off-by: David Lechner <dlechner@baylibre.com>
+> > ---
+> >  arch/arm/mach-mediatek/Kconfig                     | 21 ++++++++++++++=
+++
+> >  arch/arm/mach-mediatek/Makefile                    |  1 +
+> >  .../arm/mach-mediatek/armv8-mem-map.c              | 14 ++++-------
+> >  arch/arm/mach-mediatek/mt7622/init.c               | 20 --------------=
+-
+> >  arch/arm/mach-mediatek/mt7981/init.c               | 21 --------------=
+--
+> >  arch/arm/mach-mediatek/mt7986/init.c               | 21 --------------=
+--
+> >  arch/arm/mach-mediatek/mt7987/init.c               | 21 --------------=
+--
+> >  arch/arm/mach-mediatek/mt7988/init.c               | 21 --------------=
+--
+> >  arch/arm/mach-mediatek/mt8183/init.c               | 20 --------------=
+-
+> >  arch/arm/mach-mediatek/mt8512/init.c               | 21 --------------=
+--
+> >  arch/arm/mach-mediatek/mt8516/init.c               | 20 --------------=
+-
+> >  arch/arm/mach-mediatek/mt8518/init.c               | 21 --------------=
+--
+> >  board/mediatek/mt8365_evk/MAINTAINERS              |  5 ----
+> >  board/mediatek/mt8365_evk/Makefile                 |  3 ---
+> >  board/mediatek/mt8390_evk/MAINTAINERS              |  6 -----
+> >  board/mediatek/mt8390_evk/Makefile                 |  3 ---
+> >  board/mediatek/mt8390_evk/mt8390_evk.c             | 29 --------------=
+--------
+> >  17 files changed, 27 insertions(+), 241 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kc=
+onfig
+> > index d1d2605b2cc..33717a1864f 100644
+> > --- a/arch/arm/mach-mediatek/Kconfig
+> > +++ b/arch/arm/mach-mediatek/Kconfig
+> > @@ -130,6 +130,27 @@ config TARGET_MT8518
+> >
+> >  endchoice
+> >
+> > +if ARM64
+> > +
+> > +config MTK_MEM_MAP_DDR_SIZE
+> > +       hex "DDR .size in mem_map"
+> > +       default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET=
+_MT8188
+> > +       default 0xc0000000 if TARGET_MT8365
+> > +       default 0x80000000 if TARGET_MT7981 || TARGET_MT7986 || TARGET_=
+MT8183
+> > +       default 0x40000000 if TARGET_MT7622 || TARGET_MT8512
+> > +       default 0x20000000
+> > +       help
+> > +               Target-specific DDR region size in mem_map.
+> > +
+> > +config MTK_MEM_MAP_MMIO_SIZE
+> > +       hex "MMIO .size in mem_map"
+> > +       default 0x40000000 if TARGET_MT7622 || TARGET_MT7981 || TARGET_=
+MT7986 || TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8512
+> > +       default 0x20000000
+> > +       help
+> > +               Target-specific MMIO region size in mem_map.
+> > +
+> > +endif
+> > +
+> >  config SYS_BOARD
+> >         string "Board name"
+> >         default "mt7622" if TARGET_MT7622
+> > diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/M=
+akefile
+> > index 44591bed6fa..17e645989e5 100644
+> > --- a/arch/arm/mach-mediatek/Makefile
+> > +++ b/arch/arm/mach-mediatek/Makefile
+> > @@ -1,5 +1,6 @@
+> >  # SPDX-License-Identifier:     GPL-2.0
+> >
+> > +obj-$(CONFIG_ARM64) +=3D armv8-mem-map.o
+> >  obj-y  +=3D cpu.o
+> >  obj-$(CONFIG_MTK_TZ_MOVABLE)   +=3D tzcfg.o
+> >  obj-$(CONFIG_XPL_BUILD)        +=3D spl.o
+> > diff --git a/board/mediatek/mt8365_evk/mt8365_evk.c b/arch/arm/mach-med=
+iatek/armv8-mem-map.c
+> > similarity index 55%
+> > rename from board/mediatek/mt8365_evk/mt8365_evk.c
+> > rename to arch/arm/mach-mediatek/armv8-mem-map.c
+> > index 41a6febf03d..0abddb99f25 100644
+> > --- a/board/mediatek/mt8365_evk/mt8365_evk.c
+> > +++ b/arch/arm/mach-mediatek/armv8-mem-map.c
+> > @@ -1,22 +1,18 @@
+> > -// SPDX-License-Identifier: GPL-2.0
+> > -/*
+> > - * Copyright (C) 2023 BayLibre SAS
+> > - * Author: Julien Masson <jmasson@baylibre.com>
+> > - */
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> >
+> >  #include <asm/armv8/mmu.h>
+> >
+> > -static struct mm_region mt8365_evk_mem_map[] =3D {
+> > +static struct mm_region mediatek_mem_map[] =3D {
+> >         {
+> >                 /* DDR */
+> >                 .virt =3D 0x40000000UL,
+> >                 .phys =3D 0x40000000UL,
+> > -               .size =3D 0xc0000000UL,
+> > +               .size =3D CONFIG_MTK_MEM_MAP_DDR_SIZE,
+> >                 .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> >         }, {
+> >                 .virt =3D 0x00000000UL,
+> >                 .phys =3D 0x00000000UL,
+> > -               .size =3D 0x20000000UL,
+> > +               .size =3D CONFIG_MTK_MEM_MAP_MMIO_SIZE,
+> >                 .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> >                          PTE_BLOCK_NON_SHARE |
+> >                          PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > @@ -25,4 +21,4 @@ static struct mm_region mt8365_evk_mem_map[] =3D {
+> >         }
+> >  };
+> >
+> > -struct mm_region *mem_map =3D mt8365_evk_mem_map;
+> > +struct mm_region *mem_map =3D mediatek_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt7622/init.c b/arch/arm/mach-media=
+tek/mt7622/init.c
+> > index 368f2916224..a043ca87398 100644
+> > --- a/arch/arm/mach-mediatek/mt7622/init.c
+> > +++ b/arch/arm/mach-mediatek/mt7622/init.c
+> > @@ -36,23 +36,3 @@ void reset_cpu(void)
+> >  {
+> >         psci_system_reset();
+> >  }
+> > -
+> > -static struct mm_region mt7622_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -struct mm_region *mem_map =3D mt7622_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt7981/init.c b/arch/arm/mach-media=
+tek/mt7981/init.c
+> > index 07da5897190..79afd6ce6be 100644
+> > --- a/arch/arm/mach-mediatek/mt7981/init.c
+> > +++ b/arch/arm/mach-mediatek/mt7981/init.c
+> > @@ -30,24 +30,3 @@ void reset_cpu(void)
+> >  {
+> >         psci_system_reset();
+> >  }
+> > -
+> > -static struct mm_region mt7981_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x80000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt7981_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt7986/init.c b/arch/arm/mach-media=
+tek/mt7986/init.c
+> > index a521c95bd9d..1fe56b3f145 100644
+> > --- a/arch/arm/mach-mediatek/mt7986/init.c
+> > +++ b/arch/arm/mach-mediatek/mt7986/init.c
+> > @@ -30,24 +30,3 @@ void reset_cpu(void)
+> >  {
+> >         psci_system_reset();
+> >  }
+> > -
+> > -static struct mm_region mt7986_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x80000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt7986_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt7987/init.c b/arch/arm/mach-media=
+tek/mt7987/init.c
+> > index 8b268297809..6364ab497f7 100644
+> > --- a/arch/arm/mach-mediatek/mt7987/init.c
+> > +++ b/arch/arm/mach-mediatek/mt7987/init.c
+> > @@ -39,24 +39,3 @@ void reset_cpu(ulong addr)
+> >  {
+> >         psci_system_reset();
+> >  }
+> > -
+> > -static struct mm_region mt7987_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x200000000ULL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt7987_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt7988/init.c b/arch/arm/mach-media=
+tek/mt7988/init.c
+> > index 8bdd3848d26..7ff843585ec 100644
+> > --- a/arch/arm/mach-mediatek/mt7988/init.c
+> > +++ b/arch/arm/mach-mediatek/mt7988/init.c
+> > @@ -38,24 +38,3 @@ void reset_cpu(ulong addr)
+> >  {
+> >         psci_system_reset();
+> >  }
+> > -
+> > -static struct mm_region mt7988_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x200000000ULL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt7988_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt8183/init.c b/arch/arm/mach-media=
+tek/mt8183/init.c
+> > index b445f3ea1e3..8dbf9c3df7e 100644
+> > --- a/arch/arm/mach-mediatek/mt8183/init.c
+> > +++ b/arch/arm/mach-mediatek/mt8183/init.c
+> > @@ -47,23 +47,3 @@ int print_cpuinfo(void)
+> >         printf("CPU:   MediaTek MT8183\n");
+> >         return 0;
+> >  }
+> > -
+> > -static struct mm_region mt8183_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x80000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x20000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -struct mm_region *mem_map =3D mt8183_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt8512/init.c b/arch/arm/mach-media=
+tek/mt8512/init.c
+> > index 3b48caf5196..361c589cbc2 100644
+> > --- a/arch/arm/mach-mediatek/mt8512/init.c
+> > +++ b/arch/arm/mach-mediatek/mt8512/init.c
+> > @@ -59,24 +59,3 @@ int print_cpuinfo(void)
+> >         debug("CPU:   MediaTek MT8512\n");
+> >         return 0;
+> >  }
+> > -
+> > -static struct mm_region mt8512_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x40000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt8512_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt8516/init.c b/arch/arm/mach-media=
+tek/mt8516/init.c
+> > index 82f8c509745..1d925dd478a 100644
+> > --- a/arch/arm/mach-mediatek/mt8516/init.c
+> > +++ b/arch/arm/mach-mediatek/mt8516/init.c
+> > @@ -94,23 +94,3 @@ int print_cpuinfo(void)
+> >         printf("CPU:   MediaTek MT8516\n");
+> >         return 0;
+> >  }
+> > -
+> > -static struct mm_region mt8516_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x20000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x20000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -struct mm_region *mem_map =3D mt8516_mem_map;
+> > diff --git a/arch/arm/mach-mediatek/mt8518/init.c b/arch/arm/mach-media=
+tek/mt8518/init.c
+> > index c04bcb63517..8fa1346021a 100644
+> > --- a/arch/arm/mach-mediatek/mt8518/init.c
+> > +++ b/arch/arm/mach-mediatek/mt8518/init.c
+> > @@ -51,24 +51,3 @@ int print_cpuinfo(void)
+> >         printf("CPU:   MediaTek MT8518\n");
+> >         return 0;
+> >  }
+> > -
+> > -static struct mm_region mt8518_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x20000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x20000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt8518_mem_map;
+> > diff --git a/board/mediatek/mt8365_evk/MAINTAINERS b/board/mediatek/mt8=
+365_evk/MAINTAINERS
+> > deleted file mode 100644
+> > index e0d65efe812..00000000000
+> > --- a/board/mediatek/mt8365_evk/MAINTAINERS
+> > +++ /dev/null
+>
+> Hi David,
+>
+> You are removing board/mediatek/mt8365_evk directory (and mt8390_evk
+> below), so you left mt8365_evk_defconfig (and mt8365_evk_defconfig)
+> without any entries in MAINTAINERS files.
+> So maybe we should add them to the MAINTAINERS file at the root directory=
+?
+>
+> Also, if there is no more board directory for these boards, I think we
+> should remove CONFIG_SYS_BOARD=3D"mt8365_evk" and
+> CONFIG_SYS_BOARD=3D"mt8390_evk"  from their respective defconfig file,
+> as it should be empty if no board directory exist.
 
-On 2/6/26 12:04 PM, T Pratham wrote:
-> [You don't often get email from t-pratham@ti.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> This series adds support to use a custom key provided via Make during
-> build for signing the bootloader binaries, and updates the k3-binman to
-> use it.
-> 
+I forgot but we should also unset CONFIG_BOARD_INIT in defconfig for
+these boards, otherwise we end up with undefined reference to
+`board_init'
 
-Can't you use the same mechanism we have for adding the pubkey to the 
-SPL DTB (see tools/binman/etype/u_boot_spl_pubkey_dtb.py)?
+Cheers
+Julien
 
-We use key-name-hint property which is a key filename without the .crt 
-extension, you don't necessarily need to reuse this (but I think it 
-makes sense) but sharing the logic for finding the key seems more 
-interesting to me.
-
-We try to find the key with tools.get_input_filename(self._key_name_hint 
-+ ".crt"). The paths that are traversed can be specified with 
-BINMAN_INDIRS. This should help with not having to add yet another 
-variable. Set allow_missing to True and if it returns None, then use the 
-key listed in the filename property?
-
-Also, is there really a need for separate binman image just for keys? 
-Can't you have ti-secure/ti-secure-rom use key-name-hint directly to 
-avoid yet another binman entry?
-
-Cheers,
-Quentin
+>
+> I also notice that board/mediatek/{mt7620/mt621/mt7628} only contain
+> the MAINTAINERS file, without any board specific code. Maybe we can
+> take the opportunity to clean them as part of this series?
+>
+> Cheers
+> Julien
+>
+> > @@ -1,5 +0,0 @@
+> > -MT8365 EVK
+> > -M:     Julien Masson <jmasson@baylibre.com>
+> > -S:     Maintained
+> > -F:     board/mediatek/mt8365_evk/
+> > -F:     configs/mt8365_evk_defconfig
+> > diff --git a/board/mediatek/mt8365_evk/Makefile b/board/mediatek/mt8365=
+_evk/Makefile
+> > deleted file mode 100644
+> > index 90fc92b28c5..00000000000
+> > --- a/board/mediatek/mt8365_evk/Makefile
+> > +++ /dev/null
+> > @@ -1,3 +0,0 @@
+> > -# SPDX-License-Identifier:     GPL-2.0
+> > -
+> > -obj-y +=3D mt8365_evk.o
+> > diff --git a/board/mediatek/mt8390_evk/MAINTAINERS b/board/mediatek/mt8=
+390_evk/MAINTAINERS
+> > deleted file mode 100644
+> > index d46b8b2e156..00000000000
+> > --- a/board/mediatek/mt8390_evk/MAINTAINERS
+> > +++ /dev/null
+> > @@ -1,6 +0,0 @@
+> > -MT8390 EVK
+> > -M:     Julien Masson <jmasson@baylibre.com>
+> > -M:     Macpaul Lin <Macpaul.Lin@mediatek.com>
+> > -S:     Maintained
+> > -F:     board/mediatek/mt8390_evk/
+> > -F:     configs/mt8390_evk_defconfig
+> > diff --git a/board/mediatek/mt8390_evk/Makefile b/board/mediatek/mt8390=
+_evk/Makefile
+> > deleted file mode 100644
+> > index a26d46838c4..00000000000
+> > --- a/board/mediatek/mt8390_evk/Makefile
+> > +++ /dev/null
+> > @@ -1,3 +0,0 @@
+> > -# SPDX-License-Identifier:     GPL-2.0
+> > -
+> > -obj-y +=3D mt8390_evk.o
+> > diff --git a/board/mediatek/mt8390_evk/mt8390_evk.c b/board/mediatek/mt=
+8390_evk/mt8390_evk.c
+> > deleted file mode 100644
+> > index 5731199bf83..00000000000
+> > --- a/board/mediatek/mt8390_evk/mt8390_evk.c
+> > +++ /dev/null
+> > @@ -1,29 +0,0 @@
+> > -// SPDX-License-Identifier: GPL-2.0
+> > -/*
+> > - * Copyright (C) 2026 BayLibre SAS
+> > - * Author: Julien Masson <jmasson@baylibre.com>
+> > - */
+> > -
+> > -#include <linux/types.h>
+> > -#include <asm/armv8/mmu.h>
+> > -
+> > -static struct mm_region mt8390_evk_mem_map[] =3D {
+> > -       {
+> > -               /* DDR */
+> > -               .virt =3D 0x40000000UL,
+> > -               .phys =3D 0x40000000UL,
+> > -               .size =3D 0x200000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
+ER_SHARE,
+> > -       }, {
+> > -               .virt =3D 0x00000000UL,
+> > -               .phys =3D 0x00000000UL,
+> > -               .size =3D 0x20000000UL,
+> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> > -                        PTE_BLOCK_NON_SHARE |
+> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> > -       }, {
+> > -               0,
+> > -       }
+> > -};
+> > -
+> > -struct mm_region *mem_map =3D mt8390_evk_mem_map;
+> >
+> > --
+> > 2.43.0
+> >
