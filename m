@@ -4,150 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12664EE208C
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 11:05:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F5EEE2084
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 11:32:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6904383B95;
-	Fri,  6 Feb 2026 12:05:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B7E39836D3;
+	Fri,  6 Feb 2026 12:32:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pXU24yPP";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZY4ySr3A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12C0283AAD; Fri,  6 Feb 2026 12:05:30 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id DC929838FA; Fri,  6 Feb 2026 12:32:01 +0100 (CET)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F19B8352B
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 12:05:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A04B8352B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 12:31:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=t-pratham@ti.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NLvh8WJgRdBapYI2yjoE+3vRGE8oYjPLJMeVqbzpZgjIJhOjYMnJVHfn8F+0gycCAeOE/lbqLxU2YSXX53dfOXGLAG1s3mWc7iO+AfwzZWY3lzK2JVuJiEF2fUke56iYiZ8fG/cgVErSGGQALCmx48XibY+1KjhKRfC9/DB9vlpHHz04AemvzvxrwEhZH7PiOXiYsI5OMxbG1PhuhdAWeraLjZt57DgNeyk/E1dIBoRrHScy3paXJTxF72/eawEKNYn5OHaiGUv27U8KetJmUFmOYLg33SBECxOvTbqxF1AEgOLAbLARxI9NfsF+sF/a6b9JTBfJBajrW8oB4Bg/kw==
+ b=VKsxETplW3fC4M1ZlS0ViMToMYnmwwR4y2/JBCIMwEumY2kQyJ02u7EGPc0FS5hvHAF0NW2HOnmyMkD9rJ3p3xUrOLjAcnjRglYC3IZynrjaOkmPGQ1z33nA0Pd1JmBamIJQw7M535C5wWxaL2n4XTGoE737TR4MhxJlHSewjteQb2Hlfrx2K13Or/FJUQB6KZhAdtK+UnputfaYjPas31ZWedozfnleo8FcZTXmmh6FTxOFCF2oItun9s8EWt9oceCHViymg9RFmtZ7zj1D6jgP2ubxyVjDHS2pZq2e9Qaf8bwVURz1ry7jGCjDBhbOFivBzPdHO+cowUfXPUxKcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RCMAotRWKFHQZx8f7CyWdmenIk1Xw+mt2pgxCwf9L34=;
- b=TcQ7KZozurKr7TRTfviBtDsgCP2DID120q6M6kHfO/S4rNLKNg178b2/p2NZ4xLOEKTkRvcGFpnL47Q/rO7FVzOXUMSs2GGX1DHGU/Pb5Im3ZWszKxDSPXDtxgjeW0JGJUIbGuw0aOLnbY1+QYAdxe3dXrnHvVMHkKtNLyXMkfCi2PUzrzIbiDoXulX4TwjvjDUTIrrpCtPcKer1BYbHDGNNVYF671wptmQPVWMzB/Wpv8IwGryevOVN+/oXDh7QakYD0BgsRxX5PaEk68CVHxsjB/Gpishduo67bxOPsXw+VSXWj2Shb6qM8bFL/8GT9QNCA7DX9bnc4cF5/6k9HA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=/aDVRl400VD5HuCDhtVuxgQM4QMeP2tFT4ut5U2jG30=;
+ b=oPzqs6RWWOKpHuoSwipoEo9WnjJXq8qkui3dYuI4aoWXvCN+jnZRM56hQgI2RyRPTt5BXfSWOQ/11gJD0tOCD7xHX5AUVhJqy+gytB4967Qm0mhgND54lCpZuxALwb0r2mr4Uml4ubhQi5RbIwPczSeHmHDnnAnJQVGPPFZZ2MxxU5BFcyUkTwQ8opXUR4VfiWFhySKMjNei2+bZCzyZLo6DEJ1jCxRyJATL+4zuCmhJDxSPZq7kjAVvJHzBi/l+7f7IwmAsmdWFLuP9ySsz9cXVd0JuxXUlx2YCD2S0b6E4wSr5rDGdnsbx/i/Vb7Ro++2uQWyskdQFxJCQdC61Yw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RCMAotRWKFHQZx8f7CyWdmenIk1Xw+mt2pgxCwf9L34=;
- b=pXU24yPPjJF1svgJ7mQ0teSsxhsTBI4pbkR0dSFwScMiEtKMkbcaGmWSxQDUZBj1UhZK1hMCYwoWsXDSuMY4h3nA9QIp0RE8g6AwMkdSYt3E++Ic24Eo21OBnHqvANmlEwU6FStjTE+5EOHH0/PYuvCLyEzDL4fQVVuPuX2pZzQ=
-Received: from MN2PR11CA0005.namprd11.prod.outlook.com (2603:10b6:208:23b::10)
- by PH0PR10MB997643.namprd10.prod.outlook.com (2603:10b6:510:384::10)
+ bh=/aDVRl400VD5HuCDhtVuxgQM4QMeP2tFT4ut5U2jG30=;
+ b=ZY4ySr3ABzI6qMrlnXnsBkRXafQEvMzUczpHjb8S1mqaJUCir7FRWMxeMaHbFsCDoDzrFjQbIKxRJZ1l5+owLlDEI/O271kZAy6gqqTs0tO/KKzfQMad57siuPs/UbI8ZYl/cTt15yQ4S1hHHkmMvS4IxuM+eyleUMYRXbPlmWM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by MRWPR04MB12278.eurprd04.prod.outlook.com (2603:10a6:501:88::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.15; Fri, 6 Feb
- 2026 11:05:25 +0000
-Received: from BL6PEPF0001AB57.namprd02.prod.outlook.com
- (2603:10b6:208:23b:cafe::85) by MN2PR11CA0005.outlook.office365.com
- (2603:10b6:208:23b::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Fri,
- 6 Feb 2026 11:05:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL6PEPF0001AB57.mail.protection.outlook.com (10.167.241.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 11:05:24 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Feb
- 2026 05:05:23 -0600
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Feb
- 2026 05:05:22 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 6 Feb 2026 05:05:22 -0600
-Received: from pratham-Workstation-PC (pratham-workstation-pc.dhcp.ti.com
- [10.24.69.191])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 616B5L1n686932;
- Fri, 6 Feb 2026 05:05:22 -0600
-From: T Pratham <t-pratham@ti.com>
-To: <u-boot@lists.denx.de>
-CC: T Pratham <t-pratham@ti.com>, Shiva Tripathi <s-tripathi1@ti.com>, "Vishal
- Mahaveer" <vishalm@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
- Andrew Davis
- <afd@ti.com>, Ryan Eatmon <reatmon@ti.com>, Neha Francis <n-francis@ti.com>,
- Anshul Dalal <anshuld@ti.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] arm: dts: k3-binman: update custMpk to use
- signing-key-path node
-Date: Fri, 6 Feb 2026 16:34:39 +0530
-Message-ID: <20260206110439.1236201-3-t-pratham@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260206110439.1236201-1-t-pratham@ti.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Fri, 6 Feb
+ 2026 11:31:55 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9587.013; Fri, 6 Feb 2026
+ 11:31:55 +0000
+Message-ID: <3fc12168-7c48-45e0-986a-79acd9dffeb5@cherry.de>
+Date: Fri, 6 Feb 2026 12:31:28 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] Add a build time parameter to accept custom signing
+ key
+To: T Pratham <t-pratham@ti.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Shiva Tripathi <s-tripathi1@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
+ Praneeth Bajjuri <praneeth@ti.com>, Andrew Davis <afd@ti.com>,
+ Ryan Eatmon <reatmon@ti.com>, Neha Francis <n-francis@ti.com>,
+ Anshul Dalal <anshuld@ti.com>
 References: <20260206110439.1236201-1-t-pratham@ti.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260206110439.1236201-1-t-pratham@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0023.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:14::10) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB57:EE_|PH0PR10MB997643:EE_
-X-MS-Office365-Filtering-Correlation-Id: 53a77ffc-c7e3-493c-24bd-08de656fa0f1
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|MRWPR04MB12278:EE_
+X-MS-Office365-Filtering-Correlation-Id: fd8a7a29-bed5-4ad4-0d35-08de657354a0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FinnvTCoiCh/d2/mFRn/YNulC1WOi0kwznkIa0WZi4K57q3AZU+6JnHDgn9N?=
- =?us-ascii?Q?FHzNxDd1FB9Dg7nsMTQDXArDbB9iA5N+KDry6dFr0s1COJyO1N2MgY2NJ7fe?=
- =?us-ascii?Q?OIjWsGuL1fGQsrRt8HZmGe0K9Wa3rNLtBem9Upo6Q+MgQ0MKdfroUwEdOJr0?=
- =?us-ascii?Q?iUP101SlPC+JWl0sSktCmigN6ho2hTJKbKIVf6M8Hd8WM3856c7eL1ugmm83?=
- =?us-ascii?Q?YKWIIpmgDXMgMmpn9OcD3kX4DbwVeuZMt6yBoWoxnp1NLf2AeUGOqw11B8aP?=
- =?us-ascii?Q?tjVrrLRFsUngxKFlnjCqg9S4cq2EwOCt2GIxjIJb9/XfI4vaaE4VqLplbzAi?=
- =?us-ascii?Q?zza9gWbrflU+ga1XTFhdBV3L4qtyp8gXWmUH8BqUVbLum7wBFYyNyx0La71H?=
- =?us-ascii?Q?FCEbok6y7jHL1r2HV8sRVGG7RKnSrNTjU8Re+AxaI2uv8OSnGZuOIBhAZIh7?=
- =?us-ascii?Q?KkMaXenFSYEzPsmjGmqcHV2yOOv3FnBSNEEeGqFMXGUwYMuOufml8ICLbwZb?=
- =?us-ascii?Q?zUWhRgSzzkTd9I5oaYV1Yv2A17AURMQIPbpsb+H5/zxPXEu2/lQjxMNRvkmC?=
- =?us-ascii?Q?R48tslJ1/5lPnFRLse9Ls7xusLIIhepA65Hesj6w3rUuqXhw7lYlCitz0QNH?=
- =?us-ascii?Q?tLy5Y6G5aUljOXHojnASaqTWJ06UUlNN3PcEWcIi3lsW8q2QgbAjX2FFWD9x?=
- =?us-ascii?Q?k8HczboQhRjqJvQFBy1kKaQhKmt6n4JEHqyRO/ViDcGnIsrM/VX/2DERfHEf?=
- =?us-ascii?Q?jdykeHyBuxRqJ3nyHIY6qfXSq6ZzMP55Nh6C5VkBZMVCVzTvaL1etMcsJ9b2?=
- =?us-ascii?Q?eWsNKkYy2ZezkKgPL2MOfQi2YBfQ4kVyU813q1zyZp26ImyivbQxaAbSsxx/?=
- =?us-ascii?Q?eBvraJny3CRlVNVSIxlY1L3EMRP9OKt7UfDKNp/Sg+DB5gVQbxLDsxK/kPhP?=
- =?us-ascii?Q?XUSim5cziYFaTahUKb9c9rjfWmCoAek4MdwsoSYmQwi4GgMt/3VvOXmr+URz?=
- =?us-ascii?Q?psW5BJFPLUy2e6PBjKIOsfz85VyCYdzZahmwYelrA/+eEB9MQ/S9D+GV05fj?=
- =?us-ascii?Q?rjndRgszUnls5XYf5XGMetF9B+8T8H52oJ6WoHxw6trZoFTadEFPEGCmTaVn?=
- =?us-ascii?Q?vcN+2ezWDpTDD2iFm2sPntA8g78y1owQGJasdiGm5EhEOCDYvXkyEsMa0ZsL?=
- =?us-ascii?Q?QA3e69p/by9lXIdWWj41uspQeYPEB242Tyo/Zx8ZaEyGJbqhpe/XmeT6hFa9?=
- =?us-ascii?Q?2P6bG96e+zX9Etm+ch2ZPc2qbYdbXcJlJdZqDpPcMFdvYgDmlYlW9tO8GghQ?=
- =?us-ascii?Q?xrcduSEM12vFJVbNObP/H32pE90/oYs/yEfWQHacUBU9kFzhHt6PTfZZRXgC?=
- =?us-ascii?Q?G7ouPQFcGfI3Qt0WPV8dreZQ4X2K9e5RrZAfNQeWS/tWYJ/Hw62fqrSAYSWa?=
- =?us-ascii?Q?+PYI1k526dtWgKfitYmcvCjnlgWSBhYa+tmhnz7j5tdpooJGO6XGX/zXPcV5?=
- =?us-ascii?Q?wutXXSnUOi/1oKlaqZJjUrkr+3M0FoP4b5Bt1JDMPm0b0jDTYnujnRO8sl7z?=
- =?us-ascii?Q?88W+iOeZO5nV5Pea3cBCeRAF+C1BZkJIfzib65ll2gv8N5pC5wumgnPIXw8r?=
- =?us-ascii?Q?B0+odduWagD3M1nrgLEvbAD9OqA9bHLWdiE79Md9lABmcagqQeqS8AfgPO5q?=
- =?us-ascii?Q?7uPxpA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);
+ ARA:13230040|366016|10070799003|376014|7416014|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?a05PQk50Q2Y2ZkNqYXdFMjFFWTZBRHJINW1WWjVCR0RBVzFRMEdUVWNEbWNM?=
+ =?utf-8?B?YWMyblVtbUxhV1FFQXBUOFNLZHBTVTMwUnZUc1kzdjVSZTJkNWlLZG9ZKzVp?=
+ =?utf-8?B?elBieldlMVJISXVNRWJhd1NCOVVjN09zbHVpRkhwYWZNczJ0OWdBSExFS1gy?=
+ =?utf-8?B?Q0ZwdndoSWRZd2d6TGppZ2o5RzVjc3psb1hzWWVvU3J6ajFDbisrL25FZExq?=
+ =?utf-8?B?TDJacHM4bXc4eDBtNmdsQ0NPbjVUdVpQNTIxUGxDY2QrVzl3K01iV3JOaDli?=
+ =?utf-8?B?ZEYwcFlOMUxJaGIvNWJQcU1ObGJabUt3UXFSUGN4a1pKNFdyeFdjNVhPUTdE?=
+ =?utf-8?B?RUlnd1ZkSzBsQWxSVktnc0R4R3lERGF0eXE3alJub0lqOGFpSTdMMXhhK2I0?=
+ =?utf-8?B?SzZUUVZabnFyM2U0SHNMZ3BOUXJ0bWJPZFA3Wnd0Qjg2YTdOYVNPZzVkYmVj?=
+ =?utf-8?B?VjlsNW5ub1VJZXg5a1ZZaHNlUWR2cnR3dm5tR0NnV1lsSEMzT2NueHlBWTl2?=
+ =?utf-8?B?OVFMODR5OWVXWUt3OWVtdzFRc0JRM2xvM1EvbCttMVZhTkFTanp3RTNrMEkw?=
+ =?utf-8?B?UXcyRUlQZGlrdFhzd2lCelA1Tk80VERkSjEvdGI0U2ZqZU5pc1RSd0Z3SHpF?=
+ =?utf-8?B?WUsxeS84bHU2RGJpMWFNdk1Ra0k2Uko2SklnUWZpbFh0RlVmenFCRTJGWGlG?=
+ =?utf-8?B?WXRBUEEwSlFreXRzU1lhWGpXOTFzamxicjZQZWw4dVZZOWRIQ2Z2Sm04OElB?=
+ =?utf-8?B?YzRheGFnSlU3Y1I3Qm1oa0M3eTl4czdtQ1hpcHlSSEZIM0pzYlhoMkk5cnpP?=
+ =?utf-8?B?bGFMQ2swelg2cHlDMmY4UGhOZUFCc0NCVXkyMFBKV1hzQmpmTW5ZcUFML0hN?=
+ =?utf-8?B?YVVIa0o2cDRiRk5uYlBmblk2aUREN2Fqc0VQbDllMmwzNU5IY0J4dlBROUpl?=
+ =?utf-8?B?MEd0d1drZXRKUHoxN3QvUE1oZ2Q1N3p5MGR3czN1UmNUb3JpZlJQOHppcjJE?=
+ =?utf-8?B?M2dXQzVnOFMrWWgrMk96OHNmdHFnR0loZ3d4SXhJOGhuWUlZMTdvQ1FKRlFE?=
+ =?utf-8?B?OTlzdHlyZjJQbFF6NHJMWlVxU2VVTTg4a05vL1ZkWXNmam9zbFpWSTNDOHhs?=
+ =?utf-8?B?MjJvMmczSURRRGtST0lHbFR1c0xhTFFHN3VyWjRVOFNZMW55b0RsV0VWQVNq?=
+ =?utf-8?B?RDdIcGMwSThxVDcvdmt6RUlCRFh0a09INERmRFQ0VGtTMTlnQWZ0aVpGVlNW?=
+ =?utf-8?B?VmxyNkRiNFpvKzBFcnJWeUtKR1V6a0F4WDcyaklqN2pDY0RIQVV2SjVOVllD?=
+ =?utf-8?B?dDQ2TWF2eVZNU3Yzd0NwOTN1RHR0bTZEY2pCTTZKdlNFajlBeE9HajJqaHNF?=
+ =?utf-8?B?cis0dlpmQWh1SGRqM21iWkJJMFZQOTVUVjkvMC9LWjZrekk3d01HcXR1SkJo?=
+ =?utf-8?B?ODcxS2hQRGp4ZTNPb0ltRTV0M29KY2tBL2d4djUvS1R4TTMxY1FnQlZCM3o4?=
+ =?utf-8?B?SjcrYVRzM0hQZHJLRXpHNmJpOTJJdXVaMkRzWmNRMC9DbG1HbTczUkxJQnRK?=
+ =?utf-8?B?cXJCQVFoNWxONUx0Y1NYUjFjaEJySGo1K0tsQlB2empQRWY3dTd1RUJkNE5N?=
+ =?utf-8?B?aVdsK3pZcWlZdFdQTCswWUpzS0RMTXExS1RmZXlSZXVhSzU3eG5EbmpEc1Ay?=
+ =?utf-8?B?RmJqYlhBOW9IazdvWHc2alZaMDdxTnQ4cld0WDc0QlgyWEJKeXZLWElWN3lR?=
+ =?utf-8?B?V2cvTVJaU0xaTzc1cVBYL09yR1h5Tm0xKzBIUnBzUTNBdThnSHJrRHNQRC9v?=
+ =?utf-8?B?SW10ajdvYXc3ZHRxc0xzR09HVlNNR3NpdFdUQ3hQbGI2ZEY3TWxjdVIwcEN5?=
+ =?utf-8?B?eFNZTlFWU0FHczY5OUVoV3lOSnVqb3JPQXhTeWNpb250ejhZZzloaTdqaEw4?=
+ =?utf-8?B?czBsWjE5YnVUSzFLMWowZC81RlVjVnMxdW42U1lzRkRCVHpadkxOcCs4N2VZ?=
+ =?utf-8?B?amcxV052MkxWNmlHWERRUHFYanNDeld3ZCtWcW9HMDZ3eDkrRHd3NlBReHlz?=
+ =?utf-8?B?T0grakhobUREbEk2Z1lYN0tXd0pzd005U0NNNmcvY0xCczVoUDdZcXRWcWEv?=
+ =?utf-8?Q?SMi8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(10070799003)(376014)(7416014)(1800799024)(7053199007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: P/9PJJM0s2q9/himnFRpi++iUDRJtK/zc6q4r0gXPU9hXHJ4HIQMCKEXLJgAPYhrJsZ5iefdGdTRlEpaFsmuEPTq2ruJf28/ISo45omo8ye6L+l98xXdiKMx147kuZR/Xz09O1Q+aQPR8ag5gr/r4rxFVdihMHWFPzFkE8FTfKmkLQ3jZot7ofuPLA6M2ncR08uonoN6cGucLwRG+RWvCslg/Ve33t9kZ4mwEUelfmQ7JSRItW923BjESmq7mTep2nMSHXgu+CpTy9Um/VZPgWE5+hIBggL5Nv1TUyAoOgDCt7YFHP7IlBsc8FmgUZ6X9chUvUVWBr80rxiMLc2oDNXX3iTmihyNeIWv7EKJmVlBY+FqfwGspzsmWvYhHi0cW31g/08zSlUElNWONjwOe0uGiVzNR0VcslA+r/HkMocY5REAfE0c3Ghr61d1++QE
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 11:05:24.7935 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 53a77ffc-c7e3-493c-24bd-08de656fa0f1
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB57.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB997643
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eEd4MFZoU0JaRkpHS2VCS1BwdGZ2UkhoUU01alh4a1N2ZS9wdTlTUlE5STRT?=
+ =?utf-8?B?S0JwN0E1NStQdSt1QWRabDNQWG5GVE5SZnhaR1V5a1BYZDBFK1l2djRZNWln?=
+ =?utf-8?B?ZXE4WmJ5b3pvMUhnOWxQdG5HZmJHNmtzdmlRTmROV3hmSHBITVJlcTFQSWNO?=
+ =?utf-8?B?ODVqT2VmNzVocjI1NHNFc1hxSFBFL1h1T2hJVzcvTUpXTENOYklXcEVTeXNr?=
+ =?utf-8?B?bStqT3BkcjRuUUxUV3FGVkZDV1VmZzRIcnVJckFaQ2h0QVJFa2x6L1RxTm10?=
+ =?utf-8?B?Vm9IZ2cwcDQwZzBHSk1wQnlNZzI3SUV0WmROeWRBTkdDU3JBbGlBQ1VxT0k2?=
+ =?utf-8?B?RXFGSXdqTXlwanJiaUs3b0xoNVcxM3FUenM1ZFhqcTBwSHdaWFMxYjhNVE81?=
+ =?utf-8?B?c09LWHdkTkdhbEJWTkU2T1VPWjJSUFFLZXVsVmhva3VTa0gvMmtub1A3TDNL?=
+ =?utf-8?B?dGZXZXMwVEhoR29HSTdvUGpEV1MxM0JhdHNlMk5pZHhFckVNT2lMVGMyZjFv?=
+ =?utf-8?B?SzJDbTE4cW1hS3R6WXA1NGVRZVJvSDB2R2lyaERFdVBlYXZuZmd1ZmoyRTUw?=
+ =?utf-8?B?UmRUYVN4eHdST0ZRekVBZEJwb2x0WGtadHVWU3JPRHhVYzNVcmVvWk1kT1Rm?=
+ =?utf-8?B?L3ZDUWt3RWI4cXRDWmZzR2xYYUMreG9yRkRHcUwyU3RQN0Q1ZFZCSittWTFv?=
+ =?utf-8?B?cmZPaXI3WGRmSTE1dFB2Z29NM2xXTkMzY09GOGNZVUtoeGhIT2E5K3hXWGVp?=
+ =?utf-8?B?RDkwWmdzcisvaE93N1lTUFlnTVZ1bTk5eC9BTVlabnpWVk1BRWJ0ZjlMOFNX?=
+ =?utf-8?B?SGY3d0pOT3JESDdLVEhXcitaZDZEYXdxZDR1M3d1UlNkdTZLTjBHK2lsek9m?=
+ =?utf-8?B?c0RWYWRMT1lDWnFsdjJPekk0ZHdERTFhQmNSTzFTQWJQUmhWS2MvRUJ4WVZ5?=
+ =?utf-8?B?ekhtVU40MTlGdm1uem80c0Rqb05CZVJYYllDdjJlSTV5U3JmeWZoam0zTENH?=
+ =?utf-8?B?ZjZ2c2VyR24ydDljSkV3OFZrbEIybGx3akQvaGFaY0ZHWThPb3J5Wm9BN3Zp?=
+ =?utf-8?B?ZGE3Y2t0Um5vdkw3SUhOOWRzS2wzeW9aTklOZFBVbUR3KzBCYVdMb21lMVln?=
+ =?utf-8?B?czRaN0NDMnhpZFFjbW5rR0JuanRyU1YrTlFxS1ZFNGRkNUVVcWFyNTlmRWk3?=
+ =?utf-8?B?N0hxdTg3ZXFIT09xQWNGOGg1ak1jSlp2SmtHWFZnMTkxdEpjdXRoajRPWWlj?=
+ =?utf-8?B?cWpjUjMzV2xDbWhZQzQ3MGR3b01mWEYyd0FHTVRhWWhEckNYTTFpU05UcWJE?=
+ =?utf-8?B?SVljUFZpNGxVcG9pY1M3SEZLYWhiRlVaQ3h0TEhnVXRQbThQcUZvTDc2Qjlk?=
+ =?utf-8?B?a0N1V3NlNlVLOWJaT29sd1JoVnFpdUR3eUpuSEpjV2NPRXhjZTQ2OFliZENh?=
+ =?utf-8?B?WmNUVFFYU214dHo4czUxVUI0SStqVVA3cGZTNkJyaGRlUC9OZGE5ckdQMjF1?=
+ =?utf-8?B?c3FCRjNmNEFGYlhaVzRBNHlYbndjS1NBc1lmaVNTR01oL3NCZmtoMWt5QVJY?=
+ =?utf-8?B?TUE1V3hiRzViQXNrcjA3d1JXbDRucXBZL2Faa1NaV2ROWnZsWm9ucWt3aE9o?=
+ =?utf-8?B?K201cmxGaGlycVp4b0JtVnc0Rm9SUVBERU1rd2JoREN6MnFvUG5QVUdqMFZa?=
+ =?utf-8?B?ZTFCd0xGVUlndlI4N3dCN1lQZTNaR2F3Mm1uN1lQcldPV3p4NFlKQXE3Ym01?=
+ =?utf-8?B?eGlFdmltb1lFeDY4QzA5aUk3N25sb1RhRHM5Lzh4bkN2Smo3dCtWbGdsZUN6?=
+ =?utf-8?B?NGlLWTFkQjFsY1I2Rzc0c2ZVTURYMGE3clNZOGdlK3c0ajZoeWNteU5NYkhZ?=
+ =?utf-8?B?SEZ6K1VSWjRXOEdHTEwyY3R0WVZtVUl2TStzT2VIYXJ6TWVBclZLUDh6Z0o5?=
+ =?utf-8?B?MjhwVFJLalFvSWtRbC9pVmFCZGxLTmxKRUk3T2hSTG8vMlFqdk5VNHlqcFJp?=
+ =?utf-8?B?ZXFzSVQvaWVYQTdzRVMwdXBOdSszTW95SFg4a3JBTXluQ2RsSW91WHFOeERX?=
+ =?utf-8?B?RWRVUWlaWVlLSlRwVFBWRCthbFN1S3I2TlRZYVBKbUZWTDBjdzFwSXV4RW94?=
+ =?utf-8?B?bkVpMXc5VnlhS3kzRUIrWXd0d1puNk9VQ3p3ZHM3SDAzcXgrbnNjbEdJVUdI?=
+ =?utf-8?B?NHVZWEdFOGsxalZCaklaQmxQVFVvU2ZsNFU0WUxOV1pVTExZN2l0Yzg0T0pO?=
+ =?utf-8?B?ZENVN09UQ28yWCswV1d6dEwzM0NJbWJWK2tTam5naGtyRWdMQzNxZktGbzgw?=
+ =?utf-8?B?TFJqZllndFBxdzMrcjRPQ3A5eGc1eVVQZ3BaTys3MTl3Qyt6SWNxVUdmM09k?=
+ =?utf-8?Q?ueMatdUNca77fx4Wf477ZZ2aTMYFaRAVn+3k5?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: fd8a7a29-bed5-4ad4-0d35-08de657354a0
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 11:31:54.9937 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LWsAdTn9EuNimpubQZLLm+e2/zapUnxNHPuL7ctM75nCZ5EDNHwEIpdsI+hDl+E/BkaHJsoy0AMd9MPEU5pReYbKMMb5pILl/iMwuXFC+Qo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRWPR04MB12278
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,29 +188,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the custMpk node in binman to use signing-key-path to use a
-custom key provided for signing bootloader images. In case the
-SIGNING_KEY argument is not provided during build, fallback to the
-example key in U-boot arch/arm/mach-k3/keys/custMpk.pem
+Hi T,
 
-Signed-off-by: T Pratham <t-pratham@ti.com>
----
- arch/arm/dts/k3-binman.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 2/6/26 12:04 PM, T Pratham wrote:
+> [You don't often get email from t-pratham@ti.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> This series adds support to use a custom key provided via Make during
+> build for signing the bootloader binaries, and updates the k3-binman to
+> use it.
+> 
 
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 761b1730464..51404513561 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -14,7 +14,7 @@
- &binman {
- 	custMpk {
- 		filename = "custMpk.pem";
--		custmpk_pem: blob-ext {
-+		signing-key-path {
- 			filename = "arch/arm/mach-k3/keys/custMpk.pem";
- 		};
- 	};
--- 
-2.34.1
+Can't you use the same mechanism we have for adding the pubkey to the 
+SPL DTB (see tools/binman/etype/u_boot_spl_pubkey_dtb.py)?
 
+We use key-name-hint property which is a key filename without the .crt 
+extension, you don't necessarily need to reuse this (but I think it 
+makes sense) but sharing the logic for finding the key seems more 
+interesting to me.
+
+We try to find the key with tools.get_input_filename(self._key_name_hint 
++ ".crt"). The paths that are traversed can be specified with 
+BINMAN_INDIRS. This should help with not having to add yet another 
+variable. Set allow_missing to True and if it returns None, then use the 
+key listed in the filename property?
+
+Also, is there really a need for separate binman image just for keys? 
+Can't you have ti-secure/ti-secure-rom use key-name-hint directly to 
+avoid yet another binman entry?
+
+Cheers,
+Quentin
