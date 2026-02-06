@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DA2BEE6B44
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 18:16:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 064D2EE6B43
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 18:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E95383C4B;
-	Fri,  6 Feb 2026 19:15:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C80E083B8F;
+	Fri,  6 Feb 2026 19:15:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oEN3DC2z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R+ZiRRip";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60530836D3; Fri,  6 Feb 2026 19:15:29 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 95FA483C54; Fri,  6 Feb 2026 19:15:30 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B675836D3
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 19:15:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64B9083B86
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 19:15:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-45c9f47e1e8so902939b6e.0
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 10:15:27 -0800 (PST)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-45f09874c4cso1636418b6e.3
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 10:15:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770401726; x=1771006526; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770401727; x=1771006527; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m2VqsYTEjQzrSCCJ9j3NBltU2e/jpqody8IVvyv53Qg=;
- b=oEN3DC2zry6xr6WYN84mUcVNwi1ggKWCcJCUkrKCEhS6uQ1xot+OhuceCm3TtukIIB
- zzBVTr9P1ixRc8fkBIs+zaB7TjfPAt3I9WsfVBJnGysscoNKZib2k5A8G2w80NJHvuQP
- Wc1naDLpsI1xcAf6D7Q4YT09vmEjnKIZv87ok=
+ bh=DJ+FyY+3dQ0yxhan7jE9RzMldixqoLQnYBM3UaRA5OM=;
+ b=R+ZiRRipB5Vb9hHaPVFR3eiYg18AIgxvbQ3Ng4n1xcbkzwr85JgMPEOFmHKxmvGvgM
+ MrM05pS8yNgBG5A4/SW2lYr7+4n7wKDU2gnjY36CpgBraBAO18Up+DFKHfpFnctBQkGN
+ tsO1TXf8zK9UienqQFagcpne/v5TpzavgccdA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770401726; x=1771006526;
+ d=1e100.net; s=20230601; t=1770401727; x=1771006527;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=m2VqsYTEjQzrSCCJ9j3NBltU2e/jpqody8IVvyv53Qg=;
- b=MKscccAwryvqJdIIBExb2ekVCwbWQlUhHeoDABQ/YtcJRfKjMd64fYZi5wXK2++Pk/
- XP2hCkAgu8HvA0btz245hZtPk7nWCdNR9Atut+VJRNS77Wf32Th88mmiF3SMp84lsQSu
- MEQkhD66D3/O9ogxChaIPBVZ3YYLlPWk/NCSaIOVGHlF27Im2I7OqUC2oVwjBpRWU6Wg
- SqLykGcYVg4so2TQAwzBjiivCyVSpFddGH/GVgwt3f73u29S9/wm5cu1yr1EsdCuHmDS
- +xBSduz/wBB8JQDyl0PWVtExSJgFkQRj/mPhxnMi0O7n3Jg889ZhFcfbb9HYBKfEy08D
- qo9Q==
-X-Gm-Message-State: AOJu0YxEll/P9jBMqPeJ3w65pM3akBsHvdGH5Tmi8LX0vZzqzOizeMDB
- VpsgLcEjBJv+GnwtdUDhihSb8pBqU5QZpImH+52cX4YxmyRQjV5OcwM96uM5CIlA1us=
-X-Gm-Gg: AZuq6aKYcKDeA7/6PB+aWaRaIGWZIp0NzjfduJ60PPiqrwXQ0G7NJS7lwHnzkOJN5+h
- V/pDfMsIPkyJtHu/zlByM3lCl3vy1XyqSTlUp7mJemke1Pspv5lg9BAkEMPMe6Aw9ulLK41Z8rP
- ZqAEmZLeSbuJDIm1XPwoLXF7IkLalGofuv0GoYKoFo+OZVrLxojhGiS8TwaQi1uUAucdvWRpPjJ
- /euMdoCnDAZUDlTTHYHIFhywk/Ikazw0JOivog+miw2qET0K1sgUkbu+5dHd9oiW1cQYb447Xvz
- 2ZQ1JMeZicEe0eBz7n4NMYRp8DXUk9FgInHWLCkMigTSwaIw6jav2ENf+398UMaBln/fdiFEYMg
- pI85FjF6E1hk5AgdMXSGyLD4u2AjuRw4+/Bof4q1WzMKMeItPyYCf5v2PNhp2kv39t0of8eFwcu
- hxYOcIk5HSQWCDGsMQQVf2GsI1vETArykBaltGVfYinCesErzNY/8nqldBNxtWY+1t3AJXOkYmb
- GRXZ70VwBQFDvhwBtNnHFDxzuWHefDgAoaMkw==
-X-Received: by 2002:a05:6808:182a:b0:450:92f9:1ba1 with SMTP id
- 5614622812f47-462fcb86046mr1623431b6e.67.1770401726033; 
- Fri, 06 Feb 2026 10:15:26 -0800 (PST)
+ bh=DJ+FyY+3dQ0yxhan7jE9RzMldixqoLQnYBM3UaRA5OM=;
+ b=gwfpumTSzRznjY8ht5ehfvX0TcvxZQoiDIw4vnLP3gzfPuuhm25O4wH819AobwxXKO
+ jHVyyBUo5nW/jwCKmaJydQe0nuri1NV2n/jxE9KIvjRe1og+mzEcUSVALEmyHGZxd8r4
+ j+9mAmYLWITNNcJ7f4c+PMKGK+lw46umCkxKuRsEc1TH7XoMeHudAsbGFpWLLQ5q5TnM
+ KJhEKZQxatZkatn/WO1KxHLnVZ98+gw1+rHWhX5cHnHLoqTWWJ2smAXCKtUOeL100NkM
+ UeAEaTNu49gcPSnI9/4SxxwQV0f+iXNA+Vj90fhLFTq9fWTtKzCGhPrcORIpXg+32VgJ
+ 7D3w==
+X-Gm-Message-State: AOJu0YyKVBTTLKm8k8PizOMiJ8WaoMnc+7VsgFeEjx8IpeNF9Qi5YxVq
+ rYrDiC0rvIAMUIvbq9Uy170N9cuvH8VFVoPUCBgjsiGOn7elB+ejR/1pNbQN3WV67ls=
+X-Gm-Gg: AZuq6aLkfhJ2HUDnO71+C3wpts7aZh5ktGDMy9C6Fzs3LW5b8t1MkG9lBMaV+hK4IU2
+ 9KFU2PfWMQw19sSCMmwTm7OAadXvfuOnM0V28NiddbkO0mrcQsqggXW8hC9oRJiKkxf2/Xe/h97
+ O8zhACLk0YNEQL3e5CLZEWN7OgLigkp155sTfE1DBHWxjRVz7n/sY2rp5Q+26i7/1rw7qNU9cde
+ K6sbALFkVJZpCEiX5JKw1yok234Mesy6UbgjHqM+7TUPqA0miAuv5e48twqpAxA28vDoOellQUG
+ E2zJmPvGDeBW4Y9flH//OMZeV75Tr+wfbIsCcWOFWoOMFtTasIXVS3H9Byk4pEjNjmFHB8ozLkx
+ 0ZGyPt8+hM5Elsnu4sKdrRSCAWntGTlODRQ4QosstyGUhnL9+p4srbgPbZBX7L5cYUk/0DPacm2
+ qTBQQ1GfcSSkb9GBs/ffEfI+ZUQ8CmssJIFCZaNsGOsGBBSgOd1Ip+cuZ6bgQt+PA0e61/212Rw
+ in8sf8TXyYE88THAtnC1W8atzI4AgrE2i9DpDLrmlvZLQuk
+X-Received: by 2002:a05:6808:1507:b0:450:6eb0:3481 with SMTP id
+ 5614622812f47-462fcad610fmr1483479b6e.43.1770401727214; 
+ Fri, 06 Feb 2026 10:15:27 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d470914a1bsm97426a34.27.2026.02.06.10.15.24
+ 46e09a7af769-7d470914a1bsm97426a34.27.2026.02.06.10.15.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Feb 2026 10:15:25 -0800 (PST)
+ Fri, 06 Feb 2026 10:15:26 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Alexander Graf <agraf@csgraf.de>, 
@@ -78,12 +78,12 @@ Cc: Alexander Graf <agraf@csgraf.de>,
  Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>, 
  Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>, 
  Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260128194152.278586-1-marek.vasut+renesas@mailbox.org>
-References: <20260128194152.278586-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2] cmd: zip: Use map_sysmem() with buffers in the zip
- command
-Message-Id: <177040172492.4023747.15012505785220812780.b4-ty@konsulko.com>
-Date: Fri, 06 Feb 2026 12:15:24 -0600
+In-Reply-To: <20260128194226.278605-1-marek.vasut+renesas@mailbox.org>
+References: <20260128194226.278605-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] cmd: zip: Add missing unmap_sysmem() for buffers in
+ the unzip command
+Message-Id: <177040172617.4023747.14247474898125493445.b4-ty@konsulko.com>
+Date: Fri, 06 Feb 2026 12:15:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,21 +104,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Jan 2026 20:41:30 +0100, Marek Vasut wrote:
+On Wed, 28 Jan 2026 20:42:03 +0100, Marek Vasut wrote:
 
-> The current implementation casts an address to a pointer. Make it more
-> sandbox-friendly by using map_sysmem().
+> Unmap the sysmem that got mapped by this command.
 > 
 > Use symbolic return value for the command while updating
 > the return value handling.
 > 
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] cmd: zip: Use map_sysmem() with buffers in the zip command
-      commit: 3a76ba66ecb65b892de8b16360a8b0e93415f712
+[1/1] cmd: zip: Add missing unmap_sysmem() for buffers in the unzip command
+      commit: 109e378e9ba791b8dffaf86aa043f20d41d2adaf
 -- 
 Tom
 
