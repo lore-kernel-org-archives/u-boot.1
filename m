@@ -4,135 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A310EE6B49
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 18:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B69C4EE6B48
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 19:06:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B861D83A64;
-	Fri,  6 Feb 2026 19:32:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id E479D838FA;
+	Fri,  6 Feb 2026 20:06:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="n4QM1sx1";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RFgOryUm";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gm6X2iiF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14D6183AA7; Fri,  6 Feb 2026 19:32:50 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 5D84D83AA7; Fri,  6 Feb 2026 20:06:46 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDD62836D3
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 19:32:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 296DE836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 20:06:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1770402765; x=1771007565; i=xypron.glpk@gmx.de;
- bh=cK9DIOpV0EWXtVBUBRjeluo2akm3eQX9GNtVLs9rsgw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=n4QM1sx12wwqumg4Skyk+d2YlnMswXIz06Y31hHUNBbjoq8dC54H/j9GiUKSTU/J
- lstCSRO+Hpc2wQNTKpBHl9itaOfwzLJdiluH3I4IalOEvQwWkRqz0qv9fjHwn6+rc
- 0nlG8TdkMM4Sf1dsMJR1cU/BxwXXgADs+oEVo7Lcog48B2Za+xnmhMEQtYSx6OHGg
- 50zBb1su5o7flLY6je1RWvJOKzaVHVU7l33zm6lAvBj8xGWc88IVOpEnw8osxzYlg
- YkIl8fuvYm971ydXHaa3iHh/AJUHSBf2F+HDuxYCvaL96fPDRdBltfCiOVqcmXUQI
- rjrHkoK7TSdkLzY0Eg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MFbRm-1w28Yd2MSk-00596e; Fri, 06
- Feb 2026 19:32:45 +0100
-Message-ID: <32ebd3f3-6ce8-4be2-ada8-9edb25f42bcb@gmx.de>
-Date: Fri, 6 Feb 2026 19:32:44 +0100
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f73VC5JWRz9tyY;
+ Fri,  6 Feb 2026 20:06:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770404803;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=MGwt7RBti+R2g5R1u4UvH1wZiaavwFnFY5Mam0GLk7k=;
+ b=RFgOryUmBk24PwtbFXPFiysrh3LB+5293/g2OEW8/T9bTG5R3exLbcCSp1K2mUhvzDTb/+
+ /0bihendq5XlJVsoGBPRjOmUq4UaINKZ2ujiNLdkiQT9PmSlCy5V3NYEGNCp77dbvfFaWK
+ D0gq3u/W2jAsA4nhvqHd5NAHYmctXrfQOANbJ81CXmtAjNd4ruT6uLWjTvfWD2GKzJ7MKU
+ 8u2+zMgEhW9AyiHwR6UIca4bBfRgTzJ/S3VhMdJjeFpOem9sctLe4PgHcojpa5ZnJLjYew
+ d9EbbnPTUyd6cC0xn+X27Ocx8cmR0ep5h6F5eUZOJ2l/vszzBNn0nESrm2J+8w==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=gm6X2iiF;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Content-Type: multipart/mixed; boundary="------------7ISqgIZ8NEcV5g5JvMzS00W3"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770404801;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=MGwt7RBti+R2g5R1u4UvH1wZiaavwFnFY5Mam0GLk7k=;
+ b=gm6X2iiFhkNAX96/bh8racL8kPh3PrK+rDPP8akbmLe1vWlwADSr1Puio0vyF4nOeyJjxB
+ H70EpUo777ITg99K11spWx4wkaONecM00d7x3vhq3W1pY0WTvmXXdfxvlhFImdx5xvNBvZ
+ BhCE19JNmvcfEAs3qknNgrJuDAUDFUOoFf0wFDgx0jhqln17+CNch7awTWnK/G2VDKpg9I
+ SKkcTG9vCTmL9T3j4TBP65u+Z8fC9Cx5LooV6RqDgBSpnEH8I/sLqD6yVJYR4GxwWzoFda
+ 2UlfGYdmX1d3XDwJPB9y+AjagO5O8+SQjF8rQgk0W3Nc0BdTpZevGRUqXu0MqA==
+Message-ID: <9e498de5-d114-485e-840e-1395e153edc3@mailbox.org>
+Date: Fri, 6 Feb 2026 20:06:38 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] boot: image-fit: Add runtime flag to always relocate
+ overlays
+To: Jamie Gibbons <jamie.gibbons@microchip.com>, u-boot@lists.denx.de
+Cc: Conor Dooley <conor.dooley@microchip.com>,
+ Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>,
+ Leo <ycliang@andestech.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Cyril Jean <cyril.jean@microchip.com>
+References: <20260206151457.4104515-1-jamie.gibbons@microchip.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Pranav Tilak <pranav.vinaytilak@amd.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2026-04-rc2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:634sKD4Xg3qzc5QPy57ChKJKBRCBG32aomaXyAa8reHD5x9R2mX
- 7rMFkZi5/WaElq59OhYX7NZDbgBIVDwrsKv0LrcWiMRNxr4zlpJUVd38cw6HNzrn2VKmBAx
- i4ui5cKLCBn9IjAy7XTySZJOj2VkY/5MdrnpGYr1DkDLJdWBaMRAAXsx6HZiy+shI8KPE0J
- h9sGXQrxERwOEsQoTLPVg==
-UI-OutboundReport: notjunk:1;M01:P0:e3n+dcrGFTY=;PBza2/31R8x41ZGmWhs54FNNA3G
- b35zMeGdaJ5WtjakF7WGj1RHNn/iQBbEaP/c+eMx189YKONjyI5thv4Mfzd3aMJbGUN6+xJMo
- +s00/QSp9F/FCuhm8Ut2eD5X1SY3tCsvaNMhe2l4xtPYNqpyaoSmJyLqV2JGS18QtTSSfWCSL
- o/dxRWW2E3Q26nLuj5hN7X4je64/YGx/kLfHYwFkIlSEo8wKsdRc78XJ5eqpyx/IN/5s7/4ZW
- ivCpm8jP5jEbBjLwOATurlS/1/wVYL/THZpmft+z7sE754aqKxwXMXA6Th795P7n+/kLlhJeB
- Zkjivp9gK+sPhqoo5JznVtXPIkicHKamMC3TecZ2DotA64YOUHFHteRusXZ7GFHAq2dKs9eyT
- OeP76Dsg++6Nc0ai/Q60BcuqEYqZrxMl+Ke+TA4uSYjKInALk6DprvPPAMCY6tMJ1R1U2NqZM
- V6vj5x7p311hpOObVL074Ja0IjGG63BrQz5sM0jc25rG0+/reZHVtj2/32ztwoSf5YieuNbik
- gUan7nzmaa0pkmKVug68MdZ84k59B3caw8qMzuDmIuIx9m2pRWLxRCNvldkwztsTB8E/BuVqK
- ZbLiR2u5ZppCzglxDInzQj7pPsJNC/TD2GX4EU2sYDeHGVkurAOCsXux8fyi4hn7qx/UGG9LK
- ppvIi25bMN7mXqjOXU0rh6Vgi04K2kXhpm0Q3UeueD8IRKcP3ukHUYk+xmzJFvfp6E2Nl7/Fw
- T6WMJmCgDwH+HlT6vM8izLLJhO4jOvxSSej19+qvbhdBv/o2QQy1js8XfsKtGS/cFf5iht9Vh
- OiW2RhdGHJn1HYJRS0E1QBsr+svoLPNH/vP1nGd7zNNLPFfHDW23fl4JK5NYZ8ANDoVdxxnpQ
- OgSWHTx8E8OcqphVnZIdNINO3wOL/NvwLx5G7R7acy9cxCfJReszNq+XlBar7g1rGB9DFvQK5
- JtGCIKeOK89z2QpLU5Sw//gVgnHrcY3VpIy50nsEun/qyJF1xtGHD7GOvMTJB/omAAExNscuY
- Lh7nghvk7W5wahv2z6KsmdAbqInRfjKNj9qapeUcb2G19jgsyuuuBCEdo8GQ1DTJoj/MxiQGY
- 8p1pi/TEKWsa03gxrykeBmNumkhVJ7oEs8AXGSJWT23yn2VozJ1Xew3izoulNYkWqp24SUqDi
- orNQsx2B5oczkZm1NwRZCD5oYJhHm/bSzI6/Gdcz3lFZjZy75hHRa4rzOoMlxwDu/yOVWpbmf
- d+Wci69aFWO9CT4/R4xBRL0GQkSZCOZL+y6SOh9QHTDNBj+NfV7OigRmmkfCG4eV6/zVbT72K
- Iol6ho65ys6kOauW2a6y17B6zh3fL8eU2vOw9rCbnE8iObywFCFEgitwkt1rj3V1COYyT/s28
- hvTkhugqLdh4VbJ2n9wIg6oL/Uvu7lAq3Wfm6XnN1XoNxIuWg9E1lwX9vNW6QbNjNJSEnnBmt
- a935hhCTJhpJ4CqXw34CAs+sz7z/4uLGsQ0snLp/K5XNDKXRbGnGAe9DSKQJOCB+fu8ZkZQ8B
- 9x7pbYmslNhq8agLt+NPD+S3FttjOeUGB6/4RFlEj+ruCyAltelTeu5vFOzJtodkyu3U7xyZj
- Pc3sqtyzGYSFXxrRSGLJEY8EmnQmnqFUaqAvYZX9A9R0vP/t1XuSm12IpkBn+0Gtr+4poixJt
- NTEnmOFK2wT553IG21NT0MEGscyx4CZEj4K8QuhWk0vEpcEnFRhsvtZvzb15ZrqwvZhnfiF5e
- RmaX1rQJ7tz7BtZdrQNyzZkQFMPFm8CbpnML+Ljl5bi/seNNGAYKuJO2mV6Qv1sGIzEu8R4JI
- u6pSwPATb9C2zcuHdmlzD1G6XJ+NULtOeGixSOtdCBO8JQHfyBp62PwlljPBwBXjfRSGh15FU
- j6+ulYMskn7irG1gBCcX5QF0r5gwMibCtJlEiCSzIB1Z8/37oSo3hO0zuvbB1AHfto5h73FZt
- wwgr/CwIhZqBxd4ICHdyt5QcxfoKFG/0y3EI0nFEhASVVaTXbwMeth0IhN9JyQq3T3fHXFQIG
- mhusHm940JFfjwTwt4Eq/3oNCI21Wg+HWx+/rfIVjBgR+yI3OurYkuCqIAxhunfA7sMThiFFv
- qplK+R6gIMuJjroC6yVhAj+eB4/kAiPXvdFAQE73CDQJ2aA0k7NMlUbWmr+WdlWtxNrgm5FoX
- YLsOHc9JKxM9Wc4VpQApvs8FcVD0TxNvf9rC5shi9gcRul/3mRITHD3p+5k4JGWzef/1+h60P
- EQR75ldWweXZvmSN/qGUloPBZaBFie9qj2Q9+7g4cKctmYs1foWIDBXAfF6vO0J4/KxcwpjhJ
- k9cOlBCbWCGR8f3gXxUBNhzLdPbn9xZgnQ5e+acT+Mp+YvCo/czbNFWI1koglEZ0IoDLfS7Wn
- 1iUgI7IpFiD4lStg+IHDCr7iatU3WvLUfKRo9Dg6u9pyQCymAjiH7zLDanfENrpyfkbpQQL3o
- jkr02UW6LyYxFVAAEHthIFRvanVCtnekiAsWh+RMy4Q10cP9Ynlr19qx4/LOAN1wl49ZRKq18
- Iq2DUItp73ckwuvEApdIMwDMvwTW0efuL4NDyFkscqiDkiDtCerELQS/Go26Ur6qy/FWfpCjT
- YhNrj+NBB4EplDjDTPbj63se/bNyKVpQD9Sn8xTRjuHFeE06Xt6fk7IF5i7XL0xfKK8y7idGC
- DCWS/erZ55pZ/U/SVZXZjL5y1kOn+k2ZrG4uX7drM3IetNNpqgjWuUyFrkyslGpekjmjLueD+
- g7N9C7rIvvq1s0XorvIhS8aP11jSFt2f+vcERn8ddNWk82VxPco2Onr7wsqZ7Xk4zm1C5nnUV
- r0T64Z7G2xalb7V2SlTuRoxmlZQrzKvNPHavOGA6v3mW+k+jKdar2wqzdpfM/K1OzIHAkR6SB
- bsLi5O0J9ZL+Eq9nG7IuNvPkgb4Wa0gUBoU6Er3v+h7/71aq//DuWvHDT4GUQeuXWpAPS/j5T
- li2q2Cq8q8efAU947x3Ms+EE7d35HWeeZSAa4rgourISOY083qbOT3yjsr79pOroPXcEdksKw
- M3BCg3sYsrG0Sj3rNx2xIItLVUounihu/SqEwXJRv8/VzMogwdFj2E8zwa1L/ZehLo/fpyjxh
- jl4AB5uwOAfWh4njaAWrHziAHBRDR09VccFOmE84lilLTAmfYSRG0hsxG12tUAAm8lXdLdMmS
- Kxoj4aXEge14l7PMg1gpx7XwnLGmgdjSKTP4WLAul/Yn+ULPz/64Q0GocEBmw41WVwmBxIROn
- PVGVqebOMv+7EV3++0mTsxPZ9wI6JRvyUCjKvYNeRTZMZyB9TbomJYXftrDSmFOE98qZyUJNO
- axRNxE6XS40mBepVOJd7s+m2T2cFc4p/m+XTYwTIVKLNu3a2oPCB1n0ZpgxYCP+hqjkJJq9O+
- /D8XaLhbgy+XS6ia6XHCLPasTWgSY6rDxdZlZEYqYhVwZgWqER43LHHYD5ulVwvcbPZ+UjK0w
- I0WGXUJviDDTpNJ2HONJ2Jrztj77WYIOAjs1e7aSKET1CaQpYiaqPd/an9GLcA493kX090poW
- U9T6NQBrB42j+EsVs3bX+uI8MPpSn1pbRmvDl5FdXiaWA6ZPLDHTnOp5jF0CqaiESOW+rEZgg
- cU6GJcxXNDzoTRr1JC9Je3Sqp0TD/qmj5tCAuBy2wjcD7Ij+qsNPzfkANx7/HQtCsjLSHQ+aU
- v0i0bgooC7P9TY6yqk3w+cxQEpf58TZxtznu3NtY2b++oWrJvneb1RUncD83ymQhW8HqPzILJ
- MczwJUo/kxyJ7b5ddpHCmprY0ae4+jD9TDLPeomdAVTTXcX57D/BY9di1TS3yZwWyLQPn0Bld
- iijGHQNdKL70ydwG6dPOlskt9NxSOHUyD+GOOoNSVkm97Fc48jKyBC59c1kmi8LjRspJholcH
- VSYWwbV8Uhs6UMrbqA99jWYhD8ZfXu8qnUhfX/SGOXmIi4m6JTfwAGRgMxvQqG/p/FUeZfaZh
- HuZ0CJ39UhlWMytTlMW1ABVW6S5uUloPArXLl1KtIWEP4vMDVhRsOym+xP8lIugZZMeMglfnl
- Sptj+2lBK0RSIUazZS5kThXMoLna9EZcwolvJ02eqOPfxgpcBDg2MjwjRAw7l/0h3sdIIz6u3
- a9TCFFLjdcrG0Dc5Tfcs2zXk0NEigbh7A/XF6d+9XgsONRGliuWYfvAT0LNmq9p0hQdTjmOb9
- xpD6b34V+vhbqnFXT7pMdcEZJwGcQQW1kJB1qj6AnywAhSco2x9m/0b9PudkwwtVBI3E8wYgU
- Dvw1gatkAGzagdR7SVRaPVZ9DTr69k7n/TLDq4T3zXt5Wmn/F63IPRWICKi8ihPDIngZL4HYj
- SNk4b2LQmaUa19EG8MGSayW/RKOWZa7Qb/yQCRhohQHL3PDF5Dyy0N8jNhqhKKln73BlahXPJ
- qVsBwnvllDuii3yVLQ9QgSHxgjE0Ry8EZlRNoZR81LcQc7oIllRvm/dyP15xOKM7XBxMIIX2T
- 6uWuiyWoz8Nu6hhny0RlXQQHjzT6Zg51TeiYvMLtfP34F0QgIqaJTqIPNm1NJQ60m48qtkUN8
- DYpX+eBYbX0tP1GO7BK8Fq6YB5Z/+eG2kjKNW8VJFyLgb+1z2SaKY7lsm7vRgB5SpCJHqWxVj
- sSEzsUd8HlwDaXpMYpeDRNeyj25/10A5l1TMQ+s3W3lno+IApFJGSv8do46dfWUXBOboccdre
- +HYkyxhOKHph2O7MmqPHXlfSNeCW0a9YJTdutOHbsxYtsbnB2fm3d1p/khcC8kbwawSI4GhdH
- E3Ae9/IXCjkK807zHiGHjr1GXfV3v/fFaxTCuDvOOqo0x9HHs20mobWetUesBxqQVh40McUdc
- rsxhnkrwkeNxaLSWUNJum9ml3c9/2UFqjjvGPnTRl7GVJzfl9GkApJI1ZAkDlPidH5G/s91+r
- 5/v6rfZkHcg1RdKrVMUQP4ksjrmzorb/AXZ5RUqFLkiovHA0VvSwa7MUgCTwjCsLhRzzi2Iyr
- /Nt8m4OPG57H2tA6MpbxTQe9bbXSvVQFLcBQW20RGfwxkT315x1S7n8L+eamODPG2qmkF/yt5
- 8H8iFQhThQOwCI/UVfW+F0u6ngEq7wUOoMCpRCmtZ7ZJJKzQ0j6LYecku311mF8SmM7yldoYL
- Likn55yBC5QPfL/+nde/G0d6VdvglGEDoMT18Q
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260206151457.4104515-1-jamie.gibbons@microchip.com>
+X-MBO-RS-ID: 8f6d22bcc91fa6b2535
+X-MBO-RS-META: hn7ks7qa4fc1rg4nu9pgcrm3w3e3i81b
+X-Rspamd-Queue-Id: 4f73VC5JWRz9tyY
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,58 +96,287 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+This is a multi-part message in MIME format.
+--------------7ISqgIZ8NEcV5g5JvMzS00W3
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The following changes since commit b5213bbfdcb1812be510427857827ee8becb9f8=
-f:
+On 2/6/26 4:14 PM, Jamie Gibbons wrote:
+> Some platforms
 
-   video: menu "TrueType Fonts" depends on TrueType enabled (2026-02-04=20
-10:41:48 -0600)
+All platforms, DTs and DTOs have to be 8 Byte aligned, always, period.
 
-are available in the Git repository at:
+> require device tree overlays (DTOs) to be 8-byte aligned
+> when applying them with libfdt. Previously, the code did not guarantee
+> this alignment, which could result in alignment errors during overlay
+> application.
+> Introduce a new runtime parameter, always_relocate_overlay, to
+> boot_get_fdt_fit(). When set, overlays are always copied to an 8-byte
+> aligned buffer before being passed to fdt_open_into().
+> This resolves issues with FDT overlay application on platforms that
+> require strict alignment.
+> 
+> Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned address")
+> 
+> Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
+> ---
+>   boot/image-fdt.c |  2 +-
+>   boot/image-fit.c | 23 +++++++++++++++++------
+>   include/image.h  |  5 ++++-
+>   3 files changed, 22 insertions(+), 8 deletions(-)
+> 
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index a3a4fb8b558..33fd4248acd 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -431,7 +431,7 @@ static int select_fdt(struct bootm_headers *images, const char *select, u8 arch,
+>   				fdt_noffset = boot_get_fdt_fit(images, fdt_addr,
+>   							       &fit_uname_fdt,
+>   							       &fit_uname_config,
+> -							       arch, &load, &len);
+> +							       arch, &load, &len, true);
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
-tags/efi-2026-04-rc2
+This flag is always true, do we actually need it ?
 
-for you to fetch changes up to 36e321b487a9ac73c2dfb9cbaadb0244f70f66fb:
+>   				if (fdt_noffset < 0)
+>   					return -ENOENT;
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> index d2b0a7daccc..a3fa2a01463 100644
+> --- a/boot/image-fit.c
+> +++ b/boot/image-fit.c
+> @@ -2370,7 +2370,8 @@ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
+>   #ifndef USE_HOSTCC
+>   int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   		     const char **fit_unamep, const char **fit_uname_configp,
+> -		     int arch, ulong *datap, ulong *lenp)
+> +		     int arch, ulong *datap, ulong *lenp,
+> +		     bool always_relocate_overlay)
+>   {
+>   	int fdt_noffset, cfg_noffset, count;
+>   	const void *fit;
+> @@ -2492,11 +2493,21 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   		ov = map_sysmem(ovload, ovlen);
+>   
+>   		ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+> -		ovcopy = malloc(ovcopylen);
+> -		if (!ovcopy) {
+> -			printf("failed to duplicate DTO before application\n");
+> -			fdt_noffset = -ENOMEM;
+> -			goto out;
+> +		if (always_relocate_overlay) {
+> +			ovcopy = aligned_alloc(8, ovcopylen);
+> +			if (!ovcopy) {
+> +				printf("failed to allocate aligned DTO buffer\n");
+> +				fdt_noffset = -ENOMEM;
+> +				goto out;
+> +			}
+> +			memcpy(ovcopy, ov, ovlen);
+> +		} else {
+> +			ovcopy = malloc(ovcopylen);
+> +			if (!ovcopy) {
+> +				printf("failed to duplicate DTO before application\n");
+> +				fdt_noffset = -ENOMEM;
+> +				goto out;
+> +			}
 
-   efi_net: add missing EFI_CALL in efi_net (2026-02-06 10:04:30 +0100)
+Looking at this, if the problem is $ov aligned to 4 Bytes, then $base a 
+bit below could also be aligned to 4 Bytes if there are two or more DTs 
+in the fitImage without external data. Can you please try the attached 
+patch and see if that still works ?
 
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/29203
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 3ed69b5f7bc..845e769a7e3 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2368,6 +2368,48 @@ int boot_get_setup_fit(struct bootm_headers 
+*images, uint8_t arch,
+  }
 
-=2D---------------------------------------------------------------
-Pull request efi-2026-04-rc2
+  #ifndef USE_HOSTCC
++#ifdef CONFIG_OF_LIBFDT_OVERLAY
++static int boot_get_fdt_fit_into_buffer(ulong loadaddr, ulong loadlen, 
+void **fdtdstbuf)
++{
++	void *fdtsrcbuf, *map;
++	ulong fdtdstlen;
++	int err;
++
++	map = map_sysmem(loadaddr, loadlen);
++
++	/* Set up source buffer, make sure DT in the buffer is 8-Bytes aligned */
++	if (!IS_ALIGNED((uintptr_t)map, 8)) {
++		fdtsrcbuf = aligned_alloc(8, loadlen);
++		if (!fdtsrcbuf)
++			return -ENOMEM;
++		memcpy(fdtsrcbuf, map, loadlen);
++	} else {
++		fdtsrcbuf = map;
++	}
++
++	/* Set up destination buffer, make sure DT in the buffer is 8-Bytes 
+aligned */
++	fdtdstlen = ALIGN(fdt_totalsize(fdtsrcbuf), SZ_4K);
++	fdtdstbuf = aligned_alloc(8, fdtdstlen);
++	if (!fdtdstbuf) {
++		printf("failed to duplicate DTO before application\n");
++		if (!IS_ALIGNED((uintptr_t)map, 8))
++			free(fdtsrcbuf);
++		return -ENOMEM;
++	}
++
++	err = fdt_open_into(fdtsrcbuf, *fdtdstbuf, fdtdstlen);
++	if (!IS_ALIGNED((uintptr_t)map, 8))
++		free(fdtsrcbuf);
++	if (err < 0) {
++		printf("failed on fdt_open_into for DTO: %s\n",
++		       fdt_strerror(err));
++		return err;
++	}
++
++	return 0;
++};
++#endif
++
+  int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+  		     const char **fit_unamep, const char **fit_uname_configp,
+  		     int arch, ulong *datap, ulong *lenp)
+@@ -2380,7 +2422,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, 
+ulong addr,
+  	char *next_config = NULL;
+  	ulong load, len;
+  #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	ulong ovload, ovlen, ovcopylen;
++	ulong ovload, ovlen;
+  	const char *uconfig;
+  	const char *uname;
+  	/*
+@@ -2391,7 +2433,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, 
+ulong addr,
+  	 * Instead, let's be lazy and use void *.
+  	 */
+  	char *of_flat_tree;
+-	void *base, *ov, *ovcopy = NULL;
++	void *base, *ovcopy = NULL;
+  	int i, err, noffset, ov_noffset;
+  #endif
 
-Documentation:
+@@ -2489,17 +2531,7 @@ int boot_get_fdt_fit(struct bootm_headers 
+*images, ulong addr,
+  		}
+  		debug("%s loaded at 0x%08lx len=0x%08lx\n",
+  				uname, ovload, ovlen);
+-		ov = map_sysmem(ovload, ovlen);
+-
+-		ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+-		ovcopy = malloc(ovcopylen);
+-		if (!ovcopy) {
+-			printf("failed to duplicate DTO before application\n");
+-			fdt_noffset = -ENOMEM;
+-			goto out;
+-		}
+-
+-		err = fdt_open_into(ov, ovcopy, ovcopylen);
++		err = boot_get_fdt_fit_into_buffer(ovload, ovlen, &ovcopy);
+  		if (err < 0) {
+  			printf("failed on fdt_open_into for DTO: %s\n",
+  			       fdt_strerror(err));
+@@ -2507,8 +2539,7 @@ int boot_get_fdt_fit(struct bootm_headers *images, 
+ulong addr,
+  			goto out;
+  		}
 
-* Remove pip from requirements.txt
-* develop/process: Clarify name usage in the Signed-off-by line
+-		base = map_sysmem(load, len + ovlen);
+-		err = fdt_open_into(base, base, len + ovlen);
++		err = boot_get_fdt_fit_into_buffer(load, len + ovlen, &base);
+  		if (err < 0) {
+  			printf("failed on fdt_open_into: %s\n",
+  			       fdt_strerror(err));
+-- 
+2.51.0
 
-UEFI:
+--------------7ISqgIZ8NEcV5g5JvMzS00W3
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-boot-image-fit-Add-runtime-flag-to-always-relocate-o.patch"
+Content-Disposition: attachment;
+ filename*0="0001-boot-image-fit-Add-runtime-flag-to-always-relocate-o.pa";
+ filename*1="tch"
+Content-Transfer-Encoding: base64
 
-* Improve EFI variable load message
-* Fix use after free in efi_exit() with tcg2
-* Fix efi_debug_image_info_normal allocation
-* Add missing EFI_CALL in efi_net
+RnJvbSAwNDQ0ZGYyY2I4ODFjYzRkOTQzZTIyNGRlNzk1YWE0OTliODcwYTVjIE1vbiBTZXAg
+MTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKYW1pZSBHaWJib25zIDxqYW1pZS5naWJib25zQG1p
+Y3JvY2hpcC5jb20+CkRhdGU6IEZyaSwgNiBGZWIgMjAyNiAxNToxNDo1NyArMDAwMApTdWJq
+ZWN0OiBbUEFUQ0hdIGJvb3Q6IGltYWdlLWZpdDogQWRkIHJ1bnRpbWUgZmxhZyB0byBhbHdh
+eXMgcmVsb2NhdGUgb3ZlcmxheXMKClNvbWUgcGxhdGZvcm1zIHJlcXVpcmUgZGV2aWNlIHRy
+ZWUgb3ZlcmxheXMgKERUT3MpIHRvIGJlIDgtYnl0ZSBhbGlnbmVkCndoZW4gYXBwbHlpbmcg
+dGhlbSB3aXRoIGxpYmZkdC4gUHJldmlvdXNseSwgdGhlIGNvZGUgZGlkIG5vdCBndWFyYW50
+ZWUKdGhpcyBhbGlnbm1lbnQsIHdoaWNoIGNvdWxkIHJlc3VsdCBpbiBhbGlnbm1lbnQgZXJy
+b3JzIGR1cmluZyBvdmVybGF5CmFwcGxpY2F0aW9uLgpJbnRyb2R1Y2UgYSBuZXcgcnVudGlt
+ZSBwYXJhbWV0ZXIsIGFsd2F5c19yZWxvY2F0ZV9vdmVybGF5LCB0bwpib290X2dldF9mZHRf
+Zml0KCkuIFdoZW4gc2V0LCBvdmVybGF5cyBhcmUgYWx3YXlzIGNvcGllZCB0byBhbiA4LWJ5
+dGUKYWxpZ25lZCBidWZmZXIgYmVmb3JlIGJlaW5nIHBhc3NlZCB0byBmZHRfb3Blbl9pbnRv
+KCkuClRoaXMgcmVzb2x2ZXMgaXNzdWVzIHdpdGggRkRUIG92ZXJsYXkgYXBwbGljYXRpb24g
+b24gcGxhdGZvcm1zIHRoYXQKcmVxdWlyZSBzdHJpY3QgYWxpZ25tZW50LgoKRml4ZXM6IDhm
+YmNjMGUwZTgzOSAoImJvb3Q6IEFzc3VyZSBGRFQgaXMgYWx3YXlzIGF0IDgtYnl0ZSBhbGln
+bmVkIGFkZHJlc3MiKQoKU2lnbmVkLW9mZi1ieTogSmFtaWUgR2liYm9ucyA8amFtaWUuZ2li
+Ym9uc0BtaWNyb2NoaXAuY29tPgotLS0KIGJvb3QvaW1hZ2UtZml0LmMgfCA2MSArKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFu
+Z2VkLCA0NiBpbnNlcnRpb25zKCspLCAxNSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9i
+b290L2ltYWdlLWZpdC5jIGIvYm9vdC9pbWFnZS1maXQuYwppbmRleCAzZWQ2OWI1ZjdiYy4u
+ODQ1ZTc2OWE3ZTMgMTAwNjQ0Ci0tLSBhL2Jvb3QvaW1hZ2UtZml0LmMKKysrIGIvYm9vdC9p
+bWFnZS1maXQuYwpAQCAtMjM2OCw2ICsyMzY4LDQ4IEBAIGludCBib290X2dldF9zZXR1cF9m
+aXQoc3RydWN0IGJvb3RtX2hlYWRlcnMgKmltYWdlcywgdWludDhfdCBhcmNoLAogfQogCiAj
+aWZuZGVmIFVTRV9IT1NUQ0MKKyNpZmRlZiBDT05GSUdfT0ZfTElCRkRUX09WRVJMQVkKK3N0
+YXRpYyBpbnQgYm9vdF9nZXRfZmR0X2ZpdF9pbnRvX2J1ZmZlcih1bG9uZyBsb2FkYWRkciwg
+dWxvbmcgbG9hZGxlbiwgdm9pZCAqKmZkdGRzdGJ1ZikKK3sKKwl2b2lkICpmZHRzcmNidWYs
+ICptYXA7CisJdWxvbmcgZmR0ZHN0bGVuOworCWludCBlcnI7CisKKwltYXAgPSBtYXBfc3lz
+bWVtKGxvYWRhZGRyLCBsb2FkbGVuKTsKKworCS8qIFNldCB1cCBzb3VyY2UgYnVmZmVyLCBt
+YWtlIHN1cmUgRFQgaW4gdGhlIGJ1ZmZlciBpcyA4LUJ5dGVzIGFsaWduZWQgKi8KKwlpZiAo
+IUlTX0FMSUdORUQoKHVpbnRwdHJfdCltYXAsIDgpKSB7CisJCWZkdHNyY2J1ZiA9IGFsaWdu
+ZWRfYWxsb2MoOCwgbG9hZGxlbik7CisJCWlmICghZmR0c3JjYnVmKQorCQkJcmV0dXJuIC1F
+Tk9NRU07CisJCW1lbWNweShmZHRzcmNidWYsIG1hcCwgbG9hZGxlbik7CisJfSBlbHNlIHsK
+KwkJZmR0c3JjYnVmID0gbWFwOworCX0KKworCS8qIFNldCB1cCBkZXN0aW5hdGlvbiBidWZm
+ZXIsIG1ha2Ugc3VyZSBEVCBpbiB0aGUgYnVmZmVyIGlzIDgtQnl0ZXMgYWxpZ25lZCAqLwor
+CWZkdGRzdGxlbiA9IEFMSUdOKGZkdF90b3RhbHNpemUoZmR0c3JjYnVmKSwgU1pfNEspOwor
+CWZkdGRzdGJ1ZiA9IGFsaWduZWRfYWxsb2MoOCwgZmR0ZHN0bGVuKTsKKwlpZiAoIWZkdGRz
+dGJ1ZikgeworCQlwcmludGYoImZhaWxlZCB0byBkdXBsaWNhdGUgRFRPIGJlZm9yZSBhcHBs
+aWNhdGlvblxuIik7CisJCWlmICghSVNfQUxJR05FRCgodWludHB0cl90KW1hcCwgOCkpCisJ
+CQlmcmVlKGZkdHNyY2J1Zik7CisJCXJldHVybiAtRU5PTUVNOworCX0KKworCWVyciA9IGZk
+dF9vcGVuX2ludG8oZmR0c3JjYnVmLCAqZmR0ZHN0YnVmLCBmZHRkc3RsZW4pOworCWlmICgh
+SVNfQUxJR05FRCgodWludHB0cl90KW1hcCwgOCkpCisJCWZyZWUoZmR0c3JjYnVmKTsKKwlp
+ZiAoZXJyIDwgMCkgeworCQlwcmludGYoImZhaWxlZCBvbiBmZHRfb3Blbl9pbnRvIGZvciBE
+VE86ICVzXG4iLAorCQkgICAgICAgZmR0X3N0cmVycm9yKGVycikpOworCQlyZXR1cm4gZXJy
+OworCX0KKworCXJldHVybiAwOworfTsKKyNlbmRpZgorCiBpbnQgYm9vdF9nZXRfZmR0X2Zp
+dChzdHJ1Y3QgYm9vdG1faGVhZGVycyAqaW1hZ2VzLCB1bG9uZyBhZGRyLAogCQkgICAgIGNv
+bnN0IGNoYXIgKipmaXRfdW5hbWVwLCBjb25zdCBjaGFyICoqZml0X3VuYW1lX2NvbmZpZ3As
+CiAJCSAgICAgaW50IGFyY2gsIHVsb25nICpkYXRhcCwgdWxvbmcgKmxlbnApCkBAIC0yMzgw
+LDcgKzI0MjIsNyBAQCBpbnQgYm9vdF9nZXRfZmR0X2ZpdChzdHJ1Y3QgYm9vdG1faGVhZGVy
+cyAqaW1hZ2VzLCB1bG9uZyBhZGRyLAogCWNoYXIgKm5leHRfY29uZmlnID0gTlVMTDsKIAl1
+bG9uZyBsb2FkLCBsZW47CiAjaWZkZWYgQ09ORklHX09GX0xJQkZEVF9PVkVSTEFZCi0JdWxv
+bmcgb3Zsb2FkLCBvdmxlbiwgb3Zjb3B5bGVuOworCXVsb25nIG92bG9hZCwgb3ZsZW47CiAJ
+Y29uc3QgY2hhciAqdWNvbmZpZzsKIAljb25zdCBjaGFyICp1bmFtZTsKIAkvKgpAQCAtMjM5
+MSw3ICsyNDMzLDcgQEAgaW50IGJvb3RfZ2V0X2ZkdF9maXQoc3RydWN0IGJvb3RtX2hlYWRl
+cnMgKmltYWdlcywgdWxvbmcgYWRkciwKIAkgKiBJbnN0ZWFkLCBsZXQncyBiZSBsYXp5IGFu
+ZCB1c2Ugdm9pZCAqLgogCSAqLwogCWNoYXIgKm9mX2ZsYXRfdHJlZTsKLQl2b2lkICpiYXNl
+LCAqb3YsICpvdmNvcHkgPSBOVUxMOworCXZvaWQgKmJhc2UsICpvdmNvcHkgPSBOVUxMOwog
+CWludCBpLCBlcnIsIG5vZmZzZXQsIG92X25vZmZzZXQ7CiAjZW5kaWYKIApAQCAtMjQ4OSwx
+NyArMjUzMSw3IEBAIGludCBib290X2dldF9mZHRfZml0KHN0cnVjdCBib290bV9oZWFkZXJz
+ICppbWFnZXMsIHVsb25nIGFkZHIsCiAJCX0KIAkJZGVidWcoIiVzIGxvYWRlZCBhdCAweCUw
+OGx4IGxlbj0weCUwOGx4XG4iLAogCQkJCXVuYW1lLCBvdmxvYWQsIG92bGVuKTsKLQkJb3Yg
+PSBtYXBfc3lzbWVtKG92bG9hZCwgb3ZsZW4pOwotCi0JCW92Y29weWxlbiA9IEFMSUdOKGZk
+dF90b3RhbHNpemUob3YpLCBTWl80Syk7Ci0JCW92Y29weSA9IG1hbGxvYyhvdmNvcHlsZW4p
+OwotCQlpZiAoIW92Y29weSkgewotCQkJcHJpbnRmKCJmYWlsZWQgdG8gZHVwbGljYXRlIERU
+TyBiZWZvcmUgYXBwbGljYXRpb25cbiIpOwotCQkJZmR0X25vZmZzZXQgPSAtRU5PTUVNOwot
+CQkJZ290byBvdXQ7Ci0JCX0KLQotCQllcnIgPSBmZHRfb3Blbl9pbnRvKG92LCBvdmNvcHks
+IG92Y29weWxlbik7CisJCWVyciA9IGJvb3RfZ2V0X2ZkdF9maXRfaW50b19idWZmZXIob3Zs
+b2FkLCBvdmxlbiwgJm92Y29weSk7CiAJCWlmIChlcnIgPCAwKSB7CiAJCQlwcmludGYoImZh
+aWxlZCBvbiBmZHRfb3Blbl9pbnRvIGZvciBEVE86ICVzXG4iLAogCQkJICAgICAgIGZkdF9z
+dHJlcnJvcihlcnIpKTsKQEAgLTI1MDcsOCArMjUzOSw3IEBAIGludCBib290X2dldF9mZHRf
+Zml0KHN0cnVjdCBib290bV9oZWFkZXJzICppbWFnZXMsIHVsb25nIGFkZHIsCiAJCQlnb3Rv
+IG91dDsKIAkJfQogCi0JCWJhc2UgPSBtYXBfc3lzbWVtKGxvYWQsIGxlbiArIG92bGVuKTsK
+LQkJZXJyID0gZmR0X29wZW5faW50byhiYXNlLCBiYXNlLCBsZW4gKyBvdmxlbik7CisJCWVy
+ciA9IGJvb3RfZ2V0X2ZkdF9maXRfaW50b19idWZmZXIobG9hZCwgbGVuICsgb3ZsZW4sICZi
+YXNlKTsKIAkJaWYgKGVyciA8IDApIHsKIAkJCXByaW50ZigiZmFpbGVkIG9uIGZkdF9vcGVu
+X2ludG86ICVzXG4iLAogCQkJICAgICAgIGZkdF9zdHJlcnJvcihlcnIpKTsKLS0gCjIuNTEu
+MAoK
 
-=2D---------------------------------------------------------------
-Pranav Tilak (1):
-       efi_loader: Improve EFI variable load message
-
-Tom Rini (2):
-       doc: Remove pip from requirements.txt
-       doc: develop/process: Clarify name usage in the Signed-off-by line
-
-Vincent Stehl=C3=A9 (3):
-       efi_loader: fix use after free in efi_exit() with tcg2
-       efi_loader: fix efi_debug_image_info_normal allocation
-       efi_net: add missing EFI_CALL in efi_net
-
-  doc/develop/process.rst            |  3 +--
-  doc/sphinx/requirements.txt        |  1 -
-  lib/efi_loader/efi_boottime.c      | 13 +++++++------
-  lib/efi_loader/efi_debug_support.c |  2 +-
-  lib/efi_loader/efi_net.c           |  6 ++++--
-  lib/efi_loader/efi_var_file.c      |  2 +-
-  6 files changed, 14 insertions(+), 13 deletions(-)
+--------------7ISqgIZ8NEcV5g5JvMzS00W3--
