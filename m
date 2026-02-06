@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D39EB28F1
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 08:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC6DEB28F8
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 09:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C74158382A;
-	Fri,  6 Feb 2026 09:59:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AAAE58382A;
+	Fri,  6 Feb 2026 10:04:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jIsyRaJ/";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mSo8RMVh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B94683AA9; Fri,  6 Feb 2026 09:59:05 +0100 (CET)
+ id A5BF783A64; Fri,  6 Feb 2026 10:04:01 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41C05836D3
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 09:59:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E9BC836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 10:03:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,76 +31,80 @@ Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EC9B33F784
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 08:59:02 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D289F3F78B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 09:03:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1770368342;
- bh=hprd8HNwqjlTabxHn88RBzKQ6JZl7HU7M7VnNkkTfBo=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+ s=20251003; t=1770368638;
+ bh=wqPrIwCBQWzaNVyoPt3pKvVO6ToAiqdj+nXBlbVlV0Y=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=jIsyRaJ/QQSrrmD6kly2IIO8IS49gdcVOaVjtZqvp3P0Qq41RSKv91fiJFCsc23yL
- LNLmzcXU7uFfO+NyWxA923a6wD3WVmkYGQoFIAJr4Rr0mJfi8qtBCLpVrfIQFUysyA
- fupj2ij4/cUu9gwZ8xD1yBRo3CLZ9vRJTfr6IHjisLBxdPBYALSTnh1QI4VjEpYE+B
- kOeNH05hW+6+2si+5f/HqUcj74q4aDeFrcafujRmSdHHZrmSLO/TOeqtoH4U/8QYh0
- n5RRv5bvu/ZHzOEtATygK2X7z+8rYa+hFcLxrrkHVsSYFzjBIntTPYr5yxN1UvCQLn
- SPUWSiCtE4P1di97QrZGrEviEmAZOdhFG+1enmYEZGEUjLAPwX7hdJJhiySkvZtC9R
- XkClTmZMrcIhVJMLdoE2WHP49kcT/eTalHeXkvp+AJ9QKN6sdYgO/MwUYEC63MLYu/
- g8NuhtuRYXXuhHa/M4WfNHDgBjaAWb/loMkg94BeDbTcvHXlLyMUkGr2GqaPJQDTTs
- ZwqCNUJ2j2LfgYMn/t8k3gmygsW8qT90aZNRp6fVV3yYFUZmXx/F82YJ3cGczUr4FL
- +/Es9/eZhAwhOVGzOITVq7HYfS8byeF0ULdrLYQRhsXwZVxzcE9PV7onnHh0y3wuwL
- cbDXqX6O8gkHQCPTaGkBxERg=
+ b=mSo8RMVh+CM8Krvw8L7iJfRoiSi9cmcOTP/k2CMHh0csqnH7pF+Mz+QQLalD++rpA
+ 9jdTMlUL89jvsoD+Ua9SUpfnHpoynPGk146W9OzrgsI3sVTE8xoamxrCBdBySW2OTs
+ cXekTDUALJug1UNuzTbgnHhn8c+qWbILTtueeHTa8kdkRU9NCk3CsS1AUl+gcig9Wd
+ 1qGNE/nOz7sYd8EKvAbtpIP4iSQjJfF/YgdBnJZVw5RfJo0zSOms3ri1/Ev9jPRN8+
+ EGNDIVt45uYPZxNJHpjowqiqpDYw35Rgv1JnQbg+T7/B6K3Qpjp5/uwSHFvnoViMYj
+ QXTK2kn3wVV0dvs3jWyW7ebyHvpTrhzda+aUDAu1dZOjpdztiqNoSR/1yiJxGRT/TU
+ Z1ASJfGoITZfl5GRlleq13zhkTB3QGwieLB1T1dFpbXwzpy7HsCNoF7SyW8hA8l7lM
+ tdHE+UJDtEcpKEmgrZhhsJeYpu+mJ5zujmofiof50wqH3XVnLBqJPGCJYYd6K1E7fb
+ CyCDehJeItTfUFf9RRRnZ/QhF3yUFIt5F+3d5GrSZEw5RkUgEzP93yizpA7oK1jJao
+ bNPTAdFeGqoaTz/K6PwzMo8uDRvmWJLP3gBtmXhzlJ6tzJ2Kzj331PCa2yqz9OSwTU
+ O6braVQfo6+1CWgVaqqRF1h0=
 Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-48079ae1001so3907715e9.0
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 00:59:02 -0800 (PST)
+ 5b1f17b1804b1-4806865a01bso17110995e9.0
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 01:03:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770368342; x=1770973142;
+ d=1e100.net; s=20230601; t=1770368638; x=1770973438;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hprd8HNwqjlTabxHn88RBzKQ6JZl7HU7M7VnNkkTfBo=;
- b=VBVj1U3j7rziGay5+vDt7BOnG2rcGsVmsAsWolb9igH5Oerp2CUtGb+QGN7cgHpLrU
- ASjmPmxumR+A5E+1PTgv7+fVpuVUjxYuMAD/rgb+npY5jLUhxcbvMyn7tRYk490oGk3Q
- XYmB0kXwYA5AHjQIsIV2UD7rFjBpdJC9Jil01TEjwG7yXBa1t3utWgbTiX2qoMaeJpHJ
- jjLgm0md3wWjb9kHzejW3k+jwUMfdPbbXCNSe6kZdDygqIj4LDDe7tTeVQxItiFJ4Zal
- RZaGvZDJskLfYkcY1xr8eQil3ryXhfuxbuPEz1OZ8lNamvYFK8E5Hysj+YS6nq6eICQG
- BFiA==
+ bh=wqPrIwCBQWzaNVyoPt3pKvVO6ToAiqdj+nXBlbVlV0Y=;
+ b=JMRFlPf+24/cb4juq06s2AuDYBEKp3XBiIHdi4eZsM9icjki9iXfgYWLQhAxDViYd6
+ XLIKiOnHkDnUXRNpWExot/SdSCe9N2+XoNrcSwdwtVDGXVSfQEoWpSGKHsVUeUIVz7d5
+ moMewG/YbutSjzGrio9ZPzRVRtlVHFiH5mWRo9kAodnSv2dEE4jTY5ESP+nRMyusmJIt
+ rK9STF3xFr9P/ju3wbbGKN8Q7l2bZ9RRyA0Rr2VxYeeHjT6UlAs/pKmlF6Gn03TR/v2r
+ CxqmCbvAumAryuT9tyQ4kVCLOUAYoKto0QyR08qMmJlCHIgOTE9Z8QvVqFxmOZwzGNnJ
+ c8Pg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4CAjitHW1cwmC3yqRwHtCIMc2IpHKEI9Y+KBLByMupMbSmc2mktW/kVADL1RO61+EoxaK2lc=@lists.denx.de
-X-Gm-Message-State: AOJu0YznibZ3r8lVclIiHvEHdd2pFKDguj486kXpkovodFw+q3ebL8bt
- EojVPNNVmWGwjWUQrWjvZ+LiLdHgVO6dqudwPuKlLUf1RRf7KTw8n6eUUcyviFQcJCmwkQh/ezP
- taqbFy7w7ck0wF+qzQEh0K561J8p66/vkxD8MleHh/sGEYfE2vOuNehNuDe7fsUp+jVCtd/o=
-X-Gm-Gg: AZuq6aK/ToEjYvBRWCjW1BuEUXRO/Sx5L/yJsgfUCwEjm7WJiVQA1sjXORDuS0RLPFl
- Mu5Si4BlKxcJhsDOaK9b1EXl01NEbiH4JRtSfesrwC9/O1g6MSxVeO3chXbkYApT2UdTnMuX0OX
- FLPKF5tAWO4+0Fv0QjPKNPY92aBHtgmokiYnzdD+88salpcPgkfeh2LRAerOTLkTLMcZPSsW3eH
- CHaCXuSKG29jHb3OToi6ebdqrdTgFl7zAmYKIsqUYRhUjD8Jho9qpBM2aRruXlKZWARewcUVI9m
- Ty2M+TA2FFaB5tLM1olVBJ861zSthgsz8JIgMp+pr+ME5PtjQaH+OiVnxkMWMbpc7ROQrIbSjOV
- ki8o4LGaWhuReLDNpGxbG13V9T/g0ORUiEnjRFUfiralix+FYDB6xTLNcB378er9orze4ojCOXZ
- 97vcKTG+4=
-X-Received: by 2002:a05:600c:8116:b0:480:1c10:5633 with SMTP id
- 5b1f17b1804b1-4832021c74cmr29236365e9.26.1770368342457; 
- Fri, 06 Feb 2026 00:59:02 -0800 (PST)
-X-Received: by 2002:a05:600c:8116:b0:480:1c10:5633 with SMTP id
- 5b1f17b1804b1-4832021c74cmr29236135e9.26.1770368342044; 
- Fri, 06 Feb 2026 00:59:02 -0800 (PST)
+ AJvYcCWQrC7H2kjZcCVSJ9x2vXxyHT8ZRr32QrsZbzqiMJthiaJVEDAsXk+N4s8bHdkxMW9i4blrEJM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yybetpm3S3Fo9eomRJsjkc02+qUlEvAfKUYdzcbPATf28zsWNpa
+ OuGDs0xvFvzPPgVp4ipxfa6vllyYkbXZ1YPv+6rWkJWytar/CM1g8IFGxo+pl0fmFpMOUd1B0Io
+ 0EOrMkxK7q11ic8pukcSCxOMCaErh2feYZxO0VfUwJDoMTS7mMjbXo8yc4NsBbwaPZJ9Quxs=
+X-Gm-Gg: AZuq6aIz9DSlCu1qXK3v/BKM3wwsxoFxMN+JwM1/MAw8qoWb+WO6rA+jPY10R4nGlrY
+ rG53z3QIboBlYkxP5htqqY2bgdVaTVD9DyyC1/EPVbnRVI4mUhr8qh4la8y+SDtmB2siONNVVYC
+ NyysMJM/q68KhIUtM3m9PoJsLStmF/sd+XHejfPKiFoRfZO85fYv87+PqRrQM82xHVqo3eQm2lv
+ 5tRhkBWxK9lJcMj0J45UO8a6ylfgXdw0DJn/nJ2G6ZXQC7crxQj9pMLW3rhpzyQiiEUWmYpDsMY
+ cLV0in0WLmkQYrZhaMPcdPmfYlJ+4B7yiSDPiPFfhYtZ6APChNlnz8CKpRJK675WMrIlMqazkYb
+ m4s+jENdYUm70a81VpIb1OgAnsDjcxGL+LYBTuVD+5MQ0FeQ2GYHWPZPSNVgmgO5ED2PcA2RimU
+ Wv6zGemd8=
+X-Received: by 2002:a05:600c:19d1:b0:477:9a28:b09a with SMTP id
+ 5b1f17b1804b1-483208b9470mr22829645e9.0.1770368638368; 
+ Fri, 06 Feb 2026 01:03:58 -0800 (PST)
+X-Received: by 2002:a05:600c:19d1:b0:477:9a28:b09a with SMTP id
+ 5b1f17b1804b1-483208b9470mr22828955e9.0.1770368637933; 
+ Fri, 06 Feb 2026 01:03:57 -0800 (PST)
 Received: from [192.168.103.128]
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483207286bcsm37316905e9.12.2026.02.06.00.59.01
+ 5b1f17b1804b1-483203e37f9sm19236535e9.3.2026.02.06.01.03.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Feb 2026 00:59:01 -0800 (PST)
-Message-ID: <7d65b844-f11a-48b8-bb1f-383483cf3cd0@canonical.com>
-Date: Fri, 6 Feb 2026 09:59:00 +0100
+ Fri, 06 Feb 2026 01:03:57 -0800 (PST)
+Message-ID: <375abbda-c692-4592-8b17-65ece2090db1@canonical.com>
+Date: Fri, 6 Feb 2026 10:03:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: Remove pip from requirements.txt
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260203151303.1418027-1-trini@konsulko.com>
+Subject: Re: [PATCH] efi_net: add missing EFI_CALL in efi_net
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>,
+ u-boot@lists.denx.de
+References: <20260205164012.667019-1-vincent.stehle@arm.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260203151303.1418027-1-trini@konsulko.com>
+In-Reply-To: <20260205164012.667019-1-vincent.stehle@arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,34 +121,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/3/26 16:13, Tom Rini wrote:
-> Our documentation does not require the pip package to build, so it
-> should not be listed in our requirements.txt file here.
+On 2/5/26 17:40, Vincent Stehlé wrote:
+> The efi_reinstall_protocol_interface() function is a UEFI function;
+> make sure to call it from within U-Boot using the EFI_CALL() macro.
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
+> This fixes the following assertion:
+> 
+>    lib/efi_loader/efi_boottime.c:3752: efi_reinstall_protocol_interface: Assertion `__efi_entry_check()' failed.
+> 
+> To reproduce the issue, define LOG_DEBUG in lib/efi_loader/efi_boottime.c
+> and build u-boot for your platform. Then, boot the U-Boot helloworld.efi
+> application over the network. Example commands (adjust the URL and boot
+> entry number):
+> 
+>    => efidebug boot add -u 0 net http://10.0.2.2:8000/helloworld.efi
+>    => efidebug boot order 0
+>    => bootefi bootmgr
+> 
+> Fixes: dd5d82a59995 ("efi_loader: efi_net: Add device path cache")
+> Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Adriano Cordova <adrianox@gmail.com>
 
-Acked-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> 
-> I noticed this because GitHub dependabot filed an issue on pip, but we
-> don't need it. We've diverged a lot from the kernel in terms of how we
-> handle docs (And this is fine), but I think our requirements.txt file
-> needs a closer look.
+Thank you for fixing this.
+
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
 > ---
->   doc/sphinx/requirements.txt | 1 -
->   1 file changed, 1 deletion(-)
+>   lib/efi_loader/efi_net.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
 > 
-> diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
-> index e313e4f09468..c616c75fefc1 100644
-> --- a/doc/sphinx/requirements.txt
-> +++ b/doc/sphinx/requirements.txt
-> @@ -8,7 +8,6 @@ imagesize==1.4.1
->   Jinja2==3.1.4
->   MarkupSafe==3.0.2
->   packaging==24.1
-> -pip==24.2
->   Pygments==2.18.0
->   requests==2.32.4
->   six==1.16.0
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index 0f8a851e3f2..c2b85dac236 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -1024,8 +1024,10 @@ efi_status_t efi_netobj_set_dp(struct efi_net_obj *netobj, struct efi_device_pat
+>   		goto add;
+>   
+>   	// If it is already installed, try to update it
+> -	ret = efi_reinstall_protocol_interface(&netobj->header, &efi_guid_device_path,
+> -					       phandler->protocol_interface, new_net_dp);
+> +	ret = EFI_CALL(efi_reinstall_protocol_interface(&netobj->header,
+> +							&efi_guid_device_path,
+> +							phandler->protocol_interface,
+> +							new_net_dp));
+>   	if (ret != EFI_SUCCESS)
+>   		return ret;
+>   
 
