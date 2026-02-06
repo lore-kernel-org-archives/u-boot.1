@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49D7AEE208C
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 11:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12664EE208C
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 11:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2837E83B85;
-	Fri,  6 Feb 2026 12:05:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6904383B95;
+	Fri,  6 Feb 2026 12:05:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pn5bD3br";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pXU24yPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01D8683AA7; Fri,  6 Feb 2026 12:05:24 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 12C0283AAD; Fri,  6 Feb 2026 12:05:30 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9201F83AA7
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 12:05:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F19B8352B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 12:05:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=t-pratham@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EaF5AWFaCaUrMlNYwb3gJ4Pe8iWc7DLghhcSwhQw637ojSX5/fk1gVx6LTSEIzSSP9K5aFaJBQFTn33j81CL5XAI0BVO7bh/jqJwu4+TJVCMSMvL85rTXe+oGsJxSkcsTnfEuCXfxrpK6hxiO8La0c6hj4shnlmK81/RNBg2rdrjjACp4jTUjHBiqgdDwKgaGFx9PCvVcvSNBo8znhUg1U1+pk2RqDLXg/N+llcFMY2snvvh/ridMiU8fu9x63fxqfk3j5WaezJ7kkAc/xFsYFki7kGwbQmFvFYWQNezoDBb9L74VlQLwCgaVrfLZ7EvqJGuT+Yta8bbk1wRphhBRg==
+ b=NLvh8WJgRdBapYI2yjoE+3vRGE8oYjPLJMeVqbzpZgjIJhOjYMnJVHfn8F+0gycCAeOE/lbqLxU2YSXX53dfOXGLAG1s3mWc7iO+AfwzZWY3lzK2JVuJiEF2fUke56iYiZ8fG/cgVErSGGQALCmx48XibY+1KjhKRfC9/DB9vlpHHz04AemvzvxrwEhZH7PiOXiYsI5OMxbG1PhuhdAWeraLjZt57DgNeyk/E1dIBoRrHScy3paXJTxF72/eawEKNYn5OHaiGUv27U8KetJmUFmOYLg33SBECxOvTbqxF1AEgOLAbLARxI9NfsF+sF/a6b9JTBfJBajrW8oB4Bg/kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OgP3k+AsHz4H+Lkpk2AHhsVUVhRMEjGfVNoBFR7GNCI=;
- b=VsUVSqnDSsgORwT8qkEy2UcpOC0QQZNSw8pZaxSrrPsLwNX+5eJ9xmUMuOR9eQhulT5vjyS1qSIQlpMwjLz6H730A14mGLj4+BxdxRRewXb8yNYFdWaHnos8/22jKUFjQgFfcIRnSxJT5E2p1bT+/22Sk5MdFXkAm12eX3eT9sgRcdokMUMOhn6eiqjF6xH5b8Vw9p/TPyT0AAX7MgCfjwi06UlbFXJWwct9uKrBzNva5Ten+x5VOOi1Yew7Q2FwhmnXnKkx9tpyeZhCR8aX5pfstbzcjyowCHATQhjKCxr7IEW6FAkbGL3Rp3autazroRQwzMLqCReW/lOMJLtv1w==
+ bh=RCMAotRWKFHQZx8f7CyWdmenIk1Xw+mt2pgxCwf9L34=;
+ b=TcQ7KZozurKr7TRTfviBtDsgCP2DID120q6M6kHfO/S4rNLKNg178b2/p2NZ4xLOEKTkRvcGFpnL47Q/rO7FVzOXUMSs2GGX1DHGU/Pb5Im3ZWszKxDSPXDtxgjeW0JGJUIbGuw0aOLnbY1+QYAdxe3dXrnHvVMHkKtNLyXMkfCi2PUzrzIbiDoXulX4TwjvjDUTIrrpCtPcKer1BYbHDGNNVYF671wptmQPVWMzB/Wpv8IwGryevOVN+/oXDh7QakYD0BgsRxX5PaEk68CVHxsjB/Gpishduo67bxOPsXw+VSXWj2Shb6qM8bFL/8GT9QNCA7DX9bnc4cF5/6k9HA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OgP3k+AsHz4H+Lkpk2AHhsVUVhRMEjGfVNoBFR7GNCI=;
- b=Pn5bD3brVfwzWlyAQMs5R7OcDs9LzDVxWiyutmhuE6rsz68GByFjCTAtj5Ua497IoYwWtpih453lTNxsopJiRdgwuTy5RC6iaX2wm9OTaotp3PXc1FWB/TLbGgtA1cG88vBBWh0mM5skaq1wWtjY8RISWESjaD8ifNcIBC9rHpM=
-Received: from MN0P222CA0009.NAMP222.PROD.OUTLOOK.COM (2603:10b6:208:531::10)
- by IA1PR10MB6758.namprd10.prod.outlook.com (2603:10b6:208:42e::18)
+ bh=RCMAotRWKFHQZx8f7CyWdmenIk1Xw+mt2pgxCwf9L34=;
+ b=pXU24yPPjJF1svgJ7mQ0teSsxhsTBI4pbkR0dSFwScMiEtKMkbcaGmWSxQDUZBj1UhZK1hMCYwoWsXDSuMY4h3nA9QIp0RE8g6AwMkdSYt3E++Ic24Eo21OBnHqvANmlEwU6FStjTE+5EOHH0/PYuvCLyEzDL4fQVVuPuX2pZzQ=
+Received: from MN2PR11CA0005.namprd11.prod.outlook.com (2603:10b6:208:23b::10)
+ by PH0PR10MB997643.namprd10.prod.outlook.com (2603:10b6:510:384::10)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Fri, 6 Feb
- 2026 11:05:19 +0000
-Received: from BL6PEPF0001AB55.namprd02.prod.outlook.com
- (2603:10b6:208:531:cafe::f4) by MN0P222CA0009.outlook.office365.com
- (2603:10b6:208:531::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.15; Fri, 6 Feb
+ 2026 11:05:25 +0000
+Received: from BL6PEPF0001AB57.namprd02.prod.outlook.com
+ (2603:10b6:208:23b:cafe::85) by MN2PR11CA0005.outlook.office365.com
+ (2603:10b6:208:23b::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Fri,
- 6 Feb 2026 11:05:15 +0000
+ 6 Feb 2026 11:05:05 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -58,36 +58,36 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.195 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
 Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL6PEPF0001AB55.mail.protection.outlook.com (10.167.241.7) with Microsoft
+ BL6PEPF0001AB57.mail.protection.outlook.com (10.167.241.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 11:05:18 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
+ 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 11:05:24 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
  (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Feb
- 2026 05:05:18 -0600
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:05:23 -0600
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Feb
- 2026 05:05:18 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:05:22 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 6 Feb 2026 05:05:18 -0600
+ Transport; Fri, 6 Feb 2026 05:05:22 -0600
 Received: from pratham-Workstation-PC (pratham-workstation-pc.dhcp.ti.com
  [10.24.69.191])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 616B5Guq686839;
- Fri, 6 Feb 2026 05:05:17 -0600
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 616B5L1n686932;
+ Fri, 6 Feb 2026 05:05:22 -0600
 From: T Pratham <t-pratham@ti.com>
 To: <u-boot@lists.denx.de>
 CC: T Pratham <t-pratham@ti.com>, Shiva Tripathi <s-tripathi1@ti.com>, "Vishal
  Mahaveer" <vishalm@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
  Andrew Davis
  <afd@ti.com>, Ryan Eatmon <reatmon@ti.com>, Neha Francis <n-francis@ti.com>,
- Anshul Dalal <anshuld@ti.com>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH 1/2] binman: introduce signing-key-path etype
-Date: Fri, 6 Feb 2026 16:34:38 +0530
-Message-ID: <20260206110439.1236201-2-t-pratham@ti.com>
+ Anshul Dalal <anshuld@ti.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/2] arm: dts: k3-binman: update custMpk to use
+ signing-key-path node
+Date: Fri, 6 Feb 2026 16:34:39 +0530
+Message-ID: <20260206110439.1236201-3-t-pratham@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260206110439.1236201-1-t-pratham@ti.com>
 References: <20260206110439.1236201-1-t-pratham@ti.com>
@@ -97,56 +97,57 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB55:EE_|IA1PR10MB6758:EE_
-X-MS-Office365-Filtering-Correlation-Id: fbb0b69d-71b3-4788-e6d6-08de656f9d72
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB57:EE_|PH0PR10MB997643:EE_
+X-MS-Office365-Filtering-Correlation-Id: 53a77ffc-c7e3-493c-24bd-08de656fa0f1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?2mNdLWTMun6E80hY/7MQ0t2SkUa3CvgKJHYsNKb3q/c4YPtew3fDG2fx5Oxh?=
- =?us-ascii?Q?grPiukjqu5Hsz+Cj5bOxzpIIUthVwlLyUwEsu8Ywkx2muj72jwq4pKgkszGX?=
- =?us-ascii?Q?H1PUlDdwCqGUZFEX8ASkQM9Oi8Jzxb9rciwIwHCkH32poe/5kYvxEvJ37f53?=
- =?us-ascii?Q?rtJH8KwCfUa1xHUoMhiuJgh88mrlevYk5UqhdSqUIINsJypagEfTMQ4rSFMe?=
- =?us-ascii?Q?f64ImdMBb4RV7pnHwCWTfIQUf2wikzOw2i074i0fqrYng6kGo8TL8y+QEEhj?=
- =?us-ascii?Q?OMD2pwtCoJMD6EyN7K28DM9oERohC+D5VIiyf14io8VET5id55ON+O5jmErB?=
- =?us-ascii?Q?NOQADlZBYBu92cv9zUlaRIdsSYfAbABVzmOVJ6A3myDcJVC010E5lclpp9G4?=
- =?us-ascii?Q?+gDczsZ6sKN3rFmDEBEqWWRoMo/VLhQfoRjNsOHp90dvGAvszrm/XYIyGNd1?=
- =?us-ascii?Q?UVwggvDZlXm8AwWyD1ACSmQqr+Ab3U5xzRC7n0kBRdiEeDl+DLtjK2NtqGpa?=
- =?us-ascii?Q?SSS3kUGxWNdLsN/GI8VzqvwaXKs4SpasQJ/8/E9iqLPN2IBwDtFyYles1OfY?=
- =?us-ascii?Q?kQx0QCzK1rTfemyYO2Y3IBIHXVs20WPRzG/U3Pt7mNj9zFwTHnmSe+xZyamu?=
- =?us-ascii?Q?jrOlqYZJWzmqaV82U9yQO017mZM7xRo1QTN25HRw3rSGzIv24i6TGjlXkmv4?=
- =?us-ascii?Q?eJSxFw5Ue8gEbkDyrLon38P/3G7ly/pTn3Q6DSYdpuc2TmRuyYOhJaAkQh1N?=
- =?us-ascii?Q?fe+LfPii80xnLsJKaNaqxatx8gYG1yp+v21gBq4bcQ4hWqQ54HFf9RMVcCpK?=
- =?us-ascii?Q?XjRu6evxCDpGmJTQWgo4g1HutomMyZ/RPTswbilEPtkiG7covTM9Dzn8ZRmN?=
- =?us-ascii?Q?KNj5Tu6pqAK8Ip5atoejQkeX3pUtojrO7W64ztN944L/QmUBrM+1OgqMpXsd?=
- =?us-ascii?Q?+Ke+/A7pgQCDTUPZn+ttvxSquw0Dl09SBp3zSWpmf2LmwyxLZm5f57EnzPIB?=
- =?us-ascii?Q?RaJr6lkp/Lude94CSnTmSMQ+avapp9bPO0/tvTKj9uVUirM+YEY2F9GWULyE?=
- =?us-ascii?Q?RkWdVHq3s7+2MkqZN2Uo9Tu+OnwweP7iwsLdRDNPM91Wl9uOnmsOQZLPq0bf?=
- =?us-ascii?Q?WimfLSG5kz3qYmzZR6li+thfX3278VYOVdKGa26pvwo8vSmsRLIvJZF5kt/0?=
- =?us-ascii?Q?/e6K4EpsBGc2c7WNZ0VFtg9SbIBkFn+GqtYtxWc5NFnJvr0lC6CAbdQlV33E?=
- =?us-ascii?Q?zWRGgK56LWb6huRPWgKLvOukCMVDR5eASfzKnKbq0PogrCMYCLqYMsms8N3L?=
- =?us-ascii?Q?Of3qzIfz58nbitn6lKyYL1IjURN5fztA5++7laVwpdZZ2k2pwpZwjMA2EPZv?=
- =?us-ascii?Q?6x6yfnH06xJZPBF5e62FhDhInCNyI51Cy8SXKhjcH/YTYZ6h9+0FsQq8KPUi?=
- =?us-ascii?Q?u8lmSbaAtGGN/VhVAYDbmxHuGgq4HAplwKsq4wHI+iMKE2p8iXVMvC187fLd?=
- =?us-ascii?Q?w4oRzWQ4OzSNupcUARhvakDeopoEVs/b4uI+cHsRsSi8jU5hF1HV1S+bOAgC?=
- =?us-ascii?Q?TMpMToa/XBVXpMgIjjp7KREX1iouSUnnRIS2xUlO443PhsmhCupwj8QiM7io?=
- =?us-ascii?Q?SA=3D=3D?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FinnvTCoiCh/d2/mFRn/YNulC1WOi0kwznkIa0WZi4K57q3AZU+6JnHDgn9N?=
+ =?us-ascii?Q?FHzNxDd1FB9Dg7nsMTQDXArDbB9iA5N+KDry6dFr0s1COJyO1N2MgY2NJ7fe?=
+ =?us-ascii?Q?OIjWsGuL1fGQsrRt8HZmGe0K9Wa3rNLtBem9Upo6Q+MgQ0MKdfroUwEdOJr0?=
+ =?us-ascii?Q?iUP101SlPC+JWl0sSktCmigN6ho2hTJKbKIVf6M8Hd8WM3856c7eL1ugmm83?=
+ =?us-ascii?Q?YKWIIpmgDXMgMmpn9OcD3kX4DbwVeuZMt6yBoWoxnp1NLf2AeUGOqw11B8aP?=
+ =?us-ascii?Q?tjVrrLRFsUngxKFlnjCqg9S4cq2EwOCt2GIxjIJb9/XfI4vaaE4VqLplbzAi?=
+ =?us-ascii?Q?zza9gWbrflU+ga1XTFhdBV3L4qtyp8gXWmUH8BqUVbLum7wBFYyNyx0La71H?=
+ =?us-ascii?Q?FCEbok6y7jHL1r2HV8sRVGG7RKnSrNTjU8Re+AxaI2uv8OSnGZuOIBhAZIh7?=
+ =?us-ascii?Q?KkMaXenFSYEzPsmjGmqcHV2yOOv3FnBSNEEeGqFMXGUwYMuOufml8ICLbwZb?=
+ =?us-ascii?Q?zUWhRgSzzkTd9I5oaYV1Yv2A17AURMQIPbpsb+H5/zxPXEu2/lQjxMNRvkmC?=
+ =?us-ascii?Q?R48tslJ1/5lPnFRLse9Ls7xusLIIhepA65Hesj6w3rUuqXhw7lYlCitz0QNH?=
+ =?us-ascii?Q?tLy5Y6G5aUljOXHojnASaqTWJ06UUlNN3PcEWcIi3lsW8q2QgbAjX2FFWD9x?=
+ =?us-ascii?Q?k8HczboQhRjqJvQFBy1kKaQhKmt6n4JEHqyRO/ViDcGnIsrM/VX/2DERfHEf?=
+ =?us-ascii?Q?jdykeHyBuxRqJ3nyHIY6qfXSq6ZzMP55Nh6C5VkBZMVCVzTvaL1etMcsJ9b2?=
+ =?us-ascii?Q?eWsNKkYy2ZezkKgPL2MOfQi2YBfQ4kVyU813q1zyZp26ImyivbQxaAbSsxx/?=
+ =?us-ascii?Q?eBvraJny3CRlVNVSIxlY1L3EMRP9OKt7UfDKNp/Sg+DB5gVQbxLDsxK/kPhP?=
+ =?us-ascii?Q?XUSim5cziYFaTahUKb9c9rjfWmCoAek4MdwsoSYmQwi4GgMt/3VvOXmr+URz?=
+ =?us-ascii?Q?psW5BJFPLUy2e6PBjKIOsfz85VyCYdzZahmwYelrA/+eEB9MQ/S9D+GV05fj?=
+ =?us-ascii?Q?rjndRgszUnls5XYf5XGMetF9B+8T8H52oJ6WoHxw6trZoFTadEFPEGCmTaVn?=
+ =?us-ascii?Q?vcN+2ezWDpTDD2iFm2sPntA8g78y1owQGJasdiGm5EhEOCDYvXkyEsMa0ZsL?=
+ =?us-ascii?Q?QA3e69p/by9lXIdWWj41uspQeYPEB242Tyo/Zx8ZaEyGJbqhpe/XmeT6hFa9?=
+ =?us-ascii?Q?2P6bG96e+zX9Etm+ch2ZPc2qbYdbXcJlJdZqDpPcMFdvYgDmlYlW9tO8GghQ?=
+ =?us-ascii?Q?xrcduSEM12vFJVbNObP/H32pE90/oYs/yEfWQHacUBU9kFzhHt6PTfZZRXgC?=
+ =?us-ascii?Q?G7ouPQFcGfI3Qt0WPV8dreZQ4X2K9e5RrZAfNQeWS/tWYJ/Hw62fqrSAYSWa?=
+ =?us-ascii?Q?+PYI1k526dtWgKfitYmcvCjnlgWSBhYa+tmhnz7j5tdpooJGO6XGX/zXPcV5?=
+ =?us-ascii?Q?wutXXSnUOi/1oKlaqZJjUrkr+3M0FoP4b5Bt1JDMPm0b0jDTYnujnRO8sl7z?=
+ =?us-ascii?Q?88W+iOeZO5nV5Pea3cBCeRAF+C1BZkJIfzib65ll2gv8N5pC5wumgnPIXw8r?=
+ =?us-ascii?Q?B0+odduWagD3M1nrgLEvbAD9OqA9bHLWdiE79Md9lABmcagqQeqS8AfgPO5q?=
+ =?us-ascii?Q?7uPxpA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026);
+ CAT:NONE; SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: G7ptRrIZdCssl/NOWtTg2729dTZuFHzkh5UG0gw2eSe30h2agWvM8fToLFcZYManJvZnW8MmN8TjlEsGzcNKbM+gtq2IHbWNs0+zmSW+NCTA433RhP7cyi3ySHQBuwbShf+YpFPw+aFb73qkIqh1FbLpB/34ZkGCe2b8iSZkF5jDtnV6gWr70C/sBdvQe0OjmbVWkDY59mtMcdn/ULWlVcZc1rNu9JBunW8yERKwfdkBfrgO+BVwRCtqaBCsraIT18EWiEpJCe/lqCl/xHo0lMBpjqZFLC3j+EWNNjJFLvhSTQvyzh/T2mCiMPKkiji6SNWjR/1JM2meGuSukoFCdg8M/E6f2LYBVxcUeQsCSNRlSlIHQaKRGY0V5ZaGdE8TNL30XndOHxUeQQuHPlm7eZFZd7BfiF5RdxtGk4L1gshbXrYhGQPpFK7PrQS/ZS2P
+X-MS-Exchange-AntiSpam-MessageData-0: P/9PJJM0s2q9/himnFRpi++iUDRJtK/zc6q4r0gXPU9hXHJ4HIQMCKEXLJgAPYhrJsZ5iefdGdTRlEpaFsmuEPTq2ruJf28/ISo45omo8ye6L+l98xXdiKMx147kuZR/Xz09O1Q+aQPR8ag5gr/r4rxFVdihMHWFPzFkE8FTfKmkLQ3jZot7ofuPLA6M2ncR08uonoN6cGucLwRG+RWvCslg/Ve33t9kZ4mwEUelfmQ7JSRItW923BjESmq7mTep2nMSHXgu+CpTy9Um/VZPgWE5+hIBggL5Nv1TUyAoOgDCt7YFHP7IlBsc8FmgUZ6X9chUvUVWBr80rxiMLc2oDNXX3iTmihyNeIWv7EKJmVlBY+FqfwGspzsmWvYhHi0cW31g/08zSlUElNWONjwOe0uGiVzNR0VcslA+r/HkMocY5REAfE0c3Ghr61d1++QE
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 11:05:18.9338 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fbb0b69d-71b3-4788-e6d6-08de656f9d72
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 11:05:24.7935 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53a77ffc-c7e3-493c-24bd-08de656fa0f1
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
  Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB55.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB57.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB6758
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB997643
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,158 +164,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The image binaries generated by build are signed using a key file.
-Currently, for k3 SoCs by default the example key stored in
-arch/arm/mach-k3/keys/custMpk.pem is used for this. Changing the key for
-any purpose (testing, production environment, etc.) requires swapping
-the key here.
-
-This patch adds a signing-key-path etype to binman along with a Makefile
-variable SIGNING_KEY which can be used to provide a key file directly
-with build commands.
+Update the custMpk node in binman to use signing-key-path to use a
+custom key provided for signing bootloader images. In case the
+SIGNING_KEY argument is not provided during build, fallback to the
+example key in U-boot arch/arm/mach-k3/keys/custMpk.pem
 
 Signed-off-by: T Pratham <t-pratham@ti.com>
 ---
- Makefile                               |  1 +
- tools/binman/entries.rst               | 23 ++++++++++++++++++++
- tools/binman/etype/signing_key_path.py | 30 ++++++++++++++++++++++++++
- tools/binman/ftest.py                  |  7 ++++++
- tools/binman/test/351_signing_key.dts  | 12 +++++++++++
- 5 files changed, 73 insertions(+)
- create mode 100644 tools/binman/etype/signing_key_path.py
- create mode 100644 tools/binman/test/351_signing_key.dts
+ arch/arm/dts/k3-binman.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 435a4bf372d..2c7994b8c41 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1697,6 +1697,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
- 		-a vpl-dtb=$(CONFIG_VPL_OF_REAL) \
- 		-a pre-load-key-path=${PRE_LOAD_KEY_PATH} \
- 		-a of-spl-remove-props=$(CONFIG_OF_SPL_REMOVE_PROPS) \
-+		-a signing-key-path=${SIGNING_KEY} \
- 		$(BINMAN_$(@F))
- 
- OBJCOPYFLAGS_u-boot.ldr.hex := -I binary -O ihex
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index a81fcbd3891..0f2e0719221 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -1986,6 +1986,29 @@ available. This is set by the `SetAllowMissing()` method, if
- 
- 
- 
-+.. _etype_signing_key_path:
-+
-+Entry: signing-key-path: Entry containing a signing key blob
-+---------------------------------------------------------------
-+
-+Properties / Entry arguments:
-+    - signing-key-path: Filename of file to read into entry. This typically
-+        is <file_name>.pem or <file_name>.key
-+
-+This entry holds the private key file used for signing images.
-+
-+Typical usage of this is to provide the full path to the key file in 
-+SIGNING_KEY make argument during build. If this is not provided, the entry will
-+fallback to using the key file specified in the binman node filename property::
-+
-+    binman {
-+        signing-key-path {
-+                filename = "default_key.pem";
-+        };
-+    };
-+
-+
-+
- .. _etype_tee_os:
- 
- Entry: tee-os: Entry containing an OP-TEE Trusted OS (TEE) blob
-diff --git a/tools/binman/etype/signing_key_path.py b/tools/binman/etype/signing_key_path.py
-new file mode 100644
-index 00000000000..a68b854b7e4
---- /dev/null
-+++ b/tools/binman/etype/signing_key_path.py
-@@ -0,0 +1,30 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright (c) 2026 Texas Instruments Incorporated - https://www.ti.com/
-+# Written by T Pratham <t-pratham@ti.com>
-+#
-+# Entry-type module for private key file for signing images
-+#
-+
-+from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
-+
-+class Entry_signing_key_path(Entry_blob_named_by_arg):
-+	"""Private key file path for signing images
-+
-+	Properties / Entry arguments:
-+		- signing-key-path: Path to the private key file
-+
-+	This entry holds the private key file used for signing images.
-+
-+	Typical usage of this is to provide the full path to the key file in
-+	SIGNING_KEY make argument during build. If this is not provided, the entry will
-+	fallback to using the key file specified in the binman node filename property::
-+
-+		binman {
-+			signing-key-path {
-+					filename = "default_key.pem";
-+			};
-+		};
-+	"""
-+	def __init__(self, section, etype, node):
-+		super().__init__(section, etype, node, 'signing-key')
-+		self.external = True
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a53e37f31b3..8383db567de 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -109,6 +109,7 @@ TI_BOARD_CONFIG_DATA  = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x
- TI_UNSECURE_DATA      = b'unsecuredata'
- IMX_LPDDR_IMEM_DATA   = b'qwertyuiop1234567890'
- IMX_LPDDR_DMEM_DATA   = b'asdfghjklzxcvbnm'
-+SIGNING_KEY_DATA      = b'signingkey'
- 
- # Subdirectory of the input dir to use to put test FDTs
- TEST_FDT_SUBDIR       = 'fdts'
-@@ -238,6 +239,7 @@ class TestFunctional(unittest.TestCase):
-         TestFunctional._MakeInputFile('rockchip-tpl.bin', ROCKCHIP_TPL_DATA)
-         TestFunctional._MakeInputFile('ti_unsecure.bin', TI_UNSECURE_DATA)
-         TestFunctional._MakeInputFile('capsule_input.bin', EFI_CAPSULE_DATA)
-+        TestFunctional._MakeInputFile('signing_key.pem', SIGNING_KEY_DATA)
- 
-         # Add a few .dtb files for testing
-         TestFunctional._MakeInputFile('%s/test-fdt1.dtb' % TEST_FDT_SUBDIR,
-@@ -8334,5 +8336,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self.assertEqual(len(subnode4.props), 0,
-                         "subnode shouldn't have any properties")
- 
-+    def testSigningKey(self):
-+        """Test that signing key is correctly passed using signing-key property"""
-+        data = self._DoReadFile('351_signing_key.dts')
-+        self.assertEqual(SIGNING_KEY_DATA, data)
-+
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/binman/test/351_signing_key.dts b/tools/binman/test/351_signing_key.dts
-new file mode 100644
-index 00000000000..e035f61a242
---- /dev/null
-+++ b/tools/binman/test/351_signing_key.dts
-@@ -0,0 +1,12 @@
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index 761b1730464..51404513561 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -14,7 +14,7 @@
+ &binman {
+ 	custMpk {
+ 		filename = "custMpk.pem";
+-		custmpk_pem: blob-ext {
 +		signing-key-path {
-+			filename = "signing_key.pem";
-+		};
-+	};
-+};
+ 			filename = "arch/arm/mach-k3/keys/custMpk.pem";
+ 		};
+ 	};
 -- 
 2.34.1
 
