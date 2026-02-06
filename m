@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38438EE20B8
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 16:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A52EEE20B9
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 17:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E1E783B85;
-	Fri,  6 Feb 2026 17:53:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BBBBC83A64;
+	Fri,  6 Feb 2026 18:09:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RA5nCWcI";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HqL/t7ln";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nQ028O3e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E43B283A64; Fri,  6 Feb 2026 17:37:56 +0100 (CET)
-Received: from mail-dy1-x1330.google.com (mail-dy1-x1330.google.com
- [IPv6:2607:f8b0:4864:20::1330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8846683AA7; Fri,  6 Feb 2026 18:09:58 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 638E2836D3
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 17:37:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94EB1836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 18:09:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ssunkkan@gmail.com
-Received: by mail-dy1-x1330.google.com with SMTP id
- 5a478bee46e88-2b7381d2d95so1149648eec.0
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 08:37:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770395872; x=1771000672; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MlagFMG+JN7QPnJ7lsSxjI6eAiPQIpKj3fmcP0t2ev8=;
- b=RA5nCWcIcXXsrI/5f54fRSUiFZbgRnXZ1Q6hvmCiOHDDUvwHxTJbII+A69Vs38QFDK
- T0I8spCqN/zYLHJY/ITFptH9tsLYwVhieTAlZhq4ZK0W2ujnQBVvy9jidJT5aam6UMS9
- EIl16gK9DRmMHC8DRbPjfIlror4Ez3KPt5NXITn46rEy7VHQgHv6x1Nhie0sbtL1VTUM
- tm2rgNYqa3M1s1fTun6tIrhwde3N6bn0bhI8dN8oMhnEnzVTVKBPYFGI511vz1i0dmV8
- VV/zWO554OCeFAXVTTRNM0yzHNIew/OC+BmabJ9XeDbePsOsSrdLsELKo5y6DFBLYCAK
- xebA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770395872; x=1771000672;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MlagFMG+JN7QPnJ7lsSxjI6eAiPQIpKj3fmcP0t2ev8=;
- b=akEHRcalR/KLhqD7EfVOLfuavlU6dtfGVpQsGstngErHcVX3UAjI6F0e+ptWwknFSH
- FnAkLrp9Y0dhB3Z7Ae03Gn3yORz4qjKcrDQ6QrnlIV9ITKSWdFqQAXMTvjuaAJLqHUTD
- AqTf+R6ZYYOus8e4Cp/Jm4o2/heKqt0IRkhNx0dUTxRmi8u1YJQnpBuaLjrXqxMki5F5
- dQtm0d1f/nzTvl4OmC5lEFlsEdnW3w+HriXaRNPDcCn7NauSTtNnAE0RsxLR5jcQAoPT
- 6tJ7keheWeFpABJu4XhSDBcPSpvJuEFawNfXA4srjYS8SDpeL8Oaf9wl31Ii8s8sTu9v
- gyeQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWrRhm2EXfPxu1ksAeXFVl2T5Tmyuv4Sb+LT7drvM//fBx8UYJEWjvgXK6UyVbWgW+BaOxMfOI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8vbdhOz5GcStO8vJjxgypu/QG3S5DxGJNBY4JM+5SVmOEMU0x
- XtWIHDFVZWoeCPHhbSUGkS14Q4sSsyP24XGZdjUaHnJqlKf8pVNoaRwo
-X-Gm-Gg: AZuq6aKKZQJs6seBU0Agl5VMr0gbphAV+IqDzNBHBqDlI6HyIUlrkhRM/gUxuqbbNHx
- VN1ZJH6c4Jg8bvO5/Rvjf6nhd1DWFIvqUthKh+6jaQcmF2nsyJeU2wt2Ngu1Ly0coVGVCLZXNuR
- 1lgZBfIAhin0aBXa+3K+sxFR0HMWmvodCUBNGQZf4WywaVaQbffRWCcuq7wNTvL3hkIo4srzAAg
- Qvy2TnMYCB3hW5ZP/+6Axi4sUJTqR02SB2FeIGNLagH5vBvSvmAC64Ux9jTF1N/zvJey5O5BBZi
- kygtApOxCy8HnaCLjYfYkAXlWXiUb2vgEHVmy3+Ig8RHnOjd6B7Rm8zhpxCWWXZ61CuMh677du0
- 1aD6sNcpAdnzofECaU4uBJ82BchYshT5oUY9TobvMGfNmb+EgzhUijRGdrxSZ9AlsB7gBjPv/k0
- Jux1j1M4nhQ1ULRKS2PWyr
-X-Received: by 2002:a05:7300:a284:b0:2b7:e7bb:7959 with SMTP id
- 5a478bee46e88-2b855c7ada3mr1189242eec.12.1770395871612; 
- Fri, 06 Feb 2026 08:37:51 -0800 (PST)
-Received: from localhost.localdomain ([107.172.49.54])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2b855ad8d63sm2085831eec.4.2026.02.06.08.37.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Feb 2026 08:37:51 -0800 (PST)
-From: Ssunk <ssunkkan@gmail.com>
-To: jagan@amarulasolutions.com,
-	vigneshr@ti.com
-Cc: tudor.ambarus@linaro.org, u-boot@lists.denx.de, Ssunk <ssunkkan@gmail.com>
-Subject: [PATCH] mtd: spi: spi-nor-ids: Add support for XMC XM25QH01D
-Date: Sat,  7 Feb 2026 00:37:13 +0800
-Message-ID: <20260206163713.812-1-ssunkkan@gmail.com>
-X-Mailer: git-send-email 2.41.0.windows.1
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4f70vS2sQtz9thw;
+ Fri,  6 Feb 2026 18:09:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770397796;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7NiwOzXK47SUG3H0PjQUQWHOfsbIdCZK/G1ozgjiCv4=;
+ b=HqL/t7lnlIU/X/YtFzyiNvPi+eCUfgQbATTefHxk10GaHS2m6rLMCyZRR8P9LQevy9MAFw
+ atOqjcz8XeTF9fJ0VbpBpoypyBRs207UXUJXwBe83eNKbZyx8u3xVTdkw/A1QbVx1agkQP
+ iTlEnHHpgGSl1CcJa5ep+TOjTuRFxOSByDWEDWAZma2Jql5egMlBKKvnmBBZnSUDq3PdpG
+ Uy5wLWzoxqscQV55PrqSYh0WmwbdHMcFzRa3zDgoIKtetm31DUgvWHffO5obYGgAxVb/RK
+ JgumYrcXfZg6PjSKTZ0Waoyn/VtPzq5KO6W/8l9NkxOuqR0tLons4/xvA3mBiQ==
+Message-ID: <d3550af8-04ba-4cca-a062-5973f9dac251@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770397794;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7NiwOzXK47SUG3H0PjQUQWHOfsbIdCZK/G1ozgjiCv4=;
+ b=nQ028O3eVxs706Kk4uFE086Q3S5rt0Jec0+HWJ7Cw9sZKT7PevxhcS2sDQfn42AVHMM6Sq
+ g0V2zqrIBWcA3wziDbjKvk2ZFSWWzHVADoD/FJodqDLi09F8mLwrdVmUpDio6hW+DKix2U
+ GcqsP9eSUqqNHcJUhCcyHGa4KolHV9Py8N8zY/lChlwcd+eZdz4duiEVC3W2MzLZ1eDMcx
+ sqZ+sN8tvQ8G/EvYo//cAKzaMnA36WGL4D3kVWmfnK4TYeir7a93vG58mYIKrB/x0YW1nI
+ LvaApAxEllWA87mMG+D5uHcFvK1V87ShpjPhghUMlgzLKLKfzxas3xIcEkPZqw==
+Date: Fri, 6 Feb 2026 18:09:49 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 06 Feb 2026 17:53:38 +0100
+Subject: Re: [PATCH v2] arm: spl: Ensure 8 byte alignment of appended DTB
+ without separate BSS
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Brian Sune <briansune@gmail.com>, Phil Phil Sutter <phil@nwl.cc>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, adsp-linux@analog.com
+References: <20260130183635.2612933-1-trini@konsulko.com>
+ <20260205234158.3768337-1-trini@konsulko.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260205234158.3768337-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: t4gzjqu9hy8gsjfyqtkf5qjbt55syicb
+X-MBO-RS-ID: 051455a3259912baa94
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,25 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for XMC XM25QH01D SPI NOR flash.
+On 2/6/26 12:41 AM, Tom Rini wrote:
+> Historically, when we have an appended device tree and also our
+> resulting binary will contain the BSS section, we have ensured that
+> everything will be where it's expected to be by declaring that the BSS
+> is overlayed with a symbol matches the end of the port
 
-Datasheet: https://www.xmcwh.com/uploads/958/XM25QH01D_Ver1.0.pdf
+part ?
 
----
- drivers/mtd/spi/spi-nor-ids.c | 1 +
- 1 file changed, 1 insertion(+)
+> of the ELF binary
+> that is objcopy'd to the binary we concatenate with. This in turn means
+> that the logic to generate a "pad" file, which is the size found in the
+> __bss_size symbol, will be correct and then we can concatenate the
+> device tree and it will begin at __bss_size at run time.
+> 
+> With commit 5ffc1dcc26d3 ("arm: Remove rel.dyn from SPL linker scripts")
+> we removed this overlay as part of trying to ensure that we met both the
+> requirements of the device tree to be 8 byte aligned as well as that our
+> logic to generate the -pad file would match what ended up in the
+> resulting binary. While it was correct to remove an unused section it
+> did not solve ultimately solve the problem for all cases.
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index b6a07fa9063..954e5634d81 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -609,6 +609,7 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("XM25QU256C", 0x204119, 0, 64 * 1024, 512, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("XM25QH512C", 0x204020, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("XM25QU512C", 0x204120, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
-+	{ INFO("XM25QH01D", 0x204021, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- #endif
- #ifdef CONFIG_SPI_FLASH_XTX
- 	/* XTX Technology Limited */
--- 
-2.34.1
+solve ultimately solve ... one solve is enough
+
+> To really fix the problem, we need to do two things. First, our final
+> section prior to _image_binary_end must be 8 byte aligned (for the case
+> of having a separate BSS and so our appended DTB exists at this
+> location). This cannot be '.binman_sym_table' as it may be empty, and in
+> turn the ELF type would be NOBITS and so not copied with objcopy. The
+> __u_boot_list section will never be empty
+
+How can we be sure of that ?
+
+> , so it is our final section,
+> and ends with a '. = ALIGN(8)' statement. Second, as this is the end of
+> our copied data it is safe to declare that the BSS starts here, so use
+> the OVERLAY keyword to place the BSS here.
+
+[...]
+
+> @@ -99,5 +99,6 @@ SECTIONS
+>   
+>   ASSERT(_image_binary_end % 8 == 0, \
+>          "_image_binary_end must be 8-byte aligned for device tree");
+> +
+>   ASSERT(ADDR(.bss) % 8 == 0, \
+>          ".bss must be 8-byte aligned");
+Please drop this extra newline ^ .
