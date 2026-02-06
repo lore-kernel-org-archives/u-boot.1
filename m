@@ -4,108 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34DE2EE2091
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 12:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32D8CEE209D
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 12:50:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C2E5836D3;
-	Fri,  6 Feb 2026 13:48:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB4AF836D3;
+	Fri,  6 Feb 2026 13:50:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="chUdKipV";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZEGRHVsh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52D70838FA; Fri,  6 Feb 2026 13:48:44 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id B84EC83AAD; Fri,  6 Feb 2026 13:50:45 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE5C08352B
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 13:48:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7368D8352B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 13:50:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b885e8c6727so439973366b.1
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 04:48:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770382121; cv=none;
- d=google.com; s=arc-20240605;
- b=BDjx/lYZ8f370fdpeDDVVMhSu07mDnLQqcYXwWUlRl1fuVu7jy+Z44ukHgkPYGJE5h
- ce/ML+cSYTn+DakEFDvT7PBYTE+bbntNS1bcdgLkFchC/OhdTEHH5Bkd7zvhRB9Z74Q2
- sWzk0js+idGWqTBK+NWjSTb8GDk+WXB2UwzelHz2vi+oB5oSNUcohAmeldxnHLXu3BaP
- +RmGx2RO+L5hbKQxJWxR7Ngbp9PzZoDUx9gWAM9yXFFS6q5puWGsIDPybVu2MGphDPzR
- LKsxSr1gol1pYCMeULITf4Tc2TXZeT9bl2yyxMImgAwq+6its5SXN+6cL7Qm3JhvXHeA
- mnUg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=owmpY+iuyw7UVgsnGNXJRfBysimjCQZkNtsnsIqmjvc=;
- fh=csLC2/FkJfxKpQDeIZ3tg9f+DYUswWLsDoMr6bnRRsU=;
- b=RKRGERBjhLODG29HpiLcME5ZpD6mNSgGSY9c2hZJ5eYOjvA+ay38Rk4MZ8SU8IpQjy
- lCjjvopyfHGoLBl43eqtzymtsGN/yFH4dsz+OrStXh4mSR/T6reLtkXdkqA0DuzJn9lh
- xocliwzHufnI2elpYM04oSF1jzgfPPF5UzGC3FobCFo96M5fH81bRVOiY8VXtYAB/ncx
- Zs3oZSyY8/hWLoiR5WCPbHRQC07XH1VurKx2Rv0cvfLULm67HJeGiaoGhGZdk/YGNgv8
- zLiynAhu0KMw9RcMgrWLcpfCawR05zIe2MDHexvorRtiCy0VqIw6nd0wP+4XBWZgaNxB
- jgfA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-4362c635319so436182f8f.2
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 04:50:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770382121; x=1770986921;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770382238; x=1770987038;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=owmpY+iuyw7UVgsnGNXJRfBysimjCQZkNtsnsIqmjvc=;
- b=chUdKipVKwchP/4PzzVp1BCeQtLrbLt3zf3Zryd0w/vej0tavpFNuaaGch4pNT4lmc
- Jjg5KokvK80UPBSNoEWRyFel6b9lVntKVjwRAbSAkUEcfdXF1SP1AnwHeAuKEUholGid
- Agx2gBy2FcxF/dz2PJiK1ljJx/LJ0EPuW8h6B0zXEYhMb8L/kkXlGc7GBCpv4IpIQAi4
- oHdKORrHvU+e8tgt5y8tWht2r+TNjXt4j6ao7znS/WcM4tSife+GM/cp2i35k0fY+Y3S
- rEg/ROvOa3z5HXdYEvikOzkgou3UA85oHRpx0s1AkxChsqrlo7EtGyIHNmKw3lVYL+eD
- tQhA==
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/CCzLn880DHAJyj8knj639RJu7r0Bf4zjY9cyAvA8xs=;
+ b=ZEGRHVsh1Qp2wWzSDxat7ZU2980RIV1tOlLo9MMG6KfR4/5vJqhweeJT9RSWxqCG7Z
+ Ot6SHacYOPiqWJbPYVVcinoWWPklUXc5q3ofLFAFsFFFYK3GhhUIR258R4D8DxI9qpvK
+ cwFNytfx704Ke5O/qMmdKIbIr21RIEcG4yiFynbamCzCn3ZjUvYoKsCspJgI+fyteo3I
+ k3Uz1jZg3DlEBawrgswfl5ryzKb5dZTXgn1cjXDbEaaJVoIo/kjFg4Kzho8f+zFzOY74
+ oigJQl88eXw+PzKzqaKn2xWQTezTJbWuMV7Nah/8h33g1rjdJqU4JgKg0pD5697OwdjS
+ Jtvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770382121; x=1770986921;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=owmpY+iuyw7UVgsnGNXJRfBysimjCQZkNtsnsIqmjvc=;
- b=Gq2yqkz7kxnIHtKAHkr5tpkXjw5KTBz1P5qnbZ4yv+vo1L/Hf9GzYGh5KcC9szAC9I
- IDFOxaCxlWH5tTZ519PYvejPqfm/Z2QOr4gDAYznLcIpwsKWG2LKlZuWLUTMflQue/Og
- n52l6uEau480WlCEPvy7/nrTXQF/fcLR7cn6y7WgUh/ih0cJamD5xY7xpPp2CcwWcnth
- R+UJXj+yMiBryfBDrF+Nhh+oxp8pZY0wlAG8BsOjdVmpr1x4kzifKRa4WcBP+C8vXQw5
- nrMWPCvBw0FfX16Ub++O1S0Lwfj+vHBasctF0XLhtSEfOVxUO5Ih9WXJtLkWHg5fZfPT
- VtIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJk5yxizf7nxWMH+JcKxkSe+cfbZug8ykKTvaByj+xHc6fivmkdBx0tiASM0i1oRdZA9SIXsg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+BRkXY3uImvyb7N/X9vmZ1kOxa0NAPBHF3F8zjSkr2ChdW+44
- 2y/xP0LOBeYBvlbDeJr7GnUquhOBKlj//4GWnHHM+5632eHo9XexgCAicnXVEUf4jW7SU2wtgMB
- yRXqhDlKsdErlPglYXAPgsCFLgLXix3ZVFPssruwlXg==
-X-Gm-Gg: AZuq6aLTc4nVsb2ohpg+vTypj05XLn/cd4suz+bmlW7/Ub3Vgzy4Pt2PIx4vglq7pog
- DOiycwpYfUOsEs0qPjr/HWiwO4gASWGKHZYfCqt7tKhSI4mz1wO0Q1E0CApQfZzOzboEhLQ0TEY
- MT/uMVJYcjMefSWe7Bl52Tu8oUayn+S/R2W/aN2ppJjb1Ov6CehiYCOs4UgYj3KLc5YiMQeX4xk
- 1TRvqyIrE299+NrgZuiDxGR1e8eTnV8a3Acdk9qd3BUx5/t+r+lyCs/vtYNje2TWWhT4JdIyJn9
- DlY1Sjsvi+KHpbc/YhG/y1q14nLF
-X-Received: by 2002:a17:906:794b:b0:b8e:2fc5:c44f with SMTP id
- a640c23a62f3a-b8edb9b8964mr178340866b.21.1770382120740; Fri, 06 Feb 2026
- 04:48:40 -0800 (PST)
-MIME-Version: 1.0
-References: <20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com>
- <20260205-mtk-mach-clean-up-duplicates-v1-5-b7d4a43c18eb@baylibre.com>
- <CAEHHSvasBSDP8S+v5qbiAgJdNH9bvLcogi3oh8FJMgpfQ9VAOg@mail.gmail.com>
-In-Reply-To: <CAEHHSvasBSDP8S+v5qbiAgJdNH9bvLcogi3oh8FJMgpfQ9VAOg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1770382238; x=1770987038;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/CCzLn880DHAJyj8knj639RJu7r0Bf4zjY9cyAvA8xs=;
+ b=Rz5fXJRK1+jbdkjUzK+qXKK0dRdHckyI2rrtuomyC6esphjweugCaBV+nh+pOpldAv
+ 59yPric2kyOIWqxK42RUhYKDbtox/5mvcijMYqsgJ/y79YsiO05ghEs8Q49Ba7MWieNQ
+ iriJYlRXhmdchevyVnrj/grKePVslraqzHAL98noLLJHl/JsbMw14NBy+x8YjUEvjLiN
+ 42SQbr6gqZDCAze8EtUEt8pyhgR0/YOt5zgkQc4erZUnWuUyBAgmJ8vLRm/R1xZiZv95
+ yDvW7qE75cW6zpy7/TS6e65ozus8P7fcdvPO/e1y1uxO1wsv+HKOrNawpC+RmAxVikbY
+ WFYA==
+X-Gm-Message-State: AOJu0YxYOoNrMZfnKqpamqiV/GE5x8seGJHZVo+qLBh4xAmsYqV8eEYE
+ gj1uKBppkIB0dzI4jsbHkV1JK012v7AqIxXCjXFRx6JmC5Y9n13+tZhVSkZjtOPKiv8=
+X-Gm-Gg: AZuq6aJ6GDjyFyN/5m9Zuc2221foY/J21KTKx6c+doTkG0RUpsoAedDktaFHoFaMy8N
+ 8FZqzmFwCkeIAUaNgn/e84fDCdb2PQhNaRIFCv+eXQjErlohSU93kI71+cq9/N/6lcfdVyt7/fj
+ AHyDY5Peybxfa5SkfNELwFnpe6EjFqGb7foaAB9oS2iuYe2301Z18A4n2xfEmOsoSvbl8ADmJK6
+ 0J7MkAfwF707pc8WDnsgYfHcW6BqdATuw//zZC/YH31r7NZrbQaX61zBaBNymB3sW7b7F+4DdsE
+ sv+XMDdaoh4cLtb9AeGHFR9H/NXmikxhqmggIW7SbkSIDhcim9gMKusxvTisLZRU2KRJoEH4cO8
+ MM7CJvFOSbM2UQPixAIXqQKiYQXTMyn6AI6lE1wuefrw7NN8696UOCIs7xbs8426EzYd3CMXpX3
+ myDlflkbDHmqXZwMUtX3VmhKUJRBCgGfKzQ7EgUiv8wsuxDaofzq/MJbdc5K1uD+4SZUxX+DXbA
+ B5PVRhkvQ==
+X-Received: by 2002:a5d:5f82:0:b0:430:f3fb:35fa with SMTP id
+ ffacd0b85a97d-436293800ddmr3855668f8f.57.1770382237828; 
+ Fri, 06 Feb 2026 04:50:37 -0800 (PST)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-56a2-efb9-07f1-cf08.rev.sfr.net.
+ [2a02:842a:d52e:6101:56a2:efb9:7f1:cf08])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-436296bd4a1sm5812386f8f.17.2026.02.06.04.50.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Feb 2026 04:50:37 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 6 Feb 2026 13:48:28 +0100
-X-Gm-Features: AZwV_QjqXWUkQOdp9ywpYME7hH8T1sVfVWP5vjp0r2W-JLjXdUtPhOUxdkOGHEQ
-Message-ID: <CAEHHSvZ2bQy+b7kjO0jZyFEo0e2pYsfA9YxBk2m3DCOrcRu2Gg@mail.gmail.com>
-Subject: Re: [PATCH 5/5] arm: mediatek: consolidate ARMv8 memory maps
-To: David Lechner <dlechner@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+Date: Fri, 06 Feb 2026 13:50:31 +0100
+Subject: [PATCH v2] board: mediatek: add MT8370 EVK board support
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260206-add-mt8370-evk-board-v2-1-105c606f80dc@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32POW7DMBBFryKwzhhcRJFSlXsELjjkKCKsLdSCG
+ IbubtpqUqX8H5g/7z3YQinSwpriwRLtcYnTmIP8KJjv3PhNEEPOTHJZcclLcCHAsFplONB+A5x
+ cClAF2dZlpThWhuXTOVEbf9+zX9czJ/rZ8vp6lgzdQuCnYYhrU6CWQiG2waOwQiJpwUtprDZWG
+ iKL5LFubcv+UmXIk0lnnhsMznfge3IjbDOEbe6jd/kbuCoYNKVWwtTNLtiLp4vLOqX72zpXL6D
+ /BXcBApRQWVOrYEv9ie7eR0x0yRLsehzHE9bCDIdLAQAA
+X-Change-ID: 20260204-add-mt8370-evk-board-6d2f94630b67
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ David Lechner <dlechner@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,526 +115,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le ven. 6 f=C3=A9vr. 2026 =C3=A0 11:07, Julien Stephan <jstephan@baylibre.c=
-om> a =C3=A9crit :
->
-> Le ven. 6 f=C3=A9vr. 2026 =C3=A0 00:52, David Lechner <dlechner@baylibre.=
-com> a =C3=A9crit :
-> >
-> > Consolidate all mem_map definitions for MediaTek ARMv8 platforms into a
-> > single file. The size of the DDR and MMIO regions can vary, so Kconfig
-> > options are added to configure them by target.
-> >
-> > Signed-off-by: David Lechner <dlechner@baylibre.com>
-> > ---
-> >  arch/arm/mach-mediatek/Kconfig                     | 21 ++++++++++++++=
-++
-> >  arch/arm/mach-mediatek/Makefile                    |  1 +
-> >  .../arm/mach-mediatek/armv8-mem-map.c              | 14 ++++-------
-> >  arch/arm/mach-mediatek/mt7622/init.c               | 20 --------------=
--
-> >  arch/arm/mach-mediatek/mt7981/init.c               | 21 --------------=
---
-> >  arch/arm/mach-mediatek/mt7986/init.c               | 21 --------------=
---
-> >  arch/arm/mach-mediatek/mt7987/init.c               | 21 --------------=
---
-> >  arch/arm/mach-mediatek/mt7988/init.c               | 21 --------------=
---
-> >  arch/arm/mach-mediatek/mt8183/init.c               | 20 --------------=
--
-> >  arch/arm/mach-mediatek/mt8512/init.c               | 21 --------------=
---
-> >  arch/arm/mach-mediatek/mt8516/init.c               | 20 --------------=
--
-> >  arch/arm/mach-mediatek/mt8518/init.c               | 21 --------------=
---
-> >  board/mediatek/mt8365_evk/MAINTAINERS              |  5 ----
-> >  board/mediatek/mt8365_evk/Makefile                 |  3 ---
-> >  board/mediatek/mt8390_evk/MAINTAINERS              |  6 -----
-> >  board/mediatek/mt8390_evk/Makefile                 |  3 ---
-> >  board/mediatek/mt8390_evk/mt8390_evk.c             | 29 --------------=
---------
-> >  17 files changed, 27 insertions(+), 241 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kc=
-onfig
-> > index d1d2605b2cc..33717a1864f 100644
-> > --- a/arch/arm/mach-mediatek/Kconfig
-> > +++ b/arch/arm/mach-mediatek/Kconfig
-> > @@ -130,6 +130,27 @@ config TARGET_MT8518
-> >
-> >  endchoice
-> >
-> > +if ARM64
-> > +
-> > +config MTK_MEM_MAP_DDR_SIZE
-> > +       hex "DDR .size in mem_map"
-> > +       default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET=
-_MT8188
-> > +       default 0xc0000000 if TARGET_MT8365
-> > +       default 0x80000000 if TARGET_MT7981 || TARGET_MT7986 || TARGET_=
-MT8183
-> > +       default 0x40000000 if TARGET_MT7622 || TARGET_MT8512
-> > +       default 0x20000000
-> > +       help
-> > +               Target-specific DDR region size in mem_map.
-> > +
-> > +config MTK_MEM_MAP_MMIO_SIZE
-> > +       hex "MMIO .size in mem_map"
-> > +       default 0x40000000 if TARGET_MT7622 || TARGET_MT7981 || TARGET_=
-MT7986 || TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8512
-> > +       default 0x20000000
-> > +       help
-> > +               Target-specific MMIO region size in mem_map.
-> > +
-> > +endif
-> > +
-> >  config SYS_BOARD
-> >         string "Board name"
-> >         default "mt7622" if TARGET_MT7622
-> > diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/M=
-akefile
-> > index 44591bed6fa..17e645989e5 100644
-> > --- a/arch/arm/mach-mediatek/Makefile
-> > +++ b/arch/arm/mach-mediatek/Makefile
-> > @@ -1,5 +1,6 @@
-> >  # SPDX-License-Identifier:     GPL-2.0
-> >
-> > +obj-$(CONFIG_ARM64) +=3D armv8-mem-map.o
-> >  obj-y  +=3D cpu.o
-> >  obj-$(CONFIG_MTK_TZ_MOVABLE)   +=3D tzcfg.o
-> >  obj-$(CONFIG_XPL_BUILD)        +=3D spl.o
-> > diff --git a/board/mediatek/mt8365_evk/mt8365_evk.c b/arch/arm/mach-med=
-iatek/armv8-mem-map.c
-> > similarity index 55%
-> > rename from board/mediatek/mt8365_evk/mt8365_evk.c
-> > rename to arch/arm/mach-mediatek/armv8-mem-map.c
-> > index 41a6febf03d..0abddb99f25 100644
-> > --- a/board/mediatek/mt8365_evk/mt8365_evk.c
-> > +++ b/arch/arm/mach-mediatek/armv8-mem-map.c
-> > @@ -1,22 +1,18 @@
-> > -// SPDX-License-Identifier: GPL-2.0
-> > -/*
-> > - * Copyright (C) 2023 BayLibre SAS
-> > - * Author: Julien Masson <jmasson@baylibre.com>
-> > - */
-> > +// SPDX-License-Identifier: GPL-2.0-only
-> >
-> >  #include <asm/armv8/mmu.h>
-> >
-> > -static struct mm_region mt8365_evk_mem_map[] =3D {
-> > +static struct mm_region mediatek_mem_map[] =3D {
-> >         {
-> >                 /* DDR */
-> >                 .virt =3D 0x40000000UL,
-> >                 .phys =3D 0x40000000UL,
-> > -               .size =3D 0xc0000000UL,
-> > +               .size =3D CONFIG_MTK_MEM_MAP_DDR_SIZE,
-> >                 .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> >         }, {
-> >                 .virt =3D 0x00000000UL,
-> >                 .phys =3D 0x00000000UL,
-> > -               .size =3D 0x20000000UL,
-> > +               .size =3D CONFIG_MTK_MEM_MAP_MMIO_SIZE,
-> >                 .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> >                          PTE_BLOCK_NON_SHARE |
-> >                          PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > @@ -25,4 +21,4 @@ static struct mm_region mt8365_evk_mem_map[] =3D {
-> >         }
-> >  };
-> >
-> > -struct mm_region *mem_map =3D mt8365_evk_mem_map;
-> > +struct mm_region *mem_map =3D mediatek_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt7622/init.c b/arch/arm/mach-media=
-tek/mt7622/init.c
-> > index 368f2916224..a043ca87398 100644
-> > --- a/arch/arm/mach-mediatek/mt7622/init.c
-> > +++ b/arch/arm/mach-mediatek/mt7622/init.c
-> > @@ -36,23 +36,3 @@ void reset_cpu(void)
-> >  {
-> >         psci_system_reset();
-> >  }
-> > -
-> > -static struct mm_region mt7622_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -struct mm_region *mem_map =3D mt7622_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt7981/init.c b/arch/arm/mach-media=
-tek/mt7981/init.c
-> > index 07da5897190..79afd6ce6be 100644
-> > --- a/arch/arm/mach-mediatek/mt7981/init.c
-> > +++ b/arch/arm/mach-mediatek/mt7981/init.c
-> > @@ -30,24 +30,3 @@ void reset_cpu(void)
-> >  {
-> >         psci_system_reset();
-> >  }
-> > -
-> > -static struct mm_region mt7981_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x80000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt7981_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt7986/init.c b/arch/arm/mach-media=
-tek/mt7986/init.c
-> > index a521c95bd9d..1fe56b3f145 100644
-> > --- a/arch/arm/mach-mediatek/mt7986/init.c
-> > +++ b/arch/arm/mach-mediatek/mt7986/init.c
-> > @@ -30,24 +30,3 @@ void reset_cpu(void)
-> >  {
-> >         psci_system_reset();
-> >  }
-> > -
-> > -static struct mm_region mt7986_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x80000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt7986_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt7987/init.c b/arch/arm/mach-media=
-tek/mt7987/init.c
-> > index 8b268297809..6364ab497f7 100644
-> > --- a/arch/arm/mach-mediatek/mt7987/init.c
-> > +++ b/arch/arm/mach-mediatek/mt7987/init.c
-> > @@ -39,24 +39,3 @@ void reset_cpu(ulong addr)
-> >  {
-> >         psci_system_reset();
-> >  }
-> > -
-> > -static struct mm_region mt7987_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x200000000ULL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt7987_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt7988/init.c b/arch/arm/mach-media=
-tek/mt7988/init.c
-> > index 8bdd3848d26..7ff843585ec 100644
-> > --- a/arch/arm/mach-mediatek/mt7988/init.c
-> > +++ b/arch/arm/mach-mediatek/mt7988/init.c
-> > @@ -38,24 +38,3 @@ void reset_cpu(ulong addr)
-> >  {
-> >         psci_system_reset();
-> >  }
-> > -
-> > -static struct mm_region mt7988_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x200000000ULL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt7988_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt8183/init.c b/arch/arm/mach-media=
-tek/mt8183/init.c
-> > index b445f3ea1e3..8dbf9c3df7e 100644
-> > --- a/arch/arm/mach-mediatek/mt8183/init.c
-> > +++ b/arch/arm/mach-mediatek/mt8183/init.c
-> > @@ -47,23 +47,3 @@ int print_cpuinfo(void)
-> >         printf("CPU:   MediaTek MT8183\n");
-> >         return 0;
-> >  }
-> > -
-> > -static struct mm_region mt8183_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x80000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x20000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -struct mm_region *mem_map =3D mt8183_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt8512/init.c b/arch/arm/mach-media=
-tek/mt8512/init.c
-> > index 3b48caf5196..361c589cbc2 100644
-> > --- a/arch/arm/mach-mediatek/mt8512/init.c
-> > +++ b/arch/arm/mach-mediatek/mt8512/init.c
-> > @@ -59,24 +59,3 @@ int print_cpuinfo(void)
-> >         debug("CPU:   MediaTek MT8512\n");
-> >         return 0;
-> >  }
-> > -
-> > -static struct mm_region mt8512_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x40000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt8512_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt8516/init.c b/arch/arm/mach-media=
-tek/mt8516/init.c
-> > index 82f8c509745..1d925dd478a 100644
-> > --- a/arch/arm/mach-mediatek/mt8516/init.c
-> > +++ b/arch/arm/mach-mediatek/mt8516/init.c
-> > @@ -94,23 +94,3 @@ int print_cpuinfo(void)
-> >         printf("CPU:   MediaTek MT8516\n");
-> >         return 0;
-> >  }
-> > -
-> > -static struct mm_region mt8516_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x20000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x20000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -struct mm_region *mem_map =3D mt8516_mem_map;
-> > diff --git a/arch/arm/mach-mediatek/mt8518/init.c b/arch/arm/mach-media=
-tek/mt8518/init.c
-> > index c04bcb63517..8fa1346021a 100644
-> > --- a/arch/arm/mach-mediatek/mt8518/init.c
-> > +++ b/arch/arm/mach-mediatek/mt8518/init.c
-> > @@ -51,24 +51,3 @@ int print_cpuinfo(void)
-> >         printf("CPU:   MediaTek MT8518\n");
-> >         return 0;
-> >  }
-> > -
-> > -static struct mm_region mt8518_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x20000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x20000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt8518_mem_map;
-> > diff --git a/board/mediatek/mt8365_evk/MAINTAINERS b/board/mediatek/mt8=
-365_evk/MAINTAINERS
-> > deleted file mode 100644
-> > index e0d65efe812..00000000000
-> > --- a/board/mediatek/mt8365_evk/MAINTAINERS
-> > +++ /dev/null
->
-> Hi David,
->
-> You are removing board/mediatek/mt8365_evk directory (and mt8390_evk
-> below), so you left mt8365_evk_defconfig (and mt8365_evk_defconfig)
-> without any entries in MAINTAINERS files.
-> So maybe we should add them to the MAINTAINERS file at the root directory=
-?
->
-> Also, if there is no more board directory for these boards, I think we
-> should remove CONFIG_SYS_BOARD=3D"mt8365_evk" and
-> CONFIG_SYS_BOARD=3D"mt8390_evk"  from their respective defconfig file,
-> as it should be empty if no board directory exist.
+This adds support for the MT8370 EVK board with the following
+features enabled/tested: Boot, UART, Watchdog and MMC.
 
-I forgot but we should also unset CONFIG_BOARD_INIT in defconfig for
-these boards, otherwise we end up with undefined reference to
-`board_init'
+MT8370 is based on MT8188.
 
-Cheers
-Julien
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+This series depends on [1] for several cleanups such as memory map.
 
->
-> I also notice that board/mediatek/{mt7620/mt621/mt7628} only contain
-> the MAINTAINERS file, without any board specific code. Maybe we can
-> take the opportunity to clean them as part of this series?
->
-> Cheers
-> Julien
->
-> > @@ -1,5 +0,0 @@
-> > -MT8365 EVK
-> > -M:     Julien Masson <jmasson@baylibre.com>
-> > -S:     Maintained
-> > -F:     board/mediatek/mt8365_evk/
-> > -F:     configs/mt8365_evk_defconfig
-> > diff --git a/board/mediatek/mt8365_evk/Makefile b/board/mediatek/mt8365=
-_evk/Makefile
-> > deleted file mode 100644
-> > index 90fc92b28c5..00000000000
-> > --- a/board/mediatek/mt8365_evk/Makefile
-> > +++ /dev/null
-> > @@ -1,3 +0,0 @@
-> > -# SPDX-License-Identifier:     GPL-2.0
-> > -
-> > -obj-y +=3D mt8365_evk.o
-> > diff --git a/board/mediatek/mt8390_evk/MAINTAINERS b/board/mediatek/mt8=
-390_evk/MAINTAINERS
-> > deleted file mode 100644
-> > index d46b8b2e156..00000000000
-> > --- a/board/mediatek/mt8390_evk/MAINTAINERS
-> > +++ /dev/null
-> > @@ -1,6 +0,0 @@
-> > -MT8390 EVK
-> > -M:     Julien Masson <jmasson@baylibre.com>
-> > -M:     Macpaul Lin <Macpaul.Lin@mediatek.com>
-> > -S:     Maintained
-> > -F:     board/mediatek/mt8390_evk/
-> > -F:     configs/mt8390_evk_defconfig
-> > diff --git a/board/mediatek/mt8390_evk/Makefile b/board/mediatek/mt8390=
-_evk/Makefile
-> > deleted file mode 100644
-> > index a26d46838c4..00000000000
-> > --- a/board/mediatek/mt8390_evk/Makefile
-> > +++ /dev/null
-> > @@ -1,3 +0,0 @@
-> > -# SPDX-License-Identifier:     GPL-2.0
-> > -
-> > -obj-y +=3D mt8390_evk.o
-> > diff --git a/board/mediatek/mt8390_evk/mt8390_evk.c b/board/mediatek/mt=
-8390_evk/mt8390_evk.c
-> > deleted file mode 100644
-> > index 5731199bf83..00000000000
-> > --- a/board/mediatek/mt8390_evk/mt8390_evk.c
-> > +++ /dev/null
-> > @@ -1,29 +0,0 @@
-> > -// SPDX-License-Identifier: GPL-2.0
-> > -/*
-> > - * Copyright (C) 2026 BayLibre SAS
-> > - * Author: Julien Masson <jmasson@baylibre.com>
-> > - */
-> > -
-> > -#include <linux/types.h>
-> > -#include <asm/armv8/mmu.h>
-> > -
-> > -static struct mm_region mt8390_evk_mem_map[] =3D {
-> > -       {
-> > -               /* DDR */
-> > -               .virt =3D 0x40000000UL,
-> > -               .phys =3D 0x40000000UL,
-> > -               .size =3D 0x200000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUT=
-ER_SHARE,
-> > -       }, {
-> > -               .virt =3D 0x00000000UL,
-> > -               .phys =3D 0x00000000UL,
-> > -               .size =3D 0x20000000UL,
-> > -               .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > -                        PTE_BLOCK_NON_SHARE |
-> > -                        PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > -       }, {
-> > -               0,
-> > -       }
-> > -};
-> > -
-> > -struct mm_region *mem_map =3D mt8390_evk_mem_map;
-> >
-> > --
-> > 2.43.0
-> >
+The new defconfig file added here is not yet part of any MAINTAINERS
+file, waiting for comment on [1] to be addressed.
+---
+Changes in v2:
+- Add defconfig file, missing on v1
+- Add dependency to [1], for memory map cleanup
+- Remove board/mediatek/mt8370_evk
+- Link to v1: https://lore.kernel.org/r/20260204-add-mt8370-evk-board-v1-1-3132f953d845@baylibre.com
+
+[1]: https://lore.kernel.org/all/20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com/
+---
+ configs/mt8370_evk_defconfig | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/configs/mt8370_evk_defconfig b/configs/mt8370_evk_defconfig
+new file mode 100644
+index 00000000000..48d3f64a42e
+--- /dev/null
++++ b/configs/mt8370_evk_defconfig
+@@ -0,0 +1,28 @@
++CONFIG_ARM=y
++CONFIG_COUNTER_FREQUENCY=13000000
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_ARCH_MEDIATEK=y
++CONFIG_TEXT_BASE=0x4c000000
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8370-genio-510-evk"
++CONFIG_TARGET_MT8188=y
++CONFIG_MTK_MEM_MAP_DDR_SIZE=0x100000000
++CONFIG_SYS_LOAD_ADDR=0x4c000000
++CONFIG_IDENT_STRING="mt8370-evk"
++# CONFIG_BOARD_INIT is not set
++CONFIG_CMD_CLK=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PART=y
++CONFIG_OF_UPSTREAM=y
++CONFIG_CLK=y
++CONFIG_MMC_MTK=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_MT8188=y
++CONFIG_BAUDRATE=921600
++CONFIG_DM_SERIAL=y
++CONFIG_MTK_SERIAL=y
++CONFIG_WDT=y
++CONFIG_WDT_MTK=y
++# CONFIG_RANDOM_UUID is not set
+
+---
+base-commit: b5213bbfdcb1812be510427857827ee8becb9f8f
+change-id: 20260204-add-mt8370-evk-board-6d2f94630b67
+prerequisite-change-id: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179:v1
+prerequisite-patch-id: c807f91e384d7853a624dcdac51146f533e83302
+prerequisite-patch-id: 2985130c9247aa746578d0999ef36afae5bfe81a
+prerequisite-patch-id: d7f2bde6b8c257d93ae3155dbe51c2b1e956a87d
+prerequisite-patch-id: 68791866bda399c0744095f456da7e5e50f50a48
+prerequisite-patch-id: 2605f6c13e06821386bd3bfbdf09e57bd8f3c940
+
+Best regards,
+-- 
+Julien Stephan <jstephan@baylibre.com>
+
