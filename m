@@ -4,108 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51175EE209E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 12:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1697EE20A1
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 13:14:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA57B836D3;
-	Fri,  6 Feb 2026 13:54:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 172EC836D3;
+	Fri,  6 Feb 2026 14:14:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="m7digAHB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sFs60tO3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E36483B85; Fri,  6 Feb 2026 13:54:25 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2D4B9838FA; Fri,  6 Feb 2026 14:14:46 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD0F18352B
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 13:54:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 970708352B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 14:14:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b8870ac4c4eso103602666b.2
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 04:54:22 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770382462; cv=none;
- d=google.com; s=arc-20240605;
- b=VSiPW/cnNqa2Zfjw7M6+57sPv+uqHVxNYJhVVR2gxOQc863k/8VcJ7wva3RXeHYQ0a
- pV5S9FVXyMNui94fTvlV00gE5SPKA68cxXU+vxJAtY8EPoSH/2I2gNn9A2SSz5p/HBjm
- h7iRXyI1DNUbZFDGUNKKWl0vdWzP3aCFOLo7KpkmT1rFQAiGz2geWQVjU0DKx05PGCdv
- D238qnvd0WHAeAVDNm5EEzoq5iJq6F8Ip7lRKEFNJyAvLEWxyGda3U/FFtRuc3jKqtrU
- MoeO9gv6XbNleDSlUNzpw/ewrtCfsi7pJe7BUQit26XoF0B3zCE+9iyPbtZrzOwp0ZcL
- 0b6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=ar67RZKcV+pfVTe7N70rE5ie+8/eFp60YehT2AeuVKc=;
- fh=ZKYkIgFDz6IaiVS0gxcw1ioVGtK+60r21PjB4mLXaPo=;
- b=DstStBIj4NK76DhKpvPwIb6+HVbZqvvIrt25UfbfN7fS/urzbS52rEWd8ZGUo4Ek0W
- sOrMjDEBrjuC+22VNMmvjF7Ia9Y6eKsuflUjXsgiz+i8tsJ1JpSsRDnbNyBJ5QqeZU9j
- wxNp45RIZ4AtrkWobdSS42Juvu4jMdBL5s80GlTCD+ZfDC+lyH6uGZiarEY3TjBLbnbK
- gMbliVNKQzJPGXufdL5Dt8GRFAU0NurAdg73awKdl2/Zm/14cH15uWgkyULgMXeecxy/
- ZrRoma3GRZ4q7NRZz4JO3ZSjW1BLUx0tfW9SgQkTb03Fge08ljs+7k95ZXJIQSmF7kCQ
- tW1A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770382462; x=1770987262;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ar67RZKcV+pfVTe7N70rE5ie+8/eFp60YehT2AeuVKc=;
- b=m7digAHBEEey6FEsAoiPiPhvZYPd09LcTgdquEtf/espdAsojJQTdxyTLNX3ugk/I3
- MJb7f6FVrXhnYalhvpXH0ODdGuxYeN9iEeUoTVa9MekWREAIv4nU9kn7hZibhpyDXO/k
- v1atjUPMT099K7HtqYKcOaNkW+qanl+tViq879rOIr9fhJuFifjhPaiuZEkc3khTGt9R
- 2hBBa1ys9k6GsahUO1rnaO06vPIp8ZC1hbtUSUPFmXUSIyasloFLxTe5oyNlB+tug/4z
- 6vVIALUZCilVbW/Z7xzMIzYXrRUxjuSNaW14OfVvBy7YhpRuhHVRSdTsHS/okux5JDzK
- 2Saw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770382462; x=1770987262;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=ar67RZKcV+pfVTe7N70rE5ie+8/eFp60YehT2AeuVKc=;
- b=C5Ex+tT1laDI2WyHPqWLaSSiyUJOMLA3BPVedqf0bZYbDLCRY2I1MFDAbUhN8sAtEk
- 2KX141EYYXw+e+XDBJajvOst/KG73SP6aFEDiKD24YCbTu5ALLM/JRBKqVOXTIfnrGdD
- tEn2GYsIC4qXrRdWvmuxVpyAbk4FaMAO6i/BCyzyyq9GlVi3FNoCWWIOC/tbqw6gYC7c
- Nv7UADdZ82eQzOK/+H3bpjK6nVv7ZUoUxl/TG0xc1FVw3cjAI2JEe9qF7OTWghGlSC/k
- CrCi1k8G/Ce2Phx+quKIcNWt+npc9BrGn4uajNg2b27RlNE6JlTooSUTDSI7ZHzLXgDL
- jApQ==
-X-Gm-Message-State: AOJu0YyDAYr+7rTjUXuJ9XFq9jk8jrkQc7MV68Czxn6zrV5OjvYALYq8
- rINuhzEpkabxP5rig+Q2jW57Up+8UYYnNzDnfO2zu3Y8PaK6dSAEEUGCdaqYCYAt9lHCWjFK2FM
- Qdj15S3K3Vec3ULCpfhoaax0AtecMED1YvFpfyDeaTA==
-X-Gm-Gg: AZuq6aKEhoZNhNoILR9REF6/9nPhEHzhB987kFLHs3dp1soupTMfP9xFRoWue5EY3KE
- Uk1GIBxJE0Vndls4aWWwgXsikE0amq3ma7Oem3Q/MStceX02OSMz69Hdk1Cjnp2rhevn1zr8ADw
- i9XSOK+qyRHYHhbeGae9Q8CcZDS0Q4xIP7O5WHZfyDNCr2uWRfBdV3skYX4J+nJaE+a8wFvk48+
- iJj+q/ioUaYK/L/ay0Xr4Wi+Y20mBE2Ig5wvl3G0TLus6GRrJ7FDUW4D6eqQKXQI2YlWO/2fqa6
- Zsj+dRTHkvkmilOrnrNdU+gtKCEaBmpvAr+6EMI=
-X-Received: by 2002:a17:907:2d8d:b0:b8e:2a8a:431a with SMTP id
- a640c23a62f3a-b8edf350596mr147591066b.34.1770382462191; Fri, 06 Feb 2026
- 04:54:22 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=t-pratham@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z840+DLKZE2aOTc3lbt0U30Go337I9kvwqlC0GcBK7tGtyyoWL4fbeGAA/npqi6ClV/9Etb4/z6zfbu1ozU5hZmGlGE/geLoGQ2RzqhqSSgzVnNhcP2Mx7PGCm45RmMQ5I+gaYzKw/1NjCL+Uqmg8B2q/AMW1yrhySO+F/tK8jCrK2uqToJSlZLG85aR5PGfiIZgbgNpDr/z//ThGK+9Y2ACBHcGjvD1mj21JFoFrbNonqVwVw9hpMykxh2PsMWMsqm+ZgVukPK28N/ky+j3oajamEdM5v7ODvacoNQhRCy06XHiS83MoAk2lP1ZTliSUhdMXH+8oSEIv0tS2BgHog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=D2mWOr53Xf/1u+FicYeg3jCOcqzZVD98gwI83sTwzdE=;
+ b=n4HG91CpINegua93LnipEYlsTqaPdU6hW+N8vWJ9Q4PtdiCffhptc0gunGRk3mAJrVkAkSDVeXQUA4eeUiUd7BTIti3bgh/wW3nNl/iLMm/Oq20Q1sUsX+GSVzCfyq6DFZ71lS6NJMvisUWco3W2bX1YPOzh/57sqAEawerDvhBfjMPR2O0hBKRA2FBgE173mmvO7EjEQ2kh5KtFeirpZ2bkfjj5nKaY3DO3tB8Bs53zYkTBKxMTvPE2DIjhdZtYWWIYuAnkHeInvLJH1R9YVxGkyjrkSkAhooMHRei9WzDC+bf0AiiG0eZfmcUi/9a9HA/A2XMrwHvTRRJpVHzz6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=D2mWOr53Xf/1u+FicYeg3jCOcqzZVD98gwI83sTwzdE=;
+ b=sFs60tO3A9hDH9oehxo6thMdcf1iPhcHefjwWNae+qaKXrFJw6aTkzht0fn7oiEVRnKjVxbl24hbwby6H/XqznRsz6zHYhkhKbjDu9nw/GYVEV8wtd9gDcs5KSqN9gmbGt3Lod4WDK7tJsxgXF48TSrqdjbbDlLomc+nI3GYeE4=
+Received: from BL1PR13CA0409.namprd13.prod.outlook.com (2603:10b6:208:2c2::24)
+ by BLAPR10MB5010.namprd10.prod.outlook.com (2603:10b6:208:30d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.13; Fri, 6 Feb
+ 2026 13:14:40 +0000
+Received: from BL02EPF0001A107.namprd05.prod.outlook.com
+ (2603:10b6:208:2c2:cafe::62) by BL1PR13CA0409.outlook.office365.com
+ (2603:10b6:208:2c2::24) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Fri,
+ 6 Feb 2026 13:14:23 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BL02EPF0001A107.mail.protection.outlook.com (10.167.241.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Fri, 6 Feb 2026 13:14:39 +0000
+Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Feb
+ 2026 07:14:33 -0600
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Feb
+ 2026 07:14:33 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 6 Feb 2026 07:14:33 -0600
+Received: from [10.24.69.191] (pratham-workstation-pc.dhcp.ti.com
+ [10.24.69.191])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 616DEUoR1290074;
+ Fri, 6 Feb 2026 07:14:30 -0600
+Message-ID: <73663e66-653a-4346-a976-bfa8fc11dff0@ti.com>
+Date: Fri, 6 Feb 2026 18:44:29 +0530
 MIME-Version: 1.0
-References: <20260204-add-mt8370-evk-board-v1-1-3132f953d845@baylibre.com>
- <20260204202915.GB2603314@bill-the-cat>
-In-Reply-To: <20260204202915.GB2603314@bill-the-cat>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 6 Feb 2026 13:54:08 +0100
-X-Gm-Features: AZwV_Qi_EYzONFc69hJ3Iv2A4SBCaOGPm9iN2ZxS832HESyTy1B-dJ3ctRtqqgk
-Message-ID: <CAEHHSvbdPi3uk1-B0f4SpTzZO_4bdDD7=p7f_LHDzFO4VSf7_g@mail.gmail.com>
-Subject: Re: [PATCH] board: mediatek: add MT8370 EVK board support
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Julien Masson <jmasson@baylibre.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] Add a build time parameter to accept custom signing
+ key
+To: Quentin Schulz <quentin.schulz@cherry.de>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, "Alper Nebi
+ Yasak" <alpernebiyasak@gmail.com>, Shiva Tripathi <s-tripathi1@ti.com>,
+ "Vishal Mahaveer" <vishalm@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+ Andrew Davis <afd@ti.com>, Ryan Eatmon <reatmon@ti.com>, Neha Francis
+ <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>
+References: <20260206110439.1236201-1-t-pratham@ti.com>
+ <3fc12168-7c48-45e0-986a-79acd9dffeb5@cherry.de>
+Content-Language: en-US
+From: T Pratham <t-pratham@ti.com>
+In-Reply-To: <3fc12168-7c48-45e0-986a-79acd9dffeb5@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A107:EE_|BLAPR10MB5010:EE_
+X-MS-Office365-Filtering-Correlation-Id: d7064d37-e420-4204-153b-08de6581aed5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?b1JOalc1Q2drbC9LaVo2NGJZdTJUa2FxeW9VUDhZcXUySm4rMi9UQ3NMUzIy?=
+ =?utf-8?B?T01nZmhnL3QzMHd6aVdrQXc3U3NvdXBTK3JjNVExRGxmQ0FlNFNYd3pDeXE0?=
+ =?utf-8?B?UW1KUDNFbE1kMlpZQ090bDAxcU92aHg0TlRvR2lacUxRNFJaaS8rTERLRzI3?=
+ =?utf-8?B?N3BKMVFiNGtGSHBEbHAxTmhvMXQxOHVqdGFPWm9WanhDVUhzZjA0bzNYYzlK?=
+ =?utf-8?B?YnF2cnBONTZGbXJPZEtNRUg0TGxqSk5ubkpsbitCdjdSNUc2Nzd2RWhZNC8r?=
+ =?utf-8?B?WDl4SXg2QWc1RThrb2RObks5QTNVK2ZMdytnTks3K1VOU0NJbjBDRlVKU3Zh?=
+ =?utf-8?B?dFBNb1lMSFZZR3d3Unh1a2xuMjhhZlFXMEkwUmVyWjhiYjR5ZzRDVGlTL09u?=
+ =?utf-8?B?SXZ4SFFEZVB5MmtrUUNLelIySlBqMjE1NjQva3NxUDNUSG1JU0JUN3B3YkhU?=
+ =?utf-8?B?b0dESnJySnArcU1GeWlBVTQ1eldFQzN2d2QvZ1NaRVFSSEU3M0N3YUxzbFRP?=
+ =?utf-8?B?MXJYaHBnNFZzZDJWUzdGS3NrUysra1pSZWNpRWhrOFNCakRSZHBPTHlEQTJv?=
+ =?utf-8?B?WGl3Yzk5N3VqaFJvb2FuL3czQk11d3N2QllWYWpuYnBRK3BUNTl4YmhGUXFS?=
+ =?utf-8?B?QWRIRHlNOWpaM1g0TjFTTy9mVmVqcUNIa1lGZGNYRU1Ld0k4SkhqMTgwWXN2?=
+ =?utf-8?B?a2dRRy9mM1E1UUJUcVBsanluUGZ3cEJqRWg2d3cxV1pnZUhpVHhobFFSSXBK?=
+ =?utf-8?B?SGxPY0ZqWmhCOFgxU0FIRVNhcVdqdGhURmozYWtDUk9Ja0gxUEFmOFlJRG1x?=
+ =?utf-8?B?cTJ4SExjbVpSSHpyeVRrdTJleFFRcXFIMlhWa2RYYkFSYjA5R2V0ZmgwT3pP?=
+ =?utf-8?B?bkYrN29uZjF4Um5lNmZzdWdZVWhaTGhtNHZOcWtsdm1Wc1JoODBwd0dEWFV3?=
+ =?utf-8?B?Rnc2ektjUUR3Vk5zUXlTT2xldlduZUppeHVqYXJ2a3BkVk1lZHdwT2hZdUFS?=
+ =?utf-8?B?NGRxSnNUeHh4Q29zZGxPVG5IRUxNMkNFN2JUZ2Nxc1FWdVBmb0VpbWsxMDBG?=
+ =?utf-8?B?OEZ5c1VHaS9PTlBsdWhyQnpEVVMyZEtvaSthUUdkQjRPckdBUTJXdmVYKzhD?=
+ =?utf-8?B?TlJ2QUVLQ1ZaSWtEZDFtYWltNnk0Ri84V3ZFeVBRM2kxK1ZvajVSMHNkK0c4?=
+ =?utf-8?B?eXp2N2tRdk1vZnVLVWVsdUxRclp5dEd5cHc4ZDdpYkhKa3l4L3ZQQTJyTThs?=
+ =?utf-8?B?WUMyUTVOVHY3ai9vZnMrS1VHbVFrT1RyaU0wQWZDejljU000clFacWxYUEVW?=
+ =?utf-8?B?WEZlaTM0aUZOZ0hjRGNEZFRWOXFuL1N5dTJaNDloU0ppTnlmbmtGRGJIS0Iz?=
+ =?utf-8?B?SDJHUVZrd3dLcVFBa3JZTFRDV0tpdUxNeHV2TEIwa1VIMXhXMTcwNFlwbVBD?=
+ =?utf-8?B?RVJwV29IRmdhZzNPV2dQWHdTa3l6SWw1Zi9LaUVnZmVmSUlNcUxrdGdOV1U0?=
+ =?utf-8?B?a3hacDQyOUJiWUY5VUMwcTJpeVBaN3BmZllSbWtTRXlyZzcxUG0yNUNxVUNi?=
+ =?utf-8?B?UjUyTHFvUzlCdEwvazFSbm0zUnRyZlBOU3ZJb3VBa0lUU211aXFST1ZCVDdW?=
+ =?utf-8?B?MDZRUmZ1M2w2eXlmSTlEMGtsTkRGMkFmd1BRb0xNbms1V1ZoTW15dHhrUTY5?=
+ =?utf-8?B?MGlLVitrcCs3SmMzSTNXdlZYdEFVbnBUWmUvK0VkcUNKMDhiQ01DWW14c3lO?=
+ =?utf-8?B?M1NYU3Z6SzQxZ2hBYXY4cTlkVmE5c2ZFYTlnbVY1UTlGdytpeFkzSE0wOHRT?=
+ =?utf-8?B?WlkrT1o3Y3g4bmd6YkJ0Q05kRkdaTGF4c2w2Z0FvZjFlaEVOb3pyYy9GdnBv?=
+ =?utf-8?B?VXZ0bTZZbUx6bWNhZnFsUUkrY0djU2EwVEFvNWt1SVl6SWxqOGs2eWpzak9Y?=
+ =?utf-8?B?UlhZeGVQa2lQdXhtUm9VOUViWkxFUXp0MFJMQkNSeTF2VTVhQmZWUk5sekU4?=
+ =?utf-8?B?OFVKd0hLMGZBaEc1WVZIQzI5eGJRZk9ONVJSdGhNV3VaNTFUZlhReVdlUnY0?=
+ =?utf-8?B?V3BFdDBEWXl2WmZWUlJtTUQ3c09XRVVOMytkUTM2eXN4RnNLMFIvUmhzd0lq?=
+ =?utf-8?B?QWJtbzAxWEdqTno0QW1kcFByQzJ6OXhIU0xZOGgwVW9XdSsyVUFLY1pmZ09T?=
+ =?utf-8?B?Y3cyYVNjMFl1VU95Z3hURTkvcHRJYUVWMWNGY29zYWhzQWhRbTExRGlBVjht?=
+ =?utf-8?B?QUI3MnZGSmIralFwK1kySXZFQmJRPT0=?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: Ozm+lFcBr6vvD3ErxtETAdaOOTKVDBLpw89Vez+WYmd9BDLXWnLjF8SxPULU/+qpl16AUvaGVJpOu36NMY842vaRX2Hkk2gQY109k9hsJP6S4JShuD1vHq/Bfz7r77RCSy5pqaZnWvbvDnmN8GAx/yI+HXuE40ONrUygXBENsLwrWRsWMxlpASCVf9P7Wfh/S2taAWgmTMJ4p0/c0ShF8p2FSJNFFd/qOtQmZ5e5WR7XjKRBVKGWJ1rs07kxg+MNDRtskjB0cFX9ccduKLG8iI9hefZqvPVG/3HuvFaVjaakEnk3cguQnTPlwJcosJsLaQvtONF1kvSLtCiaXGzeVheeluCnJpnn/jCg+JfApnHRyyny/wxmcL7wTamzCJMr+Fvh5THi2527xhKSmiLgXXkJzs60sPX//u6ar8trxT4DV66Q9DPa/xUed1H8/cbO
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 13:14:39.0361 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7064d37-e420-4204-153b-08de6581aed5
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A107.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB5010
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,41 +175,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le mer. 4 f=C3=A9vr. 2026 =C3=A0 21:29, Tom Rini <trini@konsulko.com> a =C3=
-=A9crit :
->
-> On Wed, Feb 04, 2026 at 09:24:30PM +0100, Julien Stephan wrote:
->
-> > This adds support for the MT8370 EVK board with the following
-> > features enabled/tested: Boot, UART, Watchdog and MMC.
-> >
-> > MT8370 is based on MT8188.
-> >
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-> >  board/mediatek/mt8370_evk/MAINTAINERS  |  6 ++++++
-> >  board/mediatek/mt8370_evk/Makefile     |  3 +++
-> >  board/mediatek/mt8370_evk/mt8370_evk.c | 34 ++++++++++++++++++++++++++=
-++++++++
-> >  3 files changed, 43 insertions(+)
->
-> I'm wondering now, can we reduce things to be more generic? I'm assuming
-> the memory map is not the same but this is basically the tiny bit of
-> code for mt8390_evk or mt8365_evk (which doesn't have an empty
-> board_init, is there a CONFIG option to disable in 8370 and 8390?).
->
+Hi Quentin,
 
-Hi Tom,
+On 06/02/26 17:01, Quentin Schulz wrote:
+> Hi T,
+> 
+> On 2/6/26 12:04 PM, T Pratham wrote:
+>>
+>> This series adds support to use a custom key provided via Make during
+>> build for signing the bootloader binaries, and updates the k3-binman to
+>> use it.
+>>
+> 
+> Can't you use the same mechanism we have for adding the pubkey to the
+> SPL DTB (see tools/binman/etype/u_boot_spl_pubkey_dtb.py)?
+> 
+> We use key-name-hint property which is a key filename without the .crt
+> extension, you don't necessarily need to reuse this (but I think it
+> makes sense) but sharing the logic for finding the key seems more
+> interesting to me.
+> 
+> We try to find the key with tools.get_input_filename(self._key_name_hint
+> + ".crt"). The paths that are traversed can be specified with
+> BINMAN_INDIRS. This should help with not having to add yet another
+> variable. Set allow_missing to True and if it returns None, then use the
+> key listed in the filename property?
 
-We discussed this internally with David. He was already working on a
-cleanup series, and as part of that work he addressed your comment by
-adding additional memory map cleanups.
+Thanks for this insight. Re-using the key finding mechanism from
+u_boot_spl_pubkey_dtb.py looks promising as well as clean. I'll look
+into this.
 
-I=E2=80=99ve now sent a v2 of this series, rebased on top of David=E2=80=99=
-s cleanup series.
+> 
+> Also, is there really a need for separate binman image just for keys?
+> Can't you have ti-secure/ti-secure-rom use key-name-hint directly to
+> avoid yet another binman entry?
 
+I have very little clue why our binman dtsi is creating a separate image
+for key. It existed since much before I touched U-Boot. ;-;
 
-Cheers
-Julien
-> --
-> Tom
+The bigger picture in our use case is automating our internal Yocto
+builds with different signing algorithms (RSA, ECDSA) for the same SoC.
+This was the quicker and easier way to achieve this. I'll try some
+tinkering using BINMAN_INDIRS + key-name-hint mechanism by modifying
+ti-secure/ti-secure-rom.
+
+-- 
+Regards
+T Pratham <t-pratham@ti.com>
