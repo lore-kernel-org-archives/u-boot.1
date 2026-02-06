@@ -4,63 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0716FEE20A6
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 14:20:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF10BEE20A6
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 14:22:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D12A83AAD;
-	Fri,  6 Feb 2026 15:20:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 2CD6A838FA;
+	Fri,  6 Feb 2026 15:22:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="NxmzK0xE";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="JCxvW+Je";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31F3383B8F; Fri,  6 Feb 2026 15:20:34 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 2F8E083AAD; Fri,  6 Feb 2026 15:22:48 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D92838FA
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 15:20:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B07FB836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 15:22:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 34E9A4E4243B;
- Fri,  6 Feb 2026 14:20:31 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 052C160729;
- Fri,  6 Feb 2026 14:20:31 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3AFFA119D1EC5; Fri,  6 Feb 2026 15:20:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1770387630; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=2CkhJ+udkIaSsU0Pk9vTBGrUYnYs2M+dGHKlvfOVpKM=;
- b=NxmzK0xEWoL2k6Tx0UBqYUES4vXFCwL/eFf0MeD8b5/MmX+XlwrFUhW5qMY4+/5FdaOOQ9
- OUy9JMwjHU+yNmwluLe/MtNXwYbkH2mGHGNpf4Mz7qggTa6WnrNV3ywVisTrqQbTj1VtdK
- g+Y5brC8a3e0dEnPVCm/LeAfCrGaNoaO4SKClY2/gPKW4jDofSA+/lsBSpfD6z2+Fg/t1T
- ss+F8a32PHxWB+lJDqDp3Y2p0yc/ZkVS/3MDW6X1IvTYTZeecjT6mlaHo5zWaG7cu87sdi
- MO3NMy4DSbFK11e+NnyKw2c+bcZRSwIJJaN/JAcQLtcVXOvT00SLE26QMpbwvA==
-Date: Fri, 6 Feb 2026 15:20:27 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- thomas.petazzoni@bootlin.com, Tom Rini <trini@konsulko.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Padmarao Begari <padmarao.begari@amd.com>, Michal Simek
- <michal.simek@amd.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, Simon
- Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 0/2] fwu: Mark failed bank as invalid during rollback
-Message-ID: <20260206152027.1c371812@kmaincent-XPS-13-7390>
-In-Reply-To: <20260119160746.1330877-1-kory.maincent@bootlin.com>
-References: <20260119160746.1330877-1-kory.maincent@bootlin.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 93C631FA94;
+ Fri,  6 Feb 2026 15:22:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1770387764;
+ bh=jVK66ffe0QamFsR3PdotZ4boB/IOoBDgWxsFo0MU7Ck=; h=From:To:Subject;
+ b=JCxvW+JeqHq1bQehCbOWxB6QBRcV1/AGgDWY5kjyXRqEfRzlRb+c+q6/DSC8PcEyI
+ mavO+KEJone7ndU+04WFreXa3Hnzx3UdYLKjpx7WCh7MMv3bZew98gaAWq0gmbkQ0B
+ 3B6O6jdRIev64LM6cc6EGQ6RXCD6uj4veP6GzLCXUvu7vnwFbHgay+s3XNISoH0HyY
+ q/k/FkAY5N3NEEhTY6/6HaVm7BRBC63KzziwpyixuDH4xqUgrQtTypTl2bk4PCMrgB
+ rQSsBEICmhsMplu4kAKXLhL7ykqtbPxcw5WDN2BS37QaCkgE6w83/i2fkSNmSMM7Xl
+ l/BbM9skWPcUQ==
+Date: Fri, 6 Feb 2026 15:22:40 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Alice Guo <alice.guo@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH v2 3/3] toradex: smarc-imx95: Drop init_uart_clk
+Message-ID: <20260206142240.GA80787@francesco-nb>
+References: <20260206-imx9-board-clean-uart-v2-0-ebee8158586c@nxp.com>
+ <20260206-imx9-board-clean-uart-v2-3-ebee8158586c@nxp.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260206-imx9-board-clean-uart-v2-3-ebee8158586c@nxp.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,24 +70,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 Jan 2026 17:07:40 +0100
-Kory Maincent <kory.maincent@bootlin.com> wrote:
+Hello Peng,
+thanks for the patch.
 
-> This series improves the FWU (Firmware Update) subsystem's handling of
-> boot failures by properly marking failed banks as invalid during rollback.
->=20
-> Patch 1 refactors fwu_state_machine_updates() to use an enum instead of
-> a boolean, adding support for FWU_BANK_INVALID state.
->=20
-> Patch 2 detects rollback at boot time (when boot_idx !=3D active_idx) and
-> marks the failed bank as invalid to prevent future boot attempts.
+On Fri, Feb 06, 2026 at 11:28:45PM +0800, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+> 
+> Rely on serial driver calling clk_enable to enable the lpuart clk, no
+> need to do init_uart_clk in board_early_init_f().
+> 
+> Also remove board_early_init_f(), because it is empty now.
+> 
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-Hello,
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
-Any news on this series? Does something prevent it to be merged?
+Francesco
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
