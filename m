@@ -4,93 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E9BEE6B48
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 19:11:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EAD1EE6B4D
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 20:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA763838FA;
-	Fri,  6 Feb 2026 20:11:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 2BAA883AA7;
+	Fri,  6 Feb 2026 21:09:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dPHk6l1v";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PJiK1rGx";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="m1dyn9R+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0614683AA9; Fri,  6 Feb 2026 20:11:36 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4B06D83AA7; Fri,  6 Feb 2026 20:04:55 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5947836D3
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 20:11:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4E12836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 20:04:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4f73bn4cW1z9tfs;
- Fri,  6 Feb 2026 20:11:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770405093;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HrxMha96P7jM1r9nzukbUGj5kHORzPelH5Svk5al4n0=;
- b=dPHk6l1vSHi3FSzlvS84o5NLtNgndaPu345YVirqAD9qEp8oQPI/xcwDINtwvNS/ePBaRa
- +1fzhUn8l82D8Zfrx0NFZMie50p1PogB6CrHUYvjcTOPdRfRbpRwOoEIxTE8UUkca8SBrB
- OOboOI6jmTt5Q8oIcju6vkl2v4m3BWIATX+n6Z8Tp8WFOyBZIyi8Blb07AAivwMs6EM1NS
- gguK1ps4AARA6Wf5abG7/bNoZedMM15UWzqLnN3dvQ6K5t8y/QTbahDY1RX657wGKCkEZK
- b0xRHIWGtT8ZQ9tknn8jUj8v0jV7nG/Zw5S0XQqJphamPXRFYj0aelaVCdukJA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=PJiK1rGx;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <b314c6b2-376c-4c55-9a7c-e7ddb8a22a8d@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770405091;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=HrxMha96P7jM1r9nzukbUGj5kHORzPelH5Svk5al4n0=;
- b=PJiK1rGxdwMco8AN8wRLR1//JgInXjC2EW0pZ7wW2EHlOoyJPK9QFDUcD6ASLoGdwl+DoD
- aRm6i/YjbCu4gSgI+dQotTqTch+gKrh86zdQHZeEZ+dqjQkToDUlaGyy6frQ6yRPV2i/cf
- umpIeAOndAp9bYO+J7vIGDIdmGUQY3TOJGqVKHF+XKriQLtO0yHJTI/RgbM6zZLCqAUr52
- AbY8zV6HPVJ1gj8ZiqGHn7VFvgf4N1k3Nr12EaKmuWj5EYidKbsoGPAfstl8MqS6cDjrNx
- 4ol46qTBWxbGyg/dWGsO5kJf82mN0Jm6hP5cAkc6/dZLztZWEjtZIj7ZTALqug==
-Date: Fri, 6 Feb 2026 20:11:25 +0100
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-45f0c1f1b54so1538999b6e.1
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 11:04:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770404691; x=1771009491;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7utJJ5L7DEaFuikmnawKtiDrC5499RspxKNI2We8oP0=;
+ b=m1dyn9R+obJcF4it3D5tmb4KpodRE8g0yeojcNUqzQu9bppgQnayc3M97kJJioWWaM
+ Zs/FIV2gu/k8KF3H8duHQvBmafsgMLfvc5fqedBGTMKq+OgLvBZRy7VA2qAkF8bJjl+Q
+ 8zrZZX264MtCt9EsFmt65rG3cTscc+efEDKsRMrgn2ApfS0WbxQeGKlhIE5icIISdwNd
+ qTBOqXeo5a24qUtpTUU4MyeciReKdZ1INzFPR6zkji1NpYe1FTN66DsJ8iv7ONfb3J/I
+ dwPH1+ub1ib7nuf4A8YmQgmEk+uUyaaGzDdeC6rZLWdQh4ayxQUuxTkWf1aE/cKSruv9
+ IjVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770404691; x=1771009491;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7utJJ5L7DEaFuikmnawKtiDrC5499RspxKNI2We8oP0=;
+ b=XUK6G0x/ZZAuqNf2kbDpsmVexAAdiCZxWgbbZlCwcW3Z22BUMEM4HuSz/K9ehLPKbF
+ kPvFvQOlUm/Y2DEAuV+kjo/nFUYTKiPzDYn1rdbRUaUfL8pCh7pfmYpPlmNcwEeeF9F6
+ 6s7mBKFWgdYIrquPbDwMdhEVBo0AwtEQEpBIsAwRujJlW1k/5D7rrDNIEZZMR8PJqOSx
+ 331OoE/SIAGmqresHauG9y2aH6Duri9j0OqUTmtu3cLxGFY6aFfqss7uZE7uoBt4f6mT
+ NM3gRuqaEGNcRm6l5X7sp5QYlmoIm2HijZTBe3Jyi0Nr5q9ezf4llPfKNHtJjHTp1CE1
+ 37Yw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXKNIt7vTrcOfBi9/fMmCWtQjVTPWPm4KX/YtSxDxqdlFOc6rQOzyie/5tIf8G1rwe2JWZ4Mx0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFakzq126ZesvTQWxRbW3Z9aY8ybsG/T7Me2CSYLdAugqiyL+6
+ 07Gzi1nTRueE/Wzm4espUaFzAU+wjfILSxtK7zYHgOZmMeZznZgl1qYhUMd/AEv9mOI=
+X-Gm-Gg: AZuq6aLbRXrJ4ZEh3AdDRjy4a4n+HQgRI4GbTC4EoMyc39WEOvG/rgaN5EQTE6Zi8p9
+ /Qz75/wnrkCnP6R5Fqoz97YPCCq1VEvPFZKwwl1arVFRp1hY2APXnN4oiQNFnMq36uXIvSHTfhj
+ N6FhM/uHU86mGWTk776dQEeifBWcCiD2rX0c8a7+mqKFqu9vwKAifr9gh3bjithwlNc7segWFLL
+ o5WFzZ5GUem653YcQBufUKIRBsd/FMs243Y9uNB8zdTeSty6YYXooEkBZIMy3+SAbHaMrmtwRkg
+ wKbujI6FPMw0Rt5p/XX0aCCeEhD9c1foCWSAGSbTYfpVbNr9wMX86W4IgtAkbLDAiAyZvT5wcvt
+ 6H0uRg1VFP41Wvm80k+4uev1w1jWDoGmLYq0eLA1ZlaBKj+sWCgDIHXHSolpuOOKpzEDUML6J09
+ Wp/FIOb1HRuiASGA3uwPMM/vfsPKRMy2i284/C88dtTh+knl0oKn0ISEI3soMm
+X-Received: by 2002:a05:6820:4dce:b0:662:f74d:69f5 with SMTP id
+ 006d021491bc7-66d32fdbf3dmr1535240eaf.31.1770404691384; 
+ Fri, 06 Feb 2026 11:04:51 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:7918:a69e:53a3:9e1c?
+ ([2600:8803:e7e4:500:7918:a69e:53a3:9e1c])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-66d38bdeed5sm1566823eaf.4.2026.02.06.11.04.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Feb 2026 11:04:50 -0800 (PST)
+Message-ID: <49be5379-dbac-448b-b894-b8b8925b9b2f@baylibre.com>
+Date: Fri, 6 Feb 2026 13:04:27 -0600
 MIME-Version: 1.0
-Subject: Re: [REGRESSION] scripts/dtc: Update to upstream version
- v1.7.2-35-g52f07dcca47c
-To: Ye Li <ye.li@oss.nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sam Edwards <cfsworks@gmail.com>, Simon Glass <sjg@chromium.org>,
- vigneshr@ti.com, b-padhi@ti.com, n-francis@ti.com, nm@ti.com, afd@ti.com,
- u-kumar1@ti.com, i-sihag@ti.com, Anshul Dalal <anshuld@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>
-References: <20251202193310.149861-1-marek.vasut+renesas@mailbox.org>
- <DFJ950O0QM0D.380U0N16ZO19E@ti.com> <DFJ9947VLHEL.PCDIJCRU24BS@ti.com>
- <20260108141233.GQ3416603@bill-the-cat>
- <939a9696-27fa-45a1-b428-feffe21ac6d5@oss.nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 7/7] clk: mediatek: add clock driver for MT8189
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de,
+ Chris Chen <chris-qj.chen@mediatek.com>
+References: <20260205-mtk-mt8189-clocks-v1-0-bbac40932c2a@baylibre.com>
+ <20260205-mtk-mt8189-clocks-v1-7-bbac40932c2a@baylibre.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <939a9696-27fa-45a1-b428-feffe21ac6d5@oss.nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: az8xn4cyjd5sndtk4s4ca49tyikikqwt
-X-MBO-RS-ID: ab8c6e32ad6f7115cd8
-X-Rspamd-Queue-Id: 4f73bn4cW1z9tfs
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260205-mtk-mt8189-clocks-v1-7-bbac40932c2a@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 06 Feb 2026 21:09:44 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,141 +112,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/6/26 10:11 AM, Ye Li wrote:
-> Hi Tom, Marek,
+On 2/5/26 3:12 PM, David Lechner wrote:
+> From: Chris Chen <chris-qj.chen@mediatek.com>
 > 
-> On 1/8/2026 10:12 PM, Tom Rini wrote:
->> On Thu, Jan 08, 2026 at 07:21:10PM +0530, Anshul Dalal wrote:
->>> CC+: TI folks
->>>
->>> On Thu Jan 8, 2026 at 7:15 PM IST, Anshul Dalal wrote:
->>>> Hi all,
->>>>
->>>> On Wed Dec 3, 2025 at 1:02 AM IST, Marek Vasut wrote:
->>>>> Synchronize local copy of DTC with Linux 6.17 . This includes the
->>>>> following picked and squashed commits from Linux kernel. The squash
->>>>> was necessary, since the DTC here contains changes which were also
->>>>> part of DTC in Linux alraedy, and the squash helped resolve those
->>>>> without going back and forth with the changes.
->>>>>
->>>>> The following commits from Linux are picked:
->>>>>
->>>>> 8f324cd712df7 # scripts/dtc: consolidate include path options in 
->>>>> Makefile
->>>>> b5b3d9b63b0ee # scripts/dtc: Add yamltree.c to dtc sources
->>>>> 7d97a76f226d6 # scripts/dtc: Update to upstream version v1.4.7-14- 
->>>>> gc86da84d30e4
->>>>> ea6f243be74e5 # scripts/dtc: Update to upstream version v1.4.7-57- 
->>>>> gf267e674d145
->>>>> 02d435d4eccd8 # scripts/dtc: Update to upstream version v1.5.0-23- 
->>>>> g87963ee20693
->>>>> 6e321b7637396 # scripts/dtc: Update to upstream version v1.5.0-30- 
->>>>> g702c1b6c0e73
->>>>> 9f19ec91a7a35 # scripts/dtc: dtx_diff - add color output support
->>>>> 8287d642f38d1 # scripts/dtc: Update to upstream version v1.5.1-22- 
->>>>> gc40aeb60b47a
->>>>> 4c52deef9225d # scripts/dtc: Revert "yamltree: Ensure consistent 
->>>>> bracketing of properties with phandles"
->>>>> 5d3827e1452ed # scripts/dtc: Remove unused makefile fragments
->>>>> 40dd266887654 # scripts/dtc: Update to upstream version v1.6.0-2- 
->>>>> g87a656ae5ff9
->>>>> 8d4cf6b6acb59 # scripts/dtc: use pkg-config to include <yaml.h> in 
->>>>> non-standard path
->>>>> b9bf9ace5ae90 # scripts/dtc: Update to upstream version v1.6.0-11- 
->>>>> g9d7888cbf19c
->>>>> 69a883b6f5ac0 # scripts/dtc: dtx_diff - make help text formatting 
->>>>> consistent
->>>>> 8f829108b8aed # scripts/dtc: only append to HOST_EXTRACFLAGS 
->>>>> instead of overwriting
->>>>> b39b4342ac495 # scripts/dtc: Update to upstream version v1.6.0-31- 
->>>>> gcbca977ea121
->>>>> 93c6424c486b3 # scripts: dtc: Fetch fdtoverlay.c from external DTC 
->>>>> project
->>>>> 0dd574a1d75c3 # scripts/dtc: Update to upstream version v1.6.0-51- 
->>>>> g183df9e9c2b9
->>>>> ec38b5df8a231 # scripts: dtc: Build fdtoverlay tool
->>>>> a0c8c431411f5 # scripts: dtc: Remove the unused fdtdump.c file
->>>>> e7dc653d4e890 # scripts/dtc: Add missing fdtoverlay to gitignore
->>>>> d2bf5d2e3f09c # scripts/dtc: Update to upstream version v1.6.1-19- 
->>>>> g0a3a9d3449c8
->>>>> a60878f5532d0 # scripts/dtc: dtx_diff: remove broken example from 
->>>>> help text
->>>>> 8b739d8658a9b # scripts/dtc: Call pkg-config POSIXly correct
->>>>> b6eeafa67df00 # scripts/dtc: Update to upstream version v1.6.1-63- 
->>>>> g55778a03df61
->>>>> f96cc4c787588 # scripts/dtc: Update to upstream version v1.6.1-66- 
->>>>> gabbd523bae6e
->>>>> 09ab9c092ef2b # scripts/dtc: Update to upstream version v1.7.0-93- 
->>>>> g1df7b047fe43
->>>>> ded8a5a498f2d # scripts/dtc: Update to upstream version v1.7.0-95- 
->>>>> gbcd02b523429
->>>>> ee6ff6fca7e71 # scripts/dtc: Update to upstream version v1.7.2-35- 
->>>>> g52f07dcca47c
->>>>>
->>>>> This also includes forward port of U-Boot commit
->>>>> e8c2d25845c7 ("libfdt: Revert 6dcb8ba4 from upstream libfdt")
->>>>> to avoid binary size growth.
->>>>>
->>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>> ---
->>>>> Cc: Adriano Cordova <adrianox@gmail.com>
->>>>> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
->>>>> Cc: Christian Marangi <ansuelsmth@gmail.com>
->>>>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>>>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>>>> Cc: Sam Edwards <cfsworks@gmail.com>
->>>>> Cc: Simon Glass <sjg@chromium.org>
->>>>> Cc: Tom Rini <trini@konsulko.com>
->>>>> Cc: u-boot@lists.denx.de
->>>>
->>>> We observed several boot failures on K3 platforms since the addition of
->>>> this patch at the R5 SPL stage, the issue seems to be the newly added
->>>> check for alignment in fdt_check_header in scripts/dtc/libfdt/fdt.c:95
->>>> but the binaries generated don't have 8-byte aligned FDTs.
->>>>
->>>> I have been able to reproduce the issue on AM62p EVM with a clean
->>>> working directory (this is important since any minor change to the
->>>> SPL binary size such as by the added "-dirty" tag could make the 
->>>> address
->>>> aligned) and GCC 13.3[1].
->>>>
->>>> Are we ensuring the fdt present in the SPL binary is properly aligned?
->>
->> Yes, the device tree must be 8-byte aligned, this is a requirement of
->> the device tree spec itself that we had been lax over until now.
-> We found iMX95/iMX94 EVK boards are broken after this fdt lib update. 
-> The root cause is default value of CONFIG_SPL_OF_LIBFDT_ASSUME_MASK is 
-> 0xff. In this update, fdt_check_node_offset_ is changed as below to 
-> check the CONFIG_SPL_OF_LIBFDT_ASSUME_MASK. When it is 0xff, 
-> fdt_check_node_offset_ will skip offset check.
+> Add new clock driver for MedaiTek MT8189 and compatible SoCs.
 > 
+> Signed-off-by: Chris Chen <chris-qj.chen@mediatek.com>
+> Co-developed-by: David Lechner <dlechner@baylibre.com>
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  drivers/clk/mediatek/Makefile     |    1 +
+>  drivers/clk/mediatek/clk-mt8189.c | 1738 +++++++++++++++++++++++++++++++++++++
+>  2 files changed, 1739 insertions(+)
 > 
->   int fdt_check_node_offset_(const void *fdt, int offset)
->   {
-> -    if ((offset < 0) || (offset % FDT_TAGSIZE)
-> -        || (fdt_next_tag(fdt, offset, &offset) != FDT_BEGIN_NODE))
-> +    if (!can_assume(VALID_INPUT)
-> +        && ((offset < 0) || (offset % FDT_TAGSIZE)))
-> +        return -FDT_ERR_BADOFFSET;
-> +
-> +    if (fdt_next_tag(fdt, offset, &offset) != FDT_BEGIN_NODE)
->           return -FDT_ERR_BADOFFSET;
-> 
-> This cause a problem to SCMI agent uclass driver. In scmi_bind_protocols 
-> function, a ofnode_null() is used when creating scmi-base.0 device to 
-> bind with driver. This null node which has offset value -1 can 
-> successfully pass the fdt_check_node_offset_, so causes crash in 
-> device_probe()->dev_power_domain_on() when finding power-domains phandle.
-> 
-> I notice the default value of CONFIG_OF_LIBFDT_ASSUME_MASK used by u- 
-> boot is 0. So why does SPL have different default value? Should we 
-> change the SPL default value to 0 to align with u-boot? Otherwise, any 
-> idea for fix.
-Could ti be that you need a fix similar to:
+> diff --git a/drivers/clk/mediatek/Makefile b/drivers/clk/mediatek/Makefile
+> index 5bede819c0d..a8be9adf18e 100644
+> --- a/drivers/clk/mediatek/Makefile
+> +++ b/drivers/clk/mediatek/Makefile
+> @@ -12,6 +12,7 @@ obj-$(CONFIG_TARGET_MT7988) += clk-mt7988.o
+>  obj-$(CONFIG_TARGET_MT7987) += clk-mt7987.o
+>  obj-$(CONFIG_TARGET_MT8183) += clk-mt8183.o
+>  obj-$(CONFIG_TARGET_MT8188) += clk-mt8188.o
+> +obj-$(CONFIG_TARGET_MT8391) += clk-mt8189.o
 
-3c43ca3025ef ("clk: fixed_rate: Avoid calling dev_read_*() if 
-CONFIG_OF_PLATDATA=y")
+I just noticed a typo here. Should be CONFIG_TARGET_MT8189.
 
-Maybe there is some node missing and you are trying to look it up and 
-use it ?
+>  obj-$(CONFIG_TARGET_MT8195) += clk-mt8195.o
+>  obj-$(CONFIG_TARGET_MT8365) += clk-mt8365.o
+>  obj-$(CONFIG_TARGET_MT8512) += clk-mt8512.o
