@@ -4,105 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E72B3EE2084
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 10:43:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01730EE2089
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 10:47:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1585C83A64;
-	Fri,  6 Feb 2026 11:43:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5553283A64;
+	Fri,  6 Feb 2026 11:47:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=egym.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mLkCZOXC";
+	dkim=pass (1024-bit key; secure) header.d=egym.com header.i=@egym.com header.b="BOEhXnww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FD2583AA7; Fri,  6 Feb 2026 11:43:16 +0100 (CET)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id BD68483AA9; Fri,  6 Feb 2026 11:47:11 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22C5D8382A
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 11:43:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8750C8382A
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 11:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=egym.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-59b6f04cae6so1959659e87.2
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 02:43:14 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770374593; cv=none;
- d=google.com; s=arc-20240605;
- b=EuuhtkmufsA1FPyC4wxklhLCJFBc8f2UngHp/3cbeNSw/ZVY0vdCRRgj5/9t7PVi+v
- Ln5CJklDoPXDdWBF1MJwp/2tagiIfMy4yMwwuqx4vzC7aEQAKkicMApod4hf0NaVM5yU
- UxgbEMDo7MmP/mj3XfMrIyN4xFsOF1vqRa+3mBFRstwEr9aAouvwZaOLY7ujKV4jk82J
- 2AOa9Pc7j1VXpInw808K26AuaUcwavhGk4IS2HGnp90c5rK3aCz73SLHnA1/lcTjHssW
- RevgFokSf5CycEH6YWNEKZIWilOWVK9TpFIam35Zj5qRlb+9h1xCUZOD/9iCn6g7vHPj
- hPTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=oN46g/vPsGtciym/DLU9QwWdkwk4T1kNRhWjtzvcjQA=;
- fh=tgZDYE9j4/7VTyUtEO+EN3louCFgEbOnpDj7Rm7tR3Y=;
- b=ZgSH1hZgsgOYZrK4kU0qfR5LoyaytZ6BLoMJqzMLWKAU/e1pAlshsZ2TOnuz8g8JYE
- iwZqRwvRZtnPnq0yqqbhfPq6ZIb5RRM8lTp1HhBm7vY2H4JbP/plRk/XZfsoJT8oxAiL
- UdNHFrOr/nxUDpXKDlwNbzJtdYVuJCdFPSTCYfK5/upGOw8XJi1bwZkl4zedWmOEDKNC
- wZfSCrrqWwvHzIBWs02oVfVaFhIiJAqBX583HMpGuI+4LobFz+JCX+AW5Mav36818bFz
- e85yGjJGY4mwzkAjtjPEE8ITvysIn4dzkFqp4Jifed12VIH1qelBeBSBsjPEY9p/rhNQ
- uzog==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=cibil.pankiras@egym.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-47ee3a63300so20619885e9.2
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 02:47:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770374593; x=1770979393; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oN46g/vPsGtciym/DLU9QwWdkwk4T1kNRhWjtzvcjQA=;
- b=mLkCZOXCRGEsIowLG4pvyNs7NyO/6zVZx1L580p472X8kHvCPABp3ZVg9zcvATNIli
- tfbjL5L3xAf1cSbtjUaIIeveXtkp8P672RPy6jL83SUtMFNEOrZkS9gl1mTo9t2Igy/Y
- Vxg+Qi1E9ut7CHuQ/q3P2HV1VZ3/jNRS3uEd9SBLKqfSOKdm402ecXz0sDbGg2uWmJLA
- O4rUufO9Rn7aFwFwk/2ohI/cGTFhVBZaZfOqCX866BYI5jx3FwjLcFx53KV6FXG5CcIv
- 3tcTKsm4dXX0wLn7zuaizCLqKChwLm2Y4d47BO+C8SZGeFU+tWC7pbXydOJzopBjCDRG
- LulA==
+ d=egym.com; s=egymcom; t=1770374828; x=1770979628; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RboGEddfXOxXW0PXLrJ7ivPRTJ+WgaGRf02mxBdD6rE=;
+ b=BOEhXnwwTrfcTYoPXKQt7P8tfnOVGC2JXEdh4AiSuw4EkKBlXChaUvAXdVohydlm/p
+ fLcnNEZd2KS3PDZZoBtwJQQ7L8P6BkTShgMnIzisYMvCXPOOTg5QhXLKJ99hKqIh4ypY
+ I39W8Ku9es3dLyTE4hgI5h8vf+H2DNGOQOQPQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770374593; x=1770979393;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=oN46g/vPsGtciym/DLU9QwWdkwk4T1kNRhWjtzvcjQA=;
- b=SYqStY2cYdwlNXN1ldehgikmhtKsd9suKNcXHEICCglxfXYg8Ce+JTQgISmOerAmQf
- Y4v1NGfg+6GJdhZMLB6Cvz1iVzdMYpkEBvUM0YhyuKnRonV12nLQb0re4f8/YIWgbEYW
- G2FeDlMILe1JaRIBOpNKEM3i5Z3fvx00ByfI1gEg5M5J77PAgopLsgNhM2F48eIYJpPZ
- orKgb3Z/cwsHe1ih8IMF02FFbr+qTB83moLDKwx+KFEANbUP2QQCnvzkdikpIMgUuY+T
- x1GsxENfnXWSgSVd6KKZ10wt+1OeVP75AwcScdwUvBiICXEiIPMNUwtiWRv1NRcXD6xZ
- JTMw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVaaLa3wrH4yzMwT8oHx59V5c07cGbGKytf8xd+VN8GXhtNw3YDFIuND8rcTWRw5vjWP2Tv8GM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJxQzS0HEMlujJkM7JwYn4QyTXeVUSb6uIAVdTKMWmPgmqqZzE
- xBfZtHm+yt/VcYhbcyCECDSD37WJ1b8BeXPDDDWb79UfXU3rUoAaREb5jx5RNJwy0hemexZX/ci
- O0oMXQfwY8tJd97+BflOpTdswlkRvdeY=
-X-Gm-Gg: AZuq6aJcAPMHgtOdg5AxS+qgkSedSkd0cQooVpMCpdirvsArApofaCBIcALd+Njpn+5
- imSwg+Gr6VPDKqM0sZn6iPvjzY452UHygYe7cOrZIDgPeq7sy5jl+jNyhA+8jH6TyzVG6cY+n38
- XeFTQ2kUQPLtbqKcGpxVjQ8nghqlTfUU+z7Nx8kkC1s7LgUE3dYD71T9wDTpwUPzYsVyaldZdNe
- Hvs+SL5hFQYe1zFf9LBPV6D/WTiPIiNRPrdnRr3R0d93b8l13S6L01aMsnfoAXtqidgbKtYH/73
- xRxFvOkFDnVxu+fK6oRzYchG04JyZ8ASEzHh1w==
-X-Received: by 2002:a05:6512:23a4:b0:59b:7c9f:625e with SMTP id
- 2adb3069b0e04-59e4516ebd8mr684446e87.44.1770374593021; Fri, 06 Feb 2026
- 02:43:13 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770374828; x=1770979628;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RboGEddfXOxXW0PXLrJ7ivPRTJ+WgaGRf02mxBdD6rE=;
+ b=vhS72nBmN6fRSy7nn3S0mXif0LJkPIUfi1w14f7TiDfxhcStQj8f7YUgo5PUZh/xG8
+ y7r36EnNw/9/wAAFMb2+p0dCf839m2fnpYJej/cFQKBnjgO3AIqqHXUPdRDj/htHTNsH
+ /7bdvYCdH77JNulxzLzXQ4NFQTSxpYQOByrUHhyWGvxA3jsupEeNGtdCUpPgrx7hqn+e
+ Yc0YEaHJiF7dEYb7rcV2/JI2rFGeLsqI8dbTsZqTn5phTJ6J+Nm+Xtu3kZnJMJAvb2rn
+ jD3niQCCG0QLadHGQmEGD3/hI3TrLDGJuBx7B6cMrUnn6qPYl49jjNfuGu3k7j4sZzfB
+ v/aQ==
+X-Gm-Message-State: AOJu0YyIu9+0B7Ikluhj7172QjsEnzfqPzy6/BO6svpyi+NzF4Dygd2D
+ 0LR330e1k/HFA26zz9P5nHP63yzI5HOF1LZFoEdJOTrDLHhcMXFhda82Dds1pmNdphHW+zAbMig
+ i52IM1yMwOaagpFu0RyUkgZZ5oVToEXIK8i7tdAlQcA+LaTflh6eXpI4nEwc4DBQ=
+X-Gm-Gg: AZuq6aLoFgiXBv5NG7/bxdAG1Izlmk6olQTdzS+oPsISI5XUaDo/C31XR2Fcpbu8Ipd
+ wIkZunKkcEg9AyMBqeLj0LuCcIkgO49FF1csBLLjwjltBzfsNDUnowpbN9pl1202xDk7VFPgffL
+ GNSzi9lKEyRb7SPzG+U6ixlsEUOnyxgDE+a0GBhaD1/e0e8/Pd5Wrsi/4pL3rPn49+3xIPuDm06
+ 2i+cVTNQ2II/HVCQierwn+z+XCosPlTH8JRd3HkFzGViVLcLboAJK/G52iLYP9g8ix7CsbaCkdX
+ zqk9mBgmrFKFZOOpHZDoZEWMIfsfgkTFGSDN3MDfTdHsxAvOVvNsMib8tIyOijbWYFdnFl4CJn6
+ b2yc6H25dtpT5s2zB2DF78d2rWr/WI2F0YBNHuPbr4EzueXIPJ26HcoTdVnBGsdKsFvxq4S0qeD
+ JmWP0wil3C3zQKA4IWMz3A4PMFMZi4U9wPVS0vx5vZ9bHAcWvgq5ml/Y9/6MGaIYRWb39SVJDlp
+ wDfPNvom32hPbinvNGm
+X-Received: by 2002:a05:600c:3b20:b0:47a:9560:ec28 with SMTP id
+ 5b1f17b1804b1-4832020df6amr31006795e9.13.1770374828288; 
+ Fri, 06 Feb 2026 02:47:08 -0800 (PST)
+Received: from cibil-Precision-5570..
+ ([2a02:3033:280:4628:c815:77f9:1225:71ed])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48320728774sm40932795e9.14.2026.02.06.02.47.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Feb 2026 02:47:08 -0800 (PST)
+From: Cibil Pankiras <cibil.pankiras@egym.com>
+To: u-boot@lists.denx.de
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] pinctrl: bcm283x: Fix GPIO pull state register values for
+ BCM2711
+Date: Fri,  6 Feb 2026 11:47:00 +0100
+Message-ID: <20260206104701.34358-1-cibil.pankiras@egym.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260206-imx9-board-clean-uart-v1-0-3965b4e7f79d@nxp.com>
- <20260206-imx9-board-clean-uart-v1-1-3965b4e7f79d@nxp.com>
-In-Reply-To: <20260206-imx9-board-clean-uart-v1-1-3965b4e7f79d@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 6 Feb 2026 07:43:01 -0300
-X-Gm-Features: AZwV_Qid72SaKASyy6seQQ1kEyQDZu21rhPldOxPmrwygQf6YZo4A-tBw7teRqI
-Message-ID: <CAOMZO5DovEGrWOWYbnJuNLpcHtZCH53rZ2mZOrYRF+fyON_Phg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] nxp: imx95_evk: Drop init_uart_clk
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, Alice Guo <alice.guo@nxp.com>,
- Tom Rini <trini@konsulko.com>, 
- Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="ISO-8859-1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,23 +97,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+BCM2711 has different pull-up/down register values compared to BCM2835
 
-On Fri, Feb 6, 2026 at 12:11=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
-m> wrote:
+- BCM2835: NONE=3D0, DOWN=3D1, UP=3D2
+- BCM2711: NONE=3D0, UP=3D1, DOWN=3D2
 
-> diff --git a/board/nxp/imx95_evk/imx95_evk.c b/board/nxp/imx95_evk/imx95_=
-evk.c
-> index ca1d916deab..9cb69543f0f 100644
-> --- a/board/nxp/imx95_evk/imx95_evk.c
-> +++ b/board/nxp/imx95_evk/imx95_evk.c
-> @@ -9,9 +9,6 @@
->
->  int board_early_init_f(void)
->  {
-> -       /* UART1: A55, UART2: M33, UART3: M7 */
-> -       init_uart_clk(0);
-> -
->         return 0;
+This patch fixes the pull state register values for BCM2711.
 
-Can board_early_init_f() be completely removed from the board file now?
+Fixes: 2c39d975f87c ("pinctrl: bcm283x: Add GPIO pull-up/down control for B=
+CM2835 and BCM2711")
+Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
+---
+Changes in v2:
+- Moved pull value swap logic to bcm2711_gpio_set_pull()
+- Updated the function header comment for bcm2711_gpio_set_pull()
+---
+ drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinctrl/b=
+roadcom/pinctrl-bcm283x.c
+index 4ecc8bac645a..90eee88eb137 100644
+--- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
++++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+@@ -30,6 +30,11 @@ struct bcm283x_pinctrl_priv {
+=20
+ #define MAX_PINS_PER_BANK 16
+=20
++/* pull states for BCM2711 */
++#define BCM2711_PULL_NONE 0
++#define BCM2711_PULL_UP   1
++#define BCM2711_PULL_DOWN 2
++
+ static void bcm2835_gpio_set_func_id(struct udevice *dev, unsigned int gpi=
+o,
+ 				     int func)
+ {
+@@ -93,6 +98,17 @@ static void bcm2711_gpio_set_pull(struct udevice *dev, u=
+nsigned int gpio, int pu
+ 	u32 bit_shift;
+ 	u32 pull_bits;
+=20
++	if (!device_is_compatible(dev, "brcm,bcm2711-gpio"))
++		return;
++
++	/* BCM2711's pull values differ from BCM2835 */
++	if (pull =3D=3D BCM2835_PUD_UP)
++		pull =3D BCM2711_PULL_UP;
++	else if (pull =3D=3D BCM2835_PUD_DOWN)
++		pull =3D BCM2711_PULL_DOWN;
++	else
++		pull =3D BCM2711_PULL_NONE;
++
+ 	/* Findout which GPIO_PUP_PDN_CNTRL register to use */
+ 	reg_offset =3D BCM2711_GPPUD_CNTRL_REG0 + BCM2711_PUD_REG_OFFSET(gpio);
+=20
+--=20
+2.43.0
+
+
+--=20
+EGYM SE, Einsteinstra=DFe 172, 81677 M=FCnchen
+Gesch=E4ftsf=FChrende Direktoren:=20
+Patrick Meininger, Philipp Roesch-Schlanderer, Florian Sauter
+Gerichtsstand=20
+M=FCnchen | Amtsgericht M=FCnchen HRB 303509=A0|=A0USt.-Id. DE275313632
