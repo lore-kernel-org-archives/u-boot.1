@@ -4,83 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01730EE2089
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 10:47:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDD69EE2085
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 10:54:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5553283A64;
-	Fri,  6 Feb 2026 11:47:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=egym.com
+	by phobos.denx.de (Postfix) with ESMTP id 553E5838FA;
+	Fri,  6 Feb 2026 11:54:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=egym.com header.i=@egym.com header.b="BOEhXnww";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WCEUp3Ms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD68483AA9; Fri,  6 Feb 2026 11:47:11 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6D36C83A64; Fri,  6 Feb 2026 11:54:28 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8750C8382A
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 11:47:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07C018352B
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 11:54:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=egym.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cibil.pankiras@egym.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-47ee3a63300so20619885e9.2
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 02:47:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=egym.com; s=egymcom; t=1770374828; x=1770979628; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RboGEddfXOxXW0PXLrJ7ivPRTJ+WgaGRf02mxBdD6rE=;
- b=BOEhXnwwTrfcTYoPXKQt7P8tfnOVGC2JXEdh4AiSuw4EkKBlXChaUvAXdVohydlm/p
- fLcnNEZd2KS3PDZZoBtwJQQ7L8P6BkTShgMnIzisYMvCXPOOTg5QhXLKJ99hKqIh4ypY
- I39W8Ku9es3dLyTE4hgI5h8vf+H2DNGOQOQPQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770374828; x=1770979628;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RboGEddfXOxXW0PXLrJ7ivPRTJ+WgaGRf02mxBdD6rE=;
- b=vhS72nBmN6fRSy7nn3S0mXif0LJkPIUfi1w14f7TiDfxhcStQj8f7YUgo5PUZh/xG8
- y7r36EnNw/9/wAAFMb2+p0dCf839m2fnpYJej/cFQKBnjgO3AIqqHXUPdRDj/htHTNsH
- /7bdvYCdH77JNulxzLzXQ4NFQTSxpYQOByrUHhyWGvxA3jsupEeNGtdCUpPgrx7hqn+e
- Yc0YEaHJiF7dEYb7rcV2/JI2rFGeLsqI8dbTsZqTn5phTJ6J+Nm+Xtu3kZnJMJAvb2rn
- jD3niQCCG0QLadHGQmEGD3/hI3TrLDGJuBx7B6cMrUnn6qPYl49jjNfuGu3k7j4sZzfB
- v/aQ==
-X-Gm-Message-State: AOJu0YyIu9+0B7Ikluhj7172QjsEnzfqPzy6/BO6svpyi+NzF4Dygd2D
- 0LR330e1k/HFA26zz9P5nHP63yzI5HOF1LZFoEdJOTrDLHhcMXFhda82Dds1pmNdphHW+zAbMig
- i52IM1yMwOaagpFu0RyUkgZZ5oVToEXIK8i7tdAlQcA+LaTflh6eXpI4nEwc4DBQ=
-X-Gm-Gg: AZuq6aLoFgiXBv5NG7/bxdAG1Izlmk6olQTdzS+oPsISI5XUaDo/C31XR2Fcpbu8Ipd
- wIkZunKkcEg9AyMBqeLj0LuCcIkgO49FF1csBLLjwjltBzfsNDUnowpbN9pl1202xDk7VFPgffL
- GNSzi9lKEyRb7SPzG+U6ixlsEUOnyxgDE+a0GBhaD1/e0e8/Pd5Wrsi/4pL3rPn49+3xIPuDm06
- 2i+cVTNQ2II/HVCQierwn+z+XCosPlTH8JRd3HkFzGViVLcLboAJK/G52iLYP9g8ix7CsbaCkdX
- zqk9mBgmrFKFZOOpHZDoZEWMIfsfgkTFGSDN3MDfTdHsxAvOVvNsMib8tIyOijbWYFdnFl4CJn6
- b2yc6H25dtpT5s2zB2DF78d2rWr/WI2F0YBNHuPbr4EzueXIPJ26HcoTdVnBGsdKsFvxq4S0qeD
- JmWP0wil3C3zQKA4IWMz3A4PMFMZi4U9wPVS0vx5vZ9bHAcWvgq5ml/Y9/6MGaIYRWb39SVJDlp
- wDfPNvom32hPbinvNGm
-X-Received: by 2002:a05:600c:3b20:b0:47a:9560:ec28 with SMTP id
- 5b1f17b1804b1-4832020df6amr31006795e9.13.1770374828288; 
- Fri, 06 Feb 2026 02:47:08 -0800 (PST)
-Received: from cibil-Precision-5570..
- ([2a02:3033:280:4628:c815:77f9:1225:71ed])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48320728774sm40932795e9.14.2026.02.06.02.47.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Feb 2026 02:47:08 -0800 (PST)
-From: Cibil Pankiras <cibil.pankiras@egym.com>
-To: u-boot@lists.denx.de
-Cc: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] pinctrl: bcm283x: Fix GPIO pull state register values for
- BCM2711
-Date: Fri,  6 Feb 2026 11:47:00 +0100
-Message-ID: <20260206104701.34358-1-cibil.pankiras@egym.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 1F1DFC22F79
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 10:54:32 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 9604F60729;
+ Fri,  6 Feb 2026 10:54:25 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 29B84119D1C2E; Fri,  6 Feb 2026 11:54:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1770375264; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=8pYXETqH4Y9NkpMpWwIjx0Py94J73StZx5dF+X6tAh0=;
+ b=WCEUp3MsjI2JMB8kEIXJuPtROphi85IqGrxB4VN9PNnXAhyYsPOEkAQPF7k9ExOg1x/WW5
+ krOhB+YwozQev3E3NTE/wg19PlN/R4Nga5AusQN+Yu1RPl35V/VPpshmNTGn0LobQnUVg8
+ tA20WXGklY2xG78aRwxcgwlHj1LGhwS/9OCRv8TSLX81vOBFWMVXCvtQ36J0a5niCcDx71
+ KQa8Kt7vY1uA7KKmIZ8YfvYYKrkngY8jAqzQ7DyDnRfeM1/mMY/A2dAlx2Zjmh6IDfPxzZ
+ YZOW9WoAegD6obKvFdyN2jjA2hiZsZgAFNXx0ql9RMiYvwSCehBLJ1ZF/EM7nQ==
+Message-ID: <2f27e752-026d-411a-8fab-4da27abae862@bootlin.com>
+Date: Fri, 6 Feb 2026 11:54:21 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mach-k3: j722s: Update SoC data to add wake-up I2C
+ device
+To: Chintan Vankar <c-vankar@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: bb@ti.com, s-vadapalli@ti.com, p-mantena@ti.com, a-kumar2@ti.com,
+ u-boot@lists.denx.de
+References: <20260205121551.3619582-1-c-vankar@ti.com>
+Content-Language: en-US, fr
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Organization: Bootlin
+In-Reply-To: <20260205121551.3619582-1-c-vankar@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,68 +76,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BCM2711 has different pull-up/down register values compared to BCM2835
+Le 05/02/2026 à 13:15, Chintan Vankar a écrit :
+> Update dev-data and clk-data to include wake-up I2C device for J722s.
+> 
+Tested it on j722 evm, I can now access the PMIC via I2C
 
-- BCM2835: NONE=3D0, DOWN=3D1, UP=3D2
-- BCM2711: NONE=3D0, UP=3D1, DOWN=3D2
+Thanks!
 
-This patch fixes the pull state register values for BCM2711.
+Tested-by: Richard Genoud <richard.genoud@bootlin.com>
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+> ---
+> 
+> This patch is based on commit 'b5213bbfdcb1' of origin/master branch of
+> U-Boot.
+> 
+>   arch/arm/mach-k3/r5/j722s/clk-data.c | 10 +++++++++-
+>   arch/arm/mach-k3/r5/j722s/dev-data.c |  3 ++-
+>   2 files changed, 11 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-k3/r5/j722s/clk-data.c b/arch/arm/mach-k3/r5/j722s/clk-data.c
+> index cb3d864c5a3..de8c43314c7 100644
+> --- a/arch/arm/mach-k3/r5/j722s/clk-data.c
+> +++ b/arch/arm/mach-k3/r5/j722s/clk-data.c
+> @@ -5,7 +5,7 @@
+>    * This file is auto generated. Please do not hand edit and report any issues
+>    * to Bryan Brattlof <bb@ti.com>.
+>    *
+> - * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
+> + * Copyright (C) 2020-2026 Texas Instruments Incorporated - https://www.ti.com/
+>    */
+>   
+>   #include <linux/clk-provider.h>
+> @@ -159,6 +159,7 @@ static const struct clk_data clk_list[] = {
+>   	CLK_FIXED_RATE("board_0_rmii1_ref_clk_out", 0, 0),
+>   	CLK_FIXED_RATE("board_0_rmii2_ref_clk_out", 0, 0),
+>   	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
+> +	CLK_FIXED_RATE("board_0_wkup_i2c0_scl_out", 0, 0),
+>   	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_cpts_genf0", 0, 0),
+>   	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_cpts_genf1", 0, 0),
+>   	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_mdio_mdclk_o", 0, 0),
+> @@ -223,6 +224,8 @@ static const struct clk_data clk_list[] = {
+>   	CLK_MUX("wkup_clkout_sel_io_out0", wkup_clkout_sel_io_out0_parents, 2, 0x43008020, 24, 1, 0),
+>   	CLK_MUX("wkup_clksel_out0", wkup_clksel_out0_parents, 2, 0x43008010, 0, 1, 0),
+>   	CLK_MUX("main_usart0_fclk_sel_out0", main_usart0_fclk_sel_out0_parents, 2, 0x108280, 0, 1, 0),
+> +	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout1_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040084, 0, 7, 0, 0),
+> +	CLK_FIXED_RATE("mshsi2c_wkup_0_porscl", 0, 0),
+>   	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
+>   	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x402011c, 0, 5, 0, 0),
+>   };
+> @@ -307,6 +310,11 @@ static const struct dev_clk soc_dev_clk_data[] = {
+>   	DEV_CLK(102, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+>   	DEV_CLK(102, 1, "board_0_i2c0_scl_out"),
+>   	DEV_CLK(102, 2, "hsdiv4_16fft_main_1_hsdivout0_clk"),
+> +	DEV_CLK(107, 0, "wkup_clksel_out0"),
+> +	DEV_CLK(107, 1, "hsdiv3_16fft_main_15_hsdivout0_clk"),
+> +	DEV_CLK(107, 2, "hsdiv4_16fft_mcu_0_hsdivout0_clk"),
+> +	DEV_CLK(107, 3, "board_0_wkup_i2c0_scl_out"),
+> +	DEV_CLK(107, 4, "hsdiv4_16fft_mcu_0_hsdivout1_clk"),
+>   	DEV_CLK(135, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
+>   	DEV_CLK(146, 0, "main_usart0_fclk_sel_out0"),
+>   	DEV_CLK(146, 1, "usart_programmable_clock_divider_out0"),
+> diff --git a/arch/arm/mach-k3/r5/j722s/dev-data.c b/arch/arm/mach-k3/r5/j722s/dev-data.c
+> index 5f7e2a44fed..0ffef09a1d5 100644
+> --- a/arch/arm/mach-k3/r5/j722s/dev-data.c
+> +++ b/arch/arm/mach-k3/r5/j722s/dev-data.c
+> @@ -5,7 +5,7 @@
+>    * This file is auto generated. Please do not hand edit and report any issues
+>    * to Bryan Brattlof <bb@ti.com>.
+>    *
+> - * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
+> + * Copyright (C) 2020-2026 Texas Instruments Incorporated - https://www.ti.com/
+>    */
+>   
+>   #include "k3-dev.h"
+> @@ -42,6 +42,7 @@ static struct ti_dev soc_dev_list[] = {
+>   	PSC_DEV(16, &soc_lpsc_list[0]),
+>   	PSC_DEV(77, &soc_lpsc_list[0]),
+>   	PSC_DEV(61, &soc_lpsc_list[0]),
+> +	PSC_DEV(107, &soc_lpsc_list[0]),
+>   	PSC_DEV(178, &soc_lpsc_list[1]),
+>   	PSC_DEV(179, &soc_lpsc_list[2]),
+>   	PSC_DEV(57, &soc_lpsc_list[3]),
 
-Fixes: 2c39d975f87c ("pinctrl: bcm283x: Add GPIO pull-up/down control for B=
-CM2835 and BCM2711")
-Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
----
-Changes in v2:
-- Moved pull value swap logic to bcm2711_gpio_set_pull()
-- Updated the function header comment for bcm2711_gpio_set_pull()
----
- drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
 
-diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinctrl/b=
-roadcom/pinctrl-bcm283x.c
-index 4ecc8bac645a..90eee88eb137 100644
---- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-+++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-@@ -30,6 +30,11 @@ struct bcm283x_pinctrl_priv {
-=20
- #define MAX_PINS_PER_BANK 16
-=20
-+/* pull states for BCM2711 */
-+#define BCM2711_PULL_NONE 0
-+#define BCM2711_PULL_UP   1
-+#define BCM2711_PULL_DOWN 2
-+
- static void bcm2835_gpio_set_func_id(struct udevice *dev, unsigned int gpi=
-o,
- 				     int func)
- {
-@@ -93,6 +98,17 @@ static void bcm2711_gpio_set_pull(struct udevice *dev, u=
-nsigned int gpio, int pu
- 	u32 bit_shift;
- 	u32 pull_bits;
-=20
-+	if (!device_is_compatible(dev, "brcm,bcm2711-gpio"))
-+		return;
-+
-+	/* BCM2711's pull values differ from BCM2835 */
-+	if (pull =3D=3D BCM2835_PUD_UP)
-+		pull =3D BCM2711_PULL_UP;
-+	else if (pull =3D=3D BCM2835_PUD_DOWN)
-+		pull =3D BCM2711_PULL_DOWN;
-+	else
-+		pull =3D BCM2711_PULL_NONE;
-+
- 	/* Findout which GPIO_PUP_PDN_CNTRL register to use */
- 	reg_offset =3D BCM2711_GPPUD_CNTRL_REG0 + BCM2711_PUD_REG_OFFSET(gpio);
-=20
---=20
-2.43.0
-
-
---=20
-EGYM SE, Einsteinstra=DFe 172, 81677 M=FCnchen
-Gesch=E4ftsf=FChrende Direktoren:=20
-Patrick Meininger, Philipp Roesch-Schlanderer, Florian Sauter
-Gerichtsstand=20
-M=FCnchen | Amtsgericht M=FCnchen HRB 303509=A0|=A0USt.-Id. DE275313632
+-- 
+Richard Genoud, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
