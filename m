@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07D21EE6B44
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 18:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DE3CEE6B44
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 18:15:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31DEB83AA7;
-	Fri,  6 Feb 2026 19:15:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CE4B083BC8;
+	Fri,  6 Feb 2026 19:15:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VXd3s611";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CikKR/on";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8935836D3; Fri,  6 Feb 2026 19:15:24 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 093FA83A64; Fri,  6 Feb 2026 19:15:26 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9583B836D3
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 19:15:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D951F83AA7
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 19:15:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d1890f5cafso365396a34.1
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 10:15:22 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso1953162a34.0
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 10:15:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770401721; x=1771006521; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770401722; x=1771006522; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PQl31SfvmYJX1NhE9IE6OMnKCEOD0lUFiCj/O+sCSSY=;
- b=VXd3s61178JnBzY8j4zByHPwW/xRSQ/hJQTgKQUlaznFiiUFf2eTDlLTdQdbQSHvOY
- mEL0LsyzGraXBXU+O7ylvRCBaM0mxEBwHj479knoUYvcBGhXsY4GaHQ/HfnAJXZoW4Dg
- Y5c01Yi1tIasDl/4isHLfoLMOn157ssX5NgZI=
+ bh=vcf12sh6hGJyhH/3MC2y1R+n/H70zIW7/LHeuj2taAA=;
+ b=CikKR/onkFiFLnEQqxFp/Jw3SUuT5zaPjS1dWKsSPvNyC34GOybSdgQ94VKTXnRyj4
+ 3fqZeE41YmjTVKfLSXdJ/Q2Qm/GBp5bnXws3O/eWupFqVxLqGrJdJrtB22asyK+wFSZo
+ cydbPNUJ2OwtQAykeQQO+PP6iAM5Ho0RNoEfc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770401721; x=1771006521;
+ d=1e100.net; s=20230601; t=1770401722; x=1771006522;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PQl31SfvmYJX1NhE9IE6OMnKCEOD0lUFiCj/O+sCSSY=;
- b=HgVZqGEEEpJ631jfiP4K8+Djxk6VGoHFM5dzndfHSu9EJp6Ov0PiV841ZQiHeLjkOf
- 1VlUXJGMu6WKkJ1NNyJ26bZ/mwVP38HCj31xoAUlveOpn2GrNgyUXYpNwHfCWOIHsUbx
- 0fsBqxPFxOiGTWbJat0ZEiO9wq/OFubCvjsrh7JnojvP4jUA9qqvuXvdIEckEGfBfFhq
- s7mFNT5/Z1ckWsnQS9XJaVOyOjYc86S0YHqcEYoLdPkF13c1WP/CveagW7fmcBDzfEU/
- L5dVdFxlaI65AIvxzVln8hCCbw7x4Bp2elv9k54GWbAJapJYuX1MvJtA8vgerGN1LCXt
- nj5Q==
-X-Gm-Message-State: AOJu0YzBtjK0FfKMixTwFqkzbPacQDjzY/VSvkPX9lpRedmp9KdY6WhX
- xutrRKB+4/wm+JG55Ww2RQTtPaBqvHJFHkEE9c/uSEMcTLFcmezHFNoEwtGtPaKOA+I=
-X-Gm-Gg: AZuq6aJhWvHX/rioi1uFQFAIlF4Vhs6olmq0C2mtV22rySStbcQFHbIrvFNinBqtGnp
- j/WobH9bJQXON2PROTQxEajCQ6w5lIeFL2w4uKz/Ws45SGlKqqp5OmOKtYRzmF0Gh4569ISD+X1
- /xTRqPacydaPHPopUC0MEdPTaj3x8V00Nv323HKnZdYeT2qnrO4DsFR/4eFipghSBZmIesS3vvv
- lBO/TY8TPqUCyvfo5Yz+h7tPJ2f9P3C7jnLHBJny57siPRkGwNjlEONDr/cg4gK0vKl8nz7qikd
- Ttvzjnmi6EidCak3Ua3ULNLuSMWCTGLsQFfIUPYi8FbBwCahITiyDNHBAE/qLbGlW/wptm6aK+m
- xXCApcLfjt3HbrPXxG5/dT17dl9k69I4lMCbbCPn6PQH2rNp2y1pke/qZ9lgBAYIhbdN5YQp2lv
- dkT1AxZOQSIa90R1ffjwSrBt0Oj7Fu6v7XdAXgu09TvMcyJqmLabI3ULGePCi7CaGHDTZbOr/08
- Ur3FKZPxsKxdYlAoYCt2N9FT3YWHUZ3PJH5qw==
-X-Received: by 2002:a05:6830:3889:b0:7d1:582d:71db with SMTP id
- 46e09a7af769-7d4646c772cmr2072110a34.38.1770401721266; 
- Fri, 06 Feb 2026 10:15:21 -0800 (PST)
+ bh=vcf12sh6hGJyhH/3MC2y1R+n/H70zIW7/LHeuj2taAA=;
+ b=eXbyI/bsDC0mC0UyCKz1/1/Rg3/1huCPT6KLJTI2fAocDnP1H70+CoePfAl7bP3xm4
+ RoNcJusMH+RPeOiYJaFOhTSHLmpw4dxFmak7pRcSHPzU2wr+72QX2yxAumWVgvjf5g26
+ YB2jf8fZ4/YLQTFca/jqDQzp7z5oJc2C5wNhfpOKnDJzkAaqleDNzLm/xeG/dlmBDZhx
+ ya/yF3w8JTIlVJBEGf0ZwyZBaur8+xYQSmCJyHtHYVsQMWZDZaxbuxUaUWOWygch0XTL
+ uMJWkSUli8xn6jhv0zV17TISdAJ3znmqrmHlGXcj5xWDQ9u22mzTXE0alWRdWMLU9Wm/
+ 0OUg==
+X-Gm-Message-State: AOJu0Yw4u2NufnHu1W63c3+nRMOLorBKPAWiiuS/e4wOv6JvPTex68XL
+ mKcne/yv4ht53CJCGtzD+XWxzgN0dFnj4vF5Ad24FvJfuC6L5E9yEC9yxFR4HkZtspM=
+X-Gm-Gg: AZuq6aLhOv2fYdcHGKIL8Os1rkO7K1PctuOXXnc3urUu18M8nbWvuFyA+SH1EPKJFRx
+ n9Hw+RQXv5bpM29gpURpvMiXBQB80LqE703YY5nxIYbxbJSjPdekbScdSHqVrJIoElO6+nK+zO5
+ gfCWlWAJze/qFlOcwvz5aGxftskZ+lyJV3fNcYcGk8D5r5ydJbekzfU1iDkaYItSolclV3Cmahk
+ xZ/QtJYGa87FwU+78FXbA7eE94JYLNolmjMkx/t/YKjLwLXxlGPTT3aVTFmj6trWsA2h2c9DKTr
+ /klG3jc7qQ7UpoV8eRDpyob+sVMTIa38yRN95F8jjkQc1WpOE45cJERIrR8axyyBHdGIkQXoTh0
+ qQdEYGeqGkgLy9VuY3hD4eIGbJR5+aZuH/ZFZY5iKf+kmA72DWkeqTx5dCnNoyKDE0gl/Ue1OwY
+ 6TOLuJBlrUOiusy/KQp03W2hiy87qzjySrGcj5s6Dn8WNbXx/BQdzvQ//qer+3VLjXAEvKaMmkG
+ ITMOdto/S+ZBFZMN0GI3T3Wiao3lgDYnBDJZA==
+X-Received: by 2002:a05:6830:67da:b0:7cf:cd27:57b9 with SMTP id
+ 46e09a7af769-7d46333934dmr2110593a34.1.1770401722360; 
+ Fri, 06 Feb 2026 10:15:22 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d470914a1bsm97426a34.27.2026.02.06.10.15.19
+ 46e09a7af769-7d470914a1bsm97426a34.27.2026.02.06.10.15.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Feb 2026 10:15:20 -0800 (PST)
+ Fri, 06 Feb 2026 10:15:22 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, upstream@lists.phytec.de, 
- Anshul Dalal <anshuld@ti.com>
-Cc: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Wadim Egorov <w.egorov@phytec.de>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Garrett Giordano <ggiordano@phytec.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>, 
- Paresh Bhagat <p-bhagat@ti.com>, Vitor Soares <vitor.soares@toradex.com>, 
- Parth Pancholi <parth.pancholi@toradex.com>, Andrew Davis <afd@ti.com>, 
- Gowtham Tammana <g-tammana@ti.com>, Vignesh R <vigneshr@ti.com>
-In-Reply-To: <20260122-r5_dt_refactor-v1-1-5442a4321756@ti.com>
-References: <20260122-r5_dt_refactor-v1-1-5442a4321756@ti.com>
-Subject: Re: [PATCH master] arch: arm: dts: k3: refactor common nodes to
- k3-*-r5.dtsi
-Message-Id: <177040171984.4023747.6786276250663802944.b4-ty@konsulko.com>
-Date: Fri, 06 Feb 2026 12:15:19 -0600
+To: u-boot@lists.denx.de, Jamie Gibbons <jamie.gibbons@microchip.com>
+Cc: Conor Dooley <conor.dooley@microchip.com>, 
+ Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, Leo <ycliang@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Cyril Jean <cyril.jean@microchip.com>
+In-Reply-To: <20260120153314.95091-1-jamie.gibbons@microchip.com>
+References: <20260120153314.95091-1-jamie.gibbons@microchip.com>
+Subject: Re: (subset) [PATCH 0/2] Fixes for boot failures
+Message-Id: <177040172143.4023747.14204893558496879169.b4-ty@konsulko.com>
+Date: Fri, 06 Feb 2026 12:15:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,17 +101,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 22 Jan 2026 19:38:38 +0530, Anshul Dalal wrote:
+On Tue, 20 Jan 2026 15:33:11 +0000, Jamie Gibbons wrote:
 
-> This patch refactors the nodes in each board's R5 device-tree to common
-> SoC level dtsi. No functional change is intended from this patch.
+> The following series includes two fixes for master causing boot failures on
+> Microchip's PolarFire SoC Icicle kit. The first fix is for "failed on
+> fdt_open_into for DTO" on dtbo application. This is an issue with overlay
+> alignment that is fixed with a oneline change in the fit-image.c. The second
+> fix is for a boot failure introduced at commit 217cf656e24
+> ("dm: core: Default to using DEVRES outside of xPL"). The value of
+> CONFIG_SYS_MALLOC_F_LEN needed to be increased. Please see the individual
+> commits for a more comprehensive breakdown of the issues.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] arch: arm: dts: k3: refactor common nodes to k3-*-r5.dtsi
-      commit: 3382d75f7a6ccc661c840b0257d85ca7be0ab5d0
+[2/2] configs: microchip_mpfs_generic: fix boot failure
+      commit: 2e6b5185bd509d5c39bbdf900bf6ac9c12f2ed59
 -- 
 Tom
 
