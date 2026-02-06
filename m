@@ -4,101 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32D8CEE209D
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 12:50:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22BC0EE209E
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 12:53:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB4AF836D3;
-	Fri,  6 Feb 2026 13:50:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9952A836D3;
+	Fri,  6 Feb 2026 13:53:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=rohde-schwarz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZEGRHVsh";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=rohde-schwarz.com header.i=@rohde-schwarz.com header.b="hD4hMnKL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B84EC83AAD; Fri,  6 Feb 2026 13:50:45 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 469AC83A64; Fri,  6 Feb 2026 07:28:48 +0100 (CET)
+Received: from mail02.rohde-schwarz.com (mail02.rohde-schwarz.com
+ [80.246.32.97])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7368D8352B
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 13:50:38 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-4362c635319so436182f8f.2
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 04:50:38 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id C708A836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 07:28:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=rohde-schwarz.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dorde.stojicevic@rohde-schwarz.com
+Received: from securemail-mu-h4.rohde-schwarz.com (10.0.19.146) by
+ mail02.rohde-schwarz.com (172.21.64.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.39; Fri, 6 Feb 2026 07:28:45 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770382238; x=1770987038;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/CCzLn880DHAJyj8knj639RJu7r0Bf4zjY9cyAvA8xs=;
- b=ZEGRHVsh1Qp2wWzSDxat7ZU2980RIV1tOlLo9MMG6KfR4/5vJqhweeJT9RSWxqCG7Z
- Ot6SHacYOPiqWJbPYVVcinoWWPklUXc5q3ofLFAFsFFFYK3GhhUIR258R4D8DxI9qpvK
- cwFNytfx704Ke5O/qMmdKIbIr21RIEcG4yiFynbamCzCn3ZjUvYoKsCspJgI+fyteo3I
- k3Uz1jZg3DlEBawrgswfl5ryzKb5dZTXgn1cjXDbEaaJVoIo/kjFg4Kzho8f+zFzOY74
- oigJQl88eXw+PzKzqaKn2xWQTezTJbWuMV7Nah/8h33g1rjdJqU4JgKg0pD5697OwdjS
- Jtvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770382238; x=1770987038;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/CCzLn880DHAJyj8knj639RJu7r0Bf4zjY9cyAvA8xs=;
- b=Rz5fXJRK1+jbdkjUzK+qXKK0dRdHckyI2rrtuomyC6esphjweugCaBV+nh+pOpldAv
- 59yPric2kyOIWqxK42RUhYKDbtox/5mvcijMYqsgJ/y79YsiO05ghEs8Q49Ba7MWieNQ
- iriJYlRXhmdchevyVnrj/grKePVslraqzHAL98noLLJHl/JsbMw14NBy+x8YjUEvjLiN
- 42SQbr6gqZDCAze8EtUEt8pyhgR0/YOt5zgkQc4erZUnWuUyBAgmJ8vLRm/R1xZiZv95
- yDvW7qE75cW6zpy7/TS6e65ozus8P7fcdvPO/e1y1uxO1wsv+HKOrNawpC+RmAxVikbY
- WFYA==
-X-Gm-Message-State: AOJu0YxYOoNrMZfnKqpamqiV/GE5x8seGJHZVo+qLBh4xAmsYqV8eEYE
- gj1uKBppkIB0dzI4jsbHkV1JK012v7AqIxXCjXFRx6JmC5Y9n13+tZhVSkZjtOPKiv8=
-X-Gm-Gg: AZuq6aJ6GDjyFyN/5m9Zuc2221foY/J21KTKx6c+doTkG0RUpsoAedDktaFHoFaMy8N
- 8FZqzmFwCkeIAUaNgn/e84fDCdb2PQhNaRIFCv+eXQjErlohSU93kI71+cq9/N/6lcfdVyt7/fj
- AHyDY5Peybxfa5SkfNELwFnpe6EjFqGb7foaAB9oS2iuYe2301Z18A4n2xfEmOsoSvbl8ADmJK6
- 0J7MkAfwF707pc8WDnsgYfHcW6BqdATuw//zZC/YH31r7NZrbQaX61zBaBNymB3sW7b7F+4DdsE
- sv+XMDdaoh4cLtb9AeGHFR9H/NXmikxhqmggIW7SbkSIDhcim9gMKusxvTisLZRU2KRJoEH4cO8
- MM7CJvFOSbM2UQPixAIXqQKiYQXTMyn6AI6lE1wuefrw7NN8696UOCIs7xbs8426EzYd3CMXpX3
- myDlflkbDHmqXZwMUtX3VmhKUJRBCgGfKzQ7EgUiv8wsuxDaofzq/MJbdc5K1uD+4SZUxX+DXbA
- B5PVRhkvQ==
-X-Received: by 2002:a5d:5f82:0:b0:430:f3fb:35fa with SMTP id
- ffacd0b85a97d-436293800ddmr3855668f8f.57.1770382237828; 
- Fri, 06 Feb 2026 04:50:37 -0800 (PST)
-Received: from [192.168.1.100]
- (2a02-842a-d52e-6101-56a2-efb9-07f1-cf08.rev.sfr.net.
- [2a02:842a:d52e:6101:56a2:efb9:7f1:cf08])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-436296bd4a1sm5812386f8f.17.2026.02.06.04.50.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Feb 2026 04:50:37 -0800 (PST)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 06 Feb 2026 13:50:31 +0100
-Subject: [PATCH v2] board: mediatek: add MT8370 EVK board support
+ d=rohde-schwarz.com; s=mail25;
+ t=1770359325; bh=W0AvRgFq471lllf5dXHu5/G1O9AtDHNWv7qQa09oqNE=;
+ h=From:Subject:Date:Message-ID:To;
+ b=hD4hMnKLscQlPdZnPoDHkv6DTF/YOVwDaNvrdTnBWPhP2jH/tTnZHHUaoxTU3nLfDC9wX1qn
+ CB6Uxa0GeSOMtTpF/qFG92rjRqrvFMdLGw4gR0rv/fWOdejI8R70vkI42zuyJ/BL/B6le0pG
+ 3rFL8XWKVc+9rFRcKVzt6x6EO2Hx7BvEfTOYjGnVs2Aq4GoFyffTd/a0YU1xo34YXzLadGOr
+ 5exkxcnk6GHW2M28oZASpUk08fZuyXQmTF9N5olvKqj22I/bST0Sh+5MiceDCre+CET3+Nzc
+ +pEFSaCM6m5RU0N/aU+u6Ts4hbIJD6JF4+k1W5lav6iYaPZ74y7fiQ==
+Received: from GMU451.rsint.net ([10.0.225.106])
+ by gmu812.rsint.net (Totemo SMTP Server) with SMTP ID 215;
+ Fri, 6 Feb 2026 06:28:44 +0000 (GMT)
+Received: from GMU502.rsint.net (10.0.225.34) by GMU451.rsint.net
+ (10.0.225.106) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Fri, 6 Feb
+ 2026 07:28:44 +0100
+Received: from GMU508.rsint.net (10.0.225.40) by GMU502.rsint.net
+ (10.0.225.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Fri, 6 Feb
+ 2026 07:28:39 +0100
+Received: from GMU508.rsint.net ([fe80::9ee:3531:ebaf:c342]) by
+ GMU508.rsint.net ([fe80::9ee:3531:ebaf:c342%7]) with mapi id 15.02.2562.027;
+ Fri, 6 Feb 2026 07:28:39 +0100
+From: Dorde Stojicevic <dorde.stojicevic@rohde-schwarz.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Quentin Schulz <quentin.schulz@cherry.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: RE:  Re: Re: [PATCH] arm: Backward compatibility to U-Boot v2020.04
+Thread-Index: AQHclwulXLVtK+jOsEWktEXTMWYlp7V1NLAQ
+Date: Fri, 6 Feb 2026 06:28:39 +0000
+Message-ID: <989f3c4aa5a04fd3b1c2efda1aedd459@rohde-schwarz.com>
+References: <25380f75dd2443c0a882bcce78503511@rohde-schwarz.com>
+ <20260203170002.GO2603314@bill-the-cat>
+ <f8f1197e979b4998afb5dc952f7a8a63@rohde-schwarz.com>
+ <20260206015447.GP2603314@bill-the-cat>
+In-Reply-To: <20260206015447.GP2603314@bill-the-cat>
+Accept-Language: de-DE, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.9.40]
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260206-add-mt8370-evk-board-v2-1-105c606f80dc@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32POW7DMBBFryKwzhhcRJFSlXsELjjkKCKsLdSCG
- IbubtpqUqX8H5g/7z3YQinSwpriwRLtcYnTmIP8KJjv3PhNEEPOTHJZcclLcCHAsFplONB+A5x
- cClAF2dZlpThWhuXTOVEbf9+zX9czJ/rZ8vp6lgzdQuCnYYhrU6CWQiG2waOwQiJpwUtprDZWG
- iKL5LFubcv+UmXIk0lnnhsMznfge3IjbDOEbe6jd/kbuCoYNKVWwtTNLtiLp4vLOqX72zpXL6D
- /BXcBApRQWVOrYEv9ie7eR0x0yRLsehzHE9bCDIdLAQAA
-X-Change-ID: 20260204-add-mt8370-evk-board-6d2f94630b67
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Macpaul Lin <Macpaul.Lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tom Rini <trini@konsulko.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Julien Masson <jmasson@baylibre.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- David Lechner <dlechner@baylibre.com>, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+X-IQAV: YES
+thread-topic: RE: *EXT* Re: Re: [PATCH] arm: Backward compatibility to U-Boot
+ v2020.04 ***CAUTION_Invalid_Signature*** /ur/
+X-rus_sensitivity: 10
+msip_labels: MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Enabled=true;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_SetDate=2026-02-06T07:28:41Z;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Method=Privileged;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Name=UNRESTRICTED;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_SiteId=74bddbd9-705c-456e-aabd-99beb719a2b2;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_ActionId=8b69e117-7756-4ef8-b52e-ebe0297deaf4;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_ContentBits=1
+Content-Type: multipart/related; type="multipart/alternative";
+ boundary="--=_Boundary_=--499=ACDA1-_FE=3CB_16"
+X-GBS-PROCJOB: =?utf-8?Q?chdMvwyaIiyyKGbXwMD8NYEFDqr/TNt3d2q+qURNpXuMgSNXSyK2k+7aks21?=
+ =?utf-8?Q?qeg8qIcfpDfXoyeTEhpyn5/DvUn8du8ButIJoX/Xedt3nqMljSmIsSFaCEK7?=
+ =?utf-8?Q?k063A4NBFkHm5aS+vTpLnI4S6LsKaONRPjp1mBH7OuEsVJW+BOkRhrCPFci9?=
+ =?utf-8?Q?jV9xcHsRC6oNu6cKmutORTZl8oIk3+55SQ=3D=3D?=
+X-Mailman-Approved-At: Fri, 06 Feb 2026 13:53:15 +0100
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,75 +106,258 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds support for the MT8370 EVK board with the following
-features enabled/tested: Boot, UART, Watchdog and MMC.
+----=_Boundary_=--499=ACDA1-_FE=3CB_16
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-MT8370 is based on MT8188.
+SGksDQoNCnllcyBvZiBjb3Vyc2UuDQoNCkhlcmUgaXQgaXM6DQoNCiQgbWtpbWFnZSAtbCBi
+dWlsZC9lZDdjdC1jYi5zcnANCkZJVCBkZXNjcmlwdGlvbjogTHlueFNlY3VyZSAyMDI1LjEw
+LjAtMzk4NDRiODBlMCBTUlAgKGFhcmNoNjQpDQpDcmVhdGVkOiAgICAgICAgIFRodSBGZWIg
+IDUgMTM6NTg6MzEgMjAyNg0KIEltYWdlIDAgKGtlcm5lbC0xKQ0KICBEZXNjcmlwdGlvbjog
+IEx5bnhTZWN1cmUgMjAyNS4xMC4wLTM5ODQ0YjgwZTAgU1JQIChhYXJjaDY0KQ0KICBDcmVh
+dGVkOiAgICAgIFRodSBGZWIgIDUgMTM6NTg6MzEgMjAyNg0KICBUeXBlOiAgICAgICAgIEtl
+cm5lbCBJbWFnZQ0KICBDb21wcmVzc2lvbjogIHVuY29tcHJlc3NlZA0KICBEYXRhIFNpemU6
+ICAgIDI2MjUxMjI2NCBCeXRlcyA9IDI1NjM1OS42MyBLaUIgPSAyNTAuMzUgTWlCDQogIEFy
+Y2hpdGVjdHVyZTogQUFyY2g2NA0KICBPUzogICAgICAgICAgIExpbnV4DQogIExvYWQgQWRk
+cmVzczogMHg0MDIwMDAwMA0KICBFbnRyeSBQb2ludDogIDB4NDAyMDAwNDANCiBJbWFnZSAx
+IChmZHQtMSkNCiAgRGVzY3JpcHRpb246ICBGbGF0dGVuZWQgRGV2aWNlIFRyZWUgYmxvYiBm
+b3IgTHlueFNlY3VyZSAyMDI1LjEwLjAtMzk4NDRiODBlMCBTUlAgKGFhcmNoNjQpDQogIENy
+ZWF0ZWQ6ICAgICAgVGh1IEZlYiAgNSAxMzo1ODozMSAyMDI2DQogIFR5cGU6ICAgICAgICAg
+RmxhdCBEZXZpY2UgVHJlZQ0KICBDb21wcmVzc2lvbjogIHVuY29tcHJlc3NlZA0KICBEYXRh
+IFNpemU6ICAgIDc5NTE5IEJ5dGVzID0gNzcuNjYgS2lCID0gMC4wOCBNaUINCiAgQXJjaGl0
+ZWN0dXJlOiBBQXJjaDY0DQogRGVmYXVsdCBDb25maWd1cmF0aW9uOiAnY29uZi0xJw0KIENv
+bmZpZ3VyYXRpb24gMCAoY29uZi0xKQ0KICBEZXNjcmlwdGlvbjogIEx5bnhTZWN1cmUgMjAy
+NS4xMC4wLTM5ODQ0YjgwZTAgU1JQIChhYXJjaDY0KQ0KICBLZXJuZWw6ICAgICAgIGtlcm5l
+bC0xDQogIEZEVDogICAgICAgICAgZmR0LTENCg0KUGxzIGtlZXAgbWUgaW4gdG8gbG9vcCwg
+SSBhbSBxdWl0ZSBpbnRlcmVzdGVkIGluIHRoaXMNCg0KR3JlZXRpbmdzDQpEb3JkZQ0KDQoN
+CkRvcmRlIFN0b2ppY2V2aWMNCg0KTmV0d29ya3MgYW5kIEN5YmVyc2VjdXJpdHkNCg0KUm9o
+ZGUgJiBTY2h3YXJ6IFNJVCBHbWJIDQpIZW1taW5nZXIgU3RyYXNzZSA0MSB8IDcwNDk5IFN0
+dXR0Z2FydC1XZWlsaW1kb3JmIHwgR2VybWFueQ0KUGhvbmU6ICs0OTcxMTY5OTQ1MTk1DQoN
+CkludGVybmV0OiB3d3cucm9oZGUtc2Nod2Fyei5jb20NCg0KDQoNCkdlc2Now6RmdHNmw7xo
+cmVyIC8gTWFuYWdpbmcgRGlyZWN0b3I6IFJhbGYgS29lbnplbg0KQXVmc2ljaHRzcmF0c3Zv
+cnNpdHplbmRlciAvIENoYWlyIG9mIHRoZSBTdXBlcnZpc29yeSBCb2FyZDogTWFyaW8gUGFv
+bGkNClNpdHogLyBSZWdpc3RlcmVkIE9mZmljZTogU3R1dHRnYXJ0DQpIYW5kZWxzcmVnaXN0
+ZXIgLyBDb21tZXJjaWFsIFJlZ2lzdGVyOiBBRyBTdHV0dGdhcnQgSFJCIDc1OSA5MzQNClVt
+c2F0enN0ZXVlci1JZGVudGlmaWthdGlvbnNudW1tZXIgKFVTdC1JZE5yLikgLyBWQVQgSWRl
+bnRpZmljYXRpb24gTm8uOiBERSAxMjEgOTYzIDI4Mw0KRWxla3Ryby1BbHRnZXLDpHRlIFJl
+Z2lzdGVyIChFQVIpIC8gV0VFRSBSZWdpc3RlciBOby46IERFIDg3NyA3MjcgNjcNCg0KDQoN
+Ci0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBUb20gUmluaSA8dHJpbmlAa29u
+c3Vsa28uY29tPiANClNlbnQ6IEZyaWRheSwgRmVicnVhcnkgNiwgMjAyNiAyOjU1IEFNDQpU
+bzogU3RvamljZXZpYyBEb3JkZSAoMTFTSUVQVDEpIDxkb3JkZS5zdG9qaWNldmljQHJvaGRl
+LXNjaHdhcnouY29tPg0KQ2M6IFF1ZW50aW4gU2NodWx6IDxxdWVudGluLnNjaHVsekBjaGVy
+cnkuZGU+OyB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KU3ViamVjdDogKkVYVCogUmU6IFJlOiBb
+UEFUQ0hdIGFybTogQmFja3dhcmQgY29tcGF0aWJpbGl0eSB0byBVLUJvb3QgdjIwMjAuMDQg
+KioqQ0FVVElPTl9JbnZhbGlkX1NpZ25hdHVyZSoqKg0KDQpPbiBUaHUsIEZlYiAwNSwgMjAy
+NiBhdCAxMjoyMDoyN1BNICswMDAwLCBEb3JkZSBTdG9qaWNldmljIHdyb3RlOg0KPiBIaSBn
+dXlzLA0KPiANCj4gYW5kIHRoYW5rcyBmb3IgeW91ciBmYXN0IHJlc3BvbnNlLg0KPiANCj4g
+U29ycnkgZm9yIHRoZSBmb3JtYXR0aW5nIGlzc3VlLCBJIGFtIGJvdW5kIHRvIG91ciBjb21w
+YW55IE91dGxvb2ssIHdoaWNoIGhhcmQtY29kZXMgb3VyIHNpZ25hdHVyZXMsIHNvIHRoaXMg
+b25lIHdpbGwgbm90IGJlIHBvc3NpYmxlIHRvIHRha2Ugb3V0LiBJIGFtIG5vdCBxdWl0ZSBz
+dXJlIGdpdCBzZW5kLWVtYWlsIHdvdWxkIHdvcmssIGZvciB0aGUgc2FtZSByZWFzb24gKyBj
+b3Jwb3JhdGUgc3R1ZmYuLi4uDQo+IA0KPiBBbnlob3csIGFuIHVwZGF0ZS9jbGFyaWZpY2F0
+aW9uIG9uIHRoZSB0aGluZ3MgZ29pbmcgb24gaGVyZSAoSSBjb3VsZC9zaG91bGQgaGF2ZSBz
+ZW50IGluaXRpYWxseSwgc29ycnkgZm9yIHRoYXQpOg0KPiANCj4gMSkgTHlueCBUb29sY2hh
+aW4gY29tcGlsZXMgYSBGSVQgSW1hZ2Ugd2l0aCB0aGUgZm9sbG93aW5nIHN0cnVjdHVyZToN
+Cj4gCXsNCj4gCQlJbWFnZXN7DQo+IAkJCUtlcm5lbC0xIHsNCj4gCQkJCURhdGE9SW1hZ2U7
+DQo+IAkJCX0NCj4gCQkJRmR0LTEgew0KPiAJCQkJRGF0YT1zeXN0ZW0uZHRiOw0KPiAJCQl9
+DQo+IAkJfQ0KPiAJCUNvbmZpZ3VyYXRpb25zIHsNCj4gCQkJSGVyZSBrZXJuZWwtMSBhbmQg
+ZmR0LTEgdXNlZCBhcyBkZWZhdWx0IGNvbmYtMQ0KPiAJCX0NCj4gCX0NCj4gMikgRGF0YT1J
+bWFnZSBkb2VzIG5vdCBoYXZlIHRoZSBNYWdpYyBDb2RlIDB4NjQ0ZDUyNDENCj4gMykgSXQg
+aXMgYm9vdGluZyB3aXRoIFUtQm9vdCBTUEwgMjAyMC4wNCtnMWNjYzlkOTM1NzYrcDEgYWNj
+b3JkaW5nIHRvIEx5bnguIEkgaGF2ZW7CtHQgdGVzdGVkIG15c2VsZiBzaW5jZSB3ZSBzdGFy
+dGVkIHdpdGggMjAyNC4wNCwgYW5kIHdlIG5lZWQgaXQgZm9yIHNvbWUgb3RoZXIgZmVhdHVy
+ZXMuDQo+IDQpIFRoZW4gSSBpbnZlc3RpZ2F0ZWQgZGlmZmVyZW5jZXMgdjIwMjAuMDQgdnMg
+djIwMjQuMDQsIGFuZCBmb3VuZCB0aGlzIHBhcnQgb2YgY29kZSBjYW1lIGluLg0KPiA1KSBU
+aGUgZmluZGluZyBpcyBjb25zaXN0ZW50IHdpdGggbGFzdCBlcnJvciByZXBvcnRlZCBieSBV
+LUJvb3QgcHJpb3IgdG8gcmVzZXQgIkJhZCBMaW51eCBBUk02NCBJbWFnZSBtYWdpYyEiDQo+
+IA0KPiA2KSBJIDFzdCB0cmllZCBwYXRjaGluZyB0aGUgRGF0YT1JbWFnZSBpbiBMeW54IEZJ
+VCB3aXRoIHRoZSBtYWdpYyBjb2RlLCBidXQgaXQgZGlkbuKAmXQgd29yay4NCj4gNykgb25j
+ZSBJIHBhdGNoZWQgYm9vdG0gaW4gVS1Cb290IHRvIHNraXAgdGhpcyBwYXJ0IGFuZCBiZWhh
+dmVzIGFzIGluIA0KPiB2MjAyMC4wNCAoZXhjbHVkZWQgYWxsIHJlc3RydWN0dXJpbmcgZXRj
+LikgaXQgYm9vdGVkIHRoZSBMeW54IGtlcm5lbA0KPiANCj4gQmFzaWNhbGx5LCB2MjAyNC4w
+NCBjb3JyZWN0bHkgZGV0ZWN0cyAiQmFkIExpbnV4IEFSTTY0IEltYWdlIG1hZ2ljISIsIGFz
+IG5vbmUgaXMgdGhlcmUgYXQgdGhlIG1vbWVudCwgYnV0IGluIG9yZGVyIHRvIGJvb3QgTHlu
+eCBIeXBlcnZpc29yIGFzLWlzIHRoaXMgYmFja3dhcmQgY29tcGF0aWJpbGl0eSB0byB2MjAy
+MC4wNCBpcyBuZWVkZWQuDQo+IA0KPiBEb2VzIHRoaXMgc2hpbmUgbW9yZSBsaWdodCBvbiBp
+dD8NCg0KVGhpcyBpcyBoZWxwZnVsLCB5ZXMsIHRoYW5rcy4gQ2FuIHlvdSBwcm92aWRlIGFu
+ICJta2ltYWdlIC1sIiBvZiBvbmUgb2YgdGhlc2UgZmFpbGluZyB0byBib290IEZJVCBpbWFn
+ZXM/DQoNCi0tDQpUb20NCg==
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
-This series depends on [1] for several cleanups such as memory map.
+----=_Boundary_=--499=ACDA1-_FE=3CB_16
+Content-ID: <0A6EB1DD4DB44C80@9EC714B6E653EA8A>
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
 
-The new defconfig file added here is not yet part of any MAINTAINERS
-file, waiting for comment on [1] to be addressed.
----
-Changes in v2:
-- Add defconfig file, missing on v1
-- Add dependency to [1], for memory map cleanup
-- Remove board/mediatek/mt8370_evk
-- Link to v1: https://lore.kernel.org/r/20260204-add-mt8370-evk-board-v1-1-3132f953d845@baylibre.com
+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
+o1/HeMeUx0hjrWJXxl6K04gTxHXHY+Oj45vipxf6LNy5cDzBPqE44foi40V5iy4s1licvvj4
+EsUlnCVHEtGJMYktie85oZwGzvTSgKW1S6e4bO4u7hOeB28Hb5Lvyi/nTyS5JpUnPUp2Td6e
+PJninlKR8lTAFlQLnqf6p9alvk4LTduf9ik9Jr09A5eRmHFUSBGmCfsytTPzMoezzLOKs6TL
+nJftXDYlChI1ZUPZi7K7xTTZz9SAxESyXjKa45ZTk/MmNzr3SJ5ynjBvYLnZ8k3LJ/J9879e
+gVrBXdFboFuwtmB0pefK+lXQqqWrelfrry5aPb7Gb82BtYS1aWt/KLQuLC98uS5mXU+RVtGa
+orH1futbixWKRcU3NrhsqNuI2ijYOLhp7qaqTR9LeCUXS61LK0rfb+ZuvviVzVeVX33akrRl
+sMyhbM9WzFbh1uvb3LcdKFcuzy8f2x6yvXMHY0fJjpc7l+y8UGFXUbeLsEuyS1oZXNldZVC1
+tep9dUr1SI1XTXutZu2m2te7ebuv7PHY01anVVda926vYO/Ner/6zgajhop9mH05+x42Rjf2
+f836urlJo6m06cN+4X7pgYgDfc2Ozc0tmi1lrXCrpHXyYMLBy994f9Pdxmyrb6e3lx4ChySH
+Hn+b+O31w0GHe4+wjrR9Z/hdbQe1o6QT6lzeOdWV0iXtjusePhp4tLfHpafje8vv9x/TPVZz
+XOV42QnCiaITn07mn5w+lXXq6enk02O9S3rvnIk9c60vvG/wbNDZ8+d8z53p9+w/ed71/LEL
+zheOXmRd7LrkcKlzwH6g4wf7HzoGHQY7hxyHui87Xe4Znjd84or7ldNXva+euxZw7dLI/JHh
+61HXb95IuCG9ybv56Fb6ree3c27P3FlzF3235J7SvYr7mvcbfjT9sV3qID0+6j068GDBgztj
+3LEnP2X/9H686CH5YcWEzkTzI9tHxyZ9Jy8/Xvh4/EnWk5mnxT8r/1z7zOTZd794/DIwFTs1
+/lz0/NOvm1+ov9j/0u5l73TY9P1XGa9mXpe8UX9z4C3rbf+7mHcTM7nvse8rP5h+6PkY9PHu
+p4xPn34D94Tz+49wZioAAAAJcEhZcwAADsMAAA7DAcdvqGQAABktSURBVHic7Z0JfBvFvcdn
+ZiWfsZMQP0JIKRQSIIaEhHLlPQolHyBQKGBZviQ7NtBw8zjDXUxoaSlQCARIHoYkRrJiy7Ic
+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
+4IL6P6va7OV2EOpcAAAAAElFTkSuQmCC
 
-[1]: https://lore.kernel.org/all/20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com/
----
- configs/mt8370_evk_defconfig | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
-
-diff --git a/configs/mt8370_evk_defconfig b/configs/mt8370_evk_defconfig
-new file mode 100644
-index 00000000000..48d3f64a42e
---- /dev/null
-+++ b/configs/mt8370_evk_defconfig
-@@ -0,0 +1,28 @@
-+CONFIG_ARM=y
-+CONFIG_COUNTER_FREQUENCY=13000000
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_MEDIATEK=y
-+CONFIG_TEXT_BASE=0x4c000000
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8370-genio-510-evk"
-+CONFIG_TARGET_MT8188=y
-+CONFIG_MTK_MEM_MAP_DDR_SIZE=0x100000000
-+CONFIG_SYS_LOAD_ADDR=0x4c000000
-+CONFIG_IDENT_STRING="mt8370-evk"
-+# CONFIG_BOARD_INIT is not set
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_CLK=y
-+CONFIG_MMC_MTK=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_MT8188=y
-+CONFIG_BAUDRATE=921600
-+CONFIG_DM_SERIAL=y
-+CONFIG_MTK_SERIAL=y
-+CONFIG_WDT=y
-+CONFIG_WDT_MTK=y
-+# CONFIG_RANDOM_UUID is not set
-
----
-base-commit: b5213bbfdcb1812be510427857827ee8becb9f8f
-change-id: 20260204-add-mt8370-evk-board-6d2f94630b67
-prerequisite-change-id: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179:v1
-prerequisite-patch-id: c807f91e384d7853a624dcdac51146f533e83302
-prerequisite-patch-id: 2985130c9247aa746578d0999ef36afae5bfe81a
-prerequisite-patch-id: d7f2bde6b8c257d93ae3155dbe51c2b1e956a87d
-prerequisite-patch-id: 68791866bda399c0744095f456da7e5e50f50a48
-prerequisite-patch-id: 2605f6c13e06821386bd3bfbdf09e57bd8f3c940
-
-Best regards,
--- 
-Julien Stephan <jstephan@baylibre.com>
-
+----=_Boundary_=--499=ACDA1-_FE=3CB_16--
