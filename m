@@ -4,105 +4,173 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67462ECD9AA
-	for <u-boot@archiver.kernel.org>; Thu,  5 Feb 2026 23:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBFCECD9AA
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 00:33:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B71083BDD;
-	Fri,  6 Feb 2026 00:52:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id AD4B183015;
+	Fri,  6 Feb 2026 01:33:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="GZTl90/Q";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="qKf3lwTa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E54128341A; Fri,  6 Feb 2026 00:52:20 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 453F28341A; Fri,  6 Feb 2026 01:33:13 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18C7D83AAD
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 00:52:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDB39800AE
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 01:33:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-4044d3ff57bso70014fac.0
- for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 15:52:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770335537; x=1770940337;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cUGRU+3I7AeiqNyurbboDJji+YLkSPh5WMTm/6EJ72A=;
- b=GZTl90/QmvIouxrcGUTphYlqRsQtUnbe4GDkAkTZ7+dIQLjvHtnZNCQMKRO9q/YhdC
- xpUyAZ+wnk8HmgY+RaCE8gvVjYwucPJq57P4D4Z8S8wvO+x4d7q5UjUh62HFACDvYvIP
- VdZRAb778cR8hMhzHJfNfyzmZi/LN0brGKNAQqPKuvf1EvUE/gGdXFMNUKa8qqtvFgg6
- CEjZhv6kFVR5/OGJu+pzkmVGJr3xXxlvh5KzdGCXzKrZxWiQ8IEAgozPbZXtTU89wE2K
- HLRlbYH0rpNV6uIyvoWhu8PiqHh+KKU6D2B8XMhllVB1YUTjswCVMwQJ/rIejBBqGLNU
- IHqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770335537; x=1770940337;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=cUGRU+3I7AeiqNyurbboDJji+YLkSPh5WMTm/6EJ72A=;
- b=T8H8fs6HNyZLdvSsgrIBG2KgXuf7KO5uFHhxiUNBqSYrh1g99gyi5coy8VWF4gFbkJ
- aeZMtzpVEarZSZNfi6xSjJ7Zj3XZQwDAox2CdyAPuC57cQvwIj9Xpsb3YbaBp747zVPp
- cVOkJRP7rqfRR4jCjJzrsAH6EigNqmWeG7soNtotmq36C9d24+xzIEJDXKY+EtwAIEJh
- zCooUOTvakidU9FewAR4r2a7qz0k8CZ9zVasyqlVMCCynKXKiiOec5d8F0TqKAisg5cH
- WO1q35Nz2D7FtMXnUiR/pRa5tRbFvSBNs+qfUVEeh2MOeT/GUjnbHpJ6pjxrruo6tul1
- sLxQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5wiZ8lxR10BTlS6eO67VATFIswTuwe30qQHDzEB45XbgpKAMPSCpZL6DP8G+HjU3dIOeE90A=@lists.denx.de
-X-Gm-Message-State: AOJu0YwXwd84WbGBmQ/qxmEZ/wdIGOd4ULcZz7RHsNMcoS4NQoir+LVJ
- a2XhkOkSdQiyB8sQxhNgEN8WP9Uc197woh+zrMwTC4KTyzqtOARuPJ/0haD0qIOyaT8=
-X-Gm-Gg: AZuq6aI70nqA5P4yxscLffqMf1OlNGAEGBj6mbeNEXwHqm9P79evh1nlfEtNtEfpLDU
- ZGvlMd8Kk4wmNeehHEzq79p9RdM7EOEb955OlVLwpl23qu1G1fe48rtjJe4afduV/CyhgV9X39S
- 2e27wd4J5dG4kyWQDSUWDnAh4Rb5qJms8Mcb8m+c0kl7FmrssxJUVzhzY1eeSYD8B8/ERj6iz0i
- HSvCWJMBL2qafRhr5F1NkKQzLtLaW6qd4BNBk+4Q4xsBlgtFbKR1K1/rlPMhhnHd8UunxYHYGa1
- FEFg4BIg5h3tpwpX6oVtgnvsdMZ+XVcoeDLTnJjRbBfwiuHKP508wMhssDkZzezdATmTmI5p2bQ
- J834JT2qbuzNSsVcduaLfkt/Dd9/qvsf8aK72HJ/XnXFvEG1SC7D8nU3gxTjLhA2ZAm3PtwgmM1
- XiAd5UBuTs77LdDhM=
-X-Received: by 2002:a05:6820:4a12:b0:65f:698e:d5ba with SMTP id
- 006d021491bc7-66d09ac2700mr411748eaf.17.1770335536807; 
- Thu, 05 Feb 2026 15:52:16 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:4487:26aa:aa87:6ade])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66d3adcae3csm312165eaf.9.2026.02.05.15.52.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Feb 2026 15:52:16 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Thu, 05 Feb 2026 17:51:29 -0600
-Subject: [PATCH 5/5] arm: mediatek: consolidate ARMv8 memory maps
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cdCDpdlzC/ELnxTLxqXcprCKs6pWDsJbP0efmg8+IYLJIhUqDdAwCf0Cr/I9LO3cQPR0DRnO/yq732PO4xptawTQlA95bd5UBiJev1v1XNsbSjsw6PgFx5Kkm5C3vuUvfzQyXZZTtT86XYvZ+FiQooYyc9Q4taxII3/yxQ+xuoCcSyqM5YP1ZFAFgIgL4oInNwALtaljLsYj5lf8wj9r5QuI8DWrEmT7n2E/qUDMJCsleIwWIuhh94RIakhgulVaC8IMl05q5lJTLSZ73kVa3qPIlltgIcm5NS1QacV7ZVlAhKZI8HiRxmeMmAocv4Gv/9O3GVRWsP6zVs0Ll8zJWw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pECqEeTaUSQIxR/NdMPD6bit0pebBI1KdcqCjePuQJM=;
+ b=xQrRp2ZxpDMb1NdzzADQGJXYPgPpqx6+t90B+7HlmUqm7z7uwvqWWSbISwZPMZ9O8iMev7//v06kId5k9cvT6HIrDB+N2D9yTnc7bxkM+0l77KO8HrH/vmvzo6NylsVpkkWp3sWkrfu0Qz2IamZtwC/IQIdNw3Mxy48CuYK5OjZ5BqS28VWEqVbpHV3YdGy/Ldz+cP4+wOP1lPhR8lF0ahz7E/TKecAhXBUekHbVpD77XNdnEA1OcroRkUXLg9kaQTwWOhtPB9piNJxhoRgPfDD094v5s39/mHcPlR/uTpYTn1v2b5qgK7RjC1LJe/rUGRz3PySlRTj/b+W54c+nXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pECqEeTaUSQIxR/NdMPD6bit0pebBI1KdcqCjePuQJM=;
+ b=qKf3lwTahu8yElNuUW6jpDaCbaa4vgXkhckNWIl510CNApxDRLJJMhpfbsWrzKpAy4imDVpLeFFLAgbCa5Ee3DbMgCrE3T1emfivx2XjdYIREDdCXPEsEiB8NynZMuJXutwVLVXKiq/OYheMvavEq/VfKItnd9JUax4z3zvZ+cMI2bA3WWDV8cgqVAqqumfcH4KH+/E2pi7rzGP11w6hsFj3wG7Mu9fp0OaUC29Oy4Jz7pHLnRC2CPiz8Ypp3zk8OtAu1Anl5xY5PDluQLd6klFwTMveUXaTgK/RNv7wuVgjZk8n6emD202lXdQa3Bn5xzs6LCunzyw50N1ysDq1ag==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI0PR04MB10925.eurprd04.prod.outlook.com (2603:10a6:800:25b::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.15; Fri, 6 Feb
+ 2026 00:33:07 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9587.013; Fri, 6 Feb 2026
+ 00:33:07 +0000
+Date: Fri, 6 Feb 2026 08:34:39 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: alice.guo@oss.nxp.com
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Jindong Yue <jindong.yue@nxp.com>, Jacky Bai <ping.bai@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Fedor Ross <fedor.ross@ifm.com>,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
+ Ji Luo <ji.luo@nxp.com>, Frank Li <Frank.Li@nxp.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Adam Ford <aford173@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ David Zang <davidzangcs@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marex@nabladev.com>, Joseph Guo <qijian.guo@nxp.com>,
+ Tim Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
+Subject: Re: [PATCH v1 01/12] imx9: scmi: Get DDR size through SM SCMI API
+Message-ID: <aYU3H4T7shROL+60@shlinux89>
+References: <20260205-imx952-v1-0-2103d0222a0b@nxp.com>
+ <20260205-imx952-v1-1-2103d0222a0b@nxp.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260205-imx952-v1-1-2103d0222a0b@nxp.com>
+X-ClientProxiedBy: SI1PR02CA0003.apcprd02.prod.outlook.com
+ (2603:1096:4:1f7::20) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260205-mtk-mach-clean-up-duplicates-v1-5-b7d4a43c18eb@baylibre.com>
-References: <20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com>
-In-Reply-To: <20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13627;
- i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=Kwg9Fa+pH00HfeucXLAsFtc/2UKCIIvcA8r6AkUWfHU=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBphS0kYFg6TFhM32vL7TDB0V97m/H2K6Fzh6Cm8
- aBFiSuyBdeJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYUtJBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AevQH/R0nrw9UUb1grFsgBB7OrHlpVcCx/QYcfo/1r7v
- pDRueYtvuKQ2kde3sSRz4kNHQGKBSdDGn/AxfsRKvkfWXKSdY/7E5gB7+RgByJNihUuiEshW71z
- 4YZwwZOQKr8Hkt9v6XvJHsaWhgL/dMPHPo5OVUhAiccxMg2CzNbi4/IAR6DfdtAOFsUkbuuaC+s
- 0thGIEjEdJWYroSQo0zhKvHGuSXoTwafrvzOmL4ZQx0TeZ2Gcqi004NaOrnRaQYWdEgFq70Rd/s
- KRXq9qBJr62HAAAohsdAwTladZYf3ahTaNJYpPQuTdPEGnAUwf7zvVLC+z4s+AxBTv05Ani8+9W
- TYoY=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Fri, 06 Feb 2026 00:52:32 +0100
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI0PR04MB10925:EE_
+X-MS-Office365-Filtering-Correlation-Id: 692940a2-ca90-425e-bdca-08de65174be2
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|1800799024|376014|366016|7416014|52116014|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?mMKcqdyhdPLEjRIaEK1rEvuvUAeZnOTj6mtZI06p/K0168v1hNAivuFuj3rl?=
+ =?us-ascii?Q?k59Gc+X0bZ7AL33Ho2WxQQHaXPQ11zyuPstg3mHdKqF8Jla8JeGRYOBaABGj?=
+ =?us-ascii?Q?3sDgIPNHrrfJ1SDOtLQY98KVaLeSSXERiIRn2Wtm10Ir4yB7W9446yNIqRuj?=
+ =?us-ascii?Q?sAZzHDR+QmHUv/IRKdiiBRxqa78QOEazEqR581cITGSpupn+dRHH0uYIWtsv?=
+ =?us-ascii?Q?UiFtzX7Vjf9rya3Xn31mwZgwcsQih2m4yyE+dUZ9+w7uFgKDE+Py9AQPRzsq?=
+ =?us-ascii?Q?rx72Hj7ns0pKhXPl6Vmzw2NYsRa+pxOp4Uay5jC91MjAiDADODtcrot6vn3j?=
+ =?us-ascii?Q?kqFJjNgHif0L084L18EsBhmWdOM180m65J97qb7VRRWZ9el2mPjyRV3zzh0U?=
+ =?us-ascii?Q?L4mNqYuN5UO4Y2A/4m+W/WZwTBd/LjYZyjV3o8msEY3gdwpQbWKefn73tnO3?=
+ =?us-ascii?Q?hQsfI8ocQMuZTv31TSAHWPnG9Sy+mjaPiUxmisEpLTNYIgSXiygVHHkg461+?=
+ =?us-ascii?Q?w5zMlg/Z1EyVXNSk39AeBGeg0/mtn/s9NAQqhyupFevplNJW3osMo7qmdsCR?=
+ =?us-ascii?Q?lZMkBO+xArOBujdmJzz94O9CS8itU0QjNiydocr72v5nB3ind8eQuU6Cydmp?=
+ =?us-ascii?Q?WQqwfbE4Mm6n0OQF8xizS6r/dRDmjX939s1QYD9rIbqCJBs1mRl7ma1GByZf?=
+ =?us-ascii?Q?SrLudsAI5lLHe9s4inTekhnMs2004T0k3k4S31heghuNAzsCO0UB2Ue4hhQd?=
+ =?us-ascii?Q?KU35ULCBLqKLsOFnZ/zqrJ8T+YBDkKFaSkwmWy3W0r1D+KcXeOhP1tMqpg6K?=
+ =?us-ascii?Q?LslhAJU07CLWoQfcT/HTPqepbeCguLm+o5jZKYAaItwHHHl9VGDMKc8B1pwl?=
+ =?us-ascii?Q?a5TnWTZPzXZcOr2SC+ZNlZxG5EvxSlVZKqLRZ1pGtBDyODXHId55GhDnkRQx?=
+ =?us-ascii?Q?NWfBJy7gNttOgzAB1nMpWDSOb4d1+YSDAPxgOf3j0hJcbhBBS1vVg9rzb2U7?=
+ =?us-ascii?Q?JFUVkTu0CVDNUKFDWgi0THKXqXoSvMqbVLDU+JZ+3j73yiHEeBRBAYFNLg9j?=
+ =?us-ascii?Q?Wq00bgeYzJxxivDf6X/RjSEbWquNG8tsmS+mq5L6eDYhcZ9nm6a72Znn3biH?=
+ =?us-ascii?Q?PMLuuCENuqJ0w3zCi/Z5XPmDg38cEbVSw5yKCF+XairuIc9+a1MGFcKZKAT+?=
+ =?us-ascii?Q?HBBFiOBY2KoCNjfK63MrLSRX1RHnqQcyYW4NP2puW3vgvXUVVNu7x+HmerC/?=
+ =?us-ascii?Q?WSxM1NPBOdkAbYPE8AmLzcKhT60pW1JRFN7DZbiTKLO97WIN1k4Jsqa3mLLz?=
+ =?us-ascii?Q?ZCsvIzgbbftMwPvrGL85hFvCuYGgFnVPgkhZwSHjwjKP0faJzIczZ4ThxkKQ?=
+ =?us-ascii?Q?vnNh+R+W9v3RNH0pvzIJ0EVXPKBLAqF1Hu1W6XqBdde2AVWrQsNxOHOIGOWi?=
+ =?us-ascii?Q?qFBGCd1d/YS2FSdkidQxXTX8/zcfwTfIGfLabG6NRKzZhfXg+pQITG1DoZeP?=
+ =?us-ascii?Q?na9tk9KeS5cicIyCt6uoax5XpXHO+JnBXZHfIbV81WqnG8IoGyOXGMTxMx82?=
+ =?us-ascii?Q?ezUBpMObp4eGN1JbIRCXA5NN88ROIF1XUZ/tkthhcGnHjRWwNt4tQVE/aiAn?=
+ =?us-ascii?Q?/nCAGCkA+Wiwnq79b3MKxBw=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(1800799024)(376014)(366016)(7416014)(52116014)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jVXLpjzaKn4xXZLBiH+IuqrwQIczkZBYRyVLCDd+rcFoIDo8QW3hvVaZ2T76?=
+ =?us-ascii?Q?K3qcce0VDgFoKBMJiuzJU/ej/HbwqaMO7mfIEeKy+au97mwjuDqHEO/NMJ5O?=
+ =?us-ascii?Q?PvEhTbVj/yMvlTbDVpbQTlaHcKi6RvWOYZVBkh1BfEhoZO/FmiRuP6Ef6db8?=
+ =?us-ascii?Q?lOXytG4RR4c8iMH8vAxQ6RyAxVCv4JMHrxC5Z6v5Ana0nYTBey3CBWNogykq?=
+ =?us-ascii?Q?/rCnNU9G4QSUwrsFAMowSEGRv7IVWlj+c/YPGp164f3phs8oj+6yn5mBgng2?=
+ =?us-ascii?Q?PbWoreX0XMXehJSO/cZzEmB0JT9rzBn09kwMDRd7k0W02crkLleyW2nOGzyT?=
+ =?us-ascii?Q?HpJAtyBfVz4/bSqio+rEnbX5E92DW2HCW/o+kssRXDersAoQCfXl65mGo/K7?=
+ =?us-ascii?Q?iEF0sw7JjO0VJ/Bn92DZSaudtsqwcLnYaAJItBjM1cC62dTR5vbra4+6MIOp?=
+ =?us-ascii?Q?u7cRefBrq9hMIuwyj5IEODaoy4LQ9SVho5MKob6kkggrr+lpgoWQbUbZD3XC?=
+ =?us-ascii?Q?e9Qq0+bYPOPq2U8akv4iNm3At0qKdO0smKmnD7ZPwY+qioFdw86xFaNDZEap?=
+ =?us-ascii?Q?a71wIJWtQrX05Y6i7bNFM3J5OKKGg/aXizkVJKm+QGDn9vcq5LMKyVdDqaKS?=
+ =?us-ascii?Q?VxszTRZdzoHpjsOf8PNYatvAlelz1xSKtF1Iv/evPbbFXFO7PgrObRulCljI?=
+ =?us-ascii?Q?DqwVtTHSbjChcwj+KYQ4wmbd4WvavsmiJ03QFo4Y+944nuEWWtcvu4JNtKyF?=
+ =?us-ascii?Q?kyToQt9xIdHMI7DGnZtmBgHR/mK2IqJPnL0khV5291xkZi2KzlhGc1qEbv4C?=
+ =?us-ascii?Q?38spnHy6ztzJYqjPV9ZXlCqRKDSolFlNmIZ4tECnoUnnLSCwNTUQSyin09SU?=
+ =?us-ascii?Q?JvnxS1oHsU7tvRxFRcY2mfRZwoBCBLIJ4ACqQOXvFjFec+AsYZkEnRlIRn7u?=
+ =?us-ascii?Q?uxAfF2YLGEdcwQ7d9c25IWeii5qhS5t48J+TOfiU6xmCFXYSxnzsXMRxVQXH?=
+ =?us-ascii?Q?oWuLeUC5T4tTQ30Joqc/Foe+vyjdoFMXfJEjIZhWqCFJog/bZ59HQLpqx9Xm?=
+ =?us-ascii?Q?Hq3QGfHcqlUai+T+KF5yY32I9SNlN97exFBEF2/QNRxViz4iXKB6blKZCvZq?=
+ =?us-ascii?Q?9Ss58NTr93UCajDiORN5AqD6tOQbru3eaD7NxnZsPiGmewfUfL0Y4U4TmGWB?=
+ =?us-ascii?Q?tQNsALXAX9qs+O5rFlERh+E3EeeFk+UP29RCDWAHrOa/gO1Y6DVxcQJOkP0J?=
+ =?us-ascii?Q?hdsefdj/RM0N6O8ETZhUsjOB+K8T4qgXvwIvU2jGaB4S6Q4Pzm6/hJdVRUcd?=
+ =?us-ascii?Q?K2O4r4tTASP+RZGhUileSKK6Qb0I+A9e3cVTouqbdK0BgBI9eYzsKaiPQ4RA?=
+ =?us-ascii?Q?qpeLrxbW7YnuSmOVSJLAZvHyUft9oic0euGQOnHXe1G8QJN3NFfS6PQwGs8b?=
+ =?us-ascii?Q?tOhX4kadUKwprKGsgNdmaXGl6K/cE5DJUjDb1K3x2CUK88xtTQgyqFgUfmms?=
+ =?us-ascii?Q?5dqUSrMeEDem0bYMvSggpgMtMPm1tqTGs0LXAFp4XJNUDKd7+6hvaadndg5P?=
+ =?us-ascii?Q?IDiUjI+kD80JmdBZ5dhK9o2snwW5L8lEkGuQ0Kpg6qp407oBgEtnksyZijKD?=
+ =?us-ascii?Q?RcngGyZ+23sIRa33cM3jwobW1veVYIhBtYxj9OpED3rIN8WXm+1roEmrpYZh?=
+ =?us-ascii?Q?qEObOpuqx4nV2WtH+9MFNQ8khWSUNa8J34x10RW+HjQfinZNt2zYR8BJg1Kx?=
+ =?us-ascii?Q?10cVVkodJg=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 692940a2-ca90-425e-bdca-08de65174be2
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2026 00:33:06.9326 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +nLUTGvrTzYPoiD3lZ7GynZczXqmgyHMQXL47YaS04cWoBQ8y454LZBuAYVVX5ynyGKszXV6UUuwUN6q1ULxhA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10925
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,449 +187,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Consolidate all mem_map definitions for MediaTek ARMv8 platforms into a
-single file. The size of the DDR and MMIO regions can vary, so Kconfig
-options are added to configure them by target.
+On Thu, Feb 05, 2026 at 09:55:07PM +0800, alice.guo@oss.nxp.com wrote:
+>From: Ye Li <ye.li@nxp.com>
+>
+>SM has implemented MISC protocol for get DDR info. Using this API, u-boot
+>could get DDR size instead of static configs. This will facilitate the DDR
+>ECC enabled case which has 1/8 DDR size reserved by ECC data. SM get DDR info
+>API provides the reduced DDR size.
+>To be compatible with old SM, if calling this API failed, will fall back
+>to static configs.
+>
+>Signed-off-by: Ye Li <ye.li@nxp.com>
+>Signed-off-by: Alice Guo <alice.guo@nxp.com>
+>---
+> arch/arm/include/asm/mach-imx/sys_proto.h | 10 ++++
+> arch/arm/mach-imx/imx9/scmi/soc.c         | 76 +++++++++++++++++++++++++------
+> include/scmi_protocols.h                  |  3 +-
+> 3 files changed, 74 insertions(+), 15 deletions(-)
+>
+>diff --git a/arch/arm/include/asm/mach-imx/sys_proto.h b/arch/arm/include/asm/mach-imx/sys_proto.h
+>index 46da7a1eff5..6c8bd6c9085 100644
+>--- a/arch/arm/include/asm/mach-imx/sys_proto.h
+>+++ b/arch/arm/include/asm/mach-imx/sys_proto.h
+>@@ -254,6 +254,16 @@ struct scmi_rom_passover_get_out {
+> 	u32 passover[(sizeof(rom_passover_t) + 8) / 4];
+> };
+> 
+>+struct scmi_ddr_info_out {
+>+	s32 status;
+>+	u32 attributes;
+>+	u32 mts;
+>+	u32 startlow;
+>+	u32 starthigh;
+>+	u32 endlow;
+>+	u32 endhigh;
+>+};
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- arch/arm/mach-mediatek/Kconfig                     | 21 ++++++++++++++++
- arch/arm/mach-mediatek/Makefile                    |  1 +
- .../arm/mach-mediatek/armv8-mem-map.c              | 14 ++++-------
- arch/arm/mach-mediatek/mt7622/init.c               | 20 ---------------
- arch/arm/mach-mediatek/mt7981/init.c               | 21 ----------------
- arch/arm/mach-mediatek/mt7986/init.c               | 21 ----------------
- arch/arm/mach-mediatek/mt7987/init.c               | 21 ----------------
- arch/arm/mach-mediatek/mt7988/init.c               | 21 ----------------
- arch/arm/mach-mediatek/mt8183/init.c               | 20 ---------------
- arch/arm/mach-mediatek/mt8512/init.c               | 21 ----------------
- arch/arm/mach-mediatek/mt8516/init.c               | 20 ---------------
- arch/arm/mach-mediatek/mt8518/init.c               | 21 ----------------
- board/mediatek/mt8365_evk/MAINTAINERS              |  5 ----
- board/mediatek/mt8365_evk/Makefile                 |  3 ---
- board/mediatek/mt8390_evk/MAINTAINERS              |  6 -----
- board/mediatek/mt8390_evk/Makefile                 |  3 ---
- board/mediatek/mt8390_evk/mt8390_evk.c             | 29 ----------------------
- 17 files changed, 27 insertions(+), 241 deletions(-)
+Add comment to explain the fields of the structure.
 
-diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
-index d1d2605b2cc..33717a1864f 100644
---- a/arch/arm/mach-mediatek/Kconfig
-+++ b/arch/arm/mach-mediatek/Kconfig
-@@ -130,6 +130,27 @@ config TARGET_MT8518
- 
- endchoice
- 
-+if ARM64
-+
-+config MTK_MEM_MAP_DDR_SIZE
-+	hex "DDR .size in mem_map"
-+	default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8188
-+	default 0xc0000000 if TARGET_MT8365
-+	default 0x80000000 if TARGET_MT7981 || TARGET_MT7986 || TARGET_MT8183
-+	default 0x40000000 if TARGET_MT7622 || TARGET_MT8512
-+	default 0x20000000
-+	help
-+		Target-specific DDR region size in mem_map.
-+
-+config MTK_MEM_MAP_MMIO_SIZE
-+	hex "MMIO .size in mem_map"
-+	default 0x40000000 if TARGET_MT7622 || TARGET_MT7981 || TARGET_MT7986 || TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8512
-+	default 0x20000000
-+	help
-+		Target-specific MMIO region size in mem_map.
-+
-+endif
-+
- config SYS_BOARD
- 	string "Board name"
- 	default "mt7622" if TARGET_MT7622
-diff --git a/arch/arm/mach-mediatek/Makefile b/arch/arm/mach-mediatek/Makefile
-index 44591bed6fa..17e645989e5 100644
---- a/arch/arm/mach-mediatek/Makefile
-+++ b/arch/arm/mach-mediatek/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier:	GPL-2.0
- 
-+obj-$(CONFIG_ARM64) += armv8-mem-map.o
- obj-y	+= cpu.o
- obj-$(CONFIG_MTK_TZ_MOVABLE)	+= tzcfg.o
- obj-$(CONFIG_XPL_BUILD)	+= spl.o
-diff --git a/board/mediatek/mt8365_evk/mt8365_evk.c b/arch/arm/mach-mediatek/armv8-mem-map.c
-similarity index 55%
-rename from board/mediatek/mt8365_evk/mt8365_evk.c
-rename to arch/arm/mach-mediatek/armv8-mem-map.c
-index 41a6febf03d..0abddb99f25 100644
---- a/board/mediatek/mt8365_evk/mt8365_evk.c
-+++ b/arch/arm/mach-mediatek/armv8-mem-map.c
-@@ -1,22 +1,18 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2023 BayLibre SAS
-- * Author: Julien Masson <jmasson@baylibre.com>
-- */
-+// SPDX-License-Identifier: GPL-2.0-only
- 
- #include <asm/armv8/mmu.h>
- 
--static struct mm_region mt8365_evk_mem_map[] = {
-+static struct mm_region mediatek_mem_map[] = {
- 	{
- 		/* DDR */
- 		.virt = 0x40000000UL,
- 		.phys = 0x40000000UL,
--		.size = 0xc0000000UL,
-+		.size = CONFIG_MTK_MEM_MAP_DDR_SIZE,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
- 	}, {
- 		.virt = 0x00000000UL,
- 		.phys = 0x00000000UL,
--		.size = 0x20000000UL,
-+		.size = CONFIG_MTK_MEM_MAP_MMIO_SIZE,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-@@ -25,4 +21,4 @@ static struct mm_region mt8365_evk_mem_map[] = {
- 	}
- };
- 
--struct mm_region *mem_map = mt8365_evk_mem_map;
-+struct mm_region *mem_map = mediatek_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt7622/init.c b/arch/arm/mach-mediatek/mt7622/init.c
-index 368f2916224..a043ca87398 100644
---- a/arch/arm/mach-mediatek/mt7622/init.c
-+++ b/arch/arm/mach-mediatek/mt7622/init.c
-@@ -36,23 +36,3 @@ void reset_cpu(void)
- {
- 	psci_system_reset();
- }
--
--static struct mm_region mt7622_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--struct mm_region *mem_map = mt7622_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt7981/init.c b/arch/arm/mach-mediatek/mt7981/init.c
-index 07da5897190..79afd6ce6be 100644
---- a/arch/arm/mach-mediatek/mt7981/init.c
-+++ b/arch/arm/mach-mediatek/mt7981/init.c
-@@ -30,24 +30,3 @@ void reset_cpu(void)
- {
- 	psci_system_reset();
- }
--
--static struct mm_region mt7981_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x80000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt7981_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt7986/init.c b/arch/arm/mach-mediatek/mt7986/init.c
-index a521c95bd9d..1fe56b3f145 100644
---- a/arch/arm/mach-mediatek/mt7986/init.c
-+++ b/arch/arm/mach-mediatek/mt7986/init.c
-@@ -30,24 +30,3 @@ void reset_cpu(void)
- {
- 	psci_system_reset();
- }
--
--static struct mm_region mt7986_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x80000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt7986_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt7987/init.c b/arch/arm/mach-mediatek/mt7987/init.c
-index 8b268297809..6364ab497f7 100644
---- a/arch/arm/mach-mediatek/mt7987/init.c
-+++ b/arch/arm/mach-mediatek/mt7987/init.c
-@@ -39,24 +39,3 @@ void reset_cpu(ulong addr)
- {
- 	psci_system_reset();
- }
--
--static struct mm_region mt7987_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x200000000ULL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt7987_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt7988/init.c b/arch/arm/mach-mediatek/mt7988/init.c
-index 8bdd3848d26..7ff843585ec 100644
---- a/arch/arm/mach-mediatek/mt7988/init.c
-+++ b/arch/arm/mach-mediatek/mt7988/init.c
-@@ -38,24 +38,3 @@ void reset_cpu(ulong addr)
- {
- 	psci_system_reset();
- }
--
--static struct mm_region mt7988_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x200000000ULL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt7988_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt8183/init.c b/arch/arm/mach-mediatek/mt8183/init.c
-index b445f3ea1e3..8dbf9c3df7e 100644
---- a/arch/arm/mach-mediatek/mt8183/init.c
-+++ b/arch/arm/mach-mediatek/mt8183/init.c
-@@ -47,23 +47,3 @@ int print_cpuinfo(void)
- 	printf("CPU:   MediaTek MT8183\n");
- 	return 0;
- }
--
--static struct mm_region mt8183_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x80000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x20000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--struct mm_region *mem_map = mt8183_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt8512/init.c b/arch/arm/mach-mediatek/mt8512/init.c
-index 3b48caf5196..361c589cbc2 100644
---- a/arch/arm/mach-mediatek/mt8512/init.c
-+++ b/arch/arm/mach-mediatek/mt8512/init.c
-@@ -59,24 +59,3 @@ int print_cpuinfo(void)
- 	debug("CPU:   MediaTek MT8512\n");
- 	return 0;
- }
--
--static struct mm_region mt8512_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x40000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt8512_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt8516/init.c b/arch/arm/mach-mediatek/mt8516/init.c
-index 82f8c509745..1d925dd478a 100644
---- a/arch/arm/mach-mediatek/mt8516/init.c
-+++ b/arch/arm/mach-mediatek/mt8516/init.c
-@@ -94,23 +94,3 @@ int print_cpuinfo(void)
- 	printf("CPU:   MediaTek MT8516\n");
- 	return 0;
- }
--
--static struct mm_region mt8516_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x20000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x20000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--struct mm_region *mem_map = mt8516_mem_map;
-diff --git a/arch/arm/mach-mediatek/mt8518/init.c b/arch/arm/mach-mediatek/mt8518/init.c
-index c04bcb63517..8fa1346021a 100644
---- a/arch/arm/mach-mediatek/mt8518/init.c
-+++ b/arch/arm/mach-mediatek/mt8518/init.c
-@@ -51,24 +51,3 @@ int print_cpuinfo(void)
- 	printf("CPU:   MediaTek MT8518\n");
- 	return 0;
- }
--
--static struct mm_region mt8518_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x20000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x20000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt8518_mem_map;
-diff --git a/board/mediatek/mt8365_evk/MAINTAINERS b/board/mediatek/mt8365_evk/MAINTAINERS
-deleted file mode 100644
-index e0d65efe812..00000000000
---- a/board/mediatek/mt8365_evk/MAINTAINERS
-+++ /dev/null
-@@ -1,5 +0,0 @@
--MT8365 EVK
--M:	Julien Masson <jmasson@baylibre.com>
--S:	Maintained
--F:	board/mediatek/mt8365_evk/
--F:	configs/mt8365_evk_defconfig
-diff --git a/board/mediatek/mt8365_evk/Makefile b/board/mediatek/mt8365_evk/Makefile
-deleted file mode 100644
-index 90fc92b28c5..00000000000
---- a/board/mediatek/mt8365_evk/Makefile
-+++ /dev/null
-@@ -1,3 +0,0 @@
--# SPDX-License-Identifier:	GPL-2.0
--
--obj-y += mt8365_evk.o
-diff --git a/board/mediatek/mt8390_evk/MAINTAINERS b/board/mediatek/mt8390_evk/MAINTAINERS
-deleted file mode 100644
-index d46b8b2e156..00000000000
---- a/board/mediatek/mt8390_evk/MAINTAINERS
-+++ /dev/null
-@@ -1,6 +0,0 @@
--MT8390 EVK
--M:	Julien Masson <jmasson@baylibre.com>
--M:	Macpaul Lin <Macpaul.Lin@mediatek.com>
--S:	Maintained
--F:	board/mediatek/mt8390_evk/
--F:	configs/mt8390_evk_defconfig
-diff --git a/board/mediatek/mt8390_evk/Makefile b/board/mediatek/mt8390_evk/Makefile
-deleted file mode 100644
-index a26d46838c4..00000000000
---- a/board/mediatek/mt8390_evk/Makefile
-+++ /dev/null
-@@ -1,3 +0,0 @@
--# SPDX-License-Identifier:	GPL-2.0
--
--obj-y += mt8390_evk.o
-diff --git a/board/mediatek/mt8390_evk/mt8390_evk.c b/board/mediatek/mt8390_evk/mt8390_evk.c
-deleted file mode 100644
-index 5731199bf83..00000000000
---- a/board/mediatek/mt8390_evk/mt8390_evk.c
-+++ /dev/null
-@@ -1,29 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2026 BayLibre SAS
-- * Author: Julien Masson <jmasson@baylibre.com>
-- */
--
--#include <linux/types.h>
--#include <asm/armv8/mmu.h>
--
--static struct mm_region mt8390_evk_mem_map[] = {
--	{
--		/* DDR */
--		.virt = 0x40000000UL,
--		.phys = 0x40000000UL,
--		.size = 0x200000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
--	}, {
--		.virt = 0x00000000UL,
--		.phys = 0x00000000UL,
--		.size = 0x20000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
--			 PTE_BLOCK_NON_SHARE |
--			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		0,
--	}
--};
--
--struct mm_region *mem_map = mt8390_evk_mem_map;
+>+
+> #endif
+> 
+> /* For i.MX ULP */
+>diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+>index c1458ccca3c..e573736825c 100644
+>--- a/arch/arm/mach-imx/imx9/scmi/soc.c
+>+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+>@@ -58,6 +58,35 @@ uint32_t scmi_get_rom_data(rom_passover_t *rom_data)
+> 	return 0;
+> }
+> 
+>+int scmi_misc_ddrinfo(u32 ddrc_id, struct scmi_ddr_info_out *out)
+>+{
+>+	u32 in = ddrc_id;
+>+	struct scmi_msg msg = {
+>+		.protocol_id = SCMI_PROTOCOL_ID_IMX_MISC,
+>+		.message_id = SCMI_MISC_DDR_INFO_GET,
+>+		.in_msg = (u8 *)&in,
+>+		.in_msg_sz = sizeof(in),
+>+		.out_msg = (u8 *)out,
+>+		.out_msg_sz = sizeof(*out),
+>+	};
+>+	int ret;
+>+	struct udevice *dev;
+>+
+>+	memset(out, 0, sizeof(*out));
 
--- 
-2.43.0
+This could be done in caller by set an initialization value to 0.
 
+>+	ret = uclass_get_device_by_name(UCLASS_CLK, "protocol@14", &dev);
+>+	if (ret)
+>+		return ret;
+>+
+>+	ret = devm_scmi_process_msg(dev, &msg);
+>+	if (ret != 0 || out->status != 0) {
+>+		printf("Failed to get ddr cfg, scmi_err = %d\n",
+>+		       out->status);
+>+		return -EINVAL;
+>+	}
+>+
+>+	return 0;
+>+}
+>+
+> #if IS_ENABLED(CONFIG_ENV_IS_IN_MMC)
+> __weak int board_mmc_get_env_dev(int devno)
+> {
+>@@ -335,25 +364,44 @@ void enable_caches(void)
+> 
+> __weak int board_phys_sdram_size(phys_size_t *size)
+> {
+>+	struct scmi_ddr_info_out ddr_info;
+
+Init with "= { 0 }"
+
+>+	int ret;
+>+	u32 ddrc_id = 0, ddrc_num = 1;
+> 	phys_size_t start, end;
+>-	phys_size_t val;
+> 
+> 	if (!size)
+> 		return -EINVAL;
+> 
+>-	val = readl(REG_DDR_CS0_BNDS);
+>-	start = (val >> 16) << 24;
+>-	end   = (val & 0xFFFF);
+>-	end   = end ? end + 1 : 0;
+>-	end   = end << 24;
+>-	*size = end - start;
+>-
+>-	val = readl(REG_DDR_CS1_BNDS);
+>-	start = (val >> 16) << 24;
+>-	end   = (val & 0xFFFF);
+>-	end   = end ? end + 1 : 0;
+>-	end   = end << 24;
+>-	*size += end - start;
+>+	*size = 0;
+>+	do {
+>+		ret = scmi_misc_ddrinfo(ddrc_id++, &ddr_info);
+>+		if (ret) {
+>+			/* if get DDR info failed, fall to default config */
+>+			*size = PHYS_SDRAM_SIZE;
+>+#ifdef PHYS_SDRAM_2_SIZE
+>+			*size += PHYS_SDRAM_2_SIZE;
+>+#endif
+
+You dropped the method of directly reading REG_DDR_CS[0,1]_BNDS but switch
+to using PHYS_SDRAM[x]_SIZE, and commit log does not mention it.
+
+>+			return 0;
+>+		} else {
+>+			ddrc_num = ((ddr_info.attributes >> 16) & 0x3);
+>+			start = ddr_info.starthigh;
+>+			start <<= 32;
+>+			start += ddr_info.startlow;
+>+
+>+			end = ddr_info.endhigh;
+>+			end <<= 32;
+>+			end += ddr_info.endlow;
+>+
+>+			*size += end + 1 - start;
+>+
+>+			debug("ddr info attr 0x%x, start 0x%x 0x%x, end 0x%x 0x%x, mts %u\n",
+>+			      ddr_info.attributes, ddr_info.starthigh, ddr_info.startlow,
+>+			      ddr_info.endhigh, ddr_info.endlow, ddr_info.mts);
+>+		}
+>+	} while (ddrc_id < ddrc_num);
+>+
+>+	/* SM reports total DDR size, need remove secure memory */
+>+	*size -= PHYS_SDRAM - 0x80000000;
+
+secure memory size is 2GB? Need to mention in commit log or at the place
+of struct scmi_ddr_info_out definition about this behavior.
+
+Regards
+Peng
