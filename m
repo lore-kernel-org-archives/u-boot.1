@@ -4,122 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEB8FECD9BF
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 03:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EAC4E9129F
+	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 04:34:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31E6C831AC;
-	Fri,  6 Feb 2026 04:59:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30247831AC;
+	Fri,  6 Feb 2026 05:34:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bdiUc6+e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L5UDkH5B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799A98341A; Fri,  6 Feb 2026 04:59:35 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id B68CF836D3; Fri,  6 Feb 2026 03:48:39 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39F2583015
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 04:59:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A518F83015
+ for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 03:48:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-59dd9aef51eso2128398e87.2
- for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 19:59:33 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770350372; cv=none;
- d=google.com; s=arc-20240605;
- b=YfN2Zo5qMY43NDvyaAHhJm1k6XSSZXSqWeo3ZfK57iUG/U7BtEZxdfuMEWLA8bd5MR
- B8ASFjv8AkyqbaCziPUIb18RP5St4W3bP3CpFjKBhi5wgKaMKxouX6VNc+mVtPGAe2y/
- 88UIHyc06wAlbyHHBxNQipyEW58n2Th9kpvQW0/+IhmeLdHiXKoSBC0QZ2RQ2eABmp/0
- N9Ke/jn4iMte8bGmm24ajK4OWJdVSLXrIPcPRf5mx+QXcR4qQPTih7Hd/m5/7cNQn/mU
- aMrIMNQgIsnaxojsOS51PdSFrhXvNez7Yr1yllxDOJoWgulbc1EiHCe/j1SnKHV0I+Dl
- Tncw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=C4EWUPcYVAchjFVclvwZlMDE/Q5y34nRV19ndegaah4=;
- fh=pX4gXAv7Pt369UE5N/cjv8kwNYhexxsvsOUh+SqvkeE=;
- b=HIWWTMW8kMd35TIAsbUZrT4CRrvIsgGUMyTQvf9fNLCfccN8Z4mO6QaBO9VmjXYE82
- cOPrb8ol0nVXGXxNI/XQiLz9yHp36h7xaln0qhjkoLwHCqXHzUBWuRC3D9GRjcrq/J39
- BuyMbkSDBXdn/zy5W0c2hIUXZxWW3MWVWE5Vb4oAInQUI46oOYi7m9a9BV861SiGBDd3
- spMPxxG7/bwFRLGqIYowLUa/9BSr1x8Bl0JBcrKCOJr5plpgjddcFy08R55xlD8+I1uQ
- KHPB5D1Fo6mPtMLJGD5XScjoqgmgy21eUF20G+AOiPpDO/bHC3WwqhuLbXV+s9+2SlcJ
- GQpg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-45ca17ef16eso87062b6e.0
+ for <u-boot@lists.denx.de>; Thu, 05 Feb 2026 18:48:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770350372; x=1770955172; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C4EWUPcYVAchjFVclvwZlMDE/Q5y34nRV19ndegaah4=;
- b=bdiUc6+e/TN0OoqCsDU2Z4vh1ZmnHER/SLa+txRQXLsE+P6donBvYcTEL5dScrfNO1
- rqiaEP/FYw+LCdg7uKdh4X3fssoZu9nPDzw2TbsbZa+F2f61vdOfuEnW8Tf+b679XLJj
- 1DixCwwIg3YYEeffriUtLuelPvD/0mdRIrqEM6VCmp2x47rD6Xg7F9IeWjqSEr7aPkQ3
- m1RHgQEdgxSiRf0uGwH5v4Y8h503H9ky4o4GehA9KQxqRp51+X0d4WXDp6XgC2IaCSwg
- IcjNJQlgmPAwORqsKZBtHaxEza02QQvis2jeL0DnQoLohTuzSAJuc9We0vtTeld6JTNe
- nejw==
+ d=gmail.com; s=20230601; t=1770346116; x=1770950916; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/br2+fLex5jWRV6bGhS5WAnLB97jsJk7gMzl49dwDZI=;
+ b=L5UDkH5BhgxhpspCIfqcAS/4x0GRmSj2VvoqtmOBmnlsf8IgzFBXhFNfw1+YUfo/51
+ 7l/zbh5INWw+Q8pKiNkaoDvGoQWW+asz0ZwX/8M1xqirfDsEj6LOJKGCmgLo+PwrzIbX
+ JMeoV827xVxC1G1pd6xGY4Tfxw/3SpBhDklLsvDOMilAr/rnlGuSGd5XdKqlI9Be65PG
+ PqvjP6wjqhjsDq5n7iUQhcpHN5ZGzSZjkjmImw3HxBdqjeMz/6YB2u53KfyhDYu51Kb2
+ mhbOll1qMp98EI3auDOBDXp+DvPV7kL3zdUoc6GG7i4q+Aohq8NkmWpyjZFl3BAT7KhK
+ +Lvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770350372; x=1770955172;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=C4EWUPcYVAchjFVclvwZlMDE/Q5y34nRV19ndegaah4=;
- b=Hop6yyQY1lN483WKoPSowjFg9qNgxzY0UQC3Gted5YOEUBxg/iREijrQtXpmpAhMA0
- Fk9+Ggl4KxUl8XKni8WoEkbua8buCeEd3ysNfRjhGoBZLueDH+Rea6UoiBEwj1zbhjrS
- ytWzIp2lF23cj2CaEFOuVxgE1M2v5ijXPzIPwOBCx5kvYMO1ct3u6PKKzEM67ZK34pVA
- Zvzn41bPctPTuO+wWv4LbXsXGcUmGGWZK08tUmjRpiHOlrKlII0CU3x29nv0+M7SOvZy
- 5VupeaICfWNiCJgWgfFHigGWRuxsq3efyhjcbRJjPiqnx/F9pyZPcB+Bi6z/Dzu7T8FF
- Lk9w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIOUC/mpqSzqdewUUcgV+XsF799nM52FT+rqR8Y5pLe98ETBkmohHPJmh7v8iTgCsOEb2JMAM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRIA1DNV6/TEHS/7k3TDZHmQzZgdto3awszuHzKzuafuiPaMJ1
- 0kX1jMhuTxWF8digvAix63jxU46aCTPcZxWhXjwUIRD+XDn52KE4NMAN71E8zGY35mfPsLSIHtJ
- VQdn9J0mt8ppugSb4sN/3UmOK5a/HiuA=
-X-Gm-Gg: AZuq6aIe563rSCaMmR9UD2kF3wlSjHDMMq96Q6XLQPDtLm/LpW+X1i15848Ad6Ci9ND
- RaNydavUylfRZu6KHwxyAPjFvJ+JCUf476nF7rgaG0uNHBfVCeUAZCEzvIcFCROyEGtcNInxKt/
- iOTlaGoCHHnCd0IJVfHVEME5V54gYgPumJpMjj0/lqFHOrGDQ3hoM43UWEXylG0JyFUiVmSk0+H
- drS3/JtWPdL2lI9bASnK/xgjbmvkfPncZK1n/NIzss27lOBCW+jEBTpbP/amfvfkvaAzRgNY9NX
- 1o59Q6TeCWCVyDzk7yxm0pBp17Y=
-X-Received: by 2002:a05:6512:1154:b0:59e:f90:2d0f with SMTP id
- 2adb3069b0e04-59e45150e93mr369552e87.27.1770350372102; Thu, 05 Feb 2026
- 19:59:32 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770346116; x=1770950916;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/br2+fLex5jWRV6bGhS5WAnLB97jsJk7gMzl49dwDZI=;
+ b=pxj103HAiCc//lDq3TJ285aA6N0CTFCmfTXAYzfYXJnO5eVWuz/mitiJH4x//q1P7p
+ XNPjlmF7BNRlVqjb+jiB6Aq8hfIyUNi3YxXU2np21MSdKMnckWjAGIeLUeSrQLI80FTp
+ Iq+HwbIuVZviOJKcV3fHG0DL3TXUXXMqFsjLCIMyUehNTbyeCHE2HLG4aC+QBAu5/35X
+ MguIBUpwt3mrNQ65C5rhvuMgjjSz5pt97cFIBXtmKiTAp7C+mB0N2zpDnrxmJmgSFFWQ
+ 9V4+En8LEo8hvHe4C7axz1Kry31w6139/kZhcBp3NTcs35Td1Kk81OgPeyIX0uwRsXaP
+ 0gbA==
+X-Gm-Message-State: AOJu0Yy7BEv3lb5OvGvsKGjVtze48+Bor8D2ywb6HN9tRDdp9naZ3h+H
+ F6CfNkmuN6BEVdT1fplXhdaLxUBHl1bFnGAM5fnII+xCOoEGdLtF/DYLf2B94A==
+X-Gm-Gg: AZuq6aLZ5P86TgOw8aMHHd1ODY/TZKMErF71gQj+TCeKSB6TlAAw7QRWwo9DJA4UJaK
+ +VWax/8tDQK45jf6LRQNAK7pa7OwTJRoZYKvgCWqJRZ4SygregEisBeO6gZp15b5j/cw3vRIMdY
+ urDM0YgWGHefT47JBwlOZNHFGJE6h22U2zJ+xQUo7hhaoVC0mbxvUvgruKMc/Ydb03jNT7NhIK+
+ 4jBXeYrYr4FgYjZ3sRVPONwpvbAWXr3vsTG2vmvQHcN7p0PCVSytJdw7o3GgWtB62iwaLBpuOs7
+ LjHv5uUKfAyW+ltghIJwNKDu/aWIdqdqbCadraAfpfNVdgp7Ap4Ef6dKrrED3aMnfjb1fjztt0r
+ v4f0NG6Ykp7zHS9MKQbmSckNGtBTHy64Ip6lVBw4oTT5HYuXZFOIGetKCf+twHGtUGa5DQW3i6B
+ fCVqaE9mrcXafDjAz+FEorRS57rsDU4ZYs0XxeDKKypoa/n7IKsbxTw/HBNA9+S2GRpKcXtWlk2
+ 3jFPHm6Sg4VWATZcYKiNqJ+D8Br8oSdDPfsI5oG6X67SOUGRQY=
+X-Received: by 2002:a05:6808:4f06:b0:45c:8183:8c6f with SMTP id
+ 5614622812f47-462fcb6fa54mr821463b6e.47.1770346116083; 
+ Thu, 05 Feb 2026 18:48:36 -0800 (PST)
+Received: from james-x399.localdomain (71-218-105-26.hlrn.qwest.net.
+ [71.218.105.26]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-462fe9a16a1sm558005b6e.2.2026.02.05.18.48.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Feb 2026 18:48:35 -0800 (PST)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH] gpio: sunxi: Don't clear pull settings when setting input
+Date: Thu,  5 Feb 2026 19:48:21 -0700
+Message-ID: <20260206024822.454863-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260205-imx952-v1-0-2103d0222a0b@nxp.com>
- <20260205-imx952-v1-7-2103d0222a0b@nxp.com>
-In-Reply-To: <20260205-imx952-v1-7-2103d0222a0b@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 6 Feb 2026 00:59:20 -0300
-X-Gm-Features: AZwV_QhrjcDNWW-JjqllWI8AeHnGdM7UHiwb3BGwXmvOBl6HIfa6IlGgF-Zui-s
-Message-ID: <CAOMZO5C1KB+PyQ2Kgr58uCKLE9sJPtws+OYwShe4fgkm_ZdTSg@mail.gmail.com>
-Subject: Re: [PATCH v1 07/12] arm: imx952: Add watchdog base address
- definitions
-To: alice.guo@oss.nxp.com
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Jindong Yue <jindong.yue@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Fedor Ross <fedor.ross@ifm.com>,
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>, 
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>, Ji Luo <ji.luo@nxp.com>, 
- Frank Li <Frank.Li@nxp.com>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
- Adam Ford <aford173@gmail.com>, Frieder Schrempf <frieder.schrempf@kontron.de>,
- David Zang <davidzangcs@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Marek Vasut <marex@nabladev.com>, 
- Joseph Guo <qijian.guo@nxp.com>, Tim Harvey <tharvey@gateworks.com>, 
- Alice Guo <alice.guo@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 06 Feb 2026 05:34:39 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,41 +99,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
+sunxi_gpio_set_flags() always programs the pull register when
+switching a pin to input. When neither GPIOD_PULL_UP nor
+GPIOD_PULL_DOWN is requested, this writes 0 (pull disabled)
+and can clobber an existing bias configuration applied via pinctrl.
 
-On Thu, Feb 5, 2026 at 12:16=E2=80=AFPM <alice.guo@oss.nxp.com> wrote:
->
-> From: Alice Guo <alice.guo@nxp.com>
->
-> Add WDG3, WDG4 and WDG5 base addresses for i.MX952.
->
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
-> ---
->  arch/arm/include/asm/arch-imx9/imx-regs.h | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/arch/arm/include/asm/arch-imx9/imx-regs.h b/arch/arm/include=
-/asm/arch-imx9/imx-regs.h
-> index 2d084e5227a..7c7a34f74af 100644
-> --- a/arch/arm/include/asm/arch-imx9/imx-regs.h
-> +++ b/arch/arm/include/asm/arch-imx9/imx-regs.h
-> @@ -17,6 +17,11 @@
->
->  #define ANATOP_BASE_ADDR    0x44480000UL
->
-> +#ifdef CONFIG_IMX952
-> +#define WDG3_BASE_ADDR      0x420b0000UL
-> +#define WDG4_BASE_ADDR      0x420c0000UL
-> +#define WDG5_BASE_ADDR      0x420d0000UL
-> +#else
->  #ifdef CONFIG_IMX94
->  #define WDG3_BASE_ADDR      0x49220000UL
->  #define WDG4_BASE_ADDR      0x49230000UL
-> @@ -25,6 +30,7 @@
->  #define WDG4_BASE_ADDR      0x424a0000UL
->  #endif
->  #define WDG5_BASE_ADDR      0x424b0000UL
-> +#endif
+Only update the pull configuration when a pull-up or pull-down is
+explicitly requested, leaving existing pull settings unchanged.
 
-Can we improve this and retrieve the watchdog base address from the devicet=
-ree?
+Fixes: 35ae126c16a6 ("gpio: sunxi: Implement .set_flags")
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+ drivers/gpio/sunxi_gpio.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+index 094c45a6927..ad891da3a97 100644
+--- a/drivers/gpio/sunxi_gpio.c
++++ b/drivers/gpio/sunxi_gpio.c
+@@ -301,7 +301,8 @@ static int sunxi_gpio_set_flags(struct udevice *dev, unsigned int offset,
+ 			pull = 1;
+ 		else if (flags & GPIOD_PULL_DOWN)
+ 			pull = 2;
+-		sunxi_gpio_set_pull_bank(plat->regs, offset, pull);
++		if (pull)
++			sunxi_gpio_set_pull_bank(plat->regs, offset, pull);
+ 		sunxi_gpio_set_cfgbank(plat->regs, offset, SUNXI_GPIO_INPUT);
+ 	}
+ 
+-- 
+2.43.0
+
