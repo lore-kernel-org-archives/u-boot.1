@@ -4,102 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02921EE6B76
-	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 06:59:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4148EE20A9
+	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 09:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C22183A64;
-	Sat,  7 Feb 2026 07:59:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C023C83A64;
+	Sat,  7 Feb 2026 10:51:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d8oLpZwD";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bLHB5sNa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD11283AA7; Sat,  7 Feb 2026 07:59:12 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C800B83AA7; Sat,  7 Feb 2026 10:51:43 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 900FD83693
- for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 07:59:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 251A283642
+ for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 10:51:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-79088484065so26645817b3.1
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 22:59:08 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770447547; cv=none;
- d=google.com; s=arc-20240605;
- b=L5flkwsKlfL3JbHh0cFzwlLy+F3cn+vAGTkXi5vZOdiKUT02BJiF1FBvBiizAAh4Jw
- 0yKOlaCckcUb9uuAe4PYZWSL0FKDfUGxEEo/3uz9NnLZdOrURNLNopmbUtaxp5VoXQ2Y
- sBnziz3uds3hm9964rqcVsTa+ys1zZW7E80JCtlobZq6EwjQ0SWqYNSEdYrXLwhUCMVp
- xjolpquSHmbmaKpcLkb4RKUpoeACZMUTsD38O4E5WKGfDVfk9Gp9aiehm2LB6+iJVdxU
- mrY0rpIY8mUcDMQvQ/f2sSEMYXafZFOZJVYFabt0oAYcSFHIIrQonFxmZVLqMGXFUPkq
- 74QQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=ulkTfc/7umdiY1DKbubXCAb7E3qdq6VgUCXWKRm+Ldo=;
- fh=oipBDXmSotTkcMeOoKry5uJ4L2vfLs8mlhqXSypuxQg=;
- b=lp+AQJBbreeRR3o/7OGLOtemkT6E6D2NjDhTG3uEQcSCGTF8SXj6TZvV5jaWyRaYfc
- MtQsqIIdCI3D+6cw3a2Az6Ae86kvOlKwIkaMfMrSQLi5+44DfjDPttG7lw7hHwM1Xd/B
- 7TjpnE4nUlHl0u7PD0AuUqu7n6rIrx6+LFx9ZkoMl036jlYtw6Pa24vwIpvFjeVyDGw7
- iS2JUNIaHKX88sKmwBelgeaLay2EN8YXlnmid3m8FFAxeQlos4UwIPaUsaUqzVr/Nn8A
- Lhbd32Civ62lbWgWnltCDn2iy6R35iSRknvFb2AjA0tk+Og1bjdbzHrQIXsS/br2NCTG
- X3hQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770447547; x=1771052347; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ulkTfc/7umdiY1DKbubXCAb7E3qdq6VgUCXWKRm+Ldo=;
- b=d8oLpZwDJxuSnHcylna7giSTHGNc29jhphhrXqT1KNKxNyav0rPguxgF0yAxhteGFt
- vDlFp7Klxyr2744D2ya0ioi/ig+74Q10AYLbnpc8joRrGIXyXTfEeCSTHd20a9YOOEre
- E/LQ4Zm/V/6A3O5W/8xxiKxY5gtnXrvoiS70Q0sRAY3XX/VXBY4HIb+SgUROxUDWZSjI
- 4f4mx1z5eepaqCThq0gcfCBY9oPXXZ2Er6e3DT+Dwql+XXK18UVBObqzNFRfCdQSxucS
- 6UoPBB51897Im+cjiQB5v4Ojxa/HatZbLBjAmZLZGe3IlVk+L8xcadqjl4CR9orrpnRn
- QwUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770447547; x=1771052347;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ulkTfc/7umdiY1DKbubXCAb7E3qdq6VgUCXWKRm+Ldo=;
- b=BwCPYNFy0tMu9herCX0Jd86DdthPoVUt4PgAcLfk/Qu9YgitCoUW3QTlTzJ+z3xsC8
- Pw2mzml/jRM1EvFkg93eiw+jkvGsjyjYwLm2sWztqON+iVEFqYsb0H8zawPsU6uKT3ob
- gbAixjvsv3OPSM3LsNOPD26yJa4cB0dj+k0sD5kqqBUznElk1lAvdxGc49sTtfEq9toP
- 7A4cfeQF1X9demTMuOUH9lF1+QS5kypnrd6Vw2lunV74NUxhkditse32+LTRwrcodl9L
- 9G1zkrh6cL9OeacfxzPQQZ9b9mDHpzKfnMinZXTORRGBzMI6IMCHI0r+APGspgg9BMTC
- eH2g==
-X-Gm-Message-State: AOJu0Yya1yd0Uw7bMtWYrsaJoa2gQ9WCIGsSCwoOLlNp0py8s1gdiRCj
- R3mHKvx2WG+8gtwn8V1BqdhYYSdc/1sCdObTMucThjxAq2m4b2EWR+Vslvbo0Mu7l7rZ4Th9X9c
- P7j/A6Jp/m+Rnec2BtAacDO8JJZP+0U/lqa1Kh/CtEQ==
-X-Gm-Gg: AZuq6aI8FPDkFWCCTgLQWFLz6fSbFheO7LeA1CIbvkQgcMYN2Sn8MPKtoFWGlI7up37
- RSeBang/mfoRQy7Iek0oT8dCzFnwMP/SarOOuG459aSTY4NDAuVUWHJ35xRj5iYmbPe0jMo+iWQ
- hAHBLJjGA9zxEOmFsi1a70DxJK8H6GyA6T+3bU52DRzf6PKJdOkDeZdVGYtp99D95EIHJx1vRpq
- rCva+cXYzhQ+R9p/dAykEe+thxzs6Cn/+Jm7BfL/2FMsEebMGE8wZzbtldQT6gHwCDY2Bv9ZzlH
- Zo6y8Et5pbvtGEKLx3UMvnL/gyvNFg0gDJXXG69zcEEdit6FjpEeNFDxbuSEja4VtCgmDJ+gxHX
- +3FfI+AXFbIrFBvXn8lzvtoP14sDLGpTRkvFrPxrw30S2zLfqbPAj69YSZT0F2KLUtqYgGaYRlP
- OoLO5aUMiv4lefkJC7lNsugOQH3hiD+Cnxr3JBLC+jedSWHsJn8tUHTBnla8Gov39V2wLcw7lqx
- VTskdG7OdvTurNJ/8lwuETVv4JHl6Vj1rI2VU4i0r1oE8cGpfV5/F9Hq5UX9C2gCzHGDuqBugYy
- 12Iw7VVW74Qju8/sFaIaLU7s954YZViL+Q==
-X-Received: by 2002:a05:690c:498f:b0:796:3124:6565 with SMTP id
- 00721157ae682-796312469e8mr15401907b3.1.1770447547240; Fri, 06 Feb 2026
- 22:59:07 -0800 (PST)
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WMG2hM+UergGs9t4WcuUmnd9fbJuvcDbn1dkOwcEnMuGo2yE9cncQbPmC7evWmrNxy259qHbGrHmHJAeSOmQBuwOREbcti6RY1IhUd8Fc5MMB9r79zQ8fIIGkOeWRsqZrROXv212I5WpEkibkzVNl1WAU+siomzQ1UPXuKxhogHOTQDioiZNUacy9Ht5YYC27axfZpK2P/ol0ZMFd5NVllpwP5RC7h5rXCijZA35f0PvRhHfzJmQcOTqlU4Kv7ojzkwI1DWDxE10XMP8CTMsoM3Yhv/VJYcr9k0nBGVt2vIY3JTlF+nDOgTk/JRC0pHhROu9xitO5qFAj4JvIF6ABg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w1pvDRBs0Y9NV1vmXt22+4ZzHwwrvUqZo1BSIRfPM3s=;
+ b=o2Sy8TfJyvVdKjGRBcDCxzmT5aklehXJ0kmk2G8rkZgQekeezLYjGVeehI7GANdIOt8B+ccdv9EWce6DkquIGcu6U7Dt3c3M0o0E59ygeqbGiWU1swUjovTqvMBlOKXHju4GhYJz0JXN6WycNW7wXqbEfFZqATRLHp/hfa/6v/Vlj+dfg0Bcolc63oywOTHl/8AWE4Po9h2XFj3R7A2xipEsuOU3xyieopj7wtoBbiDYbxfgV4ZI42H0TGyJxqx8QVFYCgjUNATJHV/4TEj9MnbBDGTRp1qcgHtwIs0P1GnDKr3XcqlRcoMiV3uZFpXc/dL2AKFRpYCJvDW3PxZKOg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w1pvDRBs0Y9NV1vmXt22+4ZzHwwrvUqZo1BSIRfPM3s=;
+ b=bLHB5sNaNC6LXT8fG6y2Gp4KBUDwsV4Pxg7joiA76vByhY8+FXflcTA63ESIQqGir876Wa975LOXbmzgdSrlthT1aQYtGbGN1Wf1nFH27E8IsWHeZCdHI9Xo/9sRCTshDgD/gXrAws6T1JfEFLGafUGE3RNnlqXQradpx5JeEz8=
+Received: from BN9PR03CA0712.namprd03.prod.outlook.com (2603:10b6:408:ef::27)
+ by BL1PR12MB5756.namprd12.prod.outlook.com (2603:10b6:208:393::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.12; Sat, 7 Feb
+ 2026 09:51:37 +0000
+Received: from BN1PEPF00005FFC.namprd05.prod.outlook.com
+ (2603:10b6:408:ef:cafe::83) by BN9PR03CA0712.outlook.office365.com
+ (2603:10b6:408:ef::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.17 via Frontend Transport; Sat,
+ 7 Feb 2026 09:51:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN1PEPF00005FFC.mail.protection.outlook.com (10.167.243.228) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9587.10 via Frontend Transport; Sat, 7 Feb 2026 09:51:37 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Sat, 7 Feb
+ 2026 03:51:37 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Sat, 7 Feb
+ 2026 03:51:36 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Sat, 7 Feb 2026 03:51:34 -0600
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, Tudor Ambarus
+ <tudor.ambarus@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] mtd: spi-nor: Add support for flash reset
+Date: Sat, 7 Feb 2026 15:20:51 +0530
+Message-ID: <20260207095121.407468-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260202113717.2696718-1-pranav.vinaytilak@amd.com>
-In-Reply-To: <20260202113717.2696718-1-pranav.vinaytilak@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 7 Feb 2026 08:58:31 +0200
-X-Gm-Features: AZwV_Qgzx0Cmg0Nax3z_cOxyBHxoCiZ6dq732jRkdpX2zBXc6X16SVCbYzKxcPU
-Message-ID: <CAC_iWjKUht2V-mPwvvFRVewKYyyxt5noYpBA+icYATfRKFMF0Q@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: Improve EFI variable load message
-To: Pranav Tilak <pranav.vinaytilak@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com, 
- Padmarao.Begari@amd.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00005FFC:EE_|BL1PR12MB5756:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e0d8d12-3568-4d97-9990-08de662e7c56
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vl2kjZ+pCT/rl+cP7IZY6uaRJo3t+CN3uZT7T2cg//f1VEbShMevWtBIHM29?=
+ =?us-ascii?Q?L9ilbp1BTXZmXMWU8k1G3Hsb+2jbHj/dUbe+87P9EFeiLNgbrWo+s58wNdR0?=
+ =?us-ascii?Q?umB+xrW22KrTGgN17ENnc+hLxGYfwILADIAEidgM9fu3kPGrbtDzUalutwcF?=
+ =?us-ascii?Q?IwBfCCXuXRj0xzwvNErhHpIlwFVcbmFSNTcTPI9iooRUEBfyX0QKbnWu/xxe?=
+ =?us-ascii?Q?TYJuFnc8hP2kWmunpVpn5jBxIUGOxBhdx1bYATamxnHgl/xqOi2qTew4/EVF?=
+ =?us-ascii?Q?H+PYKVoWZl5JiFDFqRCYx1Feut7DGYzMoZaZG5Y676qbMYeByeFmI8vOSDIk?=
+ =?us-ascii?Q?lhSdiz0bj/NjFU5Pd5jlR78/mcw+oxUZl+e0nX6D+W7VCvhX5FvSzksFAFcO?=
+ =?us-ascii?Q?TuTRmy4jcoPwuX4JnL4JlgVL3H79yeswvNmRESQRmAQaVyoz6hPd8REnbzPb?=
+ =?us-ascii?Q?RvhjH0/PnmgKKdVWIZikV0+YAaIx3FG0slir3N0uGyxdQDQSls2teWwr2YOp?=
+ =?us-ascii?Q?VYRAmVBPi/3EihJkctSsm8+SxwWoU2NDiMSkVt8hB+PQi6jtB7ZWd1/CFKWl?=
+ =?us-ascii?Q?QWs8rDiGENghQylyDO3+VxVu/hs1+Au5+SiHSuawX/x+WtrlXwDQnbt8fsbq?=
+ =?us-ascii?Q?jQ1h0Bk8s+EEhZM72yxmW4EfuK/9VsSb3relSsM6N7PmuJfAaHteyu6F4stp?=
+ =?us-ascii?Q?weQwVuQqTOtr7XG6NHZ92Rs7peqetxOEaHpgsLdBG3v0q5TXS6D/xGiIx9AE?=
+ =?us-ascii?Q?MuvIccRsH9w/lPNR0sBgRlNnoWR7HcFtjjfuOdkC0brOtV4zSTNGbQDyRYu4?=
+ =?us-ascii?Q?V6Nf2Siy6TPgf2iFcMIB/E3+pAWnef2GjV/a/t/4O+M8sPeisrGM4/B1wl+F?=
+ =?us-ascii?Q?otPsasbLJctb1Q6QDpCT+FgLXyF+zwvRiw18JFGYqptDrEb3E2vtXwdL5n4C?=
+ =?us-ascii?Q?XaNGcMwwOdA9NGAzhO/55B3/2UTPvAtXkFizQefly7qxTYH4TJW17FakhzVT?=
+ =?us-ascii?Q?P9jAo51BdJ4t0l8wFAAibKWikgyjFW98okP63nlUajrYcm22lvFBxNKWGRRO?=
+ =?us-ascii?Q?N32KSmQvYsCjel/PelyFkhKxTnYpURjpMYoMRG1tcsBDoe4axEb+QFGxvLwu?=
+ =?us-ascii?Q?hjYTHA+WEEXG6R/jqmoXRCMjltvtnpRfcH2WvuORVYqnRbXdtU2DLhqkl7SI?=
+ =?us-ascii?Q?ENS1PfpOJsGyq5fR939MfR3MDsgh7PjdooCa8sDq3vieX8KAzh1kawHO8wST?=
+ =?us-ascii?Q?7V6QgWX2prVMIhzXndRral67kf2uOsHHqmvRN+MhowVl24E4br3zccRJEi0M?=
+ =?us-ascii?Q?eg07lXKBeoRAbE8rzk3xqqvDeIXaWFCNBdBy3nHs8RPqlG6FKFrh3lip9xsq?=
+ =?us-ascii?Q?PqtieDKxDJLw6eBQ56fzH9usST3s6hcyPT/UltbBGKJqLMbMsSUDUzAi/mRz?=
+ =?us-ascii?Q?it9mPFHKMO/WQuYFJgQhYE19KjluiePeeEvyTQmnHtLEK9oWN3aHAi0Wpyfk?=
+ =?us-ascii?Q?AQd8W8xn2is7sqQHe3jRQ+yfdcAHNvDAY5vSRjywVDS+rwkd62ro3fFAa2kO?=
+ =?us-ascii?Q?kteE/GeeY2c27Q03tlbawP1D6PyTio1jREzbriWIFLf32TT/hPCvC3RmpMtA?=
+ =?us-ascii?Q?sdG4c41w7/8r+o0tSj9Mweoh1s0Cnrucs9GIzYB5vCIJxls9XXmI46r1Leui?=
+ =?us-ascii?Q?o1PrIQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: xs8o8Fqfi1OtOaGxoZKiFpiMcSYDCE1kw/esHN0jhVaYLCWQnCU3XBJYCr8oK01c5BCMNMgH2zFdJTymK6PtoRmW633JBr+heuwVYSz/1C0rZ1nUGiNeJQRpwql2dPPlZxCiBD33Viwv1d/gqZnwX4VimFOGpzHMl9+6wGvWTLQCm3ozyhM58lOznFPesP93fO8bmHfv/hezksJE1SDdWvqYGuXJ7C7Iec0Ldf5zcK0gDNIOHZvO/O4SE+9D9CtpGgn/lJcRBdt+qhZVx84UVBbauhvkEqLGZdd6n2dKLRBbH2TcSVOvdkQD1CknAKu0H/StxUnCOyHWen8qkUqLFZFUi10YvjvVUxpP6O4mFkpirIu7+86fGjJFbqX6FTjsZY+RB6bqcJiNMlK/AwMaRv90J87UMQC0uqPOEnr3JmQOZSigZF0RXgMZpQa00Rli
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2026 09:51:37.3333 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e0d8d12-3568-4d97-9990-08de662e7c56
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00005FFC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5756
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,41 +155,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Feb 2026 at 13:37, Pranav Tilak <pranav.vinaytilak@amd.com> wrote:
->
-> Change the EFI variable load message from log_err() to log_info() with
-> neutral wording. The previous "Failed to load" message caused customer
-> confusion as it appeared to indicate an error condition.
->
-> The efi_var_from_file() function deliberately returns EFI_SUCCESS in
-> this case to allow the boot process to continue normally. This is
-> documented in the function's comment block but was not reflected in
-> the log message level or content.
->
-> The message now uses informational wording to reflect that this is
-> normal behavior when the ubootefi.var file does not yet exist.
->
-> Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
-> ---
+Add support for spi-nor flash reset via GPIO controller
+by reading the reset-gpios property.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ drivers/mtd/spi/spi-nor-core.c | 40 ++++++++++++++++++++++++++++++++++
+ include/linux/mtd/spi-nor.h    |  1 +
+ 2 files changed, 41 insertions(+)
 
->  lib/efi_loader/efi_var_file.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-> index ba0bf33ffbd..f23a964a418 100644
-> --- a/lib/efi_loader/efi_var_file.c
-> +++ b/lib/efi_loader/efi_var_file.c
-> @@ -173,7 +173,7 @@ efi_status_t efi_var_from_file(void)
->         r = fs_read(EFI_VAR_FILE_NAME, map_to_sysmem(buf), 0, EFI_VAR_BUF_SIZE,
->                     &len);
->         if (r || len < sizeof(struct efi_var_file)) {
-> -               log_err("Failed to load EFI variables\n");
-> +               log_info("No EFI variables loaded\n");
->                 goto error;
->         }
->         if (buf->length != len || efi_var_restore(buf, false) != EFI_SUCCESS)
-> --
-> 2.34.1
->
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index 76c33b24368..0c132a39190 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -4466,6 +4466,40 @@ void spi_nor_set_fixups(struct spi_nor *nor)
+ #endif /* SPI_FLASH_MACRONIX */
+ }
+ 
++static int spi_nor_hw_reset(struct spi_nor *nor)
++{
++#if CONFIG_IS_ENABLED(DM_GPIO)
++	struct udevice *dev = nor->spi->dev;
++	int rc;
++
++	nor->flash_gpio_reset = devm_gpiod_get_optional(dev, "reset",
++							GPIOD_IS_OUT |
++							GPIOD_ACTIVE_LOW);
++
++	if (nor->flash_gpio_reset) {
++		/*
++		 * Experimental delay values by looking at different flash device
++		 * vendors datasheets.
++		 */
++		udelay(5);
++
++		/* Toggle gpio to reset the flash device. */
++		rc = dm_gpio_set_value(nor->flash_gpio_reset, 1);
++		if (rc)
++			return rc;
++
++		udelay(150);
++
++		rc = dm_gpio_set_value(nor->flash_gpio_reset, 0);
++		if (rc)
++			return rc;
++
++		udelay(1200);
++	}
++#endif
++	return 0;
++}
++
+ int spi_nor_scan(struct spi_nor *nor)
+ {
+ 	struct spi_nor_flash_parameter params;
+@@ -4491,6 +4525,12 @@ int spi_nor_scan(struct spi_nor *nor)
+ 
+ 	nor->setup = spi_nor_default_setup;
+ 
++	if (CONFIG_IS_ENABLED(DM_GPIO)) {
++		ret = spi_nor_hw_reset(nor);
++		if (ret)
++			return ret;
++	}
++
+ #ifdef CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT
+ 	/*
+ 	 * When the flash is handed to us in a stateful mode like 8D-8D-8D, it
+diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+index 4eef4ab0488..8017d0dd9db 100644
+--- a/include/linux/mtd/spi-nor.h
++++ b/include/linux/mtd/spi-nor.h
+@@ -583,6 +583,7 @@ struct spi_nor {
+ 	u8			cmd_buf[SPI_NOR_MAX_CMD_SIZE];
+ 	enum spi_nor_cmd_ext	cmd_ext_type;
+ 	struct spi_nor_fixups	*fixups;
++	struct gpio_desc	*flash_gpio_reset;
+ 
+ 	int (*setup)(struct spi_nor *nor, const struct flash_info *info,
+ 		     const struct spi_nor_flash_parameter *params);
+-- 
+2.34.1
+
