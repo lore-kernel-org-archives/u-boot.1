@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 962CDEE0AE9
-	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 15:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D840EE0AE8
+	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 21:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDE3383BC4;
-	Sat,  7 Feb 2026 16:36:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 29A1A83B0B;
+	Sat,  7 Feb 2026 22:51:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HNU64QwX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gjYchQXZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C8BB8341A; Sat,  7 Feb 2026 16:36:22 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id B5C26838FA; Sat,  7 Feb 2026 20:48:20 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A96383A64
- for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 16:36:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A30F83642
+ for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 20:48:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-4094d7d71a9so541295fac.3
- for <u-boot@lists.denx.de>; Sat, 07 Feb 2026 07:36:19 -0800 (PST)
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-45f194e9a98so1009981b6e.3
+ for <u-boot@lists.denx.de>; Sat, 07 Feb 2026 11:48:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770478578; x=1771083378; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Kpgs0KW+WSx5i0K7Cuai/oXv+EbVAa1X4vXHejSlyzg=;
- b=HNU64QwXNH+plqEevl3YQRW/O4lhifqBEE4MFoCKP5WCXypLlwLlreQYLIG2bdo1fg
- jfelpd2rZGwxRs4H8o1BnPwIGtu0aecWG7FoS7uYx2HGmAEQRDhvFGxaBf2gxyBJgU9F
- bWONIGakVToFWKjRY8AxSWgsOyq+MwYfJ5ILY=
+ d=gmail.com; s=20230601; t=1770493692; x=1771098492; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eSbIC1+1/ry00Tvwe1WeQouhbbevN5sVGdD01haiRsw=;
+ b=gjYchQXZLzSMc1CScJ0WHKglM2/SuC2lvBee01F34seYcCSfKcEFzBSRVrdJGksTu0
+ t4KW8YXr+5WLQuSDMfsIRpLzLc5GMNgp1rs3IRKfZTGJhiQU/UfvsPWmDjZ5IBVKPHaS
+ aAxa9yyDArcMkW/Zho9/VKVXr/kh6mr70ites7O/J4Z+o7riEaaTkn3G8qFCQC/xOUpq
+ sUul5jAa7tVgFNNUJJReQZt1dt3M/Ha/I1BqcoZWyjfzcE1IwaID3+IsQtSScqbdngZh
+ rftDsigCVlTaFOWnXJNeBJPUvwhhWz42QnQAmj/bWm7B9OFoHHbKJVjmfu7Kkg6tnLOK
+ V4zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770478578; x=1771083378;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Kpgs0KW+WSx5i0K7Cuai/oXv+EbVAa1X4vXHejSlyzg=;
- b=mzC7oT8WK7m4rMJf3vac9rig+DWC7Gu6VIfLuhpi6JfJqTXokJQBrqTWUlalx/J6Wd
- IvutEDZ2LTW6XK65qA6LNafGPS8A8U6LGj8h7z2DzuzCUOwBDMi54gmGxHjwM405eXVt
- Ml+01TsLPNQDh/lJEy8wFWgPb4qf0OYC+3k5ObccZm3Tcf3v6mAK1jWC88WCYiCVb+Yr
- 0qlSX7TNPBrlwN0mZNH0UC0czaQTe6oxRwK7755dHsz0tGLLs/CpWdl7OBp9f76xg5Pm
- wKKGs/C72lHLvxZG0BT+ZU2C4BWq67EiZW91HQAqoE2iPjBUVZVAR43g2r3y8YBV+gyg
- DiJQ==
-X-Gm-Message-State: AOJu0YwiZCVw5IYJhHU3CMWXPRU7o5WRL6EiLg1PhHejkSgs7DFpZSPm
- 2r6pkQObQJx3D6KDVcTCCzVfJqI4YghbR+hXuzE2+geJLZX3TEHrj1xYx7GN8dkvKmU=
-X-Gm-Gg: AZuq6aKFa7+1Gl55ML9SG31ofEGRUEYoUCBHUPezuk/M39K/5jnXGRrh9Wmoh+gO/sT
- B3iDHx0awI19fyIG/kS8wL/b3IjHa0pXIKJ4Eq2WyFH5Pdv54Eg5w3qYbfn7Bxfp9AE6qlsk3gu
- 2uIARGbVkebSnAzBOIU/nTIGLLzgBs2CaEgluPQHR+ms48d67xPNIWgLlHYzebjUUGy/xsVWK0S
- e65g5Gfdemt7hSCKYsjnj1yMjGu+hdEHqA1CQxYjsHvQjwUWOQyY0B4aVa4fUbodOewnwqJEw3v
- Vt+w6xAQFeDfJArilEQEJwpPU55BOEC+J8JzyVT99kD4Tp3WAL9WXU5+8PQiO7fCLonppCMeqXP
- tTN9wwPkoZO1QXiQe6ZHPrSivb9hh+4CFl67OAlcNSnO9VFoNVqeYZZf/FArYlRRK82J/ZlZASB
- 53KmVW3QB9zhYUSIybjjMDJuRVu+dRB74ssSyRV4gIJ9Zy2ClUKbCmd6/aaPo/dLAoP4hIhVo8/
- vxs/26wWjIByf37f5YpCazPZtG/MuCAvq8OLw==
-X-Received: by 2002:a05:6820:2225:b0:663:40d:4897 with SMTP id
- 006d021491bc7-66d0cb3efacmr3180022eaf.70.1770478577935; 
- Sat, 07 Feb 2026 07:36:17 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-66d3b2a6c16sm2941332eaf.16.2026.02.07.07.36.17
+ d=1e100.net; s=20230601; t=1770493692; x=1771098492;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eSbIC1+1/ry00Tvwe1WeQouhbbevN5sVGdD01haiRsw=;
+ b=aqS117ST0nVW7/wAsLu1mJ+ASxoD7YYFSfcSu+idMHp6cKig1HsJGMS0jPr5L+riny
+ hUdviOrf1GFwHaDMN/HcOnf/fyAWtbqgFT6c0FBYwCd7bBl1VuYb0WNqToNCIIdmqkYK
+ qwpDuH46qq/WLaeH54RTgmkkga3p1zY23x3/W4FcTdZAGnedv8QOb4WBtKYnRds4b3Y7
+ bx54V8kxbDoUI71bZRHZyQIwh00rYkRuALV6PfQsJCEParqisr3to6XQDfxmmJ7bh1RK
+ a9R8q/LFJIKStIPaTJmsy3r6Hypi8AP+OXySXvbJd4ohIXiJEudd8FSGjMzrxS/fLvL8
+ C1tA==
+X-Gm-Message-State: AOJu0YxeNMV05FKgDsRUs9U/qli8VC7ZlUNZ8v3R0y6jQBeYbFBZTI7S
+ OiyjqdvkmJDuYcSWPfbDFAogRpcO6jhc/mtpz+Xa5nXdOp/4DLRgUXa5tFnmtA==
+X-Gm-Gg: AZuq6aJQHKw1nP6XzMpNHai+4UlzSBOiDiAooIWIAD/OZ/ASY1/Ea7uxO7s3xQfrgCa
+ FqNLdBcwQPI3/JH/CNSXEx1vMKNUEQ0KeQSIGpDL4HoM28w3WNTxPkfLERbr/H93k4xENPVHl+V
+ DJsoBBwvV9y/NNbojp5uqV9XODPyYgmUTO1/Z5NfwzaOhorQ+w0eV1ScjDknQS6e8IucrC+2GKm
+ GveQAD22papUhHxH+4faZ33VA1BvBfGOKwgUdTxbqmdWccNSZb9iXXVm5Tj+VT+QnZfz8J2Txmy
+ Mq9WPOOIM27aEvlYpbwwYeYLVyS1OQwlbErAURQACRgbto3VBHvHPu3I5Rt+wEwTG/tnbqMpzco
+ gIJ2XijbCh136H00xgbl6bvZ8FUFrkqxsrNHvOxp3NYB8/IJk2+2H9uDsSfo5ORgyjIqyogp5MP
+ LvgKjgIovBpyh2XiXohweE14yfsbd8LqotvhY+DKTc6AqXMd8NXQ+uwXJ5uYlfcyHZw+waV96Xi
+ LTy2b7u4LOZfdIYqPakHc8B7w3TUGgHH8qb1CsY0EeDN+GfdoM=
+X-Received: by 2002:a05:6808:640f:b0:45c:9f35:8e00 with SMTP id
+ 5614622812f47-462fc9e75f7mr3630282b6e.13.1770493691735; 
+ Sat, 07 Feb 2026 11:48:11 -0800 (PST)
+Received: from james-x399.localdomain (71-218-105-26.hlrn.qwest.net.
+ [71.218.105.26]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-462feb4fac7sm3707490b6e.15.2026.02.07.11.48.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Feb 2026 07:36:17 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20260207120017.6415-1-marek.vasut+renesas@mailbox.org>
-References: <20260207120017.6415-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <177047857711.131189.1710838655462708068.b4-ty@konsulko.com>
-Date: Sat, 07 Feb 2026 09:36:17 -0600
+ Sat, 07 Feb 2026 11:48:11 -0800 (PST)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 1/1] gpio: sunxi: Don't clear pull settings when setting
+ input
+Date: Sat,  7 Feb 2026 12:48:00 -0700
+Message-ID: <20260207194801.4128903-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 07 Feb 2026 22:51:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,21 +100,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 07 Feb 2026 13:00:08 +0100, Marek Vasut wrote:
+sunxi_gpio_set_flags() always programs the pull register when
+switching a pin to input. When neither GPIOD_PULL_UP nor
+GPIOD_PULL_DOWN is requested, this writes 0 (pull disabled)
+and can clobber an existing bias configuration applied via pinctrl.
 
-> The following changes since commit a54d613baf742a95b6deb7a016ef6262737d1918:
-> 
->   CI: Update to using grub-2.14 for our tests (2026-02-06 09:29:58 -0600)
-> 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
-> 
-> [...]
+Only update the pull configuration when a pull-up or pull-down is
+explicitly requested, leaving existing pull settings unchanged.
 
-Merged into u-boot/master, thanks!
+Fixes: 35ae126c16a6 ("gpio: sunxi: Implement .set_flags")
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+Changes v1 -> v2:
+  - remove no local pull variable
+---
+ drivers/gpio/sunxi_gpio.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
+diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+index 094c45a6927..9acf1c2ecab 100644
+--- a/drivers/gpio/sunxi_gpio.c
++++ b/drivers/gpio/sunxi_gpio.c
+@@ -295,13 +295,10 @@ static int sunxi_gpio_set_flags(struct udevice *dev, unsigned int offset,
+ 		sunxi_gpio_set_value_bank(plat->regs, offset, value);
+ 		sunxi_gpio_set_cfgbank(plat->regs, offset, SUNXI_GPIO_OUTPUT);
+ 	} else if (flags & GPIOD_IS_IN) {
+-		u32 pull = 0;
+-
+ 		if (flags & GPIOD_PULL_UP)
+-			pull = 1;
++			sunxi_gpio_set_pull_bank(plat->regs, offset, 1);
+ 		else if (flags & GPIOD_PULL_DOWN)
+-			pull = 2;
+-		sunxi_gpio_set_pull_bank(plat->regs, offset, pull);
++			sunxi_gpio_set_pull_bank(plat->regs, offset, 2);
+ 		sunxi_gpio_set_cfgbank(plat->regs, offset, SUNXI_GPIO_INPUT);
+ 	}
+ 
 -- 
-Tom
-
+2.43.0
 
