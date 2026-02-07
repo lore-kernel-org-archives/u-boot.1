@@ -4,104 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33656EE6B60
-	for <u-boot@archiver.kernel.org>; Fri,  6 Feb 2026 21:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A52EE6B6B
+	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 00:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E4CF83A64;
-	Fri,  6 Feb 2026 22:35:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 49B9383693;
+	Sat,  7 Feb 2026 01:02:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tmtDU8dY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FXBRZql/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B919583AA7; Fri,  6 Feb 2026 22:31:31 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id D190D83AA7; Sat,  7 Feb 2026 01:02:45 +0100 (CET)
+Received: from mail-dl1-x122c.google.com (mail-dl1-x122c.google.com
+ [IPv6:2607:f8b0:4864:20::122c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97D7F83642
- for <u-boot@lists.denx.de>; Fri,  6 Feb 2026 22:31:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80FCC83642
+ for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 01:02:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-669f0b0290fso1431783eaf.1
- for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 13:31:29 -0800 (PST)
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-dl1-x122c.google.com with SMTP id
+ a92af1059eb24-1270be4d125so1980968c88.1
+ for <u-boot@lists.denx.de>; Fri, 06 Feb 2026 16:02:43 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770422562; cv=none;
+ d=google.com; s=arc-20240605;
+ b=M7kfi8Tfs+Um1Hz63Np+0nExJA3FIc/PPPdbi61DBke0CMshat36+/JN4Zmjfu+hBF
+ x+LlqI7YQO50NzLSLD4ypVgAubivpgF9ZZvf/CKgYUH83N9z9lYhxic9EI9zDYFnEB/e
+ dX5g7dKraKiUw7YkL0TH5KkNGFNEPDv02hNPcWBcGALpL9DrsDOchuA+jT8P6NMSDwKI
+ 9mFdsMWl6AKan5fYEzTpt3LhHlhFqrs1EjTYM2wLIOErdHaZBlcCPPcn/LYujRspvM97
+ IHMlCy2oES+nFeGgkknG7xEFpn2iPlvrM3zq+OOXmKf01J09Z9oRQTXALIQdteM+5b8X
+ EsAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=v56w8kOiKuBvj1IXo4y+MX9EkBBaYk9JXvKT+oFAflw=;
+ fh=qZ3s20c7bQLStgy8mb1N96wUDADWp3ib1XmXEiVlhFI=;
+ b=MJIdLB95JFPho6qKA4Mu7ukHi0YN/AzRffbMbWJthlhnWhlizd+HyL/R1IBJXPDVkI
+ I8csIdiJnIekfvqX3Ti2OuoYCn5tgp7u+/U4Em4eT++5/gc804rbvqlLRy3kY1Zx6oPl
+ svDSo4CF+rfjQvLBrZlXImh2D/SmVLJxuFoYniirKkDNmCN0xeBJMYi4iMZAcQfa5zbj
+ j5Z+rc/ZcEinBs9XdDyoRXIafe/xNb1Tx7EEVGvugp9nClbgc2cVp+SllRSQSwt7v8+r
+ Sg6MBm3Dwt760620dBu70Sg/wHJqafUQ1nTTrrBrvj3XgbEwz1l9v9d/T4c0ANCc2zrJ
+ SEIA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770413488; x=1771018288;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=v5YoBULdfSkfBOruZYXQ0J9X8SscJSaBDFWGzOxJpJI=;
- b=tmtDU8dY+Yyncq6qgZEOvZm2/9j/xOWYPdO7/cyIhEsguwmEDFYLDmxjn3dXcc2WmL
- tWOD7JgUWHkpIEQY6a7Nlnz0E82Yxj/tLWs5ArSmdmHMLxwu7mnQNDVDIOq0oxpCaOzT
- J2V0UaFpEaIu2GvKeVlNhiUqrO6HeIQFOxSxpsQq0nwOipkHtWYlpMUCyuW86nB82Shu
- +fz6B9D/akKJlcf2WMtAGr9CssDXiFpCQ9xnVz5tEyZQcjCNi/iZAE4lQCMR/EzCSjK0
- +CeG98MWV2QEGDr2DnS63C/am2l/17dMQXW/f7bvOppOkSuB2pRefZiT4i1RWuPHI0fY
- dXtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770413488; x=1771018288;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1770422562; x=1771027362; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v5YoBULdfSkfBOruZYXQ0J9X8SscJSaBDFWGzOxJpJI=;
- b=kN6VgBBOSw59U2gpJ323sb3WgPErZ5ciD7Tbd7v/FYD3xPaLbnOggjMA+Ot53YF6jr
- zcP6HCq5egKFFidsVlyZYFLXYOTrXIBNagUaGr5+nNnbzSGGsv6Y5dXzHrmmvtIPkLPe
- gOt8uCfTmL7OJ6S5tVKgfTNj60+XhLaKIDbEnYFw8KWKEQZSUgcnKZuj/WSjnIyKBLtA
- FcSMC8CMw5FmMHfTsK5zSguzPSDyxd2vA+3g0B/MiG7m9niwp74hmV8ICmXP9AhqDUd2
- 5vZhLYdYjPdiCkfr1EP6z7V6hGDUESsFdIVQaMTa0FO0qFa+IPD1A9zJ9dRqhjUIL6dG
- QN9w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCURD93lyGVHrQND/GgAWBZ7FbFjNDxeXGSvEW4I2AqK9oYbWghwA7YxITzO9ldxfK7yPv2NgTk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwuZFzLbFyE8sT/xWk0Wz1UOQnOZSbazXvYlOFgDP1uRcl43G2w
- M5K3ynahPktFLGEAox/+XBWmjB4B3mgjdjlCMpnsQP/LtPAMdurZWUUcdQmjrcbZABMl/pwsIr/
- l4Nrr
-X-Gm-Gg: AZuq6aIG+5nCrilisKGKib7RGEFaqFBTBl0XDKt7lvWfMZ+9TIHr+/bBfWblvXNjLUB
- H8Z/7EpktU8Ma+EVPuOIMmg4bTz4T4GacQW8fD/Z73q0p8jFG5kgn1liBgE6CpM9czVzryGXMmM
- ukoskSaut9XQV+gRmxM/1ZK5dL41T8IpYGSTLiXC/qYobO7b2/HwKrW9RZzhkKhIKr5cTF/TKC1
- Btw18oAEbJ2o38E8M/OLksjK1NIl7YJPLNb2cZKJtcoSp40o5JDCZpr524btYw0AZwsyaUxzZE/
- hFPZtZPNGAVwXvAKRsebzfZlLumRVnlvnphP7K1S2otYq73Aci/mWYpdqQHrUKyTYnMxT7QinRX
- OuTDDyc5Lo9Uys5wfH8blWDm9CLLNQTtlelwsIJaOo2saby1gb3QRVqtplPe5PCnddZkQTmpr53
- 2W4m5rI0ExsiR0vAM=
-X-Received: by 2002:a05:6820:16a:b0:66e:25f5:4b3e with SMTP id
- 006d021491bc7-66e25f54d17mr606098eaf.32.1770413488272; 
- Fri, 06 Feb 2026 13:31:28 -0800 (PST)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:7918:a69e:53a3:9e1c])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a99643fc8sm2452000fac.14.2026.02.06.13.31.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Feb 2026 13:31:26 -0800 (PST)
-From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 06 Feb 2026 15:31:14 -0600
-Subject: [PATCH] test/py: Fix spelling of source_dir in docstring
+ bh=v56w8kOiKuBvj1IXo4y+MX9EkBBaYk9JXvKT+oFAflw=;
+ b=FXBRZql/p/swpMGrQyCJs2itaiD4k2/lhyFVLoAFYJO6m3HlLdBvckhBsGUIEwX6xK
+ LTdw9T+0UsbnQfcIY7yJm1Cisz/KvSVv5DG05OV3VkWW6lmaIW9ROgVxm72ShGzjBK1R
+ GmGAPtwoWONiVyUQuXfo0cmKPHBUYYnZFvhDn1Q571czCLMwaaD3D3OgX29An9ivRe0k
+ lAVDMlv9jdKoeKuMg5Lnmg3NS6pxVZZv0UQ8bwcH/guEgNTVVYFQ/0p2/dAWGG+7Xxfs
+ lrEr+yosxIH99TY8ZVcBGABwEUwoKmEzHjNpysxxkmTJuhZjZ0HuZqrof3o+CUV0Gnk4
+ 8k5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770422562; x=1771027362;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=v56w8kOiKuBvj1IXo4y+MX9EkBBaYk9JXvKT+oFAflw=;
+ b=rytSLxjTsfzLoyAGsvWh/8XEt3l4PxsQxVnXc0yiABoqq2zgIak+0RxVrHKau3m5FA
+ WfVqp6rnCDThO3IEIENc/mj35UYlKj9oqZsX6+EIPNxF764oamKBfZrKncmqOSjN5pUP
+ BTjlXcqqumGV88F3ugHhRWqG0JbdkarcZj1d0fDC1sNEKoxngYmNEBewV4/zUK5we+JK
+ f0laeB7d9l3F8RSGwzwfgm07HPxU4zTUxKcX3UcYmnUgyiwAMk9Dhi8mGH5cDoberh2o
+ tDpenWpatgNb715hTylboLGOhQJhvaQ00PgcyyEmNHwqMakfLAcBrWV0gDSMV8Rp2Jxi
+ E2hg==
+X-Gm-Message-State: AOJu0Yzgpj3orUsyA0QkdysfZpbDs79HNTPLbr5zgpQS/WG/1zSXdZZi
+ SmO02ERnPYGU0KXKLIWSNIJw9z5WBfWrYcw8obZc3VO8inbftDNYf8o+w/Ki8ExzFZxFueJlNyA
+ IX7ReflHNcwycrpnlvXO5dPmzSZqBKw==
+X-Gm-Gg: AZuq6aKk39W+rquqLQLsUOQ+C2CVCAb+6L8V26pNAb1wBlbdx7GoPsPUtClufrel9qY
+ lUrAMo9lRgDPcZDJSw2xvbd0jkg2WH3cHTZQ1re80IV9wc+qzzGBZ+SF3IEw/lE7YLuIgMu972M
+ Sfc8yhjEfpqgY1dSnfKFdzxmtt+8ZNbPjKzn1+ZyU9oMDR1vO4sJScWsVsVYU8WgxOnHsLVV9Wr
+ 90R2wCNJfv4cI4ddDBKW/HmVb7UViY5IAqtw+pxnOdLkOgBdEoKIA0ftZPZwSZFa/qGPG3/uhBv
+ 67v+B47LYLPJ3HsuBBZWkTsVuxo=
+X-Received: by 2002:a05:7022:43a6:b0:123:2e43:ecbd with SMTP id
+ a92af1059eb24-1270407229amr2586610c88.33.1770422561725; Fri, 06 Feb 2026
+ 16:02:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260206-test-py-source_dir-sp-v1-1-057435f85e45@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MMQqAMAxA0atIZgO10A5eRUS0TTWLlkRFEe9uc
- XzD/w8oCZNCWz0gdLLythY0dQVhGdeZkGMxWGO9scbjTrpjvlG3QwINkQU140TBpTH54CYHpc1
- Cia//2/Xv+wEg0tB4ZwAAAA==
-X-Change-ID: 20260206-test-py-source_dir-sp-bec5faf6c5b5
+References: <20260130183635.2612933-1-trini@konsulko.com>
+ <20260205234158.3768337-1-trini@konsulko.com>
+In-Reply-To: <20260205234158.3768337-1-trini@konsulko.com>
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Fri, 6 Feb 2026 19:02:07 -0500
+X-Gm-Features: AZwV_QjmX6bJAfPzB_y82ckE9Nvs7M4N4JDFNl4RXK9VMrdwpTPQJZJbVW8FhMk
+Message-ID: <CABdDSeWvfd2vK2ykQb12YrXreaq7oiuHDktgrCm+c94_6aj=Mg@mail.gmail.com>
+Subject: Re: [PATCH v2] arm: spl: Ensure 8 byte alignment of appended DTB
+ without separate BSS
 To: Tom Rini <trini@konsulko.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=968; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=BxKOmQTQv/3xnFnmajSdSFYw0u8ATrNnocuCk7HdiIQ=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBphl2n5pCot5ZEi/S9RDWedoTi5/gV73dHcJVC0
- zurrZSwBfWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYZdpxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AqhIH/2+zkfSFFJcjuj/Xb0R48cpwUMuj70MBUy5EKbM
- B3yRkQz2qgxU6NTF1edmuPMq0UQfFnSzXsibS+hrdV4L3DmLV1Wlh/ga+3FHzJQRNDz/26XjRgO
- u9zxV+H4TWq1CQLK7m3ztOkwwiA7HYe2rlH2d/0hMOfsl9yF4f2JPNe7JMMRNlLaN5mB+lGQFWz
- JZJ2HKTQ9iuU/v/jzwfCQK13bdpH0Xn6yInJ6zqeXBWSumO+KE/NHH6/d30TudFWpo8fx99Alnv
- CtCdkjFTtr5uzmMn/IFAD6s/fAiY4uZ/mOzIbf+UMoGCimYpHhxfwtAXkcPONw99Rk7tFFhf9eb
- cIRY=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
-X-Mailman-Approved-At: Fri, 06 Feb 2026 22:35:07 +0100
+Cc: u-boot@lists.denx.de, Brian Sune <briansune@gmail.com>, 
+ Phil Phil Sutter <phil@nwl.cc>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, adsp-linux@analog.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,33 +125,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a typo in the docstring for run_build() where source_dir was
-misspelled.
+Hi Tom,
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- test/py/conftest.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Feb 5, 2026 at 6:42=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> Which means second, 64bit ARM platforms. With the exception of:
+> socfpga_agilex7m socfpga_n5x_atf socfpga_n5x_vab socfpga_stratix10_atf
+> all ARM64 SPL_FRAMEWORK using platforms use the
+> arch/arm/cpu/armv8/u-boot-spl.lds explicitly. These other ones set
+> CONFIG_SPL_LDSCRIPT to a non-existant file and then fall back to using
+> arch/arm/cpu/armv8/u-boot-spl.lds. There are only 4 platforms which
+> don't use a separate BSS section and so could trip up the above as well:
+> r8a779g0_whitehawk r8a779g3_sparrowhawk sc598-som-ezkit-spl sc598-som-ezl=
+ite-spl
+> I have inspected the Renesas platforms manually, and I'm a little unsure
+> how this case works on the two sc598 platforms.
 
-diff --git a/test/py/conftest.py b/test/py/conftest.py
-index 37d9347a85f..215aaa56534 100644
---- a/test/py/conftest.py
-+++ b/test/py/conftest.py
-@@ -102,7 +102,7 @@ def run_build(config, source_dir, build_dir, board_type, log):
- 
-     Args:
-         config: The pytest configuration.
--        soruce_dir (str): Directory containing source code
-+        source_dir (str): Directory containing source code
-         build_dir (str): Directory to build in
-         board_type (str): board_type parameter (e.g. 'sandbox')
-         log (Logfile): Log file to use
+Do you recommend using SPL_SEPARATE_BSS on our platform? After power
+on, the sc598 has 2 MB of SRAM available starting at 0x20000000 which
+we treat as just a single block of memory to use for all of SPL
+operation, so we don't have any requirement to do something like a
+bare bones DDR initialization before using it as our main memory for
+SPL, so it didn't seem necessary to enable. The boot ROM has some
+guidelines on where it will place its stack, so we restrict SPL to the
+first 192 KB currently but this can easily be expanded. I'm not sure
+if I should admit to it, but some decisions on Kconfigs were made 4
+years ago as an arbitrary choice during our initial bringup and then
+were not reviewed because things were working.
 
----
-base-commit: e5e75ea8c7b8e6d9ce1ca8ec7a25fa8b3f6029a9
-change-id: 20260206-test-py-source_dir-sp-bec5faf6c5b5
+Either way, works for me on the sc598 + ezkit. There's no reason for
+it to fail on the ezlite in that case either.
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+Tested-by: Greg Malysa <malysagreg@gmail.com>
 
+Thanks,
+Greg
