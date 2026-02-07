@@ -4,93 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E89F6EE0ADC
-	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 14:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC1AEE0ADC
+	for <u-boot@archiver.kernel.org>; Sat,  7 Feb 2026 14:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30DC283693;
+	by phobos.denx.de (Postfix) with ESMTP id 6FB7C83BDD;
 	Sat,  7 Feb 2026 15:18:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SPfNoPkr";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=rwahl@gmx.de header.b="MYBwhNrY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A737483AA7; Sat,  7 Feb 2026 10:29:35 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1B3C083A64; Sat,  7 Feb 2026 13:42:31 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EB3C83642
- for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 10:29:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E96C83642
+ for <u-boot@lists.denx.de>; Sat,  7 Feb 2026 13:42:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nathbappai@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2a9004e4239so14465395ad.0
- for <u-boot@lists.denx.de>; Sat, 07 Feb 2026 01:29:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770456572; x=1771061372; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f5MaoAfDb1DevlF2gA8VOmGT0SFTvTd5xYVktDrFsWU=;
- b=SPfNoPkrliZZBJrOBuge79vbOOsLbccvJngiUpmDBl8RhK+lKwCL2mqIjwcFhGoWHE
- SfoO2MRkhYRFKDst5vcqb/IQRulQqtpR3Hi5YDt2Hq4CMExnDWKoZgEcoeggSokd+neW
- OwKRc7kUKfyha8BQBc/EsEgrV1uoPLFJ1we3SuUPAnWnFhIWg7Oy0BJasIWzcHh1fDjD
- MtakCEPxeGdgoQf6JbxTJB7weKSeYEYE3Y52gg0QQEmCYuzs4QkFdoiN5DZM8X+GrxPJ
- EqwPQYtA9NJ8SIm/CsN/g4B6rEbM0NBC7KADYkgEoIr1SRdUEeWIOr6qdeAKxaNWEgkh
- w1cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770456572; x=1771061372;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=f5MaoAfDb1DevlF2gA8VOmGT0SFTvTd5xYVktDrFsWU=;
- b=uGAqT2yPpNa1y/4c0umYKydmCnHDzDP1ZfnjqogSCzARRQBLimrXcvwb1EPahRbpjG
- wAtvGzApXT+jlo7SxXv8mrzSXKdMqc7BMo+4WrjyV75dau5ooS9NMpJv98E6m19da16b
- bRT9lnFPFHEHqYxjxxeWXv1bofSYmOAyvxY8OcJQIqFDqOqtGEnKz6bvnObPNP20E04p
- 1pmhrSoRvLy/rTpFPWqhYuXHZHysDdYT7Hm1UgCQpv+UiEcDxuPn7qlMMuaVMHH0nUPb
- ZqGNsPvCMnB9qqzdGwfSdZ+uG2OevB+BybiZIBn5gw+3R/pBL4LS7tKV3DdhvDFO/E3j
- NB9A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4mc9SQ/axIY0iGQ6ICoCWRFnuDPAJx78/gIr0xefo69Fb3/BkTcTGwU1RzRxn+uykIacmOzA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGsd8I7wB+IUUJvRicIsPKGa5M5ajaM3SYJMmn85X18B3eELeO
- 8SGZDI9GKLvgu6FT6gBHV43akevqg3ihjZVYy53lpuGe3LtQ1EHQf/+m
-X-Gm-Gg: AZuq6aJKysb4mH/3KDbAYMNPoFhDkCgvh3g1Sui1LsXZXKqCO9FsJs+4mcAkkrHKBCP
- lD0By555atsNeVMEsJ2NizIWCzAF3yzXDfkmxfJmPPXzaL0hMWmszsF4HH85Tu98a8VPyCXhJUJ
- Cxhl7hQfaTJ3bzZup3i8soQkZG6thZnW9NQBEg3ir5IYev0VEOmEvwKtZUUXaWkFDx/0bGm5naO
- mGYIpLLglZpYRLs+thVqCbnhlAhmY22wgWSKhm/JeHv2I539zCKRcBDgsbR2LEWayGqirpPkzIT
- +spxfPuu8iFLnWAUFltGSv5AtzrcmDOxlFzg77L/kjPNwP3N+2R+a1xFNtFehJbXpAWfN6Yu9yv
- pZNAcg/ju9zBBPwg1z/+Kbat9qSOZeZf7gxJbmRMDnSk20+OPac5VZUg582XW3AxgNzTg1t+gn4
- dDX856pMQS
-X-Received: by 2002:a17:902:da8f:b0:2a7:80bf:3131 with SMTP id
- d9443c01a7336-2a95196c7a7mr63574895ad.58.1770456571873; 
- Sat, 07 Feb 2026 01:29:31 -0800 (PST)
-Received: from ArchLinux ([43.251.89.233])
- by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2a951c8b041sm44970075ad.34.2026.02.07.01.29.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Feb 2026 01:29:31 -0800 (PST)
-From: Biswapriyo Nath <nathbappai@gmail.com>
-To: Biswapriyo Nath <nathbappai@gmail.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Bryan Brattlof <bb@ti.com>,
- Peng Fan <peng.fan@nxp.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- ~postmarketos/upstreaming@lists.sr.ht
-Subject: Re: [PATCH RFC 0/3] Add clk and pinctrl drivers for SM6125 SoC
-Date: Sat,  7 Feb 2026 09:28:38 +0000
-Message-ID: <20260207092845.10421-1-nathbappai@gmail.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260204-sm6125-clk-pinctrl-v1-0-9cf4c556557a@gmail.com>
-References: 
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rwahl@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1770468144; x=1771072944; i=rwahl@gmx.de;
+ bh=KxjqWUmED32MzaW6Lv55XSaAdJ9kmt3CZJG0yp7WGtg=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:From:Subject:To:
+ Cc:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=MYBwhNrYm59YFWNYPF6fALB6oUEwe8mQTZXNP2evu429+ydIKuG093exJt5XS6Y3
+ VAdDmG20PCTP7foKHvYX9Ejz90eTExsv+wmpiozl7FoZ9e4x+BNaPgFCAc4zaZTVg
+ V40gGvxcf1V1f/IFh9yighTv8HeKH4AVLXxJCLBojzlBjsu5/BCB7mmCiO2qOaaNx
+ 5b9F0Qp7dUtY31LmP0qat39Rh/9p7P0aDFEkfEZzm/xRSqW4q1ix+nvPagaNVwNit
+ Vaflwfg/3pZrzCNB7zPLiigbXT4GDDF38Vtdfz7sGh6VxAgkAdjr1/xa+FFZJvX0k
+ y1GHKs/DGKAdevlePA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.16.0.24] ([84.156.147.204]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Md6Mj-1vEoap0oBH-00kp6G; Sat, 07
+ Feb 2026 13:42:24 +0100
+Message-ID: <85942c08-47ba-4874-870e-700d32a9356f@gmx.de>
+Date: Sat, 7 Feb 2026 13:42:18 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Ronald Wahl <rwahl@gmx.de>
+Subject: Confusing memory layout after spl_relocate_stack_gd()
+To: Nikhil M Jain <n-jain1@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:jIL9cJjer3w245CUhAYpgYyrTXuBnNm1rN4uE+pnOk/q7xtKdtp
+ MO0ArEohw0FxYOvPr5G7lwWg5/7Zp4cF6MjqjQhT1/t17nxS2PyqnRQGlHJAFR0RqzXV/53
+ lZdVnRv2yxRjpP5Eih2IYqGM3y5LwI+HrPa0FwWqlz+dq2bulXGtgMKGQGAGU1t1/rvz3nn
+ PTd5OX0w4cdenyEW3GvCQ==
+UI-OutboundReport: notjunk:1;M01:P0:2O2ueKR8nDA=;c2SWio9j7iJfmkO0B1NBopSLcrQ
+ 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
+ NGe/yQ3Tm47Dg27mDXd1BZ4HRflFlewGJD0T3x
 X-Mailman-Approved-At: Sat, 07 Feb 2026 15:18:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,19 +146,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 04 Feb 2026 16:10:51 +0000 Biswapriyo Nath <nathbappai@gmail.com> wrote:
+Hi,
 
-> This is still RFC because micro SD card does not work with u-boot but it
-> works in Linux. I do not know how to troubleshoot the issue. Any pointers
-> would be really helpful.
+I'm a bit confused about the stack location after calling=20
+spl_relocate_stack_gd(). Looking at the code of this function I see that=
+=20
+the stack pointer is in the simple_malloc heap before the global data.=20
+That means that the stack is growing downwards into the heap. Also the=20
+malloc_limit includes the global data memory. This looks quite odd.=20
+Wouldn't it be better to set the stack base the same address as malloc_bas=
+e?
 
-I forgot to add the error message. Here is the output from USB serial.
+In the documentation[1] there is also a picture (DRAM SPL after=20
+relocation) that illustrates this. The Stack region is just placed wrong=
+=20
+there and never used as the stack grows downwards. It must be above=20
+malloc_base.
 
-=> mmc list
-mmc@4744000: 0 (eMMC)
-mmc@4784000: 1
-=> mmc dev 1
-Card did not respond to voltage select! : -110
+If you think my thoughts are correct I can prepare a patch.
 
-Thanks.
+thanks,
+ron
 
+[1] https://docs.u-boot.org/en/latest/develop/memory.html
