@@ -4,60 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42533EF06F8
-	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 23:47:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3073EF06FB
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 00:07:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 709848341A;
-	Mon,  9 Feb 2026 00:47:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 244C08341A;
+	Mon,  9 Feb 2026 01:07:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Fy9Pzr6B";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LQhe8adz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA60C839FD; Mon,  9 Feb 2026 00:47:18 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B1A9083642; Sun,  8 Feb 2026 23:37:43 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF4F6805D7
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 00:47:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f4ed=AN=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1770594434;
- bh=pypbuEbYuxFCkb3VXbuwMQ+TcH7hdIjoYQ6NVotPjkc=;
- b=Fy9Pzr6BmVrwtIG+S6K6mxfs7jysaTuYXsLmsRhGBzDpxYvsA57Wq4AxwMlm4c5FDEeAmRxa2
- QondD+njFhed7VUiNgPkNQETagE7z3MEcapycGSI3yYyzuVgBZnVPqOIN1H5U6Tw9V+cZYOgfG/
- 1en1Q844XG8BL318I2sojs1gj4rIZhClrQ7lxbQzz+ImDi/oZ51+pVjJystgcZN3exVEIXlCX20
- kKrW+4CEp9CWmsOHTcqIeWR6ytPIVnqmrk3MxWQbyjE0GWIfMXVEO1U+YqEqtjxqFTo2cSMQfVV
- 9RZgkrcc3sBcqVGLKuqwP+ruq4aBxgr+NwzZ3MjFG3ww==
-X-Forward-Email-ID: 6989207fa6487c2810b21bd6
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.6.2
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a174c0c4-2ebd-4d86-8d03-ee5b60aca216@kwiboo.se>
-Date: Mon, 9 Feb 2026 00:47:09 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 77C9E805D7
+ for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 23:37:41 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-662f5c4665eso1418716eaf.2
+ for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 14:37:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1770590260; x=1771195060; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IqFq8nsYflsqyI3/dCnBG7Qn9qujfSH4rQSEYDqIUB8=;
+ b=LQhe8adzjBN2Vu9FxGrDxB1hAuS/adogo2ip97/GBBn3zFQFqOVOsSIkqmdIaqnkWN
+ S6OquAx7eZxbmKIJK0H1rUyj+/dJDO20JBdhE1lW9nlZ+HfvrifdE4F13GJiMzA/U4Rp
+ 0CzbGgOoEwIn8PTLpBcgV6RNzJ3GvqgFIEvuJkqn/JVei+zuJVoiT9ATAYA0xELuWf0K
+ KTa8gKV94fVgqx07goNsP2nwRS2XA9hvODRAUeUut7k8GOhlosogvadVDOuUgJOTigLO
+ bvNGSoDxh5GcZLRDv1dbVx14KGb6QZga6NmDKIRV1t/5wkBRrhcaT4xl65r/wupbqBuK
+ kd0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770590260; x=1771195060;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IqFq8nsYflsqyI3/dCnBG7Qn9qujfSH4rQSEYDqIUB8=;
+ b=pTnSxNdLgTsoUMcKCFCkmLSQZj1EXkahv51BmgAcjyXxMFBw9TSKyGiJ4uXwvXnlWo
+ aKhJw+8FO1/yGwIWAN/I0tSeVZKy344/urVU3M99zdZ7b+h3IGpAs8O6PY+Y4Bl4OOsR
+ NISI6UKiJnfqYCsPEL6nWpBvwyhDWrIkN1RqmBN+BDZnWUUbAhZh50L4ix6yhwUnWi6x
+ kHsAVjTVOfZa3y0fk2tw/U0ai2VhlUj2HaRvgDa3JELT0wxhtPqgG5ccNSjVDqTJAbph
+ 5a7gh78GUZJ3CD6l6NTOK1x7be1ED00JwW81iAmbqnVEkpizGvV80WwW9GzX+W+9LjQI
+ oqIQ==
+X-Gm-Message-State: AOJu0YzeYdNOUGzW+3vpkho6eS5rDvwF+OjJvbeH2Z1+6gPPbzud3uAe
+ dV6hppcte25UdSH+7gZo0jcSxEHDdy88b6ysKTpnei1imStJt0u/tWxBqMRYhg==
+X-Gm-Gg: AZuq6aJQ+EcMXY+vKq8ukb6cPGwXihm2+yu1lViUzS7Y0NLNAVqKVhTWYoHv0sUbKcT
+ n7JyG1R+RvdRPsJYt9DUgvX5YcI6L87Z68wqIfdfXDLcA2mJLO30Mc559CY0UV514XSIUWibuN6
+ Vz8sz2DpZ7mxAqaleD1JLM1v+15aIaGTPqAmi8UegmEzLpN5FD2J9O8EvlTGCNVpD5wzXIBg+VJ
+ 1w6oXA8CHKnvtptY0eijtzN+Tyjz0T54P6rme26TUy0nGM2oEfz7byiSTXOgyFJkNwZKJXMdAS1
+ NH/7KDw10oIzJtXCJwnEoYiiMKZyjG9vIN+HWjou2zaWkzaQS1SsF5jJIoMNgsL9riVkPFIz7QH
+ LDYrJzE9hrhu98rMQC+JMOCnV6G1WsE/1bf73crSOFvalpK9k2RQ9K4blxrqEy21hox4eZYO4bR
+ O5UP8jkfz+hHgOL8MExg2Km1FlXOTn+0nEESW0d1b1zn7lt3jlvU2kLizNHf2FwEFzsTciOgFoN
+ ar4PDVvOzZo3dEhgdq2rBvk89KAdCjMnEOYVHL5bruPlz9ga0p67m38bE1R6Q==
+X-Received: by 2002:a4a:bc85:0:b0:66d:fb53:8279 with SMTP id
+ 006d021491bc7-66dfb5383dcmr2467185eaf.2.1770590259580; 
+ Sun, 08 Feb 2026 14:37:39 -0800 (PST)
+Received: from james-x399.localdomain (71-218-105-26.hlrn.qwest.net.
+ [71.218.105.26]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-66d391ae639sm4779452eaf.7.2026.02.08.14.37.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Feb 2026 14:37:38 -0800 (PST)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH 1/1] image: fit: Apply overlays on a writable FDT copy
+Date: Sun,  8 Feb 2026 15:37:15 -0700
+Message-ID: <20260208223715.3721340-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/7] spl: add SPI NAND support via MTD in SPL
-To: Fabio Estevam <festevam@gmail.com>
-Cc: kever.yang@rock-chips.com, trini@konsulko.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@nabladev.com>
-References: <20260208212624.3413494-1-festevam@gmail.com>
- <20260208212624.3413494-7-festevam@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260208212624.3413494-7-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 09 Feb 2026 01:07:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,252 +98,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+boot_get_fdt_fit() relocates the base FDT with boot_relocate_fdt()
+before applying overlays. That uses the bootm memory map and can
+overlap with the FIT buffer when the FIT is loaded into RAM, corrupting
+data needed to load the kernel and ramdisk.
 
-On 2/8/2026 10:26 PM, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@nabladev.com>
-> 
-> Add support for booting U-Boot SPL from SPI NAND devices
-> using the MTD subsystem.
-> 
->  - Introduce CONFIG_SPL_SPI_NAND_LOAD to enable SPL loading
->   from SPI NAND flash.
->  - Implement spl_spi_nand.c as a dedicated SPL loader that
->   reads the FIT image from SPI NAND via MTD.
->  - Update common/spl/Kconfig and Makefiles to include the
->   new loader in SPL builds.
->  - Adjust drivers/mtd/Makefile and drivers/mtd/nand/Makefile
->   to build the necessary SPI NAND MTD objects only when
->   CONFIG_SPL_SPI_NAND_LOAD is enabled, avoiding size impact
->   on other boards.
-> 
-> This allows boards like the Omega4 RV1103 to boot SPL directly
-> from SPI NAND, keeping the SPL small and avoiding unnecessary
-> inclusion of SPI NOR code.
+Allocate a writable copy of the base FDT with memalign() and
+fdt_open_into(), grow it as needed for each overlay, and apply the
+overlays to this buffer. Also check fdt_pack() errors and free the
+temporary overlay copy after each application.
 
-The content in this patch seem very generic and could possible be sent
-as a separate series that adds a generic SPL MTD loader.
+Fixes: 881f0b77dc8c ("image: apply FDTOs on FDT node")
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+ boot/image-fit.c | 91 +++++++++++++++++++++++++++++++++++-------------
+ 1 file changed, 67 insertions(+), 24 deletions(-)
 
-There also seem to be another SPL NAND loader part of the series at [1]
-that may be related.
-
-[1] https://lore.kernel.org/all/20260129050446.8858-1-dinesh.maniyam@altera.com/
-
-> 
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-> ---
-> Changes since v1:
-> - None.
-> 
->  common/spl/Kconfig        | 10 ++++-
->  common/spl/Makefile       |  1 +
->  common/spl/spl_spi_nand.c | 82 +++++++++++++++++++++++++++++++++++++++
->  drivers/mtd/Makefile      |  1 +
->  drivers/mtd/nand/Makefile | 13 ++++++-
->  5 files changed, 105 insertions(+), 2 deletions(-)
->  create mode 100644 common/spl/spl_spi_nand.c
-> 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 2998b7acb75f..126855b804ce 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1576,13 +1576,21 @@ config SPL_SPI_LOAD
->  	  Enable support for loading next stage, U-Boot or otherwise, from
->  	  SPI NOR in U-Boot SPL.
->  
-> +config SPL_SPI_NAND_LOAD
-> +	bool "Support loading from SPI NAND flash"
-> +	depends on SPL
-> +	depends on MTD && DM_MTD
-> +	help
-> +	  Enable support for loading next stage, U-Boot or otherwise, from
-> +	  SPI NAND in U-Boot SPL.
-> +
->  endif # SPL_SPI_FLASH_SUPPORT
->  
->  config SYS_SPI_U_BOOT_OFFS
->  	hex "address of u-boot payload in SPI flash"
->  	default 0x8000 if ARCH_SUNXI
->  	default 0x0
-> -	depends on SPL_SPI_LOAD || SPL_SPI_SUNXI
-> +	depends on SPL_SPI_LOAD || SPL_SPI_NAND_LOAD || SPL_SPI_SUNXI
->  	help
->  	 Address within SPI-Flash from where the u-boot payload is fetched
->  	 from.
-> diff --git a/common/spl/Makefile b/common/spl/Makefile
-> index 4c9482bd3096..4628902e7e31 100644
-> --- a/common/spl/Makefile
-> +++ b/common/spl/Makefile
-> @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
->  obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
->  obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
->  obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
-> +obj-$(CONFIG_$(PHASE_)SPI_NAND_LOAD) += spl_spi_nand.o
->  obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
->  obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
->  endif
-> diff --git a/common/spl/spl_spi_nand.c b/common/spl/spl_spi_nand.c
-> new file mode 100644
-> index 000000000000..20b877f75a05
-> --- /dev/null
-> +++ b/common/spl/spl_spi_nand.c
-> @@ -0,0 +1,82 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/*
-> + * SPL loader for SPI NAND devices using the MTD subsystem.
-> + *
-> + * Based on spl_spi.c, which is:
-> + *
-> + * Copyright (C) 2011 OMICRON electronics GmbH
-> + *
-> + * based on drivers/mtd/nand/raw/nand_spl_load.c
-> + *
-> + * Copyright (C) 2011
-> + * Heiko Schocher, DENX Software Engineering, hs@denx.de.
-> + */
-> +
-> +#include <config.h>
-> +#include <image.h>
-> +#include <log.h>
-> +#include <errno.h>
-> +#include <spl.h>
-> +#include <spl_load.h>
-> +#include <asm/io.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/ofnode.h>
-> +#include <dm/uclass.h>
-> +#include <mtd.h>
-> +
-> +static struct mtd_info *spl_spi_nand_get_mtd(void)
-> +{
-> +	struct udevice *dev;
-> +	int ret;
-> +
-> +	for (ret = uclass_first_device_err(UCLASS_MTD, &dev);
-> +	     dev;
-> +	     ret = uclass_next_device_err(&dev)) {
-> +		if (ret)
-> +			continue;
-> +		if (device_is_compatible(dev, "spi-nand"))
-> +			return dev_get_uclass_priv(dev);
-
-Is there a reason why you limit this to only spi-nand?
-
-I think it would be better to pivot this into a more generic SPL MTD
-loader.
-
-> +	}
-> +
-> +	return NULL;
-> +}
-> +
-> +static ulong spl_spinand_fit_read(struct spl_load_info *load, ulong offs,
-> +				  ulong size, void *buf)
-
-The _fit_ part can probably be dropped.
-
-> +{
-> +	struct mtd_info *mtd = load->priv;
-> +	size_t retlen = 0;
-> +	int ret;
-> +
-> +	ret = mtd_read(mtd, offs, size, &retlen, buf);
-> +	if (ret && ret != -EUCLEAN) {
-
-Maybe use mtd_is_bitflip(ret)
-
-> +		printf("SPI NAND read failed offs=0x%lx size=0x%lx ret=%d\n",
-> +		       offs, size, ret);
-> +		return 0;
-> +	}
-> +	if (retlen != size)
-
-Why do we need an error message above and not here?
-
-> +		return 0;
-> +
-> +	return retlen;
-> +}
-> +
-> +static int spl_spinand_load_image(struct spl_image_info *spl_image,
-> +				  struct spl_boot_device *bootdev)
-> +{
-> +	struct spl_load_info load;
-> +	struct mtd_info *mtd;
-> +
-> +	mtd = spl_spi_nand_get_mtd();
-> +	if (!mtd) {
-> +		puts("SPI NAND probe failed.\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	spl_load_init(&load, spl_spinand_fit_read, mtd, 1);
-
-Should probably use mtd->writesize as bl_len.
-
-	spl_load_init(&load, spl_mtd_read, mtd, mtd->writesize);
-
-> +
-> +	return spl_load(spl_image, bootdev, &load, 0, CONFIG_SYS_SPI_U_BOOT_OFFS);
-
-Suggest you could use something like following to closer match SPL flash.
-
-	offset = CONFIG_SYS_SPI_U_BOOT_OFFS;
-	if (CONFIG_IS_ENABLED(OF_REAL))
-		offset = ofnode_conf_read_int("u-boot,spl-payload-offset",
-					      offset);
-
-	return spl_load(spl_image, bootdev, &load, 0, offset);
-
-> +}
-> +
-> +/* Use priority 1 so that boards can override this */
-> +SPL_LOAD_IMAGE_METHOD("SPI NAND", 1, BOOT_DEVICE_SPI, spl_spinand_load_image);
-> diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-> index ce05e206073d..a12d880a9e90 100644
-> --- a/drivers/mtd/Makefile
-> +++ b/drivers/mtd/Makefile
-> @@ -34,6 +34,7 @@ else
->  ifneq ($(mtd-y),)
->  obj-$(CONFIG_SPL_MTD) += mtd.o
->  endif
-> +obj-$(CONFIG_SPL_SPI_NAND_LOAD) += nand/
->  obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
->  obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
->  obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
-> diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
-> index c8169cf73902..7cd2a5f1af9b 100644
-> --- a/drivers/mtd/nand/Makefile
-> +++ b/drivers/mtd/nand/Makefile
-> @@ -1,10 +1,21 @@
->  # SPDX-License-Identifier: GPL-2.0+
->  
-> -ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
->  nandcore-objs := core.o bbt.o
-> +
-> +ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
-
-Having both XPL and TPL is redundant and could be cleaned up to just
-have ($(CONFIG_XPL_BUILD),).
-
-Regards,
-Jonas
-
-> +
-> +# U-Boot proper
->  obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
->  obj-$(CONFIG_MTD_RAW_NAND) += raw/
->  obj-$(CONFIG_MTD_SPI_NAND) += spi/
-> +
->  else
-> +
-> +# SPL / XPL / TPL
-> +# SPL has no MTD_NAND_CORE symbol, so we must key off SPI NAND usage
-> +obj-$(CONFIG_SPL_SPI_NAND_LOAD) += nandcore.o
-> +obj-$(CONFIG_SPL_SPI_NAND_LOAD) += spi/
-> +
-> +# raw NAND still follows the normal SPL rule
->  obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
->  endif
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 41ab1f552b0..922a3606f47 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2356,18 +2356,12 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	char *next_config = NULL;
+ 	ulong load, len;
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	ulong ovload, ovlen, ovcopylen;
++	ulong ovload, ovlen, ovcopylen, need;
+ 	const char *uconfig;
+ 	const char *uname;
+-	/*
+-	 * of_flat_tree is storing the void * returned by map_sysmem, then its
+-	 * address is passed to boot_relocate_fdt which expects a char ** and it
+-	 * is then cast into a ulong. Setting its type to void * would require
+-	 * to cast its address to char ** when passing it to boot_relocate_fdt.
+-	 * Instead, let's be lazy and use void *.
+-	 */
+-	char *of_flat_tree;
+-	void *base, *ov, *ovcopy = NULL;
++	void *base, *ov, *ovcopy = NULL, *new_base;
++	void *base_buf = NULL;
++	ulong base_buf_size = 0;
+ 	int i, err, noffset, ov_noffset;
+ #endif
+ 
+@@ -2410,18 +2404,32 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	/* we need to apply overlays */
+ 
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	/* Relocate FDT so resizing does not overwrite other data in FIT. */
+-	of_flat_tree = map_sysmem(load, len);
+-	len = ALIGN(fdt_totalsize(load), SZ_4K);
+-	err = boot_relocate_fdt(&of_flat_tree, &len);
+-	if (err) {
+-		printf("Required FDT relocation for applying DTOs failed: %d\n",
+-		       err);
+-		fdt_noffset = -EBADF;
++	/*
++	 * Make a writable copy of the base FDT for applying overlays.
++	 *
++	 * Do not use boot_relocate_fdt() here: it allocates from the bootm map and
++	 * may overlap with the FIT buffer (still needed to load the kernel /
++	 * ramdisk) when the FIT is loaded into RAM.
++	 */
++	base = map_sysmem(load, len);
++	base_buf_size = ALIGN(fdt_totalsize(base), SZ_4K) + CONFIG_SYS_FDT_PAD;
++	base_buf = memalign(SZ_4K, base_buf_size);
++	if (!base_buf) {
++		printf("Required FDT copy for applying DTOs failed: out of memory\n");
++		fdt_noffset = -ENOMEM;
+ 		goto out;
+ 	}
+ 
+-	load = (ulong)of_flat_tree;
++	err = fdt_open_into(base, base_buf, base_buf_size);
++	if (err < 0) {
++		printf("Required FDT copy for applying DTOs failed: %s\n",
++		       fdt_strerror(err));
++		fdt_noffset = err;
++		goto out;
++	}
++
++	load = map_to_sysmem(base_buf);
++	len = fdt_totalsize(base);
+ 
+ 	/* apply extra configs in FIT first, followed by args */
+ 	for (i = 1; ; i++) {
+@@ -2482,8 +2490,34 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 			goto out;
+ 		}
+ 
+-		base = map_sysmem(load, len + ovlen);
+-		err = fdt_open_into(base, base, len + ovlen);
++		/*
++		 * Ensure the base FDT buffer is open and has enough room for the
++		 * overlay. Grow it on demand.
++		 */
++		need = ALIGN(len + ovcopylen + CONFIG_SYS_FDT_PAD, SZ_4K);
++		if (need > base_buf_size) {
++			new_base = memalign(SZ_4K, need);
++			if (!new_base) {
++				printf("failed to expand FDT for DTO application\n");
++				fdt_noffset = -ENOMEM;
++				goto out;
++			}
++
++			err = fdt_open_into(base_buf, new_base, need);
++			if (err < 0) {
++				printf("failed on fdt_open_into while expanding FDT\n");
++				free(new_base);
++				fdt_noffset = err;
++				goto out;
++			}
++
++			free(base_buf);
++			base_buf = new_base;
++			base_buf_size = need;
++			load = map_to_sysmem(base_buf);
++		}
++
++		err = fdt_open_into(base_buf, base_buf, base_buf_size);
+ 		if (err < 0) {
+ 			printf("failed on fdt_open_into\n");
+ 			fdt_noffset = err;
+@@ -2491,13 +2525,20 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 		}
+ 
+ 		/* the verbose method prints out messages on error */
+-		err = fdt_overlay_apply_verbose(base, ovcopy);
++		err = fdt_overlay_apply_verbose(base_buf, ovcopy);
++		if (err < 0) {
++			fdt_noffset = err;
++			goto out;
++		}
++		err = fdt_pack(base_buf);
+ 		if (err < 0) {
+ 			fdt_noffset = err;
+ 			goto out;
+ 		}
+-		fdt_pack(base);
+-		len = fdt_totalsize(base);
++		len = fdt_totalsize(base_buf);
++
++		free(ovcopy);
++		ovcopy = NULL;
+ 	}
+ #else
+ 	printf("config with overlays but CONFIG_OF_LIBFDT_OVERLAY not set\n");
+@@ -2515,6 +2556,8 @@ out:
+ 		*fit_uname_configp = fit_uname_config;
+ 
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
++	if (fdt_noffset < 0)
++		free(base_buf);
+ 	free(ovcopy);
+ #endif
+ 	free(fit_uname_config_copy);
+-- 
+2.43.0
 
