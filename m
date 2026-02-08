@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C775EF06E3
-	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 16:04:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA86BEF06E3
+	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 17:46:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CCAF83642;
-	Sun,  8 Feb 2026 17:04:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C85958366F;
+	Sun,  8 Feb 2026 18:46:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z05dqJUt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pz8kMG3S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AB168366F; Sun,  8 Feb 2026 17:04:10 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 03BF883AA7; Sun,  8 Feb 2026 18:46:09 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5C8680325
- for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 17:04:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D72948341A
+ for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 18:46:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-4359a302794so1388777f8f.1
- for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 08:04:05 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-45c962424daso811900b6e.2
+ for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 09:46:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770566645; x=1771171445; darn=lists.denx.de;
- h=content-transfer-encoding:subject:cc:to:from:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1770572765; x=1771177565; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Dzo7Hx4n8smdo3erIKnfLW2BqjjYa6R58g0YaMGP7D0=;
- b=Z05dqJUtJURAmve4hFRyn93l+LtwFqP29MkU8ENs/oiOlbMKz8XLP+FEW5rWbkYk0i
- H4KDNrKXEvbqCI0dMixh5omNodc/wkQDu7yv4xCBbLvPFfExNN2QvQNbYgWaVosiwyBY
- P1mvlYr5ygqERW2MGtgdSfR3KHz3Lf7+Tu024rZYAgfwwdhEc53gsz2MI3b7B82vOp+k
- nB4KuXrnp4FCDwkY8KoJrpvKbjX7nqxZjqwOINWMNjxUFZpLlkEwD0lyz/z/kqnz4WVw
- j3m20SusKJmanyOinNN1D51gXs0qpVXzhwZmJuxK+rptvCgKOonwVb/9gyVzIYNCz7gS
- ee0g==
+ bh=xEvBosFB+vyInNzJfxSl+NtFKQ9KUsCGwOTLVJw8GHg=;
+ b=pz8kMG3SBf8h9uI5KPLofLltXaWsrLE6ZVInnV9s47gNS9UUYxcT8X2qPQR8EV8Gui
+ wRh1iCdNUzh4WZ1l+AuOwfcfXBXDAq5TVqiz783k64naW5EprP2qOPESITU77XaOkZT7
+ HMqNVqgSYzX0sQ4oGhqjd8dIuIuAzNmAdhNg0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770566645; x=1771171445;
- h=content-transfer-encoding:subject:cc:to:from:content-language
- :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Dzo7Hx4n8smdo3erIKnfLW2BqjjYa6R58g0YaMGP7D0=;
- b=CJG8silUGCpLc7bHjldbPsjx0ykzFJrbtV3xrtSxtZon2tEC3jsmdi+5J/krz1cRY+
- Nt7Eb8BFwPOrxU/pYsDnsyouYj9zJ0+j+7/sSz74iZqko0eHnEzTT4pB46Y2s6wHhgcI
- ivfLCn02/+5iDDWZ7qbDmDOJhFvs8YGppCVeUpv/EHIVhPu8TzbXcdXboLmnUA641HgS
- 7HNEYPRDeBtlqaSDmqbqxvMw2WfsB79lRHsHNT85K+BwBYr4sTDOeVFYSqGkYCMJDbRi
- /sO7dPdi5eMl6C78vrpqqzpflJpd+FZQIqhRJuBD60mQMyRadWh3ft/6xfUMarC7BYq2
- DIIg==
-X-Gm-Message-State: AOJu0YxTJuMSeSboXOZ6YbDf6ALCcGaSXY52z0SPcf3zojrpxIl21w6w
- 8KMU1PUoH3YPq3a28Qwgzj+8gTZisZDplXiqIFaQBDtNl69plcS9u5fYor2RqNFI54DPrqmprmU
- 1SDzuFJU=
-X-Gm-Gg: AZuq6aJ+rOv9jJEuqc8AMi2j6k9GIgQSrfsOkSJefc5zQHSlXv4dj1G95AV+qlbDCZK
- jMmEJClvdHr7kFrZgkoLROsLf2lb6jZrsZ1jKf8RVArxH/pvT9HddjL8i2CrDKso+NOMSFlmi74
- MUD9Y3axP8Qqt6PZqXQ5CrXTWKlOrx5UBaENmWSDxhqWFLUqIZGhkRGKmjjiTDBfTi9gSZuDlSx
- lFfgE1CWraIu46jVW5H0bLP+rPF7jvwjquAR28fR0kgzb1/KVHGi/LSOguemWPAiYyThlBdsFyh
- U7h4UqBqLuelS8MRBRQ4qBTgNOm/iZhwK0kkSIZprDBDCTvMS+hYg3fUUyvf5iiMh8B56S2rKZQ
- 4WtCOZeJeErFth3rcZCrGt1PXGH3yyCGeIVY5ZrtkckVsKhg09qyOfuiruxsKOIajjNh6iSOSh5
- ilsuykOhz+HWIh9hj7RQ==
-X-Received: by 2002:a05:6000:22c4:b0:436:1517:aec7 with SMTP id
- ffacd0b85a97d-4362933efb8mr12747037f8f.17.1770566645027; 
- Sun, 08 Feb 2026 08:04:05 -0800 (PST)
-Received: from [192.168.0.34] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43629745f7asm17662283f8f.33.2026.02.08.08.04.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 08 Feb 2026 08:04:04 -0800 (PST)
-Message-ID: <ab0c56f2-0f5f-4c6d-9a7b-4abb74adeb1a@linaro.org>
-Date: Sun, 8 Feb 2026 18:04:02 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-To: Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1770572765; x=1771177565;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xEvBosFB+vyInNzJfxSl+NtFKQ9KUsCGwOTLVJw8GHg=;
+ b=EQFUhlZ7SgLODig1EJ2OJ348+F0myg1WfKsdjkyiHVYHp8XnfB6kv/fr+HdStWsTej
+ JW87iAi5X0hZuNWTJ8eXC+L0durb7vQbcgMgl628/5thJEAFFBHfjIAn2kOX7k4Ch5nm
+ P3we6ZEGI+w7rAHnxmFlE7Z0Tbsdw9XjAlqaiJ4zg0iD+YzRwoZAEps7IjksbadaYyfU
+ zHWtJKLD/DtWJ/MUJSHorb3ssWGocwJz5m73uaIJSSEvF9Vxoum/g6KOiwv292uVNNaa
+ DSRaFA4tBil5u2snh8DOyBJmKSmnxfeGcRVCHzLjzShUig/xM6gXSajlatW4GR+O+xga
+ ZKnA==
+X-Gm-Message-State: AOJu0YwtalwHWznqcOs4Aw6HkkA5Opngn9QwAnyn0J0mZSgki2SqZyNd
+ 3tltS660F3p6/bylQNPr/9Rq+MsxtYeG/0VxqpU4MgtxB2VRVTJfSevMdVkrDfzyMh42HdeAr6g
+ MFjw8kS4=
+X-Gm-Gg: AZuq6aJ3yJy4X8q7/3L+PVAHKxlGf9xI3zxhGwq8J5yy7/tGjujktAdgna8ZcZuYV8i
+ uYO/CUnJF/0jB95tEHy0+VzZeVgYojva/VB6OGJHsSVEMsJaSe8LQ06BUE9xJ9MZs+kBZT73OiV
+ MS/NbJ67SUPE08dc+IWFP+AxjeSP0FL5VwhkiIGvW7UrNzszZmOElEbsw/FI/RZEhDHMzOmHK/t
+ 5CJObwAMAV7fjHmKLMvxT+jzmSQEDiEsgir4Czac+MWsuKRkTpClkEdPtYvbC9hqpR10dcyVlPM
+ C1M6U9/P/D81rbrNFY3gwIUvGBPh6dxOXgqnsfr9RdRR/xGaA2edIIMem3VFqIOhqhmljSuKf8w
+ Fo6muY2dY1kghaETpbhyt17SJw2nzdjXSL5AQ5wjpF3v/YPRgYZVkQopJsPUPJvcNbWC/0bIzZG
+ 6xViNceR/aebL8k2Yks7qQ7HhJFi+OKY2cCgl7RFpXgJkj0eu8QnLSZIOj7pA1Q8atVImVZs70F
+ BRPQmzzL+8odiUayidRwBD/FVlifalzkTGCBA==
+X-Received: by 2002:a05:6808:1598:b0:45e:e8ee:192 with SMTP id
+ 5614622812f47-462fcb8abfdmr5049208b6e.56.1770572765575; 
+ Sun, 08 Feb 2026 09:46:05 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-462feb5455dsm5066058b6e.17.2026.02.08.09.46.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Feb 2026 09:46:04 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>
 Cc: open list <u-boot@lists.denx.de>
-Subject: [PULL] u-boot-at91-2026.04-a
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <ab0c56f2-0f5f-4c6d-9a7b-4abb74adeb1a@linaro.org>
+References: <ab0c56f2-0f5f-4c6d-9a7b-4abb74adeb1a@linaro.org>
+Subject: Re: [PULL] u-boot-at91-2026.04-a
+Message-Id: <177057276422.533981.12351213358388902988.b4-ty@konsulko.com>
+Date: Sun, 08 Feb 2026 11:46:04 -0600
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,56 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, 08 Feb 2026 18:04:02 +0200, Eugen Hristev wrote:
 
-Hello Tom,
+> Please pull tag u-boot-at91-2026.04-a , the first set of at91
+> features and fixes for the 2026.04 cycle.
+> 
+> This small fixes set includes fixing 64 bit builds and some warnings for
+> the at91 serial driver, and some cleanup on the nand driver.
+> 
+> Thanks,
+> Eugen
+> 
+> [...]
 
-Please pull tag u-boot-at91-2026.04-a , the first set of at91
-features and fixes for the 2026.04 cycle.
+Merged into u-boot/master, thanks!
 
-This small fixes set includes fixing 64 bit builds and some warnings for
-the at91 serial driver, and some cleanup on the nand driver.
-
-Thanks,
-Eugen
+-- 
+Tom
 
 
-
-The following changes since commit a8d982e1f1726254ef27bbdf362f98954ee3feb7:
-
-  x86: cpu: Fix crash on FTRACE enabled builds (2026-02-03 12:51:43 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-at91.git
-tags/u-boot-at91-2026.04-a
-
-for you to fetch changes up to 1690228bac43cf5bb0dd4473abe68cca8400f23c:
-
-  mtd: nand: raw: atmel: Access device ofnode through functions
-(2026-02-04 14:13:02 +0200)
-
-----------------------------------------------------------------
-First set of u-boot-at91 features for the 2026.04 cycle
-
-----------------------------------------------------------------
-Andy Yan (1):
-      mtd: nand: raw: atmel: Access device ofnode through functions
-
-Robert Marko (4):
-      arm: at91: move atmel_serial.h to include/dm/platform_data
-      dm: platform_data: atmel_serial: fix build warning on 64-bit platforms
-      serial: atmel-usart: include arch specific headers only for AT91
-      serial: atmel-usart: add support for skiping debug UART init
-
- board/bluewater/gurnard/gurnard.c                      |  2 +-
- board/siemens/corvus/board.c                           |  2 +-
- board/siemens/smartweb/smartweb.c                      |  2 +-
- board/siemens/taurus/taurus.c                          |  2 +-
- drivers/mtd/nand/raw/atmel/nand-controller.c           | 18
-+++++++++---------
- drivers/mtd/nand/raw/atmel/pmecc.c                     |  6 +++---
- drivers/serial/atmel_usart.c                           |  7 ++++++-
- .../mach => include/dm/platform_data}/atmel_serial.h   |  2 +-
- 8 files changed, 23 insertions(+), 18 deletions(-)
- rename {arch/arm/mach-at91/include/mach =>
-include/dm/platform_data}/atmel_serial.h (90%)
