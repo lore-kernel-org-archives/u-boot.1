@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD27DEF06E4
-	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 20:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C81EEF06E2
+	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 21:26:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6FD78341A;
-	Sun,  8 Feb 2026 21:21:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 79C938341A;
+	Sun,  8 Feb 2026 22:26:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mDNi/71o";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZSucIdpm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0D8983642; Sun,  8 Feb 2026 21:21:12 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 8874483642; Sun,  8 Feb 2026 22:26:36 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62B9C805D7
- for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 21:21:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 034AB805D7
+ for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 22:26:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-43638a33157so708793f8f.1
- for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 12:21:10 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-7963b25e0ffso5960817b3.0
+ for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 13:26:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770582070; x=1771186870;
- darn=lists.denx.de; 
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e/Z2gf3jdcRruG3i9VdFsZTFsXfj3Z4P/M1d3sWlxXc=;
- b=mDNi/71oFsVF+mh1GdAopGi5urW5JoxcB5LtmbRa+c9rWYyKlTlaD9gwp5RfUaHhjz
- 3Y6xQiUrgXrL+NyMK9vZQvJQ67bK02yK4s2WbqEbPpu1QD7n1nO3gSy7izr7ELJG6Xao
- mXpbVzIqi07WkrKd2sS8E3crD6M5+1WpU5EBWUNjRFcrWlZ+c8IZUo7iX4VbpEIgIjUW
- GUXuOAgXEXpkG+GNIiuZCyu7MseFzbf9voJycMIyxc17TjpIMPIlGzbm6+vCeNFbMJNd
- TTqUtqAC+5chvVIZ2AeDwbMt/FcEIOwFq/9TDz1XQtijOtcY0WyDdVQT3RhCm6tncmye
- z4TA==
+ d=gmail.com; s=20230601; t=1770585993; x=1771190793; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DdGdWAtwxdkRHIp77UlvaySspmRxz6ElkM6AiYf+o6k=;
+ b=ZSucIdpmabDmHx3BbkehWvnAKBYQBlaz1hMMyUK5eS8FTnFa6Xr8091kngD3cxcYz+
+ UzCjyYRU1PmygoB5VHdzxBPGIb1MsLzoCbYpGxdqfj22DAv0kOt9AxLJXmAoZfQ23tni
+ 9wwxQeVyJ45phK2pwmN1+drRdjrR/XitLI5TrrbdjX2fCyWIE0URK/OUi5Uf8+KgjluA
+ a4JUEdg8LfonMx60Y3GkEcaj8bHRZaWrBcpHcszdVF0q3/1KrcJhnVWjPPS1LKyDpP/a
+ GLXyX33FMIXMMdm+RwapiwF6h5JKxcTwJg9rmi4Xt0U1bSGhAANb0puxfeyoz64q2h0d
+ F64w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770582070; x=1771186870;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1770585993; x=1771190793;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e/Z2gf3jdcRruG3i9VdFsZTFsXfj3Z4P/M1d3sWlxXc=;
- b=CIEdBcQ0YbPu2kD18yQaMCse0qe9UTOQ06C3Dmg97PfNIv3lgRs/U3PcookV9ZGy1F
- YBgiHrH6oNDvHo6OteC6kio1148mwRdLII4jsYN9CA/OHhLCDx7z16EVM5ZkLTmx1jZg
- Nqy+5j40UVKFB1aeGrIjdZTuFrrDU/j6J6k4zQSXbFhBgFGUye8HxQqvnYj7WZRx9aID
- BZlHoD29CtgIJa/OjflDfWLiqOVMnIU9DdW62p4Fh6wnFM51cJjO2thXgQVshdKfbAhY
- F90v95h5zWyrD4eo0gijbPnZiZoavWwRiMGtjdbLTWOnT4zOOXFqwSpDD0uBGB9h6S5z
- Z6/g==
+ bh=DdGdWAtwxdkRHIp77UlvaySspmRxz6ElkM6AiYf+o6k=;
+ b=nzFj5VSKmdPGu5QfVD3W5smRSU4Kgot92tdVznsmju9hLnkhZaIil61MaiMlmnwIVq
+ JP1vuL3TSwf4+Bnyk8oBbebIu/aSrhzLBTEhHDZdp+ig/pN/icgjmInA1DAFI38cTdT/
+ M0SlMVH3y1/mY38tD3XyIXglh983gi+VpnlYL9iJpY7ongIxIA7HV+WnFhDw8LAsowxi
+ Jdiw3s7bsMJpLX+QYnHwJmQjcfcr7SVEryeaemiJ+EZTckPzYj95NyHzW61D5W7Dzwuj
+ pA4hzUdKqcKFiVFpBD6Q2BfAXcd9oicd5ZRtAxpDM2kSN/sILHmj3TAUvtjY3D7kXDET
+ A3xA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVPffAJsuAJb8kNAMc19/YCLje7OYnMsjhEj3/2FGZR+zbogzovFudfP8ARJGcKnAAHk69ZPl8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwysISspuT3q4sah5XFhjOQNTs7Ei99YuVqbw+FgGfuYjlpBwkq
- dDSqNzAMUoJsV5Aw1YPohCx7UDVYCqDhrxhyqszfWiAcm8qOM0IFOz5EO7BRn5Fq2RA=
-X-Gm-Gg: AZuq6aIHKBvI+AUT6cSVq4nFBqbHdi9+h048UKnd4n6QtDtt0PGmG1pR0GGkuUI6D1U
- sG/yoYcwPuTNBLwqPtCJjOlzZoV6dPqcl7pvKwz+Io5oY6urseRunnlfaRyn3UctGB+Kl1j+Rx8
- 4UCPDNC9vM+f5oUyEjYu8BG478dv+HAvBLwtvo2Ai5PrFu5Cyx2Bpy3bcvRORP2NnHyvRokrjEt
- HemdJIps0sux8LKvHuhEeB5VHKC1ItDPM3lvuEMZu7BkWnwYn57W0RyAIhZah12BJV5IMK7L1c6
- n0C5GByNnPLuawuWXOyJ+aRMrgO/9RmmjsGbDaa8ze7jmABWm4I+CkPbIA/zBTXEiMXY4T3HYTQ
- jjaDL5ce9LehwxDciTl1NkMGE9+UAUX4t07MyaaDHxkexuPw+uJ265hxiYPDjVwfcfrwpMCSx0s
- UUdUbBJ4F4fmGHtA==
-X-Received: by 2002:a05:6000:1786:b0:435:a2f8:151c with SMTP id
- ffacd0b85a97d-43629242557mr13878372f8f.28.1770582069634; 
- Sun, 08 Feb 2026 12:21:09 -0800 (PST)
-Received: from localhost ([195.52.25.213]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4362972fa4csm20363689f8f.26.2026.02.08.12.21.08
+ AJvYcCUrYoG55+BTkuqy7LgOOhmCbU86l34nguVcsOSK45DSKvXev0mlVuFFtTzP1AeCY/cga+9P+cM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx9l2HeoJGP91qDUapEubuLm3nypLrxQqIaoVVLzdZj8bAOejWc
+ gAGw8nw7ff3Re0SUefAQFy7blxRYm8qAVbx+OT9gDxHAG60h73tfvUM4
+X-Gm-Gg: AZuq6aL9TiqffHw2lyIfgy0mYXO5lePrg7btDOBVAmpOk2NC66xx2PPuNzPsSHH+PRb
+ /zCp4e34bbTnipoGLkjXdsuf7tn/iizj2lNqv5inVq9wj8K1y280V44e2dyry9STvzIV5NggFui
+ cqme4AZvM+LAmdSvO8YFg9X6HdHkGfQ69p2+HNufYAgp+XvrECZYUKG+tl/JIv1aI/PfMB3e21V
+ SToGZ9+9toWczLon/OdzMfRq1Pi/f5fPCjhg9s7w/7pNfNTCJdhm0igORmK966jYhRy9hM74fk8
+ 4U5M9tb62vLQUzDRP3haQ6+8gJUA0A56J/+D0UkV3ZM+oW+AYBq9NnxtoZh4DR0NdO5oAakYb9i
+ FdGdNs5gp2reP84rSpsPLsNo9GTjqhdtpc7gpBZpTj4JBU5WSZZWpZEiCoSwrKirvhPk/kwSPYG
+ 9vtP9E0np42Bii5ib8wYBXhZuo
+X-Received: by 2002:a05:690c:d81:b0:796:39c2:bcf6 with SMTP id
+ 00721157ae682-79639d21a89mr33937007b3.1.1770585992643; 
+ Sun, 08 Feb 2026 13:26:32 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5d9f:efd7:6c6a:abf8])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-7952a085999sm75229377b3.25.2026.02.08.13.26.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Feb 2026 12:21:08 -0800 (PST)
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=e8f27dd5a400db107767ce049748f183c82710f3b76110abbbde32bcb8bb;
- micalg=pgp-sha512; protocol="application/pgp-signature"
-Date: Sun, 08 Feb 2026 21:20:59 +0100
-Message-Id: <DG9UYH3KEHMK.30RD25B27GEU9@baylibre.com>
-Cc: "Tom Rini" <trini@konsulko.com>, "Mattijs Korpershoek"
- <mkorpershoek@kernel.org>, "Andrew Goodbody" <andrew.goodbody@linaro.org>,
- "Kory Maincent" <kory.maincent@bootlin.com>
-Subject: Re: [PATCH v5 1/2] usb: musb-new: Relative ctrl_mod address parsing
-From: "Markus Schneider-Pargmann" <msp@baylibre.com>
-To: "Marek Vasut" <marek.vasut@mailbox.org>, "Markus Schneider-Pargmann
- (TI.com)" <msp@baylibre.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-63-gbde0bca3c3bc-dirty
-References: <20260130-topic-musb-probing-v2026-01-v5-0-195b23c7948f@baylibre.com>
- <20260130-topic-musb-probing-v2026-01-v5-1-195b23c7948f@baylibre.com>
- <c0c59409-95e4-46a2-ab19-06bd150cdec0@mailbox.org>
-In-Reply-To: <c0c59409-95e4-46a2-ab19-06bd150cdec0@mailbox.org>
+ Sun, 08 Feb 2026 13:26:32 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: kever.yang@rock-chips.com
+Cc: trini@konsulko.com, jonas@kwiboo.se, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@nabladev.com>
+Subject: [PATCH v2 0/7] ARM: Add RV1103B Omega4 board support
+Date: Sun,  8 Feb 2026 18:26:17 -0300
+Message-Id: <20260208212624.3413494-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,70 +97,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---e8f27dd5a400db107767ce049748f183c82710f3b76110abbbde32bcb8bb
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+From: Fabio Estevam <festevam@nabladev.com>
 
-On Sun Feb 1, 2026 at 7:18 PM CET, Marek Vasut wrote:
-> On 1/30/26 5:28 PM, Markus Schneider-Pargmann (TI.com) wrote:
->> For the upstream DT the ctrl_mod node is using a relative register
->> address which is not translated by the current code.
->>=20
->> Make address parsing understand relative addresses.
->>=20
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Signed-off-by: Markus Schneider-Pargmann (TI.com) <msp@baylibre.com>
->> ---
->>   drivers/usb/musb-new/ti-musb.c | 10 +++++-----
->>   1 file changed, 5 insertions(+), 5 deletions(-)
->>=20
->> diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-mu=
-sb.c
->> index bcd31adba522fc55190fc43fd2dbd2dec93a2731..75dc2dc18748e33785c7312a=
-24145544b659579d 100644
->> --- a/drivers/usb/musb-new/ti-musb.c
->> +++ b/drivers/usb/musb-new/ti-musb.c
->> @@ -83,17 +83,17 @@ static int ti_musb_of_to_plat(struct udevice *dev)
->>   	struct ti_musb_plat *plat =3D dev_get_plat(dev);
->>   	const void *fdt =3D gd->fdt_blob;
->>   	int node =3D dev_of_offset(dev);
->> -	int phys;
->> -	int ctrl_mod;
->> +	ofnode phys_node;
->> +	ofnode ctrl_mod_node;
->>   	int usb_index;
->>   	int ret;
->>   	struct musb_hdrc_config *musb_config;
->>  =20
->>   	plat->base =3D devfdt_get_addr_index_ptr(dev, 1);
->>  =20
->> -	phys =3D fdtdec_lookup_phandle(fdt, node, "phys");
->> -	ctrl_mod =3D fdtdec_lookup_phandle(fdt, phys, "ti,ctrl_mod");
->> -	plat->ctrl_mod_base =3D (void *)fdtdec_get_addr(fdt, ctrl_mod, "reg");
->> +	phys_node =3D ofnode_get_by_phandle(dev_read_u32_default(dev, "phys", =
-0));
->> +	ctrl_mod_node =3D ofnode_get_by_phandle(ofnode_read_u32_default(phys_n=
-ode, "ti,ctrl_mod", 0));
->> +	plat->ctrl_mod_base =3D (void *)ofnode_get_addr(ctrl_mod_node);
-> Is the cast to void * necessary , and if yes, can it be removed ?
+Hi,
 
-Yes it is necessary, ctrl_mod_base is a void pointer. It is used in
-clrsetbits_le32(). If I resolved that macro correctly that expects a
-pointer as well. Other drivers seem to use the void pointer as well.
+This patch series adds support for the Onion RV1103B Omega4 board.
 
-Best
-Markus
+It covers SPL, SPI NAND boot, and the minimal board devicetree required to
+boot the board.
 
---e8f27dd5a400db107767ce049748f183c82710f3b76110abbbde32bcb8bb
-Content-Type: application/pgp-signature; name="signature.asc"
+Upstreaming the RV1103B devicetree in Linux is ongoing, but to avoid blocking
+U-Boot support, this series introduces board-specific devicetrees for now.
 
------BEGIN PGP SIGNATURE-----
+Once the Linux RV1103B devicetrees are upstreamed, the OF_UPSTREAM mechanism
+can be enabled.
 
-iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaYjwLRsUgAAAAAAEAA5t
-YW51MiwyLjUrMS4xMSwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlP5
-hgEAjAlHuGLaqo57U4Z5niR8kJcL2SQfOb7i/KhU5N1wBBMBAM0fETHmgGXgLqT6
-kosfSgLtS97ntj2oQtL7jx8aMH8H
-=vugb
------END PGP SIGNATURE-----
+In v2, the correct SoC name was used: RV1103B instead of RV1103 (Thanks Jonas!),
+the RV1103B dt-bindings, devicetrees, clock and pinctrl drivers have been
+submitted upstream.
 
---e8f27dd5a400db107767ce049748f183c82710f3b76110abbbde32bcb8bb--
+The dt-bindings have already been reviewed by the Linux DT maintainer:
+
+https://lore.kernel.org/linux-devicetree/cadee46d-589b-4833-8650-691f7a0f8321@kernel.org/
+
+https://lore.kernel.org/linux-devicetree/a2be67b7-a33a-4d72-b5b7-fa900063b599@kernel.org/
+
+https://lore.kernel.org/linux-devicetree/47561412-cbaa-42c7-b8ab-9cafb7e0f9be@kernel.org/
+
+https://lore.kernel.org/linux-devicetree/20260207-hulking-elegant-ferret-8efcea@quoll/
+
+https://lore.kernel.org/linux-devicetree/20260208-analytic-fine-grouse-e17baa@quoll/
+
+https://lore.kernel.org/linux-devicetree/20260208-pearl-ammonite-of-warranty-2c9212@quoll/
+
+Tested the boot of a 6.6 OpenWRT kernel and also a 6.19-rc8 mainline kernel.
+
+This series has successfully passed through CI.
+
+Elaine Zhang (1):
+  clk: rockchip: Add RV1103B clock driver
+
+Fabio Estevam (4):
+  ARM: dts: Add RV1103B Omega4 support
+  rockchip: spl-boot-order: Add SPI NAND support
+  spl: add SPI NAND support via MTD in SPL
+  omega4-rv1103b: Add the initial support
+
+Xuhui Lin (1):
+  tools: rkcommon: Add RV1103B support
+
+Ye Zhang (1):
+  pinctrl: rockchip: Add RV1103B support
+
+ arch/arm/dts/rv1103b-omega4-u-boot.dtsi       |   10 +
+ arch/arm/dts/rv1103b-omega4.dts               |  105 ++
+ arch/arm/dts/rv1103b-pinctrl.dtsi             |  831 +++++++++++++
+ arch/arm/dts/rv1103b-u-boot.dtsi              |    4 +
+ arch/arm/dts/rv1103b.dtsi                     |  266 ++++
+ .../include/asm/arch-rockchip/cru_rv1103b.h   |  266 ++++
+ .../include/asm/arch-rockchip/grf_rv1103b.h   |   31 +
+ arch/arm/include/asm/arch-rv1103b/boot0.h     |   11 +
+ arch/arm/mach-rockchip/Kconfig                |   14 +
+ arch/arm/mach-rockchip/Makefile               |    1 +
+ arch/arm/mach-rockchip/rv1103b/Kconfig        |   23 +
+ arch/arm/mach-rockchip/rv1103b/Makefile       |   12 +
+ arch/arm/mach-rockchip/rv1103b/boot0.h        |    5 +
+ arch/arm/mach-rockchip/rv1103b/clk_rv1103b.c  |   32 +
+ arch/arm/mach-rockchip/rv1103b/rv1103b.c      |  133 ++
+ .../mach-rockchip/rv1103b/syscon_rv1103b.c    |   19 +
+ arch/arm/mach-rockchip/spl-boot-order.c       |   11 +-
+ board/onion/omega4_rv1103b/Kconfig            |   12 +
+ board/onion/omega4_rv1103b/MAINTAINERS        |    6 +
+ board/onion/omega4_rv1103b/Makefile           |    7 +
+ board/onion/omega4_rv1103b/omega4_rv1103b.c   |   19 +
+ board/onion/omega4_rv1103b/omega4_rv1103b.env |    5 +
+ common/spl/Kconfig                            |   10 +-
+ common/spl/Makefile                           |    1 +
+ common/spl/spl_spi_nand.c                     |   82 ++
+ configs/omega4-rv1103b_defconfig              |   82 ++
+ doc/board/index.rst                           |    1 +
+ doc/board/onion/index.rst                     |    9 +
+ doc/board/onion/omega4-rv1103b.rst            |   56 +
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_rv1103b.c            | 1068 +++++++++++++++++
+ drivers/mtd/Makefile                          |    1 +
+ drivers/mtd/nand/Makefile                     |   13 +-
+ drivers/pinctrl/rockchip/Makefile             |    1 +
+ drivers/pinctrl/rockchip/pinctrl-rv1103b.c    |  398 ++++++
+ include/configs/omega4_rv1103b.h              |   11 +
+ include/configs/rv1103b_common.h              |   14 +
+ .../dt-bindings/clock/rockchip,rv1103b-cru.h  |  220 ++++
+ tools/rkcommon.c                              |    1 +
+ 39 files changed, 3788 insertions(+), 4 deletions(-)
+ create mode 100644 arch/arm/dts/rv1103b-omega4-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rv1103b-omega4.dts
+ create mode 100644 arch/arm/dts/rv1103b-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/rv1103b-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rv1103b.dtsi
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rv1103b.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/grf_rv1103b.h
+ create mode 100644 arch/arm/include/asm/arch-rv1103b/boot0.h
+ create mode 100644 arch/arm/mach-rockchip/rv1103b/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rv1103b/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rv1103b/boot0.h
+ create mode 100644 arch/arm/mach-rockchip/rv1103b/clk_rv1103b.c
+ create mode 100644 arch/arm/mach-rockchip/rv1103b/rv1103b.c
+ create mode 100644 arch/arm/mach-rockchip/rv1103b/syscon_rv1103b.c
+ create mode 100644 board/onion/omega4_rv1103b/Kconfig
+ create mode 100644 board/onion/omega4_rv1103b/MAINTAINERS
+ create mode 100644 board/onion/omega4_rv1103b/Makefile
+ create mode 100644 board/onion/omega4_rv1103b/omega4_rv1103b.c
+ create mode 100644 board/onion/omega4_rv1103b/omega4_rv1103b.env
+ create mode 100644 common/spl/spl_spi_nand.c
+ create mode 100644 configs/omega4-rv1103b_defconfig
+ create mode 100644 doc/board/onion/index.rst
+ create mode 100644 doc/board/onion/omega4-rv1103b.rst
+ create mode 100644 drivers/clk/rockchip/clk_rv1103b.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rv1103b.c
+ create mode 100644 include/configs/omega4_rv1103b.h
+ create mode 100644 include/configs/rv1103b_common.h
+ create mode 100644 include/dt-bindings/clock/rockchip,rv1103b-cru.h
+
+-- 
+2.34.1
+
