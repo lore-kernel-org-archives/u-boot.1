@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07F9AEF06E3
-	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 15:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C775EF06E3
+	for <u-boot@archiver.kernel.org>; Sun,  8 Feb 2026 16:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02B4B8366F;
-	Sun,  8 Feb 2026 16:04:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CCAF83642;
+	Sun,  8 Feb 2026 17:04:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="omTcdS8S";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z05dqJUt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 512F583AA7; Sun,  8 Feb 2026 16:04:00 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 0AB168366F; Sun,  8 Feb 2026 17:04:10 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FA688341A
- for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 16:03:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5C8680325
+ for <u-boot@lists.denx.de>; Sun,  8 Feb 2026 17:04:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7cfccba483eso1192486a34.0
- for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 07:03:57 -0800 (PST)
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-4359a302794so1388777f8f.1
+ for <u-boot@lists.denx.de>; Sun, 08 Feb 2026 08:04:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770563036; x=1771167836; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RsFUl0cgxrO+4GWJOtKlL4HY2dZylWI9PI7RokT1Gs0=;
- b=omTcdS8SdiUf9e/x3E3bIUQbDtFROS6ZvmMcL/jZt7IrWQ7Pfl4yKj7lNxPjeHZSzE
- yFf7GrexRGHiY5mBkPA8gm4weSZyJXoTAq5YeFkyXNx5VHX30xvW7uYgN4NdrKrleUEA
- Csh6rQoNBSEd5yzgyxoKwZ4cMWNyg89otPZdc=
+ d=linaro.org; s=google; t=1770566645; x=1771171445; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:cc:to:from:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Dzo7Hx4n8smdo3erIKnfLW2BqjjYa6R58g0YaMGP7D0=;
+ b=Z05dqJUtJURAmve4hFRyn93l+LtwFqP29MkU8ENs/oiOlbMKz8XLP+FEW5rWbkYk0i
+ H4KDNrKXEvbqCI0dMixh5omNodc/wkQDu7yv4xCBbLvPFfExNN2QvQNbYgWaVosiwyBY
+ P1mvlYr5ygqERW2MGtgdSfR3KHz3Lf7+Tu024rZYAgfwwdhEc53gsz2MI3b7B82vOp+k
+ nB4KuXrnp4FCDwkY8KoJrpvKbjX7nqxZjqwOINWMNjxUFZpLlkEwD0lyz/z/kqnz4WVw
+ j3m20SusKJmanyOinNN1D51gXs0qpVXzhwZmJuxK+rptvCgKOonwVb/9gyVzIYNCz7gS
+ ee0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770563036; x=1771167836;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RsFUl0cgxrO+4GWJOtKlL4HY2dZylWI9PI7RokT1Gs0=;
- b=j5WVEpycdY1F1WgcFZGuyKfBVye9OZagwHCZlEcrBQfROufWxSXbw09rHyOuYaBgIw
- kHGWftEOOtM1uvNRwVzhb9oRAD13JtrsV3CsQQxdsuT8cDrOawQv0qVvm997q9h3ZOdg
- mX0C+JoliWrqfiNtkzT5uIXJXndihL6cVYikiA1J78scIzOGAeDRtO5TxQuq/Rt41C9T
- zNiOmzF5Gb4EwvclYOVKHH9HCZQWvpS0YGzVHmCwyDgWCwGm6i888cO4GpOn/XweUESF
- YLDKw08vJN8ffT4grxzeJTW9QJum4tM5pTKcSYlbIXoVhYS7CJSGEdpV9/Y6oKkkWnUJ
- eDUQ==
-X-Gm-Message-State: AOJu0YwK2D59BN+QkQrqX/hW04eu3nvTr1zEiEYG8TSgt0KLXYO7odqc
- +/mAzgX2ezWeG4jwwyfVFxLatS6Pselmw6QYzK92p5UAHvPH0oj7OmB1Yr3UxgFEivI=
-X-Gm-Gg: AZuq6aLRgNv1WBbv392lrx+GomfwFN3vtkTKdDgUX1MMF9WFwao/atPk/SrdtASscz4
- R6UtTe8yYnMq62+wHP+6ZilDOz9EVQolnBh/cNx+Y4wnZ2SmTXd62aIdieA9bWWvI5Qz/bK3qek
- Au/GR5PUy3XS8RMMYMWxnsPY/OsG84oql0e2eIZgjwYX5SftqJxSmqonq2lSxrY+2tYt+vPmU4U
- ElLnQlUfYIiK9J4qw/VF1eS2UFT61douzl3ybMWcUIngnmQlFmgxZEFNUZp1ofKufHxENeFMtyP
- Bdlr9xnhzxHN0MV+I4CTFXfGaK1syerr0pnrPM3daH+Xx5Sz6+85ziEB4l+nRt1DUYGbFH/Glck
- kBg7Gw75mb2kJqQecc6dvvzNZ9J6BtJu8SZ8XtKQ0Q5pK9uW102g1+fsGLiff/z+NvYOQbtf8UM
- 9acSXUU4NlamzR2jCO2hDcokbSRmj3Df3ZCpSNgK86JzPrT2ycXIAUSFhltP7a9yfQbwfwjbfDf
- Y1WFZ5C1Q8IQL9F7MLJ8tJTpAKkrI4ntAslLGU=
-X-Received: by 2002:a05:6830:67fa:b0:7ca:c803:f539 with SMTP id
- 46e09a7af769-7d4643d3de3mr5457976a34.5.1770563035934; 
- Sun, 08 Feb 2026 07:03:55 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d464710c95sm5670587a34.12.2026.02.08.07.03.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Feb 2026 07:03:55 -0800 (PST)
-Date: Sun, 8 Feb 2026 09:03:53 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Peng Fan <peng.fan@nxp.com>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH] cmd: mmc: Drop trailing space in Name: before newline
-Message-ID: <20260208150353.GC2603314@bill-the-cat>
-References: <20260208145142.10341-1-marek.vasut+renesas@mailbox.org>
+ d=1e100.net; s=20230601; t=1770566645; x=1771171445;
+ h=content-transfer-encoding:subject:cc:to:from:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Dzo7Hx4n8smdo3erIKnfLW2BqjjYa6R58g0YaMGP7D0=;
+ b=CJG8silUGCpLc7bHjldbPsjx0ykzFJrbtV3xrtSxtZon2tEC3jsmdi+5J/krz1cRY+
+ Nt7Eb8BFwPOrxU/pYsDnsyouYj9zJ0+j+7/sSz74iZqko0eHnEzTT4pB46Y2s6wHhgcI
+ ivfLCn02/+5iDDWZ7qbDmDOJhFvs8YGppCVeUpv/EHIVhPu8TzbXcdXboLmnUA641HgS
+ 7HNEYPRDeBtlqaSDmqbqxvMw2WfsB79lRHsHNT85K+BwBYr4sTDOeVFYSqGkYCMJDbRi
+ /sO7dPdi5eMl6C78vrpqqzpflJpd+FZQIqhRJuBD60mQMyRadWh3ft/6xfUMarC7BYq2
+ DIIg==
+X-Gm-Message-State: AOJu0YxTJuMSeSboXOZ6YbDf6ALCcGaSXY52z0SPcf3zojrpxIl21w6w
+ 8KMU1PUoH3YPq3a28Qwgzj+8gTZisZDplXiqIFaQBDtNl69plcS9u5fYor2RqNFI54DPrqmprmU
+ 1SDzuFJU=
+X-Gm-Gg: AZuq6aJ+rOv9jJEuqc8AMi2j6k9GIgQSrfsOkSJefc5zQHSlXv4dj1G95AV+qlbDCZK
+ jMmEJClvdHr7kFrZgkoLROsLf2lb6jZrsZ1jKf8RVArxH/pvT9HddjL8i2CrDKso+NOMSFlmi74
+ MUD9Y3axP8Qqt6PZqXQ5CrXTWKlOrx5UBaENmWSDxhqWFLUqIZGhkRGKmjjiTDBfTi9gSZuDlSx
+ lFfgE1CWraIu46jVW5H0bLP+rPF7jvwjquAR28fR0kgzb1/KVHGi/LSOguemWPAiYyThlBdsFyh
+ U7h4UqBqLuelS8MRBRQ4qBTgNOm/iZhwK0kkSIZprDBDCTvMS+hYg3fUUyvf5iiMh8B56S2rKZQ
+ 4WtCOZeJeErFth3rcZCrGt1PXGH3yyCGeIVY5ZrtkckVsKhg09qyOfuiruxsKOIajjNh6iSOSh5
+ ilsuykOhz+HWIh9hj7RQ==
+X-Received: by 2002:a05:6000:22c4:b0:436:1517:aec7 with SMTP id
+ ffacd0b85a97d-4362933efb8mr12747037f8f.17.1770566645027; 
+ Sun, 08 Feb 2026 08:04:05 -0800 (PST)
+Received: from [192.168.0.34] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43629745f7asm17662283f8f.33.2026.02.08.08.04.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 08 Feb 2026 08:04:04 -0800 (PST)
+Message-ID: <ab0c56f2-0f5f-4c6d-9a7b-4abb74adeb1a@linaro.org>
+Date: Sun, 8 Feb 2026 18:04:02 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zNc6IAEyvs4FoamL"
-Content-Disposition: inline
-In-Reply-To: <20260208145142.10341-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: open list <u-boot@lists.denx.de>
+Subject: [PULL] u-boot-at91-2026.04-a
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,33 +99,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zNc6IAEyvs4FoamL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Tom,
 
-On Sun, Feb 08, 2026 at 03:51:03PM +0100, Marek Vasut wrote:
+Please pull tag u-boot-at91-2026.04-a , the first set of at91
+features and fixes for the 2026.04 cycle.
 
-> The Name: line of 'mmc info' command prints a trailing space before
-> newline. This is not useful and shows up as trailing space e.g. when
-> the output is checked into documentation. Remove the trailing space.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+This small fixes set includes fixing 64 bit builds and some warnings for
+the at91 serial driver, and some cleanup on the nand driver.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Thanks,
+Eugen
 
---=20
-Tom
 
---zNc6IAEyvs4FoamL
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+The following changes since commit a8d982e1f1726254ef27bbdf362f98954ee3feb7:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYil1QAKCRAr4qD1Cr/k
-CoNnAQCZS2yeNfNdTsD0e2rbyC421kNniR68h8WDkZFXYD662gD+PerCAXfdYe4Z
-MFJ+nHP6HYmTXj2fdM/vEqKPtcUInAg=
-=quFW
------END PGP SIGNATURE-----
+  x86: cpu: Fix crash on FTRACE enabled builds (2026-02-03 12:51:43 -0600)
 
---zNc6IAEyvs4FoamL--
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-at91.git
+tags/u-boot-at91-2026.04-a
+
+for you to fetch changes up to 1690228bac43cf5bb0dd4473abe68cca8400f23c:
+
+  mtd: nand: raw: atmel: Access device ofnode through functions
+(2026-02-04 14:13:02 +0200)
+
+----------------------------------------------------------------
+First set of u-boot-at91 features for the 2026.04 cycle
+
+----------------------------------------------------------------
+Andy Yan (1):
+      mtd: nand: raw: atmel: Access device ofnode through functions
+
+Robert Marko (4):
+      arm: at91: move atmel_serial.h to include/dm/platform_data
+      dm: platform_data: atmel_serial: fix build warning on 64-bit platforms
+      serial: atmel-usart: include arch specific headers only for AT91
+      serial: atmel-usart: add support for skiping debug UART init
+
+ board/bluewater/gurnard/gurnard.c                      |  2 +-
+ board/siemens/corvus/board.c                           |  2 +-
+ board/siemens/smartweb/smartweb.c                      |  2 +-
+ board/siemens/taurus/taurus.c                          |  2 +-
+ drivers/mtd/nand/raw/atmel/nand-controller.c           | 18
++++++++++---------
+ drivers/mtd/nand/raw/atmel/pmecc.c                     |  6 +++---
+ drivers/serial/atmel_usart.c                           |  7 ++++++-
+ .../mach => include/dm/platform_data}/atmel_serial.h   |  2 +-
+ 8 files changed, 23 insertions(+), 18 deletions(-)
+ rename {arch/arm/mach-at91/include/mach =>
+include/dm/platform_data}/atmel_serial.h (90%)
