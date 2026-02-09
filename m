@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A75F4E7E0CD
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB62E7E0BC
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:38:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E882E805D7;
-	Mon,  9 Feb 2026 18:38:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 337CF83C23;
+	Mon,  9 Feb 2026 18:38:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yKHaw6hj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="imhUJGY3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82A0183C61; Mon,  9 Feb 2026 18:27:26 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 2BCC683C54; Mon,  9 Feb 2026 18:27:27 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51E3483BF4
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 18:27:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 102B883C54
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 18:27:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7d1959ba05cso2219152a34.2
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 09:27:24 -0800 (PST)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-45c889aba0dso3433210b6e.0
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 09:27:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770658043; x=1771262843;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770658044; x=1771262844;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3nHp7431rnSK6Lp5SBuMZz1Tj0rytsNe7cU8pYzMJH0=;
- b=yKHaw6hjWW2jiEfFjHhRkFNARKpLw18VzkvuWp21T4w6Lsa1RI2GoRRhJ5ohcoHuzM
- UHjfE9i/phAbsX+VGZd+RbE6+ZreeQEAw4ojii3IpfoeB6DdtdErLevczwObLBQM9Iu7
- /r5Margp0RBhZ5FziDyfLWsTBT5EfAuyLsPsRvPNpdLH7xM8A3amffMGx0yJ4x670uyH
- tOvAlM9jUzbG3+XAu2bENW7YHisgbye2Yf1zoOAYduXPgBPIw4/Q22/h8skqPrDXdwdr
- U/eZDB4gXrN1TqcJaVZQicQlPQlDfF7t0XSK5aAIUeHQwXHq7pEfaudVIMpui0Z8u9yW
- Rhwg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=+NORPSMZCz5cmEUjzbDbHMSHtKv4rQgC9bGJeW/Yrtw=;
+ b=imhUJGY36aaUv3DJYKRxUNxYmI8sYJm1fGKQCVBlgvtKB93HCAVzJDNRfrdZhQtXkk
+ d8+TWQImxC2ac7i4CvotRlkTvV6ip760b+VYc72ue7I3O7tPumJF2+YiLmKb7Y20kBeo
+ c/MdGvcqzdysjM0Alu1lvtkJm5OA69nUeegx5eUkaeF+jknz/Etak0sVW8dwzxlwszek
+ 21DJUjfYZm3lzxVtb+9kO1M77UWO+nB+MhdfVhfMZDCLq/t/Tz7p9WGuiiHQmPJsVqt3
+ s1vLX7bZgqkh3VuJ0NZjQFpbXtvjF7sTmWoguPm6sxbZmglleSr/P8OBbZCQDm1hXqkw
+ 5v9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770658043; x=1771262843;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3nHp7431rnSK6Lp5SBuMZz1Tj0rytsNe7cU8pYzMJH0=;
- b=ds3bDRsrrnB+sF1kapHL+GOt2yzMaVTWxJ3unLB+rxRDlwF0RVEkMrW0xd6069txp1
- +mpIdH79+3nm9vYmKkYpnTnoSYSvHiYGSKs5Vo/cXK0Kf9+Idov070bjsHfa8m/ybIX7
- lBpglNvFD04m/LFhAc9f0JU2Bobc85UnZnj68q0Li7ds+xWHTmwzV9Y/1UGd1vHBx7G2
- 5I0S3gNWuNuk8jvBd9t3NPTG+aXJuztikKmh6Vb3BrgQnsD9KL9po4/JPzR7FGdEzTwq
- tSIKDMGrh3sEauXbh1XZRNodsOJO4N3DiR+he/oy/7tOvJJhVyyd/wARlZ2a4nNf5JKL
- EeQA==
+ d=1e100.net; s=20230601; t=1770658044; x=1771262844;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=+NORPSMZCz5cmEUjzbDbHMSHtKv4rQgC9bGJeW/Yrtw=;
+ b=jfRgYuV0hxoPqSIVIyYA1MFAorLECfrNtoNn41xPZnK4a73eRgoP/naRKevjbX/zSK
+ AO5gJs2JXutGqbtNzQ2DYrBL8dUb1yaQN6L3ZJjjpxMzVvPY0kVcotoUCP1LWxyTgS/k
+ fEAPvpdvV2VOtbah3lAhBf374vIhGg+znSIZZCfogmvzUYYv0jqSDeSTPgIYBNg9wf92
+ KEnNSZ8Zk6vGEAv3ucE0vzvoBjMA+7WhC7a8H215CAzdNAHeBVJxqUufPG+bLeaRFIGn
+ 2TemvjyaYXeFAR+Zi/ZK4j0hD6FeWolgfMEC1G+JYds9VhIaUntYUau+GhYsh79WlaBF
+ ao5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyJGKouvW8yOZT5IC9eir/I/JcrYe+0/9gDAXhFZzzngBw0bjUYi9Wpryz4GXYVgvWnA3IFfQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywy/wJdIZ1DJKB1Z81/kNWRcJ9ulp1Hdx3siBYmObp3u2J0uZ43
- p+zOzh3O27Xu25a4HLfOAPt7EGEdZH3OnEtcO2rfTX1+M68r7GUERBX941Dy91Szems=
-X-Gm-Gg: AZuq6aIq4KpamruON/x9S9WFecjrrcrj9b6DhAtjdI/HRKOc/1RdfF2jDNYeKUbn1gr
- pgLiY5mgJ5nOFR+qGV30JcffoLyeAB0XtFVsTjbqbfY1uZuh4jHDDYwnWVBa1fHN/Jxwr4ah0pl
- A1biePCGaZJIvpCvEbyMHbG5VnNfcNc4+9NwlsE5oreC/mX26vjI2cjb3wCvh/I6MhqBDInID1K
- TJ1jLq3940A9CosEcBH6Sqaf0W2LYt6l/LtaizszejeZNNUFjIlVWQe4rbtpSET2u3wDTVX4+tc
- y1jN8KZRO7607FV/z4NoODs++H6ssC/tfCd2IA4eAtGwWT6f1MlrEZaYs9f7sXM3MGTKAmmx84o
- uNTpRuI6Gwi19mznpT5po8GcSMDLGeKZIm9sraF4/k8HuUZSjfwsMhRrXtmJdnOT5gkb9bVkxE4
- jaLqIiJWWHWV22rds=
-X-Received: by 2002:a05:6808:4f66:b0:45e:801c:a0ea with SMTP id
- 5614622812f47-462fcadab25mr5854880b6e.32.1770658043026; 
+ AJvYcCXdxjpCV766j3CEojCcCGVohw03iNheGiIEIWQNT9Ad72jA6HrjW6MYz0QOTi5+6npCDx/0hFg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwVkgzATAp+s9D5gueGwgIm/0dGvzxllYreiq70yT90yi4dN6vw
+ MiTirm79fM+vv2oiECzOuksJtlih3PWqxURUVbSK3Noh/wrlb9/W/4zby371jwUKcLE=
+X-Gm-Gg: AZuq6aK8DiCcJDCofhqY3zYeSDLen07kdzPrMSX7AHUk4dDeSTUakRmtVkS1Frh0XCB
+ xqO6xC5BM+swRYbPypunVk/k2GvOCmwOp0hr+woerYSarURAq97xN2HSa5ycyx4splUaMSRb7NK
+ c/DF1gqzAegTGwHefDwnYQgrpHl3Ket49vVsiUUcG5K0V4Ad0G63SdTI5ciDcXeVg/N95Ca5a4g
+ 5+2ReOyt9Hws63I+h+jQySubFN1hRlgl1MHxpRELN11H+rpo+w/vycHc02TkHDTdWtbHN1MqrkT
+ U1jMJntrYFX99i/6Ry+zs+VuCWoKBKm+nUTKAHl8cDj8hWfRhLRBjqtxSBcxlqLiusHOQ5evxQR
+ TUVc+IZziTJxMPNMXCnJZuTRm7tdxMd2qJBHq9NGHxtiiLhhsvoJPI7IjqeL6FyvNUJs1th4Rbc
+ 3xLCDZ3fgwR6Du67U=
+X-Received: by 2002:a05:6808:14d0:b0:450:b92c:aaa2 with SMTP id
+ 5614622812f47-4634f86fc5amr88500b6e.18.1770658043809; 
  Mon, 09 Feb 2026 09:27:23 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:cee0:eb0c:b683:ad1d])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-462fe9de7ecsm6695383b6e.9.2026.02.09.09.27.21
+ 5614622812f47-462fe9de7ecsm6695383b6e.9.2026.02.09.09.27.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 09:27:22 -0800 (PST)
+ Mon, 09 Feb 2026 09:27:23 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH 0/2] arm: dts: mt7622: use generic node names
-Date: Mon, 09 Feb 2026 11:26:54 -0600
-Message-Id: <20260209-mtk-dtb-fix-spi-bus-bridge-warning-v1-0-84e3e2d8352d@baylibre.com>
+Date: Mon, 09 Feb 2026 11:26:55 -0600
+Subject: [PATCH 1/2] arm: dts: mt7622: Fix SPI bus bridge warning
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2N0QqDMAwAf0XyvEAtVNBfGXto16hB1knidFD8d
- 4OPB8ddBSVhUhiaCkI7K3+LQfto4D3HMhFyNgbvfOe86/GzLZi3hCP/UVfG9FNMwtnMI0rhMqF
- rfZ9CyCHEESy0Cpl9T56v87wAzCju1XQAAAA=
-X-Change-ID: 20260209-mtk-dtb-fix-spi-bus-bridge-warning-0129b55d55af
+Message-Id: <20260209-mtk-dtb-fix-spi-bus-bridge-warning-v1-1-84e3e2d8352d@baylibre.com>
+References: <20260209-mtk-dtb-fix-spi-bus-bridge-warning-v1-0-84e3e2d8352d@baylibre.com>
+In-Reply-To: <20260209-mtk-dtb-fix-spi-bus-bridge-warning-v1-0-84e3e2d8352d@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
@@ -91,17 +89,17 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=856; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=866; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=kKH+ojNKPfx8c9E+Q8Ztq8BpaZWovFqXYxYc5lT1Yrw=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpihjkVS76ZcAn86g1BQ/pBxz2V9thVP+RSMv9Z
- qnBNZ1wm5yJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoY5BYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A09YH/3yp2aTiHNlk0KhLkwnMKCiRM7fzdceep5j2Qpf
- 3fZTliSuGfVo4WWbWSfXjAbjCS/pa4oq980TUqRpJNBbCq7+gFyN2kNDDS22g2nL5jkhoiPhaeg
- OAwSckn35ThUGUE3o4mEHknicq72lJ6dVRW4v2mfzMzK+0sK/6Jx/s6+9InlDg86vnp/kIc7vqk
- Yd1+ZgxIDnxDNGq43K9vD0Bhe4rSQePc4gCdvVl5ftjvtzswZfujOv/424DOknXA3dxC8rwAThe
- eLO6NmJq8dsFZPRMXnEce8x8ys15iSJttsXoNFz1Yz03tU5SD6lX60xudL7znDXR17s24aInv6Q
- r8Kw=
+ bh=nQWgngks15mffGIbkp0Tvi68thR3PKnODzgLSZD+rwk=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpihjscIq0CVmI9XKV39DK6ptiiuaDmk22YHVkH
+ iRJ5Yhwbo6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoY7BYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AQlQIAKBE9IAoufdwGlwqpHIU2h3wruD7hT2qib+r2YR
+ fO/MPFZvwCx2H16Ss3gwYF7HSBIKp0Ic5occRw95Y2wTsSuSIE6TlSgvZcGV+2ow/GdoqJleLHF
+ 1JOcDZbZ+GAqZWRqxY8CdryyhjBvYhcy/uIhafV6WU5SWCX6TLBKwoCXT4wo+uYwliUh8fXslWF
+ N1SZ06D6H6xs3FdzXVYSP4dtJIkOkR0BgTcLHeJnhp9oh4Z/a3t2LYT/pxkKCWUCaJB63/d6SdZ
+ unYi8ulT3yyEAc8pwgErNzNX8i6Z7v5Zj8c7hS242Pc4C5dxu5s5y3v7vxrj+sMaXJwGBmHi6bj
+ GxXU=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Mon, 09 Feb 2026 18:38:26 +0100
@@ -121,26 +119,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While compile-testing things to make sure I wasn't breaking other
-platforms when making mach-wide changes for mediatek, I kept getting
-a warning about a a SPI controller node with the wrong name in
-mt7622.dtsi. The first patch addresses this. And since we are here,
-I added a second patch to generic names in general in that file even
-if they aren't causing warnings.
+Change SPI node name to generic "spi" in mt7622.dtsi. This fixes the
+following compile warning:
+
+    w+../arch/arm/dts/mt7622.dtsi:56.22-65.4: Warning (spi_bus_bridge): /snor@11014000: node name for SPI buses should be 'spi'
+    w+arch/arm/dts/mt7622-rfb.dtb: Warning (spi_bus_reg): Failed prerequisite 'spi_bus_bridge'
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-David Lechner (2):
-      arm: dts: mt7622: Fix SPI bus bridge warning
-      arm: dts: mt7622: Use generic node names
+ arch/arm/dts/mt7622.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- arch/arm/dts/mt7622.dtsi | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
----
-base-commit: 42b3ee7fa5248ad89467aaf2585f4a08aedd4731
-change-id: 20260209-mtk-dtb-fix-spi-bus-bridge-warning-0129b55d55af
+diff --git a/arch/arm/dts/mt7622.dtsi b/arch/arm/dts/mt7622.dtsi
+index 2d89fa08b4d..12c501711bb 100644
+--- a/arch/arm/dts/mt7622.dtsi
++++ b/arch/arm/dts/mt7622.dtsi
+@@ -53,7 +53,7 @@
+ 		#size-cells = <0>;
+ 	};
+ 
+-	snor: snor@11014000 {
++	snor: spi@11014000 {
+ 		compatible = "mediatek,mtk-snor";
+ 		reg = <0x11014000 0x1000>;
+ 		clocks = <&pericfg CLK_PERI_FLASH_PD>,
 
-Best regards,
 -- 
-David Lechner <dlechner@baylibre.com>
+2.43.0
 
