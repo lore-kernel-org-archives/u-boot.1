@@ -4,76 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F6BE78D74
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 16:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 271D6E81BD3
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:12:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79FC580325;
-	Mon,  9 Feb 2026 17:05:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
+	by phobos.denx.de (Postfix) with ESMTP id 16E82805D7;
+	Mon,  9 Feb 2026 18:12:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="Y4HAoSU4";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZsMWLjW2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D30D802C1; Mon,  9 Feb 2026 17:05:04 +0100 (CET)
-Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [IPv6:2a0b:5c81:1c1::37])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB2D380325; Mon,  9 Feb 2026 17:40:26 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D3CA80325
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 17:05:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 593BE80325
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 17:40:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=iki.fi
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marko.makela@iki.fi
-Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: msmakela)
- by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4f8qK71zb8z49PvN;
- Mon, 09 Feb 2026 18:04:59 +0200 (EET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
- t=1770653099;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LwrtX9Jwn0k+Deh3xSvv1z5U2dFzYGBJijGpTwY97xs=;
- b=Y4HAoSU4N/582glclrs9e91rDqs+2UNwgnB679fTu95NPs+uOfFL+nUHPfM3TrTzRFHJTU
- fCPx9vaox5MmyK89XwQeYdvZm2U+m1F+m2gWwzQJuezXn5EXpUFVMheSH+Pdpe185Gvyri
- +PJ+6o5xDD5jBZbrt2GcpCoiFtzjShbZDqGzIszUKOn4iNPu0/YNY0s6Wm65XmOw9rKG2W
- q+VZ8PQcUWlAUVOAd4GDXdhQbrwBTlwAFU4SU04e+3ssMZnm+2qdrFT/F448lUK4OdXO6z
- HpSWKR61uLIfwhTMrWbxrpNp37jVoRIuhcPZI8MrFKmEqKawd4+X5GObyXzQnA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=lahtoruutu; t=1770653099;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LwrtX9Jwn0k+Deh3xSvv1z5U2dFzYGBJijGpTwY97xs=;
- b=LMEZipaQqsJNCUzmbJA9OtZwdvNnG7JK7nXHC/tzZIHxQQwHifcxF78JhPKb6Qd9IG4ueX
- nCWozSTdmwnuNEtXGGRYRzpOe9SRcbneW0hVevNMqTsdx8zHBwIyvIEZQpfSzN/YHRBqx+
- SwNgKhhwiDFm5dmw/4HJ1jNRxZfyFoG3vr12sdXc71ZKO+jzvH/Oy1CXeBGZEvSxBFXsPt
- WhrfKW8MKazFclaS3BgPNGRHCtMi7xR+bp+6tld4ZSA1EeYrOWF6520Zs+ldZrEieZ4xWB
- wONBeIEIM6nVYtKq7KTt0Nn/kSxgvyHmCg5uez8OGg7cFFw4SJo0Utfya8pAsg==
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1770653099;
- b=U84czn7V/jG/oVbtUqwHkm9twPYkIRtkSqdsVmMpTBvCyAiQ6Sr1MhcLApW1al9007eSUW
- 2Sj9R0WBP0qPZxzyzyE1YrmLhV6gMxGvxTa9SFHYiJ4Vok66pE/LlaqNjyx7PY7FbNXF1R
- AaI3qXZvuFbSf9khx/y3Lh9mxvu+3nhgjyA255QWTiwOgYHCM/5B8QlsGFJ0GzYp3aYB48
- IXaeHV7ray+S4odfSQdDOuBSeJ2eYhEBegNnG8KmDX9VyKXP5siaJsvrtfg9plKt0zKdzW
- wi/3093jmqY/v5knG+4rEnyYJbdvqj8GRSVvHA+Kn7lkI0L7AbEOYJE29HUrrQ==
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
-Date: Mon, 9 Feb 2026 18:04:57 +0200
-From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: jonny.green@keytechinc.com, raymondmaoca@gmail.com,
-	u-boot@lists.denx.de
-Subject: Re: [RFC PATCH 0/4] add software ecdsa support
-Message-ID: <aYoFqWew28crCb1i@kehys.lan>
-References: <20260202170307.217200-1-philippe.reynes@softathome.com>
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d1851d85daso1182097a34.1
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 08:40:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770655223; x=1771260023;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O/D6UJIErIuubAh79jr2Jk9DAzywbEtP3NW2ik1LJEw=;
+ b=ZsMWLjW25ZF6BTzZ4Yi8n/EhsfH+Ud2k1OMBy2E1XZ5jz1zsAXs/c5nPTR1SBG7vNx
+ c2odv+WSWfxAUqiIhyCbZ2qkD1d5y9Z9+xPKjGSUVVQ5HG8Eobjqy0Fndg0Co4HTpCad
+ 3U6h20HjvtcZHCPDM2tQbtLvbX/xKtoK4oOBBD9HtHr5NNaX8ctA90GP6fscRXLozcEW
+ c/uxOivHFzSaodF2YG5RCXY3lpayszwXWXWlGkfI0I4l0pfotCCruRRsgettcN8wcP6k
+ Zk/NVyz6o2z7/9ISMgxxs7oaNfBZ4PUrDijLdVYsAjaTNoN6VfgtYAiKMTbEbsAl+v0E
+ PC1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770655223; x=1771260023;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O/D6UJIErIuubAh79jr2Jk9DAzywbEtP3NW2ik1LJEw=;
+ b=bWFCwytVznv3SCCm37ZgGSAX57XKyhrDN6bEPApOp94flUSYrkffXlDcKEZb3eqV0w
+ bPk+Mt4gffhJvv+ZC0TcZzVY6Nbh3/WFLojYn+SLj8jX8gkXzmEvez0OaMN2nWcLZVq0
+ ANsBLnGLOrl3mVjLBZ9pkbqu5Pt9LKpO5tY9G+QCbhzZ8geHkGM6K13iBPJX0nRdolX6
+ q1emV7+UpH5aLLOLsq67h8GwiS0Vq9Pf5PLjfeQKnZpYpnL6CYlVX+sRDt9OMCx0XIRy
+ JcjG/G8/YrPbfmcDv6Fz2OzOXeFrMvlUWNgRVYttNKDuwttLTbN+mwvTwTp8P8kkBc7L
+ Q+kA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUirLSMXki40FDZbjRohiJJSLWcbS7H8ghv1pBStk9g2rWqayUXnoE2vLRNjYQ4T0+O3QjuaSU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7iwYPpBs/u3Xho0owJWGirQKr5R39cVy0aVM1raBVwXClY/NV
+ Azqikfn226Ps4QAkfb5TEeDNyGVx1NR21w9gg47EHgpP5S8YljxSHMxSmImx3TxHBTw=
+X-Gm-Gg: AZuq6aIyK8Izn09C/W09yRI5N8Y3ktWAB+b9H9/avk5uItL/qWRCBrl5NT+9DtLTAFc
+ ax0zzFO5/0655V+ZEU/lCDrV3gfRJP6Ta6yTmphSqkoHdsdqyMptM60GESVZ+6+wdYhDEsBULGz
+ fxTnPR1NqOSH/nA7+/BCbnlxejGMm6sPJCkjLVFl5jA8v6iHoPYSkBIQSVsx3X0hAqmPsDp+aza
+ tAaT1DbzpeJeZGITPkp9y4MTbfoPwhUJuyci2gOARh7CrgKPT8Xa9CJc8/s1WmSV8dkbnyeTvzT
+ lC4ci9VKkV8iWmVRdjmf4vEuubUfErLTnqKBPvLhhp/GT0n50mWoX8Zi2T1S8j7/Madm1utb4TE
+ YMb319M08XfJugm2OGfW5rfd7Cj+D86/OTtzlG98SU5ig86ZtiMP+6gcZiwx3jSJ8KXcDKks9v9
+ +dBGcONuhXLzwJhUU=
+X-Received: by 2002:a05:6830:6518:b0:7ca:c723:6f42 with SMTP id
+ 46e09a7af769-7d464406028mr5778758a34.10.1770655222977; 
+ Mon, 09 Feb 2026 08:40:22 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:cee0:eb0c:b683:ad1d])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d464785d7esm7731139a34.15.2026.02.09.08.40.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Feb 2026 08:40:22 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v2 0/7] arm: mediatek: clean up some redundant board init
+Date: Mon, 09 Feb 2026 10:39:25 -0600
+Message-Id: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20260202170307.217200-1-philippe.reynes@softathome.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NOQ7CMBCF4atEUzPIdhYDFfdAKbwMZEQ22UlEF
+ OXumJyA8nvF/zaIFJgi3LINAi0ceegT1CkD15j+Rcg+GZRQlVCixG56Y2dcg64l0+M8op/Hlp2
+ ZKKKpvLa6KHOpr5ASY6Anf478o05uOE5DWI+3Rf7WP8OLRIFW+8IUuZMXsndr1pZtoLMbOqj3f
+ f8CW90NucsAAAA=
+X-Change-ID: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, 
+ Arnaud Ferraris <arnaud.ferraris@collabora.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2934; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=Tx7BYgkFxC+1qXVMt5TM5rryQBw0s57Due636D7hB4U=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpig3B3n7JyehNoy0ijPzlPfX2/PYSTIuRllplx
+ cdpOEfymRmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoNwRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ArMoH/09aVLX6wFbWpRQz70nX9uTWkmrla69euySKRbN
+ l9pxifpDOAR4jID3Ydl+RvCVd5OEMkq+NWKnrFkAnBJ3GInkuCxD2zE6+03qeObesXNc2XWZiYy
+ dfuPMZZHh1a2efA+tOWuaxCVI08VuQuGVV/XEZhJ/BJ64ao3LmvFu6M9J4YTdYy3NLGsPjwZ5Nm
+ kKjDI9EdrOBHjO7Nd1Un0rQh4I2hM6BbqW4DHn/Bm0GTbSy5xLG+tYwRP74M2KSTeDFJ/7YbqVK
+ L9p3CFrs9LK3GZ9HuMoP+MN8m5/fQk8V84hpKg7ev1LVl11X0yBGsTeuB7X0234xJACTl8DcxEc
+ mvdI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailman-Approved-At: Mon, 09 Feb 2026 18:12:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,73 +123,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mon, Feb 02, 2026 at 06:03:03PM +0100, Philippe Reynes wrote:
->I have tested this code with sandbox, and I have
->followed those steps:
->
->0) build u-boot using sandbox_defconfig and adding those options:
->CONFIG_ECDSA_SW=y
->CONFIG_ECDSA_MBEDTLS=y
->CONFIG_ECDSA=y
->CONFIG_ECDSA_VERIFY=y
+Before adding more targets, we take a moment to clean up some some
+redundant code in existing Mediatek SoC support.
 
-I believe that I was able to build an ECDSA signed fitImage of a Linux 
-kernel. At least "dtc" shows that a signature is present, just like with 
-my earlier attempt with RSA.
+The first three patches are removing no-op functions. The last patch
+generalizes the mem_map code so that it can be shared between all
+Mediatek ARMv8 SoCs.
 
->1) add a signature node to an its file
->	signature-256 {
->		algo = "sha256,ecdsa256";
->		key-name-hint = "private-key-256";
->	};
->
->2) generate an ecdsa key
->openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
->
->3) create the itb file
->./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb>
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+Changes in v2:
+- Also delete no longer needed init.h header.
+- Don't delete defconfig maintainer entries.
+- New patch to move MAINTAINERS files.
+- New patch to add CONFIG_MTK_MEM_MAP_DDR_BASE_PHY.
+- Link to v1: https://lore.kernel.org/r/20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com
 
-Step 1) is part of <file.its>, which specifies how a signed payload, 
-such as a Linux kernel, is built in <file.itb>, right?
+---
+David Lechner (7):
+      arm: mediatek: use default weak mtk_soc_early_init()
+      board: mediatek: mt8390_evk: remove empty board_init()
+      arm: mediatek: mt8183: remove unused function
+      arm: mediatek: make mtk_pll_early_init() static
+      board/mediatek: move EVK MAINTAINERS to common file
+      arm: mediatek: consolidate ARMv8 memory maps
+      arm: mediatek: add CONFIG_MTK_MEM_MAP_DDR_BASE_PHY
 
-I assume that arch/sandbox/dts/test.dts is the source code for 
-arch/sandbox/dts/test.dtb. Would this file correspond to the file 
-u-boot.dtb in a non-sandbox environment (in my case, based on 
-rpi_4_defconfig)?
-
-For me, mkimage version 2025.01 (as shipped in Debian Sid) would crash 
-if I ask it to write the public key to u-boot.dtb using the parameter 
-"-K u-boot.dtb". The following statement in do_add() would hit SIGSEGV:
-
-         ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
-                                  info->require_keys);
-
-The function do_add() is invoked by ecdsa_add_verify_data(). For my 
-kernel build, I did not yet try a mkimage that is built from the latest 
-u-boot. Should that make a difference?
-
-For an earlier experiment with an RSA signed fitImage, I was able to do 
-the following:
-
-make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- all u-boot.dtb
-
-cp u-boot.dtb u-boot-pubkey.dtb
-ALGO=$(scripts/dtc/dtc -I dtb /target/fitImage |grep -A10 signature|
-sed -ne "s/\s*algo = \"\(.*\)\";/\1/p")
-tools/fdt_add_pubkey -a "$ALGO" -n dev -k . -r conf u-boot-pubkey.dtb
-tools/fit_check_sign -f /target/fitImage -k u-boot-pubkey.dtb
-
-make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- \
-EXT_DTB=u-boot-pubkey.dtb
-
-cp -L u-boot.img /target/
-
-With CONFIG_ECDSA, fdt_add_pubkey would SIGSEGV (unrelated to these 
-changes) and fit_check_sign does not appear to be built.
-
-I would appreciate some help in embedding the ECDSA public key to the 
-u-boot image, so that I can test this.
+ arch/arm/mach-mediatek/Kconfig              | 27 +++++++++++++++++++++++
+ arch/arm/mach-mediatek/Makefile             |  1 +
+ arch/arm/mach-mediatek/armv8-mem-map.c      | 24 ++++++++++++++++++++
+ arch/arm/mach-mediatek/init.h               | 11 ----------
+ arch/arm/mach-mediatek/mt7622/init.c        | 20 -----------------
+ arch/arm/mach-mediatek/mt7623/init.c        |  5 -----
+ arch/arm/mach-mediatek/mt7629/init.c        |  2 +-
+ arch/arm/mach-mediatek/mt7981/init.c        | 21 ------------------
+ arch/arm/mach-mediatek/mt7986/init.c        | 21 ------------------
+ arch/arm/mach-mediatek/mt7987/init.c        | 21 ------------------
+ arch/arm/mach-mediatek/mt7988/init.c        | 21 ------------------
+ arch/arm/mach-mediatek/mt8183/init.c        | 30 -------------------------
+ arch/arm/mach-mediatek/mt8188/init.c        |  5 -----
+ arch/arm/mach-mediatek/mt8365/init.c        |  5 -----
+ arch/arm/mach-mediatek/mt8512/init.c        | 21 ------------------
+ arch/arm/mach-mediatek/mt8516/init.c        | 22 +------------------
+ arch/arm/mach-mediatek/mt8518/init.c        | 21 ------------------
+ arch/arm/mach-mediatek/spl.c                |  5 ++++-
+ board/mediatek/{mt8390_evk => }/MAINTAINERS |  6 ++++-
+ board/mediatek/mt8365_evk/MAINTAINERS       |  5 -----
+ board/mediatek/mt8365_evk/Makefile          |  3 ---
+ board/mediatek/mt8365_evk/mt8365_evk.c      | 28 ------------------------
+ board/mediatek/mt8390_evk/Makefile          |  3 ---
+ board/mediatek/mt8390_evk/mt8390_evk.c      | 34 -----------------------------
+ configs/mt8390_evk_defconfig                |  1 +
+ 25 files changed, 64 insertions(+), 299 deletions(-)
+---
+base-commit: 42b3ee7fa5248ad89467aaf2585f4a08aedd4731
+change-id: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179
 
 Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-	Marko
