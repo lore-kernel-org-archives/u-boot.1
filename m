@@ -4,57 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA9F2E7E0D5
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 19:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D72E7E0D9
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 19:16:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE2B3805D7;
-	Mon,  9 Feb 2026 20:11:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 93770805D7;
+	Mon,  9 Feb 2026 20:16:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="h3H6tDD1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q3E35g/m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8C348388D; Mon,  9 Feb 2026 20:11:36 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E07E48341A; Mon,  9 Feb 2026 20:16:38 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8130802C1
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 20:11:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1770664259;
- bh=8RStGtLwqy0Kq/J8UUsUPIgNuRHYW/h5smCB5HX2MLw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=h3H6tDD1VKTBQndl3sFoeQWbkOyJyF5C0hfTVoMHt6akuOqeWlORr5WCRtdLQuchL
- HudvefbhyQhCYTY6dzcOlZfkXbHL1xjrneWVhLSZxj2udihI/0EWrdXA5Mm473abLR
- Hv5fR+Uoy64Ov/lPl3ehHwDD2UZdiZ7MlPH+SkFa/2pfUisHzeAjBMsAfW/1RfheOM
- +ckmX2qUPYa6HwhGz33LBgMJu35jn6vBf+xw3L8Iy/daSf5GD/8ZN2v9jIAJaiw6HU
- ASn67sjX57XlB5gLRQeYIcgYmJ5+8y69jMvbQOj5G2KYXEfLZpjLdUOFNm19vX5O6a
- kt0jmo5qq9HQw==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 84EC4B22024A;
- Mon,  9 Feb 2026 20:10:57 +0100 (CET)
-Message-ID: <0e28b0a3-0c85-4690-8429-fe3cc514dded@freeshell.de>
-Date: Mon, 9 Feb 2026 11:10:55 -0800
+ by phobos.denx.de (Postfix) with ESMTPS id 140B2802C1
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 20:16:36 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-47ff94b46afso46203895e9.1
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 11:16:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770664595; x=1771269395; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dtLORKm5r7e5Brv/m518YxKS1SA/Y0tquvlRoskEB5U=;
+ b=q3E35g/mBBrUHtRVTOlmOtMSSgAoampJB0hrHXyGK0QGli8IJ3Ci2fVq3Z0Agq7GlC
+ TPAIEGLSQ4uP6G5cpJYJ9+iEQ/ABMXV6X/x/YgReeR7N9xy3v16Hb9ZXJ2VDUbVfJRh8
+ hmS4f0hvyhTbSVKB+iQsTu16HFccMwNmtkBla15qDLt/XX5iqvlKPjJeWPMC2HdmODeT
+ vuvlbjP7awxZfqoAL6FZbSkzBZxIX9XwZukoTJcOYfQBC0ILe5yHvq2OcwSCqu8viKZn
+ gUcy1NrycVHf6OWKVLfFNmY3j8VUKt09mVA6iskVF7jd8ldCvSePx0npkbipN51OJVym
+ X9Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770664595; x=1771269395;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dtLORKm5r7e5Brv/m518YxKS1SA/Y0tquvlRoskEB5U=;
+ b=Gf0k1whC8o5haMlEVQCNL7SclwUM3F3HzAb+3MXGtHjBvMp8JsrnkDweVC9Ouvw34d
+ nKHxc1dA//zF3leltv0b8H294hNIZITEuqw82zaeuv6vmoKq+LEIS4n/o7C+a/Ga7Yse
+ B4+uaT7TsVDS2qV4IZ3ch/x0TGjri+c453PuMrzhnrPfl6yDJzgbbhh1pybc0j7OFAUY
+ GdRX8gAhr0DKRfO2zWBs8ZQVrhnwPT1nNkqLetFEhOqNXvl4pzVeFOMwERbgd6T3RPpC
+ ym8t/Co49BbNsBDwae9M7rAnScLHsoESTLeHJZJAtUyB5f4kdv8UiriwSpZWyySrjK03
+ PGqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSxL+2G6JgXT90xXYsIkrzTi7c2fAImi7518ik6NYGpo0+pjT9M7EDgxhcC5gCTwtQRUPVZGs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiiKZksIjrlO2OWTv890JexViDP9VsUmyBWlxVv3cpujAkWgiA
+ tXWzDYGU39ip0TrJLjpXdYxOEhREJMFAODUlvUG0sdkjA+wX2g55dk2IzBr6+9a5vKo=
+X-Gm-Gg: AZuq6aJ2bdIZuIVfJxSvJbLPundG5FDIYxP5v+N/jXuwZDw/bv8GesFMI58SyVu0bYa
+ 1GAZHQj2N5Q/bp6Q5BLUcmwDYZXudvrYENN04/Ky7i7S1LyuyvArXEB41PrrvmCZ6hQHrAyw6An
+ rIZ0KmsiGhQjXuEmjDjNQ48j8s5sPywITlYVNaNIFaTPrW0OuCt+XCdm2Ftd65xWBqcQJtHKNwA
+ rM3wk50cNAY6TIlaetdx8soSbHxgE7MBFIHVU7O9pUXiPCpeS5lu+KSA3qFgJJX1CCaIfcsXkXc
+ SJAK9Z/Y379sywFFMUtYmen0CjkOjf479+/uoMXTUYggKyLvVX/iiC++szl0Y6HEI5es3S6bLq1
+ XtdE9w8OF2yzqyKwgrg9FajB+OqM1IDLWwtmm6edIK4F81S6aRMk6Aa0FkdlIIQqDHz3KaMFskP
+ 7AJNU7p3fJD7NmujVEF0iFtRIsMc3EvZI70qJgHAiwQKi0DXxdQA==
+X-Received: by 2002:a05:600c:1d02:b0:47e:e2b8:66e6 with SMTP id
+ 5b1f17b1804b1-4834d820e1amr7834895e9.14.1770664595422; 
+ Mon, 09 Feb 2026 11:16:35 -0800 (PST)
+Received: from [192.168.1.36] (p5b29ea02.dip0.t-ipconnect.de. [91.41.234.2])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-436296bcdfcsm30072900f8f.10.2026.02.09.11.16.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Feb 2026 11:16:34 -0800 (PST)
+Message-ID: <73b5c25d-1fc0-449d-97bd-fc76578cdf6d@linaro.org>
+Date: Mon, 9 Feb 2026 20:16:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/9] Add support for StarFive VisionFive 2 Lite board
-To: Leo Liang <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>,
- Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- u-boot@lists.denx.de
-References: <20251024085932.83596-1-hal.feng@starfivetech.com>
- <aYnDPqVzlesZqy2C@swlinux02>
+Subject: Re: [PATCH v1 3/3] board: qualcomm: Remove SCSI scan from default
+ preboot environment
 Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <aYnDPqVzlesZqy2C@swlinux02>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ lukma@denx.de, aswin.murugan@oss.qualcomm.com, rui.silva@linaro.org,
+ david.wronek@mainlining.org, ilias.apalodimas@linaro.org,
+ luca.weiss@fairphone.com, jorge.ramirez@oss.qualcomm.com,
+ stephan.gerhold@linaro.org, quic_varada@quicinc.com, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+References: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
+ <20260126155938.2717540-4-balaji.selvanathan@oss.qualcomm.com>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260126155938.2717540-4-balaji.selvanathan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,119 +109,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Leo, Hal, Tom, and Heinrich, et.al
+Hi Balaji,
 
-On 2/9/26 03:21, Leo Liang wrote:
-> On Fri, Oct 24, 2025 at 04:59:23PM +0800, Hal Feng wrote:
->> VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S industrial
->> SoC which can run at -40~85 degrees centigrade and up to 1.25GHz.
->>
->> Board features:
->> - JH7110S SoC
->> - 4/8 GiB LPDDR4 DRAM
->> - AXP15060 PMIC
->> - 40 pin GPIO header
->> - 1x USB 3.0 host port
->> - 3x USB 2.0 host port
->> - 1x M.2 M-Key (size: 2242)
->> - 1x MicroSD slot (optional non-removable 64GiB eMMC)
->> - 1x QSPI Flash
->> - 1x I2C EEPROM
->> - 1x 1Gbps Ethernet port
->> - SDIO-based Wi-Fi & UART-based Bluetooth
->> - 1x HDMI port
->> - 1x 2-lane DSI
->> - 1x 2-lane CSI
->>
->> VisionFive 2 Lite schematics: https://doc-en.rvspace.org/VisionFive2Lite/PDF/VF2_LITE_V1.10_TF_20250818_SCH.pdf
->> VisionFive 2 Lite Quick Start Guide: https://doc-en.rvspace.org/VisionFive2Lite/VisionFive2LiteQSG/index.html
->> More documents: https://doc-en.rvspace.org/Doc_Center/visionfive_2_lite.html
->>
->> Note: Patch 1 and 2 are the kernel device tree picked from [1]. They are
->> just for test and please ignore them because dts/upstream should be synced
->> with devicetree-rebasing.
->>
->> [1] https://lore.kernel.org/all/20250821100930.71404-1-hal.feng@starfivetech.com/
->>
->> Changes since RFC:
->> - Rebase on the latest mainline.
->> - Improve the commit messages.
->> - Drop patch 7.
->> patch 3, 4:
->> - Return 0 instead of 0xFF if read_eeprom() fails.
->> patch 5:
->> - Keep default FORMAT_VERSION 0x2.
->> - Change wifi_bt field to onboard_module field and use bit 0 to mark
->>   WIFI/BT.
->> - Drop all "no_eth0", "no_eth1" configuration.
->>
->> History:
->> RFC: https://lore.kernel.org/all/20250829060931.79940-1-hal.feng@starfivetech.com/
->>
->> Hal Feng (9):
->>   riscv: dts: starfive: jh7110-common: Move out some nodes to the board
->>     dts
->>   riscv: dts: starfive: Add VisionFive 2 Lite board device tree
->>   eeprom: starfive: Simplify get_ddr_size_from_eeprom()
->>   eeprom: starfive: Correct get_pcb_revision_from_eeprom()
->>   eeprom: starfive: Support eeprom data format v3
->>   pcie: starfive: Add a optional power gpio support
->>   configs: visionfive2: Add VisionFive 2 Lite DT to OF_LIST
->>   board: starfive: spl: Support VisionFive 2 Lite
->>   board: starfive: visionfive2: Add VisionFive 2 Lite fdt selection
->>
->>  arch/riscv/cpu/jh7110/spl.c                   |   2 +-
->>  arch/riscv/include/asm/arch-jh7110/eeprom.h   |  13 +-
->>  board/starfive/visionfive2/spl.c              |   3 +
->>  .../visionfive2/starfive_visionfive2.c        |   2 +
->>  .../visionfive2/visionfive2-i2c-eeprom.c      |  64 ++++---
->>  configs/starfive_visionfive2_defconfig        |   2 +-
->>  drivers/pci/pcie_starfive_jh7110.c            |   8 +
->>  .../src/riscv/starfive/jh7110-common.dtsi     |  22 ---
->>  .../jh7110-deepcomputing-fml13v01.dts         |  49 ++++++
->>  .../src/riscv/starfive/jh7110-milkv-mars.dts  |  49 ++++++
->>  .../riscv/starfive/jh7110-pine64-star64.dts   |  49 ++++++
->>  .../jh7110-starfive-visionfive-2.dtsi         |  46 +++++
->>  dts/upstream/src/riscv/starfive/jh7110.dtsi   |  16 --
->>  .../jh7110s-starfive-visionfive-2-lite.dts    | 159 ++++++++++++++++++
->>  14 files changed, 418 insertions(+), 66 deletions(-)
->>  create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+On 26/01/2026 16:59, Balaji Selvanathan wrote:
+> Remove "scsi scan" from the preboot command sequence in the default
+> Qualcomm board environment. The SCSI scan command fails on eMMC-based
+> boot configurations, causing unnecessary boot delays and potential
+> error messages during the preboot phase.
+
+I'm fine with this change in principle, since we already do the
+scsi_scan() in qcom_configure_capsule_updates(). However currently this
+only happens on Qualcomm boards if EFI_HAVE_CAPSULE_UPDATE is enabled.
+
+Could you move the scsi_scan() call from there to board_late_init()? It
+would be even better to introduce a config option for this and do it in
+board_r.c similarly to mmc init (perhaps rename initr_mmc to
+initr_storage), maybe something for the todo list?
+
 > 
-> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+> This change improves boot reliability on platforms using eMMC storage
+> as the primary boot device.
+It isn't clear from the commit message here but do I understand
+correctly that you're booting on a board that can either have eMMC or
+UFS storage, and that the UFS controller is enabled in DT despite the
+hardware not being present?
 
-The series has errors as it is applied:
+I would propose (in addition to the above) that you resolve this with a
+runtime DT fixup, I believe SMEM (or maybe the sbl1 shared data
+structure?) contain a property describing what storage device we're
+booting from, so the other one can be disabled.
 
-https://source.denx.de/u-boot/custodians/u-boot-riscv/-/commits/master?ref_type=HEADS
+Kind regards,
 
-For example:
+> 
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> ---
+>  board/qualcomm/default.env | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/board/qualcomm/default.env b/board/qualcomm/default.env
+> index dbf6f4e7260..7cfa8e0ce2a 100644
+> --- a/board/qualcomm/default.env
+> +++ b/board/qualcomm/default.env
+> @@ -1,7 +1,7 @@
+>  stdin=serial,button-kbd
+>  stdout=serial,vidconsole
+>  stderr=serial,vidconsole
+> -preboot=scsi scan; usb start
+> +preboot=usb start
+>  fastboot=fastboot -l $fastboot_addr_r usb 0
+>  do_boot=bootefi bootmgr
+>  bootmenu_0=Boot first available device=run do_boot
 
-https://source.denx.de/u-boot/custodians/u-boot-riscv/-/commit/4ea3acc000a793d04bae90eabfdc47be31580b87
+-- 
+// Casey (she/her)
 
-- CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01
-starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc
-starfive/jh7110-milkv-marscm-lite starfive/jh7110-pine64-star64
-starfive/jh7110-starfive-visionfive-2-v1.2a
-starfive/jh7110-starfive-visionfive-2-v1.3b"
-
-+ CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01
-starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc
-starfive/jh7110-milkv-marscm-lite starfive/jh7110-pine64-star64
-starfive/jh7110-starfive-visionfive-2-v1.2a
-starfive/jh7110-starfive-visionfive-2-v1.3b
-configs/starfive_visionfive2_defconfig"
-
-The above does not agree with what I reviewed on the mailing list. I am
-listed as having reviewed the content being applied. What was applied is
-something completely different than what I reviewed!
-
-My question:
-
-Why are changes to the series being made when applying to the tree, who
-is making those changes, and how can we get visibility into these
-mistakes? My question is valid even if the errors are not intentional or
-through action of some automated merge algorithm.
-
-This is a serious problem to associate contributors with code they did
-not write or review.
-
--E
