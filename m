@@ -4,86 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D07FE7E0D5
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:40:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D69F1E7E0D0
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E55783CEE;
-	Mon,  9 Feb 2026 19:40:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C8D780325;
+	Mon,  9 Feb 2026 19:45:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L7TL6fzN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ywG3H25g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA9A683D0F; Mon,  9 Feb 2026 19:40:00 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 6DF618341A; Mon,  9 Feb 2026 19:45:07 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F072C83CB5
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:39:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DBAD80325
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:45:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-382fb275271so33515271fa.0
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:39:58 -0800 (PST)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-4358fb60802so3260694f8f.1
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:45:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770662398; x=1771267198; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T8i5uXrqfkCaS4B/XAe85WcE4RxFj3dJM1FTxIiEM+E=;
- b=L7TL6fzNF/rW7xq42latiwtw2vG1JDay45veL2bn3rrdyX2FrfFwsNZnVECBIuxKfz
- 43Ma5NTfuiTGHcYnqqvlqOl3kiS6SOfXG4YnwgrQmveCwyBcTQIM/gRfpZFLTTjtd2Mn
- f3zq0s7B3w7xsyTnvsSYVwHEVl3cTI1FHxFXQQOCsnMBdE3PI+V+g/nI1xfpr29Qv80E
- fmXnRZ1pe7hYJksTzxhTdgm3QzMwX+Cj8oA8hzucuW8QZp5IlSRTeBqraxNQmYURSCsJ
- Lu29xHn8SnG2ItMprX5+3vJVyXRtz052Snomb/JN1equyxXtlWkJjSn8gVimWvEaeAyk
- sGMw==
+ d=linaro.org; s=google; t=1770662703; x=1771267503; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=AWXSoWI3XNqVxzkhVccgILKsQY+ghyeTGa/YNiEaRDQ=;
+ b=ywG3H25gN8m91B0Puvd/c4K9tV6zbr6GVqYqGDFAOx6m4rEL9NzFYaO0ZpgObZvKPC
+ /SpLDbh8IRrCuGFMR5BLDFag8AaerLwHxYE5g6dwRK0hmEzMd8RQ5QvHmdV29Mn9pzst
+ iVS5A296qS81Dd2JSjN8wJhwFhYKYz3YRMoxeYnNKXlpfmzf1mJCqsbqf5fDx9t/hR91
+ k2BoR53pYvUwofxghp2PLD9RpLgNsUFUhbPHLj3pvXeZ+KDp1O+VxKCk8aeJ6FhmF/29
+ 2+JaJTNn/jIGu/HTbYpjlcBSpJnNVhH4sgEUTiJqFjuSgateSONXPLSUmE1jGHmp26Bp
+ of/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770662398; x=1771267198;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=T8i5uXrqfkCaS4B/XAe85WcE4RxFj3dJM1FTxIiEM+E=;
- b=D9PjUYPGuI6H9ZLeNRaMUhMBCb9/mIxL4I6WNowaggRKqjlrjJIGgvgfmzl/h/v7p1
- aZNKkCkUVXSHsUvN3MAc1q1o8yQ4sCVZH0eRYlW2t88MAj07GvkvqY7zv5442N480OTQ
- srXgXIfV1d1OxmHK645wb5hO2J6Hdkg5LPlS60g9C/yOH0M9t3smOfh1g6cBxTj+Crjv
- WcHFtOQ5nxQve7sCSV3YBBvXaTuzafQBLBMOdR7hlKUkwDH8bv8PZwyy7z+mctlENdxy
- AfWlGX+sb4tvxVefIY+fafo9mGgMZ41GKaqfX3xFltOfVZkeR8mk6dgBYC7DMYfUFmBa
- 7fdw==
-X-Gm-Message-State: AOJu0Yxa+1MLnMXrpA1N0bksH/aT2AGlUWw4VlUXYNKiGG3G34bNoMze
- fVTAaJFhX8SlcTAGqw6XNR8BktLJlrZy+odrtwD2ebCzE+ti4hGN2t08
-X-Gm-Gg: AZuq6aLmCvzjSo8qd/Q58h66K1knEw9iyj+9m9+VN1AOWH92A/RdMMkh9/vejn17jeq
- GW3t9P8msZsub/ksa+WtSBxjaN+FlcPhzcyK4YYciPQ62TAXD3VdJFRfP+qo+UHPxvCavcDCn0r
- 8chKaJQm2ysVROP2FD89WG3CQIJjj+HhBgeWRVYShSgO7PUQpK14+gIeuiAk4rlshh2e8TsbMH7
- fRe8jnLhWxRLHapqy4nANUeiQ98S/Dt62gsN1EwK9V39eQqrMgyosIN/HWdHRdIGyFR6vo9tbfQ
- nHnsSxBS4MpRrnBjVwGdqNmmg8RDyct3aKblnxDVefkIz2KScjDkgcxBgdDM/6C52bq+yhgjCVp
- 6Gi/XtPA1iCjpPV3wk3m4Hz4TzwYUCRpovCWyA2EjJUT7IMsyzuuU/bNKsaFXuWpZ3vS6NUkbt0
- Hf
-X-Received: by 2002:a05:651c:1991:b0:386:e86c:835e with SMTP id
- 38308e7fff4ca-386e86c889dmr4524461fa.14.1770662397605; 
- Mon, 09 Feb 2026 10:39:57 -0800 (PST)
-Received: from xeon ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-386b62363a9sm26554891fa.9.2026.02.09.10.39.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 10:39:56 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Peng Fan <peng.fan@nxp.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] power: pmic: enable sysreset function with device tree
- property
-Date: Mon,  9 Feb 2026 20:39:48 +0200
-Message-ID: <20260209183948.34807-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260209183948.34807-1-clamor95@gmail.com>
-References: <20260209183948.34807-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1770662703; x=1771267503;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AWXSoWI3XNqVxzkhVccgILKsQY+ghyeTGa/YNiEaRDQ=;
+ b=w1k8xNqga48yMUoEAW5lflvXfytIynNfzKt356DotATjjeVx21SL5Ru9Y/EQSs41Uk
+ nRtSF6oaOfM1bTxCCaLxFae07+Vud6UuR/HO9hS0T/9sBcps6b4/AVW9lvFz+MeoguU7
+ hiefykKezN6FLf+6VWsa9u6vvFb1OHcU0AtyzsiH9ry04aPNYG4PYx7/Ou8H4M419ac7
+ ryZmgN6lQ9DYdou3quf6WhNadeCAx7xGzX8dbiFZrV5vTUqPxOy60XOlrSprr3NRZfzT
+ jf81qZzbIeHCZT4DX3YrJuGMSzCQFQ5j0/f2x1JhuNcFucYiEziFiLkcBDqjVfx0RaHG
+ QDkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMXO5IYNsUgJi269iYC9IlH+k0saJI8oFdaQTTonJgarSYfr/8GR20epuzzlzMcrU0RSfQhZ4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgCvGDL78l1DE98AWiSqZT1jt+clQkQzGbIbEDsQvJIu3QU8NP
+ lkiWiKSK6KShPSOIExylzkO887Y+vePSgrISG50EMaSZcsyiDmjphdXur8MP7rITPvI=
+X-Gm-Gg: AZuq6aIjUSlWg2WbeEYG+Jne45W3v5NJQ+6G5BRZ4D2p2l2DbcZY+19wQ52TQkvZkfs
+ ExXjpKXimdWaksGJoQ4JWMs20Vh0yLvsaK58acpLPy2iHPbj8U7esRmxC5RGxDv0voFMkp10ek4
+ 2DOKh4+WNnHSUJmKES8ln6i9pT2pLmtxaxOSJ50x2/8IW4wPFY7hL0JJooticUJ4G1vwgYwoEJE
+ mn01FeC14rSBhWbqAnA/dwF9zNift8ddqAK8EuWlXU1vME8aELcpSfufj496OYTJRCCn9sIpQvc
+ Rqyy+ABY6bHN58qqcfcoAtK35A42g2NNtOZzKeP5vDp/foYmKUmVZUC87sJkiv1Zy2I6qc+M5BJ
+ BtGMVJQiknZlEA8oGatMLlywGJCr4MU1mgMxo3jqHrIwUwNZmnJGRjuI0+ZCGeqXmXv7Wvx9Cyz
+ yS8gl0/74zRtuwTnRfhVb+x38C0PZE58W4QPGn2Ck/4FUyQk57QA6a3yF28fuv
+X-Received: by 2002:a05:6000:200c:b0:431:8bf:f08c with SMTP id
+ ffacd0b85a97d-437791a3644mr713010f8f.21.1770662702959; 
+ Mon, 09 Feb 2026 10:45:02 -0800 (PST)
+Received: from [192.168.1.36] (p5b29ea02.dip0.t-ipconnect.de. [91.41.234.2])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-436296b2110sm28835138f8f.3.2026.02.09.10.45.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Feb 2026 10:45:02 -0800 (PST)
+Message-ID: <6f12cae7-1dd3-4367-83d0-d35624dbfa4d@linaro.org>
+Date: Mon, 9 Feb 2026 19:45:00 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
+Content-Language: en-US
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
+ <A2BF7446-8270-486A-9239-8CBB2C52AC17@gmx.de>
+ <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <462cf22d-10d4-4c59-9690-29d9584e7efb@mailbox.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,109 +111,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a condition to enable the PMIC sysreset function via the
-system-power-controller device tree property in addition to the existing
-Kconfig dependency, provided the PMIC supports it.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/power/pmic/max77663.c         | 4 +++-
- drivers/power/pmic/max8907.c          | 3 ++-
- drivers/power/pmic/palmas.c           | 4 +++-
- drivers/power/pmic/pmic_tps65910_dm.c | 4 +++-
- drivers/power/pmic/rk8xx.c            | 4 +++-
- drivers/power/pmic/tps80031.c         | 4 +++-
- 6 files changed, 17 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max77663.c
-index c2a7cbf7e40..a06042e2918 100644
---- a/drivers/power/pmic/max77663.c
-+++ b/drivers/power/pmic/max77663.c
-@@ -46,7 +46,9 @@ static int max77663_bind(struct udevice *dev)
- 	ofnode regulators_node;
- 	int children, ret;
- 
--	if (IS_ENABLED(CONFIG_SYSRESET_MAX77663)) {
-+	if (IS_ENABLED(CONFIG_SYSRESET_MAX77663) &&
-+	    (dev_read_bool(dev, "maxim,system-power-controller") ||
-+	     dev_read_bool(dev, "system-power-controller"))) {
- 		ret = device_bind_driver_to_node(dev, MAX77663_RST_DRIVER,
- 						 "sysreset", dev_ofnode(dev),
- 						 NULL);
-diff --git a/drivers/power/pmic/max8907.c b/drivers/power/pmic/max8907.c
-index a7ef70177de..34bef0c8cd6 100644
---- a/drivers/power/pmic/max8907.c
-+++ b/drivers/power/pmic/max8907.c
-@@ -48,7 +48,8 @@ static int max8907_bind(struct udevice *dev)
- 	int children, ret;
- 
- 	if (IS_ENABLED(CONFIG_SYSRESET_MAX8907) &&
--	    dev_read_bool(dev, "maxim,system-power-controller")) {
-+	    (dev_read_bool(dev, "maxim,system-power-controller") ||
-+	     dev_read_bool(dev, "system-power-controller"))) {
- 		ret = device_bind_driver_to_node(dev, MAX8907_RST_DRIVER,
- 						 "sysreset", dev_ofnode(dev),
- 						 NULL);
-diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-index 37d4190fabe..e5b497dfc39 100644
---- a/drivers/power/pmic/palmas.c
-+++ b/drivers/power/pmic/palmas.c
-@@ -48,7 +48,9 @@ static int palmas_bind(struct udevice *dev)
- 	ofnode subnode, gpio_node;
- 	int children, ret;
- 
--	if (IS_ENABLED(CONFIG_SYSRESET_PALMAS)) {
-+	if (IS_ENABLED(CONFIG_SYSRESET_PALMAS) &&
-+	    (dev_read_bool(dev, "ti,system-power-controller") ||
-+	     dev_read_bool(dev, "system-power-controller"))) {
- 		ret = device_bind_driver_to_node(dev, PALMAS_RST_DRIVER,
- 						 "sysreset", dev_ofnode(dev),
- 						 NULL);
-diff --git a/drivers/power/pmic/pmic_tps65910_dm.c b/drivers/power/pmic/pmic_tps65910_dm.c
-index de8d805566a..bce35603275 100644
---- a/drivers/power/pmic/pmic_tps65910_dm.c
-+++ b/drivers/power/pmic/pmic_tps65910_dm.c
-@@ -61,7 +61,9 @@ static int pmic_tps65910_bind(struct udevice *dev)
- 	ofnode regulators_node;
- 	int children, ret;
- 
--	if (IS_ENABLED(CONFIG_SYSRESET_TPS65910)) {
-+	if (IS_ENABLED(CONFIG_SYSRESET_TPS65910) &&
-+	    (dev_read_bool(dev, "ti,system-power-controller") ||
-+	     dev_read_bool(dev, "system-power-controller"))) {
- 		ret = device_bind_driver(dev, TPS65910_RST_DRIVER,
- 					 "sysreset", NULL);
- 		if (ret) {
-diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-index d11f7a7886e..95b71d2fe49 100644
---- a/drivers/power/pmic/rk8xx.c
-+++ b/drivers/power/pmic/rk8xx.c
-@@ -220,7 +220,9 @@ static int rk8xx_bind(struct udevice *dev)
- 
- 	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
- 
--	if (CONFIG_IS_ENABLED(SYSRESET)) {
-+	if (CONFIG_IS_ENABLED(SYSRESET) &&
-+	    (dev_read_bool(dev, "rockchip,system-power-controller") ||
-+	     dev_read_bool(dev, "system-power-controller"))) {
- 		ret = device_bind_driver_to_node(dev, "rk8xx_sysreset",
- 						 "rk8xx_sysreset",
- 						 dev_ofnode(dev), NULL);
-diff --git a/drivers/power/pmic/tps80031.c b/drivers/power/pmic/tps80031.c
-index a2f935b0c6d..6004a14cd6c 100644
---- a/drivers/power/pmic/tps80031.c
-+++ b/drivers/power/pmic/tps80031.c
-@@ -46,7 +46,9 @@ static int tps80031_bind(struct udevice *dev)
- 	ofnode regulators_node;
- 	int children, ret;
- 
--	if (IS_ENABLED(CONFIG_SYSRESET_TPS80031)) {
-+	if (IS_ENABLED(CONFIG_SYSRESET_TPS80031) &&
-+	    (dev_read_bool(dev, "ti,system-power-controller") ||
-+	     dev_read_bool(dev, "system-power-controller"))) {
- 		ret = device_bind_driver(dev, TPS80031_RST_DRIVER,
- 					 "sysreset", NULL);
- 		if (ret) {
+On 28/01/2026 12:43, Marek Vasut wrote:
+> On 1/28/26 5:41 AM, Heinrich Schuchardt wrote:
+>> Am 28. Januar 2026 00:48:40 MEZ schrieb Marek Vasut
+>> <marek.vasut+renesas@mailbox.org>:
+>>> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
+>>> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top
+>>> even from
+>>> same bank"). These are based on incorrect premise of the first
+>>> commit, that
+>>> "U-Boot does not use memory above ram_top". While U-Boot itself
+>>> indeed does
+>>> not and should not use memory above ram_top, user can perfectly well use
+>>> that memory from the U-Boot shell, for example to load content in there.
+>>>
+>>> Currently, attempt to use that memory to load large image using TFTP
+>>> ends
+>>> with "TFTP error: trying to overwrite reserved memory...". With this
+>>> change
+>>> in place, the memory can be used again.
+>>
+>> IIRC there are drivers that have issues with memory above 4 GiB and
+>> boards that artificially set ram_top to 4 GiB to work around these
+>> issues.
+> 
+> I thought I had all of those solved, but apparently not, please read on.
+> 
+>> We need to carefully consider why the reverted patch was introduced.
+> 
+> I didn't find much on either commit. I believe the premise on which the
+> original patch was introduced is wrong, cf this commit message. We
+> should allow U-Boot to access the memory above ram_top, we should not
+> allow U-Boot to use it for its data structures because of the possible
+> 32bit DMA limitations.
+> 
+>> Why does your board use a 4GiB ram_top and not place ram_top at the
+>> physical top?
+> Originally, I thought it was only a remnant from the past which kept U-
+> Boot and all its data structures, stack, heap in the first DRAM bank in
+> 32bit space, so I tried to remove that. It turns out there are still a
+> couple of problems that have to be solved to make it possible to
+> relocate U-Boot fully into the 64bit space.
+> 
+> The first one is the standard parsing of DRAM size / ram_top / DRAM
+> banks order in common/board_f.c , which probably hides a lot of issues
+> on various boards, pretty much what you wrote above. In short,
+> dram_init() only sets up gd->ram_base and gd->ram_size , which is often
+> the first continuous DRAM bank which is in 32bit space. The follow up
+> setup_dest_addr() uses that information to set up U-Boot relocation
+> address at the end of that first continuous bank. And then
+> dram_init_banksize() parses the rest of the DRAM banks into gd->bd (gd-
+>>bd is set up after setup_dest_addr() is called, in reserve_board()).
+> 
+> This above is fixable and I already have some clean up patches for that,
+> which I implemented while writing this email.
+> 
+> But then I found out, that the ravb ethernet driver also has 32bit
+> limited DMA, which breaks if I relocate U-Boot to the 64bit range. It
+> worked thus far, because U-Boot was in 32bit space, so were mallocated
+> DMA descriptors, so was the net_pkt_buf[] array (which is in .data
+> section). I didn't find any other breakage thus far.
+> 
+> Which means, before we can really start switching boards to relocate to
+> 64bit space, we need to find all these remaining 32bit limitation sites
+> and fix them first. And to do that, we would need some way to force
+> allocation from 32bit space for drivers which need that ... do we
+> already have such a thing ? I couldn't find anything.
+
+For some (non-upstream) Qualcomm drivers we have just used lmb with
+LMB_ALLOC_MAX and passed in 4GB as the max address, it would be nice to
+have a wrapper function for this.
+
+Maybe this would just cause a whole bunch of other issues but perhaps it
+would be easiest to have a config option to place the malloc arena in
+32-bit memory rather than always directly below U-Boot? Then again I
+imagine this is something that has been bikeshed in the past...
+
+*casey grumbles something about making relocation optional and merging
+the f/r init sequences for most boards*
+
 -- 
-2.51.0
+// Casey (she/her)
 
