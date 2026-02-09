@@ -4,60 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C79EBE7E0C5
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 10:50:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF6AE7E0C3
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 11:05:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 053958341A;
-	Mon,  9 Feb 2026 11:50:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 8137A8341A;
+	Mon,  9 Feb 2026 12:05:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="sETEHnsc";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sEoIUk29";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E269A83BE1; Mon,  9 Feb 2026 11:50:39 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9292A839A5; Mon,  9 Feb 2026 12:05:44 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 625B2805D7
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 11:50:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f4ed=AN=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1770634235;
- bh=Z/EZ7zoHNbeE+55ovpUcHx7TN9DuFbooi7LniorTdds=;
- b=sETEHnscKLZSaHzy6GBoflhARtc/HJHF6s6BGjK6/k9aHv9QGoo3v+bHF2JqpO0FundmE7/mZ
- 2o+zL+ESimFwMiKBXXFFxkt1E1vYrO9GHC1T/TVCTBYrDzZUXksAkiNOFB2agreDY4Tz6H5Lqe1
- 5mU8udPWa9I63Et/JJEAu/Ybkz9RcSRatLg3BrTwAUVnPV+YBp/tHa9l00a781E+HhfiJzgn2Vd
- o0nZAPOZe4Gu/ht+7SV+itV30t0ix4XxJGmwZtdy/Hm5u9Qhg9BvCud5DP8TqdgFwowuk8gXGGE
- Q7iEjVUFLwgl1MLyh/a0VAEB/m0WQu2jD0iHPkiKs6rg==
-X-Forward-Email-ID: 6989bbf9de8d5e1b8dcf7dd8
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.6.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <d249ef51-894c-4c9f-b081-7866875c24f4@kwiboo.se>
-Date: Mon, 9 Feb 2026 11:50:29 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E9847805D7
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 12:05:41 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-4359108fd24so2746387f8f.2
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 03:05:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770635141; x=1771239941;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8vTM69Qa7ER/4yRcoT1vvmj96hv6tJ2cKVQrBP8mWtE=;
+ b=sEoIUk2994Js4s1wchjDfIJT5dMDFSlt7q4hvSzJG4LrbQgkbFfm+PtkQ76nlpkFf9
+ S7ao3xTkbOdYPQ1G7iJVR7gj2vB3y98J8MyySkc4yeA67wPtU/VlIkXK7s757mTy57m4
+ k2hOz5bE9uWcyFTPxCmcEmeGzNTf8QR79WLyRdcb+6hEKrcDVw8N0/F/4IFYetc9HGSC
+ 1BYRWfqHxux4y1sZqqSHu035R3JG7ClkcNPZ0EqDbnhUjq5XD5As4Z5sEQHRbQlbHO0d
+ C2QWoW1iIXESHCh3I/K7/7ajR3k9s8XPevi3b1lwScVwTCWBzekofafee0lZRUhZuGBd
+ nBLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770635141; x=1771239941;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8vTM69Qa7ER/4yRcoT1vvmj96hv6tJ2cKVQrBP8mWtE=;
+ b=c4fZb14NIzO9+9e8ARJAKMyf/t7xSKZ0a+2beb61Itjsn7OEzyEe+I9AnUUcC0sH9I
+ lIvEwoz7mYzaHtVpkwDiLG3h8jwT7ELkwkWJR3nxLUcKqIL99YsPNSLrEuRJVJgsmAy1
+ Elxj7tYhA5XrrvRGd+7wndD1Slwi8NpTY8OtAnyw2TGU5Ikh6ZXL0m/NszWuH0ZxNYCU
+ 1AVR2FyAAAeJpFrGhg4XjD1FZpia2X5Ig5oy7ySJ8tioVAnCEcc2w5etD6OROVg3416W
+ aQMtzksRCmpc6/3keQoCZugWAhmTn62pw74enC/F5yHZzc6+cZl68DBjaqGtMOipaiRU
+ bMrg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVh3qGVJNU8z6VKyhnAmDqTrZdmuMuEqWBW3rcvAa6sHagajns/rIFmX7Bd4nM3FrGkV8n/E/o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+mtt2zWMHWqBLfHZ0zQNmCA3r3LQB1yTscSkv1BAU5iavdri8
+ NTT97ISX9EXo0Pc409dSFaKVcjy2x2AKeulRWoldZm+3hnljfsOihQ6HqHRIzc88qSk=
+X-Gm-Gg: AZuq6aLj/22B3rBKrlmTCaTe5QAmFieHHuSG1yhllWjd3GJWXmu2PF9nXFG4wbUoP6g
+ NVL+5CnAZi2HlQ/do+ic2PyU2XAMrqr++peKMitkazjlheWYCKvb/Cd5WFUQhJO+e4Biu2ffVfo
+ +QBGFLOiVfEmaubs8LYVBYFMs4pxSOW1B73s90qtzAMS2TbLr58dLNj8zCwz0mPevNT1E2GPVJ/
+ 58MWDz21aNhMNI0fw3rObb/zOAIzHTgEUHGeIWBTJr84dFfNa78joWQxyfDUQW1RmMisW+z2Nul
+ kBf3SuZTImBDCmTMGrQuDZSJ47ItcYV5iZ3IHwtgFP1SIUlSG0IBceaykbq88QUdiigWx7MYKlI
+ fuoOoaEb4IF8NQAObQdgqqiFSmbsV6+vSKPGJ7J/KKNH4/JzniSkYv2QdZQSdlHaNxzZMtnPjq+
+ NGTjsGKm0JkUmYq8SSVd0F3wcRiIZfSHn07JuUkHvOpstJMyldTzYUzC5m7A==
+X-Received: by 2002:a05:6000:4024:b0:437:6f6b:4f7d with SMTP id
+ ffacd0b85a97d-4376f6b5079mr3874282f8f.19.1770635140992; 
+ Mon, 09 Feb 2026 03:05:40 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:e50:3860:9cd9:2f9d:7c05:425d?
+ ([2a01:e0a:e50:3860:9cd9:2f9d:7c05:425d])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4376b62b835sm11984968f8f.12.2026.02.09.03.05.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Feb 2026 03:05:40 -0800 (PST)
+Message-ID: <80dd375b-e905-46c5-b43d-dd4c87e71c98@baylibre.com>
+Date: Mon, 9 Feb 2026 12:05:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/7] pinctrl: rockchip: Add RV1103B support
-To: Fabio Estevam <festevam@gmail.com>
-Cc: kever.yang@rock-chips.com, trini@konsulko.com, u-boot@lists.denx.de,
- Ye Zhang <ye.zhang@rock-chips.com>, Fabio Estevam <festevam@nabladev.com>
-References: <20260208212624.3413494-1-festevam@gmail.com>
- <20260208212624.3413494-3-festevam@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260208212624.3413494-3-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20260116194323.GP3416603@bill-the-cat>
+Content-Language: fr
+From: Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <20260116194323.GP3416603@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,194 +104,346 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+Hi Tom,
 
-On 2/8/2026 10:26 PM, Fabio Estevam wrote:
-> From: Ye Zhang <ye.zhang@rock-chips.com>
-> 
-> Add pinctrl driver for RV1103.
-> 
-> Signed-off-by: Ye Zhang <ye.zhang@rock-chips.com>
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-> ---
-> Changes since v1:
-> - Use the original author from Rockchip's vendor U-Boot tree.
-> - Use regmap_update_bits()
-> - Removed unneeded blank lines.
-> - Removed unneeded logging functions.
-> 
->  drivers/pinctrl/rockchip/Makefile          |   1 +
->  drivers/pinctrl/rockchip/pinctrl-rv1103b.c | 398 +++++++++++++++++++++
->  2 files changed, 399 insertions(+)
->  create mode 100644 drivers/pinctrl/rockchip/pinctrl-rv1103b.c
-> 
-> diff --git a/drivers/pinctrl/rockchip/Makefile b/drivers/pinctrl/rockchip/Makefile
-> index e17415e1ca68..2bbee66bd3ca 100644
-> --- a/drivers/pinctrl/rockchip/Makefile
-> +++ b/drivers/pinctrl/rockchip/Makefile
-> @@ -18,5 +18,6 @@ obj-$(CONFIG_ROCKCHIP_RK3528) += pinctrl-rk3528.o
->  obj-$(CONFIG_ROCKCHIP_RK3568) += pinctrl-rk3568.o
->  obj-$(CONFIG_ROCKCHIP_RK3576) += pinctrl-rk3576.o
->  obj-$(CONFIG_ROCKCHIP_RK3588) += pinctrl-rk3588.o
-> +obj-$(CONFIG_ROCKCHIP_RV1103B) += pinctrl-rv1103b.o
->  obj-$(CONFIG_ROCKCHIP_RV1108) += pinctrl-rv1108.o
->  obj-$(CONFIG_ROCKCHIP_RV1126) += pinctrl-rv1126.o
-> diff --git a/drivers/pinctrl/rockchip/pinctrl-rv1103b.c b/drivers/pinctrl/rockchip/pinctrl-rv1103b.c
-> new file mode 100644
-> index 000000000000..fb946b036661
-> --- /dev/null
-> +++ b/drivers/pinctrl/rockchip/pinctrl-rv1103b.c
-> @@ -0,0 +1,398 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2024 Rockchip Electronics Co., Ltd
-> + */
-> +
-> +#include <dm.h>
-> +#include <log.h>
-> +#include <dm/pinctrl.h>
-> +#include <regmap.h>
-> +#include <syscon.h>
-> +#include <linux/bitops.h>
-> +
-> +#include "pinctrl-rockchip.h"
-> +
-> +static int rv1103b_set_mux(struct rockchip_pin_bank *bank, int pin, int mux)
-> +{
-> +	struct rockchip_pinctrl_priv *priv = bank->priv;
-> +	int iomux_num = (pin / 8);
-> +	struct regmap *regmap;
-> +	u32 data, rmask;
-> +	int reg, mask;
-> +	u8 bit;
-> +
-> +	if (bank->bank_num == 2 && pin >= 12)
-> +		return 0;
-> +
-> +	regmap = priv->regmap_base;
-> +	reg = bank->iomux[iomux_num].offset;
-> +	if ((pin % 8) >= 4)
-> +		reg += 0x4;
-> +	bit = (pin % 4) * 4;
-> +	mask = 0xf;
-> +
-> +	if (bank->recalced_mask & BIT(pin))
-> +		rockchip_get_recalced_mux(bank, pin, &reg, &bit, &mask);
-> +	data = (mask << (bit + 16));
-> +	rmask = data | (data >> 16);
-> +	data |= (mux & mask) << bit;
-> +
-> +	return regmap_update_bits(regmap, reg, rmask, data);
 
-This seem to have been updated to use regmap_update_bits(), thanks.
+sorry for delay, i check defects please see my comments inline
 
-> +}
-> +
-> +#define RV1103_DRV_BITS_PER_PIN		8
-> +#define RV1103_DRV_PINS_PER_REG		2
-> +#define RV1103_DRV_GPIO0_A_OFFSET		0x40100
-> +#define RV1103_DRV_GPIO0_B_OFFSET		0x50110
-> +#define RV1103_DRV_GPIO1_A01_OFFSET		0x140
-> +#define RV1103_DRV_GPIO1_A67_OFFSET		0x1014C
-> +#define RV1103_DRV_GPIO2_OFFSET		0x30180
-> +#define RV1103_DRV_GPIO2_SARADC_OFFSET		0x3080C
-> +
-> +static int rv1103b_calc_drv_reg_and_bit(struct rockchip_pin_bank *bank,
-> +				       int pin_num, struct regmap **regmap,
-> +				       int *reg, u8 *bit)
-> +{
-> +	struct rockchip_pinctrl_priv *priv = bank->priv;
-> +	int ret = 0;
-> +
-> +	*regmap = priv->regmap_base;
-> +	switch (bank->bank_num) {
-> +	case 0:
-> +		if (pin_num < 7)
-> +			*reg = RV1103_DRV_GPIO0_A_OFFSET;
-> +		else if (pin_num > 7 && pin_num < 14)
-> +			*reg = RV1103_DRV_GPIO0_B_OFFSET - 0x10;
-> +		else
-> +			ret = -EINVAL;
-> +		break;
-> +
-> +	case 1:
-> +		if (pin_num < 6)
-> +			*reg = RV1103_DRV_GPIO1_A01_OFFSET;
-> +		else if (pin_num >= 6 && pin_num < 23)
-> +			*reg = RV1103_DRV_GPIO1_A67_OFFSET - 0xc;
-> +		else if (pin_num >= 24 && pin_num < 30)
-> +			*reg = RV1103_DRV_GPIO1_A67_OFFSET - 0xc;
-> +		else
-> +			ret = -EINVAL;
-> +		break;
-> +
-> +	case 2:
-> +		if (pin_num < 12) {
-> +			*reg = RV1103_DRV_GPIO2_OFFSET;
-> +		} else if (pin_num >= 16) {
-> +			ret = -EINVAL;
-> +		} else {
-> +			*reg = RV1103_DRV_GPIO2_SARADC_OFFSET;
-> +			*bit = 10;
-> +
-> +			return 0;
-> +		}
-> +		break;
-> +
-> +	default:
-> +		ret = -EINVAL;
-> +		break;
-> +	}
-> +
-> +	if (ret) {
-> +		printf("unsupported bank_num %d pin_num %d\n", bank->bank_num, pin_num);
-> +		return ret;
-> +	}
-> +
-> +	*reg += ((pin_num / RV1103_DRV_PINS_PER_REG) * 4);
-> +	*bit = pin_num % RV1103_DRV_PINS_PER_REG;
-> +	*bit *= RV1103_DRV_BITS_PER_PIN;
-> +
-> +	return 0;
-> +}
-> +
-> +static int rv1103b_set_drive(struct rockchip_pin_bank *bank,
-> +			    int pin_num, int strength)
-> +{
-> +	struct regmap *regmap;
-> +	int reg, ret, i;
-> +	u32 data;
-> +	u8 bit;
-> +	int rmask_bits = RV1103_DRV_BITS_PER_PIN;
-> +
-> +	ret = rv1103b_calc_drv_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-> +	if (ret)
-> +		return ret;
-> +
-> +	for (i = 0, ret = 1; i < strength; i++)
-> +		ret = (ret << 1) | 1;
-> +
-> +	if (bank->bank_num == 2 && pin_num >= 12) {
-> +		rmask_bits = 2;
-> +		ret = strength;
-> +	}
-> +
-> +	/* Enable the write to the equivalent lower bits */
-> +	data = ((1 << rmask_bits) - 1) << (bit + 16);
-> +	data |= (ret << bit);
-> +	return regmap_write(regmap, reg, data);
+Le 16/01/2026 à 20:43, Tom Rini a écrit :
+> Hey all,
+>
+> Here's the latest report from Coverity scan. For the LZMA ones, the
+> _pad_ stuff seems to be a false positive (the _pad_ byte is just for
+> padding and not refernced) and the flow control one is how that's
+> written for whatever reason the upstream author wanted it like that.
+>
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Fri, Jan 16, 2026 at 1:06 PM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>
+>
+> Hi,
+>
+> Please find the latest report on new defect(s) introduced to *Das U-Boot*
+> found with Coverity Scan.
+>
+>     - *New Defects Found:* 7
+>     - 2 defect(s), reported by Coverity Scan earlier, were marked fixed in
+>     the recent build analyzed by Coverity Scan.
+>     - *Defects Shown:* Showing 7 of 7 defect(s)
+>
+> Defect Details
+>
+> ** CID 641431:         (TAINTED_SCALAR)
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 641431:           (TAINTED_SCALAR)
+> /boot/image-android.c: 434             in android_image_get_kernel()
+> 428     		if (*newbootargs) /* If there is something in newbootargs, a
+> space is needed */
+> 429     			strcat(newbootargs, " ");
+> 430     		strcat(newbootargs, img_data.kcmdline_extra);
+> 431     	}
+> 432
+> 433     	env_set("bootargs", newbootargs);
+>>>>      CID 641431:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "*newbootargs" to "dlfree", which uses it as an offset.
+> 434     	free(newbootargs);
+> 435
+> 436     	if (os_data) {
+> 437     		if (image_get_magic(ihdr) == IH_MAGIC) {
+> 438     			*os_data = image_get_data(ihdr);
+> 439     		} else {
+> /boot/image-android.c: 433             in android_image_get_kernel()
+> 427     	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+> 428     		if (*newbootargs) /* If there is something in newbootargs, a
+> space is needed */
+> 429     			strcat(newbootargs, " ");
+> 430     		strcat(newbootargs, img_data.kcmdline_extra);
+> 431     	}
+> 432
+>>>>      CID 641431:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "newbootargs" to "env_set", which uses it as an offset.
+> 433     	env_set("bootargs", newbootargs);
+> 434     	free(newbootargs);
+> 435
+> 436     	if (os_data) {
+> 437     		if (image_get_magic(ihdr) == IH_MAGIC) {
+> 438     			*os_data = image_get_data(ihdr);
+> /boot/image-android.c: 434             in android_image_get_kernel()
+> 428     		if (*newbootargs) /* If there is something in newbootargs, a
+> space is needed */
+> 429     			strcat(newbootargs, " ");
+> 430     		strcat(newbootargs, img_data.kcmdline_extra);
+> 431     	}
+> 432
+> 433     	env_set("bootargs", newbootargs);
+>>>>      CID 641431:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "*newbootargs" to "dlfree", which uses it as an offset.
+> 434     	free(newbootargs);
+> 435
+> 436     	if (os_data) {
+> 437     		if (image_get_magic(ihdr) == IH_MAGIC) {
+> 438     			*os_data = image_get_data(ihdr);
+> 439     		} else {
+> /boot/image-android.c: 433             in android_image_get_kernel()
+> 427     	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+> 428     		if (*newbootargs) /* If there is something in newbootargs, a
+> space is needed */
+> 429     			strcat(newbootargs, " ");
+> 430     		strcat(newbootargs, img_data.kcmdline_extra);
+> 431     	}
+> 432
+>>>>      CID 641431:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "newbootargs" to "env_set", which uses it as an offset.
+> 433     	env_set("bootargs", newbootargs);
+> 434     	free(newbootargs);
+> 435
+> 436     	if (os_data) {
+> 437     		if (image_get_magic(ihdr) == IH_MAGIC) {
+> 438     			*os_data = image_get_data(ihdr);
+> /boot/image-android.c: 433             in android_image_get_kernel()
+> 427     	if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
+> 428     		if (*newbootargs) /* If there is something in newbootargs, a
+> space is needed */
+> 429     			strcat(newbootargs, " ");
+> 430     		strcat(newbootargs, img_data.kcmdline_extra);
+> 431     	}
+> 432
+>>>>      CID 641431:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "newbootargs" to "env_set", which uses it as an offset.
+> 433     	env_set("bootargs", newbootargs);
+> 434     	free(newbootargs);
+> 435
+> 436     	if (os_data) {
+> 437     		if (image_get_magic(ihdr) == IH_MAGIC) {
+> 438     			*os_data = image_get_data(ihdr);
+> /boot/image-android.c: 434             in android_image_get_kernel()
+> 428     		if (*newbootargs) /* If there is something in newbootargs, a
+> space is needed */
+> 429     			strcat(newbootargs, " ");
+> 430     		strcat(newbootargs, img_data.kcmdline_extra);
+> 431     	}
+> 432
+> 433     	env_set("bootargs", newbootargs);
+>>>>      CID 641431:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "*newbootargs" to "dlfree", which uses it as an offset.
 
-However, this and all remaining places still use regmap_write, please
-change all instances of regmap_write to use regmap_update_bits.
+For CID 641431 : for me it's a false positives defect, malloc was done 
+with strlen return and free done on malloc pointer.
 
-This ensure the pins configuration in DT cannot overflow the fields,
-that is something that has happened in the past and is why I ensure all
-new rk pinctrl drivers matches Linux kernel and use regmap_update_bits
-instead of regmap_write.
+> 434     	free(newbootargs);
+> 435
+> 436     	if (os_data) {
+> 437     		if (image_get_magic(ihdr) == IH_MAGIC) {
+> 438     			*os_data = image_get_data(ihdr);
+> 439     		} else {
+>
+> ** CID 641430:         (TAINTED_SCALAR)
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 641430:           (TAINTED_SCALAR)
+> /cmd/abootimg.c: 244             in abootimg_get_ramdisk()
+> 238     				      &rd_data, &rd_len))
+> 239     		return CMD_RET_FAILURE;
+> 240
+> 241     	if (argc == 0) {
+> 242     		printf("%lx\n", rd_data);
+> 243     	} else {
+>>>>      CID 641430:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "rd_data" to "env_set_hex", which uses it as an offset.
+> 244     		env_set_hex(argv[0], rd_data);
+> 245     		if (argc == 2)
+> 246     			env_set_hex(argv[1], rd_len);
+> 247     	}
+> 248
+> 249     	return CMD_RET_SUCCESS;
+> /cmd/abootimg.c: 246             in abootimg_get_ramdisk()
+> 240
+> 241     	if (argc == 0) {
+> 242     		printf("%lx\n", rd_data);
+> 243     	} else {
+> 244     		env_set_hex(argv[0], rd_data);
+> 245     		if (argc == 2)
+>>>>      CID 641430:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "rd_len" to "env_set_hex", which uses it as an offset.
 
+CID 641430: false positive too. env_set_hex convert value on an env variable , so convert rd_len and rd_data
+  in variable.
+
+> 246     			env_set_hex(argv[1], rd_len);
+> 247     	}
+> 248
+> 249     	return CMD_RET_SUCCESS;
+> 250     }
+> 251
+>
+> ** CID 641429:       Insecure data handling  (TAINTED_SCALAR)
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 641429:         Insecure data handling  (TAINTED_SCALAR)
+> /boot/image-android.c: 307             in android_image_get_data()
+> 301     			printf("Incorrect vendor boot image header\n");
+> 302     			unmap_sysmem(vhdr);
+> 303     			unmap_sysmem(bhdr);
+> 304     			return false;
+> 305     		}
+> 306     		android_boot_image_v3_v4_parse_hdr((const struct
+> andr_boot_img_hdr_v3 *)bhdr, data);
+>>>>      CID 641429:         Insecure data handling  (TAINTED_SCALAR)
+>>>>      Passing tainted expression "vhdr->bootconfig_size" to "android_vendor_boot_image_v3_v4_parse_hdr", which uses it as a loop boundary.
+
+CID 641429:  False positive too. "vhdr->bootconfig_size" come from android image so external source , not possible to validate if value is good or not except when AVB feature was enabled
+
+> 307     		android_vendor_boot_image_v3_v4_parse_hdr(vhdr, data);
+> 308     		unmap_sysmem(vhdr);
+> 309     	} else {
+> 310     		android_boot_image_v0_v1_v2_parse_hdr(bhdr, data);
+> 311     	}
+> 312
+>
+> ** CID 641428:         (TAINTED_SCALAR)
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 641428:           (TAINTED_SCALAR)
+> /boot/image-android.c: 658             in android_image_set_bootconfig()
+> 652     		total_size += params_len + BOOTCONFIG_TRAILER_SIZE;
+> 653
+> 654     	/* Map Dest */
+> 655     	ramdisk_dest = map_sysmem(ramdisk_addr, total_size);
+> 656
+> 657     	/* Copy data */
+>>>>      CID 641428:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "img_data.vendor_ramdisk_size" to "android_boot_append_bootconfig", which uses it as an offset.
+> 658     	ret = android_boot_append_bootconfig(&img_data, params, params_len,
+> 659     					     ramdisk_dest);
+> 660
+> 661     	unmap_sysmem(ramdisk_dest);
+> 662     	free(params);
+> 663     	free(new_bootargs);
+> /boot/image-android.c: 658             in android_image_set_bootconfig()
+> 652     		total_size += params_len + BOOTCONFIG_TRAILER_SIZE;
+> 653
+> 654     	/* Map Dest */
+> 655     	ramdisk_dest = map_sysmem(ramdisk_addr, total_size);
+> 656
+> 657     	/* Copy data */
+>>>>      CID 641428:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "img_data.bootconfig_size" to "android_boot_append_bootconfig", which uses it as an offset.
+> 658     	ret = android_boot_append_bootconfig(&img_data, params, params_len,
+> 659     					     ramdisk_dest);
+> 660
+> 661     	unmap_sysmem(ramdisk_dest);
+> 662     	free(params);
+> 663     	free(new_bootargs);
+> /boot/image-android.c: 658             in android_image_set_bootconfig()
+> 652     		total_size += params_len + BOOTCONFIG_TRAILER_SIZE;
+> 653
+> 654     	/* Map Dest */
+> 655     	ramdisk_dest = map_sysmem(ramdisk_addr, total_size);
+> 656
+> 657     	/* Copy data */
+>>>>      CID 641428:           (TAINTED_SCALAR)
+>>>>      Passing tainted expression "img_data.boot_ramdisk_size" to "android_boot_append_bootconfig", which uses it as an offset.
+
+  CID 641428: for me it's false positive too. img_data.boot_ramdisk_size and vendor_ramdisk_size come from android image, it could be corrupted if we corrupt android image but it's an external source so difficult to say if value is corrupted or not , it's why on real device we have AB features to check it.
+
+> 658     	ret = android_boot_append_bootconfig(&img_data, params, params_len,
+> 659     					     ramdisk_dest);
+> 660
+> 661     	unmap_sysmem(ramdisk_dest);
+> 662     	free(params);
+> 663     	free(new_bootargs);
+>
+> ** CID 332278:       Control flow issues  (UNREACHABLE)
+> /lib/lzma/LzmaDec.c: 720           in LzmaDec_TryDummy()
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 332278:         Control flow issues  (UNREACHABLE)
+> /lib/lzma/LzmaDec.c: 720             in LzmaDec_TryDummy()
+> 714       UInt32 code = p->code;
+> 715       const Byte *bufLimit = *bufOut;
+> 716       const CLzmaProb *probs = GET_PROBS;
+> 717       unsigned state = (unsigned)p->state;
+> 718       ELzmaDummy res;
+> 719
+>>>>      CID 332278:         Control flow issues  (UNREACHABLE)
+>>>>      Since the loop increment is unreachable, the loop body will never execute more than once.
+> 720       for (;;)
+> 721       {
+> 722         const CLzmaProb *prob;
+> 723         UInt32 bound;
+> 724         unsigned ttt;
+> 725         unsigned posState = CALC_POS_STATE(p->processedPos,
+> ((unsigned)1 << p->prop.pb) - 1);
+>
+> ** CID 252901:       Uninitialized variables  (UNINIT)
+> /lib/lzma/LzmaDec.c: 1295           in LzmaDec_AllocateProbs()
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 252901:         Uninitialized variables  (UNINIT)
+> /lib/lzma/LzmaDec.c: 1295             in LzmaDec_AllocateProbs()
+> 1289
+> 1290     SRes LzmaDec_AllocateProbs(CLzmaDec *p, const Byte *props,
+> unsigned propsSize, ISzAllocPtr alloc)
+> 1291     {
+> 1292       CLzmaProps propNew;
+> 1293       RINOK(LzmaProps_Decode(&propNew, props, propsSize))
+> 1294       RINOK(LzmaDec_AllocateProbs2(p, &propNew, alloc))
+>>>>      CID 252901:         Uninitialized variables  (UNINIT)
+>>>>      Using uninitialized value "propNew". Field "propNew._pad_" is uninitialized.
+> 1295       p->prop = propNew;
+> 1296       return SZ_OK;
+> 1297     }
+> 1298
+> 1299     SRes LzmaDec_Allocate(CLzmaDec *p, const Byte *props,
+> unsigned propsSize, ISzAllocPtr alloc)
+> 1300     {
+>
+> ** CID 252579:       Uninitialized variables  (UNINIT)
+> /lib/lzma/LzmaDec.c: 1327           in LzmaDec_Allocate()
+>
+>
+> _____________________________________________________________________________________________
+> *** CID 252579:         Uninitialized variables  (UNINIT)
+> /lib/lzma/LzmaDec.c: 1327             in LzmaDec_Allocate()
+> 1321         {
+> 1322           LzmaDec_FreeProbs(p, alloc);
+> 1323           return SZ_ERROR_MEM;
+> 1324         }
+> 1325       }
+> 1326       p->dicBufSize = dicBufSize;
+>>>>      CID 252579:         Uninitialized variables  (UNINIT)
+>>>>      Using uninitialized value "propNew". Field "propNew._pad_" is uninitialized.
+> 1327       p->prop = propNew;
+> 1328       return SZ_OK;
+> 1329     }
+> 1330
+> 1331     SRes LzmaDecode(Byte *dest, SizeT *destLen, const Byte *src,
+> SizeT *srcLen,
+> 1332         const Byte *propData, unsigned propSize, ELzmaFinishMode
+> finishMode,
+>
+>
+>
+> View Defects in Coverity Scan
+> <https://scan.coverity.com/projects/das-u-boot?tab=overview>
+>
+> Best regards,
+>
+> The Coverity Scan Admin Team
+>
+> ----- End forwarded message -----
+>
 Regards,
-Jonas
+Guillaume
 
-> +}
 
-[snip]
