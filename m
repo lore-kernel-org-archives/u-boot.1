@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 523BAE7E0D0
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9AFE7E0D5
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:32:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67B92805D7;
-	Mon,  9 Feb 2026 19:17:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E9FE8397D;
+	Mon,  9 Feb 2026 19:32:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EEAwqeKA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aeb1XwBY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAE1283CBD; Mon,  9 Feb 2026 19:17:15 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id CAE7983C54; Mon,  9 Feb 2026 19:32:28 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C316883C5E
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:17:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D616380325
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:32:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-385bdc72422so42910281fa.1
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:17:13 -0800 (PST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-59ddb31ddcaso5380581e87.2
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:32:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770661033; x=1771265833; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0QZhkEIvA+9zhP4mmp56exH8OQIHxe4VE49DwNm4jk4=;
- b=EEAwqeKADaDOo2paEjOZrJ9KRm1aCEHotef2zEAAFoO8uBSFKKvjWQkkW7kfIWDeEb
- nv/Mb+qcb+lfWuMBIrlmrWoovvfzn/VaZ3y0HJY6CH7arakCDJ4lW+rEb6C/LMjNZJ6K
- 88Uc8Jq3LiuCtjx3QS3x5YI4q+sFCGzQRWquQAYGsqtCYge08CPjVGYz0OIPcRjMj9pX
- Xt6pwMHu+ik7jDwkHpY+P2j8AucWZehGXCk5kV8WkWKZT9Hj2a0Q6yU78S21z6KRYy/C
- YZ8YNr22R+uGczRGvrx/fiFR9i+mfv3SfWjDLtgYY1UXVU0x+11+N+3PPDSMbJmZFX/9
- FZFg==
+ d=gmail.com; s=20230601; t=1770661946; x=1771266746; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OIRaD3c3SNHlrvsel2auziS7cZzN+lQXw6aHKXOWKDQ=;
+ b=aeb1XwBYBC2GZnqge2gPaGBmH1mdB3EcFAwQkWpgRrsopABy7EPVWy9KS6vVCNX+lM
+ gkNJ4W6twjFwnnh9I5HQJ2zJGR0rBV7jIAnQxBRaeP+aSMlgzyxHpJaXIWDT/mXxX92l
+ 0lDNe0VecLGg019kAc2SHtz8PHE3e4qB6M4Q4I8y3xsJatVWmj1fFz73GqnOUW1thGG+
+ WD+cAc1ANlGDnzxIB2MR3CEDzRB04SqADgBewtRwZap8dl2en5LnvDwbsznwoMNxFi3v
+ BxD/qgE30g1nW5rW5EIYjXAFTn2L4iwqZM7zjw97tmqtG9RTYnA/MuDn9E+hxSQ2wF8k
+ VpFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770661033; x=1771265833;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0QZhkEIvA+9zhP4mmp56exH8OQIHxe4VE49DwNm4jk4=;
- b=v0kevdjH5NGsT1VDJGz+RWpPI0E/lwXgMGcm8MqMjPH3MkLXACN4wyPPxW6Jxj4TK4
- OhTt9OlNEuzFBXSkuWc40vq0megrvYBDaVS377g8uA20L+Bd/c+lebUPaaSmuzRQQLkU
- DDOhgyJ8tbfHho5c9rQa5OiPm9yZ4lQllxqlv88Xk7q4v9vUIMXqaIZldYpm+VHaavx0
- PQoWiQPfWDj1pB1AlTw0aAOO9J1j4o4Ww7UMNu1SKdwSOLI0CnqCfHHyVKw0KakVpwwi
- de2g1Eo6RXcIFAhu6PkVEcVhaqrX9C1G+uoad510dW/bWEa1rvml/M3D9aclYs5iKqNQ
- K5YA==
-X-Gm-Message-State: AOJu0YwxDdNdHUxgoNj8LB348TNxD1Y6oxsJXFs/1S9LE0DJlNU7ZNA5
- +B/qPsENaM5y/Iut51EoMM193qCLqXwEiaNnfy6Gn+xIAM5T8Qug9zesmbo1vA==
-X-Gm-Gg: AZuq6aLwS3quPS55vK2cYJsDqXTbrODb1E3tqbbHHAtQ5yM1pdf5g1KMA2tSLTLrxQZ
- OspoXEdtBO+1XN01JYIlk4MyowO2OZ6LhYqUDnJBOS3aZcH38gplHlp96O1JwzHPpnPwFvmuBAq
- k19BjGV836vx4lzm9OTg8MnjRuNOMh1sc1kYC54yh7sf5EyQ6QE2ge/o6roXrqPeb6703SUEjVK
- T1V6hAG4s4WNZkVhQlJmEA/SLGvABLi/zj8gi0Gp1nS4jyX3j7KTziPB4bpxvvSF9TiugKvqAGe
- voD7l+ljSnkzKtCCZMaE/9NliC09EiLE4RJrPtdELMkSwqSEOz8aiQ/+b5VvOUbvI40id9VU1gc
- UluLzzIq6Wuo1pwYmGFbpHwEWbqmPygmvE33YfmhdM93lnwTYVGLZO8goU7rBt+aDopqsD/vB6p
- 1b
-X-Received: by 2002:a05:651c:989:b0:37c:d689:7e1c with SMTP id
- 38308e7fff4ca-386b51030ecmr39670211fa.23.1770661032813; 
- Mon, 09 Feb 2026 10:17:12 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770661946; x=1771266746;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OIRaD3c3SNHlrvsel2auziS7cZzN+lQXw6aHKXOWKDQ=;
+ b=SADGlUQ2BaaxEMMO7Ml+o3WIUps0A9ufP/FtMCNJOoKBh7w18NU+o+rMtuNhPL0mtN
+ R5W4LoP3NQOdwygOz/DREB2DPxWGuNncOkpkG3r28Xo+dJK0Bw3ZvYeRRDJdEug5WJt4
+ /YUkB1n15ow3kiG92F9JTsRBQr894DA9klkAyJK56+dKzYQe2+nQWmZVTwpvt4htYf2K
+ 0DD8QAqVJ0Tv4G+tBa2pqHi28YALqBLGl7dlSFfSXRuCILBbgWckr4i8JafTX9In3tzW
+ YrEJ87E3iVda/ygct1ioHbusWm8qekUq0gztqEfLycym9gJFNYF4dt387kSDyT4BSxD7
+ r0qA==
+X-Gm-Message-State: AOJu0YxAsWFHQxOEqiWLu2FnOiw8TpS74WoTYJGGwgyCaoWSnhFxNDvA
+ P2hBpVA1LxeCMichZlAz7HHqqC3XJUN0yH7xQHKhtRSceNSwJXJ1JAjk
+X-Gm-Gg: AZuq6aKrYZi1SzaJeOWLlDPgg/P9TEnDLoAjDESkuC2u5V/97TgP3MwG/A0B1Ox5EgC
+ rp6S89xkryOEPS2pAAvGPTU0CP6xPZr2l94Cpw3nkb5cuId6cvFWqUycvbplgzILWMaE1zf7uD1
+ L/k1+5SnCH6rBIP9fBe59ybuUY0vMEKSJuYT/jSCBa8PA3zVMO4Kv26biURDrktrmjvlwttwp1N
+ 8L4lKYI1q5hiqKj3piaMqtT7Ub6lUJyeqoZltLr9Do/dgklOcgLz70+n1oIWFd+9Wb0pFV3kBvr
+ nzc0Kmf4k7ZgnKy24MxueiqyiGHy2li8iCYe4+pNwMcJnN78JypqYvCa9fosB/1R1EuxJujvG6K
+ Vw8xBkx2sjsLWXcvnBpFGl2In5EfEdiv9Tdl4102VeSQYnbFEyfUgSYoJKhHMjQbalcbC3ZCpLQ
+ 1f
+X-Received: by 2002:a05:6512:39d4:b0:59d:e65a:26ba with SMTP id
+ 2adb3069b0e04-59e45152d78mr4105627e87.27.1770661945893; 
+ Mon, 09 Feb 2026 10:32:25 -0800 (PST)
 Received: from xeon ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-386b624d4afsm27446681fa.17.2026.02.09.10.17.11
+ 2adb3069b0e04-59e44d299ffsm2815391e87.55.2026.02.09.10.32.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 10:17:12 -0800 (PST)
+ Mon, 09 Feb 2026 10:32:25 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Ion Agorria <ion@agorria.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Peter Geis <pgwipeout@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/2] video: ltl106hl02: adjust power supply name
-Date: Mon,  9 Feb 2026 20:17:02 +0200
-Message-ID: <20260209181702.33190-3-clamor95@gmail.com>
+Subject: [PATCH v1 0/6] ARM: tegra: various fixes
+Date: Mon,  9 Feb 2026 20:32:13 +0200
+Message-ID: <20260209183219.34250-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260209181702.33190-1-clamor95@gmail.com>
-References: <20260209181702.33190-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,29 +97,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename vdd-supply to power-supply according to the latest schema.
+Minor adjustments of device tree of recently added tegra devices,
+board adjustment for P990 and rename of sdhci to mmc in all
+tegra devices ligning it with Linux kernel trees.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/video/samsung-ltl106hl02.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Svyatoslav Ryhel (6):
+  ARM: tegra: lg-x3: fix panel property
+  ARM: tegra: surface2: fix panel supply
+  ARM: tegra: mot: change backlight LED source
+  ARM: tegra: remove unsupported properties from the max8907 node
+  ARM: tegra: rename sdhci nodes to mmc
+  board: lg: star: make panel fix optional
 
-diff --git a/drivers/video/samsung-ltl106hl02.c b/drivers/video/samsung-ltl106hl02.c
-index 1efc9fca610..97881a1524e 100644
---- a/drivers/video/samsung-ltl106hl02.c
-+++ b/drivers/video/samsung-ltl106hl02.c
-@@ -93,9 +93,9 @@ static int samsung_ltl106hl02_of_to_plat(struct udevice *dev)
- 	}
- 
- 	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
--					   "vdd-supply", &priv->vdd);
-+					   "power-supply", &priv->vdd);
- 	if (ret)
--		log_debug("%s: cannot get vdd-supply: error %d\n",
-+		log_debug("%s: cannot get power-supply: error %d\n",
- 			  __func__, ret);
- 
- 	ret = gpio_request_by_name(dev, "reset-gpios", 0,
+ arch/arm/dts/tegra114-asus-tf701t.dts                |  4 ++--
+ arch/arm/dts/tegra114-dalmore.dts                    |  8 ++++----
+ .../arm/dts/tegra114-microsoft-surface-2-common.dtsi |  6 +++---
+ arch/arm/dts/tegra114-nvidia-tegratab.dts            |  4 ++--
+ arch/arm/dts/tegra114.dtsi                           |  8 ++++----
+ arch/arm/dts/tegra124-apalis.dts                     | 12 ++++++------
+ arch/arm/dts/tegra124-cei-tk1-som.dts                |  8 ++++----
+ arch/arm/dts/tegra124-jetson-tk1.dts                 |  8 ++++----
+ arch/arm/dts/tegra124-nyan-big.dts                   |  6 +++---
+ arch/arm/dts/tegra124-nyan.dtsi                      |  6 +++---
+ arch/arm/dts/tegra124-venice2.dts                    |  8 ++++----
+ arch/arm/dts/tegra124-xiaomi-mocha.dts               |  4 ++--
+ arch/arm/dts/tegra124.dtsi                           |  8 ++++----
+ arch/arm/dts/tegra186-p2771-0000-000.dts             |  2 +-
+ arch/arm/dts/tegra186-p2771-0000-500.dts             |  2 +-
+ arch/arm/dts/tegra186-p2771-0000.dtsi                |  8 ++++----
+ arch/arm/dts/tegra186.dtsi                           |  4 ++--
+ arch/arm/dts/tegra20-acer-a500-picasso.dts           |  4 ++--
+ arch/arm/dts/tegra20-asus-transformer.dtsi           |  4 ++--
+ arch/arm/dts/tegra20-colibri.dts                     |  4 ++--
+ arch/arm/dts/tegra20-harmony.dts                     |  8 ++++----
+ arch/arm/dts/tegra20-lg-star.dts                     | 10 ++--------
+ arch/arm/dts/tegra20-medcom-wide.dts                 |  2 +-
+ arch/arm/dts/tegra20-motorola-mot.dtsi               |  6 +++---
+ arch/arm/dts/tegra20-paz00.dts                       |  8 ++++----
+ arch/arm/dts/tegra20-plutux.dts                      |  2 +-
+ arch/arm/dts/tegra20-samsung-bose.dts                |  2 +-
+ arch/arm/dts/tegra20-samsung-n1-common.dtsi          | 10 ++--------
+ arch/arm/dts/tegra20-samsung-n1.dts                  |  2 +-
+ arch/arm/dts/tegra20-seaboard.dts                    | 10 +++++-----
+ arch/arm/dts/tegra20-tamonten.dtsi                   |  2 +-
+ arch/arm/dts/tegra20-tec.dts                         |  2 +-
+ arch/arm/dts/tegra20-trimslice.dts                   |  8 ++++----
+ arch/arm/dts/tegra20-ventana.dts                     | 10 +++++-----
+ arch/arm/dts/tegra20.dtsi                            |  8 ++++----
+ arch/arm/dts/tegra210-p2371-0000.dts                 |  8 ++++----
+ arch/arm/dts/tegra210-p2371-2180.dts                 |  8 ++++----
+ arch/arm/dts/tegra210-p2571.dts                      |  8 ++++----
+ arch/arm/dts/tegra210-p3450-0000.dts                 |  8 ++++----
+ arch/arm/dts/tegra210.dtsi                           |  8 ++++----
+ arch/arm/dts/tegra30-apalis.dts                      | 12 ++++++------
+ arch/arm/dts/tegra30-asus-grouper-common.dtsi        |  2 +-
+ arch/arm/dts/tegra30-asus-p1801-t.dts                |  4 ++--
+ arch/arm/dts/tegra30-asus-tf600t.dts                 |  4 ++--
+ arch/arm/dts/tegra30-asus-transformer.dtsi           |  4 ++--
+ arch/arm/dts/tegra30-beaver.dts                      |  8 ++++----
+ arch/arm/dts/tegra30-cardhu.dts                      |  8 ++++----
+ arch/arm/dts/tegra30-colibri.dts                     |  8 ++++----
+ arch/arm/dts/tegra30-htc-endeavoru.dts               |  2 +-
+ arch/arm/dts/tegra30-lenovo-ideapad-yoga-11.dts      |  4 ++--
+ arch/arm/dts/tegra30-lg-p880.dts                     |  2 +-
+ arch/arm/dts/tegra30-lg-p895.dts                     |  2 +-
+ arch/arm/dts/tegra30-lg-x3.dtsi                      |  2 +-
+ arch/arm/dts/tegra30-microsoft-surface-rt.dts        |  4 ++--
+ arch/arm/dts/tegra30-ouya.dts                        |  2 +-
+ arch/arm/dts/tegra30-pegatron-chagall.dts            |  4 ++--
+ arch/arm/dts/tegra30-tamonten.dtsi                   | 10 +++++-----
+ arch/arm/dts/tegra30-tec-ng.dts                      |  2 +-
+ arch/arm/dts/tegra30-wexler-qc750.dts                |  4 ++--
+ arch/arm/dts/tegra30.dtsi                            |  8 ++++----
+ board/lg/star/star.c                                 |  4 +++-
+ 61 files changed, 169 insertions(+), 179 deletions(-)
+
 -- 
 2.51.0
 
