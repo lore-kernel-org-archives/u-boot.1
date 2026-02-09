@@ -4,99 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A20FE81BD7
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 15:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F6BE78D74
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 16:05:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 404BD8388D;
-	Mon,  9 Feb 2026 16:12:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 79FC580325;
+	Mon,  9 Feb 2026 17:05:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ksby3D/c";
+	dkim=pass (2048-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="Y4HAoSU4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4D46839A5; Mon,  9 Feb 2026 16:04:16 +0100 (CET)
-Received: from mail-yx1-xb142.google.com (mail-yx1-xb142.google.com
- [IPv6:2607:f8b0:4864:20::b142])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4D30D802C1; Mon,  9 Feb 2026 17:05:04 +0100 (CET)
+Received: from lahtoruutu.iki.fi (lahtoruutu.iki.fi [IPv6:2a0b:5c81:1c1::37])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 792B38341A
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 16:04:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D3CA80325
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 17:05:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jcethrid@gmail.com
-Received: by mail-yx1-xb142.google.com with SMTP id
- 956f58d0204a3-649d4c77a32so3935127d50.2
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 07:04:09 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770649448; cv=none;
- d=google.com; s=arc-20240605;
- b=QebnXxM8GWlNquN8OV23XAk0FOaTJRMyo36KMzirirbFVbjk12hfOfwY2jCzH/uw5K
- XOQsJHc2wJ9Kr5UqZWnMfjIxNatrrc8CtkFqxynGsqPD6fcTTgKmlsxtw66qdEeJz7Sa
- a8QE0CSqwlJt01RAOtD0o44FpviAc4AkZ0LrdXwO6A9ihhct4pT9nx04KulXGebXkXT0
- cITerh/TjJsT6pNNPH/V10T3CXXRP5aq9htK4m2v6KpXwcNr88yTe3cQn3zXA//VAc2D
- 3xY0Mh+OZEcRl72ucgPAZT3RKlqFdmueofQBAgFBW7HQIShQpAr3fKShRY1Yeo15tuEL
- YlJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=GD1DZwIfzm4m0wUrcQWTsBpXIRpsXqpJacoWnAQpTH4=;
- fh=vrCOCchtemwOqCgP/SWMtdnwckWloAK4b0xV9dwuFA8=;
- b=RDmesKZTmR3XYlihSkFs0jLm2IsUla/TCCV/PgfmsMkz5o9fQX0mOyVQiBeGvWHeLJ
- 6vvONeQYOv1sQDlRq85EurpqJcpVPEIfQbl/pVgmzYAX9E6gL2NxvI1Ara2cXOPILbZ8
- ZewdFBxEggOR0bhKtjIC6dFfyuLThlf9W2wxWrY10EtjnqjYj8t8a4+HUec0Wiys7gsu
- 01F75HwqyTU78wOJGriocLuly9FjavhpZb7c+I2qOOfrlNvyCCATFCy+2x+5b3Anut64
- LTb7MKe7nhTRrHnVqY7YC1zpGIwmew/d30Qa7rkUlEltC9iRmkCGZoU2z6+A5Kmae0as
- DX8g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770649448; x=1771254248; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=GD1DZwIfzm4m0wUrcQWTsBpXIRpsXqpJacoWnAQpTH4=;
- b=Ksby3D/cZ93IfJWatHdRFhR/T75TBXNYV1u7cTJP6fkPbWwQOsRlMuZ19Q/B9bgJJM
- T4YrSKuUR9R0DLXay5t4W+EesHGBFu4zUjaJvBw1X3shD4lSRWPnL3++eVTtxXhrQgDp
- zKXJmF2Mk3k4TVDYnsJZgk4Y70+ULDOfMKcE+MBrWTTSmIfQaKvvccTIFZUQl0I2HoXa
- jD9ZmoCkG3sNmaUMApO3Esett9C3DRt7AT7vS4VUIotYIb7p71ChQbURiPm1i1oaAbym
- grTvi8c5yrwPHNDMCqEpb88WC5jVqKzZAkFYGV/92w/rJDVzJB8vcP15e6eFEWZ8y4wW
- crAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770649448; x=1771254248;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GD1DZwIfzm4m0wUrcQWTsBpXIRpsXqpJacoWnAQpTH4=;
- b=g/j2Ei6yoFoXGcv/GLjK69dl6VSsPwIOQ0PW58FwbTrulTLcbu5jMjKDHSunILWyEl
- wTBJ5cqivkQmE4rPrlgdaRZ0UVJzAK5L4EEcWNRzNlNtU2oKJWVXyxcmWqqqq15KJIEn
- klzhnuFGawp82J5VTamTZq2FgnvnxOxBvJ74tahfxFGxXQ/P5c67myHWXYNQYcV9Txkp
- b/t8czTz4inhfRmNTkkvz6TRj+lEERAPY+w2Rj+EqSSv0+2908C9cSzdok+u1bSunjnz
- WcTrAzN4NS9Qlok5czfaATs7RKVG4WaGH8Wf9m/KuRRtle1aeffBNORIkjoz6lIKDbZ7
- vkhQ==
-X-Gm-Message-State: AOJu0YzjUtSwZpRljJxA/XBcKiZ71X4J2TJ2kjGiz6OR00gLEkHfAmtC
- SSUjT+FbCqoYW4ncFHj25UWC8pvmgtewT0KCpiMckttUMLlqn36aCcS/+FUlW+Z4lYNBhet1p8E
- UDBVsm5NCbH3jaavMp6KhgAUbC+C9veTkv5vyTfQ=
-X-Gm-Gg: AZuq6aL2mmoKkcpFiPmiBgfTvrMLkY3gZCccUa+RvFA7eQLSEyilj91m+1sNUuWqpP+
- FqfE3HysxvcDhPm6BmkXAKh84WqqxU623x3bIYdEqyld7oLsJZECAeLddsXN1x6iAj0dVrqQZVQ
- CQc1bVxv1fUYadU2tu9Sp47XgTEQxV8bWUr1xuq5n+i5xhoi7zcbGMwQCKl1WmaRPhmab73GYn0
- cJloYbIbQdmL7t71l8wakuGXmoQwwuXX/RL8dzgbIICOg6a3dYUtv0uUiKA/b/pfp3z8te0ryO5
- fecQzDI=
-X-Received: by 2002:a05:690e:5ca:b0:649:44b0:e612 with SMTP id
- 956f58d0204a3-649f217aae5mr7056413d50.73.1770649447873; Mon, 09 Feb 2026
- 07:04:07 -0800 (PST)
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by lahtoruutu.iki.fi (Postfix) with ESMTPSA id 4f8qK71zb8z49PvN;
+ Mon, 09 Feb 2026 18:04:59 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=lahtoruutu; 
+ t=1770653099;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LwrtX9Jwn0k+Deh3xSvv1z5U2dFzYGBJijGpTwY97xs=;
+ b=Y4HAoSU4N/582glclrs9e91rDqs+2UNwgnB679fTu95NPs+uOfFL+nUHPfM3TrTzRFHJTU
+ fCPx9vaox5MmyK89XwQeYdvZm2U+m1F+m2gWwzQJuezXn5EXpUFVMheSH+Pdpe185Gvyri
+ +PJ+6o5xDD5jBZbrt2GcpCoiFtzjShbZDqGzIszUKOn4iNPu0/YNY0s6Wm65XmOw9rKG2W
+ q+VZ8PQcUWlAUVOAd4GDXdhQbrwBTlwAFU4SU04e+3ssMZnm+2qdrFT/F448lUK4OdXO6z
+ HpSWKR61uLIfwhTMrWbxrpNp37jVoRIuhcPZI8MrFKmEqKawd4+X5GObyXzQnA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=lahtoruutu; t=1770653099;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LwrtX9Jwn0k+Deh3xSvv1z5U2dFzYGBJijGpTwY97xs=;
+ b=LMEZipaQqsJNCUzmbJA9OtZwdvNnG7JK7nXHC/tzZIHxQQwHifcxF78JhPKb6Qd9IG4ueX
+ nCWozSTdmwnuNEtXGGRYRzpOe9SRcbneW0hVevNMqTsdx8zHBwIyvIEZQpfSzN/YHRBqx+
+ SwNgKhhwiDFm5dmw/4HJ1jNRxZfyFoG3vr12sdXc71ZKO+jzvH/Oy1CXeBGZEvSxBFXsPt
+ WhrfKW8MKazFclaS3BgPNGRHCtMi7xR+bp+6tld4ZSA1EeYrOWF6520Zs+ldZrEieZ4xWB
+ wONBeIEIM6nVYtKq7KTt0Nn/kSxgvyHmCg5uez8OGg7cFFw4SJo0Utfya8pAsg==
+ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=lahtoruutu; cv=none; t=1770653099;
+ b=U84czn7V/jG/oVbtUqwHkm9twPYkIRtkSqdsVmMpTBvCyAiQ6Sr1MhcLApW1al9007eSUW
+ 2Sj9R0WBP0qPZxzyzyE1YrmLhV6gMxGvxTa9SFHYiJ4Vok66pE/LlaqNjyx7PY7FbNXF1R
+ AaI3qXZvuFbSf9khx/y3Lh9mxvu+3nhgjyA255QWTiwOgYHCM/5B8QlsGFJ0GzYp3aYB48
+ IXaeHV7ray+S4odfSQdDOuBSeJ2eYhEBegNnG8KmDX9VyKXP5siaJsvrtfg9plKt0zKdzW
+ wi/3093jmqY/v5knG+4rEnyYJbdvqj8GRSVvHA+Kn7lkI0L7AbEOYJE29HUrrQ==
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+Date: Mon, 9 Feb 2026 18:04:57 +0200
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+	u-boot@lists.denx.de
+Subject: Re: [RFC PATCH 0/4] add software ecdsa support
+Message-ID: <aYoFqWew28crCb1i@kehys.lan>
+References: <20260202170307.217200-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
-From: Caleb Ethridge <jcethrid@gmail.com>
-Date: Mon, 9 Feb 2026 10:03:57 -0500
-X-Gm-Features: AZwV_Qi8XOJm98XOv8wRoGNOCeFJOVj8c5APdKYYwgkhi1Eh_MeeY2OgYIs6e4k
-Message-ID: <CAA=Y9tY1pJV5O=23YSgM-1TnRQNpg9zrPJsSn6YaL_uAPxUo=A@mail.gmail.com>
-Subject: [PATCH v2] arm: dts: sc594: Update sc594 EZKIT GPIO polarities
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "trini@konsulko.com" <trini@konsulko.com>,
- Greg Malysa <malysagreg@gmail.com>, 
- "caleb.ethridge@analog.com" <caleb.ethridge@analog.com>,
- "linux@analog.com" <linux@analog.com>, 
- Philip Molloy <philip@philipmolloy.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 09 Feb 2026 16:12:46 +0100
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20260202170307.217200-1-philippe.reynes@softathome.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,59 +90,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Ethridge <caleb.ethridge@analog.com>
-Date: Mon, 9 Feb 2026 10:00:10 -0500
-Subject: [PATCH v2] arm: dts: sc594: Update sc594 EZKIT GPIO polarities
+Mon, Feb 02, 2026 at 06:03:03PM +0100, Philippe Reynes wrote:
+>I have tested this code with sandbox, and I have
+>followed those steps:
+>
+>0) build u-boot using sandbox_defconfig and adding those options:
+>CONFIG_ECDSA_SW=y
+>CONFIG_ECDSA_MBEDTLS=y
+>CONFIG_ECDSA=y
+>CONFIG_ECDSA_VERIFY=y
 
-Updates the polarities for the GPIOs on the sc594
-EZKIT carrier board for the newest revision, Rev D.
-The new carrier board revision has different polarities
-for some GPIOs. This patch updates the sc594 entries
-to match the sc598 entries that were updated in a previous
-commit, as both SOMs can utilize the EZKIT.
+I believe that I was able to build an ECDSA signed fitImage of a Linux 
+kernel. At least "dtc" shows that a signature is present, just like with 
+my earlier attempt with RSA.
 
-Note that these updates are for the EZKIT carrier
-board used by both sc598 and sc594 SOMs, not the SOMs themselves.
+>1) add a signature node to an its file
+>	signature-256 {
+>		algo = "sha256,ecdsa256";
+>		key-name-hint = "private-key-256";
+>	};
+>
+>2) generate an ecdsa key
+>openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
+>
+>3) create the itb file
+>./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb>
 
-Fixes: be79378 ("board: adi: Add support for SC594")
-Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
----
-Changes in v2:
-- Updated commit message with more detail according to reviewer feedback
----
- arch/arm/dts/sc594-som-ezkit.dts | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+Step 1) is part of <file.its>, which specifies how a signed payload, 
+such as a Linux kernel, is built in <file.itb>, right?
 
-diff --git a/arch/arm/dts/sc594-som-ezkit.dts b/arch/arm/dts/sc594-som-ezkit.dts
-index eeca6d17504..11154e65ed6 100644
---- a/arch/arm/dts/sc594-som-ezkit.dts
-+++ b/arch/arm/dts/sc594-som-ezkit.dts
-@@ -22,7 +22,7 @@
+I assume that arch/sandbox/dts/test.dts is the source code for 
+arch/sandbox/dts/test.dtb. Would this file correspond to the file 
+u-boot.dtb in a non-sandbox environment (in my case, based on 
+rpi_4_defconfig)?
 
-  eeprom {
-  gpio-hog;
-- gpios = <0 GPIO_ACTIVE_HIGH>;
-+ gpios = <0 GPIO_ACTIVE_LOW>;
-  output-low;
-  line-name = "eeprom-en";
-  bootph-pre-ram;
-@@ -30,7 +30,7 @@
+For me, mkimage version 2025.01 (as shipped in Debian Sid) would crash 
+if I ask it to write the public key to u-boot.dtb using the parameter 
+"-K u-boot.dtb". The following statement in do_add() would hit SIGSEGV:
 
-  pushbutton {
-  gpio-hog;
-- gpios = <1 GPIO_ACTIVE_HIGH>;
-+ gpios = <1 GPIO_ACTIVE_LOW>;
-  output-low;
-  line-name = "pushbutton-en";
-  bootph-pre-ram;
-@@ -70,7 +70,7 @@
+         ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
+                                  info->require_keys);
 
-  octal {
-  gpio-hog;
-- gpios = <8 GPIO_ACTIVE_HIGH>;
-+ gpios = <8 GPIO_ACTIVE_LOW>;
-  output-low;
-  line-name = "octal-spi-cs-en";
-  bootph-pre-ram;
--- 
-2.34.1
+The function do_add() is invoked by ecdsa_add_verify_data(). For my 
+kernel build, I did not yet try a mkimage that is built from the latest 
+u-boot. Should that make a difference?
+
+For an earlier experiment with an RSA signed fitImage, I was able to do 
+the following:
+
+make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- all u-boot.dtb
+
+cp u-boot.dtb u-boot-pubkey.dtb
+ALGO=$(scripts/dtc/dtc -I dtb /target/fitImage |grep -A10 signature|
+sed -ne "s/\s*algo = \"\(.*\)\";/\1/p")
+tools/fdt_add_pubkey -a "$ALGO" -n dev -k . -r conf u-boot-pubkey.dtb
+tools/fit_check_sign -f /target/fitImage -k u-boot-pubkey.dtb
+
+make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- \
+EXT_DTB=u-boot-pubkey.dtb
+
+cp -L u-boot.img /target/
+
+With CONFIG_ECDSA, fdt_add_pubkey would SIGSEGV (unrelated to these 
+changes) and fit_check_sign does not appear to be built.
+
+I would appreciate some help in embedding the ECDSA public key to the 
+u-boot image, so that I can test this.
+
+Best regards,
+
+	Marko
