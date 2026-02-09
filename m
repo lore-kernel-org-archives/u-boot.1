@@ -4,87 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3790BE94617
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 22:53:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DEE2E94623
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 23:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD3378341A;
-	Mon,  9 Feb 2026 23:53:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E9D88341A;
+	Tue, 10 Feb 2026 00:43:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l4YPV1Gj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OlrmuZeA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBEE583C5E; Mon,  9 Feb 2026 23:53:41 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id CC14683C61; Tue, 10 Feb 2026 00:35:11 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE5E4805D7
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 23:53:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CE93805D7
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 00:35:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-45f0dbe7dafso1214787b6e.3
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 14:53:39 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-45efd53148eso1222472b6e.0
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 15:35:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770677618; x=1771282418; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0ORU3BDQJxguR//Zla399iQCx/s1okcQz1eNbQs6WQQ=;
- b=l4YPV1GjqUkLFR/rA7nc9jyheKIW6J/ppvlJveknxNL9rEPlpAidog1hrkQFPhACHU
- dh4dD2qUiR/DsKircMtXCkzmo7SfEshQn+sonEHDDGRcgNgrXAI6Cxl92VF6WUgzRLQk
- nPY8zs7w5Lyo0ZG/UoTQF61PyGha0fvzQ5r70=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770680108; x=1771284908;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=amvXWi7XE7GQCk1GMPh0IYUHo4RJIT0U3ojOgrnY5kk=;
+ b=OlrmuZeAsOOSePVEhtZMVNnRgNXqkjeZFkVdyppDSKzH5/+g2FUMFEuuyF6ACsWBNa
+ W8nM7AoJN5XPMdzSYm/4ELRlu2rgBIGsX9XpFTAZZUlCDU3+ERBz2ZkO/bFUjzug8v20
+ E0tsGkwdF+H3vaZ1xee+77C8Jo1d/AWFLNbHlFTvWDYJbgXUe0ofybU/fPij/fl7Mzwj
+ bRiBnrFliF8jSNinunMTLrDuWbF4Qi/hUvyP1XGhv5FiXWy/E+VCPf+IeAmVrxvcUS2+
+ kMlxgKNYnDEveVaqv0mRtVQD3H1koZYMkTp8MvhFQRjkDP++jBMCTYh8aclHsW2a8KqA
+ 8BZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770677618; x=1771282418;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0ORU3BDQJxguR//Zla399iQCx/s1okcQz1eNbQs6WQQ=;
- b=XsQD7g8PP8Fg65WjWMEQays9hlVTRxgMztGw8zGwtz26n0Lbk3HydpACGnhcAeoUNx
- MirU/5DMr1W3d2vsI/3rbTx3VQE4xM1J5+j8yZm2wj11GKmbK6+mWrHVsT+6CG3Noau1
- yELvG2dEK5tNlvqLF16EYJa7K5XNjevQ9u9iaKkS4CsckgfnWRVuZmOCZ+bEIve4lSSD
- fUYrq+HE6TnuoEZc+HOiDsYi8IkugBCM1kvvtAw8jW0CRjDed83TQO7YqC9tvhRlQKvO
- WXw+87KHl+9+0HMd7uYauqR+murlZPkQ9iasVQj7G7bTpdBHcREBFLbw2rMuekvbMRqK
- igRA==
+ d=1e100.net; s=20230601; t=1770680108; x=1771284908;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=amvXWi7XE7GQCk1GMPh0IYUHo4RJIT0U3ojOgrnY5kk=;
+ b=dFvWQaGCFfpXVXybS4a1HLx3seqTF2K/+BRhM5WbBtUrbopei7V2Crd5KgbuvG+dPI
+ DmW6ULn9mbBRPP92+prFMEhm5opXWYZknifyW042Zmh81EOYIGdVCAidHWgf9Qf9/GnF
+ lDtPoOeQFegiMBULwRmc86YvsrZzWTgez8qxhX69oDYLXpXuIPlQcoGbUaIhJFbdJ2DY
+ 8ipMGSg6+Oz+6sxvwDCqG2ahoIFF8p+TRrCLtkrsfM72xZaTwPV35luh2fdQerZ2sODF
+ eOgpbfIQa66NqN1fSl/Xje+LE+sSLe8VIo93ZcH5t6fI3tBa+Mni1PtM2yeXRX508Iqc
+ KROA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhtbBky9pIHf6QeEW5X8Ei3QRJTWolN9d2/tvfvLK16lM829rnkPIkCA3op22ZbrdkTiv3WPg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx3x1G7hKOdqMM0dcAh+Sj8LNgDYEm6Lj1j5CtW4wbLV+iptTk3
- X0g7CknYneTim1Dvoph/En8hSzHYGdBt6zyXRL7YUay1z3qMEiCLp22MfkZs8cn5H6U=
-X-Gm-Gg: AZuq6aLjq4LVGSTOGcei+S1i0w177SC5g2g1AyRtGN3H5BQ0gNSlRv8iN7ah8bfdznE
- vxTBd2H6cS5RJn2gSOwnByQ0rRwZ1fkK8ZjQ23qt2eGAPchjFnkrxutbTqCl4hJXTQPWkjuzPXh
- 5U6AwvXUZKMxTe9DL+nkoxYq+wH/9Mn541qiFmIkOOuI0HJ8K+f4BFNDWkkMnACD6oz+1hbSiGI
- NQ1KWN3ClNteHz3VbBpfcJw8RovuJOl6Sd2qFDQ7NAAbwwZB2v/8YrrBZNUGwU2+776I8AXKMlB
- MXd9SbE6wKKxU2P+Oh7VXajlz1Q6rMSrEDqd70UceCmrgyw82PtNPjXeHm5YfQztFPel8q3TfJY
- rT+qWuZLVGvjxm4kH+XcLfttZXyeHQQt527rm+D+2q+gPmLM9nn1BzSgpDaDLxBknWRbNt5muHb
- xbSGD8poKZuhUIhM52/+Uop1FGnBBMJqUC/+DRyvOKqUX+KMj6jOlaEGsoPgAN4qtFUnm5aToDd
- mxv0RHkvlOUAIXYJSdrTjTQzLOmdfzdFmsJ+P1eCOayX0Z1ZE2ahhrdZRrFSg==
-X-Received: by 2002:a05:6808:4f23:b0:450:ac94:5ef5 with SMTP id
- 5614622812f47-462fca1e98emr5679353b6e.16.1770677618564; 
- Mon, 09 Feb 2026 14:53:38 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4631407de2dsm5254179b6e.16.2026.02.09.14.53.37
+ AJvYcCVgcRaqSohyShxMn+UWyMTDJ2qJoZh9lGAUHkaZ4V6PLyN2J5egz8DpYBxCIuqOTZN0T819ijg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnteiYD67CsSCH4YXUfJ6csozw5BuGt196Lyi7uq5+2GxcEjuh
+ b4KouZgLJqcy3epwrc73+X+it5XpXGW7jzdqqKkEDFxI6N3vlWtBF1+Yl4ZVLo2iMD8=
+X-Gm-Gg: AZuq6aIo0l5bSl2Gypyd50lzfCIKqs7FOIiAJ0oNBzszWpZBqwJNT0PbwiWMzgj08cR
+ DQb2/vlIcyVbgWeIwDntBpXAsAZ5wMINooYWPf2oRFK99Ya+8KXvBmVXdLjNdkDjoYaZJyp8/4F
+ ruv//dtsFxf/xairUAqR8aC36MXrSotbxFOjFsneqUOEqbXz7jIAw7Gw7AnlQr31RvfeCL/OZ7o
+ OYB/rRT5qaZCh2jwbL7Ciz1zCFX1SmpnBz1StK8HFGlLZD8n31+/kO2CjAzs2bhHtSMLaXVxhi+
+ E9OilXJoumX94uMybREogl03ySbT0zuslXlo56b37k4bMsqM3RIgMXdKfnrB/Z7ylxdTkwzVjc9
+ rHMT0JMD99HwWm0D1sEbEr6QSCNrLTFSOknBgslp3TxNRp1T1J9pb4x7dXmyGF9bUZJw+hGnqks
+ ptgxuZim9aYdX9K7e+Yl6U75RxYdI=
+X-Received: by 2002:a05:6808:338a:b0:450:b8da:b800 with SMTP id
+ 5614622812f47-462fcb1e0f3mr6877944b6e.47.1770680107890; 
+ Mon, 09 Feb 2026 15:35:07 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:cee0:eb0c:b683:ad1d])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4631407de2dsm5304309b6e.16.2026.02.09.15.35.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 14:53:37 -0800 (PST)
-Date: Mon, 9 Feb 2026 16:53:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: Re: [PATCH] usb: dwc3: core: Use IS_ERR_VALUE() for ref_clk rate check
-Message-ID: <20260209225332.GA2436104@bill-the-cat>
-References: <20260209201415.303190-1-jonas@kwiboo.se>
- <9a23daec-39bf-4b2d-85af-820e015ec4dd@mailbox.org>
- <20260209205126.GK2603314@bill-the-cat>
- <f5dd98cd-be29-4587-8ddf-3e43fcb7a811@mailbox.org>
+ Mon, 09 Feb 2026 15:35:07 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 0/3] pinctrl: mediatek: support for mt8189
+Date: Mon, 09 Feb 2026 17:34:16 -0600
+Message-Id: <20260209-mtk-pinctl-mt8189-v1-0-a7a3069eda6c@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VUDPe3uz/S59PWdx"
-Content-Disposition: inline
-In-Reply-To: <f5dd98cd-be29-4587-8ddf-3e43fcb7a811@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yWMQQrDIBBFryKzrtRIKTFXKVlYHdOhVdPRlELI3
+ SPJ7r8P761QkAkLDGIFxh8VyqlBdxHgXjZNKMk3Bq30XWllZKxvOVNy9dNm3/VGBm2VV8Eb727
+ QvJkx0P9oPsaTGb9LS9fzhKctKF2OkeogMtNE6RptqcgwbtsOT+03JZQAAAA=
+X-Change-ID: 20260209-mtk-pinctl-mt8189-f2a0d0fd9dc4
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>, 
+ Bo-Chen Chen <rex-bc.chen@mediatek.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1385; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=Iq3VJ87Sra7q36vFO08KQM+4ptDPugZFM01rpDYZN2w=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpim79rmQwKjnMooZzGdOmrFUSj3UQBpW82hCnm
+ BBbrAHFHJGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYpu/RYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AMtcH/RlpFQeDZPw3ErZfNq+SL1uhwVr5oC7B+bKZd4L
+ gViIcf3ti647P2pxfXz2u7K4aQVleL64e0zb9FGB5doQb47OO3jUATL3xVzBp3LbDpdbJcrAY7X
+ vVs/uaqqtM0xxj4mAuYafJQKAqEU3DVB/fDECK6NmHYy32eC/XuXj5XZfxQhGYmba2WLjlsWlKS
+ Cf3VDDPqasFESW561ye5/kPBGR+riLCE56J7gdFFiBeqCAhac9iL+wkznhr9LJl9rh97W/E1L5D
+ BIRvq6iELmV7JN8LsQ6m6LWp5qypDMNW9DR2zZ6eYff631+uzobsJkGkvUCIQ7T1kgANj6tWrkK
+ ABIs=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+X-Mailman-Approved-At: Tue, 10 Feb 2026 00:43:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,57 +122,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds initial pinctrl support for the MediaTek mt8189 SoC.
+This one has more register maps that any existing one, so there are a
+couple of preparatory patches to handle that. Then adding support is
+just a matter of adding all of the pin definition tables.
 
---VUDPe3uz/S59PWdx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Normally, I would also add the .dts changes to make use of this in the
+same series. But there are a lot of dependencies in-flight for that.
+So to keep the dependency chain from growing, I'll add/squash those
+changes into a v2 of [1].
 
-On Mon, Feb 09, 2026 at 10:46:03PM +0100, Marek Vasut wrote:
-> On 2/9/26 9:51 PM, Tom Rini wrote:
-> > On Mon, Feb 09, 2026 at 09:35:54PM +0100, Marek Vasut wrote:
-> > > On 2/9/26 9:14 PM, Jonas Karlman wrote:
-> > > > clk_get_rate() in U-Boot is documented to return clock rate on succ=
-ess,
-> > > > 0 for invalid clock and -ve error code for other errors. This differ
-> > > > slightly from Linux where only >=3D 0 is returned from clk_get_rate=
-().
-> > > >=20
-> > > > Some clock drivers take advantage of this difference and may return=
- -ve
-> > > > error code for clocks not fully supported in U-Boot.
-> > > >=20
-> > > > Use IS_ERR_VALUE() to check for an error code in addition to current
-> > > > invalid clock check to fix broken and unpredicted behavior when clo=
-ck
-> > > > driver returns a -ve error code for the ref_clk.
-> > > >=20
-> > > > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > > I wonder if it would be better to fix the API discrepancy . Could you=
- try
-> > > that instead ?
-> >=20
-> > Which API discrepancy? clk_get_rate behaves the way it behaves
-> > intentionally and there's some fairly long and recent threads about that
-> > resulting from attepmts to change that.
-> Align clk_get_rate() between U-Boot and Linux kind of discrepancy .
+[1] https://lore.kernel.org/u-boot/20260209-mtk-mt8391-initial-support-v1-0-b23ab9d0b9bc@baylibre.com/
 
-That's not in the current list of options. Please look at the various
-threads in the past 6-8 months (and some reverts about series that tried
-this). That was my initial opinion too, FWIW.
+---
+Bo-Chen Chen (1):
+      pinctrl: mediatek: add support for mt8189
 
---=20
-Tom
+David Lechner (2):
+      pinctl: mediatek: add bounds check on number of base addresses
+      pinctl: mediatek: increase max number of base addresses
 
---VUDPe3uz/S59PWdx
-Content-Type: application/pgp-signature; name="signature.asc"
+ drivers/pinctrl/mediatek/Kconfig              |    4 +
+ drivers/pinctrl/mediatek/Makefile             |    1 +
+ drivers/pinctrl/mediatek/pinctrl-mt8189.c     | 1276 +++++++++++++++++++++++++
+ drivers/pinctrl/mediatek/pinctrl-mtk-common.c |    3 +
+ drivers/pinctrl/mediatek/pinctrl-mtk-common.h |    2 +-
+ 5 files changed, 1285 insertions(+), 1 deletion(-)
+---
+base-commit: b99da05e1538b8fa153322da82917af2aa27e1d6
+change-id: 20260209-mtk-pinctl-mt8189-f2a0d0fd9dc4
 
------BEGIN PGP SIGNATURE-----
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYplaAAKCRAr4qD1Cr/k
-CsjTAQCKTtTZaFkreD0XpS1rZUo6Z0Qi4+VSwcfxYUhYp4Rm5gD/Vd8/WiBrtdg8
-dykEDcjGtN9HS+T/csV6Cw9iSLyCoQI=
-=FGyh
------END PGP SIGNATURE-----
-
---VUDPe3uz/S59PWdx--
