@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C25E7E0D0
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:12:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD39E7E0D0
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:12:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DE1C83C65;
+	by phobos.denx.de (Postfix) with ESMTP id AE9EB83CE3;
 	Mon,  9 Feb 2026 19:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BROCj2Ro";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dDRhYBeG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0666383CBD; Mon,  9 Feb 2026 19:12:06 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 3AB4A83C91; Mon,  9 Feb 2026 19:12:06 +0100 (CET)
+Received: from mail-lf1-x144.google.com (mail-lf1-x144.google.com
+ [IPv6:2a00:1450:4864:20::144])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D90983C5E
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:12:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2E2F805D7
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:12:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-59e3810df30so5478286e87.0
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:12:02 -0800 (PST)
+Received: by mail-lf1-x144.google.com with SMTP id
+ 2adb3069b0e04-59e4a04f054so2487803e87.3
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:12:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770660721; x=1771265521; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1770660723; x=1771265523; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ot2NVwtmgs0XqE/spxXwYxLoUInx0SZ8WzmxlqwpmNI=;
- b=BROCj2Roc792adc/gohmpzvnkaZeYCH8UH/u5s+1fUUZ/Dz4hqqxw8ig/CuKiipVBh
- H2vNwR5UWrggwCrb+KvTEb/kenQBZU1SM7wkSZmp+cnVPtS3dXB2sHa/zWqIrk+qgEmW
- xbP4ZwBHYi5UtzRv6MD4PqJPiX5cJ5VQ9bJ6C3alCVTMcplVxnrgrfCSLHCOCX41q/QK
- EBmRPMXrJES7l6NlWv2dxj89lmbprZlP78WInhBJm3p+E8xIpl7ZFbgjFwoNz1L5rJOi
- gyG9HpdYGQoxtUBInZsXjOoOWthDR5PeUv1AgDvAckKrUAHAcYkZIUpbSo2h4rgRNokL
- 86bw==
+ bh=so50/zwGYsURc9daEmRZdHSuQV9ytJK+cLvJnEyjU4s=;
+ b=dDRhYBeGALQ5CJTuJhkIr65C3FiYV/vAQVwTALrhUld4duuOYz+0dlnts8ZQ4bCz6r
+ wC6oq6UiUKEWZyLf+bBRrBho6kDQLHpP3NflzumlqgixE0s/wJm8H1VU9jGsUywBu8D2
+ Qfeh2VJwImtHvnuGUhhSsp1lRXZW/0kiy/ANO6rfpOYp6iRmq5jDv5b22QNVCZFcZKFk
+ iLOyHivgtXh0zmOI4E8NGdBoxnpEHjjFeDdryg6TLPnYyv/TiOkDd2I4AaxXf4Zd1jny
+ A92SeAx8+nhzaZf2vkeQxaYjBBSH56L/NCtkZnfmblPCAKW0FNTnYKZtq3GqAIjOX4T4
+ wa2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770660721; x=1771265521;
+ d=1e100.net; s=20230601; t=1770660723; x=1771265523;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=ot2NVwtmgs0XqE/spxXwYxLoUInx0SZ8WzmxlqwpmNI=;
- b=v5sV29ZpNUA5J1uM2Yxle5B5Jk0R6BDIig3wCfDK8J49NClmxzompOqQ7xb9VXH0LX
- 4YNQuMl+XJdDxWG1/RIBgVYGuRx1U6PbZUQ4Gx9F1+TMKBuKBivLzOv06n9f39bkEzhh
- zxNrUJoXrSCUNlYsskt5XwhBmJkusR5ZN9uIzhzlpnO0RbwDSe3YvHUxjJAWRqlRfLVP
- gnJuGE+whVWZKWRGXNd63y+F7NgbjPNEO0DsqI7lZ7fcukhMlqyVgjjWEO3IXF4ql0VO
- eUaV9ElP6nueHtGGVL9rS/W4WYDYq2BB4/aH67/n0RLZIqKr8UB8t5QGGi5FF0+nfZQc
- l7/A==
-X-Gm-Message-State: AOJu0Ywdk6vLRWJWomWKMFmjoI7Zft/TpGH9bObQojVAwLzkaZ3RjrbQ
- 2wuiWElZZ40nBymY5QPKfDofw7uPYptJy8JOhiqmWpCYbiJs50dffp9E
-X-Gm-Gg: AZuq6aIolnsK6JZ/U1uooAC8T2Dg5TrREeDC1X496tCAZMidqpeCJm0oCXW7AbH7yhn
- XEtnTH6YRvPDaDR/JzmrJIQi10sW4LNoA+MnozcenkkHDyy/X1Oqi1+GZWLVyAHibT4As8WtxaF
- pxgJOTT2Zub7X0rGS9SonqW9DY2MC2lVsh85TM8VpUsSkviuqcrhCk2Tc31DSYW+FUWX+pstYkq
- OP2z4R+7S5FwV1yO3u5Mb+yHnhh0XLmGNVDb68Za6ANqT6ioD7H+KxkKlYuI0kM90NvTbYLaoq6
- MNR/9jzd58ofu38zuEkwAHuTU+yCCn+K7a05uEh02o7aOH346cgGNOZP8scSAZxdnaMqUrG8/Aq
- QQgyZTW9dtn93jDYr7K2Cpp1hXUV7jcPGw+WHQgEx1rwxBR6OuYV2HoRL/g8mcqruOvQK+wiWTV
- T0
-X-Received: by 2002:a05:6512:39d4:b0:59d:e65a:26ba with SMTP id
- 2adb3069b0e04-59e45152d78mr4088657e87.27.1770660721289; 
- Mon, 09 Feb 2026 10:12:01 -0800 (PST)
+ bh=so50/zwGYsURc9daEmRZdHSuQV9ytJK+cLvJnEyjU4s=;
+ b=l+lRumukcZ+XG9uzVpHOe1Onu+4wVWEbcKffoGKc3BSl/bROq4MrfHniwOlJtNc5pb
+ hR8EPtvMosxYzkOLbcrzYkflIxatP+uMKvKH3kWgTQ8iG0OlPmG6kMOaR89AFfyE8G6C
+ s99kp62R9wEaa//QzG9c2yxbmMgC6+zRcOoDENcY3LedtV8tXfNsM2YcE1jItH5LlZg/
+ klljkEhoa4vgIfh0IcU/HTudC0a+GNkA7GEowJkQd39HvvCKZv/KbmlDtKRBqV27oC7P
+ Qiy6GZhpQlgfrYdssCseaWMnz4oQBQ+970jU708KdP1WWhnVjoOd+caYH7z13ULQdaYn
+ BgyQ==
+X-Gm-Message-State: AOJu0YwAFkMLPvXqYG6I0ql0ZMQMQiv5FTNkBDbo3Wa6NLHxdXSOdv5z
+ rwvTVZPG8uIFDyFjlq2TUPEl0EIzULCG/nfMoo18b2XOOJ1UQbVx57lK
+X-Gm-Gg: AZuq6aKi6fcUR/zypFyIUG177CysVAfZi9caI9CVeCgnTKD7yNPYUzBUB/J+YafOvzF
+ 8HYTEjIJGTQde42DQhgGIqtxcecSM9GB7R/3MLGopRW+lFxwOPzUbu8z6jqZJh9Jrkk6hmVDfwT
+ rr+x3fYcj0ICvx7PP8Kr8UPDA4JcNg16N5bhkQOHJPjrLR6AghJ34+yKRBXQaPj1YS54YAHfJyi
+ U+l+K0QJxJ32wmh0cRjuXa5P68nIlWtruWlxWnvXFZfNQ+wHqByGCChwkhYhiw/E2E8F4jMJaIE
+ swqCrLhipMTKH5/YMLQidHRQurMphroSUYT3SQ/0qL9kfzgRG+22QPMScSSpdy3o0IKYx9XTblZ
+ ME4WiIgiYIx6fP38XbtpdrxACULdWFkaeRXh+gci9xty9nwfzI+irWEas/+WBu+JI20viunTeK9
+ RWjsvlSkBkrrk=
+X-Received: by 2002:a05:6512:3b91:b0:59e:249e:d5e4 with SMTP id
+ 2adb3069b0e04-59e4515cb49mr4445602e87.42.1770660723051; 
+ Mon, 09 Feb 2026 10:12:03 -0800 (PST)
 Received: from xeon ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-59e44e25e4bsm2792801e87.88.2026.02.09.10.12.00
+ 2adb3069b0e04-59e44e25e4bsm2792801e87.88.2026.02.09.10.12.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 10:12:00 -0800 (PST)
+ Mon, 09 Feb 2026 10:12:02 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Peng Fan <peng.fan@nxp.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/5] power: pmic: cpcap: add Mapphone and Mot compatibles
-Date: Mon,  9 Feb 2026 20:11:46 +0200
-Message-ID: <20260209181149.32714-3-clamor95@gmail.com>
+Subject: [PATCH v1 4/5] input: cpcap_pwrbutton: set default keycode fallback
+Date: Mon,  9 Feb 2026 20:11:48 +0200
+Message-ID: <20260209181149.32714-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260209181149.32714-1-clamor95@gmail.com>
 References: <20260209181149.32714-1-clamor95@gmail.com>
@@ -97,26 +97,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Mapphone and Mot compatibles supported by Linux kernel.
+Set a default fallback value if no keycode is defined
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/power/pmic/cpcap.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/input/cpcap_pwrbutton.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/drivers/power/pmic/cpcap.c b/drivers/power/pmic/cpcap.c
-index f2076afff43..2fbbc7e80f0 100644
---- a/drivers/power/pmic/cpcap.c
-+++ b/drivers/power/pmic/cpcap.c
-@@ -112,6 +112,8 @@ static struct dm_pmic_ops cpcap_ops = {
- static const struct udevice_id cpcap_ids[] = {
- 	{ .compatible = "motorola,cpcap" },
- 	{ .compatible = "st,6556002" },
-+	{ .compatible = "motorola,mapphone-cpcap" },
-+	{ .compatible = "motorola,mot-cpcap" },
- 	{ }
- };
+diff --git a/drivers/input/cpcap_pwrbutton.c b/drivers/input/cpcap_pwrbutton.c
+index c8ad39d33ca..c52c0481f67 100644
+--- a/drivers/input/cpcap_pwrbutton.c
++++ b/drivers/input/cpcap_pwrbutton.c
+@@ -87,9 +87,7 @@ static int cpcap_pwrbutton_of_to_plat(struct udevice *dev)
+ 	priv->bank = irq_desc / 16;
+ 	priv->id = irq_desc % 16;
  
+-	ret = dev_read_u32(dev, "linux,code", &priv->keycode);
+-	if (ret)
+-		return ret;
++	priv->keycode = dev_read_u32_default(dev, "linux,code", KEY_POWER);
+ 
+ 	priv->old_state = false;
+ 	priv->skip = false;
 -- 
 2.51.0
 
