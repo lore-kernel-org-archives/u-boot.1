@@ -4,154 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44CF7E81BC2
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 13:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56572E81BC9
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 14:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 056F283C29;
-	Mon,  9 Feb 2026 14:27:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 75D08839A5;
+	Mon,  9 Feb 2026 15:04:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="GcqR6/SC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tMfSCeyh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8438B83BC9; Mon,  9 Feb 2026 09:10:26 +0100 (CET)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 51408839D5; Mon,  9 Feb 2026 15:04:02 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 717508397D
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 09:10:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B25F38341A
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 15:03:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chen.huei.lok@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=B/o6KUydl3tprjtQuOiYOZe4HclVXLohlSZDZkM3cZZfvYEZmc+tg1FSfBtwU5DMyENqP/7QWN9Z8tSX5V3h1p0/eGb0Qtrepis7mnp+V3AkQQr/xprL+ooVHqG/VFF9alz3PRYTkwq+Mbo9EDEkWSGfRGE9O/Bd82KQ5TBftFdNx/6bq0rfKol2fjjCSqnVogqllN6VRyfRd4jTG7BYxNpec4HVKNp61Oy5oeDhdhuFc7XP6EC0ojnWbi7PD9RSn6yFaeEwfwglto+w1r7PI7M0ETl3x2PzTktTpx81gZCFmsGdLCbDKAK5HN+RjlNZJ1qdnotlIpBFmqdLkcwxZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JQupU0+uTkEBOD2R1Xml3izTeS5ZnAF5mLnVLc2p7Uw=;
- b=X2+o9KNciPBlMSrCuwjsvT2vaoyqID8e0xVbFLnL9kCuSo6/DUnhHhYCh+kFFsBgERRUv6doeeEi1WD7eUg/9F76FswDizD361NCcMyAZGIdpe7+aWyJ7XLGGPyIFQuJ8fdVV93PnBHllFH+rk2c9xxnMIbVUnASBi2plDQp4yqqOzFFJ02A2cCHMVDjj3zNKvlKDosCamaMGI0QFxy/pft5IUuB/Rup4wTqRtfrhlEkZPFnpPGtV/72/xBjqbRFRoMp6jZCmh+zhgcI8V1+4L9wSGfEwMlmC5WN9ox7+lQ0Np1HfBaxlvx/Ys8inmGvsalb9PbvgzBnNhoAGjojLg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JQupU0+uTkEBOD2R1Xml3izTeS5ZnAF5mLnVLc2p7Uw=;
- b=GcqR6/SClIXLXdk9rXIa0M0HC0gEyiN9Q6N0WZiV2f4i/IBzNAwrwHtmu+b6pmb6G8q6EYVjCHkYbzNjvhF7v3CRGGbPypOcJIEjI3K0UWQy2rnCoT8SYsb5JjA8GY6yGM6h0lsYSk8zJVGF/ySinsuz7bPJRbqRVbzBNEt41U1XMmnr2h09N5iUeZ9hMvZ1zxkzOv/q0zCwgRP+MqbnHxtXtk5mwtmR3ZxwfwM6b8mYy1An8YSx0nLRMoLwD4kbMMAwgUFQiykQ9v7Ctjxdn/k43yIxGCSBH7m2RY3bK0qPYZ2GhQ0+Mx5kwM71qMaz+Ddo9YbIpseM1qpUL7BD4Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
- by DS7PR03MB5463.namprd03.prod.outlook.com (2603:10b6:5:2c4::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.18; Mon, 9 Feb
- 2026 08:10:21 +0000
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9587.017; Mon, 9 Feb 2026
- 08:10:21 +0000
-From: Chen Huei Lok <chen.huei.lok@altera.com>
-To: u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>
-Subject: [PATCH v1] spi: cadence_xspi: enable automatic platform data
- allocation
-Date: Mon,  9 Feb 2026 16:10:07 +0800
-Message-ID: <20260209081007.5166-1-chen.huei.lok@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BYAPR11CA0057.namprd11.prod.outlook.com
- (2603:10b6:a03:80::34) To IA3PR03MB8021.namprd03.prod.outlook.com
- (2603:10b6:208:502::17)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7cfd0f349c4so2702597a34.1
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 06:03:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1770645838; x=1771250638; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=w8JLmVxXffwBoZqNQoIH5NH5DIg8Lc1CXD7sIQ78cDM=;
+ b=tMfSCeyhuXsmu/1amEW80e2PTOMRS/ckfYLevbngkO9ef7JDr4hAe8lw03CMmBV87I
+ QuWcfvlxK7qyS/cEbYEF41G5pnkoyoh1lbz4Gg1mk746koxIqTylKAakJp5fJVq0ukMI
+ YfLluxGU/m6ExQg/pW71DlZLMhPZ6NKBuU6yE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770645838; x=1771250638;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=w8JLmVxXffwBoZqNQoIH5NH5DIg8Lc1CXD7sIQ78cDM=;
+ b=HzeOQ5mqBi8FxcdFnrC1+EV/DBI7G4FUD06KsQiKuCQdVwjNDjPgEjfl07xgL97JWG
+ /NEI+4sASkxC9wYi8dvdvqCMz+4t1jE6hY/XvMR+RbjURdsBx2FPyYgcX/6Og1lCMZXM
+ wE6ocUO50jAtPrjnZjpLOErLwQxNmML1j0o97QShflF8m/9+jw0RwU08+9AVeckRxUdg
+ ys1IqChMD7GYm7sHGOpWWanOGjRl0P6FVhTZcT9BU6tpb30BLkjolltRexhiblhdKokK
+ LI1JjrVJoQfYNTBtDZGiiLKB3yD5LXSLzsNi7JhxhUYdCz7ZxvOBMoYSKNrSeWKT/ouc
+ ql4g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8nnMcWH+9E5GLo7fZPy82YT9zNnewyIFrPaRBS78zlW1rH1Jn3NQ87mWfn/zjtLFImjNN7J0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRF+oY2IuiOkUIMjmtCz93SkZQ0p0eddyjRzA37hSHWVdMORTO
+ mWDOEypXuMW7WiryHA5B9eUc1RZr3ig/JDntz41hjrW1VsLuvlJO9Zberj3getZ4Hbk=
+X-Gm-Gg: AZuq6aJhWildJxS0Iz1kwcUxy0zMLfZ7f9K9JacRRhfbhb9stnu+Ri20SaJPLZxeHC0
+ 2OA3EOfHjFTUwdhLRyrB1f9C9vQ/JwM+RKm9CjlusdFFWK8jyNCUv71UG+No3sKNXMBuIhlffb6
+ +HxoXxW2+2oZ0B/+WQvHartuB/b7zvlTwmLTvaJRsgpCKcEmr/X/9TauyeJYAwrgNWqy7RZcyNE
+ dlhSjEwX/Z8E1MtC6f6q21q6Hhn8Wppd+2Kx/5pAntK/Ck/OcVCrX3FtYg/DBXf/Zw3HU7GaS4A
+ djgwBLJ0jvK9An65xup1c1JIVSkpGe3Noc7YEtnSzym1x//osFKPpybd4ZuHquMixVH2ekiFutP
+ miH1dCrAeGrxM9wc4iQ11fCkC2ob2P61yLunnp9cYydSHyrGPA3UXPUu/ipdUfZ9zvWfiYZsREl
+ 4xiDN2VYQ9nyCuqf3sCM8Wn+VRDgaAA+hGck/fbjBCKEvqZippFdRWHAJMb06JVkIyFclCqDJaJ
+ b7DP7Qbk06W3Q7xxW0jCft/1yIi2L1+O3mUM0A=
+X-Received: by 2002:a05:6830:3155:b0:7cf:dd34:8e1f with SMTP id
+ 46e09a7af769-7d4644861acmr7407432a34.18.1770645838341; 
+ Mon, 09 Feb 2026 06:03:58 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d464785f68sm7229286a34.16.2026.02.09.06.03.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Feb 2026 06:03:57 -0800 (PST)
+Date: Mon, 9 Feb 2026 08:03:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: dl-uboot-imx <uboot-imx@nxp.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, Jindong Yue <jindong.yue@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, "Ross, Fedor" <fedor.ross@ifm.com>,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
+ Ji Luo <ji.luo@nxp.com>, Frank Li <frank.li@nxp.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Adam Ford <aford173@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ David Zang <davidzangcs@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Marek Vasut <marex@nabladev.com>, Joseph Guo <qijian.guo@nxp.com>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ Alice Guo <alice.guo@nxp.com>
+Subject: Re: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjEgMTAv?=
+ =?utf-8?Q?12=5D_dts=3A_upstream?= =?utf-8?Q?=3A?= arm64: freescale: Sync
+ i.MX952 device tree from Linux
+Message-ID: <20260209140354.GD2603314@bill-the-cat>
+References: <20260205-imx952-v1-0-2103d0222a0b@nxp.com>
+ <20260205-imx952-v1-10-2103d0222a0b@nxp.com>
+ <20260205153850.GK2603314@bill-the-cat>
+ <PAXPR04MB964411EF269E12B1B7F20689E265A@PAXPR04MB9644.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|DS7PR03MB5463:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7bb6dec5-0ab7-433b-0ee1-08de67b2ab27
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xMEPGsUXkHEvS20kYPGKDczXsuj4lP+/zWXs0fVB5FggJAkls4lcyEMEbp2/?=
- =?us-ascii?Q?lbuLWXPCXWg7qt9/8tBhdbUEF9SQXv0hWmLjz50fAntYxV/IddCGaUxlQ2Rv?=
- =?us-ascii?Q?4f3unIM3KLV1gnAVpwN0hA1fRWp+nnsIoVsA2ZO/5QfWbaN85GVGwAiEK3n7?=
- =?us-ascii?Q?TGUknJWiOG/0qhQbk7L9rlhYcWGMiMd8l4tp3YCRkeU1Ncl4tuEJfeLgKqlm?=
- =?us-ascii?Q?ObfkrvBZG8ZcxR3wGQ6K4/DXTwq6EzM7Z8sU5gVF0MkmoI64Zxcrv/kuCM5f?=
- =?us-ascii?Q?K2z1FlaiUHFXMNfajcZCYTJ/skb0yg6nRnhsSgTf8hNkBkyJFq9mOX0CD1rl?=
- =?us-ascii?Q?mYfWHQmV1tS8vEoJlAkgpaP4dfssCGptTsApMguAWg1zfnn1bu1hjuCmHzML?=
- =?us-ascii?Q?2WIDWnv7IHKpJsrp5jXF7u20SO8442GB9wTkvtgF6UkjQVlKp5WcyMGRgK2w?=
- =?us-ascii?Q?lDPtGoqrEOxUtZf0ggZFB4XbUrdu6W/i22lFSxxiYgZ50///nSlA8ITdGnhT?=
- =?us-ascii?Q?Djjf8kM66XK3uAxvWHbY7hbu+lOEwAp2j8EBUUlYgeEbq6d+SeEYnrwQHarU?=
- =?us-ascii?Q?cd28fsbA42Jxtz66oN1Ch7T6mGkG0h42V+ilzrxds/3L3/1qR02ipFCuFx4D?=
- =?us-ascii?Q?ZbrmmKEAbHFF7kZghzcej8+2FhaEcp0Uv064PoOhfyFFCUelIuunEie0UWtJ?=
- =?us-ascii?Q?cH+6TV8pHwmVBhy+xcZPT9ONQQ/KyWYBqTPBXe2silNcNFCvQ6/vGpCfssXw?=
- =?us-ascii?Q?mKAW/Tc7Vv8Rrgh2mgmCV1MbXhJbgobu5EBXzwftplRDluNIjBxUjxVldwc5?=
- =?us-ascii?Q?EXGqaCLoBE08Q6nh0TjQeU3KHVXffPpwpZAEyhCJiE9ybly9ZGsDTFJkIf9a?=
- =?us-ascii?Q?NJ4gje4rqYftenAzdNsthzVSSvX0p2ZYRZxgoFMiz1smvWa/A0FoW711Cvm6?=
- =?us-ascii?Q?4cfOV9qvCjXRmMO9Jrqfx/Cxjoqmzs/aRRHX/aAuAguD6en038QhkiRKvinB?=
- =?us-ascii?Q?dHmjdzP63uqOEhhgHViJfo3a14H4Nk+xO3kw1DeAHj92eNEh55SyjWo72Wyu?=
- =?us-ascii?Q?JclnRMt8H+ESw6gPlFYZK9HoQ/pR9+kfEb4N6WSuF+aNQxqcbf9rOHkv6gNf?=
- =?us-ascii?Q?5Cz/jU8nIIg5rKqbN57OkmKapXOpy8XzVImdKBrM1WZzx3fjeU7D06r4K2T+?=
- =?us-ascii?Q?jmf/WJqgfyBau1ZzlxL2G+t32qeVe1XH5Uc9JYW4uaO+B3ZvA4YnutaMFmbU?=
- =?us-ascii?Q?K56J6FiPr8FoUvgyAPsTSo12zUdjo1O2npnVpiVV4uoETdMa8u717ZPNGa6y?=
- =?us-ascii?Q?eqxVPK8CXu/da3RqeIEvfrqW0rUdx//lyp5zmhFiYnpNFR6W9TsRRsmQnXxy?=
- =?us-ascii?Q?v66n7yuT/lw6c1Ui8gTaMublEmqdfLzazjRWg6zCFcS/woWZ0Z15GXi5MdPx?=
- =?us-ascii?Q?TqvGtkR85kh+1IcHAcx0u+NH2Wn6iL+/wZXCyVFALTBQybcdFy9kZ1oC1zTa?=
- =?us-ascii?Q?dwJZGV9svpvv0dGPIJwc9lXsRTF7lYoWWLIH0uK5rg5q5pHsHgo4/SC+ltKp?=
- =?us-ascii?Q?u7R5x/jlw6g1kdcGQ7g=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?w0eWUAbge8qVytJziGXVHXV1WNu6JOZOUxDNE8nDGfzmoLSbX2oW4fnZUrGq?=
- =?us-ascii?Q?vxI2LW1e5IVaQ1ZBZ/FkK4CfpcKKPzurU2iSgcVxKh/W5PTe8Uq0KB4me9M8?=
- =?us-ascii?Q?vPDR2aftLek5/lj19ag0ivfv8s36SKKeZMl9fqnRcd7+dp+bjKQRBP04V+RA?=
- =?us-ascii?Q?Jic+5UqLLQ70Bh3lq6xTk61uMTUcqDKZhM75lrJEbbXtnaWgZOF54G55V19/?=
- =?us-ascii?Q?HIqnRSp/6j28S3qTTxSX6ahW8HZ/gc8BZMvrwpKal86r6gJh87qt1ntc8sA5?=
- =?us-ascii?Q?gENlLr3B3bK/HhFzTkrgzCm+By8f6zNbwyE5grbuFHwrKmhpf9SqIdgPvA1g?=
- =?us-ascii?Q?lr7X3b9byA6tq99wWzS86C0gPQ4ojUKwK8c0AbzhT41469xWLpmgdQdGRJ7U?=
- =?us-ascii?Q?UYJKgZIVlpTxlnTdrBwC4F2doRvyVKjzemZjtEsmFneWjBc/oDB0t09cFQUG?=
- =?us-ascii?Q?gF+OKuVXWPXYhBJW3zyqcfn4SkjL5sMwa5sSm1gxO56jYvf/A1yh1T/N0b/I?=
- =?us-ascii?Q?mVyugI7/jkxRwerkVSVJpcVVSnfP68pz+N9aGn7NcYJbuUrBbKsZ1a9n7VEu?=
- =?us-ascii?Q?PDkdUKKwUGUSFetnezvntvJM9/SkKLwbQHhIgieI6N8Rcrt+NVaS9p7paNzC?=
- =?us-ascii?Q?YzBNm02Z67J5jv1WL/o94HWFJ2hXnRymP/NnHqfnulmY/6VNXf+cZ0F2+iMT?=
- =?us-ascii?Q?YnXk93xif2FX31ibSsgC16lyVG8Wsk71jRcGLIIFSWBaYBUEYpo83PwsC8cH?=
- =?us-ascii?Q?QmJBLA2CSN5yrtypX8Udv6uy4HFCoY++6P5aqPvA4IOTwjOwbkGTW6UxH/Tz?=
- =?us-ascii?Q?CauJ9Rlf1eYBt3EnxIoLOj2udLGPqMeWM1WAx72oFtxz8CXKhEnfMN7bisgx?=
- =?us-ascii?Q?E2hkYkxG3APBIi1nYGrjf5riyQ9DV5ji3U3VKgVhVXDapEYk3wqrCvxbA2AQ?=
- =?us-ascii?Q?J/hV575xnvYyv5BEWOB8O03Js6CQDPXkbfRSl5ZaASv/VES/tjHL256XP/Tv?=
- =?us-ascii?Q?hzm6opXm7HV98ImowSGuX/cVLeRgc30Us0sGbJ4a5yGRwHstCr648zGmG/es?=
- =?us-ascii?Q?VX+ybnt+MrT+hc5oWbzT23xu4LxglB/IFKTFg9jEs8aZoNxiKP1KNG+vPRo7?=
- =?us-ascii?Q?n2lOJGYr6EE+S/d2d6QsTleZx+T0v+OBZ18DB3DB1uIGe4JeVXPjBZXNFULn?=
- =?us-ascii?Q?AWnBPp1ZYaj7TySIUMv5dL+E+oEaAm320UeX5xB3wymCX3eJKjatOgYDSh3f?=
- =?us-ascii?Q?PHlBoSfQ7KmRythKj50Zz0MLf4Kt33Ud0VLsLVhrPcJ6vv6V9AK0tcGoOULn?=
- =?us-ascii?Q?wg7b5jJzoD42YvVPK7YudAYZBax9nJSJU64OXyVPj2cFOwwLnpsfEsZbzwkl?=
- =?us-ascii?Q?gGWE1v4+UEap2kXyYBYe8yOeY/JxhGT3dt8en33RvmprQuYNrShHlJa63ydF?=
- =?us-ascii?Q?gB9bMkP73uLIqLUc2HMFVMy4l4JluDDAWlnUhgsirVS/XecHD4p6CgtkEuDX?=
- =?us-ascii?Q?gLzHz52N4+Vm39aKMAszknY2ugclEvnAwuMpRwynQpdosEUSUN8DfP1NCR/D?=
- =?us-ascii?Q?VbJTLnxxA7JXaCyYUwfWJzrcm21LUSZC5JzeL6bjwserRkJQBuDKN1SOh+G6?=
- =?us-ascii?Q?V7xRnolMzsPrucARwRn7equWnafndgHaUS3LQ0zn8XNoRwmTZyj+bkoDbwJ7?=
- =?us-ascii?Q?5UJzrMPPdtuMW1bbKYcUTl5bBWVYcAbbS8TFsq2FLtzbH84NnGPJGswsYz37?=
- =?us-ascii?Q?gPRTcAOWFg=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7bb6dec5-0ab7-433b-0ee1-08de67b2ab27
-X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2026 08:10:21.0666 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EGyCesnpt6xUAgRm0txqQP0LSk/9rWxjcB/qGMhaMrYK5m3pJaPjQWaiiX3gx1nzcHmr/vVca75PFf5f/QgkfA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5463
-X-Mailman-Approved-At: Mon, 09 Feb 2026 14:27:24 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zCBscR9UVLPQ5hvh"
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB964411EF269E12B1B7F20689E265A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,37 +125,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable automatic allocation of platform data for the Cadence XSPI
-controller by setting .plat_auto.
 
-Without this, dev_get_plat() may return invalid or uninitialized
-platform data when multiple XSPI controllers are present, leading
-to incorrect IOBASE/SDMABASE/AUXBASE values and causing SPI flash
-probe failures.
+--zCBscR9UVLPQ5hvh
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Setting .plat_auto ensures each controller instance receives a
-properly sized cdns_xspi_plat structure, allowing SF probe to work
-correctly.
+On Mon, Feb 09, 2026 at 10:34:24AM +0000, Alice Guo (OSS) wrote:
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Tom Rini <trini@konsulko.com>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2026=E5=B9=B42=E6=9C=885=E6=97=A5=
+ 23:39
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>
+> > =E6=8A=84=E9=80=81: dl-uboot-imx <uboot-imx@nxp.com>; u-boot@lists.denx=
+=2Ede; Stefano
+> > Babic <sbabic@nabladev.com>; Fabio Estevam <festevam@gmail.com>; Peng
+> > Fan <peng.fan@nxp.com>; Ye Li <ye.li@nxp.com>; Jindong Yue
+> > <jindong.yue@nxp.com>; Jacky Bai <ping.bai@nxp.com>; Marek Vasut
+> > <marek.vasut+renesas@mailbox.org>; Rasmus Villemoes <ravi@prevas.dk>;
+> > Ross, Fedor <fedor.ross@ifm.com>; Jo=C3=A3o Paulo Gon=C3=A7alves
+> > <joao.goncalves@toradex.com>; Patrice Chotard
+> > <patrice.chotard@foss.st.com>; Valentin Caron <valentin.caron@foss.st.c=
+om>;
+> > Vinh Nguyen <vinh.nguyen.xz@renesas.com>; Sam Protsenko
+> > <semen.protsenko@linaro.org>; Ranjani Vaidyanathan
+> > <ranjani.vaidyanathan@nxp.com>; Ji Luo <ji.luo@nxp.com>; Frank Li
+> > <frank.li@nxp.com>; Sumit Garg <sumit.garg@oss.qualcomm.com>; Adam
+> > Ford <aford173@gmail.com>; Frieder Schrempf
+> > <frieder.schrempf@kontron.de>; David Zang <davidzangcs@gmail.com>;
+> > Andrew Goodbody <andrew.goodbody@linaro.org>; Sumit Garg
+> > <sumit.garg@kernel.org>; Marek Vasut <marex@nabladev.com>; Joseph Guo
+> > <qijian.guo@nxp.com>; tharvey@gateworks.com; Alice Guo
+> > <alice.guo@nxp.com>
+> > =E4=B8=BB=E9=A2=98: Re: [PATCH v1 10/12] dts: upstream: arm64: freescal=
+e: Sync i.MX952
+> > device tree from Linux
+> >=20
+> > On Thu, Feb 05, 2026 at 09:55:16PM +0800, alice.guo@oss.nxp.com wrote:
+> >=20
+> > > From: Alice Guo <alice.guo@nxp.com>
+> > >
+> > > Sync i.MX952 device tree files from linux-next next-20260202:
+> > > - Add imx952.dtsi for SoC
+> > > - Add imx952-evk.dts for i.MX952 EVK board
+> > > - Add imx952-*.h headers for clock, pinctrl and power
+> > >
+> > > Imported from linux-next commit 193579fe0138 ("Add linux-next specific
+> > > ifiles for 20260202")
+> > >
+> > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> > > ---
+> > >  dts/upstream/src/arm64/freescale/imx952-clock.h   |  215 ++++
+> > >  dts/upstream/src/arm64/freescale/imx952-evk.dts   |  596 ++++++++++
+> > >  dts/upstream/src/arm64/freescale/imx952-pinfunc.h |  867
+> > ++++++++++++++
+> > >  dts/upstream/src/arm64/freescale/imx952-power.h   |   44 +
+> > >  dts/upstream/src/arm64/freescale/imx952.dtsi      | 1266
+> > +++++++++++++++++++++
+> > >  5 files changed, 2988 insertions(+)
+> >=20
+> > This needs to be done (as a series of, if needed) tools/update-subtree.=
+sh
+> > cherry-pick operations. That gives the right commit message format that
+> > shows these are changes from upstream.
+> >=20
+> > --
+> > Tom
+>=20
+> Hi Tom,
+>=20
+> Thank you for the review. These i.MX952 files are not yet available in th=
+e devicetree-rebasing repository, so I cannot use the standard workflow: ./=
+tools/update-subtree.sh pick dts <devicetree-rebasing-commit-id>
+>=20
+> Should I wait for the devicetree-rebasing sync?
 
-Tested on an Altera Simics platform with multiple XSPI controllers.
+Yes, or not use OF_UPSTREAM until the device tree are in an upstream
+kernel tag.
 
-Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
----
- drivers/spi/cadence_xspi.c | 1 +
- 1 file changed, 1 insertion(+)
+--=20
+Tom
 
-diff --git a/drivers/spi/cadence_xspi.c b/drivers/spi/cadence_xspi.c
-index 717f226b709..8a894025d02 100644
---- a/drivers/spi/cadence_xspi.c
-+++ b/drivers/spi/cadence_xspi.c
-@@ -441,6 +441,7 @@ static const struct udevice_id cdns_xspi_of_match[] = {
- U_BOOT_DRIVER(cadence_xspi) = {
- 	.name = CDNS_XSPI_NAME,
- 	.id = UCLASS_SPI,
-+	.plat_auto = sizeof(struct cdns_xspi_plat),
- 	.of_match = cdns_xspi_of_match,
- 	.ops = &cdns_xspi_ops,
- 	.probe = cdns_xspi_probe,
--- 
-2.19.0
+--zCBscR9UVLPQ5hvh
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYnpRwAKCRAr4qD1Cr/k
+ChLGAP49XX5820v/7FW+XBkUEKlBUAucjibfp4AkjhVjA+BI8QEAkyPkgFt6oLdA
+3zPULzqkTUqyoPzIswDS5cGxfKtjqA8=
+=AGxN
+-----END PGP SIGNATURE-----
+
+--zCBscR9UVLPQ5hvh--
