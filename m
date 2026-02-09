@@ -4,108 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 034B7E94601
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 20:17:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 805B8E94604
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 20:20:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D608805D7;
-	Mon,  9 Feb 2026 21:17:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id EA593805D7;
+	Mon,  9 Feb 2026 21:20:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KoyJohdZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b1YzeV9G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0347D8388D; Mon,  9 Feb 2026 21:17:44 +0100 (CET)
-Received: from mail-dy1-x1329.google.com (mail-dy1-x1329.google.com
- [IPv6:2607:f8b0:4864:20::1329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7DE7383BF4; Mon,  9 Feb 2026 21:20:13 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9E3F80325
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 21:17:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id AA44D80325
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 21:20:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-dy1-x1329.google.com with SMTP id
- 5a478bee46e88-2b86ce04c5cso1304774eec.1
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 12:17:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770668260; cv=none;
- d=google.com; s=arc-20240605;
- b=ItilnQQAFe4nkwHfHyn6ZuowZKrQbKKOrTJ76PPVpNeZbZ/B7jupcfuyQs5S+f6rOW
- qCqu8p0/T1VF7pCN/biaViK1QqkLoMIebKoBhEguelp/KS/eGTn4de8O7vbnhm0hdYKo
- JoUVCtLjA3TO8TKZB62d0VOBRb1Nf4RXXplcw4mZl3736d/VRrHxSrlfD1Wmv2iQE2kA
- 4YvKGTb9nwUzzHVtRCn04Mh8qv4gMaLYYI6i9kffbYTlu2UHwpIgId41oAzJ+iq5XRCy
- RI/eux8I5/TDi75BgXQH5eo7fpUHMINX4Kba8X+Q7G8+Svhm5ReCw7BKfDa+TN2ioVB6
- rKBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=qUgXVm+67ZxTbEWGvRhj7THzg70gjlTpJD2uic5nJ4g=;
- fh=Lyn+5luPfgwp/dZiIieD8D8l8PqH+FKNGMTO4t9k7hM=;
- b=dJRrmYcWhZdIvJa7bdfE2m5XDs8MpwG0bNkTOnznkD7sjSxsQAV8uCHurYt7K4spNC
- tqApPTaGeVhKx1ukigFQj+uMXULTvbFhv5w3JIDLra7ugrj/uGthfWfCA/7h+tGxHAPR
- RvFYFdWRETVI5/fSKmKzGzVz/v4EHWl2SMyNIcs4/VAmr08NWolNj0Lg5q/2O4gBnhjv
- WTN5GD1YcI5cCTWGfQFqZjMIk9wVU/NMW0DT4Snwm3LzKayV0AKpOxHDXF+F8ZXa5yqC
- Vc/GrQrfN1s2TjFKi+fETPg8ojV8ZTIjtajxbIjzDmhGWb4yOG8BLZPadCl0PWlucT0T
- SRiA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1770668260; x=1771273060;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qUgXVm+67ZxTbEWGvRhj7THzg70gjlTpJD2uic5nJ4g=;
- b=KoyJohdZU7jRQjKU4/D/dsQpNzo2Dx+DOEcnuz/b+hI7bshO3Hzs1kdX25HX5lL9X4
- 5A3TEMpyTcLCrvaKb6pDB6AuskTKhoOC1Xdd6QKTg37q+aCJjibnTZiGr38ntXNJ8aZw
- 4SmKtFrvNeWCM2NeICTuzPOEnredzYXHKl4/k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770668260; x=1771273060;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=qUgXVm+67ZxTbEWGvRhj7THzg70gjlTpJD2uic5nJ4g=;
- b=MTFH94TtaMvS3JzW3/T+i7i9GWBOJ8dJpwogpx9yh9rG4AaqU9mCqA2ie7a6VKCjPF
- nkm/Itml+7uv681HNRiDRwBrcQveV6LPj/tkyTdxN+uSbCv52I5WRSTqmCdPiQRC/FkS
- ZaFj5TrpeE2alYG7Xxcom+HoIeNvk2at7uyji7jvr33JQMbodZhO9e/ghPwcD6iSqwWH
- KT23b9BN8kGbQYi7TIWVIvcbqMVVLGUMXaXhgt4LZ+3o534J5PwlZzbcaFDQFLxDk5bk
- rDVad2fvDmIf3acy3xU7oJHoJ5aPN3kSqFXCUdTxskx2pOJOP3AdBdquCkbknq3NOp/b
- Marw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/PGotf5p1Vz1oSAeypsbtOWtA3DMYRdIxhhYLXtqb1YGa6FX8zTcjvhwKyNfgqnbS9BV2aFo=@lists.denx.de
-X-Gm-Message-State: AOJu0YytQH4bI0MqMm5B12T6iWVLXirpDx5RH9du8opawqQUwjKYs1aL
- saTcxm9IYHNNUV0kJ5RdQfurTjViyyBAw4WEErDRyazmLuFGgfqvHMIjGv7pXi59KgF1kfLvvnX
- SyWZB/uqJ07tOGcBe7uVeqwNLBkKCZ6eJkBYxPWkZXw==
-X-Gm-Gg: AZuq6aL0z0L4Kx8bAEouVADNBt54oOPvoECepo2oW+nc3InK1+ge2grRpciVkqDevu5
- aLmU1qIFgvrAHUVj8GLBO/mX9XqG4OLszoQDDrAASPxr+NS59VrX4cfZIGGqpEc3mMFC3zWVkHS
- JbT7FUjfXDDRsKtlOOJXbVjzRYpoYGEHrx4NFCBphJfNpBvE64R17pytYMgYW8uCAyM/D23hiAr
- TRmqglI5jX0zSRKJurBzSbTYTRB/p7Zf3ALXmBd0m4qq7t4wRgfm4QfMs1u+blZtKcYv7qx/UWl
- uR2tDmyJbYlIFkBNXYCY+XF1AqI=
-X-Received: by 2002:a05:7300:6c21:b0:2ba:659f:2002 with SMTP id
- 5a478bee46e88-2ba659f21a3mr2277490eec.15.1770668259893; Mon, 09 Feb 2026
- 12:17:39 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KMqMY+HI4o1N91Tu97uqn1G5bMGvmw5gxsLDPFEPSgZ1v699F52mm31Bs4KF9K8+Hi/2dB7nSQtpmKWxCJa9YOmrvlhXqDGUK4zR9ojm7vp2sSJylT77aShccOOj+kzt43twjPkf90wG0KmiM6yZAen8+/N13/4s8CCY5cvqJyYYlBeHhREr0KcVJu/kUy+iucekIX/NbhYGPnlR0z457Nu8cbcD4YuRxhIJw+juCjExVXLzurAY+DfomOhwTHkpOCgDpLXqke/cdYDsRLAnKqMc6iOJv6QcCEd8pCmVRihjvo/GHT/3lLngenmXTNZGMeOG1UhyA4txLdKSVuMWkQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HT/JhNI/fN/sFb8nhwccM5Zu4T5IUjtwklzbdPYUg9w=;
+ b=ty6E3s0EU8AHN/nNBcbMZutgMGh2j0u0dkCd8KI3CGwftul9UuzjYeGvribALRPiBiX+ilntYg4cPS7buuNPi/NbTB89C9Lnh1NLyXIA0LJEgExE+9xjWbPYyBwSSE3GTNZp/2Tnlmc69UgZhImBA9N8siIPrZAvzHFGPvKRrnEX7KUOA3H//TjEQpGlKXnnbFV8AmJLVpO8hOr+zvWM23CaHHL+38bn4QKju0+/MOi2C1AelRXfo5h0jxeL6mciAhcbuhAUn3vahU9jronOJlGKgpCsWOO75RH6pUkz95kHLxk3H6giW14jfCQuoi3EGOFRCfD0D6VjEIjPh+swbQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=phytec.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HT/JhNI/fN/sFb8nhwccM5Zu4T5IUjtwklzbdPYUg9w=;
+ b=b1YzeV9GWI0LPgEZYxollyi4vdp/iCKm1upTWbwobmxP8OqfQuKI2Xh1gqsLWZ7LYhpvySi8g/CuIamMnyyWjgMu4sQEhxtuwF2Y2Ryc+SbDylb23ZSyl7avzHklu9UcQwYvgUsITjm6pY7DNYOl5AAgouGqTyzvwcgDdgYeQJk=
+Received: from CH5PR04CA0014.namprd04.prod.outlook.com (2603:10b6:610:1f4::26)
+ by BN0PR10MB4839.namprd10.prod.outlook.com (2603:10b6:408:126::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Mon, 9 Feb
+ 2026 20:20:03 +0000
+Received: from CH2PEPF0000009A.namprd02.prod.outlook.com
+ (2603:10b6:610:1f4:cafe::b9) by CH5PR04CA0014.outlook.office365.com
+ (2603:10b6:610:1f4::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.19 via Frontend Transport; Mon,
+ 9 Feb 2026 20:20:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ CH2PEPF0000009A.mail.protection.outlook.com (10.167.244.22) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.8 via Frontend Transport; Mon, 9 Feb 2026 20:20:02 +0000
+Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Feb
+ 2026 14:20:02 -0600
+Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Feb
+ 2026 14:20:01 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 9 Feb 2026 14:20:01 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 619KK1812177823;
+ Mon, 9 Feb 2026 14:20:01 -0600
+Date: Mon, 9 Feb 2026 14:20:01 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+CC: Suhaas Joshi <s-joshi@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ <u-boot@lists.denx.de>, <trini@konsulko.com>, <vigneshr@ti.com>,
+ <n-francis@ti.com>, <s-tripathi1@ti.com>, <k-malarvizhi@ti.com>,
+ <kamlesh@ti.com>, <vishalm@ti.com>, <d.schultz@phytec.de>,
+ <w.egorov@phytec.de>, <ggiordano@phytec.com>
+Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
+Message-ID: <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20260209083855.GA9367@francesco-nb>
+ <20260209084529.GA12200@francesco-nb>
+ <20260209100851.abaf46pr77uq46zi@ula0507357>
+ <20260209101635.GA28492@francesco-nb>
+ <20260209172546.GA281089@francesco-nb>
 MIME-Version: 1.0
-References: <20260203074721.25520-1-dinesh.maniyam@altera.com>
- <20260203074721.25520-3-dinesh.maniyam@altera.com>
- <20260203145750.GI2603314@bill-the-cat>
-In-Reply-To: <20260203145750.GI2603314@bill-the-cat>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 9 Feb 2026 21:17:28 +0100
-X-Gm-Features: AZwV_Qj8Z19ESp_yyz3S2a4wi2WY-O789KWv1o7oY9Cmhn7fnq_vZI9NjVcO4iM
-Message-ID: <CAOf5uwktpTzTqASRGXs+vsgfR=3TXUvZTX0pFDMW=AuZ9vgCZQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] mtd: nand: add generic SPL NAND MTD loader
-To: Tom Rini <trini@konsulko.com>
-Cc: dinesh.maniyam@altera.com, u-boot@lists.denx.de, 
- Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Tien Fong <tien.fong.chee@altera.com>, 
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>, 
- Alif <alif.zakuan.yuslaimi@altera.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20260209172546.GA281089@francesco-nb>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF0000009A:EE_|BN0PR10MB4839:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f5e95fd-085c-4d0c-edc2-08de68189b4e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZCsxZnA5MHJlZFlaRHNBelV3b1FVUm9XMWlBektsb0JCaXhLVFN1RGZsSGQ3?=
+ =?utf-8?B?VnBjaHpoWms2WHRXNUticlJMa3pqYlNzZ0N2V1p4U2JvUXhBbEhhYzB0MS92?=
+ =?utf-8?B?NEs2VWIvKy8wM3dpQ09EcGhPL2IxR1UyWS9pUExFZko1U3pPTlhZb0JlWHVH?=
+ =?utf-8?B?aEZ6QlRscEFmaEJNaEd6SkpvZzI2NWJEVXkzdlJ2NkpSb3hZNlpZWVhBeVBH?=
+ =?utf-8?B?REJWbVVmeU1nbm5ISWlvdmJ3SkR1RVRHUWJtTFFZSDloU2pnQVRidjBLQ1Vx?=
+ =?utf-8?B?VmhrSUVDS0RzUjFQalhodjRBRFdLTkx5c2JhZUNZNzVxTkVha1QxY2JBOWJG?=
+ =?utf-8?B?YmNuS0VGS3B1U1BxSXlmV2wwd0FjY2pnMmc1WUlmNEM5aEtSaXRVdHNKS1Bz?=
+ =?utf-8?B?d284eVd5ZFVTZVdSdXhwWE1ENVBZN1JKWFdpYUc4cisrdUxEcUFSRmtyb2s0?=
+ =?utf-8?B?WmRBVXg3dE5CVVVQMzJVY2FPNGF5bi81aW1RMU5tSWhLY0M1dXN0YWtTTVhm?=
+ =?utf-8?B?YTJYamczQytZSm1PSldmQVFTZ2NGS240UXFSbHJHeW9TTEFRcmFiWGVBUlJX?=
+ =?utf-8?B?WXc1N1lLa2VwcWxJTCtrR25FbEhYcmk3QkJDRVFLNW1mcHRzL2NkQUdNS2tF?=
+ =?utf-8?B?V2JHWm0rSzFKRTRpNkN1NldGZSs5WlRKSUpYRThoWk1DMFA3YnRodUQ3MVE3?=
+ =?utf-8?B?RWhkQUxnOU9lcHd0dWlvUkYxRGdRU2R2c2xBWitPdlg2WjI0eS9CVVIyczEz?=
+ =?utf-8?B?c1h2N2U4SXpIL3lPQVZBWVl5SHN6UjN3c1FGL1RwSy9mWXdiYkNURlYvaTJ4?=
+ =?utf-8?B?alU2V203bkpuRUxReXdZR2N1ZlNlSm1RRVBYY1dTa1NtTHlDc1g3dWxuVG1Q?=
+ =?utf-8?B?K0xmTWpMbUZXZTBmQWlYWFlvU0ZEa2VGWnp1ZE9tVVowb0ZId0taekFDMkpE?=
+ =?utf-8?B?UE1Eb2Z6WXc1RUMrTFpPWjFoUGh2N2VxTVFHQU00WmhMZ2xuSVozKzdTMWRo?=
+ =?utf-8?B?aUs2SUQ0aGxvNDBianZvTkhhRzI4cjRES2dKbXNKUE9TN0U5QUhqWUxIYW5F?=
+ =?utf-8?B?WU9ZcWl4aExEMWZLQjdjYkhhV3NHM05JSVk5S3BDTWN0Qm1IOFRsZ3JJL1Zr?=
+ =?utf-8?B?eldyYUQ0M0VyWUhyNmRaSkVSYUg3SE16dXlJbW0weUFaQVdrOWJKajZieHli?=
+ =?utf-8?B?SmdIQWkrdk1jYnpBb1luL3RJMFdWNThzN2xLNHRkanVUUDVUSlMybzJaRzVh?=
+ =?utf-8?B?SlRySzFFdjhEZGNvamh0VjByTmdlSXRRZk5NbjJsQTUwNlZrMXBhaXZ5cE1p?=
+ =?utf-8?B?RGUydzJ0WEhXRE1lRTBBcHZZVjVOUXcxYnBkUGo2UXVxZ2Noc2VEVUhXcldV?=
+ =?utf-8?B?a1BlKzFVS1JhVXZJMWNCQU5QR3o1aU1GdThMSy9rOUs5dVVxR2wzd1NOcTB3?=
+ =?utf-8?B?cUg1ejJWaVhjMC9vdU1IVkhUMTd6K0tmRDF6RG1LUy92RXRDUy96UVJzRkVD?=
+ =?utf-8?B?SVNaeE1RK09idm5iVVc3RnNHUDdoTWc1bUM4YzlHNGxheXNVYnZXdy80ZHlJ?=
+ =?utf-8?B?WDlXQkVrR09ZUFZmSDByT1hYd0FwSUNQRHRialNrTEZmVlFuK05jSGFVSVl5?=
+ =?utf-8?B?WlpaNkpLUWJ6TXo4VGpNZUFFMXVCNnZuWUZyZkxzZGtwbDNXNk8wRmN1Rncx?=
+ =?utf-8?B?UWFQU0ZxKzVuNEFWVjg4OGlXSHlYMjdOVjBTWC9FRGhqdTFjaEdmZUl4M0Mz?=
+ =?utf-8?B?WitxN3pmYlhyelRhNG11SGtLYW83NCtaODVzTmpMNURFUXRiYU1SOGJhUFpj?=
+ =?utf-8?B?QWxwVGxZQlVMOUFwaUdNellrUVJIREpOcWt4MjNzeUtYNzE3MzUzK2lzTGdM?=
+ =?utf-8?B?dGo3STg0OFkyZ01UQmw0Wml2UUdYZWNSK1VrRFFkelU4YVFsUVl3YnZEcFpY?=
+ =?utf-8?B?RUhHNmFNUnFiRUxtZStoazh1M2tLVnM4R3RiSVRNL2l3L2pCNFRqQ1lEcnds?=
+ =?utf-8?B?TDZkMlcrZ1ZMNmxKL1FIVEtYclZUR3k5aTd0OUFwS2h6V3ZVcDBweFVpbFpU?=
+ =?utf-8?B?R21mYUJCZHczaDNRa2RaSWNCZ3JxaVl0ZVR0dUN0NlkrV09CeTBDTUJNcFll?=
+ =?utf-8?B?YUhReitOc1FOUGJYc0ZTL1ZzeXBwUGFpNllBWVlxMEd4eXFDeldHUDJRRkxn?=
+ =?utf-8?B?clZEdzFnU0t2UmJ5STFtcnNVb2pta3BwMnVKOEdKd01MZ1VibWxXaGd2cnV6?=
+ =?utf-8?B?d2FOSklXeWZJVG5XTDR4blFBV1pBPT0=?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: AkldS0VOGInZzn0UchjQxfs2sRLIAQ8kmysrVUF3IVmrRCZFn/2/Rjvxx8BuyEaw6tGZNz40SmM15OPi4+uQ14my2LDC89v5p3Y44mW7bXlIH2BJ5FIEnSVdf0xyZKRn9Xr2gyomW/UuUTyzyeWFlvAYMeVSpLVpAm5JD2ZDhiA07/8JMahBu4JKLwhjs4RbqS7xg3ufHAA8Z61lNx/8P6DDKURz//RWAC894TBGnfMSzn4kcvr9o/Oy3lVNfn+2SuX9ExBr36dt4EImFrtGW+Ykx9WkCCRy6By8P1TqOsYt5V0hk5Gsf1dv6smTE2lH1779unheAcmYSMoTqQhptsOt9IustWLNqMAmA0gfb0ao7RFSl/RWkyc2pwJtwxNhiTvZ6hba+Yke8pRuagYSQAxILF7UJi9fBsrymzmbb+bwVH04ds9Ptm1X8mTZ3sRk
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Feb 2026 20:20:02.6326 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f5e95fd-085c-4d0c-edc2-08de68189b4e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009A.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4839
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,48 +175,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+On February  9, 2026 thus sayeth Francesco Dolcini:
+> On Mon, Feb 09, 2026 at 11:16:35AM +0100, Francesco Dolcini wrote:
+> > On Mon, Feb 09, 2026 at 03:38:51PM +0530, Suhaas Joshi wrote:
+> > > On 09:45-20260209, Francesco Dolcini wrote:
+> > > > + Bryan, Anshul
+> > > > 
+> > > > On Mon, Feb 09, 2026 at 09:38:55AM +0100, Francesco Dolcini wrote:
+> > > > > Verdin AM62 and AM62P are not booting anymore with U-Boot 42b3ee7fa524,
+> > > > > everything was fine with b5213bbfdcb1.
+> > > > > 
+> > > > > Looking at the commits between the two revision, I would say that the
+> > > > > issue is with this series https://lore.kernel.org/all/20260127081652.506357-1-s-joshi@ti.com/
+> > > > 
+> > > > We have also commit 3382d75f7a6c ("arch: arm: dts: k3: refactor common
+> > > > nodes to k3-*-r5.dtsi") that might be the root cause for this issue.
+> > > > 
+> > > 
+> > > Hi Francesco. Unfortunately, I don't have Verdin line of boards with me,
+> > > so I cannot reproduce this issue. This is also why I wasn't able to test
+> > > my series on my end and had requested board-specific maintainers do the
+> > > same.
+> > > 
+> > > Since I don't have the boards, could you run the following test to help
+> > > us ascertain which of the 2 suspected commits actually broke the boot?
+> > > 
+> > > * First drop my AM625 Verdin patch, and compile and copy the binaries,
+> > >   and boot.
+> > > * Then let my patch remain in the tree, and remove Anshul's refactor
+> > >   patch, and try the same thing again.
+> > > 
+> > > This could help us ascertain which commit broke boot, and we can try
+> > > fixing from that commit.
+> > 
+> > Sure, I can bisect it. 
+> > 
+> > Do this difference in the logs
+> > 
+> > Failed to set clock rates for '/a53@0': -22
+> > 
+> >   vs
+> > 
+> > Failed to set clock rates for '/a53@0': -61
+> > 
+> > ring any bell?
+> 
+> The boot failure start with commit 2ffab9da9142 ("Merge patch series
+> "Firewall ATF and OP-TEE memory regions in Sitara"").
+> 
+> With commit 24338c81ec2f ("arm: dts: k3-binman: Use configs for
+> ATF/OPTEE addresses") the board still boots fine.
+> I have some concern that this commit is changing something, however
+> CONFIG_K3_ATF_LOAD_ADDR is 0x80000000, while before in the dtsi file it
+> was 0x70000000. I tried changing it back without any positive result,
+> I just got an EL3 exception.
+> 
+> Any more test I should do?
+> 
 
-On Tue, Feb 3, 2026 at 3:57=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Feb 03, 2026 at 03:47:18PM +0800, dinesh.maniyam@altera.com wrote=
-:
->
-> > From: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> >
-> > Add a generic SPL NAND MTD loader providing nand_get_mtd() and
-> > nand_spl_load_image() helpers.
-> >
-> > This allows SPL NAND MTD loading logic to be shared across NAND
-> > controllers instead of being embedded in individual drivers.
-> >
-> > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> > ---
-> >  drivers/mtd/nand/raw/spl_nand_mtd.c | 76 +++++++++++++++++++++++++++++
-> >  1 file changed, 76 insertions(+)
-> >  create mode 100644 drivers/mtd/nand/raw/spl_nand_mtd.c
->
+Do you mind copying a boot log to a pastebin for me? I thought I had one 
+of these boards but I'm still digging around for it. 0x80000000 should 
+be where we load TFA now days unless some boards have opted out of 
+letting U-Boot move it to the bottom of DRAM
 
-Reviewed-By: Michael Trimarchi <michael@amarulasolutions.com>
-
-> This is a good idea, and I'd like to see a follow-up RFC that switches
-> at least one other platform over showing that this really is generic
-> enough.
->
-> --
-> Tom
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+~Bryan
