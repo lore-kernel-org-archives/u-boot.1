@@ -4,93 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC851E7E0D0
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA9F2E7E0D5
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 19:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 491C28397D;
-	Mon,  9 Feb 2026 19:56:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE2B3805D7;
+	Mon,  9 Feb 2026 20:11:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yQuQW5Ct";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="h3H6tDD1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0529283C54; Mon,  9 Feb 2026 19:56:57 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B8C348388D; Mon,  9 Feb 2026 20:11:36 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EAA08397D
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:56:53 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4833115090dso541305e9.3
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:56:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770663413; x=1771268213; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vOSpUgrV1uwE+BhJQEEIb70iUX8WfUpDGB5Ps65ZSus=;
- b=yQuQW5CthkrtWUC5+qBMUYacjtGKuTzd98ILkSv8jCz1GADqO5MaVLX2bJ+6Fby7x2
- AgRUdirohW5FL976JibnebdkWW3Lfm8AW8rbSWTNFa2PTfY26MNiqtP28FdxHxh0fgiU
- maUURBVEGyw6DjyfEpgei6cU1qcrdChSrMUkcA6REjeD6vtkmzd0piKTmTR/uac6UQF+
- iQk+ERKoeeItIx3lKwyJXPYIz/vwFCyoLTux21KY8/BNaBK8A7tKibYu+KEulLSn+Ai2
- f+x1vmBkyBuL4OpviD1t4TaezfeAG91gV/zpewiNAhPhcXq4aIrdNfCNWCbgKw4g5H4W
- zBtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770663413; x=1771268213;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vOSpUgrV1uwE+BhJQEEIb70iUX8WfUpDGB5Ps65ZSus=;
- b=ISU4utNCWx7/6NGVpg7k6NoRVbFkLzsaP5DhvBELu8i3rQ1Vuaf667nFYaiB7raVLi
- PVuivbECRAWbpKhHKkJkFeorAM8eaB2B+Bj5urP5WAsWbi4iVJKyp9YQWJ4x7YKW1oZ0
- E7oD28WFOL2sYN584WND6ScthRge0Na0rm2A/HUiSzSOTLE2bhy8hGmDFOykhuobVvDG
- AmW8wW8ngJA872DzgoKFwXsk60iU5456SzPJyWNHEs/cOIrZR3bw5SWolamh57hawCLk
- c88P7oSe/WEv4oliI173aRI4ma1DRutUQDXKYYuMzZYVsP8z26auo84ZnCG1+itXnwRI
- Dojw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrwnqRplcBYZVqhw9MzckTNrYvEdWBu4Mb/IJ+QzDzXgzZ0rr2DEB4vzLKuF2utNHdTPlnccw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzx2K7kJMg2yqlyUWDs5DcNNBmHA4n3SyhcYZ2KfEMP+22PABNQ
- 0PAcwTi3MNJA7eAcYpxwZw9BVR4gH/Ld+9T5GxRq2Vghb6Q+CHQ8dzA4EkzBezDc5Bw=
-X-Gm-Gg: AZuq6aKhslgI9NTSyy7daXtmYGgvMhV4Z2OarUNOQyloie3tCiTgwHQaJb4pQJg+VlO
- SSvVrWBLgpQbufdBPWUCls2y6cyWCzApXGV4ltqGB223V30KlgGZyflj1ha0AnFMc6NuYgrliAo
- elLyPOtVQaMwjL942UI+JUf47S8kJh7lhhsdAk2pv1EDbOFrRL0peyS4q/HDU/n8pvECcmy3s1x
- qM59snYGPIGnrDxSGwlG9p72midNqB/eAfIXP3JMJdEG0yZ2kA/WX9jM7ZyiYQKsdKucWeMGDC+
- kCtTugqhuIpWFnZyhRWQoIQr/4DMVobN44mSQHYdbOmsT6Wl8wuR73VorjXOi4uurzirJ1IvWtK
- k1EPpja7OGt3XZqS5aLlx4uc5huvA7HuU5h4g9u8rkEZG+TrP/OSHWTKROcIhEMpRKiYkPE2QWO
- fIKgPNqCaGIfQQh74GnD4+Z0JKswwdI5A5ssLK6yFMpBgWlcLBMhizCgGxnCtu
-X-Received: by 2002:a05:600c:8719:b0:482:eec4:76d with SMTP id
- 5b1f17b1804b1-4832021b461mr196354695e9.17.1770663412597; 
- Mon, 09 Feb 2026 10:56:52 -0800 (PST)
-Received: from [192.168.1.36] (p5b29ea02.dip0.t-ipconnect.de. [91.41.234.2])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-436296b2facsm29069841f8f.9.2026.02.09.10.56.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Feb 2026 10:56:51 -0800 (PST)
-Message-ID: <072d9524-4cd3-4a69-831c-d5df7e3d81b2@linaro.org>
-Date: Mon, 9 Feb 2026 19:56:50 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id B8130802C1
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 20:11:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1770664259;
+ bh=8RStGtLwqy0Kq/J8UUsUPIgNuRHYW/h5smCB5HX2MLw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=h3H6tDD1VKTBQndl3sFoeQWbkOyJyF5C0hfTVoMHt6akuOqeWlORr5WCRtdLQuchL
+ HudvefbhyQhCYTY6dzcOlZfkXbHL1xjrneWVhLSZxj2udihI/0EWrdXA5Mm473abLR
+ Hv5fR+Uoy64Ov/lPl3ehHwDD2UZdiZ7MlPH+SkFa/2pfUisHzeAjBMsAfW/1RfheOM
+ +ckmX2qUPYa6HwhGz33LBgMJu35jn6vBf+xw3L8Iy/daSf5GD/8ZN2v9jIAJaiw6HU
+ ASn67sjX57XlB5gLRQeYIcgYmJ5+8y69jMvbQOj5G2KYXEfLZpjLdUOFNm19vX5O6a
+ kt0jmo5qq9HQw==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 84EC4B22024A;
+ Mon,  9 Feb 2026 20:10:57 +0100 (CET)
+Message-ID: <0e28b0a3-0c85-4690-8429-fe3cc514dded@freeshell.de>
+Date: Mon, 9 Feb 2026 11:10:55 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/3] clk: qcom: Add QCS615 SDCC clock support and
- RPMH-CLK compatibility
-Content-Language: en-US
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@kernel.org,
- lukma@denx.de, aswin.murugan@oss.qualcomm.com, rui.silva@linaro.org,
- david.wronek@mainlining.org, ilias.apalodimas@linaro.org,
- luca.weiss@fairphone.com, jorge.ramirez@oss.qualcomm.com,
- stephan.gerhold@linaro.org, quic_varada@quicinc.com, u-boot-qcom@groups.io,
+Subject: Re: [PATCH v1 0/9] Add support for StarFive VisionFive 2 Lite board
+To: Leo Liang <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  u-boot@lists.denx.de
-References: <20260126155938.2717540-1-balaji.selvanathan@oss.qualcomm.com>
- <20260126155938.2717540-2-balaji.selvanathan@oss.qualcomm.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20260126155938.2717540-2-balaji.selvanathan@oss.qualcomm.com>
+References: <20251024085932.83596-1-hal.feng@starfivetech.com>
+ <aYnDPqVzlesZqy2C@swlinux02>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <aYnDPqVzlesZqy2C@swlinux02>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,94 +73,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Balaji,
+Hi Leo, Hal, Tom, and Heinrich, et.al
 
-On 26/01/2026 16:59, Balaji Selvanathan wrote:
-> Add SDCC (SD Card Controller) clock support for QCS615 platform to
-> enable eMMC functionality. This includes adding SDCC1 and SDCC2 clock
-> gates, implementing SDCC1 apps clock rate configuration
-> and adding QCS615 RPMH clock compatibility to the stub
-> driver to handle device tree clock controller references.
-
-For the sake of clarity, could you split the clk-stub patch out to it's
-own patch.
-
+On 2/9/26 03:21, Leo Liang wrote:
+> On Fri, Oct 24, 2025 at 04:59:23PM +0800, Hal Feng wrote:
+>> VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S industrial
+>> SoC which can run at -40~85 degrees centigrade and up to 1.25GHz.
+>>
+>> Board features:
+>> - JH7110S SoC
+>> - 4/8 GiB LPDDR4 DRAM
+>> - AXP15060 PMIC
+>> - 40 pin GPIO header
+>> - 1x USB 3.0 host port
+>> - 3x USB 2.0 host port
+>> - 1x M.2 M-Key (size: 2242)
+>> - 1x MicroSD slot (optional non-removable 64GiB eMMC)
+>> - 1x QSPI Flash
+>> - 1x I2C EEPROM
+>> - 1x 1Gbps Ethernet port
+>> - SDIO-based Wi-Fi & UART-based Bluetooth
+>> - 1x HDMI port
+>> - 1x 2-lane DSI
+>> - 1x 2-lane CSI
+>>
+>> VisionFive 2 Lite schematics: https://doc-en.rvspace.org/VisionFive2Lite/PDF/VF2_LITE_V1.10_TF_20250818_SCH.pdf
+>> VisionFive 2 Lite Quick Start Guide: https://doc-en.rvspace.org/VisionFive2Lite/VisionFive2LiteQSG/index.html
+>> More documents: https://doc-en.rvspace.org/Doc_Center/visionfive_2_lite.html
+>>
+>> Note: Patch 1 and 2 are the kernel device tree picked from [1]. They are
+>> just for test and please ignore them because dts/upstream should be synced
+>> with devicetree-rebasing.
+>>
+>> [1] https://lore.kernel.org/all/20250821100930.71404-1-hal.feng@starfivetech.com/
+>>
+>> Changes since RFC:
+>> - Rebase on the latest mainline.
+>> - Improve the commit messages.
+>> - Drop patch 7.
+>> patch 3, 4:
+>> - Return 0 instead of 0xFF if read_eeprom() fails.
+>> patch 5:
+>> - Keep default FORMAT_VERSION 0x2.
+>> - Change wifi_bt field to onboard_module field and use bit 0 to mark
+>>   WIFI/BT.
+>> - Drop all "no_eth0", "no_eth1" configuration.
+>>
+>> History:
+>> RFC: https://lore.kernel.org/all/20250829060931.79940-1-hal.feng@starfivetech.com/
+>>
+>> Hal Feng (9):
+>>   riscv: dts: starfive: jh7110-common: Move out some nodes to the board
+>>     dts
+>>   riscv: dts: starfive: Add VisionFive 2 Lite board device tree
+>>   eeprom: starfive: Simplify get_ddr_size_from_eeprom()
+>>   eeprom: starfive: Correct get_pcb_revision_from_eeprom()
+>>   eeprom: starfive: Support eeprom data format v3
+>>   pcie: starfive: Add a optional power gpio support
+>>   configs: visionfive2: Add VisionFive 2 Lite DT to OF_LIST
+>>   board: starfive: spl: Support VisionFive 2 Lite
+>>   board: starfive: visionfive2: Add VisionFive 2 Lite fdt selection
+>>
+>>  arch/riscv/cpu/jh7110/spl.c                   |   2 +-
+>>  arch/riscv/include/asm/arch-jh7110/eeprom.h   |  13 +-
+>>  board/starfive/visionfive2/spl.c              |   3 +
+>>  .../visionfive2/starfive_visionfive2.c        |   2 +
+>>  .../visionfive2/visionfive2-i2c-eeprom.c      |  64 ++++---
+>>  configs/starfive_visionfive2_defconfig        |   2 +-
+>>  drivers/pci/pcie_starfive_jh7110.c            |   8 +
+>>  .../src/riscv/starfive/jh7110-common.dtsi     |  22 ---
+>>  .../jh7110-deepcomputing-fml13v01.dts         |  49 ++++++
+>>  .../src/riscv/starfive/jh7110-milkv-mars.dts  |  49 ++++++
+>>  .../riscv/starfive/jh7110-pine64-star64.dts   |  49 ++++++
+>>  .../jh7110-starfive-visionfive-2.dtsi         |  46 +++++
+>>  dts/upstream/src/riscv/starfive/jh7110.dtsi   |  16 --
+>>  .../jh7110s-starfive-visionfive-2-lite.dts    | 159 ++++++++++++++++++
+>>  14 files changed, 418 insertions(+), 66 deletions(-)
+>>  create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
 > 
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+The series has errors as it is applied:
 
-> ---
->  drivers/clk/clk-stub.c          |  2 +-
->  drivers/clk/qcom/clock-qcom.h   |  1 +
->  drivers/clk/qcom/clock-qcs615.c | 10 ++++++++++
->  3 files changed, 12 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
-> index 117266ac778..1bc749e47b3 100644
-> --- a/drivers/clk/clk-stub.c
-> +++ b/drivers/clk/clk-stub.c
-> @@ -50,6 +50,7 @@ static struct clk_ops stub_clk_ops = {
->  
->  static const struct udevice_id stub_clk_ids[] = {
->  	{ .compatible = "qcom,rpmcc" },
-> +	{ .compatible = "qcom,qcs615-rpmh-clk" },
->  	{ .compatible = "qcom,sdm670-rpmh-clk" },
->  	{ .compatible = "qcom,sdm845-rpmh-clk" },
->  	{ .compatible = "qcom,sc7180-rpmh-clk" },
-> @@ -69,4 +70,3 @@ U_BOOT_DRIVER(clk_stub) = {
->  	.of_match = stub_clk_ids,
->  	.flags = DM_FLAG_DEFAULT_PD_CTRL_OFF,
->  };
-> -
-> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-> index 3a4550d8536..bc7e0453cba 100644
-> --- a/drivers/clk/qcom/clock-qcom.h
-> +++ b/drivers/clk/qcom/clock-qcom.h
-> @@ -14,6 +14,7 @@
->  #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
->  #define CFG_CLK_SRC_GPLL2 (2 << 8)
->  #define CFG_CLK_SRC_GPLL2_MAIN (2 << 8)
-> +#define CFG_CLK_SRC_GPLL6_OUT_MAIN (2 << 8)
->  #define CFG_CLK_SRC_GPLL9 (2 << 8)
->  #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
->  #define CFG_CLK_SRC_GPLL6 (4 << 8)
-> diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
-> index 4700baba8c9..483642531ef 100644
-> --- a/drivers/clk/qcom/clock-qcs615.c
-> +++ b/drivers/clk/qcom/clock-qcs615.c
-> @@ -18,6 +18,7 @@
->  #define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR	0xf034
->  #define USB30_PRIM_MASTER_CLK_CMD_RCGR		0xf01c
->  #define USB3_PRIM_PHY_AUX_CMD_RCGR		0xf060
-> +#define SDCC1_APPS_CLK_CMD_RCGR			0x12028
->  
->  #define GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT BIT(10)
->  #define GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT BIT(11)
-> @@ -52,6 +53,10 @@ static ulong qcs615_set_rate(struct clk *clk, ulong rate)
->  				     5, 0, 0, CFG_CLK_SRC_GPLL0, 8);
->  		clk_rcg_set_rate(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR, 0, 0);
->  		return rate;
-> +	case GCC_SDCC1_APPS_CLK:
-> +		clk_rcg_set_rate(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
-> +				 1, CFG_CLK_SRC_GPLL6_OUT_MAIN);
-> +		return rate;
->  	default:
->  		return 0;
->  	}
-> @@ -66,6 +71,11 @@ static const struct gate_clk qcs615_clks[] = {
->  	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, BIT(0)),
->  	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, BIT(0)),
->  	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf058, BIT(0)),
-> +	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x12008, BIT(0)),
-> +	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x12004, BIT(0)),
-> +	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK, 0x1200c, BIT(0)),
-> +	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x14008, BIT(0)),
-> +	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x14004, BIT(0)),
->  	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x5200c, GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT),
->  	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x5200c, GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT),
->  	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK, 0x5200c, GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT),
+https://source.denx.de/u-boot/custodians/u-boot-riscv/-/commits/master?ref_type=HEADS
 
--- 
-// Casey (she/her)
+For example:
 
+https://source.denx.de/u-boot/custodians/u-boot-riscv/-/commit/4ea3acc000a793d04bae90eabfdc47be31580b87
+
+- CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01
+starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc
+starfive/jh7110-milkv-marscm-lite starfive/jh7110-pine64-star64
+starfive/jh7110-starfive-visionfive-2-v1.2a
+starfive/jh7110-starfive-visionfive-2-v1.3b"
+
++ CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01
+starfive/jh7110-milkv-mars starfive/jh7110-milkv-marscm-emmc
+starfive/jh7110-milkv-marscm-lite starfive/jh7110-pine64-star64
+starfive/jh7110-starfive-visionfive-2-v1.2a
+starfive/jh7110-starfive-visionfive-2-v1.3b
+configs/starfive_visionfive2_defconfig"
+
+The above does not agree with what I reviewed on the mailing list. I am
+listed as having reviewed the content being applied. What was applied is
+something completely different than what I reviewed!
+
+My question:
+
+Why are changes to the series being made when applying to the tree, who
+is making those changes, and how can we get visibility into these
+mistakes? My question is valid even if the errors are not intentional or
+through action of some automated merge algorithm.
+
+This is a serious problem to associate contributors with code they did
+not write or review.
+
+-E
