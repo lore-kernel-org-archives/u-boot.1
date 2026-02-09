@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 977E1E7E0D5
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2307BE7E0D5
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:33:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AF6D805D7;
+	by phobos.denx.de (Postfix) with ESMTP id 994B283CBD;
 	Mon,  9 Feb 2026 19:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VwRtZhD8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mIkhmtLe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C9D383CE3; Mon,  9 Feb 2026 19:32:32 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 28DA0805D7; Mon,  9 Feb 2026 19:32:34 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59F5183C5E
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:32:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47C9C83CDC
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:32:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-59e4989dacdso2530778e87.1
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:32:30 -0800 (PST)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-385e7cafef9so43307131fa.0
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:32:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770661950; x=1771266750; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1770661951; x=1771266751; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tbc6tIm7EI/lv6UGErsDcaMEAGG4sAnxPKcRCkBRjoc=;
- b=VwRtZhD8i19jcC4beqSZ2NoIGRTWNfyjceSqRJS1x287evYCZJvldWh0a+hdfT42Ii
- 2ExtGh6jkR6pBx0jf5eqeyEXEv8x3F+g2V/PZStQmmG2RF6irMQJgPMUG4fKTROfWje0
- fRd2zHVG1OZltF8Q7VuEDrACl6AeMUIyXPJRjbebKczRvMGywphFfDaf8bGwqW6ouRv8
- avR/YcqJ9G7U6KAfptsVONQgeJkt/7NxYUx93Co17Goe5MCOUgoDCyVwp9doOjt03Ip1
- Phm2q+08WEyOcHhcYAMB6buAZ+rBarjJth5yE77D82Jm84Nu4YwEiQbkbeANdUVYbh/Q
- onWA==
+ bh=RLdI+NiQPgsv+eRVzJuMU+FdZi8mTqXGMYv2dQgALsE=;
+ b=mIkhmtLeDRCU8j3aSIxlCXvEw5fCqlpINSBdKw+KAflfJ2uy9bdLJpgUwM6L8APvno
+ DtQTx2czx38z9TtnZFd36HCOMzntwZ282+WNRK7RaoGzdhBjkatUxmKj47MKaLrdeisv
+ wkJ03sbUeZyeKOIHQ323KsnBHzF+N6dp56bWP9MJOXCM5YIN+3bYrs+X+WVbG88Ref3L
+ 7f3mYq8MphYLO+tXaSKufpUm8gRVzPBW62WYzRcM0qwkLNdmzaZOGv3uqf7DE2/h4CcI
+ wTin0HLT95h/WkGxiFjTQIxK5VgbDIZ6n9WQpzEoNfnzEkjTrEr8WhYCY+DN3+ATLrwL
+ +e6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770661950; x=1771266750;
+ d=1e100.net; s=20230601; t=1770661951; x=1771266751;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Tbc6tIm7EI/lv6UGErsDcaMEAGG4sAnxPKcRCkBRjoc=;
- b=W+hCqgXN/kNMYeoHvZq1xMiG6HK8/dtQsxdG22QlY20KKRWOwDy4Gm6Nmgni4lHD2e
- RtmBW7z9Vnw4kWIwXfUsw0aoRXO72bSRJyPgfcq4j3oylCUfVXDmW3tD955+Eeum37+r
- 7dmJZGrsCWfIlITNKCU5hAFXvUZGSJW65jqqEZxVz6rXEqLMQu5bn39ayNdQEKV7DJUs
- +38/V2gYEsBwrfyJfRKfYKZ4nlv/vsm8e3uF+89zZZ8NESWAMRsSpoS8MQCqIOA6sIBd
- VDuVqGPQept37rpE4fUiJkqYe1fSfyaQOlldXs5Y+QSyQWiV6eq3Ra7hS+pXZ22U0/fj
- f7xA==
-X-Gm-Message-State: AOJu0YxcorLpVVIy34mjrm6SKObuXwTgbsMviAGfoWsFJbice3E+xKyB
- BwmaqgcgFC45FPtLORB2KshEGCGNuBIQNCi6RjBKIyxaO1UNh64N18YV
-X-Gm-Gg: AZuq6aJJ28Rdx8TbV4tK8xXUrxE6Nwe9+pnQvsLflL5dEfu7LD1+WTiQMx8lsgM+L6L
- YrQQt17LF9PVjdAiy+jFJV5VipRh0LFMuvW0L0JVcENkcIYIlTTJw8WKXgcVE3mrZxyoqzkou+O
- uziM2AauK5HRKFioS1G3D4RyuR3CQGrRJx+6xM91a7tOF6R7qMOZocNaBpP1LYzP5HknW2ziBXY
- DKP5E69XbZTWbyl6/QGHG0u/T+XxFjIVkcUBQVyRm7juwFjHzduZ9JDkMUPq1EsZe4wgQrpVQCb
- MNghPMpgicFC5CFAgI1IacrAIv7Y0ISB9pxDMOKLI6xm5azfMw5mGG5V5JriMhJjBNZmkJLqwWx
- raMysdclfQb+bd7d/JD3gdjAPr5zoneWtL+b5EuMygJEzzZ7dHSqZJhdJHtEIWVIIpZ5Ujw0Sff
- s3
-X-Received: by 2002:a05:6512:1294:b0:59d:f545:f2da with SMTP id
- 2adb3069b0e04-59e45045940mr4028564e87.8.1770661949431; 
- Mon, 09 Feb 2026 10:32:29 -0800 (PST)
+ bh=RLdI+NiQPgsv+eRVzJuMU+FdZi8mTqXGMYv2dQgALsE=;
+ b=pVsA0e9nwy3Sxk1pmlHTagI0ITMvfiPgz/gQfU5/MjdhDDGI5DapQ1siNi34Q9BAea
+ /RG9sZ/G8v158/IhDqHlsrUB6Wsf3Z4NiMfYIR1PCb5JRkZ6+iuQmRMI4VgXz8Lb4H9+
+ aXZPKV1SN7cK37dbDfo9yJ5OoJXWt8pZ/e/SsmmkkelSKo2GbdO3dfpTelb4m08jN3LN
+ QoX/riTXSYG1HpRRPkrevMBnrra0a+TfMXWfTyZmDmu+LcRKn8guts5tfgL02wv1e4xQ
+ N35qasqkQVE9/dosG1Zw4KPPhVQc1r1V8CEFHhgMeOframhrBVeVHG7XmK53Byyllk+S
+ tkdw==
+X-Gm-Message-State: AOJu0YygvkZprrKJKPCVF+ZEqgEv5FrtuSXlcf+rYz6dqxVV0+/T3pIj
+ a0oNHtkmSJ47LHD1bKk2QVax9a0FfN/e9/PAp4GQYf/0xWQGUpGqeK2n
+X-Gm-Gg: AZuq6aLrDYKkB6wG76nxYKmVmrmH2cknAZONMaVefaEQ9A5BZl42hP3YMTNbd3Dd2l7
+ 9ZDkbifnm9G2jLo72BJt1B4+Bn2O44/qGVWoo4Ik/R+4rASCWhF5vXT2eOZIABVHRKF0X7R3ZLV
+ VNLUAuBnU7Kw2d5oSalYAlXKXY3bcamigXPhuTAW+gFUOASv9ctbGCPzK+rGy3nOiR2UNeuAd5h
+ 2MXso+VQVlNl4HcaCeVOo6oWuR1tzHR//oeUnL5odMcOKllMx3LL5jD3Q18g45fjvfKLdXRLyX5
+ HMVSLqzIP79CeHWtJ3m13P5OasiIsfE+81/2uO7JwcaaFs3v2x4aOuwrJyYX4qKdRPa4GzajCDI
+ +cBr1HcA4oMChewMnLoIOU7/IaJYpyOd9kzJbhmXau/esbSs3f1LrHHF8m6CGXUtYPSFd1pvuO4
+ re
+X-Received: by 2002:a05:6512:3c86:b0:59d:e589:c977 with SMTP id
+ 2adb3069b0e04-59e4515c13cmr3307743e87.26.1770661951427; 
+ Mon, 09 Feb 2026 10:32:31 -0800 (PST)
 Received: from xeon ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-59e44d299ffsm2815391e87.55.2026.02.09.10.32.28
+ 2adb3069b0e04-59e44d299ffsm2815391e87.55.2026.02.09.10.32.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 10:32:29 -0800 (PST)
+ Mon, 09 Feb 2026 10:32:31 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>,
@@ -76,10 +76,9 @@ To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Ion Agorria <ion@agorria.com>, Peter Robinson <pbrobinson@gmail.com>,
  Peter Geis <pgwipeout@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 4/6] ARM: tegra: remove unsupported properties from the
- max8907 node
-Date: Mon,  9 Feb 2026 20:32:17 +0200
-Message-ID: <20260209183219.34250-5-clamor95@gmail.com>
+Subject: [PATCH v1 6/6] board: lg: star: make panel fix optional
+Date: Mon,  9 Feb 2026 20:32:19 +0200
+Message-ID: <20260209183219.34250-7-clamor95@gmail.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260209183219.34250-1-clamor95@gmail.com>
 References: <20260209183219.34250-1-clamor95@gmail.com>
@@ -101,52 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove interrupt and GPIO controller properties from MAX8907 node since
-the PMIC does not have any GPIO cells and does not expose any interrupt
-features.
+Currently, U-Boot fails with an FDT patching error if the LG Optimus 2X
+device tree lacks a panel node. Since the panel is optional hardware,
+patching should be optional as well. Fix this by allowing bootflow to
+continue if the panel node is missing.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra20-lg-star.dts            | 6 ------
- arch/arm/dts/tegra20-samsung-n1-common.dtsi | 6 ------
- 2 files changed, 12 deletions(-)
+ board/lg/star/star.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/tegra20-lg-star.dts b/arch/arm/dts/tegra20-lg-star.dts
-index 083598b1b92..8012b57e5bb 100644
---- a/arch/arm/dts/tegra20-lg-star.dts
-+++ b/arch/arm/dts/tegra20-lg-star.dts
-@@ -327,13 +327,7 @@
- 		pmic: max8907@3c {
- 			compatible = "maxim,max8907";
- 			reg = <0x3c>;
--
- 			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
--			#interrupt-cells = <2>;
--			interrupt-controller;
--
--			#gpio-cells = <2>;
--			gpio-controller;
- 
- 			maxim,system-power-controller;
- 
-diff --git a/arch/arm/dts/tegra20-samsung-n1-common.dtsi b/arch/arm/dts/tegra20-samsung-n1-common.dtsi
-index 8223c5ece54..7225047caba 100644
---- a/arch/arm/dts/tegra20-samsung-n1-common.dtsi
-+++ b/arch/arm/dts/tegra20-samsung-n1-common.dtsi
-@@ -319,13 +319,7 @@
- 		pmic: max8907@3c {
- 			compatible = "maxim,max8907";
- 			reg = <0x3c>;
--
- 			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
--			#interrupt-cells = <2>;
--			interrupt-controller;
--
--			#gpio-cells = <2>;
--			gpio-controller;
- 
- 			maxim,system-power-controller;
- 
+diff --git a/board/lg/star/star.c b/board/lg/star/star.c
+index 0b4a433a5df..ab700cbe828 100644
+--- a/board/lg/star/star.c
++++ b/board/lg/star/star.c
+@@ -46,6 +46,8 @@ void pinmux_init(void)
+ #if IS_ENABLED(CONFIG_OF_LIBFDT) && IS_ENABLED(CONFIG_OF_BOARD_SETUP)
+ int ft_board_setup(void *fdt, struct bd_info *bd)
+ {
+-	return star_fix_panel(fdt);
++	star_fix_panel(fdt);
++
++	return 0;
+ }
+ #endif
 -- 
 2.51.0
 
