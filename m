@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 452AAE7E0D0
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43CE7E7E0D0
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 18:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 814478388D;
-	Mon,  9 Feb 2026 19:17:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC79F83C5E;
+	Mon,  9 Feb 2026 19:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HV1N3hv5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GISzeTHP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1910883C67; Mon,  9 Feb 2026 19:17:14 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id DAC6383C67; Mon,  9 Feb 2026 19:17:14 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 141A880325
+ by phobos.denx.de (Postfix) with ESMTPS id DDA3D8388D
  for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 19:17:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-382fb2bb83dso29127711fa.1
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-386714da2a2so25155891fa.1
  for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 10:17:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770661031; x=1771265831; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ewu4gZbpqRoMXQEIip1YU4vR4cnSN8S9zck95o52pRw=;
- b=HV1N3hv5aDIKd6vAgalbbfYzihSoxf5KJll4DMWuwLkdi6oIzEcMOFLCu69vq1oyVv
- ac/wQwz7YHXaY/RPNZwYm215bg0/jKwvPFAkYsjDGkskOuddxFtpWHmQpHANZXDNTndx
- pIRgZr7SLEFsyR/nKy8qOMPsQ32SVtfK0VqR++heUq6iw9ciQfoxbsD4LVJVKuHzUtC0
- 4aGouBwspeUptAhyuNuDUMugfRXNu8r09PUxuxTg/tfiQe7/bL/+Nrn6B5w/ee3suaeh
- fLE2a5GnwQIE6fen9Tfqh7cbjZ988lYfd7GUKct+BzyLeVyXxuM9Upek0Ljh94H5LVub
- VpMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770661031; x=1771265831;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1770661032; x=1771265832; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ewu4gZbpqRoMXQEIip1YU4vR4cnSN8S9zck95o52pRw=;
- b=J51o5usPTnBTrhdzz9FpFM/o8ageOA+Eir6zn3j+BZXmtv2aYExXFoMHVhTqgcB+d4
- V/ELyWmokEuwTBEP0Tn8wyB/zPOMFd+O2ESD+mfj2EmVgqTqzJfhR7wWVupwuk7CAGtC
- wamy2lzxkvOyZNqlvwqHCJWigE8W1cBhZW2qI/c4C3NAdXiRCPrP6gC1woLVAt+XMmug
- G7qqSmMbyhaqfQ/ungyd7YlAmBgu5V82VzlS/dXzvL0D9xXIODRkiv50b7RL03MIo6nR
- oYMmOM81O5LwZZ2GP80+6Fi7hkNVtVUYK38j1KBWcLbmmZ8uMi0bQQDlmqbO3wadqrfE
- keAA==
-X-Gm-Message-State: AOJu0YxU1SztqAGogXFIG4Hvw6oLYTDXtrZ6uJqjuTcEb4l5/mRAxpoC
- Xh1qFEmdV3XWyNoIacGqWqwr61btJfanPl5YJ2Sh/mEjsGbW30O3fzG4
-X-Gm-Gg: AZuq6aIGluJicqC6erj6QF6G4GZrHkZSBS7vj0Ps6/jfkmAP9rsQHhxXu0ef3zlQ4JX
- ReKWs2GR6sRkN15XGuIZm5klyZAu+4SQ+9nF1pHGHWOHzRN2xC5OVBgm9ZE9EQCafUPfvpjOjWZ
- +jSE4m6OaizeRFjnBQ82FGygjmfS+/qlBy0NmajJQ0S85V4Og5y8ccYyz4Jk3buq6D4Z2DhgA1j
- NJMhGa3la0mzv1g5xxH9f6PRD9WVjYrx2oQOQGyyNTHWtlP2v4lnNuYpd9B0Dzp/eRC4IIROg2E
- SfjAYmpf0IeGJfvzy67N6GB+hmBU5tNNIGO19YiuuCck1DHM1UULZLgys1/SlAq6EwKxKhfk9HK
- fXyngY09ZhOt68DJ8+J71RhOFimGdv1nNF2posp8EGCn9N/Kk+6IIybjyWnRsZ+4JMwQqapdKuo
- K0
-X-Received: by 2002:a2e:a543:0:b0:386:8e44:5d4d with SMTP id
- 38308e7fff4ca-386b6b03afemr45820231fa.40.1770661031153; 
+ bh=f9aJl0pEe16FtdJkRZ/++lvjcScEZbljK4Ehv0HyWLU=;
+ b=GISzeTHPpNWQ0yei7VGrCYBeGJDgnZp6SlLfXa+lCs8n107zWyvBXY1HOmjtO1VVH5
+ zlUPahO7hcey7vG8SuanJeK96W4+xT9LKDTQ6ZpluXd5Bj4eDNY+q0N0QzN37S6J5p2J
+ vT8eMUIvTA6AdoDX+oUjvN57Dw441wKdVvt/VdiOO+fJ6gFRXpMZJ+ZFyVW2DfSyi6RM
+ O5zHG8+aDQKUXuOUJUNUcF+Vk/RDgkVQyFgbUIMBWWs8qlrUpzd16v+Dk8yEHKhG8kzK
+ yQl/Z393JlzkdFA2nDItAAZ4vH7FVbRU4UdwQssdq6TnWBSVsCC/Wkapspn/EBImb9ge
+ thgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770661032; x=1771265832;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=f9aJl0pEe16FtdJkRZ/++lvjcScEZbljK4Ehv0HyWLU=;
+ b=lHSDlJjWaTPDLsgP3nwIdr1CVOQAjqtKSJcW3w/KzvSeAuMt0u33KicnC8+OWF25JX
+ 69yiSjmd33VQZ37B5iYKQN/dyxgp20k6oj6H6vb84N+BzCTE77ENOFYcy4gIQjKSC2mI
+ VDdEvOwzX0DDWYLa6npNu8vZ3Nj0bJUo2SJpfDW2S2pGq1H0KWFgkZrW1lpL2ME6W0lD
+ 7PorgqhEd4uehKr/pX5qE+njGgknEhCRm2tPNkHcqPgrrUjWN0ndXpWCvOo9lyeeDIIY
+ VsfV+WmTbLeG2LgiUz7Jxwb4OQjSTYfKFlqrMZnZrFqT4prpgoAcRqSFPaHWmdBKYCUY
+ mzyw==
+X-Gm-Message-State: AOJu0YwyJn7ujHCe7T/yDfuV/nOn6J3fMp/TgVqxoeNTvAFdXWKGBud0
+ uOA7PeF+yAp6l/uhAxI/YRi1MefqTRLvtGeuTlVShQNGtKZscq8l2kITP/WPhw==
+X-Gm-Gg: AZuq6aI0oviBjQ0VWxPm0tMRV5uaFZ3zBvOgvafLVJgmMjha44qlR0+IA8LcVzpRW+0
+ ruI+p2BIdT8t+bnKYirscPkT+tIjsLK6pq8Faj6DF7u+MQiks9VM2GakNLrRGTYIPe8BCJcSucE
+ AB4CGFn9KriGZg5WrIxDN9m7cwT6nCKjY63I7p4JwzwTMkhajfVtTZODNYHQxNicP50TqKXrIY0
+ iFBSP/9MT2dP2LjKfCDUdPabeGb70PDhvKAv91B+l3b/VOx8QL+Zl17LrRh4McfcL6+zTmbewjZ
+ AKG+DHOPWv5jX/ztHzpjt1RAyNAVsgQcOfPoAjscSh0x9oCVLbKGtB4R4dpsOEXQwDCI4UO9TPJ
+ RfnmR4dvj+icN5wd3Z4JGfLzPKYNAK0hMvzCQUEyatYLoQaD4qHd4sMvsJ+AUe/lzRoCym9znUe
+ 40
+X-Received: by 2002:a2e:b8c2:0:b0:37f:d484:599c with SMTP id
+ 38308e7fff4ca-386b50f9a9cmr46851001fa.28.1770661031889; 
  Mon, 09 Feb 2026 10:17:11 -0800 (PST)
 Received: from xeon ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-386b624d4afsm27446681fa.17.2026.02.09.10.17.10
+ 38308e7fff4ca-386b624d4afsm27446681fa.17.2026.02.09.10.17.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 10:17:10 -0800 (PST)
+ Mon, 09 Feb 2026 10:17:11 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/2] video: panel: align r61307 and ltl106hl02 with schema
-Date: Mon,  9 Feb 2026 20:17:00 +0200
-Message-ID: <20260209181702.33190-1-clamor95@gmail.com>
+Subject: [PATCH v1 1/2] video: r61307: adjust property name
+Date: Mon,  9 Feb 2026 20:17:01 +0200
+Message-ID: <20260209181702.33190-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260209181702.33190-1-clamor95@gmail.com>
+References: <20260209181702.33190-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,16 +97,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align r61307 and ltl106hl02 with recent DT schema additions.
+Rename renesas,inversion to renesas,column-inversion according to latest
+schema.
 
-Svyatoslav Ryhel (2):
-  video: r61307: adjust property name
-  video: ltl106hl02: adjust power supply name
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ drivers/video/renesas-r61307.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- drivers/video/renesas-r61307.c     | 2 +-
- drivers/video/samsung-ltl106hl02.c | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
+diff --git a/drivers/video/renesas-r61307.c b/drivers/video/renesas-r61307.c
+index ef6fab1e953..b643fd1db89 100644
+--- a/drivers/video/renesas-r61307.c
++++ b/drivers/video/renesas-r61307.c
+@@ -228,7 +228,7 @@ static int renesas_r61307_of_to_plat(struct udevice *dev)
+ 	}
+ 
+ 	priv->dig_cont_adj = dev_read_bool(dev, "renesas,contrast");
+-	priv->inversion = dev_read_bool(dev, "renesas,inversion");
++	priv->inversion = dev_read_bool(dev, "renesas,column-inversion");
+ 	priv->gamma = dev_read_u32_default(dev, "renesas,gamma", 0);
+ 
+ 	return 0;
 -- 
 2.51.0
 
