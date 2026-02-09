@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD53E7E0CD
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:12:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 849C2E81BD3
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:12:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5758383C23;
+	by phobos.denx.de (Postfix) with ESMTP id 97A5983C5E;
 	Mon,  9 Feb 2026 18:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BKXs6OE/";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Cv9pePyq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D2E480325; Mon,  9 Feb 2026 17:40:27 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id C7DEF83C5E; Mon,  9 Feb 2026 17:40:28 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20B698341A
+ by phobos.denx.de (Postfix) with ESMTPS id E9685839A5
  for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 17:40:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-45f18e8f2f5so2971743b6e.3
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d148dd3421so1182740a34.0
  for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 08:40:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770655224; x=1771260024;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770655225; x=1771260025;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=geKBYFQJwOJyYq27ywssVhSYHix5iEQ+yGdJgZ/QGP0=;
- b=BKXs6OE/pqyy6tN1Tn6a3ymLoyZfMHe5qA4dBepMFShKXErl3zScVbPc9wex6MYhJ6
- 7NMcNk04+xgihRQzBC9QKntKULyPhOJ6ea4bDway9VHtb3y2QnaEVOiyJKPJW7mNPo3w
- Cj/HXkzk9xwQDhzXzckzGpHlbyIs1s3B80BFAoV6FRwxgPq4SIEg+KettI4rYA6Puo1v
- eIQDcWfvd/AOc2H4ji9AFz4ENmIaTlfICelKnY5nczgzOQeNxutdPGBl5rvg2ILLoH2k
- hPE779vK8rcqu4W10KZFXqg9ObUXL/iqLi7vNHTR15cGGw20gVjL0+Tk05KMbN9iw/fl
- 8dFA==
+ :reply-to; bh=IcqXFxa7UNGxVkb4LjSpb7nbh5Jt1d32fGvi1mcBbqE=;
+ b=Cv9pePyqFdc4x96DqtZP/mnALuED63EyrXFcxx4FwYBmk8HTGRuKQ/gotbYYNhSy6R
+ Ul6NXbK61YHNW44xiquMpZmKQkY7xZHqcTjIiMv5Dv9WSwZmkPbtnD89mSFEj32ZKnNM
+ nGpcfgxCzGvTmldm60Kb/QbRgGmMvbpPBERISpQoT8SNgGbB8Jf7R8r/nFpiu7UUpujw
+ +2C5rHQxDaULTIBZJemqp0LL/X6Oh3MzqnijmaycTK8jRpBNrJ1CIWezKuoqtueKpdeM
+ 20Rq5vq6RKsHGrK3lP7MgDjGq1U6ZPdr3cTXAYlPNUpYQ0TIac+hFES4Wq7B1Ro0c1dQ
+ DKuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770655224; x=1771260024;
+ d=1e100.net; s=20230601; t=1770655225; x=1771260025;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=geKBYFQJwOJyYq27ywssVhSYHix5iEQ+yGdJgZ/QGP0=;
- b=PRW1zd++R26M6ZWHt9efN2D+/gBT0kF6Es57aq9HiC9IBOd682fjMZZeiJmxYUupas
- mqkwf0Ommc3+84z6R33HLw7zKjmV5eDwkhYjqqK1hiZQKvxCcsIEciIs6e4TNJ3GICHi
- 8CJU/DNBg8r72PBsbnTYMxjXAv4tAm8+5HL0RpvmYKBheROvNY852bbQyw0FeQ20yTYb
- a43LpyUxIzPv4ZWOcSDJALeOGY0MgXK7QWi6hNaFdM0C5bDO/2TFn6jc5INpw4crs9Dw
- 3qw7q/heLJUbERefvgBj8HlhL/liQl3YQtIdXKNR6g+/IzGvHp3GzdBuYh+kU7iB4fin
- uN+w==
+ bh=IcqXFxa7UNGxVkb4LjSpb7nbh5Jt1d32fGvi1mcBbqE=;
+ b=XdWxlfQQB1CRktsxFNMwBvV1EiCsMEYf49gGILYRoyAG5JlTihFxP4987t1wL7UcXB
+ CVQpPaxYfdBkTe7dxxmPPpiHzj/5wMESAml0Wf4XfLkDzB42cLE8MENIEE0OhNSqdtbN
+ ikKPaK3AMi64sbV/uSlekc/ivCEy0uU5MNBAl7LXMxIP4VXm4ISe+vD+6fxGXUv3tG8W
+ QqXU8QjfubczTSkBmdglO5/XjXfFWBIyUjZzb1YDAnmLlkBHSWlHS0luhz3OHLcIMFpZ
+ U/NADDURimUV4hMwVykWAeNZAQsi4iVX/fUXrYvAdGI0e+Lg2oQaVnzoSINf7eXD0llx
+ E1Hw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJ5R+CQDzkvsmUVw0zK98jj69nQtHosKsGSEy3j9HgL/nweB4+0QGFSlvQ7vvcpJcqK3O3ff4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcW69l8+eaiiAznvOJvTO52i884SgWn+ivklLO2fCclYFo9gNX
- 7vtX4/P5AOv67Ho0PiFOrZWOBAWv3wnHTAVOUAJc4Z0gmJL5DXOSBNHpkCS9q0YiQsM=
-X-Gm-Gg: AZuq6aI2LY/S9PwKcrro9mEry+YL27vmzIPX2zOQfVddvNtIBCWxCTegnhHp1LPGMDF
- ErcAojCJWKrruEuHM9WABs6TBIwxw0FFuyLuqEqQnRVLu1bhalKLfNbRtD6pfcTV+dkn4tk8h4n
- MeHcFWlo32Iw0j7q++7f/6CerAcLOGca3IDBQDB1mQAAEWic0IuGAR9hJL8d1G5TnYzJT90i0zk
- 1Uq1evIz0nXS3X9Ot/KgUkw5ltYUWPVGD0m7usiWA/VBTHbeg5QzA9TIW/k3QYJqn+7hH8xFawq
- gwY1J7vZRXD9U3WwjAtl4BSw5oRXBkBRVN9VvLB4rkkS0oHFqr7DxfE0MRVgThu28OD11PzF9AS
- SsZ7G6mEt6D3Z05QfjEnZTv0gBTifsQzHoQIzZKigFfEdxKb8b8lcJHcGRKNhSSN4bNG3a3gd0d
- E+mxh/EOlIaJFAQfo=
-X-Received: by 2002:a05:6808:1507:b0:45c:9a6e:1ea1 with SMTP id
- 5614622812f47-462fccaced4mr5169150b6e.66.1770655223823; 
- Mon, 09 Feb 2026 08:40:23 -0800 (PST)
+ AJvYcCUWEKJj38Nhuu26jq2A28JxbDe3tHWC+n3zc0RwikErMSs/UPkEZNWLaKzsMXM37bahmXmkpug=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9I826tdfkFu29mvCF+sINrVOLjz8R0buhsSWGBIrG8+++RKIh
+ d+7Tlu46/1KXgBC+NKB/RN/2YaP1K6pemLp6z8LVMpYTw1o1ObXcoN9Em/hFsNvSyVg=
+X-Gm-Gg: AZuq6aJLeTckn+OVSIhQnyW4B/H5Ib9jbHxCDlqnf363X+o2++Ulh1q9PAoC8DxFtTd
+ xMH2yCCQqeJ7opN4mqmpD0jCEcANMJpp0vcsFcUX2+vGqFeAfse8faLUsTuRUs3fhrA5NVVSOfP
+ 72o2jEAWB3202TplUpdyQmY0iEije/lL2PGr+Nz/jgIL+3TNIc2pNOoUj9IVw3pSXUJA9OVxHms
+ 4IMOT+w91gMNp78b84dZlcKf+wS5xpXPyFvbS2/kWm1zNt3M1hZcsfuu7k555QOiYgwNDtExXDS
+ kLlMIb56BZINmUBAUrYUFCxOHGjdjDgGqRndNyanoZxFGm3GQguTJMbGyqJn7Xb2JOeGpdd4ayJ
+ Rc79/goN8ZoGPPEO4Sdge1X18sKR7wG6GIgzjzMS+zP/VmKRKhLTXr+hLqfYnJzAUHPuJdSlNzY
+ 15eeX2688LhZkyZc8=
+X-Received: by 2002:a05:6830:440d:b0:7cf:dbb4:320e with SMTP id
+ 46e09a7af769-7d46447f6a1mr7722235a34.18.1770655224624; 
+ Mon, 09 Feb 2026 08:40:24 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:cee0:eb0c:b683:ad1d])
  by smtp.gmail.com with ESMTPSA id
  46e09a7af769-7d464785d7esm7731139a34.15.2026.02.09.08.40.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 08:40:23 -0800 (PST)
+ Mon, 09 Feb 2026 08:40:24 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 09 Feb 2026 10:39:26 -0600
-Subject: [PATCH v2 1/7] arm: mediatek: use default weak
- mtk_soc_early_init()
+Date: Mon, 09 Feb 2026 10:39:27 -0600
+Subject: [PATCH v2 2/7] board: mediatek: mt8390_evk: remove empty board_init()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260209-mtk-mach-clean-up-duplicates-v2-1-e3b22282c74d@baylibre.com>
+Message-Id: <20260209-mtk-mach-clean-up-duplicates-v2-2-e3b22282c74d@baylibre.com>
 References: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
 In-Reply-To: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +90,17 @@ Cc: Julien Stephan <jstephan@baylibre.com>,
  Arnaud Ferraris <arnaud.ferraris@collabora.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3111; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1167; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=9oayJVjxx4HdXQIHQGtfAK1QA1MSrKmbWARaN818r2c=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpig3I1TRbU7/pf1j7/6eNI3ifYzbkuXucxfzQc
- UOFeRU0OCWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoNyBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AP24H/RJp+rSYFl2SMMLe1O0GZGRg4BxvxbxmrqklPoT
- fRjqrG33pEFQFD4IIXXrbtm+ez064f42r8caRJGzvT0iS7NCB1wRtP4kBBmQnUlvRFlFvrNlxO+
- DQMgMbPCU4ZjQv1vxxFE+kJhFNYnrM9T8j39DH/kTimKwjq5bTTEFRBlVkRu1I3HJmWLSjV+rpf
- V7a32IH84+nec0P4MGNNiL4AoQQ+8ogRP3UctEPSv/pgOWOXFrbXfGJG7kviX9VnwCtiCqNwJlz
- sLV/9FI+/HvVKQQJSvCzYoO2wmUfgFQqiorNPD7bKTP8McmsquRFD1UCklSu20S5KlU+EGNVLQy
- 23zc=
+ bh=f9ky2WuqbmXYjRAvzIVgmtJ/BHoA9ZpleuDqy5iFJx0=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpig3Prn6sw62TGiQA/Iwe+6haxXIgMIAFYqoCl
+ n13N1zOM/mJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoNzxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AG7oH/ithw+lOX/sFpYBGlP51wXhUnS+YUFBdkdUtg0A
+ AZRGSym6hgjYzOhh1TAYLd/VjB/CDPUfFkTCoILBhMKBY3l0yc+iCWQNacny2wrrz48m3/rLZCd
+ brvoM1QUIb1kDCU0aK4ybZVl39XlDcI6KzKVoAoM3+CCG35BKS43EqREe3fDzbmn89rFhKcdsOs
+ /txK6kQVKNiX4Ulvfd/pDFaioTASaKN2VeSRSBP4ekXcQzWxjUNy1DZpssnvzSFe+fn2CScifqd
+ XeH+ezfnxeMKUUJKIXp976ENvcVDgSjQeix1Gc1AzHmJTTrmyvV04zLH45OH1j5+LitaCskskfq
+ lF0M=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Mon, 09 Feb 2026 18:12:16 +0100
@@ -121,122 +120,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a weak default implementation of mtk_soc_early_init() in spl.c to
-avoid having to define it in every SoC init.c file that does not need
-any additional early initialization.
-
-The init.h header file is no longer needed in this case and is removed.
+Remove empty board_init() function and adjust defconfig to not require
+it.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-v2 changes:
-- Also remove header file.
----
- arch/arm/mach-mediatek/init.h        | 11 -----------
- arch/arm/mach-mediatek/mt7623/init.c |  5 -----
- arch/arm/mach-mediatek/mt8183/init.c |  5 -----
- arch/arm/mach-mediatek/mt8188/init.c |  5 -----
- arch/arm/mach-mediatek/mt8365/init.c |  5 -----
- arch/arm/mach-mediatek/spl.c         |  5 ++++-
- 6 files changed, 4 insertions(+), 32 deletions(-)
+ board/mediatek/mt8390_evk/mt8390_evk.c | 5 -----
+ configs/mt8390_evk_defconfig           | 1 +
+ 2 files changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/arch/arm/mach-mediatek/init.h b/arch/arm/mach-mediatek/init.h
-deleted file mode 100644
-index 1d896fbbf7e..00000000000
---- a/arch/arm/mach-mediatek/init.h
-+++ /dev/null
-@@ -1,11 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (C) 2018 MediaTek Inc.
-- */
--
--#ifndef __MEDIATEK_INIT_H_
--#define __MEDIATEK_INIT_H_
--
--extern int mtk_soc_early_init(void);
--
--#endif /* __MEDIATEK_INIT_H_ */
-diff --git a/arch/arm/mach-mediatek/mt7623/init.c b/arch/arm/mach-mediatek/mt7623/init.c
-index 3d6ba3f383c..8713889b92d 100644
---- a/arch/arm/mach-mediatek/mt7623/init.c
-+++ b/arch/arm/mach-mediatek/mt7623/init.c
-@@ -16,11 +16,6 @@ DECLARE_GLOBAL_DATA_PTR;
+diff --git a/board/mediatek/mt8390_evk/mt8390_evk.c b/board/mediatek/mt8390_evk/mt8390_evk.c
+index 1ca40366a55..5731199bf83 100644
+--- a/board/mediatek/mt8390_evk/mt8390_evk.c
++++ b/board/mediatek/mt8390_evk/mt8390_evk.c
+@@ -7,11 +7,6 @@
+ #include <linux/types.h>
+ #include <asm/armv8/mmu.h>
  
- struct boot_argument *preloader_param;
- 
--int mtk_soc_early_init(void)
+-int board_init(void)
 -{
 -	return 0;
 -}
 -
- int dram_init(void)
- {
- 	u32 i;
-diff --git a/arch/arm/mach-mediatek/mt8183/init.c b/arch/arm/mach-mediatek/mt8183/init.c
-index 37243547da8..39072622788 100644
---- a/arch/arm/mach-mediatek/mt8183/init.c
-+++ b/arch/arm/mach-mediatek/mt8183/init.c
-@@ -42,11 +42,6 @@ int mtk_pll_early_init(void)
- 	return 0;
- }
- 
--int mtk_soc_early_init(void)
--{
--	return 0;
--}
--
- void reset_cpu(void)
- {
- 	psci_system_reset();
-diff --git a/arch/arm/mach-mediatek/mt8188/init.c b/arch/arm/mach-mediatek/mt8188/init.c
-index ed67150e611..9743e39d582 100644
---- a/arch/arm/mach-mediatek/mt8188/init.c
-+++ b/arch/arm/mach-mediatek/mt8188/init.c
-@@ -45,11 +45,6 @@ int dram_init_banksize(void)
- 	return 0;
- }
- 
--int mtk_soc_early_init(void)
--{
--	return 0;
--}
--
- void reset_cpu(void)
- {
- 	struct udevice *wdt;
-diff --git a/arch/arm/mach-mediatek/mt8365/init.c b/arch/arm/mach-mediatek/mt8365/init.c
-index 8f03ed28763..fb14a5a1902 100644
---- a/arch/arm/mach-mediatek/mt8365/init.c
-+++ b/arch/arm/mach-mediatek/mt8365/init.c
-@@ -26,11 +26,6 @@ int dram_init_banksize(void)
- 	return 0;
- }
- 
--int mtk_soc_early_init(void)
--{
--	return 0;
--}
--
- void reset_cpu(void)
- {
- 	struct udevice *wdt;
-diff --git a/arch/arm/mach-mediatek/spl.c b/arch/arm/mach-mediatek/spl.c
-index 247d7ee6f1d..6f1ec052b95 100644
---- a/arch/arm/mach-mediatek/spl.c
-+++ b/arch/arm/mach-mediatek/spl.c
-@@ -9,7 +9,10 @@
- #include <init.h>
- #include <spl.h>
- 
--#include "init.h"
-+__weak int mtk_soc_early_init(void)
-+{
-+	return 0;
-+}
- 
- void board_init_f(ulong dummy)
- {
+ static struct mm_region mt8390_evk_mem_map[] = {
+ 	{
+ 		/* DDR */
+diff --git a/configs/mt8390_evk_defconfig b/configs/mt8390_evk_defconfig
+index 9bc1d922587..06437be625e 100644
+--- a/configs/mt8390_evk_defconfig
++++ b/configs/mt8390_evk_defconfig
+@@ -9,6 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="mediatek/mt8390-genio-700-evk"
+ CONFIG_TARGET_MT8188=y
+ CONFIG_SYS_LOAD_ADDR=0x4c000000
+ CONFIG_IDENT_STRING="mt8390-evk"
++# CONFIG_BOARD_INIT is not set
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
 
 -- 
 2.43.0
