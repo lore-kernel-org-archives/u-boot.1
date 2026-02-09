@@ -4,83 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BA1E94605
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 21:12:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42382E94617
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 22:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EECF83C5E;
-	Mon,  9 Feb 2026 22:12:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 27CC78341A;
+	Mon,  9 Feb 2026 23:52:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hruYI4yk";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="quMXZqrt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A363283C91; Mon,  9 Feb 2026 22:12:09 +0100 (CET)
-Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
- [IPv6:2001:4860:4864:20::41])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F91683BF4; Mon,  9 Feb 2026 23:52:14 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160A2805D7
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 22:12:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41D83805D7
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 23:52:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x41.google.com with SMTP id
- 586e51a60fabf-40438a46d7cso2582194fac.2
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 13:12:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770671525; x=1771276325; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e1hhF5sDIiVWzLhZIEOplf22uGKdjDSmH+WROc3lWdQ=;
- b=hruYI4ykR+ufZWaVDKHPJ1ONoyt+Sv4hmYoMskS2KtVrchKdH+y23kDOpvloEVJ2O2
- 3RTuxgqThc0YuziaWBdfE4hAK9Yg3v1oSgqqKiesuEFNe1mEItS+DkJcjeI2UboJMGFF
- Zj+XUnUKUbeJyGVtA+9T1NjaQv+e/kstJAuSc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770671525; x=1771276325;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e1hhF5sDIiVWzLhZIEOplf22uGKdjDSmH+WROc3lWdQ=;
- b=hBcN+yv8ARXItHDZVidQJ7qUaY3dOnJXkrvlwv2ZlPIkoeCwyPkJpnIj5wa2BS21o8
- Fo1Ui7Arf5ZwkbNiXlmyT6HveIRmuMxJzq9B6ApzyyXpyVGYAmcAIgBP0Zk2mLn9O/uN
- oYGiG+zefNFti58O2IXm8YGkDBOcN+m7342PACHwn9eko2oHdmLlAoWlamzvHHDGrkB4
- ORvdsDXi+smQ/bvm6ogNszJi7SOl5zEJgOnshL1lYaahxx3gLo9q9uS2GRyNRpWE0EMG
- RoOWMKzepJSAOskpJZsX7VTjcKvs+o3O4OQEtxI7+YKP4oTzzfy8uu5pIWQy2tkq1iO9
- 5RoA==
-X-Gm-Message-State: AOJu0Yy3MadOeIGO9QVHXRDI7m4Rf9y/DpajyxK1AlZUiHZRR6aOer9/
- rjP5VbpAAIo1hN5S9/B1NpOu1M+tWKoeNZSN4vsiWXrWD44WHIHvt7LV2Qz8X7WWO8L/PapXpct
- JfO1p
-X-Gm-Gg: AZuq6aJkgxSukCM2pwKEz0DmoN3NF4ZHH9KWYuujm2syquq1Ms2YRcJXBk7K7j2IDBH
- aZyZQS1JNM4EHA82iEvrfzX8JsT0X2XHtSs+xqjJtBvdDkD1YO/jRDKyXLpnMjx5IKNyddzsxaB
- l5tL1h/oogxG4UUgTSqdyZA9O6Cb2d7o+nkCKUatZU8/TrzCWihAIuOJN5rYagusbJ4YmF3Fibr
- Oc0Ukjn5iSQCh9yNiRuqAUtom3l+vZ89xDhnc/88whp6sYpWZeROz01YQ6lyRlWCY+HM1Gyr9qX
- 5MjDSBNHamEy5+h5q7YrwgREe3JNY3LZT+GDKif1RbydA4uHeoBU6jcVJd/pkJ2tRhH5rQZ3MZJ
- VKa1z5GU6D8VvLUfAhN3qUz4LOnUBGkKyvbYYGmICOfIQDQjFG7T/8SJ0aKg3F9ZFZlaS+dUISc
- pcsDOEDeRko+3fizgIPiVE5Xn6CtIvn+WcjKatzbvZJmEyjjDgdJzfjQ2z+HYlzd5q9qCTktCqo
- hLXdDnlJlNvyPWJ/XmnRORa/vdjMOPUyI8O2B8=
-X-Received: by 2002:a05:6870:c6a1:b0:3e8:8e57:a7a8 with SMTP id
- 586e51a60fabf-40a9709b913mr6361368fac.55.1770671524742; 
- Mon, 09 Feb 2026 13:12:04 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a992eebd1sm8783408fac.2.2026.02.09.13.12.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 13:12:04 -0800 (PST)
-Date: Mon, 9 Feb 2026 15:12:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2026.04-rc2 released
-Message-ID: <20260209211202.GB2426323@bill-the-cat>
-References: <20260209211005.GA2426323@bill-the-cat>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4f90Lx2zGNz9tWy;
+ Mon,  9 Feb 2026 23:52:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770677529;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=hPXxcsiLB4Kuc+N5tmuBgIl3dJMWsZLFVXEKDLXDGl4=;
+ b=quMXZqrtE5CbSAj74eFpFZ5puRQ/1OJB9jh8wMTZKQKGK/FlZnB5HAcBFuABlNp9xFVUlm
+ Le4Z2GjO+siJjc2/+33vldHpJGbbog/64Cq0oGjDyPGl7dTq5Sm58CDNnW3ADLu02GREQl
+ Eq7wjYKskmzi7wYUUAaJT+hkqTXz3PayeUdyQHVBWRsYV7YiF7kiEZo3P43T5K1ziSvbm8
+ o6e0E/okuRS2YnjbfKJYhaifmnbL7zfTLf8mSiq6GkdSX2pF8Plxen67KtJDaqBwSMj58X
+ 3UaHqwIp/jFgHBIHrZFk1FFYxgF3pU4o3zWsVh/xR9aeSOMiyPm4zBDNz4nIPA==
+Message-ID: <f5dd98cd-be29-4587-8ddf-3e43fcb7a811@mailbox.org>
+Date: Mon, 9 Feb 2026 22:46:03 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fR1TGMcVXd/Q7oHI"
-Content-Disposition: inline
-In-Reply-To: <20260209211005.GA2426323@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] usb: dwc3: core: Use IS_ERR_VALUE() for ref_clk rate check
+To: Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+References: <20260209201415.303190-1-jonas@kwiboo.se>
+ <9a23daec-39bf-4b2d-85af-820e015ec4dd@mailbox.org>
+ <20260209205126.GK2603314@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260209205126.GK2603314@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: a253070565110aaf6f5
+X-MBO-RS-META: hx536w38rted71h7rgwjq1m3kaos1xk8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,64 +76,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---fR1TGMcVXd/Q7oHI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Feb 09, 2026 at 03:10:05PM -0600, Tom Rini wrote:
-
-> Hey all,
->=20
-> So it's release day and I have tagged and pushed things out. Many, but
-> not all, of the device tree alignment issues I mentioned for -rc1 have
-> been resolved. The appended cases should be solved. The FIT image case
-> for non-overlays should be solved. The FIT image case of overlays isn't
-> solved yet. There's now two threads on this, and maybe it's one problem,
-> or maybe it's two problems, it's too soon to say. But it's being worked
-> on.
->=20
-> We're continuing with a community meeting following the release and the
-> calendar link is
-> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYz=
-YzQ1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWM=
-wNmE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=
-=3D89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group=
-=2Ecalendar.google.com&scp=3DALL
-> and once again this is the same time as the previous meeting. The
-> meeting details itself are:
-> https://meet.google.com/icv-nvmv-dbf
-> February 10th, 2025. 9am (GMT -06:00)
->=20
-> To join by phone:
-> https://tel.meet/icv-nvmv-dbf?pin=3D5493171900556
->=20
-> In terms of a rough changelog:
-> - Platform updates for Renesas R-Car, many NXP, MediaTek, various TI,
->   STM32, m68k, Analog Devices,=20
-> - Subsystem updates for documentation, EFI loader, NAND, networking
->   (legacy and lwIP)
->=20
-> I continue to plan to do an rc release every two weeks and the final
-> release will be 06 April 2026.
->=20
-> Thanks all!
-
-And I dropped the PGP signature, oops.
-
---=20
-Tom
-
---fR1TGMcVXd/Q7oHI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYpNogAKCRAr4qD1Cr/k
-CruOAP4579pjA2w0EF3DnhKWsi5xDVIEV9zaJUCtUxUgC1TyGgD9EdB1cIOtLbo9
-FTNgiohby6F+Fi0j9RfLCZS+ddgWsgE=
-=508x
------END PGP SIGNATURE-----
-
---fR1TGMcVXd/Q7oHI--
+On 2/9/26 9:51 PM, Tom Rini wrote:
+> On Mon, Feb 09, 2026 at 09:35:54PM +0100, Marek Vasut wrote:
+>> On 2/9/26 9:14 PM, Jonas Karlman wrote:
+>>> clk_get_rate() in U-Boot is documented to return clock rate on success,
+>>> 0 for invalid clock and -ve error code for other errors. This differ
+>>> slightly from Linux where only >= 0 is returned from clk_get_rate().
+>>>
+>>> Some clock drivers take advantage of this difference and may return -ve
+>>> error code for clocks not fully supported in U-Boot.
+>>>
+>>> Use IS_ERR_VALUE() to check for an error code in addition to current
+>>> invalid clock check to fix broken and unpredicted behavior when clock
+>>> driver returns a -ve error code for the ref_clk.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> I wonder if it would be better to fix the API discrepancy . Could you try
+>> that instead ?
+> 
+> Which API discrepancy? clk_get_rate behaves the way it behaves
+> intentionally and there's some fairly long and recent threads about that
+> resulting from attepmts to change that.
+Align clk_get_rate() between U-Boot and Linux kind of discrepancy .
