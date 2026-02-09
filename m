@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 271D6E81BD3
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD53E7E0CD
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 17:12:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16E82805D7;
+	by phobos.denx.de (Postfix) with ESMTP id 5758383C23;
 	Mon,  9 Feb 2026 18:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZsMWLjW2";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BKXs6OE/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB2D380325; Mon,  9 Feb 2026 17:40:26 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 5D2E480325; Mon,  9 Feb 2026 17:40:27 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 593BE80325
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 17:40:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20B698341A
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 17:40:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7d1851d85daso1182097a34.1
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 08:40:24 -0800 (PST)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-45f18e8f2f5so2971743b6e.3
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 08:40:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770655223; x=1771260023;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770655224; x=1771260024;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=O/D6UJIErIuubAh79jr2Jk9DAzywbEtP3NW2ik1LJEw=;
- b=ZsMWLjW25ZF6BTzZ4Yi8n/EhsfH+Ud2k1OMBy2E1XZ5jz1zsAXs/c5nPTR1SBG7vNx
- c2odv+WSWfxAUqiIhyCbZ2qkD1d5y9Z9+xPKjGSUVVQ5HG8Eobjqy0Fndg0Co4HTpCad
- 3U6h20HjvtcZHCPDM2tQbtLvbX/xKtoK4oOBBD9HtHr5NNaX8ctA90GP6fscRXLozcEW
- c/uxOivHFzSaodF2YG5RCXY3lpayszwXWXWlGkfI0I4l0pfotCCruRRsgettcN8wcP6k
- Zk/NVyz6o2z7/9ISMgxxs7oaNfBZ4PUrDijLdVYsAjaTNoN6VfgtYAiKMTbEbsAl+v0E
- PC1Q==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=geKBYFQJwOJyYq27ywssVhSYHix5iEQ+yGdJgZ/QGP0=;
+ b=BKXs6OE/pqyy6tN1Tn6a3ymLoyZfMHe5qA4dBepMFShKXErl3zScVbPc9wex6MYhJ6
+ 7NMcNk04+xgihRQzBC9QKntKULyPhOJ6ea4bDway9VHtb3y2QnaEVOiyJKPJW7mNPo3w
+ Cj/HXkzk9xwQDhzXzckzGpHlbyIs1s3B80BFAoV6FRwxgPq4SIEg+KettI4rYA6Puo1v
+ eIQDcWfvd/AOc2H4ji9AFz4ENmIaTlfICelKnY5nczgzOQeNxutdPGBl5rvg2ILLoH2k
+ hPE779vK8rcqu4W10KZFXqg9ObUXL/iqLi7vNHTR15cGGw20gVjL0+Tk05KMbN9iw/fl
+ 8dFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770655223; x=1771260023;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=O/D6UJIErIuubAh79jr2Jk9DAzywbEtP3NW2ik1LJEw=;
- b=bWFCwytVznv3SCCm37ZgGSAX57XKyhrDN6bEPApOp94flUSYrkffXlDcKEZb3eqV0w
- bPk+Mt4gffhJvv+ZC0TcZzVY6Nbh3/WFLojYn+SLj8jX8gkXzmEvez0OaMN2nWcLZVq0
- ANsBLnGLOrl3mVjLBZ9pkbqu5Pt9LKpO5tY9G+QCbhzZ8geHkGM6K13iBPJX0nRdolX6
- q1emV7+UpH5aLLOLsq67h8GwiS0Vq9Pf5PLjfeQKnZpYpnL6CYlVX+sRDt9OMCx0XIRy
- JcjG/G8/YrPbfmcDv6Fz2OzOXeFrMvlUWNgRVYttNKDuwttLTbN+mwvTwTp8P8kkBc7L
- Q+kA==
+ d=1e100.net; s=20230601; t=1770655224; x=1771260024;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=geKBYFQJwOJyYq27ywssVhSYHix5iEQ+yGdJgZ/QGP0=;
+ b=PRW1zd++R26M6ZWHt9efN2D+/gBT0kF6Es57aq9HiC9IBOd682fjMZZeiJmxYUupas
+ mqkwf0Ommc3+84z6R33HLw7zKjmV5eDwkhYjqqK1hiZQKvxCcsIEciIs6e4TNJ3GICHi
+ 8CJU/DNBg8r72PBsbnTYMxjXAv4tAm8+5HL0RpvmYKBheROvNY852bbQyw0FeQ20yTYb
+ a43LpyUxIzPv4ZWOcSDJALeOGY0MgXK7QWi6hNaFdM0C5bDO/2TFn6jc5INpw4crs9Dw
+ 3qw7q/heLJUbERefvgBj8HlhL/liQl3YQtIdXKNR6g+/IzGvHp3GzdBuYh+kU7iB4fin
+ uN+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUirLSMXki40FDZbjRohiJJSLWcbS7H8ghv1pBStk9g2rWqayUXnoE2vLRNjYQ4T0+O3QjuaSU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7iwYPpBs/u3Xho0owJWGirQKr5R39cVy0aVM1raBVwXClY/NV
- Azqikfn226Ps4QAkfb5TEeDNyGVx1NR21w9gg47EHgpP5S8YljxSHMxSmImx3TxHBTw=
-X-Gm-Gg: AZuq6aIyK8Izn09C/W09yRI5N8Y3ktWAB+b9H9/avk5uItL/qWRCBrl5NT+9DtLTAFc
- ax0zzFO5/0655V+ZEU/lCDrV3gfRJP6Ta6yTmphSqkoHdsdqyMptM60GESVZ+6+wdYhDEsBULGz
- fxTnPR1NqOSH/nA7+/BCbnlxejGMm6sPJCkjLVFl5jA8v6iHoPYSkBIQSVsx3X0hAqmPsDp+aza
- tAaT1DbzpeJeZGITPkp9y4MTbfoPwhUJuyci2gOARh7CrgKPT8Xa9CJc8/s1WmSV8dkbnyeTvzT
- lC4ci9VKkV8iWmVRdjmf4vEuubUfErLTnqKBPvLhhp/GT0n50mWoX8Zi2T1S8j7/Madm1utb4TE
- YMb319M08XfJugm2OGfW5rfd7Cj+D86/OTtzlG98SU5ig86ZtiMP+6gcZiwx3jSJ8KXcDKks9v9
- +dBGcONuhXLzwJhUU=
-X-Received: by 2002:a05:6830:6518:b0:7ca:c723:6f42 with SMTP id
- 46e09a7af769-7d464406028mr5778758a34.10.1770655222977; 
- Mon, 09 Feb 2026 08:40:22 -0800 (PST)
+ AJvYcCWJ5R+CQDzkvsmUVw0zK98jj69nQtHosKsGSEy3j9HgL/nweB4+0QGFSlvQ7vvcpJcqK3O3ff4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxcW69l8+eaiiAznvOJvTO52i884SgWn+ivklLO2fCclYFo9gNX
+ 7vtX4/P5AOv67Ho0PiFOrZWOBAWv3wnHTAVOUAJc4Z0gmJL5DXOSBNHpkCS9q0YiQsM=
+X-Gm-Gg: AZuq6aI2LY/S9PwKcrro9mEry+YL27vmzIPX2zOQfVddvNtIBCWxCTegnhHp1LPGMDF
+ ErcAojCJWKrruEuHM9WABs6TBIwxw0FFuyLuqEqQnRVLu1bhalKLfNbRtD6pfcTV+dkn4tk8h4n
+ MeHcFWlo32Iw0j7q++7f/6CerAcLOGca3IDBQDB1mQAAEWic0IuGAR9hJL8d1G5TnYzJT90i0zk
+ 1Uq1evIz0nXS3X9Ot/KgUkw5ltYUWPVGD0m7usiWA/VBTHbeg5QzA9TIW/k3QYJqn+7hH8xFawq
+ gwY1J7vZRXD9U3WwjAtl4BSw5oRXBkBRVN9VvLB4rkkS0oHFqr7DxfE0MRVgThu28OD11PzF9AS
+ SsZ7G6mEt6D3Z05QfjEnZTv0gBTifsQzHoQIzZKigFfEdxKb8b8lcJHcGRKNhSSN4bNG3a3gd0d
+ E+mxh/EOlIaJFAQfo=
+X-Received: by 2002:a05:6808:1507:b0:45c:9a6e:1ea1 with SMTP id
+ 5614622812f47-462fccaced4mr5169150b6e.66.1770655223823; 
+ Mon, 09 Feb 2026 08:40:23 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:cee0:eb0c:b683:ad1d])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d464785d7esm7731139a34.15.2026.02.09.08.40.22
+ 46e09a7af769-7d464785d7esm7731139a34.15.2026.02.09.08.40.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 08:40:22 -0800 (PST)
+ Mon, 09 Feb 2026 08:40:23 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Subject: [PATCH v2 0/7] arm: mediatek: clean up some redundant board init
-Date: Mon, 09 Feb 2026 10:39:25 -0600
-Message-Id: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
+Date: Mon, 09 Feb 2026 10:39:26 -0600
+Subject: [PATCH v2 1/7] arm: mediatek: use default weak
+ mtk_soc_early_init()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/43NOQ7CMBCF4atEUzPIdhYDFfdAKbwMZEQ22UlEF
- OXumJyA8nvF/zaIFJgi3LINAi0ceegT1CkD15j+Rcg+GZRQlVCixG56Y2dcg64l0+M8op/Hlp2
- ZKKKpvLa6KHOpr5ASY6Anf478o05uOE5DWI+3Rf7WP8OLRIFW+8IUuZMXsndr1pZtoLMbOqj3f
- f8CW90NucsAAAA=
-X-Change-ID: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179
+Message-Id: <20260209-mtk-mach-clean-up-duplicates-v2-1-e3b22282c74d@baylibre.com>
+References: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
+In-Reply-To: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
@@ -93,17 +91,17 @@ Cc: Julien Stephan <jstephan@baylibre.com>,
  Arnaud Ferraris <arnaud.ferraris@collabora.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2934; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3111; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=Tx7BYgkFxC+1qXVMt5TM5rryQBw0s57Due636D7hB4U=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpig3B3n7JyehNoy0ijPzlPfX2/PYSTIuRllplx
- cdpOEfymRmJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoNwRYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ArMoH/09aVLX6wFbWpRQz70nX9uTWkmrla69euySKRbN
- l9pxifpDOAR4jID3Ydl+RvCVd5OEMkq+NWKnrFkAnBJ3GInkuCxD2zE6+03qeObesXNc2XWZiYy
- dfuPMZZHh1a2efA+tOWuaxCVI08VuQuGVV/XEZhJ/BJ64ao3LmvFu6M9J4YTdYy3NLGsPjwZ5Nm
- kKjDI9EdrOBHjO7Nd1Un0rQh4I2hM6BbqW4DHn/Bm0GTbSy5xLG+tYwRP74M2KSTeDFJ/7YbqVK
- L9p3CFrs9LK3GZ9HuMoP+MN8m5/fQk8V84hpKg7ev1LVl11X0yBGsTeuB7X0234xJACTl8DcxEc
- mvdI=
+ bh=9oayJVjxx4HdXQIHQGtfAK1QA1MSrKmbWARaN818r2c=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpig3I1TRbU7/pf1j7/6eNI3ifYzbkuXucxfzQc
+ UOFeRU0OCWJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaYoNyBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AP24H/RJp+rSYFl2SMMLe1O0GZGRg4BxvxbxmrqklPoT
+ fRjqrG33pEFQFD4IIXXrbtm+ez064f42r8caRJGzvT0iS7NCB1wRtP4kBBmQnUlvRFlFvrNlxO+
+ DQMgMbPCU4ZjQv1vxxFE+kJhFNYnrM9T8j39DH/kTimKwjq5bTTEFRBlVkRu1I3HJmWLSjV+rpf
+ V7a32IH84+nec0P4MGNNiL4AoQQ+8ogRP3UctEPSv/pgOWOXFrbXfGJG7kviX9VnwCtiCqNwJlz
+ sLV/9FI+/HvVKQQJSvCzYoO2wmUfgFQqiorNPD7bKTP8McmsquRFD1UCklSu20S5KlU+EGNVLQy
+ 23zc=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-Mailman-Approved-At: Mon, 09 Feb 2026 18:12:16 +0100
@@ -123,63 +121,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Before adding more targets, we take a moment to clean up some some
-redundant code in existing Mediatek SoC support.
+Add a weak default implementation of mtk_soc_early_init() in spl.c to
+avoid having to define it in every SoC init.c file that does not need
+any additional early initialization.
 
-The first three patches are removing no-op functions. The last patch
-generalizes the mem_map code so that it can be shared between all
-Mediatek ARMv8 SoCs.
+The init.h header file is no longer needed in this case and is removed.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
-Changes in v2:
-- Also delete no longer needed init.h header.
-- Don't delete defconfig maintainer entries.
-- New patch to move MAINTAINERS files.
-- New patch to add CONFIG_MTK_MEM_MAP_DDR_BASE_PHY.
-- Link to v1: https://lore.kernel.org/r/20260205-mtk-mach-clean-up-duplicates-v1-0-b7d4a43c18eb@baylibre.com
-
+v2 changes:
+- Also remove header file.
 ---
-David Lechner (7):
-      arm: mediatek: use default weak mtk_soc_early_init()
-      board: mediatek: mt8390_evk: remove empty board_init()
-      arm: mediatek: mt8183: remove unused function
-      arm: mediatek: make mtk_pll_early_init() static
-      board/mediatek: move EVK MAINTAINERS to common file
-      arm: mediatek: consolidate ARMv8 memory maps
-      arm: mediatek: add CONFIG_MTK_MEM_MAP_DDR_BASE_PHY
+ arch/arm/mach-mediatek/init.h        | 11 -----------
+ arch/arm/mach-mediatek/mt7623/init.c |  5 -----
+ arch/arm/mach-mediatek/mt8183/init.c |  5 -----
+ arch/arm/mach-mediatek/mt8188/init.c |  5 -----
+ arch/arm/mach-mediatek/mt8365/init.c |  5 -----
+ arch/arm/mach-mediatek/spl.c         |  5 ++++-
+ 6 files changed, 4 insertions(+), 32 deletions(-)
 
- arch/arm/mach-mediatek/Kconfig              | 27 +++++++++++++++++++++++
- arch/arm/mach-mediatek/Makefile             |  1 +
- arch/arm/mach-mediatek/armv8-mem-map.c      | 24 ++++++++++++++++++++
- arch/arm/mach-mediatek/init.h               | 11 ----------
- arch/arm/mach-mediatek/mt7622/init.c        | 20 -----------------
- arch/arm/mach-mediatek/mt7623/init.c        |  5 -----
- arch/arm/mach-mediatek/mt7629/init.c        |  2 +-
- arch/arm/mach-mediatek/mt7981/init.c        | 21 ------------------
- arch/arm/mach-mediatek/mt7986/init.c        | 21 ------------------
- arch/arm/mach-mediatek/mt7987/init.c        | 21 ------------------
- arch/arm/mach-mediatek/mt7988/init.c        | 21 ------------------
- arch/arm/mach-mediatek/mt8183/init.c        | 30 -------------------------
- arch/arm/mach-mediatek/mt8188/init.c        |  5 -----
- arch/arm/mach-mediatek/mt8365/init.c        |  5 -----
- arch/arm/mach-mediatek/mt8512/init.c        | 21 ------------------
- arch/arm/mach-mediatek/mt8516/init.c        | 22 +------------------
- arch/arm/mach-mediatek/mt8518/init.c        | 21 ------------------
- arch/arm/mach-mediatek/spl.c                |  5 ++++-
- board/mediatek/{mt8390_evk => }/MAINTAINERS |  6 ++++-
- board/mediatek/mt8365_evk/MAINTAINERS       |  5 -----
- board/mediatek/mt8365_evk/Makefile          |  3 ---
- board/mediatek/mt8365_evk/mt8365_evk.c      | 28 ------------------------
- board/mediatek/mt8390_evk/Makefile          |  3 ---
- board/mediatek/mt8390_evk/mt8390_evk.c      | 34 -----------------------------
- configs/mt8390_evk_defconfig                |  1 +
- 25 files changed, 64 insertions(+), 299 deletions(-)
----
-base-commit: 42b3ee7fa5248ad89467aaf2585f4a08aedd4731
-change-id: 20260205-mtk-mach-clean-up-duplicates-a6d7b7453179
+diff --git a/arch/arm/mach-mediatek/init.h b/arch/arm/mach-mediatek/init.h
+deleted file mode 100644
+index 1d896fbbf7e..00000000000
+--- a/arch/arm/mach-mediatek/init.h
++++ /dev/null
+@@ -1,11 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2018 MediaTek Inc.
+- */
+-
+-#ifndef __MEDIATEK_INIT_H_
+-#define __MEDIATEK_INIT_H_
+-
+-extern int mtk_soc_early_init(void);
+-
+-#endif /* __MEDIATEK_INIT_H_ */
+diff --git a/arch/arm/mach-mediatek/mt7623/init.c b/arch/arm/mach-mediatek/mt7623/init.c
+index 3d6ba3f383c..8713889b92d 100644
+--- a/arch/arm/mach-mediatek/mt7623/init.c
++++ b/arch/arm/mach-mediatek/mt7623/init.c
+@@ -16,11 +16,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ struct boot_argument *preloader_param;
+ 
+-int mtk_soc_early_init(void)
+-{
+-	return 0;
+-}
+-
+ int dram_init(void)
+ {
+ 	u32 i;
+diff --git a/arch/arm/mach-mediatek/mt8183/init.c b/arch/arm/mach-mediatek/mt8183/init.c
+index 37243547da8..39072622788 100644
+--- a/arch/arm/mach-mediatek/mt8183/init.c
++++ b/arch/arm/mach-mediatek/mt8183/init.c
+@@ -42,11 +42,6 @@ int mtk_pll_early_init(void)
+ 	return 0;
+ }
+ 
+-int mtk_soc_early_init(void)
+-{
+-	return 0;
+-}
+-
+ void reset_cpu(void)
+ {
+ 	psci_system_reset();
+diff --git a/arch/arm/mach-mediatek/mt8188/init.c b/arch/arm/mach-mediatek/mt8188/init.c
+index ed67150e611..9743e39d582 100644
+--- a/arch/arm/mach-mediatek/mt8188/init.c
++++ b/arch/arm/mach-mediatek/mt8188/init.c
+@@ -45,11 +45,6 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
+-int mtk_soc_early_init(void)
+-{
+-	return 0;
+-}
+-
+ void reset_cpu(void)
+ {
+ 	struct udevice *wdt;
+diff --git a/arch/arm/mach-mediatek/mt8365/init.c b/arch/arm/mach-mediatek/mt8365/init.c
+index 8f03ed28763..fb14a5a1902 100644
+--- a/arch/arm/mach-mediatek/mt8365/init.c
++++ b/arch/arm/mach-mediatek/mt8365/init.c
+@@ -26,11 +26,6 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
+-int mtk_soc_early_init(void)
+-{
+-	return 0;
+-}
+-
+ void reset_cpu(void)
+ {
+ 	struct udevice *wdt;
+diff --git a/arch/arm/mach-mediatek/spl.c b/arch/arm/mach-mediatek/spl.c
+index 247d7ee6f1d..6f1ec052b95 100644
+--- a/arch/arm/mach-mediatek/spl.c
++++ b/arch/arm/mach-mediatek/spl.c
+@@ -9,7 +9,10 @@
+ #include <init.h>
+ #include <spl.h>
+ 
+-#include "init.h"
++__weak int mtk_soc_early_init(void)
++{
++	return 0;
++}
+ 
+ void board_init_f(ulong dummy)
+ {
 
-Best regards,
 -- 
-David Lechner <dlechner@baylibre.com>
+2.43.0
 
