@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7623BE94605
-	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 21:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BA1E94605
+	for <u-boot@archiver.kernel.org>; Mon,  9 Feb 2026 21:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B4D383C61;
-	Mon,  9 Feb 2026 22:10:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1EECF83C5E;
+	Mon,  9 Feb 2026 22:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Eu5nCbvf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hruYI4yk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F23A80325; Mon,  9 Feb 2026 22:10:12 +0100 (CET)
-Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com
- [IPv6:2607:f8b0:4864:20::241])
+ id A363283C91; Mon,  9 Feb 2026 22:12:09 +0100 (CET)
+Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
+ [IPv6:2001:4860:4864:20::41])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DF5A805D7
- for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 22:10:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 160A2805D7
+ for <u-boot@lists.denx.de>; Mon,  9 Feb 2026 22:12:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x241.google.com with SMTP id
- 5614622812f47-45c89d754dfso1504761b6e.1
- for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 13:10:09 -0800 (PST)
+Received: by mail-oa1-x41.google.com with SMTP id
+ 586e51a60fabf-40438a46d7cso2582194fac.2
+ for <u-boot@lists.denx.de>; Mon, 09 Feb 2026 13:12:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770671408; x=1771276208; darn=lists.denx.de;
- h=mutt-pgp:content-disposition:mime-version:message-id:subject:cc:to
- :from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P819JpTVPxTAW5ZHC8F7RhOKJbC7t+hvpaaCSgxWYOE=;
- b=Eu5nCbvfS+FD7rO88ZmSrrUIb0a+HaxwO63TuTc224FtG78QizV0sJlgNJkDQmwNiy
- DvyauLheupIUEfOOMO3QlPyDy9fiYvELKLYz8Cc/vTjNfi8AxHMnvdTVHjoCHe18Ptjd
- 6bqgxEaMQonP0q4NxJcgEMKnuoYamoUlCPUAU=
+ d=konsulko.com; s=google; t=1770671525; x=1771276325; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=e1hhF5sDIiVWzLhZIEOplf22uGKdjDSmH+WROc3lWdQ=;
+ b=hruYI4ykR+ufZWaVDKHPJ1ONoyt+Sv4hmYoMskS2KtVrchKdH+y23kDOpvloEVJ2O2
+ 3RTuxgqThc0YuziaWBdfE4hAK9Yg3v1oSgqqKiesuEFNe1mEItS+DkJcjeI2UboJMGFF
+ Zj+XUnUKUbeJyGVtA+9T1NjaQv+e/kstJAuSc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770671408; x=1771276208;
- h=mutt-pgp:content-disposition:mime-version:message-id:subject:cc:to
- :from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P819JpTVPxTAW5ZHC8F7RhOKJbC7t+hvpaaCSgxWYOE=;
- b=PtmnVOqnyABKZ/gli+1xhWQpt0gMBRdnehq7TAb1OTdS9XY1Y4cKwL1YmT3gPJX0ga
- XsldLh79+a5Ka4mSl3RKmAEt33Orf0s8cljhpsXScsslcfwDjrSsec1TiiY32iARwEcY
- 89qYM7vYoh7gDLAPZdxRaIWNen2/IZkyYDKj6NBp5/ssQcFDIzXP7grgFEE08GSxDEq5
- 37CZT87OVDe29MFuNIrt+rbzeX1eolLfNoWOQJTmxYOLL4HOwBZmEFklqqyLk8iaBswj
- ieHSsy3WQm2qRxGJpVsWK/JiVpxcFajrHoQB2ajsWtV/UenBTlAZwJiIoABcsBGk+2dB
- xdyA==
-X-Gm-Message-State: AOJu0YxXBaqwUGiSmhI6zCP9syh+ituShGECvPkOi1HnQZHoRPWpl9tp
- WyO1MEzGAAxGU9W2x5+m9Qy4/+Y3fU3nrVMalGBcXZ477McquvBDQOCw9f3f7RvAQVEA46xNusn
- BiMZ9iqg=
-X-Gm-Gg: AZuq6aLPsxSRaXl8te880H/3n3Qoiux7NQxjk8NuPzposVcGOcdDFSyNWWjaZK/cRxK
- m/94QRMivNvxt2ofp0nzSDXmpWF/N21ESRWqW+27C6SwiuR2pXUfpiYyaUcMG+ood7DQHKA1xGp
- VpwZrvkUvGIelwh2W40mPZsPuOLXpGb3wjAHzmaM444tnzM6+8in6A1u3on9g3Gt9iXRpmD4Evn
- Eeg3dKwsFlK6tqWJUmFTbfRAzMgdHoD3NpBnVsQje0DVLw7nipi7XcEuyg3JCu//vZEn8B4/9Dj
- KItm6oBfIYgAVs/cXVL58h4+TrFb18TtaSxyZNhcaY2M4lnKLma7bdd+jC5jqULHMbUwPWlN8O8
- mMCbOTZ9g21FkwYf+TrtMlnt2cFhtIZ4pjxI4YuMetVgJJAEno/Pch0YXshgkVF3qBSrRLgzUtD
- HKl7b0qL3dGcooU6ZK/d8+U6lAKtH6sg9UeXIEy1HYQRVm3LjGBceuEn05WsL3LZc5m4Tdi+uiY
- xonlXjelkkjQtNYsAGwoKj8bbNk6lhDkquiL1ghYdAihcTf5w==
-X-Received: by 2002:a05:6808:bd0:b0:45e:a924:7ac1 with SMTP id
- 5614622812f47-4635397e0f1mr10469b6e.23.1770671407904; 
- Mon, 09 Feb 2026 13:10:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770671525; x=1771276325;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=e1hhF5sDIiVWzLhZIEOplf22uGKdjDSmH+WROc3lWdQ=;
+ b=hBcN+yv8ARXItHDZVidQJ7qUaY3dOnJXkrvlwv2ZlPIkoeCwyPkJpnIj5wa2BS21o8
+ Fo1Ui7Arf5ZwkbNiXlmyT6HveIRmuMxJzq9B6ApzyyXpyVGYAmcAIgBP0Zk2mLn9O/uN
+ oYGiG+zefNFti58O2IXm8YGkDBOcN+m7342PACHwn9eko2oHdmLlAoWlamzvHHDGrkB4
+ ORvdsDXi+smQ/bvm6ogNszJi7SOl5zEJgOnshL1lYaahxx3gLo9q9uS2GRyNRpWE0EMG
+ RoOWMKzepJSAOskpJZsX7VTjcKvs+o3O4OQEtxI7+YKP4oTzzfy8uu5pIWQy2tkq1iO9
+ 5RoA==
+X-Gm-Message-State: AOJu0Yy3MadOeIGO9QVHXRDI7m4Rf9y/DpajyxK1AlZUiHZRR6aOer9/
+ rjP5VbpAAIo1hN5S9/B1NpOu1M+tWKoeNZSN4vsiWXrWD44WHIHvt7LV2Qz8X7WWO8L/PapXpct
+ JfO1p
+X-Gm-Gg: AZuq6aJkgxSukCM2pwKEz0DmoN3NF4ZHH9KWYuujm2syquq1Ms2YRcJXBk7K7j2IDBH
+ aZyZQS1JNM4EHA82iEvrfzX8JsT0X2XHtSs+xqjJtBvdDkD1YO/jRDKyXLpnMjx5IKNyddzsxaB
+ l5tL1h/oogxG4UUgTSqdyZA9O6Cb2d7o+nkCKUatZU8/TrzCWihAIuOJN5rYagusbJ4YmF3Fibr
+ Oc0Ukjn5iSQCh9yNiRuqAUtom3l+vZ89xDhnc/88whp6sYpWZeROz01YQ6lyRlWCY+HM1Gyr9qX
+ 5MjDSBNHamEy5+h5q7YrwgREe3JNY3LZT+GDKif1RbydA4uHeoBU6jcVJd/pkJ2tRhH5rQZ3MZJ
+ VKa1z5GU6D8VvLUfAhN3qUz4LOnUBGkKyvbYYGmICOfIQDQjFG7T/8SJ0aKg3F9ZFZlaS+dUISc
+ pcsDOEDeRko+3fizgIPiVE5Xn6CtIvn+WcjKatzbvZJmEyjjDgdJzfjQ2z+HYlzd5q9qCTktCqo
+ hLXdDnlJlNvyPWJ/XmnRORa/vdjMOPUyI8O2B8=
+X-Received: by 2002:a05:6870:c6a1:b0:3e8:8e57:a7a8 with SMTP id
+ 586e51a60fabf-40a9709b913mr6361368fac.55.1770671524742; 
+ Mon, 09 Feb 2026 13:12:04 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-462feb0d786sm7165186b6e.11.2026.02.09.13.10.07
+ 586e51a60fabf-40a992eebd1sm8783408fac.2.2026.02.09.13.12.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Feb 2026 13:10:07 -0800 (PST)
-Date: Mon, 9 Feb 2026 15:10:05 -0600
+ Mon, 09 Feb 2026 13:12:04 -0800 (PST)
+Date: Mon, 9 Feb 2026 15:12:02 -0600
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2026.04-rc2 released
-Message-ID: <20260209211005.GA2426323@bill-the-cat>
+Subject: Re: [ANN] U-Boot v2026.04-rc2 released
+Message-ID: <20260209211202.GB2426323@bill-the-cat>
+References: <20260209211005.GA2426323@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fR1TGMcVXd/Q7oHI"
 Content-Disposition: inline
-Mutt-PGP: S
+In-Reply-To: <20260209211005.GA2426323@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,37 +97,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey all,
 
-So it's release day and I have tagged and pushed things out. Many, but
-not all, of the device tree alignment issues I mentioned for -rc1 have
-been resolved. The appended cases should be solved. The FIT image case
-for non-overlays should be solved. The FIT image case of overlays isn't
-solved yet. There's now two threads on this, and maybe it's one problem,
-or maybe it's two problems, it's too soon to say. But it's being worked
-on.
+--fR1TGMcVXd/Q7oHI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We're continuing with a community meeting following the release and the
-calendar link is
-https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MHYzYzQ1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwNmE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com&scp=ALL
-and once again this is the same time as the previous meeting. The
-meeting details itself are:
-https://meet.google.com/icv-nvmv-dbf
-February 10th, 2025. 9am (GMT -06:00)
+On Mon, Feb 09, 2026 at 03:10:05PM -0600, Tom Rini wrote:
 
-To join by phone:
-https://tel.meet/icv-nvmv-dbf?pin=5493171900556
+> Hey all,
+>=20
+> So it's release day and I have tagged and pushed things out. Many, but
+> not all, of the device tree alignment issues I mentioned for -rc1 have
+> been resolved. The appended cases should be solved. The FIT image case
+> for non-overlays should be solved. The FIT image case of overlays isn't
+> solved yet. There's now two threads on this, and maybe it's one problem,
+> or maybe it's two problems, it's too soon to say. But it's being worked
+> on.
+>=20
+> We're continuing with a community meeting following the release and the
+> calendar link is
+> https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYz=
+YzQ1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWM=
+wNmE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=
+=3D89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group=
+=2Ecalendar.google.com&scp=3DALL
+> and once again this is the same time as the previous meeting. The
+> meeting details itself are:
+> https://meet.google.com/icv-nvmv-dbf
+> February 10th, 2025. 9am (GMT -06:00)
+>=20
+> To join by phone:
+> https://tel.meet/icv-nvmv-dbf?pin=3D5493171900556
+>=20
+> In terms of a rough changelog:
+> - Platform updates for Renesas R-Car, many NXP, MediaTek, various TI,
+>   STM32, m68k, Analog Devices,=20
+> - Subsystem updates for documentation, EFI loader, NAND, networking
+>   (legacy and lwIP)
+>=20
+> I continue to plan to do an rc release every two weeks and the final
+> release will be 06 April 2026.
+>=20
+> Thanks all!
 
-In terms of a rough changelog:
-- Platform updates for Renesas R-Car, many NXP, MediaTek, various TI,
-  STM32, m68k, Analog Devices, 
-- Subsystem updates for documentation, EFI loader, NAND, networking
-  (legacy and lwIP)
+And I dropped the PGP signature, oops.
 
-I continue to plan to do an rc release every two weeks and the final
-release will be 06 April 2026.
-
-Thanks all!
-
--- 
+--=20
 Tom
+
+--fR1TGMcVXd/Q7oHI
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYpNogAKCRAr4qD1Cr/k
+CruOAP4579pjA2w0EF3DnhKWsi5xDVIEV9zaJUCtUxUgC1TyGgD9EdB1cIOtLbo9
+FTNgiohby6F+Fi0j9RfLCZS+ddgWsgE=
+=508x
+-----END PGP SIGNATURE-----
+
+--fR1TGMcVXd/Q7oHI--
