@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0450EA8109
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF41EA8108
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:42:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4184983D77;
+	by phobos.denx.de (Postfix) with ESMTP id 9F19C83D9F;
 	Tue, 10 Feb 2026 13:42:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="AyN00ha8";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="U2qEGHq6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A33848388D; Tue, 10 Feb 2026 10:00:57 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
+ id AF19783CBD; Tue, 10 Feb 2026 10:00:57 +0100 (CET)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08AB583CBD
+ by phobos.denx.de (Postfix) with ESMTPS id 90B1B83CEA
  for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 10:00:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zSaTNB4A9X53wWv0vdWy7s0w51E2rGCvxi3OahCfwEqnA4PpDcT+yVTWPRYhO9/x+Dg5DDyXLSjJp8HPThf8rAGZ23B8vBWId6wQLhBJd91qjV56VhQkcFkMTKwsAESxsKuOpwnXbSr6drPvTpRogCvptWvc4NCwpnEVqH5egvn2eAhTCLak9yMGG48W2hOJ9/2svp3ImIbBHhwzfqLnBg8bQPg1fnGn6D1MX+SvaaZyhROPenMuzWre3DzO1swGVVOl8FA00NLdVU7nrlRXfiEp2mekGPWdaQP9ae9M1Qz0WntY6d7+X9D44zqVMofPPpSzl6lV28tcHragLeHikg==
+ b=TfuI6wxf5OPe3ddw7/xuzU6kTO+DcMdxkcpDhOT25OyEh4e7+++HybplBKM4WJoCs9Wi8e1x6YMQ8tXr8ohrysDKoLxdH3ROk4ulV4wJRHBQNwxRPAthXsKT6FJiW04SocLZxWPuIP/wz3FtdiAKneHNsQdfzpRfwlnaBwcU1pR6z//WazIkWbf0Bc98nMsE3Bwul3DNsy3lLHJ5BM3XFs5JeMY9DDFSMREiVYGMJZEFEMpPkRfGodBQUgdoitNqIMcCJuwyPON9eaWS2jBqmgA1abeZjQfEfLqv99qt0urdgUQR2BNjIq1y63HmbKcqCcFWCgYMt+jGSbR8I/Hmzg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=se8EnvWXNoMRImt3aCyFqkCEz+5s3ydWlU4kFxeSVdI=;
- b=cXdFxYJw0wCgMOp87jgawJrvIJg7CKSXBEAwd9y6d2aE9ogy5RQOJXKycMS/5lcXSDj4sBi8sA0YiMqxxv9gr6cXDHqPtX9FZIz4UOL1XmxRX6ZGwzdAD3kOsHyHGsFsmXzZIL7KWOpcOhXBTb8a6+iwFY4/gwxPXus7vJ9BZQSxplwfQV5xkYRtSiNCYlZtw/l4eEV0obM5LPkhmdgBUyFY0kjzPED9K7+VVMHPGJliTaddptRXRWv4jQmA5zzTuO9ukVjW2QDOXIuA7LGJYXoZLLwugxBQ6bSqCEVwwwT91ZCrkhrS2YnwV6VXhI2OvwUNQFcGoh4NKjoZxeXf2A==
+ bh=kk7KxGDnELiOPhMlmnr5j8QtJa7bH+owPyG5IJBLrl8=;
+ b=EgXn9pFBujSzCDDuG9oCqo3YSRrfaFHSZLI1UyJeQImqYkcUeg9pFZCV5xIyHRTwz5D2O7lN74bZHueRO5tMyBn5qRGbCowb5dkVhAKo1RAp/cawK/4yuF3I7rnnfSCwj4YmosHqZX6nA2Y6me8cGRXMjRKjxvBz3unj6yzz0dUffLJpTjEkoemgkNu1MmYPI21m9m1XTMNRXdENZzJgNdWNheCys/BIm8SG92FZIOT19VVQFwnQ2bMc98KvQ5rNYhMjkAmWcVVYNx30CGfJVCVQ8x3nI2h13/wHkGOaxLl2BubMiTm5TPrEc/5xEIHGry6xvMTATPJNJ1fve/pX0w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  165.85.157.49) smtp.rcpttodomain=lists.denx.de
  smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
@@ -42,17 +42,17 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=se8EnvWXNoMRImt3aCyFqkCEz+5s3ydWlU4kFxeSVdI=;
- b=AyN00ha8fzPtSp7qGhU4AldJHXwhsYIIPhHSLu9Hwqi7Q+RLX7bNIlfTkHPXszHNcppYCvDqNqA6EZSb0B45lzrfywANnfFghHsLvLU6rN9l5e+t1x4vN2OxN27yagjSKwWZmPV6UtnczWGtNwfzbhfzOQ6d33qQwD2xZlJnhxn1ZbhNLW2xkT5cygm7pEplMYf22XK9rpL0bWEuKL3BM7KIo8GPRG5JfqxFl2YFYroJxV9I0qfUS4IMrfmAXYhhOjXD/CNvkELwROW7zaLN6/UZKmnCvGhVk8BpbXhV0DwjCmvenY6F3t32kO2GluS4VzygN55bt33isazMgueGXg==
-Received: from BL1PR13CA0024.namprd13.prod.outlook.com (2603:10b6:208:256::29)
- by BL1PR22MB3683.namprd22.prod.outlook.com (2603:10b6:208:396::9)
+ bh=kk7KxGDnELiOPhMlmnr5j8QtJa7bH+owPyG5IJBLrl8=;
+ b=U2qEGHq6q7HaMLldMSlY8FTuXBIcn/FmnSW8Xwcz9S9OXd5N9iaNC5n3nc+KgVgc3+WTbYX6ddcWOD2vN9iHTc/a14m8DQVyN2QgUEMWYPJ4V6/FBWxP+dDg9hj4pZ59IaBtSPQDb13pXyMogMEls62p//lmwDPejkKOdpa2Ljq6/MkkqlZ1gzzJTWIiEVOeCJLgcMUEg2AGpUNSadVo8ruMqzpiKFw4XEd9/rJM2eAYU3Pqns5XpV54NI+4mFyxNeMxB1dJTdVTStB4QrhL6OUbeqdNk4GQNEZtynwwI0GxgHjME1refbHsKA9Sa6i0L2QmpCjdxNp6Xc3scWyIeg==
+Received: from BYAPR06CA0060.namprd06.prod.outlook.com (2603:10b6:a03:14b::37)
+ by DM3PPF0A7785735.namprd22.prod.outlook.com (2603:10b6:f:fc00::e07)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Tue, 10 Feb
- 2026 09:00:49 +0000
-Received: from BL02EPF00021F6C.namprd02.prod.outlook.com
- (2603:10b6:208:256:cafe::ec) by BL1PR13CA0024.outlook.office365.com
- (2603:10b6:208:256::29) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Tue,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9564.15; Tue, 10 Feb
+ 2026 09:00:50 +0000
+Received: from SJ5PEPF000001EA.namprd05.prod.outlook.com
+ (2603:10b6:a03:14b:cafe::e) by BYAPR06CA0060.outlook.office365.com
+ (2603:10b6:a03:14b::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.8 via Frontend Transport; Tue,
  10 Feb 2026 09:00:49 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
  smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
@@ -60,84 +60,105 @@ X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
 Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
  not designate 165.85.157.49 as permitted sender)
  receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=mkerelay1.compute.ge-healthcare.net;
-Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
- BL02EPF00021F6C.mail.protection.outlook.com (10.167.249.8) with Microsoft
+ helo=atlrelay2.compute.ge-healthcare.net;
+Received: from atlrelay2.compute.ge-healthcare.net (165.85.157.49) by
+ SJ5PEPF000001EA.mail.protection.outlook.com (10.167.242.198) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Tue, 10 Feb 2026 09:00:48 +0000
+ 15.20.9611.8 via Frontend Transport; Tue, 10 Feb 2026 09:00:49 +0000
 Received: from zoo11.fihel.lab.ge-healthcare.net
  (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id DFEC0FD2FD;
- Tue, 10 Feb 2026 11:00:46 +0200 (EET)
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 1794FF882B;
+ Tue, 10 Feb 2026 11:00:43 +0200 (EET)
 From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Tommaso Merciai <tommaso.merciai@amarulasolutions.com>
-Cc: Brian Ruley <brian.ruley@gehealthcare.com>
-Subject: [PATCH v2 4/6] pwm: pwm-imx: enable ipg or per clks only if
- CONFIG_CLK enabled
-Date: Tue, 10 Feb 2026 11:00:26 +0200
-Message-Id: <20260210090029.728636-5-brian.ruley@gehealthcare.com>
+To: u-boot@lists.denx.de
+Cc: Brian Ruley <brian.ruley@gehealthcare.com>, Adam Ford <aford173@gmail.com>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@sysam.it>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ David Zang <davidzangcs@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>, Mark Jonas <mark.jonas@de.bosch.com>,
+ Michal Simek <monstr@monstr.eu>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ricardo Simoes <ricardo.simoes@pt.bosch.com>,
+ Scott McNutt <smcnutt@psyent.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Stefano Babic <sbabic@nabladev.com>, Thomas Chou <thomas@wytron.com.tw>,
+ Tom Rini <trini@konsulko.com>,
+ Tommaso Merciai <tommaso.merciai@amarulasolutions.com>,
+ Wolfgang Denk <wd@denx.de>
+Subject: [PATCH v2 0/6] Enable the IPUv3 driver to use CCF
+Date: Tue, 10 Feb 2026 11:00:22 +0200
+Message-Id: <20260210090029.728636-1-brian.ruley@gehealthcare.com>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260210090029.728636-1-brian.ruley@gehealthcare.com>
+In-Reply-To: <"20260205141332.2515996-6-brian.ruley@gehealthcare.com">
 References: <"20260205141332.2515996-6-brian.ruley@gehealthcare.com">
- <20260210090029.728636-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F6C:EE_|BL1PR22MB3683:EE_
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EA:EE_|DM3PPF0A7785735:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 35e54326-d209-49a3-a8bf-08de6882e2ae
+X-MS-Office365-Filtering-Correlation-Id: 5bf47d2e-9bbb-49c7-3d31-08de6882e352
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HfBEYQnol6FYtNrpDoJ9iGu3ksraHBnjyQMea3nxZWo1ZmbrvAHVQln3hq4l?=
- =?us-ascii?Q?UH2aq3crcsF8W5ESvjIg04NrWWqLPEsEZPqtW6IjizAaQouPnfU45EnsoIbr?=
- =?us-ascii?Q?20ZrKPNYt8UH+fJ+Vgj2bA840IhlXyxnHYU47xVbWC4EvxYoQ2oqVjO0oJVO?=
- =?us-ascii?Q?+93VnvLOorWoRK8+u/tiLLCr2FEaGRaeCs/IAlZQaTmdjr7EfcvZecUheUPA?=
- =?us-ascii?Q?ePB7AdfHe/0hrCZdJmHr2ub12UpDFoDrELURTYqM13T4g+2mAD+zPW9D4z6H?=
- =?us-ascii?Q?1IYohRiz8s4Z9C2i5IDYUD4sXhXUFWwApqKsjH5O4uQr7pcQpqaFX2AQwXei?=
- =?us-ascii?Q?9WrLDtYUuDmPELJ3lSA84mZC1cG4y2UoZdCheIw37h1PDkhpR7xf9N5S3KJs?=
- =?us-ascii?Q?gwUSHCf11HSaog3XvZQC3JpFjOf7FU/BzEXvkcoVkSQOKBmapMrw63BLw6VI?=
- =?us-ascii?Q?MfCr9b1kvJGhrf9qFntdQJnsNEmtUvBN2TwvuGsL8Fe/hMkQOZEx99Xedvtk?=
- =?us-ascii?Q?eBThp88owlLQWGZ5Kw0In1f69iN/noKE+HjUEcRVwvhmgUiuBVkV3kzn3KOF?=
- =?us-ascii?Q?i/gu7QwEiSaW2ZnKHyMfV2CRHP1aDXe7oQQXqVa95G0M+XaDNlb9wds2bTLo?=
- =?us-ascii?Q?b112foGf0CNuPP/7pUrdjBnvYtovKQjzbW3wFpodSOtyfycqSEVtTc1L+TZX?=
- =?us-ascii?Q?qsf+shQMwaLSL/TUHbIPR3Q4dygN3lyoGF780GsAcg4ZCDSwa1h/uHOhXvJO?=
- =?us-ascii?Q?fwsn/B6OuP/SO+IBjZTdwZR/sYr5/Rht4Lf+WAfTko9I07gJWsbIBDpqWy6e?=
- =?us-ascii?Q?OQ/8DQFWl/F4CKA1yzA8YjbEKUIj83Xe5e4pHX6Dg1PC1vl71amV3Dao6ZLy?=
- =?us-ascii?Q?8RwoHBTceXu3WrcMIUOyyGxWjfhYszMvIFo8cSjyKuDeIkPm3yB+DK830AXU?=
- =?us-ascii?Q?SuI3hdRNICY+uAZbPLVN6/yrrinJHUYaVR1hIAzkVZ4SnXLIBY2gl0DpashT?=
- =?us-ascii?Q?+DPna1csNdLCKE0nTGrYgBfxjmJU0A57rv1bPxdG2e1Cr1hjw9auuWs+Tajy?=
- =?us-ascii?Q?wRsGOlkA6zLERr9kvdBpOLMfvHG1541TK0Kyg05kzwD6TqJfb3KcfZdikdgr?=
- =?us-ascii?Q?tDbTXJyyF1koKL8yuHLbYIIOq445FhxZpWkZCJ4HZluVMDoeF/X/+ta0SLtP?=
- =?us-ascii?Q?xUAGMihC70bAkvCq45k7acca60+eXCuWhFYLgDKRnYwoXVvqGQdJXo9x4kyo?=
- =?us-ascii?Q?+p8clBBdggoz6C0dZXmmYhK14T7QPRqhw1z3g+V8wiz4v6kc58L1jG6can33?=
- =?us-ascii?Q?EQ6qQaBV5vWEGFwTGtlRuG56CGfGpMhzN7LbW/VGDGw+jkPox9ZNkVvCQzeT?=
- =?us-ascii?Q?MihTICc7IVwpeCF2vlfMhBBY24euhbCAqhv+i8WtITIDEeuR0qscIGshgbfp?=
- =?us-ascii?Q?ySdbje7nsBHD5HXVc46y5Ir2CfuE1pW1mFVuPN61iSUkyExL5TD3JKsFCXb7?=
- =?us-ascii?Q?PuEhiA01pqIkuTx+aCdpOYMU1XE52o59T6F4BI4jr2yhflkvh94IhiO51mJL?=
- =?us-ascii?Q?9SJXjkBAs5fQMftOLS1yhtjtYUgPLUPpZp6r0p6WNGFPM3n9J4CKIGGXw6d0?=
- =?us-ascii?Q?C3LYXQ6FnjjXdoga6k+xZXZO9cIcFlHOAjWNyfT6fW2Bpi+QklHX1MAUUo5i?=
- =?us-ascii?Q?6JisIQ=3D=3D?=
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ZSqcH2j9QJuBlInYbvaP1aiu+fiUfH8fi0YcbOqAc6vC3co7Nvr4kUgIxUjS?=
+ =?us-ascii?Q?ZfetTG9Np67Rh0lffCpgNAtF2EuHd67LzuimSuGYrPuSJfVDiR28jXDaDnUB?=
+ =?us-ascii?Q?qs/mL1a+dxJqQ9RkCShlEUB/ALKVLxiRFu/2SBkUa2E7rG1swOSlQtAgcFEN?=
+ =?us-ascii?Q?jzCgHv/bHZKlQIDtwLMvca9Fdis/Bp8kwmnNQ9xoSQ3QMUt7GVFAN+GK/3cz?=
+ =?us-ascii?Q?0DgKh0RXyVXjHB7ucykDYWJQL1nPaGKiBlrhZYC8otWTJiLSJVk2KIwhBoZm?=
+ =?us-ascii?Q?lTy6ObSfj2tFpC6clk0Pgy/fAc5jrzLsTRox9lGbYbxO/iTmV7SM22DfxNpp?=
+ =?us-ascii?Q?x3TAJXitdiWaOGHgOqXMQbXUqz70jNNMG0UUNC6Uc4MZ3hqvQnRK1FQaDrNZ?=
+ =?us-ascii?Q?XW2m1MXuoy74ZdM6cGoIBUEJz/HX7LjBbe0iH/HyVzBEjf2gz/B/0P4YdCqF?=
+ =?us-ascii?Q?a3OaNic2m2Wi0GaMtmW0cjfxQnHjRMW96JLsqreN/dctvq1WDsQf5jpUscDr?=
+ =?us-ascii?Q?/dI0YKBQNIte4b8RdMufzqa3tYC43DIKgjWWqarRGRs2ie4MMwkbVUOK1Wr1?=
+ =?us-ascii?Q?pKkPFj/ZxWRCS4Ijuze9fg4fv269Mm2d7leXqFACukWjN8jktNeq8PnSOPrQ?=
+ =?us-ascii?Q?qmfJDc5rEDq39wJi1ynzAmxt9Q2rdezYVhg3dBqaUwl0ZJKkYtUaFj230m4a?=
+ =?us-ascii?Q?4d0z/E9hHogzEPWduvnlqU42xBsq9ksmZUq/NWQ0tjqh3JVJvR/0gYv2LDMZ?=
+ =?us-ascii?Q?kGz0wmLSf7/P7vj/zmFTzZvCXhvhsjmMA4W0vTcdN/bPlYctJP0xmfsBE9yF?=
+ =?us-ascii?Q?XhaMQziWxt5CXL8MGbC4IsydHhWcELY8CQ6XG7BQCKUG+MZI9u97YL0ZUnx+?=
+ =?us-ascii?Q?BJWn+MpyjoIh7acPauC9EoPx03WgW2n77l6XCy5FzGQ04OG1OBBu4+zz/pEt?=
+ =?us-ascii?Q?v6xN9EYC/3AGDTlR9RpXY/7FAvugw297ANoVlISP+mNDy86vJZH13bQoYf1D?=
+ =?us-ascii?Q?rlmQ9zpMqFd3nRBL+8E8a271rEF7dHPkBgVnRo/vMokB74XAKeCLwAx1rhyD?=
+ =?us-ascii?Q?EQjo4gB1Fn72lBnvKLsl8QNdn54hSwJ8zXscS8k80kS3TFOQJp9kOwcwXNZg?=
+ =?us-ascii?Q?zKfRP/RyAXtOQgH/0QfvCjmdjvGWRTsoa8Whvd8iXkZ7l7Og/+qcb24qX8wc?=
+ =?us-ascii?Q?c/06uPJ7nESr3fsgN4o6BIkzJuZ4pEEZ0QUXeQiuHoUqonkUYotB+X3L7Tle?=
+ =?us-ascii?Q?MN8YbYBPfPUj9oOGwB3EYhfDAl1nd0rUUiFYaXOayei4JxkWRbVZ6mhKyH/P?=
+ =?us-ascii?Q?5SZ64xsyo3wJtiUJQRGinodfU84xau4CPE45q2ACXSK6ZGQf11jpjYUQ5OJ6?=
+ =?us-ascii?Q?nkabCQaoX+jAexYeCG/NZqXgCZg00hAua/nYlUNP4oOkVUMjESgbdEZA/IFf?=
+ =?us-ascii?Q?aB3tF/fUa+ypJPenrs0qbrHtc9QQRhKLHvzaAMeoW2FDrms8fVY4l7sNvWHX?=
+ =?us-ascii?Q?5m+MumzXbUL6YDos2zY2KEWAW8+h0uafFmewn2gagPmchFttUPRC0Ob2EqNV?=
+ =?us-ascii?Q?y70O5lyr3+qRtIcbFUMQu/JoK0rdzXRsAqvX0JMArgBl65OEI2y0nbjNxRw4?=
+ =?us-ascii?Q?5Q/2dKz93TT88Y8KjRD5nTp+p+3IfNUPb2ZgncwCrAkMETS1o6n6wNltGkM7?=
+ =?us-ascii?Q?n2okmQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
+ IPV:NLI; SFV:NSPM; H:atlrelay2.compute.ge-healthcare.net;
  PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: b5aOGRtF2EC9sJjGEM0uAJQbNlUffZRyr2NaomDrXlFlN7rOmeLzw+0XXc8unhT7ltYZmckm1B4kr/49qwVFHGzLaQ/O5qaezNfcfeuRVyE6rLF9Vs/C79wZDqq5Sd8YXS3EUtIAnXFH8O3KIyEkdPSMAdWvsprHpBhze17j1XDUzBgmvUfxwBzKiXgnW2bv8TB7ftwBw4EzpR66bXIEQdmMkJRa+o2YApSChFTIcyONGushs7ZmmLLV28RBpUburtMi2uq0pRp6JcccO/v0gDe1Ydf9uYIOwVeXnXmwE3hI87M4BZymwW+KIpXX07k5LkqJqDB6DNkoOx1KiOyUYSipTJgPNdpARCTGZMCyTaB2IikNw7/IBo3yrrs5Cxj5wKdh+jSn8YCDNPtUaer1NTouJ0TkkuLvajZHrFiLHYyDYqELyAAe59ocJhEUtRWz
+X-MS-Exchange-AntiSpam-MessageData-0: ekXcQO/ezROoYNDi3C23BNIdN7rPb2RSOWLMBQPJM6SsNkDxgolUr+ERGH/fs2gGOK9KIYFgUtkJnzAKF1Dt4H1TcXd+KJ8HhJhYujL4pEMWI9I+Koa0aB7jEBLimoTkvM8oX/Y8+AN9wioMLWj8RTO5Xi7xDqWPDrDGfqlPQebYO1nK74v3+cqMFrmtmin8w0GDdLxgLdCGyOGrUCXGpcoNRBVAhbaYwEumMYAVIBCTIadQrriTtjt7tJwnKz/nHAxeBqpvhfxy/hdwkgoMKDSjFPfIzfmMD3n0elt/aUNmDuesI+dFyn3PEWA9eRvrysYpZDOAW4E7R1Hl8Uzt8CzTFCet2G0iHd4LSvtgNQsD4I1nbQ4upom944ya6FV0JOILvkmEmtDZMBvBiTd8VWuI4yYJfTLrhA35RBIt5Ehbw6pZTo2KmrLiS/AyWGU3
 X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 09:00:48.9653 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35e54326-d209-49a3-a8bf-08de6882e2ae
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 09:00:49.9920 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5bf47d2e-9bbb-49c7-3d31-08de6882e352
 X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
- Helo=[mkerelay1.compute.ge-healthcare.net]
+ Helo=[atlrelay2.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BL02EPF00021F6C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SJ5PEPF000001EA.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR22MB3683
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PPF0A7785735
 X-Mailman-Approved-At: Tue, 10 Feb 2026 13:41:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -155,85 +176,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This caused linker errors in cases where IPUv3 was enabled (which
-defines its own clocks).
+This is a continuation of an earlier series to enable the use of the
+common clock framework to set the clocks used by the driver. This gets
+rid of some conflicts, most notably commit bfc778cb93a ("driver: pwm:
+pwm-imx: get and enable per/ipg clock using dm"), which would cause a
+linker failure if CONFIG_CLK and CONFIG_IPUV3 were enabled
+simultaneously. But, more importantly, this is how things _should_ be
+done when we have CCF.
 
-Fixes: bfc778cb93a ("driver: pwm: pwm-imx: get and enable per/ipg
-                     clock using dm")
-Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
----
+When making these changes, I considered adding driver support for the
+LDB, which might have been a cleaner approach. Ultimately, I decided
+against it since this is an old SoC, it would have required more work,
+and in the end, all we need is the LDB to supply the clock when using
+the synchronous external clock mode. I **hope** I got all the clocks
+right.
 
-(no changes since v1)
+Please let me know what you think!
 
- drivers/pwm/pwm-imx.c | 48 +++++++++++++++++++++++--------------------
- 1 file changed, 26 insertions(+), 22 deletions(-)
+Br,
+Brian
 
-diff --git a/drivers/pwm/pwm-imx.c b/drivers/pwm/pwm-imx.c
-index bb37b39fa0e..fc5d2a3e5e3 100644
---- a/drivers/pwm/pwm-imx.c
-+++ b/drivers/pwm/pwm-imx.c
-@@ -232,17 +232,19 @@ static int imx_pwm_of_to_plat(struct udevice *dev)
- 
- 	priv->regs = dev_read_addr_ptr(dev);
- 
--	ret = clk_get_by_name(dev, "per", &priv->per_clk);
--	if (ret) {
--		printf("Failed to get per_clk\n");
--		return ret;
--	}
--
--	ret = clk_get_by_name(dev, "ipg", &priv->ipg_clk);
--	if (ret) {
--		printf("Failed to get ipg_clk\n");
--		return ret;
--	}
-+        if (CONFIG_IS_ENABLED(CLK)) {
-+                ret = clk_get_by_name(dev, "per", &priv->per_clk);
-+                if (ret) {
-+                        printf("Failed to get per_clk\n");
-+                        return ret;
-+                }
-+
-+                ret = clk_get_by_name(dev, "ipg", &priv->ipg_clk);
-+                if (ret) {
-+                        printf("Failed to get ipg_clk\n");
-+                        return ret;
-+                }
-+        }
- 
- 	return 0;
- }
-@@ -252,17 +254,19 @@ static int imx_pwm_probe(struct udevice *dev)
- 	int ret;
- 	struct imx_pwm_priv *priv = dev_get_priv(dev);
- 
--	ret = clk_enable(&priv->per_clk);
--	if (ret) {
--		printf("Failed to enable per_clk\n");
--		return ret;
--	}
--
--	ret = clk_enable(&priv->ipg_clk);
--	if (ret) {
--		printf("Failed to enable ipg_clk\n");
--		return ret;
--	}
-+        if (CONFIG_IS_ENABLED(CLK)) {
-+                ret = clk_enable(&priv->per_clk);
-+                if (ret) {
-+                        printf("Failed to enable per_clk\n");
-+                        return ret;
-+                }
-+
-+                ret = clk_enable(&priv->ipg_clk);
-+                if (ret) {
-+                        printf("Failed to enable ipg_clk\n");
-+                        return ret;
-+                }
-+        }
- 
- 	return 0;
- }
+Changes in v2:
+- arch: imx: fix incorrect shutdown call for inactive video devices
+- Removed DEBUG define that was missed
+
+Brian Ruley (6):
+  arch: imx: fix incorrect shutdown call for inactive video devices
+  clk: imx6q: apply clang-format
+  clk: imx6q: add ipu and ldb clocks and dependencies
+  pwm: pwm-imx: enable ipg or per clks only if CONFIG_CLK enabled
+  video: imx: ipuv3: move clock code to legacy
+  video: imx: ipuv3: use clock framework
+
+ arch/arm/mach-imx/cpu.c            |   3 +-
+ drivers/clk/imx/clk-imx6q.c        | 410 +++++++++++++++++++++++++----
+ drivers/clk/imx/clk.h              |   9 +
+ drivers/pwm/pwm-imx.c              |  48 ++--
+ drivers/video/imx/Kconfig          |   7 +
+ drivers/video/imx/Makefile         |   1 +
+ drivers/video/imx/ipu.h            |  60 ++++-
+ drivers/video/imx/ipu_clk_legacy.c | 310 ++++++++++++++++++++++
+ drivers/video/imx/ipu_common.c     | 371 +++++---------------------
+ drivers/video/imx/ipu_disp.c       | 142 ++++++++--
+ drivers/video/imx/mxc_ipuv3_fb.c   |  17 ++
+ 11 files changed, 951 insertions(+), 427 deletions(-)
+ create mode 100644 drivers/video/imx/ipu_clk_legacy.c
+
 -- 
 2.39.5
 
+base-commit: b5213bbfdcb1812be510427857827ee8becb9f8f
+branch: video-imx-dm-clk-fix
