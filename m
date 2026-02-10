@@ -4,143 +4,176 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5781EA8108
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:43:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3FB7EA8108
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:43:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94E3783DEB;
-	Tue, 10 Feb 2026 13:42:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
+	by phobos.denx.de (Postfix) with ESMTP id B930E83DFA;
+	Tue, 10 Feb 2026 13:42:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="rcALdKO6";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="NEjWKq/M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4534D83CEA; Tue, 10 Feb 2026 10:01:01 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id BED9183A5A; Tue, 10 Feb 2026 13:24:33 +0100 (CET)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA84883CB5
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 10:00:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=gehealthcare.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4400D83A5A
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 13:24:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
+ spf=pass smtp.mailfrom=Jamie.Gibbons@microchip.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u9jCDJu6XA5wylR1e0kJdQK0ApP/bnI+Fp1uVNqblFo8+ktySPrno+RwBbS/Qq+lql3kmWHKWuxoVzi4gDbKKvNkLMWDiAjyoFWkqhSnSAOQGgUh32FnN3XDIjzP2wCyzTTuToAxP0pCQm0fAt8zQSJSNFQip/VtbgCQQP0Oq6mzRAe/PdP04NHzwyW/TxJWBrQerYibzf2PyyhemGoRtVS0L+ULdp0qJ0z+T4OVTcOdOyAY/z2gxNosXOHdcgdG5vrA3Td6gXcvioMBlXeySupIVp1kFZDo6xGuwQ/x+OQM/jTNkWYF0RJMwkxQlwHBBJt0jwoEDbkXIRNiPL+Okg==
+ b=iyn85l2i8By44NeXbDmPnZ478y2KAGVDHd4WN3oXbNI+MPn4QgJUl6rw+9MqgCZoWV2pqGYGOthuuZkTyd7f+bnkwQrai2Y15F8nlbAu2C085o2s1QYvGrkyADF7kIVhBcCRJB7T0usYCcfl8Fizw5bh930+nR9LpzhJynuhorI7DoJcXq4LhZhc2oj1e7tAh11Yjj8W1bLZ1kZ8lLDkgZeM51zD/josKJbtnef3b0YoBBEGAGCv7OFSKaJotAsFvlPsUoN0UW+p6gcjhkvsSK2vZSFID8VtwBZF6lgu7E3CmUItyuKEkKeUWvmGRX8yOBKCFZeFLsGCpLZCQ34I5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yDSPZYTuXPv1fmM+cZMk2uZfD+0AW3sq7BaObPrbU9s=;
- b=eEK64qGTTBg1FgxQO2/sisH/FzYQotVmzjJKNR9XPLewuP8HPoz+BNmbfOWjdn4jmVOw53zinVc4ToMkdDS6fmYfe+xsHyYjVnyn22bAOXRexIwkxfrlO3TWcoCbXGg+ekwj+2AKla5PnFWLa1dkCqvEvKQIzcKltA40AgSIgENIbxzexqiQzLomV/OPlSrRZ6F0Tt6ZIoZEPCCx5qK3SBYo+37QAQaxYduoxxvgl0+euu/OGOozHBZ+rPjW9Tz5qpeGOnADW3uu2P+dEnhTJKaA4F3lRS/49zov0gV72gBdF4rxAISV7aMDp383+P8au6dX6VSebYcrbF1aGGgB1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 165.85.157.49) smtp.rcpttodomain=lists.denx.de
- smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
- pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
- not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
+ bh=LQqjQeX7BlvbofPtGiNT50Wd1T5UV8uyf5lrk66/ls8=;
+ b=LRHgXolf9PvNCBg3yYIEA38s/V9Smq9u52gub42UDy1gsJDw7NUeM+FAbYnn0rqk1rsK2vSPAfWf1L0pTsYl9PnVrGkaTw3Z+VWrg+0eLoMcWU/dVz4QZrSH2L3pQdi7KszEoQ25T3E7CG28OWcIKrruYbjg1upmREXysF+NglTvjzJy1jv9L4j7bKI51qTk7ceYYw+3puLRLQYtW3PO2MrK/iUicgJioGX1Mu7djlPFT6v9Wt0xRJawLfZEa5CvDSo0+yn8C/fu2OPamSEu6Q6QyoqDClWqYuRtVF8Hq7JWnuIPdWkNY5FJEnSIQiWTvfXsAIXhLbdY+5uL+Y2s2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=microchip.com; dmarc=pass action=none
+ header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=microchip.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yDSPZYTuXPv1fmM+cZMk2uZfD+0AW3sq7BaObPrbU9s=;
- b=rcALdKO6To4nHKuN5iIbuvn0WMvyHtnp2syWSiMvyY6FCYRGbN0fXsosVJ52F3joGvXSQZdrpZWYYpfVomwxQ/0y/sXRgji7DJYcx/nh39F77P6kf6wXyzlCO6ABTu05cQf/ocOotA557oYiSXIOKUaNqMoBi7ytaiFPn1osuMv+Kje58SEPVuqrcQVT3vZVWATrK/d3HNY/zDfVl6S+h3vntoCfWY/1FZaAgTfjI3VFNBRKxlP2sdcu4WtAPrWgZHY2sI+CNda3MMYpZPbY3j7459M9SsfVEbEJxfEw7wVPUD/msbio38SSzGeOjteRZCBl8WrZK4wyfU+Oa4wipA==
-Received: from BYAPR06CA0061.namprd06.prod.outlook.com (2603:10b6:a03:14b::38)
- by BY1PR22MB5533.namprd22.prod.outlook.com (2603:10b6:a03:4ab::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.17; Tue, 10 Feb
- 2026 09:00:51 +0000
-Received: from SJ5PEPF000001EA.namprd05.prod.outlook.com
- (2603:10b6:a03:14b:cafe::42) by BYAPR06CA0061.outlook.office365.com
- (2603:10b6:a03:14b::38) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.8 via Frontend Transport; Tue,
- 10 Feb 2026 09:00:51 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
- smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
-Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
- not designate 165.85.157.49 as permitted sender)
- receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=atlrelay2.compute.ge-healthcare.net;
-Received: from atlrelay2.compute.ge-healthcare.net (165.85.157.49) by
- SJ5PEPF000001EA.mail.protection.outlook.com (10.167.242.198) with Microsoft
+ bh=LQqjQeX7BlvbofPtGiNT50Wd1T5UV8uyf5lrk66/ls8=;
+ b=NEjWKq/MxHDPFp0MpqXxkQB6ToEXfxz9gEA5P7bjFdhYS6Z848zxRaSUXUzIjpvUXgsn/RkmQonmyQ/VEfzuSQd1Gcubn1Zvc60yKItEHLWizbLNkXVqz8OyzGv2rLtDJQi4ZzLg2H1lhJNgf/ImuWYrk+MWKWmrMWMbfizXNzwyiLqiGQE/cqAe2/8fA5OZbun6BFkSswHZQVoM9/o08TIqL1vRAmMHFt9S8p65iFe37JWvNYD9t+WmJSEjkPXk6VxTKaEe3buHyV31OZS0mnRTCgQaQegsRVnQzNr/fzUL8CAJRhFmdMKXdWIHjsECCMd9H99o/q+luHPYfGpXxA==
+Received: from DM4PR11MB6335.namprd11.prod.outlook.com (2603:10b6:8:b7::10) by
+ SA1PR11MB8576.namprd11.prod.outlook.com (2603:10b6:806:3b5::9) with
+ Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Tue, 10 Feb 2026 09:00:51 +0000
-Received: from zoo11.fihel.lab.ge-healthcare.net
- (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 04E73FB3EB;
- Tue, 10 Feb 2026 11:00:48 +0200 (EET)
-From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Anatolij Gustschin <ag.dev.uboot@gmail.com>
-Cc: Brian Ruley <brian.ruley@gehealthcare.com>,
- Alexander Graf <agraf@csgraf.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@nabladev.com>
-Subject: [PATCH v2 5/6] video: imx: ipuv3: move clock code to legacy
-Date: Tue, 10 Feb 2026 11:00:27 +0200
-Message-Id: <20260210090029.728636-6-brian.ruley@gehealthcare.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20260210090029.728636-1-brian.ruley@gehealthcare.com>
-References: <"20260205141332.2515996-6-brian.ruley@gehealthcare.com">
- <20260210090029.728636-1-brian.ruley@gehealthcare.com>
+ 15.20.9611.8; Tue, 10 Feb 2026 12:24:27 +0000
+Received: from DM4PR11MB6335.namprd11.prod.outlook.com
+ ([fe80::b76:913:9a3c:a4d1]) by DM4PR11MB6335.namprd11.prod.outlook.com
+ ([fe80::b76:913:9a3c:a4d1%5]) with mapi id 15.20.9611.006; Tue, 10 Feb 2026
+ 12:24:26 +0000
+From: <Jamie.Gibbons@microchip.com>
+To: <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: <Valentina.FernandezAlanis@microchip.com>, <xypron.glpk@gmx.de>,
+ <trini@konsulko.com>, <Conor.Dooley@microchip.com>,
+ <Cyril.Jean@microchip.com>, <sjg@chromium.org>,
+ <marek.vasut+renesas@mailbox.org>, <ycliang@andestech.com>
+Subject: Re: [PATCH] boot: image-fit: Add runtime flag to always relocate
+ overlays
+Thread-Topic: [PATCH] boot: image-fit: Add runtime flag to always relocate
+ overlays
+Thread-Index: AQHcl3rA9xaYHuRjX06Kd+o1+9PNlLV2CHoAgAXaRwA=
+Date: Tue, 10 Feb 2026 12:24:26 +0000
+Message-ID: <4ff7fc064acf76ccaa8d58056fc3473798bd045e.camel@microchip.com>
+References: <20260206151457.4104515-1-jamie.gibbons@microchip.com>
+ <9e498de5-d114-485e-840e-1395e153edc3@mailbox.org>
+In-Reply-To: <9e498de5-d114-485e-840e-1395e153edc3@mailbox.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=microchip.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM4PR11MB6335:EE_|SA1PR11MB8576:EE_
+x-ms-office365-filtering-correlation-id: 2bb2b361-36da-49da-5333-08de689f54eb
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700021;
+x-microsoft-antispam-message-info: =?utf-8?B?eUg4SGpBM2FVa1VzakdTQ25INitCSXEza0hHeUVqVmZlTWdIZEo2bDNoZ2xm?=
+ =?utf-8?B?cmhoUzF5S0d2ZHhGVWNPVlRPVXVTY0pMRFRGb0lzSFE4akwzRE1OdHVnTXNP?=
+ =?utf-8?B?ajkzUnlSeVJlNEdVQXVtcUE3Vlc2QlVqbmk2bGhsVUJLbS9LdTlVQk5ZQm04?=
+ =?utf-8?B?RTJBUHpETkZSSDRwV2FYQlQ0ZHRmVFZSc3VTOXg2ZzZsekRmcjBGUldIK1FH?=
+ =?utf-8?B?VUpPNmljcGxNRnRZODdJYWtoQ3hjdVZZOFlIZUV6RXpQdHNLL0lGYmFsZGk0?=
+ =?utf-8?B?alZIN3N5bW1teVNOcUdTUTJteWExZ2pjdTIxbUFCWlpVa0t3THM4YXVwaUpI?=
+ =?utf-8?B?aXRpSm1NTE9IRm1MalJnVmdhUXlZcnNkdjY0eTBDTVNkSEk3T3Z5ZzhVbC82?=
+ =?utf-8?B?TGdSYWJtVXBzQ3ozRGVYV0JUeXZzMVIxUGRSSSttQkkxZXYwZGJlc3AyYm42?=
+ =?utf-8?B?eHo1cndMK0pJNjRFbzBQOTdUbXo5L2ZpQnpPQlM3KzNURFRNR2hNR2ZGaDFE?=
+ =?utf-8?B?eWE3dUNEcy8zajBuTkpNWDVMRCtIaVBBbjJXRnQvSTk4dU4yQ1ZVQ1FhOWU4?=
+ =?utf-8?B?eU5zRlJWYy9WSlhhMUdoekZwSWZ6d1NXYWtxeUJ6cERCOGM5cGJhR1BBeC9i?=
+ =?utf-8?B?K0Q1dWRKc09kZGowUDZtNWlZVm8wQzJScWJUY0crVHVRUFFtWjZSQmFOQlBm?=
+ =?utf-8?B?VHd4ZUFValJvUmk5MXFSM3NzemU5YWgwODVYY2kxeG8zZWhacExDbTJEQjhM?=
+ =?utf-8?B?L1N1VFJ4VUM0cWZIWndNQWptY2NuajRCd1JOeWQyU0h1cFF4ZWxjTzY5bXRI?=
+ =?utf-8?B?eWFSc2lNMkJ2ampsaitoWWpMdFhmV0xRZnJnbm5PNFpyd3dhNklHZ0xWcWU4?=
+ =?utf-8?B?RWJzcGRMY3VtQmRBendabWV2Yis1ay9idkJ5U3VnOUhVeXZwai85cHBtMnBJ?=
+ =?utf-8?B?ODlZOW5VNXRhYUJ4VHNsSHhjZ0dVRWNRYmVCYlJIM0xlcnRSRzRNWldNZ1lk?=
+ =?utf-8?B?bWEzOWdMdmdlYmNrbU9SeHpibUc2b3pQYml1aEFuY3VVdzlJYjREYkhMRnFT?=
+ =?utf-8?B?MTJQaVhSeVpHK0VCdFUzbUhReGtIS2UrclZ4cFJYTDc5RzRFS3hINjAzeGNL?=
+ =?utf-8?B?MVIrT0Y5MU9VSTAxRllyZ2tMOXJxMnJuYlFCSzlmK3hwQVRXT3VISHNMTTZC?=
+ =?utf-8?B?aXVBREF0NVhwSmFrQUd6Wm1qR3gvdW52QzZubGNnUWV0S2V0cGs5U2NWUzFM?=
+ =?utf-8?B?TGxMY2dGdmlwTDJyUTVHSXJESVlTNUd6YlI3bjdVTlhQZzF3Nnk0ei9hZzhG?=
+ =?utf-8?B?elp5Q3FnaVQvZWVlMEo0WTQvV1NQaWNLRHZ4WjhFcHFodHpWaURqeFUwN2V3?=
+ =?utf-8?B?SEFPWHR2aVNQNFkvQnprTEFrRU5IYnZqY293NkJybDlEVmRsWmovSTRid0l1?=
+ =?utf-8?B?OFNMc25vWkx0VnpSV3VUL3hHUnVZaHFUY3JmQ2FlOXhISDI2V0NDRERrWVIr?=
+ =?utf-8?B?aERqTWVyTjNmMXhFa2RDTWZ1K2Y2MGJRQUMveDNzSVBodHNyL1BFRHN5aXl2?=
+ =?utf-8?B?NlBqUWovNEhXOC9WRHV4Ulo2a0EwNU0xenFhU0VZWkp3c0RlQWplSnZPYkIr?=
+ =?utf-8?B?RXZGWlhSalljZ3pnSzRhMnN2NEpIKzVSNWdCS09wcVhGa0MrK1JScjdjQ3Jo?=
+ =?utf-8?B?dHgzOFordU5vbkxCbGN0dVl4aEpoMjFjVldJUFJ6K05nYUF1bXZEK2FQY3BB?=
+ =?utf-8?B?V0Qya1pDN3o2THgvTkdLNk1uZWpWK3ZXMTVSRWV2VFdSTVdTc1ZKQkY5cFV5?=
+ =?utf-8?B?Yy9sc2kveXFPanhiZWljaUtFaGpiR043SEtodVI0R3RNalBJZ2htRGVlZWZO?=
+ =?utf-8?B?Z1pVYm5WcnRNYzVyY3kxbHNXcWV4ZFZ0cWJvd3V3WmU4UFEveUhWUXpEZmJq?=
+ =?utf-8?B?ajJqbE1wejMvU25mSWFTTEw0WldNZWdCeEhoekZxRTFKa1Zjay82bXZoZVlu?=
+ =?utf-8?B?bVU4clFzOElYc1pXY0cxaFYzL1h6aG1aTTBFTzhLdFlpVkVTK2tNVnpQald2?=
+ =?utf-8?B?TGRkSlpJQmMrTytYTnVCUmxxVUxPRm00K3BsY0xtQVNSQjZWVi82d1JNRUJ2?=
+ =?utf-8?B?ZktHbEROVndqMWhWNWFvZUFWbk1rM0RWMkFlVVlUbHQvSmxLUzJMaHJ2WGhM?=
+ =?utf-8?Q?sEHL6otALSi5+4HehL0irF4=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM4PR11MB6335.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700021); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NTVNRHBxV1RwYjJ6WCtvb1hoTmNLQnVZaWJkc296cUw4TG1OSGJqK01iY2Yy?=
+ =?utf-8?B?WkJHNForUXFSTXNpZHlidU9HbG9CLzVDU1BzS2xPZUg1MmJwTnB4RUFDdkRl?=
+ =?utf-8?B?TXplTU1wM0k2cE90cWlFc2pYbXRBTUxLL0R6dGdMTm9nZVYzUTIxZ3VUYmpH?=
+ =?utf-8?B?OGNOdWJGK3lUYnM5aG4vZlpqQ05md0pFZzRMNUYxeE5yd3B0NHhQNVRIdVFJ?=
+ =?utf-8?B?RExHWlUvb3VIMGJjNmxQdlJhMHpFYWxmUGhyMGNhcTN1S1hsVXEyWFBaREh0?=
+ =?utf-8?B?WDF5YnFFMENVM2hzRytkWUI4MkJBRmdOL3krQmhkOU4vdlM2SitldERuVTdt?=
+ =?utf-8?B?TnRxZ0lyUHlrK1d2b20wM21zL25wS29hRXdRMFBPQmg4OUczS0FEZ1kvaHgv?=
+ =?utf-8?B?cEFRdnBFUmZJVDFsRGQzN2luWXViSWRLa2pHRWd0elZlYVNQMFB3YXJYQzlp?=
+ =?utf-8?B?WE5YQ1UyMmVuS05CYitYMVl1WWk0YVUzVHU4TWJtNGszYW5ZR2JmbXRrTXBT?=
+ =?utf-8?B?Ylh4L3A1TmtpcmRJTmZvbDVyTXE0ZERXc1pUTlJVOXB6YnBLWDd0U3hEeHJP?=
+ =?utf-8?B?Z3RNcHk1L2JOSnZzVVVEMTJiZW9Za2VaZlY2RHFOcUlJVkhJdzRDelVHdDZv?=
+ =?utf-8?B?a09YQ2ViUjVSaEtKV3BLU201WXhKRGVQYWRjeGVKK3ZNVURIRU9wZ0xkM1RN?=
+ =?utf-8?B?ejlxbWhxMmtFdC84YXl0UGovcVlzWndCbFRrcUJzYWhFNEJUSmdVOVF5Z20r?=
+ =?utf-8?B?aUk3REV0Vko3d0V4U054TGtRUnBZNDNsNjVkdlp5VUNPQ2g0S2p5NzZBWkpO?=
+ =?utf-8?B?WitmK0dXa1JtYllBWWxDV3lOMlhlUXVDdkkxdFU1RjhRZWQzTEJkZzZvaXpO?=
+ =?utf-8?B?d21HSzkwMkFPblZ3MFVDNHBoYjN2WVdmclNacjMvQ2hkMTlmdy8zK2hldWl2?=
+ =?utf-8?B?aDZsdWxzdUloNThnbDJveEJCSDhDbERNejRaakVkVjRobkcwRGRObC9xSXF4?=
+ =?utf-8?B?UHdDakdHaXA2aXhuODI1YVRpU0tCLzEyK0lVbjNibkc2Ny9CYkkxckZEQ1Yz?=
+ =?utf-8?B?Z1M4cFlnYlRLTzFlcEkreGo3ZXlKL2ZoY0Q4bGFoZTRKU1RxUW91RE9nZm1H?=
+ =?utf-8?B?M0tWRVhuRUFyZXJWZ01UYXJXekJtMWZSN3N4dTFidlVDU09ZVDRZWVJoWm5J?=
+ =?utf-8?B?c3ZpYnRmdlRmdlVCWG5GZzU3TUMrRU9DUGJWaUlsaTk3eDZpWk82RG41SnRk?=
+ =?utf-8?B?QkNuWGNyYitZdXlkdERxL01PWG9VNkpTeVVQNTNoTEw3T0RPNTIvSlo1cWRP?=
+ =?utf-8?B?OUxrLzgwTlpGUlo4Z2hkZHZpVkc3WXZJaWFsS2V2dFVvZFJOZUJ4MkhMME5F?=
+ =?utf-8?B?UkhDWkVRWjh0NFVhek40NmlGZkQzN0l2Zmg5ZFd2M1lWbGZkSlMzVExXS3VV?=
+ =?utf-8?B?ZUxEQnNpNHQ3aG1EdDg0MmZHQmFKVHE2ZC80Y3VtNklrcFRtNjlNRXZGLzBt?=
+ =?utf-8?B?RkFrSlc3OHBqeHpwTndxNDFSdUcrcGN5MUI5WFFLUGpxOXo5UmFHUGMwbEp6?=
+ =?utf-8?B?RE9ocFFXa0VkNlBVYnpybjhwNGQrU3UyWU1rcXhpU3NDbThYQ0hjKzRsWHJE?=
+ =?utf-8?B?ckNjZ3hyTjJmK3kvaEo4SkIwWnpIcjZuNUYxZ09sSXdFT1B6MjJUb3AybzVm?=
+ =?utf-8?B?dG43SmIxbHE5aVJIeXJXZXhaMDRQUVZhbGt5M1hKLzV1Vk9uN2lDdHdkRy90?=
+ =?utf-8?B?WUsxNXZ0bm5YR3VlcUtOK2U1SHAzbUxoY2htRUNadUhVZHJYbXcwZVRZRFJL?=
+ =?utf-8?B?K0wra3RGRkcrYnkvcS93RitSdUFNWWRMSklLSXp3aXRTc29abGp6WW9wcVNK?=
+ =?utf-8?B?VUpHK0g1VlpLWUFmeTFMU2Zxd1I4c1BSS0xLOEI2eFVKc0FZT2IrZFNmZERU?=
+ =?utf-8?B?VWUxN2tKZFlHV2prRkRDU3RiWE5KRXZNbElXcnhoUjhncEdjWERkY2RsUksx?=
+ =?utf-8?B?MWJqa0tFTkhnYjQ3c2ZORnRVNE93RjM2aDdHQkt6c0s0U2s2NkpUOThOTU1l?=
+ =?utf-8?B?dGVMRk8rQXJyTW1kK3NNSUpqakgzcElUTE9nRFo5MlNuTmpCd01YTVUvaUVF?=
+ =?utf-8?B?c1RLVWlzYVlmY3VPTUtJaUNmMFBCVHJxNWxzaFNWYlRIYVV0dVRnMU9tdEJR?=
+ =?utf-8?B?Ymg4S0tWQmRPWHNQSUtBeG1XclFtT3hzSVVUTmxUYzVjUWtGek1DWDg0T3VB?=
+ =?utf-8?B?TFM4bE5pTVl3SVdESVVZdUxhUEpqNGxqcVIyNkltbG1SN2d5K3Njb2dQTVI5?=
+ =?utf-8?B?Wkd3MXpZTkpMa0tLM09ZUXpBYmhSZDlkeklISFFQOXRIV1JGRDRZdVNNQm5O?=
+ =?utf-8?Q?IBGoUmP4tez0aLVY=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <3A41D722F5014D44A1A0C0C9F9D3AF47@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EA:EE_|BY1PR22MB5533:EE_
-Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: b00ff568-bb31-4abf-a017-08de6882e41d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?muFcwd4LhNgW/6F5cUsMA0nuOh9iU7EcSQlopzSw26Yw4qPlkwCMGzCuctso?=
- =?us-ascii?Q?k4ekSL6T12lqC5Lgk+xnQmkxwAtbn4oa88ii3JjW9oLp1hkno8KwzvvY0cPO?=
- =?us-ascii?Q?+YcZaQae4QHU7V7H/aF++rK9/8tI9vN4sXOLdxR7gZs7I40Gghe0usJfezpN?=
- =?us-ascii?Q?HqiB81/RyH2D6ealley/zdcpxdBREnzgH7IbxzpbA47uceTVfLsZvYDtdQGw?=
- =?us-ascii?Q?IHFOprGOWmcmquDWBLmtEqYqQUv1ojIYfVRVOY8txL4xmBzTIp/VnHC8nMmN?=
- =?us-ascii?Q?wcxB09nrOD6zCmLXMfrOv1nMJpi3ydOuSGFF9Qe97rAGKvNACcYu9QSbI3hl?=
- =?us-ascii?Q?zbsmE+Gc4eefdn99CgNzrfB1CY4YGYux3rbCLn4bZSTfrcJpwTY6Mf1uAS2I?=
- =?us-ascii?Q?reqYEdgdPehHBaQM+F03jAFS7TkKD8wTYdLXkWmfWmlskylmWkBhdOh6pZ31?=
- =?us-ascii?Q?XwZ68agR2NHsYU0dm4sELQrnoNW9SHOeS641ltxWU6vEYR3ZRiuItt2NwVEp?=
- =?us-ascii?Q?H1S/xWSrRUtH7+He1vCWOQgKj41gWLsDcUUMXupmBzTzDTNzXQAjDVzW6ZJv?=
- =?us-ascii?Q?0y+fA2lSi85Izst8u1w+pI6sNsnkWeZXWOvXoNt7uv0qiu3Nmsts/xkc6VkA?=
- =?us-ascii?Q?d+iRUzLZeEeLn1d1OWGtZPYk70RvAegljGARTvltQBL3SdvkFNQxOu4INVSE?=
- =?us-ascii?Q?+NaRkchuyrueTcVF4qMbrsfxEEZTr1RncPwXtRZCKXOZUDOcVkZi+A6PNfh0?=
- =?us-ascii?Q?ci4Zbp9O1yh1A/5967wFVtBTpASkNlY+vCQVby/n+F9iO3tZZPFAqVTaaqSQ?=
- =?us-ascii?Q?uqFyhGQ7ytMZuXcFYQc1pcCQkvCKyl8OS4q/aRTrk7UcdHwV7nhyIP4HtxKC?=
- =?us-ascii?Q?3/VVDsMJqqET94xWbuSs+L3fj8n4xAWL9Jli0sPq+ua2KPlPU6UY+KIxriiU?=
- =?us-ascii?Q?KoV6wSDfL0oeCfLiA6aVHjTqe63AnMCxGk0SQJf30jJ/e4WvQjCxlnh0NPLH?=
- =?us-ascii?Q?igV9GWkeqAuuiZY18yb7To8yc6nvabxtJFUO9HHL71IbJo+YWMSKTY2lfDIo?=
- =?us-ascii?Q?2ieH6D/JO91s2BpYZdgET3CmIHYIGq+4fhAHe6t4vvTepJEidR9MxZ1kgvLb?=
- =?us-ascii?Q?x0mqHWM6yQhr8vVwu3po5iZ5jE3GMnkkguWrXHxntrLogIkOTQET/gJjw4BG?=
- =?us-ascii?Q?Eatvc/fNzR83TjXiJcyHvV8NIYgIiPne4Gk7bKNcI2qaMcSLur5RMvTSVwIv?=
- =?us-ascii?Q?A69J1aKB4ejfRpMmApR+j10beqgGf92WeXanTngn+lhkN7gF8jYXso78JnQN?=
- =?us-ascii?Q?66dvImjxfDYw2aSy2fFm7oeq4N15QaavYU/WYFLsJ0rGRLfBEO0vqUQFfhCN?=
- =?us-ascii?Q?fdsCbgQIKkN0/nFIP5Xio8xsnWGkpUnFi8IcDZ7Sc1UvhOWDY15aBiXat9tT?=
- =?us-ascii?Q?Cg1FkOl30iaCw9PdvPq5RaocrJeDoMsFZzitebEk0J9SnNPAn5tWuJXaPrFA?=
- =?us-ascii?Q?axp5ZN2/WDPtOhK7pU6j61daox7es7m/d14hBbJ2N1X2CFuPnuiok7kYypzm?=
- =?us-ascii?Q?CCbsrhDsvdHKvqKMoUGAaO8HDb3zCw5cszLJwpzGfFJu85pbgAPo6w8bLWWl?=
- =?us-ascii?Q?BfrRAAUq0FXibR4URGjUkxsEj4ncpl+ntOmjatQLHCWW9qgbwa8vqcm3SkqY?=
- =?us-ascii?Q?zCJM2w=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:atlrelay2.compute.ge-healthcare.net;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: CbbwPpO+KWth75iSatHbajl37zxqL9z+5kSptGfNB3I9K9Ykg1C8e17oWTqC5tggz5zc02g005XSq5EWPHoHO4U19oB6hL/V9H+Cr1cIBeL4V4qW6SegQNsmSzyqL1hdUwtkk1+MbfBWIh90hF7Bm2tf3ATmoI3lAryVOyuh9HopGa5KaOtfeRhySi7vfWWhVp6F4ejE1FSCCP+K1InbMa0fiQ6OBLeodZg/AY/ik2HxnZK9XnhLR4NJko22YM/mfXnAhcXv+j8Z9buiySVfXgW61dAfobyeUvhZBVTSbKejksONCRHmn/HDxq7tnVzMwMFCcqgb6iFT28X4Yc3/T8M/4u8ArLNPao9uf8ukebi5phv3+IJc4ZmWx4TEjQDsqC+np9BzzMlgdBlxaQ8XuRjGwA2CrftZklUGuNkTwLKP9VzsjNFStYF3Binifyo8
-X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 09:00:51.3270 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b00ff568-bb31-4abf-a017-08de6882e41d
-X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
- Helo=[atlrelay2.compute.ge-healthcare.net]
+X-OriginatorOrg: microchip.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SJ5PEPF000001EA.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR22MB5533
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR11MB6335.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2bb2b361-36da-49da-5333-08de689f54eb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Feb 2026 12:24:26.6503 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 27YRS0o/gfOkHBp/hBMi/YT55UyRUlwvRHM7o9KMhWCDQnZa9e3sciJvcWZWiXT8jCXCUcELQ1REvz9I4c4RS3y0T/LQrNUEMLSZ7lA9FXA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR11MB8576
 X-Mailman-Approved-At: Tue, 10 Feb 2026 13:41:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -158,828 +191,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation for CCF migration for IPUv3 separate existing clock code
-to legacy files. These will be used by i.MX5 that currently does not
-support the CCF. No functional change.
-
-Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
----
-
-(no changes since v1)
-
- drivers/video/imx/Kconfig          |   7 +
- drivers/video/imx/Makefile         |   1 +
- drivers/video/imx/ipu.h            |  60 +++++-
- drivers/video/imx/ipu_clk_legacy.c | 310 +++++++++++++++++++++++++++
- drivers/video/imx/ipu_common.c     | 322 +----------------------------
- 5 files changed, 376 insertions(+), 324 deletions(-)
- create mode 100644 drivers/video/imx/ipu_clk_legacy.c
-
-diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index b35ba965efc..c25f209629e 100644
---- a/drivers/video/imx/Kconfig
-+++ b/drivers/video/imx/Kconfig
-@@ -15,6 +15,13 @@ config IMX_HDMI
- 	bool "Enable HDMI support in IPUv3"
- 	depends on VIDEO_IPUV3
- 
-+config IPU_CLK_LEGACY
-+	bool "Use legacy clock management for IPU"
-+	depends on VIDEO_IPUV3 && !CLK
-+	default y
-+	help
-+	 Use legacy clock management instead of Common Clock Framework.
-+
- config IMX_LDB
- 	bool "Freescale i.MX8MP LDB bridge"
- 	depends on VIDEO_BRIDGE
-diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
-index 1edf5a6bdf0..0e7f71a9f93 100644
---- a/drivers/video/imx/Makefile
-+++ b/drivers/video/imx/Makefile
-@@ -4,5 +4,6 @@
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- 
- obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
-+obj-$(CONFIG_IPU_CLK_LEGACY) += ipu_clk_legacy.o
- obj-$(CONFIG_IMX_LDB) += ldb.o
- obj-$(CONFIG_IMX_LCDIF) += lcdif.o
-diff --git a/drivers/video/imx/ipu.h b/drivers/video/imx/ipu.h
-index 62827dc480d..ae40e20bc28 100644
---- a/drivers/video/imx/ipu.h
-+++ b/drivers/video/imx/ipu.h
-@@ -18,14 +18,23 @@
- #ifndef __ASM_ARCH_IPU_H__
- #define __ASM_ARCH_IPU_H__
- 
-+#if !CONFIG_IS_ENABLED(IPU_CLK_LEGACY)
-+#include <clk.h>
-+#endif
- #include <ipu_pixfmt.h>
- #include <linux/types.h>
- 
-+#define IPUV3_CLK_MX51 133000000
-+#define IPUV3_CLK_MX53 200000000
-+#define IPUV3_CLK_MX6Q 264000000
-+#define IPUV3_CLK_MX6DL 198000000
-+
- #define IDMA_CHAN_INVALID 0xFF
- #define HIGH_RESOLUTION_WIDTH 1024
- 
- struct ipu_ctx;
--struct ipu_di_config;
-+
-+#if CONFIG_IS_ENABLED(IPU_CLK_LEGACY)
- 
- struct clk {
- 	const char *name;
-@@ -75,6 +84,46 @@ struct clk {
- 	int (*set_parent)(struct clk *clk, struct clk *parent);
- };
- 
-+/* Legacy clock API functions */
-+void clk_enable(struct clk *clk);
-+void clk_disable(struct clk *clk);
-+int clk_get_usecount(struct clk *clk);
-+u32 clk_get_rate(struct clk *clk);
-+struct clk *clk_get_parent(struct clk *clk);
-+int clk_set_rate(struct clk *clk, unsigned long rate);
-+long clk_round_rate(struct clk *clk, unsigned long rate);
-+int clk_set_parent(struct clk *clk, struct clk *parent);
-+
-+/* IPU clock initialization */
-+int ipu_clk_init_legacy(struct ipu_ctx *ctx);
-+int ipu_ldb_clk_init_legacy(struct ipu_ctx *ctx);
-+int ipu_pixel_clk_init_legacy(struct ipu_ctx *ctx, int id);
-+
-+#else
-+
-+static inline int clk_get_usecount(struct clk *clk)
-+{
-+        return clk->enable_count;
-+}
-+
-+/* Stub functions for non-legacy builds */
-+static inline int ipu_clk_init_legacy(struct ipu_ctx *ctx)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ipu_ldb_clk_init_legacy(struct ipu_ctx *ctx)
-+{
-+	return -ENOSYS;
-+}
-+
-+static inline int ipu_pixel_clk_init_legacy(struct ipu_ctx *ctx, int id)
-+{
-+	return -ENOSYS;
-+}
-+
-+#endif /* CONFIG_IS_ENABLED(IPU_CLK_LEGACY) */
-+
- struct udevice;
- 
- /*
-@@ -298,15 +347,6 @@ int32_t ipu_disp_set_color_key(ipu_channel_t channel, unsigned char enable,
- 
- u32 bytes_per_pixel(u32 fmt);
- 
--void clk_enable(struct clk *clk);
--void clk_disable(struct clk *clk);
--u32 clk_get_rate(struct clk *clk);
--int clk_set_rate(struct clk *clk, unsigned long rate);
--long clk_round_rate(struct clk *clk, unsigned long rate);
--int clk_set_parent(struct clk *clk, struct clk *parent);
--int clk_get_usecount(struct clk *clk);
--struct clk *clk_get_parent(struct clk *clk);
--
- void ipu_dump_registers(void);
- struct ipu_ctx *ipu_probe(struct udevice *dev);
- bool ipu_clk_enabled(struct ipu_ctx *ctx);
-diff --git a/drivers/video/imx/ipu_clk_legacy.c b/drivers/video/imx/ipu_clk_legacy.c
-new file mode 100644
-index 00000000000..8aaafa2a080
---- /dev/null
-+++ b/drivers/video/imx/ipu_clk_legacy.c
-@@ -0,0 +1,310 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Legacy IPU clock management for i.MX5/6 without Common Clock Framework
-+ *
-+ * (C) Copyright 2026
-+ * Brian Ruley, GE HealthCare, brian.ruley@gehealthcare.com
-+ */
-+
-+#include "ipu.h"
-+#include "ipu_regs.h"
-+#include <asm/arch/crm_regs.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm/io.h>
-+#include <div64.h>
-+#include <dm/devres.h>
-+#include <linux/err.h>
-+#include <log.h>
-+
-+extern struct mxc_ccm_reg *mxc_ccm;
-+
-+void clk_enable(struct clk *clk)
-+{
-+	if (clk) {
-+		if (clk->usecount++ == 0)
-+			clk->enable(clk);
-+	}
-+}
-+
-+void clk_disable(struct clk *clk)
-+{
-+	if (clk) {
-+		if (!(--clk->usecount)) {
-+			if (clk->disable)
-+				clk->disable(clk);
-+		}
-+	}
-+}
-+
-+int clk_get_usecount(struct clk *clk)
-+{
-+	if (clk == NULL)
-+		return 0;
-+
-+	return clk->usecount;
-+}
-+
-+u32 clk_get_rate(struct clk *clk)
-+{
-+	if (!clk)
-+		return 0;
-+
-+	return clk->rate;
-+}
-+
-+struct clk *clk_get_parent(struct clk *clk)
-+{
-+	if (!clk)
-+		return 0;
-+
-+	return clk->parent;
-+}
-+
-+int clk_set_rate(struct clk *clk, unsigned long rate)
-+{
-+	if (!clk)
-+		return 0;
-+
-+	if (clk->set_rate)
-+		clk->set_rate(clk, rate);
-+
-+	return clk->rate;
-+}
-+
-+long clk_round_rate(struct clk *clk, unsigned long rate)
-+{
-+	if (clk == NULL || !clk->round_rate)
-+		return 0;
-+
-+	return clk->round_rate(clk, rate);
-+}
-+
-+int clk_set_parent(struct clk *clk, struct clk *parent)
-+{
-+	clk->parent = parent;
-+	if (clk->set_parent)
-+		return clk->set_parent(clk, parent);
-+	return 0;
-+}
-+
-+static int clk_ipu_enable(struct clk *clk)
-+{
-+	u32 reg;
-+
-+	reg = __raw_readl(clk->enable_reg);
-+	reg |= MXC_CCM_CCGR_CG_MASK << clk->enable_shift;
-+	__raw_writel(reg, clk->enable_reg);
-+
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
-+	reg = __raw_readl(&mxc_ccm->ccdr);
-+	reg &= ~MXC_CCM_CCDR_IPU_HS_MASK;
-+	__raw_writel(reg, &mxc_ccm->ccdr);
-+
-+	reg = __raw_readl(&mxc_ccm->clpcr);
-+	reg &= ~MXC_CCM_CLPCR_BYPASS_IPU_LPM_HS;
-+	__raw_writel(reg, &mxc_ccm->clpcr);
-+#endif
-+	return 0;
-+}
-+
-+static void clk_ipu_disable(struct clk *clk)
-+{
-+	u32 reg;
-+
-+	reg = __raw_readl(clk->enable_reg);
-+	reg &= ~(MXC_CCM_CCGR_CG_MASK << clk->enable_shift);
-+	__raw_writel(reg, clk->enable_reg);
-+
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
-+	reg = __raw_readl(&mxc_ccm->ccdr);
-+	reg |= MXC_CCM_CCDR_IPU_HS_MASK;
-+	__raw_writel(reg, &mxc_ccm->ccdr);
-+
-+	reg = __raw_readl(&mxc_ccm->clpcr);
-+	reg |= MXC_CCM_CLPCR_BYPASS_IPU_LPM_HS;
-+	__raw_writel(reg, &mxc_ccm->clpcr);
-+#endif
-+}
-+
-+static void ipu_pixel_clk_recalc(struct clk *clk)
-+{
-+	u32 div;
-+	u64 final_rate = (unsigned long long)clk->parent->rate * 16;
-+
-+	div = __raw_readl(DI_BS_CLKGEN0(clk->id));
-+	debug("read BS_CLKGEN0 div:%d, final_rate:%lld, prate:%ld\n", div,
-+	      final_rate, clk->parent->rate);
-+
-+	clk->rate = 0;
-+	if (div != 0) {
-+		do_div(final_rate, div);
-+		clk->rate = final_rate;
-+	}
-+}
-+
-+static unsigned long ipu_pixel_clk_round_rate(struct clk *clk,
-+					      unsigned long rate)
-+{
-+	u64 div, final_rate;
-+	u32 remainder;
-+	u64 parent_rate = (unsigned long long)clk->parent->rate * 16;
-+
-+	div = parent_rate;
-+	remainder = do_div(div, rate);
-+	if (remainder > (rate / 2))
-+		div++;
-+	if (div < 0x10)
-+		div = 0x10;
-+	if (div & ~0xFEF)
-+		div &= 0xFF8;
-+	else {
-+		if ((div & 0xC) == 0xC) {
-+			div += 0x10;
-+			div &= ~0xF;
-+		}
-+	}
-+	final_rate = parent_rate;
-+	do_div(final_rate, div);
-+
-+	return final_rate;
-+}
-+
-+static int ipu_pixel_clk_set_rate(struct clk *clk, unsigned long rate)
-+{
-+	u64 div, parent_rate;
-+	u32 remainder;
-+
-+	parent_rate = (unsigned long long)clk->parent->rate * 16;
-+	div = parent_rate;
-+	remainder = do_div(div, rate);
-+	if (remainder > (rate / 2))
-+		div++;
-+
-+	if ((div & 0xC) == 0xC) {
-+		div += 0x10;
-+		div &= ~0xF;
-+	}
-+	if (div > 0x1000)
-+		debug("Overflow, DI_BS_CLKGEN0 div:0x%x\n", (u32)div);
-+
-+	__raw_writel(div, DI_BS_CLKGEN0(clk->id));
-+	__raw_writel((div / 16) << 16, DI_BS_CLKGEN1(clk->id));
-+
-+	do_div(parent_rate, div);
-+	clk->rate = parent_rate;
-+
-+	return 0;
-+}
-+
-+static int ipu_pixel_clk_enable(struct clk *clk)
-+{
-+	u32 disp_gen = __raw_readl(IPU_DISP_GEN);
-+	disp_gen |= clk->id ? DI1_COUNTER_RELEASE : DI0_COUNTER_RELEASE;
-+	__raw_writel(disp_gen, IPU_DISP_GEN);
-+
-+	return 0;
-+}
-+
-+static void ipu_pixel_clk_disable(struct clk *clk)
-+{
-+	u32 disp_gen = __raw_readl(IPU_DISP_GEN);
-+	disp_gen &= clk->id ? ~DI1_COUNTER_RELEASE : ~DI0_COUNTER_RELEASE;
-+	__raw_writel(disp_gen, IPU_DISP_GEN);
-+}
-+
-+static int ipu_pixel_clk_set_parent(struct clk *clk, struct clk *parent)
-+{
-+	u32 di_gen = __raw_readl(DI_GENERAL(clk->id));
-+	struct ipu_ctx *ctx = clk->ctx;
-+
-+	if (parent == ctx->ipu_clk)
-+		di_gen &= ~DI_GEN_DI_CLK_EXT;
-+	else if (!IS_ERR(ctx->di_clk[clk->id]) && parent == ctx->ldb_clk)
-+		di_gen |= DI_GEN_DI_CLK_EXT;
-+	else
-+		return -EINVAL;
-+
-+	__raw_writel(di_gen, DI_GENERAL(clk->id));
-+	ipu_pixel_clk_recalc(clk);
-+	return 0;
-+}
-+
-+int ipu_pixel_clk_init_legacy(struct ipu_ctx *ctx, int id)
-+{
-+	struct clk *pixel_clk;
-+
-+	pixel_clk = devm_kzalloc(ctx->dev, sizeof(*pixel_clk), GFP_KERNEL);
-+	if (!pixel_clk)
-+		return -ENOMEM;
-+
-+	pixel_clk->name = "pixel_clk";
-+	pixel_clk->id = id;
-+	pixel_clk->ctx = ctx;
-+	pixel_clk->recalc = ipu_pixel_clk_recalc;
-+	pixel_clk->set_rate = ipu_pixel_clk_set_rate;
-+	pixel_clk->round_rate = ipu_pixel_clk_round_rate;
-+	pixel_clk->set_parent = ipu_pixel_clk_set_parent;
-+	pixel_clk->enable = ipu_pixel_clk_enable;
-+	pixel_clk->disable = ipu_pixel_clk_disable;
-+	pixel_clk->usecount = 0;
-+
-+	ctx->pixel_clk[id] = pixel_clk;
-+	return 0;
-+}
-+
-+int ipu_clk_init_legacy(struct ipu_ctx *ctx)
-+{
-+	struct clk *ipu_clk;
-+
-+	ipu_clk = devm_kzalloc(ctx->dev, sizeof(*ipu_clk), GFP_KERNEL);
-+	if (!ipu_clk)
-+		return -ENOMEM;
-+
-+	ipu_clk->name = "ipu_clk";
-+	ipu_clk->ctx = ctx;
-+#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
-+	ipu_clk->enable_reg =
-+		(u32 *)(CCM_BASE_ADDR + offsetof(struct mxc_ccm_reg, CCGR5));
-+	ipu_clk->enable_shift = MXC_CCM_CCGR5_IPU_OFFSET;
-+#else
-+	ipu_clk->enable_reg =
-+		(u32 *)(CCM_BASE_ADDR + offsetof(struct mxc_ccm_reg, CCGR3));
-+	ipu_clk->enable_shift = MXC_CCM_CCGR3_IPU1_IPU_DI0_OFFSET;
-+#endif
-+
-+	ipu_clk->enable = clk_ipu_enable;
-+	ipu_clk->disable = clk_ipu_disable;
-+	ipu_clk->usecount = 0;
-+
-+#if CONFIG_IS_ENABLED(MX51)
-+	ipu_clk->rate = IPUV3_CLK_MX51;
-+#elif CONFIG_IS_ENABLED(MX53)
-+	ipu_clk->rate = IPUV3_CLK_MX53;
-+#else
-+	ipu_clk->rate = is_mx6sdl() ? IPUV3_CLK_MX6DL : IPUV3_CLK_MX6Q;
-+#endif
-+
-+	ctx->ipu_clk = ipu_clk;
-+	return 0;
-+}
-+
-+#if !defined CFG_SYS_LDB_CLOCK
-+#define CFG_SYS_LDB_CLOCK 65000000
-+#endif
-+
-+int ipu_ldb_clk_init_legacy(struct ipu_ctx *ctx)
-+{
-+	struct clk *ldb_clk;
-+
-+	ldb_clk = devm_kzalloc(ctx->dev, sizeof(*ldb_clk), GFP_KERNEL);
-+	if (!ldb_clk)
-+		return -ENOMEM;
-+
-+	ldb_clk->name = "ldb_clk";
-+	ldb_clk->ctx = ctx;
-+	ldb_clk->rate = CFG_SYS_LDB_CLOCK;
-+	ldb_clk->usecount = 0;
-+
-+	ctx->ldb_clk = ldb_clk;
-+	return 0;
-+}
-diff --git a/drivers/video/imx/ipu_common.c b/drivers/video/imx/ipu_common.c
-index e9897ee79d2..d994053394f 100644
---- a/drivers/video/imx/ipu_common.c
-+++ b/drivers/video/imx/ipu_common.c
-@@ -31,8 +31,8 @@
- #include <linux/types.h>
- #include <log.h>
- 
--extern struct mxc_ccm_reg *mxc_ccm;
--extern u32 *ipu_cpmem_base;
-+u32 *ipu_cpmem_base;
-+u32 *ipu_dc_tmpl_reg;
- 
- struct ipu_ch_param_word {
- 	u32 data[5];
-@@ -92,126 +92,6 @@ struct ipu_ch_param {
- 
- #define IPU_SW_RST_TOUT_USEC (10000)
- 
--#define IPUV3_CLK_MX51 133000000
--#define IPUV3_CLK_MX53 200000000
--#define IPUV3_CLK_MX6Q 264000000
--#define IPUV3_CLK_MX6DL 198000000
--
--void clk_enable(struct clk *clk)
--{
--	if (clk) {
--		if (clk->usecount++ == 0)
--			clk->enable(clk);
--	}
--}
--
--void clk_disable(struct clk *clk)
--{
--	if (clk) {
--		if (!(--clk->usecount)) {
--			if (clk->disable)
--				clk->disable(clk);
--		}
--	}
--}
--
--int clk_get_usecount(struct clk *clk)
--{
--	if (clk == NULL)
--		return 0;
--
--	return clk->usecount;
--}
--
--u32 clk_get_rate(struct clk *clk)
--{
--	if (!clk)
--		return 0;
--
--	return clk->rate;
--}
--
--struct clk *clk_get_parent(struct clk *clk)
--{
--	if (!clk)
--		return 0;
--
--	return clk->parent;
--}
--
--int clk_set_rate(struct clk *clk, unsigned long rate)
--{
--	if (!clk)
--		return 0;
--
--	if (clk->set_rate)
--		clk->set_rate(clk, rate);
--
--	return clk->rate;
--}
--
--long clk_round_rate(struct clk *clk, unsigned long rate)
--{
--	if (clk == NULL || !clk->round_rate)
--		return 0;
--
--	return clk->round_rate(clk, rate);
--}
--
--int clk_set_parent(struct clk *clk, struct clk *parent)
--{
--	clk->parent = parent;
--	if (clk->set_parent)
--		return clk->set_parent(clk, parent);
--	return 0;
--}
--
--static int clk_ipu_enable(struct clk *clk)
--{
--	u32 reg;
--
--	reg = __raw_readl(clk->enable_reg);
--	reg |= MXC_CCM_CCGR_CG_MASK << clk->enable_shift;
--	__raw_writel(reg, clk->enable_reg);
--
--#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
--	/* Handshake with IPU when certain clock rates are changed. */
--	reg = __raw_readl(&mxc_ccm->ccdr);
--	reg &= ~MXC_CCM_CCDR_IPU_HS_MASK;
--	__raw_writel(reg, &mxc_ccm->ccdr);
--
--	/* Handshake with IPU when LPM is entered as its enabled. */
--	reg = __raw_readl(&mxc_ccm->clpcr);
--	reg &= ~MXC_CCM_CLPCR_BYPASS_IPU_LPM_HS;
--	__raw_writel(reg, &mxc_ccm->clpcr);
--#endif
--	return 0;
--}
--
--static void clk_ipu_disable(struct clk *clk)
--{
--	u32 reg;
--
--	reg = __raw_readl(clk->enable_reg);
--	reg &= ~(MXC_CCM_CCGR_CG_MASK << clk->enable_shift);
--	__raw_writel(reg, clk->enable_reg);
--
--#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
--	/*
--	 * No handshake with IPU whe dividers are changed
--	 * as its not enabled.
--	 */
--	reg = __raw_readl(&mxc_ccm->ccdr);
--	reg |= MXC_CCM_CCDR_IPU_HS_MASK;
--	__raw_writel(reg, &mxc_ccm->ccdr);
--
--	/* No handshake with IPU when LPM is entered as its not enabled. */
--	reg = __raw_readl(&mxc_ccm->clpcr);
--	reg |= MXC_CCM_CLPCR_BYPASS_IPU_LPM_HS;
--	__raw_writel(reg, &mxc_ccm->clpcr);
--#endif
--}
--
- /*
-  * Function to initialize the ipu clock
-  *
-@@ -221,43 +101,8 @@ static void clk_ipu_disable(struct clk *clk)
-  */
- static int ipu_clk_init(struct ipu_ctx *ctx)
- {
--	struct clk *ipu_clk;
--
--	ipu_clk = devm_kzalloc(ctx->dev, sizeof(*ipu_clk), GFP_KERNEL);
--	if (!ipu_clk)
--		return -ENOMEM;
--
--	ipu_clk->name = "ipu_clk";
--	ipu_clk->ctx = ctx;
--#if CONFIG_IS_ENABLED(MX51) || CONFIG_IS_ENABLED(MX53)
--	ipu_clk->enable_reg =
--		(u32 *)(CCM_BASE_ADDR + offsetof(struct mxc_ccm_reg, CCGR5));
--	ipu_clk->enable_shift = MXC_CCM_CCGR5_IPU_OFFSET;
--#else
--	ipu_clk->enable_reg =
--		(u32 *)(CCM_BASE_ADDR + offsetof(struct mxc_ccm_reg, CCGR3));
--	ipu_clk->enable_shift = MXC_CCM_CCGR3_IPU1_IPU_DI0_OFFSET;
--#endif
--
--	ipu_clk->enable = clk_ipu_enable;
--	ipu_clk->disable = clk_ipu_disable;
--	ipu_clk->usecount = 0;
--
--#if CONFIG_IS_ENABLED(MX51)
--	ipu_clk->rate = IPUV3_CLK_MX51;
--#elif CONFIG_IS_ENABLED(MX53)
--	ipu_clk->rate = IPUV3_CLK_MX53;
--#else
--	ipu_clk->rate = is_mx6sdl() ? IPUV3_CLK_MX6DL : IPUV3_CLK_MX6Q;
--#endif
--
--	ctx->ipu_clk = ipu_clk;
--	return 0;
--};
--
--#if !defined CFG_SYS_LDB_CLOCK
--#define CFG_SYS_LDB_CLOCK 65000000
--#endif
-+	return ipu_clk_init_legacy(ctx);
-+}
- 
- /*
-  * Function to initialize the ldb dummy clock
-@@ -268,23 +113,8 @@ static int ipu_clk_init(struct ipu_ctx *ctx)
-  */
- static int ipu_ldb_clk_init(struct ipu_ctx *ctx)
- {
--	struct clk *ldb_clk;
--
--	ldb_clk = devm_kzalloc(ctx->dev, sizeof(*ldb_clk), GFP_KERNEL);
--	if (!ldb_clk)
--		return -ENOMEM;
--
--	ldb_clk->name = "ldb_clk";
--	ldb_clk->ctx = ctx;
--	ldb_clk->rate = CFG_SYS_LDB_CLOCK;
--	ldb_clk->usecount = 0;
--
--	ctx->ldb_clk = ldb_clk;
--	return 0;
--};
--
--u32 *ipu_cpmem_base;
--u32 *ipu_dc_tmpl_reg;
-+	return ipu_ldb_clk_init_legacy(ctx);
-+}
- 
- /* Static functions */
- 
-@@ -320,124 +150,6 @@ static inline void ipu_ch_param_set_buffer(u32 ch, int buf_num,
- #define idma_mask(ch) (idma_is_valid(ch) ? (1UL << (ch & 0x1F)) : 0)
- #define idma_is_set(reg, dma) (__raw_readl(reg(dma)) & idma_mask(dma))
- 
--static void ipu_pixel_clk_recalc(struct clk *clk)
--{
--	u32 div;
--	u64 final_rate = (unsigned long long)clk->parent->rate * 16;
--
--	div = __raw_readl(DI_BS_CLKGEN0(clk->id));
--	debug("read BS_CLKGEN0 div:%d, final_rate:%lld, prate:%ld\n", div,
--	      final_rate, clk->parent->rate);
--
--	clk->rate = 0;
--	if (div != 0) {
--		do_div(final_rate, div);
--		clk->rate = final_rate;
--	}
--}
--
--static unsigned long ipu_pixel_clk_round_rate(struct clk *clk,
--					      unsigned long rate)
--{
--	u64 div, final_rate;
--	u32 remainder;
--	u64 parent_rate = (unsigned long long)clk->parent->rate * 16;
--
--	/*
--	 * Calculate divider
--	 * Fractional part is 4 bits,
--	 * so simply multiply by 2^4 to get fractional part.
--	 */
--	div = parent_rate;
--	remainder = do_div(div, rate);
--	/* Round the divider value */
--	if (remainder > (rate / 2))
--		div++;
--	if (div < 0x10) /* Min DI disp clock divider is 1 */
--		div = 0x10;
--	if (div & ~0xFEF)
--		div &= 0xFF8;
--	else {
--		/* Round up divider if it gets us closer to desired pix clk */
--		if ((div & 0xC) == 0xC) {
--			div += 0x10;
--			div &= ~0xF;
--		}
--	}
--	final_rate = parent_rate;
--	do_div(final_rate, div);
--
--	return final_rate;
--}
--
--static int ipu_pixel_clk_set_rate(struct clk *clk, unsigned long rate)
--{
--	u64 div, parent_rate;
--	u32 remainder;
--
--	parent_rate = (unsigned long long)clk->parent->rate * 16;
--	div = parent_rate;
--	remainder = do_div(div, rate);
--	/* Round the divider value */
--	if (remainder > (rate / 2))
--		div++;
--
--	/* Round up divider if it gets us closer to desired pix clk */
--	if ((div & 0xC) == 0xC) {
--		div += 0x10;
--		div &= ~0xF;
--	}
--	if (div > 0x1000)
--		debug("Overflow, DI_BS_CLKGEN0 div:0x%x\n", (u32)div);
--
--	__raw_writel(div, DI_BS_CLKGEN0(clk->id));
--
--	/*
--	 * Setup pixel clock timing
--	 * Down time is half of period
--	 */
--	__raw_writel((div / 16) << 16, DI_BS_CLKGEN1(clk->id));
--
--	do_div(parent_rate, div);
--
--	clk->rate = parent_rate;
--
--	return 0;
--}
--
--static int ipu_pixel_clk_enable(struct clk *clk)
--{
--	u32 disp_gen = __raw_readl(IPU_DISP_GEN);
--	disp_gen |= clk->id ? DI1_COUNTER_RELEASE : DI0_COUNTER_RELEASE;
--	__raw_writel(disp_gen, IPU_DISP_GEN);
--
--	return 0;
--}
--
--static void ipu_pixel_clk_disable(struct clk *clk)
--{
--	u32 disp_gen = __raw_readl(IPU_DISP_GEN);
--	disp_gen &= clk->id ? ~DI1_COUNTER_RELEASE : ~DI0_COUNTER_RELEASE;
--	__raw_writel(disp_gen, IPU_DISP_GEN);
--}
--
--static int ipu_pixel_clk_set_parent(struct clk *clk, struct clk *parent)
--{
--	u32 di_gen = __raw_readl(DI_GENERAL(clk->id));
--	struct ipu_ctx *ctx = clk->ctx;
--
--	if (parent == ctx->ipu_clk)
--		di_gen &= ~DI_GEN_DI_CLK_EXT;
--	else if (!IS_ERR(ctx->di_clk[clk->id]) && parent == ctx->ldb_clk)
--		di_gen |= DI_GEN_DI_CLK_EXT;
--	else
--		return -EINVAL;
--
--	__raw_writel(di_gen, DI_GENERAL(clk->id));
--	ipu_pixel_clk_recalc(clk);
--	return 0;
--}
--
- /*
-  * Function to initialize the pixel clock
-  *
-@@ -447,26 +159,8 @@ static int ipu_pixel_clk_set_parent(struct clk *clk, struct clk *parent)
-  */
- static int ipu_pixel_clk_init(struct ipu_ctx *ctx, int id)
- {
--	struct clk *pixel_clk;
--
--	pixel_clk = devm_kzalloc(ctx->dev, sizeof(*pixel_clk), GFP_KERNEL);
--	if (!pixel_clk)
--		return -ENOMEM;
--
--	pixel_clk->name = "pixel_clk";
--	pixel_clk->id = id;
--	pixel_clk->ctx = ctx;
--	pixel_clk->recalc = ipu_pixel_clk_recalc;
--	pixel_clk->set_rate = ipu_pixel_clk_set_rate;
--	pixel_clk->round_rate = ipu_pixel_clk_round_rate;
--	pixel_clk->set_parent = ipu_pixel_clk_set_parent;
--	pixel_clk->enable = ipu_pixel_clk_enable;
--	pixel_clk->disable = ipu_pixel_clk_disable;
--	pixel_clk->usecount = 0;
--
--	ctx->pixel_clk[id] = pixel_clk;
--	return 0;
--};
-+	return ipu_pixel_clk_init_legacy(ctx, id);
-+}
- 
- /*
-  * This function resets IPU
--- 
-2.39.5
-
+SGkgTWFyZWssCgpPbiBGcmksIDIwMjYtMDItMDYgYXQgMjA6MDYgKzAxMDAsIE1hcmVrIFZhc3V0
+IHdyb3RlOgo+IEVYVEVSTkFMIEVNQUlMOiBEbyBub3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRh
+Y2htZW50cyB1bmxlc3MgeW91Cj4ga25vdyB0aGUgY29udGVudCBpcyBzYWZlCj4gCj4gT24gMi82
+LzI2IDQ6MTQgUE0sIEphbWllIEdpYmJvbnMgd3JvdGU6Cj4gPiBTb21lIHBsYXRmb3Jtcwo+IAo+
+IEFsbCBwbGF0Zm9ybXMsIERUcyBhbmQgRFRPcyBoYXZlIHRvIGJlIDggQnl0ZSBhbGlnbmVkLCBh
+bHdheXMsCj4gcGVyaW9kLgpUaGFua3MgZm9yIHlvdXIgZmVlZGJhY2suIEkgaGF2ZSByZWFsaXNl
+ZCBJIG1pc2ludGVycHJldGVkIFRvbSdzCmluc3RydWN0aW9uIG9uIG15IHByZXZpb3VzIHBhdGNo
+IGZpeCBhYm91dCBwYXNzaW5nIGEgbmV3IGZsYWcuCj4gCj4gPiByZXF1aXJlIGRldmljZSB0cmVl
+IG92ZXJsYXlzIChEVE9zKSB0byBiZSA4LWJ5dGUgYWxpZ25lZAo+ID4gd2hlbiBhcHBseWluZyB0
+aGVtIHdpdGggbGliZmR0LiBQcmV2aW91c2x5LCB0aGUgY29kZSBkaWQgbm90Cj4gPiBndWFyYW50
+ZWUKPiA+IHRoaXMgYWxpZ25tZW50LCB3aGljaCBjb3VsZCByZXN1bHQgaW4gYWxpZ25tZW50IGVy
+cm9ycyBkdXJpbmcKPiA+IG92ZXJsYXkKPiA+IGFwcGxpY2F0aW9uLgo+ID4gSW50cm9kdWNlIGEg
+bmV3IHJ1bnRpbWUgcGFyYW1ldGVyLCBhbHdheXNfcmVsb2NhdGVfb3ZlcmxheSwgdG8KPiA+IGJv
+b3RfZ2V0X2ZkdF9maXQoKS4gV2hlbiBzZXQsIG92ZXJsYXlzIGFyZSBhbHdheXMgY29waWVkIHRv
+IGFuIDgtCj4gPiBieXRlCj4gPiBhbGlnbmVkIGJ1ZmZlciBiZWZvcmUgYmVpbmcgcGFzc2VkIHRv
+IGZkdF9vcGVuX2ludG8oKS4KPiA+IFRoaXMgcmVzb2x2ZXMgaXNzdWVzIHdpdGggRkRUIG92ZXJs
+YXkgYXBwbGljYXRpb24gb24gcGxhdGZvcm1zIHRoYXQKPiA+IHJlcXVpcmUgc3RyaWN0IGFsaWdu
+bWVudC4KPiA+IAo+ID4gRml4ZXM6IDhmYmNjMGUwZTgzOSAoImJvb3Q6IEFzc3VyZSBGRFQgaXMg
+YWx3YXlzIGF0IDgtYnl0ZSBhbGlnbmVkCj4gPiBhZGRyZXNzIikKPiA+IAo+ID4gU2lnbmVkLW9m
+Zi1ieTogSmFtaWUgR2liYm9ucyA8amFtaWUuZ2liYm9uc0BtaWNyb2NoaXAuY29tPgo+ID4gLS0t
+Cj4gPiDCoCBib290L2ltYWdlLWZkdC5jIHzCoCAyICstCj4gPiDCoCBib290L2ltYWdlLWZpdC5j
+IHwgMjMgKysrKysrKysrKysrKysrKystLS0tLS0KPiA+IMKgIGluY2x1ZGUvaW1hZ2UuaMKgIHzC
+oCA1ICsrKystCj4gPiDCoCAzIGZpbGVzIGNoYW5nZWQsIDIyIGluc2VydGlvbnMoKyksIDggZGVs
+ZXRpb25zKC0pCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9ib290L2ltYWdlLWZkdC5jIGIvYm9vdC9p
+bWFnZS1mZHQuYwo+ID4gaW5kZXggYTNhNGZiOGI1NTguLjMzZmQ0MjQ4YWNkIDEwMDY0NAo+ID4g
+LS0tIGEvYm9vdC9pbWFnZS1mZHQuYwo+ID4gKysrIGIvYm9vdC9pbWFnZS1mZHQuYwo+ID4gQEAg
+LTQzMSw3ICs0MzEsNyBAQCBzdGF0aWMgaW50IHNlbGVjdF9mZHQoc3RydWN0IGJvb3RtX2hlYWRl
+cnMKPiA+ICppbWFnZXMsIGNvbnN0IGNoYXIgKnNlbGVjdCwgdTggYXJjaCwKPiA+IMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmR0X25v
+ZmZzZXQgPQo+ID4gYm9vdF9nZXRfZmR0X2ZpdChpbWFnZXMsIGZkdF9hZGRyLAo+ID4gwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+Cj4gPiAmZml0X3VuYW1lX2ZkdCwKPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoAo+ID4gJmZpdF91bmFtZV9jb25maWcsCj4g
+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCBhcmNoLAo+ID4gJmxvYWQsICZsZW4pOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYXJjaCwKPiA+ICZsb2Fk
+LCAmbGVuLCB0cnVlKTsKPiAKPiBUaGlzIGZsYWcgaXMgYWx3YXlzIHRydWUsIGRvIHdlIGFjdHVh
+bGx5IG5lZWQgaXQgPwo+IAo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZmR0X25vZmZzZXQgPCAwKQo+ID4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgcmV0dXJuIC1FTk9FTlQ7Cj4gPiBkaWZmIC0tZ2l0IGEvYm9vdC9pbWFnZS1maXQu
+YyBiL2Jvb3QvaW1hZ2UtZml0LmMKPiA+IGluZGV4IGQyYjBhN2RhY2NjLi5hM2ZhMmEwMTQ2MyAx
+MDA2NDQKPiA+IC0tLSBhL2Jvb3QvaW1hZ2UtZml0LmMKPiA+ICsrKyBiL2Jvb3QvaW1hZ2UtZml0
+LmMKPiA+IEBAIC0yMzcwLDcgKzIzNzAsOCBAQCBpbnQgYm9vdF9nZXRfc2V0dXBfZml0KHN0cnVj
+dCBib290bV9oZWFkZXJzCj4gPiAqaW1hZ2VzLCB1aW50OF90IGFyY2gsCj4gPiDCoCAjaWZuZGVm
+IFVTRV9IT1NUQ0MKPiA+IMKgIGludCBib290X2dldF9mZHRfZml0KHN0cnVjdCBib290bV9oZWFk
+ZXJzICppbWFnZXMsIHVsb25nIGFkZHIsCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgY29uc3QgY2hhciAqKmZpdF91bmFtZXAsIGNvbnN0IGNoYXIKPiA+ICoqZml0X3Vu
+YW1lX2NvbmZpZ3AsCj4gPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQg
+YXJjaCwgdWxvbmcgKmRhdGFwLCB1bG9uZyAqbGVucCkKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIGludCBhcmNoLCB1bG9uZyAqZGF0YXAsIHVsb25nICpsZW5wLAo+ID4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYm9vbCBhbHdheXNfcmVsb2NhdGVf
+b3ZlcmxheSkKPiA+IMKgIHsKPiA+IMKgwqDCoMKgwqAgaW50IGZkdF9ub2Zmc2V0LCBjZmdfbm9m
+ZnNldCwgY291bnQ7Cj4gPiDCoMKgwqDCoMKgIGNvbnN0IHZvaWQgKmZpdDsKPiA+IEBAIC0yNDky
+LDExICsyNDkzLDIxIEBAIGludCBib290X2dldF9mZHRfZml0KHN0cnVjdCBib290bV9oZWFkZXJz
+Cj4gPiAqaW1hZ2VzLCB1bG9uZyBhZGRyLAo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+b3YgPSBtYXBfc3lzbWVtKG92bG9hZCwgb3ZsZW4pOwo+ID4gCj4gPiDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBvdmNvcHlsZW4gPSBBTElHTihmZHRfdG90YWxzaXplKG92KSwgU1pfNEspOwo+
+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvdmNvcHkgPSBtYWxsb2Mob3Zjb3B5bGVuKTsK
+PiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKCFvdmNvcHkpIHsKPiA+IC3CoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHByaW50ZigiZmFpbGVkIHRvIGR1cGxp
+Y2F0ZSBEVE8gYmVmb3JlCj4gPiBhcHBsaWNhdGlvblxuIik7Cj4gPiAtwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmZHRfbm9mZnNldCA9IC1FTk9NRU07Cj4gPiAtwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIG91dDsKPiA+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGFsd2F5c19yZWxvY2F0ZV9vdmVybGF5KSB7Cj4gPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvdmNvcHkgPSBhbGlnbmVk
+X2FsbG9jKDgsIG92Y29weWxlbik7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBpZiAoIW92Y29weSkgewo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHByaW50ZigiZmFpbGVkIHRvIGFsbG9jYXRl
+IGFsaWduZWQKPiA+IERUTyBidWZmZXJcbiIpOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZkdF9ub2Zmc2V0ID0gLUVOT01FTTsK
+PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBnb3RvIG91dDsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIH0KPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG1lbWNw
+eShvdmNvcHksIG92LCBvdmxlbik7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxz
+ZSB7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvdmNvcHkg
+PSBtYWxsb2Mob3Zjb3B5bGVuKTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGlmICghb3Zjb3B5KSB7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJmYWlsZWQgdG8gZHVwbGljYXRl
+IERUTwo+ID4gYmVmb3JlIGFwcGxpY2F0aW9uXG4iKTsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmZHRfbm9mZnNldCA9IC1FTk9N
+RU07Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgZ290byBvdXQ7Cj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCB9Cj4gCj4gTG9va2luZyBhdCB0aGlzLCBpZiB0aGUgcHJvYmxlbSBpcyAkb3YgYWxp
+Z25lZCB0byA0IEJ5dGVzLCB0aGVuICRiYXNlCj4gYQo+IGJpdCBiZWxvdyBjb3VsZCBhbHNvIGJl
+IGFsaWduZWQgdG8gNCBCeXRlcyBpZiB0aGVyZSBhcmUgdHdvIG9yIG1vcmUKPiBEVHMKPiBpbiB0
+aGUgZml0SW1hZ2Ugd2l0aG91dCBleHRlcm5hbCBkYXRhLiBDYW4geW91IHBsZWFzZSB0cnkgdGhl
+Cj4gYXR0YWNoZWQKPiBwYXRjaCBhbmQgc2VlIGlmIHRoYXQgc3RpbGwgd29ya3MgPwo+IAo+IGRp
+ZmYgLS1naXQgYS9ib290L2ltYWdlLWZpdC5jIGIvYm9vdC9pbWFnZS1maXQuYwo+IGluZGV4IDNl
+ZDY5YjVmN2JjLi44NDVlNzY5YTdlMyAxMDA2NDQKPiAtLS0gYS9ib290L2ltYWdlLWZpdC5jCj4g
+KysrIGIvYm9vdC9pbWFnZS1maXQuYwo+IEBAIC0yMzY4LDYgKzIzNjgsNDggQEAgaW50IGJvb3Rf
+Z2V0X3NldHVwX2ZpdChzdHJ1Y3QgYm9vdG1faGVhZGVycwo+ICppbWFnZXMsIHVpbnQ4X3QgYXJj
+aCwKPiDCoCB9Cj4gCj4gwqAgI2lmbmRlZiBVU0VfSE9TVENDCj4gKyNpZmRlZiBDT05GSUdfT0Zf
+TElCRkRUX09WRVJMQVkKPiArc3RhdGljIGludCBib290X2dldF9mZHRfZml0X2ludG9fYnVmZmVy
+KHVsb25nIGxvYWRhZGRyLCB1bG9uZwo+IGxvYWRsZW4sCj4gdm9pZCAqKmZkdGRzdGJ1ZikKPiAr
+ewo+ICvCoMKgwqDCoMKgwqAgdm9pZCAqZmR0c3JjYnVmLCAqbWFwOwo+ICvCoMKgwqDCoMKgwqAg
+dWxvbmcgZmR0ZHN0bGVuOwo+ICvCoMKgwqDCoMKgwqAgaW50IGVycjsKPiArCj4gK8KgwqDCoMKg
+wqDCoCBtYXAgPSBtYXBfc3lzbWVtKGxvYWRhZGRyLCBsb2FkbGVuKTsKPiArCj4gK8KgwqDCoMKg
+wqDCoCAvKiBTZXQgdXAgc291cmNlIGJ1ZmZlciwgbWFrZSBzdXJlIERUIGluIHRoZSBidWZmZXIg
+aXMgOC0KPiBCeXRlcyBhbGlnbmVkICovCj4gK8KgwqDCoMKgwqDCoCBpZiAoIUlTX0FMSUdORUQo
+KHVpbnRwdHJfdCltYXAsIDgpKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmR0
+c3JjYnVmID0gYWxpZ25lZF9hbGxvYyg4LCBsb2FkbGVuKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBpZiAoIWZkdHNyY2J1ZikKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FTk9NRU07Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgbWVtY3B5KGZkdHNyY2J1ZiwgbWFwLCBsb2FkbGVuKTsKPiArwqDCoMKgwqDCoMKg
+IH0gZWxzZSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZmR0c3JjYnVmID0gbWFw
+Owo+ICvCoMKgwqDCoMKgwqAgfQo+ICsKPiArwqDCoMKgwqDCoMKgIC8qIFNldCB1cCBkZXN0aW5h
+dGlvbiBidWZmZXIsIG1ha2Ugc3VyZSBEVCBpbiB0aGUgYnVmZmVyIGlzCj4gOC1CeXRlcwo+IGFs
+aWduZWQgKi8KPiArwqDCoMKgwqDCoMKgIGZkdGRzdGxlbiA9IEFMSUdOKGZkdF90b3RhbHNpemUo
+ZmR0c3JjYnVmKSwgU1pfNEspOwo+ICvCoMKgwqDCoMKgwqAgZmR0ZHN0YnVmID0gYWxpZ25lZF9h
+bGxvYyg4LCBmZHRkc3RsZW4pOwo+ICvCoMKgwqDCoMKgwqAgaWYgKCFmZHRkc3RidWYpIHsKPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwcmludGYoImZhaWxlZCB0byBkdXBsaWNhdGUg
+RFRPIGJlZm9yZQo+IGFwcGxpY2F0aW9uXG4iKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBpZiAoIUlTX0FMSUdORUQoKHVpbnRwdHJfdCltYXAsIDgpKQo+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmcmVlKGZkdHNyY2J1Zik7Cj4gK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FTk9NRU07Cj4gK8KgwqDCoMKgwqDCoCB9
+Cj4gKwo+ICvCoMKgwqDCoMKgwqAgZXJyID0gZmR0X29wZW5faW50byhmZHRzcmNidWYsICpmZHRk
+c3RidWYsIGZkdGRzdGxlbik7Cj4gK8KgwqDCoMKgwqDCoCBpZiAoIUlTX0FMSUdORUQoKHVpbnRw
+dHJfdCltYXAsIDgpKQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZyZWUoZmR0c3Jj
+YnVmKTsKPiArwqDCoMKgwqDCoMKgIGlmIChlcnIgPCAwKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgcHJpbnRmKCJmYWlsZWQgb24gZmR0X29wZW5faW50byBmb3IgRFRPOiAlc1xu
+IiwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZkdF9zdHJl
+cnJvcihlcnIpKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gZXJyOwo+
+ICvCoMKgwqDCoMKgwqAgfQo+ICsKPiArwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+ICt9Owo+ICsj
+ZW5kaWYKPiArCj4gwqAgaW50IGJvb3RfZ2V0X2ZkdF9maXQoc3RydWN0IGJvb3RtX2hlYWRlcnMg
+KmltYWdlcywgdWxvbmcgYWRkciwKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIGNvbnN0IGNoYXIgKipmaXRfdW5hbWVwLCBjb25zdCBjaGFyCj4gKipmaXRfdW5hbWVf
+Y29uZmlncCwKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBh
+cmNoLCB1bG9uZyAqZGF0YXAsIHVsb25nICpsZW5wKQo+IEBAIC0yMzgwLDcgKzI0MjIsNyBAQCBp
+bnQgYm9vdF9nZXRfZmR0X2ZpdChzdHJ1Y3QgYm9vdG1faGVhZGVycwo+ICppbWFnZXMsCj4gdWxv
+bmcgYWRkciwKPiDCoMKgwqDCoMKgwqDCoCBjaGFyICpuZXh0X2NvbmZpZyA9IE5VTEw7Cj4gwqDC
+oMKgwqDCoMKgwqAgdWxvbmcgbG9hZCwgbGVuOwo+IMKgICNpZmRlZiBDT05GSUdfT0ZfTElCRkRU
+X09WRVJMQVkKPiAtwqDCoMKgwqDCoMKgIHVsb25nIG92bG9hZCwgb3ZsZW4sIG92Y29weWxlbjsK
+PiArwqDCoMKgwqDCoMKgIHVsb25nIG92bG9hZCwgb3ZsZW47Cj4gwqDCoMKgwqDCoMKgwqAgY29u
+c3QgY2hhciAqdWNvbmZpZzsKPiDCoMKgwqDCoMKgwqDCoCBjb25zdCBjaGFyICp1bmFtZTsKPiDC
+oMKgwqDCoMKgwqDCoCAvKgo+IEBAIC0yMzkxLDcgKzI0MzMsNyBAQCBpbnQgYm9vdF9nZXRfZmR0
+X2ZpdChzdHJ1Y3QgYm9vdG1faGVhZGVycwo+ICppbWFnZXMsCj4gdWxvbmcgYWRkciwKPiDCoMKg
+wqDCoMKgwqDCoMKgICogSW5zdGVhZCwgbGV0J3MgYmUgbGF6eSBhbmQgdXNlIHZvaWQgKi4KPiDC
+oMKgwqDCoMKgwqDCoMKgICovCj4gwqDCoMKgwqDCoMKgwqAgY2hhciAqb2ZfZmxhdF90cmVlOwo+
+IC3CoMKgwqDCoMKgwqAgdm9pZCAqYmFzZSwgKm92LCAqb3Zjb3B5ID0gTlVMTDsKPiArwqDCoMKg
+wqDCoMKgIHZvaWQgKmJhc2UsICpvdmNvcHkgPSBOVUxMOwo+IMKgwqDCoMKgwqDCoMKgIGludCBp
+LCBlcnIsIG5vZmZzZXQsIG92X25vZmZzZXQ7Cj4gwqAgI2VuZGlmCj4gCj4gQEAgLTI0ODksMTcg
+KzI1MzEsNyBAQCBpbnQgYm9vdF9nZXRfZmR0X2ZpdChzdHJ1Y3QgYm9vdG1faGVhZGVycwo+ICpp
+bWFnZXMsIHVsb25nIGFkZHIsCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0KPiDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZGVidWcoIiVzIGxvYWRlZCBhdCAweCUwOGx4
+IGxlbj0weCUwOGx4XG4iLAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHVuYW1lLCBvdmxvYWQsIG92bGVuKTsKPiAtwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvdiA9IG1hcF9zeXNtZW0ob3Zsb2FkLCBvdmxlbik7Cj4g
+LQo+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIG92Y29weWxlbiA9IEFMSUdOKGZkdF90
+b3RhbHNpemUob3YpLCBTWl80Syk7Cj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgb3Zj
+b3B5ID0gbWFsbG9jKG92Y29weWxlbik7Cj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+aWYgKCFvdmNvcHkpIHsKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgcHJpbnRmKCJmYWlsZWQgdG8gZHVwbGljYXRlIERUTyBiZWZvcmUKPiBhcHBsaWNhdGlv
+blxuIik7Cj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZk
+dF9ub2Zmc2V0ID0gLUVOT01FTTsKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgZ290byBvdXQ7Cj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+
+IC0KPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBlcnIgPSBmZHRfb3Blbl9pbnRvKG92
+LCBvdmNvcHksIG92Y29weWxlbik7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZXJy
+ID0gYm9vdF9nZXRfZmR0X2ZpdF9pbnRvX2J1ZmZlcihvdmxvYWQsIG92bGVuLAo+ICZvdmNvcHkp
+Owo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoZXJyIDwgMCkgewo+IMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJmYWlsZWQg
+b24gZmR0X29wZW5faW50byBmb3IgRFRPOgo+ICVzXG4iLAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmZHRfc3RyZXJyb3IoZXJy
+KSk7Cj4gQEAgLTI1MDcsOCArMjUzOSw3IEBAIGludCBib290X2dldF9mZHRfZml0KHN0cnVjdCBi
+b290bV9oZWFkZXJzCj4gKmltYWdlcywKPiB1bG9uZyBhZGRyLAo+IMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBvdXQ7Cj4gwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIH0KPiAKPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiYXNl
+ID0gbWFwX3N5c21lbShsb2FkLCBsZW4gKyBvdmxlbik7Cj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgZXJyID0gZmR0X29wZW5faW50byhiYXNlLCBiYXNlLCBsZW4gKyBvdmxlbik7Cj4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZXJyID0gYm9vdF9nZXRfZmR0X2ZpdF9pbnRv
+X2J1ZmZlcihsb2FkLCBsZW4gKyBvdmxlbiwKPiAmYmFzZSk7Cj4gwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGlmIChlcnIgPCAwKSB7Cj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCBwcmludGYoImZhaWxlZCBvbiBmZHRfb3Blbl9pbnRvOiAlc1xu
+IiwKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgZmR0X3N0cmVycm9yKGVycikpOwo+IC0tCj4gMi41MS4wClRoYW5rcyBmb3IgdGhl
+IHN1Z2dlc3Rpb24uIEkgdGVzdGVkIHlvdXIgcGF0Y2ggYW5kIGZvdW5kIHRoYXQsIGFsdGhvdWdo
+Cm92ZXJsYXlzIGFyZSBhcHBsaWVkIHRvIGFsaWduZWQgYnVmZmVycywgdGhlIENQVSBPUFAgb3Zl
+cmxheSBkb2VzIG5vdAphcHBlYXIgaW4gdGhlIGZpbmFsIGRldmljZSB0cmVlIGluIExpbnV4LiBX
+aXRoIG15IHByZXZpb3VzIHBhdGNoIGFib3ZlCih0aGUgYWxpZ25tZW50IGZpeCksIHRoZSBPUFAg
+b3ZlcmxheSB3b3Jrcy4gSXQgbG9va3MgbGlrZSB0aGUgbmV3CmJ1ZmZlciBtYW5hZ2VtZW50IGJy
+ZWFrcyBvdmVybGF5IGNoYWluaW5nIG9yIHRoZSBmaW5hbCBEVCBwb2ludGVyIGlzbuKAmXQKdXBk
+YXRlZCBjb3JyZWN0bHksIHNvIG92ZXJsYXlzIGFyZW7igJl0IHByZXNlbnQgaW4gdGhlIHJ1bm5p
+bmcgZGV2aWNlCnRyZWUuCkxldCBtZSBrbm93IGlmIHlvdSBoYXZlIHN1Z2dlc3Rpb25zIGZvciB0
+cmFja2luZyB0aGUgYnVmZmVyIG9yIGNoYWluaW5nCm92ZXJsYXlzIGRpZmZlcmVudGx5LgoKVGhh
+bmtzLApKYW1pZS4K
