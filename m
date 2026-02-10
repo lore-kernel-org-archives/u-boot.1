@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 544EBEB26F1
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 17:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2598FEB26F6
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 17:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BCA683CBD;
-	Tue, 10 Feb 2026 18:13:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3AF9183A47;
+	Tue, 10 Feb 2026 18:51:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZKmAKRs3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aN7DDA9u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FA0983A5A; Tue, 10 Feb 2026 18:13:50 +0100 (CET)
-Received: from mail-oa1-x41.google.com (mail-oa1-x41.google.com
- [IPv6:2001:4860:4864:20::41])
+ id 1F68383A5A; Tue, 10 Feb 2026 18:51:25 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A08CE83A47
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 18:13:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09BCC8367F
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 18:51:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x41.google.com with SMTP id
- 586e51a60fabf-40970f97638so611923fac.3
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 09:13:47 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-45f171cb842so52084b6e.1
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 09:51:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770743626; x=1771348426; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=ehkV21j/6IA+7kAXdThXnG2qSCrZWnpnwVVw4LCWuA4=;
- b=ZKmAKRs3kVVxP/4bz6hHqOCne67EOlT6dyXc08J67101d0jYOgcOUbd2snXCJRNESw
- 3LDx4K8FDWNsE2SawtG4YIGfQ/KRW92rAuJmchXYsqj5rr2YGogHom/UFspfudXeG1Tw
- Gq7KYbrAv9c7x+QYxdFE5UPo44OuFOt3Q8lJA=
+ d=konsulko.com; s=google; t=1770745882; x=1771350682; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LRDntqSgnxZHu811+5Umi91E09MYsWw3QDYRBfkCEF0=;
+ b=aN7DDA9u69b2m05cAj31wCgLX4/HQXHUBvFdC2/MqA8CtBMm4qU2wR1h2NEDS/jaJq
+ LO/VII2ffkX5hIzKsR90zPoskwTa4UPgvaA3rH3ISNHMtwspY0VM7EBC5xGkU5dniday
+ 0CKY+ZSZqSBhCsHegYO9b0pGKjEnv5K3Sp+Ok=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770743626; x=1771348426;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1770745882; x=1771350682;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ehkV21j/6IA+7kAXdThXnG2qSCrZWnpnwVVw4LCWuA4=;
- b=hxWIfPp+REu2JCDFKAl4n0nOG9Y5xLaTmyo3Ko3WINelByyR00Kemv/atbE+Fze0v2
- MrM/u2kCA3F8GMiUWxsSrDJPAr63p8bi+alGZNK3aEwCLtc1U7IDBvZiA+CiuqXR0VqT
- um88DQvgCKn2U17wpuPdXCLO1D0/vePy9yde7PmrA8LrfXn4fqtZBQbWl1nKjb1wKmkF
- A3p+6/68Gwvf6BERXq7j9bjgdPEBis2y2VAP3BxvkH5CAdqKAtxoxAkyFjYFqeX/sX+d
- TjExYC+NMPrteWEmKaH8g58/tHbkdIUia9u0oUhDtNSXyBnpzguSzowJ2sWgte/h9fq5
- iLxQ==
-X-Gm-Message-State: AOJu0YwUapf4op+RoeeokOcnpwi32R8mqpSNu+IDRlDReKMCC8dbSbjA
- B/oI7NAWWTEfRxUOgdMdzlrMPGpEbdAFA1ysegQB4HtpqVCaGReDYw9MPiBq7Q13H7cUvHGD6Er
- xxhm8
-X-Gm-Gg: AZuq6aLkS1YL0SqGphbnIbdGZNYpBlEGwUFZOtKzo41dGBCY/Y2XQwvtPmis6nxnff1
- ZAQ+xnao59jantuS3RTjDftGtXv3Ze5TTCg9CvCVdw3MpCSM0V/GejCRN1+E3679ueX5kSz2VGs
- RlljcQdtf3LfYFhCstCQk9ejZwlr1UmMXL+Me7WF5x5yl6eGxGTR0U91QtXgktFQcjcZRVlp3V0
- 7JBbyTBkhFUIYecLtvCK/dGswalOkpJtVFZSZvh2TvNl1vBGlxzbWHfrf8IBL5Jph9KSlTObJMh
- oVbKZlBaxfTiHR7lQEsAbaMCjw22GGwpXeSxR3MZgq3sBK5/K1nfAmcmjScmhWdrSDz42q8HJuF
- IUjksDFprPj7woCQ+QFN+sWi7OcybUPnEdiNYItMKNtG3LkxAdgx4VhHIyj3tFjk88LXamrOShP
- WjPVucn6xSQX36wcGNRFEMQ2/77i2t8Ym1/tqC+nt5UGubaBcYzPHsPUFslgjQwr9o/tTl8jyct
- 2Xtr3x5b19NkZ9SLOZ2ObJqPHfNp69Yy7BcwSchJFxUMlcMj51wvypEn/4ZZ9Ki
-X-Received: by 2002:a05:6870:9e92:b0:409:4c35:a3ca with SMTP id
- 586e51a60fabf-40a96c96a6amr8069575fac.15.1770743626228; 
- Tue, 10 Feb 2026 09:13:46 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ bh=LRDntqSgnxZHu811+5Umi91E09MYsWw3QDYRBfkCEF0=;
+ b=QR5vMmJUk/fRtypo5S1XQGS4XZbSczcB7SY0R/d+wMr9yvtVB641up1Ig+KdVSsLXP
+ XCJVEULUwZqPgKVzQnt8d+H3C6KZ6HumtB2r264wGHK5w8MLYN1FBzbySwC74nWJsXZH
+ nv2vII4pNDvgOijSd6Cc3Qy7nIYjHWoXfPwHzQKMcJ4ISv4571nR+f/mT7TnP4RpFoAj
+ jiuiJBkUW3Cjpdo5DG6sK65H1Wt2Zdf/6fA4ziP9KGkYj6X1tNHHgh6BndQ3i1d7qJ0+
+ fzaGm8TPsIVOP0o6W45h7Gp19QYklWQo7s5+H7/F7uUO5i4FpXNpLdTv3k+MdKhbOgBC
+ pAgA==
+X-Gm-Message-State: AOJu0Yyo/Y3ZsXMok3wTry/pAYMoW/hjyJcjvhiO7ruixthQIHi+rlYi
+ pMEjHkG3a/WnV/UDtY+I4I1o5rllfBXeUuudJLkcogKxeluyTEZ8yW8BuMUltAe3QkaSyV7i3BA
+ HlnXBkzs=
+X-Gm-Gg: AZuq6aJ1wvCFzIZC4jC5YnDe+EE/wHlfehTvpxs6QkBSpuv9VemFagiJ0CMafvAy2Zz
+ 9yhDn1+ScoMDSjsJ9N3YVdHWxTerForXqzS18ZYNSgpm3vWlu88lGEdj72oAvLgCIsbGf5M6MTG
+ dFxV3+P+xFK2CFSex+C60WXDNClp/muTcVDccszsXo7+YZR1DtfZiqyfHLr4v71XrH50rCBLkWr
+ gE/h5r8vypn/ew47+hpd2geDd7bTxemOlbRA+0pOoYFdfwNg3SbPw55gHodPvXTZmcSg72hMbBK
+ VDW898Lw+ZNKpdDEepJ1Xc43P63Pyy0dU7GcCUh3Geve9pS+mbuNZm9Hcmu/G9xozAd4lArgRHK
+ 3e4JsW16rqw7g1PceVONU5ZFAYTFoSepDZv1PtjH19DRwIUgDoS4lvt4cuNq3hFB02IwL3rAqo9
+ 5iX5Hey8p+GkYkMpGjXPpWBcMIdO4Ou9VCc0xELN4E2p+xWTNXFfxAeUEq/JhzE7osSOg37lTNy
+ wt2qiTrvR9LEW8HvKuGrGq0B4EirXlGO5/vx81UfPYM3lrv3FU=
+X-Received: by 2002:a05:6808:bc2:b0:450:826e:5df1 with SMTP id
+ 5614622812f47-46352ae43d2mr1464600b6e.19.1770745881786; 
+ Tue, 10 Feb 2026 09:51:21 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40a992eebd1sm10720933fac.2.2026.02.10.09.13.45
+ 5614622812f47-462feb4fac7sm8603932b6e.15.2026.02.10.09.51.20
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 09:13:45 -0800 (PST)
+ Tue, 10 Feb 2026 09:51:21 -0800 (PST)
+Date: Tue, 10 Feb 2026 11:51:19 -0600
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] MAINTAINERS: Remove a few inactive people
-Date: Tue, 10 Feb 2026 11:13:44 -0600
-Message-ID: <20260210171344.2723799-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Subject: [ANN] Updating next to v6.19-dts
+Message-ID: <20260210175119.GA2728096@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="coNDJZdr+gWSQTBZ"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,75 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It has been a long while since Jagan Teki, Joe Hershberger or Ramon
-Fried have been active in the community. We thank them for their time
-over the years. Remove them from the active maintainer list and mark a
-few things as Orphaned for now.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- MAINTAINERS | 13 +++----------
- 1 file changed, 3 insertions(+), 10 deletions(-)
+--coNDJZdr+gWSQTBZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 288b892f19b4..f8d4f6ee8b25 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -751,7 +751,6 @@ N:	stm
- N:	stm32
- 
- ARM SUNXI
--M:	Jagan Teki <jagan@amarulasolutions.com>
- M:	Andre Przywara <andre.przywara@arm.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-sunxi.git
-@@ -1147,8 +1146,7 @@ F:	tools/file2include.c
- F:	tools/mkeficapsule.c
- 
- ENVIRONMENT
--M:	Joe Hershberger <joe.hershberger@ni.com>
--S:	Maintained
-+S:	Orphaned
- F:	env/
- F:	include/env/
- F:	include/env*
-@@ -1462,8 +1460,6 @@ F:	drivers/mmc/
- N:	mmc
- 
- NETWORK
--M:	Joe Hershberger <joe.hershberger@ni.com>
--M:	Ramon Fried <rfried.dev@gmail.com>
- M:	Jerome Forissier <jerome.forissier@arm.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
-@@ -1549,8 +1545,7 @@ F:	drivers/pci/pcie_dw_imx.c
- F:	drivers/phy/phy-imx8m-pcie.c
- 
- PCI Endpoint
--M:	Ramon Fried <rfried.dev@gmail.com>
--S:	Maintained
-+S:	Orphaned
- F:	drivers/pci_endpoint/
- F:  include/pci_ep.h
- 
-@@ -1747,8 +1742,7 @@ S:	Maintained
- F:	drivers/rng/smccc_trng.c
- 
- SPI
--M:	Jagan Teki <jagan@amarulasolutions.com>
--S:	Maintained
-+S:	Orphaned
- T:	git https://source.denx.de/u-boot/custodians/u-boot-spi.git
- F:	drivers/spi/
- F:	include/spi*
-@@ -1762,7 +1756,6 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-nand-flash.git
- F:	drivers/mtd/nand/spi/
- 
- SPI-NOR
--M:	Jagan Teki <jagan@amarulasolutions.com>
- M:	Vignesh R <vigneshr@ti.com>
- R:	Tudor Ambarus <tudor.ambarus@linaro.org>
- S:	Maintained
--- 
-2.43.0
+Hey all,
 
+I'm planning to update the next branch to use the v6.19-dts tag shortly.
+Assuming nothing fails to build/run in CI, this will be going in to the
+next branch today or tomorrow.
+
+--=20
+Tom
+
+--coNDJZdr+gWSQTBZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYtwEAAKCRAr4qD1Cr/k
+Cs/LAQDJy/ckTNzdfY0ynd18wqDCyVEsI6YJlBmbDuEiatlmnAD/R26xHClKhO0P
+CX0kcTWocy/NAYx7ADpzrgCXibUKHA4=
+=5I35
+-----END PGP SIGNATURE-----
+
+--coNDJZdr+gWSQTBZ--
