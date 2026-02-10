@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC4EEA8128
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 15:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF5EEA8128
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 15:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01D7383DEC;
-	Tue, 10 Feb 2026 16:15:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B26483D3D;
+	Tue, 10 Feb 2026 16:15:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KODNkt9n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l0ywZ8iG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3F2483DEB; Tue, 10 Feb 2026 16:15:37 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 9E47B83DC9; Tue, 10 Feb 2026 16:15:40 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D376B83D3D
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 16:15:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A9DB83D3D
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 16:15:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-896f8feee14so26694906d6.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 07:15:35 -0800 (PST)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-50145d27b4cso65848031cf.2
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 07:15:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770736534; x=1771341334; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1770736537; x=1771341337; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IxwoNAXBchBGwKkkfE6HhqVQ931k6OijhfNrqcOWvjw=;
- b=KODNkt9noNyzdfURNJgLPt5WuI3xr+wOc/Wk7O7/fP0eCrWFvvsSl8mkrqHHndQ38H
- S4I46Ng00qEksUqe9WXnr23b0hsdr7cv9A1Ikc6dK/ZvBQ/pidpzkqg9SUDPO3f0IXde
- luJQhSAtM3wrZxcy7HnmvX/s8/Or41sLdDrZvvcDX5XK65rXt7u0zhgbVomvJAL6Dqy6
- 8k86SdV0xTkacKqYWC9B1tMIM0WK1uL1KoZwCZTDgHmp6Hx1HbDSMXYaQ0w/zLarR3g6
- ZuneDiMwDteAsA0yMLQz9O+GDStRZGFefEZVbUkBZIMbdDPWW6/Os1WQIjFiAAg+OjNo
- HPHw==
+ bh=uxel+wBoujwO3BG8buPT181W65nJpHxTI/y+o7/seYA=;
+ b=l0ywZ8iGol7v7PtnFrWqLqTZWWHo6B+4XRAMDGycFNhaC21zeWOGOwtbR5uhGcrXrP
+ CmtS1v2fEzsKA/Lj6WTkDGGQngUfuP+iLtCGFDF05HAwnYuUSyIBCRwNs0DyUSFA1Iwy
+ nWcjzCFh8H/zah85+IBAXZOGR0UAcx3+UQzl1dJ5u35K+QGRgzRlhgw71jSViekuxrM9
+ NTOtvYkrGu8LDjBUS12ANw7FJSVJal/10K22KdcP7BGwV3buopN18nBykh4EcJdBk9oT
+ gPe9/VKmeVso5JazAGrzyGXOI/ax4c70E6UqeiVGhD5PQXWEoOGVsJLs9ZCM5ch4aCWi
+ QH2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770736534; x=1771341334;
+ d=1e100.net; s=20230601; t=1770736537; x=1771341337;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=IxwoNAXBchBGwKkkfE6HhqVQ931k6OijhfNrqcOWvjw=;
- b=DtEjvrdg3BHm2Du0t/d0qV7Kg/cKEb3Ol7j/XgEJEP1Z4HginadR+avLac9KC+wRjy
- c2Yt9cFiwdHExc9mQPWN7473ei5CjSoRt0Nz/u2Yr+zV58joM/blNagqlz+tWjADwqxA
- LJDirwwj5eisfJgUEnrewMn7uHvc7TTHvYXZ4wDj92txk//9gNWgc3xdpg2NMjrLL1MN
- WxzmH7DGZum4hf2jis3077VNPnsXhEdYO01xoHTnaPHb98eBopFZwRpiHQQxmiC4kGCj
- qVosPlX5EMkevjE3xNM4/uoyYQ3FW99BWmqzyqi4kOz5OaQ48YBvQUAfuHp7jtJ+9GA+
- 0r9Q==
-X-Gm-Message-State: AOJu0YzjzHWdigUUVPdoDO8uy6CBUBYV29mSoW9c1eCR9BZAATo+vI5w
- YT6CXYmieVw6zSVMRO/6VC1QDGNOKYCsWV98wJb0Y7GjAeRj3MhTmy9bxLyJfA==
-X-Gm-Gg: AZuq6aIW7FL3uMoAm7YC1o5iIqABzcvd1F6OGKC5ciPMPIfmEJl/XANjsdDbzAKZGab
- jV8FWZ3c8yXcWZOsEGvTEH6xY1e8yMzhpBSYfTWf3dEsbGA3XqU7HhbaIlApHDGQ+EO/21cctRT
- c0ks3dX+dnHAhYtdx4r3ko6BIcpfR4lqXmO7YnbHN9yl0hvajm+39bZXvQRU80sLpXntRXlgw3M
- QhPWyTsJ02vBiCtSoOKnd9s+gCzCW2CcGZp6XFecldoUb0GoKoD+2VIt/SDAXQXnm+tTwCl0Bj1
- rCPoVip5dvc8Buu92jL2Ouezx+VTZmKjTcemcdewU6YXMrBOfTEaJMcg2Wmy2hZ49zhjy7mxgRl
- GJMr+VmFavkENrl3Mt9JIO5JjpBFMJ1KyUj41L4CIMOcwFwapKPqEOi08nOUxXA4M453yDlcXqH
- MHhbxQIOk12if4vit4vJB29w47akdTl1nXzbXA25JiaRXNMid+8h02xCgLTdUVK64Zsfra0tPTn
- mW2KrKcWGI=
-X-Received: by 2002:a05:6214:cc7:b0:894:6a89:5ee2 with SMTP id
- 6a1803df08f44-8970e2a4c60mr31007516d6.31.1770736534307; 
- Tue, 10 Feb 2026 07:15:34 -0800 (PST)
+ bh=uxel+wBoujwO3BG8buPT181W65nJpHxTI/y+o7/seYA=;
+ b=XE/FOrPlcvBTu1D7FBScUfr4o2jtE6kz+JBZtGT+Yls9vHrbcsOl02JCjeNJnrxwCU
+ zOJtWf6yPOEYHyq3T7bH9wxBgKngQ7/uUjEtCQtfhc2UhCQ48Azj5/1BEMDNZhCfmGFJ
+ YWTIQCJaWno3/j12NLi7iH69o+hQv2PS8Nn44xHEc3kaWV2ntAbLtOXsAYOTjw3JfrN8
+ yrEo88wSt3bdJUgHg+XTJLjKgoboywTuMBPYL4tPedD6wQHg7BHLrO1J+2LfWUll7hQm
+ 09/TxPp3vuog13Bg8fTb78G+sz0Z1nprJDcXh2U+60ZkwZ/4EhOk58tftGupo1LQsWX0
+ w2+g==
+X-Gm-Message-State: AOJu0YzaXPW3/t39OyjgtfeyCcVuoZtPo1AZKslmRe327ihYrj++Rv9d
+ BRa6gRED94r0QuonXfAjALaWI9EK5VDssYDxYsrxUmVtPzcKCZej4s2ZPVUwGg==
+X-Gm-Gg: AZuq6aL7Xu8A1bzPdMEloE6hLA0CCmEozxDQj9WK1vbfLZsRdymQVr1VD7Z7cvp4k2o
+ hRZv0cQY4uBRsd/WThwjQVU+hlEve8GdRQTSmRuH9dYP/FnXeD4Oxdkz9Ok5wfsdYfWxnj9VirH
+ JlKNsXF6HDEQJu3E8xvClGgvILhBAkWhAfiraiJ/5F7U3dKhqozST7D/7VjEAPVBLruaTn7VMAw
+ rRJfeJd/egrFmX7eiY8HKfH07zkL3BgxJlLjo95Ae3bqlYhsfDUNXtst6St/0melnQiENba3duS
+ uKavMLmCgXorGK10Quf1pTfAPd44fzI746bXqgeroQCywvTp0CHzioL+OPSJyM29SrMlmACQpC4
+ 7hVdXKUu0hGjTHVaCt3CSHR+ygDOzQMzXFZqak6cAXQ7sFZaxZ0f2nBDH+OyyB0H70UeF4jy4EL
+ 9bdXJF/f3xrNGcR2NjKevXjT+U90PqO3SzwybLNIVwj7YdMNJEst/oF3UHWERriVycSWruYkS/e
+ WgXcaSUAqg=
+X-Received: by 2002:a05:622a:65c3:b0:506:542d:2b3a with SMTP id
+ d75a77b69052e-506542d2f4emr106642611cf.11.1770736536594; 
+ Tue, 10 Feb 2026 07:15:36 -0800 (PST)
 Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
  [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8953c057751sm101019286d6.43.2026.02.10.07.15.33
+ 6a1803df08f44-8953c057751sm101019286d6.43.2026.02.10.07.15.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 07:15:33 -0800 (PST)
+ Tue, 10 Feb 2026 07:15:36 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -79,9 +79,9 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  xypron.glpk@gmx.de, randolph@andestech.com, dlan@gentoo.org,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
  quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com
-Subject: [PATCH v2 08/16] dts: k1: enable clocks in SPL
-Date: Tue, 10 Feb 2026 10:14:51 -0500
-Message-Id: <20260210151459.2348758-9-raymondmaoca@gmail.com>
+Subject: [PATCH v2 09/16] board: k1: initialize clock and serial devices in SPL
+Date: Tue, 10 Feb 2026 10:14:52 -0500
+Message-Id: <20260210151459.2348758-10-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260210151459.2348758-1-raymondmaoca@gmail.com>
 References: <20260210151459.2348758-1-raymondmaoca@gmail.com>
@@ -105,81 +105,73 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Enable clock nodes for K1 SoC in SPL.
+Initialize clock and serial devices in SPL. Otherwise, the device
+driver won't be loaded in SPL.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
 ---
- arch/riscv/dts/k1-spl.dts | 49 ++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 48 insertions(+), 1 deletion(-)
+ board/spacemit/k1/spl.c | 39 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
-diff --git a/arch/riscv/dts/k1-spl.dts b/arch/riscv/dts/k1-spl.dts
-index c7196c2d722..a74eaaf6a8f 100644
---- a/arch/riscv/dts/k1-spl.dts
-+++ b/arch/riscv/dts/k1-spl.dts
-@@ -11,15 +11,62 @@
- / {
- 	model = "spacemit k1 spl";
+diff --git a/board/spacemit/k1/spl.c b/board/spacemit/k1/spl.c
+index e15cf5f1abf..78f26616347 100644
+--- a/board/spacemit/k1/spl.c
++++ b/board/spacemit/k1/spl.c
+@@ -3,8 +3,45 @@
+  * Copyright (c) 2025-2026, RISCstar Ltd.
+  */
  
-+	aliases {
-+		console = &uart0;
-+		serial0 = &uart0;
-+	};
-+
- 	chosen {
- 		stdout-path = "serial0:115200n8";
- 	};
- };
++#include <dm/device.h>
++#include <dm/uclass.h>
++#include <log.h>
+ #include <spl.h>
  
-+&vctcxo_1m {
-+	status = "okay";
-+	bootph-pre-ram;
-+};
++static void clk_early_init(void)
++{
++	struct udevice *dev;
++	int ret;
 +
-+&vctcxo_24m {
-+	status = "okay";
-+	bootph-pre-ram;
-+};
++	ret = uclass_get_device_by_name(UCLASS_CLK, "clock-controller@d4090000", &dev);
++	if (ret)
++		panic("Fail to detect clock-controller@d4090000\n");
++	ret = uclass_get_device_by_name(UCLASS_CLK, "system-controller@d4050000", &dev);
++	if (ret)
++		panic("Fail to detect system-controller@d4050000\n");
++	ret = uclass_get_device_by_name(UCLASS_CLK, "system-controller@d4282800", &dev);
++	if (ret)
++		panic("Fail to detect system-controller@d4282800\n");
++	ret = uclass_get_device_by_name(UCLASS_CLK, "system-controller@d4015000", &dev);
++	if (ret)
++		panic("Fail to detect system-controller@d4015000\n");
 +
-+&vctcxo_3m {
-+	status = "okay";
-+	bootph-pre-ram;
-+};
++	if (device_active(dev))
++		log_debug("clk: device is active\n");
++	else
++		log_debug("clk: device not active, probing...\n");
++}
 +
-+&osc_32k {
-+	status = "okay";
-+	bootph-pre-ram;
-+};
++void serial_early_init(void)
++{
++	struct udevice *dev;
++	int ret;
 +
- &soc {
- 	bootph-all;
--	serial@d4017000 {
-+	system-controller@d4050000 {
- 		status = "okay";
- 		bootph-pre-ram;
- 	};
-+	clock-controller@d4090000 {
-+		status = "okay";
-+		bootph-pre-ram;
-+	};
-+	system-controller@d4282800 {
-+		status = "okay";
-+		bootph-pre-ram;
-+	};
-+	system-controller@d4015000 {
-+		clocks = <&osc_32k>, <&vctcxo_1m>, <&vctcxo_3m>,
-+			 <&vctcxo_24m>, <&syscon_mpmu CLK_PLL1_31P5>,
-+			 <&pll CLK_PLL1_D4>;
-+		clock-names = "osc", "vctcxo_1m", "vctcxo_3m",
-+			      "vctcxo_24m", "pll1_d78_31p5", "pll1_d4";
-+		status = "okay";
-+		bootph-pre-ram;
-+	};
-+};
++	ret = uclass_get_device(UCLASS_SERIAL, 0, &dev);
++	if (ret)
++		panic("Serial uclass init failed: %d\n", ret);
++}
 +
-+&uart0 {
-+	status = "okay";
-+	bootph-pre-ram;
- };
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+@@ -15,6 +52,8 @@ void board_init_f(ulong dummy)
+ 
+ 	riscv_cpu_setup();
+ 
++	clk_early_init();
++	serial_early_init();
+ 	preloader_console_init();
+ }
+ 
 -- 
 2.25.1
 
