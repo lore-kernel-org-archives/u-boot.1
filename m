@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E3D7EA8128
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 15:17:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DECE2EA8128
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 15:17:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E260983E48;
-	Tue, 10 Feb 2026 16:15:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D45E383E83;
+	Tue, 10 Feb 2026 16:15:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MZjKL36X";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dccDsxPe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86BD883CEE; Tue, 10 Feb 2026 16:15:54 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id E186F83E83; Tue, 10 Feb 2026 16:15:56 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4180F83E36
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 16:15:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75C7683CF3
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 16:15:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-8c70daf9c94so408940685a.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 07:15:52 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-896f632d206so27473086d6.0
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 07:15:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770736551; x=1771341351; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1770736553; x=1771341353; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vw10v5iT+joynmG/o1nypBreNeuPyz6M7jhyql+M1kU=;
- b=MZjKL36XunMXUOdccBVRQy+1yEyGvXnzAemZKBgPCVWT0fkLJcyfROPBLULixV2Iqk
- JC8RZRDdyOj7TiHOeuvj+BX1t+U0+YBfIWY/YRh/vF7vLhSvZ0gPHzt06actU/OO/bwC
- 8VVY/FXhhSqwf5+9dk7VpAAQ100/CjZkf/wd1TWbny730Jpbt7Hv4WKMtQDvuv+NLhP8
- 2Olfjr9k2/+L1yxmN/lDkZ9CVL6lQsdjAhG5Ifs05CDbvf2ZbHA+wtIGg9jGkpaMYf0S
- Lmha3tdiQSfYWWpPkViBRLateikdAAYOADJ34op3DVZAC/WBK+whM4UgxQleup3mWKOJ
- 0Buw==
+ bh=fAetLzgLBQ1yxUG2kf9nroCVFI+O5nNhtfX8H4GbgYA=;
+ b=dccDsxPeoaYEebF3fVA7hBY9syPB111uQBaM9iXWJylS6zycKSv5G4kzgxWlKpcsph
+ S03DGpMk4vrCqbhb8JARwyxOFZ/gkb8oTA/1VRFRca8dfwl2XY9PW6sopRrft2gM81mf
+ TaJM94NaeOL0QZmat0c839hn5N9IAzWdFuRl+MTXFNUiK6G2g9RF+kc5MfZ6lLmoX6U5
+ Q4cS5RITyzAF7v2WBd2/wyH4GRtyYqAWZC5fD1agZjwlBiygsWzyNkmqLRnzLM4F3w7z
+ tG+Phh66j0wseospZPqTeHAHS1MpwYNwOmmKbnCKmwPrNsH+sboXtW6qHSOp4zIOdKKZ
+ 6sfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770736551; x=1771341351;
+ d=1e100.net; s=20230601; t=1770736553; x=1771341353;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Vw10v5iT+joynmG/o1nypBreNeuPyz6M7jhyql+M1kU=;
- b=RSoGoJqAmkL+EIfjT1rKu1YxXYOEFYZn4DRtWIGSFfTwZvgEwp4Zbqn+R6ufIwutHT
- VIxNXVPoZbfM0ma5ExCCg5OxfCFmpfMfUpAMIDrRuCySE+Ct0dvqTJuKY2o2A58ApUd9
- Q40Kzkf71svC4n6NkidO5ygpgNSge0PGATjfWhwNt4NiF4tAa7D27y0v/d9JynfoA35O
- hnky1svH6o3+UzsP0WoIheyPLCT9aIrmmcP1CrS/VaxPmbz4m74nkObvYX75T9bXtiWv
- kZuKss6wmqjUrciwuKdX8vroeRsuZAHmoiqiV0WWuvIbOnLai0yXTmXE2jMQNxW/CnnZ
- /Yew==
-X-Gm-Message-State: AOJu0YzMfXPyQWho2H7LhwWjYOZC9m4rXref0RWVSNHfLS15uczPIIvN
- iy7+YEiR3pNzI8y+X+ssmbsD7qn/rnJZPgFO6Fz9r0UkpEwhrrpfJn7X0M7+5Q==
-X-Gm-Gg: AZuq6aKG2WbsvcC2GAeH5XBWx4Ne04rRGG16sg3uaLtbzNYjE0jMlSqrLKIjnrq/vFA
- Ua2ZGDrISwr6x6M77OtqFwbtWsr9ArT6YCqwW2qx8RpDZGRCqPYhkHq3OY785diT6rs+2PeuKdF
- dQU7mUOJihDyEfUa2MzBBATzXURvmnBwaaNweY/y4eFO1q/DR3gNaGeIvTAFFr7arF/C0nJE4ml
- lv853Vgv0TuEMI7vyOiLOKt8r1hEzKOXnZAqUtq/BjAqNUU1O5Gc2j7FylY+Fm7LSYKKVsFh9aX
- 8WTqmaeCipY790PInCegd9NklfTELggyzqlXpkVS/nVttgCV8VhP2EKlkkiIVvrRr9/+oA5ttt4
- snwZFD2ynKsYin08M3fbbLbj/naWw6Lum1nR8YBpI6VZGPjrvGaBMrjt5mbi77eEqgRvly0lI6L
- tfv4kbvZsthJTgXvlcolQ4eDlOR00CPgDcWrsSbWO7RJD1cYemegJmvPwCbgqwj84RlzxJoUrY+
- n9IrK7z7O8=
-X-Received: by 2002:a05:620a:1a11:b0:8c5:c99d:b2c with SMTP id
- af79cd13be357-8caef40934bmr1938046285a.34.1770736550653; 
- Tue, 10 Feb 2026 07:15:50 -0800 (PST)
+ bh=fAetLzgLBQ1yxUG2kf9nroCVFI+O5nNhtfX8H4GbgYA=;
+ b=a+oglbNFDa3V++Il/O3sHuYZbXNgzB4hhZSVEoWHVQ+yniR1mcxDRCsLyHnPG89LXa
+ ZlxYYoRyrv0+2oXKhOyEoNcQQjhRnfW+iRwSMUE6P7h6xhBp7ZgBcOmb3gt2P66KaoGj
+ nvU9baryNsMJo8VPcRIUNUoqlGR/we5lK6wd1piozGi3AG1Dl+ZdE2Y7f+2d6QQ4WucK
+ iDCdVrakMGfxUDxr30mukgENLGCbPd+lZE8IWtS7HmYT6p1RGWYL8YCi6fZtbvce0HUu
+ yrS1DBhA89swCxGRE9Y6TfhnfRw1gk0wTb3/y6Uk9Sed3hEKqpUHh+G1IJCQPlS13mKd
+ KG7A==
+X-Gm-Message-State: AOJu0YzsudbzINW8Nh9el4wJcW9svwhCr2c2u0w8i0QiPoyULB8Qutjh
+ NssQXbKgmzRU5G5hUK90F9wzkx8p6TsTzWOZDIh0zDO7e2kaWI684EgXd/GPiw==
+X-Gm-Gg: AZuq6aLRwS0GrV6Nr3eN9Ee6IwTjQtCpx7RTSZnfnNiKumJtX8kUN8yy4XefAkpw2rK
+ PP4dothMhdipY/zU1XlZUfRgya7vFzuIzyYkXZdS9x7n2vZzW2KaRl59mGRo4A0wzZvB+Gp3dGz
+ T1s5EV3L9WbIXNC7olKTrfC+iQ84pVyATJzV3CatQpAFbHDdpzMooVwzSB4Osl01Ty9hDxxho00
+ CX62O5EOPeSF/zTJMiGD9skO/RBsgAeDqV9mDtX/fxgHmbkJFeCNkGWRAk9i1PAwue4lEqRxurg
+ drVARZk21dqnoIjFVYSdajLb3uh+dWq7kx6Ax8RYnP4f295HldZecBV2ZD9BZnYK/vrXXXSiqxg
+ fNFV+k2yKTl3PotyQ0vGoIbInVU3/pMQjm9P+Osh1s/2Vx66+BGZl0pVHAFUBtcbVoZtE2V6eo1
+ JgoOeJJFvfKCrVGYGpgI4CjS7gMsae3OuT+MPHR2d5gEdEXjiMJPUojVYGqriWvxdeAwYcY/Zd3
+ aF59nn01n8=
+X-Received: by 2002:a05:6214:1d29:b0:895:d679:ecde with SMTP id
+ 6a1803df08f44-8970d8bbc5cmr35102096d6.27.1770736552990; 
+ Tue, 10 Feb 2026 07:15:52 -0800 (PST)
 Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
  [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-8953c057751sm101019286d6.43.2026.02.10.07.15.49
+ 6a1803df08f44-8953c057751sm101019286d6.43.2026.02.10.07.15.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 07:15:50 -0800 (PST)
+ Tue, 10 Feb 2026 07:15:52 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
@@ -78,11 +78,10 @@ Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
  lukma@denx.de, hs@nabladev.com, jh80.chung@samsung.com, peng.fan@nxp.com,
  xypron.glpk@gmx.de, randolph@andestech.com, dlan@gentoo.org,
  junhui.liu@pigmoral.tech, neil.armstrong@linaro.org,
- quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com,
- Guodong Xu <guodong.xu@riscstar.com>
-Subject: [PATCH v2 14/16] power: pmic: add support for Spacemit P1 PMIC
-Date: Tue, 10 Feb 2026 10:14:57 -0500
-Message-Id: <20260210151459.2348758-15-raymondmaoca@gmail.com>
+ quentin.schulz@cherry.de, samuel@sholland.org, raymondmaoca@gmail.com
+Subject: [PATCH v2 15/16] power: regulator: add support for Spacemit P1 SoC
+Date: Tue, 10 Feb 2026 10:14:58 -0500
+Message-Id: <20260210151459.2348758-16-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260210151459.2348758-1-raymondmaoca@gmail.com>
 References: <20260210151459.2348758-1-raymondmaoca@gmail.com>
@@ -106,329 +105,515 @@ X-Virus-Status: Clean
 
 From: Raymond Mao <raymond.mao@riscstar.com>
 
-Spacemit's PMIC is used by Spacemit K1 SoC. It contains voltage
-regulators, GPIOs and Watchdog.
+Support voltage regulator for Spacemit P1 SoC. It contains 6 BUCKs
+and 11 LDOs.
 
 Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
-Signed-off-by: Guodong Xu <guodong.xu@riscstar.com>
 ---
- drivers/power/pmic/Kconfig            |  17 +++
- drivers/power/pmic/Makefile           |   1 +
- drivers/power/pmic/pmic_spacemit_p1.c |  94 +++++++++++++++
- include/power/spacemit_p1.h           | 163 ++++++++++++++++++++++++++
- 4 files changed, 275 insertions(+)
- create mode 100644 drivers/power/pmic/pmic_spacemit_p1.c
- create mode 100644 include/power/spacemit_p1.h
+ drivers/power/regulator/Kconfig               |  15 +
+ drivers/power/regulator/Makefile              |   1 +
+ .../power/regulator/spacemit_p1_regulator.c   | 460 ++++++++++++++++++
+ 3 files changed, 476 insertions(+)
+ create mode 100644 drivers/power/regulator/spacemit_p1_regulator.c
 
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index b1a5b1c2a1f..19a0c4a77dd 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -433,6 +433,23 @@ config PMIC_RAA215300
- 	  support and several voltage regulators. For now, this driver simply
- 	  allows register access and will bind the sysreset driver
- 	  (CONFIG_SYSRESET_RAA215300) if it is enabled.
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index c6da459a212..182510581c0 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -520,3 +520,18 @@ config DM_REGULATOR_CPCAP
+ 	REGULATOR CPCAP. The driver supports both DC-to-DC Step-Down Switching
+ 	(SW) Regulators and Low-Dropout Linear (LDO) Regulators	found in CPCAP
+ 	PMIC and implements get/set api for voltage and state.
 +
-+config PMIC_SPACEMIT_P1
-+	bool "Enable driver for Spacemit P1 power management chip"
-+	depends on DM_PMIC
++config DM_REGULATOR_SPACEMIT_P1
++	bool "Enable driver for Spacemit P1 PMIC regulators"
++	depends on DM_REGULATOR && PMIC_SPACEMIT_P1
 +	help
-+	  The P1 PMIC integrates multiple functions including
-+	  voltage regulators, a watchdog timer, GPIO interfaces, and a
-+	  real-time clock.
++	  Enable implementation of driver-model regulator uclass features
++	  for regulator P1. The driver supports BUCKs, LDOs and SWITCHes.
 +
-+config SPL_PMIC_SPACEMIT_P1
-+	bool "Enable driver for Spacemit P1 power management chip in SPL"
-+	depends on SPL_DM_PMIC
++config SPL_DM_REGULATOR_SPACEMIT_P1
++	bool "Enable driver for Spacemit P1 PMIC regulators in SPL"
++	depends on SPL_DM_REGULATOR && SPL_PMIC_SPACEMIT_P1
 +	help
-+	  The P1 PMIC integrates multiple functions including
-+	  voltage regulators, a watchdog timer, GPIO interfaces, and a
-+	  real-time clock.
-+
- endif
- 
- config PMIC_TPS65217
-diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-index 6bebffb05a6..dfe60223f00 100644
---- a/drivers/power/pmic/Makefile
-+++ b/drivers/power/pmic/Makefile
-@@ -39,6 +39,7 @@ obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
- obj-$(CONFIG_PMIC_RAA215300) += raa215300.o
- obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
- obj-$(CONFIG_$(PHASE_)DM_PMIC_CPCAP) += cpcap.o
-+obj-$(CONFIG_$(PHASE_)PMIC_SPACEMIT_P1) += pmic_spacemit_p1.o
- 
- ifeq ($(CONFIG_$(PHASE_)POWER_LEGACY),y)
- obj-$(CONFIG_POWER_LTC3676) += pmic_ltc3676.o
-diff --git a/drivers/power/pmic/pmic_spacemit_p1.c b/drivers/power/pmic/pmic_spacemit_p1.c
++	  Enable implementation of driver-model regulator uclass features
++	  for regulator P1 in SPL. The driver supports BUCKs, LDOs and
++	  SWITCHes.
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index ee8f56ea3b9..2a586e42f5c 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -47,3 +47,4 @@ obj-$(CONFIG_$(PHASE_)DM_REGULATOR_ANATOP) += anatop_regulator.o
+ obj-$(CONFIG_DM_REGULATOR_TPS65219) += tps65219_regulator.o
+ obj-$(CONFIG_REGULATOR_RZG2L_USBPHY) += rzg2l-usbphy-regulator.o
+ obj-$(CONFIG_$(PHASE_)DM_REGULATOR_CPCAP) += cpcap_regulator.o
++obj-$(CONFIG_$(PHASE_)DM_REGULATOR_SPACEMIT_P1) += spacemit_p1_regulator.o
+diff --git a/drivers/power/regulator/spacemit_p1_regulator.c b/drivers/power/regulator/spacemit_p1_regulator.c
 new file mode 100644
-index 00000000000..46c5926874c
+index 00000000000..ab3ca489f0b
 --- /dev/null
-+++ b/drivers/power/pmic/pmic_spacemit_p1.c
-@@ -0,0 +1,94 @@
++++ b/drivers/power/regulator/spacemit_p1_regulator.c
+@@ -0,0 +1,460 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2025-2026 RISCstar Ltd.
 + */
 +
 +#include <dm.h>
++#include <dm/lists.h>
++#include <errno.h>
++#include <log.h>
 +#include <power/pmic.h>
++#include <power/regulator.h>
 +#include <power/spacemit_p1.h>
 +
-+static int pmic_p1_reg_count(struct udevice *dev)
-+{
-+	return P1_MAX_REGS;
-+}
-+
-+static int pmic_p1_write(struct udevice *dev, uint reg, const u8 *buffer,
-+			 int len)
-+{
-+	int ret;
-+
-+	ret = dm_i2c_write(dev, reg, buffer, len);
-+	if (ret)
-+		pr_err("%s write error on register %02x\n", dev->name, reg);
-+
-+	return ret;
-+}
-+
-+static int pmic_p1_read(struct udevice *dev, uint reg, u8 *buffer,
-+			int len)
-+{
-+	int ret;
-+
-+	ret = dm_i2c_read(dev, reg, buffer, len);
-+	if (ret)
-+		pr_err("%s read error on register %02x\n", dev->name, reg);
-+
-+	return ret;
-+}
-+
-+static const struct pmic_child_info p1_children_info[] = {
-+	{ .prefix = "buck",		.driver = P1_BUCK_DRIVER },
-+	{ .prefix = "aldo",		.driver = P1_ALDO_DRIVER },
-+	{ .prefix = "dldo",		.driver = P1_DLDO_DRIVER },
-+	{ },
++struct p1_reg_info {
++	uint min_uv;
++	uint step_uv;
++	u8 vsel_reg;
++	u8 vsel_sleep_reg;
++	u8 config_reg;
++	u8 vsel_mask;
++	u8 min_sel;
++	u8 max_sel;
 +};
 +
-+static int pmic_p1_bind(struct udevice *dev)
++static const struct p1_reg_info p1_bucks[] = {
++	/* BUCK 1 */
++	{ 500000,  5000, P1_BUCK_VSEL(1), P1_BUCK_SVSEL(1), P1_BUCK_CTRL(1),
++	  BUCK_VSEL_MASK, 0x00, 0xaa },
++	{ 1375000, 25000, P1_BUCK_VSEL(1), P1_BUCK_SVSEL(1), P1_BUCK_CTRL(1),
++	  BUCK_VSEL_MASK, 0xab, 0xfe },
++	/* BUCK 2 */
++	{ 500000,  5000, P1_BUCK_VSEL(2), P1_BUCK_SVSEL(2), P1_BUCK_CTRL(2),
++	  BUCK_VSEL_MASK, 0x00, 0xaa },
++	{ 1375000, 25000, P1_BUCK_VSEL(2), P1_BUCK_SVSEL(2), P1_BUCK_CTRL(2),
++	  BUCK_VSEL_MASK, 0xab, 0xfe },
++	/* BUCK 3 */
++	{ 500000,  5000, P1_BUCK_VSEL(3), P1_BUCK_SVSEL(3), P1_BUCK_CTRL(3),
++	  BUCK_VSEL_MASK, 0x00, 0xaa },
++	{ 1375000, 25000, P1_BUCK_VSEL(3), P1_BUCK_SVSEL(3), P1_BUCK_CTRL(3),
++	  BUCK_VSEL_MASK, 0xab, 0xfe },
++	/* BUCK 4 */
++	{ 500000,  5000, P1_BUCK_VSEL(4), P1_BUCK_SVSEL(4), P1_BUCK_CTRL(4),
++	  BUCK_VSEL_MASK, 0x00, 0xaa },
++	{ 1375000, 25000, P1_BUCK_VSEL(4), P1_BUCK_SVSEL(4), P1_BUCK_CTRL(4),
++	  BUCK_VSEL_MASK, 0xab, 0xfe },
++	/* BUCK 5 */
++	{ 500000,  5000, P1_BUCK_VSEL(5), P1_BUCK_SVSEL(5), P1_BUCK_CTRL(5),
++	  BUCK_VSEL_MASK, 0x00, 0xaa },
++	{ 1375000, 25000, P1_BUCK_VSEL(5), P1_BUCK_SVSEL(5), P1_BUCK_CTRL(5),
++	  BUCK_VSEL_MASK, 0xab, 0xfe },
++	/* BUCK 6 */
++	{ 500000,  5000, P1_BUCK_VSEL(6), P1_BUCK_SVSEL(6), P1_BUCK_CTRL(6),
++	  BUCK_VSEL_MASK, 0x00, 0xaa },
++	{ 1375000, 25000, P1_BUCK_VSEL(6), P1_BUCK_SVSEL(6), P1_BUCK_CTRL(6),
++	  BUCK_VSEL_MASK, 0xab, 0xfe },
++};
++
++static const struct p1_reg_info p1_aldos[] = {
++	/* ALDO 1 */
++	{ 500000, 25000, P1_ALDO_VOLT(1), P1_ALDO_SVOLT(1), P1_ALDO_CTRL(1),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* ALDO 2 */
++	{ 500000, 25000, P1_ALDO_VOLT(2), P1_ALDO_SVOLT(2), P1_ALDO_CTRL(2),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* ALDO 3 */
++	{ 500000, 25000, P1_ALDO_VOLT(3), P1_ALDO_SVOLT(3), P1_ALDO_CTRL(3),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* ALDO 4 */
++	{ 500000, 25000, P1_ALDO_VOLT(4), P1_ALDO_SVOLT(4), P1_ALDO_CTRL(4),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++};
++
++static const struct p1_reg_info p1_dldos[] = {
++	/* DLDO 1 */
++	{ 500000, 25000, P1_DLDO_VOLT(1), P1_DLDO_SVOLT(1), P1_DLDO_CTRL(1),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* DLDO 2 */
++	{ 500000, 25000, P1_DLDO_VOLT(2), P1_DLDO_SVOLT(2), P1_DLDO_CTRL(2),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* DLDO 3 */
++	{ 500000, 25000, P1_DLDO_VOLT(3), P1_DLDO_SVOLT(3), P1_DLDO_CTRL(3),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* DLDO 4 */
++	{ 500000, 25000, P1_DLDO_VOLT(4), P1_DLDO_SVOLT(4), P1_DLDO_CTRL(4),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* DLDO 5 */
++	{ 500000, 25000, P1_DLDO_VOLT(5), P1_DLDO_SVOLT(5), P1_DLDO_CTRL(5),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* DLDO 6 */
++	{ 500000, 25000, P1_DLDO_VOLT(6), P1_DLDO_SVOLT(6), P1_DLDO_CTRL(6),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++	/* DLDO 7 */
++	{ 500000, 25000, P1_DLDO_VOLT(7), P1_DLDO_SVOLT(7), P1_DLDO_CTRL(7),
++	  ALDO_VSEL_MASK, 0x0b, 0x7f },
++};
++
++static const struct p1_reg_info *get_buck_reg(struct udevice *pmic,
++					      int idx, int uvolt)
 +{
-+	const struct pmic_child_info *p1_children_info =
-+			(struct pmic_child_info *)dev_get_driver_data(dev);
-+	ofnode regulators_node;
-+	int children;
++	if (idx < 0)
++		return NULL;
++	if (uvolt < 1375000)
++		return &p1_bucks[(idx - 1) * 2 + 0];
++	return &p1_bucks[(idx - 1) * 2 + 1];
++}
 +
-+	regulators_node = dev_read_subnode(dev, "regulators");
-+	if (!ofnode_valid(regulators_node)) {
-+		debug("%s regulators subnode not found\n", dev->name);
-+		return -EINVAL;
-+	}
++static const struct p1_reg_info *get_aldo_reg(struct udevice *pmic,
++					      int idx, int uvolt)
++{
++	return &p1_aldos[idx];
++}
 +
-+	children = pmic_bind_children(dev, regulators_node,
-+				      p1_children_info);
-+	if (!children)
-+		debug("%s has no children (regulators)\n", dev->name);
++static const struct p1_reg_info *get_dldo_reg(struct udevice *pmic,
++					      int idx, int uvolt)
++{
++	return &p1_dldos[idx];
++}
++
++static int buck_get_value(struct udevice *dev)
++{
++	const struct dm_pmic_ops *ops = device_get_ops(dev->parent);
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	if (!ops || !ops->read)
++		return -ENOSYS;
++
++	info = get_buck_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++	ret = pmic_reg_read(dev->parent, info->vsel_reg);
++	if (ret < 0)
++		return ret;
++	val = ret & info->vsel_mask;
++	while (val > info->max_sel)
++		info++;
++
++	return info->min_uv + (val - info->min_sel) * info->step_uv;
++}
++
++static int buck_set_value(struct udevice *dev, int uvolt)
++{
++	const struct dm_pmic_ops *ops = device_get_ops(dev->parent);
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	if (!ops || !ops->write)
++		return -ENOSYS;
++
++	info = get_buck_reg(dev->parent, dev->driver_data, uvolt);
++	if (!info)
++		return -ENOENT;
++	val = (uvolt - info->min_uv);
++	val = val / info->step_uv;
++	val += info->min_sel;
++	ret = pmic_reg_write(dev->parent, info->vsel_reg, val);
++	if (ret < 0)
++		return ret;
++	return 0;
++}
++
++static int buck_get_enable(struct udevice *dev)
++{
++	const struct p1_reg_info *info;
++	int ret;
++
++	info = get_buck_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->config_reg);
++	if (ret < 0)
++		return ret;
++	return ret & BUCK_EN_MASK;
++}
++
++static int buck_set_enable(struct udevice *dev, bool enable)
++{
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	info = get_buck_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->config_reg);
++	if (ret < 0)
++		return ret;
++	val = (unsigned int)ret;
++	val &= BUCK_EN_MASK;
++
++	if (enable == val)
++		return 0;
++
++	val = enable;
++	ret = pmic_clrsetbits(dev->parent, info->config_reg, BUCK_EN_MASK, val);
++	if (ret < 0)
++		return ret;
 +
 +	return 0;
 +}
 +
-+static int pmic_p1_probe(struct udevice *dev)
++static const struct dm_regulator_ops p1_buck_ops = {
++	.get_value  = buck_get_value,
++	.set_value  = buck_set_value,
++	.get_enable = buck_get_enable,
++	.set_enable = buck_set_enable,
++};
++
++static int p1_buck_probe(struct udevice *dev)
 +{
++	struct dm_regulator_uclass_plat *uc_pdata;
++
++	uc_pdata = dev_get_uclass_plat(dev);
++
++	uc_pdata->type = REGULATOR_TYPE_BUCK;
++	uc_pdata->mode_count = 0;
++
 +	return 0;
 +}
 +
-+static struct dm_pmic_ops pmic_p1_ops = {
-+	.reg_count	= pmic_p1_reg_count,
-+	.read		= pmic_p1_read,
-+	.write		= pmic_p1_write,
++U_BOOT_DRIVER(p1_buck) = {
++	.name		= P1_BUCK_DRIVER,
++	.id		= UCLASS_REGULATOR,
++	.ops		= &p1_buck_ops,
++	.probe		= p1_buck_probe,
 +};
 +
-+static const struct udevice_id pmic_p1_match[] = {
-+	{
-+		.compatible = "spacemit,p1",
-+		.data = (ulong)&p1_children_info,
-+	}, {
-+		/* sentinel */
-+	}
++static int aldo_get_value(struct udevice *dev)
++{
++	const struct dm_pmic_ops *ops = device_get_ops(dev->parent);
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	if (!ops || !ops->read)
++		return -ENOSYS;
++
++	info = get_aldo_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->vsel_reg);
++	if (ret < 0)
++		return ret;
++
++	val = ret & info->vsel_mask;
++	while (val > info->max_sel)
++		info++;
++
++	return info->min_uv + (val - info->min_sel) * info->step_uv;
++}
++
++static int aldo_set_value(struct udevice *dev, int uvolt)
++{
++	const struct dm_pmic_ops *ops = device_get_ops(dev->parent);
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	if (!ops || !ops->write)
++		return -ENOSYS;
++
++	info = get_aldo_reg(dev->parent, dev->driver_data, uvolt);
++	if (!info)
++		return -ENOENT;
++	val = (uvolt - info->min_uv);
++	val = val / info->step_uv;
++	val += info->min_sel;
++	ret = pmic_reg_write(dev->parent, info->vsel_reg, val);
++	if (ret < 0)
++		return ret;
++	return 0;
++}
++
++static int aldo_get_enable(struct udevice *dev)
++{
++	const struct p1_reg_info *info;
++	int ret;
++
++	info = get_aldo_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->config_reg);
++	if (ret < 0)
++		return ret;
++	return ret & ALDO_EN_MASK;
++}
++
++static int aldo_set_enable(struct udevice *dev, bool enable)
++{
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	info = get_aldo_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->config_reg);
++	if (ret < 0)
++		return ret;
++	val = (unsigned int)ret;
++	val &= ALDO_EN_MASK;
++
++	if (enable == val)
++		return 0;
++
++	val = enable;
++	ret = pmic_clrsetbits(dev->parent, info->config_reg, ALDO_EN_MASK, val);
++	if (ret < 0)
++		return ret;
++
++	return 0;
++}
++
++static const struct dm_regulator_ops p1_aldo_ops = {
++	.get_value	= aldo_get_value,
++	.set_value	= aldo_set_value,
++	.get_enable	= aldo_get_enable,
++	.set_enable	= aldo_set_enable,
 +};
 +
-+U_BOOT_DRIVER(pmic_p1) = {
-+	.name		= "pmic_p1",
-+	.id		= UCLASS_PMIC,
-+	.of_match	= pmic_p1_match,
-+	.bind		= pmic_p1_bind,
-+	.probe		= pmic_p1_probe,
-+	.ops		= &pmic_p1_ops,
-+};
-diff --git a/include/power/spacemit_p1.h b/include/power/spacemit_p1.h
-new file mode 100644
-index 00000000000..ef5a45e8cec
---- /dev/null
-+++ b/include/power/spacemit_p1.h
-@@ -0,0 +1,163 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2025-2026 RISCstar Ltd.
-+ */
++static int p1_aldo_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_pdata;
 +
-+#ifndef __SPACEMIT_P1_H_
-+#define __SPACEMIT_P1_H_
++	uc_pdata = dev_get_uclass_plat(dev);
 +
-+#define P1_MAX_REGS			0xA8
++	uc_pdata->type = REGULATOR_TYPE_LDO;
++	uc_pdata->mode_count = 0;
 +
-+#define P1_REG_ID			0x0
++	return 0;
++}
 +
-+#define P1_ID				0x2
-+
-+#define P1_REG_BUCK1_CTRL		0x47
-+#define P1_REG_BUCK2_CTRL		0x4a
-+#define P1_REG_BUCK3_CTRL		0x4d
-+#define P1_REG_BUCK4_CTRL		0x50
-+#define P1_REG_BUCK5_CTRL		0x53
-+#define P1_REG_BUCK6_CTRL		0x56
-+
-+#define P1_REG_BUCK1_VSEL		0x48
-+#define P1_REG_BUCK2_VSEL		0x4b
-+#define P1_REG_BUCK3_VSEL		0x4e
-+#define P1_REG_BUCK4_VSEL		0x51
-+#define P1_REG_BUCK5_VSEL		0x54
-+#define P1_REG_BUCK6_VSEL		0x57
-+
-+#define P1_REG_BUCK1_SVSEL		0x49
-+#define P1_REG_BUCK2_SVSEL		0x4c
-+#define P1_REG_BUCK3_SVSEL		0x4f
-+#define P1_REG_BUCK4_SVSEL		0x52
-+#define P1_REG_BUCK5_SVSEL		0x55
-+#define P1_REG_BUCK6_SVSEL		0x58
-+
-+#define P1_BUCK_CTRL(x)			(0x47 + ((x) - 1) * 3)
-+#define P1_BUCK_VSEL(x)			(0x48 + ((x) - 1) * 3)
-+#define P1_BUCK_SVSEL(x)		(0x49 + ((x) - 1) * 3)
-+
-+#define BUCK_VSEL_MASK			0xff
-+#define BUCK_EN_MASK			0x1
-+#define BUCK_SVSEL_MASK			0xff
-+
-+#define P1_REG_ALDO1_CTRL		0x5b
-+#define P1_REG_ALDO2_CTRL		0x5e
-+#define P1_REG_ALDO3_CTRL		0x61
-+#define P1_REG_ALDO4_CTRL		0x64
-+
-+#define P1_REG_ALDO1_VOLT		0x5c
-+#define P1_REG_ALDO2_VOLT		0x5f
-+#define P1_REG_ALDO3_VOLT		0x62
-+#define P1_REG_ALDO4_VOLT		0x65
-+
-+#define P1_REG_ALDO1_SVOLT		0x5d
-+#define P1_REG_ALDO2_SVOLT		0x60
-+#define P1_REG_ALDO3_SVOLT		0x63
-+#define P1_REG_ALDO4_SVOLT		0x66
-+
-+#define P1_ALDO_CTRL(x)			(0x5b + ((x) - 1) * 3)
-+#define P1_ALDO_VOLT(x)			(0x5c + ((x) - 1) * 3)
-+#define P1_ALDO_SVOLT(x)		(0x5d + ((x) - 1) * 3)
-+
-+#define ALDO_SVSEL_MASK			0x7f
-+#define ALDO_EN_MASK			0x1
-+#define ALDO_VSEL_MASK			0x7f
-+
-+#define P1_REG_DLDO1_CTRL		0x67
-+#define P1_REG_DLDO2_CTRL		0x6a
-+#define P1_REG_DLDO3_CTRL		0x6d
-+#define P1_REG_DLDO4_CTRL		0x70
-+#define P1_REG_DLDO5_CTRL		0x73
-+#define P1_REG_DLDO6_CTRL		0x76
-+#define P1_REG_DLDO7_CTRL		0x79
-+
-+#define P1_REG_DLDO1_VOLT		0x68
-+#define P1_REG_DLDO2_VOLT		0x6b
-+#define P1_REG_DLDO3_VOLT		0x6e
-+#define P1_REG_DLDO4_VOLT		0x71
-+#define P1_REG_DLDO5_VOLT		0x74
-+#define P1_REG_DLDO6_VOLT		0x77
-+#define P1_REG_DLDO7_VOLT		0x7a
-+
-+#define P1_REG_DLDO1_SVOLT		0x69
-+#define P1_REG_DLDO2_SVOLT		0x6c
-+#define P1_REG_DLDO3_SVOLT		0x6f
-+#define P1_REG_DLDO4_SVOLT		0x72
-+#define P1_REG_DLDO5_SVOLT		0x75
-+#define P1_REG_DLDO6_SVOLT		0x78
-+#define P1_REG_DLDO7_SVOLT		0x7b
-+
-+#define P1_DLDO_CTRL(x)			(0x67 + ((x) - 1) * 3)
-+#define P1_DLDO_VOLT(x)			(0x68 + ((x) - 1) * 3)
-+#define P1_DLDO_SVOLT(x)		(0x69 + ((x) - 1) * 3)
-+
-+#define DLDO_SVSEL_MASK			0x7f
-+#define DLDO_EN_MASK			0x1
-+#define DLDO_VSEL_MASK			0x7f
-+
-+#define P1_REG_SWITCH_CTRL		0x59
-+#define P1_SWTICH_EN_MASK		0x1
-+
-+#define P1_REG_SWITCH_PWRKEY_EVENT_CTRL	0x97
-+#define P1_SWITCH_PWRKEY_EVENT_EN_MSK	0xf
-+
-+#define P1_REG_SWITCH_PWRKEY_INIT_CTRL	0x9e
-+#define P1_SWITCH_PWRKEY_INT_EN_MSK	0xf
-+
-+/* Watchdog Timer Registers */
-+#define P1_WDT_CTRL			0x44
-+#define P1_PWR_CTRL0			0x7C
-+#define P1_PWR_CTRL2			0x7E
-+#define P1_PWR_CTRL2_MSK		0xff
-+
-+/* Watchdog Timer Control Bits */
-+#define P1_WDT_CLEAR_STATUS		0x1
-+#define P1_SW_RST			0x2
-+#define P1_WDT_RESET_ENABLE		0x80
-+#define P1_WDT_ENABLE			0x8
-+#define P1_WDT_TIMEOUT_1S		0x0
-+#define P1_WDT_TIMEOUT_4S		0x1
-+#define P1_WDT_TIMEOUT_8S		0x2
-+#define P1_WDT_TIMEOUT_16S		0x3
-+
-+#define P1_RTC_TICK_CTRL		0x1d
-+#define P1_RTC_TICK_CTRL_MSK		0x7f
-+
-+#define P1_RTC_TICK_EVENT		0x92
-+#define P1_RTC_TICK_EVENT_MSK		0x3f
-+
-+#define P1_RTC_TICK_IRQ			0x99
-+#define P1_RTC_TICK_IRQ_MSK		0x3f
-+
-+#define P1_REG_ALIVE			0xab
-+#define P1_ALIVE_MSK			0x7
-+#define SYS_REBOOT_FLAG_BIT		0x2
-+
-+/* SWITCH ID */
-+enum {
-+	P1_ID_SWITCH1,
-+	P1_ID_SWITCH1_PWRKEY_EVENT,
-+	P1_ID_SWITCH1_PWRKEY_INT,
-+	P1_ID_SWITCH_RTC_TICK_CTRL,
-+	P1_ID_SWITCH_RTC_TICK_EVENT,
-+	P1_ID_SWITCH_RTC_TCK_IRQ,
-+	P1_ID_SWITCH_POWER_DOWN,
-+	P1_ID_SWITCH_CHARGING_FLAG,
++U_BOOT_DRIVER(p1_aldo) = {
++	.name		= P1_ALDO_DRIVER,
++	.id		= UCLASS_REGULATOR,
++	.ops		= &p1_aldo_ops,
++	.probe		= p1_aldo_probe,
 +};
 +
-+/* POWERKEY events */
-+enum {
-+	PWRKEY_RISING_EVENT = 1,
-+	PWRKEY_FAILING_EVENT = 2,
-+	PWRKEY_SHORT_PRESS_EVENT = 4,
-+	PWRKEY_LONG_PRESS_EVENT = 8,
++static int dldo_get_value(struct udevice *dev)
++{
++	const struct dm_pmic_ops *ops = device_get_ops(dev->parent);
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	if (!ops || !ops->read)
++		return -ENOSYS;
++
++	info = get_dldo_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->vsel_reg);
++	if (ret < 0)
++		return ret;
++
++	val = ret & info->vsel_mask;
++	while (val > info->max_sel)
++		info++;
++
++	return info->min_uv + (val - info->min_sel) * info->step_uv;
++}
++
++static int dldo_set_value(struct udevice *dev, int uvolt)
++{
++	const struct dm_pmic_ops *ops = device_get_ops(dev->parent);
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	if (!ops || !ops->write)
++		return -ENOSYS;
++
++	info = get_dldo_reg(dev->parent, dev->driver_data, uvolt);
++	if (!info)
++		return -ENOENT;
++	val = (uvolt - info->min_uv);
++	val = val / info->step_uv;
++	val += info->min_sel;
++	ret = pmic_reg_write(dev->parent, info->vsel_reg, val);
++	if (ret < 0)
++		return ret;
++	return 0;
++}
++
++static int dldo_get_enable(struct udevice *dev)
++{
++	const struct p1_reg_info *info;
++	int ret;
++
++	info = get_dldo_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->config_reg);
++	if (ret < 0)
++		return ret;
++	return ret & DLDO_EN_MASK;
++}
++
++static int dldo_set_enable(struct udevice *dev, bool enable)
++{
++	const struct p1_reg_info *info;
++	uint val;
++	int ret;
++
++	info = get_dldo_reg(dev->parent, dev->driver_data, 0);
++	if (!info)
++		return -ENOENT;
++
++	ret = pmic_reg_read(dev->parent, info->config_reg);
++	if (ret < 0)
++		return ret;
++	val = (unsigned int)ret;
++	val &= DLDO_EN_MASK;
++
++	if (enable == val)
++		return 0;
++
++	val = enable;
++	ret = pmic_clrsetbits(dev->parent, info->config_reg, DLDO_EN_MASK, val);
++	if (ret < 0)
++		return ret;
++
++	return 0;
++}
++
++static const struct dm_regulator_ops p1_dldo_ops = {
++	.get_value	= dldo_get_value,
++	.set_value	= dldo_set_value,
++	.get_enable	= dldo_get_enable,
++	.set_enable	= dldo_set_enable,
 +};
 +
-+#define P1_BUCK_DRIVER			"p1_buck"
-+#define P1_ALDO_DRIVER			"p1_aldo"
-+#define P1_DLDO_DRIVER			"p1_dldo"
-+#define P1_SWITCH_DRIVER		"p1_switch"
-+#define P1_WDT_DRIVER			"p1_wdt"
++static int p1_dldo_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_pdata;
 +
-+#endif /* __SPACEMIT_P1_H_ */
++	uc_pdata = dev_get_uclass_plat(dev);
++
++	uc_pdata->type = REGULATOR_TYPE_LDO;
++	uc_pdata->mode_count = 0;
++
++	return 0;
++}
++
++U_BOOT_DRIVER(p1_dldo) = {
++	.name		= P1_DLDO_DRIVER,
++	.id		= UCLASS_REGULATOR,
++	.ops		= &p1_dldo_ops,
++	.probe		= p1_dldo_probe,
++};
 -- 
 2.25.1
 
