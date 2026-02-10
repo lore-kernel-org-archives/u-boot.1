@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90F9EA3F30
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 10:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A963DEA3F35
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 10:23:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 046B88341A;
-	Tue, 10 Feb 2026 11:03:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BFC598388D;
+	Tue, 10 Feb 2026 11:23:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="s6ehaSyS";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="gWSeASyu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E56448341A; Tue, 10 Feb 2026 11:03:30 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 398F683CB5; Tue, 10 Feb 2026 11:23:53 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69B528309A
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 11:03:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 841A28341A
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 11:23:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=phqs2Kl9gpjxl6C/+jwkQjittchWIrsVFcIW71mq2JYUwcO5KSuNC82uZHqWOUatvu6IxJ9Z6uL4T1k4vNUWSCjR+S9wSDouKO8AqeJAj2JQLpOlEasYcvTapNCjS6o9UYvDBCUFgnDKUO0XZWCTGB4Xnk/4pNgjAQPgL/WgrXkXmW9ZhNiA0GSf/v/ETUkrGzyEmX0TM6MghXSVDNYsaYKqoAd4v3OpX+xrdkH+E8QBSgEotFBhJh+xDGaX4kieZTy/fkHeG+l3JtgnppwsxwNyrCCeFKTHsx4yShgT6SYTrnJFjgRMCOhvY2gcU71SWpJloxwqsE4v+LPAJrHx+g==
+ b=Th+esi94DCVTFsBh7WPZv8ht8GvmWIc1ixohuKoQ/I83Xu5nj/t+quL331duVmP9IGxI+2NMKoY90hluHyh0fs5tRmBjmFHh4LDXYowYum2T7YZ2m1arUP3wG4ZG48ilfS1hVNPZdyXJI/sywLEksqFAKzyu9+JibjtteIiZbQ2/0/6YII6HlBSNGVVgP0vePtyCDcbRxxn3JvtusOndaXwZDLCFlRhU8WGjHlaXU5QavU5j7FJbgSWIWAd6fVdCdLf9dSfmHaaCGvT/ULx1nwhT10FqjL4vXRCDk7wKN81s+OYebb0qY1SkciIrtu5cjElvc7EYE//Ti3csQW3cUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9O9+cmgyCg0+pkJmuaPYktoN83iK9sw8uavEZp12ygs=;
- b=xp9Q0/uGiqNgtGMyZ3hxdmZrZBzPKThHcnPtf2S9ZaDxFKF9pLa2wQLrsCul/M7xMnqGdDxfXFrIbIlJwkeQ5+lW57IwLoBnpF2dq7yU9REeM9Z4t17tScITpkHty6Y69BOiL+Nmn0K5VUskncGrAzWYgU22bZu2sE5tNfV7B97/m3GLELrlB3n24Y8HL0bY+0RXHWt6HQZ+qQRBncV4+U23fZgecnMRmzQ5If8W6WOA6fuxvaqVJjxI9zsXAsmrEfLNB7ZcT86nvOREXGfGZaUphZbsehUA2o/G4MqLAPBQJ1K7W+ggsmU9fJ1zmq0+U9OWDDNzA94N9fAlyLwFBw==
+ bh=UfuoT4rlT3CT3zO4p8Y/wC9eF5RQKsBqRmKBfqYB4pg=;
+ b=UboTcA1azxtpN+Xw+jLckMw6rO9R9EsB/Q6gOpBUXDvQC496Vk+SASiUzdcKndsgn3FDKaSkHGwgqKrHPS6CqLyR7mEWAlAhvBgj4sixiFQefPFUPobAt3vy5Nn30qzJit7jkXkLWw7TVzOXRwyMslTpKRlQAQHHc3ec9+GmPTMvuhlySUP2958+dZGK27gq9cLMhAgh8qj3PqMTn/wCi1xWAUv2dMKOsC+Tu18NGfgJ4qMWbjRDZRiZmY0uM19S9sxESl00ZD1kzEpG58aA9stSvjqCwogFw4R2IomZqRsfzD1xnjvdKAWcCf8CEtrcNM8aADOl/+nqWr5fOqUO5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
  dkim=pass header.d=phytec.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9O9+cmgyCg0+pkJmuaPYktoN83iK9sw8uavEZp12ygs=;
- b=s6ehaSySr/tb9mD8VPB8mC2qJVU1M31vjeRekjS84N/EEaLNo2YU5+/NkiOWDSBkje1evdA/vKYzFV/Cpy9QIlRSyYnZ6i87KWUuqauGPFoB8wMH8ukTXtUz5A3N5yTZ5vjPvyzIoytDhYMcY0ESiWuGmFlYvMyUqMSyUJgS9BYK164tmTzml+GTNoU5gH1vcQrjfqlAqsRdeK15kz9TCsrBKDnGS5iHFDypO6eglBV0zZj35G18NOu5ZdKeRm93YEfTALa7sg5GutEv/NzwAiMu1f0fv22DN5fVw7obSGUr1cdG0DqG5DXOxyYtre9QJbaUhduRP9PbTunIe8inXQ==
+ bh=UfuoT4rlT3CT3zO4p8Y/wC9eF5RQKsBqRmKBfqYB4pg=;
+ b=gWSeASyuO5opXOWdXwQy8lyXoZ8IEzBvKwNyOeX35c5odUarjrRWwiEyEXXK/vdgYUy4H8zlVh96QZ2L986FICqHJ+SikQLExgOPl3Z0Cf7aeNKUbNXHDw6x5tI7JYKm13vnwLrHsNp3JTCDgksoNG68nFcavOFVRUiDuluPw1ytG+Xck1AXQtoOn8u5G5u32JhzzbdS8dpGYTXBbeFp4xVMZHGYME0lhLyajr5RAWoa7axHZVch8RJ5v07pbHXcWEaXw2HkpOAEmZDqFpGN+T3OHoPf5GqUhXfIsTAVWz9zu6zYAsbnKju6+Gw2/PVeeNLcLRKmL+vo1/Dc8yj9tw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=phytec.de;
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
- by AS8P195MB1287.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:3d1::14)
+ by AS8P195MB1272.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:3cb::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Tue, 10 Feb
- 2026 10:03:24 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.18; Tue, 10 Feb
+ 2026 10:23:48 +0000
 Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::295f:9a59:b66a:621a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  ([fe80::295f:9a59:b66a:621a%6]) with mapi id 15.20.9587.016; Tue, 10 Feb 2026
- 10:03:24 +0000
-Message-ID: <4803a086-700b-462f-ae36-2fd55e9dcac2@phytec.de>
-Date: Tue, 10 Feb 2026 17:02:28 +0700
+ 10:23:48 +0000
+Message-ID: <4338d5e8-ea88-4f9c-9edf-65b07b725324@phytec.de>
+Date: Tue, 10 Feb 2026 17:22:13 +0700
 User-Agent: Mozilla Thunderbird
 Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
+From: Wadim Egorov <w.egorov@phytec.de>
 To: Suhaas Joshi <s-joshi@ti.com>, Tom Rini <trini@konsulko.com>
 Cc: Francesco Dolcini <francesco@dolcini.it>, Anshul Dalal <anshuld@ti.com>,
  Bryan Brattlof <bb@ti.com>, u-boot@lists.denx.de, vigneshr@ti.com,
@@ -69,111 +70,111 @@ References: <20260209083855.GA9367@francesco-nb>
  <20260209180726.GB281089@francesco-nb>
  <20260209181307.GH2603314@bill-the-cat>
  <20260210092646.w5bugrscifmsh5px@ula0507357>
+ <4803a086-700b-462f-ae36-2fd55e9dcac2@phytec.de>
 Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20260210092646.w5bugrscifmsh5px@ula0507357>
+In-Reply-To: <4803a086-700b-462f-ae36-2fd55e9dcac2@phytec.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: KL1PR01CA0124.apcprd01.prod.exchangelabs.com
- (2603:1096:820:4::16) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: KL1PR01CA0043.apcprd01.prod.exchangelabs.com
+ (2603:1096:820:1::31) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
  (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AS8P195MB1287:EE_
-X-MS-Office365-Filtering-Correlation-Id: b38574db-4eb7-424b-54af-08de688ba12b
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|AS8P195MB1272:EE_
+X-MS-Office365-Filtering-Correlation-Id: f90e7c6b-8268-41e5-0cbf-08de688e7aa5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|366016|1800799024|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c0hZWUdHeFVFWlcvSlhrR3lYVTNRYW5qL0ZXdnNMSFZXbW5aM05yMTE0cXUw?=
- =?utf-8?B?eEtTWUZ5dGJGZnRDVlNDRnczc00zOGoycWVOdlp3TFRVV3lrdmZnSjBycHFR?=
- =?utf-8?B?ajRWV3cvQjMzL0xUeStwR2kzMVBUODc2U05sRVVNWS9RSXBkWUZqUXBtZGQv?=
- =?utf-8?B?SFgwWkJrajQrWWhJa3NCdkxTVU9Qck15VVNNWnZrYS9wdk5qTFdORUtSNnBF?=
- =?utf-8?B?Ry9yY1hqb1o2eTZ6UU5RQXYxYVBvZVkwSEhQSTU5SmJsbkp6TjB4dC9JTS9F?=
- =?utf-8?B?TTBRcGthdTJCSlR6bFJNNXlCRTJYdG1XN05QU2xuRER6Z2I2ZEN0aWZRQlcy?=
- =?utf-8?B?UDRNMU4weGdhZ3JkUCt5VGtobDNTcjNhOGorYjVoS01nMEZzTU0rYVJTUkw1?=
- =?utf-8?B?eElic0JJeWw4YUM5RjZSdDlpZmlEVlRSRlp1VWRiUEpQMmJpUVFTdGVFSHR6?=
- =?utf-8?B?OWFOclVoNm0wYUlKTlhISW80VFMxNnMraUhOeTFadExUd2ZvZElRVDlGczJn?=
- =?utf-8?B?SzM0NWtNTXFTT1RzV0pGK3NmV05FL0JsYm13Y1Q2a0ZYV3V6Y05KdUFiVGJ4?=
- =?utf-8?B?Ly9MWm15amg3QjdwcjQ2dkVsbFkrRHNpMCtraWk0UUxiSFEvQlBxRy9oNm9r?=
- =?utf-8?B?UVEyb2hoZkJlUW5EcDNmSTgvRWQwNldFQmJKYUZOcWMyNzM1a0FHaGVUOFNo?=
- =?utf-8?B?Z2hGR0NvZnRndWxlcDdzSkNsV0YvaVB0VG82S1VLMmRsODR4OGZVRG5qamx0?=
- =?utf-8?B?RDFNT0RQNjZkbmRLbllneVcyYnFxZ1NRNEJnMi83ZzAxRWRzUTVRWnM4bWVC?=
- =?utf-8?B?SDR3YUZZL2NKUitpQlhoMk5XWENEVW93STBQRTExeWlNWG5NbEJtZW50OXpk?=
- =?utf-8?B?Vjg4S29lQWNMNFFUeURFeGxNRDAxaHpib24zb2xyMzlkSGRQQUxWOUZlU0Y4?=
- =?utf-8?B?Y0pZVUZ3SmtmaUV4OFFjSEZnMVRzbUZRajhqTGs0dzJoL1ZDQUE3VHhIUlZP?=
- =?utf-8?B?SWozYnBRVEt1Qkk1RkFiRExMUVV3WWZ4WEFtQ2MyUVltSmNNcXJxUjNkWE5s?=
- =?utf-8?B?b05xaGRCK1lrbmp3L1ZZeW8rS0V0OEFtTEN4eHYrRWFteWFUTmNoSXNpTVlD?=
- =?utf-8?B?blppZHJIcEtQM1I0QmZMS1JEM1R5WjczWkNsR0dyVEdFUStiR0kxVWpoS3k2?=
- =?utf-8?B?QTJmeW0xTHR5OGJ3ZkdlQXFWU0RaWll4dndxd1R4MEZvc0FWOGJSV215ZW05?=
- =?utf-8?B?VzJCMXhUdDZ5OGdNM3RFRzAvcE03RHV6dVRMa1BpbnY0WUFRbWg3N3VlSUE0?=
- =?utf-8?B?bi8zWmIrNUlCMnZpMUJXeUhtakRGOEUxbmxPMmxWRnkvY29XdmFqU3JXUUlL?=
- =?utf-8?B?ME5CVW1QaXd2QUx4TlJLbnNkbFFvZk9xSTFHT29rVStuZFQwTnpablk4Z0Yw?=
- =?utf-8?B?RStqekdycUk5OGlianAzc3pzL1lzLy9hdkdSU2xCMko0SkhEU0YxdzgvMDNt?=
- =?utf-8?B?MWEyRTI5Mm5VbDZnaVJEcjZndTYvd3ZSc3U5djFtcTlZdmxlZW0wV0E5STBC?=
- =?utf-8?B?OHpac1g4OUVOY2t1NTNZQlJwYldHazJzZmxWZ293MG9Renova1MyeW94QVJV?=
- =?utf-8?B?Y2NMblBMaU5ISkN4eXk1SStHZEtiUytKOUQ1L3N2OWVCRGVxQVdLZkdTSFVJ?=
- =?utf-8?B?OEFudU1sQmRoSy9XU05Od3FSM2VIaVl5L1ZscXZJcjhkSmVyTzBsUTdoaFpn?=
- =?utf-8?B?aU9aSG9PTmsyc2hPUHJZcmprU2Z6V1czWFQwT29PNkg4MnJEblVWaGRTR0Vm?=
- =?utf-8?B?aDQ0cnJXNi8zcTluWFFrU0lDbC9HRjJySmN5d0UxT1ozK2l6SHROUlhjejRm?=
- =?utf-8?B?SmI5RTZMdTBVKzhINzRVN1cxT1owOHR6bzdBcnhGTmVzdUhDdWZjWWFkVFc5?=
- =?utf-8?B?NEE2SW5MTjJNV1RaYmVtVmRyM0tXU0ozWGhmSVZONmM4eHd3SVZ2aTA1Q2NY?=
- =?utf-8?B?TTVMejRCc1dLazZiWjdvQWE4ZDhlQ0VQNzBsaUZHUEE1dk9kTzExemdsamN6?=
- =?utf-8?Q?xgxlo4?=
+ ARA:13230040|1800799024|376014|7416014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dFBFQVgzMFY2dW5IWm9ocGRDNVloR0I0MmxoeFNlWElnU1VHMzEyMDdSQ1Ev?=
+ =?utf-8?B?MXVqY0xTSHVFMDQ5SzVjYTFLNUQrVzJmRzdiQWl0UXRXYVlwR0MyT2x4Sksx?=
+ =?utf-8?B?Z00ycTlPRGxLdFJ5bHJQWnpLUTJCUXdKLzBwWEhIMmgxbElmSzRxaFRXUHZR?=
+ =?utf-8?B?RDN1MWlOV1dSa0VjZDd0WlErTTdIbnJreGV6a3VJZDNXQ0htQnNzdGw2dXB3?=
+ =?utf-8?B?MHhYRVRFMkRyYTNxeVQwVmFSYjdTTzhEemhnbGRVaWdLOUhENXBTamhNUEtk?=
+ =?utf-8?B?TldVRGN1SStUSllHYTRzdWdESTdnNGVra3Y3ZkdlZkxjUUo1Unl4MnhHNmVz?=
+ =?utf-8?B?L3N5WmJkM1FoaTRDQTFNazVyVEYxL1JKR3FtMVpwVlFpWTJSRXpBTWJYT1VY?=
+ =?utf-8?B?ODJLZ2ZxWFJJN2cvcURXcUdwOVc5eUl6VTBSTHF2cHhaZTRoQWpxQ2JoVWIw?=
+ =?utf-8?B?NzErWjc0cnFIdm1jQmFsNjcwN1JOMkRiVm1jaEU2bXB3NldreGtSU0Q3QlE2?=
+ =?utf-8?B?Y0dPbEdTeVJTMTBWWTg0cXVKdjdka1hCY0IvM3M3aUpRb3VvVktLSlJuVi83?=
+ =?utf-8?B?ZWttR2tPemcwOXprYktHaXIrWlZBVVNiZ283eU5OUHk5bFZ6cmlkdjhEUjhC?=
+ =?utf-8?B?ekN2SUY0MDhqSTVqQTFqZGZ2M2xOTi9sTEg2RFFydCtwaUh5OCtnZWRTREhy?=
+ =?utf-8?B?ZmpIS3BmNndseGhBSHp1SmRTaFNsL2NvQ3IybXBNUkR0dk9lbXFYczVLTTFE?=
+ =?utf-8?B?NnMxTGlZcFY0a2QyRWNuMWpVSUkvU0RKb251YmRsY1RpcEdaMDZjZGkvbkpz?=
+ =?utf-8?B?SzQ0K0U4UUliWVgvMzhoY2JXNzlKOVdqZ3ZJVi9xaVRuWlFDRGlneEU3eVFH?=
+ =?utf-8?B?UjdzMDBpQm56d2svQVpTenZ0Nk42M0dFclRsUVljbm5JT09OT24zM1kzODJN?=
+ =?utf-8?B?eEpVRUtCQkxub2VhVFluQjlsVjUvZnoyQmVtY08zajlOMmRURmJpK0RkaFM1?=
+ =?utf-8?B?SFhmUVBwS0dBb3RqWTRTUnpYaytFdW5aTVM2T3cwL2VINFJuYVZoTEQ1QXJM?=
+ =?utf-8?B?WlhQbHUzblBhSlRUNjhhdU5iV0ptZ2dwQ2xndW9FeEt2YjBXamVJTCtHSnlo?=
+ =?utf-8?B?cklLV0srajE3VFdiVHFNRmg5Z2lvdjZmd1RLL0o0YUcwdGUzQmQzbWtldC92?=
+ =?utf-8?B?UUwzTjZjRXc5eE5iRmRaWkMwQno1M24zTmFOTUtCdkt5cnlENm5XL2hva2xJ?=
+ =?utf-8?B?QS9qblZuMUpvVC9ITTlBZElHN0taZVdmaEgwZXpaNk55aTY3ZEdWa2h4QU9Q?=
+ =?utf-8?B?Sml2dzB5eTVFZVRkSjlrM25BUlBHaEppc25seU9jaUFSZVo1R0hteGhPRDNT?=
+ =?utf-8?B?c3NTMVBqSW4yUkk0OGt1L2xTUVA5ampqb09MUS9nTGc1WHdCdGw0ZE54ZlFi?=
+ =?utf-8?B?TllCSmd3QmE3VVJuZ2F4YytKUzJsano0T2JKUUg5Z0hIM1d3cE85cTMvbzJX?=
+ =?utf-8?B?ZHFaaysvdUI4UGd0eW1CSzRqMkU4ampnc0lKZFIwUHhnbHBqc2lyWE9YSXVq?=
+ =?utf-8?B?Y3BmOTNGbUtKR3IxanRjaW1ZdEJBeGZIbzdjd0FnSVUrbWcrNElpUE9GMTZw?=
+ =?utf-8?B?ekdhMGZPMnRFV0pQSk42MlBJK21CcjNCSi9CU1lrNzJmTmdUOTcwZHVyLzRP?=
+ =?utf-8?B?SGFuRTB1a2Z5M21rbmVhTWQrdkl5eTA5MlZteENTVGFQQlhTdGh0M2JHVFJv?=
+ =?utf-8?B?R2syNXBSYVE0ZXR5UnNDeC9sYW9EV3NURXJqSXF6T2tLMFFTRGlQM24zM3lw?=
+ =?utf-8?B?cmxNUXF4TzVQeU5IR2JKbnh2b3B2cElRT2tBTDVOUURudThtMFZJRVNvQUpm?=
+ =?utf-8?B?M3hmTjEzb0lWallGNmp0Z29GZGwvMlI0bHBIam5jOUJUWUIrbUJJT3U5bGlq?=
+ =?utf-8?B?VVlzNTNXK3dqWHAzaXNnaVBFTXZRWmw3TFNkSERTemhtTGZ3cVh2YmxXbU1j?=
+ =?utf-8?B?NktJbjZsbVF6VjVpQ1ZWSDV5dHZDdFEweDVCS3hJbXJOcEhOWm5RQ2dWV0lW?=
+ =?utf-8?Q?7DEWyi?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(366016)(1800799024)(376014)(7053199007); DIR:OUT;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(7053199007); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WnloalF0NGdidWRtRzFZRlB5akxqTDBtRFFHVXUya3Y2UDIrbHNrbEJveENM?=
- =?utf-8?B?YkxNbm1zU0ZaUXpBWGgxWE5QaGtVQW9XRjJZaEE0Y0lXQ1FlNFQrTWwyVTJy?=
- =?utf-8?B?MlhkcU5YL1NXbWU4U0orMjdrV0V2bTJxWlNvOFlQV1hUc1hJSzV6M2cxUWZv?=
- =?utf-8?B?RFN6aUtQaU14OFk1V0FCQ3B3dlFRR3Q1NHFVSS9tcTN0Z29WcmxJdVRKUkF0?=
- =?utf-8?B?MExMMUFWYmZjd0pXU2tQR1Y0RGJlVWo0bWtJNHNvdENnYUwvN0VWaU1JTTkx?=
- =?utf-8?B?SkM0THNpbDlnQUNRZDhzSWpsVTNjRVpQTnNsQ3g4TzB6ckRmSktlZlo5SlR5?=
- =?utf-8?B?aVloUWRKeFVxblliY2cvcGkyb3ViMkpRTlBWc2RZYWNtcW5Dd1ZvS2FzVUI1?=
- =?utf-8?B?OUIvTW4yUjA4SXo5THZxcUNhTzJ5VEZDVnVUZ2FBMzFkc0ZaMXlpTmhkUmhQ?=
- =?utf-8?B?K2dnRWM3Ti9JWkVYOTBNS1VZUXVTUXhWK0N0L1dhNHJFdmZRbmYzR0haZ1Er?=
- =?utf-8?B?V0Q3WlV5ZU1LUU9oWk8vc2NLdmNrUjM3VGozZ0NlaS9FL2lTVUk3VTFBZkxT?=
- =?utf-8?B?c2h3SWZJdmdLekFXaHVyaG9yNnpMUjNnZ3hZYWs1eGc1QWQyU2lqeTM3RDlD?=
- =?utf-8?B?elJDNnlzaU0rUXoxcFExeVl3bWhZbG1ocEZCY0xMNFg2eUt3R0doQjlIUE1Z?=
- =?utf-8?B?Z0VteHd0OUNyT3JPd0t6UFR4RGVXaHZ1bHhCOHd0S2YxVFFvYmplaWlKZVdv?=
- =?utf-8?B?NXN1TUdsenZZN21tcjg0aGpRQ25iN1hzNnlMYW9KSUhqL2RKaHJZUU9aaG94?=
- =?utf-8?B?dFNQdm1SSkwvK1lKTVdvdHBHai80YklXUjFlaWxabkJ1LzhwUXcvQ0lkNTFG?=
- =?utf-8?B?Y2thNjh5dWl3eXZpUmJNOWdTSzZ4RmE0WDk4enhLRDZMKzlDYlFUSmR6djls?=
- =?utf-8?B?by9hOHFyZTUzNHdqcFFUdkhlekFrK1JsVFhYMzhFTG90V3pRQk96YXBLZC93?=
- =?utf-8?B?L2hmbWZoZ2ZCM09YUVliL3pUZ2tsZXp3TnVuR09HY1hIeWgvSWE0N1pXMWpu?=
- =?utf-8?B?czB5QzZ6VEg1YmdTUDFZTDM3Tkc0QmZPVkNkSWdWRVlnY2M5dWVXcVZVUXYx?=
- =?utf-8?B?dFdyZ1dib0pXdUlobFR2SE5YT2FqMmR1TS9CNU5rRjc2aWJUa0FTaXU2VnlL?=
- =?utf-8?B?MTIyNEtqZUgwR3VPMzR4ZGVyMTBwRDg3VzBFTVpaZWdmcitwLzVmWWhuSVRM?=
- =?utf-8?B?VDU1L0MxdTVsalZTZFI1SjFXK0NrZ0pmdFRKMzFvNFBFMy9CdE94MkxZWkxn?=
- =?utf-8?B?NVdBMFg2R3U2WlRuc1ZjSXoyWmZHWm1nL0hjVWx1UEFIK0c5azYxM1dEdnNW?=
- =?utf-8?B?eXdxQnduUXNpbDlPdGlKUjU1NDBXYWMvblMzRWpwSm1yVi9ESjB4TmtqYXNG?=
- =?utf-8?B?amZLUmZGblF1ODVINmY3TGREMmMwQlE5UFFXZDFFY3N5YWtISkEvYXJkRWpj?=
- =?utf-8?B?d0pqbGdvZTFFV29XVWllcTI5c0hWdmZIditIRm5tNzZmaHdzamo2V01sVXl1?=
- =?utf-8?B?U21YcEhRZ1YwcEQ4c3JtdVE3a0dqQWNYQ1dCQjZDcUU5Q0tkN3dGZnkwQUVk?=
- =?utf-8?B?YkFqdTkyZjJwYTRqY2pHd2dtMDREU05VaW5qYmlyZElwd1hDekx2bVExc3kz?=
- =?utf-8?B?VVgwODlGbzFYdG4wYzhpQ3c1cHcrTlhlemhRbyttUE9maldFb1RoQnVYaFVt?=
- =?utf-8?B?a3J2Q3ZIUzMvMk5Da0R6eUo4QnVMaUJkWFB5bHdoMVBYT0tCbjZ0Sk10czJK?=
- =?utf-8?B?SnorZ0dpaXgzbSs5aFBSTWd6aDgvNDcreHR2R1Nmb00rbDBHeHJ3VHR3N1E4?=
- =?utf-8?B?bU81UmVtNWtKVWNPVHZHS0Npck0zdkFTSUR0U1JVejZtbm5KTExrOHlTc0pP?=
- =?utf-8?B?UUtYcjhqNjNNLytjZE9jZTF1Q2srZEZSMk8yZnVLdFJEdkluSVNaa3lBYmVG?=
- =?utf-8?B?cWV6aW1INW9oQmpROTdkWHkxR3c5NWZiZWFMajVoR3VsOGpYcHpZcWV6bjh6?=
- =?utf-8?B?WHphdEZJRms4UGFSUkoxOCtCNWE5RjByYnRaVGZUOGRIR2R1QTk4N3RycnV4?=
- =?utf-8?B?MmM0VnAzKy9tS1JoL0FCOTlzZW13VkptbUJ0TVVJN0krMVFrbUJVMjNGRjRi?=
- =?utf-8?B?WlZwbTNuZmVjellja011WGI0aGJ1aWlzZjRqS2hqNnJSSE5vb2IyUzlvMEx5?=
- =?utf-8?B?eGRUczk4eEJVMFJKOElFenhQK1FWQ1FIRVM2WDZvR0hnZFlrdnZCc2R1SEwy?=
- =?utf-8?B?NS9JeE9rbHVDeG8rcEtMNnVsaDBZd2ltalFxQ3ppK2pzYkdBa3c4Zz09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVFzWFYxUzVXTzIvVmpOVHB1WkZnU2w1K1RuM0RTUGIybDhMcldBYTNJSXBk?=
+ =?utf-8?B?M3RKOHpoQ0ZoaUVxWXVYb2ZXbTR1WXRRajFoTU5FMy9oN0FGdWZCWmIzdHB3?=
+ =?utf-8?B?UEdiaGFuTUdwOTA4S3RvUXU3NVRGUzJQU0dhVjI3VGF4bDAzQzVudi9QRThl?=
+ =?utf-8?B?QUNqYXNjV2RLTHo4by9XdnZRV20rbHMrWW1LK1NQOWRpdTRZQk0zYllvaElD?=
+ =?utf-8?B?K3pHUHIwZ0JzSjE3R2JLUFBCL1M0UDRVMVpZYUxnanJVaU54bWxJTStVdnp4?=
+ =?utf-8?B?eC9kYVhucDYweEk0YVB2T3N3QkNJT0x3MTdVNHkzNlNxWW5Md1pyOEdlRHNN?=
+ =?utf-8?B?TXpVWHRpZldpN0xXYVl2SHg3VFFXZ2FvMnZCY0NhcVp1RzFnMWtlU3ltM1hJ?=
+ =?utf-8?B?WmhvN0hRUlQyY2NTUitEU1JBM2FBRTNGNngxak0xbnZJMDVNZWJvSTJhTlpV?=
+ =?utf-8?B?a01WMFkzd2l3WjBGQVZrVzlpTjk2YnV5Ym9JeFFST0FTYTF1SElaVWJvMUF5?=
+ =?utf-8?B?SXp2SFBPYWRlSitWakxuZk9EbWZiNkpBZ2oxRGlkU2dsMU5rMFIwWUp3ZUdI?=
+ =?utf-8?B?dzBuOFJsNjNuUmlXVDQrZC9SdDhRR0xDYTR5OGUxWjlGdXc3WUJIRldzSXhW?=
+ =?utf-8?B?RlZBRFlFRVVjQTNqTUFVQkNrTENGTW1BTFhtMjRlUzdjUndVeU5UaTNMM3Nw?=
+ =?utf-8?B?N1VsLys5M2tjTm1ad1cwTVJURlFUYnZhQTNYSkNNY0hyclFqcmsrd2tXNlUv?=
+ =?utf-8?B?bDlRbGFYN01LZlVhVytSeTJkemc2RDdJYWwvVTBVbWJ2cU5uc1poMkt0Ry9F?=
+ =?utf-8?B?UXBudVdPQk5BeUtrTXVJTSthNXE0b3ZLQnZiUVRuZ1BibXVWenRpcm9ZcDMv?=
+ =?utf-8?B?aVdHQ2xNdVltajJpOVdDTVBoN2lRSzVqVXE0cVBuWDhjRTBuSTF4L2g5MENt?=
+ =?utf-8?B?emxaTUZtYUphYXNjNm9SNzI0ZTRNL0lYbVZjcitRWC9zaC9MaXVWTWI0SjBS?=
+ =?utf-8?B?QnZkWmNyK29GaEkvdXpYMkx4U0Y2NEx1VkZWQ3QyMDNhYjdXRDgrei9qckE1?=
+ =?utf-8?B?VnRFb3ZxL1F5Q0RudEE0US9BeFFVVWVZQmRlanp3Q2NlYUsyblZ5Um5LSzJY?=
+ =?utf-8?B?dTZIOEtaZjltY0x4d3RxSTNDaFRHZUx0eTdpSFFld2NFTFdqT3dJQzkzSzVn?=
+ =?utf-8?B?SEQ5eDFab0FTZG9xR1lLWFl6RWIrSzY2RDM2dW9ZZmNmTE9UdTk4b1cvcE5N?=
+ =?utf-8?B?enNJcUFDMld3YUNWeC9ONXpYMFRnK1JBU2piUjF0VGRXNWVDL0ZySmZiVjI3?=
+ =?utf-8?B?OGFuMVNYcVQzTVJhZFFyckwwQjhNWkZGZjNxcGJDN1Y0aktnNk43TjR4SGN6?=
+ =?utf-8?B?dkdGTzlFY1h4Z1F6ejVPVHBCblFlOHFaOVA4UFFyWklSVFZ5TWRhRHVnTWdj?=
+ =?utf-8?B?eGhoalFwb3djQUU1VjJ1d3VwVVZZRWZnUHg1Y3RBZHhJVkZENHNIV3FwdHBH?=
+ =?utf-8?B?QWpwdkM3TlVxWVh6Y2tDeDl0V3VsakdZMGhTTXNaVEJGN3Z0MzJJK1lMNzlw?=
+ =?utf-8?B?ZVNuWENaMWxubWtGSGtZbnFVNlM0eWVXUkw2QWQrdWlER0FZbXhIOWVENnFQ?=
+ =?utf-8?B?R2ZSekpGUWh0RUhYNGpoVDhLZGVnSW96bGlqOTJoL0V2NElKc3VXdEpHZ0t0?=
+ =?utf-8?B?Z3EzM25DTXQ4Q1BpL3ZwL0RvdUVBbTRUWWtYcnFxRG1xWjBTUnM5a3k4T1RH?=
+ =?utf-8?B?MWxybkVaNjRLZXZQek5MQUt4VElUUTRXMVkzQ05zV1RxbExQaVBqL3NZWUhl?=
+ =?utf-8?B?Mm52Vy9BcVJTVGZxME1oR3VqZGV5cHdpZ2JMbjhNODFmdHUwYk4rOE9lbzVB?=
+ =?utf-8?B?TS9YNlJWWFMvWVdqWjlIekVpQUxiVFpWRFpKbGZpY0NOV0RUVzdyQm9pQnJt?=
+ =?utf-8?B?ZHRLVTdxaUxzbnNXajhPWVcreG5LeWMxbGJIdnhVb3FRQ2R2YWZrMHg5cTk0?=
+ =?utf-8?B?Ylp5RWo3WFlJN3V6bFZJNlgzanRJVjZlRDE2VFhQNGVrbHpYQjNjUGptVkg0?=
+ =?utf-8?B?cFE4eVliTGhvUmdHZHUxYjVNa1NsSW45U285bElOdk1NOFZZSVVsRFFjYk9R?=
+ =?utf-8?B?TDZGQzJEQnBWUk0wWldsQkprR0N4SEg1a1h5VnpoaWNQd3BHUWhFdGNKSmFx?=
+ =?utf-8?B?Y3NzMUhzeG1JVUFjeCt1TkVSSUlZYVFGNEh6MVhFeVRnYTZ5djZiNk5QKzNh?=
+ =?utf-8?B?MVcxdlVLZHdjeUlXU2FyZEtUOHJ1dVp5K1QxdW1YbXdDTzBqWmxXbXplWmVy?=
+ =?utf-8?B?ZjdiOE9xREthU3ltdkxVTnpwblp0SWJOT2s3UHkvWm04Wm1lblJxdz09?=
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: b38574db-4eb7-424b-54af-08de688ba12b
+X-MS-Exchange-CrossTenant-Network-Message-Id: f90e7c6b-8268-41e5-0cbf-08de688e7aa5
 X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 10:03:24.7971 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 10:23:48.8076 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2fbSkl+6uCQV8vsuXogABBsNwcpymR4qNhjB1274DChd3klQEA/FORPHOk+zwQJ925H7hI5QP1+ZkFBKlgkXdw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB1287
+X-MS-Exchange-CrossTenant-UserPrincipalName: uVnQ+ybj7hpt3KOZuZwVYrSL+hJLpb6DpzNPrP9H3duGB2lwuXHVyacntH3mGWue8PGJFSIf042a1WGq4EKT1g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB1272
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -192,109 +193,139 @@ X-Virus-Status: Clean
 
 
 
-On 2/10/26 4:26 PM, Suhaas Joshi wrote:
-> On 12:13-20260209, Tom Rini wrote:
->> On Mon, Feb 09, 2026 at 07:07:26PM +0100, Francesco Dolcini wrote:
->>> On Mon, Feb 09, 2026 at 11:43:08AM -0600, Tom Rini wrote:
->>>> On Mon, Feb 09, 2026 at 06:25:46PM +0100, Francesco Dolcini wrote:
->>>>> On Mon, Feb 09, 2026 at 11:16:35AM +0100, Francesco Dolcini wrote:
->>>>>> On Mon, Feb 09, 2026 at 03:38:51PM +0530, Suhaas Joshi wrote:
->>>>>>> On 09:45-20260209, Francesco Dolcini wrote:
->>>>>>>> + Bryan, Anshul
->>>>>>>>
->>>>>>>> On Mon, Feb 09, 2026 at 09:38:55AM +0100, Francesco Dolcini wrote:
->>>>>>>>> Verdin AM62 and AM62P are not booting anymore with U-Boot 42b3ee7fa524,
->>>>>>>>> everything was fine with b5213bbfdcb1.
+On 2/10/26 5:02 PM, Wadim Egorov wrote:
+> 
+> 
+> On 2/10/26 4:26 PM, Suhaas Joshi wrote:
+>> On 12:13-20260209, Tom Rini wrote:
+>>> On Mon, Feb 09, 2026 at 07:07:26PM +0100, Francesco Dolcini wrote:
+>>>> On Mon, Feb 09, 2026 at 11:43:08AM -0600, Tom Rini wrote:
+>>>>> On Mon, Feb 09, 2026 at 06:25:46PM +0100, Francesco Dolcini wrote:
+>>>>>> On Mon, Feb 09, 2026 at 11:16:35AM +0100, Francesco Dolcini wrote:
+>>>>>>> On Mon, Feb 09, 2026 at 03:38:51PM +0530, Suhaas Joshi wrote:
+>>>>>>>> On 09:45-20260209, Francesco Dolcini wrote:
+>>>>>>>>> + Bryan, Anshul
 >>>>>>>>>
->>>>>>>>> Looking at the commits between the two revision, I would say that the
->>>>>>>>> issue is with this series https://lore.kernel.org/all/20260127081652.506357-1-s-joshi@ti.com/
+>>>>>>>>> On Mon, Feb 09, 2026 at 09:38:55AM +0100, Francesco Dolcini wrote:
+>>>>>>>>>> Verdin AM62 and AM62P are not booting anymore with U-Boot 
+>>>>>>>>>> 42b3ee7fa524,
+>>>>>>>>>> everything was fine with b5213bbfdcb1.
+>>>>>>>>>>
+>>>>>>>>>> Looking at the commits between the two revision, I would say 
+>>>>>>>>>> that the
+>>>>>>>>>> issue is with this series https://lore.kernel.org/ 
+>>>>>>>>>> all/20260127081652.506357-1-s-joshi@ti.com/
+>>>>>>>>>
+>>>>>>>>> We have also commit 3382d75f7a6c ("arch: arm: dts: k3: refactor 
+>>>>>>>>> common
+>>>>>>>>> nodes to k3-*-r5.dtsi") that might be the root cause for this 
+>>>>>>>>> issue.
+>>>>>>>>>
 >>>>>>>>
->>>>>>>> We have also commit 3382d75f7a6c ("arch: arm: dts: k3: refactor common
->>>>>>>> nodes to k3-*-r5.dtsi") that might be the root cause for this issue.
+>>>>>>>> Hi Francesco. Unfortunately, I don't have Verdin line of boards 
+>>>>>>>> with me,
+>>>>>>>> so I cannot reproduce this issue. This is also why I wasn't able 
+>>>>>>>> to test
+>>>>>>>> my series on my end and had requested board-specific maintainers 
+>>>>>>>> do the
+>>>>>>>> same.
 >>>>>>>>
+>>>>>>>> Since I don't have the boards, could you run the following test 
+>>>>>>>> to help
+>>>>>>>> us ascertain which of the 2 suspected commits actually broke the 
+>>>>>>>> boot?
+>>>>>>>>
+>>>>>>>> * First drop my AM625 Verdin patch, and compile and copy the 
+>>>>>>>> binaries,
+>>>>>>>>    and boot.
+>>>>>>>> * Then let my patch remain in the tree, and remove Anshul's 
+>>>>>>>> refactor
+>>>>>>>>    patch, and try the same thing again.
+>>>>>>>>
+>>>>>>>> This could help us ascertain which commit broke boot, and we can 
+>>>>>>>> try
+>>>>>>>> fixing from that commit.
 >>>>>>>
->>>>>>> Hi Francesco. Unfortunately, I don't have Verdin line of boards with me,
->>>>>>> so I cannot reproduce this issue. This is also why I wasn't able to test
->>>>>>> my series on my end and had requested board-specific maintainers do the
->>>>>>> same.
+>>>>>>> Sure, I can bisect it.
 >>>>>>>
->>>>>>> Since I don't have the boards, could you run the following test to help
->>>>>>> us ascertain which of the 2 suspected commits actually broke the boot?
+>>>>>>> Do this difference in the logs
 >>>>>>>
->>>>>>> * First drop my AM625 Verdin patch, and compile and copy the binaries,
->>>>>>>    and boot.
->>>>>>> * Then let my patch remain in the tree, and remove Anshul's refactor
->>>>>>>    patch, and try the same thing again.
+>>>>>>> Failed to set clock rates for '/a53@0': -22
 >>>>>>>
->>>>>>> This could help us ascertain which commit broke boot, and we can try
->>>>>>> fixing from that commit.
+>>>>>>>    vs
+>>>>>>>
+>>>>>>> Failed to set clock rates for '/a53@0': -61
+>>>>>>>
+>>>>>>> ring any bell?
 >>>>>>
->>>>>> Sure, I can bisect it.
+>>>>>> The boot failure start with commit 2ffab9da9142 ("Merge patch series
+>>>>>> "Firewall ATF and OP-TEE memory regions in Sitara"").
 >>>>>>
->>>>>> Do this difference in the logs
+>>>>>> With commit 24338c81ec2f ("arm: dts: k3-binman: Use configs for
+>>>>>> ATF/OPTEE addresses") the board still boots fine.
+>>>>>> I have some concern that this commit is changing something, however
+>>>>>> CONFIG_K3_ATF_LOAD_ADDR is 0x80000000, while before in the dtsi 
+>>>>>> file it
+>>>>>> was 0x70000000. I tried changing it back without any positive result,
+>>>>>> I just got an EL3 exception.
 >>>>>>
->>>>>> Failed to set clock rates for '/a53@0': -22
->>>>>>
->>>>>>    vs
->>>>>>
->>>>>> Failed to set clock rates for '/a53@0': -61
->>>>>>
->>>>>> ring any bell?
+>>>>>> Any more test I should do?
 >>>>>
->>>>> The boot failure start with commit 2ffab9da9142 ("Merge patch series
->>>>> "Firewall ATF and OP-TEE memory regions in Sitara"").
->>>>>
->>>>> With commit 24338c81ec2f ("arm: dts: k3-binman: Use configs for
->>>>> ATF/OPTEE addresses") the board still boots fine.
->>>>> I have some concern that this commit is changing something, however
->>>>> CONFIG_K3_ATF_LOAD_ADDR is 0x80000000, while before in the dtsi file it
->>>>> was 0x70000000. I tried changing it back without any positive result,
->>>>> I just got an EL3 exception.
->>>>>
->>>>> Any more test I should do?
+>>>>> Should I revert that firewall series, at this point?
 >>>>
->>>> Should I revert that firewall series, at this point?
+>>>> I did one more test.
+>>>>
+>>>> It seems that the issue is some interaction between the firewall series
+>>>> and commit 24338c81ec2f ("arm: dts: k3-binman: Use configs for ATF/ 
+>>>> OPTEE
+>>>> addresses").
 >>>
->>> I did one more test.
->>>
->>> It seems that the issue is some interaction between the firewall series
->>> and commit 24338c81ec2f ("arm: dts: k3-binman: Use configs for ATF/OPTEE
->>> addresses").
+>>> That's the first part of the series, and to be clear I'd revert the
+>>> whole series.
 >>
->> That's the first part of the series, and to be clear I'd revert the
->> whole series.
+>> This series is confirmed to be working on TI boards. I just tested it
+>> (again) on AM62 SK. See [0] for logs.
+>> Verdin boards are the only ones that are reporting this issue. Is it
+>> alright if we revert only the two Verdin-specific commits, and let the
+>> rest (TI and PhyCore ones) stay as they are? The patches are pretty
+>> un-connected to each other.
 > 
-> This series is confirmed to be working on TI boards. I just tested it
-> (again) on AM62 SK. See [0] for logs.
-> Verdin boards are the only ones that are reporting this issue. Is it
-> alright if we revert only the two Verdin-specific commits, and let the
-> rest (TI and PhyCore ones) stay as they are? The patches are pretty
-> un-connected to each other.
+> I have not tested the patches on the phycore-soms yet.
 
-I have not tested the patches on the phycore-soms yet.
+The phycore-am62x boots, see the logs
+
+https://pastebin.ubuntu.com/p/P3GHhZw8xc/plain/
+
+But I can also see this new error
+
+   Failed to set clock rates for '/a53@0': -61
+
 
 > 
-> We are working on figuring out why Verdin is seeing these issues, in the
-> meantime.
-> 
-> [0] https://gist.github.com/jsuhaas22/b4d153eedf25e2269ddefc992c6020be
-> 
-> Thanks
-> Suhaas
-> 
 >>
->>> If I keep the firewall series in, and revert 24338c81ec2f, it boots.
+>> We are working on figuring out why Verdin is seeing these issues, in the
+>> meantime.
+>>
+>> [0] https://gist.github.com/jsuhaas22/b4d153eedf25e2269ddefc992c6020be
+>>
+>> Thanks
+>> Suhaas
+>>
 >>>
->>> IMO, unless we understand what is going on exactly, we should revert
->>> both.
+>>>> If I keep the firewall series in, and revert 24338c81ec2f, it boots.
+>>>>
+>>>> IMO, unless we understand what is going on exactly, we should revert
+>>>> both.
+>>>>
+>>>> Suhaas: is current master working for you on the am62 SK or beagle 
+>>>> play?
 >>>
->>> Suhaas: is current master working for you on the am62 SK or beagle play?
+>>> These changes boot and some pytests run on am64x_evm_a53, am62x_evm_a53
+>>> and am62x_beagleplay_a53
+>>>
+>>> -- 
+>>> Tom
 >>
->> These changes boot and some pytests run on am64x_evm_a53, am62x_evm_a53
->> and am62x_beagleplay_a53
 >>
->> -- 
->> Tom
-> 
 > 
 
