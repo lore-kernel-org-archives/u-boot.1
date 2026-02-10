@@ -4,154 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80FB7EA8108
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:41:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D18F5EA8109
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:42:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEE6283CB5;
-	Tue, 10 Feb 2026 13:41:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id A884083CEE;
+	Tue, 10 Feb 2026 13:41:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="q586HbVc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FhZoEiac";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E0AB83C67; Tue, 10 Feb 2026 06:24:33 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 058A68341A; Tue, 10 Feb 2026 09:17:34 +0100 (CET)
+Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
+ [IPv6:2607:f8b0:4864:20::934])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C41578309A
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 06:24:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AE3D8309A
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 09:17:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chen.huei.lok@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Py7eJg/Cx2VoybYTDOLtd8tIVi+Os22Rxu1PapPKl+c2KSZm+59+jpA8qKwSCR6cfAONEbjfCTL0fgHiAh9C2Xo6wwRmv9EtpZEgeQVS5YaOHmLWYD8B7EfpEjIUiRjOPTDUe/qB7OKn+ZAtIBf4d394j8aUiVgRxyGhoIi2QYiQfGwsM3dT/wgRdEfWUMRm/P9GbOsCWCXbHXoMwHYCeq0uzmNpdyhdSs7ojQiyhnh0kMaPsemGojo8gL5fQs270cp/4juZjCz8RxKamjWJVbNKvPJr0eRD2S3U6DIpTwuJL8OvQHv8HTyCqL350fyJh//f4jAnHtwPBLu3fcZwXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=axxfMwK8m9vw5GE8IiMrV4Mz2WLKD5GTyUzvRGq2jCg=;
- b=onlnsjPVst259yVSCs/Ghz29N8k3/a8bV/PaqoX2IAy/92kRQV/0dDqal3/aE3MCp7fVIA1NjWmj2xECzn89Cv5VazdANP7dVb+dFeCKfMwebD1eyxjbl9PSrqEBXCv+WE0OBmYlgDIoXuPVOCv1AoCG8OZ8abtlzsv7LfeTh+ZvUcPd9Z8JJmRqK37BKgLrdREu5v9UCe6flO+tlFm7/ouxNOEgdWGNR68cdEMcKGjLQf5/f34wT36ocHzTPHXXPITCuJlT5pH2jlVD5K9ybvNuPVhG2nUA5D1yraFxFd0MeH42/kV/irgOZqV6Mkofwsq2myfuCxfnm+FExoLGfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=axxfMwK8m9vw5GE8IiMrV4Mz2WLKD5GTyUzvRGq2jCg=;
- b=q586HbVc65aU5+OZrLMyes1imv8Kj8JffFr3DxCDwPXZa3loffh+rJO/7Ja6qco4lEfNWHVbMZd2V/KFotWZHR/3nq5qnK6QobwEGjrtymZHjjwmAZhnXRRvF54DQDsZaiT0lAP/XP5rdYVH5pxMnEINP/DBQJ+7ffFkS6gAGVYBH83J7yhtCCUT5IiVXiTOA4htxIvlEKpfIS3+OT12ecJ4+PSS26iMhwAXIOUTHZPPpQIW1/DMU9pvC+OWFOje4XpDuhFI3E1ycvwQI3huohk5aJCJC2vBsGbAfqon/iTptqDU/9io6MedbxjwVpBGK2pFRqW8WToSD9bYnH8PkA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com (2603:10b6:208:502::17)
- by SJ0PR03MB6533.namprd03.prod.outlook.com (2603:10b6:a03:386::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Tue, 10 Feb
- 2026 05:24:27 +0000
-Received: from IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad]) by IA3PR03MB8021.namprd03.prod.outlook.com
- ([fe80::3016:b672:c683:f7ad%4]) with mapi id 15.20.9587.017; Tue, 10 Feb 2026
- 05:24:26 +0000
-From: Chen Huei Lok <chen.huei.lok@altera.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- drosdi <danish.ahmad.rosdi@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Boon Khai Ng <boon.khai.ng@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>
-Subject: [PATCH v1] arm: socfpga: soc64: separate reset manager into common
- and platform-family parts
-Date: Tue, 10 Feb 2026 13:23:59 +0800
-Message-ID: <20260210052359.2644-1-chen.huei.lok@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0137.namprd03.prod.outlook.com
- (2603:10b6:a03:33c::22) To IA3PR03MB8021.namprd03.prod.outlook.com
- (2603:10b6:208:502::17)
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-ua1-x934.google.com with SMTP id
+ a1e0cc1a2514c-94acb3d6cceso1218330241.2
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 00:17:31 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770711450; cv=none;
+ d=google.com; s=arc-20240605;
+ b=SIaJlYtkRjgnNCrsSg1gHKE1Ip5U1dydXepvxlSkrQrPsrVm3oBC/U791b1JS3m/0C
+ bCUxgDiOEPpsNj7tPTtLEXDfjbeo42Q52auMau0OKvRVks8ue6DBS+rfv29lj79M6BM/
+ UmAY+5fXHmPV7fSmgQwe8D3cM1tnfqmab8gxjXKVwQHOly7ZFyM4vrakMPs5fH35ayKT
+ LXcvOUxTE1b4ucGj5iDZ/F9VBjT0OL6JYEZiHLNblSnp0kLN6w3QJNnTK4ggrORNCJhb
+ 5bkkSiSazt9c8IWgkRqIVoFaAX0hCA0DW8pLa55+fUwTUuI4uyNus9eVgt8Mcda0QvgU
+ reWg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=PfGYqqrwGTEwGLd7r/boENmqojbmsVzv6DJ0Q7TVEv8=;
+ fh=sr6lzM/oyTwMQa623T2VWxN6EbDwM+j63kC1Wlonrkw=;
+ b=d9U0IuXeDBla9NZTn0St/oWBdFZX9mZx2tfu9diKCkSnKPwiwUF0J2S9M+HJx1R41E
+ ao5oyQNUbMw0paRTIGb3ZjA06c9cReU3rc1DkBc2wnsvgfEh1Tnkxr1oyGzdqy89qCyh
+ MUp1tAxHGjsTqMtLhbp87+5LMdkC110HaegGvCk3qeuJZkEYt/lL3FmFY0mSJu0X+L1n
+ F2wdW7owRUpmC/ABfBvCEoxn0DLTlIsXb036r6q8lFENhOg5W04ylpH2a/LI+IEJZatu
+ GDsg0bWMCktdnu3WGB1VVPSIx8NaKvlPjbkiqNFXkr1nnLFkam6WBa6sJpLVikyv073m
+ 6pnA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1770711450; x=1771316250; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PfGYqqrwGTEwGLd7r/boENmqojbmsVzv6DJ0Q7TVEv8=;
+ b=FhZoEiac2kBB593onIta5OSIAOMVnWnlPHvyXWxWTQxZHO8JQu7oPS7bl4lmJT+bzo
+ NKqpgp/wxF2wI1tE3VDmyO3ZSD+/pOTpdhLYAoIF6gswfMUz9BuZLJUwTn3oRRtiU+EK
+ AswPDWErr3Ti3beRC6qyPbMJBC1sm9MVJFfJPNfJFdnYtw8ALN4LVQqRtzllwEvB9pGR
+ 3dMQiPopPhaeTzqlhogBYlTzohIJmHJ9J52cyJp4iHES7Jj5HZh4f1faUCKyL8pF1d4g
+ aRFXd32eWrY+Y+UcIYiQ7qCQJ40zLiCekaR2FhXdggh6mAOsmCv69pdHxwhFe7lYpfzv
+ ZtsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770711450; x=1771316250;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=PfGYqqrwGTEwGLd7r/boENmqojbmsVzv6DJ0Q7TVEv8=;
+ b=UR+Ye/MPBTYdlJIcY89eZfdGClQlASnR6at9RqvLX2b4I9AAPCHSaEbwGXmulYPfwV
+ ZPWsWaeJ7MHeGGBXELuk2ShKrbse360tdLUqgourinqL6LY5H50AaWmAYj4PbrkTnoj7
+ e2RovKpS/Ksnd5FazJbdido0AxZ/93eE5gv9+zCgEWEso7qLxUieS5f2jVBg190k8Ft0
+ MeapBMxHOgjsNSrSmAT5Us2MY+bdS7y77dd524D4RSVuUemIPlb99iUb1qKWpfYRZuK5
+ qL3noN0XsuIkKgLFAytUcuNp+KPMetZFB+cXqS3s1VroxmKZpt5jUSwkBhpwJA+tUT3u
+ 4OkA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJy+0JzoFjcyHszQIEFc9BuwVqRSbhfmG52DMV6+9FGGcR6lC4edWM0PWX88VN+8yZ9jAyE/Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YxfzCK/IGLP9fPgHEPc5vjYx68EkCye0Y5HUvMAWtF4bfpSZ/eF
+ g9LOV86jfx5ruhJwHzRzGIeRZaXn0n2Dmu+kj7rCc7WZjshB8ud5WDX2IajNJjb61mqoRj62kLh
+ sN26Rhi0cbCgtIkJhxl/UUT42XdOufos=
+X-Gm-Gg: AZuq6aLU9M+hj9uoj7vyWoFoFj1R19Wg3b6SLphlzItz8tVIb4Tx1PaGdMp4HHvvtPn
+ 4Wq502MAQVqpXAfihCfyl6D5mU/99rv5KT0NB50uOOsooBHQivwoaySPu6l8e+iWaruQr5U+pqJ
+ jLpdYrm1Gs/AAxUiEVZPyB3Z4Fd/6QUWRUSEiXfc3H26hiGGTOBkTDmf0R6Xhy3UcxD/xrDcMDm
+ Y+Mq50K9CCZYNhtAzog3C3vUYhWjMnAxSJmRg8H7epjSpXTQIrmhi5imklxl3PRk8CBJZOFc7GB
+ 0LwfYb1rvjUcgwJrho0=
+X-Received: by 2002:a05:6102:cd1:b0:5f5:4dac:f35f with SMTP id
+ ada2fe7eead31-5fc48c12449mr324124137.3.1770711449801; Tue, 10 Feb 2026
+ 00:17:29 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA3PR03MB8021:EE_|SJ0PR03MB6533:EE_
-X-MS-Office365-Filtering-Correlation-Id: fbe9e22c-cc69-4496-fc93-08de6864a830
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kwiO23hGcyZ2BwcmFgZfVpZpRV3TJ77qfZ9ftuckRef70134No0w7Rxjuo6C?=
- =?us-ascii?Q?MNU6jRIEnZBrScIgwwmRR3fJZJSsPDc3yLQpY4teJG+a4xWKVFSG7xj9YdoS?=
- =?us-ascii?Q?AiUZz4euUw/JsbG5SlZn1Yo96FfSvUR3oAUrR3ZD+33QoiI+2uebO8cqjJxF?=
- =?us-ascii?Q?3KyJGfZRDtJBERwbJHtveZPUWRxEh1A6LMopvuvLZjmAEwt4oB4dAAL2n8Gr?=
- =?us-ascii?Q?vndlgzOgZdZ87GBV7jVjY07tLug5FSOZXrw6ohhh7o8tkHiKfuy0lrCT4ceX?=
- =?us-ascii?Q?taTOo6g38xGJM8VA7UkHktcelSCY+2mrHM4fDwDkD5lXpLxylUFx1+Tt0dL7?=
- =?us-ascii?Q?EJCkIDM+vtlfFa+ycUeWjhw9NHvB0jFjnnoU5N5AFZIehsvnpy+R6k1bAraV?=
- =?us-ascii?Q?q0Ap5oBQbXX2tZc+tPYpONcbOGGWe5NX7IYRHYJ56g7eagrjljNJsPPKyHYt?=
- =?us-ascii?Q?NeuqQ694Y+lysTDcLutq+W6cUe/73/+dMR46+m5gOm/fCz9SFsOHbEpuxuGf?=
- =?us-ascii?Q?cHLNjsiHsWljjnBjksYLYIdY15dkuCpijHfHW/qLnmyKAqkVwCNnze79Xw6w?=
- =?us-ascii?Q?xWrWSY/8SZ9y8vnhx7blziYglBLZhNqK/VSwxY8fOMp07uTSOmiQ5VRSL14s?=
- =?us-ascii?Q?LMuhQ674g1RYYa8JkL31VakK/rpJQMOa7SWDYionsdjF2lV1Jto01JBjVUqA?=
- =?us-ascii?Q?yCHGVy+dHIy6ZFdtMaCOlJvxRVAQlkkz3dW2TBfP8A0eQWKc4vspkNNMkJPt?=
- =?us-ascii?Q?fxYQOloSCqDoYkA/LNfIJwx1v4mVhbaTpYCG/OzsM7MBFExgkh/DXx2IiOid?=
- =?us-ascii?Q?yzAOVOgPn3vPQB9a7VDVwJDG11lAldW198sKTqVXVhTrOaD1F7k4rg9WZh8o?=
- =?us-ascii?Q?+S8ugT6e5vWc0dVUJtY/QC+/Lv/sNkjFVUtfaXl2dfmZ9Mti2YYGyNdr3seN?=
- =?us-ascii?Q?5M4dF27tv6mmfs4kuHxluN6+F+XtVugP3y/WyP7OO7wVzGNNx+BKXGv0SCfY?=
- =?us-ascii?Q?XSkxoxFqFhcuLTNHyBuq5jH4SjP1qdZa1aW0Fq1sSU7wqwR5T5ZFESHUx8mx?=
- =?us-ascii?Q?V6/cfwS4O42qswUj+QdbQgIU9mTB7CatAGH/BN/SGh9USKJkLNPhvzLNO6uU?=
- =?us-ascii?Q?IrrZ+pADe7jDiAVlddunJ1Vo5w8H6+0CnGJq8mrP4+2EJ7v3Qm2IvCgheqHh?=
- =?us-ascii?Q?eUxtJBg81e/zpInYmn8GbqdhYufjhirQ/CMFYs33LUricqdTI0IXfa9F8i2J?=
- =?us-ascii?Q?cy0wnvpFWcoSYClqkVDCV9PlSbPS8o5Qj9RYj8ICvHvNhGEMpuFMlfX8YZg2?=
- =?us-ascii?Q?ayYGydAgVn4OEgomcyrfnZTaa5gXqXvlQX8tmpo47nhgmR052b27HhBA/DE3?=
- =?us-ascii?Q?kdfGpE4M2D/4GfDoAUF7IPbbqbFwYKJMgJuitZ+MmJSSLmBtT13tvh2ZoMYM?=
- =?us-ascii?Q?tmyvgHnAx5FuRme3t2HYIIwFxWenrDCkNvalZ0atFbpMNX+KSBB3GDOx8m2t?=
- =?us-ascii?Q?wlIk/bzJrKu5zUc=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:IA3PR03MB8021.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Lr+ilayaBPAedFjJAzCwCNhOf6+pxDCiwiYzLVbjsq1UAb4eSkbKlBEpbKpB?=
- =?us-ascii?Q?C0FtGWUWzaX5HXcG19tydtMeGtubuujU9eV2s14UW1ZPNUt1ynGcr4NjQDBg?=
- =?us-ascii?Q?XNB/17Cne04S89nOm+zXN1iYbmuZQlbop+xCd8F8i7mIw70gGimQgvDSqbB5?=
- =?us-ascii?Q?+D1hpnp4jIKExTgub92sNzK+3WomRxUfYDXZYVQzDO7EWWa3CvLaReN0UR2z?=
- =?us-ascii?Q?TmjVXLRqk4rNHqK0rPnoMveholxXt2NVZDve4E6DXf+0mSf6a5HSj12V1aRR?=
- =?us-ascii?Q?z5f222yM5xkwEMBxjdh9v9KxQTv3bszbQ3qtQp+YIrN9W06t6vFf66MROO4O?=
- =?us-ascii?Q?v1LViFz5z9VqmPM44FRZv+sqK40iSmqVI+rAugbs+B5Ekfxfv7mFUwdNfZaI?=
- =?us-ascii?Q?tL9cokDolPcKCMT8XBNEHksvCwDgKuHv3JBlw86FvAsvRYWbCgkiEY279yR9?=
- =?us-ascii?Q?b9JwLOhKgMUigxA3BWSxRufbWV3IBlJB+xxYZr4zWhi+qnh8E+/VtwMMKwgr?=
- =?us-ascii?Q?6xn/wksU7XS+y5HgfrPpClQrUJQ2XlvUzcz8r6FdtQuSAmRP568JqNLM5jOi?=
- =?us-ascii?Q?RO7Cqmsumzc9/dWKkDDixfwHYV+P83gkPfl3MklrWny2FtYsqOWIA9qMhXTq?=
- =?us-ascii?Q?crskKHZcttQQMtSSPoQkXiUyCZvePwHg26wRWGd9TnLjhx4273vhzRJeG6QM?=
- =?us-ascii?Q?wimbUxHirbRKpS0ggDyHUKLBW/YuzvZ9+t3BZFuuiAnxjxDt3IVVfdFBbyE3?=
- =?us-ascii?Q?FPA1Ugwrl/Z4jy81vsS/LVQh6TQAXNY/VQs4UmfqBEmfJnEsBmX5M7LgrsAc?=
- =?us-ascii?Q?FZfbTkpH2VHrbDH4GHOlNPAl28enIM2yZJEDJdGdiARE0Ky/HElHQY9Oq48x?=
- =?us-ascii?Q?67SyETJjN02A1+spdtwReE1jaYr28qwvTiFh/ziCLl1ZdBYQruw8W2Lcv3pq?=
- =?us-ascii?Q?OqfJGdGy49VfBPH9jVDzNUWjEHgJ+bEYucUCwxXwjc7p7EEQ80ARRykGcxk5?=
- =?us-ascii?Q?1EcIEQQPje/w/W5M7yR1mW22gLXEAkDkPS2obRieFcBxki9E9///zmWRZt5f?=
- =?us-ascii?Q?71dkk1jVInncCnHMeajS5CClV1DIZDrubv3S5GoSg+wS+gEMnCn2dLZXCL+a?=
- =?us-ascii?Q?3gTztegILsoesoza7gjHUcJ0n93fj3nThq2IrB74ywQ0C6QdVrbSs2VRaQ/u?=
- =?us-ascii?Q?AUvNOHKuGhhWdP46lQD+q4hs2jOmioI1BSZLv6Yt6cOS0eBMf1NO60ZUvH+3?=
- =?us-ascii?Q?GwrZrJ5MSD+Gne90+iVtcdSdOqBE7R8ON2BTrGPso95k9Wo9H7nauwzCrkjo?=
- =?us-ascii?Q?OxAzKsunYP20jHRAFp+cfctfIcYt8JCdmRlkPCSCDckJ0la/+l6oYtxietCa?=
- =?us-ascii?Q?Lg5kjhPdkcpSX5+g/952IoIxofT4O3yLwrwDX8qeLvIBj4azcx2ZjLv6dRyx?=
- =?us-ascii?Q?R/7bzuGaOkL2fTfoHhwQJDHRjagRlZo4/nKWpU4zlHhecbUZhUXy51vwZrSt?=
- =?us-ascii?Q?N6MxushDgJDFiFHJNI4E1twTQx0z6gVgRDcvff6xRP12ndHuabeXfjxyeO7D?=
- =?us-ascii?Q?lR+wiUx6r81HuLySEj7TCcbrkoeDI62eHe56/Ilykxfb2+61Ltu7e4sv/XiP?=
- =?us-ascii?Q?blzTJL74sdzWmN9IDRYnPm0DdO9SCXKLOL1X2BsvgxdbzekmatceJoXNoX/D?=
- =?us-ascii?Q?R4WAzb4X5Vp6E4yVAL4fGeiMV9qfrT/7NQgIYKFqvtPq3RGDHcEDGolnu7mq?=
- =?us-ascii?Q?IXGDNR72RQ=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fbe9e22c-cc69-4496-fc93-08de6864a830
-X-MS-Exchange-CrossTenant-AuthSource: IA3PR03MB8021.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 05:24:26.5221 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: P5oDjOryCHIdXBzmQx+jhvOEkGkjEsWK/aE2pWvGq6BpvgmlSVsPKMwMPuju75UdgmkiAwRZ5IEFSKMU92Q14Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB6533
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <CAJwFiGLHDEPMsFyBhX=ogQxX_C+8ac-_9_jeiZYyo=3o0M8ZHA@mail.gmail.com>
+ <CAJwFiGLXgsnb75HT45L5Xo-N4LmCBeLGwPi8Yr5zZzNo7mrVNg@mail.gmail.com>
+ <873d73f0-34fe-4445-8745-f98734637b0c@freeshell.de>
+In-Reply-To: <873d73f0-34fe-4445-8745-f98734637b0c@freeshell.de>
+From: Aristo Chen <jj251510319013@gmail.com>
+Date: Tue, 10 Feb 2026 16:16:53 +0800
+X-Gm-Features: AZwV_Qh-fFnO8xY5Qgs7qcpeMK4ChaYfyjFst9JEY1H_t2uzBFBwo-lMTKz3NIo
+Message-ID: <CAJwFiGJsnK3CRhYBYmE0fGpds0AOvVhRv___JaBNPjGhiYRCNA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: E Shattow <e@freeshell.de>
+Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de, trini@konsulko.com,
+ sjg@chromium.org, 
+ alpernebiyasak@gmail.com, al.kochet@gmail.com, paul.henrys_ext@softathome.com, 
+ bb@ti.com, y.moog@phytec.de, w.egorov@phytec.de, 
+ francesco.dolcini@toradex.com, ggiordano@phytec.com, n-francis@ti.com, 
+ afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, ravi@prevas.dk, 
+ carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, alice.guo@nxp.com, 
+ Aristo Chen <aristo.chen@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 10 Feb 2026 13:41:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,293 +130,232 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SoCFPGA SoC64 reset manager code is currently built as
-reset_manager_s10.o even though it is shared across multiple SoC64
-families.
+Hi E Shattow and all,
 
-Split the implementation into:
-- reset_manager_soc64.o for common SoC64 logic
-- reset_manager_soc64_platform_families.o for platform-family-specific
-  code
+E Shattow <e@freeshell.de> =E6=96=BC 2026=E5=B9=B41=E6=9C=8814=E6=97=A5=E9=
+=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=881:29=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> Hi Aristo,
+>
+> On 1/13/26 07:09, Aristo Chen wrote:
+> > Hi E Shattow,
+> >
+> > Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B411=E6=9C=
+=885=E6=97=A5=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=888:21=E5=AF=AB=E9=81=93=EF=
+=BC=9A
+> >>
+> >> Hi E Shattow,
+> >>
+> >> E Shattow <e@freeshell.de> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=
+=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=889:31=E5=AF=AB=E9=81=93=EF=BC=9A
+> >>>
+> >>> Hi Aristo,
+> >>>
+> >>> On 9/24/25 04:43, Nishanth Menon wrote:
+> >>>> On 06:37-20250924, Nishanth Menon wrote:
+> >>>>> On 10:59-20250914, Aristo Chen wrote:
+> >>>>>> This patch series enhances FIT image robustness by adding **memory
+> >>>>>> region overlap detection** to `mkimage` and fixing existing overla=
+ps
+> >>>>>> in DTS files and `binman` tests.
+> >>>>
+> >>>> [...]
+> >>>>>>
+> >>>>>
+> >>>>> Looks like i see a build regression in linux-next after this series=
+.
+> >>>>
+> >>>> I fat fingered that one.. sorry, I meant u-boot next.
+> >>>>
+> >>>>
+> >>>> Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
+> >>>>
+> >>>>>
+> >>>>> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
+> >>>>
+> >>>> I  believe there are outstanding comments on V1 that have'nt been
+> >>>> addressed either. Can we revert/drop this series for now while the
+> >>>> comments are addressed?
+> >>>>
+> >>>
+> >>> Similar to Nishanth, I am seeing a build regression, itb.map:
+> >>>
+> >>> ImagePos    Offset      Size  Name
+> >>> <none>      00000000  <none>    itb
+> >>> <none>      00000000  <none>    fit
+> >>> <none>      00000000  000c1698  uboot
+> >>> <none>      00000000  000c1698  u-boot-nodtb
+> >>> <none>      000c1698  00202128  opensbi
+> >>> <none>      00000000  00202128  opensbi
+> >>>
+> >>> Yields this error:
+> >>> ...
+> >>>  MKIMAGE fit-dtb.blob
+> >>> Warning: not able to get `load` of node 'fdt-1'
+> >>> Warning: not able to get `load` of node 'fdt-2'
+> >>> Warning: not able to get `load` of node 'fdt-3'
+> >>> Warning: not able to get `load` of node 'fdt-4'
+> >>> Warning: not able to get `load` of node 'fdt-5'
+> >>> Warning: not able to get `load` of node 'fdt-6'
+> >>> Warning: not able to get `load` of node 'fdt-7'
+> >>>   CAT     u-boot-fit-dtb.bin
+> >>> ...
+> >>>   MKIMAGE u-boot.img
+> >>> Warning: not able to get `load` of node 'fdt-1'
+> >>> Warning: not able to get `load` of node 'fdt-2'
+> >>> Warning: not able to get `load` of node 'fdt-3'
+> >>> Warning: not able to get `load` of node 'fdt-4'
+> >>> Warning: not able to get `load` of node 'fdt-5'
+> >>> Warning: not able to get `load` of node 'fdt-6'
+> >>> Warning: not able to get `load` of node 'fdt-7'
+> >>>   COPY    u-boot.dtb
+> >>>   MKIMAGE u-boot-dtb.img
+> >>> Warning: not able to get `load` of node 'fdt-1'
+> >>> Warning: not able to get `load` of node 'fdt-2'
+> >>> Warning: not able to get `load` of node 'fdt-3'
+> >>> Warning: not able to get `load` of node 'fdt-4'
+> >>> Warning: not able to get `load` of node 'fdt-5'
+> >>> Warning: not able to get `load` of node 'fdt-6'
+> >>> Warning: not able to get `load` of node 'fdt-7'
+> >>>   BINMAN  .binman_stamp
+> >>> Wrote map file './itb.map' to show errors
+> >>> binman: Error 1 running 'mkimage -t -F ./itb.fit.fit': Warning: not a=
+ble
+> >>> to get `load` of node 'fdt-1'
+> >>> [Config: conf-1] Error: Overlap detected:
+> >>>   - uboot: [0x40200000 - 0x402c1698]
+> >>>   - opensbi: [0x40000000 - 0x40202128]
+> >>>
+> >>> make[1]: *** [/tmp/u-boot.2.git/Makefile:1339: .binman_stamp] Error 1
+> >>> make[1]: Leaving directory '/home/es/build/u-boot'
+> >>> make: *** [Makefile:198: sub-make] Error 2
+> >>> make: Leaving directory '/tmp/u-boot.2.git'
+> >>>
+> >>> If you would like to reproduce the issue, use config
+> >>> starfive_visionfive2_defconfig and pass to OPENSBI env variable the p=
+ath
+> >>> of opensbi object 'fw_dynamic.bin' built using PLATFORM=3Dgeneric, wi=
+th
+> >>> the ordinary gcc riscv64 toolchain. The starfive visionfive2 board
+> >>> target in U-Boot supports multiple vendors and boards selected at
+> >>> runtime and is an example of a more complex FIT usage that you may be
+> >>> interested in for comparison and testing.
+> >>>
+> >>> Best regards,
+> >>>
+> >>> -E
+> >>
+> >> Sorry that I didn't noticed that my previous email sent to you was not
+> >> including other people
+> >>
+> >> Long story short, I am now able to reproduce the overlap issue that
+> >> you have encountered, and
+> >> I spent some time trying to understand what is opensbi, please correct
+> >> me if I am wrong
+> >>
+> >> AFAICT, there will be 2 types of firmware built, one is
+> >> `fw_payload.bin`, and the other is
+> >> `fw_dynamic.bin`
+> >> - fw_payload.bin: contains the next-stage binary, so the file size
+> >> will be bigger
+> >> - fw_dynamic.bin: provides information about the next boot stage at
+> >> runtime, so the size is smaller
+> >>
+> >> and here are the size of these 2 files built in my environment
+> >> ```
+> >> -rw-rw-r-- 1 ubuntu ubuntu  273048 Oct 25 14:49 fw_dynamic.bin
+> >> -rw-rw-r-- 1 ubuntu ubuntu 2105656 Oct 25 14:49 fw_payload.bin
+> >> ```
+> >>
+> >> When using my overlap checking mechanism, and passing the
+> >> fw_dynamic.bin to build U-Boot,
+> >> there is no overlap issue. However, when using fw_payload.bin, there
+> >> will be an overlap issue.
+> >>
+> >> AFAICT, the SPL will load the opensbi firmware(assuming fw_payload.bin
+> >> here) first, then load
+> >> U-Boot into memory, and then jump to opensbi firmware, so I was a bit
+> >> confused why the
+> >> overlapped opensbi still works?
+> >>
+> >> I will find some time to figure out how the whole loading/booting
+> >> process looks like, but it would
+> >> be greatly appreciated if you can share some insight, thanks!
+> >
+> > I finally had some time to revisit this and managed to get a VisionFive=
+2
+> > board for local testing.
+> >
+> > While trying to make it bootable I noticed the following docs:
+> >   - https://docs.u-boot.org/en/latest/board/starfive/visionfive2.html#s=
+econd-stage-bootloader-opensbi-fw-dynamic-bin-u-boot-main
+> >   - https://wiki.gentoo.org/wiki/StarFive_VisionFive_2#Building_OpenSBI
+> >
+> > Both appear to recommend using OpenSBI=E2=80=99s fw_dynamic.bin when bu=
+ilding
+> > U=E2=80=91Boot. I couldn=E2=80=99t find any guidance on using fw_payloa=
+d.bin together
+> > with U=E2=80=91Boot, which made me wonder why fw_payload.bin was used i=
+n your
+> > earlier report.
+> >
+>
+> Likely I mixed up the filenames when writing in conversation, as I did
+> when writing on the opensbi mailing list about a dependency tracking bug
+> in opensbi build system:
+>
+> https://lore.kernel.org/opensbi/0d6bf7c7-7605-4ad6-a35c-54efc5230fb8@sifi=
+ve.com/
+>
+> and
+>
+> https://lore.kernel.org/opensbi/36cfe431-40fb-470d-b50e-00a139d480f8@free=
+shell.de/
+>
+> ...which is clearly a mistake to write "OPENSBI=3D/path/to/fw_payload.bin=
+"
+> when it should instead be "OPENSBI=3D/path/to/fw_dynamic.bin",
+> acknowledged in the follow-up message:
+>
+> https://lore.kernel.org/opensbi/32873fc7-2cc8-46d5-9f4e-3a16cf95f48a@free=
+shell.de/
+>
+> > Could you clarify whether there is documentation (or a specific
+> > requirement) that calls for fw_payload.bin in this flow? If the intende=
+d
+> > path is fw_dynamic.bin, then the overlap issue disappears for me
+> >
+>
+> For the VisionFive2 and derivative boards, I intended to refer to
+> fw_dynamic.bin only. If I mention otherwise it was in error or for not
+> knowing what I'm looking at and reporting more information than
+> required. There are RISC-V boards not related to VisionFive2 or its
+> StarFive JH-7110 SoC that do use the fw_payload.bin approach but I think
+> I just didn't notice the difference when transcribing to e-mail.
+>
+> > Thanks for your help and guidance.
+> >>
+> >> Best regards,
+> >> Aristo
+> >
+> > Best regards,
+> > Aristo
+>
+> Thanks very much for the follow-up,
+Thanks for letting me know that StarFive VisionFive2 is not affected
+by my patch!
 
-This improves code organization and prepares the reset manager for
-additional SoC64 platform families. No functional change intended.
+>
+> -E
 
-Signed-off-by: Chen Huei Lok <chen.huei.lok@altera.com>
----
- arch/arm/mach-socfpga/Makefile                | 15 ++-
- arch/arm/mach-socfpga/reset_manager_soc64.c   | 94 +++++++++++++++++++
- ...> reset_manager_soc64_platform_families.c} | 75 +--------------
- 3 files changed, 106 insertions(+), 78 deletions(-)
- create mode 100644 arch/arm/mach-socfpga/reset_manager_soc64.c
- rename arch/arm/mach-socfpga/{reset_manager_s10.c => reset_manager_soc64_platform_families.c} (78%)
+We=E2=80=99re currently discussing a new proposal[1] for handling TI platfo=
+rms
+in the FIT image spec. Ahmad Fatoum has a few questions about
+TI-specific implementations=E2=80=94could the TI folks on this thread pleas=
+e
+take a look when you have a moment?
 
-diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makefile
-index 4e85bfb00d4..71587fd3caa 100644
---- a/arch/arm/mach-socfpga/Makefile
-+++ b/arch/arm/mach-socfpga/Makefile
-@@ -34,7 +34,8 @@ obj-y	+= lowlevel_init_soc64.o
- obj-y	+= mailbox_s10.o
- obj-y	+= misc_soc64.o
- obj-y	+= mmu-arm64_s10.o
--obj-y	+= reset_manager_s10.o
-+obj-y	+= reset_manager_soc64.o
-+obj-y	+= reset_manager_soc64_platform_families.o
- obj-y	+= system_manager_soc64.o
- obj-y	+= timer_s10.o
- obj-y	+= wrap_handoff_soc64.o
-@@ -47,7 +48,8 @@ obj-y	+= lowlevel_init_soc64.o
- obj-y	+= mailbox_s10.o
- obj-y	+= misc_soc64.o
- obj-y	+= mmu-arm64_s10.o
--obj-y	+= reset_manager_s10.o
-+obj-y	+= reset_manager_soc64.o
-+obj-y	+= reset_manager_soc64_platform_families.o
- obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+= secure_vab.o
- obj-y	+= system_manager_soc64.o
- obj-y	+= timer_s10.o
-@@ -62,7 +64,8 @@ obj-y	+= clock_manager_agilex5.o
- obj-y	+= mailbox_s10.o
- obj-y	+= misc_soc64.o
- obj-y	+= mmu-arm64_s10.o
--obj-y	+= reset_manager_s10.o
-+obj-y	+= reset_manager_soc64.o
-+obj-y	+= reset_manager_soc64_platform_families.o
- obj-y	+= wrap_handoff_soc64.o
- obj-y	+= wrap_pll_config_soc64.o
- obj-y	+= altera-sysmgr.o
-@@ -79,7 +82,8 @@ obj-y	+= lowlevel_init_soc64.o
- obj-y	+= mailbox_s10.o
- obj-y	+= misc_soc64.o
- obj-y	+= mmu-arm64_s10.o
--obj-y	+= reset_manager_s10.o
-+obj-y	+= reset_manager_soc64.o
-+obj-y	+= reset_manager_soc64_platform_families.o
- obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+= secure_vab.o
- obj-y	+= system_manager_soc64.o
- obj-y	+= timer_s10.o
-@@ -95,7 +99,8 @@ obj-y	+= lowlevel_init_soc64.o
- obj-y	+= mailbox_s10.o
- obj-y	+= misc_soc64.o
- obj-y	+= mmu-arm64_s10.o
--obj-y	+= reset_manager_s10.o
-+obj-y	+= reset_manager_soc64.o
-+obj-y	+= reset_manager_soc64_platform_families.o
- obj-$(CONFIG_SOCFPGA_SECURE_VAB_AUTH)	+= secure_vab.o
- obj-y	+= system_manager_soc64.o
- obj-y	+= timer_s10.o
-diff --git a/arch/arm/mach-socfpga/reset_manager_soc64.c b/arch/arm/mach-socfpga/reset_manager_soc64.c
-new file mode 100644
-index 00000000000..71e9512af49
---- /dev/null
-+++ b/arch/arm/mach-socfpga/reset_manager_soc64.c
-@@ -0,0 +1,94 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2016-2018 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ *
-+ */
-+
-+#include <errno.h>
-+#include <exports.h>
-+#include <hang.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <asm/secure.h>
-+#include <asm/arch/reset_manager.h>
-+#include <asm/arch/smc_api.h>
-+#include <asm/arch/system_manager.h>
-+#include <asm/arch/timer.h>
-+#include <dt-bindings/reset/altr,rst-mgr-s10.h>
-+#include <linux/iopoll.h>
-+#include <linux/intel-smc.h>
-+#include <wait_bit.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/* Assert or de-assert SoCFPGA reset manager reset. */
-+void socfpga_per_reset(u32 reset, int set)
-+{
-+	unsigned long reg;
-+
-+	if (RSTMGR_BANK(reset) == 0)
-+		reg = RSTMGR_SOC64_MPUMODRST;
-+	else if (RSTMGR_BANK(reset) == 1)
-+		reg = RSTMGR_SOC64_PER0MODRST;
-+	else if (RSTMGR_BANK(reset) == 2)
-+		reg = RSTMGR_SOC64_PER1MODRST;
-+	else if (RSTMGR_BANK(reset) == 3)
-+		reg = RSTMGR_SOC64_BRGMODRST;
-+	else	/* Invalid reset register, do nothing */
-+		return;
-+
-+	if (set)
-+		setbits_le32(socfpga_get_rstmgr_addr() + reg,
-+			     1 << RSTMGR_RESET(reset));
-+	else
-+		clrbits_le32(socfpga_get_rstmgr_addr() + reg,
-+			     1 << RSTMGR_RESET(reset));
-+}
-+
-+/*
-+ * Assert reset on every peripheral but L4WD0.
-+ * Watchdog must be kept intact to prevent glitches
-+ * and/or hangs.
-+ */
-+void socfpga_per_reset_all(void)
-+{
-+	const u32 l4wd0 = 1 << RSTMGR_RESET(SOCFPGA_RESET(L4WD0));
-+
-+	/* disable all except OCP and l4wd0. OCP disable later */
-+	writel(~(l4wd0 | RSTMGR_PER0MODRST_OCP_MASK),
-+	       socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER0MODRST);
-+	writel(~l4wd0, socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER0MODRST);
-+	writel(0xffffffff, socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER1MODRST);
-+}
-+
-+/*
-+ * Return non-zero if the CPU has been warm reset
-+ */
-+int cpu_has_been_warmreset(void)
-+{
-+	return readl(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_STATUS) &
-+			RSTMGR_L4WD_MPU_WARMRESET_MASK;
-+}
-+
-+void print_reset_info(void)
-+{
-+	bool iswd;
-+	int n;
-+	u32 stat = cpu_has_been_warmreset();
-+
-+	printf("Reset state: %s%s", stat ? "Warm " : "Cold",
-+	       (stat & RSTMGR_STAT_SDMWARMRST) ? "[from SDM] " : "");
-+
-+	stat &= ~RSTMGR_STAT_SDMWARMRST;
-+	if (!stat) {
-+		puts("\n");
-+		return;
-+	}
-+
-+	n = generic_ffs(stat) - 1;
-+	iswd = (n >= RSTMGR_STAT_L4WD0RST_BITPOS);
-+	printf("(Triggered by %s %d)\n", iswd ? "Watchdog" : "MPU",
-+	       iswd ? (n - RSTMGR_STAT_L4WD0RST_BITPOS) :
-+	       (n - RSTMGR_STAT_MPU0RST_BITPOS));
-+}
-diff --git a/arch/arm/mach-socfpga/reset_manager_s10.c b/arch/arm/mach-socfpga/reset_manager_soc64_platform_families.c
-similarity index 78%
-rename from arch/arm/mach-socfpga/reset_manager_s10.c
-rename to arch/arm/mach-socfpga/reset_manager_soc64_platform_families.c
-index abb62a9b49f..04736b17b36 100644
---- a/arch/arm/mach-socfpga/reset_manager_s10.c
-+++ b/arch/arm/mach-socfpga/reset_manager_soc64_platform_families.c
-@@ -6,6 +6,7 @@
-  */
- 
- #include <errno.h>
-+#include <exports.h>
- #include <hang.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-@@ -15,7 +16,6 @@
- #include <asm/arch/system_manager.h>
- #include <asm/arch/timer.h>
- #include <dt-bindings/reset/altr,rst-mgr-s10.h>
--#include <exports.h>
- #include <linux/iopoll.h>
- #include <linux/intel-smc.h>
- #include <wait_bit.h>
-@@ -29,46 +29,6 @@ DECLARE_GLOBAL_DATA_PTR;
- #define F2SDRAM_SIDEBAND_FLAGOUTSET0	0x50
- #define F2SDRAM_SIDEBAND_FLAGOUTCLR0	0x54
- 
--/* Assert or de-assert SoCFPGA reset manager reset. */
--void socfpga_per_reset(u32 reset, int set)
--{
--	unsigned long reg;
--
--	if (RSTMGR_BANK(reset) == 0)
--		reg = RSTMGR_SOC64_MPUMODRST;
--	else if (RSTMGR_BANK(reset) == 1)
--		reg = RSTMGR_SOC64_PER0MODRST;
--	else if (RSTMGR_BANK(reset) == 2)
--		reg = RSTMGR_SOC64_PER1MODRST;
--	else if (RSTMGR_BANK(reset) == 3)
--		reg = RSTMGR_SOC64_BRGMODRST;
--	else	/* Invalid reset register, do nothing */
--		return;
--
--	if (set)
--		setbits_le32(socfpga_get_rstmgr_addr() + reg,
--			     1 << RSTMGR_RESET(reset));
--	else
--		clrbits_le32(socfpga_get_rstmgr_addr() + reg,
--			     1 << RSTMGR_RESET(reset));
--}
--
--/*
-- * Assert reset on every peripheral but L4WD0.
-- * Watchdog must be kept intact to prevent glitches
-- * and/or hangs.
-- */
--void socfpga_per_reset_all(void)
--{
--	const u32 l4wd0 = 1 << RSTMGR_RESET(SOCFPGA_RESET(L4WD0));
--
--	/* disable all except OCP and l4wd0. OCP disable later */
--	writel(~(l4wd0 | RSTMGR_PER0MODRST_OCP_MASK),
--		      socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER0MODRST);
--	writel(~l4wd0, socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER0MODRST);
--	writel(0xffffffff, socfpga_get_rstmgr_addr() + RSTMGR_SOC64_PER1MODRST);
--}
--
- static void socfpga_f2s_bridges_reset(int enable, unsigned int mask)
- {
- 	int ret;
-@@ -271,40 +231,9 @@ void socfpga_bridges_reset(int enable, unsigned int mask)
- 				 ARRAY_SIZE(arg), NULL, 0);
- 		if (ret)
- 			printf("Failed to %s the HPS bridges, check bridges availability. Status %d.\n",
--				enable ? "enable" : "disable", ret);
-+			       enable ? "enable" : "disable", ret);
- 	} else {
- 		socfpga_s2f_bridges_reset(enable, mask);
- 		socfpga_f2s_bridges_reset(enable, mask);
- 	}
- }
--
--/*
-- * Return non-zero if the CPU has been warm reset
-- */
--int cpu_has_been_warmreset(void)
--{
--	return readl(socfpga_get_rstmgr_addr() + RSTMGR_SOC64_STATUS) &
--			RSTMGR_L4WD_MPU_WARMRESET_MASK;
--}
--
--void print_reset_info(void)
--{
--	bool iswd;
--	int n;
--	u32 stat = cpu_has_been_warmreset();
--
--	printf("Reset state: %s%s", stat ? "Warm " : "Cold",
--	       (stat & RSTMGR_STAT_SDMWARMRST) ? "[from SDM] " : "");
--
--	stat &= ~RSTMGR_STAT_SDMWARMRST;
--	if (!stat) {
--		puts("\n");
--		return;
--	}
--
--	n = generic_ffs(stat) - 1;
--	iswd = (n >= RSTMGR_STAT_L4WD0RST_BITPOS);
--	printf("(Triggered by %s %d)\n", iswd ? "Watchdog" : "MPU",
--	       iswd ? (n - RSTMGR_STAT_L4WD0RST_BITPOS) :
--	       (n - RSTMGR_STAT_MPU0RST_BITPOS));
--}
--- 
-2.43.7
+Best regards,
+Aristo
 
+[1] https://github.com/open-source-firmware/flat-image-tree/issues/32
