@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8417DEF0702
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:23:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E245EA813E
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0594783D9C;
+	by phobos.denx.de (Postfix) with ESMTP id 416AC83DCB;
 	Tue, 10 Feb 2026 17:22:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="g0CsYq4B";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mMiAGxps";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0352583DB6; Tue, 10 Feb 2026 17:22:52 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id BB82583DB6; Tue, 10 Feb 2026 17:22:53 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D45283CE3
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 17:22:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C261283D77
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 17:22:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-4359a302794so2818143f8f.1
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 08:22:50 -0800 (PST)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-43638a3330dso2479720f8f.0
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 08:22:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770740569; x=1771345369;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770740571; x=1771345371;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JNC/SVtbbF1gjifGF7rhJALkr26J0MzAHs+IK1Bd9cs=;
- b=g0CsYq4BDvLMmIRNCRAqilw83+N4YxdIkCobrcxmukUvafxk45p4XKwMc/HbAHlPe7
- 9ExcjpfhIjz3WWPvpZrqAEylQ3Ffd8+Ktvg4Fcl+Towijz38HZQxLJAqPU7pyw6MuVhc
- cirsrXY6S1sINwfdlxwfG8hbYO9zUldmMhW2vFBTmUN/mLVa91a4sYQ215K+NV4q9MWi
- oS32jKcG6+6vwQmyIlWkiv0hvD86wtF/kghowM11K0M1KzAHl1oYci5JtfEjoF2RH507
- t52WNMzbXGryvk+5jqBRaT+TsqMDFJ4nKfCWQVZPkfMPD/bwOPIU6cbKDSMBH3T7i/a0
- I7IA==
+ :reply-to; bh=gLMXeRJzk/F1MP3iOK1XQj2/8Y/Iv20RFR4qmixR/78=;
+ b=mMiAGxpsNOxK7EEFBdVg+bEPzQbGCbijhieNwOhjij//JKlVeU54E3JlaiiCJB/Ef2
+ JP5XcQOJrnay/uU5sz5tVkZpkpRP+1AHfgr7ej2jOnWNVHpMCCmClNXF4ODQQAao+qZ8
+ qciALUj95n6F4m2CdvK9pQj6ufd3hgICuepnX1wTvjDQbJKs/bEE38KvGYJzQWjxMTm1
+ lccoM9c5th2ZZD5sJhuTp4kcWWRXWsVKu+woofpulyN9fCT9kteLwtvO5QeSF+zMV3pZ
+ Z/YfvDotDzHQAO4IuM6jqJiHGB/LqD93SeK5Bk3cXBoFSOBVBNVpEAv1XwTzJinL+Urq
+ N1Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770740569; x=1771345369;
+ d=1e100.net; s=20230601; t=1770740571; x=1771345371;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=JNC/SVtbbF1gjifGF7rhJALkr26J0MzAHs+IK1Bd9cs=;
- b=XRZgTqjPyTInegMAF7JnUwKVlvtIq+AUL7xdCh6J4QZ5TKUk4I4RLfpwhZj9mEvClQ
- 1xEbsLb0JKWKpnVygaYxDsR40nhS+dHhXQBogqbttEXX1X+q7qHx65a5ZJBe3hUrAJu5
- zWzP5xprixEDO3/lcEHkviwbsjlO6u/HWwjJOib2Jt0Vh+6Lts93tcsGG+I2ajY4FQzO
- lOgnF5TesOuHNjYk/4H4rE7uQ1cb0borGwTC12tReEWfSsFu5xyDm+vlKxNNnyIc+sol
- pwuw1QdrHLcFVScKv+KUEBgeQ/EOJjq7PR4uuo6LRk04jr4bqm/AdYlbTjaN4gvI8Oct
- SH8g==
-X-Gm-Message-State: AOJu0YwQMatVHpkmDPtDkA53l1JfmtS5d4QRcbSZvsAn1qOjUib1u+ls
- 0dkkA5WlieqRdbq1y6edajr6YQELNlRseokPlBMsj/KBIrD4MrfLdrqoIz9I/1+WXn4=
-X-Gm-Gg: AZuq6aJ0h8f6Oz4ymi2jz1KAN3j1woncrxoW33Fopof7BwBCW43BWs7iNkRDJ20gL4u
- AYXMVbo87iXqI9g948h44D7mt+92EQRcFYdSCKMd6nYnnzkhQcEBNXy4cuoFWL0RD4tY3/CprM4
- P7zwumk5Twx698SOfMU1qMKd/1oMwXN0ZXfilXO99HVRim8A2Y0iy4H0ciKjZ47uLAgZkaE9YLi
- 9PNmn8j9K8zwNlxKB+dgyNdCZVbwKxWlOzWAbwiTS6QCGOy90moUYe+waKkvhlaGY2P2YR9+kUV
- tsmDjiRLRIqm6aQe7kXL8hK9NtByIIG34oTYTVcxXNUjl1tn3iyiRhIINsyqy18WFWyYCkgRhzi
- amBdNk/NbASrWCyItFoaR7lKuIwm28j3PmjEk0r3kS3VcULS5OpfW2UqFRKeICR2mjDFpZRuj7v
- oAPKwe4hgJ4z8KqrFurH8Kk/zAuVqJht7eRLB7NItO8aFODY+zWHXKKsRgXjVNe4NVAbVR8bWLc
- GWQDUrDnkLWh5nnQtsyGQ==
-X-Received: by 2002:a05:6000:2c08:b0:437:6dac:4580 with SMTP id
- ffacd0b85a97d-4376dac47cdmr11563778f8f.62.1770740569422; 
- Tue, 10 Feb 2026 08:22:49 -0800 (PST)
+ bh=gLMXeRJzk/F1MP3iOK1XQj2/8Y/Iv20RFR4qmixR/78=;
+ b=SPVl0jHil7/6+fzsUUcQLDSkHJDk1hQjwdoKTgczRklwSqCIAVAHXCyB1NYzGQMlUa
+ p6FyC+5/3NbVbNjL3Dw2+qFw4pM9w4BKTjneUe7sXrRsa//hQnMJQrLm3CfR8TNHr0ch
+ iwK+nF+4vrAAZ17mMs8qQasxu+yE/Snxk8nqAsbdY5cESqqbiJCBGfwMJn/Eo+lkUGzc
+ dvMzYB7PNKx36UZuLJvVclFif2QDQGa1DuFNv8iZ/uatESHb3uOWd9RWJdGw7dtpDDcY
+ pXz6WwAMvR+BviB1OzEZ3dKixNOy8miDw98tejZ9tlu/aEpdjvISHkX4liPusa0YXIvJ
+ ZYWw==
+X-Gm-Message-State: AOJu0YwWEfgcmOHgC8AXLpF+qHeoY2WE4sxCTYO7r5RJEHZe+iojs6F8
+ Y/LX3nXGItq3yXFwoN4/A6top94/xbbbysZJochXJLq7/Pfs2HfI0iGi1aBMBWqF6RM=
+X-Gm-Gg: AZuq6aLqTTM+8ptYNL1E1SOMsMUOKz3AmZNYEeG1E1eQhBxNxvURi2HNf8Qn09xhURD
+ nLqgR53e6OAwww4aVxMtNwufHPsTvBHDzwkDel1cdEJLsr9DwLqKCBpdIo8j4vgsQekvDbmHBQA
+ zuCF/nSc2wZ77ey0yT96dr5w28xexCPm1iq3jq3D3l0Ze2pIjAZUKQvf5ccL9xe8HsDt9Rbm6ql
+ VTsVUJdQXrILcGudTnnM1xb8HcrGdhOkKqEwWwPt8qyxe0DR5+mb7kL6lKUQECG2jtoGm8H4Q94
+ IPeQLOnGGhVHUcWKbKHbdwBBICOnkBUZJbXStgaYOBJ6sD3OREVUaXynrqEoOek2V355oFMEwL7
+ wiJJenzciPE0VAQRTz8SLTpvkXkisQJKxlHd6+5I/0J9uU3x6NnJKSwrJ3Q86n97aJ5QEYo3yx5
+ RdJ9YzzgSLRHii3Y+TE660iEtmdn1C1sfxaPP8qeRNQOqywAqtoR78lkUDCl9sLUm+bECD6inxo
+ fVWUXYXfV0K4lURneRltEUV0kLtBK0Q
+X-Received: by 2002:a5d:5d0d:0:b0:430:f5ed:83e3 with SMTP id
+ ffacd0b85a97d-4362933bddemr20494341f8f.6.1770740571089; 
+ Tue, 10 Feb 2026 08:22:51 -0800 (PST)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-43a2-d2f0-c793-0a1b.rev.sfr.net.
  [2a02:842a:d52e:6101:43a2:d2f0:c793:a1b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-436296bd4a1sm35185402f8f.17.2026.02.10.08.22.48
+ ffacd0b85a97d-436296bd4a1sm35185402f8f.17.2026.02.10.08.22.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 08:22:49 -0800 (PST)
+ Tue, 10 Feb 2026 08:22:50 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 10 Feb 2026 17:22:43 +0100
-Subject: [PATCH v2 1/3] drivers: ufs: handle return values of ufs_hba_ops
- callbacks
+Date: Tue, 10 Feb 2026 17:22:44 +0100
+Subject: [PATCH v2 2/3] drivers: ufs: add helper for phy_initialization
+ callback
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260210-ufs-ufs_hba_ops-cleanup-v2-1-dd73da21aa92@baylibre.com>
+Message-Id: <20260210-ufs-ufs_hba_ops-cleanup-v2-2-dd73da21aa92@baylibre.com>
 References: <20260210-ufs-ufs_hba_ops-cleanup-v2-0-dd73da21aa92@baylibre.com>
 In-Reply-To: <20260210-ufs-ufs_hba_ops-cleanup-v2-0-dd73da21aa92@baylibre.com>
 To: u-boot@lists.denx.de
@@ -114,108 +114,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The return values of ufshcd_ops_link_startup_notify(),
-ufshcd_ops_hce_enable_notify(), ufshcd_ops_init(), and
-ufshcd_device_reset() are currently ignored.
+Introduce ufshcd_ops_phy_initialization() as a helper for invoking the
+phy_initialization callback from ufs_hba_ops.
 
-Check and propagate these return values properly and emit appropriate
-error messages on error.
-
-While at it, remove the ufshcd_device_reset() wrapper, which just call
-ufshcd_device_reset().
+This mirrors the existing helper pattern used for other ufs_hba_ops
+callbacks and keeps the call sites consistent and easier to maintain.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/ufs/ufs-uclass.c | 36 ++++++++++++++++++++++++++----------
- 1 file changed, 26 insertions(+), 10 deletions(-)
+ drivers/ufs/ufs-rockchip.c | 10 ++++------
+ drivers/ufs/ufs.h          |  8 ++++++++
+ 2 files changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/ufs/ufs-uclass.c b/drivers/ufs/ufs-uclass.c
-index 3c8e4299259..c09f61aa420 100644
---- a/drivers/ufs/ufs-uclass.c
-+++ b/drivers/ufs/ufs-uclass.c
-@@ -127,11 +127,6 @@ static void ufshcd_print_pwr_info(struct ufs_hba *hba)
- 		hba->pwr_info.hs_rate);
+diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+index 0384244387d..cad753d5990 100644
+--- a/drivers/ufs/ufs-rockchip.c
++++ b/drivers/ufs/ufs-rockchip.c
+@@ -30,12 +30,10 @@ static int ufs_rockchip_hce_enable_notify(struct ufs_hba *hba,
+ 	ufshcd_dme_reset(hba);
+ 	ufshcd_dme_enable(hba);
+ 
+-	if (hba->ops->phy_initialization) {
+-		err = hba->ops->phy_initialization(hba);
+-		if (err)
+-			dev_err(hba->dev,
+-				"Phy init failed (%d)\n", err);
+-	}
++	ret = ufshcd_ops_phy_initialization(hba);
++	if (err)
++		dev_err(hba->dev,
++			"Phy init failed (%d)\n", err);
+ 
+ 	return err;
  }
- 
--static void ufshcd_device_reset(struct ufs_hba *hba)
--{
--	ufshcd_vops_device_reset(hba);
--}
--
- /**
-  * ufshcd_ready_for_uic_cmd - Check if controller is ready
-  *                            to accept UIC commands
-@@ -512,7 +507,9 @@ static int ufshcd_link_startup(struct ufs_hba *hba)
- 	int retries = DME_LINKSTARTUP_RETRIES;
- 
- 	do {
--		ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
-+		ret = ufshcd_ops_link_startup_notify(hba, PRE_CHANGE);
-+		if (ret)
-+			goto out;
- 
- 		ret = ufshcd_dme_link_startup(hba);
- 
-@@ -598,12 +595,18 @@ static inline void ufshcd_hba_start(struct ufs_hba *hba)
- static int ufshcd_hba_enable(struct ufs_hba *hba)
- {
- 	int retry;
-+	int ret;
- 
- 	if (!ufshcd_is_hba_active(hba))
- 		/* change controller state to "reset state" */
- 		ufshcd_hba_stop(hba);
- 
--	ufshcd_ops_hce_enable_notify(hba, PRE_CHANGE);
-+	ret = ufshcd_ops_hce_enable_notify(hba, PRE_CHANGE);
-+	if (ret) {
-+		dev_err(hba->dev, "Controller enable notify PRE_CHANGE failed: %i\n",
-+			ret);
-+		return ret;
-+	}
- 
- 	/* start controller initialization sequence */
- 	ufshcd_hba_start(hba);
-@@ -635,7 +638,12 @@ static int ufshcd_hba_enable(struct ufs_hba *hba)
- 	/* enable UIC related interrupts */
- 	ufshcd_enable_intr(hba, UFSHCD_UIC_MASK);
- 
--	ufshcd_ops_hce_enable_notify(hba, POST_CHANGE);
-+	ret = ufshcd_ops_hce_enable_notify(hba, POST_CHANGE);
-+	if (ret) {
-+		dev_err(hba->dev, "Controller enable notify POST_CHANGE failed: %i\n",
-+			ret);
-+		return ret;
-+	}
- 
+diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+index bc839a43704..74125b1ab31 100644
+--- a/drivers/ufs/ufs.h
++++ b/drivers/ufs/ufs.h
+@@ -756,6 +756,14 @@ static inline int ufshcd_ops_link_startup_notify(struct ufs_hba *hba,
  	return 0;
  }
-@@ -2182,7 +2190,11 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
- 	/* Set descriptor lengths to specification defaults */
- 	ufshcd_def_desc_sizes(hba);
  
--	ufshcd_ops_init(hba);
-+	err = ufshcd_ops_init(hba);
-+	if (err) {
-+		dev_err(hba->dev, "Host controller init failed: %i\n", err);
-+		return err;
-+	}
- 
- 	/* Read capabilities registers */
- 	hba->capabilities = ufshcd_readl(hba, REG_CONTROLLER_CAPABILITIES);
-@@ -2226,7 +2238,11 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
- 	mb(); /* flush previous writes */
- 
- 	/* Reset the attached device */
--	ufshcd_device_reset(hba);
-+	err = ufshcd_vops_device_reset(hba);
-+	if (err) {
-+		dev_err(hba->dev, "Failed to reset attached device: %i\n", err);
-+		return err;
-+	}
- 
- 	err = ufshcd_hba_enable(hba);
- 	if (err) {
++static inline int ufshcd_ops_phy_initialization(struct ufs_hba *hba)
++{
++	if (hba->ops && hba->ops->phy_initialization)
++		return hba->ops->phy_initialization(hba);
++
++	return 0;
++}
++
+ static inline int ufshcd_vops_device_reset(struct ufs_hba *hba)
+ {
+ 	if (hba->ops && hba->ops->device_reset)
 
 -- 
 2.52.0
