@@ -4,62 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF52EEA3F00
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 05:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A227EA3F0A
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 05:43:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43ABD83CBD;
-	Tue, 10 Feb 2026 06:26:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D910F8341A;
+	Tue, 10 Feb 2026 06:43:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oCfC7EJI";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="NvaWU1mv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39B7E83CEE; Tue, 10 Feb 2026 06:26:35 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 3907983CB9; Tue, 10 Feb 2026 06:43:54 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9C2183CE3
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 06:26:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4571F405D2;
- Tue, 10 Feb 2026 05:26:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 682B6C19421;
- Tue, 10 Feb 2026 05:26:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1770701186;
- bh=kjVdh06CUwi1IfDH+EXNZoA6/vYlwvg84KfWLMP0g2E=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oCfC7EJIJQOFaJzx3WSFIzA4UTm3XfELNgA79odH7Lo6RrqfSrTbQZw37i/aL9Zn0
- aQDRadq2sAjKci2Q4VrZhT41MqgAK1u63BrXJZ18DVwefNEB0e2yLMG6hHw0CBa+e2
- sz3OeNqEvkzT3hevZllBXUM7tByOSWh9DWU32EcWk3855iEa4mHPl33YHQ0rmIsW5s
- b4Jtr9KLSTZvLfUPtaYnnkkmHjdUm86k/tA11IgwtTNkGMOgqY6G2Zk0+3UXRR4Rq4
- Te43FfAtVUnbQIkeQlj7isNd4/urv0RFgFzB4UbKpy+b2anR8nWPyVaScbCx+dRGC4
- vc5m9XN8t8yng==
-Date: Tue, 10 Feb 2026 10:56:18 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Biswapriyo Nath <nathbappai@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
+ by phobos.denx.de (Postfix) with ESMTPS id 56D7E8309A
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 06:43:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id B1C5A10E9FB; Tue, 10 Feb 2026 06:43:49 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1770702231; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=GJB8qVi2859riLvQKZ0dLXisJN2XViQOpB5ltDSReUU=;
+ b=NvaWU1mvb48JL1FGbpba9qHHb/7rElR1PDe7x2U44tmunroWxM/HBOkfyUdbfAVxhteazE
+ MT27OPkJqGNsjBv0xd5s8ltwETdh5wx83gAoYAOgNtkXMkDILUJnHZpvnaQqBuBT/Yv3q9
+ xfDZMKL85sPvITPqmaWklfE7Uc+TS7X9GPjZQ+48Ll80d5x8G8AaO1K/KSzxt561cAW6lg
+ NwKw/ECDNMlmVB4KtdWfj7lx9XRxNhfJxGTwV0iwxe1GJ0H2JsCRIH5Hs0uZyZDm90ReMo
+ lU4OFaFekglFp66x/3yDU7/AqzP1CpmJnirwami9TGfLJY7BbdJmGfLeLQ7xJA==
+From: Heiko Schocher <hs@nabladev.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Schocher <hs@nabladev.com>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Bryan Brattlof <bb@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- ~postmarketos/upstreaming@lists.sr.ht
-Subject: Re: [PATCH RFC 0/3] Add clk and pinctrl drivers for SM6125 SoC
-Message-ID: <aYrBejVVr7Ud9xkv@sumit-xelite>
-References: <20260204-sm6125-clk-pinctrl-v1-0-9cf4c556557a@gmail.com>
- <20260207092845.10421-1-nathbappai@gmail.com>
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/2] fastboot: mmc: fix bootloader offset
+Date: Tue, 10 Feb 2026 06:43:43 +0100
+Message-Id: <20260210054345.126651-1-hs@nabladev.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260207092845.10421-1-nathbappai@gmail.com>
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,26 +68,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Sat, Feb 07, 2026 at 09:28:38AM +0000, Biswapriyo Nath wrote:
-> On Wed, 04 Feb 2026 16:10:51 +0000 Biswapriyo Nath <nathbappai@gmail.com> wrote:
-> 
-> > This is still RFC because micro SD card does not work with u-boot but it
-> > works in Linux. I do not know how to troubleshoot the issue. Any pointers
-> > would be really helpful.
-> 
-> I forgot to add the error message. Here is the output from USB serial.
-> 
-> => mmc list
-> mmc@4744000: 0 (eMMC)
-> mmc@4784000: 1
-> => mmc dev 1
-> Card did not respond to voltage select! : -110
-> 
+Not for all SoCs the bootloader start at offset 0x0,
+in a hardware partition of an emmc. So we need the possibility to
+set the correct offset, where bootloader starts.
 
-Can you check if recent SD/eMMC fixes merged [1] are included in your tree?
+Example:
 
-[1] https://lore.kernel.org/all/20251210155454.1561611-1-loic.poulain@oss.qualcomm.com/
+imx8qxp revision C0 emmc Partition layout
 
--Sumit
+| eMMC block / partition | Offset     | Size  | Purpose                        |
+| ---------------------- | ---------- | ----- | ------------------------------ |
+| /dev/mmcblk0boot0      | 0x0        | 2MB   | imx-boot-container A           |
+|                        | 0x00220000 | 128kB | secure boot signature rootfs A |
+| /dev/mmcblk0boot1      | 0x0        | 2MB   | imx-boot-container B           |
+|                        | 0x00200000 | 8kB   | U-Boot env 0                   |
+|                        | 0x00202000 | 8kB   | U-Boot env 1                   |
+|                        | 0x00220000 | 128kB | secure boot signature rootfs B |
+
+imx8qxp rev B0 emmc Partition layout
+
+| eMMC block / partition | Offset     | Size  | Purpose                        |
+| ---------------------- | ---------- | ----- | ------------------------------ |
+| /dev/mmcblk0boot0      | 0x00008000 | 2MB   | imx-boot-container A           |
+|                        | 0x00220000 | 128kB | secure boot signature rootfs A |
+| /dev/mmcblk0boot1      | 0x0        | 8kB   | U-Boot env 0                   |
+|                        | 0x00002000 | 8kB   | U-Boot env 1                   |
+|                        | 0x00008000 | 2MB   | imx-boot-container B           |
+
+If we flash now the bootloader image flash.bin on a B0 revision with
+
+uuu FB: flash bootloader flash.bin
+
+we overwrite the environment and board does not boot at all, as offset
+is wrong.
+
+To prevent any API change in the above command we propose
+the following implementation from this series:
+
+We add a new weak function fb_mmc_get_boot_offset() in drivers/fastboot/fb_block.c
+which returns 0 and call this function instead of passing 0 for
+the offset where offset is used/passed.
+
+In SoC specific code (currently for IMX8QXP only) we implement this function
+that it returns on B0 SoCs the 32k offset and on other SoC revisions the
+offset 0.
+
+This is tested on B0 and C0 based boards from siemens.
+
+This patch should have no effect for other SoCs.
+
+Changes in v2:
+- added Reviewed-by from Mattijs
+- Used the commit message as Peng suggested (with a small
+  checkpatch fix:
+  WARNING: 'writting' may be misspelled - perhaps 'writing'?
+- rebased to mainline
+  b99da05e153 - (tag: v2026.04-rc2, origin/master, origin/HEAD) Prepare v2026.04-rc2
+- added Reviewed-by from Mattijs
+
+Adrian Freihofer (2):
+  fastboot: mmc: make boot partition offset configurable
+  arch: imx8qxp: Override weak fb_mmc_get_boot_offset function
+
+ arch/arm/mach-imx/imx8/cpu.c | 21 +++++++++++++++++++++
+ drivers/fastboot/fb_block.c  | 15 +++++++++++----
+ 2 files changed, 32 insertions(+), 4 deletions(-)
+
+-- 
+2.20.1
+
+base-commit: b99da05e1538b8fa153322da82917af2aa27e1d6
