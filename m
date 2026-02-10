@@ -4,63 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E81EAEA8105
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9295EA8118
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 13:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15C3083CEE;
-	Tue, 10 Feb 2026 13:52:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0C6E183CBD;
+	Tue, 10 Feb 2026 14:42:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="rou3SH6O";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GXXWxE7Q";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oOiyXeoj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EA5083D0B; Tue, 10 Feb 2026 13:52:51 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 48A4383CEE; Tue, 10 Feb 2026 14:42:07 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEA0E83CEA
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 13:52:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=1671=AP=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1770727968;
- bh=zbQ28k8vloiKb28BoQ5gYwcwqbJ3wHrZSvaZz1NJ3pQ=;
- b=rou3SH6O+VsEKym/U/rtfd+QnZSVMdcb7e9VCRcXSM81Na7xwZPvAKkiq5RlJRDu4kbkAs1uB
- B8iyHiLIrtk1VjPq6LaDm12/ACzqxOMnCJmuHNL9HJg1Oxd3XbiOMMwj3kPD70GwJIuK4hQwT2N
- Cb7jAOCV5TfSItHYzG6zCuUsLJh36+3it/LqpmDOA/77HA7gYqwhhW5Fv/RJPqW1EqRHWUxjQN8
- T+eUjxcG+Rom3TiHWVIMPnPnx10T18eOEtG3A5Xd25fXY5da5pBv0ObNzs2qY66z8FxP3JG77bL
- hCzWfguNmvD47Q1IZSgLyVywhRs29emF7LBQ/w6vVEew==
-X-Forward-Email-ID: 698b2a1ce8cd0604c09c09c3
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 2.6.3
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <2bc53024-8de6-4adf-bad6-0bf9d418a0a2@kwiboo.se>
-Date: Tue, 10 Feb 2026 13:52:41 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 96ADF83CB5
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 14:41:59 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4f9N5g1SnBz9vHm;
+ Tue, 10 Feb 2026 14:41:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770730919;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DArVi4TUYEwfdVTJLBrR/ql1t4fhXVjc1rYgujmr/MU=;
+ b=GXXWxE7QuD4lIqhRfOgSFKlm+ZeC7cvepolq/2BF1diuAn6x3L1pgwILeHOQUpbRktKFEC
+ 14DuyAQKmdcQF3VB33MB6cuRCtBlA7/M2GtnRsuuRMf04KL8Al+Ek9Hq/jDMnHZmbwd2jh
+ MUhgGXaR+s5Z6AhkZY9aHILbbZEgul59Tj63gGyv7latjDUcXl2BrYOVtWZs8z6coxQeuW
+ CflDV+QH4pY+DQ+GNKoNdznT7nbofEt7ZKb+Uet5HWA4UCOl6uwSLjxkEYKCAlBS70HV2t
+ SzRZQt6PzG9arw3nz+7OIwxLsNfj5lvEjzReWW2PvXUX+H5ldjVlzSzRlP0wNw==
+Message-ID: <574fff72-abad-4211-8f60-ffc705c591a3@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770730917;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DArVi4TUYEwfdVTJLBrR/ql1t4fhXVjc1rYgujmr/MU=;
+ b=oOiyXeojVw7M6k/avz87ptkPy5fFpkzcF9AyN38aTBmKX/ySK8fUEX8BkceKc26LlrtgGo
+ ZQ2agDE7Dc2jGZ4sNRQ4yMeWYTWmwJ9uoZJyBhkKSzS5ZyZ4c1rRLN/G6H2PRGC681C4il
+ EU0I0PmJtVKEQ1VcEHVOLK86pnmDbGWSE9YKDIceKyIn2ZBhmJ3pqLdpXtzZRWvo+yCS06
+ /qCcal4O+InPsKEgK5j5coeYAxblTV9awlwfhmgMUtRTmdB7ypiELniFccJGGvyPPLRQeJ
+ BOYY/2xCb63jcPNLXb/X+Gt3Q/Xm6PtI+DTyosmoyBHoxA4ZEK7cY9CGRSRF4w==
+Date: Tue, 10 Feb 2026 14:41:54 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3: core: Use IS_ERR_VALUE() for ref_clk rate check
-To: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260209201415.303190-1-jonas@kwiboo.se>
- <9a23daec-39bf-4b2d-85af-820e015ec4dd@mailbox.org>
- <20260209205126.GK2603314@bill-the-cat>
- <f5dd98cd-be29-4587-8ddf-3e43fcb7a811@mailbox.org>
- <20260209225332.GA2436104@bill-the-cat>
- <f4a0bb7b-197a-42f2-b6f9-ee6012ddccd7@mailbox.org>
+Subject: Re: [PATCH] boot: image-fit: Add runtime flag to always relocate
+ overlays
+From: Marek Vasut <marek.vasut@mailbox.org>
+To: Jamie.Gibbons@microchip.com, u-boot@lists.denx.de
+Cc: Valentina.FernandezAlanis@microchip.com, xypron.glpk@gmx.de,
+ trini@konsulko.com, Conor.Dooley@microchip.com, Cyril.Jean@microchip.com,
+ sjg@chromium.org, marek.vasut+renesas@mailbox.org, ycliang@andestech.com
+References: <20260206151457.4104515-1-jamie.gibbons@microchip.com>
+ <9e498de5-d114-485e-840e-1395e153edc3@mailbox.org>
+ <4ff7fc064acf76ccaa8d58056fc3473798bd045e.camel@microchip.com>
+ <ccf94e4b-9945-408a-bd9c-bdd681431ea8@mailbox.org>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <f4a0bb7b-197a-42f2-b6f9-ee6012ddccd7@mailbox.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <ccf94e4b-9945-408a-bd9c-bdd681431ea8@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 941a770e6220bab4a30
+X-MBO-RS-META: 1i3o5tsw6gwb1pcsfr1u7soqxbwm6asz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,93 +92,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/10/2026 11:58 AM, Marek Vasut wrote:
-> On 2/9/26 11:53 PM, Tom Rini wrote:
->> On Mon, Feb 09, 2026 at 10:46:03PM +0100, Marek Vasut wrote:
->>> On 2/9/26 9:51 PM, Tom Rini wrote:
->>>> On Mon, Feb 09, 2026 at 09:35:54PM +0100, Marek Vasut wrote:
->>>>> On 2/9/26 9:14 PM, Jonas Karlman wrote:
->>>>>> clk_get_rate() in U-Boot is documented to return clock rate on success,
->>>>>> 0 for invalid clock and -ve error code for other errors. This differ
->>>>>> slightly from Linux where only >= 0 is returned from clk_get_rate().
->>>>>>
->>>>>> Some clock drivers take advantage of this difference and may return -ve
->>>>>> error code for clocks not fully supported in U-Boot.
->>>>>>
->>>>>> Use IS_ERR_VALUE() to check for an error code in addition to current
->>>>>> invalid clock check to fix broken and unpredicted behavior when clock
->>>>>> driver returns a -ve error code for the ref_clk.
->>>>>>
->>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>>> I wonder if it would be better to fix the API discrepancy . Could you try
->>>>> that instead ?
->>>>
->>>> Which API discrepancy? clk_get_rate behaves the way it behaves
->>>> intentionally and there's some fairly long and recent threads about that
->>>> resulting from attepmts to change that.
->>> Align clk_get_rate() between U-Boot and Linux kind of discrepancy .
+On 2/10/26 1:28 PM, Marek Vasut wrote:
+> On 2/10/26 1:24 PM, Jamie.Gibbons@microchip.com wrote:
+>> Hi Marek,
 >>
->> That's not in the current list of options. Please look at the various
->> threads in the past 6-8 months (and some reverts about series that tried
->> this). That was my initial opinion too, FWIW.
-> Can you please elaborate WHY clk_get_rate() cannot behave the same way 
-> between U-Boot and Linux ? It is confusing to users and it is a source 
-> of bugs, this should be fixed.
+>> On Fri, 2026-02-06 at 20:06 +0100, Marek Vasut wrote:
+>>> EXTERNAL EMAIL: Do not click links or open attachments unless you
+>>> know the content is safe
+>>>
+>>> On 2/6/26 4:14 PM, Jamie Gibbons wrote:
+>>>> Some platforms
+>>>
+>>> All platforms, DTs and DTOs have to be 8 Byte aligned, always,
+>>> period.
+>> Thanks for your feedback. I have realised I misinterpreted Tom's
+>> instruction on my previous patch fix about passing a new flag.
+>>>
+>>>> require device tree overlays (DTOs) to be 8-byte aligned
+>>>> when applying them with libfdt. Previously, the code did not
+>>>> guarantee
+>>>> this alignment, which could result in alignment errors during
+>>>> overlay
+>>>> application.
+>>>> Introduce a new runtime parameter, always_relocate_overlay, to
+>>>> boot_get_fdt_fit(). When set, overlays are always copied to an 8-
+>>>> byte
+>>>> aligned buffer before being passed to fdt_open_into().
+>>>> This resolves issues with FDT overlay application on platforms that
+>>>> require strict alignment.
+>>>>
+>>>> Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always at 8-byte aligned
+>>>> address")
+>>>>
+>>>> Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
+>>>> ---
+>>>>    boot/image-fdt.c |  2 +-
+>>>>    boot/image-fit.c | 23 +++++++++++++++++------
+>>>>    include/image.h  |  5 ++++-
+>>>>    3 files changed, 22 insertions(+), 8 deletions(-)
+>>>>
+>>>> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+>>>> index a3a4fb8b558..33fd4248acd 100644
+>>>> --- a/boot/image-fdt.c
+>>>> +++ b/boot/image-fdt.c
+>>>> @@ -431,7 +431,7 @@ static int select_fdt(struct bootm_headers
+>>>> *images, const char *select, u8 arch,
+>>>>                                fdt_noffset =
+>>>> boot_get_fdt_fit(images, fdt_addr,
+>>>> &fit_uname_fdt,
+>>>> &fit_uname_config,
+>>>> -                                                            arch,
+>>>> &load, &len);
+>>>> +                                                            arch,
+>>>> &load, &len, true);
+>>>
+>>> This flag is always true, do we actually need it ?
+>>>
+>>>>                                if (fdt_noffset < 0)
+>>>>                                        return -ENOENT;
+>>>> diff --git a/boot/image-fit.c b/boot/image-fit.c
+>>>> index d2b0a7daccc..a3fa2a01463 100644
+>>>> --- a/boot/image-fit.c
+>>>> +++ b/boot/image-fit.c
+>>>> @@ -2370,7 +2370,8 @@ int boot_get_setup_fit(struct bootm_headers
+>>>> *images, uint8_t arch,
+>>>>    #ifndef USE_HOSTCC
+>>>>    int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>>>>                     const char **fit_unamep, const char
+>>>> **fit_uname_configp,
+>>>> -                  int arch, ulong *datap, ulong *lenp)
+>>>> +                  int arch, ulong *datap, ulong *lenp,
+>>>> +                  bool always_relocate_overlay)
+>>>>    {
+>>>>        int fdt_noffset, cfg_noffset, count;
+>>>>        const void *fit;
+>>>> @@ -2492,11 +2493,21 @@ int boot_get_fdt_fit(struct bootm_headers
+>>>> *images, ulong addr,
+>>>>                ov = map_sysmem(ovload, ovlen);
+>>>>
+>>>>                ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+>>>> -             ovcopy = malloc(ovcopylen);
+>>>> -             if (!ovcopy) {
+>>>> -                     printf("failed to duplicate DTO before
+>>>> application\n");
+>>>> -                     fdt_noffset = -ENOMEM;
+>>>> -                     goto out;
+>>>> +             if (always_relocate_overlay) {
+>>>> +                     ovcopy = aligned_alloc(8, ovcopylen);
+>>>> +                     if (!ovcopy) {
+>>>> +                             printf("failed to allocate aligned
+>>>> DTO buffer\n");
+>>>> +                             fdt_noffset = -ENOMEM;
+>>>> +                             goto out;
+>>>> +                     }
+>>>> +                     memcpy(ovcopy, ov, ovlen);
+>>>> +             } else {
+>>>> +                     ovcopy = malloc(ovcopylen);
+>>>> +                     if (!ovcopy) {
+>>>> +                             printf("failed to duplicate DTO
+>>>> before application\n");
+>>>> +                             fdt_noffset = -ENOMEM;
+>>>> +                             goto out;
+>>>> +                     }
+>>>
+>>> Looking at this, if the problem is $ov aligned to 4 Bytes, then $base
+>>> a
+>>> bit below could also be aligned to 4 Bytes if there are two or more
+>>> DTs
+>>> in the fitImage without external data. Can you please try the
+>>> attached
+>>> patch and see if that still works ?
+>>>
+>>> diff --git a/boot/image-fit.c b/boot/image-fit.c
+>>> index 3ed69b5f7bc..845e769a7e3 100644
+>>> --- a/boot/image-fit.c
+>>> +++ b/boot/image-fit.c
+>>> @@ -2368,6 +2368,48 @@ int boot_get_setup_fit(struct bootm_headers
+>>> *images, uint8_t arch,
+>>>    }
+>>>
+>>>    #ifndef USE_HOSTCC
+>>> +#ifdef CONFIG_OF_LIBFDT_OVERLAY
+>>> +static int boot_get_fdt_fit_into_buffer(ulong loadaddr, ulong
+>>> loadlen,
+>>> void **fdtdstbuf)
+>>> +{
+>>> +       void *fdtsrcbuf, *map;
+>>> +       ulong fdtdstlen;
+>>> +       int err;
+>>> +
+>>> +       map = map_sysmem(loadaddr, loadlen);
+>>> +
+>>> +       /* Set up source buffer, make sure DT in the buffer is 8-
+>>> Bytes aligned */
+>>> +       if (!IS_ALIGNED((uintptr_t)map, 8)) {
+>>> +               fdtsrcbuf = aligned_alloc(8, loadlen);
+>>> +               if (!fdtsrcbuf)
+>>> +                       return -ENOMEM;
+>>> +               memcpy(fdtsrcbuf, map, loadlen);
+>>> +       } else {
+>>> +               fdtsrcbuf = map;
+>>> +       }
+>>> +
+>>> +       /* Set up destination buffer, make sure DT in the buffer is
+>>> 8-Bytes
+>>> aligned */
+>>> +       fdtdstlen = ALIGN(fdt_totalsize(fdtsrcbuf), SZ_4K);
+>>> +       fdtdstbuf = aligned_alloc(8, fdtdstlen);
+>>> +       if (!fdtdstbuf) {
+>>> +               printf("failed to duplicate DTO before
+>>> application\n");
+>>> +               if (!IS_ALIGNED((uintptr_t)map, 8))
+>>> +                       free(fdtsrcbuf);
+>>> +               return -ENOMEM;
+>>> +       }
+>>> +
+>>> +       err = fdt_open_into(fdtsrcbuf, *fdtdstbuf, fdtdstlen);
+>>> +       if (!IS_ALIGNED((uintptr_t)map, 8))
+>>> +               free(fdtsrcbuf);
+>>> +       if (err < 0) {
+>>> +               printf("failed on fdt_open_into for DTO: %s\n",
+>>> +                      fdt_strerror(err));
+>>> +               return err;
+>>> +       }
+>>> +
+>>> +       return 0;
+>>> +};
+>>> +#endif
+>>> +
+>>>    int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>>>                       const char **fit_unamep, const char
+>>> **fit_uname_configp,
+>>>                       int arch, ulong *datap, ulong *lenp)
+>>> @@ -2380,7 +2422,7 @@ int boot_get_fdt_fit(struct bootm_headers
+>>> *images,
+>>> ulong addr,
+>>>          char *next_config = NULL;
+>>>          ulong load, len;
+>>>    #ifdef CONFIG_OF_LIBFDT_OVERLAY
+>>> -       ulong ovload, ovlen, ovcopylen;
+>>> +       ulong ovload, ovlen;
+>>>          const char *uconfig;
+>>>          const char *uname;
+>>>          /*
+>>> @@ -2391,7 +2433,7 @@ int boot_get_fdt_fit(struct bootm_headers
+>>> *images,
+>>> ulong addr,
+>>>           * Instead, let's be lazy and use void *.
+>>>           */
+>>>          char *of_flat_tree;
+>>> -       void *base, *ov, *ovcopy = NULL;
+>>> +       void *base, *ovcopy = NULL;
+>>>          int i, err, noffset, ov_noffset;
+>>>    #endif
+>>>
+>>> @@ -2489,17 +2531,7 @@ int boot_get_fdt_fit(struct bootm_headers
+>>> *images, ulong addr,
+>>>                  }
+>>>                  debug("%s loaded at 0x%08lx len=0x%08lx\n",
+>>>                                  uname, ovload, ovlen);
+>>> -               ov = map_sysmem(ovload, ovlen);
+>>> -
+>>> -               ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+>>> -               ovcopy = malloc(ovcopylen);
+>>> -               if (!ovcopy) {
+>>> -                       printf("failed to duplicate DTO before
+>>> application\n");
+>>> -                       fdt_noffset = -ENOMEM;
+>>> -                       goto out;
+>>> -               }
+>>> -
+>>> -               err = fdt_open_into(ov, ovcopy, ovcopylen);
+>>> +               err = boot_get_fdt_fit_into_buffer(ovload, ovlen,
+>>> &ovcopy);
+>>>                  if (err < 0) {
+>>>                          printf("failed on fdt_open_into for DTO:
+>>> %s\n",
+>>>                                 fdt_strerror(err));
+>>> @@ -2507,8 +2539,7 @@ int boot_get_fdt_fit(struct bootm_headers
+>>> *images,
+>>> ulong addr,
+>>>                          goto out;
+>>>                  }
+>>>
+>>> -               base = map_sysmem(load, len + ovlen);
+>>> -               err = fdt_open_into(base, base, len + ovlen);
+>>> +               err = boot_get_fdt_fit_into_buffer(load, len + ovlen,
+>>> &base);
+>>>                  if (err < 0) {
+>>>                          printf("failed on fdt_open_into: %s\n",
+>>>                                 fdt_strerror(err));
+>>> -- 
+>>> 2.51.0
+>> Thanks for the suggestion. I tested your patch and found that, although
+>> overlays are applied to aligned buffers, the CPU OPP overlay does not
+>> appear in the final device tree in Linux. With my previous patch above
+>> (the alignment fix), the OPP overlay works. It looks like the new
+>> buffer management breaks overlay chaining or the final DT pointer isn’t
+>> updated correctly, so overlays aren’t present in the running device
+>> tree.
+>> Let me know if you have suggestions for tracking the buffer or chaining
+>> overlays differently.
+> Maybe some memcpy is missing there somewhere ? Can you please have a 
+> look and debug this a bit ?
 
-I think main issue is that U-Boot != Linux, and in U-Boot we can disable
-subsystems such as CLK, and the normal U-Boot way to signal that is to
-return -ENOSYS from functions, what clk_get_rate() does when disabled.
-
-Other clk_*() related functions also differs from U-Boot and Linux, some
-only exists in U-Boot, others behave differently.
-
-Last attempt at changing clk_get_rate() behavior in U-Boot I gave a NAK
-on the Rockchip driver side. I am not fully against changing behavior
-of clk_get_rate(), but the driver ops should continue to work the same.
-There is a difference between an unsupported and an invalid clock.
-
-Something like below, and similar for other clk ops, could possible be
-fine if someone really want to align clk_*() funcs with Linux.
-
-Back to this patch, I will send other patches to implement the missing/
-unsupported dwc3 ref clocks on Rockchip, this patch is still valid and
-matches current and documented behavior for clk_get_rate() in U-Boot
-and prevent lockups or crashes when ref clk is missing/unsupported.
-
-
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 748359de287b..4603ecef82b5 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -485,6 +485,7 @@ int clk_request(struct udevice *dev, struct clk *clk)
- ulong clk_get_rate(struct clk *clk)
- {
- 	const struct clk_ops *ops;
-+	ulong rate;
- 
- 	debug("%s(clk=%p)\n", __func__, clk);
- 	if (!clk_valid(clk))
-@@ -492,9 +493,17 @@ ulong clk_get_rate(struct clk *clk)
- 	ops = clk_dev_ops(clk->dev);
- 
- 	if (!ops->get_rate)
--		return -ENOSYS;
-+		rate = -ENOSYS;
-+	else
-+		rate = ops->get_rate(clk);
-+
-+	if (IS_ERR_VALUE(rate)) {
-+		dm_warn("clk_get_rate(clk=%p, id=%lu) failed: %ld\n",
-+			clk, clk->id, (long)rate);
-+		return 0;
-+	}
- 
--	return ops->get_rate(clk);
-+	return rate;
- }
- 
- struct clk *clk_get_parent(struct clk *clk)
-
-
-Regards,
-Jonas
+Also, can you reproduce this in sandbox ? Can you share such a reproducer ?
