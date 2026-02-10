@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC75DEA8130
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 787D9EF0702
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9069183D7D;
-	Tue, 10 Feb 2026 17:11:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BB3D183CBD;
+	Tue, 10 Feb 2026 17:22:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="utnRHzDt";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="uEz7ZfNJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CF8283D7D; Tue, 10 Feb 2026 17:11:38 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D4AFA83D77; Tue, 10 Feb 2026 17:22:50 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 999CF80FA1
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 17:11:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F28F8367F
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 17:22:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-47ee76e8656so15128225e9.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 08:11:31 -0800 (PST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4806dffc64cso50681425e9.1
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 08:22:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770739891; x=1771344691;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770740568; x=1771345368;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=yU0IhtiE5SdT3b0e+WiUHkJgsHBG/DzDdu31HrhiRTQ=;
- b=utnRHzDtCODz4B5jOiS/VjB4l6s7DXILdCYvyvuZL72oAT5o94mkx3fiFoQ4vQej/W
- 59ZzOz89PPDZjfBfEwlwzaYxgbqfLRt2Plqu5Le7gSQvqdTE65hAs0KaWkygo4lBrb3Y
- wPZy3UBiQa3x1+kJodMaPxFu5V1ZDpaA5MPvhtMxcOEfDKKoN6etH6qtH/6du/ACtPfo
- GoiCf2zvBPJGz1JEApPQEQnlbSrTclq5vtG1tJRxFquLT8xRSJKdl6qq8zjB0MJvopab
- AiT8J6njtV+7W7V2pKvTffs9w49eFdOjvuJvToLzpoRixGryjT6PJ5JebeFu9oVwkzAD
- Yb/Q==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t/ZhLf4H1ogwEzR0lyTVBqFGu3OUtYkm7ZQGkxC8dAI=;
+ b=uEz7ZfNJ/JQo9/pC1xaHWit9WOWC16DhmU+dQTypBLJYM/LhENYO3r7+roQ8Dhsd0W
+ 7EBxy9JDunKtqXKM0Kkdpvpnv6aT2sr8Wl1Z23NI1jj+NLXs/b0bVh8z9BZlz9q5RBle
+ rphbGfpycwsJTmM4Ndw/63f+j6vbjzbsDZCEBL/zwSn6Cf+rjNvOF4NvwtlPs8lIXzUy
+ ZNKZyY+8er1udXNNsRf72UBY2lRDlXU/e9BwVY6j++wvo5Udm9NIBoMCGF+cgJDEt6A3
+ WNL0zJHuIHzwbH+4gndvAocKDH6yT0P2oi2fiocSBk/eATqXYn3YFRVgESBh6vKrWaHY
+ 0Gxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770739891; x=1771344691;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=yU0IhtiE5SdT3b0e+WiUHkJgsHBG/DzDdu31HrhiRTQ=;
- b=dDLpfzLKprJJjZyS/8hDIxxQ5DvkW6VyekjJUc1hvb5v+KxluwMS6toR4YIss1UM0S
- Y/XNM2U4uEkqxEMk3U8pvCoPmzuIur72kAW3VZ6GaYrOs9NfELuXtOF95hpSHdq62xEI
- 6T13mb93FkprXwIRXtIIZrNfTiCm4HztBYjm00BVqR9QjlwRtMEk8dYHSS+1PJGUQaTb
- pQnOej9xWScqJcZqihaBK0rsHUa75qkj9QsMN7LW01WMOY6INmJkuVoJecYvYlP1b4f+
- tez+lop/he4bmIbI199ayRF9ZPiDcMnPDDdAxB4eE2e13xcB0fSVyg2K/KdJ9bKTHnyS
- FDeA==
-X-Gm-Message-State: AOJu0YyRDPBqZneJRgdu/sD+BGjLfEEanng8aTQ/kc//m5desp01Q9Vj
- gFM39/+rETlWa/Uj8FCt2DfEgtr3UPFEWl9LTi32n2iGZWCTmn5Zgwe7xJhmr2G2aY4=
-X-Gm-Gg: AZuq6aLTbEaP3+TSP/JwjRwiUaPFS0T5loQQSXdWL+C11ywKaHqviCftDaijZb2PNU2
- S6tQpaDfwQF9718suM4n6PyrluQkYBJx9XEEShZkemdYFSX2wlxcy/Kk52/lHD+wPgF+quVI6eF
- RDtsI4LizV4vjdI+wb/VfhqE6ccDdmg+IkPi+999QkscmlGoeHzSZLLb1rgXt+7z8HRdvjAyJGS
- Oxg0usj+cRFL1L/p6zzOSobGXo0MLX2iLkdx6NFdyskdaeoZkiNpWQC8mqOIOgJinTwgZIBrzUg
- yVs2y9lGqvtcmpfXB5iWloiV7j7KEVcBJhNvrevvDT/1qCwP390fMFqxOSW1UKB8rjfdx9rjf+0
- k5PurD53xCxJ2tTbI92ggaGcqgpgBIqOXWOxdAhUdZzLy/O7twSwUZjY84sF6aWjA3Z3mzo+wuR
- IcYa5lQv7ucmC1QFglelayhuPunW4CSPQAVtgglLZRH3rFHG8sn1eqz/NEjaMBt70CEbT7RzBO9
- fmXnYGh/Mn/jjVGGvtwow==
-X-Received: by 2002:a05:600c:8b82:b0:47e:e57d:404 with SMTP id
- 5b1f17b1804b1-4832020f040mr242256545e9.16.1770739891005; 
- Tue, 10 Feb 2026 08:11:31 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770740568; x=1771345368;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t/ZhLf4H1ogwEzR0lyTVBqFGu3OUtYkm7ZQGkxC8dAI=;
+ b=mKU1WL7Whgiih0AnvbW8luUqpIGkfpUaVZg5gVl5BC61uym8+UKnEjZK039MkYqJFQ
+ 3TakUDb7mn429mD0OC/lmkwyc2bdONZC3QGE8IPErilgQMUmq44dJHWfbVRN4tXJOxVm
+ B49RbK14QWJgs4bxAXv2Kpy7YOITOrUPtCPgl3qg3LBrt1iYxkWtZxIZywLN4zQA6bO7
+ JX48W3yh78zEJNTDcbfU8gBvQWG7G/t67h1FjsSfNXh2V+z3qR4q4N7l1KcFT+zog9GL
+ z9L1MhNjCO4RmcyugxIoLy9JJ6/vGLuABy9gwzlghUkydEsre6Jgu5keUYrTvrWZHDRf
+ zxDQ==
+X-Gm-Message-State: AOJu0Yw/MciCyhbx62SasGGNCOFMYhmig9DNLrLKk0uFbRbS25TeP7kx
+ BEZhMaAVoS/Kw4J0Z5NMfgfxxl7CsQldv0RCYezkAVsgjpodVjUMPzfqXC+6q2xENvY=
+X-Gm-Gg: AZuq6aIVgitT2Zh9UArb9XKcgtcGrFrEFhDOfunJxWQyruauLJMCCpvs6uZjCY/itUX
+ oLX9viT79WCLX0oU0ZHMAbIE3590hSCTyFhWrKeZW9mf+ePXJX8aqU3t+sz61MvDCTmQxxZ/DCn
+ 529s4KQBRNkxuShv0hf0WfjVcmuyQv5YWEV26AFWE3n3b4Ls5JrkELUr5kQgyoaqg7kMUDmNW9m
+ x/A129NT13evcJQ1jvSmkKkm/eLN6pkyT1NqbjPJ84/VKOyC9rTrSVr5yYzTuxvy7FE2AHOIeyN
+ jE9xqd93TlwMmdlhdrx1ltFxhDJn6S0hFiPyse0luJuMJstDUVAu0cfyqv3BhXQJqLkJbh5aNmr
+ dOtzLY1SDV51p9FFhB4z1k+wzeWZyeHQl0CYDhp2nHDw5dMWZBQLPdYF/3vQjNMHV175jO6kpkL
+ d5kuMng/im/W70D7NP8lY9meAkM1vIMxUMTRMh9tZcZ1FPWa/JfWX5wTfLbVmulKaQaQm5sF9PW
+ 4LDoxVPCojKJ5vT69G0Jw==
+X-Received: by 2002:a05:600c:548e:b0:47e:e78a:c833 with SMTP id
+ 5b1f17b1804b1-483209bcd64mr195913275e9.32.1770740567810; 
+ Tue, 10 Feb 2026 08:22:47 -0800 (PST)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-43a2-d2f0-c793-0a1b.rev.sfr.net.
  [2a02:842a:d52e:6101:43a2:d2f0:c793:a1b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d7e50casm62994595e9.8.2026.02.10.08.11.28
+ ffacd0b85a97d-436296bd4a1sm35185402f8f.17.2026.02.10.08.22.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 08:11:30 -0800 (PST)
+ Tue, 10 Feb 2026 08:22:47 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 10 Feb 2026 17:11:19 +0100
-Subject: [PATCH 3/3] drivers: ufs: fix typo in struct ufs_dev_cmd
- kernel-doc
+Subject: [PATCH v2 0/3] drivers: ufs: ufs_hba_ops callbacks cleanup
+Date: Tue, 10 Feb 2026 17:22:42 +0100
+Message-Id: <20260210-ufs-ufs_hba_ops-cleanup-v2-0-dd73da21aa92@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260210-ufs-ufs_hba_ops-cleanup-v1-3-bf12e31de4a9@baylibre.com>
-References: <20260210-ufs-ufs_hba_ops-cleanup-v1-0-bf12e31de4a9@baylibre.com>
-In-Reply-To: <20260210-ufs-ufs_hba_ops-cleanup-v1-0-bf12e31de4a9@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNQQqDMBREryJ/3ZQkWotdeY8iksSf+sGakNRQE
+ e/e6AW6mMUbmDcbRAyEER7FBgETRXJzBnkpwIxqfiGjITNILmsuBWeLjUf6Uave+cjMhGpePLu
+ XTaVKPthbU0Ne+4CWvqf52WUeKX5cWM+jJI72vzMJxpm2QmIpBqxU02q1TqQDXo17Q7fv+w+Yu
+ OdqwQAAAA==
+X-Change-ID: 20260210-ufs-ufs_hba_ops-cleanup-7394a30df596
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -114,27 +116,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix "associated" typo in struct ufs_dev_cmd kernel-doc.
+Hi all,
+
+I am currently writing a ufs driver for MT8195 and I noticed that return
+values on ufs_hba_ops callbacks are ignored. Fix this.
+
+While at it, I also removed a useless wrapper around
+ufshcd_device_reset(), added a wrapper around
+ufshcd_ops_phy_initialization and fixed a typo.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/ufs/ufs.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Fix interactive rebase issue: add missing "," and rename ret to err
+- Link to v1: https://lore.kernel.org/r/20260210-ufs-ufs_hba_ops-cleanup-v1-0-bf12e31de4a9@baylibre.com
 
-diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index 74125b1ab31..0f6c93fbce7 100644
---- a/drivers/ufs/ufs.h
-+++ b/drivers/ufs/ufs.h
-@@ -509,7 +509,7 @@ struct ufs_query {
- };
- 
- /**
-- * struct ufs_dev_cmd - all assosiated fields with device management commands
-+ * struct ufs_dev_cmd - all associated fields with device management commands
-  * @type: device management command type - Query, NOP OUT
-  * @tag_wq: wait queue until free command slot is available
-  */
+---
+Julien Stephan (3):
+      drivers: ufs: handle return values of ufs_hba_ops callbacks
+      drivers: ufs: add helper for phy_initialization callback
+      drivers: ufs: fix typo in struct ufs_dev_cmd kernel-doc
 
+ drivers/ufs/ufs-rockchip.c | 10 ++++------
+ drivers/ufs/ufs-uclass.c   | 36 ++++++++++++++++++++++++++----------
+ drivers/ufs/ufs.h          | 10 +++++++++-
+ 3 files changed, 39 insertions(+), 17 deletions(-)
+---
+base-commit: b99da05e1538b8fa153322da82917af2aa27e1d6
+change-id: 20260210-ufs-ufs_hba_ops-cleanup-7394a30df596
+
+Best regards,
 -- 
-2.52.0
+Julien Stephan <jstephan@baylibre.com>
 
