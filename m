@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1833DEB26E0
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:45:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF963EB26E0
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:45:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CBA383D7D;
+	by phobos.denx.de (Postfix) with ESMTP id 97F1D83DCB;
 	Tue, 10 Feb 2026 17:45:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e0qsv0ll";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fVKqk4gf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BD6483CE3; Tue, 10 Feb 2026 16:36:00 +0100 (CET)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 6F71D83CBD; Tue, 10 Feb 2026 16:58:01 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C399883CB5
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 16:35:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3745A83B03
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 16:57:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=nathbappai@gmail.com
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-824484dba4dso872953b3a.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 07:35:57 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2aad1dc8856so20300415ad.1
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 07:57:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770737756; x=1771342556; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1770739078; x=1771343878; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wv/TxLBerZOCFMMZYbw1OQ/ikNSoZoHK5iO+aN3FX3g=;
- b=e0qsv0llQRjB2KQZcYgiQLtg1p9CGlLH8Q8blv7O4izK+xnZrLFyWjbigRW0oYJjki
- 6t8LShup5Htx8ww02meo09a+A079F/DIybQH9i1ueD/R/unLTA9XzN0OcIhRphILzhwi
- 7hQvoAXZxsKCPsn8K/Q31rm8s/EiddhaGRFGCeruThy2wQFZYrriwZwwkrJ7uwv5Ydg8
- oMgdds6tNngxbCQttokAiLGbTLjPNP34Nu104qvU9qLGLrzvxvEHu+902Hyv6du3lEHO
- JlthCLalWH9QUHkJcolP92rUPnz1RhYWado2ORZhUFTtJROy7FFewSu5kDBbaJKa8OMG
- YUPw==
+ bh=CiwohQ4Gj9WOQUXCBMMx0/lBAQltyq7XxpaIEEMEEok=;
+ b=fVKqk4gfBIG3ZsfDC2ZeL36o/obL5pzsSTrYv4qkJi0i5RrtB3FrVhvAThdgGxRiMi
+ SfP9OHKWkLXM1Myjy8uYwWTOmSD/CkptbZFn8QPDEg6CA4RaRv9PItbSe1cHiBGfyLBA
+ BK3IIEGX0XW6Ct9qkOCope/VT8zgzEtabtr46h58HQYarKM/Ri8F8Jt8h6AjCL3MHSuX
+ XtcBjwkPNdXtn66NTYB99zDRk4TO8CXi21ASF5hCq75ZCOGUwzVy9ZbAxbtOQEFopR3s
+ FiYFEcMxQ2XXH48HAfALv9GWxwHP0uJziT0PkmfzMw+5DIspT89ls19DYF/Leo8ldAL4
+ 3x4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770737756; x=1771342556;
+ d=1e100.net; s=20230601; t=1770739078; x=1771343878;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Wv/TxLBerZOCFMMZYbw1OQ/ikNSoZoHK5iO+aN3FX3g=;
- b=EBZCDWLujNHVmOztyMMnWyYDZwMvQZS1bk49XGjIc2zhuPULXbJGylb/9yt+SFxg+p
- IQMUpUbxRfRnIneLePk2pkndGBOdGY2IocHwikJg5E4A72ytDBjxtqNZkVm7ru5w2Hab
- FKT8jxio3vfWPURwYluGA/Fo2GFJuqzlOGMEx4C47+YHBJGRnRAJTR5t+vEKRKhymfRo
- pGr1xzRbUhDzjg/nPxkRJp2GcDDbzG1wbZIpgSxcwM9HGBaoC28vzXG3WjTjAE8zD410
- bmB0J5b322rQAeqhQ0Z1W6FOoOURbkXWCOaXYWqFePFWXIsN4H5qI/GztoUiqLvvoylw
- Is0A==
+ bh=CiwohQ4Gj9WOQUXCBMMx0/lBAQltyq7XxpaIEEMEEok=;
+ b=Swxh7yfA2MidFjCwt8EFQQa3NKdXYAzBsu8+yGl13xA1aCx9sKaCfo4r3FcLI3aZk5
+ OaNlbe2b4m4tujKef1jWjPF2MSG0HShPIJw6jUrhIy2dQEgwZZTg8DE3xUww1gbKC3os
+ Dy0pbxVI1U0XdTX5l+W3Q9d6W/WnpOtAAVbLftQ4MoF64hrY6NjTXaj7+71DMJ5wQuj5
+ 4qp7dz7odrjB+fo2Ba2jzznkigj9eLr760fWxwzP7XoyVjSvDdxtYcmFw3rwDijwu7Z0
+ Cxi9cO62pLXgBGcVdnMggTFHZxuGhzw5Sbwf7IZd2A8mDcUkBsjW2Q+K4/8d/9g2D+tK
+ ew0Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSYcHxSb1tXvGc2SjbNpZbNAZcvam6pYIKWHDWRseqoLcIGYlCPwSxrRmcXYgAyfC5gODMJhI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxWY8GyVP+iXpxkT0q20Ul6a1ZzWxLWBaXu5+CZDH1xByGIJSK9
- CyiKOhWBpxKBRzx/gKBOHNL38+Arn5k9XCs1ZpwwOFiLx4FWiQgUdQY7
-X-Gm-Gg: AZuq6aJiuIYngcmdKpuic/Lg/cQ7gIHrgTyeSuMozCd4ei8xhxUNwAafnL7Yvtd4p5W
- x251DeR6/WkmTeqMynXdcIykNg5l8ldw+MWj/D3pyUHhgn2AYZMWurkr/PLfGFhU2IDerSelXN2
- 3uGp14Xou0qyTNWjzREumGtcwOWWdD3vyJS2M2xblhUT0dLLmzfeaxl8zsrmRC7acKFZh1ELOiL
- JuO3LWfO74y1mKbHh53FFGE+J3ZH5DU5fU56U4cbINZGKxZOU4pvM+WZk51e6GPuYdFsbqFFB3P
- +MAPNYu2z+QOxHfItN/h5MqhRuKR0b4dG3RhIxlcOShh/13Wa1ogm8kvz7KdOuT6rSJxsgtdAjp
- LRKu7yOoKVSGBl8GrdaA6EQiVJn//xqOSPeNns0sw85uhUxsHdWTXnfyQ3SufD7wMA32khJKgGa
- CuVU/SFjX9IALPHNRf9VM=
-X-Received: by 2002:a05:6a00:450a:b0:81f:9c50:3564 with SMTP id
- d2e1a72fcca58-82441753c79mr12990545b3a.52.1770737756128; 
- Tue, 10 Feb 2026 07:35:56 -0800 (PST)
+ AJvYcCVZ8ZxVELTNgkgSThg9wcEIHRBFkj5jbETZAb3zx89mEP541CmXHhIotdFKioYPlla7UJ7Aohc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMzcgywL49bw0R9GrYveEJnGO2lWAg0WsC3NUgTP7oRaP1we85
+ lFUErsUTmvbUluWiy9JgoaLCmitN6I09AtMG1JqF8UdYDVVgquBbZdBf
+X-Gm-Gg: AZuq6aJMTk8qP0A3nQhOQSAiBCSsW5uZp/s2bLtK46EyawGBbAxI8QOfO7ngbJud9Kc
+ YBVEPG5OWHOkFCm1qO4oV7sexZoSY3oGKQbVE7Idd4odGiaMsZ4U51RF8HQjwlBgx1o0tIn2/B5
+ NZLGprIDB2MoHXW6HpyNMLoh85r+S11ZfqLDPCfApEa+S7a44FDP04tfHjn3Zv1MW/f8osVCdJw
+ DSMWlM9uYs+/ekTmfgvBAIIBQ6EfXqn1LWrmSYqPP+djtzZ5+D1c/PERTtYqrvNVLWTMPmen0cz
+ zl4o5D78wNLWWPAAN04u9pX5Y4faSH0IErT8f8zJG5MPKiTxAxsaRvh4hy/YB6LmKDhHuKAg+HP
+ bgwJVlXj7LQotzMSU+IJ9T5bO9qLnK6Q38ei+yc6XUJLMuZT5FEfHMhPlBVvrji6bHcFU1q7wLd
+ JwPl9wnYl8xIL4pxPyrpBhEqrQPNRcCQ==
+X-Received: by 2002:a17:902:d491:b0:2aa:d320:e96a with SMTP id
+ d9443c01a7336-2aad320ecb5mr101977595ad.27.1770739077479; 
+ Tue, 10 Feb 2026 07:57:57 -0800 (PST)
 Received: from ArchLinux ([43.251.91.63])
  by smtp.googlemail.com with ESMTPSA id
- d2e1a72fcca58-824418b60easm14104736b3a.55.2026.02.10.07.35.51
+ d9443c01a7336-2aafef16dedsm51353845ad.0.2026.02.10.07.57.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 07:35:55 -0800 (PST)
+ Tue, 10 Feb 2026 07:57:57 -0800 (PST)
 From: Biswapriyo Nath <nathbappai@gmail.com>
-To: Sumit Garg <sumit.garg@kernel.org>
-Cc: Biswapriyo Nath <nathbappai@gmail.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Cc: Biswapriyo Nath <nathbappai@gmail.com>, u-boot-qcom@groups.io,
+ Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Bryan Brattlof <bb@ti.com>,
  Peng Fan <peng.fan@nxp.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
@@ -84,10 +84,10 @@ Cc: Biswapriyo Nath <nathbappai@gmail.com>, u-boot@lists.denx.de,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
  ~postmarketos/upstreaming@lists.sr.ht
 Subject: Re: [PATCH RFC 0/3] Add clk and pinctrl drivers for SM6125 SoC
-Date: Tue, 10 Feb 2026 15:34:55 +0000
-Message-ID: <20260210153458.36231-1-nathbappai@gmail.com>
+Date: Tue, 10 Feb 2026 15:57:43 +0000
+Message-ID: <20260210155745.48819-1-nathbappai@gmail.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <aYrBejVVr7Ud9xkv@sumit-xelite>
+In-Reply-To: <39e525d7-0145-47a7-a739-b2b4c68f6801@minlexx.ru>
 References: 
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -108,21 +108,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 10 Feb 2026 10:56:18 +0530 Sumit Garg <sumit.garg@kernel.org> wrote:
+On Tue, 10 Feb 2026 15:42:58 +0300 Alexey Minnekhanov <alexeymin@minlexx.ru> wrote:
 
+> Hi!
 > 
-> Can you check if recent SD/eMMC fixes merged [1] are included in your tree?
+> Is card detect GPIO set correctly for board?
 > 
-> [1] https://lore.kernel.org/all/20251210155454.1561611-1-loic.poulain@oss.qualcomm.com/
+> Maybe you can verfy card detect is working by repeating the command:
 > 
-> -Sumit
+>   gpio status socXX
+> 
+> (where XX is your cd-gpio) while inserting/removing the SD card.
+> 
+> --
+> Regards,
+> Alexey Minnekhanov
 > 
 
-I am using this[1] repository with latest commit as of Feb 03, 2026
-and have verified that that fixes are present in this C files.
-Similar to that change, I have tried to add the sdcc1 clocks but
-the sd card is still not detected.
+I have verified that card detect is working. Here are the outputs.
 
-[1]: https://gitlab.postmarketos.org/tauchgang/u-boot
+* with sd card:
+
+=> gpio status
+Bank soc:
+soc98: input: 1 [x] mmc@4784000.cd-gpios
+
+* without sd card:
+
+=> gpio status
+Bank soc:
+soc98: input: 0 [x] mmc@4784000.cd-gpios
 
 Thanks.
