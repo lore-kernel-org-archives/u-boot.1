@@ -4,104 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 151D7EB270B
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 19:58:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D243EB2705
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 20:04:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 482EB83A47;
-	Tue, 10 Feb 2026 20:58:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B95FA83DEC;
+	Tue, 10 Feb 2026 21:04:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YekULnhZ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WBNHcIh7";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vlpAXYxc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6964F83D0B; Tue, 10 Feb 2026 20:58:22 +0100 (CET)
-Received: from mail-dl1-x1234.google.com (mail-dl1-x1234.google.com
- [IPv6:2607:f8b0:4864:20::1234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CB66E83E0E; Tue, 10 Feb 2026 21:04:40 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECD898388D
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 20:58:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0C3F8388D
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 21:04:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-dl1-x1234.google.com with SMTP id
- a92af1059eb24-1270adc5121so1534817c88.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 11:58:19 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770753498; cv=none;
- d=google.com; s=arc-20240605;
- b=kgrU6KFTQd5332I/aIXPrTtzzV1ua4yuu7xb2oqnCmxIHiHWQpdSQjvJDovPE3XFnw
- oJsYbB8SGJJfa39l1vyOvfCCdY5LyI4H27yAeE+ahEM/X6q3XVEQq2CosJUzZ7BVnSmq
- ITmLhcpcaaqATuQLvvEqXcVlTKq1aLwX9kOP0y3I1LBJ1RQkWGBXTnl4+4XgKihOOYuu
- hnsiRbzSqq2FrYcvFnrWP54u1fpMjVhOPHUuGDQ0SHEiLj9+4b9sbZPQJ0Nya6FuD/Ii
- PVCE0Gp8Xa445Xf80EBeBTQa9gmYsQt+lvLozbfv2w/5SHnx/ufbudUYziohy9F+9U3/
- Gdvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=xbFWs9uz4joHvZ1vEqGl0gz2wbYwSVklpClZZ0jfqj4=;
- fh=/B5fBfg2sMhFhoINgGDU0QzG6tK6U+rcMA763j+i8Jk=;
- b=VLHsBv3iFNBKDEGSwTXfRAY6mc8MXRWTP6qN6ci7Yy+XuUZ0+TorYG1UDP1/A8ocez
- MLQiyD5nqvNRNUWpYurDKhH6f+kn89UF+9Zg5+TSR3INxZu/QVUc0owrIA+Gt/CNf8BV
- 97JULyJGRedsK0A0aMBAbBd872JlAi9IJW0io93DLtNHL4S0aPz/x+DbAkIij0cUI91O
- BuVZZ+wcbKth5rLu8v4LX/nHyg8hKL3gzrFqxD00Rw1JyAA2j8pkynM02TnJzwMUPVC9
- kdkCqjSPG5oV8LQh9jIpWE5vZwxsf0gyAqtzbZqAJHCZRdbv1LKND81X63jK0OdkM76g
- MrTg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770753498; x=1771358298; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xbFWs9uz4joHvZ1vEqGl0gz2wbYwSVklpClZZ0jfqj4=;
- b=YekULnhZNU14FaSjY3qCnNPMKjSNHSsiuHhEpoqovZXCY7CQW9FRWql38a4G59xgAX
- sZTyv+7nJGx5fXYa88mLDpF0HJP8hPSwoKlLQu9J+a7nDFqJFUAOGAiMVKahT4AAZ14D
- HBJ0ROnFGvkhms9cEOvlhfUBxbw9p2gMWvS2U2hWIqcUiznVu4ex8xKqWQJOehkrs3xY
- j/eDoZFFf5pef39K2yPVHUq6sVBBPDglSa9jgDZDbwdyp0d1+hNpgsWFCAsM6ESOW/mp
- M2Pqmyep13Gr+b71GVpGodENWB0e/2nyclZbIbGTfq1sfCYKEH720L3z5L/0c2zE0INp
- +G8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770753498; x=1771358298;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xbFWs9uz4joHvZ1vEqGl0gz2wbYwSVklpClZZ0jfqj4=;
- b=aPMBFe+nLjQX75Da9MtlocXPmU027Wxj6qKZADipi80Bqq/mGU1Lyp6CGPzUO1YkES
- EwVce31djksGJ0mPjGGD/ypbrfXKJv6sCb++aHs0aU7eocaZPiPQCyPY6NfPQ411tMnA
- wySAkjUH8in9lbSpkMEdm+1sGZ0ETFC9hkyd0ZWHwHDw/ZDD4gMxFzkj7MVwZEx0G6Bi
- TA0F/qyL6yl3LR9m/6V3uUFiU0ijz6anD/Y3w8198/awPXYFLn/zXba2Xuj+aIi2tzRK
- VL9MI8ga6nt7gmlFaaNdQdOB9NtJjxsJCADkR3ssJ05IEKAqEUtDHnAI2U1ihtnA0NOT
- QYaQ==
-X-Gm-Message-State: AOJu0YwT1GcJ1PQx5aweQ2/8boCpctQLSYHOvOQeu4ofY8Vw7i3fVRuf
- bF6dc8ay0heeNS93iZM9Y3IM+DhrrW7sWoDMxKQIJK1HsbAdLipUvLa8YI5kbHMq7iDuVLy1HZi
- fjs6dqdXxH4Ve9eE0s25gTZVKakPsSg==
-X-Gm-Gg: AZuq6aIPqa23c2mcZc88Pa0BueVpopfjns7iLAjSuvy/O5YQVLj8UW6AVTINu4v0Pnk
- Iq6g7fWss79jRbY+HHdopj8ymUCwkjZfd6qaUl5A/KXjfUHE4wbBbMDIWIp9yIeF4/PTz6UrdfH
- maCBg7zGGRjUpRrZjr50u6h1wFsGHLTtWCTmMCjj/Bi5kpnXCdLlsNlaGdvcs+dLffNu6vVix+z
- ZXVByqwxbLn8eoQ+L8m2xjv/iRb9kMmpsbUdrfExbYYmbrvDmo4sRdQOGvo7LPcGL6Xqji967G8
- nffPeaDm5BYoDzbT+kAP0+FVG+dPlfyDj1HmLu4=
-X-Received: by 2002:a05:7022:221a:b0:119:e56b:98a0 with SMTP id
- a92af1059eb24-12703fce95fmr5657886c88.7.1770753498190; Tue, 10 Feb 2026
- 11:58:18 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4f9Xb93vm4z9ttV;
+ Tue, 10 Feb 2026 21:04:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770753877;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IVYlwCxxy+nAatELaemLcK5XmLeolj1pdfqDsCttmGw=;
+ b=WBNHcIh7VWd82BT4xyAUMBPVbGfq+kaDibx7w81iD9zFDK0VmEwuP9ElhFWRlj2CzUAK7r
+ hRcBy0bC3PJppUfdYJMdsYAo/dWITT1QHztDiZv3xaTU5FBFb5E6aWvwh1xCG5qcr5w9j+
+ 3YWSPJ6x9LEiak8hJyC5I9aYr7CpuxHElL2gVlg7upFew+abCazO4lMmoEqJkRmAdCgAJ4
+ g6eBxtig2qjFfPdn33yzHkZlp7irVVYdnTlv/+ESdrwQtNbD0TfmoHzfUEK3Zyoh7aIEiM
+ DBAw5x/LOp6sYs3e8tvdmmMyot/EPlkzfesMd/Dd+aF5Xc/C48iCsIdwd/sSXw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=vlpAXYxc;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <0ed5f17d-14f3-432b-9f6d-e686ca1ae29e@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770753875;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IVYlwCxxy+nAatELaemLcK5XmLeolj1pdfqDsCttmGw=;
+ b=vlpAXYxcnv0yBaHC8HW46DQ3Ir3D4Jv4Vi/D/0oGy7pBzRO/cfbzFbjUoFLd2kJqbCod6+
+ MEaiQRwIstEvWV+9yfn0JncIC/3P2ZdrwhUYFKUdwZ+KNxGXuYkM6pAXAIlI4A2+zMbtp4
+ IeynYRbxrigZ6RpzZyoKThc17HN0gaJVGwMtbW7QnInpFnqFdGa9qfhfQDLv3e36V0L+j4
+ 3VdBwzB2SurHeO3iEWxpXZPACrWaW2I2kO53kKd2FvEhaIhCSb9Jia2XLcJjJ0n0MUf49W
+ 3eOVLZg5v8Ta99qFdei09zwgYPk/irMzXJ0viP84WPkpHMuUxWSvTa/0CvnFPw==
+Date: Tue, 10 Feb 2026 21:04:33 +0100
 MIME-Version: 1.0
-References: <CAA=Y9tY1pJV5O=23YSgM-1TnRQNpg9zrPJsSn6YaL_uAPxUo=A@mail.gmail.com>
-In-Reply-To: <CAA=Y9tY1pJV5O=23YSgM-1TnRQNpg9zrPJsSn6YaL_uAPxUo=A@mail.gmail.com>
-From: Greg Malysa <malysagreg@gmail.com>
-Date: Tue, 10 Feb 2026 14:58:05 -0500
-X-Gm-Features: AZwV_Qg2VJbV_ebz8xpR6_2xwEmGPV_ZD6g5L7YQES2EadU-ZOp8Fksz_Jvj4xI
-Message-ID: <CABdDSeX1Kx-+N_dPptXmAJJ40mDX37H7DsmySrGORoc=JYod6g@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: dts: sc594: Update sc594 EZKIT GPIO polarities
-To: Caleb Ethridge <jcethrid@gmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "trini@konsulko.com" <trini@konsulko.com>, 
- "caleb.ethridge@analog.com" <caleb.ethridge@analog.com>,
- "linux@analog.com" <linux@analog.com>, 
- Philip Molloy <philip@philipmolloy.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 1/1] image: fit: Apply overlays using aligned writable
+ FDT copies
+To: James Hilliard <james.hilliard1@gmail.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Jamie Gibbons <Jamie.Gibbons@microchip.com>
+References: <20260210185455.2409242-1-james.hilliard1@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260210185455.2409242-1-james.hilliard1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 0ab41918a20dec159ae
+X-MBO-RS-META: 8qghwkohm4orneoqjhrg3r9ws56ccxf4
+X-Rspamd-Queue-Id: 4f9Xb93vm4z9ttV
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,70 +98,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
-On Mon, Feb 9, 2026 at 10:04=E2=80=AFAM Caleb Ethridge <jcethrid@gmail.com>=
- wrote:
->
-> From: Caleb Ethridge <caleb.ethridge@analog.com>
-> Date: Mon, 9 Feb 2026 10:00:10 -0500
-> Subject: [PATCH v2] arm: dts: sc594: Update sc594 EZKIT GPIO polarities
->
-> Updates the polarities for the GPIOs on the sc594
-> EZKIT carrier board for the newest revision, Rev D.
-> The new carrier board revision has different polarities
-> for some GPIOs. This patch updates the sc594 entries
-> to match the sc598 entries that were updated in a previous
-> commit, as both SOMs can utilize the EZKIT.
->
-> Note that these updates are for the EZKIT carrier
-> board used by both sc598 and sc594 SOMs, not the SOMs themselves.
->
-> Fixes: be79378 ("board: adi: Add support for SC594")
-> Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+On 2/10/26 7:54 PM, James Hilliard wrote:
+> libfdt expects FDT/DTO blobs to be 8-byte aligned. When loading the
+> base FDT or overlays from a FIT, the mapped buffer may be unaligned,
+> which can break fdt_open_into() on strict-alignment architectures.
+> 
+> boot_get_fdt_fit() relocates the base FDT with boot_relocate_fdt()
+> before applying overlays. That uses the bootm memory map and can
+> overlap with the FIT buffer when the FIT is loaded into RAM,
+> corrupting data needed to load the kernel and ramdisk.
+> 
+> Allocate writable, 8-byte aligned copies of the base FDT and overlays
+> with memalign() and fdt_open_into(). Grow the base buffer as needed,
+> apply overlays to it and pack the final tree. Free each temporary
+> overlay copy after application and check fdt_pack() errors.
+> 
+> Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always 8-byte aligned")
+> Fixes: 881f0b77dc8c ("image: apply FDTOs on FDT image node")
+> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 > ---
-> Changes in v2:
-> - Updated commit message with more detail according to reviewer feedback
+> Changes v1 -> v2:
+>    - also fix alignment issues
+
+Please keep the Jamie on CC
+
 > ---
->  arch/arm/dts/sc594-som-ezkit.dts | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/dts/sc594-som-ezkit.dts b/arch/arm/dts/sc594-som-ez=
-kit.dts
-> index eeca6d17504..11154e65ed6 100644
-> --- a/arch/arm/dts/sc594-som-ezkit.dts
-> +++ b/arch/arm/dts/sc594-som-ezkit.dts
-> @@ -22,7 +22,7 @@
->
->   eeprom {
->   gpio-hog;
-> - gpios =3D <0 GPIO_ACTIVE_HIGH>;
-> + gpios =3D <0 GPIO_ACTIVE_LOW>;
->   output-low;
->   line-name =3D "eeprom-en";
->   bootph-pre-ram;
-> @@ -30,7 +30,7 @@
->
->   pushbutton {
->   gpio-hog;
-> - gpios =3D <1 GPIO_ACTIVE_HIGH>;
-> + gpios =3D <1 GPIO_ACTIVE_LOW>;
->   output-low;
->   line-name =3D "pushbutton-en";
->   bootph-pre-ram;
-> @@ -70,7 +70,7 @@
->
->   octal {
->   gpio-hog;
-> - gpios =3D <8 GPIO_ACTIVE_HIGH>;
-> + gpios =3D <8 GPIO_ACTIVE_LOW>;
->   output-low;
->   line-name =3D "octal-spi-cs-en";
->   bootph-pre-ram;
-> --
-> 2.34.1
+>   boot/image-fit.c | 158 +++++++++++++++++++++++++++++++++++------------
+>   1 file changed, 118 insertions(+), 40 deletions(-)
+> 
+> diff --git a/boot/image-fit.c b/boot/image-fit.c
+> index 41ab1f552b0..68fb75c8389 100644
+> --- a/boot/image-fit.c
+> +++ b/boot/image-fit.c
+> @@ -2344,6 +2344,52 @@ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
+>   }
+>   
+>   #ifndef USE_HOSTCC
+> +#ifdef CONFIG_OF_LIBFDT_OVERLAY
+> +static int boot_get_fdt_fit_into_buffer(const void *src, ulong srclen,
+> +					ulong extra, ulong min_dstlen,
+> +					void **fdtdstbuf, ulong *fdtdstlenp)
+> +{
+> +	const void *fdtsrcbuf;
+> +	void *tmp = NULL;
+> +	ulong fdtdstlen;
+> +	int err;
+> +
+> +	/* Make sure the source FDT/DTO is 8-byte aligned for libfdt. */
+> +	fdtsrcbuf = src;
+> +	if (!IS_ALIGNED((uintptr_t)src, 8)) {
+> +		tmp = memalign(8, srclen);
+> +		if (!tmp)
+> +			return -ENOMEM;
+> +
+> +		memcpy(tmp, src, srclen);
+> +		fdtsrcbuf = tmp;
+> +	}
+> +
+> +	fdtdstlen = ALIGN(fdt_totalsize(fdtsrcbuf) + extra, SZ_4K);
+> +	min_dstlen = ALIGN(min_dstlen, SZ_4K);
+> +	if (fdtdstlen < min_dstlen)
+> +		fdtdstlen = min_dstlen;
+> +
+> +	*fdtdstbuf = memalign(8, fdtdstlen);
+> +	if (!*fdtdstbuf) {
+> +		free(tmp);
+> +		return -ENOMEM;
+> +	}
+> +
+> +	err = fdt_open_into(fdtsrcbuf, *fdtdstbuf, fdtdstlen);
+> +	free(tmp);
+> +	if (err < 0) {
+> +		free(*fdtdstbuf);
+> +		*fdtdstbuf = NULL;
+> +		return err;
+> +	}
+> +
+> +	*fdtdstlenp = fdtdstlen;
+> +
+> +	return 0;
+> +}
+> +#endif
+> +
+>   int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   		     const char **fit_unamep, const char **fit_uname_configp,
+>   		     int arch, ulong *datap, ulong *lenp)
+> @@ -2356,18 +2402,12 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   	char *next_config = NULL;
+>   	ulong load, len;
+>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
+> -	ulong ovload, ovlen, ovcopylen;
+> +	ulong ovload, ovlen, ovcopylen, need;
+>   	const char *uconfig;
+>   	const char *uname;
+> -	/*
+> -	 * of_flat_tree is storing the void * returned by map_sysmem, then its
+> -	 * address is passed to boot_relocate_fdt which expects a char ** and it
+> -	 * is then cast into a ulong. Setting its type to void * would require
+> -	 * to cast its address to char ** when passing it to boot_relocate_fdt.
+> -	 * Instead, let's be lazy and use void *.
+> -	 */
+> -	char *of_flat_tree;
+> -	void *base, *ov, *ovcopy = NULL;
+> +	void *ovcopy = NULL;
+> +	void *base_buf = NULL;
+> +	ulong base_buf_size = 0;
+>   	int i, err, noffset, ov_noffset;
+>   #endif
+>   
+> @@ -2410,18 +2450,27 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   	/* we need to apply overlays */
+>   
+>   #ifdef CONFIG_OF_LIBFDT_OVERLAY
+> -	/* Relocate FDT so resizing does not overwrite other data in FIT. */
+> -	of_flat_tree = map_sysmem(load, len);
+> -	len = ALIGN(fdt_totalsize(load), SZ_4K);
+> -	err = boot_relocate_fdt(&of_flat_tree, &len);
+> -	if (err) {
+> -		printf("Required FDT relocation for applying DTOs failed: %d\n",
+> -		       err);
+> -		fdt_noffset = -EBADF;
+> +	/*
+> +	 * Make a writable copy of the base FDT for applying overlays.
+> +	 *
+> +	 * Do not use boot_relocate_fdt() here: it allocates from the bootm map and
+> +	 * may overlap with the FIT buffer (still needed to load the kernel /
+> +	 * ramdisk) when the FIT is loaded into RAM.
+> +	 */
+> +	err = boot_get_fdt_fit_into_buffer(map_sysmem(load, len), len,
+> +					   CONFIG_SYS_FDT_PAD, 0, &base_buf,
+> +					   &base_buf_size);
+> +	if (err < 0) {
+> +		if (err == -ENOMEM)
+> +			printf("Required FDT copy for applying DTOs failed: out of memory\n");
 
-Reviewed-by: Greg Malysa <malysagreg@gmail.com>
+If this returns ENOMEM, you will likely not be able to print anything, 
+so don't bother. Bail with a return value and be done with it, i.e. drop 
+the error prints here.
 
-Thanks,
-Greg
+> +		else
+> +			printf("Required FDT copy for applying DTOs failed: %s\n",
+> +			       fdt_strerror(err));
+> +		fdt_noffset = err;
+>   		goto out;
+>   	}
+>   
+> -	load = (ulong)of_flat_tree;
+> +	len = fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base_buf);
+>   
+>   	/* apply extra configs in FIT first, followed by args */
+>   	for (i = 1; ; i++) {
+> @@ -2465,46 +2514,73 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+>   		}
+>   		debug("%s loaded at 0x%08lx len=0x%08lx\n",
+>   				uname, ovload, ovlen);
+> -		ov = map_sysmem(ovload, ovlen);
+> -
+> -		ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+> -		ovcopy = malloc(ovcopylen);
+> -		if (!ovcopy) {
+> -			printf("failed to duplicate DTO before application\n");
+> -			fdt_noffset = -ENOMEM;
+> -			goto out;
+> -		}
+> -
+> -		err = fdt_open_into(ov, ovcopy, ovcopylen);
+> +		err = boot_get_fdt_fit_into_buffer(map_sysmem(ovload, ovlen),
+> +						   ovlen, 0, 0, &ovcopy,
+> +						   &ovcopylen);
+>   		if (err < 0) {
+> -			printf("failed on fdt_open_into for DTO\n");
+> +			if (err == -ENOMEM)
+> +				printf("failed to duplicate DTO before application\n");
+> +			else
+> +				printf("failed on fdt_open_into for DTO: %s\n",
+
+DTTO
+
+> +				       fdt_strerror(err));
+>   			fdt_noffset = err;
+>   			goto out;
+>   		}
+>   
+> -		base = map_sysmem(load, len + ovlen);
+> -		err = fdt_open_into(base, base, len + ovlen);
+> -		if (err < 0) {
+> -			printf("failed on fdt_open_into\n");
+> -			fdt_noffset = err;
+> -			goto out;
+> +		/*
+> +		 * Ensure the base FDT buffer is open and has enough room for
+> +		 * the overlay. Grow it on demand.
+> +		 */
+> +		need = ALIGN(len + ovcopylen + CONFIG_SYS_FDT_PAD, SZ_4K);
+> +		if (need > base_buf_size) {
+
+Doesn't boot_get_fdt_fit_into_buffer() do the necessary 
+rounding/alignment/... already , so shouldn't it be enough to simply 
+call it here, without this conditional ?
+
+> +			void *new_base;
+> +			ulong new_size;
+> +
+> +			err = boot_get_fdt_fit_into_buffer(base_buf, base_buf_size,
+> +							   0, need, &new_base,
+> +							   &new_size);
+> +			if (err < 0) {
+> +				if (err == -ENOMEM)
+> +					printf("failed to expand FDT for DTO application\n");
+> +				else
+> +					printf("failed on fdt_open_into while expanding FDT\n");
+> +				fdt_noffset = err;
+> +				goto out;
+> +			}
+> +
+> +			free(base_buf);
+> +			base_buf = new_base;
+> +			base_buf_size = new_size;
+>   		}
+The rest looks good, thanks !
