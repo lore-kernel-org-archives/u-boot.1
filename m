@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E245EA813E
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A265EF0704
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 16:23:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 416AC83DCB;
-	Tue, 10 Feb 2026 17:22:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7B9BE83D17;
+	Tue, 10 Feb 2026 17:22:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mMiAGxps";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="w2vqrCR5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB82583DB6; Tue, 10 Feb 2026 17:22:53 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 100EE83DE4; Tue, 10 Feb 2026 17:22:55 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C261283D77
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 17:22:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B21383CE3
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 17:22:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-43638a3330dso2479720f8f.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 08:22:51 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-436e8758b91so1587628f8f.0
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 08:22:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770740571; x=1771345371;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1770740572; x=1771345372;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gLMXeRJzk/F1MP3iOK1XQj2/8Y/Iv20RFR4qmixR/78=;
- b=mMiAGxpsNOxK7EEFBdVg+bEPzQbGCbijhieNwOhjij//JKlVeU54E3JlaiiCJB/Ef2
- JP5XcQOJrnay/uU5sz5tVkZpkpRP+1AHfgr7ej2jOnWNVHpMCCmClNXF4ODQQAao+qZ8
- qciALUj95n6F4m2CdvK9pQj6ufd3hgICuepnX1wTvjDQbJKs/bEE38KvGYJzQWjxMTm1
- lccoM9c5th2ZZD5sJhuTp4kcWWRXWsVKu+woofpulyN9fCT9kteLwtvO5QeSF+zMV3pZ
- Z/YfvDotDzHQAO4IuM6jqJiHGB/LqD93SeK5Bk3cXBoFSOBVBNVpEAv1XwTzJinL+Urq
- N1Kg==
+ :reply-to; bh=yU0IhtiE5SdT3b0e+WiUHkJgsHBG/DzDdu31HrhiRTQ=;
+ b=w2vqrCR5NyFM8bEsZf9QUJrtTYiDEbXSsv0vmc1pzEldoBbrjhh/OXGitOImg/+/oK
+ XuHwH/T6cBWT5isstBqMtC+NuRJUQX6n5lGu6LsfAl6nQ8v9dNZm6pTKa89gjLiYU8vG
+ yhAxh6dkEbjPAx60HlBgT/dlf/8pzvxl5reRwCDd4uo4tqt5exveP63KectHuVRigl0F
+ oZNoY2rmKvneolm2lAn2w7RrVBX2zD8aEmorm35xSMeKU0xP3C39fIiKCO6SZgguQXMm
+ B3tJKM9smUMuM1GiM3R0mBifRfQamMaalPK8A6LZzz2xwF8PRhV4qdY/9hWRkVV7GNgD
+ sIcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770740571; x=1771345371;
+ d=1e100.net; s=20230601; t=1770740572; x=1771345372;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=gLMXeRJzk/F1MP3iOK1XQj2/8Y/Iv20RFR4qmixR/78=;
- b=SPVl0jHil7/6+fzsUUcQLDSkHJDk1hQjwdoKTgczRklwSqCIAVAHXCyB1NYzGQMlUa
- p6FyC+5/3NbVbNjL3Dw2+qFw4pM9w4BKTjneUe7sXrRsa//hQnMJQrLm3CfR8TNHr0ch
- iwK+nF+4vrAAZ17mMs8qQasxu+yE/Snxk8nqAsbdY5cESqqbiJCBGfwMJn/Eo+lkUGzc
- dvMzYB7PNKx36UZuLJvVclFif2QDQGa1DuFNv8iZ/uatESHb3uOWd9RWJdGw7dtpDDcY
- pXz6WwAMvR+BviB1OzEZ3dKixNOy8miDw98tejZ9tlu/aEpdjvISHkX4liPusa0YXIvJ
- ZYWw==
-X-Gm-Message-State: AOJu0YwWEfgcmOHgC8AXLpF+qHeoY2WE4sxCTYO7r5RJEHZe+iojs6F8
- Y/LX3nXGItq3yXFwoN4/A6top94/xbbbysZJochXJLq7/Pfs2HfI0iGi1aBMBWqF6RM=
-X-Gm-Gg: AZuq6aLqTTM+8ptYNL1E1SOMsMUOKz3AmZNYEeG1E1eQhBxNxvURi2HNf8Qn09xhURD
- nLqgR53e6OAwww4aVxMtNwufHPsTvBHDzwkDel1cdEJLsr9DwLqKCBpdIo8j4vgsQekvDbmHBQA
- zuCF/nSc2wZ77ey0yT96dr5w28xexCPm1iq3jq3D3l0Ze2pIjAZUKQvf5ccL9xe8HsDt9Rbm6ql
- VTsVUJdQXrILcGudTnnM1xb8HcrGdhOkKqEwWwPt8qyxe0DR5+mb7kL6lKUQECG2jtoGm8H4Q94
- IPeQLOnGGhVHUcWKbKHbdwBBICOnkBUZJbXStgaYOBJ6sD3OREVUaXynrqEoOek2V355oFMEwL7
- wiJJenzciPE0VAQRTz8SLTpvkXkisQJKxlHd6+5I/0J9uU3x6NnJKSwrJ3Q86n97aJ5QEYo3yx5
- RdJ9YzzgSLRHii3Y+TE660iEtmdn1C1sfxaPP8qeRNQOqywAqtoR78lkUDCl9sLUm+bECD6inxo
- fVWUXYXfV0K4lURneRltEUV0kLtBK0Q
-X-Received: by 2002:a5d:5d0d:0:b0:430:f5ed:83e3 with SMTP id
- ffacd0b85a97d-4362933bddemr20494341f8f.6.1770740571089; 
- Tue, 10 Feb 2026 08:22:51 -0800 (PST)
+ bh=yU0IhtiE5SdT3b0e+WiUHkJgsHBG/DzDdu31HrhiRTQ=;
+ b=DFApPeLcZPCUmtTTvvO7jcNYzdapU3fw6QhHkuJZ6aFoGEoOzkqvq60O/hxz+p0MJ6
+ 3w/yfwXYhFgV4065uLUTWsy6TrRgD7IFau4tkI8cQI/0o87AQUCqLfUnVdkfGEu4FsBG
+ l1n9ZgKVbVZnUsUCsT398wQXHB++tNkUGR/o6IeYsC3tOCMZeMSMYwFTlRWbMS4vGdFm
+ dKd3ldJIX049z5nSRjazmGY92sWvV2krs3ufIIgWTNFuH4XwLKbuimRZNQYxyXF+ONPv
+ 56haoJzk22agJUdn4O/aCcMaRAveh86likdBPMxT4QsBWO7RIEioIjkfJvsajkZzK+aN
+ TivA==
+X-Gm-Message-State: AOJu0YxGiGuX9X9mSRar5anLrMCRNogBkhiCRidFIw+1Kr4nZo6uYCCQ
+ DdANI6UCbZsfk93rMgRTrI32gWlvK66OxzPPr34SVjpvfsJ0GEk0kPusyCOVsfFGerE=
+X-Gm-Gg: AZuq6aJ8zA7QtPqNk41dey87dxHtZmhJaldKOdIGDmO+1ViTt+vWiK7bJzBMnM5bIAg
+ wZadwni2Zmtyl8l22xlkcKRujHFrGHr6CzWStjwGXmbeGa7dvwyXgmRJhXYR6EXI9FAm2TgpeR/
+ jiNvQe6pE+ZU8WfPrj8ASzXqw4oic3frVNdAC4p6l0GHusMoxLP3u9A2lQRVYsEbTObqwtkPIVe
+ YijYw0qSwMKApJlj/jVFj0BJwlfTA30B2JETQKZcybeThwlMZb5iiBJacyL3EKK8Cxi7xtc0u5I
+ 8oihn9krL/5SzRH9Mz4C34fBVTai3vm1qgdEP7CmncE33WB+hRPp4rt2pKEEVa0tFLELovjQXHx
+ 5FhRN2iNbDh9Zls/c6qUZuqsSqC3S4crM0dLmanG9HDhf7Jy/rzLVU+ilxMEhxImdSe7bsqu9eF
+ UjSOnGBXk+XmaDzrFj0WUAeK6j/hDs/kJPq1r8E7GqcTkZtUBoKcbnPVj6iL74qzOmqcJmkUMdD
+ a0sCfG8Pwlaf2eh+iDojg==
+X-Received: by 2002:a05:6000:2386:b0:435:8aa1:ff4d with SMTP id
+ ffacd0b85a97d-43629378587mr26588059f8f.22.1770740572624; 
+ Tue, 10 Feb 2026 08:22:52 -0800 (PST)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-43a2-d2f0-c793-0a1b.rev.sfr.net.
  [2a02:842a:d52e:6101:43a2:d2f0:c793:a1b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-436296bd4a1sm35185402f8f.17.2026.02.10.08.22.49
+ ffacd0b85a97d-436296bd4a1sm35185402f8f.17.2026.02.10.08.22.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 08:22:50 -0800 (PST)
+ Tue, 10 Feb 2026 08:22:52 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 10 Feb 2026 17:22:44 +0100
-Subject: [PATCH v2 2/3] drivers: ufs: add helper for phy_initialization
- callback
+Date: Tue, 10 Feb 2026 17:22:45 +0100
+Subject: [PATCH v2 3/3] drivers: ufs: fix typo in struct ufs_dev_cmd kernel-doc
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260210-ufs-ufs_hba_ops-cleanup-v2-2-dd73da21aa92@baylibre.com>
+Message-Id: <20260210-ufs-ufs_hba_ops-cleanup-v2-3-dd73da21aa92@baylibre.com>
 References: <20260210-ufs-ufs_hba_ops-cleanup-v2-0-dd73da21aa92@baylibre.com>
 In-Reply-To: <20260210-ufs-ufs_hba_ops-cleanup-v2-0-dd73da21aa92@baylibre.com>
 To: u-boot@lists.denx.de
@@ -114,58 +113,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce ufshcd_ops_phy_initialization() as a helper for invoking the
-phy_initialization callback from ufs_hba_ops.
-
-This mirrors the existing helper pattern used for other ufs_hba_ops
-callbacks and keeps the call sites consistent and easier to maintain.
+Fix "associated" typo in struct ufs_dev_cmd kernel-doc.
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/ufs/ufs-rockchip.c | 10 ++++------
- drivers/ufs/ufs.h          |  8 ++++++++
- 2 files changed, 12 insertions(+), 6 deletions(-)
+ drivers/ufs/ufs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
-index 0384244387d..cad753d5990 100644
---- a/drivers/ufs/ufs-rockchip.c
-+++ b/drivers/ufs/ufs-rockchip.c
-@@ -30,12 +30,10 @@ static int ufs_rockchip_hce_enable_notify(struct ufs_hba *hba,
- 	ufshcd_dme_reset(hba);
- 	ufshcd_dme_enable(hba);
- 
--	if (hba->ops->phy_initialization) {
--		err = hba->ops->phy_initialization(hba);
--		if (err)
--			dev_err(hba->dev,
--				"Phy init failed (%d)\n", err);
--	}
-+	ret = ufshcd_ops_phy_initialization(hba);
-+	if (err)
-+		dev_err(hba->dev,
-+			"Phy init failed (%d)\n", err);
- 
- 	return err;
- }
 diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index bc839a43704..74125b1ab31 100644
+index 74125b1ab31..0f6c93fbce7 100644
 --- a/drivers/ufs/ufs.h
 +++ b/drivers/ufs/ufs.h
-@@ -756,6 +756,14 @@ static inline int ufshcd_ops_link_startup_notify(struct ufs_hba *hba,
- 	return 0;
- }
+@@ -509,7 +509,7 @@ struct ufs_query {
+ };
  
-+static inline int ufshcd_ops_phy_initialization(struct ufs_hba *hba)
-+{
-+	if (hba->ops && hba->ops->phy_initialization)
-+		return hba->ops->phy_initialization(hba);
-+
-+	return 0;
-+}
-+
- static inline int ufshcd_vops_device_reset(struct ufs_hba *hba)
- {
- 	if (hba->ops && hba->ops->device_reset)
+ /**
+- * struct ufs_dev_cmd - all assosiated fields with device management commands
++ * struct ufs_dev_cmd - all associated fields with device management commands
+  * @type: device management command type - Query, NOP OUT
+  * @tag_wq: wait queue until free command slot is available
+  */
 
 -- 
 2.52.0
