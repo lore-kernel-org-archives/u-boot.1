@@ -4,115 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D18F5EA8109
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46CCEA8108
+	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 12:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A884083CEE;
-	Tue, 10 Feb 2026 13:41:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A7AA83D0F;
+	Tue, 10 Feb 2026 13:41:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FhZoEiac";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="XFBmiCJN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 058A68341A; Tue, 10 Feb 2026 09:17:34 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A81A8309A; Tue, 10 Feb 2026 10:00:55 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AE3D8309A
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 09:17:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ECA638309A
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 10:00:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-94acb3d6cceso1218330241.2
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 00:17:31 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770711450; cv=none;
- d=google.com; s=arc-20240605;
- b=SIaJlYtkRjgnNCrsSg1gHKE1Ip5U1dydXepvxlSkrQrPsrVm3oBC/U791b1JS3m/0C
- bCUxgDiOEPpsNj7tPTtLEXDfjbeo42Q52auMau0OKvRVks8ue6DBS+rfv29lj79M6BM/
- UmAY+5fXHmPV7fSmgQwe8D3cM1tnfqmab8gxjXKVwQHOly7ZFyM4vrakMPs5fH35ayKT
- LXcvOUxTE1b4ucGj5iDZ/F9VBjT0OL6JYEZiHLNblSnp0kLN6w3QJNnTK4ggrORNCJhb
- 5bkkSiSazt9c8IWgkRqIVoFaAX0hCA0DW8pLa55+fUwTUuI4uyNus9eVgt8Mcda0QvgU
- reWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=PfGYqqrwGTEwGLd7r/boENmqojbmsVzv6DJ0Q7TVEv8=;
- fh=sr6lzM/oyTwMQa623T2VWxN6EbDwM+j63kC1Wlonrkw=;
- b=d9U0IuXeDBla9NZTn0St/oWBdFZX9mZx2tfu9diKCkSnKPwiwUF0J2S9M+HJx1R41E
- ao5oyQNUbMw0paRTIGb3ZjA06c9cReU3rc1DkBc2wnsvgfEh1Tnkxr1oyGzdqy89qCyh
- MUp1tAxHGjsTqMtLhbp87+5LMdkC110HaegGvCk3qeuJZkEYt/lL3FmFY0mSJu0X+L1n
- F2wdW7owRUpmC/ABfBvCEoxn0DLTlIsXb036r6q8lFENhOg5W04ylpH2a/LI+IEJZatu
- GDsg0bWMCktdnu3WGB1VVPSIx8NaKvlPjbkiqNFXkr1nnLFkam6WBa6sJpLVikyv073m
- 6pnA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770711450; x=1771316250; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PfGYqqrwGTEwGLd7r/boENmqojbmsVzv6DJ0Q7TVEv8=;
- b=FhZoEiac2kBB593onIta5OSIAOMVnWnlPHvyXWxWTQxZHO8JQu7oPS7bl4lmJT+bzo
- NKqpgp/wxF2wI1tE3VDmyO3ZSD+/pOTpdhLYAoIF6gswfMUz9BuZLJUwTn3oRRtiU+EK
- AswPDWErr3Ti3beRC6qyPbMJBC1sm9MVJFfJPNfJFdnYtw8ALN4LVQqRtzllwEvB9pGR
- 3dMQiPopPhaeTzqlhogBYlTzohIJmHJ9J52cyJp4iHES7Jj5HZh4f1faUCKyL8pF1d4g
- aRFXd32eWrY+Y+UcIYiQ7qCQJ40zLiCekaR2FhXdggh6mAOsmCv69pdHxwhFe7lYpfzv
- ZtsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770711450; x=1771316250;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=PfGYqqrwGTEwGLd7r/boENmqojbmsVzv6DJ0Q7TVEv8=;
- b=UR+Ye/MPBTYdlJIcY89eZfdGClQlASnR6at9RqvLX2b4I9AAPCHSaEbwGXmulYPfwV
- ZPWsWaeJ7MHeGGBXELuk2ShKrbse360tdLUqgourinqL6LY5H50AaWmAYj4PbrkTnoj7
- e2RovKpS/Ksnd5FazJbdido0AxZ/93eE5gv9+zCgEWEso7qLxUieS5f2jVBg190k8Ft0
- MeapBMxHOgjsNSrSmAT5Us2MY+bdS7y77dd524D4RSVuUemIPlb99iUb1qKWpfYRZuK5
- qL3noN0XsuIkKgLFAytUcuNp+KPMetZFB+cXqS3s1VroxmKZpt5jUSwkBhpwJA+tUT3u
- 4OkA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJy+0JzoFjcyHszQIEFc9BuwVqRSbhfmG52DMV6+9FGGcR6lC4edWM0PWX88VN+8yZ9jAyE/Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfzCK/IGLP9fPgHEPc5vjYx68EkCye0Y5HUvMAWtF4bfpSZ/eF
- g9LOV86jfx5ruhJwHzRzGIeRZaXn0n2Dmu+kj7rCc7WZjshB8ud5WDX2IajNJjb61mqoRj62kLh
- sN26Rhi0cbCgtIkJhxl/UUT42XdOufos=
-X-Gm-Gg: AZuq6aLU9M+hj9uoj7vyWoFoFj1R19Wg3b6SLphlzItz8tVIb4Tx1PaGdMp4HHvvtPn
- 4Wq502MAQVqpXAfihCfyl6D5mU/99rv5KT0NB50uOOsooBHQivwoaySPu6l8e+iWaruQr5U+pqJ
- jLpdYrm1Gs/AAxUiEVZPyB3Z4Fd/6QUWRUSEiXfc3H26hiGGTOBkTDmf0R6Xhy3UcxD/xrDcMDm
- Y+Mq50K9CCZYNhtAzog3C3vUYhWjMnAxSJmRg8H7epjSpXTQIrmhi5imklxl3PRk8CBJZOFc7GB
- 0LwfYb1rvjUcgwJrho0=
-X-Received: by 2002:a05:6102:cd1:b0:5f5:4dac:f35f with SMTP id
- ada2fe7eead31-5fc48c12449mr324124137.3.1770711449801; Tue, 10 Feb 2026
- 00:17:29 -0800 (PST)
+ spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Xz1jgwslOJ4yeP5PGM3j4sUd1/kUjefD8l5w3i2HWd5omxyWWRXolbdQehTIpAEB/sgV/JyLraUOGQ34156KBvrT8IRsxdk90efUxtpwU1J+G6RXSRMBzt9iS/jNwpBJwix2rMd03fJbyeXKVHPDUy2L0WBxRN19Fc0ZV/vMSgBvdDayq9tOhvyim5ZEO8Z6dHk9UqPm4jVyCXnFqNwmKJpPsm5hNbxQvXThd9r1kgWcA3RZbMWjsHW+SlMsqgc8roXzV2QcAv73XhjO6KTyzIqjd56LgRNO3NUkk/YW3zvCKHomiaAN1QMfBKY4AKMe/9WLgTNEVSnJiT+LVA/HAQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FvRKZSsyZAqYfeVAo+2JJepTS5soVT4XelPsiwpjLF4=;
+ b=aImyI5IuBDVtqOny14qkrf6NpAm6UmDAdvkLgXqpX81qfaJLJ886y/6fSV4of+g9NM7C1B7fxe4KtAlx2EGUbafRoDQDyoDLQI1UEXbp3WmNNFN3wjVCAJXEF9gcIP7r/qhHGSt8CGit9PhJNwjuHEtgbTgkQxJAAxZPwZyPXxc47zCwBZDtCeDj9ZAuhh7lU0VfpebzqcSUVy0cbvLDDWsKkgM8grLU1K5Gym88cmfWhk7kltd7JJmyvQnLu6UndM7JqJiqFB5KJbPEGQN2aMArOxU7LsQaBIWo3whGaOarPT1nZA+IpEzmi2x0fIQVfdS+yIoOBVn3ZvjmV/CuLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 165.85.157.49) smtp.rcpttodomain=lists.denx.de
+ smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
+ pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
+ not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FvRKZSsyZAqYfeVAo+2JJepTS5soVT4XelPsiwpjLF4=;
+ b=XFBmiCJNdj4V9+h0j+oy7iDxStqkwz3JFcuDduJLG0+mAxr17FYGIpqw0KWoEW+VkYv2uL6Pkko0npDTbsBneptUv0Uywg0HttynUbJX10RCkJNH7VCgXa4xUJKVY94nc9nmASqdDTjh8rLkx0rD5TpfRkFWL9kMoJOyidfmnu/5dV9utdR9K8Xo49x4+uQSq+1275hO4jdWIzuCJp1Z6Xxz941DG65vzX0T+E0duZPCiO+4gm3gzhm7j10eRA//C34yEfhSZg0LGm57rPpH+JwW1OLV/dfcA1KXGaPz1gCiT4lg4ryBjZOMKr06UQGUAzlR8cVH7IdeGV91p2UXGQ==
+Received: from CH0PR03CA0026.namprd03.prod.outlook.com (2603:10b6:610:b0::31)
+ by MW6PR22MB4176.namprd22.prod.outlook.com (2603:10b6:303:23c::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.18; Tue, 10 Feb
+ 2026 09:00:48 +0000
+Received: from CH1PEPF0000AD7C.namprd04.prod.outlook.com
+ (2603:10b6:610:b0:cafe::44) by CH0PR03CA0026.outlook.office365.com
+ (2603:10b6:610:b0::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19 via Frontend
+ Transport; Tue, 10 Feb 2026 09:00:44 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
+ smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
+Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
+ not designate 165.85.157.49 as permitted sender)
+ receiver=protection.outlook.com; client-ip=165.85.157.49;
+ helo=mkerelay1.compute.ge-healthcare.net;
+Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
+ CH1PEPF0000AD7C.mail.protection.outlook.com (10.167.244.84) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.8 via Frontend Transport; Tue, 10 Feb 2026 09:00:48 +0000
+Received: from zoo11.fihel.lab.ge-healthcare.net
+ (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 14A63FB3EB;
+ Tue, 10 Feb 2026 11:00:45 +0200 (EET)
+From: Brian Ruley <brian.ruley@gehealthcare.com>
+To: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Cc: Brian Ruley <brian.ruley@gehealthcare.com>, Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>, Mark Jonas <mark.jonas@de.bosch.com>,
+ Peng Fan <peng.fan@nxp.com>, Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+Subject: [PATCH v2 2/6] clk: imx6q: apply clang-format
+Date: Tue, 10 Feb 2026 11:00:24 +0200
+Message-Id: <20260210090029.728636-3-brian.ruley@gehealthcare.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20260210090029.728636-1-brian.ruley@gehealthcare.com>
+References: <"20260205141332.2515996-6-brian.ruley@gehealthcare.com">
+ <20260210090029.728636-1-brian.ruley@gehealthcare.com>
 MIME-Version: 1.0
-References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250924113733.uz6hozszbuynemtc@giddy>
- <20250924114317.742ae4ntrb4mvuyq@expert>
- <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
- <CAJwFiGLHDEPMsFyBhX=ogQxX_C+8ac-_9_jeiZYyo=3o0M8ZHA@mail.gmail.com>
- <CAJwFiGLXgsnb75HT45L5Xo-N4LmCBeLGwPi8Yr5zZzNo7mrVNg@mail.gmail.com>
- <873d73f0-34fe-4445-8745-f98734637b0c@freeshell.de>
-In-Reply-To: <873d73f0-34fe-4445-8745-f98734637b0c@freeshell.de>
-From: Aristo Chen <jj251510319013@gmail.com>
-Date: Tue, 10 Feb 2026 16:16:53 +0800
-X-Gm-Features: AZwV_Qh-fFnO8xY5Qgs7qcpeMK4ChaYfyjFst9JEY1H_t2uzBFBwo-lMTKz3NIo
-Message-ID: <CAJwFiGJsnK3CRhYBYmE0fGpds0AOvVhRv___JaBNPjGhiYRCNA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
- and fix related test/DTS issues
-To: E Shattow <e@freeshell.de>
-Cc: Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de, trini@konsulko.com,
- sjg@chromium.org, 
- alpernebiyasak@gmail.com, al.kochet@gmail.com, paul.henrys_ext@softathome.com, 
- bb@ti.com, y.moog@phytec.de, w.egorov@phytec.de, 
- francesco.dolcini@toradex.com, ggiordano@phytec.com, n-francis@ti.com, 
- afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, ravi@prevas.dk, 
- carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, alice.guo@nxp.com, 
- Aristo Chen <aristo.chen@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7C:EE_|MW6PR22MB4176:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: c99f3bbc-e0f8-4716-f008-08de6882e225
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ldR8IANmbPHzhwpwh4uiuh2OfRAeUjQTMQQEMdZnK5Vd624w7Nde8toUaWyD?=
+ =?us-ascii?Q?kZUxjesJKfUG4bmgZ5WYAF0XBzNGCOewksVtvPV49DHXC4u6CE+WFrfGg0rV?=
+ =?us-ascii?Q?iFkOnbGXoj7un8qmsddTg0fEYN3VFJJQIws+0yL6x519+EyZsk55DIDoeFjh?=
+ =?us-ascii?Q?vBxYoqBtigZLBldmwbOuzGmqbcYQ5D9SKfif7A8TBRQLUlJm6jNoqXGcxymh?=
+ =?us-ascii?Q?j0Cprit4BeSpA8QiDauuQsEzilBgqL87QhQ8i/8DW2EBViTfV0q7fDLcBypC?=
+ =?us-ascii?Q?nDUIYL+494q4dMddDXoTTTp1Boo6KA+pCl2GATwElUOpyTGfvpcKeiX6/nfm?=
+ =?us-ascii?Q?ZrizTUWlkm34svOohtJn0Ei81qMZYnHTLKKWQF+sTXGXHEiFPaw5n4rihCuK?=
+ =?us-ascii?Q?+ant0rFLv3vC7n4TRmei2T7YDeG/1Sp4HkgS/KkgEtDYvwvLMFFfh+3hWUBY?=
+ =?us-ascii?Q?HHpgUc92XTdq+IuzzV80VXPyhN6PeamrdjaNWU3aQ+8YYF12GJkH56XXsfYC?=
+ =?us-ascii?Q?MvU+C1l0s1961zBo0dIhiGT/ygTM8vmQmY03n2lSXyQLS9djCkFiMGYzXl2P?=
+ =?us-ascii?Q?6ir8zAZ/dAfwsgYyz2ePbgb9NIpBXqEjOruo6XpRkEbgYZ2v/LWcqEpnL+rS?=
+ =?us-ascii?Q?dAQuBMOLKF4qBopK6hYG5qjUvewhO0CeWHx/Va7MiPk5aYVnNkDmTKm5+aKx?=
+ =?us-ascii?Q?RP1MAwx/NaKnem2GxP94GIun0F4SKMB5l+RFChDDV/aKrAfJLEYG9bSsHVrk?=
+ =?us-ascii?Q?S00AR680OQV3+pCG0bSBzjKlU0O/JVZvkteUUkPKmWY0IvNtQa2Ci1vc+tYi?=
+ =?us-ascii?Q?xeIpDIln6+SAZSzS5+hJsLz8ih69LCoMnzIYsvpOZJYE3Gh8hIr7FXdfvQfv?=
+ =?us-ascii?Q?SiGiTVV1eilC20NcnTuEtKiEH1oT0q616AZSuJPIzCSQt/9hQR4av6+fc79r?=
+ =?us-ascii?Q?B3CJih891AV47YNxrUGBus43j1hV2znBSZn6VxJF4eGmwrnINT8Jc6ca5ete?=
+ =?us-ascii?Q?caSvAO/hgBrbAVeX2L36WNxNQ6HzqtnjdTUsVt1AZfdottVORe68vPrESG00?=
+ =?us-ascii?Q?PTGW6TQ5q1WBmjw8zVmD6jR5uYrszQPLWqhYb8qsiZfhDssmno6rxNsronDc?=
+ =?us-ascii?Q?swn3OQ3sEx0nXr83xm9PBnStsM3m+yAk6Y+ZkVqBCa4dPN7M873gg1eG/hZ1?=
+ =?us-ascii?Q?7fT3t3dMSh35w4xAL8vHd77DojoGvnA21ibMipacWB0rMXMYPTV4vLIb1DUT?=
+ =?us-ascii?Q?3GrCsEQcBh/0ePaJ75TRg7trZoWxtaQ9dlH3XHsTwph9HuZ9ilnTduQuAWXH?=
+ =?us-ascii?Q?uqGnnRw4r941LEY+so0qhUKAC5LDMk1VrX52hO9qJOhlb1YDqXe9v0JEqD20?=
+ =?us-ascii?Q?iIqTCIGQBjY0r1tGwZr8VS8qs+1+FP31+5E7NW1/6M6KigRGrcHYzXQ5u6+h?=
+ =?us-ascii?Q?LFZ13fDM3DyxylwSupHGFwprpsHYaqBc/MmbB4/+hefEcdTUOporqo7NKJQV?=
+ =?us-ascii?Q?VTvYNIFdS93/vQFXHkDlwqYuEryfEaa/Vgg5IEMsjZFi2RAk4mS4Q+zwfoxf?=
+ =?us-ascii?Q?abuAMuYt31SK/HNFbzgywv4PUXZmq/Ysz4KTilQb3h1JKgnhhB4UCXQRrCpW?=
+ =?us-ascii?Q?Vq76Hwmeq4Q314x5j0WowOPuol8VwMZ6IXvuLw2I/EXSAOs+O1+6gKK3WUSA?=
+ =?us-ascii?Q?TgBWHw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: BhZR1U8BKJ/VIEF3WU1fVvs9Ql6cgwhpNkyEQ2YxJB9xp+j0vt5x8o9S0UiUk8i2xeniEr3r4pkh/+Bx7NIbmdGwVoCAIT94eRoi7dxRO5A2S5pdle28Qzn46cNipkulG+8av2YcaWDtTcbM7sFDijg5y3ZE+yKpfP8X4LmMRbdLdzXEjlUoROJfvKBSGRs/mmmzXQrZUDXN+4bm/5klROEQcE1J0pZstbkemxx1G5iIyPpKkfKq+zQyrnEArmUzZAujIxcGYSJCMmV/KBOMwfv1J9r+W7EQSXTx/mAcmkNygSZ8uYPRm5okUN+MUJPMYBV8i2jEcN3KpNTNQN+un5pTn9f2mdLr2nvAJBJxqIezDjgqwaJaVr+IaBbb4wJCZcXPTJMXUuu3I3wKqpo1uafmOXbrE7xmiXyRmKI0/b83opq02P6X3iS3/xpPpYrX
+X-OriginatorOrg: gehealthcare.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2026 09:00:48.1174 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c99f3bbc-e0f8-4716-f008-08de6882e225
+X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
+ Helo=[mkerelay1.compute.ge-healthcare.net]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH1PEPF0000AD7C.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR22MB4176
 X-Mailman-Approved-At: Tue, 10 Feb 2026 13:41:53 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -130,232 +156,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi E Shattow and all,
+Conform with U-boot guidelines.
 
-E Shattow <e@freeshell.de> =E6=96=BC 2026=E5=B9=B41=E6=9C=8814=E6=97=A5=E9=
-=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=881:29=E5=AF=AB=E9=81=93=EF=BC=9A
->
-> Hi Aristo,
->
-> On 1/13/26 07:09, Aristo Chen wrote:
-> > Hi E Shattow,
-> >
-> > Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B411=E6=9C=
-=885=E6=97=A5=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=888:21=E5=AF=AB=E9=81=93=EF=
-=BC=9A
-> >>
-> >> Hi E Shattow,
-> >>
-> >> E Shattow <e@freeshell.de> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=
-=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=889:31=E5=AF=AB=E9=81=93=EF=BC=9A
-> >>>
-> >>> Hi Aristo,
-> >>>
-> >>> On 9/24/25 04:43, Nishanth Menon wrote:
-> >>>> On 06:37-20250924, Nishanth Menon wrote:
-> >>>>> On 10:59-20250914, Aristo Chen wrote:
-> >>>>>> This patch series enhances FIT image robustness by adding **memory
-> >>>>>> region overlap detection** to `mkimage` and fixing existing overla=
-ps
-> >>>>>> in DTS files and `binman` tests.
-> >>>>
-> >>>> [...]
-> >>>>>>
-> >>>>>
-> >>>>> Looks like i see a build regression in linux-next after this series=
-.
-> >>>>
-> >>>> I fat fingered that one.. sorry, I meant u-boot next.
-> >>>>
-> >>>>
-> >>>> Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
-> >>>>
-> >>>>>
-> >>>>> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
-> >>>>
-> >>>> I  believe there are outstanding comments on V1 that have'nt been
-> >>>> addressed either. Can we revert/drop this series for now while the
-> >>>> comments are addressed?
-> >>>>
-> >>>
-> >>> Similar to Nishanth, I am seeing a build regression, itb.map:
-> >>>
-> >>> ImagePos    Offset      Size  Name
-> >>> <none>      00000000  <none>    itb
-> >>> <none>      00000000  <none>    fit
-> >>> <none>      00000000  000c1698  uboot
-> >>> <none>      00000000  000c1698  u-boot-nodtb
-> >>> <none>      000c1698  00202128  opensbi
-> >>> <none>      00000000  00202128  opensbi
-> >>>
-> >>> Yields this error:
-> >>> ...
-> >>>  MKIMAGE fit-dtb.blob
-> >>> Warning: not able to get `load` of node 'fdt-1'
-> >>> Warning: not able to get `load` of node 'fdt-2'
-> >>> Warning: not able to get `load` of node 'fdt-3'
-> >>> Warning: not able to get `load` of node 'fdt-4'
-> >>> Warning: not able to get `load` of node 'fdt-5'
-> >>> Warning: not able to get `load` of node 'fdt-6'
-> >>> Warning: not able to get `load` of node 'fdt-7'
-> >>>   CAT     u-boot-fit-dtb.bin
-> >>> ...
-> >>>   MKIMAGE u-boot.img
-> >>> Warning: not able to get `load` of node 'fdt-1'
-> >>> Warning: not able to get `load` of node 'fdt-2'
-> >>> Warning: not able to get `load` of node 'fdt-3'
-> >>> Warning: not able to get `load` of node 'fdt-4'
-> >>> Warning: not able to get `load` of node 'fdt-5'
-> >>> Warning: not able to get `load` of node 'fdt-6'
-> >>> Warning: not able to get `load` of node 'fdt-7'
-> >>>   COPY    u-boot.dtb
-> >>>   MKIMAGE u-boot-dtb.img
-> >>> Warning: not able to get `load` of node 'fdt-1'
-> >>> Warning: not able to get `load` of node 'fdt-2'
-> >>> Warning: not able to get `load` of node 'fdt-3'
-> >>> Warning: not able to get `load` of node 'fdt-4'
-> >>> Warning: not able to get `load` of node 'fdt-5'
-> >>> Warning: not able to get `load` of node 'fdt-6'
-> >>> Warning: not able to get `load` of node 'fdt-7'
-> >>>   BINMAN  .binman_stamp
-> >>> Wrote map file './itb.map' to show errors
-> >>> binman: Error 1 running 'mkimage -t -F ./itb.fit.fit': Warning: not a=
-ble
-> >>> to get `load` of node 'fdt-1'
-> >>> [Config: conf-1] Error: Overlap detected:
-> >>>   - uboot: [0x40200000 - 0x402c1698]
-> >>>   - opensbi: [0x40000000 - 0x40202128]
-> >>>
-> >>> make[1]: *** [/tmp/u-boot.2.git/Makefile:1339: .binman_stamp] Error 1
-> >>> make[1]: Leaving directory '/home/es/build/u-boot'
-> >>> make: *** [Makefile:198: sub-make] Error 2
-> >>> make: Leaving directory '/tmp/u-boot.2.git'
-> >>>
-> >>> If you would like to reproduce the issue, use config
-> >>> starfive_visionfive2_defconfig and pass to OPENSBI env variable the p=
-ath
-> >>> of opensbi object 'fw_dynamic.bin' built using PLATFORM=3Dgeneric, wi=
-th
-> >>> the ordinary gcc riscv64 toolchain. The starfive visionfive2 board
-> >>> target in U-Boot supports multiple vendors and boards selected at
-> >>> runtime and is an example of a more complex FIT usage that you may be
-> >>> interested in for comparison and testing.
-> >>>
-> >>> Best regards,
-> >>>
-> >>> -E
-> >>
-> >> Sorry that I didn't noticed that my previous email sent to you was not
-> >> including other people
-> >>
-> >> Long story short, I am now able to reproduce the overlap issue that
-> >> you have encountered, and
-> >> I spent some time trying to understand what is opensbi, please correct
-> >> me if I am wrong
-> >>
-> >> AFAICT, there will be 2 types of firmware built, one is
-> >> `fw_payload.bin`, and the other is
-> >> `fw_dynamic.bin`
-> >> - fw_payload.bin: contains the next-stage binary, so the file size
-> >> will be bigger
-> >> - fw_dynamic.bin: provides information about the next boot stage at
-> >> runtime, so the size is smaller
-> >>
-> >> and here are the size of these 2 files built in my environment
-> >> ```
-> >> -rw-rw-r-- 1 ubuntu ubuntu  273048 Oct 25 14:49 fw_dynamic.bin
-> >> -rw-rw-r-- 1 ubuntu ubuntu 2105656 Oct 25 14:49 fw_payload.bin
-> >> ```
-> >>
-> >> When using my overlap checking mechanism, and passing the
-> >> fw_dynamic.bin to build U-Boot,
-> >> there is no overlap issue. However, when using fw_payload.bin, there
-> >> will be an overlap issue.
-> >>
-> >> AFAICT, the SPL will load the opensbi firmware(assuming fw_payload.bin
-> >> here) first, then load
-> >> U-Boot into memory, and then jump to opensbi firmware, so I was a bit
-> >> confused why the
-> >> overlapped opensbi still works?
-> >>
-> >> I will find some time to figure out how the whole loading/booting
-> >> process looks like, but it would
-> >> be greatly appreciated if you can share some insight, thanks!
-> >
-> > I finally had some time to revisit this and managed to get a VisionFive=
-2
-> > board for local testing.
-> >
-> > While trying to make it bootable I noticed the following docs:
-> >   - https://docs.u-boot.org/en/latest/board/starfive/visionfive2.html#s=
-econd-stage-bootloader-opensbi-fw-dynamic-bin-u-boot-main
-> >   - https://wiki.gentoo.org/wiki/StarFive_VisionFive_2#Building_OpenSBI
-> >
-> > Both appear to recommend using OpenSBI=E2=80=99s fw_dynamic.bin when bu=
-ilding
-> > U=E2=80=91Boot. I couldn=E2=80=99t find any guidance on using fw_payloa=
-d.bin together
-> > with U=E2=80=91Boot, which made me wonder why fw_payload.bin was used i=
-n your
-> > earlier report.
-> >
->
-> Likely I mixed up the filenames when writing in conversation, as I did
-> when writing on the opensbi mailing list about a dependency tracking bug
-> in opensbi build system:
->
-> https://lore.kernel.org/opensbi/0d6bf7c7-7605-4ad6-a35c-54efc5230fb8@sifi=
-ve.com/
->
-> and
->
-> https://lore.kernel.org/opensbi/36cfe431-40fb-470d-b50e-00a139d480f8@free=
-shell.de/
->
-> ...which is clearly a mistake to write "OPENSBI=3D/path/to/fw_payload.bin=
-"
-> when it should instead be "OPENSBI=3D/path/to/fw_dynamic.bin",
-> acknowledged in the follow-up message:
->
-> https://lore.kernel.org/opensbi/32873fc7-2cc8-46d5-9f4e-3a16cf95f48a@free=
-shell.de/
->
-> > Could you clarify whether there is documentation (or a specific
-> > requirement) that calls for fw_payload.bin in this flow? If the intende=
-d
-> > path is fw_dynamic.bin, then the overlap issue disappears for me
-> >
->
-> For the VisionFive2 and derivative boards, I intended to refer to
-> fw_dynamic.bin only. If I mention otherwise it was in error or for not
-> knowing what I'm looking at and reporting more information than
-> required. There are RISC-V boards not related to VisionFive2 or its
-> StarFive JH-7110 SoC that do use the fw_payload.bin approach but I think
-> I just didn't notice the difference when transcribing to e-mail.
->
-> > Thanks for your help and guidance.
-> >>
-> >> Best regards,
-> >> Aristo
-> >
-> > Best regards,
-> > Aristo
->
-> Thanks very much for the follow-up,
-Thanks for letting me know that StarFive VisionFive2 is not affected
-by my patch!
+Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+---
 
->
-> -E
+(no changes since v1)
 
-We=E2=80=99re currently discussing a new proposal[1] for handling TI platfo=
-rms
-in the FIT image spec. Ahmad Fatoum has a few questions about
-TI-specific implementations=E2=80=94could the TI folks on this thread pleas=
-e
-take a look when you have a moment?
+ drivers/clk/imx/clk-imx6q.c | 102 ++++++++++++++++++++++--------------
+ 1 file changed, 62 insertions(+), 40 deletions(-)
 
-Best regards,
-Aristo
+diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
+index b69355cefc7..f11f9045abb 100644
+--- a/drivers/clk/imx/clk-imx6q.c
++++ b/drivers/clk/imx/clk-imx6q.c
+@@ -31,12 +31,28 @@ static struct clk_ops imx6q_clk_ops = {
+ 	.disable = ccf_clk_disable,
+ };
+ 
+-static const char *const usdhc_sels[] = { "pll2_pfd2_396m", "pll2_pfd0_352m", };
+-static const char *const periph_sels[]	= { "periph_pre", "periph_clk2", };
+-static const char *const periph_pre_sels[] = { "pll2_bus", "pll2_pfd2_396m",
+-					       "pll2_pfd0_352m", "pll2_198m", };
+-static const char *const uart_sels[] = { "pll3_80m", "osc", };
+-static const char *const ecspi_sels[] = { "pll3_60m", "osc", };
++static const char *const usdhc_sels[] = {
++	"pll2_pfd2_396m",
++	"pll2_pfd0_352m",
++};
++static const char *const periph_sels[] = {
++	"periph_pre",
++	"periph_clk2",
++};
++static const char *const periph_pre_sels[] = {
++	"pll2_bus",
++	"pll2_pfd2_396m",
++	"pll2_pfd0_352m",
++	"pll2_198m",
++};
++static const char *const uart_sels[] = {
++	"pll3_80m",
++	"osc",
++};
++static const char *const ecspi_sels[] = {
++	"pll3_60m",
++	"osc",
++};
+ 
+ static int imx6q_clk_probe(struct udevice *dev)
+ {
+@@ -52,13 +68,13 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 	       imx_clk_pllv3(dev, IMX_PLLV3_USB, "pll3_usb_otg", "osc",
+ 			     base + 0x10, 0x3));
+ 	clk_dm(IMX6QDL_CLK_PLL3_60M,
+-	       imx_clk_fixed_factor(dev, "pll3_60m",  "pll3_usb_otg",   1, 8));
++	       imx_clk_fixed_factor(dev, "pll3_60m", "pll3_usb_otg", 1, 8));
+ 	clk_dm(IMX6QDL_CLK_PLL2_PFD0_352M,
+ 	       imx_clk_pfd("pll2_pfd0_352m", "pll2_bus", base + 0x100, 0));
+ 	clk_dm(IMX6QDL_CLK_PLL2_PFD2_396M,
+ 	       imx_clk_pfd("pll2_pfd2_396m", "pll2_bus", base + 0x100, 2));
+-	clk_dm(IMX6QDL_CLK_PLL6,
+-	       imx_clk_pllv3(dev, IMX_PLLV3_ENET, "pll6", "osc", base + 0xe0, 0x3));
++	clk_dm(IMX6QDL_CLK_PLL6, imx_clk_pllv3(dev, IMX_PLLV3_ENET, "pll6",
++					       "osc", base + 0xe0, 0x3));
+ 	clk_dm(IMX6QDL_CLK_PLL6_ENET,
+ 	       imx_clk_gate(dev, "pll6_enet", "pll6", base + 0xe0, 13));
+ 
+@@ -68,50 +84,54 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 		return -EINVAL;
+ 
+ 	clk_dm(IMX6QDL_CLK_USDHC1_SEL,
+-	       imx_clk_mux(dev, "usdhc1_sel", base + 0x1c, 16, 1,
+-			   usdhc_sels, ARRAY_SIZE(usdhc_sels)));
++	       imx_clk_mux(dev, "usdhc1_sel", base + 0x1c, 16, 1, usdhc_sels,
++			   ARRAY_SIZE(usdhc_sels)));
+ 	clk_dm(IMX6QDL_CLK_USDHC2_SEL,
+-	       imx_clk_mux(dev, "usdhc2_sel", base + 0x1c, 17, 1,
+-			   usdhc_sels, ARRAY_SIZE(usdhc_sels)));
++	       imx_clk_mux(dev, "usdhc2_sel", base + 0x1c, 17, 1, usdhc_sels,
++			   ARRAY_SIZE(usdhc_sels)));
+ 	clk_dm(IMX6QDL_CLK_USDHC3_SEL,
+-	       imx_clk_mux(dev, "usdhc3_sel", base + 0x1c, 18, 1,
+-			   usdhc_sels, ARRAY_SIZE(usdhc_sels)));
++	       imx_clk_mux(dev, "usdhc3_sel", base + 0x1c, 18, 1, usdhc_sels,
++			   ARRAY_SIZE(usdhc_sels)));
+ 	clk_dm(IMX6QDL_CLK_USDHC4_SEL,
+-	       imx_clk_mux(dev, "usdhc4_sel", base + 0x1c, 19, 1,
+-			   usdhc_sels, ARRAY_SIZE(usdhc_sels)));
++	       imx_clk_mux(dev, "usdhc4_sel", base + 0x1c, 19, 1, usdhc_sels,
++			   ARRAY_SIZE(usdhc_sels)));
+ 
+ 	if (of_machine_is_compatible("fsl,imx6qp")) {
+ 		clk_dm(IMX6QDL_CLK_UART_SEL,
+-		       imx_clk_mux(dev, "uart_sel", base + 0x24, 6, 1, uart_sels,
+-				   ARRAY_SIZE(uart_sels)));
++		       imx_clk_mux(dev, "uart_sel", base + 0x24, 6, 1,
++				   uart_sels, ARRAY_SIZE(uart_sels)));
+ 		clk_dm(IMX6QDL_CLK_ECSPI_SEL,
+-		       imx_clk_mux(dev, "ecspi_sel", base + 0x38, 18, 1, ecspi_sels,
+-				   ARRAY_SIZE(ecspi_sels)));
++		       imx_clk_mux(dev, "ecspi_sel", base + 0x38, 18, 1,
++				   ecspi_sels, ARRAY_SIZE(ecspi_sels)));
+ 	}
+ 
+ 	clk_dm(IMX6QDL_CLK_USDHC1_PODF,
+-	       imx_clk_divider(dev, "usdhc1_podf", "usdhc1_sel",
+-			       base + 0x24, 11, 3));
++	       imx_clk_divider(dev, "usdhc1_podf", "usdhc1_sel", base + 0x24,
++			       11, 3));
+ 	clk_dm(IMX6QDL_CLK_USDHC2_PODF,
+-	       imx_clk_divider(dev, "usdhc2_podf", "usdhc2_sel",
+-			       base + 0x24, 16, 3));
++	       imx_clk_divider(dev, "usdhc2_podf", "usdhc2_sel", base + 0x24,
++			       16, 3));
+ 	clk_dm(IMX6QDL_CLK_USDHC3_PODF,
+-	       imx_clk_divider(dev, "usdhc3_podf", "usdhc3_sel",
+-			       base + 0x24, 19, 3));
++	       imx_clk_divider(dev, "usdhc3_podf", "usdhc3_sel", base + 0x24,
++			       19, 3));
+ 	clk_dm(IMX6QDL_CLK_USDHC4_PODF,
+-	       imx_clk_divider(dev, "usdhc4_podf", "usdhc4_sel",
+-			       base + 0x24, 22, 3));
++	       imx_clk_divider(dev, "usdhc4_podf", "usdhc4_sel", base + 0x24,
++			       22, 3));
+ 
+ 	if (of_machine_is_compatible("fsl,imx6qp")) {
+ 		clk_dm(IMX6QDL_CLK_UART_SERIAL_PODF,
+-		       imx_clk_divider(dev, "uart_serial_podf", "uart_sel", base + 0x24, 0, 6));
++		       imx_clk_divider(dev, "uart_serial_podf", "uart_sel",
++				       base + 0x24, 0, 6));
+ 		clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+-		       imx_clk_divider(dev, "ecspi_root", "ecspi_sel", base + 0x38, 19, 6));
++		       imx_clk_divider(dev, "ecspi_root", "ecspi_sel",
++				       base + 0x38, 19, 6));
+ 	} else {
+ 		clk_dm(IMX6QDL_CLK_UART_SERIAL_PODF,
+-		       imx_clk_divider(dev, "uart_serial_podf", "pll3_80m", base + 0x24, 0, 6));
++		       imx_clk_divider(dev, "uart_serial_podf", "pll3_80m",
++				       base + 0x24, 0, 6));
+ 		clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+-		       imx_clk_divider(dev, "ecspi_root", "pll3_60m", base + 0x38, 19, 6));
++		       imx_clk_divider(dev, "ecspi_root", "pll3_60m",
++				       base + 0x38, 19, 6));
+ 	}
+ 
+ 	clk_dm(IMX6QDL_CLK_ECSPI1,
+@@ -125,7 +145,8 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX6QDL_CLK_UART_IPG,
+ 	       imx_clk_gate2(dev, "uart_ipg", "ipg", base + 0x7c, 24));
+ 	clk_dm(IMX6QDL_CLK_UART_SERIAL,
+-	       imx_clk_gate2(dev, "uart_serial", "uart_serial_podf",  base + 0x7c, 26));
++	       imx_clk_gate2(dev, "uart_serial", "uart_serial_podf",
++			     base + 0x7c, 26));
+ 	clk_dm(IMX6QDL_CLK_USDHC1,
+ 	       imx_clk_gate2(dev, "usdhc1", "usdhc1_podf", base + 0x80, 2));
+ 	clk_dm(IMX6QDL_CLK_USDHC2,
+@@ -136,11 +157,11 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 	       imx_clk_gate2(dev, "usdhc4", "usdhc4_podf", base + 0x80, 8));
+ 
+ 	clk_dm(IMX6QDL_CLK_PERIPH_PRE,
+-	       imx_clk_mux(dev, "periph_pre", base + 0x18, 18, 2, periph_pre_sels,
+-			   ARRAY_SIZE(periph_pre_sels)));
++	       imx_clk_mux(dev, "periph_pre", base + 0x18, 18, 2,
++			   periph_pre_sels, ARRAY_SIZE(periph_pre_sels)));
+ 	clk_dm(IMX6QDL_CLK_PERIPH,
+-	       imx_clk_busy_mux(dev, "periph",  base + 0x14, 25, 1, base + 0x48,
+-				5, periph_sels,  ARRAY_SIZE(periph_sels)));
++	       imx_clk_busy_mux(dev, "periph", base + 0x14, 25, 1, base + 0x48,
++				5, periph_sels, ARRAY_SIZE(periph_sels)));
+ 	clk_dm(IMX6QDL_CLK_AHB,
+ 	       imx_clk_busy_divider(dev, "ahb", "periph", base + 0x14, 10, 3,
+ 				    base + 0x48, 1));
+@@ -163,7 +184,8 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX6QDL_CLK_PWM4,
+ 	       imx_clk_gate2(dev, "pwm4", "ipg_per", base + 0x78, 22));
+ 
+-	clk_dm(IMX6QDL_CLK_ENET, imx_clk_gate2(dev, "enet", "ipg", base + 0x6c, 10));
++	clk_dm(IMX6QDL_CLK_ENET,
++	       imx_clk_gate2(dev, "enet", "ipg", base + 0x6c, 10));
+ 	clk_dm(IMX6QDL_CLK_ENET_REF,
+ 	       imx_clk_fixed_factor(dev, "enet_ref", "pll6_enet", 1, 1));
+ 
+@@ -172,7 +194,7 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 
+ static const struct udevice_id imx6q_clk_ids[] = {
+ 	{ .compatible = "fsl,imx6q-ccm" },
+-	{ },
++	{},
+ };
+ 
+ U_BOOT_DRIVER(imx6q_clk) = {
+-- 
+2.39.5
 
-[1] https://github.com/open-source-firmware/flat-image-tree/issues/32
