@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A471DECD6D3
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 18:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBD7ECD6D6
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 18:25:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90FFC83E72;
-	Wed, 11 Feb 2026 19:23:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EBCF783D5D;
+	Wed, 11 Feb 2026 19:23:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="n9iInW3U";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="uXN57Zfr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59E5383E81; Wed, 11 Feb 2026 19:23:36 +0100 (CET)
+ id 69BD783CBD; Wed, 11 Feb 2026 19:23:40 +0100 (CET)
 Received: from PA4PR04CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73FA083E69
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 19:23:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 606FF83E85
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 19:23:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hCZdnWwuSxiPJBLPaov6lkQWEe0hJWVjHrs71f0RquxJjPAufdasc7GXUDHEHPxEiKLNz4vVHn3rjkAJSOA/t7hwxChOOgJk4lv1BsmfVW/unqD6fu/taXfn0EzhYowbhvKGHJYSKVuMBR/3QuBwGvFKwqPOhBDsAYu2y67ahJwO+evkeGiNW8ttxTqt8UWZpPTH8LEaqF+vfnzMIVALdCN77crZB/Q0DkoZ9mJj6ULxSfpMdEIMWjEaXWsUbJQ38YiDYkXPEXXqerKQBC2rMtnGCHckoj1kRo3Aytc40UMt/TmBmTkSe3qN43RddxLw0eiaAkOJr70l3xJ62c2pqQ==
+ b=tj9AGRs4e63AFblmut9JsQ2Y/QAg74gpnmWieWZQG3IzVMNkgrS6PqsLRqfHd5z8FSJ4+fVswWbIlCuui7DdXLp3+Crm0J1n788pYyqYjm1ghD+y7sXOkbd+ZA6Po/N58tVkoaj+q1QS+BySm9ofjaeCa16SlnM8zzOxOKQX+ODoet5HvvQN48EWco5xRpBHOyvJicVyFtcj1E5Js1WRSBNzyate9KjPf66oezUQH/X3H2rIsZzlzOVQAG1ixgyWmB+9iJ8sv2/qo9fk8RXYJu2xK34O3eBSxGW4QJ6xbASRz0qQdBNa0La5PS+edHfJbYmMU7q8yDNq0u606MSMaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BzGvpcVGa2SNugNKK8/ozCIAhsQBRiTVnjHn7PtvF/I=;
- b=FxHYfeHDkd0sFVksyspPITztRKuo7gQYSSYSyPL9P2gUMxb2k73KMVA0C/diyEn0U0UZMsy/GhaL2knNDYrGlCoEDjZd55ect5ldAkAav/lBqf7EueFC/q7ghRA3yxWjjjiLMbHgs6ijuoP3PvT/rZ6C/e69d4cxAUD35L8KJiBYWLmm15+yJwaACOdyfP/N+8uF+483nomd0Xk+WrAqvByw6HbiQ7mmSjVs8czsZR9AAZNbCjbpsYjbtDnMNoAHC+VMDQVaN8/9ygTmVbDUcG6PmmBcCNKrZppu3KWLFgUq0ioZSFnR3nWIY7hRDjYUSOiUdq/f9riZpuhMfpL9fw==
+ bh=vP5hFIJdztqe4dteaml2rhz0MQ9qVdie8uIftd1AI2w=;
+ b=qdlZRpf30xyYcvGMrjNtyd9IH72eFf5rDGL1c4r5t4ENbCh8oLGpsfeLOJtABHWYC0KXLjrL70lu/d12Y4iNpNi0xCNdO4hpaUvF96j/QJpGGCYtkIkIgLZsbt9bs2jjMIqC2ZTTxLKaxc3or0y26jk6RbljQo3u//PHjzYe5DwyzBcQRpRurQu6bFLp4/Xci6/IU1Fw0xxegMk0+w43Wy1wWBGzTuV8m3Ge4j5fZ/6qVX8q8Ie1VZSoc8Rk6KSOjoNABiVkjiSKQSvcXAF9ytPzY17965rTMOqscWAFzA9ShKkeu9OhFctEUdUxOju2VT3dztaba6zOHHx7RSaHIQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BzGvpcVGa2SNugNKK8/ozCIAhsQBRiTVnjHn7PtvF/I=;
- b=n9iInW3Uq2QqUbXWn8i3ZEE9tf9Sh2yVqmjtQACfM/LYBrcD1AxZcZTT1tiOibdpn4/xJq6uN5+ttCJy57dzMmutNO2WvYE+jqTEBNXy7axdoda0zI1P2+cIzFBcQQCI5VmCLnFFIqVEcOQCvy3x15ytcmK508XPXjA3EpZxYL+lkdmFKDcsHWmtDZYaY6XbSt1N14gF6x+cHvUkvaL5OX6s/wQSu1bPolbkzX2xS0M1iJzi/uk57CSxeknkYthMfs42UXdZjmPSIOkMUbPxqLgVhmuGGr0nhO2EFFsmzPtLBGpsVJVj3I6/NFEgauAYKExhg+n/WWqjlwZAppXjbw==
+ bh=vP5hFIJdztqe4dteaml2rhz0MQ9qVdie8uIftd1AI2w=;
+ b=uXN57Zfr0qiKoAJcZXYXBxnKQCBVenvDytFTlCdxoiuC50T61K3ehiX8xKLcAyCLYkwZDUymlxZGefKTBhDy8WkCkZnWBWBPQrmyy9ZK47QTyfEsgdJSu1xJCnYXiOHI27bVQzGT11f4YXi/8XekvOqJznku+aG1TMcVWYz/sYZDsxo2RK0EuSaumszgl1p0UkSbtKcEzVcOIYl0+qt7MwbWulcNVjmIKDD54/MhU9IMKsyZXFNDxa5B0q3ILK/FFhQn1b1GrjEL8GArJglu9jNkAnQ0pUYQC3ipSMalMYl9TPZvw6BR0xK+Des1xYy4URAYO/soAGHU0rY+wcwsLw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
  by PAWPR08MB11040.eurprd08.prod.outlook.com (2603:10a6:102:46f::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Wed, 11 Feb
- 2026 18:23:33 +0000
+ 2026 18:23:37 +0000
 Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
  ([fe80::3c7:6d2e:8afe:e4dc%4]) with mapi id 15.20.9587.010; Wed, 11 Feb 2026
- 18:23:33 +0000
+ 18:23:37 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -65,9 +65,10 @@ To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v2 13/16] configs: enable PCS for Airoha AN7581
-Date: Wed, 11 Feb 2026 21:22:27 +0300
-Message-ID: <20260211182230.968921-14-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v2 14/16] net: airoha: fill in support for PCS/PHY in Airoha
+ Ethernet driver
+Date: Wed, 11 Feb 2026 21:22:28 +0300
+Message-ID: <20260211182230.968921-15-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260211182230.968921-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20260211182230.968921-1-mikhail.kshevetskiy@iopsys.eu>
@@ -79,83 +80,83 @@ X-ClientProxiedBy: MI1P293CA0012.ITAP293.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|PAWPR08MB11040:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8e7f4d49-ff17-4ffc-bf37-08de699aa9d1
+X-MS-Office365-Filtering-Correlation-Id: ec4e581a-1167-41c9-9011-08de699aac2b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|7416014|376014|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Mwmh5kss1q7xRm7oT/iZDDkLZZYqbeSzd+M85lTIrXIPhrCjUuVtMqykQiTd?=
- =?us-ascii?Q?fwJpvh44MX7NFXMbZbCH+EurJYeEAmW9tKYQkX5JeDUdR/e71a2CkuP+YXy/?=
- =?us-ascii?Q?tm3x2G1lbxCKrgsQL4hPEWAfk/nQBf0VF8wt/RCLOXI6rEhP7eiXpEABolIh?=
- =?us-ascii?Q?28KRT+pHa2UGT1qrubSBShxavswEEZIT8jcT8B01U0Dw9/GgeFYZyA1KOdfp?=
- =?us-ascii?Q?B7z6GmCrkxM6Gzp2ug8GoLPLWuKjzcrLJ4Pl7G6FZm59X6/A2fH3OCQjWqAB?=
- =?us-ascii?Q?Q85gl56KgHJ+CYhKc+8dfCl88wji4waW4KOdn0qQpblCqg5JSWQTFni1vKSf?=
- =?us-ascii?Q?mILD2SJSdRyy+bYk23hmaJ7NeurYPC1swHXpKUxYdcLN4szt/w1M54F3cQ9G?=
- =?us-ascii?Q?+IJ+x7zvmRKud+OXOKO1/LpmIBR9/0gJdV7VrWD9tBHmwhv5LlrBQ2FY02sA?=
- =?us-ascii?Q?o7NOkadYiS7K5LJP2GIqR8KF3YF8SICXNXnmIBz+gg47yadqDNlUodwEC0BP?=
- =?us-ascii?Q?7W+dWunVNonf/pKuL1BX+YOrrs2Yho00o+XxCewZUdGHEIFokyb3WEQX15Qf?=
- =?us-ascii?Q?1CvncQDSVsSaBz/RBd7oF8l/wQHVhidMbRX0SFUL34rAh8ebfwa6V604PGPi?=
- =?us-ascii?Q?8TkqtMV6vBqjtIrZi/iCKYjtu4tYei5gCEP289FSzJIY9j080b/3gvZxXlCd?=
- =?us-ascii?Q?hapX9/H0Jm6oiumxFtNSfyzMl8kJA9ZuMGRH6UgSXPF0uqY1Ty8G9+vVrmvJ?=
- =?us-ascii?Q?N7ES8bs94npy+HvHD8JnTRvhK8rQRR6H7FhSWM2VN5AUYbG38FK2QlPXOXrO?=
- =?us-ascii?Q?PlZ75k2PDMWf8ZrkVoS3RluH5USYwJMUXrPTjVCn89fOjmlJMmkfSA7Xw4eP?=
- =?us-ascii?Q?tt0aLQItZ2H6U7kCVn1CTUVYpOHkAwe8PYk1OL1Hoe92LhrsHgmCMXJ2C0I6?=
- =?us-ascii?Q?hOPALPs0UeknVEdqc72+rdxjS+mfyBvkHWmSYm3fHMVIcHDhnfFtYOIHGz1H?=
- =?us-ascii?Q?6A4OJjJhc4Js57LwGWKD3bC9DZk4tYTzz/JuX7QTWGyQ4R5O0GwAWlu2Y4+O?=
- =?us-ascii?Q?rd7fswJWvFdqZ1vH8/9CjIYTVdAaDGAmXSsMa50b5r1vpIwCBFsvMqdB59vq?=
- =?us-ascii?Q?iv76HPmw7B8D6pavOrFhifjT/9yxK5S22RaU3l8iV7zpeQz0nxqc4BnsaXYc?=
- =?us-ascii?Q?vGlEG/520IZKnAXIcPIuf3A+hmB/RIpESxQtl89cvT5UYw0Yps7F6lOyqcPy?=
- =?us-ascii?Q?iniu+0wimy/HzIvq0xCdueY3i9n4cICvVT5mhqQwJ3tqiWVQKSfOKqORM9lv?=
- =?us-ascii?Q?sBrR1y2NX2c98XOIsQ6MkWA8yfFfCWUUKR8nRuI6wbLH51r8h0hXJ67/Pn0P?=
- =?us-ascii?Q?CjyhS4uDU2tcgdaVQXq4cCk37xXmzAQ6v7T/dUmBTF0mElXZ40HXOAAMxhgh?=
- =?us-ascii?Q?OAheJNXJruXeEEcwsqiP4M4Zg+5whZ4hNzTLxS4uNQHLdxnXxDreO5BvI22f?=
- =?us-ascii?Q?N5lI28wUImX5x9+8BGwQlChL6NX1yTeqnGdTv2cArs9oCvScGB7oOaI1OIov?=
- =?us-ascii?Q?QVZiMOFhRx/vCwDS3nFxQPt9vf70XPnPLuKKbxYM9lnI832es5vTLsUEmCve?=
- =?us-ascii?Q?6gC2mcP7pO7e5+VVZArV7aQ=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hK2Cl419PiNWmI/2OfeLgCOA4ARZHU/e2/oLEMCRmRZxE30V4hWZObHIs6Mv?=
+ =?us-ascii?Q?JqYZupfTcFnkQpAZJk78zmO2fAmZcrasmLh/e1QsBu4FGPgZGVD6tvBsGr1T?=
+ =?us-ascii?Q?MJoP2YAFoka4tVQFRoJAk0liqPbmVOE/ZMdvBf6TQC17asDK9DpL/EhnpJOZ?=
+ =?us-ascii?Q?I+uuCbNRT9mrjnbEvFABa3dSu41dYxSYO2KnWNZWruZUQZKDhzXSuiYg0dUx?=
+ =?us-ascii?Q?urHjeztdpJjB5q+NRXM2P0fxAqf8nKrAbrytdhllVNMKhUqQ5WmZQwWzPIi1?=
+ =?us-ascii?Q?Pq391tkBKn+eue/Bh5GUc4FqjmX92Ulgm2ZY+QHpbD6DPxtg4aMvo80NDc+r?=
+ =?us-ascii?Q?VRLvbR4RlKiH4qFdco98V5MUAFocNklvZO4UwKUqmPdpDJJtXvzR1rbSiGYO?=
+ =?us-ascii?Q?ioVxhvdvWE5J6DLo196POIFCDAhi5G0ymxjk3ctz3/NbzvFA0gTY/pMiplk1?=
+ =?us-ascii?Q?tYbfbl2aOUWJkpSjMZWJYMwceRkmZ7wjewOjOawszG0R3wC/jmdA2kmSOzf/?=
+ =?us-ascii?Q?BQIcVzXX5Qz7HKI6J/mFsaqMWENVztRB61MVPJ5w+qxWLQFj641LlpGJKx1D?=
+ =?us-ascii?Q?OBjoSf4mgsVN1y2zo008NcHgoEnmeTi/dwltSQOqMsYMqfW5GebHcVPEYyn+?=
+ =?us-ascii?Q?S5BTmoQ4jtdnTQAM9zHrdIZNpJlN49sqTsn+LQtrBwFd/c8gdC7PoigOOnZg?=
+ =?us-ascii?Q?XV01DwFDyldF9S35t021ugn3ClEVmkbRtwEhJ5fVcjByPY3XS/JfeE31cSmy?=
+ =?us-ascii?Q?coinswG7DTlnvom0P4H+astQO7TQDkxt7ie+dzwkMf5UQpn7iCckWwh5WeVn?=
+ =?us-ascii?Q?XEnK/JTz4kIesbv2Djs8ERd5UN5OTYiWlmR2T1wgDbdYCIO0s3pqh4e5zfxg?=
+ =?us-ascii?Q?KU/wyLIpv77wZqFwUjvDNdsGCJL8KHPG8MT9qiRYAKw5z973Fu702LDDAizb?=
+ =?us-ascii?Q?M7M8pnjFX6f7MJJnXj4mP6Er2omq3s4Lx1MkDxd6pw1vnedzqC59fUNG8ZZW?=
+ =?us-ascii?Q?kritJn86gTznhunoh9fZDXG6QtYE6Wv8l6EnNHoOYtJkwTdqDJR2tBGGcZFW?=
+ =?us-ascii?Q?96g1gkO4ZSXsW33p18Vivxn32ftUQ82Cz1yAncFGJZdX7NTmCGgnXh6+K5A9?=
+ =?us-ascii?Q?5/rnLG67QMoYRNZg3Q7qN8OvFBX7CopaUFQOkOvPpbCzx9ifVV78Kfp1ghpQ?=
+ =?us-ascii?Q?br1pr6b0n6Cox7fpkgdxg/pC7hHdUQC20M/jSd4CH5IqdlwqHmgozdlIuoia?=
+ =?us-ascii?Q?lWzZhah1q/KfnVPTc7Wz0JggdvWtTWDLZBSsrCAEQ7yBeF+HFBxSh2W4W6C5?=
+ =?us-ascii?Q?dYW5rcA2iaee+xLSYlP1/2XwiQ9hQ2sb1ju80ETZPsDdsbkA5SWXYrzTKQmn?=
+ =?us-ascii?Q?+Vwu7dQyP642wX2cR3e3eeEhvz7k30bN6tI1CTVCQZq25gb4nE0hV72hmEVo?=
+ =?us-ascii?Q?DSVCM2eSo7oyFBb/D2Yml7UWMte0BcIjFwrFD+/iDSUUMPp+KluHqcMq2s8m?=
+ =?us-ascii?Q?FggK9k2lHFL/ZsMcX/TmhCihNwLO9y1l+uBwG4rsgRScgPKpfYnLEBZbuYE9?=
+ =?us-ascii?Q?8vAPGRj9Rz3Fz3aVJ3zVCqwLnho64mwf5/yqneeaHDAmxqocUzkoRyuaBYxI?=
+ =?us-ascii?Q?Dwi8uP4RhSVrAK0JPBzYq7TYh2Zgp/xF65+XsJC24Kdz?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?uhGCDowmxkO8f6ZztSm3QWj4LI72Gixq63dpbDprq4qfjaoPmlDNHVaf7Rw0?=
- =?us-ascii?Q?V2gBz6TB2LWbbGJxMOboQ6Em9lDQX+vIsM4UmzYF6rAgduElDuxjUGBM70wK?=
- =?us-ascii?Q?kmQw66igDavFIj6SWmhIKjou9hzE7XIv1HXQaq8+FQ4FmRyQf0pR/PcTsfnq?=
- =?us-ascii?Q?YIY8r31OnDYn0OmKUnzGN80fjumeYs0nEEf32qbOPY9ZUuqIgytwre34Ie+Y?=
- =?us-ascii?Q?WWt1/XuXfLRk1iLKol0hrhmIY9w+Ccb5RHllpZ0HN9DXUUMi9CxhrYBkmgKu?=
- =?us-ascii?Q?Bkj1/I57La67/q+pMQaU+ej5U+XHKa91XhD5dXAhE+26V0/CkmwJxwLMvckq?=
- =?us-ascii?Q?1Ch1kpf7IUx9DTOnUavu0BQpq7M7fOjxBV5UDryo0/vt+mldtFfSiUwzFt77?=
- =?us-ascii?Q?t2YP5Zc/N8jrcZr7BSLt1g1E/GThjjZJP72/lx6xv68ki26fu3ONBHgtN/sJ?=
- =?us-ascii?Q?THXVpZcQEV5kvj+EtwCT/vvUNqYVJTPUCwVjqQClkOAR0XR1a/L09rq9jr6S?=
- =?us-ascii?Q?vpIqb7ITQSvaOcEJidqo6vRlR35S+YmJHSqo/KU4EjnqVIKmMfJQfzPaUA5p?=
- =?us-ascii?Q?4Lp0KB89E6UC374FKQ+NJcyAFo2/bq3dQlnmVr38LKi8ncNW54k0B0rU2D18?=
- =?us-ascii?Q?s49gq/1d3l0VQPE8zhKanjE7dm9/YNkt4pWUqayBjR7awkM7hDbzDaNwL2Bd?=
- =?us-ascii?Q?y5FggGea6C8f3LSUTKADxu3ud1thOavh6uwIE9QD964sngOn4jQiHsOzvJHX?=
- =?us-ascii?Q?pJMIJC3VBWGg0i9hOng52tQonVpSxmAUs2q/L8nUoGFH1J/J2xhWB+SDr069?=
- =?us-ascii?Q?FbqvazDKWVIPF2PkllY78HbOqx4yYVFWsF+1XnQiXoTjw+Lk3mXuR+ecsib2?=
- =?us-ascii?Q?xcZup8Q0pjvLCeahQayvIHecJDrW/SS/MbQQV8EKD4+wAnD3+W6NTsAT5tcj?=
- =?us-ascii?Q?8M9UzfrolaPHI6+7DwHdsG0DyrcRW0R5de0pQNcBy8nsLeYrD0xWq2VC0Wkd?=
- =?us-ascii?Q?GuSkOBk13ewLIWU4AbVoGhtJ4SoEeOqIblOaUj8aL7P7dIbFbE2XciH66s1g?=
- =?us-ascii?Q?ioMU/aROYMOHfkJ0t9gZOHy1AqMwixw7BzGe6uMpOT8pICzWe4Rox03Mwz9D?=
- =?us-ascii?Q?J5ZADjP+Kr8WqfmcSGbnzwfZiorpA0zlLeNspIRtqVSQcy9J4VXvFv/EiJ1L?=
- =?us-ascii?Q?i4PZAZGR6kIfCiHDpLTq+kccz+hcvNa5A6rmGB300huG0+7DU+dBskaxIRKy?=
- =?us-ascii?Q?olT0oBU2Xl8OAhadmgcrNyaEJCeYzozEgWpcpoWP+TwFs4DRdPHD5+ibvlfg?=
- =?us-ascii?Q?u5mdQJLkVyBxcJsSdUwvXyEQW30qaD1sYIdLs7itKDdiT2ZA6orHXSlN0aby?=
- =?us-ascii?Q?TWuhmrAbVPR32pU6R1cBiylYMkfi9NMEIGake1EgGBYUSzWn/tY1wx8Z3l/g?=
- =?us-ascii?Q?TZESO9W0fdog5irExCD1tyKyF1moYdXRdZ916eEFowPk5ZFX2PegkMaW3xn5?=
- =?us-ascii?Q?66/PoJhvfdUhlh1Ck72nvg9903mcupHtoniDKJ4eBKo1LB9oIi9mOnUBHUYs?=
- =?us-ascii?Q?A6ZkjIFlTTca8UkViIfGC9hu+Na/pp4eqSN6NlONad5y5xRpxWTlZtZ1NkpQ?=
- =?us-ascii?Q?sFOYpwzKGvLLV2EBIMFxg6QC0HBmUp4VNiOkzvigrKQWAaSMfgWZh+6h1HvX?=
- =?us-ascii?Q?AtgMVp7hIVtuUh2ly66giuvFPUYyVljmTAU3JoRQuO8wxiI9ergr2H28dW9M?=
- =?us-ascii?Q?L36fF/zKoszNQrPPG+ZYvH0RBhrRGbs=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ua/zpWMWgn/V/DxtftCuov5tM1qKTjvhCA7ByWNBEXWtaBJINzyqAen7Ld4n?=
+ =?us-ascii?Q?DFvZ5QK1n2hPx9roMOAu/6o1b3kp5/sWbrrRMfbz5GPfsmtQgQganJn2Bm0z?=
+ =?us-ascii?Q?9+HlFIUskSnYpx/mde2WrzeCV7IYlb1pBuULcfk6Th53kXluMaaoclozoAo0?=
+ =?us-ascii?Q?XTv6RJnWq7vLmuYapg6x3vd/2Ck0bPvsQOXwl8Yugd0vQw+NZpefMfCZm2h1?=
+ =?us-ascii?Q?bYm+KiliDU9p1+CNRqgHiF30Xkjog3LNCPLe4gkOB2u5thsbukPaCNoeh7/I?=
+ =?us-ascii?Q?QlRXyXsuZR+aTBCJvKsUbJhfn3F+s/CKGsgayXyXmH3iRj8ozJ2hvfVDt3kQ?=
+ =?us-ascii?Q?qb/IP/RU4drdsyqEvSoBO5zE2sjAuZm47VtyltfyWRuQjCMzhT2V1fbMXA5K?=
+ =?us-ascii?Q?/lLluvUnob4L+lYmtSQoZ6iypJbynwXoTujDlqg4jvkqVDfYixRO36En/SjY?=
+ =?us-ascii?Q?OPoRX5zx0ibRhPYsS02AhnSeAXwFe7zEXLMOG2cPyoqfNXl04/SkoUfDCtQh?=
+ =?us-ascii?Q?OnFnancrHtFsGDTDUG1SeF/mTD3aw6gD3Z6ettX1A5ZSeeiArKi1uoaAZIly?=
+ =?us-ascii?Q?N8JKvGivvzs9PP66jy/NdGmJ+W6KGzMlp7ZyF26ThldwZOyb5mj20s7QoTkV?=
+ =?us-ascii?Q?R67YyjK6Rgu1NJNus8+f4zn1AJy9NiG3j/hegcRrDk3CaQEInF/F5x9vYlXQ?=
+ =?us-ascii?Q?mbQVTYjvtN+1k00y9RlKeH5ghiHi3HFwKNxcfetydFPr+aDPkJ4SY9hahPQB?=
+ =?us-ascii?Q?nlOqDbiLbOiLpsJoKh3LAnSZXPI3JUeaqT8ZYnXIO9Vd55GsISBxWWJf6uD7?=
+ =?us-ascii?Q?r+44YoToD4Z/UDsKjmb7vaK2pd7GkKH2Lx/He6ozyVVTaqZH9OrVGpdphHqv?=
+ =?us-ascii?Q?lMaQaB5HkZLWpL+3Knt5pJrdk1I0e5+OI2fjHHeTAtpsAYtypYV52a/Pe+H6?=
+ =?us-ascii?Q?G8Z/6vrxn035AUgtsWfPHFMeSvZCY7QjclFTl/q7ScWRKdzbe22yT+QS2o2p?=
+ =?us-ascii?Q?cfP58Ce1+v0d1zWBBSJMxYmtY8aJ8xe4tNbcbBYnS3s1i4Q+zv2/OYfs0QCd?=
+ =?us-ascii?Q?SVv+2yTEdGnkQlXezKhTaiD1Wt1vm4S1XHROXE92k6TWfjxM/LcGJxXAB2bz?=
+ =?us-ascii?Q?JDH5TJsJp+gr1vjW1ikGyjih0Sa5cmMfGfVhMRsfDOy6PwsPdsxEO4uGkSEL?=
+ =?us-ascii?Q?nR18/C7TyclUhHz7fOsAhZ9o6wvvOCQy85qKskHpeCV1aqvbHxVttWEY3wwl?=
+ =?us-ascii?Q?NLN/0UJdJSxWzdw5S5Cz9qTkhMje0J44dyPtwqqI+HKgq0BUM9CN1Ls0eSoB?=
+ =?us-ascii?Q?jeh2Pdt5w5TfHIgmZTLbhlxzuR5y6360qBRr8/VD8oZ0Z6jJkL/8UAklY0WU?=
+ =?us-ascii?Q?2YgZpkx1ca9FBq5xgGS+9CHaGdX2xjsf/O676TkUtQsWfs7I6WsP/TZgCh1D?=
+ =?us-ascii?Q?K1W7rh2Se66mNMyzfrXGVJP6tqoc3tk2D2uv/jZFxH2LgfMZIr4arJ5f+bDj?=
+ =?us-ascii?Q?xwZyfaAl380l5LCcxpTSP816Kc3GaeVl7OvZUgzgcbcxjkzb4QMQXADkXbOf?=
+ =?us-ascii?Q?gTO3IsM5AvFxuRCk4gLtNAF6GMGfp9DaJ+l7YaDzilGWCwLY7I2dj88b+fRJ?=
+ =?us-ascii?Q?D/PHIRR9VDSmZ5tlRMzku+NSIxV1M35WLjCOVgg01geFfZHGgEctlppIuRaK?=
+ =?us-ascii?Q?4Ge5KyaSexsldaF+HB6q5Ygx80UXYGpdflDqYam9FPvhKOpFsO0uM4cEiQmw?=
+ =?us-ascii?Q?LM7nrklMNyNnuPE/IUaTm0KoB2ZarQw=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8e7f4d49-ff17-4ffc-bf37-08de699aa9d1
+X-MS-Exchange-CrossTenant-Network-Message-Id: ec4e581a-1167-41c9-9011-08de699aac2b
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 18:23:33.0630 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 18:23:36.9915 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D6hkCoAtTshRQw9/hfEe5G3QELSs5qoJXwK98jOZcCx4O6VeXd/qruDgtuQJgETvNgjCd/INictqT1+6CE5M+8B5o5PrPC0FOi9Ew92MGqs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8KVZKOsPA6zOjerJJfMpcKiE4nhlFD66spocHekp6qswmxca3BR9CGrvq+1qChrbb5KOHzgyZPCS9bzsCbxYC39deh3Y2k22XcFAHsmRwUE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB11040
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -175,27 +176,204 @@ X-Virus-Status: Clean
 
 From: Christian Marangi <ansuelsmth@gmail.com>
 
-Enable PCS config for Airoha AN7581 SoC by default to enable
-support for External PHY.
+Add required changes to call PCS function to configure the Serdes Port.
+The Ethernet driver is adapted following Upstream Kernel node structure.
+
+Function calling order is the same of Phylink upstream kernel.
+
+With the PCS support, also add support for attaching PHY. With
+"in-band-status" set in DT for the managed property, a rudimental
+support for SFP module is present.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- configs/an7581_evb_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/net/Kconfig      |  1 +
+ drivers/net/airoha_eth.c | 99 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 100 insertions(+)
 
-diff --git a/configs/an7581_evb_defconfig b/configs/an7581_evb_defconfig
-index 7c1c6cf45e1..a94730cf564 100644
---- a/configs/an7581_evb_defconfig
-+++ b/configs/an7581_evb_defconfig
-@@ -68,6 +68,8 @@ CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_DM_MDIO=y
- CONFIG_AIROHA_ETH=y
-+CONFIG_PCS_AIROHA_AN7581=y
-+CONFIG_PHYLIB=y
- CONFIG_PHY=y
- CONFIG_PINCTRL=y
- CONFIG_PINCONF=y
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 8ed6ff2fe3d..27c6a61de39 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -128,6 +128,7 @@ config AIROHA_ETH
+ 	depends on ARCH_AIROHA
+ 	select PHYLIB
+ 	select DEVRES
++	select DM_ETH_PHY
+ 	select DM_RESET
+ 	select MDIO_MT7531_MMIO
+ 	help
+diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
+index fef803ca167..d5b9da6bc18 100644
+--- a/drivers/net/airoha_eth.c
++++ b/drivers/net/airoha_eth.c
+@@ -13,6 +13,7 @@
+ #include <dm/devres.h>
+ #include <dm/lists.h>
+ #include <mapmem.h>
++#include <miiphy.h>
+ #include <net.h>
+ #include <regmap.h>
+ #include <reset.h>
+@@ -20,11 +21,14 @@
+ #include <linux/bitfield.h>
+ #include <linux/delay.h>
+ #include <linux/dma-mapping.h>
++#include <linux/ethtool.h>
+ #include <linux/io.h>
+ #include <linux/iopoll.h>
+ #include <linux/time.h>
+ #include <asm/arch/scu-regmap.h>
+ 
++#include "airoha/pcs-airoha.h"
++
+ #define AIROHA_MAX_NUM_GDM_PORTS	4
+ #define AIROHA_MAX_NUM_QDMA		1
+ #define AIROHA_MAX_NUM_RSTS		3
+@@ -319,6 +323,12 @@ struct airoha_qdma {
+ struct airoha_gdm_port {
+ 	struct airoha_qdma *qdma;
+ 	int id;
++
++	struct udevice *pcs_dev;
++	phy_interface_t mode;
++	bool neg_mode;
++
++	struct phy_device *phydev;
+ };
+ 
+ struct airoha_eth {
+@@ -694,6 +704,34 @@ static int airoha_qdma_init(struct udevice *dev,
+ 	return airoha_qdma_hw_init(qdma);
+ }
+ 
++static int airoha_pcs_init(struct udevice *dev)
++{
++	struct airoha_gdm_port *port = dev_get_priv(dev);
++	struct udevice *pcs_dev;
++	const char *managed;
++	int ret;
++
++	ret = uclass_get_device_by_phandle(UCLASS_MISC, dev, "pcs",
++					   &pcs_dev);
++	if (ret || !pcs_dev)
++		return ret;
++
++	port->pcs_dev = pcs_dev;
++	port->mode = dev_read_phy_mode(dev);
++	managed = dev_read_string(dev, "managed");
++	port->neg_mode = !strncmp(managed, "in-band-status",
++				  sizeof("in-band-status"));
++
++	airoha_pcs_pre_config(pcs_dev, port->mode);
++
++	ret = airoha_pcs_post_config(pcs_dev, port->mode);
++	if (ret)
++		return ret;
++
++	return airoha_pcs_config(pcs_dev, port->neg_mode,
++				 port->mode, NULL, true);
++}
++
+ static int airoha_hw_init(struct udevice *dev,
+ 			  struct airoha_eth *eth)
+ {
+@@ -714,6 +752,10 @@ static int airoha_hw_init(struct udevice *dev,
+ 	if (ret)
+ 		return ret;
+ 
++	ret = reset_deassert_bulk(&eth->xsi_rsts);
++	if (ret)
++		return ret;
++
+ 	mdelay(20);
+ 
+ 	for (i = 0; i < ARRAY_SIZE(eth->qdma); i++) {
+@@ -884,6 +926,7 @@ static int airoha_eth_port_probe(struct udevice *dev)
+ {
+ 	struct airoha_eth *eth = (void *)dev_get_driver_data(dev);
+ 	struct airoha_gdm_port *port = dev_get_priv(dev);
++	int ret;
+ 
+ 	port->qdma = &eth->qdma[0];
+ 
+@@ -891,6 +934,14 @@ static int airoha_eth_port_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
++	if (port->id > 1) {
++		ret = airoha_pcs_init(dev);
++		if (ret)
++			return ret;
++
++		port->phydev = dm_eth_phy_connect(dev);
++	}
++
+ 	return 0;
+ }
+ 
+@@ -910,6 +961,47 @@ static int airoha_eth_init(struct udevice *dev)
+ 			GLOBAL_CFG_TX_DMA_EN_MASK |
+ 			GLOBAL_CFG_RX_DMA_EN_MASK);
+ 
++	if (port->id > 1) {
++		struct phy_device *phydev = port->phydev;
++		int speed, duplex;
++		int ret;
++
++		if (phydev) {
++			ret = phy_config(phydev);
++			if (ret)
++				return ret;
++
++			ret = phy_startup(phydev);
++			if (ret)
++				return ret;
++
++			speed = phydev->speed;
++			duplex = phydev->duplex;
++		} else {
++			duplex = DUPLEX_FULL;
++
++			/* Hardcode speed for linkup */
++			switch (port->mode) {
++			case PHY_INTERFACE_MODE_USXGMII:
++			case PHY_INTERFACE_MODE_10GBASER:
++				speed = SPEED_10000;
++				break;
++			case PHY_INTERFACE_MODE_2500BASEX:
++				speed = SPEED_2500;
++				break;
++			case PHY_INTERFACE_MODE_SGMII:
++			case PHY_INTERFACE_MODE_1000BASEX:
++				speed = SPEED_1000;
++				break;
++			default:
++				return -EINVAL;
++			}
++		}
++
++		airoha_pcs_link_up(port->pcs_dev, port->neg_mode, port->mode,
++				   speed, duplex);
++	}
++
+ 	return 0;
+ }
+ 
+@@ -918,6 +1010,13 @@ static void airoha_eth_stop(struct udevice *dev)
+ 	struct airoha_gdm_port *port = dev_get_priv(dev);
+ 	struct airoha_qdma *qdma = port->qdma;
+ 
++	if (port->id > 1) {
++		if (port->phydev)
++			phy_shutdown(port->phydev);
++
++		airoha_pcs_link_down(port->pcs_dev);
++	}
++
+ 	airoha_qdma_clear(qdma, REG_QDMA_GLOBAL_CFG,
+ 			  GLOBAL_CFG_TX_DMA_EN_MASK |
+ 			  GLOBAL_CFG_RX_DMA_EN_MASK);
 -- 
 2.51.0
 
