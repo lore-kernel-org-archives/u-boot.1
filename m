@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B954EEA8125
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 10:05:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D35F9EA8125
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 10:11:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B70482BF2;
-	Wed, 11 Feb 2026 11:05:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 15D6582BF2;
+	Wed, 11 Feb 2026 11:11:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n47JIRGi";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="lrpZG0G/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48E98831AC; Wed, 11 Feb 2026 11:05:31 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3DA4383A5A; Wed, 11 Feb 2026 11:11:21 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAABF80FA1
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 11:05:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9B5A80FA1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 11:11:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-480706554beso54468905e9.1
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 02:05:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770804327; x=1771409127; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZBVuDKbepp3JxlBBSpekSxOwHXTFdjK+VqATUCE+ULk=;
- b=n47JIRGijDLekaLByIwT2DULVi4uqej1/7HQhcpTMMHZKNrgZzS9dokINoTE9jCCbR
- cvCVsDbhFrLt1oH8QETuVN0T0vvKmtxpUgY6Jb5ld7dmjj3A97FzMaRT5gccV4iAvDDn
- /PQLN1WlCnnPH2uYHzVBMtzyWxGMmrYWGetCBDbysWb4CTEP5+uBmFoL20PQXEK0gBnd
- 9p4bIdhTynnm7HgQkTZp+4NAl/nPIvm2+wVq43mXN1jbKtmEsa40V1fvsF0rbCaPHAOd
- S6rhWVA9BT/XmWH1gNr9U0rDEgeml+BasnEREeg2IX0WAlI09+S8kk5o0Dq8Flv2lL5E
- CZwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770804327; x=1771409127;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZBVuDKbepp3JxlBBSpekSxOwHXTFdjK+VqATUCE+ULk=;
- b=ARmrbRLpk2jcP0HOY3wfw4+1woYmOBplKigBfpYT1LjRc5KxA1ea6aPJ2YBnoWIevD
- eLJ3lTF+CzEmomX4NsWUBasbo+YUP4TJRvu4bs643fQk9g36Rk/3KNFYc5OIOcRzlMke
- UkFCCPMxqEjKfeTzUeCUBBVx3S99rvRDfK12DwrQfTw3Q3o0rwel/bA7JRNNVfRTaMaj
- TPZXmJee7w2Xh5105caRcThzRfbTH4F2L/UtZasIA56cd04x5HOs6ovrY8vTtYGRkS3S
- a1JEmCrvzM/asNrc3Bi+DK0+uFHiRBJ47bgZXhVLJYMGvgxEQY+0RKbkrRMhv6eTmhQi
- KaOg==
-X-Gm-Message-State: AOJu0YyP1m3o9T0WsGbSAkfrycFzOPir1buQWtVxR38BlrdT/IQ53GXi
- CemxZJ5FYwn5+g530pye2YAC5KbQaJfYcXBTmkOL4I9L1mTSmYr3gnE8+Q+r5RRbvfuV9af6vAs
- fHHMcmfs=
-X-Gm-Gg: AZuq6aIl7WP8rfPXIrOJlCcPNFetYeznUL3L3YisdabzV4lHYx4GCu6ZzsULC8WM1DP
- yEoUqh3xARsJVdK8504fPUGiZKoKBgL049sNKJV9tV/0C5dxGF2YhKfmbFk+JqK9kSMpgzUtoeV
- JdJnitKgxuathyvVqBhBgYwbnH/wW+HqzQzq27P2KwUsD4dDl+9n4WNTXfd9PC1YBcdVByYFcF4
- /Z+/70FXVrAYQIL41yo3WudDbK1gP536NwM9TuvA74XUVH3STvoYcHUJBl6HtV5yhSENBKw7xlz
- d7YexTaRGI2TwjxpygIqdIEdDhepbf9Me2iUtU4swLl3nZJCSKw9gr+CRlTmOCOWZosdezjMmxS
- DnW8JdaWIPPbBYerTdy14UqQOU27y62Z6wdh7sXH5cs9JAcZHF4QEsSmMapI+HnRHHm9HfCp2J3
- Z6199E0U+h2SG5d6PI4DDAV5h7zwXpWrpL5MVoOqokqEqHY8JOfLo0d5ZULbWOlw/KUHw5Z82BK
- PbhtAQlv0wUTCzs1ottGTuV7DJy5WmjrHcuXpPhj8L0O1NUoMIPpF6S4vHdXCSadhel2e9mgzKG
- WPsZ7VfPha3zTYm3MvrkM6m48TLK47ndyH3uzT7fz2ooTXrOTJn0ywPz3FuIrGDYBL6AaAaD2gv
- 8fuPPTSxQcWDwCweUu0irNXNomS5zsKxSqigTgZ4dn1++OgtijU7dOI9lrXPdCqP3IUoFxqBp8M
- IPCcqpdCUBwP2gVUXgsl78FIMN6Ptgyw7Wf5rDSJJF9r16Swq8TLiOIcr+dpXo
-X-Received: by 2002:a05:600c:820a:b0:47d:264e:b35a with SMTP id
- 5b1f17b1804b1-4835b90c74cmr30514665e9.13.1770804327092; 
- Wed, 11 Feb 2026 02:05:27 -0800 (PST)
-Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d5ebd34sm128153865e9.7.2026.02.11.02.05.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Feb 2026 02:05:26 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: ilias.apalodimas@linaro.org,
-	hs@nabladev.com
-Subject: Pull request for tpm-master-11022026
-Date: Wed, 11 Feb 2026 12:05:16 +0200
-Message-ID: <20260211100516.63099-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 74A261FAB4;
+ Wed, 11 Feb 2026 11:11:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1770804677;
+ bh=7kS5ErBFq4RwdJGoZN9aFjQfCH30WICjAyCzTcfQT34=; h=From:To:Subject;
+ b=lrpZG0G/ks6SvH9tryVfhuu/yvLO54i/aEttvVtjNVv6HcTarZU0x1pxb6bXepwOX
+ JnTznvzJjCJXwBkl94Vo+h36E4FsLAl+4Gnv0DVJuvQBiW18NASNp3X0UU7V8QCDTK
+ G4NJcb7GgEGK0MsiLHMkZcFJ4qskcoDGWej6LEdwyWPiFY4DrZ+nYtHKEHtyV5Umov
+ UYhhLEJqEoJcZfybUBAc5iH4a59rNHvVR15PQSy+yv0hynTr1jIlDYIaLf6aCDt4mC
+ BpCx9HmyWvov4v+VRN84jEdHZ+ZQ0cbc3awRcrSjMaRIthbJw5JJRhZglw8BuLL9um
+ p1WSzXmm0KR7A==
+Date: Wed, 11 Feb 2026 11:11:13 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Bryan Brattlof <bb@ti.com>, Suhaas Joshi <s-joshi@ti.com>
+Cc: Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de, trini@konsulko.com,
+ vigneshr@ti.com, n-francis@ti.com, s-tripathi1@ti.com,
+ k-malarvizhi@ti.com, kamlesh@ti.com, vishalm@ti.com,
+ d.schultz@phytec.de, w.egorov@phytec.de, ggiordano@phytec.com
+Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
+Message-ID: <20260211101113.GA176369@francesco-nb>
+References: <20260210092646.w5bugrscifmsh5px@ula0507357>
+ <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
+ <20260210105014.GB214446@francesco-nb>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260210105014.GB214446@francesco-nb>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,37 +69,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, Feb 10, 2026 at 11:50:14AM +0100, Francesco Dolcini wrote:
+> On Mon, Feb 09, 2026 at 02:20:01PM -0600, Bryan Brattlof wrote:
+> > Do you mind copying a boot log to a pastebin for me? I thought I had one 
+> > of these boards but I'm still digging around for it. 0x80000000 should 
+> > be where we load TFA now days unless some boards have opted out of 
+> > letting U-Boot move it to the bottom of DRAM
+> 
+> Here some more logs
+> 
+> https://gist.github.com/dolcini/aa4b669c6349cc6da1b9e7b19cf53fed
+> 
+> The files are named with the commit sha that is tested.
+> 
+> On Tue, Feb 10, 2026 at 02:56:46PM +0530, Suhaas Joshi wrote:
+> > Verdin boards are the only ones that are reporting this issue. Is it
+> > alright if we revert only the two Verdin-specific commits, and let the
+> > rest (TI and PhyCore ones) stay as they are? The patches are pretty
+> > un-connected to each other.
+> 
+> Verdin AM62 should not have anything special, the code is all there for
+> everyone to see, including the defconfig, the DT and so on, and the changes
+> we are talking about to me are self contained withing the SoC. Something
+> is wrong, and we are not understanding what yet.
+> 
+> I just retested once more 42b3ee7fa524 and it just hung, you never know
+> if I did something wrong. And for what matter this was spotted by our
+> CI.
+> 
+> > We are working on figuring out why Verdin is seeing these issues, in the
+> > meantime.
+> 
+> Anything I can do let me know.
+> 
+> If it matter the board that I am currently testing has 1GiB DDR RAM, and
+> the SoC is a AM6252ATCGHAALW. 
 
-A small update from Heiko on SM3 support. We want this in -master
+I was able to trace the issue to the get_ram_size() in
+verdin-am62.c:dram_init().
 
-The following changes since commit 712765339a5c6576fdd5683748f97a1215868d5d:
+That function walks the addressable memory range to dynamically detect
+how much memory is available.
 
-  Merge patch series "Update DDR Configurations" (2026-02-10 12:57:02 -0600)
+Not sure on the proper way to fix it however, Bryan? Suhaas?
 
-are available in the Git repository at:
+Francesco
 
-  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-11022026
-
-for you to fetch changes up to 1e79d9c763cf666e146f30ebd45cb486c913122d:
-
-  doc: cmd: add documentation for sm3sum (2026-02-11 11:13:47 +0200)
-
-The CI https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29250
-seems fine
-
-Please pull
-/Ilias
-
-----------------------------------------------------------------
-A coverity fix and documentation update from Heiko on SM3 support
-
-----------------------------------------------------------------
-Heiko Schocher (2):
-      lib: sm3: fix coverity error
-      doc: cmd: add documentation for sm3sum
-
- doc/usage/cmd/sm3sum.rst | 112 +++++++++++++++++++++++++++++++++++++++++++++++
- lib/sm3.c                |   2 +-
- 2 files changed, 113 insertions(+), 1 deletion(-)
- create mode 100644 doc/usage/cmd/sm3sum.rst
