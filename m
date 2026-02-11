@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE83EB271F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 10:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 890C7E9E2E0
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 11:01:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCD408366F;
-	Wed, 11 Feb 2026 11:41:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id D714682BF2;
+	Wed, 11 Feb 2026 12:01:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="qWtZhgxe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F/tbTLe8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3411983D9F; Wed, 11 Feb 2026 11:41:16 +0100 (CET)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B464683B30; Wed, 11 Feb 2026 12:01:22 +0100 (CET)
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com
+ [IPv6:2a00:1450:4864:20::442])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 174DC83015
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 11:41:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2B68380050
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 12:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macpaul.lin@mediatek.com
-X-UUID: 27ec719a073611f1b7fc4fdb8733b2bc-20260211
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=YzVqDoK8PUWdXdO+NNmJxEIM8285pgC06X1Uemt1HVY=; 
- b=qWtZhgxejjcPbx3URRKgu2m0EoSj/TTSjJc2gHg5/bvgRjxIhsznSc3MubLZqlIYOlcnCl0aJE29/MOQPVoTM80BE+KIetjW00XZLSP8z+8Sd3ru1hDnGV345+3OeYRJ80PBN13nTO69zEYOslTCnn1Ivh6HvfcWBcUPQKwx3t0=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.11, REQID:282ff1a9-4dd4-4e26-8911-7662837f2390, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:89c9d04, CLOUDID:d8c890e9-ef90-4382-9c6f-55f2a0689a6b,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|888|898,TC:-5,Content:0|15|5
- 0,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0,OSA
- :0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 27ec719a073611f1b7fc4fdb8733b2bc-20260211
-Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
- mailgw02.mediatek.com (envelope-from <macpaul.lin@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 798954410; Wed, 11 Feb 2026 18:41:00 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Wed, 11 Feb 2026 18:40:58 +0800
-Received: from mtksitap99.mediatek.inc (10.233.130.16) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Wed, 11 Feb 2026 18:40:58 +0800
-From: Macpaul Lin <macpaul.lin@mediatek.com>
-To: <u-boot@lists.denx.de>, Amjad Ouled-Ameur <aouledameur@baylibre.com>, Tom
- Rini <trini@konsulko.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>, Ryder
- Lee <Ryder.Lee@mediatek.com>, Sam Shih <sam.shih@mediatek.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-CC: Bear Wang <bear.wang@mediatek.com>, Pablo Sun <pablo.sun@mediatek.com>,
- Ramax Lo <ramax.lo@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
- Macpaul Lin <macpaul@gmail.com>, MediaTek Chromebook Upstream
- <Project_Global_Chrome_Upstream_Group@mediatek.com>, Simon Glass
- <sjg@chromium.org>, Marek Vasut <marex@denx.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Balaji Selvanathan
- <balaji.selvanathan@oss.qualcomm.com>, Varadarajan Narayanan
- <quic_varada@quicinc.com>, Casey Connolly <casey.connolly@linaro.org>, Bin
- Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, "ht
- . lin" <ht.lin@mediatek.com>
-Subject: [PATCH] scsi: Adjust SCSI inquiry command data length
-Date: Wed, 11 Feb 2026 18:40:43 +0800
-Message-ID: <20260211104043.2445588-1-macpaul.lin@mediatek.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x442.google.com with SMTP id
+ ffacd0b85a97d-435a11957f6so4994134f8f.0
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 03:01:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770807678; x=1771412478; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zq9mukSB0k0GtKj3eAtLT6NzCfHPmdBrLZTf78gKW0o=;
+ b=F/tbTLe8m3OCYz+MFUcw3OVk8kyeztCzmKlhyzpj4Vo18rMwg0z+p7jOxpt30xAyRh
+ h0pMHGHvcE3UTWUx8H3fgzcD/Og3ps2vKOBq18jbMCG0zDc7BeouMH1bgpfWzfLPeZyq
+ uqlTAg0P9bTJPc8LsNirwKggHu9Ys2G6toifWtkp+T1bXoJzhss5IGqt//tLQ3mglM2G
+ SJLVwIigGHP3xNIq95QV+D9XJPQttwEKbPc2TMs5ytN/BZpMbSkTVWhJeHinw+K0a0sH
+ BVtsyR/tsdjZIdTXLMUHNdkiZzIq2Y6gxVWNg9ztvX1odYRz4ywfR/M7iHEW8DC7boK0
+ gDkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770807678; x=1771412478;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Zq9mukSB0k0GtKj3eAtLT6NzCfHPmdBrLZTf78gKW0o=;
+ b=YGPoSmjy39uoeVifY3kMMjWIX0+da7ZqtZhyIMEo7CwvIN89/Xgx7CCReTfwTv6OSq
+ zVcBiLVYwfkfYhj8nA9fJ95vlrjgc4W7nGdCMRLIE1USa3cP/8WJ/yUzy5CeZdph6Zze
+ LTEcu4B3FOJJh2D3PFcK0Gzxr8rkKGh5iAutWcu8zPOYBfWO1KIKdV4nnqYHzAUNyJx7
+ 1pNJFaivRY3xMnemwSg9mc9Vadaifhz1uLfiwL/+grEjA0GgTJNKHR0SEL8Fr4YKPyhR
+ mmYFzReymWjPBQ6NEUiCINfraLpshc3zzbbxG42tVwkQJA6d7j2G8rahPWRlydsTNe1d
+ ZG3g==
+X-Gm-Message-State: AOJu0Yyd4qOKA+5/23ytKg7r8PzyPGdgHQ7zhvcVU6fNyzzsN4eLpn9y
+ bJY1yD0BAK467d5r8AfBsx/GV/YFCyHtu/rDcwUxfhHBpwaUITwcuxnmAzoQPSx4IKUxwfQy12q
+ 0HrwGNmc=
+X-Gm-Gg: AZuq6aIv966xSbWazaIZMSwG/3iP4EXz3qryQF0R5/laoZftt0leS12o3lf3ZYbIp6A
+ tN1WY1doPagzwsrOxJcfvpMH0dq65NyDeuytDrP9pTGw3C9vuGyaD70hQ9PloSSlURW1q132L9D
+ YqaTkpcumS+GuhX65XLkQ2DVpdlhVXrsWemkZbsjnyO7avYmyeqZDoid1j47kFFrm8FwvpHOAT9
+ 9Tw3zfmc0Qc8YWa+50gwHoO3XUHL5/x1kdIEBE92ugFi9O4YaXLRrVWfACJf77n3rSbSkpG8iYq
+ 5QscVGXfkwaMhGQ+7hU3ehlzyphNnxKwvrWJnsWAYUvl3bGKWi0BSDtwRyGKb9FxUnG2JUJsxss
+ gyLWZuFTTnHl3KqPyHEs4dVD8k466O5sWQyXyjpUNANv84RwyHNJbQ4gZgnMb1KWDJyC7T1p4TI
+ jV1KosQzwVg65uMrvPAl+VvnGdALVzwF9F/PmVf6O+KZA0n/lkNIBvLWUWmiJUwas2xl8Bc5/Qb
+ Wb8dXlWVNePYTywOvGN7JOZR9RjXJd/gxaYsnpm3TCtmKV8wiY9FUborOP9W3h2sQl6ZMlLCmqw
+ 1wDyeaCHFYqfvBLae/FLBDyS0iYH1SyGNl95+GUpjddtnl4fe+WZxeBG/9QcXbAJXi2Bledu+79
+ /FuA9rLXpROc/aAdSx8SNr06Y/tY4a3SJNLpR2nEAKCkEN75bqGbEN1FxJxWXKR+ogVCVpF9cul
+ 08nPACq/fAqoC6fbnaAW7nFdFKl+PwqKsL9XGrFoNa/aJnJdgZ9soC3YxFSRdt
+X-Received: by 2002:a05:6000:25c4:b0:430:f241:a11f with SMTP id
+ ffacd0b85a97d-4377a57c696mr7325966f8f.30.1770807678290; 
+ Wed, 11 Feb 2026 03:01:18 -0800 (PST)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43783e38e26sm3846434f8f.26.2026.02.11.03.01.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Feb 2026 03:01:17 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: ilias.apalodimas@linaro.org,
+	kory.maincent@bootlin.com
+Subject: Pull request for ab-next-11022026
+Date: Wed, 11 Feb 2026 13:01:08 +0200
+Message-ID: <20260211110108.66433-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,29 +100,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the data length of the SCSI inquiry command to accommodate various
-UFS device vendors. This prevents SCSI detection failures on Longsys UFS
-devices. Verified with Hynix, SD, and Longsys UFS devices.
+Hi Tom
+A PR for the AB support from the TPM tree.
+Kory has update dthe code to mark invalid banks. Those will now be
+skipped in acase of failure, instead of trying to boot from them, fail
+and fallback to another bank.
 
-Signed-off-by: ht.lin <ht.lin@mediatek.com>
-Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
----
- drivers/scsi/scsi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The following changes since commit b99da05e1538b8fa153322da82917af2aa27e1d6:
 
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 8fe6b38a8c74..116b696b08dd 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -513,7 +513,7 @@ static int scsi_detect_dev(struct udevice *dev, int target, int lun,
- 	pccb->target = target;
- 	pccb->lun = lun;
- 	pccb->pdata = tempbuff;
--	pccb->datalen = 512;
-+	pccb->datalen = 36;
- 	pccb->dma_dir = DMA_FROM_DEVICE;
- 	scsi_setup_inquiry(pccb);
- 	if (scsi_exec(dev, pccb)) {
--- 
-2.45.2
+  Prepare v2026.04-rc2 (2026-02-09 15:07:50 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/ab-next-11022026
+
+for you to fetch changes up to 9367b8d9339f07d83aceaf03fcd89bff9d59f727:
+
+  fwu: Mark failed bank as invalid during rollback (2026-02-11 12:17:18 +0200)
+
+The CI seems happy
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29254
+
+Please pull!
+/Ilias
+
+----------------------------------------------------------------
+Kory has updated the A/B implementation and added an invalid bank
+state. This is already described in the spec and can help boards
+boot faster by skipping banks marked as invalid
+
+----------------------------------------------------------------
+Kory Maincent (2):
+      fwu: Pass bank state enum to fwu_state_machine_updates()
+      fwu: Mark failed bank as invalid during rollback
+
+ include/fwu.h                | 22 ++++++++++---------
+ lib/efi_loader/efi_capsule.c |  5 +++--
+ lib/fwu_updates/fwu.c        |  6 ++++++
+ lib/fwu_updates/fwu_v1.c     | 16 +++++++-------
+ lib/fwu_updates/fwu_v2.c     | 50 +++++++++++++++++++-------------------------
+ 5 files changed, 50 insertions(+), 49 deletions(-)
