@@ -4,51 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3154E9E2FA
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 12:25:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26116E9E301
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 12:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACEA783CF2;
-	Wed, 11 Feb 2026 13:25:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8AF8083CB5;
+	Wed, 11 Feb 2026 13:43:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BDDB83D2E; Wed, 11 Feb 2026 13:25:13 +0100 (CET)
+ id 1D8C080FA1; Wed, 11 Feb 2026 13:43:21 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 519FE83CE3
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 13:25:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 60CC280FA1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 13:43:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 27A88339;
- Wed, 11 Feb 2026 04:25:04 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 581F7339;
+ Wed, 11 Feb 2026 04:43:11 -0800 (PST)
 Received: from debian (MacBookPro.nice.Arm.com [10.34.111.21])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9D10D3F632;
- Wed, 11 Feb 2026 04:25:09 -0800 (PST)
-Date: Wed, 11 Feb 2026 13:25:07 +0100
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Jose Marinho <jose.marinho@arm.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] efi_loader: fix ecpt size computation
-Message-ID: <aYx1I0erSBYpNM2e@debian>
-Mail-Followup-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CB3E53F632;
+ Wed, 11 Feb 2026 04:43:16 -0800 (PST)
+From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: u-boot@lists.denx.de
+Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Jose Marinho <jose.marinho@arm.com>,
- u-boot@lists.denx.de
-References: <20260211093308.3265022-1-vincent.stehle@arm.com>
- <a386de9e-1dc9-4b50-a86c-bb8dfd845eef@gmx.de>
- <aYxsaXdISybHOQTq@debian>
- <b236ac3f-493e-452e-93ce-03c0fc73baf3@canonical.com>
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH] efi_loader: add missing EFI_CALL around tcg2 read_blocks calls
+Date: Wed, 11 Feb 2026 13:43:14 +0100
+Message-ID: <20260211124314.3406952-1-vincent.stehle@arm.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <b236ac3f-493e-452e-93ce-03c0fc73baf3@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,44 +56,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Feb 11, 2026 at 12:50:38PM +0100, Heinrich Schuchardt wrote:
-> On 2/11/26 12:47, Vincent Stehlé wrote:
-> > On Wed, Feb 11, 2026 at 10:56:30AM +0100, Heinrich Schuchardt wrote:
-> > > On 2/11/26 10:33, Vincent Stehlé wrote:
-(snip)
-> > > > diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_conformance.c
-> > > > index 2bae93a94bd..9768b5ae824 100644
-> > > > --- a/lib/efi_loader/efi_conformance.c
-> > > > +++ b/lib/efi_loader/efi_conformance.c
-> > > > @@ -13,8 +13,12 @@
-> > > >    #include <malloc.h>
-> > > >    static const efi_guid_t efi_ecpt_guid = EFI_CONFORMANCE_PROFILES_TABLE_GUID;
-> > > > -static const efi_guid_t efi_ebbr_2_1_guid =
-> > > > -	EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID;
-> > > > +
-> > > > +static const efi_guid_t profiles[] = {
-> > > 
-> > > As profiles[] is not used outside efi_ecpt_register(), there is no need to
-> > > make it a static variable.
-> > 
-> > I am not sure why a "global" symbol would be better than a static one, but if
-> > you like this solution we could make the profiles[] array extern.
-> 
-> Sorry to not be clear. I wanted to suggest a local symbol.
+The read_blocks() function from the Block IO protocol is a UEFI function;
+make sure to call it from within U-Boot using the EFI_CALL() macro.
 
-Hi Heinrich,
+To demonstrate the issue on an AArch64 machine, define the DEBUG macro in
+include/efi_loader.h and build u-boot with sandbox_defconfig, then download
+and uncompress the ACS-DT image [1], and finally execute the following
+command:
 
-The profiles[] array is "local" to the efi_conformance.c file already as it has
-internal linkage, thanks to the static specifier. Is this the symbol name you
-would like to prefix maybe?
+  $ ./u-boot -T -c " \
+      host bind 0 systemready-dt_acs_live_image.wic; \
+      setenv loadaddr 0x10000; \
+      load host 0 \${loadaddr} EFI/BOOT/Shell.efi; \
+      bootefi \${loadaddr} \${fdtcontroladdr}"
 
-	static const efi_guid_t efi_conformance_profiles[] = {
-		...
+The following assertion should fail:
 
-Best regards,
-Vincent.
+  lib/efi_loader/efi_net.c:858: efi_network_timer_notify: Assertion `__efi_entry_check()' failed.
 
-> 
-> Best regards
-> 
-> Heinrich
+This happens due to the following EFIAPI functions call chain:
+
+  efi_start_image()
+    efi_disk_read_blocks()
+      (due to the missing EFI_CALL, entry_count == 2)
+      efi_network_timer_notify()
+
+Link: https://github.com/ARM-software/arm-systemready/releases/download/v25.12_DT_3.1.1/systemready-dt_acs_live_image.wic.xz [1]
+Fixes: ce3dbc5d080d ("efi_loader: add UEFI GPT measurement")
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+---
+ lib/efi_loader/efi_tcg2.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index bdf78897d47..1860dc50238 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -1213,8 +1213,10 @@ tcg2_measure_gpt_data(struct udevice *dev,
+ 		goto out2;
+ 	}
+ 
+-	ret = block_io->read_blocks(block_io, block_io->media->media_id, 1,
+-				    block_io->media->block_size, gpt_h);
++	ret = EFI_CALL(block_io->read_blocks(block_io,
++					     block_io->media->media_id, 1,
++					     block_io->media->block_size,
++					     gpt_h));
+ 	if (ret != EFI_SUCCESS)
+ 		goto out2;
+ 
+@@ -1227,9 +1229,10 @@ tcg2_measure_gpt_data(struct udevice *dev,
+ 		goto out2;
+ 	}
+ 
+-	ret = block_io->read_blocks(block_io, block_io->media->media_id,
+-				    gpt_h->partition_entry_lba,
+-				    total_gpt_entry_size, entry);
++	ret = EFI_CALL(block_io->read_blocks(block_io,
++					     block_io->media->media_id,
++					     gpt_h->partition_entry_lba,
++					     total_gpt_entry_size, entry));
+ 	if (ret != EFI_SUCCESS)
+ 		goto out2;
+ 
+-- 
+2.51.0
+
