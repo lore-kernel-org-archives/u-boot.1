@@ -4,66 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1054EB2700
-	for <u-boot@archiver.kernel.org>; Tue, 10 Feb 2026 21:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BD4DEB595E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 04:58:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70CAC83A5A;
-	Tue, 10 Feb 2026 22:27:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7EF6383A5A;
+	Wed, 11 Feb 2026 05:58:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="a09CiUHY";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="LZXPg6ZB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28DFB83D0B; Tue, 10 Feb 2026 22:27:06 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9F2D483B72; Wed, 11 Feb 2026 05:58:22 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D285C83A47
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 22:27:02 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4f9ZQD62Bcz9tqc;
- Tue, 10 Feb 2026 22:27:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770758820;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7WVAPmpQvFahDxc3sFeRlexCZC3pytMRrQ6Q4/bRWbo=;
- b=a09CiUHYsZBb3Efc3tI6AFHYrTcJbaMKo2d7E7uD/0FhTeZA8drsrFx0Pnp9ftJJX/jJ6B
- ldn+nC0kS+pA77yjdgzRsCs3URQaRBTZ9OS1an/phAhm7PyJ+XhKD59LSXsADU71/Hu7Gh
- vxwKYWW/rnHCIDb0yciUqqFS83ACDKMeDcZqn5bR0M8VE30Gj8M+tY0/FXY3Dk6y/alual
- V5fjYA08ITFUgqQFEuZgn5o8cJLmnc5xKjWPmdxhbIchKW3RMyS41xqjJiklYcJ37HNLcl
- NktqUO7GQ6QquB+xf2YwRX+7+SH5UERvvzPYE4QYl2AHEPKVbjMOO+Pl02zHgg==
-Message-ID: <210d1411-b049-4366-a2b2-cac982007df4@mailbox.org>
-Date: Tue, 10 Feb 2026 14:46:37 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id BD70E83A47
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 05:58:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7C7601104F4; Wed, 11 Feb 2026 05:58:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1770785898;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=Rx+S985SP7QTIbib+7ZBGL4zYJTeadBx012B/GWZslY=;
+ b=LZXPg6ZBfELSTJKcL/lH0qAtxZJ1PONPQg8uWQZx+o3aP7dnt0cPSEsfNYzv5jDqaRZ/cU
+ gXHNejkbaXuwC+cBeK5b15VtI9dtFe0XTo0FzSqZkuqbxbJKCk++X2Cvxlqpwh1+XTs7pQ
+ 4E6EauwtArgAo2q0PaXC+EzhRl9X6QRaxNEEbrHSLWMCoPC0ux7aPqSJNb6M8jJgDhXleF
+ MtHxj3bvuDTeVU+POdGnpRlzkBBL+vNkJXAnxNdb4BZf7P7Vb2Mgw0grbWyIl7Z9yISi4T
+ 8wSQJfKOCmAS+iVr1BdXCQh97uFp4ZmL18q1Cqc5IMWJrMmcmllShmVKBpmVFg==
+Message-ID: <cd1a492b-51a8-26ca-d7df-4c4f22706f17@nabladev.com>
+Date: Wed, 11 Feb 2026 05:57:56 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: dwc3: core: Use IS_ERR_VALUE() for ref_clk rate check
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260209201415.303190-1-jonas@kwiboo.se>
- <9a23daec-39bf-4b2d-85af-820e015ec4dd@mailbox.org>
- <20260209205126.GK2603314@bill-the-cat>
- <f5dd98cd-be29-4587-8ddf-3e43fcb7a811@mailbox.org>
- <20260209225332.GA2436104@bill-the-cat>
- <f4a0bb7b-197a-42f2-b6f9-ee6012ddccd7@mailbox.org>
- <2bc53024-8de6-4adf-bad6-0bf9d418a0a2@kwiboo.se>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 11/16] i2c: k1: add I2C driver support
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <2bc53024-8de6-4adf-bad6-0bf9d418a0a2@kwiboo.se>
+To: Raymond Mao <raymondmaoca@gmail.com>, u-boot@lists.denx.de
+Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com,
+ rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
+ lukma@denx.de, jh80.chung@samsung.com, peng.fan@nxp.com, xypron.glpk@gmx.de,
+ randolph@andestech.com, dlan@gentoo.org, junhui.liu@pigmoral.tech,
+ neil.armstrong@linaro.org, quentin.schulz@cherry.de, samuel@sholland.org,
+ Guodong Xu <guodong.xu@riscstar.com>
+References: <20260210151459.2348758-1-raymondmaoca@gmail.com>
+ <20260210151459.2348758-12-raymondmaoca@gmail.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20260210151459.2348758-12-raymondmaoca@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: zufjb1mg6yd8p6m6mtns4imk6n1q1f7k
-X-MBO-RS-ID: 3c32e6787992aad297a
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,71 +74,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/10/26 1:52 PM, Jonas Karlman wrote:
+Hello Raymond,
+
+On 10.02.26 16:14, Raymond Mao wrote:
+> From: Raymond Mao <raymond.mao@riscstar.com>
+> 
+> Add I2C driver support on Spacemit K1 SoC using driver model.
+> 
+> Signed-off-by: Raymond Mao <raymond.mao@riscstar.com>
+> Signed-off-by: Guodong Xu <guodong.xu@riscstar.com>
+> ---
+>   drivers/i2c/Kconfig  |   7 +
+>   drivers/i2c/Makefile |   1 +
+>   drivers/i2c/k1_i2c.c | 516 +++++++++++++++++++++++++++++++++++++++++++
+>   drivers/i2c/k1_i2c.h |  69 ++++++
+>   4 files changed, 593 insertions(+)
+>   create mode 100644 drivers/i2c/k1_i2c.c
+>   create mode 100644 drivers/i2c/k1_i2c.h
+
+No changelog? (You may take a look at patman tool in
+tools/patman)
+
+But it seems, you have addressed my comments to v1, so
+
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
+
+Thanks!
+
+bye,
+Heiko
 
 [...]
-
-> I think main issue is that U-Boot != Linux, and in U-Boot we can disable
-> subsystems such as CLK, and the normal U-Boot way to signal that is to
-> return -ENOSYS from functions, what clk_get_rate() does when disabled.
-
-Sure, but if the function is called the same, people will make the 
-assumption that the function return value handling is the same. So 
-either the function has to be renamed and maybe a wrapper added that 
-makes it linux-compatible, or simply make the function linux-compatible.
-
-> Other clk_*() related functions also differs from U-Boot and Linux, some
-> only exists in U-Boot, others behave differently.
-
-Which is really not good.
-
-> Last attempt at changing clk_get_rate() behavior in U-Boot I gave a NAK
-> on the Rockchip driver side. I am not fully against changing behavior
-> of clk_get_rate(), but the driver ops should continue to work the same.
-> There is a difference between an unsupported and an invalid clock.
-> 
-> Something like below, and similar for other clk ops, could possible be
-> fine if someone really want to align clk_*() funcs with Linux.
-> 
-> Back to this patch, I will send other patches to implement the missing/
-> unsupported dwc3 ref clocks on Rockchip, this patch is still valid and
-> matches current and documented behavior for clk_get_rate() in U-Boot
-> and prevent lockups or crashes when ref clk is missing/unsupported.
-> 
-> 
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index 748359de287b..4603ecef82b5 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -485,6 +485,7 @@ int clk_request(struct udevice *dev, struct clk *clk)
->   ulong clk_get_rate(struct clk *clk)
->   {
->   	const struct clk_ops *ops;
-> +	ulong rate;
->   
->   	debug("%s(clk=%p)\n", __func__, clk);
->   	if (!clk_valid(clk))
-> @@ -492,9 +493,17 @@ ulong clk_get_rate(struct clk *clk)
->   	ops = clk_dev_ops(clk->dev);
->   
->   	if (!ops->get_rate)
-> -		return -ENOSYS;
-> +		rate = -ENOSYS;
-
-This would have to be PTR_ERR() , right ?
-
-> +	else
-> +		rate = ops->get_rate(clk);
-> +
-> +	if (IS_ERR_VALUE(rate)) {
-> +		dm_warn("clk_get_rate(clk=%p, id=%lu) failed: %ld\n",
-> +			clk, clk->id, (long)rate);
-> +		return 0;
-> +	}
->   
-> -	return ops->get_rate(clk);
-> +	return rate;
->   }
->   
->   struct clk *clk_get_parent(struct clk *clk)
-[...]
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
