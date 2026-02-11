@@ -4,104 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E6CECD6EE
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 22:21:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89028ECD6F7
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 22:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B74E783A47;
-	Wed, 11 Feb 2026 23:21:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B14783B64;
+	Wed, 11 Feb 2026 23:26:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TwIXQAIb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LOJxhHgu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5294C83CB5; Wed, 11 Feb 2026 23:13:52 +0100 (CET)
-Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
- [IPv6:2607:f8b0:4864:20::a32])
+ id 793ED83C4B; Wed, 11 Feb 2026 23:26:06 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE1378388D
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 23:13:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADE6E8388D
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 23:26:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-567404384b7so1413009e0c.3
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 14:13:49 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770848029; cv=none;
- d=google.com; s=arc-20240605;
- b=Kh3+mHKwTrlwxXLdXxFXTQW4mJ4cUHNPsm4OLyD0V9o8RaUKtxYYZLtnRJU1q1hWxb
- AMbbRcOYwgoJFWqfZAadcUcrN4Vilo6vn0x1rfw+927vxRkotnJagJA45DG8YDnJtJ+3
- 77i1RVVhZnDPdZM4Py/dpD4ufrJ3U7Idgqg5sw8ROzdHTsGaqIujwB6U4htEZ9ajGlcW
- edK6NY88B+yA4Dyju2ZB1HJfemgjsI7405aCKdQ5flkwcFT3yAzLZYoYZMshlcj93VDI
- 963cjNoomOsK7UCGcIeCdE9gow7IR7E+0dIcLMivbYlTWV+pd1gp+qD3rYsvGT9ujmFp
- 1IjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=StWof2beLbzRs03kyeqOfctlLThUd6iOWa0Dx9fQQ9Q=;
- fh=AHKfqmIW5Kp7yQpLzCHKDiaVP4X1t5uS9hW/XnOqTRk=;
- b=VAxe8h7xeZaSpzE0w4nMfJw9oYdff4sW/e+DHNMtRLsz2pzJPKPisuXQbhwD+Dhpym
- pEDjTApQZwUvBdS3gpu4TfoaFGixP0pVX7k1tI8pHJ/mB4C5SyrHAwQcjqJ2t1Tfr6K/
- cN86hkiq+yFNUmxHNcguv7vTmsA/j2yWDp+psebo380Zn+nJWvjJd3lhJ8BZBFRyYZ4j
- d3wbeUPweZ6FJPHWRpdMzEekgBy7DCsxvxKEK994q5U7WTrFFvmbnu2XcXNi6C9gIwdC
- T7QSckTbei0muHBGeU2TJikIN+TaPdWCTm/E4P4twEcuCh3ECo31sx/N5oHnc19syc0l
- P4uQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-79639c2d2b5so46978917b3.2
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 14:26:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770848029; x=1771452829; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=StWof2beLbzRs03kyeqOfctlLThUd6iOWa0Dx9fQQ9Q=;
- b=TwIXQAIbI5Dc1d9joQXvStaEGuINI9wxFSIbYUlO7BHs29SReUMhm88bc2QxLnEXjw
- wmGQYXqyEeVQYXbPtySLHqs77Xngp5zFP3NMKrhpgxHiv9UD+6CRL1Ha4tBfPEwbHu3N
- VR3RS4fm5sZEtJ9uxB3L5XVH1r8I5u4Adjawh1G/olMRWrtIBfB9+K40+k9hLTAcTqKZ
- 55AKSvH6rfLMtYDWZUOY0wlzku7YT5C8kZLa82Qw/aRIaiJPFagYibuCT/3tVfg0DDdU
- 1suhGBboBOpwpk/0ETH3UMZrGzioXchqM2STOfj69YqMxm6rJUuw9EHJAv6ju9K2ta5X
- O+hw==
+ d=gmail.com; s=20230601; t=1770848762; x=1771453562; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ostaqLHmuJ1oihm6hGVRvgopdHHXf5uomdaJmlqEFok=;
+ b=LOJxhHguy6sloG/QB773A1wWR6pXCLFO8AZPahzrY5CkUiMSPvkcXOFEkAi8qShLvu
+ /bQUnKEG6vlzfQokCtftWBQv37eSX0QoGPeat8iCVlTyOZqu48xVg6QTbw931xb0aNog
+ Ts00x4v7svbZM8AkBVlxfdEBeMXxupHOXwlUNQ1ncnjELeDYQwdOLwdTa9xAkXxIQjiD
+ 9fBdkQPmXjVAYWC3+QRWeaon3T5j2HrNakTjMtcfFhUZvocudn66pZjC3XzBygHwY6EV
+ 0uxJjy54kpye75dIjFE037M4EliT3S+bZC30srMJWAnJsDIQ3UjRad0cnStvxDh9GBAK
+ MP7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770848029; x=1771452829;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=StWof2beLbzRs03kyeqOfctlLThUd6iOWa0Dx9fQQ9Q=;
- b=tpiNeDbBQ8nchSxwDwl34lEbTJgvnkeHZqelErEfodsH0hgQxOO62Fbzvyr+7/X/d3
- u7TLKQNviZlWUEb2VxeUtmLnopEltXqJI24HZsHPOGfDjRWcM0CTkNjHmo0ycdD72awV
- p4BB9Alnte2fkp7lNcFiTqgEZnjMNOH8mTwbXLzRgoFqW2jTmc1IqtGfY2BFXiwfhT25
- oZYBFMkSXV4H8P/xCZdc0hkV7hTcfZaEcgAXOj7O0WH68HgGEI89jaiNBO4tydCEQnLv
- XX0Iwod6Bo9SuU4dRRz2qBt0Pjk7fB4ZECXcn7QRkTvsaOvmknbGFk6YevgNHIwwDi3C
- XHKg==
-X-Gm-Message-State: AOJu0YxWCfhSOGay3tiPjqgVEWo1TFlPGNrl43vytufo24BvoQ6m3Mwt
- eEyHQxMYGszkwSrsynwOoaFB6RFJhm/X3W4mD838boAN+MmIYVWcR2CMhOcRmnHZqsNU7VPAuno
- 0+h0Cv4+BtEGDpAhULu35PAyfLdZSfLk=
-X-Gm-Gg: AZuq6aIWHBkbfGacM/bxBy0KZpR6au8nJj9DZ5vEdf3zkeZKQt27rd7HMhfblzoegRs
- 4LH80i8OV6Z7rG37I+Jm3dfIwc6cv1Zej60VsKixOmMeOOI2wMvY5AC2ua/gzaTqEfXyESgw7Y6
- 8zvDIvDZqKyi9qdVJ3Bf47jkVoYMc83Euh0ALq77DYGfJZ0IvG6SXBa/0UxU68q7ESR5hkNAJ7a
- gkBQNBihlDtTvmPkTSIBSBI8lzfhbu8g9/f2mOhWa2/MNV2Ggjzjip6Lztuoq7M85WxXtKWyMZi
- zUeiWQPqGSQKVmGA54U2ELu4o3LIQRLh8xJFcKkmRPSg4zDzEiBoNYNzuKglpMxWAdYnYrGYZoY
- kweQ=
-X-Received: by 2002:a05:6122:3382:b0:566:341b:4ddd with SMTP id
- 71dfb90a1353d-56759bb3081mr228707e0c.0.1770848028689; Wed, 11 Feb 2026
- 14:13:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770848762; x=1771453562;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ostaqLHmuJ1oihm6hGVRvgopdHHXf5uomdaJmlqEFok=;
+ b=JBycuLtjr9r52HaEWKBL2ZWFsSKxPBEqHHJhizBdRnf2oP7u7ErE3wtxxaNQgX/4g0
+ 3CrkQVvSZjJpwDQrtfWxgDpvF1ESUfNGlE98A1Us0TataJaPNB64zlcQe6LoZguLyc3K
+ 9EYrR/NQ2vZ5fBWzKtBfqPuiqrsAlgbyK0CANkafvcFQoHbTltMykaCQDf8aNCyDl1OD
+ 8KqpBTkl+1w3DgMruI1Irbo95bXvmKp5ivbOJlW0zIWsy7x9jCEGwa2II1mSe8h2EsoY
+ CBMbE2nbN+P+22rFpQJUi7HGdTo8nP2I8qAwgtKfRdEdj8FXn5akX6XiGACHpLkO94Gj
+ 0u5Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKxx4NB/OGFBuLEd+OfIBKnE8mX05xS2TWv/It3jcGbjUWGfBkXe77aSu0anNyebNXSHsC5vI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3PG9eGmx3AMdGN3uEXVNI8dmvKGNND37joN4wNyzqzlgHqQ3r
+ Mnt+LgadHLAMD1KQnDXf+Su7Vto9EWg6ZlBRCRzrIgEk6ORfEMyR3kfo
+X-Gm-Gg: AZuq6aJmDKjzyLKpBSDfMp9O+6PzfLA1D/46J6pbrLWiVXYoNm7V/4kZw74KVYnMPjK
+ KYnQmXZ478yZ1F7TRYtakuLAKQBd9WwEia8V+ok/oYAgMu8mnNVx3IwarbmpmQlMPQ65zYBFAZK
+ U6bNktu9uYRXZQC/c2TBk5uUN66LDDEXfFh3LcvJkLsrZq4xYRigJ7PkLo0RVMEFoZdzSEBTw0s
+ HI9HN2q1Io1Q9qsst13JDY5onlEasQDnk8XPDypzlf8dMpbESYlgHVCa9oWS2YRzGWxrSFUqq4f
+ mCak2y4h3a3dbm1DLrg8HdGuVuKY2MVwYdjL/REU7vrCMJmuRiD3SdPAJZlLD/Pwmhib1z8HjkQ
+ MhLc9V7R3a9SJMWn8Gxsb8pvDcXV500Dk5JCNyX1UoQ7AFz6NKauZfq7LBHMA1Dve47F1/DxpPm
+ j/RM8+ylBwM7AYKTF+JGunIXhBkkOwGVZBxKM=
+X-Received: by 2002:a05:690c:4a03:b0:794:747b:b6a6 with SMTP id
+ 00721157ae682-7972f0de723mr11281937b3.13.1770848762395; 
+ Wed, 11 Feb 2026 14:26:02 -0800 (PST)
+Received: from localhost.localdomain ([2804:14c:485:4ffb:e36d:8763:a188:5dcb])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-7966c18fd06sm28833867b3.17.2026.02.11.14.25.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Feb 2026 14:26:01 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: michael@amarulasolutions.com
+Cc: dinesh.maniyam@altera.com, jonas@kwiboo.se, trini@konsulko.com,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@nabladev.com>
+Subject: [PATCH] spl: Add generic SPL MTD loader support
+Date: Wed, 11 Feb 2026 19:25:50 -0300
+Message-Id: <20260211222550.739727-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260211021351.2678571-1-james.hilliard1@gmail.com>
- <4fa526c355abda8ed5ad0c88f99d215a7615a977.camel@microchip.com>
-In-Reply-To: <4fa526c355abda8ed5ad0c88f99d215a7615a977.camel@microchip.com>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Wed, 11 Feb 2026 15:13:37 -0700
-X-Gm-Features: AZwV_QiGmJiArpQ_-Slczk-PGJ92PRb0JuNKwwSe-tuYaM_Iy6Zl0tWGCvXMYuA
-Message-ID: <CADvTj4qVOgLXeO0w+MzpRukr-gafqys7t_UA5i-Y=ffEsc8Kfw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] image: fit: Apply overlays using aligned writable
- FDT copies
-To: Jamie.Gibbons@microchip.com
-Cc: u-boot@lists.denx.de, quentin.schulz@cherry.de, trini@konsulko.com, 
- marek.vasut+renesas@mailbox.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 11 Feb 2026 23:21:15 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,58 +97,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Feb 11, 2026 at 5:29=E2=80=AFAM <Jamie.Gibbons@microchip.com> wrote=
-:
->
-> Hi James,
->
-> On Tue, 2026-02-10 at 19:13 -0700, James Hilliard wrote:
-> > EXTERNAL EMAIL: Do not click links or open attachments unless you
-> > know the content is safe
-> >
-> > libfdt expects FDT/DTO blobs to be 8-byte aligned. When loading the
-> > base FDT or overlays from a FIT, the mapped buffer may be unaligned,
-> > which can break fdt_open_into() on strict-alignment architectures.
-> >
-> > boot_get_fdt_fit() relocates the base FDT with boot_relocate_fdt()
-> > before applying overlays. That uses the bootm memory map and can
-> > overlap with the FIT buffer when the FIT is loaded into RAM,
-> > corrupting data needed to load the kernel and ramdisk.
-> >
-> > Allocate writable, 8-byte aligned copies of the base FDT and overlays
-> > with memalign() and fdt_open_into(). Grow the base buffer as needed,
-> > apply overlays to it and pack the final tree. Free each temporary
-> > overlay copy after application and check fdt_pack() errors.
-> >
-> I am looking to test this patch but unfortunately it fails to apply at
-> boot/image-fit.c:2465 for me. I have tried both master and next
-> branches. What base are you working from?
+From: Fabio Estevam <festevam@nabladev.com>
 
-Oh, it was a random slightly older commit I think, I went ahead
-and rebased it on master here:
-https://patchwork.ozlabs.org/project/uboot/patch/20260211180645.3313596-1-j=
-ames.hilliard1@gmail.com/
+Add support for loading the next stage from an MTD device in SPL.
 
->
-> Thanks,
-> Jamie.
-> > Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always 8-byte aligned")
-> > Fixes: 881f0b77dc8c ("image: apply FDTOs on FDT image node")
-> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> > Cc: Jamie Gibbons <Jamie.Gibbons@microchip.com>
-> > ---
-> > Changes v1 -> v2:
-> >   - also fix alignment issues
-> > Changes v2 -> v3:
-> >   - do not print on -ENOMEM errors
-> >   - let boot_get_fdt_fit_into_buffer() reuse buffers and handle
-> > rounding
-> > ---
-> >  boot/image-fit.c | 161 ++++++++++++++++++++++++++++++++++++---------
-> > --
-> >  1 file changed, 124 insertions(+), 37 deletions(-)
-> >
-> > diff --git a/boot/image-fit.c b/boot/image-fit.c
-> > index 41ab1f552b0..09a57bbb670 100644
-> > --- a/boot/image-fit.c
-> > +++ b/boot/image-fit.c
+Introduce CONFIG_SPL_MTD_LOAD and a generic SPL MTD loader
+implementation that uses the MTD subsystem to read the U-Boot payload.
+
+The loader works with any MTD-backed storage, including raw NAND and
+SPI NAND, without being tied to a specific NAND type.
+
+The payload offset defaults to CONFIG_SYS_MTD_U_BOOT_OFFS and can be
+overridden via the device tree property:
+
+    u-boot,spl-payload-offset
+
+To support both raw NAND and SPI NAND boot flows, the loader is
+registered for BOOT_DEVICE_NAND and BOOT_DEVICE_SPI. This allows it
+to operate correctly on platforms where the ROM reports either NAND
+or SPI as the boot source while using the same MTD-based loading
+infrastructure.
+
+The required NAND core and SPI NAND drivers are built for SPL when
+CONFIG_SPL_MTD_LOAD is enabled.
+
+This provides reusable infrastructure for boards that boot from MTD
+devices without relying on SPI-specific or NAND-specific SPL loaders.
+
+Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+---
+Dinesh,
+
+Could you please test this approach on your boards?
+
+Thanks
+
+ common/spl/Kconfig        | 15 +++++++
+ common/spl/Makefile       |  1 +
+ common/spl/spl_mtd.c      | 88 +++++++++++++++++++++++++++++++++++++++
+ drivers/mtd/Makefile      |  1 +
+ drivers/mtd/nand/Makefile | 12 +++++-
+ 5 files changed, 116 insertions(+), 1 deletion(-)
+ create mode 100644 common/spl/spl_mtd.c
+
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 2998b7acb75f..2aba6da73c10 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1576,8 +1576,23 @@ config SPL_SPI_LOAD
+ 	  Enable support for loading next stage, U-Boot or otherwise, from
+ 	  SPI NOR in U-Boot SPL.
+ 
++config SPL_MTD_LOAD
++	bool "Support loading from a generic MTD device"
++	depends on SPL
++	depends on MTD && DM_MTD
++	help
++	  Enable support for loading next stage, U-Boot or otherwise, from
++	  a generic MTD device (raw NAND, SPI NAND) in U-Boot SPL.
++
+ endif # SPL_SPI_FLASH_SUPPORT
+ 
++config SYS_MTD_U_BOOT_OFFS
++	hex "address of u-boot payload in the MTD device"
++	default 0x0
++	help
++	 Address within the MTD device where the u-boot payload is fetched
++	 from.
++
+ config SYS_SPI_U_BOOT_OFFS
+ 	hex "address of u-boot payload in SPI flash"
+ 	default 0x8000 if ARCH_SUNXI
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index 4c9482bd3096..9f5ddcad17af 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
+ obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
+ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
+ obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
++obj-$(CONFIG_$(PHASE_)MTD_LOAD) += spl_mtd.o
+ obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
+ obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
+ endif
+diff --git a/common/spl/spl_mtd.c b/common/spl/spl_mtd.c
+new file mode 100644
+index 000000000000..8c6c94e592d0
+--- /dev/null
++++ b/common/spl/spl_mtd.c
+@@ -0,0 +1,88 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/*
++ * Generic SPL loader for MTD devices.
++ *
++ * Based on spl_spi.c, which is:
++ *
++ * Copyright (C) 2011 OMICRON electronics GmbH
++ *
++ * based on drivers/mtd/nand/raw/nand_spl_load.c
++ *
++ * Copyright (C) 2011
++ * Heiko Schocher, DENX Software Engineering, hs@denx.de.
++ */
++
++#include <config.h>
++#include <errno.h>
++#include <image.h>
++#include <log.h>
++#include <spl.h>
++#include <spl_load.h>
++
++#include <dm.h>
++#include <dm/ofnode.h>
++#include <dm/uclass.h>
++#include <mtd.h>
++
++static struct mtd_info *spl_mtd_get_device(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	for (ret = uclass_first_device_err(UCLASS_MTD, &dev);
++	     dev;
++	     ret = uclass_next_device_err(&dev)) {
++		if (ret)
++			continue;
++
++		return dev_get_uclass_priv(dev);
++	}
++
++	return NULL;
++}
++
++static ulong spl_mtd_read(struct spl_load_info *load,
++			  ulong offs, ulong size, void *buf)
++{
++	struct mtd_info *mtd = load->priv;
++	size_t retlen;
++	int ret;
++
++	ret = mtd_read(mtd, offs, size, &retlen, buf);
++	if (ret && !mtd_is_bitflip(ret))
++		return 0;
++
++	if (retlen != size)
++		return 0;
++
++	return retlen;
++}
++
++static int spl_mtd_load_image(struct spl_image_info *spl_image,
++			      struct spl_boot_device *bootdev)
++{
++	struct spl_load_info load;
++	struct mtd_info *mtd;
++	ulong offset;
++
++	mtd = spl_mtd_get_device();
++	if (!mtd) {
++		debug("No MTD device found\n");
++		return -ENODEV;
++	}
++
++	spl_load_init(&load, spl_mtd_read, mtd, mtd->writesize);
++
++	offset = CONFIG_SYS_MTD_U_BOOT_OFFS;
++
++	if (CONFIG_IS_ENABLED(OF_REAL))
++		offset = ofnode_conf_read_int("u-boot,spl-payload-offset",
++					      offset);
++
++	return spl_load(spl_image, bootdev, &load, 0, offset);
++}
++
++/* Priority 1 so boards may override */
++SPL_LOAD_IMAGE_METHOD("MTD-NAND", 1, BOOT_DEVICE_NAND, spl_mtd_load_image);
++SPL_LOAD_IMAGE_METHOD("MTD-SPI-NAND", 1, BOOT_DEVICE_SPI, spl_mtd_load_image);
+diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
+index ce05e206073d..0856a8f68732 100644
+--- a/drivers/mtd/Makefile
++++ b/drivers/mtd/Makefile
+@@ -34,6 +34,7 @@ else
+ ifneq ($(mtd-y),)
+ obj-$(CONFIG_SPL_MTD) += mtd.o
+ endif
++obj-$(CONFIG_SPL_MTD_LOAD) += nand/
+ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
+ obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
+ obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
+diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
+index c8169cf73902..cd6eaa87739c 100644
+--- a/drivers/mtd/nand/Makefile
++++ b/drivers/mtd/nand/Makefile
+@@ -1,10 +1,20 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+-ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+ nandcore-objs := core.o bbt.o
++
++ifeq ($(CONFIG_XPL_BUILD),)
++
++# U-Boot proper
+ obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
+ obj-$(CONFIG_MTD_RAW_NAND) += raw/
+ obj-$(CONFIG_MTD_SPI_NAND) += spi/
++
+ else
++
++# XPL
++obj-$(CONFIG_SPL_MTD_LOAD) += nandcore.o
++obj-$(CONFIG_SPL_MTD_LOAD) += spi/
++
++# raw NAND still follows the normal SPL rule
+ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
+ endif
+-- 
+2.34.1
+
