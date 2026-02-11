@@ -4,108 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF4DEB596B
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 07:20:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3313AEB597B
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 08:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD11F83A5A;
-	Wed, 11 Feb 2026 08:20:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 447EA83A5A;
+	Wed, 11 Feb 2026 09:22:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="IOhmDSuS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XfVzUz/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE4683BF4; Wed, 11 Feb 2026 08:20:35 +0100 (CET)
-Received: from mail-dy1-x1334.google.com (mail-dy1-x1334.google.com
- [IPv6:2607:f8b0:4864:20::1334])
+ id 903B383D6C; Wed, 11 Feb 2026 09:22:17 +0100 (CET)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B6548367F
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 08:20:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4F8318367F
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 09:22:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-2b82c605dbdso3602788eec.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 23:20:32 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770794431; cv=none;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alchark@gmail.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-5033387c80aso8948671cf.0
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 00:22:15 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770798134; cv=none;
  d=google.com; s=arc-20240605;
- b=RRbiv9+F9FFsZJ8TW1pEg+gS1hgYLtkSSAJfc5r0E4YN3sgOaECm8NqQJmsDEXJeMe
- Dilbpd62hHLW00yqayPzkQuyGQ+R6h8mpdhb/g2UuJhJMMK/KORzM/udwxMVZ9qSLEiY
- 6rw8hoECTPGLe0IcGB1SGf1s9TMDNSCGgs1lYnuJ8Wraxrszby+cFMcYB6rMQg5GxewM
- da22+SF1cN2L48Jii0y3OFvQkW4cZ07FBsZTBtM8umH9O9W0UFfpNlqY1Ne4mfqb1yJo
- mejMAeUoLAVmD9+ZxJT14TsyAL4Gf3nvG9X1uG28WttDZfct4dI70o1x2aHfZzbd0nRR
- c36A==
+ b=YLUfCNzZfdsAJRUDrOyc5fwaLDHzeS7gF8XyEUsqM9eqMZTn4azq53MfniNK757GGE
+ MqDNwRB9AEmWsU0IKIKTEEPLWj0qd3tIB11EdLQoEfnqY4R1wLyDcIqXPoZXE28UjAUG
+ QwVMnS/k0Usn8tJEDVF6fVcdYfS1bt5Lvtfti9rnBERcsNEn72r/bQaHd4eHdU5VhZuV
+ bf/5Cw6lMRcE94SVoCApulGGeKU1ZzWYn+ypEaSSA/2kSD6dRAvAtF/2+8wTo5ayFV2/
+ GMo85IloP8F5hvShVaShSneJCaYgLtjGi+0ELJ1hvEu9dmKhlg68a3uvxd7hmRzf8ArU
+ t2EA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=9iNKT6ZhpJpmgFkBM2rHbaZhfbLbFdZsg7dvWgZ/JiY=;
- fh=6kPG6ZKds6QQAQW9kh+rLrQdwbPhMrxKMrmS61k4qP8=;
- b=iLg8HSB/N8Mn3YX2/5AZwMOpzCYj/6N8Vh6/yyfNR/yECsI2wlmKQLQH23X+Ts8T+1
- lKaDbltqVaR4PlxaK47CgDKCgnarM/+hlzO1PeTyiA8ADn/MxjavSbgPbPQdAqguPcM8
- HzKeRWgHzo121xsbp1RoCiM3zyThFyddBSvxnAwaVW4G7bjEQAh8iT31rrtEXskpvb98
- 3m8hXWFFcxF5R1aSF4OVaRddUBN0zRxrENP0QtLIP9EiHJDvJmLQ8ZtgFZD930cHAZ5a
- qoGRgt9K/XDoUU3UkDUb225YRhj5zAN3g7jpOHMUYIYo3Yt1ZfEdUj9mNFvjRA7TQ66e
- G9+Q==; darn=lists.denx.de
+ bh=eGFmNkBxmpjrpkhJzbwpwN1BmWxxLCIlYlO5TcuWO5Q=;
+ fh=yfCs8wyjDqHdDmpzvevlxewdUnNAwbXHEDN1PCnc1ak=;
+ b=F/m5KVQNcd2/AEr/Ftao0iXZLbvAtOQRoGoKD9M3+z7SvyHKiHkvvfdK/yyZaMwX3B
+ ToyYhI2bD334y+zEaGIB1DhpTZuGiCvUu0sJIftSUlGkICC8vix4+bfFrRu+sb7MEOFO
+ BtFScyNGAYCjl56BbHBoCIJWZN6LFPMXUx2qBnQpobOF5wLIgthEiUGu1T1LsKTHpNZ+
+ MAc1Q7ujIh3a2x2B/B1P1NJNKq34//3gi50LjxEJ7IDKGFiBZHTNZTsMzlQrWuzKpLLh
+ d1CJofyY8owrPuFk05K/JENs2qwZMjJOZ2Ly8tQhk1oMiLmQxH/yWYrF5VTOaq3TcXxx
+ koAQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1770794431; x=1771399231;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1770798134; x=1771402934; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9iNKT6ZhpJpmgFkBM2rHbaZhfbLbFdZsg7dvWgZ/JiY=;
- b=IOhmDSuS+E2i8pj2+kIrYRRSJjTUIO/kbohOZrxBfV3bxRBdgLkgYTHVhuWStE6qKw
- 4wXG0WOLcj7UJfuR03yZzIWDeOTwZWpOo2gquvg8MItch0gUs+g1Lyt2QeFwY68iSLCr
- v1wtJGDnl5Nmr2uwQjZB7WDp0rPE3RZvEdcJ0=
+ bh=eGFmNkBxmpjrpkhJzbwpwN1BmWxxLCIlYlO5TcuWO5Q=;
+ b=XfVzUz/Dh0iI0jWHzZiFTTEPNlTO+lIcMKWvaDPXFHfFXDIK+pZigFIpQWmUkQJ0Gj
+ FTczsVCKfXB7lG1a/g6se1vZ98V26D7u0hb5h5P45XYvPoGOT0fr38sgQ7gbGGoYmimo
+ GX41oSIaDQnbHUc1CJw98rUUB+yKJEqU8qZFpFKjxPAvPNEe5Yt5tRZcJuqTo3ZuY0sf
+ QLA+j6TKACpjg33lMn8SN1PMMhCHEOyd92Rz9WSd0eFIwHq9A+o5fFbT06++JW9TGk7Q
+ EuBrs+kTaIZR/Rq9upF1XwyezHFjEWArvVx0iKsViOygBHXHCTgqhomjK8LP5q8ax5PE
+ zjWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770794431; x=1771399231;
+ d=1e100.net; s=20230601; t=1770798134; x=1771402934;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=9iNKT6ZhpJpmgFkBM2rHbaZhfbLbFdZsg7dvWgZ/JiY=;
- b=lYRTFaAiui0EQNIEWsz7+SrUmD+0sfhJ376rNyuNru4XWTa/bqxEPfKTJG53IiBkN6
- 7KehcUJZTdonPlLU2PNbO8K3ofG/V1jBO1vf33/p3Z3CRrbzgdbq15Gc5DEyHlFCvHOB
- A6kFGAY3zmq2pJZp7oC51zIs9CtAITAltYz0OEm2rktZXaVxduJK7AWasrbI7+FSgcJq
- HqE3xqlWr9T4Pjb81DmX3R0vmKuqYYBT6pGpH9neKDbmUYGKnlFd1N7Lmnc8swThGqd+
- qH7PDXtWt+UqweAOim/r30sHZzjGDhiJO2HRRCR6fq9C6fvunindTZPeqKgQJWPYs0ve
- yafg==
+ bh=eGFmNkBxmpjrpkhJzbwpwN1BmWxxLCIlYlO5TcuWO5Q=;
+ b=KKELq/iGTlkQXmA5bEcjvS9kkRzdzEvEs9S0hvwYXwGw7GT8rU+XBbnZMv6U2jsXip
+ aWbom593R0qA26TLKmuDEZ6Wx+tAnm4XC7GSn7kFl7GtevavaL0x+hnqsn17w0yi87fA
+ PfMe4qG5adRm1xh4wHy13+PCH73JQ/q0xIQQLr8hx53KqoBwt3moynBe6onwtAQzQdbD
+ ak79n7V4NZ5gE82YH9cdV+oTPGRneiIfWfY+XpT991o9Pyv7qwpsdi847ZXU1bL/yE/3
+ XCBKjjHQXAfm8rUpBvHMMAaGj8hfFiq+B7TSF47R4gWnqq1gHkw/+iluxWpslZ1XCpQ6
+ SGOQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXy5ZeAqwM/bCR9xiiJHK9B7xEvKetuo4Ymgv44WIGlmFd+UtGPy6fxymqPBZJZ+/UGaBuTv/c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7KoMlYCMjhxzMgee9QajlR7oryC2WVwrRfsFE+YehP9QCWfOg
- 04KSJCx61Xuw/aNlIFMJGONrxyCM33oQmBoXsC2J09RZTn+Bj4wBXZHmWTs1a5NT5wVFhVcQSMf
- bDciRqStlf+fCCTP5nsFcHnZzMEy7fCeSiFZs9v+xPw==
-X-Gm-Gg: AZuq6aIPAdWdjQEgWHnvRvvQbNtOS+miOPhja+kZrqJt9BQbln9P4OB5DHKoygjg5wt
- ZKOffEDy5Czftzp+IOLcn8lJ7YZ6epT8QMeeD581ARP/7bp2XHS+ZVLd7V3A2TXlx3WlAlww9UA
- R5SFyUYAVu1FsTWACDaUFDhlnStTkoj/dCvp2yPnU3KOtPBAOouZOghXZWdxIQAbnerf602ccz1
- RQaELiVaQbcX1cpm895fzpRYqykrqQx20LqE5sabagd9YgcqtRzw6Ty/Ic3BZKYQhInKmyr+rbZ
- NPqFuWn8M30N7vX2kyImYOK/wtkuxo7xL6EiMw==
-X-Received: by 2002:a05:7301:169a:b0:2ba:7526:f752 with SMTP id
- 5a478bee46e88-2ba752702e9mr3584996eec.25.1770794431282; Tue, 10 Feb 2026
- 23:20:31 -0800 (PST)
+ AJvYcCXdT+e0v6Cb4cGuEwTDPEWmug5wqul7Yz/MY3qliZxHd41For2jwVa/mrwbc6ldWiDXuA+3XSI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyN3qY6Yuzt3RhWhwCnndmrEHZEwmhiWgQxbbIh9mwXNQVYo3rW
+ tfNR/OHJ1WRnVbioJksyP/l11QQeD2tQFcOlS1g7joRhnK5RwVXGUMnrOTqQCIWN72ntuzI4gmN
+ CeonbB+7sr3cvr5JA/+FeS+bzf8FtOVgc/+97TKk=
+X-Gm-Gg: AZuq6aJuXGU6R7pjquvpHFT+yOuwAeNfkp3Paj3PBcyf6Xb7HJ+Db5LAhqaawEiBFrI
+ TZ9TklBGwMutfNLMxMXEWI6dJbeZbrmGJ+yP6ixZ4fLWZ569uIcz01oJqevTm/O5ot1LvZQ9jfn
+ 0fBGv2hVZ1W8b8Op9qH5YVlRrpOjONsg47Vjy95oQDZF8kxdCUtlSb2zvpV2X4ju+GPtUcXVynt
+ 7yuEtyBLVxWg1zb7bAeV/vKSLV4BjcuuFZmljJxCYG24wwWA0DRquKgMJiMEXxe5ESYfRpoJPvR
+ eTOinbyIJTZPiiFUazbgVFuVC8C95T/YMxtxL19d
+X-Received: by 2002:a05:622a:9011:b0:502:a218:1cf with SMTP id
+ d75a77b69052e-50672dc8b7cmr64424341cf.4.1770798134066; Wed, 11 Feb 2026
+ 00:22:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20260203074721.25520-1-dinesh.maniyam@altera.com>
- <20260203074721.25520-2-dinesh.maniyam@altera.com>
- <20260203145742.GH2603314@bill-the-cat>
- <074a310c-5ba3-4304-ab37-2c85d8cd58da@altera.com>
-In-Reply-To: <074a310c-5ba3-4304-ab37-2c85d8cd58da@altera.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 11 Feb 2026 08:20:20 +0100
-X-Gm-Features: AZwV_Qghho_LjffoTG5sSOTqLeLxwfAHoIoBei0iRNl59MwXCXxSXCfkjba6SDo
-Message-ID: <CAOf5uwkE_hfjLkxbOn-O2o3sYSGqAV0TVdZ7yg6eZqJgWGjDCg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] mtd: nand: introduce SPL_NAND_FRAMEWORK_CAPABLE
- Kconfig option
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Marek Vasut <marex@denx.de>, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Tien Fong <tien.fong.chee@altera.com>, 
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>, 
- Alif <alif.zakuan.yuslaimi@altera.com>
+References: <20260108133234.4001390-1-jonas@kwiboo.se>
+ <20260108133234.4001390-2-jonas@kwiboo.se>
+In-Reply-To: <20260108133234.4001390-2-jonas@kwiboo.se>
+From: Alexey Charkov <alchark@gmail.com>
+Date: Wed, 11 Feb 2026 12:22:09 +0400
+X-Gm-Features: AZwV_QitrrjmW6aRqKRtnWQgpNhn2a4wKZVD7D3ZEVv2HrOFC_brYPXAM0m41uI
+Message-ID: <CABjd4YzY3sQiVkH8ypZKuH=Yk-PPHnYgZ2V8Xa_x9TKFVGMPAA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] rockchip: rk3576: Allow pmu sram access for
+ non-secure masters
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -124,119 +119,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Jonas,
 
-On Wed, Feb 11, 2026 at 8:14=E2=80=AFAM Maniyam, Dinesh
-<dinesh.maniyam@altera.com> wrote:
+On Thu, Jan 8, 2026 at 5:36=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> wrot=
+e:
 >
-> Hi Tom,
+> The firewall block access to pmu sram for non-secure masters by default
+> after reset (0xffffbfff).
 >
-> On 3/2/2026 10:57 pm, Tom Rini wrote:
+> Change the pmu lookup configuration to match the default lookup config
+> for ddr and system sram (0xffff3fff) to allow loading TF-A using DMA.
 >
-> On Tue, Feb 03, 2026 at 03:47:17PM +0800, dinesh.maniyam@altera.com wrote=
-:
+> Mainline TF-A will re-configure the firewall to use an even less
+> restrictive lookup (0xbffe3ff0), so this change is not expected to have
+> any real security implication.
 >
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
->
-> The SPL NAND MTD framework requires working driver model support
-> and sufficient memory resources, which are not available on all
-> platforms.
->
-> Introduce a SPL_NAND_FRAMEWORK_CAPABLE Kconfig option to allow
-> platforms to explicitly advertise support for compiling the full
-> NAND/MTD framework into SPL.
->
-> This avoids accidental enablement of the SPL NAND framework on
-> platforms that cannot support it and provides a clear capability
-> boundary for platform maintainers.
->
-
-This what I have asked in the beginning, for now I don't like to have
-this change
-in the framework unless we have more consumer. For the patch that you sent =
-for
-make simple spl load, I will try to start to apply on one of my board
-
-Michael
-
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->  drivers/mtd/nand/raw/Kconfig | 30 ++++++++++++++++++++++++++++++
->  1 file changed, 30 insertions(+)
->
-> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-> index e0ff28cb21b..d73d8ed4404 100644
-> --- a/drivers/mtd/nand/raw/Kconfig
-> +++ b/drivers/mtd/nand/raw/Kconfig
-> @@ -809,6 +809,36 @@ config SYS_NAND_HW_ECC_OOBFIRST
->   bool "In SPL, read the OOB first and then the data from NAND"
->   depends on SPL_NAND_SIMPLE
->
-> +config SPL_NAND_FRAMEWORK_CAPABLE
-> + bool
-> + depends on SPL_DM
-> + depends on SPL_HAS_BSS_LINKER_SECTION
-> + depends on SPL_MAX_SIZE >=3D 0x40000
-> + help
-> +  Indicates that the platform has sufficient SPL capabilities
-> +  (driver model, BSS support, and SRAM size) to support the
-> +  full NAND/MTD framework in SPL.
-> +
-> +config SPL_NAND_USE_NAND_FRAMEWORK
-> + bool "Use NAND/MTD framework in SPL"
-> + depends on SPL_NAND_SUPPORT && MTD
-> + depends on SPL_NAND_FRAMEWORK_CAPABLE
-> + depends on SPL_ENV_SUPPORT
-> + depends on ENV_IS_IN_NAND
-> + select SPL_SYS_NAND_SELF_INIT
-> + select SPL_NAND_BASE
-> + select SPL_NAND_DRIVERS
-> + select SPL_NAND_IDENT
-> + select SPL_NAND_INIT
-> + select SPL_NAND_ECC
-> + help
-> + Enable loading U-Boot from NAND in SPL using the full
-> + NAND/MTD framework instead of the minimal SPL NAND loaders.
-> + This provides bad-block aware reads and flexible offset
-> + handling via the common NAND/MTD infrastructure.
-> + Platforms enabling this option must also provide working
-> + driver model support and sufficient SPL memory resources.
-> +
->  endif # if SPL
->
->  endif # if MTD_RAW_NAND
->
-> This still gets it backwards. Whatever depends on SPL_DM needs to add
-> it. The max size is something that needs to be set for your platforms.
-> The BSS requirement is not correct (there are platforms today without
-> that set).
->
-> Thanks for the input.
->
-> Understood =E2=80=94 the capability-style symbol is not the right approac=
-h
-> here. I=E2=80=99ll drop SPL_NAND_FRAMEWORK_CAPABLE and instead move the
-> required dependencies directly onto SPL_NAND_USE_NAND_FRAMEWORK.
->
-> I=E2=80=99ll also remove the SPL_MAX_SIZE and BSS assumptions from the
-> generic Kconfig and ensure the appropriate limits and options are set
-> in the affected platform configurations instead.
->
-> I=E2=80=99ll rework the patch accordingly.
->
-> Dinesh
+>  arch/arm/mach-rockchip/rk3576/rk3576.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 
+As mentioned earlier in the other thread, this also helps fully load
+ATF and U-boot from UFS storage without resorting to bounce buffers or
+anything like that, so thanks a lot!
 
+Tested-by: Alexey Charkov <alchark@gmail.com> # UFS
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+I wonder what's the fate of this series going forward? It would be
+lovely to have it merged, but it hasn't made it to any of the
+custodian trees from what I can see.
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Best regards,
+Alexey
