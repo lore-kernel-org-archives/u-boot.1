@@ -4,51 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C5EE9E30F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 14:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B9B8E9E310
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 14:16:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 020FD83A5A;
-	Wed, 11 Feb 2026 15:13:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CA1CB83A5A;
+	Wed, 11 Feb 2026 15:16:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nwl.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aSPxKE/o";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=nwl.cc header.i=@nwl.cc header.b="TDo/NcnU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97D2183B30; Wed, 11 Feb 2026 15:13:09 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 8A67783B64; Wed, 11 Feb 2026 15:16:47 +0100 (CET)
+Received: from orbyte.nwl.cc (orbyte.nwl.cc [IPv6:2001:41d0:e:133a::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34A4683015
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 15:13:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 7A26483015
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 15:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B0BF543D6A;
- Wed, 11 Feb 2026 14:13:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44F8EC4CEF7;
- Wed, 11 Feb 2026 14:13:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1770819185;
- bh=GYjbYtqKJI8XR8hcP35aemNf9Wlhr4U9aaS5MGHtISE=;
- h=From:To:Cc:Subject:Date:From;
- b=aSPxKE/oufKdMWG6rBGpJxpl6KvKhkQmDhu9NDrBYC+F6AshhZs1wwyZhOKZJDJNF
- 7wDKulgXoIjYb2CqanetKBI3WNzNGSZmrLsIeq9TaVu3s99jHojb/vJ4bPmYaFePya
- +nRUvVQriTAw3lEIQ9fLmt9hAYBBN4QLwUUsDxUYfThJI/kk9PTRfhUMiDzO25WTiZ
- n9oZIK8rDxbG8Y2NTLvokkozIlg2jTcn1odS6JFg0VcIrvHfQMKTizgPlT3W8t1oG6
- oD/rGiGQfqp5/w0HpWnH6yuoyz2/g0l8Cog+gWaI9kKkcSekBmtSuOCI73H9x73FtP
- Uw4cojLJwlgHw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Chris Morgan <macroalpha82@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [GIT PULL] Please pull u-boot-dfu-20260211 into master
-Date: Wed, 11 Feb 2026 15:13:03 +0100
-Message-ID: <87ms1fl66o.fsf@kernel.org>
+ dmarc=none (p=none dis=none) header.from=nwl.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=phil@nwl.cc
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nwl.cc;
+ s=mail2022; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+ Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=0PQi2/yCsyCskMaCs9L/bilpyOsV3Tnd8JGmEECgEUg=; b=TDo/NcnU9BDhLFKShWDLRGevLv
+ hA4cf+tB/be3Z35vRUmdqarTfvK8qi+MYzjf7A5M0GNexs44sEerROCyW71liAAKb/oDWh0OcR7k8
+ BqH2uNbDYpAA2ggHQNaS1hDj3Nj6NvgoYfL+ffgDG3KYB6OR6JBGMmMDJsMYv9CtIZwYUZ/WAeVlR
+ aYZU2yqQOVaQFDzDi+OZ/CGKVOHOtu83HEZMNGUSZ2wfsZ8HCXZg8TvWKY6jcopMfR+sSOgTI9uuF
+ IjlhFigF8PXAfeGBmlnzZjj0NNESewWI2sZApxrFovqZoSZC1wWVsazMw6qeV3xXnPKHfxWaYOv66
+ 1VX/2j+g==;
+Received: from n0-1 by orbyte.nwl.cc with local (Exim 4.98.2)
+ (envelope-from <phil@nwl.cc>) id 1vqB1I-000000002Ti-3SMu;
+ Wed, 11 Feb 2026 15:16:44 +0100
+Date: Wed, 11 Feb 2026 15:16:44 +0100
+From: Phil Sutter <phil@nwl.cc>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] board: Synology: common: Fix typo in Makefile
+Message-ID: <aYyPTAJiuDxl4JFx@orbyte.nwl.cc>
+Mail-Followup-To: Phil Sutter <phil@nwl.cc>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20260204202936.21585-1-phil@nwl.cc>
+ <20260207215301.GA259488@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260207215301.GA259488@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,61 +69,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sat, Feb 07, 2026 at 03:53:01PM -0600, Tom Rini wrote:
+> On Wed, Feb 04, 2026 at 09:29:36PM +0100, Phil Sutter wrote:
+> 
+> > Due to this, legacy.c was neither compiled nor linked into the binary
+> > and thus booting legacy DS414 firmware failed. Missing atag setup led to
+> > no console output (and probably stalled boot) after:
+> > 
+> > | Uncompressing Linux... done, booting the kernel.
+> > 
+> > Fixes: 9774462e34faa ("arm: Disable ATAGs support")
+> > Signed-off-by: Phil Sutter <phil@nwl.cc>
+> > ---
+> >  board/Synology/common/Makefile | 2 +-
+> >  lib/fdtdec.c                   | 5 +++++
+> 
+> OK, whoops. The lib/fdtec.c change was just a debug thing to drop.
+> However, the Makefile portion leads to failure to build on ds109 and
+> ds116.
 
-Here is a PR for master
+Oh crap, yes. The ftdec.c change was not supposed to end up in this
+patch, sorry!
 
-USB Gadget:
-* dwc3: Support ip and version type
-* dwc3: Increase controller halt timeout
-* dwc3: Don't send unintended link state change
-* dwc3: Improve reset sequence
-* dwc2: Move dr_mode check to bind to support RK3288/RK3506 with
-  2 DWC2 controllers
+Let me check what's going on when building for the other devices, will
+ideally submit a v2 this evening.
 
-CI:
-* https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/29259
-
-Regards,
-Mattijs
-
-The following changes since commit eed514b11d04a2f8a949521ad3bffba3ec98bd2f:
-
-  video: correct label for cyclic video_idle (2026-01-29 10:00:59 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20260211
-
-for you to fetch changes up to e69841fa71d67c560d767b786f956bb6f2873130:
-
-  usb: gadget: dwc2: Move dr_mode check from of_to_plat() to bind() (2026-01-30 09:01:42 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20260211
-
-USB Gadget:
-* dwc3: Support ip and version type
-* dwc3: Increase controller halt timeout
-* dwc3: Don't send unintended link state change
-* dwc3: Improve reset sequence
-* dwc2: Move dr_mode check to bind to support RK3288/RK3506 with
-  2 DWC2 controllers
-
-----------------------------------------------------------------
-Chris Morgan (4):
-      usb: dwc3: core: Add ip and version_type support from Linux
-      usb: dwc3: Increase DWC3 controller halt timeout
-      usb: dwc3: gadget: Don't send unintended link state change
-      usb: dwc3: core: improve reset sequence
-
-Jonas Karlman (1):
-      usb: gadget: dwc2: Move dr_mode check from of_to_plat() to bind()
-
- drivers/usb/dwc3/core.c           | 92 +++++++++++++++++++++++++--------------
- drivers/usb/dwc3/core.h           | 60 +++++++++++++++++++++++++
- drivers/usb/dwc3/gadget.c         | 20 ++++-----
- drivers/usb/dwc3/gadget.h         | 14 ++++++
- drivers/usb/gadget/dwc2_udc_otg.c | 19 +++++---
- 5 files changed, 156 insertions(+), 49 deletions(-)
-
+Thanks, Phil
