@@ -4,153 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D4AEB5979
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 08:30:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8620EB597C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 08:34:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 467F583A47;
-	Wed, 11 Feb 2026 09:30:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 47E9E83E3A;
+	Wed, 11 Feb 2026 09:34:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Tdlyjqwn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mKRT+Ctc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E310F83A47; Wed, 11 Feb 2026 09:30:33 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1957B83E40; Wed, 11 Feb 2026 09:34:52 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 314A98367F
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 09:30:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67D45802C1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 09:34:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=w8tcWrU2aUns4j5fRjvLbYgxk/MCMtT0Hbj9vADBQZ0nsyunQR5gKC7YTG++UJFe8aACPDgYyRp+zdwLkYO3n1IOZZWpjRB0BJrNk1D2RDN0/mEwVS/Mn7hj/DovWhbxMDEl1zvKCiZEkatk0aglJmlxG19tdC2j1JBGYen4H5nDpXVS3fjKe/8qxYnFswR1nhUXKzIu0WGhTXKVBczDAX783OWBlHLFFRrzEGn1SOcNfVDdxJV5e++l3KYl+fhGy2vY64Z1ai+gIIDukYqjSRYsWma47k1/q6pmK16nBt1Pq5+ECYSAEmzi7pgRMygU3sOGaGh19Eujb66E4tFd1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8+kMbA+27rF4Jw4yOIyvJFhuHyNnwNrgYaseIRC4hFs=;
- b=yq6/8kfkTG+Bwyi9yB6b2hraJIDqkYA9ooI1Yt3NmTwcdf3poCY4ObwHFNrrov8llS/XMkM3uivq0qXqbfMY0HWg7bV9HtDHaVRS5H0QauhVCuMzqVP/GiTlrtvOdospJDqzzS0ZyfVTu7SWXsl5NKLhyPlkKcup8VoJSEjpKs298mdXdrHb7OP+vFlFrWSSkppqqMhoqGte5CoZAS2AWqPrLPbpW8p40M5vjQ7VUvGuhtHcmbBFFr+WXTTgwzkSWSaSvc+BF21VKqb1IIJkOU3rHDCzJKe33NGB8j2Q9RJzcRmjp3FtU8WA80SL9KDvKwCc7VDqWIElaxzjz71Ezw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8+kMbA+27rF4Jw4yOIyvJFhuHyNnwNrgYaseIRC4hFs=;
- b=TdlyjqwnlFphh9OJwkb6wfUvssg6FyQLQ2L5DBl4cJKkyBAh5esoZwd3MYW/aFTKdqQSexKqzNj2+DqOQQHOGcOY2CaZMLRoJQh5sUFVUc/sjbcfFjn8uY0z0lNZXmAbQ/mJjqnacf5EWzGOqI58Tel4gTEQXGten2Rcc+G65jk=
-Received: from SJ0PR13CA0235.namprd13.prod.outlook.com (2603:10b6:a03:2c1::30)
- by MN2PR12MB4392.namprd12.prod.outlook.com (2603:10b6:208:264::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.17; Wed, 11 Feb
- 2026 08:30:27 +0000
-Received: from SJ5PEPF000001F5.namprd05.prod.outlook.com
- (2603:10b6:a03:2c1:cafe::76) by SJ0PR13CA0235.outlook.office365.com
- (2603:10b6:a03:2c1::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.8 via Frontend Transport; Wed,
- 11 Feb 2026 08:30:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF000001F5.mail.protection.outlook.com (10.167.242.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Wed, 11 Feb 2026 08:30:26 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 11 Feb
- 2026 02:30:20 -0600
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 11 Feb
- 2026 02:30:18 -0600
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 11 Feb 2026 02:30:18 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo Yu-Chi Liang
- <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Herren <sputnik@on-the-web.ch>, Padmarao Begari
- <padmarao.begari@amd.com>, Sam Protsenko <semen.protsenko@linaro.org>, "Simon
- Glass" <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] xilinx: mbv: Disable EFI loader
-Date: Wed, 11 Feb 2026 09:30:06 +0100
-Message-ID: <2b14005e41e0688ff9598d0b3f2cfbdf82c8ff91.1770798604.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4806cc07ce7so15730085e9.1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 00:34:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770798888; x=1771403688; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=oBs4V6Zeg0KTcWMuh+yTMP84EbZtjwejhhkXxbVCQwE=;
+ b=mKRT+Ctc4JbTEMToFtwM1vE5jJYTd7KM42URgg5p7ee6XHPE1qalaW8Dt4J8TrAIvJ
+ l4E1BMS6LYKKAc/nUNw7uPo0I7anBe3HY/Cf+EFdVzrhvL36Oho9iy2at7VVJq/hOREe
+ bp2PIebeSkN/hCR69S7uxVjuHtiO+zuF3HTqtY0S1//mtc/SZkmHVZS7zbHNugn5Wiqv
+ 6jZuRlD1jdfVUa8NLJiFgL7LAAoMNV8eJnJcea3uteyX9xmPugXPcb9oXyJuVcIFQIqZ
+ qkjDiSv5ICZRt2TXeOifOhkM6UXqnOmv8K8uof+xt8kYy5yS/ULunv8hiDx5QBBxxDBg
+ +F6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770798888; x=1771403688;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:from:references:cc:to:subject:reply-to:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oBs4V6Zeg0KTcWMuh+yTMP84EbZtjwejhhkXxbVCQwE=;
+ b=kGb2puM1wXLzHuqipkhJqZxt50AAGRA5j4+p9h7froP0cJhbSPClJezWCWQYKB4BTR
+ 4ZT2ZGdxjqv0PndH0D1KAqprjlyZyY1n/DY34OrZWg0WmOtz59vrmec9f/dGzJvlhJWq
+ a3FVxOFS/vhDMYWDIY2tQYCoJO0bE1jRgVGqy3eeyhEne+oRopXz97Al+hO2pT5gO1gn
+ QRXteiLJQgyLKpYkyqO593PFKsIyAhRkA8n2/sTYcWNwqN5r/vDz6Eg1/jToNsHrkYE7
+ i17lxLDTZ0UQTVnxlCnofDoEF98sRpELpZ0H6LFcutgCrc0idX935ZiUTGhECNZb+6oD
+ FdqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWW4Pv7Jgqm0xPCTkofEWBGbUlDCQxg+xfWHqv4AmgxuRPLCKwbx5TACl3g4cxqLAEtLIvqyO4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLm2Srp7beq6xEvFwkd2cS2/T1IMBPgf6b/WdEL6hrCHYwGWoi
+ VLE2FR9iwqIN/D1gFHj+NQSXmjWAb+XAygZvGl3ICBIZT40uWGr3XVWO04T6YUscCnU=
+X-Gm-Gg: AZuq6aLVHIfCw/RsHiD9otUWjXERtUTyR//XU3TbAkxla47ATiamYok8iyxXXXNg6+j
+ vlaJQhN9eUm27eNjqNJkXjPFSxNt0uAaNV7v8fiOXsahnmN/8NY0Gyj4N5dpPMEOSd49FSKvE+n
+ 95HnzaxpsUqauWike/2ExpP5FQm0ty8YVDAwNW6mz/eZfuvYflbunvUrSsWxTApZ7I023e7nil2
+ C/gsbxfcitsTC/IaxyPFv/dKgazKCzZv7h5UMD2vTvlFQGtWQjdetaiq3ho6Ju29YCKIcEviMWj
+ Dd+CNUPqpVR4ac5qpPiOjfbrbgDH1UDu30LRuu5RdIAQi5A7+qleWs7DWyhPfaPnuuT3X4RidG9
+ 6u4vL3N1FaSleX39Lxqm2u4qEYOA+qlbqEbyuV1sdCUVKyglYT6KBrktI1aEiOvNeFzJiD4kkg9
+ kapXDNFrwT4tvyiqYvoLR7LunGUcXcIt4RnW/SxFK+zUdZi1JDuHs5IkLJrF2cC8Wjas13UtiiC
+ gneWg==
+X-Received: by 2002:a05:600c:46d2:b0:480:4a90:1b06 with SMTP id
+ 5b1f17b1804b1-4832022c31fmr250520435e9.34.1770798887664; 
+ Wed, 11 Feb 2026 00:34:47 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:106d:1080:8cb4:9578:dd36:7e01?
+ ([2a01:e0a:106d:1080:8cb4:9578:dd36:7e01])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4836131d52bsm1717515e9.28.2026.02.11.00.34.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Feb 2026 00:34:47 -0800 (PST)
+Message-ID: <50e4b2d0-82fa-4bb5-ab18-bef63e6907ec@linaro.org>
+Date: Wed, 11 Feb 2026 09:34:46 +0100
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=829; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=g+qtqwGaW+TTsELGqPiSv3WkPB5A68jqTnvAFTJQNBI=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWT22PHnvGrTcLOtrc5WfR0j07PEtnKaCLPpxaPVwVMT1
- y3JPprTUcrCIMbBICumyDKdScdhzbdrS8WWR+bDzGFlAhnCwMUpABMp/MjIsHr98Q9tQj9fvs2/
- tvLmlteSpxnss/uNmM89zz2/fsIkJz5GhnmnI/z5m5/obHG7rsyxxy1Eanr7WUntpUmPO3fsK5D
- cww4A
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F5:EE_|MN2PR12MB4392:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9051cb9c-71ba-4df8-2401-08de6947cf17
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QpDrGhLX9Qr+13OY9VclmOl5uWCZ4mQwTd+80fB8mqOY17XKj0oZvF0smmT0?=
- =?us-ascii?Q?qayBefb4y7ZmZuHp0ivJs1YDtwIQOCzEjqFnLPuIwvi6D7gy6rPYAVVltkPM?=
- =?us-ascii?Q?8KZMEUSeWUvcqXpT0qczFgzfN4t7ALZT+9ZFW1XCExWHRwwNPFei1rVOgq4t?=
- =?us-ascii?Q?PVZ+EODCqkBTx8mF5LuriGf1w5FS+pKcXfaaC5M+jYRPy7D5UVe9TlAjOmtJ?=
- =?us-ascii?Q?rzzywnb7IhPEElLRrOgcS0CbMOC2jLoG+93+f7eZQ+tt0R+KqiZZW9ijNqZo?=
- =?us-ascii?Q?gonvHgbwmzAadWkGnPbQVr9/k9/KniGb1oaMWIzVlDLn/rsIyRFP2eDmkidx?=
- =?us-ascii?Q?Vz3ywKHnZJ8DX2KWDc401MheScDtoCK0fiEcdt09WKzjpqaS4zoOsMViOsju?=
- =?us-ascii?Q?cpzTrJ9Dfnf4kdQrh6n4S1FkKQ/lEXDp5NAVzTctMiodDh4xZ8W5DWOeaIQ8?=
- =?us-ascii?Q?iUkbegO4bb5p5jlSbijm/65P4WMVPbRzZU2/Fg5LYxsPyfgrWIGECNAR8MB2?=
- =?us-ascii?Q?ofCtK6iw6pVHY6GDCjWKVNy/E7gUFTDwltyPw67E2S8LwAFm+WTsOM6z/473?=
- =?us-ascii?Q?hMKXH8/8fmnNwRg+8sJGAGdp1vhuvVZl87cBd5fp5iNT+HwGqTmndP48dROi?=
- =?us-ascii?Q?psdTbX4gmfV00HbmurI6Et74yKNEjnR6EQqf3K+vIAlfv+eLvwSy4+gPin1y?=
- =?us-ascii?Q?atQ9wuzYRHm8bCO7+Nn63DhJieQCGMzrdYcM0bBVDHlCvHexAMxzbXWifC2E?=
- =?us-ascii?Q?XG9YOfwUEL4Nu+YAMt6PhphypyShQ0qMlYJnu4SCjStJZIWMqclWOxVw6VDV?=
- =?us-ascii?Q?dd45iNZOYKNvbODupu7ma8QD7FglRnvEINqLK7JbS6P4mKnJN54cVeNyPj0U?=
- =?us-ascii?Q?yJ0USaVNEY5MlLX3CkkGlNd8RF0L7Spg6tKZJqbJ2c4Ng1A21XhHsyY4zpIB?=
- =?us-ascii?Q?DTRd9QqHeRDj7l+bGhsyDP/nd+pso8vEesEGDhJraKbgJ9BKs62pWJNvNerY?=
- =?us-ascii?Q?+yn8358LDTNzlSeUnDXc/GPRHIeonZeGcsfwj/Y5Cy6ZiviclqS0LRXssb7X?=
- =?us-ascii?Q?3k4sNEhDYAGf9kDC8aPgUPEm+DD76xAddEmTGxpZjyAGjWZJkpwf4e1Zbtck?=
- =?us-ascii?Q?CgSe5KqygOou2UtsLqx6AROpMsTKHVCXV2LOTuKpo0WgTaWhWoX1aE4AD6eE?=
- =?us-ascii?Q?3pCK4KrIvZ7g9+uTtbbmjYTf/ZOx44TdqIijIgPeZxrDZuhzUqjekQmyr8MR?=
- =?us-ascii?Q?Kr2OFV1HBs60kvLYcR1dhdjPXhbqudyCU1vPKxH8KRsdoPszDEs6fWo92pQ+?=
- =?us-ascii?Q?UACqccn6hF7gPVTjBqYYczqHrUt5EqivgxEKZmYXVWYsnzhgwCUlfuLUOg7u?=
- =?us-ascii?Q?VAfy9ngnydJuCC4+jno1+TO9mIlFxELQMx77mpYYp/qid1WenH7I6UsUgYou?=
- =?us-ascii?Q?KU+rJewlsmEUMlGf8+DoazEKPXyHL/xOWYOT+qo+WzKcTyX3ipzAK69COZiP?=
- =?us-ascii?Q?apGM1qSZ7AS4SBWExG9Z+ETWLx6wWfk0p/sgpjmSI9996dS6cG3QuKgeo6Dx?=
- =?us-ascii?Q?xDLPYnWOty8lz5QZMKNHkkTDO1DoRhZtLA4cP9uSS49qUwVoH674TYvzpe5n?=
- =?us-ascii?Q?Iq7xZaYxtEDTQgyaU6lNyf1Uo8ou398SdcJST9J7blWwRuecvCHT5OItGenE?=
- =?us-ascii?Q?9ZgNlw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: qfC6THsDcpzDdwBWgRrXV/0iN2MpL/bIsN6inZF306MUbzLP3ufONfHAhXrUoZYyOzNiUPhtDutDXHZd8/WxrNdzdCHv/eZbUesIAQCFtkxoK2+rL/QHLcYbl8z67i5EbjRRo4eHwrtacTdGMsVn3xJ77CzjcOQ++7bsDEoz7FR9lETZevsa6BxQd5MRHMdI4s/w6fne8fk10BnAwc11nYQXUMU/ibEVSYBS8seIbAlUz7pElc/P5fPLT81OO5WNwCnWVQE72fH3gpCWePCPbSV62tHKCXP6XSk1JMRvKwsC5UkCa8PkFCUJ8YzZVSD4eNH2BQuF8MJLC7vPisor7YwXJcZnLJneyd/cxGyL84f/AEsfNantHi4BYTMgBgpMY+4yEMgvn3WJhlX/4q6vegCkbIt9+YRiDzj0hCqNGEWHZjYuq0Z805oQcMxV2cmF
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 08:30:26.9847 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9051cb9c-71ba-4df8-2401-08de6947cf17
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F5.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4392
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 0/3] efi_vars: Implement SPI Flash storage for EFI
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Shantur Rathore <i@shantur.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)"
+ <paul.liu@linaro.org>
+References: <cover.1770119483.git.michal.simek@amd.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <cover.1770119483.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,35 +129,100 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no intention to use EFI on Microblaze V that's why disable it to
-save some space. Also it is indication that this feature is not
-tested/supported.
+On 2/3/26 12:51, Michal Simek wrote:
+> 
+> This is updated series based on v3 version sent here
+> https://lore.kernel.org/all/20231126220836.374956-1-i@shantur.com/
+> 
+> that's why I am continuing on v4 instead of starting from scratch.
+> 
+> Tested on kv260 with saving variables to location where User MTD partition
+> is.
+> CONFIG_EFI_VARIABLE_SF_STORE=y
+> CONFIG_EFI_RT_VOLATILE_STORE=y
+> CONFIG_EFI_VARIABLE_SF_OFFSET=0x22a0000
+> 
+> In Linux:
+> root@som:~# mount | grep efivars
+> none on /sys/firmware/efi/efivars type efivarfs (rw,relatime)
+> root@som:~# printf '\x07\x00\x00\x00Hello' \
+>    | sudo tee /sys/firmware/efi/efivars/TestVar-12345678-1234-1234-1234-123456789abc
+> Helloroot@som:~#
+> root@som:~# dd if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c \
+>         of=/tmp/vars skip=4 bs=1
+> 1352+0 records in
+> 1352+0 records out
+> 1352 bytes (1.4 kB, 1.3 KiB) copied, 0.380992 s, 3.5 kB/s
+> root@som:~# flashcp /tmp/vars /dev/mtd16
+> root@som:~# reboot
+> 
+> Reboot and then in U-Boot:
+> 
+> ZynqMP> pri -e
+> ...
+> TestVar:
+>      12345678-1234-1234-1234-123456789abc (12345678-1234-1234-1234-123456789abc)
+>      NV|BS|RT, DataSize = 0x5
+>      00000000: 48 65 6c 6c 6f                                   Hello
+> ...
+> 
+> Thanks,
+> Michal
+> 
+> Changes in v7:
+> - sed -i 's/efi_var_from/efi_var_from_storage/g'
+> - sed -i 's/efi_var_from/efi_var_from_storage/g'
+> 
+> Changes in v6:
+> - Return EFI_SUCCESS in efi_set_variable_int() when
+>    CONFIG_EFI_VARIABLE_NO_STORE is enabled
+> - sed -i 's/efi_var_read/efi_var_from/g'
+> - sed -i 's/efi_var_write/efi_var_to_storage/g'
+> - sed -i 's/efi_var_read/efi_var_from/g'
+> - sed -i 's/efi_var_write/efi_var_to_storage/g'
+> 
+> Changes in v5:
+> - Invert logic in efi_variable.c and avoid #if
+> 
+> Changes in v4:
+> - New patch based on review comments from v3
+> - Extend Kconfig description
+> - Extend commit message and describe efivar missing part
+> - use unify methods for reading/writing variable
+> 
+> Changes in v3:
+> - Fixed compiler warnings.
+> 
+> Changes in v2:
+> - Refactored efi_var_file to move common parts out as requested
+> - Changed ifdefs to use CONFIG_IS_DEFINED
+> - Fixed typos
+> 
+> Michal Simek (1):
+>    efi_var: Unify read/write access helper function
+> 
+> Shantur Rathore (2):
+>    efi_var_file: refactor to move buffer functions
+>    efi_vars: Implement SPI Flash store
+> 
+>   include/efi_variable.h          | 18 +++----
+>   lib/efi_loader/Kconfig          | 34 +++++++++++-
+>   lib/efi_loader/Makefile         |  3 +-
+>   lib/efi_loader/efi_var_common.c | 42 +++++++++++++++
+>   lib/efi_loader/efi_var_file.c   | 65 ++---------------------
+>   lib/efi_loader/efi_var_sf.c     | 92 +++++++++++++++++++++++++++++++++
+>   lib/efi_loader/efi_variable.c   | 19 ++++---
+>   7 files changed, 195 insertions(+), 78 deletions(-)
+>   create mode 100644 lib/efi_loader/efi_var_sf.c
+> 
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905D3-CC
 
- configs/xilinx_mbv32_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
-index 42dc5fb282ad..4ff3bd6b6875 100644
---- a/configs/xilinx_mbv32_defconfig
-+++ b/configs/xilinx_mbv32_defconfig
-@@ -19,6 +19,7 @@ CONFIG_TARGET_XILINX_MBV=y
- # CONFIG_RISCV_ISA_F is not set
- # CONFIG_SPL_SMP is not set
- CONFIG_REMAKE_ELF=y
-+# CONFIG_EFI_LOADER is not set
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x80200000
- CONFIG_DISTRO_DEFAULTS=y
--- 
-2.43.0
-
-base-commit: b247750b997e376ea377a685b69b2e7d025db0a1
-branch: debian-sent3
+Thanks,
+Neil
