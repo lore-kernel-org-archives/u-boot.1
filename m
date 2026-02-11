@@ -4,155 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C52FEB5954
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 09:36:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAEBDEB5954
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 09:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10CDD83A47;
-	Wed, 11 Feb 2026 10:36:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 40E8B831AC;
+	Wed, 11 Feb 2026 10:54:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JDIp64mU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XEsDPW9c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1067183A5A; Wed, 11 Feb 2026 10:36:15 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0163B8367F; Wed, 11 Feb 2026 10:54:04 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 988D982BF2
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 10:36:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C86082BF2
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 10:54:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raphael.gallais-pou@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wZWd0X2+iG4Nt6/GA7T4f04mganNEajunEVVXnFlj+c0T3s0tZA+MFLypImgdBUazA9dRlOhX1YuoeUQ6IswRu7fyF4SsHhBn57B+iXJhUuRXqBIJS/16o3H9CNiQVnwWwQz/qMEy+TrNMOcwOlE0foHMihgu7vHQoUrfVndMgvrZ0k5wU0goQ71YomnUep1IwwOJ0kLRNEHenyPv/U605WjrA0YaI8yIqCFAaJtOTD6z9SjapfVHzp+DQ9MvkDc0HL73zeAKEz0M/nmt/3vqKnFga9sRAbpBvivKqz8yU6QoD8/ILPkNCtTk25lwfJzVarIig3xycW6L3mdUGPxRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uLUzZBrI5RrU5qXk55pJ5VvAXcAWpQeRLQMTA84C5mk=;
- b=I2Is6vMfHGNIAjB953OyZ/mYMVlX0/9doIY0l0k/Qxde7DdzcDXSd5rQGpbmVQtvaLRf1aTmJvtdq1KqiEbvPwZ5+t1ombM4v0TwBvlx2nG1DbSXPtNnJ6ysBtH2RmIejMeLrQCFuUbjgBmibDwtB1hUWSQoz8fSPvo99/SZbbLbL1NTYeDjVNhr6pLitBJbEhncjEiWt5zg8AoOruaSfmOjvAnRXQGxVMOtEBq3ScfltXAhUL/5Ym5BImfcYphm5/lCrPPD2nMMCd66DoDz+wCmbhmmyamO9HO4KwwYMI6Fx6anteCHVyfWp8O2tKriWW30Q4MAujI6L0FJkIeGHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.59) smtp.rcpttodomain=bootlin.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uLUzZBrI5RrU5qXk55pJ5VvAXcAWpQeRLQMTA84C5mk=;
- b=JDIp64mUbI/Mz9QDIAzr987ickIH8ipVcPHPJU19h9HOpMGqljhle93quJNyTkfVu5LnpHi4qaq0MxEURXhEYXjC8Y69+WIPE7lnjzH8N5B8fB702f5EhM2zw+QGdtCZP4sm7n2XzR9AOWp8rGWc+vF/MGxcLUZNML72N4Bj6/Iq2ryI16hyc+1tFpDZDCncz1IZjl/N4O9lk0WQA5pKFpkFU7yqWfCW3jxt48DmtbheHv2SJm1+zHNAwcVrrYqNrcgUlS8e0X9t4ypf0N0hbW9mxkpVOzvYPvwmQOo6pMHhXHPJsiUCw5QlJVLSsdO8fl/49HMatFmi9Yo+uoXavA==
-Received: from AM9P193CA0021.EURP193.PROD.OUTLOOK.COM (2603:10a6:20b:21e::26)
- by VE1PR10MB3902.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:16d::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Wed, 11 Feb
- 2026 09:36:06 +0000
-Received: from AM1PEPF000252DF.eurprd07.prod.outlook.com
- (2603:10a6:20b:21e:cafe::9b) by AM9P193CA0021.outlook.office365.com
- (2603:10a6:20b:21e::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.8 via Frontend Transport; Wed,
- 11 Feb 2026 09:36:03 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.59; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.59) by
- AM1PEPF000252DF.mail.protection.outlook.com (10.167.16.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Wed, 11 Feb 2026 09:36:05 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
- (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 11 Feb
- 2026 10:37:56 +0100
-Received: from [10.130.75.212] (10.130.75.212) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 11 Feb
- 2026 10:36:04 +0100
-Message-ID: <2a664e58-82ef-4b27-971e-02d84bf7f398@foss.st.com>
-Date: Wed, 11 Feb 2026 10:35:54 +0100
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-79427f739b0so68452537b3.3
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 01:54:00 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770803639; cv=none;
+ d=google.com; s=arc-20240605;
+ b=OPWLCfS0d1TjOliCzfamJIZ8/gOF4UGatkNuOkR5s5e31Dozm2kSj+Pl44mAxbja3R
+ Uk8v7ZiQFVj3XWMjhaVzRzLBASJEqXOMKS5P66PWGcBHp8SqE2wbLNqyjp12KdytlabR
+ oH9aFuM3QTYzdeWyMhTYNjrDuE3v+bToMmRJbJDMFbbl3fGTk0E4UGWURvFpjKfWI1Eh
+ tGiQXrJdT6XLQK2q/dMaePj2iy7zRoaJPD4/VwfTFEHCt0vUaWj6pS7sYoeNe4R1f4RH
+ oSIXojH+m2wlfuOvdnL7+8hsrOqTKjDFWFAdkoYR1AAZNyjFprsqOJA/BdleRaA38Kej
+ KTBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=zxL/PgeogA0GrnLwk5BDJ2VHQloF9mBKs1O0ohkLwxI=;
+ fh=scYkI2pdHmhnl5JNcajeOeRDElDDCijDpN9lSr2JUsY=;
+ b=eatqWopvxh0uCOldt1V+czX0yhYDnyp39d8GkiSz1X8bRCP5ncLK334kZaDGwgZTKp
+ WBTzcURFli+i1gu7LbhZGGWjI/PH8E0U9p8Wmb1f7zkNpNs7/cnpIbU27bN+uRMpndzj
+ RNpR6/pAkCSJOHJd5ld6BwNvN+zRXpvQlTSIRt9jFqCD8jtAcjjFfVYaIhnBidmwjtQF
+ 2YfycXZ2Y72rDhz8IJZ+SfXvU+YIGJwyPBMzBKKJBOLrbc7Yz6Fo0sk2Z1sl2tZlUsSJ
+ JiWcxYQ1dX6F/g79A+dN3cLWJ6fx97Y27Ke9nep4gI5mXHxNPB0jTmfWSGNkgUt4pKUj
+ Nduw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770803639; x=1771408439; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zxL/PgeogA0GrnLwk5BDJ2VHQloF9mBKs1O0ohkLwxI=;
+ b=XEsDPW9cZhcsc0OVVjEs/QLglIe0v4IQbzzdmhMH1qgEW1Ay3HwRzHgqggGtR0REDR
+ wuZvJyAaUCySuXh6fzixY4MR8uhRffbvatWyrlsCM1t5gl6vSPmxoR+tDe/Zrrsz9rTp
+ mFzmPP/D9K5rCx7E4XJp5fXR5Hx1fdu0cct9uG33VpufFiw1DE9YWtENLwUNwGct+anl
+ k/ubIc7bIVyGLJliSesx9BHJqLwa211c4fkQUCEo9ZcVuMlkKXTumu7uk0ceMe3gr9yM
+ E9XA4vtVjEtpXjqTAcXjOFUNwehL1o6ihd3LWM+oG6jtRV6pd9q3wsgc/Fj4n5YAfh3T
+ 1KVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770803639; x=1771408439;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zxL/PgeogA0GrnLwk5BDJ2VHQloF9mBKs1O0ohkLwxI=;
+ b=aQTjU7Bgw+PrOr6sdgx8vPQEW5u64p9n36/yyQpkuyJE/+dz8P+1LJ8HoVUA9pH4h1
+ 3OAwxrzpvgDZPQ3hUP8Bps6/dj2qyGXD9nEPJpj071Bl9ALS/K2VS6IsyDF78KK7xTGt
+ 7MzE5rYKQt8NV6ygr1xPQqfjEUwGmwO9j6ujMpL80ZpY04N4TBM5r4z72XvpnLgmcsci
+ d9+r05cXjZWRwDHIN9kBBI0ocpbNZ+7LgsD6msLR0VtenVRBbY63nWDK9F3rVATAcGJr
+ msoESZ5KK69jsjkw5jUpPYiQUJPrVtPqaoY+dWKP8aPam4DA/3WoSU/OaSl3h3q4XaNt
+ QDug==
+X-Gm-Message-State: AOJu0Yz7ski7FufRgz0EnyMirqk9fnVK4FRa2W4GaWIhahgWhl1Z9oLf
+ K78E8uKTITxwhUCMCWA/7C4PtfeQrBuHlCmIEsMXRQqAyEo3bcayMd6OqqxRkGdlADqlz1VkNN+
+ 3ips0Rvti+Kz/LgXYat5ZZfGphc+xeA8aEwnqbG58vQ==
+X-Gm-Gg: AZuq6aIObG+9DyZC54hDO0VaqDkULcla64OJ/EtoUcZ244mI6un3jeL00Z7iEw3NU8s
+ 5lOC6eILrziniRie3+6LVmMmOXjeI3fEv26JssYa5I02r0uP8Wj4TSgtbCttdQ7RPoqvWMeyjxd
+ 0VATZaFEUBWv9lWhacgEPZcx9sQ2c2ZQFxhYIoS+gsabchxoM2r8XnA2IZUHP/ym0X+WnUSZO4r
+ hKlyeLoPO9RusVfhRHePmlsEVFWNmOndQM5jjPMw8M6s+4T4HmoB+2yRmjsGJUSNipdAhUcQwpd
+ mA1bue1u/10lapAmQwvJU5OUZhpQnpmlGvqNK35JhySSZmDEcTMbt6wwwTPRJ3RTR/W0gUbKtql
+ nyQ+W//fpwMfBSQuuhDmpy0aOkcck8IJJkFP3iUVJccME8M4JoG+hhV4LRxebVZ3hsP9PSB7q6s
+ w01ExDJwSfrilQCs8lNkA5gVER9sGto1eucMfINDfT6VspuLtsaVQcUJpOS+FqEyDPirZRT2fgs
+ +I5c30bGZmr8EEYqS4QLz7LG+aXf3SFVYobcnwS7t8g+I8jLnN1xJrs8tLAH1rrsJa3tGBVF9D7
+ z72ZWU+uH6vWHfbvPO6J2CguPIwsxwBPgnAp4k0eRa3Q2cgA8Ahbeek=
+X-Received: by 2002:a05:690c:39d:b0:78c:6854:2771 with SMTP id
+ 00721157ae682-7966be16315mr10765767b3.36.1770803639183; Wed, 11 Feb 2026
+ 01:53:59 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dm: core: Don't allow ofnode_to_fdt() to return NULL
-To: Romain Gantois <romain.gantois@bootlin.com>, <u-boot@lists.denx.de>
-CC: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Yannick Fertre
- <yannick.fertre@foss.st.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
-Content-Language: en-US
-From: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-In-Reply-To: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
+References: <cover.1770119483.git.michal.simek@amd.com>
+ <1f50d76c2370b9b032e73c35c05246cc70255b28.1770119483.git.michal.simek@amd.com>
+In-Reply-To: <1f50d76c2370b9b032e73c35c05246cc70255b28.1770119483.git.michal.simek@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Feb 2026 11:53:23 +0200
+X-Gm-Features: AZwV_QjrORbfJAPT3J2VZsOTOgRgNPrqi3sRRS4KGsvoXvrj7Nf5882qXseBC7g
+Message-ID: <CAC_iWjKxshi4fEtUvvrwGrd8quSUNeeuqjTV=gFrW4x6uXi55A@mail.gmail.com>
+Subject: Re: [PATCH v7 1/3] efi_var_file: refactor to move buffer functions
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, Shantur Rathore <i@shantur.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.130.75.212]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM1PEPF000252DF:EE_|VE1PR10MB3902:EE_
-X-MS-Office365-Filtering-Correlation-Id: ef56dfe1-cd1e-4939-9260-08de6950fa80
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SXBtempBOTBPbEpWQkx1N01mS0FJZFRUL1FIMmlYeE9heEpya3NNMlp6enJH?=
- =?utf-8?B?NlpyeHhuejNGTDduYXpiai9NbVhRZEZGZDY3RUhLeGpOSFUyVTU1ZFRrY3Rm?=
- =?utf-8?B?RGR5dXBoUFRvQWpKNE9xU1FpcEdhZllkL0Nad3Z4TVRSMVJpQlh6eVlaRSta?=
- =?utf-8?B?amw4Tit4UUlnMG1IZ2lMSi9nWE1wU01QU3QwYmYza0VNM0tybFhTNnlXODBh?=
- =?utf-8?B?amV2ZWVwZUw5blJEdjVvVlZteDVBQ0F6N2xwN1VrSzdlc0k2MUVKU2VRb3JY?=
- =?utf-8?B?d2w0Q1RIVGJEN25IWVZvdHlSaytSVFVSR1UwOXh0a3lQUlUwbXJkREZVRjI2?=
- =?utf-8?B?dGgwY1RmVGJIZlM2OTBqSlZEYW1WSWxLUzZLYzMyNHAwckl1bVZRdVBPeDlh?=
- =?utf-8?B?RVd5L083OHlsTnJpUzJCZVhkZmZzb1RsaUJkTGVFK2RKRTYwY2ttbFpaWHdQ?=
- =?utf-8?B?WmhYTVhTclFmVWRVa1lUVlFXRGF3TEl3bHpzZnhvVGt4MVJtakhabGN6ZWhW?=
- =?utf-8?B?VmFGUENRb3Y1R3RkcHJsVlRKM1NRQnFXb2h0ZW0rVmI1TER1MzF4VG1MNUxt?=
- =?utf-8?B?dTJtOFRlbFNySW83cDhENjMzZ2h0TGRRT3ZrNmF6QkpFc2FPc3VOdkUvWVlW?=
- =?utf-8?B?ait1WDA3a21zaTVkTTJkeXhqMk00c1JzSGd2UU1BeHNUcGhaMVhBWTZYQ0dZ?=
- =?utf-8?B?bW81VllCdUgxWkN5Nm1KV3I0SjUyY2NaRWszRnJEMWpzOERPL3B2cDRmbmc1?=
- =?utf-8?B?cDFDN09nQzBwZysxZzZQdENkYm1Ua1JQOGdiczc2YmdSdXB1OVZtVDBOM1VN?=
- =?utf-8?B?eWw2VWZNOFJha3RsU1ZOOXU3eVE0aXZVQlVoWFdOVFZGak9KWGM4R0dSM0o2?=
- =?utf-8?B?MWZ4ZlZvOEpMSkREKzRIZ1JwaS9waWRNay8vOVkxL3ZpMzRPMEJTZGdQRTVY?=
- =?utf-8?B?Ym5DaWxrTjdxMkhnSWtEaXBFRmdvUVF0MElBMXR4Sitzd2kwSE92cnhBSjFy?=
- =?utf-8?B?MExwdmtUTUttK1c1NDdIMFp6b0VzWHExZW5iZXFGa05xVWVOOXJnSWhBOG0z?=
- =?utf-8?B?OUVuN1diYU9kSE04SDlnQmxEdElXZlBsTjkrM1I3emsrZkUxbFJjQzhucmFJ?=
- =?utf-8?B?QU85eEZReW5EbHVDVUgvWHNFVmZoclF3K0tyd29uYzh2K0o5T00wSDNKRER2?=
- =?utf-8?B?c1FrWmF3NWVpaCtnVVdpbE5kTCs3OW9QZldNL3duYlNMU1lLTGd3NEovUTJt?=
- =?utf-8?B?SG9oWXFjcTdsamZFZkVya0J0VVRGWVlnTUM1Wit1Mm9VYlBQMGdnVEFKdDQz?=
- =?utf-8?B?Y0VyRnpUNTJEZzFMcFZhdTV1ZnRGTVZvNDE2NENQaXlvQUtLVVdsK1RPQ0RI?=
- =?utf-8?B?dW1FaUR0aHp1dnpraHNsZ3BIdWxGcDJ6RERxSXhIV09mR1h3SmZQYURybGhV?=
- =?utf-8?B?cGIwYnl2WWNab1R4d0U1QkN0cEM5SExBZnBndnU1MlcxbnlIT0dCeDhEd0pO?=
- =?utf-8?B?OXo5VlJIKzZteWhYT2RDZUZ3YnRIN0hlZk5pWldnVGhudlVzLy9BRDY0SEpr?=
- =?utf-8?B?eFFhMnEyYjUvMzJMTzh3WDhaREVIRXZndk55bGEzMmZpUmM2L3J2ZlBiK1NP?=
- =?utf-8?B?VzJGbEZaL0RiazJUUEpIRkxYb0JBbHkrR1dBdm43djB6WFpadXZhV3V5T3ln?=
- =?utf-8?B?RERjYkRMM25sMnFsV1dwU1ZOSkdCdEpSSk5laG1JNkxzVklXUXl4UFMvdkI0?=
- =?utf-8?B?Y052Vkc5L3EyNWM4Ty9YYmw4LzVCQWxSVWdGcnpRS0hmbnllRktoM3JwMXE3?=
- =?utf-8?B?eDhlTFBEc3dUODdnd1pvbmhhZmVXdkZPYU1CSGc1MlZ1NHBYQlNZK29qaXFL?=
- =?utf-8?B?aWV0UTBIZkEwaTJnR2lXV2Vmb2NmekhBczdybjJYbDJ1dlZGTVg4N2UydDJt?=
- =?utf-8?B?Vmp3NzRoOXBiblFtZmtrcmtUSHEzbkRiaDR6U08vYkdTYW5WUWh4RytSVFpG?=
- =?utf-8?B?NGYrSnp6K3ZRdzhmMVlLaDZ2VFNNSFBVQkkwcHVweHVydFVabkRqZklOM2VU?=
- =?utf-8?B?K012UHp3Mml3ZG1WK1g2TmtmS3FSR3JoOUo2aTdBSEFiOGcvZENxdW5PY2NR?=
- =?utf-8?B?ZFdBUlZHZ0FTM0ZadTlNeWZGU1N5RnRKYVhUTzlDRm5FOUgydFUvZXVqRERC?=
- =?utf-8?B?bnNKd2x6SGphbHFJVGdZMTJkNE9sdHhTZ09scDN2clRRYkFIQnFsakNNT0Zp?=
- =?utf-8?B?TkpzRU1jL3YrdVVVaTJRSWFtL0RBPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 2IWqWbQrV95nYE/rE/LU50193W0fnaXjjgslFzfCSXeBaQQTIbReZsyUG3M4hjATKS74YFrMb1YYMydKRmv/FH3DW4zi3qPNJA5B6+wF3S3m0lME+N1zpfvt4XqRSKwN/30Qok2iLefQScMSef90SWcEF+0As3C8kHETfUUc7SHDlVRu9HWyF6t7g55bxKZuHiRgJCYN5rVKIG5xNvsL2vwXUvxHok5EitAYwjmYhe479zZFLuiXcPi2M0xayQ22SNfwnVFuHWeiSyfPXHGZUk40Rbidop65BYClsnwgRShbdE58LZECwaNe0C10S+ZecqpRzW1DYb/hwvHTjSKFJ1iUQeb9pkLxyet6pdrKHRtG/Lvr9e5go8lNLAHlqgxe/ETfUbCiFmr4IeJvjwBLEdqyrWz81HI4CjHTeZs4iBeQrDAyhnrFoWH6gJgK5vRR
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 09:36:05.3330 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ef56dfe1-cd1e-4939-9260-08de6950fa80
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AM1PEPF000252DF.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR10MB3902
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,62 +119,270 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Michael
+
+The CI seems to fail on this one for some reason.
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29248
+
+Can you take a look ?
+
+Thanks
+/Ilias
 
 
-On 2/10/26 17:29, Romain Gantois wrote:
-> The ofnode_to_fdt() function may return a NULL pointer in multiple cases.
-> Or, this function's return value is often passed directly to functions such
-> as fdt_getprop() which end up dereferencing it, thus causing a NULL pointer
-> exception.
+
+
+On Tue, 3 Feb 2026 at 13:51, Michal Simek <michal.simek@amd.com> wrote:
 >
-> Don't allow ofnode_to_fdt() to return NULL, to avoid a NULL pointer
-> dereference.
+> From: Shantur Rathore <i@shantur.com>
 >
-> Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
+> Currently efi_var_file.c has functions to store/read
+> EFI variables to/from memory buffer. These functions
+> can be used with other EFI variable stores so move
+> them out to efi_var_common.c
+>
+> Signed-off-by: Shantur Rathore <i@shantur.com>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
-
-Hi Romain, 
-
-Reviewed-by: Raphaël Gallais-Pou <raphael.gallais-pou@foss.st.com> 
-
-Best regards,
-Raphaël
->  drivers/core/ofnode.c | 13 +++++++++----
->  1 file changed, 9 insertions(+), 4 deletions(-)
 >
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index cf1cf8abfbe..af24a2c533c 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -164,15 +164,20 @@ void *ofnode_lookup_fdt(ofnode node)
->  
->  void *ofnode_to_fdt(ofnode node)
->  {
-> +	void *fdt;
+> (no changes since v6)
+>
+> Changes in v6:
+> - Return EFI_SUCCESS in efi_set_variable_int() when
+>   CONFIG_EFI_VARIABLE_NO_STORE is enabled
+>
+> Changes in v5:
+> - Invert logic in efi_variable.c and avoid #if
+>
+>  include/efi_variable.h          |  5 +++
+>  lib/efi_loader/Makefile         |  2 +-
+>  lib/efi_loader/efi_var_common.c | 42 ++++++++++++++++++++++++
+>  lib/efi_loader/efi_var_file.c   | 57 ---------------------------------
+>  lib/efi_loader/efi_variable.c   | 17 +++++++---
+>  5 files changed, 60 insertions(+), 63 deletions(-)
+>
+> diff --git a/include/efi_variable.h b/include/efi_variable.h
+> index 4065cf45ecaf..ee68fa4a885f 100644
+> --- a/include/efi_variable.h
+> +++ b/include/efi_variable.h
+> @@ -161,6 +161,11 @@ efi_status_t efi_var_to_file(void);
+>  efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
+>                                             u32 check_attr_mask);
+>
+> +/* GUID used by Shim to store the MOK database */
+> +#define SHIM_LOCK_GUID \
+> +       EFI_GUID(0x605dab50, 0xe046, 0x4300, \
+> +                0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23)
 > +
->  #ifdef OF_CHECKS
->  	if (of_live_active())
-> -		return NULL;
-> +		panic("%s called with live tree in use!\n", __func__);
->  #endif
->  	if (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) && ofnode_valid(node))
-> -		return ofnode_lookup_fdt(node);
-> +		fdt = ofnode_lookup_fdt(node);
-> +	else
-> +		fdt = gd->fdt_blob;
-> +
-> +	assert(fdt);
->  
-> -	/* Use the control FDT by default */
-> -	return (void *)gd->fdt_blob;
-> +	return fdt;
->  }
->  
 >  /**
+>   * efi_var_restore() - restore EFI variables from buffer
+>   *
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index f490081f6542..ca1775eb03be 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -53,7 +53,7 @@ ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
+>  obj-y += efi_variable_tee.o
+>  else
+>  obj-y += efi_variable.o
+> -obj-y += efi_var_file.o
+> +obj-$(CONFIG_EFI_VARIABLE_FILE_STORE) += efi_var_file.o
+>  obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
+>  endif
+>  obj-y += efi_watchdog.o
+> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+> index 4b34a58b4cf7..5ea1688dca3d 100644
+> --- a/lib/efi_loader/efi_var_common.c
+> +++ b/lib/efi_loader/efi_var_common.c
+> @@ -41,6 +41,7 @@ static const struct efi_auth_var_name_type name_type[] = {
 >
-> ---
-> base-commit: b99da05e1538b8fa153322da82917af2aa27e1d6
-> change-id: 20260210-ofnode-to-fdt-null-95a9f357819e
+>  static bool efi_secure_boot;
+>  static enum efi_secure_mode efi_secure_mode;
+> +static const efi_guid_t shim_lock_guid = SHIM_LOCK_GUID;
 >
-> Best regards,
-
+>  /**
+>   * efi_efi_get_variable() - retrieve value of a UEFI variable
+> @@ -488,3 +489,44 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
+>
+>         return EFI_SUCCESS;
+>  }
+> +
+> +efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+> +{
+> +       struct efi_var_entry *var, *last_var;
+> +       u16 *data;
+> +       efi_status_t ret;
+> +
+> +       if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
+> +           buf->crc32 != crc32(0, (u8 *)buf->var,
+> +                               buf->length - sizeof(struct efi_var_file))) {
+> +               log_err("Invalid EFI variables file\n");
+> +               return EFI_INVALID_PARAMETER;
+> +       }
+> +
+> +       last_var = (struct efi_var_entry *)((u8 *)buf + buf->length);
+> +       for (var = buf->var; var < last_var;
+> +            var = (struct efi_var_entry *)ALIGN((uintptr_t)data + var->length, 8)) {
+> +               data = var->name + u16_strlen(var->name) + 1;
+> +
+> +               /*
+> +                * Secure boot related and volatile variables shall only be
+> +                * restored from U-Boot's preseed.
+> +                */
+> +               if (!safe &&
+> +                   (efi_auth_var_get_type(var->name, &var->guid) !=
+> +                    EFI_AUTH_VAR_NONE ||
+> +                    !guidcmp(&var->guid, &shim_lock_guid) ||
+> +                    !(var->attr & EFI_VARIABLE_NON_VOLATILE)))
+> +                       continue;
+> +               if (!var->length)
+> +                       continue;
+> +               if (efi_var_mem_find(&var->guid, var->name, NULL))
+> +                       continue;
+> +               ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
+> +                                     var->length, data, 0, NULL,
+> +                                     var->time);
+> +               if (ret != EFI_SUCCESS)
+> +                       log_err("Failed to set EFI variable %ls\n", var->name);
+> +       }
+> +       return EFI_SUCCESS;
+> +}
+> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+> index ba0bf33ffbd1..d32edaac277d 100644
+> --- a/lib/efi_loader/efi_var_file.c
+> +++ b/lib/efi_loader/efi_var_file.c
+> @@ -14,17 +14,9 @@
+>  #include <mapmem.h>
+>  #include <efi_loader.h>
+>  #include <efi_variable.h>
+> -#include <u-boot/crc.h>
+>
+>  #define PART_STR_LEN 10
+>
+> -/* GUID used by Shim to store the MOK database */
+> -#define SHIM_LOCK_GUID \
+> -       EFI_GUID(0x605dab50, 0xe046, 0x4300, \
+> -                0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23)
+> -
+> -static const efi_guid_t shim_lock_guid = SHIM_LOCK_GUID;
+> -
+>  /**
+>   * efi_set_blk_dev_to_system_partition() - select EFI system partition
+>   *
+> @@ -59,7 +51,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
+>   */
+>  efi_status_t efi_var_to_file(void)
+>  {
+> -#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>         efi_status_t ret;
+>         struct efi_var_file *buf;
+>         loff_t len;
+> @@ -91,52 +82,6 @@ error:
+>  out:
+>         free(buf);
+>         return ret;
+> -#else
+> -       return EFI_SUCCESS;
+> -#endif
+> -}
+> -
+> -efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+> -{
+> -       struct efi_var_entry *var, *last_var;
+> -       u16 *data;
+> -       efi_status_t ret;
+> -
+> -       if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
+> -           buf->crc32 != crc32(0, (u8 *)buf->var,
+> -                               buf->length - sizeof(struct efi_var_file))) {
+> -               log_err("Invalid EFI variables file\n");
+> -               return EFI_INVALID_PARAMETER;
+> -       }
+> -
+> -       last_var = (struct efi_var_entry *)((u8 *)buf + buf->length);
+> -       for (var = buf->var; var < last_var;
+> -            var = (struct efi_var_entry *)
+> -                  ALIGN((uintptr_t)data + var->length, 8)) {
+> -
+> -               data = var->name + u16_strlen(var->name) + 1;
+> -
+> -               /*
+> -                * Secure boot related and volatile variables shall only be
+> -                * restored from U-Boot's preseed.
+> -                */
+> -               if (!safe &&
+> -                   (efi_auth_var_get_type(var->name, &var->guid) !=
+> -                    EFI_AUTH_VAR_NONE ||
+> -                    !guidcmp(&var->guid, &shim_lock_guid) ||
+> -                    !(var->attr & EFI_VARIABLE_NON_VOLATILE)))
+> -                       continue;
+> -               if (!var->length)
+> -                       continue;
+> -               if (efi_var_mem_find(&var->guid, var->name, NULL))
+> -                       continue;
+> -               ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
+> -                                     var->length, data, 0, NULL,
+> -                                     var->time);
+> -               if (ret != EFI_SUCCESS)
+> -                       log_err("Failed to set EFI variable %ls\n", var->name);
+> -       }
+> -       return EFI_SUCCESS;
+>  }
+>
+>  /**
+> @@ -155,7 +100,6 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+>   */
+>  efi_status_t efi_var_from_file(void)
+>  {
+> -#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>         struct efi_var_file *buf;
+>         loff_t len;
+>         efi_status_t ret;
+> @@ -180,6 +124,5 @@ efi_status_t efi_var_from_file(void)
+>                 log_err("Invalid EFI variables file\n");
+>  error:
+>         free(buf);
+> -#endif
+>         return EFI_SUCCESS;
+>  }
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> index f3533f4def3a..6e45134c61bf 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -397,11 +397,15 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>                 ret = EFI_SUCCESS;
+>
+>         /*
+> -        * Write non-volatile EFI variables to file
+> +        * Write non-volatile EFI variables
+>          * TODO: check if a value change has occured to avoid superfluous writes
+>          */
+> -       if (attributes & EFI_VARIABLE_NON_VOLATILE)
+> +       if (attributes & EFI_VARIABLE_NON_VOLATILE) {
+> +               if (IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE))
+> +                       return EFI_SUCCESS;
+> +
+>                 efi_var_to_file();
+> +       }
+>
+>         return EFI_SUCCESS;
+>  }
+> @@ -594,9 +598,12 @@ efi_status_t efi_init_variables(void)
+>         if (ret != EFI_SUCCESS)
+>                 return ret;
+>
+> -       ret = efi_var_from_file();
+> -       if (ret != EFI_SUCCESS)
+> -               return ret;
+> +       if (!IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE)) {
+> +               ret = efi_var_from_file();
+> +               if (ret != EFI_SUCCESS)
+> +                       return ret;
+> +       }
+> +
+>         if (IS_ENABLED(CONFIG_EFI_VARIABLES_PRESEED)) {
+>                 ret = efi_var_restore((struct efi_var_file *)
+>                                       __efi_var_file_begin, true);
+> --
+> 2.43.0
+>
