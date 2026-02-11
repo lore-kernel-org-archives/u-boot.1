@@ -4,106 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 189BDEA3F27
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 09:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B954EEA8125
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 10:05:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ED4F831AC;
-	Wed, 11 Feb 2026 10:56:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B70482BF2;
+	Wed, 11 Feb 2026 11:05:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="R7+0kKwe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n47JIRGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8117783CB5; Wed, 11 Feb 2026 10:56:35 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 48E98831AC; Wed, 11 Feb 2026 11:05:31 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D95682BF2
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 10:56:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0F6253F787
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 09:56:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1770803793;
- bh=oXxpFpMMb5OEfhft452/BjzbNTYXSDYM+gQtVCWK0Bs=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=R7+0kKwePn/tiZl0N8Rfvc4GvnfUuEI2K51QImRGtZATghgCjc6xFbDoGJltqS4hg
- olTQwZE0YCh28rYbkfTlme9pEa3HUoTARumcyQs07KybsUoOplxWDgaJPPfKs3em0y
- 9VK/X7vFZ4V8Ic1vnET/rTDzIsSyhB1HB0+j0/qCnLdGl1PFu6zY/EFmUEAqvQi4pU
- +4R+KoSoNZXd4go4f9t8TRi2S5AJlisHUoLifq2d2OBvXKX5P0giFraAMzfuy52Cy9
- WZU+MpY+HFObpRlroM7JaGk0noJKmltUc6PJeszOmAGcxRyiXX37RKj6jQjAEcLLgT
- zNAybMhMeO6Eav5fTpuNYNkZEyel25ijNzGHKCSWTJqpAcMb4UT4yo1Xg/IH4d+5zG
- V0vJux4LFymeP7lQ7E9yWKKLj6UIXFiOYQwCTUGjrB7aMXIYmkgkFwt/V7rHmb39Ll
- lfCqgrMkImuKxsbwxIbywGEDQwYRMi2Hb/6ri75X8St/zHISaRvii9XhENQotRiDgz
- oe66/hRSUhxtwmwXcBeKJqU6juY7QJio+wclNLJXH7Ejbb1W30swsJFe64tyPNtC+H
- egmbZdbNmibgNDJEd38AuY9Di4XcEFIQGDYITZ+F3aWGmtEBoIscpA0NJxLVlhbTGw
- MzBwqyleopt2nrJDSeOtz4No=
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4832c4621c2so44105365e9.3
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 01:56:33 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id DAABF80FA1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 11:05:27 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-480706554beso54468905e9.1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 02:05:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770804327; x=1771409127; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZBVuDKbepp3JxlBBSpekSxOwHXTFdjK+VqATUCE+ULk=;
+ b=n47JIRGijDLekaLByIwT2DULVi4uqej1/7HQhcpTMMHZKNrgZzS9dokINoTE9jCCbR
+ cvCVsDbhFrLt1oH8QETuVN0T0vvKmtxpUgY6Jb5ld7dmjj3A97FzMaRT5gccV4iAvDDn
+ /PQLN1WlCnnPH2uYHzVBMtzyWxGMmrYWGetCBDbysWb4CTEP5+uBmFoL20PQXEK0gBnd
+ 9p4bIdhTynnm7HgQkTZp+4NAl/nPIvm2+wVq43mXN1jbKtmEsa40V1fvsF0rbCaPHAOd
+ S6rhWVA9BT/XmWH1gNr9U0rDEgeml+BasnEREeg2IX0WAlI09+S8kk5o0Dq8Flv2lL5E
+ CZwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770803792; x=1771408592;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oXxpFpMMb5OEfhft452/BjzbNTYXSDYM+gQtVCWK0Bs=;
- b=AsN5gy6kINVRqphk9FcKDOBnWw82iseyX1BrwE0DmwkhNf4JmAvTMQWPcQSki4KMNY
- jHjTUbWHIo/zo6HPHpZZwh//+GdE7hPR6a0TYsZYjXrPtCPNRv9vrblQvbuUrT2hLsCw
- m0q2xw1YbrKO1DK5AQR8bl6YcuKNKXa/2+18lSTJwi1tKkYsYY6DRLYdIVgMl9qbu+nI
- 8GlJZAxQPyMjK9xKZ8PRPKsx5jIfOQpU3cw9KQp/ZJ1y8YFHhSxb8aTgRPVglmLgWvZy
- lHTb8Afj4ydLpeW3goNBV7+A03MwnGkKfSgxJPacxHbHIxeKLleIm6uW4mL2TaNzAF+Q
- zWRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6+ErdKr+3jLEAVqk5YYgHevQEqFOyrAYCLV+nOOf9/mXUR07J9A+JR0KpeI24KrgdoA75AY0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEPCEKU0lrHHwlHPqucCXxCLxemwjKP2KoWB0f85vSucmNwd2f
- 4mlE+iPnVb26AT+1c+YKRSMkso92D2KTFQ4/RxhMRQM6ZKpC5yYgDMd5aIlnmF/u6iPEYK6guqc
- ItOI0ROTE2swNXLA0e0us1rQSrwzNJBg2YkB2A2WptWryiztAwDZwyybQGwFz3H51FYcgcIY=
-X-Gm-Gg: AZuq6aJHSMJasxsTATs8QM7Qp6kgaVaaRz8r91EXs72J2o5rnFQwjwRHrfE3dK/dz+Q
- Wa/ryihLYQhpe5lFfpm5JXejXnSsdoPtIR3dmWs/3A3zkS8fxuJo2OicK0zrjkcwwNj15kAMDIx
- X7olwQxUY0elkfAB+aKyIngai6E/n79uE+VHcbMiiwxjf34f312kjVVmgGP8giktXkjPicusd9a
- k9fP7jumJvdBVOzxVbJC0rHeG1vncGphtJ1Q/tS7svPpL3vWNNUsXxMFrhhOVdGmV3VsziFj2j3
- qWeJu93DxJpuAh7QqxfyhleAkTCfyvSL4sROc9c+JasdYWruQs0p1S/LiLawxL35bITARO9iag9
- Q1eAlPhfCYuGonzioBtIdiSZ3AguDK2S4oEfxHbiNcXdqa97XehUt3/z/9ub8tj2Uwwx2lA5vR1
- HV4A==
-X-Received: by 2002:a05:600c:4e13:b0:479:1ac2:f9b8 with SMTP id
- 5b1f17b1804b1-4835081ed39mr81056115e9.21.1770803792580; 
- Wed, 11 Feb 2026 01:56:32 -0800 (PST)
-X-Received: by 2002:a05:600c:4e13:b0:479:1ac2:f9b8 with SMTP id
- 5b1f17b1804b1-4835081ed39mr81055665e9.21.1770803792176; 
- Wed, 11 Feb 2026 01:56:32 -0800 (PST)
-Received: from [192.168.103.128]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d5e0ed5sm110952025e9.5.2026.02.11.01.56.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Feb 2026 01:56:31 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <a386de9e-1dc9-4b50-a86c-bb8dfd845eef@gmx.de>
-Date: Wed, 11 Feb 2026 10:56:30 +0100
+ d=1e100.net; s=20230601; t=1770804327; x=1771409127;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZBVuDKbepp3JxlBBSpekSxOwHXTFdjK+VqATUCE+ULk=;
+ b=ARmrbRLpk2jcP0HOY3wfw4+1woYmOBplKigBfpYT1LjRc5KxA1ea6aPJ2YBnoWIevD
+ eLJ3lTF+CzEmomX4NsWUBasbo+YUP4TJRvu4bs643fQk9g36Rk/3KNFYc5OIOcRzlMke
+ UkFCCPMxqEjKfeTzUeCUBBVx3S99rvRDfK12DwrQfTw3Q3o0rwel/bA7JRNNVfRTaMaj
+ TPZXmJee7w2Xh5105caRcThzRfbTH4F2L/UtZasIA56cd04x5HOs6ovrY8vTtYGRkS3S
+ a1JEmCrvzM/asNrc3Bi+DK0+uFHiRBJ47bgZXhVLJYMGvgxEQY+0RKbkrRMhv6eTmhQi
+ KaOg==
+X-Gm-Message-State: AOJu0YyP1m3o9T0WsGbSAkfrycFzOPir1buQWtVxR38BlrdT/IQ53GXi
+ CemxZJ5FYwn5+g530pye2YAC5KbQaJfYcXBTmkOL4I9L1mTSmYr3gnE8+Q+r5RRbvfuV9af6vAs
+ fHHMcmfs=
+X-Gm-Gg: AZuq6aIl7WP8rfPXIrOJlCcPNFetYeznUL3L3YisdabzV4lHYx4GCu6ZzsULC8WM1DP
+ yEoUqh3xARsJVdK8504fPUGiZKoKBgL049sNKJV9tV/0C5dxGF2YhKfmbFk+JqK9kSMpgzUtoeV
+ JdJnitKgxuathyvVqBhBgYwbnH/wW+HqzQzq27P2KwUsD4dDl+9n4WNTXfd9PC1YBcdVByYFcF4
+ /Z+/70FXVrAYQIL41yo3WudDbK1gP536NwM9TuvA74XUVH3STvoYcHUJBl6HtV5yhSENBKw7xlz
+ d7YexTaRGI2TwjxpygIqdIEdDhepbf9Me2iUtU4swLl3nZJCSKw9gr+CRlTmOCOWZosdezjMmxS
+ DnW8JdaWIPPbBYerTdy14UqQOU27y62Z6wdh7sXH5cs9JAcZHF4QEsSmMapI+HnRHHm9HfCp2J3
+ Z6199E0U+h2SG5d6PI4DDAV5h7zwXpWrpL5MVoOqokqEqHY8JOfLo0d5ZULbWOlw/KUHw5Z82BK
+ PbhtAQlv0wUTCzs1ottGTuV7DJy5WmjrHcuXpPhj8L0O1NUoMIPpF6S4vHdXCSadhel2e9mgzKG
+ WPsZ7VfPha3zTYm3MvrkM6m48TLK47ndyH3uzT7fz2ooTXrOTJn0ywPz3FuIrGDYBL6AaAaD2gv
+ 8fuPPTSxQcWDwCweUu0irNXNomS5zsKxSqigTgZ4dn1++OgtijU7dOI9lrXPdCqP3IUoFxqBp8M
+ IPCcqpdCUBwP2gVUXgsl78FIMN6Ptgyw7Wf5rDSJJF9r16Swq8TLiOIcr+dpXo
+X-Received: by 2002:a05:600c:820a:b0:47d:264e:b35a with SMTP id
+ 5b1f17b1804b1-4835b90c74cmr30514665e9.13.1770804327092; 
+ Wed, 11 Feb 2026 02:05:27 -0800 (PST)
+Received: from hera ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4834d5ebd34sm128153865e9.7.2026.02.11.02.05.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Feb 2026 02:05:26 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: ilias.apalodimas@linaro.org,
+	hs@nabladev.com
+Subject: Pull request for tpm-master-11022026
+Date: Wed, 11 Feb 2026 12:05:16 +0200
+Message-ID: <20260211100516.63099-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: fix ecpt size computation
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, Jose Marinho <jose.marinho@arm.com>,
- u-boot@lists.denx.de
-References: <20260211093308.3265022-1-vincent.stehle@arm.com>
-Content-Language: en-US
-In-Reply-To: <20260211093308.3265022-1-vincent.stehle@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -121,94 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/11/26 10:33, Vincent Stehlé wrote:
-> The size of the memory allocated for the EFI Conformance Profiles Table is
-> computed with `num_entries' always equal to zero, which is incorrect when
-> CONFIG_EFI_EBBR_2_1_CONFORMANCE is enabled.
-> 
-> This can be verified by allocating the ECPT memory with malloc() instead of
-> efi_allocate_pool(), building u-boot with sandbox_defconfig and
-> CONFIG_VALGRIND=y, and by finally running the following command:
-> 
->    valgrind --suppressions=scripts/u-boot.supp \
->      ./u-boot -T -c 'efidebug tables'
-> 
-> Fix this by using an array of the supported profiles GUIDs instead, which
-> should also be easier to extend in the future.
+Hi Tom,
 
-Thank you Vincent for this patch.
+A small update from Heiko on SM3 support. We want this in -master
 
-Maybe mention in the commit message that U-Boot should publish all 
-supported EBBR revisions.
+The following changes since commit 712765339a5c6576fdd5683748f97a1215868d5d:
 
-> 
-> Fixes: 6b92c1735205 ("efi: Create ECPT table")
-> Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Jose Marinho <jose.marinho@arm.com>
-> ---
->   lib/efi_loader/efi_conformance.c | 18 +++++++++---------
->   1 file changed, 9 insertions(+), 9 deletions(-)
-> 
-> diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_conformance.c
-> index 2bae93a94bd..9768b5ae824 100644
-> --- a/lib/efi_loader/efi_conformance.c
-> +++ b/lib/efi_loader/efi_conformance.c
-> @@ -13,8 +13,12 @@
->   #include <malloc.h>
->   
->   static const efi_guid_t efi_ecpt_guid = EFI_CONFORMANCE_PROFILES_TABLE_GUID;
-> -static const efi_guid_t efi_ebbr_2_1_guid =
-> -	EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID;
-> +
-> +static const efi_guid_t profiles[] = {
+  Merge patch series "Update DDR Configurations" (2026-02-10 12:57:02 -0600)
 
-As profiles[] is not used outside efi_ecpt_register(), there is no need 
-to make it a static variable.
+are available in the Git repository at:
 
-Otherwise looks good to me.
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-11022026
 
-Best regards
+for you to fetch changes up to 1e79d9c763cf666e146f30ebd45cb486c913122d:
 
-Heinrich
+  doc: cmd: add documentation for sm3sum (2026-02-11 11:13:47 +0200)
 
+The CI https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29250
+seems fine
 
-> +#if CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE)
-> +	EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
-> +#endif
-> +};
->   
->   /**
->    * efi_ecpt_register() - Install the ECPT system table.
-> @@ -23,12 +27,11 @@ static const efi_guid_t efi_ebbr_2_1_guid =
->    */
->   efi_status_t efi_ecpt_register(void)
->   {
-> -	u16 num_entries = 0;
->   	struct efi_conformance_profiles_table *ecpt;
->   	efi_status_t ret;
->   	size_t ecpt_size;
->   
-> -	ecpt_size = num_entries * sizeof(efi_guid_t)
-> +	ecpt_size = sizeof(profiles)
->   		+ sizeof(struct efi_conformance_profiles_table);
->   	ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, ecpt_size,
->   				(void **)&ecpt);
-> @@ -39,12 +42,9 @@ efi_status_t efi_ecpt_register(void)
->   		return ret;
->   	}
->   
-> -	if (CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE))
-> -		guidcpy(&ecpt->conformance_profiles[num_entries++],
-> -			&efi_ebbr_2_1_guid);
-> -
-> +	memcpy(ecpt->conformance_profiles, profiles, sizeof(profiles));
->   	ecpt->version = EFI_CONFORMANCE_PROFILES_TABLE_VERSION;
-> -	ecpt->number_of_profiles = num_entries;
-> +	ecpt->number_of_profiles = ARRAY_SIZE(profiles);
->   
->   	/* Install the ECPT in the system configuration table. */
->   	ret = efi_install_configuration_table(&efi_ecpt_guid, (void *)ecpt);
+Please pull
+/Ilias
 
+----------------------------------------------------------------
+A coverity fix and documentation update from Heiko on SM3 support
+
+----------------------------------------------------------------
+Heiko Schocher (2):
+      lib: sm3: fix coverity error
+      doc: cmd: add documentation for sm3sum
+
+ doc/usage/cmd/sm3sum.rst | 112 +++++++++++++++++++++++++++++++++++++++++++++++
+ lib/sm3.c                |   2 +-
+ 2 files changed, 113 insertions(+), 1 deletion(-)
+ create mode 100644 doc/usage/cmd/sm3sum.rst
