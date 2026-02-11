@@ -4,86 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BA1EB5967
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 05:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6B5EB5967
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 06:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E59383B72;
-	Wed, 11 Feb 2026 06:22:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 96FE083A47;
+	Wed, 11 Feb 2026 07:23:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="efPowO2q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZpuIZJXL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 782F883BF4; Wed, 11 Feb 2026 03:14:24 +0100 (CET)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 0A99283A5A; Wed, 11 Feb 2026 07:23:45 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 254FA83A47
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 03:14:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCEC782BF2
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 07:23:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-662efd1bdd4so279793eaf.0
- for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 18:14:22 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-7963aa14dbbso8974927b3.1
+ for <u-boot@lists.denx.de>; Tue, 10 Feb 2026 22:23:41 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770791020; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Q/3sSK8VEwfDdlDzc6ZIFSIQncJ8Q87/ebTpEsgLOMlWCZoHyvdSCC6/mN0DCcXMTE
+ NJ2A4aVpl2Iujk+7udwQDq6/alXXGD7A5kEVOl0B+ca1XF5HVaTCUpdMitjAYDpqI5o4
+ upO6ivvAyyr2sa1T9Azt22pUEuvDa7EhlzMf9WSqrUVKZdbAMMcB/nHQ/aMU59Se7d4H
+ 6vajNwVFi82BoV/JU3MW5ZMX/HanGgzc5DR3jHeVvNjON5L3EIOUXwTczIVuhHoIZGbZ
+ NfACcvt4YJJzNRU0ai1DR/Hh9kk0lgKmw0lhyRjuD+NUbOpfbV5UaryID19sKeaFTwkZ
+ s5vg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=9P2Kk8FkBOot5Ramb0ESa77TSXyCa1IGsgLNPPOdUls=;
+ fh=sp6E9HVhTUAiEEWqHbKho2dPu9WIHpUiyF52VbJ44Bc=;
+ b=ZHciHMjtH+QiiB1FaRY/ePy4ShaepuWtfnZlfDcvQRQarO9rPFVhOjaJhkQBymSqoK
+ 9WaXPEkH2I/aPuD4IegbZMrSAAroZ/Z+7bhKm9rqv5L3Dcy4WQ3rma6BrQo4gcxk5jV7
+ 6JMNVUkmLmVOTgRHTadWFaZo3cDjZBfJwDkb358rYiU/MHqCnTBunV9DDkFl/LEBVIsI
+ 1ez4GAdl9zQOeX81Ju7gd8tv+L8kCTciONDnzx5J4o9fxfO2gcKsEyZbBmL++xkpWnsY
+ Cashbm3B09rx9GT0XpyBllA+J2Kk7KLDhLdD17fICz5G65A4ypBw+ElFjngT8dZR0Pk4
+ NyOg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770776060; x=1771380860; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cO/fzXWwKYkLyIi6u3vAyp8pnmdS3K6zjykRGn+5gZ0=;
- b=efPowO2que/bVCIMmgfUeqmrtwVwkAnOXIq4UUfQsH3xGpvqDqETrXDl+QzezWtBY3
- SRPbZzwNG7dAf4lg9MyUXCIx0C0VKcZ7H8KHrThSxjzJ871ZVLpDCLGbxA+YCWlAiwvl
- +AkOgTJAvWUvU0fUV4E+fimIJRgnSzppjmE5K62oUoLkwTMx95HURl9N+vzlQwt/ib5i
- +vs6JMvlCMElBUt70VQJnjTxAbVejwngceoZp8UAxwzznF4cqRzFGhJTfM+OKIYEQcNs
- PPraa+wmxn9i8ernSasB4MeWRx9LE24ijoYmyCb7eypaTFFdXuXThOjBTKb7pr5l/Gr7
- s7BA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770776060; x=1771380860;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1770791020; x=1771395820; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cO/fzXWwKYkLyIi6u3vAyp8pnmdS3K6zjykRGn+5gZ0=;
- b=pN4Th4zCPtBdtdMRdDDrBhTd2QmhUg8PgnfnPal5Ak8Xp3dxmRsmfdTdb+O/2uqAPG
- 1qIYofwrcnWzyiYe/IWxgoNn6BUxOkHhedFP4KIU65IeogAczTskaZ7R4ikoMjO/o0rN
- fORPnG6uZuTGQc1JpTwcmoZzQttMg66iW3wKtt2U9YZ4y3mt0qO1Jk+sRK6bojXBsYXx
- QOWJDjvTyQeBJ2+mfuV4g1Dtp182z3unCR3bcGaxJsVkUqUhQDBZYAzbshbp7dAyfPSw
- i0fjq0S+mO52VIIIWXCPZaFaKyUImhPockB5HhqFps99w3ExbbXNo7gMirn8Q+p9Wkre
- 9NUQ==
-X-Gm-Message-State: AOJu0YyeuphAc6J8AT9p9N/k8rfqGlEEVtsiJJ0g3nbvJz6gu7/7a6rL
- W6Hrh+HCFSybjQ/wVpWKyBrFCMpmE6GXR6Z8etrW/ceT9kXQqzYn3KryeaCCTA==
-X-Gm-Gg: AZuq6aIYvh8rLJiZ9KZSN2Gr239u7ZZp+CBgLTRgC5IJIEOZt1PF30uobnP6qD7jYOM
- x4/iyViYVf8S+HCsLkCpJdsUvMYEejt0J9tMRD3a+xMkJ5P9C5hYVFSgHTavGyE6A59fVLUXMb1
- B46SsQBbyWlNxmzRsSWPAmBS3jubA4xgvETEX+ssK9Y5yJTmQMfxcnFGxQ9YLh6pZUlKkLwR15y
- TeeKzVV8I+L65R/Kc6RJjqwPgZ08jcINWahYlFYoBUq+BSJ2VXFviN/t9X7qr+T/5trFWeKkzpU
- A0w/4wE0hiecfkIN8nyI3lOosf+n3zT5D1cMNbJB6dG57/kDbthV7UdjiO2O3V+VfxXfpd4lmma
- T1GY1aucKaLBP33crKcjQtjVVxkG/QoBNyNuFyTrYEa6TuauJwfP57hvN1KGr+tJlN6UmRH364z
- nDTpKOBoRKWL6oUN6dLXmZtZMxyVcWWH0V30hMnPggVvnCrDpKmy5ZZX4jFo8Vh/bDwaK2H0zjT
- 7I2kC2jDyKoaIsv++jf4uW9lpC736kj250H+MzvLkK32vRpo8kXM8KAZspaIxqYasawimo8Cg==
-X-Received: by 2002:a05:6820:160a:b0:672:afe2:4b7d with SMTP id
- 006d021491bc7-672ecc31aecmr1846736eaf.42.1770776060564; 
- Tue, 10 Feb 2026 18:14:20 -0800 (PST)
-Received: from james-x399.localdomain (71-218-105-26.hlrn.qwest.net.
- [71.218.105.26]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40eaef220cesm338128fac.9.2026.02.10.18.14.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Feb 2026 18:14:19 -0800 (PST)
-From: James Hilliard <james.hilliard1@gmail.com>
-To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>,
- Jamie Gibbons <Jamie.Gibbons@microchip.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 1/1] image: fit: Apply overlays using aligned writable FDT
- copies
-Date: Tue, 10 Feb 2026 19:13:50 -0700
-Message-ID: <20260211021351.2678571-1-james.hilliard1@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ bh=9P2Kk8FkBOot5Ramb0ESa77TSXyCa1IGsgLNPPOdUls=;
+ b=ZpuIZJXLw1lRusCz64jLgleIvpYGiQDXNDeojsAk7PH9cm8RpgStdBAWu07teQ8usm
+ +AQpZnYGqseUzHSgX9lQs27GxfLe1yefJQ1w0O+wQQqmMlGTxivZxWV0hbg1d8lJ+e16
+ eoz2bpwtZBy6ThNtjTvu0MgxaK3s+w7hnYQ2Pua8+H6BaqSXEvzgjGplxfnnIkHJoyrr
+ mgdWyh8yKECmUSe6n/d2hu5fV0YIcHnrABeaD1jBP46KkV5RxV+VIOld/KTfBD8dhZz3
+ x7WgE4hP0Uzdj+RjsoW905rG1y9rJKhfG3VwaZTmaEyF38ZhVN68KzJc61OMD0z8cg8V
+ yMyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770791020; x=1771395820;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=9P2Kk8FkBOot5Ramb0ESa77TSXyCa1IGsgLNPPOdUls=;
+ b=RnrUaWxtTnNNSyAbjs/jVz9flgryPXImSjv8qwdg+7H6XMXiU7ZKTEhcBA2no6MtEc
+ XJeCszru55A7wfXl0uDVp4kyaocI0CIKO8UhXTespghOUE4fUwuSF3R9DCmeDqZ8NVjs
+ kvZVw1xa/+RpiIoprvXuoVicchKP4iIdl2+w2Oj9TLcgT6y1TPQVdGosMovvRcHoNTeV
+ SVB+c5P6AKCj/iXLbpdlfuDnbc6sHzBTvVhOAsBgM02D52Q4rXepIjVGJFag65vNGw8i
+ 92s78+UF2F3s5Hkrm8WydyVE2od+sugez+5ppGQZiPXdFw6w8riZhh34z15hUA12Auol
+ wSpg==
+X-Gm-Message-State: AOJu0Yw1UqIBJlrMcEiDhCqqSFUc5ElqHYIuQXABN+CjEBq4yxz65t+B
+ CpXNPwmO4u8B96LylPUBB9GleZfRVBQ8BSvQb+qC5zxMky5RGA0iJiZNvdNba4g9pWJQXvH/p2E
+ OFaMVcf2LK3lsuVH3ESC6D17DC2ZySn4EhRJeH/UdwQ==
+X-Gm-Gg: AZuq6aK0QYDxIt3Mf0t6GJ9yy2JJA5l5KafXTCs9tfkjtAxA4G0UdLMsLWojDB1BOaQ
+ y/Nxb6fT4wlzCdEDd1oeEje7GpRVMP0EugROIvnu+7gggDr/4gvCZNBNDtEMVtrS34pFNys9qCY
+ VaWF8/DGCiGwIjKwL6Ah40eD/KCJUh6cbDz57WtP85cVBy1YuYjRRah3KPZio+6hCS+nwngNMFp
+ VDglRv20v5+Yl7x+UlhdTIX2w0o4ezYnGKAccCB0NsuAqLml2uRijymuLaRmH+PkYd3ca2X07dK
+ idpO3xFKKUEeGCVm8NHfdygfJU4qOEpWKz3+HZzNYg2CSbQ19SqEItoLnjGfKyTxbpGdtCj0lmD
+ G1qamZcAUCko/VmmiCgn1cMm6FxCmdloJ6EyfkLNhZtYPnTktSfZavM460jZ6Ge5qYg8cIp8Xsa
+ r7KRUI9iMbjSQObFzvLnYSkUxdHayMkW0d84SaCNVdzTubuU8fs6xPf4JYTrS/w6TLNyqY13dUr
+ AnpGQljgycVeXBH0TCyfXHXMg2ety2PsfRJPmG+E/JrZFBIEiyJS3n0Qjih29VTWMOQb2s1JhdX
+ koNuQXuZ3BQW5aeOlUKiMNh8jZqEMHbvx6nC6VloJUW0
+X-Received: by 2002:a05:690c:ed3:b0:794:a8ea:f04a with SMTP id
+ 00721157ae682-7965e2457ffmr42379947b3.20.1770791019872; Tue, 10 Feb 2026
+ 22:23:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 11 Feb 2026 06:22:44 +0100
+References: <20260123022552.100884-1-hs@nabladev.com>
+ <23a76123-9fe9-16f3-7464-2d0b6fe4147a@nabladev.com>
+In-Reply-To: <23a76123-9fe9-16f3-7464-2d0b6fe4147a@nabladev.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Feb 2026 08:23:03 +0200
+X-Gm-Features: AZwV_QhmJtdJ8BSeRXsFCpKx0h2xJHyviYipL3KEK3QYEJESzP5LN6J2vbFeDdM
+Message-ID: <CAC_iWjKT0_TFwErDss-jkdx0vxffTH=ayU3FV8d_VprohaLAzw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] lib: sm3: coverity fix and add documentation
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,261 +119,212 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-libfdt expects FDT/DTO blobs to be 8-byte aligned. When loading the
-base FDT or overlays from a FIT, the mapped buffer may be unaligned,
-which can break fdt_open_into() on strict-alignment architectures.
+Hi Heiko
 
-boot_get_fdt_fit() relocates the base FDT with boot_relocate_fdt()
-before applying overlays. That uses the bootm memory map and can
-overlap with the FIT buffer when the FIT is loaded into RAM,
-corrupting data needed to load the kernel and ramdisk.
+On Tue, 10 Feb 2026 at 07:26, Heiko Schocher <hs@nabladev.com> wrote:
+>
+> Hello Tom,
+>
+> this series fixes a coverity issue and adds the missing doc for the
+> new sm3sum command... I got no further comments... may I ask, if it
+> could be applied?
 
-Allocate writable, 8-byte aligned copies of the base FDT and overlays
-with memalign() and fdt_open_into(). Grow the base buffer as needed,
-apply overlays to it and pack the final tree. Free each temporary
-overlay copy after application and check fdt_pack() errors.
+Apologies, Tom was expecting me to send an PR and I missed that.
+I'll send one today
 
-Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always 8-byte aligned")
-Fixes: 881f0b77dc8c ("image: apply FDTOs on FDT image node")
-Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-Cc: Jamie Gibbons <Jamie.Gibbons@microchip.com>
----
-Changes v1 -> v2:
-  - also fix alignment issues
-Changes v2 -> v3:
-  - do not print on -ENOMEM errors
-  - let boot_get_fdt_fit_into_buffer() reuse buffers and handle rounding
----
- boot/image-fit.c | 161 ++++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 124 insertions(+), 37 deletions(-)
-
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 41ab1f552b0..09a57bbb670 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2344,6 +2344,75 @@ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
- }
- 
- #ifndef USE_HOSTCC
-+#ifdef CONFIG_OF_LIBFDT_OVERLAY
-+static int boot_get_fdt_fit_into_buffer(const void *src, ulong srclen,
-+					ulong extra, ulong min_dstlen,
-+					void **fdtdstbuf, ulong *fdtdstlenp)
-+{
-+	const void *fdtsrcbuf;
-+	void *tmp = NULL;
-+	void *dstbuf, *newdstbuf;
-+	ulong dstlen, newdstlen;
-+	int err;
+Cheers
+/Ilias
+>
+> Thanks!
+>
+> bye,
+> Heiko
+>
+> On 23.01.26 03:25, Heiko Schocher wrote:
+> >
+> > patch "lib: sm3: fix coverity error" fixes a Coerity scan error,
+> > which is a good catch, as this part is from linux [1].
+> >
+> > Running some hashes with this change and I see no problems,
+> > or wrong hashes [2] (Hashes calculated with the help of the
+> > webpage [3].
+> >
+> > Patch 2 adds the missing documentation for the new sm3sum command
+> > which missed his way into mainline.
+> >
+> > rebased series to
+> > commit 6b2d05748cf ("Merge tag 'u-boot-imx-master-20260117' of https://=
+gitlab.denx.de/u-boot/custodians/u-boot-imx")
+> >
+> > Azure build:
+> > https://dev.azure.com/hs0298/hs/_build/results?buildId=3D205&view=3Dres=
+ults
+> >
+> > [1]
+> > https://elixir.bootlin.com/linux/v6.14/source/include/crypto/sm3_base.h=
+#L86
+> >
+> > [2]
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] tftpb ${tftpp}/abb1.txt
+> > =E2=94=82   =E2=94=82    ## ethernet@30bf0000 Waiting for PHY auto nego=
+tiation to complete....... done
+> > =E2=94=82   =E2=94=82    ## Using ethernet@30bf0000 device
+> > =E2=94=82   =E2=94=82    ## TFTP from server 192.168.3.1; our IP addres=
+s is 192.168.3.41
+> > =E2=94=82   =E2=94=82    ## Filename '20260106/abb1.txt'.
+> > =E2=94=82   =E2=94=82    ## Load address: 0x50000000
+> > =E2=94=82   =E2=94=82    ## Loading: ##################################=
+################  3 Bytes
+> > =E2=94=82   =E2=94=82    ##      0 Bytes/s
+> > =E2=94=82   =E2=94=82    ## done
+> > =E2=94=82   =E2=94=82    ## Bytes transferred =3D 3 (3 hex)
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] md.b ${loadaddr} ${filesiz=
+e}
+> > =E2=94=82   =E2=94=82    ## 50000000: 41 42 42                         =
+                ABB
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] sm3sum ${loadaddr} ${files=
+ize}
+> > =E2=94=82   =E2=94=82    ## sm3_256 for 50000000 ... 50000002 =3D=3D> 2=
+f2e2c6e076ebff98112d96081a9714d783eb6d8ea46a16fbfdc3b589f1c374b
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] tftpb ${tftpp}/abb2.txt
+> > =E2=94=82   =E2=94=82    ## Using ethernet@30bf0000 device
+> > =E2=94=82   =E2=94=82    ## TFTP from server 192.168.3.1; our IP addres=
+s is 192.168.3.41
+> > =E2=94=82   =E2=94=82    ## Filename '20260106/abb2.txt'.
+> > =E2=94=82   =E2=94=82    ## Load address: 0x50000000
+> > =E2=94=82   =E2=94=82    ## Loading: ##################################=
+################  52 Bytes
+> > =E2=94=82   =E2=94=82    ##      4.9 KiB/s
+> > =E2=94=82   =E2=94=82    ## done
+> > =E2=94=82   =E2=94=82    ## Bytes transferred =3D 52 (34 hex)
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] md.b ${loadaddr} ${filesiz=
+e}
+> > =E2=94=82   =E2=94=82    ## 50000000: 41 42 43 44 45 46 47 48 49 4a 4b =
+4c 4d 4e 4f 50  ABCDEFGHIJKLMNOP
+> > =E2=94=82   =E2=94=82    ## 50000010: 51 52 53 54 55 56 57 58 59 5a 61 =
+62 63 64 65 66  QRSTUVWXYZabcdef
+> > =E2=94=82   =E2=94=82    ## 50000020: 67 68 69 6a 6b 6c 6d 6e 6f 70 71 =
+72 73 74 75 76  ghijklmnopqrstuv
+> > =E2=94=82   =E2=94=82    ## 50000030: 77 78 79 7a                      =
+                wxyz
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] sm3sum ${loadaddr} ${files=
+ize}
+> > =E2=94=82   =E2=94=82    ## sm3_256 for 50000000 ... 50000033 =3D=3D> e=
+5e13e8215fe8eff7dcfd9375f3c3ff0674bd979dcd192539afc3562d45f1a5e
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] tftpb ${tftpp}/abb3.txt
+> > =E2=94=82   =E2=94=82    ## Using ethernet@30bf0000 device
+> > =E2=94=82   =E2=94=82    ## TFTP from server 192.168.3.1; our IP addres=
+s is 192.168.3.41
+> > =E2=94=82   =E2=94=82    ## Filename '20260106/abb3.txt'.
+> > =E2=94=82   =E2=94=82    ## Load address: 0x50000000
+> > =E2=94=82   =E2=94=82    ## Loading: ##################################=
+################  510 Bytes
+> > =E2=94=82   =E2=94=82    ##      49.8 KiB/s
+> > =E2=94=82   =E2=94=82    ## done
+> > =E2=94=82   =E2=94=82    ## Bytes transferred =3D 510 (1fe hex)
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] md.b ${loadaddr} ${filesiz=
+e}
+> > =E2=94=82   =E2=94=82    ## 50000000: 53 4d 33 20 69 73 20 61 20 63 72 =
+79 70 74 6f 67  SM3 is a cryptog
+> > =E2=94=82   =E2=94=82    ## 50000010: 72 61 70 68 69 63 20 68 61 73 68 =
+20 66 75 6e 63  raphic hash func
+> > =E2=94=82   =E2=94=82    ## 50000020: 74 69 6f 6e 20 70 75 62 6c 69 73 =
+68 65 64 20 62  tion published b
+> > =E2=94=82   =E2=94=82    ## 50000030: 79 20 74 68 65 20 53 74 61 74 65 =
+20 43 72 79 70  y the State Cryp
+> > =E2=94=82   =E2=94=82    ## 50000040: 74 6f 67 72 61 70 68 79 20 41 64 =
+6d 69 6e 69 73  tography Adminis
+> > =E2=94=82   =E2=94=82    ## 50000050: 74 72 61 74 69 6f 6e 20 6f 66 20 =
+43 68 69 6e 61  tration of China
+> > =E2=94=82   =E2=94=82    ## 50000060: 20 61 6e 64 20 69 73 20 61 6c 73 =
+6f 20 6b 6e 6f   and is also kno
+> > =E2=94=82   =E2=94=82    ## 50000070: 77 6e 20 61 73 20 74 68 65 20 63 =
+6f 6d 6d 65 72  wn as the commer
+> > =E2=94=82   =E2=94=82    ## 50000080: 63 69 61 6c 20 63 72 79 70 74 6f =
+67 72 61 70 68  cial cryptograph
+> > =E2=94=82   =E2=94=82    ## 50000090: 69 63 20 53 4d 33 20 61 6c 67 6f =
+72 69 74 68 6d  ic SM3 algorithm
+> > =E2=94=82   =E2=94=82    ## 500000a0: 2e 20 54 68 65 20 22 53 4d 22 20 =
+72 65 70 72 65  . The "SM" repre
+> > =E2=94=82   =E2=94=82    ## 500000b0: 73 65 6e 74 73 20 22 63 6f 6d 6d =
+65 72 63 69 61  sents "commercia
+> > =E2=94=82   =E2=94=82    ## 500000c0: 6c 20 63 72 79 70 74 6f 67 72 61 =
+70 68 79 2c 22  l cryptography,"
+> > =E2=94=82   =E2=94=82    ## 500000d0: 20 77 68 69 63 68 20 72 65 66 65 =
+72 73 20 74 6f   which refers to
+> > =E2=94=82   =E2=94=82    ## 500000e0: 20 63 72 79 70 74 6f 67 72 61 70 =
+68 69 63 20 74   cryptographic t
+> > =E2=94=82   =E2=94=82    ## 500000f0: 65 63 68 6e 6f 6c 6f 67 79 20 66 =
+6f 72 20 63 6f  echnology for co
+> > =E2=94=82   =E2=94=82    ## 50000100: 6d 6d 65 72 63 69 61 6c 20 75 73 =
+65 20 74 68 61  mmercial use tha
+> > =E2=94=82   =E2=94=82    ## 50000110: 74 20 64 6f 65 73 20 6e 6f 74 20 =
+69 6e 76 6f 6c  t does not invol
+> > =E2=94=82   =E2=94=82    ## 50000120: 76 65 20 73 74 61 74 65 20 73 65 =
+63 72 65 74 73  ve state secrets
+> > =E2=94=82   =E2=94=82    ## 50000130: 2e 20 49 74 20 69 73 20 62 61 73 =
+65 64 20 6f 6e  . It is based on
+> > =E2=94=82   =E2=94=82    ## 50000140: 20 74 68 65 20 65 6c 6c 69 70 74 =
+69 63 20 63 75   the elliptic cu
+> > =E2=94=82   =E2=94=82    ## 50000150: 72 76 65 20 64 69 73 63 72 65 74 =
+65 20 6c 6f 67  rve discrete log
+> > =E2=94=82   =E2=94=82    ## 50000160: 61 72 69 74 68 6d 20 70 72 6f 62 =
+6c 65 6d 20 61  arithm problem a
+> > =E2=94=82   =E2=94=82    ## 50000170: 6e 64 20 69 73 20 75 73 65 64 20 =
+74 6f 20 72 65  nd is used to re
+> > =E2=94=82   =E2=94=82    ## 50000180: 70 6c 61 63 65 20 69 6e 73 65 63 =
+75 72 65 20 68  place insecure h
+> > =E2=94=82   =E2=94=82    ## 50000190: 61 73 68 20 61 6c 67 6f 72 69 74 =
+68 6d 73 20 73  ash algorithms s
+> > =E2=94=82   =E2=94=82    ## 500001a0: 75 63 68 20 61 73 20 4d 44 35 20 =
+61 6e 64 20 53  uch as MD5 and S
+> > =E2=94=82   =E2=94=82    ## 500001b0: 48 41 2d 31 2e 20 54 68 65 20 6f =
+75 74 70 75 74  HA-1. The output
+> > =E2=94=82   =E2=94=82    ## 500001c0: 20 6c 65 6e 67 74 68 20 6f 66 20 =
+74 68 65 20 53   length of the S
+> > =E2=94=82   =E2=94=82    ## 500001d0: 4d 33 20 61 6c 67 6f 72 69 74 68 =
+6d 20 69 73 20  M3 algorithm is
+> > =E2=94=82   =E2=94=82    ## 500001e0: 32 35 36 20 62 69 74 73 2c 20 74 =
+68 65 20 73 61  256 bits, the sa
+> > =E2=94=82   =E2=94=82    ## 500001f0: 6d 65 20 61 73 20 53 48 41 2d 32 =
+35 36 2e        me as SHA-256.
+> > =E2=94=82   =E2=94=9C=E2=94=80[helios-uboot] sm3sum ${loadaddr} ${files=
+ize}
+> > =E2=94=82   =E2=94=82    ## sm3_256 for 50000000 ... 500001fd =3D=3D> 5=
+3ce46ca129071694bac8007680573d83b941ea156ce46d9cc45a648c1b7e291
+> > =E2=94=82   =E2=94=9C=E2=94=80Entering interactive shell...
+> > =E2=94=82   =E2=94=9C=E2=94=80Press CTRL+] three times within 1 second =
+to exit.
+> >
+> > u-boot=3D>
+> >
+> > [3] https://www.toolhelper.cn/en/DigestAlgorithm/SM3
+> >
+> > Changes in v2:
+> > rebased series to
+> > commit 6b2d05748cf ("Merge tag 'u-boot-imx-master-20260117' of https://=
+gitlab.denx.de/u-boot/custodians/u-boot-imx")
+> > added Acked-by from Ilias
+> > Added comments from Quentin
+> > - fixed typo in commit subject
+> > - fixed a lot of style and spelling issues
+> > - added in parameters section the format of the input values
+> > - removed section "Return value"
+> >
+> > Heiko Schocher (2):
+> >    lib: sm3: fix coverity error
+> >    doc: cmd: add documentation for sm3sum
+> >
+> >   doc/usage/cmd/sm3sum.rst | 112 ++++++++++++++++++++++++++++++++++++++=
 +
-+	/* Make sure the source FDT/DTO is 8-byte aligned for libfdt. */
-+	fdtsrcbuf = src;
-+	if (!IS_ALIGNED((uintptr_t)src, 8)) {
-+		tmp = memalign(8, srclen);
-+		if (!tmp)
-+			return -ENOMEM;
-+
-+		memcpy(tmp, src, srclen);
-+		fdtsrcbuf = tmp;
-+	}
-+
-+	newdstlen = ALIGN(fdt_totalsize(fdtsrcbuf) + extra, SZ_4K);
-+	min_dstlen = ALIGN(min_dstlen, SZ_4K);
-+	if (newdstlen < min_dstlen)
-+		newdstlen = min_dstlen;
-+
-+	dstbuf = *fdtdstbuf;
-+	dstlen = dstbuf ? *fdtdstlenp : 0;
-+
-+	/*
-+	 * If the caller already provided a large enough writable buffer,
-+	 * and we're not moving the FDT, nothing to do.
-+	 */
-+	if (dstbuf && dstlen >= newdstlen && dstbuf == fdtsrcbuf) {
-+		free(tmp);
-+		return 0;
-+	}
-+
-+	/* Try to reuse existing destination buffer if it is large enough. */
-+	if (dstbuf && dstlen >= newdstlen) {
-+		err = fdt_open_into(fdtsrcbuf, dstbuf, dstlen);
-+		free(tmp);
-+		if (err < 0)
-+			return err;
-+		return 0;
-+	}
-+
-+	newdstbuf = memalign(8, newdstlen);
-+	if (!newdstbuf) {
-+		free(tmp);
-+		return -ENOMEM;
-+	}
-+
-+	err = fdt_open_into(fdtsrcbuf, newdstbuf, newdstlen);
-+	free(tmp);
-+	if (err < 0) {
-+		free(newdstbuf);
-+		return err;
-+	}
-+
-+	free(dstbuf);
-+	*fdtdstbuf = newdstbuf;
-+	*fdtdstlenp = newdstlen;
-+
-+	return 0;
-+}
-+#endif
-+
- int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 		     const char **fit_unamep, const char **fit_uname_configp,
- 		     int arch, ulong *datap, ulong *lenp)
-@@ -2356,18 +2425,12 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 	char *next_config = NULL;
- 	ulong load, len;
- #ifdef CONFIG_OF_LIBFDT_OVERLAY
--	ulong ovload, ovlen, ovcopylen;
-+	ulong ovload, ovlen, ovcopylen, need;
- 	const char *uconfig;
- 	const char *uname;
--	/*
--	 * of_flat_tree is storing the void * returned by map_sysmem, then its
--	 * address is passed to boot_relocate_fdt which expects a char ** and it
--	 * is then cast into a ulong. Setting its type to void * would require
--	 * to cast its address to char ** when passing it to boot_relocate_fdt.
--	 * Instead, let's be lazy and use void *.
--	 */
--	char *of_flat_tree;
--	void *base, *ov, *ovcopy = NULL;
-+	void *ovcopy = NULL;
-+	void *base_buf = NULL;
-+	ulong base_buf_size = 0;
- 	int i, err, noffset, ov_noffset;
- #endif
- 
-@@ -2410,18 +2473,25 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 	/* we need to apply overlays */
- 
- #ifdef CONFIG_OF_LIBFDT_OVERLAY
--	/* Relocate FDT so resizing does not overwrite other data in FIT. */
--	of_flat_tree = map_sysmem(load, len);
--	len = ALIGN(fdt_totalsize(load), SZ_4K);
--	err = boot_relocate_fdt(&of_flat_tree, &len);
--	if (err) {
--		printf("Required FDT relocation for applying DTOs failed: %d\n",
--		       err);
--		fdt_noffset = -EBADF;
-+	/*
-+	 * Make a writable copy of the base FDT for applying overlays.
-+	 *
-+	 * Do not use boot_relocate_fdt() here: it allocates from the bootm map and
-+	 * may overlap with the FIT buffer (still needed to load the kernel /
-+	 * ramdisk) when the FIT is loaded into RAM.
-+	 */
-+	err = boot_get_fdt_fit_into_buffer(map_sysmem(load, len), len,
-+					   CONFIG_SYS_FDT_PAD, 0, &base_buf,
-+					   &base_buf_size);
-+	if (err < 0) {
-+		if (err != -ENOMEM)
-+			printf("Required FDT copy for applying DTOs failed: %s\n",
-+			       fdt_strerror(err));
-+		fdt_noffset = err;
- 		goto out;
- 	}
- 
--	load = (ulong)of_flat_tree;
-+	len = fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base_buf);
- 
- 	/* apply extra configs in FIT first, followed by args */
- 	for (i = 1; ; i++) {
-@@ -2465,46 +2535,61 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 		}
- 		debug("%s loaded at 0x%08lx len=0x%08lx\n",
- 				uname, ovload, ovlen);
--		ov = map_sysmem(ovload, ovlen);
--
--		ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
--		ovcopy = malloc(ovcopylen);
--		if (!ovcopy) {
--			printf("failed to duplicate DTO before application\n");
--			fdt_noffset = -ENOMEM;
--			goto out;
--		}
--
--		err = fdt_open_into(ov, ovcopy, ovcopylen);
-+		err = boot_get_fdt_fit_into_buffer(map_sysmem(ovload, ovlen),
-+						   ovlen, 0, 0, &ovcopy,
-+						   &ovcopylen);
- 		if (err < 0) {
--			printf("failed on fdt_open_into for DTO\n");
-+			if (err != -ENOMEM)
-+				printf("failed on fdt_open_into for DTO: %s\n",
-+				       fdt_strerror(err));
- 			fdt_noffset = err;
- 			goto out;
- 		}
- 
--		base = map_sysmem(load, len + ovlen);
--		err = fdt_open_into(base, base, len + ovlen);
-+		/*
-+		 * Ensure the base FDT buffer is open and has enough room for
-+		 * the overlay. Grow it on demand.
-+		 */
-+		need = len + ovcopylen + CONFIG_SYS_FDT_PAD;
-+		err = boot_get_fdt_fit_into_buffer(base_buf, base_buf_size, 0,
-+						   need, &base_buf,
-+						   &base_buf_size);
- 		if (err < 0) {
--			printf("failed on fdt_open_into\n");
-+			if (err != -ENOMEM)
-+				printf("failed to expand FDT for DTO application: %s\n",
-+				       fdt_strerror(err));
- 			fdt_noffset = err;
- 			goto out;
- 		}
- 
- 		/* the verbose method prints out messages on error */
--		err = fdt_overlay_apply_verbose(base, ovcopy);
-+		err = fdt_overlay_apply_verbose(base_buf, ovcopy);
- 		if (err < 0) {
- 			fdt_noffset = err;
- 			goto out;
- 		}
--		fdt_pack(base);
--		len = fdt_totalsize(base);
-+		len = fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base_buf);
-+
-+		free(ovcopy);
-+		ovcopy = NULL;
-+	}
-+
-+	err = fdt_pack(base_buf);
-+	if (err < 0) {
-+		fdt_noffset = err;
-+		goto out;
- 	}
-+	len = fdt_totalsize(base_buf);
- #else
- 	printf("config with overlays but CONFIG_OF_LIBFDT_OVERLAY not set\n");
- 	fdt_noffset = -EBADF;
- #endif
- 
- out:
-+#ifdef CONFIG_OF_LIBFDT_OVERLAY
-+	if (fdt_noffset >= 0 && base_buf)
-+		load = map_to_sysmem(base_buf);
-+#endif
- 	if (datap)
- 		*datap = load;
- 	if (lenp)
-@@ -2515,6 +2600,8 @@ out:
- 		*fit_uname_configp = fit_uname_config;
- 
- #ifdef CONFIG_OF_LIBFDT_OVERLAY
-+	if (fdt_noffset < 0)
-+		free(base_buf);
- 	free(ovcopy);
- #endif
- 	free(fit_uname_config_copy);
--- 
-2.43.0
-
+> >   lib/sm3.c                |   2 +-
+> >   2 files changed, 113 insertions(+), 1 deletion(-)
+> >   create mode 100644 doc/usage/cmd/sm3sum.rst
+> >
+>
+> --
+> Nabla Software Engineering
+> HRB 40522 Augsburg
+> Phone: +49 821 45592596
+> E-Mail: office@nabladev.com
+> Gesch=C3=A4ftsf=C3=BChrer : Stefano Babic
