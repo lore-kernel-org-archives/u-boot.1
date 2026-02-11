@@ -4,120 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8620EB597C
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 08:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D73EB597C
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 08:37:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47E9E83E3A;
-	Wed, 11 Feb 2026 09:34:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B2A078367F;
+	Wed, 11 Feb 2026 09:37:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mKRT+Ctc";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="iPuRPTEe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1957B83E40; Wed, 11 Feb 2026 09:34:52 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 729BC83A47; Wed, 11 Feb 2026 09:37:02 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67D45802C1
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 09:34:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5586C802C1
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 09:37:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4806cc07ce7so15730085e9.1
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 00:34:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770798888; x=1771403688; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=oBs4V6Zeg0KTcWMuh+yTMP84EbZtjwejhhkXxbVCQwE=;
- b=mKRT+Ctc4JbTEMToFtwM1vE5jJYTd7KM42URgg5p7ee6XHPE1qalaW8Dt4J8TrAIvJ
- l4E1BMS6LYKKAc/nUNw7uPo0I7anBe3HY/Cf+EFdVzrhvL36Oho9iy2at7VVJq/hOREe
- bp2PIebeSkN/hCR69S7uxVjuHtiO+zuF3HTqtY0S1//mtc/SZkmHVZS7zbHNugn5Wiqv
- 6jZuRlD1jdfVUa8NLJiFgL7LAAoMNV8eJnJcea3uteyX9xmPugXPcb9oXyJuVcIFQIqZ
- qkjDiSv5ICZRt2TXeOifOhkM6UXqnOmv8K8uof+xt8kYy5yS/ULunv8hiDx5QBBxxDBg
- +F6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770798888; x=1771403688;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oBs4V6Zeg0KTcWMuh+yTMP84EbZtjwejhhkXxbVCQwE=;
- b=kGb2puM1wXLzHuqipkhJqZxt50AAGRA5j4+p9h7froP0cJhbSPClJezWCWQYKB4BTR
- 4ZT2ZGdxjqv0PndH0D1KAqprjlyZyY1n/DY34OrZWg0WmOtz59vrmec9f/dGzJvlhJWq
- a3FVxOFS/vhDMYWDIY2tQYCoJO0bE1jRgVGqy3eeyhEne+oRopXz97Al+hO2pT5gO1gn
- QRXteiLJQgyLKpYkyqO593PFKsIyAhRkA8n2/sTYcWNwqN5r/vDz6Eg1/jToNsHrkYE7
- i17lxLDTZ0UQTVnxlCnofDoEF98sRpELpZ0H6LFcutgCrc0idX935ZiUTGhECNZb+6oD
- FdqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWW4Pv7Jgqm0xPCTkofEWBGbUlDCQxg+xfWHqv4AmgxuRPLCKwbx5TACl3g4cxqLAEtLIvqyO4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzLm2Srp7beq6xEvFwkd2cS2/T1IMBPgf6b/WdEL6hrCHYwGWoi
- VLE2FR9iwqIN/D1gFHj+NQSXmjWAb+XAygZvGl3ICBIZT40uWGr3XVWO04T6YUscCnU=
-X-Gm-Gg: AZuq6aLVHIfCw/RsHiD9otUWjXERtUTyR//XU3TbAkxla47ATiamYok8iyxXXXNg6+j
- vlaJQhN9eUm27eNjqNJkXjPFSxNt0uAaNV7v8fiOXsahnmN/8NY0Gyj4N5dpPMEOSd49FSKvE+n
- 95HnzaxpsUqauWike/2ExpP5FQm0ty8YVDAwNW6mz/eZfuvYflbunvUrSsWxTApZ7I023e7nil2
- C/gsbxfcitsTC/IaxyPFv/dKgazKCzZv7h5UMD2vTvlFQGtWQjdetaiq3ho6Ju29YCKIcEviMWj
- Dd+CNUPqpVR4ac5qpPiOjfbrbgDH1UDu30LRuu5RdIAQi5A7+qleWs7DWyhPfaPnuuT3X4RidG9
- 6u4vL3N1FaSleX39Lxqm2u4qEYOA+qlbqEbyuV1sdCUVKyglYT6KBrktI1aEiOvNeFzJiD4kkg9
- kapXDNFrwT4tvyiqYvoLR7LunGUcXcIt4RnW/SxFK+zUdZi1JDuHs5IkLJrF2cC8Wjas13UtiiC
- gneWg==
-X-Received: by 2002:a05:600c:46d2:b0:480:4a90:1b06 with SMTP id
- 5b1f17b1804b1-4832022c31fmr250520435e9.34.1770798887664; 
- Wed, 11 Feb 2026 00:34:47 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:106d:1080:8cb4:9578:dd36:7e01?
- ([2a01:e0a:106d:1080:8cb4:9578:dd36:7e01])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4836131d52bsm1717515e9.28.2026.02.11.00.34.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Feb 2026 00:34:47 -0800 (PST)
-Message-ID: <50e4b2d0-82fa-4bb5-ab18-bef63e6907ec@linaro.org>
-Date: Wed, 11 Feb 2026 09:34:46 +0100
+ spf=pass smtp.mailfrom=M.Schwan@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Er+tn9CbnRkkhxtnvZmV5yjz0l0vyf1gPDVUZqmnOF+911IJpdtyEc2fe/RWLgUhVsv0eqVC8H6/Aui6YkE+S8tdb/cy6PAEADS/lQHfvH1Y7n/gzLQjU+H1n2Sw8S2vYW42HkaxmKpEb6+/FOwLUbgSYQTEIc1WwwgxCzJEIbahS7p5TsLrB/CyI2wZcNTN5rnaJjlWrfOs+/2EiKYseM4ZkmazXLIt5aq5u/s9laZjRdugocRow/5kncPvwm6OaK2JC0kVYkWuZIIalLnpvkhGZjJDZehMoK51KdNkvJdS8d99PO/1WkOOmomyFoadhXlccmadr1hlChQyuvE8+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OxhJcdsIpTIB4yq3WCnnZtpOBW3g1aC7iLlgFlJWz+c=;
+ b=YIPBy3BAmvIZQRbCkoSoFtb37NPEtGxspcBAGVNh60x4CadPypg7p8fbFKbjl6WpeYN7pqPAlma5QMl124Jo2psPQxEMplpggGHamOXNqZy0BrQzJegGImk2/lsVcdZYs7dzoaz2Roh25YmC4uV2UcOOf5K1zLGGJZJuURcjL14Vyb1DkSH81SRfqDFofRUgxodCqPsR6IIRalV/oWVpbh+dNXpvpHAfluQMg5WMy7vIvJWXq1jvqQYEfNKbcgaBvkDOiIk6IOzgKZijHiMeXipbwXKCqOjWaMeBgZoSt2sGVX4SBk7faS/LWr0aNR5q9WF/acB8dkIOR+iJ8L1B8A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=outlook.fr smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OxhJcdsIpTIB4yq3WCnnZtpOBW3g1aC7iLlgFlJWz+c=;
+ b=iPuRPTEe6rBU4nOncCrkwByzHL8JdRMM0ysYBLC3WXdnrf2kOUiJ9YtXM4u+6zC02BT01iND496EXrGyhEhBrbddr74IYi+w4DNwmjS2FxS5KJZIBqlQL2J1ynMYWkEumCILujz/7ZPqhweBlo7gddKMVOGtxGkH9XWcrOVdXz8EFsXnhqtttzTkAvdNfxh4eQtqsvRtJ3z9SRt/+d7LsP7CS0PSopA5mHz9oc1mixoVeisKQ/IGo041fbukxX7AgW3tAkGJVNEQhvq9UYJ/mXDXivMQPGMNtSUli5WFXa4aZuDiAVShNa/b3eTcqjbdhYVD+Lo4NXUf2xD4n4C+Eg==
+Received: from AS8P189CA0006.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:31f::33)
+ by DU0P195MB1883.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:3cb::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Wed, 11 Feb
+ 2026 08:36:57 +0000
+Received: from AMS0EPF000001AB.eurprd05.prod.outlook.com
+ (2603:10a6:20b:31f:cafe::83) by AS8P189CA0006.outlook.office365.com
+ (2603:10a6:20b:31f::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.8 via Frontend Transport; Wed,
+ 11 Feb 2026 08:36:55 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ AMS0EPF000001AB.mail.protection.outlook.com (10.167.16.151) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9611.8 via Frontend Transport; Wed, 11 Feb 2026 08:36:57 +0000
+Received: from lws-schwan.phytec.de (172.25.32.118) by Postix.phytec.de
+ (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Wed, 11 Feb
+ 2026 09:36:56 +0100
+From: Martin Schwan <m.schwan@phytec.de>
+Date: Wed, 11 Feb 2026 09:36:22 +0100
+Subject: [PATCH] bootstd: rauc: Fix null pointer access while checking root
+ part
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/3] efi_vars: Implement SPI Flash storage for EFI
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Shantur Rathore <i@shantur.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)"
- <paul.liu@linaro.org>
-References: <cover.1770119483.git.michal.simek@amd.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <cover.1770119483.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-ID: <20260211-wip-bootmeth-rauc-part-info-nullaccess-v1-1-d0606be8a33f@phytec.de>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3NTQ6CMBBA4auQWTsJrYA/VyEuxjrIJNg2M0VNC
+ He3cflt3tvAWIUNrs0Gym8xSbHCHRoIM8Unozyqwbd+aL1z+JGM95TKi8uMSmvATFpQ4pQwrst
+ CIbAZXroz991Ax1PvoMay8iTf/2i87fsPAQtu0ngAAAA=
+X-Change-ID: 20260211-wip-bootmeth-rauc-part-info-nullaccess-948e546a3751
+To: Leonard Anderweit <l.anderweit@phytec.de>, <u-boot@lists.denx.de>
+CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Andreas
+ Pretzsch" <apr@cn-eng.de>, Francois Berder <fberder@outlook.fr>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [172.25.32.118]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001AB:EE_|DU0P195MB1883:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27e6bdc8-81ac-40fa-4130-08de6948b7b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|32650700017|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bUFuNzY1MUNhS2NFUVU2dmJtTmFCemEvM0xTbHh0eWgvMHh0RFdtTmt4WDBw?=
+ =?utf-8?B?R1ljUDBQMElXOVZKcGdqa0FUUk14YTVXQnZXdkNkWFZDcUhWc0hkcEtOM3VP?=
+ =?utf-8?B?OExUSjZjR1ZJcHA4eFA2a3hRWDJkc3UreWV3NlBMaURkRkpYVzk5eTB3M0hR?=
+ =?utf-8?B?dmhKRlJrMUxheE9LQVR4RmdnNXkrQTB5N3pwNjU1N0VJakdVTGQ2UlFYeWxO?=
+ =?utf-8?B?MkIvSllOYjBhanVrV0d0RHhrWWNiUVhiRDZ6c3lYYVhvY0VPbTJNN251aER3?=
+ =?utf-8?B?TGt5bWVMaHFNZVYyandkbU5DUFhKb1F6RzhINCtmU054S2hRbzFzZXhUeHBM?=
+ =?utf-8?B?K0NRQkYwL0lmL2g5YTR5dzhGRFdFNDdCYms3UmZUdjk1aXI2MlJFeC8xMWtS?=
+ =?utf-8?B?c3lYRmJmZ0M4L0tDUGpKVUZuWXk3cnFqaHZvbFZYakthejcrc1o4UTF2Q20z?=
+ =?utf-8?B?WVVBTWpCWGJ0SHY5cVBpVXFRVnRqMmFmV3c0aWFWT2RZcXFPOEdGRkZQS090?=
+ =?utf-8?B?UzczTTBzUnFDMzdaYXJ4VWZpUlpUZjNOUjRxSEhJbmxldE1iajJZWXhDRFRT?=
+ =?utf-8?B?RUduNWkrQmswbG5hN3dWaHE5RDRHcStUVElSNUNzcDBMTHh0bXdlNnZnZzM4?=
+ =?utf-8?B?cXZZMGU0VkNyRE5JV3BQMkxpSW1QRmVLUjZPTWN1MExwRUNMcTJPbDQ3c0FY?=
+ =?utf-8?B?VWJiL3NnVG5lM0c2NkVaOTM1ZURkQ2E3dklCNGNsZHlrUitoaFV6VXYrVndB?=
+ =?utf-8?B?SGFQeXYzWTJyNVA1REZpUnAyMVRVNmwwMnlKN2RrZnQ4VGlObzZJRDdBQ01T?=
+ =?utf-8?B?Rm02MnRZdHJoVzQ0UThsMVcwL013OURtL3hSczc1c2IzcGZOWXZLZzJZYmlM?=
+ =?utf-8?B?UEJHcG4weHo5T0gzTkkxcC9Bc1Y5VzVPUVYwYjEyWTE2WTZFYUVpaE8rVm40?=
+ =?utf-8?B?a3E4V3lQUmpNSktqQ3Q2NVFkYm9adGpKM0U4MTdyWmwvaWF4YTdUUHJ5MkJi?=
+ =?utf-8?B?NWFGNytxOXRlUFBsZThVckRUWkkwY0xGbUF4Ry8zU2hLZC9WRUtSekVrVEc5?=
+ =?utf-8?B?WkF5U1ZzM3hINDNTN2dYWU56UDZxZkc5S2hQaWxtM1dpL1czeHNudEthSzhX?=
+ =?utf-8?B?RkVLWXZ0ai9yWEtzLzdyZURnTWxvNHlVZEIyMThxZk10WVYzOVhmT1loZHRY?=
+ =?utf-8?B?QldwY2didk1mUUl4K1YxZXFVdXpIdFg1anhURU5DU0dsWjlWMDhZM0prY1Fp?=
+ =?utf-8?B?WFdGTTlOU0J6N1Y0Sk11MUF4R3hxRXpyL2ZXOS9kK2tZM0tGWHJQSWYxNGRX?=
+ =?utf-8?B?SW10cUo1aGhHUndFZWNZRVZrQjBqYktnQy9aaUpnSkxkbDRFNzA4c0Jwc2Rv?=
+ =?utf-8?B?a0pndnFaL1JXZFNrSmZhL0JuREU3MmhycWZHU3JiRTZJRlkrekVKZFdKcU5I?=
+ =?utf-8?B?YlBUV0dxNTUzYmZJSlpiT3o4amUyY1VFWlQxNmFHUEV4ekFkMldsYXNCWjNl?=
+ =?utf-8?B?d21HNUZzaC9seEFMellIdHc4N0lleFpKcEZLSXlKQzVNSmMyWnB3K0g2Z29w?=
+ =?utf-8?B?ZExMeUk1cmpwVE5KQVpTNWlOaDdFRncvNWtDUWFiRnlSNTdBRE5FQU9FTjNl?=
+ =?utf-8?B?bXljMVdDclh2VmcwcitPajF2MTk3M0VFZ2NLWXlCU0RTQVVWQlQ3K0dSWGVT?=
+ =?utf-8?B?VEYxZGVPbG1LenVpTGFpN3JWdnp0REJsU1ViN3ZDOXpZVFNPd0hrS2RYUVFz?=
+ =?utf-8?B?SDh5d09JZ2VUdW9KQ2tmanhYV2c5ZjhsQmhoV2xReUJuVGdwZXl4LzNCM1BZ?=
+ =?utf-8?B?MFdTMHNXS3l5b1JsK0Jpb21ITDZlWXYyUGRITHAxSXNsaTBQQUdvVUZFZ1pQ?=
+ =?utf-8?B?V0U1N09vclJWN0JOTnBSYlpWTlFDVmdkMk5DOGJPUDBrQ0xrL0pwRUYyUUxr?=
+ =?utf-8?B?WjVHM0pUQU5CZENFWHdKWVF0aWdDMVIrOTVlbTlpeFAwYlJNeWQrL1dvSXFZ?=
+ =?utf-8?B?czFyUWFjMjZ6LzNncmpiTXlseGlCUWlDWTQ1a1pHTnJRNExoR20yT254cmZJ?=
+ =?utf-8?B?MzFoUlZ0cVhzQ28xM2FuLzd3SlBVUDBVaHZqWHg5UC9PZDhXOE9DWmhxcG1F?=
+ =?utf-8?B?K280VmNsUjZNaS8yMmF3MTE3T1NGckpJeWNISW03bWsrelBSUEJEY2ZMRzBj?=
+ =?utf-8?B?VGxoRytXM0Yzc1RnV2dGM1lkTXl6MjVBWWIxRDlET2lXMXFhVzNGS2ZKRkVZ?=
+ =?utf-8?B?QklCQzdKaUZ2Ry96RGdwZzlkUmJ3PT0=?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(32650700017)(36860700013);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 7xwEdONSGK9H7SokuhxXsQIK2MtYss5ZU74ZaPsT+Mc1UH+DcFSGUPAC/PODlYorEVzifxhwD2I8VzYI4G7b1qWNxLJppY6XdG0/JVA4SZaH9pgwNSe8lBihaHtr6XcT42pQ0BD7m9mEt5BdJjvtwTHgZX2Z9ecqBg8ZsS5NALqD8E3qOtUlme7r+dQZtXAdP8A7SCgp8+8hcW1wr+SQjNu2EQ5xydgsf6gqQT2qzXCXTjW92MzYJ6aPyVtsmUFeLR0cbCsU5v0cYf/S2HGXZW0CsdpKmW902065++waEtGyI45jpj+PfDHDYTjBmo8oMm7wiD77hf/9o0vhdHup0/+PHwHmRaLQrewd+vQLlPsxhAuhYPSqINXF0yXAtkPxrmu3MvLBDnFC3ZkOUw9rk0/lNoNiPjI0PVrvPMbODhcFoY99avA33yNPMQycwokA
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2026 08:36:57.3610 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27e6bdc8-81ac-40fa-4130-08de6948b7b8
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001AB.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0P195MB1883
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,100 +158,49 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/3/26 12:51, Michal Simek wrote:
-> 
-> This is updated series based on v3 version sent here
-> https://lore.kernel.org/all/20231126220836.374956-1-i@shantur.com/
-> 
-> that's why I am continuing on v4 instead of starting from scratch.
-> 
-> Tested on kv260 with saving variables to location where User MTD partition
-> is.
-> CONFIG_EFI_VARIABLE_SF_STORE=y
-> CONFIG_EFI_RT_VOLATILE_STORE=y
-> CONFIG_EFI_VARIABLE_SF_OFFSET=0x22a0000
-> 
-> In Linux:
-> root@som:~# mount | grep efivars
-> none on /sys/firmware/efi/efivars type efivarfs (rw,relatime)
-> root@som:~# printf '\x07\x00\x00\x00Hello' \
->    | sudo tee /sys/firmware/efi/efivars/TestVar-12345678-1234-1234-1234-123456789abc
-> Helloroot@som:~#
-> root@som:~# dd if=/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-11e818c3130c \
->         of=/tmp/vars skip=4 bs=1
-> 1352+0 records in
-> 1352+0 records out
-> 1352 bytes (1.4 kB, 1.3 KiB) copied, 0.380992 s, 3.5 kB/s
-> root@som:~# flashcp /tmp/vars /dev/mtd16
-> root@som:~# reboot
-> 
-> Reboot and then in U-Boot:
-> 
-> ZynqMP> pri -e
-> ...
-> TestVar:
->      12345678-1234-1234-1234-123456789abc (12345678-1234-1234-1234-123456789abc)
->      NV|BS|RT, DataSize = 0x5
->      00000000: 48 65 6c 6c 6f                                   Hello
-> ...
-> 
-> Thanks,
-> Michal
-> 
-> Changes in v7:
-> - sed -i 's/efi_var_from/efi_var_from_storage/g'
-> - sed -i 's/efi_var_from/efi_var_from_storage/g'
-> 
-> Changes in v6:
-> - Return EFI_SUCCESS in efi_set_variable_int() when
->    CONFIG_EFI_VARIABLE_NO_STORE is enabled
-> - sed -i 's/efi_var_read/efi_var_from/g'
-> - sed -i 's/efi_var_write/efi_var_to_storage/g'
-> - sed -i 's/efi_var_read/efi_var_from/g'
-> - sed -i 's/efi_var_write/efi_var_to_storage/g'
-> 
-> Changes in v5:
-> - Invert logic in efi_variable.c and avoid #if
-> 
-> Changes in v4:
-> - New patch based on review comments from v3
-> - Extend Kconfig description
-> - Extend commit message and describe efivar missing part
-> - use unify methods for reading/writing variable
-> 
-> Changes in v3:
-> - Fixed compiler warnings.
-> 
-> Changes in v2:
-> - Refactored efi_var_file to move common parts out as requested
-> - Changed ifdefs to use CONFIG_IS_DEFINED
-> - Fixed typos
-> 
-> Michal Simek (1):
->    efi_var: Unify read/write access helper function
-> 
-> Shantur Rathore (2):
->    efi_var_file: refactor to move buffer functions
->    efi_vars: Implement SPI Flash store
-> 
->   include/efi_variable.h          | 18 +++----
->   lib/efi_loader/Kconfig          | 34 +++++++++++-
->   lib/efi_loader/Makefile         |  3 +-
->   lib/efi_loader/efi_var_common.c | 42 +++++++++++++++
->   lib/efi_loader/efi_var_file.c   | 65 ++---------------------
->   lib/efi_loader/efi_var_sf.c     | 92 +++++++++++++++++++++++++++++++++
->   lib/efi_loader/efi_variable.c   | 19 ++++---
->   7 files changed, 195 insertions(+), 78 deletions(-)
->   create mode 100644 lib/efi_loader/efi_var_sf.c
-> 
+Fix a segmentation fault caused by a null pointer access during root
+partition checking. The function part_get_info() was falsely given null
+for the disk_partition struct, which later resulted in accessing a null
+pointer and thus undefined behavior.
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905D3-CC
+Fixes: 5d7c080ae5dc ("bootstd: rauc: Don't check root part filesystem")
+Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+---
+ boot/bootmeth_rauc.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Thanks,
-Neil
+diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
+index 432d170e006..d7b0c686ffe 100644
+--- a/boot/bootmeth_rauc.c
++++ b/boot/bootmeth_rauc.c
+@@ -97,6 +97,7 @@ static int distro_rauc_scan_parts(struct bootflow *bflow)
+ {
+ 	struct blk_desc *desc;
+ 	struct distro_rauc_priv *priv;
++	struct disk_partition fs_info;
+ 	char *boot_order;
+ 	const char **boot_order_list;
+ 	bool slot_found = false;
+@@ -123,7 +124,7 @@ static int distro_rauc_scan_parts(struct bootflow *bflow)
+ 			if (ret)
+ 				continue;
+ 			fs_close();
+-			ret = part_get_info(desc, slot->root_part, NULL);
++			ret = part_get_info(desc, slot->root_part, &fs_info);
+ 			if (ret)
+ 				continue;
+ 			slot_found = true;
+
+---
+base-commit: 712765339a5c6576fdd5683748f97a1215868d5d
+change-id: 20260211-wip-bootmeth-rauc-part-info-nullaccess-948e546a3751
+
+Best regards,
+-- 
+Martin Schwan <m.schwan@phytec.de>
+
