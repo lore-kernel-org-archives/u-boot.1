@@ -4,117 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB0EE9E31E
-	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 14:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 905DFE9E311
+	for <u-boot@archiver.kernel.org>; Wed, 11 Feb 2026 15:04:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B886583A47;
-	Wed, 11 Feb 2026 15:55:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B878583A47;
+	Wed, 11 Feb 2026 16:04:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s3aGS4Ii";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BQRVVuy9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABFB183CE3; Wed, 11 Feb 2026 15:18:35 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 65E9683B64; Wed, 11 Feb 2026 16:04:42 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7601683015
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 15:18:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2628883015
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 16:04:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7cfdf0c8908so4007364a34.0
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 06:18:33 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-79627af6349so23801547b3.0
+ for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 07:04:37 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770822277; cv=none;
+ d=google.com; s=arc-20240605;
+ b=gA0BWUQ8jgPMH/fhj9/tEzs9ZqTV7bQaYwAqyYb/SvjfUmzAm2IV/4aSjF3QLN/d7I
+ /a2xmMoC1cuw7QW3lFvBCc4aTBX/q1qdDVX5J+qQmFLUNgPw8pYOwSQFxsmznH13bF2/
+ 6nwcmjD4EnP3s37+ugG+O7SRjJ4qeXuzlwlGJh8pS98dbSk7fCgrgRQ9526tXUjuBcZC
+ eJ4F4//wmv+FVadNn5JIFtLGMRBdPfLcAh6qcHpom2JpywBpw1jFcOhBK29wPmtVUBh6
+ tZu9W1dqPu2a2z3ZIKtw9E+Bs2wD0yoDTKJmTD60AH+D72Rs0sLHG4quguhkWS3BH4gc
+ IRFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=K36bUboZh5/L45ESp0Q6eQKda129VjQirL9TP1XBGd4=;
+ fh=scYkI2pdHmhnl5JNcajeOeRDElDDCijDpN9lSr2JUsY=;
+ b=Plr2tU0g4z/h+dVRNR95f26uGR7mOVPoU4pnwSqEzS4e6UTWUK7azuqzR4OtAv+6NA
+ 0NPF9yqmNe15d1+BBxpDqP2cCKbQku3x7QiiQFUWUpxkB3TOqwdQeLHvNSfIOJQ74+/a
+ kWWpSiWF8c1+CfmbZRUDCaEfo2cqpaPqA+eTcU6iebqJDz20NeMaMMVzA1eNsgRapmUh
+ 6+1AVMWGX85fp9B1naSqiZeBhWpLszHxrHNHOv7CvrChv/dLcjOu1Por8LKbagUAI6Z/
+ XQXIKmv+3PDr5qmrrvtCeO4wlqXZ34wtGBcujeO3c4CjXygI6kZ2cG4P/Scv/VQILG/P
+ B8gA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770819512; x=1771424312; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SgGbeAyKN1pVelDoYtvykQ31KnrFjAiHjhNQk7VKoGI=;
- b=s3aGS4IifrVVPrggTKmrZkJm6amHCbK6FPEN3eO47CeAn2uqPz4cZPQNsAylvGjs62
- Is+4+bxDVtRTr/rQJnaRH9LrIWtM+GpVUNl5XbVVoUjGBAizslknN7Q9RFGlSeY/WqMZ
- gdr9qqOY8rl1fiJtJ2YIhRc9+c3mUyCM7DPnU=
+ d=linaro.org; s=google; t=1770822277; x=1771427077; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=K36bUboZh5/L45ESp0Q6eQKda129VjQirL9TP1XBGd4=;
+ b=BQRVVuy91hUg+ypgxNLhXkmw/Hhc7OhC8pM/85p2Kf0JSY9I3mlmLGi5g8NTqs2O+g
+ ccs+GW+xkdqSqlxqLUVFpyzEJHCwv1u02gnNaEOCfkqRweRtVtnCxifasNyvU/lcCWaI
+ esk284o0zaup2RLMnW6rR/+k7cT3B2BSCQ6KsfINbWkroKP5gjJxUDByHUrKKJbnD+Od
+ hrY5gZi7IPWraMPxELT24aG3jupXUhKJ0wSJHTbJ/sbTfjAZBwK6cxk7ezBz5ivjeqOa
+ Ae/uWd/MfBsp3lg2/aVV9TDA0tHpLlN/AB9kb6YyaI5OyoEDz6gPjRxA0UjBCzCF1Ijg
+ vcBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770819512; x=1771424312;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SgGbeAyKN1pVelDoYtvykQ31KnrFjAiHjhNQk7VKoGI=;
- b=cdF/g0KnIEqQ3IzsyvfECAimPIexUBQ28JU20g6eWxBbruFhIb8SIxFSBQ0B4SY/J4
- pxT4oR43B9tUadnGVnWa+a2Sx51gAMI7eAV1cz9XTe6wpwQsz5QbcIinw6vQSZ9calz1
- cU3gVW9bXEVJSvnnsMjlX7x2Hc9kLTLCnhrkzlUMVOBzgyPLezsYwSCYQLuY2v6n7wXs
- G5Fnibqf0u+/0B3oTBLtrbelr/tQ6cfT6CuRtqCOWUZra9xkIKNoYs7Xo1gBmH/MNlN8
- JFJSxtS5B97wa50CdCButy+Mp16Ww15fzZ5hlcR/GE9PVelOtUwHFJUfo/otGHLkDrf1
- yE9w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7ADwP0iFElLAvP4zlyChxpG561cEYJ+zkLO7yxMAlaEz9p+wzJW7DjZJnxiYYbY2QYYh/Avg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8hNTQrvOzCsRz6qq+/ZBdJUBTItj1ItFucZbhoUkR3jQcb2Ao
- 3d7yEwGk+Ep/m2e7MOCePHqtyDuKJEzw5feZ4WqQHzQP2Zf3wLdttqzsvkng4M1LybI=
-X-Gm-Gg: AZuq6aJYokjZMCIC/zAewNsXC/hfjrNyC72+2DRW0aKZgOZJj82l+H8UfRxxFDhbDUM
- aDvQmk5VV7NK8oZswFJlpZ/7MS7RzOIviwYXisC5/cbCT5hJzIXgDpUq0VxHN3dAOV/B9QO+mL+
- v1txBluKbjKb4Lr4PXcO8pgOY1jgWrGyZy9SygPpmZHV6No/D802jkRlO6TiX5aVEDCr49SQ8Sa
- jE9hxKuCba4h6GQW4z6AuRjOQAFEbCFEKx3fjUOlmgDbyBbPSDQdftsqwKydPBPLCt+puD5A24w
- GuPCWi66a2fbx8Wf9prujiH+1Wh3USL0Z/7l+S5CHpqCvWCXymxb4sayW+QatJ5UQzgAM9Xt6yx
- qDMJWgnJiI+qT6rCmDx9YvXFUfYpBsrPg7d14wZR0yHyxYN0RzYgjM4YxTZEeqAr+djIY7bTLqu
- Ei3jcLHDkK0YFPSwAsCXM47aJvcM9d8eDZnhhzP6rLyfbfDcMeu1MYa9R6HphSt/nyRKK3ZRZ/R
- YFt4mYJ366a/yzE1Mi8kLSkGCcFqu5R5HWqrXmsiu2nALDY1E8=
-X-Received: by 2002:a05:6830:6487:b0:7d0:2e9e:3984 with SMTP id
- 46e09a7af769-7d4a6d61c24mr1033614a34.4.1770819512195; 
- Wed, 11 Feb 2026 06:18:32 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a76e1b0csm1293031a34.14.2026.02.11.06.18.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Feb 2026 06:18:31 -0800 (PST)
-Date: Wed, 11 Feb 2026 08:18:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, "Andrew F. Davis" <afd@ti.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Michal Simek <michal.simek@amd.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, Minkyu Kang <mk7.kang@samsung.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- Varshini Rajendran <varshini.rajendran@microchip.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
- Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
- E Shattow <e@freeshell.de>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Sam Edwards <cfsworks@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Greg Malysa <malysagreg@gmail.com>,
- James Hilliard <james.hilliard1@gmail.com>, Yao Zi <me@ziyao.cc>,
- Raymond Mao <raymondmaoca@gmail.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
- Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] kbuild: Bump the build system to 6.1
-Message-ID: <20260211141827.GA2747538@bill-the-cat>
-References: <20251216091632.512635-1-ilias.apalodimas@linaro.org>
- <0205a2e4-0ccb-4dd0-b901-cc6afae31189@kontron.de>
+ d=1e100.net; s=20230601; t=1770822277; x=1771427077;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K36bUboZh5/L45ESp0Q6eQKda129VjQirL9TP1XBGd4=;
+ b=akGEcPFu1lIHCIULn/sK908sz+/7vsvFe+PqddyEK7by5Y/aAdlj1fR/ypQO42Y69p
+ 2GrGqI778N2SgzpQtF6NzvvvWkSLxsPzYURi+HebTWJCA6tnDQ0voF8pyzH3o4lhfCPL
+ oCvF0cKgPyWAy+tFmM688eb7trchQVlUqOYfp8tXW15E18Rzd183wyabRDSAbHWMPs6I
+ A0ix/xzhzh5F8zetiyo+45uzeDtFW5y7DJRgG72UP/wxK0gbSaLlQPMiOPuBW7QC8Qz9
+ C/OxOLqT5f73id3uXm81rA+HyQiH6V8Z5p5cdsglzGO8HeKmzKMOctvW/Om//MxmlzaJ
+ DQYg==
+X-Gm-Message-State: AOJu0YwNvdUEEBWTXmU3HG6HYdB+bJrF8qf8mKjh3363b2CsBm85laE7
+ LWOwlOlk4eTIko4YVNZ3vR+dAeyM+txzWQ9GujiO2BJKUkWmz1e75ajXk1dUyyiBsjSmjTOVxg+
+ 3FmfX3go/iVkGwgpCq08WwOxI6VfNeqN98tL2p9nzmg==
+X-Gm-Gg: AZuq6aJAKX/x5UVZt14Q+Ufs6+A9Dqge9WtjVHg+YYSXaphqwAlZJFOGMknBmWnzSBv
+ JmK3zBbI0K8WDOOo50NDmAobSCtIhR/DADw1SMp06I7i6mP/T9YbTjscNZvz++4KWShp5bvbUdi
+ n5nIP2iHHuXg8k4Ulj1+sWGzM2oC7Xi53X/TSs4dSKIhgLSRuLQYqktTkS2rgcWaNjEFDdccQ3b
+ eeXj3wKjwlrHABmE+44NwHngvhUzAbYKntOfT1nlO/LCped2z7aoYW3hT6ZmE0+KRuu1dVdDkVj
+ s1HgYJmtZBVsBt5BXYPTwPxCKmls+zxCKoc+Uoe2PMQU3gemZ0SNFO1F6AfxVsJIRKPxGK+05EF
+ IdkO14cXqpEAmcsJmyMPfCNZ3NXwyjATg6Ps9IirZF+KW7eYnvTOXbVxvTStQZdI8Imk5SbNi+0
+ HN5YD2NyfJ5psyPf85odktsAFra281rJlsBQBAuVEHaRyF6Igkd9twnFQxqOnWod8LdtGkVhbc1
+ K6QWiqSExLzVXFmvAB7FgBVG9vZKy/4Aw2HNct6bB9NXJ38usmhA9a+0CO+QL59/JJ4NtluzZAL
+ XNMZO2enford98Y9+M3VOOirhG6SGjY5L3iaNOv3daX4
+X-Received: by 2002:a05:690c:9a0c:b0:796:3c99:1833 with SMTP id
+ 00721157ae682-7963c992586mr220059407b3.60.1770822276202; Wed, 11 Feb 2026
+ 07:04:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tl9mTS8uVEwtNL+d"
-Content-Disposition: inline
-In-Reply-To: <0205a2e4-0ccb-4dd0-b901-cc6afae31189@kontron.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Wed, 11 Feb 2026 15:55:26 +0100
+References: <cover.1770119483.git.michal.simek@amd.com>
+ <1f50d76c2370b9b032e73c35c05246cc70255b28.1770119483.git.michal.simek@amd.com>
+ <CAC_iWjKxshi4fEtUvvrwGrd8quSUNeeuqjTV=gFrW4x6uXi55A@mail.gmail.com>
+In-Reply-To: <CAC_iWjKxshi4fEtUvvrwGrd8quSUNeeuqjTV=gFrW4x6uXi55A@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Feb 2026 17:04:00 +0200
+X-Gm-Features: AZwV_QgMzWOHjAAh2Na5oCMGPidgHyNEsPfNlLj9DiitwHcdYF935NoUiS-pOpA
+Message-ID: <CAC_iWjKyuoFAVVTv=+tajWJoYtEv4bxebWMAxqUehSEk2YMQaQ@mail.gmail.com>
+Subject: Re: [PATCH v7 1/3] efi_var_file: refactor to move buffer functions
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, Shantur Rathore <i@shantur.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,61 +120,294 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+So this fails for a weird reason
 
---tl9mTS8uVEwtNL+d
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Some boards don't have FAT_WRTE. It seems that the Kconfig order
+matters and those boards pick the new option if SPI is enabled.
 
-On Wed, Feb 11, 2026 at 02:34:59PM +0100, Frieder Schrempf wrote:
-> On 16.12.25 10:16, Ilias Apalodimas wrote:
-> > From: Sughosh Ganu <sughosh.ganu@linaro.org>
-> >=20
-> > Our last sync with the kernel was 5.1.
-> >=20
-> > We are so out of sync now, that tracking the patches and backporting
-> > them one by one makes little sense and it's going to take ages.
-> >=20
-> > This is an attempt to sync up Makefiles to 6.1.
-> > Unfortunately due to sheer amount of patches this is not easy to review,
-> > but that's what we decided during a community call for the bump to 5.1,
-> > so we are following the same guidelines here.
-> >=20
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>a #rebased=
- on -next
->=20
-> To me, it looks like this is breaking "make cross_tools" in some way. Or
-> am I missing something?
->=20
-> With v2026.04-rc2:
->=20
-> > make tools-only_defconfig
-> > make cross_tools
->   UPD     include/generated/timestamp_autogenerated.h
->   PYMOD   rebuild
-> tools/Makefile:359: *** insufficient number of arguments (1) to function
-> 'filter'.  Stop.
-> make: *** [Makefile:2191: tools] Error 2
->=20
-> If the problem is not on my end, then I would have assumed the CI would
-> be able to catch it. But "make cross_tools" is not part of any test, righ=
-t?
+This fixes it
 
-It is not, but we should add it to the tools-only CI job I think.
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index c13cb8952caa..0f6f927ddaf1 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -112,7 +112,8 @@ menu "UEFI Variables"
 
---=20
-Tom
+ choice
+        prompt "Store for non-volatile UEFI variables"
+-       default EFI_VARIABLE_FILE_STORE
++       default EFI_VARIABLE_FILE_STORE if FAT_WRITE
++       default EFI_VARIABLE_NO_STORE
+        help
+          Select where non-volatile UEFI variables shall be stored.
 
---tl9mTS8uVEwtNL+d
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaYyPsAAKCRAr4qD1Cr/k
-ChNrAQC+HhFrVfqKY435OOJNNXASjBHlMHJBuZypIBZhMlBP/QEA2pnmiwbFR48T
-8G19rBl9Lrg4zCtUOX6mGDERo5S0MAA=
-=oqoT
------END PGP SIGNATURE-----
-
---tl9mTS8uVEwtNL+d--
+On Wed, 11 Feb 2026 at 11:53, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Michael
+>
+> The CI seems to fail on this one for some reason.
+> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/29248
+>
+> Can you take a look ?
+>
+> Thanks
+> /Ilias
+>
+>
+>
+>
+> On Tue, 3 Feb 2026 at 13:51, Michal Simek <michal.simek@amd.com> wrote:
+> >
+> > From: Shantur Rathore <i@shantur.com>
+> >
+> > Currently efi_var_file.c has functions to store/read
+> > EFI variables to/from memory buffer. These functions
+> > can be used with other EFI variable stores so move
+> > them out to efi_var_common.c
+> >
+> > Signed-off-by: Shantur Rathore <i@shantur.com>
+> > Signed-off-by: Michal Simek <michal.simek@amd.com>
+> > ---
+> >
+> > (no changes since v6)
+> >
+> > Changes in v6:
+> > - Return EFI_SUCCESS in efi_set_variable_int() when
+> >   CONFIG_EFI_VARIABLE_NO_STORE is enabled
+> >
+> > Changes in v5:
+> > - Invert logic in efi_variable.c and avoid #if
+> >
+> >  include/efi_variable.h          |  5 +++
+> >  lib/efi_loader/Makefile         |  2 +-
+> >  lib/efi_loader/efi_var_common.c | 42 ++++++++++++++++++++++++
+> >  lib/efi_loader/efi_var_file.c   | 57 ---------------------------------
+> >  lib/efi_loader/efi_variable.c   | 17 +++++++---
+> >  5 files changed, 60 insertions(+), 63 deletions(-)
+> >
+> > diff --git a/include/efi_variable.h b/include/efi_variable.h
+> > index 4065cf45ecaf..ee68fa4a885f 100644
+> > --- a/include/efi_variable.h
+> > +++ b/include/efi_variable.h
+> > @@ -161,6 +161,11 @@ efi_status_t efi_var_to_file(void);
+> >  efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
+> >                                             u32 check_attr_mask);
+> >
+> > +/* GUID used by Shim to store the MOK database */
+> > +#define SHIM_LOCK_GUID \
+> > +       EFI_GUID(0x605dab50, 0xe046, 0x4300, \
+> > +                0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23)
+> > +
+> >  /**
+> >   * efi_var_restore() - restore EFI variables from buffer
+> >   *
+> > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> > index f490081f6542..ca1775eb03be 100644
+> > --- a/lib/efi_loader/Makefile
+> > +++ b/lib/efi_loader/Makefile
+> > @@ -53,7 +53,7 @@ ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
+> >  obj-y += efi_variable_tee.o
+> >  else
+> >  obj-y += efi_variable.o
+> > -obj-y += efi_var_file.o
+> > +obj-$(CONFIG_EFI_VARIABLE_FILE_STORE) += efi_var_file.o
+> >  obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
+> >  endif
+> >  obj-y += efi_watchdog.o
+> > diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+> > index 4b34a58b4cf7..5ea1688dca3d 100644
+> > --- a/lib/efi_loader/efi_var_common.c
+> > +++ b/lib/efi_loader/efi_var_common.c
+> > @@ -41,6 +41,7 @@ static const struct efi_auth_var_name_type name_type[] = {
+> >
+> >  static bool efi_secure_boot;
+> >  static enum efi_secure_mode efi_secure_mode;
+> > +static const efi_guid_t shim_lock_guid = SHIM_LOCK_GUID;
+> >
+> >  /**
+> >   * efi_efi_get_variable() - retrieve value of a UEFI variable
+> > @@ -488,3 +489,44 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
+> >
+> >         return EFI_SUCCESS;
+> >  }
+> > +
+> > +efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+> > +{
+> > +       struct efi_var_entry *var, *last_var;
+> > +       u16 *data;
+> > +       efi_status_t ret;
+> > +
+> > +       if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
+> > +           buf->crc32 != crc32(0, (u8 *)buf->var,
+> > +                               buf->length - sizeof(struct efi_var_file))) {
+> > +               log_err("Invalid EFI variables file\n");
+> > +               return EFI_INVALID_PARAMETER;
+> > +       }
+> > +
+> > +       last_var = (struct efi_var_entry *)((u8 *)buf + buf->length);
+> > +       for (var = buf->var; var < last_var;
+> > +            var = (struct efi_var_entry *)ALIGN((uintptr_t)data + var->length, 8)) {
+> > +               data = var->name + u16_strlen(var->name) + 1;
+> > +
+> > +               /*
+> > +                * Secure boot related and volatile variables shall only be
+> > +                * restored from U-Boot's preseed.
+> > +                */
+> > +               if (!safe &&
+> > +                   (efi_auth_var_get_type(var->name, &var->guid) !=
+> > +                    EFI_AUTH_VAR_NONE ||
+> > +                    !guidcmp(&var->guid, &shim_lock_guid) ||
+> > +                    !(var->attr & EFI_VARIABLE_NON_VOLATILE)))
+> > +                       continue;
+> > +               if (!var->length)
+> > +                       continue;
+> > +               if (efi_var_mem_find(&var->guid, var->name, NULL))
+> > +                       continue;
+> > +               ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
+> > +                                     var->length, data, 0, NULL,
+> > +                                     var->time);
+> > +               if (ret != EFI_SUCCESS)
+> > +                       log_err("Failed to set EFI variable %ls\n", var->name);
+> > +       }
+> > +       return EFI_SUCCESS;
+> > +}
+> > diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+> > index ba0bf33ffbd1..d32edaac277d 100644
+> > --- a/lib/efi_loader/efi_var_file.c
+> > +++ b/lib/efi_loader/efi_var_file.c
+> > @@ -14,17 +14,9 @@
+> >  #include <mapmem.h>
+> >  #include <efi_loader.h>
+> >  #include <efi_variable.h>
+> > -#include <u-boot/crc.h>
+> >
+> >  #define PART_STR_LEN 10
+> >
+> > -/* GUID used by Shim to store the MOK database */
+> > -#define SHIM_LOCK_GUID \
+> > -       EFI_GUID(0x605dab50, 0xe046, 0x4300, \
+> > -                0xab, 0xb6, 0x3d, 0xd8, 0x10, 0xdd, 0x8b, 0x23)
+> > -
+> > -static const efi_guid_t shim_lock_guid = SHIM_LOCK_GUID;
+> > -
+> >  /**
+> >   * efi_set_blk_dev_to_system_partition() - select EFI system partition
+> >   *
+> > @@ -59,7 +51,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
+> >   */
+> >  efi_status_t efi_var_to_file(void)
+> >  {
+> > -#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+> >         efi_status_t ret;
+> >         struct efi_var_file *buf;
+> >         loff_t len;
+> > @@ -91,52 +82,6 @@ error:
+> >  out:
+> >         free(buf);
+> >         return ret;
+> > -#else
+> > -       return EFI_SUCCESS;
+> > -#endif
+> > -}
+> > -
+> > -efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+> > -{
+> > -       struct efi_var_entry *var, *last_var;
+> > -       u16 *data;
+> > -       efi_status_t ret;
+> > -
+> > -       if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
+> > -           buf->crc32 != crc32(0, (u8 *)buf->var,
+> > -                               buf->length - sizeof(struct efi_var_file))) {
+> > -               log_err("Invalid EFI variables file\n");
+> > -               return EFI_INVALID_PARAMETER;
+> > -       }
+> > -
+> > -       last_var = (struct efi_var_entry *)((u8 *)buf + buf->length);
+> > -       for (var = buf->var; var < last_var;
+> > -            var = (struct efi_var_entry *)
+> > -                  ALIGN((uintptr_t)data + var->length, 8)) {
+> > -
+> > -               data = var->name + u16_strlen(var->name) + 1;
+> > -
+> > -               /*
+> > -                * Secure boot related and volatile variables shall only be
+> > -                * restored from U-Boot's preseed.
+> > -                */
+> > -               if (!safe &&
+> > -                   (efi_auth_var_get_type(var->name, &var->guid) !=
+> > -                    EFI_AUTH_VAR_NONE ||
+> > -                    !guidcmp(&var->guid, &shim_lock_guid) ||
+> > -                    !(var->attr & EFI_VARIABLE_NON_VOLATILE)))
+> > -                       continue;
+> > -               if (!var->length)
+> > -                       continue;
+> > -               if (efi_var_mem_find(&var->guid, var->name, NULL))
+> > -                       continue;
+> > -               ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
+> > -                                     var->length, data, 0, NULL,
+> > -                                     var->time);
+> > -               if (ret != EFI_SUCCESS)
+> > -                       log_err("Failed to set EFI variable %ls\n", var->name);
+> > -       }
+> > -       return EFI_SUCCESS;
+> >  }
+> >
+> >  /**
+> > @@ -155,7 +100,6 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+> >   */
+> >  efi_status_t efi_var_from_file(void)
+> >  {
+> > -#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+> >         struct efi_var_file *buf;
+> >         loff_t len;
+> >         efi_status_t ret;
+> > @@ -180,6 +124,5 @@ efi_status_t efi_var_from_file(void)
+> >                 log_err("Invalid EFI variables file\n");
+> >  error:
+> >         free(buf);
+> > -#endif
+> >         return EFI_SUCCESS;
+> >  }
+> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> > index f3533f4def3a..6e45134c61bf 100644
+> > --- a/lib/efi_loader/efi_variable.c
+> > +++ b/lib/efi_loader/efi_variable.c
+> > @@ -397,11 +397,15 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+> >                 ret = EFI_SUCCESS;
+> >
+> >         /*
+> > -        * Write non-volatile EFI variables to file
+> > +        * Write non-volatile EFI variables
+> >          * TODO: check if a value change has occured to avoid superfluous writes
+> >          */
+> > -       if (attributes & EFI_VARIABLE_NON_VOLATILE)
+> > +       if (attributes & EFI_VARIABLE_NON_VOLATILE) {
+> > +               if (IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE))
+> > +                       return EFI_SUCCESS;
+> > +
+> >                 efi_var_to_file();
+> > +       }
+> >
+> >         return EFI_SUCCESS;
+> >  }
+> > @@ -594,9 +598,12 @@ efi_status_t efi_init_variables(void)
+> >         if (ret != EFI_SUCCESS)
+> >                 return ret;
+> >
+> > -       ret = efi_var_from_file();
+> > -       if (ret != EFI_SUCCESS)
+> > -               return ret;
+> > +       if (!IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE)) {
+> > +               ret = efi_var_from_file();
+> > +               if (ret != EFI_SUCCESS)
+> > +                       return ret;
+> > +       }
+> > +
+> >         if (IS_ENABLED(CONFIG_EFI_VARIABLES_PRESEED)) {
+> >                 ret = efi_var_restore((struct efi_var_file *)
+> >                                       __efi_var_file_begin, true);
+> > --
+> > 2.43.0
+> >
