@@ -4,104 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01135EE368F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 14:31:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B504EE3690
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 14:40:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3115E83AAB;
-	Thu, 12 Feb 2026 15:31:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8D2B38388D;
+	Thu, 12 Feb 2026 15:40:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ilV5xDQz";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XidIj3Ja";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5826283015; Thu, 12 Feb 2026 15:31:27 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 605E783015
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 15:31:25 +0100 (CET)
+ id 9BBCB83AAB; Thu, 12 Feb 2026 15:40:21 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 664B683015
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 15:40:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fBd5m5hFCz9vDx;
- Thu, 12 Feb 2026 15:31:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770906685;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kpc1ZY23CCsNUyJXbMpUpVXWWbHphBa8OQrB8msDZY8=;
- b=ilV5xDQzvFU0u9YXW/YFMEjCSBqu511cnqi+sw5PP/lPbHmS/Np5XlFxTeYbjrqScEgSZI
- OfnvRxVyMTnOJyhwYGRuY22lXiHvvehaV2J7Z6jvCVoAZpTwrjvu6KIZCiBXvDIW20/EH2
- 4DZb6xar5rPF9xMHJ+N7UBYRmiN1nhqhDXz4Ymj3VKqOwKxr1FPCwU56tnHEhNPmt+BqG6
- ziKMdUR1cSfwJ+MxM7VihqJrD0omAZyzN0LS52MjmllYuuqxdjoC5I9dkAbICAu4Aon161
- tAcWfhgQcgH/8YAq+I7UJ/jRLf9VcVFeykiJi1A6H3iXXXwyTSIQZak6A4uiwA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=XidIj3Ja;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <65efde85-3e0e-46f4-acc9-8384a08a8e54@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1770906682;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kpc1ZY23CCsNUyJXbMpUpVXWWbHphBa8OQrB8msDZY8=;
- b=XidIj3JaWG202NdXdorqPkmqS3+6mGM+KAs52pkVMJKwIzcZweMYrrm9+ewNiTBMa6ZEw9
- Y0UJAst06ZDgFQ9tbJ6d/5kqMVjT8jKj6/81JPFcqsVREkkA9RTaW87vQvWQ5YyPT7WnCM
- PJOoU5iGAZQ/WMAKxWGDBt8eYJaL6ypGryjGk2DH0wS5SdEjmGwvDgPfiIL4iJdTgSoIf1
- KpEheoNZ2LAEAnR6ieImlMcYFfWDugTwy8V4ecLonGmP6yguP5wi+UeChSBSw4KdIXJrcU
- TaEFnA775m3h5cyT7Dd59MX5tAUT0Oyuq9aTyt/zp0UpcqpFBjvfcUuXlbrHjg==
-Date: Thu, 12 Feb 2026 15:07:03 +0100
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4D146339;
+ Thu, 12 Feb 2026 06:40:12 -0800 (PST)
+Received: from debian (MacBookPro.nice.arm.com [10.34.124.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id BCBFD3F632;
+ Thu, 12 Feb 2026 06:40:17 -0800 (PST)
+From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: u-boot@lists.denx.de
+Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Jose Marinho <jose.marinho@arm.com>
+Subject: [PATCH v2] efi_loader: fix ecpt size computation
+Date: Thu, 12 Feb 2026 15:40:15 +0100
+Message-ID: <20260212144015.3898750-1-vincent.stehle@arm.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260211093308.3265022-1-vincent.stehle@arm.com>
+References: <20260211093308.3265022-1-vincent.stehle@arm.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] scsi: Adjust SCSI inquiry command data length
-To: =?UTF-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
- "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>,
- =?UTF-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>,
- "trini@konsulko.com" <trini@konsulko.com>, Ryder Lee
- <Ryder.Lee@mediatek.com>, =?UTF-8?B?U2FtIFNoaWggKOWPsueiqeS4iSk=?=
- <Sam.Shih@mediatek.com>, =?UTF-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?=
- <Weijie.Gao@mediatek.com>,
- "aouledameur@baylibre.com" <aouledameur@baylibre.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "quic_varada@quicinc.com" <quic_varada@quicinc.com>,
- =?UTF-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?= <bear.wang@mediatek.com>,
- "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
- "andrew.goodbody@linaro.org" <andrew.goodbody@linaro.org>,
- Project_Global_Chrome_Upstream_Group
- <Project_Global_Chrome_Upstream_Group@mediatek.com>,
- "macpaul@gmail.com" <macpaul@gmail.com>,
- =?UTF-8?B?UmFtYXggTG8gKOe+heaYjumBoCk=?= <Ramax.Lo@mediatek.com>,
- "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
- =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
- "marex@denx.de" <marex@denx.de>, "sjg@chromium.org" <sjg@chromium.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- "balaji.selvanathan@oss.qualcomm.com" <balaji.selvanathan@oss.qualcomm.com>,
- "casey.connolly@linaro.org" <casey.connolly@linaro.org>,
- =?UTF-8?B?SHQgTGluICjmnpfngJrlrpcp?= <Ht.Lin@mediatek.com>
-References: <20260211104043.2445588-1-macpaul.lin@mediatek.com>
- <52bb5837-ed36-4749-824b-e1215bedfce4@mailbox.org>
- <cc89f88aa46ee7f260b8182484701f0ce02f60bc.camel@mediatek.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <cc89f88aa46ee7f260b8182484701f0ce02f60bc.camel@mediatek.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 486uye6qkwbsn76o7pibq9rugfruu81e
-X-MBO-RS-ID: 922e14de183054bbf3c
-X-Rspamd-Queue-Id: 4fBd5m5hFCz9vDx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,29 +57,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/12/26 9:21 AM, Macpaul Lin (林智斌) wrote:
-> On Wed, 2026-02-11 at 12:06 +0100, Marek Vasut wrote:
->>
->> External email : Please do not click links or open attachments until
->> you have verified the sender or the content.
->>
->>
->> On 2/11/26 11:40 AM, Macpaul Lin wrote:
->>> Adjust the data length of the SCSI inquiry command to accommodate
->>> various
->>> UFS device vendors. This prevents SCSI detection failures on
->>> Longsys UFS
->>> devices. Verified with Hynix, SD, and Longsys UFS devices.
->> Can this be quirked using some vendor/device ID match , so only the
->> problematic devices suffer the consequences ? Thank you
-> 
-> During the patch reviewing last time, Eric (HT Lin) commented
-> the length of 512 bytes is not follow the specification of UFS storage;
-> it should be 36 bytes. So these are not problematic devices actually.
-> However, I'm wondering how the parameter should apply to the
-> traditional SCSI devices like harddrive  or USB disk.
-> 
-> I'll double check it with Eric then update new patch around the end of
-> February.
-Thank you, and yes, I was about to point out that this is a scsi core 
-code, this applies to SCSI, USB and such devices.
+The size of the memory allocated for the EFI Conformance Profiles Table is
+computed with `num_entries' always equal to zero, which is incorrect when
+CONFIG_EFI_EBBR_2_1_CONFORMANCE is enabled.
+
+This can be verified by allocating the ECPT memory with malloc() instead of
+efi_allocate_pool(), building u-boot with sandbox_defconfig and
+CONFIG_VALGRIND=y, and by finally running the following command:
+
+  valgrind --suppressions=scripts/u-boot.supp \
+    ./u-boot -T -c 'efidebug tables'
+
+Fix this by using an array of the supported profiles GUIDs instead, which
+should also be easier to extend in the future as U-Boot should publish the
+GUIDs for all supported EBBR revisions.
+
+Fixes: 6b92c1735205 ("efi: Create ECPT table")
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Jose Marinho <jose.marinho@arm.com>
+---
+
+
+Changes for v2:
+- Mention in the commit message that U-Boot should publish all supported
+  EBBR GUIDs (suggested by Heinrich)
+- Move the array declaration into the function (suggested by Heinrich)
+
+
+ lib/efi_loader/efi_conformance.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_conformance.c
+index 2bae93a94bd..2d31800ccb8 100644
+--- a/lib/efi_loader/efi_conformance.c
++++ b/lib/efi_loader/efi_conformance.c
+@@ -13,8 +13,6 @@
+ #include <malloc.h>
+ 
+ static const efi_guid_t efi_ecpt_guid = EFI_CONFORMANCE_PROFILES_TABLE_GUID;
+-static const efi_guid_t efi_ebbr_2_1_guid =
+-	EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID;
+ 
+ /**
+  * efi_ecpt_register() - Install the ECPT system table.
+@@ -23,12 +21,17 @@ static const efi_guid_t efi_ebbr_2_1_guid =
+  */
+ efi_status_t efi_ecpt_register(void)
+ {
+-	u16 num_entries = 0;
+ 	struct efi_conformance_profiles_table *ecpt;
+ 	efi_status_t ret;
+ 	size_t ecpt_size;
+ 
+-	ecpt_size = num_entries * sizeof(efi_guid_t)
++	static const efi_guid_t profiles[] = {
++	#if CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE)
++		EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
++	#endif
++	};
++
++	ecpt_size = sizeof(profiles)
+ 		+ sizeof(struct efi_conformance_profiles_table);
+ 	ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, ecpt_size,
+ 				(void **)&ecpt);
+@@ -39,12 +42,9 @@ efi_status_t efi_ecpt_register(void)
+ 		return ret;
+ 	}
+ 
+-	if (CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE))
+-		guidcpy(&ecpt->conformance_profiles[num_entries++],
+-			&efi_ebbr_2_1_guid);
+-
++	memcpy(ecpt->conformance_profiles, profiles, sizeof(profiles));
+ 	ecpt->version = EFI_CONFORMANCE_PROFILES_TABLE_VERSION;
+-	ecpt->number_of_profiles = num_entries;
++	ecpt->number_of_profiles = ARRAY_SIZE(profiles);
+ 
+ 	/* Install the ECPT in the system configuration table. */
+ 	ret = efi_install_configuration_table(&efi_ecpt_guid, (void *)ecpt);
+-- 
+2.51.0
+
