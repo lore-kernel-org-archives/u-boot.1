@@ -4,96 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C72EEA84E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 20:45:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1041EEA84E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 20:45:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B72183D6C;
-	Thu, 12 Feb 2026 21:45:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6EA0B83DE0;
+	Thu, 12 Feb 2026 21:45:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="BA1s+RGr";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="J5tYWIoS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 746B383DCA; Thu, 12 Feb 2026 21:45:28 +0100 (CET)
+ id C528883D5D; Thu, 12 Feb 2026 21:45:29 +0100 (CET)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5530183D5D
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 21:45:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B9CE83CB5
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 21:45:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=redhat.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javierm@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1770929124;
+ s=mimecast20190719; t=1770929126;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Z20qoABZ2CA0QB1vSCQ9Zi0sSxjQk09IoYggdGSkk+8=;
- b=BA1s+RGrwDr/TEIy+o2PIceUdQqRl3qVdbvtqEiQUkRaSKapQmHGivAIRINY01taYdYbB0
- SN8alBOJXSRwu06AVevHmTtf6r405BOObsvG+GMcgRDBuQHCQsnAJtUgYqCi4F1ZAIuZAz
- N6cKNk/82uz1uvZZI41oQaWuxGJhLDQ=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=bPjEhwKqFdW3U76c2HevInzAo01+HnpgzrClJb7Nnk8=;
+ b=J5tYWIoSAac7QMkkaFeTCGrdNfmD9F4jyvLt/zobEIB3yEXpem+8uuAz/TdKtMn7VZKd+4
+ 3IgdjJaClD8H0PRWv1BnLurHWAu9Nep/Hn6J0U+25AAKbmFMOYR0l9H0hhsqjEJaAylLI5
+ D1XXpQRiUSwIjg1TK+DI9lLjvyw6fLg=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-77-vmYbA8MxOhGm7H0pLYSNNQ-1; Thu, 12 Feb 2026 15:45:23 -0500
-X-MC-Unique: vmYbA8MxOhGm7H0pLYSNNQ-1
-X-Mimecast-MFC-AGG-ID: vmYbA8MxOhGm7H0pLYSNNQ_1770929122
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4802bb29400so1840395e9.0
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 12:45:23 -0800 (PST)
+ us-mta-529-0AO64U2fMIulHGSIT6_11Q-1; Thu, 12 Feb 2026 15:45:25 -0500
+X-MC-Unique: 0AO64U2fMIulHGSIT6_11Q-1
+X-Mimecast-MFC-AGG-ID: 0AO64U2fMIulHGSIT6_11Q_1770929124
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4806cfffca6so2095595e9.2
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 12:45:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770929121; x=1771533921;
+ d=1e100.net; s=20230601; t=1770929123; x=1771533923;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Z20qoABZ2CA0QB1vSCQ9Zi0sSxjQk09IoYggdGSkk+8=;
- b=YJfxqP6T8bhZW92hERHkB3MvPk/gXKjxfEpYVgs0qVihCR4KQl48eJ9lQ7qzd2rkVk
- r+UDla75n6vV+LfUpHBbC7FonSPWupdmpR2vWwBOmL9y4ZHeHz8BIS1eXp+OKwpK08cn
- 4904imCf9QvQZB96E606ve9scnNMXOEmSRqt7quZsfqdyxlLokK37BCn6T0IyJMCUE1R
- SNNGpN9IQkOn0pZ4v2HlfnHYxyB/Mvue5BCQ4xxW95J9TOH1YthNhUDMcO4iDBxSxMJt
- DGV6p5dftTDzN6Dp1ZYdmFcdTWfyBTu51yDFc/1RWyrm5bvSl+ENTZDUvDsOSBeK0Fde
- Wx0w==
-X-Gm-Message-State: AOJu0YxMHUtABNTlkRFOdGzFu9MJ64TtLhj8xmx635ppf5CUgbUDzQbd
- DATpja1NR293MioXJftAPiBiN16kO483XYhH8jMwzA3DqRUiWiFdlDMSFQwiJOox20C/mRqriIe
- BqUhSMvrLOUHivcBRzM/SvtEV4D66wlHybyhjPmKegY8noi54JSCw7zwn39oR0s1IAD7lVHZV+8
- ZTKsugLxjXj1hQKj+Ja+X8VFaaygUp9AK5MsHCGQ==
-X-Gm-Gg: AZuq6aJHG9R7bFYNPYl0wIyZrxpHmA1jiGc8EJdibVyJLZYx0dWJsRl0kM3Y3Q1K+gN
- uDHI6RXzGRExYCn/QNNnSalbgTCK3QrVRIYJ8dPsAkQef/PJ9qr4HE0/6DsNGYEFAeYHgusivO5
- 31BfOhcLDUSQxkbjkN13dFdaNjjE4miCouOdDyFufmHBod4lMI6JzcqMVGGF9HWqdnR9ExuxJRy
- pYl3tFbPN8bDvjVB1cGltoY9o8XYJ/ZggskvGJ+LyI9KpA71e3NSYOtXW6Qjg6pEHxB9K9FX5eY
- ZYYEagXvRQAyYRwofPLhtcYC7JDmUE3keLMcb5BiSkw0kPdKBzpEaix8NHCGahHxeHWMgDRK8rm
- GoxKw18NS81D1z4Ryk8OA2LMDzJQ2M/qFXXmhasi+8Vmz6wo=
-X-Received: by 2002:a05:600c:3b8b:b0:483:43d8:8d68 with SMTP id
- 5b1f17b1804b1-48371040571mr7338495e9.28.1770929121290; 
- Thu, 12 Feb 2026 12:45:21 -0800 (PST)
-X-Received: by 2002:a05:600c:3b8b:b0:483:43d8:8d68 with SMTP id
- 5b1f17b1804b1-48371040571mr7338015e9.28.1770929120726; 
- Thu, 12 Feb 2026 12:45:20 -0800 (PST)
+ bh=bPjEhwKqFdW3U76c2HevInzAo01+HnpgzrClJb7Nnk8=;
+ b=Mlmn2bM8QhrsLtdfnQXe4S4+JGGSgjMrUu4KMtfyk1zuU2V8Y0O0hZgnzFRlQX7vup
+ Fv+Pylodj2C26N5G4kxvbaCu+WAjVGlu/vqjFongMlrBkSFeAok8s3R3DyoR6chPlURe
+ /mzYAZBS+LHnr4j7SRlRmzttKUIYGevvlQCU9W1XYh9QkoR0aiBPxryo+ZEV0zDwVaKz
+ k2kA8CKF/LTXLgdysC1Irapyptqg3OdeUQebLIXRk9h9MVbUHMs7CYIpI9PVy4AYs9I7
+ Kym7uuBhHlD61zD9EHM1yzUP0HdG+2sTPyMauPrTgrP36f0HshUttLnpRRjUlaatmblE
+ /kYQ==
+X-Gm-Message-State: AOJu0YzXkSYpQgltNZ8LEtb86aWlBgn8aucDevLURqMwu09K6XCzfnsK
+ //LbGoqrp2VfSx1wuXt2OsV3Y3X7ABh2R4jPCR4IFokp0Tpiod3uRFVOalSYx9Yro5JmO7G7/G8
+ cULQZY1vawD0lRM6cKyd2pxI2wnjdKCu0eHXK5ggwqwtNYm8Uy/Wctilt4xWWQfygsNvYxoQohy
+ K9V86zXlM9UOGm3wC3XTBMWZ4RqJE7fpbwd9yJdQ==
+X-Gm-Gg: AZuq6aKfWA5QCLcyJi8y+zQ9cPXwrhzFGEcVA2q9MMfocDH3bK8rH0oMCdh0VVvMaSH
+ ditGUn73/JrE0K5qiz33ZAOc/wlrl/puVwvk/BTLEF2apkQuE+E77GYmTqfNlfw1ewVDDbzTKwB
+ EL5aPj5MIZfdlqSGFCqCTUAfKDwUW5C3kiyX6ffECRcXrxPadjP5FdXMH5yYAXGYpA+yda9hmK2
+ EqvQvQ7aSY8SkCTOgm3o4XhQyEeq08uhhuCax17ufxJEH6/A4+P9m3nsHFLwz3lzOqomJL750Bz
+ 0KfX5waeWcVRte4gqqHqdQX+B+jlk6tV7Cl3rwEmzWL0k+iC9ZTVwol8JWQy2tFJU9adocRRicN
+ WOj6oDjoDGCtdAGe/w3510tfA7bnlnRTorIHUxVgIKzBZTxc=
+X-Received: by 2002:a05:600c:3591:b0:47d:4047:f377 with SMTP id
+ 5b1f17b1804b1-4837105571fmr7012255e9.36.1770929123396; 
+ Thu, 12 Feb 2026 12:45:23 -0800 (PST)
+X-Received: by 2002:a05:600c:3591:b0:47d:4047:f377 with SMTP id
+ 5b1f17b1804b1-4837105571fmr7011845e9.36.1770929122948; 
+ Thu, 12 Feb 2026 12:45:22 -0800 (PST)
 Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48370a3ecadsm3205185e9.3.2026.02.12.12.45.19
+ 5b1f17b1804b1-4836ff00332sm17387105e9.2.2026.02.12.12.45.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Feb 2026 12:45:20 -0800 (PST)
+ Thu, 12 Feb 2026 12:45:22 -0800 (PST)
 From: Javier Martinez Canillas <javierm@redhat.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, eballetb@redhat.com,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>,
  Javier Martinez Canillas <javierm@redhat.com>
-Subject: [PATCH v2 3/7] disk: part_efi: Remove redundant struct partition
- definition
-Date: Thu, 12 Feb 2026 21:44:57 +0100
-Message-ID: <20260212204511.619392-4-javierm@redhat.com>
+Subject: [PATCH v2 4/7] disk: part_dos: Document part_get_info_extended()
+ helper function
+Date: Thu, 12 Feb 2026 21:44:58 +0100
+Message-ID: <20260212204511.619392-5-javierm@redhat.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260212204511.619392-1-javierm@redhat.com>
 References: <20260212204511.619392-1-javierm@redhat.com>
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: waoFTyp5Nb4lUw3OUZ2FyujC5g1lrXxsAubBNTuInkI_1770929122
+X-Mimecast-MFC-PROC-ID: Dyj6ufKcNBtp6Udp_DaMo04rNsitDldaoJP5Fednswk_1770929124
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 content-type: text/plain; charset="US-ASCII"; x-default=true
@@ -113,95 +113,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that dos_partition_t and struct partition are identical, the duplicated
-data structure definition in the part_efi.h header can just be removed.
+The function receives many parameters but these are not documented.
+Add a description for these to make it easier to follow what it does.
 
-This results in a single, shared definition for MBR partition table
-entries, instead of having the same definition in two different places.
-
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
 (no changes since v1)
 
- disk/part_efi.c    |  4 ++--
- include/part_efi.h | 19 +++----------------
- 2 files changed, 5 insertions(+), 18 deletions(-)
+ disk/part_dos.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index fb1ed534f861..d8b17ec2e91a 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -51,7 +51,7 @@ static inline u32 efi_crc32(const void *buf, u32 len)
-  * Private function prototypes
+diff --git a/disk/part_dos.c b/disk/part_dos.c
+index 60c3d6773696..a69ad8962106 100644
+--- a/disk/part_dos.c
++++ b/disk/part_dos.c
+@@ -196,7 +196,18 @@ static void print_partition_extended(struct blk_desc *desc,
+ 	return;
+ }
+ 
+-/*  Print a partition that is relative to its Extended partition table
++/**
++ * part_get_info_extended() - get partition info for a DOS partition
++ *
++ * @desc:		Block device descriptor
++ * @ext_part_sector:	Partition table sector
++ * @relative:		Relative offset for the partition
++ * @part_num:		Current partition number
++ * @which_part:		Target partition number
++ * @info:		Returns a pointer to the partition info
++ * @disksig:		Disk signature
++ *
++ * Return:		0 on success, negative on error
   */
- 
--static int pmbr_part_valid(struct partition *part);
-+static int pmbr_part_valid(dos_partition_t *part);
- static int is_pmbr_valid(legacy_mbr * mbr);
- static int is_gpt_valid(struct blk_desc *desc, u64 lba, gpt_header *pgpt_head,
- 			gpt_entry **pgpt_pte);
-@@ -990,7 +990,7 @@ int write_mbr_and_gpt_partitions(struct blk_desc *desc, void *buf)
-  *
-  * Returns: 1 if EFI GPT partition type is found.
-  */
--static int pmbr_part_valid(struct partition *part)
-+static int pmbr_part_valid(dos_partition_t *part)
- {
- 	if (part->sys_ind == EFI_PMBR_OSTYPE_EFI_GPT &&
- 		get_unaligned_le32(&part->start_sect) == 1UL) {
-diff --git a/include/part_efi.h b/include/part_efi.h
-index fb402df6f13e..2cea50880465 100644
---- a/include/part_efi.h
-+++ b/include/part_efi.h
-@@ -18,6 +18,7 @@
- #define _DISK_PART_EFI_H
- 
- #include <efi.h>
-+#include <part_dos.h>
- 
- #define MSDOS_MBR_SIGNATURE 0xAA55
- #define MSDOS_MBR_BOOT_CODE_SIZE 440
-@@ -77,20 +78,6 @@
- /* linux/include/efi.h */
- typedef u16 efi_char16_t;
- 
--/* based on linux/include/genhd.h */
--struct partition {
--	u8 boot_ind;		/* 0x80 - active */
--	u8 head;		/* starting head */
--	u8 sector;		/* starting sector */
--	u8 cyl;			/* starting cylinder */
--	u8 sys_ind;		/* What partition type */
--	u8 end_head;		/* end head */
--	u8 end_sector;		/* end sector */
--	u8 end_cyl;		/* end cylinder */
--	__le32 start_sect;	/* starting sector counting from 0 */
--	__le32 nr_sects;	/* nr of sectors in partition */
--} __packed;
--
- /* based on linux/fs/partitions/efi.h */
- typedef struct _gpt_header {
- 	__le64 signature;
-@@ -134,7 +121,7 @@ typedef struct _legacy_mbr {
- 	u8 boot_code[MSDOS_MBR_BOOT_CODE_SIZE];
- 	__le32 unique_mbr_signature;
- 	__le16 unknown;
--	struct partition partition_record[4];
-+	dos_partition_t partition_record[4];
- 	__le16 signature;
- } __packed legacy_mbr;
- 
-@@ -153,7 +140,7 @@ struct efi_partition_info {
- 	u8 system;
- 	u8 reserved[7];
- 	union {
--		struct partition mbr;
-+		dos_partition_t mbr;
- 		gpt_entry gpt;
- 	} info;
- } __packed;
+ static int part_get_info_extended(struct blk_desc *desc,
+ 				  lbaint_t ext_part_sector, lbaint_t relative,
 -- 
 2.53.0
 
