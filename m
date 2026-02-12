@@ -4,86 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79234EEA847
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 18:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 210C0EEA84B
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 18:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0046983AAB;
-	Thu, 12 Feb 2026 19:17:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 324758367F;
+	Thu, 12 Feb 2026 19:36:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fAlSvBca";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jU0CRngb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA67883CBD; Thu, 12 Feb 2026 19:17:25 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id BEFDA83A47; Thu, 12 Feb 2026 19:36:33 +0100 (CET)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF03F83A47
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 19:17:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30E7583015
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 19:36:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-45c889aba0dso1543543b6e.0
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 10:17:23 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-3871017fea2so10331201fa.0
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 10:36:31 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770921390; cv=none;
+ d=google.com; s=arc-20240605;
+ b=g+VOVXrwX8S5et/Ao2rv0Dn/SMDOtNLsFM5wSbknULb/ncrx8c+o3tQNFd1jC7zIDZ
+ VB4XCweMkOrebKqUEudVQ2p/5fd0scSHu9fygEuQpUj1OXlOdCOCENbYgW9a1Rpbcmjs
+ sb//O2smU2Ut6PX9gNbIKGUl7PqekHPNzvVQNg7XwwF2ZlW9Pfn8xiO848woTIw1QeMv
+ ZrJTTFLw2sclmPFQGdpIAAuwAw21cc05jI/woJwU78YXMJYgIFJZWo4F515EH+KrP4mY
+ U3MEoyTm35vda1OkLyuzhe5NCz76J8POCTkiVJ/dSq3T+ObLbxFdgmAZrttgIerL6Cyx
+ vibw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=M4xB0ODEudeHvgjuAGeFXPTX8gscyPACRdmOA1I7qWI=;
+ fh=W/BMFDlMVlIRZKEDeRaCE+Mzoqg6SH83fTjjOSD9pyU=;
+ b=jHJGUBPqk2kVBEpNwHiBvrpyXgUPqFTk7HF9POFFF+HdCZL6zTpZSUqAr42ybgdNfv
+ cnd1h5paGQSEh8Qv9tCJear/TTW6P193IqmsSwwBnNkk/SefPmSVv6O1rKsXB1vOuR3f
+ Tg+AfpuZML/fexiCu94NOQ6+N8bIqsP6i2nYe3Te7dgV0jAeAn7FjVhz6VxZ5pTpt0z5
+ hOObDdFXlyChj39VQyKicmjUxtS2r8BJ2ul8d+lnvJe9buVvtD0j+T3ZKChsJCnkynBk
+ 2x6vrw2gN2Xg6fDlVqDj0FyURvH8j7jhABKR/RAMEeunli1cLsF11ddygvNi8+yLlVuk
+ idEA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770920242; x=1771525042; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1770921390; x=1771526190; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j1fk+8LfjzSsI9HE+MDeaF6T24Uo80B6t7Ym0RE2Sts=;
- b=fAlSvBcanMCRcTPYYu0xBRFvNaAQkqBGz4YGiNdLPb84c8WgwleeAx9S7Jcg8VMyHO
- f6WdRCDLa7FcvG1Bewg+Mt4eXh3piJebwNk41fGW627FBV2HeSE0bVMnv7zxVKgLXzhe
- CpBeRkE+BvXYxadSu6BgnClP950uWsuEuhxD4=
+ bh=M4xB0ODEudeHvgjuAGeFXPTX8gscyPACRdmOA1I7qWI=;
+ b=jU0CRngb0Sqh95Gf+I8venYv5Q/ft3V6XXgm2sbbEkwCJGTpoK6XPcdFhz8PHA5d2n
+ RvwE/sB8BLPIE3t+Whrgw+tBRG+EHpm/9xvTMHs0jCCotfWY0zS2Ay9rED6qlWmpSOGP
+ MSfrcwhTKJ1f1KOotOJhg3gzgu9JWtADSmHgVK7ZtPmhizFHERl7vYkckPxFjsMLL4Cs
+ EnfQNq1oAxPDDFr9bI5g0zCjMuEp35TDmrOa9ck3p7hXEiwVrqszchG8OlgGIDqwVr20
+ On8GZGTmF0O908zjDrBDugYs865haMHd2Dje3dM9Hml1WMsUy9sk4LzxmXulqKqx+GE1
+ 6krQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770920242; x=1771525042;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1770921390; x=1771526190;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=j1fk+8LfjzSsI9HE+MDeaF6T24Uo80B6t7Ym0RE2Sts=;
- b=HMSIIDL2VwZ+uVwi3G00F53hac79OZ65ZbUkF5FWDRh5jFTZzYnSoIN7Aa7/fON6KV
- 1rv3qsYJUg/ZTfccnHcJd5rlqt1NHanjGD2zvrWnqmq2Hz/d3pd2FDtl1yhmLjmEgE85
- qrBxtirnEcEGD4N0oY0tRRDBBS+LJFiE8+/JwyxznEJS/Va8NhyVxy0N2SEXeSp4Uj0v
- dzntN46S4f/MXtDyAGkJkQQZuLRKu5gCAAfpdZy0q6scY07Edx9jU3j/9XgWjz2h11pO
- NhXoaAczpRyjCs1Q7TArssvAtd+UvJIB38Er8e/V1rRwrZdhW7hjioEe8GuU/UCEDwOO
- P3uA==
-X-Gm-Message-State: AOJu0YwlXXjy/m3sUbCAN9vEoWfI46+9PP9ipswLOHwGIX2GXThXg72H
- 70hVDU6v4zK6lOQAf4Rnalx6MjR1J9n5LPaPr1icEQp0RTbERH8mV8xPKWaEc1DpQ4bahvXc4h2
- GRHpJqI8=
-X-Gm-Gg: AZuq6aJJJqke5HHsGKOAzRORwsASjKMU1/23VvQWC/+SM5SRiClRytLFCAi4Z0ntmza
- MeYjvOCwLzHfM14caG7fP3zIRwu7V1vNAkwYAJoBH4bm1SMJcYB5iFylnS6xiYCMrW4eDm7EAvn
- nfsxOvgjIhqATCTL07XriuAzhvBmxMhuVmbx8wH6mJ7OGsXD0HUs9xmFTos18ljrzEg1ZBkDvAl
- qqBYMPO/yGTnBa6p52gFOcdYEoDqjAb51ByjsGN/QbgJA9VnfimyLIdVCwGdAQW2m0bxSNloRdT
- hA0MUfXXbowN8AFv/s7pcCaCY6rlt1I4em9vE19KcxdgOG1XFbFRgZpv8Z8Sd1Wl+JvsnbaAOcJ
- fhMGdlAcy2/wrYHqsu0c2bR1vCknxUflzvlx3Ql/WioSbTxr2z/LYg/fpJzrj2c4OeecOBRrZ8N
- wgG8gdwb0HJPxUJfcs0btlKHqt4QewQ9MPq+S7jMMlzgLp0E/Qroni/JuAgiI+xREPcE7Gfkzfo
- 3gN+rlElVealtarIWQyrNMxLaA12iZFLUnhetc8oflmfxoX5A==
-X-Received: by 2002:a05:6808:4f14:b0:45f:c09:dd6d with SMTP id
- 5614622812f47-4637daa7ce4mr1702944b6e.8.1770920242418; 
- Thu, 12 Feb 2026 10:17:22 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a754b162sm4057894a34.12.2026.02.12.10.17.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Feb 2026 10:17:22 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Suhaas Joshi <s-joshi@ti.com>
-Cc: vigneshr@ti.com, n-francis@ti.com, s-tripathi1@ti.com, 
- k-malarvizhi@ti.com, kamlesh@ti.com, vishalm@ti.com, d.schultz@phytec.de, 
- w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com
-In-Reply-To: <20260212102847.1560553-1-s-joshi@ti.com>
-References: <20260212102847.1560553-1-s-joshi@ti.com>
-Subject: Re: [PATCH v2 0/1] Fix regression caused in Verdin boards by
- 42b3ee7fa524
-Message-Id: <177092024143.2032731.4130520393491981541.b4-ty@konsulko.com>
-Date: Thu, 12 Feb 2026 12:17:21 -0600
+ bh=M4xB0ODEudeHvgjuAGeFXPTX8gscyPACRdmOA1I7qWI=;
+ b=VR+fd38TQt1VAN8sMeGBCF6Agz06VvUAvbiMRALGJObiAooYUAy0BFb8Nc2IK0Fs4u
+ cgnU3hO5UfY8i02pHRQioRvPCiImCKZApCHqxANMEUU20BrOzYA6h0p7VGJPjNnMMhl1
+ eki2AnCkY5ieksRsrSOrIFrBMlJRXEuQhzJDR9DZUEk6BmDF0qpSHhamq8hC5ho5fhnk
+ RtINAmo35fdZE1mVc3wPdL6WR7kQNRQmHk1K6Xxws58fOIgKukTYWktv6pm5piCIX/lh
+ mOorxoSaVaB077th7WXjC4IHWMRIjZsKn0LCwOVH3mGTNkE6Sa6/OGmIPDRjypfFYNFi
+ GFsA==
+X-Gm-Message-State: AOJu0YygaMATAzKQWomLpe1u37yVC3DHrZfB5pizVvrjxkbwXuoXVR0i
+ Q+ortyZX986IGzdNTqkBf5MKVjhGhnarRgo+G7AbQBNM3J9M8MqowR1DEsLKYiJJfp4VUU5U9cx
+ GBnsC4+8hZCYGw8lnrLlZMxNf1XekMaI=
+X-Gm-Gg: AZuq6aKH2FNHnQf7HEiEx8TCumA+XB1kThWfrD1dY6+EhC3WDIDjSN49YbQZERhDP7N
+ jwt2u2iTBkDUPu8rY4gn1xshfAJBzgfH3+2jChbNzlgBSAShrreXD7bhJqKQFmU+vk0zm2lvLR2
+ B/mMJbSASZv0QBU+mtqaXe1p0LPZ34t4Gs+qgLsEZ2JD3QjfKGyJgLLZYwjCvER19+6JIIxcdvk
+ bmL0FxRFLrDppUoOqf9sngbweyzCI0Zv6s7x8oncsBwB0yasC1Ag2xpqiYdSZy45SMTz63wFC6j
+ xpEUaGl0fwwAQpy15iJE2lWL3929Oloovf4AN9t3RLaBwY+47VBb+BDaA/D84SC92nP+v1o=
+X-Received: by 2002:a2e:a016:0:20b0:385:beb9:dbfa with SMTP id
+ 38308e7fff4ca-38711d63c28mr9874351fa.22.1770921390113; Thu, 12 Feb 2026
+ 10:36:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260212-imx95_frdm-v2-0-9a535a506b95@nxp.com>
+ <20260212-imx95_frdm-v2-2-9a535a506b95@nxp.com>
+In-Reply-To: <20260212-imx95_frdm-v2-2-9a535a506b95@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 12 Feb 2026 15:36:18 -0300
+X-Gm-Features: AZwV_QimODLK8KdQ_sl2FIJu_nchv8q1TPGYq4fLcF6z2GUu2I67pVAsgmeEtdY
+Message-ID: <CAOMZO5BAe0JYvqdothTunajpbA37K5R7xG6GCOv2MdGK0ohdAQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] imx: Add FRDM-IMX95 initial support
+To: Joseph Guo <qijian.guo@nxp.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@kernel.org>, Lei Xu <lei.xu@nxp.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, 
+ Peng Fan <peng.fan@nxp.com>, Adam Ford <aford173@gmail.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Ji Luo <ji.luo@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Justin Jiang <justin.jiang@nxp.com>,
+ qijian.guo@oss.nxp.com, xinyu.chen@nxp.com, Jacky Bai <ping.bai@nxp.com>,
+ Tim Harvey <tharvey@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,22 +125,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Feb 2026 15:58:46 +0530, Suhaas Joshi wrote:
+Hi Joseph,
 
-> Recently, I made a patch series [0] that added firewall configurations to protect ATF and OPTEE
-> memory regions in K3 boards. This was merged. Francesco reported [1] that this series broke boot in
-> Verdin boards. This issue occurs only in Verdin boards, and not in other K3 boards, due to
-> `dram_init()` invoking `get_ram_size()` even at the A53 stage.
-> 
-> This patch fixes this issue.
-> 
-> [...]
+On Wed, Feb 11, 2026 at 11:41=E2=80=AFPM Joseph Guo <qijian.guo@nxp.com> wr=
+ote:
 
-Applied to u-boot/master, thanks!
+> +++ b/board/nxp/imx95_frdm/imx95_frdm.c
+> @@ -0,0 +1,31 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2025 NXP
+> + */
+> +
+> +#include <asm/gpio.h>
+> +#include <asm/arch/clock.h>
+> +#include <asm/mach-imx/sys_proto.h>
+> +
+> +int board_early_init_f(void)
+> +{
+> +       /* UART1: A55, UART2: M33, UART3: M7 */
+> +       init_uart_clk(0);
+> +
+> +       return 0;
+> +}
 
-[1/1] board: toradex: Make A53 get RAM size from DT in K3 boards
-      commit: f9ffeec4bdcf1da655a0ffea482062adde78fee8
--- 
-Tom
+Can't the board_early_init_f() be removed?
 
+Peng has recently sent a series that removes it from several items.MX8/9 bo=
+ards.
 
+> +cntr_file=3Dos_cntr_signed.bin
+> +boot_fit=3Dno
+> +fdtfile=3DCONFIG_DEFAULT_FDT_FILE
+
+Please see this patch from Tom and adapt accordingly:
+
+https://patchwork.ozlabs.org/project/uboot/patch/20260211221135.1738981-1-t=
+rini@konsulko.com/
+
+> +#define WDOG_BASE_ADDR                 WDG3_BASE_ADDR
+
+In another patch, I asked Alice to rework the watchdog driver to
+retrieve the base address from the devicetree.
+
+Please work with her and remove WDOG_BASE_ADDR in v3.
