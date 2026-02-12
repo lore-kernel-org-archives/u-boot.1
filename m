@@ -4,111 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7856BECD6FC
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 00:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 830DEEDF020
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 02:57:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFA5F8388D;
-	Thu, 12 Feb 2026 01:24:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6440F83A47;
+	Thu, 12 Feb 2026 03:57:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C7HgvHpV";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="VNCmz9t4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1205383B64; Thu, 12 Feb 2026 01:24:30 +0100 (CET)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C0E5783B64; Thu, 12 Feb 2026 03:57:06 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAF238367F
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 01:24:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C355383981
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 03:57:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-948ab1c79ebso1922313241.1
- for <u-boot@lists.denx.de>; Wed, 11 Feb 2026 16:24:27 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770855866; cv=none;
- d=google.com; s=arc-20240605;
- b=D2PRqjTxNw8qv8wO8CzDG2zzVPxTn/flHF3A8YujueWG8Dm8Z5Yq1hMJQq6hCnBbqR
- ekSgkJ4cPiIJ5egw81kFn21pE3SqNQONVai/DzwetV0tFphPyuExnaGU2SsYCBVyck6c
- M9IJp3AS0rdbvPzDuDT3Iz43uxrA1DHb9Of5/C+Eyzup2Cll48bWQ7FGg0H4Yqxee3IU
- xt15QWKRiodB/s5h3/QcsYaPuCZJ7jY9ggm2nye+cH9yfiLHaHLvoszivOtKxeM4fuHE
- NujY86WHNdPIu7znlD4MlR+4yRmtT3N3QDMZMGraZOgb2mh6aZdN31eZ1aOLqQKCyNbU
- u6Mg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=LVjIcqKdq8oUdaNhF6yr7D5rDbVrLTCHNvbxGSaA9mM=;
- fh=Hk20VDK9fNt2srtI7sPxUFOa0ijpDW6EOTE15xuY8Q4=;
- b=Se0d2C2+l4/RKpuRJXG2rENn8Y+whMDyePo4EbdBXLme6HG0szOtutwqYzRrU+NGLQ
- aV93cDgkUyjjwBbricbcRqOxJAn2TCL+IP9D1+in8FRwDztbuHKSP0BiNhcA8g7mRX9N
- SZztfHm/gtHnzl6+ubBxoRMIKPvJIhZ9PDn1vN7A/7PXsabUbNXD5z2AUbOgKSAw6cxa
- x7Y2TRXt4Wq1IyNPYxbxarmFjBp8T4ZjTY1NMK2t+ZqGgRE/SVZpJAVlJx4sv0xz8aI/
- t0piLUxhV2LK479RioVIxI2hdX14gJNdNWOgw/DaH6MkAX3UfAFFFvQ3M2b/hfnItKcV
- Hb0Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770855866; x=1771460666; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LVjIcqKdq8oUdaNhF6yr7D5rDbVrLTCHNvbxGSaA9mM=;
- b=C7HgvHpV5supPLVeg+Hh9TyXMTjj0Xy0ANkSUMoU6dVxhcWrGysFep8jHvX8QyEDiD
- I2b7GEn2Xpk6VO3BdjctliXJaokpXXcLCPWS5pZWYzZ4ShiKfS6Imex1hGLmDAkmpr/n
- 2ACaIwUi7mVQlvVTXSVdgv8BBX5N6BcgT53lnZL4eIoFwrJybl4154oQD6mx4LZKgOUo
- 0sI6hUE2CwxtWX7Hu/GMaTL6ndw99d8boji7R1IY6Wf6/rUt+8j4wb+UjMwohINe8iWD
- lWZ7fXfEAGwwDLGbTDey11BYNxbbEwWX1pSAzK1PLMQ+9miKrk9qXYit2AeAH49o5mSx
- zwtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770855866; x=1771460666;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=LVjIcqKdq8oUdaNhF6yr7D5rDbVrLTCHNvbxGSaA9mM=;
- b=JzvEaAz9scFK8P6+kzPkP/ssjy+/5WXlTStCvkThFjXeTiHL03A5ILRFNYIU6h5ODB
- TecRoVVoW+rROWRBSYqdOLFO/fIwcvlo3C7APs9Q/PFIy9h6IjXbvAaGFoX/i4JVE85G
- Mn+ihSR09FfqAB5K0di4D2QWJ91GjhVhf8oFPuE/mhOYRnLsjg7nS1OXiyErLnW7aEPZ
- n3I95cIdqcWzpSgGt+0JsujrPDa/42S0b/gDdSSPaq6GYcVzl0Zyfn1qC/VGGWyDuDSt
- vZbH6bsu+gFpi/lLkP8BdGwt8OnnAoFANz+v8QiT+0KogN95168VFe6PgsmdLCNgVd50
- Eu+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUqeAduMkEnySykGuIXbX2XLBJch07DaZO4FL7Keg++bB9lzLNWVJylF7P2s/VdohQSgFlqxXI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwViUnpgSBYK7TQXAZa5AVSW+lv75b3MzYSoHPvZrg9ROm9a5OI
- rQ05jXacNkEaT1l1RjYpsI1twRV8Zd0M7ZSdnopXkbLKDig475YTm3OjV6xA1rMWa8fphbuAiCt
- /dnMLoakqqUQkTLCmiPIFZhSRJrlbHIM=
-X-Gm-Gg: AZuq6aL3x9RobwB3u/FAI/r4uUtKPyPuXTZ0u9c0NA8BjDwMi4aL19dVSlqkDXc97bb
- GXi287QituRhxC7LrkYpQAEMjoQvZp+AvRFZ8/YFl4DEMwIkMIqo98QatKxstGSJ0M289EIonX7
- /3ixax60nRvsa+6nvz6sK9b6TAc4iM1SPdbPkeBzNj/ZXP423APe36U+EOj5RN65EfwosWIzHDA
- 5o6OOcNrnjuEYiUv9c1AtI2+mDp421Nc+db2QPU5xiSGEZWl+SCf50VhxuOolFpC/TOJRHy/M7Q
- rhJgqUq2
-X-Received: by 2002:a05:6102:c87:b0:5fd:7140:e38b with SMTP id
- ada2fe7eead31-5fdfbe1b045mr399024137.35.1770855866486; Wed, 11 Feb 2026
- 16:24:26 -0800 (PST)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qkuUAkrS7myB9nd+9r2ZBKMaREdsS8gRa/DZ0aPrqMRgurIR4KeJgqyQtnjr3YPnyEtBZterqqbfz2wy6qsUwzKn8ytYpLKTbvn/EXPCvivJ7dReIe7DkVf2r2WMZFWZ6qiuaIsFEQwZEvdgKSO3NG6AglKZCG3GJV1tcaJKNySbpLK8H7M0/su+YZqqv69kj9wk897YeVWibQM1G/du7BrpaKi/FIJWwYtclof2Vre9UzZ4EqPtItd+3PysbZJgjF9aH17R0v5Toaaf9tLdXJFnRAYuibmRzdxtsCCXvn1RF1/wWEAuGSstdC5w2QS+DuT0mMOXWpXH1AkZ9+rrHw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RzD0hoK8qWeUYsYDBNziHXkc1G2ZaudhTY4/0FzoV/o=;
+ b=hnNQwFPt3C3KryoiQgyJV35ntNrIXlaQfTPZR9fx0fm1Y+wHkkFPv0yN4MbIK0baRuU2tcEiC3k41omKD5ccwZZ4DzahRhW9sutTp1RPVe5m8OWLzqHyiBhjgDYwHNIkHK9jqZkYVYGJ3rkG4K9pn8I+VeF2Rlc4kyRWwWIRdlRdcliePH94U6fIrAwQ7apCGBbqaQ2KaNfuh9pQp19vRCAbuvOGgyxocuYyXuMR6EtPqr7vblFuCMzh6jK0dfFRWKOepy8s2Dxi5YodnGJfljjEFOu9vwppSu6JKhqTtIl1S6TC/KHzk3PoRmDI0hGHGikLwaa5bzhG6fi2j7YEvg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RzD0hoK8qWeUYsYDBNziHXkc1G2ZaudhTY4/0FzoV/o=;
+ b=VNCmz9t41i21jmu7SdfatFyvm8r6sohYEkSBEEekjoK4oDy8BB2swKWlJ6V57KIKp/Za6k1laTDSjBFd4v4azRfa2vkG2/zMwPYopGOC+qFbMTurAGWgjbGs6puF7nW6r2VAkV9dFkc5RPlTp5D9ee5aR+QmmeLUEc0M5zb5Y8IMrEF60xRKlZdFxSH0rub8/3/y5XplXhBgtLxRI+uMd0hgCnzE6ouyBTzum87VSnHrdjYyMDzBDbjSFTEsfuxlmmUdFNEo3LHZ2419/+gF5IGpf7DQecCnR2uMCi5xeUdwqyOpLJJZWz3O8MfcS52RVTENDcbv4H3kKbs8BHihtA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by GVXPR04MB10381.eurprd04.prod.outlook.com (2603:10a6:150:1e1::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Thu, 12 Feb
+ 2026 02:56:58 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9587.013; Thu, 12 Feb 2026
+ 02:56:58 +0000
+Date: Thu, 12 Feb 2026 10:58:38 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Christoph Stoidner <c.stoidner@phytec.de>,
+ Dominik Haller <d.haller@phytec.de>, Fabio Estevam <festevam@gmail.com>,
+ Garrett Giordano <ggiordano@phytec.com>,
+ Gilles Talis <gilles.talis@gmail.com>, Joseph Guo <qijian.guo@nxp.com>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
+ Teresa Remmet <t.remmet@phytec.de>,
+ Wadim Egorov <w.egorov@phytec.de>, upstream@lists.phytec.de
+Subject: Re: [PATCH] board: Correct usage of fdtfile=CONFIG_DEFAULT_FDT_FILE
+Message-ID: <aY1BYfCkBgHD4nen@shlinux89>
+References: <20260211221135.1738981-1-trini@konsulko.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260211221135.1738981-1-trini@konsulko.com>
+X-ClientProxiedBy: SG2P153CA0023.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c7::10)
+ To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-References: <20251128163535.2301653-1-raymondmaoca@gmail.com>
- <CAMDkj5zb1qhAR-uf=trSsGEwXmx5TiXc=agX5w5GnjMrP_Nqyg@mail.gmail.com>
- <20260204161345.GY2603314@bill-the-cat>
- <CAC_iWj+qEmxNeGVBcLcrzNM=BkVj0QW2VYW6ZNGTKD6BeRTNHA@mail.gmail.com>
- <CAMDkj5yg24MwQz4G8Y62S7mB_6D=p+0Qrooe77RKQ+C4CPwA1Q@mail.gmail.com>
- <CAC_iWjKUqkjOFsk7+dj+7tn_hrbngoq4CyjCxg0xLbU=-X+GXA@mail.gmail.com>
-In-Reply-To: <CAC_iWjKUqkjOFsk7+dj+7tn_hrbngoq4CyjCxg0xLbU=-X+GXA@mail.gmail.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 11 Feb 2026 19:24:15 -0500
-X-Gm-Features: AZwV_Qih7lqs87yfEOqhv1Q-xmXjMzj7YKfKfcGeIAaDTNWcCRWxl059lUscT1k
-Message-ID: <CAMDkj5z0UuUi0qPfaykEVF=MmbEqXUup4GejaLAyJmg3PGByMg@mail.gmail.com>
-Subject: Re: [PATCH v5 0/6] Implement all missing SMBIOS types required by
- distro tooling
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Mark Kettenis <kettenis@openbsd.org>,
- Baocheng Su <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
- Samuel Holland <samuel.holland@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GVXPR04MB10381:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b0e770f-4607-4e11-5c93-08de69e262f1
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|19092799006|7416014|52116014|376014|7053199007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4QFhvoKluMpH+xO7orp0SYCE/wJInyuYIeab9hizMufAhCnMCMSItWdnbCMH?=
+ =?us-ascii?Q?uhHxAvZi3uTj09Ivf4S9u/DBAB6w7BLEvcQV/l8L4zMLf5u/UzOIbvtkIEm/?=
+ =?us-ascii?Q?3O5ZVxfNd9ssmGxn3545xmNuKVnHkpAti0ejZADupBTJrw2YwVz84nlvabgR?=
+ =?us-ascii?Q?pLT/qfjsKXtmQADkzcO1gkhAYTvAzPjqrtJUzrNatBFpenmHcFdQcgE6V6xw?=
+ =?us-ascii?Q?RUrNTk/tGnVGKJm5er/S1/Ob0GbPzrGgVft6AlzKuBs5wNQW3mZVC35CJ9xE?=
+ =?us-ascii?Q?7zV4pIyLcQjhYGggtPuN01htTJpx4RJWSkHtBUue6wrziXpCiYTl8G3QGxwW?=
+ =?us-ascii?Q?qgxmrmE/2gG6n2QlbT7tG4qyP7eS1qGV3u4SgwR0nwfbq9dUil6aTTEogy1Y?=
+ =?us-ascii?Q?HNInPu9PVToooMq+yF8+c1tuJMWiIKLOh5LrK5PkHiq0WhKHfgA2crTXbCMW?=
+ =?us-ascii?Q?GNsn6ynXPPIE0MmPXEdsDYFkqrg3vqCjQk5NRx4lZHa77ZHRptiqwGMEoYMv?=
+ =?us-ascii?Q?3kmMKk4pgqFtuhATzqDpBN3MAcXH3bq0dUUK7QLC6nDntxrP1vns9D+YJqKK?=
+ =?us-ascii?Q?xItEj+L93sd1oOQNxtWoUSyKvqgfUy0El4QDtOXsf8RUHvuzCOcwhMnDNLRb?=
+ =?us-ascii?Q?MyDMhL83B6sXaeRgmaJeU0qar0LK/eVKcmIOfLUHlDD6z01fPAXSKKvDcki9?=
+ =?us-ascii?Q?o2ogdNTg3OvCsYITvnEBDZ31Dq775RUspeZ6RyqM0Q0i/4a9cAAXr4S5Je9U?=
+ =?us-ascii?Q?+9KI62B1uNYGuGCfDEA0uWvnNh7L9lq4nG19INiphlP65E4tp4RjlUqKPqyE?=
+ =?us-ascii?Q?p2GSZtryNy88+J58scjoGlFgGexGzfpSSEB8Nz95+TsiUTj936LYkTkAsBTk?=
+ =?us-ascii?Q?Cfw0eoyrUe53lI3fTsl07ysd44ZJGfrW+onEjAxaaXPLB/56CjFNtDzmLMHt?=
+ =?us-ascii?Q?6L+xRL1FEseNteWGUr0JlMA/EHTjFhR+u84NYmyxgg00Mtb1fyeEjxokuwuz?=
+ =?us-ascii?Q?53U3Db2QE7MQmofuU/rhMs2iBkArxiU2U/L2IEIJdLOFgt1E0awoDgyVDCRd?=
+ =?us-ascii?Q?ga4ZtOx8LgZfZN1+f69LLEpvwxgsuqSRe4PpOfd8oeB6LGCaRA/1gluCLnBy?=
+ =?us-ascii?Q?GxH3hu+5YQWRUEVH3zmqIlhJx+mN1wXaAM/lHrszVQ0S0jR0PDV2iv5yJv0q?=
+ =?us-ascii?Q?pSq3ALPXm9+bhCSO88M25udQ7KB7R40fOZ74RKi7upqUBvfziq4TQ8XHDf+C?=
+ =?us-ascii?Q?cALX2nseV6zv6pIc3BZjQynsWUr3zMCXUulMrnCR2oco8s9f69Bd5XjkkZPj?=
+ =?us-ascii?Q?z1RvxafgflkqKqJqLHMJGfEd4ZC2h/KdV0lOGm2/Tw/YniPcoYJ90+Yca5NI?=
+ =?us-ascii?Q?4Kd5sQoApq1xcuKA/GFzThwpYGRZzjuRqQTXf/m82CDqP2yaeunIEzfnVgk2?=
+ =?us-ascii?Q?pcg1vZFJvVGOrIl6ZdtQTvz1zklrnnpur5hNeiFJSJ/ZEBsD3YdtQ6yj5Qi6?=
+ =?us-ascii?Q?jL7/sQNv1PfX/Uz8BVk6hkz4D9MX8tL+S2Tbb8yDc/wyHbF/6XSgcts3Px/t?=
+ =?us-ascii?Q?3z9rjvdgmtP41UvbkzqtY1CJMod2CrNHuL4/WrdVKr2xozq3nYPt1aYxEOKA?=
+ =?us-ascii?Q?s15tub1/Dp20sLvc7U7FmFQ=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(19092799006)(7416014)(52116014)(376014)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?odHAuqg1WCtMViS9G1YeabxxrkLvZ8SiWsXXmO/VX20SXZ/0Ux4hvrQZ21eF?=
+ =?us-ascii?Q?aFMkX+62YewGu3fOdo+u0O8l8CGRlpQ68rHbsrSmQMaGkURyvlGZGJ7ISB+Z?=
+ =?us-ascii?Q?oWcEIOAOaphv47Fa67kIFNiIsZtMoOfok7kIx0B5B7r/03gvCxiza/QIb4Bq?=
+ =?us-ascii?Q?YyDIqTSjJf1IWGS9u/XD5PGYmrPo+5XiYbcO0R290x/bOPiEm7EjU8J+2wBs?=
+ =?us-ascii?Q?iZnTZHbCCyMrg4lo0zedEnV3yDNCp0EeB6MyFH8X8bhACScnX5WUh1R3Z/fJ?=
+ =?us-ascii?Q?ssK5+AV56qzyps78R096G2TIvqKIWK/h7veCze+pTxiIgsnT0j0jhLMg9isq?=
+ =?us-ascii?Q?wGa2oBA1FMJWNmmYRcMn00Icfd9vD2brzZeQ5Tk5dVx4bdU3n34ryXvIZnk1?=
+ =?us-ascii?Q?qmRwUu8WtD0IoSbaujRp6qc329P9db27d74+sdaJobHElSN/ZbLyxKbzEKjF?=
+ =?us-ascii?Q?sISaGmXXWOLKcrvymwccDQpMe7nv7pSwWuWav0J6XvAJF14s5psGXaokcC3O?=
+ =?us-ascii?Q?20pYIhOFSCjIsyw+yVH9CkXi7/RfAPCMSGXb3UL//yleY9OIz5ahCqJN26kj?=
+ =?us-ascii?Q?7ddpcTqOnDsu4f9LlSxcVQSH0Ny8Z9dk5uV3zgNcUfBUvfeVx4o57kgMlW5f?=
+ =?us-ascii?Q?Wz+0tJRNhLdmk303TOkSbloMcAIOV4DTzi0wA1M6p3+BusLp4APtvYl1E8IX?=
+ =?us-ascii?Q?SFLv3h2G4768g4JQqgkKPOWhByWnlEBMHOiOJhnNDIbxxbLUxueqms7aVQr+?=
+ =?us-ascii?Q?o2DiVPfE4e2AlA8bvsoEArpynD0G/o7R22j78fii1TQjAGVSUysqktCsmt20?=
+ =?us-ascii?Q?AeX+2YkzbmNRW9aAYs1lpv3Wf5BuK9/tWVVz52OpIdRGKJiENT7JQ+iJjWYu?=
+ =?us-ascii?Q?xqCJfllDpXlSQOrDJZl6eiwdF2Hv8XDP6Dy/74/D2KMfpX+Q7Iw/DPqI1rx2?=
+ =?us-ascii?Q?fx0VF8Pe0cP+xgWwb5mC/d8x2DZm+U0hr+NGWqDkW+0GiAMOqs9Imj/Nj14/?=
+ =?us-ascii?Q?sg2lM3pl4sBe8b4X2qfVuEuTo6bOJ4AAxCM5bCW/TDdwl9Nu+do4MfiW8PcN?=
+ =?us-ascii?Q?x9Pc1Ox4HKi2nCN+V274VDoJg1QNc5sjpzH3BjbM4ew50YV1Pa7AQcVsVLWM?=
+ =?us-ascii?Q?pUgYz+5H3bhtoJMVEbF45PkDKUfecSMNay8MPBTgOsuIoOf9ebEGfSjNXfv8?=
+ =?us-ascii?Q?y0EckSqfZ4Ey6SZMyOT5i5zWmKzoXKQr3nli0Ely3oMhZZsxowvJyvL+d1E2?=
+ =?us-ascii?Q?OQ1cQiROxk3SHSHR2g6hd5egrm/RY/v82fzhM2l0fHWa6OXr9RA/qzqO57+s?=
+ =?us-ascii?Q?vnlI0dxMIaQ4C3/s0VTyUa5aAwxxEnM8jn+3UwuoUv7asNu6DP644rFBBL5w?=
+ =?us-ascii?Q?yN/DX1VJ2CLKwzGlVDvKnT+WEjrdOqJApapgblLNy2Di1ofsv6IWUiXrR3Lg?=
+ =?us-ascii?Q?QreK4bfhvDEdvCODPe+8h8d2ORScKWf8pkQ5Korm7KotJ6cRDd7i9zuO6wLX?=
+ =?us-ascii?Q?dyqeelvEJAOGVtzNX1bQwHRRPfmmopcRa4wU2cWQVVvs2UL0IhWoMTUWmf+f?=
+ =?us-ascii?Q?4W/Rihme/AaFTgoJB+/xa027Pz4mUerclhc/uhcm/uHVY/v9Q6var1+yNioK?=
+ =?us-ascii?Q?Yy4D3f2vXir91nTgyLhjYAiyFoGaTSuCwckAEPiH/VgxTU6dbGyzQY4jIden?=
+ =?us-ascii?Q?fgm501L05CPiDOzqwXl3N6znq7G5Wlv/9XFKMPk7NYYDamfHFX4p1bBjTHfO?=
+ =?us-ascii?Q?RRps66Xdew=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b0e770f-4607-4e11-5c93-08de69e262f1
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2026 02:56:58.1878 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uop4d0MG8AazV0V/cSNxB+hFfo8lkZo3XmX26raWCHB/HLf6mUxgYzG+5S2Es+MnUY1OP+vYV6+/mcw3Vd90Jw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10381
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,230 +174,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias
-
-On Wed, Feb 11, 2026 at 10:20=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Wed, Feb 11, 2026 at 04:11:35PM -0600, Tom Rini wrote:
+>As explained in commit 03d2d5fc003f ("board: sifive: unmatched: set
+>fdtfile with unquoted variable.") using the syntax of
+>'fdtfile=CONFIG_DEFAULT_FDT_FILE' in the plain text environment files
+>will lead to extraneous and problematic "s in the output. This is fixed
+>by using fdtfile=DEFAULT_FDT_FILE which was introduced recently.
 >
-> On Wed, 11 Feb 2026 at 16:30, Raymond Mao <raymondmaoca@gmail.com> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Wed, Feb 11, 2026 at 4:32=E2=80=AFAM Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi all,
-> > >
-> > > Apologies for the late reply.
-> > >
-> > > I did test the patches but I see something weird on smbios type 17.
-> > >
-> > > Handle 0x0008, DMI type 17, 104 bytes
-> > > Memory Device
-> > >         Array Handle: 0x0000
-> > >         Error Information Handle: Not Provided
-> > >         Total Width: Unknown
-> > >         Data Width: Unknown
-> > >         Size: No Module Installed
-> > >         Form Factor: <OUT OF SPEC>
-> > >         Set: None
-> > >         Locator: <BAD INDEX>
-> > >         Bank Locator: <BAD INDEX>
-> > >         Type: Unknown
-> > >         Type Detail: Other Unknown Fast-paged Static Column
-> > > Pseudo-static RAMBus Synchronous
-> > >         Speed: 512 MT/s
-> > >         Manufacturer: <BAD INDEX>
-> > >         Serial Number: Not Specified
-> > >         Asset Tag: Not Specified
-> > >         Part Number: Not Specified
-> > >         Rank: Unknown
-> > >         Configured Memory Speed: Unknown
-> > >         Minimum Voltage: Unknown
-> > >         Maximum Voltage: Unknown
-> > >         Configured Voltage: Unknown
-> > >         Memory Technology: <OUT OF SPEC>
-> > >         Memory Operating Mode Capability: None
-> > >         Firmware Version: Not Specified
-> > >         Module Manufacturer ID: Bank 3, Hex 0x04
-> > >         Module Product ID: Unknown
-> > >         Memory Subsystem Controller Manufacturer ID: Unknown
-> > >         Memory Subsystem Controller Product ID: Unknown
-> > >         Non-Volatile Size: 16383 PB
-> > >         Volatile Size: Unknown
-> > >         Cache Size: Unknown
-> > >         Logical Size: Unknown
-> > >
-> > > Any idea what <BAD INDEX> and <OUT OF SPEC> represent?
-> > > I tested this in QEMU
-> > >
-> >
-> > I just retested it by below qemu cmd after I rebased it to the current =
-master:
-> > qemu-system-aarch64  -bios u-boot.bin -machine virt -cpu cortex-a57 -m
-> > 2G  -nographic
-> >
-> > Below is the type17 I got:
-> > ```
-> > Handle 0x0008, DMI type 17, 104 bytes at 0xbe678141
-> > Memory Device:
-> > Physical Memory Array Handle: 0x0000
-> > Memory Error Information Handle: 0xfffe
-> > Total Width: 0x0000
-> > Data Width: 0x0000
-> > Size: 0xffff
-> > Form Factor: Unknown
-> > Device Set: 0x00ff
-> > Device Locator:
-> > Bank Locator:
-> > Memory Type: Unknown
-> > Type Detail: 0x0004
-> > Speed: 0x0000
-> > Manufacturer:
-> > Serial Number:
-> > Asset Tag:
-> > Part Number:
-> > Attributes: 0x0000
-> > Extended Size: 0x00000000
-> > Configured Memory Speed: 0x0000
-> > Minimum voltage: 0x0000
-> > Maximum voltage: 0x0000
-> > Configured voltage: 0x0000
-> > Memory Technology: Unknown
-> > Memory Operating Mode Capability: 0x0004
-> > Firmware Version:
-> > Module Manufacturer ID: 0x0000
-> > Module Product ID: 0x0000
-> > Memory Subsystem Controller Manufacturer ID: 0x0000
-> > Memory Subsystem Controller Product ID: 0x0000
-> > Non-volatile Size: 0xffffffffffffffff
-> > Volatile Size: 0xffffffffffffffff
-> > Cache Size: 0xffffffffffffffff
-> > Logical Size: 0xffffffffffffffff
-> > Extended Speed: 0x0000
-> > Extended Configured Memory Speed: 0x0000
-> > PMIC0 Manufacturer ID: 0x0000
-> > PMIC0 Revision Number: 0x0000
-> > RCD Manufacturer ID: 0x0000
-> > RCD Revision Number: 0x0000
-> > ```
-> >
-> > If you didn't use smbios_generic.dtsi to insert new nodes, or add new
-> > 'memory@' / 'memory-controller@' nodes into your DT, you should get
-> > the same result as mine by default.
-> > If you still can not get it, can you give me your build instruction
-> > and qemu cmd for reproducing?
->
-> I used qemu_arm64_lwip_defconfig
->
-> qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57 \
->           -machine virt,secure=3Doff -bios u-boot.bin -chardev
-> socket,id=3Dchrtpm,path=3D/tmp/mytpm1/swtpm-sock \
->           -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm -device
-> tpm-tis-device,tpmdev=3Dtpm0 \
->           -device virtio-rng-pci -drive
-> id=3Dos,if=3Dnone,file=3D../debian.qcow2 -device virtio-blk-device,drive=
-=3Dos
->  is the command line
->
+>Signed-off-by: Tom Rini <trini@konsulko.com>
+>---
+> board/nxp/imx8mm_evk/imx8mm_evk.env                  | 2 +-
+> board/nxp/imx8mn_evk/imx8mn_evk.env                  | 2 +-
+> board/nxp/imx8mp_evk/imx8mp_evk.env                  | 2 +-
+> board/nxp/imx8mq_evk/imx8mq_evk.env                  | 2 +-
+> board/nxp/imx8ulp_evk/imx8ulp_evk.env                | 2 +-
+> board/nxp/imx91_evk/imx91_evk.env                    | 2 +-
+> board/nxp/imx91_frdm/imx91_frdm.env                  | 2 +-
+> board/nxp/imx93_evk/imx93_evk.env                    | 2 +-
+> board/nxp/imx93_frdm/imx93_frdm.env                  | 2 +-
+> board/nxp/imx93_qsb/imx93_qsb.env                    | 2 +-
+> board/nxp/imx94_evk/imx94_evk.env                    | 2 +-
+> board/nxp/imx95_evk/imx95_evk.env                    | 2 +-
 
-I did these steps with a clean build (exactly the same as your ones):
-$ make O=3Dout_lwip qemu_arm64_lwip_defconfig
-$ CROSS_COMPILE=3Daarch64-none-linux-gnu- make O=3Dout_lwip -j4 all
-$ cd out_lwip
-$ killall swtpm
-$ rm -rf /tmp/mytpm1
-$ mkdir -p /tmp/mytpm1
-$ swtpm_setup --tpmstate /tmp/mytpm1 --tpm2 --pcr-banks sha256
-$ swtpm socket --tpmstate dir=3D/tmp/mytpm1 --ctrl
-type=3Dunixio,path=3D/tmp/mytpm1/swtpm-sock --log level=3D40 --tpm2 -t -d
-$ qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57 \
--machine virt,secure=3Doff -bios u-boot.bin -chardev
-socket,id=3Dchrtpm,path=3D/tmp/mytpm1/swtpm-sock \
--tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm -device tpm-tis-device,tpmdev=
-=3Dtpm0 \
--device virtio-rng-pci -drive id=3Dos,if=3Dnone,file=3D../debian.qcow2
--device virtio-blk-device,drive=3Dos
+For nxp boards:
 
-SMBIOS type17 shows no difference:
-```
-Handle 0x0008, DMI type 17, 104 bytes at 0x7e64b141
-Memory Device:
-Physical Memory Array Handle: 0x0000
-Memory Error Information Handle: 0xfffe
-Total Width: 0x0000
-Data Width: 0x0000
-Size: 0xffff
-Form Factor: Unknown
-Device Set: 0x00ff
-Device Locator:
-Bank Locator:
-Memory Type: Unknown
-Type Detail: 0x0004
-Speed: 0x0000
-Manufacturer:
-Serial Number:
-Asset Tag:
-Part Number:
-Attributes: 0x0000
-Extended Size: 0x00000000
-Configured Memory Speed: 0x0000
-Minimum voltage: 0x0000
-Maximum voltage: 0x0000
-Configured voltage: 0x0000
-Memory Technology: Unknown
-Memory Operating Mode Capability: 0x0004
-Firmware Version:
-Module Manufacturer ID: 0x0000
-Module Product ID: 0x0000
-Memory Subsystem Controller Manufacturer ID: 0x0000
-Memory Subsystem Controller Product ID: 0x0000
-Non-volatile Size: 0xffffffffffffffff
-Volatile Size: 0xffffffffffffffff
-Cache Size: 0xffffffffffffffff
-Logical Size: 0xffffffffffffffff
-Extended Speed: 0x0000
-Extended Configured Memory Speed: 0x0000
-PMIC0 Manufacturer ID: 0x0000
-PMIC0 Revision Number: 0x0000
-RCD Manufacturer ID: 0x0000
-RCD Revision Number: 0x0000
-```
-
-By the way, I don't think it has any relationship with swtpm and the
-linux distro, so I also simply tried:
-$ qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57 \
--machine virt,secure=3Doff -bios u-boot.bin
-
-All works with the same type17 output.
-
-Regards,
-Raymond
-
-> Cheers
-> /Ilias
->
->
-> >
-> > Regards,
-> > Raymond
-> >
-> >
-> > > Regards
-> > > /Ilias
-> > >
-> > > On Wed, 4 Feb 2026 at 18:13, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Feb 04, 2026 at 11:12:42AM -0500, Raymond Mao wrote:
-> > > >
-> > > > > Hi,
-> > > > >
-> > > > > Anyone have a chance to review this patch set? It is the last pie=
-ce of
-> > > > > work to support all required SMBIOS types in U-Boot.
-> > > >
-> > > > I've been waiting for Ilias or Heinrich to have time to look at thi=
-s.
-> > > >
-> > > > --
-> > > > Tom
+Acked-by: Peng Fan <peng.fan@nxp.com>
