@@ -4,108 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A379DEEA86E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 23:48:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4647DEEA871
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 23:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4C1783015;
-	Fri, 13 Feb 2026 00:48:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 301D083AAB;
+	Fri, 13 Feb 2026 00:48:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hopDxgil";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LqbhHxfW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3540083015; Thu, 12 Feb 2026 22:32:23 +0100 (CET)
-Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
- [IPv6:2607:f8b0:4864:20::e33])
+ id BC2B683015; Thu, 12 Feb 2026 22:34:33 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05BA380FA1
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 22:32:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57E7780FA1
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 22:34:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-5fa26e497feso116444137.3
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 13:32:20 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770931940; cv=none;
- d=google.com; s=arc-20240605;
- b=jnGNcf3CgZV/B2wFo3ryUUVC6Ey9nt22k3wCtZCl+E2mvHq/vdhmWTSxilAIlYvuTR
- kyW2mhL3xM8Q4FPdlQ2xus3QBMsGj1It0ms2V6qSiEq8Okgtvc7+JHGRftkfiwctaqOT
- rDczYLv/FLzs4ZTJaYxbkyvdLofP6s8BhfE1p4D6oWMrCX+0cqK3LTrtALsSlorXER6f
- /tNdzooQlA+hRNxG5XS90+UstWrOGf/vvw9JanL6IIIp1NHh2+pVSQbWWrqw6HBydVWc
- 2LLbenjWmJkqRwhg1/NluxX9FZU69IdBhEHW6vTN2mzjzJgyQuVFJgnI/OBnVstBssSh
- bk5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Vv5xuRvYRzp6IcS1gXOhJgUwVD482Nxjg1REak1VhWU=;
- fh=CZg+trVLT5C7hPiIM0OSJFRG3Myi0YjcN1bp5nRv5F4=;
- b=XtgYBECBn3EpxXTnIk8sPwEd8599sqEbGhMtXp0cNWU5a3fzOG1bxdTvlxHq3Sqplh
- NPJfYsOjYHWph/GwCHCSwrLe/WqvILTCUXZKCL96Dy36QeN5jcJo2unYrZ6lkRelMQz0
- +V49gdWBe2qEYp9LQt/ec/4EkgWiKGEEJPqjJeO3jFXqNP6V9nkEC2z2gjFh9tdNAuMJ
- re66FEc9Q8mTDyHitzPQzt3P5GGxMFfYxHswbrbpOn3k0pEn+EZuJ48ww032Dh0TWtUA
- CXBkrwO910tkrPQLc29xGiOZ1uIY1LHdckfO47ZUCqM0tl6lvdg5xkm+nOBY9E3ZmAAa
- 1QVQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7d4c383f2fcso60473a34.0
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 13:34:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770931940; x=1771536740; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vv5xuRvYRzp6IcS1gXOhJgUwVD482Nxjg1REak1VhWU=;
- b=hopDxgildlFhYgBU5AHeoOYsq6D7XXzU44y+iV6Hl2cs0GnlFXAJPZ4b77wRir1EsW
- xotRRO6E6ymsWJ70VUXLTjW4je7d7GqGhbp+qmOvXjQIVln9fn/LzOaemzlCWrmPwP3s
- FPFHabzVr6hIGOeQlNPpssMgOswQyBkEisIKEfhCqSZsDYPQqHSMpGpbSkqbIUTJ5Vvu
- CufLl759bn/XnlLBVpWUpepfuAr36cpdjzHSltbNJcHpioXydELhDA5FBx1hzDtSRozt
- lXb1kpqnf/T1FK5EW1N+cd6MeDbMJcjarUu7+ekaRyVzJtNZ4zMlfjyChPtypmNjdIJS
- UWrw==
+ d=gmail.com; s=20230601; t=1770932070; x=1771536870; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EXp0889hDb2Dn26MJ06U2PbpaDHOhvHxlWhfepZl/WQ=;
+ b=LqbhHxfWWQWvy7OZf1ONYjbnXpNZnXWZwitWlFVakIHkDkrwXI6QkxUUhPjzGAqT4C
+ OS0/8zJmOfNp/+fpUlnWi2/7nIFqnCl4yCsREX28sIVrZ+zfFBh1IPKm1ZrshrkaqReY
+ 7RkLbWIqaSiPyy4TILfHIjSi1e1a3wjBGn2Jov7zG5YvCRGmkUkyo+HXu7sM+9orjhjq
+ aSfTEXaI7YFMSx49eOIRZdsNt4akVsAYcPSrqvBSP/O4kVIjT3ghPyf4hCFppx/UJ0V1
+ KeecC8i7tK6ZBbk/NJ7H78wUE++WGWRBfNybgS4jQt6GaitHs6kbKqJeqNN7KfsM2Y/T
+ O++g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770931940; x=1771536740;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Vv5xuRvYRzp6IcS1gXOhJgUwVD482Nxjg1REak1VhWU=;
- b=MaAHt0/5iXgjzNI9WTGBZhsJj7o4O6vIr4OnqrQWMOOXpbATv4vE4gItbhBeEEOJxA
- PwmsJ4MCG8YNLhnvrDLTVINm3pX8pUOkAESmBj9gKhbMJRlkjs5WEsaoLVCdkppv2aYQ
- EC4XvTXxmEFkPWyfsCA+9h0uh7yOZ/l0TaGWVgHlY/cwVrJ1jWFlBCCt6EPRKzD3/egH
- po4R/RLm1qMFYY/m/XoaODopXNCiTgUlBZcPl7ae0caV4LZrrZuNncLbPV7hUlizYW5w
- loNRxSsmWTb9SsU/Ya+eHGWiVLyOs4P8AgPZ6xdLExsNznloJa3ZMcJPeAC6xqRo0VyT
- ALBw==
-X-Gm-Message-State: AOJu0YymE0wqBs/aNQ0gIxGdfLaGez/Q5/G2JU7TgiaTf81sJeReaJht
- wRtMHsIx0OLj8bH2YnGN6pq7SX5pth9GWMVqRJC5YiF4JI6VVPVZHwOZ8erdGyOTNIxDJNN+cKT
- mB3v43au3EJkILqLhvFDSXH8BtYJOSB0=
-X-Gm-Gg: AZuq6aJAdb95vH2pb9EE1FW+6P1in2dkSwKVXCgLqkNcJ3uIqBU2EXB0bjmxslXaSD8
- ucZ0PtN65TmfubgF7Z+wz2eRuuthu73sm3K2tW4yFEla32DZ0xL4U7y3rIyA5hIK/90ajsSbBFD
- oDnJPoRmg4zJ4lf4iBvfiLOAa0wHQ5VjGNDkUS0lfoiH/9v3qrSQvmvP7z+KZbCVlFdK2VHFCSV
- /Jb25xEXwjM8OKtHXEA0oet1mBcSnQch8k83/8aLZ94hXCHKBF3PjlAa7v801M2C1ptf/i+sHs8
- o/Tl12trW1S72UKx6XQMKlCQZhWjeXPdTVFY00hf95rRLkv0qJfsVzBaZfjwjjGxfoY6GgVZW4I
- ZYOc=
-X-Received: by 2002:a05:6102:3a14:b0:5f5:773f:b1e3 with SMTP id
- ada2fe7eead31-5fe16d85cdbmr95979137.11.1770931939696; Thu, 12 Feb 2026
- 13:32:19 -0800 (PST)
-MIME-Version: 1.0
-References: <20260211180645.3313596-1-james.hilliard1@gmail.com>
- <cf72da71-12f3-45ab-b703-6cc776ed28ab@mailbox.org>
- <CADvTj4qtaoyJc9MtbjbpC+t_h3yO=jBXNed_3BAmDWMbDbhRPg@mail.gmail.com>
- <a00c737b-4f8f-4e26-974b-aa14ebbef64b@mailbox.org>
-In-Reply-To: <a00c737b-4f8f-4e26-974b-aa14ebbef64b@mailbox.org>
+ d=1e100.net; s=20230601; t=1770932070; x=1771536870;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EXp0889hDb2Dn26MJ06U2PbpaDHOhvHxlWhfepZl/WQ=;
+ b=sPUBq2XK08D70MasGTPlHHr0H+Cwi3Z5uAhZ3wsNDYh9m/VmeK25IW5bpEIYH518hF
+ XqQrjnwwowogDUE6EaRoEtik4+LOhfrzKxYw7MmCEvAVKFn0Hc3rifsEFLqzLgyjxj+G
+ e7VnqiFnVS/j88XjV/g6yePv2IGRFj88FXi+6hMAOHAxb56ypcJ1fe4jDf0LX1W9GvMW
+ v+0CcJpW7L3WEtIlhImeG9Ph3S91AVBQv78SoOA0xl77viUmrcXNjfQqqly8NK81RIaW
+ gQhO2uBuNlsiLalxHxbd4s3rHfuHUL4O5m0pDnQycLNStt3NAjbqdXhRTqJCSPueZi8/
+ g0Rw==
+X-Gm-Message-State: AOJu0Yyho+zgvP9dIOXSdb5UeE0CoqjVArswB6F4UCRj5Ht2RzCwaK7A
+ pKwQuaNALTTQ0mNIMocEfl04yy6F3erR9IF3UGK9afHxXBQC+pE5GP/GNyoz4w==
+X-Gm-Gg: AZuq6aLOE1Cs/cfzfp3FyiTmskP2GzC8OaV7H16VLGqS3g1lhUd3l7LY3u34tLogQvU
+ lX9zSxbPo7BCzXjDO4g34Mo1DB8yb69fsykOY85dxEOWQXWTUnllecxZ1PZiJ3WIjnlvDZM6+Xo
+ vh4paThF1rPcn1sLo5OTNxp6/a7xywdosbYFAdWMz9QnUi9qXZsdJsbvt6dCb9sJUG+50OK8VBS
+ zmSxj7DhTe0LGs94yVQ2U6kOp40ht+0xPHzyJvDD1H/VMTXQws/D/0JkBqxuUPHGB2aQTzJGGVj
+ pRMg3at/SlZMxzslepEdJGRslHfNxF5HpvixPZ68VaWx0bg4m/7rcaWazgHA6JNUZ6Xhh7r7Ex0
+ 7NZ1iBVD9D8dvvulqoBrgEhjDnVFBsTHmTGPf8xTyahA6q2YmXYxOfBdWmztQD5vsD+ghfKTA0O
+ fPnrdSWnmpqrgfPiJaDCJDAsyD+mTDlOzMFPJdz9knJztGBMVqbfkkmAYBiDx6BpnPXxL+houmV
+ DgPwSIC9/GTdZLUuTU1vDgJXykaZtV3zNwDwHxSmgcCnlIY1LpxXjFxUmgU6nw=
+X-Received: by 2002:a05:6830:348a:b0:7cf:e4a1:8b79 with SMTP id
+ 46e09a7af769-7d4c2fe5e0dmr248316a34.7.1770932069721; 
+ Thu, 12 Feb 2026 13:34:29 -0800 (PST)
+Received: from james-x399.localdomain (71-218-105-26.hlrn.qwest.net.
+ [71.218.105.26]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4a76f9483sm4886337a34.20.2026.02.12.13.34.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Feb 2026 13:34:29 -0800 (PST)
 From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 12 Feb 2026 14:32:08 -0700
-X-Gm-Features: AZwV_QhjnLMq_KPf_eTtK2osBks7SsvLMPnj-zmkwyQhCaI9xvEot7Byqb_msLE
-Message-ID: <CADvTj4pXOQ5KKJa2ZmU0WhaqMYYS8k9AXd8xZ6Uv1HvW-H_wpQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/1] image: fit: Apply overlays using aligned writable
- FDT copies
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Jamie Gibbons <Jamie.Gibbons@microchip.com>, 
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>,
+ Jamie Gibbons <Jamie.Gibbons@microchip.com>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
  David Lechner <dlechner@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [PATCH v6 1/1] image: fit: Apply overlays using aligned writable FDT
+ copies
+Date: Thu, 12 Feb 2026 14:34:09 -0700
+Message-ID: <20260212213410.822845-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 13 Feb 2026 00:48:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -123,126 +102,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 12, 2026 at 1:05=E2=80=AFPM Marek Vasut <marek.vasut@mailbox.or=
-g> wrote:
->
-> On 2/12/26 8:52 PM, James Hilliard wrote:
-> > On Thu, Feb 12, 2026 at 8:26=E2=80=AFAM Marek Vasut <marek.vasut@mailbo=
-x.org> wrote:
-> >>
-> >> On 2/11/26 7:06 PM, James Hilliard wrote:
-> >>
-> >>> +static int boot_get_fdt_fit_into_buffer(const void *src, ulong srcle=
-n,
-> >>> +                                     ulong extra, ulong min_dstlen,
-> >>> +                                     void **fdtdstbuf, ulong *fdtdst=
-lenp)
-> >>> +{
-> >>> +     const void *fdtsrcbuf;
-> >>> +     void *tmp =3D NULL;
-> >>> +     void *dstbuf, *newdstbuf;
-> >>> +     ulong dstlen, newdstlen;
-> >>> +     int err;
-> >>> +
-> >>> +     /* Make sure the source FDT/DTO is 8-byte aligned for libfdt. *=
-/
-> >>> +     fdtsrcbuf =3D src;
-> >>> +     if (!IS_ALIGNED((uintptr_t)src, 8)) {
-> >>> +             tmp =3D memalign(8, srclen);
-> >>> +             if (!tmp)
-> >>> +                     return -ENOMEM;
-> >>> +
-> >>> +             memcpy(tmp, src, srclen);
-> >>> +             fdtsrcbuf =3D tmp;
-> >>> +     }
-> >>> +
-> >>> +     newdstlen =3D ALIGN(fdt_totalsize(fdtsrcbuf) + extra, SZ_4K);
-> >>> +     min_dstlen =3D ALIGN(min_dstlen, SZ_4K);
-> >>> +     if (newdstlen < min_dstlen)
-> >>> +             newdstlen =3D min_dstlen;
-> >>> +
-> >>> +     dstbuf =3D *fdtdstbuf;
-> >>> +     dstlen =3D dstbuf ? *fdtdstlenp : 0;
-> >>> +
-> >>> +     /*
-> >>> +      * If the caller already provided a large enough writable buffe=
-r,
-> >>> +      * and we're not moving the FDT, nothing to do.
-> >>> +      */
-> >>> +     if (dstbuf && dstlen >=3D newdstlen && dstbuf =3D=3D fdtsrcbuf)=
- {
-> >>
-> >> Can $dstbuf ever be NULL ?
-> >>
-> >>> +             free(tmp);
-> >>> +             return 0;
-> >>
-> >> You could try something like this here, to reduce the duplicate
-> >> free(tmp) in the code:
-> >>
-> >> "
-> >> err =3D 0;
-> >> goto exit;
-> >>
-> >> ...
-> >>
-> >> exit:
-> >>     free(tmp);
-> >>     return err;
-> >> "
-> >>
-> >>> +     }
-> >>> +
-> >>
-> >> [...]
-> >>
-> >>> -     load =3D (ulong)of_flat_tree;
-> >>> +     len =3D fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base=
-_buf);
-> >> How does this new length calculation work, can you please clarify that=
- ?
-> >
-> >  From my understanding, that len is tracking the current packed DTB dat=
-a
-> > length (up to the end of the strings block), not the allocated buffer s=
-ize. We
-> > recompute it after each overlay so need =3D len + ovcopylen
-> > CONFIG_SYS_FDT_PAD grows from real used bytes instead of
-> > accumulated slack. This is roughly the same idea as libfdt=E2=80=99s in=
-ternal
-> > fdt_data_size_(), and the final returned size is still taken after fdt_=
-pack()
-> > with fdt_totalsize().
->
-> Ah I see, thank you for the clarification, this helped. It would be nice
-> to include that as code comment too.
+libfdt expects FDT/DTO blobs to be 8-byte aligned. When loading the
+base FDT or overlays from a FIT, the mapped buffer may be unaligned,
+which can break fdt_open_into() on strict-alignment architectures.
 
-I'll add a comment.
+boot_get_fdt_fit() relocates the base FDT with boot_relocate_fdt()
+before applying overlays. That uses the bootm memory map and can
+overlap with the FIT buffer when the FIT is loaded into RAM,
+corrupting data needed to load the kernel and ramdisk.
 
->
-> But don't you have to account for the FDT headers too, so wouldn't
-> fdt_totalsize() be more appropriate here ?
+Allocate writable, 8-byte aligned copies of the base FDT and overlays
+with memalign() and fdt_open_into(). Grow the base buffer as needed,
+apply overlays to it and pack the final tree. Free each temporary
+overlay copy after application and check fdt_pack() errors.
 
-From my understanding, fdt_off_dt_strings() + fdt_size_dt_strings() is the
-packed DTB data size we need for growth calculations, and it already
-covers data from the blob start (so headers are implicitly accounted for
-via the offset). fdt_totalsize() includes spare/free space, so using it the=
-re
-would overestimate need and cause unnecessary buffer growth.
+Fixes: 8fbcc0e0e839 ("boot: Assure FDT is always 8-byte aligned")
+Fixes: 881f0b77dc8c ("image: apply FDTOs on FDT image node")
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Cc: Jamie Gibbons <Jamie.Gibbons@microchip.com>
+---
+Changes v1 -> v2:
+  - also fix alignment issues
+Changes v2 -> v3:
+  - do not print on -ENOMEM errors
+  - let boot_get_fdt_fit_into_buffer() reuse buffers and handle rounding
+Changes v3 -> v4:
+  - rebase on master
+Changes v4 -> v5:
+  - refactor boot_get_fdt_fit_into_buffer() to use a single cleanup path
+    and avoid duplicated free(tmp) handling
+Changes v5 -> v6:
+  - add comment clarifying packed DTB size calculation and why this path
+    should not use fdt_totalsize() for growth estimation
+---
+ boot/image-fit.c | 165 ++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 126 insertions(+), 39 deletions(-)
 
->
-> >> I don't think this will work for fitImages with external data (generat=
-ed
-> >> using mkimage -E) , but I might be wrong.
-> >
-> >  From my understanding, this should still work with mkimage -E, externa=
-l
-> > data only changes where FIT payload bytes are stored, and
-> > fit_image_load()/fit_image_get_data() already resolves that before over=
-lay
-> > application. At that point we=E2=80=99re operating on a normal copied D=
-TB buffer,
-> > and the length math is based on DTB-internal layout, not FIT
-> > external-data placement.
->
-> Clear, you're right.
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 3ed69b5f7bc..ddc64debb14 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2368,6 +2368,71 @@ int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
+ }
+ 
+ #ifndef USE_HOSTCC
++#ifdef CONFIG_OF_LIBFDT_OVERLAY
++static int boot_get_fdt_fit_into_buffer(const void *src, ulong srclen,
++					ulong extra, ulong min_dstlen,
++					void **fdtdstbuf, ulong *fdtdstlenp)
++{
++	const void *fdtsrcbuf;
++	void *tmp = NULL;
++	void *dstbuf, *newdstbuf = NULL;
++	ulong dstlen, newdstlen;
++	int err = 0;
++
++	/* Make sure the source FDT/DTO is 8-byte aligned for libfdt. */
++	fdtsrcbuf = src;
++	if (!IS_ALIGNED((uintptr_t)src, 8)) {
++		tmp = memalign(8, srclen);
++		if (!tmp)
++			return -ENOMEM;
++
++		memcpy(tmp, src, srclen);
++		fdtsrcbuf = tmp;
++	}
++
++	newdstlen = ALIGN(fdt_totalsize(fdtsrcbuf) + extra, SZ_4K);
++	min_dstlen = ALIGN(min_dstlen, SZ_4K);
++	if (newdstlen < min_dstlen)
++		newdstlen = min_dstlen;
++
++	dstbuf = *fdtdstbuf;
++	dstlen = dstbuf ? *fdtdstlenp : 0;
++
++	/*
++	 * If the caller already provided a large enough writable buffer,
++	 * and we're not moving the FDT, nothing to do.
++	 */
++	if (dstlen >= newdstlen && dstbuf == fdtsrcbuf)
++		goto out;
++
++	/* Try to reuse existing destination buffer if it is large enough. */
++	if (dstbuf && dstlen >= newdstlen) {
++		err = fdt_open_into(fdtsrcbuf, dstbuf, dstlen);
++		goto out;
++	}
++
++	newdstbuf = memalign(8, newdstlen);
++	if (!newdstbuf) {
++		err = -ENOMEM;
++		goto out;
++	}
++
++	err = fdt_open_into(fdtsrcbuf, newdstbuf, newdstlen);
++	if (err < 0)
++		goto out;
++
++	free(dstbuf);
++	*fdtdstbuf = newdstbuf;
++	*fdtdstlenp = newdstlen;
++	newdstbuf = NULL;
++
++out:
++	free(newdstbuf);
++	free(tmp);
++	return err;
++}
++#endif
++
+ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 		     const char **fit_unamep, const char **fit_uname_configp,
+ 		     int arch, ulong *datap, ulong *lenp)
+@@ -2380,18 +2445,12 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	char *next_config = NULL;
+ 	ulong load, len;
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	ulong ovload, ovlen, ovcopylen;
++	ulong ovload, ovlen, ovcopylen, need;
+ 	const char *uconfig;
+ 	const char *uname;
+-	/*
+-	 * of_flat_tree is storing the void * returned by map_sysmem, then its
+-	 * address is passed to boot_relocate_fdt which expects a char ** and it
+-	 * is then cast into a ulong. Setting its type to void * would require
+-	 * to cast its address to char ** when passing it to boot_relocate_fdt.
+-	 * Instead, let's be lazy and use void *.
+-	 */
+-	char *of_flat_tree;
+-	void *base, *ov, *ovcopy = NULL;
++	void *ovcopy = NULL;
++	void *base_buf = NULL;
++	ulong base_buf_size = 0;
+ 	int i, err, noffset, ov_noffset;
+ #endif
+ 
+@@ -2434,18 +2493,31 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 	/* we need to apply overlays */
+ 
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
+-	/* Relocate FDT so resizing does not overwrite other data in FIT. */
+-	of_flat_tree = map_sysmem(load, len);
+-	len = ALIGN(fdt_totalsize(load), SZ_4K);
+-	err = boot_relocate_fdt(&of_flat_tree, &len);
+-	if (err) {
+-		printf("Required FDT relocation for applying DTOs failed: %d\n",
+-		       err);
+-		fdt_noffset = -EBADF;
++	/*
++	 * Make a writable copy of the base FDT for applying overlays.
++	 *
++	 * Do not use boot_relocate_fdt() here: it allocates from the bootm map and
++	 * may overlap with the FIT buffer (still needed to load the kernel /
++	 * ramdisk) when the FIT is loaded into RAM.
++	 */
++	err = boot_get_fdt_fit_into_buffer(map_sysmem(load, len), len,
++					   CONFIG_SYS_FDT_PAD, 0, &base_buf,
++					   &base_buf_size);
++	if (err < 0) {
++		if (err != -ENOMEM)
++			printf("Required FDT copy for applying DTOs failed: %s\n",
++			       fdt_strerror(err));
++		fdt_noffset = err;
+ 		goto out;
+ 	}
+ 
+-	load = (ulong)of_flat_tree;
++	/*
++	 * Track packed DTB data size (same as libfdt internal fdt_data_size_()).
++	 * fdt_off_dt_strings() is an offset from the blob start, so this includes
++	 * headers/reserve map/struct blocks. Do not use fdt_totalsize() here since
++	 * it includes free space and would overestimate growth requirements.
++	 */
++	len = fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base_buf);
+ 
+ 	/* apply extra configs in FIT first, followed by args */
+ 	for (i = 1; ; i++) {
+@@ -2489,48 +2561,61 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
+ 		}
+ 		debug("%s loaded at 0x%08lx len=0x%08lx\n",
+ 				uname, ovload, ovlen);
+-		ov = map_sysmem(ovload, ovlen);
+-
+-		ovcopylen = ALIGN(fdt_totalsize(ov), SZ_4K);
+-		ovcopy = malloc(ovcopylen);
+-		if (!ovcopy) {
+-			printf("failed to duplicate DTO before application\n");
+-			fdt_noffset = -ENOMEM;
+-			goto out;
+-		}
+-
+-		err = fdt_open_into(ov, ovcopy, ovcopylen);
++		err = boot_get_fdt_fit_into_buffer(map_sysmem(ovload, ovlen),
++						   ovlen, 0, 0, &ovcopy,
++						   &ovcopylen);
+ 		if (err < 0) {
+-			printf("failed on fdt_open_into for DTO: %s\n",
+-			       fdt_strerror(err));
++			if (err != -ENOMEM)
++				printf("failed on fdt_open_into for DTO: %s\n",
++				       fdt_strerror(err));
+ 			fdt_noffset = err;
+ 			goto out;
+ 		}
+ 
+-		base = map_sysmem(load, len + ovlen);
+-		err = fdt_open_into(base, base, len + ovlen);
++		/*
++		 * Ensure the base FDT buffer is open and has enough room for
++		 * the overlay. Grow it on demand.
++		 */
++		need = len + ovcopylen + CONFIG_SYS_FDT_PAD;
++		err = boot_get_fdt_fit_into_buffer(base_buf, base_buf_size, 0,
++						   need, &base_buf,
++						   &base_buf_size);
+ 		if (err < 0) {
+-			printf("failed on fdt_open_into: %s\n",
+-			       fdt_strerror(err));
++			if (err != -ENOMEM)
++				printf("failed to expand FDT for DTO application: %s\n",
++				       fdt_strerror(err));
+ 			fdt_noffset = err;
+ 			goto out;
+ 		}
+ 
+ 		/* the verbose method prints out messages on error */
+-		err = fdt_overlay_apply_verbose(base, ovcopy);
++		err = fdt_overlay_apply_verbose(base_buf, ovcopy);
+ 		if (err < 0) {
+ 			fdt_noffset = err;
+ 			goto out;
+ 		}
+-		fdt_pack(base);
+-		len = fdt_totalsize(base);
++		len = fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base_buf);
++
++		free(ovcopy);
++		ovcopy = NULL;
+ 	}
++
++	err = fdt_pack(base_buf);
++	if (err < 0) {
++		fdt_noffset = err;
++		goto out;
++	}
++	len = fdt_totalsize(base_buf);
+ #else
+ 	printf("config with overlays but CONFIG_OF_LIBFDT_OVERLAY not set\n");
+ 	fdt_noffset = -EBADF;
+ #endif
+ 
+ out:
++#ifdef CONFIG_OF_LIBFDT_OVERLAY
++	if (fdt_noffset >= 0 && base_buf)
++		load = map_to_sysmem(base_buf);
++#endif
+ 	if (datap)
+ 		*datap = load;
+ 	if (lenp)
+@@ -2541,6 +2626,8 @@ out:
+ 		*fit_uname_configp = fit_uname_config;
+ 
+ #ifdef CONFIG_OF_LIBFDT_OVERLAY
++	if (fdt_noffset < 0)
++		free(base_buf);
+ 	free(ovcopy);
+ #endif
+ 	free(fit_uname_config_copy);
+-- 
+2.43.0
+
