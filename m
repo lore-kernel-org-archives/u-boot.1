@@ -4,132 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956A7EE3685
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 13:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01135EE368F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 14:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B335783CBD;
-	Thu, 12 Feb 2026 14:54:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 3115E83AAB;
+	Thu, 12 Feb 2026 15:31:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="ctFnTiVg";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ilV5xDQz";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XidIj3Ja";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90A0083C4B; Thu, 12 Feb 2026 14:54:42 +0100 (CET)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5826283015; Thu, 12 Feb 2026 15:31:27 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24E4983015
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 14:54:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 605E783015
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 15:31:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-4836f363d0dso1842885e9.3
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 05:54:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1770904476; x=1771509276; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=El4Oufw1GAAXLZDJgqBux1yZ+OUezZKR7g61Izh6Owo=;
- b=ctFnTiVgUh9uslSUkeLtRvq90h3EzdUEeOn3BpLBBp8Kb8Tp0wJRi7OfjnANGPEWCM
- ovJ0jNeQlq7+cgcqFWeutazWOgF0xlaLe3n+DcZvA3RT+o959oEnGAAo41S5m7QvS6zU
- FIol7hVJTofWlbzftmAhN3MFtb3JLJyn1uBuvCHkERQHMQoi26R/Vyg45UITgKSdbH0R
- sTAstBkkDt4RQBIDDC1fXqUA+4ouQLL2pJEXtR0cPy2o/PrkQbWjTHI/noQRuSdnV4Mj
- TkaK83YtQ/6ICNdM+6fQ39lQt35QjUf6sAPGG8zRxerfCP2fEE5s+6X4VzdbdcbGCptZ
- u/+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770904476; x=1771509276;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=El4Oufw1GAAXLZDJgqBux1yZ+OUezZKR7g61Izh6Owo=;
- b=uwnnM3b58dXIA0PAyvPC8BPnlofiGQW1RUEDaav5o9xi4v/MOjtRTCsvvt0DqL44wR
- S5NA4GATq0KbNJ1UO0IfXHSiSr9S78LrFbebc59XBjCi2jrgjzcjp7Z33KtYuqax3b//
- V4ioMh16nC+ndCBVl+jxBSq2TuniHl+KnYQRPMeZU5NF4SRjJA2T0ZO44m7Zd0f91Ypn
- XdKSm0Org/wM7loauflbriF+iAR1qPcqbDmzAqsqbSYli9Naxg14rRU5Y/83Pw3dTUbc
- hBdSnQqiSPo5wOd/uhtreS66edEhBAsY63SMl6Yu+Bjeo2/ORXY0YC7OixDG/YrkSI8G
- Dz8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWBUGAYe073nvnBARz/c5q7XS6DCNQ4oNWu3cEw/Z0JSbGsir1Y3f0KNqkP68ISoX9qaBsAvOA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6Rbgv2LizG6h1L+fCw9bVgQjl+x+ao5tnG9UykRA2+d407bM/
- 3lmBivLEynaNNxdnv9nLD6JHiilR/aKOaXOwJ4IcYJhtErD0U141tP+5pYDu0Hf7Rn6Wdtc9uYG
- zKdBbrOA=
-X-Gm-Gg: AZuq6aJ1+tvdw6ZNZz8d1KgVZqdJW1jhBxOZvxgPDFbyyAt6c7B+iKh6LyT2SzvaObG
- 2s4AtGuqIiOxxGvho10WK7fS0qvK1B7zoo6/DYYIRmUMMmdwUdOkwZsQJsH7Q6ywnFjs8B5LyXm
- +9gyJadgqjdTUKw547XBWjcBNmtDVyOHK01FHUdAlBl0aNnQCRDp2ZUj2mkgfeD3wukEqI+MxLT
- E1a67dGBRYoI+Idy7JphPynUT1JqKNAX8bp7zYkf7es/oKuL8cOvadLbujSa3luI4GgCJJXypjT
- 1H3WqCEqOgrWvvJMxvfyQjOZwhrqdCRZdlL1G0aOF2zK+yMsl0kdpXnfn/+KUyG1ZT4g5m9aXh8
- HMZHWQFRAXJtyV2LoM1oVrGVuRyFdVbjxQ/L2o1yV30XJ5irePqUHUeXHdmWUjfFPOzs9keTcP4
- lhuieUeSuArzNJXixo5VM1AIVEe/pXH8zqL7k9a3nwzGXcxcVf+zRyBksrCrcXcx+ljctOFiSs7
- mAirZ/1CjQ1
-X-Received: by 2002:a05:600c:8b64:b0:480:1c85:88bf with SMTP id
- 5b1f17b1804b1-48365717939mr42603035e9.27.1770904476405; 
- Thu, 12 Feb 2026 05:54:36 -0800 (PST)
-Received: from [192.168.2.177] (241.85-85-167.dynamic.clientes.euskaltel.es.
- [85.85.167.241]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d5e0ed5sm184438325e9.5.2026.02.12.05.54.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Feb 2026 05:54:36 -0800 (PST)
-Message-ID: <92c43984-c2d6-4753-adc5-627e210936b8@suse.com>
-Date: Thu, 12 Feb 2026 14:54:34 +0100
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fBd5m5hFCz9vDx;
+ Thu, 12 Feb 2026 15:31:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770906685;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kpc1ZY23CCsNUyJXbMpUpVXWWbHphBa8OQrB8msDZY8=;
+ b=ilV5xDQzvFU0u9YXW/YFMEjCSBqu511cnqi+sw5PP/lPbHmS/Np5XlFxTeYbjrqScEgSZI
+ OfnvRxVyMTnOJyhwYGRuY22lXiHvvehaV2J7Z6jvCVoAZpTwrjvu6KIZCiBXvDIW20/EH2
+ 4DZb6xar5rPF9xMHJ+N7UBYRmiN1nhqhDXz4Ymj3VKqOwKxr1FPCwU56tnHEhNPmt+BqG6
+ ziKMdUR1cSfwJ+MxM7VihqJrD0omAZyzN0LS52MjmllYuuqxdjoC5I9dkAbICAu4Aon161
+ tAcWfhgQcgH/8YAq+I7UJ/jRLf9VcVFeykiJi1A6H3iXXXwyTSIQZak6A4uiwA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=XidIj3Ja;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <65efde85-3e0e-46f4-acc9-8384a08a8e54@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770906682;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kpc1ZY23CCsNUyJXbMpUpVXWWbHphBa8OQrB8msDZY8=;
+ b=XidIj3JaWG202NdXdorqPkmqS3+6mGM+KAs52pkVMJKwIzcZweMYrrm9+ewNiTBMa6ZEw9
+ Y0UJAst06ZDgFQ9tbJ6d/5kqMVjT8jKj6/81JPFcqsVREkkA9RTaW87vQvWQ5YyPT7WnCM
+ PJOoU5iGAZQ/WMAKxWGDBt8eYJaL6ypGryjGk2DH0wS5SdEjmGwvDgPfiIL4iJdTgSoIf1
+ KpEheoNZ2LAEAnR6ieImlMcYFfWDugTwy8V4ecLonGmP6yguP5wi+UeChSBSw4KdIXJrcU
+ TaEFnA775m3h5cyT7Dd59MX5tAUT0Oyuq9aTyt/zp0UpcqpFBjvfcUuXlbrHjg==
+Date: Thu, 12 Feb 2026 15:07:03 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rpi: pass the Video Core logs DT parameter through
-To: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-References: <20260209125554.14700-1-pbrobinson@gmail.com>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20260209125554.14700-1-pbrobinson@gmail.com>
+Subject: Re: [PATCH] scsi: Adjust SCSI inquiry command data length
+To: =?UTF-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
+ "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>,
+ =?UTF-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, Ryder Lee
+ <Ryder.Lee@mediatek.com>, =?UTF-8?B?U2FtIFNoaWggKOWPsueiqeS4iSk=?=
+ <Sam.Shih@mediatek.com>, =?UTF-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?=
+ <Weijie.Gao@mediatek.com>,
+ "aouledameur@baylibre.com" <aouledameur@baylibre.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "quic_varada@quicinc.com" <quic_varada@quicinc.com>,
+ =?UTF-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?= <bear.wang@mediatek.com>,
+ "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
+ "andrew.goodbody@linaro.org" <andrew.goodbody@linaro.org>,
+ Project_Global_Chrome_Upstream_Group
+ <Project_Global_Chrome_Upstream_Group@mediatek.com>,
+ "macpaul@gmail.com" <macpaul@gmail.com>,
+ =?UTF-8?B?UmFtYXggTG8gKOe+heaYjumBoCk=?= <Ramax.Lo@mediatek.com>,
+ "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
+ =?UTF-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
+ "marex@denx.de" <marex@denx.de>, "sjg@chromium.org" <sjg@chromium.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ "balaji.selvanathan@oss.qualcomm.com" <balaji.selvanathan@oss.qualcomm.com>,
+ "casey.connolly@linaro.org" <casey.connolly@linaro.org>,
+ =?UTF-8?B?SHQgTGluICjmnpfngJrlrpcp?= <Ht.Lin@mediatek.com>
+References: <20260211104043.2445588-1-macpaul.lin@mediatek.com>
+ <52bb5837-ed36-4749-824b-e1215bedfce4@mailbox.org>
+ <cc89f88aa46ee7f260b8182484701f0ce02f60bc.camel@mediatek.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <cc89f88aa46ee7f260b8182484701f0ce02f60bc.camel@mediatek.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 486uye6qkwbsn76o7pibq9rugfruu81e
+X-MBO-RS-ID: 922e14de183054bbf3c
+X-Rspamd-Queue-Id: 4fBd5m5hFCz9vDx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,33 +118,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 09/02/2026 13:55, Peter Robinson wrote:
-> Pass the VC logs DT parameter through to the kernel
-> device tree. This is used by the vclog tool and is
-> a useful debugging tool.
+On 2/12/26 9:21 AM, Macpaul Lin (林智斌) wrote:
+> On Wed, 2026-02-11 at 12:06 +0100, Marek Vasut wrote:
+>>
+>> External email : Please do not click links or open attachments until
+>> you have verified the sender or the content.
+>>
+>>
+>> On 2/11/26 11:40 AM, Macpaul Lin wrote:
+>>> Adjust the data length of the SCSI inquiry command to accommodate
+>>> various
+>>> UFS device vendors. This prevents SCSI detection failures on
+>>> Longsys UFS
+>>> devices. Verified with Hynix, SD, and Longsys UFS devices.
+>> Can this be quirked using some vendor/device ID match , so only the
+>> problematic devices suffer the consequences ? Thank you
 > 
-> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-
-Acked-by: Matthias Brugger <mbrugger@suse.com>
-
-> ---
->   board/raspberrypi/rpi/rpi.c | 3 +++
->   1 file changed, 3 insertions(+)
+> During the patch reviewing last time, Eric (HT Lin) commented
+> the length of 512 bytes is not follow the specification of UFS storage;
+> it should be 36 bytes. So these are not problematic devices actually.
+> However, I'm wondering how the parameter should apply to the
+> traditional SCSI devices like harddrive  or USB disk.
 > 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index f9b643555dd..7256d66a9a6 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -608,6 +608,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->   	/* warnings from the firmware (if any) */
->   	copy_property(fdt, fw_fdt, "/chosen", "user-warnings");
->   
-> +	/* firmware logs - used by the vclog utility */
-> +	copy_property(fdt, fw_fdt, "/chosen", "log");
-> +
->   	/* address of the PHY device as provided by the firmware  */
->   	copy_property(fdt, fw_fdt, "ethernet0/mdio@e14/ethernet-phy@1", "reg");
->   
-
+> I'll double check it with Eric then update new patch around the end of
+> February.
+Thank you, and yes, I was about to point out that this is a scsi core 
+code, this applies to SCSI, USB and such devices.
