@@ -4,107 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A586EEA84F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 20:38:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A9DEEA84E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 20:45:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 980E583CB5;
-	Thu, 12 Feb 2026 21:38:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D9BC8367F;
+	Thu, 12 Feb 2026 21:45:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrkQjx77";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="g2p22i4Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 923DB83CB5; Thu, 12 Feb 2026 20:52:17 +0100 (CET)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F5BA83C4B; Thu, 12 Feb 2026 21:45:21 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 760E583015
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 20:52:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11D8583015
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 21:45:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-948aec218a2so63597241.0
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 11:52:15 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770925934; cv=none;
- d=google.com; s=arc-20240605;
- b=kNoStn6fN/WSWk37CQR75uJiSwkdUBqE9pF+4qOQkJgtJlW1qZYtug9yKFYdEJ8YV9
- RbHxGKmT1mgFThfPB5IfMTLEJCxkrJvtRyBwbggtJCM7Aan8N/6vm2O/hN56/XSclyNi
- Lx5fWJnvns6MD3zefo7qLqQsKM1QYaogGNuNQW1DqCbXlp18ktOg1cPDZ+TKp0M+hdEB
- qpmaMKzVSDNrWw/9S3wTTJ8RbfaK5MNBB4ptc1fw15WJHwZJzohK11Qvh56qs0c6wU6I
- IBdps8tdEFy8wrWg59We2TT+UAQPOvoC6yJHAg4TGNLJIuhe/StkaHmg7EFj6WLdpCPC
- W3gg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=NZjFxy3k6j4JoNnrMmHWKkMMwkvjdEAOhi+mWaiGb8w=;
- fh=CZg+trVLT5C7hPiIM0OSJFRG3Myi0YjcN1bp5nRv5F4=;
- b=Tb2vWaa3HX+DJLxK0A0JedelOO4w5VAMooP4tAW6s+PIJ2NHq7XF33dMmO/Us/hdHJ
- qgwO0Es8wuGH/nR2MwHt+jbdy7UDm2o0+1uXH6UMHJOvbU6Xp712IFaeYJRpSVBtAZJy
- t1uJop74H/Xn7D2p13eNGKq14IPVbjAHkDE3SfFyfi3nLDbBqPP1WC1LOReMUIyaiTtJ
- 7sdz23BePZLy0jy81RGAukPHcMPCsrIJ2VS3OKlZjE7ee2QXXDr1IXtDEKpOAer8yfYo
- 0jSjEUKBOeySeod7PBMKFPjSDf0hGXHRC2kmhv5w9DXZykMxIYzwPbzT6RaGSZ9VGsPd
- XRaw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770925934; x=1771530734; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NZjFxy3k6j4JoNnrMmHWKkMMwkvjdEAOhi+mWaiGb8w=;
- b=TrkQjx77+8AeO3xhc35m5aOqEkqlGrpG1Ar7GR1MCVvfh40poL44PHV3fz+eEDHA2q
- WdWlFe0BUiGkuW2cjZOfWSmxU34NH8HONaSJLr2kGsdinmCGlfG0S2aGlFBsNzN0Yk4D
- KhRRIF7cs2drzkLWyNJb8hGuxxGqAVKmY7Xd4+3dPvGXMZpX9Fpsn3xNd2+lezxOFT7k
- kekGaIdhPXE8FMITFX9sX58Y9s2LHPhs7m5r1fLvIpgUVqPEnbIkK8w5U8sfGnNkPrf3
- SZshFlJnCuKlUXaSefWqFQfIOjKrOW0Afz7IFcOY1hW2Ty7pj3X/2tbOeB+vaoMzRal9
- RVRw==
+ spf=pass smtp.mailfrom=javierm@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1770929117;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=5wGpqACDAjbZGDKRtj31kelCkKX/rhXzBPZAIKXqE1Y=;
+ b=g2p22i4Z+X8kAoQHEPhyJcT3HI3sc1cBBaO8lt0mO1IE8nxBGPnHesKML+oxcuOsxoOn9h
+ 4YHFXKovogpA2JVa1h9+TUh1eL5GPFXG8KefUYBLU10cT8hKbXYJAOSLtdLzbBPGJ/UR42
+ ZVJNiOWOORZsVRTi3KT+WFVNLbTxTfo=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-133-swVkNCRzMy-KEEazhWjkDg-1; Thu, 12 Feb 2026 15:45:16 -0500
+X-MC-Unique: swVkNCRzMy-KEEazhWjkDg-1
+X-Mimecast-MFC-AGG-ID: swVkNCRzMy-KEEazhWjkDg_1770929115
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4803b4e3b9eso1628305e9.3
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 12:45:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770925934; x=1771530734;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=NZjFxy3k6j4JoNnrMmHWKkMMwkvjdEAOhi+mWaiGb8w=;
- b=LPW8ufVyn4BddqBNKHmzTP8hdObvIumrVmLoU0J8EaEyW+R3y0/tZ4QCsVlbAb/z9i
- 7DUSPcnZyzRsReEBy5/raOj+kKNXQl8gzuT6IXhbw/dD2KRVxt/+4wm0fxAoBAEipvqs
- hEdG2aKAEESYyUDE20ORs2TIgK838YBnsbWqQoECIFsxX1HOA3etTwPRslnXUhapaZcn
- 6qBP9vXT3JAveUqt1KdTqnWrvNP/rsss1hQgTcw5ca7sZqg8r7vw+meLciXJJo1YMnqT
- pBVboVl+54L7Wy83V2b1zQDUNk7hK+JkKh56174t9CtIUilbxew5qshC7Ew98lvR5lRh
- qoUw==
-X-Gm-Message-State: AOJu0Yx3xHiLcbNxzgn4EUxq1meJ9jcOtJjkBGc/E866UmJO5jVf1akz
- YnMT+gRqyR8gAM9X/zvxKW5so+1N4HMBgq/kJlZCnwQUbHbLNZoYsd1bBSQomFdHhZMzbS0KXis
- Te8pkzNPGHB2dikKxSparsC9c+Nm5uZo=
-X-Gm-Gg: AZuq6aJ5vdkCVu84MJICop1b8mu6b05ouMPXcPIbngVqzP3g7QBSc8GCuG/WK7dfneX
- JMeVIN8l78w7EUR8FpnBKi6I64tTnalRqTncAWIf4U7P35yo/T0aVrrnGG8ZAqU5MQXxWoDEzfq
- ik/chbAuJjUBIeDEizUqYc1U/To/nhEg1Gh3hkDXdqvKPwgQ4DlFx+uV8viGJnNzamdTv/s6b/q
- bv5/vJ3Xwb+sAZWG53v8+FMQJcH3EKzoWbpVGoA2Zt1y3V8eDz7tN8gVls0ofGbuM3ksmeSfPYh
- 3Ty7sGtaC6IKHyE1qlkzojNFHc+4bv+Em+G2ahxjm76ttPKVOAievN1tJ4RtT/fS0rpy7ZVkqG6
- BEUI=
-X-Received: by 2002:a05:6102:2acb:b0:5f5:7791:c2cb with SMTP id
- ada2fe7eead31-5fdfbe3a63amr1140569137.41.1770925934264; Thu, 12 Feb 2026
- 11:52:14 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770929115; x=1771533915;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5wGpqACDAjbZGDKRtj31kelCkKX/rhXzBPZAIKXqE1Y=;
+ b=mFLzB5Q56CmZQEqSuAGlicFQ1zFIHxIirQEF6HsvJYlJvNYXedsAYKkJ/LZng3fm3u
+ Z9bKB6giymjS0JviUBUAgsrF0A3FF/EV8OWEluvPbwegbJ8Eq1GvArXxWlG0+jVuk2uL
+ JbqB6X5N3hyf948PIcwUhy995380sGghyY7LTzBL1TJ3yH9CsoGVkGyFeU3rOLLPy8Kb
+ cBwI1wu9DHmc9uzRCW67Dbvzc7/oxN/J0wcs2xHIv6DH2liBD7/F5bjN7W0mqXR+OOk5
+ M6Fj+lmF/uHIaC1Y6iilZW2Yf/2IkwD2JwM44y1BnX7/6YFGpOeOdAv4qdBRaGiQuwAl
+ z9ug==
+X-Gm-Message-State: AOJu0YxqEaCUHT+bEKaIWCrTztj7/KQ85dZYOV/az0r5GKCw3Njy+ZkY
+ h86Df/t2QAGf75zxY+QbIiRU6YVyks4Xh1OI7bbQ89m2DgXqPycwPWXCrd3gO1+SOZpN3UDzk9F
+ vWITELLnZCdksdjozK99oTfkpP2Qxp6zyazF5sTAU1gO/o1QABDqe3vGa6RYQ3oDCvq/lOIW0EI
+ Xe6xRuT1jyGRYlNJW5PjOptu2jhaNoNQ0wJEUfFA==
+X-Gm-Gg: AZuq6aLdfdHAqJ1/walTvAIqrzq7bRD/SZkJ0dLaRT+6CPBINvD3bWmR1ufvPmobcys
+ 9cBZrlZ2ZfZNAWPXZ9ktlgulGGjNihcaE8tm5fUdPhpyx17m4CfvMZT8P9tY2OTAHkwjb2StKqZ
+ uVXIYBCFytNKu+3xh+3L8e/9zlM7pVUAPE2TcMBe7zsmOlCmAOOn6FMCyD13IqlOVqOedJ6uY27
+ SZNkf0nF1DGu4AcGtN8qU2/L/xnwoIstjPSzBDmH1ZZZyWE+fzLekFnbD8MBmlO4ytVYYZQJQTe
+ 1u6uVgmW7HPV8at/9ZnIwCyc1iARmSrvTT6FQDICwChpv7S5MQN6OvCId+2zI66fdTuYPhat0oX
+ Hf0S/lNVEySHxpS+CoIIlTce8hAf4vxx0t4exiK7anbTwwe0=
+X-Received: by 2002:a05:600c:46d3:b0:477:7ae0:cd6e with SMTP id
+ 5b1f17b1804b1-48370e186c6mr7142475e9.5.1770929114647; 
+ Thu, 12 Feb 2026 12:45:14 -0800 (PST)
+X-Received: by 2002:a05:600c:46d3:b0:477:7ae0:cd6e with SMTP id
+ 5b1f17b1804b1-48370e186c6mr7142045e9.5.1770929114119; 
+ Thu, 12 Feb 2026 12:45:14 -0800 (PST)
+Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43796a6c1bfsm427395f8f.13.2026.02.12.12.45.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Feb 2026 12:45:13 -0800 (PST)
+From: Javier Martinez Canillas <javierm@redhat.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, eballetb@redhat.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Javier Martinez Canillas <javierm@redhat.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Javier Tia <javier.tia@linaro.org>,
+ Maks Mishin <maks.mishinfz@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Subject: [PATCH v2 0/7] efi_loader: disk: Add EFI_PARTITION_INFO_PROTOCOL
+ support for MBR
+Date: Thu, 12 Feb 2026 21:44:54 +0100
+Message-ID: <20260212204511.619392-1-javierm@redhat.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-References: <20260211180645.3313596-1-james.hilliard1@gmail.com>
- <cf72da71-12f3-45ab-b703-6cc776ed28ab@mailbox.org>
-In-Reply-To: <cf72da71-12f3-45ab-b703-6cc776ed28ab@mailbox.org>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Thu, 12 Feb 2026 12:52:04 -0700
-X-Gm-Features: AZwV_QjYgolakMxp8r53NK4lyRHEI-XnmHeUI54wmN1Q5CtdIcwMr2Xu7hU99Bc
-Message-ID: <CADvTj4qtaoyJc9MtbjbpC+t_h3yO=jBXNed_3BAmDWMbDbhRPg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/1] image: fit: Apply overlays using aligned writable
- FDT copies
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Jamie Gibbons <Jamie.Gibbons@microchip.com>, 
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- David Lechner <dlechner@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 12 Feb 2026 21:38:32 +0100
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 8fyygmLkyqRizy2arlcNhsbTgR0Qj_sVPWbV5u4rq5Y_1770929115
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+content-type: text/plain; charset="US-ASCII"; x-default=true
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,94 +115,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 12, 2026 at 8:26=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.or=
-g> wrote:
->
-> On 2/11/26 7:06 PM, James Hilliard wrote:
->
-> > +static int boot_get_fdt_fit_into_buffer(const void *src, ulong srclen,
-> > +                                     ulong extra, ulong min_dstlen,
-> > +                                     void **fdtdstbuf, ulong *fdtdstle=
-np)
-> > +{
-> > +     const void *fdtsrcbuf;
-> > +     void *tmp =3D NULL;
-> > +     void *dstbuf, *newdstbuf;
-> > +     ulong dstlen, newdstlen;
-> > +     int err;
-> > +
-> > +     /* Make sure the source FDT/DTO is 8-byte aligned for libfdt. */
-> > +     fdtsrcbuf =3D src;
-> > +     if (!IS_ALIGNED((uintptr_t)src, 8)) {
-> > +             tmp =3D memalign(8, srclen);
-> > +             if (!tmp)
-> > +                     return -ENOMEM;
-> > +
-> > +             memcpy(tmp, src, srclen);
-> > +             fdtsrcbuf =3D tmp;
-> > +     }
-> > +
-> > +     newdstlen =3D ALIGN(fdt_totalsize(fdtsrcbuf) + extra, SZ_4K);
-> > +     min_dstlen =3D ALIGN(min_dstlen, SZ_4K);
-> > +     if (newdstlen < min_dstlen)
-> > +             newdstlen =3D min_dstlen;
-> > +
-> > +     dstbuf =3D *fdtdstbuf;
-> > +     dstlen =3D dstbuf ? *fdtdstlenp : 0;
-> > +
-> > +     /*
-> > +      * If the caller already provided a large enough writable buffer,
-> > +      * and we're not moving the FDT, nothing to do.
-> > +      */
-> > +     if (dstbuf && dstlen >=3D newdstlen && dstbuf =3D=3D fdtsrcbuf) {
->
-> Can $dstbuf ever be NULL ?
->
-> > +             free(tmp);
-> > +             return 0;
->
-> You could try something like this here, to reduce the duplicate
-> free(tmp) in the code:
->
-> "
-> err =3D 0;
-> goto exit;
->
-> ...
->
-> exit:
->    free(tmp);
->    return err;
-> "
->
-> > +     }
-> > +
->
-> [...]
->
-> > -     load =3D (ulong)of_flat_tree;
-> > +     len =3D fdt_off_dt_strings(base_buf) + fdt_size_dt_strings(base_b=
-uf);
-> How does this new length calculation work, can you please clarify that ?
+This patch series extends the EFI_PARTITION_INFO_PROTOCOL implementation
+to also support MBR partition tables schemes.
 
-From my understanding, that len is tracking the current packed DTB data
-length (up to the end of the strings block), not the allocated buffer size.=
- We
-recompute it after each overlay so need =3D len + ovcopylen
-CONFIG_SYS_FDT_PAD grows from real used bytes instead of
-accumulated slack. This is roughly the same idea as libfdt=E2=80=99s intern=
-al
-fdt_data_size_(), and the final returned size is still taken after fdt_pack=
-()
-with fdt_totalsize().
+When EFI_PARTITION_INFO_PROTOCOL was implented, only GPT support was
+added but this can cause compatibility issues with platforms whose boot
+ROM only supports MBR. This series add support for MBR partition tables
+to the protocol, making U-Boot compatible with systems that require a
+legacy MBR table.
 
-> I don't think this will work for fitImages with external data (generated
-> using mkimage -E) , but I might be wrong.
+This is a second version of the patches that addresses issues pointed out
+by Heinrich Schuchardt (thanks!). The first version can be found here:
 
-From my understanding, this should still work with mkimage -E, external
-data only changes where FIT payload bytes are stored, and
-fit_image_load()/fit_image_get_data() already resolves that before overlay
-application. At that point we=E2=80=99re operating on a normal copied DTB b=
-uffer,
-and the length math is based on DTB-internal layout, not FIT
-external-data placement.
+https://lists.denx.de/pipermail/u-boot/2025-June/592644.html
+
+Patches #1 to #3 are preparatory changes to remove duplicated definitions
+of data structures to store the MBR records.
+
+Patch #4 just documents the part_get_info_extended() helper function and
+patch #5 refactors this function to also optionally return the MBR record data.
+
+Patch #6 adds the MBR support to the EFI_PARTITION_INFO_PROTOCOL implementation
+and patch #7 enhances the protocol selftest, to check that the partition record
+data is correctly filled.
+
+Changes in v2:
+- Add Tom Rini Rini's Reviewed-by tags to patches 1-3.
+- Document part_get_info_extended() helper function.
+- Split partition library and EFI changes in separate patches.
+- Add static MBR data in EFI block device test and compare the queried data.
+
+Javier Martinez Canillas (7):
+  disk: part_dos: Move header to the main include directory
+  disk: part_dos: Align dos_partition_t with struct partition
+  disk: part_efi: Remove redundant struct partition definition
+  disk: part_dos: Document part_get_info_extended() helper function
+  disk: part_dos: Refactor to allow retrieving raw MBR partition data
+  efi_loader: disk: Extend EFI_PARTITION_INFO_PROTOCOL to support MBR
+  efi_selftest: Enhance MBR test for PARTITION_INFO_PROTOCOL
+
+ disk/part_dos.c                              | 91 +++++++++++++-------
+ disk/part_efi.c                              |  4 +-
+ include/part.h                               | 14 +++
+ {disk => include}/part_dos.h                 |  6 +-
+ include/part_efi.h                           | 19 +---
+ lib/efi_loader/efi_disk.c                    |  9 +-
+ lib/efi_selftest/efi_selftest_block_device.c | 26 ++++++
+ 7 files changed, 113 insertions(+), 56 deletions(-)
+ rename {disk => include}/part_dos.h (87%)
+
+-- 
+2.53.0
+
+base-commit: f9ffeec4bdcf1da655a0ffea482062adde78fee8
+branch: add-mbr-efi-part-info-proto-v2
+
