@@ -4,143 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D93EB491C
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 12:45:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A57B6EB4917
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 12:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D21F583DB6;
-	Thu, 12 Feb 2026 13:44:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CC7183DCB;
+	Thu, 12 Feb 2026 13:44:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="t57tKwcy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dfD8GUuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABA4F83CE3; Thu, 12 Feb 2026 11:40:16 +0100 (CET)
-Received: from CH5PR02CU005.outbound.protection.outlook.com
- (mail-northcentralusazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 234D283CF2; Thu, 12 Feb 2026 11:49:23 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B93483015
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 11:40:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=gehealthcare.com
+ by phobos.denx.de (Postfix) with ESMTPS id B82C783A47
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 11:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DrxTmYVUCe7fbSEfsHtGdUI07wzqMrIKpSj2T7km0iH1tVnydb1c54Qb+Wy6VFnnCvnqL2ZVs/LRPGoVqr++YVztmwfXw+fVUCruYqNdTihEpVrwLe52SShHWK5N4+JEeFhSE1YAzlpx5kIK2LW3E2rBUlJ3xVsjL3aMYaFo3uAkWMiVgQQtjntXKp7PlN3mQJpa0vWTFiNdtB9K10PopptlGRdfqrbrh6TWiwLM8tYGma/EXunpFeTwQ9fXoZpX5yWWIrwUah1I7t9Qo+6lZ3lxVOUnjT/tgfyunuxBqJPjSn8fUmKRyvE/ahE0848FCNdC6DIHOyXUDKBvf4V/RA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N2XKhaX0MJwPwUxsuJBGIElEloBN6Sneki6wuBgQJQk=;
- b=AbC2mPxvo+18DvmHTfgAZ0BF6gthizIa3UHQZC/3w6wx864Ivr2OBr84Bu0ltT6c3F5g5FmNUG1fW+fDnsxoUbGOcXTS9F8aGjzunL5R7GcU0yMGG5/ayxBsrOZIHUbfp/1ygaq6aWYGVfOH5v0igAHDQYn9U0yxbiKECdBthkv34OG2jbf9d4FhmlgnOnepLOVhVr3pgrsMQz1HIZO8sM6CoKQkBvUS3zhwyoGFffUy1sKy9DuqdKwGaM129cWCM1pN2mWcUS1OrLaD1gCqNaHSrVAnBbGRW42fIMFYdJ+Ti75oFWnkhzM0kxNGLcOdFImWooBUBjKSWokdLea5pQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 165.85.157.49) smtp.rcpttodomain=lists.denx.de
- smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
- pct=100) action=quarantine header.from=gehealthcare.com; dkim=none (message
- not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N2XKhaX0MJwPwUxsuJBGIElEloBN6Sneki6wuBgQJQk=;
- b=t57tKwcy8X7lV+J7qGBBGuU0r0G1hqiUezRVnVPr4oD7Ac92z1jTysr8UyELenkAWK/toKShEa8oPb9L/M4JykkwprOMJvK1R6uiR/Eys/hs7PNH0jwA5mUAvVl+eHZw+p0XZjY5TNCH/aVpV0rvWM3L0FiGk36c5EE5f5ubbevubJsYKxo+4EMNq7vvSZxUIMQoHl51oOattNb2fflkHrGwJz5rW48r6OR6OkvDcSyOfIYbGqB6ywB8K22PNFTFJcrBjUbc0lFwVWobSnkFpjALkARrfkieh48Bss1/LAx0rDAQAIEOkLCmbJ54acf95ewKjLXtdKE1dNsQyI6LJQ==
-Received: from BYAPR05CA0056.namprd05.prod.outlook.com (2603:10b6:a03:74::33)
- by SA1PR22MB5501.namprd22.prod.outlook.com (2603:10b6:806:3df::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9587.19; Thu, 12 Feb
- 2026 10:40:10 +0000
-Received: from SJ5PEPF000001D7.namprd05.prod.outlook.com
- (2603:10b6:a03:74:cafe::8c) by BYAPR05CA0056.outlook.office365.com
- (2603:10b6:a03:74::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9587.16 via Frontend Transport; Thu,
- 12 Feb 2026 10:40:07 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
- smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
-Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
- not designate 165.85.157.49 as permitted sender)
- receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=mkerelay2.compute.ge-healthcare.net;
-Received: from mkerelay2.compute.ge-healthcare.net (165.85.157.49) by
- SJ5PEPF000001D7.mail.protection.outlook.com (10.167.242.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Thu, 12 Feb 2026 10:40:10 +0000
-Received: from zoo11.em.health.ge.com (zoo11.fihel.lab.ge-healthcare.net
- [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with SMTP id D8E9AE8F33;
- Thu, 12 Feb 2026 12:40:06 +0200 (EET)
-Date: Thu, 12 Feb 2026 12:40:06 +0200
-From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Tom Rini <trini@konsulko.com>, Adam Ford <aford173@gmail.com>,
- Marek Vasut <marex@denx.de>, Mark Jonas <mark.jonas@de.bosch.com>,
- Peng Fan <peng.fan@nxp.com>, Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Subject: Re: [PATCH v2 2/6] clk: imx6q: apply clang-format
-Message-ID: <aY2uBu2B5TROaRq9@zoo11.em.health.ge.com>
-References: <20260210090029.728636-1-brian.ruley@gehealthcare.com>
- <20260210090029.728636-3-brian.ruley@gehealthcare.com>
- <CAOMZO5BF-jfjunxhW2_9ZF+r-c1GE2UvEBqeg9ruKutAW3H4ig@mail.gmail.com>
- <aYtUi1WdLPLEnv2X@zoo11.em.health.ge.com>
- <CAOMZO5Dq5fOFUYHxyW2SrmsZ4QTmkwAJrswEqBMwqfVMDQZe6g@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-790884840baso75421197b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 02:49:19 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770893358; cv=none;
+ d=google.com; s=arc-20240605;
+ b=PdpAX/H/pdeXJrVwQLH82lC+td+RWbNNUXxjkiEmskUa/p2bBE5XF89D9S3VYUqrha
+ 0Lc/KFzAoRwNuEkdTrbAaTJMdo1ObdEjTy8WYzaH8fE8z0DNE3qKwgKEe/p7R3Q9TQGB
+ IvryaGCsrlz/GZU4AF3/GIrjIeWiok7E9SzHMu5U36XgOXPu9jlZb52B05wtN1rOzoQ6
+ S/Slb8SmV1N5Dip7ko/onbQyr+ZWobzk38SzEVO+PtQ2uBokmAnoaXPkOAL8oFZ9R6nL
+ p4jR34Im30BolqwQYSJeXC9JfFSWEV6iDXYmShPkGDUnCDhGzJqFKwCDbCGocss8zjYE
+ tilA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=ZXOYiqpxV7gkPUQV6azxm0HZYmrgFp02HbOtL5Ec0MY=;
+ fh=Vy9V3TmvmoU33rzbFwwNAtFCRvih9hm+dD7R1fsmQRI=;
+ b=RHvqFyzbCJHD9uTXXZgeRi7GXtsy1asjz+rSQFKaJUgYNCvFJp1v47wdEt0kxp+eu9
+ yLIlLBgx0L2twr/G6C2RhevSZ+P6SW2/B1PvFcNvHt3zv5bedJByjpV49fyP4c/OFxu6
+ NE7NKQ2yvXnVdUgECY3uYYN692dGDu872/X77dk46uzj+KntFw9XwSY+71Ej0M3iWrlJ
+ KOMC0N/xDRSKYnRLhdYoHPoA6kWBVc/RDWiRq10bwA5/bqDmDfYBRE4Q63Yw6UR6jUoB
+ PmWknMvsC2h/sHmRLqVmSikovXOvvudiNVydJ2bEocHn76BtsDpYCdLt7/sXQrO/oc4W
+ Vbsw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770893358; x=1771498158; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZXOYiqpxV7gkPUQV6azxm0HZYmrgFp02HbOtL5Ec0MY=;
+ b=dfD8GUuX8AJ1XH8PY/jz/KO4Eilt/qjNZ/pNSi0RVNWjR5naUf/dHleen2ElBQNCHy
+ eXf6/SuScvBylMUSh1hZhonjfLsAM656fM1W2YKZMsNYWJq0jVeIqCto1NveHf6GaT1K
+ u2sVOCA0AQPoTLCCseunjSQJrwxfSgsgRe/q8CMduVgvka9E4BfqtZmlgR89/yHjme2E
+ n883oVxrFVy5NWdxhhi62WKtnTuZ45Tq823QCiWRC9EVLWRnOCbFijxAoCy24nClJjjC
+ GEdu4fWgrtaWFVPpw/2RGIbmG7ezcDzdAbJgpRuNH/8aedZ5cP3F9SmpVvBadPgwvjQF
+ Gy4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770893358; x=1771498158;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZXOYiqpxV7gkPUQV6azxm0HZYmrgFp02HbOtL5Ec0MY=;
+ b=e2lDf0yS9EToDMckLe/wGJLkvw0SIrEQrDAOitSqGv1u2QvIJgf5Jmx8HADkS3v0Lv
+ h4Zn6QXwwghylLWjgAWOKdX1Z7QGitFqe9YT0DhHTupozmd3nfEFNLUZBT/zxwlfEkUi
+ xIXZpiUp4LHVGD+JJ2MyvBZ6CD+sIck17cvzsJJkSxFr2k9XwJjhP9NalnvoHl43PvMf
+ epE5nH1hXmlibZ2HGuRSw1vW8wZrsxM8RL7jGxnobe6xMVhdfYSjo7PahAARJzBXwuQf
+ IS/5XI854JaXKCsqIauYp9yu1+ByuKlGIa3EoSAfbRH++Nn91QVtPK3jg0LMxZKiZ6eg
+ /AVA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWwg7qnBYz/wOGjgFx6exNq54RFmk0SLviyV1SuPmuwS78jf4lTf3KHpNEgomaQSimE1mmEUwc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyE1dH/gBIqTUjK/M6hsjYEv2ejHZe/MQSx0y9CpL1+fJmlSots
+ 97FBCDnSRi9N1jFc9t12fWtDL46onjoU35VGAKTgDKoMxbtIYZAWowRqvbyMBH9U5Zi0Is36l7k
+ dZHjcUvfjjTBz96U0ZTwIBLNAkXtijSZVnZusZ/QM1w==
+X-Gm-Gg: AZuq6aI5QbSrJWjBBhA1doRYGULtod180n5ihrKRdJHBWHdB0vnApzgNksnitH1F0b1
+ csIAGhxXESl2J2Iv+R9UrZI/vf9uog28jH3ekI2cT40c7IiCC1ol2d+T3Pb2U6Yxdx4CTuXcNVe
+ wBsJikHBdaNLiQwsNlH4gZVxLqE/z0h0oaRzSH8ZFxbIStmlvutZ3wbrRarTZdxfJj3/J3qxz+t
+ g9oXl9ENIGmSrzfkgh8vo319oivLWdn640KgnZJVj40qtgbtXXN1JXV+3pKQJyS+vkPdrna7X7j
+ MvWv1lu3njp4K96zzITQ03ZrFUXQwVXCJ1RHjShxpD2a54wN1afzfZA5VMmenB4GqXtUzo/lBtm
+ gSqfVkZoCXy+u4UC6lmad2ppFHmssxJDjSlKM9BvuJZtWjrEunhHRtsv39Mj2I+tsZhfhNijplE
+ bMCxcCbZGOug6WazwprwVVWxqxle9bXgIJK+QfznlAyS/+WzpIYGBc7EZ9gOdN9V+CDkws4bWYm
+ LHZHR0TgmkiXpc1Qi6VSjFKBISHkeFS2Rmts+9vMw+R6VsRdxrQSaEBtD/COa8rjunnlhlC7zDt
+ Z+BhMcSzK4YMcS+gxlgd0CU2W74B0agrNUgZmsjMCdhP
+X-Received: by 2002:a05:690c:660e:b0:796:3753:5349 with SMTP id
+ 00721157ae682-79737612f68mr21774847b3.30.1770893358440; Thu, 12 Feb 2026
+ 02:49:18 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5Dq5fOFUYHxyW2SrmsZ4QTmkwAJrswEqBMwqfVMDQZe6g@mail.gmail.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D7:EE_|SA1PR22MB5501:EE_
-X-MS-Office365-Filtering-Correlation-Id: 63b4c8c9-095f-46c5-551e-08de6a2318a0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wNolwrmmGtsaMTzJZLpKg238r7mxtROInna8RucBA8M81ZD9vPloMTfe9+wV?=
- =?us-ascii?Q?cSeaYYTVbr5PG5TpsgPJFQ0qwXArncBFVj4618iR6DUqcS7Ie5lWVVDsM+Xv?=
- =?us-ascii?Q?+j04zYuGy+vzEy8V2YWqEeZgJqYO+oBBSWFumBv/dsu32T9cwpunxQW4Oq8q?=
- =?us-ascii?Q?n/7DIOuZocOKKwyn0wDzGgVV63TYWCkWvdcBGJImpAoIkogi4DOuyZFD71sH?=
- =?us-ascii?Q?zxpi7w6lCGcf4gIF5pkCkb499jcWQOZKkCL63LNRJ+vli7Ou7cnrmMqGUx3a?=
- =?us-ascii?Q?BXvwWsIbEEHm29v7Dv2yziqKdv56WZ82be5p7EvWgN96QuKBFE0tmtuF5u6e?=
- =?us-ascii?Q?1DG1/b5y/GCCAjdy+7LKKgnWdKHhAd+prqKrP/36mHjc1FMw0ibIj+sgeJiE?=
- =?us-ascii?Q?i6xolPasLNbB0tp9WgnB6nG2j2lGOdFxK443MznAf3uPa471BxO/xqSiYidt?=
- =?us-ascii?Q?x/gHFJs1NfMebsOiKdHPl7hhSskI5j2H+z03wS20qhRS8R6PKt6dksftubBp?=
- =?us-ascii?Q?wWheATRIslUPp7mTM7NZB5hdn5iIqQ1/Lc4FVYbtKSBO4gHbvhIV3yLtTPiy?=
- =?us-ascii?Q?gTonngntxTECXAfSiPTZMSpojD0aCvDlHRAmsfC3rpFMvr1vIeApXeEJVya4?=
- =?us-ascii?Q?adpjJWdkMG086MQAmkfmWGmWOjX7JKnRf7MeXOctr/RtJJT6Dja3NWadeC9B?=
- =?us-ascii?Q?xAOqT80m5YbeRyLuZZGK3lLhuS/xYlGfyyfLWHMokeIZra4u4OvveyB8+7rM?=
- =?us-ascii?Q?cLPiX94+qDplFi/M7vWEf8Y9OTvGXwz0Y1wLG/K4AOweWeazCaA8b8AKdPgP?=
- =?us-ascii?Q?DD1LQS+3aPbJ6Ct7z0cWqF2TeST/XOqOT67Y5QdWgo6KAXI2eBLpJHXlW+K7?=
- =?us-ascii?Q?zTth56U/gRsgZ/70jA91w4aL9+DSTszg0nt0Xr1E6FiaHAcftdhZKKJy9rQs?=
- =?us-ascii?Q?mxkAbcr/U+vAYvTaie+GDYy4N/inP+ZuV3+l8eTMjUANstHkwkZzASqHKkES?=
- =?us-ascii?Q?w5n8GkV1nw7+LlPfxy8eJnEp1hLeMZQPEgLv75NchOuCFcMC8BllS1fFjvYN?=
- =?us-ascii?Q?xMexV9RsFSWj0rnWNylWcwUeuKl+676dYStrlwshmEEarKlwG28cqqHRuFEa?=
- =?us-ascii?Q?3n9ZE7pYrIO1dyctpe1AoDT/RqY2NQuiNVEefRO6o8y7IOIb7UtUYYZlVZ3+?=
- =?us-ascii?Q?RYESupJAFNISFSFrdDW1ASRvOp9BTgeep9VjB+l9HEQwdtxf0aIpc0mJEssD?=
- =?us-ascii?Q?CnXWGTkfNPpu8dslJ2r70kLQFm6VHwfQrskhfry0+sA+u3FmRzIXZQwo+2Ny?=
- =?us-ascii?Q?RsGT+q2EZTFAO/Hgs0LVyv2EuScYOLW6fjAxtjX9RzpMQGwSBPd0XE5KrpZA?=
- =?us-ascii?Q?VGeJ1K+GPM8OTLozcnHliHcwMXXPTyFZI//MGhKyPV0GOUFLduscT3Yo84mr?=
- =?us-ascii?Q?v+BVyowtLq86/ww66EBx/uaNOZZi/QZwUJt3EAvril+oQtqUzZOIdD0iS5BN?=
- =?us-ascii?Q?AetGOspK3Mw4btsrMv72H+FMM2e70YvXNtlDznOSb/wCfdpHvENCnnOOOL4n?=
- =?us-ascii?Q?DySnU27tHbfYSFq1MTmq+o0ENPVmNl4amYlT8sLUfUsLKSi6qQZubtzQKJqi?=
- =?us-ascii?Q?W9lBh5Gfb0Pl9iAyJqHbBWo4oUWLgNP018l5XJJwxzSYnx6ZAviK6Z1EZcxW?=
- =?us-ascii?Q?zyjUbQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mkerelay2.compute.ge-healthcare.net;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026)(13003099007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: KsxIrlHUsDCC5ffiaDjrTl4b4NR+4oe0o4LHWdkoVdgabKkN6dKYDzaPcb6NT4ZDkRnTLDMWwGyrCL06B3F6GGbM+PyuO8iY3xlfoGOGnSz2s7nbu1IDw6m9qHfk1fzAygPokWEvZE3/aFH4ibQzxGBxvB3+7MtxtvKpevrFDCw4jCp0qxdkt5puxpWBtvBxTkyKvR96Cvd5kzXvsKYZBUa6KJ3F94tC6TDKGa6kbo9FFVOJfo0j1YHIBt3lAxo5IYu4ghWeIQLBWJUPNzn7oUsqYPWJIFlTor5WWuqHrQJ3gphAkar3jC/wtDP3DUQ7ZgzwNg7zsS0Yy4CKc5MZfRuUYyLORxneV+Hypi7fvqDbZ4rbPz13poEJ7tpbGLj7klciYBujx4Obrcr611h6xoL+65i5LG9rqgi/1+hEEG/aaLbkISDGxRxFw3TyGn3d
-X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2026 10:40:10.0407 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 63b4c8c9-095f-46c5-551e-08de6a2318a0
-X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
- Helo=[mkerelay2.compute.ge-healthcare.net]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SJ5PEPF000001D7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR22MB5501
+References: <20251216091632.512635-1-ilias.apalodimas@linaro.org>
+ <0205a2e4-0ccb-4dd0-b901-cc6afae31189@kontron.de>
+ <CAC_iWjJLm98Vm70xxLAY=aAvSzb7eq2hRhrqUdr1sLZNUZj0iA@mail.gmail.com>
+ <96d856a5-7d06-48b9-bf27-9db26c7f6c9e@kontron.de>
+In-Reply-To: <96d856a5-7d06-48b9-bf27-9db26c7f6c9e@kontron.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 12 Feb 2026 12:48:42 +0200
+X-Gm-Features: AZwV_QgP15L7TEMvV7c7ZcmeElM17PZMcW8bsySrQFGsKNIyxYYnOdWdPILvFPw
+Message-ID: <CAC_iWjKkAOz4LqaZJ_q2U-XU2=7cNW6NGrCc7hvU4MQBofM79w@mail.gmail.com>
+Subject: Re: [PATCH] kbuild: Bump the build system to 6.1
+To: Frieder Schrempf <frieder.schrempf@kontron.de>
+Cc: trini@konsulko.com, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Eugen Hristev <eugen.hristev@linaro.org>, "Andrew F. Davis" <afd@ti.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Chris Packham <chris.packham@alliedtelesis.co.nz>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Luka Kovacic <luka.kovacic@sartura.hr>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, 
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>, 
+ Varshini Rajendran <varshini.rajendran@microchip.com>, 
+ Manikandan Muralidharan <manikandan.m@microchip.com>, 
+ Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>, 
+ Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
+ E Shattow <e@freeshell.de>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Sam Edwards <cfsworks@gmail.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>, Philip Molloy <philip.molloy@analog.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Greg Malysa <malysagreg@gmail.com>, 
+ James Hilliard <james.hilliard1@gmail.com>, Yao Zi <me@ziyao.cc>, 
+ Raymond Mao <raymondmaoca@gmail.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Thu, 12 Feb 2026 13:44:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -158,30 +150,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 10, 2026 at 01:04:57PM -0300, Fabio Estevam wrote:
-> 
-> On Tue, Feb 10, 2026 at 12:55???PM Brian Ruley
-> <brian.ruley@gehealthcare.com> wrote:
-> 
-> > I'm simply following U-Boot coding style:
-> > https://docs.u-boot.org/en/stable/develop/codingstyle.html
+On Thu, 12 Feb 2026 at 11:08, Frieder Schrempf
+<frieder.schrempf@kontron.de> wrote:
+>
+> Hi Ilias,
+>
+> On 11.02.26 16:25, Ilias Apalodimas wrote:
+> > Hi Frieder
 > >
-> > Checkpatch has already complained a bunch whenever I touched this
-> > particular code base, so I applied clang-format (since the project
-> > has it) before making my changes to suppress some of the warnings.
+> > On Wed, 11 Feb 2026 at 15:35, Frieder Schrempf
+> > <frieder.schrempf@kontron.de> wrote:
+> >>
+> >> On 16.12.25 10:16, Ilias Apalodimas wrote:
+> >>> From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >>>
+> >>> Our last sync with the kernel was 5.1.
+> >>>
+> >>> We are so out of sync now, that tracking the patches and backporting
+> >>> them one by one makes little sense and it's going to take ages.
+> >>>
+> >>> This is an attempt to sync up Makefiles to 6.1.
+> >>> Unfortunately due to sheer amount of patches this is not easy to review,
+> >>> but that's what we decided during a community call for the bump to 5.1,
+> >>> so we are following the same guidelines here.
+> >>>
+> >>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> >>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>a #rebased on -next
+> >>
+> >> To me, it looks like this is breaking "make cross_tools" in some way. Or
+> >> am I missing something?
+> >>
+> >> With v2026.04-rc2:
+> >>
+> >>> make tools-only_defconfig
+> >>> make cross_tools
+> >>   UPD     include/generated/timestamp_autogenerated.h
+> >>   PYMOD   rebuild
+> >> tools/Makefile:359: *** insufficient number of arguments (1) to function
+> >> 'filter'.  Stop.
+> >> make: *** [Makefile:2191: tools] Error 2
 > >
-> > If you feel like there's no visual improvement, I can of course remove
-> > the patch, but I feel it odd to have a coding style in the docs if it's
-> > completely optional.
-> 
-> Please explain in the commit log that you're fixing checkpatch/clang warnings.
-> 
-> Simply stating "Conform with U-boot guidelines" is too vague.
-> 
+> > Does the below fix it ?
+>
+> Yes it does!
+
+Ok, I'll have a closer look and make sure nothing else is affected and
+send a patch
+
+Cheers
+/Ilias
+>
 > Thanks
+> Frieder
+>
 
-Okay, fair point. I'll fix it, but I'd rather not send a v3 just for
-a commit message unless that's the only issue here.
-
-Br,
-Brian
+[...]
