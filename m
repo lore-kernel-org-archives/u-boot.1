@@ -4,41 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44892EB4907
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 11:17:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EEABEB4907
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 11:25:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85FCF83C4B;
-	Thu, 12 Feb 2026 12:17:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB5BE8367F;
+	Thu, 12 Feb 2026 12:25:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 213918367F; Thu, 12 Feb 2026 12:17:56 +0100 (CET)
+ id E67DF83A47; Thu, 12 Feb 2026 12:25:50 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 5C3E180FA1
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 12:17:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id D328680FA1
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 12:25:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6681E339;
- Thu, 12 Feb 2026 03:17:45 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BF676339;
+ Thu, 12 Feb 2026 03:25:41 -0800 (PST)
 Received: from localhost (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DEAC23F632;
- Thu, 12 Feb 2026 03:17:50 -0800 (PST)
-Date: Thu, 12 Feb 2026 16:47:47 +0530
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 44FEB3F632;
+ Thu, 12 Feb 2026 03:25:47 -0800 (PST)
+Date: Thu, 12 Feb 2026 16:55:44 +0530
 From: Sughosh Ganu <sughosh.ganu@arm.com>
 To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- thomas.petazzoni@bootlin.com, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] fwu-mdata: Allow multiple metadata storage drivers to be
- enabled
-Message-ID: <aY222wFN_8GWkAJf@a079122.arm.com>
-References: <20260114095654.736511-1-kory.maincent@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Yao Zi <ziyao@disroot.org>,
+ Leonard Anderweit <l.anderweit@phytec.de>
+Subject: Re: [PATCH v2 0/6] Add support for fwumdata
+Message-ID: <aY24uCQy_Pb7HGTD@a079122.arm.com>
+References: <20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com>
+ <20260114113115.01a0f1fd@kmaincent-XPS-13-7390>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260114095654.736511-1-kory.maincent@bootlin.com>
+In-Reply-To: <20260114113115.01a0f1fd@kmaincent-XPS-13-7390>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,66 +75,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jan 14, 2026 at 10:56:53AM +0100, Kory Maincent wrote:
-> Change the Kconfig from a "choice" to a conditional block, allowing
-> multiple FWU metadata storage drivers to be selected simultaneously
-> instead of being mutually exclusive.
+On Wed, Jan 14, 2026 at 11:31:15AM +0100, Kory Maincent wrote:
+> On Fri, 12 Dec 2025 17:23:25 +0100
+> Kory Maincent <kory.maincent@bootlin.com> wrote:
 > 
-> This enables systems with FWU metadata on different storage types
-> (e.g., both GPT-partitioned block devices and MTD devices) to have
-> both drivers compiled in. The board can then select the appropriate
-> driver at runtime based on the devicetree description.
+> > Add a new fwumdata tool to allows users to read, display, and modify FWU
+> > (Firmware Update) metadata from Linux userspace. It provides functionality
+> > similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+> > metadata, change active/previous bank indices, modify bank states, and set
+> > image acceptance flags. Configuration is done via fwumdata.config file.
+> > 
+> > Made a few change to mkfwumdata tool along the way.
 > 
-> The change converts FWU_MDATA to a menuconfig and replaces the
-> "choice/endchoice" block with "if FWU_MDATA/endif", making
-> FWU_MDATA_GPT_BLK default to 'y' for backward compatibility.
+> Hello, any news on this patch series.
 > 
-> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> ---
+> It would be nice if someone could take a look at this and help me get this
+> merged.
 
-Acked-by: Sughosh Ganu <sughosh.ganu@arm.com>
+Apologies for the late response. I recently moved to a different role,
+and missed getting these patches. A couple of these patches no longer
+apply, so it would be good to send a rebased series. Moreover, the
+patchset makes changes which affect the current mkfwumdata tool. I
+will test these changes on hardware early next week, and get back with
+my feedback. Thanks.
 
 -sughosh
-
->  drivers/fwu-mdata/Kconfig | 12 +++++-------
->  1 file changed, 5 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/fwu-mdata/Kconfig b/drivers/fwu-mdata/Kconfig
-> index 42736a5e43b..59571ac01ea 100644
-> --- a/drivers/fwu-mdata/Kconfig
-> +++ b/drivers/fwu-mdata/Kconfig
-> @@ -1,4 +1,4 @@
-> -config FWU_MDATA
-> +menuconfig FWU_MDATA
->  	bool "Driver support for accessing FWU Metadata"
->  	depends on DM
->  	help
-> @@ -6,16 +6,14 @@ config FWU_MDATA
->  	  FWU Metadata partitions reside on the same storage device
->  	  which contains the other FWU updatable firmware images.
->  
-> -choice
-> -	prompt "Storage Layout Scheme"
-> -	depends on FWU_MDATA
-> -	default FWU_MDATA_GPT_BLK
-> +if FWU_MDATA
->  
->  config FWU_MDATA_GPT_BLK
->  	bool "FWU Metadata access for GPT partitioned Block devices"
->  	select PARTITION_TYPE_GUID
->  	select PARTITION_UUIDS
-> -	depends on FWU_MDATA && BLK && EFI_PARTITION
-> +	depends on BLK && EFI_PARTITION
-> +	default y
->  	help
->  	  Enable support for accessing FWU Metadata on GPT partitioned
->  	  block devices.
-> @@ -28,4 +26,4 @@ config FWU_MDATA_MTD
->  	  (or non-GPT partitioned, e.g. partition nodes in devicetree)
->  	  MTD devices.
->  
-> -endchoice
-> +endif
-> -- 
-> 2.43.0
-> 
