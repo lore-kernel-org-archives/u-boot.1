@@ -4,157 +4,217 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99DB4EB48F8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 10:56:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4806AEB4901
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 11:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E636383A47;
-	Thu, 12 Feb 2026 11:56:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A326683CB5;
+	Thu, 12 Feb 2026 12:02:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EXgpKQQR";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="CvsKy/vL";
+	dkim=pass (1024-bit key; unprotected) header.d=mediateko365.onmicrosoft.com header.i=@mediateko365.onmicrosoft.com header.b="TU5NEDgT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FC5E83C4B; Thu, 12 Feb 2026 11:56:30 +0100 (CET)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
+ id A175983CE3; Thu, 12 Feb 2026 12:02:08 +0100 (CET)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3341583015
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 11:56:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAE2083CB5
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 12:01:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=pass smtp.mailfrom=macpaul.lin@mediatek.com
+X-UUID: 3bcbe0c0080211f185319dbc3099e8fb-20260212
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From;
+ bh=kKT2dYlB+KfmvjbCxJMPFyhBATKqNOEGAiUB37Ez4Gk=; 
+ b=CvsKy/vLkuMHvMUnROTc6dyGpxghpg20rwzEqWryWMKs3DVi73qEcAwJ4GIPlYe/i/TwFzMB+topZC2SFCIFHYAX0JG5+vn6g8kwYodcMlffpJKyoaTGLZLlzc5OSmAntuFWUbsurs/zDEASoSO1cwa1HR62HZRwHUtmTKvYL0A=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.11, REQID:ce9bd438-51ff-4540-8510-db0d3830ecae, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:89c9d04, CLOUDID:01f99ff0-16bd-4243-b4ca-b08ca08ab1d8,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|110|111|836|888|898,
+ TC:-5,Content:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BE
+ C:-1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 3bcbe0c0080211f185319dbc3099e8fb-20260212
+Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
+ mailgw01.mediatek.com (envelope-from <macpaul.lin@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1826292446; Thu, 12 Feb 2026 19:01:51 +0800
+Received: from mtkmbs10n2.mediatek.inc (172.21.101.183) by
+ MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.29; Thu, 12 Feb 2026 19:01:49 +0800
+Received: from SG2PR04CU009.outbound.protection.outlook.com (172.21.101.237)
+ by mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server id
+ 15.2.2562.29 via Frontend Transport; Thu, 12 Feb 2026 19:01:49 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lYmYjEstakbdRfdFvxtHBGoi1yvjSNEWuCHxeRantCbpjEUeSC6a51bo/Tb0A7E92EZOKzHNYFZk/SnXmA1q1LnwXeYdSk64u1aCAYe5SIntubzu4yyM6711bptj/i0EeZH/zu9ZuwU3aYjxRRzyBBeEveKfzkeVRFhCk24HEtIfGxtJQ3s6Au74V/sbAg3RI05S1rXm7Gko3LKi8t5Oh8eL8jPesQMgyL99sllkZM2Fi8ayCz/J9NIfdDlxu+S9Y/Atzh1AmF5YbktWXuV3BbcOcgcP4TxIa8Aywp1XkLbdUwOk0Xfx6yJdHp+zGWlEdr6lg6AG4VJB4RQflYOtOg==
+ b=Plhn7E/qucA3KUc3Jq7t8lYV2mAcic+5eslgt87lWE5JdYRpYOKkwuHua5BlrVKm7xiGkSbK1QBRwxbHo123rd9RG95/tViKOKh5i+Vt4H9Xw3VE5Lj3IwsSTLtm1Zl3J4Cewa9EMosMTjEpI8OOT5H25lvVIxBdLcu5nLuJip3317prpXyhT5QR3E8bdvvwArRvpKTaJPrKss3hItQtJ4A0fkeU1/+ALFDV4K6+BXFWraL+coIkXx9DM6/XVGb/j8yFmayhCk4KeTDIFCu8573hGXehpRzfCEBOUzqJDzw2gJhrLgTDzCWU0BHbgDtW5zi9OMNnGlTs1SZqKeTZHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P9gkNrSNmReYmISvHtGQXDgYMSL9M8KKaF9Y+DgGBNo=;
- b=ZgMxM76B7Mqy2nsNf9t+xqCd49xtFnPn/ERsEADLz14MVJRmY6W6ZYhotqsPLdRPfWPrUFwauvMkITAl8N6wzH3cRveTqUEFjs/RYuKBOp9fdzs1DgI2ZMXFBFBG9sjGiW5U5KVGx5Tup/c/1E030pxCB5x3RX50aj97YOqwYdJhAVLCMbR/DgmIVncM0nbkgtAcIZ8Mi/2MhM9TB6axUrwPQ7XgV+QtJeZcajFdicW4uivnJaOiRuG0UYUE/X54QrvhMPF8coOxay2GcaJ+LoaEnZ7+5QFUnxcUqMJagxWSxqHgUOhNF/6Sl7X3tHikjZsz86sn+lUhrlqaqFt4yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=kKT2dYlB+KfmvjbCxJMPFyhBATKqNOEGAiUB37Ez4Gk=;
+ b=oluJO926M3Su5Jnto8/+f7SBIytenDAgitInIOiHNtbF4xehHir0H8yAmpZ6UFOTeay1UmrP5ULikvKtLq/3nZy/rVR+RPlTcuU+9HFw5Rxii4PZelogxuRtv56L6pJWw1DiSxyh5fLbVYj+YVL13KcJIK50v3MfqzbXsvCewxa3G92Ixf7vi1lNqM2XTpsni085+lLzFmkF/qVytkgSDBXCEt7/4T2KXAPsUQsaqUdRs4R+xJSykfJuv9rTTQh2tiVSn8/Y8n8K4ysPPNu8DOf0YLZUtrWMH2c6cSgPzUbl+/arIMm28tJpe0OtZEQja5rRty0Z6fKvyGZTpz78NA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mediatek.com; dmarc=pass action=none header.from=mediatek.com;
+ dkim=pass header.d=mediatek.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=mediateko365.onmicrosoft.com; s=selector2-mediateko365-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P9gkNrSNmReYmISvHtGQXDgYMSL9M8KKaF9Y+DgGBNo=;
- b=EXgpKQQR3RCax+p6qodFuxgzfzNwFEybpa9xaF32T696OO41oW5KUjL757b1Ys7vjjXu1PJV4mKqAMGhLkr+/TZMxPTd9LVcR5EKIPGmK5AKfPwuy80059NGWhpFDCnWHugEhXxdeeePeP4AAlMlpRHDnYDRTDFPWQi0iF8PRNI=
-Received: from SA9P223CA0014.NAMP223.PROD.OUTLOOK.COM (2603:10b6:806:26::19)
- by CH3PR10MB7780.namprd10.prod.outlook.com (2603:10b6:610:1b1::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Thu, 12 Feb
- 2026 10:56:23 +0000
-Received: from SA2PEPF00003AE4.namprd02.prod.outlook.com
- (2603:10b6:806:26:cafe::b5) by SA9P223CA0014.outlook.office365.com
- (2603:10b6:806:26::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.10 via Frontend Transport; Thu,
- 12 Feb 2026 10:56:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SA2PEPF00003AE4.mail.protection.outlook.com (10.167.248.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Thu, 12 Feb 2026 10:56:21 +0000
-Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Feb
- 2026 04:56:21 -0600
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Feb
- 2026 04:56:20 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 12 Feb 2026 04:56:20 -0600
-Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61CAuIb93377123;
- Thu, 12 Feb 2026 04:56:19 -0600
-Message-ID: <6cc176bdb82e12a3894d6025188c73b30aeec632.camel@ti.com>
-Subject: Re: [PATCH] usb: cdns3: use VBUS Valid to determine role for
- dr_mode OTG
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-CC: <trini@konsulko.com>, <minda.chen@starfivetech.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Date: Thu, 12 Feb 2026 16:27:45 +0530
-In-Reply-To: <26f52e6f-d936-4180-8405-d30de803fc09@ti.com>
-References: <20260204121245.2105523-1-s-vadapalli@ti.com>
- <4267b260-9479-44b4-bbeb-521738845be1@mailbox.org>
- <26f52e6f-d936-4180-8405-d30de803fc09@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
-MIME-Version: 1.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE4:EE_|CH3PR10MB7780:EE_
-X-MS-Office365-Filtering-Correlation-Id: 14b5d52b-600f-459e-3726-08de6a255b86
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?R3hQZTRwWDkyaGhFTC9SK1dYNlFkYkN6T0E2V0tSOThkVjFTWlRCZ045UWQr?=
- =?utf-8?B?SXRmWGo3MUhlS1pXa0tBWTNJMWVMTlgvSDVlN2d4RlIwZ1NBRDQxNGN5enhD?=
- =?utf-8?B?UDhsbHhFY2Jjd3ZrclRCb0txeGlnMlMzcWR1RENKd3ljM29IVUZoaUN0S0pk?=
- =?utf-8?B?RFJueEhycDhSckNZTXBZZlVZNzcwR0J6ZU5BbGpwK0FKK21qZE96NlJCUksy?=
- =?utf-8?B?VENpcjFoa1JzN2pUSkx2TCttblA1d200R3RPeERsN0NJV3liRldKZmVwdXRy?=
- =?utf-8?B?K2did0h1VjR0TTRBV0lFOWdSbW9kV3Y5MXlZbDkvRTc0S3NtWWY4YUhySHhX?=
- =?utf-8?B?aFlrN2NObC9EMm9EMFJCMytqN1FFQXk3Vm4rV3VwT1B5cE5XbWx3TjVmRDlu?=
- =?utf-8?B?a2pCL3A0UWYzaXorRnNtbHY0TzZvZDJlU3FjcWhrOHZoL2RCOEpDZmFNMTVN?=
- =?utf-8?B?OERqUWYxaTQ3T3ZtRldRT2ZKYXp2UWs3NmxWejd1MzVVTXNLZU9GTUNSOUMw?=
- =?utf-8?B?Qi92dU9oNXZqdGgzMFprSGU0YmVyME9NZUpYTGdBcUZ1ckcvVDEwY3hOY0FU?=
- =?utf-8?B?S1o0Z1hLTUhVK3Y1UkgyZkQyaFRGcG9MdzB2dHVJZ0JQc2IxeGJSM0tyTmZl?=
- =?utf-8?B?UWxBRHhLdGRMT1ZNWFlIN0VzWktYS2tvdTlnQ2djZlcyOXBwYzN1VVBwdmU4?=
- =?utf-8?B?VjRjdE5Fd1Bkb3U2Qll3OU5uaGwyb21QbzZ4a0hKTU9qd2pXaTNobGVhNmha?=
- =?utf-8?B?UFRDZEVIOCsySGNkWDhxc0JqTGhpNHh3WUh5MUo1SkN2NTJ2eSsvVzBRZmUv?=
- =?utf-8?B?Mk5CQjVkVTVzWHpzcStDUHg4M0pIZ2RxRmhkYm5xazloenBoejJyUjdrZHdQ?=
- =?utf-8?B?S2tPMGI4S1dzbnB4Z3dXaUx6cDdtaElnazVYMjM3TnJSZW1NTVJLRWY1clhE?=
- =?utf-8?B?bSs2V1c4eFhYN2VDM053Ym5JRkdoOFRXUFlNRDh3citpNXAxcjNzaE1mS3NS?=
- =?utf-8?B?NkRoa0g3N2dnTWM3NkNkM2hjL3N4ZVhkKy9HbXpOeWZiK3FyU3A4Z1R6Um5B?=
- =?utf-8?B?S0d6UzJCL0ZuU3J3VHZPcnNCNHhSazIyQVQzNWpkUlM2anlyQVA2VXpBMEJG?=
- =?utf-8?B?N2FwS1dOVGhQTHNtRFhlNjRmQUVVblNRSnlpdVNEWlhZZVJNT2FiUjRUSlBS?=
- =?utf-8?B?aHAvczhYa0xJVDltaGo5ajVSc3ZVbW9iUW82WmhRUFhFQk53M2hoR0duOVo5?=
- =?utf-8?B?Zm5SNXNVK1FEanA2ZDhFVmUvRnhzbE5aeXo4N2dwcUNMd1JEZUd4VjJzU1Bt?=
- =?utf-8?B?WklSMk5VYmdwOXlIbG8wc3ErbzQ3d0RIOFA0L0lKSUVLTFFYTFNsMVZ0NmQx?=
- =?utf-8?B?SldBS1FYRUZnRDQzN2J0bnQ1ZmZYZkZXc3RoTm52ZkFJYUpkM3liNUVJZXJH?=
- =?utf-8?B?Q2w4YTRVTXlmSk9BVkszR3VKVXhzOWlSNFFNek02UlZEcXpOVHhaeGVmMVFG?=
- =?utf-8?B?M1d3MEpZcEQwTEJaZlg0ZDIrditONnh1Wk8wUTlBZmU3ZERXaSt0T2lHb2M3?=
- =?utf-8?B?WWNsV2hNbWU4WlZOWmN4NHV1RGdDMjRLSjNHWkhMNnoxU2VUOCtqVXViNTVt?=
- =?utf-8?B?T2t2b1RJbDBrc2VmelJOUGlSZktMNlVOTU9Ic3V2QTlqRDBlMjZuTkFGUFBw?=
- =?utf-8?B?ZncvN1E2aXhad2tLaHJTYnlFVG90V3BEcHVscWRMMjFSUzAvY1N1djZ2KzJi?=
- =?utf-8?B?TkszZXJoaDRxdnpJTlAzNld5SW8wYXFCbmdWeGdYbnRQeVFDYUdLTFlkaDZm?=
- =?utf-8?B?elBoNTRQd1FlN2FGQzh5eGwrbXAvTEk0ZDQvNnA1ZUJtNG1JaFgydk9mQkRZ?=
- =?utf-8?B?NjBUY0ZhY1E4L3kwd1NaTmM5MFpDWjIzbDFiQmZia1NDeFBWU0MwR29KbGJP?=
- =?utf-8?B?MUNseWZ6bjdtZTZ3bVVSN1h5Vi9jcHRaNEZwSVptM1lJTk5IZGRuck83akxZ?=
- =?utf-8?B?Ny9BN0pHNkNGNDRWb1VsNU5qMnJ1K0lXamZaaUZnRXZqV1hzTFBNTm1rdDY2?=
- =?utf-8?B?MjhTZDFSWXhUbHV1aVNJalQzbDFWZkVQaWNRV0s2OThsU0ttVi9yZkdDeWQ3?=
- =?utf-8?B?RWY0RXJ1WkJ6cHpNVktjZVE0OXpSUFRwQWxnL1RpOHExaXkzRnNoelV0KytR?=
- =?utf-8?Q?LG/9cc0fJIQ7Q56Q7Lms7qQ=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ bh=kKT2dYlB+KfmvjbCxJMPFyhBATKqNOEGAiUB37Ez4Gk=;
+ b=TU5NEDgTOufZdCZZ4FpjLsX3ULYYtPpcFFRBGjZ++UVl8L4XUsTRO6vybVd+8Le9yJek35R9m8auS2EJrSPEblMneUTuf8z7yRg8guGIf4Z1qKmuw9FoOsldAysj3rL+YBptBUTYklZezbKcGO3Ks8rq7tdsAaRuBN1sY5frzpI=
+Received: from SEZPR03MB7810.apcprd03.prod.outlook.com (2603:1096:101:184::13)
+ by TYSPR03MB7739.apcprd03.prod.outlook.com (2603:1096:400:42e::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.11; Thu, 12 Feb
+ 2026 11:01:45 +0000
+Received: from SEZPR03MB7810.apcprd03.prod.outlook.com
+ ([fe80::2599:cb55:e0f0:92e8]) by SEZPR03MB7810.apcprd03.prod.outlook.com
+ ([fe80::2599:cb55:e0f0:92e8%4]) with mapi id 15.20.9611.008; Thu, 12 Feb 2026
+ 11:01:45 +0000
+From: =?utf-8?B?TWFjcGF1bCBMaW4gKOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>
+To: David Lechner <dlechner@baylibre.com>,
+ =?utf-8?B?QmVhciBXYW5nICjokKnljp/mg5/lvrcp?= <bear.wang@mediatek.com>,
+ =?utf-8?B?Q2h1bmZlbmcgWXVuICjkupHmmKXls7Ap?= <Chunfeng.Yun@mediatek.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, Ryder Lee
+ <Ryder.Lee@mediatek.com>, "igor.belwon@mentallysanemainliners.org"
+ <igor.belwon@mentallysanemainliners.org>, Ariel D'Alessandro
+ <ariel.dalessandro@collabora.com>,
+ =?utf-8?B?V2VpamllIEdhbyAo6auY5oOf5p2wKQ==?= <Weijie.Gao@mediatek.com>,
+ =?utf-8?B?UGFibG8gU3VuICjlravmr5Pnv5Qp?= <pablo.sun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Julien Massot
+ <julien.massot@collabora.com>
+CC: Julien Stephan <jstephan@baylibre.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Arnaud Ferraris <arnaud.ferraris@collabora.com>
+Subject: Re: [PATCH v2 5/7] board/mediatek: move EVK MAINTAINERS to common file
+Thread-Topic: [PATCH v2 5/7] board/mediatek: move EVK MAINTAINERS to common
+ file
+Thread-Index: AQHcmeeJMr/NR2gu1Uay58vO8BGiFLV+6iMA
+Date: Thu, 12 Feb 2026 11:01:45 +0000
+Message-ID: <fe573dd30940764bc8e9d2b683fe11f573843288.camel@mediatek.com>
+References: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
+ <20260209-mtk-mach-clean-up-duplicates-v2-5-e3b22282c74d@baylibre.com>
+In-Reply-To: <20260209-mtk-mach-clean-up-duplicates-v2-5-e3b22282c74d@baylibre.com>
+Accept-Language: zh-TW, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mediatek.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SEZPR03MB7810:EE_|TYSPR03MB7739:EE_
+x-ms-office365-filtering-correlation-id: bf62fa6a-ee5d-4fe9-05ec-08de6a261c71
+x-ld-processed: a7687ede-7a6b-4ef6-bace-642f677fbe31,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|38070700021|921020; 
+x-microsoft-antispam-message-info: =?utf-8?B?NFNiMFVRNm5IdWp5d1RsV2pKdGR0RER2bWc1ZG1MYSszV0NnTy9oZmszUlJM?=
+ =?utf-8?B?VVYwU202b2FUMFB0YjEzY2RJWkYweDJoMnplZ2pBR1dpUFFZQUk0U3BUQ1FN?=
+ =?utf-8?B?ZHVXUTljUllxZVZxMkV3NUdBeTgyLzhJcEJ5dlhFRkI4Zk1kT2VVN1NqWUlZ?=
+ =?utf-8?B?aFhyVXhxWFRFYThXZndKemFlRTlnYlpCSHB1REl0YnovbFJBOFo5YnpicC8w?=
+ =?utf-8?B?cXh6dHMvbWlLYkQyaFRpSS9tRklvMDNnUlFvU0JybFF5WjRwbGY0TG9td3A1?=
+ =?utf-8?B?RXpLbzRHM1pQYXd6azhjd0dXMUJKaXJ4bTJDWlg3LzFFQ1FheFBVYnFWdkpx?=
+ =?utf-8?B?MzgzSS9VSEk4QjkxdmQ3WWpEN1dDajlzcHJobXNLb0lyUWxTeHNSMWNJREZl?=
+ =?utf-8?B?bDlVWG9GTWg5TXd6aW1OM1Ryc1dXU0gvLzcrVGhtRHZTdzJJdEUrL1diQ293?=
+ =?utf-8?B?UjhtQWhPVXhCeXJlY0ZaVGlJZ01DRjYyeXRDUFg4NStCUEVxVEF0RVZhdlNO?=
+ =?utf-8?B?bnRkTFpyWmo5THVnbWZPYU4xRGluTFFHTW1WNGpsVW9pcWtvM3hDMitFbnhq?=
+ =?utf-8?B?U3RiSEZtMjVpVmdtR2dLQmx6RHhIMksxTHF5eS9mMmFKczhvSS9KWEsrY2tR?=
+ =?utf-8?B?K0c5OURsWXRETmlkQWZsUm5RNEIzcE1aOHdSMW5xNGRHZEx5YUhaOFhzMW9h?=
+ =?utf-8?B?SzQ1NjBTNHVucWJZdVhCUy80TEVyY05YaDQvNGxEOTRqMjdBOU0rc3BnVENo?=
+ =?utf-8?B?RnVwcnpsTE8xSmMvdjd2RUgzM1NCNml1SEdhNkQzdytkbks2YnBxcFNRUWVm?=
+ =?utf-8?B?MWdMcitvN0RLaTNIaUtzSFE4MEd6aXpJSlN2UGJXaUQzS1VMRXFwMTBGU3J0?=
+ =?utf-8?B?T051SkxhcDl1bkZ5d0V6OUNEaDR6OVNOajM5RjBLeUx0NWZJa1RGeTI2cXc4?=
+ =?utf-8?B?R1RGc3NzL2lmQTBTYmxpVlAwbkNZNG0vYS9IYk1KRzkyWFhITW90S1BTWmVL?=
+ =?utf-8?B?Q1c5RUoyVi9YZEFTbXRPcHA1ZFR3QnBuVEt5UlkzeG1Sd0xvOXhKbjhPY2I5?=
+ =?utf-8?B?Q2R5OHR1WXRjdWNxU2VDd2xWMmx4MHhzOUhlR3NWbThJQi9uU3VNNUdsWTJs?=
+ =?utf-8?B?T2xxbkZxRERwb3ZJclhENHdVVTBPU3ZLdUtBa3BVUVdPSWtTTkZpRTgxN01Q?=
+ =?utf-8?B?NEZzbld4RTQ4UTVZVjhSNm1BRmM2YWVNUytiUjlqS3hjMUlDWXB1WXpUTk9U?=
+ =?utf-8?B?d0RLRXFlYWVjMzdFcnVvWmpocmNUVWhjRXViQTFtaG55R1FFT2d5WjR6VjRl?=
+ =?utf-8?B?RnZhOTFraVpFYlpQdGYrN2RadlVOaFVnNHpoWkNLaW1VV0VXYXF2Vy9mNnJR?=
+ =?utf-8?B?aVZFOHdkMEc3WWlTTHdSV1dVeS80V0dqTDRpU3cyWFR1T1BxNm1FSzdUNng4?=
+ =?utf-8?B?dUNDSW5INXRwKzBOR1B3QTV3UFNqRjVoLy9RM3ROQzFXbUpaNXdQYzZ1RVVt?=
+ =?utf-8?B?UjRhcGd1SzVCSktyekU5Mk54TUlJOXZGUFM0cEN3VjE4VWM0TGF2UXJYdTJS?=
+ =?utf-8?B?c09rK0xBQ2djRDdIcGxIUlppRUlIaWdRM0hGSGlkd1NZRHV1K1hXcE82c3U0?=
+ =?utf-8?B?Z29aVVRjZTdsMERaMFFuc1VUY2ltZXVHN1hSQW9IakcwbmxEMC93d1RZMWdR?=
+ =?utf-8?B?cWVaeE4wbjJIcGduckRGRm0rSzVsd0gybnVRK0R6cDZoN3NYR3JPWm44R2pm?=
+ =?utf-8?B?S2JvdVlDSFNoSldoakZ5NDRLbVRGOGhVaHdvZGJPM3lXdlZDUUNtZm9Iazk3?=
+ =?utf-8?B?VlFyTi9FV1hJUjZKdXpqVUZlQSs2dnBIUEpsZzFCUFZrdjVTNkFJR2tuTU5V?=
+ =?utf-8?B?VUExSW8rTCtKVEZ3eDlsWDMvanhScHBLUUcxN1lVZVRVNGZvUEhya0lrS0xW?=
+ =?utf-8?B?K1NOaG9HZEJGSENDVTFLS3RJRkpZMGE2UlpaUkdpTDFNRlRBTVBSQThXVUs5?=
+ =?utf-8?B?VVFvYU5hYVJZT1ZwVTdVT2hBaWNqb09kcVVnVDV1YUNKMStUN0hiWEd1b3JT?=
+ =?utf-8?B?T3VQSnVNV2dqYndEalcxT0RGN1ZQZi9HZDNSSE9mY2xFeWVDTDdQdnI5Kzk3?=
+ =?utf-8?B?MDVKTXNGMnBMS0RuVHI0dHZPR20yRll6eERTS0FDb3FOZGNVZ2ozK3Nmb1Y4?=
+ =?utf-8?Q?3ZMNJmnjw810FSfIRIVsivKrHZ5CeebXinPyHbeSG/W/?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SEZPR03MB7810.apcprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700021)(921020); DIR:OUT;
  SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: tUo3BG+o6Ly9RJXZtYKmI4ZKdyLXKdPxDjKanjiz8O5kJjycImt81OlzK/dRilOhFrGe1k0ueWNUmE8vDuFC1nYVe++4FjOb4RNbQBuemluT2GZzp5pvZy7cVTntDErrtSxKHAMBxOJ/J8Bxuikg2IGfsOlE8okNDR1n84cGXM/m5LWJym7IvBADKvVDU2Gl29mCJo9tF8U061EL0m2Bw98skkoGXeiMYxed323F7tbdZuAxne9vjsQ6Bwv+l5M3nSxgMpw77BxVVZK4LRKNJu6XiLio0GdPuJjv3EcrnT1Jltp1BqqJgHEVcqYEQ+KoBd+5wYfW8UilYcaH4IeZz6lFvd7SL24vXwH77MFQkYFFT1JeV+mijGDVlJ71JeMQdl4XdO+6M8kXwbTe+O+cIgq2BBSAGf2FBnQ8mDnzetgY+dY+ThsjnGHqV1M0R6ii
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2026 10:56:21.4322 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14b5d52b-600f-459e-3726-08de6a255b86
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE4.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7780
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?U2M0SzFHMDE4RE42Zi8wSm43T0xmWFQ5NWdCemJhVTdOd2RsWDliSEIxWE5i?=
+ =?utf-8?B?OHgrd09WSWRMdFNHV3d4Y3p5cC8rdEU0QVJGWDBqbEM2U0hndVJQV2M4N2tw?=
+ =?utf-8?B?YmcxTUl0UjRJNHBaaFNnbzNxME93clV3S3U5OGUwTkRQWkFQUTFlSXc1UUxy?=
+ =?utf-8?B?NFB0MDFsRWRjL0k5dys3QWtTTWRtTnFEWlRRVjk5eXRQblg3blA3Z1pSVXV1?=
+ =?utf-8?B?bk91K09tQVBVa2pzamJObkEwU09PVC9zL0duamVDL3lCY2szMFVFeENYd1pT?=
+ =?utf-8?B?UEVEcXJIb2I3aXNZUHhNQzdBbnlqeG00VGk4cm50Qjdvb0ttalBSdzdvZkJy?=
+ =?utf-8?B?QkxseXlQcnV6bDlDZHFaTytmUnVqTHpGeTgwVFJYWW1wK1F0cDdaaHNmK3lu?=
+ =?utf-8?B?RXUrcjRHR3FNaGhMRWJscXVzMXRrV0kyalNVRFRQTS9sUFN3VWFyRGdWd0ZE?=
+ =?utf-8?B?YmI5ejdQR0ZoM21zN1V0dXdoY0FTSGxNYlp3dzFyWHlobWxwTU1vWi8zTU1r?=
+ =?utf-8?B?N1VPdy9DemVOeG85S214QzhCWDhxZEhGeDY3NVFIZEpJdk9HRHdJbTNydkdl?=
+ =?utf-8?B?eUhuTU9LeVFQbXdEMnA0ZU02K2Evc29na0dqeC9oRFBFVldQYTZXek5Ua3k2?=
+ =?utf-8?B?cVQ3N2I1VTd3RFhway9CaTBXZEhYWTZMdWpUZ3dOYVF6Y1g4clVjQVBlRVhv?=
+ =?utf-8?B?eVJNNzB2dmtyR3FtWDlYL0JiMm1UdzVaUE9mWm5acGlFRjQ3RVlpZjM3N2h6?=
+ =?utf-8?B?b3M1RlNUcVJaK1FvWXdHSlEyN0dFY05oSk1XdSsvMHFFY0pCbFJCUXFwNVQ2?=
+ =?utf-8?B?WlNsbFUrbmtVM2p6VGdoWUJReDNBTSsrRVY1VTJvSEZyTjhoVzNBTUVxUnRG?=
+ =?utf-8?B?aDM2Vkc0MldldzIxY0o5UHpTS0oyN1NmM2ErWlFDUEg3NGIxUG4yNzR0bHpl?=
+ =?utf-8?B?NmdOeFYzeitIMFltVzZqK3B6T3ZWY2VyNUZLZFFZUG94TVh3OTY1S2UwUkFY?=
+ =?utf-8?B?MUpCdWhjSmZoRElVL2dGMnBJdFVSVUVMcFI4ck1WdVNvTXRraXljV01WUnBm?=
+ =?utf-8?B?d0FIN0VrWVdBaGt4b04yRmkyd1VFUFF2Tmt5T3Z5dzhnbXN0dk5OeDhZQWZu?=
+ =?utf-8?B?NlZ4eUZpNnVBTDJrdmVtUHdhaUpqKzl1bXhUQjFMWFV0Y0c0dURHbVVMNlls?=
+ =?utf-8?B?YU5IZG9XazMwWGpsZ0hRbWsvM3c4bDd4RWtGR2pTOEhBQ3JGS1VrYlUxZ2FH?=
+ =?utf-8?B?N2paQjhQWVVEUkV6REdEbStOSnRBZGZTN1M5VnhVbEEzbWYzcWs1TEJrWFRB?=
+ =?utf-8?B?YW83QndsS2swd0VBT0UwV3hxbmFrYXFqbXR6S2tTZXdsckdJcDZ3YUtzL0dh?=
+ =?utf-8?B?YU1jYUhaTVpHbEFzdzVNUFJsSERpL1MzakhTL2M5UUNXS00rOHdCNytybDRL?=
+ =?utf-8?B?VHpJRk1sQVUxOTFVdm1VNWRtR0dqeUx4ZW00b0tINlZCN2hzSFhQK3RvVmtW?=
+ =?utf-8?B?Ykh1NWp0MmFyY0tPV1laV05iSjVPelExYWdpc2RxQWc5Ym5vWHdEejFhUkFP?=
+ =?utf-8?B?WTdsRUNoaW04NHlxcWJTWXpuN0pTZEkyaHNXekR2Sk1GOElNRU1Tb1czTXRZ?=
+ =?utf-8?B?RWdndi95bkJyU3VuOGRPZzVkQ0ZPRjE1c2RxNE9ya1F6aWJmcEp5T2N3WHdS?=
+ =?utf-8?B?VFZhK0oweTU5Z3VjWGFORGZuRFk1eGMwN1BwNGF0ckZxc1NpSk1YeVlkcnFL?=
+ =?utf-8?B?Z1lxRG5YZ01SdysvZGZRR1lMK0lpclhHcmdLdkJiUDAySElGaVpsSEJ5dTgx?=
+ =?utf-8?B?aUIyUnZad29zcU1hNEw3TGx1cFA4ZlVMaWxpT01TSDJTYkU5dXcxOWxWTEUr?=
+ =?utf-8?B?ODVkYmJIbDV2dVNvVmh3aytKd3lZK3NET1NPNTdGVkd1TEJsSEprMjNoU0Yy?=
+ =?utf-8?B?bUthemlMOE9VbHI2UDlIdkJ5YmdsQnRDbzBiUWxhV2RJUXY2M1BkUS9RRi84?=
+ =?utf-8?B?S2xheDkwTUc5MkVwWU1aSDZwRnhQK1cvVUJOVTVQbHd1a2dVZHhkSnJmcWtM?=
+ =?utf-8?B?UXppWDJpUnJvWkhuOUEwcy85TFdwc0VyYXhEZGluRHRJYUFULy8xcjR2bTE0?=
+ =?utf-8?B?SHVCTHEzTXdzNXAxazU2MGtxZjhlSnB0TWFzalMvN0w0czdORWhXclNPUFFT?=
+ =?utf-8?B?ZGQwYmJRQzhRYkIrekJqcUxOWEJQR1RmS25LTnNFZVBVZ2g0WktMV2JyVkZV?=
+ =?utf-8?B?QlZpTHJnTUZYQXVlTnZzZHROMkdFYlJmY0ZBaGVlSGR5eXFnak9nMmxyOHIv?=
+ =?utf-8?B?N2gxRDRmbSs5S2E3c1FKMGRQNlh3YWNKdjlYdEU0cU5kZFZlY1h0c2ZqV3F0?=
+ =?utf-8?Q?B8jqu11skkopM2Po=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <00364F3C196A864BACDA102C749EF989@apcprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR03MB7810.apcprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bf62fa6a-ee5d-4fe9-05ec-08de6a261c71
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Feb 2026 11:01:45.1500 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a7687ede-7a6b-4ef6-bace-642f677fbe31
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: n49ygDb0RDkj+SMNHBWdyYNjXiAUtyhz/UBJ8f2PDXF3QD66uYN2lYFJAwMsbGpRQ1y16RQiYTvef3Wf6TpQecyGOs5CLVmMINIWg9tfb3E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR03MB7739
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,180 +231,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marek,
-
-On Thu, 2026-02-05 at 06:41 +0530, Siddharth Vadapalli wrote:
-> On 04/02/26 7:39 PM, Marek Vasut wrote:
-> > On 2/4/26 1:12 PM, Siddharth Vadapalli wrote:
-> > > The cdns3_bind() function is responsible for identifying the appropri=
-ate
-> > > driver to bind to the USB Controller's device-tree node. If the=20
-> > > device-tree
-> > > node has the 'dr_mode' property set to 'otg', the existing approach f=
-ails
-> > > to bind a driver, leading to loss of functionality.
-> > >=20
-> > > To address this, use the VBUS Valid field of the OTG Status register =
-to
-> > > determine the role as follows:
-> > > - If VBUS Valid field is set, it indicates that a USB Host is supplyi=
-ng
-> > > =C2=A0=C2=A0 power and the Controller should assume the Peripheral ro=
-le.
-> > > - If VBUS Valid field is clear, it indicates the absence of a USB Hos=
-t=20
-> > > and
-> > > =C2=A0=C2=A0 the Controller should assume the Host role.
-> > >=20
-> > > Additionally, when 'dr_mode' happens to be 'otg' and the STRAP settin=
-gs
-> > > are not specified, use VBUS Valid to determine the role in=20
-> > > cdns3_drd_init()
-> > > and assign it to cdns->dr_mode.
-> > >=20
-> > > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > > ---
-> > >=20
-> > > Hello,
-> > >=20
-> > > This patch is based on commit
-> > > a8d982e1f17 x86: cpu: Fix crash on FTRACE enabled builds
-> > > of the master branch of U-Boot.
-> > >=20
-> > > Patch has been tested in the context of USB DFU boot on the J784S4 So=
-C
-> > > with a Cadence USB 3.0 Controller. Since the Linux device-tree for th=
-e
-> > > J784S4-EVM specifies the 'dr_mode' as OTG, due to reuse of Linux
-> > > device-tree by U-Boot, the 'dr_mode' of 'otg' causes USB DFU Boot to=
-=20
-> > > fail.
-> > > While one approach to fix it is to update 'dr_mode' to 'peripheral' i=
-n
-> > > the 'k3-j784s4-u-boot.dtsi' file as a HACK, it doesn't scale to other
-> > > SoCs and all of their 'u-boot.dtsi' files will have to be udpated as=
-=20
-> > > well.
-> > > While I am providing Texas Instruments SoCs as an example, I presume =
-that
-> > > SoCs from other vendors are also affected by the 'dr_mode' being 'otg=
-'.
-> > > This patch addresses the issue by using the VBUS Valid bit of the OTG
-> > > status register to override 'dr_mode' from 'otg' to a deterministic r=
-ole
-> > > to enable functionality.
-> > >=20
-> > > The USB DFU Boot Logs for the R5 SPL stage on J784S4 SoC with the cur=
-rent
-> > > U-Boot master as of commit
-> > > a8d982e1f17 x86: cpu: Fix crash on FTRACE enabled builds
-> > > are:
-> > > https://gist.github.com/Siddharth-Vadapalli-at-TI/=20
-> > > b910f326b6c9fad760190bd299ae3ff3
-> > > and the logs indicate that USB DFU Boot fails. The failure is=20
-> > > specifically
-> > > due to 'dr_mode' being 'otg' and the cdns3_bind() function failing to=
-=20
-> > > bind
-> > > the device-tree node to the peripheral driver required for DFU Boot.
-> > >=20
-> > > The USB DFU Boot Logs for the R5 SPL stage with just this patch appli=
-ed
-> > > while leaving 'dr_mode' at its existing value of 'otg' are:
-> > > https://gist.github.com/Siddharth-Vadapalli-at-=20
-> > > TI/033b9772b6ab105b96806adf890848fe
-> > >=20
-> > > Regards,
-> > > Siddharth.
-> > >=20
-> > > =C2=A0 drivers/usb/cdns3/core.c | 53 ++++++++++++++++++++++++++++++++=
-++++++++
-> > > =C2=A0 drivers/usb/cdns3/drd.c=C2=A0 | 11 +++++++++
-> > > =C2=A0 2 files changed, 64 insertions(+)
-> > >=20
-> > > diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
-> > > index 4434dc15bec..b7be5c48fc9 100644
-> > > --- a/drivers/usb/cdns3/core.c
-> > > +++ b/drivers/usb/cdns3/core.c
-> > > @@ -392,6 +392,55 @@ static const struct udevice_id cdns3_ids[] =3D {
-> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 { },
-> > > =C2=A0 };
-> > > +/*
-> > > + * The VBUS Valid Bit in the OTG Status register can be used to=20
-> > > determine
-> > > + * the role. When VBUS Valid is set, it indicates that a USB Host is=
-=20
-> > > supplying
-> > > + * power, so the Controller should assume the PERIPHERAL role. If it=
-=20
-> > > isn't set,
-> > > + * it indicates the absence of a USB Host, so the Controller should=
-=20
-> > > assume the
-> > > + * HOST role. If the OTG Status register is inaccessible, return OTG=
-=20
-> > > role.
-> > > + */
-> > > +static enum usb_dr_mode cdns3_get_otg_mode(ofnode node)
-> > > +{
-> > > +=C2=A0=C2=A0=C2=A0 struct cdns3 cdns, *cdnsp;
-> > > +=C2=A0=C2=A0=C2=A0 void __iomem *otg_regs;
-> > > +=C2=A0=C2=A0=C2=A0 fdt_addr_t otg_addr;
-> > > +=C2=A0=C2=A0=C2=A0 int otg_reg_index;
-> > > +=C2=A0=C2=A0=C2=A0 int vbus;
-> > > +
-> > > +=C2=A0=C2=A0=C2=A0 otg_reg_index =3D ofnode_stringlist_search(node, =
-"reg-names", "otg");
-> > > +=C2=A0=C2=A0=C2=A0 if (otg_reg_index < 0)
-> > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return USB_DR_MODE_OTG;
-> > This is wrong, the function should return error and possibly mode via=
-=20
-> > function parameter , do not conflate return value and mode please .
->=20
-> Regarding returning an error, the patch maintains status quo for the=20
-> case where we are unable to read the USB OTG Status register. Please=20
-> refer to the following diff in the patch:
->=20
->=20
-> 	@@ -413,6 +462,10 @@ int cdns3_bind(struct udevice *parent)
->   		if (dr_mode =3D=3D USB_DR_MODE_UNKNOWN)
->   			dr_mode =3D usb_get_dr_mode(dev_ofnode(parent));
->=20
-> 	+	/* Use VBUS Valid to determine role */
-> 	+	if (dr_mode =3D=3D USB_DR_MODE_OTG)
-> 	+		dr_mode =3D cdns3_get_otg_mode(node);
-> 	+
->   		switch (dr_mode) {
-> 	 #if defined(CONFIG_SPL_USB_HOST) || \
->   		(!defined(CONFIG_XPL_BUILD) && defined(CONFIG_USB_HOST))
->=20
-> Only if the 'dr_mode' is already 'OTG', the newly added function=20
-> cdns3_get_otg_mode() is invoked. In case cdns3_get_otg_mode() cannot=20
-> determine the mode (otg status register cannot be read), we return otg=
-=20
-> mode to maintain existing behavior, following which, the code will use=
-=20
-> the CONFIGS to determine the role.
->=20
-> Returning an error will alter existing behavior rather than extending it=
-=20
-> for enhancing functionality.
->=20
-> Regarding passing the mode via a function parameter, I could do so, but=
-=20
-> I followed the implementation of other functions such as
-> 	usb_get_dr_mode()
-> which 'returns' the mode rather than using a function parameter to fill=
-=20
-> in the mode.
->=20
-> Please let me know what you think.
-
-Gentle reminder that I am waiting on your feedback. This patch has been
-marked with the 'Changes Requested' state on patchworks:
-https://patchwork.ozlabs.org/project/uboot/patch/20260204121245.2105523-1-s=
--vadapalli@ti.com/
-although the discussion is still open.
-
-Regards,
-Siddharth.
+T24gTW9uLCAyMDI2LTAyLTA5IGF0IDEwOjM5IC0wNjAwLCBEYXZpZCBMZWNobmVyIHdyb3RlOg0K
+PiBNb3ZlIHRoZSBtdDgzNjVfZXZrIGFuZCBtdDgzOTBfZXZrIE1BSU5UQUlORVJTIGZpbGVzIHRv
+IGEgY29tbW9uDQo+IE1BSU5UQUlORVJTIGZpbGUuIFdlIHdpbGwgYmUgZGVsZXRpbmcgdGhlIGJv
+YXJkLXNwZWNpZmljIGRpcmVjdG9yaWVzDQo+IHNvb24gYnV0IHdlIG5lZWQgdG8ga2VlcCB0aGUg
+TUFJTlRBSU5FUlMgZm9yIHRoZSBkZWZjb25maWcgZW50cmllcy4NCj4gDQo+IFNpZ25lZC1vZmYt
+Ynk6IERhdmlkIExlY2huZXIgPGRsZWNobmVyQGJheWxpYnJlLmNvbT4NCj4gLS0tDQo+IHYyIGNo
+YW5nZXM6IG5ldyBwYXRjaCBpbiB2Mg0KPiAtLS0NCj4gwqBib2FyZC9tZWRpYXRlay97bXQ4Mzkw
+X2V2ayA9PiB9L01BSU5UQUlORVJTIHwgNiArKysrKysNCj4gwqBib2FyZC9tZWRpYXRlay9tdDgz
+NjVfZXZrL01BSU5UQUlORVJTwqDCoMKgwqDCoMKgIHwgNSAtLS0tLQ0KPiDCoDIgZmlsZXMgY2hh
+bmdlZCwgNiBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBh
+L2JvYXJkL21lZGlhdGVrL210ODM5MF9ldmsvTUFJTlRBSU5FUlMNCj4gYi9ib2FyZC9tZWRpYXRl
+ay9NQUlOVEFJTkVSUw0KPiBzaW1pbGFyaXR5IGluZGV4IDU2JQ0KPiByZW5hbWUgZnJvbSBib2Fy
+ZC9tZWRpYXRlay9tdDgzOTBfZXZrL01BSU5UQUlORVJTDQo+IHJlbmFtZSB0byBib2FyZC9tZWRp
+YXRlay9NQUlOVEFJTkVSUw0KPiBpbmRleCBkNDZiOGIyZTE1Ni4uMzM0NWM4N2QzMGIgMTAwNjQ0
+DQo+IC0tLSBhL2JvYXJkL21lZGlhdGVrL210ODM5MF9ldmsvTUFJTlRBSU5FUlMNCj4gKysrIGIv
+Ym9hcmQvbWVkaWF0ZWsvTUFJTlRBSU5FUlMNCj4gQEAgLTEsMyArMSw5IEBADQo+ICtNVDgzNjUg
+RVZLDQo+ICtNOglKdWxpZW4gTWFzc29uIDxqbWFzc29uQGJheWxpYnJlLmNvbT4NCj4gK1M6CU1h
+aW50YWluZWQNCj4gK0Y6CWJvYXJkL21lZGlhdGVrL210ODM2NV9ldmsvDQo+ICtGOgljb25maWdz
+L210ODM2NV9ldmtfZGVmY29uZmlnDQo+ICsNCj4gwqBNVDgzOTAgRVZLDQo+IMKgTToJSnVsaWVu
+IE1hc3NvbiA8am1hc3NvbkBiYXlsaWJyZS5jb20+DQo+IMKgTToJTWFjcGF1bCBMaW4gPE1hY3Bh
+dWwuTGluQG1lZGlhdGVrLmNvbT4NCj4gZGlmZiAtLWdpdCBhL2JvYXJkL21lZGlhdGVrL210ODM2
+NV9ldmsvTUFJTlRBSU5FUlMNCj4gYi9ib2FyZC9tZWRpYXRlay9tdDgzNjVfZXZrL01BSU5UQUlO
+RVJTDQo+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCBlMGQ2NWVmZTgxMi4uMDAw
+MDAwMDAwMDANCj4gLS0tIGEvYm9hcmQvbWVkaWF0ZWsvbXQ4MzY1X2V2ay9NQUlOVEFJTkVSUw0K
+PiArKysgL2Rldi9udWxsDQo+IEBAIC0xLDUgKzAsMCBAQA0KPiAtTVQ4MzY1IEVWSw0KPiAtTToJ
+SnVsaWVuIE1hc3NvbiA8am1hc3NvbkBiYXlsaWJyZS5jb20+DQo+IC1TOglNYWludGFpbmVkDQo+
+IC1GOglib2FyZC9tZWRpYXRlay9tdDgzNjVfZXZrLw0KPiAtRjoJY29uZmlncy9tdDgzNjVfZXZr
+X2RlZmNvbmZpZw0KPiANCg0KTGV0J3MgbG9vcCBKdWxpZW4gYW5kIEFyaWVsIGZyb20gQ29sbGFi
+b3JhLg0KDQpDdXJyZW50bHkgd2UgZG8gaGF2ZSBjdXN0b21lcidzIGJvYXJkcyB3YWl0aW5nIGZv
+ciB1cHN0cmVhbS4NCkknbSBub3Qgc3VyZSBpZiB0aG9zZSBib2FyZHMgYWxsIGZvbGxvd3MgdGhl
+IHNhbWUgYm9vdCBmbG93IGFzIEdlbmlvDQpFVktzLg0KU28gSSdtIG5vdCBzdXJlIHRoZSBib2Fy
+ZCBmb2xkZXIgY291bGQgYmUgYWN0dWFsbHkgcmVtb3ZlZC4NCg0KQ291bGQgZnJpZW5kcyBmcm9t
+IENvbGxhYm9yYSBsZWF2ZSBjb21tZW50cyBoZXJlPw0KDQpUaGFua3MNCk1hY3BhdWwgTGluDQo=
