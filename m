@@ -4,43 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B504EE3690
-	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 14:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1450CEE3692
+	for <u-boot@archiver.kernel.org>; Thu, 12 Feb 2026 14:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D2B38388D;
-	Thu, 12 Feb 2026 15:40:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 173978388D;
+	Thu, 12 Feb 2026 15:42:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qA03mHuw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BBCB83AAB; Thu, 12 Feb 2026 15:40:21 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 664B683015
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 15:40:19 +0100 (CET)
+ id B81B283B9D; Thu, 12 Feb 2026 15:42:45 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C0D0A83015
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 15:42:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4D146339;
- Thu, 12 Feb 2026 06:40:12 -0800 (PST)
-Received: from debian (MacBookPro.nice.arm.com [10.34.124.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id BCBFD3F632;
- Thu, 12 Feb 2026 06:40:17 -0800 (PST)
-From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Jose Marinho <jose.marinho@arm.com>
-Subject: [PATCH v2] efi_loader: fix ecpt size computation
-Date: Thu, 12 Feb 2026 15:40:15 +0100
-Message-ID: <20260212144015.3898750-1-vincent.stehle@arm.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260211093308.3265022-1-vincent.stehle@arm.com>
-References: <20260211093308.3265022-1-vincent.stehle@arm.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fBdLn66n7z9t46;
+ Thu, 12 Feb 2026 15:42:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1770907361;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Cv98wrJi1h/RrIMQQc6szPIbAZPPLdUlzeTLvwVu1eQ=;
+ b=qA03mHuwlEpCNcupiVuIdiwY5tYyanwG89TvLPKIQ3F1c6JsUegXgufYvrn3gQNSSd7OKn
+ oxrb5adaobMNt32MPJZph3xEwaShgE3c2SVa+QFKCAAtfqLlkqXJz6yFN+krEXaUaFuEtM
+ 4pKgjYqi4EwFXbSVI2Zyzy1QOciKP6MTvgI4AJgY1gBB+qQDGhgSzV9AV0m3zBLbILuFGJ
+ nlb98EQgnhgz8iVpNBD+A7YkvwDabJ7XuEaYRNYoDANbFffjs71O8SQHzDjJpUtuaK8/99
+ PB4SsnMz1jrxOW0RzJj/rmTDX6DO2UwwDLG8FeU7/93/m/PgZ6igvz143XOU0w==
+Message-ID: <f503b515-3b9a-4dbe-bfdd-6ed02d2a02a2@mailbox.org>
+Date: Thu, 12 Feb 2026 15:42:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH] usb: cdns3: use VBUS Valid to determine role for dr_mode
+ OTG
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ minda.chen@starfivetech.com
+Cc: u-boot@lists.denx.de, srk@ti.com
+References: <20260204121245.2105523-1-s-vadapalli@ti.com>
+ <4267b260-9479-44b4-bbeb-521738845be1@mailbox.org>
+ <26f52e6f-d936-4180-8405-d30de803fc09@ti.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <26f52e6f-d936-4180-8405-d30de803fc09@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: rornsmnuhq79d6wcppeq7mp6krtjx6k6
+X-MBO-RS-ID: 7bae1ad1cdd691326d3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,87 +79,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The size of the memory allocated for the EFI Conformance Profiles Table is
-computed with `num_entries' always equal to zero, which is incorrect when
-CONFIG_EFI_EBBR_2_1_CONFORMANCE is enabled.
+On 2/5/26 2:11 AM, Siddharth Vadapalli wrote:
 
-This can be verified by allocating the ECPT memory with malloc() instead of
-efi_allocate_pool(), building u-boot with sandbox_defconfig and
-CONFIG_VALGRIND=y, and by finally running the following command:
+[...]
 
-  valgrind --suppressions=scripts/u-boot.supp \
-    ./u-boot -T -c 'efidebug tables'
+>>> +static enum usb_dr_mode cdns3_get_otg_mode(ofnode node)
+>>> +{
+>>> +    struct cdns3 cdns, *cdnsp;
+>>> +    void __iomem *otg_regs;
+>>> +    fdt_addr_t otg_addr;
+>>> +    int otg_reg_index;
+>>> +    int vbus;
+>>> +
+>>> +    otg_reg_index = ofnode_stringlist_search(node, "reg-names", "otg");
+>>> +    if (otg_reg_index < 0)
+>>> +        return USB_DR_MODE_OTG;
+>> This is wrong, the function should return error and possibly mode via 
+>> function parameter , do not conflate return value and mode please .
+> 
+> Regarding returning an error, the patch maintains status quo for the 
+> case where we are unable to read the USB OTG Status register. Please 
+> refer to the following diff in the patch:
+> 
+> 
+>      @@ -413,6 +462,10 @@ int cdns3_bind(struct udevice *parent)
+>           if (dr_mode == USB_DR_MODE_UNKNOWN)
+>               dr_mode = usb_get_dr_mode(dev_ofnode(parent));
+> 
+>      +    /* Use VBUS Valid to determine role */
+>      +    if (dr_mode == USB_DR_MODE_OTG)
+>      +        dr_mode = cdns3_get_otg_mode(node);
+>      +
+>           switch (dr_mode) {
+>       #if defined(CONFIG_SPL_USB_HOST) || \
+>           (!defined(CONFIG_XPL_BUILD) && defined(CONFIG_USB_HOST))
+> 
+> Only if the 'dr_mode' is already 'OTG', the newly added function 
+> cdns3_get_otg_mode() is invoked. In case cdns3_get_otg_mode() cannot 
+> determine the mode (otg status register cannot be read), we return otg 
+> mode to maintain existing behavior, following which, the code will use 
+> the CONFIGS to determine the role.
+> 
+> Returning an error will alter existing behavior rather than extending it 
+> for enhancing functionality.
+> 
+> Regarding passing the mode via a function parameter, I could do so, but 
+> I followed the implementation of other functions such as
+>      usb_get_dr_mode()
+> which 'returns' the mode rather than using a function parameter to fill 
+> in the mode.
+> 
+> Please let me know what you think.
+I think this patch is wrong, cdns3_get_otg_mode() should return an error 
+code and also return mode via parameter. This:
 
-Fix this by using an array of the supported profiles GUIDs instead, which
-should also be easier to extend in the future as U-Boot should publish the
-GUIDs for all supported EBBR revisions.
+static int cdns3_get_otg_mode(ofnode node, enum usb_dr_mode *mode)
+{
+    ...
+    if (error)
+       return -ESOMETHING;
+    ...
+    *mode = some mode
+    return 0;
+}
 
-Fixes: 6b92c1735205 ("efi: Create ECPT table")
-Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Jose Marinho <jose.marinho@arm.com>
----
-
-
-Changes for v2:
-- Mention in the commit message that U-Boot should publish all supported
-  EBBR GUIDs (suggested by Heinrich)
-- Move the array declaration into the function (suggested by Heinrich)
-
-
- lib/efi_loader/efi_conformance.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
-
-diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_conformance.c
-index 2bae93a94bd..2d31800ccb8 100644
---- a/lib/efi_loader/efi_conformance.c
-+++ b/lib/efi_loader/efi_conformance.c
-@@ -13,8 +13,6 @@
- #include <malloc.h>
- 
- static const efi_guid_t efi_ecpt_guid = EFI_CONFORMANCE_PROFILES_TABLE_GUID;
--static const efi_guid_t efi_ebbr_2_1_guid =
--	EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID;
- 
- /**
-  * efi_ecpt_register() - Install the ECPT system table.
-@@ -23,12 +21,17 @@ static const efi_guid_t efi_ebbr_2_1_guid =
-  */
- efi_status_t efi_ecpt_register(void)
- {
--	u16 num_entries = 0;
- 	struct efi_conformance_profiles_table *ecpt;
- 	efi_status_t ret;
- 	size_t ecpt_size;
- 
--	ecpt_size = num_entries * sizeof(efi_guid_t)
-+	static const efi_guid_t profiles[] = {
-+	#if CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE)
-+		EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
-+	#endif
-+	};
-+
-+	ecpt_size = sizeof(profiles)
- 		+ sizeof(struct efi_conformance_profiles_table);
- 	ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, ecpt_size,
- 				(void **)&ecpt);
-@@ -39,12 +42,9 @@ efi_status_t efi_ecpt_register(void)
- 		return ret;
- 	}
- 
--	if (CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE))
--		guidcpy(&ecpt->conformance_profiles[num_entries++],
--			&efi_ebbr_2_1_guid);
--
-+	memcpy(ecpt->conformance_profiles, profiles, sizeof(profiles));
- 	ecpt->version = EFI_CONFORMANCE_PROFILES_TABLE_VERSION;
--	ecpt->number_of_profiles = num_entries;
-+	ecpt->number_of_profiles = ARRAY_SIZE(profiles);
- 
- 	/* Install the ECPT in the system configuration table. */
- 	ret = efi_install_configuration_table(&efi_ecpt_guid, (void *)ecpt);
--- 
-2.51.0
-
+Do not conflate mode and error code, this leads to problems.
