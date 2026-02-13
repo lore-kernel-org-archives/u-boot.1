@@ -4,103 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 028B1EF48EE
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 09:00:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02787EF48EE
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 09:01:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5318B83015;
-	Fri, 13 Feb 2026 10:00:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 73CE883C4B;
+	Fri, 13 Feb 2026 10:01:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lOWNYfOF";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ivRiTe5g";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MgbsVjRZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7B1683AAB; Fri, 13 Feb 2026 10:00:19 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A40783C4B; Fri, 13 Feb 2026 10:01:47 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AAB180FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 10:00:17 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d4b9c839b1so297493a34.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 01:00:17 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770973216; cv=none;
- d=google.com; s=arc-20240605;
- b=jlLC1WHdh1R5kgTzKIsdi8zQ6m9blwqhD2po0vAOYEFOYKq6+WAAItUyFd22XgRlAT
- RP7VTog59jGhostPQo18i/WKwwm1DQmZ8BPRFcwUtjYnjSHEnrrUbuy8HgANrO8ADyCZ
- ltOUa/YhbNHI1Ie3nblpt0jZu+PpoKNQz6Y7yDLOiiJh09b8MOZvbbhUubf6XFJMMtwx
- wZlbv/MOeKVbiPuCVoYcZtYmP7dLK9a1ZsMBZ+SjpJl/x/lolEBVIIu7C/SpxGFRDX9T
- Kz9lpIxwdmGccNWgTHqKvYwfAcY2Yf9KFn01PDDhVUTQG+6UT6vCMfGwUUuuTBOHWh1Y
- 3HaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=xgtppdqImphClyyUU1f1mV8R/mYvFcTngJx17y/MXDg=;
- fh=eEi8Xo/lKegsBCPHHmDPcf4jaXl0OXhlbgpBC2bs1Eg=;
- b=S8s+tWfh/EOTQnXV2qbAWTlGErnOVezzl33LMz777m/PLNuRqaK6AgdjaoPYWoRh8v
- kXZ+LbD+7QecM9UdWVPsrImi+913Gnfhb5DFXznj/yRCLJTog8evWEXVBkd0OxwxCOKG
- +1NCWbt26RAdm3pcFRQVmwLvpAJyzsn1OVk4i/L2mA/i55Yf7mqhdtMn3J/fj4Wdc8et
- k+yD2NwWhemM+kPuRdV7IrEO87PDXx7kV7TWATELAP6vQzrZf/y68hFs/MBlOXsXAJnE
- 6qgx2yATnq/EyHUpt3U8I9i0d/iLbzEZkPfAFAr6NuBf6+GGziUlgusDm8Sep1XC30SH
- 3UnQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 43CE183015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 10:01:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61D4AW6o455016
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:01:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ dVu8lIx5aU04wRA6+1zMUlCRTdxHYyd1TiwqlCLK5WI=; b=ivRiTe5gyBIMFZGf
+ s453CLBUWT2HqRSIcMAurn8tpyI+KEFiNBviOz+DHCiBHqSeTxNngpuSb0AXfKKu
+ DpspN4TFPcXhkc7WVKRqrSsq/JTvlQbqyj3yDuBr4nB7zI5fndvvpE45sbMsYSnG
+ GLMpia3UaN4LoMklqPZLl0c2v8d6jO7dzZ716G95Wh7uzR16d6OvgSpMp4yAS5Yn
+ Alz2UWe80ag6V51kZMPv0eZU9BuL/amkYLiid/ouHUp2ulH4uOxWdYHb3wwjHrFx
+ gfKvkH8zaMRB3W6lA3rTzPbgNVKFRRjJ6KDEa6fO6yy5n7ODD6lGQINgDly+Ae2y
+ MrjUFA==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9mev2mmp-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:01:43 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-2a7701b6353so10802125ad.3
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 01:01:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770973216; x=1771578016; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xgtppdqImphClyyUU1f1mV8R/mYvFcTngJx17y/MXDg=;
- b=lOWNYfOF/dlSJo5mHFxuEOYPWUt36Kvqcz6UGCO8fTRnMbOoTJ19PFMVDsd2ByJJ1a
- r9M2PIwmOY2npfFY8gShYnoDqoQVKWykDoNLqCyJje/0sPoS9xS0GDMEAAStmR+ZDXyw
- +yST0Gub2UtWyFtVfRZ+y9XnjnZdSBpOWfZsrUEeVoV5GcXnCFVLTq2b7kwGjdRoQ46q
- H6SY+Ls8mNQ2B7Z296xvwSz4E7YVt9h4/GZcHG4z6jJp1a/+3ulwqyJZzTn7da2f5rAy
- 4n8SUbBRywKTRqLllU8BRlXEslH5MpOK8Iukt3SsNUjfxt54GWhGTk372/0XkOI2UiVu
- 9/og==
+ d=oss.qualcomm.com; s=google; t=1770973303; x=1771578103; darn=lists.denx.de; 
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=dVu8lIx5aU04wRA6+1zMUlCRTdxHYyd1TiwqlCLK5WI=;
+ b=MgbsVjRZArJeAjy6YtnNtxT19eXNnjoyZa8Qv/RvZCKFnVf+PO4wqMd2UvIsl2QDXF
+ MtbIIIp4nuL4HOdtJ3xi/0wmOt8wBAYsuUU8cndM5oIrzTcCtA16q7PJddFwxUigG1T5
+ 5mW4/mvil1fL1RrpZgicEdeBfLfVfezQjBP72JHpxx1Um4k2qXHGjUISCY1IvbBjrXEX
+ YRHvWX6nJGswRSDiB5uTTnCOZMhPpeIh583wFr2Qq4eD8IONRRnNu0bWDHoNGo51uNln
+ KXz0AvHC95irp3tGkMvOEcW2y4p6Ib1Vm+NLlSKJde62gtsLCDFCT/wRS0RiHHuFm+gh
+ lECw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770973216; x=1771578016;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=xgtppdqImphClyyUU1f1mV8R/mYvFcTngJx17y/MXDg=;
- b=F0mpSp++jIokJZC0OF7Be0EnhtLGXqlQUS0N13bfzneAXTGga6o52j3RkH1QglqXdh
- osyQjyBob98y+EmuOUxxLZ22G5Rjcwv4etnLn1tSiRCwlD7Y2Mxy5I6+opkBGq6sOMd4
- sU2/lWFYwyyDAyOlt3Fe/Wli24I5Dg00kJ2pegsv52GKjZiKyE537QDebM8anhWDXiRb
- WNfuO2LJZ0T/DqP4+obpb77hJ0cLQid5nUTY6LFCpfXZg3ty8xVvmxCZ0PLqzRI+H7Y3
- V5lTtwDD1bFD0LDGH4b5U6XeQnEf0rpOXWcjTsflGk6isVqjxcAjjlsM4VyurJXWamjc
- TcsA==
-X-Gm-Message-State: AOJu0Yywc3MgOeFmpXVjet45Pu2uFUN2blJ+xFidQgdLw1CYugOVt4gJ
- 0Trda1XPZsnl0ULN4kxzt3GZNlU4OS0LsuBJnrs4DoLthT9DYOyrflX6MMYrbByOh1DcpVepakN
- vQb4ZeiWXVVxdTtdcWgpkryLIyPUDyW9VowzOysbrHg==
-X-Gm-Gg: AZuq6aJVg7kGWfNSKA629h7bKaezipSjgAUbbd8L43VAEaDXMtjUsyp87YbZZOW1RQK
- RPj3UnyRHQ/R1+EZQLqHzooqD1WvuPzuoCFWG+iZ1R1NF+JowxFxr24FqluQfzF2O9kPhnYSVCv
- RP7K8RNnstUYlRuTsiT8cz2xdAgMlWoJI4sPfMJeRP/hlWGcmBI53nuDJFdka7TtYuUi0LHczB5
- ZncTzAgM5kZlM5NQSnlgHFbv1qiC9B1QSXIbUI6La6l6XXaDvGPcoqocQ3jRYq/9rE97pBFX4uC
- wt3FmxSd
-X-Received: by 2002:a05:6830:2aa7:b0:7c7:8280:9207 with SMTP id
- 46e09a7af769-7d4c4b495fdmr634375a34.37.1770973215696; Fri, 13 Feb 2026
- 01:00:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770973303; x=1771578103;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=dVu8lIx5aU04wRA6+1zMUlCRTdxHYyd1TiwqlCLK5WI=;
+ b=IQAubs/38jiIhVGPl7Q6+/miPsS1iIS5b4iDKILW4+7jye33/pEXXGYM+p7g0FaPS3
+ S8+o2FwOgmBuJNjGQbg9hLaP9t83qhnFdztCQHn5UgFpi9Hhj6lvWYsmFjn9ESaUAR5b
+ SW+4b/njS9WBYUFW2VKCmuCbx76Q2qQJD8sloj9LQvsQT7j54T9SedqT9uBcqudl+pPX
+ sZ4F0SvrVRrAOpZVQqgGDzKh8QaNGs6hOEH+Qtj9m4ATngvM7o043hKNFK6Z7YitQ3C8
+ KYUkE1P97Vy16CzM8GhlhAqj4PhB9TwbOzfJqP7RcN2yikvlr+zsM0WHrZ0Y1V16r1cX
+ DaNQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUVChhcEz3XmbyBbB3UeM9Dx1vmRtBDsj5ZW6sQxYOSBB5c+qLS24CTr9ou5rBAIrpmbvKQQvI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBV1t4lu8HNiy+m0JQekDEssBwzXz+gJn1uavOc3zZAoT2OPSf
+ SQhFRaOfEWx7qFB1+nXKO1Y+MmsLYNFR6cODsAziM+hAH3U78k2p3IXqz95xEV1cIsXWbWouYgm
+ J3rkVHyiHK3emN7V2VHKpA8pTTsf82omjyIngdvACZvnwRefpxE8yIH67
+X-Gm-Gg: AZuq6aLZEQUNqztQhuIbXmLbNEGwIyZrWEHcwgEc1kqWrO7Fhj8QeuFgy4UxJPaj955
+ r3XdsEWEquOintGHojAFabQv9maGCds09g41xCCsKrOybVU34q+ZoNG0Vc0j/NgDBgA+zTrVmA8
+ gSl7gq1CXGOrFh9riRm4f+UOLUO9wlvS9porO28y1eV5MjzaVqR/zS/8++6fLySyZEuVfidTdMM
+ PywbE2CIVS17jsIBMpVr1PQ4ROrWxs6UP0jsaqgMqT5CdXc/YMmw7Vp7jHLooMeY5xn+wBRHy62
+ FaZ6Gze+7bx8Sr0TkhtRnkGxFhpMfScstnzGAFKzNHSIdyDZmAoefEYXlEmOSDYKuTw8RR7N0cM
+ 0HbJ332KWnoIQTEBgUvM9H3z7xAisX0XQwprDW+C6RuQO4IpNGBZVkIDGl84mRlGGxWOvdCM/NN
+ Q31NEo9tTW/1nm5L/yfQ7Gu+KrebM1scoV467Zd+15z9pn68Wutw==
+X-Received: by 2002:a17:903:298d:b0:2aa:f9d7:68a9 with SMTP id
+ d9443c01a7336-2ab504fe2ecmr10952215ad.21.1770973302805; 
+ Fri, 13 Feb 2026 01:01:42 -0800 (PST)
+X-Received: by 2002:a17:903:298d:b0:2aa:f9d7:68a9 with SMTP id
+ d9443c01a7336-2ab504fe2ecmr10951935ad.21.1770973302334; 
+ Fri, 13 Feb 2026 01:01:42 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ab29965055sm77524755ad.53.2026.02.13.01.01.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Feb 2026 01:01:42 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Fri, 13 Feb 2026 14:31:18 +0530
+Subject: [PATCH 1/3] clk: qcom: qcs615: Add GCC_USB3_PRIM_CLKREF_CLK
+ support
 MIME-Version: 1.0
-References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
- <b25f6c14-7db2-4517-a3ab-e2c55a52818c@altera.com>
- <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
-In-Reply-To: <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Fri, 13 Feb 2026 17:00:05 +0800
-X-Gm-Features: AZwV_QgNRvfnbMwN2PF82JkE30D8ixQdHQqo151VFl-pnkMOjyfFN1mpcRWvEn4
-Message-ID: <CAN7C2SAOLdokAaVcuMPWMTS4HsY-4d2dhnkwLadqsGS2qAsKaw@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: socfpga: Add call to
- socfpga_sdram_apply_static_cfg()
-To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260213-talos_usb-v1-1-4c4355d61437@oss.qualcomm.com>
+References: <20260213-talos_usb-v1-0-4c4355d61437@oss.qualcomm.com>
+In-Reply-To: <20260213-talos_usb-v1-0-4c4355d61437@oss.qualcomm.com>
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Tom Rini <trini@konsulko.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Biswapriyo Nath <nathbappai@gmail.com>,
+ Alexey Minnekhanov <alexeymin@postmarketos.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1770973294; l=1320;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=ig2hVDW6OST9k2tIasb4hCmI2QWxwZfBw31LPqaCZQI=;
+ b=F8UzaRpKJJnWc6Kbp0jsaCsefS0rj7KJhY/U3CnKtWSYrivz078T+SZVPJqkGTHIIYRppknCx
+ kMc1irAVbhdDjhQTWeWk8Sq5fUr5jRPWqN1nkDjF4kWGjGubC4R4KyW
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Authority-Analysis: v=2.4 cv=Zq7g6t7G c=1 sm=1 tr=0 ts=698ee877 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
+ a=EUspDBNiAAAA:8 a=G1K_gZgz9GLba3hnKCwA:9 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-ORIG-GUID: S_j76eca0PT4L4Sae6tF2BSZM0daOLf4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA2OSBTYWx0ZWRfX1HoJtytXvzo8
+ xxiFVBZbR539fF3+0pSmhUy7GeVqO8XgmAyEuuLIZOmldtvBmfB7BbBJWaofVxzqd+xf+eTieuK
+ gBhf++5OtEAVuy2xrKnPDekyZY5Ys0Q6GnQRo2jlvLkAHdpwSGcLOLP4rrDFSeW+bDOAefHFGWR
+ tg8vrQIPb350W9u1EQF4I3/c07LRH7G066XmE+NrDfPISmh+w0P/TB7Ia1+fhjNT233A3JXD/qJ
+ l00iU1DOI4jahAR0Y78fVGn40WyBt0wcqg60IaQb6nqJyWWaXdJdzuts0ldTEgTQaXvdqNieXsO
+ GDS3eqErm5S3gsbJX3l+WNy4TYSGud+jRvqktgM+13xiEPPC7JRxWr8h40EZSU2fnKiczW0quGF
+ +8Zg0KSPbmyy+f871ynwHE4D7lZCSs6UFHtyIG0rwgzDfyvYUt7e9LtFNHvPoou52R/ca6bYrTr
+ dQ+tz0IhcHPodYg+nxg==
+X-Proofpoint-GUID: S_j76eca0PT4L4Sae6tF2BSZM0daOLf4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-13_01,2026-02-12_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ impostorscore=0 suspectscore=0 malwarescore=0 phishscore=0 bulkscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
+ definitions=main-2602130069
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,108 +165,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 13, 2026 at 4:44=E2=80=AFPM Sune Brian <briansune@gmail.com> wr=
-ote:
->
-> On Fri, Feb 13, 2026 at 3:18=E2=80=AFPM Yuslaimi, Alif Zakuan
-> <alif.zakuan.yuslaimi@altera.com> wrote:
-> >
-> > Hi Brian,
-> >
-> > On 6/2/2026 11:09 pm, Sune Brian wrote:
-> > > [CAUTION: This email is from outside your organization. Unless you tr=
-ust the sender, do not click on links or open attachments as it may be a fr=
-audulent email attempting to steal your information and/or compromise your =
-computer.]
-> > >
-> > > Hi Alif,
-> > >
-> > > Since 2025.05 to the latest master.
-> > > I do not have any issue as you mentioned in this patch.
-> > > Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
-> > > I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
-> > > that GEN5 Cyclone can support.
-> > >
-> > > Not too sure what is missing from first place?
-> > >
-> > > Thanks,
-> > > Brian
-> >
-> > Based on the CycloneV address map which can be found here -
-> > https://www.intel.com/content/www/us/en/programmable/hps/cyclone-v/hps.=
-html#sfo1411577374877.html.
-> >
-> > Bit 3 of staticcfg register has to be set to apply all the settings
-> > loaded in SDR registers to the memory interface, in this case the patch
-> > ensures the SDRAM controller applies the latest configuration after
-> > disabling FPGA SDRAM access.
-> >
-> > This is a safety and correctness fix for re-initializing the memory
-> > controller in the proper sequence during FPGA reconfiguration.
-> >
->
-> Hi Alif,
->
-> Before I plan to undergo a test we got to understand why w/o this patch
-> SDRAM2FPGA works properly w/o issue.
->
-> > If you have the time, can you help to test this patch with your setup?
-> > Although unlikely, we want to be sure that this patch will not break an=
-y
-> > existing GEN5 boards out there.
->
-> I might be wrong, I think static cfg has been done already?
-> Does the code here if not wrongly understood already finished that static=
- cfg?
->
-> ---> Quote start
-> void socfpga_sdram_apply_static_cfg(void)
-> {
-> const u32 applymask =3D 0x8;
-> u32 val =3D readl(&sdr_ctrl->static_cfg) | applymask;
->
-> /*
-> * SDRAM staticcfg register specific:
-> * When applying the register setting, the CPU must not access
-> * SDRAM. Luckily for us, we can use i-cache here to help us
-> * circumvent the SDRAM access issue. The idea is to make sure
-> * that the code is in one full i-cache line by branching past
-> * it and back. Once it is in the i-cache, we execute the core
-> * of the code and apply the register settings.
-> *
-> * The code below uses 7 instructions, while the Cortex-A9 has
-> * 32-byte cachelines, thus the limit is 8 instructions total.
-> */
-> asm volatile(".align 5 \n"
->      " b 2f \n"
->      "1: str %0, [%1] \n"
->      " dsb \n"
->      " isb \n"
->      " b 3f \n"
->      "2: b 1b \n"
->      "3: nop \n"
->     : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
-> }
-> Quote end<---
->
+Add support for GCC_USB3_PRIM_CLKREF_CLK to the QCS615 clock driver.
+This clock is referenced in the device tree USB node but was not
+implemented in U-Boot, causing "Clock 152 not found" warnings during
+fastboot run.
 
-I forgot to quote the func call location:
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+Changes in v3:
+- Add support for GCC_USB3_PRIM_CLKREF_CLK to the QCS615 clock driver.
+- Removed the logic of removing GCC_USB3_PRIM_CLKREF_CLK from DTS node
 
-void do_bridge_reset(int enable, unsigned int mask)
+Changes in v2:
+- No changes in v2
+---
+ drivers/clk/qcom/clock-qcs615.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-During boot users are supposed to use bridge enable to
-control the needs of the HPS <-> SDRAM or H2F F2H LW etc.
-When calls if I am not wrongly understand it will reset and
-simply do that static cfg and simply do not require additional
-calls.
+diff --git a/drivers/clk/qcom/clock-qcs615.c b/drivers/clk/qcom/clock-qcs615.c
+index 4700baba8c9..65b8db04020 100644
+--- a/drivers/clk/qcom/clock-qcs615.c
++++ b/drivers/clk/qcom/clock-qcs615.c
+@@ -66,6 +66,7 @@ static const struct gate_clk qcs615_clks[] = {
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, BIT(0)),
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, BIT(0)),
+ 	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK, 0xf058, BIT(0)),
++	GATE_CLK(GCC_USB3_PRIM_CLKREF_CLK, 0x8c014, BIT(0)),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK, 0x5200c, GCC_QUPV3_WRAP0_S0_CLK_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK, 0x5200c, GCC_QUPV3_WRAP0_S1_CLK_ENA_BIT),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK, 0x5200c, GCC_QUPV3_WRAP0_S2_CLK_ENA_BIT),
 
+-- 
+2.34.1
 
-> Thanks,
-> Brian
->
-> >
-> > Thanks,
-> > Alif
-> >
-> >
-> >
