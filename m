@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 799E5EDF158
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 12:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62AE9EDF159
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 12:41:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 421AC83AA9;
-	Fri, 13 Feb 2026 13:41:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3C1A83CB5;
+	Fri, 13 Feb 2026 13:41:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xxPFcwtN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zLwCLE2r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BF5A83AAB; Fri, 13 Feb 2026 13:41:01 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 1C24C83CBD; Fri, 13 Feb 2026 13:41:38 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D2AE83015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 13:40:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E15883C4B
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 13:41:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-48069a48629so7922385e9.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 04:40:57 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4806f3fc50bso10574675e9.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 04:41:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770986457; x=1771591257; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
+ d=linaro.org; s=google; t=1770986495; x=1771591295; darn=lists.denx.de;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GjXJLF1tfhz1YeoOncZ1oKCoSDf09BIqcEOW/7C/Rss=;
- b=xxPFcwtN63UaVo/CNiCfzOQEYVIlHP3KzsNsYLhnJPKM3SFm/sLi6h+GWKRVncxEub
- 9g4nudhqSXzo8sVesVt17OJ/CKWm1+CRSat4bJcf1Gf6cd5bK4akuXJkajQZIO+oGoWG
- M8Thg0Ca7WDSNthzIHcec+drxDudbwgKjiUeRtLN/dkUH8+B3ZU2zJ30w1+8wnRhbsBE
- qSuolRVCTo9rrb6bcLtXSJNAR85L5A/EwIkcncUe5F4dVHWIyuo4G3FRmEoPrAg0A/Xc
- lBPpKC+zNzTDiXIvMRQqIXC9UwgNjRz+nvstq9DK3RZPuHUd/SaZbWia5GEnKHboSMXp
- xzxA==
+ bh=8jrZNRqYHh7yePWWjIbyFTDhzZZHMLWFNHaYgoZn5Rk=;
+ b=zLwCLE2rOGPmTamd4EPp1vTUYFDTdUAURXqP1y5kINK6XtVc/rFB8TplrK6/8PmrtJ
+ /Br9uTgrru8qKiAKf8qEey6f0SXOnIvr1azvYGx6sZDcC9Mw5SHNI3hddbEZv9yf4g8u
+ dKa7O03GmIU6ecTD15CRNuAwrInWB0zNSxEjm+VoLbIeflJP+5E2chJzDrRSy12S8DZx
+ baQuVm744Bz3yReqz32aY2qxQuMh99gC4YLYl7+WLY1gU6DWyWU28u1h0kHnVst7+nDj
+ EgaWXDaVroMUOaOmCfb930qzeg5gWMkW9eAmGnPHrd5nCESBJ1bAGgj5NsCCl0/BHasD
+ t1wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770986457; x=1771591257;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
+ d=1e100.net; s=20230601; t=1770986495; x=1771591295;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
  :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=GjXJLF1tfhz1YeoOncZ1oKCoSDf09BIqcEOW/7C/Rss=;
- b=BBuMeF4Ltt9OfcKupzOWeYr8N8c/QWBllkE2he4Nd6Fl/mv00FIMGUhop6Cg0Ltl8L
- Py4elwUETXSlb4XHz8v6qIyG1zUbCBayOIfaALXDHUx1tgHTGH5fni73YqWsVToh5r37
- Wg+kDdZCDzQYW8o/LPZ9CnPWn8l2eElz7nYFUyei9K+c73LAV45dYkaAwdd8EgY8+D2d
- OOoFUoUeEQkjZ5HhL0ywtLDePLRk94kdt0W88qpjF8lKaDOo4zSo0Sa614V+kZ8oWl+/
- cQEYPdJL2xkQvC9W/975ST3sj0GEg3PxBu+AHE7uJ4+3eKbRf7+bZRfvYSLmrrrv0vMK
- GYhw==
+ bh=8jrZNRqYHh7yePWWjIbyFTDhzZZHMLWFNHaYgoZn5Rk=;
+ b=B3rxuznGR3pIoTZsCkfX1nBedIxLxbQ3KrCXOAilmowaAEp+/Wnnt1vRSt4qzNy0hX
+ QRg1aETIogjnNecgETm1K+L8A5J1xiDtWNl7BlCb9xlLcr154OIy1RFSCuctDuA2QL+F
+ Zs2tpk+n4K0Q4edRet2LIckfjFdxIGCCVQxCzu5h3EACAUw4aq5GKQAYZbz2ksDZD5oC
+ EilEcPNkhLbm7BERpfn3lbhOSRtlYu7qBPDtJ2ksjkQSot6BqV9rZT1+skewWG2gaxz/
+ FZjcOMbLolB5ElH2FqCr8/dkzf97f5Q5onXnNi+b0ahOkxSSO4D3SDB/72uMQVm3yn1Z
+ xKxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/sEJ4sid41XmBlXnr0zlW9i6O1BZRU5NjHT7ScjEx0zpy7LqhjfCzIVP7r5SEnr7S9qpE8uo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzbRWlu8dIcYLzrGuuhqHtAk592ogqA382TkE+60nw9zuErQeSd
- HQ9Aq94NGuM0RJjanq5KqFjmQtHsTjqj4d9gJRzXgEyRdOFFpRt+xU7RP4IYR0gPnxc=
-X-Gm-Gg: AZuq6aLtKgIYjyIaPvlsTOIrwnWDo6QOOuZ0wNCUjSj7p/l1Nr/ofUNpIMY7Cku5tYf
- MgWbtBH1iigKaX1Fdilj8gjGobJA3rMsgUMGkEAtF6tuiyDyslRmPXypTZpLQ3W7e1TPnROF4Y7
- tae8y0XDng7FmTP0+7XU4+2k36WiRCe7a2KsqIb7+G0SgkQRtWau7BGaEw/+GkMNmIUPbKDxm0J
- kX4S+1217UCB2AdT2fvdUu2hGtsW0aYj7uaRKaJDe4HCmT6vRqPdMUo5wSPmkgIT64NEc9ixMkQ
- CuG2Q6WhvLuNZCwzXW3CShOE6WfErP4IFvZ0gn1BOJddlY6JRnmDvkJlmwPiYtg5DWay9Gr+DU2
- D5EpvdAqtkyM0B2r7C14rUUQ+iEztXtMamQw/Pi4N6rB24YJ1Vv0AWEfja0OA2j4xdvXvRFm2aG
- fJ0e+nCh4T14HdLNzUfzzH16DWr44ZC/gpBTn3nUcqQSIldRLV/yEb6J5Fm1AWtoLchD9jPG1bx
- O3pBB9ii/iXIwBJEYn4N8wM5M/sptMwzSHrQ4dCcVFaa1kgsuuTq171rgp0mFC1RxGGcHEYyKHm
- B1l13WFXYSVSm9oddhtnlNLau8G91BT/s5T3b6ohhFs6oXhefueLgxk0FhbfJqcfq1JOjYMqcaB
- svtN0voea2x5gbfzCE/cpCyVC0CBDPfhrSwpWfqPPH6JUaq2/m8XIqCxotL1seOcGMXCWDE2YkP
- MasoVSySw7lf4JKCrR/Op/Y2QJ1bOtqhCzcYnJ3JeviHud+PMefshIlTLaX1gPNRe2Xq0=
-X-Received: by 2002:a05:600c:314f:b0:483:6fe1:c057 with SMTP id
- 5b1f17b1804b1-48373a3f3bcmr24227145e9.21.1770986456826; 
- Fri, 13 Feb 2026 04:40:56 -0800 (PST)
+ AJvYcCVZNxf/HtviQUDkwtChsrVNwo0lRMLfU3tVCfGkomS+08ROqBiHu/jHnIPbT3N1gLuDuGqiT18=@lists.denx.de
+X-Gm-Message-State: AOJu0YwkeE4NGpMoB8XZLNonZpBDnqERpnbi4MSsYHl2g98JX/dHcomy
+ WWlwmK1P1jsohept7Dv+gsrSrKaSkqSsKuP5MWSDRcu14FNkFt1xybZ+jijYA+hKZ+I=
+X-Gm-Gg: AZuq6aID/8c6BUOHyvPXp1Dy+FyUAxIaUO6hM2eO5972rdQE83A+RxtBZFMCjLLwDJ7
+ Hrn1DSj90hzBnAHU+tIGAtQLQyyJLgNtFXmR/DRAdgW7BrIpjQuOBOS3KMVh+Byp6iRz+FqF48D
+ mm26u2X9CzYzDKvuLIpv6C/tySTounRTJZ+5DgP82l1qLfEGaoxwTWWUWlVbVc6gpk2Zck6Lw1+
+ jErZ0FlyfyUmE55jDqnVkeLasK71FhGekYlVr4aSWIQ9J4aE5BIJya8DD0Jc/LhRdi1XHphX91H
+ nhh/9YZ/hX8yleCUH/Alf+j34VKwy+iyP4+my7CvM5crgDuu21V5YMimtpcA+Js9dq36qrkAMNY
+ F8WQUnGSzn4Snjv6L9V+tPFUQzoQbdB+eZ9fc+58iMbIstLuOEJN4MYLnPb+LnPxGV/olkur93I
+ 2lH5r25mRQ0RMe4J6oxBokQzjqeA9Leka8sdEf/4hYN7U0InCfz1CRgArsNJ6FbrlYJty1cSj9v
+ 3LiNHpZc4yx/M1YPrbJ++dmv9nYh1OJYgwDXeth2YRJRhlV8eYlFAOBnSSuLLvNWol9LB99ithC
+ cpxIPTVfbkW37aR7D1uZCMYl+hpa0QX7vE2ArRSkK5y05ScdX5Zm9BEEpWXIzo3aVZ3jwLG4M89
+ rIgkrPe6dL/IjKDHKpnsg6J4X9DIpRKOQgDZPwIn0u6TsKnknM/j6runoQ4ogcwUXJL41u1Qcqz
+ TzjehGb8bYZr53/Cwkps6GZ+SnDkTQ6mpYElqRr1boHjVvb+JQzRXk9ILk8bk3eYUkcIE=
+X-Received: by 2002:a05:600c:3f0b:b0:46e:4b79:551 with SMTP id
+ 5b1f17b1804b1-48373a74705mr31541835e9.31.1770986494556; 
+ Fri, 13 Feb 2026 04:41:34 -0800 (PST)
 Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48371a34d66sm19366045e9.20.2026.02.13.04.40.55
+ 5b1f17b1804b1-48371a420b1sm15477465e9.28.2026.02.13.04.41.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Feb 2026 04:40:56 -0800 (PST)
+ Fri, 13 Feb 2026 04:41:34 -0800 (PST)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 13 Feb 2026 14:40:55 +0200
-Message-Id: <DGDUAXWN8ZAA.8A73T56SKN9C@linaro.org>
-Cc: <trini@konsulko.com>, <quentin.schulz@cherry.de>
-Subject: Re: [PATCH v5 0/6] UEFI Capsule - PKCS11 Support
+Date: Fri, 13 Feb 2026 14:41:33 +0200
+Message-Id: <DGDUBFBIMGND.1KJ36N75D9HOD@linaro.org>
 From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-To: "Wojciech Dubowik" <Wojciech.Dubowik@mt.com>,
- <simon.glass@canonical.com>, <u-boot@lists.denx.de>
+To: "Wojciech Dubowik" <Wojciech.Dubowik@mt.com>, <u-boot@lists.denx.de>
+Cc: <trini@konsulko.com>, <simon.glass@canonical.com>,
+ <quentin.schulz@cherry.de>
+Subject: Re: [PATCH v5 3/6] tools: mkeficapsule: Fix dump signature long option
 X-Mailer: aerc 0.21.0
 References: <20260128080515.1275941-1-Wojciech.Dubowik@mt.com>
-In-Reply-To: <20260128080515.1275941-1-Wojciech.Dubowik@mt.com>
+ <20260128080515.1275941-4-Wojciech.Dubowik@mt.com>
+In-Reply-To: <20260128080515.1275941-4-Wojciech.Dubowik@mt.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,67 +105,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon,
-This has ended up on my patchwork, but I wasn't cc'ed.
-I'll have a look at the mkeficapsule changes soon, but do you mind if I
-re-assign it you since it's mostly binman changes?
-
-Thanks
-/Ilias
 On Wed Jan 28, 2026 at 10:05 AM EET, Wojciech Dubowik wrote:
-> Add support for pkcs11 URI's when generating UEFI capsules and
-> accept URI's for certificate in dts capsule nodes.
-> Example:
-> export PKCS11_MODULE_PATH=3D<pkcs11 provider path>/libsofthsm2.so
-> tools/mkeficapsule --monotonic-count 1 \
->  --private-key "pkcs11:token=3DEX;object=3Dcapsule;type=3Dprivate;pin-sou=
-rce=3Dpin.txt" \
->  --certificate "pkcs11:token=3DEX;object=3Dcapsule;type=3Dcert;pin-source=
-=3Dpin.txt" \
->  --index 1 \
->  --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
->  "capsule-payload" \
->  "capsule.cap
+> Only short option has been present. Also rename dump_sig
+> to dump-sig to match with other parameter names.
+>
+> Fixes: 16abff246b40 ("tools: mkeficapsule: add firmware image signing")
+>
 > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 > ---
-> Changes in v5:
-> * add bin wrappers in test for all external tools
-> * improve error handling in python test
-> * fix data types in python
-> * standardize option name in mkeficapsule
-> * fix typos
-> Changes in v4:
-> * adapt mkeficapsule python support to dump detached signature
->   for authenticated capsules
-> * verify detached capsule signature with openssl after generation
-> * use p11-kit to figure out location of softhsm2 library
-> * fix missing long option for dumping signatures in mkeficapsule
-> Changes in v3:
-> * fix write file encoding, env setting and extra line in binman test
->   after review
-> Changes in v2:
-> * allow mixed file/pkcs11 URI as key specification in mkeficapsule
-> * fix logic for accepting pkcs11 URI in binman device tree sections
-> * add binman test for UEFI capsule signature where private key comes
->   from softHSM
-> ---
-> Wojciech Dubowik (6):
->   tools: mkeficapsule: Add support for pkcs11
->   binman: Accept pkcs11 URI tokens for capsule updates
->   tools: mkeficapsule: Fix dump signature long option
->   binman: Add dump signature option to mkeficapsule
->   binman: DTS: Add dump-signature option for capsules
->   test: binman: Add test for pkcs11 signed capsule
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>  doc/mkeficapsule.1                 | 4 ++--
+>  tools/binman/btool/mkeficapsule.py | 2 +-
+>  tools/mkeficapsule.c               | 3 ++-
+>  3 files changed, 5 insertions(+), 4 deletions(-)
 >
->  doc/mkeficapsule.1                            |   4 +-
->  tools/binman/btool/mkeficapsule.py            |   8 +-
->  tools/binman/btool/p11_kit.py                 |  21 ++++
->  tools/binman/entries.rst                      |   4 +
->  tools/binman/etype/efi_capsule.py             |  17 ++-
->  tools/binman/ftest.py                         |  66 ++++++++++
->  .../binman/test/351_capsule_signed_pkcs11.dts |  22 ++++
->  tools/mkeficapsule.c                          | 113 +++++++++++++-----
->  8 files changed, 221 insertions(+), 34 deletions(-)
->  create mode 100644 tools/binman/btool/p11_kit.py
->  create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
+> diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
+> index a726149ba2ce..d6653ec42472 100644
+> --- a/doc/mkeficapsule.1
+> +++ b/doc/mkeficapsule.1
+> @@ -121,8 +121,8 @@ Specify a monotonic count which is set to be monotoni=
+cally incremented
+>  at every firmware update.
+>
+>  .TP
+> -.B "-d\fR,\fB --dump_sig"
+> -Dump signature data into *.p7 file
+> +.B "-d\fR,\fB --dump-sig"
+> +Dump signature data into <capsule-file-name>.p7 file
+>
+>  .SH "GUIDGEN OPTIONS"
+>
+> diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkef=
+icapsule.py
+> index f7e5a8868495..f2ac654db81e 100644
+> --- a/tools/binman/btool/mkeficapsule.py
+> +++ b/tools/binman/btool/mkeficapsule.py
+> @@ -16,7 +16,7 @@ Options:
+>  	-p, --private-key <privkey file>  private key file
+>  	-c, --certificate <cert file>     signer's certificate file
+>  	-m, --monotonic-count <count>     monotonic count
+> -	-d, --dump_sig              dump signature (*.p7)
+> +	-d, --dump-sig              dump signature to <output file>.p7
+>  	-A, --fw-accept  firmware accept capsule, requires GUID, no image blob
+>  	-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob
+>  	-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index a61557b73bef..e9b9ffe9b774 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -56,6 +56,7 @@ static struct option options[] =3D {
+>  	{"fw-revert", no_argument, NULL, 'R'},
+>  	{"capoemflag", required_argument, NULL, 'o'},
+>  	{"dump-capsule", no_argument, NULL, 'D'},
+> +	{"dump-sig", no_argument, NULL, 'd'},
+>  	{"help", no_argument, NULL, 'h'},
+>  	{NULL, 0, NULL, 0},
+>  };
+> @@ -83,7 +84,7 @@ static void print_usage_mkeficapsule(void)
+>  		"\t-p, --private-key <privkey file>  private key file\n"
+>  		"\t-c, --certificate <cert file>     signer's certificate file\n"
+>  		"\t-m, --monotonic-count <count>     monotonic count\n"
+> -		"\t-d, --dump_sig              dump signature (*.p7)\n"
+> +		"\t-d, --dump-sig              dump signature to <output file>.p7\n"
+>  		"\t-A, --fw-accept  firmware accept capsule, requires GUID, no image b=
+lob\n"
+>  		"\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image b=
+lob\n"
+>  		"\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0x=
+ffff\n"
 
