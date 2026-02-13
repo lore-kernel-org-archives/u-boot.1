@@ -4,98 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3855EEDF176
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 15:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A02B2EDF17C
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 16:09:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63F1383C4B;
-	Fri, 13 Feb 2026 16:46:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CFDA883015;
+	Fri, 13 Feb 2026 17:09:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hq/Gy+th";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WHUbtfiy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C9FF83015; Fri, 13 Feb 2026 16:46:47 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 3EDD483AA9; Fri, 13 Feb 2026 17:09:00 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 092F483015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 16:46:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3176182A9E
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 17:08:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-5032e59c8d3so1144461cf.2
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 07:46:44 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso1035362a34.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:08:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770997604; x=1771602404; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+/kLyY/7hxaIH+mHrPOHGgwrLvxdjshEB8qD1NlbYxU=;
- b=Hq/Gy+thHb8KmTPRCeeOCFg+BquMyomc2+o8GRzQK1IbxlXILqPhaa3YQMVfVdFhTk
- Zlwx66J6iulODFwBFHANjrnpSrXp2ut8mrUjzLNkcoj6lTvSkq9sjmVy/MH+WHbWRWRg
- cX//gGRXBC0jaCcJq36dKnz00LPkmE+dYrN2VeN3iR2COLJlEdZ2hnNq8X9QwcXi1Xzx
- xZfmKMGr4dfZ47FiJ0o+9qk9T+PeXj+ZkGkvWk3HX0nsZrArxZ+mvR8A439+6M5bbryN
- mDdDlEcTemADsi8mUBqH8+uOfp8w13tQ2QWtFuDfvG8XO8Fh/vkkvVdBHrGC/1mHZg/K
- y4ag==
+ d=konsulko.com; s=google; t=1770998937; x=1771603737; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=N4j1e5GgqKTe7of2VpZmUSB8vvlhEG1c/GRajm9SVC0=;
+ b=WHUbtfiyxSzyq5P5WhBA4TxyqbGfMX/ha5mlPKuVQvaCWP192QQ/kQed4LnzuYXDIT
+ 5j/bfOvlLO/9xH7gUXGvQfY/zUBt3nT/fa/Cxf9ufDjw6c4KXz85sXXRlADxYtIC8L2O
+ VDpyFYUBn6gdzU44h5rQVEAhifJf5MfUYKBMs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770997604; x=1771602404;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+/kLyY/7hxaIH+mHrPOHGgwrLvxdjshEB8qD1NlbYxU=;
- b=kU4trKrZYBIHy0pRQsLpvKXgMImqfIFbayMgd9i5edwhtEyXFjgiONPUsH/tUhttAW
- SauzpXWezASeW+E85mu8RO4Tc47ox40tVlQy1wXGNmORuU7/am9NtI8dxrG3oLbDty+5
- sqTWujLAf2N0lymyUNgLIDg9qJ9DFE6PnZOYXtmnZftiqrsdGZ/vaFw4MWoVtCQxLXfD
- qNwZCG3GohV0Zd0LNvdIBs9auDgW4GXuK3vfX0wV9/VZKpNJy9PQwLcUpDeN423OKKa5
- ZYtSJ6ItH6t27NAlpYJLk96Mov0orHauU6aDa9qICOXA6X7RcvmSMLxja8ld45/1mbiW
- HoMQ==
+ d=1e100.net; s=20230601; t=1770998937; x=1771603737;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=N4j1e5GgqKTe7of2VpZmUSB8vvlhEG1c/GRajm9SVC0=;
+ b=bL7fnGXYSQ9ZPAKYtimOovKyrFQr1SlVgzLTUGakSY0NBu2h3TdjZIvY7xzOZi+4Pg
+ EOip7W29j388TG4ZRB4NUQm/FWL8AbbD0sGewsuAnx0p3o0kCVmNujQ06gILLFJH8lb7
+ TE9edt7W1BmMrkas2oQHKY1T5D7zprNVXZVp4ElMObX4kDz5vObI8iO29CtRRqv2EXAu
+ rMpmvu+VxuWNQp4m1d/rz1928yMtzLANQH2noxiX4pStz+rVfMubs4bpHojUpSOQ2ro0
+ CK6WSEPSQLJztSFD3G3QaHVhQ+0o2BBlBaYI5DIfafBB70IXlEwlL7V0f6KM9gRGwWg9
+ xp0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvaCWVNdKmHd705SIdwicPylxs6UCX0WWUZLyUtiniRQcETH9ylJxMVsx6PFStSX3My+0BuCY=@lists.denx.de
-X-Gm-Message-State: AOJu0YycIwdQGef7pSDB/HaoIiGh2ZilyznOO+aarCAWLarW6Fv0btVn
- G4RqtlErSza2p0nP+IrmVA2BB6m0ygiSA5NZgRsSwxqSS3brmeNDV8ZE
-X-Gm-Gg: AZuq6aJM0khM3bx93BBLJqkNEd7WavHrwIKpjIn4JdhhDgG5bvox5sHtF51nEK/wn0y
- NOWbd+gpwve/KR037WGjVT1RxRhMlEFYJlDsGTKjKyjjsT9RYFWl9uQ9C5i9a3G7YO4PtgIgPkh
- SNZgZNRF5x9WxZVNdQjslmOLitEQVkfWeB1h9+3nOfyCiMS11eklwNAkCteBd12jOc237tmFpIC
- Cu+sFyZN5sWopvtefQJb71jqftZDTbOliVDu5TrjhLnGU51EXP7ZjD5InACNnEE21G2dMYN1o4X
- 3ZJCPyu8dtOfhWE4sNFIEcTd9Wt/huonF36TpU88ciYakrqW3XkcOoOel1RBgvuM1zhSkKlmj0P
- adKRB3giBWuq5LNa6nk7ETedJ9JwHCsoHHvInYUlUPWR8KANpL7zxJ/VcUqQkSAJHXnwbYPXMLt
- AE1Ob+8pZ70qNAOV0AyXtOnpouobtd9JWBuz6s6b/6NdJr+omUJur/FcrHVfmDwoXKN87tL8KC7
- RUyRA==
-X-Received: by 2002:ac8:7f0e:0:b0:4f1:840a:c90f with SMTP id
- d75a77b69052e-506a677c49amr27994891cf.2.1770997603652; 
- Fri, 13 Feb 2026 07:46:43 -0800 (PST)
-Received: from ?IPV6:2600:4040:4476:3800:2d8:61ff:fe7c:5d59?
- ([2600:4040:4476:3800:2d8:61ff:fe7c:5d59])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cb2b20f240sm633932985a.40.2026.02.13.07.46.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Feb 2026 07:46:43 -0800 (PST)
-Message-ID: <f66468a3-724f-2666-c043-84132ba84e3f@gmail.com>
-Date: Fri, 13 Feb 2026 10:46:42 -0500
+ AJvYcCW86UFpSbqF2xjsF05PwKpvPlfkBQDM2pvea0SWDXuor6yN1WCvo1s8eiZk2ZsACepYZneChwM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzC6VglPQ0RpwqIxNLa4GeG8E82/Va0qj2azHStAHQLVYsgygUj
+ E9RLUdjiM6v0ZqNDJiq/noE15XNXNyq0+0WRuxh0SglxdwWd59/rukDXQS3Vsh+NRLIrazj0aVQ
+ 19WdyTcg=
+X-Gm-Gg: AZuq6aJH7SMfl0MoiOgpxqNgR39YeU1DWih8g2yiORlZmVs8DEFAnIvqsbuQrwV5DFs
+ fXWPURAtED8DVX54hk++Xm28nO/RQI47D4lKzjDsq310M6yk7oWFJqm2SWFLj9rgC94cMkNyuQB
+ qBIzdbaVLLavqEk3JR/8YiVwUOMzkzM5kJGBPabJLVruM69bsNzGdJ4s5vnBUZCrJVIuRycH5cY
+ VfNY5fSwUH5E6V6WXaYX0y/x7GPhqa9YY/J7iYbPEron6CEW5TZqBt3mdr9VAfMndHDQDcN0s19
+ 9aqIISaibiETX5tKh0Tf989iDyK9DqrYytAewNubGKRr1RTRlFootY3aGRrA51VPZzJLFwbsnZ6
+ rYTYOATVy6uE8vzwZiydgoTyOEDUW1O/pWRrLDguzeAGZ7+smQwllpU6CQL69Y6pm2bp4F1QEiR
+ WDq5ykfTUuyKUgxZ4LUSgaGtYeZkInUnr3KqHscH9lO4BVEHyS9xAobCxgEMW7jW9oc3e7sM/XJ
+ N7S4eGXlRwbtgAXvRkcPoOv6SIxg0Ncy72cK88rCDRLXBONPpXP9ggHEf763A==
+X-Received: by 2002:a05:6820:f02f:b0:674:4b83:8720 with SMTP id
+ 006d021491bc7-678208a4ec0mr243424eaf.13.1770998936672; 
+ Fri, 13 Feb 2026 08:08:56 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-6772583294bsm1442528eaf.14.2026.02.13.08.08.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Feb 2026 08:08:56 -0800 (PST)
+Date: Fri, 13 Feb 2026 10:08:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Zixun LI <admin@hifiphile.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for AT25SF321B and
+ AT25SF641B
+Message-ID: <20260213160854.GA2374632@bill-the-cat>
+References: <20250701-nor-v1-1-ca3435d582d2@hifiphile.com>
+ <CA+GyqeZ+vj0cQMT51=OTTPaya26p-fiwNJLzJqUC7Q1O3NmP1Q@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2 1/6] reboot-mode: Use actual cell size instead of
- sizeof(u32)
-Content-Language: en-US
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>, u-boot@lists.denx.de,
- sumit.garg@kernel.org, casey.connolly@linaro.org, u-boot-qcom@groups.io
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
- neil.armstrong@linaro.org, peng.fan@nxp.com, quentin.schulz@cherry.de,
- n-francis@ti.com, xypron.glpk@gmx.de, h-vm@ti.com, justin@tidylabs.net,
- jamie.gibbons@microchip.com, ycliang@andestech.com, me@samcday.com,
- sughosh.ganu@arm.com, gchan9527@gmail.com, ilias.apalodimas@linaro.org
-References: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
- <20260213112717.1256823-2-aswin.murugan@oss.qualcomm.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260213112717.1256823-2-aswin.murugan@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6rwOFs55kYbSUeqg"
+Content-Disposition: inline
+In-Reply-To: <CA+GyqeZ+vj0cQMT51=OTTPaya26p-fiwNJLzJqUC7Q1O3NmP1Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,54 +102,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/13/26 06:27, Aswin Murugan wrote:
-> The nvmem reboot-mode driver hardcodes sizeof(u32) for NVMEM read/write
-> operations. This fails on platforms where the reboot reason storage is
-> smaller than 4 bytes.
-> 
-> On Qualcomm platforms with single-byte PMIC register storage, attempting
-> to read 4 bytes from a 1-byte cell causes the NVMEM subsystem to return
-> -EINVAL, breaking reboot-mode functionality.
-> 
-> Replace sizeof(*mode) and sizeof(mode) with priv->cell.size to use the
-> actual NVMEM cell size. Also initialize *mode to 0 in reboot_mode_get()
-> to ensure a clean state for cells smaller than u32.
-> 
-> This allows the driver to work with cells of any size, from single bytes
-> to multi-byte words.
-> 
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
->   drivers/reboot-mode/reboot-mode-nvmem.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/reboot-mode/reboot-mode-nvmem.c b/drivers/reboot-mode/reboot-mode-nvmem.c
-> index b9af242520a..60307cce49f 100644
-> --- a/drivers/reboot-mode/reboot-mode-nvmem.c
-> +++ b/drivers/reboot-mode/reboot-mode-nvmem.c
-> @@ -18,15 +18,16 @@ struct nvmem_reboot_mode_priv {
->   static int reboot_mode_get(struct udevice *dev, u32 *mode)
->   {
->   	struct nvmem_reboot_mode_priv *priv = dev_get_priv(dev);
-> +	*mode = 0;
->   
-> -	return nvmem_cell_read(&priv->cell, mode, sizeof(*mode));
-> +	return nvmem_cell_read(&priv->cell, mode, priv->cell.size);
->   }
->   
->   static int reboot_mode_set(struct udevice *dev, u32 mode)
->   {
->   	struct nvmem_reboot_mode_priv *priv = dev_get_priv(dev);
->   
-> -	return nvmem_cell_write(&priv->cell, &mode, sizeof(mode));
-> +	return nvmem_cell_write(&priv->cell, &mode, priv->cell.size);
->   }
->   
->   static const struct reboot_mode_ops nvmem_reboot_mode_ops = {
 
-I'm not sure about this. drivers/power/reset/nvmem-reboot-mode.c in Linux
-always writes sizeof(unsigned long), and this is checked against the nvmem
-cell length in __nvmem_cell_entry_write. We should try to keep our behavior
-close to Linux's.
+--6rwOFs55kYbSUeqg
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---Sean
+On Wed, Jul 16, 2025 at 09:47:56AM +0200, Zixun LI wrote:
+
+> Hello, any update on this ?
+>=20
+> Zixun
+>=20
+> On Tue, Jul 1, 2025 at 5:16=E2=80=AFPM Zixun LI <admin@hifiphile.com> wro=
+te:
+> >
+> > These flash chips are similar to AT25DF321A with Quad I/O capacity.
+> >
+> > Signed-off-by: Zixun LI <admin@hifiphile.com>
+> > ---
+> > Tested on SAM9X60 custom board.
+> > ---
+> >  drivers/mtd/spi/spi-nor-ids.c | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-id=
+s.c
+> > index e7e97780d7cdd27104fd7db900b3a779d2188922..18bc6f2f06e9a02594da6ad=
+1880489e78458a60f 100644
+> > --- a/drivers/mtd/spi/spi-nor-ids.c
+> > +++ b/drivers/mtd/spi/spi-nor-ids.c
+> > @@ -76,6 +76,8 @@ const struct flash_info spi_nor_ids[] =3D {
+> >         { INFO("at45db641d",    0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
+> >         { INFO("at25sl321",     0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
+> >         { INFO("at26df081a",    0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
+> > +       { INFO("at25sf321b",    0x1f8701, 0, 64 * 1024,  64, SECT_4K) },
+> > +       { INFO("at25sf641b",    0x1f8801, 0, 64 * 1024, 128, SECT_4K) },
+> >  #endif
+> >  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
+> >         /* EON -- en25xxx */
+> >
+
+Sorry for the delay. For ease of future re-syncs these should be in the
+upstream linux kernel first, and then brought to U-Boot, thanks.
+
+--=20
+Tom
+
+--6rwOFs55kYbSUeqg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY9MkgAKCRAr4qD1Cr/k
+CmZjAQDAP2v6GDWEQiN+KGCsURKBAO7w+99R36lLHUU5yQf0gwD/UCJK5zczdua5
+XRy6MLSlZjh3KLwlpBLjGses2KkE1gA=
+=bXYn
+-----END PGP SIGNATURE-----
+
+--6rwOFs55kYbSUeqg--
