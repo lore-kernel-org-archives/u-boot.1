@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC371EF99DF
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 22:09:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4097EF99E2
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 22:53:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1377583015;
-	Fri, 13 Feb 2026 23:09:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D94B783AA9;
+	Fri, 13 Feb 2026 23:53:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DZ7SfGVx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e/rrTjwQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF45683AA9; Fri, 13 Feb 2026 23:09:33 +0100 (CET)
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com
- [IPv6:2607:f8b0:4864:20::343])
+ id AFDDD83AAB; Fri, 13 Feb 2026 23:53:13 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37DF280B98
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 23:09:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 963E783015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 23:53:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7d1959ba05cso592208a34.2
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 14:09:31 -0800 (PST)
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-895341058b1so18970356d6.3
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 14:53:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771020570; x=1771625370; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=opAL71r5n3DwhiigD2ykNmc9/KYc8RBf4OWHczd2mf0=;
- b=DZ7SfGVx16YJ3iccTwJILWt34bM9ADbl61I2S3n3RS3hcIMCsKFE3FINm1JFnuploD
- Zy9/VBGBgZis2vn9sMDgcVAJI0ThagVw9hK62VLLNqR7dib8fBveL5rBK0djhA5HTYKV
- mxqTbKLI3zBLKFRDrkfuo+PRjZFZRTV+ch8Go=
+ d=gmail.com; s=20230601; t=1771023190; x=1771627990; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=y2vgbbYNxb1YE5Afaqb43J+kLQpyTfQKmkxu81ZpN4A=;
+ b=e/rrTjwQgWCsT2KYpOFzn4s9GAYh1Se9MSL+8VtvIApPG/I1lQg7YEEDJi3589Vid7
+ 9vPAW8J+pi94N2jy6TVTLIGHw4PIusIo26f2U+p9cg5d6ZJZCsjnQsbqe8YkNIikp5p6
+ feeC3Hsz965BECLJ9Uf3n21G4KZJbtssXxHZm6nqPxFTOe6GsRnFuAjF3VrptZb6g4wq
+ 32HttDzGgSAE6H1VoLqpBVQiy8rSDK8/opvVWQ0yLdhFx9B4vk6BrBsjwZlTyu6vsIeO
+ pNyjsEMcDa8rDJzTsvhsLIomXlpUbwyV0Mpm8Hyu5HhMs449uu5eqo2dnXOdtai/JvH0
+ wgvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771020570; x=1771625370;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=opAL71r5n3DwhiigD2ykNmc9/KYc8RBf4OWHczd2mf0=;
- b=VPY68MTEW3L9K/os6fyoLOyyyxbaJ8mSJP3ytBK3JqPoyrqytkPY8y78qrWNh2bhH0
- z37xzP3CNxxjZ+IOgV26G9OazLnXJErbdUfQUFyn/KTWhU0US991fPxq0BKq4yBkqE82
- wRtXiXv1ShPmgBht3qx8bSLrDZhfs262bQi/t9hInrCwCz/h+Ptzzu7RAzG4jKFB4zZs
- oNvtE8OQgswGQNjwSJ2GvTQAMEBfAWGp3Tg1NIQ6qdmYY1MMIDkEIH4a2pW7jApSLsqF
- Opyk661DnRtgoDfT04ljB0yI2dkkiq/WUWSBKg/Ujl9zGhWvXDZshSmXz7hClMpoaIyD
- fahw==
-X-Gm-Message-State: AOJu0YwNQwC07ivlSFRJMIkInngpky8YT79J7f9GZPCROJZU011vhSfd
- A5PvsbxenXnfnRrCsb4Kbavfiv9vV5z1de2uKJHriSN8VujEHjAk7UOWbyQGYIFVVGo7vOumnm/
- Go8SeJ1Q=
-X-Gm-Gg: AZuq6aJRXCu4WxhfO80XKiF44ajaWHPhz29H6JZ04LV/2+x4CKYZsq8rq2SK6HqdekA
- XnaEyOXMTwUWiqpHHTTw9FfWiAnsfA9Hlci0b+rYX9T0Duj6AtwWaZ6xlho6yRY6gWLOLKjHeV/
- LSaezlQn/mWPXVOIoPGlGNCqFZ4rNn3Eoy2z26+atdzf3OB2OnYZCqpM35J649acEnkGaEBFWAr
- PUvQZgB7yjmCKcyLblKkrQTsqQVEJEVQ5pda5xu6+zjdekUAX0KWw8ED9OHBeIRkTznjmcm3PVZ
- qHIwJKSyp8SZNua+7diYur2zAnkrud/qtIFH+3KfcieNGLv0tzgy6flWTaTJjVxj1bTPoRD2Bhg
- BOnwcVMvwgojpbVPYy60xOxkd3wRrcr3ZClHdgbWt8AQeTakPDVIv/YHnBCWn8XNwdCoBOSghL/
- kiE3ChynuYZdxHAXTY++FM1pYHR7MIjt9Z/ARJDTo+qMA4H551TaKvc94XHgQR732j+3wOhomXr
- +Mb4JI7ApM+xTlfEC0hBlTfGuZ6KlichZVJUUI6Gp3JpC3kZFc=
-X-Received: by 2002:a05:6830:4988:b0:7d4:aa58:2bef with SMTP id
- 46e09a7af769-7d4c4b313f6mr2091921a34.34.1771020569839; 
- Fri, 13 Feb 2026 14:09:29 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4b99c978csm3916263a34.28.2026.02.13.14.09.28
+ d=1e100.net; s=20230601; t=1771023190; x=1771627990;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=y2vgbbYNxb1YE5Afaqb43J+kLQpyTfQKmkxu81ZpN4A=;
+ b=c51WiWoENoestZHZh/scuC6dIO3ZXQk8VM3k1hjTXwwN+peQgpykazGrBBO1stMgao
+ TOEGQ9DzHu/v/y+eNcuhYO3P65I26i3UnCjpAsUhiqlIUV/LkcnHAwDLtL6D6bxf2rP3
+ LuiTrP4RGzAKRkXXqBfjAwOCMjrcs3LbM7FPLlBlcsd5th9VUkzK9jHD+2CkibGdksr6
+ HXuMzxKYxQnMKxJLHVzZA+w0MLqsnD2rwTMX0+rR/ieJC2gJJueGR4DJZ+mupqkmzQbD
+ 0KynIzhksJVgK7iCM+uXdAG/Tjb2xB9mXcd23C1Abs32jH+ZrMOAKdHxaWQ2ZD7StSDo
+ j7HQ==
+X-Gm-Message-State: AOJu0YxWtyMzhRy2WgjkXbn4byqKYWFzyUzvxVmys0gf3Mp6mNI1N7iw
+ B0cSQt4omP5h0ef+Seqe0j3losXVbnNVui/p3omQUEM7scnDOXEbwmS4L4EQ9Q==
+X-Gm-Gg: AZuq6aLcJdVmDH+6rkGT/eekPBT3NW2TaNERDqTMu4we9qHVuQqPo4AnTdh8MrhlL6d
+ 9MvKoBv08DdlskZMC1q0ohBKVO3hL3m19Zf+iC7wB+nQcooX+eBdxnwWG8hkVgNhvKtPvrE/rgW
+ QLG2b66olEIATeQwkcF5+li+DgWY9xU9WcmpeoFHa4gyevY1bzDIwE4/jD0itrxO6zz2bJVnbjV
+ QGM0wtG2TfywOKkxE8zROMfdzYVj5MZruUzSI7jwZR5z2xBAWNGfpmOEAGkaa1RmKd8CEVntlN0
+ xXnjsmm+XTa/5s6Nw+7oUPGhmazZenn+RTXGtHF55vR7Egi0r7DMIxhH8WEo6YFD/vxcvAUOpqK
+ Pv8EaMNWtLJcAeyfhSVo8WbHNqrhFMyJMom1bc7nL7YMAeUxXk7qy3xAUBMjyLecPjgoLJGYt+4
+ QobIqz14BgrtVn3YltSpwUhCWvCX7fmtTG04whOhkxk3aIJbAdfkECPZ9bPMHPUgwYxm1u1BWKD
+ 6DR4kMAZUE=
+X-Received: by 2002:ad4:5962:0:b0:894:7e6f:f92c with SMTP id
+ 6a1803df08f44-897404c91a0mr17612636d6.58.1771023190269; 
+ Fri, 13 Feb 2026 14:53:10 -0800 (PST)
+Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
+ [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-506847ed9c4sm72845731cf.8.2026.02.13.14.53.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 14:09:29 -0800 (PST)
-Date: Fri, 13 Feb 2026 16:09:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Chris Morgan <macromorgan@hotmail.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20260213220927.GN2747538@bill-the-cat>
+ Fri, 13 Feb 2026 14:53:10 -0800 (PST)
+From: Raymond Mao <raymondmaoca@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@riscstar.com>,
+ Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Baocheng Su <baocheng.su@siemens.com>,
+ Li Hua Qian <huaqian.li@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Samuel Holland <samuel.holland@sifive.com>
+Subject: [PATCH v6 0/6] Implement all missing SMBIOS types required by distro
+ tooling
+Date: Fri, 13 Feb 2026 17:52:45 -0500
+Message-Id: <20260213225254.2544596-1-raymondmaoca@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="F6s/T6MOAaXCJOZa"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,80 +103,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Raymond Mao <raymond.mao@riscstar.com>
 
---F6s/T6MOAaXCJOZa
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series finish the last missing puzzle of required SMBIOS types by:
+1) Fixing duplicated handles when multiple instances exist in one type;
+2) Implementing the rest of required types 9/16/17/19;
+3) Adding version control when printing properties for all types.
 
-Latest Coverity Scan report, now that it's back up and so a little out
-of sync with the usual schedule.
+Type 9/16/17/19 are generally DT-based, the idea is to write these tables
+using a hybrid approach:
+Explicit DT definitions under existing '/smbios/smbios' take precedence,
+with fallback to scan and interpret values from the entire DT.
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Fri, Feb 13, 2026 at 4:03=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+Moreover, all below APIs:
+smbios_get_val_si()
+smbios_get_u64_si()
+smbios_add_prop_si()
+are on top of sysinfo, thus allow vendors to get values from other
+subsystems by implementing their own sysinfo driver if needed.
 
+Raymond Mao (6):
+  smbios: Fix duplicated smbios handles
+  smbios: add support for dynamic generation of Type 9 system slot
+    tables
+  smbios: add support for dynamic generation of Type 16 table
+  smbios: add support for dynamic generation of Type 17 table
+  smbios: add support for dynamic generation of Type 19 table
+  smbios: print the properties only when they exist in a specified
+    version of spec
 
-Hi,
+ arch/arm/dts/smbios_generic.dtsi |   12 +
+ cmd/smbios.c                     |  365 +++++++++-
+ drivers/sysinfo/smbios.c         |    5 +
+ include/smbios.h                 |  151 ++++
+ include/smbios_def.h             |  250 +++++++
+ include/sysinfo.h                |    4 +
+ lib/smbios.c                     | 1151 +++++++++++++++++++++++++++++-
+ 7 files changed, 1905 insertions(+), 33 deletions(-)
 
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
+-- 
+2.25.1
 
-   - *New Defects Found:* 1
-   - 2 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 1 of 1 defect(s)
-
-Defect Details
-
-** CID 328330:       Integer handling issues  (NO_EFFECT)
-/drivers/usb/dwc3/core.c: 106           in dwc3_core_soft_reset()
-
-
-___________________________________________________________________________=
-__________________
-*** CID 328330:         Integer handling issues  (NO_EFFECT)
-/drivers/usb/dwc3/core.c: 106             in dwc3_core_soft_reset()
-100     done:
-101     	/*
-102     	 * For DWC_usb31 controller 1.80a and prior, once DCTL.CSFRST bit
-103     	 * is cleared, we must wait at least 50ms before accessing the PHY
-104     	 * domain (synchronization delay).
-105     	 */
->>>     CID 328330:         Integer handling issues  (NO_EFFECT)
->>>     This greater-than-or-equal-to-zero comparison of an unsigned value =
-is always true. "dwc->revision >=3D 0U".
-106     	if (DWC3_VER_IS_WITHIN(DWC31, ANY, 180A))
-107     		mdelay(50);
-108
-109     	return 0;
-110     }
-111
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
-
-Best regards,
-
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---F6s/T6MOAaXCJOZa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY+hEwAKCRAr4qD1Cr/k
-CkyTAQC9zBQ+334H2+fOfidsozanW9CGGWhejhluZWWSH2xUfgD+JBd13Zm27+M5
-3mJdvtAZOr1hlbMMVmh7WQuLDigs1wA=
-=DQTi
------END PGP SIGNATURE-----
-
---F6s/T6MOAaXCJOZa--
