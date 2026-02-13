@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A02B2EDF17C
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 16:09:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B87EDF176
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 16:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFDA883015;
-	Fri, 13 Feb 2026 17:09:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D8B3B83015;
+	Fri, 13 Feb 2026 17:11:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WHUbtfiy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f3okLDsl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EDD483AA9; Fri, 13 Feb 2026 17:09:00 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 4A64D83AA9; Fri, 13 Feb 2026 17:11:29 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3176182A9E
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 17:08:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AFD782A9E
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 17:11:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d1872504cbso1035362a34.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:08:58 -0800 (PST)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-4638e238094so587950b6e.3
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:11:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770998937; x=1771603737; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770999086; x=1771603886; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=N4j1e5GgqKTe7of2VpZmUSB8vvlhEG1c/GRajm9SVC0=;
- b=WHUbtfiyxSzyq5P5WhBA4TxyqbGfMX/ha5mlPKuVQvaCWP192QQ/kQed4LnzuYXDIT
- 5j/bfOvlLO/9xH7gUXGvQfY/zUBt3nT/fa/Cxf9ufDjw6c4KXz85sXXRlADxYtIC8L2O
- VDpyFYUBn6gdzU44h5rQVEAhifJf5MfUYKBMs=
+ bh=wlPGzh5S7I2aY4ae/TCvL/1numjRiiEU7uywbn3/6ZE=;
+ b=f3okLDsluYXs1FmpuM4B/DGeoYgAsbH3mvJFyWUDOd7BJqCcXzycJo5zNL6tQek//f
+ OO6VDPEAIg3SvAXkaIkwXFK+YL0zvo16vott42/AI4hB6rjp/OpfKVbXwJ6jK4PwIsmh
+ DhS+mdkfUREzF2cUMCnu7Z1s7x6uuAQET4mmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770998937; x=1771603737;
+ d=1e100.net; s=20230601; t=1770999086; x=1771603886;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N4j1e5GgqKTe7of2VpZmUSB8vvlhEG1c/GRajm9SVC0=;
- b=bL7fnGXYSQ9ZPAKYtimOovKyrFQr1SlVgzLTUGakSY0NBu2h3TdjZIvY7xzOZi+4Pg
- EOip7W29j388TG4ZRB4NUQm/FWL8AbbD0sGewsuAnx0p3o0kCVmNujQ06gILLFJH8lb7
- TE9edt7W1BmMrkas2oQHKY1T5D7zprNVXZVp4ElMObX4kDz5vObI8iO29CtRRqv2EXAu
- rMpmvu+VxuWNQp4m1d/rz1928yMtzLANQH2noxiX4pStz+rVfMubs4bpHojUpSOQ2ro0
- CK6WSEPSQLJztSFD3G3QaHVhQ+0o2BBlBaYI5DIfafBB70IXlEwlL7V0f6KM9gRGwWg9
- xp0A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW86UFpSbqF2xjsF05PwKpvPlfkBQDM2pvea0SWDXuor6yN1WCvo1s8eiZk2ZsACepYZneChwM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzC6VglPQ0RpwqIxNLa4GeG8E82/Va0qj2azHStAHQLVYsgygUj
- E9RLUdjiM6v0ZqNDJiq/noE15XNXNyq0+0WRuxh0SglxdwWd59/rukDXQS3Vsh+NRLIrazj0aVQ
- 19WdyTcg=
-X-Gm-Gg: AZuq6aJH7SMfl0MoiOgpxqNgR39YeU1DWih8g2yiORlZmVs8DEFAnIvqsbuQrwV5DFs
- fXWPURAtED8DVX54hk++Xm28nO/RQI47D4lKzjDsq310M6yk7oWFJqm2SWFLj9rgC94cMkNyuQB
- qBIzdbaVLLavqEk3JR/8YiVwUOMzkzM5kJGBPabJLVruM69bsNzGdJ4s5vnBUZCrJVIuRycH5cY
- VfNY5fSwUH5E6V6WXaYX0y/x7GPhqa9YY/J7iYbPEron6CEW5TZqBt3mdr9VAfMndHDQDcN0s19
- 9aqIISaibiETX5tKh0Tf989iDyK9DqrYytAewNubGKRr1RTRlFootY3aGRrA51VPZzJLFwbsnZ6
- rYTYOATVy6uE8vzwZiydgoTyOEDUW1O/pWRrLDguzeAGZ7+smQwllpU6CQL69Y6pm2bp4F1QEiR
- WDq5ykfTUuyKUgxZ4LUSgaGtYeZkInUnr3KqHscH9lO4BVEHyS9xAobCxgEMW7jW9oc3e7sM/XJ
- N7S4eGXlRwbtgAXvRkcPoOv6SIxg0Ncy72cK88rCDRLXBONPpXP9ggHEf763A==
-X-Received: by 2002:a05:6820:f02f:b0:674:4b83:8720 with SMTP id
- 006d021491bc7-678208a4ec0mr243424eaf.13.1770998936672; 
- Fri, 13 Feb 2026 08:08:56 -0800 (PST)
+ bh=wlPGzh5S7I2aY4ae/TCvL/1numjRiiEU7uywbn3/6ZE=;
+ b=fwgsVWp/LIOcxMicOMgQvJqMXsYwcrStoEY7x05DfZwTAVP1AN/8E0q32J4b+kMP4J
+ hLTDrDYnDl30FrHrTJXbMlaYJkiIbnUmZdmnx413TSAmzFLQZTIeQDcQTGla2wK+SJNf
+ 6VwCC+gnpFDWxpADwJ5aI05cBsnenvtZhe9zpEDpw6Yr4RYB1fQL8nVYM0h7Nr2VkDjF
+ TMjbI/UNrZAw7YjhTmtVfvvucnb8B+ZT0Mb+s81i71T+HXaN8zA8psu+oB7R95s3+uKl
+ 8f3UhRyWTCJer+s8HztiT56pvY6TcNk/pkTwNGC9+31vT6KatVEFBaeCJQqRhkUs1P17
+ 6n4Q==
+X-Gm-Message-State: AOJu0YyGwkxtaNsYRbpg3u9uIwBycSdLExzNS3ImamA9m+VtCyXBmx31
+ awVMg0tk9ZtB1Yz5NzUbg8w38fmWiTxil8qn/74eLydAC2bJEXQ3Cuf/L5sws+x5pAM=
+X-Gm-Gg: AZuq6aIkX5xM5FR0n8xyiY4gVcxeafTlfjFL169FAosqaZlwsQjrxQMAjrALueqxQhc
+ fdpCDJZQT08zpWcXtWfgRvpmky6NAJDntUy+7qRzKJxC8efkPvMT80bHa61vUc2J+Fm2dP5HGFR
+ jZfmTLHrGHnHI46QD/6OZPi4bA1lrppOcn2WBcvASvYJzT3OZnutxYJygW71C21Y81nYoPTy6Oe
+ ITkqHQ/0Rit4pWTg9J94EDO8/TT76jCmuNfGMjlKp2ANACYVPxXRMt6QA+l8xyLrkPCVS5O/UOq
+ cfmjlw761C5mtPNNwZn0dr/V2lOcF98A0LtIR04oI+S/+Hm+5msaPqpHLydwmV4Rnf/EX6Lqerh
+ Ms20OuI+fPMZcFyIMaVpLLP5d75/kU1zS2tMAJPe3vnfcUoHEkxIl0U0HHDBoUpWZCuWoRr8KKV
+ tOuuH+odYqPg2AjOj4T/9sAKsnIu9ZKjWxLUKraz1HaBDr6Uk6E8KEu23wdUDrivTPa03kGEjyP
+ KbvVpDCtD4lvQ9f+PxXpOliO8tyHPR3tLTg9a723rA1f6Qb8uoeEXeMT3q7ZA==
+X-Received: by 2002:a05:6808:1911:b0:45f:a12:5c88 with SMTP id
+ 5614622812f47-4639f2278a2mr1365161b6e.49.1770999085763; 
+ Fri, 13 Feb 2026 08:11:25 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-6772583294bsm1442528eaf.14.2026.02.13.08.08.55
+ 5614622812f47-4636b0cf66dsm4618346b6e.19.2026.02.13.08.11.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 08:08:56 -0800 (PST)
-Date: Fri, 13 Feb 2026 10:08:54 -0600
+ Fri, 13 Feb 2026 08:11:25 -0800 (PST)
+Date: Fri, 13 Feb 2026 10:11:23 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Zixun LI <admin@hifiphile.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for AT25SF321B and
- AT25SF641B
-Message-ID: <20260213160854.GA2374632@bill-the-cat>
-References: <20250701-nor-v1-1-ca3435d582d2@hifiphile.com>
- <CA+GyqeZ+vj0cQMT51=OTTPaya26p-fiwNJLzJqUC7Q1O3NmP1Q@mail.gmail.com>
+To: Christoph Reiter <christoph.reiter@evk.biz>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ "vigneshr@ti.com" <vigneshr@ti.com>,
+ "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>
+Subject: Re: [PATCH] mtd: spi-nor-ids:  Add Fujitsu MB85RS256TY FRAM
+Message-ID: <20260213161123.GA2375281@bill-the-cat>
+References: <DU2PR09MB5294504C1221EF029607D88C8E3EA@DU2PR09MB5294.eurprd09.prod.outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6rwOFs55kYbSUeqg"
+ protocol="application/pgp-signature"; boundary="EhPFW6oJMKhsnDc4"
 Content-Disposition: inline
-In-Reply-To: <CA+GyqeZ+vj0cQMT51=OTTPaya26p-fiwNJLzJqUC7Q1O3NmP1Q@mail.gmail.com>
+In-Reply-To: <DU2PR09MB5294504C1221EF029607D88C8E3EA@DU2PR09MB5294.eurprd09.prod.outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,45 +100,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6rwOFs55kYbSUeqg
-Content-Type: text/plain; charset=utf-8
+--EhPFW6oJMKhsnDc4
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 16, 2025 at 09:47:56AM +0200, Zixun LI wrote:
+On Mon, Aug 25, 2025 at 05:53:58AM +0000, Christoph Reiter wrote:
 
-> Hello, any update on this ?
+> This part is an FRAM, but can be used through the spi-nor generic code.
 >=20
-> Zixun
->=20
-> On Tue, Jul 1, 2025 at 5:16=E2=80=AFPM Zixun LI <admin@hifiphile.com> wro=
-te:
-> >
-> > These flash chips are similar to AT25DF321A with Quad I/O capacity.
-> >
-> > Signed-off-by: Zixun LI <admin@hifiphile.com>
-> > ---
-> > Tested on SAM9X60 custom board.
-> > ---
-> >  drivers/mtd/spi/spi-nor-ids.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-id=
-s.c
-> > index e7e97780d7cdd27104fd7db900b3a779d2188922..18bc6f2f06e9a02594da6ad=
-1880489e78458a60f 100644
-> > --- a/drivers/mtd/spi/spi-nor-ids.c
-> > +++ b/drivers/mtd/spi/spi-nor-ids.c
-> > @@ -76,6 +76,8 @@ const struct flash_info spi_nor_ids[] =3D {
-> >         { INFO("at45db641d",    0x1f2800, 0, 64 * 1024, 128, SECT_4K) },
-> >         { INFO("at25sl321",     0x1f4216, 0, 64 * 1024,  64, SECT_4K) },
-> >         { INFO("at26df081a",    0x1f4501, 0, 64 * 1024,  16, SECT_4K) },
-> > +       { INFO("at25sf321b",    0x1f8701, 0, 64 * 1024,  64, SECT_4K) },
-> > +       { INFO("at25sf641b",    0x1f8801, 0, 64 * 1024, 128, SECT_4K) },
-> >  #endif
-> >  #ifdef CONFIG_SPI_FLASH_EON            /* EON */
-> >         /* EON -- en25xxx */
-> >
+> Signed-off-by: Christoph Reiter mailto:christoph.reiter@evk.biz
+> ---
+>  drivers/mtd/spi/Kconfig       |  6 ++++++
+>  drivers/mtd/spi/spi-nor-ids.c | 13 +++++++++++++
+>  2 files changed, 19 insertions(+)
 
 Sorry for the delay. For ease of future re-syncs these should be in the
 upstream linux kernel first, and then brought to U-Boot, thanks.
@@ -149,15 +121,15 @@ upstream linux kernel first, and then brought to U-Boot, thanks.
 --=20
 Tom
 
---6rwOFs55kYbSUeqg
+--EhPFW6oJMKhsnDc4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY9MkgAKCRAr4qD1Cr/k
-CmZjAQDAP2v6GDWEQiN+KGCsURKBAO7w+99R36lLHUU5yQf0gwD/UCJK5zczdua5
-XRy6MLSlZjh3KLwlpBLjGses2KkE1gA=
-=bXYn
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY9NKgAKCRAr4qD1Cr/k
+CgofAQDsw7ohOX2KNLcpOu1YtU/je3OjT0gydy4p7gOdNRmQVgD+L9/bWzV+v/Aa
+SCA0qXjh8bb6Lf/NifeQOdhz1PJxcgg=
+=tyMJ
 -----END PGP SIGNATURE-----
 
---6rwOFs55kYbSUeqg--
+--EhPFW6oJMKhsnDc4--
