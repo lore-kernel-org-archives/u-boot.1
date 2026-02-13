@@ -4,143 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C64CEF48F0
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 08:52:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 028B1EF48EE
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 09:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B89A83015;
-	Fri, 13 Feb 2026 09:52:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5318B83015;
+	Fri, 13 Feb 2026 10:00:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="U4yNvapm";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ktAtIgEl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lOWNYfOF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75E2383AAB; Fri, 13 Feb 2026 09:52:08 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C7B1683AAB; Fri, 13 Feb 2026 10:00:19 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E8E780FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:52:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1AAB180FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 10:00:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 61D44aGB1756557
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:52:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- mQqcv4yKoQ/gyg3ncKMcPrxpfY9d/L8BAgLDryPKJmc=; b=U4yNvapmtjjvaSak
- lAe6sXtMLzBmxd8LHo0JJrEgkD3NkAfsyGTOny4r+jQ3eZ7vg7E8n/pBbDfKI/Fs
- p4kc5M37t3UR9vFd9p452ow6Ls2XqPPFcMlT5xK7nigtjDX85JBrlOnzbnRDDzWh
- aNoBptuoc803oHvCgn4WA2MV9sE4wa3Hdgq46EMIY6JVFB8gLu8A6oXeFLfXo3FT
- NVbH7YQKEKZQ6OINCBJstPYSkqrp/aDXscbvoyvAmwhD3xVS19gQ81KnmhfEzea3
- bqusqLEK5F7odw0m1WASezdYjjQOmDZzKMpC5+5mmaL9vSafuRWQvlHh3F/mzLrn
- ztE2NA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9mb12mgr-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:52:03 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2a784b2234dso31886685ad.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 00:52:03 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d4b9c839b1so297493a34.1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 01:00:17 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770973216; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jlLC1WHdh1R5kgTzKIsdi8zQ6m9blwqhD2po0vAOYEFOYKq6+WAAItUyFd22XgRlAT
+ RP7VTog59jGhostPQo18i/WKwwm1DQmZ8BPRFcwUtjYnjSHEnrrUbuy8HgANrO8ADyCZ
+ ltOUa/YhbNHI1Ie3nblpt0jZu+PpoKNQz6Y7yDLOiiJh09b8MOZvbbhUubf6XFJMMtwx
+ wZlbv/MOeKVbiPuCVoYcZtYmP7dLK9a1ZsMBZ+SjpJl/x/lolEBVIIu7C/SpxGFRDX9T
+ Kz9lpIxwdmGccNWgTHqKvYwfAcY2Yf9KFn01PDDhVUTQG+6UT6vCMfGwUUuuTBOHWh1Y
+ 3HaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=xgtppdqImphClyyUU1f1mV8R/mYvFcTngJx17y/MXDg=;
+ fh=eEi8Xo/lKegsBCPHHmDPcf4jaXl0OXhlbgpBC2bs1Eg=;
+ b=S8s+tWfh/EOTQnXV2qbAWTlGErnOVezzl33LMz777m/PLNuRqaK6AgdjaoPYWoRh8v
+ kXZ+LbD+7QecM9UdWVPsrImi+913Gnfhb5DFXznj/yRCLJTog8evWEXVBkd0OxwxCOKG
+ +1NCWbt26RAdm3pcFRQVmwLvpAJyzsn1OVk4i/L2mA/i55Yf7mqhdtMn3J/fj4Wdc8et
+ k+yD2NwWhemM+kPuRdV7IrEO87PDXx7kV7TWATELAP6vQzrZf/y68hFs/MBlOXsXAJnE
+ 6qgx2yATnq/EyHUpt3U8I9i0d/iLbzEZkPfAFAr6NuBf6+GGziUlgusDm8Sep1XC30SH
+ 3UnQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1770972723; x=1771577523; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=mQqcv4yKoQ/gyg3ncKMcPrxpfY9d/L8BAgLDryPKJmc=;
- b=ktAtIgElIFGmpSvKIO82aaX0RoNtvCLRdrg+PRfH9F40OtLVkEBuDGvtxFYtf43w2/
- AQskXvBavWUjguqHei17pJgusfAohDuFvNjnAzn8IksDTf1cBIYxvEBmd9FXmcHm9ewf
- fz/S/dIAhKapfD4rYjLVvyBi8c3hJl46xaPv3HUwIHA8OVGFkwuNZ3XjAd7kyg05zOIt
- IxQmvyhN2634RfXyvCto5NhxkdW5MY1YbK8aqJO10kwoUhq6QsjMTMSYjDgci+XYasyr
- 2hzJoKHBzy8qlIXVr9i192ThE7a/WvCZj+n/l8MMi6xFiEpU9oVfIvxXGktgK+BUvLXe
- wpTQ==
+ d=gmail.com; s=20230601; t=1770973216; x=1771578016; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xgtppdqImphClyyUU1f1mV8R/mYvFcTngJx17y/MXDg=;
+ b=lOWNYfOF/dlSJo5mHFxuEOYPWUt36Kvqcz6UGCO8fTRnMbOoTJ19PFMVDsd2ByJJ1a
+ r9M2PIwmOY2npfFY8gShYnoDqoQVKWykDoNLqCyJje/0sPoS9xS0GDMEAAStmR+ZDXyw
+ +yST0Gub2UtWyFtVfRZ+y9XnjnZdSBpOWfZsrUEeVoV5GcXnCFVLTq2b7kwGjdRoQ46q
+ H6SY+Ls8mNQ2B7Z296xvwSz4E7YVt9h4/GZcHG4z6jJp1a/+3ulwqyJZzTn7da2f5rAy
+ 4n8SUbBRywKTRqLllU8BRlXEslH5MpOK8Iukt3SsNUjfxt54GWhGTk372/0XkOI2UiVu
+ 9/og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770972723; x=1771577523;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mQqcv4yKoQ/gyg3ncKMcPrxpfY9d/L8BAgLDryPKJmc=;
- b=m1zMJpJLnQmb0uG9YKsJSOWgbq0MBuPorMQR50ByNg4VeBFXilHo4WKOklDT5NHYsq
- v1FR/TkaUzktJoHBAN5kcrUMweLYaI8iRRwOP2+jXV3a9tCm1mYodt2JOoR1eckSpBAb
- bpwLIxvMLVxkm0sAYAjDAbtuGW0V/sRKpIkbUnjugX7aZ+NEbz3K21oTSX0g6tkG+HxT
- zyK4Uj2q6HHJ5iNI1WYlE0bhIfYWGQPwH9FDdjfjVBAp5tbHao5mZA5s6g9vLyDXayfL
- M+FCdz87cEPATuBd5aLxrHnUVbrs+GuJIv+ORIIXsoc5mh0MndVtUS8F9ArIfCN9EsaH
- xwLQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcn6EbJ5OhIfv6nC0cR6MTiCZ7ZnMTfnHh4xm8kNe7kqhQNxC0HA/LGyFDRRrQR8dfTVwa/34=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8M4TRF3gOxeFMhGZZ08slB/lI7uG6bob6yZMl4FzZdW77wsKs
- Os00g/iRjv3qQoLWkXSk9Q8PVaMSm6Uq6aXtLNLji5KWdkMyZNzWbrLIJwLQGRNNdw8mhw/qvFf
- Zsi1B/oGixHKNESlQfBZh0kinchT4Jdp5p4lka0H0x/FNF5xYOpsZkVR4
-X-Gm-Gg: AZuq6aJ7+uBRVj9f4cqjocJZOoR71oGXw1cJte2eVUv7dO+EcoEoXmyikLwHy/vTb58
- 4tK1eQhPI7XkzaFj7Rhw8zVJaJxMB8u3lU7/4s+HXMl+EK+IzBvodk5YkFXBm9NCEbTxG1JkalK
- PNjEoJIVB6+BETM+/x/mRXFdCJeZtRf2QgBYWOStnMYxf4gU2V6rRR/kFgKNl7Xw28t0KPsFDU/
- PrSRcDayFeJg+e5lrmBMm3oVXU81HSCFshZIvqPHrZ6grJ80aPBtXNhI1RCsXujpo3ZgFQxBQ71
- 5fkBOA9HH2XtJg6MNZZUgVKAzHUIqhv5k7kc9lIQ2ffOK0HHANRvGEn5aUBoHFRHlp2UiyEFQzV
- Y7drlgbIMqvlK9hpoieNInXOKmm5mRUHthKACphwESdpGuwiTi20j5w==
-X-Received: by 2002:a17:903:2c0c:b0:2a9:484c:ff17 with SMTP id
- d9443c01a7336-2ab505fd0b6mr14101435ad.54.1770972722841; 
- Fri, 13 Feb 2026 00:52:02 -0800 (PST)
-X-Received: by 2002:a17:903:2c0c:b0:2a9:484c:ff17 with SMTP id
- d9443c01a7336-2ab505fd0b6mr14101075ad.54.1770972722275; 
- Fri, 13 Feb 2026 00:52:02 -0800 (PST)
-Received: from [10.152.202.155] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ab29965086sm77949005ad.51.2026.02.13.00.51.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Feb 2026 00:52:01 -0800 (PST)
-Message-ID: <f9c18852-bbd7-4d60-88d5-39480dec78a0@oss.qualcomm.com>
-Date: Fri, 13 Feb 2026 14:21:54 +0530
+ d=1e100.net; s=20230601; t=1770973216; x=1771578016;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xgtppdqImphClyyUU1f1mV8R/mYvFcTngJx17y/MXDg=;
+ b=F0mpSp++jIokJZC0OF7Be0EnhtLGXqlQUS0N13bfzneAXTGga6o52j3RkH1QglqXdh
+ osyQjyBob98y+EmuOUxxLZ22G5Rjcwv4etnLn1tSiRCwlD7Y2Mxy5I6+opkBGq6sOMd4
+ sU2/lWFYwyyDAyOlt3Fe/Wli24I5Dg00kJ2pegsv52GKjZiKyE537QDebM8anhWDXiRb
+ WNfuO2LJZ0T/DqP4+obpb77hJ0cLQid5nUTY6LFCpfXZg3ty8xVvmxCZ0PLqzRI+H7Y3
+ V5lTtwDD1bFD0LDGH4b5U6XeQnEf0rpOXWcjTsflGk6isVqjxcAjjlsM4VyurJXWamjc
+ TcsA==
+X-Gm-Message-State: AOJu0Yywc3MgOeFmpXVjet45Pu2uFUN2blJ+xFidQgdLw1CYugOVt4gJ
+ 0Trda1XPZsnl0ULN4kxzt3GZNlU4OS0LsuBJnrs4DoLthT9DYOyrflX6MMYrbByOh1DcpVepakN
+ vQb4ZeiWXVVxdTtdcWgpkryLIyPUDyW9VowzOysbrHg==
+X-Gm-Gg: AZuq6aJVg7kGWfNSKA629h7bKaezipSjgAUbbd8L43VAEaDXMtjUsyp87YbZZOW1RQK
+ RPj3UnyRHQ/R1+EZQLqHzooqD1WvuPzuoCFWG+iZ1R1NF+JowxFxr24FqluQfzF2O9kPhnYSVCv
+ RP7K8RNnstUYlRuTsiT8cz2xdAgMlWoJI4sPfMJeRP/hlWGcmBI53nuDJFdka7TtYuUi0LHczB5
+ ZncTzAgM5kZlM5NQSnlgHFbv1qiC9B1QSXIbUI6La6l6XXaDvGPcoqocQ3jRYq/9rE97pBFX4uC
+ wt3FmxSd
+X-Received: by 2002:a05:6830:2aa7:b0:7c7:8280:9207 with SMTP id
+ 46e09a7af769-7d4c4b495fdmr634375a34.37.1770973215696; Fri, 13 Feb 2026
+ 01:00:15 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] qcom_defconfig: Disable
- CONFIG_EFI_PSCI_RESET_RUNTIME
-To: Casey Connolly <casey.connolly@linaro.org>, neil.armstrong@linaro.org,
- sumit.garg@kernel.org, trini@konsulko.com, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, sajattack@postmarketos.org,
- marek.vasut+renesas@mailbox.org, quic_varada@quicinc.com,
- me@samcday.com, michal.simek@amd.com, sjg@chromium.org,
- j-humphreys@ti.com, paul.liu@linaro.org, raymondmaoca@gmail.com,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20260114111624.2321852-1-aswin.murugan@oss.qualcomm.com>
- <20260114111624.2321852-3-aswin.murugan@oss.qualcomm.com>
- <299b5e24-ec98-4adc-aab0-495bb0cf144a@linaro.org>
-Content-Language: en-US
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <299b5e24-ec98-4adc-aab0-495bb0cf144a@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA2OCBTYWx0ZWRfX5UebIoF0Ms7l
- COa94H7nzQLSYEBZMgEFl2nQV+Jxa15btnxjcMKM9jLGdGiF/UuAbMgABxjxTnNAVM0ImahJCwr
- uhjWQpfnyJHKmfyipXgnBXsgHQuaxHeNSROyS3MtGuCsIToczzEtZY32c5Oa5JzJrlDCTDNe7UM
- wVcnvRX/d47kUwMBVBoNWia/QP3EN7dstIA6QQ3wk5xBZpiL19V/9sDR6xDhclGsSBAf2n9p+D7
- 6dcUXIlQOWvf3JhSv+0c8pkVhfcVPKSldjq+54cDf5Sg6UzBqO6ARaFKwKpcaPi74FQq5tUgG1+
- hGWk4+kJODRhNBxfBT1+k/Z3EhDvJGJ0NtRsHKxYbdU/VGIPqaFXrdcVtYLAU2U8Hll0/G6rQAc
- mTqvZ8pt03o9hGYv1bbO7kSl+tuN5dIJ2O+4pKgTrMUh1MiMqLtwSgW2jj9G3vNo7GLxsQdG2ua
- XdHcDdHbdXUh6M83hrg==
-X-Proofpoint-ORIG-GUID: POXy3370fXV0FzQzUU5y2tj5ERu7KSBm
-X-Authority-Analysis: v=2.4 cv=asC/yCZV c=1 sm=1 tr=0 ts=698ee633 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=9iUq6VEK6GIGJoTCeBQA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-GUID: POXy3370fXV0FzQzUU5y2tj5ERu7KSBm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-13_01,2026-02-12_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
- impostorscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130068
+References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
+ <b25f6c14-7db2-4517-a3ab-e2c55a52818c@altera.com>
+ <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
+In-Reply-To: <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 13 Feb 2026 17:00:05 +0800
+X-Gm-Features: AZwV_QgNRvfnbMwN2PF82JkE30D8ixQdHQqo151VFl-pnkMOjyfFN1mpcRWvEn4
+Message-ID: <CAN7C2SAOLdokAaVcuMPWMTS4HsY-4d2dhnkwLadqsGS2qAsKaw@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: socfpga: Add call to
+ socfpga_sdram_apply_static_cfg()
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -157,50 +117,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 1/14/2026 7:42 PM, Casey Connolly wrote:
+On Fri, Feb 13, 2026 at 4:44=E2=80=AFPM Sune Brian <briansune@gmail.com> wr=
+ote:
 >
-> On 14/01/2026 12:16, Aswin Murugan wrote:
->> Disable CONFIG_EFI_PSCI_RESET_RUNTIME in qcom_defconfig to let the kernel
->> manage reset modes and handle specialized reboot requests correctly.
-> Please disable this in kconfig instead. Could you validate that this
-> doesn't cause issues on an older platform like sdm845?
+> On Fri, Feb 13, 2026 at 3:18=E2=80=AFPM Yuslaimi, Alif Zakuan
+> <alif.zakuan.yuslaimi@altera.com> wrote:
+> >
+> > Hi Brian,
+> >
+> > On 6/2/2026 11:09 pm, Sune Brian wrote:
+> > > [CAUTION: This email is from outside your organization. Unless you tr=
+ust the sender, do not click on links or open attachments as it may be a fr=
+audulent email attempting to steal your information and/or compromise your =
+computer.]
+> > >
+> > > Hi Alif,
+> > >
+> > > Since 2025.05 to the latest master.
+> > > I do not have any issue as you mentioned in this patch.
+> > > Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
+> > > I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
+> > > that GEN5 Cyclone can support.
+> > >
+> > > Not too sure what is missing from first place?
+> > >
+> > > Thanks,
+> > > Brian
+> >
+> > Based on the CycloneV address map which can be found here -
+> > https://www.intel.com/content/www/us/en/programmable/hps/cyclone-v/hps.=
+html#sfo1411577374877.html.
+> >
+> > Bit 3 of staticcfg register has to be set to apply all the settings
+> > loaded in SDR registers to the memory interface, in this case the patch
+> > ensures the SDRAM controller applies the latest configuration after
+> > disabling FPGA SDRAM access.
+> >
+> > This is a safety and correctness fix for re-initializing the memory
+> > controller in the proper sequence during FPGA reconfiguration.
+> >
 >
-> Kind regards,>
+> Hi Alif,
+>
+> Before I plan to undergo a test we got to understand why w/o this patch
+> SDRAM2FPGA works properly w/o issue.
+>
+> > If you have the time, can you help to test this patch with your setup?
+> > Although unlikely, we want to be sure that this patch will not break an=
+y
+> > existing GEN5 boards out there.
+>
+> I might be wrong, I think static cfg has been done already?
+> Does the code here if not wrongly understood already finished that static=
+ cfg?
+>
+> ---> Quote start
+> void socfpga_sdram_apply_static_cfg(void)
+> {
+> const u32 applymask =3D 0x8;
+> u32 val =3D readl(&sdr_ctrl->static_cfg) | applymask;
+>
+> /*
+> * SDRAM staticcfg register specific:
+> * When applying the register setting, the CPU must not access
+> * SDRAM. Luckily for us, we can use i-cache here to help us
+> * circumvent the SDRAM access issue. The idea is to make sure
+> * that the code is in one full i-cache line by branching past
+> * it and back. Once it is in the i-cache, we execute the core
+> * of the code and apply the register settings.
+> *
+> * The code below uses 7 instructions, while the Cortex-A9 has
+> * 32-byte cachelines, thus the limit is 8 instructions total.
+> */
+> asm volatile(".align 5 \n"
+>      " b 2f \n"
+>      "1: str %0, [%1] \n"
+>      " dsb \n"
+>      " isb \n"
+>      " b 3f \n"
+>      "2: b 1b \n"
+>      "3: nop \n"
+>     : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
+> }
+> Quote end<---
+>
 
-Thanks for the feedback.
-In v1 of this patch, Tom requested that the option be enabled by default 
-in Kconfig so that existing behavior on other platforms would not be 
-affected [1]. Based on that guidance, in v2 enabled the new config by 
-default in Kconfig and explicitly disabled it for Qualcomm in 
-|qcom_defconfig|.
+I forgot to quote the func call location:
 
-Regarding validation on sdm845: I currently don’t have access to sdm845 
-hardware, so I’m unable to test it directly. From the nature of the 
-change, it shouldn’t impact older Qualcomm platforms, as the reset path 
-is typically managed by the OS/bootloader independently.
+void do_bridge_reset(int enable, unsigned int mask)
 
-I will address the remaining comments and respin the patch.
+During boot users are supposed to use bridge enable to
+control the needs of the HPS <-> SDRAM or H2F F2H LW etc.
+When calls if I am not wrongly understand it will reset and
+simply do that static cfg and simply do not require additional
+calls.
 
-[1] https://lore.kernel.org/all/20260108143742.GT3416603@bill-the-cat
 
-Thanks,
-Aswin
-
->> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
->> ---
->>   configs/qcom_defconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
->> index a210f4dc5e6..0bd87b1f5a1 100644
->> --- a/configs/qcom_defconfig
->> +++ b/configs/qcom_defconfig
->> @@ -6,6 +6,7 @@ CONFIG_ARCH_SNAPDRAGON=y
->>   CONFIG_NR_DRAM_BANKS=24
->>   CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
->>   CONFIG_SYS_LOAD_ADDR=0xA0000000
->> +CONFIG_EFI_PSCI_RESET_RUNTIME=n
->>   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
->>   CONFIG_EFI_CAPSULE_ON_DISK=y
->>   CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> Thanks,
+> Brian
+>
+> >
+> > Thanks,
+> > Alif
+> >
+> >
+> >
