@@ -4,136 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29483EF48CA
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 05:49:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91606EF48CC
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 06:37:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F55982BF2;
-	Fri, 13 Feb 2026 06:49:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C2C882BF2;
+	Fri, 13 Feb 2026 07:37:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ozgpLqIM";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y0KAQ2Ff";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bHyNH2Yu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 311CE83936; Fri, 13 Feb 2026 06:49:38 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5469683015; Fri, 13 Feb 2026 07:37:29 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B922D80FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 06:49:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=varadarajan.narayanan@oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 61D3BHW72093764
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 05:49:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=TsNMhMb39kEx0J8FBuC5dCQq
- N0zPxRTpTcY8pSehZ9Q=; b=ozgpLqIMKMELWx6rjjue7vd7AL0rFO114kZZ8F0P
- R4y1SDemgmhNlNwGuV9kmIVoqZnycq0eBovRFKLFBJpFhG0qjSUls4A9jkZO8e16
- URthZsqgrty57sOkUkYRtwfvpmeZvtNVSyX5/EayanDu64eDiO5diNxBxoZdmTa5
- z4W/0cUsUz0STdtl465+yp08wfwG50ygGmu245gPkXuIvgz34lG0iYtR3gmlgfag
- iSMRJy4s4SdpWoROqFuC0Ilh9EZf7kUqujqGkLTZ9w6k+nbhTr7/J4OeQZtYJgpR
- 98bSXKebCrb68M+2anRQHDRQZFCGg/6OBsS5MImr8Esuug==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9k6y2bck-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 05:49:34 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-2aad5fec176so6490465ad.2
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 21:49:33 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32BB080FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 07:37:25 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-7945838691aso38282097b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 22:37:25 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770964644; cv=none;
+ d=google.com; s=arc-20240605;
+ b=VRLLfMlOKaauKLUvSUzITsJeCPALjOPop1rMzYMS7lq8adTlvgVHLa4GLX2/K+eFis
+ 2SiMy5GnGldJ182VsBCXE2ixk5GweZ2zMRhi9XOfA42+f23voFQvhs27z6XyNHd/IHHi
+ VYzf1FPP2irDrNHwm5Cykz7KOGLXNg7IYvC9QoIqPQ7Xg22wcK8d907wSNrRfxTJVbiV
+ vtev7tqYCpp20HdahouzFk4VjLXzYGtBniUlH6X9I3TJPRSAQ7pSGZ2N/eFp0ep4i9h7
+ 7T6hSqyUvQMLHQxit1aKVehGd+AeYnuZGBP50zQsIKMtpkiZv2qanaHfHqP8NYQvyXgv
+ SIgQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=FZ1wIKxyJTniBxs3z1aLW1tvWGk9dSHKuusqAA2oNSI=;
+ fh=1vO0KDczFVLLoeYq5+BSJ/G3iDWzBy4/WCpdY4yt+ks=;
+ b=O/8uWoxrOmLYiJsRWi+F+u41F41mTKcdpBKKNMIwR9zdDBaeZUWoM+R5QC5SIo4gcS
+ E05ofgq/Kc0kbzIpVO2gB/ln2BHO2sB/JhOMOqX9DfhfAcDymu7RYPbIWfJQTthhKvy8
+ Ax04FOxNtoAFumRGeULqY1ZSFpMrBRCEG+UjeT0DoGGGqAnuIkp26ln10EG15Y8+NjYk
+ h7x4yZ0ZwkXzrKnFj9z/lcEypZQvufULa+SDtJrUXYrUa4KxC0JefOHBqfoP6dJIlzAA
+ xsK/EW80I8TIUDUBdcjgE+vj/yv2LoRw1fzEUfbQgpJ16Tbi4UkKMXNrVS0wPsMJRdlw
+ BRxw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1770961773; x=1771566573; darn=lists.denx.de; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TsNMhMb39kEx0J8FBuC5dCQqN0zPxRTpTcY8pSehZ9Q=;
- b=Y0KAQ2FfEltAI1jXTKa2iY1f0bL6MqC5LdhLg/rI2/Ah6KM3v0tRMYLUw0K2U/hnu/
- cBixLvo+xImJAOUSelnGPJBJivahq0wbOdJFesB0SisS1CefeUhmCgVaa7x78ULVsFZA
- uqRu7PwDP0ph/WKoVzeuN9ZZDn2qJz3M8EFkpKZzaTqY4V8QbY9svxo7Xkw/neO5jlff
- v/X1nJIVY13/wzrfQ5xTZ3RQLF5IvXrAIQKJ5BpamoG0WJRfgCB+85RUgefYP1YY02uh
- 7oOcSjaG3U0GD/wbvTh2bug/oGvI7/HAY1QWo9ARwXAwdXJ02tTLhLgH6GXKPM6da37S
- 113g==
+ d=linaro.org; s=google; t=1770964644; x=1771569444; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FZ1wIKxyJTniBxs3z1aLW1tvWGk9dSHKuusqAA2oNSI=;
+ b=bHyNH2YuQBPD+Swj8YnQ2uNd9Q3g4w+pf/4bbV2zH/NT+SA0DAdF1SkbweTbLI6S0h
+ +pILt4TZPT4dbdiUxA5BoQphHlSm7+y2wpE/2teSfPfy7v4W9jmcMpDwMHJnYzPhNUDD
+ hF09aLhIwc1guVDH2hb0nZ90B+aqQVpPyc68VgcVqdgy5otkZ3onCYAU4mEe1Vcy7dJp
+ 3nxlgYOzqlVtfmhmI3igoDQ6qsaNbyIgbUESHi8QTL8+CIceuLk0syxNsThjk0Q6es53
+ +W+wGCFcsywREJc1Ecpc/y2Rii6FZPYBQ5EjUsEC2Icfay4Is2a/gVdqipEwUkLggfJL
+ 3D1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770961773; x=1771566573;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TsNMhMb39kEx0J8FBuC5dCQqN0zPxRTpTcY8pSehZ9Q=;
- b=TiZRZ/O06nPKv91QYMhbSyMu9yMfapd8iyQ81YMPD2C+iWywpoCopsaoBcRM1rzqao
- t36chbnwIQsgVf6oCZhrXBODxVabmRMTfOCWR18e6/NKzE0h0aVWTrqOIuf/1BtnfO7k
- pXW4ebWeABZpjL/3PASTJtm5b6up+Q/8oAKCmerN257j2+zOu311ncsP4AibK0degPY0
- 9WyHcp8584QGGA2b+WdzH/64ndk0ixBsXjFq20bnpFxYcEFcAUKBHpWizCLApnvSfOiS
- KkGwAZz9NNyfGbTC0hiWA0ULiS53uJLNpHRR8s6RDY4L2dKHHNa7uECjosfiely0c102
- 65Og==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHH2/dysUDY4yykDaSKIuwHRyTPU0IgYg9xEltTf/KLStsQE+DH7XgIXSts+6mXkfKYKnceh8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/DCCIfJYlrEH4B2+BAdN84CrIWEG3ZGER18k5GkrHL5XI8ZR/
- 8Lz75q/J6CYL8/bGUldvBzhulD3o2MqBYW02UDkCua/FNk6WiBxufne6CyVCokT4Og6HztmvVmD
- 322kC7zA2wP190o+4L6KvLEXW7hUOIoaJ+7rEXvBCwN7acGHlTe5rUE1W
-X-Gm-Gg: AZuq6aLEarQFVZb5xWPToqZ+d6D7gWuRF/+XxXEujTFRxzf3bkisrAnRFLquY7BVB+j
- 7zjUJSFy2v+9T1vl5/ZmMZBYJXS4YVOlC+Ecp0XCvXy+DtPbN//hGkNOnGLZ9f0hUWZUAZCyekP
- NFd0PI5Nju/t3L3oWpkcAsVy/0EjgGR8h53QOthggMTfOPd4F8f3c0iDdu5/g2xwiJryI/HzWFj
- nkmG0SBm/xqA9s6d+gRgb3qMM1BZpGQARMJIuT1EWFjffc3PYIQzNY6DjH2GLjVKA37RDhQ56Ro
- evYFAhp2ZgkuLOX2od1braw4jQjYe+Lys1BJ8oW6+BRu4xHv1E5nYpHgk4vacS+pBijZ74ZoH4J
- UJOB3+BWZvGxVW8YfEkDkmXCPZixN2m5wol7Q1eDYFyPmg6UxQS+t3TKeLLTolIDxGVdbwhkp+t
- VFfuyH0tZN4zw/VH7DAiKlLJfL1RceKbxmhKhwVWD7Pi2m4FYwxDg=
-X-Received: by 2002:a17:903:41cb:b0:29e:9c82:a918 with SMTP id
- d9443c01a7336-2ab5055e2fcmr8191705ad.22.1770961772891; 
- Thu, 12 Feb 2026 21:49:32 -0800 (PST)
-X-Received: by 2002:a17:903:41cb:b0:29e:9c82:a918 with SMTP id
- d9443c01a7336-2ab5055e2fcmr8191495ad.22.1770961772428; 
- Thu, 12 Feb 2026 21:49:32 -0800 (PST)
-Received: from hu-varada-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ab2986edecsm73192385ad.22.2026.02.12.21.49.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Feb 2026 21:49:31 -0800 (PST)
-Date: Fri, 13 Feb 2026 11:19:27 +0530
-From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
-Cc: Tom Rini <trini@konsulko.com>, gabriel.dalimonte@gmail.com,
- u-boot@lists.denx.de, caleb.connolly@linaro.org
-Subject: Re: [PATCH v3] fs: fat: Handle 'FAT sector size mismatch'
-Message-ID: <aY67Z87tM28Dtw76@hu-varada-blr.qualcomm.com>
-References: <20260122063442.2622684-1-balaji.selvanathan@oss.qualcomm.com>
- <20260128204102.GA1740001@bill-the-cat>
- <0d815ef4-0a9d-4aa9-95bd-580320357531@oss.qualcomm.com>
+ d=1e100.net; s=20230601; t=1770964644; x=1771569444;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=FZ1wIKxyJTniBxs3z1aLW1tvWGk9dSHKuusqAA2oNSI=;
+ b=oyIt7gIYCQiywoTkMJ/5mYUht3+/M8c1lGSqug7MIWrEBQrcbNUdD2qipiwTxnZ3HC
+ Lbcmk12TVIFwP5cFZ3tdYr1YT/SUXm5O60exPIBo6/Stbn8gslkGLxtNBR6J25NYID4i
+ t0X0DdCbW7lNmjra7T0WakdabGPECoVyGwHv+/8uTe1MbA5bZNrIsPw+75ugXLGBJzAd
+ lGQuVnUclfX4PKn2bA8whNhDnNrXc7u/InhhWPui5IGzb4U/ZctGDaMMrGbA3/EttN/j
+ 9FeToBU/slWYMSELBiTWKq0FDugPcXiPWsXS5KwHwB0TsmXrUlmChwy8V47ZU8lMdHcY
+ kvvA==
+X-Gm-Message-State: AOJu0YxybDX4V3h3qrq32BmgkIjT5SkAVY1wZNMaGS3rI/FqNSMOn2B3
+ Jn+/6bzgs8EO6qrtEu6aHrQcRg/GIMtOb5iqeLps/sP7X5K6TSxIY4QvIKO1N3S0Hil2K0lDU7u
+ IOh+Ea8ULRXsh/9/UY3CURRxNaUwgIWYT/PItjiSemGnKYbxobbbrbqOfBQ==
+X-Gm-Gg: AZuq6aL5RziYSe1BTLyXz6aW9388lUylgPi6fndZ/mO6HEykeujK9ux/6Co62EcD/sb
+ HYZGIWuZZ8MbUbRYdspx8u1ljhc9AYK0FMy5X3Csw+k6DwUCQ0WMEfd/4ExL1zzmltiHKksQUSw
+ StwEirZk91/4EZvN65CnKcl9W8a1yEABiCgYYrNyjEcJtFbHw4ficI6CBYhblMtPSfnVY9/85Fl
+ v4LlEujfv8mxzwZPgLLvIdEZG9QHE/TJD8XoE4elAg09lb+piPHFhcbXZYf57eMM9lzziHNcksb
+ oIffpnnS3Gs/MiwI8dAR4CDvxi4ieBt9AuR4Qnave1b8YYu4impb1ENLyOC6rqQD5rzvSR5idBF
+ YYZCA5P1kdAzwetVdjiF3RZEUBPpn+2jg/Bv2szGvrVvjhvFIrqG0GYrHphKf38xE/I2koCYk0B
+ aEtfHmhXgDiclxauUG6fIkOrUgImPkAAlQ20+xQTR1ydupCmK3ZHIQmmJGV9l4Wb6vu5/k5mRo9
+ 9fngYWrZ3xwLCq2qpdulf0rGMAfUWv1jrTfOOUfOdD5oZWcVTsc2StFkZiCwCtVJmLTNGi/xw0M
+ svcKUJV0sGNDsuY5Urqu8qRKGSF+jZdCR9fi7cKsG0G7
+X-Received: by 2002:a05:690c:4882:b0:794:c263:bead with SMTP id
+ 00721157ae682-797a0c8de8bmr5121357b3.24.1770964643891; Thu, 12 Feb 2026
+ 22:37:23 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <0d815ef4-0a9d-4aa9-95bd-580320357531@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=NsTcssdJ c=1 sm=1 tr=0 ts=698ebb6e cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
- a=YfCOm-DyAAAA:8 a=XpE1AkgCAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=osljQ9aYmv_DjUfmjjMA:9 a=CjuIK1q_8ugA:10 a=1OuFwYUASf3TG4hYMiVC:22
- a=zQLMK8awuJ6_Hvp-_9Ux:22 a=dpZMgbseYPk84XhQl7oQ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA0MiBTYWx0ZWRfXxBwYkI0e8RQq
- THnU8XwDfmXrUNZWbg/oXUJaTqLdSEVBcL+++V22PcOLkbNfw//Z/e0GE76P+CKSjkJrkmcuuz6
- 90KfgpPr3k7DfjhvERRs8ciUrZA/RTL39ta1aGqXZSCh3O7JChWA9G7WsMdGK9QQm7hGMHFtVSY
- 3FTbjVR0d5Jdf7kJyBNmWwPvoO01T1tejPxA4afob2ZBq7QbVmZ7dDZn8kh0DygHUBXeDtHwHmm
- 9CLVtYUzGX9YSLRXkRkcAeut/5qvB3Ak+W/5IyUUcho6ZtOBpagO/innOKS62vABI9yYsTo7xkB
- bIhB6aZAwewP+D0h4+8aTlqD6pVWbMgTVC7J8WsHzcq+uXf0DNvyX8qD1x7hV4s2STKk7nYL4Lu
- XjRoU4LpdAR+CCqTwpsN4CCiG2YRxF4pa/V1JiGL2usYEDK55dYbpvdjSqmbU66XAXkBFjjj0o6
- JjMHWDPPbAujX1nbYkA==
-X-Proofpoint-GUID: s-n-CUaUsj7i5SDpUFrMweOifAFKz_UF
-X-Proofpoint-ORIG-GUID: s-n-CUaUsj7i5SDpUFrMweOifAFKz_UF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-12_05,2026-02-12_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 spamscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 adultscore=0 phishscore=0 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130042
+References: <20260211124314.3406952-1-vincent.stehle@arm.com>
+In-Reply-To: <20260211124314.3406952-1-vincent.stehle@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 13 Feb 2026 08:36:48 +0200
+X-Gm-Features: AZwV_QhAy8INgmhtwHfUyA4oX8Yxs9FrHOfWbErE8ji9z3p0CPI-NSuBtGJAlKs
+Message-ID: <CAC_iWjL5O4k4HrxKk_MfiwYutXVe0LY+kN-c-=_zwFp44Nbm6Q@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: add missing EFI_CALL around tcg2 read_blocks
+ calls
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,45 +120,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Balaji,
+Merci Vincent
 
-> On 1/29/2026 2:11 AM, Tom Rini wrote:
-> > On Thu, Jan 22, 2026 at 12:04:42PM +0530, Balaji Selvanathan wrote:
-> >
-> > > From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> > >
-> > > Do FAT read and write based on the device sector size
-> > > instead of the size recorded in the FAT meta data.
-> > >
-> > > FAT code issues i/o in terms of the sector size. Convert that to
-> > > device sector size before doing the actual i/o. Additionally,
-> > > handle leading/trailing blocks when the meta data based block
-> > > no and i/o size is not an exact multiple of the device sector
-> > > size or vice versa.
-> > >
-> > > Tested on UFS device with sector size 4096 and meta data recorded
-> > > sector size 512.
-> > >
-> > > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> > First thing, clang shows a lot of warnings from this:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1365316
-> > Second thing, filesystem tests do pass:
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1365314
-> > Please make sure v4 is put through CI:
-> > https://docs.u-boot.org/en/latest/develop/ci_testing.html
+On Wed, 11 Feb 2026 at 14:43, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
+wrote:
 >
-> Sure, will address the warnings and will put v4 through CI.
+> The read_blocks() function from the Block IO protocol is a UEFI function;
+> make sure to call it from within U-Boot using the EFI_CALL() macro.
+>
+> To demonstrate the issue on an AArch64 machine, define the DEBUG macro in
+> include/efi_loader.h and build u-boot with sandbox_defconfig, then downlo=
+ad
+> and uncompress the ACS-DT image [1], and finally execute the following
+> command:
+>
+>   $ ./u-boot -T -c " \
+>       host bind 0 systemready-dt_acs_live_image.wic; \
+>       setenv loadaddr 0x10000; \
+>       load host 0 \${loadaddr} EFI/BOOT/Shell.efi; \
+>       bootefi \${loadaddr} \${fdtcontroladdr}"
+>
+> The following assertion should fail:
+>
+>   lib/efi_loader/efi_net.c:858: efi_network_timer_notify: Assertion `__ef=
+i_entry_check()' failed.
+>
+> This happens due to the following EFIAPI functions call chain:
+>
+>   efi_start_image()
+>     efi_disk_read_blocks()
+>       (due to the missing EFI_CALL, entry_count =3D=3D 2)
+>       efi_network_timer_notify()
+>
+> Link: https://github.com/ARM-software/arm-systemready/releases/download/v=
+25.12_DT_3.1.1/systemready-dt_acs_live_image.wic.xz [1]
+> Fixes: ce3dbc5d080d ("efi_loader: add UEFI GPT measurement")
+> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+> ---
 
-Have posted v4. Please see [1].
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Tom,
-
-The CI failed while building am33xx kirkwood. When I locally reverted
-the v4 change and tried to build amxx related platforms, I was getting
-similar errors. It doesn't appear to be related to this change. I might
-be wrong. Please let me know if that issue has to be resolved.
-
-Thanks
-Varada
-
-1 - https://lore.kernel.org/u-boot/20260213053719.2590474-1-varadarajan.narayanan@oss.qualcomm.com/
+>  lib/efi_loader/efi_tcg2.c | 13 ++++++++-----
+>  1 file changed, 8 insertions(+), 5 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> index bdf78897d47..1860dc50238 100644
+> --- a/lib/efi_loader/efi_tcg2.c
+> +++ b/lib/efi_loader/efi_tcg2.c
+> @@ -1213,8 +1213,10 @@ tcg2_measure_gpt_data(struct udevice *dev,
+>                 goto out2;
+>         }
+>
+> -       ret =3D block_io->read_blocks(block_io, block_io->media->media_id=
+, 1,
+> -                                   block_io->media->block_size, gpt_h);
+> +       ret =3D EFI_CALL(block_io->read_blocks(block_io,
+> +                                            block_io->media->media_id, 1=
+,
+> +                                            block_io->media->block_size,
+> +                                            gpt_h));
+>         if (ret !=3D EFI_SUCCESS)
+>                 goto out2;
+>
+> @@ -1227,9 +1229,10 @@ tcg2_measure_gpt_data(struct udevice *dev,
+>                 goto out2;
+>         }
+>
+> -       ret =3D block_io->read_blocks(block_io, block_io->media->media_id=
+,
+> -                                   gpt_h->partition_entry_lba,
+> -                                   total_gpt_entry_size, entry);
+> +       ret =3D EFI_CALL(block_io->read_blocks(block_io,
+> +                                            block_io->media->media_id,
+> +                                            gpt_h->partition_entry_lba,
+> +                                            total_gpt_entry_size, entry)=
+);
+>         if (ret !=3D EFI_SUCCESS)
+>                 goto out2;
+>
+> --
+> 2.51.0
+>
