@@ -4,91 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F72EF99E2
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 22:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709DBEF99DF
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 23:00:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28D5283AA9;
-	Fri, 13 Feb 2026 23:53:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B996183AA9;
+	Sat, 14 Feb 2026 00:00:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DYN6tuvJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FnfYxjZI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0F8083015; Fri, 13 Feb 2026 23:53:44 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 6996083AAB; Sat, 14 Feb 2026 00:00:42 +0100 (CET)
+Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
+ [IPv6:2607:f8b0:4864:20::e33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BD2083E48
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 23:53:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 865AC83015
+ for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 00:00:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-8954c9daaeaso19830336d6.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 14:53:42 -0800 (PST)
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-5fa3f2b8f7fso450079137.2
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 15:00:39 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771023638; cv=none;
+ d=google.com; s=arc-20240605;
+ b=NOQCYHjVOASjr5p0THOeHncSSTNO+WDi//HGiLPSt5tvu3e6BBvPR2rs6qRq2gCfSH
+ bK++hdZ38sTvgvIQRB2KXiEp/j0NY7CX9K4hgJOECSVp34UGbPfW9jLrSLN901CwSRXz
+ a4COHwc0K4nZm2b2Mrq2UBn+jpQfOkDrtW6FaFd6F+9ZYqlxDccZ/SDS5QSXmGDG0AAx
+ lL3sC2sI1VW6y+BqkX8h/o83WwSC80uV5ELUwIejedEIpxxzBIDyLmTZgjUb6HQjQpkT
+ l3FIi6jLo5FxiYM5aZIvBqycfkqeh/6awMwmuBgK1MjHo6gaCWz5TK71Iz1GxIj2Tiv4
+ MgQw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Q7gUJhu6+60ZO9gpsoJDRMHc/VrNlHkYbG6OXkXNiLE=;
+ fh=8YEloSG3eNNAcXhBnll2q3xU/LaKf7I07IlKg515KpU=;
+ b=gNubuNbtud91N34aDJUb+kApIgTQ3tqjcuX4MQJrDhD9S2onJ09B9u123u+C09MIOb
+ ELJjF3m26mBur6kFTahM6zmkphJt4qwNxB1ARIH1AnFg9/6eXZ1NET9z9/+MAaDbnArs
+ VaDSM4JTsYFkZZo1nFmuzIzZKDAGvz130MLPl6KmwO5Z7op6+tSnlkWAH5WvLDksBEws
+ vNY1Iu/nq4xD5Tirjk6B/pddBteScU2jrvnNLepETDPedVhw5G+B6ox/X4Zb/BEMx8oD
+ wbRIcaD9k2gFkbvnLYGsybVQfV1jLIMfNTkbnzxkOyqozrb2y5meRClmLX3OyZLfdEWI
+ Gajw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771023221; x=1771628021; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1771023638; x=1771628438; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vdOI9Y//0gsW0iXE5uikON+C/SEY0LwgAe5t7b4Be+k=;
- b=DYN6tuvJ29TAIhFYz8ncH+0REsBa29vcSx8aqR7TOKLiRwu5duaRhg7NhHy4KMGCr4
- 6j9EXun5nYb/J6Z4XcjhcE5DMn7QsprzqIdnxdRUMXc90Zw5hYuCBqvlQWTur3lk9Ya6
- OrTtKoF2WhTqI0cOaSxoGB2EhTmBKyPPJo7pHTSSppCHu3fjzp3Lvga7so3y7zAQKR5S
- rguu8YwYxy68jZ/2zmdx+M9mDV13qAfMZag5SFIF8sI6pTOwzaIrW1Fb0eX6p1RZTvxz
- l1nnh283pNY3sRDoa1KGYQslz4my2jx0P6Pcd6PIMFDHZNA3+DRpVzfid2ljnlHpn8Aa
- 5FTg==
+ bh=Q7gUJhu6+60ZO9gpsoJDRMHc/VrNlHkYbG6OXkXNiLE=;
+ b=FnfYxjZIAqlPui0zUKii53S01KjV2IWf774nveuXfspbGUCxdDUiXR374RnJDKeXic
+ Aj+PixvkwIl7Q15U9lYDHn5epox/Z6ggubJ0Wajc5THGbrH0dpcYIjEip1LxrV78A1/x
+ mbZEfQ6aWDZY28CjVQFZRFg8BcozTjGqi5n93tQDdO2vUgw8yZNN97mhjEimMno3AbJ6
+ uZLtJUzWskaUiiJ6H/0rcoSio5qKBgRW4JrekeZ4z1/bjHk1Fg8KN5AiC+0ByT/5OSWA
+ 6mKuxKjAZPs3JG7W80fsbTgUMvrYyYVHAoTfEFZd5pszIxQ4Cs+Pk3fu1p0F0glF8Vuf
+ 2gyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771023221; x=1771628021;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1771023638; x=1771628438;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=vdOI9Y//0gsW0iXE5uikON+C/SEY0LwgAe5t7b4Be+k=;
- b=K58AnHzfLrffOhD9Kb+HoRmd69oS+20O58BIzvGUYdkeWhHTIKGhxU1+y8JHnj7VMK
- OU5Wzywos2tLkAul5wodfWqB4vP03ftm2Y4zXm8iG9YP2cFrIv074J+U07DUOlsYtrfY
- WCxqkRnRnQIm6OcJewnyOQMMCd7bPdunPIdUTlzemuOs+jTycNclyKPu47CzGV/0LiW6
- DUQ3G5FnXueqDaV6BdnBbKb9sjbeCRuX7pSYas6kO8dqc33nult4PR+ug+1AM45QqD9/
- StKKlCfOfwF2ZCllIb3CWKdPO4rwj6OcknFYNPGArL0ILdSXv0JX2B77WW1bCx7TvaGo
- bjvg==
-X-Gm-Message-State: AOJu0YwbIhDCf+8ulyoBSMp6MJ3z3Pz21PS8Dn1sstq5v7SkLLPjTl2N
- toe2YR2g8lHzeDBpza7JPV9S9ovFtnh01CCIayU8O3weup2MJSHKgS+tWzbs3w==
-X-Gm-Gg: AZuq6aJk4oOKULyxBafbgtrRGy/wfxLfjYnU7mIoEmnEDpkWrn3augWTJBkF9M/qKZx
- 6NBzLWw8NRwcqJM7EiDYqkcq2/zvamrY7kcjbjLXM8e0m2obIBfeDq0amh2bpjC30Uu36ORzIJQ
- u3JRqBKBSrcoskX0lFK5pLIif84ls68sKpQPqxEVysNUDjT5H27J/L3wPMuiXwwTshsKPYHW1Zz
- CDzj3IF+3QlWlvsTK2lG90x+3k2aL98d8X0uqGdmlYAuQaHFlAUOitbtSzr9OJrBndCKSoCNweO
- JFmyrk+evATtQpOyj7D5rqU2FUvh+ZHQ//hUqerR5dL43/L5bd0e+AFCYULIyjOXZagr2UCZoyZ
- JFQxkSrfKfbXhbF7dFtexMiPg8xwuYL+CEk3Rmuj/kUWPQunlVs7tNg3newGleDCODpH9qkKCG5
- goqE3JH77tq2NG7eYJLAXv+9RtePxUjaSgSeDBT1BK4AMgBILBN/iIWxyet1cdNxQYUgMDzp8kP
- 8/uz90P4D4EtUsKgljn1w==
-X-Received: by 2002:a05:622a:4d0:b0:506:98c9:a3e5 with SMTP id
- d75a77b69052e-506a6a4c880mr47842601cf.35.1771023221233; 
- Fri, 13 Feb 2026 14:53:41 -0800 (PST)
-Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
- [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-506847ed9c4sm72845731cf.8.2026.02.13.14.53.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 14:53:41 -0800 (PST)
-From: Raymond Mao <raymondmaoca@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Baocheng Su <baocheng.su@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>,
- Samuel Holland <samuel.holland@sifive.com>
-Subject: [PATCH v6 6/6] smbios: print the properties only when they exist in a
- specified version of spec
-Date: Fri, 13 Feb 2026 17:52:51 -0500
-Message-Id: <20260213225254.2544596-7-raymondmaoca@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20260213225254.2544596-1-raymondmaoca@gmail.com>
-References: <20260213225254.2544596-1-raymondmaoca@gmail.com>
+ bh=Q7gUJhu6+60ZO9gpsoJDRMHc/VrNlHkYbG6OXkXNiLE=;
+ b=phmCutLMvuVj0UzpDTNmMUDndPbidzzTzvYsHM0SgxMoJGTHECNJQ2GCC4LBwSx37l
+ +ID6DjpvLEeON8FkjJ2MV+zFcQMbwOPDxt7ppaw4xKyiXsIs8MW3DTJdTshC481991mh
+ DmZ+dEHpppJKiieWtAtk0R6JRnQjYQXtAk5injBWAxPWzA6Mrr7dm8h+BJynwpbuoTfM
+ +KWyeSCBO7HNHKakgw52TotDnCxTSNk099sj0CtfMoiI5gyZdSUUGRCxGyuZd+wrJ6w0
+ gTF8K5RJ2dAdkMEcXlE9v0w/XQPQnh1dDUFqTWEWu1ZdiKvXE69ML48kyt94Gu4jW9DJ
+ b/Jg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwzlQjm8VwqfF+be/stsVZqQbVySPXLRiIwdlO50zZ1/UF2+A+MVBTccpAoTLIviwoPLMf4eY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKHlXo5tGaS8BihZVfYv7883imV87ojY2y2c/MO3HHTNARUVlc
+ VqKCRKkukBYoA54+z2Q0EDRId7W8TZEUewIYe7hcH46W0+JhRcdMDQeg6sxexdR9hcU4ZlAYYB2
+ 8i+Xm8+KaWQKUDY/gWnmcJ87XqeiNGWMVX5qgEQ4=
+X-Gm-Gg: AZuq6aI6VecAtcY5MQrGHo/ieosk857Xv56pkdw53kZ+v/6pPJ0J61s/yG+SMPFoEtm
+ G/jFfHclR1z8UBwlcGahNoxEwDKvuc1CPE08dHPV3c5IOn8JeTJ8KrdH9GYQnbNcNN8yPSGCAN/
+ KFwg+zcJxs873rzRzooBbphkcoDfYM1upAK4SxxJ02r86zHSwJbYd0qjLCJAxJD4/AvHubAUo8S
+ KDu+/KIu4gp/Xb7GNEM64hsQJPZ6+rxZ36Q1fsE0SPlf1RC/55+BhsAl9GgQho+F557vv0oowiC
+ PJr785Ch
+X-Received: by 2002:a05:6102:508b:b0:5f5:7791:a1d3 with SMTP id
+ ada2fe7eead31-5fe16fabdbamr1293571137.43.1771023637397; Fri, 13 Feb 2026
+ 15:00:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251128163535.2301653-1-raymondmaoca@gmail.com>
+ <CAMDkj5zb1qhAR-uf=trSsGEwXmx5TiXc=agX5w5GnjMrP_Nqyg@mail.gmail.com>
+ <20260204161345.GY2603314@bill-the-cat>
+ <CAC_iWj+qEmxNeGVBcLcrzNM=BkVj0QW2VYW6ZNGTKD6BeRTNHA@mail.gmail.com>
+ <CAMDkj5yg24MwQz4G8Y62S7mB_6D=p+0Qrooe77RKQ+C4CPwA1Q@mail.gmail.com>
+ <CAC_iWjKUqkjOFsk7+dj+7tn_hrbngoq4CyjCxg0xLbU=-X+GXA@mail.gmail.com>
+ <CAMDkj5z0UuUi0qPfaykEVF=MmbEqXUup4GejaLAyJmg3PGByMg@mail.gmail.com>
+ <CAC_iWjLqTObHeujWD_6Uix8i_6PZtPTJekVu6DShSwH2Kvobng@mail.gmail.com>
+ <CAMDkj5xGZoE52dYqWt9r93r9rsc6jB=3N8JkPOeS8nyNG796wA@mail.gmail.com>
+ <CAC_iWj+Srf1pLtPnYGrtBq2aLY+dXfhXZnLSytFP=LNa5AgOEw@mail.gmail.com>
+ <CAMDkj5z3HRp=ygWtuf5XRJhSSpMadvwx1y9A4fDHqUMJPA7Zkg@mail.gmail.com>
+ <CAC_iWj+K8Vx6+qU5dFGyoeaSz976nMx148g86tWVnT=L-U0E3A@mail.gmail.com>
+In-Reply-To: <CAC_iWj+K8Vx6+qU5dFGyoeaSz976nMx148g86tWVnT=L-U0E3A@mail.gmail.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Fri, 13 Feb 2026 18:00:23 -0500
+X-Gm-Features: AaiRm512nFzhQo0SkmFm0JFLov-hh2jGy1-Rz_uKf4MynvVXVZ2VBVzcq83kSGk
+Message-ID: <CAMDkj5xnz8p_d8G48z=N=BQbaY7mXn-Exe6Yh_EhxFBFB0mBNg@mail.gmail.com>
+Subject: Re: [PATCH v5 0/6] Implement all missing SMBIOS types required by
+ distro tooling
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Mark Kettenis <kettenis@openbsd.org>,
+ Baocheng Su <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
+ Samuel Holland <samuel.holland@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,258 +131,334 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-By checking the payload length, we can know the version of the spec and
-skip the ones which are not expected to exist.
+Hi Ilias,
 
-Signed-off-by: Raymond Mao <raymondmaoca@gmail.com>
----
-Changes in v5:
-- Initial patch.
-Changes in v6:
-- None.
+On Fri, Feb 13, 2026 at 3:20=E2=80=AFPM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> [...]
+>
+> > > > >
+> > > > > I am using a debian unstable with a 6.18 kernel
+> > > > >
+> > > >
+> > > > It looks that your log is not in a correct format, each header shou=
+ld
+> > > > start with:
+> > > > 'Handle <handle_id>, DMI type <type_num>, <size> bytes at <address>=
+'
+> > > > But your one is missing 'at <address>'.
+> > > >
+> > > > How did you test it and get it printed? Are you using 'smbios' cmd =
+in
+> > > > the u-boot console?
+> > >
+> > > No, that's probably the difference. I am booting to linux and test
+> > > with 'dmidecode'
+> > >
+> >
+> > I think I know the cause now, your dmidecode tool does not fully
+> > follow the spec DSP0134, or it might be an old version.
+> > Take "Form Factor: <OUT OF SPEC>" for example:
+> > By default, this should be "unknown", and according to the spec
+> > (3.9.0) - "unknown" equals to 2.
+> > In the u-boot console, this is decoded properly with my patch series:
+> > "Form Factor: Unknown", which matches the definition in the code
+> > "#define SMBIOS_MD_FF_UNKNOWN 2".
+> > But dmidecode shows "OUT OF SPEC", which means it does not support
+> > "2", or by an incorrect decoding.
+> >
+> > What is your dmidecode version?
+>
+> $ dmidecode --version
+> 3.6
+>
+> it's the default debian unstable version
+>
 
- cmd/smbios.c     | 65 ++++++++++++++++++++++++++++++++++++++++--------
- include/smbios.h | 32 ++++++++++++++++++++++++
- 2 files changed, 86 insertions(+), 11 deletions(-)
+Thanks a lot for the testing and patience through this long debug section.
+I am able to reproduce the issue using dmidecode v3.6, and found
+type17 structure is mis-aligned.
+U-boot console is using its native structure, thus it cannot reproduce
+the same problem.
+I fixed it and posted v6 at:
+https://lore.kernel.org/u-boot/20260213225254.2544596-1-raymondmaoca@gmail.=
+com/T/#t
+Tested with dmidecode v3.6 under debian and type17 looks fine now.
 
-diff --git a/cmd/smbios.c b/cmd/smbios.c
-index 671c14e05b5..3fafa46d0a5 100644
---- a/cmd/smbios.c
-+++ b/cmd/smbios.c
-@@ -348,6 +348,8 @@ static void smbios_print_type0(struct smbios_type0 *table)
- 	printf("\tBIOS ROM Size: 0x%02x\n", table->bios_rom_size);
- 	printf("\tBIOS Characteristics: 0x%016llx\n",
- 	       table->bios_characteristics);
-+	if (table->hdr.length < SMBIOS_TYPE0_LENGTH_V24)
-+		return;
- 	printf("\tBIOS Characteristics Extension Byte 1: 0x%02x\n",
- 	       table->bios_characteristics_ext1);
- 	printf("\tBIOS Characteristics Extension Byte 2: 0x%02x\n",
-@@ -360,6 +362,8 @@ static void smbios_print_type0(struct smbios_type0 *table)
- 	       table->ec_major_release);
- 	printf("\tEmbedded Controller Firmware Minor Release: 0x%02x\n",
- 	       table->ec_minor_release);
-+	if (table->hdr.length < SMBIOS_TYPE0_LENGTH_V31)
-+		return;
- 	printf("\tExtended BIOS ROM Size: 0x%04x\n",
- 	       table->extended_bios_rom_size);
- }
-@@ -371,17 +375,16 @@ static void smbios_print_type1(struct smbios_type1 *table)
- 	smbios_print_str("Product Name", table, table->product_name);
- 	smbios_print_str("Version", table, table->version);
- 	smbios_print_str("Serial Number", table, table->serial_number);
--	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V21) {
--		printf("\tUUID: %pUl\n", table->uuid);
--		smbios_print_lookup_str(wakeup_type_strings,
--					table->wakeup_type,
--					ARRAY_SIZE(wakeup_type_strings),
--					"Wake-up Type");
--	}
--	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V24) {
--		smbios_print_str("SKU Number", table, table->sku_number);
--		smbios_print_str("Family", table, table->family);
--	}
-+	if (table->hdr.length < SMBIOS_TYPE1_LENGTH_V21)
-+		return;
-+	printf("\tUUID: %pUl\n", table->uuid);
-+	smbios_print_lookup_str(wakeup_type_strings, table->wakeup_type,
-+				ARRAY_SIZE(wakeup_type_strings),
-+				"Wake-up Type");
-+	if (table->hdr.length < SMBIOS_TYPE1_LENGTH_V24)
-+		return;
-+	smbios_print_str("SKU Number", table, table->sku_number);
-+	smbios_print_str("Family", table, table->family);
- }
- 
- static void smbios_print_type2(struct smbios_type2 *table)
-@@ -501,21 +504,31 @@ static void smbios_print_type4(struct smbios_type4 *table)
- 	printf("\tL1 Cache Handle: 0x%04x\n", table->l1_cache_handle);
- 	printf("\tL2 Cache Handle: 0x%04x\n", table->l2_cache_handle);
- 	printf("\tL3 Cache Handle: 0x%04x\n", table->l3_cache_handle);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V23)
-+		return;
- 	smbios_print_str("Serial Number", table, table->serial_number);
- 	smbios_print_str("Asset Tag", table, table->asset_tag);
- 	smbios_print_str("Part Number", table, table->part_number);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V25)
-+		return;
- 	printf("\tCore Count: 0x%02x\n", table->core_count);
- 	printf("\tCore Enabled: 0x%02x\n", table->core_enabled);
- 	printf("\tThread Count: 0x%02x\n", table->thread_count);
- 	printf("\tProcessor Characteristics: 0x%04x\n",
- 	       table->processor_characteristics);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V26)
-+		return;
- 	smbios_print_lookup_str(processor_family_strings,
- 				table->processor_family2,
- 				ARRAY_SIZE(processor_family_strings),
- 				"Processor Family 2");
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V30)
-+		return;
- 	printf("\tCore Count 2: 0x%04x\n", table->core_count2);
- 	printf("\tCore Enabled 2: 0x%04x\n", table->core_enabled2);
- 	printf("\tThread Count 2: 0x%04x\n", table->thread_count2);
-+	if (table->hdr.length < SMBIOS_TYPE4_LENGTH_V36)
-+		return;
- 	printf("\tThread Enabled: 0x%04x\n", table->thread_enabled);
- }
- 
-@@ -529,6 +542,8 @@ static void smbios_print_type7(struct smbios_type7 *table)
- 	printf("\tInstalled Size: 0x%04x\n", table->inst_size.data);
- 	printf("\tSupported SRAM Type: 0x%04x\n", table->supp_sram_type.data);
- 	printf("\tCurrent SRAM Type: 0x%04x\n", table->curr_sram_type.data);
-+	if (table->hdr.length < SMBIOS_TYPE7_LENGTH_V21)
-+		return;
- 	printf("\tCache Speed: 0x%02x\n", table->speed);
- 	smbios_print_lookup_str(err_corr_type_strings,
- 				table->err_corr_type,
-@@ -542,6 +557,8 @@ static void smbios_print_type7(struct smbios_type7 *table)
- 				table->associativity,
- 				ARRAY_SIZE(associativity_strings),
- 				"Associativity");
-+	if (table->hdr.length < SMBIOS_TYPE7_LENGTH_V31)
-+		return;
- 	printf("\tMaximum Cache Size 2: 0x%08x\n", table->max_size2.data);
- 	printf("\tInstalled Cache Size 2: 0x%08x\n", table->inst_size2.data);
- }
-@@ -574,8 +591,12 @@ static void smbios_print_type9(struct smbios_type9 *table)
- 	printf("\tSlot ID: 0x%04x\n", table->slot_id);
- 	printf("\tSlot Characteristics 1: 0x%04x\n",
- 	       table->slot_characteristics_1);
-+	if (table->hdr.length < SMBIOS_TYPE9_LENGTH_V21)
-+		return;
- 	printf("\tSlot Characteristics 2: 0x%04x\n",
- 	       table->slot_characteristics_2);
-+	if (table->hdr.length < SMBIOS_TYPE9_LENGTH_V26)
-+		return;
- 	printf("\tSegment Group Number (Base): 0x%04x\n",
- 	       table->segment_group_number);
- 	printf("\tBus Number (Base): 0x%04x\n", table->bus_number);
-@@ -611,6 +632,8 @@ static void smbios_print_type9(struct smbios_type9 *table)
- static void smbios_print_type16(struct smbios_type16 *table)
- {
- 	printf("Physical Memory Array:\n");
-+	if (table->hdr.length < SMBIOS_TYPE16_LENGTH_V21)
-+		return;
- 	smbios_print_lookup_str(ma_location_strings, table->location,
- 				ARRAY_SIZE(ma_location_strings), "Location");
- 	smbios_print_lookup_str(ma_use_strings, table->use,
-@@ -622,12 +645,16 @@ static void smbios_print_type16(struct smbios_type16 *table)
- 	printf("\tMemory Error Information Handle: 0x%04x\n",
- 	       table->mem_err_info_hdl);
- 	printf("\tNumber of Memory Devices: 0x%04x\n", table->num_of_mem_dev);
-+	if (table->hdr.length < SMBIOS_TYPE16_LENGTH_V27)
-+		return;
- 	printf("\tExtended Maximum Capacity: 0x%016llx\n", table->ext_max_cap);
- }
- 
- static void smbios_print_type17(struct smbios_type17 *table)
- {
- 	printf("Memory Device:\n");
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V21)
-+		return;
- 	printf("\tPhysical Memory Array Handle: 0x%04x\n",
- 	       table->phy_mem_array_hdl);
- 	printf("\tMemory Error Information Handle: 0x%04x\n",
-@@ -644,17 +671,27 @@ static void smbios_print_type17(struct smbios_type17 *table)
- 	smbios_print_lookup_str(md_type_strings, table->mem_type,
- 				ARRAY_SIZE(md_type_strings), "Memory Type");
- 	printf("\tType Detail: 0x%04x\n", table->type_detail);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V23)
-+		return;
- 	printf("\tSpeed: 0x%04x\n", table->speed);
- 	smbios_print_str("Manufacturer", table, table->manufacturer);
- 	smbios_print_str("Serial Number", table, table->serial_number);
- 	smbios_print_str("Asset Tag", table, table->asset_tag);
- 	smbios_print_str("Part Number", table, table->part_number);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V26)
-+		return;
- 	printf("\tAttributes: 0x%04x\n", table->attributes);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V27)
-+		return;
- 	printf("\tExtended Size: 0x%08x\n", table->ext_size);
- 	printf("\tConfigured Memory Speed: 0x%04x\n", table->config_mem_speed);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V28)
-+		return;
- 	printf("\tMinimum voltage: 0x%04x\n", table->min_voltage);
- 	printf("\tMaximum voltage: 0x%04x\n", table->max_voltage);
- 	printf("\tConfigured voltage: 0x%04x\n", table->config_voltage);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V32)
-+		return;
- 	smbios_print_lookup_str(md_tech_strings, table->mem_tech,
- 				ARRAY_SIZE(md_tech_strings),
- 				"Memory Technology");
-@@ -671,6 +708,8 @@ static void smbios_print_type17(struct smbios_type17 *table)
- 	printf("\tVolatile Size: 0x%016llx\n", table->volatile_size);
- 	printf("\tCache Size: 0x%016llx\n", table->cache_size);
- 	printf("\tLogical Size: 0x%016llx\n", table->logical_size);
-+	if (table->hdr.length < SMBIOS_TYPE17_LENGTH_V33)
-+		return;
- 	printf("\tExtended Speed: 0x%04x\n", table->ext_speed);
- 	printf("\tExtended Configured Memory Speed: 0x%04x\n",
- 	       table->ext_config_mem_speed);
-@@ -683,10 +722,14 @@ static void smbios_print_type17(struct smbios_type17 *table)
- static void smbios_print_type19(struct smbios_type19 *table)
- {
- 	printf("Memory Array Mapped Address:\n");
-+	if (table->hdr.length < SMBIOS_TYPE19_LENGTH_V21)
-+		return;
- 	printf("\tStarting Address: 0x%08x\n", table->start_addr);
- 	printf("\tEnding Address: 0x%08x\n", table->end_addr);
- 	printf("\tMemory Array Handle: 0x%04x\n", table->mem_array_hdl);
- 	printf("\tPartition Width: 0x%04x\n", table->partition_wid);
-+	if (table->hdr.length < SMBIOS_TYPE19_LENGTH_V27)
-+		return;
- 	printf("\tExtended Starting Address: 0x%016llx\n", table->ext_start_addr);
- 	printf("\tExtended Ending Address: 0x%016llx\n", table->ext_end_addr);
- }
-diff --git a/include/smbios.h b/include/smbios.h
-index e4b5ff314d9..39090d3ba18 100644
---- a/include/smbios.h
-+++ b/include/smbios.h
-@@ -110,10 +110,42 @@ struct __packed smbios_type0 {
- 	char eos[SMBIOS_STRUCT_EOS_BYTES];
- };
- 
-+#define SMBIOS_TYPE0_LENGTH_V24		0x18
-+#define SMBIOS_TYPE0_LENGTH_V31		0x1a
-+
- #define SMBIOS_TYPE1_LENGTH_V20		0x08
- #define SMBIOS_TYPE1_LENGTH_V21		0x19
- #define SMBIOS_TYPE1_LENGTH_V24		0x1b
- 
-+#define SMBIOS_TYPE4_LENGTH_V20		0x1a
-+#define SMBIOS_TYPE4_LENGTH_V23		0x23
-+#define SMBIOS_TYPE4_LENGTH_V25		0x28
-+#define SMBIOS_TYPE4_LENGTH_V26		0x2a
-+#define SMBIOS_TYPE4_LENGTH_V30		0x30
-+#define SMBIOS_TYPE4_LENGTH_V36		0x32
-+
-+#define SMBIOS_TYPE7_LENGTH_V20		0x0f
-+#define SMBIOS_TYPE7_LENGTH_V21		0x13
-+#define SMBIOS_TYPE7_LENGTH_V31		0x1b
-+
-+#define SMBIOS_TYPE9_LENGTH_V20		0x0c
-+#define SMBIOS_TYPE9_LENGTH_V21		0x0d
-+#define SMBIOS_TYPE9_LENGTH_V26		0x11
-+
-+#define SMBIOS_TYPE16_LENGTH_V21	0x0f
-+#define SMBIOS_TYPE16_LENGTH_V27	0x17
-+
-+#define SMBIOS_TYPE17_LENGTH_V21	0x15
-+#define SMBIOS_TYPE17_LENGTH_V23	0x1b
-+#define SMBIOS_TYPE17_LENGTH_V26	0x1c
-+#define SMBIOS_TYPE17_LENGTH_V27	0x22
-+#define SMBIOS_TYPE17_LENGTH_V28	0x28
-+#define SMBIOS_TYPE17_LENGTH_V32	0x54
-+#define SMBIOS_TYPE17_LENGTH_V33	0x5c
-+
-+#define SMBIOS_TYPE19_LENGTH_V21	0x0f
-+#define SMBIOS_TYPE19_LENGTH_V27	0x1f
-+
- struct __packed smbios_type1 {
- 	struct smbios_header hdr;
- 	u8 manufacturer;
--- 
-2.25.1
+Thanks and regards,
+Raymond
 
+> Cheers
+> /Ilias
+> >
+> > Regards,
+> > Raymond
+> >
+> >
+> > > > Do you mind sharing your remote working branch, so that I can have =
+a
+> > > > cross-check?
+> > >
+> > > I don't but it's really just the -next branch with your patches. I
+> > > think the difference is u-boots tool vs linux
+> > >
+> > > Regards
+> > > /Ilias
+> > > >
+> > > > Regards,
+> > > > Raymond
+> > > >
+> > > >
+> > > > > Cheers
+> > > > > /Ilias
+> > > > >
+> > > > > On Thu, 12 Feb 2026 at 02:24, Raymond Mao <raymondmaoca@gmail.com=
+> wrote:
+> > > > > >
+> > > > > > Hi Ilias
+> > > > > >
+> > > > > > On Wed, Feb 11, 2026 at 10:20=E2=80=AFAM Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > On Wed, 11 Feb 2026 at 16:30, Raymond Mao <raymondmaoca@gmail=
+.com> wrote:
+> > > > > > > >
+> > > > > > > > Hi Ilias,
+> > > > > > > >
+> > > > > > > > On Wed, Feb 11, 2026 at 4:32=E2=80=AFAM Ilias Apalodimas
+> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi all,
+> > > > > > > > >
+> > > > > > > > > Apologies for the late reply.
+> > > > > > > > >
+> > > > > > > > > I did test the patches but I see something weird on smbio=
+s type 17.
+> > > > > > > > >
+> > > > > > > > > Handle 0x0008, DMI type 17, 104 bytes
+> > > > > > > > > Memory Device
+> > > > > > > > >         Array Handle: 0x0000
+> > > > > > > > >         Error Information Handle: Not Provided
+> > > > > > > > >         Total Width: Unknown
+> > > > > > > > >         Data Width: Unknown
+> > > > > > > > >         Size: No Module Installed
+> > > > > > > > >         Form Factor: <OUT OF SPEC>
+> > > > > > > > >         Set: None
+> > > > > > > > >         Locator: <BAD INDEX>
+> > > > > > > > >         Bank Locator: <BAD INDEX>
+> > > > > > > > >         Type: Unknown
+> > > > > > > > >         Type Detail: Other Unknown Fast-paged Static Colu=
+mn
+> > > > > > > > > Pseudo-static RAMBus Synchronous
+> > > > > > > > >         Speed: 512 MT/s
+> > > > > > > > >         Manufacturer: <BAD INDEX>
+> > > > > > > > >         Serial Number: Not Specified
+> > > > > > > > >         Asset Tag: Not Specified
+> > > > > > > > >         Part Number: Not Specified
+> > > > > > > > >         Rank: Unknown
+> > > > > > > > >         Configured Memory Speed: Unknown
+> > > > > > > > >         Minimum Voltage: Unknown
+> > > > > > > > >         Maximum Voltage: Unknown
+> > > > > > > > >         Configured Voltage: Unknown
+> > > > > > > > >         Memory Technology: <OUT OF SPEC>
+> > > > > > > > >         Memory Operating Mode Capability: None
+> > > > > > > > >         Firmware Version: Not Specified
+> > > > > > > > >         Module Manufacturer ID: Bank 3, Hex 0x04
+> > > > > > > > >         Module Product ID: Unknown
+> > > > > > > > >         Memory Subsystem Controller Manufacturer ID: Unkn=
+own
+> > > > > > > > >         Memory Subsystem Controller Product ID: Unknown
+> > > > > > > > >         Non-Volatile Size: 16383 PB
+> > > > > > > > >         Volatile Size: Unknown
+> > > > > > > > >         Cache Size: Unknown
+> > > > > > > > >         Logical Size: Unknown
+> > > > > > > > >
+> > > > > > > > > Any idea what <BAD INDEX> and <OUT OF SPEC> represent?
+> > > > > > > > > I tested this in QEMU
+> > > > > > > > >
+> > > > > > > >
+> > > > > > > > I just retested it by below qemu cmd after I rebased it to =
+the current master:
+> > > > > > > > qemu-system-aarch64  -bios u-boot.bin -machine virt -cpu co=
+rtex-a57 -m
+> > > > > > > > 2G  -nographic
+> > > > > > > >
+> > > > > > > > Below is the type17 I got:
+> > > > > > > > ```
+> > > > > > > > Handle 0x0008, DMI type 17, 104 bytes at 0xbe678141
+> > > > > > > > Memory Device:
+> > > > > > > > Physical Memory Array Handle: 0x0000
+> > > > > > > > Memory Error Information Handle: 0xfffe
+> > > > > > > > Total Width: 0x0000
+> > > > > > > > Data Width: 0x0000
+> > > > > > > > Size: 0xffff
+> > > > > > > > Form Factor: Unknown
+> > > > > > > > Device Set: 0x00ff
+> > > > > > > > Device Locator:
+> > > > > > > > Bank Locator:
+> > > > > > > > Memory Type: Unknown
+> > > > > > > > Type Detail: 0x0004
+> > > > > > > > Speed: 0x0000
+> > > > > > > > Manufacturer:
+> > > > > > > > Serial Number:
+> > > > > > > > Asset Tag:
+> > > > > > > > Part Number:
+> > > > > > > > Attributes: 0x0000
+> > > > > > > > Extended Size: 0x00000000
+> > > > > > > > Configured Memory Speed: 0x0000
+> > > > > > > > Minimum voltage: 0x0000
+> > > > > > > > Maximum voltage: 0x0000
+> > > > > > > > Configured voltage: 0x0000
+> > > > > > > > Memory Technology: Unknown
+> > > > > > > > Memory Operating Mode Capability: 0x0004
+> > > > > > > > Firmware Version:
+> > > > > > > > Module Manufacturer ID: 0x0000
+> > > > > > > > Module Product ID: 0x0000
+> > > > > > > > Memory Subsystem Controller Manufacturer ID: 0x0000
+> > > > > > > > Memory Subsystem Controller Product ID: 0x0000
+> > > > > > > > Non-volatile Size: 0xffffffffffffffff
+> > > > > > > > Volatile Size: 0xffffffffffffffff
+> > > > > > > > Cache Size: 0xffffffffffffffff
+> > > > > > > > Logical Size: 0xffffffffffffffff
+> > > > > > > > Extended Speed: 0x0000
+> > > > > > > > Extended Configured Memory Speed: 0x0000
+> > > > > > > > PMIC0 Manufacturer ID: 0x0000
+> > > > > > > > PMIC0 Revision Number: 0x0000
+> > > > > > > > RCD Manufacturer ID: 0x0000
+> > > > > > > > RCD Revision Number: 0x0000
+> > > > > > > > ```
+> > > > > > > >
+> > > > > > > > If you didn't use smbios_generic.dtsi to insert new nodes, =
+or add new
+> > > > > > > > 'memory@' / 'memory-controller@' nodes into your DT, you sh=
+ould get
+> > > > > > > > the same result as mine by default.
+> > > > > > > > If you still can not get it, can you give me your build ins=
+truction
+> > > > > > > > and qemu cmd for reproducing?
+> > > > > > >
+> > > > > > > I used qemu_arm64_lwip_defconfig
+> > > > > > >
+> > > > > > > qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57=
+ \
+> > > > > > >           -machine virt,secure=3Doff -bios u-boot.bin -charde=
+v
+> > > > > > > socket,id=3Dchrtpm,path=3D/tmp/mytpm1/swtpm-sock \
+> > > > > > >           -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm -device
+> > > > > > > tpm-tis-device,tpmdev=3Dtpm0 \
+> > > > > > >           -device virtio-rng-pci -drive
+> > > > > > > id=3Dos,if=3Dnone,file=3D../debian.qcow2 -device virtio-blk-d=
+evice,drive=3Dos
+> > > > > > >  is the command line
+> > > > > > >
+> > > > > >
+> > > > > > I did these steps with a clean build (exactly the same as your =
+ones):
+> > > > > > $ make O=3Dout_lwip qemu_arm64_lwip_defconfig
+> > > > > > $ CROSS_COMPILE=3Daarch64-none-linux-gnu- make O=3Dout_lwip -j4=
+ all
+> > > > > > $ cd out_lwip
+> > > > > > $ killall swtpm
+> > > > > > $ rm -rf /tmp/mytpm1
+> > > > > > $ mkdir -p /tmp/mytpm1
+> > > > > > $ swtpm_setup --tpmstate /tmp/mytpm1 --tpm2 --pcr-banks sha256
+> > > > > > $ swtpm socket --tpmstate dir=3D/tmp/mytpm1 --ctrl
+> > > > > > type=3Dunixio,path=3D/tmp/mytpm1/swtpm-sock --log level=3D40 --=
+tpm2 -t -d
+> > > > > > $ qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57=
+ \
+> > > > > > -machine virt,secure=3Doff -bios u-boot.bin -chardev
+> > > > > > socket,id=3Dchrtpm,path=3D/tmp/mytpm1/swtpm-sock \
+> > > > > > -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm -device tpm-tis-dev=
+ice,tpmdev=3Dtpm0 \
+> > > > > > -device virtio-rng-pci -drive id=3Dos,if=3Dnone,file=3D../debia=
+n.qcow2
+> > > > > > -device virtio-blk-device,drive=3Dos
+> > > > > >
+> > > > > > SMBIOS type17 shows no difference:
+> > > > > > ```
+> > > > > > Handle 0x0008, DMI type 17, 104 bytes at 0x7e64b141
+> > > > > > Memory Device:
+> > > > > > Physical Memory Array Handle: 0x0000
+> > > > > > Memory Error Information Handle: 0xfffe
+> > > > > > Total Width: 0x0000
+> > > > > > Data Width: 0x0000
+> > > > > > Size: 0xffff
+> > > > > > Form Factor: Unknown
+> > > > > > Device Set: 0x00ff
+> > > > > > Device Locator:
+> > > > > > Bank Locator:
+> > > > > > Memory Type: Unknown
+> > > > > > Type Detail: 0x0004
+> > > > > > Speed: 0x0000
+> > > > > > Manufacturer:
+> > > > > > Serial Number:
+> > > > > > Asset Tag:
+> > > > > > Part Number:
+> > > > > > Attributes: 0x0000
+> > > > > > Extended Size: 0x00000000
+> > > > > > Configured Memory Speed: 0x0000
+> > > > > > Minimum voltage: 0x0000
+> > > > > > Maximum voltage: 0x0000
+> > > > > > Configured voltage: 0x0000
+> > > > > > Memory Technology: Unknown
+> > > > > > Memory Operating Mode Capability: 0x0004
+> > > > > > Firmware Version:
+> > > > > > Module Manufacturer ID: 0x0000
+> > > > > > Module Product ID: 0x0000
+> > > > > > Memory Subsystem Controller Manufacturer ID: 0x0000
+> > > > > > Memory Subsystem Controller Product ID: 0x0000
+> > > > > > Non-volatile Size: 0xffffffffffffffff
+> > > > > > Volatile Size: 0xffffffffffffffff
+> > > > > > Cache Size: 0xffffffffffffffff
+> > > > > > Logical Size: 0xffffffffffffffff
+> > > > > > Extended Speed: 0x0000
+> > > > > > Extended Configured Memory Speed: 0x0000
+> > > > > > PMIC0 Manufacturer ID: 0x0000
+> > > > > > PMIC0 Revision Number: 0x0000
+> > > > > > RCD Manufacturer ID: 0x0000
+> > > > > > RCD Revision Number: 0x0000
+> > > > > > ```
+> > > > > >
+> > > > > > By the way, I don't think it has any relationship with swtpm an=
+d the
+> > > > > > linux distro, so I also simply tried:
+> > > > > > $ qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57=
+ \
+> > > > > > -machine virt,secure=3Doff -bios u-boot.bin
+> > > > > >
+> > > > > > All works with the same type17 output.
+> > > > > >
+> > > > > > Regards,
+> > > > > > Raymond
+> > > > > >
+> > > > > > > Cheers
+> > > > > > > /Ilias
+> > > > > > >
+> > > > > > >
+> > > > > > > >
+> > > > > > > > Regards,
+> > > > > > > > Raymond
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > > Regards
+> > > > > > > > > /Ilias
+> > > > > > > > >
+> > > > > > > > > On Wed, 4 Feb 2026 at 18:13, Tom Rini <trini@konsulko.com=
+> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Wed, Feb 04, 2026 at 11:12:42AM -0500, Raymond Mao w=
+rote:
+> > > > > > > > > >
+> > > > > > > > > > > Hi,
+> > > > > > > > > > >
+> > > > > > > > > > > Anyone have a chance to review this patch set? It is =
+the last piece of
+> > > > > > > > > > > work to support all required SMBIOS types in U-Boot.
+> > > > > > > > > >
+> > > > > > > > > > I've been waiting for Ilias or Heinrich to have time to=
+ look at this.
+> > > > > > > > > >
+> > > > > > > > > > --
+> > > > > > > > > > Tom
