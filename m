@@ -4,93 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64C0BEF99C1
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 17:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF99EF99C1
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 17:53:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E88C83D5D;
-	Fri, 13 Feb 2026 18:53:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F0A7183DE0;
+	Fri, 13 Feb 2026 18:53:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ezVi2L9p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a00q3XEE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82A8083DC9; Fri, 13 Feb 2026 18:53:44 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 0ED6A83C4B; Fri, 13 Feb 2026 18:53:49 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D45C83015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 18:53:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FE2D83DE4
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 18:53:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b8845cb580bso196065466b.3
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:53:42 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771005222; cv=none;
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b8fa7e3672eso167008466b.2
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:53:47 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771005226; cv=none;
  d=google.com; s=arc-20240605;
- b=JiDxwGqf9c5q8BCgtq9lw76wIcHAx7r56/sKzrlJY2QTGevQfrx4X73P/5j7zN3CvT
- 304UQ8zzNz3q8qCDZ4j220VMaiGc9m4iBjGNH0Dwh4GISQI9x0yOg3q15RFIQ8P1M47E
- sUHDwx5xEkpYMs/8h/BKguIni+7CbyDxM2w+EbgyyIc40Uu4jceAx8pefTprh6zYFAto
- sBD2ry1KePrTqOFzJFU1Yrf4F/V2vZKdAkdmoQGFyOkWnFORuqo/Lg3kI2CbDLhDCZC4
- MsPhAvudXxWgxfAhlG9RiWmf8gH7wvKAKtcEIA57++qYyM9fy8Vte1Gsp9/2epeCsjal
- MoFg==
+ b=QnVAgcJjUXstGM3fccHZaPVzV4H2rlYjE+wTKjDZbZz8EsjuJVOC6/CLo7d0O4xVS8
+ ekcQiO0k57RzJ2DNjQzAsBZNM4+XiOZWfn72tY18nSgeynh13r1e+MvU/ljJM+3XmYLo
+ xZ340110Om6n8deL7uAhHqdmVTGqC/WaQ4Rtgj79WHWMZTwo0uPgy7ZAiwfHPh3ZMCT8
+ 4UfznB9+U2ImJEiyKn+d+QxMfLl5ptXYGf0VKNGwa2F6vxf8lP5lJmOLjgsBJACjFzOq
+ V+x2uP/DgEUyC9HfGUeaYavRIek1XX573zpyBkI/gxL23Az4LgtgGvC4gT/eMSo4SlMV
+ 3JTg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=pp5AAH9bquSiTEu+kkNj5Kb0mOI49vb3oSuvRSreRFQ=;
- fh=BNXxXodM6x/TTtNw5dDUbIgJJ3THT0IIKdNrgcKqd+M=;
- b=YShpdQVLUiM8H4NXB5uyGFb3UjZBZJcAYWNbVurL5J+f0ZWVqzzewrhxLJnz+2m3v8
- bmDRkQf2BGw1FmGhs8Kb+QoM7dQiIWgr9YR6yebnZOqsaoIb/OKp1Byd6L+Mtea7BPbx
- mRHOFBUgTjIFtc3xOjEPyaY+nMMSv2SYH/CYmPspZ6yZ0xLP3CbVRfZo6tzgglqu5LUN
- O477afKWLKJauTXRfWL6S0F4d6bxFSpTbPrRmtni120VdSOVghKEMxbeOHHhefQeyEwr
- +m4X/KIoo/SmZBpNDBwtf2g9/c+FBnng2pDGbRdTGsECAyYEPT+1q140FGT2dXNVrSmt
- 4kQQ==; darn=lists.denx.de
+ bh=FOWivUcSHOt98QrOD+5z7glXFynX4hrCMgTEsXHkRqU=;
+ fh=UFOIHENB9OyRLHo5EhMU/+v3+TTyRpbYR3vEGQnBiZA=;
+ b=QIVTrUHD3tu4GQRR2Kkp3DURmwAnTUeBq3jvUx4QCNNsuxP4yWdbZSmavX47TfwPBt
+ jvAWTuMghhQXdr16lMe6kUfAWfEio4lkVEv4BGImbBy6uxQSAOx6NH+L5mXqpUYNjt08
+ mDv8FnJkRzfdLTs3IU91q0blQr15QWvlgQqiPQlb40p55zHQDh3cSDfuCWCPWdUyN33/
+ m0Q6mbuP/yK6o5yy0WDvp6ghiHHErYiIRxoE/lF0ndNJX4u00SqLv7KX8ybIzfI75izF
+ KMsK51adKz1y8jzwUrq1NXtt6jCfT9YCZN4rks5XjwbRvCC3aoVjr+XC5QUjbPWzx37s
+ e7ZA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771005222; x=1771610022; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771005226; x=1771610026; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pp5AAH9bquSiTEu+kkNj5Kb0mOI49vb3oSuvRSreRFQ=;
- b=ezVi2L9p8KR2X+pAHsVXb/Dt/cTCgYofFtiibbXs4T1FHdiAa+1HAZEtYUhHjOHsiJ
- vkdVMetsuCmKJGhztrng91FgWiO4DQLfqrFqP2KqwjHGGtj+uM0DLBZYH0NRMT/67gDb
- iAEtktnEEANPLrHFXJDcCcZ5bSW5sQ69OTg4c=
+ bh=FOWivUcSHOt98QrOD+5z7glXFynX4hrCMgTEsXHkRqU=;
+ b=a00q3XEEZE+SFzblAGI3mBGZuaiQ0SpojuqDM1VPFIIThx9I1DIpiXDb8uNWWAbVAT
+ FF3ZFKO+F22k9AMT9Jc1JGa36IYCLEFPs9L2wKy39OkA/alPc5NnWYvfBzVMC16cSPgn
+ Irz0Ao/mTgJ9YgXWgZ+iTcRRQfApV3JPe/mkc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771005222; x=1771610022;
+ d=1e100.net; s=20230601; t=1771005226; x=1771610026;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pp5AAH9bquSiTEu+kkNj5Kb0mOI49vb3oSuvRSreRFQ=;
- b=drlcS15CwlVkYEVYt/OfoxbKTLTY0iJIsjUE6DDCscZGCx+RORpcEEnNDvnHFkXCWa
- Eb9Sha795krGeOgtavjyJrzGy2YdYVS+YbmbO+eceWzRKTII2AmEgJNeHaZI4yybCCh8
- PNPKtQ7hUP2rVR1HIw6mPgv8h1SlFoQoPJGzm67OUWKTfdli75E32Kb2ElvyACDXwtIl
- S2K6oN6weRwizMGjkrHj6ol1BPxct5caRUQfVj/Q3/4SRlv7+ydQ7eUcU4XIjRU75NBM
- nYvzizJs3JO6TuJJ7NQan8Lyh7P88dLUIbbRb5szP14n6y0Cbhj2nSl56fpZ0J1ZyFKk
- +8FA==
-X-Gm-Message-State: AOJu0YxLtQI9tKTZY7qZ3M7pmU2Njq0Szsm1vYGmvIBrRo5kv6X6sMNU
- XR3eVU6MvibMGReU8VbkCixKTEJ58y+Qq9ngnVyH4myOxHHUFXnjvk0gXm51MZANj2ff+Jgr8Nn
- xSRhjZpkiXGy+cWt9G6ug2GjC+v4PFbt28AIU/CkH
-X-Gm-Gg: AZuq6aLBczPf0qRwgOqpeEqVyU10xHH0QvuqbEazk/Z4XeDdY2hwAYNU6ntVjku+3sT
- NNsYxDRFiSy5luUy5/fZpxHZca6rFpP2Lsnxds9t1XYtcvfhhvB2e21tcz4k1uUTVXW8SxpATCI
- S4MRjvs+H+pic2uHr+Aysa6fOX5tpQXiK11xJy8uhTRuT020Sf+FzQx2gwZzk4wAtL5ZLfbiKMs
- gJmQ7jFmcPu9RXBeZPfCp/UVHs+5IcwF0SGRWIlxNBBdnUr/tgAaCt0jdjzEc6ktcav5dFqzc3h
- MLnWxg==
-X-Received: by 2002:a17:906:6a22:b0:b8f:9237:4933 with SMTP id
- a640c23a62f3a-b8fc3d3f906mr12856466b.64.1771005221895; Fri, 13 Feb 2026
- 09:53:41 -0800 (PST)
+ bh=FOWivUcSHOt98QrOD+5z7glXFynX4hrCMgTEsXHkRqU=;
+ b=bL7EkiRDgQs/p6GhzIEQld5Kfmks4kYYql1CyuzvVwnGe+k57XPvUa1hcgX5alocz8
+ Ast7YKQ2tadXNa/VPOZXvC9V1H2ziIc3+vn6D9c37DWlQwuIhAPvydqUcaNxba3XVZHI
+ cpCtUZeBnWR6CKey7ujW2SCmZhLXVe+CKDb+jIDIqDdR3PyPNH/SIMV7aB+sBix4j5PC
+ td2y5sve9giZbPE1EQazD+fVJ3Xa5lSkqLevrnmM2MEkXh8rDTnansTfaj/YLf9nnTvg
+ BLjscY8O/xY2NVbvHwNfGVlVJd1NYh9NnnQ2tE43I6MoHsiySe4yR61KZjA6kSQ/bzTJ
+ iMgQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXhOh+Jtlc5kePOtUWLNKUDHhZr3VSiCTtSdMUNljSm5Aw4NK38Y4IrOx9VZwKhSx483rLIKJg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEwh3FIphbDrtWUYM22JblbycNXpXAMW/d3LSH67xoMcI7CWc5
+ 5ehHD5Rcrc0B0jeKRqQyfqPfZ8fRFHglhRkmoWDl27DEeUizQmg6TbZ/kxXlrI7uVSV96SPsPWz
+ SSvfkXK2cYReVPZ9v/rHoMaXP0vZp7PIUYc/6tz+7
+X-Gm-Gg: AZuq6aKhLbUv59MfJrHiIvGT8fECKoBokHWtxri4BR2oqRbMJxdozD9hK2XcKR1iuwv
+ LafjPKj1rCMwckORKrModO/fLhsb+kcYPcQ4lFFXinUNuETBFdedraRDnkjs9g/9VFn0LB7lyvw
+ zaaBv7dM93BMx2v8t/3WtoV03GbwnWadxy6k/jgnLMsF+UiQXy2wecLWfEYW3hrjKDKQOBWJIkI
+ kveEtwYxGNYtnE40uf0fU18aigMmtfMwxjmh9bI7t7dkq+uAgx/sr69fLJVVm2fGT+iAk+jxBqQ
+ jkjdZZOMbYZynjYy
+X-Received: by 2002:a17:907:c23:b0:b86:ecfe:b3d with SMTP id
+ a640c23a62f3a-b8fc3cb8f4dmr16943066b.43.1771005226409; Fri, 13 Feb 2026
+ 09:53:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20260213001212.157033-1-marex@nabladev.com>
-In-Reply-To: <20260213001212.157033-1-marex@nabladev.com>
+References: <BESP194MB28058C540F0C3D28F4D08541DAA3A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+ <ffa1bf53-9d40-4297-a30c-ffb9d8113820@linaro.org>
+ <20251209141706.GV303283@bill-the-cat>
+ <20260213165658.GJ2747538@bill-the-cat>
+In-Reply-To: <20260213165658.GJ2747538@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Feb 2026 10:53:23 -0700
-X-Gm-Features: AZwV_QiBKOEVMou43dmQVPbj6QgW-oN0nmyAaRrtqZ6rLx5bjCVjzqqLBbRCUH4
-Message-ID: <CAFLszTi1M=J6+R1CcAJRY4gnQa87ScFkQ-YOK+NWzsB02VKnwA@mail.gmail.com>
-Subject: Re: [PATCH] binman: add CST backend selection for i.MX8M signing
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Fri, 13 Feb 2026 10:53:25 -0700
+X-Gm-Features: AZwV_QhG2DDfIjesMMTVTUYQM4ObsB0Iw44ZWs03KNG8QKE8XPYGNFByFKnPoKE
+Message-ID: <CAFLszTi2dWCN+rhXDkBX33ph4ww=6RumXAPECY5_MdzkcB3edg@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi: Add missing free in sf_get_bootflow
+To: Tom Rini <trini@konsulko.com>
+Cc: Francois Berder <fberder@outlook.fr>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de, 
+ Vignesh R <vigneshr@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,66 +114,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Tom,
 
-On Thu, 12 Feb 2026 at 17:12, Marek Vasut <marex@nabladev.com> wrote:
+On Fri, 13 Feb 2026 at 09:57, Tom Rini <trini@konsulko.com> wrote:
 >
-> Add support for setting the CST backend, both via DT property and
-> CST_BACKEND environment variable. The CST currently supports two
-> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
-> CST tool is invoked without any -b parameter. Keep 'ssl' backend
-> as the default, but explicitly pass it via the '-b' parameter,
-> unless the user selects 'pkcs11' via either method.
+> On Tue, Dec 09, 2025 at 08:17:06AM -0600, Tom Rini wrote:
+> > On Tue, Dec 09, 2025 at 12:16:33PM +0200, Tudor Ambarus wrote:
+> > >
+> > >
+> > > On 12/9/25 11:56 AM, Francois Berder wrote:
+> > > > Free buf if spi_flash_read_dm fails.
+> > > >
+> > > > Signed-off-by: Francois Berder <fberder@outlook.fr>
+> > > > ---
+> > > >  drivers/mtd/spi/sf_bootdev.c | 4 +++-
+> > > >  1 file changed, 3 insertions(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/drivers/mtd/spi/sf_bootdev.c b/drivers/mtd/spi/sf_bootdev.c
+> > > > index 017a74a3016..720faf51a1f 100644
+> > > > --- a/drivers/mtd/spi/sf_bootdev.c
+> > > > +++ b/drivers/mtd/spi/sf_bootdev.c
+> > > > @@ -35,8 +35,10 @@ static int sf_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
+> > > >
+> > > >   ret = spi_flash_read_dm(sf, env_get_hex("script_offset_f", 0),
+> > > >                           size, buf);
+> > > > - if (ret)
+> > > > + if (ret) {
+> > > > +         free(buf);
+> > > >           return log_msg_ret("cmd", -EINVAL);
+> > > > + }
+> > >
+> > >
+> > > can we use a devm alloc method to get rid of the extra free handling?
+> >
+> > No, because this isn't the kernel and devm alloc doesn't always free
+> > here. Making that no longer be the case (always freeing) is on my list
+> > to look at doing (drivers that use devm alloc always implys/select'ing
+> > DEVRES).
 >
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  tools/binman/etype/nxp_imx8mcst.py | 12 +++++++++++-
->  1 file changed, 11 insertions(+), 1 deletion(-)
->
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> index dd9f226b751..3a95da6a35d 100644
-> --- a/tools/binman/etype/nxp_imx8mcst.py
-> +++ b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -90,6 +90,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->                  'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
->                                                f'SRK1_{KEY_NAME}.pem'))
->
-> +        self.backend = os.getenv(
-> +            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-backend',
-> +                                              'ssl'))
-> +
->          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
->          self.ReadEntries()
->
-> @@ -161,8 +165,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->          with open(cfg_fname, 'w') as cfgf:
->              config.write(cfgf)
->
-> +        # SSL is the default backend, PKCS11 backend is optional
-> +        if self.backend == "pkcs11":
-> +            cst_backend = "pkcs11"
-> +        else:
-> +            cst_backend = "ssl"
-> +
->          output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-> -        args = ['-i', cfg_fname, '-o', output_fname]
-> +        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
->          if self.cst.run_cmd(*args) is not None:
->              outdata = tools.read_file(output_fname)
->              # fixme: 0x2000 should be CONFIG_CSF_SIZE
-> --
-> 2.51.0
->
+> We've since changed so that devm alloc does behave in U-Boot the same as
+> the kernel (except in xPL phases), so Tudor's suggestion is a good one.
 
-This should be documented somewhere, likely in the comment for this
-entry type, so it ends up visible in the docs.
+I still like the idea of having this patch so that others don't hit
+it. Does it show up as a leak on any code-analysis?
 
-Also, this code path will need a test, please.
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 Regards,
 Simon
