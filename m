@@ -4,98 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B3DCEF99D3
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 20:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0CAEF99D3
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 20:29:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BA7083DFF;
-	Fri, 13 Feb 2026 21:21:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C75A283AA9;
+	Fri, 13 Feb 2026 21:29:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f8NLkzHq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GAwq5XPS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DCFF83DFF; Fri, 13 Feb 2026 21:21:00 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 7218383CB5; Fri, 13 Feb 2026 21:29:15 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 112E583015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 21:20:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0230E83015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 21:29:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2aaf5d53eaaso8529115ad.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:20:57 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771014056; cv=none;
- d=google.com; s=arc-20240605;
- b=K/cPtyjId9ifbn4B4ZSRiqekocv/LsuwicinallgaLO9JN5Xshj6V6Mvpe5SrAuvU6
- PPDTgGlL3XFt5dLQ4y1mU6U1PhDYXxnRS5CBgKbU5YknffS3xkBTZsV+2bGid0V54pSu
- waMlglHt/xJNwwwhJuJdiM0U927PqNzmnJZCc6U1m5iMcLfEgbedkKMihpsDS9jxnjlR
- UPF6QWHF0i++GZOHGEFwX5usDxymUlSIxv6XfSI2ngsRBbFKKkVQVx/nygZEfEbZc5/5
- QhjmyaduO0UkeDf6yvKNjuyjKWDVAhLmyPz9A6GAOhVRlqvatObMmT0ULvCh4UlQXVIY
- i/9w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=bmzEflmCvKpst4oJa4TCoEoCGC2lnSFFKBN/WgmxDB8=;
- fh=zJE/Fo8l/szBmEOetLct695NX5uRaYsIjDN5aCBW4wU=;
- b=RBJIJcWY1VvIeRHN8t7kqaaydtgMuFj0kMtvI8m0ZVf4x/BW9LG9CcxOPvez53Aazb
- TFHypK9YeBk+vtO8+FeJ67SvVpuENGATWd1pHK2yXkCp0Vm7qCTj3bYw5fZBlnkxdYJk
- UQvbDG3vj25nAzATsQCLGLmfU/L130eCoVp0uz7cvcjnff2ZxsyCA0VKnh+dj7G5VpB0
- t96KZEiGpvcQCHmmJEcWCIUnXmkYj1daICunzbCPAqURBUkr8puxMw92So1yMfYSS2d0
- Egyy85GlfFSGP7dDpSVxLcNxjGW9qHPhTGjAIoJXaL+2M0wk7oHuGZObAM4iHLDPr4fF
- ms3w==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-463a94f8475so408979b6e.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:29:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771014056; x=1771618856; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bmzEflmCvKpst4oJa4TCoEoCGC2lnSFFKBN/WgmxDB8=;
- b=f8NLkzHqwiY+A/zlgGs+aK3HQAi/yhaIxmzpbudC4LRoTZ4s+LGi8p6yIDzsBo2RET
- rXKA6GuhGvOsNnFUACUNqFddL+evkTg6uSBhnshfy3XOZWKYsD81SWJ8OltU5ty5kDmM
- WPwm2zK0O8IEjBYF6eEbRxfB7sw1eEm548ytI=
+ d=konsulko.com; s=google; t=1771014552; x=1771619352; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UDqdbM5Hg87+YRWrmUCdVq80eviGK1Y8LtiC3xbnvPM=;
+ b=GAwq5XPS0BF4PsTKFLysPQBenmGYQTXcOdEtOcpLqZdUa/xFqeG6TvlpdBkGKiNxKR
+ SVj6UXpMJQi+OHOOpUM8tHl+sRoli7MJUItkhj0R2TrgcDMsrl0gmV7z9uT9s0HxKJh1
+ nRudYfbNui5XFaXbFCs/xo+bN8vJ6/B5P2e1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771014056; x=1771618856;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bmzEflmCvKpst4oJa4TCoEoCGC2lnSFFKBN/WgmxDB8=;
- b=KnTm1u5XJbUMlZpjuHRHW4Nexgk75HCjc+mbCWzlRzwFWQqxTnAThOmEXBWEEAfmzA
- Y8KM6sTCDpAjIcxBHpBH7ZJUWClHheN589TWEZDX1cIIBHNBJYVq46AF0uFqhr9iVur9
- RWvYcS1wTcRI38G/dfUgjyQdjzI3y+bjJv5c5lQhkZoPyeUhRRW+UDwoLqM92guq9/fo
- U1kkSU8S23E67ggAs3cSotJ+hbeVFyvDQw0WdJNlIlrmPLDbepwFWqoig0aKFiZSvaDR
- 7wnna2S4LKw68awneyw3ynLHzgf0LbgJFdLSClA67yQrWWTPaHAcsqS1FFqS30dG28si
- 2bLQ==
-X-Gm-Message-State: AOJu0Yz6wlWrNbYawWtFUqcYJFCp1n3zutMMIXmQ5/lFq1rjzU2hE2+o
- 2MctCBcFdzlWSMO3CnMC6T97tk4BgR4s6shMqTW71tR3Qq4gHP680yDCRQ1JLPhjoLqm8ele2oE
- KQLy27H4aKDhoKZ3H8V2DP13HhIcK7BWEgwZT7tfg
-X-Gm-Gg: AZuq6aJGzXaVtW2ysiw++gWCdo1jU+/63HX1Srvf0HqRClZBzXPKUOgPq/tNTfpsxB9
- EWxjklDm4B2MMqEfwHWmpbyi/F6pl6hI6ZvvOtKZp67N9gwP/BkBIBXtAQQKExGZCfYQa7pLNVJ
- MfLrGn4BzMHV0hW5ce/2D1E0t7ibit4b+1KGQFpRjrAvhG4miRwqR6edwFefdDdJyNFtFBciU5C
- k6k4J3BW0YuOeTZ35z3/a13azmpt/u4VHG4aTSHU3aswemTap091c47xOf+SIPhm5VO3yRSg7OX
- W2BP
-X-Received: by 2002:a17:902:ecc7:b0:2a7:6aa5:68f3 with SMTP id
- d9443c01a7336-2ad174dcf0fmr6005305ad.34.1771014056406; Fri, 13 Feb 2026
- 12:20:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1771014552; x=1771619352;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UDqdbM5Hg87+YRWrmUCdVq80eviGK1Y8LtiC3xbnvPM=;
+ b=VzvIVmgpZfLtkdRekrWTC8WK7Zxc2NFrh5eliK02cKJyT3hvnFgVI5z7jsG3NRAFgG
+ 6N8ZUuUFbVAPcde6FIjgumy8S3Ry45bUMTBAaXeDJSiw9R2sQRkyeBgTRI767EKxDDKv
+ 93VucgITdDJUvz0DxEF+p0dG0pdoE8K19bpi0CGWgNHqkK2Qv9AuXoKP5TZvDW/7OIGQ
+ oYj3ZlmgqG2iQqshkf74HQLDRDXyxXnIIVEFsb3IU7BDRpZjGi4MrMttGrVl0OVIuuH5
+ Nxe1tOcHFPpkLIbE8ZnX9oGO2XqXqFiqhpVvlsvWIrmWffJOhuEo4VjiDOcIaJY0xdX+
+ nWVg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXNX1uNUupDqyPsGXDzEzvyz6mODGRmeJJWkWtUfc4NoeYoIqm5UrTNHg+IjHibRfzuAhttX/M=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywf41vbrGkrDR9i8rLAWOlLxIyxmHGcn1p5jKai0a25sNVPPqC7
+ x57M1kv2cgvOhIN6cjfWq482QbOS/Z990d73MMZAOSu5ymRZy1gvtH9IOgmiOL5pjuw=
+X-Gm-Gg: AZuq6aKzFnLU3OajhPjv0PSz6qMzVduc/RxD2nKEyHwwt+ummHBe0UtD2s0gRpSLjGD
+ slBv69nFsJ1QOC8fSXdfpikeXTWCpCQVoRT+VKahXA4SNJTt6c12Tw2VX9lub6Gi47ye/qHVKlU
+ 3+aoam0dDsTnrG7dMJgue/+1nkSOHtwEq+gFjGjNeVFjhXppr1gcvFBZPBFCAd/DrqOnbj1+OIL
+ eSz7qhvmmCLT1brevmjOW3PV4v9Vn8snTnIGtYDPxDcye0eipHMppTPVtttq2B5FeoeByZVcjT3
+ Hmhkp78IX03OzPwAvoGg7vAy2s3uGCmCt9NQ/ip+08T+bfVXYAV2ziFXocyOFkrhHYMHp/GJSHo
+ wk6GVw7229BkhpntTrkJBhESNUh/ceo9qDyQxbhXUzPIrRqNsfN2sPcnF35MJNXmUKPvHfIvllA
+ JuVDbjWWTc4jLztzEJwru6lMsZMSKpmBpsQuucU13bxepYLVq4pykiEUd4QJq/W0tBMfnRJ2K5C
+ wFEVBe3D09lqsxAIaENc9NDR5M3RxTW/qcgbCNNO2Mym3qm9FL2OnK90sapHw==
+X-Received: by 2002:a05:6808:10ca:b0:44f:f025:303e with SMTP id
+ 5614622812f47-463b00359bamr848758b6e.6.1771014551604; 
+ Fri, 13 Feb 2026 12:29:11 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-40f062ee328sm1071820fac.4.2026.02.13.12.29.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Feb 2026 12:29:11 -0800 (PST)
+Date: Fri, 13 Feb 2026 14:29:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Francois Berder <fberder@outlook.fr>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de,
+ Vignesh R <vigneshr@ti.com>
+Subject: Re: [PATCH] mtd: spi: Add missing free in sf_get_bootflow
+Message-ID: <20260213202908.GM2747538@bill-the-cat>
+References: <BESP194MB28058C540F0C3D28F4D08541DAA3A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
+ <ffa1bf53-9d40-4297-a30c-ffb9d8113820@linaro.org>
+ <20251209141706.GV303283@bill-the-cat>
+ <20260213165658.GJ2747538@bill-the-cat>
+ <CAFLszTi2dWCN+rhXDkBX33ph4ww=6RumXAPECY5_MdzkcB3edg@mail.gmail.com>
+ <20260213180100.GK2747538@bill-the-cat>
+ <CAFLszTgFvec5DTx_c-TF0nAVAitp5MLX6aqgxoCoko0Lw4tqCA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
-In-Reply-To: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Feb 2026 13:20:16 -0700
-X-Gm-Features: AZwV_QjPsgpZWaNe5J7TTTKSjrskikg58HjcKMDrm_WleKEXSqCCKZlge4bKdjU
-Message-ID: <CAFLszTgtGwjyPt2HHf+ZorSfDOoLropv6b-v0WvYBLhkSGuoVA@mail.gmail.com>
-Subject: Re: [PATCH] dm: core: Don't allow ofnode_to_fdt() to return NULL
-To: Romain Gantois <romain.gantois@bootlin.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Tom Rini <trini@konsulko.com>,
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
- Yannick Fertre <yannick.fertre@foss.st.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lA9O6W+b9iTyCi3T"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgFvec5DTx_c-TF0nAVAitp5MLX6aqgxoCoko0Lw4tqCA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,65 +106,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Romain,
 
-On Tue, 10 Feb 2026 at 09:29, Romain Gantois <romain.gantois@bootlin.com> wrote:
->
-> The ofnode_to_fdt() function may return a NULL pointer in multiple cases.
-> Or, this function's return value is often passed directly to functions such
-> as fdt_getprop() which end up dereferencing it, thus causing a NULL pointer
-> exception.
->
-> Don't allow ofnode_to_fdt() to return NULL, to avoid a NULL pointer
-> dereference.
->
-> Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
-> ---
->  drivers/core/ofnode.c | 13 +++++++++----
->  1 file changed, 9 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index cf1cf8abfbe..af24a2c533c 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -164,15 +164,20 @@ void *ofnode_lookup_fdt(ofnode node)
->
->  void *ofnode_to_fdt(ofnode node)
->  {
-> +       void *fdt;
-> +
->  #ifdef OF_CHECKS
->         if (of_live_active())
-> -               return NULL;
-> +               panic("%s called with live tree in use!\n", __func__);
->  #endif
->         if (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) && ofnode_valid(node))
-> -               return ofnode_lookup_fdt(node);
-> +               fdt = ofnode_lookup_fdt(node);
-> +       else
-> +               fdt = gd->fdt_blob;
-> +
-> +       assert(fdt);
->
-> -       /* Use the control FDT by default */
-> -       return (void *)gd->fdt_blob;
-> +       return fdt;
->  }
->
->  /**
->
-> ---
-> base-commit: b99da05e1538b8fa153322da82917af2aa27e1d6
-> change-id: 20260210-ofnode-to-fdt-null-95a9f357819e
->
-> Best regards,
-> --
-> Romain Gantois <romain.gantois@bootlin.com>
->
+--lA9O6W+b9iTyCi3T
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+On Fri, Feb 13, 2026 at 01:19:54PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 13 Feb 2026 at 11:01, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Feb 13, 2026 at 10:53:25AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 13 Feb 2026 at 09:57, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Dec 09, 2025 at 08:17:06AM -0600, Tom Rini wrote:
+> > > > > On Tue, Dec 09, 2025 at 12:16:33PM +0200, Tudor Ambarus wrote:
+> > > > > >
+> > > > > >
+> > > > > > On 12/9/25 11:56 AM, Francois Berder wrote:
+> > > > > > > Free buf if spi_flash_read_dm fails.
+> > > > > > >
+> > > > > > > Signed-off-by: Francois Berder <fberder@outlook.fr>
+> > > > > > > ---
+> > > > > > >  drivers/mtd/spi/sf_bootdev.c | 4 +++-
+> > > > > > >  1 file changed, 3 insertions(+), 1 deletion(-)
+> > > > > > >
+> > > > > > > diff --git a/drivers/mtd/spi/sf_bootdev.c b/drivers/mtd/spi/s=
+f_bootdev.c
+> > > > > > > index 017a74a3016..720faf51a1f 100644
+> > > > > > > --- a/drivers/mtd/spi/sf_bootdev.c
+> > > > > > > +++ b/drivers/mtd/spi/sf_bootdev.c
+> > > > > > > @@ -35,8 +35,10 @@ static int sf_get_bootflow(struct udevice =
+*dev, struct bootflow_iter *iter,
+> > > > > > >
+> > > > > > >   ret =3D spi_flash_read_dm(sf, env_get_hex("script_offset_f"=
+, 0),
+> > > > > > >                           size, buf);
+> > > > > > > - if (ret)
+> > > > > > > + if (ret) {
+> > > > > > > +         free(buf);
+> > > > > > >           return log_msg_ret("cmd", -EINVAL);
+> > > > > > > + }
+> > > > > >
+> > > > > >
+> > > > > > can we use a devm alloc method to get rid of the extra free han=
+dling?
+> > > > >
+> > > > > No, because this isn't the kernel and devm alloc doesn't always f=
+ree
+> > > > > here. Making that no longer be the case (always freeing) is on my=
+ list
+> > > > > to look at doing (drivers that use devm alloc always implys/selec=
+t'ing
+> > > > > DEVRES).
+> > > >
+> > > > We've since changed so that devm alloc does behave in U-Boot the sa=
+me as
+> > > > the kernel (except in xPL phases), so Tudor's suggestion is a good =
+one.
+> > >
+> > > I still like the idea of having this patch so that others don't hit
+> > > it. Does it show up as a leak on any code-analysis?
+> >
+> > I'm unsure what you're suggesting. If we can switch these to devm alloc
+> > functions now that we match the expected API of the linux kernel
+> > (outside of xPL where we don't care about leaks) we don't need to
+> > manually track frees here.
+>=20
+> Yes I understand that. But it still looks like a memory leak. Does
+> coverity flag this as a memory leak?
 
-This seems to me to be a hole in the checking in fdt_check_node_offset_()
+What we have now, or what devm alloc does?
 
-Regards,
-Simon
+> Also, most boards do in fact leak, if this is correct:
+>=20
+> ./tools/qconfig.py -f DEVRES DM_DEVICE_REMOVE
+> 132 matches
+
+That is not, no:
+$ ./tools/qconfig.py -f DEVRES DM_DEVICE_REMOVE
+1389 matches=20
+
+--=20
+Tom
+
+--lA9O6W+b9iTyCi3T
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY+JkQAKCRAr4qD1Cr/k
+CuoRAQDT7fvLfxKhYSzhWoAwjy5V1+u5+OhUQZlozi12MEvucwEA+3XoJJHHwmbZ
+MlGcc+6hv+R+g00kAPA8tlsm5NE0VQk=
+=6/2S
+-----END PGP SIGNATURE-----
+
+--lA9O6W+b9iTyCi3T--
