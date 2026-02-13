@@ -4,96 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68E7EEA860
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 09:52:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB34EDF144
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 10:20:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10D9F83015;
-	Fri, 13 Feb 2026 10:52:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 433D783015;
+	Fri, 13 Feb 2026 11:20:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="QnR0+cuB";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="h8ag5fo8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE39183936; Fri, 13 Feb 2026 10:52:55 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ id 5A63683936; Fri, 13 Feb 2026 11:20:23 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5155B80FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 10:52:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id AD2BB80FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:20:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fmartine@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1770976371;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=WjM0E3YKwjPBRGUdo71AE7iV11idlP0W1b/vtXjAGmQ=;
- b=QnR0+cuBXIVDIl0dUpnS2iAnBcARR3a9CIntSpkC5q2ayXL9YnH4dWqtxA0ISkpZ9IN4Al
- 5UzMyCG89ktHwnKvON088IrUCoQRGPe74Wq9v/M5wl0nUsyO8Ge3B1ufrAkChQlkxZP4lZ
- Vdml4L0GNYcnWLfs/HMhjv9s+t3LYW4=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-647-VvmdEl8DONCKh_xUmojA9A-1; Fri, 13 Feb 2026 04:52:50 -0500
-X-MC-Unique: VvmdEl8DONCKh_xUmojA9A-1
-X-Mimecast-MFC-AGG-ID: VvmdEl8DONCKh_xUmojA9A_1770976369
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-435aadfaf4eso459128f8f.2
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 01:52:50 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770976369; x=1771581169;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WjM0E3YKwjPBRGUdo71AE7iV11idlP0W1b/vtXjAGmQ=;
- b=iatsC4dvJbt2Gvgn/awYgKGNrDqCUTH7JRdsseyGwpaLQr8Lx9c6PJauQHDB0+1Wnl
- a5lIJhZt1DBrccPgjvQKR6b737/XUu1QEli9VAd9prygLtoNQPLNXWacKyCin9kBPzkg
- uH/npl96QHgK6BxCAXKaYkPYy7uaPDXIi+slHjIqe0ZH0eZN3uAK2z3tRiJEjgqz4YZI
- N+48D5z5iKngUMGfPXzmZl+y0f8xoaPO5bTbYK/LjJ/relXI9eBAJ+M09Cf/N0hbY0NW
- CP8xaRYGCbJP60equsb5qBXjavrVUUKqJBGV/qZH5EzV7h8JLfzlIxfgvQkS5K5KtiFG
- zQnA==
-X-Gm-Message-State: AOJu0YzSTvP4R24UfvE0AzWeULnG3tHJizLDh48TB0fa6s1SoVckU/9o
- O+BV4gQ12xydyXiodCMPAY0ZfagMYdElfRsCTVdOdV25mNsR+G1N2EzSTsi3cLgOY5WNAfmPEo9
- W2dt4P7080QXY1XWOg8Mlc1ZqdZxuXDISoLV2+7wb7vCgG41AYKIYRxI=
-X-Gm-Gg: AZuq6aJE4VBKCKM7u3LPZ8yKyiG1bVUx9WRjphPfyPx0d1szG+NofT322M1s4jrp1wp
- v08rJqLgfKKLBd+y42u63zKhZY24NbYGgfZNiB6+Q2zZA/5wyqBlcJbsokaCHU6GqaaAFbrvzvk
- 4cu6H/kvuVQoqKWwwcs1YrVqeIeDsBNXsk7MPSx+Q9D3ZMupqcMFTbpd89SjWtaYLBPtKR7Dgrm
- wdD98DXnO2mqiqh+7hl3PiyJgG1wytLT6bAVyKOJ9/RCcm6QR1IJ/A/cvMrYWkwp0tpNdOObuxa
- vz+z4aRigKQQP0VwYAa6pI7YBLVmSH1+lm+/Cw677kwZdXRL8ZYPi5d3DDQxoVx80qXK+/yz5VC
- CJJHAWz5VCzLBUTqyhRKEcSIT++mHAButcBvUEO4J3WQJP6eXUH7TasoTFieSPHl8N8qmM5aZhU
- w+u/g7
-X-Received: by 2002:a05:6000:22ca:b0:437:7050:b5bb with SMTP id
- ffacd0b85a97d-437978cd852mr2405665f8f.14.1770976369336; 
- Fri, 13 Feb 2026 01:52:49 -0800 (PST)
-X-Received: by 2002:a05:6000:22ca:b0:437:7050:b5bb with SMTP id
- ffacd0b85a97d-437978cd852mr2405630f8f.14.1770976368868; 
- Fri, 13 Feb 2026 01:52:48 -0800 (PST)
-Received: from localhost (62-151-111-63.jazzfree.ya.com. [62.151.111.63])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796a6c1b4sm3941420f8f.14.2026.02.13.01.52.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 01:52:48 -0800 (PST)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- eballetb@redhat.com, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 2/7] disk: part_dos: Align dos_partition_t with
- struct partition
-In-Reply-To: <CAC_iWjJysPTkCTJ10qR8FmNxSBYT6mK7YWoqvxxwez+6H8Yf1w@mail.gmail.com>
-References: <20260212204511.619392-1-javierm@redhat.com>
- <20260212204511.619392-3-javierm@redhat.com>
- <CAC_iWjJysPTkCTJ10qR8FmNxSBYT6mK7YWoqvxxwez+6H8Yf1w@mail.gmail.com>
-Date: Fri, 13 Feb 2026 10:52:47 +0100
-Message-ID: <87ldgx6kcw.fsf@ocarina.mail-host-address-is-not-set>
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 2E8811FED6;
+ Fri, 13 Feb 2026 11:20:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1770978019;
+ bh=QFNliK2OCVn+It/vvqpS0sR0bSWmzSDYt/pA28lYMjk=; h=From:To:Subject;
+ b=h8ag5fo8qtWHuM5HloC1VS3LHydrc5uouWnBvxJBx9quiRDHvJH9FGYNGcLWeQm3q
+ dk2uA49m8DbFp/A8ZLJigzjpoovUxb9mH7jKvLmu0OOu3nKGM0//NG8uE5GOzm9HWq
+ ATC9MzKvqowQOQAXRJizdDjlr+I9+7WaxDYDPUk7NOhOQghXFYZI/KXLdnDjc5TLMs
+ 17rbxyXCwCvbjF6tZgAJrIciiDvggbyD9gH5usPbCSU/tILKvNqmPAGjt1ZR6oehaY
+ PrYDzoNs0Nxn9mO9pFJXR41by+vxTvER8eQss0mt4GRZTO+gCcbzLsCWCz1vK7pILi
+ 7kVs2if4Pdf+g==
+Date: Fri, 13 Feb 2026 11:20:15 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Suhaas Joshi <s-joshi@ti.com>, Bryan Brattlof <bb@ti.com>
+Cc: Francesco Dolcini <francesco@dolcini.it>, Anshul Dalal <anshuld@ti.com>,
+ u-boot@lists.denx.de, trini@konsulko.com, vigneshr@ti.com,
+ n-francis@ti.com, s-tripathi1@ti.com, k-malarvizhi@ti.com,
+ kamlesh@ti.com, vishalm@ti.com, d.schultz@phytec.de,
+ w.egorov@phytec.de, ggiordano@phytec.com
+Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
+Message-ID: <20260213102015.GA10715@francesco-nb>
+References: <20260210092646.w5bugrscifmsh5px@ula0507357>
+ <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
+ <20260210105014.GB214446@francesco-nb>
+ <20260211101113.GA176369@francesco-nb>
+ <20260211112109.56e27kyy4coqpcbb@ula0507357>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: YBocqedTF0UwTVRP_VZzS2fVKil_uF9HmRbZuf8f0Ek_1770976369
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260211112109.56e27kyy4coqpcbb@ula0507357>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,70 +72,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+Hello Suhaas, Bryan, all
 
-Hello Ilias,
+On Wed, Feb 11, 2026 at 04:51:09PM +0530, Suhaas Joshi wrote:
+> On 11:11-20260211, Francesco Dolcini wrote:
+> > On Tue, Feb 10, 2026 at 11:50:14AM +0100, Francesco Dolcini wrote:
+> > > On Mon, Feb 09, 2026 at 02:20:01PM -0600, Bryan Brattlof wrote:
+> > > > Do you mind copying a boot log to a pastebin for me? I thought I had one 
+> > > > of these boards but I'm still digging around for it. 0x80000000 should 
+> > > > be where we load TFA now days unless some boards have opted out of 
+> > > > letting U-Boot move it to the bottom of DRAM
+> > > 
+> > > Here some more logs
+> > > 
+> > > https://gist.github.com/dolcini/aa4b669c6349cc6da1b9e7b19cf53fed
+> > > 
+> > > The files are named with the commit sha that is tested.
+> > > 
+> > > On Tue, Feb 10, 2026 at 02:56:46PM +0530, Suhaas Joshi wrote:
+> > > > Verdin boards are the only ones that are reporting this issue. Is it
+> > > > alright if we revert only the two Verdin-specific commits, and let the
+> > > > rest (TI and PhyCore ones) stay as they are? The patches are pretty
+> > > > un-connected to each other.
+> > > 
+> > > Verdin AM62 should not have anything special, the code is all there for
+> > > everyone to see, including the defconfig, the DT and so on, and the changes
+> > > we are talking about to me are self contained withing the SoC. Something
+> > > is wrong, and we are not understanding what yet.
+> > > 
+> > > I just retested once more 42b3ee7fa524 and it just hung, you never know
+> > > if I did something wrong. And for what matter this was spotted by our
+> > > CI.
+> > > 
+> > > > We are working on figuring out why Verdin is seeing these issues, in the
+> > > > meantime.
+> > > 
+> > > Anything I can do let me know.
+> > > 
+> > > If it matter the board that I am currently testing has 1GiB DDR RAM, and
+> > > the SoC is a AM6252ATCGHAALW. 
+> > 
+> > I was able to trace the issue to the get_ram_size() in
+> > verdin-am62.c:dram_init().
+> > 
+> > That function walks the addressable memory range to dynamically detect
+> > how much memory is available.
+> > 
+> > Not sure on the proper way to fix it however, Bryan? Suhaas?
+> 
+> Yes, this does seem to be the issue, even in my digging. I have sent a
+> patch to fix this. But since I don't have boards, I have not tested
+> this. Could you please test this and let us know if it works, or if
+> there are any other issues that pop up?
 
-> Hi Javier
->
-> [...]
->
->>         unsigned char end_head;         /* end head                             */
->>         unsigned char end_sector;       /* end sector                           */
->>         unsigned char end_cyl;          /* end cylinder                         */
->> -       unsigned char start4[4];        /* starting sector counting from 0      */
->> -       unsigned char size4[4];         /* nr of sectors in partition           */
->> -} dos_partition_t;
->> +       __le32 start_sect;              /* starting sector counting from 0      */
->> +       __le32 nr_sects;                /* nr of sectors in partition           */
->> +} __packed dos_partition_t;
->
-> This always has to be packed and the part_dos.h definition had this
-> wrong all along?
->
+With commit f9ffeec4bdcf ("board: toradex: Make A53 get RAM size from DT
+in K3 boards") merged we had our CI running on our whole board farm
+last night.
 
-I wondered exactly the same when working on these patches and did a bit
-of code archaeology, so I'm glad that you asked!
+Good news: the issue is confirmed to be fixed on Verdin AM62P and Verdin
+AM62 [Quad|Dual] with [1|2]GB RAM.
 
-It wasn't wrong because it was using unsigned char arrays for the start
-and number of sectors struct fields, instead of __le32 types.
+Bad news: we we do still have a boot failure regression on Verdin AM62
+single core with 512MB RAM. I have no idea if this is the same issue or
+a different one, but from the logs it look different (despite that I
+decided to keep using this email thread and not start a new one).
 
-Given the alignment of a char array is 1-byte (and all the other fields
-are unsigned chars), the structure was naturally aligned.
+The failing board from the logs uses a AM6231ASGGHAALW SoC, maximum
+frequency 1GHz, we also have another device failing, single core again,
+with maximum frequency 800MHz, the working one have 1.4GHz max
+frequency.
 
-But I agree that using __le32 and __packed is preferred, and in fact is
-how Linux defines this data structure in include/linux/msdos_partition.h:
+Worth noticing the errors
+  Failed to set clock rates
 
-struct msdos_partition {
-        u8 boot_ind;            /* 0x80 - active */
-        u8 head;                /* starting head */
-        u8 sector;              /* starting sector */
-        u8 cyl;                 /* starting cylinder */
-        u8 sys_ind;             /* What partition type */
-        u8 end_head;            /* end head */
-        u8 end_sector;          /* end sector */
-        u8 end_cyl;             /* end cylinder */
-        __le32 start_sect;      /* starting sector counting from 0 */
-        __le32 nr_sects;        /* nr of sectors in partition */
-} __packed;
+These are new compared to the previous U-Boot release, it affects also
+other boards, and I have no idea if this is related to this issue or not.
 
-The struct_partition in disk/part_efi.c is said to be taken from Linux's
-linux/include/genhd.h, which was the old location before commit 1442f76d4317b
-("1442f76d4317 block: move struct partition out of genhd.h").
+Logs of the failing device (U-Boot is commit f9ffeec4bdcf1da655a0ffea482062adde78fee8)
 
-My guess is that the old data structure defined in part_dos.h was copied from
-Linux, and that at the time of the copy it was using unsigned char arrays too.
+U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
+SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
+Failed to set clock rates for '/a53@0': -22
+SPL initial stack usage: 13456 bytes
+Trying to boot from MMC1
+Authentication passed
+Authentication passed
+Authentication passed
+Loading Environment from nowhere... OK
+init_env from device 9 not supported!
+Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
 
-But the struct definition has been like this since the original Linux git
-import, so I couldn't check if my guess was correct.
 
-In any case, now this single data structure definition is aligned with how
-both  the Linux kernel and edk2 define it.
+Logs of the booting device
 
--- 
-Best regards,
+U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
+SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
+Failed to set clock rates for '/a53@0': -22
+SPL initial stack usage: 13456 bytes
+Trying to boot from MMC1
+Authentication passed
+Authentication passed
+Authentication passed
+Loading Environment from nowhere... OK
+init_env from device 9 not supported!
+Authentication passed
+Authentication passed
+Starting ATF on ARM64 core...
+NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
+NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
+U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
+SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
+SPL initial stack usage: 2048 bytes
+Trying to boot from MMC1
+Authentication passed
+Authentication passed
+U-Boot 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
+SoC:   AM62X SR1.0 HS-FS
+Reset reason: POR
+DRAM:  1 GiB
+optee optee: OP-TEE: revision 4.7 (a9690ae39995af36)
+Core:  160 devices, 35 uclasses, devicetree: separate
+MMC:   mmc@fa10000: 0, mmc@fa00000: 1
+Loading Environment from MMC... Reading from MMC(0)... OK
+In:    serial@2800000
+Out:   serial@2800000
+Err:   serial@2800000
+Model: Toradex 0073 Verdin AM62 Dual 1GB ET V1.2A
+Serial#: 15412849
+Carrier: Toradex Dahlia V1.1D, Serial# 11287113
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+
+Unfortunately I do not have a single core board to test readily
+available now, and I will be out of office a couple of days, but
+I decided to share this immediately so that we can try to understand
+what's going on. Middle of next week I should be able to do more tests.
+
+Thanks for the support,
+Francesco
 
