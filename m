@@ -4,104 +4,143 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E979EF48ED
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 08:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C64CEF48F0
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 08:52:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A282883015;
-	Fri, 13 Feb 2026 09:47:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B89A83015;
+	Fri, 13 Feb 2026 09:52:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="djg/Yvrk";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="U4yNvapm";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ktAtIgEl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A0BC83CBD; Fri, 13 Feb 2026 09:47:39 +0100 (CET)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 75E2383AAB; Fri, 13 Feb 2026 09:52:08 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 970A480FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:47:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E8E780FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:52:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-64ae2ce2fe1so654534d50.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 00:47:35 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770972454; cv=none;
- d=google.com; s=arc-20240605;
- b=UMCDb6OhWnQjw8VgKDi7khVJuOpiBtjXErh7cVkomZMfkJn1iwWiChCrzlxgnpWJIP
- E4K+MF2G6+ACeCy8ou42C4DQaXIWCY/Vfn3ZCGG+rN+TjCVnZ1CG+d9ZSTvuaenwytac
- +4lEWtJINea/xkYA2OKM5u4mmvDkmRtO+zGjDyalYNtjeDMjZvEtCM61ueE/Cwzlytsc
- jrNPdpt2skXei2eRUFmvPlmzcC69zqXpKO7FyObVfk4oTYnB7+Uutubtj9U0Ovq8Konw
- kIC2PvUdwNoX5ELbdDQEddNuhACurH7E0o4oU5rHqD43zB9REyvMB1ui5wIuIRvv1TuU
- Nq3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=VNAFFuYNbvBdPaamzYkweJCeZ+K8EymdLhC3pQl7JB8=;
- fh=vyfbts51IeL9YqiXEXChvJnWUKQFbZdi8gERlNYTnqw=;
- b=ZdCqh+6r1MW77x7lFrpAXrujU0om7Un6+s5UB8khqFaqf5B0lpfuY3Nc/w16vki4mB
- tD3dDMSUBHYNeF4Sevs49U/ggYjgvnyctihkRYcKDGUkCWvFVwhlc9VpEhKcckKE0kzt
- QmyTWGKW6s9LEN5K4O6ax7hvOTxZE7wXC/0MUNi7uU+j9Dt5MT8N9euIYK8qvohqsNcY
- bZZXjSPmxTQ5OR8X8Q7DyOvSsj6y4vvlUUQyG3nHcHMzsTwmjmvvi1wOs28QtAIZMNDb
- VTA3Wfb2CUsXJ/8UHRo/bjxfAttMgy4CcDEJo1fKeiP9vJpqq17ePREJtlrZIhpAmMQp
- ddew==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61D44aGB1756557
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:52:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ mQqcv4yKoQ/gyg3ncKMcPrxpfY9d/L8BAgLDryPKJmc=; b=U4yNvapmtjjvaSak
+ lAe6sXtMLzBmxd8LHo0JJrEgkD3NkAfsyGTOny4r+jQ3eZ7vg7E8n/pBbDfKI/Fs
+ p4kc5M37t3UR9vFd9p452ow6Ls2XqPPFcMlT5xK7nigtjDX85JBrlOnzbnRDDzWh
+ aNoBptuoc803oHvCgn4WA2MV9sE4wa3Hdgq46EMIY6JVFB8gLu8A6oXeFLfXo3FT
+ NVbH7YQKEKZQ6OINCBJstPYSkqrp/aDXscbvoyvAmwhD3xVS19gQ81KnmhfEzea3
+ bqusqLEK5F7odw0m1WASezdYjjQOmDZzKMpC5+5mmaL9vSafuRWQvlHh3F/mzLrn
+ ztE2NA==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9mb12mgr-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 08:52:03 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2a784b2234dso31886685ad.1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 00:52:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770972454; x=1771577254; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VNAFFuYNbvBdPaamzYkweJCeZ+K8EymdLhC3pQl7JB8=;
- b=djg/YvrkH1NZ0xf+7R9UDw/jpwGTL74Qzb4uAAxhLjGlcvzYOo1N8OVp8KKrS1EmN8
- wxYWQ1pZ3DSyZ/wzQ2yiuYODPozZP5QL3flRs2dTnRPQP3sTzXhGR04ILwBs8bcTUvxs
- iBG7+begbIIz4bs5YKFiFKB3SPmcHx639XgjLKz3Qi9eHfg5FIVQyE0cwjf65ZMum8lf
- SrX7ymQq/5J9so6eOcDvIkeusLcCGZbztUGBoqtEW1JZotD+ljmDtEu4tFVH1wYXqN/7
- bSu00+x4kT+fnrl8T3xgQ6U2ZSrpeWBR37gsk6duv/oN86DfPrsJSCCIOJkXhXeoGVSR
- GUDQ==
+ d=oss.qualcomm.com; s=google; t=1770972723; x=1771577523; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mQqcv4yKoQ/gyg3ncKMcPrxpfY9d/L8BAgLDryPKJmc=;
+ b=ktAtIgElIFGmpSvKIO82aaX0RoNtvCLRdrg+PRfH9F40OtLVkEBuDGvtxFYtf43w2/
+ AQskXvBavWUjguqHei17pJgusfAohDuFvNjnAzn8IksDTf1cBIYxvEBmd9FXmcHm9ewf
+ fz/S/dIAhKapfD4rYjLVvyBi8c3hJl46xaPv3HUwIHA8OVGFkwuNZ3XjAd7kyg05zOIt
+ IxQmvyhN2634RfXyvCto5NhxkdW5MY1YbK8aqJO10kwoUhq6QsjMTMSYjDgci+XYasyr
+ 2hzJoKHBzy8qlIXVr9i192ThE7a/WvCZj+n/l8MMi6xFiEpU9oVfIvxXGktgK+BUvLXe
+ wpTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770972454; x=1771577254;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VNAFFuYNbvBdPaamzYkweJCeZ+K8EymdLhC3pQl7JB8=;
- b=gNDNwKQkrANX3PrLKEt8hiH4fWI/dx9BZDgunvYCLrZlFyFBVa1CcCpv9pprrQQM/9
- 63xnYxYSa7LYoptSnb4N2h2wGhU1RgmOeg2Y2jtrbyGnf8AGqIsEwX/NdCnOhbF8MgYt
- Lq91/CEYnyJ6xdKceuXEb0jOjfQfQ6Yl6xp4KdF4bRAF2kqPX+evN/SMS4P4X/i7NbBL
- loIWBNglb220c09VhWNujhmFk1HYTN2CnC0QlLU2wDZE9vwQ1EuAOOf80ZtLuhe2eUSk
- iPwzh1135mgPayPI6PW5c9XFDICI7N55ne0bFiW4tx26k2ruvbY102fC/fzlRJJhkyP3
- ZLAw==
-X-Gm-Message-State: AOJu0YzK9iuDtP0uodNSKWjIZxCUQhD+Rr3QsokWuiM/mXahRdCeAaj1
- usLIfpXVksCT2+CaS0chkLwzXAkR8czBi0qEomsDXQm0ZWU7oe84Zji4lSUgLSwx5VESBEb4No9
- Vl+92+GJwsEJEshoamv8h+KNgvCjCq889tn9mJG639A==
-X-Gm-Gg: AZuq6aL1BLiW9EzadsNZlKoRVNzK/vsOwQKcrEf+JJbmcPP7uoWtNo2s3iaUNktP6GJ
- 0rBx695B1pK1Uy0QaBtkA3iJtbMJn4EeJDHzPjNWIx+KDPxm0v2krol9UrsObuuWA+Xv8QIjy4v
- ekJ5bb07AyHapFLjx/wsHGarUL2FvmsfSzdCSm3+/LJEnWR2N9DyFPj6/H9NvPazuA+9d/l8KQh
- 67n1oMaOc1OPUT1tTuB/OrNIjiSdO85WLl4szylJKSAgv02YyqxeTMQckOoskKaRDH4Hym2CTl2
- YTtMyCWbVI057gpstriCl44ZtFVziQPKJe5BkbP1HvxeFcE9zNuf2axZZP5c26IXFkrusJkbEf6
- tZOv/w6UniMH7h6ztvwhPpKwBvEYhVRx8a4MFiajtH7NnewvGYKaRSldJy0KEMTnIQ2LAijLPG5
- mYaNopFQ1ij0r+x+h18j5TLJZmXdgeM+pto+6wweejmhMppHs1SQY79MdZaGGsPdOYmbrKP2IEm
- 8IOd5XEvhIzubWqCzNReKZ2Dw6k0SEktQR+ytiZZWmcbXpF+/R7bP4XVss4ULO4/4/U939dQI1B
- NmOeMqyf35187pYE09ZfdLSWEk3cql875Bs+K+2CDrQXvliLCKA4pXM=
-X-Received: by 2002:a05:690e:d83:b0:649:d5ca:7988 with SMTP id
- 956f58d0204a3-64c19b15cffmr712603d50.48.1770972454390; Fri, 13 Feb 2026
- 00:47:34 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770972723; x=1771577523;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mQqcv4yKoQ/gyg3ncKMcPrxpfY9d/L8BAgLDryPKJmc=;
+ b=m1zMJpJLnQmb0uG9YKsJSOWgbq0MBuPorMQR50ByNg4VeBFXilHo4WKOklDT5NHYsq
+ v1FR/TkaUzktJoHBAN5kcrUMweLYaI8iRRwOP2+jXV3a9tCm1mYodt2JOoR1eckSpBAb
+ bpwLIxvMLVxkm0sAYAjDAbtuGW0V/sRKpIkbUnjugX7aZ+NEbz3K21oTSX0g6tkG+HxT
+ zyK4Uj2q6HHJ5iNI1WYlE0bhIfYWGQPwH9FDdjfjVBAp5tbHao5mZA5s6g9vLyDXayfL
+ M+FCdz87cEPATuBd5aLxrHnUVbrs+GuJIv+ORIIXsoc5mh0MndVtUS8F9ArIfCN9EsaH
+ xwLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVcn6EbJ5OhIfv6nC0cR6MTiCZ7ZnMTfnHh4xm8kNe7kqhQNxC0HA/LGyFDRRrQR8dfTVwa/34=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8M4TRF3gOxeFMhGZZ08slB/lI7uG6bob6yZMl4FzZdW77wsKs
+ Os00g/iRjv3qQoLWkXSk9Q8PVaMSm6Uq6aXtLNLji5KWdkMyZNzWbrLIJwLQGRNNdw8mhw/qvFf
+ Zsi1B/oGixHKNESlQfBZh0kinchT4Jdp5p4lka0H0x/FNF5xYOpsZkVR4
+X-Gm-Gg: AZuq6aJ7+uBRVj9f4cqjocJZOoR71oGXw1cJte2eVUv7dO+EcoEoXmyikLwHy/vTb58
+ 4tK1eQhPI7XkzaFj7Rhw8zVJaJxMB8u3lU7/4s+HXMl+EK+IzBvodk5YkFXBm9NCEbTxG1JkalK
+ PNjEoJIVB6+BETM+/x/mRXFdCJeZtRf2QgBYWOStnMYxf4gU2V6rRR/kFgKNl7Xw28t0KPsFDU/
+ PrSRcDayFeJg+e5lrmBMm3oVXU81HSCFshZIvqPHrZ6grJ80aPBtXNhI1RCsXujpo3ZgFQxBQ71
+ 5fkBOA9HH2XtJg6MNZZUgVKAzHUIqhv5k7kc9lIQ2ffOK0HHANRvGEn5aUBoHFRHlp2UiyEFQzV
+ Y7drlgbIMqvlK9hpoieNInXOKmm5mRUHthKACphwESdpGuwiTi20j5w==
+X-Received: by 2002:a17:903:2c0c:b0:2a9:484c:ff17 with SMTP id
+ d9443c01a7336-2ab505fd0b6mr14101435ad.54.1770972722841; 
+ Fri, 13 Feb 2026 00:52:02 -0800 (PST)
+X-Received: by 2002:a17:903:2c0c:b0:2a9:484c:ff17 with SMTP id
+ d9443c01a7336-2ab505fd0b6mr14101075ad.54.1770972722275; 
+ Fri, 13 Feb 2026 00:52:02 -0800 (PST)
+Received: from [10.152.202.155] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ab29965086sm77949005ad.51.2026.02.13.00.51.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Feb 2026 00:52:01 -0800 (PST)
+Message-ID: <f9c18852-bbd7-4d60-88d5-39480dec78a0@oss.qualcomm.com>
+Date: Fri, 13 Feb 2026 14:21:54 +0530
 MIME-Version: 1.0
-References: <20260212204511.619392-1-javierm@redhat.com>
- <20260212204511.619392-8-javierm@redhat.com>
-In-Reply-To: <20260212204511.619392-8-javierm@redhat.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Feb 2026 10:46:58 +0200
-X-Gm-Features: AZwV_QgMn0_tOUjJYYpSn6EhOJVHaHdSagcy_vc2kvO_407aJMdSeq90KFAL02Y
-Message-ID: <CAC_iWjL9M6AHdSn-76moLVkzWLk3gSqtz+CuKw5dxbayznzFCg@mail.gmail.com>
-Subject: Re: [PATCH v2 7/7] efi_selftest: Enhance MBR test for
- PARTITION_INFO_PROTOCOL
-To: Javier Martinez Canillas <javierm@redhat.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- eballetb@redhat.com, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] qcom_defconfig: Disable
+ CONFIG_EFI_PSCI_RESET_RUNTIME
+To: Casey Connolly <casey.connolly@linaro.org>, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org, trini@konsulko.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org, sajattack@postmarketos.org,
+ marek.vasut+renesas@mailbox.org, quic_varada@quicinc.com,
+ me@samcday.com, michal.simek@amd.com, sjg@chromium.org,
+ j-humphreys@ti.com, paul.liu@linaro.org, raymondmaoca@gmail.com,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20260114111624.2321852-1-aswin.murugan@oss.qualcomm.com>
+ <20260114111624.2321852-3-aswin.murugan@oss.qualcomm.com>
+ <299b5e24-ec98-4adc-aab0-495bb0cf144a@linaro.org>
+Content-Language: en-US
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <299b5e24-ec98-4adc-aab0-495bb0cf144a@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA2OCBTYWx0ZWRfX5UebIoF0Ms7l
+ COa94H7nzQLSYEBZMgEFl2nQV+Jxa15btnxjcMKM9jLGdGiF/UuAbMgABxjxTnNAVM0ImahJCwr
+ uhjWQpfnyJHKmfyipXgnBXsgHQuaxHeNSROyS3MtGuCsIToczzEtZY32c5Oa5JzJrlDCTDNe7UM
+ wVcnvRX/d47kUwMBVBoNWia/QP3EN7dstIA6QQ3wk5xBZpiL19V/9sDR6xDhclGsSBAf2n9p+D7
+ 6dcUXIlQOWvf3JhSv+0c8pkVhfcVPKSldjq+54cDf5Sg6UzBqO6ARaFKwKpcaPi74FQq5tUgG1+
+ hGWk4+kJODRhNBxfBT1+k/Z3EhDvJGJ0NtRsHKxYbdU/VGIPqaFXrdcVtYLAU2U8Hll0/G6rQAc
+ mTqvZ8pt03o9hGYv1bbO7kSl+tuN5dIJ2O+4pKgTrMUh1MiMqLtwSgW2jj9G3vNo7GLxsQdG2ua
+ XdHcDdHbdXUh6M83hrg==
+X-Proofpoint-ORIG-GUID: POXy3370fXV0FzQzUU5y2tj5ERu7KSBm
+X-Authority-Analysis: v=2.4 cv=asC/yCZV c=1 sm=1 tr=0 ts=698ee633 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=9iUq6VEK6GIGJoTCeBQA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=GvdueXVYPmCkWapjIL-Q:22
+X-Proofpoint-GUID: POXy3370fXV0FzQzUU5y2tj5ERu7KSBm
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-13_01,2026-02-12_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 spamscore=0 priorityscore=1501 suspectscore=0 malwarescore=0
+ impostorscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130068
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,81 +157,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Feb 2026 at 22:45, Javier Martinez Canillas
-<javierm@redhat.com> wrote:
->
-> The EFI_PARTITION_INFO_PROTOCOL test was added before the protocol fully
-> supported MBR partitions. As a result, it lacked specific checks for the
-> content of the raw MBR partition record.
->
-> Now that MBR support has been implemented, enhance the selftest to provide
-> coverage for the MBR entries too.
->
-> This verifies that the protocol correctly reads and exposes MBR partition
-> records and prevents this functionality to regress due future changes.
->
-> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
-> ---
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 1/14/2026 7:42 PM, Casey Connolly wrote:
+>
+> On 14/01/2026 12:16, Aswin Murugan wrote:
+>> Disable CONFIG_EFI_PSCI_RESET_RUNTIME in qcom_defconfig to let the kernel
+>> manage reset modes and handle specialized reboot requests correctly.
+> Please disable this in kconfig instead. Could you validate that this
+> doesn't cause issues on an older platform like sdm845?
+>
+> Kind regards,>
 
->
-> (no changes since v1)
->
->  lib/efi_selftest/efi_selftest_block_device.c | 26 ++++++++++++++++++++
->  1 file changed, 26 insertions(+)
->
-> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_selftest/efi_selftest_block_device.c
-> index f145e58a267a..9c4be834eebb 100644
-> --- a/lib/efi_selftest/efi_selftest_block_device.c
-> +++ b/lib/efi_selftest/efi_selftest_block_device.c
-> @@ -19,6 +19,7 @@
->  #include "efi_selftest_disk_image.h"
->  #include <asm/cache.h>
->  #include <part_efi.h>
-> +#include <part.h>
->
->  /* Block size of compressed disk image */
->  #define COMPRESSED_DISK_IMAGE_BLOCK_SIZE 8
-> @@ -319,6 +320,25 @@ static int execute(void)
->         u64 pos;
->         char block_io_aligned[1 << LB_BLOCK_SIZE] __aligned(1 << LB_BLOCK_SIZE);
->
-> +       /*
-> +        * The test disk image is defined in efi_selftest_disk_image.h,
-> +        * it contains a single FAT12 partition of 127 sectors size.
-> +        */
-> +       static const dos_partition_t mbr_expected = {
-> +               .boot_ind = 0x00,
-> +               .head = 0x00,
-> +               .sector = 0x02,
-> +               .cyl = 0x00,
-> +               .sys_ind = 0x01, /* FAT12 */
-> +               .end_head = 0x02,
-> +               .end_sector = 0x02,
-> +               .end_cyl = 0x00,
-> +               /* LBA 1 */
-> +               .start_sect = cpu_to_le32(1),
-> +               /* Size 127 sectors (0x7f) */
-> +               .nr_sects = cpu_to_le32(127),
-> +       };
-> +
->         /* Connect controller to virtual disk */
->         ret = boottime->connect_controller(disk_handle, NULL, NULL, 1);
->         if (ret != EFI_SUCCESS) {
-> @@ -405,6 +425,12 @@ static int execute(void)
->                 return EFI_ST_FAILURE;
->         }
->
-> +       /* Compare the obtained MBR with the expected one for the test partition */
-> +       if (memcmp(&part_info->info.mbr, &mbr_expected, sizeof(mbr_expected))) {
-> +               efi_st_error("MBR partition record mismatch\n");
-> +               return EFI_ST_FAILURE;
-> +       }
-> +
->         /* Open the simple file system protocol */
->         ret = boottime->open_protocol(handle_partition,
->                                       &guid_simple_file_system_protocol,
-> --
-> 2.53.0
->
+Thanks for the feedback.
+In v1 of this patch, Tom requested that the option be enabled by default 
+in Kconfig so that existing behavior on other platforms would not be 
+affected [1]. Based on that guidance, in v2 enabled the new config by 
+default in Kconfig and explicitly disabled it for Qualcomm in 
+|qcom_defconfig|.
+
+Regarding validation on sdm845: I currently don’t have access to sdm845 
+hardware, so I’m unable to test it directly. From the nature of the 
+change, it shouldn’t impact older Qualcomm platforms, as the reset path 
+is typically managed by the OS/bootloader independently.
+
+I will address the remaining comments and respin the patch.
+
+[1] https://lore.kernel.org/all/20260108143742.GT3416603@bill-the-cat
+
+Thanks,
+Aswin
+
+>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>> ---
+>>   configs/qcom_defconfig | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+>> index a210f4dc5e6..0bd87b1f5a1 100644
+>> --- a/configs/qcom_defconfig
+>> +++ b/configs/qcom_defconfig
+>> @@ -6,6 +6,7 @@ CONFIG_ARCH_SNAPDRAGON=y
+>>   CONFIG_NR_DRAM_BANKS=24
+>>   CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
+>>   CONFIG_SYS_LOAD_ADDR=0xA0000000
+>> +CONFIG_EFI_PSCI_RESET_RUNTIME=n
+>>   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>>   CONFIG_EFI_CAPSULE_ON_DISK=y
+>>   CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
