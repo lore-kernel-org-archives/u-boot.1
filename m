@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2637EF99E2
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 22:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8BFAEF99E2
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 22:53:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01D7483DEC;
-	Fri, 13 Feb 2026 23:53:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DB2883DE4;
+	Fri, 13 Feb 2026 23:53:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XPFjnngK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mALSib96";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89EB983E0E; Fri, 13 Feb 2026 23:53:26 +0100 (CET)
-Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
- [IPv6:2607:f8b0:4864:20::835])
+ id 58B2983E16; Fri, 13 Feb 2026 23:53:31 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAB9B83DCB
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 23:53:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D10E783015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 23:53:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-qt1-x835.google.com with SMTP id
- d75a77b69052e-506251815a3so13773741cf.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 14:53:23 -0800 (PST)
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-5069df1dea8so10913621cf.1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 14:53:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771023202; x=1771628002; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1771023207; x=1771628007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DuDUOafNx/E8anciZi4sVmpoIDW5wu67NS0N+fdz5Jw=;
- b=XPFjnngKTa6aDMSPFzm+3yaSYMvWxploIeopfyd/p5acfAZkYA5fvbXneamPB9gkyn
- av+nnhhbF1MLgtYLgej8FMTJVAiZJ6/I32famX6dduq9u6tVZ0O2QeljV2L07I22Gxdv
- /UXlZ4UqviGmjAbqeSXN1mo8nwyNNSV+loOdBr3PrX90BPmyDyuqKJMzNC+FwmC/JSrT
- 2CH4RjE7c0m3aYDV3I2d8k1n+l6fb8wGdGANNkuh5JJujDXVFaP0n8yMkVp7qFhRimsg
- U5N134ClCqgpZAKMn7m4sEe+k3p7d/5TmHW5BDxQhQdGFzqowHQhrUb33SMXwYGYCRHQ
- fbzQ==
+ bh=hcryTX5JDQjZkNisUDYJWTfW+Ax/4cqt9eaVAcdLXSg=;
+ b=mALSib96cQrrHNfqUopvtfRM3++HN0bt/kIE3aCrwbqw/OSYRV55NqpSqgK2kttkfu
+ AdwiRrKQiTp8zCERHvJDz1/eZ9CZ1iXZK0wYltRkWFSSF2ug+LndLOHGR3lwk4GCdlZq
+ +LUFhpI7z6NTAYsVFXou0hsLXysJXG9kOMyBqgk4a03ZWBNjvn9BQxRROEo7/M+RwpSs
+ iJCPrMMaQ6dUr7VAr2bHPa+bdDufCQ16AfjZ6mIvYxUPfm2xxSPLHNvkbAm+/SuJ6rQo
+ 8ZkvXyM3WegDC4f6DldW0UKji59ey2lnbbv52a8/1XJsLLPQz2Qrf3/HmdkgAsdata8U
+ UgEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771023202; x=1771628002;
+ d=1e100.net; s=20230601; t=1771023207; x=1771628007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=DuDUOafNx/E8anciZi4sVmpoIDW5wu67NS0N+fdz5Jw=;
- b=YaUhf2soX1hIF3TzaonViVrFPKq3J5Np8yUc1Nr4Bt+l7K1BIPpK6w2oTBCYC8+BZB
- kFN6+8i3sUzX+Xuk8DJ3AK7IXXtCY1WcZRghLUrpOsJ9nuw84nBJQb3DrboZ1K0BcBWA
- j27uEGt1pofD+wXK47hfdXCw24tkYL53bMiB6AdzeErLfWVenGeUvCNxvBL5OjARPP43
- Vq6xhIsiKGXMncPQXHT9jaF/R7hXqpdBPVaYvtuyba57hPhj3hKCttyof0ZErEWUqRad
- y0lA2cdP8EqYIz9PfOd7N/OtK6Vg9d3AekGfRtIsKC+iEMFjXy+JOYQ8PWbSMkcJdjLb
- YxRw==
-X-Gm-Message-State: AOJu0Yxxhg/YLdVLRcwKX6ppNFJ4a9pl3CZU/umYwbGP1bqIFwSe7pzR
- HR8nbztwgs9Mkkw/TIseiWJhCoPxm6fjPDdepjlplfTEPR8Oh2RvtYe7/++zdg==
-X-Gm-Gg: AZuq6aLu0pVF05IzOv21xcZsAbUrtbWKj54NPVn6cqKJ+eotOOLH9QixHuWw7a2RQ5N
- cwfwYutvpYRFiNLmhlAHtQDHVCT/5EGpyYjCyYtdeGJxWESJFKCvrHSe3Tg6q7/8/H7/ME5bFmH
- lWysHFmlXS9p+MRr/a3gc3OGD7tFacwZoKWgtpv4tDDS96NYEEmSFdux1HH6KVgko8+49320xQ7
- Hl4SUOqp9N1xlvKsBDNbM6YWK4YdE8FgQytBtBMbxCjCbpUT+CqBZQwr/yWVCvFzu6iKaQgZRX5
- qFfI/HFIHf+/kPfn70r9RWuAWMEpsN1xGuA2TWLExCvwRW6ZV5xs8Az6aQ91gJfXaEIUDqQSTiX
- zNNY+cNrf2au0WabvuTOLJVfv8aHbmfnP250PtxnCrUlV1I4tiIDt94pY7YL9BFAJ3BxFrubPYT
- sIMS4yeBuzVCdvMyv4JkUEOrO4++v4HFNDlq8FF/12DN5wUBgh5e5ES/yD6AgO8Bqb+XBapy9Bl
- VNh2Oq07zY=
-X-Received: by 2002:ac8:5ac9:0:b0:4ee:4a8b:d9f6 with SMTP id
- d75a77b69052e-506a8356172mr45478111cf.59.1771023202315; 
- Fri, 13 Feb 2026 14:53:22 -0800 (PST)
+ bh=hcryTX5JDQjZkNisUDYJWTfW+Ax/4cqt9eaVAcdLXSg=;
+ b=LmL8fk2vf8jgkhha08FPqP5/z+qpqnGCEpxg2lzDjBLOMtsT9k/+TvgNw3O6wjrkSP
+ rmEj5wqRWwt6hF917BvRHFh9MRWITWCJeyFmbwA6Mv2gNIqjF1l2DsgdJy5xQ24B2avR
+ Sz0Ij3/xMypqauUgHxWJ/4lYMeub39hZX4EJOM9rKNjdeILPJzqa/r8PHoA85LpXeSxJ
+ +U6Sue7px9M84PPNislv25m/GViAukBwgkYim6lXbMx05r0qjHVpGuPcaHqk818f8Ebk
+ 4ZwQp7vgBvpZq9CuiSph6mluJ214F/g6X0dqhckuuHdtSsnF3y9/YHosxF9aOHEJ7zY9
+ XIdA==
+X-Gm-Message-State: AOJu0YwEx9k/Eu+D5FWxXj5cFgIg21fku1y4opgkABeKMC0giLiFCLjh
+ n+EfBHQ6W1lWB3o9nTIikaPc//kTN9wODds75B+houz7pBhXYkBuz+bDpmz93Q==
+X-Gm-Gg: AZuq6aId9YljqN+XMDBj54sorzUhxE/L+rpDa4DuVZ/gcPLzjIJGjAmihtgK5MiDatM
+ TUJ0HYo3/XWVf8Qv80zO3b/TclBqmttOXsMMTn/XW7qFigeHNMd1ZpzjVp58MWVUeLzXuSkxn2Z
+ s6tyLfmw/h5cfh7pspP1Woc1A7SvIIy6vAGEVd9qYh6PaPWXSmKC9llHSWNV6Dt84ZAoWZJrAbn
+ o09pVOp7sMIx0WW4lP+vw+9uE40yoIYGeRGY3GKSRVxgX5KOw/KsK1fU/chov4aRPpRHg0UMET+
+ QuxIArbwFKgM7B3BjnIGxTkkhVFi65DDHmXsJbeUOex7z2SE1UnUJrjMU06CjdcdNA8QflMWN3D
+ KG6qIwYpApDndFKvdVMcnq+wvoJfIJOceEPcvOvzf47QmJ9MgyoyRUn6Gdvy0gsavID6MR9IlTy
+ fER/zSZt2LYRy0S/vaShnF877SsyUHKXrWaXCyatoNxm4ibeeAV4obhFRkozKjzRnyEBFi5+71D
+ Ra5ttoHKhQ=
+X-Received: by 2002:a05:622a:c2:b0:4ed:2edb:92b9 with SMTP id
+ d75a77b69052e-506a83a7e03mr47089661cf.81.1771023207513; 
+ Fri, 13 Feb 2026 14:53:27 -0800 (PST)
 Received: from ubuntu.localdomain (174-138-202-16.cpe.distributel.net.
  [174.138.202.16]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-506847ed9c4sm72845731cf.8.2026.02.13.14.53.21
+ d75a77b69052e-506847ed9c4sm72845731cf.8.2026.02.13.14.53.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 14:53:22 -0800 (PST)
+ Fri, 13 Feb 2026 14:53:27 -0800 (PST)
 From: Raymond Mao <raymondmaoca@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <kettenis@openbsd.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mark Kettenis <kettenis@openbsd.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Baocheng Su <baocheng.su@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>,
+ Baocheng Su <baocheng.su@siemens.com>,
+ Li Hua Qian <huaqian.li@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
  Samuel Holland <samuel.holland@sifive.com>
-Subject: [PATCH v6 2/6] smbios: add support for dynamic generation of Type 9
- system slot tables
-Date: Fri, 13 Feb 2026 17:52:47 -0500
-Message-Id: <20260213225254.2544596-3-raymondmaoca@gmail.com>
+Subject: [PATCH v6 3/6] smbios: add support for dynamic generation of Type 16
+ table
+Date: Fri, 13 Feb 2026 17:52:48 -0500
+Message-Id: <20260213225254.2544596-4-raymondmaoca@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20260213225254.2544596-1-raymondmaoca@gmail.com>
 References: <20260213225254.2544596-1-raymondmaoca@gmail.com>
@@ -105,627 +105,360 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit introduces support for generating SMBIOS Type 9 (System Slot)
-tables using a hybrid approach:
+This commit implements SMBIOS Type 16 (Physical Memory Array)
+generation with a hybrid approach supporting both:
 
-1. Explicit Device Tree definitions:
-   Child node under '/smbios/smbios/system-slot' will be interpreted as
-   individual slot definitions.
-   - Each child represents a slot (e.g., isa, pcmcia, etc.).
-   - Properties follow the SMBIOS specification using lowercase
-     hyphen-separated names such as 'slot-type', 'slot-id',
-     'segment-group-number', 'bus-number', 'slot-information', etc.
-   - This approach allows full customization of each system slot and is
-     especially suitable for platforms with well-defined slot topology.
+1. Explicit definition via Device Tree 'smbios' node:
+   Child node under '/smbios/smbios/memory-array' will be used to
+   populate as individual Type 16 structure directly.
+   - Properties follow SMBIOS field names with lowercase letters and
+     hyphen-separated words (e.g., 'memory-error-correction',
+     'maximum-capacity', 'extended-maximum-capacity', etc.).
+   - This method supports precise platform-defined overrides and system
+     descriptions.
 
-2. Automatic detection fallback:
-   If child node under '/smbios/smbios/system-slot' does not exist, the
-   implementation will scan the entire device tree for nodes whose
-   'device_type' matches known slot-related types ("pci", "isa", "pcmcia",
-   etc.).
-   - When a match is found, default values or heuristics are applied to
-     populate to the System Slot table.
-   - This mode is useful for platforms that lack explicit SMBIOS nodes
-     but still expose slot topology via standard DT conventions.
+2. Fallback to automatic DT-based discovery:
+   If child node under '/smbios/smbios/memory-array' does not exist,
+   the implementation will:
+   - Scan all top-level 'memory@' nodes to populate Type 16 structure with
+     inferred size and location data.
+   - Scan nodes named or marked as 'memory-controller' and parse
+     associated 'dimm@' subnodes (if present) to extract DIMM sizes and
+     map them accordingly.
 
-Together, two approaches ensure that SMBIOS Type 9 entries are available
-whether explicitly described or automatically derived.
+This dual-mode support enables flexible firmware SMBIOS reporting while
+aligning with spec-compliant naming and runtime-detected memory topology.
+
+Type 16 support is under GENERATE_SMBIOS_TABLE_VERBOSE to avoid
+increasing rom size for those platforms which only require basic SMBIOS
+support.
 
 Signed-off-by: Raymond Mao <raymondmaoca@gmail.com>
 ---
-Changes in v2:
-- Reuse sysinfo_to_dt and convert_sysinfo_to_dt() for mapping SMBIOS properties to DT.
-Changes in v3:
-- Update subject and commit message.
-- Abstract helper functions and add callback for writing subnodes.
 Changes in v4:
-- Refine the commit message.
+- Initial patch.
 Changes in v5:
 - None.
 Changes in v6:
 - None.
 
  arch/arm/dts/smbios_generic.dtsi |   3 +
- cmd/smbios.c                     | 114 ++++++++++++
- include/smbios.h                 |  45 +++++
- include/smbios_def.h             |  89 +++++++++
- lib/smbios.c                     | 301 ++++++++++++++++++++++++++++++-
- 5 files changed, 549 insertions(+), 3 deletions(-)
+ cmd/smbios.c                     |  46 +++++
+ drivers/sysinfo/smbios.c         |   5 +
+ include/smbios.h                 |  18 ++
+ include/smbios_def.h             |  29 ++++
+ include/sysinfo.h                |   4 +
+ lib/smbios.c                     | 282 +++++++++++++++++++++++++++++++
+ 7 files changed, 387 insertions(+)
 
 diff --git a/arch/arm/dts/smbios_generic.dtsi b/arch/arm/dts/smbios_generic.dtsi
-index fc168317c9e..4463dade217 100644
+index 4463dade217..1a9adfaa409 100644
 --- a/arch/arm/dts/smbios_generic.dtsi
 +++ b/arch/arm/dts/smbios_generic.dtsi
-@@ -77,6 +77,9 @@
- 						   SMBIOS_CACHE_OP_WB)>;
- 				};
+@@ -80,6 +80,9 @@
+ 
+ 			system-slot {
  			};
 +
-+			system-slot {
++			memory-array {
 +			};
  		};
  	};
  };
 diff --git a/cmd/smbios.c b/cmd/smbios.c
-index ed419f19028..f9b62e66229 100644
+index f9b62e66229..3f7dd21f92e 100644
 --- a/cmd/smbios.c
 +++ b/cmd/smbios.c
-@@ -119,6 +119,55 @@ static const struct str_lookup_table associativity_strings[] = {
- 
+@@ -168,6 +168,32 @@ static const struct str_lookup_table slot_length_strings[] = {
+ 	{ SMBIOS_SYSSLOT_LENG_3_5INDRV,	"3.5 inch drive form factor" },
  };
  
-+static const struct str_lookup_table slot_type_strings[] = {
-+	{ SMBIOS_SYSSLOT_TYPE_OTHER,		"Other" },
-+	{ SMBIOS_SYSSLOT_TYPE_UNKNOWN,		"Unknown" },
-+	{ SMBIOS_SYSSLOT_TYPE_ISA,		"ISA" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCI,		"PCI" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCMCIA,		"PC Card (PCMCIA)" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIE,		"PCI Express" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIEGEN2,		"PCI Express Gen 2" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIEGEN3,		"PCI Express Gen 3" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIEGEN3X16,	"PCI Express Gen 3 x16" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIEGEN4,		"PCI Express Gen 4" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIEGEN4X8,	"PCI Express Gen 4 x8" },
-+	{ SMBIOS_SYSSLOT_TYPE_PCIEGEN4X16,	"PCI Express Gen 4 x16" },
++static const struct str_lookup_table ma_location_strings[] = {
++	{ SMBIOS_MA_LOCATION_OTHER,		"Other" },
++	{ SMBIOS_MA_LOCATION_UNKNOWN,		"Unknown" },
++	{ SMBIOS_MA_LOCATION_MOTHERBOARD,	"System board or motherboard" },
 +};
 +
-+static const struct str_lookup_table slot_bus_width_strings[] = {
-+	{ SMBIOS_SYSSLOT_WIDTH_OTHER,	"Other" },
-+	{ SMBIOS_SYSSLOT_WIDTH_UNKNOWN,	"Unknown" },
-+	{ SMBIOS_SYSSLOT_WIDTH_8BIT,	"8 bit" },
-+	{ SMBIOS_SYSSLOT_WIDTH_16BIT,	"16 bit" },
-+	{ SMBIOS_SYSSLOT_WIDTH_32BIT,	"32 bit" },
-+	{ SMBIOS_SYSSLOT_WIDTH_64BIT,	"64 bit" },
-+	{ SMBIOS_SYSSLOT_WIDTH_128BIT,	"128 bit " },
-+	{ SMBIOS_SYSSLOT_WIDTH_1X,	"1x or x1" },
-+	{ SMBIOS_SYSSLOT_WIDTH_2X,	"2x or x2" },
-+	{ SMBIOS_SYSSLOT_WIDTH_4X,	"4x or x4" },
-+	{ SMBIOS_SYSSLOT_WIDTH_8X,	"8x or x8" },
-+	{ SMBIOS_SYSSLOT_WIDTH_12X,	"12x or x12" },
-+	{ SMBIOS_SYSSLOT_WIDTH_16X,	"16x or x16" },
-+	{ SMBIOS_SYSSLOT_WIDTH_32X,	"32x or x32" },
++static const struct str_lookup_table ma_use_strings[] = {
++	{ SMBIOS_MA_USE_OTHER,		"Other" },
++	{ SMBIOS_MA_USE_UNKNOWN,	"Unknown" },
++	{ SMBIOS_MA_USE_SYSTEM,		"System memory" },
++	{ SMBIOS_MA_USE_VIDEO,		"Video memory" },
++	{ SMBIOS_MA_USE_FLASH,		"Flash memory" },
++	{ SMBIOS_MA_USE_NVRAM,		"Non-volatile RAM" },
++	{ SMBIOS_MA_USE_CACHE,		"Cache memory" },
 +};
 +
-+static const struct str_lookup_table slot_usage_strings[] = {
-+	{ SMBIOS_SYSSLOT_USAGE_OTHER,		"Other" },
-+	{ SMBIOS_SYSSLOT_USAGE_UNKNOWN,		"Unknown" },
-+	{ SMBIOS_SYSSLOT_USAGE_AVAILABLE,	"Available" },
-+	{ SMBIOS_SYSSLOT_USAGE_INUSE,		"In use" },
-+	{ SMBIOS_SYSSLOT_USAGE_NA,		"Unavailable" },
-+};
-+
-+static const struct str_lookup_table slot_length_strings[] = {
-+	{ SMBIOS_SYSSLOT_LENG_OTHER,	"Other" },
-+	{ SMBIOS_SYSSLOT_LENG_UNKNOWN,	"Unknown" },
-+	{ SMBIOS_SYSSLOT_LENG_SHORT,	"Short Length" },
-+	{ SMBIOS_SYSSLOT_LENG_LONG,	"Long Length" },
-+	{ SMBIOS_SYSSLOT_LENG_2_5INDRV,	"2.5 inch drive form factor" },
-+	{ SMBIOS_SYSSLOT_LENG_3_5INDRV,	"3.5 inch drive form factor" },
++static const struct str_lookup_table ma_err_corr_strings[] = {
++	{ SMBIOS_MA_ERRCORR_OTHER,	"Other" },
++	{ SMBIOS_MA_ERRCORR_UNKNOWN,	"Unknown" },
++	{ SMBIOS_MA_ERRCORR_NONE,	"None" },
++	{ SMBIOS_MA_ERRCORR_PARITY,	"Parity" },
++	{ SMBIOS_MA_ERRCORR_SBITECC,	"Single-bit ECC" },
++	{ SMBIOS_MA_ERRCORR_MBITECC,	"Multi-bit ECC" },
++	{ SMBIOS_MA_ERRCORR_CRC,	"CRC" },
 +};
 +
  /**
   * smbios_get_string() - get SMBIOS string from table
   *
-@@ -403,6 +452,68 @@ static void smbios_print_type7(struct smbios_type7 *table)
- 	printf("\tInstalled Cache Size 2: 0x%08x\n", table->inst_size2.data);
+@@ -514,6 +540,23 @@ static void smbios_print_type9(struct smbios_type9 *table)
+ 	printf("\tSlot Height: 0x%04x\n", *addr);
  }
  
-+static void smbios_print_type9(struct smbios_type9 *table)
++static void smbios_print_type16(struct smbios_type16 *table)
 +{
-+	int i;
-+	u8 *addr = (u8 *)table +
-+		   offsetof(struct smbios_type9, slot_information);
-+
-+	printf("System Slots:\n");
-+	smbios_print_str("Socket Designation", table,
-+			 table->socket_design);
-+	smbios_print_lookup_str(slot_type_strings,
-+				table->slot_type,
-+				ARRAY_SIZE(slot_type_strings),
-+				"Slot Type");
-+	smbios_print_lookup_str(slot_bus_width_strings,
-+				table->slot_data_bus_width,
-+				ARRAY_SIZE(slot_bus_width_strings),
-+				"Slot Data Bus Width");
-+	smbios_print_lookup_str(slot_usage_strings,
-+				table->current_usage,
-+				ARRAY_SIZE(slot_usage_strings),
-+				"Current Usage");
-+	smbios_print_lookup_str(slot_length_strings,
-+				table->slot_length,
-+				ARRAY_SIZE(slot_length_strings),
-+				"Slot Length");
-+	printf("\tSlot ID: 0x%04x\n", table->slot_id);
-+	printf("\tSlot Characteristics 1: 0x%04x\n",
-+	       table->slot_characteristics_1);
-+	printf("\tSlot Characteristics 2: 0x%04x\n",
-+	       table->slot_characteristics_2);
-+	printf("\tSegment Group Number (Base): 0x%04x\n",
-+	       table->segment_group_number);
-+	printf("\tBus Number (Base): 0x%04x\n", table->bus_number);
-+	printf("\tDevice/Function Number (Base): 0x%04x\n",
-+	       table->device_function_number.data);
-+	printf("\tData Bus Width (Base): 0x%04x\n",
-+	       table->electrical_bus_width);
-+	printf("\tPeer (S/B/D/F/Width) grouping count: 0x%04x\n",
-+	       table->peer_grouping_count);
-+	printf("\tPeer (S/B/D/F/Width) groups:\n");
-+	for (i = 0; i < table->peer_grouping_count; i++) {
-+		printf("\t\tPeer group[%03d]:\n", i);
-+		if (CONFIG_IS_ENABLED(HEXDUMP))
-+			print_hex_dump("\t\t", DUMP_PREFIX_OFFSET, 16, 1, addr,
-+				       SMBIOS_TYPE9_PGROUP_SIZE, false);
-+		addr += SMBIOS_TYPE9_PGROUP_SIZE;
-+	}
-+	printf("\n");
-+
-+	/* table->slot_information */
-+	printf("\tSlot Information: 0x%04x\n", *addr);
-+	/* table->slot_physical_width */
-+	addr += sizeof(table->slot_information);
-+	printf("\tSlot Physical Width: 0x%04x\n", *addr);
-+	/* table->slot_pitch */
-+	addr += sizeof(table->slot_physical_width);
-+	printf("\tSlot Pitch: 0x%04x\n", *(u16 *)addr);
-+	/* table->slot_height */
-+	addr += sizeof(table->slot_pitch);
-+	printf("\tSlot Height: 0x%04x\n", *addr);
++	printf("Physical Memory Array:\n");
++	smbios_print_lookup_str(ma_location_strings, table->location,
++				ARRAY_SIZE(ma_location_strings), "Location");
++	smbios_print_lookup_str(ma_use_strings, table->use,
++				ARRAY_SIZE(ma_use_strings), "Use");
++	smbios_print_lookup_str(ma_err_corr_strings, table->mem_err_corr,
++				ARRAY_SIZE(ma_err_corr_strings),
++				"Memory Error Correction");
++	printf("\tMaximum Capacity: 0x%08x\n", table->max_cap);
++	printf("\tMemory Error Information Handle: 0x%04x\n",
++	       table->mem_err_info_hdl);
++	printf("\tNumber of Memory Devices: 0x%04x\n", table->num_of_mem_dev);
++	printf("\tExtended Maximum Capacity: 0x%016llx\n", table->ext_max_cap);
 +}
 +
  static void smbios_print_type127(struct smbios_type127 *table)
  {
  	printf("End Of Table\n");
-@@ -482,6 +593,9 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
- 		case SMBIOS_CACHE_INFORMATION:
- 			smbios_print_type7((struct smbios_type7 *)pos);
+@@ -596,6 +639,9 @@ static int do_smbios(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		case SMBIOS_SYSTEM_SLOTS:
+ 			smbios_print_type9((struct smbios_type9 *)pos);
  			break;
-+		case SMBIOS_SYSTEM_SLOTS:
-+			smbios_print_type9((struct smbios_type9 *)pos);
++		case SMBIOS_PHYS_MEMORY_ARRAY:
++			smbios_print_type16((struct smbios_type16 *)pos);
 +			break;
  		case SMBIOS_END_OF_TABLE:
  			smbios_print_type127((struct smbios_type127 *)pos);
  			break;
+diff --git a/drivers/sysinfo/smbios.c b/drivers/sysinfo/smbios.c
+index 99104274f72..ff5873c940e 100644
+--- a/drivers/sysinfo/smbios.c
++++ b/drivers/sysinfo/smbios.c
+@@ -24,6 +24,7 @@ struct sysinfo_plat_priv {
+ 	struct smbios_type7 t7[SYSINFO_CACHE_LVL_MAX];
+ 	u16 cache_handles[SYSINFO_CACHE_LVL_MAX];
+ 	u8 cache_level;
++	u16 marray_handles[SYSINFO_MEM_HANDLE_MAX];
+ };
+ 
+ static void smbios_cache_info_dump(struct smbios_type7 *cache_info)
+@@ -165,6 +166,10 @@ static int sysinfo_plat_get_data(struct udevice *dev, int id, void **buf,
+ 		*buf = &priv->cache_handles[0];
+ 		*size = sizeof(priv->cache_handles);
+ 		break;
++	case SYSID_SM_MEMARRAY_HANDLE:
++		*buf = &priv->marray_handles[0];
++		*size = sizeof(priv->marray_handles);
++		break;
+ 	default:
+ 		return -EOPNOTSUPP;
+ 	}
 diff --git a/include/smbios.h b/include/smbios.h
-index f2f7483bce5..752a25250d3 100644
+index 752a25250d3..293d6795cf3 100644
 --- a/include/smbios.h
 +++ b/include/smbios.h
-@@ -264,6 +264,51 @@ struct __packed smbios_type7 {
+@@ -309,6 +309,24 @@ struct __packed smbios_type9 {
  	char eos[SMBIOS_STRUCT_EOS_BYTES];
  };
  
-+#define SMBIOS_TYPE9_PGROUP_SIZE 5
-+
-+struct pci_attr_lookup_table {
-+	const char *str;
-+	u8 slot_type;
-+	u8 data_bus_width;
-+	u8 slot_length;
-+	u8 chara1;
-+	u8 chara2;
++enum {
++	SMBIOS_MEM_NONE = 0,
++	SMBIOS_MEM_CUSTOM = 1,
++	SMBIOS_MEM_FDT_MEM_NODE = 2,
++	SMBIOS_MEM_FDT_MEMCON_NODE = 3
 +};
 +
-+union dev_func_num {
-+	struct {
-+		u8 dev_num:5;
-+		u8 func_num:3;
-+	} fields;
-+	u8 data;
-+};
-+
-+struct __packed smbios_type9 {
++struct __packed smbios_type16 {
 +	struct smbios_header hdr;
-+	u8 socket_design;
-+	u8 slot_type;
-+	u8 slot_data_bus_width;
-+	u8 current_usage;
-+	u8 slot_length;
-+	u16 slot_id;
-+	u8 slot_characteristics_1;
-+	u8 slot_characteristics_2;
-+	u16 segment_group_number;
-+	u8 bus_number;
-+	union dev_func_num device_function_number;
-+	u8 electrical_bus_width;
-+	u8 peer_grouping_count;
-+	/*
-+	 * Dynamic bytes will be inserted here to store peer_groups.
-+	 * length is equal to 'peer_grouping_count' * 5
-+	 */
-+	u8 slot_information;
-+	u8 slot_physical_width;
-+	u16 slot_pitch;
-+	u8 slot_height;
++	u8 location;
++	u8 use;
++	u8 mem_err_corr;
++	u32 max_cap;
++	u16 mem_err_info_hdl;
++	u16 num_of_mem_dev;
++	u64 ext_max_cap;
 +	char eos[SMBIOS_STRUCT_EOS_BYTES];
 +};
-+
  struct __packed smbios_type32 {
  	u8 type;
  	u8 length;
 diff --git a/include/smbios_def.h b/include/smbios_def.h
-index 81c5781217f..ef9cb02ed25 100644
+index ef9cb02ed25..c6850a5d6f5 100644
 --- a/include/smbios_def.h
 +++ b/include/smbios_def.h
-@@ -191,4 +191,93 @@
- #define SMBIOS_CACHE_ASSOC_64WAY	13
- #define SMBIOS_CACHE_ASSOC_20WAY	14
+@@ -280,4 +280,33 @@
+ /* Slot segment group number */
+ #define SMBIOS_SYSSLOT_SGGNUM_UND	0
  
-+/*
-+ * System Slot
-+ */
++/* Physical Memory Array */
 +
-+/* Slot Type */
-+#define SMBIOS_SYSSLOT_TYPE_OTHER	1
-+#define SMBIOS_SYSSLOT_TYPE_UNKNOWN	2
-+#define SMBIOS_SYSSLOT_TYPE_ISA		3	/* ISA */
-+#define SMBIOS_SYSSLOT_TYPE_PCI		6	/* PCI */
-+#define SMBIOS_SYSSLOT_TYPE_PCMCIA	7	/* PCMCIA */
-+#define SMBIOS_SYSSLOT_TYPE_PCIE	0xa5	/* PCI Express */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEX1	0xa6	/* PCI Express x1 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEX2	0xa7	/* PCI Express x2 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEX4	0xa8	/* PCI Express x4 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEX8	0xa9	/* PCI Express x8 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEX16	0xaa	/* PCI Express x16 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN2	0xab	/* PCI Express Gen 2 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN2X1	0xac	/* PCI Express Gen 2 x1 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN2X2	0xad	/* PCI Express Gen 2 x2 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN2X4	0xae	/* PCI Express Gen 2 x4 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN2X8	0xaf	/* PCI Express Gen 2 x8 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN2X16	0xb0	/* PCI Express Gen 2 x16 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN3	0xb1	/* PCI Express Gen 3 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN3X1	0xb2	/* PCI Express Gen 3 x1 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN3X2	0xb3	/* PCI Express Gen 3 x2 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN3X4	0xb4	/* PCI Express Gen 3 x4 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN3X8	0xb5	/* PCI Express Gen 3 x8 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN3X16	0xb6	/* PCI Express Gen 3 x16 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN4	0xb8	/* PCI Express Gen 4 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN4X1	0xb9	/* PCI Express Gen 4 x1 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN4X2	0xba	/* PCI Express Gen 4 x2 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN4X4	0xbb	/* PCI Express Gen 4 x4 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN4X8	0xbc	/* PCI Express Gen 4 x8 */
-+#define SMBIOS_SYSSLOT_TYPE_PCIEGEN4X16	0xbd	/* PCI Express Gen 4 x16 */
++/* Location */
++#define SMBIOS_MA_LOCATION_OTHER	1
++#define SMBIOS_MA_LOCATION_UNKNOWN	2
++#define SMBIOS_MA_LOCATION_MOTHERBOARD	3
 +
-+/* Slot Data Bus Width */
-+#define SMBIOS_SYSSLOT_WIDTH_OTHER	1
-+#define SMBIOS_SYSSLOT_WIDTH_UNKNOWN	2
-+#define SMBIOS_SYSSLOT_WIDTH_8BIT	3
-+#define SMBIOS_SYSSLOT_WIDTH_16BIT	4
-+#define SMBIOS_SYSSLOT_WIDTH_32BIT	5
-+#define SMBIOS_SYSSLOT_WIDTH_64BIT	6
-+#define SMBIOS_SYSSLOT_WIDTH_128BIT	7
-+#define SMBIOS_SYSSLOT_WIDTH_1X		8
-+#define SMBIOS_SYSSLOT_WIDTH_2X		9
-+#define SMBIOS_SYSSLOT_WIDTH_4X		10
-+#define SMBIOS_SYSSLOT_WIDTH_8X		11
-+#define SMBIOS_SYSSLOT_WIDTH_12X	12
-+#define SMBIOS_SYSSLOT_WIDTH_16X	13
-+#define SMBIOS_SYSSLOT_WIDTH_32X	14
++/* Use */
++#define SMBIOS_MA_USE_OTHER		1
++#define SMBIOS_MA_USE_UNKNOWN		2
++#define SMBIOS_MA_USE_SYSTEM		3
++#define SMBIOS_MA_USE_VIDEO		4
++#define SMBIOS_MA_USE_FLASH		5
++#define SMBIOS_MA_USE_NVRAM		6
++#define SMBIOS_MA_USE_CACHE		7
 +
-+/* Current Usage */
-+#define SMBIOS_SYSSLOT_USAGE_OTHER	1
-+#define SMBIOS_SYSSLOT_USAGE_UNKNOWN	2
-+#define SMBIOS_SYSSLOT_USAGE_AVAILABLE	3
-+#define SMBIOS_SYSSLOT_USAGE_INUSE	4
-+#define SMBIOS_SYSSLOT_USAGE_NA		5
++/* Error Correction Type */
++#define SMBIOS_MA_ERRCORR_OTHER		1
++#define SMBIOS_MA_ERRCORR_UNKNOWN	2
++#define SMBIOS_MA_ERRCORR_NONE		3
++#define SMBIOS_MA_ERRCORR_PARITY	4
++#define SMBIOS_MA_ERRCORR_SBITECC	5
++#define SMBIOS_MA_ERRCORR_MBITECC	6
++#define SMBIOS_MA_ERRCORR_CRC		7
 +
-+/* Slot Length */
-+#define SMBIOS_SYSSLOT_LENG_OTHER	1
-+#define SMBIOS_SYSSLOT_LENG_UNKNOWN	2
-+#define SMBIOS_SYSSLOT_LENG_SHORT	3
-+#define SMBIOS_SYSSLOT_LENG_LONG	4
-+#define SMBIOS_SYSSLOT_LENG_2_5INDRV	5
-+#define SMBIOS_SYSSLOT_LENG_3_5INDRV	6
-+
-+/*  Slot Characteristics 1 */
-+#define SMBIOS_SYSSLOT_CHAR_UND		1 /* BIT(0) */
-+#define SMBIOS_SYSSLOT_CHAR_5V		2 /* BIT(1) */
-+#define SMBIOS_SYSSLOT_CHAR_3_3V	4 /* BIT(2) */
-+#define SMBIOS_SYSSLOT_CHAR_SHARED	8 /* BIT(3) */
-+#define SMBIOS_SYSSLOT_CHAR_PCCARD16	16 /* BIT(4) */
-+#define SMBIOS_SYSSLOT_CHAR_PCCARDBUS	32 /* BIT(5) */
-+#define SMBIOS_SYSSLOT_CHAR_PCCARDZV	64 /* BIT(6) */
-+#define SMBIOS_SYSSLOT_CHAR_PCCARDMRR	0x80 /* BIT(7) */
-+
-+/* Slot Characteristics 2 */
-+#define SMBIOS_SYSSLOT_CHAR_PCIPME	1 /* BIT(0) */
-+#define SMBIOS_SYSSLOT_CHAR_HOTPLUG	2 /* BIT(1) */
-+#define SMBIOS_SYSSLOT_CHAR_PCISMB	4 /* BIT(2) */
-+#define SMBIOS_SYSSLOT_CHAR_PCIBIF	8 /* BIT(3) */
-+#define SMBIOS_SYSSLOT_CHAR_ASYNCRM	16 /* BIT(4) */
-+#define SMBIOS_SYSSLOT_CHAR_FBCXL1	32 /* BIT(5) */
-+#define SMBIOS_SYSSLOT_CHAR_FBCXL2	64 /* BIT(6) */
-+#define SMBIOS_SYSSLOT_CHAR_FBCXL3	0x80 /* BIT(7) */
-+
-+/* Slot segment group number */
-+#define SMBIOS_SYSSLOT_SGGNUM_UND	0
++/* Error Information Handle */
++#define SMBIOS_MA_ERRINFO_NONE		0xFFFE
++#define SMBIOS_MA_ERRINFO_NOERR		0xFFFF
 +
  #endif /* _SMBIOS_DEF_H_ */
+diff --git a/include/sysinfo.h b/include/sysinfo.h
+index e87cf969fcd..54eb64a204a 100644
+--- a/include/sysinfo.h
++++ b/include/sysinfo.h
+@@ -12,6 +12,7 @@
+ struct udevice;
+ 
+ #define SYSINFO_CACHE_LVL_MAX 3
++#define SYSINFO_MEM_HANDLE_MAX 8
+ 
+ /*
+  * This uclass encapsulates hardware methods to gather information about a
+@@ -149,6 +150,9 @@ enum sysinfo_id {
+ 	SYSID_SM_CACHE_INFO_END =
+ 		SYSID_SM_CACHE_INST_SIZE2 + SYSINFO_CACHE_LVL_MAX - 1,
+ 
++	/* Memory Array (Type 16) */
++	SYSID_SM_MEMARRAY_HANDLE,
++
+ 	/* For show_board_info() */
+ 	SYSID_BOARD_MODEL,
+ 	SYSID_BOARD_MANUFACTURER,
 diff --git a/lib/smbios.c b/lib/smbios.c
-index 85508c06547..caeb309294d 100644
+index caeb309294d..27c9c975cf2 100644
 --- a/lib/smbios.c
 +++ b/lib/smbios.c
-@@ -66,11 +66,47 @@ struct map_sysinfo {
- 
- static const struct map_sysinfo sysinfo_to_dt[] = {
- 	{ .si_node = "system", .si_str = "product", .dt_str = "model", 2 },
--	{ .si_node = "system", .si_str = "manufacturer", .dt_str = "compatible", 1 },
--	{ .si_node = "baseboard", .si_str = "product", .dt_str = "model", 2 },
--	{ .si_node = "baseboard", .si_str = "manufacturer", .dt_str = "compatible", 1 },
-+	{ .si_node = "system", .si_str = "manufacturer",
-+	  .dt_str = "compatible", 1 },
-+	{ .si_node = "baseboard", .si_str = "product",
-+	  .dt_str = "model", 2 },
-+	{ .si_node = "baseboard", .si_str = "manufacturer",
-+	  .dt_str = "compatible", 1 },
-+	{ .si_node = "system-slot", .si_str = "slot-type",
-+	  .dt_str = "device_type", 0},
-+	{ .si_node = "system-slot", .si_str = "segment-group-number",
-+	  .dt_str = "linux,pci-domain", 0},
- };
+@@ -290,6 +290,49 @@ static int smbios_get_val_si(struct smbios_ctx * __maybe_unused ctx,
+ 	return val_def;
+ }
  
 +#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+static const struct pci_attr_lookup_table pci_attr[] = {
-+	{ "pci-host-ecam-generic", SMBIOS_SYSSLOT_TYPE_PCIE,
-+	  SMBIOS_SYSSLOT_WIDTH_8X, SMBIOS_SYSSLOT_LENG_LONG,
-+	  SMBIOS_SYSSLOT_CHAR_3_3V, SMBIOS_SYSSLOT_CHAR_PCIPME },
-+	{ "pci-host-cam-generic", SMBIOS_SYSSLOT_TYPE_PCI,
-+	  SMBIOS_SYSSLOT_WIDTH_32BIT, SMBIOS_SYSSLOT_LENG_SHORT,
-+	  SMBIOS_SYSSLOT_CHAR_5V | SMBIOS_SYSSLOT_CHAR_3_3V,
-+	  SMBIOS_SYSSLOT_CHAR_PCIPME },
-+	{ "pci-host-thunder-ecam", SMBIOS_SYSSLOT_TYPE_PCIEGEN3,
-+	  SMBIOS_SYSSLOT_WIDTH_8X, SMBIOS_SYSSLOT_LENG_LONG,
-+	  SMBIOS_SYSSLOT_CHAR_3_3V,
-+	  SMBIOS_SYSSLOT_CHAR_PCIPME | SMBIOS_SYSSLOT_CHAR_HOTPLUG },
-+	{ "pci-host-octeontx-ecam", SMBIOS_SYSSLOT_TYPE_PCIEGEN3X16,
-+	  SMBIOS_SYSSLOT_WIDTH_16X, SMBIOS_SYSSLOT_LENG_LONG,
-+	  SMBIOS_SYSSLOT_CHAR_3_3V,
-+	  SMBIOS_SYSSLOT_CHAR_PCIPME | SMBIOS_SYSSLOT_CHAR_HOTPLUG },
-+	{ "pci-host-thunder-pem", SMBIOS_SYSSLOT_TYPE_PCIEGEN4X8,
-+	  SMBIOS_SYSSLOT_WIDTH_8X, SMBIOS_SYSSLOT_LENG_LONG,
-+	  SMBIOS_SYSSLOT_CHAR_3_3V,
-+	  SMBIOS_SYSSLOT_CHAR_PCIPME | SMBIOS_SYSSLOT_CHAR_HOTPLUG },
-+	{ "pci-host-octeontx2-pem", SMBIOS_SYSSLOT_TYPE_PCIEGEN4X16,
-+	  SMBIOS_SYSSLOT_WIDTH_16X, SMBIOS_SYSSLOT_LENG_LONG,
-+	  SMBIOS_SYSSLOT_CHAR_3_3V,
-+	  SMBIOS_SYSSLOT_CHAR_PCIPME | SMBIOS_SYSSLOT_CHAR_HOTPLUG |
-+	  SMBIOS_SYSSLOT_CHAR_PCIBIF },
-+};
++static u64 smbios_get_u64_si(struct smbios_ctx * __maybe_unused ctx,
++			     const char * __maybe_unused prop,
++			     int __maybe_unused sysinfo_id, u64 val_def)
++{
++	size_t len;
++	void *data;
++	const fdt32_t *prop_val;
++	int prop_len;
++	u64 val = 0;
++
++	if (!ctx->dev)
++		return val_def;
++
++	if (!sysinfo_get_data(ctx->dev, sysinfo_id, &data, &len))
++		return *((u64 *)data);
++
++	if (!IS_ENABLED(CONFIG_OF_CONTROL) || !prop || !ofnode_valid(ctx->node))
++		return val_def;
++
++	prop_val = ofnode_read_prop(ctx->node, prop, &prop_len);
++	if (!prop_val || prop_len < sizeof(fdt32_t) ||
++	    prop_len % sizeof(fdt32_t)) {
++		/*
++		 * If the node or property is not valid fallback and try the root
++		 */
++		prop_val = ofnode_read_prop(ofnode_root(), prop, &prop_len);
++		if (!prop_val || prop_len < sizeof(fdt32_t) ||
++		    prop_len % sizeof(fdt32_t))
++			return val_def;
++	}
++
++	/* 64-bit: <hi lo> or 32-bit */
++	if (prop_len >= sizeof(fdt32_t) * 2) {
++		val = ((u64)fdt32_to_cpu(prop_val[0]) << 32) |
++		     fdt32_to_cpu(prop_val[1]);
++	} else {
++		val = fdt32_to_cpu(prop_val[0]);
++	}
++	return val;
++}
 +#endif
 +
  /**
-  * struct smbios_ctx - context for writing SMBIOS tables
+  * smbios_add_prop_si() - Add a property from the devicetree or sysinfo
   *
-@@ -95,6 +131,10 @@ struct smbios_ctx {
- 	char *last_str;
- };
- 
-+typedef int (*smbios_write_subnode)(ulong *current, int handle,
-+				   struct smbios_ctx *ctx, int idx,
-+				   int type);
-+
- /**
-  * Function prototype to write a specific type of SMBIOS structure
-  *
-@@ -222,6 +262,7 @@ static int smbios_get_val_si(struct smbios_ctx * __maybe_unused ctx,
- {
- #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
- 	int val;
-+	const struct map_sysinfo *nprop;
- 
- 	if (!ctx->dev)
- 		return val_def;
-@@ -240,6 +281,11 @@ static int smbios_get_val_si(struct smbios_ctx * __maybe_unused ctx,
- 	 */
- 	if (!ofnode_read_u32(ofnode_root(), prop, &val))
- 		return val;
-+
-+	/* If the node is still missing, try with the mapping values */
-+	nprop = convert_sysinfo_to_dt(ctx->subnode_name, prop);
-+	if (!ofnode_read_u32(ofnode_root(), nprop->dt_str, &val))
-+		return val;
- #endif
- 	return val_def;
- }
-@@ -859,6 +905,252 @@ static int smbios_write_type7(ulong *current, int *handle,
+@@ -1151,6 +1194,244 @@ static int smbios_write_type9(ulong *current, int *handle,
  	return len;
  }
  
-+static int smbios_scan_subnodes(ulong *current, struct smbios_ctx *ctx,
-+				int *handle, smbios_write_subnode cb, int type)
++static u64 smbios_pop_size_from_memory_node(ofnode node)
 +{
-+	ofnode child;
-+	int i;
-+	int hdl_base = *handle;
-+	int len = 0;
-+	struct smbios_ctx ctx_bak;
-+
-+	memcpy(&ctx_bak, ctx, sizeof(ctx_bak));
-+
-+	for (i = 0, child = ofnode_first_subnode(ctx->node);
-+	     ofnode_valid(child); child = ofnode_next_subnode(child), i++) {
-+		ctx->node = child;
-+		*handle = hdl_base + i;
-+		len += cb(current, *handle, ctx, i, type);
-+		memcpy(ctx, &ctx_bak, sizeof(*ctx));
-+	}
-+
-+	return len;
-+}
-+
-+static void smbios_lookup_pci_attr(struct smbios_ctx *ctx,
-+				   struct smbios_type9 *t)
-+{
-+	const char *compatible;
-+	u32 addr_cells, size_cells, total_cells;
 +	const fdt32_t *reg;
-+	int reglen;
-+	int i;
-+
-+	/* default attributes */
-+	t->slot_type = SMBIOS_SYSSLOT_TYPE_PCI;
-+	t->slot_data_bus_width = SMBIOS_SYSSLOT_WIDTH_UNKNOWN;
-+	t->slot_characteristics_1 = SMBIOS_SYSSLOT_CHAR_UND;
-+	t->current_usage = SMBIOS_SYSSLOT_USAGE_UNKNOWN;
-+	t->slot_length = SMBIOS_SYSSLOT_LENG_UNKNOWN;
-+	t->segment_group_number = smbios_get_val_si(ctx, "segment-group-number",
-+						    SYSID_NONE,
-+						    SMBIOS_SYSSLOT_SGGNUM_UND);
-+
-+	/*
-+	 * Get #address-cells and #size-cells dynamically
-+	 * Default 3 for #address-cells and 2 for #size-cells
-+	 */
-+	addr_cells = ofnode_read_u32_default(ctx->node, "#address-cells", 3);
-+	size_cells = ofnode_read_u32_default(ctx->node, "#size-cells", 2);
-+	total_cells = addr_cells + size_cells;
++	int len;
++	u64 size_bytes;
 +
 +	/* Read property 'reg' from the node */
-+	reg = ofnode_read_prop(ctx->node, "reg", &reglen);
-+	if (reg && reglen > addr_cells * sizeof(*reg)) {
-+		/* First address-cell: Bus Number */
-+		if (addr_cells >= 1)
-+			t->bus_number = fdt32_to_cpu(reg[0]);
-+		/* Second address-cell: Device/Function */
-+		if (addr_cells >= 2)
-+			t->device_function_number.data = fdt32_to_cpu(reg[1]);
-+		/*
-+		 * Third address-cell 'Register Offset' and the following
-+		 * size-cell bytes are not useful for SMBIOS type 9, just
-+		 * ignore them.
-+		 */
-+		/*
-+		 * As neither PCI IRQ Routing Table ($PIRQ) nor FDT
-+		 * property to represent a Slot ID, try to derive a
-+		 * Slot ID programmatically.
-+		 */
-+		t->slot_id = t->device_function_number.fields.dev_num |
-+			     (t->bus_number << 5);
-+	}
++	reg = ofnode_read_prop(node, "reg", &len);
++	if (!reg || len < sizeof(fdt32_t) * 4 || len % sizeof(fdt32_t))
++		return 0;
 +
-+	/* Read 'compatible' property */
-+	compatible = ofnode_read_string(ctx->node, "compatible");
-+	if (!compatible)
-+		return;
++	/* Combine hi/lo for size (typically 64-bit) */
++	size_bytes = ((u64)fdt32_to_cpu(reg[2]) << 32) | fdt32_to_cpu(reg[3]);
 +
-+	for (i = 0; i < ARRAY_SIZE(pci_attr); i++) {
-+		if (strstr(compatible, pci_attr[i].str)) {
-+			t->slot_type = pci_attr[i].slot_type;
-+			t->slot_data_bus_width = pci_attr[i].data_bus_width;
-+			t->slot_length = pci_attr[i].slot_length;
-+			t->slot_characteristics_1 = pci_attr[i].chara1;
-+			t->slot_characteristics_2 = pci_attr[i].chara2;
-+			/* mark it as in-use arbitrarily */
-+			t->current_usage = SMBIOS_SYSSLOT_USAGE_INUSE;
-+			return;
-+		}
-+	}
++	return size_bytes;
 +}
 +
-+static void smbios_write_type9_fields(struct smbios_ctx *ctx,
-+				      struct smbios_type9 *t)
++static int
++smbios_write_type16_sum_memory_nodes(ulong *current, int handle,
++				     struct smbios_ctx *ctx, u16 cnt, u64 size)
 +{
-+	t->slot_type = smbios_get_val_si(ctx, "slot-type", SYSID_NONE,
-+					 SMBIOS_SYSSLOT_TYPE_UNKNOWN);
-+	t->slot_data_bus_width =
-+		smbios_get_val_si(ctx, "data-bus-width",
-+				  SYSID_NONE, SMBIOS_SYSSLOT_WIDTH_UNKNOWN);
-+	t->current_usage = smbios_get_val_si(ctx, "current-usage", SYSID_NONE,
-+					     SMBIOS_SYSSLOT_USAGE_UNKNOWN);
-+	t->slot_length = smbios_get_val_si(ctx, "slot-length", SYSID_NONE,
-+					   SMBIOS_SYSSLOT_LENG_UNKNOWN);
-+	t->slot_id = smbios_get_val_si(ctx, "slot-id", SYSID_NONE, 0);
-+	t->slot_characteristics_1 =
-+		smbios_get_val_si(ctx, "slot-characteristics-1", SYSID_NONE,
-+				  SMBIOS_SYSSLOT_CHAR_UND);
-+	t->slot_characteristics_2 = smbios_get_val_si(ctx,
-+						      "slot-characteristics-2",
-+						      SYSID_NONE, 0);
-+	t->segment_group_number = smbios_get_val_si(ctx, "segment-group-number",
-+						    SYSID_NONE, 0);
-+	t->bus_number = smbios_get_val_si(ctx, "bus-number", SYSID_NONE, 0);
-+	t->device_function_number.data =
-+		smbios_get_val_si(ctx, "device-function-number", SYSID_NONE, 0);
-+}
-+
-+static int smbios_write_type9_1slot(ulong *current, int handle,
-+				    struct smbios_ctx *ctx,
-+				    int __maybe_unused idx, int devtype)
-+{
-+	struct smbios_type9 *t;
++	struct smbios_type16 *t;
 +	int len = sizeof(*t);
-+	u8 pgroups_cnt;
 +	u8 *eos_addr;
-+	size_t pgroups_size;
-+	void *wp;
-+
-+	pgroups_cnt = smbios_get_val_si(ctx, "peer-grouping-count",
-+					SYSID_NONE, 0);
-+	pgroups_size = pgroups_cnt * SMBIOS_TYPE9_PGROUP_SIZE;
-+
-+	/*
-+	 * reserve the space for the dynamic bytes of peer_groups.
-+	 * TODO:
-+	 * peer_groups = <peer_grouping_count> * SMBIOS_TYPE9_PGROUP_SIZE
-+	 */
-+	len += pgroups_size;
++	void *hdl;
++	size_t hdl_size;
 +
 +	t = map_sysmem(*current, len);
 +	memset(t, 0, len);
 +
-+	fill_smbios_header(t, SMBIOS_SYSTEM_SLOTS, len, handle);
++	fill_smbios_header(t, SMBIOS_PHYS_MEMORY_ARRAY, len, handle);
 +
 +	/* eos is at the end of the structure */
 +	eos_addr = (u8 *)t + len - sizeof(t->eos);
 +	smbios_set_eos(ctx, eos_addr);
 +
-+	/* Write the general fields */
-+	t->peer_grouping_count = pgroups_cnt;
-+	t->socket_design = smbios_add_prop_si(ctx, "socket-design", SYSID_NONE,
-+					      NULL);
-+	t->electrical_bus_width = smbios_get_val_si(ctx, "data-bus-width",
-+						    SYSID_NONE, 0);
++	/* default attributes */
++	t->location = SMBIOS_MA_LOCATION_MOTHERBOARD;
++	t->use = SMBIOS_MA_USE_SYSTEM;
++	t->mem_err_corr = SMBIOS_MA_ERRCORR_UNKNOWN;
++	t->mem_err_info_hdl = SMBIOS_MA_ERRINFO_NONE;
++	t->num_of_mem_dev = cnt;
 +
-+	/* skip the reserved peer groups and write the following fields from eos */
-+	/* t->slot_height */
-+	wp = eos_addr - sizeof(t->slot_height);
-+	*((u8 *)wp) = smbios_get_val_si(ctx, "slot-height", SYSID_NONE, 0);
-+	/* t->slot_pitch */
-+	wp -= sizeof(t->slot_pitch);
-+	*((u16 *)wp) = smbios_get_val_si(ctx, "slot-pitch", SYSID_NONE, 0);
-+	/* t->slot_physical_width */
-+	wp -= sizeof(t->slot_physical_width);
-+	*((u8 *)wp) = smbios_get_val_si(ctx, "slot-physical-width", SYSID_NONE, 0);
-+	/* t->slot_information */
-+	wp -= sizeof(t->slot_information);
-+	*((u8 *)wp) = smbios_get_val_si(ctx, "slot-information", SYSID_NONE, 0);
++	/* Use extended field */
++	t->max_cap = cpu_to_le32(0x80000000);
++	t->ext_max_cap = cpu_to_le64(size >> 10); /* In KB */
 +
-+	/* For PCI, some fields can be extracted from FDT node */
-+	if (devtype == SMBIOS_SYSSLOT_TYPE_PCI)
-+		/* Populate PCI attributes from existing PCI properties */
-+		smbios_lookup_pci_attr(ctx, t);
-+	else if (devtype == SMBIOS_SYSSLOT_TYPE_UNKNOWN) {
-+		/* Properties that expected in smbios subnode 'system-slot' */
-+		smbios_write_type9_fields(ctx, t);
-+	}
++	/* Save the memory array handles */
++	if (!sysinfo_get_data(ctx->dev, SYSID_SM_MEMARRAY_HANDLE, &hdl,
++			      &hdl_size) &&
++	    hdl_size == SYSINFO_MEM_HANDLE_MAX * sizeof(u16))
++		*((u16 *)hdl) = handle;
++
 +	len = t->hdr.length + smbios_string_table_len(ctx);
 +	*current += len;
 +	unmap_sysmem(t);
@@ -733,64 +466,180 @@ index 85508c06547..caeb309294d 100644
 +	return len;
 +}
 +
-+static int smbios_scan_slot_type(ulong *current, int *handle,
-+				 struct smbios_ctx *ctx)
++static void
++smbios_pop_type16_from_memcontroller_node(ofnode node, struct smbios_type16 *t)
 +{
-+	int i = 0;
-+	struct smbios_ctx ctx_bak;
 +	ofnode child;
-+	const struct map_sysinfo *prop;
-+	int hdl_base = *handle;
-+	int len = 0;
++	int count = 0;
++	u64 total = 0;
 +
-+	memcpy(&ctx_bak, ctx, sizeof(ctx_bak));
-+	prop = convert_sysinfo_to_dt(ctx->subnode_name, "slot-type");
-+	for (child = ofnode_first_subnode(ofnode_root()); ofnode_valid(child);
++	/* default attributes */
++	t->location = SMBIOS_MA_LOCATION_MOTHERBOARD;
++	t->use = SMBIOS_MA_USE_SYSTEM;
++	t->mem_err_info_hdl = SMBIOS_MA_ERRINFO_NONE;
++
++	/* Check custom property 'ecc-enabled' */
++	if (ofnode_read_bool(node, "ecc-enabled"))
++		t->mem_err_corr = SMBIOS_MA_ERRCORR_SBITECC;
++	else
++		t->mem_err_corr = SMBIOS_MA_ERRCORR_UNKNOWN;
++
++	/* Read subnodes with 'size' property */
++	for (child = ofnode_first_subnode(node); ofnode_valid(child);
 +	     child = ofnode_next_subnode(child)) {
-+		const char *dev_type_str;
-+		u8 dev_type = SMBIOS_SYSSLOT_TYPE_UNKNOWN;
++		u64 sz = 0;
++		const fdt32_t *size;
++		int len;
 +
-+		dev_type_str = ofnode_read_string(child, prop->dt_str);
-+		if (!dev_type_str)
++		size = ofnode_read_prop(child, "size", &len);
++		if (!size || len < sizeof(fdt32_t) || len % sizeof(fdt32_t))
 +			continue;
 +
-+		if (!strcmp(dev_type_str, "pci"))
-+			dev_type = SMBIOS_SYSSLOT_TYPE_PCI;
-+		else if (!strcmp(dev_type_str, "isa"))
-+			dev_type = SMBIOS_SYSSLOT_TYPE_ISA;
-+		else if (!strcmp(dev_type_str, "pcmcia"))
-+			dev_type = SMBIOS_SYSSLOT_TYPE_PCMCIA;
++		/* 64-bit size: <hi lo> or 32-bit size */
++		if (len >= sizeof(fdt32_t) * 2)
++			sz = ((u64)fdt32_to_cpu(size[0]) << 32) |
++			     fdt32_to_cpu(size[1]);
 +		else
-+			continue;
++			sz = fdt32_to_cpu(size[0]);
 +
-+		*handle = hdl_base + i;
-+		ctx->node = child;
-+		len += smbios_write_type9_1slot(current, *handle, ctx, 0,
-+						dev_type);
-+		memcpy(ctx, &ctx_bak, sizeof(*ctx));
-+		i++;
++		count++;
++		total += sz;
 +	}
++
++	/*
++	 * Number of memory devices associated with this array
++	 * (i.e., how many Type17 entries link to this Type16 array)
++	 */
++	t->num_of_mem_dev = count;
++
++	/* Use extended field */
++	t->max_cap = cpu_to_le32(0x80000000);
++	t->ext_max_cap = cpu_to_le64(total >> 10); /* In KB */
++}
++
++static void smbios_pop_type16_si(struct smbios_ctx *ctx,
++				 struct smbios_type16 *t)
++{
++	t->location = smbios_get_val_si(ctx, "location", SYSID_NONE,
++					SMBIOS_MA_LOCATION_UNKNOWN);
++	t->use = smbios_get_val_si(ctx, "use", SYSID_NONE,
++				   SMBIOS_MA_USE_UNKNOWN);
++	t->mem_err_corr = smbios_get_val_si(ctx, "memory-error-correction", SYSID_NONE,
++					    SMBIOS_MA_ERRCORR_UNKNOWN);
++	t->max_cap = smbios_get_val_si(ctx, "maximum-capacity", SYSID_NONE, 0);
++	t->mem_err_info_hdl = smbios_get_val_si(ctx, "memory-error-information-handle",
++						SYSID_NONE, SMBIOS_MA_ERRINFO_NONE);
++	t->num_of_mem_dev = smbios_get_val_si(ctx, "number-of-memory-devices", SYSID_NONE, 1);
++	t->ext_max_cap = smbios_get_u64_si(ctx, "extended-maximum-capacity", SYSID_NONE, 0);
++}
++
++static int smbios_write_type16_1array(ulong *current, int handle,
++				      struct smbios_ctx *ctx, int idx,
++				      int type)
++{
++	struct smbios_type16 *t;
++	int len = sizeof(*t);
++	u8 *eos_addr;
++	void *hdl;
++	size_t hdl_size;
++
++	t = map_sysmem(*current, len);
++	memset(t, 0, len);
++
++	fill_smbios_header(t, SMBIOS_PHYS_MEMORY_ARRAY, len, handle);
++
++	/* eos is at the end of the structure */
++	eos_addr = (u8 *)t + len - sizeof(t->eos);
++	smbios_set_eos(ctx, eos_addr);
++
++	if (type == SMBIOS_MEM_CUSTOM)
++		smbios_pop_type16_si(ctx, t);
++	else if (type == SMBIOS_MEM_FDT_MEMCON_NODE)
++		smbios_pop_type16_from_memcontroller_node(ctx->node, t);
++
++	/* Save the memory array handles */
++	if (!sysinfo_get_data(ctx->dev, SYSID_SM_MEMARRAY_HANDLE, &hdl,
++			      &hdl_size) &&
++	    hdl_size == SYSINFO_MEM_HANDLE_MAX * sizeof(u16))
++		*((u16 *)hdl + idx) = handle;
++
++	len = t->hdr.length + smbios_string_table_len(ctx);
++	*current += len;
++	unmap_sysmem(t);
 +
 +	return len;
 +}
 +
-+static int smbios_write_type9(ulong *current, int *handle,
-+			      struct smbios_ctx *ctx)
++static int smbios_write_type16(ulong *current, int *handle,
++			       struct smbios_ctx *ctx)
 +{
 +	int len;
++	struct smbios_ctx ctx_bak;
++	ofnode child;
++	int idx;
++	u64 total = 0;
++	int count = 0;
++	int hdl_base = *handle;
 +
-+	/* TODO: Get system slot information via pci subsystem */
 +	if (!IS_ENABLED(CONFIG_OF_CONTROL))
 +		return 0;	/* Error, return 0-length */
 +
++	/* Step 1: Scan any subnode exists under 'memory-array' */
 +	len = smbios_scan_subnodes(current, ctx, handle,
-+				   smbios_write_type9_1slot,
-+				   SMBIOS_SYSSLOT_TYPE_UNKNOWN);
++				   smbios_write_type16_1array,
++				   SMBIOS_MEM_CUSTOM);
 +	if (len)
 +		return len;
 +
-+	/* if no subnode under 'system-slot', try scan the entire FDT */
-+	len = smbios_scan_slot_type(current, handle, ctx);
++	/* Step 2: Scan 'memory' node from the entire FDT */
++	for (child = ofnode_first_subnode(ofnode_root());
++	     ofnode_valid(child); child = ofnode_next_subnode(child)) {
++		const char *str;
++
++		/* Look up for 'device_type = "memory"' */
++		str = ofnode_read_string(child, "device_type");
++		if (str && !strcmp(str, "memory")) {
++			count++;
++			total += smbios_pop_size_from_memory_node(child);
++		}
++	}
++	/*
++	 * Generate one type16 instance for all 'memory' nodes,
++	 * use idx=0 implicitly
++	 */
++	if (count)
++		len += smbios_write_type16_sum_memory_nodes(current, *handle,
++							    ctx, count, total);
++
++	/* Step 3: Scan 'memory-controller' node from the entire FDT */
++	/* idx starts from 1 */
++	memcpy(&ctx_bak, ctx, sizeof(ctx_bak));
++	for (idx = 1, child = ofnode_first_subnode(ofnode_root());
++	     ofnode_valid(child); child = ofnode_next_subnode(child)) {
++		const char *compat;
++		const char *name;
++
++		/*
++		 * Look up for node with name or property 'compatible'
++		 * containing 'memory-controller'.
++		 */
++		name = ofnode_get_name(child);
++		compat = ofnode_read_string(child, "compatible");
++		if ((!compat || !strstr(compat, "memory-controller")) &&
++		    (!name || !strstr(name, "memory-controller")))
++			continue;
++
++		*handle = hdl_base + idx;
++		ctx->node = child;
++		/*
++		 * Generate one type16 instance for each 'memory-controller'
++		 * node, sum the 'size' of all subnodes.
++		 */
++		len += smbios_write_type16_1array(current, *handle, ctx, idx,
++						  SMBIOS_MEM_FDT_MEMCON_NODE);
++		idx++;
++		memcpy(ctx, &ctx_bak, sizeof(*ctx));
++	}
 +
 +	return len;
 +}
@@ -798,16 +647,14 @@ index 85508c06547..caeb309294d 100644
  #endif /* #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE) */
  
  static int smbios_write_type32(ulong *current, int *handle,
-@@ -905,6 +1197,9 @@ static struct smbios_write_method smbios_write_funcs[] = {
- 	{ smbios_write_type7, "cache", },
- #endif
+@@ -1199,6 +1480,7 @@ static struct smbios_write_method smbios_write_funcs[] = {
  	{ smbios_write_type4, "processor"},
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+	{ smbios_write_type9, "system-slot"},
-+#endif
+ #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
+ 	{ smbios_write_type9, "system-slot"},
++	{ smbios_write_type16, "memory-array"},
+ #endif
  	{ smbios_write_type32, },
  	{ smbios_write_type127 },
- };
 -- 
 2.25.1
 
