@@ -4,95 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86122EF99D3
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 20:21:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B3DCEF99D3
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 20:21:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52E4A83CB5;
-	Fri, 13 Feb 2026 21:20:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BA7083DFF;
+	Fri, 13 Feb 2026 21:21:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nLJvUdgE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f8NLkzHq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6E1483015; Fri, 13 Feb 2026 21:20:52 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 3DCFF83DFF; Fri, 13 Feb 2026 21:21:00 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7071883E57
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 21:20:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 112E583015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 21:20:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2a7d98c1879so7621615ad.3
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:20:50 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771014049; cv=none;
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2aaf5d53eaaso8529115ad.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:20:57 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771014056; cv=none;
  d=google.com; s=arc-20240605;
- b=Mu4VQtMbP8lMj+PhK2ubIQQQOykfzMxsD/8SPtsMDPEyk8bM9JNx+7NmYa3QYSaAJm
- TXc7A0VstsHMg3BN+H/bC7BZnuu9a9cMq/Gk7LWZq7ncrV8OSQOduplVgfcHv4g1AawB
- VyQbdDxYNj6qsNqI1KmdoIEPRqT+bKHNWup6ELbUi0pCGZHMYkcNWv1UYcdvf0Nyw8Zu
- n9gmN9sU4imIn5DWM8pQmwl0YoMzwvJR373DIgwKbrech+UxR/HqoTmWTguTeRrYko3x
- lc7zIZhsuit7n2BXvF+kaw8v9IcdqCUgpWhfQDNstBNyNa9dVW0H4jCmMeni6tIKeVgJ
- bqxg==
+ b=K/cPtyjId9ifbn4B4ZSRiqekocv/LsuwicinallgaLO9JN5Xshj6V6Mvpe5SrAuvU6
+ PPDTgGlL3XFt5dLQ4y1mU6U1PhDYXxnRS5CBgKbU5YknffS3xkBTZsV+2bGid0V54pSu
+ waMlglHt/xJNwwwhJuJdiM0U927PqNzmnJZCc6U1m5iMcLfEgbedkKMihpsDS9jxnjlR
+ UPF6QWHF0i++GZOHGEFwX5usDxymUlSIxv6XfSI2ngsRBbFKKkVQVx/nygZEfEbZc5/5
+ QhjmyaduO0UkeDf6yvKNjuyjKWDVAhLmyPz9A6GAOhVRlqvatObMmT0ULvCh4UlQXVIY
+ i/9w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=rTB99JAeDUk7heewdxmfNid96Yq5+Ks6gel18vCuEKE=;
- fh=BNXxXodM6x/TTtNw5dDUbIgJJ3THT0IIKdNrgcKqd+M=;
- b=P9+oFa2KSoMYa5TFeHQFtzguYB8lJTiLezlE6Yiqf1Wu5hgBOsW3A/cd8HHQczMzDI
- kNOFDYVCheUT7cdB/gCYb+BVKY1FbgvB7H15IUDkkuUFmuo2pqChUwz3T1A8I6nglhmL
- BqDtG0iSR2nWQyTFOvlbCAItnLgL61mVA7HiBLmJRy0YnJinWVea43xdYZt27YN5RK1p
- zcDoBjOBnuyCG4b1n1jTBuToAToOYlfjv6zq1rWwK19oCipD5GqIp8zmWfdHCHBIkxo2
- u7Qm9F8FHgXDrB2flvdbCkfacCBD3md71647RjPsr30Q4OzDMoop9peTdIc4UjJPqGml
- nPig==; darn=lists.denx.de
+ bh=bmzEflmCvKpst4oJa4TCoEoCGC2lnSFFKBN/WgmxDB8=;
+ fh=zJE/Fo8l/szBmEOetLct695NX5uRaYsIjDN5aCBW4wU=;
+ b=RBJIJcWY1VvIeRHN8t7kqaaydtgMuFj0kMtvI8m0ZVf4x/BW9LG9CcxOPvez53Aazb
+ TFHypK9YeBk+vtO8+FeJ67SvVpuENGATWd1pHK2yXkCp0Vm7qCTj3bYw5fZBlnkxdYJk
+ UQvbDG3vj25nAzATsQCLGLmfU/L130eCoVp0uz7cvcjnff2ZxsyCA0VKnh+dj7G5VpB0
+ t96KZEiGpvcQCHmmJEcWCIUnXmkYj1daICunzbCPAqURBUkr8puxMw92So1yMfYSS2d0
+ Egyy85GlfFSGP7dDpSVxLcNxjGW9qHPhTGjAIoJXaL+2M0wk7oHuGZObAM4iHLDPr4fF
+ ms3w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771014049; x=1771618849; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771014056; x=1771618856; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rTB99JAeDUk7heewdxmfNid96Yq5+Ks6gel18vCuEKE=;
- b=nLJvUdgEE8kgrv76Gb6NAsF6HDo7boCd8pvnG7F8uFolB9Ak5FIJfPKm8n6zP1Y9YZ
- bvIwxo920Zgl8MrplPMIdlS2HLzOPxgnGebV5eRdMMcHYpG5zaiXmd9P4lKK0vz4esBh
- 5kzDH7so25e8AVk1RZsYs+UFEceDw5fd72RC8=
+ bh=bmzEflmCvKpst4oJa4TCoEoCGC2lnSFFKBN/WgmxDB8=;
+ b=f8NLkzHqwiY+A/zlgGs+aK3HQAi/yhaIxmzpbudC4LRoTZ4s+LGi8p6yIDzsBo2RET
+ rXKA6GuhGvOsNnFUACUNqFddL+evkTg6uSBhnshfy3XOZWKYsD81SWJ8OltU5ty5kDmM
+ WPwm2zK0O8IEjBYF6eEbRxfB7sw1eEm548ytI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771014049; x=1771618849;
+ d=1e100.net; s=20230601; t=1771014056; x=1771618856;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rTB99JAeDUk7heewdxmfNid96Yq5+Ks6gel18vCuEKE=;
- b=r7kpRlSHmuJq4HFVLKzMJGp5H7Ln318JeZlassINw9Ap7iiLxFCw+RIqHnxk5sYhr4
- IXXgOz+KFnu0ySfSUtYZDztW1NbxUQC/TeJqbibAZIAsaB24qYHCfkWsB1d8wDEVRcuW
- MUhF2ygv3ROPb6Isutru8dbA65HL4pQc6B3jWc3qw/I181naUNwaKEQHAPaj5RF0oGIC
- DgSswMSMuP1fLOrPuIKvDHMMeUw9o7VvWkbfnoBNmZ8IobJZBYjHTHK5KrQu9Mb2UiPx
- LX6BnbsDIly3aEgDhZqazvDENh+gnbre9iLQ53Ar2dOM5XgsLjN8lM+Po4c0QLBU054t
- W1Iw==
-X-Gm-Message-State: AOJu0YxzsB1s9NhNL/ui8HUy4jylZoR3fY1MBo8tbQ1xItz1M7eHGjWP
- /wZl8ZJevTXcOhBOCFa/DwrufDteZgYPxwHaIXwD5NoUEdJpsTl7LNHFNh0++TT4Bmf9zujQDSt
- TjGR/grqh5UTLm5KoQLtCY2g8YYTmHnTDOmxlURFt
-X-Gm-Gg: AZuq6aIpK74kMg4ZnnJFI7MnBxm4QCUn4r/lQLsSxQC/mnUO+edRahzWCbXHIp8DZzz
- d2mvoIsA+kC0zM6c9twwJA4hf+Q49DjmnI/HIeNqXIcxbUp85jRWMRdpLWaUKkF27ng9MJ1mPNH
- /ytt5iGfoK8tmJHLWaRGlLVPaYDAuQi07ZPc0VNo6tpaZ0hRM9sEvVaeuaLY+hX+SqMOp4/wKaP
- cw1G/BovOrNJMw5ApaMMLeJsN4uDhelyjiMHCcV2N+lb2WzR0cFdWX2AG3Ab4xLAFBDeHUJD2oo
- JeuR
-X-Received: by 2002:a17:903:19cf:b0:2ab:3cba:4304 with SMTP id
- d9443c01a7336-2ab505e4f39mr29202135ad.43.1771014048929; Fri, 13 Feb 2026
- 12:20:48 -0800 (PST)
+ bh=bmzEflmCvKpst4oJa4TCoEoCGC2lnSFFKBN/WgmxDB8=;
+ b=KnTm1u5XJbUMlZpjuHRHW4Nexgk75HCjc+mbCWzlRzwFWQqxTnAThOmEXBWEEAfmzA
+ Y8KM6sTCDpAjIcxBHpBH7ZJUWClHheN589TWEZDX1cIIBHNBJYVq46AF0uFqhr9iVur9
+ RWvYcS1wTcRI38G/dfUgjyQdjzI3y+bjJv5c5lQhkZoPyeUhRRW+UDwoLqM92guq9/fo
+ U1kkSU8S23E67ggAs3cSotJ+hbeVFyvDQw0WdJNlIlrmPLDbepwFWqoig0aKFiZSvaDR
+ 7wnna2S4LKw68awneyw3ynLHzgf0LbgJFdLSClA67yQrWWTPaHAcsqS1FFqS30dG28si
+ 2bLQ==
+X-Gm-Message-State: AOJu0Yz6wlWrNbYawWtFUqcYJFCp1n3zutMMIXmQ5/lFq1rjzU2hE2+o
+ 2MctCBcFdzlWSMO3CnMC6T97tk4BgR4s6shMqTW71tR3Qq4gHP680yDCRQ1JLPhjoLqm8ele2oE
+ KQLy27H4aKDhoKZ3H8V2DP13HhIcK7BWEgwZT7tfg
+X-Gm-Gg: AZuq6aJGzXaVtW2ysiw++gWCdo1jU+/63HX1Srvf0HqRClZBzXPKUOgPq/tNTfpsxB9
+ EWxjklDm4B2MMqEfwHWmpbyi/F6pl6hI6ZvvOtKZp67N9gwP/BkBIBXtAQQKExGZCfYQa7pLNVJ
+ MfLrGn4BzMHV0hW5ce/2D1E0t7ibit4b+1KGQFpRjrAvhG4miRwqR6edwFefdDdJyNFtFBciU5C
+ k6k4J3BW0YuOeTZ35z3/a13azmpt/u4VHG4aTSHU3aswemTap091c47xOf+SIPhm5VO3yRSg7OX
+ W2BP
+X-Received: by 2002:a17:902:ecc7:b0:2a7:6aa5:68f3 with SMTP id
+ d9443c01a7336-2ad174dcf0fmr6005305ad.34.1771014056406; Fri, 13 Feb 2026
+ 12:20:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20260213001212.157033-1-marex@nabladev.com>
- <CAFLszTi1M=J6+R1CcAJRY4gnQa87ScFkQ-YOK+NWzsB02VKnwA@mail.gmail.com>
- <481a2418-4a4c-411c-8028-db7c5c4c243f@nabladev.com>
-In-Reply-To: <481a2418-4a4c-411c-8028-db7c5c4c243f@nabladev.com>
+References: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
+In-Reply-To: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Feb 2026 13:20:03 -0700
-X-Gm-Features: AZwV_QgsXddOoLZwsQ9PnbZ7RE2YkMZWfu8poBS6LujjZaRVj5JNn2dZwPDh71E
-Message-ID: <CAFLszTj0PjocZLL_3VSP+ckDKW57j99jPbZ3nmUKdA-M3-juFw@mail.gmail.com>
-Subject: Re: [PATCH] binman: add CST backend selection for i.MX8M signing
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Fri, 13 Feb 2026 13:20:16 -0700
+X-Gm-Features: AZwV_QjPsgpZWaNe5J7TTTKSjrskikg58HjcKMDrm_WleKEXSqCCKZlge4bKdjU
+Message-ID: <CAFLszTgtGwjyPt2HHf+ZorSfDOoLropv6b-v0WvYBLhkSGuoVA@mail.gmail.com>
+Subject: Re: [PATCH] dm: core: Don't allow ofnode_to_fdt() to return NULL
+To: Romain Gantois <romain.gantois@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,52 +112,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Romain,
 
-On Fri, 13 Feb 2026 at 12:27, Marek Vasut <marex@nabladev.com> wrote:
+On Tue, 10 Feb 2026 at 09:29, Romain Gantois <romain.gantois@bootlin.com> wrote:
 >
-> On 2/13/26 6:53 PM, Simon Glass wrote:
+> The ofnode_to_fdt() function may return a NULL pointer in multiple cases.
+> Or, this function's return value is often passed directly to functions such
+> as fdt_getprop() which end up dereferencing it, thus causing a NULL pointer
+> exception.
 >
-> Hello Simon,
+> Don't allow ofnode_to_fdt() to return NULL, to avoid a NULL pointer
+> dereference.
 >
-> >> @@ -161,8 +165,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
-> >>           with open(cfg_fname, 'w') as cfgf:
-> >>               config.write(cfgf)
-> >>
-> >> +        # SSL is the default backend, PKCS11 backend is optional
-> >> +        if self.backend == "pkcs11":
-> >> +            cst_backend = "pkcs11"
-> >> +        else:
-> >> +            cst_backend = "ssl"
-> >> +
-> >>           output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-> >> -        args = ['-i', cfg_fname, '-o', output_fname]
-> >> +        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
-> >>           if self.cst.run_cmd(*args) is not None:
-> >>               outdata = tools.read_file(output_fname)
-> >>               # fixme: 0x2000 should be CONFIG_CSF_SIZE
-> >> --
-> >> 2.51.0
-> >>
-> >
-> > This should be documented somewhere, likely in the comment for this
-> > entry type, so it ends up visible in the docs.
+> Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
+> ---
+>  drivers/core/ofnode.c | 13 +++++++++----
+>  1 file changed, 9 insertions(+), 4 deletions(-)
 >
-> I will send a V2 with documentation.
+> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> index cf1cf8abfbe..af24a2c533c 100644
+> --- a/drivers/core/ofnode.c
+> +++ b/drivers/core/ofnode.c
+> @@ -164,15 +164,20 @@ void *ofnode_lookup_fdt(ofnode node)
 >
-> > Also, this code path will need a test, please.
-> How do you propose to test this ?
+>  void *ofnode_to_fdt(ofnode node)
+>  {
+> +       void *fdt;
+> +
+>  #ifdef OF_CHECKS
+>         if (of_live_active())
+> -               return NULL;
+> +               panic("%s called with live tree in use!\n", __func__);
+>  #endif
+>         if (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) && ofnode_valid(node))
+> -               return ofnode_lookup_fdt(node);
+> +               fdt = ofnode_lookup_fdt(node);
+> +       else
+> +               fdt = gd->fdt_blob;
+> +
+> +       assert(fdt);
+>
+> -       /* Use the control FDT by default */
+> -       return (void *)gd->fdt_blob;
+> +       return fdt;
+>  }
+>
+>  /**
+>
+> ---
+> base-commit: b99da05e1538b8fa153322da82917af2aa27e1d6
+> change-id: 20260210-ofnode-to-fdt-null-95a9f357819e
+>
+> Best regards,
+> --
+> Romain Gantois <romain.gantois@bootlin.com>
+>
 
-Extend or copy one of the existing imx8 tests, perhaps with a new .dts
-- and I suppose set the env var and see that it works too?
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
-Note that imx8 has basic test coverage but there is quite a bit missing:
-
-tools/binman/btool/cst.py                                  18      4    78%
-tools/binman/etype/nxp_imx8mcst.py                         89     69    22%
-tools/binman/etype/nxp_imx8mimage.py                       38      6    84%
-
-I shed a small tear whenever I see that :-)
+This seems to me to be a hole in the checking in fdt_check_node_offset_()
 
 Regards,
 Simon
