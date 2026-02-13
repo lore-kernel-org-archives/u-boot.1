@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3527BEF99C1
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 18:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31387EF99C1
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 18:14:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D8EF83C4B;
-	Fri, 13 Feb 2026 19:01:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8789983AAB;
+	Fri, 13 Feb 2026 19:14:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r+SXuQyN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eKG6XAL0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9863783D5D; Fri, 13 Feb 2026 19:01:11 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 9962483C4B; Fri, 13 Feb 2026 19:14:15 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2E0383AAB
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 19:01:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CB9383AA9
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 19:14:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-40f0e14b9f9so36960fac.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 10:01:07 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d4ba9abbecso1374655a34.1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 10:14:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771005666; x=1771610466; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771006452; x=1771611252; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UlguPhLFv6c4RR7kvfITF0GQ7zibjkmxvOIAp1m0png=;
- b=r+SXuQyNBkTNd5moexmC25OjRyVNDJ96R5wiz9jU1V8YmSw/zWTDdqOlynxL4s7Leh
- c4o4oQpLjL13ebQd7qZc//urZd2YH6zrWuUt9jGqhJQqDTYxXo/jItunbS5ns8Lmajaf
- r7+RrxhzuX6ug/t60Kh3DEQ8LvTr4n+pJ0OPE=
+ bh=UCwvuQuat3uPBJa4crDXc0E7aaGdbbkzgYeer40g02I=;
+ b=eKG6XAL0tGuD/jSyyrNXxNNmUHnqYnJsfKE97PCvkWAMhtJnK3VW+7qMp1eypMHNLc
+ 8J1AjV0J/HYASvTB5T/zr5EPMBkG5+UVJChqabDe1l/BAhXhD3uA5GcNvFeNJ4YmqvA4
+ IfVfv9LSgALhKj0r2W97uyHUZ3SU0IA/uB/nM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771005666; x=1771610466;
+ d=1e100.net; s=20230601; t=1771006452; x=1771611252;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UlguPhLFv6c4RR7kvfITF0GQ7zibjkmxvOIAp1m0png=;
- b=d/1WQKHZ8LDh8Ld9t7PKM2jNpR68uZynCbh3LFUa5o6cZ0CyenkdGtN/knFZo1MajL
- Xme1VHMQ10zctqSTZIf2lJS9tI8KWU9C4HhFk9a/6Gwn3YsW6vyE+7ERfh0K8C+Tk/np
- lV5r0nPe4yXpY3Qhkj62+PF8hMNsQ0yo8X0YB4Lpycyx1KSutuRc6PEpHVZYewwq2T1f
- GAOi2CteQUlMQc8wxIQBbKgWX76RHm6c/rQpjxi3Qkjyx02JLVpB0OvLFpO8nNhppczp
- W/OIJKEHxrQG9hhCKkFuKXXnPSarFX1O5oMDGGbYj6Zd/Qkd5wB8NmXCf+eUBrbOHsCr
- 1gtA==
+ bh=UCwvuQuat3uPBJa4crDXc0E7aaGdbbkzgYeer40g02I=;
+ b=Ifb4m5x9NY06vMVc5K21ZsePGmaGUEJ0cD8Q8ZwOmQ8z4A3RhO7na0yXLDOm+S3CRd
+ mpilKnxsddnVrhqVLCeigiVbWyQbLU0fU0S1a5B5zxTVE/OEnsMv2MNtf7Q9S4XoRRw+
+ 0SLMkXr/eqC+Pn0G0amuvtG5KRkt0yQhmYi89nWEb09t2rH4K31XcJ+b/5OkdnwPBtwP
+ 9CjLAYB8jQ+8/NFHyqzUJ1hFtQxhPhXGhSSkGYxW7Q5b6VIu5mAreh5wDBGXVMIrETF7
+ o2gpYEbU9XAWV0ghgTTYU81KsFvVXD4rygwZRnKw9GlCpe00Z1qZuGPAXm/9JZnc0KB3
+ yaWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCXWNbET4uofXuKfKoD8gpCu78fqwpPnBuWxblV7BPWzss12TKpJpB1SYtk2WPqQMBlEgHTAM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyImf1HVeAlzddYP/TDqv3nzd3PZ3eKQRCmLSjQhtNr+6Dvllk9
- Nv96jJX1/7NEPSldH2/CoFj/ob8J84gLxiGYjHWQAd/nGB7LsnLPENqr7lrGyf0ISFO8WAYcceb
- 0VBTUpWY=
-X-Gm-Gg: AZuq6aJZjYlcxhMd+oJiYzeWN8MiJfu6QNDKEBMyfN6o2XBkMpwjXai2p9fgsZsc4Pa
- 63yyyg0Mpo4CwyKQde1YKMzsxR5Tf63Kz5tzN1jHJFE+lysI1E++c59dbpxDfjVoKI+l6ZVtiZq
- xEx8LmbcLbTw4GpjQIu2RjtKOURfannrncOpyyPJoFT5P7wzkeEkN+xJZKuVJPZrrgWogxY30OS
- 7SYskWM7J2lvzbAK2LvFLd2l0dwFvzbYZTW3ZUNG12LsmGgHywsru3kK/QP5pFDTdQ9R2r4KHUi
- 4vq0fkQwXlzgJxKCfSkbpxMYw4roSjXbUcD6cV/Z3CQUCyqiChTYW5z8XTji03P8f2+wmiaafPk
- tE2IEx5uUjN2aY1Q97scOzT2ey939y2wsrTrBwoxlrD/yVrtmDGe8o3Lh6j7FKl08cCBeqi81mW
- h/4brWiwumhevo3+9EcgPpSh25ZZPHsYdZ4EL4LMbpjDd/5fSn2iQRI4HlWIPn4CaNqfOrW2J2l
- gMvuQmsrJ0DvxOe73Ote92KG0DXU6SA2sYGCisKslAaJJ2+Pwg=
-X-Received: by 2002:a05:6870:3324:b0:40a:5a07:3598 with SMTP id
- 586e51a60fabf-40ef3e2baf0mr1515942fac.36.1771005663368; 
- Fri, 13 Feb 2026 10:01:03 -0800 (PST)
+ AJvYcCUpF9TwjCnQ6j9Vhc2Vtp8P1XcsPz7QhesS+wl0xE1MX/dW3QSkt8TULCtQ+k4uBVy5XOv0cRI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzryRligAqIbQjfzHJDx/2zE4RaO5Pvr9HdP/KIjRAo+nuoBql9
+ jdpitN3B1NLWcFZK/rLCbZhhm79FAnifD+1+e8IQXAh+5OyAekG6hHxj2JMQYGxqrMs=
+X-Gm-Gg: AZuq6aI62spwTKypbqVAG448282QQYBaw5J+BSEElN2gLG2S1XS62torCqZCRfnPwuR
+ pj6IgBCG+u8eAeVpJp15dREVzGdL+CpVpGRKjQ/xqFcUejZ6L9Sq6KpX4XMKUobIkbB4l4bN4M+
+ 1VIDNve7zGpyCxJThT4XVSaGIHZQkhxaH9Jzx0bF5hooFapz/PZogQYrW3KU+uZHSk5lZJVxw8p
+ Mz3bZ5mi4aP3+EegzHceTDKJMo/IuI6TbV0G8UssnSHF19io0KlFRhz2geiw45XFP5N47M3TulV
+ 0e9fN9WMaDOFEUq38i8sRWDSJNd0v643fNyIuBzs30TX/0PONp8RjBSHD3z1ChRPm2VpQzVcMOZ
+ bKzqmhq5iuaMFYBKUJ9tvZQVTdtdQ33ngAMqpc/KZjBv+fnqEv3zfxO6+zY7sxIO+NNE9vbVQ9q
+ rNggF7F+i8IhamM3OyvEk0BGl76sBy/CBYn25ByxzCqscwkytIVIjCal7lEu/Rv/DIl55vK8Yiu
+ TOFs2Bc4Zxu4YwxrOriBHwHdgaZpokb+4JzznEcwObQYZDXCYeHGzkbS02exA==
+X-Received: by 2002:a05:6830:90d:b0:7d1:9160:7b98 with SMTP id
+ 46e09a7af769-7d4c302911dmr1563065a34.15.1771006452181; 
+ Fri, 13 Feb 2026 10:14:12 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40eaeeaeb38sm6983729fac.6.2026.02.13.10.01.02
+ 46e09a7af769-7d4a771c495sm6391703a34.26.2026.02.13.10.14.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 10:01:02 -0800 (PST)
-Date: Fri, 13 Feb 2026 12:01:00 -0600
+ Fri, 13 Feb 2026 10:14:11 -0800 (PST)
+Date: Fri, 13 Feb 2026 12:14:05 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Francois Berder <fberder@outlook.fr>,
- Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de,
- Vignesh R <vigneshr@ti.com>
-Subject: Re: [PATCH] mtd: spi: Add missing free in sf_get_bootflow
-Message-ID: <20260213180100.GK2747538@bill-the-cat>
-References: <BESP194MB28058C540F0C3D28F4D08541DAA3A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
- <ffa1bf53-9d40-4297-a30c-ffb9d8113820@linaro.org>
- <20251209141706.GV303283@bill-the-cat>
- <20260213165658.GJ2747538@bill-the-cat>
- <CAFLszTi2dWCN+rhXDkBX33ph4ww=6RumXAPECY5_MdzkcB3edg@mail.gmail.com>
+Cc: Eric Schikschneit <eric.schikschneit@novatechautomation.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
+Subject: Re: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
+Message-ID: <20260213181405.GL2747538@bill-the-cat>
+References: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
+ <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
+ <20260203181444.GQ2603314@bill-the-cat>
+ <CAFLszTgLx_TtEO-8qq_9uojLd7PgFdUuhs5_6kYqL7GuzFt7ow@mail.gmail.com>
+ <SJ2PR07MB97113A17DC42B9E4E87E95EB8162A@SJ2PR07MB9711.namprd07.prod.outlook.com>
+ <CAFLszThAYG9UXu0GoUDHv=k44G3b4CMBNdZjEUmHgrneJZAXOQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BCEKizV2/iZF7Ln3"
+ protocol="application/pgp-signature"; boundary="Ik4m+Sab5ckXv1d7"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi2dWCN+rhXDkBX33ph4ww=6RumXAPECY5_MdzkcB3edg@mail.gmail.com>
+In-Reply-To: <CAFLszThAYG9UXu0GoUDHv=k44G3b4CMBNdZjEUmHgrneJZAXOQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,76 +106,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BCEKizV2/iZF7Ln3
+--Ik4m+Sab5ckXv1d7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 13, 2026 at 10:53:25AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Fri, Feb 13, 2026 at 10:53:26AM -0700, Simon Glass wrote:
+> Hi Eric,
 >=20
-> On Fri, 13 Feb 2026 at 09:57, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 10 Feb 2026 at 07:38, Eric Schikschneit
+> <eric.schikschneit@novatechautomation.com> wrote:
 > >
-> > On Tue, Dec 09, 2025 at 08:17:06AM -0600, Tom Rini wrote:
-> > > On Tue, Dec 09, 2025 at 12:16:33PM +0200, Tudor Ambarus wrote:
-> > > >
-> > > >
-> > > > On 12/9/25 11:56 AM, Francois Berder wrote:
-> > > > > Free buf if spi_flash_read_dm fails.
-> > > > >
-> > > > > Signed-off-by: Francois Berder <fberder@outlook.fr>
-> > > > > ---
-> > > > >  drivers/mtd/spi/sf_bootdev.c | 4 +++-
-> > > > >  1 file changed, 3 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/drivers/mtd/spi/sf_bootdev.c b/drivers/mtd/spi/sf_bo=
-otdev.c
-> > > > > index 017a74a3016..720faf51a1f 100644
-> > > > > --- a/drivers/mtd/spi/sf_bootdev.c
-> > > > > +++ b/drivers/mtd/spi/sf_bootdev.c
-> > > > > @@ -35,8 +35,10 @@ static int sf_get_bootflow(struct udevice *dev=
-, struct bootflow_iter *iter,
-> > > > >
-> > > > >   ret =3D spi_flash_read_dm(sf, env_get_hex("script_offset_f", 0),
-> > > > >                           size, buf);
-> > > > > - if (ret)
-> > > > > + if (ret) {
-> > > > > +         free(buf);
-> > > > >           return log_msg_ret("cmd", -EINVAL);
-> > > > > + }
-> > > >
-> > > >
-> > > > can we use a devm alloc method to get rid of the extra free handlin=
-g?
-> > >
-> > > No, because this isn't the kernel and devm alloc doesn't always free
-> > > here. Making that no longer be the case (always freeing) is on my list
-> > > to look at doing (drivers that use devm alloc always implys/select'ing
-> > > DEVRES).
+> > Hello Simon, Tom,
 > >
-> > We've since changed so that devm alloc does behave in U-Boot the same as
-> > the kernel (except in xPL phases), so Tudor's suggestion is a good one.
+> > 1. Tom -
+> > > And we should spell out that device tree can't set these any more in =
+the
+> > > commit message, along with spelling out why we can't do that anymore
+> > > safely (why can't we?). Thanks.
+> > I would be happy to move the code comment into the commit message:
+> >  /* NOTE: This breaks u-boot ability to set board options via    *
+> >   * device tree, but guarantees specific known values..          *
+> >   * you wouldnt use an uninitialized variable would you??        */
+> > These settings could be set by device tree, but every fdtdec* function =
+must
+> > set a valid value. If a user has something set differently than called =
+out in the
+> > FSP_MR5 Integration Guide the board stability will be compromised. Many=
+ of
+> > these settings are co-dependant so we would need much more robust error
+> > checking. This task would not be trivial. By using the specific values =
+called out
+> > by the Integration guide we allow users to begin from a documented known
+> > good configuration. Maybe we could set all the values, and then check t=
+he
+> > device tree to see if the user specified a different value? If the devi=
+ce tree does
+> > not call out a specific setting we would not want to just set it to zer=
+o for example
+> > as this can cause undefined behavior.
 >=20
-> I still like the idea of having this patch so that others don't hit
-> it. Does it show up as a leak on any code-analysis?
+> The device tree is actually where these values are set for all x86
+> boards. If you change any value in a device tree you risk bricking any
+> board. It should be considered an integral part of the build. If you
+> change the C code you can also brick a board.
+>=20
+> So I don't like the idea of changing this to C, sorry.
+>=20
+> NAK from me sorry.
 
-I'm unsure what you're suggesting. If we can switch these to devm alloc
-functions now that we match the expected API of the linux kernel
-(outside of xPL where we don't care about leaks) we don't need to
-manually track frees here.
+Let us not be hasty here. It sounds like we're getting some feedback
+=66rom production users of this support finally and not just people like
+you and I that had reflashed our Minnowboards or similar to prove it
+worked.
 
 --=20
 Tom
 
---BCEKizV2/iZF7Ln3
+--Ik4m+Sab5ckXv1d7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY9m2QAKCRAr4qD1Cr/k
-CunrAQCohMeobdzKpX87WDrsUkzkVMYuLisVYyJvpNNkeRGKGQEAzCJ4aZRX+MVe
-DxyGk4YBTcw5tywMr99QlYRUPpv4yQU=
-=crdx
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY9p6QAKCRAr4qD1Cr/k
+Ci7uAQC2E79pLU7qNowZeKB70rpzD5LFopK8VNwgzlAWpQHvOgD6AxvFmmyZdI4/
+a5l1QRSLuiBWxTczoY3RnXGZU+fncAE=
+=dtoI
 -----END PGP SIGNATURE-----
 
---BCEKizV2/iZF7Ln3--
+--Ik4m+Sab5ckXv1d7--
