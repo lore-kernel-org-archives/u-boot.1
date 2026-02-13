@@ -4,106 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A113DEDF152
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 10:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC20EDF151
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 11:06:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D228680FA1;
-	Fri, 13 Feb 2026 11:59:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8894B83C4B;
+	Fri, 13 Feb 2026 12:06:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nzJl6cA9";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="KdB/OOJ3";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eKt+/IBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3AAF83015; Fri, 13 Feb 2026 11:59:54 +0100 (CET)
-Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
- [IPv6:2607:f8b0:4864:20::b12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A32B683CB5; Fri, 13 Feb 2026 12:05:59 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 186B380B98
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:59:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DABAB80FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:05:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12d.google.com with SMTP id
- 956f58d0204a3-649df3c22d4so649261d50.3
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 02:59:51 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770980390; cv=none;
- d=google.com; s=arc-20240605;
- b=f/qsohBdHM3Q6Xj6x+2N0FGJAZjrjKRJAd19XeQLag45+pKmrLWJBp2dPxBZqcd2IZ
- E0SDblco6ABmLV9UKtECK+ky7shUOtg7mLjeFFaoX2q1yo2MMDyAWLSiIw00ZHv28PWj
- atJVyR937KYF+DBqQDPaxJc/A1ElGSxa9KTpBKv5Xd+SF6INXaFpw3tuK2KW9dpg59F1
- bgCdFDJViiBwcTvpXSCcx738/XacZ+m6NxxfeS5AkGcvN5r6JU1uVOtMJ82FjdOC8lnE
- zioFKydnw113psFhZ/aeszSTtHDXxZL+lJgldDpQjvCYTvcYZFhIFDGC7sky89J0sXAP
- wonQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=gY2cwLSBAjOf7MFo+IxXVsCOVBkkl5xq2Pvj/0id8CA=;
- fh=vyfbts51IeL9YqiXEXChvJnWUKQFbZdi8gERlNYTnqw=;
- b=fX3n5qi7TyygftixKwXCLT1XQV9lHeGa+3rECtk52KZFJ7pnEg+dTrGuvDd4oWIYJz
- IDyLk86YL0pfZMeE3YeNQtcz7dgd0Wxaxr+e9gZm+ZpjVEO4EtCeRsB4Ud4PWwLePnzW
- JjowCSo95jYVRFV/d9ajd25AfU+UT4IeaMpdVwISaLcSsx2AqmYqRGMzRy7bQ6ROBoj+
- klrNUeVRmwtJdjE/dwI/pg6at3AJKdPgvrL+QyP0RsHUBtvQUGkkreiEPfC24pFRlbV8
- xz2tXBLZPzcp3hmZsbbGfw/snWwxHQIh/m6fcdBiDozn0bQDYGcm1YbDL2IbuWoo+m0n
- q77g==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61DACE8n3259044
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:05:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=yc/nQRxrwWSQobtGlvqV1i
+ KcmHwWmgD84STHisIngS4=; b=KdB/OOJ3j0iFRScK0EpSkLfquGYbNIcID69hY2
+ ESMVdym3mNhf0+NDaq/4K0hkSRh7ZHl0mLTDX/SPNKSDZ8pZqWLrjd5WChrGWHxt
+ a0n2S5FtHcKDcp83li2Svm65ixaggfQkqaR9dJ3I84Ynx3koo94SuVVs27cSq6mL
+ 2eJTK5Sr7OiCy0/5CO9LHAQXK2nRrE/9ptiZ0PXMTqkeVG20z1oRyqxa4kJMmMXk
+ ykhhF0o1dI56G1DdYuRftFiAJ0xREKjWIYg8lnVrFfcSK4bH1CAkq29pOcyBVtX6
+ /cBYzH2PMZWG5LOz8/Evuc3IlCL7qa4dDTVfLK/4/jSYSCrA==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9ptv2h0c-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:05:54 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-c5291b89733so643274a12.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 03:05:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770980390; x=1771585190; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gY2cwLSBAjOf7MFo+IxXVsCOVBkkl5xq2Pvj/0id8CA=;
- b=nzJl6cA94KmztZiBv1Vm23j2f2jsG9R0Nq5QuyYiTdtlkdnjOsOcm4NO+IXcZq+IFU
- XUO6v3f9aXePh5YRvou4y3ldZpnA8wkHDpM/HI6U1U6MzgvWvD0/wes8gB0QKdGSxd3w
- S/ga7TTRxHGwVfEqwR0J6uVTD8OdoKIAgX9pVCGr88dJMYVw3woSL0UAod7nGZq8nXHz
- xge6+WK3fyoSz7CvbaJ9prjxS2JpdeaDZPFUmna3macsvxH4GgAclocTUUxmyC3WDmT7
- EXEqxUOBVxrjLyYOyi3GWd8wzkYMDVmAnpxXbgDgbnALnvsimC4MhvA7VLe2uG08TlrB
- NSDw==
+ d=oss.qualcomm.com; s=google; t=1770980754; x=1771585554; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yc/nQRxrwWSQobtGlvqV1iKcmHwWmgD84STHisIngS4=;
+ b=eKt+/IBsi7vXjlQQWwcEToNAyGLtpApiUuM0R2rtwhFo42KK98qRkCAii4bD3wLODD
+ wd2lHHsu1+xa5OILXDdQsM3O7YEwdcOGa0YHxWp2IDPdUTADYvgWZiSUbX9s1YywBnA3
+ fDTKQlCqZukKdMUkbEZpcYFsPGwMlG9TnHdrXDTKTfPR6EJ+K3r6F0GC5swvt23ZxGWj
+ OniJi6L3gBol53o65OW2b5YYib7PH4VCer6xrhiK469neJpkTdXhTym1u9xY3uZ/TlUM
+ blohlD43j5YZXbdo0HRHuH7WD4+Pdo5G47Jugi4mc12/YQvOqh+WlZFpXLz8x/+txaPA
+ PjWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770980390; x=1771585190;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1770980754; x=1771585554;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gY2cwLSBAjOf7MFo+IxXVsCOVBkkl5xq2Pvj/0id8CA=;
- b=KyNIEC2v1e6ZwK1a1OLY76ZR6jQLWVhveUyl1OIGUF5n1uNVRscNTRSQJmy+m2Eq2Y
- 0cLjokApIvNK/s5E/YY+NUhvnAAvjRbFD2X3fk55Z5DQHFcNOLBN1P/mvBDeHt2xUWsT
- J8g+wSIGMQG78rIoyAryMyknUMyoIXmrS7fNyn2SluOP+og86c4DRyhqe1Vb3lgsLpzY
- dx8NEWE4M7pWftJZ6e5Yoc7tAR4vjA0/T4qC3Q6kWDsMlkSe+zQutaYtNPM0VuWMQZjW
- V7yMtmU9iR5SyAhnaRP7DJk4lA4AQfLbNDBul5/5gHakuleU5Nz2hTunm/93SR1CFUQf
- 1+HQ==
-X-Gm-Message-State: AOJu0Yxd3pcqWnFxzR0QAbg7NHNXM6uCge2X31K624rYiIUjwerwxlzU
- gVqATlceWiD7gfmHm3x2pevP4YkC8zKImVy/uQrE3voywX8r8fjeFYnVxAPzZm0FgGpr/uIFpxo
- N5q9cRQ5OzPBTc8woit8bkyTcb0og5ccjPmRZhjVhgg==
-X-Gm-Gg: AZuq6aLoRLnksTRAisi9XRoHdAB2IfK9DxTyi9HLy3iTA7fLqcsJtO+jyypwyLQaRzg
- NCYSw+/vU3VXi3Qpk1QF0WEPNd3IIXZQm/nBEkG78eSYL6FOGRW3db1Iz2Pq2Sk3eR67/49dZT6
- QJiXvDW+oZPZ5JzdBsF4PwJRgl/FKvatD/5ERmkPL7ryav890irX6GSuF0w3K+bhqPit+beFIKX
- mGeKIbULJYmsxvRIXDKxmo0spqlL/z9IMJXhaBgvyQNe1QCD9QdO8H94vN86Ag7YEOJV7oSwHw/
- kmIeLqUw7jAG+nMYxbFr/sptjzzMxz1rqCoerIpSa73TPkDZThjhvwoFYedyDfcP84QQASgdCvg
- iO5aRDoukVKKuaBX+XfsIVGqjKAvZm09LaefKeEwsWHFvoB16LC5bk2C1sITWhkDDiqmeQJAt0c
- yKQg+MI8O0qQcuRtha3Jbvgvuq1I2Fkf5Bz4fUqhqdPcewztvDBcVeI7NDFKbpQ3RAJ7BfF2a+3
- iknd2dm7nmrHC6FZwU3KJ9OcbnB0YPTw4lRnViWKFHjVPzoBPl8V/FJE0eD/zJIsDlbylcPLjP3
- PJLBlMt0OterGG2DQI0C8MflAGpzew9aQ5IxwRpLV9+8yw==
-X-Received: by 2002:a05:690e:d07:b0:649:5423:c10e with SMTP id
- 956f58d0204a3-64c198cee2amr822147d50.38.1770980390571; Fri, 13 Feb 2026
- 02:59:50 -0800 (PST)
+ bh=yc/nQRxrwWSQobtGlvqV1iKcmHwWmgD84STHisIngS4=;
+ b=YhwaNsiHBFSwsFMLzVqk6X/gNuxMuemyQ+8R7dGuwTKfyvE6IHE/7BqsI+stlUlfZu
+ YXwiyyQ+sfArhrJxbwfneXq8+/yWyk3Yao1MgKyV8w7FMOc2v4aiPnt9u+Ry1o+UGfWq
+ mAF+SJBSH0uTjQJajjOqxnb49KnlQ7KT5zJHvtX7nzUrS7qf5jdQkD/8J11PLQOeJpeK
+ PEIEOt2LTvyGMz306A4PcaPq2kOLTWdnyvOeavnIRLxv1fTthw4ZdsRjvrUfOQoBgm4A
+ 0TT2YdQ6SpFv304J+mARjOfxBGlUObv0vTk7wEsr7UBVIin2MTyieqyCN5HemRg1/OvS
+ VFXw==
+X-Gm-Message-State: AOJu0Yz9Cy142jfuhemXJtvv6FAwpVw1NOqs5mXx2P9ieFSuuGRn7kx4
+ OUzP6HhXFfSBbpHySZGcbVFueXrw2BWbfp/jDtjKi+sIuaAVIIGzHXDWNozTEFKL43Pfz1M6gRj
+ bgCgXfBOjBcR5e5bCNqp6ny9H0Ku5ixp6czfVFaQr7vARAvfIGCrVZQYRXO2R8vpi
+X-Gm-Gg: AZuq6aJmuy1dNOO+SSBeRWdTqeT9p4PudGmdaCb8FVj2p71PrzmTaElENmbWRgOYnjp
+ Ui4Qete+W6R4pc6RQqgXWet+pF396HJE1fsTOD1e0+QZMHNKscv1luACQ+jeBoSBidJfHKGNOV4
+ bICXS1/DUb6KESdjQ6d93ujZPnD2UG/zpVE3k0RHTWZ4Hg1GjaK1NeuinU1L1hudFvpZjJXwP4x
+ PDiLGYPtthBTMco6azqggZvCamN8XR1yo3Dyw+ZDC3zoQ7R/phaOfg840uz/MEG/l8dJpx5XNFt
+ UILZ2iU+Jc3ZDPxOTikj8pSngEeW7wqLW66EnSlx1rJ8G3YIObLdS+9EvHr707VmImYI3SbJmwO
+ CU18yMMopOMZPOJNyAquACfDUqS0N+ks3I3yHJYIwookF85eLeviNS02gtZybOpTm+XzGpdL9tm
+ YOM841f/JbPpuVmWM7GK6ruqKAjZKSdNv2GYhueFvp
+X-Received: by 2002:a05:6a20:42a2:b0:394:3344:a6a3 with SMTP id
+ adf61e73a8af0-3946c8cdd89mr1495365637.57.1770980753972; 
+ Fri, 13 Feb 2026 03:05:53 -0800 (PST)
+X-Received: by 2002:a05:6a20:42a2:b0:394:3344:a6a3 with SMTP id
+ adf61e73a8af0-3946c8cdd89mr1495340637.57.1770980753446; 
+ Fri, 13 Feb 2026 03:05:53 -0800 (PST)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c6e196a3663sm7943908a12.9.2026.02.13.03.05.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Feb 2026 03:05:53 -0800 (PST)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: u-boot@lists.denx.de, sumit.garg@kernel.org, casey.connolly@linaro.org,
+ u-boot-qcom@groups.io
+Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ sjg@chromium.org, michal.simek@amd.com, gabriel.dalimonte@gmail.com,
+ jan.kiszka@siemens.com, paul.liu@linaro.org, j-humphreys@ti.com,
+ neil.armstrong@linaro.org, me@samcday.com, marek.vasut+renesas@mailbox.org,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v3 0/2] qcom: EFI PSCI runtime reset handling and config update
+Date: Fri, 13 Feb 2026 16:35:25 +0530
+Message-Id: <20260213110527.1254098-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260212204511.619392-1-javierm@redhat.com>
- <20260212204511.619392-3-javierm@redhat.com>
- <CAC_iWjJysPTkCTJ10qR8FmNxSBYT6mK7YWoqvxxwez+6H8Yf1w@mail.gmail.com>
- <87ldgx6kcw.fsf@ocarina.mail-host-address-is-not-set>
-In-Reply-To: <87ldgx6kcw.fsf@ocarina.mail-host-address-is-not-set>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Feb 2026 12:59:14 +0200
-X-Gm-Features: AZwV_QhXbsf1W8YVB_C-DOPZjo-2TZa3shu15803iX_AVJ8sA4b9_V5IsJIzbTo
-Message-ID: <CAC_iWj+F6+U2HhesN_sKxLXPHzSX_J0seK9QT0fxV_agxhkDag@mail.gmail.com>
-Subject: Re: [PATCH v2 2/7] disk: part_dos: Align dos_partition_t with struct
- partition
-To: Javier Martinez Canillas <javierm@redhat.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- eballetb@redhat.com, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: trgiHQLLFZdqkbTJGatvxIS8zQkWZUJT
+X-Authority-Analysis: v=2.4 cv=eaowvrEH c=1 sm=1 tr=0 ts=698f0592 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=V4Ys22k1LlpJHEvYqh0A:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA4NSBTYWx0ZWRfX+awVvX6gGOJ2
+ 99nLWmPe5bxtmPQNdpBcz6Ldb9dITAS6hYFyLyXNfwCYGNB+kmvADUzU7wGMymdjJS3yUKR3GFX
+ WOPM/8JNEKUdkc81nSo96JItxOLE1VCCu7Rup+KAOw6X/fYknlzvJMJvFWoWZ+ZbRWeHP9LyLlq
+ Lq02fjiVob7g1nrvpPQsZmaqcgv88QZyTue2Qr+EGkoUKwZfiWcPeiRVnbnhOALenefHT8QmZ8p
+ zm+8jPjlhLUM2GZvtjnazftHPt5vmmpsv0OXNzIjpUViUex6GJgxLiSLRv/M2ZrDzH8oTyVCO2t
+ 1fb4zcNxPjex51apm9wc+Za7tP2+m8e0D6HHgUn/5Q3kyqTU5vuxebdPlpU6hvsAq1BPvRwNE70
+ eYqhYPAWJjKyKdx05WymXnqDqEdMwDsCBFouXlhBTL5CBSZ6H21M0n+yZKtoFsABEkDwPp4CTgJ
+ suYNXxffSRDJOoVO17A==
+X-Proofpoint-ORIG-GUID: trgiHQLLFZdqkbTJGatvxIS8zQkWZUJT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-13_01,2026-02-12_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130085
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,78 +148,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Feb 2026 at 11:52, Javier Martinez Canillas
-<javierm@redhat.com> wrote:
->
-> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
->
-> Hello Ilias,
->
-> > Hi Javier
-> >
-> > [...]
-> >
-> >>         unsigned char end_head;         /* end head                             */
-> >>         unsigned char end_sector;       /* end sector                           */
-> >>         unsigned char end_cyl;          /* end cylinder                         */
-> >> -       unsigned char start4[4];        /* starting sector counting from 0      */
-> >> -       unsigned char size4[4];         /* nr of sectors in partition           */
-> >> -} dos_partition_t;
-> >> +       __le32 start_sect;              /* starting sector counting from 0      */
-> >> +       __le32 nr_sects;                /* nr of sectors in partition           */
-> >> +} __packed dos_partition_t;
-> >
-> > This always has to be packed and the part_dos.h definition had this
-> > wrong all along?
-> >
->
-> I wondered exactly the same when working on these patches and did a bit
-> of code archaeology, so I'm glad that you asked!
->
-> It wasn't wrong because it was using unsigned char arrays for the start
-> and number of sectors struct fields, instead of __le32 types.
->
-> Given the alignment of a char array is 1-byte (and all the other fields
-> are unsigned chars), the structure was naturally aligned.
->
-> But I agree that using __le32 and __packed is preferred, and in fact is
-> how Linux defines this data structure in include/linux/msdos_partition.h:
->
-> struct msdos_partition {
->         u8 boot_ind;            /* 0x80 - active */
->         u8 head;                /* starting head */
->         u8 sector;              /* starting sector */
->         u8 cyl;                 /* starting cylinder */
->         u8 sys_ind;             /* What partition type */
->         u8 end_head;            /* end head */
->         u8 end_sector;          /* end sector */
->         u8 end_cyl;             /* end cylinder */
->         __le32 start_sect;      /* starting sector counting from 0 */
->         __le32 nr_sects;        /* nr of sectors in partition */
-> } __packed;
->
-> The struct_partition in disk/part_efi.c is said to be taken from Linux's
-> linux/include/genhd.h, which was the old location before commit 1442f76d4317b
-> ("1442f76d4317 block: move struct partition out of genhd.h").
->
-> My guess is that the old data structure defined in part_dos.h was copied from
-> Linux, and that at the time of the copy it was using unsigned char arrays too.
+This series refactors the EFI runtime PSCI reset handling:
 
-Ok that makes sense and yes, the alignment is not affected by le32 or
-a a 4b char.
+1. Introduce EFI_PSCI_RESET_RUNTIME config to control PSCI-based EFI reset
+   logic in U-Boot. This allows platforms to disable U-Boot’s runtime reset
+   handling when the kernel needs to manage specialized reboot modes.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> But the struct definition has been like this since the original Linux git
-> import, so I couldn't check if my guess was correct.
->
-> In any case, now this single data structure definition is aligned with how
-> both  the Linux kernel and edk2 define it.
->
-> --
-> Best regards,
->
-> Javier Martinez Canillas
-> Core Platforms
-> Red Hat
->
+2. Enabled CONFIG_EFI_PSCI_RESET_RUNTIME by default in Kconfig as per the
+   discussion in this thread [1]
+
+2. Disable CONFIG_EFI_PSCI_RESET_RUNTIME in qcom_defconfig so that the
+   kernel retains full control over reset modes (e.g., EDL, bootloader),
+   ensuring correct behavior for advanced reboot requests.
+
+[1] https://lore.kernel.org/all/20260108143742.GT3416603@bill-the-cat/
+
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+---
+Changes in v3:
+- Updated the commit message
+- Changed 'CONFIG_EFI_PSCI_RESET_RUNTIME=n' to '# CONFIG_EFI_PSCI_RESET_RUNTIME is not set'
+- Link to v2: https://lore.kernel.org/all/20260114111624.2321852-1-aswin.murugan@oss.qualcomm.com/
+
+Changes in v2:
+- As per review comments made default y for EFI_PSCI_RESET_RUNTIME config
+- Disabled the EFI_PSCI_RESET_RUNTIME config for qualcomm platforms
+- Link to v1: https://lore.kernel.org/all/20260108105146.1285450-1-aswin.murugan@oss.qualcomm.com/
+---
+
+Aswin Murugan (2):
+  firmware: psci: Refactor EFI runtime PSCI reset handling
+  qcom_defconfig: Disable CONFIG_EFI_PSCI_RESET_RUNTIME
+
+ configs/qcom_defconfig  | 1 +
+ drivers/firmware/psci.c | 4 ++--
+ lib/efi_loader/Kconfig  | 8 ++++++++
+ 3 files changed, 11 insertions(+), 2 deletions(-)
+
+-- 
+2.34.1
+
