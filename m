@@ -4,107 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A5CEDF148
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 11:26:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB146EDF148
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 11:27:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E295D80FA1;
-	Fri, 13 Feb 2026 12:26:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B0E880FA1;
+	Fri, 13 Feb 2026 12:27:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N1hGptZJ";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="CPetq3fL";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kQ1hzlOI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 164F183015; Fri, 13 Feb 2026 12:26:31 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6D59083AA9; Fri, 13 Feb 2026 12:27:40 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC77380B98
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:26:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A415B80B98
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:27:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-79088484065so8378707b3.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 03:26:27 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770981987; cv=none;
- d=google.com; s=arc-20240605;
- b=FEN+beiPpCUvuZBCh1kH8FwLrvN3JezKVfF9mtyBEkiHstzvTCYWi9++3Jl5YyHpwP
- rP3/SBwwgi95UxRUnoMZX0oXVdwtJ0Bkm0a9+o81EOkja2hfokeQTiP9h/st3l6L5eJv
- CGtoSwp04/e4IbktlEleljNf3ruZo8kE2g5Ig2LsVd0N/KIo/mZIz/2pciPEhr+LgGBj
- NCRO7PiY4YKDkZbjmsEdvagassdOcL0lbiygWMkGWSQx77hMELI153ttyn3nmb1okhY3
- WCFU5R4SOqBurHZxLlnrSI6MbkYAae2PLG46BPMZ8V8ZgzFz4YVAbCvnk8DflM50Mjhn
- A3XA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=0r3/iP1HV1cZ64fplVlvfqfAlOH1LZ5tmmepRu7iyW0=;
- fh=DhEiqiGIkoJvFaHFSgdtXxl4bDyiAcW9Hu4vuZPB8SY=;
- b=F+ZkQj4zjm0YsrIaeaamH5WrXZTvFbxwXa9sxUpdFgREta/49qm3OsxmJXIqxwbJga
- O3itoinNy7PIGg9BGjuWfiD3xo1Sv7pF/x2pQrP4+rMH+kqbMYGL8GGxzmmIOU9ot9xI
- cAvFbv3gbA/guVkPsRNE770xaf8eTFLhPF4lfNeh9AbkALT8UrM0u9FGxFbXBWpH7BMO
- vNRvKXaK8HM7PvkFzRfr9TnMWsS/+sOancGg7EG0bjc0pzqI35Iyj9FDd+0EZ7owWrm2
- eYgk3cM1QKPQkIrYo+FoZ+Awvxyg/x5+pIa20k7yR4xmMUQhKSeLL6RvNWj7zBxBTjAc
- PJSg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61D7bR471642029
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:27:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=xMm9sMrC21U4TueHOK/T5B
+ f0osQMyUTOwjOhnqUFZsQ=; b=CPetq3fLeAJYjYe8YU7Jpp8hPScLi0J/VjEYf0
+ 07ZN5ycnk3MIHUiPhPHxVSSuwBpHuQ3GNUtCtNS3oy3AcqYcMyDRrimuOsUAh6oZ
+ X2CfZyYfWtQxzaI8Z+349VCz+5qkzopcuJGGpPv/MamkFcSo6zsxedSDSNnYEX/V
+ Df9uV1ISgGThRqamnNUEJ6tLtUL7Elq2ftN9cK6tstxSLsjCa0ZUYuJSWcwLx14l
+ LXoHCK0LosLBr9TsNBiivtE9sjvlJCiSj+8VBM69QqMauv/S6AI3P3jlxwPc6QT3
+ XKVyptasTK4G5rNVrdY/po5XbLakRQ5Exob5FAiQWNWTfvLw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9ptv2k1h-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:27:35 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-2ab4de9580dso26479515ad.3
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 03:27:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770981987; x=1771586787; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0r3/iP1HV1cZ64fplVlvfqfAlOH1LZ5tmmepRu7iyW0=;
- b=N1hGptZJcXArkLmW8cvs4jK9JbD+iHzSe8rJ+QDq1erup02KQ3hWfWe+3m2aPdXmWh
- h6s/kFtpM93rWhnAA0kHBkK1zUC5ga7zhifqcfsXHSFxPBN9DT5lXIxmX+CaJ3ZWFlpR
- pMmmcadRwG5y7XKarkdopCdBmm2fbENPtT8ltiRyrSSCGfKFvO92sgnX2O1z2wuEqVTa
- ShtxZeMMTmYni2fZk1yqt9Qtz1CV7bv2+531X/pVZ+a64jrl4hk0Qa9hGFnPlLIHI3Ie
- P+S8c2OD+wq3NDiX61kjK7TjcEHQXM70275xjIxRMQC13SquZuV8GdHpeLUn2rbVJYQO
- N/iA==
+ d=oss.qualcomm.com; s=google; t=1770982055; x=1771586855; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xMm9sMrC21U4TueHOK/T5Bf0osQMyUTOwjOhnqUFZsQ=;
+ b=kQ1hzlOIg6DvLvnMv0RWiBvOUeqHqCtYJkmjmHBbey85G5bLAfXW1wE37nSIpl4wDq
+ dfWN2fjXuCATKHJVoplLcVZLesv4wB+IntYasKAhnrqZs3aDGu8XtkGwdL96yy/q0BnL
+ BYW1sTRc5Z1wwqEY603KtUGO+a/hUprdjCka43u9dd/rYLkg2J80ofsuNrKaL5srAHog
+ Ij1qJbP74kp1apFPqewH/xYYcrAcK6rElOM9kMfBSwLwsVSw+Wan3fwRox0EuE96BqA0
+ MUHn81GaLRG+Sr83rpUIvlzFbwY/y0vXMdjJyvp2VHgbFklqLumEF67n3FtOXhVTTpik
+ rBlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770981987; x=1771586787;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1770982055; x=1771586855;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0r3/iP1HV1cZ64fplVlvfqfAlOH1LZ5tmmepRu7iyW0=;
- b=pK3QE62C8L6BDkB4lGJO3pkZuD6yL9DSZSG350jJkGvaTO8FJznv+H/UO7+rlJhlKR
- uaFpuOcBQ1Yw66rS7qw0EcLNqZqwsFABWH6sov57lTDieRErN11Uq0p7Hl74hGVwGueN
- xOLs6fFq/IyYacqdnfNQLXRB4Mn6EygboyO9bz9Scg6BO9s9r0n2whr9cemggozUTKD8
- R10HjL4AHBWlipFKS78uGQ7KMF6zmsT0H8nKL4tn8kLwLJ7xSJtHY6+OFEaEVRkTXdAN
- IW2O3tSUtt7CT8BOZcuOD42liGzbqlgLaGN1+AkSKEIVSI0kZoQzbRSsIUNQDAqIkgQB
- 8sYA==
-X-Gm-Message-State: AOJu0YwvYYo5bntHcG5+TLic3gV6cGlS4qfG+t4FkygsyKFOuKAwf48n
- 4ODw6N+e8mLuTKe/MBloHXVeadueZh6D87uEEV+oFu06Ig/4D2XMmB70hDOCOh8bKuBFy/jpJei
- 80TaeHCM6LI1gr2OawPjoWckS2AoYtdimKw8VFy77Hw==
-X-Gm-Gg: AZuq6aJ3ST+srjCWNubZ8/NS46IdsM5wXkHxUqhJkwZq/xCitEivjI9W/69ASGHtJzu
- nl+QSnEQWKokFPI6zWXyxqkP7RhFxhq5EQVpD50ud+5sK0DaIR0t536T3yw6CNS19kwIHz19syj
- bNi1WiOigRzsFlXzJN/GXK70uY8LGvvkyrBZGMKpyItHfsnfLdCkt8rldNqtmlpL6P1+opeePEs
- ivtX5Dognf66EgU740j/hiBYGT7iHa4w2jrdt8WN47P7/q2X36x23aF0QY7Nkx04SRmQfBCeWb/
- wQbpzxu3qp2gsgc+i+ObQPz66W7VviP6tTtPidvFkd+qssRgXWePG5KvRKVKb5h8IaZtdNpowm9
- vUpCVL14hxb18hiEinjus4JWb2/MvPUGlwqtI1F+BYh3BziQCyuBAmjBLoPEWHopv3+JVKT9ADM
- qGRVSwKIi3F/3TBwpHIMhSMFRrY6JLrj+Dvmcbi+ICoVtSUXWEKM5470Yq1pLp/9x86c1RLSxkw
- AuYf1VabN5FyOmd+JJk18tIq/JE4or/+Ot3HGUK3vOEOtdwEj+/OlW+ulebrvLAyH6G9llwF9ce
- cAlg5ev8fn8ThQMVA/py+N+C52FoaI2cjZCexp4WOv8ZvFwQQLeM1GzU
-X-Received: by 2002:a05:690c:6813:b0:796:6df5:4840 with SMTP id
- 00721157ae682-797a0cdfab8mr21627617b3.59.1770981986536; Fri, 13 Feb 2026
- 03:26:26 -0800 (PST)
+ bh=xMm9sMrC21U4TueHOK/T5Bf0osQMyUTOwjOhnqUFZsQ=;
+ b=Nky8jfNDdFDce5VL0jDHzBLzcd6BEyT0O2pUaAk24RMksjxEVH0rvK7SNZARkH6aFA
+ QOZ6rKZb/25afQHkXhXzQgFQC+APOAcFrfPTigGZ8Nio6K+yTK/9teREzvdfTcAyylb7
+ f6su9DraviSgLiJHBSl2xApL+VIOLEwDd+zLwX6YU/58UOsuctBjoY039rTbfWvloeKq
+ Bspx4u2dVv7kTpWEGY4zku4biyS3eM0e8OVvukiJpj+s5F+n3ve5EVgCAF2w69gjmO45
+ rw0Mdo/AnTQiO/GkUNo/20Yj4fDZTeT/YVRWMEFS71vM2bLlJwBwP8LT3ekDYIQfwcQS
+ TF1w==
+X-Gm-Message-State: AOJu0YzW8Z791tIZ1/BVyMBm/OxTlBv65O2aI6+9NpOWpXCJNVR6Ko+4
+ QVr2KlBdNassjZ+FHMMYbPnq/5egdguzQDYwFhpov9O/qtRtGdpqpZuiLncCVwK61Vvl49+yNR3
+ qHClSeNROJKtcXL4gEaqS+gIDmW9+pKh60YqgrRHpG1dcXz1iYE6njfdsN+gAT5Px
+X-Gm-Gg: AZuq6aJnOhlE+dAefl/TGJWRp+b9CGpS1mLyqn4Ym/QtLjg3lmm7kcUn0/00A/YGggi
+ n3uPcpQOlng0ewee3Kp6g1hnj4Aotyr7sAiNkQ1L+fmyt9i4yJO5e1CH4JbhqYOBchVuROn6oJP
+ jlRNhjkGztDQQLk/K6/bpndmIVdAJ4bso1jCAteJYk9kDqhlKmqnoUAPSoRcl9QnFHduFi/YqkB
+ DgsJ2O5ZTgrTHoGIgK7FWfx87c20m2Q/0yww3ulG0F2m9Lk2cX8e2J5xXFAwzdxQDQH2d4tHMTm
+ Vcv9cIlzUad8aubvSpoQMYnIn3acrcxc88LGOyGW8Fv17WlbjsQMzVGQ5sX3n95Uj1HhNkxRDAg
+ UEz/y7d0aqdfCQmV9lAY6mHX94QL1CoC8dGGllOmv552pXY+/1poyMOWLDFeNvqwJ7rDi+o6DKE
+ OjmOzFU4X5qYczHcg4wzN694NlOssKOG+9O4Vct7Kw
+X-Received: by 2002:a05:6a20:3ca2:b0:394:5830:8008 with SMTP id
+ adf61e73a8af0-3946c9501c9mr1572074637.78.1770982054849; 
+ Fri, 13 Feb 2026 03:27:34 -0800 (PST)
+X-Received: by 2002:a05:6a20:3ca2:b0:394:5830:8008 with SMTP id
+ adf61e73a8af0-3946c9501c9mr1572035637.78.1770982054388; 
+ Fri, 13 Feb 2026 03:27:34 -0800 (PST)
+Received: from hu-aswinm-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c6e1969f314sm7996939a12.8.2026.02.13.03.27.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Feb 2026 03:27:33 -0800 (PST)
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+To: u-boot@lists.denx.de, sumit.garg@kernel.org, casey.connolly@linaro.org,
+ u-boot-qcom@groups.io
+Cc: seanga2@gmail.com, trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, peng.fan@nxp.com, quentin.schulz@cherry.de,
+ n-francis@ti.com, xypron.glpk@gmx.de, h-vm@ti.com, justin@tidylabs.net,
+ jamie.gibbons@microchip.com, ycliang@andestech.com, me@samcday.com,
+ sughosh.ganu@arm.com, gchan9527@gmail.com, ilias.apalodimas@linaro.org,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: =?UTF-8?q?=5BPATCH=20v2=200/6=5D=20qcom=3A=20Add=20NVMEM=20bitfield=20support=20and=20reboot=E2=80=91mode=20integration?=
+Date: Fri, 13 Feb 2026 16:57:11 +0530
+Message-Id: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260213110527.1254098-1-aswin.murugan@oss.qualcomm.com>
- <20260213110527.1254098-2-aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <20260213110527.1254098-2-aswin.murugan@oss.qualcomm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Feb 2026 13:25:50 +0200
-X-Gm-Features: AZwV_QijjfyqlFtwc1yXxS2NHKwsgW4lifg6m51i86jI-TqI_T5M1C-5xAQpbFQ
-Message-ID: <CAC_iWjKzr_nYSJft_HbkHB+F5UKiPBr3sdEZ5vc=gTT-p+WFMA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] firmware: psci: Refactor EFI runtime PSCI reset
- handling
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: u-boot@lists.denx.de, sumit.garg@kernel.org, casey.connolly@linaro.org, 
- u-boot-qcom@groups.io, trini@konsulko.com, xypron.glpk@gmx.de, 
- sjg@chromium.org, michal.simek@amd.com, gabriel.dalimonte@gmail.com, 
- jan.kiszka@siemens.com, paul.liu@linaro.org, j-humphreys@ti.com, 
- neil.armstrong@linaro.org, me@samcday.com, marek.vasut+renesas@mailbox.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: eZBwqB1FYYaRqPX4rAGZJz6FDWAIiPeR
+X-Authority-Analysis: v=2.4 cv=eaowvrEH c=1 sm=1 tr=0 ts=698f0aa7 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=5KLPUuaC_9wA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=l-UPrZbCS1wS8v9bHbkA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA4NyBTYWx0ZWRfX1EhexV3DiGAV
+ ofr+w7Hb2ckwrTlnhtTXDEabyqIjpl/OmmETz1DelWv/3qmBkkz1H7SjT18/OJZObXww9kRiZVT
+ mPhtSk9kYCpEZbMIPDtr+mmA8kzHp/RePE43mWa/Tpeqr1jsyi4JbfqO2PEp+iitoQN3Is3yw44
+ JxkAAwnvGRuP24r28/YkhsSTgCe+h88q67VxmXq/zKJ7qVTYDhRVpQW9WGjBbR6z18ATkvKo40a
+ t9r9XGAjHYzMRbV3mQT3J4u+NOVau6l0WEc5KFQt9agOh5mCT4z91NARJPSmEw2sh2/nRN/K20k
+ VQqIMqbtdTqfZJu5E75j67l7q2XdPTfm8ovWbiGXbvZFxCuzzPCsorFXavxDdIucW77nE/Aa5Kl
+ sVLySWXPCHYcM12Y6799G5LLosZKLcwdfzsEmotUnm5ZmoRIFYsaIkWgFyVE1osiO1i4UFI8QcY
+ 5WyN7X5Mnkjyuc3QQ8w==
+X-Proofpoint-ORIG-GUID: eZBwqB1FYYaRqPX4rAGZJz6FDWAIiPeR
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-13_02,2026-02-12_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130087
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,88 +149,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ashwin
+This patch series introduces bit-level granularity to NVMEM cells and
+adds complete reboot-mode support for Qualcomm platforms that store
+reboot reasons in PMIC registers.
 
-On Fri, 13 Feb 2026 at 13:06, Aswin Murugan
-<aswin.murugan@oss.qualcomm.com> wrote:
->
-> The current PSCI-based EFI runtime reset implementation is always enabled
-> when CONFIG_PSCI_RESET is set, but it does not support the extra arguments
-> required for specialized reset modes. As a result, reboot requests such as
-> bootloader mode or EDL mode are ignored and fall back to a normal reboot.
->
-> Add CONFIG_EFI_PSCI_RESET_RUNTIME to give platforms explicit control over
+Qualcomm SoCs rely on PMIC-backed reboot reason storage to implement
+features like "reboot bootloader" for entering fastboot mode. However,
+these PMIC registers often pack multiple fields into a single byte,
+requiring fine-grained bit access that the current NVMEM subsystem does
+not support.
 
-Is there anything missing and you can't use EFI_HAVE_RUNTIME_RESET?
+In addition, PMIC generations differ in how reboot-related data is
+stored: older PMICs use PON (Power On) registers, while newer ones
+provide SDAM regions. This series introduces a unified, NVMEM-based
+approach that works seamlessly across both architectures.
 
-> the PSCI-specific EFI runtime reset path. This allows a platform to disable
-> U-Boot's PSCI reset handler when needed so that the kernel can perform the
-> reset with the correct arguments for special reboot modes.
->
-> The option defaults to enabled to maintain backward compatibility with the
-> existing behavior.
->
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
-> Changes in v3:
-> - Commit message has been updated, no change in code
->
-> Changes in v2:
-> - As per review comments made default y for EFI_PSCI_RESET_RUNTIME config
-> ---
->  drivers/firmware/psci.c | 4 ++--
->  lib/efi_loader/Kconfig  | 8 ++++++++
->  2 files changed, 10 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-> index 2e3223e1c32..009c6153d0c 100644
-> --- a/drivers/firmware/psci.c
-> +++ b/drivers/firmware/psci.c
-> @@ -244,7 +244,7 @@ static void __maybe_unused do_psci_probe(void)
->         uclass_get_device_by_name(UCLASS_FIRMWARE, DRIVER_NAME, &dev);
->  }
->
-> -#if IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET)
-> +#if IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME)
->  efi_status_t efi_reset_system_init(void)
->  {
->         do_psci_probe();
-> @@ -266,7 +266,7 @@ void __efi_runtime EFIAPI efi_reset_system(enum efi_reset_type reset_type,
->         while (1)
->                 ;
->  }
-> -#endif /* IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET) */
-> +#endif /* IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME) */
+This version also integrates reboot-mode handling into Qualcomm board
+initialization, enabling automatic fastboot entry when the reboot reason
+indicates bootloader mode.
 
-You also have to adjust the RT config table in
-lib/efi_loader/efi_runtime.c, but I really think we should reuse
-EFI_HAVE_RUNTIME_RESET
+Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 
+---
+Changes in v2:
+1. Replaced custom reboot reason handling with the standard U-Boot
+   reboot-mode subsystem, per review feedback.
+2. Added bit-field support to the NVMEM core using the new "bits"
+   property.
+3. Introduced the Qualcomm SPMI SDAM driver for unified PMIC storage
+   access.
+4. Updated the reboot-mode driver to support variable-sized NVMEM cells.
+5. Added device tree configuration for the QCS615 RIDE board.
+6. Enabled reboot-mode in qcom_defconfig.
+7. Integrated reboot-mode detection into Snapdragon board
+   initialization:
+   - Added qcom_handle_reboot_mode() in board_late_init() to enable
+     automatic fastboot entry on "reboot bootloader".
 
-Cheers
-/Ilias
->
->  #ifdef CONFIG_PSCI_RESET
->  void reset_misc(void)
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 13e44be1d06..3882de273bb 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -106,6 +106,14 @@ config EFI_HAVE_RUNTIME_RESET
->         depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
->                    SANDBOX || SYSRESET_SBI || SYSRESET_X86
->
-> +config EFI_PSCI_RESET_RUNTIME
-> +       bool "EFI Runtime PSCI Reset Support"
-> +       default y if EFI_LOADER && PSCI_RESET
-> +       depends on ARM_PSCI_FW
-> +       help
-> +         Enable PSCI-based reset implementation for EFI runtime services.
-> +         This allows the OS to reset the system through EFI runtime calls.
-> +
->  endmenu
->
->  menu "UEFI Variables"
-> --
-> 2.34.1
->
+Link to v1:
+https://lore.kernel.org/all/20260108065533.1143179-1-aswin.murugan@oss.qualcomm.com/
+---
+
+Aswin Murugan (6):
+  reboot-mode: Use actual cell size instead of sizeof(u32)
+  misc: Add support for bit fields in NVMEM cells
+  misc: qcom: Add Qualcomm SPMI SDAM NVMEM driver
+  mach-snapdragon: Integrate reboot-mode handling
+  dts: qcs615-ride-u-boot.dtsi: Add reboot-mode support
+  qcom_defconfig: Enable reboot-mode support in qcom_defconfig
+
+ arch/arm/dts/qcs615-ride-u-boot.dtsi    |  26 +++
+ arch/arm/mach-snapdragon/board.c        |  56 ++++--
+ configs/qcom_defconfig                  |   3 +
+ drivers/misc/Kconfig                    |   8 +
+ drivers/misc/Makefile                   |   1 +
+ drivers/misc/nvmem.c                    | 241 ++++++++++++++++++++++--
+ drivers/misc/qcom-spmi-sdam.c           | 200 ++++++++++++++++++++
+ drivers/reboot-mode/reboot-mode-nvmem.c |   5 +-
+ include/nvmem.h                         |   4 +
+ 9 files changed, 517 insertions(+), 27 deletions(-)
+ create mode 100644 drivers/misc/qcom-spmi-sdam.c
+
+-- 
+2.34.1
+
