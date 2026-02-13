@@ -4,136 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338DAEDF150
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 11:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E55EDF150
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 11:10:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 026E783CF2;
-	Fri, 13 Feb 2026 12:06:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2096180FA1;
+	Fri, 13 Feb 2026 12:10:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="HxMeD3F7";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KdBotEPV";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZL5YqNsP";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O6HImHdQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 176AF83DE4; Fri, 13 Feb 2026 12:06:12 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 3D4DC83AAB; Fri, 13 Feb 2026 12:10:54 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E02AA83CEE
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:06:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A469980B98
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:10:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 61DAo6mO2093483
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:06:01 GMT
+ 61D7p4aE1641984
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:10:49 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=hImQDvgKu9h
- saN9nt5U2O1xnGRiQmy5K52PekaGjZ4s=; b=HxMeD3F7GExKUOhbWVxJtytHUdM
- 6ckt3KVH/NT1Q+8ZfUUjE0X2eyo3IbsgJ64rQ31Cc9O3iTdFuEdDCh5OD7AV8v2P
- zjuJk2Dwc72sM++IewusKJcCt7dU8P3P/oQ6RMoj3DUJz70ar/OTVaFrUXucY7lq
- BlnQ0hjxRyEXnJPyT0goxR5WO8A0yWXBvC0JP+FFHCz9gKwswAeQkajs78b3rBJZ
- 9VvEI3moB9YyN+Q2jX9Kk6Ed/soImepGYFaQfkRY2eu4T/ZiXxRTq/JPulnGJRo6
- MlslVEF4Fq07GHRL5rJBsyirM+X9Nj/4pUFPewDbRUMOh5/Ix6HhMs/yOzg==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9k6y3c79-1
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=/uoVK+VfqtljPUJ9VAJhV5ArhKF6XZPEpeU
+ MQLlzDfg=; b=ZL5YqNsPShNPhYvHmN7rpDf0xfjRgJnHq1zHa0uCdcIQgSCVfzC
+ 083nrvXuEw0zqaIuVELEsXt0JTgp2ucekjmsGBUmdmFYBYkMDiQkNnbIPXirdCDd
+ /G2MbHwZakBDo3BVhLfRR5uv7QqvUpag1pMRD8Ifto9oQMDArS0eMgam0s8hfqbA
+ eBU04S9k3zvXW96u8sBKFgBd/L5PmummKUWTd8oYuIkmIwzIZjh6Zw7W3CECduVd
+ 8SSLoDuPIyBcG/X5XnBkcK1coc91MFJSrokJNeRaVBXxAKuLlXOQ0gIDBlXPfa/X
+ PVkFy+qloL+nYgdXdy5vkvbBgW+16zmNNtA==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4c9ptv2hhd-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:06:01 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id
- 41be03b00d2f7-c6136af8e06so654474a12.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 03:06:00 -0800 (PST)
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:10:49 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-35449510446so798175a91.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 03:10:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1770980760; x=1771585560; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hImQDvgKu9hsaN9nt5U2O1xnGRiQmy5K52PekaGjZ4s=;
- b=KdBotEPV56XpU4TVbbWZerDP7HDIjVuG4FU53mGH5WDniI2PvgDNC8xyQEPF3fOg7f
- 91cBvPz9BUY4lfIeQODMRwfND3bs910pScc3Rs63WmhCskeJdsu4NKWHh5IINXDUjVlH
- aHpT2Q7InAjblcp7R7zfP3IJfEetdlszh0XBSQoRrLE2a/IEWnJ+8x/bz49vzMhVElJo
- 859SGZyKoSEXGoxIUpA4UsMMBUnD3jII9HCju57sClS+8FGVBU4u9+JN3cYJvoZnMdCj
- Wcnp2M5sn99mNqV/QDmguSXqXRTH40nkyuDImufPqjES4qGK8P3//LAKWFSNEnAnmtpl
- t1xg==
+ d=oss.qualcomm.com; s=google; t=1770981049; x=1771585849; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/uoVK+VfqtljPUJ9VAJhV5ArhKF6XZPEpeUMQLlzDfg=;
+ b=O6HImHdQCTpZ4+Ldwmpxt5L6Q6l5LvdwTDXvbKKOnDuVd6WSGxoUETYNmMpoudSzjG
+ kmfRjOqbNcyBMUKm9pGQBK8OF8QdwGxu9q9aEUShMcHphxj1KlzWVFvlWz8e0txWcqTq
+ AQOLtrKyiS1UfluoTbmev8X3N6MmH5bsyMCTOM9Krs3ToDa2Hg3uXVdASE8lbhJauhbz
+ 3yckH0WNusYWslNwNAmiwIQOabgVdtFVLTJ/aZeu1vfpFLc0VIc0GI6o1uldEKIZyacN
+ pYsAdht50yuJn29YRk/SPHRhLnKZB3SbynDopVQu3c09SM5waMWoTTqyMsVo7ori623v
+ XZ8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770980760; x=1771585560;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=hImQDvgKu9hsaN9nt5U2O1xnGRiQmy5K52PekaGjZ4s=;
- b=RbMGaETPLG6QlULOtkZC93oTgFsjjMRKiWAPH2/PvZ0GIixlJWbMMZqJ28DPcHqbwO
- UzUCsmWGNQZS2OHDqKgqoEc+6FcdGNtgtP+//PXFIKl7EgVtPu9HkxQcAQBqoZ7e9jYN
- ccoEvoe4jJaLT1dDJQ0Ew0IhNp2GeYcfhTtp/SvRexi8ba0h2ngw3t8D3Bv9wurNo/g5
- cW5XCkfbdAkxwOJSmdre1oXzHvg/8sTrpnJ2wh+x4XDGq6b286l4r+Sdiyhev4bvl9+b
- Ii/JsUYN9e3zrZQ33RHQhdTnCckMmuBWKxDZtUyuEA38IecTln7EDdujkEjOIxvy10Jg
- +IFA==
-X-Gm-Message-State: AOJu0YyNthi6llxgh42bf4PB+AQLzVFyGypCLHV00PdhCr5yq5PVvN2o
- IMnLHukbvRj7t1yPtdQcZgfbmJTA9UWHXmjIGmZxD3lFTRqWEh3OOxzTJw1bVsinqCG9XudJqnn
- 2+P8sBsShQ81LYOjRz8DgavEDsoVTSHhsHm6eR/++MPaVQ5Yxo2+Zo1f3RHznhOrB
-X-Gm-Gg: AZuq6aJSJfbVvDLLgZOARbEKTpz1H/pELEgNo67XxLK8a4q69G6ntQuBXmgBr3hTPzx
- PuyVMkCcHjNaTgeLN/Y8yYLUptH4MpCzvM4dud8S8OynbC/5MLLVZ9lIg0JWoTfzcmOZMJaXTZa
- sIzqHCHcJq61gFcMH9r0RPH5p843V3N8UksdyRikMiynqcbzB01V5Kx2rdBdtkIZi7eqJdX2l5i
- EY2oYJwa0e/4BoAlMDitA5/1XZp73iNKXzzLAVN4LfjgydN2ggsJZeezAisHxrJ/rqXkDtvbyd+
- aJKpyNiEBQ/W8zVmRSe0ZM4hzAWtJ6Jo2prF5bfNxcCi7d8uQaPjO3bOU0n+xTp21m9lkZI313i
- 05a2vQfOpeKSJAuIzRIv+Wz1pCBxRSNSoXft2eT5v/Ohq6g7/t36ygoP+ekDjKBVjCEbH/5zOQu
- vxbgLFcf4NRb338QShK0XL6ZQaVDp9ueer/j6E4r7A
-X-Received: by 2002:a05:6a21:7009:b0:366:1880:c8f7 with SMTP id
- adf61e73a8af0-3946c56e491mr1351094637.0.1770980759687; 
- Fri, 13 Feb 2026 03:05:59 -0800 (PST)
-X-Received: by 2002:a05:6a21:7009:b0:366:1880:c8f7 with SMTP id
- adf61e73a8af0-3946c56e491mr1351053637.0.1770980758888; 
- Fri, 13 Feb 2026 03:05:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1770981049; x=1771585849;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/uoVK+VfqtljPUJ9VAJhV5ArhKF6XZPEpeUMQLlzDfg=;
+ b=IJ78GHeapf+v5JS1r9WZYR97+WfztOXMpklKEvkeR+fl07a1C1ENLLKWdCVQPiCqnN
+ SWbS5+q9fil+gIl6T9V0zimrUtHmqfvvjQ/djEEh3XLuzC9AChFpQ1T0Zl5vLeqwilUj
+ VEHIuM28wvk9FB3aMB7nMyyVdhLtfrizQ9e8gpO5Zgd4FtT5UEj6f9sYP5Y6MXfuBJom
+ PDGAUqT4NwJxf6m451mLmDeiNn1rzg2pmH2dkF5U8jLhPc7vZPvcG3E5f9GMpD9m7Y8C
+ IsHilTkpUr4HODLCUaD33s42KzGt4HFNBE5Vmvp5fxpaGluciyqa9tDvOVBZo5/DO1vr
+ I+Fw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVhTFt8krRvJj3oqTlT07fxhrm3uKphqQVXG4JJnUUzFILL9Yd4MZpk0Rmd9cXsKfZ0+nTxjy8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHtiudrNtvW5ckcYp5fDRlyWqToYlzB67D41eWivrj6rnBo7bS
+ iZ+aHs5s9nIUYflUJbNZLnU7tH54cyjOZPhC490uBm9jqhgBBjtn7iJmsQu3ZEDvOvKQfbk2pnC
+ zRaRogCXGFjw5oOJ496Tma4kKyq3T6TgnafxmB7Jcz2NNM2bMTeUUB4Qa
+X-Gm-Gg: AZuq6aJvQy5GTchOFP87djdXGegj6uxiuSYGZbO9aZv4WIbwn23upSjhaBa8V22Qq+H
+ yNSTgSuxNlc0sCsrpyAKTVbS+8t5AgEDqPNNq9Sit2ZN6tCROqicf4hYtwNhuVoAmluv/LKfhC2
+ 6zHnK7twaAGoq9OuPXvhaelz9Y2G0Vo7mpmMowcuRLfnjVz4uAIPxP8CP7oM8NQv2sH+vxpcZUu
+ IhoaUw36OO66B+M+fqbS6WkOpZkVOpmwI0OVQK/jBZtaVWcfSzIAyyFosZ4AdqP8mUQnwo5bU5H
+ tlqHA/zA6axvNLt1L13WC6kzXXic8syp5GLS5u4aBnNo+shJo2wMtkIiHfYg4h6japnzoRqzmeW
+ J3AI7EHYzTu2a6/Vq61FVkUzG6E0Dcf3AZ7vM1n53e52hI6mokNQJbZX947hEGZ64HstkH17Lqr
+ QDL8pJmITDq/at14g5BI/4N1bfUl8RwmkSEcS9brI2
+X-Received: by 2002:a17:90b:586f:b0:356:83b2:539b with SMTP id
+ 98e67ed59e1d1-356aada8a35mr1458025a91.32.1770981048490; 
+ Fri, 13 Feb 2026 03:10:48 -0800 (PST)
+X-Received: by 2002:a17:90b:586f:b0:356:83b2:539b with SMTP id
+ 98e67ed59e1d1-356aada8a35mr1457995a91.32.1770981047997; 
+ Fri, 13 Feb 2026 03:10:47 -0800 (PST)
 Received: from hu-aswinm-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c6e196a3663sm7943908a12.9.2026.02.13.03.05.53
+ 98e67ed59e1d1-35662f8cc57sm12364399a91.13.2026.02.13.03.10.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 03:05:58 -0800 (PST)
+ Fri, 13 Feb 2026 03:10:47 -0800 (PST)
 From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-To: u-boot@lists.denx.de, sumit.garg@kernel.org, casey.connolly@linaro.org,
- u-boot-qcom@groups.io
-Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- sjg@chromium.org, michal.simek@amd.com, gabriel.dalimonte@gmail.com,
- jan.kiszka@siemens.com, paul.liu@linaro.org, j-humphreys@ti.com,
- neil.armstrong@linaro.org, me@samcday.com, marek.vasut+renesas@mailbox.org,
+To: casey.connolly@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Cc: trini@konsulko.com, sumit.garg@kernel.org, jh80.chung@samsung.com,
+ peng.fan@nxp.com, neil.armstrong@linaro.org, tien.fong.chee@altera.com,
+ miquel.raynal@bootlin.com, msp@baylibre.com,
+ alif.zakuan.yuslaimi@altera.com, balaji.selvanathan@oss.qualcomm.com,
+ w.egorov@phytec.de, varadarajan.narayanan@oss.qualcomm.com,
+ rui.silva@linaro.org, ilias.apalodimas@linaro.org, me@samcday.com,
+ marek.vasut+renesas@mailbox.org,
  Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Subject: [PATCH v3 1/2] firmware: psci: Refactor EFI runtime PSCI reset
- handling
-Date: Fri, 13 Feb 2026 16:35:26 +0530
-Message-Id: <20260213110527.1254098-2-aswin.murugan@oss.qualcomm.com>
+Subject: [PATCH v8 0/4] Add QCOM RPMH Power Domain Driver Support
+Date: Fri, 13 Feb 2026 16:40:05 +0530
+Message-Id: <20260213111009.1254360-1-aswin.murugan@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260213110527.1254098-1-aswin.murugan@oss.qualcomm.com>
-References: <20260213110527.1254098-1-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=NsTcssdJ c=1 sm=1 tr=0 ts=698f0599 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-GUID: 8LxLdcRfZ2z21Vg30NwbWgeLq6LXcWYp
+X-Authority-Analysis: v=2.4 cv=eaowvrEH c=1 sm=1 tr=0 ts=698f06b9 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=EUspDBNiAAAA:8
- a=CLkPrrlkzVyQE86M9QYA:9 a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA4NSBTYWx0ZWRfX+N/BlPNHE8do
- JcpwqSxoWNSaTOtiX5OkCPskD2JFxHboHuqQTvFpvC7kBkJZU8YEBL/F8SEtOhI4nf0LifHHVp4
- crEZck21NWPj0jevhicX9s12QQc+qrKpOEUxQ6Re3DwsH+UFR2ouI34SSq1jqdsRzWyBkgJK/bI
- 8RUeFm4jEwlsiRHZRZg89ydnFy9Nx824x1uEcUmCwXop1WgqOTAmLc4DMetUTwB2So5OCGPM2F3
- eJFDgTp5stijIY+YVG3qw6y2orynNxqxSklyaVRrt+6ApsrlHmzK8gMwXgRfIEcmOnHcdUCa0Cn
- RW+8UXY6elYqzdK3sBQ8WmtqmebJjvM5OJ0A+LrjkxunOrmOcfYh94jEcaBxXEG8MHa8/EodPbG
- HHSY87eVJgPFujebNDkqs2nnBSLLT1Z6FdGt6z6eP+hKs/ATMxiiOWV1upv0QqfXosDHuz0ZYEn
- KBJMIiENkLWkkO66pXg==
-X-Proofpoint-GUID: mU7FVJEK4WNtk-asuPP6UjupHdx3FuV1
-X-Proofpoint-ORIG-GUID: mU7FVJEK4WNtk-asuPP6UjupHdx3FuV1
+ a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=giyyX0tnYtHS4K3SAAUA:9
+ a=iS9zxrgQBfv6-_F4QbHw:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjEzMDA4NiBTYWx0ZWRfXybTgGydycDLQ
+ oXSODczZ1CAe/TWlbtNzuLULNWPfvDOrWe9jp/G01+LFRtrzEhfDccJrPoMOPYydXFr2zTQ4ewG
+ TmbAdf1hZodCJIgmk70pORWUGFwqOG/LdtoT+B+674JNENFuvjWVRMs5aLcFlpQvV/oSAZwKLLm
+ PCJzfxwSAve5oZtbrtEmp78bZWOW6VOKstunSuKmFNmP58g9xv2HiCktAj+SUI3g4LeDF5MwtoG
+ NOhNwMYF8FzotOj3jVLMtwrbzl00aXCo35j/xKimX5vVt7tAth9L6y258DlWoDAWTD5likR+q9/
+ 85V5i1PcnMPoqt5/nYYUkjLSwJOU4n/fVve8IjWUtGrepFT9vU+nrK5MQQbePhEeKCIVIrMf78z
+ RWvk58NJEqfuEzt1B/7+vi2Jc0L6Y4c2W3euAOOPIrKOub5NzSB8wwPSkqf7azz9Rznt2y8I6vE
+ A5zQFXpkvfjRiUcfQvA==
+X-Proofpoint-ORIG-GUID: 8LxLdcRfZ2z21Vg30NwbWgeLq6LXcWYp
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-02-13_01,2026-02-12_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 spamscore=0 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 adultscore=0 phishscore=0 malwarescore=0 clxscore=1015
+ spamscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 impostorscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130085
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602130086
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,72 +151,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current PSCI-based EFI runtime reset implementation is always enabled
-when CONFIG_PSCI_RESET is set, but it does not support the extra arguments
-required for specialized reset modes. As a result, reboot requests such as
-bootloader mode or EDL mode are ignored and fall back to a normal reboot.
+This patch series adds support for the Qualcomm RPMH power domain
+driver, responsible for managing power domains on Qualcomm SoCs.
+The driver is ported from the Linux kernel and adapted for
+U-Boot to enable proper power domain control on SA8775P platform.
 
-Add CONFIG_EFI_PSCI_RESET_RUNTIME to give platforms explicit control over
-the PSCI-specific EFI runtime reset path. This allows a platform to disable
-U-Boot's PSCI reset handler when needed so that the kernel can perform the
-reset with the correct arguments for special reboot modes.
-
-The option defaults to enabled to maintain backward compatibility with the
-existing behavior.
+When a suitable power domain driver is not found for the power-controller
+node, it will be handled with a warning in dev_power_domain_ctrl() and
+execution continues without breaking, ensuring compatibility across
+different RPMH platforms.
 
 Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 ---
+Changes in v8:
+- Renamed Kconfig option from QCOM_POWER_DOMAIN to QCOM_RPMH_POWER_DOMAIN
+  for better specificity as requested in review feedback
+- Improved commit message for patch 3 as requested in review feedback
+- Link to v7: https://lore.kernel.org/u-boot/20251222114823.2146775-1-aswin.murugan@oss.qualcomm.com/
+
+Changes in v7:
+- Droped soc: qcom: cmd-db: Add cmd_db_read_slave_id() & cmd_db_read_aux_data() functions
+  patch from previous version, since it was already picked
+  Link: https://lore.kernel.org/u-boot/176363183220.2293399.7296647117885059868.b4-ty@linaro.org/
+- Cleaned up the warning logic in drivers/power/domain/power-domain-uclass.c
+  when power-domain driver is missing
+- Link to v6: https://lore.kernel.org/u-boot/20251113113427.2218045-1-aswin.murugan@oss.qualcomm.com/
+
+Changes in v6:
+- Added the change in drivers/power/domain/power-domain-uclass.c to give warning
+  when power-domain driver is missing
+- Added the change log 'In qcom-rpmhpd driver, the un-supported power domains are handled with warning
+  in rpmhpd_power_on() & rpmhpd_power_on()'
+- In drivers/power/domain/qcom-rpmhpd.c, the 'ret' variable in rpmhpd_probe() is initialized with 0
+- Link to v5: https://lore.kernel.org/u-boot/20251027113312.3815169-1-aswinm@qti.qualcomm.com/
+
+Changes in v5:
+- As part of "qcom_rpmhpd" driver removal change did in v4, the rpmh_write() in drivers/power/domain/qcom-rpmhpd.c
+  should be passed with pd->dev as first argument to align with it.
+- Added (ulong) casting in rpmhpd_match_table to address the warning.
+
+Changes in v4:
+- Added all soc entries in power domain linux driver to drivers/power/domain/qcom-rpmhpd.c and
+  stubbed it
+- Removed "qcom_rpmhpd" driver & unused members of struct rpmhpd in drivers/power/domain/qcom-rpmhpd.c
+- Moved the "soc: qcom: cmd-db" change before the "power-domain" change
+- Link to v3: https://lore.kernel.org/u-boot/20250702180133.1889709-1-aswin.murugan@oss.qualcomm.com/
+
 Changes in v3:
-- Commit message has been updated, no change in code
+- Removed OF_LIVE_SA8775P config in arch/arm/mach-snapdragon/Kconfig & configs/qcs9100_defconfig,
+  since there is no SA8775p specific fixups are done
+- Link to v2: https://lore.kernel.org/u-boot/20250702171335.1811080-1-aswin.murugan@oss.qualcomm.com/
 
 Changes in v2:
-- As per review comments made default y for EFI_PSCI_RESET_RUNTIME config
+- Added ARCH_SNAPDRAGON dependency to QCOM_POWER_DOMAIN in drivers/power/domain/Kconfig
+- In drivers/power/domain/qcom-rpmhpd.c, the un-supported power domains are handled with warning
+- Power domain fixups have been removed since they are now managed by drivers/power/domain/qcom-rpmhpd.c
+- Link to v1: https://lore.kernel.org/u-boot/20250626112441.143064-1-aswin.murugan@oss.qualcomm.com/
 ---
- drivers/firmware/psci.c | 4 ++--
- lib/efi_loader/Kconfig  | 8 ++++++++
- 2 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-index 2e3223e1c32..009c6153d0c 100644
---- a/drivers/firmware/psci.c
-+++ b/drivers/firmware/psci.c
-@@ -244,7 +244,7 @@ static void __maybe_unused do_psci_probe(void)
- 	uclass_get_device_by_name(UCLASS_FIRMWARE, DRIVER_NAME, &dev);
- }
- 
--#if IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET)
-+#if IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME)
- efi_status_t efi_reset_system_init(void)
- {
- 	do_psci_probe();
-@@ -266,7 +266,7 @@ void __efi_runtime EFIAPI efi_reset_system(enum efi_reset_type reset_type,
- 	while (1)
- 		;
- }
--#endif /* IS_ENABLED(CONFIG_EFI_LOADER) && IS_ENABLED(CONFIG_PSCI_RESET) */
-+#endif /* IS_ENABLED(CONFIG_EFI_PSCI_RESET_RUNTIME) */
- 
- #ifdef CONFIG_PSCI_RESET
- void reset_misc(void)
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 13e44be1d06..3882de273bb 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -106,6 +106,14 @@ config EFI_HAVE_RUNTIME_RESET
- 	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
- 		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
- 
-+config EFI_PSCI_RESET_RUNTIME
-+	bool "EFI Runtime PSCI Reset Support"
-+	default y if EFI_LOADER && PSCI_RESET
-+	depends on ARM_PSCI_FW
-+	help
-+	  Enable PSCI-based reset implementation for EFI runtime services.
-+	  This allows the OS to reset the system through EFI runtime calls.
-+
- endmenu
- 
- menu "UEFI Variables"
+Aswin Murugan (3):
+  power-domain: Add warning when power-domain driver is missing
+  mach-snapdragon: Remove RPMH power domain DT fixup code
+  qcom_defconfig: Add QCOM_RPMH_POWER_DOMAIN config
+
+Balaji Selvanathan (1):
+  power-domain: Add QCOM RPMH Power Domain Driver Support
+
+ arch/arm/mach-snapdragon/of_fixup.c        |  31 ---
+ configs/qcom_defconfig                     |   1 +
+ drivers/power/domain/Kconfig               |   8 +
+ drivers/power/domain/Makefile              |   1 +
+ drivers/power/domain/power-domain-uclass.c |   7 +
+ drivers/power/domain/qcom-rpmhpd.c         | 278 +++++++++++++++++++++
+ 6 files changed, 295 insertions(+), 31 deletions(-)
+ create mode 100644 drivers/power/domain/qcom-rpmhpd.c
+
 -- 
 2.34.1
 
