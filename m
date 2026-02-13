@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C7A5EDF173
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 14:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00587EDF16E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 14:44:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C028D83AAB;
-	Fri, 13 Feb 2026 15:39:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 556FC83015;
+	Fri, 13 Feb 2026 15:43:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ba6Oi5gw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kBmdlQHV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A19B83AAB; Fri, 13 Feb 2026 15:39:45 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 6344183AAB; Fri, 13 Feb 2026 15:43:57 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA98983015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 15:39:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94E5C80B98
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 15:43:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d196a2334fso942463a34.1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 06:39:42 -0800 (PST)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d4be94eeacso858804a34.2
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 06:43:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1770993581; x=1771598381; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1770993833; x=1771598633; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=J8X4L7gdtutJmBqEoQWarroz3UCLPcmKBWVISCaaoDU=;
- b=ba6Oi5gwFv5s2aqLQ3YfNqSGU7jcAN4SYePDLPo7N/MIyAmJRSEKHgDGvTvW7ptMkh
- jlteVShjwFTcj23tTQzZ1dBCIC2p3X3qA2BG3L4LXWMqNzbB67IXp2arY3uVlK+uFGIQ
- 4kW5PvSFSlB7CnOl8zK78oDkdij5Q5F/NLdMQ=
+ bh=JWgOXtwnl4IECnGAigsclU8DD6ycflJ5Yq5jEr0/KFY=;
+ b=kBmdlQHVWV1nJBoilU0t8fsWAEZuh+svHrFGU4A7Yulnn9GWrhUslyPNpfe9loLvhI
+ yNhw0Olx70wPV4IV3bwA0g24BYEzP6bxjFAQCJ/LbekcPZrEAt1uKDxQT4JHjmEE9lek
+ eyqhU9T06ZbovuSyX3zLbcuBBUPAm/ZxHADE0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770993581; x=1771598381;
+ d=1e100.net; s=20230601; t=1770993833; x=1771598633;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J8X4L7gdtutJmBqEoQWarroz3UCLPcmKBWVISCaaoDU=;
- b=B0Ox6k7DNtkTNH9pfR1iEe0+wSmipdoheiGL3vIOrUKpQHAd6SfqHoPqhjG5oycPcJ
- +ykokswGcUqXua9qy1eqUxSkmgnW6qORYrXxF6JIat8tDFabzpbFS6hjtTXOiwEejzZa
- zn7UlMX8pgyQUgiZ/D5BEZnjsA1m+JGoW/zIvCsOmjAT9QbMF6SflLy7ARGPK/boGmyd
- dTB2XfZrBR6PHrHTiXDF9DH72A/tIZQtMpEj/Y1mcuHjL7QgD38MB6teqvYpjVd4pbP6
- uTFqTlVvTgMg/QhMiQ3KngND4ZFJq4CqBC9fvfNMGxHkkToUmAVMoJW+w+rnh67lL1hV
- maHA==
+ bh=JWgOXtwnl4IECnGAigsclU8DD6ycflJ5Yq5jEr0/KFY=;
+ b=W9HNk7CS5QQgMrrYBmPqLRVADudg44/AZoYPXXZiRYH0XnD/w5sIp2RIqtykFqqWz3
+ y52779PLQtdu2V/Z+C9QgD3two3sguCqROXIuuphinPwUJEg1rAQweou9H34kwqYtcVB
+ ZtkALQuJZJ4lIeWqAleTYKN8I0okiz9FHL5WzT1iy6043gSeHjkLVkVd+NFqnNLrkUC7
+ Ra7uJ0qhN4KBD5GHczcp9Uak6jlhA4w7bSnhfBVvzRCNXqPRNMRBCK4v5CEE/jdo/f5i
+ VssBxzKv0xQdwb+2YtXNPykAOUParDHtzU+vX6U6ADADlhPtlBCM7K9mNoxdA3Y6ubuy
+ BJcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7u8YjCKs+05ZddkWkerVd/17vax/4v3P/rZ4LHFqSbxKAeWNKpy7P2WMvHo/um00NfTRzK4Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YykKt4sxZtSIDi58WcD0Fz8Tc0kFDlkaRFdlsqvQnQpaSLEjO/S
- VGMKtqcjm0hjGxsWELm+oUrl0oXF9TcbGWLAjiujtni7DKpeR9J8aYSZgxn0etFdvfjXH/Qivxz
- kufkdkGg=
-X-Gm-Gg: AZuq6aL5rFqgFbOyLhFYjvuxU8uwmCHNDrhg50LJzSxiZVSItOKYCEFMCayacjXvaCc
- 1r54CXGxgD5Md2XSDjwB4eIMoih1SOIiwxYtusTlOuzKLbql8QwqoDgRiJNejEr495VMoo0hOh9
- 40P5YSoj6c5wd1vSV8TY3+QorXZDGIlpCdoTC0jqWIa/nm+jTq//fV9KQGSF5ahAAZWbjiyEvO5
- djluO1hpojT0KXFgAiWKngzt/MaWWy+hrJb0xqfi7pRt+O7Y1bIcIafNDNEt/IE9nYxIdYkkiut
- pN8EVM2WvXstyiQNzQBQhhXr8ll4Ro0+r9tvWTpyFti/O6tlSwlKFcZchvxWLS7eV9QcZBssC1r
- yfmZA9Pc9CR/ASW95YxI5578CwgQYeW48w+HPQkex3YMbTOAata2FGkG5eHra25ko5m4wkv9ZFV
- L3laDSInPZH4PLGJ+zmnfcE5SeftvygbJ7cnKHsbTuxM/p/PgayGl/IzwAKoaWDDLItqqNy0Aez
- hKgjyX/tba/3VKf8X9U3Zfxkl5SgxP48GI9JNl6zl3e29AIbFI=
-X-Received: by 2002:a05:6830:8299:b0:7cf:d42d:edb1 with SMTP id
- 46e09a7af769-7d4cdefa9cbmr182452a34.10.1770993581468; 
- Fri, 13 Feb 2026 06:39:41 -0800 (PST)
+ AJvYcCXbdIhZVqX9YLhwNX2pnk0TUXnhMHj4l5a8e/S+FM4xQFhDRAeGVhdRCBaTYEnI/fQ4GZkQN4o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7e5jozwNGoHTA0yrWPUua2XD81O2ZEfTkRFUswXeYKXIBELke
+ w4rg0SQvgYeO+YJI7d4xFUkK7y7dHNF8JYU0mk0t5DZg2oHlZ4rmo6J6w3Fp1LjUwXMQBsvalzM
+ +6tmhyD8=
+X-Gm-Gg: AZuq6aIjxjRC/QzU71QHPmJob9V5poU85P1Lk9MhusnjRqgGXpnHG9fNhUE3MfABscZ
+ f3ueGo16Nb1mvaf6Of9sJWO4kFvtye5mtLy/RrHbMQ51xIek5eeIgEn4BpInFWseoHvQSpQitnF
+ al7B/AAW/RjYzUiqgLySKlMevG6oeql/TvKKZHDz1rVPWaS4jdsTrZ2oCQWFJk8dHn0inWEHoF6
+ MCQNvwU+MO/YUulc6gKm4rs1W93kkvJuRrG9FxrDu7OXZrJiM6AST4ISu8oxNO8/s5Aaxqmb6iJ
+ vXei+ZPMyfYueTQ0CZh4kB+F9qx34DLsC3DCz2/bQfb5Va85cxptn6OYahwrlWlqsB4zsg5aqDf
+ J3rIgSoD2LMFBfZnpjhFCXygvqaCFHz/QtD5zr9e7yBDO8KwSyjbur4VJnme78Yqv1P00FEHwXz
+ pUHiKQqWIEmbTBHRPR7dXm1V6XqnqwA3Tu6cz/bDQRnLCPEgsNl2q8CwDsQMmd6YvNujjmIAb16
+ ohGxMZ6Yu64VmZaXaUV4d/1nvEdjvSMETlwkoI3FHcdQpXxhZ09zFiaLGYj7g==
+X-Received: by 2002:a05:6830:903:b0:7cf:dc3f:6b34 with SMTP id
+ 46e09a7af769-7d4c4adddfdmr1130274a34.20.1770993833322; 
+ Fri, 13 Feb 2026 06:43:53 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a76f9cf3sm6048483a34.24.2026.02.13.06.39.40
+ 46e09a7af769-7d4a7530d08sm6281649a34.2.2026.02.13.06.43.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 06:39:40 -0800 (PST)
-Date: Fri, 13 Feb 2026 08:39:38 -0600
+ Fri, 13 Feb 2026 06:43:52 -0800 (PST)
+Date: Fri, 13 Feb 2026 08:43:50 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: gabriel.dalimonte@gmail.com, u-boot@lists.denx.de,
- caleb.connolly@linaro.org, balaji.selvanathan@oss.qualcomm.com
-Subject: Re: [PATCH v4] fs: fat: Handle 'FAT sector size mismatch'
-Message-ID: <20260213143938.GF2747538@bill-the-cat>
-References: <20260213053719.2590474-1-varadarajan.narayanan@oss.qualcomm.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Javier Martinez Canillas <javierm@redhat.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, eballetb@redhat.com
+Subject: Re: [PATCH v2 2/7] disk: part_dos: Align dos_partition_t with struct
+ partition
+Message-ID: <20260213144350.GG2747538@bill-the-cat>
+References: <20260212204511.619392-1-javierm@redhat.com>
+ <20260212204511.619392-3-javierm@redhat.com>
+ <CAC_iWjJysPTkCTJ10qR8FmNxSBYT6mK7YWoqvxxwez+6H8Yf1w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WoipPj/5M4c7QUGO"
+ protocol="application/pgp-signature"; boundary="NxdmDpaT/4V7MVCb"
 Content-Disposition: inline
-In-Reply-To: <20260213053719.2590474-1-varadarajan.narayanan@oss.qualcomm.com>
+In-Reply-To: <CAC_iWjJysPTkCTJ10qR8FmNxSBYT6mK7YWoqvxxwez+6H8Yf1w@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,53 +104,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---WoipPj/5M4c7QUGO
+--NxdmDpaT/4V7MVCb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 13, 2026 at 11:07:19AM +0530, Varadarajan Narayanan wrote:
+On Fri, Feb 13, 2026 at 10:41:08AM +0200, Ilias Apalodimas wrote:
+> Hi Javier
+>=20
+> [...]
+>=20
+> >         unsigned char end_head;         /* end head                    =
+         */
+> >         unsigned char end_sector;       /* end sector                  =
+         */
+> >         unsigned char end_cyl;          /* end cylinder                =
+         */
+> > -       unsigned char start4[4];        /* starting sector counting fro=
+m 0      */
+> > -       unsigned char size4[4];         /* nr of sectors in partition  =
+         */
+> > -} dos_partition_t;
+> > +       __le32 start_sect;              /* starting sector counting fro=
+m 0      */
+> > +       __le32 nr_sects;                /* nr of sectors in partition  =
+         */
+> > +} __packed dos_partition_t;
+>=20
+> This always has to be packed and the part_dos.h definition had this
+> wrong all along?
 
-> Do FAT read and write based on the device sector size
-> instead of the size recorded in the FAT meta data.
->=20
-> FAT code issues i/o in terms of the sector size. Convert that to
-> device sector size before doing the actual i/o. Additionally,
-> handle leading/trailing blocks when the meta data based block
-> no and i/o size is not an exact multiple of the device sector
-> size or vice versa.
->=20
-> Tested on UFS device with sector size 4096 and meta data recorded
-> sector size 512.
->=20
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.=
-com>
-> ---
-> Changes in v4:
-> - Fix clang warning reported in https://source.denx.de/u-boot/u-boot/-/jo=
-bs/1365316
-> - Remove unused function 'size_to_blocks()'
-> - Triggered CI, it fails with this error https://dev.azure.com/u-boot/u-b=
-oot/_build/results?buildId=3D12817&view=3Dlogs&j=3Da007cd84-3be0-5a02-8a7a-=
-a34fb3052485&t=3D216c79d4-eaff-5600-0b8f-3a63c01a45d6&l=3D405. But that see=
-ms to be seen on top-of-tree without this change also.
-> - Link to v3: https://lore.kernel.org/u-boot/20260122063442.2622684-1-bal=
-aji.selvanathan@oss.qualcomm.com/
-
-And to be clear, since CI fails, this can't be merged.
+I believe that's what we found as part of v1, yes. Or at least the linux
+kernel has always packed it?
 
 --=20
 Tom
 
---WoipPj/5M4c7QUGO
+--NxdmDpaT/4V7MVCb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY83qgAKCRAr4qD1Cr/k
-Ch0UAQC2UOaj+R8QSaxYgprsWaygpm5OeMgzAvuxv0iV1JZHGQEA/WscrsObI1rH
-7v6YRXx45vxJ8bY1yYphmK96U3shAgQ=
-=Teif
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaY84pgAKCRAr4qD1Cr/k
+CuCxAP9UymLIW3A0iM1+SWgsZ6gFeWdPMiLuXiublRAbH4mT2wEA26GOpGNP+GDW
+dt4xCAGdWZ6iYu9zduU4No3lfhKQsww=
+=yQ3b
 -----END PGP SIGNATURE-----
 
---WoipPj/5M4c7QUGO--
+--NxdmDpaT/4V7MVCb--
