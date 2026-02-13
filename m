@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF99EF99C1
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 17:53:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF2FEF99C0
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 17:54:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A7183DE0;
-	Fri, 13 Feb 2026 18:53:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7F46283DFF;
+	Fri, 13 Feb 2026 18:53:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a00q3XEE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eyuqyrO5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0ED6A83C4B; Fri, 13 Feb 2026 18:53:49 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 0AD9B83DFF; Fri, 13 Feb 2026 18:53:55 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FE2D83DE4
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 18:53:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAC6283C4B
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 18:53:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b8fa7e3672eso167008466b.2
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:53:47 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771005226; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b8f8f2106f1so159902766b.2
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:53:52 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771005232; cv=none;
  d=google.com; s=arc-20240605;
- b=QnVAgcJjUXstGM3fccHZaPVzV4H2rlYjE+wTKjDZbZz8EsjuJVOC6/CLo7d0O4xVS8
- ekcQiO0k57RzJ2DNjQzAsBZNM4+XiOZWfn72tY18nSgeynh13r1e+MvU/ljJM+3XmYLo
- xZ340110Om6n8deL7uAhHqdmVTGqC/WaQ4Rtgj79WHWMZTwo0uPgy7ZAiwfHPh3ZMCT8
- 4UfznB9+U2ImJEiyKn+d+QxMfLl5ptXYGf0VKNGwa2F6vxf8lP5lJmOLjgsBJACjFzOq
- V+x2uP/DgEUyC9HfGUeaYavRIek1XX573zpyBkI/gxL23Az4LgtgGvC4gT/eMSo4SlMV
- 3JTg==
+ b=UhrYHv6LLA5nqUYEfyjxgQDD5jW+LQaWVjnH/sjbLJ8Cd8/CI9Us485Vq2bYpn6GSl
+ IoqoXgshLYzwsrUUPJhstuMHZHdbrEAV+YF+pVKHINChcf43pA3sEyoAgP82bUeYSx6H
+ jmSbQChRa//fNw6wubrOp46ko0qEpfFULq3aUgUrOIrgDcmapOUwDDo0QNTYNi7r/vw3
+ i+eQvWtdB7/N8Cpri0Frg/YR2p25AfM3J8wFRWJnrwuXBcvIwGsJhfsYv/GW/sDxJO9B
+ 3sLcdfe6ktNVIzULcdB0UkElnE0Hy7X1oCvFYohD2TE+5WXmZNEobJwCDVi2oYKUR5zk
+ EbAA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=FOWivUcSHOt98QrOD+5z7glXFynX4hrCMgTEsXHkRqU=;
- fh=UFOIHENB9OyRLHo5EhMU/+v3+TTyRpbYR3vEGQnBiZA=;
- b=QIVTrUHD3tu4GQRR2Kkp3DURmwAnTUeBq3jvUx4QCNNsuxP4yWdbZSmavX47TfwPBt
- jvAWTuMghhQXdr16lMe6kUfAWfEio4lkVEv4BGImbBy6uxQSAOx6NH+L5mXqpUYNjt08
- mDv8FnJkRzfdLTs3IU91q0blQr15QWvlgQqiPQlb40p55zHQDh3cSDfuCWCPWdUyN33/
- m0Q6mbuP/yK6o5yy0WDvp6ghiHHErYiIRxoE/lF0ndNJX4u00SqLv7KX8ybIzfI75izF
- KMsK51adKz1y8jzwUrq1NXtt6jCfT9YCZN4rks5XjwbRvCC3aoVjr+XC5QUjbPWzx37s
- e7ZA==; darn=lists.denx.de
+ bh=UQ4Vqc/uMjGImmfqyFF0LNppmo926zWnwjsstGZxMEg=;
+ fh=adFXIcqmP3L6/rADA4LLGejE18xke/VK1tygNc2s9oE=;
+ b=FIFXW5/S9TAp2kPUvxpPRCXlV19/mDe9E1g1KQ+AbRLFOsYyH2ASwSzchnnDQ8jFO3
+ NR0ju+X4A+hW2yb+E3bRsLvvDaTxEDsTTYe5L438pwwb4HIKR0XCsZ+5gkZceA6zEx5V
+ C6n8gY4ZsNIzbCtebbUM1o1UwXyY4aLk/U9uV10T35z2ecQRF7j0p8qH3iWiDnoqymZZ
+ rzglZqUOagzF0VanhWoXCcdr+F0HecingMngPA5jf7BrLyDRr4k4EddlvtzLVsSO0ayD
+ hNsx72G0tHhz9EbJoAg6CbqjDlXWJvRMyuVk6RopbGXcVvazj8YAdo5Y2cWFw2XEeNkf
+ Mv1w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771005226; x=1771610026; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771005232; x=1771610032; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FOWivUcSHOt98QrOD+5z7glXFynX4hrCMgTEsXHkRqU=;
- b=a00q3XEEZE+SFzblAGI3mBGZuaiQ0SpojuqDM1VPFIIThx9I1DIpiXDb8uNWWAbVAT
- FF3ZFKO+F22k9AMT9Jc1JGa36IYCLEFPs9L2wKy39OkA/alPc5NnWYvfBzVMC16cSPgn
- Irz0Ao/mTgJ9YgXWgZ+iTcRRQfApV3JPe/mkc=
+ bh=UQ4Vqc/uMjGImmfqyFF0LNppmo926zWnwjsstGZxMEg=;
+ b=eyuqyrO5ItivAlwbpVpwE2VN3bm0e+/iFehx/hR2yA+YacIHt0rytVths3EcZbJbe+
+ 1yqYVAtnE3ESCSEXnet/mWdL4VCzBocUe8kvadaO2vkUYSg6kTqcoB/STUsHflpX73LU
+ ZCiZV/pIUEJQBmea4ej9IRYBtG+MK6YbLER1E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771005226; x=1771610026;
+ d=1e100.net; s=20230601; t=1771005232; x=1771610032;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FOWivUcSHOt98QrOD+5z7glXFynX4hrCMgTEsXHkRqU=;
- b=bL7EkiRDgQs/p6GhzIEQld5Kfmks4kYYql1CyuzvVwnGe+k57XPvUa1hcgX5alocz8
- Ast7YKQ2tadXNa/VPOZXvC9V1H2ziIc3+vn6D9c37DWlQwuIhAPvydqUcaNxba3XVZHI
- cpCtUZeBnWR6CKey7ujW2SCmZhLXVe+CKDb+jIDIqDdR3PyPNH/SIMV7aB+sBix4j5PC
- td2y5sve9giZbPE1EQazD+fVJ3Xa5lSkqLevrnmM2MEkXh8rDTnansTfaj/YLf9nnTvg
- BLjscY8O/xY2NVbvHwNfGVlVJd1NYh9NnnQ2tE43I6MoHsiySe4yR61KZjA6kSQ/bzTJ
- iMgQ==
+ bh=UQ4Vqc/uMjGImmfqyFF0LNppmo926zWnwjsstGZxMEg=;
+ b=MnY+DQtsmxbwAVQn1JCIiHiJp1pvCxMqVNl1CdlmwyO3eHGVdtKZPZaIeoaIhSjxYP
+ XyhCQ/AbUJxVgyEO3aSTCCg50df18xbbjJ7WG8DBvmYfZ0ayMAbte3VXh7nFubZMR4jW
+ qnUemGyvGuRfBYNSzUwIo7kpPS9iaQ76g9MwXr7wLpw9MVR1V6hMa3c+LOvhw3kSzntt
+ Aht5uo+xBJsrArBcKw4lJ/DGiHrQvTIwmjpjaYuYU8Db/IcNsNJH8BP/P145+VutqRJV
+ fl+jVHWpZ0Y9Tc8enu/zK7EA5bQPfTJELFhllg8csREHLnKwuQro/40GrqAjGM+kpxIm
+ C8sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhOh+Jtlc5kePOtUWLNKUDHhZr3VSiCTtSdMUNljSm5Aw4NK38Y4IrOx9VZwKhSx483rLIKJg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyEwh3FIphbDrtWUYM22JblbycNXpXAMW/d3LSH67xoMcI7CWc5
- 5ehHD5Rcrc0B0jeKRqQyfqPfZ8fRFHglhRkmoWDl27DEeUizQmg6TbZ/kxXlrI7uVSV96SPsPWz
- SSvfkXK2cYReVPZ9v/rHoMaXP0vZp7PIUYc/6tz+7
-X-Gm-Gg: AZuq6aKhLbUv59MfJrHiIvGT8fECKoBokHWtxri4BR2oqRbMJxdozD9hK2XcKR1iuwv
- LafjPKj1rCMwckORKrModO/fLhsb+kcYPcQ4lFFXinUNuETBFdedraRDnkjs9g/9VFn0LB7lyvw
- zaaBv7dM93BMx2v8t/3WtoV03GbwnWadxy6k/jgnLMsF+UiQXy2wecLWfEYW3hrjKDKQOBWJIkI
- kveEtwYxGNYtnE40uf0fU18aigMmtfMwxjmh9bI7t7dkq+uAgx/sr69fLJVVm2fGT+iAk+jxBqQ
- jkjdZZOMbYZynjYy
-X-Received: by 2002:a17:907:c23:b0:b86:ecfe:b3d with SMTP id
- a640c23a62f3a-b8fc3cb8f4dmr16943066b.43.1771005226409; Fri, 13 Feb 2026
- 09:53:46 -0800 (PST)
+ AJvYcCVLYO/pNY8dMJ9g1ajNBkb8q5SF15IgdovB51Vq/C2d3zMe0fPwasixvlw5rZodVzRME4wKL6s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEqjMi2J2nJ79N5Gpv9XRnXYjT1JbQq8SxHpH4cUXJzaeb7QRo
+ FM/cDC6LTwulESAn22/gRat1c6EEbpgMBAkKT9npAaJ3OHRjyezmWwIz6PIlyKuhhDdEf+zx90m
+ cFTR+iWUWk5H2ccinI80JpLhIxCfkgLmdTRM0Vt5A
+X-Gm-Gg: AZuq6aIqM9+FxMf+6zU782TEAq81eUSluxeE5rwiP5LxyZuVozF0tRDyHAIE6UJoARi
+ MpIu1PzfHWxSGHpdw60XJ1Z1F4bsoAKLZpqSNDbDDKqoPEum/OMfPMZHAAS6WZWhTF7ZBuTH7wF
+ gK0RAHgSefVp0OU2h8D3GJi4eWZ0JUOKE/GnI8R4Vr0IzdPnnZj9cULm+HMn5Xr422mAT/V8exo
+ APS22kPzKXnuijs1yHb65BsKmfY9+84aY8AovFsMzXeqn2UjRAev8YF5DNMOSrun3ppen+cFfme
+ nhKTBw==
+X-Received: by 2002:a17:907:7213:b0:b8e:d162:2410 with SMTP id
+ a640c23a62f3a-b8fc3a382b4mr16878066b.17.1771005232144; Fri, 13 Feb 2026
+ 09:53:52 -0800 (PST)
 MIME-Version: 1.0
-References: <BESP194MB28058C540F0C3D28F4D08541DAA3A@BESP194MB2805.EURP194.PROD.OUTLOOK.COM>
- <ffa1bf53-9d40-4297-a30c-ffb9d8113820@linaro.org>
- <20251209141706.GV303283@bill-the-cat>
- <20260213165658.GJ2747538@bill-the-cat>
-In-Reply-To: <20260213165658.GJ2747538@bill-the-cat>
+References: <20250714210249.4139916-1-eric.schikschneit@novatechautomation.com>
+ <20250714210249.4139916-2-eric.schikschneit@novatechautomation.com>
+ <20260203181444.GQ2603314@bill-the-cat>
+ <CAFLszTgLx_TtEO-8qq_9uojLd7PgFdUuhs5_6kYqL7GuzFt7ow@mail.gmail.com>
+ <SJ2PR07MB97113A17DC42B9E4E87E95EB8162A@SJ2PR07MB9711.namprd07.prod.outlook.com>
+In-Reply-To: <SJ2PR07MB97113A17DC42B9E4E87E95EB8162A@SJ2PR07MB9711.namprd07.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Feb 2026 10:53:25 -0700
-X-Gm-Features: AZwV_QhG2DDfIjesMMTVTUYQM4ObsB0Iw44ZWs03KNG8QKE8XPYGNFByFKnPoKE
-Message-ID: <CAFLszTi2dWCN+rhXDkBX33ph4ww=6RumXAPECY5_MdzkcB3edg@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spi: Add missing free in sf_get_bootflow
-To: Tom Rini <trini@konsulko.com>
-Cc: Francois Berder <fberder@outlook.fr>,
- Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de, 
- Vignesh R <vigneshr@ti.com>
+Date: Fri, 13 Feb 2026 10:53:26 -0700
+X-Gm-Features: AZwV_QjdPTYSGROVRrHUwHaiEFzXIBOI-ddZDtJ46V5fDmEXVFLbbF4CbXulmPw
+Message-ID: <CAFLszThAYG9UXu0GoUDHv=k44G3b4CMBNdZjEUmHgrneJZAXOQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
+To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,51 +115,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Eric,
 
-On Fri, 13 Feb 2026 at 09:57, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 10 Feb 2026 at 07:38, Eric Schikschneit
+<eric.schikschneit@novatechautomation.com> wrote:
 >
-> On Tue, Dec 09, 2025 at 08:17:06AM -0600, Tom Rini wrote:
-> > On Tue, Dec 09, 2025 at 12:16:33PM +0200, Tudor Ambarus wrote:
-> > >
-> > >
-> > > On 12/9/25 11:56 AM, Francois Berder wrote:
-> > > > Free buf if spi_flash_read_dm fails.
-> > > >
-> > > > Signed-off-by: Francois Berder <fberder@outlook.fr>
-> > > > ---
-> > > >  drivers/mtd/spi/sf_bootdev.c | 4 +++-
-> > > >  1 file changed, 3 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/drivers/mtd/spi/sf_bootdev.c b/drivers/mtd/spi/sf_bootdev.c
-> > > > index 017a74a3016..720faf51a1f 100644
-> > > > --- a/drivers/mtd/spi/sf_bootdev.c
-> > > > +++ b/drivers/mtd/spi/sf_bootdev.c
-> > > > @@ -35,8 +35,10 @@ static int sf_get_bootflow(struct udevice *dev, struct bootflow_iter *iter,
-> > > >
-> > > >   ret = spi_flash_read_dm(sf, env_get_hex("script_offset_f", 0),
-> > > >                           size, buf);
-> > > > - if (ret)
-> > > > + if (ret) {
-> > > > +         free(buf);
-> > > >           return log_msg_ret("cmd", -EINVAL);
-> > > > + }
-> > >
-> > >
-> > > can we use a devm alloc method to get rid of the extra free handling?
+> Hello Simon, Tom,
+>
+> 1. Tom -
+> > And we should spell out that device tree can't set these any more in the
+> > commit message, along with spelling out why we can't do that anymore
+> > safely (why can't we?). Thanks.
+> I would be happy to move the code comment into the commit message:
+>  /* NOTE: This breaks u-boot ability to set board options via    *
+>   * device tree, but guarantees specific known values..          *
+>   * you wouldnt use an uninitialized variable would you??        */
+> These settings could be set by device tree, but every fdtdec* function must
+> set a valid value. If a user has something set differently than called out in the
+> FSP_MR5 Integration Guide the board stability will be compromised. Many of
+> these settings are co-dependant so we would need much more robust error
+> checking. This task would not be trivial. By using the specific values called out
+> by the Integration guide we allow users to begin from a documented known
+> good configuration. Maybe we could set all the values, and then check the
+> device tree to see if the user specified a different value? If the device tree does
+> not call out a specific setting we would not want to just set it to zero for example
+> as this can cause undefined behavior.
+
+The device tree is actually where these values are set for all x86
+boards. If you change any value in a device tree you risk bricking any
+board. It should be considered an integral part of the build. If you
+change the C code you can also brick a board.
+
+So I don't like the idea of changing this to C, sorry.
+
+NAK from me sorry.
+
+>
+> Eric Schikschneit
+> Senior Embedded Linux Engineer III
+>
+> ________________________________________
+> From: Simon Glass <sjg@chromium.org>
+> Sent: Tuesday, February 3, 2026 3:29 PM
+> To: Tom Rini
+> Cc: Eric Schikschneit; u-boot@lists.denx.de; bmeng.cn@gmail.com
+> Subject: Re: [PATCH 2/2] Fix x86 baytrail boot flow, UPD/VPD Updates
+>
+> Hi,
+>
+> On Wed, 4 Feb 2026 at 07:14, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > No, because this isn't the kernel and devm alloc doesn't always free
-> > here. Making that no longer be the case (always freeing) is on my list
-> > to look at doing (drivers that use devm alloc always implys/select'ing
-> > DEVRES).
+> > On Mon, Jul 14, 2025 at 04:02:49PM -0500, Eric Schikschneit wrote:
+> >
+> > > The VPD has been updated to include additional values found in the Intel
+> > > FSP_MR5 Integration Guide.
+> > >
+> > > Disable MRC_CACHE for the baytrail platform as this will break the boot flow
+> > > as well. This issue has not been diagnosed further, but I suspect it is similar
+> > > to my previous patch and related to how modern GCC generates the low level
+> > > op-codes.
+> > >
+> > > Patch 2 of 2
+> > >
+> > > Upstream-Status: Pending
+> > >
+> > > Signed-off-by: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+> > [snip]
+> > > +     /* Set all values to known good defaults as documented in       *
+> > > +      * Intel FSP_MR5 file: BAYTRAIL_FSP.bsf                         */
+> > > +
+> > > +     /* NOTE: This breaks u-boot ability to set board options via    *
+> > > +      * device tree, but guarantees specific known values..          *
+> > > +      * you wouldnt use an uninitialized variable would you??        */
+> >
+> > /*
+> >  * Multi-line comments like this please per
+> >  * https://docs.u-boot.org/en/latest/develop/codingstyle.html
+> >  */
+> >
+> > And we should spell out that device tree can't set these any more in the
+> > commit message, along with spelling out why we can't do that anymore
+> > safely (why can't we?). Thanks.
 >
-> We've since changed so that devm alloc does behave in U-Boot the same as
-> the kernel (except in xPL phases), so Tudor's suggestion is a good one.
+> Again I am not seeing this problem with minnowmax, so would like a few
+> more details.
+>
 
-I still like the idea of having this patch so that others don't hit
-it. Does it show up as a leak on any code-analysis?
-
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Which board is this?
 
 Regards,
 Simon
