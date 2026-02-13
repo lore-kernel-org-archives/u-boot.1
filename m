@@ -4,58 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB34EDF144
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 10:20:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A113DEDF152
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 10:59:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 433D783015;
-	Fri, 13 Feb 2026 11:20:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id D228680FA1;
+	Fri, 13 Feb 2026 11:59:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="h8ag5fo8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nzJl6cA9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A63683936; Fri, 13 Feb 2026 11:20:23 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F3AAF83015; Fri, 13 Feb 2026 11:59:54 +0100 (CET)
+Received: from mail-yx1-xb12d.google.com (mail-yx1-xb12d.google.com
+ [IPv6:2607:f8b0:4864:20::b12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD2BB80FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:20:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 186B380B98
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 11:59:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 2E8811FED6;
- Fri, 13 Feb 2026 11:20:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1770978019;
- bh=QFNliK2OCVn+It/vvqpS0sR0bSWmzSDYt/pA28lYMjk=; h=From:To:Subject;
- b=h8ag5fo8qtWHuM5HloC1VS3LHydrc5uouWnBvxJBx9quiRDHvJH9FGYNGcLWeQm3q
- dk2uA49m8DbFp/A8ZLJigzjpoovUxb9mH7jKvLmu0OOu3nKGM0//NG8uE5GOzm9HWq
- ATC9MzKvqowQOQAXRJizdDjlr+I9+7WaxDYDPUk7NOhOQghXFYZI/KXLdnDjc5TLMs
- 17rbxyXCwCvbjF6tZgAJrIciiDvggbyD9gH5usPbCSU/tILKvNqmPAGjt1ZR6oehaY
- PrYDzoNs0Nxn9mO9pFJXR41by+vxTvER8eQss0mt4GRZTO+gCcbzLsCWCz1vK7pILi
- 7kVs2if4Pdf+g==
-Date: Fri, 13 Feb 2026 11:20:15 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Suhaas Joshi <s-joshi@ti.com>, Bryan Brattlof <bb@ti.com>
-Cc: Francesco Dolcini <francesco@dolcini.it>, Anshul Dalal <anshuld@ti.com>,
- u-boot@lists.denx.de, trini@konsulko.com, vigneshr@ti.com,
- n-francis@ti.com, s-tripathi1@ti.com, k-malarvizhi@ti.com,
- kamlesh@ti.com, vishalm@ti.com, d.schultz@phytec.de,
- w.egorov@phytec.de, ggiordano@phytec.com
-Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
-Message-ID: <20260213102015.GA10715@francesco-nb>
-References: <20260210092646.w5bugrscifmsh5px@ula0507357>
- <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
- <20260210105014.GB214446@francesco-nb>
- <20260211101113.GA176369@francesco-nb>
- <20260211112109.56e27kyy4coqpcbb@ula0507357>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12d.google.com with SMTP id
+ 956f58d0204a3-649df3c22d4so649261d50.3
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 02:59:51 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770980390; cv=none;
+ d=google.com; s=arc-20240605;
+ b=f/qsohBdHM3Q6Xj6x+2N0FGJAZjrjKRJAd19XeQLag45+pKmrLWJBp2dPxBZqcd2IZ
+ E0SDblco6ABmLV9UKtECK+ky7shUOtg7mLjeFFaoX2q1yo2MMDyAWLSiIw00ZHv28PWj
+ atJVyR937KYF+DBqQDPaxJc/A1ElGSxa9KTpBKv5Xd+SF6INXaFpw3tuK2KW9dpg59F1
+ bgCdFDJViiBwcTvpXSCcx738/XacZ+m6NxxfeS5AkGcvN5r6JU1uVOtMJ82FjdOC8lnE
+ zioFKydnw113psFhZ/aeszSTtHDXxZL+lJgldDpQjvCYTvcYZFhIFDGC7sky89J0sXAP
+ wonQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=gY2cwLSBAjOf7MFo+IxXVsCOVBkkl5xq2Pvj/0id8CA=;
+ fh=vyfbts51IeL9YqiXEXChvJnWUKQFbZdi8gERlNYTnqw=;
+ b=fX3n5qi7TyygftixKwXCLT1XQV9lHeGa+3rECtk52KZFJ7pnEg+dTrGuvDd4oWIYJz
+ IDyLk86YL0pfZMeE3YeNQtcz7dgd0Wxaxr+e9gZm+ZpjVEO4EtCeRsB4Ud4PWwLePnzW
+ JjowCSo95jYVRFV/d9ajd25AfU+UT4IeaMpdVwISaLcSsx2AqmYqRGMzRy7bQ6ROBoj+
+ klrNUeVRmwtJdjE/dwI/pg6at3AJKdPgvrL+QyP0RsHUBtvQUGkkreiEPfC24pFRlbV8
+ xz2tXBLZPzcp3hmZsbbGfw/snWwxHQIh/m6fcdBiDozn0bQDYGcm1YbDL2IbuWoo+m0n
+ q77g==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1770980390; x=1771585190; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gY2cwLSBAjOf7MFo+IxXVsCOVBkkl5xq2Pvj/0id8CA=;
+ b=nzJl6cA94KmztZiBv1Vm23j2f2jsG9R0Nq5QuyYiTdtlkdnjOsOcm4NO+IXcZq+IFU
+ XUO6v3f9aXePh5YRvou4y3ldZpnA8wkHDpM/HI6U1U6MzgvWvD0/wes8gB0QKdGSxd3w
+ S/ga7TTRxHGwVfEqwR0J6uVTD8OdoKIAgX9pVCGr88dJMYVw3woSL0UAod7nGZq8nXHz
+ xge6+WK3fyoSz7CvbaJ9prjxS2JpdeaDZPFUmna3macsvxH4GgAclocTUUxmyC3WDmT7
+ EXEqxUOBVxrjLyYOyi3GWd8wzkYMDVmAnpxXbgDgbnALnvsimC4MhvA7VLe2uG08TlrB
+ NSDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770980390; x=1771585190;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gY2cwLSBAjOf7MFo+IxXVsCOVBkkl5xq2Pvj/0id8CA=;
+ b=KyNIEC2v1e6ZwK1a1OLY76ZR6jQLWVhveUyl1OIGUF5n1uNVRscNTRSQJmy+m2Eq2Y
+ 0cLjokApIvNK/s5E/YY+NUhvnAAvjRbFD2X3fk55Z5DQHFcNOLBN1P/mvBDeHt2xUWsT
+ J8g+wSIGMQG78rIoyAryMyknUMyoIXmrS7fNyn2SluOP+og86c4DRyhqe1Vb3lgsLpzY
+ dx8NEWE4M7pWftJZ6e5Yoc7tAR4vjA0/T4qC3Q6kWDsMlkSe+zQutaYtNPM0VuWMQZjW
+ V7yMtmU9iR5SyAhnaRP7DJk4lA4AQfLbNDBul5/5gHakuleU5Nz2hTunm/93SR1CFUQf
+ 1+HQ==
+X-Gm-Message-State: AOJu0Yxd3pcqWnFxzR0QAbg7NHNXM6uCge2X31K624rYiIUjwerwxlzU
+ gVqATlceWiD7gfmHm3x2pevP4YkC8zKImVy/uQrE3voywX8r8fjeFYnVxAPzZm0FgGpr/uIFpxo
+ N5q9cRQ5OzPBTc8woit8bkyTcb0og5ccjPmRZhjVhgg==
+X-Gm-Gg: AZuq6aLoRLnksTRAisi9XRoHdAB2IfK9DxTyi9HLy3iTA7fLqcsJtO+jyypwyLQaRzg
+ NCYSw+/vU3VXi3Qpk1QF0WEPNd3IIXZQm/nBEkG78eSYL6FOGRW3db1Iz2Pq2Sk3eR67/49dZT6
+ QJiXvDW+oZPZ5JzdBsF4PwJRgl/FKvatD/5ERmkPL7ryav890irX6GSuF0w3K+bhqPit+beFIKX
+ mGeKIbULJYmsxvRIXDKxmo0spqlL/z9IMJXhaBgvyQNe1QCD9QdO8H94vN86Ag7YEOJV7oSwHw/
+ kmIeLqUw7jAG+nMYxbFr/sptjzzMxz1rqCoerIpSa73TPkDZThjhvwoFYedyDfcP84QQASgdCvg
+ iO5aRDoukVKKuaBX+XfsIVGqjKAvZm09LaefKeEwsWHFvoB16LC5bk2C1sITWhkDDiqmeQJAt0c
+ yKQg+MI8O0qQcuRtha3Jbvgvuq1I2Fkf5Bz4fUqhqdPcewztvDBcVeI7NDFKbpQ3RAJ7BfF2a+3
+ iknd2dm7nmrHC6FZwU3KJ9OcbnB0YPTw4lRnViWKFHjVPzoBPl8V/FJE0eD/zJIsDlbylcPLjP3
+ PJLBlMt0OterGG2DQI0C8MflAGpzew9aQ5IxwRpLV9+8yw==
+X-Received: by 2002:a05:690e:d07:b0:649:5423:c10e with SMTP id
+ 956f58d0204a3-64c198cee2amr822147d50.38.1770980390571; Fri, 13 Feb 2026
+ 02:59:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260211112109.56e27kyy4coqpcbb@ula0507357>
+References: <20260212204511.619392-1-javierm@redhat.com>
+ <20260212204511.619392-3-javierm@redhat.com>
+ <CAC_iWjJysPTkCTJ10qR8FmNxSBYT6mK7YWoqvxxwez+6H8Yf1w@mail.gmail.com>
+ <87ldgx6kcw.fsf@ocarina.mail-host-address-is-not-set>
+In-Reply-To: <87ldgx6kcw.fsf@ocarina.mail-host-address-is-not-set>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 13 Feb 2026 12:59:14 +0200
+X-Gm-Features: AZwV_QhXbsf1W8YVB_C-DOPZjo-2TZa3shu15803iX_AVJ8sA4b9_V5IsJIzbTo
+Message-ID: <CAC_iWj+F6+U2HhesN_sKxLXPHzSX_J0seK9QT0fxV_agxhkDag@mail.gmail.com>
+Subject: Re: [PATCH v2 2/7] disk: part_dos: Align dos_partition_t with struct
+ partition
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ eballetb@redhat.com, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,141 +120,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Suhaas, Bryan, all
+On Fri, 13 Feb 2026 at 11:52, Javier Martinez Canillas
+<javierm@redhat.com> wrote:
+>
+> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+>
+> Hello Ilias,
+>
+> > Hi Javier
+> >
+> > [...]
+> >
+> >>         unsigned char end_head;         /* end head                             */
+> >>         unsigned char end_sector;       /* end sector                           */
+> >>         unsigned char end_cyl;          /* end cylinder                         */
+> >> -       unsigned char start4[4];        /* starting sector counting from 0      */
+> >> -       unsigned char size4[4];         /* nr of sectors in partition           */
+> >> -} dos_partition_t;
+> >> +       __le32 start_sect;              /* starting sector counting from 0      */
+> >> +       __le32 nr_sects;                /* nr of sectors in partition           */
+> >> +} __packed dos_partition_t;
+> >
+> > This always has to be packed and the part_dos.h definition had this
+> > wrong all along?
+> >
+>
+> I wondered exactly the same when working on these patches and did a bit
+> of code archaeology, so I'm glad that you asked!
+>
+> It wasn't wrong because it was using unsigned char arrays for the start
+> and number of sectors struct fields, instead of __le32 types.
+>
+> Given the alignment of a char array is 1-byte (and all the other fields
+> are unsigned chars), the structure was naturally aligned.
+>
+> But I agree that using __le32 and __packed is preferred, and in fact is
+> how Linux defines this data structure in include/linux/msdos_partition.h:
+>
+> struct msdos_partition {
+>         u8 boot_ind;            /* 0x80 - active */
+>         u8 head;                /* starting head */
+>         u8 sector;              /* starting sector */
+>         u8 cyl;                 /* starting cylinder */
+>         u8 sys_ind;             /* What partition type */
+>         u8 end_head;            /* end head */
+>         u8 end_sector;          /* end sector */
+>         u8 end_cyl;             /* end cylinder */
+>         __le32 start_sect;      /* starting sector counting from 0 */
+>         __le32 nr_sects;        /* nr of sectors in partition */
+> } __packed;
+>
+> The struct_partition in disk/part_efi.c is said to be taken from Linux's
+> linux/include/genhd.h, which was the old location before commit 1442f76d4317b
+> ("1442f76d4317 block: move struct partition out of genhd.h").
+>
+> My guess is that the old data structure defined in part_dos.h was copied from
+> Linux, and that at the time of the copy it was using unsigned char arrays too.
 
-On Wed, Feb 11, 2026 at 04:51:09PM +0530, Suhaas Joshi wrote:
-> On 11:11-20260211, Francesco Dolcini wrote:
-> > On Tue, Feb 10, 2026 at 11:50:14AM +0100, Francesco Dolcini wrote:
-> > > On Mon, Feb 09, 2026 at 02:20:01PM -0600, Bryan Brattlof wrote:
-> > > > Do you mind copying a boot log to a pastebin for me? I thought I had one 
-> > > > of these boards but I'm still digging around for it. 0x80000000 should 
-> > > > be where we load TFA now days unless some boards have opted out of 
-> > > > letting U-Boot move it to the bottom of DRAM
-> > > 
-> > > Here some more logs
-> > > 
-> > > https://gist.github.com/dolcini/aa4b669c6349cc6da1b9e7b19cf53fed
-> > > 
-> > > The files are named with the commit sha that is tested.
-> > > 
-> > > On Tue, Feb 10, 2026 at 02:56:46PM +0530, Suhaas Joshi wrote:
-> > > > Verdin boards are the only ones that are reporting this issue. Is it
-> > > > alright if we revert only the two Verdin-specific commits, and let the
-> > > > rest (TI and PhyCore ones) stay as they are? The patches are pretty
-> > > > un-connected to each other.
-> > > 
-> > > Verdin AM62 should not have anything special, the code is all there for
-> > > everyone to see, including the defconfig, the DT and so on, and the changes
-> > > we are talking about to me are self contained withing the SoC. Something
-> > > is wrong, and we are not understanding what yet.
-> > > 
-> > > I just retested once more 42b3ee7fa524 and it just hung, you never know
-> > > if I did something wrong. And for what matter this was spotted by our
-> > > CI.
-> > > 
-> > > > We are working on figuring out why Verdin is seeing these issues, in the
-> > > > meantime.
-> > > 
-> > > Anything I can do let me know.
-> > > 
-> > > If it matter the board that I am currently testing has 1GiB DDR RAM, and
-> > > the SoC is a AM6252ATCGHAALW. 
-> > 
-> > I was able to trace the issue to the get_ram_size() in
-> > verdin-am62.c:dram_init().
-> > 
-> > That function walks the addressable memory range to dynamically detect
-> > how much memory is available.
-> > 
-> > Not sure on the proper way to fix it however, Bryan? Suhaas?
-> 
-> Yes, this does seem to be the issue, even in my digging. I have sent a
-> patch to fix this. But since I don't have boards, I have not tested
-> this. Could you please test this and let us know if it works, or if
-> there are any other issues that pop up?
+Ok that makes sense and yes, the alignment is not affected by le32 or
+a a 4b char.
 
-With commit f9ffeec4bdcf ("board: toradex: Make A53 get RAM size from DT
-in K3 boards") merged we had our CI running on our whole board farm
-last night.
-
-Good news: the issue is confirmed to be fixed on Verdin AM62P and Verdin
-AM62 [Quad|Dual] with [1|2]GB RAM.
-
-Bad news: we we do still have a boot failure regression on Verdin AM62
-single core with 512MB RAM. I have no idea if this is the same issue or
-a different one, but from the logs it look different (despite that I
-decided to keep using this email thread and not start a new one).
-
-The failing board from the logs uses a AM6231ASGGHAALW SoC, maximum
-frequency 1GHz, we also have another device failing, single core again,
-with maximum frequency 800MHz, the working one have 1.4GHz max
-frequency.
-
-Worth noticing the errors
-  Failed to set clock rates
-
-These are new compared to the previous U-Boot release, it affects also
-other boards, and I have no idea if this is related to this issue or not.
-
-Logs of the failing device (U-Boot is commit f9ffeec4bdcf1da655a0ffea482062adde78fee8)
-
-U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
-SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
-Failed to set clock rates for '/a53@0': -22
-SPL initial stack usage: 13456 bytes
-Trying to boot from MMC1
-Authentication passed
-Authentication passed
-Authentication passed
-Loading Environment from nowhere... OK
-init_env from device 9 not supported!
-Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
-
-
-Logs of the booting device
-
-U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
-SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
-Failed to set clock rates for '/a53@0': -22
-SPL initial stack usage: 13456 bytes
-Trying to boot from MMC1
-Authentication passed
-Authentication passed
-Authentication passed
-Loading Environment from nowhere... OK
-init_env from device 9 not supported!
-Authentication passed
-Authentication passed
-Starting ATF on ARM64 core...
-NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
-SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
-SPL initial stack usage: 2048 bytes
-Trying to boot from MMC1
-Authentication passed
-Authentication passed
-U-Boot 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
-SoC:   AM62X SR1.0 HS-FS
-Reset reason: POR
-DRAM:  1 GiB
-optee optee: OP-TEE: revision 4.7 (a9690ae39995af36)
-Core:  160 devices, 35 uclasses, devicetree: separate
-MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-Loading Environment from MMC... Reading from MMC(0)... OK
-In:    serial@2800000
-Out:   serial@2800000
-Err:   serial@2800000
-Model: Toradex 0073 Verdin AM62 Dual 1GB ET V1.2A
-Serial#: 15412849
-Carrier: Toradex Dahlia V1.1D, Serial# 11287113
-
-
-Unfortunately I do not have a single core board to test readily
-available now, and I will be out of office a couple of days, but
-I decided to share this immediately so that we can try to understand
-what's going on. Middle of next week I should be able to do more tests.
-
-Thanks for the support,
-Francesco
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> But the struct definition has been like this since the original Linux git
+> import, so I couldn't check if my guess was correct.
+>
+> In any case, now this single data structure definition is aligned with how
+> both  the Linux kernel and edk2 define it.
+>
+> --
+> Best regards,
+>
+> Javier Martinez Canillas
+> Core Platforms
+> Red Hat
+>
