@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E72AEEDF160
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 13:24:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF8CEDF160
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 13:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2122683CB5;
-	Fri, 13 Feb 2026 14:24:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1D30B83D5D;
+	Fri, 13 Feb 2026 14:24:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="E14oaSfV";
+	dkim=pass (2048-bit key; unprotected) header.d=gehealthcare.com header.i=@gehealthcare.com header.b="gGJQVrZg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC3883DCA; Fri, 13 Feb 2026 09:50:12 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 92B6D83DCB; Fri, 13 Feb 2026 09:50:14 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE13183AAB
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:50:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EE8C83B9D
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:50:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=gehealthcare.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Brian.Ruley@gehealthcare.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=beLpfixiSRhpTxrYMPmRuQCgREwzsYZFPYU/OCL3stN/lqO6L7qr4YtWo2y0LQy13cExNOLMZUDrvnt+IU92N9dLMxAHi4RVaUdKx9dxiRe4iwBXPyKUnNHkFJYKrSoWM5yHvyoD8y/xdK02e97RUHuYQDdb3I13TkIPmwf8U6EIEqLGpJO7fx3ily+UKMJhlW89fPSY8uu8+CvbwMtkv85lkYYKDPITpRpgI3gVli6UfsezfRw45sfqbPsjmx/+CD4M7BJCDRH3gtRGIyGI7MCs2iCfwj0Bqm3TuxsiI3MMsUY+12Lxs5Z7ttaU3mLvNt4sdBSNCacJaUOPJ3ehSw==
+ b=BUVOkZVLbYs/yMCecX4kUFINfPPvMrlWlCk8F6b6Sn9UALV8ANmvzU2ApVkuTRccJew265atcXW9wJj9RzPGnn48PV+UgbrGS8KAfKNcCVZsMkYKGFZLpnlwCTMWWwfkUHxT5PlkM5Jm7hSxnycJEAxVXDCCP+XVK3SH3lA/5g/UJsemco5hvjU+MRitk5PQ9ER6zeNcOQBUKAIY7oDUnVDCD5/ScOlTjRsLF+7ncguoXWPHePL1l7ld7EuLztyOflwykRhMTsbdMy+IanfW0IYnzRxhdz0GOef9JMFPq4NU94bM3kBdeTu2E4bQGOmcCFiFbAEbQ6NSmjk5CtCy1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=se8EnvWXNoMRImt3aCyFqkCEz+5s3ydWlU4kFxeSVdI=;
- b=rG+03/LwRfj8c0bcnF8jBWsDpnjq15IoeF9NlEtXFb5IlptJl7T0OynOPGM34kCjEDX5i9/Wr1Fq9FI4iLKt6FPl5DW4DJJEtTizEpbSJzNUdiVaryXzaRAtfgNsXMLk1vrWH2QCfI3IOUkry+Z01WjDWc8vdm3x3ITNjqLMzqEcw5ySEvRsO2TgxqQYXLUX1HW6m2KukXvLfx1zl6Xsms38mELDOowOYqFxalcD8LMjO1VU9BmWr2GLoPKLy9L3OqWj2yu7zXdZaY1yQOwej/wGZZtqPYVOY//JFQZVMLd5rnPkV4VtHpG65Cqz78uy5uy/0jfiorw9jlNw0mHD/g==
+ bh=tSxlFbmWV3n47bOr4IvYGKZY0lHCVk3Z8t1deBH6w+w=;
+ b=mcYfKtQQ6d1jlplu2HLnuoRMyziyv+VKvgqtODuaKvya113H8NaHHnnQwzyF9dvJxH2sSnqsvpLgQBCT4y4I7WC4MgJ44bpJo9ikiSyPl9Z7jyNcXRn/MeZCjuXB+SEFkqCBHSSRt14OpUoxvcyBdDftKv9/WsVYso24j/2BwOWTPYTocnpCHnHjnMds4IwA8fKI+1etzEkM/IS/4urXyH8w0OTvzUoB/jmDYmfPknuFDDWqM/Dm/tI5D90Zp/LFVpH1M/9OSJzYkSIqLbpOSlSZ8Tr4guNYPiBtYxNcoP3Dq7DTXvnXr4v1z99clKqacEMxRXaedw0PhXuU/2i7pQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  165.85.157.49) smtp.rcpttodomain=lists.denx.de
  smtp.mailfrom=gehealthcare.com; dmarc=fail (p=quarantine sp=quarantine
@@ -42,41 +42,55 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gehealthcare.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=se8EnvWXNoMRImt3aCyFqkCEz+5s3ydWlU4kFxeSVdI=;
- b=E14oaSfVveEW7qRwCmgLpMDrK2YiGRDvc1vNwFnVdXuINBz0xfFUEQAcQk/SiXmZj3LLDHte1bM0YcLlExEXV3Vm2yjPSkXeigRuWRtH5K2bhxM4uwHbs6dg+hPYjALRvf/i+Wg4QDA7nwQJZZLCYgPRHbyTLTof+IEcy8ExjUf9YfeLxjrQLxkU9Zjr/gh3wqFDO+1Qg99mPJh74fBAIhHhnBWv7C5nOhisbS5GTFLTVYngU1uaDFNZxN+6mCJu4a22Fsdj91fOcyq0oLuriEVK6LADTigM36uNabzbS/WfWLaGi5LC5PQvgne3LX2lvUecXdob7iacQssqQWTspA==
-Received: from CH2PR15CA0008.namprd15.prod.outlook.com (2603:10b6:610:51::18)
- by DM4PR22MB3490.namprd22.prod.outlook.com (2603:10b6:8:41::15) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=tSxlFbmWV3n47bOr4IvYGKZY0lHCVk3Z8t1deBH6w+w=;
+ b=gGJQVrZgfIMDIz6I2SrGR7gqJMWH6zEVgtRAJSaIM/zgaG0elJbxQrJp85OwjL/pnfN7vXuu36Lucw/kxPruwHqqYs/us1FavSZMGI6w+x6B4ggDuRmHLpZkr+fPRdi72PIWFEMcmel5PxEHVsB4LO5Kk0I+xVT3Hf3QbWSVNQgkDOgSKBG28anRsDNUUuSfXxH8Lkn7fJND4N4IGzYKqTXPr+3hQA4ERCSAOekc79OBNKFyYwKtQHPQ31cqPRbHhhn+M6ottex9ZZclJyBDEpOfDmiBp/xwZWp6kiNDaTl/hzgV2gQ0q4Lkaw2938XbYEwD3Sn470hr3LcXTFvMRg==
+Received: from MN2PR01CA0024.prod.exchangelabs.com (2603:10b6:208:10c::37) by
+ SJ4PPF5ED8BD012.namprd22.prod.outlook.com (2603:10b6:a0f:fc02::fa4)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.10; Fri, 13 Feb
  2026 08:50:06 +0000
-Received: from CH1PEPF0000AD75.namprd04.prod.outlook.com
- (2603:10b6:610:51:cafe::55) by CH2PR15CA0008.outlook.office365.com
- (2603:10b6:610:51::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.12 via Frontend
- Transport; Fri, 13 Feb 2026 08:49:52 +0000
+Received: from BL02EPF00021F6C.namprd02.prod.outlook.com
+ (2603:10b6:208:10c:cafe::8b) by MN2PR01CA0024.outlook.office365.com
+ (2603:10b6:208:10c::37) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.13 via Frontend Transport; Fri,
+ 13 Feb 2026 08:49:59 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 165.85.157.49)
  smtp.mailfrom=gehealthcare.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=quarantine header.from=gehealthcare.com;
 Received-SPF: Fail (protection.outlook.com: domain of gehealthcare.com does
  not designate 165.85.157.49 as permitted sender)
  receiver=protection.outlook.com; client-ip=165.85.157.49;
- helo=mkerelay1.compute.ge-healthcare.net;
-Received: from mkerelay1.compute.ge-healthcare.net (165.85.157.49) by
- CH1PEPF0000AD75.mail.protection.outlook.com (10.167.244.54) with Microsoft
+ helo=atlrelay1.compute.ge-healthcare.net;
+Received: from atlrelay1.compute.ge-healthcare.net (165.85.157.49) by
+ BL02EPF00021F6C.mail.protection.outlook.com (10.167.249.8) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Fri, 13 Feb 2026 08:50:06 +0000
+ 15.20.9611.8 via Frontend Transport; Fri, 13 Feb 2026 08:50:05 +0000
 Received: from zoo11.fihel.lab.ge-healthcare.net
  (zoo11.fihel.lab.ge-healthcare.net [10.168.174.93])
- by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 8478DFD318;
- Fri, 13 Feb 2026 10:50:04 +0200 (EET)
+ by builder1.fihel.lab.ge-healthcare.net (Postfix) with ESMTP id 86B03F2E7B;
+ Fri, 13 Feb 2026 10:50:01 +0200 (EET)
 From: Brian Ruley <brian.ruley@gehealthcare.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Tommaso Merciai <tommaso.merciai@amarulasolutions.com>
-Cc: Brian Ruley <brian.ruley@gehealthcare.com>
-Subject: [PATCH v3 4/6] pwm: pwm-imx: enable ipg or per clks only if
- CONFIG_CLK enabled
-Date: Fri, 13 Feb 2026 10:49:53 +0200
-Message-Id: <20260213084956.1031000-5-brian.ruley@gehealthcare.com>
+To: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ David Zang <davidzangcs@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>, Michal Simek <monstr@monstr.eu>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Scott McNutt <smcnutt@psyent.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Wolfgang Denk <wd@denx.de>
+Subject: [PATCH v3 1/6] arch: imx: fix incorrect shutdown call for inactive
+ video devices
+Date: Fri, 13 Feb 2026 10:49:50 +0200
+Message-Id: <20260213084956.1031000-2-brian.ruley@gehealthcare.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20260213084956.1031000-1-brian.ruley@gehealthcare.com>
 References: <"aYtUi1WdLPLEnv2X@zoo11.em.health.ge.com">
@@ -85,59 +99,59 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD75:EE_|DM4PR22MB3490:EE_
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F6C:EE_|SJ4PPF5ED8BD012:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 2aebd8f9-24ae-4aa4-1e57-08de6adce2ec
+X-MS-Office365-Filtering-Correlation-Id: 21a5d859-0ad9-4eab-4182-08de6adce29c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nLT6Xa8TA+qGiHU9lx7n/wDoDrdkxDFN8muM/RPXkeaKf0n6+NGOPu6DxQNg?=
- =?us-ascii?Q?tpcDJ+HTexjaauGfjTx8xcukbf9XYIx5FufyAz73zHFEgpZ24vSQ/vqqxBjv?=
- =?us-ascii?Q?BIntERfk/56RjHeKFwx8G5cClppGMMld/imqkxPFmS6Av5a9WL/YLy6Qtj9Y?=
- =?us-ascii?Q?vMAczt3w7UoV8T4G+dyR6jtcQ+9urXdaT/jy2JrbZGGBJ3ZNcYdlOuAsA2xR?=
- =?us-ascii?Q?TZvdXE0+3EhhJuk61rTGVn4CVE051ZrODpN6toqLvj/36aP2p0fbZWw8o4cE?=
- =?us-ascii?Q?lYlJtIUV3HzK0v1cV4H7EkMIM7ltr7z0sUqvybojoA67nihc+bigYXXCawoA?=
- =?us-ascii?Q?d47w3Jr/QX4ZcRz6xijTgpcGtK1IyZz12ZGIWXG6R/3kjENLavBCS/Pzyg39?=
- =?us-ascii?Q?j7kGRcP0LR+6Un9V/V+CbwqbUuWXHKCWoj9einxUE4r0iy8pvW2xkXLE+Kc+?=
- =?us-ascii?Q?4QOUUQGaVRVpCdUuXfPdoP/jtNhn3MsApqGzxa2wCTYn/4NmzKTNjSpg4g5Z?=
- =?us-ascii?Q?2om3+x0n715/AWdHozy7Tm9d7FBRQ6mzq6Jpd7sbzarV8hjopj8c5H8benhj?=
- =?us-ascii?Q?3/4oiXt8sihIpNNKyegxMLotaS4l+BXl/TGY28UuiuBlIFviVIbRf5qtshK4?=
- =?us-ascii?Q?GR26dt8eywArib5xJDzhhs02x493zXAyVeSLyt63sPZTjx1V64AgsPhH7leE?=
- =?us-ascii?Q?+zr2CYwITx8kO9ETR4iWPR/LSLyxwtN23UjNECY4QS5JhTqlHCmmoo2wzkOx?=
- =?us-ascii?Q?Tj0cyMdnzcBYyLlmQXuOVss1HEq6gPfwLfqbI4HifnYcWQkEbXHCdfoV10kd?=
- =?us-ascii?Q?R9HSRJ93XOkEbfox2woFji/tr5ifbk3e2CZsyI2yHqXgKD1/1p04yDlbxW47?=
- =?us-ascii?Q?sNKcMEa/W12mLJMrrK/bliF235lQj7+JRiI6uSnb0n9rfSBP+Fd4lQ+xWcgt?=
- =?us-ascii?Q?WCnR0CGJAIUpWGG9Al8Lyj6dLK2v1RZUVcQSzFwmO7vgIqKfwpB9OA9Zi6zp?=
- =?us-ascii?Q?QivCodc9vaTD7C7EA4NIWkAkpjDb1JU2bcvq0pAiR0QPYJh3Lu6oxN45H8tR?=
- =?us-ascii?Q?8/mqDt29LvPXNo71coMu+P6NhO8g4vnbGYB35eFK9tk8Oo3iZMhhyxJtgT7p?=
- =?us-ascii?Q?DuJkX1vxUt5WvMzJEOMCmMfDVvgWlKIsiXefX1TwQvoZKQkkBiXoT6sNfcEL?=
- =?us-ascii?Q?aXQ/JUC8qteQUtEl+BImVIahpaXOcpUnZ2f0oa4XurThUEPnN/nUD6LUoWyo?=
- =?us-ascii?Q?mZSZiLFIACIETGW6wLXLdq8EdBk7ZLM082w4JkXikj3GfwKn4SXZOdjQ4Fw5?=
- =?us-ascii?Q?nkp6elbYcS7fa9XQY8ZWK0lEDDwcJ0qNI80OS1We0Kf/GOkHHYxaXsQgCSFj?=
- =?us-ascii?Q?fn9p6m+ZUHoia/UR59J73Kq4D4cO1U3Y4kZPS8sKCsgL0r1fU0XclXZyzqdD?=
- =?us-ascii?Q?nYCS8lSX7TgfU3gzu+wmKsEZH0P2dpjLLdZ+gR1I3oCgA0G9TjJQ4xjyEOxQ?=
- =?us-ascii?Q?Ncbzznb5/sAxNw1tR7z/ZtdQnNM1RmPVAdM/a9oEJb+L0yYAmOsH7uBHZTj4?=
- =?us-ascii?Q?oubAzvexsigb95mYdEZPEUPROWhYHUuNjsSYMfpKnmKklVj0eSShWXLKuZVF?=
- =?us-ascii?Q?mNtWNxLTtnLQVFGiBLIedMt6O0Qrm0dpqv1RZ67HcXfNuaZksCjQ+Uk9O0to?=
- =?us-ascii?Q?J1OzAw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ekriRu7I4qLGan04STv1M8Y7A2SoPe0jq62xyw4h95FI3IprLX9uYB35BP+/?=
+ =?us-ascii?Q?oTbvlyJ/waoUtGMp3jsL2EGp8/ET7PqYpQJqAUexqqkaCmQVNSIbe91ylEf7?=
+ =?us-ascii?Q?qcOpqEx//G7baQYeMRxFxTAAol/uzi8mOcX/3o4+9mbr9zSRgcPziJiMZVit?=
+ =?us-ascii?Q?S4CMNbur59xT/LjDso7u60e9QsLU4lvIlSSa8bH6yWma8Ul33W/d3BgWlTEO?=
+ =?us-ascii?Q?jKEU39a4uMxvjW/OovLUKdJt4+h7WCBHpATPnkBO0sDno8HuPdAawO8n+CQ1?=
+ =?us-ascii?Q?yhanNuFoQ+H4w/Q5YPLRSQR0xlfy8VtOvGKPJDW77E0y0TV7xexXam9gjCtB?=
+ =?us-ascii?Q?I0epFTQvUALe1C+3occvXx4NZX2hgSOnzG1dMEYMst7pj8x95oBGHsdIVaxN?=
+ =?us-ascii?Q?XwnXTSI8lL6VObnOL2sf121/miXwISNlxs5DRj5RwrDr2TsAllGdGZFuVJur?=
+ =?us-ascii?Q?Uw3vNJWx9ee+M8mwm5gpAaqDqnQN2iO95J5SoSjIwrgErK1TmnWLCmxIBhK3?=
+ =?us-ascii?Q?aEMr7Noywj1liGcGuVVWAeMmMl4cgMownw0r2LSFyidvCBSJdqH+bvP79q9G?=
+ =?us-ascii?Q?GL9Wym6T53F9FX8v8BgEAOBptQYFx11/+V9Dc+caeVUgHbNhTzzVW1bF1o9B?=
+ =?us-ascii?Q?er0vud+EEN7+JnOvThmT2Za2+zbTCIocaeh9LOsY/Sx/P/b2c2eoyzZOh4D0?=
+ =?us-ascii?Q?M4FlzyuRy3MML5BjtoFwL57txO0iy0/cy5GSmsG21/L//BWd5NCNYTLQ1A2J?=
+ =?us-ascii?Q?2Fi3NOdCuxPalGg/0FlcGG805j6DDofWkrASscIjGk3CT7XJ9NKZacVOeKXw?=
+ =?us-ascii?Q?oxngjRgO3docxSfz9FHGGzYTuqmkYjcQJNlhZFm6p9Bw98anTWw5hu8CiGHN?=
+ =?us-ascii?Q?Srv0nh9R6nVqwctcFYlzCS5hgHkZ8HiIMWncaNF5EJaW7u94BPQo1HmMS0wT?=
+ =?us-ascii?Q?f2m1zJYzGFfFDnxEdtvLp2e+RWlq9uby61lLry40GsobdClDbGr+qyiOvjn4?=
+ =?us-ascii?Q?ccsOcZQGpHqSaOyt3Pq42neyf7s0pqhAasTc7JrXxEWLBKUH8Z4BqzczuHvE?=
+ =?us-ascii?Q?xkkuSvVIgjMLSxskSA/Szv2NGRiUySExs4i63SeTy6dI6XtHHaSHvECHa++g?=
+ =?us-ascii?Q?YcQLcbyGrY0xWzEigyPK9xim/l3tI2tVaOSYGB7flswrtcHqYaq5pIEovIrK?=
+ =?us-ascii?Q?q/skGIPLJnwh5C4JwczF3ZRcnexakuMR/8NafGRnXGmob0bHp9210CG4uJ0C?=
+ =?us-ascii?Q?FdTd89Q9WMFnQ8hAW2SJH/sgLQ9upooFOTwo7AyRdc9Nnyz34+iYjAIdX7bY?=
+ =?us-ascii?Q?toJfrIMWB/+wBkUt1FuyI0pWGrnORgYweVoKIUCe1vn4p6nXI0XXvPT+Nvpi?=
+ =?us-ascii?Q?3M7l5rHUpuqoRn1FRLP28KlRtM/rXhsz6EHjCl3CnonFNn+JgcF11Z4haEzy?=
+ =?us-ascii?Q?DnbnSaObQ8sRKIPme35MF8WtubyZHwwOFAXN8IhX7eRRIhVeOujsOt+MQAZf?=
+ =?us-ascii?Q?XXmxRJH/Qq8iN0N+Ps/xJMdJs6ZcGFSbW/WD+f4WFf6DolXHOr25T846YzP5?=
+ =?us-ascii?Q?0h3GOr383l6i6hMtXKYqL2Td058YAMRnEF7ASFD+B0wqhSPakhZcTAcWmHOZ?=
+ =?us-ascii?Q?CEw0s9v7iwwAy3gUtgkpPN927Lk3LfXPqW2jXPKQwRkx2LOcSj48MFGZloJe?=
+ =?us-ascii?Q?kgc0LQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:165.85.157.49; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mkerelay1.compute.ge-healthcare.net;
+ IPV:NLI; SFV:NSPM; H:atlrelay1.compute.ge-healthcare.net;
  PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 7q+fl19MDsEGG4dXBwZKgink2mepNghK0d46LRjK5iCMtoDtXrYyG58zJ9u1VS5VNj4LUI9+LkEzwo7ZLxjVfmG93z8DtHzZTLXORLcrFu5v0pzlKvPAwV41jPW2V3rEq6065KjQRHvj7/736AYiPPM+8hQ+Xagwn1FAUQCbleKluYwNhWpTnklX4KZWwpSpWNb6cK1hGysn5j+dyZ07/LWNEaDIqgJoH9oHbfP9TFcmVJzTk7cj1aZOG/vo23HZhc2XwoNkhM9XYNwfuhb5LbSihNLNP8pnnfdJ2yZWLj8zWv5wdmBeOjkQX4laEzTJaMo5KqVUdAOYxukq2SkQFspiUJMVtzIryJHz4qLHrUEufgD+DBB3lBOhIBthux1A+CFViY1kSSge0bXrHSBbu+3bs7EB4zKLpeTIdYz35PBRikClV7QdknCI8KgA5HE6
+X-MS-Exchange-AntiSpam-MessageData-0: fk6gbiyWhmqWmFN03VYHC/7NS/ddGPr3C2Pf+xQDUEOOTjEiYFcLWlgeVMbg7JXCGJbAzQB1vCqresxPDFmj2tfmVcVKHHGQBfn/N0F+xBcA0aUt5ObG/JzKfn3umcCuTvvNydQWPzx0TOmtDhUiyKuXoczXbB3D3hHwQ4jPnmZlpSwfXGcfdDXsX5M5trt2nsUGOwzJoyZnRpMN30PiKCbtt9q+F6e9QgLTvxOquVgr6ndzOMLaK3cxq+NV0tuH5oMas4StdzoQ9RebJlaQaP+WdHclR2HHAHwoUXwpyp4I9vRk4eBeMpxI4sg/c1aOw/BBoO+2Z5ASzYWT4WQ+rlDGZPFUPUGg700o6DBHD6mzynrNNo4n5eC4ijt6qjo0RoLyKSxCcfZy8wNQ57yaQKp1+HjQfgJ91q8xbgMbMnKIZxA0kw6lwPDuZQ9WqJ+Y
 X-OriginatorOrg: gehealthcare.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 08:50:06.4485 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2aebd8f9-24ae-4aa4-1e57-08de6adce2ec
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Feb 2026 08:50:05.7864 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21a5d859-0ad9-4eab-4182-08de6adce29c
 X-MS-Exchange-CrossTenant-Id: 9a309606-d6ec-4188-a28a-298812b4bbbf
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=9a309606-d6ec-4188-a28a-298812b4bbbf; Ip=[165.85.157.49];
- Helo=[mkerelay1.compute.ge-healthcare.net]
+ Helo=[atlrelay1.compute.ge-healthcare.net]
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CH1PEPF0000AD75.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-BL02EPF00021F6C.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR22MB3490
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ4PPF5ED8BD012
 X-Mailman-Approved-At: Fri, 13 Feb 2026 14:24:08 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -155,85 +169,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This caused linker errors in cases where IPUv3 was enabled (which
-defines its own clocks).
+Somehow I missed that ipuv3_fb_shutdown() can be called for inactive
+devices, resulting in invalid memory access and preventing the kernel
+from booting.
 
-Fixes: bfc778cb93a ("driver: pwm: pwm-imx: get and enable per/ipg
-                     clock using dm")
+Fixes: 32da6773f62 ("video: imx: ipuv3: refactor to use dm-managed state")
 Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- drivers/pwm/pwm-imx.c | 48 +++++++++++++++++++++++--------------------
- 1 file changed, 26 insertions(+), 22 deletions(-)
+Changes in v2:
+- New
 
-diff --git a/drivers/pwm/pwm-imx.c b/drivers/pwm/pwm-imx.c
-index bb37b39fa0e..fc5d2a3e5e3 100644
---- a/drivers/pwm/pwm-imx.c
-+++ b/drivers/pwm/pwm-imx.c
-@@ -232,17 +232,19 @@ static int imx_pwm_of_to_plat(struct udevice *dev)
- 
- 	priv->regs = dev_read_addr_ptr(dev);
- 
--	ret = clk_get_by_name(dev, "per", &priv->per_clk);
--	if (ret) {
--		printf("Failed to get per_clk\n");
--		return ret;
--	}
--
--	ret = clk_get_by_name(dev, "ipg", &priv->ipg_clk);
--	if (ret) {
--		printf("Failed to get ipg_clk\n");
--		return ret;
--	}
-+        if (CONFIG_IS_ENABLED(CLK)) {
-+                ret = clk_get_by_name(dev, "per", &priv->per_clk);
-+                if (ret) {
-+                        printf("Failed to get per_clk\n");
-+                        return ret;
-+                }
-+
-+                ret = clk_get_by_name(dev, "ipg", &priv->ipg_clk);
-+                if (ret) {
-+                        printf("Failed to get ipg_clk\n");
-+                        return ret;
-+                }
-+        }
- 
- 	return 0;
- }
-@@ -252,17 +254,19 @@ static int imx_pwm_probe(struct udevice *dev)
- 	int ret;
- 	struct imx_pwm_priv *priv = dev_get_priv(dev);
- 
--	ret = clk_enable(&priv->per_clk);
--	if (ret) {
--		printf("Failed to enable per_clk\n");
--		return ret;
--	}
--
--	ret = clk_enable(&priv->ipg_clk);
--	if (ret) {
--		printf("Failed to enable ipg_clk\n");
--		return ret;
--	}
-+        if (CONFIG_IS_ENABLED(CLK)) {
-+                ret = clk_enable(&priv->per_clk);
-+                if (ret) {
-+                        printf("Failed to enable per_clk\n");
-+                        return ret;
-+                }
-+
-+                ret = clk_enable(&priv->ipg_clk);
-+                if (ret) {
-+                        printf("Failed to enable ipg_clk\n");
-+                        return ret;
-+                }
-+        }
- 
- 	return 0;
- }
+ arch/arm/mach-imx/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-imx/cpu.c b/arch/arm/mach-imx/cpu.c
+index 20c741283cd..8af45e14707 100644
+--- a/arch/arm/mach-imx/cpu.c
++++ b/arch/arm/mach-imx/cpu.c
+@@ -310,7 +310,8 @@ void arch_preboot_os(void)
+ 	/* disable video before launching O/S */
+ 	rc = uclass_find_first_device(UCLASS_VIDEO, &dev);
+ 	while (!rc && dev) {
+-		ipuv3_fb_shutdown(dev);
++		if (device_active(dev))
++			ipuv3_fb_shutdown(dev);
+ 		uclass_find_next_device(&dev);
+ 	}
+ #endif
 -- 
 2.39.5
 
