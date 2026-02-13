@@ -4,93 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92EF4EF99DB
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 20:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE17FEF99D3
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 20:20:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCA5383AA9;
-	Fri, 13 Feb 2026 21:20:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1913A83CF2;
+	Fri, 13 Feb 2026 21:20:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oZO1DiCl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SwnNzhBz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91BAE83E0E; Fri, 13 Feb 2026 21:20:41 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 8CB7B83CF2; Fri, 13 Feb 2026 21:20:49 +0100 (CET)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D91EB83015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 21:20:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8912083015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 21:20:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2ab46931cf1so11419515ad.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:20:38 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771014037; cv=none;
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-c2a9a9b43b1so888305a12.2
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 12:20:45 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771014044; cv=none;
  d=google.com; s=arc-20240605;
- b=HhfqfF7mPyV+UkUW9nryzYz365sEZosNx7vcdnBTWJvCDsQNUt5G2HtSquAJGOIlgL
- 85kVvaykSUI/oNTf0hfSAMSlcHBrW/ZclzRWtFzgX2MDeTsNnPt1Gh6Ixs79fMASYYua
- X9nubCmbksUeOWZ+QJKyenSDR05FIawXqVTl6O2tTzStA/sXtN0n13tdlMFPQ2fHLZiQ
- G2bhXSHMsWbiAFOfZnB87MTa9mGw62EXmvlIdAentNtjPfGknZWwtqd9fMIh9Vcrh5gu
- qNBzO6/QurYnPJGc6DU/MI66E7wRW5d5978WHLEa4PB6VlZmRup8jVOI/e6sEU334XmL
- /mFg==
+ b=JXoYdQAFq01LYTkYfsiopJojphNDSPmkxiaBMdVOvEJgM1T8jHG9w32XZaMRo3hIYs
+ ZwX3X4eFDjB7hBwyvwctYRtodBfNy8yyUPYWRdXVKyI/fD5GprQceFjP5XeVBa5//Yfk
+ b4nZzFA9T6li9auS8/LHffNQr5dJqR7nqlsI6SDcFC0k6QDyL099sL7O7S9CUItGfsCF
+ h4fjVeGE5clh4ZAZt6u+LSNFequlAfaPmc/K3ckRCkykmjFSdp6Kw62hQqW1ma/cZsIs
+ n/cvj6hUtVKzWlZDrr9TPPhWRsRVlLZCb+rgI8uBhJGcdJSO75MZJvU3U56tS7PA64br
+ OlOg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Tasgvjg/9rSr6PqqAnpgZqUjxPALpLATTvHnlFo8jJg=;
- fh=BNXxXodM6x/TTtNw5dDUbIgJJ3THT0IIKdNrgcKqd+M=;
- b=SMb1GmDHyb+zbrgHm2VFHc8JGupE1BnvzFtlgtafjp7rxpHq8DiT6WeKfRaikal0fd
- MuDQriNJBM+5zvhYTep1qU4W/bsWTBelbtuNpzCOfYPB8FroxzzpLk1aomVwxkyz7ebI
- iEcVcyoEIcFkjRvT3aJAp92WQKdEO/kUMVnEStz+VJaIfcn/L8nGQvW1Ly0bYuzn6Zt6
- 77JNYNGOsfhZLbN94jHozdnzApUFeSnoUPfvtiMEW7+Jws84+R+sg0SqALzfUV5PGFas
- bdIpKbFPggZkLW0wVm9fDetIv8oPEV/9iKEBd89Dn9+n4b3+q6EwFa/T9uSuZJ2SEfIs
- og2A==; darn=lists.denx.de
+ bh=7y+1mshWv2DIvvYrWrjUzwdfiPSR85EXBWQsCUVT9M8=;
+ fh=4LtZ/CwKDHgVbXOMHlNLsvz29Pn69x+uUFNhmsEpgAk=;
+ b=iJ0rCtK7fYGsEC/2zPrw9cLuxP9l9lKn4y7qNFbpTqdr9GRyBawly46IDpnLJlcA+t
+ 4MHvgQmWVioXIROWVFCyrwiZINX11qe8fKg6vlE4yqawPUwsSBDAKrxKdJ7S6SQx1rG2
+ aj5RGQcSMpGGlRC+zvqp3Ix8q7CN20+roSPt9wqLrEwz2mvyj5hSIjwx//LPRH1pFEDF
+ +/rWHXizAdQN2EyGjr/T4m3MKwXubHhmeIfON0oUhc+m57Tb7Th++5TcWfD8MF285YdZ
+ LYMuyh6BNz0Nkeqa+Vrlty47AEaMUph1PD31eviof0ZUB4FGcXBYDGRR0FBQXL7gfrV1
+ aaaw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771014037; x=1771618837; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771014044; x=1771618844; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Tasgvjg/9rSr6PqqAnpgZqUjxPALpLATTvHnlFo8jJg=;
- b=oZO1DiClkREW6imJU4kl9JeCyyXy7kMDe+iFjs1SlMqZNhAY0CtNuR4BdZ3FFBZWGy
- rt9cFc2qZf+d9u/hnjnRX4Q32mJFuZSI01vbcCsl6pSkPqGYLNPMhPqgFLcUf6Jc9M1N
- N76Sf7Eg7Cxme6mR2Nmy+MJuS4+JKoKMc9WJA=
+ bh=7y+1mshWv2DIvvYrWrjUzwdfiPSR85EXBWQsCUVT9M8=;
+ b=SwnNzhBz8fP3ahTw/ar4H2ELpcj9duxeLT6JgnqN9uAXNcWN6UmKSzv+I0MkfYAf+C
+ Q874pPdCh1z/Lo4+pzYRdITxWgIPpPkUQDE6bgZLkAbSBgiH/9MI+n7ZQ5kIqOsrcg3u
+ DgHbBf0BR9ZIMUKYJ6jrN5q/gx7zXPppQ98Mg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771014037; x=1771618837;
+ d=1e100.net; s=20230601; t=1771014044; x=1771618844;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tasgvjg/9rSr6PqqAnpgZqUjxPALpLATTvHnlFo8jJg=;
- b=Po2BjfrKN4UaRN+wnW36eTHVvOkMfKQvB3eX/19WmjXmrj6Zid0mOcTrvmKuWoi433
- OZ4orFl9l+TQohtDUymWb3q8X9Tm5YPyHv5/pDm2KyTUzr5IjkzaraxCYS57uW+lfEOI
- fS8h5NYyEyoPTtnXnN0tL9iLul6zlMdTqg+MB5/mEPqoEp4kce4fq1PXur7EeXS+M81b
- fxq64yY2G7JkJScThsLqYvN5aKbXjnTsBp3F8DyBv2hO6Tm5JoORubCyha/lfZxZRDH/
- i/ow7LQHBwaz32xRF3+T46qCgEzMh7L9OlduxsBeuHawrw0AGwPW/S6+snbtq2T5CsI6
- NQHQ==
-X-Gm-Message-State: AOJu0YzhRHP/3Ol7AsGEOwLgcHK/YilrNFdMEeKMiQidRlIV/Qf/M9oD
- BPmypRliC37vYt6IpytR8KvaeFbER6GsKp7FeKoNKKVPNDWE1Ut4oa60s8OnZUz4aBiWm4khNYc
- oweF7rrHeh1YAUSlol1IDOt/ZwJ096luDPMUI9dqO
-X-Gm-Gg: AZuq6aIAinBE74IqL3zCIE+Ewzm6DcUIZB5VvsaSHL9yCcf48NSe1IzokkK/gD0HDDg
- YP5wDCvYRcOgC94a+KKYopz2cQNfZG6+7/8cZTn3cJO8IpihibJ7jrudoNEyBATgsqJ3Gf9J/3p
- NqUIeRFLpKHHurUaoD/Ms2FcmPhQsSACvf3oyNAzIov8U1TcKtpOc3GxrFiT/zQ40EhU6fMqmBT
- 3p/+DFqM482cFP0bcyH25fMB7Se3psmzk8ex9I+UW0hI0sMrrZ0zC9DGp4EZ+DEukOeN/vkl8NP
- tIl7
-X-Received: by 2002:a17:902:e745:b0:2aa:e0c2:3bcf with SMTP id
- d9443c01a7336-2acba48ea44mr12648475ad.22.1771014037392; Fri, 13 Feb 2026
- 12:20:37 -0800 (PST)
+ bh=7y+1mshWv2DIvvYrWrjUzwdfiPSR85EXBWQsCUVT9M8=;
+ b=J3ltonki8Oj4TJO/i0q0iL+67nA6WMv4/6jQ7ILgup9cV/Yc2t5YZaNldHunb7AXMc
+ VrweE990uAmQ4BrRHkJsdTu5jyLcXpoPfv+Dsxpl6n/e6iTvNx0HGNc+sEsr5fMCxOoo
+ NLea/bR99weunpc4iHHKRCKeTz3Z+3WRK75lUkOD5eukr/kch23OHL+j2vhpvypZaJ3b
+ 9KbYNnPyNJlHE2WiNd/WehF63z8hdKwYLa83mQ+zWz1oxyKTm5tKAWBen89QAu3GtYsK
+ ybzKSriMgwh+vsXPZtOdALo7D361v7O8UpJ4tFD14U2pMb27AomPd0q2LZSuC5K7Blk7
+ 5foA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaDwuQ1y5l00F8HJhQFPFVfPu+jKBNu9nB9o9eTI0buOYplEHq3KBU+l3i5NJWiZ059bidflA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQn637CukgotechK2z1yegb+VVITAAPuNdfHof2HMt+rOtjhZj
+ KO8+Bbx7y3Oj2uWU8qaLw7VcMDJe9DcQDIxrtSa34pyk1mL1z/5XhvKnkJuJ+mzUbIEmvTxqBIr
+ IGG841GhEy9cfh9EVxGVy8A4qoiTLCg567KgFin95
+X-Gm-Gg: AZuq6aJ3XKMCnxecRt/zHfndr036ylqbD4x8iSjCmEM/GazL9gtE3ZQ/Wtu7tQS9ppg
+ ZvbZNxtmaRteWzUyqpc6zTo3P0AIUY0mF506vrR5WiAMowNmMD93Bn5ZPOPgVkJPdSEhXuKhqa1
+ hmjqyqtqEJ8ug8GAsObLALkxkQhNdASvcjpjeUltK8GAxlQwOsWOVmE+Goi1f2RHY5xes/ZFgvY
+ ZIyqCbjzhrZw0iYb64jw8arFUPYOuqjvwSkuL81wXCs1n3dAdUdPR5+wOKLbD72s5abxjDhxKuZ
+ 8M4s
+X-Received: by 2002:a17:90b:53c3:b0:32e:7bbc:bf13 with SMTP id
+ 98e67ed59e1d1-358450eca4emr577928a91.34.1771014044067; Fri, 13 Feb 2026
+ 12:20:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20260213192838.157084-1-marex@nabladev.com>
-In-Reply-To: <20260213192838.157084-1-marex@nabladev.com>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
+ <CAFLszThUMWgySrb4H2F5PE6XVsRK0Cc+PZ37f_3xZ12HEhM=3g@mail.gmail.com>
+ <aXg8ge6z7EMWliSd@hu-varada-blr.qualcomm.com>
+ <CAFLszTh-B=zQyBjwJ_OuVxAbpTpUaKB1e9zB8Nm6+wuJCK5OcQ@mail.gmail.com>
+ <aY7x9EAueKZ9Xxmt@hu-varada-blr.qualcomm.com>
+In-Reply-To: <aY7x9EAueKZ9Xxmt@hu-varada-blr.qualcomm.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Feb 2026 13:20:06 -0700
-X-Gm-Features: AZwV_QhAFZf7t2HWTevsZGO2b_E1XRkTfQ4gwdYKQNsT4PGUDjQ2vAbv_bScYB4
-Message-ID: <CAFLszTjHZ+a17+bZh17DMOJGny6VaWCe4EftpYRE1Bq+RAty4Q@mail.gmail.com>
-Subject: Re: [PATCH v2] binman: add CST backend selection for i.MX8M signing
-To: Marek Vasut <marex@nabladev.com>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>
+Date: Fri, 13 Feb 2026 13:20:10 -0700
+X-Gm-Features: AZwV_QhCt1kcZ4T10jTu4D-4YB4ynFUDOeztp345Za7WNr3imK5w72uqZNZ2HZ0
+Message-ID: <CAFLszTgWW0-3hXkUWVmiDgfT1yMZMkjX8zDsT8Qf846ZgaA2Xg@mail.gmail.com>
+Subject: Re: [PATCH v6 2/5] drivers: sysreset: Add sysreset op that can take
+ arguments
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: trini@konsulko.com, casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, jerome@forissier.org,
+ marek.vasut+renesas@mailbox.org, 
+ ilias.apalodimas@linaro.org, me@samcday.com, aswin.murugan@oss.qualcomm.com, 
+ clamor95@gmail.com, michal.simek@amd.com, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io, Sumit Garg <sumit.garg@oss.qualcomm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,133 +120,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Varadarajan,
 
-On Fri, 13 Feb 2026 at 12:28, Marek Vasut <marex@nabladev.com> wrote:
+On Fri, 13 Feb 2026 at 02:42, Varadarajan Narayanan
+<varadarajan.narayanan@oss.qualcomm.com> wrote:
 >
-> Add support for setting the CST backend, both via DT property and
-> CST_BACKEND environment variable. The CST currently supports two
-> backends, 'ssl' and 'pkcs11', with 'ssl' being the default when
-> CST tool is invoked without any -b parameter. Keep 'ssl' backend
-> as the default, but explicitly pass it via the '-b' parameter,
-> unless the user selects 'pkcs11' via either method.
+> On Wed, Feb 04, 2026 at 01:23:05PM +1300, Simon Glass wrote:
+> > Hi Varadarajan,
+> >
+> > On Tue, 27 Jan 2026 at 17:18, Varadarajan Narayanan
+> > <varadarajan.narayanan@oss.qualcomm.com> wrote:
+> > >
+> > > On Mon, Jan 26, 2026 at 06:15:34PM +1300, Simon Glass wrote:
+> > > > Hi,
+> > > >
+> > > > On Wed, 21 Jan 2026 at 19:39, Varadarajan Narayanan
+> > > > <varadarajan.narayanan@oss.qualcomm.com> wrote:
+> > > > >
+> > > > > Add a 'request_arg' op to struct sysreset_ops to enable sysreset drivers
+> > > > > to receive arguments given to the 'reset' command. Process the
+> > > > > request_arg() op before the usual request() op.
+> > > > >
+> > > > > Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+> > > > > Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+> > > > > Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> > > > > ---
+> > > > > v6: Wrap this functionality inside CONFIG_SYSRESET_CMD_RESET_ARGS
+> > > > > ---
+> > > > >  drivers/sysreset/Kconfig           |  8 +++++++
+> > > > >  drivers/sysreset/sysreset-uclass.c | 37 ++++++++++++++++++++++++++++++
+> > > > >  include/sysreset.h                 | 18 +++++++++++++++
+> > > > >  3 files changed, 63 insertions(+)
+> > > > >
+> > > > > diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+> > > > > index 0181f6cd581..6fb0ca81dc6 100644
+> > > > > --- a/drivers/sysreset/Kconfig
+> > > > > +++ b/drivers/sysreset/Kconfig
+> > > > > @@ -49,6 +49,14 @@ config SYSRESET_CMD_RESET
+> > > > >         help
+> > > > >           Enable sysreset implementation of the reset command.
+> > > > >
+> > > > > +config SYSRESET_CMD_RESET_ARGS
+> > > > > +       bool "Enable reset command to take arguments"
+> > > > > +       help
+> > > > > +         Pass on the arguments received by the 'reset' command to the
+> > > > > +         sysreset driver(s). The sysreset driver(s) may make use of the
+> > > > > +         additional arguments for implementing arch/board specific
+> > > > > +         functionality.
+> > > > > +
+> > > >
+> > > > I haven't been following this, but what sort of args are you planning to pass?
+> > >
+> > > As of now, an argument to indicate reboot to emergency download mode.
+> >
+> > So how about adding a struct in sysreset.h where you can include a
+> > flag word and create a single flag for your case? We should be able to
+> > handle reset without the cmdline being enabled.
+> >
+> > There are other cases where this would be useful, e.g. an EFI app
+> > rebooting into setup boot.
 >
-> Signed-off-by: Marek Vasut <marex@nabladev.com>
-> ---
-> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: Fill in documentation for all used DT properties
-> ---
->  doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 30 ++++++++++++-------
->  tools/binman/entries.rst                      |  7 +++++
->  tools/binman/etype/nxp_imx8mcst.py            | 12 +++++++-
->  3 files changed, 37 insertions(+), 12 deletions(-)
->
-> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> index 1bea091344d..a3ebd397d82 100644
-> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
-> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
->  variables. The following DT properties and environment variables are supported.
->  Note that environment variables override DT properties.
->
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| DT property        | Variable  | Description                                                      |
-> -+====================+===========+==================================================================+
-> -| nxp,loader-address |           | SPL base address                                                 |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> -+--------------------+-----------+------------------------------------------------------------------+
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| DT property        | Variable    | Description                                                      |
-> ++====================+=============+==================================================================+
-> +| nxp,loader-address |             | SPL base address                                                 |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,fast-auth      |             | enable fast authentication method                                |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,unlock         |             | unlock CAAM in SPL                                               |
-> ++--------------------+-------------+------------------------------------------------------------------+
-> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
-> ++--------------------+-------------+------------------------------------------------------------------+
+> Previously, i.e. v5 [1] didn't have SYSRESET_CMD_RESET_ARGS config
+> option. This was added to avoid bloat code size for platforms that will
+> not need this. Please see [2]
 
-Perhaps point to an example?
-
->
->  Environment variables can be set as follows to point the build process
->  to external key material:
-> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> index 8922d6cd070..29bc778d0e5 100644
-> --- a/tools/binman/entries.rst
-> +++ b/tools/binman/entries.rst
-> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
->
->  Properties / Entry arguments:
->      - nxp,loader-address - loader address (SPL text base)
-> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
-> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
-> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
-> +    - nxp,fast-auth - enable fast authentication method
-> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
-> +    - nxp,unlock - unlock CAAM in SPL
-> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
->
-
-The way it works is you add this as a comment in nxp_imx8mcst.py and
-then run 'binman entry-docs' to generate entries.rst - see here:
-
-https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-documentation
-
->
->
-> diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-> index dd9f226b751..3a95da6a35d 100644
-> --- a/tools/binman/etype/nxp_imx8mcst.py
-> +++ b/tools/binman/etype/nxp_imx8mcst.py
-> @@ -90,6 +90,10 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->                  'SRK_KEY', fdt_util.GetString(self._node, 'nxp,srk-crt',
->                                                f'SRK1_{KEY_NAME}.pem'))
->
-> +        self.backend = os.getenv(
-> +            'CST_BACKEND', fdt_util.GetString(self._node, 'nxp,cst-backend',
-> +                                              'ssl'))
-> +
->          self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
->          self.ReadEntries()
->
-> @@ -161,8 +165,14 @@ class Entry_nxp_imx8mcst(Entry_mkimage):
->          with open(cfg_fname, 'w') as cfgf:
->              config.write(cfgf)
->
-> +        # SSL is the default backend, PKCS11 backend is optional
-> +        if self.backend == "pkcs11":
-> +            cst_backend = "pkcs11"
-> +        else:
-> +            cst_backend = "ssl"
-> +
->          output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-> -        args = ['-i', cfg_fname, '-o', output_fname]
-> +        args = ['-i', cfg_fname, '-o', output_fname, '-b', cst_backend]
->          if self.cst.run_cmd(*args) is not None:
->              outdata = tools.read_file(output_fname)
->              # fixme: 0x2000 should be CONFIG_CSF_SIZE
-> --
-> 2.51.0
->
+Sure, but you are adding a new method, so you could make it take a new
+struct instead of the string list, still behind your Kconfig option.
 
 Regards,
 Simon
+
+
+>
+> Thanks
+> Varada
+>
+> 1 - https://lore.kernel.org/u-boot/20260113103840.1948029-3-varadarajan.narayanan@oss.qualcomm.com/
+> 2 - https://lore.kernel.org/u-boot/20260119170701.GD3416603@bill-the-cat/
