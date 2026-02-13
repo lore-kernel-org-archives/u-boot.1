@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B637EF99C0
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 17:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEDA7EF99C1
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 17:53:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBF7583AA9;
-	Fri, 13 Feb 2026 18:53:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45DFF83AA9;
+	Fri, 13 Feb 2026 18:53:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ffHSEn/c";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AjCay2KJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5564E83AAB; Fri, 13 Feb 2026 18:53:06 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 875B183CB5; Fri, 13 Feb 2026 18:53:39 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09A5183015
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 18:53:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FF2A83015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 18:53:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-65940221f7eso2045909a12.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:53:03 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771005178; cv=none;
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b8f992167dcso148921366b.1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:53:37 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771005217; cv=none;
  d=google.com; s=arc-20240605;
- b=N2FXXO+JDqsGmUEBVPRa/HB1SwcJVTl4/jZqOmzJfh2wH+a2gFo8nUEIabbD35Do2/
- 8zgOP80X43LTbqWZChDhDVBHLIfPLnImkwdBgKNDIpZzd3LRlXHcE+MuurRam+VGhzmo
- WNJJoEEQB1YDivMU3WV08I0vo2f4zcZFDO4CZU1VXUuTMIyB9H0KXSfwTL6fb6dgVpmF
- DD1KN3WoEvq+z8x+OYn+3bJtQGB51YgD83zZg1w9l+kZ1JbvTjJ8VkhuCkMHyvGm+Okx
- W6gGNYBI4ufHyFbPd0QEVE5Tp77B9s/jixG6CWwxU7Yypwgk8TS9EtsETKkG3sNTg2Lk
- myjA==
+ b=MPDw6jSY7U3LIonrTxhcBUMju5/k3F13iYfLg1gOIuTWbEdk+U6WTZCOm0RUxas/7h
+ IniVwGOjaVOWf+fDigIJlBeuIrXm9FrkjtFQBYAPi5V4QSjbVCP7nTE/FTd0aWsoNa2b
+ BpPdXT58GKyE1Vjl23HD2Tmoz8/R/+zHdrmYH4XAeh3kyazid6P3W90jqAylICESoyme
+ BdMIMYadjwEOXSF/fmP1GB3SHy9wO+Xik6UsdyctopiPxJbqFo8cYDEpPQr1YG9VXEOX
+ djhk7UTC7kbM5uMB28K1RW0akdejB1Eb4gBMgoRDidcVS7wgA1dWCo9X8NJLTLcq6hJC
+ X7wQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=zCq1sZprPoywjpMYxt2ray9G8t0UHfdd9ixBaZfniM0=;
- fh=znTsNXZaDoMwZuM97NMa6Is3FS+nMIG9A+buLF6i1/Q=;
- b=lK20cz+Z3okIHouncXmsAuWSJh8FIcCcwKJibr9SKaxpbe+RIWkr7Ef1tiG6D9HhQ/
- QjHR6UDOz4QPPBZkxq+XgVSCKb4qhiKVDa1EI6TRulKo4YMA1gf4A5Em2LlCdPM/Iaqy
- KQTTRSD58rO37y1RGFrFjj+b87uoVaBWKFuh9wX+0N1zCnKEuHVy44vVd4PgwsWuBBaN
- 722+WhRzptKrxeq/P0MawztcAzg78TgINAN3FkMc7saxTePOaeROGu8SRjE4dpUX/nUf
- qlPwwW42v2iYThVQ1Bo0DtwdyFraY5yxDyRtneKkMaV0LWwZh7y+E3I+HEc5QOalaPIX
- Wynw==; darn=lists.denx.de
+ bh=3/U3O9ZhnT/LlXFSuowQPns4T1aRA/daIiCZ7KXz/1U=;
+ fh=MeQdUOgQ9An1YOR2OwM9tgU5INTZJJBn2o+ZH9ZYpMU=;
+ b=TyxmOSlhv34UgTjOTncTSnI9x7HApvZUvm5+KGh0s1VKGqP48RGSJhMXr7H5leb0pX
+ 3R1AJ/oAtXlFpAeBvJ4Aoz8i/bccXz++RT8tHgwjKmVI/BL/P7pHQ3QyAbX7H0a5K9Sv
+ El/s/soaOU4a37JJ4gAxIE4bMSWOvuXhI6xDNGLrAVwPlp2tcUAdpjkDhjAEyiAx0/RE
+ 5cRXAXDzkOxYYIrF7eswmjewv5KMJETCSW1iVve+sq7w82HeJxwvYtTSz75OJLCYRaif
+ pMzFcXomrHXjb3Z8xJE0OyL03oV2wiBBGqMcTj1th+g9gIZeoaeZ6el3eO7oBhMBgwP/
+ Pl9g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771005178; x=1771609978; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771005217; x=1771610017; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zCq1sZprPoywjpMYxt2ray9G8t0UHfdd9ixBaZfniM0=;
- b=ffHSEn/c8bJiuBQDeA5/A3kJM4iOPJCVSA0mEd0yOLB7La3MMZBLfr8S+2UG6c8QSn
- XJnQYcfDlDP2C6Fm/AAfx5nd+XOogf789p2VPUib9D3nZaL+Y40SdRW9BdqGiQtl+98J
- xnd/dfVVEZSzFFJqBXmn35KKH5Zy3WvxibtRU=
+ bh=3/U3O9ZhnT/LlXFSuowQPns4T1aRA/daIiCZ7KXz/1U=;
+ b=AjCay2KJiSRgEJVpdM0KOFRn3hCsNAKL/UmZ72yP4n+OkOLJg42XNZeSFhsiyqtGZJ
+ zbXEfuKfUXZyOH02iZbAFUAKRYou1bAqUmUSRsbrrdorgPnLGTfBghh745Tmm0iuHZo9
+ YqzdeX8YRa6WMKPhLBIJmj4qWeNFAiHNbq1pI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771005178; x=1771609978;
+ d=1e100.net; s=20230601; t=1771005217; x=1771610017;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zCq1sZprPoywjpMYxt2ray9G8t0UHfdd9ixBaZfniM0=;
- b=NgBEUJyKB/eKrX2YvqsSotjaddo3QSMgp+oge1GMGp1U4rFraStBoTSA35U1e5WF1O
- TbBb7ml72aOp2dTuOOHZPqaIF2LgrtUHgKNv3/JtVjeIIqcefjaCxNmEZuAYQ/TEP3Gy
- U+5wyUmB70oueA/XvNBTkBi6ldEvh5THnjPB9DKTqkuPNSa6qjoiifhhUeKOWRVVNsFh
- 3zhf828ccp4yXk7f4om4eM+RJ7Yd0vlXdUWRyMyUuy0xmQZs+Fg5+sg9jAtYfUK1G/Zr
- mBjr4ksHH44d6XbSwyLBhvY1hRv5MDPrUTumnN+o8SFZHvxTIK3rlhCE7WH/dzFpFwRM
- ASRw==
-X-Gm-Message-State: AOJu0YxI8ivmpIFNtuULAUThlzVOlAZnP9ozSWx7WOhYGJfI0Bmm2jrF
- Swbxl0/zEXUwBOtojMuFh4jxwQ7pbHa9WXHjggKmQ7ioN+v+tp2NyaX7DDQ3khXGpLI0EZz6CFk
- yROFcypBNplFoZ39/Eg8NwOjg131cLrBNP9hCbFAiOigslnjwXoB9dA==
-X-Gm-Gg: AZuq6aJ32pyVklaFqToJhjmepKsVPri4bMshs8M2dgdHBUH5198ZTC58zaAX+PfPlCr
- MYApuOnzLxyOZ929FXNqBKaRiNxmh4NEWbhZT8q7qfxsoHNPD3wyd71wV9mbgkAzB9+dSLiI6By
- lnQd4cHEJx5ohpz5y/NJrprvHEVxaE8FvfnSVnG/e3mXKl99t9UJf2WCfOCJeYvSRpI/t+d9vi0
- ezwZ8xM7n1D0RjZgmu3BxvGsQTHCJlVgEdnsUxQrNEF7/FDHM6Xk/uZ+bp78PF59TPNsp7p5sHu
- l9o7Fw==
-X-Received: by 2002:a17:907:6e8d:b0:b87:365d:26b8 with SMTP id
- a640c23a62f3a-b8face249a3mr185077566b.35.1771005178302; Fri, 13 Feb 2026
- 09:52:58 -0800 (PST)
+ bh=3/U3O9ZhnT/LlXFSuowQPns4T1aRA/daIiCZ7KXz/1U=;
+ b=Xi/SMWBFmDJoO8gJKxCqtLWfSzTPyI2P/P1XRR383NSRIQQ7cStiHH+dxZGD3mRXaB
+ AYT1J1BvAeQuPBRfDHevPnGdrsLeWTdMbmUsxvjYo7LvJnaAU3ZtbNRdC9HECuYN7QVy
+ TWVsvYqo0leK0CP8WXW+4fQUuwqP7KRLvQha9vCYVRjgIiLiA2Yuj+zF3ejHGWRbGtXy
+ /z7Fawuu2QTPAS8Pytn7YTZLPVX3pz2WImJSJAdj8yjl+7oPGsIGiGJb4nx131widvbn
+ l/6IflQsd+uqrIqr9dd5g1dx5POvVVc+GFZN0EscuuQN+HexKcSxuK4njp3mxpA4UCFj
+ MRjw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyn4h61RBm9nDHuGGFtVnSRjuMD1Cgc1n4OvWzs64wxvllNNxihj+jb0QIvSzVE9AOVtE43nE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz4nWeqFLi/MfA78KcW3IQUQEo66Rm8Kczvh0z7N2lh/BJ2gK1m
+ dZIYG4SP22qiIPICl8vzeiPxFT1smjZkTKwepXFMxKaagNv21U4jwJAQZc1VhaCAPcPzF8HwvB9
+ ZUCn50O4KTxegHoP8bFsOl/6xI6GMfpX++EbFuLgj
+X-Gm-Gg: AZuq6aLsSkOk6Vws6SVINfrfJIaTyi31BmOtrIZn8Wpsv0jwrqtaJAyzCj9OFYh9OHy
+ tvlr5I4f5z4Is5GICnXU/+DW2A2HGggyrtIPTIgs3lUOUGQcPaxUXhChZ1AdsU/Pvmvl8vCWwn7
+ Zya0SyG3IlUowWXFg9Gpl+F81ELmcxiBju0ZZsE9nQV5u1OKuyN9K9M11MzDLZZRYRpU1DoD3CC
+ bQWItn0A7eTm8AXYDlOrn54Lsm3Ag1qoNyGKIlKI3LsQ3Hvxg3zcObJl8VG9Sx8YMI/rtOQ69Aq
+ I7nlEA==
+X-Received: by 2002:a17:906:7312:b0:b87:39d:2bb4 with SMTP id
+ a640c23a62f3a-b8fb456be7cmr149673466b.59.1771005217045; Fri, 13 Feb 2026
+ 09:53:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20260128080515.1275941-1-Wojciech.Dubowik@mt.com>
- <20260128080515.1275941-7-Wojciech.Dubowik@mt.com>
-In-Reply-To: <20260128080515.1275941-7-Wojciech.Dubowik@mt.com>
+References: <20260209125554.14700-1-pbrobinson@gmail.com>
+ <92c43984-c2d6-4753-adc5-627e210936b8@suse.com>
+In-Reply-To: <92c43984-c2d6-4753-adc5-627e210936b8@suse.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Feb 2026 10:52:44 -0700
-X-Gm-Features: AZwV_QhujmMp87M5VL0hEaf1UVIsSQxAbQyx_Hr44-MCR3tR5n8N06lHAr4NKns
-Message-ID: <CAFLszThiCuO23=m6zcVw4EHt2HdYX2Dei-91eLdieo9sQA08RQ@mail.gmail.com>
-Subject: Re: [PATCH v5 6/6] test: binman: Add test for pkcs11 signed capsule
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, simon.glass@canonical.com, 
- quentin.schulz@cherry.de
+Date: Fri, 13 Feb 2026 10:53:22 -0700
+X-Gm-Features: AZwV_QgfOnbaJ0s3dHdXRtcLXma-SVOigPUTRW4IuQBwMjuQJWm_EYWkhO5t5Zk
+Message-ID: <CAFLszTgEJq4T4D5Rok2QS+AYZ7U5gdVZpX7-t8nG6h_bFFZVfQ@mail.gmail.com>
+Subject: Re: [PATCH] rpi: pass the Video Core logs DT parameter through
+To: Matthias Brugger <mbrugger@suse.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,173 +110,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
+Hi Peter,
 
-On Wed, 28 Jan 2026 at 01:06, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
+On Thu, 12 Feb 2026 at 06:54, Matthias Brugger <mbrugger@suse.com> wrote:
 >
-> Test pkcs11 URI support for UEFI capsule generation. For
-> simplicity only private key is defined in binman section
-> as softhsm tool doesn't support certificate import (yet).
 >
-> Add bintool support for p11-kit as it's needed in the test
-> to find library path for softhsm2 module.
 >
-> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> Reviewed-by: Simon Glass <simon.glass@canonical.com>
-> ---
->  tools/binman/btool/p11_kit.py                 | 21 ++++++
->  tools/binman/ftest.py                         | 66 +++++++++++++++++++
->  .../binman/test/351_capsule_signed_pkcs11.dts | 22 +++++++
->  3 files changed, 109 insertions(+)
->  create mode 100644 tools/binman/btool/p11_kit.py
->  create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
+> On 09/02/2026 13:55, Peter Robinson wrote:
+> > Pass the VC logs DT parameter through to the kernel
+> > device tree. This is used by the vclog tool and is
+> > a useful debugging tool.
+> >
+> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
 >
-> diff --git a/tools/binman/btool/p11_kit.py b/tools/binman/btool/p11_kit.py
-> new file mode 100644
-> index 000000000000..9d8d5d848b44
-> --- /dev/null
-> +++ b/tools/binman/btool/p11_kit.py
-> @@ -0,0 +1,21 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +# Copyright 2026 Mettler Toledo Technologies GmbH
-> +#
-> +"""Bintool implementation for p11-kit"""
-> +
-> +from binman import bintool
-> +
-> +
-> +class Bintoolp11_kit(bintool.Bintool):
-> +    """p11-kit -- support tool for pkcs#11 libraries"""
-> +    def __init__(self, name):
-> +        super().__init__('p11-kit',
-> +                         'Pkcs11 library modules tool',
-> +                         version_args='list modules')
-> +
-> +    def fetch(self, method):
-> +        """Install p11-kit via APT """
-> +        if method != bintool.FETCH_BIN:
-> +            return None
-> +
-> +        return self.apt_install('p11-kit')
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 21ec48d86fd1..a66030c7a56f 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -7,6 +7,7 @@
->  #    python -m unittest func_test.TestFunctional.testHelp
+> Acked-by: Matthias Brugger <mbrugger@suse.com>
 >
->  import collections
-> +import configparser
->  import glob
->  import gzip
->  import hashlib
-> @@ -7532,6 +7533,71 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->
->          self._CheckCapsule(data, signed_capsule=True)
->
-> +    def testPkcs11SignedCapsuleGen(self):
-> +        """Test generation of EFI capsule (with PKCS11)"""
-> +        data = tools.read_file(self.TestFile("key.key"))
-> +        private_key = self._MakeInputFile("key.key", data)
-> +        data = tools.read_file(self.TestFile("key.pem"))
-> +        cert_file = self._MakeInputFile("key.crt", data)
-> +
-> +        softhsm2_util = bintool.Bintool.create('softhsm2_util')
-> +        self._CheckBintool(softhsm2_util)
-> +
-> +        prefix = "testPkcs11SignedCapsuleGen."
-> +        # Configure SoftHSMv2
-> +        data = tools.read_file(self.TestFile('340_softhsm2.conf'))
-> +        softhsm2_conf = self._MakeInputFile(f'{prefix}softhsm2.conf', data)
-> +        softhsm2_tokens_dir = self._MakeInputDir(f'{prefix}softhsm2.tokens')
-> +
-> +        with open(softhsm2_conf, 'a') as f:
-> +            f.write(f'directories.tokendir = {softhsm2_tokens_dir}\n')
-> +
-> +        # Find the path to softhsm2 library
-> +        p11_kit = bintool.Bintool.create('p11-kit')
-> +        self._CheckBintool(p11_kit)
-> +
-> +        p11_kit_config = configparser.ConfigParser()
-> +        out = tools.run('p11-kit', 'print-config')
-> +        p11_kit_config.read_string(out)
-> +        softhsm2_lib = p11_kit_config.get('softhsm2', 'module',
-> +                                           fallback=None)
-> +        self.assertIsNotNone(softhsm2_lib)
-> +
-> +        with unittest.mock.patch.dict('os.environ',
-> +                                      {'SOFTHSM2_CONF': softhsm2_conf,
-> +                                       'PKCS11_MODULE_PATH': softhsm2_lib}):
-> +                tools.run('softhsm2-util', '--init-token', '--free', '--label',
-> +                          'U-Boot token', '--pin', '1111', '--so-pin',
-> +                          '222222')
-> +                tools.run('softhsm2-util', '--import', private_key, '--token',
-> +                          'U-Boot token', '--label', 'test_key', '--id', '999999',
-> +                          '--pin', '1111')
-> +                data = self._DoReadFile('351_capsule_signed_pkcs11.dts')
-> +
-> +        self._CheckCapsule(data, signed_capsule=True)
-> +
-> +        hdr = self._GetCapsuleHeaders(data)
-> +        monotonic_count = hdr['EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT']
-> +
-> +        # UEFI standard requires that signature is checked over payload followed
-> +        # by a monotonic count as little endian 64-bit integer.
-> +        sig_input = self._MakeInputFile("sig_input", EFI_CAPSULE_DATA)
-> +        with open(sig_input, 'ab') as f:
-> +            f.write(struct.pack('<Q', int(monotonic_count, 16)))
-> +
-> +        # Verify dumped capsule signature dumped by meficapsule during
-> +        # generation
-> +        openssl = bintool.Bintool.create('openssl')
-> +        self._CheckBintool(openssl)
-> +        openssl_args = ['smime', '-verify', '-inform', 'DER',
-> +                        '-in', tools.get_output_filename('capsule.efi-capsule.p7'),
-> +                        '-content', sig_input, '-CAfile', cert_file,
-> +                        '-no_check_time',
-> +                        '-out', tools.get_output_filename('decoded-capsule.bin')]
-> +        result = openssl.run_cmd_result(*openssl_args)
-> +        self.assertIsNotNone(result.stdout)
-> +        self.assertIn('Verification successful', result.stderr)
-> +
->      def testCapsuleGenVersionSupport(self):
->          """Test generation of EFI capsule with version support"""
->          data = self._DoReadFile('313_capsule_version.dts')
-> diff --git a/tools/binman/test/351_capsule_signed_pkcs11.dts b/tools/binman/test/351_capsule_signed_pkcs11.dts
-> new file mode 100644
-> index 000000000000..ae93bf83936f
-> --- /dev/null
-> +++ b/tools/binman/test/351_capsule_signed_pkcs11.dts
-> @@ -0,0 +1,22 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/dts-v1/;
-> +
-> +/ {
-> +       binman {
-> +               efi-capsule {
-> +                       image-index = <0x1>;
-> +                       /* Image GUID for testing capsule update */
-> +                       image-guid = "binman-test";
-> +                       hardware-instance = <0x0>;
-> +                       monotonic-count = <0x1>;
-> +                       dump-signature;
-> +                       private-key = "pkcs11:token=U-Boot%20token;object=test_key;type=private;pin-value=1111";
-> +                       public-key-cert = "key.crt";
-> +
-> +                       blob {
-> +                               filename = "capsule_input.bin";
-> +                       };
-> +               };
-> +       };
-> +};
-> --
-> 2.47.3
+> > ---
+> >   board/raspberrypi/rpi/rpi.c | 3 +++
+> >   1 file changed, 3 insertions(+)
+> >
+> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> > index f9b643555dd..7256d66a9a6 100644
+> > --- a/board/raspberrypi/rpi/rpi.c
+> > +++ b/board/raspberrypi/rpi/rpi.c
+> > @@ -608,6 +608,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+> >       /* warnings from the firmware (if any) */
+> >       copy_property(fdt, fw_fdt, "/chosen", "user-warnings");
+> >
+> > +     /* firmware logs - used by the vclog utility */
+> > +     copy_property(fdt, fw_fdt, "/chosen", "log");
+> > +
+> >       /* address of the PHY device as provided by the firmware  */
+> >       copy_property(fdt, fw_fdt, "ethernet0/mdio@e14/ethernet-phy@1", "reg");
+> >
 >
 
-I tried this out but I got a test-coverage failure (binman test -T):
-
-tools/binman/etype/efi_capsule.py                          65      1    98%
+Is this property in the schema? It looks like something ad-hoc.
 
 Regards,
 Simon
