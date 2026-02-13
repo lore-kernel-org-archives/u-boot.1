@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6DE3EDF161
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 13:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F60CEDF15B
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 13:39:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E7A783DF3;
-	Fri, 13 Feb 2026 14:24:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BA3483AA9;
+	Fri, 13 Feb 2026 14:39:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j+S2W/+S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KVnsjBm8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFFC183AA9; Fri, 13 Feb 2026 13:02:06 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 86B2783B9D; Fri, 13 Feb 2026 14:39:38 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34712802C1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 13:02:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D226183015
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 14:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-48374014a77so4743515e9.3
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 04:02:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7d4c85307b2so181167a34.0
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 05:39:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1770984123; x=1771588923; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1770989973; x=1771594773; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=au2+VjNGlKEuJk4XIFwxdD8ZR5AEH8Cjf5si70qrn0Y=;
- b=j+S2W/+Sr+LwmESc8z0aUB/URgAnN2SLBcoj6M//jhsmck8DRiTehz5kYCINrkVYzV
- dTFAFfHwLCZ75weU1JhGg8/THeY0/Mwf5/0ePybSl18s6fAd/InDkm25CWkZFft9F5Tk
- eHxQ8l3At3ppcZRSDZgWWomJb4tgNpD38DsHI7KJnz94NP/k3Ysl8gzYLgqZCzB6GrA8
- BxNjvE0k2oBeB1FJti/6AWrnFLr9k2+U2/VCbYWkQQGKzhemwmlX9J2nr0AoU1fithZV
- qw9hma286K9BVQCNI2azLawEA+v8b8mBUWsSHB+8nH673u3oymWqBtajzcN8olB67ay2
- OAAw==
+ bh=gIKR0OlXEvsQCeviATeZ23i1n8mDOhQHRskPstcn2MQ=;
+ b=KVnsjBm8iFHh6jJOiyazkyRvacQyovj3cubXtvwGoEBvqrcXwrDEDnZoyAWTa850yW
+ mulGRLmchrBRyN0bwRd3geKwHJ1cAtidEUuAbJZoCbwG8xQ1UfFUCJMQFMF2LFEoWCAK
+ cuf3WaRDPd4c0ZpLSDurtd4CZ5zhniLJkIGMU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770984123; x=1771588923;
+ d=1e100.net; s=20230601; t=1770989973; x=1771594773;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=au2+VjNGlKEuJk4XIFwxdD8ZR5AEH8Cjf5si70qrn0Y=;
- b=F/jKFjS/FJKBg8aLR/NarlY4bKD+uJKEYrS27vmnwxcJODVgEZgzqo+kT0Q11DShMv
- r5XZHahlM74a84LYysojyOKzHihqoq2+wzCI/+vKufnL+25vtY6IYYnvVD1te1j9S/g8
- S+TXYn4ZxxXNwi9zPG/ndCoICgGqmSd51FX90W0F62LrScOo/x5cflAEyoW/gx6T68JW
- 7cuUAHbFzxsPepWsE+E1UXg+jBZrsEtiarFR9N5QEriyjyvz6tcuGUZH7iS6fsNUGVUm
- NcGoCSzw+T9QbZXHTqVcjpAi37XUXgQVU/JqyTmum2fDL/Z6V3ZcNKN38FmmEm0t6za3
- F3pQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNNiRxg4wdboS10NfPxG/e8YQR79yWU2PsrWuxGGEsm/tkdDWdZ9l5v9f5keAC79FG/yjU20Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQ24quRUJPPR21RSGD6UvF7aLwWBkwvpxmytiJRV8/jPPNce9m
- 70I+oCBpogRvdN9bjwRhob/5/jd/KtPH/d0ZVbPfcx7YebuRQxqPNk0IDsoOUg==
-X-Gm-Gg: AZuq6aK15DndZuWNllZrfB12ZtAnpx4D9/dwcO6nT0D/nwjS8Pfe/nWuGsu1lNajO/0
- f15/B6SIHuNZPwM0Au//uv224Wp7Mbig0NmMloZP/nma/qJyxIstK0ba5sUYktt7yst+LA1xOv3
- D7IRr6mRkU7/rorjvAX+DH+gWcpFANlYew5TT7uhWU58tcOFM5J4x5rW1SEXICAowKrwnOy1c3U
- Pp/3rAbQbroxcCicxoY4kAxaXdzRv08C1/obrmSfmYPk4uSAg4+q3OARyoGJCvKAx+WbqzLV5yc
- dM9+ySbxnfUNUx7ni/h59gBJ6sG6hiSEjscGdZxpMrLYHk2bb8pKj4Fs/ay0toIJK1ogTu33DRM
- evIEuzR8YToGuaBLV5grVVMCR+DFRzKcXsg40S6smvpPclms56rTOCAax7HWji6YvLVu8TvkZJa
- Ebg3/VZVdnlEV8k6W5j2CuSJnUbyxTiE1A+xImoZN8LWWnkKwtQQ==
-X-Received: by 2002:a05:600c:1f91:b0:47d:4047:f377 with SMTP id
- 5b1f17b1804b1-48373a69e47mr24114515e9.36.1770984123234; 
- Fri, 13 Feb 2026 04:02:03 -0800 (PST)
-Received: from vitor-nb (bl19-170-125.dsl.telepac.pt. [2.80.170.125])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4834d482480sm292281435e9.0.2026.02.13.04.02.02
+ bh=gIKR0OlXEvsQCeviATeZ23i1n8mDOhQHRskPstcn2MQ=;
+ b=JhgEvlH+7OYy6tuNBq2lNnY/WJUgyiiqD4iWVIJxO41ADzpwKY0UQWv2JBxS7bq9wk
+ W1qVlaJ4gy6OkRfGlRRQx//rLTITwEk0FOEXpj1gXjJ8CZdTOYuy87sWg6MSyWCBcgSG
+ req13CMndOFmbtS4hD9N71KoJ0ioynOfN+wOXlIdten2uNjbc05nINYDoqgGHVb0g9Kz
+ mwHOL6Wb9AO3AHKx8rJ0XT+qYoxQRcqyULvip2U7EOJY2EAdRLKwcd79YhNsmhEyWGFO
+ XtTnAmOOBUqZ400Dfw8B0FD1M0zWhr112SgH9/HSAjvSinYjoAf5XNxu6BbPRz/QqJZt
+ c4fQ==
+X-Gm-Message-State: AOJu0Yzfl2AqRC1pgTPq2YkEKtVn4OfMwaj63f44BS/eEsnxj3tNq4iW
+ bT+W2On5P3/8YDXxZRRP/7UIuLk2KFvDLR5h56scFeJOMb1fDpYmvaizepTK8U9iopqt7jPwcrK
+ GFMQ=
+X-Gm-Gg: AZuq6aIZ1VOOz/6EMSICSswlurtDJ5j4Uku8R5IjzdB2mM/UKTy5S2Hb/+JqKSh6TCV
+ Hkb3l2Oyfhr/e5QT+5MKFu7A2+Sr9nbHHQ+rjzMLo4ZRyUJolXx20YcrfcjRFNIb2ckwvWuCTPC
+ HeAJBd6Mnojls1ZH72KVubyxrE3hiYnSdO1ReKzwKQlgkz00OeMJPq2zEvpZYMLhe1y5u3XFWtz
+ SpmSEaD7Lt2Wh4wzjxbOdMq9zTkplBLLBcnENFUPm9v9ikmBNys9FYwVkZtVzm7B5DMhcZqsZ3f
+ wlxaBQpMXtBXa1p5idpnENlQ7iSnBElbQ2N0riIwFmEW3nX4F0egzqaUvsM1IANEpWyzZt9eXS2
+ nETO3O0+mRgQXU/NmzoujecYaf0vUMK45Fg2/B2GOu7APwLaWyQsgAYQpEBGWNwwDUxauoaD0FT
+ 0grt7qKlGpv1qo76wFCB2zhDhJSIb1
+X-Received: by 2002:a05:6830:2aa7:b0:7c7:69c8:2ce with SMTP id
+ 46e09a7af769-7d4c4b31df0mr1034529a34.27.1770989972782; 
+ Fri, 13 Feb 2026 05:39:32 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4a75309a6sm6274212a34.3.2026.02.13.05.39.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Feb 2026 04:02:02 -0800 (PST)
-From: Vitor Soares <ivitro@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Vitor Soares <vitor.soares@toradex.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] toradex: tdx-cfg-block: add aquila tda4 0223 pid4
-Date: Fri, 13 Feb 2026 12:01:59 +0000
-Message-ID: <20260213120200.543875-1-ivitro@gmail.com>
-X-Mailer: git-send-email 2.52.0
+ Fri, 13 Feb 2026 05:39:31 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
+To: u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] menu: Move shortcut-key handling to bootmenu_loop()
+Date: Fri, 13 Feb 2026 06:39:09 -0700
+Message-ID: <20260213133922.1431006-1-simon.glass@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 13 Feb 2026 14:24:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,40 +92,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Soares <vitor.soares@toradex.com>
+The bootmenu_conv_key() function is shared with expo subsystem for key
+input. Adding alphanumeric-to-BKEY_SHORTCUT conversion there causes expo
+to swallow typed characters instead of inserting them as text, since
+BKEY_SHORTCUT falls in the range that expo treats as a command key
+rather than passing through.
 
-Add PID4 0223 Aquila TDA4 Octa 16GB IT to config block handling.
+Move the shortcut-key detection into bootmenu_loop() where it is
+only used in the bootmenu context.
 
-Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+Fixes: 8c986521c3c9 ("cmd: bootmenu: permit to select bootmenu entry with a shortcut")
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
- board/toradex/common/tdx-cfg-block.c | 1 +
- board/toradex/common/tdx-cfg-block.h | 1 +
- 2 files changed, 2 insertions(+)
 
-diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
-index 0fc3759695fc..17fda5038d41 100644
---- a/board/toradex/common/tdx-cfg-block.c
-+++ b/board/toradex/common/tdx-cfg-block.c
-@@ -189,6 +189,7 @@ const struct toradex_som toradex_modules[] = {
- 	{ OSM_IMX93D_2GB_IT,                     "OSM iMX93 Dual 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX93)    },
- 	{ OSM_IMX91S_2GB_IT,                     "OSM iMX91 Solo 2GB IT",                TARGET_IS_ENABLED(TORADEX_OSM_IMX91)    },
- 	{ VERDIN_AM62D_1G_ET_GPU_NODSI,          "Verdin AM62 Dual 1GB ET",              TARGET_IS_ENABLED(VERDIN_AM62_A53)      },
-+	{ AQUILA_TDA4O_16GB_IT,                  "Aquila TDA4 Octa 16GB IT",             TARGET_IS_ENABLED(AQUILA_AM69_A72)      },
- };
+ common/menu.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/common/menu.c b/common/menu.c
+index ae5afa14766..02df3b8f133 100644
+--- a/common/menu.c
++++ b/common/menu.c
+@@ -556,11 +556,6 @@ enum bootmenu_key bootmenu_conv_key(int ichar)
+ 	case ' ':
+ 		key = BKEY_SPACE;
+ 		break;
+-	case 'A' ... 'Z':
+-	case 'a' ... 'z':
+-	case '0' ... '9':
+-		key = BKEY_SHORTCUT;
+-		break;
+ 	default:
+ 		key = BKEY_NONE;
+ 		break;
+@@ -591,8 +586,10 @@ enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
  
- struct pid4list {
-diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-index b28033d8332e..69d4f5e449c6 100644
---- a/board/toradex/common/tdx-cfg-block.h
-+++ b/board/toradex/common/tdx-cfg-block.h
-@@ -147,6 +147,7 @@ enum {
- 	OSM_IMX93D_2GB_IT,
- 	OSM_IMX91S_2GB_IT, /* 220 */
- 	VERDIN_AM62D_1G_ET_GPU_NODSI,
-+	AQUILA_TDA4O_16GB_IT = 223,
- };
+ 	key = bootmenu_conv_key(c);
  
- enum {
+-	if (key == BKEY_SHORTCUT)
++	if (key == BKEY_NONE && isalnum(c)) {
++		key = BKEY_SHORTCUT;
+ 		cch->shortcut_key = bootmenu_conv_shortcut_key(menu, c);
++	}
+ 
+ 	return key;
+ }
 -- 
-2.52.0
+2.43.0
 
+base-commit: 9e6b66409a3235ae73f1937929fe025911165bbb
+branch: menu-fix-us
