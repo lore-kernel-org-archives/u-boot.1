@@ -4,104 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91606EF48CC
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 06:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81C2EF48CC
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 06:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C2C882BF2;
-	Fri, 13 Feb 2026 07:37:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03BDD82BF2;
+	Fri, 13 Feb 2026 07:45:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bHyNH2Yu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UGsjvZoe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5469683015; Fri, 13 Feb 2026 07:37:29 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id DEE9783015; Fri, 13 Feb 2026 07:45:05 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32BB080FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 07:37:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A733C80FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 07:45:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-7945838691aso38282097b3.0
- for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 22:37:25 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770964644; cv=none;
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-79627af6349so7576307b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Feb 2026 22:45:02 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770965101; cv=none;
  d=google.com; s=arc-20240605;
- b=VRLLfMlOKaauKLUvSUzITsJeCPALjOPop1rMzYMS7lq8adTlvgVHLa4GLX2/K+eFis
- 2SiMy5GnGldJ182VsBCXE2ixk5GweZ2zMRhi9XOfA42+f23voFQvhs27z6XyNHd/IHHi
- VYzf1FPP2irDrNHwm5Cykz7KOGLXNg7IYvC9QoIqPQ7Xg22wcK8d907wSNrRfxTJVbiV
- vtev7tqYCpp20HdahouzFk4VjLXzYGtBniUlH6X9I3TJPRSAQ7pSGZ2N/eFp0ep4i9h7
- 7T6hSqyUvQMLHQxit1aKVehGd+AeYnuZGBP50zQsIKMtpkiZv2qanaHfHqP8NYQvyXgv
- SIgQ==
+ b=Vn0Agu8p7Txtddrjl/GGl/wQbi3+RP7sRsypuu60ogF5DJZW+4vyZBt7ohIepeleyX
+ 2h1nBI5rIdZ3wZQnXqP7A/EJ41QsIuy3w6J8FRB49b/c3ZW111bALDtY3jc/u0T1Z/xf
+ cinSMvnFFFXIQPxwETJfQLi9TengLt2WRlj/bWcpjyfQVcXFEDy0mL1kDN/SCKPEJwnI
+ NrmzBluokTxXQH/UQT2H53/MMxSMgOqaDvoJzdFGShB+eMfHlzRfy9+/ON8vuFqQey23
+ 3ofow9Eo4SFq351pLW0lYvIKBhVx3AeuRM6z7eOx+M/YHTpbgNrKgHch1b8a8lxMSlRe
+ 2vSA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=FZ1wIKxyJTniBxs3z1aLW1tvWGk9dSHKuusqAA2oNSI=;
- fh=1vO0KDczFVLLoeYq5+BSJ/G3iDWzBy4/WCpdY4yt+ks=;
- b=O/8uWoxrOmLYiJsRWi+F+u41F41mTKcdpBKKNMIwR9zdDBaeZUWoM+R5QC5SIo4gcS
- E05ofgq/Kc0kbzIpVO2gB/ln2BHO2sB/JhOMOqX9DfhfAcDymu7RYPbIWfJQTthhKvy8
- Ax04FOxNtoAFumRGeULqY1ZSFpMrBRCEG+UjeT0DoGGGqAnuIkp26ln10EG15Y8+NjYk
- h7x4yZ0ZwkXzrKnFj9z/lcEypZQvufULa+SDtJrUXYrUa4KxC0JefOHBqfoP6dJIlzAA
- xsK/EW80I8TIUDUBdcjgE+vj/yv2LoRw1fzEUfbQgpJ16Tbi4UkKMXNrVS0wPsMJRdlw
- BRxw==; darn=lists.denx.de
+ bh=QK9+RaXYPrIU+/rQKDuX0JMLzhr37hRHcsIPViYEtEI=;
+ fh=917ItwvSEoWin1hKhxvMvb+7mVMiy0NwvNteedPUieI=;
+ b=jR4bNyalvBkYq796T8PPMfm/AlrBVPjq0uXmzAS0kpDVe07glAVdPYiH76rjLyIgVM
+ RjFNqlpN3KiFUhStmQk56OgjULo0e/masx0pXS6TANmB5/8v91q8iEBCooXuy1jtRsJJ
+ C0D4HB7qozFMZpJqcLEPVPLeLjWUe6sSbbTpV7g94db+Zl6WsSXCv+Xi5RpbLSkqMjuq
+ XJIUcd8R/pwsItbV6bHr66lP5SCRyIkITx0thCo72F7QjVVo6aBsbho2f3LpZjNI+lQM
+ O7yNEu5pfCHklU7R8Jjf5Z2nzn0fhAhn11GLQXH3fBqSJ/ZtRvE+5vAUA2IObEPNR5S9
+ CoeA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770964644; x=1771569444; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1770965101; x=1771569901; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FZ1wIKxyJTniBxs3z1aLW1tvWGk9dSHKuusqAA2oNSI=;
- b=bHyNH2YuQBPD+Swj8YnQ2uNd9Q3g4w+pf/4bbV2zH/NT+SA0DAdF1SkbweTbLI6S0h
- +pILt4TZPT4dbdiUxA5BoQphHlSm7+y2wpE/2teSfPfy7v4W9jmcMpDwMHJnYzPhNUDD
- hF09aLhIwc1guVDH2hb0nZ90B+aqQVpPyc68VgcVqdgy5otkZ3onCYAU4mEe1Vcy7dJp
- 3nxlgYOzqlVtfmhmI3igoDQ6qsaNbyIgbUESHi8QTL8+CIceuLk0syxNsThjk0Q6es53
- +W+wGCFcsywREJc1Ecpc/y2Rii6FZPYBQ5EjUsEC2Icfay4Is2a/gVdqipEwUkLggfJL
- 3D1w==
+ bh=QK9+RaXYPrIU+/rQKDuX0JMLzhr37hRHcsIPViYEtEI=;
+ b=UGsjvZoe2WBzGPPoEuZAxjxeSMxOsv0dP0Max4d7F0gecCHXVQyfhhsYs1Zy7/aH3K
+ fQN7ri+0cSYE8lgtOTyT2MKMlT5eiOadQyScB9o2g1D5/nFCaXigKckfp06Du2ELT+Hy
+ 6fpvqEhn7kCErBexyDmZVJE5nMptXgPT9VymPgj50LYtMejWpRF7MozRYqCihp7xptkp
+ zJuyNfXs5WpJQcHPwl+XeP2bHd6mVbg1uqmuuLToptGwrT69C9gRh18l1lcSrIQY/pyC
+ O7btKk3t22ek2KPDvd04xqF1i+t4eYs86vRne81SBTDISY6clu1dY/UJRy0Kt0h8Dr6I
+ c19Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770964644; x=1771569444;
+ d=1e100.net; s=20230601; t=1770965101; x=1771569901;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=FZ1wIKxyJTniBxs3z1aLW1tvWGk9dSHKuusqAA2oNSI=;
- b=oyIt7gIYCQiywoTkMJ/5mYUht3+/M8c1lGSqug7MIWrEBQrcbNUdD2qipiwTxnZ3HC
- Lbcmk12TVIFwP5cFZ3tdYr1YT/SUXm5O60exPIBo6/Stbn8gslkGLxtNBR6J25NYID4i
- t0X0DdCbW7lNmjra7T0WakdabGPECoVyGwHv+/8uTe1MbA5bZNrIsPw+75ugXLGBJzAd
- lGQuVnUclfX4PKn2bA8whNhDnNrXc7u/InhhWPui5IGzb4U/ZctGDaMMrGbA3/EttN/j
- 9FeToBU/slWYMSELBiTWKq0FDugPcXiPWsXS5KwHwB0TsmXrUlmChwy8V47ZU8lMdHcY
- kvvA==
-X-Gm-Message-State: AOJu0YxybDX4V3h3qrq32BmgkIjT5SkAVY1wZNMaGS3rI/FqNSMOn2B3
- Jn+/6bzgs8EO6qrtEu6aHrQcRg/GIMtOb5iqeLps/sP7X5K6TSxIY4QvIKO1N3S0Hil2K0lDU7u
- IOh+Ea8ULRXsh/9/UY3CURRxNaUwgIWYT/PItjiSemGnKYbxobbbrbqOfBQ==
-X-Gm-Gg: AZuq6aL5RziYSe1BTLyXz6aW9388lUylgPi6fndZ/mO6HEykeujK9ux/6Co62EcD/sb
- HYZGIWuZZ8MbUbRYdspx8u1ljhc9AYK0FMy5X3Csw+k6DwUCQ0WMEfd/4ExL1zzmltiHKksQUSw
- StwEirZk91/4EZvN65CnKcl9W8a1yEABiCgYYrNyjEcJtFbHw4ficI6CBYhblMtPSfnVY9/85Fl
- v4LlEujfv8mxzwZPgLLvIdEZG9QHE/TJD8XoE4elAg09lb+piPHFhcbXZYf57eMM9lzziHNcksb
- oIffpnnS3Gs/MiwI8dAR4CDvxi4ieBt9AuR4Qnave1b8YYu4impb1ENLyOC6rqQD5rzvSR5idBF
- YYZCA5P1kdAzwetVdjiF3RZEUBPpn+2jg/Bv2szGvrVvjhvFIrqG0GYrHphKf38xE/I2koCYk0B
- aEtfHmhXgDiclxauUG6fIkOrUgImPkAAlQ20+xQTR1ydupCmK3ZHIQmmJGV9l4Wb6vu5/k5mRo9
- 9fngYWrZ3xwLCq2qpdulf0rGMAfUWv1jrTfOOUfOdD5oZWcVTsc2StFkZiCwCtVJmLTNGi/xw0M
- svcKUJV0sGNDsuY5Urqu8qRKGSF+jZdCR9fi7cKsG0G7
-X-Received: by 2002:a05:690c:4882:b0:794:c263:bead with SMTP id
- 00721157ae682-797a0c8de8bmr5121357b3.24.1770964643891; Thu, 12 Feb 2026
- 22:37:23 -0800 (PST)
+ bh=QK9+RaXYPrIU+/rQKDuX0JMLzhr37hRHcsIPViYEtEI=;
+ b=xB83h8tjNornChnpFief5lOoo8Y38MkjSOx4NyClqmiHqg6lFG9EEkMeNNZDMDC2P0
+ WnZ8pndouyyD18V1O1XsWIWNLA1vH+/7LQBgudwPxYKtb/ogxSQt4/f0fO8EJKRN3PDo
+ ZE9ZpnyDMpkFa8saC9O17CNVWSvRy5mujRk4Z7Ar3SnGiZv22Ts4qhFCCFdRBviwsmDy
+ w+t2u7PoK6IjpM2uyQ3hgs/leYKqSobh3/3604GHxwz9H5mEF9132wnHuLdsee3zuxK+
+ 284pbK/oJSU9n8wzFNQQjpLnlzVxXq/kfmybO8fTfJjYnZvQQnScgzDdRPMyEvqAlsf2
+ 5VOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVyIXymG8YexuVndLxUGMosuznKEKuRaLE4O84mDQfbLg4wLx7QycfnzH8/ogpc8oszg0WXdvs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyq7aFMN058J8kmn7MQJU59zoJ0ZVF0K+6GduvdDHEjJ9Sd1E9B
+ jm2OzZeAF8b3gELEByU2q8LSOLyh/0V2K96dpHAbuejuTWfkeY9GgFujBh3CrbG+3dJbT1puoxy
+ b9J6viRx9SlhEVydR2YMcmREVTl3y7fH3rldDJAdTzA==
+X-Gm-Gg: AZuq6aLSA9q59xWjDz3TWQLXM6OPTe5EKJaD57QZ5LwHQ1Dp6DNsPHulYCVuN4kgSJZ
+ ic/siLH86n6mkCtrBa0dHnKlRURnF2jgT2HtM8pRcjtcOWqU63NlL1YPuz1t/bs3X913hpZf1pr
+ /AjBOdBsi9AzjQhZog5FetUQfZ9vkjrnvBoQBIJgfswHir4RdKPPpZoSws39p3TQf5wzkR8RKkn
+ +GUyA/LMP9we/wkfeAiyRksH8VOoTSZ5BZlVIWsK0OX4a7biF4Cry8Bj+bW1eT8DAFFbz99t4dt
+ DGDA6rgokUxtsS1ZvGdOn5Z7IC86Gv3qf3vpEkbZtIIi8fXA85JvlrTzdB4AUpN92ucKfmeofhJ
+ wN2QoNyMydm6bjVLWvYUniBswaCpl6Jc98nb6c23GmCohZMPZDaxxnYdv7rMS7dP7OY/o6dRTU/
+ Nul0pJyw0xAubgBZI+ECRnX0U9yu56WlIXxXXPFCyNZbRG3kLCrd6j6Yl5Pfj+KKKmkDoC4YM9q
+ jVutZYMkNRMKVhM6/BST+H0bET5/zqyLxwI13zAcqgq9rfBLhjhFFXT/4gsJnhm5pa9uP9lqEaD
+ h+pEoGT3m8lr0Lbjq+dWnAc5v2EI0IZV2CX2cX7gQbaTW7KHO6At19s=
+X-Received: by 2002:a05:690c:2613:b0:794:f36a:c8f with SMTP id
+ 00721157ae682-797a0cacb29mr12935347b3.32.1770965100706; Thu, 12 Feb 2026
+ 22:45:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20260211124314.3406952-1-vincent.stehle@arm.com>
-In-Reply-To: <20260211124314.3406952-1-vincent.stehle@arm.com>
+References: <20251128163535.2301653-1-raymondmaoca@gmail.com>
+ <CAMDkj5zb1qhAR-uf=trSsGEwXmx5TiXc=agX5w5GnjMrP_Nqyg@mail.gmail.com>
+ <20260204161345.GY2603314@bill-the-cat>
+ <CAC_iWj+qEmxNeGVBcLcrzNM=BkVj0QW2VYW6ZNGTKD6BeRTNHA@mail.gmail.com>
+ <CAMDkj5yg24MwQz4G8Y62S7mB_6D=p+0Qrooe77RKQ+C4CPwA1Q@mail.gmail.com>
+ <CAC_iWjKUqkjOFsk7+dj+7tn_hrbngoq4CyjCxg0xLbU=-X+GXA@mail.gmail.com>
+ <CAMDkj5z0UuUi0qPfaykEVF=MmbEqXUup4GejaLAyJmg3PGByMg@mail.gmail.com>
+ <CAC_iWjLqTObHeujWD_6Uix8i_6PZtPTJekVu6DShSwH2Kvobng@mail.gmail.com>
+ <CAMDkj5xGZoE52dYqWt9r93r9rsc6jB=3N8JkPOeS8nyNG796wA@mail.gmail.com>
+In-Reply-To: <CAMDkj5xGZoE52dYqWt9r93r9rsc6jB=3N8JkPOeS8nyNG796wA@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Feb 2026 08:36:48 +0200
-X-Gm-Features: AZwV_QhAy8INgmhtwHfUyA4oX8Yxs9FrHOfWbErE8ji9z3p0CPI-NSuBtGJAlKs
-Message-ID: <CAC_iWjL5O4k4HrxKk_MfiwYutXVe0LY+kN-c-=_zwFp44Nbm6Q@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: add missing EFI_CALL around tcg2 read_blocks
- calls
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>
+Date: Fri, 13 Feb 2026 08:44:24 +0200
+X-Gm-Features: AZwV_Qhu6f17I2ZaMPAp4Ire8M0MndYjQLalvajGTEHBhx0yNE6zDeZHcv1y7LY
+Message-ID: <CAC_iWj+Srf1pLtPnYGrtBq2aLY+dXfhXZnLSytFP=LNa5AgOEw@mail.gmail.com>
+Subject: Re: [PATCH v5 0/6] Implement all missing SMBIOS types required by
+ distro tooling
+To: Raymond Mao <raymondmaoca@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Mark Kettenis <kettenis@openbsd.org>,
+ Baocheng Su <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
+ Samuel Holland <samuel.holland@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -120,88 +132,331 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Merci Vincent
+On Thu, 12 Feb 2026 at 16:53, Raymond Mao <raymondmaoca@gmail.com> wrote:
+>
+> Hi Ilias,
+>
+> On Thu, Feb 12, 2026 at 7:45=E2=80=AFAM Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > That's weird.
+> >
+> > I tried again on -next and got this
+> > Handle 0x0006, DMI type 9, 24 bytes
+> > System Slot Information
+> > Designation: Not Specified
+> > Type: Unknown
+> > Data Bus Width: Unknown
+> > Current Usage: Unknown
+> > Length: Unknown
+> > Characteristics: Unknown
+> > Bus Address: 0000:00:00.0
+> > Data Bus Width (Base): 0
+> > Peer Devices: 0
+> > Height: Not applicable
+> >
+> > Handle 0x0007, DMI type 16, 23 bytes
+> > Physical Memory Array
+> > Location: Unknown
+> > Use: Unknown
+> > Error Correction Type: Unknown
+> > Maximum Capacity: 0 kB
+> > Error Information Handle: Not Provided
+> > Number Of Devices: 1
+> >
+> > Handle 0x0008, DMI type 17, 104 bytes
+> > Memory Device
+> > Array Handle: 0x0000
+> > Error Information Handle: Not Provided
+> > Total Width: Unknown
+> > Data Width: Unknown
+> > Size: No Module Installed
+> > Form Factor: <OUT OF SPEC>
+> > Set: None
+> > Locator: <BAD INDEX>
+> > Bank Locator: <BAD INDEX>
+> > Type: Unknown
+> > Type Detail: Other Unknown Fast-paged Static Column Pseudo-static
+> > RAMBus Synchronous
+> >
+> > Handle 0x0009, DMI type 19, 31 bytes
+> > Memory Array Mapped Address
+> > Starting Address: 0x00000000000
+> > Ending Address: 0x000000003FF
+> > Range Size: 1 kB
+> > Physical Array Handle: 0x0000
+> > Partition Width: 1
+> >
+> > Handle 0x000A, DMI type 32, 11 bytes
+> > System Boot Information
+> > Status: No errors detected
+> >
+> > I am using a debian unstable with a 6.18 kernel
+> >
+>
+> It looks that your log is not in a correct format, each header should
+> start with:
+> 'Handle <handle_id>, DMI type <type_num>, <size> bytes at <address>'
+> But your one is missing 'at <address>'.
+>
+> How did you test it and get it printed? Are you using 'smbios' cmd in
+> the u-boot console?
 
-On Wed, 11 Feb 2026 at 14:43, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
+No, that's probably the difference. I am booting to linux and test
+with 'dmidecode'
+
+> Do you mind sharing your remote working branch, so that I can have a
+> cross-check?
+
+I don't but it's really just the -next branch with your patches. I
+think the difference is u-boots tool vs linux
+
+Regards
+/Ilias
+>
+> Regards,
+> Raymond
+>
+>
+> > Cheers
+> > /Ilias
+> >
+> > On Thu, 12 Feb 2026 at 02:24, Raymond Mao <raymondmaoca@gmail.com> wrot=
+e:
+> > >
+> > > Hi Ilias
+> > >
+> > > On Wed, Feb 11, 2026 at 10:20=E2=80=AFAM Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > On Wed, 11 Feb 2026 at 16:30, Raymond Mao <raymondmaoca@gmail.com> =
 wrote:
->
-> The read_blocks() function from the Block IO protocol is a UEFI function;
-> make sure to call it from within U-Boot using the EFI_CALL() macro.
->
-> To demonstrate the issue on an AArch64 machine, define the DEBUG macro in
-> include/efi_loader.h and build u-boot with sandbox_defconfig, then downlo=
-ad
-> and uncompress the ACS-DT image [1], and finally execute the following
-> command:
->
->   $ ./u-boot -T -c " \
->       host bind 0 systemready-dt_acs_live_image.wic; \
->       setenv loadaddr 0x10000; \
->       load host 0 \${loadaddr} EFI/BOOT/Shell.efi; \
->       bootefi \${loadaddr} \${fdtcontroladdr}"
->
-> The following assertion should fail:
->
->   lib/efi_loader/efi_net.c:858: efi_network_timer_notify: Assertion `__ef=
-i_entry_check()' failed.
->
-> This happens due to the following EFIAPI functions call chain:
->
->   efi_start_image()
->     efi_disk_read_blocks()
->       (due to the missing EFI_CALL, entry_count =3D=3D 2)
->       efi_network_timer_notify()
->
-> Link: https://github.com/ARM-software/arm-systemready/releases/download/v=
-25.12_DT_3.1.1/systemready-dt_acs_live_image.wic.xz [1]
-> Fixes: ce3dbc5d080d ("efi_loader: add UEFI GPT measurement")
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
-> ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->  lib/efi_loader/efi_tcg2.c | 13 ++++++++-----
->  1 file changed, 8 insertions(+), 5 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> index bdf78897d47..1860dc50238 100644
-> --- a/lib/efi_loader/efi_tcg2.c
-> +++ b/lib/efi_loader/efi_tcg2.c
-> @@ -1213,8 +1213,10 @@ tcg2_measure_gpt_data(struct udevice *dev,
->                 goto out2;
->         }
->
-> -       ret =3D block_io->read_blocks(block_io, block_io->media->media_id=
-, 1,
-> -                                   block_io->media->block_size, gpt_h);
-> +       ret =3D EFI_CALL(block_io->read_blocks(block_io,
-> +                                            block_io->media->media_id, 1=
-,
-> +                                            block_io->media->block_size,
-> +                                            gpt_h));
->         if (ret !=3D EFI_SUCCESS)
->                 goto out2;
->
-> @@ -1227,9 +1229,10 @@ tcg2_measure_gpt_data(struct udevice *dev,
->                 goto out2;
->         }
->
-> -       ret =3D block_io->read_blocks(block_io, block_io->media->media_id=
-,
-> -                                   gpt_h->partition_entry_lba,
-> -                                   total_gpt_entry_size, entry);
-> +       ret =3D EFI_CALL(block_io->read_blocks(block_io,
-> +                                            block_io->media->media_id,
-> +                                            gpt_h->partition_entry_lba,
-> +                                            total_gpt_entry_size, entry)=
-);
->         if (ret !=3D EFI_SUCCESS)
->                 goto out2;
->
-> --
-> 2.51.0
->
+> > > > >
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Wed, Feb 11, 2026 at 4:32=E2=80=AFAM Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > >
+> > > > > > Hi all,
+> > > > > >
+> > > > > > Apologies for the late reply.
+> > > > > >
+> > > > > > I did test the patches but I see something weird on smbios type=
+ 17.
+> > > > > >
+> > > > > > Handle 0x0008, DMI type 17, 104 bytes
+> > > > > > Memory Device
+> > > > > >         Array Handle: 0x0000
+> > > > > >         Error Information Handle: Not Provided
+> > > > > >         Total Width: Unknown
+> > > > > >         Data Width: Unknown
+> > > > > >         Size: No Module Installed
+> > > > > >         Form Factor: <OUT OF SPEC>
+> > > > > >         Set: None
+> > > > > >         Locator: <BAD INDEX>
+> > > > > >         Bank Locator: <BAD INDEX>
+> > > > > >         Type: Unknown
+> > > > > >         Type Detail: Other Unknown Fast-paged Static Column
+> > > > > > Pseudo-static RAMBus Synchronous
+> > > > > >         Speed: 512 MT/s
+> > > > > >         Manufacturer: <BAD INDEX>
+> > > > > >         Serial Number: Not Specified
+> > > > > >         Asset Tag: Not Specified
+> > > > > >         Part Number: Not Specified
+> > > > > >         Rank: Unknown
+> > > > > >         Configured Memory Speed: Unknown
+> > > > > >         Minimum Voltage: Unknown
+> > > > > >         Maximum Voltage: Unknown
+> > > > > >         Configured Voltage: Unknown
+> > > > > >         Memory Technology: <OUT OF SPEC>
+> > > > > >         Memory Operating Mode Capability: None
+> > > > > >         Firmware Version: Not Specified
+> > > > > >         Module Manufacturer ID: Bank 3, Hex 0x04
+> > > > > >         Module Product ID: Unknown
+> > > > > >         Memory Subsystem Controller Manufacturer ID: Unknown
+> > > > > >         Memory Subsystem Controller Product ID: Unknown
+> > > > > >         Non-Volatile Size: 16383 PB
+> > > > > >         Volatile Size: Unknown
+> > > > > >         Cache Size: Unknown
+> > > > > >         Logical Size: Unknown
+> > > > > >
+> > > > > > Any idea what <BAD INDEX> and <OUT OF SPEC> represent?
+> > > > > > I tested this in QEMU
+> > > > > >
+> > > > >
+> > > > > I just retested it by below qemu cmd after I rebased it to the cu=
+rrent master:
+> > > > > qemu-system-aarch64  -bios u-boot.bin -machine virt -cpu cortex-a=
+57 -m
+> > > > > 2G  -nographic
+> > > > >
+> > > > > Below is the type17 I got:
+> > > > > ```
+> > > > > Handle 0x0008, DMI type 17, 104 bytes at 0xbe678141
+> > > > > Memory Device:
+> > > > > Physical Memory Array Handle: 0x0000
+> > > > > Memory Error Information Handle: 0xfffe
+> > > > > Total Width: 0x0000
+> > > > > Data Width: 0x0000
+> > > > > Size: 0xffff
+> > > > > Form Factor: Unknown
+> > > > > Device Set: 0x00ff
+> > > > > Device Locator:
+> > > > > Bank Locator:
+> > > > > Memory Type: Unknown
+> > > > > Type Detail: 0x0004
+> > > > > Speed: 0x0000
+> > > > > Manufacturer:
+> > > > > Serial Number:
+> > > > > Asset Tag:
+> > > > > Part Number:
+> > > > > Attributes: 0x0000
+> > > > > Extended Size: 0x00000000
+> > > > > Configured Memory Speed: 0x0000
+> > > > > Minimum voltage: 0x0000
+> > > > > Maximum voltage: 0x0000
+> > > > > Configured voltage: 0x0000
+> > > > > Memory Technology: Unknown
+> > > > > Memory Operating Mode Capability: 0x0004
+> > > > > Firmware Version:
+> > > > > Module Manufacturer ID: 0x0000
+> > > > > Module Product ID: 0x0000
+> > > > > Memory Subsystem Controller Manufacturer ID: 0x0000
+> > > > > Memory Subsystem Controller Product ID: 0x0000
+> > > > > Non-volatile Size: 0xffffffffffffffff
+> > > > > Volatile Size: 0xffffffffffffffff
+> > > > > Cache Size: 0xffffffffffffffff
+> > > > > Logical Size: 0xffffffffffffffff
+> > > > > Extended Speed: 0x0000
+> > > > > Extended Configured Memory Speed: 0x0000
+> > > > > PMIC0 Manufacturer ID: 0x0000
+> > > > > PMIC0 Revision Number: 0x0000
+> > > > > RCD Manufacturer ID: 0x0000
+> > > > > RCD Revision Number: 0x0000
+> > > > > ```
+> > > > >
+> > > > > If you didn't use smbios_generic.dtsi to insert new nodes, or add=
+ new
+> > > > > 'memory@' / 'memory-controller@' nodes into your DT, you should g=
+et
+> > > > > the same result as mine by default.
+> > > > > If you still can not get it, can you give me your build instructi=
+on
+> > > > > and qemu cmd for reproducing?
+> > > >
+> > > > I used qemu_arm64_lwip_defconfig
+> > > >
+> > > > qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57 \
+> > > >           -machine virt,secure=3Doff -bios u-boot.bin -chardev
+> > > > socket,id=3Dchrtpm,path=3D/tmp/mytpm1/swtpm-sock \
+> > > >           -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm -device
+> > > > tpm-tis-device,tpmdev=3Dtpm0 \
+> > > >           -device virtio-rng-pci -drive
+> > > > id=3Dos,if=3Dnone,file=3D../debian.qcow2 -device virtio-blk-device,=
+drive=3Dos
+> > > >  is the command line
+> > > >
+> > >
+> > > I did these steps with a clean build (exactly the same as your ones):
+> > > $ make O=3Dout_lwip qemu_arm64_lwip_defconfig
+> > > $ CROSS_COMPILE=3Daarch64-none-linux-gnu- make O=3Dout_lwip -j4 all
+> > > $ cd out_lwip
+> > > $ killall swtpm
+> > > $ rm -rf /tmp/mytpm1
+> > > $ mkdir -p /tmp/mytpm1
+> > > $ swtpm_setup --tpmstate /tmp/mytpm1 --tpm2 --pcr-banks sha256
+> > > $ swtpm socket --tpmstate dir=3D/tmp/mytpm1 --ctrl
+> > > type=3Dunixio,path=3D/tmp/mytpm1/swtpm-sock --log level=3D40 --tpm2 -=
+t -d
+> > > $ qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57 \
+> > > -machine virt,secure=3Doff -bios u-boot.bin -chardev
+> > > socket,id=3Dchrtpm,path=3D/tmp/mytpm1/swtpm-sock \
+> > > -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm -device tpm-tis-device,tp=
+mdev=3Dtpm0 \
+> > > -device virtio-rng-pci -drive id=3Dos,if=3Dnone,file=3D../debian.qcow=
+2
+> > > -device virtio-blk-device,drive=3Dos
+> > >
+> > > SMBIOS type17 shows no difference:
+> > > ```
+> > > Handle 0x0008, DMI type 17, 104 bytes at 0x7e64b141
+> > > Memory Device:
+> > > Physical Memory Array Handle: 0x0000
+> > > Memory Error Information Handle: 0xfffe
+> > > Total Width: 0x0000
+> > > Data Width: 0x0000
+> > > Size: 0xffff
+> > > Form Factor: Unknown
+> > > Device Set: 0x00ff
+> > > Device Locator:
+> > > Bank Locator:
+> > > Memory Type: Unknown
+> > > Type Detail: 0x0004
+> > > Speed: 0x0000
+> > > Manufacturer:
+> > > Serial Number:
+> > > Asset Tag:
+> > > Part Number:
+> > > Attributes: 0x0000
+> > > Extended Size: 0x00000000
+> > > Configured Memory Speed: 0x0000
+> > > Minimum voltage: 0x0000
+> > > Maximum voltage: 0x0000
+> > > Configured voltage: 0x0000
+> > > Memory Technology: Unknown
+> > > Memory Operating Mode Capability: 0x0004
+> > > Firmware Version:
+> > > Module Manufacturer ID: 0x0000
+> > > Module Product ID: 0x0000
+> > > Memory Subsystem Controller Manufacturer ID: 0x0000
+> > > Memory Subsystem Controller Product ID: 0x0000
+> > > Non-volatile Size: 0xffffffffffffffff
+> > > Volatile Size: 0xffffffffffffffff
+> > > Cache Size: 0xffffffffffffffff
+> > > Logical Size: 0xffffffffffffffff
+> > > Extended Speed: 0x0000
+> > > Extended Configured Memory Speed: 0x0000
+> > > PMIC0 Manufacturer ID: 0x0000
+> > > PMIC0 Revision Number: 0x0000
+> > > RCD Manufacturer ID: 0x0000
+> > > RCD Revision Number: 0x0000
+> > > ```
+> > >
+> > > By the way, I don't think it has any relationship with swtpm and the
+> > > linux distro, so I also simply tried:
+> > > $ qemu-system-aarch64 -m 1024 -smp 2 -nographic -cpu cortex-a57 \
+> > > -machine virt,secure=3Doff -bios u-boot.bin
+> > >
+> > > All works with the same type17 output.
+> > >
+> > > Regards,
+> > > Raymond
+> > >
+> > > > Cheers
+> > > > /Ilias
+> > > >
+> > > >
+> > > > >
+> > > > > Regards,
+> > > > > Raymond
+> > > > >
+> > > > >
+> > > > > > Regards
+> > > > > > /Ilias
+> > > > > >
+> > > > > > On Wed, 4 Feb 2026 at 18:13, Tom Rini <trini@konsulko.com> wrot=
+e:
+> > > > > > >
+> > > > > > > On Wed, Feb 04, 2026 at 11:12:42AM -0500, Raymond Mao wrote:
+> > > > > > >
+> > > > > > > > Hi,
+> > > > > > > >
+> > > > > > > > Anyone have a chance to review this patch set? It is the la=
+st piece of
+> > > > > > > > work to support all required SMBIOS types in U-Boot.
+> > > > > > >
+> > > > > > > I've been waiting for Ilias or Heinrich to have time to look =
+at this.
+> > > > > > >
+> > > > > > > --
+> > > > > > > Tom
