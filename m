@@ -4,56 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95C09EF99FD
-	for <u-boot@archiver.kernel.org>; Sat, 14 Feb 2026 04:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 930ADEF99E1
+	for <u-boot@archiver.kernel.org>; Sat, 14 Feb 2026 04:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F4283EAC;
-	Sat, 14 Feb 2026 05:57:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F5F783E13;
+	Sat, 14 Feb 2026 05:59:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="f8rCIZfG";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="BFFe7rde";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E938283DE4; Sat, 14 Feb 2026 05:57:19 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 4E55183CF2; Sat, 14 Feb 2026 03:51:21 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0821883E48
- for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 05:57:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5568F83AAB
+ for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 03:51:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marex@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3996D110297; Sat, 14 Feb 2026 05:57:17 +0100 (CET)
+ with ESMTPSA id 3361E10FAC3; Sat, 14 Feb 2026 03:51:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1771045037; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=ys4AnZz6nB7IrIRWPMvGfo7bKFbt+m11yVGd3sQsGIQ=;
- b=f8rCIZfGQ4+jt/DX+Tqsuof9Pr9BAlftVD5ReL4hTTFgG3SyNuJhLhkJeQ9btGvQca+llY
- ssTFbaoykHonujnBQTozMez10x3LjhRaR7HpcyeuG4JrpiNYvpJHLML9GBVYYylYIbYGKw
- j0W83WUbXzy4IYBAWylhafzOFjx3S7UwOwV16cCUTbxcYjrbLgdUiKpwwQ6AnWKtlVqEnH
- O0XGriKJSJ3h1/BLaHFGTrcq0oCuKwJ3STXZnr8DuT6AlSyJ3gVYm2xXQoP5aEXMz+mumd
- t4KAhq+w/kr5AI1t6Vhv8e2KIC7gczAkI7WnzwS6wygrff91hbgwerxlOu4n4A==
-From: Heiko Schocher <hs@nabladev.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
- Adrian Freihofer <adrian.freihofer@siemens.com>,
- Peng Fan <peng.fan@nxp.com>, Heiko Schocher <hs@nabladev.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Tomas Peterka <atheiste@seznam.cz>,
- Walter Schweizer <walter.schweizer@siemens.com>
-Subject: [PATCH v2 11/11] siemens: capricorn: protect environment
-Date: Sat, 14 Feb 2026 05:57:03 +0100
-Message-Id: <20260214045703.28051-12-hs@nabladev.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20260214045703.28051-1-hs@nabladev.com>
-References: <20260214045703.28051-1-hs@nabladev.com>
+ s=dkim; t=1771037478;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=wGkhxBVy/G76Fsgs80yTYZvpHeSXQom+u/ZnkNDZzDs=;
+ b=BFFe7rdeF/Kpb8NQwFgPQnDRYRiz/fFS/wH2IQF82CyWeY83o4+32jH0XRxBO6C0WKrTlK
+ VYgmc75NpU4rHIQEVEAMYFier9lSifTXhAp7H5+ZgbuerY+fJK12vwcqMMMiafJ/hnXNCa
+ ArUsnZVh7lVemWP3fa+VYQLpGgEzCShmKCwO6kQzhBGazMD4+rDGnbSSsSocNflCJr2SuC
+ d+1u+ulqXSGz1k23q4/HxoeSkkifs35o2pC9/TTEPFJarW7P+I60bwwMthDf2hfWcTEDPZ
+ AetkNEky7q9uvFW7q4vx3Ou0WhvNEg0R3Bzhl3Fom5D7e5b/LUtzi6jF/vEx1Q==
+Message-ID: <8d5ea1fc-6dc3-43e1-b90b-8f6a1de0818c@nabladev.com>
+Date: Fri, 13 Feb 2026 22:58:34 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: add CST backend selection for i.MX8M signing
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20260213001212.157033-1-marex@nabladev.com>
+ <CAFLszTi1M=J6+R1CcAJRY4gnQa87ScFkQ-YOK+NWzsB02VKnwA@mail.gmail.com>
+ <481a2418-4a4c-411c-8028-db7c5c4c243f@nabladev.com>
+ <CAFLszTj0PjocZLL_3VSP+ckDKW57j99jPbZ3nmUKdA-M3-juFw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@nabladev.com>
+In-Reply-To: <CAFLszTj0PjocZLL_3VSP+ckDKW57j99jPbZ3nmUKdA-M3-juFw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Sat, 14 Feb 2026 05:59:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,81 +73,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Adrian Freihofer <adrian.freihofer@siemens.com>
+On 2/13/26 9:20 PM, Simon Glass wrote:
 
-With ENV_WRITEABLE_LIST only specific environment variables lisetd in
-CFG_ENV_FLAGS_LIST_STATIC are read from the u-boot environment storage.
-All other environment variables are set to default values and are not
-written back to the storage.
+Hello Simon,
 
-The u-boot environment usually stays for the lifetime of the product.
-There is no A/B copy mechanism as for the firmware itself. That means
-that incompatible changes to environment variables in future u-boot
-versions may lead to serious issues if the old environment is used with
-a new u-boot version or vice versa.
-
-Having this protection in place ensures that only a limited set of
-environment variables are persisted across u-boot versions. All the
-macros not listed in CFG_ENV_FLAGS_LIST_STATIC are now part of the
-u-boot binary which is redundant and immutable. This guarantees that
-the u-boot version and the default values of these environment variables
-are always in sync and cannot be changed at runtime.
-
-ustate and rastate are not relevant for u-boot itself. ustate is used
-by swupdate which persists the transaction state in the environment.
-rastate is a similar variable used by another user space application.
-
-Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
-
-Signed-off-by: Heiko Schocher <hs@nabladev.com>
----
-
-Changes in v2:
-Added Reviewed-by from Peng
-Reworked writeable variable list, as we dropped patch
-"env: add w flags for net config in explicit write mode"
-
- configs/imx8qxp_capricorn.config   |  1 +
- include/configs/capricorn-common.h | 13 +++++++++++++
- 2 files changed, 14 insertions(+)
-
-diff --git a/configs/imx8qxp_capricorn.config b/configs/imx8qxp_capricorn.config
-index 626634cb09c..2bae5b1a862 100644
---- a/configs/imx8qxp_capricorn.config
-+++ b/configs/imx8qxp_capricorn.config
-@@ -12,6 +12,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_REDUNDANT=y
- CONFIG_ENV_MMC_EMMC_HW_PARTITION=2
-+CONFIG_ENV_WRITEABLE_LIST=y
- 
- CONFIG_DM_GPIO=y
- CONFIG_AHAB_BOOT=y
-diff --git a/include/configs/capricorn-common.h b/include/configs/capricorn-common.h
-index 7120a44d186..ee13d2ab950 100644
---- a/include/configs/capricorn-common.h
-+++ b/include/configs/capricorn-common.h
-@@ -38,6 +38,19 @@
- #define CFG_EXTRA_ENV_SETTINGS \
- 	AHAB_ENV
- 
-+#ifdef CONFIG_ENV_WRITEABLE_LIST
-+#define CFG_ENV_FLAGS_LIST_STATIC \
-+	"bootcount:dw," \
-+	"bootdelay:sw," \
-+	"bootlimit:dw," \
-+	"partitionset_active:sw," \
-+	"rastate:dw," \
-+	"sig_a:sw,sig_b:sw," \
-+	"target_env:sw," \
-+	"upgrade_available:dw," \
-+	"ustate:dw"
-+#endif
-+
- /* Default location for tftp and bootm */
- 
- /* On CCP board, USDHC1 is for eMMC */
--- 
-2.20.1
-
+>>> This should be documented somewhere, likely in the comment for this
+>>> entry type, so it ends up visible in the docs.
+>>
+>> I will send a V2 with documentation.
+>>
+>>> Also, this code path will need a test, please.
+>> How do you propose to test this ?
+> 
+> Extend or copy one of the existing imx8 tests, perhaps with a new .dts
+> - and I suppose set the env var and see that it works too?
+> 
+> Note that imx8 has basic test coverage but there is quite a bit missing:
+> 
+> tools/binman/btool/cst.py                                  18      4    78%
+> tools/binman/etype/nxp_imx8mcst.py                         89     69    22%
+> tools/binman/etype/nxp_imx8mimage.py                       38      6    84%
+> 
+> I shed a small tear whenever I see that :-)
+See [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests .
