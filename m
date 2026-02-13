@@ -4,104 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8E6EF48E6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 08:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C4C5EF48E6
+	for <u-boot@archiver.kernel.org>; Fri, 13 Feb 2026 08:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A471683015;
-	Fri, 13 Feb 2026 09:44:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2024B83015;
+	Fri, 13 Feb 2026 09:45:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uu6+gOh5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RqVszJ4d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAFA183B9D; Fri, 13 Feb 2026 09:44:02 +0100 (CET)
-Received: from mail-yx1-xb131.google.com (mail-yx1-xb131.google.com
- [IPv6:2607:f8b0:4864:20::b131])
+ id 52E2283AA9; Fri, 13 Feb 2026 09:44:59 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C9DB80FA1
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:43:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2B0580FA1
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 09:44:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb131.google.com with SMTP id
- 956f58d0204a3-64adabaafd6so632397d50.0
- for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 00:43:59 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1770972238; cv=none;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d1959ba05cso264917a34.2
+ for <u-boot@lists.denx.de>; Fri, 13 Feb 2026 00:44:56 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1770972295; cv=none;
  d=google.com; s=arc-20240605;
- b=UppWqdbGD7Mgkdk4OPU4ZxZiApMhhmeosLcpd0AhffyKhZnUXF9iah0Rry2mMQSC6i
- wA9UAoAR537dOOOlPJaL6XqEUC65jmfaZc45irgbp3lS3Ok7iLSimKS/Ob90NY5Uc8mM
- +Zx6fYPmQatS4hclS1TSkLOeaMEgGlS1sMf2kU75fpVLo1NXxmYJu52Bf4cLZmaPc3Bm
- HYFj6K1pLGPKZi2aINcksEmPXR5qQaOtQpeCKtYI+Lj+QZL7P1pJn/4RLww+jncpHlF3
- 03u/j4fBa4X6ecHmiUuOFaRCD5NueHMPjSP7sJZzbjIrbsX4hvu1d4wEDQffMEE7T1Q6
- ykuQ==
+ b=BVZGUFu5Lnzi62P/lqQglcCUSFfJZJ/PkgZ8Bm5M/K8MNnEq/Ssh6c6Ow2NVj9mY9b
+ kH3lpJ42+//eYDO8X9Bqf7QY1s3a0Ivj9AkoDAezmiJgXECpYMncIyQ7Pb4/vpRHQOqr
+ 1v81lrMuHxGetBUGQ3lAYFO4yj7MoVuTp3J1nT8A4yvOyyjl9HxuFNJ6R3JIe29BrJvv
+ VSlvEhFBLt8ku+w5nXUMd/jq8jg6HJXxGRa6BOlDldwJK2gb7uzVE6rM2IamLQg87Jz7
+ IQzgnwuO+wa2S3N6szxYM0FEi0E3KTtlchNXrB+fS+Vbxjj/VGXNK1QSygCZhOvx1uvv
+ kH3w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=s4Ac3E+5+ifU49HEdQAsVTzYP1Yta4CcrM0RswVlAu8=;
- fh=vyfbts51IeL9YqiXEXChvJnWUKQFbZdi8gERlNYTnqw=;
- b=IjsP+uHIF6+LpvJ1vzJBVYkSFnZ42KyvohlRGLj4xA4d9PZhzWtZ1StlqtUR2B9P6t
- 8reEpHx/jFePuYDJ85MTbhWr2hOUnNhwo491VevC1z3pbkpANdLmnbM2/R2AQH8KZpX5
- TnDOiYqJ3dMpVWw6FMdytc5VMUt6qQMzh7IdtjgnFM9Axdj66zBM+k5zaVU2j62gYIHb
- UwZdOdN2IimWuQN//9rnESsx9z1eMoYdHsQ5UCKOXQFG2RxhBk8/X6AsDmJ5E+HlnAyP
- f2bztMnqWDBavPlJHSIzNHJFekPXvLKecUksJePVrGP8wW9toxtkVFMsMqaymcqJ8EWN
- 0z1w==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=mezlfNvXgddQvnF8PVNgE71GoudjrPrM30jW/dmESWQ=;
+ fh=eEi8Xo/lKegsBCPHHmDPcf4jaXl0OXhlbgpBC2bs1Eg=;
+ b=ZfcHbmuimMFuSf5vwI1lLIVSVf3Fx5/SvT+hWkri8S0otXnWjJKrKCspUzEhBuv6Ik
+ KdYywGvBFLXb+n8t2BjUoKrJjoPMChVjxgbWQe2XbX9XKwi2Y3KwOiyUHt8teS2l0X6d
+ E+uCdiJxR3AQx/+3LBB6wA7mhUYlAphzw1UsrpzLA4I9W7rEwo5vs5UVri1XlIMklFfw
+ SWle0gltZuqE9O/W1bZNHKwNq2qGiUAdNd+Amrc6Iua65UyQ2JXhqqkxSckThP/DDGBF
+ ntWqOzDdFFgoI9piCC9RuLILEn6h3eNpg/glTPYL2Qq0l6RuDv+19iONg2smADM8/bWu
+ plqQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1770972238; x=1771577038; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s4Ac3E+5+ifU49HEdQAsVTzYP1Yta4CcrM0RswVlAu8=;
- b=uu6+gOh5L1qszL1TRDjGMCFo1ajRivvTMITPkNdNLo8Be2IZVjkDLY4mwChPeDEPst
- sjFyr+z8+gCJIMLm+tfvVOcuFLy8rpYxk719ITIHQkugIPU0a/6csSbCVW1Z+DTdaFLq
- GXg05iMZScq0CQq3cf65FU7/AKCbWuLZzlr42cp1NSBg42+bYuPncS/9AWlDZNlZ9beI
- 2dthb7P/kENsUMiyYZiwlEcGssmRoRuCWHfKKjFOdnhGukVH2zC5Ge6KakS2NdrwHhG7
- MKRN6/Fpsq8MCy8+G48Oe/mfWKEGnPer/uvNcHeW6Exyh6cgAUoveSw0tkCuDCH7Jw8D
- wRKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1770972238; x=1771577038;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1770972295; x=1771577095; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s4Ac3E+5+ifU49HEdQAsVTzYP1Yta4CcrM0RswVlAu8=;
- b=bn8pQCyc93JwBLGIR1m/D7vKrPmyHCT+BymE+JkgKC79aT8SyR/rVwRcPyc39O6tjW
- KCUmlCkUg8SNFCJ6b1GlyGgiZ5M+/F1FwdKJcZ7pbr5XyK4bJmXv70gjL9zJqTPB9qMO
- CO0kSVAXmInrXMbg3AagWm5Yx3knSyFeXVxQnjTVLhrfxMoB6n+HPNUBToJmAq33os9y
- 8il9CiqPJ5VIKL04E0DBu0SlZGGIku8nFrE0ICoLot33Ec449Jz7UrpRRlIN7XNO2i3w
- E8s7zkgnp83L8YkMv2oJQXT5eIuhnCIGjpyvd0Gq96jjay8j/PK+oQDxClFiZuKdV6l6
- UEOA==
-X-Gm-Message-State: AOJu0YycK61KUJaMwIGbVqA7y4LYR2o57t55iPGmiBX/dpS21vTEveEH
- vtswlvmTghEO+Q+inqf4RXQNHI2AW0kucpFXRmyV2CSsjYFU29NO8JzVvpv44fiLFuer3V9grYF
- HDf0YhcxqGhsFD1twSxVTGdBt/y9SeQQSEUWWjBJoQQ==
-X-Gm-Gg: AZuq6aJTpQONR+bSoo53mi6T2drUMiFHpb5mkv6xP343apkj9Y7P12UKpF3VbH2VqJe
- bYHrN03QXzSqYjz8+XFu8oYvCfn4O/VyjZo3nIoyXv7DVsKVc32FQyftC2GGJlC+s0x0Zi+d2jr
- PJtH4CJd0awGg+JJ4luDqoG7bM61YA4a/vtWp/iNXgZBsy0GTQnrLujU4ENRzwEBY7OAMeXPjpb
- q+lalcpm2S/Mcz/PL7Yf7zh7RsZClOP0FAiLR8gHa0U0Amzu6uml/rd6LnaYGXe4BH8PHeS5Bwy
- KTCpUiAniHa2qGIxAHoRT36drLc5p4ZvIdrJGqnnFmJgpcfq1ahd8ouQaXf/Pn9uqqTjliWcINr
- uULdNqANj+cDRw2aYGWdL6ICSjR4ot6lLuR0CE50+VwdUM02zX6M5Z7+900oGXhv1eaFaGNNX/1
- dxCddJaaBJsQg6I1VTC7WROP025g3Mv70TU1pxdKXQX+m78NbaUsIETbsoa4fKpcC1d/M8foCwE
- fDtMwm+dAT/P4ltEgFvJrQZZ8wz7YnmThRg9AUvpRNwU/GT6/fNdy8PqXnnT4hL69id5vlZffmJ
- 9LNXC9g7SxrUm7y55444zlCVucMweZUH5gC8eGDW0C+Q
-X-Received: by 2002:a53:dfcb:0:b0:63f:9c70:84ed with SMTP id
- 956f58d0204a3-64c19b2de9amr570024d50.58.1770972237977; Fri, 13 Feb 2026
- 00:43:57 -0800 (PST)
+ bh=mezlfNvXgddQvnF8PVNgE71GoudjrPrM30jW/dmESWQ=;
+ b=RqVszJ4dfoXmRTGUYFDs1/ZLqa5fGcRXePrBHP7eLHnDKHrXXpI4FgiMtaFeiiANjl
+ 9lEg4pE5j74bLskuT7wTuvaNdhcbBVrcQ0ZC/bLR4/9hn9EFDuz1dqxFFXXRjgGJvXPu
+ X8zDMMbTI/Q+2kNS3FAjFCqOgqr+2VYjE4Hgr9JVsdxpSPR14Vc2WTd09npagW7OHMh4
+ Q/uGYVB7IGXS8VDb0bE7ejUqPW9uYPZIt2c2tZohjItshh8/iuxJB/dVzvxvSq/mdMp7
+ HfggS3VXJMpmafxenixWl6AVdFDizuJ2K0XbHgmbLxaU2W9Fdg9cfGyBTtCKHoTW4+dn
+ 5uHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1770972295; x=1771577095;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=mezlfNvXgddQvnF8PVNgE71GoudjrPrM30jW/dmESWQ=;
+ b=uXKt6OYEy6NGOoy0/ZuzxHFRXwq5+AzNLeXPI1hABXsefuqvvloi39ZNy42DZqAzuW
+ z7cG7OL54GlSkddEPMtYYRKsjJeCkt6/txS4HDr4Ga8T2jhF/M+xm+OPAZfioMBE0wuc
+ NPXwe51ryfYCYpzzA3w9S3sr86qqFOmv3Gfait4YRXKWFDwhCtx/CBBVokV90oBM2bkb
+ XU2kfli4Echk8O2cAXfSA/XxGOM3V4q8mG+oNwxBL4pLCNocetI0I/d1h4HbTiRLYL7k
+ iHrxHU9egCx3nks+hlWb1VpPiFYWjblfGrHZfCM54l0/kGbzYT7xtLq9hKGoRrSKcVL1
+ rVAg==
+X-Gm-Message-State: AOJu0YzH7X4sGzKc2xM9K1zw9IMB16tuLEKjyojUliHDYv/8jb127+Mr
+ pnk2g98SYuwCksA4dsVLN5LVdvzsey/V/+UKiKeN4phM+VcIxkhuS8KSfoMtuPKXCSrrHkKdCLV
+ uV+UUW74GKXfuzJRYHKstGB8ruFb367A=
+X-Gm-Gg: AZuq6aKjxFXgw69iM+3Ib3AVz+KWoHUAOZjhThbQo5xWN3uyT8vMeNkfmyuyzQ4MZqx
+ edkQMfdzVVSF0jZHNi1zfQ4qqtAaZU29riXx+4ZtX/3ZzeiMVpdbDmvSw/aZ6HXVAtusBLTzCC0
+ euq6IsYSbFASpampK9nyALlwRX6/GwTJhRwbCJo6U2JsjZxj2B3K7WiLBZVDEZ0eX/jtJUnsGg+
+ T0vl5VtELYqDhBhdLle6MhWmFaA8kKYZqp0VXG7jcY8rz+hifEhVy2qyC+kmVxh6u/PWnzVgcdW
+ 9oqzwoom
+X-Received: by 2002:a05:6830:6314:b0:7b0:826e:4002 with SMTP id
+ 46e09a7af769-7d4c4ac919amr646579a34.20.1770972294999; Fri, 13 Feb 2026
+ 00:44:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20260212204511.619392-1-javierm@redhat.com>
- <20260212204511.619392-5-javierm@redhat.com>
-In-Reply-To: <20260212204511.619392-5-javierm@redhat.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Feb 2026 10:43:22 +0200
-X-Gm-Features: AZwV_QhlTR265iDnD7bhBuauwt3FB-OOPlNNV5WHUM2ND9iANlco_6JqavEm04M
-Message-ID: <CAC_iWjK0ZCjM14zjPOW5KAnNNoC8AUQO=KqcZWEFd5k+tbaOJw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] disk: part_dos: Document part_get_info_extended()
- helper function
-To: Javier Martinez Canillas <javierm@redhat.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- eballetb@redhat.com, Tom Rini <trini@konsulko.com>
+References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
+ <b25f6c14-7db2-4517-a3ab-e2c55a52818c@altera.com>
+In-Reply-To: <b25f6c14-7db2-4517-a3ab-e2c55a52818c@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 13 Feb 2026 16:44:44 +0800
+X-Gm-Features: AZwV_Qi0XbDHkFmXV53_deXez0oqCCyc1JktPXNanQPE-krQd29VNJmEhf33DFc
+Message-ID: <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: socfpga: Add call to
+ socfpga_sdram_apply_static_cfg()
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,48 +116,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Feb 2026 at 22:45, Javier Martinez Canillas
-<javierm@redhat.com> wrote:
+On Fri, Feb 13, 2026 at 3:18=E2=80=AFPM Yuslaimi, Alif Zakuan
+<alif.zakuan.yuslaimi@altera.com> wrote:
 >
-> The function receives many parameters but these are not documented.
-> Add a description for these to make it easier to follow what it does.
+> Hi Brian,
 >
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
-> ---
+> On 6/2/2026 11:09 pm, Sune Brian wrote:
+> > [CAUTION: This email is from outside your organization. Unless you trus=
+t the sender, do not click on links or open attachments as it may be a frau=
+dulent email attempting to steal your information and/or compromise your co=
+mputer.]
+> >
+> > Hi Alif,
+> >
+> > Since 2025.05 to the latest master.
+> > I do not have any issue as you mentioned in this patch.
+> > Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
+> > I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
+> > that GEN5 Cyclone can support.
+> >
+> > Not too sure what is missing from first place?
+> >
+> > Thanks,
+> > Brian
+>
+> Based on the CycloneV address map which can be found here -
+> https://www.intel.com/content/www/us/en/programmable/hps/cyclone-v/hps.ht=
+ml#sfo1411577374877.html.
+>
+> Bit 3 of staticcfg register has to be set to apply all the settings
+> loaded in SDR registers to the memory interface, in this case the patch
+> ensures the SDRAM controller applies the latest configuration after
+> disabling FPGA SDRAM access.
+>
+> This is a safety and correctness fix for re-initializing the memory
+> controller in the proper sequence during FPGA reconfiguration.
+>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi Alif,
+
+Before I plan to undergo a test we got to understand why w/o this patch
+SDRAM2FPGA works properly w/o issue.
+
+> If you have the time, can you help to test this patch with your setup?
+> Although unlikely, we want to be sure that this patch will not break any
+> existing GEN5 boards out there.
+
+I might be wrong, I think static cfg has been done already?
+Does the code here if not wrongly understood already finished that static c=
+fg?
+
+---> Quote start
+void socfpga_sdram_apply_static_cfg(void)
+{
+const u32 applymask =3D 0x8;
+u32 val =3D readl(&sdr_ctrl->static_cfg) | applymask;
+
+/*
+* SDRAM staticcfg register specific:
+* When applying the register setting, the CPU must not access
+* SDRAM. Luckily for us, we can use i-cache here to help us
+* circumvent the SDRAM access issue. The idea is to make sure
+* that the code is in one full i-cache line by branching past
+* it and back. Once it is in the i-cache, we execute the core
+* of the code and apply the register settings.
+*
+* The code below uses 7 instructions, while the Cortex-A9 has
+* 32-byte cachelines, thus the limit is 8 instructions total.
+*/
+asm volatile(".align 5 \n"
+     " b 2f \n"
+     "1: str %0, [%1] \n"
+     " dsb \n"
+     " isb \n"
+     " b 3f \n"
+     "2: b 1b \n"
+     "3: nop \n"
+    : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
+}
+Quote end<---
+
+Thanks,
+Brian
 
 >
-> (no changes since v1)
+> Thanks,
+> Alif
 >
->  disk/part_dos.c | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
 >
-> diff --git a/disk/part_dos.c b/disk/part_dos.c
-> index 60c3d6773696..a69ad8962106 100644
-> --- a/disk/part_dos.c
-> +++ b/disk/part_dos.c
-> @@ -196,7 +196,18 @@ static void print_partition_extended(struct blk_desc *desc,
->         return;
->  }
->
-> -/*  Print a partition that is relative to its Extended partition table
-> +/**
-> + * part_get_info_extended() - get partition info for a DOS partition
-> + *
-> + * @desc:              Block device descriptor
-> + * @ext_part_sector:   Partition table sector
-> + * @relative:          Relative offset for the partition
-> + * @part_num:          Current partition number
-> + * @which_part:                Target partition number
-> + * @info:              Returns a pointer to the partition info
-> + * @disksig:           Disk signature
-> + *
-> + * Return:             0 on success, negative on error
->   */
->  static int part_get_info_extended(struct blk_desc *desc,
->                                   lbaint_t ext_part_sector, lbaint_t relative,
-> --
-> 2.53.0
 >
