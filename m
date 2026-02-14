@@ -4,74 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 176FCEF5851
-	for <u-boot@archiver.kernel.org>; Sat, 14 Feb 2026 19:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BACEAEF584C
+	for <u-boot@archiver.kernel.org>; Sat, 14 Feb 2026 19:58:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D52483AA9;
-	Sat, 14 Feb 2026 20:38:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
+	by phobos.denx.de (Postfix) with ESMTP id 1027E83C6C;
+	Sat, 14 Feb 2026 20:58:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="bM+fOWv3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PWx8iglD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD12983AB7; Sat, 14 Feb 2026 20:38:34 +0100 (CET)
-Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4D16683AA7; Sat, 14 Feb 2026 20:58:49 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0DE083AA7
- for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 20:38:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D170983AAB
+ for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 20:58:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=iki.fi
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marko.makela@iki.fi
-Received: from kehys.lan (dsl-hkibng22-54f98f-8.dhcp.inet.fi [84.249.143.8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange secp256r1 server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: msmakela)
- by meesny.iki.fi (Postfix) with ESMTPSA id 4fCzqC3zp2zyQn;
- Sat, 14 Feb 2026 21:38:31 +0200 (EET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
- t=1771097911;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=n9gDnK4qvieC9W5sABAVAumAzS7g81uwp279uNf48gU=;
- b=bM+fOWv3oDj5sDuycK5FRH4rWHOmwtrlGhRBzY8i2G1iBX12RbAc7FlgROYjJrZVkyN3iY
- USxKXDCfcX6rtGOr4WXHg9xrm9jWubZJeAHYipy4lU9dAi6I/TVi5MzrF5HwN8p++HN3KI
- +LgFa8lvsWHzp8NQK+OhwKiMnwib84M=
-ARC-Seal: i=1; a=rsa-sha256; d=iki.fi; s=meesny; cv=none; t=1771097911;
- b=C4CG9pPXp9iNI+jhIMfGjMVfW0CbbNfKEhmycR/oyRTasQfzRMI5G3Fdrbv9tVw29LrbVC
- Vf9ZOUrSmxQ21csWFpvnUQ6NkSs7PNYsx+18Wicrml15xoJEhvVh/P93LpmhyWWswGLabO
- CnlOKdrMCe4kdV1HCLJ9Du6Dl5oMh/Q=
-ARC-Authentication-Results: i=1; ORIGINATING;
- auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
- s=meesny; t=1771097911;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=n9gDnK4qvieC9W5sABAVAumAzS7g81uwp279uNf48gU=;
- b=m4xQx0UosE85nD2ILxI0qoZzpo6I8yGeXNhiSXc3Id/OMSK76G7+jOe+zq/w5hevUJI6DO
- KbR9J6kO9yv8YEfWGB+rKFM5emeNWp1tKRETyu9X9sAWy0BUYkqUnEHaNXuZjnoszsxT94
- eX/BYJA/xxBHNwF4nEGVCt3psEWPng8=
-Date: Sat, 14 Feb 2026 21:38:30 +0200
-From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: jonny.green@keytechinc.com, raymondmaoca@gmail.com,
-	u-boot@lists.denx.de
-Subject: Re: [RFC PATCH 0/4] add software ecdsa support
-Message-ID: <aZDPNtx6-4YwPhli@kehys.lan>
-References: <20260202170307.217200-1-philippe.reynes@softathome.com>
- <aYoFqWew28crCb1i@kehys.lan>
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d19d3c7208so1322215a34.0
+ for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 11:58:46 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771099125; cv=none;
+ d=google.com; s=arc-20240605;
+ b=GhovG28cRAQGuWd6iAWO/+4bDH3fDnmG4WVMQypsZ0DOzAj/cLl1rcRfP+sQSIBAot
+ nM86mf9iuXnF2AlJDldWOILxc4CHz+aL/cm4qsPWM2vVDElkzX0EI+qwwjEsu2jW4U4k
+ ezOwjeS8ClU4uQvVsJSY9m4F22iSTurhv6BnzarglFpWgtENBqCkwsnwTB+fmyFr/DK/
+ QBqCx7HLetKBS5xO9vs+0ovZVwRCONaSmz/dciqqUEHloOXHjJ+LFRBHbqnRKUaT9ROO
+ eg9q3X5l47SBi8yrStcz9OH0hAV/5BNbvZNkN9+2uu7qmZUvbIUhIpUcaBhnh5Oxi24E
+ m+jw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=eRbLJLfOXopnWNLLHqNX3wmCdvMfKgeVKZiXSYJt3rc=;
+ fh=no8W33Pn5R5GWWHU2aoiWzfLVa2piAT3KYru3U98z6w=;
+ b=jzd4Kql2K/jQ3eWT1fHhBARdF3SxCGHTHJh1ChBOvh9H68V8Jhdi39+aafahYW1bf0
+ WBw0J8rGQgiv5QzxahAeiryLreYp4rFp9dYDURZ2mmOp7hjKRRYd5hofUL+eSRVa2uyi
+ VoBm5B4uaSv2HQEg0qMjYlNRY8+l6GdI0udYwjm2VqTrp6IO8e7ASw932m79JxeIwX2H
+ 7scqZ6nz7SD1k63N9lUdxiVCIxRYdHJVcZwMMEvTVY+Y7U6hn0V/7csPfkyYcfHnUt0/
+ V6wwS4P1NxP0k8g8A+viBClBAaa0bp/FFt4EbJrr1wlXMNxI9JGp/A0HIYaedTgxMiw1
+ RXww==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1771099125; x=1771703925; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eRbLJLfOXopnWNLLHqNX3wmCdvMfKgeVKZiXSYJt3rc=;
+ b=PWx8iglDC79BPRbEiqmMzYJOcPzgDKtBIXruIpU0OHMe95SO5ha7O4/O+ab3z4lU6M
+ UJS/1DCAG8GwKb/Zau+jANFuPlz98tL0uwCjcwTPI2B3vzRPordKLinmu7tutP/TbfCS
+ omBDZqmO/wXisvjgJziU1BkgprO23/bXI/FgRjjjRYHunaZlI6NxD3d+qCMPRiw/olnt
+ F7BFHMGfI94t2eIvi3brfpUmAPltth3li3h9vwxjOkwrprKIAQNjlpJXkYjn1gqHf01Z
+ x9zU2YAnhmcu6PKlUYR8F+V4Tn8rIYGboeqfi0Q3GH3V9RjinFpd8++fWj2JIllCO4Sp
+ rVSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771099125; x=1771703925;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=eRbLJLfOXopnWNLLHqNX3wmCdvMfKgeVKZiXSYJt3rc=;
+ b=FLDd3Po1TZgmkZalyJ3jO691+gj+iP3XGlf2xfqO+EoVSjdx84wugWNllWfrotsIOd
+ U97fuT6XZ+M8rTRL4x0HUAHN67LKVlU1QnMPQJt86eic2xRuL6+MBQZZ8EiQVmIAkPYW
+ 8hJGIMVC8IxBiAAHpKbGO9H+HrhuK1I2EPg55tEUG9aZwozAVvfj0+S9VrTquF7qsfqi
+ CQBB7vVnR2f4DowGVe3nxDXjyGDbA5cTdSXHZfU3j7bkRSPXwZpKZ/Sint+9KCHocENK
+ A/kH2G1H/TOkst+YpwSj+ifZR9vI3ci+Ak+iG6vP772tdh+ack7c/f139whN+IHgpLP1
+ 4kbA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWaaXYjKPB8+GA/W5nkOqk7FzTOUENMNAAfUItTWh5mi9XRqnc+wPDBYPfbCiXE0sEJbUkj/MM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwjnOkUquXFXVIiYHiHI6rVtXu6z8DhzpqU9eX7Hydb8I1Zf+Oa
+ lD/YbohlLS4F6J4OIPevd/dEm+UHRNLVeDvgVcJIitJ4dCc3AaqKeiIspcy0mp/1KgEYpWYj7kP
+ WltkG/1PZ49FcmHjB1zE2HjyK+bAPuA8=
+X-Gm-Gg: AZuq6aLW4DWKs83ZOiuXxay91+22JWeuWn0nxziJFNkPQOKyIEx+tehBM1RHhKH/MwF
+ KeMzJPhTLB8YwJL1HtSpSlI1iLGgOvtdbz9/f+MiHQXp2ITGmMnVoPVMTsZ5xFRJ3vU1aGQu9MB
+ 6EAB/L7JkD2inHNBikaqQCDyufZa1WZ03sDlE22c5IqRXiMu7RU7EoAXy4xT0ErT1qnCBTjag0p
+ 6fjkRDZxZn6SbT1DNFTZFwC3VwGm2TRUrWl19UR5yy6RjE6tdmXp/Qwn8/k73DzROuxLyBj9R2k
+ Xdv4+7zH
+X-Received: by 2002:a05:6830:3882:b0:7cf:e4a1:8a9d with SMTP id
+ 46e09a7af769-7d4c4a63bb2mr3906745a34.14.1771099125540; Sat, 14 Feb 2026
+ 11:58:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <aYoFqWew28crCb1i@kehys.lan>
+References: <LV8PR03MB81379CE3BDF36A06DC1D517BA761A@LV8PR03MB8137.namprd03.prod.outlook.com>
+ <20260214185409.GS2747538@bill-the-cat>
+In-Reply-To: <20260214185409.GS2747538@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Sun, 15 Feb 2026 03:58:35 +0800
+X-Gm-Features: AZwV_Qh18lTBjpPqAin5wy9bw76zSDiHFXEr4sKANs_oT5htB5y46NtAbmrJN5A
+Message-ID: <CAN7C2SAbayHsJWyKQE=trBhV-qFTdVTdV-pFCM-ji4tRzZoUTg@mail.gmail.com>
+Subject: Re: Pull request: SoCFPGA changes for u-boot-socfpga-next-20260213
+To: Tom Rini <trini@konsulko.com>
+Cc: "Chee, Tien Fong" <tien.fong.chee@altera.com>, u-boot@lists.denx.de, 
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>, 
+ "Kathpalia, Tanmay" <tanmay.kathpalia@altera.com>, "Maniyam,
+ Dinesh" <dinesh.maniyam@altera.com>, 
+ "Lok, Chen Huei" <chen.huei.lok@altera.com>, "Hea,
+ Kok Kiang" <kok.kiang.hea@altera.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,69 +121,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mon, Feb 09, 2026 at 06:04:57PM +0200, Marko Mäkelä wrote:
->For me, mkimage version 2025.01 (as shipped in Debian Sid) would crash 
->if I ask it to write the public key to u-boot.dtb using the parameter 
->"-K u-boot.dtb". The following statement in do_add() would hit SIGSEGV:
+On Sun, Feb 15, 2026 at 2:54=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
 >
->        ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
->                                 info->require_keys);
+> On Sat, Feb 14, 2026 at 04:45:41AM +0000, Chee, Tien Fong wrote:
 >
->The function do_add() is invoked by ecdsa_add_verify_data(). For my 
->kernel build, I did not yet try a mkimage that is built from the 
->latest u-boot. Should that make a difference?
+> > Dear Tom,
+> >
+> > This pull request updates SoCFPGA platforms with DDR improvements, new =
+board support, Agilex5 enhancements and general cleanup across the codebase=
+.
+> > DDR and memory handling
+> >
+> >   *
+> > Add DRAM size checking support for Arria10.
+> >   *
+> > Widen MEM_TOTAL_CAPACITY mask handling in IOSSM mailbox driver.
+> >   *
+> > Assign unit address to memory node for improved memory representation a=
+nd consistency.
+> >
+> > Agilex / Agilex5 updates
+> >
+> >   *
+> > Restore multi-DTB support for NAND boot and fix NAND clock handling.
+> >   *
+> > Enable SD card UHS mode and eMMC HS200/HS400 mode support on Agilex5.
+> >   *
+> > Fix DT property naming conventions for Agilex5.
+> >   *
+> > Exclude AGILEX_L4_SYS_FREE_CLK from clock enable/disable operations to =
+avoid unintended clock control.
+> >
+> > New board support
+> >
+> >   *
+> > Add support for CoreCourse Cyclone V boards:
+> >      *
+> > AC501
+> >      *
+> > AC550
+> > Including device trees, QTS configuration, defconfigs and maintainers e=
+ntries.
+> >
+> > Fixes and cleanup
+> >
+> >   *
+> > Fix GEN5 handoff script path.
+> >   *
+> > Remove incorrect CONFIG_SPL_LDSCRIPT settings.
+> >   *
+> > Replace legacy TARGET namespace and perform related cleanup across SoCF=
+PGA code.
+> >   *
+> > General Kconfig, build and SoCFPGA maintenance updates.
+> >
+> > Overall this pull request improves platform robustness, adds new board =
+coverage and cleans up legacy configuration usage across the SoCFPGA U-Boot=
+ codebase.
+> > Thanks.
+> >
+> > Best regards,
+> > Tien Fong
+> >
+> > The following changes since commit f9ffeec4bdcf1da655a0ffea482062adde78=
+fee8:
+> >
+> >   board: toradex: Make A53 get RAM size from DT in K3 boards (2026-02-1=
+2 08:12:09 -0600)
+> >
+> > are available in the Git repository at:
+> >
+> >   https://source.denx.de/u-boot/custodians/u-boot-socfpga.git tags/u-bo=
+ot-socfpga-next-20260213
+> >
+> > for you to fetch changes up to 4b567f8e252e27f6dafdfe22de1bad147595e33b=
+:
+> >
+> >   Replace TARGET namespace and cleanup properly (2026-02-13 20:35:09 +0=
+800)
+> >
+>
 
-Apparently, something has been fixed since the 2025.01 release. The 
-following would work for me with a current u-boot build:
+Hi Tom,
 
-echo "/dts-v1/; / { description = \"\"; images {}; };" > public-key.its
-mkimage -f public-key.its public-key.dtb
-mkimage -f fitImage.its -k . -K public-key.dtb fitImage
+Actually I am also troubled by this manners:
 
-With the mkimage 2025.01 that is included in the Debian Sid 
-u-boot-tools, I am able to build an unsigned Linux fitImage:
-mkimage -f fitImage.its fitImage
+If there are patches that are not committed yet while new patches do
+rely on the other holding patches.
 
-Then I can invoke a freshly compiled mkimage to sign it and include the 
-corresponding public ECDSA key in an u-boot image:
-mkimage -r -k . -K u-boot.dtb -F fitImage
-cat u-boot-nodtb.bin u-boot.dtb > u-boot.bin
+Under that background should the new patch that relies on another
+follow the new one or ignore the dependent patch.
+Keep using the master to develop.
 
-However, this will not work on the Raspberry Pi 4, which defines 
-CONFIG_OF_BOARD. I came up with an idea of creating a device tree 
-overlay file instead:
+Thanks,
+Brian
 
-tools/mkimage -r -k . -K pubkey.dtb -F fitImage
-cat > signature.dtso << EOF
-/dts-v1/;
-/plugin/;
-
-/ {
-         fragment@0 {
-                 target = "/";
-
-                 __overlay__ {
-EOF
-dtc pubkey.dtb|grep -A12 signature >> signature.dtso
-cat >> signature.dtso << EOF
-		};
-	};
-};
-EOF
-dtc -o signature.dtbo signature.dtso
-cat u-boot-nodtb.bin signature.dtbo > kernel8.img
-
-Initially, I tested this with CONFIG_RSA, which I expect to work. The 
-bootm command would start up my fitImage, but unfortunately it would do 
-so even if I corrupt a bit of the public key. This would lead me to 
-believe that the overlay was not loaded and the signature was not 
-validated. I only saw messages about hash validation. I'm afraid I need 
-a target environment where u-boot is the primary bootloader, or I must 
-override the CONFIG_OF_BOARD and see if the u-boot.dtb approach would 
-work.
-
-Another point is that my initial CONFIG_ECDSA_SW build was over 4 MiB in 
-size, while the sha256,rsa4096 experiment was only half a megabyte. I 
-did trim the build options for the CONFIG_ECDSA_SW experiment yet.
-
-	Marko
+> Please note that I had to fix the Kconfig entries for the two new
+> platforms as they were referring to the old symbols and so didn't build
+> (and failed in CI, in that harder to spot manner). I am also concerned
+> it looks like there's a few places in the code rerferring to the old
+> symbol names and not the new ones. That said, applied to u-boot/next,
+> thanks!
+>
+> --
+> Tom
