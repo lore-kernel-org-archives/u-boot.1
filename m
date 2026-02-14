@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 637B0EDF15A
-	for <u-boot@archiver.kernel.org>; Sat, 14 Feb 2026 14:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81C79EF5851
+	for <u-boot@archiver.kernel.org>; Sat, 14 Feb 2026 18:54:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7825C83642;
-	Sat, 14 Feb 2026 15:56:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 721E083AA9;
+	Sat, 14 Feb 2026 19:54:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XXMaYHp7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b6tGvoDr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E86DF83AA7; Sat, 14 Feb 2026 15:56:41 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 557F783AB7; Sat, 14 Feb 2026 19:54:11 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE98083015
- for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 15:56:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D42183AA7
+ for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 19:54:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45f194e9a98so605797b6e.3
- for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 06:56:39 -0800 (PST)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7d18a9d2b1aso1911530a34.2
+ for <u-boot@lists.denx.de>; Sat, 14 Feb 2026 10:54:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771080998; x=1771685798; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KHjSgP3aTyTple2rVfqxoPa6kj5Cr5X+lMvmi7/zXDY=;
- b=XXMaYHp7YXDScOkoxopkFS0R5HI2XK7ostaMxKcItcil5rqrGSGo0Nuf7gqt6hmaEV
- 3lHpJX8Ju+6Qw10sWetPoHEyXRDFCbebiGVm1iBPSu26vtQOJ6/2MAUg2MGMTJ1FuEY2
- wMaxSGz/c87jkQuPB1di68+GnNfwpIQa5Mgpk=
+ d=konsulko.com; s=google; t=1771095248; x=1771700048; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=DlA5GR8ZHiB81MKVNNzvCFNaEiOu0j7aF5nvB85LUPw=;
+ b=b6tGvoDrYJweg6R+eEqD9aF1RnYeDEZ1zVhMRXGM6mFIxMAt5LHVTsbJZzySr0TqAF
+ ZdWOtQXU2utD6EnUeYqTPhbEJcX+QAPKpT+HDoHV0Lsw0T2xSlt0Xa57gxbp5Ksyx8K3
+ aX0v3xDOHTATCgDSbgJAwLemRdwpZ6ARX4WOo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771080998; x=1771685798;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KHjSgP3aTyTple2rVfqxoPa6kj5Cr5X+lMvmi7/zXDY=;
- b=ZxisNTCavlgoUqUAZg4QjWJ8/kDFmzSfeali9ktVab++2M7Qu6CcAAWO7sTBRtvQm5
- 63ECn8hE5eLEGwxIyGn3+TRLfSN0UGvEwxfHFnecUdVye3vvqgibbzZPKHrY4R8dHdKJ
- 2AndJefacmLj+vvLHiLBayY1pvnHMUuG+XlkKAQz9ImM9P0Mvb1FXwZwQRom7hy9u1ad
- nt2fPnAFcTNVYYcIqTliZfGgCov9FPEdSsfSK8jtmo2MjIKRAjDnDkV07V56ZRFDgrU2
- Nh/L66rJEZkcO2dRbLv8nUQBKMoHPbNAHqUDSgvKKuBWGPm5Jko4ey0MS0lGSpHE78u6
- nFxA==
+ d=1e100.net; s=20230601; t=1771095248; x=1771700048;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=DlA5GR8ZHiB81MKVNNzvCFNaEiOu0j7aF5nvB85LUPw=;
+ b=FL6h8L4wZIhgRc4mxMzWXqYYXP321B9L/HwI3obdkbQ0dlQZguRpWkDp9auHcZpfIM
+ FJ52ctcYgX/HYLeBA618ltGuWfAUqBGgCbn8veeX3KJs86Ui/Wo21QMTUeYv4fgAO2mL
+ m7Eg84Wo056fWbTn++jD5oWjJn2hmYsjJTYT0gb/WkS/g2J25dMghaG3jWhIDtED5t5D
+ 6bk6/oNw91UskW2MUc1Pi2VO7d5vjEvKCeP4UtT/eAdOCql+UisjEEtNh8gFevHyrFQi
+ mJx6NrkWKCyM9EHuo1fKKcd/ml/qbRqHGkoiXB4sv89wF9/wuByPWJXEpKqJm4nHBZ9Z
+ 5Agw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVegCQwdHg+Vpved9Ru8i81UxS7EQlOrxNQ9hGV5EFOKOYHhDZUCVddTln9/avWl+jcC8ScoVY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzczdcSsJeyvTtMQSKTgNwZxTe2sRdcZeVIA3resg2to3U2L4Mk
- OPTHyG+AhkLb0taEU11cSHZ3MVqbJ75xn1XvOiNfyPEfvb3BLWhMGL6i7NTxVUNbBN1Rd/6A4lD
- 2WnpczJI=
-X-Gm-Gg: AZuq6aL9PjTlpIUB1bXKpjurKilUd7WYXMiUHW/bldTTxEbnGjG8L20DV2RKol5IIta
- 2lxoOexlkWwSTWchwQV2Hpz8sC2HxrRQKfy8Uey+ZCNMgd7NsYFaXYhs4JmBUD1f1R3gIV6Bc2I
- 22mDZ7siS3LGHUZ57+cD/Z96Q0LKNFoKMQfMtAetyHk5+oflpIf/yLAPpKDSoRDcNIGhT9HK1kh
- 05+dimbflIUMFYwkgyhnC8eTNIRJMydZ+qdYvzJtPZNmUxlnYpmNGgHdFmU6db2LzZD51L0iO4B
- hz2ZfK3KNFYB+609uv8Kh/3ZWOYuFCKLXrH7MwDTuekS2onVnCaMgV8owWPUZZzthstYHuDtUVy
- +lp5U3c/6U05s+YOlNSL3X+F/BFbKnuwKyY7HYSIYq8eus04o0MA8EC53oghgnKETuqR0ljN53j
- Tp7Hjbo9Rcx/m7qUilkNssmWhU9m36cCyDqBtM2H3E3noukj7fjJC7ANE+6imzUDTSct/bItGkz
- F54TZHP3ur7Taie/oTsWd+avglqPTtIplS3pv13GODdY3L14GA=
-X-Received: by 2002:a05:6808:2e48:b0:450:cb93:69ef with SMTP id
- 5614622812f47-4639f28a1b2mr2782120b6e.56.1771080998222; 
- Sat, 14 Feb 2026 06:56:38 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ AJvYcCUUCgeEXEwlhJsj4MOrAMRcZ5dPmJSO3nnEtT97cJJUEqkgaE/esbHLLBpuX/PPahCVJXHSZUA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+zxY5LSKlI8wzQZLV8P5k5L171Y0Fid7GNESYOQ3rVpFeNLZP
+ WpgV2M45OuO3pwguO/THfp14Vr0UhmmVBRXXh1HWg0r+uSy2q9BSQHsfCDkIwTkf+KyIhw49pYV
+ XjQRMxKM=
+X-Gm-Gg: AZuq6aId/kAqvPdJw2I+xc+2ModrtUeUsM9kEKH7vkVI8SP4TsXTDqWuMf4KZuccKVf
+ ATqAsgikFZVDKL09fw6+7kKQY933oIfsvZ+vjKR4GOwfw5y9Lfb7VBewNUTOAk10fYDUva8EOTJ
+ WTuyDmSu6yVTvoW+TciO8RdlmMAZGu73Z7DyKE2nXhUvAM77uy1L+bTEW+BHERc+Kkt1o1FHlLE
+ s4qyZzfqkgzVXuFvNREbewb0FNt0vaJi6+LzZlLoxAk42oiCinekZ4Uokz7ENLn2qf0BSj9UHUG
+ n10Q/7Mm/xes6qsBgp2IjvXaZb2vTW0U1of1gp0nbVtve9jlxY3ZoouqOQJAESTQotqtUpFRfLw
+ DCQcRxVovKz3/RmOxPz9JypVmEq55br8s4SxydSnVQYEfCbg34Zypqk9xfCfgjmMdyhShK5sjCx
+ tv4P45RmcWYpZyiw+xgVEgYZyYypIgeRZ1CHBpG7lH3raG72qvMLcCcAoX0KgnxBGj6uGAVjuE4
+ O5HhcdrXvZjNQ4K23al1wcZ+uZjyfwr4W8a2MuxQsv553Ie6b2i/i6CohLO
+X-Received: by 2002:a05:6830:6b03:b0:7cf:d05f:3e57 with SMTP id
+ 46e09a7af769-7d4c4adf2bcmr3156307a34.25.1771095247822; 
+ Sat, 14 Feb 2026 10:54:07 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4636b065d46sm6667650b6e.12.2026.02.14.06.56.36
+ 46e09a7af769-7d4a733f033sm9264072a34.0.2026.02.14.10.54.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Feb 2026 06:56:37 -0800 (PST)
-Date: Sat, 14 Feb 2026 08:56:34 -0600
+ Sat, 14 Feb 2026 10:54:07 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>, Hal Feng <hal.feng@starfivetech.com>,
- Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>
-Cc: Sumit Garg <sumit.garg@kernel.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1] configs: visionfive2: Fix the name of VisionFive 2
- Lite DT
-Message-ID: <20260214145634.GQ2747538@bill-the-cat>
-References: <20260214091424.28428-1-hal.feng@starfivetech.com>
- <b36465d8-2d99-4143-9e4c-91724c43c620@freeshell.de>
+To: jmverdun3@gmail.com, u-boot@lists.denx.de, verdun@hpe.com
+In-Reply-To: <20250610163835.26874-2-verdun@hpe.com>
+References: <20250610163835.26874-1-verdun@hpe.com>
+ <20250610163835.26874-2-verdun@hpe.com>
+Subject: Re: [PATCH v1 1/1] soft_spi performance enhancement
+Message-Id: <177109524713.1755024.2722298192082555615.b4-ty@konsulko.com>
+Date: Sat, 14 Feb 2026 12:54:07 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Qf/QBQU0p05QX/OX"
-Content-Disposition: inline
-In-Reply-To: <b36465d8-2d99-4143-9e4c-91724c43c620@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,89 +98,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 10 Jun 2025 16:38:35 +0000, verdun@hpe.com wrote:
 
---Qf/QBQU0p05QX/OX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Add a test when delay is set to 0 to improve performances
+> by 20% on ARM based systems
+> 
+> 
 
-On Sat, Feb 14, 2026 at 03:02:38AM -0800, E Shattow wrote:
-> Hi Hal,
->=20
-> On 2/14/26 01:14, Hal Feng wrote:
-> > The name of VisionFive 2 Lite DT was set incorrectly. Fix it.
-> >=20
-> > Fixes: 4ea3acc000a7 ("configs: visionfive2: Add VisionFive 2 Lite DT to=
- OF_LIST")
-> > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> > ---
-> >  configs/starfive_visionfive2_defconfig | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_=
-visionfive2_defconfig
-> > index ef4acf7c1db..614a003c971 100644
-> > --- a/configs/starfive_visionfive2_defconfig
-> > +++ b/configs/starfive_visionfive2_defconfig
-> > @@ -80,7 +80,7 @@ CONFIG_WGET_HTTPS=3Dy
-> >  CONFIG_CMD_BOOTSTAGE=3Dy
-> >  CONFIG_OF_BOARD=3Dy
-> >  CONFIG_DEVICE_TREE_INCLUDES=3D"starfive-visionfive2-u-boot.dtsi"
-> > -CONFIG_OF_LIST=3D"starfive/jh7110-deepcomputing-fml13v01 starfive/jh71=
-10-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marsc=
-m-lite starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-=
-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b configs/starfive_visionfi=
-ve2_defconfig"
-> > +CONFIG_OF_LIST=3D"starfive/jh7110-deepcomputing-fml13v01 starfive/jh71=
-10-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marsc=
-m-lite starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-=
-lite starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-v=
-isionfive-2-v1.3b"
-> >  CONFIG_MULTI_DTB_FIT=3Dy
-> >  CONFIG_ENV_OVERWRITE=3Dy
-> >  CONFIG_ENV_IS_IN_SPI_FLASH=3Dy
->=20
-> NAK
->=20
-> That fixes tag is not valid because the problem is responsibility of Leo
-> to revert and re-apply. Your series does not have this defect. I care
-> about this because I am listed as a reviewer.
->=20
-> Leo: fix this error with revert of all affected commits and do it again
-> correctly instead of authors having to submit a "fix" to a bad merge.
->=20
-> I would like to know why this happened?
->=20
-> Further, when there are ANY changes I would say that the person making
-> that change MUST add their tag to take responsibility;  it is not
-> acceptable to me to be tagged on a commit that has been silently
-> altered. The "forge" (gitlab) lists who committed the series but there
-> is no indication or comment about what happened here where it matters in
-> the git repository log.
+Applied to u-boot/next, thanks!
 
-This final paragraph is what I want to stress. If something needs to be
-reworked to apply, review tags should be dropped. It really should get
-posted again for review (or ask the submitter to rebase) as well if it
-wasn't trivial. With b4 you can make sure that if there's problems with
-the merge, you instead have the merge resolution in its own commit, for
-example:
-b4 shazam -S -M series-message-id --merge-base old-commit-series-is-based-on
-This will in turn apply the whole series in its own branch on top of the
-commit passed to --merge-base, and then merge that commit to the top of
-tree. And then you resolve the merge errors there.
-
---=20
+[1/1] soft_spi performance enhancement
+      commit: 6caff66ce4692b78faf0c5c654f223eaa3aec774
+-- 
 Tom
 
---Qf/QBQU0p05QX/OX
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZCNHwAKCRAr4qD1Cr/k
-Csz1AQDzPjAAaJPuEpTr45+lHnbHFFqrVTet/J8RTtjJZvXapQD+IJQpVbW1TVxp
-612pYCDLCNutVKim/A2q3mc6a0cuCwA=
-=JJYC
------END PGP SIGNATURE-----
-
---Qf/QBQU0p05QX/OX--
