@@ -4,140 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E90A0EF586C
-	for <u-boot@archiver.kernel.org>; Sun, 15 Feb 2026 07:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2526EF5868
+	for <u-boot@archiver.kernel.org>; Sun, 15 Feb 2026 07:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C80B80FA1;
-	Sun, 15 Feb 2026 08:30:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D876780FA1;
+	Sun, 15 Feb 2026 08:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DaXkP6tg";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="O0PVmO6k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF09383C32; Sun, 15 Feb 2026 08:30:33 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 3E96083C32; Sun, 15 Feb 2026 08:58:54 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAB9980B98
- for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 08:30:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 457B080B98
+ for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 08:58:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1771140631; x=1771745431; i=xypron.glpk@gmx.de;
- bh=OMASGP6GTJ8FyEu0alSzDQmvx9mQ2BH1dNqLyvBX9+Q=;
+ s=s31663417; t=1771142328; x=1771747128; i=xypron.glpk@gmx.de;
+ bh=aPgfcbOhVbByrNBnMl4CWi9LnMf7hsASdIHN9tL+HWI=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=DaXkP6tgw/+HNbyG0+cwx3tFphRF/TkcWD85K3pFrRMGQl2fCeijVM0so8rW2dWc
- nGu1M1NUrukz3gkb+5tGSS0OtmIjhVXoIKtbCyD2wD6Sl3HJIDTs9nErfwxzOXuTO
- zSz24TsHZZC/n+slNtrkP6r1uRTP1ZTOxDDg0Ni+H67qUrgk04q2Ycq8XJSV+lMjv
- Ij2fYurNpJ6mIeV6xS/4T+nb/FlbdEDhmWZ2b6B5++2dn26cNofFdpGMpa47hdyhp
- BFYlNWQxIz4sjBplnbakRSMeGCHmeCl/5XzyT0Iz93kAmdewdVqr5+Tf25MMr1tME
- mfH9mGv1CVIXgyer1w==
+ b=O0PVmO6kjITskO3yIt0y3nK/hfIfuuTTg7hvpcjwRWFd97POXiGer4iZmDraV2s8
+ OcuMouwbiwXm8PDmTDEfyuNGzOxKKDXuFptJylV7CNGdeQCBpc7mUhtNAONZCBBoU
+ A6QzC71+79Wy7Gi9YUaab3qn59LA7/3ZyVtNuEFiIK4tBqp8Ns0WNxuX14SPeXmnY
+ qEk614VwZQF1pFe2El225f0FuQ2c+kjl1dhE5qMMKqlJ0jOThqyqk6I/iCbRhKK3o
+ PINm9x2V8vBlAlNyS6CEY3sIO6MjzcVy4Gs5wKUXgvr0GXa9MGLmDsJAi87NoOKkY
+ bF3OA8x/hOElHodMsw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M2f5Z-1vv6QD3Pyx-00AfbZ; Sun, 15
- Feb 2026 08:30:31 +0100
-Message-ID: <74858c3f-f944-44c9-9407-9e099a36f453@gmx.de>
-Date: Sun, 15 Feb 2026 08:30:30 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6UZv-1vp2370Mqf-00DQu9; Sun, 15
+ Feb 2026 08:58:48 +0100
+Message-ID: <ea41ff4b-68a4-4f35-aefa-995b6e2cf5ca@gmx.de>
+Date: Sun, 15 Feb 2026 08:58:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] efi_loader: fix ecpt size computation
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Jose Marinho <jose.marinho@arm.com>,
- u-boot@lists.denx.de
-References: <20260211093308.3265022-1-vincent.stehle@arm.com>
- <20260212144015.3898750-1-vincent.stehle@arm.com>
+Subject: Re: [PATCH v2 7/7] efi_selftest: Enhance MBR test for
+ PARTITION_INFO_PROTOCOL
+To: Javier Martinez Canillas <javierm@redhat.com>
+Cc: eballetb@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260212204511.619392-1-javierm@redhat.com>
+ <20260212204511.619392-8-javierm@redhat.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260212144015.3898750-1-vincent.stehle@arm.com>
+In-Reply-To: <20260212204511.619392-8-javierm@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:+Bfd5qLnO1zGWJRHbvh9IsjUfmF2lAIQs8f9xiwjk5PwtcOamAI
- INK1KWLXWQkBCC9fDj/XZDpe1gfamXw2sqV684xuYb/hegZARnhOYA9thvn3jkN05Qox6PX
- N7QYTL3tFTh8Fn6Fu7Ky5hEQ2T8SJ9oC1XYlNCBMNedtep+0hGD7R65h8WNHK0DpHUuaxcX
- Hhp7/sbZCj8+Ud+tUaXnA==
-UI-OutboundReport: notjunk:1;M01:P0:+BHdvTo+H4A=;W7xnWl4lc1JUXb7vUCrQEs97yom
- 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
+X-Provags-ID: V03:K1:oSZBS/Qom6Wy4HYuFguSwbU/zypmHurm5EzRjdDqyfdbmBX5LJE
+ 4XhSZ1x5Nf/WH1+TuTmmR9dy/P3pTRqBsXb9gMQ+nvV9xvI1Zcxj6lbqLy51VnCSrphcNam
+ nrWSJ82PQGifzZzmT6sZtSMAjmNLhoii+CsvmWdQYhAWHotGSG7oPBDdbheoSjFE60ixIhH
+ ogcYDwqWnXSNCbmRGwBEA==
+UI-OutboundReport: notjunk:1;M01:P0:2roirFDEJjc=;hwxJTsf4Gn/P2OpYcaFIqwYN+Yh
+ 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
+ pcotfVkhqK5aDpz8Xa6t
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,97 +154,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/12/26 15:40, Vincent Stehl=C3=A9 wrote:
-> The size of the memory allocated for the EFI Conformance Profiles Table =
-is
-> computed with `num_entries' always equal to zero, which is incorrect whe=
+On 2/12/26 21:45, Javier Martinez Canillas wrote:
+> The EFI_PARTITION_INFO_PROTOCOL test was added before the protocol fully
+> supported MBR partitions. As a result, it lacked specific checks for the
+> content of the raw MBR partition record.
+>=20
+> Now that MBR support has been implemented, enhance the selftest to provi=
+de
+> coverage for the MBR entries too.
+>=20
+> This verifies that the protocol correctly reads and exposes MBR partitio=
 n
-> CONFIG_EFI_EBBR_2_1_CONFORMANCE is enabled.
+> records and prevents this functionality to regress due future changes.
 >=20
-> This can be verified by allocating the ECPT memory with malloc() instead=
- of
-> efi_allocate_pool(), building u-boot with sandbox_defconfig and
-> CONFIG_VALGRIND=3Dy, and by finally running the following command:
+> Signed-off-by: Javier Martinez Canillas <javierm@redhat.com>
+> ---
 >=20
->    valgrind --suppressions=3Dscripts/u-boot.supp \
->      ./u-boot -T -c 'efidebug tables'
+> (no changes since v1)
 >=20
-> Fix this by using an array of the supported profiles GUIDs instead, whic=
-h
-> should also be easier to extend in the future as U-Boot should publish t=
-he
-> GUIDs for all supported EBBR revisions.
+>   lib/efi_selftest/efi_selftest_block_device.c | 26 ++++++++++++++++++++
+>   1 file changed, 26 insertions(+)
 >=20
-> Fixes: 6b92c1735205 ("efi: Create ECPT table")
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>0
-> Cc: Jose Marinho <jose.marinho@arm.com>
+> diff --git a/lib/efi_selftest/efi_selftest_block_device.c b/lib/efi_self=
+test/efi_selftest_block_device.c
+> index f145e58a267a..9c4be834eebb 100644
+> --- a/lib/efi_selftest/efi_selftest_block_device.c
+> +++ b/lib/efi_selftest/efi_selftest_block_device.c
+> @@ -19,6 +19,7 @@
+>   #include "efi_selftest_disk_image.h"
+>   #include <asm/cache.h>
+>   #include <part_efi.h>
+> +#include <part.h>
+>  =20
+>   /* Block size of compressed disk image */
+>   #define COMPRESSED_DISK_IMAGE_BLOCK_SIZE 8
+> @@ -319,6 +320,25 @@ static int execute(void)
+>   	u64 pos;
+>   	char block_io_aligned[1 << LB_BLOCK_SIZE] __aligned(1 << LB_BLOCK_SIZ=
+E);
+>  =20
+> +	/*
+> +	 * The test disk image is defined in efi_selftest_disk_image.h,
+> +	 * it contains a single FAT12 partition of 127 sectors size.
+> +	 */
+> +	static const dos_partition_t mbr_expected =3D {
+> +		.boot_ind =3D 0x00,
+> +		.head =3D 0x00,
+> +		.sector =3D 0x02,
+> +		.cyl =3D 0x00,
+> +		.sys_ind =3D 0x01, /* FAT12 */
+> +		.end_head =3D 0x02,
+> +		.end_sector =3D 0x02,
+> +		.end_cyl =3D 0x00,
+> +		/* LBA 1 */
+> +		.start_sect =3D cpu_to_le32(1),
+> +		/* Size 127 sectors (0x7f) */
+> +		.nr_sects =3D cpu_to_le32(127),
+
+UEFI only exists on low endian systems. Field nr_sects is naturally=20
+aligned. cpu_to_le32() is superfluous here. But it is a nop anyway.
 
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-> ---
->=20
->=20
-> Changes for v2:
-> - Mention in the commit message that U-Boot should publish all supported
->    EBBR GUIDs (suggested by Heinrich)
-> - Move the array declaration into the function (suggested by Heinrich)
->=20
->=20
->   lib/efi_loader/efi_conformance.c | 18 +++++++++---------
->   1 file changed, 9 insertions(+), 9 deletions(-)
->=20
-> diff --git a/lib/efi_loader/efi_conformance.c b/lib/efi_loader/efi_confo=
-rmance.c
-> index 2bae93a94bd..2d31800ccb8 100644
-> --- a/lib/efi_loader/efi_conformance.c
-> +++ b/lib/efi_loader/efi_conformance.c
-> @@ -13,8 +13,6 @@
->   #include <malloc.h>
->  =20
->   static const efi_guid_t efi_ecpt_guid =3D EFI_CONFORMANCE_PROFILES_TAB=
-LE_GUID;
-> -static const efi_guid_t efi_ebbr_2_1_guid =3D
-> -	EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID;
->  =20
->   /**
->    * efi_ecpt_register() - Install the ECPT system table.
-> @@ -23,12 +21,17 @@ static const efi_guid_t efi_ebbr_2_1_guid =3D
->    */
->   efi_status_t efi_ecpt_register(void)
->   {
-> -	u16 num_entries =3D 0;
->   	struct efi_conformance_profiles_table *ecpt;
->   	efi_status_t ret;
->   	size_t ecpt_size;
->  =20
-> -	ecpt_size =3D num_entries * sizeof(efi_guid_t)
-> +	static const efi_guid_t profiles[] =3D {
-> +	#if CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE)
-> +		EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
-> +	#endif
 > +	};
 > +
-> +	ecpt_size =3D sizeof(profiles)
->   		+ sizeof(struct efi_conformance_profiles_table);
->   	ret =3D efi_allocate_pool(EFI_BOOT_SERVICES_DATA, ecpt_size,
->   				(void **)&ecpt);
-> @@ -39,12 +42,9 @@ efi_status_t efi_ecpt_register(void)
->   		return ret;
+>   	/* Connect controller to virtual disk */
+>   	ret =3D boottime->connect_controller(disk_handle, NULL, NULL, 1);
+>   	if (ret !=3D EFI_SUCCESS) {
+> @@ -405,6 +425,12 @@ static int execute(void)
+>   		return EFI_ST_FAILURE;
 >   	}
 >  =20
-> -	if (CONFIG_IS_ENABLED(EFI_EBBR_2_1_CONFORMANCE))
-> -		guidcpy(&ecpt->conformance_profiles[num_entries++],
-> -			&efi_ebbr_2_1_guid);
-> -
-> +	memcpy(ecpt->conformance_profiles, profiles, sizeof(profiles));
->   	ecpt->version =3D EFI_CONFORMANCE_PROFILES_TABLE_VERSION;
-> -	ecpt->number_of_profiles =3D num_entries;
-> +	ecpt->number_of_profiles =3D ARRAY_SIZE(profiles);
->  =20
->   	/* Install the ECPT in the system configuration table. */
->   	ret =3D efi_install_configuration_table(&efi_ecpt_guid, (void *)ecpt)=
-;
+> +	/* Compare the obtained MBR with the expected one for the test partiti=
+on */
+> +	if (memcmp(&part_info->info.mbr, &mbr_expected, sizeof(mbr_expected)))=
+ {
+> +		efi_st_error("MBR partition record mismatch\n");
+> +		return EFI_ST_FAILURE;
+> +	}
+> +
+>   	/* Open the simple file system protocol */
+>   	ret =3D boottime->open_protocol(handle_partition,
+>   				      &guid_simple_file_system_protocol,
 
