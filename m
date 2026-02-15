@@ -4,159 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FBDEF584C
-	for <u-boot@archiver.kernel.org>; Sun, 15 Feb 2026 12:38:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 851C2EF587B
+	for <u-boot@archiver.kernel.org>; Sun, 15 Feb 2026 13:11:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74DB080B98;
-	Sun, 15 Feb 2026 13:38:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 75FB380FA1;
+	Sun, 15 Feb 2026 14:11:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EXVYMODh";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="S4guuknq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6583D83AB7; Sun, 15 Feb 2026 13:38:29 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id 6E8D68309A; Sun, 15 Feb 2026 14:11:41 +0100 (CET)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08EE680325
- for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 13:38:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFE2880B98
+ for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 14:11:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iCnboc7PYHxZ+8l8VGYIl13ybQie3mFn6GugxIrb6kjcTVGU1jrCvypQgYGHFglcJpDaes4Za17l7g+IVT3Zvf82CxCsuEpjCT2l1wC0hQehop/k1D9vXHMy4j8x01BlY+dVJ0wnxp1MJd8V0pWIpe+zH+hOMe9KodwHx1uztcm9g/jfPxTu6IdD2Yv7hAYdLrNw4cSdvs7ZAa62wguxFELA36nWY3n08BWyAJyhIpreoJZjXVDT0EH8KZjIk6E8SYl7/rarzBnysv90morerXheNZoRECdiQvIdH5/5vSxVkP5QUcMqDPZj8HG49F7q1Au3+oDeYQK5eQ43y1ZVlQ==
+ b=P+HbiZiTiZET13wJWOFhDk2371rfstk6zwjqMS7YnmxTf0N/A6foUSpZEfBcFQ3DnabKROxd3PJUo2HU9mItBNA8GCmYsKFrFkgTjINrJAXTK3gJbizrwUOLbgbYwQ7IbdY7+jrp2xvs8364RetUI1PSq9cgoVV6td5Y7tIEPzCbXvj3/dPE+1ZXLSGKbT3jjQCuau9nWiG27XAg0G/d7KQb52wfnkV5K+0txvovV9uwMz3lAkAbB8vxexBc+PjTrZm/YO6EswjtXLIKdzhowKIk6GWyX0HCPsJjOEWJ6h9Zp4hJ6k1jnN3WPXfDB6Eb9N+pH7lAx3yuGGvmb/ylRg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZahPK9jxHCDbHPMqxrqKclj7Y/0MXOZcSN9NIdaNkVQ=;
- b=bWyupPs+F/sHAMsPMYVijO8TKj2zBMr/rg1Mg3RnXNLVVt5lKtdyxEe98U/4rq6fpmtnA0ZfoN4bhM7ZjktomJNsr9x2ktXtct95A8mnR61AkMrz1ZJg+2iL6Bq7GFT7XUNFDtkMbdCukqpe0tom/SOcxapJaZT3HXFsRQu7Q55ewWJ3cskpkoyl9QoLuC7J5pBd8qY2VCYzRIpTTOEK5doIwHYy/laN2RjBw2IJZtmAsukq3GNN0HoAEZeiy/iVi/HANX0ShYc6fy1/FJoaJJte6OmR3VqWAIWRFlwH0QPIeX8PL4SDJGXghTYsEAbFSHMDgQBAe9nBW3LNVkYY4w==
+ bh=35Yi/rQfI2sDlkPD8MtTFVTHeV6Y/mo97KuANHbu8MI=;
+ b=B+bc+gDu7chLPUJ0+gGo88p3kSWGs7YOIMff3QSrnkWdGx4aYxInNkVF8LextNGTCFudWDxHohYr0kNvzTOHu/gczcfzyrCuGy05kbI/8wIPXdtPba73PhJQzDOLangNhSr9RTID6a5A5/Q/EolXywqT6NqjUWTMz/KCu6PQbjSK60I6S+jewnZuuNcx9arCGq03J6iFFfXpl71VVMNb8kcv/7U/zeOVTp/z0u4NmKNO3ZLiCwIbiApeCM5JB+bSg34n0rxE6csKZksJsm0yxPc+caIcAXz6CAQkyO9ZBvFni0pkotUzPGR4yV7p5t4Bov3O0wwKSwKLumJ/V7La5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZahPK9jxHCDbHPMqxrqKclj7Y/0MXOZcSN9NIdaNkVQ=;
- b=EXVYMODh375cfcEi2BJ5Y5afjJSUw3e1ifiPZlvMnKIkyp1tBEBFhH+lDHgL8zLyONew+yIS8Oa1RGUCysdaDhhVbep4CjMuI9ppZibZfz988t23KVh3ptY5+q9Wg4B3eFi0Ff5j6ZmoePLGBNdKEytkJEdJ5HvmwKMwtdtoc/w=
-Received: from SA1P222CA0079.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:35e::16)
- by BN0PR10MB5080.namprd10.prod.outlook.com (2603:10b6:408:114::23)
+ bh=35Yi/rQfI2sDlkPD8MtTFVTHeV6Y/mo97KuANHbu8MI=;
+ b=S4guuknqaThdGugaRNiiI2HJm63hcuj8jq0OqNMF7mAZ2Esh+f9ToB+esuZss6kFR2s3wmya8kFdGAgEB2YY6Mi8tZbWGjsl0gb+sJhzLQGmq3U62b8EE3R06NtpagppOuSzm012OMo2N9p4sp16TmLZiVXRCG7l+wTg1fb2p8U=
+Received: from BY3PR05CA0012.namprd05.prod.outlook.com (2603:10b6:a03:254::17)
+ by LV8PR12MB9408.namprd12.prod.outlook.com (2603:10b6:408:208::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Sun, 15 Feb
- 2026 12:38:24 +0000
-Received: from SN1PEPF0002BA4C.namprd03.prod.outlook.com
- (2603:10b6:806:35e:cafe::b2) by SA1P222CA0079.outlook.office365.com
- (2603:10b6:806:35e::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.16 via Frontend Transport; Sun,
- 15 Feb 2026 12:38:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SN1PEPF0002BA4C.mail.protection.outlook.com (10.167.242.69) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.15; Sun, 15 Feb
+ 2026 13:11:34 +0000
+Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
+ (2603:10b6:a03:254:cafe::79) by BY3PR05CA0012.outlook.office365.com
+ (2603:10b6:a03:254::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.11 via Frontend Transport; Sun,
+ 15 Feb 2026 13:11:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Sun, 15 Feb 2026 12:38:24 +0000
-Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 15 Feb
- 2026 06:38:23 -0600
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 15 Feb
- 2026 06:38:23 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sun, 15 Feb 2026 06:38:23 -0600
-Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61FCcKtk3920127;
- Sun, 15 Feb 2026 06:38:21 -0600
-Message-ID: <5ca6e8fc72703eed92c12b90bc43fed0c4f8f077.camel@ti.com>
-Subject: Re: [PATCH v2] usb: cdns3: use VBUS Valid to determine role for
- dr_mode OTG
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-CC: <marex@denx.de>, <trini@konsulko.com>, <minda.chen@starfivetech.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Date: Sun, 15 Feb 2026 18:09:48 +0530
-In-Reply-To: <3b12260f-e0c6-41dc-9c56-596515f871ca@mailbox.org>
-References: <20260213051556.1247716-1-s-vadapalli@ti.com>
- <595b83ef-f83f-4ee6-8026-853a7eb89f62@mailbox.org>
- <fd664cb27379c34463c6e0ac43bbd30c00483949.camel@ti.com>
- <3b12260f-e0c6-41dc-9c56-596515f871ca@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+ 15.20.9632.12 via Frontend Transport; Sun, 15 Feb 2026 13:11:32 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Sun, 15 Feb
+ 2026 07:11:32 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 15 Feb
+ 2026 07:11:30 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Sun, 15 Feb 2026 07:11:28 -0600
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, John Toomey
+ <john.toomey@amd.com>, Tom Rini <trini@konsulko.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>
+Subject: [RFC PATCH] cmd: part: add dupcheck command to detect duplicate
+ PARTUUIDs
+Date: Sun, 15 Feb 2026 18:40:47 +0530
+Message-ID: <20260215131115.3352282-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: padmarao.begari@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4C:EE_|BN0PR10MB5080:EE_
-X-MS-Office365-Filtering-Correlation-Id: f00bc20d-f54e-464b-449d-08de6c8f1c38
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|LV8PR12MB9408:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7401f743-b682-4d1c-c7cf-08de6c93bdaa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UktmTnhudm5qNEpUS1NRaW5lT3RhSVJHekNWeEFhQ3Ywc2ZNTnFCWkVEWXJ3?=
- =?utf-8?B?ZlI3TE1QZ3UvUDlUaENRbFRLSEplaHpYb0tXMjdFZjQ1K1BDSkcxNjdPMmdL?=
- =?utf-8?B?aUxZZ2lCc2FSVWJyWjRzQTNOSUR4dUJjWUZmY0lkS1FRUWIzaFZrc0lqQWNF?=
- =?utf-8?B?QTkxVDJicHNNTWNZdDVEeWNCSWZDTjF1dURWamJKR2pjQ0xHUUlBK0pVYzZ6?=
- =?utf-8?B?dkNndmVNT3Z4eGFMMW5WU2pYWmQzaDMrUmhwbkRobDM3L0c1dW1zTXc4U3px?=
- =?utf-8?B?SVFJdmN1Z0hGZGE0SUJDWWxsL0lQSEFhWTlZWnFsUDVhMFBGL3RCK1NHYjNU?=
- =?utf-8?B?MWdhYUdRSzN6SmNJS0pOQWlpMy90WVExdFlHaHcvT0ZxOS9nZFNFSDIrMHhT?=
- =?utf-8?B?Mm1pMkhjTXgrRGJvNjNCZHBLdDU3U2k3TW1XdnREUDIwTGJhYU5GUDNhdmZQ?=
- =?utf-8?B?RHA3Ri9ScE41Q1BOYXdiTkxOTDJuRkdOWkhiNFdpd0lvL3JmV0Z0RnI3YkdT?=
- =?utf-8?B?UThzaElMbXlwZnRiVVp6WCtjbmVoM0JWYXlrUnZDVFBDR0ZvU1IweTZCdXhO?=
- =?utf-8?B?ZDhPaEVpcVFPc1RwWUkvdVU1TCtIWmY3VVNLN0RQZlJNcWZiODB4YW91OWsx?=
- =?utf-8?B?bmhvb2ZuTE5Yd21QR2ducGRlQWF1OVc5UEh2cjdEYUNUaGgzNlJkSTdyY2JB?=
- =?utf-8?B?SGM4U3RBUlh2WDlpV25mdVRJdXBYOWhWVUdQMCt5am9JM3NhSWVwMTFjK2FD?=
- =?utf-8?B?UENaa0ZtOFlQN0xUc3dTQzF1YjFYQWg3TlRWTWNFa3hhcTZnbWcwczBLb0Q0?=
- =?utf-8?B?RVdqNkFqYzc4TVp5OFowbmRJem43djFqM2lFaHFqc0lIVGswWTNPRW1ybjZM?=
- =?utf-8?B?ajVyVHp0bTFWUG9kRWNFKzd2MWZhT3duaWgzNGE3bWlzc01nODY5OUxMQjl3?=
- =?utf-8?B?MmxVQjR0cjdjaW1qbzBKUjdMTmorWG5OZGJiVHFpdm9lSDkyQmp5U09ucFdP?=
- =?utf-8?B?RGZZbFRlbHZGckxXWTVWaWhtNzh4Q3BCd1gzY04zclBmcklUcURuU1lVdkdO?=
- =?utf-8?B?RVBtL21zZ3EzWjUrdmZJT0pPZ3pHWWRxSFpxbjc2N1k4YW1nM3BadVhubzVx?=
- =?utf-8?B?SXFNakdDamF3S1lWUC9zZndQU3dBa1NnU01JT3lkaUJBUlZwaFk2YklGS05B?=
- =?utf-8?B?TGovcWk0ZGRlMmNEL2dJeGJ1Nm9ZWDFVNHdIN0s1dEoxRXRPWFZkLzFLbVVR?=
- =?utf-8?B?eFBEWk5UVmJxYTRGK0g3OGJnV2RicmhjZC9oNExkOFk4UEpHNCtUYlBaUU1r?=
- =?utf-8?B?WEZPZ2dpV2haaUV1cFk0WllWdVhIeTRxRUR5WUJ4SGFqeUU0VlFRN1doVTZv?=
- =?utf-8?B?QVhraE9DZHNvNGFaOHVHQ29mSWU4b3IraTN4aTJZTFF4OTlYMU9sZnFzaXk2?=
- =?utf-8?B?UWRPTjV3Q24yYU9aVmNNMlN5Z3pSNzk5bU1saG9XY05GcTgrNzZsK0JLY0tF?=
- =?utf-8?B?QWI3QUdpZndMZFFzT21uV0VrdkhCYnNJTUIwVlpDRGR6NFdOV21XZ1VlT2ZM?=
- =?utf-8?B?V3NtTUJTZUIxNm9sbFNOZm1CNlV1cU1xR0xSdnZ4czZoVEJFa29LZ2dpdWhF?=
- =?utf-8?B?elRYMlo4dVoyMmRvZnFCZXYvUGE1dzdNdlZpU1pqQ2I3MTRramdhTnZwZG41?=
- =?utf-8?B?N053Um0rdW1TcnhNMVlQWWs2elpYTzA0MjlldjlGcTBGYnpXTXlVMWg5ZUxK?=
- =?utf-8?B?WGhsNUx4Tzk0UHlkVjlBRFJiaDBNZngyd3pYTzZiUmlaWDR4ako4Wjc5Y3JO?=
- =?utf-8?B?QlNyTHJhWlA5ZzBvRFRLWWhZd1Z5aVRRcWE5ZGIyUHRpWWd3VWNVOGhRYkFk?=
- =?utf-8?B?UEpQbEloUEt1WlpwYkhJNFN2YkhmdW1iK3FlZWZ6VG4zS2NhYUFCamx4MG42?=
- =?utf-8?B?REh2TzZtTitMYlRXZTcxazRZb0dlWDhmSVV6NUY2RXV5ak9RTGxRNXRhWERm?=
- =?utf-8?B?RUVlZmdMSDhTZlk5L1ZJZUM0eXlpZnhjV2RyYWFvVWRwUVdvMnlLR0VOQ3p2?=
- =?utf-8?B?WkoxUlRTSEJHeGJCUVZ2OEp6QW9PV1dqcjI1VVBUZnBUdllvQy9rWnF5N3BF?=
- =?utf-8?B?bDBpZjJNMytSMEpBWTB2VXdIYkU4UWVOQlF5THlNY2VWMnNaalZWaldwbDhY?=
- =?utf-8?B?Nm9CM0V3ZFgzVmVJQ2NSRUtJR1VadEE1MExyRGF5MVgyd0dDeXpYNUw2MjBh?=
- =?utf-8?B?T2h1RElHbFlKZmxnbkREWUs0Q1l3PT0=?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|376014|1800799024|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0PEy2c5l0L3oJiPXDFI3ax2fjWl3Q4uRYQKkJ4w6fnoWp/lKd1ET5w6bz9Va?=
+ =?us-ascii?Q?xJyMctWuEaCADU0P4j8FBFwEFsKK3wbxk0jLDxhCR/my6a1oS5h5DQDom1/g?=
+ =?us-ascii?Q?LvFIY29KPUF4ZPs7+CV8vJzoUZ2qaBBnh3dp0HrD5QDqkrLO1XRvJ7jCRb4W?=
+ =?us-ascii?Q?KNCpA+wYldZ5Lmluig7KxMEZM0UP8FJgQ+yGvOGPR/fEjVrp5asorzO2e6XL?=
+ =?us-ascii?Q?j9D9ZY+Jjzx23LN4imu13efDI4PvfTybAP7QCtwSySILWulaRpMPaXN9Ay+e?=
+ =?us-ascii?Q?HuQU79FsEfhWdhCpu1DP6OCtYfQt2uY/ahP3gPfW8wxc40MRPiOQaWkVzbGm?=
+ =?us-ascii?Q?nkryUzzCL7RleNSVWnAxU4sAil/y2RTGfmnusGzweMF6mdeW8ylG7nBF629Q?=
+ =?us-ascii?Q?gTT5KdkFlW4U013ZVOGSW3kLd+QasaIFE5qUhYLyrDGyRIAzQSg2XZCDKuap?=
+ =?us-ascii?Q?+G461mJj2xuNV6kU+W1mHAO0wwRrb73EwjwkNJBkhCGqiOfTcOdlOU7E7Rv8?=
+ =?us-ascii?Q?yPhwTYMJtnC1cWGWcUfCRwjk2EF/NKLtXyct6huwa9XOdvm4t2rG7yWgJjpt?=
+ =?us-ascii?Q?vLc29/ls1CjW9itAXhfx5s0zhBmhkVXPWOGTELgFua1QVQUDzO1xnneAOjAB?=
+ =?us-ascii?Q?SxiSIwoWZvUJQOZA8Jn1dWd9g3rgpfx7UmmkXVClgWINV776Yz57Rj422Czt?=
+ =?us-ascii?Q?M6WzwBkO8tUVI624DBQnTDSZkml5ID7ExY9Emy95YI3Dc7oMyou+UZB6GYAF?=
+ =?us-ascii?Q?7e7RrdbtT9lr9vomcj4sUlhCsjKQ8UlFNabT6KMJZ6udWJ9hbeY+sJ0JGSS1?=
+ =?us-ascii?Q?kKX4bRA2Hgm+dJrSxuaWUaxnSNeMA+3A+HMPFiDBax07R6W4YG+wXHbLMbW0?=
+ =?us-ascii?Q?5BxmJvQhEyLQ6nKnl5gz5cTX974H2KMCB4xl70cUvVKAi/9MQk+vl4qeKfjc?=
+ =?us-ascii?Q?S5bnk7DXX8lN+aDjsd6jRWPva0lQzvZ5HlWpU0QJoYx/WyO/MhJFC24OGuhE?=
+ =?us-ascii?Q?ZmDjOUi8x6D7lLV3ecLyewqHFz7vVM8d+ZGXJuEf4babthAiEH9hMd829KK+?=
+ =?us-ascii?Q?EpED9gi4MHY+kynwheZ6DvNnOfrkc/vFWpvdh3lFN+jmdQktL8gF8w8wc3QB?=
+ =?us-ascii?Q?CDAnoLFRwHzkuDxAoh1fEAi9YXL8sM5Jj8ApmIUF9dpk8jt/waJjvCIt5715?=
+ =?us-ascii?Q?SOWSM6N+FmvQQXuw9sDeBwJEzHNJtIzJEGsmuyKpQySDC5aNbvMDN+LgStl6?=
+ =?us-ascii?Q?Dq0p6n6DJ3pTaLmbiP+hmPnexSI/e8cZ1VtgHuSTGW2NMR5teqnL+aHSOlqW?=
+ =?us-ascii?Q?2HSsDb+TnrhbgGPNpopfck7Ci8I5KNocE0JPS1IT/Q/GIlEczRv19k45GPhQ?=
+ =?us-ascii?Q?nRvF+J9SippLcohlMGn7kl3FEZrpFiIn+OXr2J7s4z0Wp5ErVOp/QSeshbDN?=
+ =?us-ascii?Q?hXNh0tKqEmLoXS6EUsLgvYKszhtnZdCm5mA7ubT0N5hoHDP7K1sPCZTZ+wPQ?=
+ =?us-ascii?Q?O3AO2LrmJxE8qa4mjZIpHVF1ePUDEeiOTMiaf8jQBbuLzd3wtKbTIANbw8PE?=
+ =?us-ascii?Q?qrW4gYR1SUmA3QmlLeLSPHp4PZb+atAGfpzeufHDjMAfaw84escbTi6kVPY7?=
+ =?us-ascii?Q?idx61NnehCspUmvu1HNBhCL8dfom7UpKVTyL0fguCxgTTc+XKLNLkDRtbTwa?=
+ =?us-ascii?Q?Kc4m8A=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: DCwJ/HPWuwns/UyMkOlGFMp7fHf11uzIwHIQPtwNLxzs/Edm3oNiPcDO9VQ6CGVaAdklWyyJEsbGv5TL5wKHZUQKFPEK1jwMXvPZrVKpbZ8p4aGIKFfq8bB8SMulYSlxao5dnHbhRTBXkGavcqApmuebjPxuo9cSMjWrydO4QtGL7o4fwSLVuOyQvnIVvx2j7kOpdI/7S5HvCIgWNMd7K0ePFWVyU4zh8zZRZRR612/egdl1trb1WcDPam4RmxPq1D5iin6YjSATUzP+LgRBoW2kgev+PlQL6kkAbxtlIJ7zsKzPwhFAKDI49+1t9ictXiCYQNTBM9vYvmsfEi942yUn/pEsXvo3rDyzHAfodHQa9yKfDls6jFGIrVpBPlrh1dPMm/dREptdk77HwQvR2sNHDlISWRYBW6dTONKDDTu6LUuUiAYExCNiVx2Y/2So
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2026 12:38:24.1960 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f00bc20d-f54e-464b-449d-08de6c8f1c38
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4C.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: ptfABBt81WeVZBp9/gIgTT4gWcj7lsKdA9pfbGnz5WWAp9DdNKp3q7sba0SvFMPJcuyOf43T0DKX1ooVhexgnL45G3o4rN2fT/eaUJvfQ7cKWHMStpifqim2JLDjGZerTnshbfi5zZ3cmWwk9aTxNoPUR6WkJS0lnzQkU+LVokNFi3d9LwObz7f4rNYl2Mp0M8DIAMpHdno+oVzpA8aK5/qZpdPnrR943CiCP06Faipc39TIyyt8b8vQa8w2GLeA188ugz5teAPv+7+1/FD7KemKsigEXPET9TDhY1lnvHxANwUWYtUs5sV9z5dB0nGmI3O12NLqZ4WYItVO5Ju6z849b+V1Q7SuG1CzzdkNaAoGcvus/6evoiAKbYEqPL/UyLpuYIHsiX1GP9GFDqiYqt0mxQMwQFbZJDYR8d1iDOPdUNwjDUUXD3YPEgPvWaTw
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2026 13:11:32.9924 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7401f743-b682-4d1c-c7cf-08de6c93bdaa
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C9.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5080
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9408
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,131 +158,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 2026-02-15 at 01:04 +0100, Marek Vasut wrote:
-> On 2/14/26 5:36 AM, Siddharth Vadapalli wrote:
-> > Hello Marek,
-> >=20
-> > On Fri, 2026-02-13 at 16:04 +0100, Marek Vasut wrote:
-> > > On 2/13/26 6:15 AM, Siddharth Vadapalli wrote:
-> > >=20
-> > > [...]
-> > >=20
-> > > > +++ b/drivers/usb/cdns3/core.c
-> > > > @@ -392,6 +392,63 @@ static const struct udevice_id cdns3_ids[] =3D=
+Add a 'part dupcheck' subcommand (gated by CONFIG_PARTITION_UUIDS)
+that scans all block devices for duplicate partition UUIDs. This
+helps detect situations where the same disk image has been flashed
+to multiple boot devices (e.g., USB stick and UFS), which can lead
+to unpredictable boot behavior when using PARTUUID-based root
+filesystem specifications. It iterates all block devices using
+blk_foreach_probe() and checks partition UUIDs via part_get_info().
+
+When duplicates are found, a warning is printed for each occurrence:
+
+Warning: duplicate PARTUUID 20c5fba5-0171-457f-b9cd-f5129cd07228
+  first seen on usb_mass_storage.lun0:3
+  also on ufs_scsi.id0lun0:3
+
+Signed-off-by: John Toomey <john.toomey@amd.com>
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ cmd/part.c | 104 ++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 103 insertions(+), 1 deletion(-)
+
+diff --git a/cmd/part.c b/cmd/part.c
+index 975a0a08a99..31bcdec5e6d 100644
+--- a/cmd/part.c
++++ b/cmd/part.c
+@@ -15,9 +15,12 @@
+  * Pavel Bartusek <pba@sysgo.com>
+  */
+ 
++#include <blk.h>
+ #include <config.h>
+ #include <command.h>
++#include <dm.h>
+ #include <env.h>
++#include <malloc.h>
+ #include <part.h>
+ #include <stdio.h>
+ #include <vsprintf.h>
+@@ -246,6 +249,97 @@ static int do_part_type(int argc, char *const argv[])
+ }
+ #endif
+ 
++#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
++struct part_seen {
++	char uuid[UUID_STR_LEN + 1];
++	struct udevice *dev;
++	int part;
++};
++
++static int do_part_dupcheck(int argc, char *const argv[])
++{
++	struct part_seen *seen;
++	int count = 0;
++	int duplicates = 0;
++	int max_entries;
++	int dev_count;
++	struct udevice *dev;
++
++	if (argc)
++		return CMD_RET_USAGE;
++
++	dev_count = blk_count_devices(BLKF_BOTH);
++	if (!dev_count) {
++		printf("No block devices found\n");
++		return CMD_RET_SUCCESS;
++	}
++
++	max_entries = dev_count * MAX_SEARCH_PARTITIONS;
++	seen = calloc(max_entries, sizeof(*seen));
++	if (!seen) {
++		printf("Unable to allocate dupcheck table (%d entries)\n",
++		       max_entries);
++		return CMD_RET_FAILURE;
++	}
++
++	blk_foreach_probe(BLKF_BOTH, dev) {
++		struct blk_desc *desc = dev_get_uclass_plat(dev);
++
++		for (int part = 1; part <= MAX_SEARCH_PARTITIONS; part++) {
++			struct disk_partition info;
++			int first_match = -1;
++
++			if (part_get_info(desc, part, &info))
++				continue;
++			if (!info.uuid[0])
++				continue;
++
++			for (int i = 0; i < count; i++) {
++				if (strcmp(seen[i].uuid, info.uuid))
++					continue;
++				if (first_match == -1) {
++					printf("Warning: duplicate PARTUUID %s\n",
++					       info.uuid);
++					printf("  first seen on %s:%d\n",
++					       seen[i].dev->name,
++					       seen[i].part);
++					printf("  also on %s:%d\n",
++					       dev->name, part);
++					duplicates++;
++					first_match = i;
++				} else {
++					printf("  also on %s:%d\n",
++					       seen[i].dev->name,
++					       seen[i].part);
++				}
++			}
++
++			if (count >= max_entries) {
++				printf("Error: dupcheck capacity %d entries\n",
++				       max_entries);
++				printf("       exceeded\n");
++				free(seen);
++				return CMD_RET_FAILURE;
++			}
++
++			strlcpy(seen[count].uuid, info.uuid,
++				sizeof(seen[0].uuid));
++			seen[count].dev = dev;
++			seen[count].part = part;
++			count++;
++		}
++	}
++
++	if (duplicates)
++		printf("Found %d duplicate(s) among %d partitions checked\n",
++		       duplicates, count);
++
++	free(seen);
++
++	return duplicates ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
++}
++#endif
++
+ static int do_part_types(int argc, char * const argv[])
  {
-> > > >    	{ },
-> > > >    };
-> > > >   =20
-> > > > +/*
-> > > > + * The VBUS Valid Bit in the OTG Status register can be used to de=
-termine
-> > > > + * the role. When VBUS Valid is set, it indicates that a USB Host =
-is supplying
-> > > > + * power, so the Controller should assume the PERIPHERAL role. If =
-it isn't set,
-> > > > + * it indicates the absence of a USB Host, so the Controller shoul=
-d assume the
-> > > > + * HOST role. If the OTG Status register is inaccessible, return a=
-n error.
-> > > > + */
-> > > > +static int cdns3_get_otg_mode(ofnode node
-> > >=20
-> > > Pass struct udevice *parent instead of node here ...
-> > >=20
-> > > > , enum usb_dr_mode *mode)
-> > > > +{
-> > > > +	struct cdns3 cdns, *cdnsp;
-> > > > +	void __iomem *otg_regs;
-> > > > +	fdt_addr_t otg_addr;
-> > > > +	int otg_reg_index;
-> > > > +	int vbus;
-> > > > +
-> > > > +	otg_reg_index =3D ofnode_stringlist_search(node, "reg-names", "ot=
-g");
-> > > > +	if (otg_reg_index < 0) {
-> > > > +		printf("%s: dr_mode is otg but otg register name is missing\n", =
-__func__);
-> > > > +		return -ENOENT;
-> > > > +	}
-> > > > +
-> > > > +	otg_addr =3D ofnode_get_addr_index(node, otg_reg_index);
-> > > > +	if (otg_addr =3D=3D FDT_ADDR_T_NONE) {
-> > > > +		printf("%s: address of otg registers is unspecified\n", __func__=
-);
-> > > > +		return -ENOENT;
-> > > > +	}
-> > > > +
-> > > > +	otg_regs =3D map_physmem(otg_addr, 0, MAP_NOCACHE);
-> > > > +	if (!otg_regs) {
-> > > > +		printf("%s: failed to map otg registers\n", __func__);
-> > > > +		return -EINVAL;
-> > > > +	}
-> > >=20
-> > > ... and replace all that ^ with devfdt_remap_addr_name(parent, "otg")=
- .
-> > > That should work.
-> >=20
-> > It doesn't work because the 'parent' node doesn't have the 'otg' regist=
-ers.
-> > It is the child node which has it. The device-tree nodes for parent and
-> > child are:
-> >=20
-> > 	usbss0: usb@4104000 {
-> > 							=3D> PARENT
-> > 		bootph-all;
-> > 		compatible =3D "ti,j721e-usb";
-> > 		reg =3D <0x00 0x4104000 0x00 0x100>;
-> > 		dma-coherent;
-> >=20
-> > 		[TRIMMED]
-> >=20
-> > 		usb0: usb@6000000
-> > {							=3D> CHILD
-> > 			bootph-all;
-> > 			compatible =3D "cdns,usb3";
-> > 			reg =3D <0x00 0x6000000 0x00 0x10000>,
-> > 			      <0x00 0x6010000 0x00 0x10000>,
-> > 			      <0x00 0x6020000 0x00 0x10000>;
-> > 			reg-names =3D "otg", "xhci",
-> > "dev";			=3D> OTG Register is defined here
-> >=20
-> > 			[TRIMMED]
-> > 	};
-> >=20
-> > The 'udevice' for the child node is created in the cdns3_bind() functio=
-n
-> > __after__ the function in this patch is invoked. Therefore, we don't ye=
-t
-> > have the child device which is created by:
-> >=20
-> > 		device_bind_driver_to_node(parent, driver, name, node,
-> > &dev);
-> >=20
-> > I did consider the possibility of using the standard APIs
-> > (devfdt_remap_addr_name), but since the child device doesn't exist yet,
-> > they cannot be used. Hence, I had to implement custom logic.
-> Maybe it would be possible to create a temporary udevice on stack and=20
-> pass it to devfdt_remap_addr_name() ? I think this should be complete=20
-> enough, although I might have missed something:
->=20
-> "
-> struct udevice cdev =3D { .parent =3D parent; };
-> dev_set_ofnode(cdev, node);
+ 	struct part_driver *drv = ll_entry_start(struct part_driver,
+@@ -291,6 +385,10 @@ static int do_part(struct cmd_tbl *cmdtp, int flag, int argc,
+ #ifdef CONFIG_PARTITION_TYPE_GUID
+ 	else if (!strcmp(argv[1], "type"))
+ 		return do_part_type(argc - 2, argv + 2);
++#endif
++#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
++	else if (!strcmp(argv[1], "dupcheck"))
++		return do_part_dupcheck(argc - 2, argv + 2);
+ #endif
+ 	return CMD_RET_USAGE;
+ }
+@@ -328,5 +426,9 @@ U_BOOT_CMD(
+ 	"part set <interface> <dev> type\n"
+ 	"    - set partition type for a device\n"
+ 	"part types\n"
+-	"    - list supported partition table types"
++	"    - list supported partition table types\n"
++#if CONFIG_IS_ENABLED(PARTITION_UUIDS)
++	"part dupcheck\n"
++	"    - scan all block devices for duplicate partition UUIDs"
++#endif
+ );
+-- 
+2.34.1
 
-This works, except that I had to use the subnode rather than the parent's
-node:
-	dev_set_ofnode(&child, ofnode_first_subnode(dev_ofnode(parent)));
-
-> "
->=20
-> devfdt_remap_addr_name() internally calls dev_of_offset(dev) on the=20
-> cdev, tests is device_get_uclass_id(dev->parent) =3D=3D UCLASS_SIMPLE_BUS=
-=20
-> (it is not) and that is it.
-
-I have posted the v3 patch incorporating your feedback at:
-https://lore.kernel.org/r/20260215123514.2288422-1-s-vadapalli@ti.com/
-Thank you.
-
-Regards,
-Siddharth.
