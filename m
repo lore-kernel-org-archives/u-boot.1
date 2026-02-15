@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1AC0EF587B
-	for <u-boot@archiver.kernel.org>; Sun, 15 Feb 2026 12:33:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FBDEF584C
+	for <u-boot@archiver.kernel.org>; Sun, 15 Feb 2026 12:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB51980B98;
-	Sun, 15 Feb 2026 13:33:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 74DB080B98;
+	Sun, 15 Feb 2026 13:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OvmicrwI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EXVYMODh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE3858309A; Sun, 15 Feb 2026 13:33:55 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id 6583D83AB7; Sun, 15 Feb 2026 13:38:29 +0100 (CET)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2039280325
- for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 13:33:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08EE680325
+ for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 13:38:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UtRvRodvqvsRK64y2DUdbMW2udSBbRHdLDkFNUONQVTGA1I/oVYJqHOPSfvSKrPB4EekA5RzETmEkWq/gGuiCN1vC5TI9w9S3S2LM8IYR4J1z89fWY5CBJgbkyp62S6It3DcnJ+X3My0Eu9BJLiHiKWVhh83/yBfKa1aWIQNq0H6PYR0l7eN/+M5aKIpWqpN3TQEcEM3JSMzIhsus3b44gB92XYs/5/1AMnbPCL80XQ/X6hUnDKDmUEFNPbexpePHHH3wG7DdjAfte5f1hxh3k5vz45SZyDrfOchX/8WYRvFNemKcHk1Ny9Pp/fzhiGWrC6FGw+n7tVCplySwvtQDA==
+ b=iCnboc7PYHxZ+8l8VGYIl13ybQie3mFn6GugxIrb6kjcTVGU1jrCvypQgYGHFglcJpDaes4Za17l7g+IVT3Zvf82CxCsuEpjCT2l1wC0hQehop/k1D9vXHMy4j8x01BlY+dVJ0wnxp1MJd8V0pWIpe+zH+hOMe9KodwHx1uztcm9g/jfPxTu6IdD2Yv7hAYdLrNw4cSdvs7ZAa62wguxFELA36nWY3n08BWyAJyhIpreoJZjXVDT0EH8KZjIk6E8SYl7/rarzBnysv90morerXheNZoRECdiQvIdH5/5vSxVkP5QUcMqDPZj8HG49F7q1Au3+oDeYQK5eQ43y1ZVlQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WyOlW1E3GkGOpz46GB+zms1StPE1FZuiRFDeDEKg7t0=;
- b=xT+ewOoGEiT73NUEZwJqdKWsPyahs2QAY5zI5/Z2tJ2V5kAAK6C+yahDF6qa6qFQbj+QUD0PCPni+CeDjcexIBmNMV8K2+jUqjIb6cXwzT5WLo7lrsU7UmbEbKioK/LugKE5AR5PyV95R+8aOTzWesQ/yQaTy7rqasBugzh2DCfg37NkDrytJ1zu4Y4DP4hF3P9s5WuIFJEGxbuaOgoKyYfiaB1ijZEBNVxUwK9b9e6vxAv/yUntocGKAFU/9kpPFlX13tYdcpiwNgawEkcNOLT2d1UAbqi6YT8PoSe0K5HI2LhbpJ2px9hZwlnUhitfObmqRY7Jv5WczfHS31qvlQ==
+ bh=ZahPK9jxHCDbHPMqxrqKclj7Y/0MXOZcSN9NIdaNkVQ=;
+ b=bWyupPs+F/sHAMsPMYVijO8TKj2zBMr/rg1Mg3RnXNLVVt5lKtdyxEe98U/4rq6fpmtnA0ZfoN4bhM7ZjktomJNsr9x2ktXtct95A8mnR61AkMrz1ZJg+2iL6Bq7GFT7XUNFDtkMbdCukqpe0tom/SOcxapJaZT3HXFsRQu7Q55ewWJ3cskpkoyl9QoLuC7J5pBd8qY2VCYzRIpTTOEK5doIwHYy/laN2RjBw2IJZtmAsukq3GNN0HoAEZeiy/iVi/HANX0ShYc6fy1/FJoaJJte6OmR3VqWAIWRFlwH0QPIeX8PL4SDJGXghTYsEAbFSHMDgQBAe9nBW3LNVkYY4w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WyOlW1E3GkGOpz46GB+zms1StPE1FZuiRFDeDEKg7t0=;
- b=OvmicrwI6QP3ALZbmmN8kYribmyCWg6JWPTxGJWKbkkChZGwah+b0zLNIigdmDCKpmK0h/yOTUBkNlEkJDXcIOKbGSfVdZXautlZ0CVzL3epNIkuIek3dlUMmyj6KS46KeHlxcPCIPMb505d1xoUbhEsrB2GAS+7zjgGVq9KxPk=
-Received: from BL1PR13CA0248.namprd13.prod.outlook.com (2603:10b6:208:2ba::13)
- by BN0PR10MB4823.namprd10.prod.outlook.com (2603:10b6:408:12d::19)
+ bh=ZahPK9jxHCDbHPMqxrqKclj7Y/0MXOZcSN9NIdaNkVQ=;
+ b=EXVYMODh375cfcEi2BJ5Y5afjJSUw3e1ifiPZlvMnKIkyp1tBEBFhH+lDHgL8zLyONew+yIS8Oa1RGUCysdaDhhVbep4CjMuI9ppZibZfz988t23KVh3ptY5+q9Wg4B3eFi0Ff5j6ZmoePLGBNdKEytkJEdJ5HvmwKMwtdtoc/w=
+Received: from SA1P222CA0079.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:35e::16)
+ by BN0PR10MB5080.namprd10.prod.outlook.com (2603:10b6:408:114::23)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Sun, 15 Feb
- 2026 12:33:50 +0000
-Received: from BL6PEPF0001AB58.namprd02.prod.outlook.com
- (2603:10b6:208:2ba:cafe::5c) by BL1PR13CA0248.outlook.office365.com
- (2603:10b6:208:2ba::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.12 via Frontend Transport; Sun,
- 15 Feb 2026 12:33:50 +0000
+ 2026 12:38:24 +0000
+Received: from SN1PEPF0002BA4C.namprd03.prod.outlook.com
+ (2603:10b6:806:35e:cafe::b2) by SA1P222CA0079.outlook.office365.com
+ (2603:10b6:806:35e::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.16 via Frontend Transport; Sun,
+ 15 Feb 2026 12:38:15 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
@@ -59,89 +59,104 @@ Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
  198.47.23.194 as permitted sender) receiver=protection.outlook.com;
  client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
 Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BL6PEPF0001AB58.mail.protection.outlook.com (10.167.241.10) with Microsoft
+ SN1PEPF0002BA4C.mail.protection.outlook.com (10.167.242.69) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Sun, 15 Feb 2026 12:33:50 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet200.ext.ti.com
+ 15.20.9632.12 via Frontend Transport; Sun, 15 Feb 2026 12:38:24 +0000
+Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet200.ext.ti.com
  (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 15 Feb
- 2026 06:33:49 -0600
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:38:23 -0600
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sun, 15 Feb
- 2026 06:33:49 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:38:23 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sun, 15 Feb 2026 06:33:49 -0600
-Received: from toolbox.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61FCXk6P3916028;
- Sun, 15 Feb 2026 06:33:47 -0600
+ Transport; Sun, 15 Feb 2026 06:38:23 -0600
+Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61FCcKtk3920127;
+ Sun, 15 Feb 2026 06:38:21 -0600
+Message-ID: <5ca6e8fc72703eed92c12b90bc43fed0c4f8f077.camel@ti.com>
+Subject: Re: [PATCH v2] usb: cdns3: use VBUS Valid to determine role for
+ dr_mode OTG
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <marex@denx.de>, <trini@konsulko.com>, <minda.chen@starfivetech.com>
-CC: <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>, <srk@ti.com>,
- <s-vadapalli@ti.com>
-Subject: [PATCH v3] usb: cdns3: use VBUS Valid to determine role for dr_mode
- OTG
-Date: Sun, 15 Feb 2026 18:05:12 +0530
-Message-ID: <20260215123514.2288422-1-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.51.1
+To: Marek Vasut <marek.vasut@mailbox.org>
+CC: <marex@denx.de>, <trini@konsulko.com>, <minda.chen@starfivetech.com>,
+ <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Date: Sun, 15 Feb 2026 18:09:48 +0530
+In-Reply-To: <3b12260f-e0c6-41dc-9c56-596515f871ca@mailbox.org>
+References: <20260213051556.1247716-1-s-vadapalli@ti.com>
+ <595b83ef-f83f-4ee6-8026-853a7eb89f62@mailbox.org>
+ <fd664cb27379c34463c6e0ac43bbd30c00483949.camel@ti.com>
+ <3b12260f-e0c6-41dc-9c56-596515f871ca@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.56.2-0+deb13u1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB58:EE_|BN0PR10MB4823:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a426906-491c-4775-320e-08de6c8e78e9
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4C:EE_|BN0PR10MB5080:EE_
+X-MS-Office365-Filtering-Correlation-Id: f00bc20d-f54e-464b-449d-08de6c8f1c38
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RZsK0l5s0yXSjSKx3GJpwSdYUC3TD9duwNqkVQabfl+CXjlDndfmTIGJk3WV?=
- =?us-ascii?Q?lWrJJ/Apm6oeoTtQHKz+kg71yZCNP329ffZT5c82cZ5Mh58z8q8ySf0ob+fR?=
- =?us-ascii?Q?BqR/0LMCk2tQwCBjdMtD7kVaCbS0O/rjESSYy61/aUXE0HDkLd9cvZs+/A0o?=
- =?us-ascii?Q?r/Wn8gxmgFbEYuxcyaQ164wv1gqazhMbMYUCvLQ/lRx1gw7CM0gEn1d5S+Te?=
- =?us-ascii?Q?zIWEl1EgJH+bacgqo2Wv0H5bqpx87FowI+Cxs44M24TsHIcCMsD8LeE4Hs8S?=
- =?us-ascii?Q?7xfFY9dXM68c47cdEQ1xGz7Yg/2VZQ+NwXG4b0WvUeqilgOtTLjF3ZNs478k?=
- =?us-ascii?Q?ytdObewFOsVDjONdRpJiFVtsW7SnuKCHUUSYekrYV9mXGkqssNcNhDrg+Bhr?=
- =?us-ascii?Q?inCtJMe2okP7E8/DAXxkmirVz5oTukVK9+hc7/kBX5rRJfpnyBH4qv5exg59?=
- =?us-ascii?Q?7WzOr3zpOe94KwhFXneJMQnRgliiENHf9dtYXGcqEE80hu7306x0hHH3rNTx?=
- =?us-ascii?Q?qzFeSTHtb4Nov2yqj9QIIpvqmmgCx6HZ/5pOZS2wMAeIcxWvq+iyPtRfOm0D?=
- =?us-ascii?Q?XZMa5ahTEYHKkjtJK4zd9G16DM7o7fbzkS2Yp3+RFWmV2WtWPLZ9ml2uJu5W?=
- =?us-ascii?Q?6KEqZssTnkKiZxoEfotj/dAbusk0Eg1/UiSTxehBDitxXJujzDdVZ0mv9o5v?=
- =?us-ascii?Q?Vao0rQAVQDiJXlVXSZXvzmNNJRrz86zrXvK75LkUqbYup26Gv+Gs3FC4ct8o?=
- =?us-ascii?Q?PFNqkLigqfUmrtw/Bm2KGBDODC/fRbMvCHmxG+kQ0eMSAr1TyTYgP26+Xoyw?=
- =?us-ascii?Q?DJGqlNYAPTw723LI1LA5FlCzyVI1ys77jDp5bzs5YETaWeBoPEkwDUi6WE2E?=
- =?us-ascii?Q?ZfZPo+H6GU/FJs2d7kR6z2CWlX/bMp9pUYsaqFKsbFkSiyQzs3PXRnX6AIHg?=
- =?us-ascii?Q?U12xV1T86CmvHykX87pZSgbO5S6S5uv+YZLfAQOpWZwzaqVX+X2/y4YoFKS7?=
- =?us-ascii?Q?5B5qUuIK5XJPwMsYRWPt0Y0rz2TyH+3zHNa69ChhFM3i1xDhKiQcA34NJQpc?=
- =?us-ascii?Q?KW1ZCXw52I2DZcZSX5LeYAJmpUaWSI1j9A/qkwrvalLpcY0bBy9IKK3awYh2?=
- =?us-ascii?Q?S2mEOFON2kCvvIncqruwt0Lw/yb1CcQgIcx+9g6l/cMIayALnSbUIH44346H?=
- =?us-ascii?Q?hH11P7xJc3E4/6N75Y+8GD2IP7toG3a94RujzM40KTVRmkk8y/vn5xHlf5Xw?=
- =?us-ascii?Q?d6eT7G4tPOLFwcek7qXvXx/ITd0SW3eB4rlpIPyzGcnSgsTbKoDg7L1aqcm0?=
- =?us-ascii?Q?sQica+SUXFqpnP8rxiRQZMHHFWNgd7l83Q/MKtSSfWXdZsAyg+b7RnNo96p8?=
- =?us-ascii?Q?hDPznedBCPQPFDFwBKyC1p2I4es9TIjIqU4BCpj8MEzh8YPyVf508PqSM2Xg?=
- =?us-ascii?Q?kG55OUpuUkmz59bAcKHhmQY86YQnTe0RmXNRDUc4bwiaUgimCdC+KcTLkgml?=
- =?us-ascii?Q?jQEFOCeYDFTCDquNJy6AqHSDULLB1VVuaSIb2/5S4ulL9pQOC4k761Hp9GO3?=
- =?us-ascii?Q?+50Y5CQlennNGhUy965TduAAa6J1x+cXAw6aA67G2E8jngURKX3AZmLLzi1b?=
- =?us-ascii?Q?UCDNgpYtAXp3at7uIrEAZqc=3D?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UktmTnhudm5qNEpUS1NRaW5lT3RhSVJHekNWeEFhQ3Ywc2ZNTnFCWkVEWXJ3?=
+ =?utf-8?B?ZlI3TE1QZ3UvUDlUaENRbFRLSEplaHpYb0tXMjdFZjQ1K1BDSkcxNjdPMmdL?=
+ =?utf-8?B?aUxZZ2lCc2FSVWJyWjRzQTNOSUR4dUJjWUZmY0lkS1FRUWIzaFZrc0lqQWNF?=
+ =?utf-8?B?QTkxVDJicHNNTWNZdDVEeWNCSWZDTjF1dURWamJKR2pjQ0xHUUlBK0pVYzZ6?=
+ =?utf-8?B?dkNndmVNT3Z4eGFMMW5WU2pYWmQzaDMrUmhwbkRobDM3L0c1dW1zTXc4U3px?=
+ =?utf-8?B?SVFJdmN1Z0hGZGE0SUJDWWxsL0lQSEFhWTlZWnFsUDVhMFBGL3RCK1NHYjNU?=
+ =?utf-8?B?MWdhYUdRSzN6SmNJS0pOQWlpMy90WVExdFlHaHcvT0ZxOS9nZFNFSDIrMHhT?=
+ =?utf-8?B?Mm1pMkhjTXgrRGJvNjNCZHBLdDU3U2k3TW1XdnREUDIwTGJhYU5GUDNhdmZQ?=
+ =?utf-8?B?RHA3Ri9ScE41Q1BOYXdiTkxOTDJuRkdOWkhiNFdpd0lvL3JmV0Z0RnI3YkdT?=
+ =?utf-8?B?UThzaElMbXlwZnRiVVp6WCtjbmVoM0JWYXlrUnZDVFBDR0ZvU1IweTZCdXhO?=
+ =?utf-8?B?ZDhPaEVpcVFPc1RwWUkvdVU1TCtIWmY3VVNLN0RQZlJNcWZiODB4YW91OWsx?=
+ =?utf-8?B?bmhvb2ZuTE5Yd21QR2ducGRlQWF1OVc5UEh2cjdEYUNUaGgzNlJkSTdyY2JB?=
+ =?utf-8?B?SGM4U3RBUlh2WDlpV25mdVRJdXBYOWhWVUdQMCt5am9JM3NhSWVwMTFjK2FD?=
+ =?utf-8?B?UENaa0ZtOFlQN0xUc3dTQzF1YjFYQWg3TlRWTWNFa3hhcTZnbWcwczBLb0Q0?=
+ =?utf-8?B?RVdqNkFqYzc4TVp5OFowbmRJem43djFqM2lFaHFqc0lIVGswWTNPRW1ybjZM?=
+ =?utf-8?B?ajVyVHp0bTFWUG9kRWNFKzd2MWZhT3duaWgzNGE3bWlzc01nODY5OUxMQjl3?=
+ =?utf-8?B?MmxVQjR0cjdjaW1qbzBKUjdMTmorWG5OZGJiVHFpdm9lSDkyQmp5U09ucFdP?=
+ =?utf-8?B?RGZZbFRlbHZGckxXWTVWaWhtNzh4Q3BCd1gzY04zclBmcklUcURuU1lVdkdO?=
+ =?utf-8?B?RVBtL21zZ3EzWjUrdmZJT0pPZ3pHWWRxSFpxbjc2N1k4YW1nM3BadVhubzVx?=
+ =?utf-8?B?SXFNakdDamF3S1lWUC9zZndQU3dBa1NnU01JT3lkaUJBUlZwaFk2YklGS05B?=
+ =?utf-8?B?TGovcWk0ZGRlMmNEL2dJeGJ1Nm9ZWDFVNHdIN0s1dEoxRXRPWFZkLzFLbVVR?=
+ =?utf-8?B?eFBEWk5UVmJxYTRGK0g3OGJnV2RicmhjZC9oNExkOFk4UEpHNCtUYlBaUU1r?=
+ =?utf-8?B?WEZPZ2dpV2haaUV1cFk0WllWdVhIeTRxRUR5WUJ4SGFqeUU0VlFRN1doVTZv?=
+ =?utf-8?B?QVhraE9DZHNvNGFaOHVHQ29mSWU4b3IraTN4aTJZTFF4OTlYMU9sZnFzaXk2?=
+ =?utf-8?B?UWRPTjV3Q24yYU9aVmNNMlN5Z3pSNzk5bU1saG9XY05GcTgrNzZsK0JLY0tF?=
+ =?utf-8?B?QWI3QUdpZndMZFFzT21uV0VrdkhCYnNJTUIwVlpDRGR6NFdOV21XZ1VlT2ZM?=
+ =?utf-8?B?V3NtTUJTZUIxNm9sbFNOZm1CNlV1cU1xR0xSdnZ4czZoVEJFa29LZ2dpdWhF?=
+ =?utf-8?B?elRYMlo4dVoyMmRvZnFCZXYvUGE1dzdNdlZpU1pqQ2I3MTRramdhTnZwZG41?=
+ =?utf-8?B?N053Um0rdW1TcnhNMVlQWWs2elpYTzA0MjlldjlGcTBGYnpXTXlVMWg5ZUxK?=
+ =?utf-8?B?WGhsNUx4Tzk0UHlkVjlBRFJiaDBNZngyd3pYTzZiUmlaWDR4ako4Wjc5Y3JO?=
+ =?utf-8?B?QlNyTHJhWlA5ZzBvRFRLWWhZd1Z5aVRRcWE5ZGIyUHRpWWd3VWNVOGhRYkFk?=
+ =?utf-8?B?UEpQbEloUEt1WlpwYkhJNFN2YkhmdW1iK3FlZWZ6VG4zS2NhYUFCamx4MG42?=
+ =?utf-8?B?REh2TzZtTitMYlRXZTcxazRZb0dlWDhmSVV6NUY2RXV5ak9RTGxRNXRhWERm?=
+ =?utf-8?B?RUVlZmdMSDhTZlk5L1ZJZUM0eXlpZnhjV2RyYWFvVWRwUVdvMnlLR0VOQ3p2?=
+ =?utf-8?B?WkoxUlRTSEJHeGJCUVZ2OEp6QW9PV1dqcjI1VVBUZnBUdllvQy9rWnF5N3BF?=
+ =?utf-8?B?bDBpZjJNMytSMEpBWTB2VXdIYkU4UWVOQlF5THlNY2VWMnNaalZWaldwbDhY?=
+ =?utf-8?B?Nm9CM0V3ZFgzVmVJQ2NSRUtJR1VadEE1MExyRGF5MVgyd0dDeXpYNUw2MjBh?=
+ =?utf-8?B?T2h1RElHbFlKZmxnbkREWUs0Q1l3PT0=?=
 X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
  CAT:NONE; SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: +EhC4i0Jp88YxIs+0lTAKr8B8Jcn5LBi3M4j7TexQOSyyFpUSRPZk/ixLCgsBleESOV1TSbx0RB1WPKTNVinMZwJ7oRhlodxnYDWtbE7dQRa81WmrWW/NRd38cHb80oBipETHnUmO5fgG1bU0LxnncKOlKjKCRGwqzKRLX5RXTiDk0AgOIYlqNEvKZQI93QOdcv4Z4OnPz87ZaXWkEkL16MSOyrSMymsDJLbRvSgzXJ1/4sGIrS8z4Wo/NXE+VlRzh7uamlEJ0NIhHhyjKGfm08gii5gUQaUPuWe5RqcFS4W4OdmWNrCGO5uK6CUlNhJKZTJ1D9DdaMBh0OBkfJq2ZpVkfazdY8zbNnmy/vxRaAia75BvTks4diruenVVqqoAwgbUla9YQgso5aEJgSyT9/rdzquMWVocgKhBUF2G/HKV+Z+Wi+/QaKzQEHGmSpV
+X-MS-Exchange-AntiSpam-MessageData-0: DCwJ/HPWuwns/UyMkOlGFMp7fHf11uzIwHIQPtwNLxzs/Edm3oNiPcDO9VQ6CGVaAdklWyyJEsbGv5TL5wKHZUQKFPEK1jwMXvPZrVKpbZ8p4aGIKFfq8bB8SMulYSlxao5dnHbhRTBXkGavcqApmuebjPxuo9cSMjWrydO4QtGL7o4fwSLVuOyQvnIVvx2j7kOpdI/7S5HvCIgWNMd7K0ePFWVyU4zh8zZRZRR612/egdl1trb1WcDPam4RmxPq1D5iin6YjSATUzP+LgRBoW2kgev+PlQL6kkAbxtlIJ7zsKzPwhFAKDI49+1t9ictXiCYQNTBM9vYvmsfEi942yUn/pEsXvo3rDyzHAfodHQa9yKfDls6jFGIrVpBPlrh1dPMm/dREptdk77HwQvR2sNHDlISWRYBW6dTONKDDTu6LUuUiAYExCNiVx2Y/2So
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2026 12:33:50.1609 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a426906-491c-4775-320e-08de6c8e78e9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Feb 2026 12:38:24.1960 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f00bc20d-f54e-464b-449d-08de6c8f1c38
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
  Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB58.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4C.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB4823
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5080
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,143 +173,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The cdns3_bind() function is responsible for identifying the appropriate
-driver to bind to the USB Controller's device-tree node. If the device-tree
-node has the 'dr_mode' property set to 'otg', the existing approach fails
-to bind a driver, leading to loss of functionality.
+On Sun, 2026-02-15 at 01:04 +0100, Marek Vasut wrote:
+> On 2/14/26 5:36 AM, Siddharth Vadapalli wrote:
+> > Hello Marek,
+> >=20
+> > On Fri, 2026-02-13 at 16:04 +0100, Marek Vasut wrote:
+> > > On 2/13/26 6:15 AM, Siddharth Vadapalli wrote:
+> > >=20
+> > > [...]
+> > >=20
+> > > > +++ b/drivers/usb/cdns3/core.c
+> > > > @@ -392,6 +392,63 @@ static const struct udevice_id cdns3_ids[] =3D=
+ {
+> > > >    	{ },
+> > > >    };
+> > > >   =20
+> > > > +/*
+> > > > + * The VBUS Valid Bit in the OTG Status register can be used to de=
+termine
+> > > > + * the role. When VBUS Valid is set, it indicates that a USB Host =
+is supplying
+> > > > + * power, so the Controller should assume the PERIPHERAL role. If =
+it isn't set,
+> > > > + * it indicates the absence of a USB Host, so the Controller shoul=
+d assume the
+> > > > + * HOST role. If the OTG Status register is inaccessible, return a=
+n error.
+> > > > + */
+> > > > +static int cdns3_get_otg_mode(ofnode node
+> > >=20
+> > > Pass struct udevice *parent instead of node here ...
+> > >=20
+> > > > , enum usb_dr_mode *mode)
+> > > > +{
+> > > > +	struct cdns3 cdns, *cdnsp;
+> > > > +	void __iomem *otg_regs;
+> > > > +	fdt_addr_t otg_addr;
+> > > > +	int otg_reg_index;
+> > > > +	int vbus;
+> > > > +
+> > > > +	otg_reg_index =3D ofnode_stringlist_search(node, "reg-names", "ot=
+g");
+> > > > +	if (otg_reg_index < 0) {
+> > > > +		printf("%s: dr_mode is otg but otg register name is missing\n", =
+__func__);
+> > > > +		return -ENOENT;
+> > > > +	}
+> > > > +
+> > > > +	otg_addr =3D ofnode_get_addr_index(node, otg_reg_index);
+> > > > +	if (otg_addr =3D=3D FDT_ADDR_T_NONE) {
+> > > > +		printf("%s: address of otg registers is unspecified\n", __func__=
+);
+> > > > +		return -ENOENT;
+> > > > +	}
+> > > > +
+> > > > +	otg_regs =3D map_physmem(otg_addr, 0, MAP_NOCACHE);
+> > > > +	if (!otg_regs) {
+> > > > +		printf("%s: failed to map otg registers\n", __func__);
+> > > > +		return -EINVAL;
+> > > > +	}
+> > >=20
+> > > ... and replace all that ^ with devfdt_remap_addr_name(parent, "otg")=
+ .
+> > > That should work.
+> >=20
+> > It doesn't work because the 'parent' node doesn't have the 'otg' regist=
+ers.
+> > It is the child node which has it. The device-tree nodes for parent and
+> > child are:
+> >=20
+> > 	usbss0: usb@4104000 {
+> > 							=3D> PARENT
+> > 		bootph-all;
+> > 		compatible =3D "ti,j721e-usb";
+> > 		reg =3D <0x00 0x4104000 0x00 0x100>;
+> > 		dma-coherent;
+> >=20
+> > 		[TRIMMED]
+> >=20
+> > 		usb0: usb@6000000
+> > {							=3D> CHILD
+> > 			bootph-all;
+> > 			compatible =3D "cdns,usb3";
+> > 			reg =3D <0x00 0x6000000 0x00 0x10000>,
+> > 			      <0x00 0x6010000 0x00 0x10000>,
+> > 			      <0x00 0x6020000 0x00 0x10000>;
+> > 			reg-names =3D "otg", "xhci",
+> > "dev";			=3D> OTG Register is defined here
+> >=20
+> > 			[TRIMMED]
+> > 	};
+> >=20
+> > The 'udevice' for the child node is created in the cdns3_bind() functio=
+n
+> > __after__ the function in this patch is invoked. Therefore, we don't ye=
+t
+> > have the child device which is created by:
+> >=20
+> > 		device_bind_driver_to_node(parent, driver, name, node,
+> > &dev);
+> >=20
+> > I did consider the possibility of using the standard APIs
+> > (devfdt_remap_addr_name), but since the child device doesn't exist yet,
+> > they cannot be used. Hence, I had to implement custom logic.
+> Maybe it would be possible to create a temporary udevice on stack and=20
+> pass it to devfdt_remap_addr_name() ? I think this should be complete=20
+> enough, although I might have missed something:
+>=20
+> "
+> struct udevice cdev =3D { .parent =3D parent; };
+> dev_set_ofnode(cdev, node);
 
-To address this, use the VBUS Valid field of the OTG Status register to
-determine the role as follows:
-- If VBUS Valid field is set, it indicates that a USB Host is supplying
-  power and the Controller should assume the Peripheral role.
-- If VBUS Valid field is clear, it indicates the absence of a USB Host and
-  the Controller should assume the Host role.
+This works, except that I had to use the subnode rather than the parent's
+node:
+	dev_set_ofnode(&child, ofnode_first_subnode(dev_ofnode(parent)));
 
-Additionally, when 'dr_mode' happens to be 'otg' and the STRAP settings
-are not specified, use VBUS Valid to determine the role in cdns3_drd_init()
-and assign it to cdns->dr_mode.
+> "
+>=20
+> devfdt_remap_addr_name() internally calls dev_of_offset(dev) on the=20
+> cdev, tests is device_get_uclass_id(dev->parent) =3D=3D UCLASS_SIMPLE_BUS=
+=20
+> (it is not) and that is it.
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
----
-
-Hello,
-
-This patch is based on commit
-f9ffeec4bdc board: toradex: Make A53 get RAM size from DT in K3 boards
-of the master branch of U-Boot.
-
-v2 of this patch is at:
-https://lore.kernel.org/r/20260213051556.1247716-1-s-vadapalli@ti.com/
-Changes since v2:
-- Based on feedback from Marek, a temporary child udevice has been
-  created in cdns3_get_otg_mode() to use devfdt_remap_addr_name(),
-  instead of implementing custom equivalent of devfdt_remap_addr_name().
-
-Test logs on J784S4 EVM:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/5f55c14a061a797e266f086ea18ef3e0
+I have posted the v3 patch incorporating your feedback at:
+https://lore.kernel.org/r/20260215123514.2288422-1-s-vadapalli@ti.com/
+Thank you.
 
 Regards,
 Siddharth.
-
- drivers/usb/cdns3/core.c | 55 ++++++++++++++++++++++++++++++++++++++++
- drivers/usb/cdns3/drd.c  | 11 ++++++++
- 2 files changed, 66 insertions(+)
-
-diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
-index 4434dc15bec..6eacbce7714 100644
---- a/drivers/usb/cdns3/core.c
-+++ b/drivers/usb/cdns3/core.c
-@@ -392,6 +392,54 @@ static const struct udevice_id cdns3_ids[] = {
- 	{ },
- };
- 
-+/*
-+ * The VBUS Valid Bit in the OTG Status register can be used to determine
-+ * the role. When VBUS Valid is set, it indicates that a USB Host is supplying
-+ * power, so the Controller should assume the PERIPHERAL role. If it isn't set,
-+ * it indicates the absence of a USB Host, so the Controller should assume the
-+ * HOST role. If the OTG Status register is inaccessible, return an error.
-+ */
-+static int cdns3_get_otg_mode(struct udevice *parent, enum usb_dr_mode *mode)
-+{
-+	/* Create a temporary child device for using devfdt_remap_addr_name() */
-+	struct udevice child = {
-+		.parent = parent,
-+	};
-+	struct cdns3 cdns, *cdnsp;
-+	void __iomem *otg_regs;
-+	int vbus;
-+
-+	dev_set_ofnode(&child, ofnode_first_subnode(dev_ofnode(parent)));
-+	otg_regs = devfdt_remap_addr_name(&child, "otg");
-+	if (!otg_regs) {
-+		dev_err(parent, "failed to get otg registers for child node\n");
-+		return -ENXIO;
-+	}
-+
-+	/*
-+	 * As mentioned in drivers/usb/cdns3/drd.c, there are two versions
-+	 * of the Controller. The following logic detects the version of the
-+	 * Controller and interprets the register layout accordingly.
-+	 */
-+	cdnsp = &cdns;
-+	cdnsp->otg_v0_regs = otg_regs;
-+	if (!readl(&cdnsp->otg_v0_regs->cmd)) {
-+		cdnsp->otg_regs = otg_regs;
-+	} else {
-+		cdnsp->otg_v1_regs = otg_regs;
-+		cdnsp->otg_regs = (void *)&cdnsp->otg_v1_regs->cmd;
-+	}
-+
-+	/* Use VBUS Valid to determine role */
-+	vbus = !!(readl(&cdnsp->otg_regs->sts) & OTGSTS_VBUS_VALID);
-+	if (vbus)
-+		*mode = USB_DR_MODE_PERIPHERAL;
-+	else
-+		*mode = USB_DR_MODE_HOST;
-+
-+	return 0;
-+}
-+
- int cdns3_bind(struct udevice *parent)
- {
- 	enum usb_dr_mode dr_mode;
-@@ -413,6 +461,13 @@ int cdns3_bind(struct udevice *parent)
- 	if (dr_mode == USB_DR_MODE_UNKNOWN)
- 		dr_mode = usb_get_dr_mode(dev_ofnode(parent));
- 
-+	/* Use VBUS Valid to determine role */
-+	if (dr_mode == USB_DR_MODE_OTG) {
-+		ret = cdns3_get_otg_mode(parent, &dr_mode);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
- 	switch (dr_mode) {
- #if defined(CONFIG_SPL_USB_HOST) || \
- 	(!defined(CONFIG_XPL_BUILD) && defined(CONFIG_USB_HOST))
-diff --git a/drivers/usb/cdns3/drd.c b/drivers/usb/cdns3/drd.c
-index cbb13342343..0ca40a5cc8d 100644
---- a/drivers/usb/cdns3/drd.c
-+++ b/drivers/usb/cdns3/drd.c
-@@ -301,6 +301,17 @@ int cdns3_drd_init(struct cdns3 *cdns)
- 		cdns->dr_mode = USB_DR_MODE_PERIPHERAL;
- 	}
- 
-+	/*
-+	 * In the absence of STRAP configuration, use VBUS Valid to
-+	 * determine the appropriate role to be assigned to dr_mode.
-+	 */
-+	if (cdns->dr_mode == USB_DR_MODE_OTG) {
-+		if (cdns3_get_vbus(cdns))
-+			cdns->dr_mode = USB_DR_MODE_PERIPHERAL;
-+		else
-+			cdns->dr_mode = USB_DR_MODE_HOST;
-+	}
-+
- 	state = readl(&cdns->otg_regs->sts);
- 	if (OTGSTS_OTG_NRDY(state) != 0) {
- 		dev_err(cdns->dev, "Cadence USB3 OTG device not ready\n");
--- 
-2.51.1
-
