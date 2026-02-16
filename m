@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07715E83829
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 19:39:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01BAE83827
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 19:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7280283C72;
-	Mon, 16 Feb 2026 20:39:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E1AE883B8A;
+	Mon, 16 Feb 2026 20:39:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IiHNqIyE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NW8wC0d2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B38BC80FA1; Mon, 16 Feb 2026 20:39:02 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 5265E80FA1; Mon, 16 Feb 2026 20:39:04 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5486083AA9
+ by phobos.denx.de (Postfix) with ESMTPS id A5EF883B8A
  for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 20:39:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d18a9d2b1aso3287894a34.2
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7d1890f5cafso1223627a34.1
  for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 11:39:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771270738; x=1771875538; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771270739; x=1771875539; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0ZGp2qMQ7gex50NDlP1cuWk46RCrPuvgkRmTTz5fMqs=;
- b=IiHNqIyEfWsl6jvsVR9E4wwDXoqdRaw7g4QSuPOZ7GQot0TlSvEERDg4bCmkIiAQdN
- F7jqp+9aMLCirvYZYKd9/I9DZoNnBOGrFUn8oPJ7ttsSpNXcjd4QPi4Fg0nHvc5qumIm
- u0zZGGYwmzNoZXw3gVWI3sAkqOKMaLeE2AzGA=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=p+D1f7WACk1FSPNE6fw2oSFR6edmLrWvGtyow9KUau8=;
+ b=NW8wC0d2kTJ2LtdH2wF4NaQdoBxwweFuBMcYxudT94Zd7rkGXXKOEif1hE+Xqmwru5
+ cHVq0bPHi7xzzMw+/cUEo34/+b0a65VktieTO/aJZLNgWeIU7tsgF+kKX583yTmM45jp
+ 3zzjTCogj36QipwHsNNqMR94IcQYeSyURD1mo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771270738; x=1771875538;
+ d=1e100.net; s=20230601; t=1771270739; x=1771875539;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=0ZGp2qMQ7gex50NDlP1cuWk46RCrPuvgkRmTTz5fMqs=;
- b=v1jvBXCi861Qpy3eki9DfGaSy/dEuSJmjwqlpmVo740wVLDVZQQYkR1mKot2KD6Txs
- cAo7ekBNxdieREGCMVwLUE6ylEETHMaB4T83D+z3sNiIQhOdt2rP0QhhZpFER+sYDYuK
- Z52q4n/cEMbtXvGFL26JvylbyRiXBJVI1pY0CPG2T/4Apbe95PvK2U0ryLeDRiBYq/em
- 0z8HBISNuGc+H3xhOmbzUkDV2om53K1J/GtjPZUQPBKBf+mTxLPwB4H7+KTFo289irwd
- JpHtXp5nu/noJpYPDWyJ7nn/DIzatH2IzmijXpyZx9MXzCbUGDIY3geNCD1qg0sWNcLp
- KIjw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIXxtVLKbB3gV7ykxMP6xTz9Rlmzucre3WcDEuru1SK5tHWJxDe7+GuWUiFUs0VS6pRKjdxdE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7ofK4EzSXCRuMyq8pyWcbBqumSZghdhynp+SAqx3X+qrWRymF
- vqz2mSG1Rz4muGatLseaZYFZ5k6osTsJ0sWLufUUJe3cvKimlC5jDqt7LU6FgTEYrMqpLX6WtuN
- XRBNLkNM=
-X-Gm-Gg: AZuq6aJXy5PS+yYjChhPgeKFSg6OoFhb5ZCjbgIEvkg5jRXzpdOWC129KBNPkkgr32A
- nzR+8xcjh6+oNEeHceFCmsgVghj3/a5Co9K1okHTIwd/1SqM73BH3QSQ1HzWw6/SGH2rdTFq4Iq
- QR/4oymDhLgVstxyMm0dqFEfX+Bge27zion/h/SSF9n/YGWhEfuXuRjTJRyMwhGrtmAULJkCgyl
- bm0hXlI37Qfw3tpIiu5B8d6TQVlVcE6drnrx/PXwkRP1C5hrk8ovryDG3feUxMK8+vyBQDlmLvN
- qeYAyJ8zgRFDWhEztA5yb+i72Lj72NvUMY4QLGZ7pqP3qzKhTVWnc8htTk9GpgPaGzUEVF2Db+E
- 9N1M9Afk+Xmg0L4c+4NsXWgN7J1SGnkroPqDbqXzMc7T5ZRoYxqjeCebdqbQ9iDEfPoEatOlz0W
- Q+6uv2XnkQVFlUm6HUg/G4xcdm3cFdE6ZevZ3HsViZDKTM2o+1UQ+ZWpEymREmgsU9+pn6I+G2l
- xnaVY2AtJvljyufZJMwKLXeF3spJPnVcwc7I5/SIqkSBTqCfg==
-X-Received: by 2002:a05:6830:6303:b0:7cf:ce25:e38d with SMTP id
- 46e09a7af769-7d4c4ac0981mr7412286a34.24.1771270738543; 
- Mon, 16 Feb 2026 11:38:58 -0800 (PST)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=p+D1f7WACk1FSPNE6fw2oSFR6edmLrWvGtyow9KUau8=;
+ b=j5e5VuSSH62/5tvhLrY5hsb8gh06ErT2aqtwSnOgNjeyw2LDcEZa12SCcq6z/j19dW
+ toTuyWAk0t/nYhGa0NHbqReoaiKdgzQFO1l2jNLxBJ+UoL5zYWI1OP6J1sxeH8P2qYGX
+ 8o83fsGrSnv/WzbqBXwiyEXB8on4vha/nDCWK/f4aHoWahoMwXe/DKfXTmqb7g9+zwMd
+ Mmu2uyP05RUasWpeWIsOSqoRvzQyiCZoAYuYKKkuS3Mi/eRpBATh6sphgbM7G37g5QSH
+ EHHV3qnYONtYjPup0nBui6IjnhGy0ExXkSDdtuxnKro8x/3voBCoXQc8ky3stgGH+g0+
+ in/g==
+X-Gm-Message-State: AOJu0Yy1j0q+lkvF1QQ4u13Obengg6bvyMmFLBfQ/ECJC/YIWnN9TFZ0
+ GjQs2dciG6xbLNipIRiwwzWwMUfQTYuzCAUiweUEyZM1n3tqx0Ydn03z2GDAVEMjGoAIxHd/NsU
+ mlmdOXXQ=
+X-Gm-Gg: AZuq6aLarr1G5VphiE5wz2mIWUHrLAd9jVRqutql7doEUuatnnrqNRsvl+O5FAgfKm3
+ MdMSaa7BCBChgRq2ST1HOoKFpvsGtTazIYpAxCXUsURtKixi1LQ+hUA31XljZOTJzG3vGi/fyZ0
+ OHYMbGNl1sJ6GJTBM0quAwIif6pT5De2oazuxMgqS+xPMYvBXPAiscQfuTt7Gfb1/uoRUlOmFx2
+ iWcvklL2RY+mcb8agnW1UHsMXGh5pPHVZFa7OVfAiZtyJ5W9g7oLXFGs3Vwq5i/J+Z81A9QEs5n
+ ZILAHAFtLeCRUp3YbSEfW8Q/+w74QNqDeOgZJZ5OyFGjysRL14oOIXR7i7j60/YEyO8RDZZBwc1
+ KgApIMoD7V+tiNwyPzOrLINgOj6h08012nG8MlOgoAAodIQvifCvjvwfGwOqagsDrBijzKgQrrU
+ T3JOFKOlcwnrZID+XEEPClojFUq6kXfu8JXz2iWz7RHKUnsYrTLah4nhStYMDXfSJF4xZw4PL1Y
+ q4IiaNA9OMaEU7wReZSZ7WFToWcWg/aQpT/bVX6NZpCDvCf4Q==
+X-Received: by 2002:a05:6830:a91:b0:7d1:582d:71db with SMTP id
+ 46e09a7af769-7d4d0c78d66mr6902039a34.38.1771270739275; 
+ Mon, 16 Feb 2026 11:38:59 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a76f9483sm14142543a34.20.2026.02.16.11.38.57
+ 46e09a7af769-7d4a76f9483sm14142543a34.20.2026.02.16.11.38.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 16 Feb 2026 11:38:58 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260206-test-py-source_dir-sp-v1-1-057435f85e45@baylibre.com>
-References: <20260206-test-py-source_dir-sp-v1-1-057435f85e45@baylibre.com>
-Subject: Re: [PATCH] test/py: Fix spelling of source_dir in docstring
-Message-Id: <177127073793.2634449.13436815135962581626.b4-ty@konsulko.com>
-Date: Mon, 16 Feb 2026 13:38:57 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20260210171344.2723799-1-trini@konsulko.com>
+References: <20260210171344.2723799-1-trini@konsulko.com>
+Subject: Re: [PATCH] MAINTAINERS: Remove a few inactive people
+Message-Id: <177127073869.2634449.8836088981965428811.b4-ty@konsulko.com>
+Date: Mon, 16 Feb 2026 13:38:58 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,17 +95,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 06 Feb 2026 15:31:14 -0600, David Lechner wrote:
+On Tue, 10 Feb 2026 11:13:44 -0600, Tom Rini wrote:
 
-> Fix a typo in the docstring for run_build() where source_dir was
-> misspelled.
+> It has been a long while since Jagan Teki, Joe Hershberger or Ramon
+> Fried have been active in the community. We thank them for their time
+> over the years. Remove them from the active maintainer list and mark a
+> few things as Orphaned for now.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] test/py: Fix spelling of source_dir in docstring
-      commit: 6f96026b1e33207762ca0a936abd3b132a8fc0ee
+[1/1] MAINTAINERS: Remove a few inactive people
+      commit: a79edd52a80ac346ac605362f1a61a6062b2aec8
 -- 
 Tom
 
