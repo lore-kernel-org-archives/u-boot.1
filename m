@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF374E83827
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 19:51:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF512E83827
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 19:51:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47AE080FA1;
+	by phobos.denx.de (Postfix) with ESMTP id 863FA83C61;
 	Mon, 16 Feb 2026 20:51:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dqGl2cwd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SZRuyvGV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 926E183AAB; Mon, 16 Feb 2026 19:45:16 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id DEEA283B8A; Mon, 16 Feb 2026 19:45:17 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AC0B80077
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 19:45:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D54B58063E
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 19:45:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=filip.kokosinski@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4836e3288cdso21419075e9.0
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 10:45:14 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-4359228b7c6so2623578f8f.2
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 10:45:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771267514; x=1771872314; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=081/fG6CKNtqOX1ooCi+HHg4AKCLic6d5gC8khsM3PE=;
- b=dqGl2cwd4f0E9v2AFU7gFt4ve+Wqb1y+dehEtLQ1U70337iWpf/nZYzXPy8tlRI3g4
- 5MzDk5IiQHiJoyYFbfNkuztF3Rp3JkldVfV5dvWDuHPRtLLDh2/7L4ndrwy8pGTNoVHp
- y8ZvwsWVYos2veJ/ZRnEAxHl4rJ8/B7shZ57LTZ8sFcVPS8L8lNKgxWql8K7hoXsSkob
- LPZBnhEWNDQmh++Rl/GJdNe4SbPAXUTrLf/N/iZSJjkI6685wuedbTqCuWk0WZHxwXcR
- hyoKTFEVtxXyaYiSN/PviXuofdUQPldeZDACYUHXcU4KeAY2EgVs9Kzf8yBPIypiHwlz
- gvHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771267514; x=1771872314;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1771267515; x=1771872315; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=081/fG6CKNtqOX1ooCi+HHg4AKCLic6d5gC8khsM3PE=;
- b=BFPYoLy2A/pXnIxqM/tZve+C+QN/fhoNcOoi9PdWUIvkJGYkt1rOhnMpU1+ULZPhkI
- L5IOi1zKHphkIEPM3vDrNBJjqhIyWRAJQRXbXviBGeUKHG8OpspSg1rdslnCUMkjeXbF
- fKRSubpnzZyS2GSBfUUVe94KGCFekZx7mHvo+U1Wh2/1ts3/Ju8p/0VPvl5PcE+VZ9pf
- shP+8pCRxy1Xk67W1slEwgQIn9Q8hFwLfxwVwPKb3k326K7NM5mXQAqXDByqlWlcFGcc
- K1tFwd6ALsb1JkoH6cZ3iHyCjxr1IhOKNT1/pKziObd3xWZYCw9pFucAkVIYTh48ruJf
- YgMQ==
-X-Gm-Message-State: AOJu0YwBZh/eCZg8KJ8KIxy4LcTIuMWir+OBkrPrTxMvrc0C7t1+0JDQ
- OTTCrHBbs217Vb02DyqaElor/VDAIT3tZ1zDPZ+XYUudgKq732xAJNBJZKQnyw==
-X-Gm-Gg: AZuq6aL+F3B2Hv6fAGWRVc1SQCosx1OfLkXH//9vmF78+Gfl3D+qw+CLObd0EiSBPwC
- XU4bFc2wQkNtwhRDelkgfbKtQD73FhN8QCEEvaCmYgWfp9wGI12ZzF3MWxPActnZ/FXqMkvypg8
- BrJ3vtldeYRPR4RXXM3SGeSITyiFbpByhUoWV2zUX4GqjJqMCyzZopnDQZJTIaatmYCF4J+F8P1
- e1NDfWtwu2m+ug7nyC0SywiAA1jM9/me6GPb281hUFCyJoeYaxcwKYSKgsszTnVfGniXP6h3gaN
- Y9L8rVuy3Yt+pW2NB2w4tpn3WYs/iUEX0zOXBxkflWu1PJHoorGuMO2+gOWF/LsqsK0ZxDcppFh
- YgkfdDS9t0IwDXvgRChANKr69zGSYI6By17pB2C36SD15knBSCtH1g66CqXJmdLcIRO0J88gFai
- OMHJUqWzN5uz0nghyptaU1p2yxNI1/WykOREWwZbBBztZwz79vv+u29KrM9u60HrUh+vTr7M5AO
- +7JAw2uqdQo
-X-Received: by 2002:a05:600c:468b:b0:47e:e981:78b4 with SMTP id
- 5b1f17b1804b1-48378d9ccd4mr158529645e9.12.1771267513748; 
- Mon, 16 Feb 2026 10:45:13 -0800 (PST)
+ bh=2cu/JFWILkmUFL9OKhKZ1+jKaxDVD11zhHPGlTZmadQ=;
+ b=SZRuyvGVIIAN5RbTMxYYhkZFD6knZg66XHM3KY0N6Gln0r7yujTbB3d84hlhA1N3UU
+ o3PK63qq0sbfYJ1Ti4xeZ8NiMuEje2Z2GdQlr91AKyfz+Oi167ypvJQq0+ZGIr33Yo6J
+ Zv8Caw8sCfntIKgYtsxp8ljSElybd6IJb5oq7dLF1TncyZCcyZcI/PMOERTqH2KmAH69
+ 8Jaa0lAb0DVbCdQWfiPlvuT6Tj46hap7CONEWO1D4zfpgnaPGFkKE/ATekccZy9qO+Ba
+ le4PDD6xIkwbe+++GBWf8Ycx19iOB20gE0Gdem992sapS2ALWcS2oYhaErvpazVkRyun
+ F6pQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771267515; x=1771872315;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2cu/JFWILkmUFL9OKhKZ1+jKaxDVD11zhHPGlTZmadQ=;
+ b=EDSba+LuzpsXdPwAQrca4AlfDsVN9khVNAvhoUEv0EwHSMHBngyOUcQkR+eVc6i5TD
+ m173657eQnjUVyNkvVtdEYY4e7prMJclXtITsEnkhOWin9NCCEzRmpK8X1ph2Z2V/jr2
+ NQ4AW3GHwzRmfuzS8JjC0irM6S1Ex59VvmQg+PF7nQ1J6ZiYQkoSiAZS6y/KgBbPilIL
+ GlUN+fPT+ZWYhblSUnJHKJ+cY6bhoEZaglGIclkQxyccIlbp2BZi9OfG5PbUI1WKXS/h
+ 12iwBiiRO7ZdsBHEofSNKjATQaBZNAOKIjN5ltJWFy44HMVtXICqHFFb1NG3BUkicYi6
+ Qpwg==
+X-Gm-Message-State: AOJu0YwvrobmC1I4CCtMNEic0tN2OGcQn2oKjVMvFOa5G0ESir83MQZt
+ bHuIyg3ZgMiZJZCHTDVUW9THyr0eXtiG1DUUyUoJiZWpgzxJb52yE69h79xc2Q==
+X-Gm-Gg: AZuq6aJNBaEXs6agL2K9dcGOuWhbsGjrk3Nnn5Nc7B3LrS4qqgCXflD2hUm7KGJQ7d+
+ 1LuP3p97gFP+m3KRS8Kpll1yd81o88rVuU6I74MajzQhgxD10O84duFhikMHge+DfKhjhwu+Rfg
+ NGZEDllVGO5gflrK7qXs1XgUk2yVubaMqouMaB9nrWK6ZiddLjYdLoOglHHMff3LAAidBqHwaVU
+ zSWu3qsPhjlGIWkH9FlDDnOQNY4Jzs7OrUKXZvIe409WZDuEoaOarTD2AOxY1SFxpbvpk5BVZGY
+ 7/z8C9lstDQFBheBXQFkdKhs+3Mu31vjIxMdO6xRYbltFrjqFzOZ53Dsvyqyhsn5nWlHDymA+5w
+ +zCcpKO8wu6KguWfRYWQAMNzF0ANKPpNrVdqO7gfAojsO2lAA5UkDveGG0+4EG73mK29mqeOCtL
+ L/mQy89Is6kCTVLyeaz4nXz0g4IMMlbdZdtNyiJ2BYH9FTAq0kreVDhpaLa8P4Ljj9ilRHAH7Fr
+ Q==
+X-Received: by 2002:a05:600c:45c8:b0:480:1b65:b741 with SMTP id
+ 5b1f17b1804b1-48379b9913cmr147153675e9.15.1771267514984; 
+ Mon, 16 Feb 2026 10:45:14 -0800 (PST)
 Received: from desktop.home (83.23.200.152.ipv4.supernova.orange.pl.
  [83.23.200.152]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4835dd0e327sm449404165e9.14.2026.02.16.10.45.12
+ 5b1f17b1804b1-4835dd0e327sm449404165e9.14.2026.02.16.10.45.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Feb 2026 10:45:13 -0800 (PST)
+ Mon, 16 Feb 2026 10:45:14 -0800 (PST)
 From: =?UTF-8?q?Filip=20Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
 To: u-boot@lists.denx.de
 Cc: mbrugger@suse.com, pbrobinson@gmail.com,
  =?UTF-8?q?Filip=20Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
-Subject: [PATCH 0/2] board/raspberry: add FDT for bcm2712d0
-Date: Mon, 16 Feb 2026 19:44:50 +0100
-Message-ID: <20260216184452.18732-1-filip.kokosinski@gmail.com>
+Subject: [PATCH 1/2] board/raspberrypi: add multi-FDT support
+Date: Mon, 16 Feb 2026 19:44:51 +0100
+Message-ID: <20260216184452.18732-2-filip.kokosinski@gmail.com>
 X-Mailer: git-send-email 2.51.2
+In-Reply-To: <20260216184452.18732-1-filip.kokosinski@gmail.com>
+References: <20260216184452.18732-1-filip.kokosinski@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -98,35 +101,296 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds the FDT for the d0 stepping of the BCM2712 SoC. The v1.1
-revision of the Raspberry Pi 5 board can't boot Linux properly without
-additional changes specific to the d0 stepping.
+This patch adds support for multiple FDT files per board model. This is
+done by adding the FDTFILES macro, which initializes two rpi_model
+struct members: fdtfiles and fdtcount.
 
-The d0 specific changes can be seen here:
-https://github.com/raspberrypi/linux/blob/rpi-6.12.y/arch/arm64/boot/dts/broadcom/bcm2712d0-rpi-5-b.dts
+The new-style revision codes designate LSB bits as board revision; this
+value is used to choose between provided FDTs. The first element of the
+fdtfiles list is used should no revision match.
 
-To do that, this series introduces support for multiple FDT entries for a single
-device type (bits 4-11 from the new-style revision code).
+Signed-off-by: Filip Kokosiński <filip.kokosinski@gmail.com>
+---
+ board/raspberrypi/rpi/rpi.c | 93 +++++++++++++++++++++----------------
+ 1 file changed, 52 insertions(+), 41 deletions(-)
 
-The rpi_model struct is modified by:
-* changing fdtfile to fdtfiles (const char * const *)
-* adding fdtcount (size_t)
-
-Adding fdtcount is motivated by wanting to keep FDT selection O(1), and avoid
-relying on NULL terminating fdtfiles array.
-
-A new FDTFILES macro is added to initialize fdtfile and fdtcount.
-
-In case only a single FDT is provided, or the board revision code doesn't match,
-the selected FDT defaults to the first entry in fdtfiles.
-
-Filip Kokosiński (2):
-  board/raspberrypi: add multi-FDT support
-  board/raspberrypi: add bcm2712d0-rpi-5-b for Raspberry Pi 5
-
- board/raspberrypi/rpi/rpi.c | 96 +++++++++++++++++++++----------------
- 1 file changed, 55 insertions(+), 41 deletions(-)
-
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index f9b643555dd..1b404b448f3 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -94,120 +94,125 @@ struct efi_capsule_update_info update_info = {
+  */
+ struct rpi_model {
+ 	const char *name;
+-	const char *fdtfile;
++	const char * const *fdtfiles;
++	size_t fdtcount;
+ 	bool has_onboard_eth;
+ };
+ 
++#define FDTFILES(...) \
++	(const char *[]){ __VA_ARGS__ }, \
++	sizeof((const char *[]){ __VA_ARGS__ }) / sizeof(const char *)
++
+ static const struct rpi_model rpi_model_unknown = {
+ 	"Unknown model",
+-	DTB_DIR "bcm283x-rpi-other.dtb",
++	FDTFILES(DTB_DIR "bcm283x-rpi-other.dtb"),
+ 	false,
+ };
+ 
+ static const struct rpi_model rpi_models_new_scheme[] = {
+ 	[0x0] = {
+ 		"Model A",
+-		DTB_DIR "bcm2835-rpi-a.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+ 		false,
+ 	},
+ 	[0x1] = {
+ 		"Model B",
+-		DTB_DIR "bcm2835-rpi-b.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
+ 		true,
+ 	},
+ 	[0x2] = {
+ 		"Model A+",
+-		DTB_DIR "bcm2835-rpi-a-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
+ 		false,
+ 	},
+ 	[0x3] = {
+ 		"Model B+",
+-		DTB_DIR "bcm2835-rpi-b-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
+ 		true,
+ 	},
+ 	[0x4] = {
+ 		"2 Model B",
+-		DTB_DIR "bcm2836-rpi-2-b.dtb",
++		FDTFILES(DTB_DIR "bcm2836-rpi-2-b.dtb"),
+ 		true,
+ 	},
+ 	[0x6] = {
+ 		"Compute Module",
+-		DTB_DIR "bcm2835-rpi-cm.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
+ 		false,
+ 	},
+ 	[0x8] = {
+ 		"3 Model B",
+-		DTB_DIR "bcm2837-rpi-3-b.dtb",
++		FDTFILES(DTB_DIR "bcm2837-rpi-3-b.dtb"),
+ 		true,
+ 	},
+ 	[0x9] = {
+ 		"Zero",
+-		DTB_DIR "bcm2835-rpi-zero.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-zero.dtb"),
+ 		false,
+ 	},
+ 	[0xA] = {
+ 		"Compute Module 3",
+-		DTB_DIR "bcm2837-rpi-cm3.dtb",
++		FDTFILES(DTB_DIR "bcm2837-rpi-cm3.dtb"),
+ 		false,
+ 	},
+ 	[0xC] = {
+ 		"Zero W",
+-		DTB_DIR "bcm2835-rpi-zero-w.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-zero-w.dtb"),
+ 		false,
+ 	},
+ 	[0xD] = {
+ 		"3 Model B+",
+-		DTB_DIR "bcm2837-rpi-3-b-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2837-rpi-3-b-plus.dtb"),
+ 		true,
+ 	},
+ 	[0xE] = {
+ 		"3 Model A+",
+-		DTB_DIR "bcm2837-rpi-3-a-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2837-rpi-3-a-plus.dtb"),
+ 		false,
+ 	},
+ 	[0x10] = {
+ 		"Compute Module 3+",
+-		DTB_DIR "bcm2837-rpi-cm3.dtb",
++		FDTFILES(DTB_DIR "bcm2837-rpi-cm3.dtb"),
+ 		false,
+ 	},
+ 	[0x11] = {
+ 		"4 Model B",
+-		DTB_DIR "bcm2711-rpi-4-b.dtb",
++		FDTFILES(DTB_DIR "bcm2711-rpi-4-b.dtb"),
+ 		true,
+ 	},
+ 	[0x12] = {
+ 		"Zero 2 W",
+-		DTB_DIR "bcm2837-rpi-zero-2-w.dtb",
++		FDTFILES(DTB_DIR "bcm2837-rpi-zero-2-w.dtb"),
+ 		false,
+ 	},
+ 	[0x13] = {
+ 		"400",
+-		DTB_DIR "bcm2711-rpi-400.dtb",
++		FDTFILES(DTB_DIR "bcm2711-rpi-400.dtb"),
+ 		true,
+ 	},
+ 	[0x14] = {
+ 		"Compute Module 4",
+-		DTB_DIR "bcm2711-rpi-cm4.dtb",
++		FDTFILES(DTB_DIR "bcm2711-rpi-cm4.dtb"),
+ 		true,
+ 	},
+ 	[0x17] = {
+ 		"5 Model B",
+-		DTB_DIR "bcm2712-rpi-5-b.dtb",
++		FDTFILES(DTB_DIR "bcm2712-rpi-5-b.dtb"),
+ 		true,
+ 	},
+ 	[0x18] = {
+ 		"Compute Module 5",
+-		DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
++		FDTFILES(DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb"),
+ 		true,
+ 	},
+ 	[0x19] = {
+ 		"500",
+-		DTB_DIR "bcm2712-rpi-500.dtb",
++		FDTFILES(DTB_DIR "bcm2712-rpi-500.dtb"),
+ 		true,
+ 	},
+ 	[0x1A] = {
+ 		"Compute Module 5 Lite",
+-		DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
++		FDTFILES(DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb"),
+ 		true,
+ 	},
+ };
+@@ -215,87 +220,87 @@ static const struct rpi_model rpi_models_new_scheme[] = {
+ static const struct rpi_model rpi_models_old_scheme[] = {
+ 	[0x2] = {
+ 		"Model B",
+-		DTB_DIR "bcm2835-rpi-b.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
+ 		true,
+ 	},
+ 	[0x3] = {
+ 		"Model B",
+-		DTB_DIR "bcm2835-rpi-b.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
+ 		true,
+ 	},
+ 	[0x4] = {
+ 		"Model B rev2",
+-		DTB_DIR "bcm2835-rpi-b-rev2.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+ 		true,
+ 	},
+ 	[0x5] = {
+ 		"Model B rev2",
+-		DTB_DIR "bcm2835-rpi-b-rev2.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+ 		true,
+ 	},
+ 	[0x6] = {
+ 		"Model B rev2",
+-		DTB_DIR "bcm2835-rpi-b-rev2.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+ 		true,
+ 	},
+ 	[0x7] = {
+ 		"Model A",
+-		DTB_DIR "bcm2835-rpi-a.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+ 		false,
+ 	},
+ 	[0x8] = {
+ 		"Model A",
+-		DTB_DIR "bcm2835-rpi-a.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+ 		false,
+ 	},
+ 	[0x9] = {
+ 		"Model A",
+-		DTB_DIR "bcm2835-rpi-a.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+ 		false,
+ 	},
+ 	[0xd] = {
+ 		"Model B rev2",
+-		DTB_DIR "bcm2835-rpi-b-rev2.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+ 		true,
+ 	},
+ 	[0xe] = {
+ 		"Model B rev2",
+-		DTB_DIR "bcm2835-rpi-b-rev2.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+ 		true,
+ 	},
+ 	[0xf] = {
+ 		"Model B rev2",
+-		DTB_DIR "bcm2835-rpi-b-rev2.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+ 		true,
+ 	},
+ 	[0x10] = {
+ 		"Model B+",
+-		DTB_DIR "bcm2835-rpi-b-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
+ 		true,
+ 	},
+ 	[0x11] = {
+ 		"Compute Module",
+-		DTB_DIR "bcm2835-rpi-cm.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
+ 		false,
+ 	},
+ 	[0x12] = {
+ 		"Model A+",
+-		DTB_DIR "bcm2835-rpi-a-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
+ 		false,
+ 	},
+ 	[0x13] = {
+ 		"Model B+",
+-		DTB_DIR "bcm2835-rpi-b-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
+ 		true,
+ 	},
+ 	[0x14] = {
+ 		"Compute Module",
+-		DTB_DIR "bcm2835-rpi-cm.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
+ 		false,
+ 	},
+ 	[0x15] = {
+ 		"Model A+",
+-		DTB_DIR "bcm2835-rpi-a-plus.dtb",
++		FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
+ 		false,
+ 	},
+ };
+@@ -361,11 +366,17 @@ int dram_init_banksize(void)
+ static void set_fdtfile(void)
+ {
+ 	const char *fdtfile;
++	int rev = revision & 0x0f;
+ 
+ 	if (env_get("fdtfile"))
+ 		return;
+ 
+-	fdtfile = model->fdtfile;
++	/* set the first entry as default */
++	fdtfile = model->fdtfiles[0];
++
++	if (rev < model->fdtcount)
++		fdtfile = model->fdtfiles[rev];
++
+ 	env_set("fdtfile", fdtfile);
+ }
+ 
 -- 
 2.51.2
 
