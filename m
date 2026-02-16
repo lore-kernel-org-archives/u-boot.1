@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5689E63F3F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 17:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C69AE63F3F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 17:50:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F0108063E;
-	Mon, 16 Feb 2026 18:46:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BFF5183C72;
+	Mon, 16 Feb 2026 18:50:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aLTRb/qq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="p8eWLBCr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gIt71hcv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 817C883AAB; Mon, 16 Feb 2026 18:46:34 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A9A0383CB9; Mon, 16 Feb 2026 18:50:36 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 961AA80325
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 18:46:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B56380325
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 18:50:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fF9F42m78z9tgB;
- Mon, 16 Feb 2026 18:46:32 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1771263992;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=fWSSbqzEwbinEB40nnrZEGDIZJwbsxPPpTranAjSSWk=;
- b=aLTRb/qqxR7d1DE5CHDQDwnwkSQbJvTay4M7L6M7Ok4BUHhVNG7pviQWYmejZmml7Bz4rf
- MvtiMSw9XZ5dW0ckqWVMt2J/Tm516LU76j2cINetyzfn1wovgiZAyKPh4Kh9z1YNtCKnA0
- IQ4kPiDexS65xvcxLaHQ6EKbacz2nhDELNgYtgM6ynYdg6eruT9kVmjoPrRSUpqPBYpfAB
- 7x2KhDvSN2X8G1NNatIXpKweqpl+J5It4Jc7ABafNwJB95q78vQtSQAn3IyOsz+SxABROq
- 0yOA/1fwm1T9636OwZc5SIf+UKZiop2tS7di+PKMBen6MNmJ3x84QxBUOapO5Q==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=p8eWLBCr;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
- 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+usb@mailbox.org
-From: Marek Vasut <marek.vasut+usb@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1771263990;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=fWSSbqzEwbinEB40nnrZEGDIZJwbsxPPpTranAjSSWk=;
- b=p8eWLBCr5n6KHyC00ERajvMCo1MRgaySOUhI7BS34JBW/n7RZFvNggGz2n1N8vaYFImIR8
- iqYYTlDXi+CccEUqabKZmXzgKHfvqtXROUnfD23YvJnvALvVYR5C6BaW8JxIKdrBuqOrop
- H+kr2ecREWsvG7arEkdhNhCy9p5dBhK7H5wHRPNYCKAROSqhp7nrDMOq3qUHIxpJvNbPg2
- ODcrp8slEj4VMZasUML7Uo65lJwAoKzvE82lxrwsvhzxutdVkAqNDnKUeXsQBxQagkkls2
- 66rqoZEzXtU8d/Iar4R/eRlfW6phu+bUNlqS08IcStYGOO37gXR3yaLmQY9Rtg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-Subject: [PULL] u-boot-usb/master
-Date: Mon, 16 Feb 2026 18:45:42 +0100
-Message-ID: <20260216174618.56494-1-marek.vasut+usb@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d195166b2cso2262038a34.3
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 09:50:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771264223; x=1771869023; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=d9VaIRBAsiI6iVdAb2tgI4x/lWupG0vW+ZSUAe7QCLU=;
+ b=gIt71hcvoWX8oUP09f9+dXXAbH6//A4M+TZ+fEQ0Y6c+dKxTJl/R5IOW0+pvgQlBRC
+ 3BkQw+M6J/XIOGGchgMVzwttH72eEoFoewUHuPJ1lMY5XIg6Uw+JPJ9PckZRuBz5kF4k
+ JjhCIZNtQlbh2OylzjCM7hmIy81B3tI8mFKFA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771264223; x=1771869023;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=d9VaIRBAsiI6iVdAb2tgI4x/lWupG0vW+ZSUAe7QCLU=;
+ b=EcgeJEJmMQFEJ7D6Qy4ijJbdYAOSbWHnu+Bh5U3c0o0ptne/UmcWIdsT91TfNDecyp
+ 84EnmPNH8fhAjlxqCWsksUlf+s7V9wPe1zQfKG6fkVGbJWXxMtmbM6ua0F6HKwzcn1pb
+ QbsDzW2p+3FIcHD6TVPnLEv3p1F5XPs5aHEeCGGRtxpC0MMU84QT3cJuV4gB14eo8f1M
+ 7DHpcaPUNyr4MYnTWKOkm1JrNck90HSi4ILAgSHf1uRUz1WPv8mYpxOlJvbwrAJdecK0
+ tEYIxIwFN/9rU9+PhPHMJHi4AsuLquKkNDBwzhCKCCMCq8zpT8KHwgzNLmb0WCwtwhrE
+ OnLQ==
+X-Gm-Message-State: AOJu0YwhfpEF2F5dmPn7Xqo0lzdmbLvc5OS+64Pw0ad1zznSYsyDwicf
+ v6WTxtAQLnEVWJa0A1PUiwrmsXY71WymRrv5294CYQzMIO+0LUA3FAGJvZQcSMPO1Ac=
+X-Gm-Gg: AZuq6aK2he9niw3zvItx4z9fe+MXMVJKWUIas8wbaxPl0n3MiLKyTRuQ95VzOhHdPwq
+ 9ywYGjSdeRsrcGeWij8qZLuG1UFLz/QRzGG5MorCK+FZahKhI+ZSMx78vnfyAKXxIXEWZzetkcP
+ Tp4rORE2c1toGoVK2u9U+fYaCD1rSmKYrKLC8uq3YCXfimHPkNIxf8LNS7tZCVXZys5xtrLhRC9
+ 1OzJ3e0X63LP4mIU3v2V3ROmq255u5cHkdne/q+sibQQioyu3eSsKlEVo5mPccLYP+HX6jvCP6K
+ cdn+LtYVGic7PqAcQ+zoRs/tdbJXaM0xLI5xWpaWNhmUpSMbM7RBioUWqM9AWBoU0TsYIY4vZJd
+ s3wSRVffO2IwRmhLy5iygf9M0NOpdYxDXDYgmRTv9FzYUuooMhsRBJGN+Eldq+IvCpBJG42um9k
+ CfCcf/rCdN2FJX24hW2g+wW7iaVMEvwVyVufsog9/wSwAXnk8UyDhspazvZIiSOKh+ToT9ZBGJW
+ 5XIvpBNhxTCL2OzPnhtIrLVA/iEQXd/nLqy/GHqpjjEUuSvfrE=
+X-Received: by 2002:a05:6830:3c10:b0:7d4:9679:5797 with SMTP id
+ 46e09a7af769-7d4c31c929bmr6610659a34.28.1771264223085; 
+ Mon, 16 Feb 2026 09:50:23 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4a7547ac1sm12745738a34.7.2026.02.16.09.50.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Feb 2026 09:50:22 -0800 (PST)
+Date: Mon, 16 Feb 2026 11:50:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Romain Gantois <romain.gantois@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Simon Glass <sjg@chromium.org>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH] dm: core: Don't allow ofnode_to_fdt() to return NULL
+Message-ID: <20260216175020.GX2747538@bill-the-cat>
+References: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 3cb74fed57a9dd54d27
-X-MBO-RS-META: fwox8c7i6rcpsn1bi6mz3xyd5c6k5g7n
-X-Rspamd-Queue-Id: 4fF9F42m78z9tgB
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Mr1SVJJVwdmtFEp4"
+Content-Disposition: inline
+In-Reply-To: <20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,22 +101,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit f9ffeec4bdcf1da655a0ffea482062adde78fee8:
 
-  board: toradex: Make A53 get RAM size from DT in K3 boards (2026-02-12 08:12:09 -0600)
+--Mr1SVJJVwdmtFEp4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-are available in the Git repository at:
+On Tue, Feb 10, 2026 at 05:29:01PM +0100, Romain Gantois wrote:
 
-  git://source.denx.de/u-boot-usb.git master
+> The ofnode_to_fdt() function may return a NULL pointer in multiple cases.
+> Or, this function's return value is often passed directly to functions su=
+ch
+> as fdt_getprop() which end up dereferencing it, thus causing a NULL point=
+er
+> exception.
+>=20
+> Don't allow ofnode_to_fdt() to return NULL, to avoid a NULL pointer
+> dereference.
+>=20
+> Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
 
-for you to fetch changes up to bfb530e06ca6c19f66c079601e568c761a001993:
+This leads to failures to build such as:
++(neu6a-io-rk3588) drivers/core/ofnode.c: In function 'ofnode_to_fdt':
++(neu6a-io-rk3588) drivers/core/ofnode.c:176:21: error: assignment discards=
+ 'const' qualifie  from pointer target type [-Werror=3Ddiscarded-qualifiers]
++(neu6a-io-rk3588)   176 |                 fdt =3D gd->fdt_blob;
++(neu6a-io-rk3588)       |                     ^
++(neu6a-io-rk3588) cc1: all warnings being treated as errors
 
-  usb: cdns3: use VBUS Valid to determine role for dr_mode OTG (2026-02-16 15:08:43 +0100)
+--=20
+Tom
 
-----------------------------------------------------------------
-Siddharth Vadapalli (1):
-      usb: cdns3: use VBUS Valid to determine role for dr_mode OTG
+--Mr1SVJJVwdmtFEp4
+Content-Type: application/pgp-signature; name="signature.asc"
 
- drivers/usb/cdns3/core.c | 53 ++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/usb/cdns3/drd.c  | 11 ++++++++++
- 2 files changed, 64 insertions(+)
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZNY0AAKCRAr4qD1Cr/k
+Cq3zAP9SnaK+kws9Yls7+7hm5GRQQfSIhYfjTtHrH9M1r24/sQD+I+cGeFKIYkg3
+bQLKkpiEZpiI7NTC8NRdV7wvZBaH/gQ=
+=GtiV
+-----END PGP SIGNATURE-----
+
+--Mr1SVJJVwdmtFEp4--
