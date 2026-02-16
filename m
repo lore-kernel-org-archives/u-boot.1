@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06253E83836
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:24:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDAE5E83837
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A09D83E36;
-	Mon, 16 Feb 2026 22:23:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9AFB783E62;
+	Mon, 16 Feb 2026 22:23:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B710283D0F; Mon, 16 Feb 2026 22:22:57 +0100 (CET)
+ id B463C83DEB; Mon, 16 Feb 2026 22:23:05 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9D168063E
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:22:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AE148063E
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:23:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs63A-000000002i5-1qz3; Mon, 16 Feb 2026 21:22:36 +0000
-Date: Mon, 16 Feb 2026 21:22:32 +0000
+ id 1vs63K-000000002im-0rSp; Mon, 16 Feb 2026 21:22:46 +0000
+Date: Mon, 16 Feb 2026 21:22:42 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,14 +57,16 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
-Message-ID: <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 09/20] boot: fit: support on-demand loading in
+ fit_image_load()
+Message-ID: <ab7837536e4567b90d7cb662984dd7e637ef4361.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1771275704.git.daniel@makrotopia.org>
-X-Mailman-Approved-At: Mon, 16 Feb 2026 22:23:05 +0100
+X-Mailman-Approved-At: Mon, 16 Feb 2026 22:23:19 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,207 +83,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a UBI volume storage backend for the image_loader framework.
+Add an on-demand loading path to fit_image_load() for use when
+images->loader is set (storage-backed boot).
 
-image_loader_init_ubi() takes a volume name, ensures the UBI device
-is attached (auto-attaching if needed), and installs a .read() callback
-wrapping ubi_volume_read().
+For external-data FIT images, the new path avoids dereferencing
+fit + data_offset (which would point into unmapped memory) and
+instead:
 
-Auto-attach works by scanning the device tree for the first MTD
-partition with compatible = "linux,ubi", then calling ubi_part() on
-that partition. The partition name is resolved using the same
-precedence as the MTD partition parser: the "label" property first,
-then "name", then the node name. Since U-Boot only supports a single
-attached UBI device at a time, only the first matching partition is
-used. If a UBI device is already attached, the auto-attach step is
-skipped.
+1. Extracts the data offset and size from FDT properties
+   (data-position / data-offset + data-size) -- metadata only,
+   no payload access.
 
-UBI handles bad-block management and wear leveling internally, so the
-read callback is a straightforward passthrough. Note that
-ubi_volume_read() returns positive errno values; the wrapper negates
-them for the image_loader convention.
+2. Returns early for IH_TYPE_FILESYSTEM sub-images, which stay on
+   storage and are never loaded into RAM (e.g. squashfs rootfs).
 
-Gated by CONFIG_IMAGE_LOADER_UBI (depends on CMD_UBI && IMAGE_LOADER).
+3. Determines the RAM destination:
+   - If the sub-image has a load address, loads directly there
+     via image_loader_map_to() (zero-copy).
+   - Otherwise, allocates scratch RAM via image_loader_map().
+
+4. Verifies the hash/signature in-place using
+   fit_image_verify_with_data(), which is address-agnostic.
+
+5. Jumps to the common tail, skipping the normal
+   fit_image_get_data() + memcpy() sequence since data is already
+   at its final location.
+
+The entire path is gated by 'if (images->loader && external)' and
+USE_HOSTCC, so the existing in-memory flow is completely unchanged
+when no loader is set or when building host tools.
+
+For inline-data FIT images (no data-position/data-offset), the FDT
+structure loaded during format detection already contains all sub-
+image data, so the existing path handles them correctly.
+
+Also adds a 'struct image_loader *loader' member to struct
+bootm_headers (initialised to NULL).
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/Kconfig            |   8 +++
- boot/Makefile           |   1 +
- boot/image-loader-ubi.c | 112 ++++++++++++++++++++++++++++++++++++++++
- include/image-loader.h  |  13 +++++
- 4 files changed, 134 insertions(+)
- create mode 100644 boot/image-loader-ubi.c
+ boot/image-fit.c | 96 ++++++++++++++++++++++++++++++++++++++++++++++++
+ include/image.h  |  4 ++
+ 2 files changed, 100 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 23848a0f57e..89832014af6 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1203,6 +1203,14 @@ config IMAGE_LOADER_MTD
- 	  parallel NAND, etc.) using the image_loader framework.
- 	  NAND bad blocks are skipped transparently.
- 
-+config IMAGE_LOADER_UBI
-+	bool "UBI volume backend for image loader"
-+	depends on IMAGE_LOADER && CMD_UBI
-+	help
-+	  Allows loading images from UBI volumes using the image_loader
-+	  framework. Auto-attaches the UBI device from the device tree
-+	  if not already attached.
-+
- config DISTRO_DEFAULTS
- 	bool "(deprecated) Script-based booting of Linux distributions"
- 	select CMDLINE
-diff --git a/boot/Makefile b/boot/Makefile
-index 1dde16db694..7d1d4a28106 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -76,6 +76,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
- obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
- obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
- obj-$(CONFIG_IMAGE_LOADER_MTD) += image-loader-mtd.o
-+obj-$(CONFIG_IMAGE_LOADER_UBI) += image-loader-ubi.o
- 
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
-diff --git a/boot/image-loader-ubi.c b/boot/image-loader-ubi.c
-new file mode 100644
-index 00000000000..64901a13378
---- /dev/null
-+++ b/boot/image-loader-ubi.c
-@@ -0,0 +1,112 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * UBI volume backend for image_loader
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
-+
-+#include <dm/ofnode.h>
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 3ed69b5f7bc..73d3bf7df08 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -24,6 +24,7 @@ extern void *aligned_alloc(size_t alignment, size_t size);
+ #include <linux/sizes.h>
+ #include <errno.h>
+ #include <log.h>
 +#include <image-loader.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <mtd.h>
-+#include <ubi_uboot.h>
+ #include <mapmem.h>
+ #include <asm/io.h>
+ #include <malloc.h>
+@@ -2166,6 +2167,100 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 
+ 	printf("   Trying '%s' %s subimage\n", fit_uname, prop_name);
+ 
++#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(IMAGE_LOADER)
++	/*
++	 * Storage-backed path: when an image_loader is active and the
++	 * sub-image uses external data, load the payload from storage
++	 * instead of dereferencing fit + data_offset. The FDT structure
++	 * (containing all metadata, hashes, and signatures) is already
++	 * in RAM; only the payload is on storage.
++	 *
++	 * Sequence:
++	 *  1. Print image info (fit_image_select with verify=0)
++	 *  2. Extract data location from FDT properties (no data access)
++	 *  3. Skip IH_TYPE_FILESYSTEM sub-images — they stay on storage
++	 *  4. Determine RAM destination (load address or scratch area)
++	 *  5. Read payload via image_loader_map_to() / image_loader_map()
++	 *  6. Verify hash/signature in-place
++	 *  7. Jump to common tail (FDT validation, output params)
++	 */
++	if (images && images->loader) {
++		int data_off = 0, data_sz = 0;
++		bool external = false;
++		u8 img_type;
 +
-+struct image_loader_ubi_priv {
-+	char *vol_name;
-+};
++		if (!fit_image_get_data_position(fit, noffset, &data_off)) {
++			external = true;
++		} else if (!fit_image_get_data_offset(fit, noffset, &data_off)) {
++			external = true;
++			data_off += ALIGN(fdt_totalsize(fit), 4);
++		}
 +
-+/**
-+ * ubi_auto_attach() - attach UBI if not already attached
-+ *
-+ * If no UBI device is currently attached, walk the device tree for the
-+ * first MTD partition node with compatible = "linux,ubi", find the
-+ * corresponding MTD device by matching flash_node, and attach UBI to
-+ * it via ubi_part_from_mtd().
-+ *
-+ * Since U-Boot only supports a single attached UBI device at a time,
-+ * only the first matching partition is used.
-+ *
-+ * Return: 0 on success or if already attached, negative errno on failure
-+ */
-+static int ubi_auto_attach(void)
-+{
-+	struct mtd_info *mtd;
-+	ofnode node;
++		if (external && !fit_image_get_data_size(fit, noffset, &data_sz)) {
++			/* Print image info without verifying data */
++			ret = fit_image_select(fit, noffset, 0);
++			if (ret) {
++				bootstage_error(bootstage_id + BOOTSTAGE_SUB_HASH);
++				return ret;
++			}
 +
-+	/* Already attached? */
-+	if (ubi_devices[0])
-+		return 0;
++			/* Skip filesystem images — they stay on storage */
++			if (!fit_image_get_type(fit, noffset, &img_type) &&
++			    img_type == IH_TYPE_FILESYSTEM) {
++				*datap = 0;
++				*lenp = 0;
++				return noffset;
++			}
 +
-+	mtd_probe_devices();
++			len = data_sz;
++			comp = IH_COMP_NONE;
++			fit_image_get_comp(fit, noffset, &comp);
 +
-+	ofnode_for_each_compatible_node(node, "linux,ubi") {
-+		mtd_for_each_device(mtd) {
-+			if (ofnode_equal(mtd->flash_node, node))
-+				goto found;
++			/* Determine the RAM destination */
++			if (load_op == FIT_LOAD_IGNORED) {
++				loadbuf = image_loader_map(images->loader,
++							   data_off, len);
++			} else if (!fit_image_get_load(fit, noffset, &load)) {
++				printf("   Loading %s from storage to 0x%08lx\n",
++				       prop_name, load);
++				loadbuf = map_sysmem(load, len);
++				loadbuf = image_loader_map_to(images->loader,
++							      data_off, len,
++							      loadbuf);
++			} else if (load_op == FIT_LOAD_REQUIRED) {
++				printf("Can't get %s subimage load address!\n",
++				       prop_name);
++				return -EBADF;
++			} else {
++				loadbuf = image_loader_map(images->loader,
++							   data_off, len);
++			}
++
++			if (!loadbuf) {
++				printf("Failed to load %s from storage\n",
++				       prop_name);
++				return -EIO;
++			}
++
++			load = map_to_sysmem(loadbuf);
++
++			/* Verify hash/signature in-place */
++			if (images->verify) {
++				puts("   Verifying Hash Integrity ... ");
++				if (!fit_image_verify_with_data(fit, noffset,
++								gd_fdt_blob(),
++								loadbuf, len)) {
++					puts("Bad Data Hash\n");
++					return -EACCES;
++				}
++				puts("OK\n");
++			}
++
++			goto storage_loaded;
 +		}
 +	}
++#endif /* !USE_HOSTCC && CONFIG_IMAGE_LOADER */
 +
-+	log_err("image_loader_ubi: no MTD device for \"linux,ubi\" node\n");
-+	return -ENODEV;
-+
-+found:
-+	if (ubi_part_from_mtd(mtd)) {
-+		log_err("image_loader_ubi: failed to attach UBI on \"%s\"\n",
-+			mtd->name);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int image_loader_ubi_read(struct image_loader *ldr, ulong src,
-+				 ulong size, void *dst)
-+{
-+	struct image_loader_ubi_priv *priv = ldr->priv;
-+	int ret;
-+
-+	ret = ubi_volume_read(priv->vol_name, dst, src, size);
-+	/* ubi_volume_read() returns positive errno values on error */
-+	return ret ? -ret : 0;
-+}
-+
-+static void image_loader_ubi_cleanup(struct image_loader *ldr)
-+{
-+	struct image_loader_ubi_priv *priv = ldr->priv;
-+
-+	free(priv->vol_name);
-+	free(priv);
-+}
-+
-+int image_loader_init_ubi(struct image_loader *ldr, const char *vol_name)
-+{
-+	struct image_loader_ubi_priv *priv;
-+	int ret;
-+
-+	ret = ubi_auto_attach();
-+	if (ret)
-+		return ret;
-+
-+	if (!ubi_find_volume(vol_name)) {
-+		log_err("image_loader_ubi: volume \"%s\" not found\n",
-+			vol_name);
-+		return -ENODEV;
-+	}
-+
-+	priv = malloc(sizeof(*priv));
-+	if (!priv)
-+		return -ENOMEM;
-+
-+	priv->vol_name = strdup(vol_name);
-+	if (!priv->vol_name) {
-+		free(priv);
-+		return -ENOMEM;
-+	}
-+
-+	ldr->read = image_loader_ubi_read;
-+	ldr->cleanup = image_loader_ubi_cleanup;
-+	ldr->priv = priv;
-+
-+	return 0;
-+}
-diff --git a/include/image-loader.h b/include/image-loader.h
-index 7ccf901d37d..a036e98982f 100644
---- a/include/image-loader.h
-+++ b/include/image-loader.h
-@@ -172,4 +172,17 @@ int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
-  */
- int image_loader_init_mtd(struct image_loader *ldr, const char *name);
+ 	ret = fit_image_select(fit, noffset, images->verify);
+ 	if (ret) {
+ 		bootstage_error(bootstage_id + BOOTSTAGE_SUB_HASH);
+@@ -2325,6 +2420,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		puts("WARNING: 'compression' nodes for ramdisks are deprecated,"
+ 		     " please fix your .its file!\n");
  
-+/**
-+ * image_loader_init_ubi() - Initialise loader for a UBI volume
-+ *
-+ * Ensures a UBI device is attached (auto-attaching from the device
-+ * tree if needed), verifies the named volume exists, then installs a
-+ * .read() callback wrapping ubi_volume_read().
-+ *
-+ * @ldr:	The image loader to initialise
-+ * @vol_name:	UBI volume name
-+ * Return: 0 on success, negative errno on failure
-+ */
-+int image_loader_init_ubi(struct image_loader *ldr, const char *vol_name);
++storage_loaded:
+ 	/* verify that image data is a proper FDT blob */
+ 	if (load_op != FIT_LOAD_IGNORED && image_type == IH_TYPE_FLATDT &&
+ 	    fdt_check_header(loadbuf)) {
+diff --git a/include/image.h b/include/image.h
+index 34efac6056d..ecb3fec26c0 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -345,6 +345,8 @@ struct image_info {
+ 	uint8_t		arch;			/* CPU architecture */
+ };
+ 
++struct image_loader;
 +
- #endif /* __IMAGE_LOADER_H */
+ /*
+  * Legacy and FIT format headers used by do_bootm() and do_bootm_<os>()
+  * routines.
+@@ -400,6 +402,8 @@ struct bootm_headers {
+ 
+ 	int		verify;		/* env_get("verify")[0] != 'n' */
+ 
++	struct image_loader *loader;	/* on-demand storage loader, or NULL */
++
+ #define BOOTM_STATE_START	0x00000001
+ #define BOOTM_STATE_FINDOS	0x00000002
+ #define BOOTM_STATE_FINDOTHER	0x00000004
 -- 
 2.53.0
