@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 367C9E7BDBD
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 13:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B34EDE81A29
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 14:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 341B983B8A;
-	Mon, 16 Feb 2026 14:36:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id D0BD180FA1;
+	Mon, 16 Feb 2026 15:07:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ndZ09HTy";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="TaxSbOkL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 880B783D3D; Mon, 16 Feb 2026 14:36:14 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 64F07831AC; Mon, 16 Feb 2026 15:07:32 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B007C80FA1
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 14:36:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F94A802C1
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 15:07:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 6482A1A0FC0;
- Mon, 16 Feb 2026 13:36:11 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 38012606CF;
- Mon, 16 Feb 2026 13:36:11 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C959C10369150; Mon, 16 Feb 2026 14:36:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1771248969; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=9geBPiUBLTiSzqMhpeqNenvd/JjAXns6KNLYdkyyUok=;
- b=ndZ09HTycyG/tZXMpr0Fnuve+6b7BYZTjiBazlL75PUnTAsasmhGaeVRC6/Bg4Gn1nNE7W
- vRGA+b0JktQwvEdIoPib7z13EYl5mhMtkpuB3F7f3+2lUeKJ+MArYPxDeEeA8aCVzc3Iyd
- dgU4my/u8KkA9Y2NDdiDRoKbolPfmdK7g2byL03gBD/0jGQIb8TmvDAMb9JKMfLe8ILKpZ
- hKPlr6d5x1HcNsRULb1O7jEuYMOohk/g3Rs+829PLDRi6eQMf8a8ELNrDo3KLd/9GeXuNK
- mgMRJ7CzN8SDyDJGtOogHEQpLWE4wm/cGy3rtS/hPzKKy9q01EhWLIRR55bh7g==
-From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Mon, 16 Feb 2026 14:35:36 +0100
-Subject: [PATCH v3 6/6] tools: mkfwumdata: Remove dependency on fwu_mdata.h
- header
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fF4NJ1ZF6z9tHg;
+ Mon, 16 Feb 2026 15:07:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1771250848;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AP80DOt8SIga+Zl4UlNfNI6Kn8UX5GwytWcaivg3QvI=;
+ b=TaxSbOkL0ptavD56cPsertFtCVJ/B2SOUP/eGQPtXI9CaemQZgpFH5T8yV+6freuQKJvKZ
+ 5nMDpIrTdKhnsI9HoUA0QE0z6800fsB/jVICiUcDlVGROKZg/VJMkeqUYiFNff0dumI93q
+ rskGgA9FeB5RA1lBWPnxQhxeSxcwbqS4dzdcYi8yPBjEHKEotxBSgNwvYlJL6gxGvh5VYB
+ V8Qq0k7d+5kc3esC8nazWU39PI+jfHym6D2YU7GGGREl0ShuhvrNrppJcReTznFb20vutF
+ W0r15QTjPAgrUFd4cmlPnLccobrcUep+YNsTGJnOfRx5lECEhEQ3hBRdjZ/vQg==
+Message-ID: <eb5d39a3-f8f4-4545-93b2-3a25044f5df8@mailbox.org>
+Date: Mon, 16 Feb 2026 15:07:25 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v4] usb: cdns3: use VBUS Valid to determine role for
+ dr_mode OTG
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ minda.chen@starfivetech.com
+Cc: u-boot@lists.denx.de, srk@ti.com
+References: <20260216043459.2467850-1-s-vadapalli@ti.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260216043459.2467850-1-s-vadapalli@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260216-feature_fwumdata-v3-6-9ecc5b10456d@bootlin.com>
-References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
-In-Reply-To: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
-To: u-boot@lists.denx.de
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, 
- Sughosh Ganu <sughosh.ganu@arm.com>, Greg Malysa <malysagreg@gmail.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Stefan Roese <stefan.roese@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>, 
- Daniel Golle <daniel@makrotopia.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Leonard Anderweit <l.anderweit@phytec.de>, 
- Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>
-X-Mailer: b4 0.14-dev-d4707
-X-Last-TLS-Session-Version: TLSv1.3
+X-MBO-RS-META: zcib3ecixf4bwwwp97qfcnfng133gfbm
+X-MBO-RS-ID: e7ef9d505bd481a269e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,200 +75,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The dependency on fwu_mdata.h creates unnecessary configuration
-requirements. To generate metadata V1, CONFIG_FWU_MDATA_V1 must be
-enabled, which in turn requires enabling FWU_MULTI_BANK_UPDATE,
-EFI_CAPSULE_ON_DISK, PARTITION_TYPE_GUID, and other unrelated configs.
-This is not suitable for a simple standalone tool.
+On 2/16/26 5:34 AM, Siddharth Vadapalli wrote:
+> The cdns3_bind() function is responsible for identifying the appropriate
+> driver to bind to the USB Controller's device-tree node. If the device-tree
+> node has the 'dr_mode' property set to 'otg', the existing approach fails
+> to bind a driver, leading to loss of functionality.
+> 
+> To address this, use the VBUS Valid field of the OTG Status register to
+> determine the role as follows:
+> - If VBUS Valid field is set, it indicates that a USB Host is supplying
+>    power and the Controller should assume the Peripheral role.
+> - If VBUS Valid field is clear, it indicates the absence of a USB Host and
+>    the Controller should assume the Host role.
+> 
+> Additionally, when 'dr_mode' happens to be 'otg' and the STRAP settings
+> are not specified, use VBUS Valid to determine the role in cdns3_drd_init()
+> and assign it to cdns->dr_mode.
+> 
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
 
-Additionally, even with the "-v 1" option to generate V1 metadata, the
-tool will still include the firmware store description if
-CONFIG_FWU_MDATA_V1 is not enabled. This structure should only be
-present in metadata V2.
-
-Replace the fwu_mdata.h dependency with the new fwumdata header to make
-the tool compatible with both V1 and V2 without requiring any defconfig
-changes. This also uses the access helper functions from the header to
-eliminate code duplication.
-
-Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
----
-
-Change in v2:
-- Fix mdata->desc_offset value.
----
- tools/fwumdata_src/mkfwumdata.c | 96 ++++++++---------------------------------
- 1 file changed, 17 insertions(+), 79 deletions(-)
-
-diff --git a/tools/fwumdata_src/mkfwumdata.c b/tools/fwumdata_src/mkfwumdata.c
-index 8b25539fd57..b8b60473b91 100644
---- a/tools/fwumdata_src/mkfwumdata.c
-+++ b/tools/fwumdata_src/mkfwumdata.c
-@@ -17,26 +17,7 @@
- #include <u-boot/crc.h>
- #include <uuid/uuid.h>
- 
--typedef uint8_t u8;
--typedef int16_t s16;
--typedef uint16_t u16;
--typedef uint32_t u32;
--typedef uint64_t u64;
--
--#undef CONFIG_FWU_NUM_BANKS
--#undef CONFIG_FWU_NUM_IMAGES_PER_BANK
--
--/* This will dynamically allocate the fwu_mdata */
--#define CONFIG_FWU_NUM_BANKS		0
--#define CONFIG_FWU_NUM_IMAGES_PER_BANK	0
--
--/* version 2 supports maximum of 4 banks */
--#define MAX_BANKS_V2			4
--
--#define BANK_INVALID			(u8)0xFF
--#define BANK_ACCEPTED			(u8)0xFC
--
--#include <fwu_mdata.h>
-+#include "fwumdata.h"
- 
- static const char *opts_short = "b:i:a:p:v:V:gh";
- 
-@@ -116,6 +97,7 @@ static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks,
- 			 sizeof(struct fwu_image_bank_info) * banks) * images;
- 	} else {
- 		mobj->size = sizeof(struct fwu_mdata) +
-+			sizeof(struct fwu_mdata_ext) +
- 			sizeof(struct fwu_fw_store_desc) +
- 			(sizeof(struct fwu_image_entry) +
- 			 sizeof(struct fwu_image_bank_info) * banks) * images;
-@@ -146,50 +128,6 @@ alloc_err:
- 	return NULL;
- }
- 
--static struct fwu_image_entry *
--fwu_get_image(struct fwu_mdata_object *mobj, size_t idx)
--{
--	size_t offset;
--
--	if (mobj->version == 1) {
--		offset = sizeof(struct fwu_mdata) +
--			(sizeof(struct fwu_image_entry) +
--			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
--			idx;
--	} else {
--		offset = sizeof(struct fwu_mdata) +
--			sizeof(struct fwu_fw_store_desc) +
--			(sizeof(struct fwu_image_entry) +
--			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
--			idx;
--	}
--
--	return (struct fwu_image_entry *)((char *)mobj->mdata + offset);
--}
--
--static struct fwu_image_bank_info *
--fwu_get_bank(struct fwu_mdata_object *mobj, size_t img_idx, size_t bnk_idx)
--{
--	size_t offset;
--
--	if (mobj->version == 1) {
--		offset = sizeof(struct fwu_mdata) +
--			(sizeof(struct fwu_image_entry) +
--			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
--			img_idx + sizeof(struct fwu_image_entry) +
--			sizeof(struct fwu_image_bank_info) * bnk_idx;
--	} else {
--		offset = sizeof(struct fwu_mdata) +
--			sizeof(struct fwu_fw_store_desc) +
--			(sizeof(struct fwu_image_entry) +
--			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
--			img_idx + sizeof(struct fwu_image_entry) +
--			sizeof(struct fwu_image_bank_info) * bnk_idx;
--	}
--
--	return (struct fwu_image_bank_info *)((char *)mobj->mdata + offset);
--}
--
- /**
-  * convert_uuid_to_guid() - convert UUID to GUID
-  * @buf:	UUID binary
-@@ -239,11 +177,13 @@ static int
- fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
- 			  size_t idx, char *uuids)
- {
--	struct fwu_image_entry *image = fwu_get_image(mobj, idx);
- 	struct fwu_image_bank_info *bank;
-+	struct fwu_image_entry *image;
- 	char *p = uuids, *uuid;
- 	int i;
- 
-+	image = fwu_get_image_entry(mobj->mdata, mobj->version,
-+				    mobj->banks, idx);
- 	if (!image)
- 		return -ENOENT;
- 
-@@ -266,7 +206,8 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
- 
- 	/* Fill bank image-UUID */
- 	for (i = 0; i < mobj->banks; i++) {
--		bank = fwu_get_bank(mobj, idx, i);
-+		bank = fwu_get_bank_info(mobj->mdata, mobj->version,
-+					 mobj->banks, idx, i);
- 		if (!bank)
- 			return -ENOENT;
- 		bank->accepted = 1;
-@@ -281,25 +222,22 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
- 	return 0;
- }
- 
--#if defined(CONFIG_FWU_MDATA_V1)
--static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
--{
--}
--#else
- static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
- {
- 	int i;
- 	struct fwu_fw_store_desc *fw_desc;
--	struct fwu_mdata *mdata = mobj->mdata;
-+	struct fwu_mdata_ext *mdata_ext;
- 
--	mdata->metadata_size = mobj->size;
--	mdata->desc_offset = sizeof(struct fwu_mdata);
-+	mdata_ext = fwu_get_fw_mdata_ext(mobj->mdata);
-+	mdata_ext->metadata_size = mobj->size;
-+	mdata_ext->desc_offset = sizeof(struct fwu_mdata) +
-+				 sizeof(struct fwu_mdata_ext);
- 
- 	for (i = 0; i < MAX_BANKS_V2; i++)
--		mdata->bank_state[i] = i < mobj->banks ?
--			BANK_ACCEPTED : BANK_INVALID;
-+		mdata_ext->bank_state[i] = i < mobj->banks ?
-+			FWU_BANK_ACCEPTED : FWU_BANK_INVALID;
- 
--	fw_desc = (struct fwu_fw_store_desc *)((u8 *)mdata + sizeof(*mdata));
-+	fw_desc = fwu_get_fw_desc(mobj->mdata);
- 	fw_desc->num_banks = mobj->banks;
- 	fw_desc->num_images = mobj->images;
- 	fw_desc->img_entry_size = sizeof(struct fwu_image_entry) +
-@@ -307,7 +245,6 @@ static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
- 	fw_desc->bank_info_entry_size =
- 		sizeof(struct fwu_image_bank_info);
- }
--#endif /* CONFIG_FWU_MDATA_V1 */
- 
- /* Caller must ensure that @uuids[] has @mobj->images entries. */
- static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
-@@ -320,7 +257,8 @@ static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
- 	mdata->active_index = active_bank;
- 	mdata->previous_active_index = previous_bank;
- 
--	fwu_fill_version_specific_mdata(mobj);
-+	if (mdata->version == 2)
-+		fwu_fill_version_specific_mdata(mobj);
- 
- 	for (i = 0; i < mobj->images; i++) {
- 		ret = fwu_parse_fill_image_uuid(mobj, i, uuids[i]);
-
--- 
-2.43.0
-
+Thanks
