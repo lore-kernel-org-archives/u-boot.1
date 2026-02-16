@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE55E7BDBC
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 13:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20EEE7BDBC
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 13:36:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4A3883CB1;
-	Mon, 16 Feb 2026 14:35:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2467A83C72;
+	Mon, 16 Feb 2026 14:36:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="aK91SNRE";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mzNfwXcV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BD7683B8A; Mon, 16 Feb 2026 14:35:58 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 1FC0283D0F; Mon, 16 Feb 2026 14:36:01 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4A3B83B8A
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 14:35:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D47483B8A
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 14:35:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 7E8031A0FC0;
- Mon, 16 Feb 2026 13:35:55 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id EBAF0C1786B;
+ Mon, 16 Feb 2026 13:36:08 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 4C887606CF;
- Mon, 16 Feb 2026 13:35:55 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E5AB5606CF;
+ Mon, 16 Feb 2026 13:35:57 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 141461036914F; Mon, 16 Feb 2026 14:35:51 +0100 (CET)
+ with ESMTPSA id 59FDB10369146; Mon, 16 Feb 2026 14:35:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1771248954; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1771248956; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=HagzqjzkAUUgVc48ZuqZ4nX3NxDnP/5GhQY8qvyFtkE=;
- b=aK91SNREiaMJ6uCpfwbqSv3h9Aeh03hiW6E9w7e5HN4fJYnRAiVimAdPVztgwiUPTnt+CG
- v84RufaZDeIjomH2kSPyYnhB2QtPx4UCWYFbsGN9mvCEMg/ThV4wwbXcA8Oh+F45TLLTWg
- CqWeHfMoeJ4GnUK1yFFsGVK8s6OkmlW8TcE4iLx5p6F/muZUBz11R8xoxpJNftkYupXuAo
- 6U7eUl/PtvsIsgV6IHbD9d8T/+il2/XWovrrjyTpErG6N6qQgRl8yC8AftYwlmVgOWNzb1
- MqbcTOnDIaRF85fNix3RL5UtfCZaGI5G8R11IiCo1ZlXoIuCfuDUKng5zQaogw==
+ bh=Km4G8+eiAfsJ0iOEnZ+syrPAUJFrBqM5ZJJEqlthTIc=;
+ b=mzNfwXcVWvHiXGMXrWTZ7LdOWvhEkF3XXszij6DoBQQxDoT6F32iLfjkD6Ty8G3UJpw+IL
+ 3DmITEKu7JbWMMHb8RcPn3lpV4F/FZtZkSJuY0bgTbezQcMJFuikIaSvRO/iEMyfSoaDY+
+ cWQLu3Iam8eMY+YhlmdzBbo4OrBQyta1Ffp2kry4rNNyJ6NhUMkpguttNou+4keLxA1dHr
+ D6mQycSt05U7ThSUwsFAgCiTIgKIQMqGT/I/080dB1pXtO9so7297OrItltGu7i7JK9Sur
+ g5ttxvRD+tzAi8Akg4eV9F7klojO7225pt9dnppXyIKYNok4N1Pg2AWrF5d0vw==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Mon, 16 Feb 2026 14:35:31 +0100
-Subject: [PATCH v3 1/6] tools: gitignore: Add mkfwumdata to the git ignore file
+Date: Mon, 16 Feb 2026 14:35:32 +0100
+Subject: [PATCH v3 2/6] tools: Reorganize mkfwumdata tool into fwumdata_src
+ directory
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260216-feature_fwumdata-v3-1-9ecc5b10456d@bootlin.com>
+Message-Id: <20260216-feature_fwumdata-v3-2-9ecc5b10456d@bootlin.com>
 References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
 In-Reply-To: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
 To: u-boot@lists.denx.de
@@ -92,25 +93,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-mkfwumdata is a built image. Add it to .gitignore.
+Update FWU metadata-related tools by moving mkfwumdata.c into a new
+tools/fwumdata_src/ directory structure. This refactoring prepares for the
+addition of the fwumdata runtime tool, which will allow editing FWU
+metadata directly from the target.
+
+The Kconfig and Makefile entries are also moved into separate files within
+the new directory (Kconfig and fwumdata.mk respectively) to keep all FWU
+metadata tool configurations together and improve maintainability.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
- tools/.gitignore | 1 +
- 1 file changed, 1 insertion(+)
+ MAINTAINERS                           | 3 ++-
+ tools/Kconfig                         | 9 +--------
+ tools/Makefile                        | 4 +---
+ tools/fwumdata_src/Kconfig            | 8 ++++++++
+ tools/fwumdata_src/fwumdata.mk        | 7 +++++++
+ tools/{ => fwumdata_src}/mkfwumdata.c | 0
+ 6 files changed, 19 insertions(+), 12 deletions(-)
 
-diff --git a/tools/.gitignore b/tools/.gitignore
-index 6a5c613f772..e8daa24a52d 100644
---- a/tools/.gitignore
-+++ b/tools/.gitignore
-@@ -24,6 +24,7 @@
- /mkeficapsule
- /mkenvimage
- /mkexynosspl
-+/mkfwumdata
- /mkimage
- /mksunxiboot
- /mxsboot
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 288b892f19b..9d954be4a9d 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1244,9 +1244,10 @@ FWU Multi Bank Update
+ M:	Sughosh Ganu <sughosh.ganu@arm.com>
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-efi.git
++F:	doc/mkfwumdata.1
+ F:	lib/fwu_updates/*
+ F:	drivers/fwu-mdata/*
+-F:	tools/mkfwumdata.c
++F:	tools/fwumdata_src/mkfwumdata.c
+ 
+ GATEWORKS_SC
+ M:	Tim Harvey <tharvey@gateworks.com>
+diff --git a/tools/Kconfig b/tools/Kconfig
+index a1b4d701ac7..ef33295b8ec 100644
+--- a/tools/Kconfig
++++ b/tools/Kconfig
+@@ -194,13 +194,6 @@ config LUT_SEQUENCE
+ 	help
+ 	  Look Up Table Sequence
+ 
+-config TOOLS_MKFWUMDATA
+-	bool "Build mkfwumdata command"
+-	default y if FWU_MULTI_BANK_UPDATE
+-	help
+-	  This command allows users to create a raw image of the FWU
+-	  metadata for initial installation of the FWU multi bank
+-	  update on the board. The installation method depends on
+-	  the platform.
++source tools/fwumdata_src/Kconfig
+ 
+ endmenu
+diff --git a/tools/Makefile b/tools/Makefile
+index 0ac683ac3ec..1908a63b42c 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -272,9 +272,7 @@ mkeficapsule-objs := generated/lib/uuid.o \
+ 	mkeficapsule.o
+ hostprogs-always-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+ 
+-mkfwumdata-objs := mkfwumdata.o generated/lib/crc32.o
+-HOSTLDLIBS_mkfwumdata += -luuid
+-hostprogs-always-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
++include tools/fwumdata_src/fwumdata.mk
+ 
+ # We build some files with extra pedantic flags to try to minimize things
+ # that won't build on some weird host compiler -- though there are lots of
+diff --git a/tools/fwumdata_src/Kconfig b/tools/fwumdata_src/Kconfig
+new file mode 100644
+index 00000000000..c033c560e8d
+--- /dev/null
++++ b/tools/fwumdata_src/Kconfig
+@@ -0,0 +1,8 @@
++config TOOLS_MKFWUMDATA
++	bool "Build mkfwumdata command"
++	default y if FWU_MULTI_BANK_UPDATE
++	help
++	  This command allows users to create a raw image of the FWU
++	  metadata for initial installation of the FWU multi bank
++	  update on the board. The installation method depends on
++	  the platform.
+diff --git a/tools/fwumdata_src/fwumdata.mk b/tools/fwumdata_src/fwumdata.mk
+new file mode 100644
+index 00000000000..00f4ae50dbb
+--- /dev/null
++++ b/tools/fwumdata_src/fwumdata.mk
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright 2025, Kory Maincent <kory.maincent@bootlin.com>
++
++mkfwumdata-objs := fwumdata_src/mkfwumdata.o generated/lib/crc32.o
++HOSTLDLIBS_mkfwumdata += -luuid
++hostprogs-always-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
+diff --git a/tools/mkfwumdata.c b/tools/fwumdata_src/mkfwumdata.c
+similarity index 100%
+rename from tools/mkfwumdata.c
+rename to tools/fwumdata_src/mkfwumdata.c
 
 -- 
 2.43.0
