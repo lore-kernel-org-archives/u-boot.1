@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE37E83836
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08912E83836
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F72783E96;
-	Mon, 16 Feb 2026 22:23:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 97ECE83DEB;
+	Mon, 16 Feb 2026 22:24:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD14983B8A; Mon, 16 Feb 2026 22:23:37 +0100 (CET)
+ id 67DA483DEA; Mon, 16 Feb 2026 22:23:49 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C98283E23
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:23:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CD5983E85
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:23:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs63t-000000002mh-2An4; Mon, 16 Feb 2026 21:23:21 +0000
-Date: Mon, 16 Feb 2026 21:23:17 +0000
+ id 1vs641-000000002nK-1FKT; Mon, 16 Feb 2026 21:23:29 +0000
+Date: Mon, 16 Feb 2026 21:23:25 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,14 +57,16 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 13/20] boot: bootmeth: add OpenWrt boot method skeleton
-Message-ID: <46dcab5fc58e9116ca017a63ed07922ae3093913.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 14/20] boot: bootmeth: openwrt: implement read_bootflow
+ for block devices
+Message-ID: <1bca052ba4cd629981ee4c7522263379a0e40ac5.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1771275704.git.daniel@makrotopia.org>
-X-Mailman-Approved-At: Mon, 16 Feb 2026 22:23:46 +0100
+X-Mailman-Approved-At: Mon, 16 Feb 2026 22:24:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,136 +83,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the initial bootmeth_openwrt driver with:
+Implement openwrt_read_bootflow() to discover OpenWrt FIT images on
+raw block device partitions.
 
-- UCLASS_BOOTMETH driver, compatible "u-boot,openwrt"
-- check(): accept block devices via bootflow_iter_check_blk()
-- bind(): set BOOTMETHF_ANY_PART so bootstd iterates all partitions
-  without requiring a filesystem
-- read_bootflow(): stub returning -ENOENT
-- boot(): stub returning -ENOSYS
-- Kconfig: CONFIG_BOOTMETH_OPENWRT depending on FIT, BOOTSTD,
-  BOOTM_STORAGE
+For each partition bootstd offers, read the first block and check for
+a valid FDT header via fdt_check_header(). If the header is valid the
+partition likely contains a FIT image and the bootflow is marked
+BOOTFLOWST_READY.
 
-This is the foundation for booting OpenWrt-style uImage.FIT firmware
-images stored directly on raw storage partitions. The bootmeth will
-delegate actual image loading to the existing bootm storage path via
-image_loader.
+Full FIT validation, configuration resolution, and sub-image loading
+are all deferred to boot() which uses image_loader — keeping the scan
+path fast and avoiding large reads for embedded-data FIT images that
+can be many megabytes.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/Kconfig            | 13 +++++++++
- boot/Makefile           |  1 +
- boot/bootmeth_openwrt.c | 65 +++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 79 insertions(+)
- create mode 100644 boot/bootmeth_openwrt.c
+ boot/bootmeth_openwrt.c | 43 ++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 42 insertions(+), 1 deletion(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index efc06f3cd1a..d8c7b8360ac 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -585,6 +585,19 @@ config BOOTMETH_CROS
- 
- 	  Note that only x86 devices are supported at present.
- 
-+config BOOTMETH_OPENWRT
-+	bool "Bootdev support for OpenWrt"
-+	depends on FIT
-+	depends on BOOTSTD
-+	depends on BOOTM_STORAGE
-+	help
-+	  Enables support for booting OpenWrt-style uImage.FIT firmware
-+	  images stored directly on raw storage (block device partitions,
-+	  MTD partitions, or UBI volumes). The boot method loads the FIT
-+	  metadata, selectively reads only the kernel and FDT sub-images
-+	  from storage, and skips filesystem sub-images that Linux maps
-+	  directly from flash.
-+
- config BOOTMETH_EXTLINUX
- 	bool "Bootdev support for extlinux boot"
- 	select PXE_UTILS
-diff --git a/boot/Makefile b/boot/Makefile
-index 7d1d4a28106..7b42358eb0c 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -72,6 +72,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
- 
- obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
-+obj-$(CONFIG_$(PHASE_)BOOTMETH_OPENWRT) += bootmeth_openwrt.o
- 
- obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
- obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
 diff --git a/boot/bootmeth_openwrt.c b/boot/bootmeth_openwrt.c
-new file mode 100644
-index 00000000000..02bf543031b
---- /dev/null
+index 02bf543031b..08c3f98957a 100644
+--- a/boot/bootmeth_openwrt.c
 +++ b/boot/bootmeth_openwrt.c
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bootmethod for OpenWrt
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
+@@ -16,6 +16,10 @@
+ #include <image-loader.h>
+ #include <malloc.h>
+ #include <mapmem.h>
++#include <memalign.h>
++#include <part.h>
++#include <linux/libfdt.h>
++#include <linux/sizes.h>
+ 
+ static int openwrt_check(struct udevice *dev, struct bootflow_iter *iter)
+ {
+@@ -27,7 +31,44 @@ static int openwrt_check(struct udevice *dev, struct bootflow_iter *iter)
+ 
+ static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+ {
+-	return log_msg_ret("nyi", -ENOENT);
++	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
++	const char *part_name = NULL;
++	struct disk_partition info;
++	void *buf;
++	int ret;
 +
-+#define LOG_CATEGORY UCLASS_BOOTSTD
++	/* Get partition geometry */
++	ret = part_get_info(desc, bflow->part, &info);
++	if (ret)
++		return log_msg_ret("part", ret);
 +
-+#include <blk.h>
-+#include <bootdev.h>
-+#include <bootflow.h>
-+#include <bootm.h>
-+#include <bootmeth.h>
-+#include <dm.h>
-+#include <image-loader.h>
-+#include <malloc.h>
-+#include <mapmem.h>
++	part_name = (const char *)info.name;
 +
-+static int openwrt_check(struct udevice *dev, struct bootflow_iter *iter)
-+{
-+	if (bootflow_iter_check_blk(iter))
-+		return log_msg_ret("blk", -EOPNOTSUPP);
++	/* Read first block to probe for an FDT/FIT header */
++	buf = memalign(SZ_1K, desc->blksz);
++	if (!buf)
++		return log_msg_ret("mem", -ENOMEM);
++
++	ret = blk_read(bflow->blk, info.start, 1, buf);
++	if (ret != 1) {
++		free(buf);
++		return log_msg_ret("rd", -EIO);
++	}
++
++	/* Must start with a valid FDT header */
++	if (fdt_check_header(buf)) {
++		free(buf);
++		return -ENOENT;
++	}
++
++	free(buf);
++
++	/* Show the GPT partition label as Filename */
++	bflow->fname = strdup(part_name);
++
++	bflow->state = BOOTFLOWST_READY;
 +
 +	return 0;
-+}
-+
-+static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-+{
-+	return log_msg_ret("nyi", -ENOENT);
-+}
-+
-+static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
-+{
-+	return log_msg_ret("nyi", -ENOSYS);
-+}
-+
-+static int openwrt_bootmeth_bind(struct udevice *dev)
-+{
-+	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
-+
-+	plat->desc = "OpenWrt";
-+	plat->flags = BOOTMETHF_ANY_PART;
-+
-+	return 0;
-+}
-+
-+static struct bootmeth_ops openwrt_bootmeth_ops = {
-+	.check		= openwrt_check,
-+	.read_bootflow	= openwrt_read_bootflow,
-+	.boot		= openwrt_boot,
-+};
-+
-+static const struct udevice_id openwrt_bootmeth_ids[] = {
-+	{ .compatible = "u-boot,openwrt" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(bootmeth_openwrt) = {
-+	.name		= "bootmeth_openwrt",
-+	.id		= UCLASS_BOOTMETH,
-+	.of_match	= openwrt_bootmeth_ids,
-+	.ops		= &openwrt_bootmeth_ops,
-+	.bind		= openwrt_bootmeth_bind,
-+};
+ }
+ 
+ static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
 -- 
 2.53.0
