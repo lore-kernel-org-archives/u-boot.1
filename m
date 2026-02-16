@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB76E83837
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:23:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9400E83836
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:23:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45DBB83CD3;
-	Mon, 16 Feb 2026 22:22:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A349783CB9;
+	Mon, 16 Feb 2026 22:23:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FDCA83AA9; Mon, 16 Feb 2026 22:21:59 +0100 (CET)
+ id 6B2E583C67; Mon, 16 Feb 2026 22:22:05 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE3B483B8A
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:21:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8425083AA9
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:22:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs62C-000000002cS-3u9J; Mon, 16 Feb 2026 21:21:37 +0000
-Date: Mon, 16 Feb 2026 21:21:33 +0000
+ id 1vs62K-000000002d2-1XXb; Mon, 16 Feb 2026 21:21:44 +0000
+Date: Mon, 16 Feb 2026 21:21:40 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,8 +57,8 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 02/20] boot: image-loader: add block device backend
-Message-ID: <9b0880ae234d8244f032eac6cee32a1031de26a3.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 03/20] mtd: add mtd_read_skip_bad() helper
+Message-ID: <861a2d0ad1519879d8e2bfcd67ebec605e31f7a1.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
@@ -82,236 +82,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a block device storage backend for the image_loader framework.
+Add a generic mtd_read_skip_bad() helper to the MTD core that reads
+data from an MTD device while transparently skipping bad erase blocks
+on NAND.
 
-image_loader_init_blk() takes a device and partition specification
-string, resolves the partition, and installs a .read() callback that
-translates byte-offset reads into blk_dread() calls with proper
-sector alignment.
+The function takes a physical byte offset, reads in erase-block-sized
+chunks, and automatically skips any block where mtd_block_isbad()
+returns true. Non-block-aligned start offsets are handled correctly.
+For NOR and other device types without bad-block support, it falls
+through to a plain mtd_read().
 
-Partitions can be identified by number or by name, following the
-syntax of part_get_info_by_dev_and_name_or_num():
-  "0:4"        partition 4 on device 0
-  "0#kernel"   partition named "kernel" on device 0
+Refactor the plain-data read path in cmd/mtd.c ("mtd read", without
+.raw or .oob suffixes) to use the new helper instead of open-coding
+the bad-block skip loop. The write path and OOB/raw read paths
+retain their existing page-at-a-time mtd_read_oob() loop.
 
-This is important for systems where partition numbers are not stable
-across firmware updates.
-
-Sub-sector reads (offset or size not aligned to blk_desc->blksz) use
-a single-sector bounce buffer to avoid overreading into adjacent RAM.
-
-The .cleanup callback frees the allocated private context.
-
-Gated by CONFIG_IMAGE_LOADER_BLK (depends on BLK && PARTITIONS &&
-IMAGE_LOADER).
+This helper will also be used by the image_loader MTD backend in a
+subsequent patch. It could also serve as a replacement for
+nand_read_skip_bad() in drivers/mtd/nand/raw/nand_util.c in the
+future.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/Kconfig            |   8 +++
- boot/Makefile           |   1 +
- boot/image-loader-blk.c | 133 ++++++++++++++++++++++++++++++++++++++++
- include/image-loader.h  |  20 ++++++
- 4 files changed, 162 insertions(+)
- create mode 100644 boot/image-loader-blk.c
+ cmd/mtd.c               | 65 +++++++++++++++++++++++------------------
+ drivers/mtd/mtdcore.c   | 45 ++++++++++++++++++++++++++++
+ include/linux/mtd/mtd.h | 24 +++++++++++++++
+ 3 files changed, 106 insertions(+), 28 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index f6908e04a51..e94b52288a3 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1187,6 +1187,14 @@ config IMAGE_LOADER_MAX_REGIONS
- 	  images (FDT structure + kernel + device tree + ramdisk +
- 	  a few loadable sub-images).
+diff --git a/cmd/mtd.c b/cmd/mtd.c
+index 7f25144098b..30e4845b26d 100644
+--- a/cmd/mtd.c
++++ b/cmd/mtd.c
+@@ -551,12 +551,6 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		printf("%s %lld byte(s) at offset 0x%08llx\n",
+ 		       read ? "Reading" : "Writing", len, start_off);
  
-+config IMAGE_LOADER_BLK
-+	bool "Block device backend for image loader"
-+	depends on IMAGE_LOADER && BLK && PARTITIONS
-+	help
-+	  Allows loading images from block device partitions (MMC, SATA,
-+	  USB, etc.) using the image_loader framework. Partitions can
-+	  be identified by number or name.
-+
- config DISTRO_DEFAULTS
- 	bool "(deprecated) Script-based booting of Linux distributions"
- 	select CMDLINE
-diff --git a/boot/Makefile b/boot/Makefile
-index 1dbc285dad8..ac006bbaa82 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -74,6 +74,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
+-	io_op.mode = raw ? MTD_OPS_RAW : MTD_OPS_AUTO_OOB;
+-	io_op.len = has_pages ? mtd->writesize : len;
+-	io_op.ooblen = woob ? mtd->oobsize : 0;
+-	io_op.datbuf = buf;
+-	io_op.oobbuf = woob ? &buf[len] : NULL;
+-
+ 	/* Search for the first good block after the given offset */
+ 	off = start_off;
+ 	while (mtd_block_isbad(mtd, off))
+@@ -567,31 +561,46 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (benchmark)
+ 		bench_start = timer_get_us();
  
- obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
-+obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
+-	/* Loop over the pages to do the actual read/write */
+-	while (remaining) {
+-		/* Skip the block if it is bad */
+-		if (mtd_is_aligned_with_block_size(mtd, off) &&
+-		    mtd_block_isbad(mtd, off)) {
+-			off += mtd->erasesize;
+-			continue;
+-		}
++	if (read && !raw && !woob) {
++		/* Plain data read — use the skip-bad-block helper */
++		size_t rdlen;
  
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
-diff --git a/boot/image-loader-blk.c b/boot/image-loader-blk.c
-new file mode 100644
-index 00000000000..3f9a309a60c
---- /dev/null
-+++ b/boot/image-loader-blk.c
-@@ -0,0 +1,133 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Block device backend for image_loader
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
+-		if (read)
+-			ret = mtd_read_oob(mtd, off, &io_op);
+-		else
+-			ret = mtd_special_write_oob(mtd, off, &io_op,
+-						    write_empty_pages, woob);
++		ret = mtd_read_skip_bad(mtd, off, remaining, &rdlen, buf);
++		remaining -= rdlen;
++	} else {
++		io_op.mode = raw ? MTD_OPS_RAW : MTD_OPS_AUTO_OOB;
++		io_op.len = has_pages ? mtd->writesize : len;
++		io_op.ooblen = woob ? mtd->oobsize : 0;
++		io_op.datbuf = buf;
++		io_op.oobbuf = woob ? &buf[len] : NULL;
 +
-+#include <blk.h>
-+#include <image-loader.h>
-+#include <malloc.h>
-+#include <memalign.h>
-+#include <part.h>
-+#include <log.h>
++		/* Loop over the pages to do the actual read/write */
++		while (remaining) {
++			/* Skip the block if it is bad */
++			if (mtd_is_aligned_with_block_size(mtd, off) &&
++			    mtd_block_isbad(mtd, off)) {
++				off += mtd->erasesize;
++				continue;
++			}
+ 
+-		if (ret) {
+-			printf("Failure while %s at offset 0x%llx\n",
+-			       read ? "reading" : "writing", off);
+-			break;
+-		}
++			if (read)
++				ret = mtd_read_oob(mtd, off, &io_op);
++			else
++				ret = mtd_special_write_oob(mtd, off, &io_op,
++							    write_empty_pages,
++							    woob);
 +
-+struct image_loader_blk_priv {
-+	struct blk_desc *desc;
-+	lbaint_t part_start;
-+	lbaint_t part_size;
-+};
-+
-+/**
-+ * blk_read_partial() - Read a partial sector via bounce buffer
-+ *
-+ * Reads one full sector into a stack-allocated bounce buffer, then
-+ * copies @len bytes starting at byte offset @skip within that sector
-+ * into @dst.
-+ *
-+ * @desc:	Block device descriptor
-+ * @lba:	Absolute LBA of the sector to read
-+ * @skip:	Byte offset within the sector
-+ * @len:	Number of bytes to copy
-+ * @dst:	Destination buffer
-+ * Return: 0 on success, -EIO on read failure
-+ */
-+static int blk_read_partial(struct blk_desc *desc, lbaint_t lba,
-+			    ulong skip, ulong len, void *dst)
++			if (ret) {
++				printf("Failure while %s at offset 0x%llx\n",
++				       read ? "reading" : "writing", off);
++				break;
++			}
+ 
+-		off += io_op.retlen;
+-		remaining -= io_op.retlen;
+-		io_op.datbuf += io_op.retlen;
+-		io_op.oobbuf += io_op.oobretlen;
++			off += io_op.retlen;
++			remaining -= io_op.retlen;
++			io_op.datbuf += io_op.retlen;
++			io_op.oobbuf += io_op.oobretlen;
++		}
+ 	}
+ 
+ 	if (benchmark && bench_start) {
+diff --git a/drivers/mtd/mtdcore.c b/drivers/mtd/mtdcore.c
+index 3bfa5aebbc6..eb36743af1f 100644
+--- a/drivers/mtd/mtdcore.c
++++ b/drivers/mtd/mtdcore.c
+@@ -1684,6 +1684,51 @@ int mtd_block_markbad(struct mtd_info *mtd, loff_t ofs)
+ }
+ EXPORT_SYMBOL_GPL(mtd_block_markbad);
+ 
++int mtd_read_skip_bad(struct mtd_info *mtd, loff_t from, size_t len,
++		      size_t *retlen, u_char *buf)
 +{
-+	ALLOC_CACHE_ALIGN_BUFFER(u8, sec, desc->blksz);
-+
-+	if (blk_dread(desc, lba, 1, sec) != 1)
-+		return -EIO;
-+
-+	memcpy(dst, sec + skip, len);
-+
-+	return 0;
-+}
-+
-+static int image_loader_blk_read(struct image_loader *ldr, ulong src,
-+				 ulong size, void *dst)
-+{
-+	struct image_loader_blk_priv *priv = ldr->priv;
-+	struct blk_desc *desc = priv->desc;
-+	unsigned long blksz = desc->blksz;
-+	lbaint_t lba = priv->part_start + src / blksz;
-+	ulong head = src % blksz;
-+	u8 *out = dst;
-+	lbaint_t n;
++	size_t remaining = len;
++	u_char *p = buf;
 +	int ret;
 +
-+	/* Bounds check */
-+	if (src + size > (ulong)priv->part_size * blksz) {
-+		log_err("image_loader_blk: read at 0x%lx+0x%lx exceeds partition size\n",
-+			src, size);
-+		return -EINVAL;
-+	}
++	*retlen = 0;
 +
-+	/* Handle unaligned head */
-+	if (head) {
-+		ulong chunk = min(size, blksz - head);
-+
-+		ret = blk_read_partial(desc, lba, head, chunk, out);
-+		if (ret)
-+			return ret;
-+
-+		out += chunk;
-+		size -= chunk;
-+		lba++;
-+	}
-+
-+	/* Aligned middle — read whole sectors directly into dst */
-+	if (size >= blksz) {
-+		n = size / blksz;
-+
-+		if (blk_dread(desc, lba, n, out) != n)
-+			return -EIO;
-+
-+		out += n * blksz;
-+		size -= n * blksz;
-+		lba += n;
-+	}
-+
-+	/* Handle unaligned tail */
-+	if (size) {
-+		ret = blk_read_partial(desc, lba, 0, size, out);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static void image_loader_blk_cleanup(struct image_loader *ldr)
-+{
-+	free(ldr->priv);
-+}
-+
-+int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
-+			  const char *dev_part_str)
-+{
-+	struct image_loader_blk_priv *priv;
-+	struct blk_desc *desc;
-+	struct disk_partition info;
-+	int ret;
-+
-+	ret = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str,
-+						   &desc, &info, 0);
-+	if (ret < 0)
++	if (!mtd_can_have_bb(mtd)) {
++		ret = mtd_read(mtd, from, len, retlen, buf);
++		if (ret == -EUCLEAN)
++			ret = 0;
 +		return ret;
++	}
 +
-+	priv = malloc(sizeof(*priv));
-+	if (!priv)
-+		return -ENOMEM;
++	while (remaining) {
++		loff_t block_start = from & ~(loff_t)(mtd->erasesize - 1);
++		size_t block_off = from - block_start;
++		size_t chunk, rdlen;
 +
-+	priv->desc = desc;
-+	priv->part_start = info.start;
-+	priv->part_size = info.size;
++		if (from >= mtd->size)
++			return -EINVAL;
 +
-+	ldr->read = image_loader_blk_read;
-+	ldr->cleanup = image_loader_blk_cleanup;
-+	ldr->priv = priv;
++		if (mtd_block_isbad(mtd, block_start)) {
++			/* Skip to start of next erase block */
++			from = block_start + mtd->erasesize;
++			continue;
++		}
++
++		chunk = min(remaining, (size_t)mtd->erasesize - block_off);
++
++		ret = mtd_read(mtd, from, chunk, &rdlen, p);
++		if (ret && ret != -EUCLEAN)
++			return ret;
++
++		p += rdlen;
++		from += rdlen;
++		remaining -= rdlen;
++		*retlen += rdlen;
++	}
 +
 +	return 0;
 +}
-diff --git a/include/image-loader.h b/include/image-loader.h
-index e273b1ca50f..1a9048ba482 100644
---- a/include/image-loader.h
-+++ b/include/image-loader.h
-@@ -138,4 +138,24 @@ void *image_loader_map(struct image_loader *ldr, ulong img_offset,
- void *image_loader_map_to(struct image_loader *ldr, ulong img_offset,
- 			  ulong size, void *dst);
++
+ #ifndef __UBOOT__
+ /*
+  * default_mtd_writev - the default writev method
+diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
+index 1f97bc4fe11..ea3fa513c58 100644
+--- a/include/linux/mtd/mtd.h
++++ b/include/linux/mtd/mtd.h
+@@ -471,6 +471,30 @@ int mtd_block_isreserved(struct mtd_info *mtd, loff_t ofs);
+ int mtd_block_isbad(struct mtd_info *mtd, loff_t ofs);
+ int mtd_block_markbad(struct mtd_info *mtd, loff_t ofs);
  
 +/**
-+ * image_loader_init_blk() - Initialise loader for a block device partition
++ * mtd_read_skip_bad() - Read from an MTD device, skipping bad blocks
 + *
-+ * Resolves the partition using @ifname and @dev_part_str, then installs
-+ * a .read() callback that translates byte-offset reads into blk_dread()
-+ * calls. The dev_part_str accepts the same formats as
-+ * part_get_info_by_dev_and_name_or_num():
++ * Read @len bytes starting at physical offset @from into @buf. On NAND
++ * devices, erase blocks that are marked bad are transparently skipped
++ * so the caller always receives a contiguous stream of good data.
 + *
-+ *   "0:4"        partition 4 on device 0
-+ *   "0#kernel"   partition named "kernel" on device 0
-+ *   "0:1"        partition 1 on device 0
++ * If @from is not erase-block-aligned, reading starts at the correct
++ * position within the first good block.
 + *
-+ * @ldr:		The image loader to initialise
-+ * @ifname:		Block interface name (e.g. "mmc", "scsi")
-+ * @dev_part_str:	Device and partition specification
-+ * Return: 0 on success, negative errno on failure
++ * For NOR and other device types without bad-block support, this is
++ * equivalent to a plain mtd_read().
++ *
++ * @mtd:	MTD device
++ * @from:	Start offset (physical, byte address)
++ * @len:	Number of bytes to read
++ * @retlen:	Actual number of bytes read (output)
++ * @buf:	Destination buffer
++ * Return: 0 on success, negative errno on failure. -EUCLEAN is
++ *	   treated as success (ECC corrected).
 + */
-+int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
-+			  const char *dev_part_str);
++int mtd_read_skip_bad(struct mtd_info *mtd, loff_t from, size_t len,
++		      size_t *retlen, u_char *buf);
 +
- #endif /* __IMAGE_LOADER_H */
+ #ifndef __UBOOT__
+ static inline int mtd_suspend(struct mtd_info *mtd)
+ {
 -- 
 2.53.0
