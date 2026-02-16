@@ -4,97 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A5CE81A36
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 15:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF505E81A36
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 15:31:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55F7B8063E;
-	Mon, 16 Feb 2026 16:29:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2025E8063E;
+	Mon, 16 Feb 2026 16:31:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jbkz6i8R";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PCTokyzo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8357080FA1; Mon, 16 Feb 2026 16:29:13 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id C4971831AC; Mon, 16 Feb 2026 16:31:16 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CE7A80086
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 16:29:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1B6E80086
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 16:31:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso2153711fac.0
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 07:29:11 -0800 (PST)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-409de4132b5so1817146fac.1
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 07:31:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771255750; x=1771860550; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771255873; x=1771860673; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gqPIivORoJm55bA50trcAr38IDVqwXIQFMbDEg/HMmk=;
- b=jbkz6i8RUjud+vH2JLDocCvWWTeuep/7vN46NM27KZR4T6AXAKGfVQlNvJvKtGk3zx
- U71hgW79kuf8waJ+KrmVo2icdW0R+r/Fo54Ml9ckr/PDOrRNAJbi0EcuL69qzm9YjSWJ
- GHch14067Csaiway7olQQhZC90VjocdaP2oPk=
+ bh=sykoMD2SK3bXjVSf4nPzfJl3q2aFrZedmEOy+L6Dv1U=;
+ b=PCTokyzotjAF9ByAQ8HKZ18k8OHkX7upxIofnKNwRKE0F1iwNIlj1tPK0T0YHpQd1x
+ lr99QM+XuRGyAuV3J1b513KFHZ+J+uGdvkH7mVDvbhlly8A1i3uH9FgyrqErO+M9Ww/e
+ UoSARSuDanATVCudaMCWRkC9MqvcURtDo8rnw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771255750; x=1771860550;
+ d=1e100.net; s=20230601; t=1771255873; x=1771860673;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gqPIivORoJm55bA50trcAr38IDVqwXIQFMbDEg/HMmk=;
- b=H74XpyIECH/btUulh0rgS0bbeaB3fBn45w10WonwmfG71z84IDr884UFxxHt2VKtd9
- 5JiX8SwzMoOdbsK2TjRDuWfZgtS/URktcV7A8bL917gSjEs5fRfmaBb3u6CfbS0nExLO
- vrv22dcQG4dIz30iThT1rIoUAJQIqWAAzMY+0hjoACgW98nUkcPsdEU4EjJ+5bTbQyui
- 66b771tVWPhWhFnPmiNFvvRlWynWSXeNhNukz2zWe9IKXjsINsM2b0yotyLi49NE3ewV
- RQDozjZQFDNibTueejQiSZun06J/rXXeN3uWkOE7OiFYcrtXLwlZpGiFQK9o0kQB2FDT
- hB5Q==
+ bh=sykoMD2SK3bXjVSf4nPzfJl3q2aFrZedmEOy+L6Dv1U=;
+ b=uprxFwe/QgDpwqXziomMryKI3ajmfiUS5T6d9voc+eNGLCK2udEJOk67FPXWX9ayeL
+ MPXsbZG38loeGALVcxpw0DVFD8ovAWhxxYOIWYwT0q5cza1j14LsA/6qopuI9Blc2qk/
+ fuPWCpNqe1VyiAbn73Bi/1Zgx54n7KY/19ohY3myhOUrOKh3JZd0zyVSGcgnpd9IJgPm
+ kH5WtYQFvP5LoVH8ay6Az7cKqEt0cFvy7Z2JOhqdC5RNFOI52bBp/Hegb9wSdsVSjp2/
+ mbLNa4wZwCzSSQAz7Ym96WOA/+pc3ZWKtS8ItCnAinFSOG+reZeSlqojG0XnKMz0o+cG
+ t86w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWk7u3gscwHQ460n7PSHkRPnqgn935Sb8SQEkr/v/MLv1e6lkyuZTyn4m7xARs1WfyR3xeTmjs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyp7DeEGRPhzaTc1p9sTWCVpu3yj4SL4/gin3TILuVD8c+vC8o3
- hZqY6lgHBlI59WXWUGZKG/4UVGX8cFKtyP++IRQ/IY5i2w7d8gy4+NCmi3SpZTFj3oc=
-X-Gm-Gg: AZuq6aKrrYAu3r48HV3qdtnu6c7WXJp8CeK4/QrYD/OkoB1Ri1SLRmG4i8kCV8JXGKP
- PFVtr0zuwXPlUvM+NoYRTkxDcpdyMM/QSACM8YGkbWCDqtwl223/7GagJ3/K1zu75iCRuMJjLHn
- y5jDliuQASqvOjPpDs5paPKZYl76CEFaNyFzI0EZiknLgTRrhCrS15zi5mQTamElFnzzEN6agIO
- x/vSSXRmt2ObtoIIFo4m0woBAgAdWtM2Ead7BwQHblPZyN2B4dwwloikrVzRrJ4PzqusEBN7nrt
- w/8vH6OLOLNExE1NWnuXwn6/d9nkLLC2EpBrllKSKSbYsKuFQ0g5mjQqLO61ICIB5+tx9ZhJgUt
- X/LOSolQ3Oj/Tv5KsSN/w4CJkuU6DOrg9UTXOvXWWph766Cv5wXxvQuj973jjI0kZZJOocvs6lv
- rvFUflVUfJI0boSr2MSaf9JYiNve/oHTk3UG8eQFwWnvZEsRZ8ygCH2OvPKhTEMIb5+JnGgqAag
- OD9WTUfIN+s/IJxBeOY4e58TtaOpvwIwvFZxe2cqVpUNIQqmI4=
-X-Received: by 2002:a05:6870:440d:b0:40e:ea07:2215 with SMTP id
- 586e51a60fabf-40f08779a45mr4978383fac.10.1771255749948; 
- Mon, 16 Feb 2026 07:29:09 -0800 (PST)
+ AJvYcCV1/1SiroEXzSLVRar0mmw4KBmxgaOuf8vfT3r+lXWEKQ+7ZBicNXeIsgDoaAa6cnjnDDefWRU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAPBv1U5fHKiGQU7xB5vP40lcJNqsTe/wqZgVzfrJX2nLLYK3B
+ 6kmCrUm4QVishpsbl2aqGaeL/wo5VgvlZ0tEK/kSG29u/oMEs7xGKYbvhQdi2GMrT6Y=
+X-Gm-Gg: AZuq6aJ9pNv3fp5v7fROOsDgmqBKPryIxvopxkXaEmtTO6LU5VK/LO2OJk4wxjqB5K6
+ 98DqGDhfWX+SPrYD/Z56JwAh4obF43TsJLNYpIwyQegFfEAP11A4Bhyp0xi3yr28i+/vXzqbrhU
+ R/dkTIOcHU9QuSnau/R2R8z7B5E91v6pC2rudNhpgPjc8H5eC6xx/dc6ohMwr21uQue7roxdnBT
+ y+fkNftgdU/hjfm9KIM79A1wL19qEh17BFgXTSC+BdsWNlGwjV5Zxu1uxsoc1+0qAdGfZ68esnr
+ Xoeu3vUusJv7f0NGDWM90mSqVx09F92nRMX0/BaMk0Qq4mxFrTCWWaN8FLPrG91/DhFTSqo/X34
+ gF4Pec8ibiyhki1FHnkLw68i+6E+S6VWMqynjWLhuVs/xQEQDCoNQdCL8NnpNO7nG8Ov0QKySlo
+ NOoICWf6eVIBXahvNYt6MQUwNE5UOxx6I+YhNA/SZE3HlVAqCA3MQVE8XK/71eNu+4MfEkrmoV+
+ MGM2JWQ/qjehcx1xYGBCzP5B24Pz9d78bIkDG94bg00GxR2Dii9nHfu3BkisQ==
+X-Received: by 2002:a05:6870:8275:b0:409:99bb:1eb0 with SMTP id
+ 586e51a60fabf-40f0d94fbe5mr4505668fac.44.1771255873221; 
+ Mon, 16 Feb 2026 07:31:13 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40eaef220cesm14524378fac.9.2026.02.16.07.29.07
+ 586e51a60fabf-40f062ee328sm8717228fac.4.2026.02.16.07.31.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Feb 2026 07:29:08 -0800 (PST)
-Date: Mon, 16 Feb 2026 09:29:06 -0600
+ Mon, 16 Feb 2026 07:31:12 -0800 (PST)
+Date: Mon, 16 Feb 2026 09:31:10 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Simon Glass <sjg@chromium.org>, casey.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@kernel.org,
- jerome@forissier.org, marek.vasut+renesas@mailbox.org,
- ilias.apalodimas@linaro.org, me@samcday.com,
- aswin.murugan@oss.qualcomm.com, clamor95@gmail.com,
- michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-Subject: Re: [PATCH v6 2/5] drivers: sysreset: Add sysreset op that can take
- arguments
-Message-ID: <20260216152906.GU2747538@bill-the-cat>
-References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
- <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
- <CAFLszThUMWgySrb4H2F5PE6XVsRK0Cc+PZ37f_3xZ12HEhM=3g@mail.gmail.com>
- <aXg8ge6z7EMWliSd@hu-varada-blr.qualcomm.com>
- <CAFLszTh-B=zQyBjwJ_OuVxAbpTpUaKB1e9zB8Nm6+wuJCK5OcQ@mail.gmail.com>
- <aY7x9EAueKZ9Xxmt@hu-varada-blr.qualcomm.com>
- <CAFLszTgWW0-3hXkUWVmiDgfT1yMZMkjX8zDsT8Qf846ZgaA2Xg@mail.gmail.com>
- <aZKrlhpNI/tpdWmG@hu-varada-blr.qualcomm.com>
+To: Michael Walle <mwalle@kernel.org>
+Cc: Conor Dooley <conor@kernel.org>, u-boot@lists.denx.de,
+ Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>
+Subject: Re: [RFH] SPI and SPI-NOR patch help
+Message-ID: <20260216153110.GV2747538@bill-the-cat>
+References: <20260213164607.GI2747538@bill-the-cat>
+ <20260214-sternness-cling-4259916a8f73@spud>
+ <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EiUtGRphn2/IUe0X"
+ protocol="application/pgp-signature"; boundary="BitxFZBc3gTzefki"
 Content-Disposition: inline
-In-Reply-To: <aZKrlhpNI/tpdWmG@hu-varada-blr.qualcomm.com>
+In-Reply-To: <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,68 +109,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---EiUtGRphn2/IUe0X
+--BitxFZBc3gTzefki
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 16, 2026 at 11:01:02AM +0530, Varadarajan Narayanan wrote:
-> On Fri, Feb 13, 2026 at 01:20:10PM -0700, Simon Glass wrote:
-> [ . . . ]
->=20
-> > > > > > I haven't been following this, but what sort of args are you pl=
-anning to pass?
-> > > > >
-> > > > > As of now, an argument to indicate reboot to emergency download m=
-ode.
-> > > >
-> > > > So how about adding a struct in sysreset.h where you can include a
-> > > > flag word and create a single flag for your case? We should be able=
- to
-> > > > handle reset without the cmdline being enabled.
-> > > >
-> > > > There are other cases where this would be useful, e.g. an EFI app
-> > > > rebooting into setup boot.
-> > >
-> > > Previously, i.e. v5 [1] didn't have SYSRESET_CMD_RESET_ARGS config
-> > > option. This was added to avoid bloat code size for platforms that wi=
-ll
-> > > not need this. Please see [2]
+On Mon, Feb 16, 2026 at 09:21:55AM +0100, Michael Walle wrote:
+> On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
+> > On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
+> >> Hey all,
+> >>=20
+> >> To be blunt, U-Boot needs help with reviewing and maintaining the SPI
+> >> and SPI-NOR subsystems. We haven't had someone with time to actively
+> >> work in this area for some time. I'm going through the outstanding
+> >> changes now, but it also seems a common problem is that with respect to
+> >> device IDs, most of the new ones also aren't in the upstream Linux
+> >> Kernel. Is there some better and generic solution we're missing so that
+> >> we don't have large and often growing device ID tables? I'd rather not
+> >> make that problem worse, so I've rejected two of those types of updates
+> >> today and I'm just setting aside a large number of others.
 > >
-> > Sure, but you are adding a new method, so you could make it take a new
-> > struct instead of the string list, still behind your Kconfig option.
+> > Dunno if your timing was cursed on sending this, but Tudor submitted his
+> > resignation from spi-nor maintainership in the kernel about 10 mins
+> > after.
+> > I think Michael Walle might be responsible for what you're talking about
+> > here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash driver"),
+> > but idk jack about spi-nor stuff.
 >=20
-> Sure.
+> Yeah. Nowadays SPI-NOR flashes come with self describing tables,
+> which are already supported by u-boot, I think. The only change that
+> seems to be missing is the fallback to it if an id isn't found in
+> the flashdb. Only thing is, the SFDP doesn't describe all features,
+> most prominent example being locking. So if you need that, you'll
+> still need to have an entry per flash.
 >=20
-> You want 'request_arg' function pointer to take a structure instead of
-> 'char * const argv[]'. Is this understanding correct?
->=20
-> If yes, this string list is what was given in the command line. And is
-> passed to the implementation specific handler.
->=20
-> 	Command line -> do_reset -> sysreset_walk_arg -> *request_arg
->=20
-> The implementation specific handler can interpret the argv[] as
-> applicable to itself. Not sure how to convert/parse this to a struct
-> that can be used by EFI app. Am I missing something. Please advice.
+> In fact, in linux I'm planning to change to make it probe SFDP first
+> and then amend it with the flashdb information (if there is an
+> entry).
 
-Varada, do you think this suggestion is taking things in a useful
-direction? It's unclear to me at this point if what Simon suggested is
-going to provide something meaningfully more clear / useful or not.
-Thanks.
+Thanks for explaining. So in that U-Boot does have SFDP support, the
+first thing is platforms should likely be enabling that instead of just
+adding IDs, at least for basic support. It still leaves us in a bad spot
+about having SPI and SPI-NOR stuff reviewed and maintained, but at least
+it's clearer in public now where it stands.
 
 --=20
 Tom
 
---EiUtGRphn2/IUe0X
+--BitxFZBc3gTzefki
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZM3vwAKCRAr4qD1Cr/k
-ChARAP98Z0W2PkFE2pcKWZTcUzpMB5HXaw4VYX33u9GDJ8Qv6AEAmt1Jfh9CNQS3
-Ub+ZNcL1wLGCGiwCB90DuxTuqCY+zgQ=
-=0D0O
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZM4PQAKCRAr4qD1Cr/k
+CgLbAQCwNbD1OxYdIKeHDuC1edwhX4KuPTNQM2xCxof19IynGQD9HiY2TMT29T2E
+roDCQwCIKEewF6tO2hcXEnFz52SULgQ=
+=U2ws
 -----END PGP SIGNATURE-----
 
---EiUtGRphn2/IUe0X--
+--BitxFZBc3gTzefki--
