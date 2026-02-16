@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED73E83836
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:24:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E70EE83837
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:24:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA5ED83E72;
-	Mon, 16 Feb 2026 22:23:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1799F83C72;
+	Mon, 16 Feb 2026 22:23:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA8FB83DC9; Mon, 16 Feb 2026 22:23:12 +0100 (CET)
+ id A48B283D3D; Mon, 16 Feb 2026 22:23:22 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C00EF83E60
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:23:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F4C083DEB
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:23:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs63S-000000002k2-3JyJ; Mon, 16 Feb 2026 21:22:54 +0000
-Date: Mon, 16 Feb 2026 21:22:51 +0000
+ id 1vs63a-000000002kb-2j5o; Mon, 16 Feb 2026 21:23:02 +0000
+Date: Mon, 16 Feb 2026 21:22:59 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,15 +57,15 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 10/20] cmd: bootm: accept storage device as image source
-Message-ID: <5b30234322e3efdc4efb4c1e2b312418bc3e90a4.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 11/20] test: boot: add image_loader unit tests
+Message-ID: <05cc2003b7e0951a80b0078b3824d14466979b3d.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1771275704.git.daniel@makrotopia.org>
-X-Mailman-Approved-At: Mon, 16 Feb 2026 22:23:19 +0100
+X-Mailman-Approved-At: Mon, 16 Feb 2026 22:23:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,390 +82,517 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the bootm command to accept a storage device type keyword as
-the first argument:
+Add unit tests for the image_loader framework covering its core
+logic with a mock storage backend:
 
-    bootm mmc <dev>:<part>    - boot from MMC/SD/eMMC partition
-    bootm mtd <name>          - boot from MTD partition
-    bootm ubi <volume>        - boot from UBI volume
+- map() allocates, reads and records a region
+- map() returns cached pointer for already-mapped range
+- map() returns correct offset within a larger region
+- map() re-reads when extending a region to a larger size
+- map_to() reads to a specified address and records it
+- lookup() returns NULL for unmapped ranges
+- alloc_ptr advances with correct alignment
+- map() returns NULL when the translation table is full
+- cleanup() calls backend and resets state
+- map() with multiple disjoint regions
+- read beyond image size returns error
 
-When a known device-type keyword is found, an image_loader is
-constructed using the corresponding backend and stored in
-images.loader. The rest of the bootm flow proceeds unchanged:
-boot_get_kernel() uses image_loader_map() for format detection and
-FDT structure loading, then fit_image_load() uses the on-demand
-storage path for sub-image data.
+Also fix IMAGE_LOADER_MAX_REGIONS Kconfig to depend on IMAGE_LOADER
+and default to 16 unconditionally (the previous 'default 0' fallback
+caused the regions array to be zero-sized when IMAGE_LOADER was
+enabled after initial defconfig generation).
 
-If the first argument does not match a device-type keyword (i.e. it
-looks like a hex address, or is absent), images.loader remains NULL
-and the existing in-memory path is taken -- full backward compatibility.
-
-The #config suffix follows the same convention as existing bootm FIT
-config selection. Multiple # suffixes can be chained to select a
-base config and one or more device-tree overlays:
-
-    bootm mmc 0:4#config-1#overlay-wifi#overlay-lcd
-    bootm mtd firmware#config-1
-
-Gated by CONFIG_BOOTM_STORAGE.
+Register the new 'image_loader' test suite in test/cmd_ut.c so it
+can be run via 'ut image_loader'.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/Kconfig    |  13 +++++
- boot/bootm.c    |  62 +++++++++++++++++---
- cmd/bootm.c     | 148 ++++++++++++++++++++++++++++++++++++++++++++++--
- include/bootm.h |   2 +
- 4 files changed, 212 insertions(+), 13 deletions(-)
+ boot/Kconfig             |   4 +-
+ test/boot/Makefile       |   2 +
+ test/boot/image_loader.c | 429 +++++++++++++++++++++++++++++++++++++++
+ test/cmd_ut.c            |   2 +
+ 4 files changed, 435 insertions(+), 2 deletions(-)
+ create mode 100644 test/boot/image_loader.c
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 89832014af6..1f870c7d251 100644
+index 1f870c7d251..efc06f3cd1a 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -1211,6 +1211,19 @@ config IMAGE_LOADER_UBI
- 	  framework. Auto-attaches the UBI device from the device tree
- 	  if not already attached.
+@@ -1179,8 +1179,8 @@ config IMAGE_LOADER
  
-+config BOOTM_STORAGE
-+	bool "Allow bootm to load images directly from storage"
-+	depends on CMDLINE && FIT && IMAGE_LOADER
-+	help
-+	  Extends the bootm command to accept "mmc <dev>:<part>",
-+	  "mtd <name>", or "ubi <volume>" as the image source instead
-+	  of a RAM address. Sub-images (kernel, FDT, ramdisk, etc.)
-+	  are loaded from storage on demand; filesystem sub-images are
-+	  never read.
+ config IMAGE_LOADER_MAX_REGIONS
+ 	int "Maximum number of mapped regions in image loader"
+-	default 16 if IMAGE_LOADER
+-	default 0
++	depends on IMAGE_LOADER
++	default 16
+ 	help
+ 	  Maximum number of distinct image regions that can be mapped
+ 	  into RAM simultaneously. 16 is sufficient for typical FIT
+diff --git a/test/boot/Makefile b/test/boot/Makefile
+index 89538d4f0a6..6fd349a65bc 100644
+--- a/test/boot/Makefile
++++ b/test/boot/Makefile
+@@ -23,3 +23,5 @@ endif
+ obj-$(CONFIG_BOOTMETH_VBE) += vbe_fixup.o
+ 
+ obj-$(CONFIG_UPL) += upl.o
 +
-+	  Requires at least one IMAGE_LOADER backend to be enabled
-+	  (IMAGE_LOADER_BLK, IMAGE_LOADER_MTD, or IMAGE_LOADER_UBI).
-+
- config DISTRO_DEFAULTS
- 	bool "(deprecated) Script-based booting of Linux distributions"
- 	select CMDLINE
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 4bdca22ea8c..67d161f6e3a 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -13,6 +13,7 @@
- #include <env.h>
- #include <errno.h>
- #include <fdt_support.h>
-+#include <image-loader.h>
- #include <irq_func.h>
- #include <lmb.h>
- #include <log.h>
-@@ -146,7 +147,22 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- 
- 	/* check image type, for FIT images get FIT kernel node */
- 	*os_data = *os_len = 0;
--	buf = map_sysmem(img_addr, 0);
-+	if (IS_ENABLED(CONFIG_BOOTM_STORAGE) && images->loader) {
-+		/*
-+		 * Storage path: read enough bytes to detect the image
-+		 * format. genimg_get_kernel_addr_fit() above still
-+		 * parsed any #config / :subimage suffix so the FIT
-+		 * selection variables are populated.
-+		 */
-+		buf = image_loader_map(images->loader, 0, 64);
-+		if (!buf) {
-+			puts("Cannot read image header from storage\n");
-+			return -EIO;
-+		}
-+		img_addr = map_to_sysmem(buf);
-+	} else {
-+		buf = map_sysmem(img_addr, 0);
-+	}
- 	switch (genimg_get_format(buf)) {
- #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
- 	case IMAGE_FORMAT_LEGACY:
-@@ -192,6 +208,20 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- #endif
- #if CONFIG_IS_ENABLED(FIT)
- 	case IMAGE_FORMAT_FIT:
-+		if (IS_ENABLED(CONFIG_BOOTM_STORAGE) && images->loader) {
-+			/*
-+			 * Extend the mapping to cover the full FIT
-+			 * FDT structure so all metadata is accessible.
-+			 */
-+			size_t fdt_sz = fdt_totalsize(buf);
-+
-+			buf = image_loader_map(images->loader, 0, fdt_sz);
-+			if (!buf) {
-+				puts("Cannot read FIT header from storage\n");
-+				return -ENOMEM;
-+			}
-+			img_addr = map_to_sysmem(buf);
-+		}
- 		os_noffset = fit_image_load(images, img_addr,
- 				&fit_uname_kernel, &fit_uname_config,
- 				IH_ARCH_DEFAULT, IH_TYPE_KERNEL,
-@@ -991,11 +1021,21 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	 * Work through the states and see how far we get. We stop on
- 	 * any error.
- 	 */
--	if (states & BOOTM_STATE_START)
-+	if (states & BOOTM_STATE_START) {
- 		ret = bootm_start();
-+		/*
-+		 * bootm_start() zeroes the global images struct. Restore
-+		 * the loader pointer so the storage-backed path works.
-+		 */
-+		if (IS_ENABLED(CONFIG_BOOTM_STORAGE) && bmi->loader)
-+			images->loader = bmi->loader;
-+	}
- 
--	if (!ret && (states & BOOTM_STATE_PRE_LOAD))
--		ret = bootm_pre_load(bmi->addr_img);
-+	if (!ret && (states & BOOTM_STATE_PRE_LOAD)) {
-+		/* Pre-load verification is not applicable to storage boot */
-+		if (!IS_ENABLED(CONFIG_BOOTM_STORAGE) || !images->loader)
-+			ret = bootm_pre_load(bmi->addr_img);
-+	}
- 
- 	if (!ret && (states & BOOTM_STATE_FINDOS))
- 		ret = bootm_find_os(bmi->cmd_name, bmi->addr_img);
-@@ -1003,8 +1043,11 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	if (!ret && (states & BOOTM_STATE_FINDOTHER)) {
- 		ulong img_addr;
- 
--		img_addr = bmi->addr_img ? hextoul(bmi->addr_img, NULL)
--			: image_load_addr;
-+		if (IS_ENABLED(CONFIG_BOOTM_STORAGE) && images->loader)
-+			img_addr = images->os.start;
-+		else
-+			img_addr = bmi->addr_img ? hextoul(bmi->addr_img, NULL)
-+				: image_load_addr;
- 		ret = bootm_find_other(img_addr, bmi->conf_ramdisk,
- 				       bmi->conf_fdt);
- 	}
-@@ -1097,8 +1140,13 @@ int bootm_run_states(struct bootm_info *bmi, int states)
- 	}
- 
- 	/* Now run the OS! We hope this doesn't return */
--	if (!ret && (states & BOOTM_STATE_OS_GO))
-+	if (!ret && (states & BOOTM_STATE_OS_GO)) {
-+		/* Release storage backend before jumping — no return expected */
-+		if (IS_ENABLED(CONFIG_BOOTM_STORAGE) && images->loader)
-+			image_loader_cleanup(images->loader);
-+
- 		ret = boot_selected_os(BOOTM_STATE_OS_GO, bmi, boot_fn);
-+	}
- 
- 	/* Deal with any fallout */
- err:
-diff --git a/cmd/bootm.c b/cmd/bootm.c
-index 2c5aea26d98..6c26dd8e36d 100644
---- a/cmd/bootm.c
-+++ b/cmd/bootm.c
-@@ -12,6 +12,7 @@
- #include <env.h>
- #include <errno.h>
- #include <image.h>
-+#include <image-loader.h>
- #include <malloc.h>
- #include <nand.h>
- #include <asm/byteorder.h>
-@@ -132,14 +133,123 @@ static int do_bootm_subcommand(struct cmd_tbl *cmdtp, int flag, int argc,
- /* bootm - boot application image from image in memory */
- /*******************************************************************/
- 
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+/**
-+ * bootm_init_loader() - Try to parse a storage device spec from argv
++obj-$(CONFIG_IMAGE_LOADER) += image_loader.o
+diff --git a/test/boot/image_loader.c b/test/boot/image_loader.c
+new file mode 100644
+index 00000000000..dc4b0b4173a
+--- /dev/null
++++ b/test/boot/image_loader.c
+@@ -0,0 +1,429 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Tests for image_loader framework
 + *
-+ * If argv[0] is a known device-type keyword ("mmc", "mtd", "ubi"),
-+ * initialise @ldr as the corresponding backend and return the number
-+ * of argv entries consumed. The optional #config[#overlay...] suffix
-+ * is stripped from the device spec and returned via @conf_name.
-+ *
-+ * @ldr:       loader to initialise
-+ * @argc:      argument count (after removing the "bootm" verb)
-+ * @argv:      argument vector
-+ * @conf_name: on output, points to the #config string (incl. '#') or NULL
-+ * Return: number of argv entries consumed (>0), 0 if no storage keyword
-+ *         was found, or negative errno on init failure
++ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
 + */
-+static int bootm_init_loader(struct image_loader *ldr,
-+			     int argc, char *const argv[],
-+			     const char **conf_name)
++
++#include <image-loader.h>
++#include <mapmem.h>
++#include <malloc.h>
++#include <asm/cache.h>
++#include <test/test.h>
++#include <test/ut.h>
++
++#define IMG_LOADER_TEST(_name, _flags) \
++	UNIT_TEST(_name, _flags, image_loader)
++
++/* Synthetic image size used throughout the tests */
++#define IMAGE_SIZE	4096
++
++/**
++ * struct mock_priv - private data for the mock storage backend
++ *
++ * @image:	pointer to synthetic image data in RAM
++ * @image_size:	size of the synthetic image
++ * @read_count:	number of times .read() was called
++ * @last_off:	offset from the most recent .read() call
++ * @last_size:	size from the most recent .read() call
++ */
++struct mock_priv {
++	const void *image;
++	size_t image_size;
++	int read_count;
++	ulong last_off;
++	ulong last_size;
++};
++
++static int mock_read(struct image_loader *ldr, ulong src, ulong size,
++		     void *dst)
 +{
-+	const char *devtype;
-+	char *devspec;
-+	char *hash;
-+	int ret;
++	struct mock_priv *p = ldr->priv;
 +
-+	if (argc < 2)
-+		return 0;
++	if (src + size > p->image_size)
++		return -EINVAL;
 +
-+	devtype = argv[0];
-+	devspec = (char *)argv[1];
-+	*conf_name = NULL;
++	memcpy(dst, (const char *)p->image + src, size);
++	p->read_count++;
++	p->last_off = src;
++	p->last_size = size;
 +
-+	/* Locate the first '#' — its meaning depends on the backend */
-+	hash = strchr(devspec, '#');
-+
-+	if (IS_ENABLED(CONFIG_IMAGE_LOADER_BLK) &&
-+	    !strcmp(devtype, "mmc")) {
-+		/*
-+		 * Block device specs use '#' for partition names when no ':'
-+		 * precedes it (e.g. "0#kernel"). Only treat the first '#'
-+		 * as the FIT config separator when ':' appears before it
-+		 * (e.g. "0:4#config-1"), otherwise the first '#' is the
-+		 * partition name and a second '#' starts the config
-+		 * (e.g. "0#kernel#config-1").
-+		 */
-+		char *colon = strchr(devspec, ':');
-+
-+		if (!(colon && hash && colon < hash) && hash)
-+			hash = strchr(hash + 1, '#');
-+		if (hash) {
-+			*conf_name = hash;
-+			*hash = '\0';
-+		}
-+		ret = image_loader_init_blk(ldr, "mmc", devspec);
-+		if (hash)
-+			*hash = '#';
-+	} else if (IS_ENABLED(CONFIG_IMAGE_LOADER_MTD) &&
-+		   !strcmp(devtype, "mtd")) {
-+		if (hash) {
-+			*conf_name = hash;
-+			*hash = '\0';
-+		}
-+		ret = image_loader_init_mtd(ldr, devspec);
-+		if (hash)
-+			*hash = '#';
-+	} else if (IS_ENABLED(CONFIG_IMAGE_LOADER_UBI) &&
-+		   !strcmp(devtype, "ubi")) {
-+		if (hash) {
-+			*conf_name = hash;
-+			*hash = '\0';
-+		}
-+		ret = image_loader_init_ubi(ldr, devspec);
-+		if (hash)
-+			*hash = '#';
-+	} else {
-+		return 0;   /* not a storage keyword */
-+	}
-+
-+	if (ret) {
-+		printf("Failed to init %s loader: %d\n", devtype, ret);
-+		return ret;
-+	}
-+
-+	return 2;   /* consumed: keyword + device-spec */
++	return 0;
 +}
-+#endif
 +
- int do_bootm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
- 	struct bootm_info bmi;
- 	int ret;
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+	struct image_loader ldr = {};
-+	const char *conf_name = NULL;
-+	int consumed = 0;
-+#endif
- 
- 	/* determine if we have a sub command */
- 	argc--; argv++;
++static void mock_cleanup(struct image_loader *ldr)
++{
++	/* Nothing dynamic to free — just verify it's called */
++}
 +
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+	/* Try storage device spec before checking for hex/subcommand */
-+	consumed = bootm_init_loader(&ldr, argc, argv, &conf_name);
-+	if (consumed < 0)
-+		return CMD_RET_FAILURE;
-+	if (consumed > 0) {
-+		ldr.alloc_ptr = image_load_addr;
-+		argc -= consumed;
-+		argv += consumed;
-+	}
-+#endif
++/**
++ * init_mock_loader() - set up a loader with the mock backend
++ *
++ * @ldr:	loader to initialise
++ * @priv:	mock private data (caller-allocated)
++ * @image:	synthetic image buffer
++ * @image_size:	size of @image
++ * @alloc_base:	RAM address to use as alloc_ptr base
++ */
++static void init_mock_loader(struct image_loader *ldr, struct mock_priv *priv,
++			     const void *image, size_t image_size,
++			     ulong alloc_base)
++{
++	memset(ldr, 0, sizeof(*ldr));
++	memset(priv, 0, sizeof(*priv));
 +
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+	if (argc > 0 && !consumed) {
-+#else
- 	if (argc > 0) {
-+#endif
- 		char *endp;
- 
- 		hextoul(argv[0], &endp);
-@@ -156,12 +266,25 @@ int do_bootm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	}
- 
- 	bootm_init(&bmi);
--	if (argc)
--		bmi.addr_img = argv[0];
--	if (argc > 1)
--		bmi.conf_ramdisk = argv[1];
--	if (argc > 2)
--		bmi.conf_fdt = argv[2];
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+	if (consumed > 0) {
-+		bmi.addr_img = conf_name;	/* "#config-1" or NULL */
-+		bmi.loader = &ldr;
-+		if (argc > 0)
-+			bmi.conf_ramdisk = argv[0];
-+		if (argc > 1)
-+			bmi.conf_fdt = argv[1];
-+	} else {
-+#else
++	priv->image = image;
++	priv->image_size = image_size;
++
++	ldr->read = mock_read;
++	ldr->cleanup = mock_cleanup;
++	ldr->priv = priv;
++	ldr->alloc_ptr = alloc_base;
++}
++
++/* Test: map() allocates, reads and records a region */
++static int image_loader_test_map_basic(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p;
++
++	/* Fill image with a recognisable pattern */
++	for (int i = 0; i < IMAGE_SIZE; i++)
++		image[i] = (u8)(i & 0xff);
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Map a 64-byte region at offset 0 */
++	p = image_loader_map(&ldr, 0, 64);
++	ut_assertnonnull(p);
++	ut_asserteq_mem(image, p, 64);
++	ut_asserteq(1, mock.read_count);
++	ut_asserteq(1, ldr.nr_regions);
++	ut_asserteq(0, (int)ldr.regions[0].img_offset);
++	ut_asserteq(64, (int)ldr.regions[0].size);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_map_basic, 0);
++
++/* Test: map() returns cached pointer for already-mapped range */
++static int image_loader_test_map_cached(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p1, *p2;
++
++	memset(image, 0xaa, IMAGE_SIZE);
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	p1 = image_loader_map(&ldr, 0, 128);
++	ut_assertnonnull(p1);
++	ut_asserteq(1, mock.read_count);
++
++	/* Same range — should return same pointer, no new read */
++	p2 = image_loader_map(&ldr, 0, 128);
++	ut_asserteq_ptr(p1, p2);
++	ut_asserteq(1, mock.read_count);
++
++	/* Subset of the already-mapped range — still cached */
++	p2 = image_loader_map(&ldr, 0, 64);
++	ut_asserteq_ptr(p1, p2);
++	ut_asserteq(1, mock.read_count);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_map_cached, 0);
++
++/* Test: map() returns correct offset within a larger region */
++static int image_loader_test_map_offset(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p1, *p2;
++
++	for (int i = 0; i < IMAGE_SIZE; i++)
++		image[i] = (u8)(i & 0xff);
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Map a 256-byte region starting at offset 0 */
++	p1 = image_loader_map(&ldr, 0, 256);
++	ut_assertnonnull(p1);
++
++	/* Request a sub-range within the previously mapped region */
++	p2 = image_loader_map(&ldr, 64, 64);
++	ut_assertnonnull(p2);
++	/* p2 should point 64 bytes into p1 */
++	ut_asserteq_ptr((char *)p1 + 64, p2);
++	ut_asserteq_mem(image + 64, p2, 64);
++	/* Only one read should have occurred */
++	ut_asserteq(1, mock.read_count);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_map_offset, 0);
++
++/* Test: map() re-reads when extending a region to a larger size */
++static int image_loader_test_map_extend(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p1, *p2;
++
++	for (int i = 0; i < IMAGE_SIZE; i++)
++		image[i] = (u8)(i & 0xff);
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Initial small mapping */
++	p1 = image_loader_map(&ldr, 0, 64);
++	ut_assertnonnull(p1);
++	ut_asserteq(1, mock.read_count);
++
++	/* Request larger range at same base — should re-read (extend) */
++	p2 = image_loader_map(&ldr, 0, 256);
++	ut_assertnonnull(p2);
++	ut_asserteq(2, mock.read_count);
++	ut_asserteq_ptr(p1, p2);	/* same RAM base */
++	ut_asserteq_mem(image, p2, 256);
++
++	/* Region count should still be 1 (updated, not added) */
++	ut_asserteq(1, ldr.nr_regions);
++	ut_asserteq(256, (int)ldr.regions[0].size);
++
++	/* alloc_ptr must have advanced past the extended region */
++	ut_assert(ldr.alloc_ptr >= 0x1000000 + 256);
++
++	/*
++	 * Map a new region after the extend — it must not overlap the
++	 * extended first region. This is the exact pattern that bit us
++	 * on real hardware: FIT header at offset 0 extended from 64 to
++	 * 4096, then kernel payload at offset 4096 was allocated at
++	 * alloc_ptr that hadn't been advanced, clobbering the header.
++	 */
 +	{
-+#endif
-+		if (argc)
-+			bmi.addr_img = argv[0];
-+		if (argc > 1)
-+			bmi.conf_ramdisk = argv[1];
-+		if (argc > 2)
-+			bmi.conf_fdt = argv[2];
-+	}
- 
- 	/* set up argc and argv[] since some OSes use them */
- 	bmi.argc = argc;
-@@ -169,6 +292,11 @@ int do_bootm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 
- 	ret = bootm_run(&bmi);
- 
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+	if (ldr.read)
-+		image_loader_cleanup(&ldr);
-+#endif
++		void *p3 = image_loader_map(&ldr, 256, 128);
 +
- 	return ret ? CMD_RET_FAILURE : 0;
- }
++		ut_assertnonnull(p3);
++		ut_asserteq(2, ldr.nr_regions);
++		/* New region must start at or after the extended region end */
++		ut_assert((ulong)map_to_sysmem(p3) >= 0x1000000 + 256);
++		ut_asserteq_mem(image + 256, p3, 128);
++	}
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_map_extend, 0);
++
++/* Test: map_to() reads to a specified address and records it */
++static int image_loader_test_map_to(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	u8 dst[256];
++	void *p;
++
++	for (int i = 0; i < IMAGE_SIZE; i++)
++		image[i] = (u8)(i & 0xff);
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	p = image_loader_map_to(&ldr, 128, 256, dst);
++	ut_asserteq_ptr(dst, p);
++	ut_asserteq_mem(image + 128, dst, 256);
++	ut_asserteq(1, mock.read_count);
++	ut_asserteq(1, ldr.nr_regions);
++	ut_asserteq(128, (int)ldr.regions[0].img_offset);
++	ut_asserteq(256, (int)ldr.regions[0].size);
++	ut_asserteq_ptr(dst, ldr.regions[0].ram);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_map_to, 0);
++
++/* Test: lookup() returns NULL for unmapped ranges */
++static int image_loader_test_lookup_miss(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p;
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Nothing mapped yet — should return NULL */
++	p = image_loader_lookup(&ldr, 0, 64);
++	ut_assertnull(p);
++
++	/* Map a region at offset 0 */
++	ut_assertnonnull(image_loader_map(&ldr, 0, 64));
++
++	/* Lookup within the mapped region — should succeed */
++	p = image_loader_lookup(&ldr, 0, 32);
++	ut_assertnonnull(p);
++
++	/* Lookup at a different offset — should miss */
++	p = image_loader_lookup(&ldr, 128, 32);
++	ut_assertnull(p);
++
++	/* Lookup extending beyond the mapped region — should miss */
++	p = image_loader_lookup(&ldr, 0, 128);
++	ut_assertnull(p);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_lookup_miss, 0);
++
++/* Test: alloc_ptr advances with correct alignment */
++static int image_loader_test_alloc_advance(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	ulong base = 0x1000000;
++	ulong expected;
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, base);
++
++	/* Map 100 bytes — alloc_ptr should advance to ALIGN(base + 100) */
++	ut_assertnonnull(image_loader_map(&ldr, 0, 100));
++	expected = ALIGN(base + 100, ARCH_DMA_MINALIGN);
++	ut_asserteq(expected, ldr.alloc_ptr);
++
++	/* Map another 200 bytes at a different offset */
++	ut_assertnonnull(image_loader_map(&ldr, 200, 200));
++	expected = ALIGN(expected + 200, ARCH_DMA_MINALIGN);
++	ut_asserteq(expected, ldr.alloc_ptr);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_alloc_advance, 0);
++
++/* Test: map() returns NULL when the translation table is full */
++static int image_loader_test_table_full(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p;
++	int i;
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Fill all region slots with distinct offsets */
++	for (i = 0; i < CONFIG_IMAGE_LOADER_MAX_REGIONS; i++) {
++		p = image_loader_map(&ldr, i * 16, 8);
++		ut_assertnonnull(p);
++	}
++
++	ut_asserteq(CONFIG_IMAGE_LOADER_MAX_REGIONS, ldr.nr_regions);
++
++	/* Next map at a new offset should fail (table full) */
++	p = image_loader_map(&ldr, CONFIG_IMAGE_LOADER_MAX_REGIONS * 16, 8);
++	ut_assertnull(p);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_table_full, 0);
++
++/* Test: cleanup() calls the backend and resets state */
++static int image_loader_test_cleanup(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Map something so nr_regions > 0 */
++	ut_assertnonnull(image_loader_map(&ldr, 0, 64));
++	ut_asserteq(1, ldr.nr_regions);
++
++	image_loader_cleanup(&ldr);
++
++	ut_assertnull(ldr.read);
++	ut_assertnull(ldr.cleanup);
++	ut_assertnull(ldr.priv);
++	ut_asserteq(0, ldr.nr_regions);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_cleanup, 0);
++
++/* Test: map() with multiple disjoint regions */
++static int image_loader_test_multi_region(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p1, *p2, *p3;
++
++	for (int i = 0; i < IMAGE_SIZE; i++)
++		image[i] = (u8)(i & 0xff);
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	p1 = image_loader_map(&ldr, 0, 64);
++	ut_assertnonnull(p1);
++	p2 = image_loader_map(&ldr, 512, 128);
++	ut_assertnonnull(p2);
++	p3 = image_loader_map(&ldr, 1024, 256);
++	ut_assertnonnull(p3);
++
++	ut_asserteq(3, ldr.nr_regions);
++	ut_asserteq(3, mock.read_count);
++
++	/* Verify data in each region */
++	ut_asserteq_mem(image, p1, 64);
++	ut_asserteq_mem(image + 512, p2, 128);
++	ut_asserteq_mem(image + 1024, p3, 256);
++
++	/* Lookup each region */
++	ut_asserteq_ptr(p1, image_loader_lookup(&ldr, 0, 64));
++	ut_asserteq_ptr(p2, image_loader_lookup(&ldr, 512, 128));
++	ut_asserteq_ptr(p3, image_loader_lookup(&ldr, 1024, 256));
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_multi_region, 0);
++
++/* Test: read beyond image size returns error */
++static int image_loader_test_read_oob(struct unit_test_state *uts)
++{
++	struct image_loader ldr;
++	struct mock_priv mock;
++	u8 image[IMAGE_SIZE];
++	void *p;
++
++	init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
++
++	/* Attempt to map beyond the end of the image */
++	p = image_loader_map(&ldr, IMAGE_SIZE - 32, 64);
++	ut_assertnull(p);
++
++	/* map_to should also fail */
++	u8 dst[64];
++
++	p = image_loader_map_to(&ldr, IMAGE_SIZE - 32, 64, dst);
++	ut_assertnull(p);
++
++	return 0;
++}
++
++IMG_LOADER_TEST(image_loader_test_read_oob, 0);
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 44e5fdfdaa6..3b907a12e4e 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -71,6 +71,7 @@ SUITE_DECL(optee);
+ SUITE_DECL(pci_mps);
+ SUITE_DECL(seama);
+ SUITE_DECL(setexpr);
++SUITE_DECL(image_loader);
+ SUITE_DECL(upl);
  
-@@ -204,6 +332,14 @@ U_BOOT_LONGHELP(bootm,
- 	"\taddr#<conf_uname>   - configuration specification\n"
- 	"\tUse iminfo command to get the list of existing component\n"
- 	"\timages and configurations.\n"
-+#endif
-+#if IS_ENABLED(CONFIG_BOOTM_STORAGE)
-+	"\nAlternatively, boot directly from a storage device:\n"
-+	"\tbootm mmc <dev>:<part>[#conf]  - boot from MMC/SD partition\n"
-+	"\tbootm mtd <name>[#conf]        - boot from MTD partition\n"
-+	"\tbootm ubi <volume>[#conf]      - boot from UBI volume\n"
-+	"\tThe #conf suffix selects a FIT configuration; additional\n"
-+	"\t#overlay suffixes select device-tree overlays.\n"
- #endif
- 	"\nSub-commands to do part of the bootm sequence.  The sub-commands "
- 	"must be\n"
-diff --git a/include/bootm.h b/include/bootm.h
-index 4060cec7fc0..ebc014b3468 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -40,6 +40,7 @@ struct cmd_tbl;
-  *	boot_get_fdt() for processing, or NULL for none
-  * @boot_progress: true to show boot progress
-  * @images: images information
-+ * @loader: image loader for storage-backed boot (NULL for in-memory)
-  * @cmd_name: command which invoked this operation, e.g. "bootm"
-  * @argc: Number of arguments to the command (excluding the actual command).
-  *	This is 0 if there are no arguments
-@@ -51,6 +52,7 @@ struct bootm_info {
- 	const char *conf_fdt;
- 	bool boot_progress;
- 	struct bootm_headers *images;
-+	struct image_loader *loader;
- 	const char *cmd_name;
- 	int argc;
- 	char *const *argv;
+ static struct suite suites[] = {
+@@ -98,6 +99,7 @@ static struct suite suites[] = {
+ 	SUITE(pci_mps, "PCI Express Maximum Payload Size"),
+ 	SUITE(seama, "seama command parameters loading and decoding"),
+ 	SUITE(setexpr, "setexpr command"),
++	SUITE(image_loader, "image_loader on-demand storage loading"),
+ 	SUITE(upl, "Universal payload support"),
+ };
+ 
 -- 
 2.53.0
