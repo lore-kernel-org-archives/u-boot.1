@@ -4,62 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B135E63F38
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 08:22:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72DABE63F3F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 08:49:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2C5D8063E;
-	Mon, 16 Feb 2026 09:22:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DE90683C6C;
+	Mon, 16 Feb 2026 09:49:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Yca349UD";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="e8mG7zQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62E3883CF2; Mon, 16 Feb 2026 09:22:04 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id D1A9F83D5D; Mon, 16 Feb 2026 09:49:10 +0100 (CET)
+Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C58F880325
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 09:22:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id EE52E4333C;
- Mon, 16 Feb 2026 08:21:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AD50C19424;
- Mon, 16 Feb 2026 08:21:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771230119;
- bh=1pY+s1SdoGkgAXH1hXYTNN/VU3m42j5wgFb6HyvjcZ4=;
- h=Date:Cc:From:To:Subject:References:In-Reply-To:From;
- b=Yca349UDw8yMwbgfhhWJl/MmUSOSi9M378siOZOBobDuXcSIGxMOAHkdiZOoriV6C
- eLPILCT27gweSt0Azj8RDvbgGrAB+6eKIR5ouebnl369OlAFH7Gj98PdNLYkGCZZ/P
- JrmTvYgUQSojssWhhc8E6QTUwyFDadKkdY3EFKIh6dlwySwD9+cFFcvSLxGycfYuD+
- 21bTV8TtNadix5rSdMnVveTd8xYn9SPHafwOLvcOnaNowGNIPGtW+Fa21kd+Gi3ojE
- JKBzpPZHMISHWs3xtLzO+iCLBCVNRWTzXA4zvnTTfwCil6l2HzG65cn+cw0nuI2Oqu
- ev/r5W9F4gdMw==
-Mime-Version: 1.0
-Content-Type: multipart/signed;
- boundary=a2fa5d58bc283d6d4644732674d3bb3106cc2bc4e5ac5e4a60b6b08c3838;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Mon, 16 Feb 2026 09:21:55 +0100
-Message-Id: <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
-Cc: <u-boot@lists.denx.de>, "Tudor Ambarus" <tudor.ambarus@linaro.org>,
- "Miquel Raynal" <miquel.raynal@bootlin.com>, "Takahiro Kuwano"
- <Takahiro.Kuwano@infineon.com>, "Hiroyuki Saito"
- <Hiroyuki.Saito2@infineon.com>, "Venkatesh Yadav Abbarapu"
- <venkatesh.abbarapu@amd.com>, "Prasanth Babu Mantena" <p-mantena@ti.com>,
- "Vaishnav Achath" <vaishnav.a@ti.com>, "Prasad Kummari"
- <prasad.kummari@amd.com>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Conor Dooley" <conor@kernel.org>, "Tom Rini" <trini@konsulko.com>
-Subject: Re: [RFH] SPI and SPI-NOR patch help
-X-Mailer: aerc 0.20.0
-References: <20260213164607.GI2747538@bill-the-cat>
- <20260214-sternness-cling-4259916a8f73@spud>
-In-Reply-To: <20260214-sternness-cling-4259916a8f73@spud>
+ by phobos.denx.de (Postfix) with ESMTPS id AF0338063E
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 09:49:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D23FA10F1BF; Mon, 16 Feb 2026 09:49:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1771231747;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=zLxOPKuBs6T8WblAbtc5WFnDdeHxODAJpIinFWGSKjo=;
+ b=e8mG7zQnul4/VTayXvSxY8XQhHp3f7PkKM7fRxEjhtnI85edTEuAdAn7ImWLAw9fMIIxfL
+ VDD7ac2Ush5GSh0zdpvXR8OWU6TV/m+bVaj7TdtqWL9f9jPtpp9Dk0V1A6XJls0pFu3+KJ
+ gtOEIHMbR5v71SO3Kotxp4Uwnn7pS5UUmBIRytbWm9wJZB+JHPZUKQT96oo0W0mg9IGj8H
+ GQUPzhvGeXL5LsSjy1gEGE7x903vqlQ2DSw+B18GtjUghPrzbZqDy1vn//vaeC32CczLCR
+ cWb6E+h38dWn7x2eZcWqs/1sxJDGi9XoK43A+dUifE4yn2hEiuF/2/HHRyX+ug==
+Message-ID: <856380cf-09eb-d722-0f48-3c9705b78626@nabladev.com>
+Date: Mon, 16 Feb 2026 09:49:13 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] i2c: muxes: pca954x: Add support for pca9848
+Content-Language: en-US
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Frank Wunderlich <frank-w@public-files.de>, Tom Rini <trini@konsulko.com>
+References: <72cadba2a21e9d5723d54994b898d8a6880042e0.1771229639.git.michal.simek@amd.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <72cadba2a21e9d5723d54994b898d8a6880042e0.1771229639.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,54 +67,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---a2fa5d58bc283d6d4644732674d3bb3106cc2bc4e5ac5e4a60b6b08c3838
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hello Micahl,
 
-On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
-> On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
->> Hey all,
->>=20
->> To be blunt, U-Boot needs help with reviewing and maintaining the SPI
->> and SPI-NOR subsystems. We haven't had someone with time to actively
->> work in this area for some time. I'm going through the outstanding
->> changes now, but it also seems a common problem is that with respect to
->> device IDs, most of the new ones also aren't in the upstream Linux
->> Kernel. Is there some better and generic solution we're missing so that
->> we don't have large and often growing device ID tables? I'd rather not
->> make that problem worse, so I've rejected two of those types of updates
->> today and I'm just setting aside a large number of others.
->
-> Dunno if your timing was cursed on sending this, but Tudor submitted his
-> resignation from spi-nor maintainership in the kernel about 10 mins
-> after.
-> I think Michael Walle might be responsible for what you're talking about
-> here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash driver"),
-> but idk jack about spi-nor stuff.
+On 16.02.26 09:14, Michal Simek wrote:
+> Add support for PCA9848 chip.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+>   drivers/i2c/muxes/pca954x.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 
-Yeah. Nowadays SPI-NOR flashes come with self describing tables,
-which are already supported by u-boot, I think. The only change that
-seems to be missing is the fallback to it if an id isn't found in
-the flashdb. Only thing is, the SFDP doesn't describe all features,
-most prominent example being locking. So if you need that, you'll
-still need to have an entry per flash.
+Thanks!
 
-In fact, in linux I'm planning to change to make it probe SFDP first
-and then amend it with the flashdb information (if there is an
-entry).
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
--michael
-
---a2fa5d58bc283d6d4644732674d3bb3106cc2bc4e5ac5e4a60b6b08c3838
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCaZLTpBIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/hazgF8D1FacxqKBGPse2Gi1QRMot6rISlZlc6c
-H03NtiYFehprnfbNROD7pMkzI0ab12tyAYDGDKEcRatHA7kR5Uy24FdwpAyCHxGl
-1bHeR1wQWxaJdr9/ArW8aYTiWdU4vC6eBm4=
-=ZLOV
------END PGP SIGNATURE-----
-
---a2fa5d58bc283d6d4644732674d3bb3106cc2bc4e5ac5e4a60b6b08c3838--
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
