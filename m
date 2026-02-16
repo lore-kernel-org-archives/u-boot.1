@@ -4,100 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F53DE63F2A
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 07:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BBAEE63F33
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 07:37:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFB148063E;
-	Mon, 16 Feb 2026 08:34:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id B0AF68063E;
+	Mon, 16 Feb 2026 08:37:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="I7vp2dXd";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="mDPayeqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3427D80FA1; Mon, 16 Feb 2026 08:34:19 +0100 (CET)
-Received: from mx-relay99-hz2.antispameurope.com
- (mx-relay99-hz2.antispameurope.com [94.100.136.199])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B079E80B98; Mon, 16 Feb 2026 08:37:23 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B409380325
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 08:34:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0500d65fcd=max.merchel@ew.tq-group.com
-ARC-Authentication-Results: i=1; mx-gate99-hz2.hornetsecurity.com 1; spf=pass
- reason=mailfrom (ip=94.100.132.6,
- headerfrom=ew.tq-group.com)
- smtp.mailfrom=ew.tq-group.com
- smtp.helo=hmail-p-smtp01-out04-hz1.hornetsecurity.com; dmarc=pass
- header.from=ew.tq-group.com orig.disposition=pass
-ARC-Message-Signature: a=rsa-sha256;
- bh=6UwSF7HOnM2lROrgn2piCby+HNOLQL9SQYT05xEJ9xw=; c=relaxed/relaxed;
- d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
- t=1771227243;
- b=ItC5Yjx3gDGsZ7P6xe5sr7PqPPIrWuhr1rgsQJHoNhIhe6ltvSjWY87ssWuJTRZ3vqqwL0EG
- BvPmLi+3TTW+TiIRYorvjRECQ54Ff5YkGikJYVohOxx2qdLahIlRF1zSQMIBhaFejlV79wGZVX6
- X3UUPBoOO7x2WzdWRtRjFfZiKMFy/R3+QsIYK1Q6QV0Ml6Jt7f1vm7Gi75dSazIsG6QkyFIcFgY
- 1oG2US0zM6KOb0UcDQzaEy/xsGyhD3PGW0JQk6XO0yUNYdWYZpNPa1AdAStInjTR7RHi55e/stC
- earvIHpZXP7Tv6oR66XZru0RFIKmdMhgk0TcTFqzitX0Q==
-ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
- t=1771227243;
- b=g+I3he1/1uXxPC7UQG69Sd+SwCWXfaLK/LdSlTxoqbgJ3Sih4g6CptaY9lKpbEmwCbZzn3vm
- J/MPpT+MQnEm+LkK46Vm4mQNjmPhUlW4e7UNcjtbwzC+QYlWLYiWY+z5VpKjlTLj+TbQQVIkc/f
- FubfHw1AdPpBZM+HX+DOQ/PQFT74QYNmH824u054p6OoxwiZmP1gjTrzWGmWU5TsC2GcUsyi9pe
- h9y/aZLqQH7/xukf+K4YA2Q8EwfQNtA9Iw7x41rZQmG4+sQ6HuGFSSI5ghsZFUiPQZgQj2YW+dn
- 7Jwrf7cRvbgE3/1rO7NQ0WynwQChmZYgk7UMKY0HNMHHA==
-Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
- mx-relay99-hz2.antispameurope.com; Mon, 16 Feb 2026 08:34:03 +0100
-Received: from [10.123.75.134] (host-82-135-125-110.customer.m-online.net
- [82.135.125.110]) (Authenticated sender: max.merchel@ew.tq-group.com)
- by hmail-p-smtp01-out04-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
- E701C220535; Mon, 16 Feb 2026 08:33:36 +0100 (CET)
-Message-ID: <d91ba34a-0b64-47ee-89d6-458c7c3958e3@ew.tq-group.com>
-Date: Mon, 16 Feb 2026 08:33:36 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 6100E80325
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 08:37:21 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b8f992167dcso341801266b.1
+ for <u-boot@lists.denx.de>; Sun, 15 Feb 2026 23:37:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1771227441; x=1771832241;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YQzKzGJA7rLMrP5ZqZV5V/8vJCAbHs+l4xNI93sD7W8=;
+ b=mDPayeqxb6yKtzVQRxsMymxVFqATfkhsB/rtsFEJq1ThpQxIOYEE4YWWht6NbNhiae
+ v87kOBtrDdONDUFq0pr4pVv92XWtilTicsLRXqBcarHV9kWOlXGWfQBiNiTFpBToplcq
+ ilqZgvwqaU/O/nBt5OccnYL5ZEewr8KUrBOAGBWpz0o7l6EdXemOMAdNOobfmEUehu/5
+ z55XPL60xk7LiRevI3ZTCnX/DlBttyLm3UE4mNeDkVpwt+PzKs53EHuFcMMvL2jkb75A
+ 0FNec7Q3KXOo18kzQNjiY2rHQyRJBR1DELcg8A/HX2PyoCKG4biNP1vPfafibRFbNW24
+ Q1HA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771227441; x=1771832241;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YQzKzGJA7rLMrP5ZqZV5V/8vJCAbHs+l4xNI93sD7W8=;
+ b=B5Wg9Ueh1YHM2YYCVAA8PSYjWwP0u5a8+xplZovZQmFpQb8O8xBEf7Sx6qz6B7JEj6
+ fpw0rKI1wlcuR0lI5HkA66ZaJGXbY9iKtT8HwupsyK5lQuKAi38L+ZOO86n7RlugtewA
+ ybTark891XSg3SE/K8rLpEFAEi+T9MX1X1WnzR8KSVOVj/ONl0glwy5WR3m0bUXsFFWi
+ r9U2HjEGKhBUiCAUZXsO7l4mfeWXoORKKxsTmLGR0cNdlkF6+UgnckzVP1ZFt7LWh18H
+ GiyAf6070tpwmXB4DCvOYWm0ZYrTK3MI/vheHgQe/T+OkJx21J0UFM5q9PaFn1VUM00B
+ SJWA==
+X-Gm-Message-State: AOJu0YxqEoRYlF4BC6c50AjGFS7II41mQuau4C9m3qsCqLod5Kw77ZPt
+ MUXZHaSQX0a1p/a6pqJRO5KSLpgv56jHVUh6MMasi7AMLk8Eddn8LjC3e0ZYUvkgUOpnrer9yvz
+ 4It4Vzg==
+X-Gm-Gg: AZuq6aJBVHgWgm1grBn9jzRYPkgn+cHJgxGdb/9r43rS0IJT2/bZwQbpmQSMdS/jUzQ
+ MOQIccGOZ0TOy3aNb4/YyJdmxW78X+xdgLcvL+VvqM8lc6oX8aHyvcnlvPNNE+NsGHLoQqGl6Vs
+ GNP4dyCPJ4ZU4q2DicI6fFA2B7wJ/b+udfJojtPOGzmdCLKw5OzfQaUEcgZsZWW23lHXmqtEW3d
+ nVDWWMjGyP097WW4ZHHaefn/AqIQ67uOM9O8N3umZ0uff/IJ6nUjug1guJzLfGqGpBZTYpzX7wn
+ C1wZE/wjbMZz8Wl9ZYxzWEaUh72Rz/oqhClJNjPD633H0YXjnsG+l7hUg17OXAlArR6I+gBrt5t
+ OFdNezs7OIVDbTXCIskqvIBoNycLsBvVPMpgtiHd3hzqznZPxRZYKdOd41UFoM6VRD8tPUKG7FB
+ aoYemPnPcEJMWItXmT/tlvJSFIPkgLVjiW0p7x1QA+
+X-Received: by 2002:a17:907:1c21:b0:b7a:1bde:1222 with SMTP id
+ a640c23a62f3a-b8fb4672866mr492769266b.63.1771227440567; 
+ Sun, 15 Feb 2026 23:37:20 -0800 (PST)
+Received: from [192.168.0.105] (nat-108f.starnet.cz. [109.164.53.108])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b8fc7691f0esm234585666b.60.2026.02.15.23.37.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 15 Feb 2026 23:37:20 -0800 (PST)
+Message-ID: <aa956239-7433-41f9-9189-10a95e5633b9@monstr.eu>
+Date: Mon, 16 Feb 2026 08:37:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/11] imx8qxp: siemens: small board updates
-To: Heiko Schocher <hs@nabladev.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
- Adrian Freihofer <adrian.freihofer@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Lukas Stockmann <lukas.stockmann@siemens.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, Tomas Peterka <atheiste@seznam.cz>,
- Walter Schweizer <walter.schweizer@siemens.com>
-References: <20260214045703.28051-1-hs@nabladev.com>
 Content-Language: en-US
-From: Max Merchel <max.merchel@ew.tq-group.com>
-In-Reply-To: <20260214045703.28051-1-hs@nabladev.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] AMD/Xilinx changes for 2026-07-rc1
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-cloud-security-sender: max.merchel@ew.tq-group.com
-X-cloud-security-recipient: u-boot@lists.denx.de
-X-cloud-security-crypt: load encryption module
-X-cloud-security-Mailarchiv: E-Mail archived for: max.merchel@ew.tq-group.com
-X-cloud-security-Mailarchivtype: outbound
-X-cloud-security-Virusscan: CLEAN
-X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
- mx-relay99-hz2.antispameurope.com with 4fDvds5ZBtz28mWB
-X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
- IP=94.100.132.6
-X-cloud-security-Digest: 1eb7458585fca7ebfeb762f74eeee08f
-X-cloud-security: scantime:2.090
-DKIM-Signature: a=rsa-sha256;
- bh=6UwSF7HOnM2lROrgn2piCby+HNOLQL9SQYT05xEJ9xw=; c=relaxed/relaxed;
- d=ew.tq-group.com;
- h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
- t=1771227242; v=1;
- b=I7vp2dXdXdjgD0cYLy3ksI2K1/EL2x5RLetxEN9Nm3KpIJNzqOnKxzAxGgzQEvMrGfgffhC3
- yfYArsqn7irJCzIkr/fnAb8m00TwMdJG6z5JIsseriX4IPZ5DMTFbyzvoT4mnhENrJKS3TY8c+P
- tNUkQLvSlQ7ahXgfnB3zj0rsdaKg0uvKTMAcbjdNVWxJI2IL+H38tbczRr9330qG0a7Fr+g/yee
- SAdm9Acog1PrBW5Cv1YM80RHNpYhdFs0yszT+ilNHhrhW9TH5yXaAORfzMtRaIgpaZsv4kUTcbg
- NVMW2zlHQl5b2BSZSZjp5gzHa9LZMbXB+e6lCJRrIsA/A==
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,90 +98,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi Tom,
 
-Am 14.02.26 um 05:56 schrieb Heiko Schocher:
-> 
-> - small DTS fixes
-> - add wget and bootcounter command
-> - Environment changes
->    - introduce protected Environment
->    - a lot of fixes and tries to simplify environment
->      as it has grown over the years.
-> 
-> Some patches has changes in environment text file with
-> long lines, ignored the checkpatch warning for these
-> added commit note in the individual patches.
+please pull these patches to your next branch.
 
-Why don't you fix the warnings in a separate commit first?
+Thanks,
+Michal
 
-Line breaks in environment files are easy to add and significantly 
-improve readability.
+The following changes since commit 9e6b66409a3235ae73f1937929fe025911165bbb:
 
-If you need an example, you can take a look at the following environment 
-variables file:
-/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20-a1.env
+   Merge tag 'ab-next-11022026' of 
+https://source.denx.de/u-boot/custodians/u-boot-tpm into next (2026-02-11 
+10:42:18 -0600)
 
-> 
-> Changes in v2:
-> - rebased to mainline
->    b99da05e153 - (tag: v2026.04-rc2, origin/master, origin/HEAD) Prepare v2026.04-rc2
-> - respell the commit message as Peng suggested
-> Added Reviewed-by from Peng
-> Added Reviewed-by from Peng
-> Added Reviewed-by from Peng
-> Added Reviewed-by from Peng
-> Added Reviewed-by from Peng
-> enhanced commit message
-> Added Reviewed-by from Peng
-> fixed typos in commit message and board code
-> Added Reviewed-by from Peng
-> Added Reviewed-by from Peng
-> Added Acked-by from Peng, fixed typo in commit message
-> Added small fixes in Environment from Adrian: It fixes a serious bug which
-> Adrian detect. It occurs when a broken firmware is applied as a downgrade.
-> The old bootloader ended up in an endless reboot boot loop. With this fix
-> also the old bootloader is able to reject the update and recover. Also
-> slightly reworked bootcmd.
-> Added Reviewed-by from Peng
-> Reworked writeable variable list, as we dropped patch
-> "env: add w flags for net config in explicit write mode"
-> 
-> Adrian Freihofer (3):
->    siemens: capricorn: set max-frequency for usdhc1
->    siemens: capricorn: rework bootcmd environment variables
->    siemens: capricorn: protect environment
-> 
-> Heiko Schocher (3):
->    capricorn: config: add bootcounter command
->    siemens: capricorn: add logic to U-Boot to avoid zig-zag boot
->    siemens: capricorn: always detect emmc device
-> 
-> Lukas Stockmann (3):
->    arm: dts: capricorn: pinctrl_usdhc1 cleanup
->    arm: dts: capricorn: remove pinctrl_usdhc2
->    arm: dts: capricorn: move fec2 config
-> 
-> Walter Schweizer (2):
->    imx8qxp_capricorn config: add wget command
->    siemens: capricorn: fix fallback bootm call for fitImage
-> 
->   arch/arm/dts/imx8-capricorn-cxg3.dts          | 44 ++++++++++++++
->   arch/arm/dts/imx8-capricorn.dtsi              | 60 +------------------
->   board/siemens/capricorn/Kconfig               |  2 +
->   board/siemens/capricorn/board.c               | 56 ++++++++++-------
->   board/siemens/capricorn/capricorn_default.env | 17 +++---
->   configs/imx8qxp_capricorn.config              |  3 +
->   include/configs/capricorn-common.h            | 13 ++++
->   7 files changed, 106 insertions(+), 89 deletions(-)
-> 
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2026.07-rc1
+
+for you to fetch changes up to 601e08e0b7abd15784d19daa05692fae350e5027:
+
+   arm64: zynqmp: Wire gpio-delay driver for USB hub reset (2026-02-13 08:16:25 
++0100)
+
+----------------------------------------------------------------
+AMD/Xilinx/FPGA changes for v2026.07-rc1
+
+gpio:
+- Add gpio delay driver
+
+zynqmp:
+- Wire gpio usb delay
+- Enable SPL pinctrl per pin
+
+xilinx:
+- Enable NFS support
+
+versal2:
+- Extend DDR initialization
+
+zynqmp-rtc:
+- Use clock framework for calibration value
+
+----------------------------------------------------------------
+Michal Simek (4):
+       xilinx: mbv: Disable EFI loader
+       gpio: Add GPIO delay driver
+       xilinx: Enable GPIO delay driver on Kria platforms
+       arm64: zynqmp: Wire gpio-delay driver for USB hub reset
+
+Pranav Sanwal (2):
+       fdtdec: Add declaration for get_next_memory_node() helper
+       arm64: versal2: Populate DRAM banks before page table size calculation
+
+Pranav Tilak (2):
+       rtc: zynqmp: Add clock framework support with calibration fallback
+       xilinx: Enable NFS support for all Xilinx platforms
+
+Sean Anderson (1):
+       pinctrl: zynqmp: Add SPL support
+
+  arch/arm/dts/zynqmp-sck-kd-g-revA.dtso         |  13 +-
+  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso         |  16 ++-
+  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso         |  16 ++-
+  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso         |  13 +-
+  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso         |  11 +-
+  arch/arm/mach-versal2/cpu.c                    |  55 ++++++--
+  arch/arm/mach-versal2/include/mach/sys_proto.h |   4 +-
+  board/amd/versal2/board.c                      |  75 ++++++++---
+  configs/amd_versal2_virt_defconfig             |   1 +
+  configs/xilinx_mbv32_defconfig                 |   1 +
+  configs/xilinx_versal_net_virt_defconfig       |   1 +
+  configs/xilinx_versal_virt_defconfig           |   1 +
+  configs/xilinx_zynqmp_kria_defconfig           |   1 +
+  configs/xilinx_zynqmp_virt_defconfig           |   1 +
+  drivers/firmware/firmware-zynqmp.c             | 101 ++++++++++++++
+  drivers/gpio/Kconfig                           |   8 ++
+  drivers/gpio/Makefile                          |   1 +
+  drivers/gpio/gpio-delay.c                      | 139 ++++++++++++++++++++
+  drivers/pinctrl/Kconfig                        |   8 ++
+  drivers/pinctrl/Makefile                       |   2 +-
+  drivers/pinctrl/pinctrl-zynqmp.c               |   8 +-
+  drivers/rtc/zynqmp_rtc.c                       |  64 ++++++---
+  include/fdtdec.h                               |  24 ++++
+  include/zynqmp_firmware.h                      |   5 +
+  lib/fdtdec.c                                   |   7 +-
+  25 files changed, 508 insertions(+), 68 deletions(-)
+  create mode 100644 drivers/gpio/gpio-delay.c
 
 -- 
-Best regards,
-Max
-
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
-
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
