@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B17E83836
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693B2E83837
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:25:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D46A783E88;
-	Mon, 16 Feb 2026 22:24:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20A7683EEF;
+	Mon, 16 Feb 2026 22:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC0DB83DC9; Mon, 16 Feb 2026 22:23:54 +0100 (CET)
+ id C584783E61; Mon, 16 Feb 2026 22:24:10 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E108F83B8A
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:23:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B2C783B8A
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:24:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs648-000000002nn-1S0W; Mon, 16 Feb 2026 21:23:36 +0000
-Date: Mon, 16 Feb 2026 21:23:32 +0000
+ id 1vs64P-000000002oy-2mGR; Mon, 16 Feb 2026 21:23:53 +0000
+Date: Mon, 16 Feb 2026 21:23:50 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,15 +57,15 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 15/20] boot: bootmeth: openwrt: implement boot via bootm
- storage path
-Message-ID: <92b77e44c1fb34f0433fb75f8404f357ed28b03e.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 16/20] boot: bootdev: add MTD boot device
+Message-ID: <01cc9fe77706bfec2c7806f95d93c84678d06a91.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1771275704.git.daniel@makrotopia.org>
-X-Mailman-Approved-At: Mon, 16 Feb 2026 22:24:15 +0100
+X-Mailman-Approved-At: Mon, 16 Feb 2026 22:24:18 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,85 +82,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement openwrt_boot() to boot a discovered OpenWrt FIT image:
+Add a boot device driver for MTD (Memory Technology Devices) that
+enables bootstd to scan MTD partitions for FIT images.
 
-1. Get the block interface name via blk_get_devtype() and construct
-   the dev_part_str (e.g. "0:3") from the block descriptor and
-   bootflow partition number
-2. Initialise an image_loader for block devices via
-   image_loader_init_blk(), with alloc_ptr set to image_load_addr
-3. Optionally read the 'bootconf' env variable and pass it as
-   '#config' in bmi.addr_img for FIT configuration selection
-4. Call bootm_run() which runs the full bootm state machine:
-   START -> FINDOS -> FINDOTHER -> LOADOS -> OS_PREP -> OS_GO
+Add a mtd_bootdev_hunt() callback that:
+- Calls mtd_probe_devices() once to probe all MTD devices (both
+  UCLASS_MTD and UCLASS_SPI_FLASH) and parse their partitions
+- Iterates the MTD subsystem device list and binds an mtd_bootdev for
+  any top-level MTD device that has partitions but is not in UCLASS_MTD
+  (those already get their bootdev from mtd_post_bind)
+- Uses bootdev_bind() directly since sf_bootdev may already occupy the
+  standard bootdev child slot
 
-The image_loader handles on-demand reading of the FIT metadata and
-sub-images (kernel, FDT) directly from the raw partition. The
-existing cleanup call in bootm_run_states() releases the loader just
-before OS_GO. If bootm_run() returns (boot failure), cleanup is
-called explicitly.
-
-This completes the core block-device boot path for bootmeth_openwrt.
+The MTD bootdev calls bootmeth_check() at the start of get_bootflow()
+so that only compatible bootmeths (those that accept MTD bootdevs)
+produce bootflows. Until bootmeth_openwrt's check() is extended to
+accept MTD bootdevs, this driver is inert — each commit compiles and
+introduces no regressions independently.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/bootmeth_openwrt.c | 37 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 36 insertions(+), 1 deletion(-)
+ boot/Kconfig             |   9 +++
+ boot/Makefile            |   1 +
+ boot/mtd_bootdev.c       | 150 +++++++++++++++++++++++++++++++++++++++
+ drivers/mtd/mtd-uclass.c |  15 ++++
+ 4 files changed, 175 insertions(+)
+ create mode 100644 boot/mtd_bootdev.c
 
-diff --git a/boot/bootmeth_openwrt.c b/boot/bootmeth_openwrt.c
-index 08c3f98957a..82f39c17d7f 100644
---- a/boot/bootmeth_openwrt.c
-+++ b/boot/bootmeth_openwrt.c
-@@ -13,6 +13,8 @@
- #include <bootm.h>
- #include <bootmeth.h>
- #include <dm.h>
-+#include <env.h>
-+#include <image.h>
- #include <image-loader.h>
- #include <malloc.h>
- #include <mapmem.h>
-@@ -73,7 +75,40 @@ static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+diff --git a/boot/Kconfig b/boot/Kconfig
+index d8c7b8360ac..63e373cc62d 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -585,6 +585,15 @@ config BOOTMETH_CROS
  
- static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
- {
--	return log_msg_ret("nyi", -ENOSYS);
-+	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
-+	const char *ifname = blk_get_devtype(bflow->blk);
-+	struct image_loader ldr = {};
-+	struct bootm_info bmi;
-+	char dev_part_str[32];
-+	char addr_img[64];
-+	const char *conf;
+ 	  Note that only x86 devices are supported at present.
+ 
++config BOOTDEV_MTD
++	bool "MTD bootdev support"
++	depends on DM_MTD
++	depends on BOOTSTD
++	help
++	  Enable a boot device for MTD (Memory Technology Devices).
++	  This scans MTD partitions for uImage.FIT firmware images,
++	  enabling raw-flash boot via the OpenWrt boot method.
++
+ config BOOTMETH_OPENWRT
+ 	bool "Bootdev support for OpenWrt"
+ 	depends on FIT
+diff --git a/boot/Makefile b/boot/Makefile
+index 7b42358eb0c..feeed4924dd 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -72,6 +72,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
+ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
+ 
+ obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
++obj-$(CONFIG_$(PHASE_)BOOTDEV_MTD) += mtd_bootdev.o
+ obj-$(CONFIG_$(PHASE_)BOOTMETH_OPENWRT) += bootmeth_openwrt.o
+ 
+ obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
+diff --git a/boot/mtd_bootdev.c b/boot/mtd_bootdev.c
+new file mode 100644
+index 00000000000..8a3304be988
+--- /dev/null
++++ b/boot/mtd_bootdev.c
+@@ -0,0 +1,150 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * MTD boot device
++ *
++ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
++ */
++
++#define LOG_CATEGORY UCLASS_BOOTSTD
++
++#include <bootdev.h>
++#include <bootflow.h>
++#include <bootmeth.h>
++#include <dm.h>
++#include <malloc.h>
++#include <mtd.h>
++#include <linux/libfdt.h>
++
++static int mtd_bootdev_get_bootflow(struct udevice *dev,
++				    struct bootflow_iter *iter,
++				    struct bootflow *bflow)
++{
++	struct udevice *parent = dev_get_parent(dev);
++	struct mtd_info *mtd, *part;
++	u8 buf[40];
++	size_t retlen;
++	char dname[60];
++	int n = 0;
 +	int ret;
 +
-+	snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d",
-+		 desc->devnum, bflow->part);
-+
-+	ret = image_loader_init_blk(&ldr, ifname, dev_part_str);
++	ret = bootmeth_check(bflow->method, iter);
 +	if (ret)
-+		return log_msg_ret("ldr", ret);
++		return log_msg_ret("chk", ret);
 +
-+	ldr.alloc_ptr = image_load_addr;
++	/* Find the top-level MTD device matching our parent */
++	mtd_for_each_device(mtd) {
++		if (!mtd_is_partition(mtd) && mtd->dev == parent)
++			break;
++	}
++	if (!mtd || mtd->dev != parent)
++		return log_msg_ret("mtd", -ESHUTDOWN);
 +
-+	bootm_init(&bmi);
-+	bmi.loader = &ldr;
++	/* Count partitions so the scanning framework knows the bound */
++	list_for_each_entry(part, &mtd->partitions, node)
++		n++;
++	if (n)
++		iter->max_part = n - 1;
 +
-+	/* FIT config selection via #conf suffix */
-+	conf = env_get("bootconf");
-+	if (conf) {
-+		snprintf(addr_img, sizeof(addr_img), "#%s", conf);
-+		bmi.addr_img = addr_img;
++	n = 0;
++
++	/* Walk to the iter->part'th sub-partition */
++	list_for_each_entry(part, &mtd->partitions, node) {
++		if (n == iter->part)
++			goto found;
++		n++;
++	}
++	return -ESHUTDOWN;
++
++found:
++	ret = mtd_read(part, 0, sizeof(buf), &retlen, buf);
++	if (ret || retlen < sizeof(buf))
++		return log_msg_ret("rd", -EIO);
++
++	if (fdt_check_header(buf))
++		return log_msg_ret("fdt", -ENOENT);
++
++	/* Device-style name and partition index for bootflow list display */
++	snprintf(dname, sizeof(dname), "%s.part_%x", dev->name, iter->part);
++	bflow->name = strdup(dname);
++	bflow->part = iter->part;
++	bflow->fname = strdup(part->name);
++	bflow->bootmeth_priv = strdup(part->name);
++	bflow->state = BOOTFLOWST_MEDIA;
++
++	return bootmeth_read_bootflow(bflow->method, bflow);
++}
++
++static int mtd_bootdev_bind(struct udevice *dev)
++{
++	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
++
++	ucp->prio = BOOTDEVP_4_SCAN_FAST;
++
++	return 0;
++}
++
++struct bootdev_ops mtd_bootdev_ops = {
++	.get_bootflow	= mtd_bootdev_get_bootflow,
++};
++
++static const struct udevice_id mtd_bootdev_ids[] = {
++	{ .compatible = "u-boot,bootdev-mtd" },
++	{ }
++};
++
++U_BOOT_DRIVER(mtd_bootdev) = {
++	.name		= "mtd_bootdev",
++	.id		= UCLASS_BOOTDEV,
++	.ops		= &mtd_bootdev_ops,
++	.bind		= mtd_bootdev_bind,
++	.of_match	= mtd_bootdev_ids,
++};
++
++/**
++ * mtd_bootdev_hunt() - probe MTD devices and bind bootdevs
++ *
++ * Call mtd_probe_devices() to ensure all MTD devices (including SPI NOR
++ * flash via CONFIG_SPI_FLASH_MTD) are probed and their partitions parsed.
++ *
++ * UCLASS_MTD devices already get an mtd_bootdev via mtd_post_bind().
++ * This creates mtd_bootdev instances for other MTD devices (e.g. SPI NOR
++ * in UCLASS_SPI_FLASH) that have partitions but would otherwise lack one.
++ * bootdev_bind() is used directly because sf_bootdev may already occupy
++ * the standard bootdev child slot.
++ */
++static int mtd_bootdev_hunt(struct bootdev_hunter *info, bool show)
++{
++	struct mtd_info *mtd;
++	struct udevice *bdev;
++
++	mtd_probe_devices();
++
++	mtd_for_each_device(mtd) {
++		/* Only top-level MTD devices, not partitions */
++		if (mtd_is_partition(mtd))
++			continue;
++
++		/* Must have a DM device */
++		if (!mtd->dev)
++			continue;
++
++		/* UCLASS_MTD devices already have mtd_bootdev from post_bind */
++		if (device_get_uclass_id(mtd->dev) == UCLASS_MTD)
++			continue;
++
++		/* Only interested in MTD devices that have partitions */
++		if (list_empty(&mtd->partitions))
++			continue;
++
++		bootdev_bind(mtd->dev, "mtd_bootdev", "mtdbootdev", &bdev);
 +	}
 +
-+	ret = bootm_run(&bmi);
++	return 0;
++}
 +
-+	/* Clean up if bootm_run() returned (i.e. boot failed) */
-+	image_loader_cleanup(&ldr);
-+
-+	return log_msg_ret("run", ret);
- }
++BOOTDEV_HUNTER(mtd_bootdev_hunter) = {
++	.prio		= BOOTDEVP_4_SCAN_FAST,
++	.uclass		= UCLASS_MTD,
++	.drv		= DM_DRIVER_REF(mtd_bootdev),
++	.hunt		= mtd_bootdev_hunt,
++};
+diff --git a/drivers/mtd/mtd-uclass.c b/drivers/mtd/mtd-uclass.c
+index 720bd824c4d..0c637d3f5ec 100644
+--- a/drivers/mtd/mtd-uclass.c
++++ b/drivers/mtd/mtd-uclass.c
+@@ -5,11 +5,25 @@
  
- static int openwrt_bootmeth_bind(struct udevice *dev)
+ #define LOG_CATEGORY UCLASS_MTD
+ 
++#include <bootdev.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <errno.h>
+ #include <mtd.h>
+ 
++static int mtd_post_bind(struct udevice *dev)
++{
++	if (CONFIG_IS_ENABLED(BOOTDEV_MTD)) {
++		int ret;
++
++		ret = bootdev_setup_for_dev(dev, "mtd_bootdev");
++		if (ret)
++			return log_msg_ret("bd", ret);
++	}
++
++	return 0;
++}
++
+ /*
+  * Implement a MTD uclass which should include most flash drivers.
+  * The uclass private is pointed to mtd_info.
+@@ -18,5 +32,6 @@
+ UCLASS_DRIVER(mtd) = {
+ 	.id		= UCLASS_MTD,
+ 	.name		= "mtd",
++	.post_bind	= mtd_post_bind,
+ 	.per_device_auto	= sizeof(struct mtd_info),
+ };
 -- 
 2.53.0
