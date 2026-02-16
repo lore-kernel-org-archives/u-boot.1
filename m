@@ -4,86 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F4DE81A3B
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 15:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D69E81A3C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 16:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 249C08063E;
-	Mon, 16 Feb 2026 16:32:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 61A378063E;
+	Mon, 16 Feb 2026 17:16:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YSOdnA8L";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="gv2YSFBr";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Sscvo71m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 101A083AAB; Mon, 16 Feb 2026 16:32:56 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8807980FA1; Mon, 16 Feb 2026 17:16:06 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E62A880086
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 16:32:53 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d4c307db9aso1915947a34.3
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 07:32:53 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 501D680325
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 17:16:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=balaji.selvanathan@oss.qualcomm.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61GFkvxY982785
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 16:16:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=x63TySXYXngbzYvzYJE0z7
+ p/jEbBP8DR5slEFVs7pVw=; b=gv2YSFBrFApRutcwToGVKHA7B0B8rAxgmDLrbY
+ N0l5LyHRi+bS0fpW95DBXvH+uY9JSAWoGCmpuTaPCsaoa7Lyg67o1yjbNz5jeWYY
+ NTfyh9TFgxEbvi+VlXKV/A7UigQ80VZUSuUU0M/7mzChyYqSiqkTRSu8Xeck0Luz
+ Nec6J9ZfM1oyhRxIhCUUlBQNSh7lfriwWgWswt66GN5fUxWyiCN6MDTNUgdofduQ
+ eYz3W4R4JkFwN5O3hHCCgT7moIczcunMDSZNNT+3mSnBWgw9s0yBUEFPdOnXKoDC
+ f+OsdPzOu+jOm9fCv7m7uYdfuc64wH0CuNtL396+aYODhysA==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cc662r2hk-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 16:16:02 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2aaf2ce5d81so40694525ad.1
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 08:16:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771255972; x=1771860772; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nQMEfxJkFq+p1GxyBms9+ZvXp/yrbDVgfmk6gXGhQF0=;
- b=YSOdnA8Lre+uy5vwG7VicQdYD5DjtfOcbM9/ZchqaDbZd8yLpAr4zZ8+Fpm0HAsKSJ
- RQdsXqvRZo5YbBCWsjSPpvMQ5egHNNpSJdQz4tZyoB9f0UkHuhhyySIuq6wVUWEIqV9S
- 9MQbs82aiMGSEcnTHzWSah5WWC4a+/CxiQZkM=
+ d=oss.qualcomm.com; s=google; t=1771258562; x=1771863362; darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=x63TySXYXngbzYvzYJE0z7p/jEbBP8DR5slEFVs7pVw=;
+ b=Sscvo71mlsYPylQsO4/g+8Ip4Ude0Cb9hKjZCq4xJptdsdR1jBfRVg1Fs8xvH1S3sH
+ 13IvMIh2lpO1UIDYMHOAS/Kqap1tlgfpavVKlXPC5rFMV2bzKN7fRTIkXwoNOAYC54mo
+ 1R/CUkCtSTvLZIuKyeR1eux2FVvZ3Msp5JMRoXIpnufIuS8sZ2YbIYfGF+/ip9r7veev
+ sgoHewbRSULKNvXefdg+F7oJCZcnE+oUi7AFm9mw7xJCLvVwTz8372xehuH2Lg4jOgU9
+ ZLgCIsnRJFs9d1q/BFl+qU0HvB9WG5W44KYnFqa9hblXR69IASjfwdb9dyBZ8Z0sXQrx
+ UMYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771255972; x=1771860772;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nQMEfxJkFq+p1GxyBms9+ZvXp/yrbDVgfmk6gXGhQF0=;
- b=G08rGGtendPdnLtawkeNZOleIv6jgx6s/9N5TUNNhTEyRVDVD0FkY9Gpt2oFAOD3eJ
- uBbMZGh+WrXwonhrQkWnpPnnRACcF2qf/OSpyVjSQJvZN5oc0XmDOEZJqRQz6cDfTQx9
- 2/AEuUwnl7A1P4qRbQF87g3GeYnWDtfHi+WYURDL1xyJnw7HKAFvtaB1ZnwFr/yxJ34c
- iCKaUDhUGTq7bIlsAF7j3oPmF+HSji5Y8fXjKln4Qw4M4EvwoJWpUcf8VHcMN3AkH/Cg
- uS5q1usJl+ZGXshkwBGG63A4IENMoQSj1QQSUlhZeNPTA5o1jQPj4QDLOoEG7LQM1/Io
- zYQA==
-X-Gm-Message-State: AOJu0YyUQmVyVRrGDwvkq7cTSGMCCO7jE3g6I3Bf5svGO4gUYSAQ1mwR
- rTZsPcKRaTm3dJnGjKoQClqnODuG5xtp0/Z7JVA+P3xgZKWOQZOmnoY0byrWYnO9H78=
-X-Gm-Gg: AZuq6aJdVcqIr9hDuysZpPGVf4vPkQeX+jsd2AU5oSh4JdJ1Ylj6ubYL5iDQafrLXUA
- bKCM4Bde1a6OD7FSykIepO7AJhkKUD64j3ZtiJ4zxFLs2N9fzmUCyC3oWbCe/Wm5yJgYaulJ4/l
- xlIm27gSZllkKRFvwLkylhJ+v504egG5C9udMBcQCWDgtQIVddRIPClKBCiKk9ueeFgfSScN8Dy
- et6HS781v0jRuHzKBFmw7nF+H3+pEXFWE5oI4PPGe2HGrJzqwn+rdiQJLxy1hO0a3zSeQKkoWYn
- PFEY6mRh4Wt/HZb9gZJ0ygigs4kOw0pZBjGZRnXf8t7gdzrFDfZzYuan6Z5siWfWRu5uiNxp4CE
- 4t/Bud5pTgKejn0fPhhTjVUx0w34hDfxQflAqFezrOxDWiIRIP2LboCxU6hEn1YNRrdZ4NU9x+f
- Unh73Gf51vMg1/pkgLFBoIVyeQNXnOI//b3zxnUBRGdh3V2jol7naDnyQEuWBghz7yDvzVuQfuL
- lX1hume+cXXrBb5+G79DgFvHa5H5RVBkLuwkp6O0lJiSU3/wA4=
-X-Received: by 2002:a05:6830:dc7:b0:7d1:a028:4464 with SMTP id
- 46e09a7af769-7d4d0c6d654mr4631766a34.36.1771255972648; 
- Mon, 16 Feb 2026 07:32:52 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a76e0386sm12976246a34.13.2026.02.16.07.32.51
+ d=1e100.net; s=20230601; t=1771258562; x=1771863362;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x63TySXYXngbzYvzYJE0z7p/jEbBP8DR5slEFVs7pVw=;
+ b=OMxpEiKoODPM06yv3gkq1mDX86u1Nyart+jhUdTSrSZZNp2I0twMdNu5Qr7chA89rm
+ KQ2BEyvblMUnWJRFXld3Vlu110LxHlgniHaC/TVfELPX+gw/LOPEo+RuspXEKT3G3ugv
+ fXdsBltXIL5mHIGmrDlz+PVzQm0DjZWsVCCprSo/3I/Kpqxhq5uETyHY/AZOm29Kblcb
+ wkI3zymti3sHhvyjmUGEGwc/8F6IAHQnW+aALdaFNctc5ub4GmcDxc7Bjh1mbRCtUNYc
+ Y64Rz8lhl5jxjjpTxPtsOdMAw/lkrjcqw+9Tn/Rhu0bF7qFfXkjZF7jQv0wMmjwIaJr0
+ mXpQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVym2pYJXI0fX4gT8w8puQmJHQ9g2KlUVAZhJCX2stx/AN+oRk0+mnfIbWKL/kG5kTofIngKiA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnD0iLDEsgwK1MOMPyhxFkhJOOKxxcLJOeYwTpWe3cnqkatMUn
+ GJTcxm0+XQ+2+ECNHFKmNdmfCifJfjk6l6zDjEdMnoR02Sz3StM8SiW3sTAiBZD2STjZv9OISnt
+ mpT67jBSpQMXE/EVsXw/aWSOSle714dBfRuQOFY0eIfEQt/LG4S61Abfa
+X-Gm-Gg: AZuq6aKs6dNTm8z4Z3aOK4ub5tD65EOBEsQ7zMq7XbzboCoV4KQSUmUd6UnbKOyw7c8
+ V0EiuSZQGIrOFh/XBWhLuQFJB6+EJHt1awyRwFuBj5caEnwzBVn0YChEJ1y20lrlli3tNcnYe/x
+ BX3HoC37zzQfvz3Q+tskoihrVhPgaVnDEUZc9tImzFHQOqZHTO9C1z1Pj+n8cXNNdDRZVHCE7gj
+ Bx/VMOuE7cxONNdfLkMaArV9pnYYUds2n1Dkf56wZq4q2Gvds1qcD4ktF4TZ2cf0aEc3jBhp5RO
+ J6AlZNtGE4qw17qtMSBoKZQVFAwAP0QH6oWXjYDQfVirdqr0zOtqgi40FGp6ZZJJExWtiD3baF+
+ Ua6ihzBeXdDl3T3ENDy7GAtrAdAB8uf1yeFwRfcKL1MhXGRXR/BgQdGmWrF9LUSKr46+eTqrKji
+ IXr8CPuPvyci4PixfNoypzAD+aPQmWnEtNPGcofqWellu7PWtwSQ==
+X-Received: by 2002:a05:6a21:748e:b0:38e:5655:2897 with SMTP id
+ adf61e73a8af0-3948389a31bmr7495553637.22.1771258561579; 
+ Mon, 16 Feb 2026 08:16:01 -0800 (PST)
+X-Received: by 2002:a05:6a21:748e:b0:38e:5655:2897 with SMTP id
+ adf61e73a8af0-3948389a31bmr7495512637.22.1771258560971; 
+ Mon, 16 Feb 2026 08:16:00 -0800 (PST)
+Received: from hu-bselvana-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-c6e5331bbe2sm7539651a12.28.2026.02.16.08.15.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Feb 2026 07:32:52 -0800 (PST)
-Date: Mon, 16 Feb 2026 09:32:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Padmarao Begari <padmarao.begari@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@amd.com,
- John Toomey <john.toomey@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: Re: [RFC PATCH] cmd: part: add dupcheck command to detect duplicate
- PARTUUIDs
-Message-ID: <20260216153249.GW2747538@bill-the-cat>
-References: <20260215131115.3352282-1-padmarao.begari@amd.com>
+ Mon, 16 Feb 2026 08:16:00 -0800 (PST)
+From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Date: Mon, 16 Feb 2026 21:45:49 +0530
+Subject: [PATCH] qcom_defconfig: Switch Qualcomm fastboot flash from MMC to
+ block
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p3qZUc2El1VWrNmh"
-Content-Disposition: inline
-In-Reply-To: <20260215131115.3352282-1-padmarao.begari@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIALRCk2kC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDI0Mz3bSk+KSc/ORsXTNDS+PUZEPT5OQ0MyWg8oKi1LTMCrBR0bG1tQD
+ /LxjXWgAAAA==
+X-Change-ID: 20260216-fb_block-6193ec15ccf6
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1771258557; l=1169;
+ i=balaji.selvanathan@oss.qualcomm.com; s=20260213; h=from:subject:message-id; 
+ bh=L8dfRevWdjVZnGfBGfNPHnmnrSfmBu/19qOO9DZPY6E=;
+ b=TaBXxNDw7nqMnotaY77TCli41gXGoOqfVTyFJcuzt9nbR3NGpLq4QW/noycj7bLT2H+fOLrsU
+ 9Xi/mpT8yTcBtth7U1S+ryBkttlpzRxKu092NimVc+/oOqSSV6VOebo
+X-Developer-Key: i=balaji.selvanathan@oss.qualcomm.com; a=ed25519;
+ pk=CDpYiUU3SH7KGEtsBvY2tBGPiWfMxqWJF0p2LftOfnc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjE2MDEzOSBTYWx0ZWRfXwA0I5TDqzWBh
+ aM8/4gcnZwHvt7+Gip/3iYvmSx1vdi4xqi0lg0LBHoxnDrePZdgxuAubvVM6iPQwzAISK+nPyBt
+ mOdD3s0Izu+AJVh9OMCR3HhtWb2/tACZyTnTBbA0qTyrBfDHSCq2X3YlaA7y33w74Kx0Dr1hEYC
+ nnvS8P+hv9n6yi2fXnCisgJWTw3rfeFI4qJ88+wtYEeDpVD2ijUWI1uFqr2iYLfwAWSVxpmQ24T
+ lzdKTswbu+m2rC1Z6mi2DnwtYyIqPiYI4zN2khcc/BNUfznC9tkm62I9+kk1XCOZD4DEovG0bmL
+ EnClQ//AYuM6VFlzxQFaK5e83o8GNJHAb8tXe10DuJboaC9bu2RidVic60WBX5sw0DeeBSg0Wzn
+ ZgTJRGbHhYgc77zejulLEyUz0CKS5HC3KQrD4iPoHq4NGZNS/l6PDgs9P/XL9n0sYiHf5T8IHee
+ X9zvOI/qkjVG5+v9qtQ==
+X-Authority-Analysis: v=2.4 cv=Y6b1cxeN c=1 sm=1 tr=0 ts=699342c2 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
+ a=EUspDBNiAAAA:8 a=7xorb5Et9y77LehQ4dEA:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-GUID: ryquFWVnNU59dRWQ6wviYKMv-QaGeSi7
+X-Proofpoint-ORIG-GUID: ryquFWVnNU59dRWQ6wviYKMv-QaGeSi7
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-16_05,2026-02-16_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 adultscore=0 priorityscore=1501 impostorscore=0
+ bulkscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602160139
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,50 +163,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Replace MMC-specific fastboot flash configuration with generic
+block device support for Qualcomm platforms. This change switches
+from MMC device 0 to SCSI interface with device ID 4, enabling
+fastboot operations on UFS storage instead of eMMC.
 
---p3qZUc2El1VWrNmh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+---
+ configs/qcom_defconfig | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-On Sun, Feb 15, 2026 at 06:40:47PM +0530, Padmarao Begari wrote:
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index fe5880de1fd..2666adb0569 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -77,8 +77,9 @@ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x0
+ CONFIG_FASTBOOT_FLASH=y
+-CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+-CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
++CONFIG_FASTBOOT_FLASH_BLOCK=y
++CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
++CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=4
+ CONFIG_MSM_GPIO=y
+ CONFIG_QCOM_PMIC_GPIO=y
+ CONFIG_DM_I2C=y
 
-> Add a 'part dupcheck' subcommand (gated by CONFIG_PARTITION_UUIDS)
-> that scans all block devices for duplicate partition UUIDs. This
-> helps detect situations where the same disk image has been flashed
-> to multiple boot devices (e.g., USB stick and UFS), which can lead
-> to unpredictable boot behavior when using PARTUUID-based root
-> filesystem specifications. It iterates all block devices using
-> blk_foreach_probe() and checks partition UUIDs via part_get_info().
->=20
-> When duplicates are found, a warning is printed for each occurrence:
->=20
-> Warning: duplicate PARTUUID 20c5fba5-0171-457f-b9cd-f5129cd07228
->   first seen on usb_mass_storage.lun0:3
->   also on ufs_scsi.id0lun0:3
->=20
-> Signed-off-by: John Toomey <john.toomey@amd.com>
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> ---
->  cmd/part.c | 104 ++++++++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 103 insertions(+), 1 deletion(-)
+---
+base-commit: f9ffeec4bdcf1da655a0ffea482062adde78fee8
+change-id: 20260216-fb_block-6193ec15ccf6
 
-I see this as useful, but I think it needs to be its own Kconfig symbol.
-This is going to be enabled on something like 1100 boards today, if only
-gating on CONFIG_PARTITION_UUIDS. Thanks.
+Best regards,
+-- 
+Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 
---=20
-Tom
-
---p3qZUc2El1VWrNmh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZM4oQAKCRAr4qD1Cr/k
-CojTAP97pwmBkhM0bAEAczwweDIGCApUknf0UVHnCA0i6D4ctgD+K3kzleBcoIYv
-49X6Q82WJ9SS/mJxI28HdUBWeU2x7QA=
-=V7u5
------END PGP SIGNATURE-----
-
---p3qZUc2El1VWrNmh--
