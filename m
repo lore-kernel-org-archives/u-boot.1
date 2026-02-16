@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E89EE83827
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 19:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EECE83829
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 19:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5270980325;
+	by phobos.denx.de (Postfix) with ESMTP id 9024883E13;
 	Mon, 16 Feb 2026 20:39:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AwZQqt3/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W449bPMm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BA6883D07; Mon, 16 Feb 2026 20:39:12 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 7CF1883AAB; Mon, 16 Feb 2026 20:39:13 +0100 (CET)
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4E0D83C6C
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 20:39:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AB6383CD3
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 20:39:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7d4c85307b2so1691912a34.0
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 11:39:05 -0800 (PST)
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-7d1890f5cafso1223656a34.1
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 11:39:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771270744; x=1771875544; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771270745; x=1771875545; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=frP5vgquSfW0adneZOw7oGXtB3OSulpnAckxVjhMqRA=;
- b=AwZQqt3/spJeqZCggEiWdxzu3p4xFIDBV+rTyE/gxhTRo+qy5TeDguPl99PXmIgI+m
- lx/gf67wayiORTGulrFbTWmblOlgip2qT8XH6znv/5tXVnkBrZwaOFk5oEkiW19VjTUW
- TmoEMib9Tt45meX85ZGT0IfPL7L+GFeYNRkq4=
+ bh=j0J9lm1e56Yd2rTR+Hp3aw34GupMDUGW6QOct/+3RCo=;
+ b=W449bPMmT3nr78KZTw0lttF4f8yFj5iu5Qd65lFB5bGhk0AX5rz9Xr6OG6DcZKk3B8
+ 4CyGtKRTcejH2YRWptZKaQ1ssnS73ClslIonJY1mEGCe7RcP/411v7gpYxrQownQCbnM
+ QTEvWhE/XiHshwFdq689A0mEa/xXbsoQmTXb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771270744; x=1771875544;
+ d=1e100.net; s=20230601; t=1771270745; x=1771875545;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=frP5vgquSfW0adneZOw7oGXtB3OSulpnAckxVjhMqRA=;
- b=eQ4SKQdqGBgEBCKvhQDGR6PCDjusCozQs4zTJvaGPi+RYz0vRNErbyNQ1C/2NxS4V+
- o1W4Bv/09pfUggkFZB+RE4mXz14eX9+u8qb0y2MAqTcp12VM7ZOeP0iStV8/6X1sSVgk
- ZYLqd+Z0dqr2eZggOkQ8OODyx5NV+y/i2DpHJhz73ELcIsMHfDl0+SKmss0S2GkB9gUA
- 4a9BAJGY6Z+C4KxC5RvKfTxVj27lKAGV+mhI/LswWpvK4okRVNiMV+PpNz9/wLalEcmF
- nieTzu1WB0IRM7nz0PbLLKd4kJQVxEgNUyU9bWagW+i5FyO2tgXX6h40BcPTisc23ofW
- ux1Q==
-X-Gm-Message-State: AOJu0YyDa1PpL1A5gvdJnenDmylHNuHvxF6Wv7X9q9r034U2NSblyOxx
- 36KfI9xbotWrI67giMK+JRLxo1XxEK2L5t4G6Pyw+Mj1B5OKR7eJshVypZI34UNiMik=
-X-Gm-Gg: AZuq6aKcvBH6P8hUmN3H6+0ENzce/DD1Mk+coBzN98TrPcsQ/+iDzevwWTMErg1P7zH
- D0mB6kundqZxe2DVsZCzzii8rMIOUZY/NEpLNIWY48+x1mNkHV0i6cysbdp7bnv4/OeGGubMMc7
- 8OXIGLmiPnhEEiTYwFUcknngP9muIOfNut30l/+iWn4qD2Ht5YcdR9jKKYnwkbgDfMiyhyLs08K
- trlD4tgl8lj8yvCXBcdjU0WgS3vdWUZ4303eVaL6TW5yxGUZCw1tcl3jCSZV/Cp5ZfmqrDgUwyJ
- hflVyxHEms/LqZLsFF6Xi1qdQg8XMT3IY/nCQa/r1QyZnMTP0fAl7fXl7+/RTLx+O7b7l9pakDl
- fWVzXMlFJUGj/2PTsyJCsgNL0eNYOn/g2/mYbOF4vDi0zfWk6KWPkRrCb7A2BNi/NixlXPIgVBc
- Lwl72ij0p+i0OlpsNsvf5fsVpy7zj1VqIC9j8pQRXKxOL7UDzgZgwML2WIGtHekg0d5UWfg2cmu
- 9HM2dCYffdDb7QZTcGRiNxW8e6YPD0NYzU+Kidu8IwbIsb6/Q==
-X-Received: by 2002:a05:6830:7086:20b0:7cf:d1b7:c319 with SMTP id
- 46e09a7af769-7d4ebb862b1mr1248864a34.2.1771270744500; 
- Mon, 16 Feb 2026 11:39:04 -0800 (PST)
+ bh=j0J9lm1e56Yd2rTR+Hp3aw34GupMDUGW6QOct/+3RCo=;
+ b=P8vBiiCsuhJDj0RNfMeBfRLGaDmcEVgT4xrknOEDLMpX940m7qbltuvcvZ/TUkVRJ7
+ P4Bf9jpl+vcr8t4Vne4U5Y6tQD3+qvWaFy7yN/6WSs1kBpCmsmG7sVhEbeUol2yTCkrC
+ mYa2E3qoyAfer8x+NZT9QFNSTX4udzRJsGzhmfmWNTMqTnL9nvIi6xanAUaE7CdjEevO
+ HGMYFkm82zmTFbCufbtqgciZhDsRtzmdcaDE7j435ytPvU202Zc9IedZtLnUxjX47/fT
+ 8GqqwyHQ7CRLyEVdpePoSyGWtEFGxVANtCUa0q4ATGMQocUiP7MwB4ANSQT+jXjNJJux
+ tpKw==
+X-Gm-Message-State: AOJu0YwH/SpYQp5lm3r92EsgA/6HOhfbhCP+DZ5nkMQbJWBphFnQ97Q0
+ UiKKEQcNTXqASU1rn65K/oX49VXrq8cJjzULvRm3zncXCDaPmGyZbj9F/8lqsL8NXUM=
+X-Gm-Gg: AZuq6aJTeHPJUEDjzzuMRqCiUcRCFIIXJG0NGZvWlkauCIpVZQapxI4B5x+imk93WFC
+ rmWP5YaKuCbGcTrhEtGrLyqeUaXPAelL4FXVdMbc0HnGOqZB8Hg/b65pm9x01Feh0t8SfFAhO+f
+ uqeT8xFpGmEBXEpQ4AMgO1ZivPrrqKxX0xgEkWI4WVoxDg1strXeateSndC3PFsd2cMJlBhGWgr
+ O1v60zjqQRUDqS4V1y3J7Nv/YpHXYqq9SOF29AQeCmI6hhLK1hfXxg/bTrTLTw8JXCE30W9aiJd
+ wbRBc4gfqRZlRsVo46qa2TorE2TTamBX7hrrHM0I0t5LY+PpEGcTjWUFM1fDRlAzp7/yPbVNAoM
+ iuQ7Dz/aYPLMHHS3ZBNuA8lZVM45a++9NZlDA6cvxQ8iFo6P1ydCuOLujfgmRuLswnmmoECDj9j
+ N2DxX2IzowyElAiJCG4iqYm/Ed8hIDTXUeRX6qNQo1IMCGMcrQ9NfKT+M5o86BUZyKpUfrOAqU0
+ SL/lTn597xT6OP/im5ZAN+fsRpFT+GoVB+hjCcFO+oE23xZHA==
+X-Received: by 2002:a05:6830:258e:b0:7cf:dbb4:320e with SMTP id
+ 46e09a7af769-7d4d0bd1ce1mr6323680a34.18.1771270745371; 
+ Mon, 16 Feb 2026 11:39:05 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a76f9483sm14142543a34.20.2026.02.16.11.39.03
+ 46e09a7af769-7d4a76f9483sm14142543a34.20.2026.02.16.11.39.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Feb 2026 11:39:04 -0800 (PST)
+ Mon, 16 Feb 2026 11:39:05 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Jeremy Compostella <jeremy.compostella@intel.com>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <87qzr1z0tf.fsf@jcompost-mobl.amr.corp.intel.com>
-References: <87qzr1z0tf.fsf@jcompost-mobl.amr.corp.intel.com>
-Subject: Re: [PATCH] x86/coreboot: Exclude memory regions starting above
- 4GB
-Message-Id: <177127074392.2634449.16645339876724577955.b4-ty@konsulko.com>
-Date: Mon, 16 Feb 2026 13:39:03 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <20260216174618.56494-1-marek.vasut+usb@mailbox.org>
+References: <20260216174618.56494-1-marek.vasut+usb@mailbox.org>
+Subject: Re: [PULL] u-boot-usb/master
+Message-Id: <177127074470.2634449.3919799247715917618.b4-ty@konsulko.com>
+Date: Mon, 16 Feb 2026 13:39:04 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,22 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 03 Feb 2026 19:42:36 -0700, Jeremy Compostella wrote:
+On Mon, 16 Feb 2026 18:45:42 +0100, Marek Vasut wrote:
 
-> This commit updates the RAM region filtering logic in
-> board_get_usable_ram_top() to skip any memory regions whose start address
-> is above 4GB. Previously, only the end address was capped at 4GB, but
-> regions entirely above this threshold were still considered.
+> The following changes since commit f9ffeec4bdcf1da655a0ffea482062adde78fee8:
 > 
-> Typically, the following memory map entries would cause
-> board_get_usable_ram_top() to return 0x100000000, which is incorrect.
+>   board: toradex: Make A53 get RAM size from DT in K3 boards (2026-02-12 08:12:09 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   git://source.denx.de/u-boot-usb.git master
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
-[1/1] x86/coreboot: Exclude memory regions starting above 4GB
-      commit: 8666b16015d4212facacc514e2eb626f3630dcf0
 -- 
 Tom
 
