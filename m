@@ -4,101 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7282DE7BDA4
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 11:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00ECCE7BDA1
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 11:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C87FF80FA1;
-	Mon, 16 Feb 2026 12:51:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 796CF80FA1;
+	Mon, 16 Feb 2026 12:54:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="di1qqmwf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nV9EvDmd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 856E283AAB; Mon, 16 Feb 2026 12:51:32 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 9BA9083AB7; Mon, 16 Feb 2026 12:54:15 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C718E8063E
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 12:51:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2B358063E
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 12:54:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-59de8155501so3131719e87.3
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 03:51:29 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771242689; cv=none;
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-38706f96202so18146651fa.3
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 03:54:12 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771242852; cv=none;
  d=google.com; s=arc-20240605;
- b=DJpt5EmLOebN5FV1Y3uHjbpX8JTtycZVZZseVE+ixl0uDN6CTkVzrlPP8SKbnmp8dV
- /drYSN2sVY2otjwyoNEpAOMHd1kYLgeW3YWsolmYsPGfPIcC4k/gphMtu1qwSw4bJQEV
- Vbwz49S3Eq2kMS3BqhMm9HYBwTu/itRk384T1HqSMjqwDws7RdQhCRkGuyOIUwR7AaKu
- aWvICESE3TVzMmcgbXqDjLXZ/bUhTw+RSI2XyrT4qi2sndEuXRxCaX5iPrkoHQlf5AYC
- YQcyn/mqdsnVPhOKS/Uqm3HWpTuav3tza04ZhTWz0cEa655y5qT5L2MaNmdUXR7MUm2h
- vWYg==
+ b=fvvjBD4mvhZ5n1qPGDBwtnrU1bIki7R4tZuRHZMVPFXWdw1sYdUrHI7RI7Yrj67GwR
+ sqAHm0xLQwFxj86baH65uFv3lU6YTPcG6Rd+t9N8oZEhcmQLd1ZvraCrLSh2vuVO7DMY
+ Wi9eiyFLFYoJU/bYkk6qv1N2deMBnYVvy+eqC05a4HJojoHE7N133BfRxIoXIH6LXJyU
+ poYsqzieVEqDAIBnqLqvz6aIOCcHLiYtYFhM64YjEyqLCoBgKdUdwv4uEZ+QzZ2mGJIO
+ izTJ4X+y3nWRUXsrKkVlbD+esvLLuSHyvwnmROVxLEfW3e1GoaZTYaKOkTukJ1iR6Nbl
+ aCdg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=KUlCy+JTljNHq00JC7wG9XqYJioqYtdA8ohl5ZMkxH8=;
- fh=CiFAJCSR0dBrrd4JbcOZP7ED6RdIlzgYToKKXEootOk=;
- b=ZzyWryhub7gBMnN81LoWrM4FC/hSojQlhJcmFitrM6wA0BBcAzPd07drtn5siQTyel
- iOblOQ0Q6ConCJQFZ8dfFRqIKMyEvAjX3YGbgjWmg5KEYBgRncxOyj1saoOgZnCZ9MNM
- ZQOZCkhKyo5Kx+vtcj45qvmjuquWwNLmV+IEg4abSRNJJJC4XRM3IDV8RGhcmguSZ2cz
- QAjzQUvlxmAFogfUm2WG/eZQaKIlq+GMdC/uwn6NsDaulGJsqtTHQ641dOR0MC0PXlYU
- bdE/L2mKRFwuaVVnAD952SolwR+2eOIwyveU7koFbDnCtAdCCx4tyX/1VOOBFwC1rNJH
- AYlg==; darn=lists.denx.de
+ bh=tHHKGzr/mj5rzzDXRQTPfn1jX+R7c8qr3T2kx9lLq4o=;
+ fh=dnxC08T5YtX7Sz3Ven3edkzZQyNDOTCG6TzyTHNA9t8=;
+ b=JIfRezBq4KskjGKuWBBy0fT0nHBCGGfCgdw6yhH5AcpSmZnyUoINsT4A5mHJGnur1o
+ CwaXDNXpiSCrgbCSExgDq7NzJf/L0NXPtqvfH78+OgvzBGRlt5nQwxVZBjpzSFrzw3dg
+ i73WBNCcOq4LmAZsAa6t7h3wyu0qU+ib8h/qAr4WQgmOgLBR1OG9eTmpaRmu66zpU0IR
+ g8CjBZyrSovqvrQA6HGT6tBjJb/2lzCE8gidFhOnfdrx26Lk82SXXzr/BS+GjtA+x92v
+ sgxScGs3LCbYuUQ1dfiHPJKAb56TGE2my5SJktv7LqZjIs60vTbQWHl38QsthEHf12Gm
+ 0+Hw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771242689; x=1771847489; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1771242852; x=1771847652; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KUlCy+JTljNHq00JC7wG9XqYJioqYtdA8ohl5ZMkxH8=;
- b=di1qqmwfhWsyFUpGUk74ql4NAqix3CHJ9EuZeEmtozTXeNkvzO9y/ovy1slgd5zgbX
- PNRu4fSCxGQBG4SQdKkT3UfpXqaDQ+2gXq/3HX31/AGlshdQwHkp1lUzAvPyHfqeVk6+
- rJ54459nJhDKe9FkedxB8k2JdmDDsIM6v6ThebW2yE+GFQK069mEuUmd0KPdF0vMuxPE
- ds/wUusKY8L5UwYfefFW3WTUoMWUkXKq7BRVjG73LZvhBQu7QuXoVBETteMkIRfQu8jj
- vP4UzHfcekq9dImH60ZcUpvJkaHxW3Uvrbkw26jhDmkU73eCziArPaGDYkU+Hg8M+Zjk
- 7wUA==
+ bh=tHHKGzr/mj5rzzDXRQTPfn1jX+R7c8qr3T2kx9lLq4o=;
+ b=nV9EvDmdko0/dfYCJBDPJYRwlfvk1RiVahtzrGEY0U9WuCCJKlk6VRYvzcl/LZPMNO
+ nvBWuEkesmah5h/BmJPnbwUqgbBvah09l94uqdHsjw4m9hDzIGT2XgeuZSNO7k4yR5cF
+ tPEovWreUGat9J6xEqS8HJJMfA/mAGg5Sa16tcxpruUSjNSsvR3rExI5l57V4nIq2GOh
+ zM+jseo6+f/UgEpoRe0CXqsy06NAjKTG10SxBelJmf1HxJHhZJjN7qu+kUhjzSfFnHET
+ ea3th0RwFIE9Rhae5JZ2RQ4FXdHIZ8ELMNXw2w8mAyDruy0XHNvsBAqW6RscPf+gajmr
+ Z3PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771242689; x=1771847489;
+ d=1e100.net; s=20230601; t=1771242852; x=1771847652;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=KUlCy+JTljNHq00JC7wG9XqYJioqYtdA8ohl5ZMkxH8=;
- b=FA77b6kr9Icmejfqt7aJ8zNuhzd1pSeFYJzDbJNFSkppJguij8bWSuHXkm2LEiayvA
- aj4zBCsZf6GCZNzMD1Lo/TlOPeHbySj628TpT0XDP6cbOiAEaPs5w/wDf+AaqTqcvd4A
- swMyh2+SmVkHFAQDUUYwz+HDi1VsChn8i9XUll8ACul9Sul2Up9c62hec6ppjNh0oJEa
- dcx3e2SsOQR7FDgAd4Tw0U7MR4gsvTy1KugXmILOSESq3sxZ+/nnzSAW+VCfqJRrblFd
- X6x3VMmPjnfLFHw7DetbIoeEJwbeEoHUMqeFa+CX7DqQ1AbaEe+0PUY/NYK9lMXCU+IW
- GNnQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5/p6t/E/XPFqQds+jPkOjw6DYN3ONhxlGvw4Aj2LOTy6ITZJJLvZZhnfKS49agGTyHYkUcrk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVbU5+v8MHWfgKVfeAe2PuGYhUUOsB21bf24tUTJIjuHBKV96w
- qMA5hsvF9TD8FX+Zd+G1r1C5LPqqar/GODG5C8xn+Y+xERtVM3mNlaQSrY5E4wztfv2ik/PztaY
- K8qTUOy1+9rRh6oz6c/PPvzM0D7L1Kvw=
-X-Gm-Gg: AZuq6aI+UnU6QXxqxybTQ3zbILFkECZLXBqoT7N5xTFheD3tvGGLv4SpUi+B5jSq+Zo
- eWfY8TIE1l0ibY3ZbUadIcBJn2ID3TXZzA/CUKROsZpYUfbNb1uJP4wsWZ/yviIwe+meffMi6J1
- 9zhXb7wa4dO2D5rVRnXFLYYegPoEdiwJJKRuFsb79ZAlFypPwFjZlmAAfGTktxFhacr62ibbrbA
- FJNjXIEuqWJHLeGPxLFCzdMi/BUL9TDThfRGtijhxWG/rSWP1tJgtykaoxWhXwCqYTXEtMs5JWM
- hXkyLSrlUrfTk/Wtq9YXh9tDeFiIaPJM4WD0YHciSkcD8afbXAJlhl1SG+M+9GCpyXBrVA==
-X-Received: by 2002:a05:6512:12cd:b0:59b:6d12:6bd7 with SMTP id
- 2adb3069b0e04-59f69c6f320mr2425128e87.40.1771242688758; Mon, 16 Feb 2026
- 03:51:28 -0800 (PST)
+ bh=tHHKGzr/mj5rzzDXRQTPfn1jX+R7c8qr3T2kx9lLq4o=;
+ b=VLSuLWrOTkFA5GgAtSUoUb3rp0nPBRFlnI8YxxBKuYVNccSUbbalALnK2eDZKhpIAL
+ hj5Ba2XYtzJ2t2PpJorMjkDMw3kenRFN72JkDJ7cIIAmO7hHxIiapKIDw5DLiBb0r705
+ GB7dgmffLBCdrNA+l3BxvA9BGXqoAcpkXzaavOAj9hwEQHxPAIWwcTbCgBWqi71tRHvD
+ kE3Mf0GjCozOT+YJNfrIS2TdUPj9fobyzSlPvxB2ELgCKjF4DY80ZcNoJ+5uubYMKikt
+ tTer7xiichxx6QbwAqyLL5kplVclhNeNJlpmf/s3SlcUY7TL+Q2dQMmELMIL84utoo5o
+ 1Yng==
+X-Gm-Message-State: AOJu0YxsBp+zkMsjRHUts37ChHsIxLDJoEuH6gPghGnNUOBGOvNK+HOL
+ McWoWhe2/AZBkhgDumNuvnC8ZsU4QtCrpv9tqqvzbjdxv3zjkucmxBUczjms6IGbmbR6IkTA0IK
+ 9FtFVMFNDK2l8RsJX9ybUrVR3VFJ+dNA=
+X-Gm-Gg: AZuq6aJcNo7BDHfUCuY3KQCpmWtdje+ne+fD6KqWbDZ2V8lOQQbuJ6xN6ctw85YA6zY
+ lsf9+pw0hkH+iAS2S0Er+gB7y/Wz3niSKbrhGYE46Eryf09SqprK/xsyIjiznRHKoT93kGt8uSF
+ dX/hfYMqShvZf7waehJPExKZxGnsCyOYCyfeiVCLsHGuWHD2bmTWyY8apCT+mI+l34SOXOe4n8+
+ rheC+qK83K71i4XWvW79WMsXAuLljvxlFXemgi4elYw/CmBImyRJwDP17UH2JlprCuVYqa/HGoC
+ 3h5MLniqNG2GTF1rysgm82S/S62LNJjXhbIWnO6ECq3optRuK8uNBmgKlv9AiIohqDjt4w==
+X-Received: by 2002:a05:651c:b10:b0:37a:34e2:88e7 with SMTP id
+ 38308e7fff4ca-38810570813mr33275521fa.22.1771242851576; Mon, 16 Feb 2026
+ 03:54:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20260211222550.739727-1-festevam@gmail.com>
- <e83ce331-e8ff-4b0b-b4a0-e0b292c79238@altera.com>
-In-Reply-To: <e83ce331-e8ff-4b0b-b4a0-e0b292c79238@altera.com>
+References: <20260214045703.28051-1-hs@nabladev.com>
+ <20260214045703.28051-6-hs@nabladev.com>
+In-Reply-To: <20260214045703.28051-6-hs@nabladev.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 16 Feb 2026 08:51:17 -0300
-X-Gm-Features: AaiRm52T1bRgLIRiqZDg_fO7Cd69phb4CIT-_mj8ZSTZS-nNVOc99eq7E-Nj5l0
-Message-ID: <CAOMZO5C7aU3aCmzRS2QF8U+CJAvmy2LTzcN_PyvrhJ61YOOCyQ@mail.gmail.com>
-Subject: Re: [PATCH] spl: Add generic SPL MTD loader support
-To: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-Cc: michael@amarulasolutions.com, jonas@kwiboo.se, trini@konsulko.com, 
- u-boot@lists.denx.de, Fabio Estevam <festevam@nabladev.com>
+Date: Mon, 16 Feb 2026 08:54:00 -0300
+X-Gm-Features: AaiRm50eMREeKWMVI3LabrF4yfLwKa-FSSJQBJFrMcrFTXzYtRwo-cl4_qdps5k
+Message-ID: <CAOMZO5CeuGSdHMaFy5dvSHF=5xt0hM+Xb2GshafXJ0QuwCj-Ug@mail.gmail.com>
+Subject: Re: [PATCH v2 05/11] imx8qxp_capricorn config: add wget command
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@oss.nxp.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>, Peng Fan <peng.fan@nxp.com>, 
+ Adrian Freihofer <adrian.freihofer@siemens.com>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -117,14 +119,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dinesh,
+HI Heiko,
 
-On Thu, Feb 12, 2026 at 2:42=E2=80=AFAM Maniyam, Dinesh
-<dinesh.maniyam@altera.com> wrote:
+On Sat, Feb 14, 2026 at 1:57=E2=80=AFAM Heiko Schocher <hs@nabladev.com> wr=
+ote:
+>
+> From: Walter Schweizer <walter.schweizer@siemens.com>
+>
+> Faster than tftp.
+>
+> Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
+> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+>
+> Signed-off-by: Heiko Schocher <hs@nabladev.com>
 
-> > Sure, seems like the approach is quite robust.
-> > Let me try the approach on my board and will update you
+In addition to the other comments, please do not add a blank line
+before your Signed-off-by line.
 
-Have you had a chance to test it?
+This also applies to the other patches in this series.
 
 Thanks
