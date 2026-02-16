@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58648E83836
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB76E83837
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:23:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AD8E83C72;
+	by phobos.denx.de (Postfix) with ESMTP id 45DBB83CD3;
 	Mon, 16 Feb 2026 22:22:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BE3883C6C; Mon, 16 Feb 2026 22:21:58 +0100 (CET)
+ id 9FDCA83AA9; Mon, 16 Feb 2026 22:21:59 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B58A28063E
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:21:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE3B483B8A
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:21:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs624-000000002bn-3GXG; Mon, 16 Feb 2026 21:21:28 +0000
-Date: Mon, 16 Feb 2026 21:21:25 +0000
+ id 1vs62C-000000002cS-3u9J; Mon, 16 Feb 2026 21:21:37 +0000
+Date: Mon, 16 Feb 2026 21:21:33 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,8 +57,8 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 01/20] boot: add image_loader on-demand loading abstraction
-Message-ID: <3cb8b55fd4f96dc612b6a3453acecc0d37ca24a5.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 02/20] boot: image-loader: add block device backend
+Message-ID: <9b0880ae234d8244f032eac6cee32a1031de26a3.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
@@ -82,401 +82,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce struct image_loader, a small generic layer that lets callers
-read arbitrary byte ranges from a storage device and keeps a translation
-table of the regions that have already been loaded into RAM.
+Add a block device storage backend for the image_loader framework.
 
-The API consists of four functions:
+image_loader_init_blk() takes a device and partition specification
+string, resolves the partition, and installs a .read() callback that
+translates byte-offset reads into blk_dread() calls with proper
+sector alignment.
 
-  image_loader_lookup()   - check whether a range is already mapped
-  image_loader_map()      - return a mapped pointer, reading on demand
-  image_loader_map_to()   - read into a caller-supplied address
-  image_loader_cleanup()  - release all backend resources
+Partitions can be identified by number or by name, following the
+syntax of part_get_info_by_dev_and_name_or_num():
+  "0:4"        partition 4 on device 0
+  "0#kernel"   partition named "kernel" on device 0
 
-A read-callback (image_loader_read_fn) plus an opaque *priv pointer
-abstract the actual I/O so that block, MTD, and UBI back-ends can be
-added in follow-up patches without touching the core.
+This is important for systems where partition numbers are not stable
+across firmware updates.
 
-Each backend provides a .cleanup callback which is invoked by
-image_loader_cleanup() to release held device references and free
-allocated memory. This ensures safe resource teardown between
-consecutive boot attempts.
+Sub-sector reads (offset or size not aligned to blk_desc->blksz) use
+a single-sector bounce buffer to avoid overreading into adjacent RAM.
 
-The translation table (struct image_loader_region[]) avoids redundant
-reads when the same region is requested more than once, and allows
-extending an existing mapping when a larger size is needed at the same
-offset. The table size is controlled by CONFIG_IMAGE_LOADER_MAX_REGIONS
-(default 16).
+The .cleanup callback frees the allocated private context.
+
+Gated by CONFIG_IMAGE_LOADER_BLK (depends on BLK && PARTITIONS &&
+IMAGE_LOADER).
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- boot/Kconfig           |  20 +++++
- boot/Makefile          |   2 +
- boot/image-loader.c    | 163 +++++++++++++++++++++++++++++++++++++++++
- include/image-loader.h | 141 +++++++++++++++++++++++++++++++++++
- 4 files changed, 326 insertions(+)
- create mode 100644 boot/image-loader.c
- create mode 100644 include/image-loader.h
+ boot/Kconfig            |   8 +++
+ boot/Makefile           |   1 +
+ boot/image-loader-blk.c | 133 ++++++++++++++++++++++++++++++++++++++++
+ include/image-loader.h  |  20 ++++++
+ 4 files changed, 162 insertions(+)
+ create mode 100644 boot/image-loader-blk.c
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index e5db165424a..f6908e04a51 100644
+index f6908e04a51..e94b52288a3 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -1167,6 +1167,26 @@ config SYS_BOOT_RAMDISK_HIGH
+@@ -1187,6 +1187,14 @@ config IMAGE_LOADER_MAX_REGIONS
+ 	  images (FDT structure + kernel + device tree + ramdisk +
+ 	  a few loadable sub-images).
  
- endmenu		# Boot images
- 
-+config IMAGE_LOADER
-+	bool "On-demand image loading from storage"
++config IMAGE_LOADER_BLK
++	bool "Block device backend for image loader"
++	depends on IMAGE_LOADER && BLK && PARTITIONS
 +	help
-+	  Provides a generic abstraction for reading image data from
-+	  storage on demand. A translation table maps already-loaded
-+	  regions to their RAM addresses, avoiding redundant reads.
-+
-+	  Used by bootm when a storage device is specified instead of a
-+	  RAM address.
-+
-+config IMAGE_LOADER_MAX_REGIONS
-+	int "Maximum number of mapped regions in image loader"
-+	default 16 if IMAGE_LOADER
-+	default 0
-+	help
-+	  Maximum number of distinct image regions that can be mapped
-+	  into RAM simultaneously. 16 is sufficient for typical FIT
-+	  images (FDT structure + kernel + device tree + ramdisk +
-+	  a few loadable sub-images).
++	  Allows loading images from block device partitions (MMC, SATA,
++	  USB, etc.) using the image_loader framework. Partitions can
++	  be identified by number or name.
 +
  config DISTRO_DEFAULTS
  	bool "(deprecated) Script-based booting of Linux distributions"
  	select CMDLINE
 diff --git a/boot/Makefile b/boot/Makefile
-index 7fb56e7ef37..1dbc285dad8 100644
+index 1dbc285dad8..ac006bbaa82 100644
 --- a/boot/Makefile
 +++ b/boot/Makefile
-@@ -73,6 +73,8 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
- 
+@@ -74,6 +74,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
  obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
  
-+obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
-+
+ obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
++obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
+ 
  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_OS) += vbe_abrec_os.o
-diff --git a/boot/image-loader.c b/boot/image-loader.c
+diff --git a/boot/image-loader-blk.c b/boot/image-loader-blk.c
 new file mode 100644
-index 00000000000..77f5b8c69a1
+index 00000000000..3f9a309a60c
 --- /dev/null
-+++ b/boot/image-loader.c
-@@ -0,0 +1,163 @@
++++ b/boot/image-loader-blk.c
+@@ -0,0 +1,133 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * On-demand image loading from storage
++ * Block device backend for image_loader
 + *
 + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
 + */
 +
++#include <blk.h>
 +#include <image-loader.h>
-+#include <mapmem.h>
-+#include <asm/cache.h>
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
++#include <malloc.h>
++#include <memalign.h>
++#include <part.h>
 +#include <log.h>
 +
-+void *image_loader_lookup(struct image_loader *ldr, ulong img_offset,
-+			  ulong size)
-+{
-+	int i;
-+
-+	for (i = 0; i < ldr->nr_regions; i++) {
-+		struct image_loader_region *r = &ldr->regions[i];
-+
-+		if (img_offset >= r->img_offset &&
-+		    img_offset + size <= r->img_offset + r->size)
-+			return (char *)r->ram + (img_offset - r->img_offset);
-+	}
-+
-+	return NULL;
-+}
-+
-+void image_loader_cleanup(struct image_loader *ldr)
-+{
-+	if (ldr->cleanup)
-+		ldr->cleanup(ldr);
-+
-+	ldr->read = NULL;
-+	ldr->cleanup = NULL;
-+	ldr->priv = NULL;
-+	ldr->nr_regions = 0;
-+}
++struct image_loader_blk_priv {
++	struct blk_desc *desc;
++	lbaint_t part_start;
++	lbaint_t part_size;
++};
 +
 +/**
-+ * image_loader_record() - Record a region in the translation table
++ * blk_read_partial() - Read a partial sector via bounce buffer
 + *
-+ * If an entry with the same img_offset already exists and the new size
-+ * is larger, update the existing entry. Otherwise add a new entry.
++ * Reads one full sector into a stack-allocated bounce buffer, then
++ * copies @len bytes starting at byte offset @skip within that sector
++ * into @dst.
 + *
-+ * @ldr:	The image loader
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Region size
-+ * @ram:	RAM pointer where the region was loaded
-+ * Return: pointer to the region entry, or NULL if the table is full
++ * @desc:	Block device descriptor
++ * @lba:	Absolute LBA of the sector to read
++ * @skip:	Byte offset within the sector
++ * @len:	Number of bytes to copy
++ * @dst:	Destination buffer
++ * Return: 0 on success, -EIO on read failure
 + */
-+static struct image_loader_region *
-+image_loader_record(struct image_loader *ldr, ulong img_offset, ulong size,
-+		    void *ram)
++static int blk_read_partial(struct blk_desc *desc, lbaint_t lba,
++			    ulong skip, ulong len, void *dst)
 +{
-+	struct image_loader_region *r;
-+	int i;
++	ALLOC_CACHE_ALIGN_BUFFER(u8, sec, desc->blksz);
 +
-+	/* Check for an existing entry at the same base that we can extend */
-+	for (i = 0; i < ldr->nr_regions; i++) {
-+		r = &ldr->regions[i];
-+		if (r->img_offset == img_offset) {
-+			r->size = size;
-+			r->ram = ram;
-+			return r;
-+		}
-+	}
++	if (blk_dread(desc, lba, 1, sec) != 1)
++		return -EIO;
 +
-+	if (ldr->nr_regions >= CONFIG_IMAGE_LOADER_MAX_REGIONS) {
-+		log_err("image_loader: translation table full (%d regions)\n",
-+			ldr->nr_regions);
-+		return NULL;
-+	}
++	memcpy(dst, sec + skip, len);
 +
-+	r = &ldr->regions[ldr->nr_regions++];
-+	r->img_offset = img_offset;
-+	r->size = size;
-+	r->ram = ram;
-+
-+	return r;
++	return 0;
 +}
 +
-+void *image_loader_map(struct image_loader *ldr, ulong img_offset, ulong size)
++static int image_loader_blk_read(struct image_loader *ldr, ulong src,
++				 ulong size, void *dst)
 +{
-+	struct image_loader_region *r;
-+	void *p;
++	struct image_loader_blk_priv *priv = ldr->priv;
++	struct blk_desc *desc = priv->desc;
++	unsigned long blksz = desc->blksz;
++	lbaint_t lba = priv->part_start + src / blksz;
++	ulong head = src % blksz;
++	u8 *out = dst;
++	lbaint_t n;
 +	int ret;
 +
-+	/* Return existing mapping if the range is already covered */
-+	p = image_loader_lookup(ldr, img_offset, size);
-+	if (p)
-+		return p;
-+
-+	/*
-+	 * Check if we have an entry at the same base offset but smaller.
-+	 * If so, re-read the full range to the same RAM address.
-+	 */
-+	for (int i = 0; i < ldr->nr_regions; i++) {
-+		r = &ldr->regions[i];
-+		if (r->img_offset == img_offset && r->size < size) {
-+			ulong region_end;
-+
-+			ret = ldr->read(ldr, img_offset, size, r->ram);
-+			if (ret) {
-+				log_err("image_loader: read failed at offset 0x%lx (size 0x%lx): %d\n",
-+					img_offset, size, ret);
-+				return NULL;
-+			}
-+			r->size = size;
-+
-+			/* Keep alloc_ptr past the extended region */
-+			region_end = ALIGN(map_to_sysmem(r->ram) + size,
-+					   ARCH_DMA_MINALIGN);
-+			if (region_end > ldr->alloc_ptr)
-+				ldr->alloc_ptr = region_end;
-+
-+			return r->ram;
-+		}
++	/* Bounds check */
++	if (src + size > (ulong)priv->part_size * blksz) {
++		log_err("image_loader_blk: read at 0x%lx+0x%lx exceeds partition size\n",
++			src, size);
++		return -EINVAL;
 +	}
 +
-+	/* New region — allocate from scratch area */
-+	p = map_sysmem(ldr->alloc_ptr, size);
++	/* Handle unaligned head */
++	if (head) {
++		ulong chunk = min(size, blksz - head);
 +
-+	ret = ldr->read(ldr, img_offset, size, p);
-+	if (ret) {
-+		log_err("image_loader: read failed at offset 0x%lx (size 0x%lx): %d\n",
-+			img_offset, size, ret);
-+		return NULL;
++		ret = blk_read_partial(desc, lba, head, chunk, out);
++		if (ret)
++			return ret;
++
++		out += chunk;
++		size -= chunk;
++		lba++;
 +	}
 +
-+	if (!image_loader_record(ldr, img_offset, size, p))
-+		return NULL;
++	/* Aligned middle — read whole sectors directly into dst */
++	if (size >= blksz) {
++		n = size / blksz;
 +
-+	ldr->alloc_ptr = ALIGN(ldr->alloc_ptr + size, ARCH_DMA_MINALIGN);
++		if (blk_dread(desc, lba, n, out) != n)
++			return -EIO;
 +
-+	return p;
++		out += n * blksz;
++		size -= n * blksz;
++		lba += n;
++	}
++
++	/* Handle unaligned tail */
++	if (size) {
++		ret = blk_read_partial(desc, lba, 0, size, out);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
 +}
 +
-+void *image_loader_map_to(struct image_loader *ldr, ulong img_offset,
-+			  ulong size, void *dst)
++static void image_loader_blk_cleanup(struct image_loader *ldr)
 +{
++	free(ldr->priv);
++}
++
++int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
++			  const char *dev_part_str)
++{
++	struct image_loader_blk_priv *priv;
++	struct blk_desc *desc;
++	struct disk_partition info;
 +	int ret;
 +
-+	/* If already mapped to this exact destination, return it */
-+	void *p = image_loader_lookup(ldr, img_offset, size);
++	ret = part_get_info_by_dev_and_name_or_num(ifname, dev_part_str,
++						   &desc, &info, 0);
++	if (ret < 0)
++		return ret;
 +
-+	if (p && p == dst)
-+		return p;
++	priv = malloc(sizeof(*priv));
++	if (!priv)
++		return -ENOMEM;
 +
-+	ret = ldr->read(ldr, img_offset, size, dst);
-+	if (ret) {
-+		log_err("image_loader: read failed at offset 0x%lx (size 0x%lx): %d\n",
-+			img_offset, size, ret);
-+		return NULL;
-+	}
++	priv->desc = desc;
++	priv->part_start = info.start;
++	priv->part_size = info.size;
 +
-+	if (!image_loader_record(ldr, img_offset, size, dst))
-+		return NULL;
++	ldr->read = image_loader_blk_read;
++	ldr->cleanup = image_loader_blk_cleanup;
++	ldr->priv = priv;
 +
-+	return dst;
++	return 0;
 +}
 diff --git a/include/image-loader.h b/include/image-loader.h
-new file mode 100644
-index 00000000000..e273b1ca50f
---- /dev/null
+index e273b1ca50f..1a9048ba482 100644
+--- a/include/image-loader.h
 +++ b/include/image-loader.h
-@@ -0,0 +1,141 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * On-demand image loading from storage
-+ *
-+ * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-+ */
-+
-+#ifndef __IMAGE_LOADER_H
-+#define __IMAGE_LOADER_H
-+
-+#include <linux/types.h>
-+
+@@ -138,4 +138,24 @@ void *image_loader_map(struct image_loader *ldr, ulong img_offset,
+ void *image_loader_map_to(struct image_loader *ldr, ulong img_offset,
+ 			  ulong size, void *dst);
+ 
 +/**
-+ * struct image_loader_region - One mapped region of the image
++ * image_loader_init_blk() - Initialise loader for a block device partition
 + *
-+ * Records the fact that image bytes [img_offset, img_offset + size)
-+ * have been loaded into RAM at address @ram.
++ * Resolves the partition using @ifname and @dev_part_str, then installs
++ * a .read() callback that translates byte-offset reads into blk_dread()
++ * calls. The dev_part_str accepts the same formats as
++ * part_get_info_by_dev_and_name_or_num():
 + *
-+ * @img_offset:	Start offset within the source image (bytes)
-+ * @size:	Region size (bytes)
-+ * @ram:	RAM pointer where this region was loaded
-+ */
-+struct image_loader_region {
-+	ulong img_offset;
-+	ulong size;
-+	void *ram;
-+};
-+
-+struct image_loader;
-+
-+/**
-+ * image_loader_read_fn - Read data from a storage device
++ *   "0:4"        partition 4 on device 0
++ *   "0#kernel"   partition named "kernel" on device 0
++ *   "0:1"        partition 1 on device 0
 + *
-+ * @ldr:	The image loader instance
-+ * @src:	Byte offset within the source image
-+ * @size:	Number of bytes to read
-+ * @dst:	Destination buffer in RAM
++ * @ldr:		The image loader to initialise
++ * @ifname:		Block interface name (e.g. "mmc", "scsi")
++ * @dev_part_str:	Device and partition specification
 + * Return: 0 on success, negative errno on failure
 + */
-+typedef int (*image_loader_read_fn)(struct image_loader *ldr, ulong src,
-+				    ulong size, void *dst);
++int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
++			  const char *dev_part_str);
 +
-+/**
-+ * image_loader_cleanup_fn - Release backend resources
-+ *
-+ * Called by image_loader_cleanup() to free any backend-specific state
-+ * such as allocated priv structs or held device references.
-+ *
-+ * @ldr:	The image loader instance
-+ */
-+typedef void (*image_loader_cleanup_fn)(struct image_loader *ldr);
-+
-+/**
-+ * struct image_loader - On-demand image loading from storage
-+ *
-+ * Provides a generic abstraction for reading image data from a storage
-+ * device on demand. A translation table maps regions of the source
-+ * image that have already been loaded to their RAM addresses, avoiding
-+ * redundant reads.
-+ *
-+ * @read:	Backend read callback
-+ * @cleanup:	Optional backend cleanup callback
-+ * @priv:	Opaque backend-specific context
-+ * @regions:	Translation table of loaded regions
-+ * @nr_regions:	Number of entries currently used in @regions
-+ * @alloc_ptr:	Next free RAM address for scratch allocations
-+ */
-+struct image_loader {
-+	image_loader_read_fn read;
-+	image_loader_cleanup_fn cleanup;
-+	void *priv;
-+	struct image_loader_region regions[CONFIG_IMAGE_LOADER_MAX_REGIONS];
-+	int nr_regions;
-+	ulong alloc_ptr;
-+};
-+
-+/**
-+ * image_loader_lookup() - Look up an already-mapped region
-+ *
-+ * Checks the translation table to see if the requested range
-+ * [img_offset, img_offset + size) is fully contained within a
-+ * previously loaded region.
-+ *
-+ * @ldr:	The image loader
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Number of bytes needed
-+ * Return: RAM pointer on hit, NULL on miss (does not trigger a read)
-+ */
-+void *image_loader_lookup(struct image_loader *ldr, ulong img_offset,
-+			  ulong size);
-+
-+/**
-+ * image_loader_cleanup() - Release all backend resources
-+ *
-+ * Calls the backend cleanup callback (if set) and resets the loader
-+ * state so it can be safely re-initialised or discarded. Should be
-+ * called when the boot attempt is finished, whether it succeeded or
-+ * not.
-+ *
-+ * @ldr:	The image loader to clean up
-+ */
-+void image_loader_cleanup(struct image_loader *ldr);
-+
-+/**
-+ * image_loader_map() - Ensure an image region is accessible in RAM
-+ *
-+ * If the region is already in the translation table, returns the
-+ * existing RAM pointer. Otherwise allocates RAM at @ldr->alloc_ptr,
-+ * reads the data from storage, records the mapping, advances the
-+ * allocation pointer (aligned to ARCH_DMA_MINALIGN), and returns the
-+ * new pointer.
-+ *
-+ * If the requested range starts at the same offset as an existing
-+ * region but is larger, the existing region is extended in place
-+ * (re-read to the same RAM base, size updated).
-+ *
-+ * @ldr:	The image loader
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Number of bytes needed
-+ * Return: RAM pointer on success, NULL on failure
-+ */
-+void *image_loader_map(struct image_loader *ldr, ulong img_offset,
-+		       ulong size);
-+
-+/**
-+ * image_loader_map_to() - Load an image region to a specific RAM address
-+ *
-+ * Like image_loader_map() but reads into a caller-specified address
-+ * instead of allocating from the scratch area. Used when the sub-image
-+ * has a known load address for a zero-copy path.
-+ *
-+ * @ldr:	The image loader
-+ * @img_offset:	Byte offset within the source image
-+ * @size:	Number of bytes to load
-+ * @dst:	Destination address in RAM
-+ * Return: @dst on success, NULL on failure
-+ */
-+void *image_loader_map_to(struct image_loader *ldr, ulong img_offset,
-+			  ulong size, void *dst);
-+
-+#endif /* __IMAGE_LOADER_H */
+ #endif /* __IMAGE_LOADER_H */
 -- 
 2.53.0
