@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C528AE83837
-	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:23:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE1EDE83836
+	for <u-boot@archiver.kernel.org>; Mon, 16 Feb 2026 21:24:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EA7383DDD;
-	Mon, 16 Feb 2026 22:23:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FE8883DFF;
+	Mon, 16 Feb 2026 22:23:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAB328063E; Mon, 16 Feb 2026 22:22:19 +0100 (CET)
+ id 90B7283AAB; Mon, 16 Feb 2026 22:22:37 +0100 (CET)
 Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
  [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C38E083AA9
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:22:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B52BA8063E
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 22:22:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
@@ -26,8 +26,8 @@ Authentication-Results: phobos.denx.de;
 Received: from local
  by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
  (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vs62c-000000002ex-1sVD; Mon, 16 Feb 2026 21:22:02 +0000
-Date: Mon, 16 Feb 2026 21:21:58 +0000
+ id 1vs62r-000000002gW-456D; Mon, 16 Feb 2026 21:22:18 +0000
+Date: Mon, 16 Feb 2026 21:22:14 +0000
 From: Daniel Golle <daniel@makrotopia.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
@@ -57,8 +57,8 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de
 Cc: John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: [RFC PATCH 05/20] cmd: ubi: export ubi_find_volume()
-Message-ID: <5511a9a0d434c3b69f1625f9f4bfd8e99151bc1a.1771275704.git.daniel@makrotopia.org>
+Subject: [RFC PATCH 06/20] mtd: set flash_node on DT-created partitions
+Message-ID: <e21bf2c12eb5a4b7954f50c8739655d749e6d38e.1771275704.git.daniel@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -81,56 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the static qualifier from ubi_find_volume() and add a
-declaration to include/ubi_uboot.h so that other translation units
-can look up a UBI volume by name.
+add_mtd_partitions_of() creates MTD partition slaves from device-tree
+sub-nodes but never stores the originating ofnode on the partition.
+This means there is no way to match a registered MTD partition back
+to its DT node.
 
-The function now refers to ubi_devices[0] directly instead of the
-file-local 'ubi' pointer, and takes a const char * for the volume
-name.
+Set slave->flash_node = child right after allocate_partition() so
+that every DT-created partition carries a reference to its DT node.
+This will be used by the image_loader UBI backend to find the MTD
+partition that corresponds to a 'compatible = "linux,ubi"' node.
 
 Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 ---
- cmd/ubi.c           | 10 +++++++---
- include/ubi_uboot.h |  1 +
- 2 files changed, 8 insertions(+), 3 deletions(-)
+ drivers/mtd/mtdpart.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/cmd/ubi.c b/cmd/ubi.c
-index 93de6f3aea2..ca7d657aa07 100644
---- a/cmd/ubi.c
-+++ b/cmd/ubi.c
-@@ -247,13 +247,17 @@ static int ubi_create_vol(char *volume, int64_t size, int dynamic, int vol_id,
- 	return ubi_create_volume(ubi, &req);
- }
+diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
+index f3b7f1ee13c..eac7215907b 100644
+--- a/drivers/mtd/mtdpart.c
++++ b/drivers/mtd/mtdpart.c
+@@ -940,6 +940,8 @@ int add_mtd_partitions_of(struct mtd_info *master)
+ 		if (IS_ERR(slave))
+ 			return PTR_ERR(slave);
  
--static struct ubi_volume *ubi_find_volume(char *volume)
-+struct ubi_volume *ubi_find_volume(const char *volume)
- {
-+	struct ubi_device *dev = ubi_devices[0];
- 	struct ubi_volume *vol;
- 	int i;
- 
--	for (i = 0; i < ubi->vtbl_slots; i++) {
--		vol = ubi->volumes[i];
-+	if (!dev)
-+		return NULL;
++		slave->flash_node = child;
 +
-+	for (i = 0; i < dev->vtbl_slots; i++) {
-+		vol = dev->volumes[i];
- 		if (vol && !strcmp(vol->name, volume))
- 			return vol;
- 	}
-diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
-index ea0db69c72a..92892704d0a 100644
---- a/include/ubi_uboot.h
-+++ b/include/ubi_uboot.h
-@@ -50,6 +50,7 @@ extern void ubi_exit(void);
- extern int ubi_part(char *part_name, const char *vid_header_offset);
- extern int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size);
- extern int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size);
-+struct ubi_volume *ubi_find_volume(const char *volume);
- 
- extern struct ubi_device *ubi_devices[];
- int cmd_ubifs_mount(char *vol_name);
+ 		mutex_lock(&mtd_partitions_mutex);
+ 		list_add_tail(&slave->node, &master->partitions);
+ 		mutex_unlock(&mtd_partitions_mutex);
 -- 
 2.53.0
