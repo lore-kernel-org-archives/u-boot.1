@@ -4,65 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4ABCE68149
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 09:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3FA0E68156
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 09:50:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D42483C32;
-	Tue, 17 Feb 2026 10:28:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id CF7E183981;
+	Tue, 17 Feb 2026 10:50:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="evP79hMi";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rAll4mOO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 733B083C61; Tue, 17 Feb 2026 10:28:04 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id 2BA0283C32; Tue, 17 Feb 2026 10:50:28 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 475178063E
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 10:28:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB9D18063E
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 10:50:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=romain.gantois@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id ACC594E40EF7;
- Tue, 17 Feb 2026 09:28:00 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 789BB606D1;
- Tue, 17 Feb 2026 09:28:00 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 73A4B10368945; Tue, 17 Feb 2026 10:27:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1771320479; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=yJGomfxQTxejRa9DS/2OpPxmIQgsHLeQboKCBeMID10=;
- b=evP79hMiR7yV7ga1oFtaF0wiRrm5zoqsidvoGhazxZsGdD+iSRnnTXrs1h1gCVSVaRu0Xl
- E2doP2ziRpAb+expphD0KuwXwPNeTUH+zdToBCxBr2kwjrCkVt0rdqCkI1Yudh7E0mWEZU
- dyashwoeiR7I3faby5aqzZ9snjj5NnKxLX4GSv/WxjRWoMmvoewGY2scNYT70/SF5FNCmb
- pQxlRU9Yaq8Ovfr/+QmzWfZuCYiH+rp9mrtElvwkfknQuEyUAIJKPwCZnSjxgpIgyXZ2pL
- TfGR0gXhmidEGVxFXML1FKVKUf5yOp0uJJonT1lUPo1YWdgzYULVid55fP9qCg==
-From: Romain Gantois <romain.gantois@bootlin.com>
-Date: Tue, 17 Feb 2026 10:27:52 +0100
-Subject: [PATCH v2] dm: core: Don't allow ofnode_to_fdt() to return NULL
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9494B60126;
+ Tue, 17 Feb 2026 09:50:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE144C4CEF7;
+ Tue, 17 Feb 2026 09:50:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1771321824;
+ bh=F/Mj/faGVgkEigBily7ty/pejSrjeU4kM/u1+nmfuTc=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=rAll4mOOjJkHEa0NP1KYfBaH5TFGbILrCY2ZU2QJlUdV5lJqPcuPq94e2Yq2pOQR2
+ bWKXdijVlp2JDbxbPs2mRdP2gLR7rZSqVdW7ne5msZd8obew+01xPyh7p2i2QCihov
+ FbNIQF8WMrOn3co99DjBeHVTyn8eN1v8Iev0rJ0XfsJ6OUYIOGsTww0K7FjY40Q3OF
+ FoSTYlNcPNbf9nTZri2iVHv8U4ZmWkOZJxq2HgvXcBmt+M89iTCdRaeOgupMOa9jQq
+ kPq8nBUfvLWwTdlJOpH8CFbUb6bTjQz/jB5Mp5LIF+zpEL/jZylWtnAYLInznDxfTn
+ 1GfpwBNXhPOOw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Jerome Forissier <jerome.forissier@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan
+ <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH] cmd: mmc: Drop trailing space in Name: before newline
+In-Reply-To: <20260208145142.10341-1-marek.vasut+renesas@mailbox.org>
+References: <20260208145142.10341-1-marek.vasut+renesas@mailbox.org>
+Date: Tue, 17 Feb 2026 10:50:21 +0100
+Message-ID: <87ms17k8bm.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260217-ofnode-to-fdt-null-v2-1-915e627d201b@bootlin.com>
-X-B4-Tracking: v=1; b=H4sIAJc0lGkC/32NQQ6CMBBFr0Jm7Zi2CoIr72FYAJ3KJNghbSUaw
- t2tHMDle8l/f4VIgSnCtVgh0MKRxWcwhwKGsfMPQraZwShTKaMVivNiCZOgswn9a5qwKbvGncp
- LrRuCPJwDOX7v0XubeeSYJHz2j0X/7N/colHjuSdr6qpWOXzrRdLE/jjIE9pt276thxmgtgAAA
- A==
-X-Change-ID: 20260210-ofnode-to-fdt-null-95a9f357819e
-To: u-boot@lists.denx.de
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
- Yannick Fertre <yannick.fertre@foss.st.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Romain Gantois <romain.gantois@bootlin.com>
-X-Mailer: b4 0.14.3
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,59 +69,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ofnode_to_fdt() function may return a NULL pointer in multiple cases.
-Or, this function's return value is often passed directly to functions such
-as fdt_getprop() which end up dereferencing it, thus causing a NULL pointer
-exception.
+Hi Marek,
 
-Don't allow ofnode_to_fdt() to return NULL, to avoid a NULL pointer
-dereference.
+Thank you for the patch.
 
-Reviewed-by: Raphaël Gallais-Pou <raphael.gallais-pou@foss.st.com>
-Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
----
-Changes in v2:
-- Added back a dropped cast from cont void* to void*
-- Link to v1: https://lore.kernel.org/r/20260210-ofnode-to-fdt-null-v1-1-4bed28680f35@bootlin.com
----
- drivers/core/ofnode.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+On Sun, Feb 08, 2026 at 15:51, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index cf1cf8abfbe..3a36b6fdd03 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -164,15 +164,20 @@ void *ofnode_lookup_fdt(ofnode node)
- 
- void *ofnode_to_fdt(ofnode node)
- {
-+	void *fdt;
-+
- #ifdef OF_CHECKS
- 	if (of_live_active())
--		return NULL;
-+		panic("%s called with live tree in use!\n", __func__);
- #endif
- 	if (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) && ofnode_valid(node))
--		return ofnode_lookup_fdt(node);
-+		fdt = ofnode_lookup_fdt(node);
-+	else
-+		fdt = (void *)gd->fdt_blob;
-+
-+	assert(fdt);
- 
--	/* Use the control FDT by default */
--	return (void *)gd->fdt_blob;
-+	return fdt;
- }
- 
- /**
+> The Name: line of 'mmc info' command prints a trailing space before
+> newline. This is not useful and shows up as trailing space e.g. when
+> the output is checked into documentation. Remove the trailing space.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
----
-base-commit: 8666b16015d4212facacc514e2eb626f3630dcf0
-change-id: 20260210-ofnode-to-fdt-null-95a9f357819e
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-Best regards,
--- 
-Romain Gantois <romain.gantois@bootlin.com>
-
+> ---
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Jerome Forissier <jerome.forissier@arm.com> <jerome@forissier.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yao Zi <me@ziyao.cc>
+> Cc: u-boot@lists.denx.de
+> ---
+>  cmd/mmc.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/cmd/mmc.c b/cmd/mmc.c
+> index 6cb1ef5dc23..81b1ca4ad84 100644
+> --- a/cmd/mmc.c
+> +++ b/cmd/mmc.c
+> @@ -29,12 +29,12 @@ static void print_mmcinfo(struct mmc *mmc)
+>  	printf("Manufacturer ID: %x\n", mmc->cid[0] >> 24);
+>  	if (IS_SD(mmc)) {
+>  		printf("OEM: %x\n", (mmc->cid[0] >> 8) & 0xffff);
+> -		printf("Name: %c%c%c%c%c \n", mmc->cid[0] & 0xff,
+> +		printf("Name: %c%c%c%c%c\n", mmc->cid[0] & 0xff,
+>  		(mmc->cid[1] >> 24), (mmc->cid[1] >> 16) & 0xff,
+>  		(mmc->cid[1] >> 8) & 0xff, mmc->cid[1] & 0xff);
+>  	} else {
+>  		printf("OEM: %x\n", (mmc->cid[0] >> 8) & 0xff);
+> -		printf("Name: %c%c%c%c%c%c \n", mmc->cid[0] & 0xff,
+> +		printf("Name: %c%c%c%c%c%c\n", mmc->cid[0] & 0xff,
+>  		(mmc->cid[1] >> 24), (mmc->cid[1] >> 16) & 0xff,
+>  		(mmc->cid[1] >> 8) & 0xff, mmc->cid[1] & 0xff,
+>  		(mmc->cid[2] >> 24));
+> -- 
+> 2.51.0
