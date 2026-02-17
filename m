@@ -4,60 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05B3AE6817C
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 12:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 871CDE68171
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 13:03:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4858F8063E;
-	Tue, 17 Feb 2026 13:46:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CB2B58063E;
+	Tue, 17 Feb 2026 14:02:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iN6lPzRL";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D18983AC5; Tue, 17 Feb 2026 13:46:44 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 0C6AB83AC5; Tue, 17 Feb 2026 14:02:53 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BDED80325
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 13:46:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id E9CD880325
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 14:02:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D8F7441917;
- Tue, 17 Feb 2026 12:46:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6C316C4CEF7;
- Tue, 17 Feb 2026 12:46:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771332400;
- bh=W726zx8risFA72+mX19XknK2SjgoAQXbF8+yhY0Yfd0=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=iN6lPzRL7+ZUDNFIQQkcTkUbqurXw1dvgRWEMdIQq80hxztBTZZw86iAdoKGSWaMD
- CC0RT1dmUtt/W6Bj5JJVIQgImxmemFxbTWuocJiTv6Zf6Mxr2ergxKhoWmZ49eNgrF
- 96nR+3vd7BYDiA42lY6EwKqr7pFApXtsv8Hql3MMxJefcLhxtPa0s5GE1gNjqjtb+W
- TzvI9HXdCZneoAFZ38WhhjNJ5CFB7WjEPqbJSNP2QajFuiXvbAGlJVn4JNTYFQ+KhS
- F2EUu9OdCaYcuXnP9irEdyOgw+kk6BOGPToC2kk+Yb70PmKJ1gR9jH4p5bCgVl0Axq
- DxCW3oRwurLBA==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Heiko Schocher <hs@nabladev.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>, Fabio Estevam
- <festevam@gmail.com>
-Cc: Adrian Freihofer <adrian.freihofer@siemens.com>, Heiko Schocher
- <hs@nabladev.com>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Stefano Babic <sbabic@nabladev.com>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH v3 2/2] arch: imx8qxp: Override weak
- fb_mmc_get_boot_offset function
-In-Reply-To: <20260217103604.71029-3-hs@nabladev.com>
-References: <20260217103604.71029-1-hs@nabladev.com>
- <20260217103604.71029-3-hs@nabladev.com>
-Date: Tue, 17 Feb 2026 13:46:38 +0100
-Message-ID: <87h5rfk05t.fsf@kernel.org>
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1vsKiW-000000006Zp-427T; Tue, 17 Feb 2026 13:02:17 +0000
+Date: Tue, 17 Feb 2026 13:02:12 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ David Lechner <dlechner@baylibre.com>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
+Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand
+ FIT loading
+Message-ID: <aZRm1DVkEgUtInqt@makrotopia.org>
+References: <cover.1771275704.git.daniel@makrotopia.org>
+ <49aa54f6-78a0-4eb4-bd60-d7e17263e586@mailbox.org>
+ <aZPB8o9bvkNNpGT6@makrotopia.org>
+ <dd636864-2e3e-4701-9e42-fd32353afe92@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <dd636864-2e3e-4701-9e42-fd32353afe92@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,29 +84,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 17, 2026 at 11:36, Heiko Schocher <hs@nabladev.com> wrote:
+On Tue, Feb 17, 2026 at 03:04:09AM +0100, Marek Vasut wrote:
+> On 2/17/26 2:18 AM, Daniel Golle wrote:
+> > Hi Marek,
+> > 
+> > thanks for taking a look at the series!
+> > 
+> > Let me reply inline below:
+> > 
+> > On Mon, Feb 16, 2026 at 11:16:24PM +0100, Marek Vasut wrote:
+> > > On 2/16/26 10:21 PM, Daniel Golle wrote:
+> > > 
+> > > Hi,
+> > > 
+> > > > This RFC series adds a new boot method for OpenWrt's "uImage.FIT with
+> > > > embedded rootfs" firmware model, along with the underlying infrastructure
+> > > > to load FIT images on-demand directly from storage devices without copying
+> > > > them entirely to RAM first.
+> > > > 
+> > > > I would like to discuss the design with U-Boot maintainers and fellow
+> > > > OpenWrt developers before submitting a formal patch series.
+> > > 
+> > > [...]
+> > > 
+> > > > 4. On-demand loading: None of the existing methods support loading FIT
+> > > >      subimages directly from storage. OpenWrt's FIT images typically
+> > > >      contain a 5-20 MB squashfs that does NOT need to be copied to RAM —
+> > > >      the kernel maps it directly from flash. The bootloader only needs
+> > > >      to load the kernel and DTB (~5-10 MB), not the entire 20-50 MB
+> > > >      container. This requires a new loading abstraction.
+> > > 
+> > > Isn't this partial loading exactly what SPL does when the fitImage is
+> > > generated with external data (mkimage -E) ? SPL loads and traverses the
+> > > tree, and then loads the remaining chunks (files) only when needed if I
+> > > recall it right ?
+> > 
+> > Yes, the image_loader abstraction in this series is essentially the
+> > main-U-Boot equivalent of SPL's spl_load_info.read(), adapted for the
+> > richer set of storage backends, byte-addressed, providing an interface
+> > for both "load this to where ever" and "load this to a specific target
+> > address" (image_loader_map() vs. image_loader_map_to()), and the full
+> > fit_image_load() verification pipeline. The integration point in
+> > fit_image_load() (patch 09/20) is ~50 lines of new code gated by if
+> > (images->loader && external_data) - it reuses all existing FIT property
+> > parsing, load address negotiation, and hash verification unchanged.
+> > 
+> > That said, the image_loader abstraction itself is format-agnostic - it
+> > only deals with byte offsets, lengths, and RAM destinations. The same
+> > three storage backends could be wired into other executable formats with
+> > minimal effort, such as ELF, legacy uImage or UEFI PE.
+> > 
+> > Likewise, adding a backend based on fs_read() would be trivial,
+> > extending U-Boot's wget to support range requests and using it as
+> > image_loader backend would not be hard either.
+> > 
+> > > Can that SPL code be reused instead ?
+> > 
+> > I considered factoring out a shared "FIT external data reader" between
+> > SPL and U-Boot proper, but the two callers want fundamentally different
+> > things: SPL wants minimal code size and populates spl_image_info; U-Boot
+> > proper wants full verification and populates bootm_headers.
+> 
+> I suspect the feature set of each loading stage can be configured e.g. using
+> "if (IS_ENABLED(...))" to keep the size under control ?
+> 
+> I would be very happy if we could have ONE consistent code base used for
+> loading in all of TPL/SPL/U-Boot . Custom special loader in U-Boot and
+> different special loader in SPL and so on, will only lead to inconsistency
+> and increased maintenance burden. Worse, it will lead to obscure bugs which
+> will differ between U-Boot and SPL, or bugs being fixed in one and not the
+> other.
 
-> From: Adrian Freihofer <adrian.freihofer@siemens.com>
->
-> Add IMX8QXP SoCs specific implementation of fb_mmc_get_boot_offset()
->
-> This is needed as bootloader offset is different dependent on SoC
-> revision!
->
-> For revision B0 the bootloader starts at 32k offset. On offset
-> 0x0 the bootloaders environment is stored.
->
-> On C0 revisions of the SoC bootloader image starts at offset 0x0
->
-> Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-> Signed-off-by: Heiko Schocher <hs@nabladev.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+This implies changing the parameter "ulong sector" to a byte offset,
+which means all existing readers and users will have to be changed as
+well, and also code to deal with unaligned start offsets will have to be
+added. Other than that it's mostly a matter of adding some #ifdef-ery,
+conditionally extending struct spl_load_info with
+ - a cleanup callback function pointer
+ - alloc_ptr for bump allocator
+ - the array of already mapped regions
 
-Fabio, Peng, can one of you please Acked-by: so that I can take this
-through my tree?
+None of that is used by the readers, so the low-level spl_mmc reader
+could be reused and extended -- but it's already very messy with many
+hacks and special cases, it's own device and partition hunters, ...
+and would basically need adding almost all of the code which is currently
+in image-loader-blk.c (to handle the unaligned start offset, ...)
 
-Alternatively, please let me know if you want to pick up the series instead.
+The other SPL readers are even more unsuitable:
 
->
-> ---
->
+ - The SPI-NOR and NOR readers lack support for MTD partitions, instead
+   they are using a downstream DT property to specify *one* static offset
+   ('u-boot,spl-payload-offset')
+
+ - The UBI reader deals only with static UBI volumes, and support for UBI
+   in SPL is a light-weight minimal thing incompatible with the full UBI
+   implementation in U-Boot proper.
+
+ - The FIT reader in SPL uses a very different approach from the
+   image_loader approach I suggested. It is basically a minimal
+   implementation of a FIT parser, while I'm suggesting to glue
+   support for the image_loader into boot/image-fit.c of U-Boot proper,
+   hence keeping and reusing all of its features.
+   See patch "boot: fit: support on-demand loading in fit_image_load()".
+
+So there really isn't much overlap other than the fact that there is a
+struct with a priv pointer and a .read callback, and even that uses a
+different addressing parameter (sectors vs. bytes).
+
+Imho, trying to unite the two "with a hammer" will do more harm than good.
