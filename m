@@ -4,146 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F40BE6816B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 11:31:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8DE5E68176
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 11:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6F5783C61;
-	Tue, 17 Feb 2026 12:31:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 25A0183C61;
+	Tue, 17 Feb 2026 12:53:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hyGVfiIo";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="CR5KzrrU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A3983C72; Tue, 17 Feb 2026 12:31:01 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
+ id 8619F83AA9; Tue, 17 Feb 2026 12:53:42 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FC9283C32
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 12:30:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BF8483AA9
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 12:53:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
+ dmarc=pass (p=reject dis=none) header.from=mt.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GejthK4f2b9wknZFn7PrRHUs0KCSJhpp/waQfvHpWUNBTz7zdkdczLOPAEuQtOHKR0Vsa7OzXTlI0pJXXLDaTGflSjmpjVeOvh1tNq5taUX7SOQV4DozyJK+XSfIsaddmyEYu4puFPl8ZiN+UjPyPh2gIiGfI3RHvArubJ7hcgVV2PBVtYjrTBAsRPmGnuAQHQ/s9RCqBgW8RgPLI9B4vOW1Ufmlh1cJ2+5i7HHQLHLKcj7rz9dTwFu/O7EI3IfuNoMLhuh9Mvy9lYDGKYD0m+M3kTjhKK6CVtH0kmgImLGuE04SThtH47WGgBLDqTmoRBye1f7JQw43gfniLiobxg==
+ b=NcnkvnQaYQyUo+iI1k36oGMFn6cYZEjjutrwTaH+1tC002bIm8JwfB+7sBCBChABvuR2HHI1b8YG4hMXIyhT6lZVNOd6sST3dpsTYhiWD7hUUA3egBEVCTYfVivAFX8ZI9pDXX9BgxbLORf6aCO7b4BfhoupkLfaY2Hc30N9pHawbJTddX9UCBIdGgaqJusxQ0omw+9Zm754rzwBDf4+/y6RxmoRNqCdKcTnbY89yPfkICSmN+O8pjABJJcasnVRgmwbsTw61usWt6x1NWYxcOBjIjOPQtjCmFD0bH3OVC2ry0J5LCaiVnipLuBCtzkJktsN0xCmyIBDFg2A4eSE5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CnEbBoBJtjgYovAaLbepRyG8VV4ficOMK42YEstghM0=;
- b=Jpu11tzhHoN4D3FTC9WC0JheZ+pv/2EO+TOqmY9vy8DiCjMYh0oXM8gmid5xZPZBQwFjF5AfkLdxwaMXqfyiH1lxhPTllNwKmit3bg7MjK30fMv+Q5oInAwaz+b48B2+DzTGk81epCsixFiZYFS3wvF24tNm3rCHMdJKl1Df3m6CjEUPE/A9E0V5syunCP/MKu+ZQAs+UP1500Z3tUwHh1bMzkjJzGWd4qSzjW+0rkguTOR4RzjL4zZrfcr4nFIo4s3D4QI4jcsRICzuS0WC92nUnFZPcamK6YYuuWvmOzy2SvRThEm+mCrmwmabmS9SRNnpB36JfsUO5KqjULk6cQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=AZcgDlMtHqaxl/bk1Yi/RUlXoB1ciBC+cqmNTXoOsr0=;
+ b=Z6/PoTlP3HDtWJwaixIpqHSDDQaYuxsjoHLJFIKCK7VeHGIRczSHb9vGZiEJEnVU1IEGIHkpqZTb5RUz2r3mTEFwrCOQLN3+tnOcnRMqQUdHkrDlzDLOf1+qGN6Ztda1aC6ZOXO0IztqMHLW3EhB5UH9y4Syjw2IyX3AZ2Vpp1LhKQsmj7NmwnzxiC5kxT6yeQgJyWitHscfZDGJ7Zekk8ktk+ROIaC37wEpeEEkE31suT2D5WhHAEiiRN/LhB2JTNwgZ9dSnI3tnjdtQ9VSZU9Izbe6kecgITqZ8mOKHNlAGXKMQmxfs40EhejmzQcx83GzpDig9rSQR27jGqGmtQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
+ header.d=mt.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CnEbBoBJtjgYovAaLbepRyG8VV4ficOMK42YEstghM0=;
- b=hyGVfiIocSeFj1yGc180C/wNg8Pdq1/MBUSa0j3h0nNY1XJ+LGVHm21bbiOEhhWeT6f6I1xfRPMbXoruHta9Ydt0ZzwSmJRWf1Ub/ZMLaCJFfu0eCpfla2DBvU9DeEZ7fZt/4sPuPRFMV4VGa9Vzk1TdMKOID36AM2kDk5ltG6g=
-Received: from CH2PR14CA0031.namprd14.prod.outlook.com (2603:10b6:610:56::11)
- by SA3PR10MB7096.namprd10.prod.outlook.com (2603:10b6:806:306::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.13; Tue, 17 Feb
- 2026 11:30:47 +0000
-Received: from CH1PEPF0000AD7A.namprd04.prod.outlook.com
- (2603:10b6:610:56:cafe::58) by CH2PR14CA0031.outlook.office365.com
- (2603:10b6:610:56::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.13 via Frontend Transport; Tue,
- 17 Feb 2026 11:30:47 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CH1PEPF0000AD7A.mail.protection.outlook.com (10.167.244.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Tue, 17 Feb 2026 11:30:47 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Feb
- 2026 05:30:46 -0600
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Feb
- 2026 05:30:46 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 17 Feb 2026 05:30:46 -0600
-Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [10.24.51.206] (may be
- forged))
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61HBUgva3273085;
- Tue, 17 Feb 2026 05:30:43 -0600
-From: Anurag Dutta <a-dutta@ti.com>
-To: <jagan@amarulasolutions.com>, <trini@konsulko.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <boon.khai.ng@altera.com>, <a-dutta@ti.com>, <s-k6@ti.com>,
- <gehariprasath@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH] mtd: spinand: winbond: Fix oob_layout for W25N01JW
-Date: Tue, 17 Feb 2026 17:00:42 +0530
-Message-ID: <20260217113042.277239-1-a-dutta@ti.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+ bh=AZcgDlMtHqaxl/bk1Yi/RUlXoB1ciBC+cqmNTXoOsr0=;
+ b=CR5KzrrU1UxIz+/P0ohOzELLQRgoCzJ5TX3kGHGxAiVFG5MXTz2jM98mNowofjJbI37NB2/m2fmgAxnZLiEgEmRB1B6fwzAcJJcBiStAqxAzJ7lmq3Q7EFJAOIfKY3PEd1YoVbPSA14TQe3mkpK4dsNC67/HxJKMWz35UH2BQN9T/7+0ZGYRe/9a9QfXHRe9QP+hmS12EbXQ7LyiAYFvzUeVHiziMgGR+qEYKYmkwldZNYNFkkMkl63wN/wTOGbLEH8dzhN8EpjlS0WzTwRv2UrjgX1s/g9sqLsp8bIdD67e/x25jhpdzkY147H0np3DYv4Yrap2nfN81oBURJJTww==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mt.com;
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
+ by DBBPR03MB6761.eurprd03.prod.outlook.com (2603:10a6:10:1f4::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Tue, 17 Feb
+ 2026 11:53:36 +0000
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9611.012; Tue, 17 Feb 2026
+ 11:53:36 +0000
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+To: u-boot@lists.denx.de
+Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, simon.glass@canonical.com, quentin.schulz@cherry.de
+Subject: [PATCH v6 0/6] UEFI Capsule - PKCS11 Support
+Date: Tue, 17 Feb 2026 12:53:26 +0100
+Message-ID: <20260217115333.503359-1-Wojciech.Dubowik@mt.com>
+X-Mailer: git-send-email 2.47.3
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: ZR0P278CA0151.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:41::12) To DB9PR03MB7180.eurprd03.prod.outlook.com
+ (2603:10a6:10:22d::13)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7A:EE_|SA3PR10MB7096:EE_
-X-MS-Office365-Filtering-Correlation-Id: d96fe020-0c38-4e18-89ca-08de6e17fed1
+X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|DBBPR03MB6761:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6dd06320-485a-41c3-e5bd-08de6e1b2ea2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?apve49lyUbC0Kv50KIqZocBq9Kzv7V+FROlMkmJng5kUuR3GMPCMiw76hFs8?=
- =?us-ascii?Q?wnFwKzqk35s7d6vDvRcr3RiGcoR4fptdhIZ3oqtPLGyMi6bs12kRXBlPjclM?=
- =?us-ascii?Q?jkjPhE1H47GR84zidCs8tEgsn2vK4OoYNlVPgBWi8mZk/K6IAS4PfpGn57B0?=
- =?us-ascii?Q?4jCQHCndL64Zw3XScObdY5QlxreU1GNJUI1HhN1HQUz96HM9UtPxFKw5HgQN?=
- =?us-ascii?Q?L0f6vgcqV/xlTsSEOLeDqh4j+Kospj4c8b+QSCmEK9wWgZJQrArr9jzSX8dm?=
- =?us-ascii?Q?pxBXdrFDnwkCOs9EyjEsdJqNuKPEmX+WETVC3rH0nGDi3m4tW5fSFZ8fEoK0?=
- =?us-ascii?Q?yapKo0UPiN+EH1QkWsvwdZk7VGxXn5ykPjYAYh0YPs9L8YIY0XyudoTe+xwT?=
- =?us-ascii?Q?UyRBuafxqUiPG8c5QY7c0juofpJJ1cFwP/D0nDLzRAaq05PCzMuoHNHnQohl?=
- =?us-ascii?Q?O3whvLCje74zsyb5SzColh/yyAmg2pQTL+wJo2m655UHvyju6C7Rk+KGHSpZ?=
- =?us-ascii?Q?4Oy25bRdLWl5/beaZV7/IdS7/bLXXZjWdvH+WfV/DURmewJRLuPCfUqb0dn7?=
- =?us-ascii?Q?zJl/DHD04aNJgyd8+GUqFczfNRfqRtptc+KdMB7m3NVClc74/KG24riCK/wd?=
- =?us-ascii?Q?FqnKWbDLbFQQ9PfCPKFrY9+0fc9l4wc5U0g9TkuPFhF/q+nNZFB3g4Pr/kdu?=
- =?us-ascii?Q?Nxkw4bCYhxc/uCva7O3BY0/rSMMVWV59lYM1CtOdOBE1na/EvhkP+rKqFhde?=
- =?us-ascii?Q?LF+lkTvG9qyhB+Zx9TQUYxGuU9ZG0Yvf59d9bCbN0DqiXt7Lcy5bNZvBo3SE?=
- =?us-ascii?Q?MNYgGenBFWsnrsxhfrnOCliUp44GeUsnLK6UGxCz5Cp3bL5FJNIly2Ij0g7C?=
- =?us-ascii?Q?IS3FBNSXe80hu8hUBwxHrLJSQJr6Qx3eFIO1rYE2s5Vd5D5Z+0MsVOIRKz+m?=
- =?us-ascii?Q?0sIL68XODoMk4vgcmeQ+dxqZUrYM9iNaPLvZW/b3DDMqnxGjTsHq2D9WgFoa?=
- =?us-ascii?Q?hlqZTiXehN0rshXOGpx8m7b7wXHvkQviNOJUKk5KOkH4lTc0y3oi6vMnFwI/?=
- =?us-ascii?Q?4HpyPUiZXWS04NcAfb+Rs8QDHKHRvmIINqinzBWWeOey8E6xMk1+7wrlAMOm?=
- =?us-ascii?Q?DLD5A6z/hQN14Nzi/CjPv2l3ufoLEhKwUGtcA2uO8cnra2qxU/d0tl6y6iJ5?=
- =?us-ascii?Q?nju8FlKjXWDbOfVaNMXTcpcNSBD0ZQh8+wwc0pR5VL/d4fGyXeOJCCcueLqJ?=
- =?us-ascii?Q?Bd541vd8CMddsMV0wfowFeqJgF5F2RqAa3NgYFayNh9XPxjBEjAJ8+Qs40pN?=
- =?us-ascii?Q?h9teT/O4SnoQqr5ZqLd3ja3bzvcmncVVcMk/BiMioMfg4GDJ8xKFrSPAGxvi?=
- =?us-ascii?Q?4Iv9og1Ih/KYdTbkAuAoSHS8m79svfC9gokpSKXf2LX7bZcRpk83ZWzPS+w5?=
- =?us-ascii?Q?ozkh/ad5Jiha84bNoYqwPCRsuHcHx7Ysa+Tu21txnjTYV6Rr4Te+XaZzZG/c?=
- =?us-ascii?Q?sZRKJQX36yTARK6KIIeRqZPMsHyMJtke93058G1Pb0fpuAWs2AmQXGHcnA/i?=
- =?us-ascii?Q?Vy3IxWz1m9AQFeCC6figyvSn78DQAeVs+cdByNcBvGS4ALp7hMupyrCeYl8v?=
- =?us-ascii?Q?66VyISK8pTCC93dv3PDF9+YoN203QOrjPT+pBV10jajuxs9tKIft2/FnQ9l8?=
- =?us-ascii?Q?zW9lDQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);
+ ARA:13230040|366016|376014|52116014|1800799024|19092799006|7142099003|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?8DjShDEjkATVKG7bGuTduIXEhbog43tVQOvT+5iUYJICt6txZcl7nzD51oZl?=
+ =?us-ascii?Q?shuhdw9CnP3gESqSmZ9/3y/+WpIjwoMsmJ+U/N8vUhy1MRkpH5qV2STh+lEt?=
+ =?us-ascii?Q?MwwzVUua+zrgD4T6cjqB8HaSuDpSPDF79q2DQCB0lgDE2H+xirP9cfffvGCN?=
+ =?us-ascii?Q?auFkpQcCphWn5SDEBn/X/MUkI60FzXiATWOt5sAtoRvM3TrOn67C70LHWHSJ?=
+ =?us-ascii?Q?ifESpuZ29faP7XtXOXQ+a/1/HDt6qk2A5PLMox5DCEZMsrMJYPz9aGqtfsQx?=
+ =?us-ascii?Q?BCHv3AOBLxiaydN1XR+YyZYw5A0EbA/y7btBptSSv8soc/sR3tArVcoVqFkr?=
+ =?us-ascii?Q?FdaRs4nkp/hUmmQjIRDCmWezF2Bfu58PNYp9HbSFkJ3Z0gzkTPvXjecnMUJL?=
+ =?us-ascii?Q?nCd8V25XV/4ddZhyx6JBUgmVGvpt08zI4MZjfXGtHny4S0sE1JwJ0A5Ri3BW?=
+ =?us-ascii?Q?K4b9ccEbK4yfr9duRxuFl5H+36H21TIlOLrqjGmNcfqLepqxv3EJ5dHARrgQ?=
+ =?us-ascii?Q?BM+zq9oNaoHzuk8Z1hltS9jll3MayPkltqbtGPGYE4li3yZA6RhZlGbKjZrL?=
+ =?us-ascii?Q?YbnLl3tW7uHKc63ol/1LTkfxiBVxu4Eg86XPbs96g85C18N60BtvbwHMWdq7?=
+ =?us-ascii?Q?yp1BCyUR1T4DOKDuNJgNrP+qyw+eVeruYkmBW3kd+pkJypJTQupF5vF2AFMx?=
+ =?us-ascii?Q?ek3WS+UoeBnscdenI+TL3icMXoh7WrgEU+16UP68R33runblM16j4w+D7ys0?=
+ =?us-ascii?Q?WSCD4bKx7Fzu0SE2Gqx2NMAFAi1Dm8koVUkeVdBNCf7F5kzMnP1w0dLhq9Fu?=
+ =?us-ascii?Q?7NNMoX6cZI1aOcgwhLhkr3dkGqzc2RWwQgCU5KfyfC8yIOCPsDoe7L1gT9sk?=
+ =?us-ascii?Q?nArTvw/BFmf05BRjuxxpjGmWe7EsJ/slgkB74HFy9KHxwqWdraAtZuMfOQsX?=
+ =?us-ascii?Q?zMuzyiGxDqgcCh0wy8k6XIRJLC9WAKlHZLCXgXdQIPw1ZiV96za/nFkDVLvF?=
+ =?us-ascii?Q?umzR+Sf0pcSyeSitQUEpIOyJrblvILWQSSB0brtOI4iHLKUgoubvhViSLT9X?=
+ =?us-ascii?Q?kzmxuHVm+EYXO8AR0gIvxaUFCFNog7n0RjFvZIhhrKSSeAZaSEgcOTmitXUl?=
+ =?us-ascii?Q?hShVLWFpDwtIrydrpy6cAi4jw2bgYBpJP4Swg7OO4fALoQCU+oOBEEg6/XfU?=
+ =?us-ascii?Q?0ap91ZUNP+yBFKPTvZwa13Il+IpJy2pHeFuSEtIetLCGWug2w4qDMRlSbZ2o?=
+ =?us-ascii?Q?O8X3NnIIoOu24EAO+OXcw2zufJCw1wtq3aVptQxytRlapS8lywiEx5tJdlWg?=
+ =?us-ascii?Q?P8d77usn0cPldS6DR2e9w3FGM5sKA/Qlb1d/2HJlfYLRlmUhNCKXIAqDB3jI?=
+ =?us-ascii?Q?I2La7FM6TNtyZ8iIUatYMqtqKuaHOUcgsWv6hPPIT6vEBmFKT+WVNhMvHhEe?=
+ =?us-ascii?Q?IJl12M9MRFtHIWXRlnmPHVR6ZC+BdJqwatfUwRqHU57M0CmaDImrettZOcln?=
+ =?us-ascii?Q?WjzRf50DBu42YrHKaMs7DI3VjMILNFUZTKLJ+drdzBQIIE1E3a8kUAiZJ3FV?=
+ =?us-ascii?Q?f194Jioeu9pzBm9zm41bkFV0ZDqf0TzqWLxe2Kr5VGfOKVocNqiIJF34jlJj?=
+ =?us-ascii?Q?Jvtyqi4U/jdfjiqOSAE2kCM=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(52116014)(1800799024)(19092799006)(7142099003)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 7U7zIs4x9lM2/5HSEbiC+Jj3mZM8X5TrH9ZP+aHChvyVNa0Ix+E576kqfOS12XGHqUfiXf2yjvRN+31LMmpMUSPQKIt6aXbpiZiWvgkRaGaZ5ridIBuV92bLp2V0/nPQ0Y4tUy3LV1+puMh2HzsR/h3iJwpfu1mQWvtxA7Lwfy/a3uha+GSIxZNoEwl9R5ddyz28/w1T2yA6LbBnjvWmlyPAv8GQgEIJf6KoDZi9Pbp4NJbE0Zo5Pn89cKnG0vd+BcmjJm7JMf/TA8TuvLCeJFNNDA6k5oxxKBYTnE5er73nMPKX2I6II21ljT9jh9li3DyvwP4vPUZu/yq8Q3d+LD3xJ8CQQ4Y4s4A2M55EUBhVSGSPNOhyyc29ogUQY83lKCQNq5DWkQnptu2xj8exRev0GNJCgFbsqzfxdyHnYaYPfKdb8cLXKhvD1nC2mfQS
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2026 11:30:47.0663 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d96fe020-0c38-4e18-89ca-08de6e17fed1
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7A.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR10MB7096
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zg6ljDQc9SYbtbjXrjfRHZbNfLXHj4bQ8ibp8Im2Q5HKvprXqEccZFWT+nS4?=
+ =?us-ascii?Q?SVlbs5c+ZJcN/06NS0dwF6Wc7yikaCPaJHeOXxrE42Ie1VaHSlAdHYYFf7Fa?=
+ =?us-ascii?Q?okk3yyfAoQoRRQxYxAvQnQh7xcKG8NCuGm6yuSictZCjRKTvhIQT+xC1o+zP?=
+ =?us-ascii?Q?Wu/SojcMNsuxCogn8vJtlCXyOqrwqy2Np/wNnieQHUlSXjErLZvPhEtEKhoS?=
+ =?us-ascii?Q?/p4YX+GXPGzZE5hKrv8/p4e2j9+Bs3IsWg4A29jfAuvbMzO1v6KZXaDJxIln?=
+ =?us-ascii?Q?bs6StPDvQ68CThngqVvRWxlE03zMyjSESUBTgg8sUKM2rwzrPyf9zbSv83VN?=
+ =?us-ascii?Q?+B0fRGAY5NlkVXI2e9uKM9I2kGSgs+rZXteoxXxPYuUmol1UGJUsnlFXckmQ?=
+ =?us-ascii?Q?7hkdNzZY8kwpaPryJ2fux+3TYHy5CPanV9b7GimQQy2XS8VaQlVgC/WOW+s2?=
+ =?us-ascii?Q?YMPW5wT8bzmG82L8rID0hZ6jZd8YDXK0QJA/hLJDs36L/NZn5fJfyuY7lRKx?=
+ =?us-ascii?Q?ciA64WOCMmEIEXXxpHmTITldJ3JgTETorQ5xnMuDyQUv3TGRLsQ+P2geUmQL?=
+ =?us-ascii?Q?L8+sBpmkMV5KE6LzUZazrvHGJa9GDqspws3Zg8pdKtilJeH7UgT2arDplvn7?=
+ =?us-ascii?Q?2Er87PImJLO1bkjjeriHeaBMB5fl/FUqroJAl8h6EDSuLvvanBxHdkgH9hpH?=
+ =?us-ascii?Q?L3Jw78nqa/+BDQ3EL4kI3CrT0crgyG5hakfKnoHQIQn1n9aYiIbzdJuamO3p?=
+ =?us-ascii?Q?qg47eVWiwsDZB6JQrvHCtZBSQWb95v6xz+uBxznF9yokWRa10ej6OqRmk0Jv?=
+ =?us-ascii?Q?AiqgMTiiSnUM1WwHog+08nnRcvyb1cPV/6nrTg0YJTlMEEwWYmuuE0N8m4ob?=
+ =?us-ascii?Q?Lvnnqwrx62uczXLzDU+iE+PIDRzVkDUsY1I6Bfmn8PmOA0UpOQIFvybcL3rX?=
+ =?us-ascii?Q?gTfXSHDmfwMocNC76ZjK/2w/avC/RxWQP5jKEbO3pXTOKdaAhKM+aadcdM8L?=
+ =?us-ascii?Q?UGna5EoUxH4u5mi/LtbEZrqaPBZIRQ4UeasJ88mtsLSPfYgHznX3ezBoqMvD?=
+ =?us-ascii?Q?vGLMSgatGvHdvsv7m2ekAfeNIsK5oeCU0c9JoiIHc/RL281fkTsUdVCKO9KM?=
+ =?us-ascii?Q?6/y9NSbIqnxkL5Fs2hBqdgkmxv9B5DcUOBheM8T5QGRyqdJn6QqRg8hYV2xE?=
+ =?us-ascii?Q?hQWyhUdPwGjr01ba0PGrW3LaKWdmqhyBK/117szcmHGmjI4KyT5/gfkJhGve?=
+ =?us-ascii?Q?vgwiDL/v/YhxYY8cGE3iWmswTBoiEFcfZLVPQpS8z03f10rLQBGawCbq7kHa?=
+ =?us-ascii?Q?VmCGZRelDOD6QPYbIxmvDPkRk9Vf+YEIK9jNuPOP+gCE+uONYYOMuvD6rZkg?=
+ =?us-ascii?Q?TWTSTkW5L/ZJNArh6+6t89daO7tcfFNP17crM35OJAvLGZgNuxnCn+XeSepK?=
+ =?us-ascii?Q?3pIFznFnMQIteDB2UcoppspTz0fHFcJI/blcEcbGshC2anPhyWJHRxVaHOS9?=
+ =?us-ascii?Q?kLz7cEqjlzXJv2P8wVK8sEvjDEahXxsyGtOOQhRgiYljxs6FBe9gL/lc6coL?=
+ =?us-ascii?Q?L6vfK4a72Y7YXBZBqFetYMmzF2hEPVp4sE1bEgnczL6XyXlIqfinOHv3wS8g?=
+ =?us-ascii?Q?+pTqgF772kLhU7Zx6i+ObXrtPNIm04emR0pa5hszAPwUacAqR2b4I0QXBV78?=
+ =?us-ascii?Q?IY1uIR8ws1bkT1aaB6/7P30cEIxbd6s3HxKrS3N61+JoT4v4LJ094QTVahjI?=
+ =?us-ascii?Q?/aHg4rw4kQ=3D=3D?=
+X-OriginatorOrg: mt.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6dd06320-485a-41c3-e5bd-08de6e1b2ea2
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2026 11:53:36.0095 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: onRU+jbngttoM/+B547FagIiJhw5RlNKx43dBk8HiRXrpMqZPNQN2KD2MLugTIrqk8zHtt24EczMQqwsRLLlYA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR03MB6761
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,82 +162,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Santhosh Kumar K <s-k6@ti.com>
-
-Fix the W25N01JW's oob_layout according to the datasheet [1]
-
-[1] https://www.winbond.com/hq/product/code-storage-flash-memory/qspinand-flash/?__locale=en&partNo=W25N01JW
-
-Fixes: 2cbdd3e4491b ("mtd: spinand: Sync core code and device support with Linux 6.17-rc1")
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+Add support for pkcs11 URI's when generating UEFI capsules and
+accept URI's for certificate in dts capsule nodes.
+Example:
+export PKCS11_MODULE_PATH=<pkcs11 provider path>/libsofthsm2.so
+tools/mkeficapsule --monotonic-count 1 \
+ --private-key "pkcs11:token=EX;object=capsule;type=private;pin-source=pin.txt" \
+ --certificate "pkcs11:token=EX;object=capsule;type=cert;pin-source=pin.txt" \
+ --index 1 \
+ --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
+ "capsule-payload" \
+ "capsule.cap
+Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 ---
- drivers/mtd/nand/spi/winbond.c | 37 +++++++++++++++++++++++++++++++++-
- 1 file changed, 36 insertions(+), 1 deletion(-)
+Changes in v6:
+* mkeficapsule: use strlen instead of hardcoded values
+Changes in v5:
+* add bin wrappers in test for all external tools
+* improve error handling in python test
+* fix data types in python
+* standardize option name in mkeficapsule
+* fix typos
+Changes in v4:
+* adapt mkeficapsule python support to dump detached signature
+  for authenticated capsules
+* verify detached capsule signature with openssl after generation
+* use p11-kit to figure out location of softhsm2 library
+* fix missing long option for dumping signatures in mkeficapsule
+Changes in v3:
+* fix write file encoding, env setting and extra line in binman test
+  after review
+Changes in v2:
+* allow mixed file/pkcs11 URI as key specification in mkeficapsule
+* fix logic for accepting pkcs11 URI in binman device tree sections
+* add binman test for UEFI capsule signature where private key comes
+  from softHSM
+---
+Wojciech Dubowik (6):
+  tools: mkeficapsule: Add support for pkcs11
+  binman: Accept pkcs11 URI tokens for capsule updates
+  tools: mkeficapsule: Fix dump signature long option
+  binman: Add dump signature option to mkeficapsule
+  binman: DTS: Add dump-signature option for capsules
+  test: binman: Add test for pkcs11 signed capsule
 
-diff --git a/drivers/mtd/nand/spi/winbond.c b/drivers/mtd/nand/spi/winbond.c
-index a89aaec516b..2786d91f19b 100644
---- a/drivers/mtd/nand/spi/winbond.c
-+++ b/drivers/mtd/nand/spi/winbond.c
-@@ -171,6 +171,36 @@ static int w25n02kv_ooblayout_free(struct mtd_info *mtd, int section,
- 	return 0;
- }
- 
-+static int w25n01jw_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				  struct mtd_oob_region *region)
-+{
-+	if (section > 3)
-+		return -ERANGE;
-+
-+	region->offset = (16 * section) + 12;
-+	region->length = 4;
-+
-+	return 0;
-+}
-+
-+static int w25n01jw_ooblayout_free(struct mtd_info *mtd, int section,
-+				   struct mtd_oob_region *region)
-+{
-+	if (section > 3)
-+		return -ERANGE;
-+
-+	region->offset = (16 * section);
-+	region->length = 12;
-+
-+	/* Extract BBM */
-+	if (!section) {
-+		region->offset += 2;
-+		region->length -= 2;
-+	}
-+
-+	return 0;
-+}
-+
- static const struct mtd_ooblayout_ops w25n01kv_ooblayout = {
- 	.ecc = w25n01kv_ooblayout_ecc,
- 	.rfree = w25n02kv_ooblayout_free,
-@@ -181,6 +211,11 @@ static const struct mtd_ooblayout_ops w25n02kv_ooblayout = {
- 	.rfree = w25n02kv_ooblayout_free,
- };
- 
-+static const struct mtd_ooblayout_ops w25n01jw_ooblayout = {
-+	.ecc = w25n01jw_ooblayout_ecc,
-+	.rfree = w25n01jw_ooblayout_free,
-+};
-+
- static int w35n01jw_ooblayout_ecc(struct mtd_info *mtd, int section,
- 				  struct mtd_oob_region *region)
- {
-@@ -399,7 +434,7 @@ static const struct spinand_info winbond_spinand_table[] = {
- 					      &write_cache_variants,
- 					      &update_cache_variants),
- 		     0,
--		     SPINAND_ECCINFO(&w25m02gv_ooblayout, NULL),
-+		     SPINAND_ECCINFO(&w25n01jw_ooblayout, NULL),
- 		     SPINAND_CONFIGURE_CHIP(w25n0xjw_hs_cfg)),
- 	SPINAND_INFO("W25N01KV", /* 3.3V */
- 		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_DUMMY, 0xae, 0x21),
+ doc/mkeficapsule.1                            |   4 +-
+ tools/binman/btool/mkeficapsule.py            |   8 +-
+ tools/binman/btool/p11_kit.py                 |  21 ++++
+ tools/binman/entries.rst                      |   4 +
+ tools/binman/etype/efi_capsule.py             |  17 ++-
+ tools/binman/ftest.py                         |  66 ++++++++++
+ .../binman/test/351_capsule_signed_pkcs11.dts |  22 ++++
+ tools/mkeficapsule.c                          | 113 +++++++++++++-----
+ 8 files changed, 221 insertions(+), 34 deletions(-)
+ create mode 100644 tools/binman/btool/p11_kit.py
+ create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
+
 -- 
-2.34.1
+2.47.3
 
