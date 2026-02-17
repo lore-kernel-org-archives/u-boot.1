@@ -4,74 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00D7EE9A031
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 19:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED6FEE9A03A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 19:28:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F20AA83AC5;
-	Tue, 17 Feb 2026 20:20:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 49A1183AC5;
+	Tue, 17 Feb 2026 20:28:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jvoo6aRg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 946B683CB9; Tue, 17 Feb 2026 20:20:09 +0100 (CET)
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com
- [IPv6:2607:f8b0:4864:20::341])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 50E0483B99; Tue, 17 Feb 2026 20:28:38 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69E4383981
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 20:20:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A73A83981
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 20:28:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-7d1959ba05cso2269399a34.2
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 11:20:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771356005; x=1771960805; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CASP9CsvmSzRZT6yNyLw48ETC1nkAwhS9oR8JdvYqdc=;
- b=Jvoo6aRg9wWyeKauSak62cGM//SM+bVy74dBa8Mp41Sx9RYC4uK8DwbbP2eK6T9Z/k
- 9/8CbM1Leq69dvqTgMNbyvnYRKRsXDnvjglK3/IwtIZOd8zDpVqvLt2m6Cwq7UkQVw+x
- bnhPbME3vcfcWU4T8UoMd2N8O61puivaFPF8g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771356005; x=1771960805;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CASP9CsvmSzRZT6yNyLw48ETC1nkAwhS9oR8JdvYqdc=;
- b=vnB4v7m9eqqzIgvhYhOK+aHV6wnq8Sr6dDo0hmtEj80J0D77FNdmRNr+1wuFo7gaSB
- ANjYzRGnVZtWW6ftD2ByitmiA62UrksybtZVTgHIndYtxfqILqrBmIfUaNPqg9fO8YUp
- FyL2hUuSDL5ih2B647TXTZuM8q55iuGqlcl69eQdaD3zHkaD0QtH4u6DtwkoINeHItUw
- ZojMntDilfOoVwtHfDMiR9GQnt2AzV1QXTlmrdELANFmaJkyOgHOvsP7CivA9kbaMMCe
- PPkx0lyaLF3ZSErfZg4/jmIuN4mVN226q9kROZ+vcZCVwS1CHp3qo9KTPJSFX5fSEAn5
- HhhQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6Vy0ISZFgdfLBauoe1nXcSXkAJdpaidpCwj7IWaHdG3j/9phbgJHBCkxAmOOWv9u5I+m9+Xc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyuG/MdzrPo2z7r+l0Apoh+VwB9xEwkJmreUr7bwMsu/KquIoBU
- cuvv+QnRKW+h7bRnvhdEds5kJnU64efYSxgsYfuOsbnuFwQ9JA3hy6sx8Vs9pUkZRfc=
-X-Gm-Gg: AZuq6aJ/tCj0Q5Y6mME65cSzclNUSlRybbY8Oc2koT5NRPC6tBOcvxQMVNqaWhR3pkg
- BUfGB7R8IWgP9/mHQB/LvbWjXdknXjxrXglAtVwQFyEj6rlZ02u5JsXyqvoPk/TO8+vWfRBFgQy
- r2VMKIY2S0lPXMupZV72yU8UNX5vdkeaFyE1IGWNohIKuB38v2lnPMKH+OUkAvBkHl7b36mwAb4
- WJdMsoMPgYq3zlJHCcPK9ZROLFofw0gstcj22bm4v65BkDRksoe+z3RhKo9a+FUQmeXhUWOBAAw
- y8OUT9VM/cqbVRHc0yyZMUCH/fVKe1h6PWkk0Cp4plS4swE1SImg3+PpZBbwVrh4LTfTBYWitZ9
- D8EXggmh/nBzeTkGW1AZjW45dKqiulVRc9N9hEotVEjnnS30aPurThdKg+qg+mRc46hQ6u231sS
- H3QfEmYSt8juA64mkPOjvIFMc8yi0949wpFORplyF0zTQeyu4NeL7brnsDbWgJbdhwD47g0t88b
- xwrTPz+lQN2Ohbomy4ByoHxCgnjus+51R5cDh/LxHzfFUg+pWKD36dbeZ7XCQ==
-X-Received: by 2002:a05:6830:3102:b0:7c7:63b6:89d3 with SMTP id
- 46e09a7af769-7d4c4ac757fmr6640950a34.19.1771356004560; 
- Tue, 17 Feb 2026 11:20:04 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4d668434bsm8686186a34.9.2026.02.17.11.20.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Feb 2026 11:20:04 -0800 (PST)
-Date: Tue, 17 Feb 2026 13:20:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1vsQjz-000000008UA-0vfL; Tue, 17 Feb 2026 19:28:11 +0000
+Date: Tue, 17 Feb 2026 19:28:03 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
  Kory Maincent <kory.maincent@bootlin.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
@@ -100,14 +58,13 @@ Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
  John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
 Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand
  FIT loading
-Message-ID: <20260217192000.GH2747538@bill-the-cat>
+Message-ID: <aZTBQykqCt7H8H4W@makrotopia.org>
 References: <cover.1771275704.git.daniel@makrotopia.org>
+ <20260217181358.GE2747538@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SB1BsIuCmfnfQ3Vk"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <cover.1771275704.git.daniel@makrotopia.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20260217181358.GE2747538@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,79 +81,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Feb 17, 2026 at 12:13:58PM -0600, Tom Rini wrote:
+> On Mon, Feb 16, 2026 at 09:21:14PM +0000, Daniel Golle wrote:
+> > Hi all,
+> > 
+> > This RFC series adds a new boot method for OpenWrt's "uImage.FIT with
+> > embedded rootfs" firmware model, along with the underlying infrastructure
+> > to load FIT images on-demand directly from storage devices without copying
+> > them entirely to RAM first.
+> > 
+> > I would like to discuss the design with U-Boot maintainers and fellow
+> > OpenWrt developers before submitting a formal patch series.
+> [snip]
+> > Three storage backends:
+> > 
+> >   - Block device (eMMC, SD, SATA, NVMe, USB mass storage, virtio)
+> >   - MTD (SPI-NOR, raw NOR, raw NAND with bad block skipping)
+> >   - UBI volume (SPI-NAND, raw NAND)
+> > 
+> > The "bootm" command is extended to accept a storage device specification
+> > instead of a RAM address:
+> > 
+> >   bootm mmc 0:4         # boot FIT from eMMC partition 4
+> >   bootm mtd recovery    # boot FIT from MTD partition "recovery"
+> >   bootm ubi recovery    # boot FIT from UBI volume "recovery"
+> > 
+> > This infrastructure is independently useful beyond the OpenWrt boot
+> > method. Any board that stores a FIT image directly in a partition
+> > (rather than as a file on a filesystem) can benefit from on-demand
+> > subimage loading.
+> 
+> For the user interface portion of this, since this is implementing
+> bootmeths, this should all be handled under bootflow/bootdev/etc
+> commands, and not adding further options to bootm.
 
---SB1BsIuCmfnfQ3Vk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I thought it would be useful independently of bootmeth/bootflow/bootdev
+for `bootm` to have these options, as it will allow to gradually migrate
+a large number of our downstream boards. Many of them at this point
+still require scripts to handle things like extracting MAC addresses
+from flash (in ways the original vendor has decided to store them),
+updating U-Boot or TF-A blobs, ... and migrating all of that to use
+bootmeth/bootflow/... will take time.
 
-On Mon, Feb 16, 2026 at 09:21:14PM +0000, Daniel Golle wrote:
+In the meantime, already getting rid of (duplicate) scripts "read
+firmware from mmc/ubi/mtd" would be feasible, is less of a burden and
+easy to test for people who got the respective board at hand.
 
-> Hi all,
->=20
-> This RFC series adds a new boot method for OpenWrt's "uImage.FIT with
-> embedded rootfs" firmware model, along with the underlying infrastructure
-> to load FIT images on-demand directly from storage devices without copying
-> them entirely to RAM first.
->=20
-> I would like to discuss the design with U-Boot maintainers and fellow
-> OpenWrt developers before submitting a formal patch series.
-[snip]
->  boot/Kconfig                   |  88 +++++++
->  boot/Makefile                  |   8 +
->  boot/bootm.c                   |  62 ++++-
->  boot/bootmeth_openwrt.c        | 248 +++++++++++++++++++
->  boot/image-fit.c               |  96 ++++++++
->  boot/image-loader-blk.c        | 133 ++++++++++
->  boot/image-loader-mtd.c        | 103 ++++++++
->  boot/image-loader-ubi.c        | 112 +++++++++
->  boot/image-loader.c            | 163 +++++++++++++
->  boot/mtd_bootdev.c             | 150 ++++++++++++
->  boot/ubi_bootdev.c             | 180 ++++++++++++++
->  cmd/bootm.c                    | 148 +++++++++++-
->  cmd/mtd.c                      |  65 ++---
->  cmd/ubi.c                      |  33 ++-
->  doc/develop/bootm-storage.rst  | 210 ++++++++++++++++
->  doc/develop/index.rst          |   1 +
->  doc/usage/fit/index.rst        |   1 +
->  doc/usage/fit/storage-boot.rst | 201 +++++++++++++++
->  drivers/mtd/mtd-uclass.c       |  15 ++
->  drivers/mtd/mtdcore.c          |  45 ++++
->  drivers/mtd/mtdpart.c          |   2 +
->  include/bootm.h                |   2 +
->  include/image-loader.h         | 188 +++++++++++++++
->  include/image.h                |   4 +
->  include/linux/mtd/mtd.h        |  24 ++
->  include/ubi_uboot.h            |   2 +
->  test/boot/Makefile             |   2 +
->  test/boot/image_loader.c       | 429 +++++++++++++++++++++++++++++++++
->  test/cmd_ut.c                  |   2 +
+Also, testing loading (partial) images directly from storage outside
+of bootmeth has been very useful during development.
 
-This isn't enabled on any platforms, and not enabled on sandbox either
-so the tests aren't run. Please do that for the next iteration as well.
-Since you mentioned one of the Banana Pi boards, including that would be
-helpful too. If you can also include support for the openwrt one (and
-instructions on how to flash it, if
-https://openwrt.org/toh/openwrt/one#uart_boot) isn't enough that would
-be great since I have one of those at hand.
+Would it be an option to hide the new bootm cmdline features behind an
+additional Kconfig option maybe?
 
-Finally, aside from the feedback I just gave about splitting the image
-portion out, it seemed like a few other changes here could be considered
-stand-alone bug fixes themselves. Posting them outside of a series helps
-both for ease of review and ease of merging. Thanks.
+> 
+> Since you're also talking about an A/B mechanism, looking at the RAUC
+> support may also be helpful as that's another widely deployed
+> methodology we support now via standard boot.
 
---=20
-Tom
+Yes, I've looked into RAUC and it has (more or less) recently gained
+support for UBI, which indeed brings it closer to being useful in the
+context of OpenWrt.
 
---SB1BsIuCmfnfQ3Vk
-Content-Type: application/pgp-signature; name="signature.asc"
+Due to OpenWrt having a read/write overlayfs typically covering all
+raiming space on flash, using a symmetric A/B mechanism is not feasible
+in many cases, especially if space is limited (typical: 128 MB
+SPI-NAND), as both A and B would require independent r/w overlayfs,
+effectively halfing the space available for users. Configuration being
+synced across A and B (which may be different versions) is another
+non-trivial problem. Hence, OpenWrt has opted to implement a production
+vs. recovery dual-boot model when ever we have the choice to do so. The
+recovery system doesn't have any persistent state, hence elimintating
+the need for finding an arrangement regarding the read/write overlay
+filesystem, or keeping configuration in-sync across different versions
+of the firmware.
 
------BEGIN PGP SIGNATURE-----
+RAUC also defines the firmware format, which for OpenWrt often isn't an
+option as we like to remain compatible with the vendor/stock firmware
+formats (in 90%+ of cases: uImage.FIT or legacy uImage, sometimes with
+appended metadata)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZS/YAAKCRAr4qD1Cr/k
-Ci5dAQDwAdsu5LF+ozVMHzjzUObUWUnWYQQpTS5RMutp8mmOAgEA4zw2p5v4A16D
-JIrUD50Peh90KNPmAOtcEUCLhpR4rAY=
-=j2Tz
------END PGP SIGNATURE-----
+Apart from that, the dependencies required for RAUC on the target
+(OpenSSL, libglib2, libdbus, expat, ...) are overkill for many smaller
+OpenWrt devices. We've made big efforts to avoid FreeDesktop-land and
+have created userspace tools which require only a fraction of the
+resources. We offer free choice of the TLS provider library (OpenSSL,
+mbedTLS and wolfSSL are 1st class citizens; there is some support gnuTLS
+as well), and having only one of them installed. A hard dependency on
+OpenSSL alone is already a show-stopper for anything to be considered
+becoming part of the core infrastructure. Requiring an XML parser would
+end the conversation.
 
---SB1BsIuCmfnfQ3Vk--
+I consider it as extremely unlikely that this will ever change for
+OpenWrt, and we do consider that as one of our strengths. The total size
+of a fully usable OpenWrt installation currently starts at around 6 MiB
+on low-end targets (that does include the kernel and all drivers, as
+well as mbedTLS and everything else needed for a router or WiFi access
+point, including a Web UI).
+
+Random examples
+
+- ultra low-end device: NEC Aterm WR8750N
+
+https://downloads.openwrt.org/releases/24.10.5/targets/ath79/tiny/openwrt-24.10.5-ath79-tiny-nec_wr8750n-squashfs-sysupgrade.bin
+
+
+- aforementioned BananaPi R3 WiFi 6 DBDC router:
+
+https://downloads.openwrt.org/releases/24.10.5/targets/mediatek/filogic/openwrt-24.10.5-mediatek-filogic-bananapi_bpi-r3-sdcard.img.gz
+
+(SD card image which can be used directly, or to install to SPI-NAND,
+SPI-NOR or eMMC)
