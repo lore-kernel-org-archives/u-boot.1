@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15465E68165
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 11:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F1A2E68165
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 11:22:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADE5283CD3;
-	Tue, 17 Feb 2026 12:22:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE90C80325;
+	Tue, 17 Feb 2026 12:22:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RSPDaXhg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l9A8mjPb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1208483C72; Tue, 17 Feb 2026 12:22:17 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c110::1])
+ id 3E05080325; Tue, 17 Feb 2026 12:22:18 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E52283CF2
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 12:22:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5783483D17
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 12:22:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u1nazLuKldg9H1MXTwJvt0HXtGJela1MaRC7rUJCAU5a2dC6yASpopb1LI58JfGXYnmLVuLjqYDKI9yzZpuzur/Vp8l6ZNxEIXg7iGufLZfYQluU+NQX6qlqaOpf6ybIupdmKJIi4LPvDDXfYZYDkUzJjU9lCmIL/vxdpsLpvRURYZ6y/jj/+3HmJGFh6n16QJoY2wsRJYM3OXjUmcXHOA0iQfxTy+pgvXRrrQZtsIuqkFiATdqFQxJxxWVo01S7aa+p0/3dzEmobn//xm5VAwUbhQmOi6/ObC5cBSQK9PL6JC+kd9kjrlOE8EVY0Sk6tV2nJ0HoeCJWK0ms9AUHfw==
+ b=vYYnBvRjPjVy3Vm3UsASnGjaZEla4Q/FrRYfe2E51KW8UFwsVaOzrd/oWk2qcVbzDngy6baznRM+xB2I1RET7+r37/+JFT2dJFkrw9M7A5zBASsfDLsINEOWj/gO/B6YCCdsk/B8oXlcW/Fi7S43NQmlv1i8mE42IVFhXSWTqhN/M6Zh1fxQD0Zf4ILI7oEjVnrZcEFnPkYcTPyIQZh6IPay/lCAR2hE8kdbPwH9ZbE71ek5236o3tv2hqgF4CNFDf6d8JFi+oG6EBXS1C8hS7GvY41VWxgJg6bfY7V57f0JZUHtN+KtBRuTBR4tNZN/6DmxsfjeHRk7Kz5pU4kA8Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZhJgB7eZ0Ye5TLImlPLW20Xr45hIpnqFPU0o7ndF7rU=;
- b=YXF08EToLUKcEiDsjNEYeZ35KCNDXapb6zdneOZEnEHg8N4iezfqf/Jk129adxegdiYkUDMTDVQdmQuv3vJjY4Iy8wJN7qk9R3H8MZ+xKRqx6+8UcBrJ80E2wS47o2NcDVKfpixmHUDA9mBpo6u6P29zT5W+BOVrKwFmAhFs+xjGiR0ZvONKnlJKKiKwBOHwcqoW10vBaDyoFtvJ1XUg9vyaewH8+grPefTn73NxRRjPOmur9avNvgYvy/+cpJoqZYFf4ayjkO1G1J626ZkiPa3Zx5TDe/tqggX/9XP2oDSRRCutGKrZZbdNwyMdgzWFHkzwRjQ+/34TgYNLIhLIjA==
+ bh=J9urJW97ivqwiVol805kqZxd+IGpirmzaprwwmrvwyE=;
+ b=xQoKx1yHbDoQrHWIa2zLrEVR/SHSEE6nSGPGmSTLdOhP+MjHFa3bjb3Z6YrM2XHIs/KUlR7qYFfg1oxf+SUCGV+uI0I84dfkU/gk1+fJtiZJq5VnTIhPxaeFOA8iS6PmHQUTJNGOnqiYzXa+o2xPm1oPi1m1GTHYDNbGVgtQRmiRRgJTCmd0XE99ZMkO8u7YVRcXacnhe/k9g2z+U4S2X+i7SVUqo2jsa0gIldxZ5rLbm/5t2B4BjKy3pGkDvldECczVe33V2+BIUgi94krSdSj6+KYlwysacPXjurSletUWKhRNVQvaM7SGpHMWka03b4RE1Lt0/ryLZUkxpclqMA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZhJgB7eZ0Ye5TLImlPLW20Xr45hIpnqFPU0o7ndF7rU=;
- b=RSPDaXhgTLCRC8C01JY8H+H2xlkW758cpWiZp8z6/wdIfadogbQqf5gtNdaFjws5ZlvZb5IDxbl8Res6tDryiIYKtW+m+xOsK2GGGCV4ZlVlm3oicQ+f/6U0k/206pd3is626iTUtZprxEDYcLu35nqGYGIY4y7YP6LId7U9XEc=
-Received: from PH8PR20CA0014.namprd20.prod.outlook.com (2603:10b6:510:23c::24)
- by DM6PR10MB4361.namprd10.prod.outlook.com (2603:10b6:5:211::13) with
+ bh=J9urJW97ivqwiVol805kqZxd+IGpirmzaprwwmrvwyE=;
+ b=l9A8mjPbyZ281vMuB4XCHBWw9b9DGpOlXE9M6MrOBNUiNJRfVw51QUx19PtYvxRq8iaRNAmOpyCgYMRAp74BX/V+xurDCymh10eaUZZRCX9+iSd6adrqquK6j3MdRiXcQYQpIYEsU8OlKSf5h9VjGPzrTp/hdPdykq9Lc/aJ0Lk=
+Received: from DM6PR07CA0065.namprd07.prod.outlook.com (2603:10b6:5:74::42) by
+ BN0PR10MB5190.namprd10.prod.outlook.com (2603:10b6:408:12b::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.13; Tue, 17 Feb
- 2026 11:22:08 +0000
-Received: from SN1PEPF0002529D.namprd05.prod.outlook.com
- (2603:10b6:510:23c:cafe::2a) by PH8PR20CA0014.outlook.office365.com
- (2603:10b6:510:23c::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9611.16 via Frontend Transport; Tue,
- 17 Feb 2026 11:22:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ 2026 11:22:13 +0000
+Received: from DS1PEPF0001708F.namprd03.prod.outlook.com
+ (2603:10b6:5:74:cafe::d8) by DM6PR07CA0065.outlook.office365.com
+ (2603:10b6:5:74::42) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.13 via Frontend Transport; Tue,
+ 17 Feb 2026 11:22:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SN1PEPF0002529D.mail.protection.outlook.com (10.167.242.4) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ DS1PEPF0001708F.mail.protection.outlook.com (10.167.17.139) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Tue, 17 Feb 2026 11:22:07 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9632.12 via Frontend Transport; Tue, 17 Feb 2026 11:22:11 +0000
+Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Feb
- 2026 05:22:07 -0600
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:22:10 -0600
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Feb
- 2026 05:22:07 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:22:10 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 17 Feb 2026 05:22:07 -0600
+ Transport; Tue, 17 Feb 2026 05:22:10 -0600
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [10.24.51.206] (may be
  forged))
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61HBLutO3263329;
- Tue, 17 Feb 2026 05:22:04 -0600
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61HBLutP3263329;
+ Tue, 17 Feb 2026 05:22:07 -0600
 From: Anurag Dutta <a-dutta@ti.com>
 To: <jagan@amarulasolutions.com>, <trini@konsulko.com>
 CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
  <boon.khai.ng@altera.com>, <a-dutta@ti.com>, <s-k6@ti.com>,
  <gehariprasath@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 2/7] spl: mtd: Remove MTD device after loading images
-Date: Tue, 17 Feb 2026 16:51:51 +0530
-Message-ID: <20260217112156.272154-3-a-dutta@ti.com>
+Subject: [PATCH 3/7] spl: mtd: Add bad block handling for SPL image loading
+Date: Tue, 17 Feb 2026 16:51:52 +0530
+Message-ID: <20260217112156.272154-4-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260217112156.272154-1-a-dutta@ti.com>
 References: <20260217112156.272154-1-a-dutta@ti.com>
@@ -95,56 +95,56 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002529D:EE_|DM6PR10MB4361:EE_
-X-MS-Office365-Filtering-Correlation-Id: b955f866-f401-4ce1-c488-08de6e16c94f
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001708F:EE_|BN0PR10MB5190:EE_
+X-MS-Office365-Filtering-Correlation-Id: 839cd944-e4aa-481d-4779-08de6e16cb9b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HrYXr4NhwprQNY8JeEO7chEKZlqzXrIfhwpvMvHxcOpIg4c3SOCGZu3KDmFy?=
- =?us-ascii?Q?pj0VrjS0nPtdLLEG6Aeq2LHHq+oBw69cpGPmHalyvz5EjGKm29TGRcjGU53x?=
- =?us-ascii?Q?1uIJL7NqQ4pF5FVvpMMuVq+T4dA+j2w5it4GvWsBCn4PCG/NrHFZa9IEFHC/?=
- =?us-ascii?Q?2NGUQi/FfdAu+G6pKh/r01UeOh5KGE8+8S/ioUJl6DxitD2HMBLWNm2e01TO?=
- =?us-ascii?Q?7Cj+ocurCNzPdJABUX3UREivYRS89DzVmH/Fdw4BtdO39Tmv6FFw5zNGDXNS?=
- =?us-ascii?Q?OXhN+X2v8QJxmEWJpPWPMUtenfIUmHvAlJNHah02NEi+quN5Ruj7HoAaCWjA?=
- =?us-ascii?Q?q18xlXkdzB/aJamXFuSwhdkuoTf6slWUDpx7PMQc1SMTwurDwC732eafia2Z?=
- =?us-ascii?Q?8DEfjq1hEf13MKVnc0OsdfRE5jlaeW1G2tJWIdaSjLwB71alwi6Wpvx7/yhk?=
- =?us-ascii?Q?720uPz6UMqNVLDoIRBIcltvNfoFCxEG6bfM7R0WWxSDADJvAOGTjfdkT13v8?=
- =?us-ascii?Q?lx7KxLAGwAqtG9ja2qJWk8MEqXjZRb6iOAHi1Xl2o784pUxlw3QXtQi9cTlg?=
- =?us-ascii?Q?Gc55+JwbEp4I8WjGC0pXvYh6kiUe8SFjLjxcu/bFkxCSK677F7vLsz+/Fd4w?=
- =?us-ascii?Q?W869sqvjCEyeELHTGVByUEnNRSBeTc0dsm3kSejHvOQwGiWT8Xmo3OM+VYS9?=
- =?us-ascii?Q?dnjAo0W/cxL5o5Z+k0iNyIxH/NAa8gMf35MJygMNAgp1grQzix3kD3Nnx9T6?=
- =?us-ascii?Q?hjENIHndCjEuKuZZGSkEFKEtjfz8kVrit33xuuJTH7JFnkTb8iOc6z0VhNI5?=
- =?us-ascii?Q?xsVZ4wEayEGQiyqhK5ba5O7QDLPwu/eS4esPKane6q903zGdimqES1YCogp4?=
- =?us-ascii?Q?gIOwr6vNhOgbDAwQ+6GuztjwcM3GhINesclanqjCzluYQHWaISroMVd/Nn9b?=
- =?us-ascii?Q?R19ijPsrSMmwyfGbPO6FKR+NLIj2v4EjNEf5D9PbczLtO0rNNlLQD48P9FHZ?=
- =?us-ascii?Q?CgJMDcx/UqhPd4RlS2zMsGqjW6toMklhhVXkyElQ449zm2Yy0YtMYwL7ivpv?=
- =?us-ascii?Q?RJH0cT103l4YH8U4VIyI4iJ1TEq7zJfi2Seaw2a16zpm/0RLCgCny1XEGx+6?=
- =?us-ascii?Q?k3imQG5jlPWKK/g5sYDhjDOgJQcn0pOtmJ5+YgWwguDfj/APUpWqNDgxOsv0?=
- =?us-ascii?Q?lYxrWuF9tP2nbgVYaP5y4WMru6KCjAmshcAJ28VfWhd7F+JN/hldLJtwBNNP?=
- =?us-ascii?Q?PpFYAMdHZw7ItIdtG8gD2aaCcom29qWmmDqRCcXqgyibvK6NtbIXzWCMfJ8W?=
- =?us-ascii?Q?x8p8RE9hr5/Fad2COi1QGqAzBc77n7oSPC/sv/8/u8GUYHaNb8FTS+8We2fS?=
- =?us-ascii?Q?CwJNoDkSE8cNrAJ+QUNbxQKipMis90yo1ITOSnNz9vsRftPEJzzbpF9AzidS?=
- =?us-ascii?Q?T7Rq8UpWId77eoZVksy/9XJuyU7OivXkP9DMq5qghVW3OgOyHuF2DnBlOBSp?=
- =?us-ascii?Q?8WEDhOvgW5yMO+Jlx4OlkIFwCTqVbkPDZjpeeYQ+8Y7v2ED4fcDeVp/HixtC?=
- =?us-ascii?Q?tYGxtOOSORJlh80mEJNUPbq6Qj/iIeEPp7dLTKie/pYqwaKSsCV8ZXyq1g/N?=
- =?us-ascii?Q?B3nMVyCH26zmlcTYWvZW5ylJl5nQIlbhmuZTE4iF0beF?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MAdhvrQ40x88VmekuzAwNFj0sWoDMs+leKaMLFqd0xKUnet557l5MTxxGT9q?=
+ =?us-ascii?Q?hXWr/cMNDOwc9lStuLO+ZAQKehe+qZJk3bnbt/qG9WP8BmOzOPvXUvM667fd?=
+ =?us-ascii?Q?WGGN5a5baNKNWl7cqsj9t/7/28GqtjMggY2JNtwrrSkKslFvCZpgfgHlC1dX?=
+ =?us-ascii?Q?8PwHaHRzwEXQ6BZyvewc4dULstisFVIjQpqu082vVwwF/0PQUHeVZJ9w57YL?=
+ =?us-ascii?Q?Nzic/PPCWDqZ1vJd3nChHGBYgYWf8ykCCo0PJYZThgubo1ZtDLIIYmLBqX26?=
+ =?us-ascii?Q?GOek8U7YSXQHnf2uj4iN250XKCuRq4DgizKD5WrF/cLX77PRtSmBRYZRlC5y?=
+ =?us-ascii?Q?zlXmgL97Mk0F4Lo4l8ujbpde1mZhBZn/5pOJgI3pmZvzvn0/PNnAu5hiJ07x?=
+ =?us-ascii?Q?zqVBddLYtAeXQ7ZciRpWfM7fTO7McDzW3rzk+Ew31VouSNs2YG2RgQOhfp7F?=
+ =?us-ascii?Q?QkZ2QzxZv2iwjiF9Xw/G8aLV0IXfTEOXmqevAPjoPqzkwy++WkEqra8ZmgSl?=
+ =?us-ascii?Q?9JtGrJInKcgMTMJjR7xLkLwOI3GRddYXZFQpim/YkULk54nFRq8kM0zks6k1?=
+ =?us-ascii?Q?obxkK9MweFgW0aMZLLgpTiI0j4COGgACo5JL2VeicR0tHlO81gPXleb4nafN?=
+ =?us-ascii?Q?HJ7csA3zZ2CUrS6CQAyudBLvugG9wAtGx4MdGokUq3+t6/x8yJYfWIJkL4OA?=
+ =?us-ascii?Q?osmNk6tDpkgFFWYFIfCGKQrQ9CDkg6tNRY4Pj+5P0lPAgyfxntC0JJ4WDelg?=
+ =?us-ascii?Q?oRUPMUWxIpI83S56WQgDZMyoyDrQYIyY9qKJk9ENesRRWmIb0w5ohnXfEanf?=
+ =?us-ascii?Q?FFODv7Gr2L3L8SPa620uAXNuvvYLMQH75oiJ8YHfxkOwhd2mbSV0J6Wcg1Cd?=
+ =?us-ascii?Q?w4q/nmmPlyqnjrzbhkVSeZFJ0ofTE53+b03grgIjaFb79DJMHjZJwBo+dZK0?=
+ =?us-ascii?Q?2fp290qVuGo9iDzZA0SrwaAhWkvAP0MConUYREWJIyVIJwZ0dhzeB9FIDa4v?=
+ =?us-ascii?Q?Vjx5twMYC5cYyIL9z8iOvT4Bn+65Kk+RHHTNftZiWxrky809DT3lDv/V3mFq?=
+ =?us-ascii?Q?fKY2lrc/+eSp8UJQd+kS3rUIb1Kv8FJRj0mfkxQ8N0xZoGLXauLEZWW1fdAb?=
+ =?us-ascii?Q?g8eO0L2R1DvwVECXP17rvchrsr8RGPxQKHGNu51P+CW8YtbN7uA3cidwgNP3?=
+ =?us-ascii?Q?uEd56QOLWij0G7fcSsodrH1ErjcKLdIaEIHJCmeAA8xbRJaBKYpH/Xfssfey?=
+ =?us-ascii?Q?rc6OfG0mI75PEHRoA8R49KhNuqNYzumqbaqtlDkPKlvkJKW4FGgUypbz7/RP?=
+ =?us-ascii?Q?Ljw+j10KUWXzF2PmQDjhNwTpM7Lc61lqu0ezC6eLVRanYyJpaOlEtYdddyAP?=
+ =?us-ascii?Q?tVDhpJQOm6byCDBoao13OhqVks0PbNKaUTJSDlRpJpRznp5uBG0ILSXvVEEd?=
+ =?us-ascii?Q?Yb3AhHmMz7Aeyu7ceTzDdVjllvqWhGc2EkNcpnrVhyAd+gOmecNu2ik6llvR?=
+ =?us-ascii?Q?bckQ4yc/jqrgUfmHyGAjwfhspw7+MbNN32johrrV4nPo9EyfrGtItmxomtGU?=
+ =?us-ascii?Q?gbFIbqWRRcuS6HhGGSpe8TfAJN3biDyxwNPQ/2wyeeuDfJtgRn2lExImwzpm?=
+ =?us-ascii?Q?NV3zYOB5MJvMLIHQikgVfV6Zu5i+sIyEzQHPceksqKS3?=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: mRE5NIBB5+uu/EoWZEPLif8Lh4hT6dfRrfrGxP9xA3Y4mkN6SMJGKz070KPA41p2sjguNQfbkNGTlvTuNf4D43CV0jnaoHCbAFuhlijJlsY20AztPDJNMR+al+JL6JmSmN8FJqlHhDcq2lsh4vRJ51CEtb3twL5ZJKqMjraGvNMKIqp/sNcW839sshPuc1XlWGuSMj6veNSyf7wgk8K3E8MKu9oQkMQTWMxaRNT1sAY31VPYp1TeABWWAl67VmpX6eq/GVviRmxl+gM81EkRWfhnIo22iiq5CowSdggu+L5gS4DPUUqd/iEv1/tMB4mAaE83ho8EEYMCQ6gYyHNl9GEPQ8StfCdYpn9+sb++XlImOLc1vXISH/z142UJg6cx1PSy0HjgmjwV81TTSoXISnc1UiTeQ3YJ2N9fN6TsJ0TiEflAEMCnHN9dXEtWVTOK
+X-MS-Exchange-AntiSpam-MessageData-0: sOT6EKFIgbdu9/xQKDyY4nsuUb+nG2dsdCZ5FL7LjrOBZBugdJB//MlwKQonepH5S8Q722QMYdCaBZowABuLf4lX2x56O3DVp9ApSwd1bPuClcIvmlfJkqis/LhweGZoSMjYxa70NRppP9K5sQZGQgao698SC8N4gkFUsUueJUO4HdYWZps0qeUIaDUGZrVqe2+n9/FEB0YI8taflNkTEpLFTSegQWDNUM4i+VR8o8CDBlwDxwcI785HNbu1fBoSjnUlIzxjRc+VsXjjE81cZF3O+JSEubeMPhvMx8RJzMggpL6w2j+b5ym57NFlm5XTfADXQinUiXtf52Ys3UpFRKnhZXsiAE38L7DTn8K5VzPrGej10EsVxKBevLyTI98eSlkDDmOZJTLufZWTFMR7SMXihGHtrcYbMsoKSGh7HqOGmsYXLSQ/FuFzzX2jxuCI
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2026 11:22:07.8352 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b955f866-f401-4ce1-c488-08de6e16c94f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2026 11:22:11.6507 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 839cd944-e4aa-481d-4779-08de6e16cb9b
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002529D.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001708F.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR10MB4361
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5190
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,175 +161,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Apurva Nandan <a-nandan@ti.com>
+From: Santhosh Kumar K <s-k6@ti.com>
 
-Releasing the flash into proper state, after the loading completes,
-is important for the next stage bootloader/kernel to be able to use
-the MTD device. This would enable to reset the device for fresh
-use by next boot stage.
+Implement bad block skipping functionality in SPL MTD loader to ensure
+reliable boot from flash devices with bad blocks. Without this, the
+SPL would fail to load images if bad blocks were encountered.
 
-Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
 Signed-off-by: Anurag Dutta <a-dutta@ti.com>
 ---
- common/spl/spl_mtd.c        | 19 ++++++++++---------
- common/spl/spl_mtd_nand.c   | 10 +++++++---
- drivers/mtd/mtd-uclass.c    | 12 ++++++++++++
- drivers/mtd/nand/spi/core.c | 12 ++++++++----
- include/mtd.h               |  2 +-
- 5 files changed, 38 insertions(+), 17 deletions(-)
+ common/spl/spl_mtd.c | 78 ++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 68 insertions(+), 10 deletions(-)
 
 diff --git a/common/spl/spl_mtd.c b/common/spl/spl_mtd.c
-index 341e1a73392..95c0c8ce8cd 100644
+index 95c0c8ce8cd..d635aa2b476 100644
 --- a/common/spl/spl_mtd.c
 +++ b/common/spl/spl_mtd.c
-@@ -62,7 +62,7 @@ int spl_mtd_load(struct spl_image_info *spl_image,
- 	err = mtd_read(mtd, spl_mtd_get_uboot_offs(), sizeof(*header),
- 		       &ret_len, (void *)header);
- 	if (err)
--		return err;
-+		goto out_err;
+@@ -17,15 +17,64 @@ uint32_t __weak spl_mtd_get_uboot_offs(void)
+ 	return CONFIG_SYS_MTD_U_BOOT_OFFS;
+ }
+ 
++static ulong spl_mtd_read_skip_bad(struct mtd_info *mtd, loff_t offs,
++				   size_t size, void *dst)
++{
++	size_t remaining = size;
++	size_t ret_len;
++	loff_t current_offs = offs;
++	loff_t block_aligned_offs, next_block;
++	u_char *buf = (u_char *)dst;
++	int err;
++
++	while (remaining > 0) {
++		size_t read_size;
++		size_t block_remaining;
++
++		block_aligned_offs = current_offs & ~(mtd->erasesize - 1);
++
++		if (mtd_block_isbad(mtd, block_aligned_offs)) {
++			debug("SPL: Skipping bad block at 0x%llx, jumping to 0x%llx\n",
++			      block_aligned_offs, next_block);
++
++			next_block = block_aligned_offs + mtd->erasesize;
++			current_offs = next_block;
++			continue;
++		}
++
++		block_remaining = mtd->erasesize -
++				  (current_offs & (mtd->erasesize - 1));
++		read_size = remaining < block_remaining ? remaining : block_remaining;
++
++		err = mtd_read(mtd, current_offs, read_size, &ret_len, buf);
++		if (err) {
++			printf("SPL: Read error at offset 0x%llx: %d\n",
++			       current_offs, err);
++			return size - remaining;
++		}
++
++		buf += ret_len;
++		current_offs += ret_len;
++		remaining -= ret_len;
++
++		if (current_offs >= mtd->size) {
++			printf("SPL: Reached end of device, read %zu/%zu bytes\n",
++			       size - remaining, size);
++			break;
++		}
++	}
++
++	return size - remaining;
++}
++
+ static ulong spl_mtd_fit_read(struct spl_load_info *load, ulong offs,
+ 			      ulong size, void *dst)
+ {
+ 	struct mtd_info *mtd = load->priv;
+-	int err;
+ 	size_t ret_len;
+ 
+-	err = mtd_read(mtd, offs, size, &ret_len, dst);
+-	if (!err)
++	ret_len = spl_mtd_read_skip_bad(mtd, offs, size, dst);
++	if (ret_len > 0)
+ 		return ret_len;
+ 
+ 	return 0;
+@@ -52,17 +101,19 @@ struct mtd_info *spl_prepare_mtd(uint boot_device)
+ int spl_mtd_load(struct spl_image_info *spl_image,
+ 		 struct mtd_info *mtd, struct spl_boot_device *bootdev)
+ {
+-	int err;
++	int err = 0;
+ 	struct legacy_img_hdr *header;
+ 	__maybe_unused struct spl_load_info load;
+ 	size_t ret_len;
+ 
+ 	header = spl_get_load_buffer(0, sizeof(*header));
+-
+-	err = mtd_read(mtd, spl_mtd_get_uboot_offs(), sizeof(*header),
+-		       &ret_len, (void *)header);
+-	if (err)
++	ret_len = spl_mtd_read_skip_bad(mtd, spl_mtd_get_uboot_offs(),
++					sizeof(*header), (void *)header);
++	if (ret_len != sizeof(*header)) {
++		printf("SPL: Failed to read image header\n");
++		err = -EIO;
+ 		goto out_err;
++	}
  
  	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
  	    image_get_magic(header) == FDT_MAGIC) {
-@@ -70,21 +70,22 @@ int spl_mtd_load(struct spl_image_info *spl_image,
- 		load.priv = mtd;
- 		load.bl_len = 1;
- 		load.read = spl_mtd_fit_read;
--		return spl_load_simple_fit(spl_image, &load,
--					   spl_mtd_get_uboot_offs(), header);
-+		err = spl_load_simple_fit(spl_image, &load,
-+					  spl_mtd_get_uboot_offs(), header);
- 	} else if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER)) {
- 		load.priv = mtd;
- 		load.bl_len = 1;
- 		load.read = spl_mtd_fit_read;
--		return spl_load_imx_container(spl_image, &load,
--					      spl_mtd_get_uboot_offs());
-+		err = spl_load_imx_container(spl_image, &load,
-+					     spl_mtd_get_uboot_offs());
- 	} else {
+@@ -82,8 +133,15 @@ int spl_mtd_load(struct spl_image_info *spl_image,
  		err = spl_parse_image_header(spl_image, bootdev, header);
  		if (err)
--			return err;
--		return mtd_read(mtd, spl_mtd_get_uboot_offs(), spl_image->size,
--				&ret_len, (void *)(ulong)spl_image->load_addr);
-+			goto out_err;
-+		err = mtd_read(mtd, spl_mtd_get_uboot_offs(), spl_image->size,
-+			       &ret_len, (void *)(ulong)spl_image->load_addr);
- 	}
- 
--	return -EINVAL;
-+out_err:
-+	return err;
- }
-diff --git a/common/spl/spl_mtd_nand.c b/common/spl/spl_mtd_nand.c
-index 9bc6ff86ee8..2eb7458e599 100644
---- a/common/spl/spl_mtd_nand.c
-+++ b/common/spl/spl_mtd_nand.c
-@@ -16,16 +16,20 @@ static int spl_mtd_load_image(struct spl_image_info *spl_image,
- 			      struct spl_boot_device *bootdev)
- {
- 	struct mtd_info *mtd;
--	int ret;
-+	int err;
- 
- 	mtd = spl_prepare_mtd(BOOT_DEVICE_SPINAND);
- 	if (IS_ERR_OR_NULL(mtd)) {
- 		printf("MTD device %s not found, ret %ld\n", "spi-nand",
- 		       PTR_ERR(mtd));
--		return -EINVAL;
-+		err = PTR_ERR(mtd);
-+		goto remove_mtd_device;
- 	}
- 
--	return spl_mtd_load(spl_image, mtd, bootdev);
-+	err = spl_mtd_load(spl_image, mtd, bootdev);
-+remove_mtd_device:
-+	mtd_remove(mtd);
-+	return err;
- }
- 
- SPL_LOAD_IMAGE_METHOD("SPINAND", 0, BOOT_DEVICE_SPINAND, spl_mtd_load_image);
-diff --git a/drivers/mtd/mtd-uclass.c b/drivers/mtd/mtd-uclass.c
-index 720bd824c4d..598eedae6a5 100644
---- a/drivers/mtd/mtd-uclass.c
-+++ b/drivers/mtd/mtd-uclass.c
-@@ -10,6 +10,18 @@
- #include <errno.h>
- #include <mtd.h>
- 
-+/**
-+ * mtd_remove - Remove the device @dev
-+ *
-+ * @dev: U-Boot device to probe
-+ *
-+ * @return 0 on success, an error otherwise.
-+ */
-+int mtd_remove(struct mtd_info *mtd)
-+{
-+	return device_remove(mtd->dev, DM_REMOVE_NORMAL);
-+}
+ 			goto out_err;
+-		err = mtd_read(mtd, spl_mtd_get_uboot_offs(), spl_image->size,
+-			       &ret_len, (void *)(ulong)spl_image->load_addr);
 +
- /*
-  * Implement a MTD uclass which should include most flash drivers.
-  * The uclass private is pointed to mtd_info.
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 14af4264612..9bd8cce58f2 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -1718,26 +1718,28 @@ err_spinand_cleanup:
- 	return ret;
- }
++		ret_len = spl_mtd_read_skip_bad(mtd, spl_mtd_get_uboot_offs(),
++						spl_image->size,
++						(void *)(ulong)spl_image->load_addr);
++		if (ret_len != spl_image->size) {
++			printf("SPL: Failed to read full image: %zu/%u bytes\n",
++			       ret_len, spl_image->size);
++			err = -EIO;
++		}
+ 	}
  
--#ifndef __UBOOT__
- static int spinand_remove(struct udevice *slave)
- {
- 	struct spinand_device *spinand;
- 	struct mtd_info *mtd;
--	int ret;
-+	int ret = 0;
- 
--	spinand = spi_mem_get_drvdata(slave);
-+	spinand = dev_get_priv(slave);
- 	mtd = spinand_to_mtd(spinand);
- 	free(mtd->name);
- 
-+#ifndef __UBOOT__
- 	ret = mtd_device_unregister(mtd);
- 	if (ret)
- 		return ret;
- 
-+#endif
- 	spinand_cleanup(spinand);
- 
--	return 0;
-+	return ret;
- }
- 
-+#ifndef __UBOOT__
- static const struct spi_device_id spinand_ids[] = {
- 	{ .name = "spi-nand" },
- 	{ /* sentinel */ },
-@@ -1783,4 +1785,6 @@ U_BOOT_DRIVER(spinand) = {
- 	.probe = spinand_probe,
- 	.bind = spinand_bind,
- 	.plat_auto = sizeof(struct spinand_plat),
-+	.remove = spinand_remove,
-+	.flags = DM_FLAG_OS_PREPARE,
- };
-diff --git a/include/mtd.h b/include/mtd.h
-index f9e5082446a..740f1bb76db 100644
---- a/include/mtd.h
-+++ b/include/mtd.h
-@@ -11,7 +11,7 @@
- #include <linux/mtd/mtd.h>
- 
- int mtd_probe_devices(void);
--
-+int mtd_remove(struct mtd_info *mtd);
- void board_mtdparts_default(const char **mtdids, const char **mtdparts);
- 
- /* compute the max size for the string associated to a dev type */
+ out_err:
 -- 
 2.34.1
 
