@@ -4,55 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B06E909B1
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 14:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC01E909B9
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 14:40:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D227083AC5;
-	Tue, 17 Feb 2026 15:31:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernkonzept.com
+	by phobos.denx.de (Postfix) with ESMTP id E28E583C72;
+	Tue, 17 Feb 2026 15:40:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernkonzept.com header.i=@kernkonzept.com header.b="NsjVCcQz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r71ZAIUF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C71183C72; Tue, 17 Feb 2026 14:59:58 +0100 (CET)
-Received: from mx.kernkonzept.com (serv1.kernkonzept.com
- [IPv6:2a01:4f8:1c1c:b490::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 999D883C32; Tue, 17 Feb 2026 15:40:06 +0100 (CET)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8573280325
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 14:59:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=kernkonzept.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=christian.poetzsch@kernkonzept.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=kernkonzept.com; s=mx1; h=Content-Transfer-Encoding:Content-Type:
- MIME-Version:Message-ID:Subject:Cc:To:From:Date:References:In-Reply-To:
- Reply-To:Content-ID:Content-Description;
- bh=RP2EjRYJsttUKOj47Zm9rX8ajl5dqoPj7mNmPltp/Kk=; b=NsjVCcQzyfbywuNVSHly0+krsZ
- QivwtJsjjW7T2KQzvKYDa4iYp4MTLm11rfNP/Fu5L25BLQ+D/ChZE4xNEkwhY2mcN5a1yJCCbkT1K
- ouA9GeqHTem1QK9N40we8LU6OhSmrL/ve06P9QbKy46HTpnUXsCPXzvDeenmPu5fXwhP1c85QTuFf
- VdKHyC+t0wc99Jl8unT8iuGLEeRT8Ckw4djcre78/f+OIYEHGPbZGLtKkdcC8xyfBrTZmcB+bNfH/
- PTaC9pohE5QMwisdNXXb6473wIWgn86tb9tWFe25VqIrMW0Af72ezp1tMxKFfHey6FQOglFLvBUtg
- H95GKnNA==;
-Received: from [10.72.1.1] (helo=kernkonzept.com)
- by mx.kernkonzept.com with esmtps
- (TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim 4.98.2)
- id 1vsLcJ-00000007BfW-1PrK; Tue, 17 Feb 2026 14:59:55 +0100
-Date: Tue, 17 Feb 2026 14:59:52 +0100
-From: Christian =?iso-8859-1?Q?P=F6tzsch?= <christian.poetzsch@kernkonzept.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Adam Lackorzynski <adam@l4re.org>
-Subject: [PATCH] virtio: Fix virtio initialization sequence
-Message-ID: <aZR0WCHAC6KaJfH1@kernkonzept.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 0B66B83981
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 15:40:03 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-40974bf7781so3816095fac.0
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 06:40:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771339201; x=1771944001; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WdKA1vFKSp74ZHvRuqdgiKPoV8UjShj4Ow3hKFRXT1Y=;
+ b=r71ZAIUFGIbmuX8I4TO/1HK0a3wblWPVCghLRi3oidTSahUlmXleBo2CvxpWwEkOJJ
+ TjFhgJ+xvyCVevFTd07OHbPr4BVpF8ELARi8P+0csKadtgibwvKdmqig3HSz/tQGtHzH
+ 6okNNafT09FAKieqU41QVDcJ2McBMsyaq1cLw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771339201; x=1771944001;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WdKA1vFKSp74ZHvRuqdgiKPoV8UjShj4Ow3hKFRXT1Y=;
+ b=d/KJLJ9aDEr517fcytoSKDjOq5rs2Zg5FrEKGwpHml7akDROP4NtGad6x+eLMMvuas
+ 4Aw/efRXqRqwbJoM7vKAKiIsF93AVHoZ17e+R2gs5C5+JqhLRfkLtg/7D0LQOYnhEdw2
+ JPv1GveZUN3I3e5AIuRQloiYKWwcv5NtaRz9CAwtYhZQV0aIkrSkVMqerfKvQE/LT8Zt
+ 34K0F29tEi8doVFxzS4ejj5WHrATyEhJ7B6MU34ydlTJ4n/ceZl0+edZ25QRberm2Cku
+ FDnR4v7hQ1P01CJBzeotsRRC1juA3Itci63wA6oD+dvUOpytn60lDqgdKSawX8JwVSh9
+ lF+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWAGTjTJAFGjtG/V72up5WHXvULummhyTuWmphRIsHiPTYmGaILmcnt/a0VrYwhmoDqQHcj31M=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMbvVAqP/sk/SjRWONt8K7Pel24LGsr7mXT96ELFOuM0dYKEiw
+ VwIC+g49H2g+P+vv1V583dBQSIQj3TJushCsUoJzGZELlNxw2hj5xSmk18+Anqap4nA=
+X-Gm-Gg: AZuq6aLGNhtSpITatyJdIg3uodoX+WO+JHtJGYSPARIFOhskraGxq7xaJn/uVtCJ6GU
+ GXBakCmEICODiIh+hr/kboI2tVMvQCMcH2TYawfHPRd7fswPsYKxzFtY2QMOzKyFt9pQTulW8K+
+ lMSh38jaBi+ikGei/AA2TuXjmQxk4lrHy8tHDlAim1pXxptFPH2CRZxjjZtLz4MbgcKNp277bsl
+ w4TqWR1tohsVtmjNMWuoa004RlVTlPFxTdeqznkVsbyR5JUGrI1Q/PX0wrthUE/paohK7fUMEbc
+ rIP3Q86vfFYj8IOc8jRnmDTOfM4fmiUKH6ORYOz7QJxBnRKoEXFtY8+r7Z9Gtp4yLu/cVAigz+r
+ GWoEudTAL0g/+zHulPYRomTGZSIOTmACY7gemGvK3xFCtoEDUH6/2I6jtYfsGcBb6qyOfHW8KH6
+ Jy1vCBBJ9lbH3W8f62Zn3Kk4FfK3lhJr3gqk3i76D0xZOfdLTzYftJX/ASqqJZQ3Lq0apkHwPw0
+ PrBysQm1pMY3cagmM1IFomsMaRUkedbvPDf1F7wgIWbeH3FR64=
+X-Received: by 2002:a05:6870:8318:b0:3fa:aa5:be04 with SMTP id
+ 586e51a60fabf-40f08a58572mr7090638fac.20.1771339201106; 
+ Tue, 17 Feb 2026 06:40:01 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-40eaeb42708sm18415381fac.0.2026.02.17.06.39.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Feb 2026 06:40:00 -0800 (PST)
+Date: Tue, 17 Feb 2026 08:39:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: Simon Glass <sjg@chromium.org>, casey.connolly@linaro.org,
+ neil.armstrong@linaro.org, sumit.garg@kernel.org,
+ jerome@forissier.org, marek.vasut+renesas@mailbox.org,
+ ilias.apalodimas@linaro.org, me@samcday.com,
+ aswin.murugan@oss.qualcomm.com, clamor95@gmail.com,
+ michal.simek@amd.com, u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>
+Subject: Re: [PATCH v6 2/5] drivers: sysreset: Add sysreset op that can take
+ arguments
+Message-ID: <20260217143957.GZ2747538@bill-the-cat>
+References: <20260121063920.1500293-1-varadarajan.narayanan@oss.qualcomm.com>
+ <20260121063920.1500293-3-varadarajan.narayanan@oss.qualcomm.com>
+ <CAFLszThUMWgySrb4H2F5PE6XVsRK0Cc+PZ37f_3xZ12HEhM=3g@mail.gmail.com>
+ <aXg8ge6z7EMWliSd@hu-varada-blr.qualcomm.com>
+ <CAFLszTh-B=zQyBjwJ_OuVxAbpTpUaKB1e9zB8Nm6+wuJCK5OcQ@mail.gmail.com>
+ <aY7x9EAueKZ9Xxmt@hu-varada-blr.qualcomm.com>
+ <CAFLszTgWW0-3hXkUWVmiDgfT1yMZMkjX8zDsT8Qf846ZgaA2Xg@mail.gmail.com>
+ <aZKrlhpNI/tpdWmG@hu-varada-blr.qualcomm.com>
+ <20260216152906.GU2747538@bill-the-cat>
+ <aZPuDGK/uUOg11fR@hu-varada-blr.qualcomm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uyFOV9fZjKlzjFcz"
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Mutt/2.2.13 (2024-03-09)
-X-Mailman-Approved-At: Tue, 17 Feb 2026 15:31:03 +0100
+In-Reply-To: <aZPuDGK/uUOg11fR@hu-varada-blr.qualcomm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,32 +114,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The virtio spec clearly states in "3.1.1 Driver Requirements: Device
-Initialization" the sequence a client has to follow after device reset.
-Because u-boot resets here again, it also needs to set the "acknowledge"
-bit again even if this was done in virtio_uclass_child_post_bind already
-once before.
 
-Signed-off-by: Christian P=F6tzsch <christian.poetzsch@kernkonzept.com>
-Signed-off-by: Adam Lackorzynski <adam@l4re.org>
----
- drivers/virtio/virtio-uclass.c | 3 +++
- 1 file changed, 3 insertions(+)
+--uyFOV9fZjKlzjFcz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
-index ac563991b90..c36e9e9b3a7 100644
---- a/drivers/virtio/virtio-uclass.c
-+++ b/drivers/virtio/virtio-uclass.c
-@@ -292,6 +292,9 @@ static int virtio_uclass_child_pre_probe(struct udevice=
- *vdev)
- 	if (ret)
- 		goto err;
-=20
-+	/* After a reset we always need to start the init sequence again */
-+	virtio_add_status(vdev, VIRTIO_CONFIG_S_ACKNOWLEDGE);
-+
- 	/* We have a driver! */
- 	virtio_add_status(vdev, VIRTIO_CONFIG_S_DRIVER);
-=20
+On Tue, Feb 17, 2026 at 09:56:52AM +0530, Varadarajan Narayanan wrote:
+> On Mon, Feb 16, 2026 at 09:29:06AM -0600, Tom Rini wrote:
+> > On Mon, Feb 16, 2026 at 11:01:02AM +0530, Varadarajan Narayanan wrote:
+> > > On Fri, Feb 13, 2026 at 01:20:10PM -0700, Simon Glass wrote:
+> > > [ . . . ]
+> > >
+> > > > > > > > I haven't been following this, but what sort of args are yo=
+u planning to pass?
+> > > > > > >
+> > > > > > > As of now, an argument to indicate reboot to emergency downlo=
+ad mode.
+> > > > > >
+> > > > > > So how about adding a struct in sysreset.h where you can includ=
+e a
+> > > > > > flag word and create a single flag for your case? We should be =
+able to
+> > > > > > handle reset without the cmdline being enabled.
+> > > > > >
+> > > > > > There are other cases where this would be useful, e.g. an EFI a=
+pp
+> > > > > > rebooting into setup boot.
+> > > > >
+> > > > > Previously, i.e. v5 [1] didn't have SYSRESET_CMD_RESET_ARGS config
+> > > > > option. This was added to avoid bloat code size for platforms tha=
+t will
+> > > > > not need this. Please see [2]
+> > > >
+> > > > Sure, but you are adding a new method, so you could make it take a =
+new
+> > > > struct instead of the string list, still behind your Kconfig option.
+> > >
+> > > Sure.
+> > >
+> > > You want 'request_arg' function pointer to take a structure instead of
+> > > 'char * const argv[]'. Is this understanding correct?
+> > >
+> > > If yes, this string list is what was given in the command line. And is
+> > > passed to the implementation specific handler.
+> > >
+> > > 	Command line -> do_reset -> sysreset_walk_arg -> *request_arg
+> > >
+> > > The implementation specific handler can interpret the argv[] as
+> > > applicable to itself. Not sure how to convert/parse this to a struct
+> > > that can be used by EFI app. Am I missing something. Please advice.
+> >
+> > Varada, do you think this suggestion is taking things in a useful
+> > direction? It's unclear to me at this point if what Simon suggested is
+> > going to provide something meaningfully more clear / useful or not.
+>=20
+> At this point, for my case, it seems not needed. That is why trying to
+> understand his perspective to get better clarity and arrive at a
+> consensus.
+
+OK, yes. I think we can set Simon's questions aside for now then as it
+seems like he's trying to find a generic solution when we only have one
+example, and that's not the right way. We need two or three "doesn't fit
+the generic method" examples before we can see how to abstract things
+correctly.
+
 --=20
-2.51.0
+Tom
+
+--uyFOV9fZjKlzjFcz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZR9uQAKCRAr4qD1Cr/k
+CiXHAP4m9mSqETNf/CcMB2HZenpBi6ja75TyDQLa6l73iWRiwgD+IU5U9bzye6A2
+d+itB3CYDlw4DRGgzdV6dOFGwuGhhg0=
+=sjo1
+-----END PGP SIGNATURE-----
+
+--uyFOV9fZjKlzjFcz--
