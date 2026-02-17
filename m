@@ -4,162 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E63E83852
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 04:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507A6E83856
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 05:26:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80C4783B8A;
-	Tue, 17 Feb 2026 05:46:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 73CA783AA9;
+	Tue, 17 Feb 2026 06:26:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LO3iQDLU";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="GRQUhIKG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2F2F83C61; Tue, 17 Feb 2026 05:45:59 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
+ id 2205D83B8A; Tue, 17 Feb 2026 06:26:39 +0100 (CET)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E354D83981
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 05:45:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACCEE83981
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 06:26:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jt9PQ8OUDvt88PVEyCpHGcBClRWRHYfIbrypK0/gklYGO1D+QxI54vvQ4+xO+8JZDbB/i904Gn0Tn4sNy658/p6hW8R+wvY6yZHaRz2y7tUWXTPwy3C9C9bdya7rdSW0rVKUUmptCF0MHqM8ji+Ms8awpeNjcKXMga8V7u4DpuHXQQHj9yKuDlw6wr6oG7jhOOJtwxZqAnPPBiBOyY81ywrarzXMFmrN7S95etHd22Zxf1RmTNWYym6Is2YsvEfPqx5EYKt5IK8e1LhVhltOaA7XYvj7AOa1QqjY0FGjvNjKzcRNolumwiBEmVHoxuenKS0YP65R1/uRKm4MdFaVTw==
+ b=mH9BIqUSAoGDdNbUo2dDq6hROkwy085f8qm+JDvRoNed//qlUiA+kBVrc7fYhf8/YQT6VZD9AG7I7PKbu7IPdvKX546ppSIJgswLhLT7DANZyt4Y3999lVG5XnF8yEO00EEbKV2hTlNUEHP0LU3l4yYKmG4BLkCG5msnDDiAH5khiyzcE6dn9/lpXYRsrPipb0h4iUhzgwOHn/leZjNSOqe46/RB5MmF5MdFOP5KvBaSgPJKpNT6bKx/q3LfDKaga7Yx5iSShL+Qxy8DxqjvQPOPNjXbb9lAHtj/AxdA2Y6LUYbNw6kh+yKGRK+0t/wM1+Gl9P1ef1jqSuyqvEvS4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=r5HFMvb5Qhxho5cH/2q9Ml3mTBrkBYa6sAeYwj0MZuE=;
- b=M3x7zmerc2QM2ir0MgEuEMTGtgYln/5fM+LUIMWe1C4qJQArXE2YbPThnU+q55WHWFfOHt1Li3SHzR0Z5vrH37T85MJGAOZeg8JE/ya3U+sjQGJMR0IiUb1DdHPpcy7oHAwdrHEcQJr8uGzDL3OajXAUBHBrGtyB8JSY+VqOhQNuMuhWxw7cPpyQCTlbHZ7jMCywzakNBR3hRq+/3rIGnOXLOyetCVeOpvUCWdu6uM+cQgk/uDogBWFADnzct/Mt3YwTghnZJfePFkP4FYAA5wwaQ4egxlgX0PmrZyoNdHiAoXxLKaGx4wJ4i87mym0Q4eC843WvunQwy14UEap4OQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=5W8dKa3+O5Hxxs3QqvocVfx7X/DO1eHs2nrQfyI1Fnc=;
+ b=D33X75iwTcXgbhy1pYn2jpvppAtOtViepGzJeCs2Dj3P68jviDqq+roT5IuOBSrY55KH5rbRGoapoaHJX0ID6GxAHjeJ/i/ZMfJhWvatp4JM0RzwRUwR0sg3YzR/Pz7w4Ed3LCkuhZ3cmtdIZedT8Oo9dhXutHWYNXeLJRcn78/frJdanpjv7WUf2dkE38JkKd11p5J5wiEV4TP12j7J86+jJokRI5wOUEG4JfFLtI2Ztn8zCVf5+KDak5k3Hq9VQl0TalBF02QB5yxEYa6h9tizkiG/Pq84JUDGSOQKC3gcH1r9XJcXIuK/2L53LW6IVmeFIhgy2jMxXwP0iMxS7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=r5HFMvb5Qhxho5cH/2q9Ml3mTBrkBYa6sAeYwj0MZuE=;
- b=LO3iQDLUJM4P1AdgVYw2aCj04g9q4I4sOkZftZMdB3OU2rovDrKKfvFCuTzXTu4aqYegkIzjAiyO8lNtIW1Y0ZO0NLbccmB5XsSYfPuC+klsAc4Zyyc2kY+6g8plPLnbgaacLL/XrSp7uqvzGmz9GjT+6C1OxIaR6DJSDfCMz/s=
-Received: from BY5PR17CA0050.namprd17.prod.outlook.com (2603:10b6:a03:167::27)
- by PH0PR10MB997640.namprd10.prod.outlook.com (2603:10b6:510:386::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Tue, 17 Feb
- 2026 04:45:53 +0000
-Received: from SJ1PEPF00002322.namprd03.prod.outlook.com
- (2603:10b6:a03:167:cafe::be) by BY5PR17CA0050.outlook.office365.com
- (2603:10b6:a03:167::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.13 via Frontend Transport; Tue,
- 17 Feb 2026 04:45:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ1PEPF00002322.mail.protection.outlook.com (10.167.242.84) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Tue, 17 Feb 2026 04:45:51 +0000
-Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 16 Feb
- 2026 22:45:50 -0600
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 16 Feb
- 2026 22:45:50 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 16 Feb 2026 22:45:50 -0600
-Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61H4jjJ22784342;
- Mon, 16 Feb 2026 22:45:46 -0600
-Message-ID: <ef7bbd84fca55d137d66f7f29d050714dea84d37.camel@ti.com>
-Subject: Re: [PATCH v5 06/10] configs: am69_sk_r5_defconfig: Disable PCIe
- boot configs
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: <trini@konsulko.com>, <m-chawdhry@ti.com>, <c-vankar@ti.com>,
- <neil.armstrong@linaro.org>, <marek.vasut+renesas@mailbox.org>,
- <u-kumar1@ti.com>, <j-keerthy@ti.com>, <semen.protsenko@linaro.org>,
- <anshuld@ti.com>, <peng.fan@nxp.com>, <ahalaney@redhat.com>,
- <mkorpershoek@kernel.org>, <n-francis@ti.com>, <u-boot@lists.denx.de>,
- <srk@ti.com>, <s-vadapalli@ti.com>
-Date: Tue, 17 Feb 2026 10:17:13 +0530
-In-Reply-To: <0de97221-047c-420b-aeab-3b5eee74f97c@ti.com>
-References: <20260216102858.2745657-1-s-vadapalli@ti.com>
- <20260216102858.2745657-7-s-vadapalli@ti.com>
- <0de97221-047c-420b-aeab-3b5eee74f97c@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+ bh=5W8dKa3+O5Hxxs3QqvocVfx7X/DO1eHs2nrQfyI1Fnc=;
+ b=GRQUhIKGxcuREuHwf1NxGxwKF4/Y8CUA8kt0C4QjWz/10vJqPFATl0wImh+NWtP1+oWT0IcvSJ7LAaQzCsPSAJmQW73wHak/kjY9TnvzjLLTcBXt9AeTItShXH+cqGDEQ0TaRk9wTJvt7bu2z/GkyxL7BtmjGYqSJNwoIs82RpE=
+Received: from PH7PR12MB7428.namprd12.prod.outlook.com (2603:10b6:510:203::9)
+ by IA0PPFAF4999BF6.namprd12.prod.outlook.com
+ (2603:10b6:20f:fc04::be0) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.15; Tue, 17 Feb
+ 2026 05:26:31 +0000
+Received: from PH7PR12MB7428.namprd12.prod.outlook.com
+ ([fe80::e99b:6a9d:278c:f034]) by PH7PR12MB7428.namprd12.prod.outlook.com
+ ([fe80::e99b:6a9d:278c:f034%4]) with mapi id 15.20.9611.013; Tue, 17 Feb 2026
+ 05:26:31 +0000
+From: "Begari, Padmarao" <Padmarao.Begari@amd.com>
+To: Tom Rini <trini@konsulko.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "Simek, Michal"
+ <michal.simek@amd.com>, "git (AMD-Xilinx)" <git@amd.com>, "Toomey, John"
+ <john.toomey@amd.com>, Quentin Schulz <quentin.schulz@cherry.de>, Rasmus
+ Villemoes <ravi@prevas.dk>
+Subject: RE: [RFC PATCH] cmd: part: add dupcheck command to detect duplicate
+ PARTUUIDs
+Thread-Topic: [RFC PATCH] cmd: part: add dupcheck command to detect duplicate
+ PARTUUIDs
+Thread-Index: AQHcnny6wvJCIRWi10Cs5q2ljeQwHbWFdgmAgADoAOA=
+Date: Tue, 17 Feb 2026 05:26:31 +0000
+Message-ID: <PH7PR12MB7428ECA4885D64FA3FA9C07AEC6DA@PH7PR12MB7428.namprd12.prod.outlook.com>
+References: <20260215131115.3352282-1-padmarao.begari@amd.com>
+ <20260216153249.GW2747538@bill-the-cat>
+In-Reply-To: <20260216153249.GW2747538@bill-the-cat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Enabled=True;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SetDate=2026-02-17T05:23:27.0000000Z;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Name=Open
+ Source; MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_ContentBits=3;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Method=Privileged
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH7PR12MB7428:EE_|IA0PPFAF4999BF6:EE_
+x-ms-office365-filtering-correlation-id: a99bb2b4-f824-4afb-8971-08de6de51bd2
+x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700021;
+x-microsoft-antispam-message-info: =?us-ascii?Q?E0UW9rNd4chVyx/j/OVnH2Gv1xx7009FpHOSQkNNNenxeXPKJyBskAE1jpB5?=
+ =?us-ascii?Q?VN2iVXpUIot/o1Ml6lJXyMDicPg9Z6UGxP1ZJhJjSYpQq/QQDxfV7KqNre4i?=
+ =?us-ascii?Q?crBIOhGXLtZh09CjZpENujoaCcwkuFROYi9/WM3E+pIkyOXdomFb+OQyBU0t?=
+ =?us-ascii?Q?rushlMvhOuGIHkY6LeFumKLy+cPeTryVRNCypBzdW3ZdGAjS7lHrFBu1rBrC?=
+ =?us-ascii?Q?0r6ZLFWr62a1g9i3RQ+Dk5pyU+RA1W/sBHEbeNYduTag/LFKRSik5e9dk3ZU?=
+ =?us-ascii?Q?3/Nuf7il6IWKJkau0hNAP4Uvuzxkr+A1ozkbtSEIM5zJ4KPfVVE+QKRVDQp4?=
+ =?us-ascii?Q?SOIW25IybtUEuE1wk+IyHbtvR1td/Mt78chnfByrNhv61vheTSQmPKqkRIr1?=
+ =?us-ascii?Q?vk9avOcbqkOFwf079lokh7ISrXPBNfrWF0+tBP3L1VtmEwrnbMdH3f2+tFoh?=
+ =?us-ascii?Q?Vp2KoNMf2Y09SSFynQMvxkH6OrauwbJq7oyXU/tZ5Zm4Kow5J0kBcuzUKeZY?=
+ =?us-ascii?Q?4VH+RJ42D4YDksYha5cyBqYU0Krpvp96d4aUQvb1ZCeDFnYpxncIDwe48VZY?=
+ =?us-ascii?Q?yYejkwHeSx2mRhwwCDSuwEupzMgi82yPlnuE3XEoUyQlR3lHaFqZ2LRmKOS+?=
+ =?us-ascii?Q?g2PWJVw9pXy2agaEM15NvzW8W+d8PrL5N9jbLTWH9bwF1zA076yLDpCYGI1T?=
+ =?us-ascii?Q?Wngw8WGbmG8AwJVvdLQWASUikgtfmeuWDdQqkAn1adonfPO9VP0Y8jsmtWn9?=
+ =?us-ascii?Q?dxsmTW15HgNxeNzzvw2yagXY5UeD3Wnq3r7pYJPyJdkGVP0UjHp/AELY8EAj?=
+ =?us-ascii?Q?lsOJFErCdomonQIGjRy2m3ot+ArP9n/eUbw2LJch73XGl4G15h0uaY7Fcg3Y?=
+ =?us-ascii?Q?Syr2RcqMGDIba6EmmskMpabMQhqGjTucJrAoknSU88ZOK4XfX5QEbvgjRbzO?=
+ =?us-ascii?Q?IJb68sgguY3RArLZftmVFeWxQ99B9+bUt3FWtTeblTdTWqmto0mEzGizDybX?=
+ =?us-ascii?Q?AglJIUorgFrR3bRuEmssa3lvBjXKUltFGa0M3M948gd/0fyD0tqM7hLh+kOS?=
+ =?us-ascii?Q?uxDKnwSjY7RSSiBDpvEIWh85UV7ieO+VJFs3vKxrV87o0wYk6kFaoOoB3ywr?=
+ =?us-ascii?Q?R2Z6nZ1uGnz7/rCWwF1K21kfEx1Dr8WTRPgi3YpX3Pcqo42QezHBIPHegtFG?=
+ =?us-ascii?Q?3vkpNUmriWcU5AZdyMzncQoiQSpiydYFUtDyLpyUC0OJSy2pnaW//u033lkj?=
+ =?us-ascii?Q?BaMjiAeCw5bpCcWrARysQuopLmUloEBctZbPz/ZAl00KOAHpKZ0UkoXOJ6kV?=
+ =?us-ascii?Q?P+56UJBYkWcgf25eUNDZE3i/FXHsEFvAZgT2HIByuuNI/HN/VrNpV0V9GL9i?=
+ =?us-ascii?Q?SjT37+xbIY7b1Y/0SJZukxRg8SBTCeZ6fQC139o3cfK8Mwa56WQ34Ksrq7Sm?=
+ =?us-ascii?Q?zQ1s5HBT4ilaPbbADEUaJi0vKnTmzuKJRO1U5DWLfaTPe5kVoMEz6J/nbK0D?=
+ =?us-ascii?Q?WsPcDAP0aKr26WA6bQ4i4MkrEpLQQLy0mgRaaHFac3j4VLwHIO9ebaKJAJUZ?=
+ =?us-ascii?Q?gWYkN9uHI2f9ezPT3JYs2nhbY/1Rkc9bW4N2Nv5aeMvdggCRBbfjwaK05qmx?=
+ =?us-ascii?Q?dw/BNvdsRFD0D8PeqmpuWCk=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB7428.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700021); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?SAvo9UuPvuF9NJNKdzUGVYdCFABuATxB9U8N8x+EZSYz7+IDPoGWkv5jXuYl?=
+ =?us-ascii?Q?BXV7yILUg//INnkS/SayVq546Je2yid07SkLEC/AX3VJVQRYoB/mkLjzuuk6?=
+ =?us-ascii?Q?xRWDaIsdMv74VOhAqJSv5N6ttvgtabuelDLyb5jPAtWJg88Vxjh2VApNLCPp?=
+ =?us-ascii?Q?9QSw+FZLA1WjnPh0EXsdO4jHQwB2adD43iiXMrLdKkfmBhanOWdNZid58+WJ?=
+ =?us-ascii?Q?b4+RKevWxynKToG75umuwOv4M5yaTRo+CrnwlttJqn0RPnx8PzeJeHcyCEy2?=
+ =?us-ascii?Q?5EwJTjaMx0c0pjnWUgqhPalGKpreioqjBpP44H4vhbx0/XY6lpjLOsw85fSw?=
+ =?us-ascii?Q?g8TbrhknG5nYL64AbKNPewNhXLS/aW5+pjYxk1QzdPTdL13Z/gvZxGu4MzE+?=
+ =?us-ascii?Q?CsNgQhqsYtfRnFOR3OQKc0ySHbPZAMBiuvPta4EAnclzT2J4yU3IuSlARd3l?=
+ =?us-ascii?Q?XMPeBbEp6vrpHpPAufYVHxnKQf5lwybp5hUV8kSnGi1aAMDNd4uYlE3W2Gu7?=
+ =?us-ascii?Q?FpAa7t6DEdA0NRnTriFtN8Ld74HwYA0FwZVZYJD/IGk/jGfAJZbL2HXQuWqb?=
+ =?us-ascii?Q?N1rD9UfP9wEYnVYz/yo9joizvMyIbC29jhWgDPDWeJRnmH+Uj4lDL17gXM34?=
+ =?us-ascii?Q?61YhAZRnY5wq0CKTq56/FnvxWjR7FOBE0nrT51AjcHElEEELJKFq/a5xy3tE?=
+ =?us-ascii?Q?9Rik2Dnt+hUSNodn9EzHhKDipQc/pUvZmUOtJQX8xaZqyy+rxNE3nroXCFCo?=
+ =?us-ascii?Q?YbKDCbb9wx0kh0PVc1/xmRBnH7cnz2IwLa/T8GaCeKsPlVGFhehHkyVAY6+j?=
+ =?us-ascii?Q?Cc/BrE7GT9uKrzmBh4D9WkxZLq7RVQYPmrBEIpvXTxtiaOjv6Zw61qcBYNm0?=
+ =?us-ascii?Q?dJTKYWUj5bFLP/3mEXVdQ3WOAQUlfRVyiEoqoD3cCumRZdMKo6JGTmvmDdcS?=
+ =?us-ascii?Q?FmL8wm7+LjcEfXWCXDptuxH0wouGno6N2VyuAizBUsV8WISq/itIkgamuyaW?=
+ =?us-ascii?Q?SR74Y0oizaunmI/6bMK34tyalFjxuwOSgpq4iJ3DI9CNs+kZtp+enH/Rt025?=
+ =?us-ascii?Q?YXUcALBJnbW76UsBh1/Pty+xaIFR1m4V3+iZxw53cl8U8Kgu/x+A+jbbFMQy?=
+ =?us-ascii?Q?ZOktzu7tM/8UpmSURCc3qV+E8xCUh4hr5N9APZmKyzV+r6HNA/sdql+L/GO/?=
+ =?us-ascii?Q?iUDO2cclCUzRh8lf/+l/g1R/TYdU6sZbAl0EGrP89r1qahhXeHFGckFrVvDn?=
+ =?us-ascii?Q?j6IRTHe9NHqn7qvu1iUUs618dRnACqsWx/G6zv7YbWAEP4ywBqEl8tDXq6gU?=
+ =?us-ascii?Q?TMdJrcz/R0bDBJGu+WnRFdy0EkWO87Zc4iU0Vt3HtC2Y/f+TUcvMr7GXCm0j?=
+ =?us-ascii?Q?zHJZsvzaYhrK8yb9w8rm2ouL6tpJQkqLbFTX2ccFRSStrPwxa8yRAqZLUEjt?=
+ =?us-ascii?Q?prfZhzUTnUBM730L/cncN/kXMRcsr4of92FiNmbTgV/yNN7aAQ7YM7Aj45kg?=
+ =?us-ascii?Q?pgXVjTwY9rDAdfhhjEHBO5m0kroNbmHW3jucq7UlGgf8jiADzj03cFrydIVk?=
+ =?us-ascii?Q?9dvDCUxopuP1ZeKFOjH3zV0R2LQfJp9rGHPFAZzk2M76pa9CajOmHxkkJA48?=
+ =?us-ascii?Q?mzxkX3ndcSUrZj/KWKb+w6O5ERz6DWMx0fttCfooaUfscs9EPggyBm47y6Ob?=
+ =?us-ascii?Q?Qbo/fGaKIOeKg4j7nT/jXa2MlaVlsc/v2l3Q8Xo8VSN2R3oZ?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
 MIME-Version: 1.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002322:EE_|PH0PR10MB997640:EE_
-X-MS-Office365-Filtering-Correlation-Id: 06b06c04-ac4b-46e8-d2a5-08de6ddf6db6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|376014|1800799024|18082099003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?anhyR0ZObndNTi9wTFZ4cmhxdGtGKzA3WnptSW1wNlBIS2picmducVU4Yy9K?=
- =?utf-8?B?ZHp2UEoyUk5kc2FxNWlOM2ZnOGd5S0ZWYkVERGRxWWoyL2N1U3JxeURVNDFu?=
- =?utf-8?B?cHFzVlpQZHRXWi9UMnhqa0FSejJqWTJPa2s3NlF3VjJrdkw4TVhWeUFMNndq?=
- =?utf-8?B?WFlTVGo4K0UrUGd6eS96UEp6UkFTTHdvUzJoeDh3N3ZoTnpZQUFIdzY5Q0Nm?=
- =?utf-8?B?VXBiMmZqb1o2UkUxclZhUG5IVlU0WWJuM2xkVHY4YzdyT1VENXllNmhyVjA4?=
- =?utf-8?B?M25FUzk3aU4yTDFJOUl6T0kvaERsdWpxV2F5WjFLQThKQXlLUHRwbTF3SUxs?=
- =?utf-8?B?ZHBsTUp4Q1B3czN6TENxL2h2b0tCTFZXN2hRZEpVWW5tWXVwc2JxdWx1VDNr?=
- =?utf-8?B?Q0NBUWw5cEd1SFU3RWdUNHFsa3l6bXJlQ1U1dEYwbmpLVnc5RHdwRVR6bkVB?=
- =?utf-8?B?eFExQWZhZGhDRlVvOVRKZUtQS0hFYlRlNnZVeW5OL1BxNHdodnpiTTNKZjJO?=
- =?utf-8?B?ZU13VGpvS2hya1BYeGg2TWdnK2xOYnFRQ283ZElxMlVvSEFqK2xVcHJXM2o0?=
- =?utf-8?B?QjdzQ3N2V1BoazlRUW9nK3VGUzlmYitvQjhicnNFSTVZcmQxYTRya3R3Unpx?=
- =?utf-8?B?cGg2TUpDOUV3elBGQU82TW5WYy9nWkJtcWRuQWFYUjZFOHFobEozN0ZPaVEy?=
- =?utf-8?B?ZEZTWFdpSVlBamw2bk5aeW5rSlovdlJoOG1uRDVGZ2NHaGFGWS91eXdxY2JG?=
- =?utf-8?B?TlJRTUtvdElBUzJtNDlVZUg4VUl3L3A5T2k1K3F3N3hSaFJ0U1JTMU9BZnFq?=
- =?utf-8?B?QWU4cWhpZjZtYnVxM0d5cVF2ZWFFSkdXc1p5cW9zNWF0WnFaa3BqNWhURU5L?=
- =?utf-8?B?WVNOcXZVMVA0RHB5eDMrU0RHN0d3bG9FbDFKN2lzTnVhVTh5RUIrbDZjS0pi?=
- =?utf-8?B?YXdhUFV0MWZ4Ujl0cUxkakQvQkcyMGVpQ0REcFJ6ODhPSDd5aHNodGlEWGJu?=
- =?utf-8?B?TjY0UmdqVUVFKzdJdVpzVlBBZ1Z3WTgrV0kramFpc3FnallSOWNsTm9sb2Y4?=
- =?utf-8?B?NTlFOHNXWTQvckZhMmJuVzhzN2RpVmdXaW91czZobWFVYTdpK3pmeVRJNnpR?=
- =?utf-8?B?NHQ0Y3NyWXI5Y3V2UGV5dklHLzJkY2FVMTZDRUtVOEhNZjdGeUdQS2JVTjhE?=
- =?utf-8?B?L3BIblJ4OEtpaTBQWGtlTEZRVEEzQmZBSFpzMTh6NHlUZ01RS3o3Y2NSUDc1?=
- =?utf-8?B?K3g4Q0hzMy9lN3ZrbUxOcjIwQWJZVUMzTmtvUTR4cHFnRlZpRzlxUUhjcDBY?=
- =?utf-8?B?TFBud0JlKzU1WDBMTUh6dXo5eWM2bVBVMFkwbGtNOHAzL1U1TUk5UWhZaWxM?=
- =?utf-8?B?V1lNZjlFVDBDTlg5Zm5XcEVlRm1NM1FoNWdLcVNHMHBaNEd0WFplWDBsY3Az?=
- =?utf-8?B?NzZYUVVoVGhDREVxRE9PS1VQZWJFaGY5angxU2VOOTQ5L09vMUFROFVzT2VV?=
- =?utf-8?B?WFowNjhzeWU3N2VOc3c1cVU2VWs5M29md0hNc0xyRUM5K2JzNTFYWXluRWFt?=
- =?utf-8?B?aDRLdVBtZGgyVVgwQUxYVDQ1UjBZRndHOXg5QWcrTUp2Q2M2Sk1NRFdJd1pK?=
- =?utf-8?B?N1Y2VmxBZzNHTU5YSmJxVDhBcldIVEdKaElUcFpaTGc1c242YVFEUDNWY2VF?=
- =?utf-8?B?bldRK2RPS3J4cWJiZm9nTHJPTUpNbXlEVGVVRFA3WnpVVXBRTms0UnM3bWlw?=
- =?utf-8?B?OVJKZVFtK2piak03eWc3cTMyWGNoSjNEVFlKcEd3QjVoYXRBS1Q4QU1zK1h2?=
- =?utf-8?B?YmRNRndteHF6WFg5bEhMbStKOE5ZbldwamxkMVB4RkFIZG50RUFzcittQ0Ez?=
- =?utf-8?B?NkowYldqc3FTdERKdThsTGhKNEhxTzdnK0IyTjEzSjR6M1JWeFFnUmk1d052?=
- =?utf-8?B?Y3k0cm9BQzVmdmluODlMQ3o3RjJZUlh0ajhBNm1BejRFNU1wbFVXS05yNEdR?=
- =?utf-8?B?NEhmZGkySDRsVmhiYnAzT0ZyWXpxTm9wWHZDbjJ3RzA5NVY5NWpGRnhrYldD?=
- =?utf-8?B?Z0ZIdWxCK2g1emJoT09ZU3d1L3hUWUNkTnovVU1rTVhRckJuc0k2Z2JMc1pM?=
- =?utf-8?B?L0lpNW1uWUVDYzZXWUU4MG5rc3ZOL2tsR0VYUE5IY1pVQWtvNVpIYVNEVkR1?=
- =?utf-8?B?ZjdjblYvVVpzbTNoSWdOTUhjYVNmL3h6SjVFekhvT0F5MDRqQ1I4UEE5YXdw?=
- =?utf-8?B?MFV2ejhUUyt3aGVOQkRZcVc4cGl3PT0=?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(18082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: nNyzaE0DqpcpauxXzqNdSRJJUWuk8spKsnvOyd8UpCFH+T77R2AMf3EX4fceswstMDwmJO1c1AHz3f/YYTJXYsz1ZrpFIhl+tWiS+7NyM4Zmt9zSLB484sKQLgQMhXzgnGR6BGxZwlL5b7e6BgJrigQc37U8ZBGAHMAfzr08MtxG0QZSc7oN8iXWDrXmVFprAeWBvOmHEbQpyDp8N6v+XuvxIL03XWJReF8Oyh3OIcDUi1oIFbAr1tKZP1KeQ94Q/r5ARu9zfesjXh+x2Vj+DoUcWATktLGF2pJO+R/MpUi/kHKfK4L7FlJWFwhjG0K+TrpAI0dsES+LESXxziTgnThrmVEu8sy7YpcO8oTAbJeWyiJiLRjEZ8IdNkM9KYccGFxN42iSRL/c8YmqtvgUINPUsDWQpl6JtorZtIchdsI0eRr/qRh+F5qUCbZUo6PM
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2026 04:45:51.7739 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06b06c04-ac4b-46e8-d2a5-08de6ddf6db6
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002322.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB997640
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB7428.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a99bb2b4-f824-4afb-8971-08de6de51bd2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Feb 2026 05:26:31.4247 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: bgcAeBwt0kZs8zaOoifqQF+Giky61nHCDD3PdHuFsJjCLUR1Px7xM3UUCHRrLXjdkByr+zydBOnAl8fDjGH/XA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPFAF4999BF6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,72 +175,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2026-02-16 at 11:39 -0600, Andrew Davis wrote:
-> On 2/16/26 4:28 AM, Siddharth Vadapalli wrote:
-> > From: Hrushikesh Salunke <h-salunke@ti.com>
-> >=20
-> > AM69 SK does not contain PCIe Boot in the list of supported Boot Modes.
-> > Hence, disable PCIe Boot related configurations that are not applicable=
-.
-> >=20
->=20
-> The board does not have PCIe Boot selectable on the DIP switches, but
-> those switches are not the only way to set the boot mode. I'd just leave
+[Public]
 
-PCIe Boot is not claimed as a supported Boot Mode in the AM69 Starter Kit
-User Guide on purpose.
-This is because the Boot ROM supports PCIe Boot via PCIe1 instance which is
-connected to an M.2 Key M Slot (intended for M.2 SSD) on the AM69 Starter
-Kit board. Even if there is an alternate method for setting the Boot Mode
-Pins for PCIe Boot, it will still require the usage of an M.2 Key M to PCIe
-Edge Connector Adapter which is _not_ sold along with the AM69 Starter Kit
-on ti.com.
-
-Hence, I interpret it to mean that PCIe Boot is not intended for AM69
-Starter Kit board.
-
-> these enabled unless you know of some hardware issue that would prevent
-> PCIe boot on these boards.
-
-Due to the 'hardware challenges' mentioned above, enabling it in Software
-and testing it on the AM69-SK isn't straightforward and is HACKY (alternate
-mechanism to select PCIe Boot).
-
-Additionally, this series is for enabling PCIe Boot on the J784S4 EVM. So
-even if it may be possible to enable PCIe Boot for the AM69 SK in the
-future, at the moment, this series doesn't do so. If and when
-the support for PCIe Boot for AM69 SK is added, the configs may be enabled.
-
-I hope this clarifies the reason for disabling the 'inherited' configs in
-am69_sk_*_defconfig.
-
->=20
-> Andrew
->=20
-> > Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> From: Tom Rini <trini@konsulko.com>
+> Sent: Monday, February 16, 2026 9:03 PM
+> To: Begari, Padmarao <Padmarao.Begari@amd.com>
+> Cc: u-boot@lists.denx.de; Simek, Michal <michal.simek@amd.com>; git (AMD-
+> Xilinx) <git@amd.com>; Toomey, John <john.toomey@amd.com>; Quentin Schulz
+> <quentin.schulz@cherry.de>; Rasmus Villemoes <ravi@prevas.dk>
+> Subject: Re: [RFC PATCH] cmd: part: add dupcheck command to detect duplic=
+ate
+> PARTUUIDs
+>
+> On Sun, Feb 15, 2026 at 06:40:47PM +0530, Padmarao Begari wrote:
+>
+> > Add a 'part dupcheck' subcommand (gated by CONFIG_PARTITION_UUIDS)
+> > that scans all block devices for duplicate partition UUIDs. This helps
+> > detect situations where the same disk image has been flashed to
+> > multiple boot devices (e.g., USB stick and UFS), which can lead to
+> > unpredictable boot behavior when using PARTUUID-based root filesystem
+> > specifications. It iterates all block devices using
+> > blk_foreach_probe() and checks partition UUIDs via part_get_info().
+> >
+> > When duplicates are found, a warning is printed for each occurrence:
+> >
+> > Warning: duplicate PARTUUID 20c5fba5-0171-457f-b9cd-f5129cd07228
+> >   first seen on usb_mass_storage.lun0:3
+> >   also on ufs_scsi.id0lun0:3
+> >
+> > Signed-off-by: John Toomey <john.toomey@amd.com>
+> > Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 > > ---
-> >   configs/am69_sk_r5_defconfig | 6 ++++++
-> >   1 file changed, 6 insertions(+)
-> >=20
-> > diff --git a/configs/am69_sk_r5_defconfig b/configs/am69_sk_r5_defconfi=
-g
-> > index 2186b9a0490..166f774aade 100644
-> > --- a/configs/am69_sk_r5_defconfig
-> > +++ b/configs/am69_sk_r5_defconfig
-> > @@ -5,6 +5,12 @@ CONFIG_ARCH_K3=3Dy
-> >   CONFIG_SOC_K3_J784S4=3Dy
-> >   CONFIG_TARGET_J784S4_R5_EVM=3Dy
-> >  =20
-> > +CONFIG_MULTIPLEXER=3Dn
-> > +CONFIG_SPL_MUX_MMIO=3Dn
-> > +CONFIG_SPL_PCI_ENDPOINT=3Dn
-> > +CONFIG_SPL_PCI_DFU=3Dn
-> > +CONFIG_SPL_PHY=3Dn
-> > +
-> >   CONFIG_DEFAULT_DEVICE_TREE=3D"k3-am69-r5-sk"
-> >   CONFIG_SPL_OF_LIST=3D"k3-am69-r5-sk"
-> >   CONFIG_OF_LIST=3D"k3-am69-r5-sk"
+> >  cmd/part.c | 104
+> > ++++++++++++++++++++++++++++++++++++++++++++++++++++-
+> >  1 file changed, 103 insertions(+), 1 deletion(-)
+>
+> I see this as useful, but I think it needs to be its own Kconfig symbol.
+> This is going to be enabled on something like 1100 boards today, if only =
+gating on
+> CONFIG_PARTITION_UUIDS. Thanks.
 
-Regards,
-Siddharth.
+Ok Tom got it, will guard it with own Kconfig symbol.
+
+Regards
+Padmarao
+>
+> --
+> Tom
