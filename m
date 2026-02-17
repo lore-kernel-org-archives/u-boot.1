@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698ADE909D9
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 16:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF05CE909D3
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 16:40:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 186B483D0B;
+	by phobos.denx.de (Postfix) with ESMTP id 51F0483E4C;
 	Tue, 17 Feb 2026 17:39:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="MNwK9qT9";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="IKMKw4Hz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6457383DC9; Tue, 17 Feb 2026 17:39:23 +0100 (CET)
+ id 9EA4283C32; Tue, 17 Feb 2026 17:39:23 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6144983AC5
+ by phobos.denx.de (Postfix) with ESMTPS id BC95783D0B
  for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 17:39:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 059CB110ADB; Tue, 17 Feb 2026 17:39:19 +0100 (CET)
+ with ESMTPSA id D103A110AD7; Tue, 17 Feb 2026 17:39:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1771346360; h=from:subject:date:message-id:to:cc:mime-version:
+ s=dkim; t=1771346361; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=qk5W7htfRn/oH0m2No1Y+pSy8Kqfh6fXbaD13Mi38TI=;
- b=MNwK9qT9EiW9rmGluLjw9imLk4NRLuqhqIgnjk6U/Jcp1lMoj+N7P+MwHtf1MSgBmTdmI3
- ntkmzL3yGCTXzLzFtWpPMXR36QLxJo9L5Gy8WmBJwr5H5I35Q8C7CAqHXAX+xKtizzJGZ5
- iII+phDcIUnyJcIC0sSClA50Ytf4RiqD9ROZZI9hfvygGJ5DvL5BpXnumVTOzz24v7uW0G
- 5rN6VQpar1gD1atMYrF7CmTqbNx/ZNvmoC9/164SI6WAAk2QrXCnXt361svbDbcGs2Bg3H
- yJ2OHaMTjY/616JWJUMClFjTNVauwKgFnRCobh8M/KHGXqLo+nsntiK2vmbHog==
+ bh=GKfN29bmpNSmTJkH2olG1NrBQVk9IztnPTBuuB4/v/0=;
+ b=IKMKw4HzbDLFmvzf3zNIdKJe51+WLInWKrHXxfOybFE1fkeDOFX3qRDvzwo8Q/UFhbUuZ7
+ Ab3qzVURFoLVfJfwxWSZ3Z0yXfwnpJ57j0qvdMVGKp5mYtm8QSKTTD4OWrwUHw0mBzoBqo
+ 4ibYAayw0m2jz1YbVQXnYHQvHWVuOhEYgqorTRO+cu2whaIA/a6M44L8wd2e3UqgzDw6qR
+ s5KCz+vBPj41BPzvKusfA3uTW/r2RRmQ+/cXLSICTv4beiFzvDKC400QNfugG6HB+cm7o9
+ /G+dYv8TosEpbgxDJwTE0M4bdcTF7R0SKbMOLvk4aT1TAseqyGQMj+lrisIO2A==
 From: Heiko Schocher <hs@nabladev.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
- Heiko Schocher <hs@nabladev.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Peng Fan <peng.fan@nxp.com>,
+ Heiko Schocher <hs@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
+ Adrian Freihofer <adrian.freihofer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 07/11] siemens: capricorn: add logic to U-Boot to avoid
- zig-zag boot
-Date: Tue, 17 Feb 2026 17:39:07 +0100
-Message-Id: <20260217163911.31878-8-hs@nabladev.com>
+ Tom Rini <trini@konsulko.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>
+Subject: [PATCH v3 08/11] siemens: capricorn: always detect emmc device
+Date: Tue, 17 Feb 2026 17:39:08 +0100
+Message-Id: <20260217163911.31878-9-hs@nabladev.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20260217163911.31878-1-hs@nabladev.com>
 References: <20260217163911.31878-1-hs@nabladev.com>
@@ -70,25 +69,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add logic in board code for detecting the real boot
-partition and set a local hush shell variable fallback
-which can be used later in boot variables for detecting
-a ROM bootloader fallback case.
-
-We use the local hush shell variable, as we do not want
-to save in any case the fallback variable in U-Boot
-Environment, as the default Environment is maybe saved
-in boards, which are downgraded to older U-Boot versions.
-
-And than the board code does not run, and fallback never
-gets the correct value.
-
-Introduce also hush shell variable envvers to value "v2_"
-so we can use them in Environment for running different
-versions of variables between new and old U-Boot images.
+drop Environment variable mmcautodetect and the board logic
+behind it, as we want always to autodetct the emmc device.
 
 Signed-off-by: Heiko Schocher <hs@nabladev.com>
-Signed-off-by: Walter Schweizer <walter.schweizer@siemens.com>
 Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
 ---
@@ -97,101 +81,51 @@ Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
 Changes in v2:
 Added Reviewed-by from Peng
-fixed typos in commit message and board code
 
- board/siemens/capricorn/Kconfig |  2 ++
- board/siemens/capricorn/board.c | 43 +++++++++++++++++++++++++++------
- 2 files changed, 37 insertions(+), 8 deletions(-)
+ board/siemens/capricorn/board.c               | 13 -------------
+ board/siemens/capricorn/capricorn_default.env |  1 -
+ 2 files changed, 14 deletions(-)
 
-diff --git a/board/siemens/capricorn/Kconfig b/board/siemens/capricorn/Kconfig
-index fe230971e97..d6d1aad75b2 100644
---- a/board/siemens/capricorn/Kconfig
-+++ b/board/siemens/capricorn/Kconfig
-@@ -1,5 +1,7 @@
- if TARGET_CAPRICORN
- 
-+config HUSH_INIT_VAR
-+	def_bool y
- 
- config SYS_BOARD
- 	default "capricorn"
 diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
-index 390a7b0d841..34e7f2d1713 100644
+index 34e7f2d1713..ba6c96a409c 100644
 --- a/board/siemens/capricorn/board.c
 +++ b/board/siemens/capricorn/board.c
-@@ -5,6 +5,7 @@
-  * Copyright 2019 Siemens AG
-  *
-  */
-+#include <cli_hush.h>
- #include <command.h>
- #include <dm.h>
- #include <env.h>
-@@ -29,6 +30,7 @@
- #include "../common/board.h"
- #include "../common/eeprom.h"
- #include "../common/factoryset.h"
-+#include <firmware/imx/sci/sci.h>
+@@ -357,16 +357,6 @@ int board_mmc_get_env_dev(int devno)
+ 	return devno;
+ }
  
- #define GPIO_PAD_CTRL \
- 		((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | \
-@@ -373,23 +375,48 @@ __weak int mmc_map_to_kernel_blk(int dev_no)
- 
- void board_late_mmc_env_init(void)
+-static int check_mmc_autodetect(void)
+-{
+-	char *autodetect_str = env_get("mmcautodetect");
+-
+-	if (autodetect_str && (strcmp(autodetect_str, "yes") == 0))
+-		return 1;
+-
+-	return 0;
+-}
+-
+ /* This should be defined for each board */
+ __weak int mmc_map_to_kernel_blk(int dev_no)
  {
--	char cmd[32];
--	char mmcblk[32];
+@@ -377,9 +367,6 @@ void board_late_mmc_env_init(void)
+ {
  	u32 dev_no = mmc_get_env_dev();
  
- 	if (!check_mmc_autodetect())
- 		return;
- 
+-	if (!check_mmc_autodetect())
+-		return;
+-
  	env_set_ulong("mmcdev", dev_no);
-+}
-+
-+#if defined(CONFIG_HUSH_INIT_VAR)
-+int hush_init_var(void)
-+{
-+	sc_misc_bt_t boot_type;
- 
--	/* Set mmcblk env */
--	sprintf(mmcblk, "/dev/mmcblk%dp2 rootwait rw",
--		mmc_map_to_kernel_blk(dev_no));
--	env_set("mmcroot", mmcblk);
-+	if (sc_misc_get_boot_type(-1, &boot_type) != 0) {
-+		puts("boottype cannot be retrieved\n");
-+		return 0;
-+	}
-+
-+	/*
-+	 * Set here explicitly a hush shell variable, so if a saveenv
-+	 * happens, this variable is *not* saved in U-Boot environment.
-+	 *
-+	 * This is for devices which are already in the field essential,
-+	 * as if such a device breaks, the cutsomer gets a new device
-+	 * with a new U-Boot version (and so a new U-Boot environment).
-+	 *
-+	 * But the customer makes a downgrade to an older U-Boot version,
-+	 * which does not have this code in, and runs now with a new
-+	 * U-Boot Environment (yes, protected Environment is not enabled
-+	 * there) and the old U-Boot must still work with the new U-Boot
-+	 * Environment. So we cannot store this variable in U-Boot
-+	 * Environment as a stored value will in this case never be over-
-+	 * written.
-+	 */
-+	if (boot_type == 1) {
-+		printf("boot-container fallback ocured\n");
-+		set_local_var("fallback=1", 0);
-+	}
- 
--	sprintf(cmd, "mmc dev %d", dev_no);
--	run_command(cmd, 0);
-+	return 0;
  }
-+#endif
  
- #ifndef CONFIG_XPL_BUILD
- static int load_parameters_from_factoryset(void)
+diff --git a/board/siemens/capricorn/capricorn_default.env b/board/siemens/capricorn/capricorn_default.env
+index c8b5b3d7da3..ad88f7ed770 100644
+--- a/board/siemens/capricorn/capricorn_default.env
++++ b/board/siemens/capricorn/capricorn_default.env
+@@ -45,4 +45,3 @@ kboot=booti
+ bootcmd_mfg=run mfgtool_args; if iminfo ${initrd_addr}; then if test ${tee} = yes; then bootm ${tee_addr} ${initrd_addr} ${fdt_addr}; else booti ${loadaddr} ${initrd_addr} ${fdt_addr}; fi; else echo "Run fastboot ..."; fastboot usb auto; fi;
+ fastboot_bytes=124c00
+ fastboot_dev=mmc
+-mmcautodetect=yes
 -- 
 2.20.1
 
