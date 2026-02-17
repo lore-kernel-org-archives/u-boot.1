@@ -4,105 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE41FE8385F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 07:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C51E63F29
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 07:17:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E397583981;
-	Tue, 17 Feb 2026 08:15:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C41E83981;
+	Tue, 17 Feb 2026 08:17:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z2X7wZkf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GhFyG7QE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9295F83AA9; Tue, 17 Feb 2026 08:15:14 +0100 (CET)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id 954E883C32; Tue, 17 Feb 2026 08:17:19 +0100 (CET)
+Received: from mail-yx1-xb129.google.com (mail-yx1-xb129.google.com
+ [IPv6:2607:f8b0:4864:20::b129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 529B38063E
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 08:15:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA5CF8063E
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 08:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-649e97f1e1eso3110465d50.1
- for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 23:15:11 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771312510; cv=none;
+Received: by mail-yx1-xb129.google.com with SMTP id
+ 956f58d0204a3-64ad79dfb7cso3689588d50.2
+ for <u-boot@lists.denx.de>; Mon, 16 Feb 2026 23:17:16 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771312635; cv=none;
  d=google.com; s=arc-20240605;
- b=aLh/yTwIiRlmz3y+9va45/6QSaGHRvrRlGDCgPAsRg6RrzfPS76fieCkwWCoTteSjb
- xZ1CnD/4wnDhOP5qaRluETB0qSCK5XJrfKGOrQCyO85IvU/WCGPn6ZvzGr3X/eXinMMa
- B1ofVAw5f4XtyXT8lYLK8fNOkzEewqKRckchqqrsxQIt17XBn3KAT5IG+vl+sXV8Qywk
- p0vjiO6V681MF1MiBAx6OqRbR8UVzzbJ/SBvL6Mphzr/w9IqIQznkcXTgbY7CqA0iJMc
- d8mX4DvmbigszhVMfXjKhFw6WF4PPJRjevfnlIoG5PzgGI0CbFAGy6rv171yqHWbRRiz
- SSIQ==
+ b=WXe2xuuMKhLCJ761bcWdq7yiv8n6jEIT28i8TPC0PT795BUFHNdklVY7HYntE3nE8C
+ +VQy3OiAYcDZx5dDm55PtaawbAL2KIjx7JGXhCt4qMsSTXcq+WGvubqjaTP5htxOsztW
+ 7too2Y1dsxKw0VkwXwWMg7mac98XRpZ71fm9WbbaBLs/9bixOvpHTrzqbo/L4KrPMz+y
+ NtgPIlzXcaC4FrotkaJ43w3l1d6CTCm+dr5wUgND3H2htldUsvQA7d2YS7H+GuzfmdHl
+ TO47qT9KtjyMMcWGYvWTsdyZyjkZP6d/EtJNgAXAwfcfyiyUyKLD5wzLT+cvwcxgJXqu
+ h2zQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=fxa6oW7M3eo3QGS8dNUzK19VyXqM/uZ3TRrJr62EUJg=;
- fh=rN28YA54lzqiGq96LttaGmOTBOSy4Tx/FAOR3EpJLu0=;
- b=FzgzoHyC3wM09VTNzwQL9R2nz83CYBUs/oknNiAMYOpN6zQ7zpWMXJY/XuxdqQKCtY
- ej95DelHrIqGtqASmzbPErglkEfrcFwwzzDMIhcefbsr+0dYkwZ+0EZTBt8naMwRZX9t
- UROr5nWJuylORaX10TXfOHxXezuS3DQTRwHDFQh47j37cWEKNSqWarnxo9D4hm1mhph4
- MbQ5nnXQvwc8zs7O2/FeeN35UjG//J87svzO0Pr9AS5m/lXlpC41w/gUTMjualWZs/Cj
- Or0sDxz3o8y8WzZYlNUu/gz0Gl76gFIVlvoOZhXGs2cVvg9fmqIYbSYv5D4n6+SUFNjb
- bi3w==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2+JXIIRJ/TJivOgIOF4YpMARdxXECCeSPZ2QjO5R4V4=;
+ fh=HMo1EPWwGoozHp4urU/Xv1ky/Jp1zB+ZimkLAjhvYkQ=;
+ b=F1+oUYZN234wRFuI/x5+ZML102nzPh7Viup3O6ri6HeR7UoqelIWgDkUN+P4qtovCg
+ Yb0hC2KfYBMhpxmDrs6peLr4peHAeCIB23gy2zj8K5JM4EfHRXi271g2fkgA4SEBohvR
+ gVNUS6+Tzi0B7C7HQnXuKYzjzacXN1DXcvMi2afBHRMVLgXSbZebgNT6gKwyH6CjJssh
+ Vmb/5vygOmsiCTUdgVxBVcnpO7NNAuGUmXSJMtI+uEbOOct/dVmKySj93KnMf3TaRCxx
+ ycfmst5LaZUk6gpHbqjyV39k0eArrIsgUPGuOGsqs+7k9WU4tmi5TZYUXJ+za2AwwcFT
+ /0OA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1771312510; x=1771917310; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fxa6oW7M3eo3QGS8dNUzK19VyXqM/uZ3TRrJr62EUJg=;
- b=z2X7wZkf1IguJdL50QhkUlFWAwRxmydNjHS0FflLnZG8p25xOHerFovNFHWNq71Gzh
- mUE74TFPdkgRMnjOEGNO5ot8A+QqXhUSqiITZ3fqpJYYvlmq+QPOTw9pjRhDyzZfm/FG
- aKqsbXRb1y4uF9E2woICIuH2Ke1FWvA6X7wkZSxwSKjoeZOVNIiZKS6xQZ+yw8IPbO41
- KkmB5mDvAhDAGOdtV0UOKOKLo6IA8TAdyAgb89XUxkE5Pw9PwBsx4WpQUgk9SRDH226W
- /5saiXwIW5Ewy6C/H4Mg0hQMhxDgvgwj9f/yOWdrhJif+NkZv06tP77eGxQ60oKWLOrt
- 2NOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771312510; x=1771917310;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1771312635; x=1771917435; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fxa6oW7M3eo3QGS8dNUzK19VyXqM/uZ3TRrJr62EUJg=;
- b=oi/gRZ3xwLSgx2CVsQtgNm7sYmRuoB+1lHoDpCzEyh6sOydM3HLNQeMCbjXj1R+maV
- cmgk9UR9VT18MAXVeOXHkMKCS002B3odSFDvns7i3spiMq9SSYyIGRUE5vHtFWRlZNYc
- Y4xbGtXiz/moCVsth2X2ziHGHSU75bKWB2VXIRxFgl7Nq0IrowMGuDhitnurSzsFyQlT
- W+q1q5i61QQN7BJWHIgC5xBunqUhdrLoeXPC9jxu5YO37ZHpk5ux/s+uusyEWFZ8Jlb+
- tNQBzi6aoBjwigTtP6XaPoZ5Sp7+z3XCMkvLUxa8+XLPO4zrzxzrcqLYmB3FNZsRAQ/2
- Dhyg==
-X-Gm-Message-State: AOJu0YxRjSoAfLkXiTsZhf3mJA5WXjLhI0fs2ftv5VoAo+JgCgyHZ9/i
- IiwEzaHEJB7DZ10lSmtwmRvd6AoXJqAdurOtPch2qrEnLzJxpyBXstoFly0VCole03yixP2V6In
- 7tjlLBia52VgIURMfag3z5LXj5nIAKfPA0AOBrXV6zg==
-X-Gm-Gg: AZuq6aKaaXKtYydUZzQ8cKQJT2n3jBRvLPEhnyLDOYoMFXsp1XbyNw/0cffemKZSdvX
- RMgYN1fBQi1RmTTNLfe2i1zqoDM1nO8J2O1cV1goZMrMUMlJqhyxhxO9bVCJO8aNLaHYL5eURtw
- ufOCWMer6ZAwy3HPnWHrwL6lUBORtoIpTcShIW2AUbSKjtTygn26WDvfi4Ld5ZdL0VMeHym/hT6
- qQ5yRM8iH/HUPNqZH6dBChDvtfjU+sIwBkbugQ+Uyxjyu6uiHW8jRuwsaO4c/vEFXAo4ic+1ROd
- DfOTx1lL+lz3uxhzCIh9sYvIi0ILln0p1f3Pz11ApFiFn11m7BIqKss/ku+59ulz6a51P40F0D3
- C0tynXWBRO2JS2OBukRODD51ZcIDx1/nfLJ1+e6mtzhjbpdy4EoCf28wFOL2td533iBWUz6PCJ5
- q3idTPocUb2BoVP6IQvvCSMC63dVxC+YbBb0eSluh53JJQuVszwQmr/N/0qOvTawfhSOpshQ8ZZ
- Mi22S9mcMcpzWPHk3qUISv5CQKGUPMUNjefaXdVmlpDnU8v88pYJDW+2xQeFlKcDI+9S6r9KW7L
- hJLSNdZNVTsLE0QOm4UGHJCgHpkzanEzlQRGfCdZTDna7gzsUE6Oufk=
-X-Received: by 2002:a05:690e:689:b0:649:c7dd:d2fb with SMTP id
- 956f58d0204a3-64c14d99826mr7752080d50.75.1771312509988; Mon, 16 Feb 2026
- 23:15:09 -0800 (PST)
+ bh=2+JXIIRJ/TJivOgIOF4YpMARdxXECCeSPZ2QjO5R4V4=;
+ b=GhFyG7QEil4CREXjTGQBUau2hpxRrjpCvInK09JLqFXLZt6P5NnchC2sLfenoyhJeH
+ hdQNBMHt2NJh35z/xub61KXSXt5WMfwXhNAzmGRA2+P+E6vcITfnSNRcKQDPCnsT2Fis
+ r/YrzhOUGueLryX6lAK2lPJ2vqScnu1F7CQDlFoW3koy5gEEd+jV9SD1aes0Y4Pc3nGM
+ xXOCsR/wNLq6LuDH0JqxQ4+b1+LhY2Tlgida/Uf4VLtOqRR9w/Z7epMTXL9ZE661cWd5
+ /33Ti2dh6y01HKf36MMnmkb/jA50A5qEcthmKUk+KafHy/NO/oLjIaHjmk0Lb940xvT1
+ Bq3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771312635; x=1771917435;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2+JXIIRJ/TJivOgIOF4YpMARdxXECCeSPZ2QjO5R4V4=;
+ b=eUD4aRpmhcoR4EtahwuvA4Q1tCGXxaKVax2XImyq5yD8pxO8xYX3bHRMQp+BXzBgsc
+ 5DipJ8epclDLfou1clu+1Nf2pkhOmNLA5DItwkz4GNl9hhMsR7AX3Y0Q8V2RKvrPwedy
+ ztaJPZq9Lk5MqCqZDU4vRaSt1UKXmcxlGD7tuV2/At+32QBzMJXrsZkahWMalI/Ljb0r
+ tWMKZcN3nGf4k5N3WN0SUHLxzjYzfp64yPWBKdwD0/ogmoywRVbAGEKpSjcWomqtGk2p
+ 4PhOijJw4v81Yffce0vg7EFS5GrupRwKKxr0nGHcleM0Fl5vp1ZhAjtdF3ri5z5YhNnT
+ Xobw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVsWDMHRRrdHWSg1mSF0WMDVGK6iSYG9w8jInE/6QMh0mwxW6sFOcLW1cZYKb9Az1VsJzBt97s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwLIP4jPPqFgKTHfLbqg1D/E9QE8FD2rLII1fJukX9UfNMw0spf
+ CoTd3i3ZkeDHzrEln6Fq//UM2bqbjqPmY69xGwgcN/ePVtOvSQG7jd1TqG+2QcDNGBwhHy8wLhf
+ tKf7ElNzJlcvRyf0tovDsgbrKMAqoA2RWTv0OBIDwmw==
+X-Gm-Gg: AZuq6aIGnCpXw0dP4+ZBgtUctDocmQTuL/uvIShndGUzp9p4BoSdG+UnXXhNh2PqO2R
+ nTZ6Ljo17jLvupKclc5AuknObgn9wO9uKlPEzkzfR1qGO4LDNCi1SmxAPQsdYHcvCsgw84gPt1/
+ Bni3RjkGwUfK1C6vJIoXtJrr1hCqigCD1uycqssoyy/q4Ijnxz7n85UxNcXxtiavhuxPGPSh21s
+ 2hzE9CeYLdfq5d3hNYPWnM/m4R2gn516kfMDGh2hDjgaCEttM1n65FJJaT1vtn2CGQRSgoKL1W1
+ y8uZbZbuWYGIy3XbTORtJfGgBrUCTYgsjFweI5V8NoqalJuJeWwTc1+DJYG2WlshUicCpLj9eNE
+ yHb4AUZZzC8Oh8N16Ry23YQdRB9e95UqeKLgo3rShw03h7pjuitybywfCJBtsSVPnnr3pfTf4XD
+ Q4MYZzQns14jZsqicmCKUi/YgPKvedxMZ1lBh8i3DaubdnTOXksXKFKaSKwxzL2b13CB85mFNMJ
+ 112W0HNBcFVgONfTCJJYqe7tdjMNscjPNgI9+VLcTKFWDHR5ZyhAPzhgEm88d/QFu0+1hkJkhem
+ lMq4bjHrMTcdTUy2XH5Z8+OEGXPMNwJUKNigN0zoRLrB
+X-Received: by 2002:a05:690e:c45:b0:648:3d3:790a with SMTP id
+ 956f58d0204a3-64c197a3d8fmr9875330d50.17.1771312635490; Mon, 16 Feb 2026
+ 23:17:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20260213225254.2544596-1-raymondmaoca@gmail.com>
-In-Reply-To: <20260213225254.2544596-1-raymondmaoca@gmail.com>
+References: <CAFLszTjgsSj47P6u2JohHv3vV1=sOWQxQ7qS3RDuBYBQsejKWA@mail.gmail.com>
+ <CANqXHyEShK3bCA-5K4K=zH_b19i9+o9DRPYW8LHo-gFpMB2Hkg@mail.gmail.com>
+ <CANqXHyH3OwPEpo=rv6E+uSP01quOQisEJ3_aD2-r=DkNDK4_+g@mail.gmail.com>
+ <CAC_iWjLKotX4X9mD1qnJbnkbh9xBHfnyF+b=b--XvMjjbCrU-g@mail.gmail.com>
+ <CANqXHyGZSGybzchkqSE0-7s3HgfY=UBjpkjS1wjuRkZzOLDMWQ@mail.gmail.com>
+ <430A021B-7511-4C08-B30C-72C153A25A27@wolfssl.com>
+ <CALeDE9M7ENPccTD18b3YKrvYEu8yU0cXT1ePXM_tagV4Ou+Z0w@mail.gmail.com>
+ <CAC_iWjKnbp_gtHQ6nMZEHEOx92NA2U1OLFKkgDtyqS_aDHO6GQ@mail.gmail.com>
+ <48C4A401-E824-46BF-BC93-1EA9A45AC374@wolfssl.com>
+ <CAC_iWjJD+_spstOX5z2tDoyEUZwbV7QXNz_s5ffz7FWK9QopEg@mail.gmail.com>
+ <20260212194620.GD2747538@bill-the-cat>
+ <CC9C4133-1AF8-4A32-8DEF-CBB716817422@wolfssl.com>
+In-Reply-To: <CC9C4133-1AF8-4A32-8DEF-CBB716817422@wolfssl.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 17 Feb 2026 09:14:34 +0200
-X-Gm-Features: AZwV_QhUL6YlCCsduws3IUcmajilzW5MqKvykFQ0sz40N7UGZvGrFeM5BTZuD4E
-Message-ID: <CAC_iWjLaWYndgvrCFGer-8mgW+t1usawjy+QroW+H92NmY3WZg@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] Implement all missing SMBIOS types required by
- distro tooling
-To: Raymond Mao <raymondmaoca@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Raymond Mao <raymond.mao@riscstar.com>, 
- Mark Kettenis <kettenis@openbsd.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Baocheng Su <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Samuel Holland <samuel.holland@sifive.com>
+Date: Tue, 17 Feb 2026 09:16:39 +0200
+X-Gm-Features: AZwV_Qj8VDwRSHpGWoSvRuIpp5rKj58Eo-3h4AGhwPDQ72sWyHdt0H5LRa0oLyI
+Message-ID: <CAC_iWjJa_AmUBjsct2ddsL-QaYoyXBQjUiMzE4uWGy3RSshU4w@mail.gmail.com>
+Subject: Re: U-Boot support for wolfTPM and firmware update for SLB9672/SLB9673
+To: David Garske <david@wolfssl.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, 
+ Todd Ouska <todd@wolfssl.com>, Larry Stefonic <larry@wolfssl.com>, 
+ Wolfram Kusterer <wolfram@wolfssl.com>, Aidan Garske <aidan@wolfssl.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,56 +134,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom, Raymond
+On Mon, 16 Feb 2026 at 23:30, David Garske <david@wolfssl.com> wrote:
+>
+> Hi Ilias,
+>
+> Can you confirm that the patch was received correctly? It appears it was =
+based on the link Tom shared. Let me know if you have any feedback.
 
-I tested the patches and they now work properly in linux.
-Unfortunately I don't have time to review them depth, but I think we
-can pull them in since they improve the SMBIOS reporting overall
+Yes I found it in my patchwork now. I'll try having a look by the end
+of the week
 
-
-For the series
-Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-On Sat, 14 Feb 2026 at 00:53, Raymond Mao <raymondmaoca@gmail.com> wrote:
+Regards
+/Ilias
 >
-> From: Raymond Mao <raymond.mao@riscstar.com>
+> Thanks,
+> David Garske
+> Software Engineer, wolfSSL
+> +1 (530) 409-2990
+> https://www.wolfssl.com
+> https://github.com/wolfssl
 >
-> This series finish the last missing puzzle of required SMBIOS types by:
-> 1) Fixing duplicated handles when multiple instances exist in one type;
-> 2) Implementing the rest of required types 9/16/17/19;
-> 3) Adding version control when printing properties for all types.
+> On Feb 12, 2026, at 11:46=E2=80=AFAM, Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Type 9/16/17/19 are generally DT-based, the idea is to write these tables
-> using a hybrid approach:
-> Explicit DT definitions under existing '/smbios/smbios' take precedence,
-> with fallback to scan and interpret values from the entire DT.
+> On Thu, Feb 12, 2026 at 02:58:19PM +0200, Ilias Apalodimas wrote:
 >
-> Moreover, all below APIs:
-> smbios_get_val_si()
-> smbios_get_u64_si()
-> smbios_add_prop_si()
-> are on top of sysinfo, thus allow vendors to get values from other
-> subsystems by implementing their own sysinfo driver if needed.
+> Hi David,
 >
-> Raymond Mao (6):
->   smbios: Fix duplicated smbios handles
->   smbios: add support for dynamic generation of Type 9 system slot
->     tables
->   smbios: add support for dynamic generation of Type 16 table
->   smbios: add support for dynamic generation of Type 17 table
->   smbios: add support for dynamic generation of Type 19 table
->   smbios: print the properties only when they exist in a specified
->     version of spec
+> On Thu, 12 Feb 2026 at 04:11, David Garske <david@wolfssl.com> wrote:
 >
->  arch/arm/dts/smbios_generic.dtsi |   12 +
->  cmd/smbios.c                     |  365 +++++++++-
->  drivers/sysinfo/smbios.c         |    5 +
->  include/smbios.h                 |  151 ++++
->  include/smbios_def.h             |  250 +++++++
->  include/sysinfo.h                |    4 +
->  lib/smbios.c                     | 1151 +++++++++++++++++++++++++++++-
->  7 files changed, 1905 insertions(+), 33 deletions(-)
+>
+> Hi Ilias,
+>
+> Thanks for your reply. I did submit the patch via git send-email on Jan 2=
+8 to u-boot@lists.denx.de with subject "[PATCH] tpm: Add wolfTPM library su=
+pport for TPM 2.0=E2=80=9D. Can you check if you received it? Copy of the e=
+mail is attached.
+>
+>
+> I haven't and i can't find it on
+> https://lore.kernel.org/u-boot/?q=3DAdd+wolfTPM+ either. Any chance git
+> failed to send it?
+>
+>
+> It's:
+> https://lore.kernel.org/u-boot/20260128171112.1818705-1-david@wolfssl.com=
+/
 >
 > --
-> 2.25.1
+> Tom
+>
 >
