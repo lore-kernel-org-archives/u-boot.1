@@ -4,91 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F95CE909C0
-	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 15:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF94E909C0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Feb 2026 15:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5427983C32;
-	Tue, 17 Feb 2026 16:11:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CBD5C83AC5;
+	Tue, 17 Feb 2026 16:13:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aX/uxdGO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P9uxZHEb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3897183C72; Tue, 17 Feb 2026 16:11:28 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id ABFCD83C32; Tue, 17 Feb 2026 16:13:48 +0100 (CET)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E52A183AC5
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 16:11:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 604CE83981
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 16:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-5069fd561a8so8403711cf.3
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 07:11:25 -0800 (PST)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-506b6663a36so6076391cf.1
+ for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 07:13:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771341085; x=1771945885; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=gmail.com; s=20230601; t=1771341225; x=1771946025; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=5b8rdpe1HHALjjN6sV/4V8uIITDZwJjJwijt65UUrcc=;
- b=aX/uxdGOXdjewQ1HNMpIgJqffvhypfqSornZYsySGZdIYjLB/UPQrrSjJTwxbeA2Kx
- LOjIsyrDJzeS0/37FIy2UpUCu/eKJewxcI4aDxOkn/5PUI1CKLtJxyknj7lEw46sDEno
- 9UG30/wViOJdvETQ3gCnmrmSox6nvqwKGb1yxQBW9bBDDZOvusjXTO/e2E7k6N4nLRE9
- z6TjP13v0OvXPmSJjvrzqQtYN89rAIfGOe1QSgwE18v7qEGp8vB/YuNIJKqt2R5jeI94
- BXykw5N+ZM99Q2yamD2A0WDqf18jZkZmrGQN0SdVAw6B/pc78mm6a/YulHR3uFPhjsLr
- gNgA==
+ bh=alDDhIlWuRs69fnXw4PhkolgoBJP7/LtCYsccwe/R6Y=;
+ b=P9uxZHEbQ5UnZgL8ndzfIcMvKkez404V//Xcj2slXZpokCZwcnhXLTH8RSdb6Cn4VR
+ av9C9ME32CV9FQ4ul2adZZWoLRBbkBAcsL5clwcAHP1WnqLUThUTdjiXo9IlS78LFvlJ
+ TkLKDUn8bjn1SAoFiL9Yi8xJqsbpP2AKZdPg3lYSb1ujy5dBi1KsuSb407ToTrnN6to6
+ SyTNIckx43XIIEnrlLK/WYOw+Ehs9ZZYT6UAQiOQDesuKLOTPypyRwcNuI+Fz5V/f9RO
+ m+g75EhGk/HSZk0v1zlhPuublfr0BLss292Xb4on/OiqjJgmFshlXjQeSnuFF3ns6ZzR
+ 6j4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771341085; x=1771945885;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20230601; t=1771341225; x=1771946025;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5b8rdpe1HHALjjN6sV/4V8uIITDZwJjJwijt65UUrcc=;
- b=s5EYUAbQ34ndukryF8W3WcVlY+vI6ELM7yNUUdAfy1+9ORobpOrgs6tCG/5lIGNDJz
- RAq27FnI6ZmU9vHCuMHqurkTriCVZemb8dPpRiSLAlLwOcMFGQl4JU7AxKSfkDLsB03E
- bCqeXPWBVhQ8Lk3DCvwMDcR7u9PvEJ9w1EgNkcXdKfdL8rNdXARiX2W9dX9QTuu1u6KB
- d0XDqajzvoBUvjpuXZTKAeCnoi8uAA3Pk+QVzcnNN5MqHneZ/AIdlMYCgl8QwEfRBJCF
- uvZf1W8McDb6ZsTMXghcs8BWyH6HEEzoQl5D9hKs/JDP8Bb5mDjMfEb3Z4QxrTJ6PlIp
- adxQ==
+ bh=alDDhIlWuRs69fnXw4PhkolgoBJP7/LtCYsccwe/R6Y=;
+ b=Z9G8EEueB3PXpCutoHzh5OLpIW+nuSDz0MJ32hcPpQPZLfFDMI01eOjhme5RLtr97N
+ 1yW+I0FDDh7JOIueFZIz1e9y4MDoNhzwjosFaqYjh08+Lm8daY6x5mSgJXSraVCkt7jC
+ FMBTPmSyoprM7aj2JuYRxIPGahov+J2xOv/rcjbzP5MSy7Jl4bk9A3GrJgFcp6tydnwX
+ Hf8uifV3nxs7M3pddKVjVoYhQtjUv6QY3R9OhIrnpEhPn1G5bI7ZXAfkPs1p63NrosBY
+ Z9PaTub5ABzpsNYM8WjuG39q/r2wg7oFUo6Vbt8PchVP5aHiSp5wVzBXQKnAY3LtrKK/
+ 7Juw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXSsRPAT8dHEVGGrVUFYv2A2rkgtiQPhe4k0wFPcanI3pdLJvSZq0/X+5VNORst9L8LZhqdoU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz47NujrRO5EPkjN54vxxx1ZZwbcUDIDIzFDK1ATKS3cG5diH/o
- jpSqNhItpnR34Lc0EqyjUEBaCsj04MGuJlOPzXEYsPoYrVoRCJRKrYTj
-X-Gm-Gg: AZuq6aIRY94aLQVh4rNO3lD1NPNRqY95jAdZI9TyhQrKXnL9qxwsCIqOWMSFORx252l
- XWruSV1Zx9hO9BWpt/Kigwhf9r0YSMwpxxw1ujIfFzrfDklEhRfN8cqu4y8+WSEGq0mTNH+16r/
- q6icq6ofohSmZDNxpGU+fFwG7vuvYu4Df0aOrq4Aiw9R30MOwPvf990Md75VOnMUyVsZubyAtzF
- noN4snXt2j7qVq2YIz/Ej9YrlCIBPEV+/E2n4A+glT265K5MVUXtM64iJYSkZcn8YTpcZHZuARJ
- 1IMczgKGgF5OciEqCDP8U3M5vms56C4Zbaocnh5wqR62Iz4xrM/fz09lqjg8YHsqbWbzCnUQQHM
- nTZ7gGqhgxXhBOw4gnwso7+iKNQYVkMOi3j0Mz0ZzLY/cWCTZLOFUmhLQnoUzUmps8m2k7CnkNF
- nGuqhOmiqgj5eZVWXl2qOXq2JKB4k0I16SRam/U+7WQRnGyO08kyfrGAIvRYON5cvbbP8=
-X-Received: by 2002:a05:620a:1925:b0:8c6:f7ad:49b with SMTP id
- af79cd13be357-8cb408839bcmr1435937685a.5.1771341084533; 
- Tue, 17 Feb 2026 07:11:24 -0800 (PST)
+ AJvYcCXzoUu+yvaVoNhFKlo4GeKI/y59mCiLkBvQQHzDV+tyVVkJDh4DENNEeYM0YuNCt3bPG03VKlo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNcbqakfjGn8KZkM/qOpCgHZ2nGLx7RHt2BU2XG1C884FMi6Ce
+ bu4DspQ4AcV2oGRfX5PDqsqBntZ2HTb6VN9cWVim9Jh0sSAmWjSgFx1I
+X-Gm-Gg: AZuq6aL1xPTmMbrAwIt400T5Aj3975mLfqoHiylj+edKgU1SI7kj8ovuZdaOz9X7Ogd
+ jJOCwQiPFzqxDOZUJz3w7DtFtgPDpI8NiOJGYslG5ZPMZxb956wFwWgi0fqNN0WKqgsERJQ41oU
+ Dzw4Rw5NkyrZxaj2wGry+aNR6auCogB2Evzy+5RA5G6GcjVUbgd3ILundMalSClCGrQ9BkdHBwh
+ TtdtdEF1XxdZRB4+aFGT2lxJshbAlRwkfSFyVEegbmC/FpLHe5mnzSsGTbLWvi+ZaOD0cG1IYxu
+ c7gzwN/tW5dG7gqrVL0UMeowz6oTh/2cVsHY5x+DWAVo/KE2FMfnxRW2AbgtllY27qW63yPU4C6
+ tHC858lEa9dMrcLTfZAVtZU6Aq027dnk+eWbmd3Mn/uAtucBPjBP8GvHoIUpXQnG9oa0MnZtkGo
+ YQkdk4P4UqJy5rv7TzxYHJjbposKYKZfge62jmQSBPvMruo+rowz7yGFpbeC9isPEAGJ4=
+X-Received: by 2002:a05:620a:45a3:b0:8b2:e177:fb18 with SMTP id
+ af79cd13be357-8cb408fb864mr1429561285a.9.1771341224957; 
+ Tue, 17 Feb 2026 07:13:44 -0800 (PST)
 Received: from ?IPV6:2600:4040:4476:3800:2d8:61ff:fe7c:5d59?
  ([2600:4040:4476:3800:2d8:61ff:fe7c:5d59])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cb2b1c8505sm1506166785a.25.2026.02.17.07.11.23
+ af79cd13be357-8cb2b20f240sm1584832485a.40.2026.02.17.07.13.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Feb 2026 07:11:24 -0800 (PST)
-Message-ID: <2b5ebaa9-76f1-e2b0-4e8c-fc8b6c197136@gmail.com>
-Date: Tue, 17 Feb 2026 10:11:23 -0500
+ Tue, 17 Feb 2026 07:13:44 -0800 (PST)
+Message-ID: <d2a12570-080f-715f-3d6e-0f2fae2b2b7a@gmail.com>
+Date: Tue, 17 Feb 2026 10:13:43 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Subject: Re: [PATCH] spl: Add generic SPL MTD loader support
 Content-Language: en-US
+From: Sean Anderson <seanga2@gmail.com>
 To: Fabio Estevam <festevam@gmail.com>, michael@amarulasolutions.com
 Cc: dinesh.maniyam@altera.com, jonas@kwiboo.se, trini@konsulko.com,
  u-boot@lists.denx.de, Fabio Estevam <festevam@nabladev.com>
 References: <20260211222550.739727-1-festevam@gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260211222550.739727-1-festevam@gmail.com>
+ <2b5ebaa9-76f1-e2b0-4e8c-fc8b6c197136@gmail.com>
+In-Reply-To: <2b5ebaa9-76f1-e2b0-4e8c-fc8b6c197136@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,243 +106,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/11/26 17:25, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@nabladev.com>
-> 
-> Add support for loading the next stage from an MTD device in SPL.
-> 
-> Introduce CONFIG_SPL_MTD_LOAD and a generic SPL MTD loader
-> implementation that uses the MTD subsystem to read the U-Boot payload.
-> 
-> The loader works with any MTD-backed storage, including raw NAND and
-> SPI NAND, without being tied to a specific NAND type.
-> 
-> The payload offset defaults to CONFIG_SYS_MTD_U_BOOT_OFFS and can be
-> overridden via the device tree property:
-> 
->      u-boot,spl-payload-offset
-> 
-> To support both raw NAND and SPI NAND boot flows, the loader is
-> registered for BOOT_DEVICE_NAND and BOOT_DEVICE_SPI. This allows it
-> to operate correctly on platforms where the ROM reports either NAND
-> or SPI as the boot source while using the same MTD-based loading
-> infrastructure.
-> 
-> The required NAND core and SPI NAND drivers are built for SPL when
-> CONFIG_SPL_MTD_LOAD is enabled.
-> 
-> This provides reusable infrastructure for boards that boot from MTD
-> devices without relying on SPI-specific or NAND-specific SPL loaders.
-> 
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+T24gMi8xNy8yNiAxMDoxMSwgU2VhbiBBbmRlcnNvbiB3cm90ZToNCj4gT24gMi8xMS8yNiAx
+NzoyNSwgRmFiaW8gRXN0ZXZhbSB3cm90ZToNCj4+IEZyb206IEZhYmlvIEVzdGV2YW0gPGZl
+c3RldmFtQG5hYmxhZGV2LmNvbT4NCj4+DQo+PiBBZGQgc3VwcG9ydCBmb3IgbG9hZGluZyB0
+aGUgbmV4dCBzdGFnZSBmcm9tIGFuIE1URCBkZXZpY2UgaW4gU1BMLg0KPj4NCj4+IEludHJv
+ZHVjZSBDT05GSUdfU1BMX01URF9MT0FEIGFuZCBhIGdlbmVyaWMgU1BMIE1URCBsb2FkZXIN
+Cj4+IGltcGxlbWVudGF0aW9uIHRoYXQgdXNlcyB0aGUgTVREIHN1YnN5c3RlbSB0byByZWFk
+IHRoZSBVLUJvb3QgcGF5bG9hZC4NCj4+DQo+PiBUaGUgbG9hZGVyIHdvcmtzIHdpdGggYW55
+IE1URC1iYWNrZWQgc3RvcmFnZSwgaW5jbHVkaW5nIHJhdyBOQU5EIGFuZA0KPj4gU1BJIE5B
+TkQsIHdpdGhvdXQgYmVpbmcgdGllZCB0byBhIHNwZWNpZmljIE5BTkQgdHlwZS4NCj4+DQo+
+PiBUaGUgcGF5bG9hZCBvZmZzZXQgZGVmYXVsdHMgdG8gQ09ORklHX1NZU19NVERfVV9CT09U
+X09GRlMgYW5kIGNhbiBiZQ0KPj4gb3ZlcnJpZGRlbiB2aWEgdGhlIGRldmljZSB0cmVlIHBy
+b3BlcnR5Og0KPj4NCj4+IMKgwqDCoMKgIHUtYm9vdCxzcGwtcGF5bG9hZC1vZmZzZXQNCj4+
+DQo+PiBUbyBzdXBwb3J0IGJvdGggcmF3IE5BTkQgYW5kIFNQSSBOQU5EIGJvb3QgZmxvd3Ms
+IHRoZSBsb2FkZXIgaXMNCj4+IHJlZ2lzdGVyZWQgZm9yIEJPT1RfREVWSUNFX05BTkQgYW5k
+IEJPT1RfREVWSUNFX1NQSS4gVGhpcyBhbGxvd3MgaXQNCj4+IHRvIG9wZXJhdGUgY29ycmVj
+dGx5IG9uIHBsYXRmb3JtcyB3aGVyZSB0aGUgUk9NIHJlcG9ydHMgZWl0aGVyIE5BTkQNCj4+
+IG9yIFNQSSBhcyB0aGUgYm9vdCBzb3VyY2Ugd2hpbGUgdXNpbmcgdGhlIHNhbWUgTVRELWJh
+c2VkIGxvYWRpbmcNCj4+IGluZnJhc3RydWN0dXJlLg0KPj4NCj4+IFRoZSByZXF1aXJlZCBO
+QU5EIGNvcmUgYW5kIFNQSSBOQU5EIGRyaXZlcnMgYXJlIGJ1aWx0IGZvciBTUEwgd2hlbg0K
+Pj4gQ09ORklHX1NQTF9NVERfTE9BRCBpcyBlbmFibGVkLg0KPj4NCj4+IFRoaXMgcHJvdmlk
+ZXMgcmV1c2FibGUgaW5mcmFzdHJ1Y3R1cmUgZm9yIGJvYXJkcyB0aGF0IGJvb3QgZnJvbSBN
+VEQNCj4+IGRldmljZXMgd2l0aG91dCByZWx5aW5nIG9uIFNQSS1zcGVjaWZpYyBvciBOQU5E
+LXNwZWNpZmljIFNQTCBsb2FkZXJzLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IEZhYmlvIEVz
+dGV2YW0gPGZlc3RldmFtQG5hYmxhZGV2LmNvbT4NCj4gDQo+IFRoYW5rcyBmb3IgcHV0dGlu
+ZyB0aGlzIHRvZ2V0aGVyLiBGb3IgcGxhdGZvcm1zIHRoYXQgaGF2ZSB0aGUgc3BhY2UgdGhp
+cw0KPiBpcyBkZWZpbml0ZWx5IHRoZSB3YXkgdG8gZ28uDQo+IA0KPj4gLS0tDQo+PiBEaW5l
+c2gsDQo+Pg0KPj4gQ291bGQgeW91IHBsZWFzZSB0ZXN0IHRoaXMgYXBwcm9hY2ggb24geW91
+ciBib2FyZHM/DQo+Pg0KPj4gVGhhbmtzDQo+Pg0KPj4gwqAgY29tbW9uL3NwbC9LY29uZmln
+wqDCoMKgwqDCoMKgwqAgfCAxNSArKysrKysrDQo+PiDCoCBjb21tb24vc3BsL01ha2VmaWxl
+wqDCoMKgwqDCoMKgIHzCoCAxICsNCj4+IMKgIGNvbW1vbi9zcGwvc3BsX210ZC5jwqDCoMKg
+wqDCoCB8IDg4ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPj4g
+wqAgZHJpdmVycy9tdGQvTWFrZWZpbGXCoMKgwqDCoMKgIHzCoCAxICsNCj4+IMKgIGRyaXZl
+cnMvbXRkL25hbmQvTWFrZWZpbGUgfCAxMiArKysrKy0NCj4+IMKgIDUgZmlsZXMgY2hhbmdl
+ZCwgMTE2IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4+IMKgIGNyZWF0ZSBtb2Rl
+IDEwMDY0NCBjb21tb24vc3BsL3NwbF9tdGQuYw0KPj4NCj4+IGRpZmYgLS1naXQgYS9jb21t
+b24vc3BsL0tjb25maWcgYi9jb21tb24vc3BsL0tjb25maWcNCj4+IGluZGV4IDI5OThiN2Fj
+Yjc1Zi4uMmFiYTZkYTczYzEwIDEwMDY0NA0KPj4gLS0tIGEvY29tbW9uL3NwbC9LY29uZmln
+DQo+PiArKysgYi9jb21tb24vc3BsL0tjb25maWcNCj4+IEBAIC0xNTc2LDggKzE1NzYsMjMg
+QEAgY29uZmlnIFNQTF9TUElfTE9BRA0KPj4gwqDCoMKgwqDCoMKgwqAgRW5hYmxlIHN1cHBv
+cnQgZm9yIGxvYWRpbmcgbmV4dCBzdGFnZSwgVS1Cb290IG9yIG90aGVyd2lzZSwgZnJvbQ0K
+Pj4gwqDCoMKgwqDCoMKgwqAgU1BJIE5PUiBpbiBVLUJvb3QgU1BMLg0KPj4gK2NvbmZpZyBT
+UExfTVREX0xPQUQNCj4+ICvCoMKgwqAgYm9vbCAiU3VwcG9ydCBsb2FkaW5nIGZyb20gYSBn
+ZW5lcmljIE1URCBkZXZpY2UiDQo+PiArwqDCoMKgIGRlcGVuZHMgb24gU1BMDQo+PiArwqDC
+oMKgIGRlcGVuZHMgb24gTVREICYmIERNX01URA0KPj4gK8KgwqDCoCBoZWxwDQo+PiArwqDC
+oMKgwqDCoCBFbmFibGUgc3VwcG9ydCBmb3IgbG9hZGluZyBuZXh0IHN0YWdlLCBVLUJvb3Qg
+b3Igb3RoZXJ3aXNlLCBmcm9tDQo+PiArwqDCoMKgwqDCoCBhIGdlbmVyaWMgTVREIGRldmlj
+ZSAocmF3IE5BTkQsIFNQSSBOQU5EKSBpbiBVLUJvb3QgU1BMLg0KPj4gKw0KPj4gwqAgZW5k
+aWYgIyBTUExfU1BJX0ZMQVNIX1NVUFBPUlQNCj4+ICtjb25maWcgU1lTX01URF9VX0JPT1Rf
+T0ZGUw0KPj4gK8KgwqDCoCBoZXggImFkZHJlc3Mgb2YgdS1ib290IHBheWxvYWQgaW4gdGhl
+IE1URCBkZXZpY2UiDQo+PiArwqDCoMKgIGRlZmF1bHQgMHgwDQo+PiArwqDCoMKgIGhlbHAN
+Cj4+ICvCoMKgwqDCoCBBZGRyZXNzIHdpdGhpbiB0aGUgTVREIGRldmljZSB3aGVyZSB0aGUg
+dS1ib290IHBheWxvYWQgaXMgZmV0Y2hlZA0KPj4gK8KgwqDCoMKgIGZyb20uDQo+PiArDQo+
+PiDCoCBjb25maWcgU1lTX1NQSV9VX0JPT1RfT0ZGUw0KPj4gwqDCoMKgwqDCoCBoZXggImFk
+ZHJlc3Mgb2YgdS1ib290IHBheWxvYWQgaW4gU1BJIGZsYXNoIg0KPj4gwqDCoMKgwqDCoCBk
+ZWZhdWx0IDB4ODAwMCBpZiBBUkNIX1NVTlhJDQo+PiBkaWZmIC0tZ2l0IGEvY29tbW9uL3Nw
+bC9NYWtlZmlsZSBiL2NvbW1vbi9zcGwvTWFrZWZpbGUNCj4+IGluZGV4IDRjOTQ4MmJkMzA5
+Ni4uOWY1ZGRjYWQxN2FmIDEwMDY0NA0KPj4gLS0tIGEvY29tbW9uL3NwbC9NYWtlZmlsZQ0K
+Pj4gKysrIGIvY29tbW9uL3NwbC9NYWtlZmlsZQ0KPj4gQEAgLTM1LDYgKzM1LDcgQEAgb2Jq
+LSQoQ09ORklHXyQoUEhBU0VfKU5WTUUpICs9IHNwbF9udm1lLm8NCj4+IMKgIG9iai0kKENP
+TkZJR18kKFBIQVNFXylTRU1JSE9TVElORykgKz0gc3BsX3NlbWlob3N0aW5nLm8NCj4+IMKg
+IG9iai0kKENPTkZJR18kKFBIQVNFXylERlUpICs9IHNwbF9kZnUubw0KPj4gwqAgb2JqLSQo
+Q09ORklHXyQoUEhBU0VfKVNQSV9MT0FEKSArPSBzcGxfc3BpLm8NCj4+ICtvYmotJChDT05G
+SUdfJChQSEFTRV8pTVREX0xPQUQpICs9IHNwbF9tdGQubw0KPj4gwqAgb2JqLSQoQ09ORklH
+XyQoUEhBU0VfKVJBTV9TVVBQT1JUKSArPSBzcGxfcmFtLm8NCj4+IMKgIG9iai0kKENPTkZJ
+R18kKFBIQVNFXylVU0JfU0RQX1NVUFBPUlQpICs9IHNwbF9zZHAubw0KPj4gwqAgZW5kaWYN
+Cj4+IGRpZmYgLS1naXQgYS9jb21tb24vc3BsL3NwbF9tdGQuYyBiL2NvbW1vbi9zcGwvc3Bs
+X210ZC5jDQo+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4gaW5kZXggMDAwMDAwMDAwMDAw
+Li44YzZjOTRlNTkyZDANCj4+IC0tLSAvZGV2L251bGwNCj4+ICsrKyBiL2NvbW1vbi9zcGwv
+c3BsX210ZC5jDQo+PiBAQCAtMCwwICsxLDg4IEBADQo+PiArLy8gU1BEWC1MaWNlbnNlLUlk
+ZW50aWZpZXI6IEdQTC0yLjArDQo+PiArDQo+PiArLyoNCj4+ICsgKiBHZW5lcmljIFNQTCBs
+b2FkZXIgZm9yIE1URCBkZXZpY2VzLg0KPj4gKyAqDQo+PiArICogQmFzZWQgb24gc3BsX3Nw
+aS5jLCB3aGljaCBpczoNCj4+ICsgKg0KPj4gKyAqIENvcHlyaWdodCAoQykgMjAxMSBPTUlD
+Uk9OIGVsZWN0cm9uaWNzIEdtYkgNCj4+ICsgKg0KPj4gKyAqIGJhc2VkIG9uIGRyaXZlcnMv
+bXRkL25hbmQvcmF3L25hbmRfc3BsX2xvYWQuYw0KPj4gKyAqDQo+PiArICogQ29weXJpZ2h0
+IChDKSAyMDExDQo+PiArICogSGVpa28gU2Nob2NoZXIsIERFTlggU29mdHdhcmUgRW5naW5l
+ZXJpbmcsIGhzQGRlbnguZGUuDQo+PiArICovDQo+PiArDQo+PiArI2luY2x1ZGUgPGNvbmZp
+Zy5oPg0KPj4gKyNpbmNsdWRlIDxlcnJuby5oPg0KPj4gKyNpbmNsdWRlIDxpbWFnZS5oPg0K
+Pj4gKyNpbmNsdWRlIDxsb2cuaD4NCj4+ICsjaW5jbHVkZSA8c3BsLmg+DQo+PiArI2luY2x1
+ZGUgPHNwbF9sb2FkLmg+DQo+PiArDQo+PiArI2luY2x1ZGUgPGRtLmg+DQo+PiArI2luY2x1
+ZGUgPGRtL29mbm9kZS5oPg0KPj4gKyNpbmNsdWRlIDxkbS91Y2xhc3MuaD4NCj4+ICsjaW5j
+bHVkZSA8bXRkLmg+DQo+PiArDQo+PiArc3RhdGljIHN0cnVjdCBtdGRfaW5mbyAqc3BsX210
+ZF9nZXRfZGV2aWNlKHZvaWQpDQo+PiArew0KPj4gK8KgwqDCoCBzdHJ1Y3QgdWRldmljZSAq
+ZGV2Ow0KPj4gK8KgwqDCoCBpbnQgcmV0Ow0KPj4gKw0KPj4gK8KgwqDCoCBmb3IgKHJldCA9
+IHVjbGFzc19maXJzdF9kZXZpY2VfZXJyKFVDTEFTU19NVEQsICZkZXYpOw0KPj4gK8KgwqDC
+oMKgwqDCoMKgwqAgZGV2Ow0KPj4gK8KgwqDCoMKgwqDCoMKgwqAgcmV0ID0gdWNsYXNzX25l
+eHRfZGV2aWNlX2VycigmZGV2KSkgew0KPj4gK8KgwqDCoMKgwqDCoMKgIGlmIChyZXQpDQo+
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBjb250aW51ZTsNCj4+ICsNCj4+ICvCoMKgwqDC
+oMKgwqDCoCByZXR1cm4gZGV2X2dldF91Y2xhc3NfcHJpdihkZXYpOw0KPj4gK8KgwqDCoCB9
+DQo+IA0KPiBJIHRoaW5rIHRoaXMgc2hvdWxkIGJlIHVjbGFzc19nZXRfZGV2aWNlX2J5X3Nl
+cShVQ0xBU1NfTVRELA0KPiBDT05GSUdfU1lTX01URF9TRVEpIG9yIHVzZSB0aGUgYWJvdmUg
+bWV0aG9kIGlmIGUuZy4NCj4gQ09ORklHX1NZU19NVERfVV9CT09UX09GRlMgaXMgLTEuDQoN
+CmdldF9tdGRfZGV2aWNlKE5VTEwsIENPTkZJR19TWVNfTVREX1NFUSkNCg0KPj4gKw0KPj4g
+K8KgwqDCoCByZXR1cm4gTlVMTDsNCj4+ICt9DQo+PiArDQo+PiArc3RhdGljIHVsb25nIHNw
+bF9tdGRfcmVhZChzdHJ1Y3Qgc3BsX2xvYWRfaW5mbyAqbG9hZCwNCj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB1bG9uZyBvZmZzLCB1bG9uZyBzaXplLCB2b2lkICpidWYpDQo+
+PiArew0KPj4gK8KgwqDCoCBzdHJ1Y3QgbXRkX2luZm8gKm10ZCA9IGxvYWQtPnByaXY7DQo+
+PiArwqDCoMKgIHNpemVfdCByZXRsZW47DQo+PiArwqDCoMKgIGludCByZXQ7DQo+PiArDQo+
+PiArwqDCoMKgIHJldCA9IG10ZF9yZWFkKG10ZCwgb2Zmcywgc2l6ZSwgJnJldGxlbiwgYnVm
+KTsNCj4+ICvCoMKgwqAgaWYgKHJldCAmJiAhbXRkX2lzX2JpdGZsaXAocmV0KSkNCj4+ICvC
+oMKgwqDCoMKgwqDCoCByZXR1cm4gMDsNCj4+ICsNCj4+ICvCoMKgwqAgaWYgKHJldGxlbiAh
+PSBzaXplKQ0KPj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiAwOw0KPj4gKw0KPj4gK8KgwqDC
+oCByZXR1cm4gcmV0bGVuOw0KPj4gK30NCj4+ICsNCj4+ICtzdGF0aWMgaW50IHNwbF9tdGRf
+bG9hZF9pbWFnZShzdHJ1Y3Qgc3BsX2ltYWdlX2luZm8gKnNwbF9pbWFnZSwNCj4+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBzcGxfYm9vdF9kZXZpY2Ug
+KmJvb3RkZXYpDQo+PiArew0KPj4gK8KgwqDCoCBzdHJ1Y3Qgc3BsX2xvYWRfaW5mbyBsb2Fk
+Ow0KPj4gK8KgwqDCoCBzdHJ1Y3QgbXRkX2luZm8gKm10ZDsNCj4+ICvCoMKgwqAgdWxvbmcg
+b2Zmc2V0Ow0KPj4gKw0KPj4gK8KgwqDCoCBtdGQgPSBzcGxfbXRkX2dldF9kZXZpY2UoKTsN
+Cj4+ICvCoMKgwqAgaWYgKCFtdGQpIHsNCj4+ICvCoMKgwqDCoMKgwqDCoCBkZWJ1ZygiTm8g
+TVREIGRldmljZSBmb3VuZFxuIik7DQo+IA0KPiBUaGlzIHNob3VsZCBiZSBhIHB1dHMsIGFz
+IG90aGVyd2lzZSB0aGVyZSB3aWxsIGJlIG5vIGVycm9yIHByaW50ZWQgYXQgYWxsLg0KPiAN
+Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVOT0RFVjsNCj4+ICvCoMKgwqAgfQ0KPj4g
+Kw0KPj4gK8KgwqDCoCBzcGxfbG9hZF9pbml0KCZsb2FkLCBzcGxfbXRkX3JlYWQsIG10ZCwg
+bXRkLT53cml0ZXNpemUpOw0KPj4gKw0KPj4gK8KgwqDCoCBvZmZzZXQgPSBDT05GSUdfU1lT
+X01URF9VX0JPT1RfT0ZGUzsNCj4+ICsNCj4+ICvCoMKgwqAgaWYgKENPTkZJR19JU19FTkFC
+TEVEKE9GX1JFQUwpKQ0KPj4gK8KgwqDCoMKgwqDCoMKgIG9mZnNldCA9IG9mbm9kZV9jb25m
+X3JlYWRfaW50KCJ1LWJvb3Qsc3BsLXBheWxvYWQtb2Zmc2V0IiwNCj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBvZmZzZXQpOw0KPj4g
+Kw0KPj4gK8KgwqDCoCByZXR1cm4gc3BsX2xvYWQoc3BsX2ltYWdlLCBib290ZGV2LCAmbG9h
+ZCwgMCwgb2Zmc2V0KTsNCj4+ICt9DQo+PiArDQo+PiArLyogUHJpb3JpdHkgMSBzbyBib2Fy
+ZHMgbWF5IG92ZXJyaWRlICovDQo+PiArU1BMX0xPQURfSU1BR0VfTUVUSE9EKCJNVEQtTkFO
+RCIsIDEsIEJPT1RfREVWSUNFX05BTkQsIHNwbF9tdGRfbG9hZF9pbWFnZSk7DQo+PiArU1BM
+X0xPQURfSU1BR0VfTUVUSE9EKCJNVEQtU1BJLU5BTkQiLCAxLCBCT09UX0RFVklDRV9TUEks
+IHNwbF9tdGRfbG9hZF9pbWFnZSk7DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9tdGQvTWFr
+ZWZpbGUgYi9kcml2ZXJzL210ZC9NYWtlZmlsZQ0KPj4gaW5kZXggY2UwNWUyMDYwNzNkLi4w
+ODU2YThmNjg3MzIgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL210ZC9NYWtlZmlsZQ0KPj4g
+KysrIGIvZHJpdmVycy9tdGQvTWFrZWZpbGUNCj4+IEBAIC0zNCw2ICszNCw3IEBAIGVsc2UN
+Cj4+IMKgIGlmbmVxICgkKG10ZC15KSwpDQo+PiDCoCBvYmotJChDT05GSUdfU1BMX01URCkg
+Kz0gbXRkLm8NCj4+IMKgIGVuZGlmDQo+PiArb2JqLSQoQ09ORklHX1NQTF9NVERfTE9BRCkg
+Kz0gbmFuZC8NCj4gDQo+IFlvdSBzaG91bGQgYWRkIHRoaXMgdG8gdGhlIGxpc3QgaW4gaW5j
+bHVkZS9zcGxfbG9hZC5oLg0KPiANCj4+IMKgIG9iai0kKENPTkZJR18kKFBIQVNFXylOQU5E
+X1NVUFBPUlQpICs9IG5hbmQvDQo+PiDCoCBvYmotJChDT05GSUdfU1BMX09ORU5BTkRfU1VQ
+UE9SVCkgKz0gb25lbmFuZC8NCj4+IMKgIG9iai0kKENPTkZJR18kKFBIQVNFXylTUElfRkxB
+U0hfU1VQUE9SVCkgKz0gc3BpLw0KPj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbXRkL25hbmQv
+TWFrZWZpbGUgYi9kcml2ZXJzL210ZC9uYW5kL01ha2VmaWxlDQo+PiBpbmRleCBjODE2OWNm
+NzM5MDIuLmNkNmVhYTg3NzM5YyAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvbXRkL25hbmQv
+TWFrZWZpbGUNCj4+ICsrKyBiL2RyaXZlcnMvbXRkL25hbmQvTWFrZWZpbGUNCj4+IEBAIC0x
+LDEwICsxLDIwIEBADQo+PiDCoCAjIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4w
+Kw0KPj4gLWlmZXEgKCQoQ09ORklHX1hQTF9CVUlMRCkkKENPTkZJR19UUExfQlVJTEQpLCkN
+Cj4+IMKgIG5hbmRjb3JlLW9ianMgOj0gY29yZS5vIGJidC5vDQo+PiArDQo+PiAraWZlcSAo
+JChDT05GSUdfWFBMX0JVSUxEKSwpDQo+PiArDQo+PiArIyBVLUJvb3QgcHJvcGVyDQo+PiDC
+oCBvYmotJChDT05GSUdfTVREX05BTkRfQ09SRSkgKz0gbmFuZGNvcmUubw0KPj4gwqAgb2Jq
+LSQoQ09ORklHX01URF9SQVdfTkFORCkgKz0gcmF3Lw0KPj4gwqAgb2JqLSQoQ09ORklHX01U
+RF9TUElfTkFORCkgKz0gc3BpLw0KPj4gKw0KPj4gwqAgZWxzZQ0KPj4gKw0KPj4gKyMgWFBM
+DQo+PiArb2JqLSQoQ09ORklHX1NQTF9NVERfTE9BRCkgKz0gbmFuZGNvcmUubw0KPj4gK29i
+ai0kKENPTkZJR19TUExfTVREX0xPQUQpICs9IHNwaS8NCj4gDQo+IFRoaXMgc2hvdWxkIGJl
+IGRvbmUgaW4gS2NvbmZpZy4gU29tZSBwbGF0Zm9ybXMgbWF5IHdhbnQgdG8gbG9hZCBmcm9t
+IGRpZmZlcmVudA0KPiBNVEQgY29tYmluYXRpb25zLCBlLmcuIFNQSSBuYW5kIGFuZCBTUEkg
+bm9yLg0KPiANCj4+ICsNCj4+ICsjIHJhdyBOQU5EIHN0aWxsIGZvbGxvd3MgdGhlIG5vcm1h
+bCBTUEwgcnVsZQ0KPj4gwqAgb2JqLSQoQ09ORklHXyQoUEhBU0VfKU5BTkRfU1VQUE9SVCkg
+Kz0gcmF3Lw0KPj4gwqAgZW5kaWYNCj4gDQo+IFBsZWFzZSBhZGQgYSB0ZXN0IGZvciB0aGlz
+LiBZb3Ugc2hvdWxkIGJlIGFibGUgdG8gZXh0ZW5kIHRlc3QvaW1hZ2Uvc3BsX2xvYWRfc3Bp
+LmMNCj4gYW5kIHRlc3QvaW1hZ2Uvc3BsX2xvYWRfbmFuZC5jDQo+IA0KPiAtLVNlYW4NCg0K
 
-Thanks for putting this together. For platforms that have the space this
-is definitely the way to go.
-
-> ---
-> Dinesh,
-> 
-> Could you please test this approach on your boards?
-> 
-> Thanks
-> 
->   common/spl/Kconfig        | 15 +++++++
->   common/spl/Makefile       |  1 +
->   common/spl/spl_mtd.c      | 88 +++++++++++++++++++++++++++++++++++++++
->   drivers/mtd/Makefile      |  1 +
->   drivers/mtd/nand/Makefile | 12 +++++-
->   5 files changed, 116 insertions(+), 1 deletion(-)
->   create mode 100644 common/spl/spl_mtd.c
-> 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 2998b7acb75f..2aba6da73c10 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -1576,8 +1576,23 @@ config SPL_SPI_LOAD
->   	  Enable support for loading next stage, U-Boot or otherwise, from
->   	  SPI NOR in U-Boot SPL.
->   
-> +config SPL_MTD_LOAD
-> +	bool "Support loading from a generic MTD device"
-> +	depends on SPL
-> +	depends on MTD && DM_MTD
-> +	help
-> +	  Enable support for loading next stage, U-Boot or otherwise, from
-> +	  a generic MTD device (raw NAND, SPI NAND) in U-Boot SPL.
-> +
->   endif # SPL_SPI_FLASH_SUPPORT
->   
-> +config SYS_MTD_U_BOOT_OFFS
-> +	hex "address of u-boot payload in the MTD device"
-> +	default 0x0
-> +	help
-> +	 Address within the MTD device where the u-boot payload is fetched
-> +	 from.
-> +
->   config SYS_SPI_U_BOOT_OFFS
->   	hex "address of u-boot payload in SPI flash"
->   	default 0x8000 if ARCH_SUNXI
-> diff --git a/common/spl/Makefile b/common/spl/Makefile
-> index 4c9482bd3096..9f5ddcad17af 100644
-> --- a/common/spl/Makefile
-> +++ b/common/spl/Makefile
-> @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
->   obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
->   obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
->   obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
-> +obj-$(CONFIG_$(PHASE_)MTD_LOAD) += spl_mtd.o
->   obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
->   obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
->   endif
-> diff --git a/common/spl/spl_mtd.c b/common/spl/spl_mtd.c
-> new file mode 100644
-> index 000000000000..8c6c94e592d0
-> --- /dev/null
-> +++ b/common/spl/spl_mtd.c
-> @@ -0,0 +1,88 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/*
-> + * Generic SPL loader for MTD devices.
-> + *
-> + * Based on spl_spi.c, which is:
-> + *
-> + * Copyright (C) 2011 OMICRON electronics GmbH
-> + *
-> + * based on drivers/mtd/nand/raw/nand_spl_load.c
-> + *
-> + * Copyright (C) 2011
-> + * Heiko Schocher, DENX Software Engineering, hs@denx.de.
-> + */
-> +
-> +#include <config.h>
-> +#include <errno.h>
-> +#include <image.h>
-> +#include <log.h>
-> +#include <spl.h>
-> +#include <spl_load.h>
-> +
-> +#include <dm.h>
-> +#include <dm/ofnode.h>
-> +#include <dm/uclass.h>
-> +#include <mtd.h>
-> +
-> +static struct mtd_info *spl_mtd_get_device(void)
-> +{
-> +	struct udevice *dev;
-> +	int ret;
-> +
-> +	for (ret = uclass_first_device_err(UCLASS_MTD, &dev);
-> +	     dev;
-> +	     ret = uclass_next_device_err(&dev)) {
-> +		if (ret)
-> +			continue;
-> +
-> +		return dev_get_uclass_priv(dev);
-> +	}
-
-I think this should be uclass_get_device_by_seq(UCLASS_MTD,
-CONFIG_SYS_MTD_SEQ) or use the above method if e.g.
-CONFIG_SYS_MTD_U_BOOT_OFFS is -1.
-
-> +
-> +	return NULL;
-> +}
-> +
-> +static ulong spl_mtd_read(struct spl_load_info *load,
-> +			  ulong offs, ulong size, void *buf)
-> +{
-> +	struct mtd_info *mtd = load->priv;
-> +	size_t retlen;
-> +	int ret;
-> +
-> +	ret = mtd_read(mtd, offs, size, &retlen, buf);
-> +	if (ret && !mtd_is_bitflip(ret))
-> +		return 0;
-> +
-> +	if (retlen != size)
-> +		return 0;
-> +
-> +	return retlen;
-> +}
-> +
-> +static int spl_mtd_load_image(struct spl_image_info *spl_image,
-> +			      struct spl_boot_device *bootdev)
-> +{
-> +	struct spl_load_info load;
-> +	struct mtd_info *mtd;
-> +	ulong offset;
-> +
-> +	mtd = spl_mtd_get_device();
-> +	if (!mtd) {
-> +		debug("No MTD device found\n");
-
-This should be a puts, as otherwise there will be no error printed at all.
-
-> +		return -ENODEV;
-> +	}
-> +
-> +	spl_load_init(&load, spl_mtd_read, mtd, mtd->writesize);
-> +
-> +	offset = CONFIG_SYS_MTD_U_BOOT_OFFS;
-> +
-> +	if (CONFIG_IS_ENABLED(OF_REAL))
-> +		offset = ofnode_conf_read_int("u-boot,spl-payload-offset",
-> +					      offset);
-> +
-> +	return spl_load(spl_image, bootdev, &load, 0, offset);
-> +}
-> +
-> +/* Priority 1 so boards may override */
-> +SPL_LOAD_IMAGE_METHOD("MTD-NAND", 1, BOOT_DEVICE_NAND, spl_mtd_load_image);
-> +SPL_LOAD_IMAGE_METHOD("MTD-SPI-NAND", 1, BOOT_DEVICE_SPI, spl_mtd_load_image);
-> diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-> index ce05e206073d..0856a8f68732 100644
-> --- a/drivers/mtd/Makefile
-> +++ b/drivers/mtd/Makefile
-> @@ -34,6 +34,7 @@ else
->   ifneq ($(mtd-y),)
->   obj-$(CONFIG_SPL_MTD) += mtd.o
->   endif
-> +obj-$(CONFIG_SPL_MTD_LOAD) += nand/
-
-You should add this to the list in include/spl_load.h.
-
->   obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
->   obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
->   obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
-> diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
-> index c8169cf73902..cd6eaa87739c 100644
-> --- a/drivers/mtd/nand/Makefile
-> +++ b/drivers/mtd/nand/Makefile
-> @@ -1,10 +1,20 @@
->   # SPDX-License-Identifier: GPL-2.0+
->   
-> -ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
->   nandcore-objs := core.o bbt.o
-> +
-> +ifeq ($(CONFIG_XPL_BUILD),)
-> +
-> +# U-Boot proper
->   obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
->   obj-$(CONFIG_MTD_RAW_NAND) += raw/
->   obj-$(CONFIG_MTD_SPI_NAND) += spi/
-> +
->   else
-> +
-> +# XPL
-> +obj-$(CONFIG_SPL_MTD_LOAD) += nandcore.o
-> +obj-$(CONFIG_SPL_MTD_LOAD) += spi/
-
-This should be done in Kconfig. Some platforms may want to load from different
-MTD combinations, e.g. SPI nand and SPI nor.
-
-> +
-> +# raw NAND still follows the normal SPL rule
->   obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
->   endif
-
-Please add a test for this. You should be able to extend test/image/spl_load_spi.c
-and test/image/spl_load_nand.c
-
---Sean
