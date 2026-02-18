@@ -4,75 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C120BE9A047
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 18:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA9F3E9A04B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 19:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE45383AA9;
-	Wed, 18 Feb 2026 19:14:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id 9ABC483CE3;
+	Wed, 18 Feb 2026 20:26:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 52AB783AC5; Wed, 18 Feb 2026 18:26:07 +0100 (CET)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8915D83A47
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 18:26:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vslIn-000000005AR-1ngd; Wed, 18 Feb 2026 17:25:29 +0000
-Date: Wed, 18 Feb 2026 17:25:20 +0000
-From: Daniel Golle <daniel@makrotopia.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>,
- Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand
- FIT loading
-Message-ID: <aZX2APcJvmU4XSIy@makrotopia.org>
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <20260217181358.GE2747538@bill-the-cat>
- <aZTBQykqCt7H8H4W@makrotopia.org>
- <20260217193534.GI2747538@bill-the-cat>
- <aZTYk8E6r4S5zo_Z@makrotopia.org>
- <20260217211853.GJ2747538@bill-the-cat>
- <aZTqyRfqYe1iJ9EY@makrotopia.org>
- <20260218155839.GC3233182@bill-the-cat>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fGHBCBv/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1700F83CE3; Wed, 18 Feb 2026 20:26:46 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0181A83A47
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 20:26:43 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-413c2977db8so89327fac.3
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 11:26:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771442803; x=1772047603; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9fhGew0cHEti1NKEweYeZNnsumlromq98EaXJHxhCpQ=;
+ b=fGHBCBv/REcvMbH5K79/y/nhRmeTYPm1JYZd9CifYTpRhQvXADwqSC18wXzf5B5+Ho
+ SDE9s9R8PJj043vpYYvFbr2/QzG/O2kT5XkR3Wtb5jxXcyc2L7cb6GORvwtD/x3cIKbl
+ e6FxuFqKOxcOIiI6xnI03h+qS0pr4umK+uG4U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771442803; x=1772047603;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=9fhGew0cHEti1NKEweYeZNnsumlromq98EaXJHxhCpQ=;
+ b=St4lCVadAUvUK8E4vNF/xnkCjlTpsaIiKa1UACGl9xchdmvM5VqE4sc0NMzaNlPaPy
+ XSH4E1eGxxZu/Bgb3h1ZELfZUsiE2Se2+7KTZ2zI4iOFSmW6JmQNLRK8TWo7AbefjOkQ
+ 2jgvTYlzShMUXskqEvIgiVW8HwaJF3FxV/aXMOVsn9SubanWtWKrl5EI+EhTHYEFMjM/
+ c54cWx6shoqs7s/GYNcouQmwrbBnlvciWG9Atcr6hEjRgkOpvgEfMLUJ3xx6M59+XEia
+ Lk4eHM5ot/jkC2Xzuih3eWP1InsHfWmIUnp7z59xTbGot1zM/2CRAUObykfxo9WV8ufG
+ YcXg==
+X-Gm-Message-State: AOJu0YytSQPTIMu0eK398HjXaHonBPM52u+igCSmoOyAZUgkc7f7WKe8
+ 0wpGx87f8Dhjcs4hfCXeLGZNdlbg3aRwD8j1J18CoqwadN7x1CJ8ARm0vwtNzEAI3mg=
+X-Gm-Gg: AZuq6aKvMjQ68Be/EBq6LxaLaXoUuo6ZbruANPA5MEmlOGyhK4iinIBJPhy+7VfgCga
+ Eh55QGDspF3DKZdV+DkNKTQad67vtqJH3q0go5C8igin+xVeJ0NwE6MDCZFuAKCCg3Ckz0jOI6F
+ w2seKMBsSiJ0Z41cexMLxAJ3fiOueEkiK91mWUP/RG9csqm7fyDflcgyBFexQShIs7Ou6L2Yz+S
+ osvuqwoDJmEcYEhj7VSTwXGSLQg3oj6EEdQvuyVnHyjVTbcdIdpyHjnGcsQ+OgxuHzsbBySTfx6
+ LhIXoBQeYBqbvQEcK1Zqoh8hqQsgUFM6hRKiepiWOHeXQjUll7Z0xE6BP1tI+SPgcuHax00ONCs
+ PeojMAlU9362YwMr/vJs0b4wWlr+Jni6cdD1iai8g/R++DZ7e0nAhLFwGzKhbhyc1hwkXX2k9AH
+ jjMNNeR+dENE5m55BibQX7qL6X8RmZA7cd8IHXiF+Ucf5V/7tqE0xCsZCbWOWr7Mg8W5t0XAaG1
+ 2ykrahQV15hFuhoKZE3h0hQ0zGkYuSsfGXk9uai1mao4aRdaw==
+X-Received: by 2002:a05:6870:fb87:b0:349:de3c:bfc5 with SMTP id
+ 586e51a60fabf-41539b89b98mr127611fac.7.1771442802648; 
+ Wed, 18 Feb 2026 11:26:42 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-40eaf1e858bsm21568269fac.19.2026.02.18.11.26.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Feb 2026 11:26:42 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <Macpaul.Lin@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260210-add-mt8370-evk-board-v3-1-faf40de5f402@baylibre.com>
+References: <20260210-add-mt8370-evk-board-v3-1-faf40de5f402@baylibre.com>
+Subject: Re: [PATCH v3] board: mediatek: add MT8370 EVK board support
+Message-Id: <177144280139.3629982.610050572413809396.b4-ty@konsulko.com>
+Date: Wed, 18 Feb 2026 13:26:41 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260218155839.GC3233182@bill-the-cat>
-X-Mailman-Approved-At: Wed, 18 Feb 2026 19:14:22 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,59 +104,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Feb 18, 2026 at 09:58:39AM -0600, Tom Rini wrote:
-> On Tue, Feb 17, 2026 at 10:25:13PM +0000, Daniel Golle wrote:
-> > [...]
-> > As the existing code expects the whole image to reside in RAM and only
-> > take care of validation, decompression and relocation, I had to extend
-> > image-fit.c to use the image_loader to only load the parts *from
-> > storage* which are actually needed, and if possible, load them directly
-> > to where they are supposed to go. Imho, the code is simple enough to
-> > just look at it:
-> > 
-> > https://patchwork.ozlabs.org/project/uboot/patch/ab7837536e4567b90d7cb662984dd7e637ef4361.1771275704.git.daniel@makrotopia.org/
-> > 
-> > At this stage (because I first wanted to discuss the general approach)
-> > the patch still skips some parts of image-fit.c, which is obviously not
-> > acceptable for upstream inclusion, but good enough to demonstrate the
-> > idea and also try it in practise.
-> > 
-> > Ie. the 'goto storage_loaded' has to go away and all of image-fit.c has
-> > to be changed to equally work on RAM-backed or storage-backed images.
+On Tue, 10 Feb 2026 10:34:01 +0100, Julien Stephan wrote:
+
+> This adds support for the MT8370 EVK board with the following
+> features enabled/tested: Boot, UART, Watchdog and MMC.
 > 
-> I was talking with Marek to recall some of the details about what we can
-> and can't (easily..) do today with external data and he remidned me of
-> something. So one big concern here is that we have to be care to not
-> re-open things like:
-> https://nvd.nist.gov/vuln/detail/CVE-2023-39902
-> or otherwise allow for mix-and-match type attacks by having some sort of
-> partial reads allowed.
+> MT8370 is based on MT8188.
 > 
-> So a specialized partial-read of FIT images, in full U-Boot (not just
-> SPL), is something to figure out, but may also invalidate one of your
-> design goals because you do have to authenticate the whole image, unless
-> there's something both secure and clever I'm missing.
+> 
 
-The idea here is to have one or more IH_TYPE_FILESYSTEM subimages which
-do not have hash-* subnodes at all, hence, if there is anyway nothing to
-validate and they do not need to be loaded to RAM (ie. no load address),
-they can be skipped entirely, even if listed as 'loadable' (which is how
-the parser in the kernel currently knows which filesystem image to map;
-we could introduce a new property different from 'loadables', of course).
-Everything else which is part of the selected configuration node of
-course has to be loaded and authenticated.
+Applied to u-boot/next, thanks!
 
-To compensate for the authentication of IH_TYPE_FILESYSTEM subimages not
-done by U-Boot before launching Linux, the dm-verity root hash passed to
-Linux via cmdline should be part of the signed configuration, eg. by
-including an image of IH_TYPE_SCRIPT modifying 'bootargs', or by coming
-up with a new image type specifically for that purpose. Or, even better
-but a bit more involved, include the dm-verity roothash in the ITS spec
-instead of the hash-* nodes.
+[1/1] board: mediatek: add MT8370 EVK board support
+      commit: b5db4f322a0cf9eb78a9dc23ac9b290f15ff10af
+-- 
+Tom
 
-In terms of security, anyway only dm-verity makes sense, as there is no
-point in validating the filesystem subimage if what is validated then
-isn't also what is used -- one could quickly swap the storage device
-after U-Boot has launched the kernel and before Linux mounts the rootfs
-(from storage!) ending up with a different rootfs than what U-Boot had
-previously validated when authenticating the image.
+
