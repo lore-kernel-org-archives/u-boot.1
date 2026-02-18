@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C16ACE9A02C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 19:26:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10888E9A02C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 19:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D64D183D0F;
-	Wed, 18 Feb 2026 20:26:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C87383D77;
+	Wed, 18 Feb 2026 20:26:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="caCu/Jey";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FU3VAUn1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B8A283CE3; Wed, 18 Feb 2026 20:26:47 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 407E083D0F; Wed, 18 Feb 2026 20:26:48 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2272683AC5
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 20:26:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DF9883A47
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 20:26:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-40f095f1036so89494fac.1
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 11:26:45 -0800 (PST)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-40ee9b945d5so93891fac.0
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 11:26:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771442804; x=1772047604; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771442805; x=1772047605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A4kovkU7v/vgvuib7I7HdA+3I1KxuA+osBUerzNULxk=;
- b=caCu/JeyJHVK8TkHZvCeUft/BN3k/IR5YCHcm3f4GpqQjLxg5uZC2jkaxCXEj+vMrb
- g6uM0VvGO+vffdasxKy7rZtHc/DHrJHDh/lJsrk1O6hIYVTcvJUXVu7kUUzXJTW3OqGl
- k1T240sReb/GnE7wKA0gddmyd07l0INt/J6UI=
+ bh=w4KrWvoe6gNEXvwcMmIqm9CpqvwYooP9ccb0duaPAFQ=;
+ b=FU3VAUn1TyFFawxtpFDyrK1tkdiiDbO9U1AhdhkWRIHM0tj/mvoLGCxAUh16pHXKOR
+ hSLvo8uKi8M0B87PC/iY5/n/heeNVx8RwyJ08nllTN7HKc5g4So0rzCQa3vtCmMW/X6j
+ 8Vob1wh6tngd2Jm+mK9qkI7i8kQWziGYqgtOo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771442804; x=1772047604;
+ d=1e100.net; s=20230601; t=1771442805; x=1772047605;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=A4kovkU7v/vgvuib7I7HdA+3I1KxuA+osBUerzNULxk=;
- b=FBg+ZYXI2+sRd3I1y6vUCH46Nj5giqo4fgBcQWA8BAGztbrgE2uqrKPcjF/O/MTQXO
- /jb+SphzZIfN+reZ4216rXe4tR1lEqxvzSvIic9qkxQ2PguPaKd9Z0xe47OE+TZ0HV8i
- PnCJh+OOdQfFKugP1+NbzZHg1PQlZvaqBlwwYGdMoj7Nh4FAVviFTIrKaGcSJ+3ljq1a
- 02jHhBBUpfYeuh5uz6ao383WsCnIEXoZ5nDQxWYeDSlRfwAHOtG0avLAFur9ox0/9+WB
- 6mPlkw3tAbSZHA+ZKJ3OJ0cjQGE90leX6xGDxhEPsCpfFX2tCPztESMMmfsIRfgzom8g
- FnMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUm1+TlgmhkgwWMGv5aS13b3ezmgdTozSTLFHPqRcMx8WWW+REB/uBrQTeoDqztPJaB5/u4k4g=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPvdO9+wDGNQrhvJQxX8APdNdjRd5kOInfxW4jRMEbc41ZPyoc
- HyPwDDI60VGjx5Xkk9qZpgee7m0MPvJHev77LX5r4/d0vmyR9WCFCaRKh18vzDZuRWU=
-X-Gm-Gg: AZuq6aJP0X8qNxvlbKJXmNuLAdv8FaJclsbOKGeAkcMAysVAA8VQyMxSMP4sXliTVCq
- /VVXXG63poLW1NSv1N3HGPVy5GEtt4nx9gD42AmyYEfOi3WS9jH5bSt+s1L0/dhpUCUcaJ5Ge54
- bkO7zGHNdTjj2ZFUuYlL7AKov7JoqBbPeBU2lj83a6D70kjGeyPev0Xxp22yw9/AwYEaJ9sQPjt
- 2Qu6Pv+c6I+MD+IU1AsOj0kBGt9h2okwZBtJoUB3jnSTytRaYDk1M4yDjBXqgwk+Fou1phkYtRz
- 3tiZI2KGk3zLs1b4Kh20PSdrxbv+sOCwatULfmjy8O0nEXssewzJ1L3bc4dnmDlGcmj3WqqgInX
- z4tDhoqJcjd2IfllwUvX20FA7ZYFoKnZg+acMLcXGMoBa0xfZ/vR5yRINifbv8zy1WwFtN70xUp
- ev2HExyg/tdnXA/4rZWL2txq80U82K/0gMR5ooE8eSmhX98EuGB9n0hUTvGq95Z7XYsSr8Xp67j
- tjlslSqlOV1f3Tr0+o4YOWNfXF/SUcCVBFhRIZNOfZYJMWxYQ==
-X-Received: by 2002:a05:6870:b14d:b0:40b:66d:1118 with SMTP id
- 586e51a60fabf-40eeed74765mr11552770fac.55.1771442803713; 
- Wed, 18 Feb 2026 11:26:43 -0800 (PST)
+ bh=w4KrWvoe6gNEXvwcMmIqm9CpqvwYooP9ccb0duaPAFQ=;
+ b=S9FzHmLe4q/L9O7mDp+XHgaKrT5CLhQezNypUCwzY+aDmbvVsIxU40cKmO4ahGmOxP
+ qnIx7Ss3djtAgc0QCxHEvwxtNiBMQshP6npIRaRv64TQ6olmraeYeoLQGPwoWyFwTbW8
+ xa+PDWUSpiy/vW0KE2iqhwSHnS3bSDkziufNrhQLfelR9w0QWwfqQDvxtr5KdTFXT6R3
+ +zVOAofxCR4O6jXfvvS9DSjmKSKFACUjX0/YCDFyE4onBNSgLPqoqGerjbCz+GTP/cgt
+ FQ81HGrbdVKmT71RmSNWR/5s/R0IkF6vavRg0UG+Y/XomhN7n4xlqv+OU9rA0VNHQCfd
+ Vm/g==
+X-Gm-Message-State: AOJu0Yx0XRxXTst5ChGqkGDmVbfpbyQbkrDMvdrUYDAbKYlb8cUHCxNe
+ 8hTcogReY+1fp4QNNd2UWDUyp+l16xXoxGXQi/vMSFqEpNGRR18kZ+4Qok+yP7b1dxY=
+X-Gm-Gg: AZuq6aLAqc2pXJvDLpIOfCGAdn7guf7HGR7J9eiq8NargX2wZ15S1CnPxGFmb4k1YOI
+ WeW0ubPTjipQXfGPTbnmysKIcPH8d0Cx1i/EzR6fI5YTDOlbQd90MQlSR0SXOGYDc37aTpgx0kU
+ gWLeePDcuMZ/Z9RnKqAS5ypeGR8YT+96X6mpb0uDmeXlPBj0sldjZIIwQ2mubHQIsm+vAPD5qCk
+ HYMmfkSDh+qJ+gB3iCjaAfGT3NEr/2JuZ0u7+U872Nj6dvxKvhPoqFaZLQ3fRL4965NKPEQIb8+
+ mYTrIR9sSRBNJvdeizseUjmqHgXslM9zq2E2wapKLlFYIigwYQFrk6juxbPJURhaGYAymGrSVOe
+ s2+wcR2MS7ETZatov/UeVgVGQe11tztArIN7bhuMgF8sb3pybLxOY1QEZ8+6ifg/jZJ6oeabZR1
+ 4p88fMRTlh/s9cTBPyYRAGp1oiR5D0gzVYfpUmrNU9u5iVf8wFGWcUlraSEAkosrZVpJOFgC33n
+ JvhRH89wPgEcR+TlxU4UVWYSgbQuOlXWc6H5tWZdwWts7kxoA==
+X-Received: by 2002:a05:6870:524b:b0:404:4238:b333 with SMTP id
+ 586e51a60fabf-41528f8dea2mr1623786fac.7.1771442804859; 
+ Wed, 18 Feb 2026 11:26:44 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40eaf1e858bsm21568269fac.19.2026.02.18.11.26.42
+ 586e51a60fabf-40eaf1e858bsm21568269fac.19.2026.02.18.11.26.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Feb 2026 11:26:43 -0800 (PST)
+ Wed, 18 Feb 2026 11:26:44 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, 
- Arnaud Ferraris <arnaud.ferraris@collabora.com>, u-boot@lists.denx.de
-In-Reply-To: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
-References: <20260209-mtk-mach-clean-up-duplicates-v2-0-e3b22282c74d@baylibre.com>
-Subject: Re: [PATCH v2 0/7] arm: mediatek: clean up some redundant board init
-Message-Id: <177144280276.3629982.2554283802784525746.b4-ty@konsulko.com>
-Date: Wed, 18 Feb 2026 13:26:42 -0600
+ David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>
+In-Reply-To: <20260202-mt8188-fix-clock-v2-0-b39bddfcac66@baylibre.com>
+References: <20260202-mt8188-fix-clock-v2-0-b39bddfcac66@baylibre.com>
+Subject: Re: [PATCH v2 0/5] clk: mediatek: mt8188: fix clocks
+Message-Id: <177144280383.3629982.5559868929996654174.b4-ty@konsulko.com>
+Date: Wed, 18 Feb 2026 13:26:43 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,33 +102,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 09 Feb 2026 10:39:25 -0600, David Lechner wrote:
+On Mon, 02 Feb 2026 13:41:48 +0100, Julien Stephan wrote:
 
-> Before adding more targets, we take a moment to clean up some some
-> redundant code in existing Mediatek SoC support.
+> I recently submitted the clock driver for MT8188. I naively submitted a driver that was ported
+> from the kernel driver, and mostly work to boot a kernel.
 > 
-> The first three patches are removing no-op functions. The last patch
-> generalizes the mem_map code so that it can be shared between all
-> Mediatek ARMv8 SoCs.
+> Recently David Lechner, added support for the clk dump command for
+> Mediatek clock drivers, so I used it to check the MT8188 and found
+> several issues fixed on this series:
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/7] arm: mediatek: use default weak mtk_soc_early_init()
-      commit: 1af249f511af6d88fb365bfc335f6b84e860b77b
-[2/7] board: mediatek: mt8390_evk: remove empty board_init()
-      commit: d8c550fb7a348ce2496adc22730157416938baab
-[3/7] arm: mediatek: mt8183: remove unused function
-      commit: 35d5cd54153d4ca06547712c33810e8095967745
-[4/7] arm: mediatek: make mtk_pll_early_init() static
-      commit: 9260339c0ed0cb6989f1fc1959d7619fcff7ed7c
-[5/7] board/mediatek: move EVK MAINTAINERS to common file
-      commit: 8b621407386eae25dc299823185ecdb5bb7822ef
-[6/7] arm: mediatek: consolidate ARMv8 memory maps
-      commit: 24ffbb2aa17e287578aa359e773f075b9c96ebc0
-[7/7] arm: mediatek: add CONFIG_MTK_MEM_MAP_DDR_BASE_PHY
-      commit: f1c0e637cd67ffddee154f8c5282c4e910a7179e
+[1/5] clk: mediatek: mt8188: remove separate topckgen-cg driver
+      commit: a04835c0e929c04403b01b50e1dd966eb42e5004
+[2/5] clk: mediatek: mt8188: fix circular clock dependency
+      commit: 6354f83f43f7d2c1b76a17f9b5629a1af7b7916a
+[3/5] clk: mediatek: mt8188: add missing fixed clock
+      commit: 5e9bbbdab003e147f54d15e0a1c081c13bb0855f
+[4/5] clk: mediatek: mt8188: fix some clock parents
+      commit: 2797fa3efd88fb8e4661093aab1958799a4696f0
+[5/5] clk: mediatek: mt8188: refactor driver to improve readability
+      commit: 0cdd01dbde2a686ae3891c8bd79dd75d686fcbab
 -- 
 Tom
 
