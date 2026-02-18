@@ -4,72 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4ED3E9A047
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 14:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9712EE9A02C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 15:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C68E083D5D;
-	Wed, 18 Feb 2026 15:59:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
+	by phobos.denx.de (Postfix) with ESMTP id F0B9983AA9;
+	Wed, 18 Feb 2026 16:17:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=armadeus.com header.i=@armadeus.com header.b="L00mYFCq";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="X+/wp9bI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A88A802C1; Wed, 18 Feb 2026 15:59:42 +0100 (CET)
-Received: from 8.mo561.mail-out.ovh.net (8.mo561.mail-out.ovh.net
- [87.98.172.249])
+ id 2BDBD83AC5; Wed, 18 Feb 2026 16:17:42 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7E8E83AC5
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 15:59:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B446F802C1
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 16:17:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=armadeus.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director7.ghost.mail-out.ovh.net (unknown [10.109.254.71])
- by mo561.mail-out.ovh.net (Postfix) with ESMTP id 4fGKRY3XGPz5yMZ
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 14:59:37 +0000 (UTC)
-Received: from ghost-submission-7d8d68f679-62b48 (unknown [10.110.101.145])
- by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 2ADF5C01C9;
- Wed, 18 Feb 2026 14:59:37 +0000 (UTC)
-Received: from armadeus.com ([37.59.142.110])
- by ghost-submission-7d8d68f679-62b48 with ESMTPSA
- id hnYEB9jTlWnVjAAAa7HxRw:T3
- (envelope-from <sebastien.szymanski@armadeus.com>);
- Wed, 18 Feb 2026 14:59:37 +0000
-Authentication-Results: garm.ovh; auth=pass
- (GARM-110S00444eeeb47-015e-422b-b338-c6c3197b9520,
- BCC414E58A87BDF8F3171654DA18834A20810328)
- smtp.auth=sebastien.szymanski@armadeus.com
-X-OVh-ClientIp: 86.243.239.229
-From: =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Date: Wed, 18 Feb 2026 15:59:19 +0100
-Subject: [PATCH 2/2] serial: lpuart: handle Overrun flag
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 849E6C6345B;
+ Wed, 18 Feb 2026 15:17:50 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 836995FA23;
+ Wed, 18 Feb 2026 15:17:38 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 48A3310368B26; Wed, 18 Feb 2026 16:17:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1771427857; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=y1J8Ayu5W4KI8n1PXitKSbbQboTTBtXgvAmNOcaZJDg=;
+ b=X+/wp9bINU4UZLVUOxqxcxW5CC5JN+OM9qlX8ulGKbQjYx+wFYg0snsfBYr+xzvd74lroC
+ IDURwij9LXauhjPHlfYuNZRdTibSem+rXiWXCsWeGTlZNxKpOrpeL2KEQR2LS3wiEs5bvu
+ sCVrgUIFmZfiww5TA2UgcSZDZZVw/h/K3zu9XpE9nHuq8zefv+AFsqRchXzSEOZ47/E9AZ
+ hftoCJ92QnFJ3D2VF2icn2Ec3+xqERbvEUFGsxjcqMiNBB4oR0fdKsPZyfLoR9npl7EfEZ
+ ldnnEM5kzhJD/bFbZ6lNLyLZPYuGaLly0makQ5WPy9gdyE/5/y6Q1YDW+WH19Q==
+Date: Wed, 18 Feb 2026 16:17:23 +0100
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Cc: "Sughosh Ganu" <sughosh.ganu@arm.com>, <u-boot@lists.denx.de>,
+ <jose.marinho@arm.com>, "Thomas Petazzoni" <thomas.petazzoni@bootlin.com>,
+ "Tom Rini" <trini@konsulko.com>, "Patrice Chotard"
+ <patrice.chotard@foss.st.com>, "Paul HENRYS"
+ <paul.henrys_ext@softathome.com>, "Greg Malysa" <malysagreg@gmail.com>,
+ "Arturs Artamonovs" <arturs.artamonovs@analog.com>, "Vasileios Bimpikas"
+ <vasileios.bimpikas@analog.com>, "Utsav Agarwal"
+ <utsav.agarwal@analog.com>, "Nathan Barrett-Morrison"
+ <nathan.morrison@timesys.com>, "Peng Fan" <peng.fan@nxp.com>, "Simon Glass"
+ <sjg@chromium.org>, Duje =?UTF-8?B?TWloYW5vdmnEhw==?=
+ <duje@dujemihanovic.xyz>, "Stefan Roese" <stefan.roese@mailbox.org>,
+ "Mattijs Korpershoek" <mkorpershoek@kernel.org>, "Sumit Garg"
+ <sumit.garg@kernel.org>, "Heiko Schocher" <hs@nabladev.com>, "Alif Zakuan
+ Yuslaimi" <alif.zakuan.yuslaimi@altera.com>, "E Shattow" <e@freeshell.de>,
+ "Raymond Mao" <raymondmaoca@gmail.com>, "Jan Kiszka"
+ <jan.kiszka@siemens.com>, "Shiji Yang" <yangshiji66@outlook.com>, "Daniel
+ Golle" <daniel@makrotopia.org>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Leonard Anderweit" <l.anderweit@phytec.de>, "Yao Zi" <me@ziyao.cc>
+Subject: Re: [PATCH v3 5/6] tools: Add support for fwumdata tool
+Message-ID: <20260218161723.00faf1bf@kmaincent-XPS-13-7390>
+In-Reply-To: <DGI512YNMO8N.16UJEORE7YFKK@linaro.org>
+References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
+ <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
+ <aZWKyl6r8BphaePp@a079122.arm.com>
+ <aZWM0_v4eUgKLTSz@a079122.arm.com>
+ <20260218113116.3c447668@kmaincent-XPS-13-7390>
+ <DGI512YNMO8N.16UJEORE7YFKK@linaro.org>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260218-lpuart-fix-rxfe-offset-v1-2-86a78b224f13@armadeus.com>
-References: <20260218-lpuart-fix-rxfe-offset-v1-0-86a78b224f13@armadeus.com>
-In-Reply-To: <20260218-lpuart-fix-rxfe-offset-v1-0-86a78b224f13@armadeus.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Kory Maincent <kory.maincent@bootlin.com>, 
- Julien Boibessot <julien.boibessot@armadeus.com>, 
- =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-X-Mailer: b4 0.14.3
-x-ovh-tracer-id: 15265232415330326217
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTGcdss9VIj/m/mQGm7b1Z6eoMkur1vDkfIGe5Y4nnkgxx0BvfE5VBX1jNQMlL7rU0Vdj70IrRf6iM1l38tVWhCJpsRRULLGaFMla95dOQFPtBf8mgT9OImbd3e9nxDTWWVRke8mu7zedMcVmgoroOkzzRhgfFz4xkiyjWkuhADrBmInZg8ByJFX8dlo7TyjdupzitPbrcrbeZeC+wlfbFFKDlKYdueZaEgZH+wS9Rp9XbOsXMIobp1zG/rybsn2hSjKXdc7C87iYXe0J5NbRKA5k9lLmE/ay54DViP6pBSycUyXfcJ/H+TUtURyDzbUuROI1QH08FdNYbPb3P4GkZTdPBD64aLphV4i+Mg8fv4E31NVHyB/3nTcqGHSCmpunnAPch211Yw/jVz3hbdt0ZoxERTwMnS+u8/wfA+EVGx1fhybXLH5sgL/SAPwqpweMU2ln6rziPC8xn67lmEXGc8+cZgtyB42i2H25e178Ivn0g10FBou5saN3ekC6UKyiZDV8f97CgdOkyll3ChSXIV5eeRHooHFaXh4APQoEfMP1UquZj+i+xq+T5OnP1JCH26Cwi2BYvJI2p7Osd3Q2xO+fpml38agKYl6egSeuW6+Hz5melax8X9j9vAY0w5XPyfwZOqfUC3qdabCeo7B0gRIjqLAXBGoZcBP/UyP0TD8pQ
-DKIM-Signature: a=rsa-sha256; bh=XLBcE69QgulgZeJPg45m/GWR90yIvjwGuO3jd7zFZ44=; 
- c=relaxed/relaxed; d=armadeus.com; h=From;
- s=ovhmo103079-selector1; t=1771426777; v=1;
- b=L00mYFCq6q1fJgIVnzVQScaaTaJHCutnbgr5wFYw26iSuEYQFoEiGQldeht+uea/2e0cKhtf
- aEX1qepOavRC8IoUB8LrCdUJGXLc0L5dsk0GkVQ6pd9Enywdhsy7c+vXwoM7w9Y4cz+z+dj4Gwg
- 8R8hx7fe+7QXqa98HCPZFOmPTC3KELCsNGHFK/j9G6G9Tw1pNi2T0x0Xiho48OKKAeZjV+jDawR
- If9Fnw15iJiEtbeFE/Ohgugp58K0lvP6Tlfg5SvmatS8QeTvCotjeBSRx5f5N0r1f1hQ/DN5hZp
- W0ABsl05ngWqPW0iFnzDzhTRpEvIk+imHYDMh046RXDhQ==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,39 +94,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The receive FIFO may overflow if data are sent while U-Boot is still
-booting. In that case, the Overrun flag (STAT[19]) is set and no
-additional data is stored in the receive FIFO and the user cannot get
-access to the U-Boot prompt.
+On Wed, 18 Feb 2026 15:55:54 +0200
+"Ilias Apalodimas" <ilias.apalodimas@linaro.org> wrote:
 
-Fix this by clearing the Overrun flag in _lpuart32_serial_tstc()
+> On Wed Feb 18, 2026 at 12:31 PM EET, Kory Maincent wrote:
+> > Hello Sughosh,
+> >
+> > On Wed, 18 Feb 2026 15:26:35 +0530
+> > Sughosh Ganu <sughosh.ganu@arm.com> wrote:
+> > =20
+> >> On Wed, Feb 18, 2026 at 03:17:58PM +0530, Sughosh Ganu wrote: =20
+> >> > On Mon, Feb 16, 2026 at 02:35:35PM +0100, Kory Maincent wrote: =20
+> >> > > Add a new fwumdata tool to allows users to read, display, and modi=
+fy
+> >> > > FWU (Firmware Update) metadata from Linux userspace. It provides
+> >> > > functionality similar to fw_printenv/fw_setenv but for FWU metadat=
+a.
+> >> > > Users can view metadata, change active/previous bank indices, modi=
+fy
+> >> > > bank states, and set image acceptance flags. Configuration is done=
+ via
+> >> > > fwumdata.config file.
+> >> > >
+> >> > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> >> > > --- =20
+> >> >
+> >> > I am not sure if this has been discussed with Ilias earlier, and
+> >> > apologies if it has been, but I do think that this patch is not
+> >> > adhering to the DEN0118 specification, specifically the part mention=
+ed
+> >> > in section A3.2.1, which says that the metadata is to be maintained =
+by
+> >> > the Update Agent. I would like to hear from Jose Marinho, who is the
+> >> > author of the spec, on what he thinks about this approach.
+> >> >
+> >> > I do think that the other patches in series look fine, and can be
+> >> > applied. There is just an issue of inclusion of the tool for
+> >> > building. I will comment on that patch separately. =20
+> >>
+> >>
+> >> Adding Jose to the discussion. =20
+> >
+> > We indeed already had some discussion about it with Ilias.
+> > https://lists.denx.de/pipermail/u-boot/2025-December/605924.html
+> >
+> > It seems ST deviate from the original idea behind the standard. It does=
+ not
+> > use EFI neither update capsule.
+> > TF-A is managing the selection of the boot partition (FIP image: OPTEE +
+> > bootloader) according to the FWU metadata content and is dealingwith the
+> > rollback mechanism. Linux through this tools is the update agent to sel=
+ect
+> > the boot image.
+> > The final goal is to have RAUC updating the boot A/B partition and
+> > switching to it calling this new tool. =20
+>=20
+> The whole point of adding this via EFI, is that we had an existing mechan=
+ism
+> for reporting. e.g when an update is in trial state and an acceptance mus=
+t be
+> explicitly approved by the OS. I assume RAUC etc will implement that ad-h=
+oc?
 
-Signed-off-by: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
----
- drivers/serial/serial_lpuart.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+Yes it can report the current status of the update process.
 
-diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
-index bbce59443388..0728feccd131 100644
---- a/drivers/serial/serial_lpuart.c
-+++ b/drivers/serial/serial_lpuart.c
-@@ -367,10 +367,13 @@ static int _lpuart32_serial_putc(struct lpuart_serial_plat *plat,
- static int _lpuart32_serial_tstc(struct lpuart_serial_plat *plat)
- {
- 	struct lpuart_fsl_reg32 *base = plat->reg;
--	u32 water;
-+	u32 water, stat;
- 
--	lpuart_read32(plat->flags, &base->water, &water);
-+	lpuart_read32(plat->flags, &base->stat, &stat);
-+	if (stat & STAT_OR)
-+		lpuart_write32(plat->flags, &base->stat, STAT_OR);
- 
-+	lpuart_read32(plat->flags, &base->water, &water);
- 	if ((water >> 24) == 0)
- 		return 0;
- 
-
--- 
-2.52.0
-
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
