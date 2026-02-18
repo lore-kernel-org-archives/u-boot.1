@@ -4,150 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B7A5E9A03B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 06:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D839CE9A03B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 06:59:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A9C883AC5;
-	Wed, 18 Feb 2026 07:34:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 2452083AA9;
+	Wed, 18 Feb 2026 07:59:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="W2vD3W3K";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="W97mCD4F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 412DD83C72; Wed, 18 Feb 2026 07:34:12 +0100 (CET)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c000::1])
+ id 05E5E83AC5; Wed, 18 Feb 2026 07:59:24 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A11283AA9
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 07:34:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58C1B80050
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 07:59:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SGaI+66tBbnIoIxceSMBROA5q7bQ8xY+tcWcRS8ZgM0ru9tMxFUNhEzAZQBsA57sIt0QaNYGSj+OOhv3jvj/KV1LT2OJbtcpP578gbGgvKyr2i+aoU/tlTY/doDvSijBtmdnIbrKu67YrH7S5vf4uxdxJ0/SEBGv6DrPGHvdeOwPgz2HrUmhkcSVyeOrlLkUrvf94wvXzi78rffXTUyGYszWX+M2biKUwAUX6dxFl4WUg7fWJ47BtRuHBLEzXq8Fl3pA793LXpJlDT0bsC6peW1bEwXRbZ8N636yYzRlNzIMFPae96VYUU6af1HnyYEHJ638v5bETsX1ML0WCF7TlA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nVGZIawFaGC3HGeLJEqAyM3/28XRdwWs1EYC3eRoJF4=;
- b=okoRDl9tnZTZtJBNPXYpw1ra4E+tbXTBy1jzDm3mC6kY+NqjTSqi2xmui3lMYI0J/kL/yTzmOSDz0+wcI6HWoR0kzPiEVPh22FBSyyFdbZke01yNxiktP6mupDf0Rz7yBQsPiOavnO7m/D4vvQ8wlHiUK/x/Jg6Ks7CKWERwUfSrqjs+UAbIhtJV/TjZ/iO2N7P5ZZBCHOZoW5R4iKE4CTxIAIlKutcWAGeeNi0PBPMr8eGwGVSnOOjxCkUTcoSV9e7gfpIwMHLrCAJfrtBUutBPor25e8of7F9uFIv+F00wENsca8BKWVKDM2P778GbY1i63TvI9bEwXx8vkf3dfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nVGZIawFaGC3HGeLJEqAyM3/28XRdwWs1EYC3eRoJF4=;
- b=W2vD3W3KVCj977U6d6FO3J88opf9qQD7hrgakWKr7gTo/iFiy++8WR4tIcDmlxxHI6Y9m51dIJ5F4O9tZijB4wVNeLhSn3FlaVHoeKybMdi5TXTq+07+NJnHfXRItTy3TCCWon8IDrS/orLc2+qFD5Vh+a4J2pw7O7OM21OHi1g=
-Received: from DS7PR03CA0077.namprd03.prod.outlook.com (2603:10b6:5:3bb::22)
- by PH7PR12MB7137.namprd12.prod.outlook.com (2603:10b6:510:1ed::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Wed, 18 Feb
- 2026 06:33:40 +0000
-Received: from DS3PEPF000099DC.namprd04.prod.outlook.com
- (2603:10b6:5:3bb:cafe::d) by DS7PR03CA0077.outlook.office365.com
- (2603:10b6:5:3bb::22) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.13 via Frontend Transport; Wed,
- 18 Feb 2026 06:33:40 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DS3PEPF000099DC.mail.protection.outlook.com (10.167.17.198) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Wed, 18 Feb 2026 06:33:40 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 18 Feb
- 2026 00:33:39 -0600
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 18 Feb
- 2026 00:33:38 -0600
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 18 Feb 2026 00:33:36 -0600
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] xilinx: mbv: Update stack, heap, and OpenSBI memory
-Date: Wed, 18 Feb 2026 12:03:15 +0530
-Message-ID: <20260218063329.396968-1-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 58FD71FAA3;
+ Wed, 18 Feb 2026 07:59:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1771397960;
+ bh=E78l5XwqWSl/4h9VqLo0q0gsGc6rqSqSAV2z5g/0ykk=;
+ h=Received:From:To:Subject;
+ b=W97mCD4FwM6YkTu+NL5ZS0rfYI86DeWJjHlGUUk7JQkg+u4yGlGWIifCXmxCOUaeM
+ eheVutnxs1nWBFOrkc6UTc2NgVRhGR6GLY267OMS+mL6y4tJt1+A6IavUr+or3TpDb
+ RXyyGCA+I062QRIBdqiVoknbyvR/sI8AHLslI8Suxl4TSPeuOzDc9NOm/jx0V0lKYO
+ ebN+jmFdBnuhVUtGRo7CwKNWnyCdFNegUpj7XpTc4sFzSNaddiVSPkdMGEDhge1ws9
+ zlz37cOjDKJ8VPuIhn26A4sJhoOyduw34et4W8YJJkc9pc/IaxGWBd2Op6r+W2jJGQ
+ 9A2DEB6f+gnWQ==
+Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
+ id 11E507F858; Wed, 18 Feb 2026 07:59:20 +0100 (CET)
+Date: Wed, 18 Feb 2026 07:59:20 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Suhaas Joshi <s-joshi@ti.com>
+Cc: Francesco Dolcini <francesco@dolcini.it>, Bryan Brattlof <bb@ti.com>,
+ Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
+ trini@konsulko.com, vigneshr@ti.com, n-francis@ti.com,
+ s-tripathi1@ti.com, k-malarvizhi@ti.com, kamlesh@ti.com,
+ vishalm@ti.com, d.schultz@phytec.de, w.egorov@phytec.de,
+ ggiordano@phytec.com
+Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
+Message-ID: <aZVjSOzCH6ZP3CjW@gaggiata.pivistrello.it>
+References: <20260210092646.w5bugrscifmsh5px@ula0507357>
+ <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
+ <20260210105014.GB214446@francesco-nb>
+ <20260211101113.GA176369@francesco-nb>
+ <20260211112109.56e27kyy4coqpcbb@ula0507357>
+ <20260213102015.GA10715@francesco-nb>
+ <20260217132150.of5l5qirxkeizsne@ula0507357>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Received-SPF: None (SATLEXMB03.amd.com: padmarao.begari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|PH7PR12MB7137:EE_
-X-MS-Office365-Filtering-Correlation-Id: 57b1420f-f7b6-4954-d1d0-08de6eb7a77d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eDVmQ0hRTitJZXhFcTgxbTNIWElxUXpCVVU3UnFlK1UzSTZ6N0NOTGVhQndw?=
- =?utf-8?B?UkJ1RW43SVpPN0xrZnhIM2FhVDRpd0FMRldPd0FRZ0lrclE0UThIZjBJNktP?=
- =?utf-8?B?M3UyN3NrNGpGL0sraHBzWlRMSlJJQjlObE9mQWlXNHphY0grRm9reXc2TDFz?=
- =?utf-8?B?blhZbFJIcjJBbStoYUJMMmlNUktMSXJvUEJ1dmJOc1lHVjkwZExKTmlGd1hG?=
- =?utf-8?B?UkNMWHB2YllRZmZzblRSRnFsWExkR2JTSDNmd25WQUlPT2ladDFKSndrejZk?=
- =?utf-8?B?WmppSkpQMTZ6YU43aFBHTkVIQ3VXVzh3RHE4dTU1aE1zL2hzcUtkSnVTeDdZ?=
- =?utf-8?B?Ny9RVTViQk5BYmFadTgrZDhyTnAwSXFBMCtYakluRzdhM21aT2hkZi9CU0NQ?=
- =?utf-8?B?dy9ub2htejUzWjZLS09IQW9URWpGUzZySHphTEhJSVlNT09ySGtYK2lqM3lD?=
- =?utf-8?B?SFJvQUxoREJnQUxzNm9QZkdTVGUwWnFaT1FDV3hwNTQxRk8xR1pERnVXOEtM?=
- =?utf-8?B?MTVtbzQ3WDFSR0FHTmVac2h1UWlSMTlDTHpQSHpSVVBvdlJwRzNTemM2OEpO?=
- =?utf-8?B?UGFsamNUZktnREdybVZQNVFydlZRREZ4RjJqM1NaUFdwY29OY3hPalVmM0cx?=
- =?utf-8?B?SFJLdyswajZNaGI1UTNTcGRyNmNkcS8vZC82NE9IUW1DTk1OOWVkQWNWQm9r?=
- =?utf-8?B?dm9EcElidVpNQ1V0bkVvODhpOVRKeUZSM09wdnNzb3dxdVlYc1lKN296TDZn?=
- =?utf-8?B?VlhSWGVTVjU1dVFnTFo5aXN5bi9VVHd4SXd0azJldDBTWUgxeVZvd3ZWdEZF?=
- =?utf-8?B?VU9wK0tya2xMVlVRWFRCSVRhMDRCMXVxQ2dRSTN5Zm1TUTUrZm55aDBvYk9H?=
- =?utf-8?B?anU3RmkzYVhwb292cWVNK1lDdU9UYmJKRm1VcmRwK1doNm9PL0wyYWZhcTlP?=
- =?utf-8?B?L05DcHNIMWZYTlJmN0FUVGhRUlcrN3ArRnhVckdwOGVjUC9TSEpKWHFIc3Z2?=
- =?utf-8?B?RnM4MHZncTI2VklNSUVsRnk0c01vY2Q4VnZNL0l3eUNsamduMVRoQTZzemJt?=
- =?utf-8?B?VU1tYjhJeC9RekJ1REZ0a2NrSWJuSE5BbUdkRE1zYmFtK1gzSXZremhTdjEz?=
- =?utf-8?B?d2lUajhsTVQxVGpKUk5oa3gxajdKMFNJc21rWGpQK0d5T1JWdTFxSHZ6T241?=
- =?utf-8?B?TE84T1lYblplS1JCUllWUkhwbEtXbmRFYjBSSTBoM0pDYW5pKzI3ZjZhaFVT?=
- =?utf-8?B?dFpuQVkzRW9PMGkvOEM1NmlpN1hPdzBZTEFRRFhXWngxL1BnOUxmWi9EWmVC?=
- =?utf-8?B?ZHZaOHZWTnYwd3ZTRVNCRFdlNmVPN2Q4YkhPbVdnbllicm1mVkRDZDJrTzNy?=
- =?utf-8?B?QUp2Ky84UWZLRzIzb3R4cERVS3VVSlo2N25JdEFzcDRhcEcvWkM4SGhaMzNE?=
- =?utf-8?B?cER4OGRocTBwMVdlUW1zUU0xbEJSUnBoWXVMRWgzU1U2UDdjWTJLN3FFWGdx?=
- =?utf-8?B?alhUb0lLTDNsT0M0b0F6b1dEZVJYVjlyaTFmc3VtYlR0WWF6aEU4VHp4a2Js?=
- =?utf-8?B?OGxkL3NkTGhIL2pONUp1SXRlYmkzR3V1TUh4WGRYb0JKRmFnRytNcXFGRVdi?=
- =?utf-8?B?ZDZDd2JWUnlLT1M2VmErZUZrZ3ZJNmo0ek15VERhWUdrM3B2eEl6dFdaZXU5?=
- =?utf-8?B?ZittdDBzL3B6RWtrOHp4R3ZkSERqWWRlTnFDaU8wYlRETlNIUHpnQWEvRGtn?=
- =?utf-8?B?Q1puTzdTdXNwUmhsT0NITkhsZ3h2WW0wd0VnOXo4R2tLUCtsU05PcXlqMU9V?=
- =?utf-8?B?WFdDUlBoak9BUXF2WlNKOVRUZ1dyQkVLbzk0ei82Y1dDUWhRYXQ4U1c3Z20w?=
- =?utf-8?B?TUdnNnBlRXZtQjVFbUVYaWNMdEVMb2ZwR0p2M0dKSFBoYk0zVVREYTViSzkw?=
- =?utf-8?B?VlVIM3ZqbXd5eWU1R3dQM1hXZ0NYUUI2eW5Za08rRmZFTjN2V3ZPSllJZkFL?=
- =?utf-8?B?OGREMFVTR213dkw2ZGJIVnBuVTVPMWJNRXAwSzJKTExIWlBkTXpNdCtuMXdn?=
- =?utf-8?B?dng2c0xUaUlnbzZlbjVrd3BQWFlPM2xTNk1sbUJSQk1OaHNEU2N0eDVBdDZv?=
- =?utf-8?B?RkxEM0hNY0piK1RuY1VSYW1qdVlwU2RxOGJmS2hNVVlzcjZ4UFhtS3VCYjRy?=
- =?utf-8?B?U29jV2FyeEFSQTRiamZRZmpzc2t6bHFBYnVpMDIxdkQrWjhmdElsRWFNa1BM?=
- =?utf-8?B?WkNzdldveVZkcmVVTFFvL2RubUtBPT0=?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wl1IY/ORcupFRmdzTbZxlTPbTfHAacBnCHJR3k7wD1pWiXrWhZX4dxN6TzRhcO1gOAym4XOrlueYUSJPbDK1Z9TeWfx2ClxDMwy+/tK4ZHUhUiVKn6T8yGAVZ6STwlRXQ4tq9Y3G9SYa8ZCEWX29VDotGpg9mwnu1QNIbXKCqxRlYhm9bdULMj30etcpJ7KrBe1PNuJ9XTs7T075fFOr7DXM55M8xCeq0ZrOz2LeO67IuaUx6Ywls2rp8OKefteX3+xE31TkDmbQaKdcgNmGQAsBMw2+qeUOlquq2Vl2Kmk/bRnj7XqFdQj2VWGmzjsivDYcw0PiYc4EG81xM5uy4lj6y9mTRcE1KOAX8gNzfW6JXrJ6On3ux83QLF9w/xxwpyO2GQJH1PQlvdGyIlxwgxVPyQ9YAauvndrlxpFDQc+n+Y/KrWEEKFWV10zmh8Az
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 06:33:40.0494 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 57b1420f-f7b6-4954-d1d0-08de6eb7a77d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DC.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7137
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260217132150.of5l5qirxkeizsne@ula0507357>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,84 +79,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A 2 MB region of DDR memory is allocated for U‑Boot SPL, with the
-heap starting at address 0x80000000 and the stack at 0x80200000.
-However, U‑Boot fails when using OpenSBI v1.8 because OpenSBI begins
-execution at 0x80100000, causing an overlap between the SPL stack
-and the malloc region.
-To resolve this conflict, the SPL heap and stack are moved to
-higher memory addresses, and OpenSBI is relocated to 0x80000000.
-The SPL heap now starts at 0x8C000000, and the stack is placed
-at 0x8F000000. The MB-V requires at least 256MB of DDR to run U-Boot.
+On Tue, Feb 17, 2026 at 06:51:50PM +0530, Suhaas Joshi wrote:
+> On 11:20-20260213, Francesco Dolcini wrote:
+> > On Wed, Feb 11, 2026 at 04:51:09PM +0530, Suhaas Joshi wrote:
+> > > On 11:11-20260211, Francesco Dolcini wrote:
+> > > > On Tue, Feb 10, 2026 at 11:50:14AM +0100, Francesco Dolcini wrote:
+> > > > > On Mon, Feb 09, 2026 at 02:20:01PM -0600, Bryan Brattlof wrote:
+> > > > > > Do you mind copying a boot log to a pastebin for me? I thought I had one 
+> > > > > > of these boards but I'm still digging around for it. 0x80000000 should 
+> > > > > > be where we load TFA now days unless some boards have opted out of 
+> > > > > > letting U-Boot move it to the bottom of DRAM
+> > > > > 
+> > > > > Here some more logs
+> > > > > 
+> > > > > https://gist.github.com/dolcini/aa4b669c6349cc6da1b9e7b19cf53fed
+> > > > > 
+> > > > > The files are named with the commit sha that is tested.
+> > > > > 
+> > > > > On Tue, Feb 10, 2026 at 02:56:46PM +0530, Suhaas Joshi wrote:
+> > > > > > Verdin boards are the only ones that are reporting this issue. Is it
+> > > > > > alright if we revert only the two Verdin-specific commits, and let the
+> > > > > > rest (TI and PhyCore ones) stay as they are? The patches are pretty
+> > > > > > un-connected to each other.
+> > > > > 
+> > > > > Verdin AM62 should not have anything special, the code is all there for
+> > > > > everyone to see, including the defconfig, the DT and so on, and the changes
+> > > > > we are talking about to me are self contained withing the SoC. Something
+> > > > > is wrong, and we are not understanding what yet.
+> > > > > 
+> > > > > I just retested once more 42b3ee7fa524 and it just hung, you never know
+> > > > > if I did something wrong. And for what matter this was spotted by our
+> > > > > CI.
+> > > > > 
+> > > > > > We are working on figuring out why Verdin is seeing these issues, in the
+> > > > > > meantime.
+> > > > > 
+> > > > > Anything I can do let me know.
+> > > > > 
+> > > > > If it matter the board that I am currently testing has 1GiB DDR RAM, and
+> > > > > the SoC is a AM6252ATCGHAALW. 
+> > > > 
+> > > > I was able to trace the issue to the get_ram_size() in
+> > > > verdin-am62.c:dram_init().
+> > > > 
+> > > > That function walks the addressable memory range to dynamically detect
+> > > > how much memory is available.
+> > > > 
+> > > > Not sure on the proper way to fix it however, Bryan? Suhaas?
+> > > 
+> > > Yes, this does seem to be the issue, even in my digging. I have sent a
+> > > patch to fix this. But since I don't have boards, I have not tested
+> > > this. Could you please test this and let us know if it works, or if
+> > > there are any other issues that pop up?
+> > 
+> > With commit f9ffeec4bdcf ("board: toradex: Make A53 get RAM size from DT
+> > in K3 boards") merged we had our CI running on our whole board farm
+> > last night.
+> > 
+> > Good news: the issue is confirmed to be fixed on Verdin AM62P and Verdin
+> > AM62 [Quad|Dual] with [1|2]GB RAM.
+> 
+> That's great!
+> > 
+> > Bad news: we we do still have a boot failure regression on Verdin AM62
+> > single core with 512MB RAM. I have no idea if this is the same issue or
+> > a different one, but from the logs it look different (despite that I
+> > decided to keep using this email thread and not start a new one).
+> > 
+> > The failing board from the logs uses a AM6231ASGGHAALW SoC, maximum
+> > frequency 1GHz, we also have another device failing, single core again,
+> > with maximum frequency 800MHz, the working one have 1.4GHz max
+> > frequency.
+> > 
+> > Worth noticing the errors
+> >   Failed to set clock rates
+> > 
+> > These are new compared to the previous U-Boot release, it affects also
+> > other boards, and I have no idea if this is related to this issue or not.
+> > 
+> > Logs of the failing device (U-Boot is commit f9ffeec4bdcf1da655a0ffea482062adde78fee8)
+> > 
+> > U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
+> > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
+> > Failed to set clock rates for '/a53@0': -22
+> > SPL initial stack usage: 13456 bytes
+> > Trying to boot from MMC1
+> > Authentication passed
+> > Authentication passed
+> > Authentication passed
+> > Loading Environment from nowhere... OK
+> > init_env from device 9 not supported!
+> > Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+> > 
+> 
+> I don't think this one is related to the firewall series. Not really
+> sure what the issue is. Just to rule this series out -- could you drop
+> my patch(es) and check if this specific device boots?
+> 
+> Was this device booting earlier? Could it be a build misconfig, since it
+> says that it can't detect an image signing certificate?
 
-	_________________
-	|		|0x8FFFFFFF
-	|_______________|
-	|  SPL- Stack	|0x8F000000
-	|		|
-    	|		|
-	|  SPL - Heap	|
-	|_______________|0x8C000000
-	|		|
-	|		|
-	| Full U-Boot	|
-	|_______________|0x81200000
-	|Load FIT Image |
-	|_______________|0x80200000
-	|   OpenSBI     |
-	|_______________|0x80000000
+This is a regression with 2026.04. 2026.04-rc never booted on this device, and
+before commit f9ffeec4bdcf1da655a0ffea482062adde78fee8 none of the verdin
+am62[p] variants were booting for multiple bugs that were present in the
+release.
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- configs/xilinx_mbv32_defconfig       | 4 ++--
- configs/xilinx_mbv32_smode_defconfig | 2 +-
- configs/xilinx_mbv64_smode_defconfig | 2 +-
- 3 files changed, 4 insertions(+), 4 deletions(-)
+2026.01 is booting fine on this device, with plain vanilla U-Boot.
 
-diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
-index 42dc5fb282a..0ca64b22659 100644
---- a/configs/xilinx_mbv32_defconfig
-+++ b/configs/xilinx_mbv32_defconfig
-@@ -5,7 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
--CONFIG_SPL_STACK=0x80200000
-+CONFIG_SPL_STACK=0x8F000000
- CONFIG_SPL_TEXT_BASE=0x0
- CONFIG_SPL_BSS_START_ADDR=0xf000
- CONFIG_SPL_BSS_MAX_SIZE=0x1000
-@@ -31,7 +31,7 @@ CONFIG_SPL_MAX_SIZE=0xf000
- CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
--CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80000000
-+CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x8C000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x200000
- # CONFIG_CMD_MII is not set
- CONFIG_CMD_SNTP=y
-diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
-index dd1221a6904..a72f13851ac 100644
---- a/configs/xilinx_mbv32_smode_defconfig
-+++ b/configs/xilinx_mbv32_smode_defconfig
-@@ -1,5 +1,5 @@
- #include <configs/xilinx_mbv32_defconfig>
- 
--CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80100000
-+CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80000000
- CONFIG_RISCV_SMODE=y
- CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x2
-diff --git a/configs/xilinx_mbv64_smode_defconfig b/configs/xilinx_mbv64_smode_defconfig
-index 56bf0bdc7e4..d7cf108692d 100644
---- a/configs/xilinx_mbv64_smode_defconfig
-+++ b/configs/xilinx_mbv64_smode_defconfig
-@@ -1,5 +1,5 @@
- #include <configs/xilinx_mbv64_defconfig>
- 
--CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80100000
-+CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80000000
- CONFIG_RISCV_SMODE=y
- CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x2
--- 
-2.34.1
+Francesco
 
