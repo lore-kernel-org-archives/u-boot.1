@@ -4,76 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97290E9A03B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 10:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 356DFE9A03B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 10:45:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEA0983B99;
-	Wed, 18 Feb 2026 11:37:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B70383AA9;
+	Wed, 18 Feb 2026 11:45:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pVy0yS/U";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BB3F83CE3; Wed, 18 Feb 2026 11:37:09 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F197B83C67
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 11:37:06 +0100 (CET)
+ id 9440483B99; Wed, 18 Feb 2026 11:45:27 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 959F080050
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 11:45:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 2E8794E40F58;
- Wed, 18 Feb 2026 10:37:06 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 0423F60738;
- Wed, 18 Feb 2026 10:37:06 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 83D1410368B5B; Wed, 18 Feb 2026 11:36:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1771411024; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=zlMCgf4VSnPszNCnaBXebC7ywETYq4MURzK9512M96A=;
- b=pVy0yS/U7NEjAykatW1+0NtDq04a1mmvxXUgds2c55dZqEE684XVDqOsvG62oZvVlwEyQN
- K45G1y2QL+x/N7sjDrQ6XWuFC1oqAYIcWJwTmNJhie9tsEhDbni73FkBjS9lnnRHGiqv50
- Hs/wY73eKyrPc7bjUVhrUxA7RHt3LI2psZdNRYlA00LxnJ5RKNi8REOqIKwyJUsCkW84xh
- FTm2shrQiBOqBDsFWhjj53eKuC+85fG079YIMK29zcz7vWysTyZ4wQR9aQlbCiKHLC5GFU
- i9s2zybFTLDPhfmToPNWbalDW03r2L+m6OfX75+HqWBD7h4Hyt/ljsKrS7AwNQ==
-Date: Wed, 18 Feb 2026 11:36:57 +0100
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Sughosh Ganu <sughosh.ganu@arm.com>
-Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Tom Rini <trini@konsulko.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Paul HENRYS
- <paul.henrys_ext@softathome.com>, Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>, Vasileios Bimpikas
- <vasileios.bimpikas@analog.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Peng Fan
- <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, Duje =?UTF-8?B?TWlo?=
- =?UTF-8?B?YW5vdmnEhw==?= <duje@dujemihanovic.xyz>, Stefan Roese
- <stefan.roese@mailbox.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, Alif
- Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, E Shattow
- <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>, Jan Kiszka
- <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>, Daniel
- Golle <daniel@makrotopia.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Leonard Anderweit
- <l.anderweit@phytec.de>, Yao Zi <me@ziyao.cc>
+ spf=pass smtp.mailfrom=sughosh.ganu@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 74F871477;
+ Wed, 18 Feb 2026 02:45:11 -0800 (PST)
+Received: from localhost (a079122.arm.com [10.164.21.38])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 013243F62B;
+ Wed, 18 Feb 2026 02:45:17 -0800 (PST)
+Date: Wed, 18 Feb 2026 16:15:14 +0530
+From: Sughosh Ganu <sughosh.ganu@arm.com>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: u-boot@lists.denx.de, jose.marinho@arm.com,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leonard Anderweit <l.anderweit@phytec.de>, Yao Zi <me@ziyao.cc>
 Subject: Re: [PATCH v3 5/6] tools: Add support for fwumdata tool
-Message-ID: <20260218113657.38d374c6@kmaincent-XPS-13-7390>
-In-Reply-To: <aZWMA6Oh0dPtQmUP@a079122.arm.com>
+Message-ID: <aZWYOv6nAASD_dQk@a079122.arm.com>
 References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
  <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
- <aZWMA6Oh0dPtQmUP@a079122.arm.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ <aZWKyl6r8BphaePp@a079122.arm.com>
+ <aZWM0_v4eUgKLTSz@a079122.arm.com>
+ <20260218113116.3c447668@kmaincent-XPS-13-7390>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260218113116.3c447668@kmaincent-XPS-13-7390>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,59 +79,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Feb 2026 15:23:07 +0530
-Sughosh Ganu <sughosh.ganu@arm.com> wrote:
+On Wed, Feb 18, 2026 at 11:31:16AM +0100, Kory Maincent wrote:
+> Hello Sughosh,
+> 
+> On Wed, 18 Feb 2026 15:26:35 +0530
+> Sughosh Ganu <sughosh.ganu@arm.com> wrote:
+> 
+> > On Wed, Feb 18, 2026 at 03:17:58PM +0530, Sughosh Ganu wrote:
+> > > On Mon, Feb 16, 2026 at 02:35:35PM +0100, Kory Maincent wrote:  
+> > > > Add a new fwumdata tool to allows users to read, display, and modify FWU
+> > > > (Firmware Update) metadata from Linux userspace. It provides functionality
+> > > > similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+> > > > metadata, change active/previous bank indices, modify bank states, and set
+> > > > image acceptance flags. Configuration is done via fwumdata.config file.
+> > > > 
+> > > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> > > > ---  
+> > > 
+> > > I am not sure if this has been discussed with Ilias earlier, and
+> > > apologies if it has been, but I do think that this patch is not
+> > > adhering to the DEN0118 specification, specifically the part mentioned
+> > > in section A3.2.1, which says that the metadata is to be maintained by
+> > > the Update Agent. I would like to hear from Jose Marinho, who is the
+> > > author of the spec, on what he thinks about this approach.
+> > > 
+> > > I do think that the other patches in series look fine, and can be
+> > > applied. There is just an issue of inclusion of the tool for
+> > > building. I will comment on that patch separately.  
+> > 
+> > 
+> > Adding Jose to the discussion.
+> 
+> We indeed already had some discussion about it with Ilias. 
+> https://lists.denx.de/pipermail/u-boot/2025-December/605924.html
+> 
+> It seems ST deviate from the original idea behind the standard. It does not use
+> EFI neither update capsule.
+> TF-A is managing the selection of the boot partition (FIP image: OPTEE +
+> bootloader) according to the FWU metadata content and is dealingwith the
+> rollback mechanism. Linux through this tools is the update agent to select the
+> boot image.
 
-> On Mon, Feb 16, 2026 at 02:35:35PM +0100, Kory Maincent wrote:
-> > Add a new fwumdata tool to allows users to read, display, and modify FWU
-> > (Firmware Update) metadata from Linux userspace. It provides functional=
-ity
-> > similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-> > metadata, change active/previous bank indices, modify bank states, and =
-set
-> > image acceptance flags. Configuration is done via fwumdata.config file.
-> >=20
-> > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > ---
-> >  MAINTAINERS                        |   4 +
-> >  doc/develop/uefi/fwu_updates.rst   |   4 +-
-> >  doc/fwumdata.1                     | 222 ++++++++++
-> >  tools/.gitignore                   |   1 +
-> >  tools/fwumdata_src/Kconfig         |  11 +
-> >  tools/fwumdata_src/fwumdata.c      | 854
-> > +++++++++++++++++++++++++++++++++++++ tools/fwumdata_src/fwumdata.confi=
-g |
-> > 33 ++ tools/fwumdata_src/fwumdata.h      | 138 ++++++
-> >  tools/fwumdata_src/fwumdata.mk     |   5 +-
-> >  9 files changed, 1270 insertions(+), 2 deletions(-)
-> >  =20
->=20
-> <snip>
->=20
-> > diff --git a/tools/fwumdata_src/fwumdata.mk b/tools/fwumdata_src/fwumda=
-ta.mk
-> > index 00f4ae50dbb..2199e43b372 100644
-> > --- a/tools/fwumdata_src/fwumdata.mk
-> > +++ b/tools/fwumdata_src/fwumdata.mk
-> > @@ -4,4 +4,7 @@
-> > =20
-> >  mkfwumdata-objs :=3D fwumdata_src/mkfwumdata.o generated/lib/crc32.o
-> >  HOSTLDLIBS_mkfwumdata +=3D -luuid
-> > -hostprogs-always-$(CONFIG_TOOLS_MKFWUMDATA) +=3D mkfwumdata
-> > +hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) +=3D mkfwumdata =20
->=20
-> This is correct the first way around.
->=20
-> > +
-> > +fwumdata-objs :=3D fwumdata_src/fwumdata.o generated/lib/crc32.o
-> > +hostprogs-$(CONFIG_TOOLS_FWUMDATA) +=3D fwumdata =20
->=20
-> This needs to be hostprogs-always-$(...)
+Okay. I guess that is fine then -- with the Update Agent residing in
+Linux, this is not an issue. My next question then would be, why are
+you adding this to U-Boot then :). Can this not be bundled with a
+related package of RAUC maybe(if one such exists)?
 
-Oh thanks spotting this, I don't know how I lost the always suffix.
+-sughosh
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+> The final goal is to have RAUC updating the boot A/B partition and switching to
+> it calling this new tool.
+> 
+> Regards,
+> -- 
+> Köry Maincent, Bootlin
+> Embedded Linux and kernel engineering
+> https://bootlin.com
+
+-sughosh
