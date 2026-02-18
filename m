@@ -4,113 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26DC9E9A02C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 14:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E63CE9A02C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 14:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD97583AC5;
-	Wed, 18 Feb 2026 15:21:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9900D83AC5;
+	Wed, 18 Feb 2026 15:32:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cvkjoMpu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uUWpPpmH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3809A83D0F; Wed, 18 Feb 2026 15:21:11 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id E41A083D2E; Wed, 18 Feb 2026 15:32:50 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28C5F83AA9
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 15:21:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A94FB83AA9
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 15:32:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-65a40f3f048so8690291a12.3
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 06:21:09 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771424468; cv=none;
- d=google.com; s=arc-20240605;
- b=ItHdAzdi+kfJ/xaXaHSX/JwYzoQ9c7XG7rmb/nCVMzQv1j1ape9JhJ+Pr9/UV7MFjh
- kGAzGbJuWeDbyrBMGwsAppmZ5KrQXZxX/OZaRt0cALLxhmRbhzzqKQIr1odfBwvIkOsl
- PM5z5R98mZ41sgof4YxUKZS3XVGBJO4omvQzfthOgoDpteyv4XiN2BeIW/UuLl2YtpfI
- pDivuxlHyTtwoyDbBLuageif7IanxwK2S+uzfQVM6Z8H+8JNz+UHUASYpWuCrt/6YI7r
- AnGgDbhAQVAVBXjFo89Cia450rv1P7takQgcu+G6ng3OA0Yr1Fh7EY57U1I67hCvYwsa
- eEcA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=QlWt4S3LieSg07FRbnR84wyOLF7qmRxJvcJmvftpJ4I=;
- fh=mxOgx5bqRtou26Q1Y2lPXACmdrWqGSsX4UELZgF5eHg=;
- b=UC0zeoXIVjbCF1cdl1gBHWTElwsarfEcEb5135ZTcAdJLDa2Km2YgzWSe0lnMBi83/
- D6MPZQ2sQjOWQvG76nvT2wLpXz9Uh2QGywxV7IQ1aiMllzqVZeLTkp9xh37JK8d5Wxrp
- pl0N/ktOkrpESBDUid3PCrJmlB3zpHoxXc010VpoleNvJ1CSuE1Tm8vA0bhUE33IzDup
- DslvUXxcwLRHGwu7c14r/bDuIKWzQog27vBxaVbk7CKvZ6beh9+2b3CLByAf7TZ1cAp9
- 6jyKLn9lSod6SRXnN6ezrIrn0wZXuCF0ii11MIYeHqnaDsyaD00ND/bij8cw6OXlUOH6
- D/kw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7d4c12ff3d5so4747126a34.2
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 06:32:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771424468; x=1772029268; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QlWt4S3LieSg07FRbnR84wyOLF7qmRxJvcJmvftpJ4I=;
- b=cvkjoMpuTNSIGdGFdq1X6PrM6mLjXkCQym6d4e1XgtuJB2p9SOgh+adlOA3xRWMa1E
- dUc1MOvZNp653eViKwtp6aMrz11maacDhn3f432X2S91LqC8vKAZpXlj2BZpOP2JCnXX
- MX21ZcltHjlibr9tEwMueJYcV6E+U1B4ZS38UmUxVlRFY3E/mzXbcWmLsiEKTWJceoAK
- 42FzLsqZLNdr7vMy4bDQNkm80Yy4nFwCXAw8MxpFvqZ4lBQ2DEw2E/qxyXMdKJZSYp31
- 9M1kb8Ymluqt5ED3Ud96sVvpaAQaNXMWh2KC5hK4r5pY/pckdHP6pWpSw3kHAHjuqQKv
- IWfA==
+ d=konsulko.com; s=google; t=1771425167; x=1772029967; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ImhVdvCa3jsxl7+xpuEgyJF3w9UehKzQTG7eyeBxUkw=;
+ b=uUWpPpmH6HnGysfQe3hH0nC99Mu8DjB94BjMv7f9ZE2WRtrHSUh00de2P/12zt6JNM
+ XtccPZa72qCfEfVsa/JbHwUKwSbu7vff0PpQBDLsCTKCE2B0UL3zYy0utrwV3nM4OqHN
+ h4yDaQOBvozurD4JNCVlHLzhm//tK05vGGH8s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771424468; x=1772029268;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QlWt4S3LieSg07FRbnR84wyOLF7qmRxJvcJmvftpJ4I=;
- b=N1BH5af2Ppj4ILavu3V8n1gNPJm1MnuUxvF5+6xL4R+adjxon/a5Fh3Nhqr/XT4k34
- E7u/Ha6RQnIj9amU4dN04udfq7YmfUbPmoSghFZWD82dlV6euunM9IrrthY+ktAmQIIv
- QA8e6tCpi6Fi9ElK+BWKl2OUsNpB3cwj7uMKAcYBFbHcC15rQHH9xQANe01lA8pGQCm1
- 1rjhOokH9+JEaDjQWkc8jeB2rVCSQxUG2QA+NbUXe8p32tKi3cQm6FI1wioIJgg1f0/I
- b/wDFD97J0MMR6kI4Ns8CHXoYMq5J+UbRNAfTTq28bqF7Q/2Oneu2zyvy9GmiW1nyI5g
- AiyA==
+ d=1e100.net; s=20230601; t=1771425167; x=1772029967;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ImhVdvCa3jsxl7+xpuEgyJF3w9UehKzQTG7eyeBxUkw=;
+ b=jTrRBqeS4j38m2eVnFHbWr8HQ8tF0xhUmdZUVII/ojKP5+16puMqAx1bx8vUeFj/Gs
+ PzWkhJ0An173ipr6LD4dg2uXpi0JbxOm3qVBbGXUMpX3pGv8OXeN8qV56qif1AFmhL68
+ LbFNNVncBC1AEjRvyZxrG2z1sTVelhl71GlO8tOaQME4kddDwmncZ4SAv7T+2K948dQV
+ NKm/5SWfVv5BU40vWN8i2pxIsotFnv4yLF8ysgQgHBDe992tCtFQwcca1MHA065m/YcG
+ uq6RYBdq90zeulfk2M6T3J4OFsTEOZ265Rotu6JhfLdAWNtxxnb/5ZHMTZLjFRKuJMUk
+ cXaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWW7WTjTLkNLR2JsfT2qVj9mpJNW3pFefblE80/Ha9KxJvxZU9DP8dBwO4X5D+kyNWQWLG2Fyc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf2xMGfMkq/o5cviJ9brHTP+3G3dzXGeMCXQgufPd3qPNAsUTg
- LNgWnrvuMA8wk2ZKc6Gn4R0tpzzeKRXIr2ZpcFi920cy73IoGcY0ZRCwELWW13wtP5fLq95RFR1
- R+UaUHAsQyCdhkz/WjCd9yAIkPWF4rUg=
-X-Gm-Gg: AZuq6aKXcicYL9kvyCKQrGxN4PASPf/kSbTptgq24A1H19LMnwnAFfonyx4vmPOiohj
- 1LyhDOXhM5SI/1sS+Ech2vTAYUXyslKN8BiMuOg1p7H340RT1BWEKMN4MZV97QzmHMSyEe4LhOd
- ny+/LnbP/X5JAgqP+jQIkpZThxwitywsctvWr05vZWd9O7OUXthfx6Pho2Ifiaz1VerLAWcAsfX
- MGaaYprkz3rsBKbvesqFPGxg98Um0pfbAEZ/u9eJEd37I9HSLXJqxcGbsbY6BKTVOh+ZcIkr8qf
- hwsAAIHa0yrDC3kkVXvJSik7gM0q5TGzD8an451mlQHjmUdbHHPdwoC5dabyWDyzZWEQm3loHRx
- oQyxhGlcqgyLlJ9t6WNIOQYZjpbJq9dGqeuT7TlEVARhXy3Eo
-X-Received: by 2002:a05:6402:34d3:b0:659:46ee:aa18 with SMTP id
- 4fb4d7f45d1cf-65c766dcb70mr1368684a12.0.1771424468337; Wed, 18 Feb 2026
- 06:21:08 -0800 (PST)
+ AJvYcCVSjtP5y9ZK9upM6KPxuWfNSsVUAJHPinRvGBwz9xJwTzRwWoi5FRCQ6STsYqzHe6UFINQDJyo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDixNLfgptEPeZGEYygP6eOU3YwIHrHmEpLTEtwed8udg+rX9p
+ 2reCAtQWBL/ja3BS6IdvEDTtwQR6mRMWzgkEQ5vMvtXM6WOrKrMOgpfjOyGEppF8z+0=
+X-Gm-Gg: AZuq6aK872fSFfvCKcmHuGKiQ0ljHwgoWF2OhRMiqp8UiS4CV9/K4TgRepVmtgScjjI
+ +LmprgXhj3WhAp0zhS81qds6L3zK7m+O9N2kZmCHmZdYxlFJD3hRac6sGGnXhoLqk+IRnsEVVh/
+ Ft6dQz706gUNJWMKMQ3clSYDOlUoB6CFgHmFEodBUSDQiUmhy6BAC61nY8FtLFZJFG2NYr65Vsu
+ dB93nzPFRT9mE910pBPS+q81rkvA/BoHwE+xqe/HRgjgHJ9gfLTaOs25iH4OoiC370Vb6cI87Ir
+ AbxUueoWjWga/+m+sY75IVEWA6SMfKQ31Fx8lqPfbMDUpY/MjwbhoMvo0KUDRlxYqNltaiXJhIl
+ jvy6XGLzrHKxTPA3oTc+3Z5RSkAkNwkzSQcFVKE8euVETdSi7PIV9Vn4OVJi565GQAZ+V3gTNVu
+ undUfGI4VmiwXYQo7CjnTf5GFpT5Y+LumyW/bMBwttltsWuQzHnUOVEllApApRWqbCe8B916oso
+ 7liHKIKQzGayCGZvfBzW1MaIaTJXITfOm2gTmfE4PHw7z2wBMQ=
+X-Received: by 2002:a05:6830:638b:b0:7d1:91a7:8e15 with SMTP id
+ 46e09a7af769-7d4d0c517c5mr8996109a34.33.1771425167302; 
+ Wed, 18 Feb 2026 06:32:47 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4a7547ac1sm17406929a34.7.2026.02.18.06.32.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Feb 2026 06:32:46 -0800 (PST)
+Date: Wed, 18 Feb 2026 08:32:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Padmarao Begari <padmarao.begari@amd.com>, u-boot@lists.denx.de,
+ git@amd.com
+Subject: Re: [PATCH] xilinx: mbv: Update stack, heap, and OpenSBI memory
+Message-ID: <20260218143243.GB3233182@bill-the-cat>
+References: <20260218063329.396968-1-padmarao.begari@amd.com>
+ <20260218141224.GA3233182@bill-the-cat>
+ <363a86e6-8ebc-4b76-8bc9-34e317362b71@amd.com>
 MIME-Version: 1.0
-References: <20260213164607.GI2747538@bill-the-cat>
- <20260214-sternness-cling-4259916a8f73@spud>
- <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
- <20260216153110.GV2747538@bill-the-cat>
- <87bjhmv20f.fsf@bootlin.com>
-In-Reply-To: <87bjhmv20f.fsf@bootlin.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 18 Feb 2026 14:20:56 +0000
-X-Gm-Features: AaiRm50hCwa57j8ojjUZKhCse5VY01sPPW_fKc-sEdekbv6lv6Nro1iIQHC5sSc
-Message-ID: <CALeDE9OiivzK9-Hy6RN0yD5ctiBRVC_GtHXvmnXRzx5-e-NV5w@mail.gmail.com>
-Subject: Re: [RFH] SPI and SPI-NOR patch help
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Michael Walle <mwalle@kernel.org>, 
- Conor Dooley <conor@kernel.org>, u-boot@lists.denx.de, 
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, 
- Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Prasanth Babu Mantena <p-mantena@ti.com>, 
- Vaishnav Achath <vaishnav.a@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KxhZ869RKkMvvPth"
+Content-Disposition: inline
+In-Reply-To: <363a86e6-8ebc-4b76-8bc9-34e317362b71@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,77 +101,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Feb 2026 at 13:40, Miquel Raynal <miquel.raynal@bootlin.com> wro=
-te:
->
-> Hello Tom,
->
-> On 16/02/2026 at 09:31:10 -06, Tom Rini <trini@konsulko.com> wrote:
->
-> > On Mon, Feb 16, 2026 at 09:21:55AM +0100, Michael Walle wrote:
-> >> On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
-> >> > On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
-> >> >> Hey all,
-> >> >>
-> >> >> To be blunt, U-Boot needs help with reviewing and maintaining the S=
-PI
-> >> >> and SPI-NOR subsystems. We haven't had someone with time to activel=
-y
-> >> >> work in this area for some time. I'm going through the outstanding
-> >> >> changes now, but it also seems a common problem is that with respec=
-t to
-> >> >> device IDs, most of the new ones also aren't in the upstream Linux
-> >> >> Kernel. Is there some better and generic solution we're missing so =
-that
-> >> >> we don't have large and often growing device ID tables? I'd rather =
-not
-> >> >> make that problem worse, so I've rejected two of those types of upd=
-ates
-> >> >> today and I'm just setting aside a large number of others.
-> >> >
-> >> > Dunno if your timing was cursed on sending this, but Tudor submitted=
- his
-> >> > resignation from spi-nor maintainership in the kernel about 10 mins
-> >> > after.
-> >> > I think Michael Walle might be responsible for what you're talking a=
-bout
-> >> > here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash drive=
-r"),
-> >> > but idk jack about spi-nor stuff.
-> >>
-> >> Yeah. Nowadays SPI-NOR flashes come with self describing tables,
-> >> which are already supported by u-boot, I think. The only change that
-> >> seems to be missing is the fallback to it if an id isn't found in
-> >> the flashdb. Only thing is, the SFDP doesn't describe all features,
-> >> most prominent example being locking. So if you need that, you'll
-> >> still need to have an entry per flash.
-> >>
-> >> In fact, in linux I'm planning to change to make it probe SFDP first
-> >> and then amend it with the flashdb information (if there is an
-> >> entry).
-> >
-> > Thanks for explaining. So in that U-Boot does have SFDP support, the
-> > first thing is platforms should likely be enabling that instead of just
-> > adding IDs, at least for basic support.
->
-> Yes. There will be the need for IDs anyways, for those "extra" "non
-> sfdp" features, but that should reduce the load. For example, shall we
-> consider block protection in U-Boot or not? This is a useful feature,
-> but at the same time, do we really need it in a Bootloader? This is open
-> to discussion.
 
-By block protection do you mean for features like rpmc counters for
-rollback protection? If so I suspect there's some usefulness to
-supporting it given U-Boot ends up being the entry point for FW stack
-updates using mechanisms like UEFI capsule support.
+--KxhZ869RKkMvvPth
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> > It still leaves us in a bad spot
-> > about having SPI and SPI-NOR stuff reviewed and maintained, but at leas=
-t
-> > it's clearer in public now where it stands.
->
-> I guess spi-mem and SPI NAND is also in this kind of situation, even
-> with the Amarula crew doing what they can to improve the situation.
->
-> Thanks,
-> Miqu=C3=A8l
+On Wed, Feb 18, 2026 at 03:18:37PM +0100, Michal Simek wrote:
+>=20
+>=20
+> On 2/18/26 15:12, Tom Rini wrote:
+> > On Wed, Feb 18, 2026 at 12:03:15PM +0530, Padmarao Begari wrote:
+> >=20
+> > > A 2=E2=80=AFMB region of DDR memory is allocated for U=E2=80=91Boot S=
+PL, with the
+> > > heap starting at address 0x80000000 and the stack at 0x80200000.
+> > > However, U=E2=80=91Boot fails when using OpenSBI v1.8 because OpenSBI=
+ begins
+> > > execution at 0x80100000, causing an overlap between the SPL stack
+> > > and the malloc region.
+> > > To resolve this conflict, the SPL heap and stack are moved to
+> > > higher memory addresses, and OpenSBI is relocated to 0x80000000.
+> > > The SPL heap now starts at 0x8C000000, and the stack is placed
+> > > at 0x8F000000. The MB-V requires at least 256MB of DDR to run U-Boot.
+> > >=20
+> > > 	_________________
+> > > 	|		|0x8FFFFFFF
+> > > 	|_______________|
+> > > 	|  SPL- Stack	|0x8F000000
+> > > 	|		|
+> > >      	|		|
+> > > 	|  SPL - Heap	|
+> > > 	|_______________|0x8C000000
+> > > 	|		|
+> > > 	|		|
+> > > 	| Full U-Boot	|
+> > > 	|_______________|0x81200000
+> > > 	|Load FIT Image |
+> > > 	|_______________|0x80200000
+> > > 	|   OpenSBI     |
+> > > 	|_______________|0x80000000
+> > >=20
+> > > Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+> > > ---
+> > >   configs/xilinx_mbv32_defconfig       | 4 ++--
+> > >   configs/xilinx_mbv32_smode_defconfig | 2 +-
+> > >   configs/xilinx_mbv64_smode_defconfig | 2 +-
+> > >   3 files changed, 4 insertions(+), 4 deletions(-)
+> >=20
+> > As general feedback, this is something that ought to be in doc/board/
+> > somewhere too. One such existing example is doc/board/ti/am62x_sk.rst
+> > and follow-up patches are fine.
+>=20
+> Just curious. Memory layout is something what every platform has to deal =
+with.
+> Don't we have any script for it?
+
+My still current preference is putting reasonable default values in
+Kconfig, so that it's not something that has to be managed in defconfigs
+as it's not typically on the developer to modify per board, but rather
+on whomever is doing the upstream SoC/etc support to say what it is. But
+that's also a little less true for FPGA platforms?
+
+--=20
+Tom
+
+--KxhZ869RKkMvvPth
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZXNhwAKCRAr4qD1Cr/k
+CrMnAP0UpD1/GRAPdL9rXZHOeMB7LBA1HWUjn7sz6JK9Om2xKAD/dGEc3cxIv/x1
+stD2S9zRqe7IZ6s89mWganaQ6Puosgg=
+=rJo0
+-----END PGP SIGNATURE-----
+
+--KxhZ869RKkMvvPth--
