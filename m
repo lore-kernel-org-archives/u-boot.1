@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63F83E9A03B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 09:48:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CA6CE9A03E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 09:53:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D271883AC5;
-	Wed, 18 Feb 2026 10:48:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6BBA83AC5;
+	Wed, 18 Feb 2026 10:53:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA44283CB9; Wed, 18 Feb 2026 10:48:50 +0100 (CET)
+ id 92F7F83CF2; Wed, 18 Feb 2026 10:53:14 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 55DA583AA9
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 10:48:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 827ED83AA9
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 10:53:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 400221477;
- Wed, 18 Feb 2026 01:48:41 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 69AE814BF;
+ Wed, 18 Feb 2026 01:53:05 -0800 (PST)
 Received: from localhost (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 80E0A3F7F5;
- Wed, 18 Feb 2026 01:48:46 -0800 (PST)
-Date: Wed, 18 Feb 2026 15:18:43 +0530
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C0EF13F7F5;
+ Wed, 18 Feb 2026 01:53:10 -0800 (PST)
+Date: Wed, 18 Feb 2026 15:23:07 +0530
 From: Sughosh Ganu <sughosh.ganu@arm.com>
 To: Kory Maincent <kory.maincent@bootlin.com>
 Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
@@ -50,15 +50,14 @@ Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Leonard Anderweit <l.anderweit@phytec.de>, Yao Zi <me@ziyao.cc>
-Subject: Re: [PATCH v3 6/6] tools: mkfwumdata: Remove dependency on
- fwu_mdata.h header
-Message-ID: <aZWK--beAfDJR5_C@a079122.arm.com>
+Subject: Re: [PATCH v3 5/6] tools: Add support for fwumdata tool
+Message-ID: <aZWMA6Oh0dPtQmUP@a079122.arm.com>
 References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
- <20260216-feature_fwumdata-v3-6-9ecc5b10456d@bootlin.com>
+ <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260216-feature_fwumdata-v3-6-9ecc5b10456d@bootlin.com>
+In-Reply-To: <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,209 +74,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 16, 2026 at 02:35:36PM +0100, Kory Maincent wrote:
-> The dependency on fwu_mdata.h creates unnecessary configuration
-> requirements. To generate metadata V1, CONFIG_FWU_MDATA_V1 must be
-> enabled, which in turn requires enabling FWU_MULTI_BANK_UPDATE,
-> EFI_CAPSULE_ON_DISK, PARTITION_TYPE_GUID, and other unrelated configs.
-> This is not suitable for a simple standalone tool.
-> 
-> Additionally, even with the "-v 1" option to generate V1 metadata, the
-> tool will still include the firmware store description if
-> CONFIG_FWU_MDATA_V1 is not enabled. This structure should only be
-> present in metadata V2.
-> 
-> Replace the fwu_mdata.h dependency with the new fwumdata header to make
-> the tool compatible with both V1 and V2 without requiring any defconfig
-> changes. This also uses the access helper functions from the header to
-> eliminate code duplication.
+On Mon, Feb 16, 2026 at 02:35:35PM +0100, Kory Maincent wrote:
+> Add a new fwumdata tool to allows users to read, display, and modify FWU
+> (Firmware Update) metadata from Linux userspace. It provides functionality
+> similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+> metadata, change active/previous bank indices, modify bank states, and set
+> image acceptance flags. Configuration is done via fwumdata.config file.
 > 
 > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 > ---
+>  MAINTAINERS                        |   4 +
+>  doc/develop/uefi/fwu_updates.rst   |   4 +-
+>  doc/fwumdata.1                     | 222 ++++++++++
+>  tools/.gitignore                   |   1 +
+>  tools/fwumdata_src/Kconfig         |  11 +
+>  tools/fwumdata_src/fwumdata.c      | 854 +++++++++++++++++++++++++++++++++++++
+>  tools/fwumdata_src/fwumdata.config |  33 ++
+>  tools/fwumdata_src/fwumdata.h      | 138 ++++++
+>  tools/fwumdata_src/fwumdata.mk     |   5 +-
+>  9 files changed, 1270 insertions(+), 2 deletions(-)
+> 
 
-Acked-by: Sughosh Ganu <sughosh.ganu@arm.com>
-Tested-by: Sughosh Ganu <sughosh.ganu@arm.com>
+<snip>
 
--sughosh
+> diff --git a/tools/fwumdata_src/fwumdata.mk b/tools/fwumdata_src/fwumdata.mk
+> index 00f4ae50dbb..2199e43b372 100644
+> --- a/tools/fwumdata_src/fwumdata.mk
+> +++ b/tools/fwumdata_src/fwumdata.mk
+> @@ -4,4 +4,7 @@
+>  
+>  mkfwumdata-objs := fwumdata_src/mkfwumdata.o generated/lib/crc32.o
+>  HOSTLDLIBS_mkfwumdata += -luuid
+> -hostprogs-always-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
+> +hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
 
-> 
-> Change in v2:
-> - Fix mdata->desc_offset value.
-> ---
->  tools/fwumdata_src/mkfwumdata.c | 96 ++++++++---------------------------------
->  1 file changed, 17 insertions(+), 79 deletions(-)
-> 
-> diff --git a/tools/fwumdata_src/mkfwumdata.c b/tools/fwumdata_src/mkfwumdata.c
-> index 8b25539fd57..b8b60473b91 100644
-> --- a/tools/fwumdata_src/mkfwumdata.c
-> +++ b/tools/fwumdata_src/mkfwumdata.c
-> @@ -17,26 +17,7 @@
->  #include <u-boot/crc.h>
->  #include <uuid/uuid.h>
->  
-> -typedef uint8_t u8;
-> -typedef int16_t s16;
-> -typedef uint16_t u16;
-> -typedef uint32_t u32;
-> -typedef uint64_t u64;
-> -
-> -#undef CONFIG_FWU_NUM_BANKS
-> -#undef CONFIG_FWU_NUM_IMAGES_PER_BANK
-> -
-> -/* This will dynamically allocate the fwu_mdata */
-> -#define CONFIG_FWU_NUM_BANKS		0
-> -#define CONFIG_FWU_NUM_IMAGES_PER_BANK	0
-> -
-> -/* version 2 supports maximum of 4 banks */
-> -#define MAX_BANKS_V2			4
-> -
-> -#define BANK_INVALID			(u8)0xFF
-> -#define BANK_ACCEPTED			(u8)0xFC
-> -
-> -#include <fwu_mdata.h>
-> +#include "fwumdata.h"
->  
->  static const char *opts_short = "b:i:a:p:v:V:gh";
->  
-> @@ -116,6 +97,7 @@ static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks,
->  			 sizeof(struct fwu_image_bank_info) * banks) * images;
->  	} else {
->  		mobj->size = sizeof(struct fwu_mdata) +
-> +			sizeof(struct fwu_mdata_ext) +
->  			sizeof(struct fwu_fw_store_desc) +
->  			(sizeof(struct fwu_image_entry) +
->  			 sizeof(struct fwu_image_bank_info) * banks) * images;
-> @@ -146,50 +128,6 @@ alloc_err:
->  	return NULL;
->  }
->  
-> -static struct fwu_image_entry *
-> -fwu_get_image(struct fwu_mdata_object *mobj, size_t idx)
-> -{
-> -	size_t offset;
-> -
-> -	if (mobj->version == 1) {
-> -		offset = sizeof(struct fwu_mdata) +
-> -			(sizeof(struct fwu_image_entry) +
-> -			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
-> -			idx;
-> -	} else {
-> -		offset = sizeof(struct fwu_mdata) +
-> -			sizeof(struct fwu_fw_store_desc) +
-> -			(sizeof(struct fwu_image_entry) +
-> -			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
-> -			idx;
-> -	}
-> -
-> -	return (struct fwu_image_entry *)((char *)mobj->mdata + offset);
-> -}
-> -
-> -static struct fwu_image_bank_info *
-> -fwu_get_bank(struct fwu_mdata_object *mobj, size_t img_idx, size_t bnk_idx)
-> -{
-> -	size_t offset;
-> -
-> -	if (mobj->version == 1) {
-> -		offset = sizeof(struct fwu_mdata) +
-> -			(sizeof(struct fwu_image_entry) +
-> -			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
-> -			img_idx + sizeof(struct fwu_image_entry) +
-> -			sizeof(struct fwu_image_bank_info) * bnk_idx;
-> -	} else {
-> -		offset = sizeof(struct fwu_mdata) +
-> -			sizeof(struct fwu_fw_store_desc) +
-> -			(sizeof(struct fwu_image_entry) +
-> -			 sizeof(struct fwu_image_bank_info) * mobj->banks) *
-> -			img_idx + sizeof(struct fwu_image_entry) +
-> -			sizeof(struct fwu_image_bank_info) * bnk_idx;
-> -	}
-> -
-> -	return (struct fwu_image_bank_info *)((char *)mobj->mdata + offset);
-> -}
-> -
->  /**
->   * convert_uuid_to_guid() - convert UUID to GUID
->   * @buf:	UUID binary
-> @@ -239,11 +177,13 @@ static int
->  fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
->  			  size_t idx, char *uuids)
->  {
-> -	struct fwu_image_entry *image = fwu_get_image(mobj, idx);
->  	struct fwu_image_bank_info *bank;
-> +	struct fwu_image_entry *image;
->  	char *p = uuids, *uuid;
->  	int i;
->  
-> +	image = fwu_get_image_entry(mobj->mdata, mobj->version,
-> +				    mobj->banks, idx);
->  	if (!image)
->  		return -ENOENT;
->  
-> @@ -266,7 +206,8 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
->  
->  	/* Fill bank image-UUID */
->  	for (i = 0; i < mobj->banks; i++) {
-> -		bank = fwu_get_bank(mobj, idx, i);
-> +		bank = fwu_get_bank_info(mobj->mdata, mobj->version,
-> +					 mobj->banks, idx, i);
->  		if (!bank)
->  			return -ENOENT;
->  		bank->accepted = 1;
-> @@ -281,25 +222,22 @@ fwu_parse_fill_image_uuid(struct fwu_mdata_object *mobj,
->  	return 0;
->  }
->  
-> -#if defined(CONFIG_FWU_MDATA_V1)
-> -static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
-> -{
-> -}
-> -#else
->  static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
->  {
->  	int i;
->  	struct fwu_fw_store_desc *fw_desc;
-> -	struct fwu_mdata *mdata = mobj->mdata;
-> +	struct fwu_mdata_ext *mdata_ext;
->  
-> -	mdata->metadata_size = mobj->size;
-> -	mdata->desc_offset = sizeof(struct fwu_mdata);
-> +	mdata_ext = fwu_get_fw_mdata_ext(mobj->mdata);
-> +	mdata_ext->metadata_size = mobj->size;
-> +	mdata_ext->desc_offset = sizeof(struct fwu_mdata) +
-> +				 sizeof(struct fwu_mdata_ext);
->  
->  	for (i = 0; i < MAX_BANKS_V2; i++)
-> -		mdata->bank_state[i] = i < mobj->banks ?
-> -			BANK_ACCEPTED : BANK_INVALID;
-> +		mdata_ext->bank_state[i] = i < mobj->banks ?
-> +			FWU_BANK_ACCEPTED : FWU_BANK_INVALID;
->  
-> -	fw_desc = (struct fwu_fw_store_desc *)((u8 *)mdata + sizeof(*mdata));
-> +	fw_desc = fwu_get_fw_desc(mobj->mdata);
->  	fw_desc->num_banks = mobj->banks;
->  	fw_desc->num_images = mobj->images;
->  	fw_desc->img_entry_size = sizeof(struct fwu_image_entry) +
-> @@ -307,7 +245,6 @@ static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
->  	fw_desc->bank_info_entry_size =
->  		sizeof(struct fwu_image_bank_info);
->  }
-> -#endif /* CONFIG_FWU_MDATA_V1 */
->  
->  /* Caller must ensure that @uuids[] has @mobj->images entries. */
->  static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
-> @@ -320,7 +257,8 @@ static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
->  	mdata->active_index = active_bank;
->  	mdata->previous_active_index = previous_bank;
->  
-> -	fwu_fill_version_specific_mdata(mobj);
-> +	if (mdata->version == 2)
-> +		fwu_fill_version_specific_mdata(mobj);
->  
->  	for (i = 0; i < mobj->images; i++) {
->  		ret = fwu_parse_fill_image_uuid(mobj, i, uuids[i]);
-> 
-> -- 
-> 2.43.0
-> 
+This is correct the first way around.
+
+> +
+> +fwumdata-objs := fwumdata_src/fwumdata.o generated/lib/crc32.o
+> +hostprogs-$(CONFIG_TOOLS_FWUMDATA) += fwumdata
+
+This needs to be hostprogs-always-$(...)
 
 -sughosh
