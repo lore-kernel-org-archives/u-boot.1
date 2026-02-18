@@ -4,89 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9223AE9A04B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 21:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34161E9A02C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 22:34:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC99B83AC5;
-	Wed, 18 Feb 2026 22:36:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6460083AC5;
+	Wed, 18 Feb 2026 23:33:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bltBv1B0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i6FryRDn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57CEC83B99; Wed, 18 Feb 2026 22:09:39 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id BB35D83CE3; Wed, 18 Feb 2026 23:33:56 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62F6983AA9
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 22:09:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D8D783AA9
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 23:33:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=filip.kokosinski@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-4362507f0feso166738f8f.0
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 13:09:37 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-463b3697846so878458b6e.0
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 14:33:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771448977; x=1772053777; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language:subject
- :references:cc:to:user-agent:mime-version:date:message-id:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jUrJ3qzEkcZICGC3XwNBaRa/h66e0038wLArOaD2oBc=;
- b=bltBv1B0EOD9X6BJ3MekWgU0r4E43BVFeXpCVKXjttqxH65kJWIaQbPI+RQB90yIlh
- Zyk3EUNdqiG84GMg6CnK0BKiqlMQ5lEvLgxCaEHHgwK4F578SqAFGh0414gm9EyHhvOL
- BeXrrTqeAPkzxj/3GpkSZo+4Y3Xxe+5LjB5JRvIFcl0JRy2AGzQxv5zWQCAP+ErVIZzm
- mvfMP0zX0cWQQ3ILnIl/nHtPvYJXEbkkFDvWJZ/LmMf6L1HeHB2PrCePtpwgcx647gps
- 9VwvnuRmHIvZbTW6jd/sc4glUmG1X7qYfCi8c5d5XYCIhNBK+GmKGeziaiYj1XmL1JHF
- buEQ==
+ d=konsulko.com; s=google; t=1771454033; x=1772058833; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ODldkqO6Lff4rZN+qQOVWmJ2YWuRexTJ3eiL0aekoy0=;
+ b=i6FryRDnnH1tarSxx/LHDigFVL0av0KcjL/ai6kmCfwXpOZywX9koquNujpPQum/mG
+ tOCGJWkS6HjgxRD2jve/KnGXvlTOw4D80MtXo3h+mQXV2zyQIvDRtmYl0m9kADH7G1w1
+ g1Dh79tcwULWRDOf5gVVMM76NFyyUGeGxfLoc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771448977; x=1772053777;
- h=content-transfer-encoding:in-reply-to:from:content-language:subject
- :references:cc:to:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jUrJ3qzEkcZICGC3XwNBaRa/h66e0038wLArOaD2oBc=;
- b=YqLsrptYbkPiV+/6Bmj2GfSZHJJhZcNs/lDTE36nmw9Ay1dQrGNnAg68cwy1hdtTFw
- V1/QFuylS/gsSXgQcGHfU8t4kY53DHAt34PfKozFKDY6coCk144HJidiUYFK+MtmPcC0
- 3j8fJw7jqosTysOqnoX0gaEXgCdKm4JsQUU3pp34xq2I8vReG/hgqpRONUxrY7C6BWk+
- kDaoQVNNNmBcp0rKrg1OlM9cgv0LsygQt2zJNcUtkWzCyChU1D7e6RpiOjDq2kXJwEUO
- iWR1MsQLsIId3cyUj+CTcACBwLikIjhBBxwiYXUn6Izk+3EzaOxxxeOWtycZwkC5YJ9a
- OOfw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVyeNqVoiqm3oaZXDr8bywxHmsYDmlr5z5mqVqqe7IHfce2sDU7TB8nPSXmKAjkZVz5hXIFqQI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0HyxUaxylkFamtrvQhoJzI6vNaJ1py6nYc22WHrDa+ykMuxrp
- p+Oji55ba6LvW4cWC2OOxrZ4E1k7JvoMAoi7TTU26vmXUM5wp3UhspGN
-X-Gm-Gg: AZuq6aKS7/mJgArLjz4x3h1r4483WGcyAAFO/HLxUmZrDFbogUyeIUnEtz5YlkJljn6
- gByG4EbggvvavtVHp+ztGNCvIMv+sVFV64C6iHnleMkQXikyV/i4VdIbPsNyy9NOVvtn1zQoMS+
- x1c3UeMBje07BRfIxUrgJoYQRfEuk/eSJpXpVY1mw+cYwrzOkvXFjp5gnwF4D29YrEX75Y9OYwr
- fcCaFRRBby7lfW0pWUCi5ujC5tblMatY1W6ke55a2K422302hhgiwA0AILpNcMcZrPos496lMrV
- 3Oyye6BMtJg6jtCvROywO6LFvCstxv+3F2NmpjWmV2z6sj/13hZSsEp3+dC7IDWCma5egskUCMZ
- lBs+CDZsTEY1FTxdq0oEsAyA2nsQ7c6csCTC1rfFeaKWIFMQRbnVojVbKaQmIgzDRuBAiW8WpdC
- Pj3vfu7q3/rHavR0534eqRzruIN6JMBZAtk/boPDuM84ai+B9+zXisoHIqWdXPpvKYbWDqXmC7P
- A==
-X-Received: by 2002:a05:6000:4381:b0:436:32ea:6ac7 with SMTP id
- ffacd0b85a97d-43796aefc72mr32369738f8f.40.1771448976569; 
- Wed, 18 Feb 2026 13:09:36 -0800 (PST)
-Received: from [192.168.1.21] (83.23.192.36.ipv4.supernova.orange.pl.
- [83.23.192.36]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796a6a5f0sm42540972f8f.11.2026.02.18.13.09.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Feb 2026 13:09:36 -0800 (PST)
-Message-ID: <f33431ba-85b1-47c0-9431-055a2f519c61@gmail.com>
-Date: Wed, 18 Feb 2026 22:09:30 +0100
+ d=1e100.net; s=20230601; t=1771454033; x=1772058833;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ODldkqO6Lff4rZN+qQOVWmJ2YWuRexTJ3eiL0aekoy0=;
+ b=fm3KE16me9K9RGtadtv2k+XXLm9+Ls13qkIN5qw3rY3vERbZtS+3fDTBAeDwuxFxoD
+ L0r/QMQzf+DCbMbXLYHqY6CNbp9uUZWcELHoQZuq1/F011oGwbD4jTWOIMEgaogJeM2N
+ rX3HhgXZnnOxJYB0XpDF0KyHIFcBfyS+M5qehgwxiFCu395jAhGZD/LyT+QYgVuQdVx8
+ bQjgeE8qqTfVA/n4LJyzMAYtZ3iBJhyL8iLWAjPWKE+rOvqz+3KIb/y6VWKPrnBuF2+x
+ hcfsxoHjR8jCYWB/H+t3f27EOPlYD7M+oaedhPyZhNyTGVyBDgLA+vt+f0hxGb6WnVJg
+ iGSQ==
+X-Gm-Message-State: AOJu0YxvqlIrbuKehE+x3BCJs/1JtbUCe9MQvwVujoo0YV1aFUTg671G
+ n49KenEdVCZS8rs5+rQA3dS/9SOAT0f7+KW5w96Q6+PGEWIhbRLzXaultxERvvLk7S3va7O+T/n
+ F6kLXtPk=
+X-Gm-Gg: AZuq6aLHAemRIk2pNgIF9q6uXjaDqFkxe33haYIYQd6+pNhKHEJHgjF02y+SjiihXGF
+ Yz4uG0kCHW0tjmU6KnPMEMvL66j1r84EQtGYO2Z0ABOoQXAwWJWPrl8zmx5htyh/lJQRiu88W0o
+ bHPEHQIo11Yy7kkcBHs1NSDoNiB5zmBTDplbDbC+cevnONNT3H2zco+hTYxJNn9qsxvB02ox7kL
+ tgkrwRW7E5x6QKyFoyCOktz1791MbYk37ue8oFdtq+kzq6o4UWvFGjHmA/egDU1O51wR3wsjIf7
+ Kz6rrnhA9GJwZyhKJ+SUX8gLTCPkfSOouSe1yegI6lWWZLl2BRPdyv5/uXzN7I0C4M6q7yhIZGn
+ FHAYmcAUA01a+BDMRyEED05RhWAET6kXdSZU1cKKB8UzsqzJEJ1ybEog7O4lTILsKuW43BZER5q
+ 2qpGXi7RbzbrgeTDCUdFn951SOA5li1hBYDUdhFHDkcRUVll7nkG4HbAHujBxS25RRVrhFSWckN
+ Ph0yXFR6G4Zyjewi8repfwVpPA2o6TBKBotpCZguFHwy3QsUSmY1l6muWJR
+X-Received: by 2002:a05:6808:13c9:b0:463:a42c:503a with SMTP id
+ 5614622812f47-46410b3ed9bmr2373968b6e.14.1771454033257; 
+ Wed, 18 Feb 2026 14:33:53 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-463a20598b8sm11601438b6e.8.2026.02.18.14.33.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Feb 2026 14:33:52 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: d.schultz@phytec.de, Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+In-Reply-To: <20260203055444.202307-1-w.egorov@phytec.de>
+References: <20260203055444.202307-1-w.egorov@phytec.de>
+Subject: Re: [PATCH] arm: dts: k3-am64-phycore-som-ddr4: Update DDR timings
+Message-Id: <177145403245.3679933.5617657489785696289.b4-ty@konsulko.com>
+Date: Wed, 18 Feb 2026 16:33:52 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: pbrobinson@gmail.com
-Cc: filip.kokosinski@gmail.com, mbrugger@suse.com, u-boot@lists.denx.de
-References: <CALeDE9MTfGaVt3p9h2oTt2KkJ8JDjauNT7oA4bnsHbP8C8aB7Q@mail.gmail.com>
-Subject: Re: [PATCH 0/2] board/raspberry: add FDT for bcm2712d0
-Content-Language: en-US
-From: =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
-In-Reply-To: <CALeDE9MTfGaVt3p9h2oTt2KkJ8JDjauNT7oA4bnsHbP8C8aB7Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 18 Feb 2026 22:36:25 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,62 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+On Tue, 03 Feb 2026 06:54:43 +0100, Wadim Egorov wrote:
 
-Thanks for taking a look at these patches and taking them for a spin!
+> Update DDR timings to increase stability in higher temperature ranges.
+> 
+> Update DDR settings:
+>   - SysConfig DDR tool v0.09.05
+>   - Package: ALV
+>   - Extended temperature range -40C to 105C
+>   - Lower tREFI (ns) to 3900
+> 
+> [...]
 
- > Can you also provide details of which revisions of rpi devices you
- > tested this on?
+Applied to u-boot/master, thanks!
 
-I've tested this on the 16gb v1.1 -- it's the only bcm2712 device I've got,
-unfortunately.
+[1/1] arm: dts: k3-am64-phycore-som-ddr4: Update DDR timings
+      commit: 73823d1c581617a9adbecae1f4aa06c313e0a2f6
+-- 
+Tom
 
-The EEPROM bootloader reports:
-
-     4.07 BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=1756339608 
-serial b36eabd9 boardrev e04171 stc 4076083
-
-The board_revision from environment is set to:
-
-     U-Boot> printenv board_revision
-     board_revision=0xE04171
-
-Which matches what I can see in the dtb:
-
-     U-Boot> fdt print /system
-     system {
-         linux,serial = <0xf849b6d5 0xb36eabd9>;
-         linux,revision = <0x00e04171>;
-     };
-
-In Linux, /proc/cpuinfo reports:
-
-     Serial        : f849b6d5b36eabd9
-     Model        : Raspberry Pi 5 Model B Rev 1.1
-
-Additionally, I can see that the EEPROM bootloader lists these dtbos, even
-though I don't have them on my boot partition:
-
-     9.15  /overlays/overlay_map.dtb
-     9.16  /overlays/bcm2712d0.dtbo
-
-I wonder what it lists for the c1 variant.
-
- > I have an 8gb v1.0, and I thought I had a v1.1 2Gb but looking closer
- > it looks like that's the old c1 SoC rev (I read their original
- > announcement for the 2Gb variant as they were all 1.1, it appears
- > not).
-
-Do I understand correctly that the c1 reports as v1.1 as well, which causes
-the bcm2712d0-rpi-5-b.dtb to match? If that's the case, I wonder how the 
-EEPROM
-bootloader differentiates between c1 and d0, as both have the 0x17 type.
-
- > I have ordered the new 1Gb variant so I have a revD I can test
- > against.
-
-Looking forward to hearing about that from you!
-
-Best
-FK
 
