@@ -4,56 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D47E9A02C
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 14:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68CD2E9A02C
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 14:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4082283AC5;
-	Wed, 18 Feb 2026 15:59:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C94883D0F;
+	Wed, 18 Feb 2026 15:59:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=armadeus.com header.i=@armadeus.com header.b="b7/nOtog";
+	dkim=pass (2048-bit key; unprotected) header.d=armadeus.com header.i=@armadeus.com header.b="ibP3n9R9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4038D83D17; Wed, 18 Feb 2026 15:59:40 +0100 (CET)
-Received: from 17.mo583.mail-out.ovh.net (17.mo583.mail-out.ovh.net
- [46.105.56.132])
+ id A2E81802C1; Wed, 18 Feb 2026 15:59:41 +0100 (CET)
+Received: from 4.mo584.mail-out.ovh.net (4.mo584.mail-out.ovh.net
+ [178.32.98.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7470C802C1
+ by phobos.denx.de (Postfix) with ESMTPS id A12DF83AA9
  for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 15:59:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director7.ghost.mail-out.ovh.net (unknown [10.109.231.103])
- by mo583.mail-out.ovh.net (Postfix) with ESMTP id 4fGKRX4y81z5xJy
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 14:59:36 +0000 (UTC)
+Received: from director7.ghost.mail-out.ovh.net (unknown [10.110.43.17])
+ by mo584.mail-out.ovh.net (Postfix) with ESMTP id 4fGKRY0wHSz8HFq
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 14:59:37 +0000 (UTC)
 Received: from ghost-submission-7d8d68f679-62b48 (unknown [10.110.101.145])
- by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 4092CC01C9;
+ by director7.ghost.mail-out.ovh.net (Postfix) with ESMTPS id B46C3C05B2;
  Wed, 18 Feb 2026 14:59:36 +0000 (UTC)
 Received: from armadeus.com ([37.59.142.110])
  by ghost-submission-7d8d68f679-62b48 with ESMTPSA
- id hnYEB9jTlWnVjAAAa7HxRw
+ id hnYEB9jTlWnVjAAAa7HxRw:T2
  (envelope-from <sebastien.szymanski@armadeus.com>);
  Wed, 18 Feb 2026 14:59:36 +0000
 Authentication-Results: garm.ovh; auth=pass
- (GARM-110S0040da32969-884c-4f6a-a1e8-f14e886230c0,
+ (GARM-110S004cc1c2cc6-1b27-4d45-af80-9b4b3f635183,
  BCC414E58A87BDF8F3171654DA18834A20810328)
  smtp.auth=sebastien.szymanski@armadeus.com
 X-OVh-ClientIp: 86.243.239.229
 From: =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Subject: [PATCH 0/2] serial: lpuart: fix RXFE filed offset and handle
- Overrun flag
-Date: Wed, 18 Feb 2026 15:59:17 +0100
-Message-Id: <20260218-lpuart-fix-rxfe-offset-v1-0-86a78b224f13@armadeus.com>
+Date: Wed, 18 Feb 2026 15:59:18 +0100
+Subject: [PATCH 1/2] serial: lpuart: fix RXFE filed offset for i.MX9
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAMXTlWkC/x3MUQqDQAyE4atIng3sLkW0Vyl9WOxEA6KSbWVBv
- HuDjx/8MycVmKLQsznJcGjRbXXEtqFxzusE1o+bUkhdSLHnZf9l+7JoZasC3kQK3OEB6buYMQz
- k493gyX38el/XH7wMfS1oAAAA
-X-Change-ID: 20260218-lpuart-fix-rxfe-offset-f04ef861ae99
+Message-Id: <20260218-lpuart-fix-rxfe-offset-v1-1-86a78b224f13@armadeus.com>
+References: <20260218-lpuart-fix-rxfe-offset-v1-0-86a78b224f13@armadeus.com>
+In-Reply-To: <20260218-lpuart-fix-rxfe-offset-v1-0-86a78b224f13@armadeus.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>, 
@@ -61,18 +58,18 @@ Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Julien Boibessot <julien.boibessot@armadeus.com>, 
  =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
 X-Mailer: b4 0.14.3
-x-ovh-tracer-id: 15264950939735938761
+x-ovh-tracer-id: 15265232412717995721
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTGT2+BOqQmKGWy+4NY18UTeaihDDWmFcw9hg+cK/GtQ/dpffk7aPmnOOiH7aP0rc/2FyPKj4KZeickMgGEAM57Mnr9QE9HhxnLK247wLds4vEfP21fLH/1pAfOHmqE6/DDH0PY2azgit22TP63ese/AEzyq5BWgVcq39JVmPhc4Ts7BjKRoyGfe5hpkxmQTBOKBAJPqIA3LVzJDcieMQr3QWDktdGSXAMtWRO0S2607bHuGGROyMCFroLHWTLmREQE9xHOEUiLhMt7PMMX2G3YEMhsXLJW0MCIgZzLIsYp7qY141/JKweAJTSRbdiLJ31OFiRpFtsLRz0o0W/Dj7PIFqiYU6CUpEiXADu6TYRcSPPMGWETD37BGIV0NFTkjIeXM8Lb+5u/fwhZL+xQ0iQ0Tn8KQZGkpODgQLDKGl1drODQVyj/ChHpAe/lLiuHt05gAtW31AVRRDBXa/0LdlJlbvppQyFVjTlac1KvhEu+p0lC5ieeSYqjsTxZYPnPTbgTpPmyYf3BF4kfU9h5Pmo50qs5Ie94NPoXQY83DQX3/AhfXSjPg30gpfdbhH35JoF0GdB77vMpffI5PHwIt/5NI/PwzEwM5ouQZJ0ETcNy3njYroUVCYX00AqIYfGiW1oyQVtu5csESpUyiexbSbzdxCLUoHYAci9KK5XBs43IANg
-DKIM-Signature: a=rsa-sha256; bh=uCQge3wu4adIvvCERIK6ucoLOXufmVfoHKmZuPL3Ju0=; 
+X-VR-SPAMCAUSE: dmFkZTGcdss9VIj/m/mQGm7b1Z6eoMkur1vDkfIGe5Y4nnkgxx0BvfE5VBX1jNQMlL7rU0Vdj70IrRf6iM1l38tVWhCJpsRRULLGaFMla95dOQFPtBf8mgT9OImbd3e9nxDTWWVRke8mu7zedMcVmgoroOkzzRhgfFz4xkiyjWkuhADrBmInZg8ByJFX8dlo7TyjdupzitPbrcrbeZeC+wlfbFFKDlKYdueZaEgZH+wS9Rp9XbOsXMIobp1zG/rybsn2hSjKXdc7C87iYXe0J5NbRKA5k9lLmE/ay54DViP6pBSycUyXfcJ/H+TUtURyDzbUuROI1QH08FdNYbPb3P4GkZTdSNnajCLRs0J30iYv8Sqxjy+dlq3c4S2YdgVjLo62iahm2PhWeL5yYxpTjGk6p5Ns11RRiCK0vqcqh+Zj08Bh2EDrCLvYEBoEDXo1BqbgtnzHpBebOj0ysKxCh3wOEJzd+6W9NfeiLVYOFV7XeSrELjzKJgefOoB3tonj7Vm4aPt0CY68UgNHoonOREZrIYNt6iPqnrSD3gIyOimZX53Xo251ivQSPW61G93y7ZcyH4ZfgmuJ0letlhiHilyd+KtIoRN47bbiuB5stYRdxPFr3kCgB6x/zulOKoDCrukdZGoCf7bozO3wDDTBVNJHKPxKyOOqNJHjzK1YLnQwmaz83g
+DKIM-Signature: a=rsa-sha256; bh=bG0Eub8cwPAIEBbAecRkZZ2uR4+hSKH4XzICDSFQalM=; 
  c=relaxed/relaxed; d=armadeus.com; h=From;
- s=ovhmo103079-selector1; t=1771426776; v=1;
- b=b7/nOtogd1TsI5T6yVc2pAuxr2fmnbxcOv+iFvfNNR8zN2qBCGjXBOQJdiWmHeAmFFtdQ9Ld
- nK0b+FTSQZPDkqmgXovHpLi8I2acdXFHsTK12IHko5FAUyRAVIGDgW095OZcJEKi9DY/v4My14z
- re8MbVT8JYK4ki1ro2HFUSBye9u9n366Wls6w+ZP3hhkA+zWjT6WabvqMrkeJtR/TBMdcPmONav
- hJur5IOsA3a+oFkgXzM49d1yCFD7+7qPPdYKC5CrMGUKJB9PoNRh3pQuunQsXbEkh+P8KprhLhj
- J/fqKtf3S7GrQ4dZrO2Vo2+zhH7G7tPwoc8VjG2vzGW8g==
+ s=ovhmo103079-selector1; t=1771426777; v=1;
+ b=ibP3n9R9ZS4bV3ZIZj4BOqbbL6r/fn5bGcOL25jg7aVXk02aHLaTxnxNud733C/wKSLWtnKP
+ VDhjgs5oig784h2p7s439RNHrzt6PsgpukbgP3aqWEPvCuTbicGPaRCp4N/X41tv6qq6GKt96QV
+ jVmlYqhGjVwEWYf3ipwIbVG7tcDm/0TUvyBKi0B4ayPFPHVSSJ+Q7kplatJ/N37vqDMclbZVXyb
+ FB4OnbHvCwZty6qVPl+rJYf0f+Pk6LT7VqAtCw/MbYRuZENMx3qoXmQwrgMykLMW/AkRM+j7Hr9
+ m8a3/MRTpze/Y21cZlFTfaCK2HkexNvKe3bW0GQtG95rA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,22 +86,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This couple patches fixes the RXFE filed offset on i.MX9 platforms and handle
-the Overrun flag which can prevent user from accessing the U-Boot prompt.
+Like i.MX8 and i.MXRT, on i.MX9, the Receive RX FIFO Enable (RXFE) field
+in LPUART FIFO register is bit 3, so set FIFO_RXFE to 0x08 on i.MX9 too.
 
 Signed-off-by: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
 ---
-Sébastien Szymanski (2):
-      serial: lpuart: fix RXFE filed offset for i.MX9
-      serial: lpuart: handle Overrun flag
+ drivers/serial/serial_lpuart.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- drivers/serial/serial_lpuart.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
----
-base-commit: 8666b16015d4212facacc514e2eb626f3630dcf0
-change-id: 20260218-lpuart-fix-rxfe-offset-f04ef861ae99
+diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
+index 9fdb6503085d..bbce59443388 100644
+--- a/drivers/serial/serial_lpuart.c
++++ b/drivers/serial/serial_lpuart.c
+@@ -53,7 +53,8 @@
+ #define FIFO_RXSIZE_MASK	0x7
+ #define FIFO_RXSIZE_OFF	0
+ #define FIFO_TXFE		0x80
+-#if defined(CONFIG_ARCH_IMX8) || defined(CONFIG_ARCH_IMXRT)
++#if defined(CONFIG_ARCH_IMX8) || defined (CONFIG_ARCH_IMX9) || \
++    defined(CONFIG_ARCH_IMXRT)
+ #define FIFO_RXFE		0x08
+ #else
+ #define FIFO_RXFE		0x40
 
-Best regards,
 -- 
-Sébastien Szymanski <sebastien.szymanski@armadeus.com>
+2.52.0
 
