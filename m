@@ -4,158 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73CDAE9A03E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 08:42:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D43C1E9A03B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 09:48:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E270583CE3;
-	Wed, 18 Feb 2026 09:42:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CD2083AC5;
+	Wed, 18 Feb 2026 10:48:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v1YbJ/ms";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C440183CF2; Wed, 18 Feb 2026 09:42:26 +0100 (CET)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE47E83C19
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 09:42:22 +0100 (CET)
+ id DCBEC83B99; Wed, 18 Feb 2026 10:48:02 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id E060383AA9
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 10:47:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WCRLLOP16EjuthvGmP6ev8+PWjL3oc3rOGmWSqD77ABRV4QxzgPgHFAXbHOfSRoUWnbqKGicJXa/Ds6iAgYAPhi1S6cSYnhVoyNLmtoJUyI5JNsc5rTGFbsa+bouEuQXB33WRIZIhHm3Djyp81dvtMcjuSe9gLO5xiVQQchSf1+x9MwJ2tRj0WAB8uX93HQ9An0F5N3x8a0TwG+1u2TFCqntCGMAZziH52WmwJxnQ2ydFLKgT1YHk+EYANh78ZI3e6rKL924oHGP9XhC/MWCC0cCdsMrXBKhoutiO4d2QfayRBbD3qBAOmFIgvIPZpjhVc/WW91qWjMYzGSASNu19g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JX8RKxcfxwID5SuUsfZKiKBAcTXjtk5qJpmiIbKLdfY=;
- b=wI2Y4loYyKvvF1IfjGphoIDGZb35UeBK6VdqluKsVLkRIdqV1Idyc4xeH577iBs0u4DyL0ENhcJOesj5NESgLmH5YvUs20xR4pQyschWbl4Nl883ft/ImTEnTh4QliZWl+k/JtzQ7qrDq5qos4jVXWgwh5J737DzL3OcJIb9Ji9BYXFEtT2vd027AKSC0rCPFURxjmrKZ9kMYAQxPCfKZplGj5MDE+ewsrp2f6SE+zMGX3IMH/mPq4vpwB9whruSgMuwhb0+/ZuuVEGwpMQL511wwpbsCDmtPvJrwu3sueV/Ei8nHgv8h2T+yhFheOd7upBj2qqoJweOx23/I+nvgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JX8RKxcfxwID5SuUsfZKiKBAcTXjtk5qJpmiIbKLdfY=;
- b=v1YbJ/msDKMJUNOT68IER01bmOpnMTXVKe93xO6RhKHlBqG5NfFV0t7bvhTmJ/sIW20lWqJl1VmDeX86q6yXAL+bz6VUQq5gWeCZJFyGLzu22u+FGAyGyTJA5CZD9SC4sSSXi3Pin+MRY5xa3BFej6vVPOdE+HsWXjNgglAS3kw=
-Received: from SA9PR13CA0148.namprd13.prod.outlook.com (2603:10b6:806:27::33)
- by LV8PR10MB7942.namprd10.prod.outlook.com (2603:10b6:408:209::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Wed, 18 Feb
- 2026 08:42:19 +0000
-Received: from SN1PEPF0002BA52.namprd03.prod.outlook.com
- (2603:10b6:806:27:cafe::51) by SA9PR13CA0148.outlook.office365.com
- (2603:10b6:806:27::33) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Wed,
- 18 Feb 2026 08:42:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SN1PEPF0002BA52.mail.protection.outlook.com (10.167.242.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Wed, 18 Feb 2026 08:42:19 +0000
-Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 18 Feb
- 2026 02:42:19 -0600
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 18 Feb
- 2026 02:42:18 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 18 Feb 2026 02:42:18 -0600
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61I8gHia574104;
- Wed, 18 Feb 2026 02:42:18 -0600
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E0A21477;
+ Wed, 18 Feb 2026 01:47:51 -0800 (PST)
+Received: from localhost (a079122.arm.com [10.164.21.38])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E4D513F7F5;
+ Wed, 18 Feb 2026 01:47:56 -0800 (PST)
+Date: Wed, 18 Feb 2026 15:17:54 +0530
+From: Sughosh Ganu <sughosh.ganu@arm.com>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leonard Anderweit <l.anderweit@phytec.de>, Yao Zi <me@ziyao.cc>
+Subject: Re: [PATCH v3 5/6] tools: Add support for fwumdata tool
+Message-ID: <aZWKyl6r8BphaePp@a079122.arm.com>
+References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
+ <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 18 Feb 2026 14:12:17 +0530
-Message-ID: <DGHYCYEIXTKK.1FYQH6YASASKO@ti.com>
-Subject: Re: [PATCH 1/7] common: spl: mtd: Add support for loading images
- from MTD
-From: Anshul Dalal <anshuld@ti.com>
-To: Anurag Dutta <a-dutta@ti.com>, <jagan@amarulasolutions.com>,
- <trini@konsulko.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <boon.khai.ng@altera.com>, <s-k6@ti.com>, <gehariprasath@ti.com>,
- <vigneshr@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260217112156.272154-1-a-dutta@ti.com>
- <20260217112156.272154-2-a-dutta@ti.com>
-In-Reply-To: <20260217112156.272154-2-a-dutta@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA52:EE_|LV8PR10MB7942:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe39f04e-2b8e-4206-a61e-08de6ec9a092
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|36860700013|82310400026|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SzNNNDlMSnphY0hSQXlqMkpIZTlzN3Zsb0xMWjNkTmJOdTNDa2lUaFNpLysz?=
- =?utf-8?B?b0tRSG5TNWQwMW9RODJQMHVmSFJ0SzJYd0t1YldOS0R0Zk4xaHhMNkNQTndK?=
- =?utf-8?B?Ulova3VUUS9EQVRtM2xjWHYxejd0Q0NpaTU5TWhTc1ZLamJCRm92UXBPRkRW?=
- =?utf-8?B?dFNJQXgxL1dzL05lZkl0eWZtQnMrSVhnY2VUQ2lMSjdVLzh1ZVJUV2d0ZTl0?=
- =?utf-8?B?SDVuZlE0Y0FmM1F5d2p0N0lYZk5aZVJZakZCRFlMWE0vUzJoNnUwTnBVTk9M?=
- =?utf-8?B?cC94cDRKRmxtRnB4THdyaVI5VHc4RlRMcXJVL1VtQXhWa291TkNjcHROaHJV?=
- =?utf-8?B?SEQ0RXBsSUo1SUxIMmN3R2sySi8zUHFkaEpEWjc5Vmg4ODY4OEJiMjlLeVBJ?=
- =?utf-8?B?bGdTYVdubExnTkFDVmZCV0pSS2VzdmlpdUhwRTJjWjhmU1VOTzNsWEJQVlNP?=
- =?utf-8?B?NmNzSUdsaC9OOFU0YUJaWXRsR1gzSUZockk5LzhJd2ZtWjRXWWY4UnBJaERR?=
- =?utf-8?B?YnJ4ZHdWZThCUndJUGlwM3JZdC8vcGY4cG9iSnI4ZGh3alNVK3d2Wlg1MUla?=
- =?utf-8?B?dEdwbmVoUHhjRHFybHMyVHZleXFGZXRBTjV4WUFoVVF2dExHSXdlVS82bVpB?=
- =?utf-8?B?RlBPbldSQlM5TmN0M2JPMUJad0JLcVpXdXdNTWpoQkhwTkdIRlBTYzlUdWlT?=
- =?utf-8?B?WDdUeHJhRy80Z0U3TDQxSlBiMzRYVGtUYTBDMFI5NUhkQlVVaEVnN09YdENM?=
- =?utf-8?B?cHJjcnBZZDlBby9hMkJCZk0wOEQxc0hCbTNvbU9iVm9TMStaOWV1YkFrM0lz?=
- =?utf-8?B?QksxamlobW5TYVdLT3R1UW1BcWx0U0NvbXpxamMzbXJCVXEweFJIMk5vZUpJ?=
- =?utf-8?B?OGdpUHVoRmZDMmhmcEhCZUYvWDlRUC9NSzUxK2dUMmpqeTdpMTFsL0pVWk5j?=
- =?utf-8?B?ZHpPMWsvcVdaR0o1emg5Uk9RMVk0a1Bxc3U3RnZETk0zQndzdkFiSTN4TFhO?=
- =?utf-8?B?NlNBN0Z0S2pDSldDVDBFV1RPQXlqOXQ0MEZtMERCNnd4Q0xkcWlzb2wvakxr?=
- =?utf-8?B?SnN2cHZJSUhsZ25JbkJiRTErVGYxYXRVcE9GZnRyc0hJZG1ML2pHellNaEFp?=
- =?utf-8?B?WjVxNU1sZGxpeGl0S3FDLzlHR2NHQ3JxTFQ1TGUzT0Z3eWJUckg4UFZVenNB?=
- =?utf-8?B?Q2lKVk9KSS8wdlpWWUhNMCtvZHlsdDZ6eHY5UHhGRFJ4RVEzaTJsYUFMY1Iw?=
- =?utf-8?B?Q0VqWTBRVml5TDdiRnpvcytnRitCSzNwMUdtZXh3d28wMTB1K3IyN3I3dUg0?=
- =?utf-8?B?S3ZjMDJUQ1dBQzNDQnZpR2JwUmFjUUQwbHluK1o2VHVERlJ2SkE3VmZLRWZX?=
- =?utf-8?B?SWhBZTdQTHgvbFdiMTRKUDgvZDltZmFnTjAwWnVWMVo3TjB2dXdaYmorUWNt?=
- =?utf-8?B?cEtuY2Fja2l3bkdEZGNQU3lneVFPRGlKOTRCQmdqNzQwRFFEMGZiTS95TVRh?=
- =?utf-8?B?ZVcyTnBCbDc5ckhFVk5KaUkyRDQ3OWJCQTdrVHdTT01VNXJWWVFLeGV4ZlNo?=
- =?utf-8?B?UEJsMDhUUEx0ZUg1bnY4Vm1Wb0gvSGx4WkxsSE4yZjltaFpyNHNBajR5Sjky?=
- =?utf-8?B?MUJndkJBbWhHZFFiSjd4dXJ6YndwOTJXMDExTVZ3YjFtNjBHRVVpcktFSGJ4?=
- =?utf-8?B?dWV5WE9oUDV3S0ZIOVVxOXlIV0JKdFZ5TDlWOFVZVXRIUUdKNXlvYi9NTDNj?=
- =?utf-8?B?akR0UXFFT1VmVzV6UG5Xc2UrYS9sUmpnMVl3UFJlZFRRdnFYK2UxNUVVOVVv?=
- =?utf-8?B?NXp1WVNuWU5Xdm5kMUhGNVkyQTlTdjZ0LyttOHkyT3UwbTdmL1VpTE9LamNY?=
- =?utf-8?B?OFh4WndicWRYZEIrd1llN1MxNEdXTUowOW5ZenU4WlF4bGpIZk9OdUZUcjNS?=
- =?utf-8?B?SG5QYXl2dExaQStpaXlzZGNJNDloZVlvSUZhYlRJeUhrMkd1dVlDOVJ5cjhm?=
- =?utf-8?B?VVYxdUw2SEJKS1ZPL3R6QXE2b0w4KzlIWmFpcmVhY2p6NXJSek5kWm1ERG5G?=
- =?utf-8?B?bEVIZjl4dUhSOVhmSkw0d3NYUGVOaWdIMWhxUVZmZHJpUlk4TXVFZkI3S1M5?=
- =?utf-8?B?U09rdnRkeXRabDIxWFVvUERCUG9acGtGT2p2KzVhTC9DNzVYWjdUSmwvNi96?=
- =?utf-8?B?eUE9PQ==?=
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(36860700013)(82310400026)(13003099007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: fU5GtEaAOPH7RBZ5xZfNDD9kpam309QO93m4agG5o0PynQDEbuLJmbPDz/M9555OSmeslv1CO/Lnxi//rnxsvGCSCxR2o2jTUxAUvUH5SBb/noY34k6saALbhrj0g2hzRf1jLqvF9pGPwcVhGJJ7OfYEEvQ3UZ4Mm79LLrS+yZiI2gxjFXSjmoTP37f0NEdDREAFZrM0fttDahH6+JZRhG1KMAscH164eVMdSQn+ZvXHyXd585FrWAyIP4IQwqI1YOI6J6rLxfr5OzMEdNdUMdnDozFk3ghU4rCZdgS+gRs39AtPJTHgtrGj3hE/bU56ftZm/P65uGOQoT94bboJcReRcmL1bWVGauoF9AwrX8EIX3QlT3MPHNRVuC3G7XaaFT/a3+BWrZpbzKFkuFrwz7v6TeStkM7viQfLjpv7+PVZseYWyQM8hkddQuQ0mFLR
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 08:42:19.3936 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe39f04e-2b8e-4206-a61e-08de6ec9a092
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA52.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR10MB7942
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,198 +74,1394 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Feb 17, 2026 at 4:51 PM IST, Anurag Dutta wrote:
-> From: Apurva Nandan <a-nandan@ti.com>
->
-> Introduce support for using MTD subsystem for loading images from
-> memory flashes. This will provide the support of using mtd functions
-> which are abstracted over the type of flash being used, to load the
-> boot images from the flash.
->
-> Currently, add support for only SPI NAND flashes. This can be extended
-> to all other flash types, when required.
->
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
-
-Asides form what Sean said, I have a few comments below:
-
+On Mon, Feb 16, 2026 at 02:35:35PM +0100, Kory Maincent wrote:
+> Add a new fwumdata tool to allows users to read, display, and modify FWU
+> (Firmware Update) metadata from Linux userspace. It provides functionality
+> similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+> metadata, change active/previous bank indices, modify bank states, and set
+> image acceptance flags. Configuration is done via fwumdata.config file.
+> 
+> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 > ---
->  common/spl/spl_mtd.c      | 90 +++++++++++++++++++++++++++++++++++++++
->  common/spl/spl_mtd_nand.c | 31 ++++++++++++++
->  include/spl.h             | 18 ++++++++
->  3 files changed, 139 insertions(+)
->  create mode 100644 common/spl/spl_mtd.c
->  create mode 100644 common/spl/spl_mtd_nand.c
->
-> diff --git a/common/spl/spl_mtd.c b/common/spl/spl_mtd.c
+
+I am not sure if this has been discussed with Ilias earlier, and
+apologies if it has been, but I do think that this patch is not
+adhering to the DEN0118 specification, specifically the part mentioned
+in section A3.2.1, which says that the metadata is to be maintained by
+the Update Agent. I would like to hear from Jose Marinho, who is the
+author of the spec, on what he thinks about this approach.
+
+I do think that the other patches in series look fine, and can be
+applied. There is just an issue of inclusion of the tool for
+building. I will comment on that patch separately.
+
+-sughosh
+
+
+>  MAINTAINERS                        |   4 +
+>  doc/develop/uefi/fwu_updates.rst   |   4 +-
+>  doc/fwumdata.1                     | 222 ++++++++++
+>  tools/.gitignore                   |   1 +
+>  tools/fwumdata_src/Kconfig         |  11 +
+>  tools/fwumdata_src/fwumdata.c      | 854 +++++++++++++++++++++++++++++++++++++
+>  tools/fwumdata_src/fwumdata.config |  33 ++
+>  tools/fwumdata_src/fwumdata.h      | 138 ++++++
+>  tools/fwumdata_src/fwumdata.mk     |   5 +-
+>  9 files changed, 1270 insertions(+), 2 deletions(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 9d954be4a9d..d680b193033 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1242,11 +1242,15 @@ F:	drivers/watchdog/sbsa_gwdt.c
+>  
+>  FWU Multi Bank Update
+>  M:	Sughosh Ganu <sughosh.ganu@arm.com>
+> +M:	Kory Maincent <kory.maincent@bootlin.com>
+>  S:	Maintained
+>  T:	git https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> +F:	doc/fwumdata.1
+>  F:	doc/mkfwumdata.1
+>  F:	lib/fwu_updates/*
+>  F:	drivers/fwu-mdata/*
+> +F:	tools/fwumdata_src/fwumdata.c
+> +F:	tools/fwumdata_src/fwumdata.h
+>  F:	tools/fwumdata_src/mkfwumdata.c
+>  
+>  GATEWORKS_SC
+> diff --git a/doc/develop/uefi/fwu_updates.rst b/doc/develop/uefi/fwu_updates.rst
+> index 84713581459..c592106f8a8 100644
+> --- a/doc/develop/uefi/fwu_updates.rst
+> +++ b/doc/develop/uefi/fwu_updates.rst
+> @@ -66,7 +66,9 @@ FWU Metadata
+>  U-Boot supports both versions(1 and 2) of the FWU metadata defined in
+>  the two revisions of the specification. Support can be enabled for
+>  either of the two versions through a config flag. The mkfwumdata tool
+> -can generate metadata for both the supported versions.
+> +can generate metadata for both the supported versions. On the target side,
+> +the fwumdata tool can read and update FWU metadata located in memory,
+> +similarly to how fw_printenv/fw_setenv works.
+>  
+>  Setting up the device for GPT partitioned storage
+>  -------------------------------------------------
+> diff --git a/doc/fwumdata.1 b/doc/fwumdata.1
 > new file mode 100644
-> index 00000000000..341e1a73392
+> index 00000000000..66a53fc9403
 > --- /dev/null
-> +++ b/common/spl/spl_mtd.c
-> @@ -0,0 +1,90 @@
+> +++ b/doc/fwumdata.1
+> @@ -0,0 +1,222 @@
+> +.\" SPDX-License-Identifier: GPL-2.0-or-later
+> +.\" Copyright (C) 2025 Kory Maincent <kory.maincent@bootlin.com>
+> +.TH FWUMDATA 1 2025 U-Boot
+> +.SH NAME
+> +fwumdata \- read, display, and modify FWU metadata
+> +.
+> +.SH SYNOPSIS
+> +.SY fwumdata
+> +.OP \-c config
+> +.OP \-l
+> +.OP \-u
+> +.OP \-a bankid
+> +.OP \-p bankid
+> +.RB [ \-s
+> +.IR bankid " " state ]
+> +.OP \-i imageid
+> +.OP \-b bankid
+> +.OP \-A
+> +.OP \-C
+> +.OP \-B num_banks
+> +.OP \-I num_images
+> +.YS
+> +.SY fwumdata
+> +.B \-h
+> +.YS
+> +.
+> +.SH DESCRIPTION
+> +.B fwumdata
+> +reads, displays, and modifies FWU (Firmware Update) metadata from Linux
+> +userspace.
+> +.PP
+> +The tool operates on FWU metadata stored on block or MTD devices, allowing
+> +userspace manipulation of firmware update state including active bank
+> +selection, image acceptance, and bank state management.
+> +.
+> +.SH OPTIONS
+> +.TP
+> +.BR \-c ", " \-\-config " \fIfile\fR"
+> +Use custom configuration file. By default, the tool searches for
+> +.I ./fwumdata.config
+> +then
+> +.IR /etc/fwumdata.config .
+> +.
+> +.TP
+> +.BR \-l ", " \-\-list
+> +Display detailed metadata information including all GUIDs, image entries,
+> +and bank information. Without this option, only a summary is shown.
+> +.
+> +.TP
+> +.BR \-u ", " \-\-update
+> +Update metadata if CRC validation fails. Useful for recovering from corrupted
+> +metadata.
+> +.
+> +.TP
+> +.BR \-a ", " \-\-active " \fIbankid\fR"
+> +Set the active bank index to
+> +.IR bank .
+> +.
+> +.TP
+> +.BR \-p ", " \-\-previous " \fIbankid\fR"
+> +Set the previous active bank index to
+> +.IR bank .
+> +.
+> +.TP
+> +.BR \-s ", " \-\-state " \fIbankid state\fR"
+> +Set bank index
+> +.I bankid
+> +to the specified
+> +.IR state .
+> +Valid states are:
+> +.BR accepted ,
+> +.BR valid ,
+> +or
+> +.BR invalid .
+> +Supported only with version 2 metadata. When setting a bank to accepted state,
+> +all firmware images in that bank are automatically marked as accepted.
+> +.
+> +.TP
+> +.BR \-i ", " \-\-image " \fIimageid\fR"
+> +Specify image number (used with
+> +.B \-A
+> +or
+> +.BR \-C ).
+> +.
+> +.TP
+> +.BR \-b ", " \-\-bank " \fIbankid\fR"
+> +Specify bank number (used with
+> +.B \-A
+> +or
+> +.BR \-C ).
+> +.
+> +.TP
+> +.BR \-A ", " \-\-accept
+> +Accept the image specified by
+> +.B \-i
+> +in the bank specified by
+> +.BR \-b .
+> +Sets the FWU_IMAGE_ACCEPTED flag for the image.
+> +.
+> +.TP
+> +.BR \-C ", " \-\-clear
+> +Clear the acceptance flag for the image specified by
+> +.B \-i
+> +in the bank specified by
+> +.BR \-b .
+> +According to the FWU specification, the bank state is automatically set to
+> +invalid before clearing the acceptance flag.
+> +.
+> +.TP
+> +.BR \-B ", " \-\-nbanks " \fInum_banks\fR"
+> +Specify total number of banks (required for V1 metadata).
+> +.
+> +.TP
+> +.BR \-I ", " \-\-nimages " \fInum_images\fR"
+> +Specify total number of images (required for V1 metadata).
+> +.
+> +.TP
+> +.BR \-h ", " \-\-help
+> +Print usage information and exit.
+> +.
+> +.SH CONFIGURATION FILE
+> +The configuration file specifies the location of FWU metadata on storage
+> +devices. The format is:
+> +.PP
+> +.EX
+> +.in +4
+> +# Device Name      Device Offset    Metadata Size    Erase Size
+> +/dev/mtd0          0x0              0x78             0x1000
+> +/dev/mtd1          0x0              0x78             0x1000
+> +.in
+> +.EE
+> +.PP
+> +Lines starting with
+> +.B #
+> +are comments.
+> +.I Erase Size
+> +is optional and only applies to MTD devices; if omitted, it defaults to the
+> +metadata size.
+> +.PP
+> +Specifying two devices enables redundant metadata support.
+> +.
+> +.SH BUGS
+> +Please report bugs to the
+> +.UR https://\:source\:.denx\:.de/\:u-boot/\:u-boot/\:issues
+> +U-Boot bug tracker
+> +.UE .
+> +.
+> +.SH EXAMPLES
+> +Display FWU metadata summary:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata
+> +.in
+> +.EE
+> +.PP
+> +Display detailed metadata with all GUIDs:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-l
+> +.in
+> +.EE
+> +.PP
+> +Set active bank to 1:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-a 1
+> +.in
+> +.EE
+> +.PP
+> +Set bank 1 to accepted state (automatically accepts all images in that bank):
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-s 1 accepted
+> +.in
+> +.EE
+> +.PP
+> +Accept image 0 in bank 0:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-i 0 \-b 0 \-A \-l
+> +.in
+> +.EE
+> +.PP
+> +Clear acceptance for image 0 in bank 1:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-i 0 \-b 1 \-C \-l
+> +.in
+> +.EE
+> +.PP
+> +Clear acceptance for image 1 in bank 1 with metadata V1:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-B 2 \-I 2 \-i 1 \-b 1 \-C \-l
+> +.in
+> +.EE
+> +.PP
+> +Use custom configuration file:
+> +.PP
+> +.EX
+> +.in +4
+> +$ \c
+> +.B fwumdata \-c /path/to/custom.config
+> +.in
+> +.EE
+> +.
+> +.SH SEE ALSO
+> +.BR mkfwumdata (1)
+> diff --git a/tools/.gitignore b/tools/.gitignore
+> index e8daa24a52d..49943d2cf3a 100644
+> --- a/tools/.gitignore
+> +++ b/tools/.gitignore
+> @@ -11,6 +11,7 @@
+>  /file2include
+>  /fit_check_sign
+>  /fit_info
+> +/fwumdata
+>  /gdb/gdbcont
+>  /gdb/gdbsend
+>  /gen_eth_addr
+> diff --git a/tools/fwumdata_src/Kconfig b/tools/fwumdata_src/Kconfig
+> index c033c560e8d..af1f3bb3f57 100644
+> --- a/tools/fwumdata_src/Kconfig
+> +++ b/tools/fwumdata_src/Kconfig
+> @@ -6,3 +6,14 @@ config TOOLS_MKFWUMDATA
+>  	  metadata for initial installation of the FWU multi bank
+>  	  update on the board. The installation method depends on
+>  	  the platform.
+> +
+> +config TOOLS_FWUMDATA
+> +	bool "Build fwumdata command"
+> +	default y if FWU_MULTI_BANK_UPDATE
+> +	help
+> +	  This command allows users to read, display, and modify FWU
+> +	  (Firmware Update) metadata from Linux userspace. It provides
+> +	  functionality similar to fw_printenv/fw_setenv but for FWU
+> +	  metadata. Users can view metadata, change active/previous
+> +	  bank indices, modify bank states, and set image acceptance
+> +	  flags. Configuration is done via fwumdata.config file.
+> diff --git a/tools/fwumdata_src/fwumdata.c b/tools/fwumdata_src/fwumdata.c
+> new file mode 100644
+> index 00000000000..c5b0f56842d
+> --- /dev/null
+> +++ b/tools/fwumdata_src/fwumdata.c
+> @@ -0,0 +1,854 @@
 > +// SPDX-License-Identifier: GPL-2.0+
 > +/*
-> + * FIT image loader functions using MTD read
+> + * FWU Metadata Read/Write Tool
+> + * Copyright (c) 2025, Kory Maincent <kory.maincent@bootlin.com>
 > + *
-> + * Copyright (C) 2026 Texas Instruments Incorporated - http://www.ti.com=
-/
-> + *	Apurva Nandan <a-nandan@ti.com>
+> + * Tool to read, display, and modify FWU (Firmware Update) metadata
+> + * from Linux userspace. Similar to fw_printenv/fw_setenv for U-Boot
+> + * environment, but for FWU metadata.
+> + *
+> + * Usage:
+> + *   fwumdata                          - Print all metadata
+> + *   fwumdata -u                       - Print metadata and update it if CRC corrupted
+> + *   fwumdata -c <config>              - Use custom config file
+> + *   fwumdata -a <bank>                - Set active bank
+> + *   fwumdata -p <bank>                - Set previous bank
+> + *   fwumdata -s <bank> <state>        - Set bank state (V2 only)
+> + *   fwumdata -i <id> -b <bank> -A     - Accept image
+> + *   fwumdata -i <id> -b <bank> -C     - Clear image acceptance
+> + *   fwumdata -i <id> -b <bank>
+> + *            -B <num_banks>
+> + *            -I <num_images> -C       - Clear image acceptance (V1 only)
+> + *   fwumdata -l                       - List detailed info with GUIDs
 > + */
-> +#include <config.h>
-> +#include <image.h>
-> +#include <log.h>
-> +#include <spl.h>
-> +#include <asm/io.h>
-> +#include <mtd.h>
 > +
-> +uint32_t __weak spl_mtd_get_uboot_offs(void)
+> +#include <errno.h>
+> +#include <getopt.h>
+> +#include <stdio.h>
+> +#include <unistd.h>
+> +#include <mtd/mtd-user.h>
+> +#include <sys/ioctl.h>
+> +#include <u-boot/crc.h>
+> +#include "fwumdata.h"
+> +
+> +/* Device configuration */
+> +struct fwumdata_device {
+> +	const char *devname;
+> +	long long devoff;
+> +	unsigned long mdata_size;
+> +	unsigned long erase_size;
+> +	int fd;
+> +	bool is_mtd;
+> +};
+> +
+> +/* Global state */
+> +static struct fwumdata_device devices[2];  /* Primary and secondary */
+> +static struct fwu_mdata *mdata;
+> +static int have_redundant;
+> +static struct fwu_mdata *valid_mdata;
+> +static bool mdata_mod;
+> +static const char *config_file;
+> +static int nbanks, nimages; /* For V1 only */
+> +static const char * const default_config_files[] = {
+> +	"./fwumdata.config",
+> +	"/etc/fwumdata.config",
+> +	NULL
+> +};
+> +
+> +/* GUID/UUID utilities */
+> +static void guid_to_string(const struct efi_guid *guid, char *str)
 > +{
-> +	return CONFIG_SYS_MTD_U_BOOT_OFFS;
-
-NIT: The symbol is used here but is not added until 4/7 of the series.
-
+> +	sprintf(str, "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x",
+> +		guid->time_high, guid->time_low, guid->reserved,
+> +		guid->family, guid->node[0],
+> +		guid->node[1], guid->node[2], guid->node[3],
+> +		guid->node[4], guid->node[5], guid->node[6]);
 > +}
 > +
-> +static ulong spl_mtd_fit_read(struct spl_load_info *load, ulong offs,
-> +			      ulong size, void *dst)
+> +/* Config file parsing */
+> +static int parse_config(const char *fname)
 > +{
-> +	struct mtd_info *mtd =3D load->priv;
-> +	int err;
-> +	size_t ret_len;
+> +	size_t linesize = 0;
+> +	char *line = NULL;
+> +	char *devname;
+> +	int i = 0;
+> +	FILE *fp;
+> +	int rc;
 > +
-> +	err =3D mtd_read(mtd, offs, size, &ret_len, dst);
-> +	if (!err)
-> +		return ret_len;
+> +	fp = fopen(fname, "r");
+> +	if (!fp)
+> +		return -ENOENT;
+> +
+> +	while (i < 2 && getline(&line, &linesize, fp) != -1) {
+> +		/* Skip comments and empty lines */
+> +		if (line[0] == '#' || line[0] == '\n')
+> +			continue;
+> +
+> +		rc = sscanf(line, "%ms %lli %lx %lx",
+> +			    &devname,
+> +			    &devices[i].devoff,
+> +			    &devices[i].mdata_size,
+> +			    &devices[i].erase_size);
+> +
+> +		if (rc < 3) {
+> +			free(devname);
+> +			continue;
+> +		}
+> +
+> +		if (rc < 4)
+> +			devices[i].erase_size = devices[i].mdata_size;
+> +
+> +		devices[i].devname = devname;
+> +		i++;
+> +	}
+> +
+> +	free(line);
+> +	fclose(fp);
+> +
+> +	if (i == 2) {
+> +		have_redundant = true;
+> +		if (devices[0].mdata_size != devices[1].mdata_size) {
+> +			fprintf(stderr,
+> +				"Size mismatch between the two metadata\n");
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	if (!i) {
+> +		fprintf(stderr,
+> +			"Can't read config %s content\n", fname);
+> +		return -EINVAL;
+> +	}
 > +
 > +	return 0;
 > +}
 > +
-> +struct mtd_info *spl_prepare_mtd(uint boot_device)
+> +static int find_parse_config(void)
 > +{
-> +	struct mtd_info *mtd =3D NULL;
+> +	int i;
 > +
-> +	mtd_probe_devices();
+> +	if (config_file)
+> +		return parse_config(config_file);
 > +
-> +	switch (boot_device) {
-> +	case BOOT_DEVICE_SPINAND:
-> +		mtd =3D get_mtd_device_nm("spi-nand0");
-> +		break;
-> +	default:
-> +		puts(PHASE_PROMPT "Unsupported MTD Boot Device!\n");
-> +		break;
+> +	for (i = 0; default_config_files[i]; i++) {
+> +		int ret;
+> +
+> +		ret = parse_config(default_config_files[i]);
+> +		if (ret == -ENOENT)
+> +			continue;
+> +		if (ret)
+> +			return ret;
+> +
+> +		config_file = default_config_files[i];
+> +		return 0;
 > +	}
 > +
-> +	return mtd;
+> +	fprintf(stderr, "Error: Cannot find config file\n");
+> +	return -ENOENT;
 > +}
 > +
-> +int spl_mtd_load(struct spl_image_info *spl_image,
-> +		 struct mtd_info *mtd, struct spl_boot_device *bootdev)
+> +static int open_device(struct fwumdata_device *dev)
 > +{
-> +	int err;
-> +	struct legacy_img_hdr *header;
-> +	__maybe_unused struct spl_load_info load;
-> +	size_t ret_len;
+> +	if (strstr(dev->devname, "/dev/mtd"))
+> +		dev->is_mtd = true;
 > +
-> +	header =3D spl_get_load_buffer(0, sizeof(*header));
-> +
-> +	err =3D mtd_read(mtd, spl_mtd_get_uboot_offs(), sizeof(*header),
-> +		       &ret_len, (void *)header);
-> +	if (err)
-> +		return err;
-> +
-> +	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
-> +	    image_get_magic(header) =3D=3D FDT_MAGIC) {
-> +		debug("Found FIT\n");
-> +		load.priv =3D mtd;
-> +		load.bl_len =3D 1;
-> +		load.read =3D spl_mtd_fit_read;
-> +		return spl_load_simple_fit(spl_image, &load,
-> +					   spl_mtd_get_uboot_offs(), header);
-> +	} else if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER)) {
-> +		load.priv =3D mtd;
-> +		load.bl_len =3D 1;
-> +		load.read =3D spl_mtd_fit_read;
-> +		return spl_load_imx_container(spl_image, &load,
-> +					      spl_mtd_get_uboot_offs());
-> +	} else {
-> +		err =3D spl_parse_image_header(spl_image, bootdev, header);
-> +		if (err)
-> +			return err;
-> +		return mtd_read(mtd, spl_mtd_get_uboot_offs(), spl_image->size,
-> +				&ret_len, (void *)(ulong)spl_image->load_addr);
+> +	dev->fd = open(dev->devname, O_RDWR | O_SYNC);
+> +	if (dev->fd < 0) {
+> +		fprintf(stderr, "Cannot open %s: %s\n", dev->devname,
+> +			strerror(errno));
+> +		return -ENODEV;
 > +	}
 > +
-> +	return -EINVAL;
+> +	return 0;
 > +}
-> diff --git a/common/spl/spl_mtd_nand.c b/common/spl/spl_mtd_nand.c
-> new file mode 100644
-> index 00000000000..9bc6ff86ee8
-> --- /dev/null
-> +++ b/common/spl/spl_mtd_nand.c
-> @@ -0,0 +1,31 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * FIT image loader using MTD read
-> + *
-> + * Copyright (C) 2026 Texas Instruments Incorporated - http://www.ti.com=
-/
-> + *	Anurag Dutta <a-dutta@ti.com>
-> + */
-> +#include <config.h>
-> +#include <image.h>
-> +#include <log.h>
-> +#include <spl.h>
-> +#include <asm/io.h>
-> +#include <mtd.h>
 > +
-> +static int spl_mtd_load_image(struct spl_image_info *spl_image,
-> +			      struct spl_boot_device *bootdev)
+> +static int mtd_erase(int fd, unsigned long offset, unsigned long size)
 > +{
-> +	struct mtd_info *mtd;
+> +	struct erase_info_user erase;
 > +	int ret;
 > +
-> +	mtd =3D spl_prepare_mtd(BOOT_DEVICE_SPINAND);
-> +	if (IS_ERR_OR_NULL(mtd)) {
-> +		printf("MTD device %s not found, ret %ld\n", "spi-nand",
-> +		       PTR_ERR(mtd));
+> +	erase.start = offset;
+> +	erase.length = size;
+> +
+> +	ret = ioctl(fd, MEMERASE, &erase);
+> +	if (ret < 0) {
+> +		fprintf(stderr, "MTD erase failed: %s\n", strerror(errno));
+> +		return -errno;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int read_device(struct fwumdata_device *dev, void *buf, size_t count)
+> +{
+> +	if (lseek(dev->fd, dev->devoff, SEEK_SET) < 0) {
+> +		fprintf(stderr, "Seek failed: %s\n", strerror(errno));
+> +		return -errno;
+> +	}
+> +
+> +	if (read(dev->fd, buf, count) < 0) {
+> +		fprintf(stderr, "Read failed: %s\n", strerror(errno));
+> +		return -errno;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int write_device(struct fwumdata_device *dev, const void *buf,
+> +			size_t count)
+> +{
+> +	int ret;
+> +
+> +	/* Erase if MTD device */
+> +	if (dev->is_mtd) {
+> +		ret = mtd_erase(dev->fd, dev->devoff, dev->erase_size);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	if (lseek(dev->fd, dev->devoff, SEEK_SET) < 0) {
+> +		fprintf(stderr, "Seek failed: %s\n", strerror(errno));
+> +		return -errno;
+> +	}
+> +
+> +	if (write(dev->fd, buf, count) < 0) {
+> +		fprintf(stderr, "Write failed: %s\n", strerror(errno));
+> +		return -errno;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/* Metadata operations */
+> +static int validate_crc(struct fwu_mdata *mdata, size_t size)
+> +{
+> +	u32 calc_crc, stored_crc;
+> +
+> +	stored_crc = mdata->crc32;
+> +	calc_crc = crc32(0, (const u8 *)&mdata->version, size - sizeof(u32));
+> +
+> +	if (calc_crc != stored_crc) {
+> +		fprintf(stderr,
+> +			"CRC mismatch: calculated 0x%08x, stored 0x%08x\n",
+> +			calc_crc, stored_crc);
+> +		if (mdata->version == 1)
+> +			fprintf(stderr,
+> +				"Metadata is V1, this may be size description issue\n");
+> +		return -1;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static void update_crc(struct fwu_mdata *mdata, size_t size)
+> +{
+> +	mdata->crc32 = crc32(0, (const u8 *)&mdata->version, size - sizeof(u32));
+> +}
+> +
+> +static int read_one_metadata(int mdata_id, size_t size)
+> +{
+> +	int ret;
+> +
+> +	ret = open_device(&devices[mdata_id]);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = read_device(&devices[mdata_id], &mdata[mdata_id], size);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (mdata[mdata_id].version != 1 && mdata[mdata_id].version != 2) {
+> +		fprintf(stderr, "Invalid metadata %d version: %u\n",
+> +			mdata_id, mdata[mdata_id].version);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int read_metadata(bool update)
+> +{
+> +	size_t alloc_size;
+> +	int ret;
+> +
+> +	/* Allocate initial buffer */
+> +	alloc_size = devices[0].mdata_size;
+> +	mdata = calloc(have_redundant ? 2 : 1, alloc_size);
+> +	if (!mdata) {
+> +		fprintf(stderr, "Memory allocation failed\n");
+> +		return -ENOMEM;
+> +	}
+> +
+> +	ret = read_one_metadata(0, alloc_size);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (validate_crc(&mdata[0], alloc_size) < 0) {
+> +		fprintf(stderr,
+> +			"Warning: Primary metadata CRC validation failed\n");
+> +		mdata_mod = update;
+> +	} else {
+> +		valid_mdata = &mdata[0];
+> +	}
+> +
+> +	if (have_redundant) {
+> +		ret = read_one_metadata(1, alloc_size);
+> +		if (ret)
+> +			return ret;
+> +
+> +		if (validate_crc(&mdata[1], alloc_size) < 0) {
+> +			fprintf(stderr,
+> +				"Warning: Secondary metadata CRC validation failed\n");
+> +			mdata_mod = update;
+> +		} else if (valid_mdata && mdata[0].crc32 != mdata[1].crc32) {
+> +			fprintf(stderr,
+> +				"Metadatas valid but not equal, use first one as default\n");
+> +			mdata_mod = update;
+> +		} else {
+> +			valid_mdata = &mdata[1];
+> +		}
+> +	}
+> +
+> +	if (!valid_mdata) {
+> +		fprintf(stderr,
+> +			"No metadata valid, use first one as default\n");
+> +		mdata_mod = update;
+> +		valid_mdata = &mdata[0];
+> +	}
+> +
+> +	if (valid_mdata->version == 2) {
+> +		struct fwu_mdata_ext *mdata_ext;
+> +
+> +		mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
+> +		if (mdata_ext->metadata_size != alloc_size) {
+> +			fprintf(stderr,
+> +				"Metadata real size 0x%x mismatch with the config 0x%zx\n",
+> +				mdata_ext->metadata_size, alloc_size);
+> +				return -EINVAL;
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int write_metadata(void)
+> +{
+> +	size_t write_size = devices[0].mdata_size;
+> +	int ret;
+> +
+> +	if (!mdata_mod)
+> +		return 0;
+> +
+> +	/* Update CRC */
+> +	update_crc(valid_mdata, write_size);
+> +
+> +	/* Write primary */
+> +	ret = write_device(&devices[0], valid_mdata, write_size);
+> +	if (ret < 0) {
+> +		fprintf(stderr, "Failed to write primary metadata\n");
+> +		return ret;
+> +	}
+> +
+> +	/* Write secondary if redundant */
+> +	if (have_redundant) {
+> +		ret = write_device(&devices[1], valid_mdata, write_size);
+> +		if (ret < 0) {
+> +			fprintf(stderr, "Failed to write secondary metadata\n");
+> +			return -1;
+> +		}
+> +	}
+> +
+> +	printf("FWU metadata updated successfully\n");
+> +	mdata_mod = 0;
+> +
+> +	return 0;
+> +}
+> +
+> +/* Display functions */
+> +static const char *bank_state_to_string(u8 state)
+> +{
+> +	switch (state) {
+> +	case FWU_BANK_ACCEPTED:
+> +		return "accepted";
+> +	case FWU_BANK_VALID:
+> +		return "valid";
+> +	case FWU_BANK_INVALID:
+> +		return "invalid";
+> +	default:
+> +		return "unknown";
+> +	}
+> +}
+> +
+> +static void print_metadata_summary(void)
+> +{
+> +	int i;
+> +
+> +	printf("FWU Metadata:\n");
+> +	printf("\tVersion:            %u\n", valid_mdata->version);
+> +	printf("\tActive Index:       %u\n", valid_mdata->active_index);
+> +	printf("\tPrevious Index:     %u\n", valid_mdata->previous_active_index);
+> +	printf("\tCRC32:              0x%08x\n", valid_mdata->crc32);
+> +
+> +	if (valid_mdata->version == 2) {
+> +		struct fwu_fw_store_desc *fw_desc;
+> +		struct fwu_mdata_ext *mdata_ext;
+> +
+> +		mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
+> +		printf("\tMetadata Size:      %u bytes\n", mdata_ext->metadata_size);
+> +		printf("\tDescriptor Offset:  %u\n", mdata_ext->desc_offset);
+> +		printf("\tBank States:\n");
+> +
+> +		fw_desc = fwu_get_fw_desc(valid_mdata);
+> +		for (i = 0; i < fw_desc->num_banks && i < MAX_BANKS_V2; i++) {
+> +			printf("\t\tBank %d: %s (0x%02x)\n", i,
+> +			       bank_state_to_string(mdata_ext->bank_state[i]),
+> +			       mdata_ext->bank_state[i]);
+> +		}
+> +	}
+> +}
+> +
+> +static void print_metadata_detailed(void)
+> +{
+> +	struct fwu_fw_store_desc *fw_desc = NULL;
+> +	struct fwu_image_bank_info *bank_info;
+> +	struct fwu_image_entry *img_entry;
+> +	int num_images, num_banks;
+> +	char guid_str[64];
+> +	int i, j;
+> +
+> +	print_metadata_summary();
+> +
+> +	if (valid_mdata->version == 1) {
+> +		num_images = nimages;
+> +		num_banks = nbanks;
+> +	} else {
+> +		fw_desc = fwu_get_fw_desc(valid_mdata);
+> +		num_images = fw_desc->num_images;
+> +		num_banks = fw_desc->num_banks;
+> +	}
+> +
+> +	if (fw_desc) {
+> +		printf("\n\tFirmware Store Descriptor:\n");
+> +		printf("\t\tNumber of Banks:       %u\n", num_banks);
+> +		printf("\t\tNumber of Images:      %u\n", num_images);
+> +		printf("\t\tImage Entry Size:      %u\n", fw_desc->img_entry_size);
+> +		printf("\t\tBank Info Entry Size:  %u\n", fw_desc->bank_info_entry_size);
+> +	}
+> +
+> +	printf("\n\tImages:\n");
+> +	for (i = 0; i < num_images; i++) {
+> +		img_entry = fwu_get_image_entry(valid_mdata, valid_mdata->version,
+> +						num_banks, i);
+> +
+> +		printf("\t\tImage %d:\n", i);
+> +
+> +		guid_to_string(&img_entry->image_type_guid, guid_str);
+> +		printf("\t\t\tImage Type GUID:  %s\n", guid_str);
+> +
+> +		guid_to_string(&img_entry->location_guid, guid_str);
+> +		printf("\t\t\tLocation GUID:    %s\n", guid_str);
+> +
+> +		printf("\t\t\tBanks:\n");
+> +		for (j = 0; j < num_banks; j++) {
+> +			bank_info = fwu_get_bank_info(valid_mdata,
+> +						      valid_mdata->version,
+> +						      num_banks, i, j);
+> +
+> +			guid_to_string(&bank_info->image_guid, guid_str);
+> +			printf("\t\t\t\tBank %d:\n", j);
+> +			printf("\t\t\t\t\tImage GUID:  %s\n", guid_str);
+> +			printf("\t\t\t\t\tAccepted:    %s (%u)\n",
+> +			       (bank_info->accepted & FWU_IMAGE_ACCEPTED) ? "yes" : "no",
+> +			       bank_info->accepted);
+> +		}
+> +	}
+> +}
+> +
+> +/* Modification functions */
+> +static int set_active_index(int bank)
+> +{
+> +	struct fwu_fw_store_desc *fw_desc;
+> +	int num_banks;
+> +
+> +	if (valid_mdata->version == 2) {
+> +		fw_desc = fwu_get_fw_desc(valid_mdata);
+> +		num_banks = fw_desc->num_banks;
+> +	} else {
+> +		num_banks = nbanks;
+> +	}
+> +
+> +	if (bank < 0 || bank >= num_banks) {
+> +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
+> +			bank, num_banks - 1);
 > +		return -EINVAL;
 > +	}
 > +
-> +	return spl_mtd_load(spl_image, mtd, bootdev);
+> +	if (valid_mdata->active_index == bank)
+> +		return 0;
+> +
+> +	valid_mdata->active_index = bank;
+> +	mdata_mod = 1;
+> +
+> +	printf("Active bank set to %d\n", bank);
+> +	return 0;
 > +}
 > +
-> +SPL_LOAD_IMAGE_METHOD("SPINAND", 0, BOOT_DEVICE_SPINAND, spl_mtd_load_im=
-age);
-> diff --git a/include/spl.h b/include/spl.h
-> index 06dc28362d3..c4442be4fdb 100644
-> --- a/include/spl.h
-> +++ b/include/spl.h
-> @@ -1219,4 +1219,22 @@ int spl_reloc_prepare(struct spl_image_info *image=
-, ulong *addrp);
->   */
->  int spl_reloc_jump(struct spl_image_info *image, spl_jump_to_image_t fun=
-c);
-> =20
-> +/* SPL MTD functions */
-> +/**
-> + * spl_prepare_mtd() - Prepares the mtd for the corresponidng boot devic=
-e
-> + *
-> + * @boot_device: A number indicating the BOOT_DEVICE type
-> + */
-> +struct mtd_info *spl_prepare_mtd(uint boot_device);
+> +static int set_previous_index(int bank)
+> +{
+> +	struct fwu_fw_store_desc *fw_desc;
+> +	int num_banks;
 > +
-> +/**
-> + * spl_mtd_load() - FIT Image loader
-> + *
-> + * @spl_image: SPL image to jump to
-> + * @mtd: MTD device descriptor with geometry, flags, and read/write/eras=
-e function pointers
-> + * @bootdev: boot device used by SPL
-> + */
-> +int spl_mtd_load(struct spl_image_info *spl_image, struct mtd_info *mtd,
-> +		 struct spl_boot_device *bootdev);
+> +	if (valid_mdata->version == 2) {
+> +		fw_desc = fwu_get_fw_desc(valid_mdata);
+> +		num_banks = fw_desc->num_banks;
+> +	} else {
+> +		num_banks = nbanks;
+> +	}
 > +
->  #endif
+> +	if (bank < 0 || bank >= num_banks) {
+> +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
+> +			bank, num_banks - 1);
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (valid_mdata->previous_active_index == bank)
+> +		return 0;
+> +
+> +	valid_mdata->previous_active_index = bank;
+> +	mdata_mod = 1;
+> +
+> +	printf("Previous bank set to %d\n", bank);
+> +	return 0;
+> +}
+> +
+> +static int set_image_accepted(int image, int bank, int accept)
+> +{
+> +	struct fwu_image_bank_info *bank_info;
+> +	int num_images, num_banks;
+> +
+> +	if (valid_mdata->version == 1) {
+> +		num_images = nimages;
+> +		num_banks = nbanks;
+> +	} else {
+> +		struct fwu_fw_store_desc *fw_desc;
+> +
+> +		fw_desc = fwu_get_fw_desc(valid_mdata);
+> +		num_images = fw_desc->num_images;
+> +		num_banks = fw_desc->num_banks;
+> +	}
+> +
+> +	if (bank < 0 || bank >= num_banks) {
+> +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
+> +			bank, num_banks - 1);
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (image < 0 || image >= num_images) {
+> +		fprintf(stderr, "Error: Invalid image %d (must be 0-%d)\n",
+> +			image, num_images - 1);
+> +		return -EINVAL;
+> +	}
+> +
+> +	bank_info = fwu_get_bank_info(valid_mdata, valid_mdata->version,
+> +				      num_banks, image, bank);
+> +	if (accept == bank_info->accepted)
+> +		return 0;
+> +
+> +	if (accept) {
+> +		bank_info->accepted = FWU_IMAGE_ACCEPTED;
+> +	} else {
+> +		bank_info->accepted = 0;
+> +
+> +		/* According to the spec: bank_state[index] have to be set
+> +		 * to invalid before any content in the img_bank_info[index]
+> +		 * is overwritten.
+> +		 */
+> +		if (valid_mdata->version == 2) {
+> +			struct fwu_mdata_ext *mdata_ext;
+> +
+> +			mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
+> +			mdata_ext->bank_state[bank] = FWU_BANK_INVALID;
+> +		}
+> +	}
+> +
+> +	mdata_mod = 1;
+> +	printf("Image %d in bank %d: acceptance %s\n",
+> +	       image, bank, accept ? "set" : "cleared");
+> +
+> +	return 0;
+> +}
+> +
+> +static int set_bank_state(int bank, const char *state_str)
+> +{
+> +	struct fwu_fw_store_desc *fw_desc;
+> +	struct fwu_mdata_ext *mdata_ext;
+> +	u8 state;
+> +	int i;
+> +
+> +	if (valid_mdata->version != 2) {
+> +		fprintf(stderr,
+> +			"Error: Bank state is only supported in V2 metadata\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	fw_desc = fwu_get_fw_desc(valid_mdata);
+> +	mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
+> +
+> +	if (bank < 0 || bank >= fw_desc->num_banks || bank >= MAX_BANKS_V2) {
+> +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
+> +			bank, fw_desc->num_banks - 1);
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Parse state string */
+> +	if (!strcmp(state_str, "accepted")) {
+> +		state = FWU_BANK_ACCEPTED;
+> +	} else if (!strcmp(state_str, "valid")) {
+> +		state = FWU_BANK_VALID;
+> +	} else if (!strcmp(state_str, "invalid")) {
+> +		state = FWU_BANK_INVALID;
+> +	} else {
+> +		fprintf(stderr,
+> +			"Error: Invalid state '%s' (must be accepted/valid/invalid)\n",
+> +			state_str);
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (mdata_ext->bank_state[bank] == state)
+> +		return 0;
+> +
+> +	/* If a bank is set in a accepted state all firmware images in
+> +	 * that bank must be marked as accepted as described in the spec.
+> +	 */
+> +	if (state == FWU_BANK_ACCEPTED) {
+> +		for (i = 0; i < fw_desc->num_images; i++) {
+> +			int ret;
+> +
+> +			ret = set_image_accepted(i, bank, true);
+> +			if (ret)
+> +				return ret;
+> +		}
+> +	}
+> +	mdata_ext->bank_state[bank] = state;
+> +	mdata_mod = 1;
+> +
+> +	printf("Bank %d state set to %s (0x%02x)\n", bank, state_str, state);
+> +	return 0;
+> +}
+> +
+> +static int metadata_v1_validate_size(void)
+> +{
+> +	int calc_size;
+> +
+> +	calc_size = sizeof(struct fwu_mdata) +
+> +		    (sizeof(struct fwu_image_entry) +
+> +		     sizeof(struct fwu_image_bank_info) * nbanks) * nimages;
+> +
+> +	if (devices[0].mdata_size != calc_size) {
+> +		fprintf(stderr,
+> +			"Metadata calculate size (-B and -I options) 0x%x mismatch with the config 0x%zx\n",
+> +			calc_size, devices[0].mdata_size);
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/* Command-line interface */
+> +static void print_usage(void)
+> +{
+> +	fprintf(stderr, "Usage: fwumdata [options]\n\n");
+> +	fprintf(stderr, "Options:\n"
+> +		"\t-c, --config <file>         Use custom config file, defaults:\n"
+> +		"\t                              ./fwumdata.config or /etc/fwumdata.config\n"
+> +		"\t-l, --list                  List detailed metadata with GUIDs\n"
+> +		"\t-a, --active <bank>         Set active bank index\n"
+> +		"\t-p, --previous <bank>       Set previous bank index\n"
+> +		"\t-s, --state <bank> <state>  Set bank state (V2 only)\n"
+> +		"\t                              state: accepted|valid|invalid\n"
+> +		"\t-i, --image <id>            Image number (for -A/-C)\n"
+> +		"\t-b, --bank <bank>           Bank number (for -A/-C)\n"
+> +		"\t-A, --accept                Accept image (requires -i and -b)\n"
+> +		"\t-C, --clear                 Clear image acceptance (requires -i and -b)\n"
+> +		"\t-u, --update                Update metadata if there is a checksum issue\n"
+> +		"\t-B, --nbanks <num_banks>    Number of banks (required for V1 metadata)\n"
+> +		"\t-I, --nimages <num_images>  Number of images (required for V1 metadata)\n"
+> +		"\t-h, --help                  Print this help\n\n");
+> +	fprintf(stderr, "Config file format (fwumdata.config):\n"
+> +		"\t# Device Name      Device Offset    Metadata Size    Erase Size\n"
+> +		"\t/dev/mtd0          0x0              0x78             0x1000\n"
+> +		"\t/dev/mtd1          0x0              0x78             0x1000\n\n");
+> +	fprintf(stderr, "Examples:\n"
+> +		"\tfwumdata                              # Print metadata summary\n"
+> +		"\tfwumdata -l                           # Print detailed metadata\n"
+> +		"\tfwumdata -a 1                         # Set active bank to 1\n"
+> +		"\tfwumdata -s 1 accepted                # Set bank 1 to accepted state\n"
+> +		"\tfwumdata -i 0 -b 0 -A                 # Accept image in bank 0\n"
+> +		"\tfwumdata -B 2 -I 2 -i 1 -b 1 -A -l    # Accept image 1 in bank 1 with metadata V1\n");
+> +}
+> +
+> +int main(int argc, char *argv[])
+> +{
+> +	char *bank_state_str = NULL;
+> +	bool list_detailed = false;
+> +	int bank_state_num = -1;
+> +	int active_index = -1;
+> +	int bank_id = -1;
+> +	int prev_index = -1;
+> +	bool do_accept = 0;
+> +	bool do_clear = 0;
+> +	bool do_update = 0;
+> +	int image_id = -1;
+> +	int ret = 0;
+> +	int opt;
+> +
+> +	static struct option long_options[] = {
+> +		{"config", required_argument, 0, 'c'},
+> +		{"list", no_argument, 0, 'l'},
+> +		{"active", required_argument, 0, 'a'},
+> +		{"previous", required_argument, 0, 'p'},
+> +		{"state", required_argument, 0, 's'},
+> +		{"image", required_argument, 0, 'i'},
+> +		{"bank", required_argument, 0, 'b'},
+> +		{"accept", no_argument, 0, 'A'},
+> +		{"clear", no_argument, 0, 'C'},
+> +		{"update", no_argument, 0, 'u'},
+> +		{"nbanks", required_argument, 0, 'B'},
+> +		{"nimages", required_argument, 0, 'I'},
+> +		{"help", no_argument, 0, 'h'},
+> +		{0, 0, 0, 0}
+> +	};
+> +
+> +	/* Parse arguments */
+> +	while ((opt = getopt_long(argc, argv, "c:la:p:s:i:b:ACuB:I:h", long_options, NULL)) != -1) {
+> +		switch (opt) {
+> +		case 'c':
+> +			config_file = optarg;
+> +			break;
+> +		case 'l':
+> +			list_detailed = 1;
+> +			break;
+> +		case 'a':
+> +			active_index = atoi(optarg);
+> +			break;
+> +		case 'p':
+> +			prev_index = atoi(optarg);
+> +			break;
+> +		case 's':
+> +			bank_state_num = atoi(optarg);
+> +			if (optind < argc && argv[optind][0] != '-') {
+> +				bank_state_str = argv[optind++];
+> +			} else {
+> +				fprintf(stderr,
+> +					"Error: -s requires bank number and state\n");
+> +				return 1;
+> +			}
+> +			break;
+> +		case 'i':
+> +			image_id = atoi(optarg);
+> +			break;
+> +		case 'b':
+> +			bank_id = atoi(optarg);
+> +			break;
+> +		case 'A':
+> +			do_accept = 1;
+> +			break;
+> +		case 'C':
+> +			do_clear = 1;
+> +			break;
+> +		case 'u':
+> +			do_update = 1;
+> +			break;
+> +		case 'B':
+> +			nbanks = atoi(optarg);
+> +			break;
+> +		case 'I':
+> +			nimages = atoi(optarg);
+> +			break;
+> +		case 'h':
+> +			print_usage();
+> +			return 0;
+> +		default:
+> +			print_usage();
+> +			return 1;
+> +		}
+> +	}
+> +
+> +	ret = find_parse_config();
+> +	if (ret < 0) {
+> +		fprintf(stderr, "Error: Cannot read configuration\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = read_metadata(do_update);
+> +	if (ret < 0) {
+> +		fprintf(stderr, "Error: Cannot read metadata\n");
+> +		goto cleanup;
+> +	}
+> +
+> +	if (valid_mdata->version == 1) {
+> +		ret = metadata_v1_validate_size();
+> +		if (ret)
+> +			goto cleanup;
+> +	}
+> +
+> +	/* Perform operations */
+> +	if (active_index >= 0) {
+> +		ret = set_active_index(active_index);
+> +		if (ret < 0)
+> +			goto cleanup;
+> +	}
+> +
+> +	if (prev_index >= 0) {
+> +		ret = set_previous_index(prev_index);
+> +		if (ret < 0)
+> +			goto cleanup;
+> +	}
+> +
+> +	if (do_accept || do_clear) {
+> +		if (image_id < 0 || bank_id < 0) {
+> +			fprintf(stderr,
+> +				"Error: -A/-C requires both -i <guid> and -b <bank>\n");
+> +			ret = -EINVAL;
+> +			goto cleanup;
+> +		}
+> +
+> +		ret = set_image_accepted(image_id, bank_id, do_accept);
+> +		if (ret < 0)
+> +			goto cleanup;
+> +	}
+> +
+> +	if (bank_state_num >= 0 && bank_state_str) {
+> +		ret = set_bank_state(bank_state_num, bank_state_str);
+> +		if (ret < 0)
+> +			goto cleanup;
+> +	}
+> +
+> +	/* Write back if modified */
+> +	if (mdata_mod) {
+> +		ret = write_metadata();
+> +		if (ret)
+> +			goto cleanup;
+> +	}
+> +
+> +	/* Display metadata if no modifications or list requested */
+> +	if (list_detailed)
+> +		print_metadata_detailed();
+> +	else
+> +		print_metadata_summary();
+> +
+> +cleanup:
+> +	/* Close devices and free memory */
+> +	if (devices[0].fd)
+> +		close(devices[0].fd);
+> +	if (devices[1].fd)
+> +		close(devices[1].fd);
+> +
+> +	free(mdata);
+> +
+> +	for (int i = 0; i < 2; i++) {
+> +		if (devices[i].devname)
+> +			free((void *)devices[i].devname);
+> +	}
+> +
+> +	return ret;
+> +}
+> diff --git a/tools/fwumdata_src/fwumdata.config b/tools/fwumdata_src/fwumdata.config
+> new file mode 100644
+> index 00000000000..7e83f7a5909
+> --- /dev/null
+> +++ b/tools/fwumdata_src/fwumdata.config
+> @@ -0,0 +1,33 @@
+> +# FWU Metadata Configuration File
+> +#
+> +# Format: <device> <offset> <metadata_size> <erase_size>
+> +#
+> +# This file describes where the FWU metadata is stored. You can specify
+> +# up to two entries for redundant metadata copies.
+> +#
+> +# Device: MTD device (/dev/mtdX), block device (/dev/mmcblkX), or file path
+> +# Offset: Byte offset from start of device (hex with 0x prefix)
+> +# Metadata Size: Size of metadata structure in bytes (hex with 0x prefix)
+> +# Erase Size: Sector/erase block size (hex with 0x prefix, defaults to
+> +#	      metadata_size, required only for MTD device)
+> +#
+> +# Examples:
+> +#
+> +# MTD devices (NOR/NAND flash):
+> +# /dev/mtd0  0x0       0x1000  0x1000
+> +# /dev/mtd1  0x0       0x1000  0x1000
+> +#
+> +# Block device (eMMC/SD):
+> +# /dev/mmcblk0  0x100000  0x78
+> +# /dev/mmcblk0  0x101000  0x78
+> +#
+> +# or:
+> +# /dev/disk/by-partlabel/metadata1  0  0x78
+> +# /dev/disk/by-partlabel/metadata2  0  0x78
+> +#
+> +# Regular file:
+> +# /boot/fwu-mdata.bin  0x0  0x78
+> +#
+> +# Default configuration (update for your platform):
+> +/dev/mtd0  0x0  0x78  0x1000
+> +/dev/mtd1  0x0  0x78  0x1000
+> diff --git a/tools/fwumdata_src/fwumdata.h b/tools/fwumdata_src/fwumdata.h
+> new file mode 100644
+> index 00000000000..5e2c45d0fb0
+> --- /dev/null
+> +++ b/tools/fwumdata_src/fwumdata.h
+> @@ -0,0 +1,138 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (c) 2025, Kory Maincent <kory.maincent@bootlin.com>
+> + */
+> +
+> +#ifndef _FWUMDATA_H_
+> +#define _FWUMDATA_H_
+> +
+> +#include <linux/compiler_attributes.h>
+> +
+> +/* Type definitions for U-Boot compatibility */
+> +typedef uint8_t u8;
+> +typedef uint16_t u16;
+> +typedef uint32_t u32;
+> +typedef uint64_t u64;
+> +
+> +/* FWU Constants */
+> +#define FWU_IMAGE_ACCEPTED	0x1
+> +#define FWU_BANK_INVALID	(uint8_t)0xFF
+> +#define FWU_BANK_VALID		(uint8_t)0xFE
+> +#define FWU_BANK_ACCEPTED	(uint8_t)0xFC
+> +#define MAX_BANKS_V2		4
+> +
+> +/* EFI GUID structure */
+> +struct efi_guid {
+> +	u32 time_high;
+> +	u16 time_low;
+> +	u16 reserved;
+> +	u8  family;
+> +	u8  node[7];
+> +} __packed;
+> +
+> +/* FWU Metadata structures */
+> +struct fwu_image_bank_info {
+> +	struct efi_guid  image_guid;
+> +	u32 accepted;
+> +	u32 reserved;
+> +} __packed;
+> +
+> +struct fwu_image_entry {
+> +	struct efi_guid image_type_guid;
+> +	struct efi_guid location_guid;
+> +	struct fwu_image_bank_info img_bank_info[0]; /* Variable length */
+> +} __packed;
+> +
+> +struct fwu_fw_store_desc {
+> +	u8  num_banks;
+> +	u8  reserved;
+> +	u16 num_images;
+> +	u16 img_entry_size;
+> +	u16 bank_info_entry_size;
+> +	struct fwu_image_entry img_entry[0]; /* Variable length */
+> +} __packed;
+> +
+> +struct fwu_mdata {
+> +	u32 crc32;
+> +	u32 version;
+> +	u32 active_index;
+> +	u32 previous_active_index;
+> +	/* Followed by image entries or fwu_mdata_ext */
+> +} __packed;
+> +
+> +struct fwu_mdata_ext { /* V2 only */
+> +	u32 metadata_size;
+> +	u16 desc_offset;
+> +	u16 reserved1;
+> +	u8  bank_state[4];
+> +	u32 reserved2;
+> +} __packed;
+> +
+> +/* Metadata access helpers */
+> +struct fwu_image_entry *fwu_get_image_entry(struct fwu_mdata *mdata,
+> +					    int version, int num_banks,
+> +					    int img_id)
+> +{
+> +	size_t offset;
+> +
+> +	if (version == 1) {
+> +		offset = sizeof(struct fwu_mdata) +
+> +			(sizeof(struct fwu_image_entry) +
+> +			 sizeof(struct fwu_image_bank_info) * num_banks) * img_id;
+> +	} else {
+> +		/* V2: skip fwu_fw_store_desc header */
+> +		offset = sizeof(struct fwu_mdata) +
+> +			 sizeof(struct fwu_mdata_ext) +
+> +			 sizeof(struct fwu_fw_store_desc) +
+> +			 (sizeof(struct fwu_image_entry) +
+> +			  sizeof(struct fwu_image_bank_info) * num_banks) * img_id;
+> +	}
+> +
+> +	return (struct fwu_image_entry *)((char *)mdata + offset);
+> +}
+> +
+> +struct fwu_image_bank_info *fwu_get_bank_info(struct fwu_mdata *mdata,
+> +					      int version, int num_banks,
+> +					      int img_id, int bank_id)
+> +{
+> +	size_t offset;
+> +
+> +	if (version == 1) {
+> +		offset = sizeof(struct fwu_mdata) +
+> +			 (sizeof(struct fwu_image_entry) +
+> +			  sizeof(struct fwu_image_bank_info) * num_banks) * img_id +
+> +			 sizeof(struct fwu_image_entry) +
+> +			 sizeof(struct fwu_image_bank_info) * bank_id;
+> +	} else {
+> +		offset = sizeof(struct fwu_mdata) +
+> +			 sizeof(struct fwu_mdata_ext) +
+> +			 sizeof(struct fwu_fw_store_desc) +
+> +			 (sizeof(struct fwu_image_entry) +
+> +			  sizeof(struct fwu_image_bank_info) * num_banks) * img_id +
+> +			 sizeof(struct fwu_image_entry) +
+> +			 sizeof(struct fwu_image_bank_info) * bank_id;
+> +	}
+> +
+> +	return (struct fwu_image_bank_info *)((char *)mdata + offset);
+> +}
+> +
+> +struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
+> +{
+> +	size_t offset;
+> +
+> +	offset = sizeof(struct fwu_mdata) +
+> +		 sizeof(struct fwu_mdata_ext);
+> +
+> +	return (struct fwu_fw_store_desc *)((char *)mdata + offset);
+> +}
+> +
+> +struct fwu_mdata_ext *fwu_get_fw_mdata_ext(struct fwu_mdata *mdata)
+> +{
+> +	size_t offset;
+> +
+> +	offset = sizeof(struct fwu_mdata);
+> +
+> +	return (struct fwu_mdata_ext *)((char *)mdata + offset);
+> +}
+> +
+> +#endif /* _FWUMDATA_H_ */
+> diff --git a/tools/fwumdata_src/fwumdata.mk b/tools/fwumdata_src/fwumdata.mk
+> index 00f4ae50dbb..2199e43b372 100644
+> --- a/tools/fwumdata_src/fwumdata.mk
+> +++ b/tools/fwumdata_src/fwumdata.mk
+> @@ -4,4 +4,7 @@
+>  
+>  mkfwumdata-objs := fwumdata_src/mkfwumdata.o generated/lib/crc32.o
+>  HOSTLDLIBS_mkfwumdata += -luuid
+> -hostprogs-always-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
+> +hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
+> +
+> +fwumdata-objs := fwumdata_src/fwumdata.o generated/lib/crc32.o
+> +hostprogs-$(CONFIG_TOOLS_FWUMDATA) += fwumdata
+> 
+> -- 
+> 2.43.0
+> 
 
+-sughosh
