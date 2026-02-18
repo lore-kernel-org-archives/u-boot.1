@@ -4,144 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED646E9A03E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 06:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B7A5E9A03B
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 06:34:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D60A83AC5;
-	Wed, 18 Feb 2026 07:29:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A9C883AC5;
+	Wed, 18 Feb 2026 07:34:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="YQQUWI57";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="b8cwBiqr";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="W2vD3W3K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B779183B99; Wed, 18 Feb 2026 07:29:30 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 412DD83C72; Wed, 18 Feb 2026 07:34:12 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E693B83AA9
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 07:29:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7A11283AA9
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 07:34:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 61HKqbbN2784620
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 06:29:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- dek7vfVlAxKLC5HIr4Nr8V/jE0UNUIT9bX3xYly+7Gs=; b=YQQUWI575lwO1tkj
- 6FB1us8KZEBluBGMjGKwecNdtMSnTIX/LcESKgMIH1Cl1hgAm7Hy6lrHNY+iNM9Q
- 9z9U6/vHOd13ncnqWniqSuF1TrnoLR904qWNaWdceI26UT1fzzomHtrDbYz+qtKP
- Q37SD9/EcgJYkhzrRDP2GERNw14sruA1RaUt0e/F6y10lzWn8rdkj//8zNwoQtSt
- ZQ+hIOgR0Pn96CJ4K0f22jG8tw3NSupkxQxgGrEH1YjjQpqE21yp2RaK46HE8WVM
- cYZQSHRHyTpuy1EVoMVeJ01GLCV+qsIY7lNgLTX8BMNhq6BTvrg7iKxFvmQrDI0/
- 3jP9Lw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ccyrk17d5-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 06:29:25 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id
- 98e67ed59e1d1-35845fcf0f5so664563a91.0
- for <u-boot@lists.denx.de>; Tue, 17 Feb 2026 22:29:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1771396165; x=1772000965; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dek7vfVlAxKLC5HIr4Nr8V/jE0UNUIT9bX3xYly+7Gs=;
- b=b8cwBiqrgkxC9Ii9g8oNTOAFBd3xhr/fz45Hk0ZK6Yn7R7AMlCKNjbpjwhtEkMU1w8
- RyQdLrxCqi92jmAU72rK0JRXEZ4h8wmQEoHtTtbY0cnw3TMcE6/NSGHLgC1TkY3z92i8
- wFtOHvz98BIUnwj/ElovBiR6WbGBtqvuf20cpBk5mWNoGr7JGyANwBKf1+CUHKfZBF4X
- wiQ1b7w0Syxgy6hYYvZ0TDR/UjuboLoqp/9Ftm3qZxopUmi9o9mhbzPeqE8fkUIkKrio
- 2rAYdls3c59qnjzhT8RANA6Wlzn/6dgv5R9vCN9ms0mDcGSOEpCm8W23/r6CKliKz12q
- lORw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771396165; x=1772000965;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dek7vfVlAxKLC5HIr4Nr8V/jE0UNUIT9bX3xYly+7Gs=;
- b=DxROTT9aWb0wpc0CL8koV2+u0gXG6ScY9VKENgDyftw0HYTu4Jz+JBD5EvrbyeHzbB
- IjgCiHHDYY/zUcamxlQ5QExs8nXBPJyoO2A0cCbHGoYAtygR30DoP1iiA6yLqqb/M1uL
- ydfjybefCGcHXQi//gznS+ARI6vHAgul51eWBmn0mjqUH3ua40fCIz9hE4umkD88us+O
- CSG0JhSiSL9eYfJD2wbpxuIFNb/bPY19CgwkzhaJRV/B27CsafQfnI0HYLyuCi94VErQ
- KlenFGCI6OHRQ97X7ZuwFnx7uEDPe+Jr6ypDDpUX3CXthXby4upO6zRY6fR5N61gF12y
- cwHg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCViyVoSrWqxXc9mEFLTpObrJm3Z7ZoF4OQiIHc/M6CyQIlGLOGa8hNkT020PsTJraTn9NoQNk8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLoW3k3RxWDnqoEIiqnfE7sG6uqrm+d0TmxS4tx8JzVW4mA022
- tU2sfvma6U8J2j35Kv1KvycXN90nuc4SkShS6qWfX9IZMdLNTNKjClgMA399Zp4AmL+EEYlnEZK
- 0Fu0OB9LYxmI4jjJz9ICuakEDXJZNGVTNsqOnJwZWrXRsAduxKP7WNjjo
-X-Gm-Gg: AZuq6aIQNgMg3xoH730yoh0Tzad+sMJvLlxzNFGy9t9WQGDXqF3PINrkrHLWJSeQpsu
- cFAkm8UmOClVo80+8Bc40N5kEqtEp4qL3XD0dH8qbmDVEkvUiYDVaFsCVB7xDWDkORe1ByJkKXR
- sSiFS02ZQEYrnpShqVUVzWlvb+tgddTD3D7eFhZ1JDkiUy1jlhHj0ThLtmuaWjFWNr9/QLRyZsF
- So4sLAEGbbJliYJMzs55RVAtgP9SynBg0m1ci+ESstiM9SCtagDlKngdyImXW63L0lrhiZobreH
- lqnv3G+gSZgp2+8egGavMkKuh4G5OGtLaCo+L9hAaS+laGLCZoRJzU127m58Z1Q60Z7ox+9TQr1
- fiVlYvnq6guHLZJTM5frDRxS36wPlaiN83rUz3FsxI673CAA7XQllEg==
-X-Received: by 2002:a17:90a:e70f:b0:352:d0cf:9d18 with SMTP id
- 98e67ed59e1d1-35888c524b2mr807163a91.5.1771396165140; 
- Tue, 17 Feb 2026 22:29:25 -0800 (PST)
-X-Received: by 2002:a17:90a:e70f:b0:352:d0cf:9d18 with SMTP id
- 98e67ed59e1d1-35888c524b2mr807139a91.5.1771396164644; 
- Tue, 17 Feb 2026 22:29:24 -0800 (PST)
-Received: from [10.152.202.155] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-35662e537desm24093844a91.4.2026.02.17.22.29.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Feb 2026 22:29:24 -0800 (PST)
-Message-ID: <b3fad3ab-03b3-4e13-8c82-b7b6cef648b3@oss.qualcomm.com>
-Date: Wed, 18 Feb 2026 11:59:17 +0530
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SGaI+66tBbnIoIxceSMBROA5q7bQ8xY+tcWcRS8ZgM0ru9tMxFUNhEzAZQBsA57sIt0QaNYGSj+OOhv3jvj/KV1LT2OJbtcpP578gbGgvKyr2i+aoU/tlTY/doDvSijBtmdnIbrKu67YrH7S5vf4uxdxJ0/SEBGv6DrPGHvdeOwPgz2HrUmhkcSVyeOrlLkUrvf94wvXzi78rffXTUyGYszWX+M2biKUwAUX6dxFl4WUg7fWJ47BtRuHBLEzXq8Fl3pA793LXpJlDT0bsC6peW1bEwXRbZ8N636yYzRlNzIMFPae96VYUU6af1HnyYEHJ638v5bETsX1ML0WCF7TlA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nVGZIawFaGC3HGeLJEqAyM3/28XRdwWs1EYC3eRoJF4=;
+ b=okoRDl9tnZTZtJBNPXYpw1ra4E+tbXTBy1jzDm3mC6kY+NqjTSqi2xmui3lMYI0J/kL/yTzmOSDz0+wcI6HWoR0kzPiEVPh22FBSyyFdbZke01yNxiktP6mupDf0Rz7yBQsPiOavnO7m/D4vvQ8wlHiUK/x/Jg6Ks7CKWERwUfSrqjs+UAbIhtJV/TjZ/iO2N7P5ZZBCHOZoW5R4iKE4CTxIAIlKutcWAGeeNi0PBPMr8eGwGVSnOOjxCkUTcoSV9e7gfpIwMHLrCAJfrtBUutBPor25e8of7F9uFIv+F00wENsca8BKWVKDM2P778GbY1i63TvI9bEwXx8vkf3dfw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nVGZIawFaGC3HGeLJEqAyM3/28XRdwWs1EYC3eRoJF4=;
+ b=W2vD3W3KVCj977U6d6FO3J88opf9qQD7hrgakWKr7gTo/iFiy++8WR4tIcDmlxxHI6Y9m51dIJ5F4O9tZijB4wVNeLhSn3FlaVHoeKybMdi5TXTq+07+NJnHfXRItTy3TCCWon8IDrS/orLc2+qFD5Vh+a4J2pw7O7OM21OHi1g=
+Received: from DS7PR03CA0077.namprd03.prod.outlook.com (2603:10b6:5:3bb::22)
+ by PH7PR12MB7137.namprd12.prod.outlook.com (2603:10b6:510:1ed::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Wed, 18 Feb
+ 2026 06:33:40 +0000
+Received: from DS3PEPF000099DC.namprd04.prod.outlook.com
+ (2603:10b6:5:3bb:cafe::d) by DS7PR03CA0077.outlook.office365.com
+ (2603:10b6:5:3bb::22) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.13 via Frontend Transport; Wed,
+ 18 Feb 2026 06:33:40 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ DS3PEPF000099DC.mail.protection.outlook.com (10.167.17.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Wed, 18 Feb 2026 06:33:40 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 18 Feb
+ 2026 00:33:39 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 18 Feb
+ 2026 00:33:38 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Wed, 18 Feb 2026 00:33:36 -0600
+From: Padmarao Begari <padmarao.begari@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] xilinx: mbv: Update stack, heap, and OpenSBI memory
+Date: Wed, 18 Feb 2026 12:03:15 +0530
+Message-ID: <20260218063329.396968-1-padmarao.begari@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/2] firmware: psci: Refactor EFI runtime PSCI reset
- handling
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: trini@konsulko.com, ilias.apalodimas@linaro.org, sjg@chromium.org,
- michal.simek@amd.com, gabriel.dalimonte@gmail.com,
- jan.kiszka@siemens.com, paul.liu@linaro.org, j-humphreys@ti.com,
- neil.armstrong@linaro.org, me@samcday.com,
- marek.vasut+renesas@mailbox.org, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, sumit.garg@kernel.org, casey.connolly@linaro.org
-References: <20260213110527.1254098-1-aswin.murugan@oss.qualcomm.com>
- <20260213110527.1254098-2-aswin.murugan@oss.qualcomm.com>
- <CC8AE9C0-F7DA-4EED-BCA0-F739BF75ADB5@gmx.de>
-Content-Language: en-US
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <CC8AE9C0-F7DA-4EED-BCA0-F739BF75ADB5@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: -6iTCA99dwXKnaDzS9p9PGYxTiknpxFC
-X-Proofpoint-ORIG-GUID: -6iTCA99dwXKnaDzS9p9PGYxTiknpxFC
-X-Authority-Analysis: v=2.4 cv=eOweTXp1 c=1 sm=1 tr=0 ts=69955c45 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
- a=7CQSdrXTAAAA:8 a=EUspDBNiAAAA:8 a=kX0aPsMa5xAO-LAJy3AA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22 a=a-qgeE7W1pNrGK8U0ZQC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjE4MDA1NSBTYWx0ZWRfXyuOxMRCXpgT1
- XVcG2GIe4aFexEiNsJkWZPzEv+i1LoIhlsDd1GDbRbfyK9pQO83o8ooLYZzUdur49dLLMNQPfzQ
- DGzaJcetgH1atXQr2HZrUbSJ3AFKLJQlnQclY3ieT1xnSuXlGIdOTEe4tcWzhCj5S/jijOAZqKS
- sdHNvgckredk+zTKoKYLkvDDtcrKAOmT8ioFC4XWY0pQn9sNSRSs+rAp/LlpgUbsereXXcqYwKj
- by+Tx3GmUYwx+Lf1aQ7DUlmPuCyVy/al3QVuefEMSBNdJZxrRB9U5oWld3Gd4ef0HvuOLaNC8MP
- CRPOjnMRxui7Dxh874YlJPLpZ4Q+IFDpBdSl2h6T6pF5cwR8IEVmjc1tgQDG5P3YpDooUPDcKL7
- hS6niJYzn2TJfg8bmeEieqpf9PJtbAY0zDm5QPY/z30938KNnKbfG2pTnbucKYqO8WpRzGy80Ka
- nloqH5x5EpZgwySLrcQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-17_04,2026-02-16_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 bulkscore=0 clxscore=1015 phishscore=0
- malwarescore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2601150000
- definitions=main-2602180055
+Received-SPF: None (SATLEXMB03.amd.com: padmarao.begari@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DC:EE_|PH7PR12MB7137:EE_
+X-MS-Office365-Filtering-Correlation-Id: 57b1420f-f7b6-4954-d1d0-08de6eb7a77d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eDVmQ0hRTitJZXhFcTgxbTNIWElxUXpCVVU3UnFlK1UzSTZ6N0NOTGVhQndw?=
+ =?utf-8?B?UkJ1RW43SVpPN0xrZnhIM2FhVDRpd0FMRldPd0FRZ0lrclE0UThIZjBJNktP?=
+ =?utf-8?B?M3UyN3NrNGpGL0sraHBzWlRMSlJJQjlObE9mQWlXNHphY0grRm9reXc2TDFz?=
+ =?utf-8?B?blhZbFJIcjJBbStoYUJMMmlNUktMSXJvUEJ1dmJOc1lHVjkwZExKTmlGd1hG?=
+ =?utf-8?B?UkNMWHB2YllRZmZzblRSRnFsWExkR2JTSDNmd25WQUlPT2ladDFKSndrejZk?=
+ =?utf-8?B?WmppSkpQMTZ6YU43aFBHTkVIQ3VXVzh3RHE4dTU1aE1zL2hzcUtkSnVTeDdZ?=
+ =?utf-8?B?Ny9RVTViQk5BYmFadTgrZDhyTnAwSXFBMCtYakluRzdhM21aT2hkZi9CU0NQ?=
+ =?utf-8?B?dy9ub2htejUzWjZLS09IQW9URWpGUzZySHphTEhJSVlNT09ySGtYK2lqM3lD?=
+ =?utf-8?B?SFJvQUxoREJnQUxzNm9QZkdTVGUwWnFaT1FDV3hwNTQxRk8xR1pERnVXOEtM?=
+ =?utf-8?B?MTVtbzQ3WDFSR0FHTmVac2h1UWlSMTlDTHpQSHpSVVBvdlJwRzNTemM2OEpO?=
+ =?utf-8?B?UGFsamNUZktnREdybVZQNVFydlZRREZ4RjJqM1NaUFdwY29OY3hPalVmM0cx?=
+ =?utf-8?B?SFJLdyswajZNaGI1UTNTcGRyNmNkcS8vZC82NE9IUW1DTk1OOWVkQWNWQm9r?=
+ =?utf-8?B?dm9EcElidVpNQ1V0bkVvODhpOVRKeUZSM09wdnNzb3dxdVlYc1lKN296TDZn?=
+ =?utf-8?B?VlhSWGVTVjU1dVFnTFo5aXN5bi9VVHd4SXd0azJldDBTWUgxeVZvd3ZWdEZF?=
+ =?utf-8?B?VU9wK0tya2xMVlVRWFRCSVRhMDRCMXVxQ2dRSTN5Zm1TUTUrZm55aDBvYk9H?=
+ =?utf-8?B?anU3RmkzYVhwb292cWVNK1lDdU9UYmJKRm1VcmRwK1doNm9PL0wyYWZhcTlP?=
+ =?utf-8?B?L05DcHNIMWZYTlJmN0FUVGhRUlcrN3ArRnhVckdwOGVjUC9TSEpKWHFIc3Z2?=
+ =?utf-8?B?RnM4MHZncTI2VklNSUVsRnk0c01vY2Q4VnZNL0l3eUNsamduMVRoQTZzemJt?=
+ =?utf-8?B?VU1tYjhJeC9RekJ1REZ0a2NrSWJuSE5BbUdkRE1zYmFtK1gzSXZremhTdjEz?=
+ =?utf-8?B?d2lUajhsTVQxVGpKUk5oa3gxajdKMFNJc21rWGpQK0d5T1JWdTFxSHZ6T241?=
+ =?utf-8?B?TE84T1lYblplS1JCUllWUkhwbEtXbmRFYjBSSTBoM0pDYW5pKzI3ZjZhaFVT?=
+ =?utf-8?B?dFpuQVkzRW9PMGkvOEM1NmlpN1hPdzBZTEFRRFhXWngxL1BnOUxmWi9EWmVC?=
+ =?utf-8?B?ZHZaOHZWTnYwd3ZTRVNCRFdlNmVPN2Q4YkhPbVdnbllicm1mVkRDZDJrTzNy?=
+ =?utf-8?B?QUp2Ky84UWZLRzIzb3R4cERVS3VVSlo2N25JdEFzcDRhcEcvWkM4SGhaMzNE?=
+ =?utf-8?B?cER4OGRocTBwMVdlUW1zUU0xbEJSUnBoWXVMRWgzU1U2UDdjWTJLN3FFWGdx?=
+ =?utf-8?B?alhUb0lLTDNsT0M0b0F6b1dEZVJYVjlyaTFmc3VtYlR0WWF6aEU4VHp4a2Js?=
+ =?utf-8?B?OGxkL3NkTGhIL2pONUp1SXRlYmkzR3V1TUh4WGRYb0JKRmFnRytNcXFGRVdi?=
+ =?utf-8?B?ZDZDd2JWUnlLT1M2VmErZUZrZ3ZJNmo0ek15VERhWUdrM3B2eEl6dFdaZXU5?=
+ =?utf-8?B?ZittdDBzL3B6RWtrOHp4R3ZkSERqWWRlTnFDaU8wYlRETlNIUHpnQWEvRGtn?=
+ =?utf-8?B?Q1puTzdTdXNwUmhsT0NITkhsZ3h2WW0wd0VnOXo4R2tLUCtsU05PcXlqMU9V?=
+ =?utf-8?B?WFdDUlBoak9BUXF2WlNKOVRUZ1dyQkVLbzk0ei82Y1dDUWhRYXQ4U1c3Z20w?=
+ =?utf-8?B?TUdnNnBlRXZtQjVFbUVYaWNMdEVMb2ZwR0p2M0dKSFBoYk0zVVREYTViSzkw?=
+ =?utf-8?B?VlVIM3ZqbXd5eWU1R3dQM1hXZ0NYUUI2eW5Za08rRmZFTjN2V3ZPSllJZkFL?=
+ =?utf-8?B?OGREMFVTR213dkw2ZGJIVnBuVTVPMWJNRXAwSzJKTExIWlBkTXpNdCtuMXdn?=
+ =?utf-8?B?dng2c0xUaUlnbzZlbjVrd3BQWFlPM2xTNk1sbUJSQk1OaHNEU2N0eDVBdDZv?=
+ =?utf-8?B?RkxEM0hNY0piK1RuY1VSYW1qdVlwU2RxOGJmS2hNVVlzcjZ4UFhtS3VCYjRy?=
+ =?utf-8?B?U29jV2FyeEFSQTRiamZRZmpzc2t6bHFBYnVpMDIxdkQrWjhmdElsRWFNa1BM?=
+ =?utf-8?B?WkNzdldveVZkcmVVTFFvL2RubUtBPT0=?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: wl1IY/ORcupFRmdzTbZxlTPbTfHAacBnCHJR3k7wD1pWiXrWhZX4dxN6TzRhcO1gOAym4XOrlueYUSJPbDK1Z9TeWfx2ClxDMwy+/tK4ZHUhUiVKn6T8yGAVZ6STwlRXQ4tq9Y3G9SYa8ZCEWX29VDotGpg9mwnu1QNIbXKCqxRlYhm9bdULMj30etcpJ7KrBe1PNuJ9XTs7T075fFOr7DXM55M8xCeq0ZrOz2LeO67IuaUx6Ywls2rp8OKefteX3+xE31TkDmbQaKdcgNmGQAsBMw2+qeUOlquq2Vl2Kmk/bRnj7XqFdQj2VWGmzjsivDYcw0PiYc4EG81xM5uy4lj6y9mTRcE1KOAX8gNzfW6JXrJ6On3ux83QLF9w/xxwpyO2GQJH1PQlvdGyIlxwgxVPyQ9YAauvndrlxpFDQc+n+Y/KrWEEKFWV10zmh8Az
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2026 06:33:40.0494 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57b1420f-f7b6-4954-d1d0-08de6eb7a77d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DC.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7137
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,26 +164,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+A 2 MB region of DDR memory is allocated for U‑Boot SPL, with the
+heap starting at address 0x80000000 and the stack at 0x80200000.
+However, U‑Boot fails when using OpenSBI v1.8 because OpenSBI begins
+execution at 0x80100000, causing an overlap between the SPL stack
+and the malloc region.
+To resolve this conflict, the SPL heap and stack are moved to
+higher memory addresses, and OpenSBI is relocated to 0x80000000.
+The SPL heap now starts at 0x8C000000, and the stack is placed
+at 0x8F000000. The MB-V requires at least 256MB of DDR to run U-Boot.
 
-On 2/18/2026 1:44 AM, Heinrich Schuchardt wrote:
-> Am 13. Februar 2026 12:05:26 MEZ schrieb Aswin Murugan <aswin.murugan@oss.qualcomm.com>:
->> The current PSCI-based EFI runtime reset implementation is always enabled
->> when CONFIG_PSCI_RESET is set, but it does not support the extra arguments
->> required for specialized reset modes. As a result, reboot requests such as
->> bootloader mode or EDL mode are ignored and fall back to a normal reboot.
-> Are the "specialized" reset modes defined in the PSCI specification or at least compliant to it? Where can I find the description of these reset modes.
-The specialized reset modes are not defined as standard PSCI reset 
-modes, but they are supported through the *PSCI SYSTEM_RESET2* call [1], 
-which is explicitly designed for vendor‑specific reset types. 
-SYSTEM_RESET2 takes two parameters reset_type and cookie. Together, 
-these parameters enable platform firmware to handle specialized reset 
-behaviors modes such as bootloader, recovery, EDL, and others that are 
-defined by the SoC vendor.
-> If you don't want to use U-Boot's PSCI implementation, why don't you simply disable the PSCI driver?
-We still rely on the PSCI‑based reset flow in U‑Boot for normal 
-functionality, so disabling the PSCI driver entirely would not be 
-suitable for us. Our intention is only to avoid invoking the PSCI reset 
-path specifically during EFI runtime reboot requests, since those are 
-handled differently. Outside of the EFI runtime reboot case, U‑Boot 
-should continue to use its PSCI implementation as usual. [1] 
-https://developer.arm.com/documentation/den0022/fb/?lang=en Thanks, Aswin
+	_________________
+	|		|0x8FFFFFFF
+	|_______________|
+	|  SPL- Stack	|0x8F000000
+	|		|
+    	|		|
+	|  SPL - Heap	|
+	|_______________|0x8C000000
+	|		|
+	|		|
+	| Full U-Boot	|
+	|_______________|0x81200000
+	|Load FIT Image |
+	|_______________|0x80200000
+	|   OpenSBI     |
+	|_______________|0x80000000
+
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+---
+ configs/xilinx_mbv32_defconfig       | 4 ++--
+ configs/xilinx_mbv32_smode_defconfig | 2 +-
+ configs/xilinx_mbv64_smode_defconfig | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index 42dc5fb282a..0ca64b22659 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -5,7 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
+-CONFIG_SPL_STACK=0x80200000
++CONFIG_SPL_STACK=0x8F000000
+ CONFIG_SPL_TEXT_BASE=0x0
+ CONFIG_SPL_BSS_START_ADDR=0xf000
+ CONFIG_SPL_BSS_MAX_SIZE=0x1000
+@@ -31,7 +31,7 @@ CONFIG_SPL_MAX_SIZE=0xf000
+ CONFIG_SPL_HAVE_INIT_STACK=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80000000
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x8C000000
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x200000
+ # CONFIG_CMD_MII is not set
+ CONFIG_CMD_SNTP=y
+diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
+index dd1221a6904..a72f13851ac 100644
+--- a/configs/xilinx_mbv32_smode_defconfig
++++ b/configs/xilinx_mbv32_smode_defconfig
+@@ -1,5 +1,5 @@
+ #include <configs/xilinx_mbv32_defconfig>
+ 
+-CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80100000
++CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80000000
+ CONFIG_RISCV_SMODE=y
+ CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x2
+diff --git a/configs/xilinx_mbv64_smode_defconfig b/configs/xilinx_mbv64_smode_defconfig
+index 56bf0bdc7e4..d7cf108692d 100644
+--- a/configs/xilinx_mbv64_smode_defconfig
++++ b/configs/xilinx_mbv64_smode_defconfig
+@@ -1,5 +1,5 @@
+ #include <configs/xilinx_mbv64_defconfig>
+ 
+-CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80100000
++CONFIG_SPL_OPENSBI_LOAD_ADDR=0x80000000
+ CONFIG_RISCV_SMODE=y
+ CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x2
+-- 
+2.34.1
+
