@@ -4,41 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1DE3E9A03B
-	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 09:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25880E9A03E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Feb 2026 10:03:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C58483AC5;
-	Wed, 18 Feb 2026 10:56:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A17DB83AC5;
+	Wed, 18 Feb 2026 11:03:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Hit1cQhL";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AB5683C19; Wed, 18 Feb 2026 10:56:44 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 53F5E83AA9
- for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 10:56:40 +0100 (CET)
+ id EA67683C67; Wed, 18 Feb 2026 11:03:54 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7243F83AA9
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 11:03:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 66CB21477;
- Wed, 18 Feb 2026 01:56:33 -0800 (PST)
-Received: from localhost (a079122.arm.com [10.164.21.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AA5843F7F5;
- Wed, 18 Feb 2026 01:56:38 -0800 (PST)
-Date: Wed, 18 Feb 2026 15:26:35 +0530
-From: Sughosh Ganu <sughosh.ganu@arm.com>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: u-boot@lists.denx.de, jose.marinho@arm.com
-Subject: Re: [PATCH v3 5/6] tools: Add support for fwumdata tool
-Message-ID: <aZWM0_v4eUgKLTSz@a079122.arm.com>
-References: <20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com>
- <20260216-feature_fwumdata-v3-5-9ecc5b10456d@bootlin.com>
- <aZWKyl6r8BphaePp@a079122.arm.com>
+ spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k11rq60hF83DNDrdk1PhhNBw2qxQWaYUcCIAy74k9/GYcLoo5znEOYVMcYHioSfjG7oiqR4AniszNVYyfqu01DahjDmLj12YPD2tTTxZRSJfxaFY6osaF1nYbjI4RuebJWhE0FA81dtom84FHOv+K7P+KirNQKI+sZ/Al8GIK7D1+K3dQ7U37+bcVlEtlt+aSXASTlx/lbxzYbHLXy+j08dv4mW8Dnsg9s7ZNO3C4IF3k6R47XQsQAnT3TK4IHmY7e5V6dot/2Td6t9dtf9qdAfsArxw3A9sFDb1zf6wFwhesjJq7hNjc+4Us2JR/p1Ya20jQ3xzcJ6Bzxce0S+YYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fYnpgZqlwByXSlrNQHbtZjnjBzbViWviwjUr/BoCgN4=;
+ b=mbtJI/G3tqbuZDTnkqtW60RMXn/UL1wupmBjKFShAzp2Ij0YDG3hPS3YhFUjOfHp8yhoPublF1YBkoCL3O2rvaW/ucG4Cqy0UMvsoocQGZNTo2RIuHWBos0qRjOv8WLinUi6ZJV1eZiQrD24yejQfiPbU/43MNp/DSgC9qpzlmX5nc9joMzDfu/lKN65SjIU+yC4+KYIJveXnP26q1OmXPF80/xaJCitABbAPJfmDXAj66dLKl1anDQixPbGzdFEKWeUhd08bCoaNmqA9TLRnwpRwbeyYKTtQnwKS8Waz7i/3P9gbMkPxBo9LDqqrwAtB8Nnl26tWlUr6fdtoCARbg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fYnpgZqlwByXSlrNQHbtZjnjBzbViWviwjUr/BoCgN4=;
+ b=Hit1cQhLXMC0f0cyhDw5MOS72kiXiOmCQSgod7md7Qt01WktaWxd4CDCFE7t5cCFh98N+Y4vJTTVfGTXAJtpxkoeqic+EhggtApgkumAZpopC4slD9sE7yT8aCa6UYuVM4MsnlvtafDnWCropQNkjSsTqBMzEVzawxeUfzPu8Zg=
+Received: from PH7PR12MB7428.namprd12.prod.outlook.com (2603:10b6:510:203::9)
+ by DS0PR12MB8503.namprd12.prod.outlook.com (2603:10b6:8:15a::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.15; Wed, 18 Feb
+ 2026 10:03:45 +0000
+Received: from PH7PR12MB7428.namprd12.prod.outlook.com
+ ([fe80::e99b:6a9d:278c:f034]) by PH7PR12MB7428.namprd12.prod.outlook.com
+ ([fe80::e99b:6a9d:278c:f034%4]) with mapi id 15.20.9632.010; Wed, 18 Feb 2026
+ 10:03:45 +0000
+From: "Begari, Padmarao" <Padmarao.Begari@amd.com>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "tudor.ambarus@linaro.org"
+ <tudor.ambarus@linaro.org>, "j-humphreys@ti.com" <j-humphreys@ti.com>,
+ "marex@denx.de" <marex@denx.de>
+CC: "Simek, Michal" <michal.simek@amd.com>, "jagan@amarulasolutions.com"
+ <jagan@amarulasolutions.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
+ "u-kumar1@ti.com" <u-kumar1@ti.com>, "trini@konsulko.com"
+ <trini@konsulko.com>, "seanga2@gmail.com" <seanga2@gmail.com>,
+ "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>, "sjg@chromium.org"
+ <sjg@chromium.org>, "william.zhang@broadcom.com"
+ <william.zhang@broadcom.com>, "stefan_b@posteo.net" <stefan_b@posteo.net>,
+ "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
+ "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
+ "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
+Subject: RE: [PATCH] spi: cadence_qspi: Disable the DAC mode in indirect read
+Thread-Topic: [PATCH] spi: cadence_qspi: Disable the DAC mode in indirect read
+Thread-Index: AQHbuY4ZX1dcaDia5Eesv73b0MkfebWKB58A
+Date: Wed, 18 Feb 2026 10:03:45 +0000
+Message-ID: <PH7PR12MB74282B424C0D91F616819527EC6AA@PH7PR12MB7428.namprd12.prod.outlook.com>
+References: <20250430050923.135256-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20250430050923.135256-1-venkatesh.abbarapu@amd.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Enabled=True;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SiteId=3dd8961f-e488-4e60-8e11-a82d994e183d;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_SetDate=2026-02-18T10:00:25.0000000Z;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Name=Open
+ Source; MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_ContentBits=3;
+ MSIP_Label_f265efc6-e181-49d6-80f4-fae95cf838a0_Method=Privileged
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH7PR12MB7428:EE_|DS0PR12MB8503:EE_
+x-ms-office365-filtering-correlation-id: 3e897018-d256-453b-8b67-08de6ed500a7
+x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|376014|7416014|366016|38070700021|7053199007; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?6x8v+qzVMOmAvKr8x09hk1CvDWFqlPcLSUMja246KOAWRdy/Es9DdqLsbvsd?=
+ =?us-ascii?Q?ZtGotzjCy259HTjJ+dN+kNZoDmHAsjqe4fGRlUTzFqtE+PzceYEk3BKqY/xa?=
+ =?us-ascii?Q?1+2qQ2VQ2CWn84SF9HEIEaeVvSnG1Bnxs86fXOrOzKFOb9kOsNVxkJu3NmMH?=
+ =?us-ascii?Q?fx9ysun0AIZsIgEwoCU2cBkXdyh13rjH/uhZUhV5I3L7HtnlpW+sCqOotN0K?=
+ =?us-ascii?Q?+Mr9sWzYDJtocTikuVw8xpugerPwZ3x0HRb3qJL7jcjybZlubwaBrFnlw8Mf?=
+ =?us-ascii?Q?esDAyAT9cOSybhWtBWPqHexZ0+uAATXAiqV6fuLifYkVGxHhMNmeDKW1wxOO?=
+ =?us-ascii?Q?HbDh7mRFFqNCSqVRGQvr1ll4+SlM35yLfEQFadcEtrJvNJZMHPV4kiZ/WL+P?=
+ =?us-ascii?Q?AGktfI3mhmr8A+bVh5LDXlzPzi8Wbw8r5S11f0e1B8yzNZptQgHxpj0eXe7b?=
+ =?us-ascii?Q?Sgrg/A/Raj27Iw8WtczGHYkokK30ZFg2Elze9Ut62+jMY8j0Hcz0E+LjVsLj?=
+ =?us-ascii?Q?Ir7MJOxwZHrdeTvevew3eZz4JUtH/k2U5ICFSyKtHzhEBLkX767TZ7/xC0gO?=
+ =?us-ascii?Q?7GvrXvvmu9lpjlsPjkTviRdfzDksZhkJQodr4vr/UP08WEanVZZFdLiyDcYH?=
+ =?us-ascii?Q?Ktm5+lOWwKx1kaAWa9usPx2UxwAPj6i93bFTfJYKcgwvqInUtx6UX98JIbqT?=
+ =?us-ascii?Q?PatX/oFtk6s3hvEgZs6ngihSygSmUmG9rW7pg9xui8U+/MEQJF1r9pA56npo?=
+ =?us-ascii?Q?FLYLwecpuEiEfOC75rdchC36ViqjGzJWSpXllZ/e/ukhe9w1mxCo08y9NeNe?=
+ =?us-ascii?Q?Jff110vFGWqoOdJToDhn1NCnC1KOejcHuS4eoLY6L6G7knxMibPLPf2JIlpm?=
+ =?us-ascii?Q?ElK2il1BxUucic7xx/u+7+U5elKMhRpE+WXpoKMgIHCYbfGJ6rInkU5raIKL?=
+ =?us-ascii?Q?LU+o8ptzlfSJxj+B1dy6MpETKfFSOK0TjERDskzRZ49GMgl4C0ZcxMQgIvFx?=
+ =?us-ascii?Q?hY6GZjcpHD/Yz7EcrwLzJ9UuSU96p/I33ZH7vAstgMx3nbCZDAjeb0Hm5ifb?=
+ =?us-ascii?Q?6fI6nuYCfcxOv4dQn46Ubg+8Nf7YlsIVFr0zSrCKxjLeEWE9VeF8lHBm8rrR?=
+ =?us-ascii?Q?k0Oe6dhXWvenc19j9FyYypRIEi76PjjIG74nSfOev+hy7x5XDV+vVCP3CIZD?=
+ =?us-ascii?Q?ZXUPOOVysS8KVeK9to+JG9aOtmiLNHHfp1Z2aQ/elCitDKtKPZp0EUDUhNWi?=
+ =?us-ascii?Q?DlCkuHsEHyk/meC1Nn1tDt8vBr/ZNeI171dhKRbis/xJIGuQMuD3Ilgiwy0z?=
+ =?us-ascii?Q?VqZW3+SSeQYotf8SVpMu/Qk/6Lxc0kg/lm+47/CKthVjF5l1swemBgvHmo+i?=
+ =?us-ascii?Q?Fr59mFi/Ya/cNHUkTibwcW76ZB3Xd4qmoi3ydB4446MUJKs82Xsl0lfHIyvN?=
+ =?us-ascii?Q?KyoG0tZrKbjFNsnfXCPn6h7QY8/gB60A4qacJ49io4mq4Y2c1vQsNJqbRC7x?=
+ =?us-ascii?Q?/yGrWB7Xor+D76QOSuAUe6FX+L86UrEMUIFFYXCoJph1ViSXvtQ2+pFf6V2O?=
+ =?us-ascii?Q?Biav0CRBv8T6RUUUn35X4fKLvlFZxdWODYWiCwkV548SSULkDvOLMsMl97tD?=
+ =?us-ascii?Q?Q00APuzB0HHBkB8CRbx3CqU=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB7428.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(38070700021)(7053199007);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?InkMxW8SQCkcVGXCKdFCuuO5/pZYLRQZAHTQhu4hLuMzB/pFz5r5PjTQ/SG/?=
+ =?us-ascii?Q?+rErZO+CTNsCf8WNY3wO3RsrERm9CiN/trPrQamZJcbg8kXKLJ4hjUYsXEty?=
+ =?us-ascii?Q?54H6OSaE6LLFCY9/WMed3p9rRI1ScIhoM7jZDQp/iRDsn5dsfC4MaLeCDam1?=
+ =?us-ascii?Q?ttKlcy29aCtuIrBm8rBYInOfHpnJuMV6GX7OnTxCAY+yVjDtjxo7RTffJXRg?=
+ =?us-ascii?Q?HNS8NC2DtVsuZoBhM7w5ihw7yLHNXmMlJSgkBoabBujYEDodjg6BbRSrPzQ5?=
+ =?us-ascii?Q?VdT3gZ9Ml5fyyZ+igZbCGAQ0DGH3bdgUgWWAeS2kH7GABt2FPxW1vYst7DV+?=
+ =?us-ascii?Q?NE25qmW5UcCGgit4OYb6Kiih0p8mAb7yyOYRI5j/JcVrntcxNKZUbNpvZf9e?=
+ =?us-ascii?Q?ZNSNR37xLM3sTsTuseFL+owvNjG/+FpYGn271jzekCIJUxwn5/+sVpx0bqo1?=
+ =?us-ascii?Q?5c6SZCIclXgTFtp7/2kwhUrhmIQ7YZqd4tk874mEnw7wsXhbweILwKoTyozs?=
+ =?us-ascii?Q?XvrdCMu3WfpYCBnSnr5aCefvkz9HEToysL6ivGomed69p79pUK1/P8zkK2/M?=
+ =?us-ascii?Q?1O73OH0n/SUSPwQswsW3u7UrlyGGsDaQc/Vdind96zFW2c7Hts/1DiJm6JcA?=
+ =?us-ascii?Q?AxOGBbKJYpGZWF4UpFU6sES9xQLnBQG9v/TKYLJsqEmOTJVD631pDiZ/1kLQ?=
+ =?us-ascii?Q?r0aEfMz3+S6DeQyxqXilCh6ckyideF2mbppYfO0IppYrzzHk2BDzu8c/KcrX?=
+ =?us-ascii?Q?Y+dQ8yfdM/dOARIYmwl7s6NU8upfvgiS1DOsJ863taoT398frNDLwlGBrfyp?=
+ =?us-ascii?Q?4tAfePDLV2VDq9+GSJX2Wwhs1HESPOgeel2zoAVLSVDY9fhxpk/kQBPgGVz0?=
+ =?us-ascii?Q?j0E9RdFqOnCGSTaewJzDQOJCSOwG9Qs6VA5WTdOa4BsdrwYuprpnTLS/1b+e?=
+ =?us-ascii?Q?cD5N0jAGeahEsEwEh4d6F5dICD2HKyUJT0/iidzuOHrgQn6DVyQX3mj3cfvG?=
+ =?us-ascii?Q?a/ZRrqICthyh12jvkqHdA+cjSkXEaO7CbR9b1Mkz/SBg4zkiLPdz+/TqxhB8?=
+ =?us-ascii?Q?tL32e9UQ6YjwlMe/KyfQCmSQV1SrxhKKZJzqGiRf2vuQBrkzHvIpXeQMcZ3T?=
+ =?us-ascii?Q?nzX8DFgRd3OkZQ7K7wt4p2SK3ujk5ZwYAfhnmqMjWCyyik8i+nLZcMHKhNj4?=
+ =?us-ascii?Q?qieP0O+EUTA793X0S6ICa1H27csURXZiII4dpJ5KrqQTYsqQmc2guvY2I4bj?=
+ =?us-ascii?Q?gmJ8m6pPwvGaYk/iiuuYUqjUBPwhK7MB3STi+FTuZDEW6xgojDSIMD0SPChf?=
+ =?us-ascii?Q?v8E7CmIL0aZpBwioOb5oyLMS6qAbSSAbkx0CLNnRDwF8jbI2oxRj08KPZ6j2?=
+ =?us-ascii?Q?aCs+Uz6uYbP6OVfroz+DvvMjg3ZzS4Gj+2NcSAN4F2S2VBItRc9U0kZYp8se?=
+ =?us-ascii?Q?9Fn23XjZw87K9smj4oIugeg2gIKyk0HO4Rd1EAFjm042HojOAEpHsbXFna41?=
+ =?us-ascii?Q?Pyow1Dr9bMRImZjgkE+RPve9k8l5jjbgYT9U4wcMy8WWULZNXgE/XwIKQoe8?=
+ =?us-ascii?Q?pWD5N8mMRoEo+gqvXKJjbkd8DFROOgv1Vx8CaUsN3jLYvqnsQkXyGmxDQUVd?=
+ =?us-ascii?Q?XmIr1f1e4RjdHyvT02t6suIA3ykc/5HG+3sMDklo3hrTRM/jinS7QQhEIxZB?=
+ =?us-ascii?Q?w88xU/XZ6/s0AyqPT1uWmEyrANZRncV9ANMk5PjGvYyJ82pK?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aZWKyl6r8BphaePp@a079122.arm.com>
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB7428.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e897018-d256-453b-8b67-08de6ed500a7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Feb 2026 10:03:45.1006 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: YJ8SjW/WSmjBMXtnyp0KBi5a+07aA/2BDw+JTXb+4FcDRalPl6Nqz1Q9Ks1v4c0zJE/MvLm2qklXiPEOWSDzfA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8503
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,1401 +183,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Feb 18, 2026 at 03:17:58PM +0530, Sughosh Ganu wrote:
-> On Mon, Feb 16, 2026 at 02:35:35PM +0100, Kory Maincent wrote:
-> > Add a new fwumdata tool to allows users to read, display, and modify FWU
-> > (Firmware Update) metadata from Linux userspace. It provides functionality
-> > similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-> > metadata, change active/previous bank indices, modify bank states, and set
-> > image acceptance flags. Configuration is done via fwumdata.config file.
-> > 
-> > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > ---
-> 
-> I am not sure if this has been discussed with Ilias earlier, and
-> apologies if it has been, but I do think that this patch is not
-> adhering to the DEN0118 specification, specifically the part mentioned
-> in section A3.2.1, which says that the metadata is to be maintained by
-> the Update Agent. I would like to hear from Jose Marinho, who is the
-> author of the spec, on what he thinks about this approach.
-> 
-> I do think that the other patches in series look fine, and can be
-> applied. There is just an issue of inclusion of the tool for
-> building. I will comment on that patch separately.
+[Public]
 
+> From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> Sent: Wednesday, April 30, 2025 10:39 AM
+> To: u-boot@lists.denx.de; tudor.ambarus@linaro.org; j-humphreys@ti.com;
+> marex@denx.de
+> Cc: Simek, Michal <michal.simek@amd.com>; jagan@amarulasolutions.com;
+> vigneshr@ti.com; u-kumar1@ti.com; trini@konsulko.com; seanga2@gmail.com;
+> caleb.connolly@linaro.org; sjg@chromium.org; william.zhang@broadcom.com;
+> stefan_b@posteo.net; quentin.schulz@cherry.de; Takahiro.Kuwano@infineon.c=
+om;
+> p-mantena@ti.com; git (AMD-Xilinx) <git@amd.com>
+> Subject: [PATCH] spi: cadence_qspi: Disable the DAC mode in indirect read
+>
+> Hang has been observed on QEMU, as it starts with indac read and fills sr=
+am, but
+> after dma is triggered, it tries dac read instead (based on priority) whi=
+ch gets blocked.
+> Disable the DAC mode in indirect DMA read and enable back for writes as D=
+AC
+> mode is used.
+>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 
-Adding Jose to the discussion.
+Tested-by: Padmarao Begari <padmarao.begari@amd.com>
 
--sughosh
+Regards
+Padmarao
+> ---
+>  drivers/spi/cadence_ospi_versal.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/drivers/spi/cadence_ospi_versal.c b/drivers/spi/cadence_ospi=
+_versal.c
+> index fbeb0c6a85c..a78a282c543 100644
+> --- a/drivers/spi/cadence_ospi_versal.c
+> +++ b/drivers/spi/cadence_ospi_versal.c
+> @@ -36,6 +36,10 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv
+> *priv,
+>       bytes_to_dma =3D n_rx - rx_rem;
+>
+>       if (bytes_to_dma) {
+> +             if (priv->use_dac_mode)
+> +                     clrbits_le32(priv->regbase + CQSPI_REG_CONFIG,
+> +                                  CQSPI_REG_CONFIG_DIRECT);
+> +
+>               cadence_qspi_apb_enable_linear_mode(false);
+>               reg =3D readl(priv->regbase + CQSPI_REG_CONFIG);
+>               reg |=3D CQSPI_REG_CONFIG_ENBL_DMA;
+> @@ -116,6 +120,9 @@ int cadence_qspi_apb_dma_read(struct cadence_spi_priv
+> *priv,
+>               memcpy(rxbuf, rxbuf + 1, n_rx - 1);
+>       }
+>
+> +     if (priv->use_dac_mode)
+> +             cadence_qspi_apb_dac_mode_enable(priv->regbase);
+> +
+>       return 0;
+>  }
+>
+> --
+> 2.34.1
 
-> 
-> 
-> >  MAINTAINERS                        |   4 +
-> >  doc/develop/uefi/fwu_updates.rst   |   4 +-
-> >  doc/fwumdata.1                     | 222 ++++++++++
-> >  tools/.gitignore                   |   1 +
-> >  tools/fwumdata_src/Kconfig         |  11 +
-> >  tools/fwumdata_src/fwumdata.c      | 854 +++++++++++++++++++++++++++++++++++++
-> >  tools/fwumdata_src/fwumdata.config |  33 ++
-> >  tools/fwumdata_src/fwumdata.h      | 138 ++++++
-> >  tools/fwumdata_src/fwumdata.mk     |   5 +-
-> >  9 files changed, 1270 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 9d954be4a9d..d680b193033 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -1242,11 +1242,15 @@ F:	drivers/watchdog/sbsa_gwdt.c
-> >  
-> >  FWU Multi Bank Update
-> >  M:	Sughosh Ganu <sughosh.ganu@arm.com>
-> > +M:	Kory Maincent <kory.maincent@bootlin.com>
-> >  S:	Maintained
-> >  T:	git https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> > +F:	doc/fwumdata.1
-> >  F:	doc/mkfwumdata.1
-> >  F:	lib/fwu_updates/*
-> >  F:	drivers/fwu-mdata/*
-> > +F:	tools/fwumdata_src/fwumdata.c
-> > +F:	tools/fwumdata_src/fwumdata.h
-> >  F:	tools/fwumdata_src/mkfwumdata.c
-> >  
-> >  GATEWORKS_SC
-> > diff --git a/doc/develop/uefi/fwu_updates.rst b/doc/develop/uefi/fwu_updates.rst
-> > index 84713581459..c592106f8a8 100644
-> > --- a/doc/develop/uefi/fwu_updates.rst
-> > +++ b/doc/develop/uefi/fwu_updates.rst
-> > @@ -66,7 +66,9 @@ FWU Metadata
-> >  U-Boot supports both versions(1 and 2) of the FWU metadata defined in
-> >  the two revisions of the specification. Support can be enabled for
-> >  either of the two versions through a config flag. The mkfwumdata tool
-> > -can generate metadata for both the supported versions.
-> > +can generate metadata for both the supported versions. On the target side,
-> > +the fwumdata tool can read and update FWU metadata located in memory,
-> > +similarly to how fw_printenv/fw_setenv works.
-> >  
-> >  Setting up the device for GPT partitioned storage
-> >  -------------------------------------------------
-> > diff --git a/doc/fwumdata.1 b/doc/fwumdata.1
-> > new file mode 100644
-> > index 00000000000..66a53fc9403
-> > --- /dev/null
-> > +++ b/doc/fwumdata.1
-> > @@ -0,0 +1,222 @@
-> > +.\" SPDX-License-Identifier: GPL-2.0-or-later
-> > +.\" Copyright (C) 2025 Kory Maincent <kory.maincent@bootlin.com>
-> > +.TH FWUMDATA 1 2025 U-Boot
-> > +.SH NAME
-> > +fwumdata \- read, display, and modify FWU metadata
-> > +.
-> > +.SH SYNOPSIS
-> > +.SY fwumdata
-> > +.OP \-c config
-> > +.OP \-l
-> > +.OP \-u
-> > +.OP \-a bankid
-> > +.OP \-p bankid
-> > +.RB [ \-s
-> > +.IR bankid " " state ]
-> > +.OP \-i imageid
-> > +.OP \-b bankid
-> > +.OP \-A
-> > +.OP \-C
-> > +.OP \-B num_banks
-> > +.OP \-I num_images
-> > +.YS
-> > +.SY fwumdata
-> > +.B \-h
-> > +.YS
-> > +.
-> > +.SH DESCRIPTION
-> > +.B fwumdata
-> > +reads, displays, and modifies FWU (Firmware Update) metadata from Linux
-> > +userspace.
-> > +.PP
-> > +The tool operates on FWU metadata stored on block or MTD devices, allowing
-> > +userspace manipulation of firmware update state including active bank
-> > +selection, image acceptance, and bank state management.
-> > +.
-> > +.SH OPTIONS
-> > +.TP
-> > +.BR \-c ", " \-\-config " \fIfile\fR"
-> > +Use custom configuration file. By default, the tool searches for
-> > +.I ./fwumdata.config
-> > +then
-> > +.IR /etc/fwumdata.config .
-> > +.
-> > +.TP
-> > +.BR \-l ", " \-\-list
-> > +Display detailed metadata information including all GUIDs, image entries,
-> > +and bank information. Without this option, only a summary is shown.
-> > +.
-> > +.TP
-> > +.BR \-u ", " \-\-update
-> > +Update metadata if CRC validation fails. Useful for recovering from corrupted
-> > +metadata.
-> > +.
-> > +.TP
-> > +.BR \-a ", " \-\-active " \fIbankid\fR"
-> > +Set the active bank index to
-> > +.IR bank .
-> > +.
-> > +.TP
-> > +.BR \-p ", " \-\-previous " \fIbankid\fR"
-> > +Set the previous active bank index to
-> > +.IR bank .
-> > +.
-> > +.TP
-> > +.BR \-s ", " \-\-state " \fIbankid state\fR"
-> > +Set bank index
-> > +.I bankid
-> > +to the specified
-> > +.IR state .
-> > +Valid states are:
-> > +.BR accepted ,
-> > +.BR valid ,
-> > +or
-> > +.BR invalid .
-> > +Supported only with version 2 metadata. When setting a bank to accepted state,
-> > +all firmware images in that bank are automatically marked as accepted.
-> > +.
-> > +.TP
-> > +.BR \-i ", " \-\-image " \fIimageid\fR"
-> > +Specify image number (used with
-> > +.B \-A
-> > +or
-> > +.BR \-C ).
-> > +.
-> > +.TP
-> > +.BR \-b ", " \-\-bank " \fIbankid\fR"
-> > +Specify bank number (used with
-> > +.B \-A
-> > +or
-> > +.BR \-C ).
-> > +.
-> > +.TP
-> > +.BR \-A ", " \-\-accept
-> > +Accept the image specified by
-> > +.B \-i
-> > +in the bank specified by
-> > +.BR \-b .
-> > +Sets the FWU_IMAGE_ACCEPTED flag for the image.
-> > +.
-> > +.TP
-> > +.BR \-C ", " \-\-clear
-> > +Clear the acceptance flag for the image specified by
-> > +.B \-i
-> > +in the bank specified by
-> > +.BR \-b .
-> > +According to the FWU specification, the bank state is automatically set to
-> > +invalid before clearing the acceptance flag.
-> > +.
-> > +.TP
-> > +.BR \-B ", " \-\-nbanks " \fInum_banks\fR"
-> > +Specify total number of banks (required for V1 metadata).
-> > +.
-> > +.TP
-> > +.BR \-I ", " \-\-nimages " \fInum_images\fR"
-> > +Specify total number of images (required for V1 metadata).
-> > +.
-> > +.TP
-> > +.BR \-h ", " \-\-help
-> > +Print usage information and exit.
-> > +.
-> > +.SH CONFIGURATION FILE
-> > +The configuration file specifies the location of FWU metadata on storage
-> > +devices. The format is:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +# Device Name      Device Offset    Metadata Size    Erase Size
-> > +/dev/mtd0          0x0              0x78             0x1000
-> > +/dev/mtd1          0x0              0x78             0x1000
-> > +.in
-> > +.EE
-> > +.PP
-> > +Lines starting with
-> > +.B #
-> > +are comments.
-> > +.I Erase Size
-> > +is optional and only applies to MTD devices; if omitted, it defaults to the
-> > +metadata size.
-> > +.PP
-> > +Specifying two devices enables redundant metadata support.
-> > +.
-> > +.SH BUGS
-> > +Please report bugs to the
-> > +.UR https://\:source\:.denx\:.de/\:u-boot/\:u-boot/\:issues
-> > +U-Boot bug tracker
-> > +.UE .
-> > +.
-> > +.SH EXAMPLES
-> > +Display FWU metadata summary:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata
-> > +.in
-> > +.EE
-> > +.PP
-> > +Display detailed metadata with all GUIDs:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-l
-> > +.in
-> > +.EE
-> > +.PP
-> > +Set active bank to 1:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-a 1
-> > +.in
-> > +.EE
-> > +.PP
-> > +Set bank 1 to accepted state (automatically accepts all images in that bank):
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-s 1 accepted
-> > +.in
-> > +.EE
-> > +.PP
-> > +Accept image 0 in bank 0:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-i 0 \-b 0 \-A \-l
-> > +.in
-> > +.EE
-> > +.PP
-> > +Clear acceptance for image 0 in bank 1:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-i 0 \-b 1 \-C \-l
-> > +.in
-> > +.EE
-> > +.PP
-> > +Clear acceptance for image 1 in bank 1 with metadata V1:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-B 2 \-I 2 \-i 1 \-b 1 \-C \-l
-> > +.in
-> > +.EE
-> > +.PP
-> > +Use custom configuration file:
-> > +.PP
-> > +.EX
-> > +.in +4
-> > +$ \c
-> > +.B fwumdata \-c /path/to/custom.config
-> > +.in
-> > +.EE
-> > +.
-> > +.SH SEE ALSO
-> > +.BR mkfwumdata (1)
-> > diff --git a/tools/.gitignore b/tools/.gitignore
-> > index e8daa24a52d..49943d2cf3a 100644
-> > --- a/tools/.gitignore
-> > +++ b/tools/.gitignore
-> > @@ -11,6 +11,7 @@
-> >  /file2include
-> >  /fit_check_sign
-> >  /fit_info
-> > +/fwumdata
-> >  /gdb/gdbcont
-> >  /gdb/gdbsend
-> >  /gen_eth_addr
-> > diff --git a/tools/fwumdata_src/Kconfig b/tools/fwumdata_src/Kconfig
-> > index c033c560e8d..af1f3bb3f57 100644
-> > --- a/tools/fwumdata_src/Kconfig
-> > +++ b/tools/fwumdata_src/Kconfig
-> > @@ -6,3 +6,14 @@ config TOOLS_MKFWUMDATA
-> >  	  metadata for initial installation of the FWU multi bank
-> >  	  update on the board. The installation method depends on
-> >  	  the platform.
-> > +
-> > +config TOOLS_FWUMDATA
-> > +	bool "Build fwumdata command"
-> > +	default y if FWU_MULTI_BANK_UPDATE
-> > +	help
-> > +	  This command allows users to read, display, and modify FWU
-> > +	  (Firmware Update) metadata from Linux userspace. It provides
-> > +	  functionality similar to fw_printenv/fw_setenv but for FWU
-> > +	  metadata. Users can view metadata, change active/previous
-> > +	  bank indices, modify bank states, and set image acceptance
-> > +	  flags. Configuration is done via fwumdata.config file.
-> > diff --git a/tools/fwumdata_src/fwumdata.c b/tools/fwumdata_src/fwumdata.c
-> > new file mode 100644
-> > index 00000000000..c5b0f56842d
-> > --- /dev/null
-> > +++ b/tools/fwumdata_src/fwumdata.c
-> > @@ -0,0 +1,854 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * FWU Metadata Read/Write Tool
-> > + * Copyright (c) 2025, Kory Maincent <kory.maincent@bootlin.com>
-> > + *
-> > + * Tool to read, display, and modify FWU (Firmware Update) metadata
-> > + * from Linux userspace. Similar to fw_printenv/fw_setenv for U-Boot
-> > + * environment, but for FWU metadata.
-> > + *
-> > + * Usage:
-> > + *   fwumdata                          - Print all metadata
-> > + *   fwumdata -u                       - Print metadata and update it if CRC corrupted
-> > + *   fwumdata -c <config>              - Use custom config file
-> > + *   fwumdata -a <bank>                - Set active bank
-> > + *   fwumdata -p <bank>                - Set previous bank
-> > + *   fwumdata -s <bank> <state>        - Set bank state (V2 only)
-> > + *   fwumdata -i <id> -b <bank> -A     - Accept image
-> > + *   fwumdata -i <id> -b <bank> -C     - Clear image acceptance
-> > + *   fwumdata -i <id> -b <bank>
-> > + *            -B <num_banks>
-> > + *            -I <num_images> -C       - Clear image acceptance (V1 only)
-> > + *   fwumdata -l                       - List detailed info with GUIDs
-> > + */
-> > +
-> > +#include <errno.h>
-> > +#include <getopt.h>
-> > +#include <stdio.h>
-> > +#include <unistd.h>
-> > +#include <mtd/mtd-user.h>
-> > +#include <sys/ioctl.h>
-> > +#include <u-boot/crc.h>
-> > +#include "fwumdata.h"
-> > +
-> > +/* Device configuration */
-> > +struct fwumdata_device {
-> > +	const char *devname;
-> > +	long long devoff;
-> > +	unsigned long mdata_size;
-> > +	unsigned long erase_size;
-> > +	int fd;
-> > +	bool is_mtd;
-> > +};
-> > +
-> > +/* Global state */
-> > +static struct fwumdata_device devices[2];  /* Primary and secondary */
-> > +static struct fwu_mdata *mdata;
-> > +static int have_redundant;
-> > +static struct fwu_mdata *valid_mdata;
-> > +static bool mdata_mod;
-> > +static const char *config_file;
-> > +static int nbanks, nimages; /* For V1 only */
-> > +static const char * const default_config_files[] = {
-> > +	"./fwumdata.config",
-> > +	"/etc/fwumdata.config",
-> > +	NULL
-> > +};
-> > +
-> > +/* GUID/UUID utilities */
-> > +static void guid_to_string(const struct efi_guid *guid, char *str)
-> > +{
-> > +	sprintf(str, "%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x",
-> > +		guid->time_high, guid->time_low, guid->reserved,
-> > +		guid->family, guid->node[0],
-> > +		guid->node[1], guid->node[2], guid->node[3],
-> > +		guid->node[4], guid->node[5], guid->node[6]);
-> > +}
-> > +
-> > +/* Config file parsing */
-> > +static int parse_config(const char *fname)
-> > +{
-> > +	size_t linesize = 0;
-> > +	char *line = NULL;
-> > +	char *devname;
-> > +	int i = 0;
-> > +	FILE *fp;
-> > +	int rc;
-> > +
-> > +	fp = fopen(fname, "r");
-> > +	if (!fp)
-> > +		return -ENOENT;
-> > +
-> > +	while (i < 2 && getline(&line, &linesize, fp) != -1) {
-> > +		/* Skip comments and empty lines */
-> > +		if (line[0] == '#' || line[0] == '\n')
-> > +			continue;
-> > +
-> > +		rc = sscanf(line, "%ms %lli %lx %lx",
-> > +			    &devname,
-> > +			    &devices[i].devoff,
-> > +			    &devices[i].mdata_size,
-> > +			    &devices[i].erase_size);
-> > +
-> > +		if (rc < 3) {
-> > +			free(devname);
-> > +			continue;
-> > +		}
-> > +
-> > +		if (rc < 4)
-> > +			devices[i].erase_size = devices[i].mdata_size;
-> > +
-> > +		devices[i].devname = devname;
-> > +		i++;
-> > +	}
-> > +
-> > +	free(line);
-> > +	fclose(fp);
-> > +
-> > +	if (i == 2) {
-> > +		have_redundant = true;
-> > +		if (devices[0].mdata_size != devices[1].mdata_size) {
-> > +			fprintf(stderr,
-> > +				"Size mismatch between the two metadata\n");
-> > +			return -EINVAL;
-> > +		}
-> > +	}
-> > +
-> > +	if (!i) {
-> > +		fprintf(stderr,
-> > +			"Can't read config %s content\n", fname);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int find_parse_config(void)
-> > +{
-> > +	int i;
-> > +
-> > +	if (config_file)
-> > +		return parse_config(config_file);
-> > +
-> > +	for (i = 0; default_config_files[i]; i++) {
-> > +		int ret;
-> > +
-> > +		ret = parse_config(default_config_files[i]);
-> > +		if (ret == -ENOENT)
-> > +			continue;
-> > +		if (ret)
-> > +			return ret;
-> > +
-> > +		config_file = default_config_files[i];
-> > +		return 0;
-> > +	}
-> > +
-> > +	fprintf(stderr, "Error: Cannot find config file\n");
-> > +	return -ENOENT;
-> > +}
-> > +
-> > +static int open_device(struct fwumdata_device *dev)
-> > +{
-> > +	if (strstr(dev->devname, "/dev/mtd"))
-> > +		dev->is_mtd = true;
-> > +
-> > +	dev->fd = open(dev->devname, O_RDWR | O_SYNC);
-> > +	if (dev->fd < 0) {
-> > +		fprintf(stderr, "Cannot open %s: %s\n", dev->devname,
-> > +			strerror(errno));
-> > +		return -ENODEV;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int mtd_erase(int fd, unsigned long offset, unsigned long size)
-> > +{
-> > +	struct erase_info_user erase;
-> > +	int ret;
-> > +
-> > +	erase.start = offset;
-> > +	erase.length = size;
-> > +
-> > +	ret = ioctl(fd, MEMERASE, &erase);
-> > +	if (ret < 0) {
-> > +		fprintf(stderr, "MTD erase failed: %s\n", strerror(errno));
-> > +		return -errno;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int read_device(struct fwumdata_device *dev, void *buf, size_t count)
-> > +{
-> > +	if (lseek(dev->fd, dev->devoff, SEEK_SET) < 0) {
-> > +		fprintf(stderr, "Seek failed: %s\n", strerror(errno));
-> > +		return -errno;
-> > +	}
-> > +
-> > +	if (read(dev->fd, buf, count) < 0) {
-> > +		fprintf(stderr, "Read failed: %s\n", strerror(errno));
-> > +		return -errno;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int write_device(struct fwumdata_device *dev, const void *buf,
-> > +			size_t count)
-> > +{
-> > +	int ret;
-> > +
-> > +	/* Erase if MTD device */
-> > +	if (dev->is_mtd) {
-> > +		ret = mtd_erase(dev->fd, dev->devoff, dev->erase_size);
-> > +		if (ret)
-> > +			return ret;
-> > +	}
-> > +
-> > +	if (lseek(dev->fd, dev->devoff, SEEK_SET) < 0) {
-> > +		fprintf(stderr, "Seek failed: %s\n", strerror(errno));
-> > +		return -errno;
-> > +	}
-> > +
-> > +	if (write(dev->fd, buf, count) < 0) {
-> > +		fprintf(stderr, "Write failed: %s\n", strerror(errno));
-> > +		return -errno;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +/* Metadata operations */
-> > +static int validate_crc(struct fwu_mdata *mdata, size_t size)
-> > +{
-> > +	u32 calc_crc, stored_crc;
-> > +
-> > +	stored_crc = mdata->crc32;
-> > +	calc_crc = crc32(0, (const u8 *)&mdata->version, size - sizeof(u32));
-> > +
-> > +	if (calc_crc != stored_crc) {
-> > +		fprintf(stderr,
-> > +			"CRC mismatch: calculated 0x%08x, stored 0x%08x\n",
-> > +			calc_crc, stored_crc);
-> > +		if (mdata->version == 1)
-> > +			fprintf(stderr,
-> > +				"Metadata is V1, this may be size description issue\n");
-> > +		return -1;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static void update_crc(struct fwu_mdata *mdata, size_t size)
-> > +{
-> > +	mdata->crc32 = crc32(0, (const u8 *)&mdata->version, size - sizeof(u32));
-> > +}
-> > +
-> > +static int read_one_metadata(int mdata_id, size_t size)
-> > +{
-> > +	int ret;
-> > +
-> > +	ret = open_device(&devices[mdata_id]);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	ret = read_device(&devices[mdata_id], &mdata[mdata_id], size);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	if (mdata[mdata_id].version != 1 && mdata[mdata_id].version != 2) {
-> > +		fprintf(stderr, "Invalid metadata %d version: %u\n",
-> > +			mdata_id, mdata[mdata_id].version);
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int read_metadata(bool update)
-> > +{
-> > +	size_t alloc_size;
-> > +	int ret;
-> > +
-> > +	/* Allocate initial buffer */
-> > +	alloc_size = devices[0].mdata_size;
-> > +	mdata = calloc(have_redundant ? 2 : 1, alloc_size);
-> > +	if (!mdata) {
-> > +		fprintf(stderr, "Memory allocation failed\n");
-> > +		return -ENOMEM;
-> > +	}
-> > +
-> > +	ret = read_one_metadata(0, alloc_size);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	if (validate_crc(&mdata[0], alloc_size) < 0) {
-> > +		fprintf(stderr,
-> > +			"Warning: Primary metadata CRC validation failed\n");
-> > +		mdata_mod = update;
-> > +	} else {
-> > +		valid_mdata = &mdata[0];
-> > +	}
-> > +
-> > +	if (have_redundant) {
-> > +		ret = read_one_metadata(1, alloc_size);
-> > +		if (ret)
-> > +			return ret;
-> > +
-> > +		if (validate_crc(&mdata[1], alloc_size) < 0) {
-> > +			fprintf(stderr,
-> > +				"Warning: Secondary metadata CRC validation failed\n");
-> > +			mdata_mod = update;
-> > +		} else if (valid_mdata && mdata[0].crc32 != mdata[1].crc32) {
-> > +			fprintf(stderr,
-> > +				"Metadatas valid but not equal, use first one as default\n");
-> > +			mdata_mod = update;
-> > +		} else {
-> > +			valid_mdata = &mdata[1];
-> > +		}
-> > +	}
-> > +
-> > +	if (!valid_mdata) {
-> > +		fprintf(stderr,
-> > +			"No metadata valid, use first one as default\n");
-> > +		mdata_mod = update;
-> > +		valid_mdata = &mdata[0];
-> > +	}
-> > +
-> > +	if (valid_mdata->version == 2) {
-> > +		struct fwu_mdata_ext *mdata_ext;
-> > +
-> > +		mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
-> > +		if (mdata_ext->metadata_size != alloc_size) {
-> > +			fprintf(stderr,
-> > +				"Metadata real size 0x%x mismatch with the config 0x%zx\n",
-> > +				mdata_ext->metadata_size, alloc_size);
-> > +				return -EINVAL;
-> > +		}
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int write_metadata(void)
-> > +{
-> > +	size_t write_size = devices[0].mdata_size;
-> > +	int ret;
-> > +
-> > +	if (!mdata_mod)
-> > +		return 0;
-> > +
-> > +	/* Update CRC */
-> > +	update_crc(valid_mdata, write_size);
-> > +
-> > +	/* Write primary */
-> > +	ret = write_device(&devices[0], valid_mdata, write_size);
-> > +	if (ret < 0) {
-> > +		fprintf(stderr, "Failed to write primary metadata\n");
-> > +		return ret;
-> > +	}
-> > +
-> > +	/* Write secondary if redundant */
-> > +	if (have_redundant) {
-> > +		ret = write_device(&devices[1], valid_mdata, write_size);
-> > +		if (ret < 0) {
-> > +			fprintf(stderr, "Failed to write secondary metadata\n");
-> > +			return -1;
-> > +		}
-> > +	}
-> > +
-> > +	printf("FWU metadata updated successfully\n");
-> > +	mdata_mod = 0;
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +/* Display functions */
-> > +static const char *bank_state_to_string(u8 state)
-> > +{
-> > +	switch (state) {
-> > +	case FWU_BANK_ACCEPTED:
-> > +		return "accepted";
-> > +	case FWU_BANK_VALID:
-> > +		return "valid";
-> > +	case FWU_BANK_INVALID:
-> > +		return "invalid";
-> > +	default:
-> > +		return "unknown";
-> > +	}
-> > +}
-> > +
-> > +static void print_metadata_summary(void)
-> > +{
-> > +	int i;
-> > +
-> > +	printf("FWU Metadata:\n");
-> > +	printf("\tVersion:            %u\n", valid_mdata->version);
-> > +	printf("\tActive Index:       %u\n", valid_mdata->active_index);
-> > +	printf("\tPrevious Index:     %u\n", valid_mdata->previous_active_index);
-> > +	printf("\tCRC32:              0x%08x\n", valid_mdata->crc32);
-> > +
-> > +	if (valid_mdata->version == 2) {
-> > +		struct fwu_fw_store_desc *fw_desc;
-> > +		struct fwu_mdata_ext *mdata_ext;
-> > +
-> > +		mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
-> > +		printf("\tMetadata Size:      %u bytes\n", mdata_ext->metadata_size);
-> > +		printf("\tDescriptor Offset:  %u\n", mdata_ext->desc_offset);
-> > +		printf("\tBank States:\n");
-> > +
-> > +		fw_desc = fwu_get_fw_desc(valid_mdata);
-> > +		for (i = 0; i < fw_desc->num_banks && i < MAX_BANKS_V2; i++) {
-> > +			printf("\t\tBank %d: %s (0x%02x)\n", i,
-> > +			       bank_state_to_string(mdata_ext->bank_state[i]),
-> > +			       mdata_ext->bank_state[i]);
-> > +		}
-> > +	}
-> > +}
-> > +
-> > +static void print_metadata_detailed(void)
-> > +{
-> > +	struct fwu_fw_store_desc *fw_desc = NULL;
-> > +	struct fwu_image_bank_info *bank_info;
-> > +	struct fwu_image_entry *img_entry;
-> > +	int num_images, num_banks;
-> > +	char guid_str[64];
-> > +	int i, j;
-> > +
-> > +	print_metadata_summary();
-> > +
-> > +	if (valid_mdata->version == 1) {
-> > +		num_images = nimages;
-> > +		num_banks = nbanks;
-> > +	} else {
-> > +		fw_desc = fwu_get_fw_desc(valid_mdata);
-> > +		num_images = fw_desc->num_images;
-> > +		num_banks = fw_desc->num_banks;
-> > +	}
-> > +
-> > +	if (fw_desc) {
-> > +		printf("\n\tFirmware Store Descriptor:\n");
-> > +		printf("\t\tNumber of Banks:       %u\n", num_banks);
-> > +		printf("\t\tNumber of Images:      %u\n", num_images);
-> > +		printf("\t\tImage Entry Size:      %u\n", fw_desc->img_entry_size);
-> > +		printf("\t\tBank Info Entry Size:  %u\n", fw_desc->bank_info_entry_size);
-> > +	}
-> > +
-> > +	printf("\n\tImages:\n");
-> > +	for (i = 0; i < num_images; i++) {
-> > +		img_entry = fwu_get_image_entry(valid_mdata, valid_mdata->version,
-> > +						num_banks, i);
-> > +
-> > +		printf("\t\tImage %d:\n", i);
-> > +
-> > +		guid_to_string(&img_entry->image_type_guid, guid_str);
-> > +		printf("\t\t\tImage Type GUID:  %s\n", guid_str);
-> > +
-> > +		guid_to_string(&img_entry->location_guid, guid_str);
-> > +		printf("\t\t\tLocation GUID:    %s\n", guid_str);
-> > +
-> > +		printf("\t\t\tBanks:\n");
-> > +		for (j = 0; j < num_banks; j++) {
-> > +			bank_info = fwu_get_bank_info(valid_mdata,
-> > +						      valid_mdata->version,
-> > +						      num_banks, i, j);
-> > +
-> > +			guid_to_string(&bank_info->image_guid, guid_str);
-> > +			printf("\t\t\t\tBank %d:\n", j);
-> > +			printf("\t\t\t\t\tImage GUID:  %s\n", guid_str);
-> > +			printf("\t\t\t\t\tAccepted:    %s (%u)\n",
-> > +			       (bank_info->accepted & FWU_IMAGE_ACCEPTED) ? "yes" : "no",
-> > +			       bank_info->accepted);
-> > +		}
-> > +	}
-> > +}
-> > +
-> > +/* Modification functions */
-> > +static int set_active_index(int bank)
-> > +{
-> > +	struct fwu_fw_store_desc *fw_desc;
-> > +	int num_banks;
-> > +
-> > +	if (valid_mdata->version == 2) {
-> > +		fw_desc = fwu_get_fw_desc(valid_mdata);
-> > +		num_banks = fw_desc->num_banks;
-> > +	} else {
-> > +		num_banks = nbanks;
-> > +	}
-> > +
-> > +	if (bank < 0 || bank >= num_banks) {
-> > +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
-> > +			bank, num_banks - 1);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	if (valid_mdata->active_index == bank)
-> > +		return 0;
-> > +
-> > +	valid_mdata->active_index = bank;
-> > +	mdata_mod = 1;
-> > +
-> > +	printf("Active bank set to %d\n", bank);
-> > +	return 0;
-> > +}
-> > +
-> > +static int set_previous_index(int bank)
-> > +{
-> > +	struct fwu_fw_store_desc *fw_desc;
-> > +	int num_banks;
-> > +
-> > +	if (valid_mdata->version == 2) {
-> > +		fw_desc = fwu_get_fw_desc(valid_mdata);
-> > +		num_banks = fw_desc->num_banks;
-> > +	} else {
-> > +		num_banks = nbanks;
-> > +	}
-> > +
-> > +	if (bank < 0 || bank >= num_banks) {
-> > +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
-> > +			bank, num_banks - 1);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	if (valid_mdata->previous_active_index == bank)
-> > +		return 0;
-> > +
-> > +	valid_mdata->previous_active_index = bank;
-> > +	mdata_mod = 1;
-> > +
-> > +	printf("Previous bank set to %d\n", bank);
-> > +	return 0;
-> > +}
-> > +
-> > +static int set_image_accepted(int image, int bank, int accept)
-> > +{
-> > +	struct fwu_image_bank_info *bank_info;
-> > +	int num_images, num_banks;
-> > +
-> > +	if (valid_mdata->version == 1) {
-> > +		num_images = nimages;
-> > +		num_banks = nbanks;
-> > +	} else {
-> > +		struct fwu_fw_store_desc *fw_desc;
-> > +
-> > +		fw_desc = fwu_get_fw_desc(valid_mdata);
-> > +		num_images = fw_desc->num_images;
-> > +		num_banks = fw_desc->num_banks;
-> > +	}
-> > +
-> > +	if (bank < 0 || bank >= num_banks) {
-> > +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
-> > +			bank, num_banks - 1);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	if (image < 0 || image >= num_images) {
-> > +		fprintf(stderr, "Error: Invalid image %d (must be 0-%d)\n",
-> > +			image, num_images - 1);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	bank_info = fwu_get_bank_info(valid_mdata, valid_mdata->version,
-> > +				      num_banks, image, bank);
-> > +	if (accept == bank_info->accepted)
-> > +		return 0;
-> > +
-> > +	if (accept) {
-> > +		bank_info->accepted = FWU_IMAGE_ACCEPTED;
-> > +	} else {
-> > +		bank_info->accepted = 0;
-> > +
-> > +		/* According to the spec: bank_state[index] have to be set
-> > +		 * to invalid before any content in the img_bank_info[index]
-> > +		 * is overwritten.
-> > +		 */
-> > +		if (valid_mdata->version == 2) {
-> > +			struct fwu_mdata_ext *mdata_ext;
-> > +
-> > +			mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
-> > +			mdata_ext->bank_state[bank] = FWU_BANK_INVALID;
-> > +		}
-> > +	}
-> > +
-> > +	mdata_mod = 1;
-> > +	printf("Image %d in bank %d: acceptance %s\n",
-> > +	       image, bank, accept ? "set" : "cleared");
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static int set_bank_state(int bank, const char *state_str)
-> > +{
-> > +	struct fwu_fw_store_desc *fw_desc;
-> > +	struct fwu_mdata_ext *mdata_ext;
-> > +	u8 state;
-> > +	int i;
-> > +
-> > +	if (valid_mdata->version != 2) {
-> > +		fprintf(stderr,
-> > +			"Error: Bank state is only supported in V2 metadata\n");
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	fw_desc = fwu_get_fw_desc(valid_mdata);
-> > +	mdata_ext = fwu_get_fw_mdata_ext(valid_mdata);
-> > +
-> > +	if (bank < 0 || bank >= fw_desc->num_banks || bank >= MAX_BANKS_V2) {
-> > +		fprintf(stderr, "Error: Invalid bank %d (must be 0-%d)\n",
-> > +			bank, fw_desc->num_banks - 1);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	/* Parse state string */
-> > +	if (!strcmp(state_str, "accepted")) {
-> > +		state = FWU_BANK_ACCEPTED;
-> > +	} else if (!strcmp(state_str, "valid")) {
-> > +		state = FWU_BANK_VALID;
-> > +	} else if (!strcmp(state_str, "invalid")) {
-> > +		state = FWU_BANK_INVALID;
-> > +	} else {
-> > +		fprintf(stderr,
-> > +			"Error: Invalid state '%s' (must be accepted/valid/invalid)\n",
-> > +			state_str);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	if (mdata_ext->bank_state[bank] == state)
-> > +		return 0;
-> > +
-> > +	/* If a bank is set in a accepted state all firmware images in
-> > +	 * that bank must be marked as accepted as described in the spec.
-> > +	 */
-> > +	if (state == FWU_BANK_ACCEPTED) {
-> > +		for (i = 0; i < fw_desc->num_images; i++) {
-> > +			int ret;
-> > +
-> > +			ret = set_image_accepted(i, bank, true);
-> > +			if (ret)
-> > +				return ret;
-> > +		}
-> > +	}
-> > +	mdata_ext->bank_state[bank] = state;
-> > +	mdata_mod = 1;
-> > +
-> > +	printf("Bank %d state set to %s (0x%02x)\n", bank, state_str, state);
-> > +	return 0;
-> > +}
-> > +
-> > +static int metadata_v1_validate_size(void)
-> > +{
-> > +	int calc_size;
-> > +
-> > +	calc_size = sizeof(struct fwu_mdata) +
-> > +		    (sizeof(struct fwu_image_entry) +
-> > +		     sizeof(struct fwu_image_bank_info) * nbanks) * nimages;
-> > +
-> > +	if (devices[0].mdata_size != calc_size) {
-> > +		fprintf(stderr,
-> > +			"Metadata calculate size (-B and -I options) 0x%x mismatch with the config 0x%zx\n",
-> > +			calc_size, devices[0].mdata_size);
-> > +		return -EINVAL;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +/* Command-line interface */
-> > +static void print_usage(void)
-> > +{
-> > +	fprintf(stderr, "Usage: fwumdata [options]\n\n");
-> > +	fprintf(stderr, "Options:\n"
-> > +		"\t-c, --config <file>         Use custom config file, defaults:\n"
-> > +		"\t                              ./fwumdata.config or /etc/fwumdata.config\n"
-> > +		"\t-l, --list                  List detailed metadata with GUIDs\n"
-> > +		"\t-a, --active <bank>         Set active bank index\n"
-> > +		"\t-p, --previous <bank>       Set previous bank index\n"
-> > +		"\t-s, --state <bank> <state>  Set bank state (V2 only)\n"
-> > +		"\t                              state: accepted|valid|invalid\n"
-> > +		"\t-i, --image <id>            Image number (for -A/-C)\n"
-> > +		"\t-b, --bank <bank>           Bank number (for -A/-C)\n"
-> > +		"\t-A, --accept                Accept image (requires -i and -b)\n"
-> > +		"\t-C, --clear                 Clear image acceptance (requires -i and -b)\n"
-> > +		"\t-u, --update                Update metadata if there is a checksum issue\n"
-> > +		"\t-B, --nbanks <num_banks>    Number of banks (required for V1 metadata)\n"
-> > +		"\t-I, --nimages <num_images>  Number of images (required for V1 metadata)\n"
-> > +		"\t-h, --help                  Print this help\n\n");
-> > +	fprintf(stderr, "Config file format (fwumdata.config):\n"
-> > +		"\t# Device Name      Device Offset    Metadata Size    Erase Size\n"
-> > +		"\t/dev/mtd0          0x0              0x78             0x1000\n"
-> > +		"\t/dev/mtd1          0x0              0x78             0x1000\n\n");
-> > +	fprintf(stderr, "Examples:\n"
-> > +		"\tfwumdata                              # Print metadata summary\n"
-> > +		"\tfwumdata -l                           # Print detailed metadata\n"
-> > +		"\tfwumdata -a 1                         # Set active bank to 1\n"
-> > +		"\tfwumdata -s 1 accepted                # Set bank 1 to accepted state\n"
-> > +		"\tfwumdata -i 0 -b 0 -A                 # Accept image in bank 0\n"
-> > +		"\tfwumdata -B 2 -I 2 -i 1 -b 1 -A -l    # Accept image 1 in bank 1 with metadata V1\n");
-> > +}
-> > +
-> > +int main(int argc, char *argv[])
-> > +{
-> > +	char *bank_state_str = NULL;
-> > +	bool list_detailed = false;
-> > +	int bank_state_num = -1;
-> > +	int active_index = -1;
-> > +	int bank_id = -1;
-> > +	int prev_index = -1;
-> > +	bool do_accept = 0;
-> > +	bool do_clear = 0;
-> > +	bool do_update = 0;
-> > +	int image_id = -1;
-> > +	int ret = 0;
-> > +	int opt;
-> > +
-> > +	static struct option long_options[] = {
-> > +		{"config", required_argument, 0, 'c'},
-> > +		{"list", no_argument, 0, 'l'},
-> > +		{"active", required_argument, 0, 'a'},
-> > +		{"previous", required_argument, 0, 'p'},
-> > +		{"state", required_argument, 0, 's'},
-> > +		{"image", required_argument, 0, 'i'},
-> > +		{"bank", required_argument, 0, 'b'},
-> > +		{"accept", no_argument, 0, 'A'},
-> > +		{"clear", no_argument, 0, 'C'},
-> > +		{"update", no_argument, 0, 'u'},
-> > +		{"nbanks", required_argument, 0, 'B'},
-> > +		{"nimages", required_argument, 0, 'I'},
-> > +		{"help", no_argument, 0, 'h'},
-> > +		{0, 0, 0, 0}
-> > +	};
-> > +
-> > +	/* Parse arguments */
-> > +	while ((opt = getopt_long(argc, argv, "c:la:p:s:i:b:ACuB:I:h", long_options, NULL)) != -1) {
-> > +		switch (opt) {
-> > +		case 'c':
-> > +			config_file = optarg;
-> > +			break;
-> > +		case 'l':
-> > +			list_detailed = 1;
-> > +			break;
-> > +		case 'a':
-> > +			active_index = atoi(optarg);
-> > +			break;
-> > +		case 'p':
-> > +			prev_index = atoi(optarg);
-> > +			break;
-> > +		case 's':
-> > +			bank_state_num = atoi(optarg);
-> > +			if (optind < argc && argv[optind][0] != '-') {
-> > +				bank_state_str = argv[optind++];
-> > +			} else {
-> > +				fprintf(stderr,
-> > +					"Error: -s requires bank number and state\n");
-> > +				return 1;
-> > +			}
-> > +			break;
-> > +		case 'i':
-> > +			image_id = atoi(optarg);
-> > +			break;
-> > +		case 'b':
-> > +			bank_id = atoi(optarg);
-> > +			break;
-> > +		case 'A':
-> > +			do_accept = 1;
-> > +			break;
-> > +		case 'C':
-> > +			do_clear = 1;
-> > +			break;
-> > +		case 'u':
-> > +			do_update = 1;
-> > +			break;
-> > +		case 'B':
-> > +			nbanks = atoi(optarg);
-> > +			break;
-> > +		case 'I':
-> > +			nimages = atoi(optarg);
-> > +			break;
-> > +		case 'h':
-> > +			print_usage();
-> > +			return 0;
-> > +		default:
-> > +			print_usage();
-> > +			return 1;
-> > +		}
-> > +	}
-> > +
-> > +	ret = find_parse_config();
-> > +	if (ret < 0) {
-> > +		fprintf(stderr, "Error: Cannot read configuration\n");
-> > +		return ret;
-> > +	}
-> > +
-> > +	ret = read_metadata(do_update);
-> > +	if (ret < 0) {
-> > +		fprintf(stderr, "Error: Cannot read metadata\n");
-> > +		goto cleanup;
-> > +	}
-> > +
-> > +	if (valid_mdata->version == 1) {
-> > +		ret = metadata_v1_validate_size();
-> > +		if (ret)
-> > +			goto cleanup;
-> > +	}
-> > +
-> > +	/* Perform operations */
-> > +	if (active_index >= 0) {
-> > +		ret = set_active_index(active_index);
-> > +		if (ret < 0)
-> > +			goto cleanup;
-> > +	}
-> > +
-> > +	if (prev_index >= 0) {
-> > +		ret = set_previous_index(prev_index);
-> > +		if (ret < 0)
-> > +			goto cleanup;
-> > +	}
-> > +
-> > +	if (do_accept || do_clear) {
-> > +		if (image_id < 0 || bank_id < 0) {
-> > +			fprintf(stderr,
-> > +				"Error: -A/-C requires both -i <guid> and -b <bank>\n");
-> > +			ret = -EINVAL;
-> > +			goto cleanup;
-> > +		}
-> > +
-> > +		ret = set_image_accepted(image_id, bank_id, do_accept);
-> > +		if (ret < 0)
-> > +			goto cleanup;
-> > +	}
-> > +
-> > +	if (bank_state_num >= 0 && bank_state_str) {
-> > +		ret = set_bank_state(bank_state_num, bank_state_str);
-> > +		if (ret < 0)
-> > +			goto cleanup;
-> > +	}
-> > +
-> > +	/* Write back if modified */
-> > +	if (mdata_mod) {
-> > +		ret = write_metadata();
-> > +		if (ret)
-> > +			goto cleanup;
-> > +	}
-> > +
-> > +	/* Display metadata if no modifications or list requested */
-> > +	if (list_detailed)
-> > +		print_metadata_detailed();
-> > +	else
-> > +		print_metadata_summary();
-> > +
-> > +cleanup:
-> > +	/* Close devices and free memory */
-> > +	if (devices[0].fd)
-> > +		close(devices[0].fd);
-> > +	if (devices[1].fd)
-> > +		close(devices[1].fd);
-> > +
-> > +	free(mdata);
-> > +
-> > +	for (int i = 0; i < 2; i++) {
-> > +		if (devices[i].devname)
-> > +			free((void *)devices[i].devname);
-> > +	}
-> > +
-> > +	return ret;
-> > +}
-> > diff --git a/tools/fwumdata_src/fwumdata.config b/tools/fwumdata_src/fwumdata.config
-> > new file mode 100644
-> > index 00000000000..7e83f7a5909
-> > --- /dev/null
-> > +++ b/tools/fwumdata_src/fwumdata.config
-> > @@ -0,0 +1,33 @@
-> > +# FWU Metadata Configuration File
-> > +#
-> > +# Format: <device> <offset> <metadata_size> <erase_size>
-> > +#
-> > +# This file describes where the FWU metadata is stored. You can specify
-> > +# up to two entries for redundant metadata copies.
-> > +#
-> > +# Device: MTD device (/dev/mtdX), block device (/dev/mmcblkX), or file path
-> > +# Offset: Byte offset from start of device (hex with 0x prefix)
-> > +# Metadata Size: Size of metadata structure in bytes (hex with 0x prefix)
-> > +# Erase Size: Sector/erase block size (hex with 0x prefix, defaults to
-> > +#	      metadata_size, required only for MTD device)
-> > +#
-> > +# Examples:
-> > +#
-> > +# MTD devices (NOR/NAND flash):
-> > +# /dev/mtd0  0x0       0x1000  0x1000
-> > +# /dev/mtd1  0x0       0x1000  0x1000
-> > +#
-> > +# Block device (eMMC/SD):
-> > +# /dev/mmcblk0  0x100000  0x78
-> > +# /dev/mmcblk0  0x101000  0x78
-> > +#
-> > +# or:
-> > +# /dev/disk/by-partlabel/metadata1  0  0x78
-> > +# /dev/disk/by-partlabel/metadata2  0  0x78
-> > +#
-> > +# Regular file:
-> > +# /boot/fwu-mdata.bin  0x0  0x78
-> > +#
-> > +# Default configuration (update for your platform):
-> > +/dev/mtd0  0x0  0x78  0x1000
-> > +/dev/mtd1  0x0  0x78  0x1000
-> > diff --git a/tools/fwumdata_src/fwumdata.h b/tools/fwumdata_src/fwumdata.h
-> > new file mode 100644
-> > index 00000000000..5e2c45d0fb0
-> > --- /dev/null
-> > +++ b/tools/fwumdata_src/fwumdata.h
-> > @@ -0,0 +1,138 @@
-> > +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> > +/*
-> > + * Copyright (c) 2025, Kory Maincent <kory.maincent@bootlin.com>
-> > + */
-> > +
-> > +#ifndef _FWUMDATA_H_
-> > +#define _FWUMDATA_H_
-> > +
-> > +#include <linux/compiler_attributes.h>
-> > +
-> > +/* Type definitions for U-Boot compatibility */
-> > +typedef uint8_t u8;
-> > +typedef uint16_t u16;
-> > +typedef uint32_t u32;
-> > +typedef uint64_t u64;
-> > +
-> > +/* FWU Constants */
-> > +#define FWU_IMAGE_ACCEPTED	0x1
-> > +#define FWU_BANK_INVALID	(uint8_t)0xFF
-> > +#define FWU_BANK_VALID		(uint8_t)0xFE
-> > +#define FWU_BANK_ACCEPTED	(uint8_t)0xFC
-> > +#define MAX_BANKS_V2		4
-> > +
-> > +/* EFI GUID structure */
-> > +struct efi_guid {
-> > +	u32 time_high;
-> > +	u16 time_low;
-> > +	u16 reserved;
-> > +	u8  family;
-> > +	u8  node[7];
-> > +} __packed;
-> > +
-> > +/* FWU Metadata structures */
-> > +struct fwu_image_bank_info {
-> > +	struct efi_guid  image_guid;
-> > +	u32 accepted;
-> > +	u32 reserved;
-> > +} __packed;
-> > +
-> > +struct fwu_image_entry {
-> > +	struct efi_guid image_type_guid;
-> > +	struct efi_guid location_guid;
-> > +	struct fwu_image_bank_info img_bank_info[0]; /* Variable length */
-> > +} __packed;
-> > +
-> > +struct fwu_fw_store_desc {
-> > +	u8  num_banks;
-> > +	u8  reserved;
-> > +	u16 num_images;
-> > +	u16 img_entry_size;
-> > +	u16 bank_info_entry_size;
-> > +	struct fwu_image_entry img_entry[0]; /* Variable length */
-> > +} __packed;
-> > +
-> > +struct fwu_mdata {
-> > +	u32 crc32;
-> > +	u32 version;
-> > +	u32 active_index;
-> > +	u32 previous_active_index;
-> > +	/* Followed by image entries or fwu_mdata_ext */
-> > +} __packed;
-> > +
-> > +struct fwu_mdata_ext { /* V2 only */
-> > +	u32 metadata_size;
-> > +	u16 desc_offset;
-> > +	u16 reserved1;
-> > +	u8  bank_state[4];
-> > +	u32 reserved2;
-> > +} __packed;
-> > +
-> > +/* Metadata access helpers */
-> > +struct fwu_image_entry *fwu_get_image_entry(struct fwu_mdata *mdata,
-> > +					    int version, int num_banks,
-> > +					    int img_id)
-> > +{
-> > +	size_t offset;
-> > +
-> > +	if (version == 1) {
-> > +		offset = sizeof(struct fwu_mdata) +
-> > +			(sizeof(struct fwu_image_entry) +
-> > +			 sizeof(struct fwu_image_bank_info) * num_banks) * img_id;
-> > +	} else {
-> > +		/* V2: skip fwu_fw_store_desc header */
-> > +		offset = sizeof(struct fwu_mdata) +
-> > +			 sizeof(struct fwu_mdata_ext) +
-> > +			 sizeof(struct fwu_fw_store_desc) +
-> > +			 (sizeof(struct fwu_image_entry) +
-> > +			  sizeof(struct fwu_image_bank_info) * num_banks) * img_id;
-> > +	}
-> > +
-> > +	return (struct fwu_image_entry *)((char *)mdata + offset);
-> > +}
-> > +
-> > +struct fwu_image_bank_info *fwu_get_bank_info(struct fwu_mdata *mdata,
-> > +					      int version, int num_banks,
-> > +					      int img_id, int bank_id)
-> > +{
-> > +	size_t offset;
-> > +
-> > +	if (version == 1) {
-> > +		offset = sizeof(struct fwu_mdata) +
-> > +			 (sizeof(struct fwu_image_entry) +
-> > +			  sizeof(struct fwu_image_bank_info) * num_banks) * img_id +
-> > +			 sizeof(struct fwu_image_entry) +
-> > +			 sizeof(struct fwu_image_bank_info) * bank_id;
-> > +	} else {
-> > +		offset = sizeof(struct fwu_mdata) +
-> > +			 sizeof(struct fwu_mdata_ext) +
-> > +			 sizeof(struct fwu_fw_store_desc) +
-> > +			 (sizeof(struct fwu_image_entry) +
-> > +			  sizeof(struct fwu_image_bank_info) * num_banks) * img_id +
-> > +			 sizeof(struct fwu_image_entry) +
-> > +			 sizeof(struct fwu_image_bank_info) * bank_id;
-> > +	}
-> > +
-> > +	return (struct fwu_image_bank_info *)((char *)mdata + offset);
-> > +}
-> > +
-> > +struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
-> > +{
-> > +	size_t offset;
-> > +
-> > +	offset = sizeof(struct fwu_mdata) +
-> > +		 sizeof(struct fwu_mdata_ext);
-> > +
-> > +	return (struct fwu_fw_store_desc *)((char *)mdata + offset);
-> > +}
-> > +
-> > +struct fwu_mdata_ext *fwu_get_fw_mdata_ext(struct fwu_mdata *mdata)
-> > +{
-> > +	size_t offset;
-> > +
-> > +	offset = sizeof(struct fwu_mdata);
-> > +
-> > +	return (struct fwu_mdata_ext *)((char *)mdata + offset);
-> > +}
-> > +
-> > +#endif /* _FWUMDATA_H_ */
-> > diff --git a/tools/fwumdata_src/fwumdata.mk b/tools/fwumdata_src/fwumdata.mk
-> > index 00f4ae50dbb..2199e43b372 100644
-> > --- a/tools/fwumdata_src/fwumdata.mk
-> > +++ b/tools/fwumdata_src/fwumdata.mk
-> > @@ -4,4 +4,7 @@
-> >  
-> >  mkfwumdata-objs := fwumdata_src/mkfwumdata.o generated/lib/crc32.o
-> >  HOSTLDLIBS_mkfwumdata += -luuid
-> > -hostprogs-always-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
-> > +hostprogs-$(CONFIG_TOOLS_MKFWUMDATA) += mkfwumdata
-> > +
-> > +fwumdata-objs := fwumdata_src/fwumdata.o generated/lib/crc32.o
-> > +hostprogs-$(CONFIG_TOOLS_FWUMDATA) += fwumdata
-> > 
-> > -- 
-> > 2.43.0
-> > 
-> 
-> -sughosh
-
--sughosh
