@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C40E9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:12:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A20BCE9A049
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:12:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 204BF83D77;
-	Thu, 19 Feb 2026 14:11:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E59283CD3;
+	Thu, 19 Feb 2026 14:11:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aMSqqRFS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JkB8D9Sw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42BF883D77; Thu, 19 Feb 2026 14:11:14 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 40B5683D5D; Thu, 19 Feb 2026 14:11:32 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A263E83E48
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9788883936
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-65a43a512b0so959730a12.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:04 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771506663; cv=none;
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-65b9608a9adso1498784a12.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:27 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506684; cv=none;
  d=google.com; s=arc-20240605;
- b=afSbaUguXIz9DDdKXJVcPQyGxNFZre1vfZ2BuxQVo1HXdPKvUOwvU5a29gnXztpPxO
- UgeZndpobLorf52I9rb+rNPpJYobOf3ZuqeD7F3dkcyXCFBDB7SBSj08b0HfyMcbZnMO
- 5cKYkblJ8eup2goIraqM1RrP+RpdKwLk5MCfLHNPrdg65an2oDviKAYe2bHdk0qFDkDc
- +j4FW3NSYuijJtlY71wFL/Dat+dTmk6SlVLiLuNxcG/IGaeofiNj0dn/DIYhedCf+iau
- eN9XJLc/+N0GkxMOcVl6xF7yhru5OFgf6TFJFW7qFLx1UpyOeaBNeJ4QU+17Uarrvved
- tFvg==
+ b=Ev3NmUwYU4tl4ehV71SDKs7TfA5QcC/3/9YJz1MBcwqeTJ7+935Jxn2v9zODzwd5cI
+ pkzsFcS82e01ONXPlyjespjq2Y8F6Bb6sNR3EeMjmLLFiMeVWtuuur5IltcC0EkuRgYs
+ PLcDrv3FhyV8FM+X0yzYYGN4edMfIhClpEBUBULuoM9hVYGqBi/h87cyi3SEXSJ8WpdV
+ ljPypV6wYXcbmcVec83zU9N9KSpuIY32VRoCRmoLM6+FnkzgnR6RoXZPfU1wstyVGjcA
+ puXKTaI1djTdE8jric4esTk5s3LyynqGAudSZkRNcQubBVByQlq0RvlhE+5sEcMOzklq
+ c/0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=27Ak6TsMgrj8CwRjaLaEB3V21YwCMvKps6GG3g+OmFg=;
- fh=8HXeQCbb9h3AtNPUfI3FO3bizYOX7+wOEfFEklPP8Y0=;
- b=SDcgnVCbVlhKCa4XWsq6Tf4T8sOWTvSEr7tbggtnhGWrt1oZW5grabWYwl0sgkpej6
- S/cbekCsq5usxmh9w+0iStum2IAHUXsKEBr5Lc17Gx/HVmdGwPFgqjo8p9i4/I/vTEhS
- dBhvaFsZ++YVxYx1xDEtjJW+AooLvT7FvSp9CEqxMc1IjlNTPkIMAyhg0/arBv5SgyAg
- kfHE8RGPG62w9o3nu9l2wa3/56+zD1kZBrvE52RdqzrVCgfk1fdTmx/98P2HAI5UGh5u
- 8iXrErj88A+/46Ot9NQdyKJVKXymOg8JPqASRwoOBt6W77i+dw+SsEJ3BOaZbPFx9wcG
- c12A==; darn=lists.denx.de
+ bh=I/rVbuR4ItP6HjAsu6JmKc9E6fZezyKp9RQClIQrZsE=;
+ fh=0ALNrgGuMSAONUmbLKxKJZofitgEWc3Za7mn3DgLpZM=;
+ b=GBDXJqSK3gArzr0TN2kt4cG6T32K87Xr8LZTjc4oHRHSv/MNLh3UXnJ2kuwuOJUPzV
+ f95jwyc3GSpxt36rjARxMKhZ1CgspN+M8w+gH+Kt9N3z9BHY4kSxC+UmHNA9Og+H2VSC
+ ui/n9ztnb42xQkRuItx4C0VBu/kqbvJfMMUZhP+6osH0aIzhfXVUtct9Zn5MtEXDxgKa
+ KZla0sRcG5FrHhGJsYfYUpN7QiwSxQdWbyKv3uT0y3XUSaj78Y5ip4ZizdMvPIiRONm4
+ 6jdxQTSv5Z+a9qbQ/NQ0hA4KscIXJBX3tCK/3MVBWc2KTpEZBfcLUVG4TTzp1sTbWTfX
+ hpDg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771506663; x=1772111463; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771506684; x=1772111484; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=27Ak6TsMgrj8CwRjaLaEB3V21YwCMvKps6GG3g+OmFg=;
- b=aMSqqRFSIMBWQwMa0etpedVyziMbEtp09t/B0/EcMirM5Yj9TlY1KEf2XT3VyVtX00
- FxrhXFw85DrhMixEr01EI6eWxqtJ3n7V11bBvHzXH6GC8oT34Dn/d4/5kMN9nYrXYTMA
- S5T6+Gv4rMD4PMtSPAvVLK9qJrSWJk1q2IZHQ=
+ bh=I/rVbuR4ItP6HjAsu6JmKc9E6fZezyKp9RQClIQrZsE=;
+ b=JkB8D9SwSzs00BawN9uTD+5qq+vYk0V3hcqsFKC9dyQejb4aH1BEP3NrkM3Unow/Qe
+ NfDmquGIDxKPo2A+rsxBTDuty1vdEMpAQjPsf1HYnOTV38cMBGwyv2tAs/RxBHtYwspC
+ dBQL3VEFYn0RHnsABfxEgdkY62dAbc6Msfj50=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771506663; x=1772111463;
+ d=1e100.net; s=20230601; t=1771506684; x=1772111484;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=27Ak6TsMgrj8CwRjaLaEB3V21YwCMvKps6GG3g+OmFg=;
- b=LfgfovtFhR+4fUtjIq8S82UqGn+GKlpl2bAo4xnvwgcIB7+kOyuXSnEf+QUlfZ0/uX
- 4T2eiRVD496gju7aXIaBNW6d31vw9JHmSi2UuoQVMeVgn/CxQZ9J5fQ5xOL0z6EoeB+N
- BWURkiI55xdIsdemnSOwwBKsJ4q99Pke7p3QSQzuNL/SGKw1vbip/F+OATpJ8QcHv39m
- 1V8ez1vs3wQ3hla3qqYt4qT7N/clLnPhz7iXIHrI5Qpzlmvt0cz2hWQzHMUr94BA6xFc
- V4HpU9V9BNhXl7MFogy3yWuRwvYw999aIxRuWxQ7q7H2uTa+d0YJ48RIg62Hf5CIuDlN
- 3mpA==
+ bh=I/rVbuR4ItP6HjAsu6JmKc9E6fZezyKp9RQClIQrZsE=;
+ b=Q+5HvopF1IOvG82ut9ebUOuvwlQlhp3LR/FUYHk3pFjOgX2Tsaq6/aCAQgGs5Hn/Zj
+ 4H7lqrX1QPVFTS5z4Vv+C0M2Ry3D8quIMVF50mAjuL/HNg1h4Y6RPnc+gdzdA11UN6X3
+ +X9QAtBAvQZMJVadRkQpXO+8fJ9s+DOFv9Uq7S4SGltP7eycJPwdpxBkjmGA4A2yYrEA
+ vaWXsiUACLLFxF89OTlLVmk+2nZcbk/izBSlC34QVIaIK2SyyBrLzeisx2kOFn2xVzlL
+ 0QaJFP5PT6eSHb+3x8XOWn6OJaIgQR0LxDXUG/zHa98iB8gpgodNPNU2WAyNT30RZ1HZ
+ QG5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3Ghxoqn8tr9AzVer8IiWmyoB5kV92scPaozipjkEI5xoPGv0hVqlPRE2XbOWzp/YOt03sjtY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzSpy+Yn8m1/R8x9k+B0nXGjaAllmnnvHxBSxKyytnDjQeSEetw
- J1Sc1YtIgRwUpi2LmRwp7nClqXL4lRFQQ6UK/UiJpWErYKhwAVFH9fqhOuOKM7xdiqGKzXUo+n/
- VM2TTsIWYF2rZK9gUX26LMgVbdDfVCjlIUL4SLBf8
-X-Gm-Gg: AZuq6aK0jzbH+lCYniojHF854CT//w80BufnMyrc/ZDg3HAt4RORpW76CDTb/dCnVRz
- SqRV0s/G/+490uSt/KidoOUKHXJkE9BgwSPvIYVbiYyWA+mGwg+Ec/vwYW2GL7o85EFqzYLdmKi
- Iz9LzNdihUtHIrpDJUO7EtJB4QMEJXnMXEmyj1WBUgQ7fHEjiKtghx4NtGM2t0gnEKPY8mardpH
- ZFph89mc6UzObGtje5PvC+DwV0kwDIAAwEB8aQ1FU1f6gYe+fMoKJyQQGdrKZP3UT9Ayo+0vDUk
- 5+QqdA==
-X-Received: by 2002:a05:6402:2794:b0:65b:f342:d1a2 with SMTP id
- 4fb4d7f45d1cf-65c76999439mr3075217a12.6.1771506662651; Thu, 19 Feb 2026
- 05:11:02 -0800 (PST)
+ AJvYcCX4i+WPyWKijMgQbHTUmRkXI5whS6jnOkrvB0tOerWOqpndsZEylk1L80ETbkJPxfJINo9DBk4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHqGMdgbgaT2ZvMJoj3mE5+USB7vp6aAR2gPzbR2Rgmjre0+i3
+ UI9cY1W/Zvp6P/LGniHkmp/ewOUUJ+V+5lbqS8QdxzJqzrJAYpWu52DKuLo4QZyZuVfqj//Lou0
+ +HQynBS3WBNQY3bT+tuxzqYCJSsHYjTl9IRCFz1Cc
+X-Gm-Gg: AZuq6aKH/SdYsiXSKpeCEbuAqRSuUm/YZcHkkgY0gnf/Eu9P5UmN9EFbXH/3YsobmXb
+ bc1fGnWw0/7p2JtjA9lKPBCj8QIFY0dha+Aqv8LkkmHJ03z+mblAJ9bJS+ELLEiSQbSnsyTXHVz
+ SNbzHFN8h5c6IhcGWyhDZV+LjxJMh5BFOp1mzmycAulgV6mJGQv5+T/PZGXwGD0Tr6+Rs4STyLI
+ ZOPNCiiNb8hBeDHE9KBK1/2L7lC7wLSDKRaA/zIVgWcYoYVO7aJSKFrtAKj0ij4uhrUdCC/n+JK
+ YgVgPg==
+X-Received: by 2002:a05:6402:27d3:b0:659:4a1f:c6a8 with SMTP id
+ 4fb4d7f45d1cf-65bc785cd09mr9429064a12.12.1771506683631; Thu, 19 Feb 2026
+ 05:11:23 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <92b77e44c1fb34f0433fb75f8404f357ed28b03e.1771275704.git.daniel@makrotopia.org>
-In-Reply-To: <92b77e44c1fb34f0433fb75f8404f357ed28b03e.1771275704.git.daniel@makrotopia.org>
+ <3cb8b55fd4f96dc612b6a3453acecc0d37ca24a5.1771275704.git.daniel@makrotopia.org>
+In-Reply-To: <3cb8b55fd4f96dc612b6a3453acecc0d37ca24a5.1771275704.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 06:09:29 -0700
-X-Gm-Features: AaiRm53Kr9-DAwxyh0aKOdjh54QrN42rYHaKwfs3WHwKO20jz1JxxhYyWWTBZ6c
-Message-ID: <CAFLszTgXPPo0u7zUsqDc7g6FsZycwuo9nLxEG22+XvmSrF4c8A@mail.gmail.com>
-Subject: Re: [RFC PATCH 15/20] boot: bootmeth: openwrt: implement boot via
- bootm storage path
+Date: Thu, 19 Feb 2026 06:09:23 -0700
+X-Gm-Features: AaiRm53kDvQP8UAdwnuWIjGpODO0BDiWWV4-X8aEYG6sNjBI74A_ni5tbLpsH48
+Message-ID: <CAFLszTikEfShvuir8bsVspZ836dxmceGrE7wNUP87eav4kL7dQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 01/20] boot: add image_loader on-demand loading
+ abstraction
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>,
@@ -137,92 +137,94 @@ X-Virus-Status: Clean
 
 Hi Daniel,
 
-On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
+On Mon, 16 Feb 2026 at 14:21, Daniel Golle <daniel@makrotopia.org> wrote:
 >
-> Implement openwrt_boot() to boot a discovered OpenWrt FIT image:
+> Introduce struct image_loader, a small generic layer that lets callers
+> read arbitrary byte ranges from a storage device and keeps a translation
+> table of the regions that have already been loaded into RAM.
 >
-> 1. Get the block interface name via blk_get_devtype() and construct
->    the dev_part_str (e.g. "0:3") from the block descriptor and
->    bootflow partition number
-> 2. Initialise an image_loader for block devices via
->    image_loader_init_blk(), with alloc_ptr set to image_load_addr
-> 3. Optionally read the 'bootconf' env variable and pass it as
->    '#config' in bmi.addr_img for FIT configuration selection
-> 4. Call bootm_run() which runs the full bootm state machine:
->    START -> FINDOS -> FINDOTHER -> LOADOS -> OS_PREP -> OS_GO
+> The API consists of four functions:
 >
-> The image_loader handles on-demand reading of the FIT metadata and
-> sub-images (kernel, FDT) directly from the raw partition. The
-> existing cleanup call in bootm_run_states() releases the loader just
-> before OS_GO. If bootm_run() returns (boot failure), cleanup is
-> called explicitly.
+>   image_loader_lookup()   - check whether a range is already mapped
+>   image_loader_map()      - return a mapped pointer, reading on demand
+>   image_loader_map_to()   - read into a caller-supplied address
+>   image_loader_cleanup()  - release all backend resources
+
+This is somewhat similar to blkmap, but in this case the block is 1.
+
+How about calling it imagemap instead of image_loader? We have lots of
+load_image and image_load stuff in the code base so image_loader would
+be confusing.
+
 >
-> This completes the core block-device boot path for bootmeth_openwrt.
+> A read-callback (image_loader_read_fn) plus an opaque *priv pointer
+> abstract the actual I/O so that block, MTD, and UBI back-ends can be
+> added in follow-up patches without touching the core.
+>
+> Each backend provides a .cleanup callback which is invoked by
+> image_loader_cleanup() to release held device references and free
+> allocated memory. This ensures safe resource teardown between
+> consecutive boot attempts.
+>
+> The translation table (struct image_loader_region[]) avoids redundant
+> reads when the same region is requested more than once, and allows
+> extending an existing mapping when a larger size is needed at the same
+> offset. The table size is controlled by CONFIG_IMAGE_LOADER_MAX_REGIONS
+> (default 16).
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  boot/bootmeth_openwrt.c | 37 ++++++++++++++++++++++++++++++++++++-
->  1 file changed, 36 insertions(+), 1 deletion(-)
+>  boot/Kconfig           |  20 +++++
+>  boot/Makefile          |   2 +
+>  boot/image-loader.c    | 163 +++++++++++++++++++++++++++++++++++++++++
+>  include/image-loader.h | 141 +++++++++++++++++++++++++++++++++++
+>  4 files changed, 326 insertions(+)
+>  create mode 100644 boot/image-loader.c
+>  create mode 100644 include/image-loader.h
 >
-> diff --git a/boot/bootmeth_openwrt.c b/boot/bootmeth_openwrt.c
-> index 08c3f98957a..82f39c17d7f 100644
-> --- a/boot/bootmeth_openwrt.c
-> +++ b/boot/bootmeth_openwrt.c
-> @@ -13,6 +13,8 @@
->  #include <bootm.h>
->  #include <bootmeth.h>
->  #include <dm.h>
-> +#include <env.h>
-> +#include <image.h>
->  #include <image-loader.h>
->  #include <malloc.h>
->  #include <mapmem.h>
-> @@ -73,7 +75,40 @@ static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *bflow)
->
->  static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
->  {
-> -       return log_msg_ret("nyi", -ENOSYS);
-> +       struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
-> +       const char *ifname = blk_get_devtype(bflow->blk);
-> +       struct image_loader ldr = {};
-> +       struct bootm_info bmi;
-> +       char dev_part_str[32];
-> +       char addr_img[64];
-> +       const char *conf;
-> +       int ret;
-> +
-> +       snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d",
-> +                desc->devnum, bflow->part);
-> +
-> +       ret = image_loader_init_blk(&ldr, ifname, dev_part_str);
-> +       if (ret)
-> +               return log_msg_ret("ldr", ret);
-> +
-> +       ldr.alloc_ptr = image_load_addr;
-> +
-> +       bootm_init(&bmi);
-> +       bmi.loader = &ldr;
-> +
-> +       /* FIT config selection via #conf suffix */
-> +       conf = env_get("bootconf");
-> +       if (conf) {
-> +               snprintf(addr_img, sizeof(addr_img), "#%s", conf);
-> +               bmi.addr_img = addr_img;
-> +       }
-> +
-> +       ret = bootm_run(&bmi);
-> +
-> +       /* Clean up if bootm_run() returned (i.e. boot failed) */
-> +       image_loader_cleanup(&ldr);
-> +
-> +       return log_msg_ret("run", ret);
->  }
->
->  static int openwrt_bootmeth_bind(struct udevice *dev)
-> --
-> 2.53.0
 
-This looks OK so far as it goes, but will need rework for the driver change.
+Having looked through some of the patches, this should be a new
+uclass, with a driver for each of the parent devices (block, mtd) that
+you support.
+
+In other words it should be a child of the media device, similar to
+how UCLASS_BOOTDEV works.
+
+See my notes in patch 2 as well.
+
+I wonder if your tests could be added here or perhaps in the next
+patch after this one?
+
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index e5db165424a..f6908e04a51 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -1167,6 +1167,26 @@ config SYS_BOOT_RAMDISK_HIGH
+>
+>  endmenu                # Boot images
+>
+> +config IMAGE_LOADER
+> +       bool "On-demand image loading from storage"
+> +       help
+> +         Provides a generic abstraction for reading image data from
+> +         storage on demand. A translation table maps already-loaded
+> +         regions to their RAM addresses, avoiding redundant reads.
+> +
+> +         Used by bootm when a storage device is specified instead of a
+> +         RAM address.
+> +
+> +config IMAGE_LOADER_MAX_REGIONS
+> +       int "Maximum number of mapped regions in image loader"
+> +       default 16 if IMAGE_LOADER
+> +       default 0
+> +       help
+> +         Maximum number of distinct image regions that can be mapped
+> +         into RAM simultaneously. 16 is sufficient for typical FIT
+> +         images (FDT structure + kernel + device tree + ramdisk +
+> +         a few loadable sub-images).
+
+It doesn't seem worth having a limit and this would render some images
+unloadable. How about using an alist so you can handle any number?
 
 Regards,
 Simon
