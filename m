@@ -4,94 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD379E9A04A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 14:31:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5471E9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 14:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3419683A47;
-	Thu, 19 Feb 2026 15:31:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6F0B83D8A;
+	Thu, 19 Feb 2026 15:31:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JLFoUH1j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F0YgUKw6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DED8383CF2; Thu, 19 Feb 2026 15:31:23 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 801F483936; Thu, 19 Feb 2026 15:31:32 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9420783936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 15:31:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62B0483936
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 15:31:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-65a40f3f048so1764482a12.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 06:31:21 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771511481; cv=none;
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-65807298140so1465265a12.2
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 06:31:30 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771511490; cv=none;
  d=google.com; s=arc-20240605;
- b=J7yOVkmTMS2jxwzkze2MkH2txAZUxpF5YC8qfy48cZ/FROpEFQvUSpYLSy+zZiP2w/
- oGiCxgnwKxRUUlllE7LP7iebJX6XdXtQnRYIhkxpH+q1Io/O8sOxWiy42nZtYOs4hWfw
- IhYAJ9MjXEgCJPFJa+R7EZhkPhzYy3cJlEs24Yjn1pZcdIZhVQ9UklfBTbkLdP10bQu8
- a31wqCfM9Tvp5pFjmYbAmwDXyo5EjTAjqPBmWkwqqNVhPqiYTqanyaSbNdb5H2yqGmAM
- yZDRSAulBXVlcXWtpwyEJoeowdOvazgE+QzLIKGK1LbwVrmsTQz87ykmhZuoYhqxqiQo
- 8bVQ==
+ b=KT3VmKSXs743qGJwQhBbwnUYi3FzQcBkifUBwyFVj2h0IBQGiNYslUKuEkCuGxHK2H
+ v/dRRNik/eSXyacsnwzmLRZ+nDu6azCit2GcB5uud3hUtx3nxdK8KIMh7Nl3wkhiSYm4
+ 0iajA8UrSke9ahk0G5f3PY8tq0xxhlCMpblo8McfeCQaTxziloySQaC7dBHV9Jecxzxs
+ cNYa2U8k19PKQhvQ+CO3Kv7c4+tKE/h+/yIP4p/g0CpFH6UBMYlXRFRH9eZ/PZRW/d0q
+ tcNqHzbQHYipUbgz/TsonuShCG5jsuLTK8AXtAHJf84LkrUxPaRzfLCiL/r+udKkaMLv
+ wE7w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=P5D8XDea8G2TlULo9UgFYT7r+xDMwBAxOSOHW+sp1hU=;
- fh=89JGekwhSyYOPQOy2uyR8LelJwXS2WWWd2nllJCIfB4=;
- b=lhsJG9rvjRrEfO7tm9g0uMAqVgNoer+G5hTm+LQiDPOePiRqR/yi91wvyOcpk1RuT+
- lDXoue9TAOEm+7I1qvpmTnoAA1lGuwznD2aB1mzvA5jRFfcCMYk1OaIrS1tpZbTh4BTF
- BZjSFy9IrQA690XA5RZj1Z7EMLVywhUxARRz843VvfOIocqCVRz34FcyqDseZLToMca5
- VWy+X3pgT+3gRU0PRpdOoZslMAajzKQKTX2mL6PZetAsBkzCMIDOOy7+XYSUe/WCvPI2
- 1uXD7/EiAUBoij6rI5gShNV3zGNNG8ic1ZFdAO2QEn/45ALWqZx7ssbvuWAvCCp7rXBZ
- dDqQ==; darn=lists.denx.de
+ bh=oYQJeeEbaWEBUufd1KoQI+RA1/toCfib5hdSlGVoooU=;
+ fh=Yuk3V/34b+FX9QDxa4PDTsq/QGIOsBiUqlZ9jSvK7ig=;
+ b=LqsscWspabx6iMtF/8ybYExTEEO0H9yYUqEqgVQdUqKjP3ShlY+7flAYytk4MLzqkr
+ iTLl7uJm3l8aYGBAhLPcubNbM4FFCuksoT66YrFRsrfITrCqrRWkbFjT028H6R8Dz4qk
+ 4MHAQrKjloyxub0gT7ASyxY0FhHBcvmAHewyfh8W744jSTBxq/Nrj9fbao4gVkWupVkW
+ KOjDnTO7dLQ3zwN6iWn5LhjQJhIddeYMzufbqmjLS+UqJ+lMhaF6mQRz5fwGCPoVS8YC
+ hdmBXjoEU439u6c3cJQ5m4aw6bErzLEAxWfM6ZSyY0eNqQPGv9ltZw56gMX/GWnuBKeQ
+ sI4w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771511481; x=1772116281; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771511490; x=1772116290; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=P5D8XDea8G2TlULo9UgFYT7r+xDMwBAxOSOHW+sp1hU=;
- b=JLFoUH1jsA6CrMJb7fJIsOej93XjEQRaeZO1h0jifYmhPpzuNbjv9t1+gm08vSZg1E
- BoA6MxEr3g2FP8JU/dyaEvG3M/nmreePsrhl5ZWDtnFHB9KTn+akhb4Q6PA+iC+R5W+4
- tv9J4eFJhzaHxRfh4xlf6jfGcOQwntY2R76tw=
+ bh=oYQJeeEbaWEBUufd1KoQI+RA1/toCfib5hdSlGVoooU=;
+ b=F0YgUKw6X5wStQmBSqQnXzH214lC7LY2n32XytTZcoWPcSD/6G5Bml0eJu6YuMmfYd
+ lA6gyRvMmnHwo+9xHKlW4eHwrlGqQmixxMgDYxtyDNf1CRIKl4c+BLn877ie8tA0Hwqc
+ 1Cwftqn2RoXogaXe1uudQrPIccRdMC06lm+To=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771511481; x=1772116281;
+ d=1e100.net; s=20230601; t=1771511490; x=1772116290;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P5D8XDea8G2TlULo9UgFYT7r+xDMwBAxOSOHW+sp1hU=;
- b=K8mLRhQzUH6kCNT3FZJYruUyVWNQuG3dGIxf7Scww7+S742yIqtBRMTA1JaTTqp668
- WxCwLhIUXZanK7grsKyua5F56lR58Uph8l7t9+4NWz3ZOc+8LT/MKDbV8RJ167dAWO86
- RqLlHtR4DP//v5bGRAEMoHAJljYqYRgub9hwGRo0RyMg1RRXJbDt9zLD5UXEKpEEQBLY
- VtimTeFv1+UFY6WTt9tryoNLanXcEQEBT7RfYgHRRIVk5zC71u3+jaL2sfbxAk3v+kSn
- /iT0MoZf0bnhu9Yh7nzzlDzXU11NefV21xIZkpA5QwXbaU6zUQuWCUshUYm9euP6kcdv
- lEJQ==
-X-Gm-Message-State: AOJu0Yw2zQ7LojdPkarXKYgk2XuBg/wCvKjUqQ26O3qQ4+cjLaZaSoqj
- hsaPmp/hONKjHZ9A7V9FzCBEE5oViD5uPefLnN+kkMzNQAXp1E6Ouw0Z8iptzpTZNf+WLmcwe68
- /2rqt7iHSxLl8sqXbSi0xV+7pUL/UL8KN6xc4vZWc
-X-Gm-Gg: AZuq6aK9PouSIGyUyhYzAQs6wub9Tk94GibfF+IyHwIVC+NTn5jUs/Yv7a2YQFJVXDr
- vDiaf2fXExOoX2+R/V2gasrrRYD1MSy1ZcJpvC0NtFi6yiv2VqUMrdr1nV06ghQRRujHRYbLjeI
- 12giZkG0M49R2DIjPd2NL5gFeRI3t0R+PBCuX0tUhtEo+50Vgya6U5YcsNxDDUZz2oZHgvnodSw
- JcEHRvsHCcpYPQjojlFIcAAftfnjuXZNqxQHZ6c0He6Hw3JK+SnaWpB0cHadr52bsm28YvgaUMV
- OINM/w==
-X-Received: by 2002:a05:6402:f07:b0:659:4d41:9f70 with SMTP id
- 4fb4d7f45d1cf-65dbd3a1dfdmr1353518a12.30.1771511480855; Thu, 19 Feb 2026
- 06:31:20 -0800 (PST)
+ bh=oYQJeeEbaWEBUufd1KoQI+RA1/toCfib5hdSlGVoooU=;
+ b=JNLykf0dwIbBj7uJPTvQ0R8ZYn6KoCcac/EhgaaZyFIoe6Scp3+jY2iTUJZCAvByEC
+ fkqGwY0pLuinwuuxYVfzZg2Z4EGRw2x9r6L/CSQLBFB43Rv0qula/aRR0hwRdUAh1wYT
+ a0F7gqHfZS7228YpZoFkkub03CaIxzBYTii04WM/Q0HjLQbdh8zmFIWZl4fgEgEYQS5M
+ JkifjH2wPdXyvRs12lB27K44jwihxkOIsG2+Ech1P9Lva4cMfJOMPstkBdeH6oLRdusg
+ xGEwW7S5dmwflBw123Ovf2bAzN+n3qBJIfRqh+9TCLSvLYEjgS7kggTW1CjXpSeXOtAI
+ z9kA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCURe4+PWGg5DwryNqsz4c0wifEdMCPYv8KsUQsaOuElUMKgtpVqcVmI8orespeEYzbGKYnar9g=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQ/O+HRxJvGiB5EpK8GcQiMcsQWG7cSDRvj78yH6kBuXhGaVoU
+ p8pQQtLsAb21UXfqUGayyWXr+eXG0zWLOQ+Qd5AQ7qL21Xfwlx8wXr+b11/x62K7rxNALywk39g
+ B2AqsxMegvjkOQuzEiCfyKYZ159JldePIaDhEsQ++
+X-Gm-Gg: AZuq6aJ7Bzd1NmOvjgK9U6Vf63aHWK2HCSFu0mXJUKj5khLLJS0Ra+viS669YxRoCst
+ keTJob/FJOCaAfjRtVS72RR/MifAl6MbFd4haxgsTpJpLzewzCJurzXN2zzDiRXXgGa5peL3XvI
+ rFWTUIdLsEgnVF1DwbH6DG3PoXqEw55NlECKUA6/TxEaJz3KJXANegIkqG0v4fCJSdMSsToQqIa
+ JK+G1GJy44s57pBNEjBAC/xdtUZ9qQfOtwRf9lm6OczcSOqUJ60TBkkLVCzngjHxexNBsexmpRX
+ 1eLShQ==
+X-Received: by 2002:a05:6402:5106:b0:65c:2120:4055 with SMTP id
+ 4fb4d7f45d1cf-65c76a62449mr3431989a12.17.1771511489647; Thu, 19 Feb 2026
+ 06:31:29 -0800 (PST)
 MIME-Version: 1.0
-References: <20260217115333.503359-1-Wojciech.Dubowik@mt.com>
- <20260217115333.503359-5-Wojciech.Dubowik@mt.com>
-In-Reply-To: <20260217115333.503359-5-Wojciech.Dubowik@mt.com>
+References: <cover.1771275704.git.daniel@makrotopia.org>
+ <46dcab5fc58e9116ca017a63ed07922ae3093913.1771275704.git.daniel@makrotopia.org>
+ <CAFLszTiE82Bo1PbvK7Lx7P4Gq=-z+hhgLcgXORtSrYha4R7sBg@mail.gmail.com>
+ <20260219140002.GI3233182@bill-the-cat>
+In-Reply-To: <20260219140002.GI3233182@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 07:31:08 -0700
-X-Gm-Features: AaiRm52bGDVU3SAp4WAQCfrGy6w_1v2zOEXL_KcAqh_o_GPEgxvWFLtfJo5T8mw
-Message-ID: <CAFLszThD4sb6dDOq_8-XJ-QapoxbuHOZJt0rRJBeydpr6fhFJw@mail.gmail.com>
-Subject: Re: [PATCH v6 4/6] binman: Add dump signature option to mkeficapsule
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, trini@konsulko.com, 
- simon.glass@canonical.com, quentin.schulz@cherry.de
+Date: Thu, 19 Feb 2026 07:31:17 -0700
+X-Gm-Features: AaiRm53SWZVwcwouP1uZidfWMjxKmehIHvRSidL9npsCTt-ghO42VeMdcPodD_c
+Message-ID: <CAFLszTj9BzFK3hcRRGtwzZWBO39WwtLjbYJ9ajFQ_c2+rDU=FQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 13/20] boot: bootmeth: add OpenWrt boot method skeleton
+To: Tom Rini <trini@konsulko.com>
+Cc: Daniel Golle <daniel@makrotopia.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Aristo Chen <jj251510319013@gmail.com>,
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Frank Wunderlich <frank-w@public-files.de>, 
+ David Lechner <dlechner@baylibre.com>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Mike Looijmans <mike.looijmans@topic.nl>, Weijie Gao <weijie.gao@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de, 
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,56 +137,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
+Hi Tom,
 
-On Tue, 17 Feb 2026 at 04:54, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
+On Thu, 19 Feb 2026 at 07:00, Tom Rini <trini@konsulko.com> wrote:
 >
-> It will be used to capsule signature verification.
+> On Thu, Feb 19, 2026 at 06:09:28AM -0700, Simon Glass wrote:
+> > On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
+> > >
+> > > Add the initial bootmeth_openwrt driver with:
+> > >
+> > > - UCLASS_BOOTMETH driver, compatible "u-boot,openwrt"
+> > > - check(): accept block devices via bootflow_iter_check_blk()
+> > > - bind(): set BOOTMETHF_ANY_PART so bootstd iterates all partitions
+> > >   without requiring a filesystem
+> > > - read_bootflow(): stub returning -ENOENT
+> > > - boot(): stub returning -ENOSYS
+> > > - Kconfig: CONFIG_BOOTMETH_OPENWRT depending on FIT, BOOTSTD,
+> > >   BOOTM_STORAGE
+> >
+> > We don't normally write out this much detail in the code
 >
-> Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> ---
->  tools/binman/btool/mkeficapsule.py | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
->
-> diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkeficapsule.py
-> index f2ac654db81e..7638c941a8ee 100644
-> --- a/tools/binman/btool/mkeficapsule.py
-> +++ b/tools/binman/btool/mkeficapsule.py
-> @@ -38,7 +38,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
->
->      def generate_capsule(self, image_index, image_guid, hardware_instance,
->                           payload, output_fname, priv_key, pub_key,
-> -                         monotonic_count=0, version=0, oemflags=0):
-> +                         monotonic_count=0, version=0, oemflags=0,
-> +                         dump_sig=False):
->          """Generate a capsule through commandline-provided parameters
->
->          Args:
-> @@ -53,6 +54,7 @@ class Bintoolmkeficapsule(bintool.Bintool):
->              monotonic_count (int): Count used when signing an image
->              version (int): Image version (Optional)
->              oemflags (int): Optional 16 bit OEM flags
-> +            dump_sig (bool): Dump signature to a file (Optional). Default no.
->
->          Returns:
->              str: Tool output
-> @@ -73,6 +75,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
->                  f'--private-key={priv_key}',
->                  f'--certificate={pub_key}'
->              ]
-> +        if dump_sig:
-> +            args += [f'--dump-sig']
->
->          args += [
->              payload,
-> --
-> 2.47.3
->
+> I assume you mean the commit message? And yes, this reads like an
+> AI genreated (then human proof-read) commit message. Which is something
+> I wanted to address, once done with the open questions I still have in
+> the cover letter.
 
-It looks like there are still two problems with test coverage:
+Yes I meant 'about' the code not 'in' the code.
 
-tools/binman/etype/efi_capsule.py                          65      2    97%
-tools/binman/etype/fit.py                                 358      1    99%
+You can normally fix it by asking for prose, or giving it some general
+instructions.
 
 Regards,
 Simon
+
+
+
+>
+> --
+> Tom
