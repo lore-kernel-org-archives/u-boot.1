@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FBBE9A057
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD3AE9A057
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:52:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7577D83DCB;
-	Thu, 19 Feb 2026 18:52:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DBCCA83D0B;
+	Thu, 19 Feb 2026 18:52:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OJTtmg08";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="FvjkqJIk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95FC383CF2; Thu, 19 Feb 2026 18:52:13 +0100 (CET)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
+ id 8760C83D0B; Thu, 19 Feb 2026 18:52:16 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0CD283DCB
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:52:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FBE983E21
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-4838c15e3cbso10494075e9.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:52:10 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4836d4c26d3so11655905e9.2
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:52:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1771523530; x=1772128330;
+ d=amarulasolutions.com; s=google; t=1771523534; x=1772128334;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VXul22mgOqTPFmE2l0Bw7pi4t5Fuo2IMZYSpgl/+DvU=;
- b=OJTtmg081Mvhl+WUhEhRy+z837V0QOLDEYNa5uoEbbCHOG6trZdpzVQle9ANiQjxg6
- j99FXvu7nu2/NBGOGEZjCTGaZTPdR3pb3QbuKVXA+ubU6bFbBkdPqK1iSABch0/Wm312
- XdWUN3p8iHjFgjJBG+1HTyIkjMEdP9CKoYQR8=
+ bh=533B30VEdaP+E4Na1aeGiCFVM50K9If5sXJTZgVBYao=;
+ b=FvjkqJIkaNNUSNoBGLk9g9JipXFLo5K8k6HqJsOOm+VcOIwFpVkRcSn34gk0+vrLTA
+ SSeGTB2Q2xfE9beRFmPZMp/nprEUzmWBdVMOIUgZjv/y7HAxUDfR6SPk1alXduaQeLBU
+ W+tAx12P9FiX4eTTzf0nxtMkwzPqRAPxUwxf8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771523530; x=1772128330;
+ d=1e100.net; s=20230601; t=1771523534; x=1772128334;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=VXul22mgOqTPFmE2l0Bw7pi4t5Fuo2IMZYSpgl/+DvU=;
- b=jXuorrjjAQdzrl2G5lgJgQ9myf5ATvc6oEjHR4DWv3YosdsByN8jHm5peeKtzlKSFU
- g+u8IygaR1KiCT/Fm3yWA976WBgfvqH7s4+3y3BPHb1GNzcyz64gs8nQHqA1oUh1MQNI
- qsnYtGAl74r+Huu99xf9Yf0nkQo65LLjf862mEkZa3pFcxQTsijmJK6niMJfPSoiNE5z
- 4ygX3KGMqLT+spep0LoSgc/uec6enRGdYxFemUOOZWOQjia+mwKn5vfAhdg9kLurX6r2
- L1D+l3NWqxliHl90HkDcup05wQWYy4fvkcyfnnJZNmAQXSDINlHXS9TMzgK9q1smLAVG
- cuFQ==
-X-Gm-Message-State: AOJu0YxKLb0MfZgFT7cEjOgJfJbZe+TbD0Imlo4FZv0eDG/QamhSHOPs
- pk4/ReBqbNODCPWABNFJ8Q5rss5oEahGai9E/EZhu1FBg8KexoAesVoTgloBYvmHBa395qH8wpR
- bnPW0Vag=
-X-Gm-Gg: AZuq6aK6xg4z2gO/2SSiZa3kBg9lAWtAabdqtRS4jn5Vex5m72G5/wZxWXQJuD7gL67
- Poj3nTJU9xXd6j95l0EQoOJIIr1B6OqJTFod2fcReU7SjxQ97Ja/SVF76Y4XrEIDTxIAbC81ptq
- ugl3DgCJcUN0IfGZhVu4AmzL/LKcxAdUCMa5G2f/JxWJ8uCWRehJNIObFV0Z4/8RMxsvQrlI+XN
- kqZoXFIZjA3OHtJqPZEDc9utv+8/QlaJHr/Ht+/+1Ovukia/Zarbrhev9ub25Ia66+cvtj5KutY
- I7i3lSgTUeVRdNZKOKIPm04lFvGXw3qhXV2MheOjGmzukHGxgOSo/PcK96sYIQsR36hz3pIm6/d
- wLae45+wpR6UxOAEZ5t6o4UgqHOQ0Cmuk7w6hSjyvtcbyRr97EY9TGhoZ0poU2Nn1i4LqBxox9U
- ZmWoCDwOFFCPZb2u4wbg3tiAqUYI42EESWs8E2jYtwCI6txJqrZtgtbtfHwjSI3mIhuZGP0oJVT
- ELR3Y47Sl2rj9MzVfCU8jteWuduGYLGKM1SwoytgL2OCWTPPKgK4h36UrCsp+CjJx+bw7hBg6Z7
- NGlZIyuXOaHwEWwdjojwhsb5
-X-Received: by 2002:a05:600c:6912:b0:483:709e:f22d with SMTP id
- 5b1f17b1804b1-4837108fc46mr374253345e9.27.1771523529890; 
- Thu, 19 Feb 2026 09:52:09 -0800 (PST)
+ bh=533B30VEdaP+E4Na1aeGiCFVM50K9If5sXJTZgVBYao=;
+ b=R0UfwRElmqewwHeHLTTlhNXlIT5fS51lxzVuVtYa9ThLqtuaELatbQzfz7r2PGsCnU
+ NT9HgYhzbjKpoulhcEaWNp8p7YH4gydH6/igVDQZKBBt321tykt8eIqXlXmsODRKiEPa
+ t/WCNZGoPzA07PF+IYdKJP28u8XzruJyLigAwL7M5iBp1hHqZeLkW15snpLQYVo8kNqM
+ ZlIJj6QGYalQIKmQNY5UOGPe24Fo8i24yZ3xzBgLB0zn5/y5CJWdvhs7HbZPxtRoVvXy
+ CwZ86gTcxUXY+3g4RU5vW6HdnRUrKXAll7tyV376rQNH4Zxh1LWGrk5nDoyslT6u1KZd
+ wxJA==
+X-Gm-Message-State: AOJu0Yzq0TkXujJPH5HJ034VSPevPW6YDzJZwv4QOWl4QgX63pJJCTMb
+ j6lUir+Ztaxe7NChtfRoqzyZ8Fkeq+XOur+xh9uV6F6SYB+0BZHKV1qWFggFE2ahwPVgfAwpTHu
+ xRYuB
+X-Gm-Gg: AZuq6aL0imdHawHaW307TXIuoL2oKWS7luIbETalbmfoNQBQ+Ji4PKwklsiVIl9yCaa
+ 5cxsVGwHBrtCkGyV0SIhEbZAgFkcfJJQ/VeeLa9zy8RM+OPrxr8gny3zYm6TPIDumvD94U3oWYY
+ ODBM04zliJdZh00H4Z5BWyXWeuejl6XvuvqsTMRh3du0SgtPzbP9MDTtlwqvZBqz22ZGrz7/dd7
+ cQ8M3WcmF1Am2cM5eTpsP/G4ddya9D4N6s/m8tX5oTFiKzTen+JCgT3JySVDI4aE6j73JL6m0ha
+ XLlCf5eXaAe7cbub6rjFKvdqV8mln9+/p0dBUDsK9xqUESE6hDsHpAWXY+3NqSKJ8JOLNx0GiVx
+ mAD6ggFKKNGaYOIqDrBQV1DQSNFavJbBrmRfbS94L4EEF9TePu0izzzYjbWFWt1xAW2O/RGIhYl
+ BQhfquJNKrj2pRwfZHz/qdn3IaEmFT+gkLzsfwTqQxPByTJGDj5KvBbWwnnUTxxG7zOKhj+myT9
+ QQ+JmNzpfUlaUFUCiBHQ6g4SFxMdPcNkTnDR06ESTxY1HmJEuitYXRppPTJCHe9a5LQHRvg8YHC
+ UxIXvZgT8zV8CItkKwQ/xWFy
+X-Received: by 2002:a05:600c:6990:b0:483:8f38:a928 with SMTP id
+ 5b1f17b1804b1-4838f38a961mr158805545e9.34.1771523533689; 
+ Thu, 19 Feb 2026 09:52:13 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483a31b0e63sm35485005e9.2.2026.02.19.09.52.04
+ 5b1f17b1804b1-483a31b0e63sm35485005e9.2.2026.02.19.09.52.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 09:52:09 -0800 (PST)
+ Thu, 19 Feb 2026 09:52:13 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
@@ -80,9 +80,9 @@ Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 5/8] spi: stm32: clean up buffer length assignment
-Date: Thu, 19 Feb 2026 18:51:16 +0100
-Message-ID: <20260219175130.2839234-6-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH 6/8] spi: stm32: add support for bits-per-word setting
+Date: Thu, 19 Feb 2026 18:51:17 +0100
+Message-ID: <20260219175130.2839234-7-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260219175130.2839234-1-dario.binacchi@amarulasolutions.com>
 References: <20260219175130.2839234-1-dario.binacchi@amarulasolutions.com>
@@ -104,30 +104,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove redundant divisions by using the already available xferlen
-variable for setting the rx/tx buffer lengths.
+Implement the set_wordlen operation to allow dynamic bus width
+configuration. This is required for peripherals with non-standard
+requirements, such as display panels that need 9-bit word transfers
+during the initialization and setup phase.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
- drivers/spi/stm32_spi.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/spi/stm32_spi.c | 62 +++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 57 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
-index a1f31cf653c7..adba97915cd3 100644
+index adba97915cd3..39ea69c68174 100644
 --- a/drivers/spi/stm32_spi.c
 +++ b/drivers/spi/stm32_spi.c
-@@ -404,8 +404,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+@@ -192,6 +192,11 @@ static void stm32_spi_read_rxfifo(struct udevice *bus)
+ 	log_debug("%d bytes left\n", priv->rx_len);
+ }
  
- 	priv->tx_buf = dout;
++static bool stm32_spi_is_enabled(void __iomem *base)
++{
++	return !!(readl(base + STM32_SPI_CR1) & SPI_CR1_SPE);
++}
++
+ static int stm32_spi_enable(void __iomem *base)
+ {
+ 	log_debug("\n");
+@@ -381,6 +386,44 @@ static int stm32_spi_set_speed(struct udevice *bus, uint hz)
+ 	return 0;
+ }
+ 
++static int _stm32_spi_set_wordlen(struct udevice *bus, unsigned int wordlen)
++{
++	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
++	bool spi_enabled;
++
++	if ((wordlen - 1) < SPI_CFG1_DSIZE_MIN ||
++	    (wordlen - 1) > SPI_CFG1_DSIZE) {
++		dev_err(bus, "Cannot set wordlen to %u [%d - %d]\n",
++			wordlen, SPI_CFG1_DSIZE_MIN + 1,
++			SPI_CFG1_DSIZE + 1);
++		return -EINVAL;
++	}
++
++	spi_enabled = stm32_spi_is_enabled(plat->base);
++	if (spi_enabled)
++		stm32_spi_disable(plat->base);
++
++	dev_dbg(bus, "bits_per_word=%d\n", wordlen);
++
++	priv->cur_bpw = wordlen;
++	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
++			priv->cur_bpw - 1);
++
++	if (spi_enabled)
++		stm32_spi_enable(plat->base);
++
++	return 0;
++}
++
++static int stm32_spi_set_wordlen(struct udevice *slave, unsigned int wordlen)
++{
++	struct udevice *bus = dev_get_parent(slave);
++
++	return _stm32_spi_set_wordlen(bus, wordlen);
++}
++
+ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 			  const void *dout, void *din, unsigned long flags)
+ {
+@@ -394,11 +437,19 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 	u32 xferlen;
+ 	u32 mode;
+ 	int xfer_status = 0;
++	int nb_words;
+ 
+ 	xferlen = bitlen / 8;
+ 
+-	if (xferlen <= SPI_CR2_TSIZE)
+-		writel(xferlen, base + STM32_SPI_CR2);
++	if (priv->cur_bpw <= 8)
++		nb_words = xferlen;
++	else if (priv->cur_bpw <= 16)
++		nb_words = DIV_ROUND_UP(xferlen * 8, 16);
++	else
++		nb_words = DIV_ROUND_UP(xferlen * 8, 32);
++
++	if (nb_words <= SPI_CR2_TSIZE)
++		writel(nb_words, base + STM32_SPI_CR2);
+ 	else
+ 		return -EMSGSIZE;
+ 
+@@ -406,6 +457,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
  	priv->rx_buf = din;
--	priv->tx_len = priv->tx_buf ? bitlen / 8 : 0;
--	priv->rx_len = priv->rx_buf ? bitlen / 8 : 0;
-+	priv->tx_len = priv->tx_buf ? xferlen : 0;
-+	priv->rx_len = priv->rx_buf ? xferlen : 0;
+ 	priv->tx_len = priv->tx_buf ? xferlen : 0;
+ 	priv->rx_len = priv->rx_buf ? xferlen : 0;
++	dev_dbg(bus, "bitlen: %d, xferlen: %d, nb_words: %d\n",
++		bitlen, xferlen, nb_words);
  
  	mode = SPI_FULL_DUPLEX;
  	if (!priv->tx_buf)
+@@ -567,9 +620,7 @@ static int stm32_spi_probe(struct udevice *dev)
+ 	priv->fifo_size = stm32_spi_get_fifo_size(dev);
+ 	priv->cur_mode = SPI_FULL_DUPLEX;
+ 	priv->cur_xferlen = 0;
+-	priv->cur_bpw = SPI_DEFAULT_WORDLEN;
+-	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
+-			priv->cur_bpw - 1);
++	_stm32_spi_set_wordlen(dev, SPI_DEFAULT_WORDLEN);
+ 
+ 	for (i = 0; i < ARRAY_SIZE(plat->cs_gpios); i++) {
+ 		if (!dm_gpio_is_valid(&plat->cs_gpios[i]))
+@@ -630,6 +681,7 @@ static const struct dm_spi_ops stm32_spi_ops = {
+ 	.release_bus	= stm32_spi_release_bus,
+ 	.set_mode	= stm32_spi_set_mode,
+ 	.set_speed	= stm32_spi_set_speed,
++	.set_wordlen    = stm32_spi_set_wordlen,
+ 	.xfer		= stm32_spi_xfer,
+ };
+ 
 -- 
 2.43.0
 
