@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C63E9A04A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:37:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DCEE9A04A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:37:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F60183E8E;
-	Thu, 19 Feb 2026 14:37:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5F51583EC0;
+	Thu, 19 Feb 2026 14:37:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OYgv27Pb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Rv0rrfVK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9E9383A47; Thu, 19 Feb 2026 12:59:23 +0100 (CET)
-Received: from SJ2PR03CU001.outbound.protection.outlook.com
- (mail-westusazlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c001::2])
+ id 6F17B83936; Thu, 19 Feb 2026 12:59:24 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76E1E83AA9
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:59:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB7F8802C1
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:59:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sparsh-kumar@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bI1jt8axgWpFkVUT5rUwGh1CNfjJ//pIk5dInSVVmYSHrHJOJQHpYbGieQNkQAzFQUkdxgkMusDQENvaR+l3su1Jbp32bgGBdlv2BjfW9XTLSbxR9XOnDgPxWNMlVtRZECq62jyq2/0sbJv+3JpRuRyKJRev6BSDT0dhvZ4+hKpIC2AlyTlxyTuz7jhkDm1S0k643suCkKdLwb2OWV9+wNafwvMMWa6DglT58acaGG3JGv939HyC3C+Y2h2ky5cC8GVlRsmih9O9qT0gFUiRPpE0qOlSgci8nRBqKKxOuVIA336n3G4XdrJULAcWvfnv8xhScAIqMd4Zr9a+yxxCqw==
+ b=ss8Q1vtwvdsbvHvyEZ3UJZVuLhIXs8cR9jDjmIJPyaz/SaNVto+CZIhs2GcnxzvHEDXHU6DlRNqnJldfF+3qOeVaqq20OuviVDEUMPyPvQCYwpegYOU+5ZP8+JMV8hFI5fCgkSecyv/vQBXGuRhQyvuvDJRBc9UjiV9VKFfwGpyYtJ33e+S/TuH3IHdtXCxZHW4jddoAcbK95tg2kyi6Lhdz82//4XaT3d7JgNBqaXArbDpamDy0Do76ufyKCQd6K2J4w5dxZ4zmUT4wOr6e7cYNmGNhB2R1mINxEU4lNPS1z75mkXnFo8be0MrY0N+Q6Yzb+pSA73EsURIqKMtH1Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B/wkUKj9lj81XOqyOQm4UncEJiPpaH0RyVAYslr4k1M=;
- b=FB711wbbhFoyTwe8pkNbJkhfjkpUaD0h1hmel+dzn1Gl+evuhRpiL08jkMp/CoaJ+IL9KD0MqaoYykpfUrWXmaIF9eZEtUFyGCH7Uz/Sj7og6PtVFKOuPKwztYOiMVYPwnp0bClsKXUP3E0WWfeT8pAJ8eNYOwYCVZh0QYtfQHvUZSfarrAfjt6u3SyQVkF3f6b+WucMNFb9BFm+geYuHr01R2AYK173P8yiImRF2XtmKoyvfj14l1jMUB7iaiZOemUlsA6DPi5MFdqc93KtblmYSMdInG/DwUbxTlGaiJMs7Ky4zeyEgebHOis2R9UZVTkzS47GENQu8kNmM3KpKw==
+ bh=rkdSEnxZMCD+LQHruu4YUa55PqfjHtMn3qSecpusbGo=;
+ b=RXLkNKy63JzKauLYDZaqxxXGIETiarnstRmEUBi+P5DaFStcDAS7IoG0VCy+ubWj2D92CLKQj3cYnQTQvAL5WJ5Xs9SpBrNW0xwKzgSW928yWiHjlCOxSJXmwHBZLefWZm9iBGs+paBKIN1CqObdgm1krHoK7CDT+4r8242uxVDdZXejTf3B9Uy8Il7EpneEY8ezfnOyN1Xy8kDdrpkUxmjiAhD7opF+iaID91RLqM2ZClI0BE1jpJDj6ZgS42ai8MQL4JFBaV/ToJwNCBNNFM7Vzk+nLi+TTq+qwZdo20kA7GlxIUvvLiKpdOFuQgu1AdN75JLXRhtuvqpclaU6BQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B/wkUKj9lj81XOqyOQm4UncEJiPpaH0RyVAYslr4k1M=;
- b=OYgv27Pb8C6mnQnzhGt2ZmMlYXqzpx8Q24SMX2akyN73vws6H4VNFDWPSm+3N7rRLtIPSIAMy03RLDVStVf1avIy+M4pk0kex423eVY2dJ+OIVm7cHwEAjdZrP0lEBoaxyb7zpVeyO25qn9Y2clF/JdNiHJWrmJkMGJPuHmPCbs=
-Received: from CH0PR04CA0006.namprd04.prod.outlook.com (2603:10b6:610:76::11)
- by MW4PR10MB6629.namprd10.prod.outlook.com (2603:10b6:303:22e::18)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=rkdSEnxZMCD+LQHruu4YUa55PqfjHtMn3qSecpusbGo=;
+ b=Rv0rrfVK4r1zLmEM9swS2esk91a6A/WpGTOI9u4NSPCqLfkucsJfjMtqQeR38PaEw0b5OBWRKd0vRZDeB/TsyyEnBqFmPUW45U6wJsKGE9ORGVY7pl0hugV5mgrWqE7s3owhhIv7BpMZXUC9bH1u2lVKMlMr6voJ4ymKcSwsNWQ=
+Received: from DS7PR03CA0249.namprd03.prod.outlook.com (2603:10b6:5:3b3::14)
+ by IA1PR10MB6709.namprd10.prod.outlook.com (2603:10b6:208:41a::18) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.15; Thu, 19 Feb
- 2026 11:59:15 +0000
-Received: from CH3PEPF0000000F.namprd04.prod.outlook.com
- (2603:10b6:610:76:cafe::71) by CH0PR04CA0006.outlook.office365.com
- (2603:10b6:610:76::11) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 11:59:17 +0000
+Received: from DS1PEPF00017097.namprd05.prod.outlook.com
+ (2603:10b6:5:3b3:cafe::87) by DS7PR03CA0249.outlook.office365.com
+ (2603:10b6:5:3b3::14) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.16 via Frontend Transport; Thu,
  19 Feb 2026 11:59:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH3PEPF0000000F.mail.protection.outlook.com (10.167.244.40) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ DS1PEPF00017097.mail.protection.outlook.com (10.167.18.101) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 11:59:13 +0000
-Received: from DFLE214.ent.ti.com (10.64.6.72) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 11:59:16 +0000
+Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
- 2026 05:59:12 -0600
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:59:16 -0600
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
- 2026 05:59:12 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 05:59:15 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 19 Feb 2026 05:59:12 -0600
+ Transport; Thu, 19 Feb 2026 05:59:15 -0600
 Received: from uda0510137.dhcp.ti.com (uda0510137.dhcp.ti.com [172.24.233.216])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61JBx59u2535407;
- Thu, 19 Feb 2026 05:59:09 -0600
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61JBx59v2535407;
+ Thu, 19 Feb 2026 05:59:12 -0600
 From: Sparsh Kumar <sparsh-kumar@ti.com>
 To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  Bryan Brattlof <bb@ti.com>, <u-boot@lists.denx.de>
 CC: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, "Sebin
  Francis" <sebin.francis@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
  "Akashdeep Kaur" <a-kaur@ti.com>, Sparsh Kumar <sparsh-kumar@ti.com>
-Subject: [PATCH 1/4] board: ti: rm-cfg: Update rm-cfg to reflect new resource
- reservation
-Date: Thu, 19 Feb 2026 17:28:34 +0530
-Message-ID: <20260219115837.965532-2-sparsh-kumar@ti.com>
+Subject: [PATCH 2/4] board: ti: am62px: tifs-rm-cfg: Sync tifs-rm-cfg with
+ TIFS firmware updates
+Date: Thu, 19 Feb 2026 17:28:35 +0530
+Message-ID: <20260219115837.965532-3-sparsh-kumar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260219115837.965532-1-sparsh-kumar@ti.com>
 References: <20260219115837.965532-1-sparsh-kumar@ti.com>
@@ -96,56 +96,56 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000F:EE_|MW4PR10MB6629:EE_
-X-MS-Office365-Filtering-Correlation-Id: 848aefa2-ffe5-4f3e-c399-08de6fae4cd6
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017097:EE_|IA1PR10MB6709:EE_
+X-MS-Office365-Filtering-Correlation-Id: 80e965f6-9f3c-4bef-3683-08de6fae4e8f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TAe+wIg1DjagvcgH2VGqm1cqEachpIjpOA7p2jZOLS6tjjKu4vU8QCAEwK6Z?=
- =?us-ascii?Q?pgOkecMOWpwip75OVH2e4D/1bXQjPz4tafnwS8k0tcpG6YVQzm2v74qXSujV?=
- =?us-ascii?Q?aCAlSWd5HgdJgZ2nNqdMilrGLUW4pqq54OztXlfenAag96a+YtxSxajgazEN?=
- =?us-ascii?Q?x1et/oDwrpHUjnmOyq1m/Bd+kepBTLm3d221N2H/qS1ZRd/2FmFLzMaUE4Ec?=
- =?us-ascii?Q?AeHeS2YPza7DICF4v2T8X3JFOyy3fmi5T/r3+UkQv8zXpvqt7ariDh+jIVOC?=
- =?us-ascii?Q?Ej1FQeY6IcMnFpA9c8Re9H1CMX/npPSyhqbGKTHSDMFL5QW3XbGeF/9YBBM3?=
- =?us-ascii?Q?2zOls7luPl2gIBydDEhzJrxxUHqkMpCG/eWGmqs+p9TNyUDh9rPHZ/Y9Gxho?=
- =?us-ascii?Q?8u/a0aCxmiOSW/IqrRBUEOt1Xub4YpGWA2Tj7q/51Eg0b0NPAtpKsC+9/zei?=
- =?us-ascii?Q?0k0UgubJLWIIIXNsZAhMvTvQF5QAF98CMJYzmACnwXItdwM+9Ooj0znP+WzR?=
- =?us-ascii?Q?zLSMNPubUdbpOafsHe0q1fcZnmV1HHdm0bUtJgLD/65b6QTZWFS1X31TWuSR?=
- =?us-ascii?Q?+TQot5laAlQBwpdVfP5oycy6x5Sf8PEMv+r0V2+JjGFvrQXbGPjXawbzdFs+?=
- =?us-ascii?Q?Fj0ZUGOEz423nbRvJ6q2oKRMQmd7PBhCvCZeIWk4ThE4GhtFPRq+pSB3n7iJ?=
- =?us-ascii?Q?dpXl5edLcHOAa3QbiBhKC6Px+ZbDnWOAGCi1TPuckQUG2VDX7pgbGD0rv7eV?=
- =?us-ascii?Q?yqH1+LwMUksPMyAWi3vPImmgi76mhDdKYNxt0IS7X12rvozoVGKLbfzStHgr?=
- =?us-ascii?Q?5bT4xkr5ov0vATfg0jRyG08UNhTuEbdlmZwmyBCAN+Pf8oOkTd42eGaeHuuZ?=
- =?us-ascii?Q?xBPcYWbG57DEmrExTszkIi1zscwAUWW/l3DL8zG+5xdz0vHVQtMz2t5RcuXu?=
- =?us-ascii?Q?zc1j208fm39znXQGrA+PhMnKjmZ7LqlfOX3f8ICOBMqubjGjxhLbWoqYNNz8?=
- =?us-ascii?Q?M2lsmRDD77sJeUcfl3gSnTngxJ6DVeXovzWR1wnZadpvwDYpNOw+L3E/5tP2?=
- =?us-ascii?Q?m7Dv42G+gQiuatrB987bXOawekvK7G97eaVutLtkcmeLtctCfJM8jNzNN1eu?=
- =?us-ascii?Q?xU+iQt9hHZ542K1wBiWIrcF/21HhBYur5KuLaC8PiXPF/Ah/pjUCxJgcJQSi?=
- =?us-ascii?Q?fM2v2CO5MByGDZwyXAPlP6FyF9DfjUHiHNNCmbqEP7kxIPWQhRcvHq1Zu32n?=
- =?us-ascii?Q?xTRn4nSI75HSuwybaMq0JGHcETFmHLPsC7Cufyk2GBtFNeNJxAX63FjlEi6m?=
- =?us-ascii?Q?fgxhxAdxFWyg8y41AQH655kBPqaEW54MTmHXQ2/oqjii2EmQR8e/8RNo1lFL?=
- =?us-ascii?Q?9RuZdCrIRCefolpF4Qf3NjvFnD/mjPLsHpLOIMl4Hy1yelcTS17zAK7edEB7?=
- =?us-ascii?Q?osUudkl8SN9x7zNMeAsu9MgDHBWof6dxRd16smJKD+tEjtW7ieQbBFuERyin?=
- =?us-ascii?Q?IqjdRFVN7d8X6ITIvsu4d1f/trqxXT9VgAoxpYuWZc0S6bTty3iZeJCy+iGD?=
- =?us-ascii?Q?l83lJnfsqjbqZqoCben5xd4M5kQ05qv8WNg4tmwhm9FHv5NG4pvsrH4GpTk5?=
- =?us-ascii?Q?xQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(13003099007);
+ ARA:13230040|36860700013|82310400026|376014|1800799024|13003099007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WzCykNotGNaTkkuuvhNv8ynBvN3A62PWGgwLX/UZmcmUXa2W7U+NOkQMQ/6M?=
+ =?us-ascii?Q?9Ci+XOW+VHJoFqeQ6ZtfdHxCFks/pNdGUcw2fFHiBV0ycWRkaDDYC91G59is?=
+ =?us-ascii?Q?hjBKQapl5cKzKPMie5LfJ9kB9Ufcp0okThDgrgjwAFXUeRw2oB//bgiNuh6d?=
+ =?us-ascii?Q?CKcNj1cyH9bIDZldZ49E7lkJ6YoqVAMFYfEzzDN1KAz68kZBZRgDEU1IneD9?=
+ =?us-ascii?Q?wyVMDD9bJW9fYDkxnMvh9K2svovxluGcqYizy17ksilFNIzbZQQ/+qw7pYiB?=
+ =?us-ascii?Q?CoYdxrIU/fhOA+d57WqY3NiTalXGK4bxm4Pc1CYLIepWtDzMQ9H81RvAlWW6?=
+ =?us-ascii?Q?Jf8/mDQuId8sLkK8R9KEx0ceCGOGmK3KyEPXVHDuXaSPemV7ebGrUWmE9ziq?=
+ =?us-ascii?Q?8RIsGMnwRgGs3Pgt9oqMOlVFnrdgvqQiwFI12TpXMw5hrDHESIIwsO3RUFkh?=
+ =?us-ascii?Q?EKOuXyGA7dnA6Rqo+okIHPLWhj3kY1PEWpDuS2LZYZ4tsTRzQKr0/BYv/7TO?=
+ =?us-ascii?Q?PhaRrAmppRjBLfay+x1RxtjZKG/IlA6q9a7UL/D13l9ZZ1xnUYDeeONzICAM?=
+ =?us-ascii?Q?xkzG6O4/quDsz2Bzr+ftaferPPcY8o2dCtz0Nt393uAdYkBD+u6N0b/NcslT?=
+ =?us-ascii?Q?fPQMjJHU2cvcUImd1ir+LfpKyww6dVN4rNTMZFN7Wa6I8HeT7MFnw252jNun?=
+ =?us-ascii?Q?WRYsg6k3ek1Ph1M+VbkZEmtnJGn3r2fXupJ4Gr5p0fyiA3jR4OkQasSduib0?=
+ =?us-ascii?Q?OS803ICP1Vuqsek2MARg08W3dJK1oyJWDORvWu5yw3zF8m/UiduTa/NTZ3FS?=
+ =?us-ascii?Q?qejZT08b5mJPAvD42gHx9rHX8rtqw3nuJRRbsx82Xi55TV+LLrAWrU+LZihQ?=
+ =?us-ascii?Q?ZCl1xkHcnof7uL/7kN700M3XTdPM8z93pdSKebJHogfCuxdkKm/yQo2UoGSQ?=
+ =?us-ascii?Q?BPlIv1xR42S1C7fgWWiHXWYQRnD7P9BfyNqRy9Yj2yawkGZloGhUBb9C/m0J?=
+ =?us-ascii?Q?xMQe3upBjoDL9CxDt1EOJDM7sKSTPtYOzBxIzYpgA6K595Es+V0z8vCoBYsJ?=
+ =?us-ascii?Q?D6vlznJbUMQGYOyxTwFvJAf0xsK2IB7CQxcq6Wb4xtMqOXAXDPSj89hl71B8?=
+ =?us-ascii?Q?4ouGR36klvW8ta1H5sVlSFTF8A60Cv6ljkUw6dOnPrPCdMH/Fyk1feudQ87w?=
+ =?us-ascii?Q?8Oz2VLVWoKZ0Ep2Ms+PjZ3wN2oxj4a3ibQN8Eo0Kl5W7Vb973+11RYquY8sK?=
+ =?us-ascii?Q?f3e/xK8OqmCXesFtf2fSp33R71IcoCc18SWzcs9LnzzyNKOgytpOwzMfx2q7?=
+ =?us-ascii?Q?1pQMKWoaXs3HSzzFzWf5e16Vj1eWiJwRLzdPf+TjwaicXWfIO21EuKq08Zus?=
+ =?us-ascii?Q?AjO7/QJMenWPKph6DRalH7nYWvstyJ/hWeZVrywiaVqpMxNAPVCkI96/Icnu?=
+ =?us-ascii?Q?AsAVhhwFTE69H/ygwa2Mr1RfCUjNkqm1oDVQotG4T/oV1LI9zUP7wgQfuWQ5?=
+ =?us-ascii?Q?t8QYOf/7YNc+xaaXR09yJLJ+wwcuYT7JcmD+Ers41syZnnilv9n6B2zCDinB?=
+ =?us-ascii?Q?Zz9EUBabi/B+A76zlmKeL8RKuYlfB6k7T++DX0aJHa3iRIUvasnq0odo5bMg?=
+ =?us-ascii?Q?wg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024)(13003099007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: CdSh3CRX6j2qlohx+LOM8a3BjDbMMpmH7ti8POwsYot40DUEaUrj/agtq8LhDDmY0+SaUXx0N7YhArAKiX4Lu58aV8HbHnBeri8sGPY+iSMyjnGa8nglGTkXZ+acIP5N1R8R62Bu9iZ7cNcJHnlD+Mfr5NZcuPOP5sUa6QYLqWcKN+2zSdX3wVaqoztj25ewBT3Lij1S3v88RkQyQGy/bTHxp3P0g3n6YXgzDyRobu8u8UN8YK4PV0dbh2dpI3bzQRGlhOVsquau5ru9clPNV6CBzeyokoxowJsgVOh96BWpF6oQ6+f8rD+ebAOArSYRPXKPJD16Q+OZyQrs8+o5uYUivWygT67aovX95icRf3oWPL23IxoN2BZroqGBFs70Hw1t1EaknUiSW6jrRityvWCdeQSXEIJvPsuRJbxoD2cU9c0xAGMDQkHdKG2akTEF
+X-MS-Exchange-AntiSpam-MessageData-0: icsD59a/VNjRFqX1CeDaQ2+dK5B4Kx3T8uDSEkVkIGPxOgp29ZAM7g+raCRVDmBU8YxdZPO1ad9l/SoHFMlr0+OioIHp5a39aV0JUHuYUeHOKyvCxdJyQfvSbdWzMvokxd5NfYqUGT7AKZhYOfz/6dt2UVnUgzMF9JZcpDjdI1Dp9nBo37lGt8a/kp9TJ8kZZEO9IzILORvel+NA/0K8OXA4Yhyilytx2GgVQxL6eJvibRQmQTS1HM69W7vlem2TGm37R8kq/iLmVBpjiBYjdKV6c+zp9hMmwDDMMKpUiQARyCLGQ+KvHYYzHWgeMq37JjzBuWwRIRoqEhPnQ9+RxA6oEFlw/mtqIGFH4rj5dXbGY0zdhJ7t0Uqu8eItOTaC6tqIzU/r4kY9dqevbsuBAc2uB+gIjnRGNM6rsQ0nLx9sYZZmmkub5fKvyLR8NbPV
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 11:59:13.6385 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 848aefa2-ffe5-4f3e-c399-08de6fae4cd6
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 11:59:16.5138 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 80e965f6-9f3c-4bef-3683-08de6fae4e8f
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000F.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017097.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6629
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB6709
 X-Mailman-Approved-At: Thu, 19 Feb 2026 14:37:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -163,60 +163,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the latest v11.02.09 TIFS firmware, an additional
-virtual interrupt and event is reserved for MCU cores
-to DM usage on am62x, am62ax and am62px devices.
+Synchronize tifs-rm-cfg file with the latest v11.02.09
+TIFS firmware rm configuration:
 
-Update the rm-cfg to reflect this new reservation.
+ - Update am62px tifs-rm-cfg with revised resource allocations
+ - Apply formatting updates to align with TIFS template
+
+This brings tifs-rm-cfg in sync with the rm-cfg changes
+from commit 22cc77516ac7 ("board: ti: rm-cfg: Update
+rm-cfg to reflect new resource reservation").
 
 Signed-off-by: Sparsh Kumar <sparsh-kumar@ti.com>
 ---
- board/ti/am62ax/rm-cfg.yaml | 8 ++++----
- board/ti/am62px/rm-cfg.yaml | 4 ++--
- board/ti/am62x/rm-cfg.yaml  | 6 +++---
- 3 files changed, 9 insertions(+), 9 deletions(-)
+ board/ti/am62px/tifs-rm-cfg.yaml | 1476 +++++++++++++++---------------
+ 1 file changed, 762 insertions(+), 714 deletions(-)
 
-diff --git a/board/ti/am62ax/rm-cfg.yaml b/board/ti/am62ax/rm-cfg.yaml
-index cbd087de797..4e238883b96 100644
---- a/board/ti/am62ax/rm-cfg.yaml
-+++ b/board/ti/am62ax/rm-cfg.yaml
-@@ -1,5 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0+
--# Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
-+# Copyright (C) 2022-2026 Texas Instruments Incorporated - https://www.ti.com/
- #
- # Resource management configuration for AM62A
- #
-@@ -16,14 +16,14 @@ rm-cfg:
-                 magic: 0x4C41
-                 size: 356
-             host_cfg_entries:
--                -   #  1
-+                -  # 1
-                     host_id: 12
-                     allowed_atype: 0x2A
-                     allowed_qos: 0xAAAA
-                     allowed_orderid: 0xAAAAAAAA
-                     allowed_priority: 0xAAAA
-                     allowed_sched_priority: 0xAA
--                -   #  2
-+                -  # 2
-                     host_id: 20
-                     allowed_atype: 0x2A
-                     allowed_qos: 0xAAAA
-@@ -567,7 +567,7 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 1038
--            num_resource: 497
-+            num_resource: 496
-             type: 1805
-             host_id: 128
-             reserved: 0
-diff --git a/board/ti/am62px/rm-cfg.yaml b/board/ti/am62px/rm-cfg.yaml
-index 73da85eeade..0db82fdaf79 100644
---- a/board/ti/am62px/rm-cfg.yaml
-+++ b/board/ti/am62px/rm-cfg.yaml
+diff --git a/board/ti/am62px/tifs-rm-cfg.yaml b/board/ti/am62px/tifs-rm-cfg.yaml
+index 80269748057..73efceafc75 100644
+--- a/board/ti/am62px/tifs-rm-cfg.yaml
++++ b/board/ti/am62px/tifs-rm-cfg.yaml
 @@ -1,5 +1,5 @@
  # SPDX-License-Identifier: GPL-2.0+
 -# Copyright (C) 2022-2025 Texas Instruments Incorporated - https://www.ti.com/
@@ -224,44 +189,1684 @@ index 73da85eeade..0db82fdaf79 100644
  #
  # Resource management configuration for AM62P
  #
-@@ -567,7 +567,7 @@ rm-cfg:
+@@ -9,231 +9,231 @@
+ tifs-rm-cfg:
+     rm_boardcfg:
+         rev:
+-            boardcfg_abi_maj : 0x0
+-            boardcfg_abi_min : 0x1
++            boardcfg_abi_maj: 0x0
++            boardcfg_abi_min: 0x1
+         host_cfg:
+             subhdr:
+                 magic: 0x4C41
+-                size : 356
++                size: 356
+             host_cfg_entries:
+-                - #1
++                -  # 1
+                     host_id: 12
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #2
++                -  # 2
+                     host_id: 30
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #3
++                -  # 3
+                     host_id: 36
+                     allowed_atype: 0x2A
+                     allowed_qos: 0xAAAA
+                     allowed_orderid: 0xAAAAAAAA
+                     allowed_priority: 0xAAAA
+                     allowed_sched_priority: 0xAA
+-                - #4
++                -  # 4
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #5
++                -  # 5
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #6
++                -  # 6
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #7
++                -  # 7
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #8
++                -  # 8
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #9
++                -  # 9
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #10
++                -  # 10
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #11
++                -  # 11
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #12
++                -  # 12
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #13
++                -  # 13
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #14
++                -  # 14
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #15
++                -  # 15
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #16
++                -  # 16
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #17
++                -  # 17
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #18
++                -  # 18
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #19
++                -  # 19
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #20
++                -  # 20
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #21
++                -  # 21
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #22
++                -  # 22
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #23
++                -  # 23
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #24
++                -  # 24
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #25
++                -  # 25
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #26
++                -  # 26
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #27
++                -  # 27
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #28
++                -  # 28
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #29
++                -  # 29
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #30
++                -  # 30
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #31
++                -  # 31
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+                     allowed_orderid: 0
+                     allowed_priority: 0
+                     allowed_sched_priority: 0
+-                - #32
++                -  # 32
+                     host_id: 0
+                     allowed_atype: 0
+                     allowed_qos: 0
+@@ -244,684 +244,732 @@ tifs-rm-cfg:
+             subhdr:
+                 magic: 0x7B25
+                 size: 8
+-            resasg_entries_size: 904
++            resasg_entries_size: 968
              reserved: 0
+     resasg_entries:
          -
-             start_resource: 909
--            num_resource: 626
-+            num_resource: 625
-             type: 1805
-             host_id: 128
-             reserved: 0
-diff --git a/board/ti/am62x/rm-cfg.yaml b/board/ti/am62x/rm-cfg.yaml
-index 26d99b03b80..a7035dc0bd9 100644
---- a/board/ti/am62x/rm-cfg.yaml
-+++ b/board/ti/am62x/rm-cfg.yaml
-@@ -1,5 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0+
--# Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
-+# Copyright (C) 2022-2026 Texas Instruments Incorporated - https://www.ti.com/
- #
- # Resource management configuration for AM62X
- #
-@@ -525,7 +525,7 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 168
--            num_resource: 8
-+            num_resource: 7
-             type: 1802
-             host_id: 30
-             reserved: 0
-@@ -555,7 +555,7 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 909
--            num_resource: 626
-+            num_resource: 625
-             type: 1805
-             host_id: 128
-             reserved: 0
+-                start_resource: 0
+-                num_resource: 18
+-                type: 1677
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 6
+-                type: 1677
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 6
+-                type: 1677
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 24
+-                num_resource: 2
+-                type: 1677
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 26
+-                num_resource: 6
+-                type: 1677
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 57
+-                num_resource: 18
+-                type: 1678
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 75
+-                num_resource: 5
+-                type: 1678
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 75
+-                num_resource: 5
+-                type: 1678
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 80
+-                num_resource: 2
+-                type: 1678
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 32
+-                num_resource: 12
+-                type: 1679
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 6
+-                type: 1679
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 6
+-                type: 1679
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 50
+-                num_resource: 2
+-                type: 1679
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 52
+-                num_resource: 5
+-                type: 1679
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 18
+-                type: 1696
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 6
+-                type: 1696
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 6
+-                type: 1696
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 24
+-                num_resource: 2
+-                type: 1696
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 26
+-                num_resource: 6
+-                type: 1696
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 18
+-                type: 1697
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 5
+-                type: 1697
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 5
+-                type: 1697
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 23
+-                num_resource: 2
+-                type: 1697
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 12
+-                type: 1698
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 12
+-                num_resource: 6
+-                type: 1698
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 12
+-                num_resource: 6
+-                type: 1698
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 18
+-                num_resource: 2
+-                type: 1698
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 20
+-                num_resource: 5
+-                type: 1698
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 5
+-                num_resource: 35
+-                type: 1802
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 35
+-                type: 1802
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 44
+-                num_resource: 35
+-                type: 1802
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 168
+-                num_resource: 8
+-                type: 1802
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 4096
+-                num_resource: 29
+-                type: 1807
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 4608
+-                num_resource: 99
+-                type: 1808
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 5120
+-                num_resource: 24
+-                type: 1809
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 5632
+-                num_resource: 51
+-                type: 1810
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 6144
+-                num_resource: 51
+-                type: 1811
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 8192
+-                num_resource: 32
+-                type: 1812
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 8704
+-                num_resource: 32
+-                type: 1813
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 9216
+-                num_resource: 32
+-                type: 1814
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 9728
+-                num_resource: 25
+-                type: 1815
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 10240
+-                num_resource: 25
+-                type: 1816
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 10752
+-                num_resource: 25
+-                type: 1817
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 11264
+-                num_resource: 25
+-                type: 1818
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 11776
+-                num_resource: 25
+-                type: 1819
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 12288
+-                num_resource: 25
+-                type: 1820
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1936
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1936
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1936
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1936
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1936
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 32
+-                type: 1937
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 32
+-                type: 1937
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 51
+-                num_resource: 32
+-                type: 1937
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 51
+-                num_resource: 32
+-                type: 1937
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 83
+-                num_resource: 8
+-                type: 1938
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 91
+-                num_resource: 8
+-                type: 1939
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 99
+-                num_resource: 10
+-                type: 1942
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 109
+-                num_resource: 3
+-                type: 1942
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 109
+-                num_resource: 3
+-                type: 1942
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 112
+-                num_resource: 3
+-                type: 1942
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 115
+-                num_resource: 3
+-                type: 1942
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 118
+-                num_resource: 6
+-                type: 1943
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 118
+-                num_resource: 6
+-                type: 1943
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 124
+-                num_resource: 10
+-                type: 1943
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 124
+-                num_resource: 10
+-                type: 1943
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 134
+-                num_resource: 8
+-                type: 1944
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 134
+-                num_resource: 8
+-                type: 1945
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 142
+-                num_resource: 8
+-                type: 1946
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 142
+-                num_resource: 8
+-                type: 1947
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1955
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1955
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1955
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1955
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1955
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 4
+-                type: 1956
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 4
+-                type: 1956
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 23
+-                num_resource: 4
+-                type: 1956
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 23
+-                num_resource: 4
+-                type: 1956
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 27
+-                num_resource: 1
+-                type: 1957
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 28
+-                num_resource: 1
+-                type: 1958
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1961
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1961
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1961
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1961
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1961
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 10
+-                type: 1962
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1962
+-                host_id: 35
+-                reserved: 0
+-        -
+-                start_resource: 10
+-                num_resource: 3
+-                type: 1962
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 13
+-                num_resource: 3
+-                type: 1962
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 16
+-                num_resource: 3
+-                type: 1962
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 1
+-                type: 1963
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 1
+-                type: 1963
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 6
+-                type: 1964
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 19
+-                num_resource: 6
+-                type: 1964
+-                host_id: 36
+-                reserved: 0
+-        -
+-                start_resource: 25
+-                num_resource: 10
+-                type: 1964
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 25
+-                num_resource: 10
+-                type: 1964
+-                host_id: 30
+-                reserved: 0
+-        -
+-                start_resource: 20
+-                num_resource: 1
+-                type: 1965
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 35
+-                num_resource: 8
+-                type: 1966
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 21
+-                num_resource: 1
+-                type: 1967
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 35
+-                num_resource: 8
+-                type: 1968
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 22
+-                num_resource: 1
+-                type: 1969
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 43
+-                num_resource: 8
+-                type: 1970
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 23
+-                num_resource: 1
+-                type: 1971
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 43
+-                num_resource: 8
+-                type: 1972
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 1
+-                type: 2112
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 2
+-                num_resource: 2
+-                type: 2122
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 6
+-                type: 12750
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 6
+-                type: 12769
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 0
+-                num_resource: 8
+-                type: 12810
+-                host_id: 12
+-                reserved: 0
+-        -
+-                start_resource: 3072
+-                num_resource: 6
+-                type: 12826
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 3584
+-                num_resource: 6
+-                type: 12827
+-                host_id: 128
+-                reserved: 0
+-        -
+-                start_resource: 4096
+-                num_resource: 6
+-                type: 12828
+-                host_id: 128
+-                reserved: 0
++            start_resource: 0
++            num_resource: 2
++            type: 1676
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 1676
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 1676
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 1676
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 18
++            type: 1677
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 1677
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 1677
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 1677
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 1677
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 57
++            num_resource: 18
++            type: 1678
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 75
++            num_resource: 5
++            type: 1678
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 75
++            num_resource: 5
++            type: 1678
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 80
++            num_resource: 2
++            type: 1678
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 32
++            num_resource: 12
++            type: 1679
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 6
++            type: 1679
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 6
++            type: 1679
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 50
++            num_resource: 2
++            type: 1679
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 52
++            num_resource: 5
++            type: 1679
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 2
++            type: 1695
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 1695
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 1
++            type: 1695
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 3
++            num_resource: 1
++            type: 1695
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 4
++            num_resource: 18
++            type: 1696
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 1696
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 6
++            type: 1696
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 2
++            type: 1696
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 30
++            num_resource: 2
++            type: 1696
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 18
++            type: 1697
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 5
++            type: 1697
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 5
++            type: 1697
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 2
++            type: 1697
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 12
++            type: 1698
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1698
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 12
++            num_resource: 6
++            type: 1698
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 18
++            num_resource: 2
++            type: 1698
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 5
++            type: 1698
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5
++            num_resource: 35
++            type: 1802
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 35
++            type: 1802
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 44
++            num_resource: 35
++            type: 1802
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 168
++            num_resource: 8
++            type: 1802
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 4096
++            num_resource: 29
++            type: 1807
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4608
++            num_resource: 99
++            type: 1808
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5120
++            num_resource: 24
++            type: 1809
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 5632
++            num_resource: 51
++            type: 1810
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 6144
++            num_resource: 51
++            type: 1811
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 8192
++            num_resource: 32
++            type: 1812
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 8704
++            num_resource: 32
++            type: 1813
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 9216
++            num_resource: 32
++            type: 1814
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 9728
++            num_resource: 25
++            type: 1815
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 10240
++            num_resource: 25
++            type: 1816
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 10752
++            num_resource: 25
++            type: 1817
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 11264
++            num_resource: 25
++            type: 1818
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 11776
++            num_resource: 25
++            type: 1819
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 12288
++            num_resource: 25
++            type: 1820
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1936
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1936
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1936
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1936
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1936
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 32
++            type: 1937
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 32
++            type: 1937
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 51
++            num_resource: 32
++            type: 1937
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 51
++            num_resource: 32
++            type: 1937
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 83
++            num_resource: 8
++            type: 1938
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 91
++            num_resource: 8
++            type: 1939
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 99
++            num_resource: 10
++            type: 1942
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 3
++            type: 1942
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 109
++            num_resource: 3
++            type: 1942
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 112
++            num_resource: 3
++            type: 1942
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 115
++            num_resource: 3
++            type: 1942
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 118
++            num_resource: 6
++            type: 1943
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 118
++            num_resource: 6
++            type: 1943
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 124
++            num_resource: 10
++            type: 1943
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 124
++            num_resource: 10
++            type: 1943
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 134
++            num_resource: 8
++            type: 1944
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 134
++            num_resource: 8
++            type: 1945
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 142
++            num_resource: 8
++            type: 1946
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 142
++            num_resource: 8
++            type: 1947
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1955
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1955
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1955
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1955
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1955
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 4
++            type: 1956
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 4
++            type: 1956
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 4
++            type: 1956
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 4
++            type: 1956
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 27
++            num_resource: 1
++            type: 1957
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 28
++            num_resource: 1
++            type: 1958
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1961
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1961
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1961
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1961
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1961
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 10
++            type: 1962
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1962
++            host_id: 35
++            reserved: 0
++        -
++            start_resource: 10
++            num_resource: 3
++            type: 1962
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 13
++            num_resource: 3
++            type: 1962
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 16
++            num_resource: 3
++            type: 1962
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 1
++            type: 1963
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 1
++            type: 1963
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 6
++            type: 1964
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 19
++            num_resource: 6
++            type: 1964
++            host_id: 36
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 10
++            type: 1964
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 25
++            num_resource: 10
++            type: 1964
++            host_id: 30
++            reserved: 0
++        -
++            start_resource: 20
++            num_resource: 1
++            type: 1965
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 8
++            type: 1966
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 21
++            num_resource: 1
++            type: 1967
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 35
++            num_resource: 8
++            type: 1968
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 22
++            num_resource: 1
++            type: 1969
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 8
++            type: 1970
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 23
++            num_resource: 1
++            type: 1971
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 43
++            num_resource: 8
++            type: 1972
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 1
++            type: 2112
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 2
++            num_resource: 2
++            type: 2122
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 6
++            type: 12750
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 6
++            type: 12769
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 0
++            num_resource: 8
++            type: 12810
++            host_id: 12
++            reserved: 0
++        -
++            start_resource: 3072
++            num_resource: 6
++            type: 12826
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 3584
++            num_resource: 6
++            type: 12827
++            host_id: 128
++            reserved: 0
++        -
++            start_resource: 4096
++            num_resource: 6
++            type: 12828
++            host_id: 128
++            reserved: 0
 -- 
 2.34.1
 
