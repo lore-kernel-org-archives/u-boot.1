@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E939DE9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:11:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C40E9A049
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:12:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF58583E23;
-	Thu, 19 Feb 2026 14:11:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 204BF83D77;
+	Thu, 19 Feb 2026 14:11:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cYOCLXig";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aMSqqRFS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9269583936; Thu, 19 Feb 2026 14:11:09 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 42BF883D77; Thu, 19 Feb 2026 14:11:14 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9465E83E21
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:10:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A263E83E48
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b883c8dfb00so179452666b.1
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:10:57 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771506656; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-65a43a512b0so959730a12.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:04 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506663; cv=none;
  d=google.com; s=arc-20240605;
- b=Bkzcr4b/OMnUXl9M2kBHl638wp3hgcr2PwxV4mwVq8LSogfEW32hgNhGUtHIUF2sra
- 672ojYoldPnnHJstAlqDpSv3hmAvEi8tWiUxZYJoIBRS5cHvSi4aZ+Nn/Jy9fVoug8fe
- ooWNz8QIeXQ2vN2I0SDw4mY0soihLjNs9W37841pBQ8s0ramPBRixK/Y8tzpH0hAO/ZO
- sdomyIpCIfQdOKarM78EOU0UwmaGj5ziffkMvpzm9aVPqa/QQGTykzQ1jMPBhEXT7C8g
- xuDBjixTUnda42KP+A6gX5MaGcAWMOOCXo+r47PywN9R/cKoLEWJRaWhWgrbW8u4VQEE
- Y4Rg==
+ b=afSbaUguXIz9DDdKXJVcPQyGxNFZre1vfZ2BuxQVo1HXdPKvUOwvU5a29gnXztpPxO
+ UgeZndpobLorf52I9rb+rNPpJYobOf3ZuqeD7F3dkcyXCFBDB7SBSj08b0HfyMcbZnMO
+ 5cKYkblJ8eup2goIraqM1RrP+RpdKwLk5MCfLHNPrdg65an2oDviKAYe2bHdk0qFDkDc
+ +j4FW3NSYuijJtlY71wFL/Dat+dTmk6SlVLiLuNxcG/IGaeofiNj0dn/DIYhedCf+iau
+ eN9XJLc/+N0GkxMOcVl6xF7yhru5OFgf6TFJFW7qFLx1UpyOeaBNeJ4QU+17Uarrvved
+ tFvg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=LEtdhG8uvf0ZuyCgKL4EEk47SJGG9Z9AfVMF1tyHwdQ=;
- fh=orZP/9a0Sl76UUdnZjcGxQpIGyDZwWsEHTYHCHug5Ns=;
- b=VKZDX05r79O0s5J6mxluc1Z1RfwXARU9UmHzKSp5mhvSgMyaRj/pk2n7idoOD+qGit
- XbrUGelKxHUVvMh8tKO78rW7UzYng0k2l1K2YeIqaeshP6wiUlN6NbzMPd8h8jw+dtXw
- Vj1jeHsNRNemZCqEne/P/lg04adbSt7X7w6Zs0OSuWIFGJ1eusNe6xCBHw3yGjMPhCCw
- eRDC/1CAOc+WGsOOco6vlO4yyU8oNncRPLaWBaQ7UmsmMqZu0vSD7z3JIm+p9garSavi
- hdhYFcPtnZ9CNHulW7NsQhhBs3tZsPgwq+pID4eKdn/2Ii5QrUyUpzlqMCgywtz/0ege
- Llvg==; darn=lists.denx.de
+ bh=27Ak6TsMgrj8CwRjaLaEB3V21YwCMvKps6GG3g+OmFg=;
+ fh=8HXeQCbb9h3AtNPUfI3FO3bizYOX7+wOEfFEklPP8Y0=;
+ b=SDcgnVCbVlhKCa4XWsq6Tf4T8sOWTvSEr7tbggtnhGWrt1oZW5grabWYwl0sgkpej6
+ S/cbekCsq5usxmh9w+0iStum2IAHUXsKEBr5Lc17Gx/HVmdGwPFgqjo8p9i4/I/vTEhS
+ dBhvaFsZ++YVxYx1xDEtjJW+AooLvT7FvSp9CEqxMc1IjlNTPkIMAyhg0/arBv5SgyAg
+ kfHE8RGPG62w9o3nu9l2wa3/56+zD1kZBrvE52RdqzrVCgfk1fdTmx/98P2HAI5UGh5u
+ 8iXrErj88A+/46Ot9NQdyKJVKXymOg8JPqASRwoOBt6W77i+dw+SsEJ3BOaZbPFx9wcG
+ c12A==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771506656; x=1772111456; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771506663; x=1772111463; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LEtdhG8uvf0ZuyCgKL4EEk47SJGG9Z9AfVMF1tyHwdQ=;
- b=cYOCLXigWalgp4KUBKWpD65nKfaW3uT/7qiWteDvRkNc7ytkWSU/40B9SfjXiLhcip
- KbBw3Caz+v+mmxQsJtHKGGIGRC8V/eG+YfNCriJwQBKRJh0GXWf3+KqHeVdVk8jT/Msd
- u9dLaMH6L2XltXjXCpnquxobHCW67CrQb2JIE=
+ bh=27Ak6TsMgrj8CwRjaLaEB3V21YwCMvKps6GG3g+OmFg=;
+ b=aMSqqRFSIMBWQwMa0etpedVyziMbEtp09t/B0/EcMirM5Yj9TlY1KEf2XT3VyVtX00
+ FxrhXFw85DrhMixEr01EI6eWxqtJ3n7V11bBvHzXH6GC8oT34Dn/d4/5kMN9nYrXYTMA
+ S5T6+Gv4rMD4PMtSPAvVLK9qJrSWJk1q2IZHQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771506656; x=1772111456;
+ d=1e100.net; s=20230601; t=1771506663; x=1772111463;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LEtdhG8uvf0ZuyCgKL4EEk47SJGG9Z9AfVMF1tyHwdQ=;
- b=l69BojhU2yZ8ZEoXD1f66zB8sjlu8Oesvigbz668NZ8ivxgIkwfh777FbMiZe+iCvK
- TQZRUfi3Qef1Bg7vHUnd7YBhq8IxFRlax1E3DWSiEfCvRXzvx9Tk1HTbDfEfIpSHaVHB
- 3Pf8o3tYRjWnzIJoFZGHBuHZUFhpHjYKdz2M2aT/hi5bfBmOwVE6NCIBm2Np42Mf4d6y
- TMp8urJEVnol0ahb7j1MWxAiBxXzFXwvVutgTzbJz0dVEL+qhVvedT3XSPtHaB7MFLeW
- 5o7roeX/pDCSuqh6Sl9+rou+DhqnqHHsUeVOB/aDph4RxPw0k9CWoxsq56LpEuXp3Hg+
- JDsg==
+ bh=27Ak6TsMgrj8CwRjaLaEB3V21YwCMvKps6GG3g+OmFg=;
+ b=LfgfovtFhR+4fUtjIq8S82UqGn+GKlpl2bAo4xnvwgcIB7+kOyuXSnEf+QUlfZ0/uX
+ 4T2eiRVD496gju7aXIaBNW6d31vw9JHmSi2UuoQVMeVgn/CxQZ9J5fQ5xOL0z6EoeB+N
+ BWURkiI55xdIsdemnSOwwBKsJ4q99Pke7p3QSQzuNL/SGKw1vbip/F+OATpJ8QcHv39m
+ 1V8ez1vs3wQ3hla3qqYt4qT7N/clLnPhz7iXIHrI5Qpzlmvt0cz2hWQzHMUr94BA6xFc
+ V4HpU9V9BNhXl7MFogy3yWuRwvYw999aIxRuWxQ7q7H2uTa+d0YJ48RIg62Hf5CIuDlN
+ 3mpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNclm/1Ra00O86YIzl2+tNWACiB8glvouLBNMrafMs8MsKAlxwmwwM/1VF719P/TORb7AwvRQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCQWodjm/gBCib/zjQIEzxjd5dew3M3yQwQ6uVytnafqawJLV4
- pqpK7twqYZ6cKd25+r7y0+1F4kB94mVF4Yaqxi99ADXeKIrD5i39juxKGIqZGBZW5s3xvd5QOFx
- svrx+odV7IJjCg2ZXJS6C/fBZkaQJ60Y4suXB+qoq
-X-Gm-Gg: AZuq6aKS8GPvjjRTAnd0sZ10GQltVG9R869clA/4M4o22ZPUeo32FYCA4Em54h1B2+i
- OaP7vHJ5e7SIK78ZQmTtr7yb83IaimqKXov04Y/xDdki8jSmY1Q687zms8VP5Ojbufrl31kdajt
- MK0xu/O/mGG41CGFCH7W2fD98pHpebXQytlphMkUAUOcbr3W1kj6Z8ohH7wBRXFsLpAxQ1tbmSm
- SFMYKLda7uRQmA0+PHJbxT1cncFKn8NnWauh6lPbuqKFCeKJQK2PekKfa8ozbFe/jTZO2N+OXDS
- RXSGgw==
-X-Received: by 2002:a17:906:f5a5:b0:b87:2abc:4a32 with SMTP id
- a640c23a62f3a-b903da926b7mr348612966b.18.1771506656398; Thu, 19 Feb 2026
- 05:10:56 -0800 (PST)
+ AJvYcCX3Ghxoqn8tr9AzVer8IiWmyoB5kV92scPaozipjkEI5xoPGv0hVqlPRE2XbOWzp/YOt03sjtY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSpy+Yn8m1/R8x9k+B0nXGjaAllmnnvHxBSxKyytnDjQeSEetw
+ J1Sc1YtIgRwUpi2LmRwp7nClqXL4lRFQQ6UK/UiJpWErYKhwAVFH9fqhOuOKM7xdiqGKzXUo+n/
+ VM2TTsIWYF2rZK9gUX26LMgVbdDfVCjlIUL4SLBf8
+X-Gm-Gg: AZuq6aK0jzbH+lCYniojHF854CT//w80BufnMyrc/ZDg3HAt4RORpW76CDTb/dCnVRz
+ SqRV0s/G/+490uSt/KidoOUKHXJkE9BgwSPvIYVbiYyWA+mGwg+Ec/vwYW2GL7o85EFqzYLdmKi
+ Iz9LzNdihUtHIrpDJUO7EtJB4QMEJXnMXEmyj1WBUgQ7fHEjiKtghx4NtGM2t0gnEKPY8mardpH
+ ZFph89mc6UzObGtje5PvC+DwV0kwDIAAwEB8aQ1FU1f6gYe+fMoKJyQQGdrKZP3UT9Ayo+0vDUk
+ 5+QqdA==
+X-Received: by 2002:a05:6402:2794:b0:65b:f342:d1a2 with SMTP id
+ 4fb4d7f45d1cf-65c76999439mr3075217a12.6.1771506662651; Thu, 19 Feb 2026
+ 05:11:02 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
-In-Reply-To: <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
+ <92b77e44c1fb34f0433fb75f8404f357ed28b03e.1771275704.git.daniel@makrotopia.org>
+In-Reply-To: <92b77e44c1fb34f0433fb75f8404f357ed28b03e.1771275704.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 06:09:27 -0700
-X-Gm-Features: AaiRm51wZCILQQpzgbMJoNMLXM8asttk5QYQfdHuJ0BI2wN6ecWIdtq8Hgds_aM
-Message-ID: <CAFLszThSKbRjufnj4z4xunn-OEUv8kNRngNQ3=EpaNyvyV5ncg@mail.gmail.com>
-Subject: Re: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
+Date: Thu, 19 Feb 2026 06:09:29 -0700
+X-Gm-Features: AaiRm53Kr9-DAwxyh0aKOdjh54QrN42rYHaKwfs3WHwKO20jz1JxxhYyWWTBZ6c
+Message-ID: <CAFLszTgXPPo0u7zUsqDc7g6FsZycwuo9nLxEG22+XvmSrF4c8A@mail.gmail.com>
+Subject: Re: [RFC PATCH 15/20] boot: bootmeth: openwrt: implement boot via
+ bootm storage path
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>,
@@ -136,222 +137,92 @@ X-Virus-Status: Clean
 
 Hi Daniel,
 
-On Mon, 16 Feb 2026 at 14:22, Daniel Golle <daniel@makrotopia.org> wrote:
+On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
 >
-> Add a UBI volume storage backend for the image_loader framework.
+> Implement openwrt_boot() to boot a discovered OpenWrt FIT image:
 >
-> image_loader_init_ubi() takes a volume name, ensures the UBI device
-> is attached (auto-attaching if needed), and installs a .read() callback
-> wrapping ubi_volume_read().
+> 1. Get the block interface name via blk_get_devtype() and construct
+>    the dev_part_str (e.g. "0:3") from the block descriptor and
+>    bootflow partition number
+> 2. Initialise an image_loader for block devices via
+>    image_loader_init_blk(), with alloc_ptr set to image_load_addr
+> 3. Optionally read the 'bootconf' env variable and pass it as
+>    '#config' in bmi.addr_img for FIT configuration selection
+> 4. Call bootm_run() which runs the full bootm state machine:
+>    START -> FINDOS -> FINDOTHER -> LOADOS -> OS_PREP -> OS_GO
 >
-> Auto-attach works by scanning the device tree for the first MTD
-> partition with compatible = "linux,ubi", then calling ubi_part() on
-> that partition. The partition name is resolved using the same
-> precedence as the MTD partition parser: the "label" property first,
-> then "name", then the node name. Since U-Boot only supports a single
-> attached UBI device at a time, only the first matching partition is
-> used. If a UBI device is already attached, the auto-attach step is
-> skipped.
+> The image_loader handles on-demand reading of the FIT metadata and
+> sub-images (kernel, FDT) directly from the raw partition. The
+> existing cleanup call in bootm_run_states() releases the loader just
+> before OS_GO. If bootm_run() returns (boot failure), cleanup is
+> called explicitly.
 >
-> UBI handles bad-block management and wear leveling internally, so the
-> read callback is a straightforward passthrough. Note that
-> ubi_volume_read() returns positive errno values; the wrapper negates
-> them for the image_loader convention.
->
-> Gated by CONFIG_IMAGE_LOADER_UBI (depends on CMD_UBI && IMAGE_LOADER).
+> This completes the core block-device boot path for bootmeth_openwrt.
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  boot/Kconfig            |   8 +++
->  boot/Makefile           |   1 +
->  boot/image-loader-ubi.c | 112 ++++++++++++++++++++++++++++++++++++++++
->  include/image-loader.h  |  13 +++++
->  4 files changed, 134 insertions(+)
->  create mode 100644 boot/image-loader-ubi.c
+>  boot/bootmeth_openwrt.c | 37 ++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 36 insertions(+), 1 deletion(-)
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 23848a0f57e..89832014af6 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -1203,6 +1203,14 @@ config IMAGE_LOADER_MTD
->           parallel NAND, etc.) using the image_loader framework.
->           NAND bad blocks are skipped transparently.
+> diff --git a/boot/bootmeth_openwrt.c b/boot/bootmeth_openwrt.c
+> index 08c3f98957a..82f39c17d7f 100644
+> --- a/boot/bootmeth_openwrt.c
+> +++ b/boot/bootmeth_openwrt.c
+> @@ -13,6 +13,8 @@
+>  #include <bootm.h>
+>  #include <bootmeth.h>
+>  #include <dm.h>
+> +#include <env.h>
+> +#include <image.h>
+>  #include <image-loader.h>
+>  #include <malloc.h>
+>  #include <mapmem.h>
+> @@ -73,7 +75,40 @@ static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *bflow)
 >
-> +config IMAGE_LOADER_UBI
-> +       bool "UBI volume backend for image loader"
-> +       depends on IMAGE_LOADER && CMD_UBI
-> +       help
-> +         Allows loading images from UBI volumes using the image_loader
-> +         framework. Auto-attaches the UBI device from the device tree
-> +         if not already attached.
-> +
->  config DISTRO_DEFAULTS
->         bool "(deprecated) Script-based booting of Linux distributions"
->         select CMDLINE
-> diff --git a/boot/Makefile b/boot/Makefile
-> index 1dde16db694..7d1d4a28106 100644
-> --- a/boot/Makefile
-> +++ b/boot/Makefile
-> @@ -76,6 +76,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
->  obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
->  obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
->  obj-$(CONFIG_IMAGE_LOADER_MTD) += image-loader-mtd.o
-> +obj-$(CONFIG_IMAGE_LOADER_UBI) += image-loader-ubi.o
->
->  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
->  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
-> diff --git a/boot/image-loader-ubi.c b/boot/image-loader-ubi.c
-> new file mode 100644
-> index 00000000000..64901a13378
-> --- /dev/null
-> +++ b/boot/image-loader-ubi.c
-> @@ -0,0 +1,112 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * UBI volume backend for image_loader
-> + *
-> + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-> + */
-> +
-> +#include <dm/ofnode.h>
-> +#include <image-loader.h>
-> +#include <log.h>
-> +#include <malloc.h>
-> +#include <mtd.h>
-> +#include <ubi_uboot.h>
-> +
-> +struct image_loader_ubi_priv {
-> +       char *vol_name;
-> +};
-> +
-> +/**
-> + * ubi_auto_attach() - attach UBI if not already attached
-> + *
-> + * If no UBI device is currently attached, walk the device tree for the
-> + * first MTD partition node with compatible = "linux,ubi", find the
-> + * corresponding MTD device by matching flash_node, and attach UBI to
-> + * it via ubi_part_from_mtd().
-> + *
-> + * Since U-Boot only supports a single attached UBI device at a time,
-> + * only the first matching partition is used.
-> + *
-> + * Return: 0 on success or if already attached, negative errno on failure
-> + */
-> +static int ubi_auto_attach(void)
-> +{
-> +       struct mtd_info *mtd;
-> +       ofnode node;
-> +
-> +       /* Already attached? */
-> +       if (ubi_devices[0])
-> +               return 0;
-> +
-> +       mtd_probe_devices();
-
-This should be handled by your new ubi driver for your uclass.
-
-> +
-> +       ofnode_for_each_compatible_node(node, "linux,ubi") {
-> +               mtd_for_each_device(mtd) {
-> +                       if (ofnode_equal(mtd->flash_node, node))
-> +                               goto found;
-> +               }
-> +       }
-
-Eek this is really strange. There should be a device so you can use
-uclass_first_device(UCLASS_...).
-
-> +
-> +       log_err("image_loader_ubi: no MTD device for \"linux,ubi\" node\n");
-> +       return -ENODEV;
-> +
-> +found:
-> +       if (ubi_part_from_mtd(mtd)) {
-> +               log_err("image_loader_ubi: failed to attach UBI on \"%s\"\n",
-> +                       mtd->name);
-> +               return -EIO;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int image_loader_ubi_read(struct image_loader *ldr, ulong src,
-> +                                ulong size, void *dst)
-> +{
-> +       struct image_loader_ubi_priv *priv = ldr->priv;
+>  static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
+>  {
+> -       return log_msg_ret("nyi", -ENOSYS);
+> +       struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+> +       const char *ifname = blk_get_devtype(bflow->blk);
+> +       struct image_loader ldr = {};
+> +       struct bootm_info bmi;
+> +       char dev_part_str[32];
+> +       char addr_img[64];
+> +       const char *conf;
 > +       int ret;
 > +
-> +       ret = ubi_volume_read(priv->vol_name, dst, src, size);
-> +       /* ubi_volume_read() returns positive errno values on error */
-
-blank line before final return
-
-> +       return ret ? -ret : 0;
-> +}
+> +       snprintf(dev_part_str, sizeof(dev_part_str), "%d:%d",
+> +                desc->devnum, bflow->part);
 > +
-> +static void image_loader_ubi_cleanup(struct image_loader *ldr)
-> +{
-> +       struct image_loader_ubi_priv *priv = ldr->priv;
-> +
-> +       free(priv->vol_name);
-> +       free(priv);
-> +}
-> +
-> +int image_loader_init_ubi(struct image_loader *ldr, const char *vol_name)
-> +{
-> +       struct image_loader_ubi_priv *priv;
-> +       int ret;
-> +
-> +       ret = ubi_auto_attach();
+> +       ret = image_loader_init_blk(&ldr, ifname, dev_part_str);
 > +       if (ret)
-> +               return ret;
+> +               return log_msg_ret("ldr", ret);
 > +
-> +       if (!ubi_find_volume(vol_name)) {
-> +               log_err("image_loader_ubi: volume \"%s\" not found\n",
-> +                       vol_name);
-> +               return -ENODEV;
+> +       ldr.alloc_ptr = image_load_addr;
+> +
+> +       bootm_init(&bmi);
+> +       bmi.loader = &ldr;
+> +
+> +       /* FIT config selection via #conf suffix */
+> +       conf = env_get("bootconf");
+> +       if (conf) {
+> +               snprintf(addr_img, sizeof(addr_img), "#%s", conf);
+> +               bmi.addr_img = addr_img;
 > +       }
 > +
-> +       priv = malloc(sizeof(*priv));
-> +       if (!priv)
-> +               return -ENOMEM;
+> +       ret = bootm_run(&bmi);
 > +
-> +       priv->vol_name = strdup(vol_name);
-> +       if (!priv->vol_name) {
-> +               free(priv);
-> +               return -ENOMEM;
-> +       }
+> +       /* Clean up if bootm_run() returned (i.e. boot failed) */
+> +       image_loader_cleanup(&ldr);
 > +
-> +       ldr->read = image_loader_ubi_read;
-> +       ldr->cleanup = image_loader_ubi_cleanup;
-> +       ldr->priv = priv;
-> +
-> +       return 0;
-> +}
-> diff --git a/include/image-loader.h b/include/image-loader.h
-> index 7ccf901d37d..a036e98982f 100644
-> --- a/include/image-loader.h
-> +++ b/include/image-loader.h
-> @@ -172,4 +172,17 @@ int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
->   */
->  int image_loader_init_mtd(struct image_loader *ldr, const char *name);
+> +       return log_msg_ret("run", ret);
+>  }
 >
-> +/**
-> + * image_loader_init_ubi() - Initialise loader for a UBI volume
-> + *
-> + * Ensures a UBI device is attached (auto-attaching from the device
-> + * tree if needed), verifies the named volume exists, then installs a
-> + * .read() callback wrapping ubi_volume_read().
-> + *
-> + * @ldr:       The image loader to initialise
-> + * @vol_name:  UBI volume name
-> + * Return: 0 on success, negative errno on failure
-> + */
-> +int image_loader_init_ubi(struct image_loader *ldr, const char *vol_name);
-> +
->  #endif /* __IMAGE_LOADER_H */
+>  static int openwrt_bootmeth_bind(struct udevice *dev)
 > --
 > 2.53.0
 
+This looks OK so far as it goes, but will need rework for the driver change.
+
 Regards,
-SImon
+Simon
