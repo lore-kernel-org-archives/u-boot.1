@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BB29E9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:12:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F81E9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:13:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA3F283E36;
-	Thu, 19 Feb 2026 14:11:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2D8083EA6;
+	Thu, 19 Feb 2026 14:11:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aHJ0Plgv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JFWtzOgU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49A9683936; Thu, 19 Feb 2026 14:11:53 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 387C583EA6; Thu, 19 Feb 2026 14:11:58 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2184883E85
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CEF7F83E96
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-65c01595276so1223262a12.1
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:51 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771506709; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-65bfc858561so1674370a12.2
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:55 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506715; cv=none;
  d=google.com; s=arc-20240605;
- b=MiZhspZkRFQN+dC4b72rnI9mdZRcdeCcrnSVxm5se1JuP4qNCJzBkfZ98oOcuQtzOt
- ti4shsDce9TZKwfyWoLS3GPsQ+qTsKVtTGLbmkPymJJPbtv9JzWAwfyMa7rOFNwdvYiC
- MJdS9MyJvYrx9NcoWQCBlW0qOR+2ZzehgnBCWX4psDgYamgsSJ2TRKKFUw5fGCyNui0a
- JV8mE39l8uTAtvU7Poa2bmfCCchzXItKiNE+tTuhNpuK3J6CLl2vn6YWCdc88On2cUSL
- PUDNdDIHRVE16YawmrZCcDogXrmZi8GEsPk2gbCIGkW4IsnYnRLZP/xG1XZjGsWQTbA0
- ImSA==
+ b=bheYHsdKMhHPOSFHjA9j5Jc2x4sWbgv5Ye0ho4RtaMBxJg6xr+gnyyyMKZAGbXC+MC
+ ylia9OsBgWgVuYx2U9mBHJwjfulGm2nl5Vc/pOX4pxeJuEmU1YoNp5zjEjcu1XkEvKAn
+ +kSljMHTnPl32HM3O7+GmBC53pyNqQSe5OFoSN7jxS5ov+EF4KfJVziRY/MdmFzDKsm5
+ VuN+P9MlQVeDgkGlDlwAh1MgHpeKXVdTHqyMMnmrN6sb77VZFs1/nETFzKG21U3cHwAN
+ 14t1kFLG9iI3cqyM/iAFkxH/bnG8NkTExBtyXtZpjvU76TcfHBu1iTPs1Lxm0SEy3spM
+ LSlw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=rticnT4w6brqMGHyu/7Lud9afUmLmq+q0o92ww4xD9g=;
- fh=Z4Jq10Z+4hTZlRNIaUiK2k9TsXIVZReMqPSXVOBYLx8=;
- b=JzdY7qE2wyCGCvNEM50c8KKRYAxzBuA4WZ4sPxXX1dSJTxPpVpjBywptAWfPAMbUeb
- ZSHcORCe3z/9nBuWTDsmue/YuUglQktNkzOzwRVfnrsdcADPe920mulBrGou5HGgPveq
- h/zoEM5hw8P0rQ4IKqqPbK/sDQkksn8pjWn+pqK0+nMneUdX6W9Y5Gc4PEZkXEPoPDWJ
- H0tpLD0z18kyQJhJftuKdJ9Kx3P4o0pUzwSKjSRbV8jDIXDMMlpLgtJ3eshSi4i78Nzd
- Bo9R/z1gcfQOCc5reBb7EZ+H3XsZPPqZ4VQBvX1dWV3/HlJKehk8otXOcZBUma1RV99A
- 8Qkg==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=AeJbgIFc3Hdtr4rW/N2JI/bvIu1QqXLv3IS9ruWpFp4=;
+ fh=tG3qah6MjM85oKjPvZkRaK3CbCFcaSwMXHxXK0+vL3g=;
+ b=OqqC5eCFbBGGrdE4kt5G6es8KFZBr0djzjck496qfRtQvADF2IlmiQbRXSkAaZJ8oI
+ /gN3BTGR/ByPzgl+7zwswRITsqb1DH/3xjdCvxxn0maeQzWSe5lxptAECuMrTxVUFqcE
+ r9L6gelYE3vrU1PHrS8t2SqgB3AEEL0kb1yl/wT15rqTJlvRMv5F+YrAsOjfpnSYUadi
+ hUy549UU3b1rP7Iz5uvTejb6GaeWJ/rhaDZzH1J+hzjKLsNXpz2rsozFxl+3oG+5B3at
+ fHNvMkm2HB7k9ZyqTulU9ZE3vjVASkrG02wl6GDsnTA0OygTXLl1g9fpvhx8LKfyg5zK
+ Co/Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771506709; x=1772111509; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rticnT4w6brqMGHyu/7Lud9afUmLmq+q0o92ww4xD9g=;
- b=aHJ0Plgvqt1jbvc1bjVZf2/wKjKcw/NcfBodJ37AtwxHvDzo2QYctCyr5qULiqO7tD
- y9yIZWG05SDGJucWoWWjC6IVEh0W0o5q5ZykgJvoEHFRLopPkaVZ4QUZvkQvoOYxRhRC
- pdL9BzXtDP+1rBD+JGQA+eyZZ+9nGCkXHZWm8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771506709; x=1772111509;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1771506715; x=1772111515; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rticnT4w6brqMGHyu/7Lud9afUmLmq+q0o92ww4xD9g=;
- b=QgD0GRKLIXjvnrX6Z7cD3FxjHfnjLIn1CPa7HOjv7K/7gJEHDuvW7mquSkTGo1VwLH
- bLbDmievIaNChMETG2mnKmIwCrnM9aqiqDB1OM8QwjTi1Yc4AujAnP1iW4vk908Ikr/e
- 8v/VGWrZrlkZ8IweCNJmwRdOz3jBzOFgKv0+gQ4SiKujdKyv+ijGQokuzYt6TRFtHKNt
- p+nW6IAHn/iOSmOQ6h000Go/G/Z0zdVOtCCOtydEgl2XeKMklZ0e7YqhdgjQFMQY/vgh
- mriN8DA9a8v57Gh2umXGERLY1n6pe564SS1ZBv2HvUN7dKUoUOKk1bqGPt8oVJQdrwh0
- zHTQ==
+ bh=AeJbgIFc3Hdtr4rW/N2JI/bvIu1QqXLv3IS9ruWpFp4=;
+ b=JFWtzOgUnfYyrigDh+GWvtlkf6Uo/07hWmfzYyv9gBwul4OYBUQMQZxt30Rfb/BFjZ
+ VcUSsPq+xJFaNsHAfZZ4x56MidB356tr1CE2XjWamZ4msYRUKrTF81Y5qokAk+qqbkkP
+ ZhK9uRSxz6IiTqxaO8rnAWvOUCaBk0SKjBCbE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771506715; x=1772111515;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=AeJbgIFc3Hdtr4rW/N2JI/bvIu1QqXLv3IS9ruWpFp4=;
+ b=bEgRbVAgz+0g92ZouQpAZXB3QI3kaJYsoqr/CwGIBm00tALCqDGCdgL8LmZfrbihb8
+ m/ToTXQmuvBX4gG3+cc+H0o54CYr1GKCY2Pg+hNJ0nTJwGZZ6WiB0TG/LBHZPBrgXD2k
+ ySSdjE8CqjV1q683GVAE7g7c4ihELSN6j2vhAAUk15iXEADJuMFhPXa1bB1oKHeYoanH
+ PJffbJWoHbfTnvca6ptNSLAolnKjwEDh8YnQaZ3d2zfZQetAZ98ydcvzLJGQ7XaF4kaB
+ gzghnNwYeW1AoFgzJK8a7KyRF9neWWsymlawbfrn6HTIeTf93cHCi2kGm8miHFp6+2qQ
+ onUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCH1PeL7Zeve83HbvloIY++gWRvReKO/F0hSeRa1Dr1Q9a714PMk+SWSSCoA+rcWIPFkKHPOw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLAqPspyeicTV+2UK0rKdTQESgl5dkHSMij1wEIReYK7uUuCP4
- d2NpsKxQ35K2AOti0X+mHTaOHCfuqIUdyjEsLhjIOWNR8SvDi3l00o5LjGs8iH07uAoCZNM8ATj
- HA44yXosYnCXuRpmYShBrLWFU8iS46y4tIvngCmYc
-X-Gm-Gg: AZuq6aKnLvhK92RrLtlGn3hi8pxywot1z8eyML1UN4Zu4UD0G03Fv+HuvmKUC/rbj1n
- erAap4WBf6tO2x7Z/vqdcmHh942k8gDA1wt/MSbFJbXZGF3qU0B+qpqzRFiFR17OTl0bYPzeHxl
- w4r9uqwF3UZetGA9cbVSKviSaqVT3fft5FAYJ0GweY5NzCnRpVvSka3ezalQdkd37vKDc1+b6DJ
- rAEvZee+Dblh3SjWX73MjAJRi65tQrMAAFEF5hKKfLumCJT/JdsPHsDaq+i9dlmSOaNh1mO3arW
- cEIVKg==
-X-Received: by 2002:a05:6402:42c3:b0:65c:37a2:e4a4 with SMTP id
- 4fb4d7f45d1cf-65c37a2e9a3mr6306641a12.25.1771506709067; Thu, 19 Feb 2026
- 05:11:49 -0800 (PST)
+ AJvYcCV3zdT5gkwYQqm8zslXZ5eq3ZzWVG4j3oftaZwyVDe3GMLBRJaQ+w/O95Ojg5E0aY7gKMM1zLc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwdaHrP8ql3wIz2nVnGhV4m4cDipdJCbc/5atjk3G35r7bKd1m4
+ pE7d4VvAYlCrF5jxJRPnwRLiDsfyumC9ywfTJqARYk6YjYEPR9K+uULD8Ke6pbnXOllfHH5WU/W
+ +efQifiz8pZIOguQ9ZhcxrqDQXnWkuP/xtwdtw+8p
+X-Gm-Gg: AZuq6aKYQG2ryy6jh4ijdhRXLpd2FeRT0n3xpmHXXvrCIn3q0QXSWfwJ26q2DURh/rE
+ 5sZuLdc9lRMdEVZtZ6YXpvZIsaG0iulyahhh8q6K2Jw6L43vhOcb2X7Lh0Z5vHZm7rvz4+bVe3+
+ nWhnMgq7EsFSeSbBvy3vYqYSXp0zZRGLxbxFWCl8mHQxVPC2WA3xFo9u8jw57gZetrkUdRz+N/R
+ XVa45geAsVwNHQQgzuWSMaEU3CFismIJYWj5omO3uJk/N81uXDWJgVfQekM5PUal1dlrWGz8hTe
+ 8IGVeg==
+X-Received: by 2002:a05:6402:3581:b0:65c:6387:4733 with SMTP id
+ 4fb4d7f45d1cf-65c63874e39mr4713581a12.25.1771506714041; Thu, 19 Feb 2026
+ 05:11:54 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <7f98de4d33c063072fff8e20af5a31a41cab7130.1771275704.git.daniel@makrotopia.org>
-In-Reply-To: <7f98de4d33c063072fff8e20af5a31a41cab7130.1771275704.git.daniel@makrotopia.org>
+ <db31f5b213b57b802c5db7309941b5fab94dec2c.1771275704.git.daniel@makrotopia.org>
+In-Reply-To: <db31f5b213b57b802c5db7309941b5fab94dec2c.1771275704.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 06:11:34 -0700
-X-Gm-Features: AaiRm51FaUivicemp_l2RKgdkOOUajuj9IiBWOEzGjnW2HiSuq_6GNhSAzNrp3U
-Message-ID: <CAFLszTgD5+MT1iw5KNQJqjgC+ncUiueZicgLH+Md1_QmZroBOw@mail.gmail.com>
-Subject: Re: [RFC PATCH 19/20] boot: bootmeth: openwrt: add
- openwrt_boot_script hook for bootconf
+Date: Thu, 19 Feb 2026 06:11:35 -0700
+X-Gm-Features: AaiRm51INiCfoKQJ9hHSrx0ACrX91W1gFFyFU6SDsKATlIoTNYuY0MfxfPS74-8
+Message-ID: <CAFLszTh4dudF6+gN7SDDTs9iJhHLNkqLR8+YG586x8QSPR4AxA@mail.gmail.com>
+Subject: Re: [RFC PATCH 20/20] boot: bootmeth: openwrt: add slot configuration
+ from environment
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>,
@@ -119,6 +120,7 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de, 
  John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,65 +141,210 @@ Hi Daniel,
 
 On Mon, 16 Feb 2026 at 14:24, Daniel Golle <daniel@makrotopia.org> wrote:
 >
-> Some boards need to probe hardware at boot time to determine the
-> correct FIT configuration. For example, the BPi-R3 checks whether
-> SPI-NAND or SPI-NOR is present and selects the matching FIT config
-> overlay accordingly.
+> Add configurable multi-slot boot with slot names and boot order
+> defined via environment variables. This enables production/recovery
+> dual-boot (or any number of named slots).
 >
-> Add an optional script hook: if the environment variable
-> openwrt_boot_script is set, its content is executed as a U-Boot
-> command string right before bootconf is read. This lets board
-> configurations assemble the correct bootconf value dynamically:
+> New environment variables:
 >
->   setenv openwrt_boot_script 'if nand info; then
->     setenv bootconf $bootconf_base#$bootconf_emmc#$bootconf_nand;
->   else
->     setenv bootconf $bootconf_base#$bootconf_emmc#$bootconf_nor;
->   fi'
+> - openwrt_slot_<name>=3D<location> -- defines a named slot. <name> is
+>   an arbitrary label (e.g. "production", "recovery"). <location> is
+>   a GPT partition label, MTD partition name, or UBI volume name.
 >
-> The hook runs once per boot attempt, after the image loader is set up
-> but before bootm_run() is called.
+> - openwrt_boot_order=3D<name1> <name2> ... -- space-separated list of
+>   slot names that are eligible for booting. Only partitions/volumes
+>   whose name matches a configured slot's location are probed.
+>
+> Without openwrt_boot_order, all partitions/volumes are probed
+> (backward-compatible with the Milestone 1/2 behavior). When set,
+> only partitions matching a defined slot pass the filter.
+>
+> The matched slot name is stored in bflow->os_name for later use by
+> boot-loop avoidance (Milestone 4) and boot menu display.
+>
+> The MTD and UBI bootdevs now delegate to bootmeth_read_bootflow()
+> instead of setting BOOTFLOWST_READY directly, so that slot filtering
+> is applied uniformly across all storage backends.
+>
+> Example configuration:
+>
+>   openwrt_slot_production=3Dfirmware
+>   openwrt_slot_recovery=3Drecovery
+>   openwrt_boot_order=3Dproduction recovery
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  boot/bootmeth_openwrt.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+>  boot/bootmeth_openwrt.c | 130 ++++++++++++++++++++++++++++++++--------
+>  1 file changed, 104 insertions(+), 26 deletions(-)
 >
 > diff --git a/boot/bootmeth_openwrt.c b/boot/bootmeth_openwrt.c
-> index e1f47b58f61..d448697fe08 100644
+> index d448697fe08..6e90a203ed6 100644
 > --- a/boot/bootmeth_openwrt.c
 > +++ b/boot/bootmeth_openwrt.c
-> @@ -12,6 +12,7 @@
->  #include <bootflow.h>
->  #include <bootm.h>
->  #include <bootmeth.h>
-> +#include <command.h>
->  #include <dm.h>
->  #include <env.h>
->  #include <image.h>
-> @@ -113,6 +114,17 @@ static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
->         bootm_init(&bmi);
->         bmi.loader = &ldr;
+> @@ -24,6 +24,63 @@
+>  #include <linux/libfdt.h>
+>  #include <linux/sizes.h>
 >
-> +       /*
-> +        * Optional script hook: run the command in openwrt_boot_script
-> +        * before reading bootconf. Boards use this to probe hardware
-> +        * and assemble the correct FIT configuration string, e.g.:
-> +        *
-> +        *   setenv openwrt_boot_script 'if nand info; then ...'
-> +        */
-> +       conf = env_get("openwrt_boot_script");
-> +       if (conf)
-> +               run_command(conf, 0);
+> +/**
+> + * openwrt_match_slot() - check if a partition name matches a configured=
+ slot
+> + * @part_name: GPT label, MTD partition name, or UBI volume name
+> + * @slot_namep: set to strdup'd slot name on match (caller must free)
+> + *
+> + * When ``openwrt_boot_order`` is set in the environment, only partition=
+s
+> + * whose name matches one of the ``openwrt_slot_<name>`` locations are
+> + * accepted. Without ``openwrt_boot_order``, all partitions pass.
+> + *
+> + * Return: 0 if accepted, -ENOENT if filtered out
+> + */
+> +static int openwrt_match_slot(const char *part_name, char **slot_namep)
+> +{
+> +       const char *order, *p;
 > +
->         /* FIT config selection via #conf suffix */
->         conf = env_get("bootconf");
->         if (conf) {
+> +       *slot_namep =3D NULL;
+> +
+> +       order =3D env_get("openwrt_boot_order");
+> +       if (!order)
+> +               return 0;
+> +
+> +       if (!part_name)
+> +               return -ENOENT;
+> +
+> +       p =3D order;
+> +       while (*p) {
+> +               char name[64], var[80];
+> +               const char *location, *end;
+> +               int len;
+> +
+> +               while (*p =3D=3D ' ')
+> +                       p++;
+> +               if (!*p)
+> +                       break;
+> +
+> +               end =3D p;
+> +               while (*end && *end !=3D ' ')
+> +                       end++;
+> +
+> +               len =3D end - p;
+> +               if (len >=3D sizeof(name))
+> +                       len =3D sizeof(name) - 1;
+> +               memcpy(name, p, len);
+> +               name[len] =3D '\0';
+> +               p =3D end;
+> +
+> +               snprintf(var, sizeof(var), "openwrt_slot_%s", name);
+> +               location =3D env_get(var);
+> +               if (location && !strcmp(part_name, location)) {
+> +                       *slot_namep =3D strdup(name);
+> +                       return 0;
+> +               }
+> +       }
+> +
+> +       return -ENOENT;
+> +}
+> +
+>  static int openwrt_check(struct udevice *dev, struct bootflow_iter *iter=
+)
+>  {
+>         if (bootflow_iter_check_blk(iter))
+> @@ -34,40 +91,61 @@ static int openwrt_check(struct udevice *dev, struct =
+bootflow_iter *iter)
+>
+>  static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *b=
+flow)
+>  {
+> -       struct blk_desc *desc =3D dev_get_uclass_plat(bflow->blk);
+>         const char *part_name =3D NULL;
+> -       struct disk_partition info;
+> -       void *buf;
+> +       char *slot_name =3D NULL;
+>         int ret;
+>
+> -       /* Get partition geometry */
+> -       ret =3D part_get_info(desc, bflow->part, &info);
+> -       if (ret)
+> -               return log_msg_ret("part", ret);
+> -
+> -       part_name =3D (const char *)info.name;
+> -
+> -       /* Read first block to probe for an FDT/FIT header */
+> -       buf =3D memalign(SZ_1K, desc->blksz);
+> -       if (!buf)
+> -               return log_msg_ret("mem", -ENOMEM);
+> +       if (bflow->blk) {
+> +               struct blk_desc *desc =3D dev_get_uclass_plat(bflow->blk)=
+;
+> +               struct disk_partition info;
+> +               void *buf;
+> +
+> +               ret =3D part_get_info(desc, bflow->part, &info);
+> +               if (ret)
+> +                       return log_msg_ret("part", ret);
+> +
+> +               part_name =3D (const char *)info.name;
+> +
+> +               /* Check slot filter before expensive I/O */
+> +               ret =3D openwrt_match_slot(part_name, &slot_name);
+> +               if (ret)
+> +                       return -ENOENT;
+> +
+> +               /* Read first block to probe for an FDT/FIT header */
+> +               buf =3D memalign(SZ_1K, desc->blksz);
+> +               if (!buf) {
+> +                       free(slot_name);
+> +                       return log_msg_ret("mem", -ENOMEM);
+> +               }
+> +
+> +               ret =3D blk_read(bflow->blk, info.start, 1, buf);
+> +               if (ret !=3D 1) {
+> +                       free(buf);
+> +                       free(slot_name);
+> +                       return log_msg_ret("rd", -EIO);
+> +               }
+> +
+> +               if (fdt_check_header(buf)) {
+> +                       free(buf);
+> +                       free(slot_name);
+> +                       return -ENOENT;
+> +               }
+
+The code above would benefit from being in its own function.
+
+>
+> -       ret =3D blk_read(bflow->blk, info.start, 1, buf);
+> -       if (ret !=3D 1) {
+>                 free(buf);
+> -               return log_msg_ret("rd", -EIO);
+> -       }
+>
+> -       /* Must start with a valid FDT header */
+> -       if (fdt_check_header(buf)) {
+> -               free(buf);
+> -               return -ENOENT;
+> -       }
+> +               /* Show the GPT partition label as Filename */
+> +               bflow->fname =3D strdup(part_name);
+> +       } else {
+> +               /* MTD or UBI =E2=80=94 partition/volume name in bootmeth=
+_priv */
+> +               part_name =3D bflow->bootmeth_priv;
+>
+> -       free(buf);
+> +               ret =3D openwrt_match_slot(part_name, &slot_name);
+> +               if (ret)
+> +                       return -ENOENT;
+> +       }
+>
+> -       /* Show the GPT partition label as Filename */
+> -       bflow->fname =3D strdup(part_name);
+> +       if (slot_name)
+> +               bflow->os_name =3D slot_name;
+>
+>         bflow->state =3D BOOTFLOWST_READY;
+>
 > --
 > 2.53.0
 
-Down the track it would be nice to build this into bootstd too, as we
-are trying to avoid scripts.
-
 Regards,
-Simon
+SIMon
