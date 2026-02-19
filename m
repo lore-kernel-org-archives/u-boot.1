@@ -4,90 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B608E9A055
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C16AE9A053
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 18:07:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 169F983D5D;
-	Thu, 19 Feb 2026 18:53:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FD1283CF2;
+	Thu, 19 Feb 2026 19:07:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Okt95Iwy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bU8DQ673";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A350283D8A; Thu, 19 Feb 2026 18:53:20 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 20D2F83CF5; Thu, 19 Feb 2026 19:07:35 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8C9083D3D
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:53:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-436263e31abso1128946f8f.1
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:53:18 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC40C83CEE
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:07:32 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d4c383f2fcso1056503a34.0
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 10:07:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1771523598; x=1772128398;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=n6vp1Ccy3dOUzENEylKbE8hDLMdMo6/xDG45phrs0rM=;
- b=Okt95IwyxupZqePqkcMo8V0KsxkKzlnGQFMx1HdKEZ67IchKgQ6Mvoi7hAiWKc8sby
- RNaTnIaSLC5K1rpn3gPlxyQdFUpG5PbihwP5TrBwGLWxBF6zgDWZM3PsygsXSJReGwbw
- VmwpPVmat7MIZBkQf6gLuKpvgBcZUFsU8TLIU=
+ d=konsulko.com; s=google; t=1771524451; x=1772129251; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZuOXfqaSRnKKiF5IDfvN3TXIslT+ns37oPm9UpSdb64=;
+ b=bU8DQ673iSr39zatXlpOwcFW+93R6X1eqsN7QosWBREKIgkwrpk7RX7KYJZhRA609c
+ u0W1Q8uRoo3au7/DEtZ21bHnzO8fDXX4J62PYMfJY4UsMWBzHjQ5ZIb4D9D3/DrD0uJF
+ r5caaDvhXJhvLSflS8PY+X6nYHOF2a4cw5uio=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771523598; x=1772128398;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n6vp1Ccy3dOUzENEylKbE8hDLMdMo6/xDG45phrs0rM=;
- b=QUMwC5QlfEiAfy1Li/xzZCjOq4r+mb2pB8DIF2c2qCukSvn9AY2Q6FfPJX5b7rofb/
- EuEyFcD+3Ay8R4mqShbfWKnU5VIcF9HAP+zokhUSaf7kzehVTRf89/eF5QCZFLU9DNOi
- gHqj54wPiF7msKpeZzkMp+vBDQoX4tLTxK0d+JxETZ+ebFATcAuUwln3+CAHvgBcDPyb
- +VXk0akVXbfjCoHHXEuHQWKXOe2IwX2rfXKUuFiIVwNLEwGnIg5wf6kE+YfuA0O/Mq++
- ULrjCzaPkFzyE2ngoy3FV+xtqJBGppwoKqfSvv7VIL4F86PJcnkLyk5wDp5o1jGWhn5k
- 7k3w==
-X-Gm-Message-State: AOJu0Ywv9fibouBHQNIck+Aa7O6hZqVB2LTT3ZL+b+iBkJBclGBTFzFy
- HaYjdRk0LKpj9Q6NOo973+IYuvqe/evB662v4t/qNR2/bchA2khwZRts0txJ8lTRaWVkyeStb68
- PEUfo
-X-Gm-Gg: AZuq6aKyimaHh550lq+tIfobL3+gKdpVFnEhVpAM5dXd83hbTgPeCXRlV58uqZAijY+
- UfL8rNJaegwPqq9qN6/p8Xup7fJmAHGhgwdPfp9LSe7yq2CdyY+OiO6mTPchPFCBnuRoGcKYaJv
- BjTA/6lBjCl9JWCW8nFN6rM9y0qcpPsxqjgt3qzHS89CzsX7NGdPs5XQ44oZiF2pmWjSG9OH7jM
- F2LPkAwu1Yjk5A4Dv3UbYaLbm54vVpZGZG3E3yRIAPYnmAaW+WnI+mDRAuX59RMdB5rE1Qw/Pk2
- 0gQVDRkyS4IG8pWFQSe9TzdEt6EHE7+ZrlCjMsz43Hdkn495k61pUBw00aNEM4xg0EBAyq3hOLI
- xd4+dpvEGCaFJxNn1cdqVEy/ZIEVslF/mV/XVFUrdaNQtb5FyGMVkYvgiIIWCSa5UP0xfubozqK
- 8sRoj2O9YWrkosMU+GC6JtLOadxVjX3TcZ/s4LY/STefXS2oHgvUH99yRcTGCnio99MYAeS6Et2
- bS03G1dCHM4kilTwVR5jRlECXYxQiv9xLNWj+BBCwOHqWDnT//9Nl+ImarQLgOtH5A045P2f7E8
- T2P3afx6P8ZTYbgekBPbkG84
-X-Received: by 2002:a05:6000:2585:b0:437:6dac:4578 with SMTP id
- ffacd0b85a97d-4379791b7a4mr43510542f8f.42.1771523597951; 
- Thu, 19 Feb 2026 09:53:17 -0800 (PST)
-Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
- (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796ac7d91sm52370312f8f.26.2026.02.19.09.53.12
+ d=1e100.net; s=20230601; t=1771524451; x=1772129251;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZuOXfqaSRnKKiF5IDfvN3TXIslT+ns37oPm9UpSdb64=;
+ b=BvxaN27FpuSlrB1Ty/h/YL/7AUwPCE5TDDrLPhZ/w2fhAeLN/a8RFoWfx6VqB853Ax
+ +bEWdn2ztvjnPq9YlFCDqT3geU6vmjNbS7kXUAQGFSNtJfHD8KmGANwgz5s1KIZYijVC
+ v/hFsfa4ugQvv0Hit3o1m/jSvqis3EYhCMnBiU+weQ2L47jSSYYdgBumwg+b+yKWX2hv
+ CVhTu3tQYgBuijuzdgXwSVvzwwKC/ztA2EAeXX8gVePi3bi4rb5bQ/DMMfAitt67xtIP
+ 4rvPJNdUyUiZuurehbO4ZkqKawfjeEx0lpgqBa+HGo6rLr+GZ7k2+nC2mH3JdcRR2GuP
+ HiEQ==
+X-Gm-Message-State: AOJu0YyhBa1GhrT35yTGQ6BcrZioxmmfrTGHm/jiGoc8m8N2GtVsL6gT
+ V1PgZXh790xeWfKIv/OdjtcndpDzKTBg3tV/ikoDvbc2Y1JEGHruMxM+sybEYDan7HQ=
+X-Gm-Gg: AZuq6aLJyuXqi/PuTeorcQ8bd5WfJRuF/3YEDHo0CJWU7ddGOl7i5JkId/yYTF2fPQJ
+ RjgV7n+XGjk+bzF+nlELFPTThSqZOJ/HPr6/NZK5qfrpDYSqrDDHmjXhLHU7J1ehtvZ4fvxy5QX
+ 8PTO/H9E2rT6osBaCAm0hQILFTLKx8pMJUojxNVfyrszDB+SIOo+BEDyisTgdnEx09lhH5f6UQV
+ oxJaW2pusqzjd/ztP5zBO/T8eKHBsiQJZ/xvh7eK7AfF0/dJ/y5TNI8uyoa4glMFCS9r3YN7oZj
+ 2+/Hf8LH/FNMxPg69CK6nKiHmO2+rn1n0mqCWdTavE/PiCijluzWqU1zKYqWVA76OBr39CZwjD6
+ 4z4rG0coKzwt6MtLoYWPoQvBpHnkKEJ/tKOEwo1EBx/ChrulsX6gHWOEKT9LtwbslUSazRIt8Gu
+ VCYqiguullu9Kwf3dfMZ1A8uKY4LV5lzb8cWaMAYP0XLLH1YOmZob9GeapOJj3m7flRyEd1Q2bW
+ S2cqVrA25uiANgF9+LXlg2GmFiJPYTQZqOtO+4jB+ZzNNw6lOT5a93teIWmKw==
+X-Received: by 2002:a05:6830:4904:b0:7cf:ce25:e38d with SMTP id
+ 46e09a7af769-7d5128791c7mr2347223a34.24.1771524451582; 
+ Thu, 19 Feb 2026 10:07:31 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4a76f98cesm20937815a34.22.2026.02.19.10.07.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 09:53:17 -0800 (PST)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Thu, 19 Feb 2026 10:07:30 -0800 (PST)
+Date: Thu, 19 Feb 2026 12:07:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>,
+ linux-amarula@amarulasolutions.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Alexander Graf <agraf@csgraf.de>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Anatolij Gustschin <ag.dev.uboot@gmail.com>,
  Dragan Simic <dsimic@manjaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Simon Glass <simon.glass@canonical.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] video: Kconfig: fix indentation of help text
-Date: Thu, 19 Feb 2026 18:52:55 +0100
-Message-ID: <20260219175301.2839586-1-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH 8/8] video: support Rocktech RK050HR345-CT106A panel
+Message-ID: <20260219180728.GO3233182@bill-the-cat>
+References: <20260219175130.2839234-1-dario.binacchi@amarulasolutions.com>
+ <20260219175130.2839234-9-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4pNRpcsfCRCHz4AD"
+Content-Disposition: inline
+In-Reply-To: <20260219175130.2839234-9-dario.binacchi@amarulasolutions.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,41 +108,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the indentation of the help text for VIDEO_LCD_NOVATEK_NT35510 and
-VIDEO_LCD_ORISETECH_OTM8009A to align with the standard Kconfig format.
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
----
+--4pNRpcsfCRCHz4AD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- drivers/video/Kconfig | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+On Thu, Feb 19, 2026 at 06:51:19PM +0100, Dario Binacchi wrote:
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 08c9b0207884..8ce660804072 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -566,15 +566,15 @@ config VIDEO_LCD_NOVATEK_NT35510
- 	bool "Novatek NT35510 DSI LCD panel support"
- 	select VIDEO_MIPI_DSI
- 	help
--	Say Y here if you want to enable support for Novatek nt35510
--	dsi panel.
-+	  Say Y here if you want to enable support for Novatek nt35510
-+	  dsi panel.
- 
- config VIDEO_LCD_ORISETECH_OTM8009A
- 	bool "OTM8009A DSI LCD panel support"
- 	select VIDEO_MIPI_DSI
- 	help
--	Say Y here if you want to enable support for Orise Technology
--	otm8009a 480x800 dsi 2dl panel.
-+	  Say Y here if you want to enable support for Orise Technology
-+	  otm8009a 480x800 dsi 2dl panel.
- 
- config VIDEO_LCD_LG_LD070WX3
- 	bool "LD070WX3 DSI LCD panel support"
--- 
-2.43.0
+> Add support for the Rocktech RK050HR345-CT106A RGB panel. This model
+> uses an Ilitek ILI9806E controller over the SPI bus for initialization
+> and register configuration only.
+>=20
+> The driver is designed to be easily extensible to support other panels
+> with different sequences and timings by providing a specific descriptor
+> structure for each model.
+>=20
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
+>=20
+>  drivers/video/Kconfig           |   8 +
+>  drivers/video/Makefile          |   1 +
+>  drivers/video/ilitek-ili9806e.c | 354 ++++++++++++++++++++++++++++++++
+>  3 files changed, 363 insertions(+)
+>  create mode 100644 drivers/video/ilitek-ili9806e.c
+>=20
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index 08c9b0207884..c78d6540855a 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -552,6 +552,14 @@ config VIDEO_LCD_HIMAX_HX8394
+>  	Say Y here if you want to enable support for Himax HX8394
+>  	dsi 4dl panel.
+> =20
+> +config VIDEO_LCD_ILITEK_ILI9806E
+> +	tristate "Ilitek ILI9806E-based panels"
 
-base-commit: 7dca54ef4c44c82bdc6716ac6cdc84c22c66e9ed
-branch: video-kconfig-help-text
+"tristate" is wrong for U-Boot, it should be bool.
+
+--=20
+Tom
+
+--4pNRpcsfCRCHz4AD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZdRWAAKCRAr4qD1Cr/k
+ChXgAP9a1/+QK1xf0taN2huZCoIRq9/tt0Y5apz9VHVM/gqKLQEAtM1/aUkgzUMi
+NK7ecRmO5P0j4GfMzzgXHlQ1EbzPzAw=
+=TdT9
+-----END PGP SIGNATURE-----
+
+--4pNRpcsfCRCHz4AD--
