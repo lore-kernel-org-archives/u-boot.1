@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B301CE9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9076E9A049
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C69E683D0F;
-	Thu, 19 Feb 2026 14:09:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3422083D0F;
+	Thu, 19 Feb 2026 14:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mdw7RT4a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CG2yXlzk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2D878366F; Thu, 19 Feb 2026 14:09:37 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 3641B83D3D; Thu, 19 Feb 2026 14:10:27 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A330B83D0F
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:09:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BCFF83CF2
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:10:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-65bfc858561so1670001a12.2
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:09:35 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771506575; cv=none;
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-354c19bf64bso430374a91.1
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:10:24 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506623; cv=none;
  d=google.com; s=arc-20240605;
- b=dtizaXlJJlxuM5Qcmn+x0OZWELsaBVkdu1zT0EjPqkB3/E9HnGzFxdg9hP6Xr41i9y
- LAPHNZ12RG8mRuOihRzhQNXbKUA4ItBfmOtuPIobeD2UFPNQUSwR8wwu2u5z+cfkRTSB
- 2S0Rw6cB8J79JTWHB+/o65wE4DHVJ5K5ifPqN91ao7g48xGbxYxV2I5tHF7/R7pNLG+N
- C/hYOT0TUDfbCWeTzHYnXSjHPuFDDrO6tfhXqg8Z2H5MY3gII9BZOfdc2UUMQB+ZjoeJ
- xbF8KGxdkxnBbV3Ewc/aJuVhDYYB+JwTrVtDqTJjOFjDmOmBD1F/l1726b0hyPe2+xAT
- qjgQ==
+ b=g5hv5pH+Mr9bKS3dMxkNM9KZMPXWcub9+S+1anMWzeXvAlKX3RwdAHHIcZWaOR09Mp
+ vDDTqkWZWhKjjGLbPYLwgMGNkJIebWJFHoTDA6lbjJ4xBCyb78hDKLrOS3pUCyv/OKM1
+ 5zaB32P2054N+DZhj9cHsrlOSGzkigy5KWRkln8VVJtlCIHz9SS9AVTF61kNpbylLJV5
+ k9H/OjPP08z0+p3X/HZ2q+84r5XNzhl7WBDkS9fZjRSCPiW6aC93pcLeHZecJ0dIyEwP
+ sgtXlXIa3ZjN0aJbKA4i/30oZM8WIc01UQyvW/ljQpEzhlOKqIK7fpeVPGo2iw6smoq7
+ 2G4A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=CtTC1ViSGWQSfVbBqRhNADnJDSjISApxVBW1WKgGbJw=;
- fh=afMamCyVH4nn/9Q6+cNwe8tBeIS7yQah2kEnMcw7z8c=;
- b=iAzA2fRhA6SIPJPdOdCqg5t/fYBn560jzFWYIQd0gXYvIVlqXVXZO5T2Xqi5lThfUy
- 0Gpg71HBM4PCFfQDAvfTqElAl3wSUdZhdk2Dco9Df0AVwyYh0cXqfA0DhJo9/gAPqpqT
- qSYawbPQC5eKa8DsNxw8u0p/eDfyGF7SFGfXHgpgyVymySu86zLlQJvNMKWOymbO5NYC
- J+FQx3XRT2jGi7lxRub9xL/3ZbJqBv7RlfY9G6OowsJMv7GTIqIj1KeQrJf/4un+40b7
- 2QT+Q5lTe8BT+JHg0R5rxPAJHtrie02qOX4aaFP5lpbWUlb3wi/A9UZI9pioABioiNMW
- qIoA==; darn=lists.denx.de
+ bh=UD6Urv2uL49bUTX+vWX0Gxn4CX3IunYiCdkfuYz61H0=;
+ fh=M1mguO2NKL67GmY1MFEcbuizCnr7eTpVMANZSarrQS0=;
+ b=MLEJ29M99dWG8wssyyRkJBBhE7IssUm3h1t1jzTpNLVxEfNhQYQ+quMJvA6Z2uP81U
+ ZTlCkKmuAldwmkk2IS7EVReaN6dFbc2WJkYxW00sZ+7SBgZvNNlVFNGf4tCf9kXzq+pM
+ DLAc+8FZ4Sh7spzPwSMb+aSwrIY7mcUoW9IW6AwmSPPZEUUacRDExZk5KT8utcReEnLZ
+ J5Xly+nNlnyM8ruSfpzbMu6vmXn1mXD/XoJgEgCMxTt+3UjXoGYGSzGJhZMRB0wMtlGR
+ izPa4w9Pnh3ctGFTt50C+qhiBLLb5XujHAcDocmyKRaAG0LiPKCKwkS/iZagB3Om4Jxz
+ iv8Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771506575; x=1772111375; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771506623; x=1772111423; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CtTC1ViSGWQSfVbBqRhNADnJDSjISApxVBW1WKgGbJw=;
- b=mdw7RT4aC9NT/FoBLkEyoxTK5kCn2/c98P0NN7fjEod6lS4skUCjmeipH8i7HYzVM4
- Pc28Q03UOtQYUXpwyhBtlG6NWmDJSQg1F1ZmzT20KT5i4fjY/W/kKe/uv1T5XfZsyM1R
- r0RZQXBViVF4S2UXxJwGJQzuOy7z6RDp2uriI=
+ bh=UD6Urv2uL49bUTX+vWX0Gxn4CX3IunYiCdkfuYz61H0=;
+ b=CG2yXlzk+5/IPGjnCJwVR9UV3ta0RE9PfUoWjdD1SBp/XI4eV2MaN39OZunNnGxv4/
+ U7+rQC9WUiQFBRbaYsO1b8ydPMgxoB9fktrT2r41ixvFISphAz3esmwo3rpAb4fuyU/N
+ 02/1xgYl0fJbmPoB7xk8fuuxL++4E9G3SgVG8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771506575; x=1772111375;
+ d=1e100.net; s=20230601; t=1771506623; x=1772111423;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=CtTC1ViSGWQSfVbBqRhNADnJDSjISApxVBW1WKgGbJw=;
- b=eW5h7uobCO+C9p6dm+p+gZpcGrx0IXdNa7EXHFknxJy5Jfjca5yeI2aqZo75lzYOkH
- oENDCPjDs1rJnBTOEwsu6wcSRYwF+JrGUgSvbxWy/gVcjd7M607MKQl0octq1KFGFYDH
- DrzT8xh0N0Rr1sMXxnBLtftthIRuY3TFrsPY+YaFGRt6wzACiUhYRSGmNQ+B2xCsb9xo
- LRes2KfSLjFTxvQMep0srMt5XicXVCGGqbWOtaLer4mplXeoY1/RR+1ea5pTpZHNH5Nr
- 27OPL2kTcgBjkNb4SjB9Tcbj0sitQ7rRmcRUiQzCq+uwTm0y4M4b26KPagJ9sAcnK18e
- CHzw==
+ bh=UD6Urv2uL49bUTX+vWX0Gxn4CX3IunYiCdkfuYz61H0=;
+ b=XYLOxvI30rEh1gE9pqTjjXpembqFjbEsn7fk+ZjORTMG4g/unh3a7HHH2dH2oBWOiL
+ w2xMKxv65S1vC/pn+4szJoqs3AVp1Z61DfEW2XM4TIaZ+KbeqyZ/k/lUC/B/QSKotEP1
+ vcfCqRN0soZ/z9yuxZ5XK+oW8bseYFjVCxmKZBluunVl+cNr1MeNl6L4KzVyHNCLgt3v
+ jpty8THEzOYQwH4PR6IHUfQf3SVE6O4hQc0kpEzMa5Neu/rVbO3jVb3O5iHBt46Uw1SE
+ LSOQ1h9DwrAH3+jycuJRKDaPHHxm1RpqeiiKHMC/iLJVUoYFYHuEMh63LqnBdeBFeMCK
+ tECA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjk19fgJudUQ5EbseX6PwXFm8R12FetxlpldDRTn0OSu7UXWwQG3cbM0mE3lLi9g+sPUzU48w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx0gMcRSOLquZPmiGI4AtZBdHd8fG2WeTXFfLNrFFvSTEc8YfoS
- I4tfzXIq5caVVqSAjJst9GBp2sz8nOJJlOoRNIseuffmXjXOBAwsp98PV+nrDOqDmJJEpH+3wXe
- 2kSn6eAuwtM8+S25eyNMxLg2VX2+Ht7Uj643sL4z/
-X-Gm-Gg: AZuq6aJezlrecXqmNh9/RhAZOe2XyP2AKsd8eUn4qn07CjA3t//kdDzLBxRPWy1xxgw
- i9E77QZhE0SG2p05IzzLcDfnFGVH5E9NxkBdZkDQMidDjyyXh62IGhpab2fI34wUYMBY+Gclhvm
- awVCK/d9Z+sNMTj3wEfuyhAG5sQrHxn7OkCD0RPPsFLSS9rT0Lm2i8+lzh4Y9YKUuP+/8THKP1L
- mj0F0SDDDPEh77BXXwM5IcHWS8xEdewj6A0PgYV1qOCPdmRzJVNLHFvy8vATrN07mzvOLfnfSsT
- kcn0Nua69A+m4oCd
-X-Received: by 2002:a05:6402:1468:b0:64d:2889:cf42 with SMTP id
- 4fb4d7f45d1cf-65bc784b143mr8986911a12.2.1771506574971; Thu, 19 Feb 2026
- 05:09:34 -0800 (PST)
+ AJvYcCUZ8IslCwYJueCzgXFKGrrq4ObhJ0J+fZA9WIYl+Zfs9wFjS+MpAh+LfizgniJhGs7bcxb8Upw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqF7SqIJWi0NPg8nQQhhEjHgZV5bnOfC2ek2tPhurPt4YObr2f
+ mO7qQd1/FRUCv3wkIrNMHeMyLdukhyadYY5g4GTgacZML7zUNEqn5RffEYoU/8cdv2N0VG0eiK1
+ Xdt2vkm6/Q0lmdIC2szNvzLu4IWIcUhGT9wXKvXg5
+X-Gm-Gg: AZuq6aLUuvywR2kZVQo66dB8xYayIHnHBsuviwzBq4nx+nRaZgtY48OPieZQAfDjCWu
+ df4MhbBohQBsszoWEoflUGm9nlFZgdY9YkFY8eC52vPZXKQu/CDVyglhv/xghkCSCYzynExQXy+
+ iXOf/KZqDrwYVETciLMJt6dZHw0TI6E4ozosFSu/xQebCARK76GJgAtv6rIHD0CQTBoAMZ5c3HG
+ izRF1WOvahzBD6HrdUThrvCoHkwoGK4N2h7Coqz3oIRlAg4m/wRt5JfZeWs54tZVYK14eqLmoTu
+ BlZq8A==
+X-Received: by 2002:a17:90b:4cc7:b0:34c:718c:5448 with SMTP id
+ 98e67ed59e1d1-358984ea764mr1318208a91.4.1771506622699; Thu, 19 Feb 2026
+ 05:10:22 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <9b0880ae234d8244f032eac6cee32a1031de26a3.1771275704.git.daniel@makrotopia.org>
-In-Reply-To: <9b0880ae234d8244f032eac6cee32a1031de26a3.1771275704.git.daniel@makrotopia.org>
+ <01cc9fe77706bfec2c7806f95d93c84678d06a91.1771275704.git.daniel@makrotopia.org>
+In-Reply-To: <01cc9fe77706bfec2c7806f95d93c84678d06a91.1771275704.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 06:09:22 -0700
-X-Gm-Features: AaiRm53WaM569OhTr_EsvsYhnheUS9ODMgHznMaRMXHtZlnHKFa1Qb5-OakcG1U
-Message-ID: <CAFLszTjq8CGAQkDOmr0k55Pek4E59L=GfJbGbLZ0ij4M+0AY6A@mail.gmail.com>
-Subject: Re: [RFC PATCH 02/20] boot: image-loader: add block device backend
+Date: Thu, 19 Feb 2026 06:09:30 -0700
+X-Gm-Features: AaiRm51SEwKsREL3WmjpqOnTZBvL9TRLL_YwREgdgL3mb6ynFLc6uEwA57JkXS8
+Message-ID: <CAFLszTg7ofy26E=12fgxTAvhd05Xb-p9ZhYe6uzdf_1zdVdULg@mail.gmail.com>
+Subject: Re: [RFC PATCH 16/20] boot: bootdev: add MTD boot device
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>,
@@ -138,269 +138,280 @@ X-Virus-Status: Clean
 
 Hi Daniel,
 
-On Mon, 16 Feb 2026 at 14:21, Daniel Golle <daniel@makrotopia.org> wrote:
+On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
 >
-> Add a block device storage backend for the image_loader framework.
+> Add a boot device driver for MTD (Memory Technology Devices) that
+> enables bootstd to scan MTD partitions for FIT images.
 >
-> image_loader_init_blk() takes a device and partition specification
-> string, resolves the partition, and installs a .read() callback that
-> translates byte-offset reads into blk_dread() calls with proper
-> sector alignment.
+> Add a mtd_bootdev_hunt() callback that:
+> - Calls mtd_probe_devices() once to probe all MTD devices (both
+>   UCLASS_MTD and UCLASS_SPI_FLASH) and parse their partitions
+> - Iterates the MTD subsystem device list and binds an mtd_bootdev for
+>   any top-level MTD device that has partitions but is not in UCLASS_MTD
+>   (those already get their bootdev from mtd_post_bind)
+> - Uses bootdev_bind() directly since sf_bootdev may already occupy the
+>   standard bootdev child slot
 >
-> Partitions can be identified by number or by name, following the
-> syntax of part_get_info_by_dev_and_name_or_num():
->   "0:4"        partition 4 on device 0
->   "0#kernel"   partition named "kernel" on device 0
->
-> This is important for systems where partition numbers are not stable
-> across firmware updates.
->
-> Sub-sector reads (offset or size not aligned to blk_desc->blksz) use
-> a single-sector bounce buffer to avoid overreading into adjacent RAM.
->
-> The .cleanup callback frees the allocated private context.
->
-> Gated by CONFIG_IMAGE_LOADER_BLK (depends on BLK && PARTITIONS &&
-> IMAGE_LOADER).
+> The MTD bootdev calls bootmeth_check() at the start of get_bootflow()
+> so that only compatible bootmeths (those that accept MTD bootdevs)
+> produce bootflows. Until bootmeth_openwrt's check() is extended to
+> accept MTD bootdevs, this driver is inert =E2=80=94 each commit compiles =
+and
+> introduces no regressions independently.
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  boot/Kconfig            |   8 +++
->  boot/Makefile           |   1 +
->  boot/image-loader-blk.c | 133 ++++++++++++++++++++++++++++++++++++++++
->  include/image-loader.h  |  20 ++++++
->  4 files changed, 162 insertions(+)
->  create mode 100644 boot/image-loader-blk.c
+>  boot/Kconfig             |   9 +++
+>  boot/Makefile            |   1 +
+>  boot/mtd_bootdev.c       | 150 +++++++++++++++++++++++++++++++++++++++
+>  drivers/mtd/mtd-uclass.c |  15 ++++
+>  4 files changed, 175 insertions(+)
+>  create mode 100644 boot/mtd_bootdev.c
 >
 
-Yes, this should be a driver, a child of the device that provides its
-media, in this case a UCLASS_BLK. You can see a similar pattern with
-UCLASS_BOOTDEV
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
-You can use probe() and remove() to set up and clean up.
+nits below
 
 > diff --git a/boot/Kconfig b/boot/Kconfig
-> index f6908e04a51..e94b52288a3 100644
+> index d8c7b8360ac..63e373cc62d 100644
 > --- a/boot/Kconfig
 > +++ b/boot/Kconfig
-> @@ -1187,6 +1187,14 @@ config IMAGE_LOADER_MAX_REGIONS
->           images (FDT structure + kernel + device tree + ramdisk +
->           a few loadable sub-images).
+> @@ -585,6 +585,15 @@ config BOOTMETH_CROS
 >
-> +config IMAGE_LOADER_BLK
-> +       bool "Block device backend for image loader"
-> +       depends on IMAGE_LOADER && BLK && PARTITIONS
+>           Note that only x86 devices are supported at present.
+>
+> +config BOOTDEV_MTD
+> +       bool "MTD bootdev support"
+> +       depends on DM_MTD
+> +       depends on BOOTSTD
 > +       help
-> +         Allows loading images from block device partitions (MMC, SATA,
-> +         USB, etc.) using the image_loader framework. Partitions can
-> +         be identified by number or name.
+> +         Enable a boot device for MTD (Memory Technology Devices).
+> +         This scans MTD partitions for uImage.FIT firmware images,
+> +         enabling raw-flash boot via the OpenWrt boot method.
 > +
->  config DISTRO_DEFAULTS
->         bool "(deprecated) Script-based booting of Linux distributions"
->         select CMDLINE
+>  config BOOTMETH_OPENWRT
+>         bool "Bootdev support for OpenWrt"
+>         depends on FIT
 > diff --git a/boot/Makefile b/boot/Makefile
-> index 1dbc285dad8..ac006bbaa82 100644
+> index 7b42358eb0c..feeed4924dd 100644
 > --- a/boot/Makefile
 > +++ b/boot/Makefile
-> @@ -74,6 +74,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) +=3D vbe_=
-simple_os.o
+> @@ -72,6 +72,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_FW) +=3D vbe_=
+simple_fw.o
+>  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) +=3D vbe_simple_os.o
+>
 >  obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) +=3D bootmeth_android.o
+> +obj-$(CONFIG_$(PHASE_)BOOTDEV_MTD) +=3D mtd_bootdev.o
+>  obj-$(CONFIG_$(PHASE_)BOOTMETH_OPENWRT) +=3D bootmeth_openwrt.o
 >
 >  obj-$(CONFIG_IMAGE_LOADER) +=3D image-loader.o
-> +obj-$(CONFIG_IMAGE_LOADER_BLK) +=3D image-loader-blk.o
->
->  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) +=3D vbe_abrec.o vbe_common.o
->  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) +=3D vbe_abrec_fw.o
-> diff --git a/boot/image-loader-blk.c b/boot/image-loader-blk.c
+> diff --git a/boot/mtd_bootdev.c b/boot/mtd_bootdev.c
 > new file mode 100644
-> index 00000000000..3f9a309a60c
+> index 00000000000..8a3304be988
 > --- /dev/null
-> +++ b/boot/image-loader-blk.c
-> @@ -0,0 +1,133 @@
+> +++ b/boot/mtd_bootdev.c
+> @@ -0,0 +1,150 @@
 > +// SPDX-License-Identifier: GPL-2.0+
 > +/*
-> + * Block device backend for image_loader
+> + * MTD boot device
 > + *
 > + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
 > + */
 > +
-> +#include <blk.h>
-> +#include <image-loader.h>
+> +#define LOG_CATEGORY UCLASS_BOOTSTD
+> +
+> +#include <bootdev.h>
+> +#include <bootflow.h>
+> +#include <bootmeth.h>
+> +#include <dm.h>
 > +#include <malloc.h>
-> +#include <memalign.h>
-> +#include <part.h>
-> +#include <log.h>
+> +#include <mtd.h>
+> +#include <linux/libfdt.h>
 > +
-> +struct image_loader_blk_priv {
-> +       struct blk_desc *desc;
-> +       lbaint_t part_start;
-> +       lbaint_t part_size;
+> +static int mtd_bootdev_get_bootflow(struct udevice *dev,
+> +                                   struct bootflow_iter *iter,
+> +                                   struct bootflow *bflow)
+> +{
+> +       struct udevice *parent =3D dev_get_parent(dev);
+> +       struct mtd_info *mtd, *part;
+> +       u8 buf[40];
+> +       size_t retlen;
+> +       char dname[60];
+> +       int n =3D 0;
+> +       int ret;
+> +
+> +       ret =3D bootmeth_check(bflow->method, iter);
+> +       if (ret)
+> +               return log_msg_ret("chk", ret);
+> +
+> +       /* Find the top-level MTD device matching our parent */
+> +       mtd_for_each_device(mtd) {
+> +               if (!mtd_is_partition(mtd) && mtd->dev =3D=3D parent)
+> +                       break;
+> +       }
+> +       if (!mtd || mtd->dev !=3D parent)
+> +               return log_msg_ret("mtd", -ESHUTDOWN);
+> +
+> +       /* Count partitions so the scanning framework knows the bound */
+> +       list_for_each_entry(part, &mtd->partitions, node)
+> +               n++;
+> +       if (n)
+> +               iter->max_part =3D n - 1;
+> +
+> +       n =3D 0;
+> +
+> +       /* Walk to the iter->part'th sub-partition */
+> +       list_for_each_entry(part, &mtd->partitions, node) {
+> +               if (n =3D=3D iter->part)
+> +                       goto found;
+> +               n++;
+> +       }
+
+blank line here
+
+> +       return -ESHUTDOWN;
+> +
+> +found:
+> +       ret =3D mtd_read(part, 0, sizeof(buf), &retlen, buf);
+> +       if (ret || retlen < sizeof(buf))
+> +               return log_msg_ret("rd", -EIO);
+> +
+> +       if (fdt_check_header(buf))
+> +               return log_msg_ret("fdt", -ENOENT);
+> +
+> +       /* Device-style name and partition index for bootflow list displa=
+y */
+> +       snprintf(dname, sizeof(dname), "%s.part_%x", dev->name, iter->par=
+t);
+> +       bflow->name =3D strdup(dname);
+> +       bflow->part =3D iter->part;
+> +       bflow->fname =3D strdup(part->name);
+> +       bflow->bootmeth_priv =3D strdup(part->name);
+> +       bflow->state =3D BOOTFLOWST_MEDIA;
+> +
+> +       return bootmeth_read_bootflow(bflow->method, bflow);
+> +}
+> +
+> +static int mtd_bootdev_bind(struct udevice *dev)
+> +{
+> +       struct bootdev_uc_plat *ucp =3D dev_get_uclass_plat(dev);
+> +
+> +       ucp->prio =3D BOOTDEVP_4_SCAN_FAST;
+> +
+> +       return 0;
+> +}
+> +
+> +struct bootdev_ops mtd_bootdev_ops =3D {
+> +       .get_bootflow   =3D mtd_bootdev_get_bootflow,
 > +};
-
-Needs a comment. The 'desc' won't be needed when this is a driver
-since you can use dev_get_parent(your_dev) which will be a block
-device.
-
+> +
+> +static const struct udevice_id mtd_bootdev_ids[] =3D {
+> +       { .compatible =3D "u-boot,bootdev-mtd" },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(mtd_bootdev) =3D {
+> +       .name           =3D "mtd_bootdev",
+> +       .id             =3D UCLASS_BOOTDEV,
+> +       .ops            =3D &mtd_bootdev_ops,
+> +       .bind           =3D mtd_bootdev_bind,
+> +       .of_match       =3D mtd_bootdev_ids,
+> +};
 > +
 > +/**
-> + * blk_read_partial() - Read a partial sector via bounce buffer
+> + * mtd_bootdev_hunt() - probe MTD devices and bind bootdevs
 > + *
-> + * Reads one full sector into a stack-allocated bounce buffer, then
-> + * copies @len bytes starting at byte offset @skip within that sector
-> + * into @dst.
+> + * Call mtd_probe_devices() to ensure all MTD devices (including SPI NOR
+> + * flash via CONFIG_SPI_FLASH_MTD) are probed and their partitions parse=
+d.
 > + *
-> + * @desc:      Block device descriptor
-> + * @lba:       Absolute LBA of the sector to read
-> + * @skip:      Byte offset within the sector
-
-So maybe call it 'offset' ?
-
-> + * @len:       Number of bytes to copy
-> + * @dst:       Destination buffer
-> + * Return: 0 on success, -EIO on read failure
+> + * UCLASS_MTD devices already get an mtd_bootdev via mtd_post_bind().
+> + * This creates mtd_bootdev instances for other MTD devices (e.g. SPI NO=
+R
+> + * in UCLASS_SPI_FLASH) that have partitions but would otherwise lack on=
+e.
+> + * bootdev_bind() is used directly because sf_bootdev may already occupy
+> + * the standard bootdev child slot.
 > + */
-> +static int blk_read_partial(struct blk_desc *desc, lbaint_t lba,
-> +                           ulong skip, ulong len, void *dst)
+> +static int mtd_bootdev_hunt(struct bootdev_hunter *info, bool show)
 > +{
-> +       ALLOC_CACHE_ALIGN_BUFFER(u8, sec, desc->blksz);
+> +       struct mtd_info *mtd;
+> +       struct udevice *bdev;
 > +
-> +       if (blk_dread(desc, lba, 1, sec) !=3D 1)
-> +               return -EIO;
+> +       mtd_probe_devices();
 > +
-> +       memcpy(dst, sec + skip, len);
+> +       mtd_for_each_device(mtd) {
+> +               /* Only top-level MTD devices, not partitions */
+> +               if (mtd_is_partition(mtd))
+> +                       continue;
 > +
-> +       return 0;
-> +}
+> +               /* Must have a DM device */
+> +               if (!mtd->dev)
+> +                       continue;
 > +
-> +static int image_loader_blk_read(struct image_loader *ldr, ulong src,
-> +                                ulong size, void *dst)
-> +{
-> +       struct image_loader_blk_priv *priv =3D ldr->priv;
-> +       struct blk_desc *desc =3D priv->desc;
-> +       unsigned long blksz =3D desc->blksz;
+> +               /* UCLASS_MTD devices already have mtd_bootdev from post_=
+bind */
+> +               if (device_get_uclass_id(mtd->dev) =3D=3D UCLASS_MTD)
+> +                       continue;
+> +
+> +               /* Only interested in MTD devices that have partitions */
+> +               if (list_empty(&mtd->partitions))
+> +                       continue;
+> +
+> +               bootdev_bind(mtd->dev, "mtd_bootdev", "mtdbootdev", &bdev=
+);
 
-ulong
+Check error
 
-> +       lbaint_t lba =3D priv->part_start + src / blksz;
-> +       ulong head =3D src % blksz;
-> +       u8 *out =3D dst;
-> +       lbaint_t n;
-> +       int ret;
-> +
-> +       /* Bounds check */
-> +       if (src + size > (ulong)priv->part_size * blksz) {
-> +               log_err("image_loader_blk: read at 0x%lx+0x%lx exceeds pa=
-rtition size\n",
-> +                       src, size);
-> +               return -EINVAL;
-> +       }
-> +
-> +       /* Handle unaligned head */
-> +       if (head) {
-> +               ulong chunk =3D min(size, blksz - head);
-> +
-> +               ret =3D blk_read_partial(desc, lba, head, chunk, out);
-> +               if (ret)
-> +                       return ret;
-> +
-> +               out +=3D chunk;
-> +               size -=3D chunk;
-> +               lba++;
-> +       }
-> +
-> +       /* Aligned middle =E2=80=94 read whole sectors directly into dst =
-*/
-> +       if (size >=3D blksz) {
-> +               n =3D size / blksz;
-> +
-> +               if (blk_dread(desc, lba, n, out) !=3D n)
-> +                       return -EIO;
-> +
-> +               out +=3D n * blksz;
-> +               size -=3D n * blksz;
-> +               lba +=3D n;
-> +       }
-> +
-> +       /* Handle unaligned tail */
-> +       if (size) {
-> +               ret =3D blk_read_partial(desc, lba, 0, size, out);
-> +               if (ret)
-> +                       return ret;
 > +       }
 > +
 > +       return 0;
 > +}
 > +
-> +static void image_loader_blk_cleanup(struct image_loader *ldr)
-> +{
-> +       free(ldr->priv);
-
-This is handled automatically by driver model.
-
-> +}
-> +
-> +int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
-> +                         const char *dev_part_str)
-> +{
-> +       struct image_loader_blk_priv *priv;
-> +       struct blk_desc *desc;
-> +       struct disk_partition info;
-> +       int ret;
-> +
-> +       ret =3D part_get_info_by_dev_and_name_or_num(ifname, dev_part_str=
-,
-> +                                                  &desc, &info, 0);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       priv =3D malloc(sizeof(*priv));
-> +       if (!priv)
-> +               return -ENOMEM;
-
-and this
-
-> +
-> +       priv->desc =3D desc;
-> +       priv->part_start =3D info.start;
-> +       priv->part_size =3D info.size;
-> +
-> +       ldr->read =3D image_loader_blk_read;
-> +       ldr->cleanup =3D image_loader_blk_cleanup;
-> +       ldr->priv =3D priv;
-> +
-> +       return 0;
-> +}
-> diff --git a/include/image-loader.h b/include/image-loader.h
-> index e273b1ca50f..1a9048ba482 100644
-> --- a/include/image-loader.h
-> +++ b/include/image-loader.h
-> @@ -138,4 +138,24 @@ void *image_loader_map(struct image_loader *ldr, ulo=
-ng img_offset,
->  void *image_loader_map_to(struct image_loader *ldr, ulong img_offset,
->                           ulong size, void *dst);
+> +BOOTDEV_HUNTER(mtd_bootdev_hunter) =3D {
+> +       .prio           =3D BOOTDEVP_4_SCAN_FAST,
+> +       .uclass         =3D UCLASS_MTD,
+> +       .drv            =3D DM_DRIVER_REF(mtd_bootdev),
+> +       .hunt           =3D mtd_bootdev_hunt,
+> +};
+> diff --git a/drivers/mtd/mtd-uclass.c b/drivers/mtd/mtd-uclass.c
+> index 720bd824c4d..0c637d3f5ec 100644
+> --- a/drivers/mtd/mtd-uclass.c
+> +++ b/drivers/mtd/mtd-uclass.c
+> @@ -5,11 +5,25 @@
 >
-> +/**
-> + * image_loader_init_blk() - Initialise loader for a block device partit=
-ion
-> + *
-> + * Resolves the partition using @ifname and @dev_part_str, then installs
-> + * a .read() callback that translates byte-offset reads into blk_dread()
-> + * calls. The dev_part_str accepts the same formats as
-> + * part_get_info_by_dev_and_name_or_num():
-> + *
-> + *   "0:4"        partition 4 on device 0
-> + *   "0#kernel"   partition named "kernel" on device 0
-> + *   "0:1"        partition 1 on device 0
-> + *
-> + * @ldr:               The image loader to initialise
-> + * @ifname:            Block interface name (e.g. "mmc", "scsi")
-> + * @dev_part_str:      Device and partition specification
-> + * Return: 0 on success, negative errno on failure
-> + */
-> +int image_loader_init_blk(struct image_loader *ldr, const char *ifname,
-> +                         const char *dev_part_str);
+>  #define LOG_CATEGORY UCLASS_MTD
+>
+> +#include <bootdev.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <errno.h>
+>  #include <mtd.h>
+>
+> +static int mtd_post_bind(struct udevice *dev)
+> +{
+> +       if (CONFIG_IS_ENABLED(BOOTDEV_MTD)) {
+> +               int ret;
 > +
->  #endif /* __IMAGE_LOADER_H */
+> +               ret =3D bootdev_setup_for_dev(dev, "mtd_bootdev");
+> +               if (ret)
+> +                       return log_msg_ret("bd", ret);
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  /*
+>   * Implement a MTD uclass which should include most flash drivers.
+>   * The uclass private is pointed to mtd_info.
+> @@ -18,5 +32,6 @@
+>  UCLASS_DRIVER(mtd) =3D {
+>         .id             =3D UCLASS_MTD,
+>         .name           =3D "mtd",
+> +       .post_bind      =3D mtd_post_bind,
+>         .per_device_auto        =3D sizeof(struct mtd_info),
+>  };
 > --
 > 2.53.0
 
