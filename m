@@ -4,64 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23543E9A05E
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 19:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCDAC531CD
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 20:57:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 440D583CF2;
-	Thu, 19 Feb 2026 20:30:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id D31AF83AC5;
+	Thu, 19 Feb 2026 21:57:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="s0+zFl5w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M9mQqPFv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A0BB83CEE; Thu, 19 Feb 2026 20:30:52 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9DD2183CEE; Thu, 19 Feb 2026 21:57:33 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D6BA83CF5
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 20:30:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6276283946
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 21:57:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 46D751FABE;
- Thu, 19 Feb 2026 20:30:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1771529448;
- bh=5j8l0rjsSTzyCX0ZTtKqzb+YLHTDvXVnFn2LcuotoD0=; h=From:To:Subject;
- b=s0+zFl5wPCLz5GOA10Yv3NW42zlghd5DWH5Vfqtu2rTvNktIW/4xzM4f1tOKObYFx
- sPotdnx2uWUYk6alUpjIKocW9LAI5XALBDe5CXyqQfkOZFXQ3cJTyuQTCAIritlxDG
- 4oC954X9i/kjYgqYbktAWMse8gSqZ8cMM8qJPXKqmtM/sSwYHOh9+SOpKdR/SwRGiq
- Vxkd3tfGis3RXHtXYiWDX6Kcy8OhIPtlgPN20Z7h+fYN1jsMkZharoDJrbOzUJWHOK
- vz/OUF/sfl0VynSiiRwvvo+XacFE83ETSNrEeaezDVZ9Le8nCCs1oA/zSOi/bwLD0q
- 7xfuiQS7aezuA==
-Date: Thu, 19 Feb 2026 20:30:44 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Suhaas Joshi <s-joshi@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>, francesco@dolcini.it,
- Anshul Dalal <anshuld@ti.com>, u-boot@lists.denx.de,
- trini@konsulko.com, vigneshr@ti.com, n-francis@ti.com,
- s-tripathi1@ti.com, k-malarvizhi@ti.com, kamlesh@ti.com,
- vishalm@ti.com, d.schultz@phytec.de, w.egorov@phytec.de,
- ggiordano@phytec.com
-Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
-Message-ID: <20260219193044.GA203975@francesco-nb>
-References: <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
- <20260210105014.GB214446@francesco-nb>
- <20260211101113.GA176369@francesco-nb>
- <20260211112109.56e27kyy4coqpcbb@ula0507357>
- <20260213102015.GA10715@francesco-nb>
- <20260217132150.of5l5qirxkeizsne@ula0507357>
- <aZVjSOzCH6ZP3CjW@gaggiata.pivistrello.it>
- <20260218145241.GA179991@francesco-nb>
- <20260219014606.x5sg43kuc7fbq5cr@bryanbrattlof.com>
- <20260219104020.4gzvbit3b7qqcoqk@ula0507357>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7d15b8feca3so1568263a34.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:57:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771534650; x=1772139450; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=c/np0MJ9hHWFoR8N8J2fH4q1Kp/BfELfiXK7qFpAIZU=;
+ b=M9mQqPFvTxiE7vb0ZP8LWqnckceJCqBJ1q1Kcy0zUCWaOfhEJDmjh8e7/tJqOq6kga
+ Yv/trsZoeywdo4TOPcXWiF8SVwiuFfkd3SYE4iIs50Zi6XDHttwcXC+aHGHlZTYUpQEb
+ GpMKddHlaRYlPvQsMClwfs6jEHYGRJwtyrRhE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771534650; x=1772139450;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=c/np0MJ9hHWFoR8N8J2fH4q1Kp/BfELfiXK7qFpAIZU=;
+ b=kSOZUB2pZJwUwHM79Mbbtf/EY47aaV4kv6PhFZXzJqZBh5vDuLfvrPETjk+3PllrVT
+ HwcCrr5FoFwqCeuFZ7REER/zx2FSi7v68jUDh1aP+r5JIYRlYlaInGTT3oA8eZXtfw0e
+ OjSDHKbbld8T7b9Xvbsb2YBfnTSgaiBRGhuy/TttWFWAAgzhQDBrhKaX349OgmLACeAN
+ NNxQy0MBz5o1wxUIjdDDnAq6Q7gtmXgS1+dewnUIgiZmiz7T+isOqeXKILIRnjkN5TwF
+ 2Tt0HQE6qoI7g5OVmlrwB5jyLEUeKMGqy01kXb52+0i3vCJoyVHv7wkviUwivPWy+v8f
+ g1kw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/LMzSs+Fehhn6hDRYCVhT784Ws9FEXmNXGZea/05Hz2WpI7I99AUBvXU061QOvOazssA2JLk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvVUgUK9XqM04QavCs08y3YA1c1QLbamVmvu4hKeVYnBTrYefA
+ KRT5B2f7RYa5F8Axz6OkZMDPoRT9jFFPl1BnPLnX2EEYPsvw/K9GRaGptEKZyaxwN2g=
+X-Gm-Gg: AZuq6aJ+AWrXhXgMzrJc4KfOD9jc0nGj1BzLteKzL0Wfm/fGenK7WOgyP8Pg1Bwa8yT
+ yb1Gf3KoDV1fp0fHFo6hjhCMhijgu3cyz69eml9ZUJS/SvkS5oEf1cQb1C7WheTiQ4j3Z7dsVNr
+ 8qCczhYCqXsnch2VTqJtgCqLojPFJHDCad9eq3aVdcrKkH0xS+FV3tofJtoyyuKQtsI9UPhvwrU
+ dC7ab2H6WP6dx8TMfmr6sgWdR0XRWiXsfxG1b235Mx5guQ2iHKNGGXPHFfu6lf++Jdzpfrgcftp
+ OgMhPrhjUtw9U2HAPLOkYW3xA/r6dz/XlqpiakCZFtpT1LfmC+Qs+m2luDTiIMjfxKXTRu+Czc1
+ +y9fvAEvvbeZ/tX9T/TRV09tjnuh2i4VO8U2ggIav/PXq7DIqGOMBz7FW0OxI01vKsjetJ1t7Rl
+ pgjezHgpaAXCNB69akBZq8bdShttJCP4BMxE6aNIur3Rgd9o0Tz0yMd+84lyEn7JBRRyxWSPqPy
+ etzTFq/mCnxi0r2QF09TWSbwkPG2Dynj6G5L6HqVBbi7TOekaI=
+X-Received: by 2002:a05:6830:4986:b0:7cf:d1b7:c076 with SMTP id
+ 46e09a7af769-7d505e392ccmr4746072a34.23.1771534650087; 
+ Thu, 19 Feb 2026 12:57:30 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d4a77200fbsm21280165a34.27.2026.02.19.12.57.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Feb 2026 12:57:29 -0800 (PST)
+Date: Thu, 19 Feb 2026 14:57:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tudor Ambarus <tudor.ambarus@linaro.org>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Michael Walle <mwalle@kernel.org>, Conor Dooley <conor@kernel.org>,
+ u-boot@lists.denx.de, Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Pratyush Yadav <pratyush@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [RFH] SPI and SPI-NOR patch help
+Message-ID: <20260219205726.GP3233182@bill-the-cat>
+References: <20260213164607.GI2747538@bill-the-cat>
+ <20260214-sternness-cling-4259916a8f73@spud>
+ <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
+ <20260216153110.GV2747538@bill-the-cat>
+ <87bjhmv20f.fsf@bootlin.com>
+ <46b5a69c-f589-4c4e-99e8-6bf0c41be573@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pYfhOsEFBJgUno+D"
 Content-Disposition: inline
-In-Reply-To: <20260219104020.4gzvbit3b7qqcoqk@ula0507357>
+In-Reply-To: <46b5a69c-f589-4c4e-99e8-6bf0c41be573@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,309 +113,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 19, 2026 at 04:10:20PM +0530, Suhaas Joshi wrote:
-> On 19:46-20260218, Bryan Brattlof wrote:
-> > On February 18, 2026 thus sayeth Francesco Dolcini:
-> > > Hello Suhaas,
-> > > 
-> > > On Wed, Feb 18, 2026 at 07:59:20AM +0100, Francesco Dolcini wrote:
-> > > > On Tue, Feb 17, 2026 at 06:51:50PM +0530, Suhaas Joshi wrote:
-> > > > > On 11:20-20260213, Francesco Dolcini wrote:
-> > > > > > On Wed, Feb 11, 2026 at 04:51:09PM +0530, Suhaas Joshi wrote:
-> > > > > > > On 11:11-20260211, Francesco Dolcini wrote:
-> > > > > > > > On Tue, Feb 10, 2026 at 11:50:14AM +0100, Francesco Dolcini wrote:
-> > > > > > > > > On Mon, Feb 09, 2026 at 02:20:01PM -0600, Bryan Brattlof wrote:
-> > > > > > > > > > Do you mind copying a boot log to a pastebin for me? I thought I had one 
-> > > > > > > > > > of these boards but I'm still digging around for it. 0x80000000 should 
-> > > > > > > > > > be where we load TFA now days unless some boards have opted out of 
-> > > > > > > > > > letting U-Boot move it to the bottom of DRAM
-> > > > > > > > > 
-> > > > > > > > > Here some more logs
-> > > > > > > > > 
-> > > > > > > > > https://gist.github.com/dolcini/aa4b669c6349cc6da1b9e7b19cf53fed
-> > > > > > > > > 
-> > > > > > > > > The files are named with the commit sha that is tested.
-> > > > > > > > > 
-> > > > > > > > > On Tue, Feb 10, 2026 at 02:56:46PM +0530, Suhaas Joshi wrote:
-> > > > > > > > > > Verdin boards are the only ones that are reporting this issue. Is it
-> > > > > > > > > > alright if we revert only the two Verdin-specific commits, and let the
-> > > > > > > > > > rest (TI and PhyCore ones) stay as they are? The patches are pretty
-> > > > > > > > > > un-connected to each other.
-> > > > > > > > > 
-> > > > > > > > > Verdin AM62 should not have anything special, the code is all there for
-> > > > > > > > > everyone to see, including the defconfig, the DT and so on, and the changes
-> > > > > > > > > we are talking about to me are self contained withing the SoC. Something
-> > > > > > > > > is wrong, and we are not understanding what yet.
-> > > > > > > > > 
-> > > > > > > > > I just retested once more 42b3ee7fa524 and it just hung, you never know
-> > > > > > > > > if I did something wrong. And for what matter this was spotted by our
-> > > > > > > > > CI.
-> > > > > > > > > 
-> > > > > > > > > > We are working on figuring out why Verdin is seeing these issues, in the
-> > > > > > > > > > meantime.
-> > > > > > > > > 
-> > > > > > > > > Anything I can do let me know.
-> > > > > > > > > 
-> > > > > > > > > If it matter the board that I am currently testing has 1GiB DDR RAM, and
-> > > > > > > > > the SoC is a AM6252ATCGHAALW. 
-> > > > > > > > 
-> > > > > > > > I was able to trace the issue to the get_ram_size() in
-> > > > > > > > verdin-am62.c:dram_init().
-> > > > > > > > 
-> > > > > > > > That function walks the addressable memory range to dynamically detect
-> > > > > > > > how much memory is available.
-> > > > > > > > 
-> > > > > > > > Not sure on the proper way to fix it however, Bryan? Suhaas?
-> > > > > > > 
-> > > > > > > Yes, this does seem to be the issue, even in my digging. I have sent a
-> > > > > > > patch to fix this. But since I don't have boards, I have not tested
-> > > > > > > this. Could you please test this and let us know if it works, or if
-> > > > > > > there are any other issues that pop up?
-> > > > > > 
-> > > > > > With commit f9ffeec4bdcf ("board: toradex: Make A53 get RAM size from DT
-> > > > > > in K3 boards") merged we had our CI running on our whole board farm
-> > > > > > last night.
-> > > > > > 
-> > > > > > Good news: the issue is confirmed to be fixed on Verdin AM62P and Verdin
-> > > > > > AM62 [Quad|Dual] with [1|2]GB RAM.
-> > > > > 
-> > > > > That's great!
-> > > > > > 
-> > > > > > Bad news: we we do still have a boot failure regression on Verdin AM62
-> > > > > > single core with 512MB RAM. I have no idea if this is the same issue or
-> > > > > > a different one, but from the logs it look different (despite that I
-> > > > > > decided to keep using this email thread and not start a new one).
-> > > > > > 
-> > > > > > The failing board from the logs uses a AM6231ASGGHAALW SoC, maximum
-> > > > > > frequency 1GHz, we also have another device failing, single core again,
-> > > > > > with maximum frequency 800MHz, the working one have 1.4GHz max
-> > > > > > frequency.
-> > > > > > 
-> > > > > > Worth noticing the errors
-> > > > > >   Failed to set clock rates
-> > > > > > 
-> > > > > > These are new compared to the previous U-Boot release, it affects also
-> > > > > > other boards, and I have no idea if this is related to this issue or not.
-> > > > > > 
-> > > > > > Logs of the failing device (U-Boot is commit f9ffeec4bdcf1da655a0ffea482062adde78fee8)
-> > > > > > 
-> > > > > > U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
-> > > > > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
-> > > > > > Failed to set clock rates for '/a53@0': -22
-> > > > > > SPL initial stack usage: 13456 bytes
-> > > > > > Trying to boot from MMC1
-> > > > > > Authentication passed
-> > > > > > Authentication passed
-> > > > > > Authentication passed
-> > > > > > Loading Environment from nowhere... OK
-> > > > > > init_env from device 9 not supported!
-> > > > > > Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
-> > > > > > 
-> > > > > 
-> > > > > I don't think this one is related to the firewall series. Not really
-> > > > > sure what the issue is. Just to rule this series out -- could you drop
-> > > > > my patch(es) and check if this specific device boots?
-> > > > > 
-> > > > > Was this device booting earlier? Could it be a build misconfig, since it
-> > > > > says that it can't detect an image signing certificate?
-> > > > 
-> > > > This is a regression with 2026.04. 2026.04-rc never booted on this device, and
-> > > > before commit f9ffeec4bdcf1da655a0ffea482062adde78fee8 none of the verdin
-> > > > am62[p] variants were booting for multiple bugs that were present in the
-> > > > release.
-> > > > 
-> > > > 2026.01 is booting fine on this device, with plain vanilla U-Boot.
-> > > 
-> > > The issue is still there, and it seems again related with your changes.
-> > > 
-> > > Can you help? Any test that I should do?
-> > > 
-> > > 
-> > > 
-> > > v2026.01 booting fine
-> > > =====================
-> > > 
-> > > U-Boot SPL 2026.01 (Feb 18 2026 - 12:12:15 +0100)
-> > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> > > Changed A53 CPU frequency to 800000000Hz (K grade) in DT
-> > > SPL initial stack usage: 13512 bytes
-> > > Trying to boot from MMC1
-> > > Authentication passed
-> > > Authentication passed
-> > > Authentication passed
-> > > Loading Environment from nowhere... OK
-> > > init_env from device 9 not supported!
-> > > Authentication passed
-> > > Authentication passed
-> > > Starting ATF on ARM64 core...
-> > > 
-> > > NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-> > > NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-> > > 
-> > > U-Boot SPL 2026.01 (Feb 18 2026 - 12:12:38 +0100)
-> > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> > > SPL initial stack usage: 2048 bytes
-> > > Trying to boot from MMC1
-> > > Authentication passed
-> > > Authentication passed
-> > > 
-> > > 
-> > > U-Boot 2026.01 (Feb 18 2026 - 12:12:38 +0100)
-> > > 
-> > > SoC:   AM62X SR1.0 HS-FS
-> > > Reset reason: POR
-> > > DRAM:  512 MiB
-> > > optee optee: OP-TEE: revision 4.7 (a9690ae39995af36)
-> > > Core:  159 devices, 34 uclasses, devicetree: separate
-> > > MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-> > > Loading Environment from MMC... Reading from MMC(0)... OK
-> > > In:    serial@2800000
-> > > Out:   serial@2800000
-> > > 
-> > > 2026.04, commit 3243a73102c3 ("Merge branch 'master' of
-> > > https://source.denx.de/u-boot/custodians/u-boot-sh"), booting fine
-> > > =================================================================
-> > > 
-> > > 
-> > > U-Boot SPL 2026.04-rc1-00199-g3243a73102c3 (Feb 18 2026 - 15:38:33 +0100)
-> > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> > > Failed to set clock rates for '/a53@0': -22
-> > > SPL initial stack usage: 13512 bytes
-> > > Trying to boot from MMC1
-> > > Authentication passed
-> > > Authentication passed
-> > > Authentication passed
-> > > Loading Environment from nowhere... OK
-> > > init_env from device 9 not supported!
-> > > Authentication passed
-> > > Authentication passed
-> > > Starting ATF on ARM64 core...
-> > > 
-> > > NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-> > > NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-> > > 
-> > > U-Boot SPL 2026.04-rc1-00199-g3243a73102c3 (Feb 18 2026 - 15:38:57 +0100)
-> > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> > > SPL initial stack usage: 2048 bytes
-> > > Trying to boot from MMC1
-> > > Authentication passed
-> > > Authentication passed
-> > > 
-> > > 
-> > > U-Boot 2026.04-rc1-00199-g3243a73102c3 (Feb 18 2026 - 15:38:57 +0100)
-> > > 
-> > > SoC:   AM62X SR1.0 HS-FS
-> > > Reset reason: POR
-> > > DRAM:  512 MiB
-> > > optee optee: OP-TEE: revision 4.7 (a9690ae39995af36)
-> > > Core:  160 devices, 35 uclasses, devicetree: separate
-> > > MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-> > > Loading Environment from MMC... Reading from MMC(0)... OK
-> > > In:    serial@2800000
-> > > Out:   serial@2800000
-> > > Err:   serial@2800000
-> > > Model: Toradex 0071 Verdin AM62 Solo 512MB V1.2A
-> > > 
-> > > 
-> > > 2026.04, current master, commit 8666b16015d4, NOT working
-> > > =========================================================
-> > > 
-> > > 
-> > > U-Boot SPL 2026.04-rc2-00033-g8666b16015d4 (Feb 18 2026 - 15:05:31 +0100)
-> > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> > > Failed to set clock rates for '/a53@0': -22
-> > 
-> > Hmm It's interesting to see this start to fail. 
 
-This is fixed with another patch, and I would confirm that this is
-unrelated to the issue we are debugging here
+--pYfhOsEFBJgUno+D
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> > > SPL initial stack usage: 13464 bytes
-> > > Trying to boot from MMC1
-> > > Authentication passed
-> > > Authentication passed
-> > > Authentication passed
-> > > Loading Environment from nowhere... OK
-> > > init_env from device 9 not supported!
-> > > Authentication passed
-> > > Authentication passed
-> > > Starting ATF on ARM64 core...
-> > > 
-> > > NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-> > > NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-> > > 
-> > > U-Boot SPL 2026.04-rc2-00033-g8666b16015d4 (Feb 18 2026 - 15:05:54 +0100)
-> > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> > > 
-> > 
-> > I'm suspicious of the spl_enable_cache(). I've witnessed issues if we 
-> > add MMU entries that are not backed by DRAM which can cause the MMU to 
-> > crash the CPU.
-> > 
-> 
-> I looked into that function.
-> 
-> This is my current theory:
-> 
-> The end address of 512MB RAM is 0x9FFFFFFF. This is the same as OPTEE's
-> end address.
-> 
-> If you look into the `spl_enable_cache()` function, you'll see that it
-> is subtracting the size of page tables from the top of RAM, i.e. it is
-> placing the page table at the end of RAM, i.e. it is placing the page
-> table in OPTEE's memory region. Since this region wasn't protected by
-> firewalls earlier, everything worked. But now the firewall disallows
-> U-Boot's access to the page table.
-> 
-> On 1GB and 2GB devices, there's a great deal of distance between the
-> end addresses of RAM (0xBFFFFFFF and 0xFFFFFFFF respectively) and the
-> end address of OPTEE. So we don't run into this issue.
-> 
-> Francesco -- Just to confirm if this indeed is the case, could you
-> change CONFIG_K3_OPTEE_LOAD_ADDR to any other free location, and check
-> if the device boots?
+On Thu, Feb 19, 2026 at 02:13:24PM +0200, Tudor Ambarus wrote:
+> Hi,
+>=20
+> + Pratush,
+> + Vignesh,
+> + Marek,
+>=20
+> On 2/18/26 11:23 AM, Miquel Raynal wrote:
+> > Hello Tom,
+> >=20
+> > On 16/02/2026 at 09:31:10 -06, Tom Rini <trini@konsulko.com> wrote:
+> >=20
+> >> On Mon, Feb 16, 2026 at 09:21:55AM +0100, Michael Walle wrote:
+> >>> On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
+> >>>> On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
+> >>>>> Hey all,
+> >>>>>
+> >>>>> To be blunt, U-Boot needs help with reviewing and maintaining the S=
+PI
+> >>>>> and SPI-NOR subsystems. We haven't had someone with time to actively
+> >>>>> work in this area for some time. I'm going through the outstanding
+> >>>>> changes now, but it also seems a common problem is that with respec=
+t to
+> >>>>> device IDs, most of the new ones also aren't in the upstream Linux
+> >>>>> Kernel. Is there some better and generic solution we're missing so =
+that
+> >>>>> we don't have large and often growing device ID tables? I'd rather =
+not
+> >>>>> make that problem worse, so I've rejected two of those types of upd=
+ates
+> >>>>> today and I'm just setting aside a large number of others.
+> >>>>
+> >>>> Dunno if your timing was cursed on sending this, but Tudor submitted=
+ his
+> >>>> resignation from spi-nor maintainership in the kernel about 10 mins
+> >>>> after.
+> >>>> I think Michael Walle might be responsible for what you're talking a=
+bout
+> >>>> here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash drive=
+r"),
+> >>>> but idk jack about spi-nor stuff.
+> >>>
+> >>> Yeah. Nowadays SPI-NOR flashes come with self describing tables,
+> >>> which are already supported by u-boot, I think. The only change that
+> >>> seems to be missing is the fallback to it if an id isn't found in
+> >>> the flashdb. Only thing is, the SFDP doesn't describe all features,
+> >>> most prominent example being locking. So if you need that, you'll
+> >>> still need to have an entry per flash.
+> >>>
+> >>> In fact, in linux I'm planning to change to make it probe SFDP first
+> >>> and then amend it with the flashdb information (if there is an
+> >>> entry).
+> >>
+> >> Thanks for explaining. So in that U-Boot does have SFDP support, the
+> >> first thing is platforms should likely be enabling that instead of just
+> >> adding IDs, at least for basic support.
+>=20
+> Right.
+>=20
+> SFDP is behind a config, because of size constraints I assume. And then we
+> also have a tiny duplicate version of the driver for stricter size
+> constraints. Are these size constraints defined somewhere? We need to know
+> them in order to choose a direction.=20
+>=20
+> Also, I'd argue that having the tiny version of the driver was ideal.
+> Instead we should have tried to modularize SPI NOR, by SFDP, static
+> initialization of flashes, manufacturer drivers.
 
-Any suggestion on a good address to use?
+Some platforms define their overall size constraints, and so we know for
+sure a hard limit even in full U-Boot. More platforms do this for SPL,
+but not all. So the general answer does end up being that we always care
+about if there is a more size-considerate solution with minimal
+trade-offs. Especially since we are also in a more minimal overall
+space.
 
-I tried 0x83800000, and the result is not booting in different ways,
-failing in different ways
+--=20
+Tom
 
-Sometime
+--pYfhOsEFBJgUno+D
+Content-Type: application/pgp-signature; name="signature.asc"
 
-U-Boot SPL 2026.04-rc2-00035-g94764e8c861f-dirty (Feb 19 2026 - 19:21:39 +0100)
-SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-Set clock rates for '/a53@0', CPU: 800MHz at Speed Grade 'K'
-SPL initial stack usage: 13464 bytes
-Trying to boot from MMC1
-Authentication passed
-Authentication passed
-Authentication passed
-Loading Environment from nowhere... OK
-init_env from device 9 not supported!
-Authentication passed
-Authentication passed
-Starting ATF on ARM64 core...
+-----BEGIN PGP SIGNATURE-----
 
-NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZd5KwAKCRAr4qD1Cr/k
+Cp/WAP4p53DJF5O1TCDDpAt1dOP+t4MbPDLicM7Sq3MPhitHHgD/epQ9UMZAePWm
+JhZ+9hBacJWQQJm/Qzj1GpVsSWGPkAs=
+=WO4m
+-----END PGP SIGNATURE-----
 
-
-and sometime
-
-U-Boot SPL 2026.04-rc2-00035-g94764e8c861f-dirty (Feb 19 2026 - 19:21:39 +0100)
-SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-Set clock rates for '/a53@0', CPU: 800MHz at Speed Grade 'K'
-SPL initial stack usage: 13464 bytes
-Trying to boot from MMC1
-Authentication passed
-Authentication passed
-Authentication passed
-Loading Environment from nowhere... OK
-init_env from device 9 not supported!
-Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-
-SE) devices
-Authentication passed
-Starting ATF on ARM64 core...
-
-Francesco
-
+--pYfhOsEFBJgUno+D--
