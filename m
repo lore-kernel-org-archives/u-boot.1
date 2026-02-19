@@ -4,145 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F52EE9A03B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 11:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB20E9A049
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3807483A47;
-	Thu, 19 Feb 2026 12:24:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
+	by phobos.denx.de (Postfix) with ESMTP id 4507683936;
+	Thu, 19 Feb 2026 14:09:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="fRmSeySW";
-	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gT1HZGEQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hhwMYzDo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5E2883AA9; Thu, 19 Feb 2026 12:24:20 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C05F783A47; Thu, 19 Feb 2026 14:09:28 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72BFE83936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:24:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=oss.qualcomm.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0EF978366F
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 61J47m0C422068
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:24:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Drf1WU7UhH3YH/q+kEl60Y5tVH6fLlujPap7kZvasEs=; b=fRmSeySW4Lji2H72
- +H4NsIi/XiMEEp1463SZXwm4U/tZ8E+a/ofv6Tiu94PghNg11rI/nom1V1L8uWvf
- Up2qGrcgu5yZaqepzEo2YAWKYFA09E/IExI3oEgBIQX5LD2bakKcJWjvQXr/GZZv
- b/arSh9n4W0GBbyvvF+v4g3kajhm0NvSkjM6satEcRja89/vVFinjeBFFm04RZ7I
- RYgFP6aSN1TGywex0rDYyG+fFW8W0hDAuG+isNzd9jOfAif6gyg7PtpVkyrM8Ozn
- WbFtggahQOc7B1SWLFt2bMctP4FHfxl8rhtHq9Dy2M2IZoazBR/UJiA9If3OFqB5
- ZjtWJA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cd76e48sr-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:24:16 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2a77040ede0so9941865ad.2
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 03:24:16 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-65baa72399fso1198826a12.0
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:09:26 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506565; cv=none;
+ d=google.com; s=arc-20240605;
+ b=aIBd0eS9VytvBiPfGwSTtvF9a3WH6UBJxhKt4pVt09c2InO9Auc8u18neFL4buAMOO
+ ae+W1RSRAz0yaux2+8uxYdF+054+pgq3AiDynawfIRg8DiLu2xlEPk3HZkDS+OtPcktb
+ g/fVpiLucefA5fToYpyx1o43cbq4sM+jnw2ACC8gCADzFtSKkdz+8LbbsCaYxkYSfVUz
+ o7Fs2ypxeQ+eIvqsXJSizbDtUKpsJ2AZJRlFkRq8/uQKfRlVt3NZuF5aIixJORUBj2RP
+ w216LmTAUXlUdCeWZc8iocfLBivEH/GP905UwnTj6AEG+kp7FD3tfV3SgT7GCs6kirAD
+ 5u9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=tUrZ1aMXxImC86esPuoKqGC0Vwppm9va0Lync2byJzs=;
+ fh=ed0Ie8kN2ZRpM9JpRUh2QtwLMXwIkJzbEqpXUxMla1Q=;
+ b=U6Z7yqLmp7A+qOQy1lFzp8+0HquxP3E6QucyqOFrSmRcO57ewS/29DT/ozgf3Ge94R
+ +hgDk77eENHGm0LEhXUtQ6nukHkTOfBg6ux6OGtP13tcPcJISCqAUV7oLIv4INOfiLcK
+ Gy1oT0nt2SQPQUUUn2pvN3YzP+P/k35z/W4vtyPt9NdShlfcLA+8FlLUk47L1Vfllja4
+ qdJJZA9dbjKHWg16KftBeRq+T+wpzYezraZoHKlxyy/OL8c5VF9aLbuYv5/BdjOTLTdd
+ kazAq47ZWj0mq8FR484XcQGmYjvHMDe1+XUWSaBcpdqlnEijd8658iTMv0SvaCq+1Rra
+ 8YVg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1771500256; x=1772105056; darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Drf1WU7UhH3YH/q+kEl60Y5tVH6fLlujPap7kZvasEs=;
- b=gT1HZGEQgRMYqNsOUiWKTJA0hatlTpyAN2sBN1MXh19F+guEGlUmUW0fCXYp8isicz
- /GjPrtdlpbKl6ITM/jIViq2OwROq+xZAndLzmorRaivEjkbdkHbGw7NZJMdZBesIkNlt
- FPaNv4SUVBsXNBIprDi3oTng1Z55cE+qnm7wwbUVbZfp3qEpWpIC47kHzEAygIenNP/J
- I5yJahX5AsieyTLhZ9hDcO5YbUd8Awh+nRJLz357IKxsag6olZHu2usR6xPbB1Y2Sl+1
- uyKYL6LQULXdzVM/2yCIslOOXgKrbEzN7uIM6S5cWKFYw5PXP+wBcgvXQCzT9eAPt7Ce
- mm9g==
+ d=chromium.org; s=google; t=1771506565; x=1772111365; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tUrZ1aMXxImC86esPuoKqGC0Vwppm9va0Lync2byJzs=;
+ b=hhwMYzDoOZByZFCx1pCKJXRLOELP0TqK6w8C3EGFjfi9fn8uBNRevTJ3QPRfefBXuH
+ SzbWyUbITVNUebfpRa9q377l85gR+0SXBXEbKU5u6rTe+LV0+L5b8Q9VV3atYK5n3uNA
+ hOPbmB1ycpyYsdlECGsDfmpBDBdkcEb046jfU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771500256; x=1772105056;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Drf1WU7UhH3YH/q+kEl60Y5tVH6fLlujPap7kZvasEs=;
- b=JF1SbR3mCHM89c530yQGDqiKjIpHEFVMS9slWAqoO7e8b5Oi6oqmnjNj4LAYibhy6q
- t9R5WluZpk5kZjgOfUPoi/EvELliScAHNJyndP8DIOWTnQ2GcCWBXDt9Drht2P+QMDt2
- 3vyKWTapaI9wwxdx95ZQrrt5lzbUEWUOzgaxs/ySBOHThuaKDC4OL5zwgU3oOlf8P0mM
- BJyjRJQHVtrA9nh/xKCbk6IFhDB6Z/iJKitRFwgQ8+gOLch/OBNfNNaa/aZfZI/5m6Ls
- Bfzkd1VvEcytmuGec3t0CVx5WoZ1/rKTjd+DYpMoWwetry2CxpnxmlGPq+KoWkaN0w8P
- 4HaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVgVJy+GVvxQtZkDReSMqbDlfJ35WGXp4mO3q8rJUaZl0dTHBYmp7T7kjKgkuIu7iuFeprdEKU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJTqzISJTM+vONWO6HjNAZ2R+GW4wAowX6MrK54/P+zIOF/Hf4
- pAUKP2s1WNmB+LQlyG/K/elPGWrad6mQ0lZyidnSN+FzQdf9mroXEWzs0EMc6ueeIwXRoJU0o1k
- 7Zo7qPoGuTPtrzD/PyD1/hxZVIGPMdaTgGNtowS976RkebUPn2+852mc7
-X-Gm-Gg: AZuq6aKxsLAP5T+hLVPSejyhoxTBAQanso38b79G+StQVchR41cLRUrTA/urY6Sm9UW
- iXvLU1WsB4YHdXayNTgTD/WiB0xXgVwkMAd7YriImdQK///xP4XOBuZKJnFnzWrgK/dO73cIeP2
- YJJWrnlBOpEssA+SZCZQH5GiE7lcDowKIOJZJWX9pYo97xJtgGnh4MmifHkraFr9XMhe05xizcd
- IUS0QqZsaPBHpxRgf0k0ycnfR5MPRPbnh/4SLBCY0VYFBaKzWcQ/8G6VNxRAyiy+vFmzVLHwM2O
- dFy8y6YMhg6tbZxg2yayGmhlr+X8jKPBtTy384Oso/X5fUbiC+kIp9PUVM+Zv/rKrbYNr0eXZId
- tHIp6cKle0d7kh+n5+uBohoUQB7/GHQwZ0JKS+V8BXeDe3qHKU00X5Q==
-X-Received: by 2002:a17:902:ebc3:b0:2a9:5ef2:f788 with SMTP id
- d9443c01a7336-2ad50f5f5ccmr53766745ad.37.1771500255551; 
- Thu, 19 Feb 2026 03:24:15 -0800 (PST)
-X-Received: by 2002:a17:902:ebc3:b0:2a9:5ef2:f788 with SMTP id
- d9443c01a7336-2ad50f5f5ccmr53766355ad.37.1771500254993; 
- Thu, 19 Feb 2026 03:24:14 -0800 (PST)
-Received: from [10.152.202.155] ([202.46.23.19])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ad1aadc729sm149797475ad.64.2026.02.19.03.24.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Feb 2026 03:24:14 -0800 (PST)
-Message-ID: <23fa6538-d69b-4f59-9e36-f3cf2c6dd543@oss.qualcomm.com>
-Date: Thu, 19 Feb 2026 16:54:06 +0530
+ d=1e100.net; s=20230601; t=1771506565; x=1772111365;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tUrZ1aMXxImC86esPuoKqGC0Vwppm9va0Lync2byJzs=;
+ b=uHdIpEMbK+wG2fRfPE/gtN+2wuiiM1qaFl1WpK4gtIY92ABHY/+fZ4YaJFVRie/8Jz
+ enjFeikH9i/PGTm6KYmZ5Yj95C3q4p7IbQe17aW5rz/ZnhtjIRIkm70Z+hIZ0EKS/TjA
+ PoCupo8WV/t27twWBpzCpaj/W2k15IlMuH3/qGRqH5seeFB1Q0DdxneFSOTq6fGHuIGG
+ StAukqc6p/xjf+zalqElVVc1MDOMfYK5BgG2qyPLpP9/nMZgIPaNIkfbyxjSEaFdeYpp
+ RgsXZE4ccEecbHF1Wu+AFP27tCrWV6FXEtHehZWVy5T6Qo3Y5mYrQuXDEst8MBXkjSZl
+ yorg==
+X-Gm-Message-State: AOJu0YyoB+kd9fyNlxAh5l+96zqTwyQOnz9MBbAEOZIaORziOPF4gqXe
+ idvbtBVsByPC78EwkVEk42PiHJU1uf67ddk9cbT7c4w/Wnq1ZZjXSpJHdDN8tT4QRLgqnSACyfM
+ u8lUlYWSbKmhJIQJNhHduK1Bt3srvc7UtFrem3EtuSCIcC44e46o=
+X-Gm-Gg: AZuq6aKG/qLocFYBzc9RDTWxgsuli72rOD+O9TArFLsawysc986QyZJkLjVR2PFWXph
+ kMI6ycdAHPg0K0sZHJLmf8qHfOE6FzUa73nZkBzJyYrPJc8L21sVHZD+75SLLkMiJ6RzM4n2yiE
+ V9mLTYoAYZ3pVF/uWH/9HRtARF8usscgfCrMjh7jkPddr6/NnL/p2uDJla4kMgy6wzYT3cJIzuO
+ 95tNwzbRyxKsXBBCugXcGF7Bg+CUeev9WmRQn96p+8DRnWtjT8Bh56ehjluZ78IsK6k/HG8MSVB
+ SyXAow==
+X-Received: by 2002:a05:6402:399c:b0:65b:f5fa:afdd with SMTP id
+ 4fb4d7f45d1cf-65bf5fab2dcmr5969878a12.5.1771506565368; Thu, 19 Feb 2026
+ 05:09:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] misc: Add support for bit fields in NVMEM cells
-To: Sean Anderson <seanga2@gmail.com>
-Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
- neil.armstrong@linaro.org, peng.fan@nxp.com, quentin.schulz@cherry.de,
- n-francis@ti.com, xypron.glpk@gmx.de, h-vm@ti.com, justin@tidylabs.net,
- jamie.gibbons@microchip.com, ycliang@andestech.com, me@samcday.com,
- sughosh.ganu@arm.com, gchan9527@gmail.com, ilias.apalodimas@linaro.org,
- u-boot-qcom@groups.io, u-boot@lists.denx.de, sumit.garg@kernel.org,
- casey.connolly@linaro.org
-References: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
- <20260213112717.1256823-3-aswin.murugan@oss.qualcomm.com>
- <3fe5e11d-7240-c577-64fc-062d5c5e4d6a@gmail.com>
- <497f7e07-3a5c-4a7a-b2bb-9016d6927ba4@oss.qualcomm.com>
- <96a3a5e8-a853-b766-a013-d3db6bfce117@gmail.com>
-Content-Language: en-US
-From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-In-Reply-To: <96a3a5e8-a853-b766-a013-d3db6bfce117@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=OKsqHCaB c=1 sm=1 tr=0 ts=6996f2e0 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
- a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
- a=3a11mvtZPsPdW_w_N7UA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjE5MDEwNCBTYWx0ZWRfX6gtt2ctf/ir+
- HL8/yXer/WB9GaZQFSZNRmpwT/nLUm1atL61c2ZjS/AoweNJ2dWtmT8A3K/0Qvyu1O9Lpe2hgF3
- 2DAI68k5f8uvd6qXuQh1x4qc51A1NxgKs0D4Z0SHe/vD6iA5TmC5JjUqGm5ZrSnaW8kN07op8xN
- /4/K58C//hAOaGCcxnRabFxlm8OsT61ZA5LCZM10WWqvn+hGxys6KnIMoSqmmKOMtHevN+Zc9hP
- Kyahz4aoVjtvV8iklyn9ZSXRLN2+AWkkDl41QDEtYUQp6X+yq3IuWmWAq3c1kzVUTk+UpMtAIza
- K3VmgBpJnv01mropb7i35quTSw49WBQxf8AhkrTM3lOenVU40h0G4zZQ4ZyQSK2WbKVeiAMdnJi
- zoFTvm3un+RnXF/xs1WcYQEQkvTLn0MzufIeuDaKfcQDVZgfZEM0876EmViJvSk4ZntMgTfjIlK
- evSOGYI4rdh7WRg28FA==
-X-Proofpoint-GUID: lCYTD-RmORR7_Ow0CrlA2OiuQbo7w3nC
-X-Proofpoint-ORIG-GUID: lCYTD-RmORR7_Ow0CrlA2OiuQbo7w3nC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-02-19_03,2026-02-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 impostorscore=0 adultscore=0 suspectscore=0
- clxscore=1015 spamscore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602190104
+References: <20260219003351.388722-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20260219003351.388722-1-marek.vasut+renesas@mailbox.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 19 Feb 2026 06:09:12 -0700
+X-Gm-Features: AaiRm51glp3jVbfs2lECmbuk2NSCjpxGgkxAMUwYv8zAkPrOteLcGD6i_SyplK0
+Message-ID: <CAFLszTj42WZF3DTOt4HxskNW3qyZJ5_pQ66RsBNdbr13rXTFeg@mail.gmail.com>
+Subject: Re: [PATCH v2] gunzip: Implement chunked decompression
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Alexander Graf <agraf@csgraf.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome@forissier.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,83 +114,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Marek,
 
-On 2/18/2026 7:37 AM, Sean Anderson wrote:
-> On 2/17/26 14:05, Aswin Murugan wrote:
->> Hi Sean,
->>
->> Thanks for your feedback.
->> To address stack smashing, which occurs when the cell size is larger 
->> than 4 bytes, I will revert the `nvmem_cell_read()` call in 
->> `reboot_mode_get()` to pass `sizeof(*mode)` as the size, consistent 
->> with the original implementation.
->>
->> Inside `nvmem_cell_read()`, will modify the validation check. Instead 
->> of enforcing `size == cell->size`, will check if `cell->size` is 
->> within the passed `size` (i.e., `cell->size <= size`) to correctly 
->> support our 1-byte read case where the buffer is 4 bytes.
+On Wed, 18 Feb 2026 at 17:34, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 >
-> Then don't we need to zero out the rest of the buffer?
+> The current gzwrite() implementation is limited to 4 GiB compressed
+> input buffer size due to struct z_stream_s { uInt avail_in } member,
+> which is of type unsigned int. Current gzwrite() implementation sets
+> the entire input buffer size as avail_in and performs decompression
+> of the whole compressed input buffer in one round, which limits the
+> size of input buffer to 4 GiB.
 >
-> I would expect the check to be
+> Rework the decompression loop to use chunked approach, and decompress
+> the input buffer in up to 4 GiB - 1 kiB avail_in chunks, possibly in
+> multiple decompression rounds. This way, the compressed input buffer
+> size is limited by gzwrite() function 'len' parameter type, which is
+> unsigned long.
 >
-> if ((cell->bit_offset && size > cell->size) || size != cell->size)
->     return -EINVAL;
+> In case of sandbox build, include parsing of 'gzwrite_chunk'
+> environment variable, so the chunked approach can be thoroughly tested
+> with non default chunk size. For non-sandbox builds, the chunk size is
+> 4 GiB - 1 kiB.
 >
->> Also, i2c_eeprom_read() and misc_read() will continue to request a 
->> read for cell->size instead of the passed buffer size, ensuring we 
->> only read the valid data from the hardware.
->>
->> Regarding the bit field logic, as you suggested will simplify the 
->> bit‑field handling to max u32 size, which significantly reduces the 
->> code complexity. Given this simplification, is it still necessary to 
->> keep this bit‑manipulation logic behind a separate config option?
+> The gzwrite test case is extended to test various chunk sizes during
+> gzwrite decompression test.
 >
-> I think it's likely. You can check the growth with 
-> scripts/bloat-o-meter in
-> Linux. Since this is mainly for U-Boot proper I'd say a couple hundred 
-> bytes
-> is reasonable for this feature.
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Alexander Graf <agraf@csgraf.de>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jerome Forissier <jerome@forissier.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: Rebase on master
+> ---
+>  lib/gunzip.c     | 76 +++++++++++++++++++++++++++++++++---------------
+>  test/cmd/unzip.c | 12 +++++++-
+>  2 files changed, 64 insertions(+), 24 deletions(-)
 >
->> Kindly confirm if this approach aligns with your expectations. 
+> diff --git a/lib/gunzip.c b/lib/gunzip.c
+> index 76f3397fced..20cc14f9688 100644
+> --- a/lib/gunzip.c
+> +++ b/lib/gunzip.c
+> @@ -8,8 +8,10 @@
+>  #include <command.h>
+>  #include <console.h>
+>  #include <div64.h>
+> +#include <env.h>
+>  #include <gzip.h>
+>  #include <image.h>
+> +#include <linux/sizes.h>
+>  #include <malloc.h>
+>  #include <memalign.h>
+>  #include <u-boot/crc.h>
+> @@ -119,7 +121,7 @@ void gzwrite_progress_finish(int returnval,
+>  int gzwrite(unsigned char *src, size_t len, struct blk_desc *dev,
+>             size_t szwritebuf, off_t startoffs, size_t szexpected)
+>  {
+> -       int i, flags;
+> +       int flags;
+>         z_stream s;
+>         int r = 0;
+>         unsigned char *writebuf;
+> @@ -127,13 +129,23 @@ int gzwrite(unsigned char *src, size_t len, struct blk_desc *dev,
+>         ulong totalfilled = 0;
+>         lbaint_t blksperbuf, outblock;
+>         u32 expected_crc;
+> -       size_t payload_size;
+> +       size_t i, payload_size;
+> +       unsigned long blocks_written;
+> +       lbaint_t writeblocks;
+> +       int numfilled = 0;
+>         int iteration = 0;
+> -
+> -       if (len > 0xffffffff) {
+> -               log_err("Input size over 4 GiB in size not supported\n");
+> -               return -1;
+> -       }
+> +       /*
+> +        * Allow runtime configuration of decompression chunk on
+> +        * sandbox to better cover the chunked decompression
+> +        * functionality without having to use > 4 GiB files.
+> +        */
+> +       const ulong minchunk = 0x400;
+> +       const ulong maxchunk = SZ_4G - minchunk;
+> +       const ulong chunk =
+> +               CONFIG_IS_ENABLED(SANDBOX,
+> +                                 (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
+> +                                        minchunk, maxchunk)),
+> +                                 (maxchunk));
 >
-> Please remember to reply on the bottom :)
->
-> --Sean
 
-The suggested check will fail for our case, we always pass size = 
-sizeof(u32) = 4 bytes regardless of the actual cell size.
+As you mentioned in the last version, there is a compression test in
+compression.c - could you add a version of this function that takes
+maxchunk as an argument and call it from that test? Reading an
+environment variable to avoid passing a parameter seems pretty odd to
+me :-)
 
-Example: 1-byte cell with 7-bit field
+[..]
 
-cell->size = 1, bit_offset = 1, nbits = 7, size = 4
-
-With suggested check: if ((cell->bit_offset && size > cell->size) || 
-size != cell->size) -> (1 && 4 > 1) || 4 != 1 -> TRUE -> rejects valid case
-
-If we have a check as below:
-
-if (size < cell->size) -> 4 < 1 -> FALSE -> correctly allows
-
-Then if cell has nbits set, bit field bounds can be validated separately 
-as follows:
-
-bytes_needed = DIV_ROUND_UP(7+1, 8)
-
-if (bytes_needed > cell->size || bytes_needed > sizeof(u32) || size != 
-sizeof(u32))
-
-This validates:
-
-  * bytes_needed > cell->size: Bit field doesn't exceed actual cell size
-  * bytes_needed > sizeof(u32): Bit field doesn't exceed maximum
-    supported size
-  * size != sizeof(u32): Buffer size is correct for bit field operations
-
-Thanks
-
-Aswin
-
-
-
+Regards,
+Simon
