@@ -4,150 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 540A9E9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F0E3E9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:26:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEDD483CD3;
-	Thu, 19 Feb 2026 14:23:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
+	by phobos.denx.de (Postfix) with ESMTP id 801EE83E1E;
+	Thu, 19 Feb 2026 14:26:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="EIy/Biph";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="iKVmcwX5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C4E183D0F; Thu, 19 Feb 2026 14:23:40 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id E31EC83DC9; Thu, 19 Feb 2026 14:26:14 +0100 (CET)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5432383AC5
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:23:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA02F83AC5
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:26:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mt.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
+ spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iayvClGj2qbXc8mqi0YextPUqMd8P1hPyz7gHIOFVJsAUPPTxtmFO7iAQJ5TtNdfvogJoBkrYsOyhXtYdRL/07CPZ86q9eQRSN5RcTJ253OYOZHXX/pFAwqtaEeAWD8///RaOupZtV12DaaTY9aIRDENNRCM3N1J+BPAAUgWrgSBxhe8y/8Z57IjK2yDZz4L/BFqZj5u+6tUU/Q6HUpoSLBBZynNynvXdzfC85kpMEFPXGQ2KPdAjvhbyTl2oTo29KBnZJdqW5j3zPj1OVWjuW6i5MMrB8TdaoGyw9gAX7bVeNqqlZMQTFXKNyseg5vW/rZkK+bsHnk9b3zrcLnJ0g==
+ b=tOt2oa0JOe1EtcsA7+67X3EfRYZtmJ/r+sAUTbDwrBqoNX/n5elMsq354oc0PZ0XrFTH3AzXDHM8+LAmAbUcfbdZtbdu6PAY4Uhyb7Da4C+hIcAypArzs4kgu5THHpXJrCI7g4UFbZzRLmD3rhee6IJqaGPs/MEcp6NrzJktU2wN94kRZHAoOE46J/Qf7srX/S2HXtAPKaG4VK76ktshAl0huadrG3/er1313oLFkbai3lZeK6ac0kX4eQUrMogbxCjGR10psr3+MG1VmnhP4moVhWbjIyiy72vJ3MJM9wDc8Ein5XjTw8OKIupEbQOsL5dKEC51YezsplWiFEfhrQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SlgfD5/OcgJZa8Yk8Cl6CRBTqlXF86qadTWd3JwMs/g=;
- b=d4yNAIroK8yX1n+F5XUaZCZkToee303plJ/ehmsVAFR82a0120xjiev1wRV62NeTAF66MAGb5foioMO8zjJci5FPa/Er/Bga7SHaCf2w1fhTKBx8VKVARlXHUwRgoVYQy6Y5zctFaTpw7RZli509RIDeknprlK5Qgzp+MovmokwzRE3XROcfx7hXpqyK+32Hf8L1QOlsWAHA4Ac3DDb8koDQsYnkyUBTt8zJqFYDwT88k/nNw6GaVyq41ur+/LEOLZSr6mH+0PgajO/14fjcathXlxgyeQl5CHYNIajmTcyETXYmUPu35Av2DHVL+vdKGsDNZOjxa5kSalXHg8b4lg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
- header.d=mt.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
+ bh=OxxEFaRN1/McFSN3TJseBr7AlQ6BaKSlNMJkpfHxHl8=;
+ b=ArTQ6dEuZ4lLqvDrv4jCrkzdPLx9Ccm1HlLwrEYt9NYMZbO8U1q3ARiaMHV6LtTU1ZRSqi/P74OmwONLA/tpTdcOZx5UpTepo9dyKixqJjNn6ov9zsdgE4KfXuuRIZmt+lICeGGERAAbf8Q1mZltuOGAXKoOaqOQC8O/fT8q6naooXj+s+TCN9hZk+ki06yUzyIY3VJvwSFiJW3N4d4hiHDUVFwuIjhhAFiMPhgQ/it19UZ+m2bYs7PhzD0eTLH5bNUzLNgV6cuaUuqVYqLKE8aPkCJAwYGWle8w1rJaJNOp9yG08dreKw819+dv4bxmrcJnZaDmOZOOizZ3Hei5pQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=gmail.com smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SlgfD5/OcgJZa8Yk8Cl6CRBTqlXF86qadTWd3JwMs/g=;
- b=EIy/BiphlWMr6uGM3waMGDpDnKlJn3Nyn1DxJBBbU1nMnVkyvsUJBuihpRb5ely4X2DXFISdGMVY7xD5cXBxrhOd3cOnNVCU7Gv1O/8Ed41xDWha1WLkAN1MeXwbnPZGTw28jy39Vm1rCK+wTqt3Peq6Piy7UGPFEeiRjdaVBPMDf9O+ne6H9RzU3ED7JN8s95kus+jCVBiBvcY2lK4WfcEJxda9UTyq/rji20o/rgQ00on4U+doHXGpNG3k02Irg80iIBfpf4/2E54u9mwr26CuMdhxmeSDMCJSDFbq+0dmC1yKHSgUzqYySmUNFq08iR+kCrfCaLNzrypcVU90zA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=mt.com;
-Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
- by DB9PR03MB7514.eurprd03.prod.outlook.com (2603:10a6:10:22d::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.13; Thu, 19 Feb
- 2026 13:23:35 +0000
-Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
- ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
- ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9632.010; Thu, 19 Feb 2026
- 13:23:35 +0000
-Date: Thu, 19 Feb 2026 14:23:25 +0100
-From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
- simon.glass@canonical.com, quentin.schulz@cherry.de
-Subject: Re: EXTERNAL - [PATCH v6 0/6] UEFI Capsule - PKCS11 Support
-Message-ID: <aZcOzb-jpCY9oC1i@mt.com>
-References: <20260217115333.503359-1-Wojciech.Dubowik@mt.com>
- <CAFLszTiexKf9VhSvKC46QrJMW4dy9Uc2ufsG5AyWvs0e1D4aMw@mail.gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiexKf9VhSvKC46QrJMW4dy9Uc2ufsG5AyWvs0e1D4aMw@mail.gmail.com>
-X-ClientProxiedBy: ZR0P278CA0117.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:20::14) To DB9PR03MB7180.eurprd03.prod.outlook.com
- (2603:10a6:10:22d::13)
+ bh=OxxEFaRN1/McFSN3TJseBr7AlQ6BaKSlNMJkpfHxHl8=;
+ b=iKVmcwX51tkVeu6xVp8mOoa7e9t5BnBzK5IdDdex165ya7edBozwiYMZBmvvGVQZOf5v1WKVY3gqloaAy8hIYiqYfhqd/XwqJAlFq5b2zFOPipl299wkwBy4G87R/yCnPztII3fShqC1f8m7sxil6gvcMsvMfQCDtixKrJtKSbrwY+fshtHDLk1YEmxfwpXovFINJ9ucc5p6Bq80krAyr023NUxHJFCSBZEQ+8uWvsicM6idijoLcsafcTwjtepvXD7g2bSemF3Yzumsu3Fl/tKqY/jcvxaLQ3lTVlScZakJ7Pml+mASwYeWOMewJaXMWbY+YdZhCdCssxykGNFwgw==
+Received: from PR1P264CA0128.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2ce::14)
+ by PASP264MB6917.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:541::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.15; Thu, 19 Feb
+ 2026 13:26:10 +0000
+Received: from PA3PEPF000089BB.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2ce:cafe::e4) by PR1P264CA0128.outlook.office365.com
+ (2603:10a6:102:2ce::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
+ 19 Feb 2026 13:26:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA3PEPF000089BB.mail.protection.outlook.com (10.167.242.23) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.12
+ via Frontend Transport; Thu, 19 Feb 2026 13:26:10 +0000
+Received: from sah1lpt726.home (unknown [192.168.72.32])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 0D3B82042F;
+ Thu, 19 Feb 2026 14:26:10 +0100 (CET)
+From: Philippe Reynes <philippe.reynes@softathome.com>
+To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
+ trini@konsulko.com
+Cc: u-boot@lists.denx.de,
+	Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [RFC PATCH v2 6/9] test: dm: ecdsa.c: clean this test as software
+ ecdsa is now implemented
+Date: Thu, 19 Feb 2026 14:25:49 +0100
+Message-ID: <20260219132552.1499698-7-philippe.reynes@softathome.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260219132552.1499698-1-philippe.reynes@softathome.com>
+References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|DB9PR03MB7514:EE_
-X-MS-Office365-Filtering-Correlation-Id: b08ed231-ab4a-4ee8-da1e-08de6fba158f
+X-MS-TrafficTypeDiagnostic: PA3PEPF000089BB:EE_|PASP264MB6917:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: e54dca66-19f8-46ec-49c7-08de6fba7231
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|52116014|1800799024|19092799006|376014|7142099003|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?T1Dk0vmjTD7Eyom6+QtA19KuZWi3AP3sQxy4+pcSjp62W4kc66xSibREIbDn?=
- =?us-ascii?Q?SNKyATX4WYAlYNpON4JuLIamr3uOw4YSwXTTmV+lmTqRhR07lurKDeBHpeoj?=
- =?us-ascii?Q?8rbB2go2105khpVl1B4u9BDLc6OKnz1LpFbUeFbCkon4ZgzVmc5ljB07WME3?=
- =?us-ascii?Q?aFXD4ZEXfChNN0mynQ/uCYwJBLgPW+wEpcPg9JhhjHNqyUYyViuHNZos4Nl1?=
- =?us-ascii?Q?fb0fGp3BzvI022iJjJiQYdNeTBvuPRp+3bhO544EXmu2FHaukACm/YbYdJcG?=
- =?us-ascii?Q?3YXKwMFov/wmH1aGoJ5Ygi8dE4AQhRqennlz75+sTNu5fbdnm4kwrlF17oA3?=
- =?us-ascii?Q?JnMFLFp5YeRZwObn+PNnxIHZ34OdwhoX5nYiCqNGSGnQKkxQHFt/34RgfpHI?=
- =?us-ascii?Q?rzCgskof7l/bat4PsWKv5QJD1e9CXmFvRAHgaS4bZZT2GLJWKEzCx+zZuReb?=
- =?us-ascii?Q?Xz1WcX0VCh+eCtFw5T7r+xhjgDEjTdEzG/vgFh8alGdXp+r574W4ie1XpJrs?=
- =?us-ascii?Q?vCSjvHS2xJ0LGWDN/I7v8ukkvVzat9I5iqhH8fAdHdMQVNEMTdKgEGX+gbMw?=
- =?us-ascii?Q?7hCmQKDlr/pzoIbDsOepJwXBXtfacQeKDHawJ9pp4f+dTMC06S4rwNoIT6Fk?=
- =?us-ascii?Q?nPllDmp80Ob5TEICrbF71eOYK3zN6g+hiw9axdPCbORIIio10NbiBCc9uRa7?=
- =?us-ascii?Q?DaF5P/eSzjgKwNxxltJ+7rxo18Y4Rdep7lK9nrYF1w/+1ZC2qmGpEthFTAlw?=
- =?us-ascii?Q?7n7SjmQ6sy6mkIOF8FyH9D0T7IWhGRZwC0nXbfQWFT7pZ/MXEF+FdnlTW48o?=
- =?us-ascii?Q?iLVze+GAm03LmRZizhp99dQIz4bXmFqvS7beDH9Jckcg9omeRwuEkRcIRe2W?=
- =?us-ascii?Q?FnExpsXCfdFGsADhyujeapM7qVZGXPaRQCLAhTF0OBhzdQNYMvG3r+jXDoJk?=
- =?us-ascii?Q?fSnLsA4TL50l5wcZKbyHockH9K+6cnTGnZnlhBl0ewfyTQi8rSovyc+HSmXK?=
- =?us-ascii?Q?sxhyjgT244rt1l5QWOo8gFXzKprW1xXjfRjFXu5R+Pp0Ke+niySeF85Wnns/?=
- =?us-ascii?Q?6w9jtkCy4bQh4TmPKYcOD8ES5LNxgVp1el/bksrAe+MKRo/1XesJXwZeQ+P/?=
- =?us-ascii?Q?6JKnAXBd4qmUNd5IbW/HOfEk6vIcWBZsrxouR8BZ8Tiux9ERvil1JJgyQUqb?=
- =?us-ascii?Q?O9jdNWcnMVztu1Mm8yWTqQ7Abj5NJtU5FdYt9oeONaM0cAczErkaSek05FBx?=
- =?us-ascii?Q?Bq2XlFTFmAbECn6gzZsNEb3WUZYV4PuW4m5M4XVXiAGzrsDnFmLL2fRVIzMc?=
- =?us-ascii?Q?cifcdZ3g6ESGPCqrC6Jj4BDQStbwYKTuHQy8bwVjuDPXuTeYNL2aKQqRnBc5?=
- =?us-ascii?Q?4qIYOP52BDmjfOohU0TbfP+5emUOoZzMiHZ2bpcUTNWXU/XHXq3Ng+nmTVH+?=
- =?us-ascii?Q?Cpo4rPLw2cMwMz2AURRZp14rxw8t5ooZVOD+eU0EYcuC+TYdhpsvjczTaEkv?=
- =?us-ascii?Q?Pqrdi5RSHWKe+7WzG0jCcNRBELWyzDQ+tNPe/da+y/n9S7RwAfYU8DoEBoqk?=
- =?us-ascii?Q?3dhEaPIBVe2d+IyrcaMNrHSVZVE/HCDZfrediTo12AbpYO909TAULTaiAamn?=
- =?us-ascii?Q?lvbL/l75NzvjcBb/DrhQ4e4=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(52116014)(1800799024)(19092799006)(376014)(7142099003)(38350700014);
- DIR:OUT; SFP:1101; 
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?NH1BGPUB2xkJvsN9ipUa7nD5VEyQ1H875rDVyYX24sO3YATiswN4BvfeiTVd?=
+ =?us-ascii?Q?Fs6mGZG/YGXd+Gc9yXIc5Dtt5uivQ/Qcncl26Tb0qbbgFJCVZnGmdHc94W5o?=
+ =?us-ascii?Q?Sl+9F/VptAT9MIPruu04OpM74S5Wjc8pjcNtHTnPT1E2axTn2/wSLseSrmKM?=
+ =?us-ascii?Q?k8h+/BXtXBb3pL8FgKrpSpf0hC6C1pZq3hvd6fPj6fw+I0nim8rQk6+pJQBD?=
+ =?us-ascii?Q?Q85Vg7FpFTNQKLhuk/+iTtpEUWU4sLzENdTB9YdFydfP5Ifb/QSZIhhudaN5?=
+ =?us-ascii?Q?LNlpzq6uUT7eDYBB5U9a8yy14O4nPewH9G79Fradfabet9Wt4hiLaqBojJRb?=
+ =?us-ascii?Q?k3SiLpCd5o+5hrC5hDFA0thRsoSnqdBdtiEwUn5DKtBmbEypoUCMjHd9fwn7?=
+ =?us-ascii?Q?TEZpRZ/rfe0cl0qNsP3fKkFg+xZUDJdc/9sd3TwXwTQYY2nFGTIC6EnL58l8?=
+ =?us-ascii?Q?Xdw+iYSMMCc/1azT7v2SDT3Z8b+8ho2t41CnzT7o+a90Ci1LBqCA/r9Doxz+?=
+ =?us-ascii?Q?cku31bkV3RGMPkks6Ze0grXcmWxh+pB7BvUmxgtOBAZ15BiukGOfF+Dc4F3S?=
+ =?us-ascii?Q?9kJ2M4UgsIRkn2X7Czxl9Kzr1PJm8WDhS23tCcVJj9tgR2PKKVMuch2OcBpp?=
+ =?us-ascii?Q?f/jLE20MYbZHg3Z3SjxqfVkOz84ScRI1rbTQ4hhzCdOIxXL5MxwY5xDRUOMH?=
+ =?us-ascii?Q?IQnAkO/Lv6aWV7lFNv/tRPBzsyL6l8MUw0FAjlvKIiUz28RECXosGWz9a/80?=
+ =?us-ascii?Q?4rZUq4nw7W79Z6oK5V+bZYWVfDtDn1AAmDCVupEpt83l2yiSnC5e/cbtHbBB?=
+ =?us-ascii?Q?2eVWAX2YJ0ccHpteuHRfVkns5cCsCSoWZNSJMEMKSFiaDC9mfSSt6iz54nKs?=
+ =?us-ascii?Q?TudXXpGvLsrNSiomJJEM6pKSI1PnawF+OsVqKZGEvfwWBo+iQcRIH33F7roz?=
+ =?us-ascii?Q?hfrmLnDpXn7lak75WiGvEvbq/7wSpPP9mTm0nTXqY9xLOUIe0EMMIhTM/K5Y?=
+ =?us-ascii?Q?fTikAFkyAK+hWKQlwzozJI0Nij3MpC4UbwpzqV6+L7vCk1UT91+4jhV8jnV2?=
+ =?us-ascii?Q?Lp5jalQ/YVFDNm1nyFfCp1t8kIRTSdG0cUBbZ3xSEMTTElBve1Ap7SlA9seu?=
+ =?us-ascii?Q?+RFQCqC7/uDXd+PIYaPFU4GshC5fQP8a5FeIUZq1Ku+Jb8PyCzsV+7GKSCEf?=
+ =?us-ascii?Q?DnYO06ReceyrxQFBH9yX6aU2pN3X4Cz+wCHARqT238fEFnksBUmp15/sJ/fK?=
+ =?us-ascii?Q?RnfcXMr/ORXe5LDLz2DLMK1PNBxxDmWlTi8Kt7uSMKlvL7D7oslpeH5hkSA0?=
+ =?us-ascii?Q?UVVY3AzPzlt9lsb7PnfaZ5/JzAwVT9tGFqNWwiNwRt3YEniHnTliSzPF8FJA?=
+ =?us-ascii?Q?Bzfo1bLHiJtyrQNwQCqZe6NEpRlhR6IhOdjm++uD89NgnG/6+vzh2Kaw4Xlb?=
+ =?us-ascii?Q?vyXH1OIgqZe3i50pm2+Jvn+0kbqJq247Lnlpl0FkgDHDslfkbOF2HoiwrLSE?=
+ =?us-ascii?Q?nsUgBZ/9YdS+gUniHM3pu6TpHVqN2b781qWKXmEfgZdGiBVglkznVIGlQW0h?=
+ =?us-ascii?Q?7NrkAP+SNszXmKZi+d5USfknAgGUeWwyQe3V9wxInIdZSfH4421b5nQf99LW?=
+ =?us-ascii?Q?hKOAvxx17BpktZ/PD7KsgRaZFkJktYMtrVLUSF4eloNKRuLYfPMPSsO0RxxK?=
+ =?us-ascii?Q?U2BUzA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LIWqKwfpKZcG1lGwUrDNhNFek8EpDYGaCyHj5MKiUubTs40uaIDBZHsEFdc4?=
- =?us-ascii?Q?M+4edqmIPuTHAj+DOtEi7tWBgUmxOL2iK2LlPzxejsbc5ThxHiDssk5AuY/2?=
- =?us-ascii?Q?rSHY02qHH+IxshA0MunSBbTV1a12M6Cs3MxnZkWyIQu6NGMSsxlYlMPv+KgO?=
- =?us-ascii?Q?IfAmH0JMYkYXKkYZL4uWOF/rGfgDth74AFshSKWBtS/RbxyZVCOL82+MDh6L?=
- =?us-ascii?Q?QjvuUGm0iBYSOg031lGKxwM34+5etQsUVO3XJ4Uu3GxtQbi/w2iqmRhtElO2?=
- =?us-ascii?Q?ul+sapEiP5D3ofiUn9SG+6esQ7pcq82SwxwElBiK2MJ78w17GdSkXE52uiCo?=
- =?us-ascii?Q?gNtHMBHlQ/ZClQi+r05jmti+ZnhSXjLYiHxWVrMxJQS6kxlPnxCyBadN0dFK?=
- =?us-ascii?Q?2kBxltsiyvaHYDOi9wPtIumTa2YKbkVPSTVZuILHaXPYp1U0N6c2amA+174k?=
- =?us-ascii?Q?zKkqqW5mDx6CKWS8DPx+J+ntMklk0EIoOmbwuMpDODo8vMOazB8lV6fInw2Z?=
- =?us-ascii?Q?7/jFIzdXyIHkXNlpD7I0cjuJq2Jef4OfdoYpan9NcVbhXavzloq6jjumN3L+?=
- =?us-ascii?Q?fo3yfw1RhVWc4yPAfLP9mf8vjAW5lman4XfvWwdZefjhkrslmzL5PJYMUVyM?=
- =?us-ascii?Q?hBn5ATYg4zldNZV+ApB+o91DxJV5m7F8YRZOlTY6pwhKPEGtXiy3P+d2SrxS?=
- =?us-ascii?Q?YaxATelUPPBL0v7UxJ6NPUKV6XBQKIH4DCLwGf2bFFhhvKvzeWlxmvaLWT6S?=
- =?us-ascii?Q?sy9VLkZMJLT+1ipz1yw7i9KASh5V6oaXhNLM8XL0lsdmFJuyBgBgWRoUuCO1?=
- =?us-ascii?Q?Ml9dH/0nBQitOrCB0Dmzh1tEILjloIMnCGW7JNlxNmCwaIYM0f5ZGk3QBzhZ?=
- =?us-ascii?Q?uMCBpoYgTDX7Sf9KZ6sHGG/INPZUo0IMsV+jfZiWfSmMp9rMhquTTIG1Q4N3?=
- =?us-ascii?Q?5gYulKvf9S4Q94Rqgm1P4ZxHFNddDXdrXBeF55Nzd3zTA+3IzjdbzG64b9uE?=
- =?us-ascii?Q?YAhhlCbkgRNIXh6R3Aj6Ky58wslzUQsdGurLxp9llZWrt11e4WoGtu29FXOs?=
- =?us-ascii?Q?hg0EXx+fa6/4+R2gnB0CT7D0W8bCXKNSHuMK9Az1eGX2nPfBGBKTbEciieDX?=
- =?us-ascii?Q?pVYpI3DFERle8TlWQLjMRKc2X/sBZqImMMYX7kz0Wu9geGVX5QiSDcZDuzS6?=
- =?us-ascii?Q?Rw+G5KaNn0YjyQHYv2sBt/QI7ZLim9a303y4/y7x6A9M3QWACmho14nC+/9E?=
- =?us-ascii?Q?tSAyxLog9IfC7xe5+eUd/aoBRFpVzUaaKk890jTWuuJ/eZyf/ATCfEsQj3tA?=
- =?us-ascii?Q?fY1euqh8bX1B3KcuT/8pjQvGFOg8JeJeSIK+XHEgwXc76XnTSaQHpIL/n1OE?=
- =?us-ascii?Q?HnxGs7Emx10yLTHGnoUDpRlIFm59r16hhNJUnHPpiMut3t6MiY8n1P0kyOOl?=
- =?us-ascii?Q?TC6Dg4PFfDYexSJcBOy6FUObGwT/ksZU/M7h2xB/1d00xRnWgdP6RQitxz72?=
- =?us-ascii?Q?TEfxzgC/1hZbgjrwDEjx8bYskSOYveyHQWMD4xr7tzPeW8BLbAJjjfSJ0K84?=
- =?us-ascii?Q?ukcnHvhGJkzFkQiYd4KMMDj3LxKrvHukcY1Kg7/YdfWEdwfvSrF4/U6w4cJC?=
- =?us-ascii?Q?djRZNsc1RMygOExPRi/8NSiZhOAhorgPcv16ZGr4DXqPtLSYsIO7tmoC1+UV?=
- =?us-ascii?Q?Bg4HElQo2vtM5NPlXPgl2c2oz3gjEWVisfYniNvX5uhbP5LQm5/pARnAjpJw?=
- =?us-ascii?Q?fLXItiEb4w=3D=3D?=
-X-OriginatorOrg: mt.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b08ed231-ab4a-4ee8-da1e-08de6fba158f
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:23:35.0833 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: k4uphzOg38ZqRVju+kjimpRNIlAnedjvOIXp1OZno7C6NR6De4AnibZkN6d4TjI0GuY1nv/LvlaiAIT2g1Cw6g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB7514
+X-MS-Exchange-AntiSpam-MessageData-0: zB+gIaATJyAHW5LlHoZhF0nkhuQcJjexjkCa2nmE5HQnLCaln/MySxZOn9slJ7Mdfv0huKXndckan1hg6w4UAQMbGPZd4kARAWQii4EkMToR0L0ASLcqPmGFYVF79vnTp2ucodsrPvZecpxkZO65I7+aji628Kk6TgF0ohq+ycXUyqzCUsVDJmkzl0wDkKJbInopwhHbtzVrNV0LSm9ypdOC+2bTFH9QGtt3QMg0F4nNZ1SID5X2q/ZaWegKd4LiqMCmIcdXyFAw265ksss3c2h8SVlgqT7ftS8jAbhOEaYYgthaig8HPNc9fYLIAwinPd8EwDK8hQcc1Gtz7dGEdjcGBcmrQbnEYcvNPEl5a45B+1Z7bXWGIzrbIc4Ax2G6TGsyuAlyIkY1xevuMAqVcMsWu/fkfRl7VNqVC+2UI/LQV4RK2F4KdF2c0TFP1Ax/
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:10.3169 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e54dca66-19f8-46ec-49c7-08de6fba7231
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BB.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PASP264MB6917
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,83 +151,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 19, 2026 at 06:12:51AM -0700, Simon Glass wrote:
-Hi Simon,
+The test ecdsa was done when ecdsa was only supported by hardware.
+So it wasn't possible to test ecdsa on sandbox, and there is a test
+to check that ecdsa is not supported on sandbox.
+Now, there is a software implementation of ecdsa. So we remove
+this outdated test.
 
-> Hi Wojciech,
-> 
-> On Tue, 17 Feb 2026 at 04:53, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
-> >
-> > Add support for pkcs11 URI's when generating UEFI capsules and
-> > accept URI's for certificate in dts capsule nodes.
-> > Example:
-> > export PKCS11_MODULE_PATH=<pkcs11 provider path>/libsofthsm2.so
-> > tools/mkeficapsule --monotonic-count 1 \
-> >  --private-key "pkcs11:token=EX;object=capsule;type=private;pin-source=pin.txt" \
-> >  --certificate "pkcs11:token=EX;object=capsule;type=cert;pin-source=pin.txt" \
-> >  --index 1 \
-> >  --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
-> >  "capsule-payload" \
-> >  "capsule.cap
-> > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> > ---
-> > Changes in v6:
-> > * mkeficapsule: use strlen instead of hardcoded values
-> > Changes in v5:
-> > * add bin wrappers in test for all external tools
-> > * improve error handling in python test
-> > * fix data types in python
-> > * standardize option name in mkeficapsule
-> > * fix typos
-> > Changes in v4:
-> > * adapt mkeficapsule python support to dump detached signature
-> >   for authenticated capsules
-> > * verify detached capsule signature with openssl after generation
-> > * use p11-kit to figure out location of softhsm2 library
-> > * fix missing long option for dumping signatures in mkeficapsule
-> > Changes in v3:
-> > * fix write file encoding, env setting and extra line in binman test
-> >   after review
-> > Changes in v2:
-> > * allow mixed file/pkcs11 URI as key specification in mkeficapsule
-> > * fix logic for accepting pkcs11 URI in binman device tree sections
-> > * add binman test for UEFI capsule signature where private key comes
-> >   from softHSM
-> > ---
-> > Wojciech Dubowik (6):
-> >   tools: mkeficapsule: Add support for pkcs11
-> >   binman: Accept pkcs11 URI tokens for capsule updates
-> >   tools: mkeficapsule: Fix dump signature long option
-> >   binman: Add dump signature option to mkeficapsule
-> >   binman: DTS: Add dump-signature option for capsules
-> >   test: binman: Add test for pkcs11 signed capsule
-> >
-> >  doc/mkeficapsule.1                            |   4 +-
-> >  tools/binman/btool/mkeficapsule.py            |   8 +-
-> >  tools/binman/btool/p11_kit.py                 |  21 ++++
-> >  tools/binman/entries.rst                      |   4 +
-> >  tools/binman/etype/efi_capsule.py             |  17 ++-
-> >  tools/binman/ftest.py                         |  66 ++++++++++
-> >  .../binman/test/351_capsule_signed_pkcs11.dts |  22 ++++
-> >  tools/mkeficapsule.c                          | 113 +++++++++++++-----
-> >  8 files changed, 221 insertions(+), 34 deletions(-)
-> >  create mode 100644 tools/binman/btool/p11_kit.py
-> >  create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
-> >
-> > --
-> > 2.47.3
-> >
-> 
-> Please make sure that you have 100% test coverage now. CI will fail
-> without it. If you need help on covering some code, please let me
-> know.
-> 
-> Regards,
-> Simon
+Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+---
+v2:
+- initial version
 
-I will need to integrate pkcs11 tool and make two tests, one with mixed
-keys and one with pkcs11 tokens only. I hope it will solve the issue.
-Will contact you when in doubt.
+ test/dm/ecdsa.c | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
 
-Thanks,
-Wojtek
+diff --git a/test/dm/ecdsa.c b/test/dm/ecdsa.c
+index d7eac7115f7..074b4b25576 100644
+--- a/test/dm/ecdsa.c
++++ b/test/dm/ecdsa.c
+@@ -9,29 +9,15 @@
+ /*
+  * Basic test of the ECDSA uclass and ecdsa_verify()
+  *
+- * ECDSA implementations in u-boot are hardware-dependent. Until we have a
+- * software implementation that can be compiled into the sandbox, all we can
+- * test is the uclass support.
+- *
+- * The uclass_get() test is redundant since ecdsa_verify() would also fail. We
+- * run both functions in order to isolate the cause more clearly. i.e. is
+- * ecdsa_verify() failing because the UCLASS is absent/broken?
++ * ECDSA software implementation is tested in another test,
++ * so we only check that the class UCLASS_ECDSA may be reached.
+  */
+ static int dm_test_ecdsa_verify(struct unit_test_state *uts)
+ {
+ 	struct uclass *ucp;
+ 
+-	struct checksum_algo algo = {
+-		.checksum_len = 256,
+-	};
+-
+-	struct image_sign_info info = {
+-		.checksum = &algo,
+-	};
+-
+ 	ut_assertok(uclass_get(UCLASS_ECDSA, &ucp));
+ 	ut_assertnonnull(ucp);
+-	ut_asserteq(-ENODEV, ecdsa_verify(&info, NULL, 0, NULL, 0));
+ 
+ 	return 0;
+ }
+-- 
+2.43.0
+
