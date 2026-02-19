@@ -4,156 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3928E9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 10:52:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F52EE9A03B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 11:24:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 687A283A47;
-	Thu, 19 Feb 2026 11:52:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3807483A47;
+	Thu, 19 Feb 2026 12:24:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aUdlRC1Y";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="fRmSeySW";
+	dkim=pass (2048-bit key; unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gT1HZGEQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91FF283AA9; Thu, 19 Feb 2026 11:52:23 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id C5E2883AA9; Thu, 19 Feb 2026 12:24:20 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E859D83936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:52:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72BFE83936
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:24:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=oss.qualcomm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ljYPkkd7mmHByje+fP0aaZuToJ6fj1ToSOLNp0nqW0srmkb0EelDzIelcEvGnu1ck2L+/HjBV5NDeVOIgiqA28jYL5Gy9KeR99rQIeYrjL1UAXWU8h6FDTIxEAT5gS3rnqr17S3SQCN2uFAqzXgGQvV+TTCdJk6WO5X0YDr7TjMlP7ucZqaciqwgSVqgR4QNoeVwXhw5mMbUCHa126YCtQ42onh+csplvDIBYN0Q5bi3bEddR9ZOb3gxErH7f+RMRG16/lSD9hu+hBsmRKughebnwK4ptLq4lJwu+u6mLFu0jF8QmDSGgr43StjCFiknowfoaa8ANgJZlZ+Td9tOMA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zNIlpBMuG4jGPNoZIhD17N6Uj7erxgWk0C3byA1KNfM=;
- b=zUfdsPB4ctFRDA2ceSgKQOa57W/88UdZBw+MH0f9Tooqv5AFPQP5CiozavKxobLoaoWVGTSLJmN5NNMP8zvxaq5TdSswuKg1fTDjAM1zADkeMLDM7ZUlAyKx1ucrnQnhKkaWB9rHzVfKvFz4Oq306RxYuVNLQc03r/yZeu6F7eVL+waFwKQTSbIDEv6O++2I7Un14ShKrgn3C1dLLTXx0UkjUqDatz6ZhqCp16Sn1et1EFc48yBsbw1Cdh4jGPxQ3X29zjX+CzYOOO0ApD3DGwaOzY2SXOe9lM2DC88ZYaB2O68+TUwj+gDc1fTGAXje+7RLSEQoyyqhWP4MLelMrQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.phytec.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zNIlpBMuG4jGPNoZIhD17N6Uj7erxgWk0C3byA1KNfM=;
- b=aUdlRC1Y/YTi3wQ6ab6Um7RePlxZBbvPbrR5pNlWboRrniP+PaqqCdIGQaGoZ8BrR3CCzbD80JO9HhbhQuI9x6D8CM0frXK4GJjTCFyFRM9yxwp1VHQEXwbhI+q0/PRP8orlmIQER26u2JaRkvQt9JWkYDljy0rBjwcc3nMLees=
-Received: from PH8P221CA0060.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:349::9)
- by CO1PR10MB4561.namprd10.prod.outlook.com (2603:10b6:303:9d::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Thu, 19 Feb
- 2026 10:52:15 +0000
-Received: from SA2PEPF000015CC.namprd03.prod.outlook.com
- (2603:10b6:510:349:cafe::da) by PH8P221CA0060.outlook.office365.com
- (2603:10b6:510:349::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
- 19 Feb 2026 10:52:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SA2PEPF000015CC.mail.protection.outlook.com (10.167.241.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 10:52:14 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
- 2026 04:52:14 -0600
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
- 2026 04:52:14 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 19 Feb 2026 04:52:14 -0600
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61JAqDZ81983880;
- Thu, 19 Feb 2026 04:52:13 -0600
+ spf=pass smtp.mailfrom=aswin.murugan@oss.qualcomm.com
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 61J47m0C422068
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:24:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ Drf1WU7UhH3YH/q+kEl60Y5tVH6fLlujPap7kZvasEs=; b=fRmSeySW4Lji2H72
+ +H4NsIi/XiMEEp1463SZXwm4U/tZ8E+a/ofv6Tiu94PghNg11rI/nom1V1L8uWvf
+ Up2qGrcgu5yZaqepzEo2YAWKYFA09E/IExI3oEgBIQX5LD2bakKcJWjvQXr/GZZv
+ b/arSh9n4W0GBbyvvF+v4g3kajhm0NvSkjM6satEcRja89/vVFinjeBFFm04RZ7I
+ RYgFP6aSN1TGywex0rDYyG+fFW8W0hDAuG+isNzd9jOfAif6gyg7PtpVkyrM8Ozn
+ WbFtggahQOc7B1SWLFt2bMctP4FHfxl8rhtHq9Dy2M2IZoazBR/UJiA9If3OFqB5
+ ZjtWJA==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
+ [209.85.214.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4cd76e48sr-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:24:16 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id
+ d9443c01a7336-2a77040ede0so9941865ad.2
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 03:24:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1771500256; x=1772105056; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Drf1WU7UhH3YH/q+kEl60Y5tVH6fLlujPap7kZvasEs=;
+ b=gT1HZGEQgRMYqNsOUiWKTJA0hatlTpyAN2sBN1MXh19F+guEGlUmUW0fCXYp8isicz
+ /GjPrtdlpbKl6ITM/jIViq2OwROq+xZAndLzmorRaivEjkbdkHbGw7NZJMdZBesIkNlt
+ FPaNv4SUVBsXNBIprDi3oTng1Z55cE+qnm7wwbUVbZfp3qEpWpIC47kHzEAygIenNP/J
+ I5yJahX5AsieyTLhZ9hDcO5YbUd8Awh+nRJLz357IKxsag6olZHu2usR6xPbB1Y2Sl+1
+ uyKYL6LQULXdzVM/2yCIslOOXgKrbEzN7uIM6S5cWKFYw5PXP+wBcgvXQCzT9eAPt7Ce
+ mm9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771500256; x=1772105056;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Drf1WU7UhH3YH/q+kEl60Y5tVH6fLlujPap7kZvasEs=;
+ b=JF1SbR3mCHM89c530yQGDqiKjIpHEFVMS9slWAqoO7e8b5Oi6oqmnjNj4LAYibhy6q
+ t9R5WluZpk5kZjgOfUPoi/EvELliScAHNJyndP8DIOWTnQ2GcCWBXDt9Drht2P+QMDt2
+ 3vyKWTapaI9wwxdx95ZQrrt5lzbUEWUOzgaxs/ySBOHThuaKDC4OL5zwgU3oOlf8P0mM
+ BJyjRJQHVtrA9nh/xKCbk6IFhDB6Z/iJKitRFwgQ8+gOLch/OBNfNNaa/aZfZI/5m6Ls
+ Bfzkd1VvEcytmuGec3t0CVx5WoZ1/rKTjd+DYpMoWwetry2CxpnxmlGPq+KoWkaN0w8P
+ 4HaA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgVJy+GVvxQtZkDReSMqbDlfJ35WGXp4mO3q8rJUaZl0dTHBYmp7T7kjKgkuIu7iuFeprdEKU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJTqzISJTM+vONWO6HjNAZ2R+GW4wAowX6MrK54/P+zIOF/Hf4
+ pAUKP2s1WNmB+LQlyG/K/elPGWrad6mQ0lZyidnSN+FzQdf9mroXEWzs0EMc6ueeIwXRoJU0o1k
+ 7Zo7qPoGuTPtrzD/PyD1/hxZVIGPMdaTgGNtowS976RkebUPn2+852mc7
+X-Gm-Gg: AZuq6aKxsLAP5T+hLVPSejyhoxTBAQanso38b79G+StQVchR41cLRUrTA/urY6Sm9UW
+ iXvLU1WsB4YHdXayNTgTD/WiB0xXgVwkMAd7YriImdQK///xP4XOBuZKJnFnzWrgK/dO73cIeP2
+ YJJWrnlBOpEssA+SZCZQH5GiE7lcDowKIOJZJWX9pYo97xJtgGnh4MmifHkraFr9XMhe05xizcd
+ IUS0QqZsaPBHpxRgf0k0ycnfR5MPRPbnh/4SLBCY0VYFBaKzWcQ/8G6VNxRAyiy+vFmzVLHwM2O
+ dFy8y6YMhg6tbZxg2yayGmhlr+X8jKPBtTy384Oso/X5fUbiC+kIp9PUVM+Zv/rKrbYNr0eXZId
+ tHIp6cKle0d7kh+n5+uBohoUQB7/GHQwZ0JKS+V8BXeDe3qHKU00X5Q==
+X-Received: by 2002:a17:902:ebc3:b0:2a9:5ef2:f788 with SMTP id
+ d9443c01a7336-2ad50f5f5ccmr53766745ad.37.1771500255551; 
+ Thu, 19 Feb 2026 03:24:15 -0800 (PST)
+X-Received: by 2002:a17:902:ebc3:b0:2a9:5ef2:f788 with SMTP id
+ d9443c01a7336-2ad50f5f5ccmr53766355ad.37.1771500254993; 
+ Thu, 19 Feb 2026 03:24:14 -0800 (PST)
+Received: from [10.152.202.155] ([202.46.23.19])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ad1aadc729sm149797475ad.64.2026.02.19.03.24.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Feb 2026 03:24:14 -0800 (PST)
+Message-ID: <23fa6538-d69b-4f59-9e36-f3cf2c6dd543@oss.qualcomm.com>
+Date: Thu, 19 Feb 2026 16:54:06 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Thu, 19 Feb 2026 16:22:12 +0530
-Message-ID: <DGIVQZB5G0NQ.36KCKDY96KAL4@ti.com>
-Subject: Re: [PATCH] arch: arm: dts: k3-r5: Drop a53_0 clock overrides in
- board files
-From: Anshul Dalal <anshuld@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>, <anshuld@ti.com>,
- <m-chawdhry@ti.com>, <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260219102721.102254-1-w.egorov@phytec.de>
-In-Reply-To: <20260219102721.102254-1-w.egorov@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF000015CC:EE_|CO1PR10MB4561:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5a859b7f-761d-4961-b1a0-08de6fa4f181
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YW1tWDBtaWdVQ2FFMGwySU92MVE4TnNZOWt5Y0xvYy9zUnZTOWtNU041ekN1?=
- =?utf-8?B?SlVVM1l4alJBSmx6akpnQ2svSXVlaWF6d0VPN040L0NocDZIWVlDMDNYVEJn?=
- =?utf-8?B?QldMVVJ0MW5XWklGbkRYd1JQUmo4Q3pCc1ZPNEZLWURxTmNVYlJwaHpQR3Zw?=
- =?utf-8?B?cU5Cc0NQbkp0STlNOGlMOGFvcGliMmdnaGdSdEJYRzNCaFI2NDNlZXhPV0NJ?=
- =?utf-8?B?clZpdFpMdlBja1lDSlJYc0VDMHYyZGtHL3ZwckliaEFLNW1mZXlGM2xVdExl?=
- =?utf-8?B?cDlxbFBLRHU5Tmt5NU10dTg1ZE1LR201QjcyOFVEQzFHeTBWUk9VcDdXNUFT?=
- =?utf-8?B?RnMwOC9aL0ZOMVI5STFTNzFWcGhxS2NVVHlTVDR0UFpTOWpuaG1uMG1MV1VR?=
- =?utf-8?B?S2ZLMjB6czJwcnF6SVh0bms2TjNoT3dwK24zbWF3QTAyR01wRjBuU2hPUzh2?=
- =?utf-8?B?VEE4dHYxck1ESWd5dWV1NkFEZk1KblFPRDVmVWtnWk1zWXRKWXd2NWFYZitI?=
- =?utf-8?B?VGNrN3RZY1AvTElUMnVRUWhuOUVKT2tzYkxScmw2SUVMc0hBZytZNTRyaTh4?=
- =?utf-8?B?dlhMcE5yZFN1bEtpUEJ3MktPWXZxa2pSNTVMMC9JMk1OeHVpMW5zQlYwQWl2?=
- =?utf-8?B?YS94ZUVDOHJmWng5QSs4clYrbFFRQS8vM2Z2Y0hNWkI0NlNQVWNqb3B3QS9E?=
- =?utf-8?B?d3JLVnN0NnVlamlNZDBXRUdxQTUyRFFrMkdUbzIvUTNLQ0FoYmhKbE40WUNZ?=
- =?utf-8?B?eXp2Z1BUUENzL0tVN0NpdGFQa1l4UGhicDUvUXNMdEM3MHJBcHBzUUhZNWFI?=
- =?utf-8?B?TW9GSy9Idm1tVVpOdUxOQldNajk5WGJIdTh6RDFTU2VKOWxiYVdVdXNybHhV?=
- =?utf-8?B?MzVqZ1I0YkVIcTlyR3dDTjBrMCtjVUZwMjFZRGZZMnpuY0tiTXFIWkFieTNH?=
- =?utf-8?B?U1BVa0FMWHVYamZyNER0NkRaaTV5TUZUazJ4TWhXaEE5VGpLN3Q5OGtNV21p?=
- =?utf-8?B?U3VxYmhBd09uakROL2RFTVB6c25ubnQ1Q0JzT2tFbUFJbWNrNTJTMG9EM0Rm?=
- =?utf-8?B?N3NHdW5SZkZDVTNtc1ZGS2l6bnRaQmlkWlN0dllnYmlkRndobUZSUXU1Rlhz?=
- =?utf-8?B?WjBiWEJMWTVFdXgwQ013K3A2a21aTWR6cWlBVnNGT2U1UmJaNk5IUDNKVUpX?=
- =?utf-8?B?Q0kxSkdOc0I4QkVyR0ZUb2ZtRzBwYVNzWm5WN2pLSVNlOEVDc1E5RjI5TUNO?=
- =?utf-8?B?YzlhTmN2VUxja0tHZlB0S0NTNDg4VXNHRzdHSDRmejVNTm5wTW9OUGVjWXZu?=
- =?utf-8?B?L2h2OGxEaTdNcThHRDIvZm9YU2VpNzlFZDBLclVpWCtwT1JTYzluTjdlODMw?=
- =?utf-8?B?b3JmYml3YVNBeGdGTENvaWlXVkk2UzJtY1BleW50cW5uU3hlbDBwMlFQWFZ5?=
- =?utf-8?B?YzZ5TFZnYWhnQ2o0M20vRDFxanVzZW9SOXZNYURMckFuY2xRNVNtaWtPY1R3?=
- =?utf-8?B?MUdHWGdHQUJFUWVLb0JPbC8raVREMHM0Mm93NmFmMUhyd1YyQ21nSjVDZ0Zy?=
- =?utf-8?B?ZjNaWWpYNlBxNGI2b1QvTk41MGdJcnFPVnErb0hDS2htTlZ5aFBGWUJpMXow?=
- =?utf-8?B?SGZ2cXduT0djYUJpNUUwRDlpOWV6aHpLN0xySGo4N0VpQzQ0Y3l6aHBFRTFn?=
- =?utf-8?B?dUxIT1JnckVweEJ1YXNxQmE2bklHMTdQRGtkTjh3SDhDc1ZuYW1nQW9BcVRO?=
- =?utf-8?B?OUZEQ01ENnJKeFFxcHJVbkZUUDdlSUpZdWhURnczMVplUjRQK0xRMS9vT0pi?=
- =?utf-8?B?MWFwZEFPTTVKWWxIaTREdnFsTjNsd2E2aytHQzhkUlk4MHRzTXUwNnZGQ1JL?=
- =?utf-8?B?ekYyRUVYeWZIakNYcTlnN21iYXlIbEhTNW1hYzhXNEZqbDlCblBTMXg4dW5t?=
- =?utf-8?B?cG0zbjlOSEZxbHdRcGZHUWhjbzZQeklTeTQ3NC8wTzVPOUdxR0RsdzZneFBv?=
- =?utf-8?B?QkRMN3dUWGhQZlVxNnFoN3p6K3BBTXNUY204R2ludE9taVBwUXlPaXcxMUp6?=
- =?utf-8?B?S2I2YnpsZEJ3ZjBIb3dCRXc5YnJmZnRNWlRoSi9zeWlmNHExdWp3RW9QM3pu?=
- =?utf-8?B?NjJrT2plS3krNytxd0ZKMldDbUQ4Y3Q2Nm95Si9DV09ySWM3eUkzYWpVQUk0?=
- =?utf-8?B?OHVLcDcrZEowQkdKdEdKeFlORC9qcWh0R2tlY3d4b0J2UUNIeXVqWFVwL0Ux?=
- =?utf-8?B?dHpUQk9hZWVhYXZoaUE4ZGRFVXlRPT0=?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE; SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: vNh3L/VMGUlm6SVsF7tNP7Dw8B1KE/SEJTbiFMvEJZBDulehFuCenf+sDMT5L0gqimxECtVgsprhGla6nxWmba+mLql+ObZgaER3ybGr9ooP96bjOgDq0eLZXoAZ9ZBPhZpDnxhgaGUtq4UZ3u+rhJaRErtOSK5l7Bi7QruZxRYiuJ8DpZp3uW+NSoEA7t/zh5IbzGf0aKGRm9F1VE06F/ZrmcO1bYQsfG4aJ7utpGK65UyLjfMSYKOM5AXbC52BmjD0PTbMubOBS5sMHf1h6JXnF6yKCrujQlIiVywK2h9bNuw3c3Zgahnw96eEp5RJhRzL/E+TBIzQXLtabRuQUv5PwkkP972APQlwXuttHz12mS5q8nscNfqSRBFLnlQqFQrgZv+eEukJtSOYWgb61ceUHoThl9kCiKEoZwutXbpstF7uFRgAiBblbk4/oyz0
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 10:52:14.9552 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a859b7f-761d-4961-b1a0-08de6fa4f181
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CC.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4561
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/6] misc: Add support for bit fields in NVMEM cells
+To: Sean Anderson <seanga2@gmail.com>
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, peng.fan@nxp.com, quentin.schulz@cherry.de,
+ n-francis@ti.com, xypron.glpk@gmx.de, h-vm@ti.com, justin@tidylabs.net,
+ jamie.gibbons@microchip.com, ycliang@andestech.com, me@samcday.com,
+ sughosh.ganu@arm.com, gchan9527@gmail.com, ilias.apalodimas@linaro.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, sumit.garg@kernel.org,
+ casey.connolly@linaro.org
+References: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
+ <20260213112717.1256823-3-aswin.murugan@oss.qualcomm.com>
+ <3fe5e11d-7240-c577-64fc-062d5c5e4d6a@gmail.com>
+ <497f7e07-3a5c-4a7a-b2bb-9016d6927ba4@oss.qualcomm.com>
+ <96a3a5e8-a853-b766-a013-d3db6bfce117@gmail.com>
+Content-Language: en-US
+From: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <96a3a5e8-a853-b766-a013-d3db6bfce117@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=OKsqHCaB c=1 sm=1 tr=0 ts=6996f2e0 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=Mpw57Om8IfrbqaoTuvik:22 a=GgsMoib0sEa3-_RKJdDe:22
+ a=3a11mvtZPsPdW_w_N7UA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMjE5MDEwNCBTYWx0ZWRfX6gtt2ctf/ir+
+ HL8/yXer/WB9GaZQFSZNRmpwT/nLUm1atL61c2ZjS/AoweNJ2dWtmT8A3K/0Qvyu1O9Lpe2hgF3
+ 2DAI68k5f8uvd6qXuQh1x4qc51A1NxgKs0D4Z0SHe/vD6iA5TmC5JjUqGm5ZrSnaW8kN07op8xN
+ /4/K58C//hAOaGCcxnRabFxlm8OsT61ZA5LCZM10WWqvn+hGxys6KnIMoSqmmKOMtHevN+Zc9hP
+ Kyahz4aoVjtvV8iklyn9ZSXRLN2+AWkkDl41QDEtYUQp6X+yq3IuWmWAq3c1kzVUTk+UpMtAIza
+ K3VmgBpJnv01mropb7i35quTSw49WBQxf8AhkrTM3lOenVU40h0G4zZQ4ZyQSK2WbKVeiAMdnJi
+ zoFTvm3un+RnXF/xs1WcYQEQkvTLn0MzufIeuDaKfcQDVZgfZEM0876EmViJvSk4ZntMgTfjIlK
+ evSOGYI4rdh7WRg28FA==
+X-Proofpoint-GUID: lCYTD-RmORR7_Ow0CrlA2OiuQbo7w3nC
+X-Proofpoint-ORIG-GUID: lCYTD-RmORR7_Ow0CrlA2OiuQbo7w3nC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-02-19_03,2026-02-18_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 bulkscore=0 impostorscore=0 adultscore=0 suspectscore=0
+ clxscore=1015 spamscore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2601150000 definitions=main-2602190104
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,90 +159,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Feb 19, 2026 at 3:57 PM IST, Wadim Egorov wrote:
-> The a53_0 clock properties are already set correctly in their
-> common k3-<soc>-r5.dtsi includes. Stop overriding them in
-> the r5 board device trees.
->
-> Fixes the following error message:
->   Failed to set clock rates for '/a53@0': -61
->
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  | 5 -----
->  arch/arm/dts/k3-am625-verdin-r5.dts           | 1 -
->  arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts | 5 -----
->  arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts  | 5 -----
->  4 files changed, 16 deletions(-)
->
-> diff --git a/arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts b/arch/arm/dts/=
-k3-am625-r5-phycore-som-2gb.dts
-> index 46b621242b5..ac6f1022a55 100644
-> --- a/arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
-> +++ b/arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
-> @@ -21,11 +21,6 @@
->  	};
->  };
-> =20
-> -&a53_0 {
-> -	clock-names =3D "gtc";
-> -	clocks =3D <&k3_clks 61 0>;
-> -};
-> -
->  &main_pktdma {
->  	ti,sci =3D <&dm_tifs>;
->  };
-> diff --git a/arch/arm/dts/k3-am625-verdin-r5.dts b/arch/arm/dts/k3-am625-=
-verdin-r5.dts
-> index dfd960aaf3c..971bb752052 100644
-> --- a/arch/arm/dts/k3-am625-verdin-r5.dts
-> +++ b/arch/arm/dts/k3-am625-verdin-r5.dts
-> @@ -24,7 +24,6 @@
->  };
-> =20
->  &a53_0 {
-> -	clocks =3D <&k3_clks 61 0>;
->  	/*
->  	 * FIXME: Currently only the SPL running on the R5 has a clock
->  	 * driver. As a workaround therefore move the assigned-clock
+Hi Sean,
 
-I wonder if there could be a better way to handle the hacky solution we
-have here and in k3-am62p5-verdin-r5 to configure the clocks for
-ETH_25MHz_CLK. Though that's a discussion for a separate patch, what we
-have here looks good to me.
+On 2/18/2026 7:37 AM, Sean Anderson wrote:
+> On 2/17/26 14:05, Aswin Murugan wrote:
+>> Hi Sean,
+>>
+>> Thanks for your feedback.
+>> To address stack smashing, which occurs when the cell size is larger 
+>> than 4 bytes, I will revert the `nvmem_cell_read()` call in 
+>> `reboot_mode_get()` to pass `sizeof(*mode)` as the size, consistent 
+>> with the original implementation.
+>>
+>> Inside `nvmem_cell_read()`, will modify the validation check. Instead 
+>> of enforcing `size == cell->size`, will check if `cell->size` is 
+>> within the passed `size` (i.e., `cell->size <= size`) to correctly 
+>> support our 1-byte read case where the buffer is 4 bytes.
+>
+> Then don't we need to zero out the rest of the buffer?
+>
+> I would expect the check to be
+>
+> if ((cell->bit_offset && size > cell->size) || size != cell->size)
+>     return -EINVAL;
+>
+>> Also, i2c_eeprom_read() and misc_read() will continue to request a 
+>> read for cell->size instead of the passed buffer size, ensuring we 
+>> only read the valid data from the hardware.
+>>
+>> Regarding the bit field logic, as you suggested will simplify the 
+>> bit‑field handling to max u32 size, which significantly reduces the 
+>> code complexity. Given this simplification, is it still necessary to 
+>> keep this bit‑manipulation logic behind a separate config option?
+>
+> I think it's likely. You can check the growth with 
+> scripts/bloat-o-meter in
+> Linux. Since this is mainly for U-Boot proper I'd say a couple hundred 
+> bytes
+> is reasonable for this feature.
+>
+>> Kindly confirm if this approach aligns with your expectations. 
+>
+> Please remember to reply on the bottom :)
+>
+> --Sean
 
-Thanks for the cleanup,
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
+The suggested check will fail for our case, we always pass size = 
+sizeof(u32) = 4 bytes regardless of the actual cell size.
 
-> diff --git a/arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts b/arch/arm/dts=
-/k3-am62a7-r5-phycore-som-2gb.dts
-> index b54cd9d48a4..c949485017e 100644
-> --- a/arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts
-> +++ b/arch/arm/dts/k3-am62a7-r5-phycore-som-2gb.dts
-> @@ -22,11 +22,6 @@
->  	};
->  };
-> =20
-> -&a53_0 {
-> -	clocks =3D <&k3_clks 61 0>;
-> -	clock-names =3D "gtc";
-> -};
-> -
->  &cbass_main {
->  	bootph-pre-ram;
->  	sa3_secproxy: secproxy@44880000 {
-> diff --git a/arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts b/arch/arm/dts/=
-k3-am642-r5-phycore-som-2gb.dts
-> index 4b7a63db4ce..6f3a2628353 100644
-> --- a/arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts
-> +++ b/arch/arm/dts/k3-am642-r5-phycore-som-2gb.dts
-> @@ -21,8 +21,3 @@
->  		ethernet0 =3D &cpsw3g;
->  	};
->  };
-> -
-> -&a53_0 {
-> -	clock-names =3D "gtc";
-> -	clocks =3D <&k3_clks 61 0>;
-> -};
+Example: 1-byte cell with 7-bit field
+
+cell->size = 1, bit_offset = 1, nbits = 7, size = 4
+
+With suggested check: if ((cell->bit_offset && size > cell->size) || 
+size != cell->size) -> (1 && 4 > 1) || 4 != 1 -> TRUE -> rejects valid case
+
+If we have a check as below:
+
+if (size < cell->size) -> 4 < 1 -> FALSE -> correctly allows
+
+Then if cell has nbits set, bit field bounds can be validated separately 
+as follows:
+
+bytes_needed = DIV_ROUND_UP(7+1, 8)
+
+if (bytes_needed > cell->size || bytes_needed > sizeof(u32) || size != 
+sizeof(u32))
+
+This validates:
+
+  * bytes_needed > cell->size: Bit field doesn't exceed actual cell size
+  * bytes_needed > sizeof(u32): Bit field doesn't exceed maximum
+    supported size
+  * size != sizeof(u32): Buffer size is correct for bit field operations
+
+Thanks
+
+Aswin
+
+
 
