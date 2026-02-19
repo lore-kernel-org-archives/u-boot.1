@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D97EE9A03B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 10:03:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958ACE9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 10:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87AF183A47;
-	Thu, 19 Feb 2026 11:03:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F23B583D0F;
+	Thu, 19 Feb 2026 11:03:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="q+kLKiZ4";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Hn+U46IF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8088E83D17; Thu, 19 Feb 2026 11:03:44 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 1738C83A47; Thu, 19 Feb 2026 11:03:45 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2547C83A47
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:03:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 119F483CD3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:03:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-43591b55727so755088f8f.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 02:03:42 -0800 (PST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-4376c0bffc1so589446f8f.0
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 02:03:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1771495421; x=1772100221;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1771495422; x=1772100222;
  darn=lists.denx.de; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pbc5WfK0ONtMIMsmtHAmx9doJ0IvfOqyCGNjm4dKZs4=;
- b=q+kLKiZ4vn9IB83yY62oyjnM4YDezrNn6ItATin716iHEG725XGaoXbjrMuwwmd2P2
- X54BOlQ+YQha2kkRnRZqCZ97TeHSEyLcpnHwOASvcNFujR4stSqM608b/ng0Z5INNdeW
- p8munzJuS39kA+deynUoqN4sri6rMzcU1iPjL918X2UZJHF6O82zuV4h8bv9Y5t7ucYs
- iA3TnQDv+15+LG6gZSxUhMcSYuXSaRqWS72B1na9DDP6bT7o7w5mpmT/EkzpTf67Oo1E
- FuGe7u0/zWYsXuNSFa6NcNfLMkjXb7QPcU5w1nmByaau674KIQEP84twbivU3x6YbI+j
- GTYg==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=MYzn5XI3pSMScNRDuy7ym3ZX+wxaUgxJKIaLBlMXgwQ=;
+ b=Hn+U46IFu0GZrhokpeRq9S92yfGAWUvr/gOzUfot4Y7Kt07VxtNP3Q/Hb3cXB7VeRv
+ I4qjYh433b7DyyQpKYfiaf47ppxdkoHprDglznbzj/lcZssupOuYzjtT/vk0QIUC0qj5
+ hVjCWkzov8nu+7NWsqFj50M9dHAWzojQA/jFDYIh8xsOkBTRhrF/a/ToEjMz8NnksYLN
+ 6C4umus2/C5lKCkI03vRf58d4bupWYT4r8vgwoQKxt3MX026wvhFxfrsHVrj83xFfSTY
+ 83C+3g8Nkjdb9sZx/spLQI8R7Nmsnz1KjYCkP4K6+NRvgVCBk8e+VdrdYDwW5hAlpTUp
+ P7VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771495421; x=1772100221;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pbc5WfK0ONtMIMsmtHAmx9doJ0IvfOqyCGNjm4dKZs4=;
- b=c5uuxkqqzuudD+rUHKrLwUwOTycs4sGgYzGzObNa6jBBJwVgNrkbExX6OVU2UPxbvd
- VUhWqVAALs0PF7Snbln+clTfO66VsxbStzZr0YqhoYESK70Ar3HueS9cmWWMlGxcWkz8
- ytvGXq+rmia/rGR4Gxtw1dRHmpEA+PvqT/tHheSpTVDD4wmQyduC069u29aqrpCz30rm
- yitP6IFOHb5DFfbaz4i1GvtejYNgRtzL4ttD4f0EE7cC+p46x+GQX4wowoo/ZOscJcqO
- +VeSdIeLxyStDWVIGsQgzkdpomR45/l1dy06amOcwdPdvdVNVg/XkfriE/Ohg97LaKWB
- Swww==
-X-Gm-Message-State: AOJu0YycW/3awBfYPJPUs2B0EHApK9YlHeDG0T0LcrTfk9p58A/RQv0r
- M9NPKLW3bnU1PsuwWQ0dKiQI+O+9iDFFOJRZdlFzJxf3CtPEvkF+PgKKFj6Bp+JeAHU=
-X-Gm-Gg: AZuq6aJmW4rEXrWQtkl5mgYywJlxvETEqMyB3NnfAuXRVCAQ5zxaAS0HM916awI2yxe
- Kyq9uiv+wX6qf+pULTCIhDzdeEWsftHUu+FXNDFccmteYVStPE85jpd2XdCeOSQyXOy/vN69Dvz
- IBR66+yWebv8RLgp+crlEQ/mW6UGGP8CQoxEi5JJxCcRkNb0gTBcZwx+PRUfWqqYOG8XYrTHnXC
- ky5sE1g6YmZOd7jkYA3IM8XU5JTPv3QzA51silQ0gJ99aw+BsYgZTDJRuPF91wr4RwMA5qIJHEX
- ydnpcAwzGtuANqkIAln5cdFhtzkyJx73o5G3znWdHnDNuEX5IzO50vGMHsx9zYBSZcrsDc/lV95
- lhVzZKZIFV9sFEpcAXq5uCKlmQIAckX8z85JFOeZUkwWfi0bz+kTYqpwfXlqfiFZhi2iOnn44/z
- 7YmDE3KMO/nkczQYYjyrGjk85GzDhUkKvKZb4+5a8Ur5tQV5XW8qnlTQr9xwgqmjuxI/PAIiI/j
- oNImcnMortSorf2CHtdzA==
-X-Received: by 2002:a05:6000:2dc5:b0:436:3267:3ed0 with SMTP id
- ffacd0b85a97d-4379db61f4amr32090850f8f.20.1771495421407; 
- Thu, 19 Feb 2026 02:03:41 -0800 (PST)
+ d=1e100.net; s=20230601; t=1771495422; x=1772100222;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=MYzn5XI3pSMScNRDuy7ym3ZX+wxaUgxJKIaLBlMXgwQ=;
+ b=rCfNZZsP3HUKPpFWsizadECEM+4rp4uh7fAnNXA0e6Ac9sik0DhUl7XZxY8CHLOO1H
+ hiJESgCff5yFGyoub0gqgYncBMSzg0skxUvsK0lU+y3S9rcidsaNXIJ0HSmxjXnbon5p
+ M23mDCFZbjl13Lu4g9dvfPuFjTpMasaOTmxMQNH4U0bdIGc8t1NtY7h/KsLQBvf1WzUH
+ Tj87wShEu8nyQC5adrWs1Fhv/QTCNZBEkenhBXzttetlpTckuu/TQopWixPh16SmcmlA
+ 3LEGaLFnFoLA+cNOtAPRhGKV8L/VSquCmoVzq1DeOWYkPyAYZ3EMqFx6bSE/ZWKfnuYc
+ nBeQ==
+X-Gm-Message-State: AOJu0Yx8JeB35X/zkvqjd8eOdYvwTaZ//Mm5TkQ1NVngMlINoTieOGWM
+ abFJNxSvgg8nghovY7VJZeCPoGnjCmnRgHlqj4PqX0WcYogwyi2ElRaG2dVD4SXS4YM=
+X-Gm-Gg: AZuq6aK64HEZl2GASHzc9Un5BwpoJLVGxCF6066Tjzb24Zokr+/sxaQSkjKiAxMLhZH
+ qGMgiGagrpzTr51/LTkaoG7k8LA3OIdcKXNf8QwSxaqzpF39CC0mMpdTXw3UQeQiOKJh+M3iNf2
+ +Cc1wIJXbfSZCgGoBAZdnwTMxZQqUz2W5RHucnhpSpqB34KZuFyDKMfkYK0XvIxQVZeE1lSkrY6
+ g9PgsyGUx6DFEW2mx5OGiJkRDpEZcYfegIitOOzMfKnkEilP/m1tO0T/T3WyB8sk70QJ3AyWmbz
+ Z32gHsIy8989hqQ+oDz0FnkoAXRWcO4mf+65VO5btcdDiBTXEOegC7ttZ+LSSK16B+Fe7xvjKNy
+ VjnlO/WrmeZqSjZbbvsqCGW1I9pIuEK0eWgCiCJFqOQ6QOyVj7Q7XE0RuhYGLs+7paTpHQsChVi
+ dGtuIfQXDoUMjffmpLwtgW7ulx9E88pki3WWQ9LtDAhpQdU0lFHEjfS1MTiskuJxOkbYrb6da+I
+ K/G50zM19grlVqv+H00tkxl8BuZQLH2
+X-Received: by 2002:a05:6000:381:b0:437:6625:d0d7 with SMTP id
+ ffacd0b85a97d-4395fd5c155mr3734438f8f.42.1771495422380; 
+ Thu, 19 Feb 2026 02:03:42 -0800 (PST)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
  [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796a74918sm47885240f8f.17.2026.02.19.02.03.40
+ ffacd0b85a97d-43796a74918sm47885240f8f.17.2026.02.19.02.03.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 19 Feb 2026 02:03:41 -0800 (PST)
 From: Julien Stephan <jstephan@baylibre.com>
-Subject: [PATCH v2 0/2] Add MediaTek MT8395_EVK board
-Date: Thu, 19 Feb 2026 11:03:36 +0100
-Message-Id: <20260219-add-mt8395-evk-v2-0-18b190d91cb6@baylibre.com>
+Date: Thu, 19 Feb 2026 11:03:37 +0100
+Subject: [PATCH v2 1/2] arm: mediatek: MT8195 fix mem_map
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/12Nyw6CMBREf4V07TVteYS68j8Mi5Ze5Eah2mIjI
- fy7FRYmbiY5k8yZhQX0hIGdsoV5jBTIjQnkIWNtr8crAtnETHJZcSEVaGthmOpclYDxBqqs2kJ
- pWXeyZmn08NjRexNemp09Pl/JO/3KnsLk/LydRvFtd3+Kf38UICDnhbFF2VVcmbPR852Mx2PrB
- tas6/oB6S2fjMQAAAA=
-X-Change-ID: 20260129-add-mt8395-evk-956c49a28f28
+Message-Id: <20260219-add-mt8395-evk-v2-1-18b190d91cb6@baylibre.com>
+References: <20260219-add-mt8395-evk-v2-0-18b190d91cb6@baylibre.com>
+In-Reply-To: <20260219-add-mt8395-evk-v2-0-18b190d91cb6@baylibre.com>
 To: u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -113,37 +110,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Commit 2517e2b524e8 ("arm: mediatek: add support for MediaTek MT8195
+SoC") was merged after commit 24ffbb2aa17e ("arm: mediatek: consolidate
+ARMv8 memory maps") but was not rebased on top of it, so mem_map is
+defined twice. Fix it.
 
-This series add basic support for MT8395_EVK board. It is based on
-MT8195 SoC.
-
-Cheers
-Julien
-
+Fixes: 2517e2b524e8 ("arm: mediatek: add support for MediaTek MT8195 SoC")
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
-Changes in v2:
-- rebased on u-boot/next
-- added missing CMD_PART/CMD_GPT/CMD_MMC configs
-- Add entry for MT8395_EVK in newly added file board/mediatek/MAINTAINERS
-- Link to v1: https://lore.kernel.org/r/20260202-add-mt8395-evk-v1-1-304bd45f609b@baylibre.com
-
----
-Julien Stephan (2):
-      arm: mediatek: MT8195 fix mem_map
-      board: mediatek: add MT8395 EVK board support
-
  arch/arm/mach-mediatek/Kconfig       |  2 +-
  arch/arm/mach-mediatek/mt8195/init.c | 21 ---------------------
- board/mediatek/MAINTAINERS           |  5 +++++
- configs/mt8395_evk_defconfig         | 26 ++++++++++++++++++++++++++
- 4 files changed, 32 insertions(+), 22 deletions(-)
----
-base-commit: cf6aa7cf731d3b1b296802e47e9800b0d6bed65a
-change-id: 20260129-add-mt8395-evk-956c49a28f28
+ 2 files changed, 1 insertion(+), 22 deletions(-)
 
-Best regards,
+diff --git a/arch/arm/mach-mediatek/Kconfig b/arch/arm/mach-mediatek/Kconfig
+index 8da4ba5ceab..671a6cb1cad 100644
+--- a/arch/arm/mach-mediatek/Kconfig
++++ b/arch/arm/mach-mediatek/Kconfig
+@@ -149,7 +149,7 @@ config MTK_MEM_MAP_DDR_BASE_PHY
+ 
+ config MTK_MEM_MAP_DDR_SIZE
+ 	hex "DDR .size in mem_map"
+-	default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8188
++	default 0x200000000 if TARGET_MT7987 || TARGET_MT7988 || TARGET_MT8188 || TARGET_MT8195
+ 	default 0xc0000000 if TARGET_MT8365
+ 	default 0x80000000 if TARGET_MT7981 || TARGET_MT7986 || TARGET_MT8183
+ 	default 0x40000000 if TARGET_MT7622 || TARGET_MT8512
+diff --git a/arch/arm/mach-mediatek/mt8195/init.c b/arch/arm/mach-mediatek/mt8195/init.c
+index c399550b8fc..0f68c589e9a 100644
+--- a/arch/arm/mach-mediatek/mt8195/init.c
++++ b/arch/arm/mach-mediatek/mt8195/init.c
+@@ -68,24 +68,3 @@ int print_cpuinfo(void)
+ 	printf("CPU:   MediaTek MT8195\n");
+ 	return 0;
+ }
+-
+-static struct mm_region mt8195_mem_map[] = {
+-	{
+-		/* DDR */
+-		.virt = 0x40000000UL,
+-		.phys = 0x40000000UL,
+-		.size = 0x200000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
+-	}, {
+-		.virt = 0x00000000UL,
+-		.phys = 0x00000000UL,
+-		.size = 0x20000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+-			 PTE_BLOCK_NON_SHARE |
+-			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, {
+-		0,
+-	}
+-};
+-
+-struct mm_region *mem_map = mt8195_mem_map;
+
 -- 
-Julien Stephan <jstephan@baylibre.com>
+2.52.0
 
