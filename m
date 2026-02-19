@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE68AE9A057
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:52:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FBBE9A057
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:52:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D68683DF3;
-	Thu, 19 Feb 2026 18:52:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7577D83DCB;
+	Thu, 19 Feb 2026 18:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="olDn/XRn";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OJTtmg08";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34DD183DCB; Thu, 19 Feb 2026 18:52:06 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 95FC383CF2; Thu, 19 Feb 2026 18:52:13 +0100 (CET)
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
+ [IPv6:2a00:1450:4864:20::344])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BF3783CEE
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:52:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0CD283DCB
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:52:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4806f3fc50bso14030785e9.0
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:52:04 -0800 (PST)
+Received: by mail-wm1-x344.google.com with SMTP id
+ 5b1f17b1804b1-4838c15e3cbso10494075e9.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:52:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1771523523; x=1772128323;
+ d=amarulasolutions.com; s=google; t=1771523530; x=1772128330;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RCHtgDZvfTFI4kdVn/tCFXNLzJyuLrLIYxBP/bv67wk=;
- b=olDn/XRnMh5Dcafc94NcxP0cOEd96EpuDmq+zv1KQp6JsZucMVdF7KNL2Za0N0/CpU
- fpdf1WhX/gfFEUiN/0Zxn7W6MBfEQDTcf4yt8aFRz6RbCepNaXZQwKcspSfHug5IdldI
- BCjtkMXM7rdkSPAeBGPn25Onftipryg/Wu810=
+ bh=VXul22mgOqTPFmE2l0Bw7pi4t5Fuo2IMZYSpgl/+DvU=;
+ b=OJTtmg081Mvhl+WUhEhRy+z837V0QOLDEYNa5uoEbbCHOG6trZdpzVQle9ANiQjxg6
+ j99FXvu7nu2/NBGOGEZjCTGaZTPdR3pb3QbuKVXA+ubU6bFbBkdPqK1iSABch0/Wm312
+ XdWUN3p8iHjFgjJBG+1HTyIkjMEdP9CKoYQR8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771523523; x=1772128323;
+ d=1e100.net; s=20230601; t=1771523530; x=1772128330;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=RCHtgDZvfTFI4kdVn/tCFXNLzJyuLrLIYxBP/bv67wk=;
- b=amxiiCLaIvgsN0xa8MkKDMWb0ulWLkrwjQrfpQGwFXF7xtUQac8s3cM2pqQO3BW1rs
- ABwtX8qYVbna4pq+c21yheo+z2m8LJesuYtlqlEwK+qMSjUW8GFcvCxVEsHGBHnagJ7G
- p1g55yyqxOirTOXZc0+h1gWBs/SEx1erDB1obP/5ZfadM1ys86A4Z4hGsk5YrKvJWDkl
- jFfFrgBXS0A3Ll10NDJAYVKNBtBW17gUQttjA2Dfrg77bWhL56sA3nLY7K/d2GATD0WW
- f7VHDfJFkT03W5k/xmqq3z99LotPx5cbwt5jCectQ99VbpCUlNhp0Ly8cl2tAnuv15Eb
- 4jBA==
-X-Gm-Message-State: AOJu0YwjFri8Cq35tQeksK/G3ak1NFX/PnOawhZUMStSg6hffIKiaaEl
- b5ajiNnsFuSnOoydBpdzdx7FOKIJmxMUGF/S/Ni4ZRzIRMbFI1xEhSaHbqrZiCLf42+5waPOivI
- arzqM
-X-Gm-Gg: AZuq6aJ5P2Be8LzxsJ+zlNeiAVefSbdZllJO7jDT/BvPKGwKh2LcUj43yOZo0SmNzXe
- WdqSfRtWXsBaFV7o4h+K6T7e213oeeg4QWUeio19pm3bhpSIqoDV4NHU7CXuUkFsghqz0B67Vww
- jzEp+b2AUzH0XcvDjr0dEdjcCMZTkTreNUfLwBrRgd7fJXgCt7Ef973QINXit3Mh5nyQrvhxdkF
- cnSyBg8Sp9S+vXz4PGYLf0ASX2MUA6qZuvocwYciZbDjZuPyHlGiOlk+fQXOc1+JdIGiBXKQpxA
- xqd/m86nOctqQClJFQ9wdDUQWa36aN8Yon+DDcUx7BbhEzFn7ZT1rQppHdhBOOWmRy7xDx1RP+/
- YNtCu6u4aENGT4gifMxVE/+PPsIkAgIkbQ9ehC3B1yOsPFeB8Lq2Axju4v5uXcdELD4QqOIS9jL
- bHbyR6AzrmP0LEncn5eIknCEdpJ6e6OnkNgO4tRQ2qA+obmO7KGKfpD6nsgyxU1hzOgebAQFMrD
- jG/+v3hXzBx0Y7HXgaVl+U7gZMioPrRNBXiMPtcBwIDqzwZopsjvDO1vXQxUVDWcWxcBVrAEVET
- 4UeGZ+eBFfKpBvM6gxqpzitZ
-X-Received: by 2002:a05:600c:698c:b0:477:5ad9:6df1 with SMTP id
- 5b1f17b1804b1-48379b932b7mr339624495e9.3.1771523523473; 
- Thu, 19 Feb 2026 09:52:03 -0800 (PST)
+ bh=VXul22mgOqTPFmE2l0Bw7pi4t5Fuo2IMZYSpgl/+DvU=;
+ b=jXuorrjjAQdzrl2G5lgJgQ9myf5ATvc6oEjHR4DWv3YosdsByN8jHm5peeKtzlKSFU
+ g+u8IygaR1KiCT/Fm3yWA976WBgfvqH7s4+3y3BPHb1GNzcyz64gs8nQHqA1oUh1MQNI
+ qsnYtGAl74r+Huu99xf9Yf0nkQo65LLjf862mEkZa3pFcxQTsijmJK6niMJfPSoiNE5z
+ 4ygX3KGMqLT+spep0LoSgc/uec6enRGdYxFemUOOZWOQjia+mwKn5vfAhdg9kLurX6r2
+ L1D+l3NWqxliHl90HkDcup05wQWYy4fvkcyfnnJZNmAQXSDINlHXS9TMzgK9q1smLAVG
+ cuFQ==
+X-Gm-Message-State: AOJu0YxKLb0MfZgFT7cEjOgJfJbZe+TbD0Imlo4FZv0eDG/QamhSHOPs
+ pk4/ReBqbNODCPWABNFJ8Q5rss5oEahGai9E/EZhu1FBg8KexoAesVoTgloBYvmHBa395qH8wpR
+ bnPW0Vag=
+X-Gm-Gg: AZuq6aK6xg4z2gO/2SSiZa3kBg9lAWtAabdqtRS4jn5Vex5m72G5/wZxWXQJuD7gL67
+ Poj3nTJU9xXd6j95l0EQoOJIIr1B6OqJTFod2fcReU7SjxQ97Ja/SVF76Y4XrEIDTxIAbC81ptq
+ ugl3DgCJcUN0IfGZhVu4AmzL/LKcxAdUCMa5G2f/JxWJ8uCWRehJNIObFV0Z4/8RMxsvQrlI+XN
+ kqZoXFIZjA3OHtJqPZEDc9utv+8/QlaJHr/Ht+/+1Ovukia/Zarbrhev9ub25Ia66+cvtj5KutY
+ I7i3lSgTUeVRdNZKOKIPm04lFvGXw3qhXV2MheOjGmzukHGxgOSo/PcK96sYIQsR36hz3pIm6/d
+ wLae45+wpR6UxOAEZ5t6o4UgqHOQ0Cmuk7w6hSjyvtcbyRr97EY9TGhoZ0poU2Nn1i4LqBxox9U
+ ZmWoCDwOFFCPZb2u4wbg3tiAqUYI42EESWs8E2jYtwCI6txJqrZtgtbtfHwjSI3mIhuZGP0oJVT
+ ELR3Y47Sl2rj9MzVfCU8jteWuduGYLGKM1SwoytgL2OCWTPPKgK4h36UrCsp+CjJx+bw7hBg6Z7
+ NGlZIyuXOaHwEWwdjojwhsb5
+X-Received: by 2002:a05:600c:6912:b0:483:709e:f22d with SMTP id
+ 5b1f17b1804b1-4837108fc46mr374253345e9.27.1771523529890; 
+ Thu, 19 Feb 2026 09:52:09 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
  (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483a31b0e63sm35485005e9.2.2026.02.19.09.51.56
+ 5b1f17b1804b1-483a31b0e63sm35485005e9.2.2026.02.19.09.52.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 09:52:03 -0800 (PST)
+ Thu, 19 Feb 2026 09:52:09 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
  linux-amarula@amarulasolutions.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/8] test: dm: spi: add testcase for spi_set_wordlen()
-Date: Thu, 19 Feb 2026 18:51:15 +0100
-Message-ID: <20260219175130.2839234-5-dario.binacchi@amarulasolutions.com>
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 5/8] spi: stm32: clean up buffer length assignment
+Date: Thu, 19 Feb 2026 18:51:16 +0100
+Message-ID: <20260219175130.2839234-6-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260219175130.2839234-1-dario.binacchi@amarulasolutions.com>
 References: <20260219175130.2839234-1-dario.binacchi@amarulasolutions.com>
@@ -104,43 +104,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a unit test to verify that the SPI word length configuration is
-correctly handled by the SPI uclass and successfully passed down to
-the sandbox driver.
+Remove redundant divisions by using the already available xferlen
+variable for setting the rx/tx buffer lengths.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
- test/dm/spi.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/spi/stm32_spi.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/test/dm/spi.c b/test/dm/spi.c
-index 249a9238fedc..a89ba06274fc 100644
---- a/test/dm/spi.c
-+++ b/test/dm/spi.c
-@@ -170,6 +170,22 @@ static int dm_test_spi_claim_bus(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_spi_claim_bus, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
+index a1f31cf653c7..adba97915cd3 100644
+--- a/drivers/spi/stm32_spi.c
++++ b/drivers/spi/stm32_spi.c
+@@ -404,8 +404,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
  
-+static int dm_test_spi_set_wordlen(struct unit_test_state *uts)
-+{
-+	struct spi_slave *slave;
-+	struct udevice *bus;
-+	const int busnum = 0, cs = 0;
-+
-+	ut_assertok(spi_get_bus_and_cs(busnum, cs, &bus, &slave));
-+	ut_assertok(spi_set_wordlen(slave, 8));
-+	ut_asserteq(8, sandbox_spi_get_wordlen(slave->dev));
-+	ut_assertok(spi_set_wordlen(slave, 9));
-+	ut_asserteq(9, sandbox_spi_get_wordlen(slave->dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_spi_set_wordlen, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
- /* Test that sandbox SPI works correctly */
- static int dm_test_spi_xfer(struct unit_test_state *uts)
- {
+ 	priv->tx_buf = dout;
+ 	priv->rx_buf = din;
+-	priv->tx_len = priv->tx_buf ? bitlen / 8 : 0;
+-	priv->rx_len = priv->rx_buf ? bitlen / 8 : 0;
++	priv->tx_len = priv->tx_buf ? xferlen : 0;
++	priv->rx_len = priv->rx_buf ? xferlen : 0;
+ 
+ 	mode = SPI_FULL_DUPLEX;
+ 	if (!priv->tx_buf)
 -- 
 2.43.0
 
