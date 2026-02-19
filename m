@@ -4,164 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A74E9A03B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 01:46:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF57DE9A03B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 02:21:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0FE183AA9;
-	Thu, 19 Feb 2026 02:46:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B04C783AC5;
+	Thu, 19 Feb 2026 03:21:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ikVpR0vZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BDXzisTY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 453F583AC5; Thu, 19 Feb 2026 02:46:14 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 14CE983C19; Thu, 19 Feb 2026 03:21:43 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00FBC83A47
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 02:46:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ABC483A47
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 03:21:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZGF9k101HdhTWh3dcoh57KhhKWQ8uh0uOPAxfO8HauVk7Kez6F1UOarSgtjfeWOumS5yPJUQ3YxPlP39/LBYKaFy/VhH/HRD3cMi1KEjdnEypgQXTjWYiTOyHEo5dMRqAEyNI2F3UnlvSI9IErmHA5EWUlSUhynNR+/hgMvSFTUc/slFmzQZ9e/t9iIvNRgdJiYre33QmVtSV8z0IVinCUI7dqJFF1fjgrJK6+LL6wjEyC4gQA2iL7djLdr8oPpjUV4YIwSN7g7D8BftmlS4XEYnCZgdySL/OKd/A7S62rsEFoJpnuXrm+CiLQvo3W8uRMcf9w8F0QRcT7E5DueNQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3qVwdZZ9NCf+kNoL0f35k6QQJfK4GblEoDSuJAiPujI=;
- b=ICIstl41A4tB3psdjw1uutT8upHXtJ42brxxQgWudfpj0dHAyv1rhMctYICU1u7XYFIie95vt16FN8Wq4xnRbYMVn7/+MFqznDMS6WMUv1Ivtwg9LzR5xag/XXbyUTP0ikOp/x2ICDPP39gXHLJ1xHhvePBXcA8iSOilIvEeLQvQYgS10qh9SjIf3OIdY5bGBFb3Z8RD+isMN8tWQ7It1pAcy2h0PieUZfHrYuESzol6ocIF0qYqCc/AWE0/nrmQR79Z0iti4qKEquaHyf7Nk+TJL21h0IJPKO69aKUTQ8pcjiNMe7LQXWU+Nm8EestQXeG/895EA8D8qRaRI1CeMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=phytec.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3qVwdZZ9NCf+kNoL0f35k6QQJfK4GblEoDSuJAiPujI=;
- b=ikVpR0vZCWIpbpvsoFR0kEbiRlh6QGI7XC3Qxqwf9l33Ik0oQz+utcN2KgfoOOx2RvdO2o9XDRUV7jBX1UmB1hVIAaINuUYJngiQly8nTPcNUTkhWykAzCppfznOBlrkTa4dmeO4TBJEx/j7xZEOTEFaccmXkXpd5sTcmDIoNrY=
-Received: from DM6PR03CA0083.namprd03.prod.outlook.com (2603:10b6:5:333::16)
- by SJ0PR10MB4432.namprd10.prod.outlook.com (2603:10b6:a03:2df::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Thu, 19 Feb
- 2026 01:46:08 +0000
-Received: from DS3PEPF0000C37C.namprd04.prod.outlook.com
- (2603:10b6:5:333:cafe::7c) by DM6PR03CA0083.outlook.office365.com
- (2603:10b6:5:333::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
- 19 Feb 2026 01:46:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- DS3PEPF0000C37C.mail.protection.outlook.com (10.167.23.6) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 01:46:07 +0000
-Received: from DFLE200.ent.ti.com (10.64.6.58) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 18 Feb
- 2026 19:46:06 -0600
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 18 Feb
- 2026 19:46:06 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 18 Feb 2026 19:46:06 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61J1k6hQ1799350;
- Wed, 18 Feb 2026 19:46:06 -0600
-Date: Wed, 18 Feb 2026 19:46:06 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-CC: Suhaas Joshi <s-joshi@ti.com>, Anshul Dalal <anshuld@ti.com>,
- <u-boot@lists.denx.de>, <trini@konsulko.com>, <vigneshr@ti.com>,
- <n-francis@ti.com>, <s-tripathi1@ti.com>, <k-malarvizhi@ti.com>,
- <kamlesh@ti.com>, <vishalm@ti.com>, <d.schultz@phytec.de>,
- <w.egorov@phytec.de>, <ggiordano@phytec.com>
-Subject: Re: [REGRESSION] Verdin AM62/62P not booting with 42b3ee7fa524
-Message-ID: <20260219014606.x5sg43kuc7fbq5cr@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20260210092646.w5bugrscifmsh5px@ula0507357>
- <20260209202001.saeaf6l2kz57rufg@bryanbrattlof.com>
- <20260210105014.GB214446@francesco-nb>
- <20260211101113.GA176369@francesco-nb>
- <20260211112109.56e27kyy4coqpcbb@ula0507357>
- <20260213102015.GA10715@francesco-nb>
- <20260217132150.of5l5qirxkeizsne@ula0507357>
- <aZVjSOzCH6ZP3CjW@gaggiata.pivistrello.it>
- <20260218145241.GA179991@francesco-nb>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d4c9537f90so379432a34.0
+ for <u-boot@lists.denx.de>; Wed, 18 Feb 2026 18:21:39 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771467698; cv=none;
+ d=google.com; s=arc-20240605;
+ b=QQopppKJV9I5kIi/j4MbYRWxKyV4HopE8VMljimvW78A/vG6hloxymHF5qWfuzVzov
+ UU171y9a/RmRMrePkY18+JJJxAgtYYVYMQSsMlToGGx/OcvAegaAucF8W6nU6CbjKPTP
+ oG43Xz3bpJlDf/pWV/kMsYjC11FYJVxkbEnZPOApmo9El7ouBYLOwbelCNEx0rpdHbzc
+ prXh6GF7EeAs/qnV4OhFdpbEv3opdINciBo6qX/b8VvQacfwabr5TjpLie4ptopvbWNQ
+ 1Qt/X3amhkI48V46txl72TorLYJU3TzDw4P/IXgNJI/O5WUi4RLVUT7avYZDnxN46MHF
+ /Y9Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=xTMmeQboSNeiJwPwfUB4Z2QRGqso1dLq822+0g3BCos=;
+ fh=eEi8Xo/lKegsBCPHHmDPcf4jaXl0OXhlbgpBC2bs1Eg=;
+ b=Q2CHUlc4+zwnbr4a48cao0Zb6uxNB2uG1Ggg+ts1Ax+oGQLqc4wHnCQVXnhFITLID+
+ FbD6RsmFDd2D5+evIPcrwWZ0PIGG3uouf8NkDicIDD6mM2f449uPWvXuqVJ7Q7gUoP67
+ yDI0NXc0BKo6fzDaGaHMybCcY73QaH9tZvPXMrCYvgNan0wUhFaeJE/wSYSniXQOTi8r
+ 0Gko+E2ou/yPpaejKwnYardr5Dag3oQ7v3k5Z6JNn0rWlENG4/9hb1pTiugTwUE2oe+N
+ djR5jPeYQ9vOcH3s1SF7Mu+HWOmMWyLD8i2xEK47bOvLQPpE1O+qIkMXlXJzHC1eQTsq
+ G8Dg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1771467698; x=1772072498; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xTMmeQboSNeiJwPwfUB4Z2QRGqso1dLq822+0g3BCos=;
+ b=BDXzisTYo41FfdY9r7gQLIjnVdVDBpZE849qUMW97AwiYYMx1ubG0FkI9jxsNPQJl0
+ RVZpa8ss+x5ypuHg+ZKnUOvWlfnWdHvXfQ9Y2oQItJ6kZ+UmX+qHxNhBOKhCNPv0FrUC
+ jEO42Gb6fxq3LGXOkxJMkkP0pI5YV2JL/CEMIVsI+PIHs06V0OvJBmDn4NNXDgkaM45q
+ 9MhGhGvXCsQno4n++s2Kb5aRka9NO6RBlgYs4DMgwHbJse+NrQXfPRrMbo0lMdTYC9iX
+ GxIbUfAC0oUXO5MLFh6ySdrQSyIeWumdfAXLqhKiltRABidI/5Yr48MCM/v0sd/ug51V
+ v26w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771467698; x=1772072498;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xTMmeQboSNeiJwPwfUB4Z2QRGqso1dLq822+0g3BCos=;
+ b=lnENT4MohmjivJliZfWpww1GvenvFX1P1oTNlza/t0id6yNMFp9fFMJ2P2A/9PKR1N
+ RKwp8eTfjqHGjJo6TXuQcpvl/SYaBvugVn1KgvPPxR+BDGTtbe431OCMu0v8d6Q27AGB
+ 1o63wlnXhEr/GJW0cDJhFZdYq9s4GaLy5kbiaeW3VN+NCIZcLMEq9QJlqLV2YQrRZGNs
+ UXl+9WaNj5NOBXj2X5ysF22TJbMlpmMzG+KdSjwFKjqzDRZ2JUVaEMySyeayhxglyuZ+
+ 9DSj9rSKw4G2Sc13UpMrT2M/j4f5juwuzdECdenG7/X9uVZp7wzEqWlwtcHpg0aMgy6P
+ j3Xw==
+X-Gm-Message-State: AOJu0YznWnSPVbUSO/pDv1Kujk+USlAxs3pMOqQY3Jg9ZzVo+2m5RkdP
+ o5ZqsXoWRcsjzYYeTc+1jKfl5nuLOqP1h/vQWYlWQQ1XWqvMQNAyclu0WmsEf6hF24xuSzB+AAd
+ DAz7QBy1MzuA9XTR5bYPiE74Z2eH07PEq1c2j5CE=
+X-Gm-Gg: AZuq6aL1/+QFOGAhMcvQSilrtkziDvQucKcQlGsOYPExe9o0TPomdIjwSfc8Ab8pniN
+ nuJpZMITl+doN2/MjTllsPEyWsEw69jeNZzZSvz5IijfZHjWVHaBL6ePVyntDLTbPMJJjPsFWg2
+ BWdc0bwAcgY7QcvbfYbt5xSZmp+2KjOaz8AEVeBr2lYDJal8qqElb1Hfw0QUIQbzrn6qrcL7hn6
+ 6tLKHSdhXhA/RpbxldXbhLBvaGF7plMtBSmo/JYog1869736knAGUvvBme+KSfi3UTLCfB6N+PX
+ xQy2feht
+X-Received: by 2002:a05:6830:922:b0:7cf:cbee:6bd5 with SMTP id
+ 46e09a7af769-7d505e16fb6mr1773560a34.19.1771467698221; Wed, 18 Feb 2026
+ 18:21:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20260218145241.GA179991@francesco-nb>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37C:EE_|SJ0PR10MB4432:EE_
-X-MS-Office365-Filtering-Correlation-Id: e8a05bd0-dc60-4c95-bda3-08de6f58a681
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?R29zWEZ3Q0J2NWtNeTBNN2xEK2hnS1pYWlBEZHdzNm1XZ1gxdEM5aU85T0dX?=
- =?utf-8?B?ZGNTTWxWdEYzaTNVYlJhWERMYmthd2dxQTBjcHhhaDUwTFNsL296ZFZWaUNx?=
- =?utf-8?B?bEY0N2I2bXhDelR6Zk1JeVl1ZkhHTUV3ZXBVNFdwSXE5UTF0ODFuOXhCTEI0?=
- =?utf-8?B?bm9UWDM3aVJEY3JFaW9GZ25nTS9Zc0NwUWlFWis0UzVybzN3RWFEeWF4TFhw?=
- =?utf-8?B?aEwrcGVqcHZicXE3Tkdha2RZT3JxVTNHUnE0eVRWalo0UzYwRG96QzJhMFdv?=
- =?utf-8?B?ZWZkQ2htaGJQTHJMVHU4Y0tzTlJuMm0vTVVwV3dqUXE4Nm5FREdzTTIrdEN4?=
- =?utf-8?B?TkpKR1AyQ1g3MGk0eTRxTUhVeDRST1dWajNjTHNiaCtKMlVvTmwvb0gzdW5H?=
- =?utf-8?B?MmhLUjV2VThDUG9PQ3d3UlFGVEo2eWNiOUQ0QTNIbFNLeTdDc1JYczlRRysx?=
- =?utf-8?B?RHpkWWhJQWtNNCs4R1FkTDlsSmNoTnk0WVFqejk2QkYrK3ZLQ2ZKemRyVGd2?=
- =?utf-8?B?L0RMclhVM2Jiak96R0FYWGpyVFBYS0w4QjZjWlZYMmxXNlBnaGVZR2FyQTdO?=
- =?utf-8?B?Rk9tRUtBeTBFRVZGdWNIVkxJeHVPZmVDWjlNVUR4blBaaytrdkJaQWp2QjA1?=
- =?utf-8?B?aXRzVjkxVmFEb2xlR002SnFONk4xellPaTJYM2hJRndWVE80ck9CcEFYTEpl?=
- =?utf-8?B?eW1tRG15S0pIZVh1QXh1MDBoWXFlS2xaOVJ3QUhiSkRab2NBVUIxZVJXUEFt?=
- =?utf-8?B?MnQvRTNialRHU2JGZXdHVStlRW9xUXRUUGgxNTltVHlEMHVLbm91V0o5aEpI?=
- =?utf-8?B?MzVSMEoyOERDU1RITmVHaFJ1Sk1PTS9hZmk0TEp2aXpLaDNtWUp3aHk1OUx5?=
- =?utf-8?B?djZsdnBvMXhkV1FRSXk0dHdGczQ0Mk1mQTBvMHpjQXM5SWxSQ2xJS3NVbjJu?=
- =?utf-8?B?bEREV3pJaWlWTkRKRys1T0hBRXNGbHA3QUNvalo3MXNyYXVEL3RkaTdKeTh5?=
- =?utf-8?B?VkczeCtmNnlPVDFKanltQkF0Vm9oNU1BSlN1SHF0OEsrVlUwL0V3NlV5ck5L?=
- =?utf-8?B?V2lQaWNORXMxYnhFTGF2TnFZY1phOWZuTk11WWxOS29Zei9GT1VWRnlubXhY?=
- =?utf-8?B?Z1pnaTY2TlVpR3Q0SUdMeHNSbXg5Z3VzTUVoOUUwY0FCVGJvWXhwamRCcXRU?=
- =?utf-8?B?NUFvM0RMQjloTzkrWThsWHY2QVBKVUhMQklqOGdZWE5oelZQTUhLR1V4Tmd4?=
- =?utf-8?B?Nm1ScDYvT1RkRmovYmF4aTdaRmhXQ2dWTnhDQjBpUnFhLzZHdnBpUnlVeXNo?=
- =?utf-8?B?dGtSRG85NWxDRjFGRk1mU1RaQnNodncreXN3OS9YT3cwcnUzZkh0dDVrYWpm?=
- =?utf-8?B?eDRtbFZlUDVIbWxjZzNsdWFid3g0ZXROWU05djJoQXVCT2QybHoxTGRjYk92?=
- =?utf-8?B?QmRWVkZ2YUgwNjFxOFFNNjZ6NmgyYzNORlBISkZOeHlCSm1iM00vL01VV0Iy?=
- =?utf-8?B?VXdzZmdpRWFQdWUvOVNneGoxRXdPYURnSHpzYmNaejM2NkFRWGlKL3IwMTdo?=
- =?utf-8?B?UFhTTUpCOGJtYm9tUUt4U3VMVFpSdG1aTFNObTVsVTFjRjl6cS80Z0F4b0NF?=
- =?utf-8?B?NjFLZEp6TmdjeHlrMERvcFhZQms2TGdoSnRtYVd3Y2lHWExlOEdYTzF5a29n?=
- =?utf-8?B?V3JsYmNRVDYydVozVGpDTXMyMlhOYnR5b2hEaWVmazJvbzJRb1dZUWcvOU1j?=
- =?utf-8?B?Wi9LNSs1ZjlYYlR2TW8zeFZtbk13QWdJMnZwdzlLVllZbzF2VXV4ekZqTC9h?=
- =?utf-8?B?UTVkaDJJdncxanpoaS8xSzVFNCtJNEJZeXRlU2FtNXI5NFJNOEkxMWJWU3B0?=
- =?utf-8?B?RFNZL2JCZ0ZXTnF1c0h6ajk3RkxuaHNrbEo1VzBKcVRJMFEyMFgzSnBzQzJo?=
- =?utf-8?B?UW9wUCtORGhqaHRwUU4vQzA0UEFobmx5dVg2cUN4WGJaejZWZENIQTk2V05W?=
- =?utf-8?B?N3pRYW9Nc1J5SUtLeWZlTTh3WWRWOU11VllobUZKcEEzYWI2V3p2Zk9rN0dk?=
- =?utf-8?B?cDhEdFA0QXZCQ0NGT0RWMnlJVDNFSWgxQmhNaFp6b2VUbFBlMk8rVXFCbHR1?=
- =?utf-8?B?L2YrNC8yK05ISTdpa1FyZDdIdHRaVXBzUG1mbHFKOUg2ejkwMHNuL0lqWlZL?=
- =?utf-8?B?VkE9PQ==?=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: w6v2BRrIHoJs8JZ9E81fl7EkW95feB2aRfyRhQYMDd9ukpRlI0h+PR46pS6RiGAfng+9Vla33cuNtlDBmLnr00sVa8kz2wOWAV3CUSYJN3RYzsqluBbaejEsjJxGu5xmDrxUfyWyEsrjkmP/cbjvM7fNz3AkbQvTPN5z1zXPu7n/+d3oxT3EvIagTNzl/lZ6wMDi/dppU7WOCXjko3yRK/eB0jeuAMfO7A068V2xcc+TKG8oMPYUeJacxMMHQIPnAkQn18DYQdUcqykgL1ROKMLgOagsawL722B+i2NLZqj8I8ILj9E06h3whxXfpX2WD6DaDjGQE1H02xyMkUDIle5PL3BO36UeI0ZQRSoh5AIQ4yOzjLfbCacr5Ja4C7up3bJQK3s6g51fQjgEQ3bpeB9ITNTviRQ/E8vF3IUEDPBRAd0fs/3nhsGYW7sJtnFf
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 01:46:07.3449 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e8a05bd0-dc60-4c95-bda3-08de6f58a681
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37C.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB4432
+References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
+ <b25f6c14-7db2-4517-a3ab-e2c55a52818c@altera.com>
+ <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
+ <CAN7C2SAOLdokAaVcuMPWMTS4HsY-4d2dhnkwLadqsGS2qAsKaw@mail.gmail.com>
+ <4b6327d1-681d-46a4-b672-6d53fbfa1e89@altera.com>
+In-Reply-To: <4b6327d1-681d-46a4-b672-6d53fbfa1e89@altera.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 19 Feb 2026 10:21:26 +0800
+X-Gm-Features: AaiRm51kj-2N-g8gQQ0iK4YWDQp9q4x9ZD4zOOrZ6YxzFkCODLpgykdeGnxEk8c
+Message-ID: <CAN7C2SCbyuBz4d8QmqGUNFBGjhGaSFyZD-J3GcYy9r3DGNSjvA@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: socfpga: Add call to
+ socfpga_sdram_apply_static_cfg()
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,241 +119,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On February 18, 2026 thus sayeth Francesco Dolcini:
-> Hello Suhaas,
-> 
-> On Wed, Feb 18, 2026 at 07:59:20AM +0100, Francesco Dolcini wrote:
-> > On Tue, Feb 17, 2026 at 06:51:50PM +0530, Suhaas Joshi wrote:
-> > > On 11:20-20260213, Francesco Dolcini wrote:
-> > > > On Wed, Feb 11, 2026 at 04:51:09PM +0530, Suhaas Joshi wrote:
-> > > > > On 11:11-20260211, Francesco Dolcini wrote:
-> > > > > > On Tue, Feb 10, 2026 at 11:50:14AM +0100, Francesco Dolcini wrote:
-> > > > > > > On Mon, Feb 09, 2026 at 02:20:01PM -0600, Bryan Brattlof wrote:
-> > > > > > > > Do you mind copying a boot log to a pastebin for me? I thought I had one 
-> > > > > > > > of these boards but I'm still digging around for it. 0x80000000 should 
-> > > > > > > > be where we load TFA now days unless some boards have opted out of 
-> > > > > > > > letting U-Boot move it to the bottom of DRAM
-> > > > > > > 
-> > > > > > > Here some more logs
-> > > > > > > 
-> > > > > > > https://gist.github.com/dolcini/aa4b669c6349cc6da1b9e7b19cf53fed
-> > > > > > > 
-> > > > > > > The files are named with the commit sha that is tested.
-> > > > > > > 
-> > > > > > > On Tue, Feb 10, 2026 at 02:56:46PM +0530, Suhaas Joshi wrote:
-> > > > > > > > Verdin boards are the only ones that are reporting this issue. Is it
-> > > > > > > > alright if we revert only the two Verdin-specific commits, and let the
-> > > > > > > > rest (TI and PhyCore ones) stay as they are? The patches are pretty
-> > > > > > > > un-connected to each other.
-> > > > > > > 
-> > > > > > > Verdin AM62 should not have anything special, the code is all there for
-> > > > > > > everyone to see, including the defconfig, the DT and so on, and the changes
-> > > > > > > we are talking about to me are self contained withing the SoC. Something
-> > > > > > > is wrong, and we are not understanding what yet.
-> > > > > > > 
-> > > > > > > I just retested once more 42b3ee7fa524 and it just hung, you never know
-> > > > > > > if I did something wrong. And for what matter this was spotted by our
-> > > > > > > CI.
-> > > > > > > 
-> > > > > > > > We are working on figuring out why Verdin is seeing these issues, in the
-> > > > > > > > meantime.
-> > > > > > > 
-> > > > > > > Anything I can do let me know.
-> > > > > > > 
-> > > > > > > If it matter the board that I am currently testing has 1GiB DDR RAM, and
-> > > > > > > the SoC is a AM6252ATCGHAALW. 
-> > > > > > 
-> > > > > > I was able to trace the issue to the get_ram_size() in
-> > > > > > verdin-am62.c:dram_init().
-> > > > > > 
-> > > > > > That function walks the addressable memory range to dynamically detect
-> > > > > > how much memory is available.
-> > > > > > 
-> > > > > > Not sure on the proper way to fix it however, Bryan? Suhaas?
-> > > > > 
-> > > > > Yes, this does seem to be the issue, even in my digging. I have sent a
-> > > > > patch to fix this. But since I don't have boards, I have not tested
-> > > > > this. Could you please test this and let us know if it works, or if
-> > > > > there are any other issues that pop up?
-> > > > 
-> > > > With commit f9ffeec4bdcf ("board: toradex: Make A53 get RAM size from DT
-> > > > in K3 boards") merged we had our CI running on our whole board farm
-> > > > last night.
-> > > > 
-> > > > Good news: the issue is confirmed to be fixed on Verdin AM62P and Verdin
-> > > > AM62 [Quad|Dual] with [1|2]GB RAM.
-> > > 
-> > > That's great!
-> > > > 
-> > > > Bad news: we we do still have a boot failure regression on Verdin AM62
-> > > > single core with 512MB RAM. I have no idea if this is the same issue or
-> > > > a different one, but from the logs it look different (despite that I
-> > > > decided to keep using this email thread and not start a new one).
-> > > > 
-> > > > The failing board from the logs uses a AM6231ASGGHAALW SoC, maximum
-> > > > frequency 1GHz, we also have another device failing, single core again,
-> > > > with maximum frequency 800MHz, the working one have 1.4GHz max
-> > > > frequency.
-> > > > 
-> > > > Worth noticing the errors
-> > > >   Failed to set clock rates
-> > > > 
-> > > > These are new compared to the previous U-Boot release, it affects also
-> > > > other boards, and I have no idea if this is related to this issue or not.
-> > > > 
-> > > > Logs of the failing device (U-Boot is commit f9ffeec4bdcf1da655a0ffea482062adde78fee8)
-> > > > 
-> > > > U-Boot SPL 2026.04-rc2-0.0.0-devel+git.f9ffeec4bdcf (Feb 12 2026 - 14:12:09 +0000)
-> > > > SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.9--v11.02.09 (Fancy Rat)')
-> > > > Failed to set clock rates for '/a53@0': -22
-> > > > SPL initial stack usage: 13456 bytes
-> > > > Trying to boot from MMC1
-> > > > Authentication passed
-> > > > Authentication passed
-> > > > Authentication passed
-> > > > Loading Environment from nowhere... OK
-> > > > init_env from device 9 not supported!
-> > > > Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
-> > > > 
-> > > 
-> > > I don't think this one is related to the firewall series. Not really
-> > > sure what the issue is. Just to rule this series out -- could you drop
-> > > my patch(es) and check if this specific device boots?
-> > > 
-> > > Was this device booting earlier? Could it be a build misconfig, since it
-> > > says that it can't detect an image signing certificate?
-> > 
-> > This is a regression with 2026.04. 2026.04-rc never booted on this device, and
-> > before commit f9ffeec4bdcf1da655a0ffea482062adde78fee8 none of the verdin
-> > am62[p] variants were booting for multiple bugs that were present in the
-> > release.
-> > 
-> > 2026.01 is booting fine on this device, with plain vanilla U-Boot.
-> 
-> The issue is still there, and it seems again related with your changes.
-> 
-> Can you help? Any test that I should do?
-> 
-> 
-> 
-> v2026.01 booting fine
-> =====================
-> 
-> U-Boot SPL 2026.01 (Feb 18 2026 - 12:12:15 +0100)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> Changed A53 CPU frequency to 800000000Hz (K grade) in DT
-> SPL initial stack usage: 13512 bytes
-> Trying to boot from MMC1
-> Authentication passed
-> Authentication passed
-> Authentication passed
-> Loading Environment from nowhere... OK
-> init_env from device 9 not supported!
-> Authentication passed
-> Authentication passed
-> Starting ATF on ARM64 core...
-> 
-> NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-> NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-> 
-> U-Boot SPL 2026.01 (Feb 18 2026 - 12:12:38 +0100)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> SPL initial stack usage: 2048 bytes
-> Trying to boot from MMC1
-> Authentication passed
-> Authentication passed
-> 
-> 
-> U-Boot 2026.01 (Feb 18 2026 - 12:12:38 +0100)
-> 
-> SoC:   AM62X SR1.0 HS-FS
-> Reset reason: POR
-> DRAM:  512 MiB
-> optee optee: OP-TEE: revision 4.7 (a9690ae39995af36)
-> Core:  159 devices, 34 uclasses, devicetree: separate
-> MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-> Loading Environment from MMC... Reading from MMC(0)... OK
-> In:    serial@2800000
-> Out:   serial@2800000
-> 
-> 2026.04, commit 3243a73102c3 ("Merge branch 'master' of
-> https://source.denx.de/u-boot/custodians/u-boot-sh"), booting fine
-> =================================================================
-> 
-> 
-> U-Boot SPL 2026.04-rc1-00199-g3243a73102c3 (Feb 18 2026 - 15:38:33 +0100)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> Failed to set clock rates for '/a53@0': -22
-> SPL initial stack usage: 13512 bytes
-> Trying to boot from MMC1
-> Authentication passed
-> Authentication passed
-> Authentication passed
-> Loading Environment from nowhere... OK
-> init_env from device 9 not supported!
-> Authentication passed
-> Authentication passed
-> Starting ATF on ARM64 core...
-> 
-> NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-> NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-> 
-> U-Boot SPL 2026.04-rc1-00199-g3243a73102c3 (Feb 18 2026 - 15:38:57 +0100)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> SPL initial stack usage: 2048 bytes
-> Trying to boot from MMC1
-> Authentication passed
-> Authentication passed
-> 
-> 
-> U-Boot 2026.04-rc1-00199-g3243a73102c3 (Feb 18 2026 - 15:38:57 +0100)
-> 
-> SoC:   AM62X SR1.0 HS-FS
-> Reset reason: POR
-> DRAM:  512 MiB
-> optee optee: OP-TEE: revision 4.7 (a9690ae39995af36)
-> Core:  160 devices, 35 uclasses, devicetree: separate
-> MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-> Loading Environment from MMC... Reading from MMC(0)... OK
-> In:    serial@2800000
-> Out:   serial@2800000
-> Err:   serial@2800000
-> Model: Toradex 0071 Verdin AM62 Solo 512MB V1.2A
-> 
-> 
-> 2026.04, current master, commit 8666b16015d4, NOT working
-> =========================================================
-> 
-> 
-> U-Boot SPL 2026.04-rc2-00033-g8666b16015d4 (Feb 18 2026 - 15:05:31 +0100)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> Failed to set clock rates for '/a53@0': -22
+On Thu, Feb 19, 2026 at 8:18=E2=80=AFAM Yuslaimi, Alif Zakuan
+<alif.zakuan.yuslaimi@altera.com> wrote:
+>
+>
+>
+> On 13/2/2026 5:00 pm, Sune Brian wrote:
+> > [CAUTION: This email is from outside your organization. Unless you trus=
+t the sender, do not click on links or open attachments as it may be a frau=
+dulent email attempting to steal your information and/or compromise your co=
+mputer.]
+> >
+> > On Fri, Feb 13, 2026 at 4:44=E2=80=AFPM Sune Brian <briansune@gmail.com=
+> wrote:
+> >>
+> >> On Fri, Feb 13, 2026 at 3:18=E2=80=AFPM Yuslaimi, Alif Zakuan
+> >> <alif.zakuan.yuslaimi@altera.com> wrote:
+> >>>
+> >>> Hi Brian,
+> >>>
+> >>> On 6/2/2026 11:09 pm, Sune Brian wrote:
+> >>>> [CAUTION: This email is from outside your organization. Unless you t=
+rust the sender, do not click on links or open attachments as it may be a f=
+raudulent email attempting to steal your information and/or compromise your=
+ computer.]
+> >>>>
+> >>>> Hi Alif,
+> >>>>
+> >>>> Since 2025.05 to the latest master.
+> >>>> I do not have any issue as you mentioned in this patch.
+> >>>> Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
+> >>>> I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
+> >>>> that GEN5 Cyclone can support.
+> >>>>
+> >>>> Not too sure what is missing from first place?
+> >>>>
+> >>>> Thanks,
+> >>>> Brian
+> >>>
+> >>> Based on the CycloneV address map which can be found here -
+> >>> https://www.intel.com/content/www/us/en/programmable/hps/cyclone-v/hp=
+s.html#sfo1411577374877.html.
+> >>>
+> >>> Bit 3 of staticcfg register has to be set to apply all the settings
+> >>> loaded in SDR registers to the memory interface, in this case the pat=
+ch
+> >>> ensures the SDRAM controller applies the latest configuration after
+> >>> disabling FPGA SDRAM access.
+> >>>
+> >>> This is a safety and correctness fix for re-initializing the memory
+> >>> controller in the proper sequence during FPGA reconfiguration.
+> >>>
+> >>
+> >> Hi Alif,
+> >>
+> >> Before I plan to undergo a test we got to understand why w/o this patc=
+h
+> >> SDRAM2FPGA works properly w/o issue.
+> >>
+> >>> If you have the time, can you help to test this patch with your setup=
+?
+> >>> Although unlikely, we want to be sure that this patch will not break =
+any
+> >>> existing GEN5 boards out there.
+> >>
+> >> I might be wrong, I think static cfg has been done already?
+> >> Does the code here if not wrongly understood already finished that sta=
+tic cfg?
+> >>
+> >> ---> Quote start
+> >> void socfpga_sdram_apply_static_cfg(void)
+> >> {
+> >> const u32 applymask =3D 0x8;
+> >> u32 val =3D readl(&sdr_ctrl->static_cfg) | applymask;
+> >>
+> >> /*
+> >> * SDRAM staticcfg register specific:
+> >> * When applying the register setting, the CPU must not access
+> >> * SDRAM. Luckily for us, we can use i-cache here to help us
+> >> * circumvent the SDRAM access issue. The idea is to make sure
+> >> * that the code is in one full i-cache line by branching past
+> >> * it and back. Once it is in the i-cache, we execute the core
+> >> * of the code and apply the register settings.
+> >> *
+> >> * The code below uses 7 instructions, while the Cortex-A9 has
+> >> * 32-byte cachelines, thus the limit is 8 instructions total.
+> >> */
+> >> asm volatile(".align 5 \n"
+> >>       " b 2f \n"
+> >>       "1: str %0, [%1] \n"
+> >>       " dsb \n"
+> >>       " isb \n"
+> >>       " b 3f \n"
+> >>       "2: b 1b \n"
+> >>       "3: nop \n"
+> >>      : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
+> >> }
+> >> Quote end<---
+> >>
+> >
+> > I forgot to quote the func call location:
+> >
+> > void do_bridge_reset(int enable, unsigned int mask)
+> >
+> > During boot users are supposed to use bridge enable to
+> > control the needs of the HPS <-> SDRAM or H2F F2H LW etc.
+> > When calls if I am not wrongly understand it will reset and
+> > simply do that static cfg and simply do not require additional
+> > calls.
+> >
+> Thanks for pointing this out, Brian.
+>
 
-Hmm It's interesting to see this start to fail. 
+Hi Alif,
 
-> SPL initial stack usage: 13464 bytes
-> Trying to boot from MMC1
-> Authentication passed
-> Authentication passed
-> Authentication passed
-> Loading Environment from nowhere... OK
-> init_env from device 9 not supported!
-> Authentication passed
-> Authentication passed
-> Starting ATF on ARM64 core...
-> 
-> NOTICE:  BL31: v2.13.0(release):v2.13.0-259-ge0c4d3903b-dirty
-> NOTICE:  BL31: Built : 07:01:36, Jul  1 2025
-> 
-> U-Boot SPL 2026.04-rc2-00033-g8666b16015d4 (Feb 18 2026 - 15:05:54 +0100)
-> SYSFW ABI: 4.0 (firmware rev 0x000b '11.2.5--v11.02.05 (Fancy Rat)')
-> 
+Pic by pic.
 
-I'm suspicious of the spl_enable_cache(). I've witnessed issues if we 
-add MMU entries that are not backed by DRAM which can cause the MMU to 
-crash the CPU.
+> I understand that you saw potential redundancy in this patch's explicit
+> re-application of the SDRAM static configuration, which may already be
+> handled by the existing call to socfpga_sdram_apply_static_cfg() during
+> bridge reset.
 
-I wonder (complete guess right now) if we're passing the correct DRAM 
-density to the A53 SPL?
+This is following the old boot flow to the latest and not having issues
+under boot.scr with "bridge enable" and sub-bit bridge setup.
 
-~Bryan
+>
+> I would imagine your current flow works as the current code already
+> applies SDRAM configuration changes at the correct time during boot or
+> bridge reset. However, there are some cases or sequences where this
+> apply step could be missed - such as during partial reconfiguration.
+
+Not too understand this case even if you PR the bridge enable MUST
+be done after the reconfiguration phase aka "bridge enable".
+And PR itself has nothing to do with turning on F2H SDRAM the first time.
+One is the FPGA manager and the other is the HPS register unless it auto
+reset all bridge registers.
+I can also reload full bit during boot again and again and boot to linux w/=
+o
+f2h issue.
+
+>
+> This patch would then be needed as an extra safeguard in cases where SDR
+> registers are updated manually or outside the typical bridge reset sequen=
+ce.
+
+If the user doesn't use f2h then turning on this bit for what purpose?
+As "bridge
+enable" under boot.scr have good control.
+
+Brian
+
+> >
+> >> Thanks,
+> >> Brian
+> >>
+> >>>
+> >>> Thanks,
+> >>> Alif
+> >>>
+> >>>
+> >>>
+>
