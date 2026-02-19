@@ -4,120 +4,170 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0174FE9A03B
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 15:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B04E9A04A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 16:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0956F83CEE;
-	Thu, 19 Feb 2026 16:57:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B77C983946;
+	Thu, 19 Feb 2026 17:08:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZeTxQunz";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="sUKZhFX+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68FA383CF2; Thu, 19 Feb 2026 16:29:36 +0100 (CET)
-Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
- [IPv6:2607:f8b0:4864:20::242])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F1F983CD3; Thu, 19 Feb 2026 17:08:05 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D28F880050
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 16:29:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 402A383936
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 17:08:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x242.google.com with SMTP id
- 5614622812f47-46391e91e16so633401b6e.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 07:29:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771514972; x=1772119772; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ajYPElnFtm7hcYNnEOBLqPYf2IR/7hd6GLXpHwtDOlE=;
- b=ZeTxQunz7XhaO1YJWSSpbsqol2onebHx1nGagb7oKzdqFSAgfi3h/sEQIHi/o8siA4
- YL2R52kwcTUy5CoK4to8vRAXmARvLHAqww+vVYSeE513HvB19rsDRSGlZa/zmjRFiC01
- Ay2aymShnhUYYWFW2MxF+QaqEic4Jrgveh4GU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771514972; x=1772119772;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ajYPElnFtm7hcYNnEOBLqPYf2IR/7hd6GLXpHwtDOlE=;
- b=XuuegcBkrwWUqt2Tuf2sWgRrcJYPJ1+WAo6QWKPx6/I1hbz9n1DxExguindLPBN817
- 0whPh9BKKfzkb1DaDJKpfWDxBKZYKfwoBx0XbULi+b25M7MGBzzQBwKea5fh+rRHCDHW
- 1wKNKmDLanmH5OcTpMnKGaG1LHMCaWxEOyBhScqMP2QdT6BdxoNnqettwAMzw18S0h6y
- Uq43MnX6dxF5NLQ/fXepCMefDh5VNyMTnQDyloAoyk2qnLXroJzi7+S+pwRVGuDtKr7x
- nED8uPTQo2hQKuCUm5M+wriN+7SCpzZ36UarDMk21nBr0gMX3846OGINlMmkHccyWN+A
- PFcA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUXaOXYbxmavwMfPEa/WrPiEer3HRPjeC9+glOIo46N3CAoK81ccp0emG990tAFmSUk7Sdet60=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQf6rbBt0XVwKmA4aKDynZHswve6dDtRrnjLUUg/ikD3M0GvYF
- bx2Zr0UaBBVgzHsVBaMxpauqmCTk9k+UZPTWULRjLXzw5ur9UyhBXPsMD1fg3iDDwYk=
-X-Gm-Gg: AZuq6aJi4QhrEIsdhcSNfCEGYx6n9e6GYUucQhcCFIpelAAWcXegf37loIe0e+TtHyX
- 3bx3L0vpyP9DJtrO6G+jIvo7U2kwux/djjY+1p3iPUNsUHO6p7391+yVTgDXScPRBx+avwJ9cd7
- 22dbUG1s0EXLcD1VeR6GBNkw7xoS63GY6vzHa68uvC1dpW7VZPkHvsliUHd6PRKMlvfGkzSOBzr
- v4chciXmF1qlKYQ4LWY3VhMdlHwIpOyY5BJrapv51np2dfxyAwaGbOO48NubQf0OlhPS/79SkJj
- vgvZ6dh9tFPUBt94DLQubfMMFJytQux7x4GwxXdt0g9EYMkKnLS6M1l3jVhETLpwoUHwzI4t1zm
- uZDo5N9F4FePAz+5QIgigBdjfxuo/VlVLs4Qf3zE34fI5CttaEr5W9kDBL5BJnNqDQe6NGJRJrA
- ytM2JZM7WUZBZ8/B8HXqWsBtlAXkFbTU63TDkCbF2FuM3Ayrc/16WW/nex1t/d27UkZ5Fvgt69S
- FzUIds9Kq4xifFs0wqiooZ8/qdhIdLTolGA2RbK0PCHvRq6uCg=
-X-Received: by 2002:a05:6808:d52:b0:45c:9a62:91fc with SMTP id
- 5614622812f47-46410d601aamr2996465b6e.67.1771514971849; 
- Thu, 19 Feb 2026 07:29:31 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a7720a95sm19742243a34.29.2026.02.19.07.29.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 07:29:31 -0800 (PST)
-Date: Thu, 19 Feb 2026 09:29:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>,
- Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand
- FIT loading
-Message-ID: <20260219152927.GK3233182@bill-the-cat>
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <20260217181358.GE2747538@bill-the-cat>
- <aZTBQykqCt7H8H4W@makrotopia.org>
- <20260217193534.GI2747538@bill-the-cat>
- <aZTYk8E6r4S5zo_Z@makrotopia.org>
- <20260217211853.GJ2747538@bill-the-cat>
- <aZTqyRfqYe1iJ9EY@makrotopia.org>
- <20260218155839.GC3233182@bill-the-cat>
- <aZX2APcJvmU4XSIy@makrotopia.org> <aZZGgCp4WqCLoSLs@makrotopia.org>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wNdSOCga7ahO7MlECZtqV3i/ws5wD8E5oropUzsQeWY51tbTFKxAA7ABMOQKd+GU248HpJAX+O/GF/ksqu6ZSIaUJqrIk8nnZXAJws5aWnAaHSidBnIoAaadtoV2601sL6t8kqT6s76i9mXDdv8RS/fJL9yPo8Gj6L0IfjrqxgQJg8tRfdYc1pfv/GSm96lhKSZTzbcxLfeUTxHzHhNFaH+3Va6Nx+fvnClIlaP9l3eugO5te1QWzVKPZTFd5jsG0vZMHPrT9KsRmWT3v2Ni3c0h8uUtAzk0hIhTdcakKFkcWeTnM6CK8Phnw4MRkzOP5wdLJ/wRbTwtdiuAIAoVXA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NO/nB0EQQCNhhdGdwKDbwUK42S6rtZAc+gI3ue9U4U4=;
+ b=fl8YeNSxbAsCseNhDtFdPSO2OgY6iYde5yNwgscVXXfpUP0IdOi02mSUDpQS9OuJ24jKKFDW2o5D2WrK8k+Rx7KdS31rW1BWG0ArEn6W8Cgf50EE+AAAXVfX51rU8fzHpc1yNLYw8AJtgIBQWH0gTdX9dwwwm+rHwzp0yoa+Z5EDnGMJPTXl118K3aDuj3J2T1EbVjJb3YRNA7YVsHr+663o0nLfTtuiBstKMIOBhJuEi53fz19h2zWpOdsvQnbSPsPIt7bdV1eDTaQs6PR1Dt2mMJjuwM+qxFeDN76pfsgRDeGBOdrf2kVKxcw9zHgd/kgY5QXbdQ0Xxdhak2AGkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NO/nB0EQQCNhhdGdwKDbwUK42S6rtZAc+gI3ue9U4U4=;
+ b=sUKZhFX+KV5let9YYzkdjiPSyl/na5+4FVCKd4dxLpGL+CZVH7iEXXFW7g6VAWzq7FWmeVq7lSl3WayizMqasroEawWTiM1CI207enIfTwelcQffPz/LeFlF2ZfHYvbx74LkvqorWXArOrk9xT1R9OCb8NBEZ3g0kTvRTc0aXDqApILQ6/Snb37J95RH8XB36Zoqu8m/uswJ23Xh4LbOOn94HRAcxMlv4uiFMqj/r0pY+eiWC5pg7uY8T7bZKxAbjzRA32YB30NkpvQo6veV2lKKhDf/GdGaRAcPINPhfuuVFEKNVWG/tX6GVzD/peugGxt0BDB0DngSmK+CLpMY8g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by MATP195MB3339.EURP195.PROD.OUTLOOK.COM (2603:10a6:250:4d::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Thu, 19 Feb
+ 2026 16:07:58 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::295f:9a59:b66a:621a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::295f:9a59:b66a:621a%6]) with mapi id 15.20.9632.010; Thu, 19 Feb 2026
+ 16:07:58 +0000
+Message-ID: <ca9672e8-12de-4545-918d-79f3b171e863@phytec.de>
+Date: Thu, 19 Feb 2026 18:07:24 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] board: ti: am62 family: Sync rm-cfg and tifs-rm-cfg
+ with TIFS firmware
+To: Sparsh Kumar <sparsh-kumar@ti.com>, Tom Rini <trini@konsulko.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ u-boot@lists.denx.de
+Cc: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Sebin Francis <sebin.francis@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
+ Akashdeep Kaur <a-kaur@ti.com>
+References: <20260219115837.965532-1-sparsh-kumar@ti.com>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20260219115837.965532-1-sparsh-kumar@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P190CA0028.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:802:2b::41) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RGTZwHbSkx4TOt/T"
-Content-Disposition: inline
-In-Reply-To: <aZZGgCp4WqCLoSLs@makrotopia.org>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Thu, 19 Feb 2026 16:57:37 +0100
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|MATP195MB3339:EE_
+X-MS-Office365-Filtering-Correlation-Id: 60657680-c8b2-4774-1ad5-08de6fd10cc2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VWRjWjFGc21hK1p2UWo1cENkbk95dGFIVFNaRGQvbDhlbG5mR1dzU3Bpdnow?=
+ =?utf-8?B?MHFUVnhkSzM4ZnRoUTZxR2tHZ0N2VjE1bWhmVnJtZjk5TWt1UHVncSsvQTVm?=
+ =?utf-8?B?Vy9NRHJMOW9neUpIdVRoUmJxcVJNZGZBOVlrOTRYQ05xMlJjdCsvZFRzNWtG?=
+ =?utf-8?B?VUZEd3ljb2MwK2dYRC8vdk8wTy9tREgyT0ZyS0tLY3A4aWV6c2MrL1BpaDdK?=
+ =?utf-8?B?Q0hOQ0haYmRpL080eUdGdVNsQkhtQ2pnN29PTUNaTDc0M09HdmRWb29Vc1Zo?=
+ =?utf-8?B?M0NKVGV4RWVuZy9sUll2WXpvYk9UQTFINFNVdUI5eXYxNUJTTDZEZmpMeG9O?=
+ =?utf-8?B?MHVPbjhReEhFUy9Cb09kK296NHdZWWtlT3RMQSthYWlndFduckQrUyt1eU8y?=
+ =?utf-8?B?SVZRZnNucmpDQjBSMC9Gc0VjNHdiZDRnMzdWbkhranY4V1B4dENDcWdZa3BJ?=
+ =?utf-8?B?NnpzU2lLMGdNR1JFMGRWT0NOalBLQ0NIVDV0S3FMRjRqZ3A5azdESEM0aThC?=
+ =?utf-8?B?YlJDbTZLZitQcFRHOGZSSHBuOTVvVGFKNGpNaUoxS04wY1FsdWIrUnNuaHdp?=
+ =?utf-8?B?dUI4K3h3a0w5L3kyV05NU280ZDlKVTVpTEhqOGtaNTJLTVRmVWNoREMwRENq?=
+ =?utf-8?B?Vm1VdGdPdGZINDdPUnpJYXB4S3MybmJmbEtFcVpJKy8wZTRSVktUY2JaR1E4?=
+ =?utf-8?B?dVVSbVBqeHBtTEE0b2NsSmxMbVNsWTFSQlg5ZW9BckdlY2FYc1pLK1VndWZm?=
+ =?utf-8?B?amRFUHNzbzYwSHNlbFBHSmdnU1dWWUordDREbVhKZXdmemJlQ2d0Und6Z2kr?=
+ =?utf-8?B?MUprb2VsWG5Jd3VaQVdqa0xJTyt6MmlheEVtVzJsc0lyYXl6OElFZzNRekoz?=
+ =?utf-8?B?NHkwVERrZnRHREdOVjRFTisxR3dNT05LRDFSQ3ZsK0hjMjFTNkhXWktGSTZ0?=
+ =?utf-8?B?bzB1Tk5HNjRyQ1BJaGJLY05oVDN1Q2NJMENIR2lOMmpydWVGZU5TaXBXeWtU?=
+ =?utf-8?B?QWxJMThoQlhwSzl2a3pUclYrKzV1RFZ3aXpzekdyNnMxR2NWUFhkVUlMK3JL?=
+ =?utf-8?B?NU1nYk1EbjljUkx5RWYwb2N5RzZEcFFGYU9DT3NaMElQZjlsWWV1VnJGMGYz?=
+ =?utf-8?B?VnJzSDdNZ2gyM0hRSlVpbGVYbDM2TTM0MFAydE1wdk1VYjJYd3d2RTNLaUto?=
+ =?utf-8?B?ZS9UamxvTG9KWDg4TFpqM0J1RGFzaVZFQWMyL1FHKy9oZVYySmFaTGhLajdS?=
+ =?utf-8?B?VkI1N3JVL3hJTzUyTnFacjZOdzVHN0hPNVd3d3pWSFBTcU15R0dsV2hpVG1h?=
+ =?utf-8?B?cGZsa2hyclhXWDY0TmZUc0hsT2dFdnMzQWZXSm1DY1RtZG9LRWthT3FWRk1x?=
+ =?utf-8?B?c05JZUhwLzdWeTB3eHpyaVhkV3JBSjAwb1hFTThvRElWd0phRlkrVzdKMnFu?=
+ =?utf-8?B?Szd0WlRUZzVGQm9hNktKc3A5a2F0enRaV0lmdHNGLytpdURQd2Q1NklVMFhk?=
+ =?utf-8?B?YzBIV1lMZSs3VW5BMWdCcURrQnpRdldrVGlILytHWU16WVNMbFoyWnRRVTVl?=
+ =?utf-8?B?UENYdDN5N3ZDeGd2OSs1VUhFdzNuRjhoYmV0Ump6YWU5bWoyd0xsM0tXWjdk?=
+ =?utf-8?B?WVROTkZJQ0p1Wm9Vcnp1TVhrRWRoNUpuLzBWRURvRFlwRG8zaEYrdTlDY3g2?=
+ =?utf-8?B?OFRiekQ4OWFPNkJnN2FYS0xUenEzc2RvL2FZazNXRzVKMC92NVBKWEo4VVNO?=
+ =?utf-8?B?L3ZSK3JYWG1SL256Q1RyN09KaXFHd1JhVjB4ZHRndFlyUmprVlJrKzkyMlhD?=
+ =?utf-8?B?amkvdHoweEJOdVlFazhCRGFBL3JSRi9YV0U3ZlgzRnBxZjIzWXJieWV5RUpY?=
+ =?utf-8?B?c0FQU2t0T1ZFOFVNRHZQQVVTaVpYRGF5WGpjVHEyTDdCTTByRG8veWh0TWk0?=
+ =?utf-8?B?bWtRaHNvSndaN3BCWVVkd2JxaXI4U3F5YmRPNnoyekk5c2hvTHQ2ZjVWSFBy?=
+ =?utf-8?B?NExJUlVQR21BVVJFczQwcWJVWG1nd3ZZdm9tV3pwR3ozeXpiWktmUVNMZU9x?=
+ =?utf-8?B?TlpqYkkzSTR0eGZYdmxiVFdxZDNqRVhuZU5EUnU5L0szWTNjckMxaUZ4Y0kx?=
+ =?utf-8?Q?UYjI=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WEQvSmx2WDNqdkxQakd6QjVHakU0SnFmNXJYSklEQ2JNRHRNSUp1VnZYMHNV?=
+ =?utf-8?B?ZStZUTgxdjM3YmZVYm81TUxleVhiTERiQ3Vic2VvQ0FPQzlvUHRNcVdXckQx?=
+ =?utf-8?B?Z3VnSTdIM2x6SGpjSi8vcWJlU1NFZFBlaHNqcGF1d3laN3VhcERYTW5CUmRQ?=
+ =?utf-8?B?YUsyL3Aybk9vcEtyRWJXY2pFUzgzSVBhcFFnQlJEUmZHekowYko0c3BmZjY5?=
+ =?utf-8?B?V0lWVVlyUWV3WHcweTJUOTFsVllTSnNkMVJidzQ3RG9QYi9IZGc4Um1Odm5h?=
+ =?utf-8?B?SDBXTWJEWWc2clhrRXZFa3ZMdnpYeFpjTHlCdENqdmdST2Y5d3d3Uk9kZ215?=
+ =?utf-8?B?WEpJOUFJTnpNQTh0TmVHNk5nUnIyL1AvcUIvUUhNR3ZGRTJsR3VLUFJJYUVa?=
+ =?utf-8?B?UWtrZTJ5M1BGT2Rvcm9TbVYyUFJBNkFkRWFObkF4NlJBb1MrVDlmWjZJdFpI?=
+ =?utf-8?B?eFlseVlrcFg2aXFiVW5NZnB5cmVhMUpWZEFqRkJQQVo2M0hTOGxXQkpEYWtC?=
+ =?utf-8?B?N25sL1l6K2FDbDFKbHZ0S0pVUjgyODZIaXVndUdEcDBvaDZJM1ZLY2NsOVlj?=
+ =?utf-8?B?SnMwQ1I3cUR0NHFZV1pmL2VhSTNiNzVaV2UzREJnOUE3eUZZQnVZaTFtVWlE?=
+ =?utf-8?B?Ynh6ekhPckRqb3BTVUd1UHVkT3p3Um9wb1JPaG1zQXFjOTRXbU45WVZOZlBB?=
+ =?utf-8?B?RmpVdU81cENQblR6cEhYQWNjaTl1MzN1R3NQNll2SC9PT1ZKTTdFVFI5Z2dC?=
+ =?utf-8?B?MFdEVXFxRkEwUUlwTnB2bTlKaVVDWVVoeEpQSmM5VlB6ZWRkT2VXR0swaFd1?=
+ =?utf-8?B?WE9mcFJVRGgyYm5WZ0NlOTdDZWtja1VOZlpwQUwzS09zTWE4eW1xMkw3RVZz?=
+ =?utf-8?B?aXU5NndFT2dyWXpSVlB2bENLMUpkenRLZzh0d2RZZVlNa0Zka3NzNnZjTnRy?=
+ =?utf-8?B?QnhjY1Jab2VKMk5rdFNtay9CQThHL214QUFmMVZQVlJCdG5kTUxjN0tzM0h1?=
+ =?utf-8?B?TU5sTWFFSExiTE1WYTZYRVRHRWplQkZrbW0zQTdMaDJRV3c4RkhyWVZYeUpF?=
+ =?utf-8?B?ZENkMDFBblBiQU9sVnliUW5qaDFxQkswNEpabmdPcnNIR1FBdEZ3cGFvank5?=
+ =?utf-8?B?S3ZMWUhsRDRlelVBWmYxaDUrVVRkQm9GTlh0ek02V1dBeXFWcTdoNXRIWGJ4?=
+ =?utf-8?B?NXJmOEJNbTRTQnZ2UjdUVFJ0V0V4NTQ5OXlUcXpsdEMzb3Y0MXdLZmF6Nnhm?=
+ =?utf-8?B?dWVUZ3ZtdUlCWGFlcklVK3N4WUpCbGlRKytHMmdWWGhFNlVQeENQamZzc2Nw?=
+ =?utf-8?B?UnZSdjczSlZmWndIR3Q1a1FleEEzUTJoWVdqcGdYczdMd3RQMjdDa1NENHpy?=
+ =?utf-8?B?T2diRUFZSk0yRGtCYmQ3TWtab1NoU3A5R3RreC9NVkxHUElBdjZaZit6bUd4?=
+ =?utf-8?B?Z1hQYWxaTERTMlExbGY1dHpzL3JZdm9UTUgrY0QzS1c1dmNKeGlaSVhGSUwx?=
+ =?utf-8?B?L2hHSWhJZHBxU1J5UW40d3Y3ZGQ0S0RscHBJbGQ2QXhHazBaYXFvYXY1OXJX?=
+ =?utf-8?B?eFZvUzVCUTFxM0lHOVFBUjRSOENuMElHNXppZmlacFQycmw5YmhZK295ZzNL?=
+ =?utf-8?B?ZUVJWEh1c0NyajhVek8rOStEYlRFN2ZMdWQyOVNVUnZvN0dpYmlZSEZiVG9V?=
+ =?utf-8?B?K0w3bGRKVCtDall3dk5JWGV0NjFRdmRRbkVIeURXNnhDSytjS2xlU3NlRHVy?=
+ =?utf-8?B?NDRVanhhbkN2VEZ2MDVHYlA0Qisrdm5Kd09hdFg1cjFYeEZSWXZzWUJzbitl?=
+ =?utf-8?B?T09wZnBoQWhEbTF1MWQ3N3YwK0l2ZEp5VXFXMTFyL1VOejJPcDhIa2ZtdS9p?=
+ =?utf-8?B?TEJEN0ROWGRZWWFYdXQzMUFOK0xnZ0VHMG03TmcxQTJ1V3lTY1RxUUFSWi9v?=
+ =?utf-8?B?eVpxZy9jSmtEMTJyWlFnMndSMi81bDhUUDJLaStWZUJHTFE3b1NkbktUWFgx?=
+ =?utf-8?B?ZXh3WldkWlJOeUkwamd2YlJ1QzB3LzY0RFFJOU9ldzlBZU0yVWJnWkFFU2R1?=
+ =?utf-8?B?VXlJTFc0MnlNam9ZUnNGa1hUMHBXT0g3ZytadnZpMU8yRng4SzZoMFhpSW5i?=
+ =?utf-8?B?RjdqZm9CK25xbTgzWGJmb0U4NTR0bGtkbExZMDJSaExnL0VQUzJLcnFhVnAr?=
+ =?utf-8?B?eTRxdm82UEdVamxWbU4wc0QxWUhPZ0RCNUlOd2ZUSFoxSDUyM2NLdFhYV2Ur?=
+ =?utf-8?B?U3dIZEJSVE56aVVyMy9OemZTY3ZTQS9UbXZpbnFTZjFDWnFxaUd3SkdHSnFk?=
+ =?utf-8?B?OFZuV3M1bHZLUHF3S24zYUxmdndDeWdacjhsVUV4QXhyaDk4M3p1QT09?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 60657680-c8b2-4774-1ad5-08de6fd10cc2
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 16:07:58.7450 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: MiP/6DiAXq1ptNMrBag7SgrWWGzvRUtg9g9vWsK6V9DiHz8UybBOQGNsJzMYtZTaDrfzi540ynJGCe1ZzJc/YQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MATP195MB3339
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,106 +184,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sparsh,
 
---RGTZwHbSkx4TOt/T
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2/19/26 1:58 PM, Sparsh Kumar wrote:
+> This patch series updates the Resource Management (RM) configuration
+> files for the AM62 family of devices (am62x, am62ax, am62px) to align
+> with the latest TIFS firmware changes.
 
-On Wed, Feb 18, 2026 at 11:08:48PM +0000, Daniel Golle wrote:
-> On Wed, Feb 18, 2026 at 05:25:29PM +0000, Daniel Golle wrote:
-> > On Wed, Feb 18, 2026 at 09:58:39AM -0600, Tom Rini wrote:
-> > > On Tue, Feb 17, 2026 at 10:25:13PM +0000, Daniel Golle wrote:
-> > > > [...]
-> > > > As the existing code expects the whole image to reside in RAM and o=
-nly
-> > > > take care of validation, decompression and relocation, I had to ext=
-end
-> > > > image-fit.c to use the image_loader to only load the parts *from
-> > > > storage* which are actually needed, and if possible, load them dire=
-ctly
-> > > > to where they are supposed to go. Imho, the code is simple enough to
-> > > > just look at it:
-> > > >=20
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/ab7837536e4567b90d=
-7cb662984dd7e637ef4361.1771275704.git.daniel@makrotopia.org/
-> > > >=20
-> > > > At this stage (because I first wanted to discuss the general approa=
-ch)
-> > > > the patch still skips some parts of image-fit.c, which is obviously=
- not
-> > > > acceptable for upstream inclusion, but good enough to demonstrate t=
-he
-> > > > idea and also try it in practise.
-> > > >=20
-> > > > Ie. the 'goto storage_loaded' has to go away and all of image-fit.c=
- has
-> > > > to be changed to equally work on RAM-backed or storage-backed image=
-s.
-> > >=20
-> > > I was talking with Marek to recall some of the details about what we =
-can
-> > > and can't (easily..) do today with external data and he remidned me of
-> > > something. So one big concern here is that we have to be care to not
-> > > re-open things like:
-> > > https://nvd.nist.gov/vuln/detail/CVE-2023-39902
-> > > or otherwise allow for mix-and-match type attacks by having some sort=
- of
-> > > partial reads allowed.
-> > >=20
-> > > So a specialized partial-read of FIT images, in full U-Boot (not just
-> > > SPL), is something to figure out, but may also invalidate one of your
-> > > design goals because you do have to authenticate the whole image, unl=
-ess
-> > > there's something both secure and clever I'm missing.
-> >=20
-> > The idea here is to have one or more IH_TYPE_FILESYSTEM subimages which
-> > do not have hash-* subnodes at all, hence, if there is anyway nothing to
-> > validate and they do not need to be loaded to RAM (ie. no load address),
-> > they can be skipped entirely, even if listed as 'loadable' (which is how
-> > the parser in the kernel currently knows which filesystem image to map;
-> > we could introduce a new property different from 'loadables', of course=
-).
-> > Everything else which is part of the selected configuration node of
-> > course has to be loaded and authenticated.
->=20
-> Thinking about this a bit more I think that it would still be good
-> to have a way to validate the whole image also within U-Boot, but
-> add a way to mark the image as "no need to authenticate at boot" using
-> a new property in ITS, eg. containing the dm-vierty root hash which is
-> passed on to Linux via cmdline.
-> This would have the advantage that U-Boot can still authenticate the
-> whole image because hash-* and sign-* nodes are, eg. when loading it via =
-TFTP and before writing it flash
-> during firmware recovery.
->=20
-> What do you think?
->=20
-> Do you agree that having 'dm-verity-root-hash =3D "....."' in addition to
-> the existing 'hash-*' and/or 'signature-*' properties would be a good
-> idea, and that then allowing to skip authenticating that specific
-> subimage at boot (but not in other cases, eg. 'iminfo' should still
-> always authenticate the whole image).
+I guess we have to update all non TI boards aswell?
 
-It's a question that requires a bit of thought. As part of the thing is
-that we have to validate the FIT as a whole (excluding external data)
-before we can move on to working with the contents of the FIT. After
-that, what is stored in the config nodes and so forth is a separate
-question, and at-rest security provides its own challenges that also
-depend on what the hardware can/can't provide for us too.
+> 
+> Background:
+> -----------
+> With the latest TIFS firmware, an additional virtual interrupt and event
+> is reserved for MCU cores to DM usage. This series brings the rm-cfg and
+> tifs-rm-cfg files in sync with these firmware changes.
+> 
+> Additionally, the am62x platform was originally introduced without a
+> tifs-rm-cfg.yaml file, unlike other platforms in the AM62 family. This
+> series addresses that gap.
 
---=20
-Tom
+Is there a specific TIFS version we need to use with the changes you are 
+introducing here? Your other patches mentioning 11.02.09.
 
---RGTZwHbSkx4TOt/T
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
+Wadim
 
------BEGIN PGP SIGNATURE-----
+> 
+> Dependencies:
+> -------------
+> This series depends on the following patch for am62ax tifs-rm-cfg updates:
+>    https://lore.kernel.org/u-boot/20260130143339.1401600-1-p-bhagat@ti.com/
+> 
+> That patch adds C7x core resource allocations to am62ax tifs-rm-cfg:
+> - Shared split BCDMA tx/rx channels between DM R5 and C7x
+> - Shared rings for split BCDMA tx/rx channels
+> - Global events and virtual interrupts for C7x
+> 
+> ---
+> 
+> Sparsh Kumar (4):
+>    board: ti: rm-cfg: Update rm-cfg to reflect new resource reservation
+>    board: ti: am62px: tifs-rm-cfg: Sync tifs-rm-cfg with TIFS firmware
+>      updates
+>    board: ti: am62x: tifs-rm-cfg: Add the missing tifs-rm-cfg:
+>    arm: dts: k3: am62x/am62px: Enable tifs-rm-cfg in binman
+> 
+>   arch/arm/dts/k3-am625-sk-binman.dtsi |    4 +
+>   arch/arm/dts/k3-am62p-sk-binman.dtsi |    4 +
+>   board/ti/am62ax/rm-cfg.yaml          |    8 +-
+>   board/ti/am62px/rm-cfg.yaml          |    4 +-
+>   board/ti/am62px/tifs-rm-cfg.yaml     | 1476 +++++++++++++-------------
+>   board/ti/am62x/rm-cfg.yaml           |    6 +-
+>   board/ti/am62x/tifs-rm-cfg.yaml      |  867 +++++++++++++++
+>   7 files changed, 1646 insertions(+), 723 deletions(-)
+>   create mode 100644 board/ti/am62x/tifs-rm-cfg.yaml
+> 
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZcsVAAKCRAr4qD1Cr/k
-ChCrAQCvuptlrXr4MBaWXbWLo3Z5mL/sxwkwmGGVcdgqEPhGDQD+OkQ5lCAPETF2
-0FJ4yTGzcWmCTuqEfuVXwOl3R6xNYAA=
-=6yYW
------END PGP SIGNATURE-----
-
---RGTZwHbSkx4TOt/T--
