@@ -4,148 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABAB6E9A04D
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:38:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DB69E9A04A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:38:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27B5A83F1F;
+	by phobos.denx.de (Postfix) with ESMTP id 8E36C83F2A;
 	Thu, 19 Feb 2026 14:37:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vqF4pvZn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZT5IZxN/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40BC083AC5; Thu, 19 Feb 2026 12:59:30 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 93A8683A47; Thu, 19 Feb 2026 13:13:29 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32BCE83936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:59:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C44182A9E
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 13:13:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sparsh-kumar@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ww4rYRUQdgfQ3gkG0/Ys07lK0heOeOL3Z/mZWtrHYAoDVEdBgIB8DxIKa7STwIkt1707v09hjZIk0nu0bdu4qS8JB5f8kPP3c01gFwMYveRIYLDdmKIonCnmTvL5QuUUZKJP9d9B5YAKvya0+XAMw1BK+TPBuyqFcsbU/fMgn/gfBXWttHns1nrF2ZWH43srtZoZl6gcpQZ7IFV2+8/2xzm8GqBo+C0f1aNXo5MW7s+gn6P/lmxO3vHoeCnYp6L8Bi76M1ONsyOdUzebjrK7RIaO2XUT3oyzlYouft+ppVad9VtfkTnP01uh2kHdtmW6hJxD6p8BpMnVajmFZlS5TQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2Ck4b3JTkZ+EetHndcmluMBlBMXzVf0qusWGTupZYgE=;
- b=rmcaQDfW35IJYIciudLkQj3uaYlPA0ko23KS7Afg+EtcPql+VmICJwKpcszOmKriApuVKl3NJ4CxaVxNgjP1GFRqBR94vvIRT9awQCDU5velC1q9TThdXN+VaNlrM7M1eEgQBnuh6Ilm1SiTBpycxk25kYYuQzNpKsbTwJqecagGgQk0lFPIxK9ju+uLhsBHksd9TEEMMrI+GbqCn1vX3/6Y9HDGgXpihFSL2NzB6FD7Cq0qbT04L2qzsCcqgandNafj4jkWHRIl8ihVzKjpJm3e3gcwCzZubaC3cKDI5qZLZd6HqReLmArlg49IFNrq04nl+1NNSvR2bCL9cNl0sA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2Ck4b3JTkZ+EetHndcmluMBlBMXzVf0qusWGTupZYgE=;
- b=vqF4pvZn5byEaxhtFPgBNcy+rwRWPpogdzwMbM/dH4Fti1oACgcozYiu1RwmffbY290wQ/elB9xh6Sw/fAJidT5nBcNN+MYAIy5L2Uxi+17DfAi1tuBE0XKbPV9EL/ua/lBGwpx5au4NsPtRoGcKSVKpBOPP8hYcH/ORsm7EgVc=
-Received: from CH2PR11CA0010.namprd11.prod.outlook.com (2603:10b6:610:54::20)
- by SN7PR10MB6476.namprd10.prod.outlook.com (2603:10b6:806:2a3::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.13; Thu, 19 Feb
- 2026 11:59:24 +0000
-Received: from CH3PEPF0000000C.namprd04.prod.outlook.com
- (2603:10b6:610:54:cafe::6e) by CH2PR11CA0010.outlook.office365.com
- (2603:10b6:610:54::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.16 via Frontend Transport; Thu,
- 19 Feb 2026 11:59:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- CH3PEPF0000000C.mail.protection.outlook.com (10.167.244.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 11:59:22 +0000
-Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
- 2026 05:59:22 -0600
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
- 2026 05:59:22 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 19 Feb 2026 05:59:22 -0600
-Received: from uda0510137.dhcp.ti.com (uda0510137.dhcp.ti.com [172.24.233.216])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61JBx59x2535407;
- Thu, 19 Feb 2026 05:59:19 -0600
-From: Sparsh Kumar <sparsh-kumar@ti.com>
-To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Bryan Brattlof <bb@ti.com>, <u-boot@lists.denx.de>
-CC: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, "Sebin
- Francis" <sebin.francis@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
- "Akashdeep Kaur" <a-kaur@ti.com>, Sparsh Kumar <sparsh-kumar@ti.com>
-Subject: [PATCH 4/4] arm: dts: k3: am62x/am62px: Enable tifs-rm-cfg in binman
-Date: Thu, 19 Feb 2026 17:28:37 +0530
-Message-ID: <20260219115837.965532-5-sparsh-kumar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260219115837.965532-1-sparsh-kumar@ti.com>
-References: <20260219115837.965532-1-sparsh-kumar@ti.com>
+ spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-4362507f396so930283f8f.0
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 04:13:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1771503206; x=1772108006; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Jls7aeWU9Cty/KoowWUKVX9UY0JBq8H/U2kjWu9XfsY=;
+ b=ZT5IZxN//eec6s8uwDSWnxr4ljH0GuteDXBmH9lYEjQYDdQNuUAwIWlJSCv3UgcY9G
+ 1gpqYK8jdqbJe53XJ+vs55HCS3X/tXeJdqQRn/g0BCTYSxzBRvkIoq8hw/D5u+4P6yYo
+ dnCn1axwGUoSPg6J6WxgBqP0CAUODV73VIL4HNcpOQ2ekyTnN+SWW93DQU2hAZjlQjkh
+ 1ClxmkOlIYgzGbdzb9s2qBuSchsp7sGgZwvXLQSD93FTZu2KIGpLKuo1c0tqhcpWx7yH
+ +x08mk7+apb9ErZGjzZnfWXqvaCH8ertE7/3Ku9Qrzks+yeeRUzooxGP3wDls4HSXrFP
+ AYpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771503206; x=1772108006;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Jls7aeWU9Cty/KoowWUKVX9UY0JBq8H/U2kjWu9XfsY=;
+ b=tqj+hKPPqkjLIYrU/odMjvQtRIvC5NBG6hjj2pB+O7K1a/0R7cy108eXctpFa9KBpt
+ yJ917stIeiQWuCwfUFulRVtMfDcsK05IMm1n9ZJ9qKvkZ821bMAufcVDt6InD0j6Yw09
+ ceY6puASAt4TTk8zw0AX93zB1N5QchBhLRhCue2k8jiKl6PlcJWa2c3JYF8PiLzIuT/C
+ y9F764fjv26WsqI5atroRunAdB6ClHgONeFWy5PkdCD67HAYvF+Q/rs7ebZQIubeUQPg
+ Qz0AaSEegozybUrjvLtPxwmNaTL6CXcZuOsBXc2A7hxFW5zKGc5zd56+4a+uwjTQmZh9
+ AjyA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXC8Dvjj1xtYATCSei5YzmQJydikQZl2Y+Dyo1OPS6KXfJ6eLF03rXFmULG0uEwoy8UfIAgSgM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhXNulA8XQ8AzkXMySsuqjmfxwYoZ2s55fKngyLWBWFT74DOPH
+ vHs/GcAJswRX7Q/gLguBs3PQYEFk34c8roppNMP0vyaGU522XV8kbdtFDbsrn5wXFn8=
+X-Gm-Gg: AZuq6aKFU/ICbQjEJ//xkdEO1RCeftIWxuvMkLq3pJVuI+SfFA7ePFZ+WkGHS7MSFDh
+ exR7M5Jr5XicGtMlOUfDRAYfom9DLKWknpw06UYC6HDgaTcIXJT0bdx469gEZgIuErYdLuTX/Jc
+ qSb8lobjRtLeWBwd1iktBNAKvZ0nuJsB4bwJxCTghchJZ0b2ULcBXF9MkbNWlkpb1xcGhah5W0m
+ o3lnrr129jrTu9lYT9LCQCCl1Kyft/eSgQnJJmvqYLwD24oivJkdnkg9HpY5RWjcLUCJQ4RBRBO
+ 075o7dwnR0THlVu5Tv1+f+GiBVK5l15zJlm2LZbBKVXf5xtH6JGYAmhkZbpRaXCsWeK0me2usKN
+ qeDOBvR7GrsQmN6Hjvkt4jl7qR56DXrSCwygToTa8J/I27fGAqmZGZriG29PsyFE2zC+5NdkSut
+ 0SPFU3G+mQ+4D4+ghqPdg/PXXci3aOcAAE
+X-Received: by 2002:a05:6000:40cd:b0:437:712a:fab5 with SMTP id
+ ffacd0b85a97d-43958e4048dmr9595668f8f.35.1771503206328; 
+ Thu, 19 Feb 2026 04:13:26 -0800 (PST)
+Received: from [10.11.12.108] ([79.115.63.134])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43796a6a5e5sm46085119f8f.9.2026.02.19.04.13.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Feb 2026 04:13:26 -0800 (PST)
+Message-ID: <46b5a69c-f589-4c4e-99e8-6bf0c41be573@linaro.org>
+Date: Thu, 19 Feb 2026 14:13:24 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFH] SPI and SPI-NOR patch help
+To: Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>, 
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Cc: Michael Walle <mwalle@kernel.org>, Conor Dooley <conor@kernel.org>,
+ u-boot@lists.denx.de, Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>, Vaishnav Achath
+ <vaishnav.a@ti.com>, Prasad Kummari <prasad.kummari@amd.com>,
+ Pratyush Yadav <pratyush@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20260213164607.GI2747538@bill-the-cat>
+ <20260214-sternness-cling-4259916a8f73@spud>
+ <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
+ <20260216153110.GV2747538@bill-the-cat> <87bjhmv20f.fsf@bootlin.com>
+Content-Language: en-US
+From: Tudor Ambarus <tudor.ambarus@linaro.org>
+In-Reply-To: <87bjhmv20f.fsf@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF0000000C:EE_|SN7PR10MB6476:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5f75a696-96f3-4ae4-f783-08de6fae5268
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9x3ScvFY41U4N+HlfAxpqRGXla7Y/RfQlVBkexp33LzD56QZOIoUrFxaIHZH?=
- =?us-ascii?Q?QM1m023sXooDQ9spQqw6T7sUA/T/yLACN10zK1y9OO8PcqIsTdU0TzfD2VEz?=
- =?us-ascii?Q?HSnCEy2XN5wRglpEbtdPFGRWqXcyxlI8ptYlMlru9K8pF1gXukPtdILELfvw?=
- =?us-ascii?Q?mJvbOtkR4o3xDiW/flRFP/C20FBClaUWkekjRZHyTQiMJ8XnD5BbFcLYGDIP?=
- =?us-ascii?Q?vYC561ZVxpiUnkDObWPyRHUX6aF3ZErCR1UMspLubE0omJ1L+ofI7bXPBDRc?=
- =?us-ascii?Q?jaNa+eBluUjeHeY1Q9eKQTQ37TJq5Lk4xVGze5wpp5yZM4v3uQvCgpiEceKb?=
- =?us-ascii?Q?y3MCqBMAho6GCdjWeUtepPbVGbLg1TCkK6nWvhmkvBYvXfIJA7ONJqjqkLB7?=
- =?us-ascii?Q?aoTr0V+eW9a6wLovbBJay834kVku7c+ho9/hb3/Km3Ub7A+XHpZUMNzgdO+G?=
- =?us-ascii?Q?vUZTWAZe0Tpylb4pkt/i3aFmh2SQILsQdzQWWyx4d5YUVJOGY5QKrd4Splxi?=
- =?us-ascii?Q?kq/eU3Bvydy9VoNRHwqFkukpKUU3caTAZ8WvcwAl0qbH8/IpvTD/kXg1zcX2?=
- =?us-ascii?Q?FJ3Hhop7aI2Y2UWmEgFIUqAsiE5Sg150amTH5A0vlNvs6W4lOGC2k96V/qS/?=
- =?us-ascii?Q?wkfY8QgxxnA+Dfo/EaS/9+vZEkGKKMoZVxzJDf0RHC0tn5+FA6N8ITzTqjXZ?=
- =?us-ascii?Q?nyssSw5SvgFVZ4rHjGlb7p/KmZp+ZEqMA4EIJrybio8PoB51Y2DUWdAay92+?=
- =?us-ascii?Q?SZKwR5wgpVuc7cMzCrdlz/9UywUW0DSAm0OLEcOYlU3dzlr6Dvi/l8OY58UY?=
- =?us-ascii?Q?qAjrJWMOM7VF6jkb3QjWX7g+Lp//i+B6kwrFHz7JDSKOsR1r+Rbzo56daR97?=
- =?us-ascii?Q?ljeXna3zz+8QE8YPJhiQ+8CrfBSsU32v33EjFQknvXNm9XW2EiIMxY2PEQhp?=
- =?us-ascii?Q?QcCaoYwDPBEUklymdWHLoxdF4IkVED7erSJkBULd9r7Umnp8qgVZvV/WnnMc?=
- =?us-ascii?Q?FNuZjodAYCQLL68KFNI7v5IES0y/BixjxNjazBunVJtVI/HiMgsVTMost3Dc?=
- =?us-ascii?Q?Y/OvOg0rFw7ES9JwKJiBJr1N1MkBJWEsyZJxLZnnul3O//BmdB/ej2IL+bQ9?=
- =?us-ascii?Q?Wg8dyXTzOQh18kfKz/R2LX6XKflG96vA/w12DOiuQNZtUDVtOG8dA4XBOVMX?=
- =?us-ascii?Q?4XBcF7kLY4ox/MVT7Fb9LXueXvkKmpbD+4e0gLS7EGPpRNqbUpAXiE6ucbyt?=
- =?us-ascii?Q?gmt2ZfF4eSKQGMlYk8aaHz85hvPtbr8oaPfJq0EZSxeSY6UGOHEfhsJOtFFY?=
- =?us-ascii?Q?iXp4FoWcRyKfMeFKeJLgF2uoEf6rWHLp+G6SlBR0fddI9m70YGkrVBmIvbGJ?=
- =?us-ascii?Q?RrAKguQHTvQI8Pgqbu9eJZHhR0orrpaUFGb9K2ktBcFKdLmYRywuAAWcFu6h?=
- =?us-ascii?Q?jo4HQGFtK4ZuL8ckh8rxbotZK6sVrBAOSunlEgNqJMG5oXgiWwZ+w3GGkFc2?=
- =?us-ascii?Q?rGNT+pw36uWeCZJ9N7IAc2c+Ln/oXiBOJkkLglFu4I5Mb+DuL0SaDJHOl4dp?=
- =?us-ascii?Q?IJyu+Zlnplud92F7ndQOQhMQO5JTEyPGIxPzZFMWQ9FrZHTs4Rka1pZosfJm?=
- =?us-ascii?Q?FRyABaKe9HUSjEwXFhVF+KMbsLTDb8EAkpDAAihxCM9b/bWqkJqxjRC+I3gJ?=
- =?us-ascii?Q?nxKmKA=3D=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 4wCmWk6GOo5sYkJNibFL++I1zSHqBDDacKmq9roDRZsItjh8V86DC4FCyRMFMt4tdjy2GAmv/kTWAO+/uCGSr71nBPEpLVRSGlfGSt+ukxwROawwhZt48nvc/915ii9oDw+IeUFnxs+ZDtu9tfakli5jMexFuO6Lj3vdpQ3r9nUVNNoXtmL2qBQNALQZ/x6QVWiT9svDYoyCcZt31tSKMwA7l8DOxHBAdBztAosiMAyMtLz0fMlsOa5HHJI/4uhNnM8blQv0rGCcw6Th5QniJvNyWxyxS/v7/ors4EBCGbvXvFW2TvYwjDVHYRxdfpaQFGk/6BNnWxPvOwX/GEn/EWg1UvglOiLAvvWh+MLQzmoc+oCCvnHRgJdqHgYif45R/M+yORCSVUDu1hvw45G4AgcpHgr9D7zD3v9rC6vmQ5dwJLnaE8g/+VAViVG0gcgq
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 11:59:22.9792 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f75a696-96f3-4ae4-f783-08de6fae5268
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF0000000C.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6476
 X-Mailman-Approved-At: Thu, 19 Feb 2026 14:37:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -163,55 +113,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add rcfg_yaml_tifs node override to use tifs-rm-cfg.yaml instead of
-the default rm-cfg.yaml for am625-sk and am62p-sk platforms.
+Hi,
 
-This enables binman to include the tifs-rm-cfg.yaml configuration
-when building tiboot3 images, bringing these platforms in line with
-other K3 devices like am62a-sk that already use tifs-rm-cfg.yaml.
++ Pratush,
++ Vignesh,
++ Marek,
 
-Related commits:
-- commit 551dab22ce68 ("board: ti: am62x: tifs-rm-cfg: Add the
-  missing tifs-rm-cfg:")
-- commit d0c9d1c2eaeb ("board: ti: am62px: tifs-rm-cfg: Sync
-  tifs-rm-cfg with TIFS firmware updates")
+On 2/18/26 11:23 AM, Miquel Raynal wrote:
+> Hello Tom,
+> 
+> On 16/02/2026 at 09:31:10 -06, Tom Rini <trini@konsulko.com> wrote:
+> 
+>> On Mon, Feb 16, 2026 at 09:21:55AM +0100, Michael Walle wrote:
+>>> On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
+>>>> On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
+>>>>> Hey all,
+>>>>>
+>>>>> To be blunt, U-Boot needs help with reviewing and maintaining the SPI
+>>>>> and SPI-NOR subsystems. We haven't had someone with time to actively
+>>>>> work in this area for some time. I'm going through the outstanding
+>>>>> changes now, but it also seems a common problem is that with respect to
+>>>>> device IDs, most of the new ones also aren't in the upstream Linux
+>>>>> Kernel. Is there some better and generic solution we're missing so that
+>>>>> we don't have large and often growing device ID tables? I'd rather not
+>>>>> make that problem worse, so I've rejected two of those types of updates
+>>>>> today and I'm just setting aside a large number of others.
+>>>>
+>>>> Dunno if your timing was cursed on sending this, but Tudor submitted his
+>>>> resignation from spi-nor maintainership in the kernel about 10 mins
+>>>> after.
+>>>> I think Michael Walle might be responsible for what you're talking about
+>>>> here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash driver"),
+>>>> but idk jack about spi-nor stuff.
+>>>
+>>> Yeah. Nowadays SPI-NOR flashes come with self describing tables,
+>>> which are already supported by u-boot, I think. The only change that
+>>> seems to be missing is the fallback to it if an id isn't found in
+>>> the flashdb. Only thing is, the SFDP doesn't describe all features,
+>>> most prominent example being locking. So if you need that, you'll
+>>> still need to have an entry per flash.
+>>>
+>>> In fact, in linux I'm planning to change to make it probe SFDP first
+>>> and then amend it with the flashdb information (if there is an
+>>> entry).
+>>
+>> Thanks for explaining. So in that U-Boot does have SFDP support, the
+>> first thing is platforms should likely be enabling that instead of just
+>> adding IDs, at least for basic support.
 
-Signed-off-by: Sparsh Kumar <sparsh-kumar@ti.com>
----
- arch/arm/dts/k3-am625-sk-binman.dtsi | 4 ++++
- arch/arm/dts/k3-am62p-sk-binman.dtsi | 4 ++++
- 2 files changed, 8 insertions(+)
+Right.
 
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index 8d6015e44a9..ba29a047406 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -7,6 +7,10 @@
- 
- #ifdef CONFIG_TARGET_AM625_R5_EVM
- 
-+&rcfg_yaml_tifs {
-+	config = "tifs-rm-cfg.yaml";
-+};
-+
- &binman {
- 	tiboot3-am62x-hs-evm.bin {
- 		filename = "tiboot3-am62x-hs-evm.bin";
-diff --git a/arch/arm/dts/k3-am62p-sk-binman.dtsi b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-index 603487341d2..cca56b76d69 100644
---- a/arch/arm/dts/k3-am62p-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62p-sk-binman.dtsi
-@@ -7,6 +7,10 @@
- 
- #if IS_ENABLED(CONFIG_TARGET_AM62P5_R5_EVM)
- 
-+&rcfg_yaml_tifs {
-+	config = "tifs-rm-cfg.yaml";
-+};
-+
- &binman {
- 	tiboot3-am62px-hs-fs-evm.bin {
- 		filename = "tiboot3-am62px-hs-fs-evm.bin";
--- 
-2.34.1
+SFDP is behind a config, because of size constraints I assume. And then we
+also have a tiny duplicate version of the driver for stricter size
+constraints. Are these size constraints defined somewhere? We need to know
+them in order to choose a direction. 
+
+Also, I'd argue that having the tiny version of the driver was ideal.
+Instead we should have tried to modularize SPI NOR, by SFDP, static
+initialization of flashes, manufacturer drivers.
+
+> 
+> Yes. There will be the need for IDs anyways, for those "extra" "non
+> sfdp" features, but that should reduce the load. For example, shall we
+> consider block protection in U-Boot or not? This is a useful feature,
+> but at the same time, do we really need it in a Bootloader? This is open
+> to discussion.
+
+If you have write capability in u-boot, having block protection is useful
+to avoid inadvertent writes.
+
+> 
+>> It still leaves us in a bad spot
+>> about having SPI and SPI-NOR stuff reviewed and maintained, but at least
+>> it's clearer in public now where it stands.
+
+Takahiro recently accepted becoming a designated reviewer for SPI NOR
+in Linux, and I think his expertise would be highly valuable in U-Boot
+as well. Takahiro, if you have the bandwidth, would you be open to
+becoming a designated reviewer here too? Or maybe see how things are
+going in Linux first? No pressure.
+
+Cheers,
+ta
+
+> 
+> I guess spi-mem and SPI NAND is also in this kind of situation, even
+> with the Amarula crew doing what they can to improve the situation.
+> 
+> Thanks,
+> Miquèl
 
