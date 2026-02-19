@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E5BE9A057
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 18:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6744EE9A05A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 18:45:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FAB083D77;
-	Thu, 19 Feb 2026 19:44:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5039D83DCB;
+	Thu, 19 Feb 2026 19:45:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2746083D77; Thu, 19 Feb 2026 19:44:55 +0100 (CET)
+ id 58A7D83E13; Thu, 19 Feb 2026 19:45:02 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E4F2183CEE
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:44:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id F18F883CEE
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:44:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D9D72339;
- Thu, 19 Feb 2026 10:44:45 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 045EB339;
+ Thu, 19 Feb 2026 10:44:53 -0800 (PST)
 Received: from debian (unknown [10.57.12.78])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id E78773F62B;
- Thu, 19 Feb 2026 10:44:50 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1EDF63F62B;
+ Thu, 19 Feb 2026 10:44:57 -0800 (PST)
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/5] efi_selftest: fix buffer size and count computations
-Date: Thu, 19 Feb 2026 19:43:59 +0100
-Message-ID: <20260219184400.257008-5-vincent.stehle@arm.com>
+Subject: [PATCH 5/5] efi_selftest: cosmetic: fix spelling in comments
+Date: Thu, 19 Feb 2026 19:44:00 +0100
+Message-ID: <20260219184400.257008-6-vincent.stehle@arm.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20260219184400.257008-1-vincent.stehle@arm.com>
 References: <20260219184400.257008-1-vincent.stehle@arm.com>
@@ -57,20 +57,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When testing the UEFI LocateHandle() function, the BufferSize argument is
-erroneously computed with a count from three test steps before, leading to
-an incorrect input buffer size.
-
-Also, while the buffer size returned by LocateHandle() is correctly
-converted to a count during a subsequent comparison, it is incorrectly
-passed "as is" as a count to later calls to find_in_buffer().
-
-Finally, the variables usage during this test step is misleading, as the
-`buffer_size' variable is used to hold a count, and the `count' variable is
-used to hold a buffer size.
-
-Fix all those issues at once, and remove also one copy to buffer_size,
-which has now become unnecessary.
+Fix a few UEFI function names, as well as a typo.
 
 Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -81,36 +68,45 @@ Cc: Tom Rini <trini@konsulko.com>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/lib/efi_selftest/efi_selftest_manageprotocols.c b/lib/efi_selftest/efi_selftest_manageprotocols.c
-index 7fe7b285011..f07ff256ce1 100644
+index f07ff256ce1..a096e8c2b01 100644
 --- a/lib/efi_selftest/efi_selftest_manageprotocols.c
 +++ b/lib/efi_selftest/efi_selftest_manageprotocols.c
-@@ -170,7 +170,6 @@ static int execute(void)
- 		efi_st_error("LocateHandleBuffer with AllHandles failed\n");
- 		return EFI_ST_FAILURE;
+@@ -6,7 +6,7 @@
+  *
+  * This unit test checks the following protocol services:
+  * InstallProtocolInterface, UninstallProtocolInterface,
+- * InstallMultipleProtocolsInterfaces, UninstallMultipleProtocolsInterfaces,
++ * InstallMultipleProtocolInterfaces, UninstallMultipleProtocolInterfaces,
+  * HandleProtocol, ProtocolsPerHandle,
+  * LocateHandle, LocateHandleBuffer.
+  */
+@@ -188,7 +188,7 @@ static int execute(void)
  	}
--	buffer_size = count;
- 	ret = find_in_buffer(handle1, count, buffer);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("LocateHandleBuffer failed to locate new handle\n");
-@@ -245,14 +244,15 @@ static int execute(void)
+ 
  	/*
- 	 * Test LocateHandle with ByProtocol
+-	 * Test error handling in UninstallMultipleProtocols
++	 * Test error handling in UninstallMultipleProtocolInterfaces
+ 	 *
+ 	 * These are the installed protocol interfaces on handle 2:
+ 	 *
+@@ -238,7 +238,7 @@ static int execute(void)
+ 		efi_st_error("LocateHandleBuffer failed to locate new handle\n");
+ 		return EFI_ST_FAILURE;
+ 	}
+-	/* Clear the buffer, we are reusing it it the next step. */
++	/* Clear the buffer, we are reusing it in the next step. */
+ 	boottime->set_mem(buffer, sizeof(efi_handle_t) * count, 0);
+ 
+ 	/*
+@@ -287,7 +287,7 @@ static int execute(void)
+ 	}
+ 
+ 	/*
+-	 * Test UninstallMultipleProtocols
++	 * Test UninstallMultipleProtocolInterfaces
  	 */
--	count = buffer_size * sizeof(efi_handle_t);
-+	buffer_size = count * sizeof(efi_handle_t);
- 	ret = boottime->locate_handle(BY_PROTOCOL, &guid1, NULL,
--				      &count, buffer);
-+				      &buffer_size, buffer);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("LocateHandle with ByProtocol failed\n");
- 		return EFI_ST_FAILURE;
- 	}
--	if (count / sizeof(efi_handle_t) != 2) {
-+	count = buffer_size / sizeof(efi_handle_t);
-+	if (count != 2) {
- 		efi_st_error("LocateHandle failed to locate new handles\n");
- 		return EFI_ST_FAILURE;
- 	}
+ 	ret = boottime->uninstall_multiple_protocol_interfaces(
+ 						handle2,
 -- 
 2.51.0
 
