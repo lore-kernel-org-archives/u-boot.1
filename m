@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C94E9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:26:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB5DE9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F10E83E36;
+	by phobos.denx.de (Postfix) with ESMTP id E511683E4C;
 	Thu, 19 Feb 2026 14:26:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="UYXWybwp";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="MqMa34IN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43A9B83D5D; Thu, 19 Feb 2026 14:26:17 +0100 (CET)
+ id 6637D83D8A; Thu, 19 Feb 2026 14:26:17 +0100 (CET)
 Received: from MRZP264CU002.outbound.protection.outlook.com
  (mail-francesouthazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B51C83DBF
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:26:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3128D83AC5
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:26:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rOda8II2MzTrBByvIAkdXxGY9UTgjwfRHlk94CN0TSso+YGM1pHR6iUFNP04C2oq0scweChQVDOZtUOrvvDd37RijOgADVCeWFTM57XwjDnS4KUXQvL7f9BjRpjbwPxXQMdjiy+iWlx6iZ9dOc2k881+FGP+h269bWKbbPXnjCwY59XWftd+HBRbticb4CLWmxI76CkVeRXCO9FCxOip8b1/ip73vwIQO1+YcWpGIwlULJUjkXKQfHZ6QVUTevurx46Lqs0hIbASGEOcsRQ5DIsR1S86GYLn4hwQPjGLlqj5ZRP0OAsliZ+A9keffhNXeTiJ6njSuPS2Lj/begbKfQ==
+ b=MylSCPQKbYfpDJAnQy8quJI24PTuKvdLPIDFr90HbgyF1f6D6cBzi4jCSpvJiIZeLU44hHUyjX/RrqnVtz8dQhMM8WEMcLzSvtEdi8LAO/ywF/TDcdSfH9gbbPMhX8b/joK0nl0GYzNNodgoigRAu9lmgVuJCgA/zk0gQv51MN05nu7uh6kFxb5Z01OG1i7Ej5c3rnIc6RVLtIr4BX9tcjqv90taX4WqKuNN12AXkX2VpS/MT750XKLf6S3UT37f1lrzMaUmaRRlW1NiLUq/vCXc79ZFpbcVx06D1o0Dv6HYz5eypK5amuIZevjsZ2+WEnHvJYtF2McwM77FBAy1PQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VBL8E57k7FsFTGOKsaBK7BrNVeyh9zIF+XiQgKy2AAg=;
- b=W4hFdzqEeOBsPz2viiru/TmeGZ6jl43IpEqEyHwOG0EEUm2Z86LcwGQgbuxGRYTo/h+kHQXkbj8Li5xse/zuX/JT2qU3ebSGYmzO7mYiL1dGCfuNvm7VOXLT83wCKO17OmT9+qNCLgM5vJdceytBmMPEO3DgqXdfp0L31Y2QddsiDHy+U0mcY/EMJl73BAYco+5oGfkb0Bq5efcwQHZHwo92mOiwO2k6uiz7dibaDTwfu2ZIPqVkg4vvXWuraKD+DpxaYd1gCVaC2Su4ytTb9NCMxFMhkaTstGlxKCCrIdcR6oX4oG1h8tQeXVAj4pFSFJAByMX3jYD8nnXvWhO4gg==
+ bh=KtuXBYZg27CnibUJk258efxBw/pTExGW8KW5cLkQ5s8=;
+ b=ZZwqqb74Mpw2ZbF4iQ2QoOk2xlk1wVWA7f8WPK/UFY+jE8OxRdRaDsIIpSd6ZhUFLIF5yf2JCzEAjaXZ/5tSBoiNsGgTf4wtRF6B/2I7622SiYNNoHWOl1OPiiGN6RS0VSWZa/gQFhZ0T4uHIuTswV78YqDvsoNKr4hOLKR/wMjwNpD58XhpQiioxcprKWcBELERKxMMMrlUuc2lDQra4MUnrNrfDr6ilhv3+Nbz8CjPOrr6YOF4FrvB1ENLelWJpjU7K0eWveHz3WwJUAgW/rMWBEbnFsdYr9cpGvjHGQbx9+qixkyV3MXyLwn2qZy2bhJoNKXVFujxmKWx/M9R7A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=gmail.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VBL8E57k7FsFTGOKsaBK7BrNVeyh9zIF+XiQgKy2AAg=;
- b=UYXWybwp4ltBqSHaZbC79ym7Oqsr+53yzW596IsnPqnvEXa/u41NaBqfUwrOU1qIyxR35afQVjvhQfWRjtsn4uoadCEPgj3DpxxXMmEFxx/SEEIKCevdJZ2v2RY6F7v+pch7ScEYTL1EoCrO64wo/Yrhk4WRUbkEJK9WBllm3VcdBx2KuVdwrvyyaS/zVqMgJgG3uCNVCJEZ+Cx5E6Tw83T9tfnD8XZqQxoDMN4Yb/5MTvs89PDc7WqK6ZEz4znAF2IAUiYLY+BJpLyG6BtNiXZpVM2hmiIg8Js9lvauHh2Gd0DTc2isM9ole74wzQj4nuELkOB8xM3csJQuGkQKpQ==
-Received: from PA7P264CA0349.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:37c::13)
- by PARP264MB6078.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:4a2::7) with
+ bh=KtuXBYZg27CnibUJk258efxBw/pTExGW8KW5cLkQ5s8=;
+ b=MqMa34INwLJO8rPLXFHDvLRyE2VVzwHMJ5miA4S6cf5URmQA0ktfnjyNOj0vWNMSr/mN5qlN7IK7xbL5WxZ9VChfDaGXSvQ8TcmgmQE0GE/S/Fd8m/Blx8mszufJSWeyRlEwiyIDdO3001oQQfUk4oReJwWb8svm223+JrWpjcs0nwXv4PppUEvvlwMFb3kgCetucrrF4ly8vW09eammUWJejK1EdRCnVOiuTLWK94aCBcWtmwjl8y94pZmSPks3iEbd9C9QNbvdcWJjSVA7SUSIqs2jtBaXju8/D7HgYndKbs2Z1fGtRki1gWHw3t8z9DryFjPRP9PqdbAGgEcnuQ==
+Received: from PAZP264CA0206.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:237::30)
+ by MR1P264MB1843.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:5::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.15; Thu, 19 Feb
- 2026 13:26:10 +0000
-Received: from PA2PEPF00019230.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:37c:cafe::73) by PA7P264CA0349.outlook.office365.com
- (2603:10a6:102:37c::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.16; Thu, 19 Feb
+ 2026 13:26:11 +0000
+Received: from PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:237:cafe::36) by PAZP264CA0206.outlook.office365.com
+ (2603:10a6:102:237::30) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
- 19 Feb 2026 13:26:10 +0000
+ 19 Feb 2026 13:26:08 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA2PEPF00019230.mail.protection.outlook.com (10.167.242.36) with Microsoft
+ PA1PEPF000CC3F9.mail.protection.outlook.com (10.167.242.4) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.12
  via Frontend Transport; Thu, 19 Feb 2026 13:26:10 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id DD555202BF;
- Thu, 19 Feb 2026 14:26:09 +0100 (CET)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 50EDA20143;
+ Thu, 19 Feb 2026 14:26:10 +0100 (CET)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com
 Cc: u-boot@lists.denx.de,
 	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [RFC PATCH v2 4/9] drivers: crypto: add software ecdsa support
-Date: Thu, 19 Feb 2026 14:25:47 +0100
-Message-ID: <20260219132552.1499698-5-philippe.reynes@softathome.com>
+Subject: [RFC PATCH v2 9/9] test: vboot: add test for ecdsa
+Date: Thu, 19 Feb 2026 14:25:52 +0100
+Message-ID: <20260219132552.1499698-10-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260219132552.1499698-1-philippe.reynes@softathome.com>
 References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
@@ -82,57 +82,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA2PEPF00019230:EE_|PARP264MB6078:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3F9:EE_|MR1P264MB1843:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: ab13756b-b79b-4ad2-e34d-08de6fba7205
+X-MS-Office365-Filtering-Correlation-Id: 5df6c553-50d8-4cf0-0d06-08de6fba7240
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024|30052699003|7142099003|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?l5qLlUJHHsAKWj9lFALaPm4/qTs0CCWq+FQD/qjZBvCS6Pfg4Zms7VPNbB1k?=
- =?us-ascii?Q?y0UqeCb9ToA4K4yL2crKTmALdmJvK+5WcuOO+VRg28bGjJn2FAXd221+sK6o?=
- =?us-ascii?Q?9KDbr+cvPmW0qQxTcHfZmIsFkhRh56ddiHrQh/9yt6gD6b2lcB2dQz8cCrHD?=
- =?us-ascii?Q?tIU6jTR/ALpPoVfuOxUetVZv+RUs4rnMT4rfv8RI5uUhwl7RKAwyElyH/eG6?=
- =?us-ascii?Q?Jizbq0H6N07Kqn2sFBDoQU/h4jWskm+DtLfv6ohd7HU0z8ANn1kNn7GD6zpC?=
- =?us-ascii?Q?T9A3/Vr3VFrGN0OT5buPNPWXvlEMdASrFovISRMxseC74RrmPFV/P7I642bD?=
- =?us-ascii?Q?wVctBvhc5UzqkpqCL1/cNrjbR/aelpU/J4BoZxFpvwFnr/U7SL2zrswaOQ7z?=
- =?us-ascii?Q?LfGGtmxQCMKAIZ1Oh4cR1HUCrUFOyRa4kbkTYYnrAO1HnqhtMs+8Ps6JFL9X?=
- =?us-ascii?Q?XjEQ//vhNu+U0WJx1RnDCSuq1XJjf1/FLPa02bEwjIU0KzLGE+lJ3pnY8W5a?=
- =?us-ascii?Q?nIOdjaAHq6foKUbkAK1m9oj1e0NvQx1R+vnAPmyoPXHB3RlxCM0KWf/+lpfH?=
- =?us-ascii?Q?rj9EFAgYyJuo72dCcTaWtF4DWxx5c3XRuvVfP5VbgwJJdLxv//Q4aFoBmjxw?=
- =?us-ascii?Q?GmbpN/SpCbCxPZgRR55UEM9o2mvEySISbZx6gAzvj1jKoJh3pAw1YZz0lyGL?=
- =?us-ascii?Q?O3gpMilv600PPUn3Elo2VxiYqB88+cq0fAdAM/H68Lx67qxjVw1+neLS03M8?=
- =?us-ascii?Q?mOe2Qu8UHQmZuPmXFcmL08+DI32BikJY5gkwIdWoFA7O4s+wUrb+zXMRGmSG?=
- =?us-ascii?Q?ObCTnNFqTcbVxFDqM9nNECUj6vreZ08Hzn9yn4AFhJaCWgtlgqtFarbzD/7G?=
- =?us-ascii?Q?ijsXM4Mk2SW5ibS28hGZtY66Ktz9mbSSycMSgPFdAtSlPNYlv5aT0XL9F8xK?=
- =?us-ascii?Q?FLNbkU/BC1743xeb3mvH/6vwngzvkhK27Iyk6EM4lg3Pjno+1u8GfW+fv47O?=
- =?us-ascii?Q?8i423CNxLQYrgdAZzWL94aHvzj54Nk7L6fB3f2CbKf9k1TXySscQOQLQnsdZ?=
- =?us-ascii?Q?yqHs9j/zhJIVqkIctWRdU4aUnBP9RsFsLrPp9R5elgI8+G0MXrwqxWqVp9ot?=
- =?us-ascii?Q?Ra98bygr5dWbXAFOgfNd+lYez3FCI6Uo4ndO/WJn5j/zJy0v13pe6hUYU1HX?=
- =?us-ascii?Q?C0w7Gy9O9hEOfqAbIaAB9E6Lo5iBTQW/aosrI74ThBPXrJk8oMYPWC2bM0N1?=
- =?us-ascii?Q?eTdXLDjPs+40dJnt0psmjimcxBueKOpZmYQ7ySVCFZBAJ75n74Ik9t6WISEb?=
- =?us-ascii?Q?5NN/1HTXsyAn8GqH58mKJR/QzCdYZVeYFSx3N4oWn6cAqAoMsCdQvsFyVMbQ?=
- =?us-ascii?Q?w++EQklz/ZTIiAdnk5OBFC7E2XeVXP3ZdZ0NmbvJdauB4f+aea3oq4Z5PZ/u?=
- =?us-ascii?Q?I+o5Y+NiHK5AuhpBhB1dEvabm/g8hFN3G2W4/mfog3ddHetsZnqdBHGwHOGD?=
- =?us-ascii?Q?GLKI0Wz6FFMqOoL0iSzHeLK8kZ18DmfXg2kg3C2nSYdkSdVug/HSNNlr0x8n?=
- =?us-ascii?Q?52BlLG0h1sgZR0wxhhSCBAd1+wKhEerWqD5VCgfhoP55/VoQmZPBUpLy52j9?=
- =?us-ascii?Q?OA=3D=3D?=
+ ARA:13230040|36860700013|1800799024|376014|82310400026|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3WdZsBx08knqryu9/OUlIrpDQ9shTzMkN+C08JYLwjOuglKKG7vXuJC8+6A8?=
+ =?us-ascii?Q?pCMBmg0Lh/+VnH7QUXWFwWdgxN1BrCqUChETsfPBQDEptLc+HAKlnzMU6BnJ?=
+ =?us-ascii?Q?3lo6UpwIdCx6YzYv3NVOHtG4glPzv1IEROGVYRGTF+p+CJfNi5nkcVrpxlz2?=
+ =?us-ascii?Q?AplsWDlinS/UjiZwDcoqNCkH5Afiq4uTL7kEQ89HMBiaWbW33ZOXkiqMn/C1?=
+ =?us-ascii?Q?gDbvd8meHu/GWJlAXAePc4RsujFn0HZE0/zet2Rw/LSAd+aXJf7UIuH7sQPw?=
+ =?us-ascii?Q?wwn4QQzCgtIu7FGHc/wnXoTwygwf7cccaWCI+bdjRIUsWD/lg46fAfvUDoi3?=
+ =?us-ascii?Q?PrgXt6OoGckRIe53FL4ieKShZzgkBcxw2yHmw/VgnY6kuzLHsxdQ2ury2aDG?=
+ =?us-ascii?Q?PFDoK34MJU38Gkd/W2HfnZDqdY1nyVuBSo9bciO0rAjrPbffheUXOwchaJPN?=
+ =?us-ascii?Q?sDAe4lgO5MKeHVVSZjfBMfk4njbplSRul9VvJvRIv1++h1B+/BlrMmqz/0qb?=
+ =?us-ascii?Q?u00GmA8Dv6SzYyqBSQwqrk/I/008uLMrk17LmWiA7x4G9xyp+SBi3dqeFogc?=
+ =?us-ascii?Q?W+icWE6Ts5MF3sD019yqXPI0rGepDsu8MANSDE0JNKRMVyAVXjtR8qzCMtqK?=
+ =?us-ascii?Q?Ie5AZv2t0P2dB+7T7R+u4Uu6FImSD6UqZGTiGlWxkYeJh7iipzBhujGtWL1X?=
+ =?us-ascii?Q?LTB53zSBxKc5LHURCp0KroPZ/pr055yjDZwZ3weK5e+xTA1oZCajgIwkHsS5?=
+ =?us-ascii?Q?oxi5j+q5aAt6O0OBBuNY+m/dDAz6O5dxPvFeX7tE+r5E31pa43txQrD0cLJe?=
+ =?us-ascii?Q?NU4gShE5UvksPEyymdopmqNc9lvXfiTBzRbrEOq6ovR35+K96mv0+Tx/23nh?=
+ =?us-ascii?Q?t/apfZqY1yNqBoaUYzUMzXSpE/1Pu+4FTFkxeoQOZ24f3gLFIIt4ipdkVnNt?=
+ =?us-ascii?Q?Q30lYAajWS2I90oVcN67qxnRSeM5uTcFy2cGzcWsfsQQ2OTk+li7BDxEBOZT?=
+ =?us-ascii?Q?ugnMh3fwxRnb8KGRKKCRXc8kFl7LJk7HhNmYAOfAz8JVHWyJeLrGEz/mbN4t?=
+ =?us-ascii?Q?Recbp+lbEFXSj1S0GT3lmLGauEZTPZlcDBoPsZMKOhSZAJCHxQ8dg/kLLwS5?=
+ =?us-ascii?Q?9Lbs4kONbcg1miTr5/ZRSMIZWR4UjRlYEszf5C538Nf1L6+1k8QQrs9t/wD4?=
+ =?us-ascii?Q?StcrzzK+ARzFl00NogJyYYdTxYcDa32Z3mOLUE4PWZnq+Ty0xSaj96078z2Z?=
+ =?us-ascii?Q?9ojwmQGGi4EQTOT2co+gtEMs8hsyjZEyyoNu3gH0dSVhQHV4ouNT+cTZf3U+?=
+ =?us-ascii?Q?D1sLD9H/HAXJD8QvtDRL1AT4SOIG5GFUJijRyNKTCeRcXT14i1hXt1v9acVS?=
+ =?us-ascii?Q?Gjz4wY0jtlLcJMgFrpOEDP6a4FcTpRug//tl8CD9WShS00Z0AuxbmjUR4fiE?=
+ =?us-ascii?Q?8e5Sz3f0ljYNsm4/YcIw6CcSIY59j582XZGJoOoRKv/9TAskz9OQ9fGXWDXn?=
+ =?us-ascii?Q?NX+2fY0la6WYIR+QJSO7x4fkqal1R3/tU1FmBuVD65V7dLvT/pynzjcT9hJ2?=
+ =?us-ascii?Q?pAjtIXrkgItAXWTu/tPOA9g/bwR+2aeydNDvHREel23vbNep4rjUOhwMfuPC?=
+ =?us-ascii?Q?aIi8FoTwKEoiNbTWFMxLn2rejiSBEAM/7506wG2LsyMYqroMF+KhnlSjxMdP?=
+ =?us-ascii?Q?D6Dk9Q=3D=3D?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024)(30052699003)(7142099003)(13003099007);
+ SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026)(7142099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: AugNlmINpnkBb1UbvFquESIDkIb6BKQBicEptVWpVfEP4p3H2ZN2XVxWizEk1Mff7H3Hs8qlAqtpNmPPPWkWgCmbo+GifF0CFld/+PDqe4ecSSwE7Sld6V7rk7A+LMmGyHvbO8Gi1eSeJoxjAT9sDwbzG5g5VutqqboPLrG4YvKJn9dMGWr58amvOZ7+noW7+Nf8qj1UmY+RTmu3hXi/HWcjlLToRWGI7E2SmLZzOZtYNuRSAFaMBL9E48mhpSIRUrIlhNrOIKJhicH0XPuxc8tTurT61/DibPH09uqDsWzLRjlgJL14bdAZli15zn0CQ171LCd1DoUPYmIbsK7n/pU5cWe7ULTr0s5SdIofRCnHVZoiKqF0WHF0IjzBttpvdKpllnOLVXTPDB02vt4zighEO3W6yZCItIpTn4zkYARLJIJe7cYnRb41PqhNecW3
+X-MS-Exchange-AntiSpam-MessageData-0: paq2P+nPfukOb4kjc86bA6TfKbB2Ir0i3MCTf+4UCL6SIb8IOIlEEvA6G7fR6jnn1rnkjv9Gd4udfBobTdGxv4Q3wEYPajOEzo5jSlFuZ1X1/NVolYWQX4iC51bTaEL3vISiHFCZ377byLmhYNL18W+Nl8NSJBR8HuNbZizFUAuHtWWfwYYwsavG6L/MADF0u6GL9Q5M75CgpYRjJ8sl4cX+ShpehrD56I9yq+e6PmADRh2XnIVbLDxQQPDFr8jkIdK/qNhIX2rlm5XpXJDytE+mEz5ldOX+gDKzIbhyuCaay5Pge8I8YmXt+n2mtsmUiiWnE5z0aIDA+25YKYHiBvfWGzpJtmWrlHQ8qjew4TE0v6ogh2dcH8bNdRu+LMzQ3w5giT1DbqONqLyf722fhg+2u0bctqe8sykQ65jxcCEjqOOntxeh2WN3gGPURpFk
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:10.0314 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ab13756b-b79b-4ad2-e34d-08de6fba7205
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:10.4504 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5df6c553-50d8-4cf0-0d06-08de6fba7240
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019230.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB6078
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB1843
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,110 +150,379 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an software ecdsa driver so it is
-now possible to use ecdsa signature on
-board without ecdsa hardware support.
+This commit adds test case for ecdsa on fit, but not (yet) for
+the global image signature (preload).
 
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
 v2:
-- no change
+- initial version
 
- drivers/crypto/Kconfig          |  2 ++
- drivers/crypto/Makefile         |  1 +
- drivers/crypto/ecdsa/Kconfig    |  6 ++++++
- drivers/crypto/ecdsa/Makefile   |  6 ++++++
- drivers/crypto/ecdsa/ecdsa-sw.c | 33 +++++++++++++++++++++++++++++++++
- 5 files changed, 48 insertions(+)
- create mode 100644 drivers/crypto/ecdsa/Kconfig
- create mode 100644 drivers/crypto/ecdsa/Makefile
- create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
+ test/py/tests/test_vboot.py                   | 29 ++++++++++++
+ .../vboot/sign-configs-sha256-ecdsa256.its    | 45 +++++++++++++++++++
+ .../vboot/sign-configs-sha256-ecdsa384.its    | 45 +++++++++++++++++++
+ .../vboot/sign-configs-sha256-ecdsa521.its    | 45 +++++++++++++++++++
+ .../vboot/sign-images-sha256-ecdsa256.its     | 42 +++++++++++++++++
+ .../vboot/sign-images-sha256-ecdsa384.its     | 42 +++++++++++++++++
+ .../vboot/sign-images-sha256-ecdsa521.its     | 42 +++++++++++++++++
+ 7 files changed, 290 insertions(+)
+ create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
+ create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+ create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+ create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
 
-diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
-index 0d58e3910fe..cf49e5c0f7e 100644
---- a/drivers/crypto/Kconfig
-+++ b/drivers/crypto/Kconfig
-@@ -12,4 +12,6 @@ source "drivers/crypto/nuvoton/Kconfig"
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index fd1bf6eb8aa..d2eeda816e2 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -94,6 +94,9 @@ TESTDATA_IN = [
+     ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
+     ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
+     ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
++    ['sha256-basic-ecdsa256', 'sha256', '-ecdsa256', '', None, False, False, False, False],
++    ['sha256-basic-ecdsa384', 'sha256', '-ecdsa384', '', None, False, False, False, False],
++    ['sha256-basic-ecdsa521', 'sha256', '-ecdsa521', '', None, False, False, False, False],
+     ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
+     ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
+     ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
+@@ -287,6 +290,29 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
+                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
  
- source "drivers/crypto/tegra/Kconfig"
++    def create_ecdsa_pair(name):
++        """Generate a new ECDSA key pair
++
++        Args:
++            name: Name of of the key (e.g. 'dev')
++        """
++
++        if sig_algo == "-ecdsa256":
++            curve_name = "secp256r1"
++        elif sig_algo == "-ecdsa384":
++            curve_name = "secp384r1"
++        elif sig_algo == "-ecdsa521":
++            curve_name = "secp521r1"
++        else:
++            curve_name = "unknownCurve"
++
++        utils.run_and_log(ubman, 'openssl ecparam -name %s -genkey -noout -out %s%s.pem' %
++                     (curve_name, tmpdir, name))
++
++        # Create a certificate containing the public key
++        utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.pem '
++                          '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
++
+     def test_with_algo(sha_algo, sig_algo, padding, sign_options):
+         """Test verified boot with the given hash algorithm.
  
-+source "drivers/crypto/ecdsa/Kconfig"
-+
- endmenu
-diff --git a/drivers/crypto/Makefile b/drivers/crypto/Makefile
-index e4a4482b7f3..8170e4cae9c 100644
---- a/drivers/crypto/Makefile
-+++ b/drivers/crypto/Makefile
-@@ -4,6 +4,7 @@
- #	http://www.samsung.com
+@@ -523,6 +549,9 @@ def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+     if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
+         create_rsa_pair('dev')
+         create_rsa_pair('prod')
++    elif sig_algo == "-ecdsa256" or sig_algo == "-ecdsa384" or sig_algo == "-ecdsa521":
++        create_ecdsa_pair('dev')
++        create_ecdsa_pair('prod')
  
- obj-$(CONFIG_EXYNOS_ACE_SHA)	+= ace_sha.o
-+obj-$(CONFIG_ECDSA) += ecdsa/
- obj-y += aes/
- obj-y += rsa_mod_exp/
- obj-y += fsl/
-diff --git a/drivers/crypto/ecdsa/Kconfig b/drivers/crypto/ecdsa/Kconfig
+     # Create a number kernel image with zeroes
+     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
+diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
 new file mode 100644
-index 00000000000..308824d8421
+index 00000000000..4d0ef903a78
 --- /dev/null
-+++ b/drivers/crypto/ecdsa/Kconfig
-@@ -0,0 +1,6 @@
-+config ECDSA_SW
-+	bool "Enable driver for ECDSA in software"
-+	depends on ECDSA_MBEDTLS
-+	help
-+	  Enable driver for ECDSA operations in software. Currently
-+	  it supports multiple ECDSA algorithm.
-diff --git a/drivers/crypto/ecdsa/Makefile b/drivers/crypto/ecdsa/Makefile
-new file mode 100644
-index 00000000000..8f9e5a767f8
---- /dev/null
-+++ b/drivers/crypto/ecdsa/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+#
++++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
+@@ -0,0 +1,45 @@
++/dts-v1/;
 +
-+obj-$(CONFIG_ECDSA_SW) += ecdsa-sw.o
-diff --git a/drivers/crypto/ecdsa/ecdsa-sw.c b/drivers/crypto/ecdsa/ecdsa-sw.c
-new file mode 100644
-index 00000000000..0d526371ecb
---- /dev/null
-+++ b/drivers/crypto/ecdsa/ecdsa-sw.c
-@@ -0,0 +1,33 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+ */
-+#include <dm/device.h>
-+#include <linux/types.h>
-+#include <u-boot/ecdsa.h>
-+#include <crypto/ecdsa-uclass.h>
-+#include <dm/platdata.h>
-+#include <crypto/internal/sw_ecdsa.h>
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
 +
-+static int ops_sw_ecdsa_verify(__always_unused struct udevice *dev,
-+			       const struct ecdsa_public_key *pubkey,
-+			       const void *hash, size_t hash_len,
-+			       const void *signature, size_t sig_len)
-+{
-+	return sw_ecdsa_verify(pubkey, hash, hash_len, signature, sig_len);
-+}
-+
-+static const struct ecdsa_ops sw_ecdsa_ops = {
-+	.verify = ops_sw_ecdsa_verify,
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++			signature {
++				algo = "sha256,ecdsa256";
++				key-name-hint = "dev";
++				sign-images = "fdt", "kernel";
++			};
++		};
++	};
 +};
+diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+new file mode 100644
+index 00000000000..10427b43659
+--- /dev/null
++++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
+@@ -0,0 +1,45 @@
++/dts-v1/;
 +
-+U_BOOT_DRIVER(sw_ecdsa) = {
-+	.name	= "sw_ecdsa",
-+	.id	= UCLASS_ECDSA,
-+	.ops	= &sw_ecdsa_ops,
-+	.flags	= DM_FLAG_PRE_RELOC,
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++			signature {
++				algo = "sha256,ecdsa384";
++				key-name-hint = "dev";
++				sign-images = "fdt", "kernel";
++			};
++		};
++	};
 +};
+diff --git a/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+new file mode 100644
+index 00000000000..a65593ec64b
+--- /dev/null
++++ b/test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
+@@ -0,0 +1,45 @@
++/dts-v1/;
 +
-+U_BOOT_DRVINFO(sw_ecdsa) = {
-+	.name = "sw_ecdsa",
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			hash-1 {
++				algo = "sha256";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++			signature {
++				algo = "sha256,ecdsa521";
++				key-name-hint = "dev";
++				sign-images = "fdt", "kernel";
++			};
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa256.its b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+new file mode 100644
+index 00000000000..009003bb601
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-ecdsa256.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,ecdsa256";
++				key-name-hint = "dev";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,ecdsa256";
++				key-name-hint = "dev";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa384.its b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+new file mode 100644
+index 00000000000..567de687a06
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-ecdsa384.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,ecdsa384";
++				key-name-hint = "dev";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,ecdsa384";
++				key-name-hint = "dev";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
++};
+diff --git a/test/py/tests/vboot/sign-images-sha256-ecdsa521.its b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
+new file mode 100644
+index 00000000000..74ed45b21b8
+--- /dev/null
++++ b/test/py/tests/vboot/sign-images-sha256-ecdsa521.its
+@@ -0,0 +1,42 @@
++/dts-v1/;
++
++/ {
++	description = "Chrome OS kernel image with one or more FDT blobs";
++	#address-cells = <1>;
++
++	images {
++		kernel {
++			data = /incbin/("test-kernel.bin");
++			type = "kernel_noload";
++			arch = "sandbox";
++			os = "linux";
++			compression = "none";
++			load = <0x4>;
++			entry = <0x8>;
++			kernel-version = <1>;
++			signature {
++				algo = "sha256,ecdsa521";
++				key-name-hint = "dev";
++			};
++		};
++		fdt-1 {
++			description = "snow";
++			data = /incbin/("sandbox-kernel.dtb");
++			type = "flat_dt";
++			arch = "sandbox";
++			compression = "none";
++			fdt-version = <1>;
++			signature {
++				algo = "sha256,ecdsa521";
++				key-name-hint = "dev";
++			};
++		};
++	};
++	configurations {
++		default = "conf-1";
++		conf-1 {
++			kernel = "kernel";
++			fdt = "fdt-1";
++		};
++	};
 +};
 -- 
 2.43.0
