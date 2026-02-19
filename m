@@ -4,123 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC118E9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 14:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26676E9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 15:23:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4391083CF5;
-	Thu, 19 Feb 2026 15:34:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1298A83946;
+	Thu, 19 Feb 2026 16:23:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RAYO4m/x";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="UTLCHr7J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B61A383D3D; Thu, 19 Feb 2026 15:34:36 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B092C83A47; Thu, 19 Feb 2026 16:23:47 +0100 (CET)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 468C883936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 15:34:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6704980050
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 16:23:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-65b9608a9adso1662369a12.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 06:34:34 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771511674; cv=none;
- d=google.com; s=arc-20240605;
- b=Sg/fR9w+ePTOjDcMPuJFLhh8e8MzyRryOcizd7GanHZbnmBNugE8jnTUaFBygikr1X
- x1DQwcEMdkjXt2v44okFHid6Fcms4lGcsmYI3RmbdI0nN4T0i9fWTMH0zza0XCJ+XW3a
- X+pyIynxubsGYqhT++MxP5r3Swll4qhreIBvbGZyI1q/1c0i8lDHTcthGE61EuisO2va
- ys4l+lU4JB6kLak7Ui9hxuGnG0dCFC18i2xnDRuCxZ667QbsaPBXVJmF7Foyq/MCWmbU
- k2eiBAUplM0MGqmd4DcwL4bn46RA4Rln9InLyJOEHxypy6pIS4ODdaXSIjcS7Woa9jOK
- LR0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=INuBk0Jz50+5u0qx8OwkRN3+sVtDSP1gP4pppwm0Nr8=;
- fh=DDAk11SuFiQn3Od90A26D+KrexqslrkhzZ3WCPg98n0=;
- b=Y96fUXAEHlMrPHESQ7QHaPNaeyzUqoetqWLXdzQBR63Zm7n9xfTh7EwadOqCArCXV9
- /QStezN4Gt1ewH6G+r05hspAgATNf9L1FhIptVKwuNwBOEGFefH2tCuZC6j4JeAGDmA0
- +Aiz02OfpWCesVDR9u7UjLCroQFOAmfbnOHwLwJv6DtXAlJWfPcPxFrGmGPFdGrhbMoH
- WkxFbGzDPuWZ3uypjSf2zOsT05fbcaDzUnJ2NDDS5l807iTCjyYAUyVyD505CcQV8KlV
- CmvfnMoJok7LoUCM53oHEBEQAIL7ibfoh2Iu7chWgs609xIHYbeorVVIUeYvzqyKWxgL
- /TpA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771511674; x=1772116474; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=INuBk0Jz50+5u0qx8OwkRN3+sVtDSP1gP4pppwm0Nr8=;
- b=RAYO4m/xO+X1qbvtUbWZ2GzRojWX2uvjxvg/xTmJLs8Tjcw7H2hsqyEnVeC4PxqND9
- 8i4I2FOZxYShzn4chMtc8BmJEG4gC+JuZBT6XTLfIzV6SSxiqhaE2yJiOSMhdaPo0jN2
- +LQyscIx+lowqz4z/DcpZ2AQKpKdxzq0NxSQM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771511674; x=1772116474;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=INuBk0Jz50+5u0qx8OwkRN3+sVtDSP1gP4pppwm0Nr8=;
- b=YRxc+wpxjRWbP86ZZj8xVFKK5WEZVSodehrXuMatCzvZWwPD2v/Xo6EaGinzGntypl
- t3HdifEa8ueMCoCAB1/wqlm1fLJdD8ByvunTQl7cCksqGDfe8Nai/YqDe/m6XlyMXF/V
- bTv4pYACCWJ9fIRgGozn2oJ1aS6yMJgk2pcGuH/hPc/W5AN3P30xSzx1bY8+GP3rIBjE
- Q7TUlT+4lbCNv4jNYEXttdWvWeqC6Qa3/4i1PqNxH2TsQcPMGix4BKiGrNVaOVMohgGj
- mF4E2gqnJd+KTIEUxykmherZ68pJLTgfqE+0686hxIFOB05bbijkRH+LCfelFdPF1X7V
- kWGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVB444fJsYeUt5ctIWiC/82ojBP4Q7/X8jJlNlSOPV7hii5dd0+yVhA5a6K6GlFdg30mJ9H1S4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyXiTHuE2/0oe34c2YvjDd/JLSH4SQ7J6EWZsfql7FqHhhzdG8A
- 9SfUfNLadJHl8etIdfAV1XMWg2jTf0HXEkomdoxv+TF6KvfMIokdrCgid8+2kXaOQLOR2noyEAj
- iKRSFL6rqwpXQInl+zPnSW0e8y9PmIoNJELE9xyvn
-X-Gm-Gg: AZuq6aLvSDXh+dMKzBF7I5sZTl+tzokrYNgOQKNWHKU5pqv8J2mNW0XXMK32PAuTB4f
- 2CymKNVmZKZCUp9UmfgtTAQZfNtjDfm/eC94PD5rahCLH7RBdc1heOzIg6pkm0QEB99RIm9vN9P
- n56BZap0rNE4DzV7xNGsdhyjnUC2C3ZAUhKDoWfP+AQ91c7/yhSj7O1buBsylhMwSTDA2zfsSSF
- 8XhrGS5PVFMZVCno7PZwz190xBPL/eYOS6O0URM7J4RuZqV2MEZdpfjE6fKhpuPjcSHsjZwfC5C
- xmv6PQ==
-X-Received: by 2002:a17:907:3e8f:b0:b88:5b21:b16b with SMTP id
- a640c23a62f3a-b8fc3b59ed1mr1159792766b.25.1771511673664; Thu, 19 Feb 2026
- 06:34:33 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mt.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hKr+CJ6z7w/DM3rvW1UWKnSMuWIGKygHKCBhdRRpxE2fgucpWpzZnsHC8YymVuGwgILOsI5S1XcYRcWny/cRRI7llnLRqIqF0gryJWG8HJLWntVWL5hMAQEgD5BIuqHQdbRDxaUBU94CvIIe4oSrdI151oip0BspkY9WrmQGnYJgwhyrcPIIE7p/fbezS8VSJXP2Vti6l+u9QH3ReAvDbfEwvX8U9D2Iwgeztl6I6DOnS2t8VxxawWjtrF6mBGOPbvZrU41GT0Fk5NJeJaBIyUPrOJxrx7p6f8G8UI8wWwW0Id/mnleL/uVaYCm7xXTXkiiKD2sgXmjVQoCNvPR0vg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W3MWGobIWpunQcd6vvUMaIqvolVnwNAKCXBQ7tBIFEo=;
+ b=ppf2LTd3mrtkJJqJbnqq59VM3kX2SduUDEuqqkVWcJK5AknXJROeFi0iQ00DHtS6wQfO1eBDggJdfIB0utOBCiThtTr8TadiMuJH/mTil92xa6hzMtP42hBt9CC/aCpFQjmcBGDer8lE+CVka1u2qQwxXXeAzNAHwbPgb2QrZV+T/xt17/h9E8lkYt0MGVQeuYc62GOc4TJShN5yUm9f2ZfYpvxyipI7gX2tT41LgRf8ptsqHbgqEqrKvDKsV3ZJ3OcQQtCY+1BDsNUl6/dYY9rnA8mwCGXcQ1UZ2CQ+/2VCb5GrLBwqESolZ+PFIrwhofOVowr3wqqac8yhALx8uQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
+ header.d=mt.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W3MWGobIWpunQcd6vvUMaIqvolVnwNAKCXBQ7tBIFEo=;
+ b=UTLCHr7J0LUSRYLNlgfFZMwr7fdAWXX8LAV/CQy3jas3dW5c/SlvKuvaVOI9L/DMnz+FIJ+wMqnvHaoZJBCPZwdOhhLk86nA9W5NMmR/tyUAOK7d0SGvOvL2MlSqxI0r95jGmwvGArTp81fry+8GhDePIIWSbNib+uk1ON/f5XOhek3BI5AtqKUBWrhye+wwDhr8roUfTRoi26lMtNN0h5hm2D9Ov2vrtezwXHEEre74sqq/mmrZiDS+/hKdFaItmpUU1ELJHoYfI1lGLtUwOlvx+r8ScGn4os7H7gS1DH4k/BxXacPTkJguLsYFRv+vM9UsWtP7/gYhEqtLEGEytQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mt.com;
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
+ by PA4PR03MB7181.eurprd03.prod.outlook.com (2603:10a6:102:103::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Thu, 19 Feb
+ 2026 15:23:43 +0000
+Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
+ ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9632.010; Thu, 19 Feb 2026
+ 15:23:43 +0000
+Date: Thu, 19 Feb 2026 16:23:35 +0100
+From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
+ simon.glass@canonical.com, quentin.schulz@cherry.de
+Subject: Re: EXTERNAL - [PATCH v6 4/6] binman: Add dump signature option to
+ mkeficapsule
+Message-ID: <aZcq99-dMBpCNqzv@mt.com>
+References: <20260217115333.503359-1-Wojciech.Dubowik@mt.com>
+ <20260217115333.503359-5-Wojciech.Dubowik@mt.com>
+ <CAFLszThD4sb6dDOq_8-XJ-QapoxbuHOZJt0rRJBeydpr6fhFJw@mail.gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFLszThD4sb6dDOq_8-XJ-QapoxbuHOZJt0rRJBeydpr6fhFJw@mail.gmail.com>
+X-ClientProxiedBy: ZR0P278CA0034.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:1c::21) To DB9PR03MB7180.eurprd03.prod.outlook.com
+ (2603:10a6:10:22d::13)
 MIME-Version: 1.0
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <05cc2003b7e0951a80b0078b3824d14466979b3d.1771275704.git.daniel@makrotopia.org>
- <CAFLszTh3FiMF+eCSxHq7b6hszKphWxyZZpeKrfPAAqEseLhNdg@mail.gmail.com>
- <20260219140421.GJ3233182@bill-the-cat>
-In-Reply-To: <20260219140421.GJ3233182@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 07:34:21 -0700
-X-Gm-Features: AaiRm53Z6cX9GefzO6Qb_XOdG9mUtbNnXp8r2Kvgq_-eKs88j-vxc3GBHuoBYJM
-Message-ID: <CAFLszTjkdArCnEWPc5MkA1rVH1xnTvyQ+eeeWRkXiPPuSkbvwg@mail.gmail.com>
-Subject: Re: [RFC PATCH 11/20] test: boot: add image_loader unit tests
-To: Tom Rini <trini@konsulko.com>
-Cc: Daniel Golle <daniel@makrotopia.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Aristo Chen <jj251510319013@gmail.com>,
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>, 
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Mike Looijmans <mike.looijmans@topic.nl>, Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de, 
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|PA4PR03MB7181:EE_
+X-MS-Office365-Filtering-Correlation-Id: 25da6915-4815-49b3-41b3-08de6fcade1b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|366016|376014|19092799006|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?p48efgyp36judIybWCZBmquyN/S+Q+FhVDGfiX0BySon5wDPT46mN2+jy/3F?=
+ =?us-ascii?Q?EA6dXBYdj6Z18qbWWNlkcPrXJJWdIcTiXy0h7qO6hLMm/7p1o3URtJiQs2DM?=
+ =?us-ascii?Q?s1jW67e55+klwUjl12POcuG3yyoixRG8eG0CFAjF+JGppT24htDxY+js2zYz?=
+ =?us-ascii?Q?M+k5dYrJ4fpb0frdQ/HiFQs9y3z54H94MYduus+ecb/TQ7yElevxVRHakNhY?=
+ =?us-ascii?Q?MHYn/qtU8zAVVYXoncWB24IyLhBhOkk3sTBl2FU6oGNfAOZLdmDfrms4F+dv?=
+ =?us-ascii?Q?VdSE0DK/qUWgB8kXHcVGZR0jKf2SraPhsPoe4G5FA+lSsLPTez0q8hpxs2ES?=
+ =?us-ascii?Q?fQMHpBMGZrpD5bgCxPqmhW95FV2IgMOLRGTiswObm1J9BkXnASs8K8Bmk1Mj?=
+ =?us-ascii?Q?Sxb/egDy3RNDwySglQZCYwFRN48K3Xha8jDRCpEKWDWmYYJ5CltyC5WgqbAY?=
+ =?us-ascii?Q?fmiTGcdf/tdWgVI/MCa3uh67ALxP5FhkhmPLaElHcvgx8uR2j0AFaT/K9wOY?=
+ =?us-ascii?Q?XAFfGVmOltLBCFwPXrNzjU73vfdPOBf9hUQLat9UtrcMZxc6Ir3WzqTQE0ne?=
+ =?us-ascii?Q?FSdfg+RfDeI09YaGyV7ynAP7+ZfeVjEcXz6MUuHhsTK5jsJgVC/Pxcd3A5Ml?=
+ =?us-ascii?Q?zQS4EGK7JBU3/VtRAbItoYhxLWrWIAUc16kLO4qqfkUGozGj0xf5HCG6XpB5?=
+ =?us-ascii?Q?7NqBuDWDmGwdh9gPD23ljWL4GPoPbUxOa41cZdALjy6BHi/Bkit8Hwm/YADV?=
+ =?us-ascii?Q?e5VOEGyMl4DuXdqNYTBlZR6PJulzv/X6ZwV/t2fN78gp6iaA3YQKbP3aG/Qh?=
+ =?us-ascii?Q?EAIRl2Dbg4oS5uveWVdl1c8RGqrsK/vD8Y/f2ccmpdywYIb/LKAtQQDjbIRs?=
+ =?us-ascii?Q?PhSDTNNSmeMYffvPceZiwY/OMGhJ/LQdFxIaarR1JMod0ZOlBJii2ZaoA9dP?=
+ =?us-ascii?Q?WYbA2dSpWep9MJszAYykof1gskFJCuDBikLAHP1GRuXkqNhMsce9gFTEWg8Q?=
+ =?us-ascii?Q?cqtDvYYtApj5MVYBwUU6qRZDIiyr7qJc/sCvTSpXOGCt8hqxlMP5o3zh7y6N?=
+ =?us-ascii?Q?RhEZeJ66g9pEN5eLOetdhgmrAy8KmU6Vb1HyX4r+HspI2UUHX7nKHoHPGnKT?=
+ =?us-ascii?Q?/n4d8jXlqhrN4l8IsU8WQHk5/HV3BHaldoPIKnuzqGU6mMkcKovwcKO3juzp?=
+ =?us-ascii?Q?UeB9m4U/TKlQAz0vN8BLeOMf8xdoMAFtdzETPmVkAKNcokKGfTXC2OyPiQ3L?=
+ =?us-ascii?Q?mDpVXH9oAg4NG2hLgoec4W+4B3q4rbxB7H07r9DOLngfwYUHTNwyOfpcQ+eW?=
+ =?us-ascii?Q?4nqW6u8xJAy8m+u5zPKGNBeBGYXEGVpx43Wj2sG71+683rT5Ot4XnTQnGLTd?=
+ =?us-ascii?Q?yyXGd4oSpN1MlhlFl3FCUKLCKbXLDOdPSIwo1SGWBX0pjJzhRFMIMvAvWrq7?=
+ =?us-ascii?Q?B1hWNGhi/xtjhAwOOfYtUFYLm+hql1bf2apNcrSLgpk7NDoBYjE9rK6iP0lZ?=
+ =?us-ascii?Q?ZbqcBHWsh2iXPtU145QMviCt5IXmjBwMyadTyHMx9pJWGkzg8ASJiE+vL8IY?=
+ =?us-ascii?Q?2iL9jg1udNYn4MR3v4DkqaIuK6hJKP7Mf17CQgAuYL7h5LFURvKYDkU+9zfR?=
+ =?us-ascii?Q?qsu1E+fpzwBm2hM3VCSTTxE=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(366016)(376014)(19092799006)(1800799024)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?G8R8Zm9EoJLeg/0W22BR4SQVIHoiKWY0SCqjghzwRwYxI4BP6gv9eipxLNlK?=
+ =?us-ascii?Q?xXBK0gKv1DA4px94wWxWwkEpHwfTUgn6iba+TIpCbz70zt/V30O44Lis2vVb?=
+ =?us-ascii?Q?C2i4P/FKxRabgVP0UyUF+hMtFLDZr9/MxDKSY3k5q9rHHbI+c4d5zavZ45KK?=
+ =?us-ascii?Q?ikxh1wf7seTw/7WvmoVht0qcZdyRx930vRpZH/P9AzVqnEq03707ZetNDAZY?=
+ =?us-ascii?Q?LuVc4FZS0d2yg4P0YG9dMmkVSNE2eIszk1ROxk7iuRTVMalKAQeGTGayQR9+?=
+ =?us-ascii?Q?Xof61mnMnlhfxC32OxG2ZDaNRVRspUaV2LPMxyNBLQpJFIUWrqX4qy4iXZhX?=
+ =?us-ascii?Q?NfhEUqYS11MNnjTuXWWOFDqG/N4rNvLjNCVEPrCbISE6sQDWqGiWrvuwii2Q?=
+ =?us-ascii?Q?fnODESXmt2mQ+7hjLpFK2JOysFSH+cVv1H1s8h2IaW3NUeXbvuc1XDGWCJto?=
+ =?us-ascii?Q?S2aiD3xPcesLjGW5GJCc0vCbJUoTLPm+Au/d8DwClZ1fsx9XXVZFrtcfF8J6?=
+ =?us-ascii?Q?fr3TD6hNC2OGN7hUVG1INaBmUvv+zFENW/i5I+6gYPixR1PTPvQqC/fyymuL?=
+ =?us-ascii?Q?T4Fb7qB8O2ZlpFPAY3cUgw7B8VHLaMDTshkybQcEwJVTvMfplY4unN3FcAXV?=
+ =?us-ascii?Q?+Bb4JYSnpaNdM6rZMwQPeoasOBSdeMe5nBZg2MSEuL35N20HexUe/41xEM8J?=
+ =?us-ascii?Q?kubRdUjr/sW4iYO5BeFpj4sq/Gd+t5Gv2grHEYQlwF530Rul042PMMXFQHcJ?=
+ =?us-ascii?Q?kplhfDrw3iHjIXiuhAPV/hVaNiIvsdB2dEyhrat3Y21v48nAOD0cLjJD892T?=
+ =?us-ascii?Q?EbC5nLyJnIEftafyAbZyxhJZh6XU2U1UOBjE3HVgmpExNvK0diuuT2Q42ZYH?=
+ =?us-ascii?Q?GynxG8vXHGHItBkGkP3UwAoERt9o3VO3i1gWaDYGcV+bF3DujZAAGsIcQs1W?=
+ =?us-ascii?Q?n7b+GuIa0ZkAAPHWcjmQ3EfskF+b8a+sQ37Z7G8VGcy+8fm3eQZHyjzE5Szp?=
+ =?us-ascii?Q?HiX61rjQcVnYhM87OH4+OK6VG+VeyhKnUB+2oynqhhtJa64seIOYRxYeJmzF?=
+ =?us-ascii?Q?y7VjynIYy+PTWV7tmZh2frkvgpcqTj/7A5XMX9ThgZ6GtIQpWSXpjzXOZwOT?=
+ =?us-ascii?Q?o6hUVp6TtaGIMHIxEdpCvDZI/atZlE9zzK0GT8euTbW6JdxAbEsAJNEPNL54?=
+ =?us-ascii?Q?uQaV23xZp0xB1dBtxHTa4OT/Ch9tFUbSiwYspVS/tlZg/fQaG723TV5Kogbb?=
+ =?us-ascii?Q?J8qDV/GyKKFdylLgr/vwMsBkXywg2SzEaFNvqDACpx0QXskl6uuz+ns4Q7bC?=
+ =?us-ascii?Q?JTxaWD7RKJAnl5NMxyX8bdbBUSUad1Owxf3k6+/PrnJRhnGPVLDEoyyxRFxC?=
+ =?us-ascii?Q?XkAHczYtUizjumLz2wovxDihanEr+F5Af//8eLcy4DSHudlETEg2Q+Pkp6il?=
+ =?us-ascii?Q?BnbXfeCQJjuBDTJj9ondXQKtfYeXsOvK3GFc6iStRn5kCXuJGnejGSh7ezig?=
+ =?us-ascii?Q?reldY7bXAwDuL7mSp0MTlb1+O+xXFWi72HQPN3LbGjsQz57DAmQ0QI62VHWB?=
+ =?us-ascii?Q?wiqLLsLb/G4PlUqSzzf3xgS2UYzsT0B+91gJlzbAN6JRai9ABmVEmFKSNhbq?=
+ =?us-ascii?Q?eGw/y2N9q3AkUKm96Ctrc1TVRCq4RtrvOxfl2pXDkynzbaQrn6DVh4P+2wib?=
+ =?us-ascii?Q?kq8LVOLrmPPXlFOwPGJus3CNES7FONB/JdWwUpjXTtrtfyqllYMpqNvxEGOL?=
+ =?us-ascii?Q?meJcBycPGg=3D=3D?=
+X-OriginatorOrg: mt.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 25da6915-4815-49b3-41b3-08de6fcade1b
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 15:23:43.4542 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JDdEHBOJLPq46rXvfiBkuecFNbzc1hM1tTbwolwItziCMLoZPhDmivwfljintfUqBiMaOBHuY9xfPRBnaA7RCg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7181
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,69 +166,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, Feb 19, 2026 at 07:31:08AM -0700, Simon Glass wrote:
+Hi Simon,
 
-On Thu, 19 Feb 2026 at 07:04, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Feb 19, 2026 at 06:10:58AM -0700, Simon Glass wrote:
-> > Hi Daniel,
+> Hi Wojciech,
+> 
+> On Tue, 17 Feb 2026 at 04:54, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
 > >
-> > On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
-> > >
-> > > Add unit tests for the image_loader framework covering its core
-> > > logic with a mock storage backend:
-> > >
-> > > - map() allocates, reads and records a region
-> > > - map() returns cached pointer for already-mapped range
-> > > - map() returns correct offset within a larger region
-> > > - map() re-reads when extending a region to a larger size
-> > > - map_to() reads to a specified address and records it
-> > > - lookup() returns NULL for unmapped ranges
-> > > - alloc_ptr advances with correct alignment
-> > > - map() returns NULL when the translation table is full
-> > > - cleanup() calls backend and resets state
-> > > - map() with multiple disjoint regions
-> > > - read beyond image size returns error
-> > >
-> > > Also fix IMAGE_LOADER_MAX_REGIONS Kconfig to depend on IMAGE_LOADER
-> > > and default to 16 unconditionally (the previous 'default 0' fallback
-> > > caused the regions array to be zero-sized when IMAGE_LOADER was
-> > > enabled after initial defconfig generation).
-> > >
-> > > Register the new 'image_loader' test suite in test/cmd_ut.c so it
-> > > can be run via 'ut image_loader'.
-> > >
-> > > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> > > ---
-> > >  boot/Kconfig             |   4 +-
-> > >  test/boot/Makefile       |   2 +
-> > >  test/boot/image_loader.c | 429 +++++++++++++++++++++++++++++++++++++++
-> > >  test/cmd_ut.c            |   2 +
-> > >  4 files changed, 435 insertions(+), 2 deletions(-)
-> > >  create mode 100644 test/boot/image_loader.c
-> > >
-> > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > index 1f870c7d251..efc06f3cd1a 100644
-> > > --- a/boot/Kconfig
-> > > +++ b/boot/Kconfig
-> > > @@ -1179,8 +1179,8 @@ config IMAGE_LOADER
-> > >
-> > >  config IMAGE_LOADER_MAX_REGIONS
-> > >         int "Maximum number of mapped regions in image loader"
-> > > -       default 16 if IMAGE_LOADER
-> > > -       default 0
-> > > +       depends on IMAGE_LOADER
-> > > +       default 16
-> > >         help
-> > >           Maximum number of distinct image regions that can be mapped
-> > >           into RAM simultaneously. 16 is sufficient for typical FIT
+> > It will be used to capsule signature verification.
 > >
-> > As Tom mentioned, this is in the wrong patch. But really we should
-> > just remove it and use an alist
->
-> Lets not have another argument about your alist stuff please.
+> > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+> > ---
+> >  tools/binman/btool/mkeficapsule.py | 6 +++++-
+> >  1 file changed, 5 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkeficapsule.py
+> > index f2ac654db81e..7638c941a8ee 100644
+> > --- a/tools/binman/btool/mkeficapsule.py
+> > +++ b/tools/binman/btool/mkeficapsule.py
+> > @@ -38,7 +38,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
+> >
+> >      def generate_capsule(self, image_index, image_guid, hardware_instance,
+> >                           payload, output_fname, priv_key, pub_key,
+> > -                         monotonic_count=0, version=0, oemflags=0):
+> > +                         monotonic_count=0, version=0, oemflags=0,
+> > +                         dump_sig=False):
+> >          """Generate a capsule through commandline-provided parameters
+> >
+> >          Args:
+> > @@ -53,6 +54,7 @@ class Bintoolmkeficapsule(bintool.Bintool):
+> >              monotonic_count (int): Count used when signing an image
+> >              version (int): Image version (Optional)
+> >              oemflags (int): Optional 16 bit OEM flags
+> > +            dump_sig (bool): Dump signature to a file (Optional). Default no.
+> >
+> >          Returns:
+> >              str: Tool output
+> > @@ -73,6 +75,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
+> >                  f'--private-key={priv_key}',
+> >                  f'--certificate={pub_key}'
+> >              ]
+> > +        if dump_sig:
+> > +            args += [f'--dump-sig']
+> >
+> >          args += [
+> >              payload,
+> > --
+> > 2.47.3
+> >
+> 
+> It looks like there are still two problems with test coverage:
+> 
+> tools/binman/etype/efi_capsule.py                          65      2    97%
 
-Then perhaps another type of list that can grow as needed.
+Do you know what the second one is? I see on my setup only one:
+           if 'pkcs11:' in self.public_key_cert:
+***            public_key_cert = self.public_key_cert
 
 Regards,
-Simon
+Wojtek
+
+> tools/binman/etype/fit.py                                 358      1    99%
+> 
+> Regards,
+> Simon
