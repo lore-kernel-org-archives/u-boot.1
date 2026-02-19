@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BCAAE9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:27:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED9B5E9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C23C83E96;
-	Thu, 19 Feb 2026 14:26:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DAE5E83D77;
+	Thu, 19 Feb 2026 14:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="O/51g8Sq";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="itqNaO07";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D1BD83CD3; Thu, 19 Feb 2026 14:26:18 +0100 (CET)
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
+ id 02A3483DEA; Thu, 19 Feb 2026 14:26:19 +0100 (CET)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFA8C83DEA
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:26:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DD1983E13
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yNzNGILJERcDUrAXSgPMWvJ7u1ccbhn9MWt6jELAUCA5IiUJtmceis1BcQ/MwgaJwt8Ak7v1y0N3R6rITrEG0l8oGsSs9StBz3Gv5Ff9DtZpu8e5U1pdfmOW+aiTvOxaB7Y9WnpaUlDCD7ddr3Yo75xfyB5Wu2AEiRFahloqUgiqfN7ajWP1nn4Er4mUyKPQEMkZvAEfwqoooed6ggInWLM0iyAiiJoCc9+aslSLrnxnPoqA45c4PfWSPVJwlUrGBUSFkW9mwjTy+9x37DsLilEY/YhkSEgOPTcxuxgkTc4vVF7hL7MOwpu4I2k2NLX5LiwwetzjA16XSTh9br7q8A==
+ b=W2ivFO87MAjN31wTR+wTuTdKX60qcPJyYt4+gWm0X2Z+mzj5zR2/8StbuRnbYHfpaFq55DeloTIB5z1i0n3Owpf3eB8ARInQsubYtUcVdOwVjkWTJqLkLmvEZTNPLOYCtEfDTtUja2Y3IAQek9VBip5x4LXW2lsebN1Xk261m9X6wyX9rLWCm6QeVylSWvL9imHDNaQZAX8BT/Y0O50AjaxbLuDQ2QW+ikx88S0zb9mtFReR80wFYkDU3E7pxXy6Y6lE/zKwb6L90c5oyhvFx3EaHH3nlOrmeYjQjRi23kbRzmsf05bELy8OIxXbvXIzgg85JZBBj8ofyyHkcnDxkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4z3giD8NjH69kFh01k2Gbfl0i6/58ytVSLuYWqHiiOo=;
- b=B8MC0pLTw2wWrbUKkMHRtfRkBgvXrsAku14RcqjXCTHTviKEEviVeFzoD3HnujhHe9GgSuXXRjdiFEkjSvz7vONBrosAUo1X80OWnS3R30JptnYEbq0bAsvoi7BQCmtAsBqYLEHi7NFyDIueNksdPCwcsxw9MZ6TORE4EzEwDv7WSGFOaiXLrYtv+B1KQtU2nxbyXW4rV4bxhmH1kMsHWzoX3+2N2vEsykQtKRUmLskMyVUSnEJAtbpkTVP+stAXlB6DpB3RWiU1LH/1PKSGPBAdv8rAJKSz4fgDerpQGOG9EK9c2Bk5JFXT+D38rStGWD6MCzKIsAIVeXdQziHEcQ==
+ bh=0/EEO1obV9ybkajF8thngPSVoC7K7xrt0ADu/A8qLFo=;
+ b=siQyAjy/A/FTEnnhVCDCD4mS3aZDvpw+vKRd6g8h+mHpacPBGDSZDrEMtWCC3A9hD7/EwkpXddboiRodxyuTRNTyeYPO8P0c4yB8U9abU9vwVixCZfjAfWHtWFYBKPp4x7HncG5HLStVA9AtCJzA+yWbNULvm7r8Ju0XjY+bDsRqqOhe5bVvVvzIaBkkbFfiqLw9dIUibmC7+bf5mzHc9M+XeTvJp9v+Cj5wfk0BzfPMi1IlnotmcQvDAaZL+Xh6aM90MnvmOxm9jM2of6r3UotFmrJrFkrkmGJSYqbJss1I3hwPcHuPRmiQG1Si5/4CG8Dh3k70YkAr2Y5lIaTB2w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=gmail.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4z3giD8NjH69kFh01k2Gbfl0i6/58ytVSLuYWqHiiOo=;
- b=O/51g8SqHCD81gJAesMp72agX2Nn0sXUCdve1mX4+JHxxkYM3nt9nh9JEEqsg5DZ1j4MI8MPV432nYu+EfHATVlBdEYIRtnalcdNuczELVc+hknY2Pp6/L3BfMv5lPkEzlhBUtZNui1ajmXIqVRkEHOIvULbaeOKmwFhelX8Rh93PHVYhWRY1wPE3v+/majXQHGs7pg8eAu6nCKHmeDf7vmyt4zNrmZsr6YBFwslc69ZuYxLbD9RYFUQ0q7KtSwxu5qFQmTT+AdhGRp3mmp4Mys7P46WbDXQ/aF4PI7yGm2E5WcWjcc8fbf6cc77piXWQ4fHZus2c9n7WNZpUS9jOQ==
-Received: from PA7P264CA0479.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3dc::20)
- by PAZP264MB2720.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1f7::22)
+ bh=0/EEO1obV9ybkajF8thngPSVoC7K7xrt0ADu/A8qLFo=;
+ b=itqNaO07k3Gap9HlG+A5R8tDJA4RZF5uKRpHxqXi/KcYPGE03NOBWO+5XxCuRZYL0JR+ZuA2N5lVo2DYi4PrqRyXb+EJoTiSWo5W14cIuXoP3TumLtk/GRAnmc/01cY7YJ8yfd4/9PQ+Tx2QLLQhVwN1+F6Q6qYravZ2YhEgpTX8AI+CGuNpnhNuutO0sg3tbX8WuyfTFTl/14qhLNqmn3VrYx/yw9L2+2JAu9nSvD6iZ3vtUcTg2SvjbAE0kmL1SpxReSMOZEkWxxJDohZjYXwS3be+b7166vjJIw1FHWR6o6Pq8k/F6bAyNYef8kT7SJoa7104geuDcYq1arZiXg==
+Received: from PAZP264CA0197.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:237::18)
+ by MR1PPFECD1EEFF4.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::6a1)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.15; Thu, 19 Feb
- 2026 13:26:09 +0000
-Received: from PA3PEPF000089B8.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:3dc:cafe::92) by PA7P264CA0479.outlook.office365.com
- (2603:10a6:102:3dc::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Thu, 19 Feb
+ 2026 13:26:10 +0000
+Received: from PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:237:cafe::69) by PAZP264CA0197.outlook.office365.com
+ (2603:10a6:102:237::18) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
- 19 Feb 2026 13:26:09 +0000
+ 19 Feb 2026 13:25:57 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089B8.mail.protection.outlook.com (10.167.242.20) with Microsoft
+ PA1PEPF000CC3F9.mail.protection.outlook.com (10.167.242.4) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.12
  via Frontend Transport; Thu, 19 Feb 2026 13:26:09 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id A033020159;
+ by proxy.softathome.com (Postfix) with ESMTPSA id B34482018F;
  Thu, 19 Feb 2026 14:26:09 +0100 (CET)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com
 Cc: u-boot@lists.denx.de,
 	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [RFC PATCH v2 1/9] mbedtls: enable support of ecc
-Date: Thu, 19 Feb 2026 14:25:44 +0100
-Message-ID: <20260219132552.1499698-2-philippe.reynes@softathome.com>
+Subject: [RFC PATCH v2 2/9] ecdsa: initial support of ecdsa using mbedtls
+Date: Thu, 19 Feb 2026 14:25:45 +0100
+Message-ID: <20260219132552.1499698-3-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260219132552.1499698-1-philippe.reynes@softathome.com>
 References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
@@ -82,58 +82,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089B8:EE_|PAZP264MB2720:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3F9:EE_|MR1PPFECD1EEFF4:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 9e35bf6e-2cbe-4f50-1075-08de6fba71da
+X-MS-Office365-Filtering-Correlation-Id: 66074266-3fc3-43c3-bef7-08de6fba71eb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?xaoeBY2TIStRxzrQa/33qaYPEBvK+dMpsjIQ6NbWcf2G/3pgIUUaFxWyIAGM?=
- =?us-ascii?Q?jpLYKU1vYszYv1HpM8CehuUpZjTM2+EyMrJLGIyJmRv8ZlgTbBybc3AH2+Y2?=
- =?us-ascii?Q?WRL7y7iF2FSfXA6gV7h/eg3HaRr9ZLLgvkkhteLakCVBs1oaAoY/4NxyLJ8J?=
- =?us-ascii?Q?SPMCpOqjQx8TexA3+8WAgum8/i970Vn+9YM+qQQnafJi3RDpInxX8EzGH3LI?=
- =?us-ascii?Q?c2C/jRJ3XdE4Xx0EYti8vA6tjPh8jGJ+Mz7BPVDy7QffoMGunrPSG+QrgJ78?=
- =?us-ascii?Q?rAEP/Ov/yA/FCDINSrcEsD0EfMNuQzLc3rd0yWniWMKzY1GFuLQynzM1XHEU?=
- =?us-ascii?Q?CTjSzIMljnCk6mwbQoPe5KrTQsfgb7XDrFK2kzK9mCYiYBN8sTs/y6oIwqwR?=
- =?us-ascii?Q?HoMFaqhTjCn2emq25JQJe1QvxtyqFLaK7udFg0KXRanw3v6Ymxobx3LQRhlO?=
- =?us-ascii?Q?cAGk3Tnx3Ak4+Ntd3/sgvJjwewG1E3N/eGB9kajCafWTNH8HhyI1i3/3F6dn?=
- =?us-ascii?Q?X5EzaYYA1sdRNACJnnk2ZKbXLONXQjPHzWBZbnm6ASogaSXhyzvzmuDHwGUx?=
- =?us-ascii?Q?GE2cswaAAL1QbVrhaBwKUk7325mCGfvlbyfu9yFUBPCQiXUgbZR8o1rEucIZ?=
- =?us-ascii?Q?fPK3LbGCrQBQoTflmzEE1mWW457bi0MoJ/SjHkVxQOaaroMMpE1tcTSwiFBG?=
- =?us-ascii?Q?HV9y7vlWZRePPHd8S5NsP/b5PjM+XLi17oqZ7ro1W3L4DFgbNTfa6HSnKo0d?=
- =?us-ascii?Q?5l8STvVeJxOuZkXPzVf2LXKQEIyxCVnL1bWPQ+4X8vc+KyS+03B2wD9kFy2Q?=
- =?us-ascii?Q?ZaLtUh37YAnKG/QQ3a6cd9CjS7ldpEjgdU/oIgXYJD9PJYgA+/7FlnuUIkZK?=
- =?us-ascii?Q?0flGX9zMucMimb274dIwsCElshuj9Al6n4EDjTmoX6v+6YGSQno+djgHrjgJ?=
- =?us-ascii?Q?Metpap7WxPKbIpPqc0deIRG86cLXrJG3C4Ubj/0wzr4fySENSwYyQ1I7ZU8j?=
- =?us-ascii?Q?fyRg38G1pwN2x5kN7rrigZbGIVJwGRpx6ifsbqzOtXNdVB+XoW93QjFS5sNj?=
- =?us-ascii?Q?Mf53ViGy/BkT6AGcGVdhD5xirpa0IZi+++4NXnJ+r9GdFmqXmOPqsMUcMIBM?=
- =?us-ascii?Q?2ei6k4fLQ0Og4pf5GBn1rSRi09XtwS7GWsFxzB4AElM41Fad4r5sAGkpFNLM?=
- =?us-ascii?Q?zXDxv5GGntpSaCvcYy9vYgiUJTx3CYT5cxuWSDFJLxpRRDlpXzZOzeh2+pB3?=
- =?us-ascii?Q?ARLI9zUM3HN6LrrDD+jEiHH51VMNYYF9Z64glCEC0axFVvOudrzEVu1yz9ol?=
- =?us-ascii?Q?jahIwSHtot7slHEngZOkHejfceBmzZErviFnyB4ZorOGzchdUlOJGkzx0IR3?=
- =?us-ascii?Q?C++1hbv5g1aZN0hJ6tVvf7ue5syEzMjopTB2g0URnVZsvpPYZD9G9Diepekm?=
- =?us-ascii?Q?QQhAemsJz6AbVmBsUosiZ0ONCRelrClBocVRv19v4KaV77itZf3EDnNG4Q3O?=
- =?us-ascii?Q?aKOfQNjE6Meo9X9ukW6uXiSVJIygALbVvYJg0KhxXvZuK4QlcIlBOWZeA2EJ?=
- =?us-ascii?Q?aJFxV9449LvLUZW7ylI7rppFAGIOgGvzMen16jTXlYexq15j7SMxyqSbO/P2?=
- =?us-ascii?Q?zreOdJAsnV17Is4Ulwy32+QwSpXzGUneMOpMEaWolmAKvnnQ31jlcNLNBB2n?=
- =?us-ascii?Q?IMk92A=3D=3D?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?VRrEDVeTkdK2CaGTwY+A1lTXTMiPUpE1t9/2mkSslXy8pniqxYPrDsCW/TyR?=
+ =?us-ascii?Q?0Zl39yibCngI/NAv/C+dEVrSkLAq70t2ma9ATh9tuOknANfoQd28FgbrmDFs?=
+ =?us-ascii?Q?eAq2wFCY5eBlx3XLBJU3yZ+oAeSiGAW1Ht7nyiAlDvBxrMWkxQ3glLYHwUXw?=
+ =?us-ascii?Q?hLoXNf8G14Ls3nKDCfHM15NbXw+NA2XMlb2MUePHzE7Ah8OgzUUPxHKH/ayC?=
+ =?us-ascii?Q?UwNrZrVNGXJ75lU8/RBK8+k+0vFpxcY1cjlkDjEXwE5R/q1UgRxybVAZXHGH?=
+ =?us-ascii?Q?9ShQWJ92gkQjzEB7xFCOG2SEjN4QabT1Ot+iuimxtCCuMNO4JQpVd0WUBEQq?=
+ =?us-ascii?Q?wTd0qFD0APOxPJfeMoakvoh3Ats2i/K3geiaY+gTlpKFb9Y3KnO4R7npfldW?=
+ =?us-ascii?Q?c6u4if4/kYLgym8feR/253ETXAycGtYLtqSInDq6ecA+ulwtG/9yyAUBRQmB?=
+ =?us-ascii?Q?ElPxPJh2U4+RVe3MJYbl5JuL5FGe3FqLC363hQqYoGv10W4qIMeIeEYAXzy+?=
+ =?us-ascii?Q?nEcidH4j3DEIbTyj9/3AoPLB1shFqzYW3UFr1fGVQ7j0xvLdSk46BgEcKNSs?=
+ =?us-ascii?Q?RKxoytXzeUnsPgwj9Iegt9juMy+G+s9VxoZ3eSLGRZCMWwGZgE4dsUs23oup?=
+ =?us-ascii?Q?sy5b6MELLbeLtrS3jWRzpQ1JqRNTJ1Fl0hoA2ej5dj2HbqazIdyH4EsYwItG?=
+ =?us-ascii?Q?ZAxD2X6K6DJ/6YGiBmV/yTDJ2St9tJGed7uMLisgq7Pd1F0mFXdgJ4HsaPyS?=
+ =?us-ascii?Q?jqXSWGnl0u217+NSj/XIx71NTGLDv9OEdRuNqbSCKCD6z1kPdzPKHs7k40G8?=
+ =?us-ascii?Q?cjQN8Ajd4zZlL8IhNRe5p8KL9N1gwZ0nycIYiPIPWz7JqQHVTvhffNS7dq5p?=
+ =?us-ascii?Q?5VfLf9H3HgTpcd+R1djfPDnvKugrdPW3adQfR7q51whiDMs6VkhO9LFVRaUb?=
+ =?us-ascii?Q?E5PUjP16yQkgEt63LYvYt9eyRIC7DR1blTA0GaiEvJJUyPNGpISH75+nxV8w?=
+ =?us-ascii?Q?zsVOaxN1B3s8/zH806Af5MTDYz9xFw3p77feGOug+2C3qu6AFF/9OM82VlXA?=
+ =?us-ascii?Q?CHN079xVFMUv05q/hW2QKAHphZE0O3kMfoXe46h508feXMBrO1bN3ypQePxT?=
+ =?us-ascii?Q?xJoHFZf3W9tCzo4vPlOZFWKU3yOtzw6psT0UHCBOkE7s+rUFHdqQtBN8y/3x?=
+ =?us-ascii?Q?q5okb6UMSatUmv74Qlj2CPXmMhiDsCEGdk9CpOlDVWm+rAipgLup+qXxhNxJ?=
+ =?us-ascii?Q?4KG3p+XNRup1a9osVJn2ySd28yzYYyiDS6IvCXyPzY+x2FLm+UaDTX/4Rmu8?=
+ =?us-ascii?Q?gemr0oQWE9v8Dc/2JSlVq/1DGIRZ+LN7eFMafpA6MhgLXdFMbxXAHjomBO83?=
+ =?us-ascii?Q?U/heTfWqRxxVJVdpgYo2fNUxj20bh8FJaafKJz0uginLkvp8YfPIcUvZg9CK?=
+ =?us-ascii?Q?D4IdGbBzwhd/5OWtPivTxAehv7JbEGjTkiYvDZ91wWlmjvKAH5S0KTa0ZBay?=
+ =?us-ascii?Q?95XTse992SGxgsx+AKArpICkT5xxN/od+SB6ig89eXeK6f491zcaWYBkGs0Y?=
+ =?us-ascii?Q?fCHQxlDTbEeAArr0noitRQsjt/efAr9V56YOcfjCrXn/55TZw1slmAR9n62C?=
+ =?us-ascii?Q?VdUoWCtuHH4wDj3VYG2in+6Co7AKf/UvbG4afDzb2seT0oKNtALy+uP3IlCX?=
+ =?us-ascii?Q?/3ZqSQ=3D=3D?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(7142099003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: k5Rr/HazHqe+94BgiefR+L3fb3Z/DlYMg8bq7rTo645yrjixq2IEWOfM2ESZnQ8nQmuwqirPPzUioPbAXa9xBZxveTje0q/vm2LF0E2YmfXrLgA3EEGHnJhKBiEVriR5xl65BNALhtMjTATAyk9EXlZuVA7od0yuX5ZZoUETZ01z4cHMrHTUwA1QQjbtXVxtOGhc8irTWcbIrM53MHZgicDcm2m63cTk+LtGaEKfdYcT7o+Wbrq0yYK6n2grwFWgniTIjmDbT+FY0BNWlHWNxF5fZuixMwbtMCjXlIAQxb5utAE0ZsjUZP7KoCZCeE85ZF17YqwcVZw/kOYE5u7b9DupOrH//sHq0rPONTRf1J9ecLRt1Snw6Z6PY90LLbkXB8fj1gzeulRvTvY0c/BkYmWlMEkxR6XobHNhouS+Aw0rP4tF37Vo4f+Vl1v3Jigu
+X-MS-Exchange-AntiSpam-MessageData-0: XPEeq99PdLbEuMQLtIqUshnP4rNjVnJAKzl+Qsfj707hVzxa5EyCTnWOlpUFLs8iureD4slnBh+pOzJoHVcJFcFOWdzejv5mM8YpYLPj69hAgvUgUwYJ+QbVtNhT9FMuQnHi/G1j46K5D4q5eNMFny8CL952oru3W2cBNqC1bNgpKo2dG49y9wUfNOvsnFXhqbOmvi8454T8nHZyDejZjdg5qGaizgYcKFlh+AqAXBquWBTJyDWHlHeDx81Ap/XMWezUsfuvrfNXvOHb8IBovDrrjEiuHZ3cS1J3sBDsnH3U9hq23IIHuKh4X/vXnf5ZuOsgrbBqcPDBP4552wYaMrm1bUX1j0gBfPsm0wO6B9fVrUio+WrVxo1bH8ll3PJZV7oBuM6f9obhUSoIBr9o7hv/xEoa2eDDCPrAHdkGM5KAGMtMegPHK1ousN6kpK1e
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:09.7822 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e35bf6e-2cbe-4f50-1075-08de6fba71da
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:09.8593 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66074266-3fc3-43c3-bef7-08de6fba71eb
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089B8.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2720
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPFECD1EEFF4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,234 +150,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enables the support of ecc in mbedtls.
+Adds an initial support of ecdsa verify using mbedtls.
 
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
 v2:
-- move ecdsa to MBEDTLS_LIB_X509
-- enhance depencendies
+- rename sw_ecdsa.c to ecdsa.c
 
- configs/amd_versal2_virt_defconfig       |  1 +
- configs/qemu_arm64_lwip_defconfig        |  1 +
- configs/starfive_visionfive2_defconfig   |  1 +
- configs/xilinx_versal_net_virt_defconfig |  1 +
- configs/xilinx_versal_virt_defconfig     |  1 +
- configs/xilinx_zynqmp_kria_defconfig     |  1 +
- configs/xilinx_zynqmp_virt_defconfig     |  1 +
- lib/mbedtls/Kconfig                      | 16 ++++++++++++++++
- lib/mbedtls/Makefile                     | 16 +++++++++-------
- lib/mbedtls/mbedtls_def_config.h         | 18 ++++++++++++++++++
- 10 files changed, 50 insertions(+), 7 deletions(-)
+ include/crypto/internal/sw_ecdsa.h | 14 +++++
+ lib/mbedtls/Makefile               |  3 +
+ lib/mbedtls/ecdsa.c                | 94 ++++++++++++++++++++++++++++++
+ 3 files changed, 111 insertions(+)
+ create mode 100644 include/crypto/internal/sw_ecdsa.h
+ create mode 100644 lib/mbedtls/ecdsa.c
 
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 0344089030c..702bf28405d 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -164,6 +164,7 @@ CONFIG_VIRTIO_MMIO=y
- CONFIG_VIRTIO_NET=y
- CONFIG_VIRTIO_BLK=y
- CONFIG_MBEDTLS_LIB=y
-+CONFIG_ECDSA=y
- CONFIG_TPM=y
- # CONFIG_OPTEE_LIB is not set
- CONFIG_TOOLS_MKFWUMDATA=y
-diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-index a974970c3d3..ab6302b67eb 100644
---- a/configs/qemu_arm64_lwip_defconfig
-+++ b/configs/qemu_arm64_lwip_defconfig
-@@ -11,3 +11,4 @@ CONFIG_CMD_WGET=y
- CONFIG_EFI_HTTP_BOOT=y
- CONFIG_WGET_HTTPS=y
- CONFIG_WGET_CACERT=y
-+CONFIG_ECDSA=y
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index a754134a313..508bd465704 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -156,3 +156,4 @@ CONFIG_USB_GADGET=y
- CONFIG_WDT=y
- CONFIG_WDT_STARFIVE=y
- CONFIG_MBEDTLS_LIB=y
-+CONFIG_ECDSA=y
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index 323b5606566..8b760beab03 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -154,4 +154,5 @@ CONFIG_VIRTIO_MMIO=y
- CONFIG_VIRTIO_NET=y
- CONFIG_VIRTIO_BLK=y
- CONFIG_MBEDTLS_LIB=y
-+CONFIG_ECDSA=y
- CONFIG_TPM=y
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index 652121e27a0..6dd8620cf51 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -168,5 +168,6 @@ CONFIG_VIRTIO_MMIO=y
- CONFIG_VIRTIO_NET=y
- CONFIG_VIRTIO_BLK=y
- CONFIG_MBEDTLS_LIB=y
-+CONFIG_ECDSA=y
- CONFIG_TPM=y
- CONFIG_TOOLS_MKFWUMDATA=y
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index 8ad05e37189..d23452e96d0 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -219,6 +219,7 @@ CONFIG_VIRTIO_BLK=y
- CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
- CONFIG_PANIC_HANG=y
- CONFIG_MBEDTLS_LIB=y
-+CONFIG_ECDSA=y
- CONFIG_TPM=y
- CONFIG_SPL_GZIP=y
- CONFIG_TOOLS_MKFWUMDATA=y
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index bb79ddf989e..01370a215d4 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -237,6 +237,7 @@ CONFIG_VIRTIO_BLK=y
- CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman.dtb"
- CONFIG_PANIC_HANG=y
- CONFIG_MBEDTLS_LIB=y
-+CONFIG_ECDSA=y
- CONFIG_TPM=y
- CONFIG_SPL_GZIP=y
- CONFIG_TOOLS_MKFWUMDATA=y
-diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index 789721ee6cd..8bf8809198f 100644
---- a/lib/mbedtls/Kconfig
-+++ b/lib/mbedtls/Kconfig
-@@ -242,11 +242,16 @@ config MBEDTLS_LIB_X509
- 	select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
- 	select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
- 	select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
-+	select ECDSA_MBEDTLS if ECDSA
- 	help
- 	  Enable MbedTLS certificate libraries.
- 
- if MBEDTLS_LIB_X509
- 
-+config BIGNUM_MBEDTLS
-+	bool
-+	default n
+diff --git a/include/crypto/internal/sw_ecdsa.h b/include/crypto/internal/sw_ecdsa.h
+new file mode 100644
+index 00000000000..b1ca31da0f8
+--- /dev/null
++++ b/include/crypto/internal/sw_ecdsa.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2026, Philippe Reynes <philippe.reynes@softathome.com>
++ */
++#ifndef _SW_ECDSA
++#define _SW_ECDSA
 +
- config ASN1_DECODER_MBEDTLS
- 	bool "ASN1 decoder with MbedTLS certificate library"
- 	depends on MBEDTLS_LIB_X509 && ASN1_DECODER
-@@ -264,6 +269,7 @@ config RSA_PUBLIC_KEY_PARSER_MBEDTLS
- 	bool "RSA public key parser with MbedTLS certificate library"
- 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
- 	select ASN1_DECODER_MBEDTLS
-+	select BIGNUM_MBEDTLS
- 	help
- 	  This option chooses MbedTLS certificate library for RSA public key
- 	  parser.
-@@ -292,6 +298,15 @@ config MSCODE_PARSER_MBEDTLS
- 	  This option chooses MbedTLS certificate library for MS authenticode
- 	  parser.
- 
-+config ECDSA_MBEDTLS
-+	bool "Enable ECDSA support with MbedTLS certificate library"
-+	depends on MBEDTLS_LIB_X509
-+	select ASN1_DECODER
-+	select BIGNUM_MBEDTLS
-+	help
-+	  This option enables support of ECDSA with the MbedTLS certificate
-+	  library.
++struct ecdsa_public_key;
 +
- endif # MBEDTLS_LIB_X509
- 
- config MBEDTLS_LIB_TLS
-@@ -301,6 +316,7 @@ config MBEDTLS_LIB_TLS
- 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
- 	depends on ASN1_DECODER_MBEDTLS
- 	depends on MBEDTLS_LIB
-+	depends on ECDSA_MBEDTLS
- 	help
- 	  Enable MbedTLS TLS library. Required for HTTPs support
- 	  in wget
++int sw_ecdsa_verify(const struct ecdsa_public_key *pubkey,
++		    const void *hash, size_t hash_len,
++		    const void *signature, size_t sig_len);
++
++#endif
 diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-index c5b445bd85c..5433e17cc64 100644
+index 5433e17cc64..6db06092cee 100644
 --- a/lib/mbedtls/Makefile
 +++ b/lib/mbedtls/Makefile
-@@ -39,13 +39,14 @@ mbedtls_lib_crypto-$(CONFIG_$(PHASE_)HKDF_MBEDTLS) += \
- # MbedTLS X509 library
- obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
- mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
-+mbedtls_lib_x509-$(CONFIG_$(PHASE_)BIGNUM_MBEDTLS) += \
-+	$(MBEDTLS_LIB_DIR)/bignum.o \
-+	$(MBEDTLS_LIB_DIR)/bignum_core.o
- mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASN1_DECODER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/asn1parse.o \
- 	$(MBEDTLS_LIB_DIR)/asn1write.o \
- 	$(MBEDTLS_LIB_DIR)/oid.o
- mbedtls_lib_x509-$(CONFIG_$(PHASE_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
--	$(MBEDTLS_LIB_DIR)/bignum.o \
--	$(MBEDTLS_LIB_DIR)/bignum_core.o \
- 	$(MBEDTLS_LIB_DIR)/rsa.o \
- 	$(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
- mbedtls_lib_x509-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
-@@ -57,6 +58,12 @@ mbedtls_lib_x509-$(CONFIG_$(PHASE_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/x509_crt.o
- mbedtls_lib_x509-$(CONFIG_$(PHASE_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/pkcs7.o
-+mbedtls_lib_x509-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += \
-+	$(MBEDTLS_LIB_DIR)/ecdsa.o \
-+	$(MBEDTLS_LIB_DIR)/ecp.o \
-+	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
-+	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
-+	$(MBEDTLS_LIB_DIR)/pk_ecc.o
+@@ -11,6 +11,9 @@ obj-$(CONFIG_$(PHASE_)SHA1_MBEDTLS) += sha1.o
+ obj-$(CONFIG_$(PHASE_)SHA256_MBEDTLS) += sha256.o
+ obj-$(CONFIG_$(PHASE_)SHA512_MBEDTLS) += sha512.o
  
- #mbedTLS TLS support
- obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
-@@ -64,7 +71,6 @@ mbedtls_lib_tls-y := \
- 	$(MBEDTLS_LIB_DIR)/mps_reader.o \
- 	$(MBEDTLS_LIB_DIR)/mps_trace.o \
- 	$(MBEDTLS_LIB_DIR)/net_sockets.o \
--	$(MBEDTLS_LIB_DIR)/pk_ecc.o \
- 	$(MBEDTLS_LIB_DIR)/ssl_cache.o \
- 	$(MBEDTLS_LIB_DIR)/ssl_ciphersuites.o \
- 	$(MBEDTLS_LIB_DIR)/ssl_client.o \
-@@ -82,8 +88,4 @@ mbedtls_lib_tls-y := \
- 	$(MBEDTLS_LIB_DIR)/cipher.o \
- 	$(MBEDTLS_LIB_DIR)/cipher_wrap.o \
- 	$(MBEDTLS_LIB_DIR)/ecdh.o \
--	$(MBEDTLS_LIB_DIR)/ecdsa.o \
--	$(MBEDTLS_LIB_DIR)/ecp.o \
--	$(MBEDTLS_LIB_DIR)/ecp_curves.o \
--	$(MBEDTLS_LIB_DIR)/ecp_curves_new.o \
- 	$(MBEDTLS_LIB_DIR)/gcm.o \
-diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-index dda3f4dd6e4..7d60bcc52aa 100644
---- a/lib/mbedtls/mbedtls_def_config.h
-+++ b/lib/mbedtls/mbedtls_def_config.h
-@@ -89,6 +89,24 @@
- #define MBEDTLS_ASN1_WRITE_C
- #endif
- 
-+#if CONFIG_IS_ENABLED(ECDSA_MBEDTLS)
-+#define MBEDTLS_ECDSA_C
-+#define MBEDTLS_ECP_C
-+#define MBEDTLS_BIGNUM_C
-+#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP192R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP224R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP256R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP384R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP521R1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP192K1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP224K1_ENABLED
-+#define MBEDTLS_ECP_DP_SECP256K1_ENABLED
-+#define MBEDTLS_ECP_DP_BP256R1_ENABLED
-+#define MBEDTLS_ECP_DP_BP384R1_ENABLED
-+#define MBEDTLS_ECP_DP_BP512R1_ENABLED
-+#endif
++# shim layer for ecdsa
++obj-$(CONFIG_$(PHASE_)ECDSA_MBEDTLS) += ecdsa.o
 +
- #endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
- 
- #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+ # x509 libraries
+ obj-$(CONFIG_$(PHASE_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+ 	public_key.o
+diff --git a/lib/mbedtls/ecdsa.c b/lib/mbedtls/ecdsa.c
+new file mode 100644
+index 00000000000..0ed95f4407f
+--- /dev/null
++++ b/lib/mbedtls/ecdsa.c
+@@ -0,0 +1,94 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
++ */
++
++#include <crypto/ecdsa-uclass.h>
++#include "mbedtls_options.h" /* required to access private fields */
++#include <mbedtls/ecdsa.h>
++#include <mbedtls/ecp.h>
++
++static mbedtls_ecp_group_id sw_ecdsa_search_group_id(const char *curve_name)
++{
++	mbedtls_ecp_group_id grp_id = MBEDTLS_ECP_DP_NONE;
++	const mbedtls_ecp_curve_info *info;
++
++	if (!curve_name)
++		goto out;
++
++	if (!strcmp(curve_name, "prime256v1"))
++		grp_id = MBEDTLS_ECP_DP_SECP256R1;
++
++	info = mbedtls_ecp_curve_list();
++	while (info && info->name) {
++		if (!strcmp(curve_name, info->name))
++			grp_id = info->grp_id;
++		info++;
++	}
++
++ out:
++	return grp_id;
++}
++
++int sw_ecdsa_verify(const struct ecdsa_public_key *pubkey,
++		    const void *hash, size_t hash_len,
++		    const void *signature, size_t sig_len)
++{
++	mbedtls_ecp_group_id grp_id;
++	mbedtls_ecp_group grp;
++	const unsigned char *buf = hash;
++	size_t blen = hash_len;
++	mbedtls_ecp_point Q;
++	mbedtls_mpi r, s;
++	int key_len;
++	int err = -1;
++
++	if (!(pubkey->size_bits % 8))
++		key_len = pubkey->size_bits / 8;
++	else
++		key_len = pubkey->size_bits / 8 + 1;
++
++	/* search the group */
++	grp_id = sw_ecdsa_search_group_id(pubkey->curve_name);
++	if (grp_id == MBEDTLS_ECP_DP_NONE) {
++		printf("%s: curve name %s not found\n",
++		       __func__, pubkey->curve_name);
++		goto out;
++	}
++
++	/* init and load the group */
++	mbedtls_ecp_group_init(&grp);
++	err = mbedtls_ecp_group_load(&grp, grp_id);
++	if (err < 0)
++		goto out;
++
++	/* prepare the pubkey */
++	mbedtls_ecp_point_init(&Q);
++	mbedtls_mpi_init(&Q.X);
++	mbedtls_mpi_init(&Q.Y);
++	mbedtls_mpi_init(&Q.Z);
++	mbedtls_mpi_read_binary(&Q.X, pubkey->x, key_len);
++	mbedtls_mpi_read_binary(&Q.Y, pubkey->y, key_len);
++	mbedtls_mpi_lset(&Q.Z, 1);
++
++	/* check if the pubkey is valid */
++	err = mbedtls_ecp_check_pubkey(&grp, &Q);
++	if (err < 0) {
++		printf("%s: public key is invalid (err = %d)\n", __func__, err);
++		goto out;
++	}
++
++	/* compute r */
++	mbedtls_mpi_init(&r);
++	mbedtls_mpi_read_binary(&r, signature, key_len);
++
++	/* compute s */
++	mbedtls_mpi_init(&s);
++	mbedtls_mpi_read_binary(&s, signature + key_len, key_len);
++
++	/* check the signature */
++	err = mbedtls_ecdsa_verify(&grp, buf, blen, &Q, &r, &s);
++
++ out:
++	return err;
++}
 -- 
 2.43.0
 
