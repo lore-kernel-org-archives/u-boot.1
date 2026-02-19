@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28294E9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:10:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A27C9E9A049
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E01F783DBF;
-	Thu, 19 Feb 2026 14:10:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6C6283DEB;
+	Thu, 19 Feb 2026 14:10:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b095nnn5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XobF1rwi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6CC383936; Thu, 19 Feb 2026 14:10:44 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 0690083DF3; Thu, 19 Feb 2026 14:10:46 +0100 (CET)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80A4583DBF
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:10:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5D1383DCB
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:10:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-824ba8f0acaso597192b3a.1
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:10:42 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771506641; cv=none;
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-c6e5998f90dso328479a12.1
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:10:43 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506642; cv=none;
  d=google.com; s=arc-20240605;
- b=In7ndIs+xxSv1FKIG1tssg7cH2WFTVA3dxYxObpSx+I9UbC/MfGDUzhMNGrHUlVU+t
- mOn31/GMyo98fY6NEmtg+eFcaygSlRUwuysqhdzo6Wv46LXBG8ldzG5Lx0B082ZrB7/G
- Jzcs5+dITxbSZ2/X/yBB9KkAaW/XaCbU5yRQeN1VNCHQ4Riq0VenyOwdUro4lRF+Aot1
- UjPupIE9W8OVCT79NvfLUCfWqaSa6nqqKatGMXGdr5D80oxEDXEngnhqU+rEoE3gUVDC
- sM2v+o1URN/ollcuZaDFdGBJuICRpr2NbhXJrHwX5oPcU6rP1MbIqTOwvAj7iGhRhjFD
- aKgw==
+ b=XI1gviK3KdSqMdAouiq8S5Ywn64Zi9RoAz36MuwSGHMoYkhzIBlFbcx8pDTYrnZ7f2
+ eE7i3Jj978WMUHZop64JmB7TvoRaGqCE598D1MVHTRfO4PQd9h63oRhVYiCTfOoIHsTr
+ uzGfExpQ7ZAiZV30i5xQqS3CqkyR4hutByXhfgZTOXBF2yMUxEm4qRHisHg4vdoBln3h
+ x3uFQQlba0Nmoq8s+ZF81Olz6HXLfayV88MtnmIr+2jTCcX5HJPxpYe0nc/OK40J4YDg
+ +OB+BzqRDopfreHBFxQUsABi11JouI0F6DtUh8RBYtSacLZ5BKrkRbombXUw73YXIoUO
+ g82g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=tlUjeHHHz1VjhFkCqtM4Y+oKR6qkpqiVKP+mR8Y016E=;
- fh=4HrCD9V8guY9p+UMQgDhJFKyhBBfxhzODOj5mEVDnOE=;
- b=QyP8Y6t8BCpauBW6i9NuD6OMkcsSPhEWkcD2qJ/iWzzF11unY1KNzVpxRFyRTtsIO4
- VYN9RLF08ag6W58qdEbepwohuWT1vYNPsbVoU1LtvHh8qny5SqyhtRt7DmA14weqgAic
- y1d4xlFMQgxhqE5DUYOlwPzlEwHVDiPfPP01p9mCiXKX4xisTRdTs35RragjOJgyKmr9
- 5lS0k4n0qRoFcVOwCs/lGI3Hik+tvRdsy4Zj57/wb738QYC8nRcKUytQDCR9GXxq5P64
- hntLm6tdSl1CEPCdXuCpvgjjx/K4NbXtxKUKVWnMXF7jvlc5hJdw8wybULOtkwmqMhg4
- oR3g==; darn=lists.denx.de
+ bh=hhIVDdF/XSa8RoIPRO1UrrUV9664/EJ79FuInOtFuuQ=;
+ fh=JsZ56WXa+JFR2ZUIvgbzq0j14tuEgHfobuEFj5EL03I=;
+ b=FBjy3VqFAm6lF4OD56txQycemq71H/i0P2uXPCCaYaVq+85969BtLWDlv8bYqEr/3N
+ E/Mm1f4QPq+flk95hDXWZWWhh1Rq2IZox/bd1yX3cbToSFTGdAxnKAsny/gkOPpG6oXr
+ y8Z0enFQHfRAi7xvD8+sK5UkhyzrBPzTj0bnN78bRAXV9kaMv4+Lu6ndNhdL9eKmgBPI
+ y5q4Puw4OOxCzQvm8Q9RCtmcaphW1pxVjBNUJk36HYyCmmjr9OrQMvF2ik8vclN5PvIw
+ WjDbKQ4B4KbeOygSOdu569dnjWnRl9DMwuoCfgg5FLA7XtmBukPkASz4je7eaWsp8EsU
+ 8pkQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771506641; x=1772111441; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771506642; x=1772111442; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tlUjeHHHz1VjhFkCqtM4Y+oKR6qkpqiVKP+mR8Y016E=;
- b=b095nnn50SYONJUcyxMqOcGSXIGMDh48J4y9cUHrDFQMGF1YwWdwmbKZIM+65N37R8
- aAuCdXWQJFdz0cMdHR/4vkyzmOC7N3dw3i1KR2YxdUgeYecMcMrt4yhrXd4QdMINWfw9
- 5t3DU8Ib28UGkQcs+2Tl6vOXiLqGQ6Rv9V1d4=
+ bh=hhIVDdF/XSa8RoIPRO1UrrUV9664/EJ79FuInOtFuuQ=;
+ b=XobF1rwiAEgpV4F3s675cqbD0hQ1dA7RrnKtdeY571RAjxLW4uGBpciY48gqLyA837
+ NCK7zijoi8AWwtnPOvELkwodqPMBLMpCSD/fvAkUk7/pCGdYoZOpvFLqpJg6cBF6lD8s
+ OSQSqn7MdNLCSZmYcNXueyvL4iaBn3A5n+5GM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771506641; x=1772111441;
+ d=1e100.net; s=20230601; t=1771506642; x=1772111442;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tlUjeHHHz1VjhFkCqtM4Y+oKR6qkpqiVKP+mR8Y016E=;
- b=WSbf+yU9pUCE7ueLVlOBWCG3Wjk3WJOrj7FOZePtYaZ2Oihop1t3kUF5n2o8d965xi
- BE3jNQ7wQVblP23h7clEXxTAqJ3QBusMDqt6ZaD8d8yqa358F+Qe/VQt5Eze5LwkJppr
- 2hfm9NTFG6+kLMu9MAitBEEv0EKAAl+SUSjTbSpB+dhcNli1CyjT/jcglDsoV0WXa4L0
- Jy51C7VIIVU9FWsfjgJRFJJ9WezWA/gFUJvbcDjvYmcUtQREJSPkB8dpF+1UOlrESbDi
- mBy0+cknZmtIToOPyw+lNSBL1BjgcJ+PyY+2PVacc1+cKRKDiS8QA9NitZQ/8gEECzS8
- RNOg==
+ bh=hhIVDdF/XSa8RoIPRO1UrrUV9664/EJ79FuInOtFuuQ=;
+ b=HkQN1am7ZAkDLK8VIjCWg6alcmAhwoZ7GVNSYoo1dzKZyVOBpcmktA6d94FjFdxKKN
+ R4vdEI9BbrUkrhyQT2qsCyWmI6UR0fnqAg6/kT0uMPp63F/dRFP0Pzo9cpa1DZ9NTrFX
+ FvYv/RM3gqd9lUPHgmeKSeSmQgMCginUz3RvJCGbF1Iyc/WMYeuvP1IFfdRBBZJBaYcK
+ sLJMuEpdQvf7KcByEgX8VTSvnpKrmmmikMJZKIogt0MVEsIlXj0A/jgNVgltmbnVnqGo
+ oHXPMStD6OW8FyF2R2Omh/5qIZpyNBfemzzfWCgx6jmdwrR5267qSPLaWkULA10Hfp64
+ QUYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWnfpapUIsgto11+9ACVqezMTgOsKR/bxfCdERA0E0Aq7uHt5HvhgPCtO1SXi07u4GAD3O6EmE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKQzckmXbaTXw/Y7CZoaHQ2zuPFSyexxPXe2jwKNLsdFa26FWn
- jGyDTPdx1ls6BmBN3y+SdYq0fwYHCwNywWAQdcvOnRh4akxljgmCoJPnJ6c0AtrcPLE1O/pPcBB
- cX5g/UbvqomhVNCBayETFqIm90W2oQF42oyiXS5i9
-X-Gm-Gg: AZuq6aJ0FoKpwoByM5ni/EFCjqX+IN1tBbuXTm5jEF5H6KMbvRJ7IOlj5JQwByStlCU
- Nc6GaZRjwG4CuvOJfL8bc8LeBZND9R5NM1VyMN7TmL8SPBOzhpXTPSbZlEGv+PTHkDQoVAu2vjX
- tnyvrFoRCF8sv7txK5Vht57MWl50BuCMv86hTlmIcE+szA3r25pNYpluiP+k/2shHl5I9rtWZ7o
- RZFMCzdjpPKYtFcx18ZwceoNHzH6eIAgAMW4J1iz48A2Kj+piRhDNooXvFuMMje/VSvQJ9pj/iR
- 7nUlKg==
-X-Received: by 2002:a05:6a20:2452:b0:366:5bda:1e87 with SMTP id
- adf61e73a8af0-3946c9c4e21mr16871380637.80.1771506640911; Thu, 19 Feb 2026
- 05:10:40 -0800 (PST)
+ AJvYcCW9K7rxpF3Wm7ngDTZ36imzcjNkbhqSKuh9fRuJkZaLNOh/O6bG8KyAtY3bZWithkP2y1QSr9w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzdep8IKZld0dSXVW7OQUrcJw1yJ2mVXTMTKsuU/m0YEjxLYVn5
+ iMpCJngk9AghrCmGWCgZjsy5Uyp0gBVAnygETWZT9jEY0e9jpqpmmvHLRub3I3nOM9bbNJqOPZp
+ S/h1zmhFTt3AT89YXgYFjukTBSjnNTnTOxaxDiDR0
+X-Gm-Gg: AZuq6aIqB6SE/iakEorPb5zFBI/6TMe5Q1ODqOAQxrFUHIbO4HvhJCMdfSNo/skfp/F
+ Q6QIVoSMuGLLCd8acTd4UtCG1YgGOck8dXnWF1Nl7FHkBw3KiyzjC+35u7yLHZnBh0y81AS73ky
+ C7uUsJrtLjmGjBsKttwRIwIocjVNwvMkF/PB3ZKExuOPHWa+GMHvkUMyhh0l0EfHAdFdwXe5sdP
+ eh01VOqSEDj7XAR+w2wDD4wElj+e5BzzgKU2kXkPcwt19CXXKcF+VdX2MlDet8Ez9t7Afpg5KL4
+ +NtC3A==
+X-Received: by 2002:a17:903:2a8f:b0:2aa:e285:f249 with SMTP id
+ d9443c01a7336-2ad50e757a5mr48200595ad.1.1771506642179; Thu, 19 Feb 2026
+ 05:10:42 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <46dcab5fc58e9116ca017a63ed07922ae3093913.1771275704.git.daniel@makrotopia.org>
-In-Reply-To: <46dcab5fc58e9116ca017a63ed07922ae3093913.1771275704.git.daniel@makrotopia.org>
+ <5511a9a0d434c3b69f1625f9f4bfd8e99151bc1a.1771275704.git.daniel@makrotopia.org>
+In-Reply-To: <5511a9a0d434c3b69f1625f9f4bfd8e99151bc1a.1771275704.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 06:09:28 -0700
-X-Gm-Features: AaiRm50QhR3Ugky99KWwSHAU9UZP2NwOMMhhBpHYoWukqlz43La2xCOpQCffaFo
-Message-ID: <CAFLszTiE82Bo1PbvK7Lx7P4Gq=-z+hhgLcgXORtSrYha4R7sBg@mail.gmail.com>
-Subject: Re: [RFC PATCH 13/20] boot: bootmeth: add OpenWrt boot method skeleton
+Date: Thu, 19 Feb 2026 06:09:24 -0700
+X-Gm-Features: AaiRm53V3o5jZo_yawAuFb1LRJZi7NFT4sDUjHctbaJ-K8Iy4266axr4k_oIkQo
+Message-ID: <CAFLszTibAjG6GrgCgyAgYRfEeEPxE3znseyfpXj4PCH8tRCgMA@mail.gmail.com>
+Subject: Re: [RFC PATCH 05/20] cmd: ubi: export ubi_find_volume()
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>,
@@ -134,145 +134,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
->
-> Add the initial bootmeth_openwrt driver with:
->
-> - UCLASS_BOOTMETH driver, compatible "u-boot,openwrt"
-> - check(): accept block devices via bootflow_iter_check_blk()
-> - bind(): set BOOTMETHF_ANY_PART so bootstd iterates all partitions
->   without requiring a filesystem
-> - read_bootflow(): stub returning -ENOENT
-> - boot(): stub returning -ENOSYS
-> - Kconfig: CONFIG_BOOTMETH_OPENWRT depending on FIT, BOOTSTD,
->   BOOTM_STORAGE
+Hi Daniel,
 
-We don't normally write out this much detail in the code
-
+On Mon, 16 Feb 2026 at 14:22, Daniel Golle <daniel@makrotopia.org> wrote:
 >
-> This is the foundation for booting OpenWrt-style uImage.FIT firmware
-> images stored directly on raw storage partitions. The bootmeth will
-> delegate actual image loading to the existing bootm storage path via
-> image_loader.
+> Remove the static qualifier from ubi_find_volume() and add a
+> declaration to include/ubi_uboot.h so that other translation units
+> can look up a UBI volume by name.
+>
+> The function now refers to ubi_devices[0] directly instead of the
+> file-local 'ubi' pointer, and takes a const char * for the volume
+> name.
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  boot/Kconfig            | 13 +++++++++
->  boot/Makefile           |  1 +
->  boot/bootmeth_openwrt.c | 65 +++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 79 insertions(+)
->  create mode 100644 boot/bootmeth_openwrt.c
+>  cmd/ubi.c           | 10 +++++++---
+>  include/ubi_uboot.h |  1 +
+>  2 files changed, 8 insertions(+), 3 deletions(-)
+>
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> index 93de6f3aea2..ca7d657aa07 100644
+> --- a/cmd/ubi.c
+> +++ b/cmd/ubi.c
+> @@ -247,13 +247,17 @@ static int ubi_create_vol(char *volume, int64_t size, int dynamic, int vol_id,
+>         return ubi_create_volume(ubi, &req);
+>  }
+>
+> -static struct ubi_volume *ubi_find_volume(char *volume)
+> +struct ubi_volume *ubi_find_volume(const char *volume)
+>  {
+> +       struct ubi_device *dev = ubi_devices[0];
+>         struct ubi_volume *vol;
+>         int i;
+>
+> -       for (i = 0; i < ubi->vtbl_slots; i++) {
+> -               vol = ubi->volumes[i];
+> +       if (!dev)
+> +               return NULL;
+> +
+> +       for (i = 0; i < dev->vtbl_slots; i++) {
+> +               vol = dev->volumes[i];
+>                 if (vol && !strcmp(vol->name, volume))
+>                         return vol;
+>         }
+> diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+> index ea0db69c72a..92892704d0a 100644
+> --- a/include/ubi_uboot.h
+> +++ b/include/ubi_uboot.h
+> @@ -50,6 +50,7 @@ extern void ubi_exit(void);
+>  extern int ubi_part(char *part_name, const char *vid_header_offset);
+>  extern int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size);
+>  extern int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size);
+> +struct ubi_volume *ubi_find_volume(const char *volume);
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Needs a full comment.
 
-
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index efc06f3cd1a..d8c7b8360ac 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -585,6 +585,19 @@ config BOOTMETH_CROS
->
->           Note that only x86 devices are supported at present.
->
-> +config BOOTMETH_OPENWRT
-> +       bool "Bootdev support for OpenWrt"
-> +       depends on FIT
-> +       depends on BOOTSTD
-> +       depends on BOOTM_STORAGE
-> +       help
-> +         Enables support for booting OpenWrt-style uImage.FIT firmware
-> +         images stored directly on raw storage (block device partitions,
-> +         MTD partitions, or UBI volumes). The boot method loads the FIT
-> +         metadata, selectively reads only the kernel and FDT sub-images
-> +         from storage, and skips filesystem sub-images that Linux maps
-> +         directly from flash.
-> +
->  config BOOTMETH_EXTLINUX
->         bool "Bootdev support for extlinux boot"
->         select PXE_UTILS
-> diff --git a/boot/Makefile b/boot/Makefile
-> index 7d1d4a28106..7b42358eb0c 100644
-> --- a/boot/Makefile
-> +++ b/boot/Makefile
-> @@ -72,6 +72,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_FW) += vbe_simple_fw.o
->  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_SIMPLE_OS) += vbe_simple_os.o
->
->  obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
-> +obj-$(CONFIG_$(PHASE_)BOOTMETH_OPENWRT) += bootmeth_openwrt.o
->
->  obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
->  obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
-> diff --git a/boot/bootmeth_openwrt.c b/boot/bootmeth_openwrt.c
-> new file mode 100644
-> index 00000000000..02bf543031b
-> --- /dev/null
-> +++ b/boot/bootmeth_openwrt.c
-> @@ -0,0 +1,65 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Bootmethod for OpenWrt
-> + *
-> + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-> + */
-> +
-> +#define LOG_CATEGORY UCLASS_BOOTSTD
-> +
-> +#include <blk.h>
-> +#include <bootdev.h>
-> +#include <bootflow.h>
-> +#include <bootm.h>
-> +#include <bootmeth.h>
-> +#include <dm.h>
-> +#include <image-loader.h>
-> +#include <malloc.h>
-> +#include <mapmem.h>
-> +
-> +static int openwrt_check(struct udevice *dev, struct bootflow_iter *iter)
-> +{
-> +       if (bootflow_iter_check_blk(iter))
-> +               return log_msg_ret("blk", -EOPNOTSUPP);
-> +
-> +       return 0;
-> +}
-> +
-> +static int openwrt_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-> +{
-> +       return log_msg_ret("nyi", -ENOENT);
-> +}
-> +
-> +static int openwrt_boot(struct udevice *dev, struct bootflow *bflow)
-> +{
-> +       return log_msg_ret("nyi", -ENOSYS);
-> +}
-> +
-> +static int openwrt_bootmeth_bind(struct udevice *dev)
-> +{
-> +       struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
-> +
-> +       plat->desc = "OpenWrt";
-> +       plat->flags = BOOTMETHF_ANY_PART;
-> +
-> +       return 0;
-> +}
-> +
-> +static struct bootmeth_ops openwrt_bootmeth_ops = {
-> +       .check          = openwrt_check,
-> +       .read_bootflow  = openwrt_read_bootflow,
-> +       .boot           = openwrt_boot,
-> +};
-> +
-> +static const struct udevice_id openwrt_bootmeth_ids[] = {
-> +       { .compatible = "u-boot,openwrt" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(bootmeth_openwrt) = {
-> +       .name           = "bootmeth_openwrt",
-> +       .id             = UCLASS_BOOTMETH,
-> +       .of_match       = openwrt_bootmeth_ids,
-> +       .ops            = &openwrt_bootmeth_ops,
-> +       .bind           = openwrt_bootmeth_bind,
-> +};
+>  extern struct ubi_device *ubi_devices[];
+>  int cmd_ubifs_mount(char *vol_name);
 > --
 > 2.53.0
+
+Regards,
+Simon
