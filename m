@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65F68E9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 15:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0174FE9A03B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 15:57:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4EDC83946;
-	Thu, 19 Feb 2026 16:41:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0956F83CEE;
+	Thu, 19 Feb 2026 16:57:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OX5hJCym";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZeTxQunz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08F3D83CEE; Thu, 19 Feb 2026 16:41:22 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 68FA383CF2; Thu, 19 Feb 2026 16:29:36 +0100 (CET)
+Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com
+ [IPv6:2607:f8b0:4864:20::242])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C36888366F
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 16:41:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D28F880050
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 16:29:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7d4c7d04890so970137a34.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 07:41:19 -0800 (PST)
+Received: by mail-oi1-x242.google.com with SMTP id
+ 5614622812f47-46391e91e16so633401b6e.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 07:29:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771515678; x=1772120478; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771514972; x=1772119772; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mu0z5BSK5AN2Z+MRn2BuDEQpErS3XVuYdKj+/4iJNPc=;
- b=OX5hJCymh8CtNblLLyO6k5RtI6GxdN1exQ+NwZZ1nt8X5kIcvfc0n0DV76znSQn3bf
- LwSpaPHrFh6FUHhSVnDefgmAF7zSDcDiCKVlUfdI5BXyt5UpcXewJNPrA0jaKb5M0g+t
- qs5EERGw2bnHM63YfxenG3j3DOPWqVmAKurXk=
+ bh=ajYPElnFtm7hcYNnEOBLqPYf2IR/7hd6GLXpHwtDOlE=;
+ b=ZeTxQunz7XhaO1YJWSSpbsqol2onebHx1nGagb7oKzdqFSAgfi3h/sEQIHi/o8siA4
+ YL2R52kwcTUy5CoK4to8vRAXmARvLHAqww+vVYSeE513HvB19rsDRSGlZa/zmjRFiC01
+ Ay2aymShnhUYYWFW2MxF+QaqEic4Jrgveh4GU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771515678; x=1772120478;
+ d=1e100.net; s=20230601; t=1771514972; x=1772119772;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mu0z5BSK5AN2Z+MRn2BuDEQpErS3XVuYdKj+/4iJNPc=;
- b=GC9DDDZ9dRRvNE27Wy1XEqNSqzfxf2G3cGD39H7p8bWXc51ZGo0adpXpYrlLtzHhYp
- 1b0AHjKsbpAlhAT+4oZ+gHEY5LavtzChu8CJvldiTgPU+wsN5R+tF0PJKH2NuHkutsQS
- GMV84+Ob20lPIx60RvmUf3bR45WuMyIQ414Em0HQBIb0iQOe3kkvFY6IUht8b74fAY5D
- aXjEtVM5UCLWGsTgwppkFwT9nTOKqEyb6TaAoftbTAtjCshAdpz8NKPb3AMdXAgWtID9
- 170BGIcZy50dH/6s+VuzhmaA53G8yH/tAQ9Lig+UbrY+ttqsqXgQfP3LKFWOtH20VkSx
- z6Og==
+ bh=ajYPElnFtm7hcYNnEOBLqPYf2IR/7hd6GLXpHwtDOlE=;
+ b=XuuegcBkrwWUqt2Tuf2sWgRrcJYPJ1+WAo6QWKPx6/I1hbz9n1DxExguindLPBN817
+ 0whPh9BKKfzkb1DaDJKpfWDxBKZYKfwoBx0XbULi+b25M7MGBzzQBwKea5fh+rRHCDHW
+ 1wKNKmDLanmH5OcTpMnKGaG1LHMCaWxEOyBhScqMP2QdT6BdxoNnqettwAMzw18S0h6y
+ Uq43MnX6dxF5NLQ/fXepCMefDh5VNyMTnQDyloAoyk2qnLXroJzi7+S+pwRVGuDtKr7x
+ nED8uPTQo2hQKuCUm5M+wriN+7SCpzZ36UarDMk21nBr0gMX3846OGINlMmkHccyWN+A
+ PFcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFlLJ4bPXzdbLueu4glgrh4Fmm864w/I2VKi1FX8uriafQ+VgOo0r17U5mkmAgN1Kds/ixk20=@lists.denx.de
-X-Gm-Message-State: AOJu0YzM5avHMXunGj/M9pF7iSgNbO/P/zSB/QOQxSuSX92TQU9zyJwT
- 1fgbnNB9Og30ynfGYZ7amF49tve5shsQVcpa1a6/AT9rujQunBOs6bst4sn2U3ZLeUw=
-X-Gm-Gg: AZuq6aLm2bgPE1Jr8EEUDmnj5Ji76d7qdz49wO0o+nbFMeQnJfKfnfR5hcFWy/fL6ZZ
- PpeESsmAoPx8MfdZleBpktY68Aw8FHjE5eQfVu1nOFOOTW3O5Rp0ljJiHBnfygXHOVQlsDBtObf
- zyGciqko+D0+fFb/lG9mBEkWrKZkh5mtSnwoszi4igfr4I2ELxaSvRQTRw34nknDKj9IztDtstS
- a7NpVnAqkLdrvtX4rj2RyJ7G0WrSG4Kz4r+O3Pb4Tg/4y2FG9xfGHQ2SJ1bwAd/t+GT6L0ePWvU
- BH/mnzUeA40omMEiUR/8Gg+BbVSvsnk0T8qnI8vZ0vr4cBY7Ydf74V6PSiUZJQhHd7Bwu2j03Ss
- S/1TWPpcjnXbNJPCHNqAykbNlHz3T9cKfDPonJIBhPYBclMUfC8oBfXK0Wd19QWlPPsjHY2Cxli
- VBVpKFJkJ0rFB4eG2tocd7PTtUAg2Gf/hs5K1a2/svLSFheRVeY/WF5IByrIk32F+hGfuAP/xUn
- ZXkrErOE4xrQ3O2STPHKtQj/+dzNqN870oCOLjFJGUC6qwSQKc=
-X-Received: by 2002:a05:6830:6aeb:b0:7d1:4608:a2cc with SMTP id
- 46e09a7af769-7d505db712dmr4203985a34.12.1771515678461; 
- Thu, 19 Feb 2026 07:41:18 -0800 (PST)
+ AJvYcCUXaOXYbxmavwMfPEa/WrPiEer3HRPjeC9+glOIo46N3CAoK81ccp0emG990tAFmSUk7Sdet60=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQf6rbBt0XVwKmA4aKDynZHswve6dDtRrnjLUUg/ikD3M0GvYF
+ bx2Zr0UaBBVgzHsVBaMxpauqmCTk9k+UZPTWULRjLXzw5ur9UyhBXPsMD1fg3iDDwYk=
+X-Gm-Gg: AZuq6aJi4QhrEIsdhcSNfCEGYx6n9e6GYUucQhcCFIpelAAWcXegf37loIe0e+TtHyX
+ 3bx3L0vpyP9DJtrO6G+jIvo7U2kwux/djjY+1p3iPUNsUHO6p7391+yVTgDXScPRBx+avwJ9cd7
+ 22dbUG1s0EXLcD1VeR6GBNkw7xoS63GY6vzHa68uvC1dpW7VZPkHvsliUHd6PRKMlvfGkzSOBzr
+ v4chciXmF1qlKYQ4LWY3VhMdlHwIpOyY5BJrapv51np2dfxyAwaGbOO48NubQf0OlhPS/79SkJj
+ vgvZ6dh9tFPUBt94DLQubfMMFJytQux7x4GwxXdt0g9EYMkKnLS6M1l3jVhETLpwoUHwzI4t1zm
+ uZDo5N9F4FePAz+5QIgigBdjfxuo/VlVLs4Qf3zE34fI5CttaEr5W9kDBL5BJnNqDQe6NGJRJrA
+ ytM2JZM7WUZBZ8/B8HXqWsBtlAXkFbTU63TDkCbF2FuM3Ayrc/16WW/nex1t/d27UkZ5Fvgt69S
+ FzUIds9Kq4xifFs0wqiooZ8/qdhIdLTolGA2RbK0PCHvRq6uCg=
+X-Received: by 2002:a05:6808:d52:b0:45c:9a62:91fc with SMTP id
+ 5614622812f47-46410d601aamr2996465b6e.67.1771514971849; 
+ Thu, 19 Feb 2026 07:29:31 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d4a7720a95sm19763963a34.29.2026.02.19.07.41.16
+ 46e09a7af769-7d4a7720a95sm19742243a34.29.2026.02.19.07.29.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 07:41:17 -0800 (PST)
-Date: Thu, 19 Feb 2026 09:41:14 -0600
+ Thu, 19 Feb 2026 07:29:31 -0800 (PST)
+Date: Thu, 19 Feb 2026 09:29:27 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Daniel Golle <daniel@makrotopia.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
+To: Daniel Golle <daniel@makrotopia.org>
+Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
  Kory Maincent <kory.maincent@bootlin.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
@@ -98,20 +97,27 @@ Cc: Daniel Golle <daniel@makrotopia.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: Re: [RFC PATCH 11/20] test: boot: add image_loader unit tests
-Message-ID: <20260219154114.GM3233182@bill-the-cat>
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>,
+ Marek Vasut <marek.vasut@mailbox.org>
+Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand
+ FIT loading
+Message-ID: <20260219152927.GK3233182@bill-the-cat>
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <05cc2003b7e0951a80b0078b3824d14466979b3d.1771275704.git.daniel@makrotopia.org>
- <CAFLszTh3FiMF+eCSxHq7b6hszKphWxyZZpeKrfPAAqEseLhNdg@mail.gmail.com>
- <20260219140421.GJ3233182@bill-the-cat>
- <CAFLszTjkdArCnEWPc5MkA1rVH1xnTvyQ+eeeWRkXiPPuSkbvwg@mail.gmail.com>
+ <20260217181358.GE2747538@bill-the-cat>
+ <aZTBQykqCt7H8H4W@makrotopia.org>
+ <20260217193534.GI2747538@bill-the-cat>
+ <aZTYk8E6r4S5zo_Z@makrotopia.org>
+ <20260217211853.GJ2747538@bill-the-cat>
+ <aZTqyRfqYe1iJ9EY@makrotopia.org>
+ <20260218155839.GC3233182@bill-the-cat>
+ <aZX2APcJvmU4XSIy@makrotopia.org> <aZZGgCp4WqCLoSLs@makrotopia.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+npyNlChtAjuIxEr"
+ protocol="application/pgp-signature"; boundary="RGTZwHbSkx4TOt/T"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjkdArCnEWPc5MkA1rVH1xnTvyQ+eeeWRkXiPPuSkbvwg@mail.gmail.com>
+In-Reply-To: <aZZGgCp4WqCLoSLs@makrotopia.org>
 X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Thu, 19 Feb 2026 16:57:37 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,93 +135,105 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+npyNlChtAjuIxEr
+--RGTZwHbSkx4TOt/T
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 19, 2026 at 07:34:21AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Wed, Feb 18, 2026 at 11:08:48PM +0000, Daniel Golle wrote:
+> On Wed, Feb 18, 2026 at 05:25:29PM +0000, Daniel Golle wrote:
+> > On Wed, Feb 18, 2026 at 09:58:39AM -0600, Tom Rini wrote:
+> > > On Tue, Feb 17, 2026 at 10:25:13PM +0000, Daniel Golle wrote:
+> > > > [...]
+> > > > As the existing code expects the whole image to reside in RAM and o=
+nly
+> > > > take care of validation, decompression and relocation, I had to ext=
+end
+> > > > image-fit.c to use the image_loader to only load the parts *from
+> > > > storage* which are actually needed, and if possible, load them dire=
+ctly
+> > > > to where they are supposed to go. Imho, the code is simple enough to
+> > > > just look at it:
+> > > >=20
+> > > > https://patchwork.ozlabs.org/project/uboot/patch/ab7837536e4567b90d=
+7cb662984dd7e637ef4361.1771275704.git.daniel@makrotopia.org/
+> > > >=20
+> > > > At this stage (because I first wanted to discuss the general approa=
+ch)
+> > > > the patch still skips some parts of image-fit.c, which is obviously=
+ not
+> > > > acceptable for upstream inclusion, but good enough to demonstrate t=
+he
+> > > > idea and also try it in practise.
+> > > >=20
+> > > > Ie. the 'goto storage_loaded' has to go away and all of image-fit.c=
+ has
+> > > > to be changed to equally work on RAM-backed or storage-backed image=
+s.
+> > >=20
+> > > I was talking with Marek to recall some of the details about what we =
+can
+> > > and can't (easily..) do today with external data and he remidned me of
+> > > something. So one big concern here is that we have to be care to not
+> > > re-open things like:
+> > > https://nvd.nist.gov/vuln/detail/CVE-2023-39902
+> > > or otherwise allow for mix-and-match type attacks by having some sort=
+ of
+> > > partial reads allowed.
+> > >=20
+> > > So a specialized partial-read of FIT images, in full U-Boot (not just
+> > > SPL), is something to figure out, but may also invalidate one of your
+> > > design goals because you do have to authenticate the whole image, unl=
+ess
+> > > there's something both secure and clever I'm missing.
+> >=20
+> > The idea here is to have one or more IH_TYPE_FILESYSTEM subimages which
+> > do not have hash-* subnodes at all, hence, if there is anyway nothing to
+> > validate and they do not need to be loaded to RAM (ie. no load address),
+> > they can be skipped entirely, even if listed as 'loadable' (which is how
+> > the parser in the kernel currently knows which filesystem image to map;
+> > we could introduce a new property different from 'loadables', of course=
+).
+> > Everything else which is part of the selected configuration node of
+> > course has to be loaded and authenticated.
 >=20
-> On Thu, 19 Feb 2026 at 07:04, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Feb 19, 2026 at 06:10:58AM -0700, Simon Glass wrote:
-> > > Hi Daniel,
-> > >
-> > > On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wr=
-ote:
-> > > >
-> > > > Add unit tests for the image_loader framework covering its core
-> > > > logic with a mock storage backend:
-> > > >
-> > > > - map() allocates, reads and records a region
-> > > > - map() returns cached pointer for already-mapped range
-> > > > - map() returns correct offset within a larger region
-> > > > - map() re-reads when extending a region to a larger size
-> > > > - map_to() reads to a specified address and records it
-> > > > - lookup() returns NULL for unmapped ranges
-> > > > - alloc_ptr advances with correct alignment
-> > > > - map() returns NULL when the translation table is full
-> > > > - cleanup() calls backend and resets state
-> > > > - map() with multiple disjoint regions
-> > > > - read beyond image size returns error
-> > > >
-> > > > Also fix IMAGE_LOADER_MAX_REGIONS Kconfig to depend on IMAGE_LOADER
-> > > > and default to 16 unconditionally (the previous 'default 0' fallback
-> > > > caused the regions array to be zero-sized when IMAGE_LOADER was
-> > > > enabled after initial defconfig generation).
-> > > >
-> > > > Register the new 'image_loader' test suite in test/cmd_ut.c so it
-> > > > can be run via 'ut image_loader'.
-> > > >
-> > > > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> > > > ---
-> > > >  boot/Kconfig             |   4 +-
-> > > >  test/boot/Makefile       |   2 +
-> > > >  test/boot/image_loader.c | 429 +++++++++++++++++++++++++++++++++++=
-++++
-> > > >  test/cmd_ut.c            |   2 +
-> > > >  4 files changed, 435 insertions(+), 2 deletions(-)
-> > > >  create mode 100644 test/boot/image_loader.c
-> > > >
-> > > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > > index 1f870c7d251..efc06f3cd1a 100644
-> > > > --- a/boot/Kconfig
-> > > > +++ b/boot/Kconfig
-> > > > @@ -1179,8 +1179,8 @@ config IMAGE_LOADER
-> > > >
-> > > >  config IMAGE_LOADER_MAX_REGIONS
-> > > >         int "Maximum number of mapped regions in image loader"
-> > > > -       default 16 if IMAGE_LOADER
-> > > > -       default 0
-> > > > +       depends on IMAGE_LOADER
-> > > > +       default 16
-> > > >         help
-> > > >           Maximum number of distinct image regions that can be mapp=
-ed
-> > > >           into RAM simultaneously. 16 is sufficient for typical FIT
-> > >
-> > > As Tom mentioned, this is in the wrong patch. But really we should
-> > > just remove it and use an alist
-> >
-> > Lets not have another argument about your alist stuff please.
+> Thinking about this a bit more I think that it would still be good
+> to have a way to validate the whole image also within U-Boot, but
+> add a way to mark the image as "no need to authenticate at boot" using
+> a new property in ITS, eg. containing the dm-vierty root hash which is
+> passed on to Linux via cmdline.
+> This would have the advantage that U-Boot can still authenticate the
+> whole image because hash-* and sign-* nodes are, eg. when loading it via =
+TFTP and before writing it flash
+> during firmware recovery.
 >=20
-> Then perhaps another type of list that can grow as needed.
+> What do you think?
+>=20
+> Do you agree that having 'dm-verity-root-hash =3D "....."' in addition to
+> the existing 'hash-*' and/or 'signature-*' properties would be a good
+> idea, and that then allowing to skip authenticating that specific
+> subimage at boot (but not in other cases, eg. 'iminfo' should still
+> always authenticate the whole image).
 
-A problem to worry about later, yes.
+It's a question that requires a bit of thought. As part of the thing is
+that we have to validate the FIT as a whole (excluding external data)
+before we can move on to working with the contents of the FIT. After
+that, what is stored in the config nodes and so forth is a separate
+question, and at-rest security provides its own challenges that also
+depend on what the hardware can/can't provide for us too.
 
 --=20
 Tom
 
---+npyNlChtAjuIxEr
+--RGTZwHbSkx4TOt/T
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZcvFgAKCRAr4qD1Cr/k
-Chh4AP9lU2OQTJ9iiZIhmKGSGsLgl/kEo9Cv1pclfFmfuMLWRgEAiqh6BqYI4fRi
-gvLzdGFiyFxmh5xK2vALMR70o6NlxQs=
-=dBoC
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZcsVAAKCRAr4qD1Cr/k
+ChCrAQCvuptlrXr4MBaWXbWLo3Z5mL/sxwkwmGGVcdgqEPhGDQD+OkQ5lCAPETF2
+0FJ4yTGzcWmCTuqEfuVXwOl3R6xNYAA=
+=6yYW
 -----END PGP SIGNATURE-----
 
---+npyNlChtAjuIxEr--
+--RGTZwHbSkx4TOt/T--
