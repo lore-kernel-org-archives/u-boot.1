@@ -4,90 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD43E9A055
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DCA7E9A055
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 17:51:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E5A283CF5;
-	Thu, 19 Feb 2026 18:28:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EE30283CF2;
+	Thu, 19 Feb 2026 18:51:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mIXKbgTS";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="JrCmtot8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE15483D0B; Thu, 19 Feb 2026 18:28:43 +0100 (CET)
-Received: from mail-oi1-x243.google.com (mail-oi1-x243.google.com
- [IPv6:2607:f8b0:4864:20::243])
+ id DB2B583CF5; Thu, 19 Feb 2026 18:51:47 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EEA683CEE
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:28:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x243.google.com with SMTP id
- 5614622812f47-46394090d2fso378233b6e.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:28:41 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCDCF83CEE
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:51:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-483703e4b08so9771825e9.1
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 09:51:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771522120; x=1772126920; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CqifEo2uD5QhHsSCFvVGWGI/eRZDUVL+EShG+NIHVBw=;
- b=mIXKbgTSxc1rO5AWKFAE/6A5Kvsv6qk/FmCmUXL3PQc6IB6XpIaCN2qLE+Cq3gpV2w
- 6bRM/FXUqLYW5D7Rf8Bjv3ooRyQKhZJx3YidHQtgcGX666vB28xpXHNH05Fpf0Z5Srfs
- L7i8RprDFQ5K5DATgjPz/YFk8xqW+Y4OPsJls=
+ d=amarulasolutions.com; s=google; t=1771523505; x=1772128305;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cy4KkJttvJ9loTxMFwuXAS6gYR0rkuPozqGdtP6/ELg=;
+ b=JrCmtot8gce2t3A5IvDjPdhjH0UQhYA2KeLeTOUDKFg5hY40lHDHSN2pE8Spwh8CgW
+ rEVhK4HWwSsI6D5Nq+v2H3HYL+eZzIDqRYY9UgKf5xuOV3W6pPJKb7nn88nZXGBiddiE
+ uYXDLOd1nfWSS3E8WhS3PXLLH57LPtPSm6KGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771522120; x=1772126920;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CqifEo2uD5QhHsSCFvVGWGI/eRZDUVL+EShG+NIHVBw=;
- b=wyyIrhGSiuSi8RskImE4AyV5KQ0HDPEXdD8x80inck6ft4rY1bLay0bCxEsE1Nc/sx
- PBX79BOY1iUwBjVjzPUEpBbBZt1O8lYFoFwByXyJnWkY9xTpxdEgwDxDHinkdKDCyMUa
- xvO25KVhJqwXTg8dgh6joak/HWTw5D0zrQ9yYGQ4D4YASj7kjHaQmyHKpI8Zg6sWeSlR
- +0obIX53YGqLRLHMxIR2BqafhPZFtRydlIAUdNJ7v+J5rHHudgQ8IZYSNml2w0VEDubd
- dO+jpWIleldfqgJFQiJ7ISPTD0yzzW3jpb3HTKimQC83k8rXY7JScA78gcxkNF/z/nsH
- 7+ag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWuNpl0BK2m+YVyZmIREVkCkdfJ7RbES3rYKJdbHGc1bvm4qYzlmMkb6GKh3vuTp9rYVmzSwCU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzBOwrsdq2IepG6zvwc9Q3RWt+igRttQCXEVH7YgGmP/pslIm02
- /Eg7phcSIe9E9Onhwd239UQDpGzijQiDc3jgEIFnnqR8h0pWv0E2BC71DP2XLgEBpek=
-X-Gm-Gg: AZuq6aLCd2Vz5+Fp74ITnBEkXfPlssy7vXEscF3rVgCgrT0fs7/2dR+yK7oj1JGPowM
- 3dca7Qf7zli0e1aHlK/uPrmbT0e1V9PX1mj0wOoXo0OazdDnKsKxz5769rQDAQYxHjrm9+CXeGw
- vEO68YecUpJtbRAKAGhsMXY+FTUQLkdnCjiA/mBbp8hDuix4mzo3+i3/STVBzJaRKWkd/T2PP/L
- Pb54o+3HWX/OyijIWJRvfqHLgwytwBXvv92xaTmxj834+xmKu87AZYmQH6ogfqXmA+MBdjgD09T
- m1rVEDoI/GE9nvHWVbao9GfGXiT1F03x4H1+Z+ttHN1l0O0poGqiUtuCqvNFP+pCW5xSSihAWLP
- 7+SuLPlhfAwq58IaiwnNxxhQ4JBI1MjqiGLp1BzTIOGIGMF+8YDdcaQl+Wd918AvzIfhOtmoDEj
- P+tZ+fC5Nh/vknAeYQf4mq8iWu8lDjfEMGkkMcKLMxtw6+JjWN8KKLYmt0glDHr3BOrjNv7Y3kv
- B7TzpA4Oklp8+E6IEMgGGUWNR9/MxtyrGavhtaQjEsmv/53umYDCWO6L7KA0g==
-X-Received: by 2002:a05:6808:398d:b0:45e:57ab:ad13 with SMTP id
- 5614622812f47-463b4038622mr8749151b6e.43.1771522120042; 
- Thu, 19 Feb 2026 09:28:40 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4642b1c526bsm1118514b6e.8.2026.02.19.09.28.38
+ d=1e100.net; s=20230601; t=1771523505; x=1772128305;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cy4KkJttvJ9loTxMFwuXAS6gYR0rkuPozqGdtP6/ELg=;
+ b=a4kuUUesCSJjwNqbgIjQ0+prMZlOBK+fLafB52CLiXhNBw2uZ3kQs2Wlz9agGn+eKz
+ S62VZAxE5SiwQtrIU+GJwSTNxs/jh9ehAN1nUtgA3j26A0KRkzSNxKWQ9SKfOkctuHri
+ /VHj1FoD3CCfTKhKSaQq3qfGuLd+BAfhpKCXuiPsvUzGTcmREyeJC4glEgb2ETpwLz3R
+ +9UWshJ9zUJMT/rfIs12Yo8tMaPNd/+t9M8hDzPrpWXBEOC20RYRCZKNt6aix7L+Qq4v
+ lHFi5KtpECw8LLw0UV+w7vsJAgWFalgbDdHaATNz86mGZ3eN2OJf+HNIIz2jxJIuo+BQ
+ DQLw==
+X-Gm-Message-State: AOJu0YwRj0tmIavylYi/lTn0fjeOQpgHPt5aP+Uw6RuxpZPaPVvA3vq/
+ kuxVM3az4/x0Wp/9yYrJ6bWQIP4tNlLyhsscmF0mXOOy2xLEnRsNjdz7+HyyS+bc+pCf0bwsU1O
+ etQzp
+X-Gm-Gg: AZuq6aJDWOSj33pspOJQSivdgsDkIjMxhy9hzMKMueQC+7f35llpc4mXm/X4KzKv+Kg
+ noF+fh3PyDKGAd8P/fnm/BkqWTMMWsPuCZMN95TRtIrap2ajvJHd4ruUn8vpJgnWFKVTdkdIa7g
+ ZKjn4NUDDXyRO4pOg/vkKgJTi0ig1GotE2R5e1Tfz8fCWjgGKyCBEtoNiuKJx5eTNrPcwWgz0ws
+ dhgWJJEFHX97jUbS+pL5HRlMMAL8xhm+C7yDJIHwUT7u8ew569t2uiaq8Ly3s7zFsKIAx7GhJ51
+ hdg1/ofDQdfLwaXTyXnNO4+ViPH5b4LKjq1n0yF7uo6deejDDBFxSfkDLDwWk+KlAc16oVzRSRu
+ o6QKIqr4RpWBjni4IVHf+gC4+W6mciRU57XmyoBxtd6pKktbCkfUARNnAuPZfAFj924sHpHjym/
+ YOGUdNAHJimO9bPlSjvhSJpOuQPnAg8M4OmHcDzRZbynHbKyu2vc2MMs0XCl2TqIZFSvgvZFRlJ
+ QmZeLeyyo6o31DNraEyvY8BhiVw//tNgMCBSTNHbn3q6ua4x2GdH3jQFb2OQOxbl7kdcY69ZHdw
+ oH8OZen6JIz0Ei3eEIJg4/f/
+X-Received: by 2002:a05:600c:4e16:b0:47e:e981:78b4 with SMTP id
+ 5b1f17b1804b1-483a008dcc2mr46366975e9.12.1771523504939; 
+ Thu, 19 Feb 2026 09:51:44 -0800 (PST)
+Received: from dario-ThinkPad-P14s-Gen-5.homenet.telecomitalia.it
+ (host-95-248-31-95.retail.telecomitalia.it. [95.248.31.95])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483a31b0e63sm35485005e9.2.2026.02.19.09.51.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 09:28:39 -0800 (PST)
-Date: Thu, 19 Feb 2026 11:28:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Eddie Kovsky <ekovsky@redhat.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tobias Olausson <tobias@eub.se>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>,
- a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
-Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
-Message-ID: <20260219172836.GN3233182@bill-the-cat>
-References: <20260120164524.253188-1-ekovsky@redhat.com>
- <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
+ Thu, 19 Feb 2026 09:51:44 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
+ linux-amarula@amarulasolutions.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 0/8] video: support Rocktech RK050HR345-CT106A panel
+Date: Thu, 19 Feb 2026 18:51:11 +0100
+Message-ID: <20260219175130.2839234-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5X6896bmo1Vlucro"
-Content-Disposition: inline
-In-Reply-To: <aZc_efHFk1Q-iWvP@daedalus>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,80 +112,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds support for the Rocktech RK050HR345-CT106A panel.
+The initialization of this panel requires a 9-bit word length
+configuration. To support this, I have extended the STM32 SPI driver
+(including support for the STM32MP25 SoC) to implement the set_wordlen
+operation.
 
---5X6896bmo1Vlucro
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+To properly validate these changes and ensure the SPI uclass correctly
+handles the word length propagation, I have also implemented the
+corresponding logic in the sandbox driver and added a dedicated unit
+test.
 
-On Thu, Feb 19, 2026 at 09:51:05AM -0700, Eddie Kovsky wrote:
+I have grouped these patches together to provide a complete overview of
+the implementation and its verification.
 
-> On 01/29/26, Mattijs Korpershoek wrote:
-> > Hi Eddie,
-> >=20
-> > Thank you for the patch.
-> >=20
->=20
-> Hi Mattijs
->=20
-> Thanks for the review.
->=20
-> > On Tue, Jan 20, 2026 at 09:45, Eddie Kovsky <ekovsky@redhat.com> wrote:
-> >=20
-> > > The Engine API has been deprecated since the release of OpenSSL 3.0. =
-End
-> > > users have been advised to migrate to the new Provider interface.
-> > > Several distributions have already removed support for engines, which=
- is
-> > > preventing U-Boot from being compiled in those environments.
-> > >
-> > > Add support for the Provider API while continuing to support the exis=
-ting
-> > > Engine API on distros shipping older releases of OpenSSL.
-> > >
-> > > This is based on similar work contributed by Jan Stancek updating Lin=
-ux
-> > > to use the Provider interface.
-> > >
-> > >     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
-> > >     Author: Jan Stancek <jstancek@redhat.com>
-> > >     Date:   Fri Sep 20 19:52:48 2024 +0300
-> > >
-> > >         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR=
- >=3D 3
-> > >
-> > > The changes have been tested with the FIT signature verification vboot
-> > > tests on Fedora 42 and Debian 13. All 30 tests pass with both the leg=
-acy
-> > > Engine library installed and with the Provider API.
-> > >
-> > > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
-[snip]
-> Sure, I can update the comment for v4.
 
-Since we're talking about v4, can you please make sure that for v4 it:
-- Passes CI https://docs.u-boot.org/en/latest/develop/ci_testing.html as
-  that will cover some non-Linux host builds.
-- See if you can get access to a FreeBSD or OpenBSD host and make sure
-  the tools build still works there too? I was hoping Mark would have
-  commented / tested-by v3 because I do want to make sure the libressl
-  case still builds. At worst case, I have a freebie Oracle VM that's
-  FreeBSD based, so you can maybe spin one of those up as well?
+Dario Binacchi (8):
+  spi: add support for bits-per-word setting
+  spi: sandbox_spi: support wordlen setup
+  test: spi: add sandbox_spi_get_wordlen interface
+  test: dm: spi: add testcase for spi_set_wordlen()
+  spi: stm32: clean up buffer length assignment
+  spi: stm32: add support for bits-per-word setting
+  spi: stm32: extend support to STM32MP25
+  video: support Rocktech RK050HR345-CT106A panel
 
-Thanks!
+ arch/sandbox/include/asm/test.h |   8 +
+ drivers/spi/sandbox_spi.c       |  21 ++
+ drivers/spi/spi-uclass.c        |  19 ++
+ drivers/spi/stm32_spi.c         |  67 +++++-
+ drivers/video/Kconfig           |   8 +
+ drivers/video/Makefile          |   1 +
+ drivers/video/ilitek-ili9806e.c | 354 ++++++++++++++++++++++++++++++++
+ include/spi.h                   |  12 ++
+ test/dm/spi.c                   |  16 ++
+ 9 files changed, 499 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/video/ilitek-ili9806e.c
 
---=20
-Tom
+-- 
+2.43.0
 
---5X6896bmo1Vlucro
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZdIQQAKCRAr4qD1Cr/k
-CvDwAP9e1LqcxoMD9aksSK/HZAhbXHFENxbbIpP/Njcq6jOTuAEAqWVR3FBMvt0H
-Q28qDIdRiZ6UaNbFPbhMx0EdIPB+Wwc=
-=PO5A
------END PGP SIGNATURE-----
-
---5X6896bmo1Vlucro--
+base-commit: 7dca54ef4c44c82bdc6716ac6cdc84c22c66e9ed
+branch: RK050HR345-CT106A-ON-SPI
