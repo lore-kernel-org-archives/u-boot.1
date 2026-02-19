@@ -4,69 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3219E9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E71E9A04A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:37:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E25ED83DFF;
-	Thu, 19 Feb 2026 14:37:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 3620383E4C;
+	Thu, 19 Feb 2026 14:37:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gonJVCkA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pIy3QS8P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0337183AA9; Thu, 19 Feb 2026 11:27:02 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id B2D3F83A47; Thu, 19 Feb 2026 12:59:19 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 515A383936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 11:26:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CCA7802C1
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 12:59:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id BEED14E40544;
- Thu, 19 Feb 2026 10:26:58 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 7B46F5FB45;
- Thu, 19 Feb 2026 10:26:58 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 68BAB10368C82; Thu, 19 Feb 2026 11:26:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1771496817; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=kfxCzrBUa/5Wa0YNMMDvfgs8zLTAAMk0eLXKvQGFWus=;
- b=gonJVCkANCeMMV7PstGQxPrWSggPb/Hb2AVGap20PF4H4aUzlt7MGJoZFGUMmOsu5bTFhH
- jjR9KtWcCFo4Z0Gk+Nlm2D7q7Luawi3GjOWJshYhLo8XJRBtTgvdkHPljsxT/E1jZgI5ZP
- v5yQGn0AGqHtA6rYSJGRvFqxLxIruY3T9AaNid0m8YsD53YyouvC3jGMUS+zCpjjwadRNG
- 6FqgUE++TqXS3AAyieDffgmrPNUxikPp2HFN3Yhr22LL3WfB+7/6YP6iAsQTjwVwx74Taw
- mIGDEuTy2QFv91rISxwYWpxBWw9evda2M48IhPLzXJqyEpTNPKnEdbnHMiwVDg==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,  Michael Walle <mwalle@kernel.org>,
- Conor Dooley <conor@kernel.org>,  u-boot@lists.denx.de,  Tudor Ambarus
- <tudor.ambarus@linaro.org>,  Takahiro Kuwano
- <Takahiro.Kuwano@infineon.com>,  Hiroyuki Saito
- <Hiroyuki.Saito2@infineon.com>,  Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>,  Prasanth Babu Mantena <p-mantena@ti.com>,
- Vaishnav Achath <vaishnav.a@ti.com>,  Prasad Kummari
- <prasad.kummari@amd.com>
-Subject: Re: [RFH] SPI and SPI-NOR patch help
-In-Reply-To: <CALeDE9OiivzK9-Hy6RN0yD5ctiBRVC_GtHXvmnXRzx5-e-NV5w@mail.gmail.com>
- (Peter Robinson's message of "Wed, 18 Feb 2026 14:20:56 +0000")
-References: <20260213164607.GI2747538@bill-the-cat>
- <20260214-sternness-cling-4259916a8f73@spud>
- <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
- <20260216153110.GV2747538@bill-the-cat> <87bjhmv20f.fsf@bootlin.com>
- <CALeDE9OiivzK9-Hy6RN0yD5ctiBRVC_GtHXvmnXRzx5-e-NV5w@mail.gmail.com>
-User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Thu, 19 Feb 2026 11:26:54 +0100
-Message-ID: <87ikbtt4ep.fsf@bootlin.com>
+ spf=pass smtp.mailfrom=sparsh-kumar@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yTMbfDDoyYt07x8niXvq/cfCISTwPPsXmAnrFjyZpnVhP9PKVs4UTKgHEFw7jvdnsQc5rAM9R9VS6fMy557u+E6hFcGCaAJzTXX5/hY5xjuDQOanBC/6AMME5Zkfzzh2Ol3E5SDWUCLnlb0qAnqTaBfA6kfckpdJ0pItRUifmI6GLIbEMuJSyY2g4q/Uhk/Y6dFZTtcChJPZba7TRhOmCf7uxuKSuJptuOg+i7ySOc+lDEtlKcmzAacMAKLNTRFrNbB0L/2hj3YWt6I8nuSLyYa372yFlMjwYZdA70+fKKebm7w1E2C0PTdhdpUbw1QRC+47kPfWJesJ6TZDCS4cLg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6x2RlJvGxHporO8ILEH+WnMDodPRugpc9gO9PYbwSqU=;
+ b=rwcAAka0TxH4JDkj8IkD8iXfG33QU8zx1SlSR2YoAgnf3jU1mOOXdjB1WygncjFbmslk1aj8jqfovAW/AyPjnVk+kboPPZooAEk6cMdclEYazlC8T4ueAtiCEMaOwIZNHmtuldgz0tNAzfNYlqvFNB20c5U6bpVdMZyIwwSA3VCC72vECn3/lShY8z9TzIwyi8NUbBMG/PI2E737cUuEAhbV065vZQsLqxuWfWACeqzH7knqLZ0476S+or9MhSkkrFRyZZQ9bU7vulnXu1EnA6X0zGZUl1D2ab0Zcd4NTHuxh/qaJ4mZv9HJFIuvhJRXU0dbEdQAaafcn89QUQ9IaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6x2RlJvGxHporO8ILEH+WnMDodPRugpc9gO9PYbwSqU=;
+ b=pIy3QS8Psd8OHsA7oDMwms4qk+GKBYw/cbTVZgTTbmpuLCntBWz92ybcXYO2+TkE4PmVVahjfR6TsKQ6E8twfpzIbDXhVdPTI+VtXcc2DFmFb/wk516ocxcIO+XkXcT0FykqHaoRnp+jsRgvmZDimqgmERfErQUIJtaaZj0M2OI=
+Received: from DM6PR01CA0012.prod.exchangelabs.com (2603:10b6:5:296::17) by
+ DM3PR10MB7910.namprd10.prod.outlook.com (2603:10b6:0:b::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.15; Thu, 19 Feb 2026 11:59:10 +0000
+Received: from DS2PEPF00003448.namprd04.prod.outlook.com
+ (2603:10b6:5:296:cafe::38) by DM6PR01CA0012.outlook.office365.com
+ (2603:10b6:5:296::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
+ 19 Feb 2026 11:59:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ DS2PEPF00003448.mail.protection.outlook.com (10.167.17.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Thu, 19 Feb 2026 11:59:09 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
+ 2026 05:59:09 -0600
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 19 Feb
+ 2026 05:59:09 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 19 Feb 2026 05:59:09 -0600
+Received: from uda0510137.dhcp.ti.com (uda0510137.dhcp.ti.com [172.24.233.216])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61JBx59t2535407;
+ Thu, 19 Feb 2026 05:59:06 -0600
+From: Sparsh Kumar <sparsh-kumar@ti.com>
+To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Bryan Brattlof <bb@ti.com>, <u-boot@lists.denx.de>
+CC: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, "Sebin
+ Francis" <sebin.francis@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
+ "Akashdeep Kaur" <a-kaur@ti.com>, Sparsh Kumar <sparsh-kumar@ti.com>
+Subject: [PATCH 0/4] board: ti: am62 family: Sync rm-cfg and tifs-rm-cfg with
+ TIFS firmware
+Date: Thu, 19 Feb 2026 17:28:33 +0530
+Message-ID: <20260219115837.965532-1-sparsh-kumar@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF00003448:EE_|DM3PR10MB7910:EE_
+X-MS-Office365-Filtering-Correlation-Id: bbd33173-5d90-45a0-30c5-08de6fae4a8f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?faXLDXsGXPH3wdFVua1SvgB61Yg/vBn/5zRLt0pgdiG0tQMXxdGualdrGGEW?=
+ =?us-ascii?Q?CT58q4f6HxCLvFGpki/xWhXMpTGV6WSiiCDHYswzjAo0z9rylET3I7MKRab0?=
+ =?us-ascii?Q?C/W4rFNy2UPoA8zEAKVc3iM8npyc6PaVa+aayR9le3sdY4SRgOEskpOrv1HP?=
+ =?us-ascii?Q?MjWLg0ojbNI4Y3WdY2Rfhr+npRoFgOjpwbJKzvupiBlcV3yAvG/vZfwKsk+3?=
+ =?us-ascii?Q?AdUgV5T0hr24OF+X/GutxhDd7dRrPTuC4+dSAKb4gc1sBjRtE70pxzIZEk27?=
+ =?us-ascii?Q?JUrudT1LuJr1PaNC/MBYS4mZP/AK+d63e0e8kFUKPn9ME8zbN8DC9Q3M5Fzm?=
+ =?us-ascii?Q?YWp8WT5+2WlMq3Zwsf3YQcUOFwNOl8pF2Vtdbsx1FHbkRLWSEgHRTM6IEBAG?=
+ =?us-ascii?Q?xCwNNHsf1eoz+xb1XlxfYL0kkkQv+zEg7GmMT+k40ReXBcmZ5soZicHXhZkN?=
+ =?us-ascii?Q?iSiR/9jzf1YHgmk9kFY3SNgYfJsZAZ1/Osnv0AZlr9cm1FXr/8d4DGlor5yS?=
+ =?us-ascii?Q?fFsbMDJESwERlMooD2KUEKcY6ZGDVnLPByTHOtr41DUi9ckPSb0d9/ff4tN4?=
+ =?us-ascii?Q?jLt651/XgL2/5U31B83pEKblo4C4KgmOWNlxqODTqHyLUT8yRx7u7bssigd9?=
+ =?us-ascii?Q?z/EWW5xQEvtDfYFrwL6JU985eqbcHgvYhS/bdiukorw9qJjXRCcvz/d8D8d1?=
+ =?us-ascii?Q?6ub64TN6GAnaZwDKHOD4i9nTVlpgvECedP3gSRMQYgV9VxQLfDjF0BdW9f5o?=
+ =?us-ascii?Q?I8GaiW8UsSQsj8vcf21oiumYJsuXRf7ojHQWxIgeC9lq6N/eYFJ3m9qc7WbT?=
+ =?us-ascii?Q?/LVn76A2jc6QXbfaq5zztx/Hxg3Uy3dxIdCAQZmJQF44boXxb6rD8f39Uqzt?=
+ =?us-ascii?Q?ZnPFgl+YbWs6E66qw1w4MXxEmLz4LzoDGRGzGBeTb8YNG2isBrh4dyZFYhGk?=
+ =?us-ascii?Q?mieMe/fOZlNmjvwNampNp3F2sI6FMyfR8jitOhzZiCrOYnkqqi5G5bzqVjIb?=
+ =?us-ascii?Q?bzZLdW2VTC6veLM3sE4SKxMCmATFCB3JOpQ81OjaRV8+IHXtlwYY4VysE14T?=
+ =?us-ascii?Q?AtjxaRXc0hNPbj7z7lmT2qmATCZZD51yq+J4djrivQeT4hV7MuzEtGCPZljb?=
+ =?us-ascii?Q?KYBIDrswuj26d1mBLUEJeuMz8gPbe+a08euBtYhCwhlNWz3Vw/ruT/1a0NXD?=
+ =?us-ascii?Q?Xl9MO7CGOqCOfNkGEd1RwxWEW/fyattOsY84ocyWBgxWFY1nqtbvM2KOPYsK?=
+ =?us-ascii?Q?OnFuZIDggE9M37qjKzHOGXUvybBY/jBgEmYUTl/EDIR9M370n+1fpazqo06y?=
+ =?us-ascii?Q?gksT4RLIehrsfFey5qw4i//cfC4Tt8AL2HyrUnR2dguIoPLfNaTtWwEWmLRz?=
+ =?us-ascii?Q?rRcZRn7FmlDz7iBqfCpuAatPMi8D6X+2wVRnZ8PjmU/zcfSESOpAgLU/J0uD?=
+ =?us-ascii?Q?zYkikW4qdlbyIVkfAKmmwsuWOZQzJdgeVRDSB7mhAt0XZ7d8ieu7Pykahgau?=
+ =?us-ascii?Q?sM+t0llFWiAw7o7+I7Sr0L79vxUDucnmK/1kKthmXnRxVlUqllJpijtLjPFF?=
+ =?us-ascii?Q?dmxi0N5jpoKAlr1DvwaZUieUgBRdgH980j9jtFLvYWwtqYsATKCdTlI78fma?=
+ =?us-ascii?Q?bNkam4KfeKY/9YUzm6tHzO4tcrO9E5AaQankunxN5yRWgjVVLwmL7r2LJJL9?=
+ =?us-ascii?Q?TiLUCg=3D=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: m0K2nkeZo9f8bp1zhJlZcJi4dOc8dyg6UnzbPXFwZhvzR5I0V/QM8TAnOjBSbmzLskaJdwqMAnd7ocHBzx9HaMIPUO2iwEQxFBryNHIXCQKDELhMx8G8pWH8isV0inJUj1FZ7X01t0PX8OyLZ3JCjaz+VE5LKWt+CB5yeciCWpOv+pPta6ki/RVQWmnYthUtcNPYa0LaWlqVsWj8u0SKR2MRQPXNqWxJpUK5wRivqzqwAUUEyFY2R7FxaBpBriEOX5+dZFr/hnShyridaRpKgIGfUBTNcyVgo05kN4yLWl8glAcBaEgZarJ138yJ7sEY8ptHTwyzeQFQbp5pVngcX6VPcBMw//O7Ve/HHai1PSl595WyRoJJXSVh/kvBBPG3570FHwRsqZvbAoYQiUZ0i7ZWgZV4zv9aTSUOwEZwoGMfbobtp/3lu8Zslugu03We
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 11:59:09.8127 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bbd33173-5d90-45a0-30c5-08de6fae4a8f
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003448.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR10MB7910
 X-Mailman-Approved-At: Thu, 19 Feb 2026 14:37:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,74 +161,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18/02/2026 at 14:20:56 GMT, Peter Robinson <pbrobinson@gmail.com> wrote:
+This patch series updates the Resource Management (RM) configuration
+files for the AM62 family of devices (am62x, am62ax, am62px) to align
+with the latest TIFS firmware changes.
 
-> On Wed, 18 Feb 2026 at 13:40, Miquel Raynal <miquel.raynal@bootlin.com> w=
-rote:
->>
->> Hello Tom,
->>
->> On 16/02/2026 at 09:31:10 -06, Tom Rini <trini@konsulko.com> wrote:
->>
->> > On Mon, Feb 16, 2026 at 09:21:55AM +0100, Michael Walle wrote:
->> >> On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
->> >> > On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
->> >> >> Hey all,
->> >> >>
->> >> >> To be blunt, U-Boot needs help with reviewing and maintaining the =
-SPI
->> >> >> and SPI-NOR subsystems. We haven't had someone with time to active=
-ly
->> >> >> work in this area for some time. I'm going through the outstanding
->> >> >> changes now, but it also seems a common problem is that with respe=
-ct to
->> >> >> device IDs, most of the new ones also aren't in the upstream Linux
->> >> >> Kernel. Is there some better and generic solution we're missing so=
- that
->> >> >> we don't have large and often growing device ID tables? I'd rather=
- not
->> >> >> make that problem worse, so I've rejected two of those types of up=
-dates
->> >> >> today and I'm just setting aside a large number of others.
->> >> >
->> >> > Dunno if your timing was cursed on sending this, but Tudor submitte=
-d his
->> >> > resignation from spi-nor maintainership in the kernel about 10 mins
->> >> > after.
->> >> > I think Michael Walle might be responsible for what you're talking =
-about
->> >> > here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash driv=
-er"),
->> >> > but idk jack about spi-nor stuff.
->> >>
->> >> Yeah. Nowadays SPI-NOR flashes come with self describing tables,
->> >> which are already supported by u-boot, I think. The only change that
->> >> seems to be missing is the fallback to it if an id isn't found in
->> >> the flashdb. Only thing is, the SFDP doesn't describe all features,
->> >> most prominent example being locking. So if you need that, you'll
->> >> still need to have an entry per flash.
->> >>
->> >> In fact, in linux I'm planning to change to make it probe SFDP first
->> >> and then amend it with the flashdb information (if there is an
->> >> entry).
->> >
->> > Thanks for explaining. So in that U-Boot does have SFDP support, the
->> > first thing is platforms should likely be enabling that instead of just
->> > adding IDs, at least for basic support.
->>
->> Yes. There will be the need for IDs anyways, for those "extra" "non
->> sfdp" features, but that should reduce the load. For example, shall we
->> consider block protection in U-Boot or not? This is a useful feature,
->> but at the same time, do we really need it in a Bootloader? This is open
->> to discussion.
->
-> By block protection do you mean for features like rpmc counters for
-> rollback protection? If so I suspect there's some usefulness to
-> supporting it given U-Boot ends up being the entry point for FW stack
-> updates using mechanisms like UEFI capsule support.
+Background:
+-----------
+With the latest TIFS firmware, an additional virtual interrupt and event
+is reserved for MCU cores to DM usage. This series brings the rm-cfg and
+tifs-rm-cfg files in sync with these firmware changes.
 
-Sounds like a legitimate use case. I was actually referring to Software
-Block Protection bits (BP, TB, INV).
+Additionally, the am62x platform was originally introduced without a
+tifs-rm-cfg.yaml file, unlike other platforms in the AM62 family. This
+series addresses that gap.
 
-Thanks,
-Miqu=C3=A8l
+Dependencies:
+-------------
+This series depends on the following patch for am62ax tifs-rm-cfg updates:
+  https://lore.kernel.org/u-boot/20260130143339.1401600-1-p-bhagat@ti.com/
+
+That patch adds C7x core resource allocations to am62ax tifs-rm-cfg:
+- Shared split BCDMA tx/rx channels between DM R5 and C7x
+- Shared rings for split BCDMA tx/rx channels
+- Global events and virtual interrupts for C7x
+
+---
+
+Sparsh Kumar (4):
+  board: ti: rm-cfg: Update rm-cfg to reflect new resource reservation
+  board: ti: am62px: tifs-rm-cfg: Sync tifs-rm-cfg with TIFS firmware
+    updates
+  board: ti: am62x: tifs-rm-cfg: Add the missing tifs-rm-cfg:
+  arm: dts: k3: am62x/am62px: Enable tifs-rm-cfg in binman
+
+ arch/arm/dts/k3-am625-sk-binman.dtsi |    4 +
+ arch/arm/dts/k3-am62p-sk-binman.dtsi |    4 +
+ board/ti/am62ax/rm-cfg.yaml          |    8 +-
+ board/ti/am62px/rm-cfg.yaml          |    4 +-
+ board/ti/am62px/tifs-rm-cfg.yaml     | 1476 +++++++++++++-------------
+ board/ti/am62x/rm-cfg.yaml           |    6 +-
+ board/ti/am62x/tifs-rm-cfg.yaml      |  867 +++++++++++++++
+ 7 files changed, 1646 insertions(+), 723 deletions(-)
+ create mode 100644 board/ti/am62x/tifs-rm-cfg.yaml
+
+-- 
+2.34.1
+
