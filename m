@@ -4,95 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5471E9A048
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 14:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC118E9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 14:34:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F0B83D8A;
-	Thu, 19 Feb 2026 15:31:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4391083CF5;
+	Thu, 19 Feb 2026 15:34:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F0YgUKw6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RAYO4m/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 801F483936; Thu, 19 Feb 2026 15:31:32 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id B61A383D3D; Thu, 19 Feb 2026 15:34:36 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62B0483936
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 15:31:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 468C883936
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 15:34:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-65807298140so1465265a12.2
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 06:31:30 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771511490; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-65b9608a9adso1662369a12.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 06:34:34 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771511674; cv=none;
  d=google.com; s=arc-20240605;
- b=KT3VmKSXs743qGJwQhBbwnUYi3FzQcBkifUBwyFVj2h0IBQGiNYslUKuEkCuGxHK2H
- v/dRRNik/eSXyacsnwzmLRZ+nDu6azCit2GcB5uud3hUtx3nxdK8KIMh7Nl3wkhiSYm4
- 0iajA8UrSke9ahk0G5f3PY8tq0xxhlCMpblo8McfeCQaTxziloySQaC7dBHV9Jecxzxs
- cNYa2U8k19PKQhvQ+CO3Kv7c4+tKE/h+/yIP4p/g0CpFH6UBMYlXRFRH9eZ/PZRW/d0q
- tcNqHzbQHYipUbgz/TsonuShCG5jsuLTK8AXtAHJf84LkrUxPaRzfLCiL/r+udKkaMLv
- wE7w==
+ b=Sg/fR9w+ePTOjDcMPuJFLhh8e8MzyRryOcizd7GanHZbnmBNugE8jnTUaFBygikr1X
+ x1DQwcEMdkjXt2v44okFHid6Fcms4lGcsmYI3RmbdI0nN4T0i9fWTMH0zza0XCJ+XW3a
+ X+pyIynxubsGYqhT++MxP5r3Swll4qhreIBvbGZyI1q/1c0i8lDHTcthGE61EuisO2va
+ ys4l+lU4JB6kLak7Ui9hxuGnG0dCFC18i2xnDRuCxZ667QbsaPBXVJmF7Foyq/MCWmbU
+ k2eiBAUplM0MGqmd4DcwL4bn46RA4Rln9InLyJOEHxypy6pIS4ODdaXSIjcS7Woa9jOK
+ LR0w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=oYQJeeEbaWEBUufd1KoQI+RA1/toCfib5hdSlGVoooU=;
- fh=Yuk3V/34b+FX9QDxa4PDTsq/QGIOsBiUqlZ9jSvK7ig=;
- b=LqsscWspabx6iMtF/8ybYExTEEO0H9yYUqEqgVQdUqKjP3ShlY+7flAYytk4MLzqkr
- iTLl7uJm3l8aYGBAhLPcubNbM4FFCuksoT66YrFRsrfITrCqrRWkbFjT028H6R8Dz4qk
- 4MHAQrKjloyxub0gT7ASyxY0FhHBcvmAHewyfh8W744jSTBxq/Nrj9fbao4gVkWupVkW
- KOjDnTO7dLQ3zwN6iWn5LhjQJhIddeYMzufbqmjLS+UqJ+lMhaF6mQRz5fwGCPoVS8YC
- hdmBXjoEU439u6c3cJQ5m4aw6bErzLEAxWfM6ZSyY0eNqQPGv9ltZw56gMX/GWnuBKeQ
- sI4w==; darn=lists.denx.de
+ bh=INuBk0Jz50+5u0qx8OwkRN3+sVtDSP1gP4pppwm0Nr8=;
+ fh=DDAk11SuFiQn3Od90A26D+KrexqslrkhzZ3WCPg98n0=;
+ b=Y96fUXAEHlMrPHESQ7QHaPNaeyzUqoetqWLXdzQBR63Zm7n9xfTh7EwadOqCArCXV9
+ /QStezN4Gt1ewH6G+r05hspAgATNf9L1FhIptVKwuNwBOEGFefH2tCuZC6j4JeAGDmA0
+ +Aiz02OfpWCesVDR9u7UjLCroQFOAmfbnOHwLwJv6DtXAlJWfPcPxFrGmGPFdGrhbMoH
+ WkxFbGzDPuWZ3uypjSf2zOsT05fbcaDzUnJ2NDDS5l807iTCjyYAUyVyD505CcQV8KlV
+ CmvfnMoJok7LoUCM53oHEBEQAIL7ibfoh2Iu7chWgs609xIHYbeorVVIUeYvzqyKWxgL
+ /TpA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771511490; x=1772116290; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771511674; x=1772116474; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oYQJeeEbaWEBUufd1KoQI+RA1/toCfib5hdSlGVoooU=;
- b=F0YgUKw6X5wStQmBSqQnXzH214lC7LY2n32XytTZcoWPcSD/6G5Bml0eJu6YuMmfYd
- lA6gyRvMmnHwo+9xHKlW4eHwrlGqQmixxMgDYxtyDNf1CRIKl4c+BLn877ie8tA0Hwqc
- 1Cwftqn2RoXogaXe1uudQrPIccRdMC06lm+To=
+ bh=INuBk0Jz50+5u0qx8OwkRN3+sVtDSP1gP4pppwm0Nr8=;
+ b=RAYO4m/xO+X1qbvtUbWZ2GzRojWX2uvjxvg/xTmJLs8Tjcw7H2hsqyEnVeC4PxqND9
+ 8i4I2FOZxYShzn4chMtc8BmJEG4gC+JuZBT6XTLfIzV6SSxiqhaE2yJiOSMhdaPo0jN2
+ +LQyscIx+lowqz4z/DcpZ2AQKpKdxzq0NxSQM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771511490; x=1772116290;
+ d=1e100.net; s=20230601; t=1771511674; x=1772116474;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oYQJeeEbaWEBUufd1KoQI+RA1/toCfib5hdSlGVoooU=;
- b=JNLykf0dwIbBj7uJPTvQ0R8ZYn6KoCcac/EhgaaZyFIoe6Scp3+jY2iTUJZCAvByEC
- fkqGwY0pLuinwuuxYVfzZg2Z4EGRw2x9r6L/CSQLBFB43Rv0qula/aRR0hwRdUAh1wYT
- a0F7gqHfZS7228YpZoFkkub03CaIxzBYTii04WM/Q0HjLQbdh8zmFIWZl4fgEgEYQS5M
- JkifjH2wPdXyvRs12lB27K44jwihxkOIsG2+Ech1P9Lva4cMfJOMPstkBdeH6oLRdusg
- xGEwW7S5dmwflBw123Ovf2bAzN+n3qBJIfRqh+9TCLSvLYEjgS7kggTW1CjXpSeXOtAI
- z9kA==
+ bh=INuBk0Jz50+5u0qx8OwkRN3+sVtDSP1gP4pppwm0Nr8=;
+ b=YRxc+wpxjRWbP86ZZj8xVFKK5WEZVSodehrXuMatCzvZWwPD2v/Xo6EaGinzGntypl
+ t3HdifEa8ueMCoCAB1/wqlm1fLJdD8ByvunTQl7cCksqGDfe8Nai/YqDe/m6XlyMXF/V
+ bTv4pYACCWJ9fIRgGozn2oJ1aS6yMJgk2pcGuH/hPc/W5AN3P30xSzx1bY8+GP3rIBjE
+ Q7TUlT+4lbCNv4jNYEXttdWvWeqC6Qa3/4i1PqNxH2TsQcPMGix4BKiGrNVaOVMohgGj
+ mF4E2gqnJd+KTIEUxykmherZ68pJLTgfqE+0686hxIFOB05bbijkRH+LCfelFdPF1X7V
+ kWGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURe4+PWGg5DwryNqsz4c0wifEdMCPYv8KsUQsaOuElUMKgtpVqcVmI8orespeEYzbGKYnar9g=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQ/O+HRxJvGiB5EpK8GcQiMcsQWG7cSDRvj78yH6kBuXhGaVoU
- p8pQQtLsAb21UXfqUGayyWXr+eXG0zWLOQ+Qd5AQ7qL21Xfwlx8wXr+b11/x62K7rxNALywk39g
- B2AqsxMegvjkOQuzEiCfyKYZ159JldePIaDhEsQ++
-X-Gm-Gg: AZuq6aJ7Bzd1NmOvjgK9U6Vf63aHWK2HCSFu0mXJUKj5khLLJS0Ra+viS669YxRoCst
- keTJob/FJOCaAfjRtVS72RR/MifAl6MbFd4haxgsTpJpLzewzCJurzXN2zzDiRXXgGa5peL3XvI
- rFWTUIdLsEgnVF1DwbH6DG3PoXqEw55NlECKUA6/TxEaJz3KJXANegIkqG0v4fCJSdMSsToQqIa
- JK+G1GJy44s57pBNEjBAC/xdtUZ9qQfOtwRf9lm6OczcSOqUJ60TBkkLVCzngjHxexNBsexmpRX
- 1eLShQ==
-X-Received: by 2002:a05:6402:5106:b0:65c:2120:4055 with SMTP id
- 4fb4d7f45d1cf-65c76a62449mr3431989a12.17.1771511489647; Thu, 19 Feb 2026
- 06:31:29 -0800 (PST)
+ AJvYcCVB444fJsYeUt5ctIWiC/82ojBP4Q7/X8jJlNlSOPV7hii5dd0+yVhA5a6K6GlFdg30mJ9H1S4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXiTHuE2/0oe34c2YvjDd/JLSH4SQ7J6EWZsfql7FqHhhzdG8A
+ 9SfUfNLadJHl8etIdfAV1XMWg2jTf0HXEkomdoxv+TF6KvfMIokdrCgid8+2kXaOQLOR2noyEAj
+ iKRSFL6rqwpXQInl+zPnSW0e8y9PmIoNJELE9xyvn
+X-Gm-Gg: AZuq6aLvSDXh+dMKzBF7I5sZTl+tzokrYNgOQKNWHKU5pqv8J2mNW0XXMK32PAuTB4f
+ 2CymKNVmZKZCUp9UmfgtTAQZfNtjDfm/eC94PD5rahCLH7RBdc1heOzIg6pkm0QEB99RIm9vN9P
+ n56BZap0rNE4DzV7xNGsdhyjnUC2C3ZAUhKDoWfP+AQ91c7/yhSj7O1buBsylhMwSTDA2zfsSSF
+ 8XhrGS5PVFMZVCno7PZwz190xBPL/eYOS6O0URM7J4RuZqV2MEZdpfjE6fKhpuPjcSHsjZwfC5C
+ xmv6PQ==
+X-Received: by 2002:a17:907:3e8f:b0:b88:5b21:b16b with SMTP id
+ a640c23a62f3a-b8fc3b59ed1mr1159792766b.25.1771511673664; Thu, 19 Feb 2026
+ 06:34:33 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <46dcab5fc58e9116ca017a63ed07922ae3093913.1771275704.git.daniel@makrotopia.org>
- <CAFLszTiE82Bo1PbvK7Lx7P4Gq=-z+hhgLcgXORtSrYha4R7sBg@mail.gmail.com>
- <20260219140002.GI3233182@bill-the-cat>
-In-Reply-To: <20260219140002.GI3233182@bill-the-cat>
+ <05cc2003b7e0951a80b0078b3824d14466979b3d.1771275704.git.daniel@makrotopia.org>
+ <CAFLszTh3FiMF+eCSxHq7b6hszKphWxyZZpeKrfPAAqEseLhNdg@mail.gmail.com>
+ <20260219140421.GJ3233182@bill-the-cat>
+In-Reply-To: <20260219140421.GJ3233182@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 07:31:17 -0700
-X-Gm-Features: AaiRm53SWZVwcwouP1uZidfWMjxKmehIHvRSidL9npsCTt-ghO42VeMdcPodD_c
-Message-ID: <CAFLszTj9BzFK3hcRRGtwzZWBO39WwtLjbYJ9ajFQ_c2+rDU=FQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 13/20] boot: bootmeth: add OpenWrt boot method skeleton
+Date: Thu, 19 Feb 2026 07:34:21 -0700
+X-Gm-Features: AaiRm53Z6cX9GefzO6Qb_XOdG9mUtbNnXp8r2Kvgq_-eKs88j-vxc3GBHuoBYJM
+Message-ID: <CAFLszTjkdArCnEWPc5MkA1rVH1xnTvyQ+eeeWRkXiPPuSkbvwg@mail.gmail.com>
+Subject: Re: [RFC PATCH 11/20] test: boot: add image_loader unit tests
 To: Tom Rini <trini@konsulko.com>
 Cc: Daniel Golle <daniel@makrotopia.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
@@ -139,39 +139,67 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 19 Feb 2026 at 07:00, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 19 Feb 2026 at 07:04, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Feb 19, 2026 at 06:09:28AM -0700, Simon Glass wrote:
+> On Thu, Feb 19, 2026 at 06:10:58AM -0700, Simon Glass wrote:
+> > Hi Daniel,
+> >
 > > On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
 > > >
-> > > Add the initial bootmeth_openwrt driver with:
+> > > Add unit tests for the image_loader framework covering its core
+> > > logic with a mock storage backend:
 > > >
-> > > - UCLASS_BOOTMETH driver, compatible "u-boot,openwrt"
-> > > - check(): accept block devices via bootflow_iter_check_blk()
-> > > - bind(): set BOOTMETHF_ANY_PART so bootstd iterates all partitions
-> > >   without requiring a filesystem
-> > > - read_bootflow(): stub returning -ENOENT
-> > > - boot(): stub returning -ENOSYS
-> > > - Kconfig: CONFIG_BOOTMETH_OPENWRT depending on FIT, BOOTSTD,
-> > >   BOOTM_STORAGE
+> > > - map() allocates, reads and records a region
+> > > - map() returns cached pointer for already-mapped range
+> > > - map() returns correct offset within a larger region
+> > > - map() re-reads when extending a region to a larger size
+> > > - map_to() reads to a specified address and records it
+> > > - lookup() returns NULL for unmapped ranges
+> > > - alloc_ptr advances with correct alignment
+> > > - map() returns NULL when the translation table is full
+> > > - cleanup() calls backend and resets state
+> > > - map() with multiple disjoint regions
+> > > - read beyond image size returns error
+> > >
+> > > Also fix IMAGE_LOADER_MAX_REGIONS Kconfig to depend on IMAGE_LOADER
+> > > and default to 16 unconditionally (the previous 'default 0' fallback
+> > > caused the regions array to be zero-sized when IMAGE_LOADER was
+> > > enabled after initial defconfig generation).
+> > >
+> > > Register the new 'image_loader' test suite in test/cmd_ut.c so it
+> > > can be run via 'ut image_loader'.
+> > >
+> > > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> > > ---
+> > >  boot/Kconfig             |   4 +-
+> > >  test/boot/Makefile       |   2 +
+> > >  test/boot/image_loader.c | 429 +++++++++++++++++++++++++++++++++++++++
+> > >  test/cmd_ut.c            |   2 +
+> > >  4 files changed, 435 insertions(+), 2 deletions(-)
+> > >  create mode 100644 test/boot/image_loader.c
+> > >
+> > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > index 1f870c7d251..efc06f3cd1a 100644
+> > > --- a/boot/Kconfig
+> > > +++ b/boot/Kconfig
+> > > @@ -1179,8 +1179,8 @@ config IMAGE_LOADER
+> > >
+> > >  config IMAGE_LOADER_MAX_REGIONS
+> > >         int "Maximum number of mapped regions in image loader"
+> > > -       default 16 if IMAGE_LOADER
+> > > -       default 0
+> > > +       depends on IMAGE_LOADER
+> > > +       default 16
+> > >         help
+> > >           Maximum number of distinct image regions that can be mapped
+> > >           into RAM simultaneously. 16 is sufficient for typical FIT
 > >
-> > We don't normally write out this much detail in the code
+> > As Tom mentioned, this is in the wrong patch. But really we should
+> > just remove it and use an alist
 >
-> I assume you mean the commit message? And yes, this reads like an
-> AI genreated (then human proof-read) commit message. Which is something
-> I wanted to address, once done with the open questions I still have in
-> the cover letter.
+> Lets not have another argument about your alist stuff please.
 
-Yes I meant 'about' the code not 'in' the code.
-
-You can normally fix it by asking for prose, or giving it some general
-instructions.
+Then perhaps another type of list that can grow as needed.
 
 Regards,
 Simon
-
-
-
->
-> --
-> Tom
