@@ -4,95 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6594E9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C96CE9A048
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:12:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1674283E7F;
-	Thu, 19 Feb 2026 14:11:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6904383CF2;
+	Thu, 19 Feb 2026 14:11:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P/IefWns";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XW8jUVgR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB27283936; Thu, 19 Feb 2026 14:11:37 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id A5BAE83CF2; Thu, 19 Feb 2026 14:11:44 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFCA683DF3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0221983936
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:11:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-65c01595082so1196753a12.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:33 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771506691; cv=none;
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-65807298140so1321696a12.2
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 05:11:38 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771506696; cv=none;
  d=google.com; s=arc-20240605;
- b=GO+Q/jI2suxR/G3XaY0rHWQbFy7ioL4h3y32eV9WWNuX7WWIM+v6uaC0z+hc9PcVJ5
- p0RBr2MGB+NcD8KJ9d3IObm+k8YNi2z5iV3PIpJpO0ymlp95PBtdV3RyYwV39L5SX6sl
- SdRtcGX/9dKnZy+c3L/S6uKyCXzxzg3kEFwu15SqsQbidQN/kQlzNzGD7Pa6ozN1r9FO
- i2ajtKetflNspzNOJcAJ4Z0/tZZyH2ue4FH2/AoY7eEj18HNzWTsU/8jfnDpQ/sp9VoL
- zJrRC0LglJ5HAVWoA7X72J1g345vgA+Oa8mazxwIRGMFtjtrbl8qt0En27VV0tOAwr7g
- DZcQ==
+ b=ke4m1EXGB4XKilD7lVwivp+ohhe33vvKNWHoI6Ho2sEhTDwq+zlF0iC/qV1JSDOUW2
+ V5r25nk8wVHCmdxljtC5Cecxwpdt0W1cCJ2avTq1fEX4sBnqRxQXtGYLVzN0IERc6qvb
+ 5qvTY4S8wjY7KploXhXzrydAIfCaOoUpz828Bdh6Ch7iIsVz/P7yXfdzxwm+Qwm3oGi6
+ MPOWpKn+usfBkP3HKldlda+NhGkz+nX+Oljpm0oDU5rHy5t2ESItUMqhEHUXFfSmdMkM
+ N62kFl3ptPo8k4eOoE/FVeCh5in5I1Nzotmut5km+ad34IFkBHCECW9KQyNv2NBPiaEe
+ vsKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=lWtLsN7NoPiuQWW3VqDyqFa5Wt8quRcCdiSe+R15qNg=;
- fh=/qylhtYtuBkLitSNodewGug8IfgZjvhW3g4XYMzCy+k=;
- b=ZSAG976gzht1d7tKXIcxbPvRc/9NcX3sup7z+9YZ9ZLMN94TDwWTo0eqT6QPDJd3MU
- LcDxj+resOk2orzurf2pR2ZGteOM5C+C+5eKLrPm3YbSSdpOTE357mNrEf6lMe5biZmV
- a5zQx8mu32U/FbmUJzuUFR5Gj5XQ1Lc3ed85Wx3Z7ekgEXt10Sn4V14Vu5mPEs/35cuy
- ddbW8WGm49SO0uniX817hsA2ihGv3bFLqAnHWhQnOmlcK6Yn0z8cybXD1wR8a6dsjVCx
- YCbz/w3BLOGSU46x0BzZ6E/YwVccoztogiPHnwmLEw648Aym/Eic4x5p4BLkhc5X6zF2
- PPTw==; darn=lists.denx.de
+ bh=ETTfxr3fImS8YeqmeGWFbuZkgV+wdJE2CIVOsjfZecE=;
+ fh=Mnr0XWigeKUQjHGXBbT1fApNoU0DnA+RcLfY43TYhRA=;
+ b=W2vKU5UEYDMit9EEi6MRabZru+mWWYFM0+uAEtNAGf/QtVGgXY1JzRtHB8V2IWxwoK
+ /Lk/R7xlUOHvMxXMa9MiNxy+XhAvlCaq8yKuwWGpI5FDChZ9qdt9E8XAMpQpc7N7giZA
+ FUaLTDhblg9Xo1Kzsd427zsrdDVoCgrdHIoSr8e6SSFwm3RrN8Hm7Sv3AHlc9pccmUVD
+ 5Wa92SKXZP/ONSLcrz7T9bskRFKuhbSUMUUcUFSnANs81ebFhQGh/TyUSpyEOinKtcsM
+ 5/ko/FfmiORyCg3kg8B2+wECjWL5TgVi7TfDOOoIoOuJQMssl5SzKGnJ2rqD4aMme3jD
+ ra3g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771506691; x=1772111491; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771506696; x=1772111496; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lWtLsN7NoPiuQWW3VqDyqFa5Wt8quRcCdiSe+R15qNg=;
- b=P/IefWnslkzRmE9jOEUU1dZ+QCJtKWROK5d4iwo9W2oUdC/eYlB1P6fMHllT7oGs3R
- JYi8FVibw+eIXwp9r/r0quWYlyktsBbY6tbL0QRe4201fX5sQVSyeErLlyQmiya9fFh9
- rPNSpb2nxwy2nPvE5y0t/LuIWNe6qloR65jwE=
+ bh=ETTfxr3fImS8YeqmeGWFbuZkgV+wdJE2CIVOsjfZecE=;
+ b=XW8jUVgRW/1mi1NG7QpJ4RQKMdpjpau4TPXUzzNtI/0OcWvMQsIW6Y3RASG/BXNgjF
+ ep6EDBfCWeMp1l+OLcLPo6L1an8msEhQNKk5Vupd8H1heMz780ywAbCrsrC063ySVf9E
+ pcPwqWmOBYjuCJK1ZQNQeEYyiHgAE+ANLAngc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771506691; x=1772111491;
+ d=1e100.net; s=20230601; t=1771506696; x=1772111496;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=lWtLsN7NoPiuQWW3VqDyqFa5Wt8quRcCdiSe+R15qNg=;
- b=bCzP61YJ4im5Ys2dmgVLuVaP53/sJh0tvlKPwXYpBhPPBUBqBTE8EBFZd9fjH059jo
- Dww/6YxpwNE/mqwc6iYcm0/NwiHUklZPkKPu8Qsc5wTxks/aD6Rwniw2GQo93nnqbcd4
- Gz2Gw2I97KTtWcKFKztKZukuwt5KdaxFZKxn6Mm3ysY3iuetd3T7AUqZdemPeoqUAV7C
- IH2uxB+dmWoIMvg2P9o+QyD4Sb/jdQOu3R7s8SKQVwn7EX5mLdOtZFJZUw/edORrRfc4
- Au8sR9+NLjQCqCkSZxf63teiG2/bRqMqvOLosfRrRPREGtqXjUwoVoy9dWFTfx1ys09L
- EGtw==
+ bh=ETTfxr3fImS8YeqmeGWFbuZkgV+wdJE2CIVOsjfZecE=;
+ b=B3kxvQ/2QmzcX7nd40tc27UTGf1FgjxonWdq71PG4c0Erag/gM0kms6/SYY5SPetFN
+ mwEQi79YTFlZtSdVgyN08A3a95Py0x4N1ccIGW8sMcsPE+vxEZZHeO7jzNTbX0XQNebo
+ gTxf54g5mtUIfhSytLiWNy2HoOj7VJN9EpDpZ4xHXL2AQS/O1RsV4dZUelO1fANGImAq
+ yrJFv7StFK4YEzujbZ7dsLXaZA8t+0cHl9IZQ9j87R2zXDIdrCJtJtLqujtaSOJJEK9s
+ oaZMf5n8iY799g0LzD5NbPq8jvRmhG5SfmaQdmwzcYUB7R5zlSJAR7Ck99IhZIX4/Kik
+ QqwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVNo3C8aVJVKFV0RcBEivSmv6yqq3qcqVTlZ9pL/R4hoRH4M/oqF4kGGGH6Un9+C7HsOdv5LAA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf9ufHR+aIdCpBfpDKkLypEW4OZ9eqXiZ6HiFAML0Xkzdbm8FN
- RKZZabhr1AIRTwmfTHl6/qLlr7i+5bAKO5Kcq5i8OisPCoWCi5mRZ8MZ+OhGWgOYK9V3Rm3yT+9
- MV/kq4GEewedmWBPrjBmnLodszR/tDEKKIAFfwDqj
-X-Gm-Gg: AZuq6aL8Z0vDM/71K70kfG8XX8PZML8whoPH8p2BPzjf1++hoSYf2WsVzR0KXTkPNZ6
- FUsGYMVnBqS6TNc9OdmJ/f+ow0FI641XDX/mI7Sz/l76mn8157oOiJCUzv4JO4xGnxbJLd7lKcd
- YjbgQAA+0cLZiaO/ByT9pTm/hh0y4zMV5umwjFDfiqlMBsqcAyE1740wDrm/AZhurubuDo3bFSa
- W5xeK74D1slsewGyy7ENssghEQoZKHHUmvNHOcBFi9Q3zjLElWrEFw5OdIEkHR6vx90FuYTPVre
- tSWKbA==
-X-Received: by 2002:a05:6402:13cc:b0:65c:149b:dfea with SMTP id
- 4fb4d7f45d1cf-65c149bfd4dmr8382462a12.15.1771506691187; Thu, 19 Feb 2026
- 05:11:31 -0800 (PST)
+ AJvYcCXb6IZJCSj2NJow0RFJ2Hi3uN5mU76f9qxMbQaaTTB6MXsCMflDDFToI/Qoy9+LihnIOcwnSMA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/JCYEgcRPR8UAx+n7m0yg1qLwHBR3ZFS7SYmez/P7xiOayaT8
+ FArBoGo3uElwYab2W67Rtp6bx8SSRiUrSiVTkxRNuf/J7tA4o+L1f8Ntmbzl5uwm38SbO2pa1GS
+ SiGWAsc7Xvigz/OeLVKT4HI/lFu68kBSGEQLXgxW+
+X-Gm-Gg: AZuq6aJ9s6NuDDplGllA/6JqBVj0AVR04ZFpReOvSezkNH1b+Fw+Vj46SmLVH5IPr78
+ q7PQd/+4tSIPeuG4yJCPpXQBwJs4Qca0OGIRxk7IrhVCMhIJhoXEpfeaTGvou/F6rX5UjNmMOLw
+ l6biC01iHpgdYfH6i4bpjd1UWr6/XSkVr77FmzPWTV5iTx+hyY+Grc8gpkH1DVWFXcazHppJGKK
+ lBv6OCSDeFPQaTeUH+UDzhwsfwgHAoVhDQNm4o4k64caSpUGXHdFPDsNHszXPHJJJ2IZIwPnGay
+ pEqFpg==
+X-Received: by 2002:a05:6402:234e:b0:65c:238b:8b1f with SMTP id
+ 4fb4d7f45d1cf-65c76a630e4mr3360265a12.22.1771506696333; Thu, 19 Feb 2026
+ 05:11:36 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1771275704.git.daniel@makrotopia.org>
- <ab7837536e4567b90d7cb662984dd7e637ef4361.1771275704.git.daniel@makrotopia.org>
-In-Reply-To: <ab7837536e4567b90d7cb662984dd7e637ef4361.1771275704.git.daniel@makrotopia.org>
+ <05cc2003b7e0951a80b0078b3824d14466979b3d.1771275704.git.daniel@makrotopia.org>
+In-Reply-To: <05cc2003b7e0951a80b0078b3824d14466979b3d.1771275704.git.daniel@makrotopia.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 06:09:26 -0700
-X-Gm-Features: AaiRm52-M4cx9OTicnSF49fgQw6kvK3oKHCuGN6upuFdQi93ebb2JCvcTNDVghc
-Message-ID: <CAFLszTi3r_6VynzrZKkDNbcucntoEW=4nLCV_q8kv3+vQojLBg@mail.gmail.com>
-Subject: Re: [RFC PATCH 09/20] boot: fit: support on-demand loading in
- fit_image_load()
+Date: Thu, 19 Feb 2026 06:10:58 -0700
+X-Gm-Features: AaiRm51GAqb4b6lzm5xOgkkXUtyXTgbP7Jk-c77F4yM6OWc6dPjJAHUTjX_4FoA
+Message-ID: <CAFLszTh3FiMF+eCSxHq7b6hszKphWxyZZpeKrfPAAqEseLhNdg@mail.gmail.com>
+Subject: Re: [RFC PATCH 11/20] test: boot: add image_loader unit tests
 To: Daniel Golle <daniel@makrotopia.org>
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
  Kory Maincent <kory.maincent@bootlin.com>,
@@ -139,233 +138,143 @@ X-Virus-Status: Clean
 
 Hi Daniel,
 
-On Mon, 16 Feb 2026 at 14:22, Daniel Golle <daniel@makrotopia.org> wrote:
+On Mon, 16 Feb 2026 at 14:23, Daniel Golle <daniel@makrotopia.org> wrote:
 >
-> Add an on-demand loading path to fit_image_load() for use when
-> images->loader is set (storage-backed boot).
+> Add unit tests for the image_loader framework covering its core
+> logic with a mock storage backend:
 >
-> For external-data FIT images, the new path avoids dereferencing
-> fit + data_offset (which would point into unmapped memory) and
-> instead:
+> - map() allocates, reads and records a region
+> - map() returns cached pointer for already-mapped range
+> - map() returns correct offset within a larger region
+> - map() re-reads when extending a region to a larger size
+> - map_to() reads to a specified address and records it
+> - lookup() returns NULL for unmapped ranges
+> - alloc_ptr advances with correct alignment
+> - map() returns NULL when the translation table is full
+> - cleanup() calls backend and resets state
+> - map() with multiple disjoint regions
+> - read beyond image size returns error
 >
-> 1. Extracts the data offset and size from FDT properties
->    (data-position / data-offset + data-size) -- metadata only,
->    no payload access.
+> Also fix IMAGE_LOADER_MAX_REGIONS Kconfig to depend on IMAGE_LOADER
+> and default to 16 unconditionally (the previous 'default 0' fallback
+> caused the regions array to be zero-sized when IMAGE_LOADER was
+> enabled after initial defconfig generation).
 >
-> 2. Returns early for IH_TYPE_FILESYSTEM sub-images, which stay on
->    storage and are never loaded into RAM (e.g. squashfs rootfs).
->
-> 3. Determines the RAM destination:
->    - If the sub-image has a load address, loads directly there
->      via image_loader_map_to() (zero-copy).
->    - Otherwise, allocates scratch RAM via image_loader_map().
->
-> 4. Verifies the hash/signature in-place using
->    fit_image_verify_with_data(), which is address-agnostic.
->
-> 5. Jumps to the common tail, skipping the normal
->    fit_image_get_data() + memcpy() sequence since data is already
->    at its final location.
->
-> The entire path is gated by 'if (images->loader && external)' and
-> USE_HOSTCC, so the existing in-memory flow is completely unchanged
-> when no loader is set or when building host tools.
->
-> For inline-data FIT images (no data-position/data-offset), the FDT
-> structure loaded during format detection already contains all sub-
-> image data, so the existing path handles them correctly.
->
-> Also adds a 'struct image_loader *loader' member to struct
-> bootm_headers (initialised to NULL).
+> Register the new 'image_loader' test suite in test/cmd_ut.c so it
+> can be run via 'ut image_loader'.
 >
 > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  boot/image-fit.c | 96 ++++++++++++++++++++++++++++++++++++++++++++++++
->  include/image.h  |  4 ++
->  2 files changed, 100 insertions(+)
+>  boot/Kconfig             |   4 +-
+>  test/boot/Makefile       |   2 +
+>  test/boot/image_loader.c | 429 +++++++++++++++++++++++++++++++++++++++
+>  test/cmd_ut.c            |   2 +
+>  4 files changed, 435 insertions(+), 2 deletions(-)
+>  create mode 100644 test/boot/image_loader.c
 >
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index 3ed69b5f7bc..73d3bf7df08 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -24,6 +24,7 @@ extern void *aligned_alloc(size_t alignment, size_t siz=
-e);
->  #include <linux/sizes.h>
->  #include <errno.h>
->  #include <log.h>
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 1f870c7d251..efc06f3cd1a 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -1179,8 +1179,8 @@ config IMAGE_LOADER
+>
+>  config IMAGE_LOADER_MAX_REGIONS
+>         int "Maximum number of mapped regions in image loader"
+> -       default 16 if IMAGE_LOADER
+> -       default 0
+> +       depends on IMAGE_LOADER
+> +       default 16
+>         help
+>           Maximum number of distinct image regions that can be mapped
+>           into RAM simultaneously. 16 is sufficient for typical FIT
+
+As Tom mentioned, this is in the wrong patch. But really we should
+just remove it and use an alist
+
+> diff --git a/test/boot/Makefile b/test/boot/Makefile
+> index 89538d4f0a6..6fd349a65bc 100644
+> --- a/test/boot/Makefile
+> +++ b/test/boot/Makefile
+> @@ -23,3 +23,5 @@ endif
+>  obj-$(CONFIG_BOOTMETH_VBE) +=3D vbe_fixup.o
+>
+>  obj-$(CONFIG_UPL) +=3D upl.o
+> +
+> +obj-$(CONFIG_IMAGE_LOADER) +=3D image_loader.o
+> diff --git a/test/boot/image_loader.c b/test/boot/image_loader.c
+> new file mode 100644
+> index 00000000000..dc4b0b4173a
+> --- /dev/null
+> +++ b/test/boot/image_loader.c
+> @@ -0,0 +1,429 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Tests for image_loader framework
+> + *
+> + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
+> + */
+> +
 > +#include <image-loader.h>
->  #include <mapmem.h>
->  #include <asm/io.h>
->  #include <malloc.h>
-> @@ -2166,6 +2167,100 @@ int fit_image_load(struct bootm_headers *images, =
-ulong addr,
->
->         printf("   Trying '%s' %s subimage\n", fit_uname, prop_name);
->
-> +#if !defined(USE_HOSTCC) && CONFIG_IS_ENABLED(IMAGE_LOADER)
+> +#include <mapmem.h>
+> +#include <malloc.h>
+> +#include <asm/cache.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +
+> +#define IMG_LOADER_TEST(_name, _flags) \
+> +       UNIT_TEST(_name, _flags, image_loader)
+> +
+> +/* Synthetic image size used throughout the tests */
+> +#define IMAGE_SIZE     4096
+> +
+> +/**
+> + * struct mock_priv - private data for the mock storage backend
+> + *
+> + * @image:     pointer to synthetic image data in RAM
+> + * @image_size:        size of the synthetic image
+> + * @read_count:        number of times .read() was called
+> + * @last_off:  offset from the most recent .read() call
+> + * @last_size: size from the most recent .read() call
+> + */
+> +struct mock_priv {
+> +       const void *image;
+> +       size_t image_size;
+> +       int read_count;
+> +       ulong last_off;
+> +       ulong last_size;
+> +};
+> +
 
-This function is far too long so this code should go in its own
-function. Also use if() and tools_build()
+[..]
 
-> +       /*
-> +        * Storage-backed path: when an image_loader is active and the
-> +        * sub-image uses external data, load the payload from storage
-> +        * instead of dereferencing fit + data_offset. The FDT structure
-> +        * (containing all metadata, hashes, and signatures) is already
-> +        * in RAM; only the payload is on storage.
-> +        *
-> +        * Sequence:
-> +        *  1. Print image info (fit_image_select with verify=3D0)
-> +        *  2. Extract data location from FDT properties (no data access)
-> +        *  3. Skip IH_TYPE_FILESYSTEM sub-images =E2=80=94 they stay on =
-storage
-> +        *  4. Determine RAM destination (load address or scratch area)
-> +        *  5. Read payload via image_loader_map_to() / image_loader_map(=
-)
-> +        *  6. Verify hash/signature in-place
-> +        *  7. Jump to common tail (FDT validation, output params)
-> +        */
-> +       if (images && images->loader) {
-> +               int data_off =3D 0, data_sz =3D 0;
-> +               bool external =3D false;
-> +               u8 img_type;
+> +/* Test: lookup() returns NULL for unmapped ranges */
+> +static int image_loader_test_lookup_miss(struct unit_test_state *uts)
+> +{
+> +       struct image_loader ldr;
+> +       struct mock_priv mock;
+> +       u8 image[IMAGE_SIZE];
+> +       void *p;
 > +
-> +               if (!fit_image_get_data_position(fit, noffset, &data_off)=
-) {
-> +                       external =3D true;
-> +               } else if (!fit_image_get_data_offset(fit, noffset, &data=
-_off)) {
-> +                       external =3D true;
-> +                       data_off +=3D ALIGN(fdt_totalsize(fit), 4);
-> +               }
+> +       init_mock_loader(&ldr, &mock, image, IMAGE_SIZE, 0x1000000);
 > +
-> +               if (external && !fit_image_get_data_size(fit, noffset, &d=
-ata_sz)) {
-> +                       /* Print image info without verifying data */
-> +                       ret =3D fit_image_select(fit, noffset, 0);
-> +                       if (ret) {
-> +                               bootstage_error(bootstage_id + BOOTSTAGE_=
-SUB_HASH);
-> +                               return ret;
-> +                       }
-> +
-> +                       /* Skip filesystem images =E2=80=94 they stay on =
-storage */
-> +                       if (!fit_image_get_type(fit, noffset, &img_type) =
-&&
-> +                           img_type =3D=3D IH_TYPE_FILESYSTEM) {
-> +                               *datap =3D 0;
-> +                               *lenp =3D 0;
-> +                               return noffset;
+> +       /* Nothing mapped yet =E2=80=94 should return NULL */
+> +       p =3D image_loader_lookup(&ldr, 0, 64);
+> +       ut_assertnull(p);
 
-Should add a comment here about why you are not doing verification. I
-assume the FS is protected with dm-verify, iwc should the root hash be
-stored in the FIT?
+AI tends to write it like this, but you can just do:
 
-> +                       }
-> +
-> +                       len =3D data_sz;
-> +                       comp =3D IH_COMP_NONE;
-> +                       fit_image_get_comp(fit, noffset, &comp);
-> +
-> +                       /* Determine the RAM destination */
-> +                       if (load_op =3D=3D FIT_LOAD_IGNORED) {
-> +                               loadbuf =3D image_loader_map(images->load=
-er,
-> +                                                          data_off, len)=
-;
-> +                       } else if (!fit_image_get_load(fit, noffset, &loa=
-d)) {
-> +                               printf("   Loading %s from storage to 0x%=
-08lx\n",
-> +                                      prop_name, load);
-> +                               loadbuf =3D map_sysmem(load, len);
-> +                               loadbuf =3D image_loader_map_to(images->l=
-oader,
-> +                                                             data_off, l=
-en,
-> +                                                             loadbuf);
-> +                       } else if (load_op =3D=3D FIT_LOAD_REQUIRED) {
-> +                               printf("Can't get %s subimage load addres=
-s!\n",
-> +                                      prop_name);
-> +                               return -EBADF;
-> +                       } else {
-> +                               loadbuf =3D image_loader_map(images->load=
-er,
-> +                                                          data_off, len)=
-;
-> +                       }
-> +
-> +                       if (!loadbuf) {
-> +                               printf("Failed to load %s from storage\n"=
-,
-> +                                      prop_name);
-> +                               return -EIO;
-> +                       }
-> +
-> +                       load =3D map_to_sysmem(loadbuf);
-> +
-> +                       /* Verify hash/signature in-place */
-> +                       if (images->verify) {
-> +                               puts("   Verifying Hash Integrity ... ");
-> +                               if (!fit_image_verify_with_data(fit, noff=
-set,
-> +                                                               gd_fdt_bl=
-ob(),
-> +                                                               loadbuf, =
-len)) {
-> +                                       puts("Bad Data Hash\n");
-> +                                       return -EACCES;
-> +                               }
-> +                               puts("OK\n");
-> +                       }
-> +
-> +                       goto storage_loaded;
-> +               }
-> +       }
-> +#endif /* !USE_HOSTCC && CONFIG_IMAGE_LOADER */
-> +
->         ret =3D fit_image_select(fit, noffset, images->verify);
->         if (ret) {
->                 bootstage_error(bootstage_id + BOOTSTAGE_SUB_HASH);
-> @@ -2325,6 +2420,7 @@ int fit_image_load(struct bootm_headers *images, ul=
-ong addr,
->                 puts("WARNING: 'compression' nodes for ramdisks are depre=
-cated,"
->                      " please fix your .its file!\n");
->
-> +storage_loaded:
->         /* verify that image data is a proper FDT blob */
->         if (load_op !=3D FIT_LOAD_IGNORED && image_type =3D=3D IH_TYPE_FL=
-ATDT &&
->             fdt_check_header(loadbuf)) {
-> diff --git a/include/image.h b/include/image.h
-> index 34efac6056d..ecb3fec26c0 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -345,6 +345,8 @@ struct image_info {
->         uint8_t         arch;                   /* CPU architecture */
->  };
->
-> +struct image_loader;
-> +
->  /*
->   * Legacy and FIT format headers used by do_bootm() and do_bootm_<os>()
->   * routines.
-> @@ -400,6 +402,8 @@ struct bootm_headers {
->
->         int             verify;         /* env_get("verify")[0] !=3D 'n' =
-*/
->
-> +       struct image_loader *loader;    /* on-demand storage loader, or N=
-ULL */
-> +
->  #define BOOTM_STATE_START      0x00000001
->  #define BOOTM_STATE_FINDOS     0x00000002
->  #define BOOTM_STATE_FINDOTHER  0x00000004
-> --
-> 2.53.0
+ut_assertnull(image_loader_lookup(&ldr, 0, 64));
+
+There are various examples of this in this patch.
+
+The test declarations should immediately follow the } of the function
+they refer to
+
+image_loader_test_map_basic()
+{
+...
+}
+IMG_LOADER_TEST(image_loader_test_map_basic, 0);
 
 Regards,
 Simon
