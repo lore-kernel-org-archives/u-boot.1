@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C56E3E9A05A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 18:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11CD5E9A05A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 18:44:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60F0683D2E;
-	Thu, 19 Feb 2026 19:44:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95E8383D77;
+	Thu, 19 Feb 2026 19:44:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 971B883AC5; Thu, 19 Feb 2026 19:44:22 +0100 (CET)
+ id 8A4A583D5D; Thu, 19 Feb 2026 19:44:29 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 765B583AC5
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:44:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 8002F83D0F
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:44:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vincent.stehle@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6642C339;
- Thu, 19 Feb 2026 10:44:13 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 63586339;
+ Thu, 19 Feb 2026 10:44:20 -0800 (PST)
 Received: from debian (unknown [10.57.12.78])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 872403F62B;
- Thu, 19 Feb 2026 10:44:18 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 7EC403F62B;
+ Thu, 19 Feb 2026 10:44:25 -0800 (PST)
 From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
 To: u-boot@lists.denx.de
 Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/5] efi_selftest: manageprotocols fixes and enhancements
-Date: Thu, 19 Feb 2026 19:43:55 +0100
-Message-ID: <20260219184400.257008-1-vincent.stehle@arm.com>
+Subject: [PATCH 1/5] efi_selftest: fix buffer overflow
+Date: Thu, 19 Feb 2026 19:43:56 +0100
+Message-ID: <20260219184400.257008-2-vincent.stehle@arm.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20260219184400.257008-1-vincent.stehle@arm.com>
+References: <20260219184400.257008-1-vincent.stehle@arm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -55,39 +57,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The test of the UEFI LocateHandleBuffer() function clears a returned buffer
+at some point to reuse it, but there is an error in the size computation,
+which leads to a buffer overflow; fix it.
 
-This patch series contains fixes and enhancements for the UEFI Protocols
-management test. It is broken down in small steps to ease review; feel free
-to squash and/or cherry-pick.
+Fixes: 927ca890b09f ("efi_selftest: test protocol management")
+Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+ lib/efi_selftest/efi_selftest_manageprotocols.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-It is possible to verify with valgrind that the first couple of fixes in
-this series do indeed remove invalid writes, with the following steps:
-
-1. Modify the efi_allocate_pool() and efi_free_pool() functions to call
-   malloc() and free() respectively.
-
-2. Build U-Boot with sandbox_defconfig and CONFIG_VALGRIND=y.
-3. Run the following command:
-
-  $ valgrind --suppressions=scripts/u-boot.supp \
-      ./u-boot -T -c "setenv efi_selftest manage protocols; \
-                      bootefi selftest"
-
-Best regards,
-Vincent.
-
-
-Vincent Stehlé (5):
-  efi_selftest: fix buffer overflow
-  efi_selftest: fix buffer overflow and memory leak
-  efi_selftest: remove unnecessary initializations
-  efi_selftest: fix buffer size and count computations
-  efi_selftest: cosmetic: fix spelling in comments
-
- .../efi_selftest_manageprotocols.c            | 28 ++++++++++---------
- 1 file changed, 15 insertions(+), 13 deletions(-)
-
+diff --git a/lib/efi_selftest/efi_selftest_manageprotocols.c b/lib/efi_selftest/efi_selftest_manageprotocols.c
+index 097b2ae3545..ccffa59095d 100644
+--- a/lib/efi_selftest/efi_selftest_manageprotocols.c
++++ b/lib/efi_selftest/efi_selftest_manageprotocols.c
+@@ -241,7 +241,7 @@ static int execute(void)
+ 		return EFI_ST_FAILURE;
+ 	}
+ 	/* Clear the buffer, we are reusing it it the next step. */
+-	boottime->set_mem(buffer, sizeof(efi_handle_t) * buffer_size, 0);
++	boottime->set_mem(buffer, sizeof(efi_handle_t) * count, 0);
+ 
+ 	/*
+ 	 * Test LocateHandle with ByProtocol
 -- 
 2.51.0
 
