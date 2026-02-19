@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AB44E9A049
-	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:27:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20F95E9A049
+	for <u-boot@archiver.kernel.org>; Thu, 19 Feb 2026 13:27:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BF3283E8E;
+	by phobos.denx.de (Postfix) with ESMTP id 95F1683EC6;
 	Thu, 19 Feb 2026 14:26:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="JO/qpKyz";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="n9sapkHL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABE3483E4C; Thu, 19 Feb 2026 14:26:19 +0100 (CET)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id 209F583E7A; Thu, 19 Feb 2026 14:26:20 +0100 (CET)
+Received: from MRZP264CU002.outbound.protection.outlook.com
+ (mail-francesouthazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 477EA83D77
+ by phobos.denx.de (Postfix) with ESMTPS id C246083AC5
  for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 14:26:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b9/TOjTGpH013KmbNOriQpz0vyJRrwV6pTgiQqulzqTnGT56uZBgfvpAQ45SJGV4LKwQlE/HPBSRteHw+QBIhSaDxb0FzLb2EZFPFBWNXlch1was+tDGp3KcVIeOt97WhRBJ03rY9CePFuuotheTVIAfpi5fGLR5YhtjsUhG0Taf8YyzFjB0xVuSSKEWnRoRFsN/FWWdUHhcw3KX79hk0dhMkg/jbKC/CMGJItMYyJsakcZWCLfA9ctbd44IvN2dYa2cF9XOKhP9i2ttcSljK+CO/GOn/wQFaIKZ41zsPV573KwDYu/lea7LNESQ3Tz2HJloZvOj2apwYH/LQKvtyg==
+ b=MFzPcJ/DVq2fhk3N/SicoaypNfX+wb11XMDyDzYx5dzI0tFiuJt23kGb/5DNJv+mDPXViLsOSRKzyfYW9oYrZe+NfenspiDQ9lEJ5IK+nv2WTNGFM3JKtmu2EQhSvXwiXt7v6BJKF5qb6Bvd4oKwr0GoJ/V3cDF1+oj+6VWo0rncXKYMdp+ZHcSiKk0qGA/L0mRVtrjIXLtYjTN5yWWvSW/uuycJvqUGUK8ipoHwbLqohyz2nYCcPb8xL0MRSbK/s/QslzUPvh5ReWE8HXAaUqbQPekkha+TrnUgo24Ns+8MgrerR/VeOM3xpv1Kz7OzQwsDHu+IE6+NMFE5gOI1JQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GOnMJBCJirrw3YQBJ3apQHHR5Agac9WxGdA96dCjdos=;
- b=mgOPZntaxqrLKO3HKT7RRBpRWl9Ap9aD3cwEx4oHK21mt7obndLpVG2LM1usA9cPyWul5JE6ECe+p+iBMyZFwk2pR01MjWjynkSaee6q/iE02alQ92zTKTUU3zTsqlS4JpEUw0lz10wnoOR2wIcVixZ7zLX9/vLPmckXHliCHv2Dt3wnn94v+F+v7iZIrv9Bsh1z/L8Iea/9mdyPwYYfKfgoWVIRY626lvQqDI3LYGaNCgGGcwNdPUufk20R2qWcvdmxfceAzLT3KfQuw059qEsnRqxqdkE3RhbhxzRP/hUJJQFiojfpwhqB0BFMwQBxsjLWNWRymsdzWBnBFN17GA==
+ bh=aVS1ROdBp73KJ/sMuX8wDMBYMnHZYRpsDNu+W4wY94E=;
+ b=wso0KVY1BUa2Gu6msKBYQCw5eoHXq36VAwQb6nQ/sx0eEtcdTjgfaiI2PBAscqA/C2OX7Ou69/3Mnhk2gTXvURnmMzrFg+md5QW7gwb5YoCxakXLR4lPo1raL3nZJkSk9kXqxd8J7laKrLE7zOQvc8T4lw7UT6M3dVA7lkRo9F2H4Vo2UsNHJVla6sHT10gohRUsQgj16bujisltusavdpdF64WrneIcRPO7bjADS9o5BQzx3BnFNM7F707x2gqK1S8sy10FPvA7WoOdT+QSqxjoTYVtL2OiU/CyOsWtOhy4zGIvMRC5oepQoNZV3Ivz7rSwNGKWvOCc+E3GtXyNQA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=gmail.com smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GOnMJBCJirrw3YQBJ3apQHHR5Agac9WxGdA96dCjdos=;
- b=JO/qpKyz48k01WFcUmL/xczaG5yc2/nfWTOfZecRDA3nf11JjkRGQ+OrHjrF4PhrYl28dX2eSKA6fdZr60sJvB3dvON5iTLUTxaRua0oEoHkXqTjiY0eLTNrTQuFYYK66wuMrR4Juyg+oqXsdWo/85LW+rj8d07rbc3FTFJyvVlCrbg4WmlN4+l57OrCJN56wsMkcyyPcswMSo9q+32PnzUEicNrA5q2ONweBqbovnZaur7kfpPvp9tzb0MLJ0oy5sVAowbdOQI72GHFqaL4T48K2vHVH1DF7y1gmi0V0tocJ6SrX7OTyPEySP/uADDCXdCU58MjyllTrCuAfIsOKQ==
-Received: from PR1P264CA0130.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2ce::15)
- by MR1PPFC10A025F7.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::24c)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.15; Thu, 19 Feb
- 2026 13:26:10 +0000
-Received: from PA3PEPF000089BB.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:2ce:cafe::d6) by PR1P264CA0130.outlook.office365.com
- (2603:10a6:102:2ce::15) with Microsoft SMTP Server (version=TLS1_3,
+ bh=aVS1ROdBp73KJ/sMuX8wDMBYMnHZYRpsDNu+W4wY94E=;
+ b=n9sapkHLAytbvMKk+jWfle4go0bv0Q/Um06eGsZMyFzGpmUVOQhpQPvhJhx+p9Ri5QTE8DIvhDnm5GkaYNxvzZ3/TddhnlynBfbG2GsVAtTZrACdyHuPdN+Paiu4Pha6Tgzf1gvt4gNuHMeHjV8K5VooRY5GxRV6uLTwqg1EhLpL+UUUrzgluyxKuldd9YBJ20X6UW5+jzKx9xK8je4wbzDCmwtfIkCLeg55gtjcqzvtAbErTQ7+KN5DDDd/cQqlBk5wfy3HE0TsPj/6vNYn4siMJnLsCwTc9fHDnid+3w3UCWWioWju8tCUWoXSPskXVQPCjk/S1J02kWybCTfFTw==
+Received: from PA7P264CA0482.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3dc::10)
+ by MRZP264MB2103.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:a::5) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.13; Thu, 19 Feb 2026 13:26:10 +0000
+Received: from PA3PEPF000089B8.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:3dc:cafe::9c) by PA7P264CA0482.outlook.office365.com
+ (2603:10a6:102:3dc::10) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.15 via Frontend Transport; Thu,
  19 Feb 2026 13:26:10 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089BB.mail.protection.outlook.com (10.167.242.23) with Microsoft
+ PA3PEPF000089B8.mail.protection.outlook.com (10.167.242.20) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.12
- via Frontend Transport; Thu, 19 Feb 2026 13:26:09 +0000
+ via Frontend Transport; Thu, 19 Feb 2026 13:26:10 +0000
 Received: from sah1lpt726.home (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id C770E201A2;
- Thu, 19 Feb 2026 14:26:09 +0100 (CET)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 3D27120737;
+ Thu, 19 Feb 2026 14:26:10 +0100 (CET)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: marko.makela@iki.fi, jonny.green@keytechinc.com, raymondmaoca@gmail.com,
  trini@konsulko.com
 Cc: u-boot@lists.denx.de,
 	Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [RFC PATCH v2 3/9] test: lib: sw_ecdsa: add initial test
-Date: Thu, 19 Feb 2026 14:25:46 +0100
-Message-ID: <20260219132552.1499698-4-philippe.reynes@softathome.com>
+Subject: [RFC PATCH v2 8/9] test: py: vboot: prepare integration test for ecdsa
+Date: Thu, 19 Feb 2026 14:25:51 +0100
+Message-ID: <20260219132552.1499698-9-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260219132552.1499698-1-philippe.reynes@softathome.com>
 References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
@@ -82,57 +82,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089BB:EE_|MR1PPFC10A025F7:EE_
+X-MS-TrafficTypeDiagnostic: PA3PEPF000089B8:EE_|MRZP264MB2103:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 80e154a6-4c13-4e94-f420-08de6fba71fa
+X-MS-Office365-Filtering-Correlation-Id: 2006713c-91f6-4143-0c92-08de6fba7246
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700013|1800799024|7142099003; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6Ay2ranKeVEHAXS+3IQYUJ/EJA67+nkzmU7SkCWWoujhc9YwUlMKGxLCXvV7?=
- =?us-ascii?Q?kPo2nsKF/A2TGhC7qE73WykGsrl5aew0KyCCs5dUfD2CHvT0MZylKZn+wVAe?=
- =?us-ascii?Q?IALScfybVf3BDT6+bvOfQEwOqQAgIHiiQMpuE0yY6bdd1HVz21tCdUfjSR43?=
- =?us-ascii?Q?C0Gm9kwKjRP5r/bpYAx70FbLirITvHDLIQhAf3/FMcl+d7xEEPSVAqzdiXXO?=
- =?us-ascii?Q?c78LQIsX4ew/c1XVylzeRbXgdjcRsg9ZhLnbziiGun0jk0zt2sNLx3frYKuc?=
- =?us-ascii?Q?9rozY+vRr/MOUSFyqS7Tmi1Jg85KutDZ7NkE26FyV3bv4bLOAwSdETqfgawv?=
- =?us-ascii?Q?GYZT6myjCCb89ZiyQ6m5aO9qTL4Fb0N9edHRzkaQ1VZBOno9kzhJC4qI8D/y?=
- =?us-ascii?Q?EvKZA45UWIf+hJY5opuvdH+gdUfp/KKnIeZl9tWf1HVZ/sig7uqmr9Z69CnV?=
- =?us-ascii?Q?tkl6vd/cgf7rwU6p7L9/CyneNiLiy20MNkoM837DiX5m0oJt7OgYqT42BDHa?=
- =?us-ascii?Q?9G5gg/Ja+bVVH00FO5FkpXUY61iF/LF6ffamqMJBAmL8oap7hcvELzlHmjI9?=
- =?us-ascii?Q?02pde4SnehD0Xjos6hGt438WCL4n441xBfAVlKUbXlZveGveEl2nzBOVbuZM?=
- =?us-ascii?Q?h038HcbQ9diaBQZNriO+IWGFgKHU0cQ/JQ/HeHoMmFjfyqfsB9fc8zx9+upU?=
- =?us-ascii?Q?My7SujxS5SHINQ11nvq9xUSPW3X1xgmT5KR1IEtsP/TGaoRCWX/7QN0tSSuF?=
- =?us-ascii?Q?iIo4Rcfv/LBWkieoQvCu/cgpxBy4UAoF807/S2qQisjaW7smzNYxPwUiHZFV?=
- =?us-ascii?Q?RU8KUA9a9hybRJUcPC8D8ggw8VGXSrIb6qkXATNErNUvOOhNOAfrqJyDGIyK?=
- =?us-ascii?Q?dLSzQiV89cuP206NTINoSNfI57lJLis2cbsTyY8pUCaea9qqCDRfEPCZ58Pn?=
- =?us-ascii?Q?idM+pZs7QiAjr6De/5iexlg4s5FCEB4KwSU9pUV9V/a90Cg0F6eLin2Vm+Qv?=
- =?us-ascii?Q?DxzQ61Wyf9XQrUoCMPcPL78JeROMFzIuLAjkU2STsyepP5jt5Ed6CSBBPMh1?=
- =?us-ascii?Q?9ZzLMPpsrH4VX1c/BO/GLGIYm+EkqMXvV7Dgsl7AqPkpXwopOz/kOc5BXZmO?=
- =?us-ascii?Q?g1VZ5InKfyaRUsbtfL71h4Ft3HzpDXE56xWMCP8bakbbpv7obx89FyD7EwXD?=
- =?us-ascii?Q?hjmkaD0nOTVpedFB3P/SWEq30aj45aevu4JJHOf9E1EP8YWaIypY9T7KlVkk?=
- =?us-ascii?Q?nYq4CVKnREDMr5k52BnzLvalbFZ85u3fmxac4YM4eeWhR+nMMr/1MI6w2bVF?=
- =?us-ascii?Q?FI+ghvsXaGnywUn38K9ArE3NJk3t2rNHTUUyAeakqTj4qLEPWcDx3WD/f3Gg?=
- =?us-ascii?Q?r2d6EkJYdH7joXG0CritoFBIdl99sGg1wp2yNsx2+kgCaewGRNDdKqAudEml?=
- =?us-ascii?Q?7Jf1Lj1yE4M5c9fVbF5Z9o+RInIQTiarhw7IZ1MIRClFIyRVJgZw6Exr8lqT?=
- =?us-ascii?Q?z7GkCshPxUpvsVuwiWMdjxGLf3s1C1BG+B2e+imGdHOp3N0MK3qRb0may/Rp?=
- =?us-ascii?Q?/FTH8FSy8471HXB+k+ThPTiJSoCuFWZySkFEQdPxzvYoO2iL6lCUhiJAOpox?=
- =?us-ascii?Q?/ROum2yCjZ1mtF4YpvMlqyVwhU44NMlp1nw6cwq9GoeU?=
+ ARA:13230040|1800799024|36860700013|82310400026|376014|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Qv1NtXNzvP3nNEyXMMhpzcd+6jujqadUv+zaPngCXg/NDgE9UdCvNQvKbV6Y?=
+ =?us-ascii?Q?6c1bZKWxKDUTSWxNOABAbZXiNjYnKHeG2Ibe9ypHzwS9avPd1PfpgtiD5y9k?=
+ =?us-ascii?Q?HV611O3Z3TC7jVHBQCqsZG02tKOKsjNePE+KStuDLaALALAWhgEv/A16kIJ2?=
+ =?us-ascii?Q?mkHgOMhTDrbFl1iJvPx5HvMqXZI4IKgRKUrlWDtuZHxMLYkeYceXNQEwzzv6?=
+ =?us-ascii?Q?Sc7etsmT5cZM3Qm8CODkDM/KJtGi/ktE6TQezuBE1FH2njYkpdNC0ULT64Xe?=
+ =?us-ascii?Q?S3uff01GyQNvAJ8sXNGw4vzcKd189Uou6z4BirMLF5i7W7jx5Ehiz+lYa2R5?=
+ =?us-ascii?Q?Us1kbIyXdbVa9CRWDttYMevQnmAiXH5xXt0euILZGdgW749LDn7mEDH3xVDU?=
+ =?us-ascii?Q?XGprStQa8Ut4y8Qo8uMSFCN212Ipb8U1kGKF6gSdieVF5obY5aPfXlOVhoSG?=
+ =?us-ascii?Q?aGm3DHTRzJhRtWqebeGKi66bfwxzHTnrCuHTIZ1qE6eE05vITZ2nykYy0nX0?=
+ =?us-ascii?Q?FAvIhTIdi38t7itfIgtCq5MfveZdb5NEAVIbR23ux4AbOIkdG10MKytLJM3N?=
+ =?us-ascii?Q?23onVWm2oZe/hW1PgUFWRsHmmFC6E98k3JOF27U4/Umkz1K7gisE5WYZZN86?=
+ =?us-ascii?Q?aVss8IHvRoTwwLEDC5kQVsj6oOeSgr7swFzKkJHeNKqeYF8kPdDkPjboouo9?=
+ =?us-ascii?Q?GkVaei3KX8jrLuus1TqSsV9Aai0dSH6/FfttMlUUuVWer5t9ctV2fyVQg1en?=
+ =?us-ascii?Q?/Ud6W8TFeDK3uRBnXEqNEZlNKsQUxBbeA+UbM6qY1O0V7NteZzqQAFBHtBxE?=
+ =?us-ascii?Q?KTEjKgzSREVJr4VY5/Lq3/0eUmuBZ43cUytqm1stQaxrB9qXHgG9XP4+J743?=
+ =?us-ascii?Q?RLFn3c6k5yGzUredhqArM/SFOiIg3vGirTG+o7WeUugbZ1ebya+99fteNctG?=
+ =?us-ascii?Q?oIIZCJ6Rmhised/2kh/QIDHPg3/G4Bk7TDh1U4TArbR1/oQ9z44OUdKRSia5?=
+ =?us-ascii?Q?S91A9U8QQmPGVTJgLYpDsG1/hXfnrn4b1cU3Bee392YcoO9APApvXpFI27IN?=
+ =?us-ascii?Q?GawqoP43LuohMUU1MyFyCDkfz7PUWeCtqwS38xcZn3bKj3OZdGA9BGVEk8ui?=
+ =?us-ascii?Q?yOaTbhs88hWHxM2Ol4mmtuUHxH/3kCVit3i4CvMoe7E6L5whZIEYjkg/hAXq?=
+ =?us-ascii?Q?Op443Dr7rYR+goTUzrjn6+73pnC7lMOjA7T2CY3obhDJ9Pssgl13FIm3Cdh8?=
+ =?us-ascii?Q?GjRywEH66SZ9DgKuq1ZqKXQMrT6M5SMGYdIpqF06LIaAf8/rjBNMfwKQgTxB?=
+ =?us-ascii?Q?7VqsUSKERX+f7mcwk2WxtxpAqyN6jdXNU/Gtb4XhHfeXhruFIiA9EqvGsboQ?=
+ =?us-ascii?Q?RcMGz6zyZT7c9UjUtjsiHcaYwZ5ccW8uL8UHAYdMeRgrG1oT96VJP1/L4+1R?=
+ =?us-ascii?Q?Fbx1gk6FCqBD5BKz9fs0Rpo0/QTq2PIvnHTUGpTMLMFQKGrF+r0zuERyaf3d?=
+ =?us-ascii?Q?CC0SgSKiquG5gwANuQ2U7TrpviXXb+AN9gYCt25OHcZXvOlOO0FN8zDjV58p?=
+ =?us-ascii?Q?1HohZk0UEMry34a6oVNoblAzsksoczlHvhJl70fsrBUfSsXF6QtRcaZ7xfUr?=
+ =?us-ascii?Q?UV+fgjW6VtS/ELtdLpm0gATghaV8UhLmgFMkU2AMoJ19gRn2qsBl0G/Oz74F?=
+ =?us-ascii?Q?d4xQhA=3D=3D?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(7142099003);
+ SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014)(7142099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: USguImmpxN9/ZDpkUaI1vwpk8AMYfvV4GWBYGKf2cDZF4jfw6QA41Kox3b4IEDLUQnKl+V/myKM1wnUtSNngHvMdz9Q0tyeT+6B2qHYoraOmnojrP6XkrOQKwbIXho86lBOAqdlpsztqgebfhbSFgztQM5EmiXyfeFwAubYQEMi1oI7C3VtRHVXZCI7P1Y3qIYo6q2SZtiW3V7NLGAAYS6J97fSV4kuGXbUV2gjQGrYGtN/te9nAtDdmQ3OPWqUNBDujUQXlQB3UxRw9LGel+UnIKiX8l61RhQCKJUq4oFWSMbXvsWvX7TBniBkXRpnAkIzoIMJGA5eXG4kXgG82oWtUjTG9R8AgE4aLPqNIe3ffKdaNeG8a7wbEU1FvAaGjaQ25n7EVXqiRNBOzD//dhfATntkX50BMjQ4r7ECwp+uRSb9RMM2VUvtzx0UbIbF8
+X-MS-Exchange-AntiSpam-MessageData-0: JRjISWZS8W0JpLI73gULXTVDbDPzZHnnPIhMxX1MNJJ5gxByyJct3kh7ZohJk7PkTLq20zH8aUlUAeH+IIWGC/WchqJh9bjLJL2hOd6c7dczYHr08zobwmwBBSrLt1O+yoDm3iBQVjZ9oageqOw0b+F8vM6KHKKkKe5SwD/O0ZbAE2CSPsmN5/iI3Bq84linfkomBtKjkS4T24WOThqkPL7gfyYFc5MnZfrhVwD2xX8E/lqhM4Grg0JVFOmilVWH0213w8c7YLXcCPUJokhZyEB8lXk0MG7FenWSDFQPHy28rcFe8ksoo+oKfUfLj+lHGws2h8eGVCAwN60brUTODM9HOpjJZGMcjiz5r1BVgrfpL9pBflinxLrzUe9LUXXX/rnMd3EGeVNr2WBZTabry6uKuRnhBYczR+T8DkhSNI20stZTbHzub2Bd7WxvkYNJ
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:09.9584 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80e154a6-4c13-4e94-f420-08de6fba71fa
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Feb 2026 13:26:10.4520 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2006713c-91f6-4143-0c92-08de6fba7246
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BB.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089B8.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPFC10A025F7
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRZP264MB2103
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,502 +150,316 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds tests to check that the function sw_ecdsa_verify
-using mbedtls is valid.
+The vboot tests only consider rsa algo for signature.
+To prepare the integration of ecdsa test, the signature
+algo is now explicit.
 
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
 v2:
-- little change to only use test with sha enabled
+- initial version
 
- test/lib/Makefile   |   1 +
- test/lib/sw_ecdsa.c | 465 ++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 466 insertions(+)
- create mode 100644 test/lib/sw_ecdsa.c
+ test/py/tests/test_fit_ecdsa.py               |  2 +-
+ test/py/tests/test_vboot.py                   | 99 ++++++++++---------
+ ....its => sign-configs-sha1-rsa2048-pss.its} |  0
+ ...sha1.its => sign-configs-sha1-rsa2048.its} |  0
+ ... sign-configs-sha256-rsa2048-pss-prod.its} |  0
+ ...ts => sign-configs-sha256-rsa2048-pss.its} |  0
+ ...56.its => sign-configs-sha256-rsa2048.its} |  0
+ ...84.its => sign-configs-sha384-rsa3072.its} |  0
+ ...s.its => sign-images-sha1-rsa2048-pss.its} |  0
+ ...-sha1.its => sign-images-sha1-rsa2048.its} |  0
+ ...its => sign-images-sha256-rsa2048-pss.its} |  0
+ ...256.its => sign-images-sha256-rsa2048.its} |  0
+ ...384.its => sign-images-sha384-rsa3072.its} |  0
+ 13 files changed, 51 insertions(+), 50 deletions(-)
+ rename test/py/tests/vboot/{sign-configs-sha1-pss.its => sign-configs-sha1-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha1.its => sign-configs-sha1-rsa2048.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha256-pss-prod.its => sign-configs-sha256-rsa2048-pss-prod.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha256-pss.its => sign-configs-sha256-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha256.its => sign-configs-sha256-rsa2048.its} (100%)
+ rename test/py/tests/vboot/{sign-configs-sha384.its => sign-configs-sha384-rsa3072.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha1-pss.its => sign-images-sha1-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha1.its => sign-images-sha1-rsa2048.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha256-pss.its => sign-images-sha256-rsa2048-pss.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha256.its => sign-images-sha256-rsa2048.its} (100%)
+ rename test/py/tests/vboot/{sign-images-sha384.its => sign-images-sha384-rsa3072.its} (100%)
 
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index f25383a40e5..8837446968b 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -8,6 +8,7 @@ obj-$(CONFIG_$(PHASE_)UT_COMPRESSION) += compression.o
- ifeq ($(CONFIG_XPL_BUILD),)
- obj-y += abuf.o
- obj-y += alist.o
-+obj-$(CONFIG_ECDSA_MBEDTLS) += sw_ecdsa.o
- obj-$(CONFIG_EFI_LOADER) += efi_device_path.o efi_memory.o
- obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
- ifdef CONFIG_RISCV
-diff --git a/test/lib/sw_ecdsa.c b/test/lib/sw_ecdsa.c
-new file mode 100644
-index 00000000000..431b44af596
---- /dev/null
-+++ b/test/lib/sw_ecdsa.c
-@@ -0,0 +1,465 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Philippe Reynes <philippe.reynes@softathome.com>
-+ */
-+
-+#include <command.h>
-+#include <image.h>
-+#include <test/lib.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <crypto/ecdsa-uclass.h>
-+#include <crypto/internal/sw_ecdsa.h>
-+
-+#include <mbedtls/ecp.h>
-+
-+struct ecdsa_test_vector_s {
-+	char *test_name;
-+	char *curve_name;
-+	unsigned char *x;
-+	unsigned char *y;
-+	int size_bits;
-+	unsigned char *hash_type;
-+	unsigned char *hash_message;
-+	unsigned char *k;
-+	unsigned char *r;
-+	unsigned char *s;
-+	int expected;
-+};
-+
-+/*
-+ * Those data come from RFC6979
-+ */
-+
-+struct ecdsa_test_vector_s ecdsa_test_vector[] = {
-+	/*
-+	 * secp192r1
-+	 */
-+	{
-+	.test_name = "secp192r1 sha1",
-+	.curve_name = "secp192r1",
-+	.x = "AC2C77F529F91689FEA0EA5EFEC7F210D8EEA0B9E047ED56",
-+	.y = "3BC723E57670BD4887EBC732C523063D0A7C957BC97C1C43",
-+	.size_bits = 192,
-+	.hash_type = "sha-1",
-+	.hash_message = "sample",
-+	.k = "37D7CA00D2C7B0E5E412AC03BD44BA837FDD5B28CD3B0021",
-+	.r = "98C6BD12B23EAF5E2A2045132086BE3EB8EBD62ABF6698FF",
-+	.s = "57A22B07DEA9530F8DE9471B1DC6624472E8E2844BC25B64",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp192r1 sha256",
-+	.curve_name = "secp192r1",
-+	.x = "AC2C77F529F91689FEA0EA5EFEC7F210D8EEA0B9E047ED56",
-+	.y = "3BC723E57670BD4887EBC732C523063D0A7C957BC97C1C43",
-+	.size_bits = 192,
-+	.hash_type = "sha-256",
-+	.hash_message = "sample",
-+	.k = "32B1B6D7D42A05CB449065727A84804FB1A3E34D8F261496",
-+	.r = "4B0B8CE98A92866A2820E20AA6B75B56382E0F9BFD5ECB55",
-+	.s = "CCDB006926EA9565CBADC840829D8C384E06DE1F1E381B85",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp192r1 sha384",
-+	.curve_name = "secp192r1",
-+	.x = "AC2C77F529F91689FEA0EA5EFEC7F210D8EEA0B9E047ED56",
-+	.y = "3BC723E57670BD4887EBC732C523063D0A7C957BC97C1C43",
-+	.size_bits = 192,
-+	.hash_type = "sha-384",
-+	.hash_message = "sample",
-+	.k = "4730005C4FCB01834C063A7B6760096DBE284B8252EF4311",
-+	.r = "DA63BF0B9ABCF948FBB1E9167F136145F7A20426DCC287D5",
-+	.s = "C3AA2C960972BD7A2003A57E1C4C77F0578F8AE95E31EC5E",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp192r1 sha512",
-+	.curve_name = "secp192r1",
-+	.x = "AC2C77F529F91689FEA0EA5EFEC7F210D8EEA0B9E047ED56",
-+	.y = "3BC723E57670BD4887EBC732C523063D0A7C957BC97C1C43",
-+	.size_bits = 192,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "A2AC7AB055E4F20692D49209544C203A7D1F2C0BFBC75DB1",
-+	.r = "4D60C5AB1996BD848343B31C00850205E2EA6922DAC2E4B8",
-+	.s = "3F6E837448F027A1BF4B34E796E32A811CBB4050908D8F67",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp192r1 sha512 error",
-+	.curve_name = "secp192r1",
-+	.x = "AC2C77F529F91689FEA0EA5EFEC7F210D8EEA0B9E047ED56",
-+	.y = "3BC723E57670BD4887EBC732C523063D0A7C957BC97C1C43",
-+	.size_bits = 192,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "A2AC7AB055E4F20692D49209544C203A7D1F2C0BFBC75DB1",
-+	.r = "4D60C5AB1996BD848343B31C00850205E2EA6922DAC2E4B8",
-+	.s = "0F6E837448F027A1BF4B34E796E32A811CBB4050908D8F67",
-+	.expected = MBEDTLS_ERR_ECP_VERIFY_FAILED,
-+	},
-+	/*
-+	 * secp224r1
-+	 */
-+	{
-+	.test_name = "secp224r1 sha1",
-+	.curve_name = "secp224r1",
-+	.x = "00CF08DA5AD719E42707FA431292DEA11244D64FC51610D94B130D6C",
-+	.y = "EEAB6F3DEBE455E3DBF85416F7030CBD94F34F2D6F232C69F3C1385A",
-+	.size_bits = 224,
-+	.hash_type = "sha-1",
-+	.hash_message = "sample",
-+	.k = "7EEFADD91110D8DE6C2C470831387C50D3357F7F4D477054B8B426BC",
-+	.r = "22226F9D40A96E19C4A301CE5B74B115303C0F3A4FD30FC257FB57AC",
-+	.s = "66D1CDD83E3AF75605DD6E2FEFF196D30AA7ED7A2EDF7AF475403D69",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp224r1 sha256",
-+	.curve_name = "secp224r1",
-+	.x = "00CF08DA5AD719E42707FA431292DEA11244D64FC51610D94B130D6C",
-+	.y = "EEAB6F3DEBE455E3DBF85416F7030CBD94F34F2D6F232C69F3C1385A",
-+	.size_bits = 224,
-+	.hash_type = "sha-256",
-+	.hash_message = "sample",
-+	.k = "AD3029E0278F80643DE33917CE6908C70A8FF50A411F06E41DEDFCDC",
-+	.r = "61AA3DA010E8E8406C656BC477A7A7189895E7E840CDFE8FF42307BA",
-+	.s = "BC814050DAB5D23770879494F9E0A680DC1AF7161991BDE692B10101",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp224r1 sha384",
-+	.curve_name = "secp224r1",
-+	.x = "00CF08DA5AD719E42707FA431292DEA11244D64FC51610D94B130D6C",
-+	.y = "EEAB6F3DEBE455E3DBF85416F7030CBD94F34F2D6F232C69F3C1385A",
-+	.size_bits = 224,
-+	.hash_type = "sha-384",
-+	.hash_message = "sample",
-+	.k = "52B40F5A9D3D13040F494E83D3906C6079F29981035C7BD51E5CAC40",
-+	.r = "0B115E5E36F0F9EC81F1325A5952878D745E19D7BB3EABFABA77E953",
-+	.s = "830F34CCDFE826CCFDC81EB4129772E20E122348A2BBD889A1B1AF1D",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp224r1 sha512",
-+	.curve_name = "secp224r1",
-+	.x = "00CF08DA5AD719E42707FA431292DEA11244D64FC51610D94B130D6C",
-+	.y = "EEAB6F3DEBE455E3DBF85416F7030CBD94F34F2D6F232C69F3C1385A",
-+	.size_bits = 224,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "9DB103FFEDEDF9CFDBA05184F925400C1653B8501BAB89CEA0FBEC14",
-+	.r = "074BD1D979D5F32BF958DDC61E4FB4872ADCAFEB2256497CDAC30397",
-+	.s = "A4CECA196C3D5A1FF31027B33185DC8EE43F288B21AB342E5D8EB084",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp224r1 sha512 error",
-+	.curve_name = "secp224r1",
-+	.x = "00CF08DA5AD719E42707FA431292DEA11244D64FC51610D94B130D6C",
-+	.y = "EEAB6F3DEBE455E3DBF85416F7030CBD94F34F2D6F232C69F3C1385A",
-+	.size_bits = 224,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "9DB103FFEDEDF9CFDBA05184F925400C1653B8501BAB89CEA0FBEC14",
-+	.r = "074BD1D979D5F32BF958DDC61E4FB4872ADCAFEB2256497CDAC30397",
-+	.s = "04CECA196C3D5A1FF31027B33185DC8EE43F288B21AB342E5D8EB084",
-+	.expected = MBEDTLS_ERR_ECP_VERIFY_FAILED,
-+	},
-+	/*
-+	 * secp256r1
-+	 */
-+	{
-+	.test_name = "secp256r1 sha1",
-+	.curve_name = "secp256r1",
-+	.x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6",
-+	.y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299",
-+	.size_bits = 256,
-+	.hash_type = "sha-1",
-+	.hash_message = "sample",
-+	.k = "882905F1227FD620FBF2ABF21244F0BA83D0DC3A9103DBBEE43A1FB858109DB4",
-+	.r = "61340C88C3AAEBEB4F6D667F672CA9759A6CCAA9FA8811313039EE4A35471D32",
-+	.s = "6D7F147DAC089441BB2E2FE8F7A3FA264B9C475098FDCF6E00D7C996E1B8B7EB",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp256r1 sha256",
-+	.curve_name = "secp256r1",
-+	.x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6",
-+	.y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299",
-+	.size_bits = 256,
-+	.hash_type = "sha-256",
-+	.hash_message = "sample",
-+	.k = "A6E3C57DD01ABE90086538398355DD4C3B17AA873382B0F24D6129493D8AAD60",
-+	.r = "EFD48B2AACB6A8FD1140DD9CD45E81D69D2C877B56AAF991C34D0EA84EAF3716",
-+	.s = "F7CB1C942D657C41D436C7A1B6E29F65F3E900DBB9AFF4064DC4AB2F843ACDA8",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp256r1 sha384",
-+	.curve_name = "secp256r1",
-+	.x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6",
-+	.y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299",
-+	.size_bits = 256,
-+	.hash_type = "sha-384",
-+	.hash_message = "sample",
-+	.k = "09F634B188CEFD98E7EC88B1AA9852D734D0BC272F7D2A47DECC6EBEB375AAD4",
-+	.r = "0EAFEA039B20E9B42309FB1D89E213057CBF973DC0CFC8F129EDDDC800EF7719",
-+	.s = "4861F0491E6998B9455193E34E7B0D284DDD7149A74B95B9261F13ABDE940954",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp256r1 sha512",
-+	.curve_name = "secp256r1",
-+	.x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6",
-+	.y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299",
-+	.size_bits = 256,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "5FA81C63109BADB88C1F367B47DA606DA28CAD69AA22C4FE6AD7DF73A7173AA5",
-+	.r = "8496A60B5E9B47C825488827E0495B0E3FA109EC4568FD3F8D1097678EB97F00",
-+	.s = "2362AB1ADBE2B8ADF9CB9EDAB740EA6049C028114F2460F96554F61FAE3302FE",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp256r1 sha512 error",
-+	.curve_name = "secp256r1",
-+	.x = "60FED4BA255A9D31C961EB74C6356D68C049B8923B61FA6CE669622E60F29FB6",
-+	.y = "7903FE1008B8BC99A41AE9E95628BC64F2F1B20C2D7E9F5177A3C294D4462299",
-+	.size_bits = 256,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "5FA81C63109BADB88C1F367B47DA606DA28CAD69AA22C4FE6AD7DF73A7173AA5",
-+	.r = "8496A60B5E9B47C825488827E0495B0E3FA109EC4568FD3F8D1097678EB97F00",
-+	.s = "0362AB1ADBE2B8ADF9CB9EDAB740EA6049C028114F2460F96554F61FAE3302FE",
-+	.expected = MBEDTLS_ERR_ECP_VERIFY_FAILED,
-+	},
-+	/*
-+	 * secp384r1
-+	 */
-+	{
-+	.test_name = "secp384r1 sha1",
-+	.curve_name = "secp384r1",
-+	.x = "EC3A4E415B4E19A4568618029F427FA5DA9A8BC4AE92E02E06AAE5286B300C64DEF8F0EA9055866064A254515480BC13",
-+	.y = "8015D9B72D7D57244EA8EF9AC0C621896708A59367F9DFB9F54CA84B3F1C9DB1288B231C3AE0D4FE7344FD2533264720",
-+	.size_bits = 384,
-+	.hash_type = "sha-1",
-+	.hash_message = "sample",
-+	.k = "4471EF7518BB2C7C20F62EAE1C387AD0C5E8E470995DB4ACF694466E6AB096630F29E5938D25106C3C340045A2DB01A7",
-+	.r = "EC748D839243D6FBEF4FC5C4859A7DFFD7F3ABDDF72014540C16D73309834FA37B9BA002899F6FDA3A4A9386790D4EB2",
-+	.s = "A3BCFA947BEEF4732BF247AC17F71676CB31A847B9FF0CBC9C9ED4C1A5B3FACF26F49CA031D4857570CCB5CA4424A443",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp384r1 sha256",
-+	.curve_name = "secp384r1",
-+	.x = "EC3A4E415B4E19A4568618029F427FA5DA9A8BC4AE92E02E06AAE5286B300C64DEF8F0EA9055866064A254515480BC13",
-+	.y = "8015D9B72D7D57244EA8EF9AC0C621896708A59367F9DFB9F54CA84B3F1C9DB1288B231C3AE0D4FE7344FD2533264720",
-+	.size_bits = 384,
-+	.hash_type = "sha-256",
-+	.hash_message = "sample",
-+	.k = "180AE9F9AEC5438A44BC159A1FCB277C7BE54FA20E7CF404B490650A8ACC414E375572342863C899F9F2EDF9747A9B60",
-+	.r = "21B13D1E013C7FA1392D03C5F99AF8B30C570C6F98D4EA8E354B63A21D3DAA33BDE1E888E63355D92FA2B3C36D8FB2CD",
-+	.s = "F3AA443FB107745BF4BD77CB3891674632068A10CA67E3D45DB2266FA7D1FEEBEFDC63ECCD1AC42EC0CB8668A4FA0AB0",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp384r1 sha384",
-+	.curve_name = "secp384r1",
-+	.x = "EC3A4E415B4E19A4568618029F427FA5DA9A8BC4AE92E02E06AAE5286B300C64DEF8F0EA9055866064A254515480BC13",
-+	.y = "8015D9B72D7D57244EA8EF9AC0C621896708A59367F9DFB9F54CA84B3F1C9DB1288B231C3AE0D4FE7344FD2533264720",
-+	.size_bits = 384,
-+	.hash_type = "sha-384",
-+	.hash_message = "sample",
-+	.k = "94ED910D1A099DAD3254E9242AE85ABDE4BA15168EAF0CA87A555FD56D10FBCA2907E3E83BA95368623B8C4686915CF9",
-+	.r = "94EDBB92A5ECB8AAD4736E56C691916B3F88140666CE9FA73D64C4EA95AD133C81A648152E44ACF96E36DD1E80FABE46",
-+	.s = "99EF4AEB15F178CEA1FE40DB2603138F130E740A19624526203B6351D0A3A94FA329C145786E679E7B82C71A38628AC8",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp384r1 sha512",
-+	.curve_name = "secp384r1",
-+	.x = "EC3A4E415B4E19A4568618029F427FA5DA9A8BC4AE92E02E06AAE5286B300C64DEF8F0EA9055866064A254515480BC13",
-+	.y = "8015D9B72D7D57244EA8EF9AC0C621896708A59367F9DFB9F54CA84B3F1C9DB1288B231C3AE0D4FE7344FD2533264720",
-+	.size_bits = 384,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "92FC3C7183A883E24216D1141F1A8976C5B0DD797DFA597E3D7B32198BD35331A4E966532593A52980D0E3AAA5E10EC3",
-+	.r = "ED0959D5880AB2D869AE7F6C2915C6D60F96507F9CB3E047C0046861DA4A799CFE30F35CC900056D7C99CD7882433709",
-+	.s = "512C8CCEEE3890A84058CE1E22DBC2198F42323CE8ACA9135329F03C068E5112DC7CC3EF3446DEFCEB01A45C2667FDD5",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp384r1 sha512 error",
-+	.curve_name = "secp384r1",
-+	.x = "EC3A4E415B4E19A4568618029F427FA5DA9A8BC4AE92E02E06AAE5286B300C64DEF8F0EA9055866064A254515480BC13",
-+	.y = "8015D9B72D7D57244EA8EF9AC0C621896708A59367F9DFB9F54CA84B3F1C9DB1288B231C3AE0D4FE7344FD2533264720",
-+	.size_bits = 384,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "92FC3C7183A883E24216D1141F1A8976C5B0DD797DFA597E3D7B32198BD35331A4E966532593A52980D0E3AAA5E10EC3",
-+	.r = "ED0959D5880AB2D869AE7F6C2915C6D60F96507F9CB3E047C0046861DA4A799CFE30F35CC900056D7C99CD7882433709",
-+	.s = "012C8CCEEE3890A84058CE1E22DBC2198F42323CE8ACA9135329F03C068E5112DC7CC3EF3446DEFCEB01A45C2667FDD5",
-+	.expected = MBEDTLS_ERR_ECP_VERIFY_FAILED,
-+	},
-+	/*
-+	 * secp521r1
-+	 */
-+	{
-+	.test_name = "secp521r1 sha1",
-+	.curve_name = "secp521r1",
-+	.x = "01894550D0785932E00EAA23B694F213F8C3121F86DC97A04E5A7167DB4E5BCD371123D46E45DB6B5D5370A7F20FB633155D38FFA16D2BD761DCAC474B9A2F5023A4",
-+	.y = "00493101C962CD4D2FDDF782285E64584139C2F91B47F87FF82354D6630F746A28A0DB25741B5B34A828008B22ACC23F924FAAFBD4D33F81EA66956DFEAA2BFDFCF5",
-+	.size_bits = 521,
-+	.hash_type = "sha-1",
-+	.hash_message = "sample",
-+	.k = "0089C071B419E1C2820962321787258469511958E80582E95D8378E0C2CCDB3CB42BEDE42F50E3FA3C71F5A76724281D31D9C89F0F91FC1BE4918DB1C03A5838D0F9",
-+	.r = "00343B6EC45728975EA5CBA6659BBB6062A5FF89EEA58BE3C80B619F322C87910FE092F7D45BB0F8EEE01ED3F20BABEC079D202AE677B243AB40B5431D497C55D75D",
-+	.s = "00E7B0E675A9B24413D448B8CC119D2BF7B2D2DF032741C096634D6D65D0DBE3D5694625FB9E8104D3B842C1B0E2D0B98BEA19341E8676AEF66AE4EBA3D5475D5D16",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp521r1 sha256",
-+	.curve_name = "secp521r1",
-+	.x = "01894550D0785932E00EAA23B694F213F8C3121F86DC97A04E5A7167DB4E5BCD371123D46E45DB6B5D5370A7F20FB633155D38FFA16D2BD761DCAC474B9A2F5023A4",
-+	.y = "00493101C962CD4D2FDDF782285E64584139C2F91B47F87FF82354D6630F746A28A0DB25741B5B34A828008B22ACC23F924FAAFBD4D33F81EA66956DFEAA2BFDFCF5",
-+	.size_bits = 521,
-+	.hash_type = "sha-256",
-+	.hash_message = "sample",
-+	.k = "00EDF38AFCAAECAB4383358B34D67C9F2216C8382AAEA44A3DAD5FDC9C32575761793FEF24EB0FC276DFC4F6E3EC476752F043CF01415387470BCBD8678ED2C7E1A0",
-+	.r = "01511BB4D675114FE266FC4372B87682BAECC01D3CC62CF2303C92B3526012659D16876E25C7C1E57648F23B73564D67F61C6F14D527D54972810421E7D87589E1A7",
-+	.s = "004A171143A83163D6DF460AAF61522695F207A58B95C0644D87E52AA1A347916E4F7A72930B1BC06DBE22CE3F58264AFD23704CBB63B29B931F7DE6C9D949A7ECFC",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp521r1 sha384",
-+	.curve_name = "secp521r1",
-+	.x = "01894550D0785932E00EAA23B694F213F8C3121F86DC97A04E5A7167DB4E5BCD371123D46E45DB6B5D5370A7F20FB633155D38FFA16D2BD761DCAC474B9A2F5023A4",
-+	.y = "00493101C962CD4D2FDDF782285E64584139C2F91B47F87FF82354D6630F746A28A0DB25741B5B34A828008B22ACC23F924FAAFBD4D33F81EA66956DFEAA2BFDFCF5",
-+	.size_bits = 521,
-+	.hash_type = "sha-384",
-+	.hash_message = "sample",
-+	.k = "01546A108BC23A15D6F21872F7DED661FA8431DDBD922D0DCDB77CC878C8553FFAD064C95A920A750AC9137E527390D2D92F153E66196966EA554D9ADFCB109C4211",
-+	.r = "01EA842A0E17D2DE4F92C15315C63DDF72685C18195C2BB95E572B9C5136CA4B4B576AD712A52BE9730627D16054BA40CC0B8D3FF035B12AE75168397F5D50C67451",
-+	.s = "01F21A3CEE066E1961025FB048BD5FE2B7924D0CD797BABE0A83B66F1E35EEAF5FDE143FA85DC394A7DEE766523393784484BDF3E00114A1C857CDE1AA203DB65D61",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp521r1 sha512",
-+	.curve_name = "secp521r1",
-+	.x = "01894550D0785932E00EAA23B694F213F8C3121F86DC97A04E5A7167DB4E5BCD371123D46E45DB6B5D5370A7F20FB633155D38FFA16D2BD761DCAC474B9A2F5023A4",
-+	.y = "00493101C962CD4D2FDDF782285E64584139C2F91B47F87FF82354D6630F746A28A0DB25741B5B34A828008B22ACC23F924FAAFBD4D33F81EA66956DFEAA2BFDFCF5",
-+	.size_bits = 521,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "01DAE2EA071F8110DC26882D4D5EAE0621A3256FC8847FB9022E2B7D28E6F10198B1574FDD03A9053C08A1854A168AA5A57470EC97DD5CE090124EF52A2F7ECBFFD3",
-+	.r = "00C328FAFCBD79DD77850370C46325D987CB525569FB63C5D3BC53950E6D4C5F174E25A1EE9017B5D450606ADD152B534931D7D4E8455CC91F9B15BF05EC36E377FA",
-+	.s = "00617CCE7CF5064806C467F678D3B4080D6F1CC50AF26CA209417308281B68AF282623EAA63E5B5C0723D8B8C37FF0777B1A20F8CCB1DCCC43997F1EE0E44DA4A67A",
-+	.expected = 0,
-+	},
-+	{
-+	.test_name = "secp521r1 sha512 error",
-+	.curve_name = "secp521r1",
-+	.x = "01894550D0785932E00EAA23B694F213F8C3121F86DC97A04E5A7167DB4E5BCD371123D46E45DB6B5D5370A7F20FB633155D38FFA16D2BD761DCAC474B9A2F5023A4",
-+	.y = "00493101C962CD4D2FDDF782285E64584139C2F91B47F87FF82354D6630F746A28A0DB25741B5B34A828008B22ACC23F924FAAFBD4D33F81EA66956DFEAA2BFDFCF5",
-+	.size_bits = 521,
-+	.hash_type = "sha-512",
-+	.hash_message = "sample",
-+	.k = "01DAE2EA071F8110DC26882D4D5EAE0621A3256FC8847FB9022E2B7D28E6F10198B1574FDD03A9053C08A1854A168AA5A57470EC97DD5CE090124EF52A2F7ECBFFD3",
-+	.r = "00C328FAFCBD79DD77850370C46325D987CB525569FB63C5D3BC53950E6D4C5F174E25A1EE9017B5D450606ADD152B534931D7D4E8455CC91F9B15BF05EC36E377FA",
-+	.s = "00017CCE7CF5064806C467F678D3B4080D6F1CC50AF26CA209417308281B68AF282623EAA63E5B5C0723D8B8C37FF0777B1A20F8CCB1DCCC43997F1EE0E44DA4A67A",
-+	.expected = MBEDTLS_ERR_ECP_VERIFY_FAILED,
-+	},
-+};
-+
-+int ecdsa_test(struct unit_test_state *uts, struct ecdsa_test_vector_s *tv)
-+{
-+	struct ecdsa_public_key pubkey;
-+	unsigned char x[528 / 8];
-+	unsigned char y[528 / 8];
-+	unsigned char hash[512 / 8];
-+	unsigned int hash_len;
-+	unsigned char signature[528 / 8 * 2];
-+	unsigned int sig_len;
-+	int ret;
-+
-+	if (!(tv->size_bits % 8))
-+		sig_len = tv->size_bits / 8;
-+	else
-+		sig_len = tv->size_bits / 8 + 1;
-+
-+	pubkey.curve_name = tv->curve_name;
-+	hex2bin(x, tv->x, strlen(tv->x) / 2);
-+	pubkey.x          = x;
-+	hex2bin(y, tv->y, strlen(tv->y) / 2);
-+	pubkey.y          = y;
-+	pubkey.size_bits  = tv->size_bits;
-+
-+	if (!strcmp(tv->hash_type, "sha-1")) {
-+#if CONFIG_IS_ENABLED(SHA1)
-+		hash_len = SHA1_SUM_LEN;
-+		sha1_csum_wd(tv->hash_message, strlen(tv->hash_message),
-+			     hash, hash_len);
-+#else
-+		/* sha1 is not supported so we skip this test */
-+		goto out;
-+#endif
-+	} else if (!strcmp(tv->hash_type, "sha-256")) {
-+#if CONFIG_IS_ENABLED(SHA256)
-+		hash_len = SHA256_SUM_LEN;
-+		sha256_csum_wd(tv->hash_message, strlen(tv->hash_message),
-+			       hash, hash_len);
-+#else
-+		/* sha256 is not supported so we skip this test */
-+		goto out;
-+#endif
-+	} else if (!strcmp(tv->hash_type, "sha-384")) {
-+#if CONFIG_IS_ENABLED(SHA384)
-+		hash_len = SHA384_SUM_LEN;
-+		sha384_csum_wd(tv->hash_message, strlen(tv->hash_message),
-+			       hash, hash_len);
-+#else
-+		/* sha384 is not supported so we skip this test */
-+		goto out;
-+#endif
-+	} else if (!strcmp(tv->hash_type, "sha-512")) {
-+#if CONFIG_IS_ENABLED(SHA512)
-+		hash_len = SHA512_SUM_LEN;
-+		sha512_csum_wd(tv->hash_message, strlen(tv->hash_message),
-+			       hash, hash_len);
-+#else
-+		/* sha512 is not supported so we skip this test */
-+		goto out;
-+#endif
-+	} else {
-+		ut_reportf("Unknown hash type (%s)", tv->hash_type);
-+		goto out;
-+	}
-+
-+	memset(signature, 0, sizeof(signature));
-+	hex2bin(signature, tv->r, sig_len);
-+	hex2bin(signature + sig_len, tv->s, sig_len);
-+	sig_len = sig_len * 2;
-+
-+	ret = sw_ecdsa_verify(&pubkey,
-+			      hash, hash_len,
-+			      signature, sig_len);
-+	ut_asserteq(tv->expected, ret);
-+
-+ out:
-+	return 0;
-+}
-+
-+static int lib_sw_ecdsa(struct unit_test_state *uts)
-+{
-+	int i, num_test = ARRAY_SIZE(ecdsa_test_vector);
-+
-+	for (i = 0; i < num_test; i++)
-+		ecdsa_test(uts, &ecdsa_test_vector[i]);
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_sw_ecdsa, 0);
+diff --git a/test/py/tests/test_fit_ecdsa.py b/test/py/tests/test_fit_ecdsa.py
+index 3e816d68eb6..e59390374af 100644
+--- a/test/py/tests/test_fit_ecdsa.py
++++ b/test/py/tests/test_fit_ecdsa.py
+@@ -102,7 +102,7 @@ def test_fit_ecdsa(ubman):
+     with open(key_file, 'w') as f:
+         f.write(key.export_key(format='PEM'))
+ 
+-    assemble_fit_image(fit_file, f'{datadir}/sign-images-sha256.its', tempdir)
++    assemble_fit_image(fit_file, f'{datadir}/sign-images-sha256-rsa2048.its', tempdir)
+ 
+     fit = SignableFitImage(ubman, fit_file)
+     nodes = fit.find_signable_image_nodes()
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 7a7f9c379de..fd1bf6eb8aa 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -84,21 +84,21 @@ def make_fit(its, ubman, mkimage, dtc_args, datadir, fit):
+ # Only run the full suite on a few combinations, since it doesn't add any more
+ # test coverage.
+ TESTDATA_IN = [
+-    ['sha1-basic', 'sha1', '', None, False, True, False, False],
+-    ['sha1-pad', 'sha1', '', '-E -p 0x10000', False, False, False, False],
+-    ['sha1-pss', 'sha1', '-pss', None, False, False, False, False],
+-    ['sha1-pss-pad', 'sha1', '-pss', '-E -p 0x10000', False, False, False, False],
+-    ['sha256-basic', 'sha256', '', None, False, False, False, False],
+-    ['sha256-pad', 'sha256', '', '-E -p 0x10000', False, False, False, False],
+-    ['sha256-pss', 'sha256', '-pss', None, False, False, False, False],
+-    ['sha256-pss-pad', 'sha256', '-pss', '-E -p 0x10000', False, False, False, False],
+-    ['sha256-pss-required', 'sha256', '-pss', None, True, False, False, False],
+-    ['sha256-pss-pad-required', 'sha256', '-pss', '-E -p 0x10000', True, True, False, False],
+-    ['sha384-basic', 'sha384', '', None, False, False, False, False],
+-    ['sha384-pad', 'sha384', '', '-E -p 0x10000', False, False, False, False],
+-    ['algo-arg', 'algo-arg', '', '-o sha256,rsa2048', False, False, True, False],
+-    ['sha256-global-sign', 'sha256', '', '', False, False, False, True],
+-    ['sha256-global-sign-pss', 'sha256', '-pss', '', False, False, False, True],
++    ['sha1-basic', 'sha1', '-rsa2048', '', None, False, True, False, False],
++    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
++    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False, False, False, False],
++    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
++    ['sha256-basic', 'sha256', '-rsa2048', '', None, False, False, False, False],
++    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False, False, False, False],
++    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False, False, False, False],
++    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False, False, False, False],
++    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, True, False, False, False],
++    ['sha256-pss-pad-required', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', True, True, False, False],
++    ['sha384-basic', 'sha384', '-rsa3072', '', None, False, False, False, False],
++    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False, False, False, False],
++    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', False, False, True, False],
++    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False, False, False, True],
++    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False, False, False, True],
+ ]
+ 
+ # Mark all but the first test as slow, so they are not run with '-k not slow'
+@@ -111,9 +111,9 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
+ @pytest.mark.requiredtool('fdtget')
+ @pytest.mark.requiredtool('fdtput')
+ @pytest.mark.requiredtool('openssl')
+-@pytest.mark.parametrize("name,sha_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
++@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,required,full_test,algo_arg,global_sign",
+                          TESTDATA)
+-def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
++def test_vboot(ubman, name, sha_algo, sig_algo, padding, sign_options, required,
+                full_test, algo_arg, global_sign):
+     """Test verified boot signing with mkimage and verification with 'bootm'.
+ 
+@@ -287,7 +287,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+         utils.run_and_log(ubman, 'openssl req -batch -new -x509 -key %s%s.key '
+                           '-out %s%s.crt' % (tmpdir, name, tmpdir, name))
+ 
+-    def test_with_algo(sha_algo, padding, sign_options):
++    def test_with_algo(sha_algo, sig_algo, padding, sign_options):
+         """Test verified boot with the given hash algorithm.
+ 
+         This is the main part of the test code. The same procedure is followed
+@@ -308,7 +308,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+ 
+         # Build the FIT, but don't sign anything yet
+         ubman.log.action('%s: Test FIT with signed images' % sha_algo)
+-        make_fit('sign-images-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-images-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         run_bootm(sha_algo, 'unsigned images', ' - OK' if algo_arg else 'dev-', True)
+ 
+         # Sign images with our dev keys
+@@ -319,7 +319,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+         dtc('sandbox-u-boot.dts', ubman, dtc_args, datadir, tmpdir, dtb)
+ 
+         ubman.log.action('%s: Test FIT with signed configuration' % sha_algo)
+-        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         run_bootm(sha_algo, 'unsigned config', '%s+ OK' % ('sha256' if algo_arg else sha_algo), True)
+ 
+         # Sign images with our dev keys
+@@ -369,7 +369,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+             run_bootm(sha_algo, 'evil kernel@', msg, False, efit)
+ 
+         # Create a new properly signed fit and replace header bytes
+-        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         sign_fit(sha_algo, sign_options)
+         bcfg = ubman.config.buildconfig
+         max_size = int(bcfg.get('config_fit_signature_max_size', 0x10000000), 0)
+@@ -401,7 +401,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+             ubman, [fit_check_sign, '-f', fit, '-k', dtb],
+             1, 'Failed to verify required signature')
+ 
+-    def test_required_key(sha_algo, padding, sign_options):
++    def test_required_key(sha_algo, sig_algo, padding, sign_options):
+         """Test verified boot with the given hash algorithm.
+ 
+         This function tests if U-Boot rejects an image when a required key isn't
+@@ -423,12 +423,12 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+ 
+         # Build the FIT with prod key (keys required) and sign it. This puts the
+         # signature into sandbox-u-boot.dtb, marked 'required'
+-        make_fit('sign-configs-%s%s-prod.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-configs-%s%s%s-prod.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         sign_fit(sha_algo, sign_options)
+ 
+         # Build the FIT with dev key (keys NOT required). This adds the
+         # signature into sandbox-u-boot.dtb, NOT marked 'required'.
+-        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         sign_fit_norequire(sha_algo, sign_options)
+ 
+         # So now sandbox-u-boot.dtb two signatures, for the prod and dev keys.
+@@ -440,7 +440,7 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+ 
+         # Build the FIT with dev key (keys required) and sign it. This puts the
+         # signature into sandbox-u-boot.dtb, marked 'required'.
+-        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+         sign_fit(sha_algo, sign_options)
+ 
+         # Set the required-mode policy to "any".
+@@ -520,8 +520,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+     dtb = '%ssandbox-u-boot.dtb' % tmpdir
+     sig_node = '/configurations/conf-1/signature'
+ 
+-    create_rsa_pair('dev')
+-    create_rsa_pair('prod')
++    if sig_algo == "-rsa2048" or sig_algo == "-rsa3072" or sig_algo == "":
++        create_rsa_pair('dev')
++        create_rsa_pair('prod')
+ 
+     # Create a number kernel image with zeroes
+     with open('%stest-kernel.bin' % tmpdir, 'wb') as fd:
+@@ -540,9 +541,9 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+         if global_sign:
+             test_global_sign(sha_algo, padding, sign_options)
+         elif required:
+-            test_required_key(sha_algo, padding, sign_options)
++            test_required_key(sha_algo, sig_algo, padding, sign_options)
+         else:
+-            test_with_algo(sha_algo, padding, sign_options)
++            test_with_algo(sha_algo, sig_algo, padding, sign_options)
+     finally:
+         # Go back to the original U-Boot with the correct dtb.
+         ubman.config.dtb = old_dtb
+@@ -550,21 +551,21 @@ def test_vboot(ubman, name, sha_algo, padding, sign_options, required,
+ 
+ 
+ TESTDATA_IN = [
+-    ['sha1-basic', 'sha1', '', None, False],
+-    ['sha1-pad', 'sha1', '', '-E -p 0x10000', False],
+-    ['sha1-pss', 'sha1', '-pss', None, False],
+-    ['sha1-pss-pad', 'sha1', '-pss', '-E -p 0x10000', False],
+-    ['sha256-basic', 'sha256', '', None, False],
+-    ['sha256-pad', 'sha256', '', '-E -p 0x10000', False],
+-    ['sha256-pss', 'sha256', '-pss', None, False],
+-    ['sha256-pss-pad', 'sha256', '-pss', '-E -p 0x10000', False],
+-    ['sha256-pss-required', 'sha256', '-pss', None, False],
+-    ['sha256-pss-pad-required', 'sha256', '-pss', '-E -p 0x10000', False],
+-    ['sha384-basic', 'sha384', '', None, False],
+-    ['sha384-pad', 'sha384', '', '-E -p 0x10000', False],
+-    ['algo-arg', 'algo-arg', '', '-o sha256,rsa2048', True],
+-    ['sha256-global-sign', 'sha256', '', '', False],
+-    ['sha256-global-sign-pss', 'sha256', '-pss', '', False],
++    ['sha1-basic', 'sha1', '-rsa2048', '', None, False],
++    ['sha1-pad', 'sha1', '-rsa2048', '', '-E -p 0x10000', False],
++    ['sha1-pss', 'sha1', '-rsa2048', '-pss', None, False],
++    ['sha1-pss-pad', 'sha1', '-rsa2048', '-pss', '-E -p 0x10000', False],
++    ['sha256-basic', 'sha256', '-rsa2048', '', None, False],
++    ['sha256-pad', 'sha256', '-rsa2048', '', '-E -p 0x10000', False],
++    ['sha256-pss', 'sha256', '-rsa2048', '-pss', None, False],
++    ['sha256-pss-pad', 'sha256', '-rsa2048', '-pss', '-E -p 0x10000', False],
++    ['sha256-pss-required', 'sha256', '-rsa2048', '-pss', None, False],
++    ['sha256-pss-pad-required', 'sha256', '-rsa2048' , '-pss', '-E -p 0x10000', False],
++    ['sha384-basic', 'sha384', '-rsa3072', '', None, False],
++    ['sha384-pad', 'sha384', '-rsa3072', '', '-E -p 0x10000', False],
++    ['algo-arg', 'algo-arg', '', '', '-o sha256,rsa2048', True],
++    ['sha256-global-sign', 'sha256', '-rsa2048', '', '', False],
++    ['sha256-global-sign-pss', 'sha256', '-rsa2048', '-pss', '', False],
+ ]
+ 
+ # Mark all but the first test as slow, so they are not run with '-k not slow'
+@@ -575,8 +576,8 @@ TESTDATA += [pytest.param(*v, marks=pytest.mark.slow) for v in TESTDATA_IN[1:]]
+ @pytest.mark.buildconfigspec('fit_signature')
+ @pytest.mark.requiredtool('dtc')
+ @pytest.mark.requiredtool('openssl')
+-@pytest.mark.parametrize("name,sha_algo,padding,sign_options,algo_arg", TESTDATA)
+-def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
++@pytest.mark.parametrize("name,sha_algo,sig_algo,padding,sign_options,algo_arg", TESTDATA)
++def test_fdt_add_pubkey(ubman, name, sha_algo, sig_algo, padding, sign_options, algo_arg):
+     """Test fdt_add_pubkey utility with bunch of different algo options."""
+ 
+     def sign_fit(sha_algo, options):
+@@ -595,7 +596,7 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
+         ubman.log.action('%s: Sign images' % sha_algo)
+         utils.run_and_log(ubman, args)
+ 
+-    def test_add_pubkey(sha_algo, padding, sign_options):
++    def test_add_pubkey(sha_algo, sig_algo, padding, sign_options):
+         """Test fdt_add_pubkey utility with given hash algorithm and padding.
+ 
+         This function tests if fdt_add_pubkey utility may add public keys into dtb.
+@@ -618,7 +619,7 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
+                             'rsa3072' if sha_algo == 'sha384' else 'rsa2048'),
+                            '-k', tmpdir, '-n', 'dev', '-r', 'conf', dtb])
+ 
+-        make_fit('sign-configs-%s%s.its' % (sha_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
++        make_fit('sign-configs-%s%s%s.its' % (sha_algo, sig_algo, padding), ubman, mkimage, dtc_args, datadir, fit)
+ 
+         # Sign images with our dev keys
+         sign_fit(sha_algo, sign_options)
+@@ -640,4 +641,4 @@ def test_fdt_add_pubkey(ubman, name, sha_algo, padding, sign_options, algo_arg):
+ 
+     # keys created in test_vboot test
+ 
+-    test_add_pubkey(sha_algo, padding, sign_options)
++    test_add_pubkey(sha_algo, sig_algo, padding, sign_options)
+diff --git a/test/py/tests/vboot/sign-configs-sha1-pss.its b/test/py/tests/vboot/sign-configs-sha1-rsa2048-pss.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-configs-sha1-pss.its
+rename to test/py/tests/vboot/sign-configs-sha1-rsa2048-pss.its
+diff --git a/test/py/tests/vboot/sign-configs-sha1.its b/test/py/tests/vboot/sign-configs-sha1-rsa2048.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-configs-sha1.its
+rename to test/py/tests/vboot/sign-configs-sha1-rsa2048.its
+diff --git a/test/py/tests/vboot/sign-configs-sha256-pss-prod.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048-pss-prod.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-configs-sha256-pss-prod.its
+rename to test/py/tests/vboot/sign-configs-sha256-rsa2048-pss-prod.its
+diff --git a/test/py/tests/vboot/sign-configs-sha256-pss.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048-pss.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-configs-sha256-pss.its
+rename to test/py/tests/vboot/sign-configs-sha256-rsa2048-pss.its
+diff --git a/test/py/tests/vboot/sign-configs-sha256.its b/test/py/tests/vboot/sign-configs-sha256-rsa2048.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-configs-sha256.its
+rename to test/py/tests/vboot/sign-configs-sha256-rsa2048.its
+diff --git a/test/py/tests/vboot/sign-configs-sha384.its b/test/py/tests/vboot/sign-configs-sha384-rsa3072.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-configs-sha384.its
+rename to test/py/tests/vboot/sign-configs-sha384-rsa3072.its
+diff --git a/test/py/tests/vboot/sign-images-sha1-pss.its b/test/py/tests/vboot/sign-images-sha1-rsa2048-pss.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-images-sha1-pss.its
+rename to test/py/tests/vboot/sign-images-sha1-rsa2048-pss.its
+diff --git a/test/py/tests/vboot/sign-images-sha1.its b/test/py/tests/vboot/sign-images-sha1-rsa2048.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-images-sha1.its
+rename to test/py/tests/vboot/sign-images-sha1-rsa2048.its
+diff --git a/test/py/tests/vboot/sign-images-sha256-pss.its b/test/py/tests/vboot/sign-images-sha256-rsa2048-pss.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-images-sha256-pss.its
+rename to test/py/tests/vboot/sign-images-sha256-rsa2048-pss.its
+diff --git a/test/py/tests/vboot/sign-images-sha256.its b/test/py/tests/vboot/sign-images-sha256-rsa2048.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-images-sha256.its
+rename to test/py/tests/vboot/sign-images-sha256-rsa2048.its
+diff --git a/test/py/tests/vboot/sign-images-sha384.its b/test/py/tests/vboot/sign-images-sha384-rsa3072.its
+similarity index 100%
+rename from test/py/tests/vboot/sign-images-sha384.its
+rename to test/py/tests/vboot/sign-images-sha384-rsa3072.its
 -- 
 2.43.0
 
