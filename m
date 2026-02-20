@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18145C5B560
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 20:51:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 462EFC5B561
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 20:51:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3314083DEB;
-	Fri, 20 Feb 2026 21:51:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6FAD283D8A;
+	Fri, 20 Feb 2026 21:51:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rTPO7Wxp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QqoejBBh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 799C583A5E; Fri, 20 Feb 2026 21:51:23 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id A4A7983C39; Fri, 20 Feb 2026 21:51:24 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6111A83A5E
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 21:51:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9173583CEE
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 21:51:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-677a11d11e0so932173eaf.2
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 12:51:21 -0800 (PST)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d4cb7e10efso2114987a34.0
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 12:51:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771620680; x=1772225480; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771620681; x=1772225481; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=o0yX0vuV13Cd9CFDzLNgTj6WlDRTK/nizskszH4M4tc=;
- b=rTPO7WxpXl1MvDeyfg+ph3iN+l2EOmPaI0uPexLNaqbZPHsN5cjGQ8s3Z9YiI+xW6+
- SixrvNJCpL1cVBlg8ezO8WNmXfv04JjR8eklmHdBSoNtN29fMQ4OdS92EdeZBHGWB2F2
- DYPqjZZeutbSsrtw2Fw58uIwleG3HM4z5jNl8=
+ bh=m7gOBR8Dgd54qPoZzmZSCOxvnvV3V1GFtxqqNSfF7SM=;
+ b=QqoejBBhhYbP//xHh+ad/roKgM7EkZJm5pbChqENcQLKBv/h5FZuzJIgZVzeIHnNBZ
+ pp1oxPBzse0g5Gn1zn7Supg+tQW6cp/saU1t2xtMcxt8aO3odyl/hxKYZM7eZMtPG4T4
+ Svx24XMi8b+Qs/KS8tbREd3xryDe6CJvB0Ugo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771620680; x=1772225480;
+ d=1e100.net; s=20230601; t=1771620681; x=1772225481;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=o0yX0vuV13Cd9CFDzLNgTj6WlDRTK/nizskszH4M4tc=;
- b=oQGzRe2/u5pgsyuumm1lEf+14pvtiiFcmkVBhuoD4QAUWlBx5nwmaTZy+juF3KeT1O
- XlHVT18fadOP+Vem+/IGVwVwxvhMwO8a7bfepIa5IWT5vr0dzsXJG6F02t29qs48ms8b
- YAe1D/6sWiQpC8Daf0BqBHGv1QJNBSDE1QO6VSlDp+WSPyvsV/36L5rxYMvG3TOP9OTB
- 0YJu+SoGSkrtwdB1gnwH8Z2rDOVuUkI1JTcdBCmFbQKhaK43V56dJMAevTgrGKn+AVkr
- kaTKROQsznvns4gZFrJsx4KoieKCdz9c4q1o5WdWgdWSp6Lihbn/VKXZbTV7JaSHtyk9
- URVw==
-X-Gm-Message-State: AOJu0YxyomqfrWmK9p8CBeN9MgSieZdrwdcquMvk6BMXv4d17JyU4CdX
- 0wrUdLWdkkTaSDOv97YeY6Xxtk/w1Pc/B6oe5CCFuyfaJj1y4Q8/BJyJbDYYNKerrWhRIjhhmPw
- 964nVTAc=
-X-Gm-Gg: AZuq6aJ6j8vJI4aYyV8HiDi5iaMyXRuFQxs2tJ+s2GLKBvDlhP5js92hVvUTtleCanA
- IjhTP+t1+KlAMSp+HFjK5+pfFcnJ9yhIO4uzgdccO/jEZxjA8h9KYzXUxU6D+Ha/BFkzO75X6Cq
- Vm6ucn1IqGA4y3cm/ePBDJGYnKixICaIxqgeAecmSy6/dsCAHxDkOBOmIZWIeAw9ngpqcf6diLb
- Z/y2xY/oJOjBOTkBfs/MEQMSnD768f4PFH4JoomOnNZU2SgpUiUSYbpKb3QfZt7DoAsojKjsQ53
- ervDNJeCfmpbBprI16ecglSOonUd5GPsBWBmKgv4nIfPYdw7FNHSiLaXQijUve4Fva8READ+PgQ
- AboSAkKSeqCCjtFrYFWgikP9F2gFeVPaX+r66Lrl9nE8B3nDFv4pQt8jzyzKHUHLWQS36GNX5do
- 2FhhSCxVMMAFiGw6/Fm/9K0qYcvZ4JUTzwMowU551mmErjT84JS4iW3fj6GNgmADxVer408BHMl
- 0Q5JUIbycN/UW1rx85ap1ryp8mF+JkEGG/uxWYchN3g7YAVq7hTDw4Popaj
-X-Received: by 2002:a05:6808:10d5:b0:44d:b72e:ec1a with SMTP id
- 5614622812f47-464463700dfmr843927b6e.45.1771620680078; 
- Fri, 20 Feb 2026 12:51:20 -0800 (PST)
+ bh=m7gOBR8Dgd54qPoZzmZSCOxvnvV3V1GFtxqqNSfF7SM=;
+ b=KyS70CSeqCBGP/iTSfiD2asIVW8mD/UUcAB48Z8FWnxQvABk7mMTWZNZsWdq4WrNpI
+ R6cWkKEO4Iq13ZKgFX5K84wgCfovweHhHpS0uaxT9f/thMeUjivC6rhZaVTznFrPzhPR
+ zlH04jNmK82NxmQolTVAQi5MNTDVXSScNxIcK43pHR2d9Oi/Bg1ihJtRWfTlzOvkRi5y
+ 7HSFteNvkO6zCSlOWtMimLIs/rAKYHCeVGWxVFIcF9GxW7pvBkRXWUPCxHMeNAQI9MDD
+ cwIpzMc+3AfOwtUzNwTAc9KFjp3SDdK9m5n9Mjrx3yR/22qbPEXxKgRJV2U7lbsNaNcZ
+ +T4w==
+X-Gm-Message-State: AOJu0Yy5nnuQaFSsC2ae5n+5vDIth1GD0/TrvRQ8dirVd/o18BCAmV7B
+ Cir7O4EqxvEGpA+ML0BIH6PruuQkvByiC484CHj5GrsUBC34lyNWeTe7KWDPBX5hPKyvWYFqbV5
+ H3SNe7EI=
+X-Gm-Gg: AZuq6aL9oBzNTmSVCUlfesTZd7y7PakXE4LMVKhj2mXlaBb08BJVoP8dKGI/5Bk5c9O
+ Le8SXhSThbb27NnTGlrn9P1JJk1OD+eJFaNSkDD4heCyV2+g5zB3/yvr4xZ4MN8aIK5exwPc3UB
+ lmdTexiEu1YCJsjazAEpDw3S9azSiUu0/NOYAdwPMUAzYTTbi6ywwRdg+xLKVIWY1sw4Q3PD49b
+ p2yN5C0wjBtICRUmva6xxh9WU1JTQwIUSPSQs/vpQmVYHEs4px4WVuShV1cYLIeYHnMZ8Vw5mgw
+ YazcbK/Unv8lyXaF6mE5BwT1d5aqxGb0z1jQm5/BxP5grbM20f5tnB1MYNG5MKVuKOKhoIPwRSR
+ 4Z72zCw2xXzCKDMs610hMVugJ6CIeLr7NG/Gy7juhpcApAPDn9NRk13ml/3LBLByX5+KbW8TdB+
+ qHuUP2ZhhrMqlrk1xKnQtVPBMPET0Yg2RpO7aGay4fXsH0KK9lQ4NyBfDsjIaY9VpUwy+NUGDO3
+ ooH15vcQebLWcoHlKGOZXZx6C0m7zFekhQM4SPxiILeeVUfaQ==
+X-Received: by 2002:a05:6808:c227:b0:45c:75ec:b9b3 with SMTP id
+ 5614622812f47-46446181296mr884326b6e.9.1771620681173; 
+ Fri, 20 Feb 2026 12:51:21 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cfed28esm525818fac.9.2026.02.20.12.51.19
+ 586e51a60fabf-4157cfed28esm525818fac.9.2026.02.20.12.51.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 12:51:19 -0800 (PST)
+ Fri, 20 Feb 2026 12:51:20 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ronald Wahl <rwahl@gmx.de>
-Cc: Ronald Wahl <ronald.wahl@legrand.com>, Anshul Dalal <anshuld@ti.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Dhruva Gole <d-gole@ti.com>, 
- Simon Glass <sjg@chromium.org>, Albert ARIBAUD <albert.u.boot@aribaud.net>
-In-Reply-To: <20260207153330.90165-1-rwahl@gmx.de>
-References: <20260207153330.90165-1-rwahl@gmx.de>
-Subject: Re: [PATCH] spl: fix stack placement in spl_relocate_stack_gd()
-Message-Id: <177162067898.148229.4662358075694437697.b4-ty@konsulko.com>
-Date: Fri, 20 Feb 2026 14:51:18 -0600
+To: u-boot@lists.denx.de, Christoph Reiter <christoph.reiter@evk.biz>
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org
+In-Reply-To: <DU2PR09MB5294504C1221EF029607D88C8E3EA@DU2PR09MB5294.eurprd09.prod.outlook.com>
+References: <DU2PR09MB5294504C1221EF029607D88C8E3EA@DU2PR09MB5294.eurprd09.prod.outlook.com>
+Subject: Re: [PATCH] mtd: spi-nor-ids: Add Fujitsu MB85RS256TY FRAM
+Message-Id: <177162068021.148229.18432942989354958228.b4-ty@konsulko.com>
+Date: Fri, 20 Feb 2026 14:51:20 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,31 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 07 Feb 2026 16:33:30 +0100, Ronald Wahl wrote:
+On Mon, 25 Aug 2025 05:53:58 +0000, Christoph Reiter wrote:
 
-> Currently when CONFIG_SPL_STACK_R and CONFIG_SPL_SYS_MALLOC_SIMPLE is
-> enabled then spl_relocate_stack_gd() will setup a layout where the stack
-> lays inside the heap and grows down to heap start. Also the global data
-> is part of the heap. This can lead to corruption of stack and global
-> data. The current layout is:
+> This part is an FRAM, but can be used through the spi-nor generic code.
 > 
->                     0x0 +-------------+
->                         .             .
->                         .             .
->         gd->malloc_base +- - - - - - -+
->                         |             |\
->                         | HEAP/STACK  | \
->                         |             |  } SPL_STACK_R_MALLOC_SIMPLE_LEN
->       gd->start_addr_sp +- - - - - - -+ /  (gd->malloc_limit)
->                         | GLOBAL DATA |/
-> CONFIG_SPL_STACK_R_ADDR +-------------+
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] spl: fix stack placement in spl_relocate_stack_gd()
-      commit: ef65b15383c99f4562539a635fe166fb4d75c0e3
+[1/1] mtd: spi-nor-ids: Add Fujitsu MB85RS256TY FRAM
+      commit: 311f9237613d71ac1807db59c16c2250076e9957
 -- 
 Tom
 
