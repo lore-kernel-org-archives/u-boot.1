@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C32B8C55AB9
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 13:04:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFD55C55AB9
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 13:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 784FD83AC5;
-	Fri, 20 Feb 2026 14:04:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0597383D0F;
+	Fri, 20 Feb 2026 14:04:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dNZmUw5V";
+	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="dUL95la8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D7DA83CEE; Fri, 20 Feb 2026 04:19:24 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 51FBE83CD3; Fri, 20 Feb 2026 05:48:01 +0100 (CET)
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
+ [IPv6:2001:df5:b000:5::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5D2B8366F
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 04:19:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACFEB83946
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 05:47:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2aaf59c4f7cso7458745ad.1
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:19:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771557560; x=1772162360; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mWVVuUSEZhwInqN2I2ZQr7Mhg/R/tJqclm0sTBTGJjk=;
- b=dNZmUw5VTp57ESs8ln25cl9sJ0O6mGl5AJQKjrMQgsFNe9DeHQ9in7gkb7YV+yZc4G
- 7dZuzrQlcd7r5UCet8nwhSieYNXnrkUonHlWcti/3gbFYKFCYFuaBJxK7OC6NAeVfHW2
- UsntfEY4J/wFeQ8uRxC2JMWUcFqC8dpU2pw8pWfoRgtc7rsFe5KHX2wB0izT22C+eHev
- GlPibbG0d+BQkaHuouXaxqbUwuclCj9PMb9P3miP9xDIPGyaF1rRLj09Wo3IldoMYeSt
- Kl7qLsiKjVnCelWoOh9WeSCXAy3SKeX9d5j8jPW7ao3+9eAYKt54Phq6KMIgOBPAzbC0
- yCfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771557560; x=1772162360;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mWVVuUSEZhwInqN2I2ZQr7Mhg/R/tJqclm0sTBTGJjk=;
- b=bCbB2sRzr0D0YSnbmb0eezeCK04EHBK00GuVdYya8E/4M4XzYsCtRtDytsIb5h9eY1
- o/QdEyWrRoqrnwD4ZMoKhW/GtEm/csiN7N6UZxdPMf6spnEiMMY8itsTuOFkIB4KbHHg
- DvRdl6FoC5XikmEjNE2LvGX60L+cPMY71v5QMWi4aOqvuaPNUHs9MvkfBCirR9xmc8Bp
- Z0GL/cH+SJ/f/JW1Url7ra2qP8VdlldtZCKlUFGjVVxPpTM1Pau1d7kKEzLygz8N9CYs
- G7fMcDqf+L04lAFkjLZiPN+cZL0BBJ52hpnSkJwaNkkOxVAdT7J7iYiN56dqSoSUi9BZ
- OPlg==
-X-Gm-Message-State: AOJu0Ywvu3qEMPVS3e+0LBuDxwWcZ3ZjC5gLJeYR5n1RUkwNHGjOjRPI
- PjNc7Oqbll+gxpKnh0yn1nRVVYerZ6Awit2odCXXr5hhPOPh+9ih5mTbfaeG/g==
-X-Gm-Gg: AZuq6aLsRDTujHzdInwv7szikKqDfIB9Og/ar0lEjYlqnxyiPPkgLYppRXEBHCqPlr9
- W5/7cLWvlWubHzMq7oygYuLmDqRmVMTrxFW8EfqGfS2P2R2dwkxeBJX8tqHbIgYa8ouh8i7Nfba
- 67axL5RjnDg4HKyfHOWxQCRMW9USQ1jwcWLsq9dt7tK1yXsaj/+9VDaXh5dRj/Rv0IFIUWZwsv7
- 5fnBEU1pp5tEyfKBkeHNuU9IWq02e1tPFg5y2a5RlZMKR41JCstCTD4jemgcFz/S5L1B5lPwYYz
- 5uGLOGshLaqiVB2UwLyEyUhJAF8BRuMcD2zKh71S/l9iKTKr56CwwBt/lmQO/AvSDmG27UbRdB4
- hsHIfBfQgPGvai+6McveSn8CxhSxRPe3vnup7CUA4036IDCotl6cDWv4GNfmSIt6LCgskNdEXcN
- JsJjvBMM4Lhh3Fs26PLU/wWwD/wWDYkFSQ5h7tzOvm14MSu/gmp6LCCJY8lfwIY/XC/G1gSmwgh
- w==
-X-Received: by 2002:a17:903:2f4e:b0:246:7a43:3f66 with SMTP id
- d9443c01a7336-2ad50e77517mr72042295ad.7.1771557559916; 
- Thu, 19 Feb 2026 19:19:19 -0800 (PST)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ad1aadc7b7sm180415905ad.67.2026.02.19.19.19.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Feb 2026 19:19:19 -0800 (PST)
-From: Aristo Chen <jj251510319013@gmail.com>
-X-Google-Original-From: Aristo Chen <aristo.chen@canonical.com>
+ spf=pass smtp.mailfrom=ronand@alliedtelesis.co.nz
+Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 5D4A02C04D4;
+ Fri, 20 Feb 2026 17:47:52 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+ s=mail181024; t=1771562872;
+ bh=MqClzFsYrzFqvZaQOsYbKNapKnSSvcpPfiNxXBnRHZ0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=dUL95la8TECKPw8ASC0dsspO4md2dW8T3H/eHxo6Ucv/XJ4+1CaIxxW1W7iSepQKX
+ 4fyg/vQvkuV01wSi55UnJ9qX7t75F8iD73asOhwxS/MS6gQ/AlP4bS09PSBDfCFBHH
+ AarDwq88sNviftliBfFN+4jUMXoYvlcDCX7p7q0lk16BWKmJyS8EkPhVIwDuK6ceRW
+ m71rf9DtAwXcERMy+oWxZYf/h5b9b3GRC2G0eG8lDdUoVIc+y8Jh/43w9Fqz3Um66E
+ Vd97UMEFT+8gG1/CiXzA9LAjuSSyeHigUED0V+MdwNIDepeV8CJRemqSN7MsCx2CaC
+ y8CdjnyObID7A==
+Received: from pat.atlnz.lc (Not Verified[10.32.16.33]) by
+ svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
+ id <B6997e7780000>; Fri, 20 Feb 2026 17:47:52 +1300
+Received: from ronand-dl.ws.atlnz.lc (ronand-dl.ws.atlnz.lc [10.33.12.18])
+ by pat.atlnz.lc (Postfix) with ESMTP id 3223713ECD2;
+ Fri, 20 Feb 2026 17:47:52 +1300 (NZDT)
+Received: by ronand-dl.ws.atlnz.lc (Postfix, from userid 1930)
+ id 2D02884004E; Fri, 20 Feb 2026 17:47:52 +1300 (NZDT)
+From: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>
 To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Aristo Chen <aristo.chen@canonical.com>
-Subject: [PATCH v1 1/1] doc: pstore: fix typo
-Date: Fri, 20 Feb 2026 03:18:39 +0000
-Message-ID: <20260220031841.15708-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>,
+ Marek Vasut <marex@denx.de>, Philip Oberfichtner <pro@denx.de>
+Subject: [PATCH] usb: Fix USB read configuration error on some devices
+Date: Fri, 20 Feb 2026 17:47:09 +1300
+Message-ID: <20260220044709.1065540-1-ronan.dalton@alliedtelesis.co.nz>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=d/NWygjE c=1 sm=1 tr=0 ts=6997e778
+ a=KLBiSEs5mFS1a/PbTCJxuA==:117 a=HzLeVaNsDn8A:10 a=R4PBVHzQumiQ7lRicsAA:9
+ a=3ZKOabzyN94A:10
+X-SEG-SpamProfiler-Score: 0
+x-atlnz-ls: pat
 X-Mailman-Approved-At: Fri, 20 Feb 2026 14:03:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,27 +82,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use "parameters have been set" for correct grammar in the pstore
-documentation.
+The following error sometimes occurs on PNY USB sticks:
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
+  =3D> usb start
+  starting USB...
+  USB XHCI 1.00
+  WARN endpoint is halted
+  WARN endpoint is halted
+  usb_new_device: Cannot read configuration, skipping device 154b:6000
+  Bus usb3@500000: 1 USB Device(s) found
+         scanning usb for storage devices... 0 Storage Device(s) found
+
+Note that this USB stick works correctly in Linux but not in u-boot.
+
+Work around this quirk by adding a small delay before calling
+usb_get_configuration_no, which it would fail in otherwise (with the
+error code -EINVAL).
+
+Signed-off-by: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Philip Oberfichtner <pro@denx.de>
 ---
- doc/usage/cmd/pstore.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ common/usb.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/doc/usage/cmd/pstore.rst b/doc/usage/cmd/pstore.rst
-index 63a437135ec..fd3425a1dc2 100644
---- a/doc/usage/cmd/pstore.rst
-+++ b/doc/usage/cmd/pstore.rst
-@@ -80,7 +80,7 @@ For test purpose, you can generate a kernel crash by setting reboot timeout to
- Retrieve logs in U-Boot
- ~~~~~~~~~~~~~~~~~~~~~~~
- 
--First of all, unless PStore parameters as been set during U-Boot configuration
-+First of all, unless PStore parameters have been set during U-Boot configuration
- and match kernel ramoops parameters, it needs to be set using 'pstore set', e.g.::
- 
-     => pstore set 0x30000000 0x100000 0x2000 0x2000
--- 
-2.43.0
+diff --git a/common/usb.c b/common/usb.c
+index 6a4ad346f4b..00d051edec5 100644
+--- a/common/usb.c
++++ b/common/usb.c
+@@ -1197,10 +1197,17 @@ int usb_select_config(struct usb_device *dev)
+ 	err =3D usb_get_configuration_len(dev, 0);
+ 	if (err >=3D 0) {
+ 		tmpbuf =3D (unsigned char *)malloc_cache_aligned(err);
+-		if (!tmpbuf)
++		if (!tmpbuf) {
+ 			err =3D -ENOMEM;
+-		else
++		} else {
++			/*
++			 * PNY 32GB USB 2.0 flash drives seem to require an
++			 * additional delay before getting the next descriptor.
++			 */
++			mdelay(1);
++
+ 			err =3D usb_get_configuration_no(dev, 0, tmpbuf, err);
++		}
+ 	}
+ 	if (err < 0) {
+ 		printf("usb_new_device: Cannot read configuration, " \
+--=20
+2.53.0
 
