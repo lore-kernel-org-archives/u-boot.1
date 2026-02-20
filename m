@@ -4,102 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 817B1C56201
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 431ECC56206
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 15:07:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B05EF83AC5;
-	Fri, 20 Feb 2026 15:59:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 58A6683A5E;
+	Fri, 20 Feb 2026 16:07:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="An+nrdKZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y9ogGQZx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03F2883C39; Fri, 20 Feb 2026 15:59:06 +0100 (CET)
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
- [IPv6:2607:f8b0:4864:20::a36])
+ id 501E983AC5; Fri, 20 Feb 2026 16:07:23 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 727F883936
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:59:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07B0B83936
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 16:07:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-56637565faaso1786518e0c.1
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:59:01 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771599540; cv=none;
- d=google.com; s=arc-20240605;
- b=X2Sce2dW6Osd5xbz5H1+i/X3jiF8Pt5+nBrsmtGPB1Hx3lSoOyfL4bqE10EN3o399W
- rvriNZIaMusjqbnqh+msLKSWNVNUzmtPi8tF6aUmfsnueFChCalc9iXEZAvPj9t8kQm5
- N5Ge6wO4luldei+ieYaRbSq/cTJiU7Qvi/6INcf/daeYE6e9XdoMN2aUbasdr1GNWQBZ
- A3mpSmudmy8xj42HWX0Id+gld3pSbQMvdFvb5+hyAggwXe4OmV6445KtBvlU5GK9Yq8O
- Z0pg8aCk2VklLWeOF8JZgcQZGVPkIU9+TgZkcpjbEO/4BvLwg3b83DpZreYCIt7oOZI9
- V2pw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=RV0TK/9p/gok8+cl6Sp4djXLdN3xWzgRDGxk3an4Qk0=;
- fh=N2s3+OhRCnJ5yLXeGeQM67cAnkqUx2GyLCvuETsDdzI=;
- b=RHsrQWm6BYsjbmKu1mXNINWF2y3jwQNlHppM74+y3VsUxjOVUigZXKMbesWYCx69jE
- Mntr/AOX1ur95PUonDMFn8uzQxRPOY0tdxuPjpQ87ERPVv0lZPXftEZZ7AxXVel4359m
- l0SzspOVe8sOUuwb5r/PyW95tTo8lL1r3R6dfgSwpUtmNKDLvvgZ0NK85+eXtL66pkQn
- +a1202e/tpj0llcv5l+5juU6pzF7PV7DF0rMX13t0g/rLGMuIs88pD8txQqEv1jgRlEY
- 12kgdkpjoC+ik5pkm8pFSzyGYDyIrREia+IKs+4BtZoRq6GE87Fx7xEXIiZq6Jab/KHg
- NTuQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-45f171cb842so1532950b6e.1
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 07:07:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771599540; x=1772204340; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RV0TK/9p/gok8+cl6Sp4djXLdN3xWzgRDGxk3an4Qk0=;
- b=An+nrdKZ9mil8Nb3OvCQe95j44GoCKAiq1hEEKpaaC/Wzthm7yPjA37QQIo35Ybt/7
- a2LBWQKSHv6McAc+Ll+90etZVphkXHYorPw/mCqJJXUO584H6LzjaGFD1iMtjR0eyJ6L
- gv/hZ2G98dWRqdAJUHsUG4u011kAVkEt+xWhwuTrwnTmBoS/2uBk3CCLNvJN3493sJ4I
- umubU+72myUaRvZZcbpPg4whPiRUX5LoeG7rsV80j7AF6eCrnTN0b56SxWV28KYh4uZm
- MsSWNS1OEmenCxg0S0v6fi4uFACLPE3yYtePEOOQ7QbmNB/8o5riYFS4diaCf5Oueco/
- VyKA==
+ d=konsulko.com; s=google; t=1771600040; x=1772204840; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rKsrXrzi69k2FJ44N4F68J9PrX8HXuFz20u3D81FFqg=;
+ b=Y9ogGQZxmitUfSGr6knzjYA1VGjZJJ5jyE/F+5VWrWdX5rGADZuKCwwqYijAucUylI
+ rsu1/Ku4c80oYtMvKXwdkD7TWhcbzBEo9Z8WVoPqFsaleZ24O9CqmfoI5PL3UwLT+cEA
+ FpH6YX9toZgKX5ed2ZeeFeDIMHv/1MSv9OIAU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771599540; x=1772204340;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=RV0TK/9p/gok8+cl6Sp4djXLdN3xWzgRDGxk3an4Qk0=;
- b=kSDALULogL6+QSsOaERIiL8hLnd9W7BX9G6uPbsZjt++sa2mzDa6d9QHfEGZ6r2UtY
- YHSVAfTNyqMl793ThqVjfh3vG4X7ldlSMq3QIZi8MqQ3+XchZ/B0Xe84I48CIjDO38qH
- LY04BzPrCHvOJBUsu/gm50JiifmB1l2I5bBUvc/ZO3jeUbCqhfvbcASuprIXqypzWMXW
- msTG66kq4xSkaNYAx371jZs+uyxLkWa28rGfdmgkCexQrDi5mE5t3Lr+ySVj2nLt94ok
- +GLcOqrOG49SOJ5j+2PYDTCPkVxS/ZllHFGqQhlUGvpmqPlRGFYEQYM7Q3UvCL2lNrPZ
- cY7A==
+ d=1e100.net; s=20230601; t=1771600040; x=1772204840;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rKsrXrzi69k2FJ44N4F68J9PrX8HXuFz20u3D81FFqg=;
+ b=tSfgQBy/DStN4pzOZ6bJzYNzOYo0+F3I/VMljJyZr2mE3hda1X6C+WaY/m9TPGhbeo
+ dTx0KzPwrDAfgP9piPtdoFpCBc8GIKJGGz3QBL4YE60eToOuLp1PDAPwJVdnFiFGASbU
+ R1wd9KNrhncOFKZ5+QXzIPiIR4cTnLVCP6TaoOHzrxYl9ph+xbYu9YqdmJTO7gUbwsv7
+ CJRYI7EUY2vWnJoq2YNOe8c/PEwsgGuBuiEkMUX7CPSylKqrSE5InbFWv1gwNcZ6F2Rm
+ LIRkg0ReKsgf9u/VUzMW7mx5MZuIwpTJuwV+P3hY5skGwl3ZhdinDnnmgrIsCG83yg+O
+ dclg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZm0FKHTd1VH3cjBfdLzqPmjjieNWSOCRTzdSonWhvk8wEtPo2JqMVrskgmAkGm+AjikhUwUc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy441ybuwjGkYNzBs9k3igS6F4meGDHbgNd8ZW1902Ab/2EqMse
- 76int9x7WQ2s5ckdv2yPC0kC2r9MQqZwW9D2IpykFeqXxlnZoH5nFGvxBCv6qNFpifhHCkC65du
- QVKUddjVUxRaMf7XHH6tgX5s40kXL2sk=
-X-Gm-Gg: AZuq6aKQqPEMHPf981jBb8VQeacT6byQduzpRfX75DebiTeqgrg2YW53XIgXSGFDa5M
- BNep7ygSoa0Fov0W1RHkKzx0QsA1FcrM6jnjNVEpdvYSTrxwuLZkgEozHXwtBWSYZf53+u1L/hX
- r7EXsCfHvu8ssbtUha6YPQMNL6PYQttr2Z4Y0bRx/Bln0S3yr0TKHrueu/1UpFkcpMAlSSFiIsp
- xsLttUAeviYZEmvjRloATYUMR997Yptln7ZrY3bXZ1OIMh6kp1Zowz/HPi6bhMqITz+tPuyBv0Q
- 9lgRXIUD
-X-Received: by 2002:a05:6102:41a8:b0:5fe:f14:e701 with SMTP id
- ada2fe7eead31-5feb307ab47mr29807137.24.1771599539962; Fri, 20 Feb 2026
- 06:58:59 -0800 (PST)
+ AJvYcCX4rJ4L6omszGQlwZ01jwOrrLr1sXBirqSgJmWvr9fcXWXE2xKSa7edpxloJzZvMcAssrRMf9s=@lists.denx.de
+X-Gm-Message-State: AOJu0YzP8+3lCjLo6S0AGKjrrCvTk2oGG1umtKzAc1CxjV9mh1Kq73UR
+ NdXpNMaDOCNTnPEHXGhn8lxj9unKc3rA3/tk9QKqycjAT845MMVb2Z0GgbUQC8BgdL8=
+X-Gm-Gg: AZuq6aJnWG2ucs5pbIA9czQvoGASIPzCdKm6J/zC8oMghH3n1Exj0GwyuJ4vvA3oism
+ fyt+QIKgd067ubMhOFtNfy1qjKNbTC57P++zJ5lRtI+PZvXUu6BTyUyj2pJPu//9J9li/unBmTP
+ rCQRkTelDySlXfenvXbEKjcy/ArdFDn1BY87otBLRLYvKEizkdrS0zjTSj9id9bkSw4TB40UhCp
+ 4KMy5kI17X3b6mqitemY2yH/c3743wgDLM7DRUBTf0pSx7Ba7XFbBUBAUR/2dKXu5NYLCk7oPxr
+ /GgrjoEwzMerSnQCJeJg9dgOBevKOUAmYDkKgz227Ektm9Sv3+XCI1J6WAkcKlYbHe5xgOsBP6u
+ IsrO1+Xd+2fDZoxizdnhRQsIQ2sCGKfgRpwHP4zocHDByyM4IXxf8PRDThcnDpyB2rFAD1xK8hK
+ qGYPrD9rkUMrOIWXX/Av0w3rFZyzK5rCeAjZxVwZTOAF8cRQUuvLi5oLWrFoJHopBINj27n5awG
+ 8gbTCqM/4abXZDLCNUrEJub3nwidGg0YhuVc5XSrsXN7RctPd8=
+X-Received: by 2002:a05:6808:c228:b0:45e:fcf2:b693 with SMTP id
+ 5614622812f47-4643b987ed1mr1184540b6e.29.1771600039665; 
+ Fri, 20 Feb 2026 07:07:19 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4642b1c526bsm3316873b6e.8.2026.02.20.07.07.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Feb 2026 07:07:18 -0800 (PST)
+Date: Fri, 20 Feb 2026 09:07:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tudor Ambarus <tudor.ambarus@linaro.org>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Michael Walle <mwalle@kernel.org>, Conor Dooley <conor@kernel.org>,
+ u-boot@lists.denx.de, Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Pratyush Yadav <pratyush@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [RFH] SPI and SPI-NOR patch help
+Message-ID: <20260220150716.GT3233182@bill-the-cat>
+References: <20260213164607.GI2747538@bill-the-cat>
+ <20260214-sternness-cling-4259916a8f73@spud>
+ <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
+ <20260216153110.GV2747538@bill-the-cat>
+ <87bjhmv20f.fsf@bootlin.com>
+ <46b5a69c-f589-4c4e-99e8-6bf0c41be573@linaro.org>
+ <20260219205726.GP3233182@bill-the-cat>
+ <c1d92200-1099-4d8a-aae1-293cd1ee3f41@linaro.org>
 MIME-Version: 1.0
-References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
-In-Reply-To: <20260219132552.1499698-1-philippe.reynes@softathome.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Fri, 20 Feb 2026 09:58:48 -0500
-X-Gm-Features: AaiRm50f5cI-3tJikcsJE87ddlaZeJw_K7FUAytpVRQnoTqyAAugFHF5DfdZ-PI
-Message-ID: <CAMDkj5yPfC=sdD8feU-sWVd4ok9D1045C+VVxn7Z5smKSyaikw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 0/9] add software ecdsa support
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Oaq6rve+jYTAOM1p"
+Content-Disposition: inline
+In-Reply-To: <c1d92200-1099-4d8a-aae1-293cd1ee3f41@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,168 +115,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
 
-On Thu, Feb 19, 2026 at 8:26=E2=80=AFAM Philippe Reynes
-<philippe.reynes@softathome.com> wrote:
->
-> This serie adds the support of ecdsa with software
-> using mbedtls. So boards without ecdsa hardware may
-> also use signature with ecdsa.
->
-> To add the support of ecdsa with mbedtls, I have:
-> - enabled ecdsa in mbedtls
-> - add a function sw_ecdsa_verify that uses mbedtls
-> - add a driver sw_ecdsa that call sw_ecdsa_verify
->
-> I have tested this code with sandbox, and I have
-> followed those steps:
->
-> 0) build u-boot using sandbox_defconfig and adding those options:
-> CONFIG_ECDSA_SW=3Dy
-> CONFIG_ECDSA_MBEDTLS=3Dy
+--Oaq6rve+jYTAOM1p
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-As this series introduces a MbedTLS-only solution, duplicating a
-CONFIG_ECDSA_SW is not necessary, you can just use
-CONFIG_ECDSA_MBEDTLS when linking with ecdsa-sw.o.
+On Fri, Feb 20, 2026 at 09:35:50AM +0200, Tudor Ambarus wrote:
+>=20
+>=20
+> On 2/19/26 10:57 PM, Tom Rini wrote:
+> > On Thu, Feb 19, 2026 at 02:13:24PM +0200, Tudor Ambarus wrote:
+> >> Hi,
+> >>
+> >> + Pratush,
+> >> + Vignesh,
+> >> + Marek,
+> >>
+> >> On 2/18/26 11:23 AM, Miquel Raynal wrote:
+> >>> Hello Tom,
+> >>>
+> >>> On 16/02/2026 at 09:31:10 -06, Tom Rini <trini@konsulko.com> wrote:
+> >>>
+> >>>> On Mon, Feb 16, 2026 at 09:21:55AM +0100, Michael Walle wrote:
+> >>>>> On Sat Feb 14, 2026 at 7:58 PM CET, Conor Dooley wrote:
+> >>>>>> On Fri, Feb 13, 2026 at 10:46:07AM -0600, Tom Rini wrote:
+> >>>>>>> Hey all,
+> >>>>>>>
+> >>>>>>> To be blunt, U-Boot needs help with reviewing and maintaining the=
+ SPI
+> >>>>>>> and SPI-NOR subsystems. We haven't had someone with time to activ=
+ely
+> >>>>>>> work in this area for some time. I'm going through the outstanding
+> >>>>>>> changes now, but it also seems a common problem is that with resp=
+ect to
+> >>>>>>> device IDs, most of the new ones also aren't in the upstream Linux
+> >>>>>>> Kernel. Is there some better and generic solution we're missing s=
+o that
+> >>>>>>> we don't have large and often growing device ID tables? I'd rathe=
+r not
+> >>>>>>> make that problem worse, so I've rejected two of those types of u=
+pdates
+> >>>>>>> today and I'm just setting aside a large number of others.
+> >>>>>>
+> >>>>>> Dunno if your timing was cursed on sending this, but Tudor submitt=
+ed his
+> >>>>>> resignation from spi-nor maintainership in the kernel about 10 mins
+> >>>>>> after.
+> >>>>>> I think Michael Walle might be responsible for what you're talking=
+ about
+> >>>>>> here, with his 773bbe1044973 ("mtd: spi-nor: add generic flash dri=
+ver"),
+> >>>>>> but idk jack about spi-nor stuff.
+> >>>>>
+> >>>>> Yeah. Nowadays SPI-NOR flashes come with self describing tables,
+> >>>>> which are already supported by u-boot, I think. The only change that
+> >>>>> seems to be missing is the fallback to it if an id isn't found in
+> >>>>> the flashdb. Only thing is, the SFDP doesn't describe all features,
+> >>>>> most prominent example being locking. So if you need that, you'll
+> >>>>> still need to have an entry per flash.
+> >>>>>
+> >>>>> In fact, in linux I'm planning to change to make it probe SFDP first
+> >>>>> and then amend it with the flashdb information (if there is an
+> >>>>> entry).
+> >>>>
+> >>>> Thanks for explaining. So in that U-Boot does have SFDP support, the
+> >>>> first thing is platforms should likely be enabling that instead of j=
+ust
+> >>>> adding IDs, at least for basic support.
+> >>
+> >> Right.
+> >>
+> >> SFDP is behind a config, because of size constraints I assume. And the=
+n we
+> >> also have a tiny duplicate version of the driver for stricter size
+> >> constraints. Are these size constraints defined somewhere? We need to =
+know
+> >> them in order to choose a direction.=20
+> >>
+> >> Also, I'd argue that having the tiny version of the driver was ideal.
+> >> Instead we should have tried to modularize SPI NOR, by SFDP, static
+> >> initialization of flashes, manufacturer drivers.
+> >=20
+> > Some platforms define their overall size constraints, and so we know for
+> > sure a hard limit even in full U-Boot. More platforms do this for SPL,
+> > but not all. So the general answer does end up being that we always care
+> > about if there is a more size-considerate solution with minimal
+> > trade-offs. Especially since we are also in a more minimal overall
+> > space.
+> >=20
+>=20
+> Thanks, Tom. I get this. I was curious about some numbers, but probably a
+> good reference is the size of spi-nor-tiny.o. My point is that if we try
+> to modularize the SPI NOR core we might get a chance to strip it to a
+> spi-nor-tiny equivalent. This would reduce code duplication and
+> maintenance cost.=20
+>=20
+> In what concerns the flash IDs array that keeps extending, that can be
+> indeed mitigated by implementing just the BFPT (Basic Flash Parameter
+> Table) from the SFDP (Serial FLash Discoverable Parameters) table. So for
+> SPL we would have a minimal core with a minimal SFDP (just BFPT or parts
+> of it) that can handle the basic support for all flashes that define BFPT.
+> We won't need to add new flash IDs for flashes where we want just basic
+> support.
+>=20
+> Unfortunately I currently don't work with MTDs so I'm not interested in
+> implementing what I'm suggesting.
 
-Regards,
-Raymond
+Those are good suggestions that hopefully someone can pick up and
+implement, thanks!
 
+--=20
+Tom
 
-> CONFIG_ECDSA=3Dy
-> CONFIG_ECDSA_VERIFY=3Dy
->
-> 1) add a signature node to an its file
->         signature-256 {
->                 algo =3D "sha256,ecdsa256";
->                 key-name-hint =3D "private-key-256";
->         };
->
-> 2) generate an ecdsa key
-> openssl ecparam -name prime256v1 -genkey -noout -out private-key-256.pem
->
-> 3) create the itb file
-> ./tools/mkimage -f <file.its> -k . -K arch/sandbox/dts/test.dtb <file.itb=
->
->
-> 4) launch sandbox u-boot
->
-> ./u-boot -d arch/sandbox/dts/test.dtb
->
-> 5) on sandbox u-boot prompt, load the itb and launch bootm on it
->
-> =3D> host load hostfs - 1000000 uboot-ecdsa.itb
-> 4628674 bytes read in 1 ms (4.3 GiB/s)
-> =3D> bootm 1000000
-> ...
-> ...
->    Verifying Hash Integrity ... sha256,ecdsa256:private-key-256+ OK
->
->
-> I have tested with success ecdsa256 and ecdsa384,
-> but there is an issue with secp521r1.
->
-> Changes in v2:
-> - move ECDSA_MBEDTLS to MBEDTLS_LIB_X509
-> - rename lib/mbedtls/sw_ecdsa.c to lib/mbedtls/ecdsa.c
-> - enhance dependancies for ECDSA_MBEDTLS
-> - fix support of ecdsa521/secp521r1
-> - add vboot test using ecdsa
->
->
-> Philippe Reynes (9):
->   mbedtls: enable support of ecc
->   ecdsa: initial support of ecdsa using mbedtls
->   test: lib: sw_ecdsa: add initial test
->   drivers: crypto: add software ecdsa support
->   ecdsa: fix support of secp521r1
->   test: dm: ecdsa.c: clean this test as software ecdsa is now
->     implemented
->   configs: sandbox: enable the software ecdsa driver
->   test: py: vboot: prepare integration test for ecdsa
->   test: vboot: add test for ecdsa
->
->  configs/amd_versal2_virt_defconfig            |   1 +
->  configs/qemu_arm64_lwip_defconfig             |   1 +
->  configs/sandbox_defconfig                     |   1 +
->  configs/starfive_visionfive2_defconfig        |   1 +
->  configs/xilinx_versal_net_virt_defconfig      |   1 +
->  configs/xilinx_versal_virt_defconfig          |   1 +
->  configs/xilinx_zynqmp_kria_defconfig          |   1 +
->  configs/xilinx_zynqmp_virt_defconfig          |   1 +
->  drivers/crypto/Kconfig                        |   2 +
->  drivers/crypto/Makefile                       |   1 +
->  drivers/crypto/ecdsa/Kconfig                  |   6 +
->  drivers/crypto/ecdsa/Makefile                 |   6 +
->  drivers/crypto/ecdsa/ecdsa-sw.c               |  33 ++
->  include/crypto/internal/sw_ecdsa.h            |  14 +
->  lib/ecdsa/ecdsa-libcrypto.c                   |  21 +-
->  lib/ecdsa/ecdsa-verify.c                      |  24 +-
->  lib/fdt-libcrypto.c                           |   2 +-
->  lib/mbedtls/Kconfig                           |  16 +
->  lib/mbedtls/Makefile                          |  19 +-
->  lib/mbedtls/ecdsa.c                           |  94 ++++
->  lib/mbedtls/mbedtls_def_config.h              |  18 +
->  test/dm/ecdsa.c                               |  18 +-
->  test/lib/Makefile                             |   1 +
->  test/lib/sw_ecdsa.c                           | 465 ++++++++++++++++++
->  test/py/tests/test_fit_ecdsa.py               |   2 +-
->  test/py/tests/test_vboot.py                   | 128 +++--
->  ....its =3D> sign-configs-sha1-rsa2048-pss.its} |   0
->  ...sha1.its =3D> sign-configs-sha1-rsa2048.its} |   0
->  .../vboot/sign-configs-sha256-ecdsa256.its    |  45 ++
->  .../vboot/sign-configs-sha256-ecdsa384.its    |  45 ++
->  .../vboot/sign-configs-sha256-ecdsa521.its    |  45 ++
->  ... sign-configs-sha256-rsa2048-pss-prod.its} |   0
->  ...ts =3D> sign-configs-sha256-rsa2048-pss.its} |   0
->  ...56.its =3D> sign-configs-sha256-rsa2048.its} |   0
->  ...84.its =3D> sign-configs-sha384-rsa3072.its} |   0
->  ...s.its =3D> sign-images-sha1-rsa2048-pss.its} |   0
->  ...-sha1.its =3D> sign-images-sha1-rsa2048.its} |   0
->  .../vboot/sign-images-sha256-ecdsa256.its     |  42 ++
->  .../vboot/sign-images-sha256-ecdsa384.its     |  42 ++
->  .../vboot/sign-images-sha256-ecdsa521.its     |  42 ++
->  ...its =3D> sign-images-sha256-rsa2048-pss.its} |   0
->  ...256.its =3D> sign-images-sha256-rsa2048.its} |   0
->  ...384.its =3D> sign-images-sha384-rsa3072.its} |   0
->  tools/image-sig-host.c                        |   2 +-
->  44 files changed, 1062 insertions(+), 79 deletions(-)
->  create mode 100644 drivers/crypto/ecdsa/Kconfig
->  create mode 100644 drivers/crypto/ecdsa/Makefile
->  create mode 100644 drivers/crypto/ecdsa/ecdsa-sw.c
->  create mode 100644 include/crypto/internal/sw_ecdsa.h
->  create mode 100644 lib/mbedtls/ecdsa.c
->  create mode 100644 test/lib/sw_ecdsa.c
->  rename test/py/tests/vboot/{sign-configs-sha1-pss.its =3D> sign-configs-=
-sha1-rsa2048-pss.its} (100%)
->  rename test/py/tests/vboot/{sign-configs-sha1.its =3D> sign-configs-sha1=
--rsa2048.its} (100%)
->  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa256.its
->  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa384.its
->  create mode 100644 test/py/tests/vboot/sign-configs-sha256-ecdsa521.its
->  rename test/py/tests/vboot/{sign-configs-sha256-pss-prod.its =3D> sign-c=
-onfigs-sha256-rsa2048-pss-prod.its} (100%)
->  rename test/py/tests/vboot/{sign-configs-sha256-pss.its =3D> sign-config=
-s-sha256-rsa2048-pss.its} (100%)
->  rename test/py/tests/vboot/{sign-configs-sha256.its =3D> sign-configs-sh=
-a256-rsa2048.its} (100%)
->  rename test/py/tests/vboot/{sign-configs-sha384.its =3D> sign-configs-sh=
-a384-rsa3072.its} (100%)
->  rename test/py/tests/vboot/{sign-images-sha1-pss.its =3D> sign-images-sh=
-a1-rsa2048-pss.its} (100%)
->  rename test/py/tests/vboot/{sign-images-sha1.its =3D> sign-images-sha1-r=
-sa2048.its} (100%)
->  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa256.its
->  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa384.its
->  create mode 100644 test/py/tests/vboot/sign-images-sha256-ecdsa521.its
->  rename test/py/tests/vboot/{sign-images-sha256-pss.its =3D> sign-images-=
-sha256-rsa2048-pss.its} (100%)
->  rename test/py/tests/vboot/{sign-images-sha256.its =3D> sign-images-sha2=
-56-rsa2048.its} (100%)
->  rename test/py/tests/vboot/{sign-images-sha384.its =3D> sign-images-sha3=
-84-rsa3072.its} (100%)
->
-> --
-> 2.43.0
->
+--Oaq6rve+jYTAOM1p
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZh4oAAKCRAr4qD1Cr/k
+CuImAP9bjDuv7WAW8LhBuiy8hTNGdDxG8zu6dAKVhd5hLepdTAD7Bi27QXxLSS5b
+5KYlU1wUlVl3dYe8Ics02Vy0tGb0fAg=
+=zJYx
+-----END PGP SIGNATURE-----
+
+--Oaq6rve+jYTAOM1p--
