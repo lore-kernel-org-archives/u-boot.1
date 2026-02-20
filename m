@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C188C53216
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 07:37:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 666B0C53216
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 07:42:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39BD183AC5;
-	Fri, 20 Feb 2026 08:37:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C9C8D83D0F;
+	Fri, 20 Feb 2026 08:42:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C0JrBmlx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t+0CdO5u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3578583CF2; Fri, 20 Feb 2026 08:37:47 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id E80CA83D17; Fri, 20 Feb 2026 08:42:30 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E172A83AA9
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 08:37:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03B4F83AA9
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 08:42:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-4362507f0feso1075474f8f.0
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 23:37:44 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4833115090dso16463175e9.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 23:42:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1771573064; x=1772177864; darn=lists.denx.de;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
+ d=linaro.org; s=google; t=1771573348; x=1772178148; darn=lists.denx.de;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
  :content-transfer-encoding:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BQZ8FmIAK2bW8YQBVzK8yze8iAMk4qMK7RQYKdQESEM=;
- b=C0JrBmlxiXw0gzJswKt70GjQxZzPItdwv85XCqg2M9yF5EbrVLU44UblDuN9LPPHzb
- 0KUOy2ohFug/IEvicjqLypqg49I3Thfq9zwyJz3+oJYVWFuVRReIrORYg7P4me5rXYz9
- eXk/kh+JsoqLGzCqriU0hLfQWYtzV1NemIzDHFoLXqIfSmFCFJdzOpkhRpp7owYEMnmb
- 5iY+xv19HXWoPwziKWhNoV2+5+bQRfc7bdVhnuxmwtP6r5Rn6i0wM/da3ZHLki4PaqLE
- j26S4Kn0hUrM/XZjXfCSNjv52MXG39Alz2IDQOHsG57sKv4YwQUM6IYW2wm+h/S89S4Z
- MexQ==
+ bh=kMVioKOZnTgcq1kDwVoGd9/gjyjtrrE7iGoz95n8lfc=;
+ b=t+0CdO5uJmTgiRlT7mG2bMycrbFjlxM4Wqeg3iGLdUCgK2tnTjIEHl4VPcE9zJUb5G
+ ny0LMWgEUdtapnhea8ZFLrJKE2muqtWQ1jb8tbbFusbT9mq3qz3uE8CL+NlmwyaeyYWz
+ phXfTYHtujcUaGTEeePtgDytXXC0d25f3PONrGsHCNiN3t24tm3heEAVG5Ur/fc6nvuN
+ HExqMe1jtj7udiqHsL/lCZdlAveACZltUTJsn76y/evd5647YXG+p2sRPLJj2iFoAwk5
+ Hl05w9BGlce1mvzrk5seD75JOssxcCU+ci1xjqEoNyOAWogNNKwXqzayIZpyk09eUjjw
+ OkAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771573064; x=1772177864;
- h=in-reply-to:references:from:subject:cc:to:message-id:date
+ d=1e100.net; s=20230601; t=1771573348; x=1772178148;
+ h=in-reply-to:references:subject:cc:to:from:message-id:date
  :content-transfer-encoding:mime-version:x-gm-gg:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=BQZ8FmIAK2bW8YQBVzK8yze8iAMk4qMK7RQYKdQESEM=;
- b=WT2ME0OJtMChjs0woyBue11FJ7/HAfYIdbQe0ox5UlzPgFZiPlQMQM88ULBlnVLfMs
- 0v6WvHRN4e1gQabc983DbL3l4bcyid+FOtCeaQHbj4V+oR24ouqRC2E+o5AfJnPkAExh
- Ai21wqtKm6e7gLbgQpjSeUxhrnCuoj2GEMpuOoR7zu1ZSIY4uVu2SnSQ712RMWVeIOg0
- /8IpjU7m353PcS6IyQsRcPYCbZ6q8rdVYuPnC4Oo+1NC+sAPIlEo0s7JFxsWhAh+hm+S
- lszyHhzKpDXK2F/jhUqc3jcmAbWJRu0HQrBCjQIs4kchrnwVKtQLYE78l5iVas4zDWK9
- GSMQ==
+ bh=kMVioKOZnTgcq1kDwVoGd9/gjyjtrrE7iGoz95n8lfc=;
+ b=T/DOz51ISxj8/ON50FhPOT4hFBL0ctcIUIeEdkGIocZJU6YwMxl/WWHiNWlxm/3aXY
+ WenHvIsyDWU7gsUdFH8THgquIuTcIeMl6pXreRSb6LJAvTLCw2SURBNPRU+yWCHHqu3X
+ laj9vi7r2auMNWWQb7BL7wuaK7bFEwe5oPyyEHjCL/cMqTVwjqlnBGJvpzXF9ipVyoMA
+ oOwzmj6mu7e2TmQo3mZ73lcvNho5SWgw1nTSr6b+HfWeTFuENmGGi1/087u3hEqoZvWZ
+ fSnfFRcHKoNlqT5JM0f/kFKT89w/yUPubN/TaWsW6XgxVLI8mcBXZ9LdtHFGI0XINuSH
+ WweQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5ydxfP22iniacpn38hcEaU6P334L6ps2qtjlH3Idk6GR3IZ9tJqqzVDL1AYssmCrS7x7SqXs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTxzDddn88eiwOpxy1NlYOWbCMOVr/lBHF/bWPRtiUXHxRFN6U
- u2RKkvsLxyXdyKvYIV9INcjI84A0CIPue7yuqrpaFQAb1pJtSXq9YHkK1KYrYO8KOW8=
-X-Gm-Gg: AZuq6aJ/AcL0DJYIfInnFsmTe1T/egMPsZQVjY1hUDeUdKefbtEdbPsZ6jzY9FMP9st
- elQ4BTkEMFFGX4BOZcT9fbZzyggFawWBIy1Aci9GmXbzQm57yTNCPm/D2fpY9I1qYmQs2Pi8m7G
- 6/Odfr/n2YPIIQfGYdezMEubrZl+8+EZ+LDD6uftLJj3GgVSXUToK8G0u9qDFGVg5A7RefinQsD
- YuCr+aZOGDv6tup8qWAiBn5xiCL3EB+v9yrjAGwJ5vPTfomlRLaXP1Ojx1dzDpRnNnVctU1FKEN
- 1chhW77MpTGa4GklfLH2vfshrLSbukdk/D7iC6cNq60+IpIDESoJFzwKgdTNqUJr+6AvVHciuHx
- re9Q0juq3ryW9sbfNqjBwGhRQAg5YXAstLIJtZNqrzmCMAPpdbVg9ig+/MCS4Yk3vZH6QAfQZDq
- enYH0C2Z5hnQy9sYdCFNraZYZI0UgV7glEGkpNvAuds+6TQDH5LjtIFAhcZbFVXD0ZB/1GY5iCj
- VRfLZq9Q+tvKc/6ROAzItGSTt3Yl7DXeYBfQW+DL7KPmjFf8y2vxOkdUfkYWfRYmUF3BedyYwd4
- rs54WcUhoGTsusuLpS315QHk+VJxGM1QD8T+F543DlcpXSm5BnRzKPRGj6khl79J2M4u0DlRPP/
- LdS7o2z/9s6dQLXCrrWapPmJxCbVmxvRSfy0b/exbFeiMU78+w4XaP7zFSmFc2M8+TjAbC1Q/Fm
- YcTveEOj9Zo5nhG8Xn05hmOg6AfxUC1pRzldGLzp1pwfuqy6kN+hjWSKa2GxqQ5+c1DIGmmPHhR
- MnY3w==
-X-Received: by 2002:a5d:5d03:0:b0:437:8941:2f7b with SMTP id
- ffacd0b85a97d-4396b040281mr1377009f8f.19.1771573064280; 
- Thu, 19 Feb 2026 23:37:44 -0800 (PST)
+ AJvYcCUF9sv+5d7Xp/nFAT9rM3swQvMGVLw03tozsiD0aB+5tGybMJP2XZjCxFQk0jOZWKw1tT6kzyk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6oafGR3SMDK4vZcQk/AP4c+q+37MGVRorbOw7ZfRhaVtiK5Ex
+ 7f+Wp7VfxZ/MlB1PI/2E80xgsjd5d5Ek8K0mikMwTM3bJVxlp2TtatVnyUyJMunqCu8=
+X-Gm-Gg: AZuq6aKol8n/K5rqYMwPzUYy5pbHCednSScT8WpzBp7iSKDuY6KyQgICgxQmvXfMpHH
+ j2jSSe0P6l0EH0YrzNhCnQOLayDJlk45If9R8OebaOMCTCK2lWbCF9YZtcvl+8TOy06Z04g7Lzq
+ eNNVosw/O/t1RwBoFMnarG9mT3IgrM7bWapRqXkhOLVxtbBr6SJGNsJopjQRs2z0Ku1rxuJsoJC
+ HM0Afixnayq+pi5weyv2sTevnhp/DMfhdpODsNwkAuxeA2SnJ2XmBuuWGUkrwwKgqbOy1T8Ohkn
+ 6sa/wtWn61LzaOxPgh+eNe2wzC4CgRgS7fxPbJL087MiGtIgYssW0ef9BQk0jknUjC6CN6ezjHG
+ 6h+ZIpXtQ1IrdrWT6cCD7uQhNHR2weNCTCGV6eHyb+/kdytj2jTnWcAl6GoLB++OmTIMwsJlbXM
+ jQQy3adyme1WcqT6E1WX/CGpuw9OvXviVRgGXsAlABhxhfUT+LUyM+ugzkcAbxGdG5IgOp++EHx
+ 0zJpaNgHDhV4uikx2mJPy3JjBArzazOY9rIAuNosQY/NUVLEE1E0gf4+iURueZ1rfkPbA+rGkY3
+ TTPqd/Wr6EMTXx1XkR3EcYc8YbrCgP/lZALkd4QqtM+/zcrVvUkifDFXL3r+/RCdrK/DTPiJ5Wh
+ FixTeOP9MjryTDaVoo8aBLhI01A5YsixT+nJOx4oMxrC5FO7KzkZowAUJYwG/Yyy8kBcdAiEiY0
+ h2UxwFaRJjai5KS3dm6RWHOP70yQT4y3TNc8weXgPNYZ2aaWCbsuKLt+xGALUGCCV6GbM=
+X-Received: by 2002:a05:600c:1987:b0:483:79a6:e7e1 with SMTP id
+ 5b1f17b1804b1-48398a4839bmr145594605e9.7.1771573348348; 
+ Thu, 19 Feb 2026 23:42:28 -0800 (PST)
 Received: from localhost ([94.131.143.12]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796a6a6desm54113964f8f.10.2026.02.19.23.37.43
+ 5b1f17b1804b1-483a31c54bbsm56945125e9.9.2026.02.19.23.42.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Feb 2026 23:37:43 -0800 (PST)
+ Thu, 19 Feb 2026 23:42:27 -0800 (PST)
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 20 Feb 2026 09:37:42 +0200
-Message-Id: <DGJM8LNP7EV2.1Q9FAKXOLKK@linaro.org>
+Date: Fri, 20 Feb 2026 09:42:26 +0200
+Message-Id: <DGJMC88FVICX.SS7SO674VQB4@linaro.org>
+From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
 To: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
  <u-boot@lists.denx.de>
 Cc: "Heinrich Schuchardt" <xypron.glpk@gmx.de>, "Ilias Apalodimas"
  <ilias.apalodimas@linaro.org>, "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH 1/5] efi_selftest: fix buffer overflow
-From: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 5/5] efi_selftest: cosmetic: fix spelling in comments
 X-Mailer: aerc 0.21.0
 References: <20260219184400.257008-1-vincent.stehle@arm.com>
- <20260219184400.257008-2-vincent.stehle@arm.com>
-In-Reply-To: <20260219184400.257008-2-vincent.stehle@arm.com>
+ <20260219184400.257008-6-vincent.stehle@arm.com>
+In-Reply-To: <20260219184400.257008-6-vincent.stehle@arm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,13 +106,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu Feb 19, 2026 at 8:43 PM EET, Vincent Stehl=C3=A9 wrote:
-> The test of the UEFI LocateHandleBuffer() function clears a returned buff=
-er
-> at some point to reuse it, but there is an error in the size computation,
-> which leads to a buffer overflow; fix it.
+On Thu Feb 19, 2026 at 8:44 PM EET, Vincent Stehl=C3=A9 wrote:
+> Fix a few UEFI function names, as well as a typo.
 >
-> Fixes: 927ca890b09f ("efi_selftest: test protocol management")
 > Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -122,21 +117,50 @@ er
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  lib/efi_selftest/efi_selftest_manageprotocols.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  lib/efi_selftest/efi_selftest_manageprotocols.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
 > diff --git a/lib/efi_selftest/efi_selftest_manageprotocols.c b/lib/efi_se=
 lftest/efi_selftest_manageprotocols.c
-> index 097b2ae3545..ccffa59095d 100644
+> index f07ff256ce1..a096e8c2b01 100644
 > --- a/lib/efi_selftest/efi_selftest_manageprotocols.c
 > +++ b/lib/efi_selftest/efi_selftest_manageprotocols.c
-> @@ -241,7 +241,7 @@ static int execute(void)
->  		return EFI_ST_FAILURE;
+> @@ -6,7 +6,7 @@
+>   *
+>   * This unit test checks the following protocol services:
+>   * InstallProtocolInterface, UninstallProtocolInterface,
+> - * InstallMultipleProtocolsInterfaces, UninstallMultipleProtocolsInterfa=
+ces,
+> + * InstallMultipleProtocolInterfaces, UninstallMultipleProtocolInterface=
+s,
+>   * HandleProtocol, ProtocolsPerHandle,
+>   * LocateHandle, LocateHandleBuffer.
+>   */
+> @@ -188,7 +188,7 @@ static int execute(void)
 >  	}
->  	/* Clear the buffer, we are reusing it it the next step. */
-> -	boottime->set_mem(buffer, sizeof(efi_handle_t) * buffer_size, 0);
-> +	boottime->set_mem(buffer, sizeof(efi_handle_t) * count, 0);
 >
 >  	/*
->  	 * Test LocateHandle with ByProtocol
+> -	 * Test error handling in UninstallMultipleProtocols
+> +	 * Test error handling in UninstallMultipleProtocolInterfaces
+>  	 *
+>  	 * These are the installed protocol interfaces on handle 2:
+>  	 *
+> @@ -238,7 +238,7 @@ static int execute(void)
+>  		efi_st_error("LocateHandleBuffer failed to locate new handle\n");
+>  		return EFI_ST_FAILURE;
+>  	}
+> -	/* Clear the buffer, we are reusing it it the next step. */
+> +	/* Clear the buffer, we are reusing it in the next step. */
+>  	boottime->set_mem(buffer, sizeof(efi_handle_t) * count, 0);
+>
+>  	/*
+> @@ -287,7 +287,7 @@ static int execute(void)
+>  	}
+>
+>  	/*
+> -	 * Test UninstallMultipleProtocols
+> +	 * Test UninstallMultipleProtocolInterfaces
+>  	 */
+>  	ret =3D boottime->uninstall_multiple_protocol_interfaces(
+>  						handle2,
 
