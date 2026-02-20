@@ -4,92 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D728C56202
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 622CDC56204
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0084183C39;
-	Fri, 20 Feb 2026 15:39:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D791083D5D;
+	Fri, 20 Feb 2026 15:45:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LoOngQcx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Frkw++0C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CB9683D3D; Fri, 20 Feb 2026 15:39:37 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 79AC383D5D; Fri, 20 Feb 2026 15:45:13 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E8783AC5
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:39:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51FC383AC5
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:45:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-4042fe53946so896335fac.3
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:39:34 -0800 (PST)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-6780761b665so1176584eaf.1
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:45:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771598373; x=1772203173; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771598710; x=1772203510; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FoCxcRUDJ37RNoAadFyUE/Ab1UadRl7Y6119jxkA9mY=;
- b=LoOngQcxwvttBIXdVk5DUYejdTqJzhEnQWtSqSBIrW+6/OUnrGLDorUovzl88ftSek
- vKaugETUbiXZd/xm0g5zTP16yad8//IfzIbHosHFnvs9XEXXvxGJ6mhWP9O881S5SshB
- VCkiDH/tDhKJBe+AJL85rng6YT4lceVXiXobY=
+ bh=+XkUKwdGSi0kJNvZw0LDRUQONS9vxzl2xcMEb+hRFy8=;
+ b=Frkw++0C19DpZ/wnyQZGt4T/WXlpdXp0wl/2CsFzHJl7FJfD/JfBcZcvPwGOfi1g4D
+ lfjU7q7azIof5Dmk8HpoHJ86FgZA5sD6+SPLUmDI0VNCe4yAbrbPy5wRI1OcEMKqE8s6
+ 02ENC3KOgxAgMsm4u7+Qru8lYlkrQhPZvBtbc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771598373; x=1772203173;
+ d=1e100.net; s=20230601; t=1771598710; x=1772203510;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FoCxcRUDJ37RNoAadFyUE/Ab1UadRl7Y6119jxkA9mY=;
- b=aCiDkXwRZzNYs1dXd8lBPnxf8bwLIAnAG8ml0X204Ni/ANTvvicCYs2xLEP71YR6FA
- gZZ2teT8Z1xvDUe6XMzwVbSHcs3ydUXXyHI9NkGCSMfNQHquZgrhGfzvCG67aIDbyQNU
- OhCKFVHHBKxgBhZzebZsD8pV5DsEVPgrwdHGlpqw4HuS+aB4wBZCRX2t2J9McT4dqvej
- zPClSn1vgCkRuIGkV9H/HQJudJsY4nXBEF8ViaKu2/V1qgB98awLR4Im84gvqCMM/vBm
- yH89nJVK7MWkLtnz//O/OTwd7mAIXcw5G0m4CzmDd3Z8UVUJdGiiIPht2bPocu+8XaYd
- 8aoQ==
+ bh=+XkUKwdGSi0kJNvZw0LDRUQONS9vxzl2xcMEb+hRFy8=;
+ b=clW3NYV1bZ0Hz8v4ziqHk5nKzK1FDtTWXORYLbKEnZhFs89zqNTfUTjKcIyvd8QYkd
+ JJyw3PaNItany6QjM+495/dlpLpXpUOBRX8OZ3VQAF/mKjU3xjmm2oemeDNWA6mgs25x
+ 9SB1pgkbZFDC7N8fIMfiBoIm22R6AsIWaLYe0Re8dcQwZGkj7VBzE0dV2YKR8FH4f7/C
+ 18adY3xpCQltKnq8owSDcDE0kd9yrk5NaoZHvXqMMyDXCKzNqD+Fs5pYnvRk5zCKxbRr
+ /3a52zFDOd6peJUZvbvPZp9hehn5bBly/pr8Uyjov3opE/3gy9vt27ZncFPohdoXepFI
+ SO5Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxFg2R/VmtGbigcKwVcxG72A76xvgLppNhdVXC9jRyXiuBdZrl9chabGdtyVoJAIy0jEOaxsY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxO84Kx6F6MwvhyvKWlOcI47zNuey4hPZNR+yYUFB5l8hNyXyAI
- jdpb6+1plRcZb81fGyxSDA3ZIZhQfuSWU+4bemoBt/JMqdVb2Bd/zwGlCHazKh3h4s8=
-X-Gm-Gg: AZuq6aLb+PPQvUI7bkHmJFZ7gvpXpJCz90V3Bd6qfT0BgTcWpuXQC8OBPGKQ7SiJMdX
- 337iRSsC8rWYUzefHORQB3CKU4Up77nfrkZv/hUqZPS5KpDa2sGCcjRr4yad97IceQ9EopSRrtv
- CXluxCAzq929VQDsWw3SV6duYGl+DV0Ggso5M56PTdPVZiuceqVMA7F3S5FcincKyuFNVdBjD3J
- wPK4x1jyreUC9Axk+H4QNPrAAKE+md3xZcJ+zRTbvAORm13eRtISOwqQsqaqh+/yh3IHE7TvsJ7
- guIQKCLqHFCOrRUGtG4SQfVzB+WFDK5qTOwgmqjAsN7d51C/7rLBTIPrkeOr/XCFmfn0XnotBcj
- wSM9jwmLMYd3m8uBWC03iQOoy9bFtZ0l3lOfEJL/O+L2PgccoZvdtvFhU3BSXraGH6z1QW7oMxL
- QUk5JDc78pvKCEQ6g/ObcsB6MgeYeXYUoNQRxHLcYgBzBp4023WFqOBqwJWH/Bl/OsPnHTkenx8
- FoJD3ozP4FJ4Mmzbi7eiTvACjwapgDS3yt98j/eP+OeQhz1xIw=
-X-Received: by 2002:a05:6871:828:b0:40f:c84:e59b with SMTP id
- 586e51a60fabf-40f0d8d9522mr11801784fac.30.1771598373235; 
- Fri, 20 Feb 2026 06:39:33 -0800 (PST)
+ AJvYcCWrGSy1Qnoi9be/3q4Q/r0eASlmUFvmwOyjk3KONjyuBb0h25UetlhcNlP7C5/W76BnL4BiqQM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJP+jd7ab87mgapO6BNcC/n/Hj3V1sc47hYeGMbWEKNMlO+ALj
+ ZGBsQD1q/nTglZmpfIiIdn0l87DmHItoPgCqSorKyZo/odx928Nb9NMd6HbPrwUnfqg=
+X-Gm-Gg: AZuq6aKvu6UCS0sQiyA6qadx/ci/5VScw1s66/GQbjRVbh4s+bxOJIF9YZBvP3QPN0+
+ RgH13Wp60Le9N5P+RT750NLTmqaHzff4SLt3fzvpDoMpYY7mWO5FX7z+Slw1ubR7ai+EJaCwh8r
+ dMO6MT9EZEJhwC1yAd6YFmcbGuClpLhCHPe9ySpjBq3Qr/wDXLBuo486PN/zQsKwAKeW9My+yWi
+ IRw0NSmRxhbQLBCJl78N5BIELe9Sgg3Zn3Ha5JNNVbjcQvKqiTeLidXTRArAfc6v4ntQM8AHFu5
+ WvJmatBWZddjMwjOawbGnORaLaSuJXNa+PPwAXW+dJVQqSnEKZ92H/wPga0TCxIDuI1JmijwfL+
+ 7IC5fc09x3lunwTkl+1XchOBYquzvwBS4P8wZWp2foYIfKLJYa7odj0Jw9S4a2Axu47gjUCIbdd
+ Eey4BJ/oMzv671Zm1Sn2hlOG9pV2w8brDDLQE6grCgJcvGhK0bAVc9+/DK++6xYZFPQCFhWo/3E
+ ph0J+Bg5baKfl0zs6l4wkToMOK5MMPcy5vAZdNL9KBTMbCyuFk=
+X-Received: by 2002:a05:6820:f01:b0:663:5b9:a586 with SMTP id
+ 006d021491bc7-679c470d349mr8337eaf.72.1771598710041; 
+ Fri, 20 Feb 2026 06:45:10 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40f18df8a64sm18636558fac.14.2026.02.20.06.39.31
+ 006d021491bc7-6747540780asm17958090eaf.9.2026.02.20.06.45.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 06:39:32 -0800 (PST)
-Date: Fri, 20 Feb 2026 08:39:30 -0600
+ Fri, 20 Feb 2026 06:45:09 -0800 (PST)
+Date: Fri, 20 Feb 2026 08:45:07 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jerome Forissier <jerome.forissier@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] boot: availability of command mii for NET_LWIP
-Message-ID: <20260220143930.GR3233182@bill-the-cat>
-References: <20260220143311.36196-1-heinrich.schuchardt@canonical.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: bb@ti.com, reatmon@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
+ gehariprasath@ti.com, s-k6@ti.com
+Subject: Re: [PATCH] configs: k3_*: Add config fragments for inline ECC and
+ BIST
+Message-ID: <20260220144507.GS3233182@bill-the-cat>
+References: <20260220091532.3584771-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DcfYAOqad4phtBX1"
+ protocol="application/pgp-signature"; boundary="hVrCRb6whxao2JGm"
 Content-Disposition: inline
-In-Reply-To: <20260220143311.36196-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20260220091532.3584771-1-n-francis@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,54 +101,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DcfYAOqad4phtBX1
+--hVrCRb6whxao2JGm
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 20, 2026 at 03:33:11PM +0100, Heinrich Schuchardt wrote:
+On Fri, Feb 20, 2026 at 02:45:32PM +0530, Neha Malcom Francis wrote:
 
-> If we are using the legacy or the LWIP network stack,
-> should not influence our decision to provide command `mii`.
+> Add config fragment support for enabling inline ECC and/or BIST on TI K3
+> supported platforms.
 >=20
-> Let BOOT_DEFAULTS_CMDS imply MII if either of the network
-> stacks is available.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  boot/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index e5db165424a..3f8f3e7cf35 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -435,7 +435,7 @@ config BOOT_DEFAULTS_CMDS
->  	select CMD_PXE if CMD_NET
->  	select CMD_BOOTI if ARM64
->  	select CMD_BOOTZ if ARM && !ARM64
-> -	imply CMD_MII if NET
-> +	imply CMD_MII if NET || NET_LWIP
-> =20
->  config BOOT_DEFAULTS
->  	bool  # Common defaults for standard boot and distroboot
+> Typically we do not enable these configs by default but would still like =
+to have
+> the option to start building them in our default build flow for testing. =
+Also
+> there is the added advantage of users being able to see what is needed in=
+ case
+> they choose to enable these features.
 
-This is fine, yes. Quentin, have you had more time for your series that
-introduces a symbol to use for "networking is enabled" and separates
-legacy from NET ?
+If we want to partly justify this as helping users, we need to update
+the board documentation as well. Also, can these live under
+board/ti/common perhaps?
 
 --=20
 Tom
 
---DcfYAOqad4phtBX1
+--hVrCRb6whxao2JGm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZhyIQAKCRAr4qD1Cr/k
-CkqCAQChV3nWs+S9VPbWYfk3Lc7/LslMHQNDRpbEceJQKdyDhwD+LeRRcshsiFLu
-Z7Ig4tUufDLg3CY55PSxtvf6OE1wTw4=
-=vqpP
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZhzcwAKCRAr4qD1Cr/k
+CvzqAPwOCkNfQ1t0qnw/jLESflqp4dG6r8rXMHvbwXF7fsIwjgD+I1yET+lfp2VP
+z81O7pDm4E0ORPevoAIvGkz/na0fMwg=
+=JYDk
 -----END PGP SIGNATURE-----
 
---DcfYAOqad4phtBX1--
+--hVrCRb6whxao2JGm--
