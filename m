@@ -4,150 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B1DCC5AD05
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 16:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19876C5AD05
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 16:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83EAF83A5E;
-	Fri, 20 Feb 2026 17:48:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A41F483CF5;
+	Fri, 20 Feb 2026 17:49:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="mfxOSg6F";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PMmfJhyV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A6C783AC5; Fri, 20 Feb 2026 17:23:49 +0100 (CET)
-Received: from BYAPR05CU005.outbound.protection.outlook.com
- (mail-westusazolkn190100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d000::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8509983D0F; Fri, 20 Feb 2026 17:49:29 +0100 (CET)
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A746083A41
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 17:23:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5596B83A41
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 17:49:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=hotmail.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macromorgan@hotmail.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LSO0wkZH6LnknWFuWQEdZI8knyVQWQexlWHcMnQiQVoMMPkM55BcPRS3vTt6R20X+3n8Ck6ZBdenBKt2aBU92dZ1NM133kSISgavSi6vweNOldgsPyR46KpVEymLXAgWDQSDQZIznXFXTHiuXSVbtzLSKD7pjI/sWNWUP0wjGxnAWYbeD+UANPSSAWxDuFL2zrI80LkJ7wJsYq5fl5kVMcZkxFcx4AEJH16AsLrQWQ3xOVRs79vkJCGv1Zp4e7vDK6DfXuimZ1O7kbTQkx2xGwAH+vPqEX/0Bb150WJKLTx86SvA33QvYU17Upfd1M5d4Ac5vb6gP/Ps/vxixDDVLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eayPFX8REHNzsvOWxCN6Bec3azIW0RbeujQ2YKEqz2c=;
- b=MWImC07FV6AuvN9ttj72pPu5rhgVJc8N0tUXbnLdyn3S7by9z+2gPYJTkyTTvFdvRYRWJNwwkat0Oeoo8j0eiVAbLa3wc6wSeqRSahHLD6+/cZbe+rxRFiwXY/R98s0QZxWjfaVhe7yFkT8tiMY6XBdfFYeXOt+Rk/ZNnbEvT2p07mMJlzmNEnO5XTAi5uLMGbbIQriBlIuqnajgxCsEg3ZolNUNiqTGvzL9sOQlmxx8my4xQh2B7VxustYHHKziN1AtDR5E3Mi5UstLLIjWSygtEKZQ11QlLfHViKb/TgsTDJGk8GSM44ybxkgBvgCcfxR6fJC/s8ddmWMy3mu9Hw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eayPFX8REHNzsvOWxCN6Bec3azIW0RbeujQ2YKEqz2c=;
- b=mfxOSg6FeqeYSk9I7p2t65K+2Wo63gEeddnTpGYQDeZs0WtgVW8ky80bCpqey7NyUbK1QGCstGoh4cSgm5YYs93QzFgZVnfnXx/fQzgzBVvYHsKv2ctoHWBEW8cHs0erENI3Umfsvov1PtI3Ndl52iFcUc9kSQFsNv4acpL0x0NAEy6cp/pSaa0PtCojZ1udZQh9+z6DRow6wDisfL7eGn4kameDcRe4g1xRV1lmFUpowODrRPYjgX2MJOSpBy5oeJ2fWDCEBzshk2d6qT8Wb8bFp55wbOuGdJ5E3WdcYuhOsh2EV+/E3RZJw5NIBlyDPefkjLQ8YD8mN8IopIHydA==
-Received: from SN6PR1901MB4654.namprd19.prod.outlook.com (2603:10b6:805:b::18)
- by SJ1PR19MB6210.namprd19.prod.outlook.com (2603:10b6:a03:45f::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.16; Fri, 20 Feb
- 2026 16:23:40 +0000
-Received: from SN6PR1901MB4654.namprd19.prod.outlook.com
- ([fe80::57b1:b92:26fc:c937]) by SN6PR1901MB4654.namprd19.prod.outlook.com
- ([fe80::57b1:b92:26fc:c937%5]) with mapi id 15.20.9632.010; Fri, 20 Feb 2026
- 16:23:40 +0000
-Date: Fri, 20 Feb 2026 10:23:37 -0600
-From: Chris Morgan <macromorgan@hotmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <SN6PR1901MB46547577B09BFAA89055E1A5A568A@SN6PR1901MB4654.namprd19.prod.outlook.com>
-References: <20260213220927.GN2747538@bill-the-cat>
- <SN6PR1901MB4654C67BCBEA987213F1922DA56AA@SN6PR1901MB4654.namprd19.prod.outlook.com>
- <20260220161156.GW3233182@bill-the-cat>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260220161156.GW3233182@bill-the-cat>
-X-ClientProxiedBy: SN6PR2101CA0016.namprd21.prod.outlook.com
- (2603:10b6:805:106::26) To SN6PR1901MB4654.namprd19.prod.outlook.com
- (2603:10b6:805:b::18)
-X-Microsoft-Original-Message-ID: <aZiKibBRZg8H2YjH@wintermute.localhost.fail>
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-566390e7db3so2156389e0c.1
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 08:49:26 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771606165; cv=none;
+ d=google.com; s=arc-20240605;
+ b=XmUQkCY879TKZ+Hddn6nPJ678ehXUdXWlMVTsAJPGTGUfl11zaUk63Vg4m9ncihMNg
+ i6Sx/CWs5sXyq4AvrbSUg1r5PO3llwaGw2UaxxA6CK9DW4etDeClQvv3mGpU01+BntGh
+ ogOKndjFVaC7kYi+nVQpiIqyXRCrxiQ0DnBf2JQLa4ina7CboCsUIecRapNdeNUN1kyq
+ ic3kcN0iGaz+n6d8iiC4qZvLRXvixEf5EPIIkdFDA2MpJ59B52TT3WwinwGxH+Q4wqVB
+ rrjjlaCQMFiSy+4GrBBSn3t1wDhorysWK0LswYZMF9CXaKU7s05AmUXl+xE7MSDD6Qi1
+ Oi0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=yyZHVLnBrK/WVrkCkkjfybOUG4QXDpdEOXCnFjtcORk=;
+ fh=9uZZCA4FnQ4cG9bY9TPKEsQpuxhK8MvXJKr0M04nGaU=;
+ b=Sq12TW8zNsPApzxTV+r9SjT+KJiAK2dkuN97lMMWexaRBxgeMauUB0RTHtx9qDNKUs
+ ZIz2ppR4u4IkgzpYX/05QkT4vqynkSAKNFIggiKeZU1xt+eZdL7pMLDeDkpY3LOnz5yr
+ qJuOr8aKx7wveK2EQT0iW+Jz8cY1c6oSLJOndvYxFTYqbukqSr1fLWu772vVmCaQ8IH4
+ z3cJEEJEshdgqg/Kjm1jpoOc1a9ol9fOk2jjSk+MVbrhT8X8YhbR7FJuHqRz9cDh/B1p
+ AmaRiaE3cnh0cKcCNSQ1fDQN9whx1cErPQMSUNSiQ2m5cRUR7Duj8PA2ejWRBh/GLE43
+ E+1w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1771606165; x=1772210965; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yyZHVLnBrK/WVrkCkkjfybOUG4QXDpdEOXCnFjtcORk=;
+ b=PMmfJhyVi6XGFmT2PeoJwtY5X4Qqw/ZgZFtR4aOHBL5CP34n1xwJ6Y8bS/i2QRGd58
+ 4G/O9kwJH7qc00/lW6SpncO+4C6auzYYj/8cJlAnjQImVOkbmU5sQqiyoGbITue1UPdG
+ 7P9K5XyVgNmKWEPCCUMXVlffzd6gpFiuAl0aLUTFVDAVlvQWvGCHrDl+/n51451v23hZ
+ jsatbb0RN0X6256vbjlSa8JE6a1Dnv9lDC79lzRaGGFvHJ1WmNARef/fRI/PO7TsmYl+
+ sjB6e0veICOBTr3TkzpKJhmWIApAvaP+yBZ+1lgE+2YSNKMIi7prkzs6xSzXGMKAuQMB
+ COfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771606165; x=1772210965;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=yyZHVLnBrK/WVrkCkkjfybOUG4QXDpdEOXCnFjtcORk=;
+ b=tSz2Cvr+ecaRNAfXYtB4m2xQtVVg7tM29C/faF71NkobAFAwyV1s7Cy6Svu4gzVSX1
+ Lrb6Me2pdYohIFszCYhcpPxCfOwOOaVDTEuUvx8LgAagkeouUru0x8o6SOMejln8bwCH
+ S+YTHv20zFhWf459ziz3rMmbA++sNNtwRAzeR+vKBJv/ysW4X8+VamdZSBKh/Ltx7fk9
+ b2Yk/K1sXUo8WEvflbuHPEAmaBu0uAvztXV3CLNlnjoMT7qcEJzznEtBt/K4JhLFbdWC
+ 13d1wWond9nI4Vcf57H/tg9ZPPWkujrm5QEdBvZ0axzf9VeaBRWWWZgLmEKFyBTtVFbD
+ 040w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWVyrj+m/uFiSD6aRtQDu2swZU+EbAsEDzlZeQ2oSdZdKi/p4CFAiCACEso/40XindImv0LzNA=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYLgzYLCoqRejiGyCn9Aw4ufLvY9m7IYynZnG9aAfoLLoumCQ3
+ CsSBb9FxdaaNNA98fPE+GuZfZIywOBmv+5bD2mWzUw5fZRBfXsqsG9po41zc6KBc6tdr9S/eBsx
+ WakECHDtBysP50Z/DFd1OkLtOqbEQvGg=
+X-Gm-Gg: AZuq6aKNw89erOPqcZnv4/QJOibToufwEnFDCj7KIRblEVIJmm3alAaGN53zVRNwsaf
+ juPj5b+Afmd6h59e9iYhyb2F6/29+yB8kx9x1OCjsSV5iuxqF/AQsitNG/wY4sSWLQLUw4Io/7Z
+ 6ogAcSEVAZWtrut1Mjb+QK62FTzocZvGaYI1YpvbmhMwJ/stS1oHWn1htiEZSPpJTD9k6d7aQtF
+ uEZbHJlDUKwZ12RlIDttRk96rSA3CaJDa/kwEJGTm38bfgIP975sf1+Ac85kDs3vVyK/hZ7clOb
+ 0d3SBL9q
+X-Received: by 2002:a05:6102:3e91:b0:5ee:a03c:8782 with SMTP id
+ ada2fe7eead31-5feb3071bb5mr302932137.21.1771606165372; Fri, 20 Feb 2026
+ 08:49:25 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN6PR1901MB4654:EE_|SJ1PR19MB6210:EE_
-X-MS-Office365-Filtering-Correlation-Id: ff3a9d89-b5da-43c3-d20f-08de709c6829
-X-MS-Exchange-SLBlob-MailProps: Mga27o8vReFWf9RzH6tnqJClNbiui38JZkvxjtfvNzddEXBZ7Dg+K6bk2bbUenqgzKAYf2GiASgQyVOFvL+xEMuzLnluai8M6uQ0n5XogSxIktauA7fxBkca7Igv/DXd2wyi9ck/FZIlVQplUhSSrqffqFn79+SbVE7VbjPetri9tGDgrNc55sxn7NA3NKeiBtEvzctRS71823LdGRMgYfpUTqOFeADJ9gETWaEept7ShziCffexWHbCT7oEYXPmaaxK7z8aj5/QdjCOWbqtrFhJNE5yDe8xrxiDboySFISwN9Q1wJMv+SDXYMkDLbKHTO2hfDvxhOHFL53EozFKdbPeRj4jZw6Wtb4QHXWTgE4TCs2AC0uBBFuJG0DYqOXyXLIjS4eG5/DMMuXcXESMCq+L9Q7rg7LS2GMf3eoLeEjSTKwHb+l6S21Lmk1gEs1TLrfzIDI/0ly9pXJ3/FxdNkV/8z5gQj8XTNO0y1spLZfqbsgGewY638er3f6uszteBKZE6jlAHtLYpm5d50Xdajefh6fw30IJXWXQZ9KUD83GWGvXeT0KvElcZAogNFo5GIAkaz21eESjiMAaUmoTJOzQ6g1FOYxdkRoRAXf5GJA87bBMUimfLQNAIqFDioC9/Ki19Ze6j6/c/LLfD8IwCOSRZNyi5s9xJMfyuIfV/2zRY8RwXrW4Q7eKdNZOd6VwcwxLSx/OvTmnfAxqBirqgRbAmBAqGD+W3muOcvT4K8BmGIRGviwZOU7oRohkW8O9t+XlQN/O19npkMsTG39FktuBeZBJnK2Ss45p4KAOz2diiHDUUPvvCg==
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|6090799003|15080799012|23021999003|41001999006|5072599009|461199028|19110799012|8060799015|440099028|3412199025|10035399007|52005399003|40105399003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cVRteHVSa1hEajBHN203bEJzMmcyb2RoTHdLd3RQUHdOc1QzQVdXVFR2Unk0?=
- =?utf-8?B?R244amF1bVZrWlZNL3ZVUTdmVEgzYitwb1FjUTVqUjZEaGtzZFh4bE9hM3Zv?=
- =?utf-8?B?L29KV0NWT1o4WVM4cUlhZU01NGptczg4VkhMU0JXYUl3eTdxdHRQb0tFbGVh?=
- =?utf-8?B?enVHd0NDUjNHN3BEaFpaaDJpNzc5NDljck42akVzbXNMR3VrSVdUNXROMTVi?=
- =?utf-8?B?bzNBNDl2VmxYVVRxL0xxQUZYbU9ZSHMxZGZyWFkxRFZnMHQ5c2l4UlN4MFZo?=
- =?utf-8?B?Y1BqRnpGdDkrV0lhcm8zS1RCb3lhQTRMZTVIaHR0TmJxYjYxNVYzTUZJMWtr?=
- =?utf-8?B?VnFxOW4yZlBhVzRTbllxS0NOVnlzRUVRUVRvRlRBcmNGZ3JzNldLTW9EK201?=
- =?utf-8?B?UUVhSlNmRnZLZ1B2dHpZRVFxdVdkWGdHRllORWUybEhmZ2dBK2RyMWlPaFpG?=
- =?utf-8?B?UlJOL2NBMVNIUmhUUjV0ekhHN2RUUGF5MmJ6d2FPTWpSaVJkY09abDNBdTZo?=
- =?utf-8?B?QjZZQUhuWlpJQUt2UEo3TVR5R1hsN2xOQlJaVGtzNU5tQUFKOGUrNHBLK3dV?=
- =?utf-8?B?SDFVYmY2VGpVbUsyREdBMXNQVDJ0YXZzTnFORVNsY3QvOE4yVFQvWFJXM3BH?=
- =?utf-8?B?ek1oTlVYUjE5VC9STmtpRXNnbEh2Qk9LTDQ4V2F5eDZ6a0lEalRsV2Y3UDFX?=
- =?utf-8?B?ZCs3a1FpTmtiajNvdGFEMmxGVEFTWXRBLzlWVkNzeHluUU5aYWdqUWlCdE9j?=
- =?utf-8?B?d3pLZXNOdGdGNDQrNGtOZWFReGdLZDNkUlpHSVdETENYTDdVLzBYVXBveTNG?=
- =?utf-8?B?MjJVRDc2Qk96QnVHclk5TEhHNEMwRG9rY3hCdEpqaGd0SWh6VGp1di9MdGww?=
- =?utf-8?B?VWI4NVR6L0YyMldqekMrVEdkcGFNaUxYQlVYelc0cmlObUtWYkc5ZmVDd3lS?=
- =?utf-8?B?LzdRdWNhUDRsajFFZi9DNk5lWXNEZExqMWFXWU5DMUhnNzhBUzhGUXVZOUFi?=
- =?utf-8?B?L0hMSThkWEVWOEdMb085eTE5WmtaeXUrcE81OHdIMElENnNVY0JpYVY1eE5a?=
- =?utf-8?B?LzdhL25RUml6d2NWTTBPbVc2K0lmNmFzNFVvS2pZYS9Yb2JiMWFEL1dhdWZB?=
- =?utf-8?B?a3pGSmtMRVdFVk1QMXFiakxHN3JMak9OSVFhMlkxU0cxNkliWEgwS0pjK1ZF?=
- =?utf-8?B?ODRCVTllcFFtTWZFWDMvT0FEUDEzZE9hZitYclhTc2NHUXJlMkYvTlNBejVV?=
- =?utf-8?B?QXg4NXgxQitIUmtyWGxHb3ZXSTBoaG9VMGNGZFFSSElIaEFSaGtGVXpROHZz?=
- =?utf-8?B?TUIrZXFnS2xma1dvWldOVXUxRXZjTm1DUmNHUk1FdHZvWjF1OG9nZXJYMVJW?=
- =?utf-8?B?Q3d1OERvdlVaS0tBaW9BdVpjcGFKcjBSeE9BaktCa1lyVEpJc3p0VzAyVmlz?=
- =?utf-8?B?TmJXYy9QUGkzalhEZVBIUFV4QUt5VFdJbGhqTHB6MmdHc1NsVnF5ME9CTmhz?=
- =?utf-8?B?ZGNMVGdFVDZXdWRrNUdmRlg2YlhNYnZLVXd2YTlVemFqNmpDWmd5VTRoeEhG?=
- =?utf-8?B?bnJFUjJnd0lNcEdzS3poekRXL2pyNWJlc3N1RStJQlhxM0lrck5xWjZBNkZk?=
- =?utf-8?B?SFNLM2Fxek1mQVlLby9kUmtXZC9YUStpdURTTURYK3ZsZHA3SVRWaUIzMm96?=
- =?utf-8?B?L3hobi9UYlpLLzJYQmFtYXFld0tQVWxaaUZtMXVkbXk4N0Y5VU5TK2hpd2tl?=
- =?utf-8?Q?AxNC0lwwUwgQH5+XRHKBTLCehxOC4qeivRIdDoc?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z2ZUVWZZSnB6d0U2eUFCK3Q0L2Y4SDZSd1hDRmhiSC9NaXE5dWt4b2hNMkV1?=
- =?utf-8?B?MlZpL3h3TDBFRFR6VDhidmpmbU50WG5zUjBibjZWbTk2eW0zN2lnMXQ3a3RS?=
- =?utf-8?B?dmNLRGk0L284bG9DVCtBUUhGWlhMVklHRWlua2MzTU1raUVlZVlERUFneTVW?=
- =?utf-8?B?VzRlYnlKVW4xZVIyNTNSYzVsbmNVSFVJeDZjdnMrcTFOTmQwNTAxNFBMeVM5?=
- =?utf-8?B?RWVTMjJDVEZhK1Q3QTdPN01HaGhOd0xlNjFpc3ZnMzNGcWJHc1I0TW9xMW92?=
- =?utf-8?B?NXJER0kxZEVVYk9KYnFTYlBTT3M5VmpBc1I2Y3ROSXhlcHBLbkl2ODZtWUFU?=
- =?utf-8?B?M09HbjdGWkFBSWdwbCttM0x3S0RBUkUweTdURkFkdTF2SmJjSkFuQzRQV1R3?=
- =?utf-8?B?eWFiM1BSVlRDOGVpc1NsZXRLUnp0a203Z0lIRGF5NTd6N3RlcS9sL2cwZEZP?=
- =?utf-8?B?NmZlKzNRbWk3VDV6VnR1cmZ2bU5Hc1ZPYVZzS1B0ckROall1ODlCSXpaRjRa?=
- =?utf-8?B?TGhBMlRMZFFJbDRUWHhVNGVpOUNpd3dnK3lzUGEwQlIvaG9hNHRnd3dXcXRJ?=
- =?utf-8?B?VDZGblFTVkFNMGRsWi9rNy9jRW9pVmtZNVl3Q1ZzZy9KQzhMd2NGcytJTlc1?=
- =?utf-8?B?dHRsZGtkdHkyRzNIekFaaFJ3RENkQVpOVW1uaC96ZWEycUdTZVY1Ui8rUU16?=
- =?utf-8?B?Ritrcnp4dWtnNjV3aEREVTFwVVY5Y3ZEL1V3eDJHNXhDa0JHVHdtN21BM0JC?=
- =?utf-8?B?Y0pPSmpLanRzK085ZkRJQ3NVQnJpb2VOZVlTMDZDY3JPSW5ad21YRitENW1x?=
- =?utf-8?B?Y0g0VnNtUFhzcjh4STZBTHZJTFlCWjQvTkFvMG01WGVmNGpkb2l3S1A0R1dZ?=
- =?utf-8?B?c250czcybXZ1WUZIYWdDeVplV0VvNFFpMHdObFZ5YmdiYjM1VWlISWh2T2Z3?=
- =?utf-8?B?cmx2MEFNQllnTlhUcE9JSXFER0c2ZDhPbm8rNE43eTRjeVdWRUxpbXZBbWU4?=
- =?utf-8?B?bHRrUVJFa21QQisxak5hRzJNNXBzM0t6cFBsMDRaU202MlYvQ1RhNytsaExR?=
- =?utf-8?B?RllBZS8rcmdlK2w0b0dvYzR1MmVkQW1qaTE2T2Q3MG5IdUR3bkNkOSt4MVFN?=
- =?utf-8?B?OWxqbHpHRGFERkxHZFg4TEZDWTRVb2JlNmdCeTlQbUZyNWhhWHVKTjBmVU5v?=
- =?utf-8?B?VitCR0RiRDd5V09mbUJqRGhBNGdBY05Rd05DTjg3SGd1RXpyMjZjV2FUK0t2?=
- =?utf-8?B?anVWT0haV2tKam9ITEF2ZXpFZUJ5Ky9zZ0hpV3o4MjN5cHBBNEdMU0tVN0ln?=
- =?utf-8?B?SWVYOGs0eFZTVVVKRWxHTmRXbyszYXRDR2NicVVGUnFVbUhrQlA4aTdXNTZw?=
- =?utf-8?B?d0c1WWo5N2VRcERuS0JaN3pjUjl1VDd6OUpQRjRRY1dJUjBKb05PY1ZrR0dz?=
- =?utf-8?B?K0ExN1VKWTFXL3RpN0duRGtkY1JkT2ppQ1NZTkNYVytobjVuT3pqRy8vYk5N?=
- =?utf-8?B?WTN3ekhDVjVlNHJwZEY4Vk4yc0xLMVNySWxZczA4Ti9YdFVOam82eXRwSnBQ?=
- =?utf-8?B?cm0vVTlmMHZKNmw4emFTSWlTSG5pc0I3dE00dUdwNTVFTTJwNncyc285VE1y?=
- =?utf-8?B?anRDTVJCaVRIYjJRZmxVSHowQTFRcFlOdVVIa2o5L0hZWm9kUGI5QXFjOTFZ?=
- =?utf-8?B?elFZTnBjV2JPOVNvalo0T2d5R3lqK0ZtQVNERmIvcGtqTHdKcEFFclBkSXRl?=
- =?utf-8?B?VkM3RHVNTFRGWFIwLzRmNWpNNTB4cGFQU3NmL1lvTTFwc0ltbVZ1UStrLy9Q?=
- =?utf-8?B?VnN2NUVuVC96bGoydUdnZllHekxYaU1sZE02WDZmQUpaQmxRVWloMHlqOVBV?=
- =?utf-8?B?eFlrcTFwSXFJTVpuaEh3Vmpya0VoSjJmUFJmOEpITllxR0E9PQ==?=
-X-OriginatorOrg: sct-15-20-9412-3-msonline-outlook-6f20a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: ff3a9d89-b5da-43c3-d20f-08de709c6829
-X-MS-Exchange-CrossTenant-AuthSource: SN6PR1901MB4654.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2026 16:23:40.3089 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR19MB6210
-X-Mailman-Approved-At: Fri, 20 Feb 2026 17:48:00 +0100
+References: <20260219132552.1499698-1-philippe.reynes@softathome.com>
+ <20260219132552.1499698-6-philippe.reynes@softathome.com>
+In-Reply-To: <20260219132552.1499698-6-philippe.reynes@softathome.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Fri, 20 Feb 2026 11:49:12 -0500
+X-Gm-Features: AaiRm537xwlRVXx0wwy5YaBrZ1koyEaIRuxFfqajyBQKAuodriu1cRVwIeHP0dY
+Message-ID: <CAMDkj5wOXiUnRqV2QK-NgMkNgiDzejDkMiOinP8gShsFXRTjmg@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 5/9] ecdsa: fix support of secp521r1
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: marko.makela@iki.fi, jonny.green@keytechinc.com, trini@konsulko.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,92 +117,199 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 20, 2026 at 10:11:56AM -0600, Tom Rini wrote:
-> On Wed, Feb 18, 2026 at 05:02:27PM -0600, Chris Morgan wrote:
-> > On Fri, Feb 13, 2026 at 04:09:27PM -0600, Tom Rini wrote:
-> > > Latest Coverity Scan report, now that it's back up and so a little out
-> > > of sync with the usual schedule.
-> > > 
-> > > ---------- Forwarded message ---------
-> > > From: <scan-admin@coverity.com>
-> > > Date: Fri, Feb 13, 2026 at 4:03 PM
-> > > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > > To: <tom.rini@gmail.com>
-> > > 
-> > > 
-> > > Hi,
-> > > 
-> > > Please find the latest report on new defect(s) introduced to *Das U-Boot*
-> > > found with Coverity Scan.
-> > > 
-> > >    - *New Defects Found:* 1
-> > >    - 2 defect(s), reported by Coverity Scan earlier, were marked fixed in
-> > >    the recent build analyzed by Coverity Scan.
-> > >    - *Defects Shown:* Showing 1 of 1 defect(s)
-> > > 
-> > > Defect Details
-> > > 
-> > > ** CID 328330:       Integer handling issues  (NO_EFFECT)
-> > > /drivers/usb/dwc3/core.c: 106           in dwc3_core_soft_reset()
-> > > 
-> > > 
-> > > _____________________________________________________________________________________________
-> > > *** CID 328330:         Integer handling issues  (NO_EFFECT)
-> > > /drivers/usb/dwc3/core.c: 106             in dwc3_core_soft_reset()
-> > > 100     done:
-> > > 101     	/*
-> > > 102     	 * For DWC_usb31 controller 1.80a and prior, once DCTL.CSFRST bit
-> > > 103     	 * is cleared, we must wait at least 50ms before accessing the PHY
-> > > 104     	 * domain (synchronization delay).
-> > > 105     	 */
-> > > >>>     CID 328330:         Integer handling issues  (NO_EFFECT)
-> > > >>>     This greater-than-or-equal-to-zero comparison of an unsigned value is always true. "dwc->revision >= 0U".
-> > > 106     	if (DWC3_VER_IS_WITHIN(DWC31, ANY, 180A))
-> > > 107     		mdelay(50);
-> > > 108
-> > > 109     	return 0;
-> > > 110     }
-> > > 111
-> > > 
-> > > 
-> > > View Defects in Coverity Scan
-> > > <https://scan.coverity.com/projects/das-u-boot?tab=overview>
-> > > 
-> > > Best regards,
-> > > 
-> > > The Coverity Scan Admin Team
-> > > 
-> > > ----- End forwarded message -----
-> > > 
-> > > -- 
-> > > Tom
-> > 
-> > I'm not *entirely* sure what to do to fix this issue, but it looks
-> > like maybe the issue is that all we're trying to do here is make sure
-> > that the version is DWC31_REVISION_180A or earlier, and this is done in
-> > mainline by checking between revisions _ANY and revisions _180A
-> > (instead of creating a new macro). Since the DWC31_REVISION_ANY is set
-> > as 0 this means that condition will always evaluate as true. In this
-> > case though that's fine, because all we really care about is if the
-> > second condition of the macro is true (whether or not we are equal to
-> > or less than revision _180A).
-> > 
-> > I copied this stuff directly out of the mainline Linux driver so as to
-> > maintain some semblance of parity (and because I needed the stuff that
-> > used this specific macro for gadget mode), however it looks like to stop
-> > this Coverity error I need to create a new macro, possibly a
-> > DWC3_VER_IS_AFTER() macro. Or is it simply fine to say that I
-> > acknowledge the issue, but given the context don't think it's an issue
-> > if the comparison to zero always returns true because it's just a reused
-> > macro with two conditions and we only care about the second condition?
-> 
-> So, looking at the Coverity Scan dashboard for the kernel, there's just
-> nothing on drivers/usb/dwc3/core.c (at all, even closed), which I think
-> is odd, but I also think I've updated the filter correctly. I'll put
-> your comments in the dashboard here for the issue and mark as
-> intentional, thanks!
-> 
-> -- 
-> Tom
+Hi Philippe,
 
-Perfect, thank you.
+On Thu, Feb 19, 2026 at 8:26=E2=80=AFAM Philippe Reynes
+<philippe.reynes@softathome.com> wrote:
+>
+> Current implementation of ecdsa only supports key len aligned on
+> 8 bits. But the curve secp521r1 use a key of 521 bits which is not
+> aligned on 8 bits. In this commit, we update the key management
+> for ecdsa to support key of any lenght.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+> v2:
+> - intitial version
+>
+>  lib/ecdsa/ecdsa-libcrypto.c | 21 +++++++++++++++++++--
+>  lib/ecdsa/ecdsa-verify.c    | 24 ++++++++++++++++++++++--
+>  lib/fdt-libcrypto.c         |  2 +-
+>  tools/image-sig-host.c      |  2 +-
+>  4 files changed, 43 insertions(+), 6 deletions(-)
+>
+> diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+> index c4bfb2cec61..6f25ccc783d 100644
+> --- a/lib/ecdsa/ecdsa-libcrypto.c
+> +++ b/lib/ecdsa/ecdsa-libcrypto.c
+> @@ -45,6 +45,7 @@ static int fdt_get_key(struct ecdsa_public_key *key, co=
+nst void *fdt, int node)
+>  {
+>         int x_len;
+>         int y_len;
+> +       int expected_len;
+>
+>         key->curve_name =3D fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+>         if (!key->curve_name)
+> @@ -54,6 +55,8 @@ static int fdt_get_key(struct ecdsa_public_key *key, co=
+nst void *fdt, int node)
+>                 key->size_bits =3D 256;
+>         else if (!strcmp(key->curve_name, "secp384r1"))
+>                 key->size_bits =3D 384;
+> +       else if (!strcmp(key->curve_name, "secp521r1"))
+> +               key->size_bits =3D 521;
+>         else
+>                 return -EINVAL;
+>
+> @@ -63,7 +66,19 @@ static int fdt_get_key(struct ecdsa_public_key *key, c=
+onst void *fdt, int node)
+>         if (!key->x || !key->y)
+>                 return -EINVAL;
+>
+> -       if (x_len !=3D key->size_bits / 8 || y_len !=3D key->size_bits / =
+8)
+> +       /*
+> +        * the public key is stored as an array of u32, so if the key siz=
+e if
+
+
+s/if/is/
+
+
+> +        * not a multiple of 32 (for example 521), we may have extra byte=
+s.
+> +        * To avoid any issue later, we shift the x and y pointer to the =
+first
+> +        * useful byte.
+> +        */
+> +       expected_len =3D (key->size_bits + 7) / 8;
+> +       if (x_len > expected_len)
+> +               key->x +=3D x_len - expected_len;
+> +       if (y_len > expected_len)
+> +               key->y +=3D y_len - expected_len;
+> +
+> +       if (x_len < expected_len || y_len < expected_len)
+>                 return -EINVAL;
+>
+>         return 0;
+> @@ -89,6 +104,8 @@ static int read_key_from_fdt(struct signer *ctx, const=
+ void *fdt, int node)
+>                 nid =3D NID_X9_62_prime256v1;
+>         } else if (!strcmp(pubkey.curve_name, "secp384r1")) {
+>                 nid =3D NID_secp384r1;
+> +       } else if (!strcmp(pubkey.curve_name, "secp521r1")) {
+> +               nid =3D NID_secp521r1;
+>         } else {
+>                 fprintf(stderr, "Unsupported curve name: '%s'\n", pubkey.=
+curve_name);
+>                 return -EINVAL;
+> @@ -111,7 +128,7 @@ static int read_key_from_fdt(struct signer *ctx, cons=
+t void *fdt, int node)
+>                 return -ENOMEM;
+>         }
+>
+> -       len =3D pubkey.size_bits / 8;
+> +       len =3D (pubkey.size_bits + 7) / 8;
+>
+>         uint8_t buf[1 + len * 2];
+>
+> diff --git a/lib/ecdsa/ecdsa-verify.c b/lib/ecdsa/ecdsa-verify.c
+> index 629b662cf6c..d87d95a5002 100644
+> --- a/lib/ecdsa/ecdsa-verify.c
+> +++ b/lib/ecdsa/ecdsa-verify.c
+> @@ -24,13 +24,15 @@ static int ecdsa_key_size(const char *curve_name)
+>                 return 256;
+>         else if (!strcmp(curve_name, "secp384r1"))
+>                 return 384;
+> +       else if (!strcmp(curve_name, "secp521r1"))
+> +               return 521;
+>
+>         return 0;
+>  }
+>
+>  static int fdt_get_key(struct ecdsa_public_key *key, const void *fdt, in=
+t node)
+>  {
+> -       int x_len, y_len;
+> +       int expected_len, x_len, y_len;
+>
+>         key->curve_name =3D fdt_getprop(fdt, node, "ecdsa,curve", NULL);
+>         if (!key->curve_name) {
+> @@ -50,7 +52,19 @@ static int fdt_get_key(struct ecdsa_public_key *key, c=
+onst void *fdt, int node)
+>         if (!key->x || !key->y)
+>                 return -EINVAL;
+>
+> -       if (x_len !=3D (key->size_bits / 8) || y_len !=3D (key->size_bits=
+ / 8)) {
+> +       /*
+> +        * the public key is stored as an array of u32, so if the key siz=
+e if
+
+
+s/if/is/
+
+Regards,
+Raymond
+
+
+> +        * not a multiple of 32 (for example 521), we may have extra byte=
+s.
+> +        * To avoid any issue later, we shift the x and y pointer to the =
+first
+> +        * useful byte.
+> +        */
+> +       expected_len =3D (key->size_bits + 7) / 8;
+> +       if (x_len > expected_len)
+> +               key->x +=3D x_len - expected_len;
+> +       if (y_len > expected_len)
+> +               key->y +=3D y_len - expected_len;
+> +
+> +       if (x_len < expected_len || y_len < expected_len) {
+>                 printf("%s: node=3D%d, curve@%p x@%p+%i y@%p+%i\n", __fun=
+c__,
+>                        node, key->curve_name, key->x, x_len, key->y, y_le=
+n);
+>                 return -EINVAL;
+> @@ -135,6 +149,12 @@ U_BOOT_CRYPTO_ALGO(ecdsa384) =3D {
+>         .verify =3D ecdsa_verify,
+>  };
+>
+> +U_BOOT_CRYPTO_ALGO(ecdsa521) =3D {
+> +       .name =3D "ecdsa521",
+> +       .key_len =3D ECDSA521_BYTES,
+> +       .verify =3D ecdsa_verify,
+> +};
+> +
+>  /*
+>   * uclass definition for ECDSA API
+>   *
+> diff --git a/lib/fdt-libcrypto.c b/lib/fdt-libcrypto.c
+> index ecb0344c8f6..090246b44e9 100644
+> --- a/lib/fdt-libcrypto.c
+> +++ b/lib/fdt-libcrypto.c
+> @@ -10,7 +10,7 @@
+>  int fdt_add_bignum(void *blob, int noffset, const char *prop_name,
+>                    BIGNUM *num, int num_bits)
+>  {
+> -       int nwords =3D num_bits / 32;
+> +       int nwords =3D (num_bits + 31) / 32;
+>         int size;
+>         uint32_t *buf, *ptr;
+>         BIGNUM *tmp, *big2, *big32, *big2_32;
+> diff --git a/tools/image-sig-host.c b/tools/image-sig-host.c
+> index 5285263c616..a2272b196e7 100644
+> --- a/tools/image-sig-host.c
+> +++ b/tools/image-sig-host.c
+> @@ -84,7 +84,7 @@ struct crypto_algo crypto_algos[] =3D {
+>                 .verify =3D ecdsa_verify,
+>         },
+>         {
+> -               .name =3D "secp521r1",
+> +               .name =3D "ecdsa521",
+>                 .key_len =3D ECDSA521_BYTES,
+>                 .sign =3D ecdsa_sign,
+>                 .add_verify_data =3D ecdsa_add_verify_data,
+> --
+> 2.43.0
+>
