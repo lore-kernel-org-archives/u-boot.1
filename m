@@ -4,149 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9DA8C5516E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399DDC53200
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:16:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBFD583EE8;
-	Fri, 20 Feb 2026 10:15:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C5E283E96;
+	Fri, 20 Feb 2026 10:15:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="dwYhWGzF";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="Vp3zbYd4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9B4B83EAC; Fri, 20 Feb 2026 10:15:32 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 3469A83E7F; Fri, 20 Feb 2026 10:15:34 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEA7983AC5
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:15:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DC8783E96
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:15:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=Wojciech.Dubowik@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=edAK2NI9nqp8cB3jaOrwrnVTjm2AKicnXHyk1EAcyeogjykWMYfCBVXrnk8UNq+ESTeB2Rb6hVz0BYE2KRamwjjT+FiM6FG7ugLaPE7l5WFwEtOgReYxcKOnsu1v6TszAynmC0k4YsWCB3e/RLePyRQHxnr5uZxMPqO44c81PsgqTHg52cVcynU4Ms8XHHIeuQ2C1jZqhTFngm+zsVPrlNjU+vOE9HB4HCvDrf+Sm2N67oNuLfMNChOVFegUCU/XIV//MFM0jIOunATcDhp3Sd/UoVp6YLeisFrCMIkMg2qsBkJWmztClPV8klZ6YxwVQqCSg2Yd6+oPvNM7kNr3SA==
+ b=Ze9XaxNQkqyxKk/j9FEEEFOgr+4MRxS8dGKj4LcffqWWfGHF5+/S2SRxcEhU53YQNFun+a82s02GtDx5xTSn34qJsXknE0lii+gZIoM5MYKoGlSTB0ExwY0vsPTf5g2e24ddCEIYD1hAc9V8rOoK7zxYs90B+kqwyFPeoxSX6xIWHjQH8KVua2bXxXfjChUHhp3+ytcsgYyuF9BBTqss971NeVUpmBbzJHDEXJQaMDol4d/woOdq8HKr5V/YVJqdz5f3c4nfIekmhX3toEaZ6t+w6K5zmn/ZQRdeKujtGTGa8HGHaY2HEa1iryWI96dvc045FgdOqRxbQZDDkMjGmw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KvcDsHHKQBvGPhdBF15520xnz8aqRi4H5vfU0eJx9XE=;
- b=A/srxrZKPQs92ueOAoSVOLneYfuejEJ6ffQmuGnXZ+YGt0bGHBA5H1692yYJpmdQ4QNXhOZTYPT/WoL0H0YMLf8Nv/G0KrZfJeh2GJiQYhJwShkg/eZ9v1fLoL9BMGCQyOaf7kqi/N4frmn7+CcmPCcZ2HcS9GDZM9zvfvmmjXqZwl0fWSaxj+qc2zfJK0wfc/YglsCWZ+8wqStx9DcHl/E2VRSZPAHZLTzn8o1NWvQJuylky65fwbFbUiZhD7KKVwR4jPMe5j7KsddOpqGBax2ngGhQVhPL7fDBlN1kgli8e4K+1Uw0uoKMS3ll1BAClLdyoCXvv5Oln8iYyCfRnA==
+ bh=FCUMWnFgRDij/FhFFtE3U9IqeNgArrbzm+Mp4QpWP7E=;
+ b=aLKJlGC8vpeaDnfYvXrI2fmNLQL2LmelmNgOsdrtmU2kEX+92uXnbxMZDBTsLfwzljQuxTWcuIOaYwUYhahmPa49QwWPtQOqCvh2oB87rIgADV8NjH+RU0mg45iPdH2HTg3ddJSy41OUB62BNUgFu5gp10xWdVuqJ+iDVMje4h2iKPDyJ4c+17gKw6KW9WKBS/KkQcyS62n//OfUGGcCgHtZBPKcQw5k+aONaIzp16es2eaHnQz2+V9dfum1QQidnvCMLpjRr4majDgoNpymTZPq9nKHIZBGBJIjAjRnc+viF18YRl2hkCbrFV+49TfAFY7btYgY7BJdt+GAe1wfOw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
  header.d=mt.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KvcDsHHKQBvGPhdBF15520xnz8aqRi4H5vfU0eJx9XE=;
- b=dwYhWGzF4508zkymzdreKEBMTg+ysz30Y8rwxxxA4EqwAFCuON7RZOgSipkZMPaFoxcx+H5TDVDKWtie+pjLQy5Dv/R1fzcVx3gCTnRnmG9lXT+i7M8sopAP3WFy5Bf0d8wteZx9mPsRQTPhJrZ7/TS/NFINFmMwWFgfXumsAHOP6USt7GII86amol7X8cAor3up7MfBHKLO+ZMpPoyI/yR5KId+PUJVlUfI16VxDdKNMVWFvgAy1i+33kQbOUTZNVDlmceG79EXdooG0w5DGuzSAG2b1fF11kKMgvyzY54yp8bCVQ5dNgKkJcQsiW/yDMnKKgy+bC/hGnA8OabfvA==
+ bh=FCUMWnFgRDij/FhFFtE3U9IqeNgArrbzm+Mp4QpWP7E=;
+ b=Vp3zbYd4H3e/KxvJicnxqSyUCXtMP04MGWvEE2RXaZMyvIoP18Zx0c4LZP1kimfQtGh681EFWmejZ7qRsJPVmq72GsWTtNt72jH3bLZ6FcZt1Cffn/R22/ZSzlSWSpNrufj6bsnNFYoAqFsZVMlcbhad5ypg8ymtIWyOroBEVk6tfJoiLOMyHqb7HUbMPeZyVji6T7gPSy3cPYkbafBiE5Et53CuV1i9dIc9RbYfIq5N6IdOfwhZx7q8T4wcv+jF3Z0FHe4QsTg2zXqp6hKkGky0Y+wqhJxIa1SUmIiaJWu/ttm5R+SeaMULPT+HA85Fr3M95fHqCc25K+6M8Cjvlg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=mt.com;
 Received: from DB9PR03MB7180.eurprd03.prod.outlook.com (2603:10a6:10:22d::13)
  by GV1PR03MB8544.eurprd03.prod.outlook.com (2603:10a6:150:9c::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.16; Fri, 20 Feb
- 2026 09:15:27 +0000
+ 2026 09:15:28 +0000
 Received: from DB9PR03MB7180.eurprd03.prod.outlook.com
  ([fe80::6fd2:12a9:4423:8ddc]) by DB9PR03MB7180.eurprd03.prod.outlook.com
  ([fe80::6fd2:12a9:4423:8ddc%6]) with mapi id 15.20.9632.010; Fri, 20 Feb 2026
- 09:15:27 +0000
+ 09:15:28 +0000
 From: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
 To: u-boot@lists.denx.de
 Cc: Wojciech Dubowik <Wojciech.Dubowik@mt.com>, ilias.apalodimas@linaro.org,
  trini@konsulko.com, simon.glass@canonical.com, quentin.schulz@cherry.de
-Subject: [PATCH v7 5/6] binman: DTS: Add dump-signature option for capsules
-Date: Fri, 20 Feb 2026 10:15:15 +0100
-Message-ID: <20260220091518.180641-6-Wojciech.Dubowik@mt.com>
+Subject: [PATCH v7 6/6] test: binman: Add test for pkcs11 signed capsule
+Date: Fri, 20 Feb 2026 10:15:16 +0100
+Message-ID: <20260220091518.180641-7-Wojciech.Dubowik@mt.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260220091518.180641-1-Wojciech.Dubowik@mt.com>
 References: <20260220091518.180641-1-Wojciech.Dubowik@mt.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: ZR2P278CA0004.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:50::8) To DB9PR03MB7180.eurprd03.prod.outlook.com
+X-ClientProxiedBy: ZR2P278CA0013.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:50::17) To DB9PR03MB7180.eurprd03.prod.outlook.com
  (2603:10a6:10:22d::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR03MB7180:EE_|GV1PR03MB8544:EE_
-X-MS-Office365-Filtering-Correlation-Id: 906b3a6e-6f50-4e4d-448f-08de70609661
+X-MS-Office365-Filtering-Correlation-Id: 806d92d7-4881-474f-e0ac-08de70609708
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|10070799003|19092799006|376014|52116014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?q8LbUYN8btzgiXcYpGHzIBgQUPcJiun8MEKSaIHgxP3Q45dWEMQr1tRzp41g?=
- =?us-ascii?Q?Uwxla9PGlkWW4x2kLjg63Z9BscH6qm+T1ZsFSTowk3bd1dHB8dmlLCEyw8io?=
- =?us-ascii?Q?x8Kz77BoCGBxAY4XQTjfCiRA9pR3vSP5/sqDkPlFIZkQdeccpPDjWV0/vCHh?=
- =?us-ascii?Q?BUhBcC4eCIT7SZs5cdGB63xMveZwsfTGpSJv5GWdvai/8O6uF1YEWyurXPr8?=
- =?us-ascii?Q?2N19Hi+MBtjOsY1GOivzDEkRy94oTbbeDXau3ktdmGS9voDjZPVn6IO+YBvx?=
- =?us-ascii?Q?ZP1HX/+Ue0F9vpUKXOVhVYBopovhPD0C6kuDUu6Fnh8okujd+rAZOr5KwXd3?=
- =?us-ascii?Q?CuWyt3/ZW87kF8rZ7HfkWH9CkeVgCKhboNp4P8bAJtl5DTaI5ERVge9DZF7i?=
- =?us-ascii?Q?v7QmrM+FlC9Xb7liPp+4GrNVfHqdwElBFIj8I3jPSOtccBSMFPgEyBtLC4yz?=
- =?us-ascii?Q?eQBQyLZLGIeYtj5IfTjMNp1Uc4PUTuxwmwyikqMb0B66yDOuLpNr5yMgl+x1?=
- =?us-ascii?Q?GLwjq/T4xrY7dtJVQnIp4P29yRw4Xaldx/YOVCctXiwNJskpiXFHfeBz3BSE?=
- =?us-ascii?Q?5+WyUpkbJzNXe3RRKm1siW4A5Unqz1fYSZ/iiYzwkaQ07le7wE5SMHsDdHfs?=
- =?us-ascii?Q?0yQYkXDhJc6SKC+XLAy1til8VEEJ19S1DlZCuPVGwRdCNzySbUgPjGRbKg1D?=
- =?us-ascii?Q?KknJbO0kvcq2kXqH2mKXm4FjR+qqnJ++W0oKQy+avK3uu4UN7Wa+A0S46m5z?=
- =?us-ascii?Q?w0aL7ob5Uy+7d5RbENsCKum/toLObS4QcxD45Cw9Y55eDmiwUfD7zeNcGvLq?=
- =?us-ascii?Q?xtlpdEgB9/Rmj+a21zlfgaIabpFe62jwGqr5opKNYn1Df85dm6Y4mSio5eFP?=
- =?us-ascii?Q?5wbmy0eS5nwhClwdxFY1yNhV69KdM5R5cN4CoR/LmWe8/nkAN8ip9URRicRQ?=
- =?us-ascii?Q?2lG3unpY99JssE3QtltAiYUxtI4bHiFaj/68lhVUkkNmt4Q0ceYcWj/wqpp5?=
- =?us-ascii?Q?/3McasaZkMXMVWfvFWAhtmTjQf6aFMST7npmmL4qRf2VAbo0/X2q3wIwDUbQ?=
- =?us-ascii?Q?XTV4lKOyZgv5jv59JTxOc/0Ezpd674uwWPf9lOAcF7lybcaulMVuRmWEdiRJ?=
- =?us-ascii?Q?iH0kHqoeyF3Rpn8yagViAi1JhIOm/aJHM/V9UDDkb2Ysdt1omYBWVt2Sh9iF?=
- =?us-ascii?Q?JAvP2ZmUwRAXlKExX5FhfD+s8/ujbV7B6Dh4mXBdkjogd90F5+j3vP23aD0Z?=
- =?us-ascii?Q?o9ZaKVt9mENJHTsI0WLLxRmuhS75LZSWRrRm6MV49DN8KPF+/Y8Vgh8BC5UA?=
- =?us-ascii?Q?mobZVRJsRaDJX2QglGZmG27bOPc9o9rpNCvdIeLOzIXZJB70IBwxcauTpJVE?=
- =?us-ascii?Q?QWBd3VhCUSKMPxvTA6gg4fs3lGjw9Qc3FUBXoXHdphE48CDWXNCvn8wgkX+s?=
- =?us-ascii?Q?ME/ldhAXzAVYg+hDmPPqTGsJCpsVmCGVsIGBHGPALEKdCKkGvn+i5K07uzVJ?=
- =?us-ascii?Q?o0iPFn+536P7WbgV4bahnFHEdIHSvClyBhvK7VtexstanCa++xzGGdIyZZ7J?=
- =?us-ascii?Q?2mFnZ5f+1Id5I6tmplI=3D?=
+ ARA:13230040|366016|10070799003|19092799006|376014|52116014|1800799024|7142099003;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?T6bxNuB4wfoggwu+jLdpt3YA8yRCVhok0eyLJ/OXZwpaEDH7haAReqs5uhp/?=
+ =?us-ascii?Q?avEir1J0KS7SFXKy4NaAuX/6ERGI0x6R6rcNrW3qTs08OmnJyli2TASUWQHd?=
+ =?us-ascii?Q?qTQxPTmYo066sA5n4wKfZ4Cp8foz7qUP/Jx4KQ73bTJYYEVmZ83OzsUUgHcr?=
+ =?us-ascii?Q?l0oppnZ0T+EoMNhFp0Gysh1rL1cTUHh1NsP4SLPl5CiSa+Jl2FlMPgC7bXTB?=
+ =?us-ascii?Q?HVlIP0IfObRDcoS0jekhJUKQJHGgP1UqzaBeTmGVRoBoELU4ieiTqidSfLxk?=
+ =?us-ascii?Q?2+mr9lVMLBN4EzNkSrYQlDNOti38AUXUBx/JemeWY+r28A/rioTQjLqM/H+J?=
+ =?us-ascii?Q?f5CpddSDCrqM5p9z90fYievuOZ3fzAIDVaqR4r+dC1w55vJjhjBYt4zkF3py?=
+ =?us-ascii?Q?hEhiLYLkEoQJDlnyyWBOxTU2XT7igH9Sh7CvFQPVVt+MuroEPwhc+9i8h02H?=
+ =?us-ascii?Q?GxjNgtJf3K72V140rATPhtmzNmm+4XMNC1KuY/KLoVTB52zcb7NKYzP+nsLY?=
+ =?us-ascii?Q?eRJkqHj7V3wx3akPqT1j0LSiHCfTIY+r/gJo2kkimEBDseOPIZ5D7B0UpD4W?=
+ =?us-ascii?Q?vguRxGXYoaPO1WIELUMXQFDi3Zb59q3P0rEsC5gO6EDLuKgnMtSLtlJLbD7u?=
+ =?us-ascii?Q?3Ka3753bgYJxlxfvFe+g1P2dQJwZ2JOd4cfRJkrIQx7bBygfYPijErelPzh0?=
+ =?us-ascii?Q?2cpw0l4Mwws+xCacBtNgUXUgga9DNhT4vVt17sZ7P85FaJU7XZ7X7mnb1qTO?=
+ =?us-ascii?Q?Bu4gwY7L7Mw5TFI8+S7mkLK9f5ZOc5/WU4z749l3h3egRjvvFRfxUORiQjDC?=
+ =?us-ascii?Q?aTkZkmil0fhmZ8Ygm2DslbVVCXSlepDkSdNugPEBsaxhRq6wiNY6CSZlRG91?=
+ =?us-ascii?Q?UENDNsNt58NHDuH6WrCd2LTL9mFvHB+MLdG3FrMZ/r5O08wcB72ELWexzo8c?=
+ =?us-ascii?Q?qTRD+rm65spMtysmk5C1csM/8rP2au4yQ5/g6cdv1Pd6aP+ppFMDTNCA+Wc/?=
+ =?us-ascii?Q?h9D3wZTZ61n1mjQkgeWy/zL8sQQMq7jeBWUYeVPdJwOKEC8lW/CDik/CWAgq?=
+ =?us-ascii?Q?9U74a4V/OAXWQZARVcQnNYMChaOk2VSwmatl3Q1/y64ic65gR4Hc70xY5eAp?=
+ =?us-ascii?Q?G/zaRLhnw1Ss96PpGL52MIIckRlc3fIQLpG7aZfyziDL9m32SdjKzK9WtmHW?=
+ =?us-ascii?Q?fHMxtT82HhIroFWEXpArqvss4l2HfC0s+e7CzMTFlXmon6/VgqP5by2HvNRw?=
+ =?us-ascii?Q?QKenIfLBdk3czjq/EUnRdHiGdS3rAcujGQU4r+m7NuJ6vfPIUID25Luj+M3j?=
+ =?us-ascii?Q?mMCAYuYEftlyxl/Q7XEpw7JhjKeUtqN624+I0TYzY24ODLBYvjm3rCtDG8rN?=
+ =?us-ascii?Q?4c5V7DVLEehFjuqxkObikmjiKAb0T+l71XXXq1QsL1DfaoqEzVwsXCpSfQEf?=
+ =?us-ascii?Q?mQcvhGGXr+cTolgluVdA4YzoBl0Q+hv9fihO9jfsLZZCfhG/JlUORRyybfKX?=
+ =?us-ascii?Q?42P2MjSsLHL5aaNqWKXy+kGTM5bF9ViUTvMRQU0p0MYrtpLyb/6+ayO9F2kF?=
+ =?us-ascii?Q?YBjgHBgeQ/g7QYC2mFE=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR03MB7180.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(19092799006)(376014)(52116014)(1800799024);
+ SFS:(13230040)(366016)(10070799003)(19092799006)(376014)(52116014)(1800799024)(7142099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iChipkUA2WX8zhsM0e+FlFrrttdOlIvcHZm6+KcPKms68W/fxXAjOXIFLlef?=
- =?us-ascii?Q?JnWkaGhRqyc2TfRdOxm2qIIooMnhJbp/8gDDbfzmHcPYtuMlXIaQV9RriwyF?=
- =?us-ascii?Q?AkebfFTgnJuUPdatsv46x7AboM/LqRrxPKBJnsGkPDpm8qqgO9DDvqpKslPD?=
- =?us-ascii?Q?gBtNXicTzeXxYSsYJ7pdv8K39FwdUy5NaGEsatTNziHykWptF6vJh8lP6yOb?=
- =?us-ascii?Q?WFA5RMgnRF5qr9GXQsq1dcIaj9G/uchKqUKSyniQHHqvJQ54gZ0sVqeUnwP5?=
- =?us-ascii?Q?BdXBPfoRLylutKWOJrRGdlB7vek2Fu0DXn4lauovCHbwcupFjaemaoENCiuA?=
- =?us-ascii?Q?lUU/UoAXK5Di7txQeMLOxG8JQHUZTgful3O7+vFff3OIhQ4umD3Mz7h78SJQ?=
- =?us-ascii?Q?yroS6/KD5kGTUZJV/3jrWLfP9bSCV8NM/s5uoeT46l8doGmzHSOT2r4t2ASs?=
- =?us-ascii?Q?fhpuOZYrb6iidqbBeKUDJz4b/CSSWxUigy2CShPGOCW9orbBLpkfVW4sq2gH?=
- =?us-ascii?Q?NyPXv4jeVeNgIaGWv0wICSbUfUSjYE8C8cLcYetJoTyuThEvennCGdSLaOT0?=
- =?us-ascii?Q?3J8+9kkuyVZ0aEebsgUvosk+lH0MsEKub3jQVnLujfoqxWKvedfg01bVsoU5?=
- =?us-ascii?Q?ic5mioWMupsdpjxgoXXpgwk0JwdAPIW9VYcbUtNoFYeK8vNYbxXztuGLP1YS?=
- =?us-ascii?Q?pQpax2FHLLxlohCorh8ASuD1GdVHSZna6c7i3R/6KtEaIOGFWFwMpr8ItiEo?=
- =?us-ascii?Q?WVnqvMxkwappLjebBGNN/B9NHlodZXKii3YMasANtWUJHwJN8Mh74tFJTtZ2?=
- =?us-ascii?Q?dVPoikE3x8AlCl3Af7q7ELOOXl7YQCTdMcvKZJjjWUlX/U9jWr+Vq+HgJiUm?=
- =?us-ascii?Q?RdbrzOcpFB3JzqzvLhPgSo0n2w/6H8es4FE39tjntR3anV3sMaUDUEOkbGwU?=
- =?us-ascii?Q?F1beyFtVMJSRVve8me8iHatB3ho/46D86HLpGiASCk9XeccIWYiGxMYLVJCC?=
- =?us-ascii?Q?2InzOkl74ixQuRy2jXq2WqQYiKSM7Y3lkjPj7jjx8gtcDIrCKy1Tx/pRycPf?=
- =?us-ascii?Q?3xWB4Zpmv+ETNS2sxfmxS7y0LWyggUoVoe/AkzIWo8qoYvklrq1kZ4lpFtzA?=
- =?us-ascii?Q?T2Y7ziawUCgG83srCTHwrEp6qivg9dB0mgwdFUh1r52CAyT00ftMtaw/EFvv?=
- =?us-ascii?Q?E2F7O1Twe8KTsdD2mBiQLb6J+/8fa+uTepTW6esQcq3W60/QlSCCFZU+LmLe?=
- =?us-ascii?Q?v+3yOuUbgV88glWVT96vkFG0Nt0FFbDWjpl1pV4uWz2zlwtessiQDA35XVVQ?=
- =?us-ascii?Q?jiF8bP4q8eWlAmr8C0UQ47Fhdgq+vOSaVz6z2sNv1/PjuFdUOrFhwS27pqP1?=
- =?us-ascii?Q?M4GKRd42lN2w2k0JnKFtb105/Fg9fbDWnb/L+3xkFxz8u8SrdlqpkLAny7Au?=
- =?us-ascii?Q?nVICf+AwyyuSwKaYbnlTBVcie7Gwaa7q86WVfrhUTvQudsSOCU75mcSQbikP?=
- =?us-ascii?Q?yt28EiR45Oap+hmOz855hhY7xIYxOP7l0/+hJ4c0UBbKVK2EllnWXjJw4YaW?=
- =?us-ascii?Q?HPOqYzbp+nKnNDEzYcJM195ZgNqlQ+8amyQpFQI/u6UL9rsM0LiG3+YXnU3c?=
- =?us-ascii?Q?Ufxxh/lvKFvF0qeNPlUyy/I3XIPwjghLaTwbPvH1bEe14XwRdz2bR558YU4P?=
- =?us-ascii?Q?0KdKWqTMvH1kh9tsZmaaIlsanHvt+512/sVmmW2NruVbipfc6wiOYK/cR33d?=
- =?us-ascii?Q?Ei6fLiO05jpfwXg3rw5Sf43tcbEWGIb9B1UY3O3BwgfA0GzUXBUSkBucPzMN?=
-X-MS-Exchange-AntiSpam-MessageData-1: gykNJwFRcJyFvHF0QFq/6CGoNbOL5TjhTas=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ouQjp61yR3goLngi+TinSf38d32lGy0aOza+lLKJ53h5qhHfd0d8RU3S6yeA?=
+ =?us-ascii?Q?q2FkdR9buUP3sml8gDNo+YoiO/T8nKWBgEGw30S/C0qUlcaHcpfGzFP6obHh?=
+ =?us-ascii?Q?v+tKW4cgoYXihxzif/4k5Fi5vs8WkoMK2P5HDXvKb7jteIGf6RGsdDgLk7IN?=
+ =?us-ascii?Q?ZAwjhBtHEIjSg5dnMK8wA0weYVWEuVl4U+4DxXZDK2GB/FJGLlSoy+PLJ43S?=
+ =?us-ascii?Q?YR0Un3fnBX5HAuMCKuv0QF5TA+81QP66SOQkDreAo4NpB606OOEv+iHtWM3f?=
+ =?us-ascii?Q?lpE9WBk79lyxLhp3bZUOnU1WcWLV1qsJ1N31iYQbaWW7tY6sRkJ3x8z624cH?=
+ =?us-ascii?Q?TO0I5MTxoiArquWZjW3vDE0Km/pyBzfSrhDEb3+fbbTWX+dDZIOJZqk4s+0t?=
+ =?us-ascii?Q?9b5wxIspNXynC8wJ1438le+/rR64uHSX3mXMt9fImxUVvs0OiwgE3wx9m/a3?=
+ =?us-ascii?Q?HN/IkHpx8zEuRFfHY4PPqwR2uvXb/eRURePGj9Vd7CJQPRcsLPC6IAOk96Ra?=
+ =?us-ascii?Q?/gT8iRimOw5gYoScplWEpUtvUwVhZZY/YtI15iL1V+/rPZuhRSJSogKMg9ql?=
+ =?us-ascii?Q?ju+4u9hi6OWyrsBYvLjrDPrVrvefLEDPS4qSojkjpnkK4Q8RO4vbSoNTxU+r?=
+ =?us-ascii?Q?nSNb5DHYoHwqW0DSIW3HuhvO5FESsNtk8izxStt4LZ5hVibdw6tVotOmJcwb?=
+ =?us-ascii?Q?20PZv8JVXaVJRuqIHKItHMxsWj2TFH75OaOiPTV8ooOCLqgJSv4h/D5x8o4V?=
+ =?us-ascii?Q?ebCNY/5JcnWTSMMfp66yzePLRMyXRaXGMGeuhjQ7rPMkHNt2Qq029UgPOFP8?=
+ =?us-ascii?Q?MAXndEmIfQMH9L6wx2m0UPUGkFwbnIcDp33jXmJ6ygJ1wGvdgud1d6kPt/tC?=
+ =?us-ascii?Q?GeYZBswT9fdwZ1RvsfaP+5M3aO2FhG1WE6E1gbKio6IaG+UMfuzT2q3RBuT6?=
+ =?us-ascii?Q?pFSOmE0wwgiveDNh1p2ehL708oirhlSA6TXmFun4JlBJ9m4qd5AjgXn5ScIn?=
+ =?us-ascii?Q?14DWvwh2C5znJ56kQp83kBuDN/cLFiKqS63ejn9zSPhnasIuE0iSKJB/oT/S?=
+ =?us-ascii?Q?rqbFfIHsdN4Z8WB9JdmCZyxLgMqXtmEUC9qoVst9ThjPFIDscLLl614zjOtT?=
+ =?us-ascii?Q?oCEnNJOB5kxblXbENdpGv6FshcYRAboOOBLIP4zbLBxLI2zFpW0nNYUb9ugI?=
+ =?us-ascii?Q?pYapHFHyOjeRMEeEAFVSmQs4XHt6dW1F1nqTgXTV3cXWAotrnRCNYJdEQHc6?=
+ =?us-ascii?Q?OKgkmj3boW03xw30ArQ5qYa6Iy7z2KKcXIamYSbmoNVpinZVRh90rpSu+dCk?=
+ =?us-ascii?Q?MTL5V9CM55cRo28phkrf+OxQVrt2iIWj3iYgOaI8u4ZH7O/j5hk+PEAFBYhV?=
+ =?us-ascii?Q?UIe77ECWG+Hdv8ZHtmhVEzxqfXD/D4fBBAtNq6XT7J7GG+aMGnuQp+nDRUtT?=
+ =?us-ascii?Q?0LiqAEAVo50qOE8+ewcWh7pp+QEcXTkRqlIJ4tDAcTQbT4S2VbbMYBfpHLPm?=
+ =?us-ascii?Q?orUM8wYaqXnTs4v0VW2LTtaGFBYPgzE03/8dbnriMVwYLgUIztVOcRo9LURg?=
+ =?us-ascii?Q?gluOW7PBaVnay9ewMFtektHQH19PFr+UNM5wplbwaf4Ubl3CjGicQTphqGVh?=
+ =?us-ascii?Q?ZX6wr4dTou0niQzt7oox5HVAbFTsmRv9KeoA+Vov0VfE2a9KedFcbPDPNpIb?=
+ =?us-ascii?Q?yey0GygzRgWz23DGg6jNksC0Q2wAH8jSLsjjm9I7WXN1GQlWOTDO5AtuMZXs?=
+ =?us-ascii?Q?hT108+89CKqJGbxAk4Su083TocIwV5o4V3wb7Y5PKkMpF2p34+SAViky0cfJ?=
+X-MS-Exchange-AntiSpam-MessageData-1: soESOt+Vxm6Qi1de1zsOf4oGQ4bPwM4FnLY=
 X-OriginatorOrg: mt.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 906b3a6e-6f50-4e4d-448f-08de70609661
+X-MS-Exchange-CrossTenant-Network-Message-Id: 806d92d7-4881-474f-e0ac-08de70609708
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR03MB7180.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2026 09:15:27.6507 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2026 09:15:28.7217 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dABG+mEiYdxX+n1YalrriVxLhkHZde1nfxyt6ZNYmqTxylvEWRH9+rQjjHylwv+MiNj0Gr1oYJc8oVlCR7YTNg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: yY2jvTS55oY3lHWfrsJKLWY1sppsn5iajzbrH9Y6/3mJsjPl9t61yJLHcH+7lnSjKInHDxxV/LsSS4RuFyJ7qw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB8544
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,72 +164,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mkeficapsule can dump signature for signed capsules. It can
-be used in test to validate signature i.e. with openssl.
-Add an entry for device tree node.
+Test pkcs11 URI support for UEFI capsule generation. Both
+public certificate and private key are used over pkcs11
+protocol.
+Pkcs11-tool has been introduced as softhsm tool doesn't have
+functionality to import certificates in commonly distributed
+version (only in the latest).
 
 Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 ---
- tools/binman/entries.rst          | 4 ++++
- tools/binman/etype/efi_capsule.py | 9 ++++++++-
- 2 files changed, 12 insertions(+), 1 deletion(-)
+ tools/binman/btool/p11_kit.py                 | 21 ++++++
+ tools/binman/btool/pkcs11_tool.py             | 21 ++++++
+ tools/binman/ftest.py                         | 73 +++++++++++++++++++
+ .../binman/test/351_capsule_signed_pkcs11.dts | 22 ++++++
+ 4 files changed, 137 insertions(+)
+ create mode 100644 tools/binman/btool/p11_kit.py
+ create mode 100644 tools/binman/btool/pkcs11_tool.py
+ create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
 
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index a81fcbd3891f..91f855f6d7a3 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -552,6 +552,10 @@ Properties / Entry arguments:
-     - public-key-cert: Path to PEM formatted .crt public key certificate
-       file. Mandatory property for generating signed capsules.
-     - oem-flags - OEM flags to be passed through capsule header.
-+    - dump-signature: Optional boolean (default: false). Instruct
-+      mkeficapsule to write signature data to a separate file. The
-+      filename will be <capsule file>.p7. It might be used to verify
-+      capsule authentication with external tools.
+diff --git a/tools/binman/btool/p11_kit.py b/tools/binman/btool/p11_kit.py
+new file mode 100644
+index 000000000000..9d8d5d848b44
+--- /dev/null
++++ b/tools/binman/btool/p11_kit.py
+@@ -0,0 +1,21 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++# Copyright 2026 Mettler Toledo Technologies GmbH
++#
++"""Bintool implementation for p11-kit"""
++
++from binman import bintool
++
++
++class Bintoolp11_kit(bintool.Bintool):
++    """p11-kit -- support tool for pkcs#11 libraries"""
++    def __init__(self, name):
++        super().__init__('p11-kit',
++                         'Pkcs11 library modules tool',
++                         version_args='list modules')
++
++    def fetch(self, method):
++        """Install p11-kit via APT """
++        if method != bintool.FETCH_BIN:
++            return None
++
++        return self.apt_install('p11-kit')
+diff --git a/tools/binman/btool/pkcs11_tool.py b/tools/binman/btool/pkcs11_tool.py
+new file mode 100644
+index 000000000000..673c0ea0ac35
+--- /dev/null
++++ b/tools/binman/btool/pkcs11_tool.py
+@@ -0,0 +1,21 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++# Copyright 2026 Mettler Toledo Technologies GmbH
++#
++"""Bintool implementation for pkcs11-tool"""
++
++from binman import bintool
++
++
++class Bintoolpkcs11_tool(bintool.Bintool):
++    """pkcs11-tool -- support tool for managing pkcs#11 tokens"""
++    def __init__(self, name):
++        super().__init__('pkcs11-tool',
++                         'PKCS #11 tokens managing tool',
++                         version_args='--show-info')
++
++    def fetch(self, method):
++        """Install opensc via APT """
++        if method != bintool.FETCH_BIN:
++            return None
++
++        return self.apt_install('opensc')
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index a53e37f31b3e..d47364162188 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -7,6 +7,7 @@
+ #    python -m unittest func_test.TestFunctional.testHelp
  
- Since this is a subclass of Entry_section, all properties of the parent
- class also apply here. Except for the properties stated as mandatory, the
-diff --git a/tools/binman/etype/efi_capsule.py b/tools/binman/etype/efi_capsule.py
-index 3b30c12ea514..022d57ee5519 100644
---- a/tools/binman/etype/efi_capsule.py
-+++ b/tools/binman/etype/efi_capsule.py
-@@ -53,6 +53,10 @@ class Entry_efi_capsule(Entry_section):
-         - public-key-cert: Path to PEM formatted .crt public key certificate
-           file. Mandatory property for generating signed capsules.
-         - oem-flags - OEM flags to be passed through capsule header.
-+        - dump-signature: Optional boolean (default: false). Instruct
-+          mkeficapsule to write signature data to a separate file. The
-+          filename will be <capsule file>.p7. It might be used to verify
-+          capsule authentication with external tools.
+ import collections
++import configparser
+ import glob
+ import gzip
+ import hashlib
+@@ -7532,6 +7533,78 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-     Since this is a subclass of Entry_section, all properties of the parent
-     class also apply here. Except for the properties stated as mandatory, the
-@@ -101,6 +105,7 @@ class Entry_efi_capsule(Entry_section):
-         self.private_key = ''
-         self.public_key_cert = ''
-         self.auth = 0
-+        self.dump_signature = False
+         self._CheckCapsule(data, signed_capsule=True)
  
-     def ReadNode(self):
-         super().ReadNode()
-@@ -111,6 +116,7 @@ class Entry_efi_capsule(Entry_section):
-         self.hardware_instance = fdt_util.GetInt(self._node, 'hardware-instance')
-         self.monotonic_count = fdt_util.GetInt(self._node, 'monotonic-count')
-         self.oem_flags = fdt_util.GetInt(self._node, 'oem-flags')
-+        self.dump_signature = fdt_util.GetBool(self._node, 'dump-signature')
- 
-         self.private_key = fdt_util.GetString(self._node, 'private-key')
-         self.public_key_cert = fdt_util.GetString(self._node, 'public-key-cert')
-@@ -150,7 +156,8 @@ class Entry_efi_capsule(Entry_section):
-                                                  public_key_cert,
-                                                  self.monotonic_count,
-                                                  self.fw_version,
--                                                 self.oem_flags)
-+                                                 self.oem_flags,
-+                                                 self.dump_signature)
-         if ret is not None:
-             return tools.read_file(capsule_fname)
-         else:
++    def testPkcs11SignedCapsuleGen(self):
++        """Test generation of EFI capsule (with PKCS11)"""
++        data = tools.read_file(self.TestFile("key.key"))
++        private_key = self._MakeInputFile("key.key", data)
++        data = tools.read_file(self.TestFile("key.pem"))
++        cert_file = self._MakeInputFile("key.crt", data)
++
++        softhsm2_util = bintool.Bintool.create('softhsm2_util')
++        self._CheckBintool(softhsm2_util)
++
++        pkcs11_tool = bintool.Bintool.create('pkcs11-tool')
++        self._CheckBintool(pkcs11_tool)
++
++        prefix = "testPkcs11SignedCapsuleGen."
++        # Configure SoftHSMv2
++        data = tools.read_file(self.TestFile('340_softhsm2.conf'))
++        softhsm2_conf = self._MakeInputFile(f'{prefix}softhsm2.conf', data)
++        softhsm2_tokens_dir = self._MakeInputDir(f'{prefix}softhsm2.tokens')
++
++        with open(softhsm2_conf, 'a') as f:
++            f.write(f'directories.tokendir = {softhsm2_tokens_dir}\n')
++
++        # Find the path to softhsm2 library
++        p11_kit = bintool.Bintool.create('p11-kit')
++        self._CheckBintool(p11_kit)
++
++        p11_kit_config = configparser.ConfigParser()
++        out = tools.run('p11-kit', 'print-config')
++        p11_kit_config.read_string(out)
++        softhsm2_lib = p11_kit_config.get('softhsm2', 'module',
++                                           fallback=None)
++        self.assertIsNotNone(softhsm2_lib)
++
++        with unittest.mock.patch.dict('os.environ',
++                                      {'SOFTHSM2_CONF': softhsm2_conf,
++                                       'PKCS11_MODULE_PATH': softhsm2_lib}):
++                tools.run('softhsm2-util', '--init-token', '--free', '--label',
++                          'U-Boot token', '--pin', '1111', '--so-pin',
++                          '222222')
++                tools.run('pkcs11-tool', '--module', softhsm2_lib,
++                          '--write-object', cert_file, '--pin', '1111',
++                          '--type', 'cert', '--id', '999999', '--label',
++                          'test_cert', '--login')
++                tools.run('softhsm2-util', '--import', private_key, '--token',
++                          'U-Boot token', '--label', 'test_key', '--id', '999999',
++                          '--pin', '1111')
++                data = self._DoReadFile('351_capsule_signed_pkcs11.dts')
++
++        self._CheckCapsule(data, signed_capsule=True)
++
++        hdr = self._GetCapsuleHeaders(data)
++        monotonic_count = hdr['EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT']
++
++        # UEFI standard requires that signature is checked over payload followed
++        # by a monotonic count as little endian 64-bit integer.
++        sig_input = self._MakeInputFile("sig_input", EFI_CAPSULE_DATA)
++        with open(sig_input, 'ab') as f:
++            f.write(struct.pack('<Q', int(monotonic_count, 16)))
++
++        # Verify dumped capsule signature dumped by meficapsule during
++        # generation
++        openssl = bintool.Bintool.create('openssl')
++        self._CheckBintool(openssl)
++        openssl_args = ['smime', '-verify', '-inform', 'DER',
++                        '-in', tools.get_output_filename('capsule.efi-capsule.p7'),
++                        '-content', sig_input, '-CAfile', cert_file,
++                        '-no_check_time',
++                        '-out', tools.get_output_filename('decoded-capsule.bin')]
++        result = openssl.run_cmd_result(*openssl_args)
++        self.assertIsNotNone(result.stdout)
++        self.assertIn('Verification successful', result.stderr)
++
+     def testCapsuleGenVersionSupport(self):
+         """Test generation of EFI capsule with version support"""
+         data = self._DoReadFile('313_capsule_version.dts')
+diff --git a/tools/binman/test/351_capsule_signed_pkcs11.dts b/tools/binman/test/351_capsule_signed_pkcs11.dts
+new file mode 100644
+index 000000000000..bb87e18a15fe
+--- /dev/null
++++ b/tools/binman/test/351_capsule_signed_pkcs11.dts
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	binman {
++		efi-capsule {
++			image-index = <0x1>;
++			/* Image GUID for testing capsule update */
++			image-guid = "binman-test";
++			hardware-instance = <0x0>;
++			monotonic-count = <0x1>;
++			dump-signature;
++			private-key = "pkcs11:token=U-Boot%20token;object=test_key;type=private;pin-value=1111";
++			public-key-cert = "pkcs11:token=U-Boot%20token;object=test_cert;type=cert;pin-value=1111";
++
++			blob {
++				filename = "capsule_input.bin";
++			};
++		};
++	};
++};
 -- 
 2.47.3
 
