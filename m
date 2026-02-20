@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3AA4C55164
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D51FC54FCC
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:02:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7E0483A5E;
-	Fri, 20 Feb 2026 10:00:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7AD1F83D17;
+	Fri, 20 Feb 2026 10:02:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ysqh2y3I";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="duxMSdKw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFECF83AC5; Fri, 20 Feb 2026 10:00:54 +0100 (CET)
+ id 8C1E583D2E; Fri, 20 Feb 2026 10:02:11 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D02E083A41
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:00:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAB9583A41
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:02:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C3D46415F4;
- Fri, 20 Feb 2026 09:00:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3DC5C116C6;
- Fri, 20 Feb 2026 09:00:43 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 4F74143F9C;
+ Fri, 20 Feb 2026 09:02:07 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54E03C116C6;
+ Fri, 20 Feb 2026 09:02:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771578049;
- bh=vpktnik3Hm4UVmd1V4w8W7eoBr5WPN3EMvaEmouuQpw=;
+ s=k20201202; t=1771578127;
+ bh=wKNoOoR06oTnL5cVgk/FRJFte0/jtMWZtTpKnkY66LE=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Ysqh2y3Iiuv2sH+kTvbRX+OX0olrO83UdSr/38nHMicEXz+10qAaqkO2BnJqNC615
- qyra3oVgKzryAo+3C8qBL5crfQ/GwqxVI5hNHrULjy1RuIxGvEt+Xnr98W6ZdYnz73
- u78F2tFiVfHsMVIGgKfZX4/hFn67oTdD4dbKfY/whkhfHPQqxYwlhr7l8HByQhH1dR
- 2+3/2fmxtzbuLXtXrdeLL+2ACexYYgIzujJQAmzKDwzij21Ta/kBzZeDO4zSvl/Vot
- QRCi0FI23oQK1CM5gQ36XmpLHkI4o5Ykj26up8RkQ+W8tiKYl6epyK8p/NPUyVoq2c
- 89BaBS+CQO2eA==
-Date: Fri, 20 Feb 2026 14:30:40 +0530
+ b=duxMSdKwxmj9oEFS0D60v81b4RbpkSpIIKVuvg3a4SB3T/2UIjWtFXbjTwgYg4P/P
+ qkDZ+xJPTvvL5L2cEpmTHtMDnAbcB3J7wS+hJ/NoHmUUyCEU63djL8wRmhlb38JcZ9
+ 7wtgJIRwVja9caLE1fMczcJ99o8RNYpFztrLH+nwoLZpzQU/07MiwVUwjEnvis7SOn
+ 0gd/QAFpijDnIer7Obwo3XtTSEgphPsFcPbE3ZPh3sUJzl5VnFTFFrI7Ls7cLJscdx
+ vFh5AeDwjyBvaOMV014Zbxbg0PjHjEu5pDZaWkczq9Hg0XqTXYbqNHFGty6BmW44kh
+ PsmeWGIth/Pdg==
+Date: Fri, 20 Feb 2026 14:31:56 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 Cc: casey.connolly@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io,
@@ -52,15 +52,15 @@ Cc: casey.connolly@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io,
  varadarajan.narayanan@oss.qualcomm.com, rui.silva@linaro.org,
  ilias.apalodimas@linaro.org, me@samcday.com,
  marek.vasut+renesas@mailbox.org
-Subject: Re: [PATCH v8 1/4] power-domain: Add QCOM RPMH Power Domain Driver
- Support
-Message-ID: <aZgiuJkx1gZUZ7CS@sumit-xelite>
+Subject: Re: [PATCH v8 2/4] power-domain: Add warning when power-domain
+ driver is missing
+Message-ID: <aZgjBLn0fiaXL6rY@sumit-xelite>
 References: <20260213111009.1254360-1-aswin.murugan@oss.qualcomm.com>
- <20260213111009.1254360-2-aswin.murugan@oss.qualcomm.com>
+ <20260213111009.1254360-3-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260213111009.1254360-2-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260213111009.1254360-3-aswin.murugan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,374 +77,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 13, 2026 at 04:40:06PM +0530, Aswin Murugan wrote:
-> From: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+On Fri, Feb 13, 2026 at 04:40:07PM +0530, Aswin Murugan wrote:
+> Update dev_power_domain_ctrl() to log a warning if the power-domain
+> driver is not found (-ENODEV). Return 0 in this case to allow continued
+> execution, while preserving error handling for other failures.
 > 
-> Added support for Qualcomm RPMH power domain driver, responsible
-> for managing power domains on Qualcomm SoCs. This is a port of
-> the Linux RPMHPD driver [1] and sa8775p related changes. The
-> power domain driver currently has support to power on and off
-> MMCX power domain of sa8775p; support for other soc entries power
-> domains are stubbed, in future, the required soc support can be
-> added.
-> 
-> [1]:
-> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/pmdomain/qcom/rpmhpd.c?id=3d25d46a255a83f94d7d4d4216f38aafc8e116b
-> 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+> Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
-> v8:
-> - Renamed Kconfig option from QCOM_POWER_DOMAIN to QCOM_RPMH_POWER_DOMAIN
->   for better specificity as requested in review feedback
->
+> Changes in v8:
+> - No changes in v8
 
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
-> v7:
-> - No changes to this patch in v7
 > 
-> v6:
-> - Initialized ret with 0 in rpmhpd_probe()
+> Changes in v7:
+> - Cleaned up the warning logic in drivers/power/domain/power-domain-uclass.c
+>   when power-domain driver is missing
 > 
-> v5:
-> - Changed the first argument passed to rpmh_write as pd->dev
-> - Added (ulong) casting in rpmhpd_match_table to address the warning.
-> 
-> v4:
-> - Added all SoC entries from the Linux driver and stubbed it
-> - Removed "qcom_rpmhpd" driver
-> - Removed unused members in struct rpmhpd
-> 
-> v3:
-> - No changes to this patch in v3
-> 
-> v2:
-> - Added ARCH_SNAPDRAGON dependency to QCOM_POWER_DOMAIN Kconfig
-> - In qcom-rpmhpd driver, the un-supported power domains are handled with warning
->   in rpmhpd_power_on() & rpmhpd_power_off()
+> Changes in v6:
+> - Newly added the change in drivers/power/domain/power-domain-uclass.c to give warning
+>   when power-domain driver is missing
 > ---
->  drivers/power/domain/Kconfig       |   8 +
->  drivers/power/domain/Makefile      |   1 +
->  drivers/power/domain/qcom-rpmhpd.c | 278 +++++++++++++++++++++++++++++
->  3 files changed, 287 insertions(+)
->  create mode 100644 drivers/power/domain/qcom-rpmhpd.c
+>  drivers/power/domain/power-domain-uclass.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
 > 
-> diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-> index 935f282d6c5..9fc2f5f020d 100644
-> --- a/drivers/power/domain/Kconfig
-> +++ b/drivers/power/domain/Kconfig
-> @@ -90,6 +90,14 @@ config MESON_SECURE_POWER_DOMAIN
->  	  Enable support for manipulating Amlogic Meson Secure power domains.
->  	  Support for Amlogic A1 series.
->  
-> +config QCOM_RPMH_POWER_DOMAIN
-> +	bool "Enable the QCOM RPMH Power domain driver"
-> +	depends on POWER_DOMAIN && ARCH_SNAPDRAGON
-> +	help
-> +	  Generic RPMH power domain implementation for QCOM devices.
-> +	  The RPMH power domain driver is responsible for managing power
-> +	  domains on Qualcomm SoCs.
-> +
->  config SANDBOX_POWER_DOMAIN
->  	bool "Enable the sandbox power domain test driver"
->  	depends on POWER_DOMAIN && SANDBOX
-> diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/Makefile
-> index b2c0bd8a61a..f373fc01395 100644
-> --- a/drivers/power/domain/Makefile
-> +++ b/drivers/power/domain/Makefile
-> @@ -23,3 +23,4 @@ obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
->  obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
->  obj-$(CONFIG_TI_OMAP_PRM_POWER_DOMAIN) += ti-omap-prm.o
->  obj-$(CONFIG_ZYNQMP_POWER_DOMAIN) += zynqmp-power-domain.o
-> +obj-$(CONFIG_QCOM_RPMH_POWER_DOMAIN) += qcom-rpmhpd.o
-> diff --git a/drivers/power/domain/qcom-rpmhpd.c b/drivers/power/domain/qcom-rpmhpd.c
-> new file mode 100644
-> index 00000000000..f51bc9a4bbb
-> --- /dev/null
-> +++ b/drivers/power/domain/qcom-rpmhpd.c
-> @@ -0,0 +1,278 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +// Copyright (c) 2018, The Linux Foundation. All rights reserved.
-> +// Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
-> +
-> +#include <dm.h>
-> +#include <dm/lists.h>
-> +#include <power-domain.h>
-> +#include <asm/io.h>
-> +#include <linux/errno.h>
-> +
-> +#include <power-domain-uclass.h>
-> +#include <soc/qcom/cmd-db.h>
-> +#include <soc/qcom/rpmh.h>
-> +#include <dt-bindings/power/qcom-rpmpd.h>
+> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/domain/power-domain-uclass.c
+> index d9fa8ad4bd2..52f56f57658 100644
+> --- a/drivers/power/domain/power-domain-uclass.c
+> +++ b/drivers/power/domain/power-domain-uclass.c
+> @@ -10,6 +10,7 @@
+>  #include <malloc.h>
+>  #include <power-domain.h>
+>  #include <power-domain-uclass.h>
 > +#include <dm/device_compat.h>
+>  #include <dm/device-internal.h>
+>  
+>  struct power_domain_priv {
+> @@ -184,6 +185,12 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
+>  					    "#power-domain-cells", 0);
+>  	for (i = 0; i < count; i++) {
+>  		ret = power_domain_get_by_index(dev, &pd, i);
 > +
-> +#define RPMH_ARC_MAX_LEVELS	16
-> +
-> +/**
-> + * struct rpmhpd - top level RPMh power domain resource data structure
-> + * @dev:                rpmh power domain controller device
-> + * @pd:                 generic_pm_domain corresponding to the power domain
-> + * @parent:             generic_pm_domain corresponding to the parent's power domain
-> + * @enable_corner:      lowest non-zero corner
-> + * @level:              An array of level (vlvl) to corner (hlvl) mappings
-> + *                      derived from cmd-db
-> + * @level_count:        Number of levels supported by the power domain. max
-> + *                      being 16 (0 - 15)
-> + * @enabled:            true if the power domain is enabled
-> + * @res_name:           Resource name used for cmd-db lookup
-> + * @addr:               Resource address as looped up using resource name from
-> + * @skip_retention_level: Indicate that retention level should not be used for the power domain
-> + */
-> +struct rpmhpd {
-> +	struct udevice	*dev;
-> +	struct power_domain pd;
-> +	struct power_domain *parent;
-> +	unsigned int	enable_corner;
-> +	u32		level[RPMH_ARC_MAX_LEVELS];
-> +	size_t		level_count;
-> +	bool		enabled;
-> +	const char	*res_name;
-> +	u32		addr;
-> +	bool		skip_retention_level;
-> +};
-> +
-> +struct rpmhpd_desc {
-> +	struct rpmhpd **rpmhpds;
-> +	size_t num_pds;
-> +};
-> +
-> +/* RPMH powerdomains */
-> +static struct rpmhpd mmcx_ao;
-> +static struct rpmhpd mmcx = {
-> +	.res_name = "mmcx.lvl",
-> +};
-> +
-> +static struct rpmhpd mmcx_ao = {
-> +	.res_name = "mmcx.lvl",
-> +};
-> +
-> +/* SA8775P RPMH power domains */
-> +static struct rpmhpd *sa8775p_rpmhpds[] = {
-> +	[SA8775P_MMCX] = &mmcx,
-> +	[SA8775P_MMCX_AO] = &mmcx_ao,
-> +};
-> +
-> +static const struct rpmhpd_desc sa8775p_desc = {
-> +	.rpmhpds = sa8775p_rpmhpds,
-> +	.num_pds = ARRAY_SIZE(sa8775p_rpmhpds),
-> +};
-> +
-> +/* stub RPMH power domains mapped for unsupported platforms */
-> +static struct rpmhpd *stub_rpmhpds[] = {};
-> +
-> +static const struct rpmhpd_desc stub_desc = {
-> +	.rpmhpds = stub_rpmhpds,
-> +	.num_pds = ARRAY_SIZE(stub_rpmhpds),
-> +};
-> +
-> +static const struct udevice_id rpmhpd_match_table[] = {
-> +	{ .compatible = "qcom,sa8775p-rpmhpd", .data = (ulong)&sa8775p_desc },
-> +	{ .compatible = "qcom,qcs615-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,qcs8300-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,qdu1000-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sa8155p-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sa8540p-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sar2130p-rpmhpd", .data = (ulong)&stub_desc},
-> +	{ .compatible = "qcom,sc7180-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sc7280-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sc8180x-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sc8280xp-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sdm670-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sdm845-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sdx55-rpmhpd", .data = (ulong)&stub_desc},
-> +	{ .compatible = "qcom,sdx65-rpmhpd", .data = (ulong)&stub_desc},
-> +	{ .compatible = "qcom,sdx75-rpmhpd", .data = (ulong)&stub_desc},
-> +	{ .compatible = "qcom,sm4450-rpmhpd", .data = (ulong)&stub_desc},
-> +	{ .compatible = "qcom,sm6350-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm7150-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8150-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8250-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8350-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8450-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8550-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8650-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,sm8750-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ .compatible = "qcom,x1e80100-rpmhpd", .data = (ulong)&stub_desc },
-> +	{ }
-> +};
-> +
-> +static int rpmhpd_send_corner(struct rpmhpd *pd, int state,
-> +			      unsigned int corner, bool sync)
-> +{
-> +	struct tcs_cmd cmd = {
-> +		.addr = pd->addr,
-> +		.data = corner,
-> +	};
-> +
-> +	return rpmh_write(pd->dev, state, &cmd, 1);
-> +}
-> +
-> +static int rpmhpd_power_on(struct power_domain *pd)
-> +{
-> +	int ret;
-> +	unsigned int corner;
-> +	struct rpmhpd **rpmhpds;
-> +	const struct rpmhpd_desc *desc;
-> +	struct rpmhpd *curr_rpmhpd;
-> +
-> +	desc = (const struct rpmhpd_desc *)dev_get_driver_data(pd->dev);
-> +	if (!desc)
-> +		return -EINVAL;
-> +
-> +	rpmhpds = desc->rpmhpds;
-> +	curr_rpmhpd = rpmhpds[pd->id];
-> +
-> +	/* Do nothing for undefined power domains */
-> +	if (!curr_rpmhpd) {
-> +		log_warning("Power domain id (%ld) not supported\n",
-> +			    pd->id);
-> +		return 0;
-> +	}
-> +
-> +	corner = curr_rpmhpd->enable_corner;
-> +
-> +	ret = rpmhpd_send_corner(curr_rpmhpd, RPMH_ACTIVE_ONLY_STATE, corner,
-> +				 false);
-> +	if (!ret)
-> +		curr_rpmhpd->enabled = true;
-> +
-> +	return ret;
-> +}
-> +
-> +static int rpmhpd_power_off(struct power_domain *pd)
-> +{
-> +	int ret;
-> +	unsigned int corner;
-> +	struct rpmhpd **rpmhpds;
-> +	const struct rpmhpd_desc *desc;
-> +	struct rpmhpd *curr_rpmhpd;
-> +
-> +	desc = (const struct rpmhpd_desc *)dev_get_driver_data(pd->dev);
-> +	if (!desc)
-> +		return -EINVAL;
-> +
-> +	rpmhpds = desc->rpmhpds;
-> +	curr_rpmhpd = rpmhpds[pd->id];
-> +
-> +	/* Do nothing for undefined power domains */
-> +	if (!curr_rpmhpd) {
-> +		log_warning("Power domain id (%ld) not supported\n",
-> +			    pd->id);
-> +		return 0;
-> +	}
-> +
-> +	corner = 0;
-> +
-> +	ret = rpmhpd_send_corner(curr_rpmhpd, RPMH_ACTIVE_ONLY_STATE, corner,
-> +				 false);
-> +	if (!ret)
-> +		curr_rpmhpd->enabled = false;
-> +
-> +	return ret;
-> +}
-> +
-> +static int rpmhpd_update_level_mapping(struct rpmhpd *rpmhpd)
-> +{
-> +	int i;
-> +	const u16 *buf;
-> +
-> +	buf = cmd_db_read_aux_data(rpmhpd->res_name, &rpmhpd->level_count);
-> +	if (IS_ERR(buf))
-> +		return PTR_ERR(buf);
-> +
-> +	/* 2 bytes used for each command DB aux data entry */
-> +	rpmhpd->level_count >>= 1;
-> +
-> +	if (rpmhpd->level_count > RPMH_ARC_MAX_LEVELS)
-> +		return -EINVAL;
-> +
-> +	for (i = 0; i < rpmhpd->level_count; i++) {
-> +		if (rpmhpd->skip_retention_level && buf[i] == RPMH_REGULATOR_LEVEL_RETENTION)
-> +			continue;
-> +
-> +		rpmhpd->level[i] = buf[i];
-> +
-> +		/* Remember the first corner with non-zero level */
-> +		if (!rpmhpd->level[rpmhpd->enable_corner] && rpmhpd->level[i])
-> +			rpmhpd->enable_corner = i;
-> +
-> +		/*
-> +		 * The AUX data may be zero padded. These 0 valued entries at
-> +		 * the end of the map must be ignored.
-> +		 */
-> +		if (i > 0 && rpmhpd->level[i] == 0) {
-> +			rpmhpd->level_count = i;
-> +			break;
-> +		}
-> +		debug("%s: ARC hlvl=%2d --> vlvl=%4u\n", rpmhpd->res_name, i,
-> +		      rpmhpd->level[i]);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int rpmhpd_probe(struct udevice *dev)
-> +{
-> +	int i, ret = 0;
-> +	struct rpmhpd **rpmhpds;
-> +	struct rpmhpd *priv;
-> +	const struct rpmhpd_desc *desc;
-> +
-> +	desc = (const struct rpmhpd_desc *)dev_get_driver_data(dev);
-> +	if (!desc)
-> +		return -EINVAL;
-> +
-> +	rpmhpds = desc->rpmhpds;
-> +
-> +	for (i = 0; i < desc->num_pds; i++) {
-> +		if (!rpmhpds[i])
-> +			continue;
-> +
-> +		priv = rpmhpds[i];
-> +		priv->dev = dev;
-> +		priv->addr = cmd_db_read_addr(priv->res_name);
-> +		if (!priv->addr) {
-> +			dev_err(dev, "Could not find RPMh address for resource %s\n",
-> +				priv->res_name);
-> +			return -ENODEV;
+> +		if (ret == -ENODEV) {
+> +			dev_warn(dev, "power-domain driver not found\n");
+> +			return 0;
 > +		}
 > +
-> +		ret = cmd_db_read_slave_id(priv->res_name);
-> +		if (ret != CMD_DB_HW_ARC) {
-> +			dev_err(dev, "RPMh slave ID mismatch\n");
-> +			return -EINVAL;
-> +		}
-> +
-> +		ret = rpmhpd_update_level_mapping(priv);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct power_domain_ops qcom_rpmhpd_power_ops = {
-> +	.on = rpmhpd_power_on,
-> +	.off = rpmhpd_power_off,
-> +};
-> +
-> +U_BOOT_DRIVER(qcom_rpmhpd_drv) = {
-> +	.name = "qcom_rpmhpd_drv",
-> +	.id = UCLASS_POWER_DOMAIN,
-> +	.of_match = rpmhpd_match_table,
-> +	.probe = rpmhpd_probe,
-> +	.ops = &qcom_rpmhpd_power_ops,
-> +};
+>  		if (ret)
+>  			return ret;
+>  		if (on)
 > -- 
 > 2.34.1
 > 
