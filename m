@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E9DEC56204
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D728C56202
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:39:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62C8083AC5;
-	Fri, 20 Feb 2026 15:35:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0084183C39;
+	Fri, 20 Feb 2026 15:39:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V4pT5Z/r";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LoOngQcx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C11183D0F; Fri, 20 Feb 2026 15:35:24 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 5CB9683D3D; Fri, 20 Feb 2026 15:39:37 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2FBA802C1
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:35:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92E8783AC5
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-40423dbe98bso895413fac.2
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:35:21 -0800 (PST)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-4042fe53946so896335fac.3
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:39:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771598121; x=1772202921; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771598373; x=1772203173; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AxQJS5KVEEn+HQ72nqpn19v6E/3wuFJQ+LP9LknesLE=;
- b=V4pT5Z/r5s0EB1tHkEkhmffzMEgmS0tuqvcUrOLo1cPcqb0LRmVUSqjtmB5wyXqEgh
- hf0sO/IVWeYRKQPn4fmRxhRXFUNize184R5eTYY2vIAfqx6SHzD9Kxj5blYjCfPN8cTb
- LVBUWi1jqMLn4bmihbBfOnMy0yjnz8Mjiy4S4=
+ bh=FoCxcRUDJ37RNoAadFyUE/Ab1UadRl7Y6119jxkA9mY=;
+ b=LoOngQcxwvttBIXdVk5DUYejdTqJzhEnQWtSqSBIrW+6/OUnrGLDorUovzl88ftSek
+ vKaugETUbiXZd/xm0g5zTP16yad8//IfzIbHosHFnvs9XEXXvxGJ6mhWP9O881S5SshB
+ VCkiDH/tDhKJBe+AJL85rng6YT4lceVXiXobY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771598121; x=1772202921;
+ d=1e100.net; s=20230601; t=1771598373; x=1772203173;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AxQJS5KVEEn+HQ72nqpn19v6E/3wuFJQ+LP9LknesLE=;
- b=iMf6jAWhkg7/9z7nH0jVs1HPPn2QaABCVP2Z7E3UrVyR+1OxZ/OmC/LxL+legmwJYf
- rmsdXySfw64PsmV05Az8gijzpXA9YkmBrT00SYOdxkqmxz79pQV6SoXXefub+0l5zLWh
- vDg+EVsd79J8rReGfnIQ84Aef75Wrur5ty0n1Uj4U6XaYiV95aPZbRueOgr+Z04s1bb2
- xIPGhe4VXAvvgQ0O+M+CIO6iTe/6pm2AGPmN+kjaD8pgSAMcN5b9ZwzjZDEAT7F0i6YT
- Xk1w+ZHzzcAdgURJBmDf+YPNW2dA8ZLdgSlG83xaruyZ+E7iqMW6bhFq5fPUvWkEtAL6
- 133g==
+ bh=FoCxcRUDJ37RNoAadFyUE/Ab1UadRl7Y6119jxkA9mY=;
+ b=aCiDkXwRZzNYs1dXd8lBPnxf8bwLIAnAG8ml0X204Ni/ANTvvicCYs2xLEP71YR6FA
+ gZZ2teT8Z1xvDUe6XMzwVbSHcs3ydUXXyHI9NkGCSMfNQHquZgrhGfzvCG67aIDbyQNU
+ OhCKFVHHBKxgBhZzebZsD8pV5DsEVPgrwdHGlpqw4HuS+aB4wBZCRX2t2J9McT4dqvej
+ zPClSn1vgCkRuIGkV9H/HQJudJsY4nXBEF8ViaKu2/V1qgB98awLR4Im84gvqCMM/vBm
+ yH89nJVK7MWkLtnz//O/OTwd7mAIXcw5G0m4CzmDd3Z8UVUJdGiiIPht2bPocu+8XaYd
+ 8aoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVVe+94LpTA+b+vCc9B8QGSkk5HCqcrK7s0cGffsiuG1DfguDYf15yT7AaWQ/s7vcPj0ot7EU=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywrf7bFWz9/p11J2YjDeXvR1BPNx6TDw9bDxUTRde+NY/Pv0OB8
- Q8/dEQtGaWH7SaSwALPYUrQlQ/VWmOGH9l9kD7FdnYyrOepIRkSmQv/kVhFhm1pLt1U=
-X-Gm-Gg: AZuq6aKRhhw8RD+FUcyXGBkMXIQar3mzwCercVe2muW9eRP0JuGMaFYtzLCbB0yagUQ
- rK7nmIaDGp69ttHTN4uF27dbHVPEptE2mqHOukVflDJcEsjmNr5F9vOSu9sHlR89pNzmzMvAzbC
- yBmHYwd53r2WoXXi8xZxgVyBVL9TvFEN+wj1PwhqhtNdIBnMbYafvBmNkRh8KSL2d8uUEL2NREf
- LuZVSR/uchMiILCo566oYU8Zm3UTZTzLjQK6lv/nye4Fx0gwirDYRIdcL2qX63TPTGRpp+hv5Es
- 9Ml7HdCL09x15ymLuJYxXqD7cTV4TOVpdz7fg2OUlgsB4a91ndShh3Z9s/djbwSQXRAFT+WYk2Z
- oyLrMDHEC6F5MxKDWh05E6LLAFuFT4SyDp2fb4S6Za5mftSz4/A1tb9k2LtGz8tO5H/5IyYB5F1
- cMljs/Z/eNs0F/cEkWs0XUtt5+1lRXOWf8nFwDGZqnfQJEdw7fWbsYprE/YAtgqKRuR5LDN3CT7
- +hm65P+dhgy+S4aHWto+JOfH5OI0DvFOmPTEiv1uBeY2lqyMuiiI9Jj/stbSw==
-X-Received: by 2002:a05:6870:912c:b0:409:7d3a:bfdd with SMTP id
- 586e51a60fabf-40f0d577329mr13669245fac.4.1771598120578; 
- Fri, 20 Feb 2026 06:35:20 -0800 (PST)
+ AJvYcCUxFg2R/VmtGbigcKwVcxG72A76xvgLppNhdVXC9jRyXiuBdZrl9chabGdtyVoJAIy0jEOaxsY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxO84Kx6F6MwvhyvKWlOcI47zNuey4hPZNR+yYUFB5l8hNyXyAI
+ jdpb6+1plRcZb81fGyxSDA3ZIZhQfuSWU+4bemoBt/JMqdVb2Bd/zwGlCHazKh3h4s8=
+X-Gm-Gg: AZuq6aLb+PPQvUI7bkHmJFZ7gvpXpJCz90V3Bd6qfT0BgTcWpuXQC8OBPGKQ7SiJMdX
+ 337iRSsC8rWYUzefHORQB3CKU4Up77nfrkZv/hUqZPS5KpDa2sGCcjRr4yad97IceQ9EopSRrtv
+ CXluxCAzq929VQDsWw3SV6duYGl+DV0Ggso5M56PTdPVZiuceqVMA7F3S5FcincKyuFNVdBjD3J
+ wPK4x1jyreUC9Axk+H4QNPrAAKE+md3xZcJ+zRTbvAORm13eRtISOwqQsqaqh+/yh3IHE7TvsJ7
+ guIQKCLqHFCOrRUGtG4SQfVzB+WFDK5qTOwgmqjAsN7d51C/7rLBTIPrkeOr/XCFmfn0XnotBcj
+ wSM9jwmLMYd3m8uBWC03iQOoy9bFtZ0l3lOfEJL/O+L2PgccoZvdtvFhU3BSXraGH6z1QW7oMxL
+ QUk5JDc78pvKCEQ6g/ObcsB6MgeYeXYUoNQRxHLcYgBzBp4023WFqOBqwJWH/Bl/OsPnHTkenx8
+ FoJD3ozP4FJ4Mmzbi7eiTvACjwapgDS3yt98j/eP+OeQhz1xIw=
+X-Received: by 2002:a05:6871:828:b0:40f:c84:e59b with SMTP id
+ 586e51a60fabf-40f0d8d9522mr11801784fac.30.1771598373235; 
+ Fri, 20 Feb 2026 06:39:33 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-40ee06756easm24409635fac.13.2026.02.20.06.35.19
+ 586e51a60fabf-40f18df8a64sm18636558fac.14.2026.02.20.06.39.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 06:35:19 -0800 (PST)
-Date: Fri, 20 Feb 2026 08:35:16 -0600
+ Fri, 20 Feb 2026 06:39:32 -0800 (PST)
+Date: Fri, 20 Feb 2026 08:39:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Fabio Estevam <festevam@gmail.com>, michael@amarulasolutions.com,
- u-boot@lists.denx.de, dinesh.maniyam@altera.com, a-dutta@ti.com,
- a-nandan@ti.com, jonas@kwiboo.se, Fabio Estevam <festevam@nabladev.com>
-Subject: Re: [PATCH v2] spl: Add generic SPL MTD loader support
-Message-ID: <20260220143516.GQ3233182@bill-the-cat>
-References: <20260220031232.1254728-1-festevam@gmail.com>
- <fecf9c20-f5a5-d9f6-ddc0-dc8db483922d@gmail.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jerome Forissier <jerome.forissier@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] boot: availability of command mii for NET_LWIP
+Message-ID: <20260220143930.GR3233182@bill-the-cat>
+References: <20260220143311.36196-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2ClOAJQkzRZ+BLcV"
+ protocol="application/pgp-signature"; boundary="DcfYAOqad4phtBX1"
 Content-Disposition: inline
-In-Reply-To: <fecf9c20-f5a5-d9f6-ddc0-dc8db483922d@gmail.com>
+In-Reply-To: <20260220143311.36196-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,68 +108,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2ClOAJQkzRZ+BLcV
+--DcfYAOqad4phtBX1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 19, 2026 at 10:52:20PM -0500, Sean Anderson wrote:
-> On 2/19/26 22:12, Fabio Estevam wrote:
-> > From: Fabio Estevam <festevam@nabladev.com>
-> >=20
-> > Add support for loading the next stage from an MTD device in SPL.
-> >=20
-> > Introduce CONFIG_SPL_MTD_LOAD and a generic SPL MTD loader
-> > implementation that uses the MTD subsystem to read the U-Boot payload.
-> >=20
-> > The loader works with any MTD-backed storage, including raw NAND and
-> > SPI NAND, without being tied to a specific NAND type.
-> >=20
-> > The payload offset defaults to CONFIG_SYS_MTD_U_BOOT_OFFS and can be
-> > overridden via the device tree property:
-> >=20
-> >      u-boot,spl-payload-offset
-> >=20
-> > To support both raw NAND and SPI NAND boot flows, the loader is
-> > registered for BOOT_DEVICE_NAND and BOOT_DEVICE_SPI. This allows it
-> > to operate correctly on platforms where the ROM reports either NAND
-> > or SPI as the boot source while using the same MTD-based loading
-> > infrastructure.
-> >=20
-> > The required NAND core and SPI NAND drivers are built for SPL when
-> > CONFIG_SPL_MTD_LOAD is enabled.
-> >=20
-> > This provides reusable infrastructure for boards that boot from MTD
-> > devices without relying on SPI-specific or NAND-specific SPL loaders.
-> >=20
-> > Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-[snip]
-> > diff --git a/common/spl/Makefile b/common/spl/Makefile
-> > index 4c9482bd3096..67fc1cd1b396 100644
-> > --- a/common/spl/Makefile
-> > +++ b/common/spl/Makefile
-> > @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) +=3D spl_nvme.o
-> >   obj-$(CONFIG_$(PHASE_)SEMIHOSTING) +=3D spl_semihosting.o
-> >   obj-$(CONFIG_$(PHASE_)DFU) +=3D spl_dfu.o
-> >   obj-$(CONFIG_$(PHASE_)SPI_LOAD) +=3D spl_spi.o
-> > +obj-$(CONFIG_SPL_MTD_LOAD) +=3D spl_mtd.o
->=20
-> Does this need a $(PHASE_)? (I don't know, but the others have it)
+On Fri, Feb 20, 2026 at 03:33:11PM +0100, Heinrich Schuchardt wrote:
 
-For consistency yes, even if we're unlikely to need this in TPL too.
+> If we are using the legacy or the LWIP network stack,
+> should not influence our decision to provide command `mii`.
+>=20
+> Let BOOT_DEFAULTS_CMDS imply MII if either of the network
+> stacks is available.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  boot/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index e5db165424a..3f8f3e7cf35 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -435,7 +435,7 @@ config BOOT_DEFAULTS_CMDS
+>  	select CMD_PXE if CMD_NET
+>  	select CMD_BOOTI if ARM64
+>  	select CMD_BOOTZ if ARM && !ARM64
+> -	imply CMD_MII if NET
+> +	imply CMD_MII if NET || NET_LWIP
+> =20
+>  config BOOT_DEFAULTS
+>  	bool  # Common defaults for standard boot and distroboot
+
+This is fine, yes. Quentin, have you had more time for your series that
+introduces a symbol to use for "networking is enabled" and separates
+legacy from NET ?
 
 --=20
 Tom
 
---2ClOAJQkzRZ+BLcV
+--DcfYAOqad4phtBX1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZhxIQAKCRAr4qD1Cr/k
-Cl1wAQDGjgrTj9jA5m69BJu4PA2yOu2qBQlMyuPIOpRAaeBxCAEAsuV5qPH4FoG5
-SywTD3Ri/Zb0gy3l4kAHwiSgcR2Axw0=
-=cfu9
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZhyIQAKCRAr4qD1Cr/k
+CkqCAQChV3nWs+S9VPbWYfk3Lc7/LslMHQNDRpbEceJQKdyDhwD+LeRRcshsiFLu
+Z7Ig4tUufDLg3CY55PSxtvf6OE1wTw4=
+=vqpP
 -----END PGP SIGNATURE-----
 
---2ClOAJQkzRZ+BLcV--
+--DcfYAOqad4phtBX1--
