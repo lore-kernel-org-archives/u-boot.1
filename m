@@ -4,91 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0E8C531FE
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 03:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051EEC531E4
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 04:04:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15DD083946;
-	Fri, 20 Feb 2026 04:52:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 563CD83946;
+	Fri, 20 Feb 2026 05:04:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KOSBFY/h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HCqTdo9E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C84B683AA9; Fri, 20 Feb 2026 04:52:25 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id B46AF83AA9; Fri, 20 Feb 2026 05:04:50 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7859D8366F
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 04:52:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 956018366F
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 05:04:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-5069c08cd32so2590991cf.2
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:52:23 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-895498f3819so2594696d6.3
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 20:04:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771559542; x=1772164342; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1771560287; x=1772165087; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Y4iXbxKOGpPdeD5ylCcKoE6GoN68H6tGlqHlwRsXsXA=;
- b=KOSBFY/hCZZvDhPR70UdSg47FU7wbfWMFhtiuBniiDL03EJDqLHaSeuWMGdVlLKhri
- Xf8T5qXwDfD8X6JhvVYwuakjFErUtLhpgjeGG7Puyo0q5nVvM+75DnqZnWlDarDmypU/
- HVTjARQNjcQFrUz7xj3LELDtssezwDt/cr5xn+5WeQDxW6FPcYx/SBUUhEc3dn520kWU
- saeDW4iiWq9h7tFL5DsksALtX9+wcUL7MEakqImugF2lr4tYcJticUGydzAEmlX5fvTJ
- +EUiDxqRz98BfUzwwioThwxR7M2RFvQ1xpBAHuSszvfgyKxDTg27BU4t+7bPlIC41okq
- GMZA==
+ bh=LibYZpVRGCdbwWUQoCy6W+Xr8sG8HdPyASgkptpoZz4=;
+ b=HCqTdo9EwC/MEIgyJMb6jqPIIdEguQmZeYZisR075TOO1xjrdYrEjGb/RiMaH0U+GY
+ z4WTChq1qcR5AWRLk2rRl0ZhQOGf+TA0KNMWknHOk2NRZ80VPZ6hhdV+HgZOZdNMdYQR
+ TBdxPuj1nTcK0WqAWuH+ytUJ2b5W5dThkQBSAgF6SBUCymi+etpuO/uHvJM8FPWsae8x
+ mF9pxVSqELkLGcScwFFWaV/PKAg3grQpWteRiQUPpx4BT0ahV/CJsmn3SvBjkSK0SV2c
+ KLDQ7A75dd0rlD6j2EyJbDOrIObATXvCLB8GXFAiDeXuKUvVaS6Rl5LBurTirb+JVvfr
+ udzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771559542; x=1772164342;
+ d=1e100.net; s=20230601; t=1771560287; x=1772165087;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y4iXbxKOGpPdeD5ylCcKoE6GoN68H6tGlqHlwRsXsXA=;
- b=cg1h19w6WDSwH5zwCfbR9wJsyLA9+lqf9OG5ZBeqxq57eCfcyH3Fc/mbZjtYJzMZY5
- mSAJjxt6Bp1Q+kUnqtZDSjMJcdlZEQsqVF7kBj9B9OynsC4DoOdtoC6Ni+AeZA9t232e
- zaY8AjQ3rPeviG3iLKqIxDS5CbKW01vKCHl25EkgISOxBKpWin8NzFp9/XIeneNVj/UN
- FOcsX7w2BgPZjiETJjuZHR1o5KGDluZSi2ObfH1zqaAUupuAJ29fc8xW4NqdVXiAJaYp
- ADiGy2ICthIpfwQCiYlLBN0Q76IocXqi2GT8OkTpCkgGrQugujOvqdlLb0c+6fKzLb4+
- lomg==
-X-Gm-Message-State: AOJu0YyeW2SiY9OC7D7m4eTIi0OrWn1NiSqGjHTb3HvRnBeE0zN73IMn
- RSSZDhFxe04MhdtTIN1BWM81uuqRJJ84XdCDbhlfnLxUnsPHMkROG4J9
-X-Gm-Gg: AZuq6aKwkqzZyI3yxnWIPLpulHYezpYAfEZguwmmNyOq/RIa1zIBB13koj705lDiAZz
- FWO7MZCfkRnw1w9WSl9csT2PSPzzVs0zzX1MTDNasA0W5LgD6i7leP+/Tf08S1eGuKTRYzCmFpQ
- Br2QwUJlUrCpyhJXLu6bJJtoRo+LFC2JzfX2+vS7tIQM2Bn4kBClh8TM3DB990q9xfy9/0xal0p
- SB/G7ZhzmQgay96VDlVHIs58pzxLUPP5lZ8Ij8GBWPpc4EfV1s+iBg2YtFJfSyvHQURGi8WDjuK
- C7erwE464eN60v4i88CTlX51Kr/BHsjnVCZZDl82TjOi6VIWY3bgWIBefD4xUjHEYsBWyA1en1D
- glagJ82nPiL3i3TuCbW/cgIyl+XE/OkNZXpiZ2OyJFdmv3sMhUQhg0XXUFB4CT1jI7x/3hOZgCT
- sr9BNqhXOS7SpOBWAZPFo5zmNgny+GALk9NlRuH7FrnsbKYc7CNyrSgY04n0AyvuN4Y4wkU6J7Z
- vUlHw==
-X-Received: by 2002:a05:620a:400a:b0:8cb:3df5:4b70 with SMTP id
- af79cd13be357-8cb4081fc2fmr2236509385a.2.1771559542088; 
- Thu, 19 Feb 2026 19:52:22 -0800 (PST)
+ bh=LibYZpVRGCdbwWUQoCy6W+Xr8sG8HdPyASgkptpoZz4=;
+ b=OPxt/1fCRmqSra5kTVGxYjGO2cMC8WYwraSoUWLFLnZXEU/mw0vkxnvQKlayEi/28Q
+ WRf15U9oge+kkDAEkzICE2VKZCUYzlomelawxLwI8wfz/DV0DG0ZwcPbu1arNP9M6ASb
+ ON4l+jmyjdPCu5uFNXxFm9MvRE8gCNzFrYXyExKy8W7w7DyNu/QDphjdjatBXJPsX+pA
+ p61jxCxEtoYs4diJrRxvgwNiI+UK0JpplbB0D53okxZPNziYIlphDIS1jai8OFoAhrfb
+ dPgQvK+U+9/gw/bmFwwjEvqhDgkKmhyG3tFkmC/wG21v7pSEB22ljV7stEeR+VrMIqN7
+ 0vHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUjAESu2OK2eLE08uw7SiskJ5ZN0BgmT+j8MGb45QMAs+cJdCYK16IclGzijwemiCNk6Pt5x0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxS21qsXEWkMfjREcLvbh/w635J+Eg60w2QvwiVelhXT2uw8kFe
+ YoEbAoQ4rOpijUTgTPDWFlD3VBSytL26vIQxbIH2R2phZNP5q/Jt1QL5
+X-Gm-Gg: AZuq6aLdLF30KVqTDlscBUAPDTzeN0Lc37TxkprY9zBE3+FsD+sKpEkD4DXnZHEuwQG
+ F/PGIP7P3USA51jzq0BEEV2rJHVQwge2nlskB6bLThNCLtctrYerIdjoz93yV8foUzpC8ORq/AP
+ HZfk+0Bzfra5b8zL8b7pp8q9FRI7C3i9p8sHWEEY7JumRhZAA21nrkGswGO3HO+TZHKZxdSawg9
+ T3BE2YWIZ7vq/EPaHCiW35WIYZPiQ2nQxkXtP2iiApPYl7T46DJ2begn+ogZUFPQPQGwIjRWviq
+ qy8aYJQoyk1gs5KC7Vma2DZOJqhMWiOMmLZpFsw/gXrxOj0tB1o0uqFo92h8GGNS9wB4lGq7I7E
+ JjnysjIcFdEIeKMGBqzHI7kvfTVkk2CEQVlC8RQ9fiTfGgGyftU7jLhonM1XimCVUzLTcCiF+5V
+ SsW3pTTDp9nHvZaYUm08D7hQYL3+AnGARMQFlwDSMzNdfXZxN4GsIpk2WO2BWFIx3MqhQ=
+X-Received: by 2002:a05:6214:6014:b0:894:9d67:7329 with SMTP id
+ 6a1803df08f44-897346fe806mr234325296d6.2.1771560287120; 
+ Thu, 19 Feb 2026 20:04:47 -0800 (PST)
 Received: from ?IPV6:2600:4040:4476:3800:2d8:61ff:fe7c:5d59?
  ([2600:4040:4476:3800:2d8:61ff:fe7c:5d59])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cb2b004eecsm2169751385a.0.2026.02.19.19.52.21
+ 6a1803df08f44-8971c8e60a0sm224849426d6.0.2026.02.19.20.04.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Feb 2026 19:52:21 -0800 (PST)
-Message-ID: <fecf9c20-f5a5-d9f6-ddc0-dc8db483922d@gmail.com>
-Date: Thu, 19 Feb 2026 22:52:20 -0500
+ Thu, 19 Feb 2026 20:04:46 -0800 (PST)
+Message-ID: <2b329216-f2f8-88b4-f63d-370d3640e4e7@gmail.com>
+Date: Thu, 19 Feb 2026 23:04:45 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH v2] spl: Add generic SPL MTD loader support
+Subject: Re: [PATCH v2 2/6] misc: Add support for bit fields in NVMEM cells
 Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>, michael@amarulasolutions.com
-Cc: u-boot@lists.denx.de, trini@konsulko.com, dinesh.maniyam@altera.com,
- a-dutta@ti.com, a-nandan@ti.com, jonas@kwiboo.se,
- Fabio Estevam <festevam@nabladev.com>
-References: <20260220031232.1254728-1-festevam@gmail.com>
+To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, peng.fan@nxp.com, quentin.schulz@cherry.de,
+ n-francis@ti.com, xypron.glpk@gmx.de, h-vm@ti.com, justin@tidylabs.net,
+ jamie.gibbons@microchip.com, ycliang@andestech.com, me@samcday.com,
+ sughosh.ganu@arm.com, gchan9527@gmail.com, ilias.apalodimas@linaro.org,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de, sumit.garg@kernel.org,
+ casey.connolly@linaro.org
+References: <20260213112717.1256823-1-aswin.murugan@oss.qualcomm.com>
+ <20260213112717.1256823-3-aswin.murugan@oss.qualcomm.com>
+ <3fe5e11d-7240-c577-64fc-062d5c5e4d6a@gmail.com>
+ <497f7e07-3a5c-4a7a-b2bb-9016d6927ba4@oss.qualcomm.com>
+ <96a3a5e8-a853-b766-a013-d3db6bfce117@gmail.com>
+ <23fa6538-d69b-4f59-9e36-f3cf2c6dd543@oss.qualcomm.com>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20260220031232.1254728-1-festevam@gmail.com>
+In-Reply-To: <23fa6538-d69b-4f59-9e36-f3cf2c6dd543@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,272 +115,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/19/26 22:12, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@nabladev.com>
-> 
-> Add support for loading the next stage from an MTD device in SPL.
-> 
-> Introduce CONFIG_SPL_MTD_LOAD and a generic SPL MTD loader
-> implementation that uses the MTD subsystem to read the U-Boot payload.
-> 
-> The loader works with any MTD-backed storage, including raw NAND and
-> SPI NAND, without being tied to a specific NAND type.
-> 
-> The payload offset defaults to CONFIG_SYS_MTD_U_BOOT_OFFS and can be
-> overridden via the device tree property:
-> 
->      u-boot,spl-payload-offset
-> 
-> To support both raw NAND and SPI NAND boot flows, the loader is
-> registered for BOOT_DEVICE_NAND and BOOT_DEVICE_SPI. This allows it
-> to operate correctly on platforms where the ROM reports either NAND
-> or SPI as the boot source while using the same MTD-based loading
-> infrastructure.
-> 
-> The required NAND core and SPI NAND drivers are built for SPL when
-> CONFIG_SPL_MTD_LOAD is enabled.
-> 
-> This provides reusable infrastructure for boards that boot from MTD
-> devices without relying on SPI-specific or NAND-specific SPL loaders.
-> 
-> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
-> ---
-> Changes since v1:
-> - Use uclass_get_device_by_seq().
-> - Use puts() instead of debug() for error.
-> - Include the new loader to include/spl_load.h.
-> - Introduce SPL_MTD_SPI_NAND.
-> 
->   common/spl/Kconfig        | 30 ++++++++++++++
->   common/spl/Makefile       |  1 +
->   common/spl/spl_mtd.c      | 83 +++++++++++++++++++++++++++++++++++++++
->   drivers/mtd/Makefile      |  1 +
->   drivers/mtd/nand/Makefile |  4 +-
->   include/spl_load.h        |  1 +
->   6 files changed, 119 insertions(+), 1 deletion(-)
->   create mode 100644 common/spl/spl_mtd.c
-> 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 2998b7acb75f..16dbc5b54324 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -933,6 +933,12 @@ config SYS_MMCSD_FS_BOOT_PARTITION
->   	  used in fs mode.
->   	  Use -1 as a special value to use the first bootable partition.
->   
-> +config SYS_SPL_MTD_SEQ
-> +	int "MTD device number for the SPL load"
-> +	default 0
-> +	help
-> +	  MTD device number used for the SPL load.
-> +
->   config SPL_MMC_TINY
->   	bool "Tiny MMC framework in SPL"
->   	depends on SPL_MMC
-> @@ -1578,6 +1584,30 @@ config SPL_SPI_LOAD
->   
->   endif # SPL_SPI_FLASH_SUPPORT
->   
-> +config SPL_MTD_LOAD
-> +	bool "Support loading from a generic MTD device"
-> +	depends on SPL
-> +	depends on MTD && DM_MTD
-> +	help
-> +	  Enable support for loading the next stage from an MTD device
-> +	  using the MTD subsystem in SPL.
-> +
-> +	  This supports raw NAND and SPI NAND devices.
-> +
-> +config SPL_MTD_SPI_NAND
-> +	bool "Enable SPI NAND support in SPL"
-> +	depends on SPL_MTD_LOAD
-> +	select MTD_SPI_NAND
-> +	help
-> +	 Build SPI NAND support for SPL.
-> +
-> +config SYS_MTD_U_BOOT_OFFS
-> +	hex "address of U-boot payload in the MTD device"
-> +	default 0x0
-> +	help
-> +	 Address within the MTD device where the U-boot payload is fetched
-> +	 from.
-> +
-
-Maybe default to SYS_SPI_U_BOOT_OFFS? or CONFIG_SYS_NAND_U_BOOT_OFFS?
-
->   config SYS_SPI_U_BOOT_OFFS
->   	hex "address of u-boot payload in SPI flash"
->   	default 0x8000 if ARCH_SUNXI
-> diff --git a/common/spl/Makefile b/common/spl/Makefile
-> index 4c9482bd3096..67fc1cd1b396 100644
-> --- a/common/spl/Makefile
-> +++ b/common/spl/Makefile
-> @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
->   obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
->   obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
->   obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
-> +obj-$(CONFIG_SPL_MTD_LOAD) += spl_mtd.o
-
-Does this need a $(PHASE_)? (I don't know, but the others have it)
-
->   obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
->   obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
->   endif
-> diff --git a/common/spl/spl_mtd.c b/common/spl/spl_mtd.c
-> new file mode 100644
-> index 000000000000..904f1fbad834
-> --- /dev/null
-> +++ b/common/spl/spl_mtd.c
-> @@ -0,0 +1,83 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/*
-> + * Generic SPL loader for MTD devices.
-> + *
-> + * Based on spl_spi.c, which is:
-> + *
-> + * Copyright (C) 2011 OMICRON electronics GmbH
-> + *
-> + * based on drivers/mtd/nand/raw/nand_spl_load.c
-> + *
-> + * Copyright (C) 2011
-> + * Heiko Schocher, DENX Software Engineering, hs@denx.de.
-> + */
-> +
-> +#include <config.h>
-> +#include <errno.h>
-> +#include <image.h>
-> +#include <log.h>
-> +#include <spl.h>
-> +#include <spl_load.h>
-> +
-> +#include <dm.h>
-> +#include <dm/ofnode.h>
-> +#include <dm/uclass.h>
-> +#include <mtd.h>
-> +
-> +static struct mtd_info *spl_mtd_get_device(void)
-> +{
-> +	struct udevice *dev;
-> +	int ret;
-> +
-> +	ret = uclass_get_device_by_seq(UCLASS_MTD, CONFIG_SYS_SPL_MTD_SEQ, &dev);
-> +	if (ret)
-> +		return NULL;
-> +
-> +	return dev_get_uclass_priv(dev);
-> +}
-> +
-> +static ulong spl_mtd_read(struct spl_load_info *load,
-> +			  ulong offs, ulong size, void *buf)
-> +{
-> +	struct mtd_info *mtd = load->priv;
-> +	size_t retlen;
-> +	int ret;
-> +
-> +	ret = mtd_read(mtd, offs, size, &retlen, buf);
-> +	if (ret && !mtd_is_bitflip(ret))
-> +		return 0;
-> +
-> +	if (retlen != size)
-> +		return 0;
-
-You can just return retlen here. We check it against size in spl_load.
-
-> +
-> +	return retlen;
-> +}
-> +
-> +static int spl_mtd_load_image(struct spl_image_info *spl_image,
-> +			      struct spl_boot_device *bootdev)
-> +{
-> +	struct spl_load_info load;
-> +	struct mtd_info *mtd;
-> +	ulong offset;
-> +
-> +	mtd = spl_mtd_get_device();
-> +	if (!mtd) {
-> +		puts("SPL: No MTD device found\n");
-> +		return -ENODEV;
-> +	}
-> +
-> +	spl_load_init(&load, spl_mtd_read, mtd, mtd->writesize);
-> +
-> +	offset = CONFIG_SYS_MTD_U_BOOT_OFFS;
-> +
-> +	if (CONFIG_IS_ENABLED(OF_REAL))
-> +		offset = ofnode_conf_read_int("u-boot,spl-payload-offset",
-> +					      offset);
-> +
-> +	return spl_load(spl_image, bootdev, &load, 0, offset);
-> +}
-> +
-> +/* Priority 1 so boards may override */
-> +SPL_LOAD_IMAGE_METHOD("MTD-NAND", 1, BOOT_DEVICE_NAND, spl_mtd_load_image);
-> +SPL_LOAD_IMAGE_METHOD("MTD-SPI-NAND", 1, BOOT_DEVICE_SPI, spl_mtd_load_image);
-
-Should these be a different priority than the "native" loaders? Does it make sense
-to have both enabled or should we disable native loaders in Kconfig so we don't have
-to consider this?
-
-Actually, if CONFIG_SPL_NAND_SUPPORT is enabled then the native nand loader is compiled.
-Maybe we should add a separate Kconfig for it (CONFIG_SPL_NAND_LOAD) defaulting to
-SPL_NAND_SUPPORT. Then users can disable the "native" load method if they want to use MTD.
-
-> diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-> index ce05e206073d..0856a8f68732 100644
-> --- a/drivers/mtd/Makefile
-> +++ b/drivers/mtd/Makefile
-> @@ -34,6 +34,7 @@ else
->   ifneq ($(mtd-y),)
->   obj-$(CONFIG_SPL_MTD) += mtd.o
->   endif
-> +obj-$(CONFIG_SPL_MTD_LOAD) += nand/
-
-Is this necessary? Shouldn't the user just enable CONFIG_SPL_NAND_SUPPORT?
-
->   obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
->   obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
->   obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
-> diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
-> index c8169cf73902..4bc11054ad74 100644
-> --- a/drivers/mtd/nand/Makefile
-> +++ b/drivers/mtd/nand/Makefile
-> @@ -1,10 +1,12 @@
->   # SPDX-License-Identifier: GPL-2.0+
->   
-> -ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
->   nandcore-objs := core.o bbt.o
-> +ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
->   obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
->   obj-$(CONFIG_MTD_RAW_NAND) += raw/
->   obj-$(CONFIG_MTD_SPI_NAND) += spi/
->   else
-> +obj-$(CONFIG_SPL_MTD_LOAD) += nandcore.o
-
-Shouldn't this be CONFIG_SPL_MTD_SPI_NAND too?
-
-> +obj-$(CONFIG_SPL_MTD_SPI_NAND) += spi/
->   obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
->   endif
-> diff --git a/include/spl_load.h b/include/spl_load.h
-> index 525e0c9e86c6..5b06fa419dbf 100644
-> --- a/include/spl_load.h
-> +++ b/include/spl_load.h
-> @@ -113,6 +113,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
->   	IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) + \
->   	IS_ENABLED(CONFIG_SPL_SEMIHOSTING) + \
->   	IS_ENABLED(CONFIG_SPL_SPI_LOAD) + \
-> +	IS_ENABLED(CONFIG_SPL_MTD_LOAD) + \
-
-Please keep this alphabetical.
-
-And still needs tests, but hopefully those should be simple to implement based
-on my reply to v1.
-
---Sean
-
->   	0
->   
->   #if SPL_LOAD_USERS > 1
-
+T24gMi8xOS8yNiAwNjoyNCwgQXN3aW4gTXVydWdhbiB3cm90ZToNCj4gSGkgU2VhbiwNCj4g
+DQo+IE9uIDIvMTgvMjAyNiA3OjM3IEFNLCBTZWFuIEFuZGVyc29uIHdyb3RlOg0KPj4gT24g
+Mi8xNy8yNiAxNDowNSwgQXN3aW4gTXVydWdhbiB3cm90ZToNCj4+PiBIaSBTZWFuLA0KPj4+
+DQo+Pj4gVGhhbmtzIGZvciB5b3VyIGZlZWRiYWNrLg0KPj4+IFRvIGFkZHJlc3Mgc3RhY2sg
+c21hc2hpbmcsIHdoaWNoIG9jY3VycyB3aGVuIHRoZSBjZWxsIHNpemUgaXMgbGFyZ2VyIHRo
+YW4gNCBieXRlcywgSSB3aWxsIHJldmVydCB0aGUgYG52bWVtX2NlbGxfcmVhZCgpYCBjYWxs
+IGluIGByZWJvb3RfbW9kZV9nZXQoKWAgdG8gcGFzcyBgc2l6ZW9mKCptb2RlKWAgYXMgdGhl
+IHNpemUsIGNvbnNpc3RlbnQgd2l0aCB0aGUgb3JpZ2luYWwgaW1wbGVtZW50YXRpb24uDQo+
+Pj4NCj4+PiBJbnNpZGUgYG52bWVtX2NlbGxfcmVhZCgpYCwgd2lsbCBtb2RpZnkgdGhlIHZh
+bGlkYXRpb24gY2hlY2suIEluc3RlYWQgb2YgZW5mb3JjaW5nIGBzaXplID09IGNlbGwtPnNp
+emVgLCB3aWxsIGNoZWNrIGlmIGBjZWxsLT5zaXplYCBpcyB3aXRoaW4gdGhlIHBhc3NlZCBg
+c2l6ZWAgKGkuZS4sIGBjZWxsLT5zaXplIDw9IHNpemVgKSB0byBjb3JyZWN0bHkgc3VwcG9y
+dCBvdXIgMS1ieXRlIHJlYWQgY2FzZSB3aGVyZSB0aGUgYnVmZmVyIGlzIDQgYnl0ZXMuDQo+
+Pg0KPj4gVGhlbiBkb24ndCB3ZSBuZWVkIHRvIHplcm8gb3V0IHRoZSByZXN0IG9mIHRoZSBi
+dWZmZXI/DQo+Pg0KPj4gSSB3b3VsZCBleHBlY3QgdGhlIGNoZWNrIHRvIGJlDQo+Pg0KPj4g
+aWYgKChjZWxsLT5iaXRfb2Zmc2V0ICYmIHNpemUgPiBjZWxsLT5zaXplKSB8fCBzaXplICE9
+IGNlbGwtPnNpemUpDQo+PiDCoMKgwqDCoHJldHVybiAtRUlOVkFMOw0KPj4NCj4+PiBBbHNv
+LCBpMmNfZWVwcm9tX3JlYWQoKSBhbmQgbWlzY19yZWFkKCkgd2lsbCBjb250aW51ZSB0byBy
+ZXF1ZXN0IGEgcmVhZCBmb3IgY2VsbC0+c2l6ZSBpbnN0ZWFkIG9mIHRoZSBwYXNzZWQgYnVm
+ZmVyIHNpemUsIGVuc3VyaW5nIHdlIG9ubHkgcmVhZCB0aGUgdmFsaWQgZGF0YSBmcm9tIHRo
+ZSBoYXJkd2FyZS4NCj4+Pg0KPj4+IFJlZ2FyZGluZyB0aGUgYml0IGZpZWxkIGxvZ2ljLCBh
+cyB5b3Ugc3VnZ2VzdGVkIHdpbGwgc2ltcGxpZnkgdGhlIGJpdOKAkWZpZWxkIGhhbmRsaW5n
+IHRvIG1heCB1MzIgc2l6ZSwgd2hpY2ggc2lnbmlmaWNhbnRseSByZWR1Y2VzIHRoZSBjb2Rl
+IGNvbXBsZXhpdHkuIEdpdmVuIHRoaXMgc2ltcGxpZmljYXRpb24sIGlzIGl0IHN0aWxsIG5l
+Y2Vzc2FyeSB0byBrZWVwIHRoaXMgYml04oCRbWFuaXB1bGF0aW9uIGxvZ2ljIGJlaGluZCBh
+IHNlcGFyYXRlIGNvbmZpZyBvcHRpb24/DQo+Pg0KPj4gSSB0aGluayBpdCdzIGxpa2VseS4g
+WW91IGNhbiBjaGVjayB0aGUgZ3Jvd3RoIHdpdGggc2NyaXB0cy9ibG9hdC1vLW1ldGVyIGlu
+DQo+PiBMaW51eC4gU2luY2UgdGhpcyBpcyBtYWlubHkgZm9yIFUtQm9vdCBwcm9wZXIgSSdk
+IHNheSBhIGNvdXBsZSBodW5kcmVkIGJ5dGVzDQo+PiBpcyByZWFzb25hYmxlIGZvciB0aGlz
+IGZlYXR1cmUuDQo+Pg0KPj4+IEtpbmRseSBjb25maXJtIGlmIHRoaXMgYXBwcm9hY2ggYWxp
+Z25zIHdpdGggeW91ciBleHBlY3RhdGlvbnMuIA0KPj4NCj4+IFBsZWFzZSByZW1lbWJlciB0
+byByZXBseSBvbiB0aGUgYm90dG9tIDopDQo+Pg0KPj4gLS1TZWFuDQo+IA0KPiBUaGUgc3Vn
+Z2VzdGVkIGNoZWNrIHdpbGwgZmFpbCBmb3Igb3VyIGNhc2UsIHdlIGFsd2F5cyBwYXNzIHNp
+emUgPSBzaXplb2YodTMyKSA9IDQgYnl0ZXMgcmVnYXJkbGVzcyBvZiB0aGUgYWN0dWFsIGNl
+bGwgc2l6ZS4NCj4gDQo+IEV4YW1wbGU6IDEtYnl0ZSBjZWxsIHdpdGggNy1iaXQgZmllbGQN
+Cj4gDQo+IGNlbGwtPnNpemUgPSAxLCBiaXRfb2Zmc2V0ID0gMSwgbmJpdHMgPSA3LCBzaXpl
+ID0gNA0KPiANCj4gV2l0aCBzdWdnZXN0ZWQgY2hlY2s6IGlmICgoY2VsbC0+Yml0X29mZnNl
+dCAmJiBzaXplID4gY2VsbC0+c2l6ZSkgfHwgc2l6ZSAhPSBjZWxsLT5zaXplKSAtPiAoMSAm
+JiA0ID4gMSkgfHwgNCAhPSAxIC0+IFRSVUUgLT4gcmVqZWN0cyB2YWxpZCBjYXNlDQo+IA0K
+PiBJZiB3ZSBoYXZlIGEgY2hlY2sgYXMgYmVsb3c6DQo+IA0KPiBpZiAoc2l6ZSA8IGNlbGwt
+PnNpemUpIC0+IDQgPCAxIC0+IEZBTFNFIC0+IGNvcnJlY3RseSBhbGxvd3MNCj4gDQo+IFRo
+ZW4gaWYgY2VsbCBoYXMgbmJpdHMgc2V0LCBiaXQgZmllbGQgYm91bmRzIGNhbiBiZSB2YWxp
+ZGF0ZWQgc2VwYXJhdGVseSBhcyBmb2xsb3dzOg0KPiANCj4gYnl0ZXNfbmVlZGVkID0gRElW
+X1JPVU5EX1VQKDcrMSwgOCkNCj4gDQo+IGlmIChieXRlc19uZWVkZWQgPiBjZWxsLT5zaXpl
+IHx8IGJ5dGVzX25lZWRlZCA+IHNpemVvZih1MzIpIHx8IHNpemUgIT0gc2l6ZW9mKHUzMikp
+DQo+IA0KPiBUaGlzIHZhbGlkYXRlczoNCj4gDQo+ICDCoCogYnl0ZXNfbmVlZGVkID4gY2Vs
+bC0+c2l6ZTogQml0IGZpZWxkIGRvZXNuJ3QgZXhjZWVkIGFjdHVhbCBjZWxsIHNpemUNCj4g
+IMKgKiBieXRlc19uZWVkZWQgPiBzaXplb2YodTMyKTogQml0IGZpZWxkIGRvZXNuJ3QgZXhj
+ZWVkIG1heGltdW0NCj4gIMKgwqAgc3VwcG9ydGVkIHNpemUNCj4gIMKgKiBzaXplICE9IHNp
+emVvZih1MzIpOiBCdWZmZXIgc2l6ZSBpcyBjb3JyZWN0IGZvciBiaXQgZmllbGQgb3BlcmF0
+aW9ucw0KDQpZZWFoLCBidXQgaXQncyBpbXBvcnRhbnQgdG8gZW5zdXJlIHNpemUgPT0gY2Vs
+bC0+c2l6ZSBmb3Igbm9ybWFsIGJpdGZpZWxkcy4gV2UgZG9uJ3Qgd2FudCB0byBhbGxvdyBl
+LmcuDQpzdXBwbHlpbmcgYSA0LWJ5dGUgY2VsbCBmb3IgYSBtYWMgYWRkcmVzcy4gV2UgcHJv
+YmFibHkgZG9uJ3Qgd2FudCB0byBhbGxvdyBzdG9yaW5nIGUuZy4gMHhkZWFkYmVlZiBpbiBh
+DQpjZWxsIG9mIHNpemUgMiBlaXRoZXIuLi4NCg0KLS1TZWFuDQoNCg==
