@@ -4,95 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9683BC531FC
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 02:39:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6047FC531F8
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 03:12:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1AF883946;
-	Fri, 20 Feb 2026 03:39:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9CA3F83946;
+	Fri, 20 Feb 2026 04:12:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MTzY1KWK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UIkyyFDU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96F0383AA9; Fri, 20 Feb 2026 03:39:19 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 597A083AA9; Fri, 20 Feb 2026 04:12:47 +0100 (CET)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D31D8366F
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 03:39:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1638B8366F
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 04:12:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-6597a7bd7d6so2054902a12.3
- for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 18:39:17 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771555157; cv=none;
- d=google.com; s=arc-20240605;
- b=DaC6uOZzTRZZ8uMOjvFn6EE2IDSpolEUcs9mT0fWw79rTLnBJ1qkfHITUNdLM+FgbF
- l4LpePfP69bn5GTbz3u35cE27+58Y5j167IQ2BJ/AX4ylJcJ5i6tlYhnlbXd6VYl8QPM
- LVWPhZ4tMVNVW4cgrrjVo09/VLx5oaDe5/EZ71BFrprlZwce5CjG8aJvgno0sCKB3qEf
- CfhGha49b7ottL8drHuOYnm4b56MelVir7wwpWDElLH7v53QfJu3k7out3EYBskCwcvB
- BKoKROsmg4eVV3xXV5RdM7bYQLUXyFvLQCWyX3oAo5hVMQ0tTmRi8NrU0G2AEUfqv+Xw
- FQ8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=D/9pQ/lUQc4DSMeV6b5XlY5kZyRmYS/1WjWjAf5aMVI=;
- fh=89JGekwhSyYOPQOy2uyR8LelJwXS2WWWd2nllJCIfB4=;
- b=PQ35M4EMluusqGhr7UpV8m8ssbDzsRoftxXYhhype9KEa3JJe0k1nbP0HzbjutO/e/
- EK/gYhoHuUVq7cqZz98GQ5dKcHtVO2Um84cP+voTRRtSW2yWvSyHATqD/JhZUxoJZqay
- lBwTaVBsQvjD1hH6hw78yPHsmGDWfcWOQmTsbEgW8kARTFqzVHrtkmuZfzJmyjufAs7M
- KL9BstfmYC4Dut7mGaMzVKw424hIbIvyfz8r2ERHah8DQV+F1UPlptzhC5+7z/kvNn51
- it3JqcZB7I97uQYZoC3aMQgtSmbHvU0OchtwSkIRfuWAbms/kHEAnXIb489fsHq53INI
- JB+A==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-5fc4857e080so385015137.0
+ for <u-boot@lists.denx.de>; Thu, 19 Feb 2026 19:12:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771555157; x=1772159957; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D/9pQ/lUQc4DSMeV6b5XlY5kZyRmYS/1WjWjAf5aMVI=;
- b=MTzY1KWKmDSrV2y2Z3A9DKDK41B9jjqD13riFYhHb8pV04U1h36w5MdC5MpNrMa5M9
- vu2VBtMdlHz1yI/VGa7zCI2ajGqGI4qgTnIv57C/F3nC8bGSozHr3zHjK+A8ag1bY+bo
- RM4ve/NtKuPkMS7HsHqMK/IP0nzfAz8KP/WnA=
+ d=gmail.com; s=20230601; t=1771557164; x=1772161964; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VMJQJYmp6avgPiJNCHxKmEAsUio0/pqsNChr9HQhmt0=;
+ b=UIkyyFDUPDGmj7KmldXBMXZbtB5bKJzmr+sglamv3ZDaiq1eTyZDSS4oa25xRQyWA/
+ MZ1JmMH5fZzNfJKB2t/4Kh0LWz0Gp8xLCgG7ghynGr64v7L/xedq/KrbJHFvvmmGV7yO
+ nxthhiE6vcsDWjSoagvf252ZBjSk7sHb5SFHl4L0OtV8w9xbFwYJPdj1WsB6OWitasV4
+ LhoDYDRuHJ42rWnjB772daAV6gEZn7fPHGDnxEjDsSxXcY2lQQ6xUVo/1FbMJh/Cbkpk
+ nTQbqG9BNCS+nYXSnju+CM305tghB6Gd/8cuGPFg7fH8K7vbXisuHWYkpQ7MT7sWRk47
+ Qi7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771555157; x=1772159957;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1771557164; x=1772161964;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D/9pQ/lUQc4DSMeV6b5XlY5kZyRmYS/1WjWjAf5aMVI=;
- b=cYYBzja3kop7xkV8VWlsKWHIE1VL0/1w7RmYv4x2DwqVNLGW/83UiSHQdtEwirX0yO
- DAsvtKPFJJXNjE+VqCYb06Vru0SBz1FaTw8nEYJT1JuvW85x5p02f3g4c0OxbdFTQf+J
- AP2R9yczQLUHsiX+rWNx7rFmBeZDyI+/XgfXrWlcYmSHl8XBVdpF5cBLNe4vhESdy1mf
- frnnl4KsVmwM1xeLEhCTA/fk+r7bSiXGNmmSidDmfWcehZsDKQKhRW51fBkwlzbgCCFq
- 4NfCLPVOTV6uVhn3qk6635UCztHXTFMqQhr/tm359higklXx8fNBlvqH30Ypd+O8nPoq
- 3ccg==
-X-Gm-Message-State: AOJu0YwX5Vs/OpBeEszOTLOSFZ5aNcP2JUHfIcKVq6uHo4BPYXnt9wZg
- kHJQxnobONkK8S0ln4LISd22WXsM+/pQQcl2V+iahll45mPDhpbkZ2p7OnLUMGmofhY2LiJtkZw
- OGY/ITqjqnUw03s5FJl0VHomvDeTQGt5A1z/lNgOc
-X-Gm-Gg: AZuq6aLz7zt0dcWGqBuklQlLSbm0qXuLqRbntq7YoWrR623DHRUX1Kqj14q4JVS0h7J
- 51tvVMGiOqvXUM/wIEbBHCpCWQo3+wszOOzYro1y7ag4MdZAMKD7/iDwXr4eumAG2M+VJZLmeUw
- JfUAsIoQcw+QGxfoxSPhlTRJL7LMwAZ5hRUxnmAPvD9EzGs7+in6crv7jUHEiDyWAEazAAaCDeO
- V5BJw7WqWSCLOmRShFFP87/LqDdxyIX4XJy/h4prnJNMOL8QHq5Up4Vl5YLa8zclWKe+GFtzCRO
- zJgLlA==
-X-Received: by 2002:a05:6402:34ce:b0:658:b837:7953 with SMTP id
- 4fb4d7f45d1cf-65bc78653cemr11219119a12.12.1771555156983; Thu, 19 Feb 2026
- 18:39:16 -0800 (PST)
+ bh=VMJQJYmp6avgPiJNCHxKmEAsUio0/pqsNChr9HQhmt0=;
+ b=PM7rX4ohUyaYsiFnZBgaHUg/zrkda+fTFCJvDZ603zs8IIE0ULO3EVlyb18776uNAW
+ rlXAz6/bkIkd6Np6HtncfVBRSVXVMfDQ4+xsbonlrM3Espkx4JS/crEQNoTOsPhexSXL
+ 29K62SULctpkaoYmG/Fhc7uyIJNHGCSlUDSOYCvF2eRYNfepvLhiuncjAH5s1rW+R5kH
+ b4gX2Ug3DFQuYpthoHiT+mBBjoS3SdWnmZ6c1v6ZdKzm/Up13wve8i1g/tLPJC5zeQBP
+ 3kCmXC//u5PQVhTmoLTPR7kbngg3VjJ6joy0uxU7eTN2MsoblL4F5yXCZX9vVtsivJpo
+ I4aQ==
+X-Gm-Message-State: AOJu0YwaJGHIMomNNfZF95OmHVk6m7PsUdrdbYboZhXt5ZUCKoQ74kx4
+ koemYOVfRHwie7dASs2q9ipovGDXa0GTKxBF2upk9h58migD2xBcTm8l
+X-Gm-Gg: AZuq6aJymJNSWatOjjePUkw/PQXFt5mdcE1RRjsH7Z++R1MQr2FUXik5cAoZ2omCO96
+ hC+qEUmyJmjgTqeqHqn77iLgVr/enF0BCGRozypWRjOGMvwLGcyYg6dyTvC+w89t7kzzi980xZv
+ GYFWTWCPeIzEo1J8PHAyTu06LAqyNl2CylMDa6okXsZy3RAeaQC6L7u6VvNhdGlqpJebKglzznq
+ 2Q9VTruBS/IljMQ18OhTB/O9BxYDqtrfkqGFQP1Wll/w3596rHlh6FM0fJUYTAxEHkRr3wsUkGo
+ PaXeDDPPmyRHDdCmM1tpR6sV4Jvtzl0Bftu30oLbbVXgQvHySYGfOx7ADNfLgKCnsqrT5e80oW1
+ Ch1cOJx0tMr1S1G5xpo6tUX+CgZC4wpYLTdZEkA1RCfLUOxEEh7YUhdmjcVqduYS7RoaYkMS/C6
+ UVFRy6LESDYO/L3VaObaXKOrvljCngznU9UtSiVVtCi9U4rFttDoMqiLZ/PuOkwq9Q6lo=
+X-Received: by 2002:a05:6102:942:b0:5f9:3ac4:8f6e with SMTP id
+ ada2fe7eead31-5fe2af5f78amr7913412137.31.1771557163712; 
+ Thu, 19 Feb 2026 19:12:43 -0800 (PST)
+Received: from localhost.localdomain ([2804:14c:485:4ffb:41a3:92c9:4c38:2cf3])
+ by smtp.gmail.com with ESMTPSA id
+ ada2fe7eead31-5fe153b3231sm13119538137.5.2026.02.19.19.12.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Feb 2026 19:12:43 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: michael@amarulasolutions.com
+Cc: u-boot@lists.denx.de, trini@konsulko.com, seanga2@gmail.com,
+ dinesh.maniyam@altera.com, a-dutta@ti.com, a-nandan@ti.com,
+ jonas@kwiboo.se, Fabio Estevam <festevam@nabladev.com>
+Subject: [PATCH v2] spl: Add generic SPL MTD loader support
+Date: Fri, 20 Feb 2026 00:12:32 -0300
+Message-Id: <20260220031232.1254728-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20260217115333.503359-1-Wojciech.Dubowik@mt.com>
- <CAFLszTiexKf9VhSvKC46QrJMW4dy9Uc2ufsG5AyWvs0e1D4aMw@mail.gmail.com>
-In-Reply-To: <CAFLszTiexKf9VhSvKC46QrJMW4dy9Uc2ufsG5AyWvs0e1D4aMw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Feb 2026 19:39:04 -0700
-X-Gm-Features: AaiRm53tPG_jx5mBEJg5ZqzNLG4AgSj7LFvdlj2GkY9vsHvFjDJdL93JL4zj_Y8
-Message-ID: <CAFLszTjNx8_eew0p1uQK_k4tR81SDtBPpNmDSVVBmZcc2mG3cA@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] UEFI Capsule - PKCS11 Support
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, trini@konsulko.com, 
- simon.glass@canonical.com, quentin.schulz@cherry.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,81 +96,241 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
+From: Fabio Estevam <festevam@nabladev.com>
 
-On Thu, 19 Feb 2026 at 06:12, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Wojciech,
->
-> On Tue, 17 Feb 2026 at 04:53, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
-> >
-> > Add support for pkcs11 URI's when generating UEFI capsules and
-> > accept URI's for certificate in dts capsule nodes.
-> > Example:
-> > export PKCS11_MODULE_PATH=<pkcs11 provider path>/libsofthsm2.so
-> > tools/mkeficapsule --monotonic-count 1 \
-> >  --private-key "pkcs11:token=EX;object=capsule;type=private;pin-source=pin.txt" \
-> >  --certificate "pkcs11:token=EX;object=capsule;type=cert;pin-source=pin.txt" \
-> >  --index 1 \
-> >  --guid XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX \
-> >  "capsule-payload" \
-> >  "capsule.cap
-> > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> > ---
-> > Changes in v6:
-> > * mkeficapsule: use strlen instead of hardcoded values
-> > Changes in v5:
-> > * add bin wrappers in test for all external tools
-> > * improve error handling in python test
-> > * fix data types in python
-> > * standardize option name in mkeficapsule
-> > * fix typos
-> > Changes in v4:
-> > * adapt mkeficapsule python support to dump detached signature
-> >   for authenticated capsules
-> > * verify detached capsule signature with openssl after generation
-> > * use p11-kit to figure out location of softhsm2 library
-> > * fix missing long option for dumping signatures in mkeficapsule
-> > Changes in v3:
-> > * fix write file encoding, env setting and extra line in binman test
-> >   after review
-> > Changes in v2:
-> > * allow mixed file/pkcs11 URI as key specification in mkeficapsule
-> > * fix logic for accepting pkcs11 URI in binman device tree sections
-> > * add binman test for UEFI capsule signature where private key comes
-> >   from softHSM
-> > ---
-> > Wojciech Dubowik (6):
-> >   tools: mkeficapsule: Add support for pkcs11
-> >   binman: Accept pkcs11 URI tokens for capsule updates
-> >   tools: mkeficapsule: Fix dump signature long option
-> >   binman: Add dump signature option to mkeficapsule
-> >   binman: DTS: Add dump-signature option for capsules
-> >   test: binman: Add test for pkcs11 signed capsule
-> >
-> >  doc/mkeficapsule.1                            |   4 +-
-> >  tools/binman/btool/mkeficapsule.py            |   8 +-
-> >  tools/binman/btool/p11_kit.py                 |  21 ++++
-> >  tools/binman/entries.rst                      |   4 +
-> >  tools/binman/etype/efi_capsule.py             |  17 ++-
-> >  tools/binman/ftest.py                         |  66 ++++++++++
-> >  .../binman/test/351_capsule_signed_pkcs11.dts |  22 ++++
-> >  tools/mkeficapsule.c                          | 113 +++++++++++++-----
-> >  8 files changed, 221 insertions(+), 34 deletions(-)
-> >  create mode 100644 tools/binman/btool/p11_kit.py
-> >  create mode 100644 tools/binman/test/351_capsule_signed_pkcs11.dts
-> >
-> > --
-> > 2.47.3
-> >
->
-> Please make sure that you have 100% test coverage now. CI will fail
-> without it. If you need help on covering some code, please let me
-> know.
+Add support for loading the next stage from an MTD device in SPL.
 
-Please note though that the only goal is to cover the code. Binman is
-full of fakes and other techniques to do that with the minimum of
-effort.
+Introduce CONFIG_SPL_MTD_LOAD and a generic SPL MTD loader
+implementation that uses the MTD subsystem to read the U-Boot payload.
 
-Regards,
-Simon
+The loader works with any MTD-backed storage, including raw NAND and
+SPI NAND, without being tied to a specific NAND type.
+
+The payload offset defaults to CONFIG_SYS_MTD_U_BOOT_OFFS and can be
+overridden via the device tree property:
+
+    u-boot,spl-payload-offset
+
+To support both raw NAND and SPI NAND boot flows, the loader is
+registered for BOOT_DEVICE_NAND and BOOT_DEVICE_SPI. This allows it
+to operate correctly on platforms where the ROM reports either NAND
+or SPI as the boot source while using the same MTD-based loading
+infrastructure.
+
+The required NAND core and SPI NAND drivers are built for SPL when
+CONFIG_SPL_MTD_LOAD is enabled.
+
+This provides reusable infrastructure for boards that boot from MTD
+devices without relying on SPI-specific or NAND-specific SPL loaders.
+
+Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+---
+Changes since v1:
+- Use uclass_get_device_by_seq().
+- Use puts() instead of debug() for error.
+- Include the new loader to include/spl_load.h.
+- Introduce SPL_MTD_SPI_NAND.
+
+ common/spl/Kconfig        | 30 ++++++++++++++
+ common/spl/Makefile       |  1 +
+ common/spl/spl_mtd.c      | 83 +++++++++++++++++++++++++++++++++++++++
+ drivers/mtd/Makefile      |  1 +
+ drivers/mtd/nand/Makefile |  4 +-
+ include/spl_load.h        |  1 +
+ 6 files changed, 119 insertions(+), 1 deletion(-)
+ create mode 100644 common/spl/spl_mtd.c
+
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 2998b7acb75f..16dbc5b54324 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -933,6 +933,12 @@ config SYS_MMCSD_FS_BOOT_PARTITION
+ 	  used in fs mode.
+ 	  Use -1 as a special value to use the first bootable partition.
+ 
++config SYS_SPL_MTD_SEQ
++	int "MTD device number for the SPL load"
++	default 0
++	help
++	  MTD device number used for the SPL load.
++
+ config SPL_MMC_TINY
+ 	bool "Tiny MMC framework in SPL"
+ 	depends on SPL_MMC
+@@ -1578,6 +1584,30 @@ config SPL_SPI_LOAD
+ 
+ endif # SPL_SPI_FLASH_SUPPORT
+ 
++config SPL_MTD_LOAD
++	bool "Support loading from a generic MTD device"
++	depends on SPL
++	depends on MTD && DM_MTD
++	help
++	  Enable support for loading the next stage from an MTD device
++	  using the MTD subsystem in SPL.
++
++	  This supports raw NAND and SPI NAND devices.
++
++config SPL_MTD_SPI_NAND
++	bool "Enable SPI NAND support in SPL"
++	depends on SPL_MTD_LOAD
++	select MTD_SPI_NAND
++	help
++	 Build SPI NAND support for SPL.
++
++config SYS_MTD_U_BOOT_OFFS
++	hex "address of U-boot payload in the MTD device"
++	default 0x0
++	help
++	 Address within the MTD device where the U-boot payload is fetched
++	 from.
++
+ config SYS_SPI_U_BOOT_OFFS
+ 	hex "address of u-boot payload in SPI flash"
+ 	default 0x8000 if ARCH_SUNXI
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index 4c9482bd3096..67fc1cd1b396 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) += spl_nvme.o
+ obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += spl_semihosting.o
+ obj-$(CONFIG_$(PHASE_)DFU) += spl_dfu.o
+ obj-$(CONFIG_$(PHASE_)SPI_LOAD) += spl_spi.o
++obj-$(CONFIG_SPL_MTD_LOAD) += spl_mtd.o
+ obj-$(CONFIG_$(PHASE_)RAM_SUPPORT) += spl_ram.o
+ obj-$(CONFIG_$(PHASE_)USB_SDP_SUPPORT) += spl_sdp.o
+ endif
+diff --git a/common/spl/spl_mtd.c b/common/spl/spl_mtd.c
+new file mode 100644
+index 000000000000..904f1fbad834
+--- /dev/null
++++ b/common/spl/spl_mtd.c
+@@ -0,0 +1,83 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/*
++ * Generic SPL loader for MTD devices.
++ *
++ * Based on spl_spi.c, which is:
++ *
++ * Copyright (C) 2011 OMICRON electronics GmbH
++ *
++ * based on drivers/mtd/nand/raw/nand_spl_load.c
++ *
++ * Copyright (C) 2011
++ * Heiko Schocher, DENX Software Engineering, hs@denx.de.
++ */
++
++#include <config.h>
++#include <errno.h>
++#include <image.h>
++#include <log.h>
++#include <spl.h>
++#include <spl_load.h>
++
++#include <dm.h>
++#include <dm/ofnode.h>
++#include <dm/uclass.h>
++#include <mtd.h>
++
++static struct mtd_info *spl_mtd_get_device(void)
++{
++	struct udevice *dev;
++	int ret;
++
++	ret = uclass_get_device_by_seq(UCLASS_MTD, CONFIG_SYS_SPL_MTD_SEQ, &dev);
++	if (ret)
++		return NULL;
++
++	return dev_get_uclass_priv(dev);
++}
++
++static ulong spl_mtd_read(struct spl_load_info *load,
++			  ulong offs, ulong size, void *buf)
++{
++	struct mtd_info *mtd = load->priv;
++	size_t retlen;
++	int ret;
++
++	ret = mtd_read(mtd, offs, size, &retlen, buf);
++	if (ret && !mtd_is_bitflip(ret))
++		return 0;
++
++	if (retlen != size)
++		return 0;
++
++	return retlen;
++}
++
++static int spl_mtd_load_image(struct spl_image_info *spl_image,
++			      struct spl_boot_device *bootdev)
++{
++	struct spl_load_info load;
++	struct mtd_info *mtd;
++	ulong offset;
++
++	mtd = spl_mtd_get_device();
++	if (!mtd) {
++		puts("SPL: No MTD device found\n");
++		return -ENODEV;
++	}
++
++	spl_load_init(&load, spl_mtd_read, mtd, mtd->writesize);
++
++	offset = CONFIG_SYS_MTD_U_BOOT_OFFS;
++
++	if (CONFIG_IS_ENABLED(OF_REAL))
++		offset = ofnode_conf_read_int("u-boot,spl-payload-offset",
++					      offset);
++
++	return spl_load(spl_image, bootdev, &load, 0, offset);
++}
++
++/* Priority 1 so boards may override */
++SPL_LOAD_IMAGE_METHOD("MTD-NAND", 1, BOOT_DEVICE_NAND, spl_mtd_load_image);
++SPL_LOAD_IMAGE_METHOD("MTD-SPI-NAND", 1, BOOT_DEVICE_SPI, spl_mtd_load_image);
+diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
+index ce05e206073d..0856a8f68732 100644
+--- a/drivers/mtd/Makefile
++++ b/drivers/mtd/Makefile
+@@ -34,6 +34,7 @@ else
+ ifneq ($(mtd-y),)
+ obj-$(CONFIG_SPL_MTD) += mtd.o
+ endif
++obj-$(CONFIG_SPL_MTD_LOAD) += nand/
+ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += nand/
+ obj-$(CONFIG_SPL_ONENAND_SUPPORT) += onenand/
+ obj-$(CONFIG_$(PHASE_)SPI_FLASH_SUPPORT) += spi/
+diff --git a/drivers/mtd/nand/Makefile b/drivers/mtd/nand/Makefile
+index c8169cf73902..4bc11054ad74 100644
+--- a/drivers/mtd/nand/Makefile
++++ b/drivers/mtd/nand/Makefile
+@@ -1,10 +1,12 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+-ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+ nandcore-objs := core.o bbt.o
++ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+ obj-$(CONFIG_MTD_NAND_CORE) += nandcore.o
+ obj-$(CONFIG_MTD_RAW_NAND) += raw/
+ obj-$(CONFIG_MTD_SPI_NAND) += spi/
+ else
++obj-$(CONFIG_SPL_MTD_LOAD) += nandcore.o
++obj-$(CONFIG_SPL_MTD_SPI_NAND) += spi/
+ obj-$(CONFIG_$(PHASE_)NAND_SUPPORT) += raw/
+ endif
+diff --git a/include/spl_load.h b/include/spl_load.h
+index 525e0c9e86c6..5b06fa419dbf 100644
+--- a/include/spl_load.h
++++ b/include/spl_load.h
+@@ -113,6 +113,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ 	IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) + \
+ 	IS_ENABLED(CONFIG_SPL_SEMIHOSTING) + \
+ 	IS_ENABLED(CONFIG_SPL_SPI_LOAD) + \
++	IS_ENABLED(CONFIG_SPL_MTD_LOAD) + \
+ 	0
+ 
+ #if SPL_LOAD_USERS > 1
+-- 
+2.34.1
+
