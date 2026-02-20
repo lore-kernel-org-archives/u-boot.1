@@ -4,107 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C0CC56203
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E9DEC56204
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 14:35:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51DA283C39;
-	Fri, 20 Feb 2026 15:33:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 62C8083AC5;
+	Fri, 20 Feb 2026 15:35:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="aZeLeWPV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V4pT5Z/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2E583C39; Fri, 20 Feb 2026 15:33:20 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2C11183D0F; Fri, 20 Feb 2026 15:35:24 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8D2783936
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:33:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8B6D73F659
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 14:33:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1771597998;
- bh=RCXjaK5lLuWKDjQVoFNPTx9BwMMnaBw39mCBluvnpRw=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=aZeLeWPV14Hj5sukBVw4b656koVwir64AVkUEOO9nFOntzhK3vdOi9oUp6F8RYcHl
- Vj+f1JT0LPivYBF2wNUTPoSdE0amzWDek3eme0BUhLvdo05kPtSMrWIUO5XNRBCMcF
- 0x5VdaIuRROMnhwyGruSkQvrHPrZNGg9oF6ZIAEJm4yrgjPYPMuqkr6wgat5px9TjP
- RRzWlAHuM939XM1DqnsKDW3FryzTdh1MRTnGfAc+ptM1HY0XiTg6RZOP98kxTry4WY
- cieOX4Iu/LZVLOsMbsSBrWEEW5tkrbmQc6E4JvOzzQKNl4qgYensftg2T7/6br+j+a
- iO8lm7f+fBAwUQro24tSzfqQ5nY3/Z5mosNv6A8PVeJy64hx7b6g7zd3HporYESlVm
- 3/jJus5XqVe+uIMe9494lcK09Mcp+Wbg7OI2Eh5H6oNNxDyG2FEqozVEa/VsMeog7E
- D0QtNk6mfxadllhek/Ya5K9FYnT2ZYjvcGQEjDZW6pIrQ5MGg37XNMnWdzEa9V/RVT
- YiZhCBwqdaFeMFikTCHKcNYpoJqAMRZK0Sb996SU1/TsAEurrv40hDe2PuBcl0vAkB
- XhoSO4rBbtVLt8qNHU6HiiP1rcP3eY7zfWtQsXNdRVNMBy4AaEsR/Ods05QVpfV/FY
- utI3IW+x9PtLdBYugtk9h46U=
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-43630b02fb4so2141022f8f.3
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:33:18 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2FBA802C1
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 15:35:21 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-40423dbe98bso895413fac.2
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 06:35:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771598121; x=1772202921; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=AxQJS5KVEEn+HQ72nqpn19v6E/3wuFJQ+LP9LknesLE=;
+ b=V4pT5Z/r5s0EB1tHkEkhmffzMEgmS0tuqvcUrOLo1cPcqb0LRmVUSqjtmB5wyXqEgh
+ hf0sO/IVWeYRKQPn4fmRxhRXFUNize184R5eTYY2vIAfqx6SHzD9Kxj5blYjCfPN8cTb
+ LVBUWi1jqMLn4bmihbBfOnMy0yjnz8Mjiy4S4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771597998; x=1772202798;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RCXjaK5lLuWKDjQVoFNPTx9BwMMnaBw39mCBluvnpRw=;
- b=Iv7rjz2TZCW84+wUQ4vnDlbAmyWflBQdfquNsdoGZLROBSjgEXwTttkGRGQLQi6GkU
- dnSRblg1Vbwai5xRW6UQiv8RNdaTjL0v5HcfFNTYp1WcCYolHe824RBL1cc8kbLZOCYG
- N73DhXZAMa9E62bqI2eZkOD+vNwTUnqXvvy6ftH7Gs7UbVf9KsI+rokEPOtWOMP5A6gw
- 9piUvEBh1r5ROIL/Fx+3Vh/yZVVFDeEln3WP4DAJLfSWH79ysRuWWCI7qm3ET+yk9WHg
- e8Wr4MtHeB77IBfGfVqz7kS+Q0dqr5SGnWj6Cg63gPQ4TygQbttuglGUYIzVEeAUs9H2
- vsHQ==
+ d=1e100.net; s=20230601; t=1771598121; x=1772202921;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AxQJS5KVEEn+HQ72nqpn19v6E/3wuFJQ+LP9LknesLE=;
+ b=iMf6jAWhkg7/9z7nH0jVs1HPPn2QaABCVP2Z7E3UrVyR+1OxZ/OmC/LxL+legmwJYf
+ rmsdXySfw64PsmV05Az8gijzpXA9YkmBrT00SYOdxkqmxz79pQV6SoXXefub+0l5zLWh
+ vDg+EVsd79J8rReGfnIQ84Aef75Wrur5ty0n1Uj4U6XaYiV95aPZbRueOgr+Z04s1bb2
+ xIPGhe4VXAvvgQ0O+M+CIO6iTe/6pm2AGPmN+kjaD8pgSAMcN5b9ZwzjZDEAT7F0i6YT
+ Xk1w+ZHzzcAdgURJBmDf+YPNW2dA8ZLdgSlG83xaruyZ+E7iqMW6bhFq5fPUvWkEtAL6
+ 133g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUibE0+SNBsYMG/NkeAkbHsuOCcum745Z8c94ZfZjSeJ7OLVd+iaY3xGvhZCtVmupYpHWx3IPw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRigJWuNSCFsBeBPahgR4B4youjlf7x/5E3f2pD88dIlZPjJa5
- VVhUnI/rYeFeReqEaVRmmB3BMSyoQNUdRz+YvF2nEE6WEpn5IdRtU09ORClVULRpojrkqQFa5Kt
- GLTPaFAtKO76PihQ62neTt6IaQcdonsEOqcl9MbdMBB8NTJitSLRB7nT8ZlxpOAlWUKEsC/c=
-X-Gm-Gg: AZuq6aLbRQXFWLHtM/vq+XFDx/DD+9S4XzofegSwm2aQCPvn8R8W3M9gDf+ENsDFt9U
- /ecS1+WuepJKYrYQCY/EfAcpFF+p5iiD/K1kF/7EDFPJeqLuwp7V+cK4VA9gxDpntViYUYTwjZ3
- kLYte3lT0oKcXkCLCNAdhQINpSXK5bX/RF1XP4GlIf+pjzOjRQk9TvpwK74S6qYecgOiDmmlcVw
- qOhQu3LfFr77Y15OhRKu8dgyA1nIpqBnQ/cHtWMqVw+QkzZ9feTlWFE+W0Iknp6tYPINV08Stfg
- NYG4l7NQuYtY+ze8+sNpVUXF1Xdfffk4ixHYq+bCk0Pw4vI1PA7XML4Z9VAdj/GlWsDIX9uO1pL
- cMiI+xnenN5Yw+1ldLwKhtRftZzB6ZMaFTvUcm0X8XKHDsXMbEgpkQhC3SrwzAIBynWBTHnveMX
- YlxwDEBctql2q7JeJoIHLxb1raS4DLgryL0HPDLu2KIoFr
-X-Received: by 2002:a5d:5f83:0:b0:435:bcbe:d104 with SMTP id
- ffacd0b85a97d-4396f17c94bmr173937f8f.34.1771597997956; 
- Fri, 20 Feb 2026 06:33:17 -0800 (PST)
-X-Received: by 2002:a5d:5f83:0:b0:435:bcbe:d104 with SMTP id
- ffacd0b85a97d-4396f17c94bmr173882f8f.34.1771597997513; 
- Fri, 20 Feb 2026 06:33:17 -0800 (PST)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43796ac800esm59646283f8f.27.2026.02.20.06.33.16
+ AJvYcCVVVe+94LpTA+b+vCc9B8QGSkk5HCqcrK7s0cGffsiuG1DfguDYf15yT7AaWQ/s7vcPj0ot7EU=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywrf7bFWz9/p11J2YjDeXvR1BPNx6TDw9bDxUTRde+NY/Pv0OB8
+ Q8/dEQtGaWH7SaSwALPYUrQlQ/VWmOGH9l9kD7FdnYyrOepIRkSmQv/kVhFhm1pLt1U=
+X-Gm-Gg: AZuq6aKRhhw8RD+FUcyXGBkMXIQar3mzwCercVe2muW9eRP0JuGMaFYtzLCbB0yagUQ
+ rK7nmIaDGp69ttHTN4uF27dbHVPEptE2mqHOukVflDJcEsjmNr5F9vOSu9sHlR89pNzmzMvAzbC
+ yBmHYwd53r2WoXXi8xZxgVyBVL9TvFEN+wj1PwhqhtNdIBnMbYafvBmNkRh8KSL2d8uUEL2NREf
+ LuZVSR/uchMiILCo566oYU8Zm3UTZTzLjQK6lv/nye4Fx0gwirDYRIdcL2qX63TPTGRpp+hv5Es
+ 9Ml7HdCL09x15ymLuJYxXqD7cTV4TOVpdz7fg2OUlgsB4a91ndShh3Z9s/djbwSQXRAFT+WYk2Z
+ oyLrMDHEC6F5MxKDWh05E6LLAFuFT4SyDp2fb4S6Za5mftSz4/A1tb9k2LtGz8tO5H/5IyYB5F1
+ cMljs/Z/eNs0F/cEkWs0XUtt5+1lRXOWf8nFwDGZqnfQJEdw7fWbsYprE/YAtgqKRuR5LDN3CT7
+ +hm65P+dhgy+S4aHWto+JOfH5OI0DvFOmPTEiv1uBeY2lqyMuiiI9Jj/stbSw==
+X-Received: by 2002:a05:6870:912c:b0:409:7d3a:bfdd with SMTP id
+ 586e51a60fabf-40f0d577329mr13669245fac.4.1771598120578; 
+ Fri, 20 Feb 2026 06:35:20 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-40ee06756easm24409635fac.13.2026.02.20.06.35.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Feb 2026 06:33:16 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Jerome Forissier <jerome.forissier@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Anshul Dalal <anshuld@ti.com>, Martin Schwan <m.schwan@phytec.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] boot: availability of command mii for NET_LWIP
-Date: Fri, 20 Feb 2026 15:33:11 +0100
-Message-ID: <20260220143311.36196-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ Fri, 20 Feb 2026 06:35:19 -0800 (PST)
+Date: Fri, 20 Feb 2026 08:35:16 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Fabio Estevam <festevam@gmail.com>, michael@amarulasolutions.com,
+ u-boot@lists.denx.de, dinesh.maniyam@altera.com, a-dutta@ti.com,
+ a-nandan@ti.com, jonas@kwiboo.se, Fabio Estevam <festevam@nabladev.com>
+Subject: Re: [PATCH v2] spl: Add generic SPL MTD loader support
+Message-ID: <20260220143516.GQ3233182@bill-the-cat>
+References: <20260220031232.1254728-1-festevam@gmail.com>
+ <fecf9c20-f5a5-d9f6-ddc0-dc8db483922d@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2ClOAJQkzRZ+BLcV"
+Content-Disposition: inline
+In-Reply-To: <fecf9c20-f5a5-d9f6-ddc0-dc8db483922d@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,30 +101,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If we are using the legacy or the LWIP network stack,
-should not influence our decision to provide command `mii`.
 
-Let BOOT_DEFAULTS_CMDS imply MII if either of the network
-stacks is available.
+--2ClOAJQkzRZ+BLcV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- boot/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Feb 19, 2026 at 10:52:20PM -0500, Sean Anderson wrote:
+> On 2/19/26 22:12, Fabio Estevam wrote:
+> > From: Fabio Estevam <festevam@nabladev.com>
+> >=20
+> > Add support for loading the next stage from an MTD device in SPL.
+> >=20
+> > Introduce CONFIG_SPL_MTD_LOAD and a generic SPL MTD loader
+> > implementation that uses the MTD subsystem to read the U-Boot payload.
+> >=20
+> > The loader works with any MTD-backed storage, including raw NAND and
+> > SPI NAND, without being tied to a specific NAND type.
+> >=20
+> > The payload offset defaults to CONFIG_SYS_MTD_U_BOOT_OFFS and can be
+> > overridden via the device tree property:
+> >=20
+> >      u-boot,spl-payload-offset
+> >=20
+> > To support both raw NAND and SPI NAND boot flows, the loader is
+> > registered for BOOT_DEVICE_NAND and BOOT_DEVICE_SPI. This allows it
+> > to operate correctly on platforms where the ROM reports either NAND
+> > or SPI as the boot source while using the same MTD-based loading
+> > infrastructure.
+> >=20
+> > The required NAND core and SPI NAND drivers are built for SPL when
+> > CONFIG_SPL_MTD_LOAD is enabled.
+> >=20
+> > This provides reusable infrastructure for boards that boot from MTD
+> > devices without relying on SPI-specific or NAND-specific SPL loaders.
+> >=20
+> > Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+[snip]
+> > diff --git a/common/spl/Makefile b/common/spl/Makefile
+> > index 4c9482bd3096..67fc1cd1b396 100644
+> > --- a/common/spl/Makefile
+> > +++ b/common/spl/Makefile
+> > @@ -35,6 +35,7 @@ obj-$(CONFIG_$(PHASE_)NVME) +=3D spl_nvme.o
+> >   obj-$(CONFIG_$(PHASE_)SEMIHOSTING) +=3D spl_semihosting.o
+> >   obj-$(CONFIG_$(PHASE_)DFU) +=3D spl_dfu.o
+> >   obj-$(CONFIG_$(PHASE_)SPI_LOAD) +=3D spl_spi.o
+> > +obj-$(CONFIG_SPL_MTD_LOAD) +=3D spl_mtd.o
+>=20
+> Does this need a $(PHASE_)? (I don't know, but the others have it)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index e5db165424a..3f8f3e7cf35 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -435,7 +435,7 @@ config BOOT_DEFAULTS_CMDS
- 	select CMD_PXE if CMD_NET
- 	select CMD_BOOTI if ARM64
- 	select CMD_BOOTZ if ARM && !ARM64
--	imply CMD_MII if NET
-+	imply CMD_MII if NET || NET_LWIP
- 
- config BOOT_DEFAULTS
- 	bool  # Common defaults for standard boot and distroboot
--- 
-2.51.0
+For consistency yes, even if we're unlikely to need this in TPL too.
 
+--=20
+Tom
+
+--2ClOAJQkzRZ+BLcV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZhxIQAKCRAr4qD1Cr/k
+Cl1wAQDGjgrTj9jA5m69BJu4PA2yOu2qBQlMyuPIOpRAaeBxCAEAsuV5qPH4FoG5
+SywTD3Ri/Zb0gy3l4kAHwiSgcR2Axw0=
+=cfu9
+-----END PGP SIGNATURE-----
+
+--2ClOAJQkzRZ+BLcV--
