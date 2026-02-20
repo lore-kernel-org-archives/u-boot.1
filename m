@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DACC5AE49
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 20:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B315C5B560
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 20:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93EF883D0F;
-	Fri, 20 Feb 2026 21:38:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=trailofbits.com
+	by phobos.denx.de (Postfix) with ESMTP id AAD2E83D17;
+	Fri, 20 Feb 2026 21:51:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=trailofbits.com header.i=@trailofbits.com header.b="ClnJDEah";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XaqoyqZI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82A3D83CEE; Fri, 20 Feb 2026 20:49:14 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 4588583D17; Fri, 20 Feb 2026 21:51:21 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F8BB83A5E
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 20:49:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=trailofbits.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2B20683A5E
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 21:51:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eric.kilmer@trailofbits.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-8c70b5594f4so272309285a.1
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 11:49:11 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-40ee9b945d5so1511441fac.0
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 12:51:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=trailofbits.com; s=google; t=1771616950; x=1772221750; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1771620678; x=1772225478; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vlLIF754pnaCZp78SyusltbFEvrL7rEhMMzqksfH5w0=;
- b=ClnJDEahLQQaV/sVoCquASCBz/pCOohg+i42f+L8AsbgrKCxy+5ODiF8UeL4esY794
- JCSOfSHZ8/uE9dV1A8bksNWFZcb1XxBDsZFByRF423CGEdkLwkvSs9sNmRGn7rpXr1Cl
- NzAVhkm9j17183AEaF2GPvh6dzOD82+tNobs+oFdI82+coY8T+IGY2s7ri6jhrfDSq4M
- DUZI+J8wt3yrZKcg6ZEhQVhg4XeGJ+ssKbafhHlXYHYSgaPSHiIKQFHoN566J6DEc+B7
- r2oHzoL3ATe4xM2I2sirbOC7k/q5ooVewK662RszUZm2B5i3H/UBe9fKd/KYAUaOno+X
- yJbw==
+ bh=0TwyUCmQOoob6z7wF2d4AH0AOGrenoBWuetX944cRxQ=;
+ b=XaqoyqZIl6mJNkFTbs6GvsW1UWzN1vrqQ9EPbWz7j/ONlTWTyADqgFvPm9EIlNOn1p
+ 2sBuVe9bQxOVtIl9Nrw2NPvmMe2vvMZ2G0vvAs1OYKKYzvKCgDNpOH+zlCwZnFw1RrpI
+ H1IQob/H6uY8A7/+i5Y0XYYrwS++MK0ENNSRA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771616950; x=1772221750;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1771620678; x=1772225478;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=vlLIF754pnaCZp78SyusltbFEvrL7rEhMMzqksfH5w0=;
- b=A9zOFjk8SfLZWqdwFWXqPlvU5h3R0JinIPcwJv4oLd1y7GJr8F4WSCaswIoXUdLrc1
- xXmHWdaziTy5G36W1tZVfIxw7P2yux3eR/or/Af7SkSsy7CKuCyrQSG5uBwYW5r9IlKN
- VJnrZfY41T0DFPn4OF6owGfVh65qHDPPI5OGe7DUmUfcbt2EZLIuNAkyOEOj4ga1P9Qv
- nSBd3bP3SgXv/jHTPV0oeu5ZsC8Jz85F/txXDxenCUf0OqygNBoZg+fTJ9gD6LgJClw1
- MCwCXbEW+sc+eDDxly1TznaLCsGou0mxCczBkG4jNCT7UtaoHKaYHpu7NtJn1+L2dmeD
- fpEg==
-X-Gm-Message-State: AOJu0YyLv5RIcla0WfeW0EuREk+SWzcNSV9mExR0mKt1wfXKA9weAhJ6
- XybmtbaXa3zUEyEK6+G4z1sJBDubJjqOHdAAhb48eqe63jFFmHJKAN10nJZIEUV9xKZbNS5Ch3D
- PXFl+k10=
-X-Gm-Gg: AZuq6aIn/Wsz+u5GYgZp8mFCehSvNUXa1Wgf+/YL+YfjEKI9zpczCaqfBrTmmR4PDLW
- /vlOzgNa4AbeYZb2stcOUkHcJ3dCKb5E2QMIEFdvR+ZOjnYVFKlkxenSRk97OZI/jbMeourGmLN
- a1zRUi2TAQ0hFddExlfYhmmf/us9AhWs5mC5ux7LQjZ8I0nCNB5VHC4rkl5WyCsqGCuTuiGzUjO
- sI2WkT4kdrdJfEk6wXNvdMQiIKjiqlRLKP2LUCr6Y0FZ5KBIMPt11RVetjOl54z9PMYPkXZlzEy
- hJpsB1MMj7M8EvFEuPYPQfZxVAOAbCiPDZL7NVOulgXRYiX3t1XcIEoNjhzLj7cxAOVhi2TkAjk
- Av6Ie03RW8+E7nplydFIOBUTLMFB7GAvnyNNP4sEX2qxTH26KKIxgBRWc6xkJRhJJ5u0Nr+74ER
- Tpz9rFeip0lxzEdv9ss1XPmqLBfsmpvDqf/dk=
-X-Received: by 2002:a05:620a:4611:b0:88e:1be9:cf65 with SMTP id
- af79cd13be357-8cb7c0049dfmr760672385a.39.1771616950398; 
- Fri, 20 Feb 2026 11:49:10 -0800 (PST)
-Received: from localhost ([2600:4040:5493:a900:ac9a:2022:5331:c80f])
- by smtp.gmail.com with UTF8SMTPSA id
- af79cd13be357-8cb8d103084sm28405285a.33.2026.02.20.11.49.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Feb 2026 11:49:09 -0800 (PST)
-From: Eric Kilmer <eric.kilmer@trailofbits.com>
-To: u-boot@lists.denx.de
-Cc: jmcosta944@gmail.com, thomas.petazzoni@bootlin.com,
- miquel.raynal@bootlin.com, trini@konsulko.com,
- Eric Kilmer <eric.kilmer@trailofbits.com>
-Subject: [PATCH 1/1] fs/squashfs: fix heap buffer overflow in
- sqfs_frag_lookup()
-Date: Fri, 20 Feb 2026 14:48:08 -0500
-Message-ID: <20260220194808.1146082-2-eric.kilmer@trailofbits.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260220194808.1146082-1-eric.kilmer@trailofbits.com>
-References: <20260220194808.1146082-1-eric.kilmer@trailofbits.com>
+ bh=0TwyUCmQOoob6z7wF2d4AH0AOGrenoBWuetX944cRxQ=;
+ b=ea0TakuPKRh+NM78urqkU8nG6PpEdRUhkKpNUBAWPxRfURVnBccTluX7uTxy5X8kxj
+ wGUWOqAYi+xPhH4TlZAat6n5n3gPhU0gIF233gmsXPD4PbceNP2JZMNhy9P41/b52B98
+ eW9R1BseS/5a6X0MVjkfXF/GjxsGMZ+lvk8JlXoJ9GQaDLdVEBBLWlkSTGYY2M8kT1dz
+ BJlWmcdxM2CW6RmBN0JpAlipZYSOoij6mVXaCgaUiYB5qOXdmCE8mHlXCyP6RmgknZTS
+ lbPlVQP4cnit9w4Zn7plnVSW5Rb9bizirvLIQPesPTwlYaHsL3En+2pGpG7RxBbehedk
+ eNKg==
+X-Gm-Message-State: AOJu0YwbzfY6XrqroWCb0dFf8wNZWIagp5MXyvenCgJ5zsfRv4JWIAqW
+ KRyJM1FF2/poytj7MMz4JUgAEhLJHTT+kuSZlEXYPvM6j0WElXYEvrFYvspCxWpN528=
+X-Gm-Gg: AZuq6aJNQaftjaHjohKukeL36CDmyWyHfgpSt1WlJaHsrtCEzhobDVpwujIlMgdecih
+ /+rDuZrTWyAvslvroayrvO2FZq1L6mENIxeBcz3AjLjMLznBBj8aFoTktfR8pN7IgK1nCr77z1r
+ rPza249BR5QbK04GbmPm3kd1xjBmEHSon6JHHRCzP+P8fuoK8irKc8imAHJPZgSegMEDYHz6Jwo
+ nOGF8ju/tP0FdjAcCKxrY67xGPJBKnDvnfzVQj0B8T9nG2qNLk0KMZrCLJod4GdQPf0a8RUUUm4
+ MdS4NXKmo6XqiKj268+iOjL7Ae11Lywa2299LLfvGqvGhC+CnAG8Zxqu2HadjzjaP0owI8LqVgJ
+ xmT1O0qebNCgwiiM9NKf2i5l1iDYqp7ERTetzOlIVwBhdS0ox9+POZ2pHb1eXYwSLhZf0qFNRGi
+ 4dvCcEpief76fLE50fMcze+gyZUuq16U7A6NxIzNrE82f9uz9UUha1cY0xeCI4+MgW53BWc73zM
+ qDzYVB+pZ3qJo3nWOYbIzqsRkEG+Af915oy/9DCnhO9Im9wn+wb8UGtgJCu
+X-Received: by 2002:a05:6870:b513:b0:409:6ddb:110d with SMTP id
+ 586e51a60fabf-4157b0cf43bmr789790fac.32.1771620677777; 
+ Fri, 20 Feb 2026 12:51:17 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4157cfed28esm525818fac.9.2026.02.20.12.51.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Feb 2026 12:51:17 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Paresh Bhagat <p-bhagat@ti.com>
+Cc: praneeth@ti.com, vigneshr@ti.com, bb@ti.com, khasim@ti.com, afd@ti.com, 
+ sparsh-kumar@ti.com, sebin.francis@ti.com, nm@ti.com, v-singh1@ti.com, 
+ vishalm@ti.com
+In-Reply-To: <20260130143339.1401600-1-p-bhagat@ti.com>
+References: <20260130143339.1401600-1-p-bhagat@ti.com>
+Subject: Re: [PATCH] board: ti: am62ax: tifs-rm-cfg.yaml: Add C7x resource
+ allocation entries
+Message-Id: <177162067642.148229.2373245366757815576.b4-ty@konsulko.com>
+Date: Fri, 20 Feb 2026 14:51:16 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 20 Feb 2026 21:38:16 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,40 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sqfs_frag_lookup() reads a 16-bit metadata block header whose lower
-15 bits encode the data size. Unlike sqfs_read_metablock() in
-sqfs_inode.c, this function does not validate that the decoded size is
-within SQFS_METADATA_BLOCK_SIZE (8192). A malformed SquashFS image can
-set the size field to any value up to 32767, causing memcpy to write
-past the 8192-byte 'entries' heap buffer.
+On Fri, 30 Jan 2026 20:03:39 +0530, Paresh Bhagat wrote:
 
-Add the same bounds check used by sqfs_read_metablock(): reject any
-metadata block header with SQFS_METADATA_SIZE(header) exceeding
-SQFS_METADATA_BLOCK_SIZE.
+> Update am62ax and am62dx tifs-rm-cfg with allocation entries for C7x
+> core to match with their rm-cfg. Following updates are added for C7x:
+> - Share split BCDMA tx and rx channels between DM R5 and C7x.
+> - Share rings for split BCDMA tx and rx channels between DM R5 and C7x.
+> - Add global events and virtual interrupts for C7x.
+> 
+> 
+> [...]
 
-Found by fuzzing with libFuzzer + AddressSanitizer.
+Applied to u-boot/next, thanks!
 
-Signed-off-by: Eric Kilmer <eric.kilmer@trailofbits.com>
----
- fs/squashfs/sqfs.c | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index f668c26472e..9cb8b4afcdd 100644
---- a/fs/squashfs/sqfs.c
-+++ b/fs/squashfs/sqfs.c
-@@ -178,6 +178,11 @@ static int sqfs_frag_lookup(u32 inode_fragment_index,
- 		goto out;
- 	}
- 
-+	if (SQFS_METADATA_SIZE(header) > SQFS_METADATA_BLOCK_SIZE) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
- 	entries = malloc(SQFS_METADATA_BLOCK_SIZE);
- 	if (!entries) {
- 		ret = -ENOMEM;
+[1/1] board: ti: am62ax: tifs-rm-cfg.yaml: Add C7x resource allocation entries
+      commit: 587b1a56752f31c1060d39dd0bd439ff08ea44d7
 -- 
-2.53.0
+Tom
+
 
