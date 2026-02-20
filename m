@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE1D6C54FCC
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:03:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7D2C54FCC
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:03:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76C3D83D3D;
-	Fri, 20 Feb 2026 10:03:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1D71D83DBF;
+	Fri, 20 Feb 2026 10:03:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XbUfIwco";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Kmb9IlB9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4869F83E13; Fri, 20 Feb 2026 10:02:59 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 7BCD183E13; Fri, 20 Feb 2026 10:03:33 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 263FE83D3D
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:02:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E2E983DAE
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:03:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EA12760054;
- Fri, 20 Feb 2026 09:02:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B00A8C116C6;
- Fri, 20 Feb 2026 09:02:49 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8340A43D3C;
+ Fri, 20 Feb 2026 09:03:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D186C116C6;
+ Fri, 20 Feb 2026 09:03:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771578175;
- bh=id/j9HCr/NRebYD1wgo00AvGd8ieKn9HYGnNIBqxYFM=;
+ s=k20201202; t=1771578209;
+ bh=N+JyPdw6KdSYUGMDwDeYoZcuIsYxrA21SRCA7fklYF8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=XbUfIwcouuljAaZrB7JKyXgSWo8+VSym9f5v07fguyBbKzQ8DGKVqxUiZFb5KmeyR
- iafFG2GrUWbmQpMswYQVP0zLAGzDJynBOt+YRws4imHcsTc9ZR63Q5jOIG+siaj4yw
- LmAbqNOXK9/J4KQN66vg2kI38CUD5bg4TgmAcAvRJpySNdSAy1GoBxP5+PcmGEo05l
- +dBxqklim7mPt6uhuSHntbn+3S9sNUuWgUNxA9+XNh3VPXoJEgoC7Iw4ZDvydsiOR3
- UnkjB5Wp6me0N92UcXiY5YcmJP/0z7WCSbB/HGdUJtQ0yY8z4NFjcmh/CIugnBbhiJ
- i1F50IBX5zs4w==
-Date: Fri, 20 Feb 2026 14:32:46 +0530
+ b=Kmb9IlB9wO4x1jWlT8oKysnjTSCExH/8S+5Uz7dcokXu2bjFV+gUUy+BncqlN9wis
+ En+J1FXt+6h2qSrAlFTUKHPeLNgbPaXyoVHupSeCYRyfH/PviVLpwy7HatXyOYpb30
+ kCp1O8m8MbdxU6wr/3PBG3crZ9zarTOAEFjRY6njMHAqrDLqeClZdBPfdbU+x+T8ia
+ OCYP3F8PeF4/1b9fJ4pYCdAaYoaO2WPHSGjD4FtIZtL+PsaUbKjtBEBnskeJkN/EKW
+ 8YpKXgPAME6fgx4VsHRi0OjGyc2WTaDjaxVaTXQXQQazI1SLSMdE/iSyjYLoPck6Ir
+ Enj7tV1Vi5qjw==
+Date: Fri, 20 Feb 2026 14:33:20 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 Cc: casey.connolly@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io,
@@ -52,15 +53,14 @@ Cc: casey.connolly@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io,
  varadarajan.narayanan@oss.qualcomm.com, rui.silva@linaro.org,
  ilias.apalodimas@linaro.org, me@samcday.com,
  marek.vasut+renesas@mailbox.org
-Subject: Re: [PATCH v8 3/4] mach-snapdragon: Remove RPMH power domain DT
- fixup code
-Message-ID: <aZgjNiXk3DxwAzTX@sumit-xelite>
+Subject: Re: [PATCH v8 4/4] qcom_defconfig: Add QCOM_RPMH_POWER_DOMAIN config
+Message-ID: <aZgjWDdagPDRvD42@sumit-xelite>
 References: <20260213111009.1254360-1-aswin.murugan@oss.qualcomm.com>
- <20260213111009.1254360-4-aswin.murugan@oss.qualcomm.com>
+ <20260213111009.1254360-5-aswin.murugan@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260213111009.1254360-4-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260213111009.1254360-5-aswin.murugan@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,29 +77,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 13, 2026 at 04:40:08PM +0530, Aswin Murugan wrote:
-> Remove the device tree fixup code that was stripping power-domains
-> properties from device tree nodes. This fixup was a temporary
-> workaround needed when RPMH power domain driver support was not
-> available in U-Boot.
+On Fri, Feb 13, 2026 at 04:40:09PM +0530, Aswin Murugan wrote:
+> Enable QCOM_RPMH_POWER_DOMAIN config for qualcomm devices
 > 
-> Now that RPMH power domain driver support has been added, the power
-> domain properties can be preserved in the device tree, allowing proper
-> power domain management. If a suitable power domain driver is not found
-> for the power-controller node, it will be handled with a warning in
-> dev_power_domain_ctrl().
-> 
-> Reviewed-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
 > ---
 > v8:
-> - Changed commit message
->
+> - No changes to this patch in v8
 
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 
 -Sumit
 
+> 
 > v7:
 > - No changes to this patch in v7
 > 
@@ -110,66 +101,29 @@ Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 > - No changes to this patch in v5
 > 
 > v4:
-> - Reverted the inclusion of qcom-rpmpd.h header in pervious versions.
+> - No changes to this patch in v4
 > 
 > v3:
-> - Removed OF_LIVE_SA8775P config, since there is no SA8775P specific fixups are done
+> - Removed OF_LIVE_SA8775P config, since there is no SA8775p specific fixups are done
 > 
 > v2:
-> - Removed the power domain fixups, since the power domains are handled in qcom-rpmhpd driver
+> - No changes to this patch in v2
 > ---
->  arch/arm/mach-snapdragon/of_fixup.c | 31 -----------------------------
->  1 file changed, 31 deletions(-)
+>  configs/qcom_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 5b6076ea8e5..286541c8edc 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -134,36 +134,6 @@ static void fixup_usb_nodes(struct device_node *root)
->  	}
->  }
->  
-> -/* Remove all references to the rpmhpd device */
-> -static void fixup_power_domains(struct device_node *root)
-> -{
-> -	struct device_node *pd = NULL, *np = NULL;
-> -	struct property *prop;
-> -	const __be32 *val;
-> -
-> -	/* All Qualcomm platforms name the rpm(h)pd "power-controller" */
-> -	for_each_of_allnodes_from(root, pd) {
-> -		if (pd->name && !strcmp("power-controller", pd->name))
-> -			break;
-> -	}
-> -
-> -	/* Sanity check that this is indeed a power domain controller */
-> -	if (!of_find_property(pd, "#power-domain-cells", NULL)) {
-> -		log_err("Found power-controller but it doesn't have #power-domain-cells\n");
-> -		return;
-> -	}
-> -
-> -	/* Remove all references to the power domain controller */
-> -	for_each_of_allnodes_from(root, np) {
-> -		if (!(prop = of_find_property(np, "power-domains", NULL)))
-> -			continue;
-> -
-> -		val = prop->value;
-> -		if (val[0] == cpu_to_fdt32(pd->phandle))
-> -			of_remove_property(np, prop);
-> -	}
-> -}
-> -
->  #define time_call(func, ...) \
->  	do { \
->  		u64 start = timer_get_us(); \
-> @@ -176,7 +146,6 @@ static int qcom_of_fixup_nodes(void * __maybe_unused ctx, struct event *event)
->  	struct device_node *root = event->data.of_live_built.root;
->  
->  	time_call(fixup_usb_nodes, root);
-> -	time_call(fixup_power_domains, root);
->  
->  	return 0;
->  }
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index fe5880de1fd..bced5d6eb0f 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -126,6 +126,7 @@ CONFIG_MSM_SERIAL=y
+>  CONFIG_MSM_GENI_SERIAL=y
+>  CONFIG_SOC_QCOM=y
+>  CONFIG_QCOM_COMMAND_DB=y
+> +CONFIG_QCOM_RPMH_POWER_DOMAIN=y
+>  CONFIG_QCOM_RPMH=y
+>  CONFIG_SPMI_MSM=y
+>  CONFIG_SYSINFO=y
 > -- 
 > 2.34.1
 > 
