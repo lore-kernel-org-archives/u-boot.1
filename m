@@ -4,63 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7D2C54FCC
-	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BBA5C5516A
+	for <u-boot@archiver.kernel.org>; Fri, 20 Feb 2026 09:09:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D71D83DBF;
-	Fri, 20 Feb 2026 10:03:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1141783E36;
+	Fri, 20 Feb 2026 10:09:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Kmb9IlB9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nOjuHCGc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BCD183E13; Fri, 20 Feb 2026 10:03:33 +0100 (CET)
+ id 8D3EC83E40; Fri, 20 Feb 2026 10:09:53 +0100 (CET)
 Received: from sea.source.kernel.org (sea.source.kernel.org
  [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E2E983DAE
- for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:03:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8089683E21
+ for <u-boot@lists.denx.de>; Fri, 20 Feb 2026 10:09:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8340A43D3C;
- Fri, 20 Feb 2026 09:03:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D186C116C6;
- Fri, 20 Feb 2026 09:03:22 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id ECD4643BCE;
+ Fri, 20 Feb 2026 09:09:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF998C116C6;
+ Fri, 20 Feb 2026 09:09:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771578209;
- bh=N+JyPdw6KdSYUGMDwDeYoZcuIsYxrA21SRCA7fklYF8=;
+ s=k20201202; t=1771578589;
+ bh=AssqNMHov0wtI7rWOKdSRuDpwhnxCCKpqsvLmazzk9A=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Kmb9IlB9wO4x1jWlT8oKysnjTSCExH/8S+5Uz7dcokXu2bjFV+gUUy+BncqlN9wis
- En+J1FXt+6h2qSrAlFTUKHPeLNgbPaXyoVHupSeCYRyfH/PviVLpwy7HatXyOYpb30
- kCp1O8m8MbdxU6wr/3PBG3crZ9zarTOAEFjRY6njMHAqrDLqeClZdBPfdbU+x+T8ia
- OCYP3F8PeF4/1b9fJ4pYCdAaYoaO2WPHSGjD4FtIZtL+PsaUbKjtBEBnskeJkN/EKW
- 8YpKXgPAME6fgx4VsHRi0OjGyc2WTaDjaxVaTXQXQQazI1SLSMdE/iSyjYLoPck6Ir
- Enj7tV1Vi5qjw==
-Date: Fri, 20 Feb 2026 14:33:20 +0530
+ b=nOjuHCGcbsFDLVljwnIR4HCPQPM4usXg8F5klM92Q6lVMVguO4DVnphjBrRe5NL1w
+ rV1ZdgpPILk2XHAmIn2NV9ipYdVkIJwTZjavdVw4MrFiFQpgjqBXKKNMeL6ZaICWRp
+ 5cEz7+q5WkV0m8Gt1eA0lxLvwqJoCJ7U5ceesyyDrKWs4vxdcYLc1QgKYICvqo+NjS
+ +cqTzLis8+FA74keX/bmmQjRnOe0eiBh+3SLHOMG+wzbdDbY2Z5YQjWgXdhJxrJf+N
+ JCAToGVr44tXsyUlWuKq1ppATFDQlcJ6YWAlFeBFIHQiYxFkjA2f4bUEAkmdHsVj2P
+ lno+wVOXI8FJg==
+Date: Fri, 20 Feb 2026 14:39:42 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
-To: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-Cc: casey.connolly@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io,
- trini@konsulko.com, jh80.chung@samsung.com, peng.fan@nxp.com,
- neil.armstrong@linaro.org, tien.fong.chee@altera.com,
- miquel.raynal@bootlin.com, msp@baylibre.com,
- alif.zakuan.yuslaimi@altera.com,
- balaji.selvanathan@oss.qualcomm.com, w.egorov@phytec.de,
- varadarajan.narayanan@oss.qualcomm.com, rui.silva@linaro.org,
- ilias.apalodimas@linaro.org, me@samcday.com,
- marek.vasut+renesas@mailbox.org
-Subject: Re: [PATCH v8 4/4] qcom_defconfig: Add QCOM_RPMH_POWER_DOMAIN config
-Message-ID: <aZgjWDdagPDRvD42@sumit-xelite>
-References: <20260213111009.1254360-1-aswin.murugan@oss.qualcomm.com>
- <20260213111009.1254360-5-aswin.murugan@oss.qualcomm.com>
+To: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+Subject: Re: [PATCH] qcom_defconfig: Switch Qualcomm fastboot flash from MMC
+ to block
+Message-ID: <aZgk1rZKhCW_7A2F@sumit-xelite>
+References: <20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260213111009.1254360-5-aswin.murugan@oss.qualcomm.com>
+In-Reply-To: <20260216-fb_block-v1-1-4e2d286bae76@oss.qualcomm.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,53 +74,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 13, 2026 at 04:40:09PM +0530, Aswin Murugan wrote:
-> Enable QCOM_RPMH_POWER_DOMAIN config for qualcomm devices
-> 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
-> ---
-> v8:
-> - No changes to this patch in v8
+Hi Balaji,
 
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+On Mon, Feb 16, 2026 at 09:45:49PM +0530, Balaji Selvanathan wrote:
+> Replace MMC-specific fastboot flash configuration with generic
+> block device support for Qualcomm platforms. This change switches
+> from MMC device 0 to SCSI interface with device ID 4, enabling
+> fastboot operations on UFS storage instead of eMMC.
+
+I don't think if it's right for qcom generic defconfig to hardcode
+fastboot flash device. Can you try to see rather if the fastboot flash
+device can be determined at runtime? As otherwise it might end up in
+target specific defconfig which we should avoid if we can.
 
 -Sumit
 
 > 
-> v7:
-> - No changes to this patch in v7
-> 
-> v6:
-> - No changes to this patch in v6
-> 
-> v5:
-> - No changes to this patch in v5
-> 
-> v4:
-> - No changes to this patch in v4
-> 
-> v3:
-> - Removed OF_LIVE_SA8775P config, since there is no SA8775p specific fixups are done
-> 
-> v2:
-> - No changes to this patch in v2
+> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > ---
->  configs/qcom_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  configs/qcom_defconfig | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 > 
 > diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index fe5880de1fd..bced5d6eb0f 100644
+> index fe5880de1fd..2666adb0569 100644
 > --- a/configs/qcom_defconfig
 > +++ b/configs/qcom_defconfig
-> @@ -126,6 +126,7 @@ CONFIG_MSM_SERIAL=y
->  CONFIG_MSM_GENI_SERIAL=y
->  CONFIG_SOC_QCOM=y
->  CONFIG_QCOM_COMMAND_DB=y
-> +CONFIG_QCOM_RPMH_POWER_DOMAIN=y
->  CONFIG_QCOM_RPMH=y
->  CONFIG_SPMI_MSM=y
->  CONFIG_SYSINFO=y
+> @@ -77,8 +77,9 @@ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
+>  CONFIG_USB_FUNCTION_FASTBOOT=y
+>  CONFIG_FASTBOOT_BUF_ADDR=0x0
+>  CONFIG_FASTBOOT_FLASH=y
+> -CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> -CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
+> +CONFIG_FASTBOOT_FLASH_BLOCK=y
+> +CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME="scsi"
+> +CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID=4
+>  CONFIG_MSM_GPIO=y
+>  CONFIG_QCOM_PMIC_GPIO=y
+>  CONFIG_DM_I2C=y
+> 
+> ---
+> base-commit: f9ffeec4bdcf1da655a0ffea482062adde78fee8
+> change-id: 20260216-fb_block-6193ec15ccf6
+> 
+> Best regards,
 > -- 
-> 2.34.1
+> Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
 > 
