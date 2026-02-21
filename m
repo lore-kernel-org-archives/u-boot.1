@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C63C61DFB
-	for <u-boot@archiver.kernel.org>; Sat, 21 Feb 2026 17:33:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B71C61DE3
+	for <u-boot@archiver.kernel.org>; Sat, 21 Feb 2026 17:33:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB51B83D17;
-	Sat, 21 Feb 2026 18:32:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 242FA83DBF;
+	Sat, 21 Feb 2026 18:32:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TMPlKQOD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JgMrRMmF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B68583A41; Sat, 21 Feb 2026 17:32:27 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 2307F83936; Sat, 21 Feb 2026 17:32:32 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAF70801BE
- for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 17:32:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DCAD0801BE
+ for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 17:32:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2a91215c158so20372455ad.0
- for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 08:32:24 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2a871daa98fso20816385ad.1
+ for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 08:32:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771691543; x=1772296343; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1771691547; x=1772296347; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PsStu99SvKp4nR9xQ1oemSijpYLMhzSTUrPObC/Cr+o=;
- b=TMPlKQODbhec7l3hYAp5M5tNjMMaDDf8ZbmE+OMniabV+9gpH9Spvex+ML+acKVpoy
- 75Vf4L4z1stgQ0erLn5cVB0ipe5lfP8qnCeT5av3qdEVqKxnmTGuSSmp8rF8T9YpSXty
- kcynp9eDthQGCUPsbyIWEAHxj4vxGBIWWphRnhy1XM5ItTDtjy9JPqKYshdZ11zVHde/
- WsAfqAOy24H7MSw0VNu/EYJuv5vKawGAaMVep7AllWO+F1nVebv7YN1/MgIi2a3C1zp0
- jgK38+MbGd2rMp6Yr1y/mOoMidy0Fp8DwYoO/E05NDKi6psWf8CbKV+E54Gu8lC1FZMN
- oRAg==
+ bh=IJEIUbaiJbu423esZVw26Ck2Lda8RwYSyUcMasYoxJw=;
+ b=JgMrRMmFZgfj4cx41hb1EaDHiCn8aboLDVVe3eiJIFpmJ18DQq8f/9gRUJtlq/gvd8
+ Q+oFI4LHAhukjaf4Zu6DIr8X260eeZf70v+Z6VpZhJ2oAFHb/1GPAyJ/JXJ2wqisZAjk
+ 9j4fzZhBBABPsnR4rqilqGyAM+a6BbB+zGLBo7X9+/CL/pUszrItD2C398G+fsR4HI4k
+ tBSoVBHbkqR91Kp2sXXV/D9+jxHOXSNT2Y5o+IpQRVD0yLyHOJYsVJNTE2SF8zjai0/C
+ nEZDtS1bTy+kW1czxMftS+dnyIDNdnpXFxrxuAhggKfEQ9QcEjhXpOafYXPuioX4ugW/
+ MLHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771691543; x=1772296343;
+ d=1e100.net; s=20230601; t=1771691547; x=1772296347;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PsStu99SvKp4nR9xQ1oemSijpYLMhzSTUrPObC/Cr+o=;
- b=pJovdiWunkc4T4tDHSd/UjTq4STaNIWw1i1uj5AWOkBPc7szWeSE3b/BfCp1sj4rzw
- OVMSTqaM2+wPx55gEJMQnUiuH2tm/YKb8kNvxu2cHXyWFkxHkjV55rdSKcoT8zf79Cfw
- gy1ToVlNJGU297tbBsdZhDpi0j5bSwiMn64I9NVCO8yUf5xPLcVIev2pwd1nv8hWESy5
- mFol1ev+C84TGrIh2PUUJCOHhkxy13yRdFHWUXFG/u3cr5p2QtuXKT0Y/j3F3g0zzwl/
- m+4/CQIHYymY/ZuBcCOyyliI8TDRjRjRIE+5MnBXNw1FyhXZAK199zSX8pZIKPHviGlm
- Z5Hw==
+ bh=IJEIUbaiJbu423esZVw26Ck2Lda8RwYSyUcMasYoxJw=;
+ b=kQAagEr4BtkTU28x+9zEk7IMpbJ18S9sIEjjPTNXycGtKvaxporis6Z24GQ217ij35
+ mjKc7FeFYBx5YHNIvDgtRBhRykqx+1548Nw8VkucXslBXCbZijTp2ttBnB7pk7Dmv0ER
+ eKKyKBmDuVUdSzoBqeXuzFBTLrGV4Bjk9cxk+cVapjEvRuYoxpFlTZ7W8TUSQrDtrj2p
+ ygkrze2me76NdFFCt3JFXBFnxDrCCGIio5RlZMfP5D+s6LEydRqGXb3zF8YmxTOuhFR1
+ YHwt34JSqneXsfb1LvD15ltwXUPJQnR+HVfahUo4dvczQROlNP+SCOULmM1/kKT8DSEs
+ 8LhQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpQCW8tspGsjj7HGJ4QUvvJRZLdigrW4J2sQqUh6ayuB5Dvzu0B1aAOm4WU5Q53Y1FvLDTWaM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwhTsPzkbGtvuk1Nkeoz9xXL3FI0E/5tfJIOnTi2TOnIrotxjMU
- 4I9g5Ih2aVmADhYuIP+H5jbbni/P4oUgCd+iHKm1NkR37c+lo3lVNKfw
-X-Gm-Gg: AZuq6aJpqBCgAWS1/499G/5qCVV0zrUaYPs55UgNSFqbXF4wTeQ1OKMYYSbw9rdFVRF
- oZPMXxUXny2HLsHhYejqo8LrVBw2zY9wc1zJuuVinUnzGQbSiIY3JCAuo2SCr6EZn6tQGvwccIo
- kwFBsuEi5FOO7t2wuEDJaHjb0jT0s96KIn5DkflkcrVnVoJsXENDOVxj01UxMwMLyjrH7851uQ+
- 9urhMKjbeKynkZpCJa7JyxiRV6A+Fw+StQl5FfJmjJnWWUDYzgs+jQjzaIzw2qdJSx3LSlPYvmN
- S2eb54jiRCyCn5hIQOwmYLG9JKLHCwbthDWvhZ7rR9etP+fcv7MBcsz9VMBk0evzZsZkpOwBYz6
- p+vz2S3O6fon9Tn28YTNaazbwdCjGdLyKw2kOIYiHUE8zcgZFUTYqw857aRbU5Vdleaf8rlIt+F
- rQHo4F/wpgmIQ+xcw7NOW5QCRWSSADE0SvfLgfrsGbdONeGtvmf52Kz5S5KFo9kBBVQlws8abrv
- Ve0BBCV9fvJsSGAVl7T4g==
-X-Received: by 2002:a17:902:c952:b0:2a9:838e:8d7f with SMTP id
- d9443c01a7336-2ad74524453mr33680785ad.41.1771691543122; 
- Sat, 21 Feb 2026 08:32:23 -0800 (PST)
+ AJvYcCWF0U9YQBREC3lAj2ixNN6jwhk7vni9S6A/hhO8Pj9JGvaXtCUJo8i1+JB1lbcuvqLnBy3URkE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwFKMIP7u1lTwvCC1ITNEKkfKv7sV86qVcxXGBCGnik8oc/LcGN
+ 2fgTf53YgM4yoPuLFAwkgx+gwO9dYywR2fq7UXaaes9FPn4/ND4hdmXP
+X-Gm-Gg: AZuq6aJ1dCv6AOtXMZXcPuyVM7qKQqllkXq8ZW+MU7zvGtk1kngoUYfo9F/uMYEf/7D
+ Ohe9U2lkzaPeoxUqW34XTC603I8eO/Ne3wxVL8I1vMd8qIGjgUbaheYub1/xx0i1UPxQrqcmHko
+ oqfrVjywpB43xnN92lqh7B4BuLKNK2++36AxJYVH6oDKOEXyrWANhyRqbvF/eRhw0j/9Nt5XR9X
+ gSYC5D7NY31H6EO+eWMTiS8AVggVkcomu+FjxCLb7iju7ftIup96ODUAAsm8a8iUfN+7aQ/O99s
+ /MwaWmFakyOs4LkNEbT8qdVQTXuP2AYIh0mdz8SNbrXcmZlnGFSK48B/yAvv7wYfku0lBdj350u
+ tf6KNX7ylz8wXg8us/M5SV2Mh5vaqqC7QoPtmhyD0MiKkwAK0GxpdG77vZxzmsklR3keGzjbIwZ
+ L+yMFyjPLNP1er9JfMW0NhAXv5Wmr7Qvleaa46zlx+EeYq952fI+KSY5gFoKwHXyp6YkQRG95ys
+ kIEro34PByWF9y4Saye5w==
+X-Received: by 2002:a17:903:18b:b0:2aa:f9d7:68af with SMTP id
+ d9443c01a7336-2ad74419eb9mr33742415ad.4.1771691547216; 
+ Sat, 21 Feb 2026 08:32:27 -0800 (PST)
 Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
  [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ad7500e062sm36868365ad.48.2026.02.21.08.32.20
+ d9443c01a7336-2ad7500e062sm36868365ad.48.2026.02.21.08.32.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Feb 2026 08:32:22 -0800 (PST)
+ Sat, 21 Feb 2026 08:32:26 -0800 (PST)
 From: "Lucien.Jheng" <lucienzx159@gmail.com>
 To: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
  marek.vasut+renesas@mailbox.org
@@ -80,15 +80,13 @@ Cc: ericwouds@gmail.com, kabel@kernel.org, vladimir.oltean@nxp.com,
  frank-w@public-files.de, daniel@makrotopia.org, ansuelsmth@gmail.com,
  mkorpershoek@kernel.org, skylake.huang@mediatek.com, u-boot@lists.denx.de,
  "Lucien.Jheng" <lucienzx159@gmail.com>
-Subject: [PATCH v1 1/4] dt-bindings: phy: rename transmit-amplitude to
- phy-common-props and add polarity
-Date: Sun, 22 Feb 2026 00:31:11 +0800
-Message-Id: <20260221163114.87553-2-lucienzx159@gmail.com>
+Subject: [PATCH v1 2/4] phy: add common PHY properties support
+Date: Sun, 22 Feb 2026 00:31:12 +0800
+Message-Id: <20260221163114.87553-3-lucienzx159@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260221163114.87553-1-lucienzx159@gmail.com>
 References: <20260221163114.87553-1-lucienzx159@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 21 Feb 2026 18:32:49 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -107,159 +105,467 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename transmit-amplitude.yaml to phy-common-props.yaml to better reflect
-its scope, and extend it with two new common PHY properties:
+Add a new PHY_COMMON_PROPS library that provides helper functions for
+PHY drivers to read standardized polarity properties from the device
+tree node:
 
-  - rx-polarity: configure receiver polarity (normal, inverted, or auto)
-  - tx-polarity: configure transmitter polarity (normal or inverted)
+  - phy_get_rx_polarity() / phy_get_tx_polarity()
+  - phy_get_manual_rx_polarity() / phy_get_manual_tx_polarity()
 
-Both properties support per-mode configuration via a companion -names
-property, with a "default" entry as fallback when a specific mode is
-not listed.
+Also add include/dt-bindings/phy/phy.h with PHY_POL_NORMAL,
+PHY_POL_INVERT, and PHY_POL_AUTO constants for use in device trees.
 
 Ported from Merge tag 'phy-for-7.0':
   git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy
 
-Link: https://git.kernel.org/linus/b7b4dcd96e3dfbb955d152c9ce4b490498b0f4b4
+Link: https://git.kernel.org/linus/e7556b59ba65179612bce3fa56bb53d1b4fb20db
 Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 ---
- ...t-amplitude.yaml => phy-common-props.yaml} | 92 +++++++++++++++----
- 1 file changed, 73 insertions(+), 19 deletions(-)
- rename dts/upstream/Bindings/phy/{transmit-amplitude.yaml => phy-common-props.yaml} (44%)
+ drivers/phy/Kconfig                  |   8 +
+ drivers/phy/Makefile                 |   1 +
+ drivers/phy/phy-common-props.c       | 286 +++++++++++++++++++++++++++
+ include/dt-bindings/phy/phy.h        |  32 +++
+ include/linux/phy/phy-common-props.h |  70 +++++++
+ 5 files changed, 397 insertions(+)
+ create mode 100644 drivers/phy/phy-common-props.c
+ create mode 100644 include/dt-bindings/phy/phy.h
+ create mode 100644 include/linux/phy/phy-common-props.h
 
-diff --git a/dts/upstream/Bindings/phy/transmit-amplitude.yaml b/dts/upstream/Bindings/phy/phy-common-props.yaml
-similarity index 44%
-rename from dts/upstream/Bindings/phy/transmit-amplitude.yaml
-rename to dts/upstream/Bindings/phy/phy-common-props.yaml
-index 617f3c0b3df..b2c709cc1b0 100644
---- a/dts/upstream/Bindings/phy/transmit-amplitude.yaml
-+++ b/dts/upstream/Bindings/phy/phy-common-props.yaml
-@@ -1,36 +1,27 @@
- # SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
- %YAML 1.2
- ---
--$id: http://devicetree.org/schemas/phy/transmit-amplitude.yaml#
-+$id: http://devicetree.org/schemas/phy/phy-common-props.yaml#
- $schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+index 87729b479bd..9a6d56a7fdc 100644
+--- a/drivers/phy/Kconfig
++++ b/drivers/phy/Kconfig
+@@ -329,4 +329,12 @@ source "drivers/phy/qcom/Kconfig"
+ source "drivers/phy/renesas/Kconfig"
+ source "drivers/phy/starfive/Kconfig"
  
--title: Common PHY and network PCS transmit amplitude property
-+title: Common PHY and network PCS properties
- 
- description:
--  Binding describing the peak-to-peak transmit amplitude for common PHYs
--  and network PCSes.
-+  Common PHY and network PCS properties, such as peak-to-peak transmit
-+  amplitude.
- 
- maintainers:
-   - Marek Behún <kabel@kernel.org>
- 
--properties:
--  tx-p2p-microvolt:
-+$defs:
-+  protocol-names:
-     description:
--      Transmit amplitude voltages in microvolts, peak-to-peak. If this property
--      contains multiple values for various PHY modes, the
--      'tx-p2p-microvolt-names' property must be provided and contain
--      corresponding mode names.
--
--  tx-p2p-microvolt-names:
--    description: |
--      Names of the modes corresponding to voltages in the 'tx-p2p-microvolt'
--      property. Required only if multiple voltages are provided.
--
--      If a value of 'default' is provided, the system should use it for any PHY
--      mode that is otherwise not defined here. If 'default' is not provided, the
--      system should use manufacturer default value.
-+      Names of the PHY modes. If a value of 'default' is provided, the system
-+      should use it for any PHY mode that is otherwise not defined here. If
-+      'default' is not provided, the system should use manufacturer default value.
-     minItems: 1
-     maxItems: 16
-+    uniqueItems: true
-     items:
-       enum:
-         - default
-@@ -89,15 +80,78 @@ properties:
-         - mipi-dphy-univ
-         - mipi-dphy-v2.5-univ
- 
-+properties:
-+  tx-p2p-microvolt:
-+    description:
-+      Transmit amplitude voltages in microvolts, peak-to-peak. If this property
-+      contains multiple values for various PHY modes, the
-+      'tx-p2p-microvolt-names' property must be provided and contain
-+      corresponding mode names.
++config PHY_COMMON_PROPS
++	bool "Common PHY properties support"
++	help
++	  Enable support for common PHY properties defined in the device tree,
++	  such as rx-polarity and tx-polarity. This provides helpers for PHY
++	  drivers to read polarity and other standard PHY properties from the
++	  device tree node.
 +
-+  tx-p2p-microvolt-names:
-+    description:
-+      Names of the modes corresponding to voltages in the 'tx-p2p-microvolt'
-+      property. Required only if multiple voltages are provided.
-+    $ref: "#/$defs/protocol-names"
+ endmenu
+diff --git a/drivers/phy/Makefile b/drivers/phy/Makefile
+index 5a6df0ecfeb..bbf795bd478 100644
+--- a/drivers/phy/Makefile
++++ b/drivers/phy/Makefile
+@@ -41,6 +41,7 @@ obj-$(CONFIG_PHY_NPCM_USB) += phy-npcm-usb.o
+ obj-$(CONFIG_$(PHASE_)PHY_IMX8MQ_USB) += phy-imx8mq-usb.o
+ obj-$(CONFIG_PHY_IMX8M_PCIE) += phy-imx8m-pcie.o
+ obj-$(CONFIG_PHY_XILINX_ZYNQMP) += phy-zynqmp.o
++obj-$(CONFIG_PHY_COMMON_PROPS) += phy-common-props.o
+ obj-y += cadence/
+ obj-y += ti/
+ obj-y += qcom/
+diff --git a/drivers/phy/phy-common-props.c b/drivers/phy/phy-common-props.c
+new file mode 100644
+index 00000000000..e02051e53b4
+--- /dev/null
++++ b/drivers/phy/phy-common-props.c
+@@ -0,0 +1,286 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * phy-common-props.c  --  Common PHY properties
++ *
++ * Copyright 2025-2026 NXP
++ * Ported to U-Boot 2026
++ */
++#include <dm/ofnode.h>
++#include <log.h>
++#include <malloc.h>
++#include <linux/phy/phy-common-props.h>
++#include <linux/bitops.h>
++#include <linux/err.h>
++#include <linux/errno.h>
 +
-+  rx-polarity:
-+    description:
-+      An array of values indicating whether the differential receiver's
-+      polarity is inverted. Each value can be one of
-+      PHY_POL_NORMAL (0) which means the negative signal is decoded from the
-+      RXN input, and the positive signal from the RXP input;
-+      PHY_POL_INVERT (1) which means the negative signal is decoded from the
-+      RXP input, and the positive signal from the RXN input;
-+      PHY_POL_AUTO (2) which means the receiver performs automatic polarity
-+      detection and correction, which is a mandatory part of link training for
-+      some protocols (PCIe, USB SS).
++/**
++ * ofnode_count_u32_prop - Count number of u32 elements in a property
++ * @node: Device tree node
++ * @propname: Property name
++ *
++ * Return: number of u32 elements, or negative error code
++ */
++static int ofnode_count_u32_prop(ofnode node, const char *propname)
++{
++	int size;
 +
-+      The values are defined in <dt-bindings/phy/phy.h>. If the property is
-+      absent, the default value is undefined.
++	size = ofnode_read_size(node, propname);
++	if (size < 0) {
++		pr_debug("%s: property '%s' not found (err=%d)\n",
++			 __func__, propname, size);
++		return size;
++	}
 +
-+      Note that the RXP and RXN inputs refer to the block that this property is
-+      under, and do not necessarily directly translate to external pins.
++	pr_debug("%s: property '%s' has %zu bytes (%zu elements)\n",
++		 __func__, propname, (size_t)size, (size_t)(size / sizeof(u32)));
 +
-+      If this property contains multiple values for various protocols, the
-+      'rx-polarity-names' property must be provided.
-+    $ref: /schemas/types.yaml#/definitions/uint32-array
-+    minItems: 1
-+    maxItems: 16
-+    items:
-+      enum: [0, 1, 2]
++	return size / sizeof(u32);
++}
 +
-+  rx-polarity-names:
-+    $ref: '#/$defs/protocol-names'
++/**
++ * ofnode_get_u32_prop_for_name - Find u32 property by name, or default value
++ * @node: Device tree node; if invalid or @props_title is absent, -ENOENT is returned
++ * @name: Property name used as lookup key in @names_title (must not be NULL)
++ * @props_title: Name of u32 array property holding values
++ * @names_title: Name of string array property holding lookup keys
++ * @default_val: Default value if @props_title exists but is empty
++ * @val: Pointer to store the returned value
++ *
++ * This function retrieves a u32 value from @props_title based on a name lookup
++ * in @names_title. The value stored in @val is determined as follows:
++ *
++ * - If @node is invalid or @props_title is absent: -ENOENT is returned
++ * - If @props_title exists but is empty: @default_val is used
++ * - If @props_title has exactly one element and @names_title is empty:
++ *   that element is used
++ * - Otherwise: @val is set to the element at the same index where @name is
++ *   found in @names_title.
++ * - If @name is not found, the function looks for a "default" entry in
++ *   @names_title and uses the corresponding value from @props_title
++ *
++ * When both @props_title and @names_title are present, they must have the
++ * same number of elements (except when @props_title has exactly one element).
++ *
++ * Return: zero on success, negative error on failure.
++ */
++static int ofnode_get_u32_prop_for_name(ofnode node, const char *name,
++					const char *props_title,
++					const char *names_title,
++					unsigned int default_val,
++					unsigned int *val)
++{
++	int err, n_props, n_names, idx;
++	u32 *props;
 +
-+  tx-polarity:
-+    description:
-+      Like 'rx-polarity', except it applies to differential transmitters,
-+      and only the values of PHY_POL_NORMAL and PHY_POL_INVERT are possible.
-+    $ref: /schemas/types.yaml#/definitions/uint32-array
-+    minItems: 1
-+    maxItems: 16
-+    items:
-+      enum: [0, 1]
++	if (!name) {
++		printf("Error: Lookup key inside \"%s\" is mandatory\n",
++		       names_title);
++		return -EINVAL;
++	}
 +
-+  tx-polarity-names:
-+    $ref: '#/$defs/protocol-names'
++	pr_debug("%s: looking up '%s' in props='%s' names='%s' default=%u\n",
++		 __func__, name, props_title, names_title, default_val);
 +
- dependencies:
-   tx-p2p-microvolt-names: [ tx-p2p-microvolt ]
-+  rx-polarity-names: [ rx-polarity ]
-+  tx-polarity-names: [ tx-polarity ]
- 
- additionalProperties: true
- 
- examples:
-   - |
-+    #include <dt-bindings/phy/phy.h>
++	n_props = ofnode_count_u32_prop(node, props_title);
++	if (n_props < 0) {
++		/* property is absent */
++		pr_debug("%s: '%s' is absent, returning -ENOENT\n",
++			 __func__, props_title);
++		return -ENOENT;
++	}
++	if (n_props == 0) {
++		/* property exists but is empty, use default */
++		pr_debug("%s: '%s' is empty, using default value %u\n",
++			 __func__, props_title, default_val);
++		*val = default_val;
++		return 0;
++	}
 +
-     phy: phy {
-       #phy-cells = <1>;
-       tx-p2p-microvolt = <915000>, <1100000>, <1200000>;
-       tx-p2p-microvolt-names = "2500base-x", "usb-hs", "usb-ss";
-+      rx-polarity = <PHY_POL_AUTO>, <PHY_POL_NORMAL>;
-+      rx-polarity-names = "usb-ss", "default";
-+      tx-polarity = <PHY_POL_INVERT>;
-     };
++	n_names = ofnode_read_string_count(node, names_title);
++
++	pr_debug("%s: '%s' has %d elements, '%s' has %d entries\n",
++		 __func__, props_title, n_props, names_title, n_names);
++	if (n_names >= 0 && n_props != n_names) {
++		printf("Error: mismatch between \"%s\" and \"%s\" property count (%d vs %d)\n",
++		       props_title, names_title, n_props, n_names);
++		return -EINVAL;
++	}
++
++	idx = ofnode_stringlist_search(node, names_title, name);
++	if (idx >= 0) {
++		pr_debug("%s: found '%s' at index %d in '%s'\n",
++			 __func__, name, idx, names_title);
++	} else {
++		pr_debug("%s: '%s' not found in '%s', trying 'default'\n",
++			 __func__, name, names_title);
++		idx = ofnode_stringlist_search(node, names_title, "default");
++		if (idx >= 0)
++			pr_debug("%s: 'default' entry found at index %d\n",
++				 __func__, idx);
++		else
++			pr_debug("%s: 'default' entry not found in '%s'\n",
++				 __func__, names_title);
++	}
++	/*
++	 * If the mode name is missing, it can only mean the specified property
++	 * is the default one for all modes, so reject any other property count
++	 * than 1.
++	 */
++	if (idx < 0 && n_props != 1) {
++		printf("Error: \"%s\" property has %d elements, but cannot find \"%s\" in \"%s\" and there is no default value\n",
++		       props_title, n_props, name, names_title);
++		return -EINVAL;
++	}
++
++	if (n_props == 1) {
++		pr_debug("%s: single-element '%s', reading directly\n",
++			 __func__, props_title);
++		err = ofnode_read_u32(node, props_title, val);
++		if (err) {
++			pr_debug("%s: failed to read '%s' (err=%d)\n",
++				 __func__, props_title, err);
++			return err;
++		}
++		pr_debug("%s: resolved value %u for name '%s' from '%s'\n",
++			 __func__, *val, name, props_title);
++		return 0;
++	}
++
++	/* We implicitly know idx >= 0 here */
++	props = calloc(n_props, sizeof(*props));
++	if (!props)
++		return -ENOMEM;
++
++	err = ofnode_read_u32_array(node, props_title, props, n_props);
++	if (err >= 0) {
++		*val = props[idx];
++		pr_debug("%s: resolved value %u at index %d for name '%s' from '%s'\n",
++			 __func__, *val, idx, name, props_title);
++	} else {
++		pr_debug("%s: failed to read u32 array '%s' (err=%d)\n",
++			 __func__, props_title, err);
++	}
++
++	free(props);
++
++	return err;
++}
++
++/**
++ * phy_get_polarity_for_mode - Get polarity for a specific PHY mode
++ * @node: Device tree node
++ * @mode_name: The name of the PHY mode to look up
++ * @supported: Bit mask of supported polarity values
++ * @default_val: Default polarity value if property is missing
++ * @polarity_prop: Name of the polarity property
++ * @names_prop: Name of the names property
++ * @val: Pointer to returned polarity
++ *
++ * Return: zero on success, negative error on failure.
++ */
++static int phy_get_polarity_for_mode(ofnode node, const char *mode_name,
++				     unsigned int supported,
++				     unsigned int default_val,
++				     const char *polarity_prop,
++				     const char *names_prop,
++				     unsigned int *val)
++{
++	int err;
++
++	pr_debug("%s: querying '%s' for mode '%s' (supported=0x%x, default=%u)\n",
++		 __func__, polarity_prop, mode_name, supported, default_val);
++
++	err = ofnode_get_u32_prop_for_name(node, mode_name, polarity_prop,
++					   names_prop, default_val, val);
++	if (err) {
++		pr_debug("%s: '%s' lookup failed for mode '%s' (err=%d)\n",
++			 __func__, polarity_prop, mode_name, err);
++		return err;
++	}
++
++	pr_debug("%s: '%s' for mode '%s' = %u\n",
++		 __func__, polarity_prop, mode_name, *val);
++
++	if (!(supported & BIT(*val))) {
++		printf("Error: %d is not a supported value for '%s' element '%s'\n",
++		       *val, polarity_prop, mode_name);
++		err = -EOPNOTSUPP;
++	}
++
++	return err;
++}
++
++/**
++ * phy_get_rx_polarity - Get RX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @supported: Bit mask of PHY_POL_NORMAL, PHY_POL_INVERT and PHY_POL_AUTO
++ * @default_val: Default polarity value if property is missing
++ * @val: Pointer to returned polarity.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_rx_polarity(ofnode node, const char *mode_name,
++			unsigned int supported, unsigned int default_val,
++			unsigned int *val)
++{
++	return phy_get_polarity_for_mode(node, mode_name, supported,
++					 default_val, "rx-polarity",
++					 "rx-polarity-names", val);
++}
++
++/**
++ * phy_get_tx_polarity - Get TX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @supported: Bit mask of PHY_POL_NORMAL, PHY_POL_INVERT and PHY_POL_AUTO
++ * @default_val: Default polarity value if property is missing
++ * @val: Pointer to returned polarity.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_tx_polarity(ofnode node, const char *mode_name,
++			unsigned int supported, unsigned int default_val,
++			unsigned int *val)
++{
++	return phy_get_polarity_for_mode(node, mode_name, supported,
++					 default_val, "tx-polarity",
++					 "tx-polarity-names", val);
++}
++
++/**
++ * phy_get_manual_rx_polarity - Get manual RX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @val: Pointer to returned polarity.
++ *
++ * Helper for PHYs which do not support protocols with automatic RX polarity
++ * detection and correction.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_manual_rx_polarity(ofnode node, const char *mode_name,
++			       unsigned int *val)
++{
++	return phy_get_rx_polarity(node, mode_name,
++				   BIT(PHY_POL_NORMAL) | BIT(PHY_POL_INVERT),
++				   PHY_POL_NORMAL, val);
++}
++
++/**
++ * phy_get_manual_tx_polarity - Get manual TX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @val: Pointer to returned polarity.
++ *
++ * Helper for PHYs without any custom default value for the TX polarity.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_manual_tx_polarity(ofnode node, const char *mode_name,
++			       unsigned int *val)
++{
++	return phy_get_tx_polarity(node, mode_name,
++				   BIT(PHY_POL_NORMAL) | BIT(PHY_POL_INVERT),
++				   PHY_POL_NORMAL, val);
++}
+diff --git a/include/dt-bindings/phy/phy.h b/include/dt-bindings/phy/phy.h
+new file mode 100644
+index 00000000000..56b5c57a84c
+--- /dev/null
++++ b/include/dt-bindings/phy/phy.h
+@@ -0,0 +1,32 @@
++/* SPDX-License-Identifier: GPL-2.0-only OR MIT */
++/*
++ *
++ * This header provides constants for the phy framework
++ *
++ * Copyright (C) 2014 STMicroelectronics
++ * Author: Gabriel Fernandez <gabriel.fernandez@st.com>
++ */
++
++#ifndef _DT_BINDINGS_PHY
++#define _DT_BINDINGS_PHY
++
++#define PHY_NONE		0
++#define PHY_TYPE_SATA		1
++#define PHY_TYPE_PCIE		2
++#define PHY_TYPE_USB2		3
++#define PHY_TYPE_USB3		4
++#define PHY_TYPE_UFS		5
++#define PHY_TYPE_DP		6
++#define PHY_TYPE_XPCS		7
++#define PHY_TYPE_SGMII		8
++#define PHY_TYPE_QSGMII		9
++#define PHY_TYPE_DPHY		10
++#define PHY_TYPE_CPHY		11
++#define PHY_TYPE_USXGMII	12
++#define PHY_TYPE_XAUI		13
++
++#define PHY_POL_NORMAL		0
++#define PHY_POL_INVERT		1
++#define PHY_POL_AUTO		2
++
++#endif /* _DT_BINDINGS_PHY */
+diff --git a/include/linux/phy/phy-common-props.h b/include/linux/phy/phy-common-props.h
+new file mode 100644
+index 00000000000..77158f3e5f1
+--- /dev/null
++++ b/include/linux/phy/phy-common-props.h
+@@ -0,0 +1,70 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * phy-common-props.h -- Common properties for generic PHYs
++ *
++ * Copyright 2025-2026 NXP
++ * Ported to U-Boot 2026
++ */
++
++#ifndef __PHY_COMMON_PROPS_H
++#define __PHY_COMMON_PROPS_H
++
++#include <dt-bindings/phy/phy.h>
++#include <dm/ofnode.h>
++
++/**
++ * phy_get_rx_polarity - Get RX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @supported: Bit mask of PHY_POL_NORMAL, PHY_POL_INVERT and PHY_POL_AUTO
++ * @default_val: Default polarity value if property is missing
++ * @val: Pointer to returned polarity.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_rx_polarity(ofnode node, const char *mode_name,
++			unsigned int supported, unsigned int default_val,
++			unsigned int *val);
++
++/**
++ * phy_get_tx_polarity - Get TX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @supported: Bit mask of PHY_POL_NORMAL, PHY_POL_INVERT and PHY_POL_AUTO
++ * @default_val: Default polarity value if property is missing
++ * @val: Pointer to returned polarity.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_tx_polarity(ofnode node, const char *mode_name,
++			unsigned int supported, unsigned int default_val,
++			unsigned int *val);
++
++/**
++ * phy_get_manual_rx_polarity - Get manual RX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @val: Pointer to returned polarity.
++ *
++ * Helper for PHYs which do not support protocols with automatic RX polarity
++ * detection and correction.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_manual_rx_polarity(ofnode node, const char *mode_name,
++			       unsigned int *val);
++
++/**
++ * phy_get_manual_tx_polarity - Get manual TX polarity for PHY differential lane
++ * @node: Pointer to the PHY's device tree node.
++ * @mode_name: The name of the PHY mode to look up.
++ * @val: Pointer to returned polarity.
++ *
++ * Helper for PHYs without any custom default value for the TX polarity.
++ *
++ * Return: zero on success, negative error on failure.
++ */
++int phy_get_manual_tx_polarity(ofnode node, const char *mode_name,
++			       unsigned int *val);
++
++#endif /* __PHY_COMMON_PROPS_H */
 -- 
 2.34.1
 
