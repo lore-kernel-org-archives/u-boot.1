@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76112C61DFB
-	for <u-boot@archiver.kernel.org>; Sat, 21 Feb 2026 17:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C26CBC61DFB
+	for <u-boot@archiver.kernel.org>; Sat, 21 Feb 2026 17:33:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A466E83DFF;
-	Sat, 21 Feb 2026 18:32:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C3D383E36;
+	Sat, 21 Feb 2026 18:32:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jMXloGhk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZOhz+ohK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1830A83A41; Sat, 21 Feb 2026 17:32:35 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 90A4F83AC5; Sat, 21 Feb 2026 17:32:38 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88968801BE
- for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 17:32:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06DC1801BE
+ for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 17:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2ad22a5e245so20986005ad.2
- for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 08:32:32 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2a7a23f5915so17616445ad.2
+ for <u-boot@lists.denx.de>; Sat, 21 Feb 2026 08:32:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771691551; x=1772296351; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1771691554; x=1772296354; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1HhEHp7EOoJA00ad3lsdzaaoyWg7wiuFZHOyZ8T3YO0=;
- b=jMXloGhkMNKwVLldWg5W9Kll/9r6cOsWVHHVD4Dy1d+5aaQfkeYzNjuIsveVIP7s25
- so8tCrgTz6O5PgpUriHHSvMZroxjFs3aKLOKPSjtjhfRhFBl7Cx6KH75y3esqnlJEbTB
- 25Ik4uIw/YILRGj/0PAyN/6B44p+n0jwpyjgHPv3bg7mn8netuPqqxzMVHkfOuy7jKhg
- fdjHuLdyJBVpvcPE+jzmZnlptG0j0txrzCkUiA0JQjhOph8lLaumz0A1Xq0dybilzlNm
- cI0E8V0C4Fi8lCY9CBil3pZntqZNu2t51DbOo+37sqHoLOnYBs/62t3+ofSeGOimyDOu
- nNUg==
+ bh=veBAsCJPz3IbOwtOO0WTGe2YqkAR8c3b3Kl6W4G+yqw=;
+ b=ZOhz+ohKjQsoGJsdGxiyqTn5AujRKLIDOVbBLOx39fXlVTHnXYtqBUQHtZydxrjrzG
+ 9YSk/WqJ3S80rcQ0n8rLlTWy3og7/k7vSX0iH0tnrcDYM0I6hSK4TXqBs76uN8M1SW7h
+ O42x2XkRbcGe2WiVA7SwZPKRYknpKKyILMQ2dYyILLFBeFO0yTZ+huijGFkDDn5GBV56
+ d3SHB28kPp1Pry97hPaesKne59L8J/LNe8BMz9fyiXkJiVb2YI1iIm5BqoX1o3fXjed7
+ XJCyqIZM4R2ka+OubUWSxQGgVU4WA0zb+p5XU9HZ/PoOJBuEVoYl85DbmUWFH0dsVWEJ
+ SngQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771691551; x=1772296351;
+ d=1e100.net; s=20230601; t=1771691554; x=1772296354;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=1HhEHp7EOoJA00ad3lsdzaaoyWg7wiuFZHOyZ8T3YO0=;
- b=NqsAZa6/kgF3HkmRvSp8SId0mzYFdHJDjMp97GvMVTNJWJK1K23YuZ5X+L8hxtHLPK
- SLQQzlE/iVjT9PkJUN9cZtoTku4guqWfO34QriUuqODBA2Y5iXbyEm3e+6nCRefx8+su
- qqoaoTkDrGyG7wkW+gWj4RYfk+2wBdxBv6DOyB19oeVJsGwiuXRst1uW4ORa7AKc+Gjk
- UxEyf/RYI+FyqeDTqSlRo5Y28zXN7RSr3TEYS4wiidvdiKs9p4xlyB5Pf3Q134WxAvDa
- bR5xe88W+lcCbpT3vXgzXBiUwY3m2o6xnaWcg0DhcGorm+PU81DS8VkrnDH+YtydHOXH
- FI5g==
+ bh=veBAsCJPz3IbOwtOO0WTGe2YqkAR8c3b3Kl6W4G+yqw=;
+ b=SF6Q7yvosEqRGNoGSlRxWgI3t5o6Lwsa9bRji8PGiklr0uuQSReZgOHWXSjxJmoDg7
+ QRHz/GtEDfNDk2rcoampCtvhDtIal9322aUUo+/NpKyG4Ab27nOOUqljP90B8Un8mbRx
+ UYW+rH4wRCpsz3X6t0QXWr+68M+LcuhYmyLkzXHId1Pfx2UxAWh0KxSQ7hMo1T1ThVCh
+ 8HcrVOT3yuA+20x60Nvep2CaHp5hIs9rgq6eEMXOVYHa/pbg+7AHSSNdk7NcK7GiC2Ao
+ PZA2Gi7gNKduYaLqf1dhmZKXNJqREgQz9LN77Jr0WHFT4DBCqjWbDGCth4IHszU5HxWh
+ x0lg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV/LMY8V9Cx+ztWtn7nhKixOLvez+VO6vKA/hrIu14/pzHFtjhPjChGUy3KvIxeeAbOj7OdRqE=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywzg76JKofOJiZJlfUWiWaU1bM+WODpyJol/hISxg2d4jgBQMy2
- bao56c6okyGSb142q0lUHRficGZQm/21+iRJMesJN9e0Nk+V25ofvESapMEU4w==
-X-Gm-Gg: AZuq6aJXnpMd2Le8vQQS0J4UpF4WuiCaU51AD++7FKWy8rn8RnH3nBou4YK91Io+Dk5
- 01F67Fy13z418IG+lpvf+e9TV+J8cYqgaTOSI12Zr4BHIoW4xtsqvAnXGBuGBsYkBT5Mxz7R44G
- pN6U68Bzq9XMuGGeglJUTXeOwHxgSxzvFadM2zfIVacUbmLw6cu8awTswLoMB9gq2WTd0ccQV1d
- MGIT2XTGHbt8z12JGqwiH76z3BOtYOysd4NjNifESTPQ/GOZhNMwydmcB46CaO+IT2hghohv+Mz
- ijXK3/+wWkiEKqwYkEv+U40GwqwdGsRFjBo8Zxa6zxl7w39+6mDFF5zlIisl2zXZQ01PP/kEt8r
- CAbzPsScaU8fmObGfqzfshja6H8Uzl6/xrz2dPPdybtDPCbEm267nl0x7IwpY7I1xPVO4mp6Efv
- 3VZgcvD6/gCvL2CBohcFzd/cNS3RrbSUHNPraeC5y0pQnoogK7BEsTJMsp9QFXWNGpNC/JVPsTG
- kayZcy9TXJVHomgV4gLQw==
-X-Received: by 2002:a17:903:2c05:b0:2aa:d671:e613 with SMTP id
- d9443c01a7336-2ad74523121mr31317685ad.38.1771691550805; 
- Sat, 21 Feb 2026 08:32:30 -0800 (PST)
+ AJvYcCUaaFx8jKHJA1EKZG+63NsN39iV3LE/h5hGibIExNy17GN2DOUnXOkqcBn8ten5ey3vBYmq9zc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJDoQkf8EBJrNQ2+5GOYbYbax5uUyTYQKQFE+NOmaDhjN1qWXJ
+ OeHjWTskJZmM97f92PdYKmPVzU/YaV3dj6QjHbY7wycl4QS07JOM7tKJ
+X-Gm-Gg: AZuq6aJT3XygeDuMKjIWH5Q4st68MA9XSzXzaDkTo8K3hLACF+FkaxGjIcJDYGFhQjQ
+ HCAbnpgxPd+/50GF+nYfoVR2bOMAkmHJbnKhEP1xTR76X7/kKAzQMRrFQuUtShFMuAt4ns0oGKk
+ v+6CFSzVat2HIFcicnJeTFUlBgFJGvwJIvLE6KwSeYMl+WMZLkoE0BsALoabwBBOO39OMkDb5lC
+ hqbhIOfyPggFTSC4hy7Hk9Klc8Lk3E3rkW1uxdrJHFoIaqNQskknfllllYmb8zu+Mgo7DhqXodW
+ SrxMo3AqY0SfFye5doQo8Wr0hU1lE9uQQFTg4XdiHJbacqXea2chYovKuVMG9wb1pUOmPQBq1lB
+ rq3/FDayvzDKu43aH9vIyo3NSDH7LNjdCcG39rmJGX1/bQZ8uYFS+/+0DUDmhC5SUnOBvfDQMh3
+ qJaEL2IwkRhoDHsmn4NIQ7mPBzhZ39rYkGNPBNhNOFlwThkPeeVFPuaeN1zI3iAj9Cex4WJXHvI
+ YyEBxbM8qBlXkpxfLcxog==
+X-Received: by 2002:a17:903:4b30:b0:2aa:de6a:8b29 with SMTP id
+ d9443c01a7336-2ad74418ba5mr30311195ad.4.1771691554401; 
+ Sat, 21 Feb 2026 08:32:34 -0800 (PST)
 Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
  [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ad7500e062sm36868365ad.48.2026.02.21.08.32.28
+ d9443c01a7336-2ad7500e062sm36868365ad.48.2026.02.21.08.32.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Feb 2026 08:32:30 -0800 (PST)
+ Sat, 21 Feb 2026 08:32:34 -0800 (PST)
 From: "Lucien.Jheng" <lucienzx159@gmail.com>
 To: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
  marek.vasut+renesas@mailbox.org
@@ -80,10 +80,10 @@ Cc: ericwouds@gmail.com, kabel@kernel.org, vladimir.oltean@nxp.com,
  frank-w@public-files.de, daniel@makrotopia.org, ansuelsmth@gmail.com,
  mkorpershoek@kernel.org, skylake.huang@mediatek.com, u-boot@lists.denx.de,
  "Lucien.Jheng" <lucienzx159@gmail.com>
-Subject: [PATCH v1 3/4] dt-bindings: net: airoha,
- en8811h: deprecate pnswap-rx and pnswap-tx
-Date: Sun, 22 Feb 2026 00:31:13 +0800
-Message-Id: <20260221163114.87553-4-lucienzx159@gmail.com>
+Subject: [PATCH v1 4/4] net: phy: air_en8811h: use standard
+ rx-polarity/tx-polarity properties
+Date: Sun, 22 Feb 2026 00:31:14 +0800
+Message-Id: <20260221163114.87553-5-lucienzx159@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260221163114.87553-1-lucienzx159@gmail.com>
 References: <20260221163114.87553-1-lucienzx159@gmail.com>
@@ -106,66 +106,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Deprecate the proprietary airoha,pnswap-rx and airoha,pnswap-tx boolean
-properties in favour of the standard rx-polarity and tx-polarity
+Replace the proprietary airoha,pnswap-rx / airoha,pnswap-tx boolean
+device tree properties with the standard rx-polarity and tx-polarity
 properties defined in phy-common-props.yaml.
 
-Update the example to use rx-polarity with the PHY_POL_INVERT constant.
+The driver first tries the standard properties; if absent it falls back
+to the legacy ones for backward compatibility. The legacy properties are
+marked deprecated in the bindings.
 
-Link: https://git.kernel.org/linus/44f62aa1b1209232cedcfb39097fc1bfbe75bbc7
+Link: https://git.kernel.org/linus/66d8a334b57e64e43810623b3d88f0ce9745270b
 Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
 ---
- dts/upstream/Bindings/net/airoha,en8811h.yaml | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ drivers/net/phy/airoha/Kconfig      |  1 +
+ drivers/net/phy/airoha/air_en8811.c | 91 ++++++++++++++++++++++++-----
+ 2 files changed, 77 insertions(+), 15 deletions(-)
 
-diff --git a/dts/upstream/Bindings/net/airoha,en8811h.yaml b/dts/upstream/Bindings/net/airoha,en8811h.yaml
-index ecb5149ec6b..0de6e9284fb 100644
---- a/dts/upstream/Bindings/net/airoha,en8811h.yaml
-+++ b/dts/upstream/Bindings/net/airoha,en8811h.yaml
-@@ -16,6 +16,7 @@ description:
+diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
+index 999564e4848..efe3c0f485b 100644
+--- a/drivers/net/phy/airoha/Kconfig
++++ b/drivers/net/phy/airoha/Kconfig
+@@ -6,6 +6,7 @@ config PHY_AIROHA_EN8811
+ 	bool "Airoha Ethernet EN8811H support"
+ 	depends on PHY_AIROHA
+ 	select FW_LOADER
++	select PHY_COMMON_PROPS
+ 	help
+ 	  AIROHA EN8811H supported.
  
- allOf:
-   - $ref: ethernet-phy.yaml#
-+  - $ref: /schemas/phy/phy-common-props.yaml#
+diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
+index 1a628ede82b..0ec11ba5231 100644
+--- a/drivers/net/phy/airoha/air_en8811.c
++++ b/drivers/net/phy/airoha/air_en8811.c
+@@ -23,6 +23,7 @@
+ #include <linux/compat.h>
+ #include <dm/device_compat.h>
+ #include <u-boot/crc.h>
++#include <linux/phy/phy-common-props.h>
  
- properties:
-   compatible:
-@@ -30,12 +31,18 @@ properties:
-     description:
-       Reverse rx polarity of the SERDES. This is the receiving
-       side of the lines from the MAC towards the EN881H.
-+      This property is deprecated, for details please refer to
-+      Documentation/devicetree/bindings/phy/phy-common-props.yaml
-+    deprecated: true
+ #define EN8811H_PHY_ID		0x03a2a411
  
-   airoha,pnswap-tx:
-     type: boolean
-     description:
-       Reverse tx polarity of SERDES. This is the transmitting
-       side of the lines from EN8811H towards the MAC.
-+      This property is deprecated, for details please refer to
-+      Documentation/devicetree/bindings/phy/phy-common-props.yaml
-+    deprecated: true
+@@ -660,11 +661,82 @@ static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
+ 	return 0;
+ }
  
- required:
-   - reg
-@@ -44,6 +51,8 @@ unevaluatedProperties: false
- 
- examples:
-   - |
-+    #include <dt-bindings/phy/phy.h>
+-static int en8811h_config(struct phy_device *phydev)
++static int en8811h_config_polarity(struct phy_device *phydev)
+ {
+-	struct en8811h_priv *priv = phydev->priv;
+ 	ofnode node = phy_get_ofnode(phydev);
++	unsigned int rx_pol, tx_pol;
+ 	u32 pbus_value = 0;
++	int ret;
++	bool use_legacy = false;
 +
-     mdio {
-         #address-cells = <1>;
-         #size-cells = <0>;
-@@ -51,6 +60,6 @@ examples:
-         ethernet-phy@1 {
-             compatible = "ethernet-phy-id03a2.a411";
-             reg = <1>;
--            airoha,pnswap-rx;
-+            rx-polarity = <PHY_POL_INVERT>;
-         };
-     };
++	if (!ofnode_valid(node))
++		return 0;
++
++	/* Try standard rx-polarity property first */
++	ret = phy_get_manual_rx_polarity(node,
++					 phy_interface_strings[phydev->interface],
++					 &rx_pol);
++	if (ret == 0) {
++		dev_info(phydev->dev, "EN8811H: RX polarity = %s\n",
++			 rx_pol == PHY_POL_INVERT ? "inverted" : "normal");
++		if (rx_pol == PHY_POL_INVERT)
++			pbus_value |= EN8811H_POLARITY_RX_REVERSE;
++		else
++			pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
++	} else if (ret == -ENOENT) {
++		/* Fall back to legacy airoha,pnswap-rx property */
++		use_legacy = true;
++		dev_info(phydev->dev, "EN8811H: Legacy RX polarity\n");
++
++		if (ofnode_read_bool(node, "airoha,pnswap-rx"))
++			pbus_value |= EN8811H_POLARITY_RX_REVERSE;
++		else
++			pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
++	} else {
++		dev_err(phydev->dev, "EN8811H: Error reading rx-polarity: %d\n", ret);
++		return ret;
++	}
++
++	/* Try standard tx-polarity property first */
++	ret = phy_get_manual_tx_polarity(node,
++					 phy_interface_strings[phydev->interface],
++					 &tx_pol);
++	if (ret == 0) {
++		dev_info(phydev->dev, "EN8811H: TX polarity = %s\n",
++			 tx_pol == PHY_POL_INVERT ? "inverted" : "normal");
++		if (tx_pol == PHY_POL_INVERT)
++			pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
++		else
++			pbus_value |= EN8811H_POLARITY_TX_NORMAL;
++	} else if (ret == -ENOENT) {
++		/* Fall back to legacy airoha,pnswap-tx property */
++		if (!use_legacy)
++			dev_err(phydev->dev, "EN8811H: Mixing standard and legacy polarity properties\n");
++
++		dev_info(phydev->dev, "EN8811H: Legacy TX polarity\n");
++
++		if (ofnode_read_bool(node, "airoha,pnswap-tx"))
++			pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
++		else
++			pbus_value |= EN8811H_POLARITY_TX_NORMAL;
++	} else {
++		dev_err(phydev->dev, "EN8811H: Error reading tx-polarity: %d\n", ret);
++		return ret;
++	}
++
++	/* Apply polarity configuration to hardware */
++	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
++				      EN8811H_POLARITY_RX_REVERSE |
++				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
++	if (ret < 0)
++		return ret;
++
++	return 0;
++}
++
++static int en8811h_config(struct phy_device *phydev)
++{
++	struct en8811h_priv *priv = phydev->priv;
+ 	int ret = 0;
+ 
+ 	/* If restart happened in .probe(), no need to restart now */
+@@ -695,19 +767,8 @@ static int en8811h_config(struct phy_device *phydev)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	/* Serdes polarity */
+-	pbus_value = 0;
+-	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
+-		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
+-	else
+-		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
+-	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
+-		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
+-	else
+-		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
+-	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
+-				      EN8811H_POLARITY_RX_REVERSE |
+-				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
++	/* Configure Serdes polarity from device tree */
++	ret = en8811h_config_polarity(phydev);
+ 	if (ret < 0)
+ 		return ret;
+ 
 -- 
 2.34.1
 
