@@ -4,92 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E13BC636B3
-	for <u-boot@archiver.kernel.org>; Sun, 22 Feb 2026 16:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41CCC6369E
+	for <u-boot@archiver.kernel.org>; Sun, 22 Feb 2026 23:26:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51C3E80FA1;
-	Sun, 22 Feb 2026 17:49:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C6AE383935;
+	Mon, 23 Feb 2026 00:26:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T9ppPh7M";
+	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="qYQWXiA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD29D83C39; Sun, 22 Feb 2026 17:49:57 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8A2C980FA1; Sun, 22 Feb 2026 23:14:05 +0100 (CET)
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
+ [IPv6:2001:df5:b000:5::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F214801BE
- for <u-boot@lists.denx.de>; Sun, 22 Feb 2026 17:49:55 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-7d195166b2cso2548259a34.3
- for <u-boot@lists.denx.de>; Sun, 22 Feb 2026 08:49:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771778994; x=1772383794; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PZ9PBpAnaPZ29aagbKJbWCHniFKQIIbGKh0eHC0b/os=;
- b=T9ppPh7MpZGg3OWrRJVRP7nbtDYdbdEHdyFCSuDjq6vbrxrIJDqK80lUc5egHp2Vro
- DmMIkDMNNjwvhNssCJCrEGGsGwF9GOiD+Dql5pvjIZxR22EpWWuUn7bFiMETNSP5jMY1
- 2awcU3GTVobFLA0egbIi1ea9m+aLCac58bd6Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771778994; x=1772383794;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PZ9PBpAnaPZ29aagbKJbWCHniFKQIIbGKh0eHC0b/os=;
- b=hT3bQNx/7FBtdvOHLnklCPOvgjD4LQaS9b9gsRhTUOkraM+xoHzcMsgVIEMCMzwcdv
- fK4PpXpSdOl3v+LmurOWRgfSO1qqJYiLn+R/dgpUXAyjkxjwOoZnAu7uTN33dCOlL6EN
- vjyc4By87X9cjjqkNiVzpmjnl070nVuGRHe1HFYZlSU0+nkvmhduxohlXNT8tzJXuhtO
- NbwFILzyTuREkgrcIPKBIYvJG76O6xRS6PSoyfUHBXZVdxKU8fQ9UndGsO3pLqHQ5VlX
- J43+o0cf7zDv4UzLUc//YqprJB8foBDWTQ7cdfQqJ7n/6rizEbpMotb2MLbb2hKaA9Ay
- ioKA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU811YmXcMaD9dtERBci8CwFq+wLxxRfNEKVxIpF0A9ImO5AslxO2QHt8X0NCwNWomSBYLbWwg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxf5VmKEwmh3LX3tXwmFk5J10ToXqYeXfsRNm87oKG+PSbSvXOg
- Q9G95mLKXXuC+eZw7F/Y4w5uRUdUmzq9nttNtTP6XEUs4Ttt30FFBl157o4lY+oSXCg=
-X-Gm-Gg: AZuq6aKtEZZgrT4yYg29V+PWStBXpkcvEgfUgtYiBFrLm8qvkfsqDhssTqdycGhHI57
- JkiuWqQssX5j8nUJikVc2dgARz7lFhf3u8Svmu56CrII7xGLtqlCYR0impLh7Gks2T+Skfnpt03
- NQGUmScgs/mQ4v0Sp9qPEXVHUAC2HCqy3anr2kxCia1+/5fizLdwNFJH8XYEHlI+uKUYbYaZZ/6
- /hxnAd3Op9MwRz6NsGgXwI/5D9HdgGZxUmRdSe/nPTBvEE14GHTeFsDMUmv/xDT27ieQov0QGtJ
- EH+HfiHJxPVx990rwM6l/zC6BOdiQ5qcSMP0bWdzwJ5O+Rr//ViP50OUty6VymYhTA1gt0C/et/
- 7K9FXwSDsX8wtLgDLXwrlb+n5y5nfsnYueNydjrUgq0Ra/ErK9GVI8Nc6Ua1jDI1lE8Cun8oxhb
- c8+mJnYLVrD38oJew7sLn7I37LLPyUwBkjKjKBQmfP8ezwLfGwNxCaWGtHrpdhks7YHIR7Ic9iV
- cQjb6gnl1X19fiOCd5rjyWID1yDccgI+fYlFH8hVGK/jelm9Xo=
-X-Received: by 2002:a05:6830:40ca:b0:7cf:cc2c:1d9f with SMTP id
- 46e09a7af769-7d52bf52e93mr2974384a34.32.1771778993920; 
- Sun, 22 Feb 2026 08:49:53 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52cf9f489sm5081134a34.7.2026.02.22.08.49.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Feb 2026 08:49:53 -0800 (PST)
-Date: Sun, 22 Feb 2026 10:49:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Lucien.Jheng" <lucienzx159@gmail.com>
-Cc: jerome.forissier@arm.com, sumit.garg@kernel.org,
- marek.vasut+renesas@mailbox.org, ericwouds@gmail.com,
- kabel@kernel.org, vladimir.oltean@nxp.com, frank-w@public-files.de,
- daniel@makrotopia.org, ansuelsmth@gmail.com,
- mkorpershoek@kernel.org, skylake.huang@mediatek.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 3/4] dt-bindings: net: airoha,en8811h: deprecate
- pnswap-rx and pnswap-tx
-Message-ID: <20260222164950.GB3233182@bill-the-cat>
-References: <20260221163114.87553-1-lucienzx159@gmail.com>
- <20260221163114.87553-4-lucienzx159@gmail.com>
- <20260221164556.GZ3233182@bill-the-cat>
- <8e1c4274-797e-4f2d-b1ff-c6ef67bffacd@gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 3034C80077
+ for <u-boot@lists.denx.de>; Sun, 22 Feb 2026 23:13:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=alliedtelesis.co.nz
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Ronan.Dalton@alliedtelesis.co.nz
+Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id EB37C2C025C;
+ Mon, 23 Feb 2026 11:13:49 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+ s=mail181024; t=1771798429;
+ bh=QzXr2wjbeI4HUivxgkgAKKvv0rIV9QS00kC9OncNr3o=;
+ h=From:To:Subject:Date:References:In-Reply-To:From;
+ b=qYQWXiA7eSHAl7wi04184ydi/1Sci0MnK5XymMTH9yUa/vJh3GXM41PjZeNfXoyzf
+ o8vyH0us6lmJwaQg4fxuJVPLq/Npglz6BFn3qT4FNSJj+AZFKDl0QatfaFw1xjsdS6
+ OFQFywRSGc9TmxOPxgv8q70dmkbp5HlRi1/5lGelQ1vQ9UgQRQNHvAxMsjyFm+C3/9
+ Ak63fCpYvSEak5bGSZUGQGcAXzkVSxaJ8fE6oa23/cWqpxF/Rvcqci8WdhdFoBuGId
+ /XNydaeKcESChpUjWdkE0QyWByQ1axryycRp6V3x3IqSYxuJXTBuwuMdugRGcZhdsV
+ C92KpsaeJHefQ==
+Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by
+ svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
+ id <B699b7f9d0000>; Mon, 23 Feb 2026 11:13:49 +1300
+Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) by
+ svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8::76) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.39; Mon, 23 Feb 2026 11:13:48 +1300
+Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
+ svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
+ 15.02.1748.039; Mon, 23 Feb 2026 11:13:48 +1300
+From: Ronan Dalton <Ronan.Dalton@alliedtelesis.co.nz>
+To: "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] usb: Fix USB read configuration error on some devices
+Thread-Topic: [PATCH] usb: Fix USB read configuration error on some devices
+Thread-Index: AQHcoiQSuGyGCqWzE0ybxFJ4VBL9WbWLSLyAgAMqE4A=
+Date: Sun, 22 Feb 2026 22:13:48 +0000
+Message-ID: <4550f320c271db50ff8af455244eadad0f435099.camel@alliedtelesis.co.nz>
+References: <20260220044709.1065540-1-ronan.dalton@alliedtelesis.co.nz>
+ <c9179461-cc40-49b6-ab10-086f4e5c1eda@mailbox.org>
+In-Reply-To: <c9179461-cc40-49b6-ab10-086f4e5c1eda@mailbox.org>
+Accept-Language: en-US, en-NZ
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.33.12.18]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <9AF706E033F7DE44B88F4C3994C0837E@alliedtelesis.co.nz>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TWMEKImH93pOHXAe"
-Content-Disposition: inline
-In-Reply-To: <8e1c4274-797e-4f2d-b1ff-c6ef67bffacd@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=d/NWygjE c=1 sm=1 tr=0 ts=699b7f9d
+ a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=BhaoXNk7gXQA:10
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=7M42kAREPRnyh_Ny8zgA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-SEG-SpamProfiler-Score: 0
+X-Mailman-Approved-At: Mon, 23 Feb 2026 00:26:29 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,57 +94,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---TWMEKImH93pOHXAe
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Feb 23, 2026 at 12:27:02AM +0800, Lucien.Jheng wrote:
-> Hi Tom
->=20
-> Tom Rini =E6=96=BC 2026/2/22 =E4=B8=8A=E5=8D=88 12:45 =E5=AF=AB=E9=81=93:
-> > On Sun, Feb 22, 2026 at 12:31:13AM +0800, Lucien.Jheng wrote:
-> >=20
-> > > Deprecate the proprietary airoha,pnswap-rx and airoha,pnswap-tx boole=
-an
-> > > properties in favour of the standard rx-polarity and tx-polarity
-> > > properties defined in phy-common-props.yaml.
-> > >=20
-> > > Update the example to use rx-polarity with the PHY_POL_INVERT constan=
-t.
-> > >=20
-> > > Link: https://git.kernel.org/linus/44f62aa1b1209232cedcfb39097fc1bfbe=
-75bbc7
-> > > Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
-> > And for clarity, my comment about cherry-pick also applies here. The
-> > script tools/update-subtree.sh makes doing the cherry-picks
-> > straighforward.
->=20
-> Thank you for your comment.
->=20
-> I checked devicetree-rebasing.git and it only has the v6.19-dts tag.
->=20
-> I will try to manually cherry-pick all phy-common DTS-related commits from
-> Linux.
-
-Outside of extra-ordinary circumstances, we just wait for them to be in
-the rebasing tree and do a proper cherry-pick. These changes look fine
-(but waiting for other comments still) for v2026.07, so there's time to
-wait, really. Thanks!
-
---=20
-Tom
-
---TWMEKImH93pOHXAe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZszqAAKCRAr4qD1Cr/k
-Cq+3AQDpyv+l1Lh8QP8lIZVv3P6y7MfSxUgU3tme1azaO3n9yQD/Q/g1cELG7RCf
-1CeDYpkdEH2IH2zPoE36kJFlnT1Jpgg=
-=0S7V
------END PGP SIGNATURE-----
-
---TWMEKImH93pOHXAe--
+T24gRnJpLCAyMDI2LTAyLTIwIGF0IDIyOjU0ICswMTAwLCBNYXJlayBWYXN1dCB3cm90ZToNCj4g
+DQo+IERvZXMgdGhlIGZvbGxvd2luZyBhbHNvIG1ha2UgdGhlIFVTQiBzdGljayB3b3JrID8NCj4g
+DQo+ID0+IHNldGVudiB1c2JfcGdvb2RfZGVsYXkgMjAwMA0KPiA9PiB1c2IgcmVzZXQNCj4gDQo+
+ID8NCg0KSXQgZG9lcyBub3QuDQo=
