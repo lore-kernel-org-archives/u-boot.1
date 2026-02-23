@@ -4,61 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A567BEEC285
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 21:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3796BEEC287
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 21:32:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2CCD83C39;
-	Mon, 23 Feb 2026 22:23:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 5223383BC9;
+	Mon, 23 Feb 2026 22:32:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="qjm2ncAP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rl5s0kqs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09BD683C6E; Mon, 23 Feb 2026 22:23:11 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3451183C39; Mon, 23 Feb 2026 22:32:15 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E793D83935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 22:23:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1808483935
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 22:32:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: d72f8b57-10fd-11f1-afd4-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id d72f8b57-10fd-11f1-afd4-005056994fde;
- Mon, 23 Feb 2026 22:23:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=0+RbYuUKxOnYCu0SZu43scjygRQzCIuAxaABAScniko=;
- b=qjm2ncAPUWjgHFoz3F2c8X5R1mSXh4d9CG7Fo6SQ+0S6Ph2VDYBqtKRWxHOVZPcM7BE7jQjX4kGT7
- tbWEedxMMRUj3tMOTMrMPobzjCLS5evubcK4Way+0nmTK306XzzXQVHGWXozhr7GB59rsMkyU+iDAz
- NijQytP5e9+peocStqTDvNs4/jBJ4OMb72ymBI6l/pE38vIHVB3yZlO8tdHAl6X3pVVY4bg5AsxycZ
- 0xuWnBvNLBh1QFRm0CW+XstKHvR/i7Pf2G5XX/fthlcXyWdcp6PMOIDb9Z714qXBfIvhL2uwdnttUI
- k+nzVopyZHUGEW1QphYoEn3O6RkwSKg==
-X-KPN-MID: 33|ZxJxvHSjoyqz96eT30N+objXnHoVvfjSE2WoJHoRB9Ffp8f2IsNEH7FRtfRH4wn
- ZTVqoXnAMrHaOXj+LaADl7d8/OnuZuDIKCM2uz/VEZAA=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|FaUA1q+/+KNEguTxFznwx3Nc1amuJELOefApc5VazsA07hUJpie1M7+UVqxk0Ue
- i1jqH8B6UTJS7aQvsPIpo5A==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id d6b91295-10fd-11f1-86d1-005056998788;
- Mon, 23 Feb 2026 22:23:04 +0100 (CET)
-Date: Mon, 23 Feb 2026 22:23:03 +0100
-Message-Id: <87ldgjw3wo.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Mark Kettenis <kettenis@openbsd.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com,
- ilias.apalodimas@linaro.org, anshuld@ti.com, d-gole@ti.com,
- casey.connolly@linaro.org, kettenis@openbsd.org
-In-Reply-To: <20260110195610.42068-1-kettenis@openbsd.org> (message from Mark
- Kettenis on Sat, 10 Jan 2026 20:56:10 +0100)
-Subject: Re: [PATCH] arm: armv8: Flush TLB before enabling MMU
-References: <20260110195610.42068-1-kettenis@openbsd.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d195166b2cso3394558a34.3
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 13:32:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771882332; x=1772487132; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2ZBvxsxxKVS5Tcd/pKKu5JaZR2R8tI55mXL5glsDqOA=;
+ b=Rl5s0kqsik2lSfLmWQbzaNveVe9KtlZUtwX1NZK/6h4msM+E2ONQzriaHxvRrrk1k/
+ 9WDvsXnYGqM4Hreht8XNjaf2v4IjlfKjl8T01cnR52GxFW9a1anc8wpc7KMYc75I80oy
+ qGnXUvd9ei+Ngy/mb6bapDb1Hes7R9cug03uQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771882332; x=1772487132;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2ZBvxsxxKVS5Tcd/pKKu5JaZR2R8tI55mXL5glsDqOA=;
+ b=iAo77eovYMK4sWdHhIgn+KYqyI9yl0bVbepR82xC0MM7Hius58rAVT/Iiy7eviuPK5
+ FSDxiDWyoXoxGDgQtu1DllMyYr6QXSO/SDFCfhpAllMhBpRy6ELO7ZSGhVMQvfq3xaFB
+ bibqmpDpIhjbqF7FV0BHlmawBgEmdcaAf8R7KH+o942KUprT4ltrLxI9KSHdrCfnU/Ex
+ KYLwxE+vJcfSSTG+28KmIczDtWQvIdaYfSxa8DcVifCKRjIvhdaCnbgZyx5xDvVwwVtn
+ axd21aYEGhPbQugoMhxfR8aPYv3PXD5xixzbo2t6+AcxAOMsvSVw0wjN1iWQvl2sKRLW
+ Vwmw==
+X-Gm-Message-State: AOJu0YyQ1N59X5NHWk6PLbhF+jgifRasAWEPINaQAS3gvcQ3jsrHcgdB
+ VWJlpycjFKy/YjV8/1obFeHdn9rb510H2iwDntzkNm+NNh4SbtbdlqbGgBEQsS/vzHg=
+X-Gm-Gg: ATEYQzwK8iXhzbMcBy7qR0FtS7SnQZ8LNnUxNKzbovY68RxOgyLlLjvtJql8VZvSk0h
+ OgwFP6nK2Dh1F7x2BV8+AltsCRz8oFUQant2/Rk5q+XHRn3zrwSpPLktB+bjePcBHNP90ocZoyM
+ q24C1qV6AUO/GN5eF4DF7WF0/hsVOujYHAWihdoX8qjb70ygh8yOjvWzlQsMtXSwmVBkteL8yhJ
+ lV6nGuvJXy6Za2qcXht46FSApH4OI0nqTt8mwtgf1kEudRIlzqoKfEUTwXpQ0GsePJXMsmexPky
+ a6nSz0HThKCzZll0d34PJxnxY/zr7KV91gddd0Y5i+QKb9n8kuGHLHt1jQIv29PX0mYLzIWxjIq
+ BXSDxZ2XHGza2YHrkkJo4x6OULQBNktbF1qp2D1FjHI4+YR9vl38I2+nAQs8LGcaJxum3q++kM9
+ YV2QVz/+N36E0S+rMHUnzafk//LbmJgFjK0bs9IaoxMxAqGFv2svxHu7j5LZV2OaipHlmh5Xoxw
+ GRdudAymkP496YqTrAnQ4gAEg36htKDxlp5rq4ojMScmhfRupjVdx9UFgX4vQ==
+X-Received: by 2002:a05:6870:9452:b0:409:77d1:f91d with SMTP id
+ 586e51a60fabf-4157b1ccb63mr5084357fac.47.1771882331806; 
+ Mon, 23 Feb 2026 13:32:11 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4157cf9a388sm8434923fac.6.2026.02.23.13.32.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Feb 2026 13:32:10 -0800 (PST)
+Date: Mon, 23 Feb 2026 15:32:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Caleb Ethridge <jcethrid@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Greg Malysa <malysagreg@gmail.com>,
+ "caleb.ethridge@analog.com" <caleb.ethridge@analog.com>,
+ "linux@analog.com" <linux@analog.com>,
+ Philip Molloy <philip@philipmolloy.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>
+Subject: Re: [PATCH v2] arm: dts: sc594: Update sc594 EZKIT GPIO polarities
+Message-ID: <20260223213208.GA4003066@bill-the-cat>
+References: <CAA=Y9tY1pJV5O=23YSgM-1TnRQNpg9zrPJsSn6YaL_uAPxUo=A@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vspsuQkzHKAHiO6j"
+Content-Disposition: inline
+In-Reply-To: <CAA=Y9tY1pJV5O=23YSgM-1TnRQNpg9zrPJsSn6YaL_uAPxUo=A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,59 +101,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Hi Mark,
 
-Hi Ilias,
+--vspsuQkzHKAHiO6j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Sorry for the late reply.  I was a bit busy the last weeks...
+On Mon, Feb 09, 2026 at 10:03:57AM -0500, Caleb Ethridge wrote:
 
-> On Sat, 10 Jan 2026 at 21:56, Mark Kettenis <kettenis@openbsd.org> wrote:
-> >
-> > Commit 9ebdbbc43e5f ("arm: armv8: invalidate dcache entries on
-> > dcache_enable") broke Apple Silicon machines in certain scenarios.
-> > If the MMU is currently not enabled we need to flush the TLB
-> > before we enable it to prevent stale TLB entries from becoming
-> > active again.  So move the __asm_invalidate_tlb_all() back
-> > immediately before the mmu_setup() call.
-> >
-> > Fixes: 9ebdbbc43e5f ("arm: armv8: invalidate dcache entries on dcache_enable")
-> > Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
-> > ---
-> 
-> Should we keep the check here or mayber move it in mmu_setup()?
+> From: Caleb Ethridge <caleb.ethridge@analog.com>
+> Date: Mon, 9 Feb 2026 10:00:10 -0500
+> Subject: [PATCH v2] arm: dts: sc594: Update sc594 EZKIT GPIO polarities
+>=20
+> Updates the polarities for the GPIOs on the sc594
+> EZKIT carrier board for the newest revision, Rev D.
+> The new carrier board revision has different polarities
+> for some GPIOs. This patch updates the sc594 entries
+> to match the sc598 entries that were updated in a previous
+> commit, as both SOMs can utilize the EZKIT.
+>=20
+> Note that these updates are for the EZKIT carrier
+> board used by both sc598 and sc594 SOMs, not the SOMs themselves.
+>=20
+> Fixes: be79378 ("board: adi: Add support for SC594")
+> Signed-off-by: Caleb Ethridge <caleb.ethridge@analog.com>
+> ---
+> Changes in v2:
+> - Updated commit message with more detail according to reviewer feedback
 
-It would make sense to move it to mmu_setup(), but I went for a
-partial revert as there is an alternative implementation of
-mmu_setup() in cpu/armv8/fsl-layerscape/cpu.c and I couldn't test that
-code.
+Please resend this, the spacing in the patch was mangled by your mailer,
+thanks.
 
-Hope this can still make the next release.
+--=20
+Tom
 
-> Thanks
-> /Ilias
-> 
-> >  arch/arm/cpu/armv8/cache_v8.c | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> > index 0309da6d397..39479df7b21 100644
-> > --- a/arch/arm/cpu/armv8/cache_v8.c
-> > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > @@ -878,15 +878,16 @@ void flush_dcache_range(unsigned long start, unsigned long stop)
-> >  void dcache_enable(void)
-> >  {
-> >         /* The data cache is not active unless the mmu is enabled */
-> > -       if (!mmu_status())
-> > +       if (!mmu_status()) {
-> > +               __asm_invalidate_tlb_all();
-> >                 mmu_setup();
-> > +       }
-> >
-> >         /* Set up page tables only once (it is done also by mmu_setup()) */
-> >         if (!gd->arch.tlb_fillptr)
-> >                 setup_all_pgtables();
-> >
-> >         invalidate_dcache_all();
-> > -       __asm_invalidate_tlb_all();
-> >         set_sctlr(get_sctlr() | CR_C);
-> >  }
+--vspsuQkzHKAHiO6j
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZzHTQAKCRAr4qD1Cr/k
+CvcRAQC6nfJYpnSpe5QHMvLiVhnZ9WytAiIJJ3aho+4boAuxeQD/bAPsgdLVTYen
+zTMNnNPkCXR4mRaYzhTb2Qr8rw5aygk=
+=nWh9
+-----END PGP SIGNATURE-----
+
+--vspsuQkzHKAHiO6j--
