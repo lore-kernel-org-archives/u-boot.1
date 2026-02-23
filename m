@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428D8EC112C
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD48DEC112B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9042683C39;
-	Mon, 23 Feb 2026 21:28:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BE2483C39;
+	Mon, 23 Feb 2026 21:37:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VV4EYpYQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mFG2jcLT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E61583C6E; Mon, 23 Feb 2026 21:28:23 +0100 (CET)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id E727383C6E; Mon, 23 Feb 2026 21:37:15 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73A2D83935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:28:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC78083935
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:37:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-673f0b73dd3so2599254eaf.2
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 12:28:21 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-45f171cb842so3474700b6e.1
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 12:37:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771878500; x=1772483300; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Lr/D7+Kbexvv8J5kV98HS/Ri7NL12Cb4TX9gs4vowhE=;
- b=VV4EYpYQq2K3xbYoW1hBSgED5FIaT1UEwYotWRZfb6f4JY5qilxIijlS63VaFZVTBb
- /k8HoVq/VuDSvGlLR6cw4Jree2eXBSt3zzaUSyvZP9fEf0730gimGO/dtBkVD2kaY+jS
- kDrdNBxej0/H8cSA50gNka2RwnkNB6Uyw8HTI=
+ d=konsulko.com; s=google; t=1771879032; x=1772483832; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6Ni7jFQDXmGyqpz55Sm9VdweEsVoSLDQPblU0vIpYp0=;
+ b=mFG2jcLTBwXsdwpUV/AUIpokg8ZmKr06XdZ+CwBRVCsncWa0LbAZTcBAPK9Pr2pPSx
+ BV2GcFsJcnVGxcrURx2GmYZPLf6yzLIOP/3MyxqrdEFQ8KfKDgn7TAPUlPlFy7w1Gvj7
+ l/ybo4qljDra8aIWNUl22nud05v3I3DpfXRcU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771878500; x=1772483300;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Lr/D7+Kbexvv8J5kV98HS/Ri7NL12Cb4TX9gs4vowhE=;
- b=vOoW+vnunhCjRtaA+vv/HnyEgFCMl8wcOY3ky2aruow4YnTCkBrp9PgKplRzmBt5rR
- 7fQw2ma4sJ6P6WUCTkkU1bLCwP/4led1sOxajhq11d7uF8kA9NP/1ButAJWWXd1jbJEi
- 2GHld8fQBlaBcO+EjKWxtU5+HnZrJT2z/Yu8wmL1rooQBUwT1wAIY2L8B5vBkRE6/I7C
- X6jPighLAXSg9Neik8u81QXaZbeC9slFqbFVipgWpSQBuWiZZgMH1iKbHztolsQAwhNi
- fFXsiKiUMYTdLkBAKrpNuKeEQw5LRaXbSj0Udr1KtfgK8PqJxef4JQTklQbUp+A7XkEq
- V6Xw==
-X-Gm-Message-State: AOJu0YwsQfis9GWF00Rgc2PY2EFLlXz8cxge6dx/D4bSEKofcSyu0dP7
- IIifldxh7WdEbZt0RECc3zfwU/nVkAesO/i9P1nLRjMlNfPJo3W6Ibb/jrJ1BpBzjRwT8uk9I+w
- uzZJyHfg=
-X-Gm-Gg: AZuq6aLIMJgGR/uTqK3cPo7o9kvVLQTrzVgEIix/d9mv0midUVxW5bwwvxpb8HxX/mn
- 2ZoLCwqV9b5oO9U7cLTqgQlCma3VFlnBd5KVcZtPxC9qJT+QqOxOsTsUtIUI/i2tp9ouHFnMdBE
- iTWGg3q4PtmRMRtvE8/kNVERKi3vQ/J256mLKN41RdtEGgl5NCr5OUVfbpJaslKC6RgFOjpIvw6
- snmVeVzzTRrS8TGtfEqNZDSDksRfLy2EC3fH+szbSxBYMNeIoHmYN6kRgjnvTh5AlVUBOs50G6q
- 74cUEt7KLEPFrYRGeFsPx8riUwLLRvebbbudAdjY7r3uheDj4RnunFPW2lZtY1723ZBpYzoBLga
- +IL+7/J8vpeAut9SzpQfF6uCYBooBwXAUS6PWCdWv+fT3sQevCiNamkW37Pz8AukfGdmnY1Nx24
- vJy+oAlwQZa2DOGyc+jmt4+OKCHbAscKt/IvnoQBbcXKQtW5MyV8o+2yOdgAhYLIFV26wcu0r+V
- ybuL7iXffx/KJiEOYEjqdPXkTEOxtVt1e61v20uM+1scjnF8w==
-X-Received: by 2002:a05:6820:22a7:b0:66b:6862:18d5 with SMTP id
- 006d021491bc7-679c4488c02mr4427062eaf.8.1771878499952; 
- Mon, 23 Feb 2026 12:28:19 -0800 (PST)
-Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1771879032; x=1772483832;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6Ni7jFQDXmGyqpz55Sm9VdweEsVoSLDQPblU0vIpYp0=;
+ b=S691Kd6AUUQ9vf9HacZJikEe1TkHR8eu9TEmIgrTmjwJO3dKrisJfMhkQt6gcOgLP4
+ wAPWc52sCCxdeOHlzOZAScAaxUgIsehvgSHQvUVVEnarComku6k0q+4Db/pD1/MKVXXy
+ g5yQvWgee4sm/d6YVFlxeAySQrDYGcQKz/CcCT4tAWMKOgwccWY1L+Dz0UxYJ/SITatN
+ w/Y/G1K0BbLDJ2+Os00zDU3Mpev0sXrUY4Gt5oHV+dZ/Fg0FwIc0KywSXgHVkyyjAgnB
+ Eq5q8Bi1tWfgGFmxbSpY8NTk4e3gK0S1uYVvoVI5mVPaXh7QOeIG7xSERfiFB5o3xktG
+ sfZA==
+X-Gm-Message-State: AOJu0YzUlbohousSg62vETUNTLTJpiq6bGPVnGO4fD0ZHfTP96+1NxwQ
+ 68c7/C+cCYr77YQxc3lZyw5YkPXzLMPT3iTwt15KaQ74Xrg741IwDH8TlJK0xH/Ibu0=
+X-Gm-Gg: AZuq6aId2JJQbYLrkNwQ/EcdJZY2nt7PiN4m8gIzT7cSOZMBh0Mm8U6NTdaUAi2a3nw
+ N5PNzddg1gu7rDzqGKp4EeNPBqbUcj/0zaFFs0WvBavFguc3RF0YL4n8b6wXTS48k+LhP6wTblU
+ kS1fw6b3eWJmIrqbam07TzpPTCona2WgyQSL+0X22TYtOSAqtKt5ORH5+4GUVzaj4fA/g+bdnTQ
+ G9WJp/I6eWbCcrLtgSL/2ta/BYwfp2/GhsTKa462QGDcA9+LZAA9Ik7WnwqpuQfMNcH/Wpvc4iZ
+ qy7YNYeIyPjYcp4tR1lCUJJ3d6p/CJmhf0GNduem5b7HLDed+LYvsU9+NhxoZwZ8oPJ+UEKjL18
+ 3e+hJGY06hr8ePnKzz8MrJjKNAZQZeJ4jTmcfV0nwOj6MEiKUYsS6/q8gpu8QTeExn9wLGlZKh+
+ c56CM16iqjkpzhZxTtq2qxW7x02+8PfnnYKDtOsJez85EwBmAvk6FUunDq+HkHpRfMhPv/+xNAG
+ vwnaEqs9gu72wn2zx/YD+jLu0Y6LLAzQxCh4UP4DsGw8cclb8o=
+X-Received: by 2002:a05:6808:308b:b0:45f:318:adb8 with SMTP id
+ 5614622812f47-464276261d6mr7987527b6e.28.1771879032249; 
+ Mon, 23 Feb 2026 12:37:12 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-679c56ec56dsm6899608eaf.12.2026.02.23.12.28.19
+ 46e09a7af769-7d52d04dbf1sm7976419a34.22.2026.02.23.12.37.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Feb 2026 12:28:19 -0800 (PST)
+ Mon, 23 Feb 2026 12:37:11 -0800 (PST)
+Date: Mon, 23 Feb 2026 14:37:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Eric Kilmer <eric.kilmer@trailofbits.com>
-Cc: jmcosta944@gmail.com, thomas.petazzoni@bootlin.com, 
- miquel.raynal@bootlin.com
-In-Reply-To: <20260220194808.1146082-2-eric.kilmer@trailofbits.com>
-References: <20260220194808.1146082-1-eric.kilmer@trailofbits.com>
- <20260220194808.1146082-2-eric.kilmer@trailofbits.com>
-Subject: Re: [PATCH 1/1] fs/squashfs: fix heap buffer overflow in
- sqfs_frag_lookup()
-Message-Id: <177187849919.3987051.5535085401243530182.b4-ty@konsulko.com>
-Date: Mon, 23 Feb 2026 14:28:19 -0600
+To: =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
+Cc: u-boot@lists.denx.de, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
+Subject: Re: [PATCH 4/6] fw_env: unify calculation of "blockstart" in
+ flash_write_buf()
+Message-ID: <20260223203709.GH3233182@bill-the-cat>
+References: <20260221100011.29049-1-zajec5@gmail.com>
+ <20260221100011.29049-5-zajec5@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RKLcNXH65aLxZX/b"
+Content-Disposition: inline
+In-Reply-To: <20260221100011.29049-5-zajec5@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,22 +98,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Feb 2026 14:48:08 -0500, Eric Kilmer wrote:
 
-> sqfs_frag_lookup() reads a 16-bit metadata block header whose lower
-> 15 bits encode the data size. Unlike sqfs_read_metablock() in
-> sqfs_inode.c, this function does not validate that the decoded size is
-> within SQFS_METADATA_BLOCK_SIZE (8192). A malformed SquashFS image can
-> set the size field to any value up to 32767, causing memcpy to write
-> past the 8192-byte 'entries' heap buffer.
-> 
-> [...]
+--RKLcNXH65aLxZX/b
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Sat, Feb 21, 2026 at 11:00:09AM +0100, Rafa=C5=82 Mi=C5=82ecki wrote:
 
-[1/1] fs/squashfs: fix heap buffer overflow in sqfs_frag_lookup()
-      commit: e365a269df5d01307390bdf7d6a1081d94b06470
--- 
+> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+>=20
+> In both code paths "blockstart" is calculated the same way. Unify it.
+>=20
+> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
 Tom
 
+--RKLcNXH65aLxZX/b
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZy6cgAKCRAr4qD1Cr/k
+CocNAP9SJSefYsg8RNSjgIlxIli/1QUQtXzBlrrpEzoy3jsh/gD+OH6wH13i3vRI
+Hdm4Ts8dpuzorUd1sB/jA40/evKB4Q8=
+=KKv0
+-----END PGP SIGNATURE-----
+
+--RKLcNXH65aLxZX/b--
