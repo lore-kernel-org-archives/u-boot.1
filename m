@@ -4,103 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3492EEC1113
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FD2EC1116
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0D0E83C6E;
-	Mon, 23 Feb 2026 18:42:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3608482BF2;
+	Mon, 23 Feb 2026 18:51:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KZgtp7Sd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lq51QQmf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CF9983D0F; Mon, 23 Feb 2026 18:42:08 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id C286A83935; Mon, 23 Feb 2026 18:51:00 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E4C683935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:42:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D022E80077
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:50:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-65a36583ef9so37921a12.0
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:42:06 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771868526; cv=none;
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-6580dbdb41eso6038054a12.0
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:50:58 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771869058; cv=none;
  d=google.com; s=arc-20240605;
- b=Gi5g4vZCZZN4nhukm3x51e+IPVs5CcNerJoHRZfdWYXYh1tVmzBFxhz/8m55kWF/Mi
- CNA9LXAiCtpt/Z/qzL5Ap/qnRLe+LkGZWMGollzeuCB+NuUArgItz+Uy5BXCjN9LIkP8
- lONVasAsKD8p9YHiysK1Yts97yS6YABtUCr/kMW+rTPERH6fkENlyYMOjYSWSjzaqy+N
- +CFfXxG8Pl3XccxYR2pNuYWrlbXiiIS0tVaPtQkdxFp6Bikj4nXXyG3tpXjVR6V+S0Qh
- erpolNrlme8eSvOTaE7SVZxJ15zoWZ8nuiOQ5+KszuTpyBgBA2lT4+P+mOZM8ihE/kUg
- uw1Q==
+ b=bRaIW9x7yNZeqbH/3Tzne4wrtXksdkZ5C3uDAi596YCGV2a01b77CyhZn5EZBX3hti
+ Gk5E5U+xCGsUfRhXNpYXyGqrTYJHLpRXS85sj9u68O7pQJlS4CUAXpkh3joOv9qJL/Mk
+ 7mUmcX9fVMuXevo3VapQKNTA3tHmV+X9vgVy900MJvk6wWta6h/OBCQAIFk8mYnBE7aY
+ eXAbO4T4Se1Wdzk9bFJMq2SewLYaorj750C0wi3uoFzdCfbIOxkQYUEUZrFFt2Nkkb3U
+ u7PLAXBeK1sOp94gDO7+4LyrxuYgcmF37JLYlZjyPa635okFio4E9VWYbXd5OFfALxeI
+ NcFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=aIayxqNX4lcDhsNZVVKmIgwO5SWy86V/FKs9O41znUQ=;
- fh=RPgTYJ68neRIQTFm+6R4eja2dl/YuQ9PskF80fCLAcE=;
- b=k+i+f3H0UvSIIc8MMW+LQzg0mNR425ca8d7lv61zk8/0l3c2gpItFGTA+GV4NL4o93
- 65k+0JqwjoEiaGwZ0t44rRPhfrQTH2ySd5WLT6OS9qHJ/iRdEvmW+q5zyL9jz0pyfZ7Q
- 0guLNeFeU6E4lTFPDd4D0FaJ6vU3agSGNWNwfk8gAKshYt210QaaCQEFwh+t1k7J/BkA
- KhOCG3dFGOBqmaDsEFhKJeXtYvPSEcH80/aauuFOeEa6xmvhUDMDX0Pa+Xo+ryEMsim4
- /Er1dhVwD6GZ9Y/hllRe/efYudMx2eE955oEtISk0GG2i4pnpfEhvGM1hm/G3H6hDotu
- tLxw==; darn=lists.denx.de
+ bh=/fE4Ssv0DP0tb3l52xcaienPjOgkTQq3bz0zZd1R3So=;
+ fh=HnsLlpVhzwN7uih7Ak2yI4wYc3mQPSEfV2n79G1UCUM=;
+ b=Q6196S64HlLXvWauHYAzXDEYPIurJCSxcC5GJE8UwCZCsAMMJJCR4Ji0XXI+amHftP
+ KTRS1XsgW8g8VEIWq4eeJKY6S6tq/xDsk5eZXgXD1bPv3QCke1IyUopRRl8sih9RUslJ
+ dLsulYnv9FPacmQuQQOrUfVVaKAAWWr9RE3W5dao7JceuUTYKv6gEg5LAuuNAFTyywj5
+ pcAB4q65jcOHVTE1RIYa14dH6yxIStSNYhBz1NhcK84olH0qxty+p/xbr5ymlBw07RwZ
+ YxF/g4J9H7hCkPtTH6z1V2NYMJ2QBfKYtYplTI+kLJI/Q27IH54bvuBaMLyf1XYOKPdk
+ pxWw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771868526; x=1772473326; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771869058; x=1772473858; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aIayxqNX4lcDhsNZVVKmIgwO5SWy86V/FKs9O41znUQ=;
- b=KZgtp7Sd6FZzsDF1bP4SLnKecQxeU1Cb6wty4hMIZZkK2B2rQgClET7q9CTjYzbyzU
- hZmF8QiY1Gp47YZ8wkCvzYNwRX9LDrjfvlUuC0YUHTnIOeKg/H9Pcv/A3rGsIWH8EoHW
- MlzxRtzG4j9hDoyLLdYjM+QtXysNSwd2E1erU=
+ bh=/fE4Ssv0DP0tb3l52xcaienPjOgkTQq3bz0zZd1R3So=;
+ b=lq51QQmfFUKq0ZgWYSojcmhh0GKkz3f/QSkvtvlY1GGACCVBQzdsUODSEKxSIrx86H
+ ThYD1C5FcGKTsgqXLONv+nMwSeB/8BtFDIz/2qrkFDeOc4ueUIVSskwvLPvIH0T7p4Dq
+ vTxX1HprL9t5yhcCN151RTTDTgzSCxC5CHEBI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771868526; x=1772473326;
+ d=1e100.net; s=20230601; t=1771869058; x=1772473858;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aIayxqNX4lcDhsNZVVKmIgwO5SWy86V/FKs9O41znUQ=;
- b=Yn2jizqyHOqEM0LKr2pSObF8hJ1d9YS3CFyvp9tMNVhYfxgcJqCpic4LyGoJoVNH1U
- k+RUJUGLdrpdJUmUbzfQBLHPH1FnumnvE8OI3t1/keACACpHPEFpUMAm4hxGwxF6yn8e
- sK2IbY/QbKY01dEH1MFF78lnVthWJbxqliyfqllQjVYg1PrwWwcenbApd3BLpvt5A4Ky
- 2vnqqLoLZFQc+aGgHICRkjGN2VdZd/xccVL/np3Zgc1Sf1KyHAXxkiWDDr5jsC8aNLJD
- UJhlBEkhC0PUouMBQVEehUzvJVPD/fx6z43jbEKTT7bfJ0SNOgp7jqxJ+u99xsIKzGrw
- TMxw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXcDUSKHBocokTG+EtZhNs3O22KH/DFTE/+FhgbqFmbvsLS5GVLSmvyK7KVmrUJfbQQpPSE1/E=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKPvtMNQEbgMoZaNyDnezjc0JHlIsFxDM/FwhBN0GGfI8X27Pz
- PvQit9jr0fUnXa5iT3UhzeYDs2OgrthX/jC8FVpYTpa/V2fboEM7oa4M8cCiLEDmEXCoSPdstnE
- PcVn9K3uxhykyDJKBtp2LXD6TFAwui5jn7JfFOGFi
-X-Gm-Gg: ATEYQzy2aJjdUseSg8rFXtAgH6hcq+3uH8d2trQYkNinVz2IppbNkNBu2E3ow7qtv+J
- zSn9433kSr8A5MossILN6z0hMs6GgbpirJX2HU0H9cxX5BpW47eTSWCD/WpuO0QEfoODDsFGMKE
- HLXPaE/X3rPebWKLZGpS9el6zPB0qoHvP1YS/7QhjEG/gKYK8h8oQQH0ZE06ARIstBuehhkHZ3g
- ibLcoKOVQwNZTLmyFCsfUdUa3WCJ8O6JiIMiR30opwOHrWs7l+dA0TUVAAV/2KPzJ37SW7lhEyg
- b4rEUw==
-X-Received: by 2002:a05:6402:1e90:b0:65b:ffe3:c588 with SMTP id
- 4fb4d7f45d1cf-65ea4e76080mr5412126a12.7.1771868526012; Mon, 23 Feb 2026
- 09:42:06 -0800 (PST)
+ bh=/fE4Ssv0DP0tb3l52xcaienPjOgkTQq3bz0zZd1R3So=;
+ b=AVWtSIuhWMe8GjglWgC9ndgWCUKMVHebbGnOowqOVf/EqRqxvkIuoj7SH7tcvVeIsk
+ N7fBbQiNs2Kx80nfTjPUA0lwWzTmXfTlaN8gzgVJjUN+FtQJ02nVnnauRoJ2NPmNntQe
+ MDRII4YMJBaxqGMf9EIsSMtL3JWUZF/ZIk7FKyzsWgMSLUuMEAjcvwFAMXvyAYOo2e+i
+ 5s/iiE/az8axjOXtIaJ9ZsC4U/gTyvmQiJmG8JPT3XCLPB/OZZ6j3F40Hngy2FrErY3V
+ cXVCJHLHQdM2OWuxRg+G5MdemnOSG4Z44teKYO+JUbAZZIPfcmi1WmSMZrFgzXyPHa59
+ Dlmw==
+X-Gm-Message-State: AOJu0Ywwvi2wgYjxZeyp4uRyUDKHM5z5+soR0kvOF6tM5I/GDMW2qV5r
+ 3SCf9VqjEoNyi0nBG2CMuBiqtaPhHaTNrV+vIwZaGb7BBWw6ampHZeHE7+UsLIXLP6FNeZvTXNV
+ tIVfzAVdowmfk6otM87TjrNVYv5WnVNKlCu1+dWgK
+X-Gm-Gg: ATEYQzyy2KbK9+inYGUTD+e4cJTWsOz/M7rx4IZEkx+cstk+rn+hmK84eCE46wOmv3r
+ E2LIXqtSby7AXOYrNcLytJl6HznA6mphd4wgIhd90hxO8lw1hBWk2cxjJ6YjL/OVOOKotGGyQHW
+ VHvjf/ae3164uXlHZueXO1qvoY3TbBYMddSSlUPHe7e01Q1qO11V1358m1AetXtyu0MOAkQe0ys
+ iAjJrwLHgCnU08TvIoc9z1dciZOY8jrlOpwXikSoeavTOIUr1wZgXRytZmRe7yz6MCql8FG8beh
+ HWmb0PhWh5PmECWe
+X-Received: by 2002:a05:6402:40c1:b0:65b:9699:7785 with SMTP id
+ 4fb4d7f45d1cf-65ea4ee7c0bmr5712178a12.10.1771869058258; Mon, 23 Feb 2026
+ 09:50:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20260219003351.388722-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTj42WZF3DTOt4HxskNW3qyZJ5_pQ66RsBNdbr13rXTFeg@mail.gmail.com>
- <2acea5e6-5760-40b3-b8e7-952fc355e621@mailbox.org>
-In-Reply-To: <2acea5e6-5760-40b3-b8e7-952fc355e621@mailbox.org>
+References: <20260221094252.3103034-1-dario.binacchi@amarulasolutions.com>
+ <20260221094252.3103034-3-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260221094252.3103034-3-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Feb 2026 10:41:53 -0700
-X-Gm-Features: AaiRm51NbH7Uf20BeipTeT8V_2YVCRaxMToFCAZTJLsam8ry-t3qJFq9I6NswCM
-Message-ID: <CAFLszTjRjpFRxxQJt2hNXzuMn9O3Kgcwrh10XpAMXqczK146NQ@mail.gmail.com>
-Subject: Re: [PATCH v2] gunzip: Implement chunked decompression
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Tom Rini <trini@konsulko.com>, Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Mon, 23 Feb 2026 10:50:45 -0700
+X-Gm-Features: AaiRm51ZA5Ss2-eQOfQlbXz6vsdavFcOHhPZum_JVxDdGPLxpT31Scw58i0QcVM
+Message-ID: <CAFLszTh_VvaPayYm5dLmYSoO64BEV3ZMjufecc1QchNvus2aXg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] spi: sandbox_spi: support wordlen setup
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ linux-amarula@amarulasolutions.com, 
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,39 +111,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-On Sun, 22 Feb 2026 at 20:12, Marek Vasut <marek.vasut@mailbox.org> wrote:
+On Sat, 21 Feb 2026 at 02:43, Dario Binacchi
+<dario.binacchi@amarulasolutions.com> wrote:
 >
-> On 2/19/26 2:09 PM, Simon Glass wrote:
+> The driver currently ignores the word length configuration. Implement
+> the set_wordlen operation to store and track the current word length.
 >
-> Hello Simon,
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
 >
-> >> +       /*
-> >> +        * Allow runtime configuration of decompression chunk on
-> >> +        * sandbox to better cover the chunked decompression
-> >> +        * functionality without having to use > 4 GiB files.
-> >> +        */
-> >> +       const ulong minchunk = 0x400;
-> >> +       const ulong maxchunk = SZ_4G - minchunk;
-> >> +       const ulong chunk =
-> >> +               CONFIG_IS_ENABLED(SANDBOX,
-> >> +                                 (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
-> >> +                                        minchunk, maxchunk)),
-> >> +                                 (maxchunk));
-> >>
-> >
-> > As you mentioned in the last version, there is a compression test in
-> > compression.c - could you add a version of this function that takes
-> > maxchunk as an argument and call it from that test? Reading an
-> > environment variable to avoid passing a parameter seems pretty odd to
-> > me :-)
-> Do we not want to test the command line interface ?
+> (no changes since v1)
+>
+>  drivers/spi/sandbox_spi.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
 
-Yes it is a good idea to test it, although we don't need to
-exhaustively test each compression case. I suggest using the dedicated
-compression/decompression tests to check detailed features, with the
-cmdline tests just checking for basic functionality.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
