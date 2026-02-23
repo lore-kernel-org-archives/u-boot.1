@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1B9FEC1136
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 100B3EC1136
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:44:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E62883C39;
-	Mon, 23 Feb 2026 21:44:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EBD483D8A;
+	Mon, 23 Feb 2026 21:44:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ig0PYyWj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="laGOfcEF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72C8583C39; Mon, 23 Feb 2026 21:44:04 +0100 (CET)
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
- [IPv6:2607:f8b0:4864:20::344])
+ id 9C15483D2E; Mon, 23 Feb 2026 21:40:28 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7E3583935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:44:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 378F083935
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:40:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x344.google.com with SMTP id
- 46e09a7af769-7d4be94eeacso109307a34.2
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 12:44:01 -0800 (PST)
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-67997ce9e1cso2765631eaf.2
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 12:40:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771879440; x=1772484240; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zywsBUVcNnqjLcE1IruEzKo0kQUEBoT43q0s/Xl5Dr8=;
- b=Ig0PYyWjb2mscG+StymlOTbn+0IOPP78UYzmz+q8f7Yg6aTh/QEXU0Aal0jkvxdLmI
- hkUG+27tyMGN5ybDOnjgBP67311f1ISwd882RLnWvv7pucw+O3XnKZTGDY4ZAKcpIszq
- 8kycmaM+PDy6NisyJjgRSKWDsn5RWnA0UfomY=
+ d=gmail.com; s=20230601; t=1771879225; x=1772484025; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MBZpNyHScrfa1m5j9o2GDn0Tc/2kkq9/ka7DXMdFoM0=;
+ b=laGOfcEFLZKou7OT58oiRkBCkltWdLxME6iOtF4i9Yvt8TiYBcocAeh4ZdO+5wCLo9
+ m7RILn2iF9kWmDrm1VGLlVzwwndS2HO65A15tg0xavFNXAV/ry9rXKsjECvvMW7nGOa0
+ tGN/tmWjOG4Ts97sqMm8i9m0z2z39710TFp0Agqxu1Yd/1VdnuQgxzfoJ96yrMwArQ5f
+ i8C8wSGulRtUqytFx2Dxvmg0f1LAdRdnhWl1CpVSRSNmJnxlIZCuVRGxTJsG/epEg7IB
+ nKnq6i1/wQsA72jkyjJL53moFqAaN8gg5knCweuP/+8PgdP3t+DugMNHMX4Ai+NYq/V0
+ zMBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771879440; x=1772484240;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zywsBUVcNnqjLcE1IruEzKo0kQUEBoT43q0s/Xl5Dr8=;
- b=t8ahKk4CUUZ1/k+arsjsFiLdmiVNsBn4NRQY1z7tZETP/b4MiVYltNEXslq+1vlPCw
- eGkr1WqhwGygz+IypXKM69osmTMTKvl//pnNVSCG345PluBUJc/HEN5cIhMl4h8XmOhV
- UA2YjfN8eIH0wpwvnrt2/ElOh8+r5ETwcf532LyuSfDWO6XTxlN+KASunZRG+0hAXKeD
- t9GZQ0DeivimtVnyHWNmWu5ryXZwMaE8sn161lAGsZaZSomyMj+7qs0TqBflwvPaiitX
- MgCR1l3YZN1yDifygPcjkO7ziOhT39fYjZWDgSoI132IXGma+5HiNa35ZUaYchmTIfRS
- SuRg==
-X-Gm-Message-State: AOJu0YyMbn7/JotwjpzHhMo+r/lDnBupz4Hn7Fwhjijd7GHe6O3ekSSR
- CwNHADls5G/VNAxV0GC8a9AojBix5WpWBwmXBxb//BmKQ4p28XxHCJ6Le0Z2+aFORw0=
-X-Gm-Gg: AZuq6aID9LLlELbVzW4w0FQMseo7rkRiJfL8EvqtxKWQMx6xspzFBAKOjwG74Dn4SqX
- U7/fEYXfSJWTUoP/XJuhsCQ++x8y5ddvXBVvAhgSbM8hd4KKfe03bvVaD5Z0zgIRaZdGIU/vmCl
- bf8QAsf9gFIuLmmqy76VKSPvXAzkmQSqC6y4L3pgz7k+d/ABljIK3pd1YB+EMew37j9ALy8x+5x
- IGcS98/rA7o40n/JInfBodtg2juqV6TCH/mR5+7sAJeYC/pfHdjJ4kDr9bCtE2n33yWRtRC1aZA
- qKPmZz5L9rPRh/tEkX0JG2GIOU16s+v5E8nSVRHNQgYF8pad0lvR4S1UoJP7Y+PXmpggiEsfM/p
- C3/K8B9S7WfbrMtgBxUyTWfYnDHX00iojeqbWeocdZEmIJ+S5rzzHrFdN4Z65ZLcQ35WxoDkvvv
- 1AQHa6tIVCBqVCrwAXoyGcfxJOX840ESwas/S6IdxuE/k2A90KdFS+7RTWkgoxRFHtqQQqYzeuy
- B/JO99gTDqZllo7JSKDlHBHHl8VA/FCF4sc0/yEuTRpfTlkOLg=
-X-Received: by 2002:a05:6830:638b:b0:7cf:d8c1:8e19 with SMTP id
- 46e09a7af769-7d52bfbc5d5mr5620612a34.25.1771879440343; 
- Mon, 23 Feb 2026 12:44:00 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52cf9f42dsm7976551a34.9.2026.02.23.12.43.59
+ d=1e100.net; s=20230601; t=1771879225; x=1772484025;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MBZpNyHScrfa1m5j9o2GDn0Tc/2kkq9/ka7DXMdFoM0=;
+ b=vgG3uddv8ejBR9FxQ284FYqaErZu3A9tVBn7/Viza3VVIAdudH0hzigxN1vOtb+AtE
+ KvKtliDIJI1ETonWLfiDyhCJiXo5dDwycPl0ByYv/N7TUypmr8cISAv3gn3Wq6011olR
+ gd2RnuJ6F6tGhABqbwLOm9dCfnggJA4eIUOxA1Hsc0fZvP9K8I96pJpDIagOnScOQV5d
+ WUKinsyH7XHBYKHz2PDkDdqzmQPxq3SQIblP1ngelJgD8IjGaH3EF45Gadwx4syiDp21
+ mfovj1AcCv3EJl4kUmowqJ6IVww4DgmHGfABvPIyjcUuIOut5MeqKt0TnCqjnDtQKsPx
+ ePaw==
+X-Gm-Message-State: AOJu0Yz8K2k23MlIn/CFlxoqXfeYB2LkaMKNoiTRSyVRTdUmyKD+6x5O
+ bZqixYBu9geLbtRhc4O/FNaW8vYNX2KWLdzvOe0OD7aXFcapM076W0A4jly+JQ==
+X-Gm-Gg: AZuq6aKIbP5t7n9dZ0w21we5DbRu064D78RjOY9JyMacAm+2ytHimThplnJdd3SFSYI
+ x3sKb1/Y7ouU7stIc5SRGSAavG2PcXdwDLxnwPd/DwXIZyH/QDgXk7d6HjM9Mt65u8oLHcb3r8r
+ gGxQ/dVWrDQz9bG62II9yopfw5XvD0z5KM/tGnlujUNLAOYpOEVmDfCP8w0P/gIagjz6/jZ2EFp
+ /gktw+1z6+UAPzS0P+FB7N/nSG9aJ0lnDMqnpTcKkv2vOGYh+PWAPB/kCZaWdst7OQEh0+eE8kF
+ n0MShgR4VvD1NVNqV6NkD15CfUdSt5wjBjiXpV0YCyxABOuO3dCL4TyRr4rkZ6PHQVHxZpzQ6Qn
+ PHmKPKvOgnoCbXXLCwwTvg1PXQe7XuGcRyH9AEZ3XbK1PUzGkR+kJqO3XvukRldZaHjPTsObLb2
+ AHddYSQvBjHXCJLMDjSAGCPOCOb/ddwh4cr2xkRKNcEChxOOGCtFBY38kMMS+KsKuMuUjzP2xmX
+ R+UM5cWilwpdmnw8KGgukjr6aj2NjsBun5+wamUrOabnNZvq7bGH6JpkCo5
+X-Received: by 2002:a05:6820:4dc6:b0:662:f2ea:8f9b with SMTP id
+ 006d021491bc7-679c428264bmr5489961eaf.20.1771879224599; 
+ Mon, 23 Feb 2026 12:40:24 -0800 (PST)
+Received: from james-x399.localdomain (71-33-158-51.hlrn.qwest.net.
+ [71.33.158.51]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-679c56dbdc4sm6791726eaf.10.2026.02.23.12.40.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Feb 2026 12:43:59 -0800 (PST)
-Date: Mon, 23 Feb 2026 14:43:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
+ Mon, 23 Feb 2026 12:40:24 -0800 (PST)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, James Hilliard <james.hilliard1@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  David Lechner <dlechner@baylibre.com>,
  Frank Wunderlich <frank-w@public-files.de>
-Subject: Re: [PATCH 1/1] boot: fit: validate FDT/DTO payload before
- fdt_open_into()
-Message-ID: <20260223204357.GJ3233182@bill-the-cat>
-References: <20260223204005.2705968-1-james.hilliard1@gmail.com>
+Subject: [PATCH 1/1] boot: fit: validate FDT/DTO payload before fdt_open_into()
+Date: Mon, 23 Feb 2026 13:40:04 -0700
+Message-ID: <20260223204005.2705968-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3dYRlVyh1Mr7Kzfn"
-Content-Disposition: inline
-In-Reply-To: <20260223204005.2705968-1-james.hilliard1@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 23 Feb 2026 21:44:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,48 +100,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+boot_get_fdt_fit_into_buffer() calls fdt_open_into() for both the
+base FDT and overlay DTO blobs loaded from a FIT image.
 
---3dYRlVyh1Mr7Kzfn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Those blobs come from FIT payload data. In the overlay path,
+fit_image_load() is called with FIT_LOAD_IGNORED, so the IH_TYPE_FLATDT
+header check in fit_image_load() is skipped. This leaves fdt_open_into()
+to consume header-derived offsets/sizes from unvalidated input.
 
-On Mon, Feb 23, 2026 at 01:40:04PM -0700, James Hilliard wrote:
+Validate the full blob against the payload length first with
+fdt_check_full(fdtsrcbuf, srclen), then proceed with fdt_totalsize() and
+fdt_open_into(). This fixes Coverity CID 644638 (TAINTED_SCALAR).
 
-> boot_get_fdt_fit_into_buffer() calls fdt_open_into() for both the
-> base FDT and overlay DTO blobs loaded from a FIT image.
->=20
-> Those blobs come from FIT payload data. In the overlay path,
-> fit_image_load() is called with FIT_LOAD_IGNORED, so the IH_TYPE_FLATDT
-> header check in fit_image_load() is skipped. This leaves fdt_open_into()
-> to consume header-derived offsets/sizes from unvalidated input.
->=20
-> Validate the full blob against the payload length first with
-> fdt_check_full(fdtsrcbuf, srclen), then proceed with fdt_totalsize() and
-> fdt_open_into(). This fixes Coverity CID 644638 (TAINTED_SCALAR).
->=20
-> Fixes: 5ebf0c55a23 ("image: fit: Apply overlays using aligned writable FD=
-T copies")
-> Link: https://lore.kernel.org/all/20260223195109.GG3233182@bill-the-cat/
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Fixes: 5ebf0c55a23 ("image: fit: Apply overlays using aligned writable FDT copies")
+Link: https://lore.kernel.org/all/20260223195109.GG3233182@bill-the-cat/
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+ boot/image-fit.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Thanks for such a quick response.
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index ddc64debb14..e7c7212195f 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2390,6 +2390,14 @@ static int boot_get_fdt_fit_into_buffer(const void *src, ulong srclen,
+ 		fdtsrcbuf = tmp;
+ 	}
+ 
++	/*
++	 * Source data comes from FIT payload. Validate the blob against
++	 * payload length before fdt_open_into() trusts header offsets/sizes.
++	 */
++	err = fdt_check_full(fdtsrcbuf, srclen);
++	if (err < 0)
++		goto out;
++
+ 	newdstlen = ALIGN(fdt_totalsize(fdtsrcbuf) + extra, SZ_4K);
+ 	min_dstlen = ALIGN(min_dstlen, SZ_4K);
+ 	if (newdstlen < min_dstlen)
+-- 
+2.43.0
 
-Addresses-Coverity-ID: 644638 (TAINTED_SCALAR)
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---3dYRlVyh1Mr7Kzfn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZy8DQAKCRAr4qD1Cr/k
-CqWuAQDfr1IlTO1OdupFJwmj4iV8BfU/MZzU4P6Xpgx4J0t7ZQD+IQK8tX2phQK0
-G5HnPBVqZDZOeI09FP5wk+M/JtiQKww=
-=AvLQ
------END PGP SIGNATURE-----
-
---3dYRlVyh1Mr7Kzfn--
