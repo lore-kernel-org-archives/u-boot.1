@@ -4,83 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8B4EC111A
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 18:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7605EC1120
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 18:47:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B41C83C39;
-	Mon, 23 Feb 2026 19:45:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1631283C39;
+	Mon, 23 Feb 2026 19:47:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jr/KYJJ1";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="PZ3T/P3N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A610283C6E; Mon, 23 Feb 2026 19:45:47 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5960083C6E; Mon, 23 Feb 2026 19:39:21 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BC1D83935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 19:45:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF85483D8A
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 19:39:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7d18f80b5c2so3957797a34.3
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 10:45:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771872344; x=1772477144; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VWAB5EU7iuQvKSdIhUTutuZfFtG2OKTgdaxgmQFiKSs=;
- b=Jr/KYJJ1sQcWDD7T0/E8y9nW7l5Vi4WvM9Pv1/rM8TjUsZZc96GGTEWxxV6j+r2gwW
- t/mk3OcAZ/+n2Y/M8Y3ROOBHbhylJ+9ZZ243z0oB42C5Ilo1GhuCi8cK7s6izqgc4lio
- QdLvjQEcqHe2KTWq2Sh7PEX2cDBr8SOo3gCig=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771872344; x=1772477144;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VWAB5EU7iuQvKSdIhUTutuZfFtG2OKTgdaxgmQFiKSs=;
- b=rz+V+c1UhUK7KQ/e9vmKysLDYX1UyKvmejis9zmEFlbMdQcdVfmmt4Fh0UJCavZcoR
- Ek+RPfBSIMgI84qf84p8Ly+b8oxU3iojKpSrlxNLIk8HtEkuVaBeTn7aDyXIynnXPUpI
- C5iEIocatBV2GUFxIbrckMH6YzOIULXlh0KaL3thWyPVC3W7bgxxlAxMst4CEyR73+r9
- 4NHg+aL0QvDXxRK8D5alE4AAxSr0vLPurP1uTmiRJf/f34kBMhg2+5hwaXHFZPn4ABY5
- VKEEgGbKrO1UhVpah8F/TeQ4guVnBGx9sBvgJgRfpkXrSsjJ25cb4yVgJ3N0ETsTC8Fk
- L+9g==
-X-Gm-Message-State: AOJu0Yylgic3oJ4cTSXWD9fMRbS7aXKt5GaYWFDOeJrGzwnAIzYtnrNV
- PODHKPjsxHyhTEogKdxRNZu7HndeWIE6Mn+0YZwPUhacjI2ua1VM40i5yeDTgr4Yni4=
-X-Gm-Gg: AZuq6aKUFMOwZdZ0KVRaM4rx8rqAxSGi4z8a+7RbtnWI6juk+uq2PiijbiXcwE4rL0G
- +tEkVxQcp37MxrGaAEKfj968oEoCLQakqSacQCapCOoOauPeCvfXYvVxsOWVlyKFN8VWcWPn7Ur
- 3UtXFCujH06M47WGlOmzerKtu5c0gmDD5+miq/6tVtwam+5vUXLhuZupM8B3tMDrDDlYZ28ruVV
- ob9rMfNUNE0NenH4ijGJoMA/1tEmXUiEHEUuKPAKQvrSDtiHQqS1YEHUqc/2XeL3JBRvk8CHij9
- IUsmMjd+CPPkKA+4pkZGMFBPN1iL5mbYjojickcmokrg+VMnyIdfTSc3HzYKlTIls9H9J3qVaQq
- 6MWyEsBmGe+mdOmosMuZ1GzvZ7gXIw/B5Edza7WlpEx1y9fQ8kkAEwNAwK2z3mar2JXNgiStr0g
- 35v6gOwaz3qzPO7ShcpQWRs7x8vKMh/rsXA16IIYqt8geETQSjJVQhn1vvDr0+qJA4REs1gLUsk
- kfvZrttLvrECFF7B/MpwXgem83VFrUpGUnTnFSE5YtBORBgCK8=
-X-Received: by 2002:a05:6830:4ac6:b0:7ca:e8bf:8c4c with SMTP id
- 46e09a7af769-7d52be3eb0amr7194334a34.12.1771872344016; 
- Mon, 23 Feb 2026 10:45:44 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52d04de97sm7635972a34.21.2026.02.23.10.45.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Feb 2026 10:45:43 -0800 (PST)
-Date: Mon, 23 Feb 2026 12:45:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Minkyu Kang <mk7.kang@samsung.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: please pull u-boot-samsung master
-Message-ID: <20260223184541.GD3233182@bill-the-cat>
-References: <CGME20260223103749epcas1p2d9af2576eb9704b70a8572f7ccb8080f@epcas1p2.samsung.com>
- <2d9001dca4b0$74a82c10$5df88430$@samsung.com>
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id C31AD27E9F;
+ Mon, 23 Feb 2026 19:39:17 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id FEcv5EFyehtx; Mon, 23 Feb 2026 19:39:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1771871957; bh=Rdxbz6rijcchM6SjoAx2KjZz/4LSh+poBL0Qr8MF1Ko=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=PZ3T/P3N1B1bY/6NXlCsr9OVLr73pV7C4NNFii+mqOsgI0vJyyds/Uu7DpUg0tx1J
+ adFIrnJ9d2LH/HyzGlbb8J+h3nMoWrLRJjZieDrqFW9ntAtStK1E/UrXpR5Vk17zRq
+ BWAZsYQnaur2mD3bCk7ihbV9wEolynMUZoAj3dNlI819knz3CjICwr8uFrhi9s54CX
+ 7S8KQiaDEPUhF+2yPNR0qu1QpxsWaQz5p8kH52S++TJi9DWWTopkHolEijEsnbi+mq
+ 5elLYd1IjCNxuz2kYPTD9xdxMiiXnRGvP16Wij+6ocdjUB5NqMFNQYf/IpByOMT3GL
+ Mvv67W+4TQKNw==
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+Date: Tue, 24 Feb 2026 00:09:09 +0530
+Subject: [PATCH 1/2] board: samsung: exynos-mobile: use blkmap for booting
+ from userdata subpartitions
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OecPXXuwBzWBBbww"
-Content-Disposition: inline
-In-Reply-To: <2d9001dca4b0$74a82c10$5df88430$@samsung.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260224-exynos-blkmap-dfu-v1-1-cfe615b68c88@disroot.org>
+References: <20260224-exynos-blkmap-dfu-v1-0-cfe615b68c88@disroot.org>
+In-Reply-To: <20260224-exynos-blkmap-dfu-v1-0-cfe615b68c88@disroot.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+X-Mailman-Approved-At: Mon, 23 Feb 2026 19:47:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,47 +70,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Some distributions tend to provide a single combined image with EFS and
+the system root filesystem. Flashing it as-is in a single partition
+(usually done in userdata partition as it is the largest) is not
+bootable as U-Boot does not understand subpartitions.
 
---OecPXXuwBzWBBbww
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Use blkmap to map the userdata partition into its own block device.
 
-On Mon, Feb 23, 2026 at 07:37:49PM +0900, Minkyu Kang wrote:
+Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+---
+ board/samsung/exynos-mobile/exynos-mobile.c   | 45 +++++++++++++++++++++++++++
+ board/samsung/exynos-mobile/exynos-mobile.env |  5 +++
+ configs/exynos-mobile_defconfig               |  4 ++-
+ 3 files changed, 53 insertions(+), 1 deletion(-)
 
-> Dear Tom,
->=20
-> The following changes since commit eed514b11d04a2f8a949521ad3bffba3ec98bd=
-2f:
->=20
->   video: correct label for cyclic video_idle (2026-01-29 10:00:59 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-samsung.git master
->=20
-> for you to fetch changes up to 11198fa347390eb449c2a0939f5f00cf510fe285:
->=20
->   doc: board: samsung: exynos-mobile: remove requirement of stub device t=
-ree
-> (2026-02-23 15:35:33 +0900)
->=20
+diff --git a/board/samsung/exynos-mobile/exynos-mobile.c b/board/samsung/exynos-mobile/exynos-mobile.c
+index 1f61f28de5f..c5e1b186ae3 100644
+--- a/board/samsung/exynos-mobile/exynos-mobile.c
++++ b/board/samsung/exynos-mobile/exynos-mobile.c
+@@ -184,6 +184,45 @@ static void exynos_env_setup(void)
+ 	env_set("fdtfile", buf);
+ }
+ 
++static int exynos_blk_env_setup(void)
++{
++	const char *blk_ifname;
++	int blk_dev = 0;
++	struct blk_desc *blk_desc;
++	struct disk_partition info = {0};
++	unsigned long largest_part_start = 0, largest_part_size = 0;
++	int i;
++
++	blk_ifname = "mmc";
++	blk_desc = blk_get_dev(blk_ifname, blk_dev);
++	if (!blk_desc) {
++		log_err("%s: required mmc device not available\n", __func__);
++		return -ENODEV;
++	}
++
++	for (i = 1; i < CONFIG_EFI_PARTITION_ENTRIES_NUMBERS; i++) {
++		if (part_get_info(blk_desc, i, &info))
++			continue;
++
++		if (info.start > largest_part_size) {
++			largest_part_start = info.start;
++			largest_part_size = info.size;
++		}
++	}
++
++	if (largest_part_size) {
++		env_set("blkmap_blk_ifname", blk_ifname);
++		env_set_ulong("blkmap_blk_dev", blk_dev);
++		env_set_ulong("blkmap_blk_nr", largest_part_start);
++		env_set_hex("blkmap_size_r", largest_part_size);
++	} else {
++		log_warning("%s: no qualified partition for blkmap, skipping\n",
++			    __func__);
++	}
++
++	return 0;
++}
++
+ static int exynos_fastboot_setup(void)
+ {
+ 	struct blk_desc *blk_dev;
+@@ -297,7 +336,13 @@ int board_init(void)
+ 
+ int misc_init_r(void)
+ {
++	int ret;
++
+ 	exynos_env_setup();
+ 
++	ret = exynos_blk_env_setup();
++	if (ret)
++		return ret;
++
+ 	return exynos_fastboot_setup();
+ }
+diff --git a/board/samsung/exynos-mobile/exynos-mobile.env b/board/samsung/exynos-mobile/exynos-mobile.env
+index aa2e89afbac..33f767319b5 100644
+--- a/board/samsung/exynos-mobile/exynos-mobile.env
++++ b/board/samsung/exynos-mobile/exynos-mobile.env
+@@ -2,6 +2,11 @@ stdin=serial,button-kbd
+ stdout=serial,vidconsole
+ stderr=serial,vidconsole
+ 
++blkmapcmd=blkmap create root;
++	  blkmap map root 0 ${blkmap_size_r} linear ${blkmap_blk_ifname} ${blkmap_blk_dev} ${blkmap_blk_nr}
++
++preboot=run blkmapcmd
++
+ bootdelay=0
+ bootcmd=bootefi bootmgr; pause; bootmenu
+ 
+diff --git a/configs/exynos-mobile_defconfig b/configs/exynos-mobile_defconfig
+index c7d206f94ac..cee468d9c24 100644
+--- a/configs/exynos-mobile_defconfig
++++ b/configs/exynos-mobile_defconfig
+@@ -12,6 +12,7 @@ CONFIG_SYS_LOAD_ADDR=0x80000000
+ CONFIG_ARMV8_CNTFRQ_BROKEN=y
+ # CONFIG_PSCI_RESET is not set
+ CONFIG_BUTTON_CMD=y
++CONFIG_USE_PREBOOT=y
+ CONFIG_SAVE_PREV_BL_FDT_ADDR=y
+ CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
+ CONFIG_SYS_PBSIZE=1024
+@@ -24,8 +25,9 @@ CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_EFI_PARTITION=y
+ CONFIG_OF_UPSTREAM=y
+-CONFIG_OF_BOARD=y
+ CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
++CONFIG_OF_BOARD=y
++CONFIG_BLKMAP=y
+ CONFIG_BUTTON=y
+ CONFIG_BUTTON_REMAP_PHONE_KEYS=y
+ CONFIG_CLK_EXYNOS7870=y
 
-Unfortunately the exynos-mobile does not build in CI with this PR:
-https://source.denx.de/u-boot/u-boot/-/jobs/1383183/viewer
+-- 
+2.52.0
 
---=20
-Tom
-
---OecPXXuwBzWBBbww
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZygSgAKCRAr4qD1Cr/k
-CkeyAQCShvfxTByDJP7d25Bmn/GI06ckuC/XbX8sbtCPiZ5VhwEA3XXSYjNwUjuh
-L19OxTHqFPi+7i30XM93DBveDFdk4QI=
-=VdwD
------END PGP SIGNATURE-----
-
---OecPXXuwBzWBBbww--
