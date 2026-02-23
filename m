@@ -4,121 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76EDFEC1116
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8335EC1116
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:53:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B39DF83E36;
-	Mon, 23 Feb 2026 18:53:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F182183D8A;
+	Mon, 23 Feb 2026 18:53:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DOFspvk1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N7ZC+U+Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 744128063E; Mon, 23 Feb 2026 18:53:19 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id C536A83EAC; Mon, 23 Feb 2026 18:53:22 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 851F083EA6
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:53:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96B608063E
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:53:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-65b94e0a875so6568230a12.0
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:53:17 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771869197; cv=none;
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-65815ec51d3so7500031a12.2
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:53:20 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771869200; cv=none;
  d=google.com; s=arc-20240605;
- b=LY7vWioizzfBUWr4/SqkkRGWmHjXqNoGfrvBW085Ql7k+l65dhNHz7Wqt7CO11WcWm
- UXUaHU92gvOIqy+D7+DRDLxffK4SQEYhCVdUrCOvUp1f1K+7V9Gp+aqg9NrN3v+1gGUf
- E04aGMS6/CmI27L1IonU0/BMLVSlpDZ9hRfb3nYDxFapK2jH9Pr9CVcHdb2pYs03QL2/
- XygfunIr1K+8Xg/xSbcIbJd8tZrkDcmAH2F2ifKZXx/iDMwTh9A58QLy7ZQiJ5c+dy9G
- hGWkKGDfQ69WkPP1CeRcRRlvgZBH7GnXm1QvVyDr52LmYCMPJNRDrl2BfZnkszMVN8QH
- oYvA==
+ b=DuQxjA86iSBSlAX8dMhxfYvHKSpWH5nddV/Jwqp9LMv+ZakcITzJySu7wiiSx0JHrq
+ RsjPm1fpr58XmR5hf94NbFOVEm9Eqfqk48vCu5THebhmsD7Ri3LPM2OOf0ABnl0Y76R6
+ U4kFMVOMsaXLkFh+Mb7pdlMYNmHIGI9lfZzrV5vHucLU955vz7N3WUfZaAtdk1ye4TM2
+ 1xwl7b/FyOeSCwGouvD5tUZ8xV8qwRlcF7qu8+qXJDt81GsmL3g/ogSBNWDNbaMvoXcz
+ M/qoCqmWAYLllKbdlf3ZqIgUdKmLDAa8ZJSdiqdn2SsZ6V8XXbeg52YcJWT3EB7kfI1U
+ 6mig==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=LeH03k+rYygSyhe9YCjV9eBJvQoGfNzx/iHgnPukS5A=;
- fh=ygb6jlSkAF0Rqd4RmOz+L4ilHCFQZ+jNBAF0WUL/vKc=;
- b=ZwwDgtpMAHfT9+ae4rDu+kLzXvMjpEYgHwkTJZWkhcGf6bJzKchEXXCNtZhQpKdVds
- 7XiS3O4vhmOcipJxkUUOLswPoNRHso0T2kr3K9IyTuIdI2XLV/RLE9HjdBq3cQUuMxtk
- SDwzbQ+6THZw83B1HLCrBFulC359mXPLTRvdNmtD/AIKQDPGjQ9O0RzgQ4dv2jgkREAT
- aWxGD+khiUPYnt+k1vMuDQMZhXP5HvzPhXidC2SmailRFt0TQzyzeQUEaS1SS3s8qW/H
- uQ10/4q1nlgAarANXHJZvwqOHC2VUPnfbbCEo05ORJo3C6GOCsPi6TTTJTXLW1cYBh2z
- gD3g==; darn=lists.denx.de
+ bh=KUDkSugD6xpMlxXL3gs3k5oMZHPZUKzVuZBiDmFyg2k=;
+ fh=HnsLlpVhzwN7uih7Ak2yI4wYc3mQPSEfV2n79G1UCUM=;
+ b=jOHjyxjwLMikVuR763HyFnwxRWgq9hyuvfe64ElewEnFNbDbraybjl38tigwHBp7hi
+ XL6Pu089XHyOKInGjw81GJUAfIStFNbv53FVFaNeHXKC6AFULqHf4J4yo+lnyZck5vPW
+ lgFuSTYD/JiwHGgDcc7y01kZ15YPEo2JFUhrEW7iR1edFKVVp1k7XfWiPRnsOqVw3Kna
+ R4qJOIqgyjnFG43sLn/+2VFzS09v6RYxfgDn5aJFauDYypft0lHzJ84+Ub/Bddn9BiNG
+ nVO2mSP5oB3MO4ObnqV6JuoCCe6V5Y6pJ+2cHzbmK78T72aiHuNd1wi2P9vXVzq15QWQ
+ cU1w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771869197; x=1772473997; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771869200; x=1772474000; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LeH03k+rYygSyhe9YCjV9eBJvQoGfNzx/iHgnPukS5A=;
- b=DOFspvk1aC3i1hfPb6v3sspXHU4mpsuISottAV7SRhHQKO7Tr8FzmkvrsJiU8XVdAq
- XKHTWCMOdGCG6H7ldrDOdA4LnLppy/kR+o40LOvBuos6GZL2Svi72ksVryDm348tVXQG
- SRXRBNb6k+oqSWt8ftunh4qfG3VhtZDFbYaP8=
+ bh=KUDkSugD6xpMlxXL3gs3k5oMZHPZUKzVuZBiDmFyg2k=;
+ b=N7ZC+U+QvnST5Zft8H1c/9q8tKkeVKYb1D/rxuSRWmFgRzzZPqQ3gNWBaQk5rrRzQB
+ 8RC3CO5ClOUNwJiCKEAXy/C/PpptKBe6vsnUglZ9DuQxAcaHC/yBQL2PvtBn7V6x21/F
+ UcJETYye0Yk0IbTlfnaS5jZAaXG+GIXbxhsLc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771869197; x=1772473997;
+ d=1e100.net; s=20230601; t=1771869200; x=1772474000;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LeH03k+rYygSyhe9YCjV9eBJvQoGfNzx/iHgnPukS5A=;
- b=QVtirUFekNk4/oU/L/cMYKn60hLURD6xdftX8yBVS0Ha/i3SgSJsDhAIvCc/vh6iBg
- 5zC4TQ+2t5FOfsNxJIOzLIrIedE50NCDOFnR0DARN2oa80qePiCJO0D8+pacgLqd8YaB
- NbG9gvJ/u8YUK6jgLYm+gqHXVALmAzegsl6NqOjP9jPuBi0b9VUkUobjbgzMD9tUtaQX
- RQquxt1IoOcH2vQkPrFUQvdRljudCaSwbTvZ0wo/Xtor5IVtoMcQkPwP37odRHw+9U/j
- nsTuY2hr8EQpQ5mo/Ffgq54BabAesl1lixjcY2KdQpn1e8LxHa8+4xEKzkoJvNTzV9/O
- DN8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU98qdjLMR6yNiKX093WEk06ou/KgaGTTvNmQry0tH7Szhb+13C2y/WQyt1jLu7uQwtRph2y18=@lists.denx.de
-X-Gm-Message-State: AOJu0YzB+CO7gbdn7x3dD+H7meqd7nXi/4mKvOC8o60Vxz0mCUkPuEdB
- yockWLz96yAhIVu8yp9Hftn9SKGiwZSKzBQ/gFTpX3Uwc2dexhugfD51CptDtGIoPoSh24oOEeB
- XIJKnq9ioJu/1JCaQzCwOzSElVp15Xh4RFaU6EGhq
-X-Gm-Gg: ATEYQzzruv88Lpq3Bl83lcIn5tuNLfBHwyjKttnntKuMxT60+er2dkMmnrLMqrITqX6
- zA2bVRGLmbRvUq2c+UGqSA9OBx+fKXQG3UGQZNXqVQZKE2tmja6XZTSLmgqB7YpVOdvZ86NoiFv
- hl7fPAWUGH9Z61zt1T7rLr0DY3qqRAlGxJz8sCnT2zTsX92Bshvadb3ny085cwXQi78Wm3cl8q7
- zItLJqQMU1syVwm7Vjz13OQQJgEw2dRdCz19EpHl//+afNaAOxaqmESgG+J7W7CbxHo8QiPLv0c
- 9sk+BA==
-X-Received: by 2002:a05:6402:1e8e:b0:659:3671:137 with SMTP id
- 4fb4d7f45d1cf-65ea4ec5bacmr5012827a12.1.1771869196871; Mon, 23 Feb 2026
- 09:53:16 -0800 (PST)
+ bh=KUDkSugD6xpMlxXL3gs3k5oMZHPZUKzVuZBiDmFyg2k=;
+ b=cbzyrN/X5h4cDfBIJMMowzegH3EmAySXPkRt1KPy9hWhMgZB32htuo2o7gMwJCs/HN
+ rNzCPz7cvduQ/SLeE3mtNTO5PDpo/NDuqiSDvKy3TihN9pS199Irn1M+Hdgj6VHaXnIt
+ o05IH70oFtS8O9ObGDCxGK1PXwByVR5uNsScuNgrV6fcuqgqR26fpGCDAVGm9T+tuoS6
+ G+HxWWfvkxXiRQyHHqoVvLXfR7ustEaC7UiFE1QE7Mqz+hchz0P18nd/diPVwnzobNg2
+ rOfzqsO6unmZbbnDgcizVx78LBtcrZt6nlxxi2laFEw2lWm0PLP4mAHNXW+wHZA+SwIn
+ uSfQ==
+X-Gm-Message-State: AOJu0Yw+2ffqEB8svEBranUslpLpi4VKUcvPiv5p/vMsFu5qoG0Hvf0q
+ AIo9lEWgj7OxuYjC1GIUeEO59hKBb3HMaqqXpIW8MJzferW0TOKAQqfEXZdURHxk7ET/1yXsNEE
+ f7J3K6YTCo2rkMvljYIFmxSpIJj1rI5K7u8Vml4NJ
+X-Gm-Gg: ATEYQzws0iZRUc0ubutcRMcRMoHp6z+jpm2qpPga+M1AFW00BtqgzyHT8xExAjOl2en
+ Dnjo8n8BcGCZrH761kWyef643dNJ38MaEQz8T2l0Tlm47K3PRr1I2PW+Rr07AdHsMoNZKBVwGG6
+ YkAPTeCnPLYiodsqbEAE6vK0j+WoJ6SDjlT8JHnBM7oSrtMcVVeguPmer32eJdMVNAN61joi/y2
+ p2r+eL71iEcu6pWWvvmWgB8M0CwPrcXEEjTzeYg2CRFcaEq8IEdkZwaP8RqcUDB9GopZACa82Pk
+ 0H2dPA==
+X-Received: by 2002:a05:6402:210d:b0:659:36b2:1afe with SMTP id
+ 4fb4d7f45d1cf-65ea4f167d6mr5866658a12.17.1771869200048; Mon, 23 Feb 2026
+ 09:53:20 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <bc1fb5747051cd6462bf3158250a04ea8e83b14e.1771275704.git.daniel@makrotopia.org>
- <CAFLszTjt+F00+-x0yr7i8=MpxDVgrmaJQJqNpUVTA4cd55TRXQ@mail.gmail.com>
- <aZdA2ltaV_0chTPd@makrotopia.org>
-In-Reply-To: <aZdA2ltaV_0chTPd@makrotopia.org>
+References: <20260221094252.3103034-1-dario.binacchi@amarulasolutions.com>
+ <20260221094252.3103034-5-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260221094252.3103034-5-dario.binacchi@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Feb 2026 10:51:10 -0700
-X-Gm-Features: AaiRm53SE1T_DHElDbmG_rUjSfiblp-tpTYsXNcZIcbXrRphnJTMFyFl1JSfe-M
-Message-ID: <CAFLszTj1UTuwsFkHDFnd4Bcm4=0xxr88+SYzRamWodAWSpxJLw@mail.gmail.com>
-Subject: Re: [RFC PATCH 17/20] boot: bootdev: add UBI boot device
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Aristo Chen <jj251510319013@gmail.com>,
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>, 
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Mike Looijmans <mike.looijmans@topic.nl>, Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de, 
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
+Date: Mon, 23 Feb 2026 10:51:11 -0700
+X-Gm-Features: AaiRm50BQ0PJkIzYrPH95H9-QaswfZhNig1MG37p1caaxjZHFodoIJEzNKfEJk8
+Message-ID: <CAFLszTgP69Q3y0rTwubeazy14PYq=NTAeXriKJzAmpp5kzcRKA@mail.gmail.com>
+Subject: Re: [PATCH v2 4/8] test: dm: spi: add testcase for spi_set_wordlen()
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ linux-amarula@amarulasolutions.com, 
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -136,55 +111,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
-
-On Thu, 19 Feb 2026 at 09:57, Daniel Golle <daniel@makrotopia.org> wrote:
+On Sat, 21 Feb 2026 at 02:43, Dario Binacchi
+<dario.binacchi@amarulasolutions.com> wrote:
 >
-> On Thu, Feb 19, 2026 at 06:09:31AM -0700, Simon Glass wrote:
-> > On Mon, 16 Feb 2026 at 14:24, Daniel Golle <daniel@makrotopia.org> wrote:
-> > > [...]
-> > > +/**
-> > > + * ubi_bootdev_hunt() - attach UBI and bind a bootdev for it
-> > > + *
-> > > + * Walk the DT for the first partition with compatible = "linux,ubi",
-> > > + * find its MTD device, attach UBI via ubi_part_from_mtd(), then bind
-> > > + * a ubi_bootdev as a child of the top-level MTD DM device.
-> > > + */
-> > > +static int ubi_bootdev_hunt(struct bootdev_hunter *info, bool show)
-> > > +{
-> > > +       struct udevice *bdev;
-> > > +       struct mtd_info *mtd;
-> > > +       ofnode node;
-> > > +       int ret;
-> > > +
-> > > +       mtd_probe_devices();
-> > > +
-> > > +       if (!ubi_devices[0]) {
-> > > +               ofnode_for_each_compatible_node(node, "linux,ubi") {
-> > > +                       mtd_for_each_device(mtd) {
-> > > +                               if (ofnode_equal(mtd->flash_node, node))
-> > > +                                       goto found;
-> > > +                       }
-> > > +               }
-> > > +               return -ENOENT;
-> >
-> > Eek no we need to find the device, not the node. There must surely be
-> > a link between the UBI and MTD in the data structures somewhere.
+> Add a unit test to verify that the SPI word length configuration is
+> correctly handled by the SPI uclass and successfully passed down to
+> the sandbox driver.
 >
-> Yes, but only once UBI is already attached. We can move the responsibiltiy
-> to auto-attach the first suitable UBI volume having the 'linux, ubi'
-> compatible to the moment the MTD partition devices are created, so UBI
-> will always already be attached. However, that will then waste time to
-> do the UBI scanning even on devices not using UBI to boot from (but eg.
-> only as auxilary storage while booting from NOR flash). Hence I kinda
-> liked taking care of the UBI attachment in the hunter...
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
+>
+> (no changes since v1)
+>
+>  test/dm/spi.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>
 
-OK...well from your other email it seems that UBI is pretty old code.
-So I suppose we do need this sort of conversion.
-
-I could perhaps take a look at converting UBI to driver model, but
-that would be separate from this series and would have to come
-afterwards.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
