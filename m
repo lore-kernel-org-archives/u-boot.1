@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594E5E98E13
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 10:38:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95660EA4FAE
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 13:19:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBE6A83BC9;
-	Mon, 23 Feb 2026 11:38:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D5D383935;
+	Mon, 23 Feb 2026 14:19:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="LgN5s4TY";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Ru3pTUyy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E66B183D0F; Mon, 23 Feb 2026 11:38:03 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 63B6183C6E; Mon, 23 Feb 2026 14:19:35 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A161E83935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 11:37:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B6CA80077
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 14:19:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mk7.kang@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20260223103751epoutp02b7e07063ce090c90da2e8457617b3606~W2eLXFQBr0428904289epoutp024
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 10:37:51 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20260223103751epoutp02b7e07063ce090c90da2e8457617b3606~W2eLXFQBr0428904289epoutp024
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1771843071;
- bh=MEk685Z2kGOEC7pws+0zvWiwm43OGfVBi55zw6jcv3E=;
- h=From:To:Cc:Subject:Date:References:From;
- b=LgN5s4TYHSbCPhTzrglpFaVtmwlTfUTgucGrmm2jyA5JlOs888r2O5XmrXaCMUgF9
- lLSAhkzjkD7A7jDZqJG+Zn6ykNpBGHjq4WRypOkKFBN6LfiFNLT9hmbXYrCiwtjG3z
- r9kt2WmkAlu26JnASIlP2sDPavXmDhF8r7RArsn4=
-Received: from epsnrtp04.localdomain (unknown [182.195.42.156]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPS id
- 20260223103751epcas1p19a1da79de413963204fc9d17b5cee97b~W2eKxF0Md2905129051epcas1p12;
- Mon, 23 Feb 2026 10:37:51 +0000 (GMT)
-Received: from epcas1p3.samsung.com (unknown [182.195.38.191]) by
- epsnrtp04.localdomain (Postfix) with ESMTP id 4fKHPB3zqqz6B9mD; Mon, 23 Feb
- 2026 10:37:50 +0000 (GMT)
-Received: from epsmtip2.samsung.com (unknown [182.195.34.31]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20260223103749epcas1p2d9af2576eb9704b70a8572f7ccb8080f~W2eJJQEll1895618956epcas1p2K;
- Mon, 23 Feb 2026 10:37:49 +0000 (GMT)
-Received: from mk7kang01 (unknown [10.88.105.222]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20260223103749epsmtip2632781059ed99768013b9d9d98a259c9~W2eJHvv3h0345803458epsmtip2a;
- Mon, 23 Feb 2026 10:37:49 +0000 (GMT)
-From: "Minkyu Kang" <mk7.kang@samsung.com>
-To: "'Tom Rini'" <trini@konsulko.com>
-Cc: <u-boot@lists.denx.de>
-Subject: please pull u-boot-samsung master
-Date: Mon, 23 Feb 2026 19:37:49 +0900
-Message-ID: <2d9001dca4b0$74a82c10$5df88430$@samsung.com>
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 8E572C143C6;
+ Mon, 23 Feb 2026 13:19:45 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 603A45FD43;
+ Mon, 23 Feb 2026 13:19:31 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8B54A10368F7B; Mon, 23 Feb 2026 14:19:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1771852770; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=MxQo9kSyXEGmVq6hZedwm5ukIzrkJsElHeJSEvU5Huw=;
+ b=Ru3pTUyyYnSgZW5Rn2KmS8esleaMYRHbhdI0SiwIA5nBMcNftrn/6ypeDkcW80Zc8NBPof
+ xwFJS3dYHq94SVy2xDfBPEM9pg806LZJbn9c/xJ9FmSJqcMfcYRtkC2qm5oTPlhKkz8ig6
+ guw8OMf1dsdN8Gpw2JZUQi0bFSEKoJ8Hin3NxkF7kv+0yoJbL4bDeK3zKW0NHXvf6WVL3D
+ dOrFBSPknZFFahqlS8XE76XVmyTL1FDnBNnljq/kYX8Gmt67qFsImUwkYZVbyMOsxnpI3W
+ eoIX2DVlI7I61JBWoLXml0rAmowNMzBKXhinW8WdTtNJ6WUWNLfYDBe13jnU1Q==
+From: Kory Maincent <kory.maincent@bootlin.com>
+Subject: [PATCH v4 0/6] Add support for fwumdata
+Date: Mon, 23 Feb 2026 14:18:34 +0100
+Message-Id: <20260223-feature_fwumdata-v4-0-680ea4ad6ce6@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AdyksGa0XFquMb2HS42+DmUa2QkA6g==
-Content-Language: ko
-X-CMS-MailID: 20260223103749epcas1p2d9af2576eb9704b70a8572f7ccb8080f
-X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-cpgsPolicy: CPGSC10-702,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20260223103749epcas1p2d9af2576eb9704b70a8572f7ccb8080f
-References: <CGME20260223103749epcas1p2d9af2576eb9704b70a8572f7ccb8080f@epcas1p2.samsung.com>
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAKpTnGkC/23N3QqCMBTA8VeRXbfYmdvUrnqPiJjumIN0MT8qx
+ HdvGkGhNwf+B87vjKRFb7Elh2gkHgfbWteEELuIFJVurkitCU044xKAJbRE3fUeL+Wjr43uNJW
+ pZKlRgGBiEs7uHkv7XMjTOXRl28751/JhgHn7wcJYYwNQRo2UIIVBASw+5s51N9vsC1eTmRv4D
+ wFbBA+ENoFIeJljkq2J+EsoxkFtEHEgMiwKmQMTUpl/YpqmN4GRXaE4AQAA
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, 
+ Sughosh Ganu <sughosh.ganu@arm.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, 
+ =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
+ Stefan Roese <stefan.roese@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ E Shattow <e@freeshell.de>, Raymond Mao <raymondmaoca@gmail.com>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Daniel Golle <daniel@makrotopia.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Leonard Anderweit <l.anderweit@phytec.de>, 
+ Kory Maincent <kory.maincent@bootlin.com>, Yao Zi <me@ziyao.cc>
+X-Mailer: b4 0.14-dev-d4707
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,65 +93,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Add a new fwumdata tool to allows users to read, display, and modify FWU
+(Firmware Update) metadata from Linux userspace. It provides functionality
+similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
+metadata, change active/previous bank indices, modify bank states, and set
+image acceptance flags. Configuration is done via fwumdata.config file.
 
-The following changes since commit eed514b11d04a2f8a949521ad3bffba3ec98bd2f:
+Made a few change to mkfwumdata tool along the way.
 
-  video: correct label for cyclic video_idle (2026-01-29 10:00:59 -0600)
+Here is an output example
 
-are available in the Git repository at:
+$ ./fwumdata -l
+FWU Metadata:
+	Version:            2
+	Active Index:       0
+	Previous Index:     1
+	CRC32:              0x1f21ff7b
+	Metadata Size:      120 bytes
+	Descriptor Offset:  32
+	Bank States:
+		Bank 0: accepted (0xfc)
+		Bank 1: accepted (0xfc)
 
-  https://source.denx.de/u-boot/custodians/u-boot-samsung.git master
+	Firmware Store Descriptor:
+		Number of Banks:       2
+		Number of Images:      1
+		Image Entry Size:      80
+		Bank Info Entry Size:  24
 
-for you to fetch changes up to 11198fa347390eb449c2a0939f5f00cf510fe285:
+	Images:
+		Image 0:
+			Image Type GUID:  65ae85ad-1fb3-0b46-8c5d-285543aa6eab
+			Location GUID:    51513491-da07-2a4f-9bea-375ea53b1b5c
+			Banks:
+				Bank 0:
+					Image GUID:  cb2df442-f929-6a44-a374-672d92eb2aa7
+					Accepted:    yes (1)
+				Bank 1:
+					Image GUID:  a839a18f-395c-484f-83b8-0354077c8f9f
+					Accepted:    yes (1)
 
-  doc: board: samsung: exynos-mobile: remove requirement of stub device tree
-(2026-02-23 15:35:33 +0900)
+Changes in v4:
+- Add missing "always" suffix in Makefile description
+- Link to v3: https://lore.kernel.org/r/20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com
 
-----------------------------------------------------------------
-Andrew Goodbody (2):
-      video: exynos: node variable should not be unsigned
-      video: nexell: unsigned parameter cannot be negative
+Changes in v3:
+- Rebase on master.
+- Link to v2: https://lore.kernel.org/r/20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com
 
-Kaustabh Chakraborty (14):
-      ARM: dts: add dtsi for exynos7870-a2corelte (Samsung Galaxy A2 Core)
-      ARM: dts: add dtsi for exynos7870-j6lte (Samsung Galaxy J6)
-      ARM: dts: add dtsi for exynos7870-on7xelte (Samsung Galaxy J7 Prime)
-      board: samsung: exynos-mobile: simplify parsing RAM banks from device
-tree
-      board: samsung: exynos-mobile: resolve env vars without board_info
-data
-      board: samsung: exynos-mobile: disable MULTI_DTB_FIT support
-      board: samsung: exynos-mobile: enable OF_BOARD support
-      configs: exynos-mobile: remove DEFAULT_DEVICE_TREE and add
-OF_UPSTREAM_BUILD_VENDOR
-      doc: board: samsung: exynos-mobile: add DEVICE_TREE make flag in build
-      doc: board: samsung: exynos-mobile: use u-boot-nodtb.bin for packaging
-process
-      ARM: dts: exynos7870-a2corelte: add properties to make S-BOOT happy
-      ARM: dts: exynos7870-j6lte: add properties to make S-BOOT happy
-      ARM: dts: exynos7870-on7xelte: add properties to make S-BOOT happy
-      doc: board: samsung: exynos-mobile: remove requirement of stub device
-tree
+Changes in v2:
+- Fix a small offset mistake in last patch
 
- arch/arm/dts/exynos7870-a2corelte-u-boot.dtsi  |  26 ++++++++
- arch/arm/dts/exynos7870-j6lte-u-boot.dtsi      |  46 +++++++++++++++
- arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi   |  41 +++++++++++++
- board/samsung/exynos-mobile/exynos-mobile.c    | 276
-+++++++++++++++++++++++++++-------------------------------------------------
----------
- configs/exynos-mobile_defconfig                |   5 +-
- doc/board/samsung/exynos-mobile.rst            |   5 +-
- doc/board/samsung/exynos-mobile/exynos7870.rst |  42 ++-----------
- drivers/video/exynos/exynos_fb.c               |   2 +-
- drivers/video/nexell/soc/s5pxx18_soc_mlc.c     |   2 -
- 9 files changed, 211 insertions(+), 234 deletions(-)
- create mode 100644 arch/arm/dts/exynos7870-a2corelte-u-boot.dtsi
- create mode 100644 arch/arm/dts/exynos7870-j6lte-u-boot.dtsi
- create mode 100644 arch/arm/dts/exynos7870-on7xelte-u-boot.dtsi
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+Kory Maincent (6):
+      tools: gitignore: Add mkfwumdata to the git ignore file
+      tools: Reorganize mkfwumdata tool into fwumdata_src directory
+      tools: mkfwumdata: Improve error message specificity
+      tools: mkfwumdata: Add bank count validation for FWU metadata v2
+      tools: Add support for fwumdata tool
+      tools: mkfwumdata: Remove dependency on fwu_mdata.h header
 
-Thanks,
-Minkyu Kang.
+ MAINTAINERS                           |   7 +-
+ doc/develop/uefi/fwu_updates.rst      |   4 +-
+ doc/fwumdata.1                        | 222 +++++++++
+ tools/.gitignore                      |   2 +
+ tools/Kconfig                         |   9 +-
+ tools/Makefile                        |   4 +-
+ tools/fwumdata_src/Kconfig            |  19 +
+ tools/fwumdata_src/fwumdata.c         | 854 ++++++++++++++++++++++++++++++++++
+ tools/fwumdata_src/fwumdata.config    |  33 ++
+ tools/fwumdata_src/fwumdata.h         | 138 ++++++
+ tools/fwumdata_src/fwumdata.mk        |  10 +
+ tools/{ => fwumdata_src}/mkfwumdata.c | 106 ++---
+ 12 files changed, 1315 insertions(+), 93 deletions(-)
+---
+base-commit: 30b8c03d8c8f500b3e4cc51f7b7abf573180ea51
+change-id: 20251107-feature_fwumdata-58508d61e1d3
 
-
+Best regards,
+-- 
+Köry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
 
