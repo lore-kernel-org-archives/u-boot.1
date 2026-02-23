@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95660EA4FAE
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 13:19:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CEB1EA4FBB
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 13:19:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D5D383935;
-	Mon, 23 Feb 2026 14:19:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1FEA283C39;
+	Mon, 23 Feb 2026 14:19:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Ru3pTUyy";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WALEOrR9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63B6183C6E; Mon, 23 Feb 2026 14:19:35 +0100 (CET)
+ id 9081083D17; Mon, 23 Feb 2026 14:19:36 +0100 (CET)
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B6CA80077
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 14:19:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCAF683BC9
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 14:19:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 8E572C143C6;
- Mon, 23 Feb 2026 13:19:45 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 906C4C143C7;
+ Mon, 23 Feb 2026 13:19:48 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 603A45FD43;
- Mon, 23 Feb 2026 13:19:31 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 6D8C75FD43;
+ Mon, 23 Feb 2026 13:19:34 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8B54A10368F7B; Mon, 23 Feb 2026 14:19:21 +0100 (CET)
+ with ESMTPSA id 692B510368EF5; Mon, 23 Feb 2026 14:19:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1771852770; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=MxQo9kSyXEGmVq6hZedwm5ukIzrkJsElHeJSEvU5Huw=;
- b=Ru3pTUyyYnSgZW5Rn2KmS8esleaMYRHbhdI0SiwIA5nBMcNftrn/6ypeDkcW80Zc8NBPof
- xwFJS3dYHq94SVy2xDfBPEM9pg806LZJbn9c/xJ9FmSJqcMfcYRtkC2qm5oTPlhKkz8ig6
- guw8OMf1dsdN8Gpw2JZUQi0bFSEKoJ8Hin3NxkF7kv+0yoJbL4bDeK3zKW0NHXvf6WVL3D
- dOrFBSPknZFFahqlS8XE76XVmyTL1FDnBNnljq/kYX8Gmt67qFsImUwkYZVbyMOsxnpI3W
- eoIX2DVlI7I61JBWoLXml0rAmowNMzBKXhinW8WdTtNJ6WUWNLfYDBe13jnU1Q==
+ t=1771852773; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=HagzqjzkAUUgVc48ZuqZ4nX3NxDnP/5GhQY8qvyFtkE=;
+ b=WALEOrR9yJAm/o8KHy7932/FdOTRFPuXE/ktR7oSJnF0R0PRfowtuzLaznZjna80MN+4e/
+ DoEGeMG2qRUJUVJRFt2MJGK6TLFdKV0MyAl8yT5PAsO6Pj7ce4gpBN1f0+ON6KY1+uDQt1
+ Y7zi14jPjvPUxPq1j56cedCVMoi48RpNePAjQqoQfucOl9tyY6jJKgg77Lj3fzI6mlPkd5
+ mvSA617dR7K7m8/5yGbPSeeZfUYc06/PjFUKrMZ1LQxXX/fhhV9MxEwbZh43lw+c48UiyC
+ kPEk+re+CVvpE64skZyeTpSroX8aBLQcouxPHOtaK0w9DOQYUItma/x21dEBpQ==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Subject: [PATCH v4 0/6] Add support for fwumdata
-Date: Mon, 23 Feb 2026 14:18:34 +0100
-Message-Id: <20260223-feature_fwumdata-v4-0-680ea4ad6ce6@bootlin.com>
+Date: Mon, 23 Feb 2026 14:18:35 +0100
+Subject: [PATCH v4 1/6] tools: gitignore: Add mkfwumdata to the git ignore file
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAKpTnGkC/23N3QqCMBTA8VeRXbfYmdvUrnqPiJjumIN0MT8qx
- HdvGkGhNwf+B87vjKRFb7Elh2gkHgfbWteEELuIFJVurkitCU044xKAJbRE3fUeL+Wjr43uNJW
- pZKlRgGBiEs7uHkv7XMjTOXRl28751/JhgHn7wcJYYwNQRo2UIIVBASw+5s51N9vsC1eTmRv4D
- wFbBA+ENoFIeJljkq2J+EsoxkFtEHEgMiwKmQMTUpl/YpqmN4GRXaE4AQAA
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260223-feature_fwumdata-v4-1-680ea4ad6ce6@bootlin.com>
+References: <20260223-feature_fwumdata-v4-0-680ea4ad6ce6@bootlin.com>
+In-Reply-To: <20260223-feature_fwumdata-v4-0-680ea4ad6ce6@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
  Tom Rini <trini@konsulko.com>, 
@@ -93,87 +92,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new fwumdata tool to allows users to read, display, and modify FWU
-(Firmware Update) metadata from Linux userspace. It provides functionality
-similar to fw_printenv/fw_setenv but for FWU metadata. Users can view
-metadata, change active/previous bank indices, modify bank states, and set
-image acceptance flags. Configuration is done via fwumdata.config file.
-
-Made a few change to mkfwumdata tool along the way.
-
-Here is an output example
-
-$ ./fwumdata -l
-FWU Metadata:
-	Version:            2
-	Active Index:       0
-	Previous Index:     1
-	CRC32:              0x1f21ff7b
-	Metadata Size:      120 bytes
-	Descriptor Offset:  32
-	Bank States:
-		Bank 0: accepted (0xfc)
-		Bank 1: accepted (0xfc)
-
-	Firmware Store Descriptor:
-		Number of Banks:       2
-		Number of Images:      1
-		Image Entry Size:      80
-		Bank Info Entry Size:  24
-
-	Images:
-		Image 0:
-			Image Type GUID:  65ae85ad-1fb3-0b46-8c5d-285543aa6eab
-			Location GUID:    51513491-da07-2a4f-9bea-375ea53b1b5c
-			Banks:
-				Bank 0:
-					Image GUID:  cb2df442-f929-6a44-a374-672d92eb2aa7
-					Accepted:    yes (1)
-				Bank 1:
-					Image GUID:  a839a18f-395c-484f-83b8-0354077c8f9f
-					Accepted:    yes (1)
-
-Changes in v4:
-- Add missing "always" suffix in Makefile description
-- Link to v3: https://lore.kernel.org/r/20260216-feature_fwumdata-v3-0-9ecc5b10456d@bootlin.com
-
-Changes in v3:
-- Rebase on master.
-- Link to v2: https://lore.kernel.org/r/20251212-feature_fwumdata-v2-0-ad51572fbe79@bootlin.com
-
-Changes in v2:
-- Fix a small offset mistake in last patch
+mkfwumdata is a built image. Add it to .gitignore.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
-Kory Maincent (6):
-      tools: gitignore: Add mkfwumdata to the git ignore file
-      tools: Reorganize mkfwumdata tool into fwumdata_src directory
-      tools: mkfwumdata: Improve error message specificity
-      tools: mkfwumdata: Add bank count validation for FWU metadata v2
-      tools: Add support for fwumdata tool
-      tools: mkfwumdata: Remove dependency on fwu_mdata.h header
+ tools/.gitignore | 1 +
+ 1 file changed, 1 insertion(+)
 
- MAINTAINERS                           |   7 +-
- doc/develop/uefi/fwu_updates.rst      |   4 +-
- doc/fwumdata.1                        | 222 +++++++++
- tools/.gitignore                      |   2 +
- tools/Kconfig                         |   9 +-
- tools/Makefile                        |   4 +-
- tools/fwumdata_src/Kconfig            |  19 +
- tools/fwumdata_src/fwumdata.c         | 854 ++++++++++++++++++++++++++++++++++
- tools/fwumdata_src/fwumdata.config    |  33 ++
- tools/fwumdata_src/fwumdata.h         | 138 ++++++
- tools/fwumdata_src/fwumdata.mk        |  10 +
- tools/{ => fwumdata_src}/mkfwumdata.c | 106 ++---
- 12 files changed, 1315 insertions(+), 93 deletions(-)
----
-base-commit: 30b8c03d8c8f500b3e4cc51f7b7abf573180ea51
-change-id: 20251107-feature_fwumdata-58508d61e1d3
+diff --git a/tools/.gitignore b/tools/.gitignore
+index 6a5c613f772..e8daa24a52d 100644
+--- a/tools/.gitignore
++++ b/tools/.gitignore
+@@ -24,6 +24,7 @@
+ /mkeficapsule
+ /mkenvimage
+ /mkexynosspl
++/mkfwumdata
+ /mkimage
+ /mksunxiboot
+ /mxsboot
 
-Best regards,
 -- 
-Köry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+2.43.0
 
