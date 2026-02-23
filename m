@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B03AEC1123
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 19:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BAAEC1127
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 19:24:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86E6E83D8A;
-	Mon, 23 Feb 2026 20:17:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3001F83935;
+	Mon, 23 Feb 2026 20:24:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YE8G/Gix";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CD5383935; Mon, 23 Feb 2026 20:17:48 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 87D1A83C39; Mon, 23 Feb 2026 20:24:55 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD2A683C6E
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 20:17:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFA5C80077
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 20:24:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d4c307db9aso2414595a34.3
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 11:17:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771874262; x=1772479062; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4g8l4AlmtiWSwA9Tg6p1SqdO5CGYOM9T322LPojmhqc=;
- b=YE8G/GixDDCKJwk8je2U16Xs7xGt9y+oWUUhpBIBhzWjfi+jaXLSCG7fKOMW9nDk6N
- 6uY9yLC5OFzsPk0AgrchZIZf62L0aWuK+cZVy7zk3vTYlqB5xPJNVvRRvobytqK5CRzh
- skEpIQqUFeLZNMWz6SVDQC4fKzuWDGSlnpd5k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771874262; x=1772479062;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4g8l4AlmtiWSwA9Tg6p1SqdO5CGYOM9T322LPojmhqc=;
- b=qrhOiXPWD2PdTEnuwRIddIDGD5TOGTKEoo0GxPZ8g6Yg/IfyLNYIJUs/ruoo6PJgBu
- iF0Ht41IbBHVLEBaZ+/4u0xqbzVHi4Bm1qKqkfTISMEfEkU/kqWFMEOmEniGlZ/RmCDT
- uE1m/+wLVb2KVbtHOqEWbCCmYEHaYexogu5QnBqGYWFR0ArVPM8RF5e8d6rvH/k3MrN8
- WdGiqowVC6R4st86OC5fVTGo1cRNg0JVRtQu3hLr+BIqt2n2QRec6MrH9+LX5PgEror7
- MlMA/EwH96WLA+NrVCrfM6uvVH6GUoiqyewayK8GtaMRyIs1iDxT3AsIW9GbY9ejQNTM
- ijsA==
-X-Gm-Message-State: AOJu0YziNxD5YoqHvpEc5HT6zgvHmdmpJf7yg4dKWwf4wOrAHIStJC+/
- N3vca9a9XhNBot/GE9XHmk7rnrtg45yhcDs496uJQF6tDRZZgWvT+H8djiq4/u72mVNTBqtw/0K
- xkyWtQfo=
-X-Gm-Gg: AZuq6aK8vLNp8bJDPWdTn0Ga45I9rkmi0tKxQXIa2mKzasxjfmSUK4qgXnQU+a/bebr
- v9c+JjbbYwEtTUtXobzR0xQ6v7oKWgW6+/2eG6Tuse22y228NNhH3/tC0VbRae6IuMjCIX4ox2m
- sjFyAKny3bYmoSGcOmPzovF/UL48nt1KyXBKy2OV2p2bFkukqeJnx/NZ3UjlpqMmN/wYmfYFFoa
- 2nXSD0Wk5sDbL0oK8FMOBswlsuDSW4S9uri8VkGeDbUIHGPMj7g25JpxDzZh5NHbdkclcoCYI1b
- e7/cv+SYyOE2cKGzbmnOUtI4dk5K3tRqNbhggH4cPOaDKBtHPGqtM+hiuOF/B25UjZrrgGBCtNP
- 5IWI6t1QDRCrkKFtvkqtpKEGpx1Ue/1o8akGQdmLuRUkZHpejqdMPyQeZ3WlWOfu2O641fQo4Fs
- Hw7MlkH90/4EXcxzu43AJ6MLK4WKUfCMUCXeU187gqnAY+1FmoQHDFqcx5/2gxP2RXcYnA3D1Pd
- 3Q9Huafm9WbJYw4mdPAMsb6yCFVz84lBxqWxisT7Wy4c/VE4f4=
-X-Received: by 2002:a05:6830:6f81:b0:7cf:d119:92ab with SMTP id
- 46e09a7af769-7d52beabb1cmr7085811a34.9.1771874262484; 
- Mon, 23 Feb 2026 11:17:42 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52d072598sm7913649a34.27.2026.02.23.11.17.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Feb 2026 11:17:41 -0800 (PST)
-Date: Mon, 23 Feb 2026 13:17:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2026.04-rc3 released
-Message-ID: <20260223191740.GE3233182@bill-the-cat>
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1vubXZ-000000008K3-0dPM; Mon, 23 Feb 2026 19:24:21 +0000
+Date: Mon, 23 Feb 2026 19:24:15 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ David Lechner <dlechner@baylibre.com>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
+Subject: Re: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
+Message-ID: <aZypXx3liLvvB4zr@makrotopia.org>
+References: <cover.1771275704.git.daniel@makrotopia.org>
+ <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
+ <CAFLszThSKbRjufnj4z4xunn-OEUv8kNRngNQ3=EpaNyvyV5ncg@mail.gmail.com>
+ <aZc_f3lrmRdE9c3Z@makrotopia.org>
+ <CAFLszTgxMeFvKx8nkVUa_PADiVFnv1UB69SyD+C3OiLY_7ku8w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ejNmlxQhF+KUs4Za"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+In-Reply-To: <CAFLszTgxMeFvKx8nkVUa_PADiVFnv1UB69SyD+C3OiLY_7ku8w@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,61 +83,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Feb 23, 2026 at 10:51:09AM -0700, Simon Glass wrote:
+> Hi Daniel,
+> 
+> On Thu, 19 Feb 2026 at 09:51, Daniel Golle <daniel@makrotopia.org> wrote:
+> >
+> > On Thu, Feb 19, 2026 at 06:09:27AM -0700, Simon Glass wrote:
+> > > Hi Daniel,
+> > >
+> > > On Mon, 16 Feb 2026 at 14:22, Daniel Golle <daniel@makrotopia.org> wrote:
+> > > >
+> > > > Add a UBI volume storage backend for the image_loader framework.
+> > > >
+> > > > image_loader_init_ubi() takes a volume name, ensures the UBI device
+> > > > is attached (auto-attaching if needed), and installs a .read() callback
+> > > > wrapping ubi_volume_read().
+> > > >
+> > > > Auto-attach works by scanning the device tree for the first MTD
+> > > > partition with compatible = "linux,ubi", then calling ubi_part() on
+> > > > that partition. The partition name is resolved using the same
+> > > > precedence as the MTD partition parser: the "label" property first,
+> > > > then "name", then the node name. Since U-Boot only supports a single
+> > > > attached UBI device at a time, only the first matching partition is
+> > > > used. If a UBI device is already attached, the auto-attach step is
+> > > > skipped.
+> > > >
+> > > > UBI handles bad-block management and wear leveling internally, so the
+> > > > read callback is a straightforward passthrough. Note that
+> > > > ubi_volume_read() returns positive errno values; the wrapper negates
+> > > > them for the image_loader convention.
+> > > >
+> > > > Gated by CONFIG_IMAGE_LOADER_UBI (depends on CMD_UBI && IMAGE_LOADER).
+> > > >
+> > > > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> > > > ---
+> > > >  boot/Kconfig            |   8 +++
+> > > >  boot/Makefile           |   1 +
+> > > >  boot/image-loader-ubi.c | 112 ++++++++++++++++++++++++++++++++++++++++
+> > > >  include/image-loader.h  |  13 +++++
+> > > >  4 files changed, 134 insertions(+)
+> > > >  create mode 100644 boot/image-loader-ubi.c
+> > > >
+> > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > index 23848a0f57e..89832014af6 100644
+> > > > --- a/boot/Kconfig
+> > > > +++ b/boot/Kconfig
+> > > > @@ -1203,6 +1203,14 @@ config IMAGE_LOADER_MTD
+> > > >           parallel NAND, etc.) using the image_loader framework.
+> > > >           NAND bad blocks are skipped transparently.
+> > > >
+> > > > +config IMAGE_LOADER_UBI
+> > > > +       bool "UBI volume backend for image loader"
+> > > > +       depends on IMAGE_LOADER && CMD_UBI
+> > > > +       help
+> > > > +         Allows loading images from UBI volumes using the image_loader
+> > > > +         framework. Auto-attaches the UBI device from the device tree
+> > > > +         if not already attached.
+> > > > +
+> > > >  config DISTRO_DEFAULTS
+> > > >         bool "(deprecated) Script-based booting of Linux distributions"
+> > > >         select CMDLINE
+> > > > diff --git a/boot/Makefile b/boot/Makefile
+> > > > index 1dde16db694..7d1d4a28106 100644
+> > > > --- a/boot/Makefile
+> > > > +++ b/boot/Makefile
+> > > > @@ -76,6 +76,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
+> > > >  obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
+> > > >  obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
+> > > >  obj-$(CONFIG_IMAGE_LOADER_MTD) += image-loader-mtd.o
+> > > > +obj-$(CONFIG_IMAGE_LOADER_UBI) += image-loader-ubi.o
+> > > >
+> > > >  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
+> > > >  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
+> > > > diff --git a/boot/image-loader-ubi.c b/boot/image-loader-ubi.c
+> > > > new file mode 100644
+> > > > index 00000000000..64901a13378
+> > > > --- /dev/null
+> > > > +++ b/boot/image-loader-ubi.c
+> > > > @@ -0,0 +1,112 @@
+> > > > +// SPDX-License-Identifier: GPL-2.0+
+> > > > +/*
+> > > > + * UBI volume backend for image_loader
+> > > > + *
+> > > > + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
+> > > > + */
+> > > > +
+> > > > +#include <dm/ofnode.h>
+> > > > +#include <image-loader.h>
+> > > > +#include <log.h>
+> > > > +#include <malloc.h>
+> > > > +#include <mtd.h>
+> > > > +#include <ubi_uboot.h>
+> > > > +
+> > > > +struct image_loader_ubi_priv {
+> > > > +       char *vol_name;
+> > > > +};
+> > > > +
+> > > > +/**
+> > > > + * ubi_auto_attach() - attach UBI if not already attached
+> > > > + *
+> > > > + * If no UBI device is currently attached, walk the device tree for the
+> > > > + * first MTD partition node with compatible = "linux,ubi", find the
+> > > > + * corresponding MTD device by matching flash_node, and attach UBI to
+> > > > + * it via ubi_part_from_mtd().
+> > > > + *
+> > > > + * Since U-Boot only supports a single attached UBI device at a time,
+> > > > + * only the first matching partition is used.
+> > > > + *
+> > > > + * Return: 0 on success or if already attached, negative errno on failure
+> > > > + */
+> > > > +static int ubi_auto_attach(void)
+> > > > +{
+> > > > +       struct mtd_info *mtd;
+> > > > +       ofnode node;
+> > > > +
+> > > > +       /* Already attached? */
+> > > > +       if (ubi_devices[0])
+> > > > +               return 0;
+> > > > +
+> > > > +       mtd_probe_devices();
+> > >
+> > > This should be handled by your new ubi driver for your uclass.
+> > >
+> > > > +
+> > > > +       ofnode_for_each_compatible_node(node, "linux,ubi") {
+> > > > +               mtd_for_each_device(mtd) {
+> > > > +                       if (ofnode_equal(mtd->flash_node, node))
+> > > > +                               goto found;
+> > > > +               }
+> > > > +       }
+> > >
+> > > Eek this is really strange. There should be a device so you can use
+> > > uclass_first_device(UCLASS_...).
+> >
+> > I carefully considered turning UBI devices into a UCLASS, but it would
+> > be a huge major rewrite of how UBI works in U-Boot, and while that would
+> > be a good thing to do, I consider far beyond the scope of supporting a
+> > boot method for OpenWrt.
+> 
+> Oh, I just assumed it supports driver model. But surely it must have a
+> UCLASS_BLK device?
 
---ejNmlxQhF+KUs4Za
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Sadly no. Neither UBI devices nor UBI volumes are block storage devices.
 
-Hey all,
+Every UBI device does have a UCLASS_MTD parent device, but that
+obviously also doesn't uniquely identify the partition on the flash chip
+which is used as UBI device -- there can be (and sometimes are, for
+dual-boot/redundancy reasons) multiple UBI devices in different
+partitions on the same flash.
 
-So it's release day and I have tagged and pushed things out. First, I
-forgot to mention with -rc2, but the next window is open. Second, at
-this point the only device tree alignment fixes I am aware of being
-outstanding are the SCMI series, which I expect a pull request for. With
-that said, the changes from -rc2 to -rc3 are fairly small, which is
-good. There is a known regression for TI K3 platforms and smaller DRAM
-sizes that's being looked at and will keep an eye out for the fix.
+What I ended up doing now is to move more of the UBI detection and
+enumeration logic into ubi_bootdev.c and have imagemap-ubi.c rely
+on getting the MTD device and partition index from there.
 
-We're continuing with a community meeting following the release and the
-calendar link is
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYzYz=
-Q1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
-mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
-89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
-lendar.google.com&scp=3DALL
-and once again this is the same time as the previous meeting. The
-meeting details itself are:
-https://meet.google.com/icv-nvmv-dbf
-February 24th, 2025. 9am (GMT -06:00)
-
-To join by phone:
-https://tel.meet/icv-nvmv-dbf?pin=3D5493171900556
-
-In terms of a rough changelog:
-- Platform updates for Samsung, TI K3, x86.
-- Subsystem updates for USB, EFI Loader
-- Device tree alignment fixes for handling overlays.
-- A few more tests are added / enabled.
-- Some Coverity Scan errors resolved.
-
-I continue to plan to do an rc release every two weeks and the final
-release will be 06 April 2026.
-
-Thanks all!
-
---=20
-Tom
-
---ejNmlxQhF+KUs4Za
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZyn0wAKCRAr4qD1Cr/k
-CjSoAP9C3tM5ev7TtaOZDdM92rzityJ7zkxcCGzGipZKMT5UfwD+I0Ik3mRrWiWA
-mklMwk3XZM4nelu64vpqhykgGmnRcgI=
-=R8Vn
------END PGP SIGNATURE-----
-
---ejNmlxQhF+KUs4Za--
+> 
+> >
+> > Or did you mean the to-be-create UCLASS_IMAGE_MAPPER?
+> 
+> No I was talking about ubi.
+> 
+> Regards,
+> Simon
