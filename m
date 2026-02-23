@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF59EC1126
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 19:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79604EC112B
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:07:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56FB283935;
-	Mon, 23 Feb 2026 20:51:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8045783C39;
+	Mon, 23 Feb 2026 21:07:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MAnysAAo";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A429083C39; Mon, 23 Feb 2026 20:51:17 +0100 (CET)
-Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com
- [IPv6:2607:f8b0:4864:20::244])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E26483C5E; Mon, 23 Feb 2026 21:07:15 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EF5D80077
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 20:51:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3397083935
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:07:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x244.google.com with SMTP id
- 5614622812f47-45f18e8f2f5so3129825b6e.3
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 11:51:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771876273; x=1772481073; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xF7RnH9F25Btrb9OrPnTh0J3D64faMGzh+2beN6OkfM=;
- b=MAnysAAof+Vk9l1f7ThI2Zt/lns23NbnBiLAFVathywnxmlSZCEhN/gfDIrgFMdRfa
- e3EkAxWXOFmhNl2e/iw8rhxsLFfTaW9Dq19GxnJoxzLe2u7j3H7GD2/08eEEA/G7LRB1
- DkwNqqNMvaA0q4Fo+ESFq9wnrdZkavY762UHw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771876273; x=1772481073;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xF7RnH9F25Btrb9OrPnTh0J3D64faMGzh+2beN6OkfM=;
- b=cpTqNP1b7T3gmKuzpxSSfQ2e1tXKJPzJs0u7OpTPkxBSkwhGfpk06UUnjK7UO4wVlB
- mQIxSR55Zbp6LAI57AgL1BD80vHA1lQK2feuuf+EiQ6zBXiw6+MN6NLUCvLkOVBZh5xl
- JTcFPQPRgVU54qxCFubPQTF3EzHqfoHgPCXgTQBmoSPLOsPV+LK/X9Yz2QGyVagJsuqm
- OAYLYtzIW1CvAq5HcbbV6wiIU9pyxRx7ZTOMcDBF986USP4qqsXxjWkNS6Ipr8iJJtao
- jHQUsc9bdntt+p2oN0DbHY491Df9A65COMKfeOmBWuEOd1BslS+Rhvm4KgNX5xS3hB2/
- Os0w==
-X-Gm-Message-State: AOJu0Ywaddy4btRQz5jsBdNmVXalYU5FFJH9IR9mJcRYKbuzOmUG2ECj
- goBDBleqo1am3TDCaHgr85L7Be86LkG1k2M8gzg/tM9yilacU0+vf65CTSdH1SebXZKfnOTycUk
- jnGGEcQg=
-X-Gm-Gg: AZuq6aIkJ9J09R5cz4LOZeuYXSyDHqQmiv+6zUHwtAuyD/IVPncjt92tVzK6b868c3k
- Tg0C7B9uE/JkyCYFKqMTznHSrbAl3D4/+ADQGjN2ugEoZwFaJofEw8AsY1wrKl+n9h+EB9ASVNw
- qnu7qW+3rk/XwhImSfcEgNNNq908yAyZjXSYaqqBxft0iZDT87xmPkTjvZi+/jzctCAqvVgTs2i
- RayGkiwBTDqXO5RvFz+yxByyhlsZfD3Nq7kclPewUdaLztdDBgNkI6X5/MTjwKTgHNFKzRtVEef
- eNtlUBCiiLv/0raEzkLMT+0qLNxlmZoxOUjXQZMITu6lf5vdguCdk1FN86QcCxY/glY7CU93v+7
- eI1RKb/ubaUyKeQ+MCITZ89oJbvKVxGF9DtAI747+wLs+XAxlb/pkjZk8ZNrQNiA6aa9rApB4jI
- D75J5dqzr2LFpZnpzrUX/Qz43ms73SktPh/SDrhOrpLdzk/NMJub4h6iiQ3+limwc/4U22pchI8
- gOSqWCwLCVscnkYZwLv+XYRyOIlQmsFWfDmLrXvzNK7GIJ0Dyo=
-X-Received: by 2002:a05:6808:c16c:b0:450:aba0:f006 with SMTP id
- 5614622812f47-4644619a0f2mr5543553b6e.17.1771876272500; 
- Mon, 23 Feb 2026 11:51:12 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4644a17a11csm5673612b6e.11.2026.02.23.11.51.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Feb 2026 11:51:11 -0800 (PST)
-Date: Mon, 23 Feb 2026 13:51:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: James Hilliard <james.hilliard1@gmail.com>,
- Marek Vasut <marek.vasut@mailbox.org>
-Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20260223195109.GG3233182@bill-the-cat>
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1vucCW-000000008Uj-0yWT; Mon, 23 Feb 2026 20:06:40 +0000
+Date: Mon, 23 Feb 2026 20:06:36 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ David Lechner <dlechner@baylibre.com>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
+Subject: Re: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
+Message-ID: <aZyzTP6tmg1OGjU3@makrotopia.org>
+References: <cover.1771275704.git.daniel@makrotopia.org>
+ <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
+ <CAFLszThSKbRjufnj4z4xunn-OEUv8kNRngNQ3=EpaNyvyV5ncg@mail.gmail.com>
+ <aZc_f3lrmRdE9c3Z@makrotopia.org>
+ <CAFLszTgxMeFvKx8nkVUa_PADiVFnv1UB69SyD+C3OiLY_7ku8w@mail.gmail.com>
+ <aZypXx3liLvvB4zr@makrotopia.org>
+ <a1d06225-bc17-411a-80ed-f39e0450dc29@iopsys.eu>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ESlGZZhSGjdKGQOh"
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <a1d06225-bc17-411a-80ed-f39e0450dc29@iopsys.eu>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,166 +86,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Feb 23, 2026 at 10:30:03PM +0300, Mikhail Kshevetskiy wrote:
+> 
+> On 2/23/26 22:24, Daniel Golle wrote:
+> > On Mon, Feb 23, 2026 at 10:51:09AM -0700, Simon Glass wrote:
+> >> Hi Daniel,
+> >>
+> >> On Thu, 19 Feb 2026 at 09:51, Daniel Golle <daniel@makrotopia.org> wrote:
+> >>> On Thu, Feb 19, 2026 at 06:09:27AM -0700, Simon Glass wrote:
+> >>>> Hi Daniel,
+> >>>>
+> >>>> On Mon, 16 Feb 2026 at 14:22, Daniel Golle <daniel@makrotopia.org> wrote:
+> >>>>> Add a UBI volume storage backend for the image_loader framework.
+> >>>>>
+> >>>>> image_loader_init_ubi() takes a volume name, ensures the UBI device
+> >>>>> is attached (auto-attaching if needed), and installs a .read() callback
+> >>>>> wrapping ubi_volume_read().
+> >>>>>
+> >>>>> Auto-attach works by scanning the device tree for the first MTD
+> >>>>> partition with compatible = "linux,ubi", then calling ubi_part() on
+> >>>>> that partition. The partition name is resolved using the same
+> >>>>> precedence as the MTD partition parser: the "label" property first,
+> >>>>> then "name", then the node name. Since U-Boot only supports a single
+> >>>>> attached UBI device at a time, only the first matching partition is
+> >>>>> used. If a UBI device is already attached, the auto-attach step is
+> >>>>> skipped.
+> >>>>>
+> >>>>> UBI handles bad-block management and wear leveling internally, so the
+> >>>>> read callback is a straightforward passthrough. Note that
+> >>>>> ubi_volume_read() returns positive errno values; the wrapper negates
+> >>>>> them for the image_loader convention.
+> >>>>>
+> >>>>> Gated by CONFIG_IMAGE_LOADER_UBI (depends on CMD_UBI && IMAGE_LOADER).
+> >>>>>
+> >>>>> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> >>>>> ---
+> >>>>>  boot/Kconfig            |   8 +++
+> >>>>>  boot/Makefile           |   1 +
+> >>>>>  boot/image-loader-ubi.c | 112 ++++++++++++++++++++++++++++++++++++++++
+> >>>>>  include/image-loader.h  |  13 +++++
+> >>>>>  4 files changed, 134 insertions(+)
+> >>>>>  create mode 100644 boot/image-loader-ubi.c
+> >>>>>
+> >>>>> diff --git a/boot/Kconfig b/boot/Kconfig
+> >>>>> index 23848a0f57e..89832014af6 100644
+> >>>>> --- a/boot/Kconfig
+> >>>>> +++ b/boot/Kconfig
+> >>>>> @@ -1203,6 +1203,14 @@ config IMAGE_LOADER_MTD
+> >>>>>           parallel NAND, etc.) using the image_loader framework.
+> >>>>>           NAND bad blocks are skipped transparently.
+> >>>>>
+> >>>>> +config IMAGE_LOADER_UBI
+> >>>>> +       bool "UBI volume backend for image loader"
+> >>>>> +       depends on IMAGE_LOADER && CMD_UBI
+> >>>>> +       help
+> >>>>> +         Allows loading images from UBI volumes using the image_loader
+> >>>>> +         framework. Auto-attaches the UBI device from the device tree
+> >>>>> +         if not already attached.
+> >>>>> +
+> >>>>>  config DISTRO_DEFAULTS
+> >>>>>         bool "(deprecated) Script-based booting of Linux distributions"
+> >>>>>         select CMDLINE
+> >>>>> diff --git a/boot/Makefile b/boot/Makefile
+> >>>>> index 1dde16db694..7d1d4a28106 100644
+> >>>>> --- a/boot/Makefile
+> >>>>> +++ b/boot/Makefile
+> >>>>> @@ -76,6 +76,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
+> >>>>>  obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
+> >>>>>  obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
+> >>>>>  obj-$(CONFIG_IMAGE_LOADER_MTD) += image-loader-mtd.o
+> >>>>> +obj-$(CONFIG_IMAGE_LOADER_UBI) += image-loader-ubi.o
+> >>>>>
+> >>>>>  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
+> >>>>>  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
+> >>>>> diff --git a/boot/image-loader-ubi.c b/boot/image-loader-ubi.c
+> >>>>> new file mode 100644
+> >>>>> index 00000000000..64901a13378
+> >>>>> --- /dev/null
+> >>>>> +++ b/boot/image-loader-ubi.c
+> >>>>> @@ -0,0 +1,112 @@
+> >>>>> +// SPDX-License-Identifier: GPL-2.0+
+> >>>>> +/*
+> >>>>> + * UBI volume backend for image_loader
+> >>>>> + *
+> >>>>> + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
+> >>>>> + */
+> >>>>> +
+> >>>>> +#include <dm/ofnode.h>
+> >>>>> +#include <image-loader.h>
+> >>>>> +#include <log.h>
+> >>>>> +#include <malloc.h>
+> >>>>> +#include <mtd.h>
+> >>>>> +#include <ubi_uboot.h>
+> >>>>> +
+> >>>>> +struct image_loader_ubi_priv {
+> >>>>> +       char *vol_name;
+> >>>>> +};
+> >>>>> +
+> >>>>> +/**
+> >>>>> + * ubi_auto_attach() - attach UBI if not already attached
+> >>>>> + *
+> >>>>> + * If no UBI device is currently attached, walk the device tree for the
+> >>>>> + * first MTD partition node with compatible = "linux,ubi", find the
+> >>>>> + * corresponding MTD device by matching flash_node, and attach UBI to
+> >>>>> + * it via ubi_part_from_mtd().
+> >>>>> + *
+> >>>>> + * Since U-Boot only supports a single attached UBI device at a time,
+> >>>>> + * only the first matching partition is used.
+> >>>>> + *
+> >>>>> + * Return: 0 on success or if already attached, negative errno on failure
+> >>>>> + */
+> >>>>> +static int ubi_auto_attach(void)
+> >>>>> +{
+> >>>>> +       struct mtd_info *mtd;
+> >>>>> +       ofnode node;
+> >>>>> +
+> >>>>> +       /* Already attached? */
+> >>>>> +       if (ubi_devices[0])
+> >>>>> +               return 0;
+> >>>>> +
+> >>>>> +       mtd_probe_devices();
+> >>>> This should be handled by your new ubi driver for your uclass.
+> >>>>
+> >>>>> +
+> >>>>> +       ofnode_for_each_compatible_node(node, "linux,ubi") {
+> >>>>> +               mtd_for_each_device(mtd) {
+> >>>>> +                       if (ofnode_equal(mtd->flash_node, node))
+> >>>>> +                               goto found;
+> >>>>> +               }
+> >>>>> +       }
+> >>>> Eek this is really strange. There should be a device so you can use
+> >>>> uclass_first_device(UCLASS_...).
+> >>> I carefully considered turning UBI devices into a UCLASS, but it would
+> >>> be a huge major rewrite of how UBI works in U-Boot, and while that would
+> >>> be a good thing to do, I consider far beyond the scope of supporting a
+> >>> boot method for OpenWrt.
+> >> Oh, I just assumed it supports driver model. But surely it must have a
+> >> UCLASS_BLK device?
+> > Sadly no. Neither UBI devices nor UBI volumes are block storage devices.
+> >
+> > Every UBI device does have a UCLASS_MTD parent device, but that
+> > obviously also doesn't uniquely identify the partition on the flash chip
+> > which is used as UBI device -- there can be (and sometimes are, for
+> > dual-boot/redundancy reasons) multiple UBI devices in different
+> > partitions on the same flash.
+> >
+> > What I ended up doing now is to move more of the UBI detection and
+> > enumeration logic into ubi_bootdev.c and have imagemap-ubi.c rely
+> > on getting the MTD device and partition index from there.
+> 
+> There are UBI based block storage emulation, see CONFIG_UBI_BLOCK
+> commits: 
+> * 9daad11ad178646c288aca3615a7ba1e6039aed3 ("drivers: introduce UBI
+> block abstraction")
+> * aa5b67ce226267440e64fadc57d3a21e5842027c ("disk: support UBI partitions")
 
---ESlGZZhSGjdKGQOh
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hey all,
-
-Looks like Coverity is a little unhappy about the FIT alignment fixes,
-but I'm not sure yet if we can just mark them as intentional and already
-safety checked inputs or not.
-
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Feb 23, 2026 at 1:34=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
-
-
-Hi,
-
-Please find the latest report on new defect(s) introduced to *Das U-Boot*
-found with Coverity Scan.
-
-   - *New Defects Found:* 1
-   - 1 defect(s), reported by Coverity Scan earlier, were marked fixed in
-   the recent build analyzed by Coverity Scan.
-   - *Defects Shown:* Showing 1 of 1 defect(s)
-
-Defect Details
-
-** CID 644638:         (TAINTED_SCALAR)
-
-
-___________________________________________________________________________=
-__________________
-*** CID 644638:           (TAINTED_SCALAR)
-/boot/image-fit.c: 2410             in boot_get_fdt_fit_into_buffer()
-2404     	 */
-2405     	if (dstlen >=3D newdstlen && dstbuf =3D=3D fdtsrcbuf)
-2406     		goto out;
-2407
-2408     	/* Try to reuse existing destination buffer if it is large enough=
-=2E */
-2409     	if (dstbuf && dstlen >=3D newdstlen) {
->>>     CID 644638:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdtsrcbuf->size_dt_strings" to "fdt_ope=
-n_into", which uses it as an offset.
-2410     		err =3D fdt_open_into(fdtsrcbuf, dstbuf, dstlen);
-2411     		goto out;
-2412     	}
-2413
-2414     	newdstbuf =3D memalign(8, newdstlen);
-2415     	if (!newdstbuf) {
-/boot/image-fit.c: 2420             in boot_get_fdt_fit_into_buffer()
-2414     	newdstbuf =3D memalign(8, newdstlen);
-2415     	if (!newdstbuf) {
-2416     		err =3D -ENOMEM;
-2417     		goto out;
-2418     	}
-2419
->>>     CID 644638:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdtsrcbuf->size_dt_struct" to "fdt_open=
-_into", which uses it as an offset.
-2420     	err =3D fdt_open_into(fdtsrcbuf, newdstbuf, newdstlen);
-2421     	if (err < 0)
-2422     		goto out;
-2423
-2424     	free(dstbuf);
-2425     	*fdtdstbuf =3D newdstbuf;
-/boot/image-fit.c: 2420             in boot_get_fdt_fit_into_buffer()
-2414     	newdstbuf =3D memalign(8, newdstlen);
-2415     	if (!newdstbuf) {
-2416     		err =3D -ENOMEM;
-2417     		goto out;
-2418     	}
-2419
->>>     CID 644638:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdtsrcbuf->size_dt_strings" to "fdt_ope=
-n_into", which uses it as an offset.
-2420     	err =3D fdt_open_into(fdtsrcbuf, newdstbuf, newdstlen);
-2421     	if (err < 0)
-2422     		goto out;
-2423
-2424     	free(dstbuf);
-2425     	*fdtdstbuf =3D newdstbuf;
-/boot/image-fit.c: 2420             in boot_get_fdt_fit_into_buffer()
-2414     	newdstbuf =3D memalign(8, newdstlen);
-2415     	if (!newdstbuf) {
-2416     		err =3D -ENOMEM;
-2417     		goto out;
-2418     	}
-2419
->>>     CID 644638:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdtsrcbuf->totalsize" to "fdt_open_into=
-", which uses it as an offset.
-2420     	err =3D fdt_open_into(fdtsrcbuf, newdstbuf, newdstlen);
-2421     	if (err < 0)
-2422     		goto out;
-2423
-2424     	free(dstbuf);
-2425     	*fdtdstbuf =3D newdstbuf;
-/boot/image-fit.c: 2410             in boot_get_fdt_fit_into_buffer()
-2404     	 */
-2405     	if (dstlen >=3D newdstlen && dstbuf =3D=3D fdtsrcbuf)
-2406     		goto out;
-2407
-2408     	/* Try to reuse existing destination buffer if it is large enough=
-=2E */
-2409     	if (dstbuf && dstlen >=3D newdstlen) {
->>>     CID 644638:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdtsrcbuf->totalsize" to "fdt_open_into=
-", which uses it as an offset.
-2410     		err =3D fdt_open_into(fdtsrcbuf, dstbuf, dstlen);
-2411     		goto out;
-2412     	}
-2413
-2414     	newdstbuf =3D memalign(8, newdstlen);
-2415     	if (!newdstbuf) {
-/boot/image-fit.c: 2410             in boot_get_fdt_fit_into_buffer()
-2404     	 */
-2405     	if (dstlen >=3D newdstlen && dstbuf =3D=3D fdtsrcbuf)
-2406     		goto out;
-2407
-2408     	/* Try to reuse existing destination buffer if it is large enough=
-=2E */
-2409     	if (dstbuf && dstlen >=3D newdstlen) {
->>>     CID 644638:           (TAINTED_SCALAR)
->>>     Passing tainted expression "fdtsrcbuf->size_dt_struct" to "fdt_open=
-_into", which uses it as an offset.
-2410     		err =3D fdt_open_into(fdtsrcbuf, dstbuf, dstlen);
-2411     		goto out;
-2412     	}
-2413
-2414     	newdstbuf =3D memalign(8, newdstlen);
-2415     	if (!newdstbuf) {
-
-
-
-View Defects in Coverity Scan
-<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
-
-Best regards,
-
-The Coverity Scan Admin Team
-
------ End forwarded message -----
-
---=20
-Tom
-
---ESlGZZhSGjdKGQOh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZyvpgAKCRAr4qD1Cr/k
-CiSZAQCMbDm9yGG49TvXZrkRGCjSKfCHA5U8NvAC5RJcMxTjcQEAlFmuKDNjMGlf
-mSZHkfNh2WJGqyU5FgTnIkSo9BizKgY=
-=2v2b
------END PGP SIGNATURE-----
-
---ESlGZZhSGjdKGQOh--
+Yes, but that also only works once the UBI device is already attached.
+Before that, and for any UBI device not currently attached, there aren't
+any UBI_BLOCK devices. However, in both cases we'd also need to scan
+them for volumes to be presented as potential bootdevs.
