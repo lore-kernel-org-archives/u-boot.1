@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F3BEEC2A8
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 22:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71CCBEEC2A8
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 22:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02E2383C6E;
-	Mon, 23 Feb 2026 23:48:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C4B983BC9;
+	Mon, 23 Feb 2026 23:48:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KfBUFS/u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iv8EPuBO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CFA683D3D; Mon, 23 Feb 2026 23:48:27 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id CF8C483D8A; Mon, 23 Feb 2026 23:48:28 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 462CF83C39
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 23:48:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B796D83BC9
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 23:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-46413b2c3d8so1457617b6e.2
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 14:48:25 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-4645dde00a7so1605981b6e.1
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 14:48:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771886904; x=1772491704; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771886905; x=1772491705; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=umqc/hGmbDtX3AgkVuMBoHmVtCIMciJcM6uWnrHjTrA=;
- b=KfBUFS/uSL+tV9MffwAs6pPjieGJ9SD10c5l3LpuFH9Co1w++L07U9ap2L9HdACW/a
- MgQOpVFh+/H5AdVH6VmXaBEQ5uFUFZZn9PCOwg5QB3rOCbcnZ46G3OdH743v8ujcEdKU
- 5u3mtFX5rL0MHlGNOn/BNAEY3JOIgb5QI5WQU=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KO6awyEgikm+X1QVHLpR8Fu2J3C0kskOnPd+G6bvHv4=;
+ b=iv8EPuBOMK50SUptgHaZlmnmjdoqSN+nsUSk2s4m3IPo0pUPmJfHU1OZk61uS8fpJl
+ vs4sucCQ++gsMl+n7y3ScPGC0h2o0kNdTJzzOnpK1QTltO83D/scbCTrCVtAV38HW+wW
+ gTPBs5ffpT4bS79LQaGiLMt1ScjEp0Gjvrl28=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771886904; x=1772491704;
+ d=1e100.net; s=20230601; t=1771886905; x=1772491705;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=umqc/hGmbDtX3AgkVuMBoHmVtCIMciJcM6uWnrHjTrA=;
- b=MIRmhj181/DRF4w8eoQ5YqpLTSL9WEyxTzS69y/Sj7xkPSK6Maa9O6I9GgMN9gn95D
- EPpopnVcA27V1rPmn/wVfvWiStGP+M7ABvqbx0u1bAyP4gW5h8/Uzql14qZQeMkiXrhp
- sGhTyqG1c6aYzxiavyd1kmx87BzlmP+whvGhEKX5rHo9CjdggoRbOT4/NhAHLuRO2V11
- P6eMUW/X5eOGX6lrXjIUkIwcNuYUDqAZaC+hXi3lhx1QDOBI6dIXMm/OjN2eEu/vg1YS
- 3aGPUqg6Ii7G4wSPXIy9dpr/6UF9ZGEKBjGItSbI0wER6RMFIE65efThUgp6cvK7kyqk
- HsZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwU+PGXlJ+H/Os5AzSWVOpIVLz+LXTe/BpXw5ut/4z3oz/F/9V7Mr956VlSsIdS4fdn/3dPc8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqsX8/s1bOVFkc17nIO8aCsf1Zk1/L2M0g4lR5/Moaa9wXqA6c
- xSC2tnsVZX+wz6pLoDuqwR1pQFR+z3tOwCeTIDOF9aICRD/mVWt2cDF6SZyaB+Vr7Tk=
-X-Gm-Gg: AZuq6aLi2u5dsUv3X+5CV4lWATeR2dPjNlqvh3mQLjjACPzBuIMT1VhN8NflOnLBU6N
- pTiAwpNlHkQx0r/Za8CHiG+gzr4m3gzmgwHw0WgeXG4seAjBaNqV2A2Nt9CTRliK1+8pN3P+Hp8
- k4XZHV5SsgyEibMohqo4866LWou34fjrouLrRAtqsmD6Nf2krwCsClaDRW6d5XGw/06L7MoEX/2
- OhYYUQiwsgpRjjV+GJHHHmmMxXzEWAmJLg9iu3PMl+lEpe3PsFhodXMZtYGGI0heH/EPERe6jQn
- 3xrazCuE4BWHR71zpEm/DEpTL6p0lJRD6AO0z5sNtMIVE5HKsfQ0tr0Je1GUsWnFTCxoMOsGJCL
- dSdXblFq4C9rAQ5SDRDgRH51NVs8UJnVvSNlodDL47602VTTqpGBcrkKQHjhmfIaQ3Hc/Jb8a91
- SMS8SGx7/8EouNIKVoyozYvxdYBHMN/lsVI61ZzsP5Ji0/9y3vkCGmzcfGADXmQeb1X2MhKhzMw
- xqJik24FC1OAB2D/sA1kiiuqFxn35f5foEXnxfokEiayjG+Qw==
-X-Received: by 2002:a05:6808:4fc9:b0:45c:9384:3626 with SMTP id
- 5614622812f47-4644638d03bmr4855750b6e.47.1771886904004; 
- Mon, 23 Feb 2026 14:48:24 -0800 (PST)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=KO6awyEgikm+X1QVHLpR8Fu2J3C0kskOnPd+G6bvHv4=;
+ b=KPL7cPEai7+f1AkL4S8KuKRkVd1OFlx7oKO/fiCJvnepbHZu3BkwRJnOK8Lnbr3Rwk
+ MLucvI9jbrwVyCOS4XTXd0fEGrOL1JvhALxhE2KvmfHDXQp6ZSQxXXFIVeDoOwRl456k
+ n0j1IJ0igwCYl7ZRUx7PRTcRMufrpa/72DqxCK6y4qaXkZ12xbukktfJEApLBAnK8dLB
+ j14hXN4tD681PUGnM+Oqx5+r/AuV5ufjPByr+6my79e8UabRlJhjvXFU85/nLYieLWiJ
+ W+i8rTCIQc9xMzmCF5E98vOemu0DviUNFjGvrTrR0ZXkGqRg4TKGkhrVph+xrQXLN9Un
+ 6/uw==
+X-Gm-Message-State: AOJu0YwG22uRk+YuvLHGl71LGYRzV31n5NssN1hwyv155m+LFZIQhTRb
+ 0qOjh1SbMTWR6PIp7adA7Dx/ezqH8iTFgOIlBNMVsQdJHnBU3KkINpApe3xTWqrLUGw=
+X-Gm-Gg: AZuq6aLr0GkkWuQW+rSNGY6qxmjj1lb/CrF4c7fLwUHrYf+a7HL6V3GrCgpYrwd8ABd
+ rOSj6FSsTHNv6CPS9qyxyyCeRQ1C/7mqN1UgpRE61iCjrX4O4HJyQ+LED1hSZWkBo7IE14F2RcJ
+ fD90GqD9WBW98LUeLRxcVGpj+E+iWol90N/AcxDplK0HuKJ3K91mRei+oZ0gvqu/UD2xEarY1Ep
+ wKouPjnlVoQ+ciI5Ux/49qiDlwWY+YUceIgl2KYByb41gUBL06tND8o9i7aBo10P2GETiU/UpnV
+ fSSvvDMG5JwGoE5fF/9XEfHh2b/e/SiknzVQzezKAHbic6kV5Ae2yqswQGq2zWqQEgQU7QyF2FD
+ fC/piCMC6HbVBTIbNanimBjSdiVd1y2ME04ZtSXEe/Gdt6DVYryo/Elbd5FqiKJ3L3M/ay5lIoB
+ 04Y706UV8H7ch7ci3JAphJholhihEXrzcPS6fy4mhCkTmIJIqdEUSClaBu1uV7YdycIZXuyUlmK
+ 6frNJw3dGH0mEV+XLTRZ61DgoohkCqMhAS3mF6Z6VhfjZWsxQ==
+X-Received: by 2002:a05:6808:170c:b0:45f:961:9f83 with SMTP id
+ 5614622812f47-46446ff248fmr5974737b6e.5.1771886905419; 
+ Mon, 23 Feb 2026 14:48:25 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4644a17aea2sm5929413b6e.12.2026.02.23.14.48.22
+ 5614622812f47-4644a17aea2sm5929413b6e.12.2026.02.23.14.48.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Feb 2026 14:48:23 -0800 (PST)
+ Mon, 23 Feb 2026 14:48:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Jerome Forissier <jerome.forissier@arm.com>, u-boot@lists.denx.de, 
- Christian Marangi <ansuelsmth@gmail.com>
-In-Reply-To: <20260209114515.1916-1-ansuelsmth@gmail.com>
-References: <20260209114515.1916-1-ansuelsmth@gmail.com>
-Subject: Re: [PATCH 0/2] net: mdio-mt7531-mmio: consolidate and improve probe
-Message-Id: <177188690292.4021327.15386355321486911645.b4-ty@konsulko.com>
-Date: Mon, 23 Feb 2026 16:48:22 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Christoph Stoidner <c.stoidner@phytec.de>, 
+ Dominik Haller <d.haller@phytec.de>, Fabio Estevam <festevam@gmail.com>, 
+ Garrett Giordano <ggiordano@phytec.com>, 
+ Gilles Talis <gilles.talis@gmail.com>, Joseph Guo <qijian.guo@nxp.com>, 
+ Mathieu Othacehe <m.othacehe@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Teresa Remmet <t.remmet@phytec.de>, 
+ Wadim Egorov <w.egorov@phytec.de>, upstream@lists.phytec.de
+In-Reply-To: <20260211221135.1738981-1-trini@konsulko.com>
+References: <20260211221135.1738981-1-trini@konsulko.com>
+Subject: Re: [PATCH] board: Correct usage of
+ fdtfile=CONFIG_DEFAULT_FDT_FILE
+Message-Id: <177188690418.4021327.13394786609588062571.b4-ty@konsulko.com>
+Date: Mon, 23 Feb 2026 16:48:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,25 +104,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 09 Feb 2026 12:45:04 +0100, Christian Marangi wrote:
+On Wed, 11 Feb 2026 16:11:35 -0600, Tom Rini wrote:
 
-> This small series consolidate header usage of mdio-mt7531-mmio driver
-> and improve usage in preparation for support of OF PHY autoprobe.
+> As explained in commit 03d2d5fc003f ("board: sifive: unmatched: set
+> fdtfile with unquoted variable.") using the syntax of
+> 'fdtfile=CONFIG_DEFAULT_FDT_FILE' in the plain text environment files
+> will lead to extraneous and problematic "s in the output. This is fixed
+> by using fdtfile=DEFAULT_FDT_FILE which was introduced recently.
 > 
-> This driver is still not used (as it will be used by AN7581/AN7583)
-> in the OF mode (it's used by MT7988 for the MDIO functions)
-> 
-> For OF PHY to be correctly autoprobed, the MDIO driver needs to attached
-> to the MDIO node (the parent of the PHY nodes)
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/2] net: mdio-mt7531-mmio: use common header priv struct
-      commit: 145487611f6875efc106be7f41e8544ff5bdadc9
-[2/2] net: mdio-mt7531-mmio: improve parsing of switch register on probe
-      commit: 358f97fcca9a888e7f2c074d70460b92b5222c55
+[1/1] board: Correct usage of fdtfile=CONFIG_DEFAULT_FDT_FILE
+      commit: 8fd76675efbe7af785ccc1ba1ac8b9f7e10f6715
 -- 
 Tom
 
