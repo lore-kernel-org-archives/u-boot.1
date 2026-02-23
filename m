@@ -4,57 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773E4EC1112
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:29:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8328EEC1112
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:29:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B116883D8A;
-	Mon, 23 Feb 2026 18:29:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 0A27183DEB;
+	Mon, 23 Feb 2026 18:29:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="jw7uZGoi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BtM632sj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5082183BC9; Mon, 23 Feb 2026 15:25:39 +0100 (CET)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 92B0883C39; Mon, 23 Feb 2026 15:42:48 +0100 (CET)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ED6180077
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 15:25:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CBE383935
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 15:42:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kauschluss@disroot.org
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id E15DD27E70;
- Mon, 23 Feb 2026 15:25:36 +0100 (CET)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id 7TvPAauTY2Gr; Mon, 23 Feb 2026 15:25:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1771856735; bh=hcjQ/zB7c/4rDZjRt4DwEhWTj5LpA50Lx4NC+bBCqtY=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=jw7uZGoiaGnKYPJK6MmgnmTTpxl3IRk6z2VoOM7e/mzLaTKFhKCs+oF4WOIgTc0N6
- jtbVwS/XfOoie0czns0zCSjLZUzaNr5soOciuzWBOiPmKiGbSI4JUQ8/2OocV6URju
- qk7sM922HkJH7esRtn704s24DrPf34vw1k4MucCg6+JyMackVY2fIBW36iwl8yxlfH
- 45oX2YFTEDR0PaAvNPNOf2T7OQ9QzV/84YGvpy018909JqIjoNLRks0TjXiWrrnJnE
- G6CrGhyVjitezMmnstWBdhjkBlGO0E2ABnrAGPpKjwztaDxILKwt17qFLqAWyFk7vK
- TMQ61jCJGPObA==
-From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Mon, 23 Feb 2026 19:55:24 +0530
-Subject: [PATCH v2 2/2] phy: samsung: add support for exynos7870 USB PHY
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-c6e266a3572so1462759a12.0
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 06:42:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1771857764; x=1772462564; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CiCaOozMaBqtu0W7JkoLLdfxEnVK89AmMhGax1pTnn8=;
+ b=BtM632sjObzbgi4ISeXXv4NroRc/syzFWCPiown/C3KmXXv6HRMP6NKsuLtmVuA8gj
+ LMJita4CPY/7otIpEBThwulyEQ/y0cOp2IHiyVawUnZ17lRQZbn+bhuVpMIcx8YL5ixm
+ ctUdierybGf0B9rjRhCafJyVqFkuVpnjc4sOg/YkgVL19aMseujr3l7EaCodfP8IQcsb
+ pDdsjAGckqGjkUoDkACNeCO/LqeE7AuBh9HamWZf/9IAYIVHheRrv3ekyIIZOmnsb2Fd
+ ZyKzvF2YM87oD8kzz+Qjc8huIMipTmu91ybNrbX78Rp/T2I0v/kFZbur85kLhvMBROgZ
+ GouQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771857764; x=1772462564;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CiCaOozMaBqtu0W7JkoLLdfxEnVK89AmMhGax1pTnn8=;
+ b=Qgd8ENnNKSfhN9lHBOruIQzoe3npgcsmrkmZ4lTvDmnnI3y8FYw6VKdf1iBvCz/3BD
+ W1I7FygqBCVmxsEGifK+eRGZPB0oy907SGyKe3MfHwfmUewAfhjjM8eQ05gASoPXnBLv
+ X2qOSh1ZKPV+xzHLhSTDd6ycEBsVlamMdQDqeCTGJPHcjhjon/mwBiNTom2b5OhLzTCW
+ L/5SQ6NM+cO8et0pznWnhBnNW9P0faSgmO8NfZZBEiKZqO4oLkarL1gxi8cqbkQqFqBZ
+ oIRssptQiIBfE4yPj41ycAqFdmSrCZVWjk4FKiTHIOu6J+DJRA/01XbpQLOWuKZN6xGG
+ 0IXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZND0Lj9y/uhm0jejyumVtwAr8PkdHFsSLbCp+dwk7b+3WyuUCX3TTdYkEnNGyYfnp/Q/2x3U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7nSSlp0SScTpFwuJatzzhLwUVzCGFP0QMlr4zMVHF9Wdh1Ad8
+ sCKgfh7f9RRBKKecaJMuG7kaJakpAQ6e9+8e+sEbZzD3NJs6wAF8FK1D
+X-Gm-Gg: ATEYQzw8MHJc/9Qjgd3jeJyOm1ds31Ic0wnnyWkkF0NgaEYeQdK5/gaCtt6ox6CVdVW
+ hO+PZ3l17qrahsHgv7sPW+VFLAQXOGot5kaU9DW8IdRm4oXJKl2jnCpOmlTHStVLr9eLSJxkLtZ
+ zGit0nybRiYPdnGEbrGKS++Q07gikr2i3DEqtLoBLcwC4Fi0gV9wZKKaQY+nD9l3/GT75TvXv7z
+ b9iO+Px7G2IxKiM9Y9isVHVvIuR6cFrcZDXORLDV6wWbV2h2HsymXqqv0OW0ULzdBRYiA88HlQ+
+ blcjI3wadUn+2xEOtDRbDki5+dIIP17V2CfrJWjpdgddi98D1yfqY5tK08bqy8lplkghiflp2C5
+ wQeKUoxC/zGbDIjYPqgO2SLYy2RhwQ93gXTP567w9QjWPlfVRg9ORxak+przyAGjgpiU/GyENqk
+ ZKZVDF47gs+6Rc/KuiN0HPX+lFFOYwf1NZ5kMnR6VrUxcsVq6M6qlWUGH9e5KDTTPHZ/xSNqDz9
+ jQjGiYUxkR6nyA6JkBGuw==
+X-Received: by 2002:a17:902:e80c:b0:2a1:388d:8ef3 with SMTP id
+ d9443c01a7336-2ad7444e7fcmr88379735ad.18.1771857764461; 
+ Mon, 23 Feb 2026 06:42:44 -0800 (PST)
+Received: from [192.168.0.2] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ad74f5dae6sm82875165ad.21.2026.02.23.06.42.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Feb 2026 06:42:44 -0800 (PST)
+Message-ID: <ae45130b-9c94-4a9c-8cd6-d7fd4a996e20@gmail.com>
+Date: Mon, 23 Feb 2026 22:42:38 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260223-phy-usb-exynos7870-v2-2-5e91a25ef42d@disroot.org>
-References: <20260223-phy-usb-exynos7870-v2-0-5e91a25ef42d@disroot.org>
-In-Reply-To: <20260223-phy-usb-exynos7870-v2-0-5e91a25ef42d@disroot.org>
-To: u-boot@lists.denx.de
-Cc: Sam Protsenko <semen.protsenko@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Marek Vasut <marek.vasut@mailbox.org>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/4] dt-bindings: net: airoha,en8811h: deprecate
+ pnswap-rx and pnswap-tx
+To: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: jerome.forissier@arm.com, marek.vasut+renesas@mailbox.org,
+ ericwouds@gmail.com, kabel@kernel.org, vladimir.oltean@nxp.com,
+ frank-w@public-files.de, daniel@makrotopia.org, ansuelsmth@gmail.com,
+ mkorpershoek@kernel.org, skylake.huang@mediatek.com, u-boot@lists.denx.de
+References: <20260221163114.87553-1-lucienzx159@gmail.com>
+ <20260221163114.87553-4-lucienzx159@gmail.com>
+ <20260221164556.GZ3233182@bill-the-cat>
+ <8e1c4274-797e-4f2d-b1ff-c6ef67bffacd@gmail.com>
+ <20260222164950.GB3233182@bill-the-cat> <aZvfnT8C-g3DXBgp@sumit-xelite>
+Content-Language: en-US
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <aZvfnT8C-g3DXBgp@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 23 Feb 2026 18:29:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,353 +112,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB PHY used by the Exynos7870 SoC has a single USB 2.0 interface.
-Add its dedicated variant enum, compatible, and init/exit functions.
+Hi Tom and Sumit
 
-The PHY enable bit of Exynos7870's PHY is different in contrast to that
-of Exynos850 and most Exynos PHYs. To allow this change, a simple if
-condition is added in exynos_usbdrd_phy_isol() which changes the
-bitmask. Since the variant enum is required, the function argument is
-changed to accept the driver data itself.
+Thanks for the feedback.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
----
- drivers/phy/phy-exynos-usbdrd.c | 246 ++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 238 insertions(+), 8 deletions(-)
+I'll wait for the v7.0-rc1-dts release before submitting v2.
 
-diff --git a/drivers/phy/phy-exynos-usbdrd.c b/drivers/phy/phy-exynos-usbdrd.c
-index 4ab8da2a08f..c5eed29a2c8 100644
---- a/drivers/phy/phy-exynos-usbdrd.c
-+++ b/drivers/phy/phy-exynos-usbdrd.c
-@@ -21,6 +21,7 @@
- /* Offset of PMU register controlling USB PHY output isolation */
- #define EXYNOS_USBDRD_PHY_CONTROL		0x0704
- #define EXYNOS_PHY_ENABLE			BIT(0)
-+#define EXYNOS7870_PHY_ENABLE			BIT(1)
- 
- /* Exynos USB PHY registers */
- #define EXYNOS5_FSEL_9MHZ6			0x0
-@@ -32,6 +33,88 @@
- #define EXYNOS5_FSEL_26MHZ			0x6
- #define EXYNOS5_FSEL_50MHZ			0x7
- 
-+/* Exynos5: USB DRD PHY registers */
-+#define EXYNOS5_DRD_LINKSYSTEM			0x04
-+#define LINKSYSTEM_XHCI_VERSION_CONTROL		BIT(27)
-+#define LINKSYSTEM_FORCE_VBUSVALID		BIT(8)
-+#define LINKSYSTEM_FORCE_BVALID			BIT(7)
-+#define LINKSYSTEM_FLADJ			GENMASK(6, 1)
-+
-+#define EXYNOS5_DRD_PHYUTMI			0x08
-+#define PHYUTMI_UTMI_SUSPEND_COM_N		BIT(12)
-+#define PHYUTMI_UTMI_L1_SUSPEND_COM_N		BIT(11)
-+#define PHYUTMI_VBUSVLDEXTSEL			BIT(10)
-+#define PHYUTMI_VBUSVLDEXT			BIT(9)
-+#define PHYUTMI_TXBITSTUFFENH			BIT(8)
-+#define PHYUTMI_TXBITSTUFFEN			BIT(7)
-+#define PHYUTMI_OTGDISABLE			BIT(6)
-+#define PHYUTMI_IDPULLUP			BIT(5)
-+#define PHYUTMI_DRVVBUS				BIT(4)
-+#define PHYUTMI_DPPULLDOWN			BIT(3)
-+#define PHYUTMI_DMPULLDOWN			BIT(2)
-+#define PHYUTMI_FORCESUSPEND			BIT(1)
-+#define PHYUTMI_FORCESLEEP			BIT(0)
-+
-+#define EXYNOS5_DRD_PHYCLKRST			0x10
-+#define PHYCLKRST_EN_UTMISUSPEND		BIT(31)
-+#define PHYCLKRST_SSC_REFCLKSEL			GENMASK(30, 23)
-+#define PHYCLKRST_SSC_RANGE			GENMASK(22, 21)
-+#define PHYCLKRST_SSC_EN			BIT(20)
-+#define PHYCLKRST_REF_SSP_EN			BIT(19)
-+#define PHYCLKRST_REF_CLKDIV2			BIT(18)
-+#define PHYCLKRST_MPLL_MULTIPLIER		GENMASK(17, 11)
-+#define PHYCLKRST_MPLL_MULTIPLIER_100MHZ_REF	0x19
-+#define PHYCLKRST_MPLL_MULTIPLIER_50M_REF	0x32
-+#define PHYCLKRST_MPLL_MULTIPLIER_24MHZ_REF	0x68
-+#define PHYCLKRST_MPLL_MULTIPLIER_20MHZ_REF	0x7d
-+#define PHYCLKRST_MPLL_MULTIPLIER_19200KHZ_REF	0x02
-+#define PHYCLKRST_FSEL_PIPE			GENMASK(10, 8)
-+#define PHYCLKRST_FSEL_UTMI			GENMASK(7, 5)
-+#define PHYCLKRST_FSEL_PAD_100MHZ		0x27
-+#define PHYCLKRST_FSEL_PAD_24MHZ		0x2a
-+#define PHYCLKRST_FSEL_PAD_20MHZ		0x31
-+#define PHYCLKRST_FSEL_PAD_19_2MHZ		0x38
-+#define PHYCLKRST_RETENABLEN			BIT(4)
-+#define PHYCLKRST_REFCLKSEL			GENMASK(3, 2)
-+#define PHYCLKRST_REFCLKSEL_PAD_REFCLK		0x2
-+#define PHYCLKRST_REFCLKSEL_EXT_REFCLK		0x3
-+#define PHYCLKRST_PORTRESET			BIT(1)
-+#define PHYCLKRST_COMMONONN			BIT(0)
-+
-+#define EXYNOS5_DRD_PHYPARAM0			0x1c
-+#define PHYPARAM0_REF_USE_PAD			BIT(31)
-+#define PHYPARAM0_REF_LOSLEVEL			GENMASK(30, 26)
-+#define PHYPARAM0_REF_LOSLEVEL_VAL		0x9
-+#define PHYPARAM0_TXVREFTUNE			GENMASK(25, 22)
-+#define PHYPARAM0_TXRISETUNE			GENMASK(21, 20)
-+#define PHYPARAM0_TXRESTUNE			GENMASK(19, 18)
-+#define PHYPARAM0_TXPREEMPPULSETUNE		BIT(17)
-+#define PHYPARAM0_TXPREEMPAMPTUNE		GENMASK(16, 15)
-+#define PHYPARAM0_TXHSXVTUNE			GENMASK(14, 13)
-+#define PHYPARAM0_TXFSLSTUNE			GENMASK(12, 9)
-+#define PHYPARAM0_SQRXTUNE			GENMASK(8, 6)
-+#define PHYPARAM0_OTGTUNE			GENMASK(5, 3)
-+#define PHYPARAM0_COMPDISTUNE			GENMASK(2, 0)
-+
-+#define EXYNOS5_DRD_LINKPORT			0x44
-+#define LINKPORT_HOST_U3_PORT_DISABLE		BIT(8)
-+#define LINKPORT_HOST_U2_PORT_DISABLE		BIT(7)
-+#define LINKPORT_HOST_PORT_OVCR_U3		BIT(5)
-+#define LINKPORT_HOST_PORT_OVCR_U2		BIT(4)
-+#define LINKPORT_HOST_PORT_OVCR_U3_SEL		BIT(3)
-+#define LINKPORT_HOST_PORT_OVCR_U2_SEL		BIT(2)
-+
-+/* Exynos7870: USB DRD PHY registers */
-+#define EXYNOS7870_DRD_HSPHYCTRL		0x54
-+#define HSPHYCTRL_PHYSWRSTALL			BIT(31)
-+#define HSPHYCTRL_SIDDQ				BIT(6)
-+#define HSPHYCTRL_PHYSWRST			BIT(0)
-+
-+#define EXYNOS7870_DRD_HSPHYPLLTUNE		0x70
-+#define HSPHYPLLTUNE_PLL_B_TUNE			BIT(6)
-+#define HSPHYPLLTUNE_PLL_I_TUNE			GENMASK(5, 4)
-+#define HSPHYPLLTUNE_PLL_P_TUNE			GENMASK(3, 0)
-+
- /* Exynos850: USB DRD PHY registers */
- #define EXYNOS850_DRD_LINKCTRL			0x04
- #define LINKCTRL_FORCE_QACT			BIT(8)
-@@ -67,6 +150,7 @@
- #define MHZ					(KHZ * KHZ)
- 
- enum exynos_usbdrd_phy_variant {
-+	EXYNOS7870_USBDRD_PHY,
- 	EXYNOS850_USBDRD_PHY,
- };
- 
-@@ -88,16 +172,20 @@ struct exynos_usbdrd_phy {
- 	enum exynos_usbdrd_phy_variant variant;
- };
- 
--static void exynos_usbdrd_phy_isol(struct regmap *reg_pmu, bool isolate)
-+static void exynos_usbdrd_phy_isol(struct exynos_usbdrd_phy *phy_drd,
-+				   bool isolate)
- {
--	unsigned int val;
-+	unsigned int mask = EXYNOS_PHY_ENABLE, val;
- 
--	if (!reg_pmu)
-+	if (!phy_drd->reg_pmu)
- 		return;
- 
--	val = isolate ? 0 : EXYNOS_PHY_ENABLE;
--	regmap_update_bits(reg_pmu, EXYNOS_USBDRD_PHY_CONTROL,
--			   EXYNOS_PHY_ENABLE, val);
-+	if (phy_drd->variant == EXYNOS7870_USBDRD_PHY)
-+		mask = EXYNOS7870_PHY_ENABLE;
-+
-+	val = isolate ? 0 : mask;
-+	regmap_update_bits(phy_drd->reg_pmu, EXYNOS_USBDRD_PHY_CONTROL,
-+			   mask, val);
- }
- 
- /*
-@@ -138,6 +226,111 @@ static unsigned int exynos_rate_to_clk(unsigned long rate, u32 *reg)
- 	return 0;
- }
- 
-+static void exynos7870_usbdrd_utmi_init(struct phy *phy)
-+{
-+	struct exynos_usbdrd_phy *phy_drd = dev_get_priv(phy->dev);
-+	void __iomem *regs_base = phy_drd->reg_phy;
-+	u32 reg;
-+
-+	reg = readl(regs_base + EXYNOS5_DRD_PHYCLKRST);
-+	/* Use PADREFCLK as ref clock */
-+	reg &= ~PHYCLKRST_REFCLKSEL;
-+	reg |= FIELD_PREP(PHYCLKRST_REFCLKSEL, PHYCLKRST_REFCLKSEL_PAD_REFCLK);
-+	/* Select ref clock rate */
-+	reg &= ~PHYCLKRST_FSEL_UTMI;
-+	reg &= ~PHYCLKRST_FSEL_PIPE;
-+	reg |= FIELD_PREP(PHYCLKRST_FSEL_UTMI, phy_drd->extrefclk);
-+	/* Enable suspend and reset the port */
-+	reg |= PHYCLKRST_EN_UTMISUSPEND;
-+	reg |= PHYCLKRST_COMMONONN;
-+	reg |= PHYCLKRST_PORTRESET;
-+	writel(reg, regs_base + EXYNOS5_DRD_PHYCLKRST);
-+	udelay(10);
-+
-+	/* Clear the port reset bit */
-+	reg &= ~PHYCLKRST_PORTRESET;
-+	writel(reg, regs_base + EXYNOS5_DRD_PHYCLKRST);
-+
-+	/* Change PHY PLL tune value */
-+	reg = readl(regs_base + EXYNOS7870_DRD_HSPHYPLLTUNE);
-+	if (phy_drd->extrefclk == EXYNOS5_FSEL_24MHZ)
-+		reg |= HSPHYPLLTUNE_PLL_B_TUNE;
-+	else
-+		reg &= ~HSPHYPLLTUNE_PLL_B_TUNE;
-+	reg &= ~HSPHYPLLTUNE_PLL_P_TUNE;
-+	reg |= FIELD_PREP(HSPHYPLLTUNE_PLL_P_TUNE, 14);
-+	writel(reg, regs_base + EXYNOS7870_DRD_HSPHYPLLTUNE);
-+
-+	/* High-Speed PHY control */
-+	reg = readl(regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+	reg &= ~HSPHYCTRL_SIDDQ;
-+	reg &= ~HSPHYCTRL_PHYSWRST;
-+	reg &= ~HSPHYCTRL_PHYSWRSTALL;
-+	writel(reg, regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+	udelay(500);
-+
-+	reg = readl(regs_base + EXYNOS5_DRD_LINKSYSTEM);
-+	/*
-+	 * Setting the Frame length Adj value[6:1] to default 0x20
-+	 * See xHCI 1.0 spec, 5.2.4
-+	 */
-+	reg |= LINKSYSTEM_XHCI_VERSION_CONTROL;
-+	reg &= ~LINKSYSTEM_FLADJ;
-+	reg |= FIELD_PREP(LINKSYSTEM_FLADJ, 0x20);
-+	/* Set VBUSVALID signal as the VBUS pad is not used */
-+	reg |= LINKSYSTEM_FORCE_BVALID;
-+	reg |= LINKSYSTEM_FORCE_VBUSVALID;
-+	writel(reg, regs_base + EXYNOS5_DRD_LINKSYSTEM);
-+
-+	reg = readl(regs_base + EXYNOS5_DRD_PHYUTMI);
-+	/* Release force_sleep & force_suspend */
-+	reg &= ~PHYUTMI_FORCESLEEP;
-+	reg &= ~PHYUTMI_FORCESUSPEND;
-+	/* DP/DM pull down control */
-+	reg &= ~PHYUTMI_DMPULLDOWN;
-+	reg &= ~PHYUTMI_DPPULLDOWN;
-+	reg &= ~PHYUTMI_DRVVBUS;
-+	/* Set DP-pull up as the VBUS pad is not used */
-+	reg |= PHYUTMI_VBUSVLDEXTSEL;
-+	reg |= PHYUTMI_VBUSVLDEXT;
-+	/* Disable OTG block and VBUS valid comparator */
-+	reg |= PHYUTMI_OTGDISABLE;
-+	writel(reg, regs_base + EXYNOS5_DRD_PHYUTMI);
-+
-+	/* Configure OVC IO usage */
-+	reg = readl(regs_base + EXYNOS5_DRD_LINKPORT);
-+	reg |= LINKPORT_HOST_PORT_OVCR_U3_SEL | LINKPORT_HOST_PORT_OVCR_U2_SEL;
-+	writel(reg, regs_base + EXYNOS5_DRD_LINKPORT);
-+
-+	/* High-Speed PHY swrst */
-+	reg = readl(regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+	reg |= HSPHYCTRL_PHYSWRST;
-+	writel(reg, regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+	udelay(20);
-+
-+	/* Clear the PHY swrst bit */
-+	reg = readl(regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+	reg &= ~HSPHYCTRL_PHYSWRST;
-+	writel(reg, regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+
-+	reg = readl(regs_base + EXYNOS5_DRD_PHYPARAM0);
-+	reg &= ~(PHYPARAM0_TXVREFTUNE | PHYPARAM0_TXRISETUNE |
-+		 PHYPARAM0_TXRESTUNE | PHYPARAM0_TXPREEMPPULSETUNE |
-+		 PHYPARAM0_TXPREEMPAMPTUNE | PHYPARAM0_TXHSXVTUNE |
-+		 PHYPARAM0_TXFSLSTUNE | PHYPARAM0_SQRXTUNE |
-+		 PHYPARAM0_OTGTUNE | PHYPARAM0_COMPDISTUNE);
-+	reg |= FIELD_PREP_CONST(PHYPARAM0_TXVREFTUNE, 14) |
-+	       FIELD_PREP_CONST(PHYPARAM0_TXRISETUNE, 1) |
-+	       FIELD_PREP_CONST(PHYPARAM0_TXRESTUNE, 3) |
-+	       FIELD_PREP_CONST(PHYPARAM0_TXPREEMPAMPTUNE, 0) |
-+	       FIELD_PREP_CONST(PHYPARAM0_TXHSXVTUNE, 0) |
-+	       FIELD_PREP_CONST(PHYPARAM0_TXFSLSTUNE, 3) |
-+	       FIELD_PREP_CONST(PHYPARAM0_SQRXTUNE, 6) |
-+	       FIELD_PREP_CONST(PHYPARAM0_OTGTUNE, 2) |
-+	       FIELD_PREP_CONST(PHYPARAM0_COMPDISTUNE, 3);
-+	writel(reg, regs_base + EXYNOS5_DRD_PHYPARAM0);
-+}
-+
- static void exynos850_usbdrd_utmi_init(struct phy *phy)
- {
- 	struct exynos_usbdrd_phy *phy_drd = dev_get_priv(phy->dev);
-@@ -225,6 +418,33 @@ static void exynos850_usbdrd_utmi_init(struct phy *phy)
- 	writel(reg, regs_base + EXYNOS850_DRD_HSP);
- }
- 
-+static void exynos7870_usbdrd_utmi_exit(struct phy *phy)
-+{
-+	struct exynos_usbdrd_phy *phy_drd = dev_get_priv(phy->dev);
-+	void __iomem *regs_base = phy_drd->reg_phy;
-+	u32 reg;
-+
-+	/*
-+	 * Disable the VBUS signal and the ID pull-up resistor.
-+	 * Enable force-suspend and force-sleep modes.
-+	 */
-+	reg = readl(regs_base + EXYNOS5_DRD_PHYUTMI);
-+	reg &= ~(PHYUTMI_DRVVBUS | PHYUTMI_VBUSVLDEXT | PHYUTMI_VBUSVLDEXTSEL);
-+	reg &= ~PHYUTMI_IDPULLUP;
-+	reg |= PHYUTMI_FORCESUSPEND | PHYUTMI_FORCESLEEP;
-+	writel(reg, regs_base + EXYNOS5_DRD_PHYUTMI);
-+
-+	/* Power down PHY analog blocks */
-+	reg = readl(regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+	reg |= HSPHYCTRL_SIDDQ;
-+	writel(reg, regs_base + EXYNOS7870_DRD_HSPHYCTRL);
-+
-+	/* Clear VBUSVALID signal as the VBUS pad is not used */
-+	reg = readl(regs_base + EXYNOS5_DRD_LINKSYSTEM);
-+	reg &= ~(LINKSYSTEM_FORCE_BVALID | LINKSYSTEM_FORCE_VBUSVALID);
-+	writel(reg, regs_base + EXYNOS5_DRD_LINKSYSTEM);
-+}
-+
- static void exynos850_usbdrd_utmi_exit(struct phy *phy)
- {
- 	struct exynos_usbdrd_phy *phy_drd = dev_get_priv(phy->dev);
-@@ -261,6 +481,9 @@ static int exynos_usbdrd_phy_init(struct phy *phy)
- 		return ret;
- 
- 	switch (phy_drd->variant) {
-+	case EXYNOS7870_USBDRD_PHY:
-+		exynos7870_usbdrd_utmi_init(phy);
-+		break;
- 	case EXYNOS850_USBDRD_PHY:
- 		exynos850_usbdrd_utmi_init(phy);
- 		break;
-@@ -283,6 +506,9 @@ static int exynos_usbdrd_phy_exit(struct phy *phy)
- 		return ret;
- 
- 	switch (phy_drd->variant) {
-+	case EXYNOS7870_USBDRD_PHY:
-+		exynos7870_usbdrd_utmi_exit(phy);
-+		break;
- 	case EXYNOS850_USBDRD_PHY:
- 		exynos850_usbdrd_utmi_exit(phy);
- 		break;
-@@ -307,7 +533,7 @@ static int exynos_usbdrd_phy_power_on(struct phy *phy)
- 		return ret;
- 
- 	/* Power-on PHY */
--	exynos_usbdrd_phy_isol(phy_drd->reg_pmu, false);
-+	exynos_usbdrd_phy_isol(phy_drd, false);
- 
- 	return 0;
- }
-@@ -319,7 +545,7 @@ static int exynos_usbdrd_phy_power_off(struct phy *phy)
- 	dev_dbg(phy->dev, "Request to power_off usbdrd_phy phy\n");
- 
- 	/* Power-off the PHY */
--	exynos_usbdrd_phy_isol(phy_drd->reg_pmu, true);
-+	exynos_usbdrd_phy_isol(phy_drd, true);
- 
- 	clk_disable_unprepare(phy_drd->core_clk);
- 
-@@ -390,6 +616,10 @@ static const struct phy_ops exynos_usbdrd_phy_ops = {
- };
- 
- static const struct udevice_id exynos_usbdrd_phy_of_match[] = {
-+	{
-+		.compatible = "samsung,exynos7870-usbdrd-phy",
-+		.data = EXYNOS7870_USBDRD_PHY,
-+	},
- 	{
- 		.compatible = "samsung,exynos850-usbdrd-phy",
- 		.data = EXYNOS850_USBDRD_PHY,
+Thanks
 
--- 
-2.52.0
-
+Sumit Garg 於 2026/2/23 下午 01:03 寫道:
+> On Sun, Feb 22, 2026 at 10:49:50AM -0600, Tom Rini wrote:
+>> On Mon, Feb 23, 2026 at 12:27:02AM +0800, Lucien.Jheng wrote:
+>>> Hi Tom
+>>>
+>>> Tom Rini 於 2026/2/22 上午 12:45 寫道:
+>>>> On Sun, Feb 22, 2026 at 12:31:13AM +0800, Lucien.Jheng wrote:
+>>>>
+>>>>> Deprecate the proprietary airoha,pnswap-rx and airoha,pnswap-tx boolean
+>>>>> properties in favour of the standard rx-polarity and tx-polarity
+>>>>> properties defined in phy-common-props.yaml.
+>>>>>
+>>>>> Update the example to use rx-polarity with the PHY_POL_INVERT constant.
+>>>>>
+>>>>> Link: https://git.kernel.org/linus/44f62aa1b1209232cedcfb39097fc1bfbe75bbc7
+>>>>> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+>>>> And for clarity, my comment about cherry-pick also applies here. The
+>>>> script tools/update-subtree.sh makes doing the cherry-picks
+>>>> straighforward.
+>>> Thank you for your comment.
+>>>
+>>> I checked devicetree-rebasing.git and it only has the v6.19-dts tag.
+>>>
+>>> I will try to manually cherry-pick all phy-common DTS-related commits from
+>>> Linux.
+>> Outside of extra-ordinary circumstances, we just wait for them to be in
+>> the rebasing tree and do a proper cherry-pick.
+> Exactly, directly patching DTS git subtree shouldn't be allowed. I
+> would rather say it's better to use alternatives like *-u-boot.dtsi etc.
+>
+> However, in this case v7.0-rc1-dts tag should be available soon as over
+> the weekend kernel has been tagged with rc1 release. So just wait for a
+> few days for that to be available.
+>
+> -Sumit
+>
+>> These changes look fine
+>> (but waiting for other comments still) for v2026.07, so there's time to
+>> wait, really. Thanks!
+>>
+>> -- 
+>> Tom
