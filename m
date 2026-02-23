@@ -4,72 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79604EC112B
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428D8EC112C
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 20:28:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8045783C39;
-	Mon, 23 Feb 2026 21:07:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id 9042683C39;
+	Mon, 23 Feb 2026 21:28:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E26483C5E; Mon, 23 Feb 2026 21:07:15 +0100 (CET)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3397083935
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:07:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vucCW-000000008Uj-0yWT; Mon, 23 Feb 2026 20:06:40 +0000
-Date: Mon, 23 Feb 2026 20:06:36 +0000
-From: Daniel Golle <daniel@makrotopia.org>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: Re: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
-Message-ID: <aZyzTP6tmg1OGjU3@makrotopia.org>
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
- <CAFLszThSKbRjufnj4z4xunn-OEUv8kNRngNQ3=EpaNyvyV5ncg@mail.gmail.com>
- <aZc_f3lrmRdE9c3Z@makrotopia.org>
- <CAFLszTgxMeFvKx8nkVUa_PADiVFnv1UB69SyD+C3OiLY_7ku8w@mail.gmail.com>
- <aZypXx3liLvvB4zr@makrotopia.org>
- <a1d06225-bc17-411a-80ed-f39e0450dc29@iopsys.eu>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VV4EYpYQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9E61583C6E; Mon, 23 Feb 2026 21:28:23 +0100 (CET)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 73A2D83935
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 21:28:21 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-673f0b73dd3so2599254eaf.2
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 12:28:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771878500; x=1772483300; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lr/D7+Kbexvv8J5kV98HS/Ri7NL12Cb4TX9gs4vowhE=;
+ b=VV4EYpYQq2K3xbYoW1hBSgED5FIaT1UEwYotWRZfb6f4JY5qilxIijlS63VaFZVTBb
+ /k8HoVq/VuDSvGlLR6cw4Jree2eXBSt3zzaUSyvZP9fEf0730gimGO/dtBkVD2kaY+jS
+ kDrdNBxej0/H8cSA50gNka2RwnkNB6Uyw8HTI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771878500; x=1772483300;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Lr/D7+Kbexvv8J5kV98HS/Ri7NL12Cb4TX9gs4vowhE=;
+ b=vOoW+vnunhCjRtaA+vv/HnyEgFCMl8wcOY3ky2aruow4YnTCkBrp9PgKplRzmBt5rR
+ 7fQw2ma4sJ6P6WUCTkkU1bLCwP/4led1sOxajhq11d7uF8kA9NP/1ButAJWWXd1jbJEi
+ 2GHld8fQBlaBcO+EjKWxtU5+HnZrJT2z/Yu8wmL1rooQBUwT1wAIY2L8B5vBkRE6/I7C
+ X6jPighLAXSg9Neik8u81QXaZbeC9slFqbFVipgWpSQBuWiZZgMH1iKbHztolsQAwhNi
+ fFXsiKiUMYTdLkBAKrpNuKeEQw5LRaXbSj0Udr1KtfgK8PqJxef4JQTklQbUp+A7XkEq
+ V6Xw==
+X-Gm-Message-State: AOJu0YwsQfis9GWF00Rgc2PY2EFLlXz8cxge6dx/D4bSEKofcSyu0dP7
+ IIifldxh7WdEbZt0RECc3zfwU/nVkAesO/i9P1nLRjMlNfPJo3W6Ibb/jrJ1BpBzjRwT8uk9I+w
+ uzZJyHfg=
+X-Gm-Gg: AZuq6aLIMJgGR/uTqK3cPo7o9kvVLQTrzVgEIix/d9mv0midUVxW5bwwvxpb8HxX/mn
+ 2ZoLCwqV9b5oO9U7cLTqgQlCma3VFlnBd5KVcZtPxC9qJT+QqOxOsTsUtIUI/i2tp9ouHFnMdBE
+ iTWGg3q4PtmRMRtvE8/kNVERKi3vQ/J256mLKN41RdtEGgl5NCr5OUVfbpJaslKC6RgFOjpIvw6
+ snmVeVzzTRrS8TGtfEqNZDSDksRfLy2EC3fH+szbSxBYMNeIoHmYN6kRgjnvTh5AlVUBOs50G6q
+ 74cUEt7KLEPFrYRGeFsPx8riUwLLRvebbbudAdjY7r3uheDj4RnunFPW2lZtY1723ZBpYzoBLga
+ +IL+7/J8vpeAut9SzpQfF6uCYBooBwXAUS6PWCdWv+fT3sQevCiNamkW37Pz8AukfGdmnY1Nx24
+ vJy+oAlwQZa2DOGyc+jmt4+OKCHbAscKt/IvnoQBbcXKQtW5MyV8o+2yOdgAhYLIFV26wcu0r+V
+ ybuL7iXffx/KJiEOYEjqdPXkTEOxtVt1e61v20uM+1scjnF8w==
+X-Received: by 2002:a05:6820:22a7:b0:66b:6862:18d5 with SMTP id
+ 006d021491bc7-679c4488c02mr4427062eaf.8.1771878499952; 
+ Mon, 23 Feb 2026 12:28:19 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-679c56ec56dsm6899608eaf.12.2026.02.23.12.28.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Feb 2026 12:28:19 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Eric Kilmer <eric.kilmer@trailofbits.com>
+Cc: jmcosta944@gmail.com, thomas.petazzoni@bootlin.com, 
+ miquel.raynal@bootlin.com
+In-Reply-To: <20260220194808.1146082-2-eric.kilmer@trailofbits.com>
+References: <20260220194808.1146082-1-eric.kilmer@trailofbits.com>
+ <20260220194808.1146082-2-eric.kilmer@trailofbits.com>
+Subject: Re: [PATCH 1/1] fs/squashfs: fix heap buffer overflow in
+ sqfs_frag_lookup()
+Message-Id: <177187849919.3987051.5535085401243530182.b4-ty@konsulko.com>
+Date: Mon, 23 Feb 2026 14:28:19 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <a1d06225-bc17-411a-80ed-f39e0450dc29@iopsys.eu>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,162 +100,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 23, 2026 at 10:30:03PM +0300, Mikhail Kshevetskiy wrote:
-> 
-> On 2/23/26 22:24, Daniel Golle wrote:
-> > On Mon, Feb 23, 2026 at 10:51:09AM -0700, Simon Glass wrote:
-> >> Hi Daniel,
-> >>
-> >> On Thu, 19 Feb 2026 at 09:51, Daniel Golle <daniel@makrotopia.org> wrote:
-> >>> On Thu, Feb 19, 2026 at 06:09:27AM -0700, Simon Glass wrote:
-> >>>> Hi Daniel,
-> >>>>
-> >>>> On Mon, 16 Feb 2026 at 14:22, Daniel Golle <daniel@makrotopia.org> wrote:
-> >>>>> Add a UBI volume storage backend for the image_loader framework.
-> >>>>>
-> >>>>> image_loader_init_ubi() takes a volume name, ensures the UBI device
-> >>>>> is attached (auto-attaching if needed), and installs a .read() callback
-> >>>>> wrapping ubi_volume_read().
-> >>>>>
-> >>>>> Auto-attach works by scanning the device tree for the first MTD
-> >>>>> partition with compatible = "linux,ubi", then calling ubi_part() on
-> >>>>> that partition. The partition name is resolved using the same
-> >>>>> precedence as the MTD partition parser: the "label" property first,
-> >>>>> then "name", then the node name. Since U-Boot only supports a single
-> >>>>> attached UBI device at a time, only the first matching partition is
-> >>>>> used. If a UBI device is already attached, the auto-attach step is
-> >>>>> skipped.
-> >>>>>
-> >>>>> UBI handles bad-block management and wear leveling internally, so the
-> >>>>> read callback is a straightforward passthrough. Note that
-> >>>>> ubi_volume_read() returns positive errno values; the wrapper negates
-> >>>>> them for the image_loader convention.
-> >>>>>
-> >>>>> Gated by CONFIG_IMAGE_LOADER_UBI (depends on CMD_UBI && IMAGE_LOADER).
-> >>>>>
-> >>>>> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> >>>>> ---
-> >>>>>  boot/Kconfig            |   8 +++
-> >>>>>  boot/Makefile           |   1 +
-> >>>>>  boot/image-loader-ubi.c | 112 ++++++++++++++++++++++++++++++++++++++++
-> >>>>>  include/image-loader.h  |  13 +++++
-> >>>>>  4 files changed, 134 insertions(+)
-> >>>>>  create mode 100644 boot/image-loader-ubi.c
-> >>>>>
-> >>>>> diff --git a/boot/Kconfig b/boot/Kconfig
-> >>>>> index 23848a0f57e..89832014af6 100644
-> >>>>> --- a/boot/Kconfig
-> >>>>> +++ b/boot/Kconfig
-> >>>>> @@ -1203,6 +1203,14 @@ config IMAGE_LOADER_MTD
-> >>>>>           parallel NAND, etc.) using the image_loader framework.
-> >>>>>           NAND bad blocks are skipped transparently.
-> >>>>>
-> >>>>> +config IMAGE_LOADER_UBI
-> >>>>> +       bool "UBI volume backend for image loader"
-> >>>>> +       depends on IMAGE_LOADER && CMD_UBI
-> >>>>> +       help
-> >>>>> +         Allows loading images from UBI volumes using the image_loader
-> >>>>> +         framework. Auto-attaches the UBI device from the device tree
-> >>>>> +         if not already attached.
-> >>>>> +
-> >>>>>  config DISTRO_DEFAULTS
-> >>>>>         bool "(deprecated) Script-based booting of Linux distributions"
-> >>>>>         select CMDLINE
-> >>>>> diff --git a/boot/Makefile b/boot/Makefile
-> >>>>> index 1dde16db694..7d1d4a28106 100644
-> >>>>> --- a/boot/Makefile
-> >>>>> +++ b/boot/Makefile
-> >>>>> @@ -76,6 +76,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_ANDROID) += bootmeth_android.o
-> >>>>>  obj-$(CONFIG_IMAGE_LOADER) += image-loader.o
-> >>>>>  obj-$(CONFIG_IMAGE_LOADER_BLK) += image-loader-blk.o
-> >>>>>  obj-$(CONFIG_IMAGE_LOADER_MTD) += image-loader-mtd.o
-> >>>>> +obj-$(CONFIG_IMAGE_LOADER_UBI) += image-loader-ubi.o
-> >>>>>
-> >>>>>  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC) += vbe_abrec.o vbe_common.o
-> >>>>>  obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE_ABREC_FW) += vbe_abrec_fw.o
-> >>>>> diff --git a/boot/image-loader-ubi.c b/boot/image-loader-ubi.c
-> >>>>> new file mode 100644
-> >>>>> index 00000000000..64901a13378
-> >>>>> --- /dev/null
-> >>>>> +++ b/boot/image-loader-ubi.c
-> >>>>> @@ -0,0 +1,112 @@
-> >>>>> +// SPDX-License-Identifier: GPL-2.0+
-> >>>>> +/*
-> >>>>> + * UBI volume backend for image_loader
-> >>>>> + *
-> >>>>> + * Copyright (C) 2026 Daniel Golle <daniel@makrotopia.org>
-> >>>>> + */
-> >>>>> +
-> >>>>> +#include <dm/ofnode.h>
-> >>>>> +#include <image-loader.h>
-> >>>>> +#include <log.h>
-> >>>>> +#include <malloc.h>
-> >>>>> +#include <mtd.h>
-> >>>>> +#include <ubi_uboot.h>
-> >>>>> +
-> >>>>> +struct image_loader_ubi_priv {
-> >>>>> +       char *vol_name;
-> >>>>> +};
-> >>>>> +
-> >>>>> +/**
-> >>>>> + * ubi_auto_attach() - attach UBI if not already attached
-> >>>>> + *
-> >>>>> + * If no UBI device is currently attached, walk the device tree for the
-> >>>>> + * first MTD partition node with compatible = "linux,ubi", find the
-> >>>>> + * corresponding MTD device by matching flash_node, and attach UBI to
-> >>>>> + * it via ubi_part_from_mtd().
-> >>>>> + *
-> >>>>> + * Since U-Boot only supports a single attached UBI device at a time,
-> >>>>> + * only the first matching partition is used.
-> >>>>> + *
-> >>>>> + * Return: 0 on success or if already attached, negative errno on failure
-> >>>>> + */
-> >>>>> +static int ubi_auto_attach(void)
-> >>>>> +{
-> >>>>> +       struct mtd_info *mtd;
-> >>>>> +       ofnode node;
-> >>>>> +
-> >>>>> +       /* Already attached? */
-> >>>>> +       if (ubi_devices[0])
-> >>>>> +               return 0;
-> >>>>> +
-> >>>>> +       mtd_probe_devices();
-> >>>> This should be handled by your new ubi driver for your uclass.
-> >>>>
-> >>>>> +
-> >>>>> +       ofnode_for_each_compatible_node(node, "linux,ubi") {
-> >>>>> +               mtd_for_each_device(mtd) {
-> >>>>> +                       if (ofnode_equal(mtd->flash_node, node))
-> >>>>> +                               goto found;
-> >>>>> +               }
-> >>>>> +       }
-> >>>> Eek this is really strange. There should be a device so you can use
-> >>>> uclass_first_device(UCLASS_...).
-> >>> I carefully considered turning UBI devices into a UCLASS, but it would
-> >>> be a huge major rewrite of how UBI works in U-Boot, and while that would
-> >>> be a good thing to do, I consider far beyond the scope of supporting a
-> >>> boot method for OpenWrt.
-> >> Oh, I just assumed it supports driver model. But surely it must have a
-> >> UCLASS_BLK device?
-> > Sadly no. Neither UBI devices nor UBI volumes are block storage devices.
-> >
-> > Every UBI device does have a UCLASS_MTD parent device, but that
-> > obviously also doesn't uniquely identify the partition on the flash chip
-> > which is used as UBI device -- there can be (and sometimes are, for
-> > dual-boot/redundancy reasons) multiple UBI devices in different
-> > partitions on the same flash.
-> >
-> > What I ended up doing now is to move more of the UBI detection and
-> > enumeration logic into ubi_bootdev.c and have imagemap-ubi.c rely
-> > on getting the MTD device and partition index from there.
-> 
-> There are UBI based block storage emulation, see CONFIG_UBI_BLOCK
-> commits: 
-> * 9daad11ad178646c288aca3615a7ba1e6039aed3 ("drivers: introduce UBI
-> block abstraction")
-> * aa5b67ce226267440e64fadc57d3a21e5842027c ("disk: support UBI partitions")
+On Fri, 20 Feb 2026 14:48:08 -0500, Eric Kilmer wrote:
 
-Yes, but that also only works once the UBI device is already attached.
-Before that, and for any UBI device not currently attached, there aren't
-any UBI_BLOCK devices. However, in both cases we'd also need to scan
-them for volumes to be presented as potential bootdevs.
+> sqfs_frag_lookup() reads a 16-bit metadata block header whose lower
+> 15 bits encode the data size. Unlike sqfs_read_metablock() in
+> sqfs_inode.c, this function does not validate that the decoded size is
+> within SQFS_METADATA_BLOCK_SIZE (8192). A malformed SquashFS image can
+> set the size field to any value up to 32767, causing memcpy to write
+> past the 8192-byte 'entries' heap buffer.
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+[1/1] fs/squashfs: fix heap buffer overflow in sqfs_frag_lookup()
+      commit: e365a269df5d01307390bdf7d6a1081d94b06470
+-- 
+Tom
+
+
