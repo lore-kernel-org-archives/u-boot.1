@@ -4,81 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065A3E8384D
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 03:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 129E4EF5864
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 05:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 243EF83935;
-	Mon, 23 Feb 2026 04:12:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3AD4B83642;
+	Mon, 23 Feb 2026 06:03:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="htKOE1zZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Elcv6+2x";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gwO0+nrb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DFAB83BC9; Mon, 23 Feb 2026 04:12:11 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 0BDFB83C39; Mon, 23 Feb 2026 06:03:37 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD41883642
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 04:12:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7850180050
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 06:03:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4fK5Vw3dRPz9tCf;
- Mon, 23 Feb 2026 04:12:08 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1771816328;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=47ukdhkzxWrvKP9jsPuFYxXlsnPQSEMXG8Y/VrV+tjo=;
- b=htKOE1zZfuciGgw6i9bxRlbGo8qkTRJdSZxdBzORcwNv1j2Djm3etFWaPRxPoBusOROvgP
- 2APkaYX1x9yNPJ5iNqYtatGXT2sT69a0WZMbbPJ8UiH8tl10qGElco0NFmKJZjM91sZCJv
- WjCRO3qwO4zi6GJcV0l7bAIahyvMciP/hewTNM5ghOb6BLkSp2WF9+/nzlb9A0Wf2oM++t
- F1hS2hOe5qSdkAFsB6CTKUAOxVaFSGlKD4xLWAlgVWQCoyJss+pIw8e2k+gA/lUaaXMK0s
- Iah8HeAPft7Rzrg9rYftASHuWxgsz4BDWitX7lcHFk89tU9b1aWbvHjNCX4tTA==
-Message-ID: <2acea5e6-5760-40b3-b8e7-952fc355e621@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1771816326;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=47ukdhkzxWrvKP9jsPuFYxXlsnPQSEMXG8Y/VrV+tjo=;
- b=Elcv6+2xjhTr1KWPAgIYuo+4fl1X1WxotFm1fubCWMA/4QDssW7virKUExI/+G5TaWHPEv
- Vn6H5VxGMTCrNZpv4jIUnoXO/xfRiM1E05Mw+pNWEvlKLaM8cvc25L6gj0W8UioWF+NLBL
- sRMfnbOr19RSixStpjADMBF5wVJMEXPmMXsNxH4VBQoVcy1SmQB2ddvwuJ7TuEN4XNLKJ/
- XCt+VZpvDnNkLK8rWfng0NK7iBRWFNpyaZfP5e/yVMYuyLA4mIoiT3yz9rDzuUgXbdGxVl
- s4xCUJwVuj2RAhslofnpc05A5Es8/jTLPYnzKCLQXzGYo5sepsy1nF1TrfE8Iw==
-Date: Sat, 21 Feb 2026 19:33:32 +0100
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 430BD6001D;
+ Mon, 23 Feb 2026 05:03:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CAB17C116C6;
+ Mon, 23 Feb 2026 05:03:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1771823012;
+ bh=SGSY2ZPjLze8mP5kFIYYwmCWigE+VL1uWs77Ewr1TTI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gwO0+nrb8H2mafyTPon14U2MbDZWH15CZ8JuCkl6RgcwEBG/33VcNzA7lLyJywJ36
+ RpaDVoHGU4K55H7xwkvQSmC8EnMvDIGze0Oh951k3VMkV+RVF0hoQzTbt943jO4LD3
+ oYZbJIgnqu4jgqqtolDcYDoXzBV+0sMAiT3XdBtlCAw6tFiTfFnajZbHIsd8YEI/x9
+ 8PEMpgXDRwg8xR0JFu0TuXnbpXwoFtjMf/9sT+J6R2OE7ZPDMR2SbmDhUly1WYsLVz
+ 3axK09coS1wvSK+4hQiE3RDtd5oWgOPJ/IwDlxXT4Tv+rafV2L/W31CoSWm5mNkmEe
+ gQERxL2/jdFQQ==
+Date: Mon, 23 Feb 2026 10:33:25 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: "Lucien.Jheng" <lucienzx159@gmail.com>, jerome.forissier@arm.com,
+ marek.vasut+renesas@mailbox.org, ericwouds@gmail.com,
+ kabel@kernel.org, vladimir.oltean@nxp.com, frank-w@public-files.de,
+ daniel@makrotopia.org, ansuelsmth@gmail.com,
+ mkorpershoek@kernel.org, skylake.huang@mediatek.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 3/4] dt-bindings: net: airoha,en8811h: deprecate
+ pnswap-rx and pnswap-tx
+Message-ID: <aZvfnT8C-g3DXBgp@sumit-xelite>
+References: <20260221163114.87553-1-lucienzx159@gmail.com>
+ <20260221163114.87553-4-lucienzx159@gmail.com>
+ <20260221164556.GZ3233182@bill-the-cat>
+ <8e1c4274-797e-4f2d-b1ff-c6ef67bffacd@gmail.com>
+ <20260222164950.GB3233182@bill-the-cat>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] gunzip: Implement chunked decompression
-To: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Alexander Graf <agraf@csgraf.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-References: <20260219003351.388722-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTj42WZF3DTOt4HxskNW3qyZJ5_pQ66RsBNdbr13rXTFeg@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszTj42WZF3DTOt4HxskNW3qyZJ5_pQ66RsBNdbr13rXTFeg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: ec541f99353e6e33aa2
-X-MBO-RS-META: rsfpu9t3d1wygjq65kds4p5cpr7u1bnn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260222164950.GB3233182@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,27 +77,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/19/26 2:09 PM, Simon Glass wrote:
-
-Hello Simon,
-
->> +       /*
->> +        * Allow runtime configuration of decompression chunk on
->> +        * sandbox to better cover the chunked decompression
->> +        * functionality without having to use > 4 GiB files.
->> +        */
->> +       const ulong minchunk = 0x400;
->> +       const ulong maxchunk = SZ_4G - minchunk;
->> +       const ulong chunk =
->> +               CONFIG_IS_ENABLED(SANDBOX,
->> +                                 (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
->> +                                        minchunk, maxchunk)),
->> +                                 (maxchunk));
->>
+On Sun, Feb 22, 2026 at 10:49:50AM -0600, Tom Rini wrote:
+> On Mon, Feb 23, 2026 at 12:27:02AM +0800, Lucien.Jheng wrote:
+> > Hi Tom
+> > 
+> > Tom Rini 於 2026/2/22 上午 12:45 寫道:
+> > > On Sun, Feb 22, 2026 at 12:31:13AM +0800, Lucien.Jheng wrote:
+> > > 
+> > > > Deprecate the proprietary airoha,pnswap-rx and airoha,pnswap-tx boolean
+> > > > properties in favour of the standard rx-polarity and tx-polarity
+> > > > properties defined in phy-common-props.yaml.
+> > > > 
+> > > > Update the example to use rx-polarity with the PHY_POL_INVERT constant.
+> > > > 
+> > > > Link: https://git.kernel.org/linus/44f62aa1b1209232cedcfb39097fc1bfbe75bbc7
+> > > > Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> > > And for clarity, my comment about cherry-pick also applies here. The
+> > > script tools/update-subtree.sh makes doing the cherry-picks
+> > > straighforward.
+> > 
+> > Thank you for your comment.
+> > 
+> > I checked devicetree-rebasing.git and it only has the v6.19-dts tag.
+> > 
+> > I will try to manually cherry-pick all phy-common DTS-related commits from
+> > Linux.
 > 
-> As you mentioned in the last version, there is a compression test in
-> compression.c - could you add a version of this function that takes
-> maxchunk as an argument and call it from that test? Reading an
-> environment variable to avoid passing a parameter seems pretty odd to
-> me :-)
-Do we not want to test the command line interface ?
+> Outside of extra-ordinary circumstances, we just wait for them to be in
+> the rebasing tree and do a proper cherry-pick.
+
+Exactly, directly patching DTS git subtree shouldn't be allowed. I
+would rather say it's better to use alternatives like *-u-boot.dtsi etc.
+
+However, in this case v7.0-rc1-dts tag should be available soon as over
+the weekend kernel has been tagged with rc1 release. So just wait for a
+few days for that to be available.
+
+-Sumit
+
+> These changes look fine
+> (but waiting for other comments still) for v2026.07, so there's time to
+> wait, really. Thanks!
+> 
+> -- 
+> Tom
