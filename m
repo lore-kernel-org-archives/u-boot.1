@@ -4,98 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FA9EC1117
-	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 431C0EC1116
+	for <u-boot@archiver.kernel.org>; Mon, 23 Feb 2026 17:52:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1C2E8063E;
-	Mon, 23 Feb 2026 18:52:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39B4583E36;
+	Mon, 23 Feb 2026 18:52:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ifY+CoLO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NOyeMsHw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C8D78063E; Mon, 23 Feb 2026 18:52:41 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id EF1F083E36; Mon, 23 Feb 2026 18:52:42 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1252283E13
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:52:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24BBB82BF2
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 18:52:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2a79ded11a2so31101235ad.3
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:52:38 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771869157; cv=none;
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2a95de4b5cbso42434995ad.1
+ for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 09:52:40 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771869158; cv=none;
  d=google.com; s=arc-20240605;
- b=ddfctVk129Vlox0Ao8DJUe/ZX87BZDQSblFar+6oJeRYANJrgu11DNEQ5vPX8NR7Fn
- GNTpwDzuQhRMS64XwfkqfwQRgvMIvVd9WwDOxlKexiWP4rkh4H0qqGOAvhWhi5jyPwMR
- MPuFXtqXqrGrcAs25tjG/H4uQD0w5l6Lsi5P98KGV1LYvFcmOgh8KP6B3WCjXdIJ3XZT
- nEZWsb6T92zpnvW9BDNMOElwEX60jOv+POuNjPT5njr/A1M4ec+cRWXtPKB7IPxoJARw
- Av6Zaym81W1zKEi9uVRat96jgPR1NMDHasoyvVuxM5lhpe+Ib/iHYb+y0F0STk7M7TjF
- q8gw==
+ b=SLXY/EavdcC4XgQbINumcvKQzmTn/kKauBb1eO5f3k/GtVif94uCM2TL5ghPZwzxjd
+ wsM3hzXnbHApiol8/bhq9nvwUq9EEQ3w+LGEZthp5IUiRByIAzIQc2AuwFPmenSZYKE/
+ HgQt8YTEEAJX+Yi2HZqfc7beKH5eQToIWi6xHtgsKao+z8CiJ0f/L3jBn6g46zevdpM2
+ GKIS5XhHyg2EbStYEWT2LPCyQipsz7KrNa33dCsK59+n8lXmfPhplqlRWuJkpeH1y1h3
+ aI0htPY7ul4oG7KKZrQ6l31dwVt/CfnUJii0QE28WztIUEUk3d9vMue/wRR4ezQMPxvh
+ u+6w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=hqY4ALRlIokAIuu6NIgSe2VFnxkwXhpSEaAqEzyoJOg=;
- fh=89JGekwhSyYOPQOy2uyR8LelJwXS2WWWd2nllJCIfB4=;
- b=UfENoI1YJ3UkwNCEilctvXV7Gcw7H2ysEv+4wqlG2JNScQoYpQfhZ9fi6giQUmafO+
- OFPDlWKwdlp5Mu7lBIcCVpZf5PjX1tETjf8NZL++0jerDdW1ZWlbPr2TjjRe+YNuqGp0
- bEQDe0mptF9pkpOIQ06b/PbUe4WJ5Mh3el0h/WaDveeVh/9a2fMrNOAz1jg/PZgNPzSM
- J6rW2IvfPWf8tOg2s2W5HMxN7jXySfB1sSNRYR00Hw5SeKPniuXUdhQRWVPy4Y1l1cq2
- k5xVAn9mKr8EgtoKvWOa/lPTurCNFz7xsLJD8QPkTw5b4wl+jNcz0MwRnOZCdqAPiz33
- 5GCg==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=2vEupwHhDzPCIfX33HAmitO6y11FavY5uy1iCHo0Ub0=;
+ fh=zJE/Fo8l/szBmEOetLct695NX5uRaYsIjDN5aCBW4wU=;
+ b=V6v9BzPCKpUHIIKwiZTadDejaeBnYxj7lfxWc9CefKXzxIDvaUs5pKtQLDgHUDYalm
+ NpRjYYyrdFlTD0t003AhZ3ZhTq03M3M5qbRIHsr+ReM64wrHhZR6E9C/dz0LsmV/ibA/
+ pFD59JQdgWw3FtXv8tAkw9AXrJuiGB1SWZCjVUorPtXyBHEvjw2c4uB1HbAK89mCrq4B
+ 8O8QZfUIy9aPqVc5JZApveG2k5IjKjPcKRD0AlOFrVDyK59zkBupn/KRPQI7TIYGMcbR
+ cHKnUA4a63QrCoq3YT6mllbxzDviNIRunsDn6/Qm0/Zk0c8aUPzHyKr49leU9yu5v9Pl
+ ivIw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771869157; x=1772473957; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hqY4ALRlIokAIuu6NIgSe2VFnxkwXhpSEaAqEzyoJOg=;
- b=ifY+CoLOAElzE2Cs+hw2l+oE/V303Mb7m8w3XMh9c1d/X2dufB8soNzW0z+V5YM6OO
- bwxHdAEMVzLnmCh3EhCL08F9BfspM7jEKcy87BlADblZnBRR+h8oGKM4dFnpjuYMqaLo
- LxACUW2ymLTjy7b1BKaSTtLYtXIwUz2FrDg2w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771869157; x=1772473957;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1771869158; x=1772473958; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hqY4ALRlIokAIuu6NIgSe2VFnxkwXhpSEaAqEzyoJOg=;
- b=keCrvE4p+A9f8k32ulAAYkJQNXWZwemKpHSam7CvtzeJ2cl0/+9mMej2mINddxme3k
- J3dCAjYafiMWc5Q/hMlEKmfhedS1cF+8JKgmBM/tFqv8Iroe4D+V5nUytBVihOKO/fyl
- nDJUTf2HseJx2U1gCs/9mNKtespmmyzjtGQttIXEcECHkBYF06q9Mnb/q2XScL54AjT3
- 53GWnnHVsgfQW9LejbIpIMbyQRs9XvSz4IJDR8xNpIs7sjxBsCym5Wz1GHPVpgxOdC4D
- vaax3vkAXhY1eQGPtlBUTnERuB5BeO6LhqXKkdhdDI71d0o81eV4zkyHK63SNBb1JyjW
- Qkkw==
-X-Gm-Message-State: AOJu0YzWn+8voGsYR9mGvon3c44BHVADltHCStRKIbnYNqrA2zG1FbB/
- Mo111glQ2xsVlxIxVrbgaNGG0xdLoFqGzNnMwSODz4p8oQjmUb7WDozlDE6VbWcjXTHdpxfA4OJ
- 6dq9/ZgL49yDK0Qp9ebqMH2xcng4XD5/chLlLKCUY
-X-Gm-Gg: ATEYQzyO28pzpyyewSn2KzfN+aSSZdTFjPksSoWa3+YGswj4yfCS/t6YC10SJ350iCu
- HcO79Wd59tsNW4zEFnedxX9909BcyyJbKuAU/QERF5hiuYTYVaEE8N12D3h7jZqa7KIgAzifepz
- 5WhmC0pP6aEuSDKtfXarzQT5O4YHuN2Jvxm34zjmabAdGCDehy9wTN75bL52ukf36YerwXk+2ac
- +TiiEJpXrj7F2pfZvxpt9hrmEgE7iEtOMas8sWlql1rRuiBsASWKFlSCLnhoV+RudMHtr15R5QX
- CKdGmQ==
-X-Received: by 2002:a17:902:db02:b0:2a7:3db0:6efe with SMTP id
- d9443c01a7336-2ad743ffd1cmr83409355ad.12.1771869157377; Mon, 23 Feb 2026
- 09:52:37 -0800 (PST)
+ bh=2vEupwHhDzPCIfX33HAmitO6y11FavY5uy1iCHo0Ub0=;
+ b=NOyeMsHw6Mo8GPb5HA2G2umFopk9rnkJ68nOK2TZZYUj9spN2Za7pD77CGkfht72ba
+ HTVDZ5xOmQIZhVLQPHE/iZOX10EhGmOR+rrCysihWL+6CLiew/wvxZf+Dh5wfJsnh2E0
+ kqlPoj1Ua5MsuWd31vmlkj33y12geujCDVYdg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771869158; x=1772473958;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=2vEupwHhDzPCIfX33HAmitO6y11FavY5uy1iCHo0Ub0=;
+ b=qSaEcf3ykb1LhRFf3/KtKttIRenWy3h/QvpC6LGzkePr8FEjIjvVOM8SgQkwjgMNHE
+ Y233AWWzkQO2w8+smUAYzSJA3MueB51vc5tUzQ3bWvaDcNjSjonmQMnIxAaRdflqLPiY
+ wwJfwd6DTLjk8iRTR3J7Uw2T6NBOjun0/VkGlmPg5E0RIT0z+edgPk06ECLM/ChPsDsr
+ +Z8LRA7urYyDnkVLEFvovl/JO+TJocTBAa59oZA1/noJdzcJyTGVb9ywWbrW/Pr3lls+
+ jafrq6FHLoaF+ef2l9YvagbmgTViEZBE+VF09NySejla8KZpA+xA6B5qUaIIL7WG3UAF
+ IuzA==
+X-Gm-Message-State: AOJu0Ywt6cTlhRdionqhAlPXb3H+ZLJJhhjDqSvCdNVKXuGCDpsjD57t
+ h+X5f6ecYQ8CBgjzWwRcyFNOpligmIHGytm+HwhJSMn2qt/8y1oJhVZ7rJfcvRG+p8OwK220Qft
+ 1uaaPU2Y3qKcKI6Pqedwc61R3tzhSVK27Zc+9xCx5
+X-Gm-Gg: ATEYQzwfqgc4z9QbzVIHTxNV5j99DmHerE/M6D6rZgHJ7yvsuoPr7ELBSpQp5nx5GAR
+ OhFX9cAqJm+p/Vu/UTjqG8pbbACrEiRAYtEwxlN1h5iww7lI7eKAZt9lUZqYPn4gR/DS+VLi/WM
+ EVCl52srXMOWC4AjwCD6kz7bT7EdZZKP/O51GJ9RZ3yuWVFbdIXl703XJb8HPFxEfF/kOy4WnlS
+ LyRF+z4fR/3whB+4yBXRUe5ZS14v6YveoPgITtpq8rNJvrG8656hxNA4IHxvkWlaDIUUE8dYftq
+ pdot+Q==
+X-Received: by 2002:a17:902:d549:b0:2aa:d61d:79bf with SMTP id
+ d9443c01a7336-2ad74527c4dmr92569965ad.42.1771869158596; Mon, 23 Feb 2026
+ 09:52:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20260217115333.503359-1-Wojciech.Dubowik@mt.com>
- <20260217115333.503359-5-Wojciech.Dubowik@mt.com>
- <CAFLszThD4sb6dDOq_8-XJ-QapoxbuHOZJt0rRJBeydpr6fhFJw@mail.gmail.com>
- <aZcq99-dMBpCNqzv@mt.com>
-In-Reply-To: <aZcq99-dMBpCNqzv@mt.com>
+References: <20260217-ofnode-to-fdt-null-v2-1-915e627d201b@bootlin.com>
+In-Reply-To: <20260217-ofnode-to-fdt-null-v2-1-915e627d201b@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Feb 2026 10:51:22 -0700
-X-Gm-Features: AaiRm53RMb3GEJGKDivqRsNbmC4cEgbix1ROvaL2XNJgjNmcAWWBzXbeoqhO5u0
-Message-ID: <CAFLszTjb0aWy=8_+fc+Rgyf1Q80rbbsMO_N2b7h+PAv_ih11WQ@mail.gmail.com>
-Subject: Re: EXTERNAL - [PATCH v6 4/6] binman: Add dump signature option to
- mkeficapsule
-To: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, trini@konsulko.com, 
- simon.glass@canonical.com, quentin.schulz@cherry.de
+Date: Mon, 23 Feb 2026 10:51:12 -0700
+X-Gm-Features: AaiRm53v-J1eue1vdibtoPSK7W8xAekhpBQYdZ_-v3ymyQGZDDboUg6C-c-TM9c
+Message-ID: <CAFLszThZ=5LFyNV20Pze5mJXB2tRcRpF0o2oTvBUSpYqTJTF2g@mail.gmail.com>
+Subject: Re: [PATCH v2] dm: core: Don't allow ofnode_to_fdt() to return NULL
+To: Romain Gantois <romain.gantois@bootlin.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, 
+ Yannick Fertre <yannick.fertre@foss.st.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,75 +114,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
+On Tue, 17 Feb 2026 at 02:28, Romain Gantois <romain.gantois@bootlin.com> w=
+rote:
+>
+> The ofnode_to_fdt() function may return a NULL pointer in multiple cases.
+> Or, this function's return value is often passed directly to functions su=
+ch
+> as fdt_getprop() which end up dereferencing it, thus causing a NULL point=
+er
+> exception.
+>
+> Don't allow ofnode_to_fdt() to return NULL, to avoid a NULL pointer
+> dereference.
+>
+> Reviewed-by: Rapha=C3=ABl Gallais-Pou <raphael.gallais-pou@foss.st.com>
+> Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>
+> ---
+> Changes in v2:
+> - Added back a dropped cast from cont void* to void*
+> - Link to v1: https://lore.kernel.org/r/20260210-ofnode-to-fdt-null-v1-1-=
+4bed28680f35@bootlin.com
+> ---
+>  drivers/core/ofnode.c | 13 +++++++++----
+>  1 file changed, 9 insertions(+), 4 deletions(-)
 
-On Thu, 19 Feb 2026 at 08:23, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
->
-> On Thu, Feb 19, 2026 at 07:31:08AM -0700, Simon Glass wrote:
-> Hi Simon,
->
-> > Hi Wojciech,
-> >
-> > On Tue, 17 Feb 2026 at 04:54, Wojciech Dubowik <Wojciech.Dubowik@mt.com> wrote:
-> > >
-> > > It will be used to capsule signature verification.
-> > >
-> > > Signed-off-by: Wojciech Dubowik <Wojciech.Dubowik@mt.com>
-> > > ---
-> > >  tools/binman/btool/mkeficapsule.py | 6 +++++-
-> > >  1 file changed, 5 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkeficapsule.py
-> > > index f2ac654db81e..7638c941a8ee 100644
-> > > --- a/tools/binman/btool/mkeficapsule.py
-> > > +++ b/tools/binman/btool/mkeficapsule.py
-> > > @@ -38,7 +38,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
-> > >
-> > >      def generate_capsule(self, image_index, image_guid, hardware_instance,
-> > >                           payload, output_fname, priv_key, pub_key,
-> > > -                         monotonic_count=0, version=0, oemflags=0):
-> > > +                         monotonic_count=0, version=0, oemflags=0,
-> > > +                         dump_sig=False):
-> > >          """Generate a capsule through commandline-provided parameters
-> > >
-> > >          Args:
-> > > @@ -53,6 +54,7 @@ class Bintoolmkeficapsule(bintool.Bintool):
-> > >              monotonic_count (int): Count used when signing an image
-> > >              version (int): Image version (Optional)
-> > >              oemflags (int): Optional 16 bit OEM flags
-> > > +            dump_sig (bool): Dump signature to a file (Optional). Default no.
-> > >
-> > >          Returns:
-> > >              str: Tool output
-> > > @@ -73,6 +75,8 @@ class Bintoolmkeficapsule(bintool.Bintool):
-> > >                  f'--private-key={priv_key}',
-> > >                  f'--certificate={pub_key}'
-> > >              ]
-> > > +        if dump_sig:
-> > > +            args += [f'--dump-sig']
-> > >
-> > >          args += [
-> > >              payload,
-> > > --
-> > > 2.47.3
-> > >
-> >
-> > It looks like there are still two problems with test coverage:
-> >
-> > tools/binman/etype/efi_capsule.py                          65      2    97%
->
-> Do you know what the second one is? I see on my setup only one:
->            if 'pkcs11:' in self.public_key_cert:
-> ***            public_key_cert = self.public_key_cert
-
-It looks like you have fixed both, in v7!
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 
 >
-> Regards,
-> Wojtek
+> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> index cf1cf8abfbe..3a36b6fdd03 100644
+> --- a/drivers/core/ofnode.c
+> +++ b/drivers/core/ofnode.c
+> @@ -164,15 +164,20 @@ void *ofnode_lookup_fdt(ofnode node)
 >
-> > tools/binman/etype/fit.py                                 358      1    99%
-
-Regards,
-Simon
+>  void *ofnode_to_fdt(ofnode node)
+>  {
+> +       void *fdt;
+> +
+>  #ifdef OF_CHECKS
+>         if (of_live_active())
+> -               return NULL;
+> +               panic("%s called with live tree in use!\n", __func__);
+>  #endif
+>         if (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) && ofnode_valid(node))
+> -               return ofnode_lookup_fdt(node);
+> +               fdt =3D ofnode_lookup_fdt(node);
+> +       else
+> +               fdt =3D (void *)gd->fdt_blob;
+> +
+> +       assert(fdt);
+>
+> -       /* Use the control FDT by default */
+> -       return (void *)gd->fdt_blob;
+> +       return fdt;
+>  }
+>
+>  /**
+>
+> ---
+> base-commit: 8666b16015d4212facacc514e2eb626f3630dcf0
+> change-id: 20260210-ofnode-to-fdt-null-95a9f357819e
+>
+> Best regards,
+> --
+> Romain Gantois <romain.gantois@bootlin.com>
+>
