@@ -4,177 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15265EFB801
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 08:23:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC85DEFB819
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 09:03:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5624583642;
-	Tue, 24 Feb 2026 09:23:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 4697383642;
+	Tue, 24 Feb 2026 10:03:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="prZ0i+ek";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Ox0NZkYQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA17183981; Tue, 24 Feb 2026 09:23:31 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id E633F83981; Tue, 24 Feb 2026 10:03:48 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EDD580050
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 09:23:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B66AE82BF2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 10:03:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
+ spf=pass smtp.mailfrom=patrick.delaunay@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LBUQnWmjy4iG213oq0W1L805hO+xUn/8CBrYW3o+fgSBttN7CO545q4eYIMsQd+TaK2xHPeCHJsu531H/3LoXerEDwJITN1IDhtfSTwu9+EIKhiSb4I+gKgRt7scy1Krm3t6FVkXNAkO6ebyJ23MK2YHQNbzezKvsLY4Jt3Ls/5+pN1jJ+TvuMjLeElo5veIpnqocBBNhmZIUS+LkpCj4RAs9RR0/A8Elk5dKJmzwx48JoDxu5eA4/ePluHNxBjq/61hQ8f5uq52ooUV7NVHtZuo0zo/OrQG5YnNrmZrV7Fj7HAzcHiKK26jOn2i6vv7mYF9DWc1wHF8DqFn/oECEQ==
+ b=qA0N4NySS75lZy5c013rbifoVmwKIT9D43uQVFFP5NKojMtudFsII60gOk6X8UxoWJefvdlYO+rHioOsyVN2cCaqZdU56ejxMRhgfDVuw9T3aDLVpPIztNrwbMF8T54XYYFaY1QKbYjaNgUi7KEVdugXx6o9vCvLpvFwHJpbaN5mrb2TXQaRiSFBXdzCzzleawk7VjOI68UzL7SFKgHtbC2NgwId8hgsOLDdDmZI2dl+/dCf5ezjNs6leifcQrFitGFxgJ57L8tCznaiq30npzw6ClvXDN4o3l+TfCJEM97v0Me6RYoEPdwTG4cGx5QsBqLXlyVbrnPdSzw4wuMJ8w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9bMIVqgiqE0VRjdM1GvEGacrFdJv4JyV3scykHhiUiA=;
- b=l2G2xMx0UpvvQNeyFxYodZ25Ddz5gKwI/Gq/EH/Vld+UJ0CgqcapFn74Qh8jmOvv17hI/lI/JcgGN/Js85/m8wRTrfAv+6ctnzeRuz3mbsLlTrUIfz+InxlWt8kic3OxzGUiTM2yrV3MM7Y3JNP2BuvWQzWQtHe/hspKEQues9We44vZYcmXgjWYQFCWlJMITiBeM2FsSPk531p8nsRpo4Ut6d2p9w4IlOwQekA58asIu1AFu+O1SAdoXp/+0vC5q+P4vKJldA9G02ZmavY2jJR/t2KLjwYqdwasyhWlcx1wCh9bfvjWH1REyLu50VLjd8mZnqiuKzBbRgTOFlvr9A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ bh=/PDBTpAXxtF2BIwJgHhj/1FN0Iu3tjRieByN0emoQz0=;
+ b=y+kQtyOR0L+TGEo2DK2OPZUsJzoPDEQXiYHHYnC8zV+3NUvQHcgFVLXyBpqiYiNgothb1fXVwmO3drLLecyRQvgjfNfAy5pE6iGKglYgUlnpIsrvUH8zqcqTH7+VNcmQQ/vHlg1wLYPbYL6YiIUDi3aeeXG4TIAkmTZlTs+cVilDU37y/5CBWNx8UcvQ9y5Mn2wosNpfquEzjwEaqkzevlDEN8Bk+j0cLgXMdIwOprjHvRZgZ6NA6s3SFQQaVBy8BwbxrVAm1k9+5N1PlKOq5RzMeuVub8cHCvRsZGdriEge9FxXEHOwJetvb6bQd3qGvHQbiwbpNuWSRqUx1thrTw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9bMIVqgiqE0VRjdM1GvEGacrFdJv4JyV3scykHhiUiA=;
- b=prZ0i+ekOpQLMKBqeVupzDtfioBM0vvL8Gn3kLpol/5kuWtx88wgO7uAUvSHePbk37RICgqnfcfJJokD/fdIoWw8l7rTbeE3KD4oVnc6pTFhMbq9cbMc7uSn0klPl3Y0MncAiK96YrABAkRxgaHZMHIJAtdh02CspxXgbIx25kjmq2NE/ZsRVBOFIDgpr3g9RSYkuIrhuNAGVvJzrhPnX1j0w/ix922+I2Lpv18Ka9WImJ/ln6ofBiHs9seKIwUMeII2XTqQ6kMwU3pW8hn+17NkKQKOBP/EF4yGrcP19gdgYNi2t05+cAJGffMMZgyxDXk6Pfmknoyg2+7RCkibzA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from SJ2PR03MB7072.namprd03.prod.outlook.com (2603:10b6:a03:500::15)
- by DS2PR03MB8466.namprd03.prod.outlook.com (2603:10b6:8:333::6) with
+ bh=/PDBTpAXxtF2BIwJgHhj/1FN0Iu3tjRieByN0emoQz0=;
+ b=Ox0NZkYQDO2IB4TZgUEgqPVvHp0h0cUu2XIBXLiCzLCC3Tni8v8V/xEZkK7xHrojOQsfsTdM3XEUER/MM/6Nd4UIFpzEXIco+vdVIdDyBMeyp6mRmkCRFJ4tMdR+p6DlzeC7CUVq61pcJu2U8SZzKAq+jG2QKVmvYgkWIKJewZ7UctRQkfTypZ/0a27hnUWsraPcgjCAPwT5lUiKmo1rfmJrMXnHoAVQ9+iUzKfMcHtvuoSPppoVbLXP0nE/+GOE4MeVB3hyv6MAz6Hdw3BsNp7k+diVAO5ytoaLG3LwknSVkO0W43fV5x6WCYX/rgs5C0AMP4kD2dQYCYvblIu6cw==
+Received: from AS8P251CA0025.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:2f2::20)
+ by DU0PR10MB5512.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:31d::6) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.17; Tue, 24 Feb
- 2026 08:23:26 +0000
-Received: from SJ2PR03MB7072.namprd03.prod.outlook.com
- ([fe80::7d1c:7fcb:cd62:6cd8]) by SJ2PR03MB7072.namprd03.prod.outlook.com
- ([fe80::7d1c:7fcb:cd62:6cd8%6]) with mapi id 15.20.9632.017; Tue, 24 Feb 2026
- 08:23:26 +0000
-Message-ID: <52a4859d-d6e0-4e20-b78b-34213c230bc5@altera.com>
-Date: Tue, 24 Feb 2026 16:23:19 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] arm: socfpga: Add call to
- socfpga_sdram_apply_static_cfg()
-To: "Chee, Tien Fong" <tienfong.chee@altera.com>,
- Sune Brian <briansune@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
- <b25f6c14-7db2-4517-a3ab-e2c55a52818c@altera.com>
- <CAN7C2SCC9L30S2BNYUzRE1jRJeQ2H1d6fq_Hgsu7uPge_QgsYw@mail.gmail.com>
- <CAN7C2SAOLdokAaVcuMPWMTS4HsY-4d2dhnkwLadqsGS2qAsKaw@mail.gmail.com>
- <4b6327d1-681d-46a4-b672-6d53fbfa1e89@altera.com>
- <CAN7C2SCbyuBz4d8QmqGUNFBGjhGaSFyZD-J3GcYy9r3DGNSjvA@mail.gmail.com>
- <4d3e22e1-3f7f-4c19-a529-157eac6d0f61@altera.com>
-Content-Language: en-US
-From: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
-In-Reply-To: <4d3e22e1-3f7f-4c19-a529-157eac6d0f61@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI1PR02CA0058.apcprd02.prod.outlook.com
- (2603:1096:4:1f5::9) To SJ2PR03MB7072.namprd03.prod.outlook.com
- (2603:10b6:a03:500::15)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Tue, 24 Feb
+ 2026 09:03:40 +0000
+Received: from AM3PEPF0000A799.eurprd04.prod.outlook.com
+ (2603:10a6:20b:2f2:cafe::bf) by AS8P251CA0025.outlook.office365.com
+ (2603:10a6:20b:2f2::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Tue,
+ 24 Feb 2026 09:03:25 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AM3PEPF0000A799.mail.protection.outlook.com (10.167.16.104) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 09:03:40 +0000
+Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
+ 2026 10:05:47 +0100
+Received: from [10.48.87.244] (10.48.87.244) by STKDAG1NODE2.st.com
+ (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
+ 2026 10:03:39 +0100
+Message-ID: <6f9cd5cc-550b-49b3-a38e-339050447f8d@foss.st.com>
+Date: Tue, 24 Feb 2026 10:03:39 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] stm32mp: cmd_stm32key: add support of STM32MP21x SoC
+To: Patrice Chotard <patrice.chotard@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Thomas Bourgoin
+ <thomas.bourgoin@foss.st.com>, Gwenael Treuveur
+ <gwenael.treuveur@foss.st.com>, Lionel Debieve <lionel.debieve@foss.st.com>,
+ Yann Gautier <yann.gautier@foss.st.com>, Nicolas Le Bayon
+ <nicolas.le.bayon@st.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Yannick Fertre
+ <yannick.fertre@foss.st.com>, Cheick Traore <cheick.traore@foss.st.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
+References: <20260204-upstream_update_stm32_cmdkey-c-v1-0-d95374395840@foss.st.com>
+ <20260204-upstream_update_stm32_cmdkey-c-v1-1-d95374395840@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20260204-upstream_update_stm32_cmdkey-c-v1-1-d95374395840@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.244]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
+ (10.75.128.133)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR03MB7072:EE_|DS2PR03MB8466:EE_
-X-MS-Office365-Filtering-Correlation-Id: 66cd572d-3d31-4954-4a73-08de737dfae1
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A799:EE_|DU0PR10MB5512:EE_
+X-MS-Office365-Filtering-Correlation-Id: fda16003-9b28-4389-990a-08de73839aae
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UEh4aStlR1RuekQzRUcrTExNMTRxMnYxRCtXbUVlRGlqZ1dWVzl3OHpiVExk?=
- =?utf-8?B?Z2RRTm9WSStDMFlTZHpsZU5SZlhTc29UeHZzNWFNVU5oVFNmNHNOTk4zbTkv?=
- =?utf-8?B?QUxNK0pITWFkY0FCQ2lHaDd4UXV1LzRYQlNOZUY5cGxKOFdRNTV5ZkNEcndJ?=
- =?utf-8?B?ZzdqTTJkbjdDQm5YQjZ6bmFuaFJZK2kveCtrWEZ2bFF4dm85UkorY3R3MEwr?=
- =?utf-8?B?by9kMHpxbW40NkRpQVk3b1NFVGg1d2ptUFowZUNrMWxFRWFLSUFrZDBsRXBV?=
- =?utf-8?B?clJBRnlvWjlLQmhNRSt5WmE0cWlXUDlpVVViM2xqVzBWbDlKZFRkUWtKQU1r?=
- =?utf-8?B?eGpaMlh5cmxzaGlOQ051Mkt4cVEvYkRJN2p1TFI1Tjg5TnZaT3pIcGU1TjRt?=
- =?utf-8?B?WlFGWFdQd2F1OVlYeGlVdmxjbG5oN21pZ2R6M3RSeGJDMWxrQ1EvbVJ4UjBt?=
- =?utf-8?B?K2dJaEdNeWN5SkFnZzJVSFVOSkpObllKY21xUWxqeHR0L294eXRaWHdQazRI?=
- =?utf-8?B?dHJkclVKd1lCMndUNEY1ZTVmMEdxMDlKdndtRmxmMnBQa2M4NUZYUmZWZjlw?=
- =?utf-8?B?OTdKT2RycUZRVmFvWUIrOXp4T2tuekVBQWlmRkFOTjk3VGxpMDZROVNUbnNO?=
- =?utf-8?B?K0ROQkZlbjFGMmpEVVQ2MEhuSmNXcDQ0c3NCTXFHb25CRUU4ZWJIK0pIdCto?=
- =?utf-8?B?OVNkRWtyeHBPSDQ4dWxtM2kvTG9SU0hzQmczdlcyb3NOL2JCWWhQWnc0S2ti?=
- =?utf-8?B?dXRZQ2ZDSi9sbFducS9sNG9IR0hVVlFPeWVKdW5FNEZtMnJWVDIvUTd0STJI?=
- =?utf-8?B?UXNiNGVNRjh3Z3FjeVFydENjWDVHQ1BHK1hjbHhJdmoyUlB0azQ0Q3pYa01O?=
- =?utf-8?B?OFkrUlVxTnR4cCs3RG5JL0VUNjB6UTZuTE15aDFOMU4wNzdNMWdNWkw3bjBo?=
- =?utf-8?B?T3FVQk5ic3E3YzYvdUhuWGRmRnpSMHJ0TzQ4ZExtejUzNzM1ajM0Z0FJaHFC?=
- =?utf-8?B?WG5qVit4NWI4UGplWldnU2xiUmhKeWgrTitFOS96RmRvUXRJNEYvSk93R0pz?=
- =?utf-8?B?SUdjK3RuNXpQeGZHYmpIWjJwa3pkTHpid3ZXWXF2cWZVQWVVYXNQcU9sRDBp?=
- =?utf-8?B?Q2hOa0hPdUs3T0dvU2EwUFY1KzROazBSMGlqSXdqQjVmY2JaamwwWXYxczI3?=
- =?utf-8?B?Qk9WeFprZldMWWFuQlI4dStWRHBwN29WYlovcjV0eFUybHdScytETURxa0xT?=
- =?utf-8?B?VHA3NndYVWpBRTdIeFBMNUpIcldKVWNKYWNUT1d2eFpiYjZ1aWFya2FUelNu?=
- =?utf-8?B?RSs5dyt2dFZJQy9iU1pvZ1N4ZTkvand5aWErTW9ZZlhMR3ljUDU0aEdheEJh?=
- =?utf-8?B?cmVwZXpZQzhWQkhQaUthVHllWFFWTGN4Vmp5MkNrYUQyTHZBVFR2TjhNdmpx?=
- =?utf-8?B?VTBYVVlpemlZRm8vL3g1SWU0K0xRSjRCSTVHR2I4c3ZzMCt4VHRzdndoRzNl?=
- =?utf-8?B?N1d3dnAzYVNaOEkvOUgxcEgxT25DV3ZMdnVaTXdwZzY2TkJYTkFXT0k5NlJM?=
- =?utf-8?B?UFBkS3llaWZlZUxwbGFXUkV6eEN2TlpCSFBVNjA2NmJMaWdSbm01eFVpb2h2?=
- =?utf-8?B?UGk2cHNpVnl3YUhzcWU2aXlsL2l5dlhlR3dDOVlLa0dja280M3FsWUJ2ZytJ?=
- =?utf-8?B?OG9yNHV2WUJ0azNkVi9FRWZOUWJlSmJJM1VyZ1Vrb2lIMnppU3pmMUpLM0Y5?=
- =?utf-8?B?ZW56UTFNZW1SazRIaVE0WU1DTzlmbHA0bUloS3FZc2V4aGlBS1NSVXpmN0RX?=
- =?utf-8?B?VUlXc20xamtSTG1TVVYvQ29QcWRma1FGc1JsWWdENzVwMXdZRnJMK3VhVWVG?=
- =?utf-8?B?aXFPSnpGaVNIRTVDUWs1WnVIMTFnaXVIZ3QzRFYyZWZOY2tJUStHMmVyclJB?=
- =?utf-8?B?RFArZmt3ZTJPOVNvUWY2cmlIVXpvRnFsMFA3dW5HUC9mS090K050YUNLcWZt?=
- =?utf-8?B?cVhTMjQ5Z1pQeDJXVkVEYVk5a0d0Q0tOL2tURXFJTzBUOUdQRFRLRVUxSzZt?=
- =?utf-8?B?dVE5U1FQazdrNFBLeE9vblIzMjRIR2YyK0xDVkc4eEVJOUJKenA1VXFMNUZm?=
- =?utf-8?Q?+0lA=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR03MB7072.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|36860700013|376014|7142099003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z1BzOXFnU1BaRDd4UUpVVEV3TSt2MWljbjZKa0JmUWFDZlpSQVZEcExKUmZ4?=
+ =?utf-8?B?UDlxajRNd05BZFVWTGxMSWp2QkJJMDVhMngwNzMxaDZGYnlMckpyRGRDaldx?=
+ =?utf-8?B?d0cxRzQxU1NhdXdYeTVwMTBsWTRhUDlvWThjUDJybVlPR2NhN1RuQmJwMGVt?=
+ =?utf-8?B?MjZvUnNQcm9PVGR6VWxBUUtIcG9vLzFxd2N1U3V4MStYQzAyb3hiaW1XeUVu?=
+ =?utf-8?B?dkNQbDBmc1FKV3Z1d1pyWTcxdkNaWW5tUHA5eWhVZkY0RmdiK3F0RmozRHNt?=
+ =?utf-8?B?L0hiOTE4UFdGTVB5WUFuOXpZd1pzWWV4MENYWklPUk96WVpnU0o5aVlUMDZk?=
+ =?utf-8?B?ZWdhMmFXYmhZT3dIbjRlVVppM09ZQjZQTjVMRFRuK2grVjFBMldSR1FVZS9h?=
+ =?utf-8?B?S1R5M1JXRU1vTUlBbkw4SzlzMmY0ZmliQk5PeTlvMEo2VnExU1N2RFFMck41?=
+ =?utf-8?B?V2ZSNkVDMXhUN2UzM2VwYk5uYVRXR0pHY0J5NFJlUVFLM0c5RkZTOXVpN1Ax?=
+ =?utf-8?B?OHA5eWppVDNDZ2ZtaER4bGV4M0V5MVVtTkx3VHdLWGo0L04vL251b21ickNx?=
+ =?utf-8?B?NUFSWFN4Z1RPRXJNRVhuWTJONXRISlJYVVlZdE5PSUZmVFQxb295dWMzOHh1?=
+ =?utf-8?B?RElUTmN6QWhHNEZidVp5YW9CaEMvQncyYUpsSktKNVhqOGpEbXRpMnZ0emVE?=
+ =?utf-8?B?REIzbVhWMXBrV01EbkE3QzNIOGFSTmpCMjZqOEtiVWMvNWVnSTB1SnRPVHdJ?=
+ =?utf-8?B?Q2NYNmk4VUNMOFlXUThybUZJRFd0ZHorWWJOMzVRVWZma3NkRjM4ZWhXM1lR?=
+ =?utf-8?B?YWVab1RFV21hNHQxMjdIRWdhVmNlQVVUZ1Z2dE1vd1U4M3NYdGFHOWIyUmRz?=
+ =?utf-8?B?NWZDWWw1SzZmM012UWQySVdWZ0laMEwwUFd6a283UUZQWnE2My91VnR0V0Z2?=
+ =?utf-8?B?am14dW5IY3cxZi9kREc1NmZneHNyUUZuSUhpUjc5OGI3VzNUN3BUWnRnOXNl?=
+ =?utf-8?B?R21rOUFkQUp2QUMyVXEzbDEzM29zYm1UdXlyQjM1eWg0L3I5SklDTTl2N2dp?=
+ =?utf-8?B?dGpOZ1d1Y3lYYnRqa29ubFBHdnl3MjNkWTA5Z3daVFZ1cTFSUWpUUkFXa2tS?=
+ =?utf-8?B?UlplTWZGSUtYWGJodlFJSGZmdmQybHQyQU1CUDR1amRYRmRUZHVRbVU3Tkc4?=
+ =?utf-8?B?NXdEMWZhdUZ2MXhRelNyakYweVVrOXVGTVREZHIyOVZVam1kNFdvL21XQXEr?=
+ =?utf-8?B?ZmI0dWhoMGlSaHkzb2xPU01TMkYyZ25WMVlST0ZpS3FQcnhVUUM4VHJ1elpL?=
+ =?utf-8?B?ZXRKdFZEZ2EvS3ZwM0g2V0RCOWRkK2JVSUpxN29PanNHaTdTMWI5WTRiTUlB?=
+ =?utf-8?B?SEdUTmtBdWZwdE4zWEJPK1I5dXVyTG5Ib1RvN2NYY3l0aU5uTVFWeWRxbnBU?=
+ =?utf-8?B?ZHRQcy9Hc3Z0WWNHTTVMdEFwSzZtRmh5bnNYbFNVeS9oMnk3T01ZMWJTNFBV?=
+ =?utf-8?B?d3laU2RVTllsR3ppSVkrWXdjUWdrc2JEbCtlK3hqT1c1WlA0VFpTOWVjN1p5?=
+ =?utf-8?B?aHdWOWJQUkNkdmg2K2pnbzRuL2F2bFVqSmxMYzJiL3BZM3UvMlA1YjNWZlF4?=
+ =?utf-8?B?NzZMYzlPR2M4Qkc3ZDNPQ25CVFVxQk9jOExRZVRnOTdnbWFmdUhRQk0zMGh0?=
+ =?utf-8?B?Y3Y5aFpSaW1lb0hPY0hmNVhIaHd4V3RmS2Z5M3IwcVROWjZwWDUwN2tYL1hG?=
+ =?utf-8?B?dzhwdytzRXJncGJzaWNTeE9uWGlyZmpzMTVIM0RUUVJHbHByQ1pTaWdKS2NQ?=
+ =?utf-8?B?SlRZZjJGR1BvVmh6cFdrZi83TVo1cVp1VTJIQVBValFuZHhPU3JVRm5PMjhO?=
+ =?utf-8?B?TmNJbXRMdHdGc3ZpOE9RTjNZT3NIMXV6aFRZajdDaDRGTjM2UTBWQit0emt3?=
+ =?utf-8?B?RGViOTgwWk5WQ3JUZSt3ODR5VXQ3dFhOamxvRXpKbERCTXR2NjJlbkJhcVhD?=
+ =?utf-8?B?ZGlsUkpTek82WTkrNFF5dHgvanJCeDEwWTlIcFMwTzY4YVNHeW9YdlI4SUlR?=
+ =?utf-8?B?TEFOU3huQ3hERGx1YklNK0kra3JCUFhLdk9sRXp3OUNSYnFBeWtPV2YrVUN4?=
+ =?utf-8?B?dzh0VW9xb3Y5SlkvakpqU21oS1lTV0tNdXJkdEcvbmt6OTZ4UGRSVU5ib1Ra?=
+ =?utf-8?B?Z2VhbEIrbG1teWxvYStPNmZ4a01Fb28vamIzbTd3SU44OXpVRTlzTXFMamRn?=
+ =?utf-8?B?Qlg5eXhtaElzSEMyd2hBQnlMdkpBPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(7142099003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OEM1VTFlakRjMStPdFVUNUYzd054UjlvejRyYXoxNERad3B6YlQyTEpDeVNC?=
- =?utf-8?B?c3Uwck05TUJ1VnB2aUdrV1k3N3RORFdOaU9LdEkzMG5sSFB6STQvVWJpSUxo?=
- =?utf-8?B?d1VmNFJiajVWWWpDYVo5ZVhIUHhWRUFWU3A1bkRCS1orbFI1MHlUeS8xZ0M5?=
- =?utf-8?B?UFNWSEVwNE1VYlJmczBCOExkTzhhd3gyYzZQd21tY0F4WGU1TnZqak9YTklM?=
- =?utf-8?B?SnhtZ3g5azFKZVVidENOUlo4Y1FpQTZnb3JlSm5EN2pZN05tMDd4TEhpaDNJ?=
- =?utf-8?B?NzZYMUNkeHgxYldnZ3FqeE9yS21nWlRXUVB2azNsdTI4dUxobnNaSXNkZnVF?=
- =?utf-8?B?TDBLcGEyYWg0VlZMS0x5bUlLR0dQZlZlelZraWtiUldpU3hralptQnRicUgw?=
- =?utf-8?B?eEt4Rm8rdkxVbEdwME81ditENUtOYnc1MTF1M29tQkxPVlhQLzI1eW03NWFK?=
- =?utf-8?B?ODVoTWJhOHdkKzBYMTBxWDdFODZpMjY0R0dYQVEzVkZpZ05oZVdiWHkxOEhD?=
- =?utf-8?B?TkVCVU5iSUhRNjJXWkdBTjRIZWJ2bHFvTk1WOHh1dVJmYmxBZ3lPY2NYRXBk?=
- =?utf-8?B?dnA0YVM3cmI5MzVlNmxzdW44cVY2TXhOakk1dzRESHMwMFMweDZUcE5mek1T?=
- =?utf-8?B?STFUMVg4MzNOMUhyZXJ1N3g2MmpNdlFHMlBSUGk0U3RoaFd2ZEx4VWw2VXBS?=
- =?utf-8?B?d1J6RXkrWndHam1PdlJEblRLbytmeXNnMTI2dXBOYVhCN0pObForZXJnMmZO?=
- =?utf-8?B?TXFDaTBtYzNEYk03TzVsZFY5dzdSQUZTTkRmamM5V1dGa0wrc1pPZ2J4YnVW?=
- =?utf-8?B?YXlHc1RGQ2lGd2NQMkVZdXRpeUszK0RhNnNFVm9yaS9SUFBpbGF2ZDkwbm5Z?=
- =?utf-8?B?SEQ4K0VhVllYM2k5QldZcFRyOGlJZzFsTC93a1E3NUpIQnZGOURKZENOTG1Y?=
- =?utf-8?B?clJ5WU02b2F0WUVUWW5TckEwa2N1UFlwTXp4QWlybVlaN1F3dU44QTVnSEVN?=
- =?utf-8?B?dk5JZHBUZXhrUUVWV1NacENYRWNqUTdWbE54NVQ5bDBSYmZzdm1iQjlHN1Vt?=
- =?utf-8?B?RVJUYjNHNzE0T2E3bzdlOUpVaDgxS3dtd1NqRm8rMU1TSnFTMVBwR3Y2MHZR?=
- =?utf-8?B?SzE4YlRxbWU1a2phejFMU0x6UXNiQ2tENGg2WVdPWWdoaHRoQjlUNjRVL2ty?=
- =?utf-8?B?T1gycTl0Ly9ZSUJRQklOQW52L2tVV3lBb1RpeXM4RTQvUElLYlVtRDNKMEtT?=
- =?utf-8?B?NytjQWZIOUJVWXB5Tld4b3REQ0hqY2dxZ0YwUjl6R1NncXBXdjRaUEtoVjRa?=
- =?utf-8?B?eFZpVkgyNzVZL2FmYUdyTHQ2L3B0UUdBRllDYTRtVEEyR3VnVk9vMlJlY3BS?=
- =?utf-8?B?NWlEdnVNM09CRHVDU0UyR3VDTHJWVm9SWXRUb3RGOFU5VFJ0QTllUk9vZnU2?=
- =?utf-8?B?ekhRVW1Jak9aak9ENHQ2Vjg4Wk9yRmRwVE1hUi9EZTR4SWFzS0lqNXN3Rkl3?=
- =?utf-8?B?VXUyUnpkSXZrK2c0SUZQaDIvYURLLy90U1VQU2xUVFV2Nm13dmV1RDdManRv?=
- =?utf-8?B?QjdsYVNWYVFnczMyblpFVE1kbVdGMllaY2RwTWdSV3gxM3hHZ0t5MVIyWk1X?=
- =?utf-8?B?YTBqYlFlWVZQblB2Z0RTMk8wNTBxM1RCUG1xaTRJM2w4TFlxTEo3TjF4ekJG?=
- =?utf-8?B?cnVDaE9mOFBqQlBkT1ZhNW42Rjh2R2t5enBvRFN1TXJydVR3YWVoZHRra2ZD?=
- =?utf-8?B?UWhFcUZGUFJMeEduTWUvTW1ieHk5QUtpT1hadXRiclNVSHBMaEppQlcyRjJN?=
- =?utf-8?B?TUJwZVJHaFJkaTFFOFU1ckNNVU1KTkhLSnNCdlIrT1RMRi9xZGNNcUN5K2ZH?=
- =?utf-8?B?SnpzdFk1Y1craVlabzNEcG9qUVNWOHAwQklzT0U0Ulk4VFN1ZDBSbkk4MzhD?=
- =?utf-8?B?Y05TcXVqOCtQNEVwN280ZzlVT0FTWjlOSjlDenNyQ1JmR081aFFOckltUmlR?=
- =?utf-8?B?M2RxbWJkVGhJQjJlTkxLRzkwaEtlN2V3MllrQ3dMWDAvWERZWVQ1eFk4Zngx?=
- =?utf-8?B?dzZsMEVjNkZleExSU2VoNWVKRGlPcktRODM3bEw1aTVpdmVVRnZDTjgwZFMy?=
- =?utf-8?B?NXRleVVIbzBVanZrWGtDendWUWhmelZmV0d5VG5ZbnlTNnYxZ1NQWW95L2ZN?=
- =?utf-8?B?bnpjTGViS1VRMlN2ZmtIZ2RwOWNDRXhVZnZDYURUakhRTlpNcklFbnFqTCt2?=
- =?utf-8?B?T3ByVkxhaGtPYzZpMjJGS05hOURMU3RYUXcyZHprN20wQ2dqQ3IwdnQzWGJt?=
- =?utf-8?B?cXNESnVSQ0ZsWExDeFRYUENJbGNpR0dZTERJd0xJT2gyZ3VITC9JRDhBKy95?=
- =?utf-8?Q?BjAyoi4MHqS7uouc=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 66cd572d-3d31-4954-4a73-08de737dfae1
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR03MB7072.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 08:23:25.7027 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oqwwmHSrsb5SuUbO+0rfYmzZoTeREAlQf1U0WTJAJBa3N+cKJSOIoseO3odh3lZESsOiix51xXgU4IicbAaIyjUQra9Wjnbe1PHTT3w6WbQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR03MB8466
+X-MS-Exchange-AntiSpam-MessageData-0: EBJ7E+iYkF8Cc69zauyQ9uozHJeggNGhUp6jrhnWZhMWSB8voCS2FPjDErFHQXF0+OUJBEGtp9qTy7jKU6KBcSLGxodAmahHAJBPiSUhg3IbtlIz/1dF9QGANlNvir/FD1lFNT5/7PXxc+xwcGOvVaZusQpqOTyx4rlBW5UnNtJJAtarWt/IHdGxrde8lx/Y4VHcO607qp0VyHTq+kvKaEiNohg5zZpMOFDwii/LnCK0U04k1Qt7rR7kBqWKivAEuWEOeVFNVSuHX3bQBDn8NGhbzH0vlYFx9RANPEBp3NcypHj6RhxHs5UpS4oN7Yn6xx/kNEWJcs4dtTL6rSIpPpZyEicAM4J/pxr4K6g0LZN5hsWd/n7T0q3nMXYQZaAe0W7H7tKVuNG8Yb/oO7aK7yRUyK0iYpvzKPL73IGJXl4IuzVGWLPwijMiOrXex43S
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 09:03:40.5462 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fda16003-9b28-4389-990a-08de73839aae
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A799.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -191,160 +174,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian, Tien Fong,
+Hi,
 
-On 24/2/2026 4:14 pm, Chee, Tien Fong wrote:
-> Hi Alif,
-> 
-> On 19/2/2026 10:21 am, Sune Brian wrote:
->> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
->>
->> On Thu, Feb 19, 2026 at 8:18 AM Yuslaimi, Alif Zakuan
->> <alif.zakuan.yuslaimi@altera.com> wrote:
->>> On 13/2/2026 5:00 pm, Sune Brian wrote:
->>>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
->>>>
->>>> On Fri, Feb 13, 2026 at 4:44 PM Sune Brian<briansune@gmail.com> wrote:
->>>>> On Fri, Feb 13, 2026 at 3:18 PM Yuslaimi, Alif Zakuan
->>>>> <alif.zakuan.yuslaimi@altera.com> wrote:
->>>>>> Hi Brian,
->>>>>>
->>>>>> On 6/2/2026 11:09 pm, Sune Brian wrote:
->>>>>>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
->>>>>>>
->>>>>>> Hi Alif,
->>>>>>>
->>>>>>> Since 2025.05 to the latest master.
->>>>>>> I do not have any issue as you mentioned in this patch.
->>>>>>> Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
->>>>>>> I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
->>>>>>> that GEN5 Cyclone can support.
->>>>>>>
->>>>>>> Not too sure what is missing from first place?
->>>>>>>
->>>>>>> Thanks,
->>>>>>> Brian
->>>>>> Based on the CycloneV address map which can be found here -
->>>>>> https://www.intel.com/content/www/us/en/programmable/hps/cyclone- 
->>>>>> v/hps.html#sfo1411577374877.html.
->>>>>>
->>>>>> Bit 3 of staticcfg register has to be set to apply all the settings
->>>>>> loaded in SDR registers to the memory interface, in this case the patch
->>>>>> ensures the SDRAM controller applies the latest configuration after
->>>>>> disabling FPGA SDRAM access.
->>>>>>
->>>>>> This is a safety and correctness fix for re-initializing the memory
->>>>>> controller in the proper sequence during FPGA reconfiguration.
->>>>>>
->>>>> Hi Alif,
->>>>>
->>>>> Before I plan to undergo a test we got to understand why w/o this patch
->>>>> SDRAM2FPGA works properly w/o issue.
->>>>>
->>>>>> If you have the time, can you help to test this patch with your setup?
->>>>>> Although unlikely, we want to be sure that this patch will not break any
->>>>>> existing GEN5 boards out there.
->>>>> I might be wrong, I think static cfg has been done already?
->>>>> Does the code here if not wrongly understood already finished that static cfg?
->>>>>
->>>>> ---> Quote start
->>>>> void socfpga_sdram_apply_static_cfg(void)
->>>>> {
->>>>> const u32 applymask = 0x8;
->>>>> u32 val = readl(&sdr_ctrl->static_cfg) | applymask;
->>>>>
->>>>> /*
->>>>> * SDRAM staticcfg register specific:
->>>>> * When applying the register setting, the CPU must not access
->>>>> * SDRAM. Luckily for us, we can use i-cache here to help us
->>>>> * circumvent the SDRAM access issue. The idea is to make sure
->>>>> * that the code is in one full i-cache line by branching past
->>>>> * it and back. Once it is in the i-cache, we execute the core
->>>>> * of the code and apply the register settings.
->>>>> *
->>>>> * The code below uses 7 instructions, while the Cortex-A9 has
->>>>> * 32-byte cachelines, thus the limit is 8 instructions total.
->>>>> */
->>>>> asm volatile(".align 5 \n"
->>>>>        " b 2f \n"
->>>>>        "1: str %0, [%1] \n"
->>>>>        " dsb \n"
->>>>>        " isb \n"
->>>>>        " b 3f \n"
->>>>>        "2: b 1b \n"
->>>>>        "3: nop \n"
->>>>>       : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
->>>>> }
->>>>> Quote end<---
->>>>>
->>>> I forgot to quote the func call location:
->>>>
->>>> void do_bridge_reset(int enable, unsigned int mask)
->>>>
->>>> During boot users are supposed to use bridge enable to
->>>> control the needs of the HPS <-> SDRAM or H2F F2H LW etc.
->>>> When calls if I am not wrongly understand it will reset and
->>>> simply do that static cfg and simply do not require additional
->>>> calls.
->>>>
->>> Thanks for pointing this out, Brian.
->>>
->> Hi Alif,
->>
->> Pic by pic.
->>
->>> I understand that you saw potential redundancy in this patch's explicit
->>> re-application of the SDRAM static configuration, which may already be
->>> handled by the existing call to socfpga_sdram_apply_static_cfg() during
->>> bridge reset.
->> This is following the old boot flow to the latest and not having issues
->> under boot.scr with "bridge enable" and sub-bit bridge setup.
->>
->>> I would imagine your current flow works as the current code already
->>> applies SDRAM configuration changes at the correct time during boot or
->>> bridge reset. However, there are some cases or sequences where this
->>> apply step could be missed - such as during partial reconfiguration.
->> Not too understand this case even if you PR the bridge enable MUST
->> be done after the reconfiguration phase aka "bridge enable".
->> And PR itself has nothing to do with turning on F2H SDRAM the first time.
->> One is the FPGA manager and the other is the HPS register unless it auto
->> reset all bridge registers.
->> I can also reload full bit during boot again and again and boot to linux w/o
->> f2h issue.
->>
->>> This patch would then be needed as an extra safeguard in cases where SDR
->>> registers are updated manually or outside the typical bridge reset sequence.
->> If the user doesn't use f2h then turning on this bit for what purpose?
->> As "bridge
->> enable" under boot.scr have good control.
-> 
-> 
-> NAK as the TRM’s staticcfg.applycfg (bit 3) applies SDRAM-controller 
-> configuration to the memory interface (burst length membl, ECC/data 
-> width, timings, etc.).
-> 
-> It does not gate fpgaportrst.portrstn. The claim “after write to any SDR 
-> register” is too broad.
-> 
-> fpgaportrst.portrstn[13:0] is a live reset control for the FPGA ports.  
-> Writing 0 stretches reset, writing 1 releases reset. Its effect is 
-> immediate and independent of applycfg.
-> 
-> Thanks.
-> 
-> Best regards,
-> 
-> Tien Fong
+On 2/4/26 11:20, Patrice Chotard wrote:
+> From: Thomas Bourgoin <thomas.bourgoin@foss.st.com>
+>
+> Update stm32key to support stm32mp21 OTP mapping.
+> Create a new list of key to support the following differences :
+>    - STM32MP21x SoC support 128b and 25b FSBL encryption keys.
+>    - OEM-KEY1 and OEM-KEY2 used for authentication are in different OTP
+>      from MP25 and MP23.
+minor "from STM32MP25 and STM32MP23"
+>
+> stm32key is compatible with platform STM32MP2 (aarch64)
+> Hence, use unsigned long to handle argument addr of function
+> read_key_value() instead of u32.
+>
+> Signed-off-by: Thomas Bourgoin <thomas.bourgoin@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>   arch/arm/mach-stm32mp/cmd_stm32key.c | 97 ++++++++++++++++++++++++++++++++----
+>   1 file changed, 88 insertions(+), 9 deletions(-)
+>
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
+> index f1e0a3e817c..1ceb640e6b2 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32key.c
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
+> @@ -40,7 +40,7 @@ struct stm32key {
+>   	char *desc;
+>   	u16 start;
+>   	u8 size;
+> -	int (*post_process)(struct udevice *dev);
+> +	int (*post_process)(struct udevice *dev, const struct stm32key *key);
+>   };
+>   
+>   const struct stm32key stm32mp13_list[] = {
+> @@ -67,7 +67,56 @@ const struct stm32key stm32mp15_list[] = {
+>   	}
+>   };
+>   
+> -static int post_process_oem_key2(struct udevice *dev);
+> +static int post_process_oem_key2(struct udevice *dev, const struct stm32key *key);
+> +static int post_process_edmk_128b(struct udevice *dev, const struct stm32key *key);
+> +
+> +const struct stm32key stm32mp21_list[] = {
+> +	[STM32KEY_PKH] = {
+> +		.name = "OEM-KEY1",
+> +		.desc = "Hash of the 8 ECC Public Keys Hashes Table (ECDSA is the authentication algorithm) for FSBLA or M",
+> +		.start = 152,
+> +		.size = 8,
+> +	},
+> +	{
+> +		.name = "OEM-KEY2",
+> +		.desc = "Hash of the 8 ECC Public Keys Hashes Table (ECDSA is the authentication algorithm) for FSBLM",
+> +		.start = 160,
+> +		.size = 8,
+> +		.post_process = post_process_oem_key2,
+> +	},
+> +	{
+> +		.name = "FIP-EDMK",
+> +		.desc = "Encryption/Decryption Master Key for FIP",
+> +		.start = 260,
+> +		.size = 8,
+> +	},
+> +	{
+> +		.name = "EDMK1-128b",
+> +		.desc = "Encryption/Decryption Master 128b Key for FSBLA or M",
+> +		.start = 356,
+> +		.size = 4,
+> +		.post_process = post_process_edmk_128b,
+> +	},
+> +	{
+> +		.name = "EDMK1-256b",
+> +		.desc = "Encryption/Decryption Master 256b Key for FSBLA or M",
+> +		.start = 356,
+> +		.size = 8,
+> +	},
+> +	{
+> +		.name = "EDMK2-128b",
+> +		.desc = "Encryption/Decryption Master 128b Key for FSBLM",
+> +		.start = 348,
+> +		.size = 4,
+> +		.post_process = post_process_edmk_128b,
+> +	},
+> +	{
+> +		.name = "EDMK2-256b",
+> +		.desc = "Encryption/Decryption Master 256b Key for FSBLM",
+> +		.start = 348,
+> +		.size = 8,
+> +	},
+> +};
+>   
+>   const struct stm32key stm32mp2x_list[] = {
+>   	[STM32KEY_PKH] = {
+> @@ -171,8 +220,10 @@ static u8 get_key_nb(void)
+>   	if (IS_ENABLED(CONFIG_STM32MP15X))
+>   		return ARRAY_SIZE(stm32mp15_list);
+>   
+> -	if (IS_ENABLED(CONFIG_STM32MP21X) || IS_ENABLED(CONFIG_STM32MP23X) ||
+> -	    IS_ENABLED(CONFIG_STM32MP25X))
+> +	if (IS_ENABLED(CONFIG_STM32MP21X))
+> +		return ARRAY_SIZE(stm32mp21_list);
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP23X) || IS_ENABLED(CONFIG_STM32MP25X))
+>   		return ARRAY_SIZE(stm32mp2x_list);
+>   }
+>   
+> @@ -184,8 +235,10 @@ static const struct stm32key *get_key(u8 index)
+>   	if (IS_ENABLED(CONFIG_STM32MP15X))
+>   		return &stm32mp15_list[index];
+>   
+> -	if (IS_ENABLED(CONFIG_STM32MP21X) || IS_ENABLED(CONFIG_STM32MP23X) ||
+> -	    IS_ENABLED(CONFIG_STM32MP25X))
+> +	if (IS_ENABLED(CONFIG_STM32MP21X))
+> +		return &stm32mp21_list[index];
+> +
+> +	if (IS_ENABLED(CONFIG_STM32MP23X) || IS_ENABLED(CONFIG_STM32MP25X))
+>   		return &stm32mp2x_list[index];
+>   }
+>   
+> @@ -237,7 +290,8 @@ static void read_key_value(const struct stm32key *key, unsigned long addr)
+>   	}
+>   }
+>   
+> -static int read_key_otp(struct udevice *dev, const struct stm32key *key, bool print, bool *locked)
+> +static int read_key_otp(struct udevice *dev, const struct stm32key *key,
+> +			bool print, bool *locked)
+
+minor: needed change ?
+
+
+>   {
+>   	int i, word, ret;
+>   	int nb_invalid = 0, nb_zero = 0, nb_lock = 0, nb_lock_err = 0;
+> @@ -351,7 +405,7 @@ static int write_close_status(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> -static int post_process_oem_key2(struct udevice *dev)
+> +static int post_process_oem_key2(struct udevice *dev, const struct stm32key *key)
+>   {
+>   	int ret;
+>   	u32 val;
+> @@ -372,6 +426,31 @@ static int post_process_oem_key2(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> +static int post_process_edmk_128b(struct udevice *dev, const struct stm32key *key)
+> +{
+> +	int ret, word, start_otp;
+> +	u32 val;
+> +
+> +	start_otp = key->start + key->size;
+> +
+> +	/* On MP21, when using a 128bit key, program 0xffffffff and lock the unused OTPs. */
+> +	for (word = start_otp; word < (start_otp + 4); word++) {
+> +		val = GENMASK(31, 0);
+> +		ret = misc_write(dev, STM32_BSEC_OTP(word), &val, 4);
+> +		if (ret != 4)
+> +			log_warning("Fuse %s OTP padding %i failed, continue\n", key->name, word);
+> +
+> +		val = BSEC_LOCK_PERM;
+> +		ret = misc_write(dev, STM32_BSEC_LOCK(word), &val, 4);
+> +		if (ret != 4) {
+> +			log_err("Failed to lock unused OTP : %d\n", word);
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static int fuse_key_value(struct udevice *dev, const struct stm32key *key, unsigned long addr,
+>   			  bool print)
+>   {
+> @@ -550,7 +629,7 @@ static int do_stm32key_fuse(struct cmd_tbl *cmdtp, int flag, int argc, char *con
+>   		return CMD_RET_FAILURE;
+>   
+>   	if (key->post_process) {
+> -		if (key->post_process(dev)) {
+> +		if (key->post_process(dev, key)) {
+>   			printf("Error: %s for post process\n", key->name);
+>   			return CMD_RET_FAILURE;
+>   		}
 >
 
-Thank you both for your valuable inputs, we can proceed to drop this 
-patch as it has been determined that the changes are not relevant - 
-there is no need to apply staticcfg bit after controlling the reset for 
-F2H bridge.
+even with 2 minor remarks
 
-Best regards,
-Alif
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
->
-> 
+Thanks
+Patrick
+
 
