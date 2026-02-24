@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F23F357AC
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 14:27:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7ABFF357AD
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 14:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A17483E9F;
-	Tue, 24 Feb 2026 15:26:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF82383E96;
+	Tue, 24 Feb 2026 15:26:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mhzd3TWq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fji+j2Wf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE19083EBA; Tue, 24 Feb 2026 15:26:31 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 9D02183EF9; Tue, 24 Feb 2026 15:26:33 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1B0C83E96
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:26:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C2A883E1E
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:26:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-45ee8823e2aso3195686b6e.0
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 06:26:29 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-46413b2c3d8so1799989b6e.2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 06:26:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771943188; x=1772547988; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771943189; x=1772547989; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3uNn8Hc0/O12D7lFhnhWytDDywwCZlY2GYaQWxhK/W8=;
- b=Mhzd3TWq+6q46ijsOBIsZ7LEMWmjLwPj0N69UC/GXNALAFYeey6DnavZvon95NfyQF
- MXO7iGrnzt6+DGvUUgHjNYuA1I01iM+aPEOU7kZQLOZ77pL4k9xkn7Qq9yzZcqfeN4qh
- ES0mZmXVr8Z6aYjaLtdQSF95Q8x+WfM/ElbjI=
+ bh=4RYKOEEBrOK2LPI7YJ6jpuAWkCaypv6eWL7MkKEABUQ=;
+ b=Fji+j2Wf6RGplC1GQDsHMENa/wc+sKdYHCypGdxBDE9JpUX6SfHEVyd4yA7HfRskw0
+ +WaImJvaZB6wOvjfKYAzxl7SKqmfsJ/ouYWXIM+TVleU51IaB8ZUUiTNc+LjJHglgnTy
+ h2IEFUFafB/iaF1xh8T2l/KgkyqYqDsfxz7Yg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771943188; x=1772547988;
+ d=1e100.net; s=20230601; t=1771943189; x=1772547989;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=3uNn8Hc0/O12D7lFhnhWytDDywwCZlY2GYaQWxhK/W8=;
- b=CjvxWpQQKwZ6fVvk8EQikOHoxgH1z6HpMgtt0C0BC9bXcSV3ZMgXf6rNjkZb6tgYgG
- VusyEFoWlcPje5TtVYyfJPoMR47z2rwFBYDar/Wq3eF1c2WxidvSr6ehVVxPIpP4YkqS
- q5GnRTV2CmeIlPsokTi9DjQNITD11xpgz7qhVCtvPPdFvfGv1iKOQgfsDC5C/ofIpjWN
- t2CFghmZLaIL9eRk/yBRd6eD3XtOQK8YAA/DQuG+chDIqeNiirVpe4ekAhZdNHxDIsbQ
- yZ1RnmdKWMUe/zu+vURWjQC82SGRYu09u3dU1g0YuZ0vaLRH430frycRenkXjVL11bA4
- kGyg==
-X-Gm-Message-State: AOJu0Yybzbh6XNX0fYoFGsh7MpkvvjaZETyjPa5Dui72XgTmv/uik3XI
- FWBRk7u6MEdjrnHi6mYIAZIFoVZ9G69LKOazoZCpArHlBIBm5hliMLItgMLR6MKHgN+pfF5NFS1
- xnQM=
-X-Gm-Gg: ATEYQzxNzvu0uSlAAXg7UXVu26/JGK9mgM32W2ZYYHnC9oL/nImG1uUrbBcvlQn6VId
- RwxqxTphNs9EUDo8UEerAXftQs0Tbb9vH+O3w2KQ2fE8nGu4XhzJT6Y8MmWT/MXjitNWQpAdI2f
- DdgrjF410OgUEHwyDjeUS9+SJGfxB7OrRELqcHUVSx5lkFOA9NFHz1pVTKrRqvHxi3yCIlqyQSv
- kSaYkgMcHOdmUUbtonLSSjD7vPZlCAXLwaZ3Ia26eZOESJSvsOm/B1Hof2ev38PIHMDwQBkb87b
- 49S0fGPJ80MD/Yz94dTRzn/hJ3XS2I41ho3XXFgTikbREwbIalzyeSJhWzQ8ZW3k/Y3zD26JlVZ
- Kb9gXH1FECFrrUIx4PjG083VV6V9AprTcsZXsRFcD8XNhSATAe/WBLbhZQu/ZpTjlMd4TMLmoh2
- BC4LkX+acCpZzM1HigY1hlMdx1xLodBw==
-X-Received: by 2002:a05:6870:c0d4:b0:415:2295:c45e with SMTP id
- 586e51a60fabf-4157ac7c0a4mr7534409fac.18.1771943187765; 
- Tue, 24 Feb 2026 06:26:27 -0800 (PST)
+ bh=4RYKOEEBrOK2LPI7YJ6jpuAWkCaypv6eWL7MkKEABUQ=;
+ b=sp8gKV1uXWbnODHcGy3i+dTQB5xls8LrbPbe1Tu5f5ec4L+1aMcJ9bSjCUl7ARbKoj
+ e0vNMzHxyaOJ0bzIxL0lpl6HpaH8k18a7mg3aYGjOQqXD3OO+ex7HaTW1OPfeSyyX68z
+ HrHYPbC1qOVhU3mbxFClGgtz/wWaHX/yBqdCDbySvegyvqhYko02dwu1j1ceKqD2dl1a
+ MK16f23gXtX40uQus4a49oaN+10bt+Hqq0s8/WanmqgceA3u3urGyC0jNoS00KCq+eQb
+ TNIVp2koRjGdjFmU0vwCwqCHGpEESqkvwVspurC5zOx415ZPkC47ruX5A/PqOnAl3ifL
+ Hxnw==
+X-Gm-Message-State: AOJu0Yz/06HFaeRl5Tkx3Y0VK1bnbmhswzA9ra1NuD2rtfbx7DipgptP
+ 9a8VFksRm5xz6UjVj5oG34f6H+zwYNzlLvT+reb1Tc9u4HddaYBnoNIbbnEtE5D4yoDIDkHwnwr
+ UiGo=
+X-Gm-Gg: AZuq6aL9b9EQ4+b6TJyAdYOGTiZ7MFI18xS7PvldB2miCePPUSlRdEKLluvKFqioRlR
+ 67PaDvGiI8iZX6eZwgHdiQYVhei0OpWTrT9+ZRHQuYKAIJgx75suy+85OcxQTfqNGW5DGlXDzdJ
+ +UQS2n9rDBlg2yqLSzvw+FiZs0mgZtaxUnRgSc8S7K5hb/o4mHdeH0BOwtKnsHwugJXbUNRxkpQ
+ g0UM3IUoql2lN7ZpjBN7vQYBW4gArajRAzLl3PJ3IymU+B4GKt/IXaX2JpKNSqz+/z//WZVzb+e
+ 2qeEgK9GFMXfp/D35/r3P0uBNUvx9HVqu+DXDvc7Oh7Uw0px9+DJaTp/oC1PY40gK+JMK3UqQdT
+ 4esRsa3d5yRLp2wIBaqiN93IzCsjQEhJjA9akq4MBRk7dSCZbiWkYGEq0n7WFZoqC3cDbSuVAFh
+ YTem+E0Qsiijv/slvUfob2Y2k7I9+hRw==
+X-Received: by 2002:a05:6808:4f06:b0:464:3557:a73 with SMTP id
+ 5614622812f47-46446139355mr5907610b6e.11.1771943189480; 
+ Tue, 24 Feb 2026 06:26:29 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cd5e168sm10199478fac.4.2026.02.24.06.26.26
+ 586e51a60fabf-4157cd5e168sm10199478fac.4.2026.02.24.06.26.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 06:26:27 -0800 (PST)
+ Tue, 24 Feb 2026 06:26:28 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Aristo Chen <jj251510319013@gmail.com>
-Subject: [PATCH v2 4/9] bootstage: Add some missing dummy functions
-Date: Tue, 24 Feb 2026 07:25:46 -0700
-Message-ID: <20260224142553.1608883-5-simon.glass@canonical.com>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 5/9] bootm: Do bootstage processing in bootm_final()
+Date: Tue, 24 Feb 2026 07:25:47 -0700
+Message-ID: <20260224142553.1608883-6-simon.glass@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260224142553.1608883-1-simon.glass@canonical.com>
 References: <20260224142553.1608883-1-simon.glass@canonical.com>
@@ -95,36 +95,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Neither bootstage_fdt_add_report() nor bootstage_report() has a dummy
-double for when bootstage is disabled. Add them.
+Mark kernel start before booting. If enabled, show a bootstage report.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Drop the EFI change
 
- include/bootstage.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ boot/bootm_final.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/include/bootstage.h b/include/bootstage.h
-index 528d0ca0614..62fb99110f0 100644
---- a/include/bootstage.h
-+++ b/include/bootstage.h
-@@ -435,6 +435,14 @@ static inline uint32_t bootstage_accum(enum bootstage_id id)
- 	return 0;
- }
+diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+index 71661334e11..dd7cac55f1e 100644
+--- a/boot/bootm_final.c
++++ b/boot/bootm_final.c
+@@ -6,11 +6,17 @@
+  */
  
-+static inline void bootstage_report(void)
-+{
-+}
-+
-+static inline void bootstage_fdt_add_report(void)
-+{
-+}
-+
- static inline int bootstage_stash(void *base, int size)
+ #include <bootm.h>
++#include <bootstage.h>
+ #include <dm/root.h>
+ 
+ void bootm_final(enum bootm_final_t flags)
  {
- 	return 0;	/* Pretend to succeed */
+ 	printf("\nStarting kernel ...\n\n");
+ 
++	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
++
++	if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
++		bootstage_report();
++
+ 	dm_remove_devices_active();
+ }
 -- 
 2.43.0
 
