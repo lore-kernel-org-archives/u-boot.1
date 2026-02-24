@@ -4,157 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0D01E9B246
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 09:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 366E0E9B248
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 10:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F5FE83642;
-	Tue, 24 Feb 2026 10:46:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 80C6883642;
+	Tue, 24 Feb 2026 11:01:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Z7Pk+V1S";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="PVXQjTIM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2311E83D8A; Tue, 24 Feb 2026 10:46:34 +0100 (CET)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id 2DC9783D3D; Tue, 24 Feb 2026 11:01:55 +0100 (CET)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B11EB82BF2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 10:46:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2367982BF2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 11:01:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrick.delaunay@foss.st.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S0mnYqwAMVCKMwAsEjNOOjzBjDIXsjrVnHwWTbX6CKgbN4e7lciZJF61LUEpa0P7oiG8AG+cJk2UVAqWj80HA+RzE0pw0rv0ZxFWDsDF+YjTo0fdMZ7f89VELSf9hUPPE+2iQfCyObIgby/fCqS9OHFeOcu/hT2GJifjZY0ywhEtPbw97kpVmiim+m5bQfCz/HLThBjtXPIwd7wdIYzZTpJPb37Qk08vK1SIOF+Og4H9Hmm0dIUM5QaQAsXl7YJnDfCe5SE/M8gcZotasbAyVuStYXJ+Ux01lctYG2hn1otRMHk4Dsv8Rlz2dDaqvtwsvs1JiWtwjZIKx60sMo1mgw==
+ b=y+e2cP75Z23TEfzrp6s9jbaAVCRySkrYPOMEbQ5iSnWNK4FaSy+WB3nPM8RPVYWQsVFQJdxiiHXdQErLWTgIMeve43DO5n9rQkOBJgMk98rrtCaEMIW3pOq2Gr2GNOI3AwYgkge9Okzy64opxRO0brc5mZGdJmq/bCfVxOQ5Hk24rcPhVz5YJ/4dzvDaEwHs98BpRdpB7WJbNLmkmSh8EnAHKw52OnnPCAQ5vXpFR+HgLR1N6O40P9mkcrEGoG9TW8EyzGwSnm2k+ewKtZeBFtGTYZ66WbpO4xuW1e+mpot+KlwWyCQW3fsQBEvPFy6AEETM8GVL0G0MkWnEA8iKrA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FXxgvbDlmlDzyjFGzZf97D26f1dx4snORFzWLQEqwII=;
- b=ymf4d46ZCn/Y8Q4T+dqBrDADIhBTGbbDVpXSCS7mY24F537Fe92maB7m3wNJgbczaKOfep2g22twWTGbL0CgiyxjW7KdZlIuLi09UfTB20DXUyrUweiSCUB5oOuoZi1lqL688xCVC+E9Df8Ae79kIuuuUwIaqUDv614ShQpHSfDf8wfxoYysXh+UMvGxkD0wZo5u27Cz/p04dDSol7UPBymWUAZ1auOfTHbSp6vIbT4qyHViHQIUo9Do9my7bXl+bUaiOjfv8Bj8176/KQU3QUZnZ04dqhWSFM5Y8sqQjQ5nraLKLRbuw5cRoft0in3XZ8HnJcYyX1iu8fWS2kDktA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ bh=ZeeDgYwbAxtJYxUk5aKEda+oel38yOeIcIoh4zXGskk=;
+ b=w5Pjj+MY78PvrkAtj8m9szJ7Tkh05sHr8Wcyisx0FvzKUkEqa/8tal4qo0eE3fBdNlzvMD+8IICrjLDYOV+yfIC34VvYWHPXKVnjH7FQnwV1CjdnFGQ5CtCySzAr5OAVaoJjXncwjm0Vhq92R886kiQ3AvjIwGv17j+kOXq6/TCJarRpXTsa+t4DeWPPAVcUEwbarzr8S/Y4XQ1pKkLBQgGbBr27DUF6Udc85OSElWXpucNtx2uXuaZtXP8sjQKEjgsujh2wZ7mS0OmDFk1SOZNNaxbYpVSazzjk7QzoQwPEeCq5L7NV1J3I/SvLQis0mz1nzmBcKnZJcR6YNOGAmw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=gmail.com smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FXxgvbDlmlDzyjFGzZf97D26f1dx4snORFzWLQEqwII=;
- b=Z7Pk+V1SvgrvaeizweBjrPrh1h8alD/sgvNnkNlPVzTJqTM5wXkaiwlkUyxWA1vRSrl3dxn9iJWjDlOtFEmImJGQkWQS/FHqLXbeZ59D4Y2pU0IpHICb2Pb9Z13afgvuN3i7aAt3gAtMWqNLjII0xNOl+jrl9NUbhzjhb9Vb9Y4=
-Received: from SN7PR04CA0182.namprd04.prod.outlook.com (2603:10b6:806:126::7)
- by LV3PR10MB8203.namprd10.prod.outlook.com (2603:10b6:408:284::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Tue, 24 Feb
- 2026 09:46:24 +0000
-Received: from SN1PEPF00036F42.namprd05.prod.outlook.com
- (2603:10b6:806:126:cafe::a) by SN7PR04CA0182.outlook.office365.com
- (2603:10b6:806:126::7) with Microsoft SMTP Server (version=TLS1_3,
+ bh=ZeeDgYwbAxtJYxUk5aKEda+oel38yOeIcIoh4zXGskk=;
+ b=PVXQjTIMFFS8Tds+tM7S4Ek+iH5UhVIuN8PYuIi5cWQaDAj1zbhgtu5Z2RXZGQrB0qLuTB9Z6+6ARZUkX6pTvW4AdRBN2XFDgL4OLsFQWUi+bFg0BZSyxaqYxdUfH5RuHQRqzfUsBe3fKruKWhUNFQM2PU+6Mr9hv3EY0rRDh0RSXEnPJHfg5qdbbJj+LBPZ7vzeMtQM3uDN011GyhmVIq9kFlkbtuj1AJZJ6IMgkTSOcLDmTL7hFBjxp5R/O8hckAZrvpiYwtOKYoz/TxE2qmUQewgvy8hR7R7il65o76WGltbQUR62SgzzdyClATts9enT38UAjnIhkwCbco2F6Q==
+Received: from AM8P251CA0008.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:21b::13)
+ by GV2PR10MB7485.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:d1::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.21; Tue, 24 Feb
+ 2026 10:01:47 +0000
+Received: from AMS0EPF000001B7.eurprd05.prod.outlook.com
+ (2603:10a6:20b:21b:cafe::5c) by AM8P251CA0008.outlook.office365.com
+ (2603:10a6:20b:21b::13) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Tue,
- 24 Feb 2026 09:46:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SN1PEPF00036F42.mail.protection.outlook.com (10.167.248.26) with Microsoft
+ 24 Feb 2026 10:01:29 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS0EPF000001B7.mail.protection.outlook.com (10.167.16.171) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 09:46:23 +0000
-Received: from DFLE201.ent.ti.com (10.64.6.59) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Feb
- 2026 03:46:21 -0600
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Feb
- 2026 03:46:20 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 24 Feb 2026 03:46:20 -0600
-Received: from [10.24.50.71]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61O9kHPO2512146;
- Tue, 24 Feb 2026 03:46:18 -0600
-Message-ID: <c3ff3d97-18f5-4f32-b05a-3e2fb33ec786@ti.com>
-Date: Tue, 24 Feb 2026 15:16:17 +0530
+ 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 10:01:45 +0000
+Received: from STKDAG1NODE2.st.com (10.75.128.133) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
+ 2026 11:04:01 +0100
+Received: from [10.48.87.244] (10.48.87.244) by STKDAG1NODE2.st.com
+ (10.75.128.133) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
+ 2026 11:01:44 +0100
+Message-ID: <50a9f6c3-4284-460c-a429-49b4a53c836e@foss.st.com>
+Date: Tue, 24 Feb 2026 11:01:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] power: regulator: tps65941: Enable FPWM bits
-To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>,
- <jh80.chung@samsung.com>, <peng.fan@nxp.com>
-CC: <j-keerthy@ti.com>, <t-fujiwara1@ti.com>, <u-boot@lists.denx.de>,
- <gehariprasath@ti.com>
-References: <20260129072857.1437272-1-n-francis@ti.com>
- <a5661115-be8e-4e29-8c5f-923845f90ff9@ti.com>
+Subject: Re: [PATCH] video: stm32: dsi: add .of_to_plat callback
+To: Raphael Gallais-Pou <rgallaispou@gmail.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>
+References: <20260205-dsi-v1-1-eb5805068e97@gmail.com>
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <a5661115-be8e-4e29-8c5f-923845f90ff9@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20260205-dsi-v1-1-eb5805068e97@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.244]
+X-ClientProxiedBy: ENXCAS1NODE2.st.com (10.75.128.138) To STKDAG1NODE2.st.com
+ (10.75.128.133)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F42:EE_|LV3PR10MB8203:EE_
-X-MS-Office365-Filtering-Correlation-Id: eb936bd7-ce59-4677-c06f-08de73899251
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001B7:EE_|GV2PR10MB7485:EE_
+X-MS-Office365-Filtering-Correlation-Id: 84216788-7b42-418a-30b6-08de738bb805
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VlRLQ1JlQzA2RmhxZ0pOYTNYVlcrZ2FZNXh4T3lic3JRNkNpMDh4ZzBOUUE4?=
- =?utf-8?B?TjR3T2poZ1puRDFNa2RVMGNzRzN3cmNKU3BTU3BOczFGTEd0eWJuaVJkaFZW?=
- =?utf-8?B?YkRSaWNxbEgxYmNZbmxjQ2lqalRtbEF4UWhLR0tFanFXUlZMdlk2SHg2T3Bt?=
- =?utf-8?B?Q09kc21NRXUvSWlySjFTeElSQXl4WW4vVW5tdWdmRmFUK0kyMkZKNWFjbE1E?=
- =?utf-8?B?SnBuTENDRVg3ZEhQWHFWb2R0YVd0alM0VlJHeVprK21yTUp6N3c2emxyWWt3?=
- =?utf-8?B?cFNqUk1qaVg3MGwwb3k3V2VnRng4dURmeTBwcjVwdTRFK0RTbkJSMHVlay8w?=
- =?utf-8?B?c0NiT1JUQzc0YzJ4TFpaSW0yYUwyY3pZa3FJdnpab2RiYWo0ditWSkNxTUZq?=
- =?utf-8?B?RUlUTFFubnFGTXQxa2t2bFVQQU1ydVd5TFpHelREQ3p5azlOOWhpbnA2SlFQ?=
- =?utf-8?B?a1kreC9WaVpKbXAwNTlrYmZQQk9JQ0pXYjRSQS84RGZ5bFI3dyszRWdhdnFo?=
- =?utf-8?B?SmYzZHVQZHZPNWNrVkYwc1JwSVR1dXdtZHBaOUZFTmd6L2x0d3ZpZ0dYV2dN?=
- =?utf-8?B?Yy8vUGc4OEppUzRqWldsT2hqT0YxVjVrZTRoZitrSnhEQmxEWjJNRldSa2Zx?=
- =?utf-8?B?TFV2YVZpODczSWZCVzVFSjRNKzNFMlNsdUxlTUMzcGJua2c4SGNtaE9OYXoy?=
- =?utf-8?B?bmk1Z3BTZ3lXK2VQZyt0QlBVQldWUjFGQmNWUFppb2lEaVI4Q1dTQWl1VE14?=
- =?utf-8?B?M0FqcDh1dnRTMzMwR1pSSlNLbzlMam9DTXdwNm1wUTY5OC9rdVVuakR0TFZy?=
- =?utf-8?B?bmNZN29YZzRCWG1FOG5PMGlHdW9FeVg5MVEzNjA1cU44M1I0ZCtPb20rMW9E?=
- =?utf-8?B?RVp4ZDIvVjBVLzVrSUNOVXBlU2dUV1NzNTJPUDh3dmtSV09yRWx6TUcwamMx?=
- =?utf-8?B?aFh3aERDYk1wV2tkU0kwUExtTmYzUTdWbXdZYkFzTW9ydUlvVTNSRzZ1eUxy?=
- =?utf-8?B?QTVqQlJHdUxPVWE5RHZPaFZlRWsrYXc1NUk1NXVObXNScmlDS1ZKb2tON1RN?=
- =?utf-8?B?dU9YSTJBVUk2bElXeUVLelNJSGRpWStwQjQvRlZCa0pjTzdUMmdhRDJqYmVC?=
- =?utf-8?B?NFAxeU5zQUZBNXZYckRUejhUYVdPV2FhcFVhT2k0SjFxQnArVUs2N1RIRkh5?=
- =?utf-8?B?VmF1N09TS0pWRWRBaXl3WmlIZmtYRTNadldKZVUxU0txRmNHY1pTQWhCSHdV?=
- =?utf-8?B?bm5uMGNiekJ2VURpWmVmcTNOamdqU3c3czFhMU0wYlRFZlRjQ2ZPOStWZzRV?=
- =?utf-8?B?QXlQcStOMDBFK0xxaWxvSjBiUWNvNlh0MWxERWNsTldmbHduZnVvdkxCdzZN?=
- =?utf-8?B?bHBXMUw0VUsvcG1sK2tUTmlBWXp3UGtIaUp5U0RXQVdsdTVpL21LcE1jSk5P?=
- =?utf-8?B?cWsyWVBOcTgzZk1oQ2hXaDFYZmdNMks5YTBzR2UybjIzZjEzVTIvOEVrZk5Q?=
- =?utf-8?B?bDBFQWl5RFRkRm5TNkVNMDh3aDduZDdPNlJIV0ZzeHZIamhWNld5ZlYzSWZB?=
- =?utf-8?B?L3NCbGJDaVlSS1QvYmc3TmtlUlRmNmVkZmJWMmxiL1JZUjVtMFFQOVFQZlN4?=
- =?utf-8?B?c0pla1pUakFiL1QvU1VyZlJXSG5USzBOUWlJSklYS04rQmFUSkNnck15TVYr?=
- =?utf-8?B?a3dmMGxiN0ttQ1k2MEtQYTJzalRlUDdrdm0wL0c0WVdEOXZaSVNiUHlrQVdD?=
- =?utf-8?B?ZzZHMFNyL012WkxKcWN6R1Y5SXl5aU9nME12dDBkcHZCNXJrbWFmSWp0WldH?=
- =?utf-8?B?N1lxWlRoMnJkM2w1RG9ZbzFJQTRRTW05L0dOOVNaVExqWGlNeXJDYzNNTU1j?=
- =?utf-8?B?Rm9tYTUwaXJBZlZnYi9ZdHNBd3JwUnd3dkpPVmVQQjAyOEU1cCt2K01Gdmg1?=
- =?utf-8?B?RmpWVVNXUUMzcGwxaDdUcWxFajZ1TTdJbkVGMkRLMlhNTE5hS1BBMnp5Q0xQ?=
- =?utf-8?B?aUxWTzVQZGhlcXRqNXRnTkl5SFdLS083NFY3SDZCakNZWVVaQTM5bWxNOVNr?=
- =?utf-8?B?a3MwOG9IYVZka3RKUUlnNGcwRW5uQzhUemVPeFVYa0I1Sk5ML2RuVmZRTFYv?=
- =?utf-8?B?ckdDWU84dVhURmU3eFRjN2FSM1BEQWJUQjFKalFBeUVyVC9ZQUFHVzJQNzVJ?=
- =?utf-8?Q?DUVb7ZchaLfXg7iLPer+ZPE=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
- SFP:1101; 
+ ARA:13230040|36860700013|376014|82310400026|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q3V0SncvaEN3SEpFTTBzU1YxcWZ1WjVPZzVsTFYyWEFrU1c5dHFzMjNtZXhT?=
+ =?utf-8?B?MUNlWWlqMU5acEtoaTI2VEVDY0pCejhiVTd1Q0haZVpvSkhDT1k5K0dDWnVu?=
+ =?utf-8?B?N0VyMDlHSUYzbG9NZW1IY2tDMXlId1ZKNUIva2FyTDFZcWNYR3JaTUxzRVAr?=
+ =?utf-8?B?dzAweURsWkxoWHB6NzRVQkt4WlZURkZVZHNMby9LODB4RnIyRS9uSDFBSFp6?=
+ =?utf-8?B?K1lEWTRUNzNXREF3bUYwc2xqemhzdjVxcEwxUE5QOTg3alpCT3lwb2NwQmhy?=
+ =?utf-8?B?NjQ4Y1J3Mlg0Ti9Vak5sNWlBbmRsVU9sZGtLd0k4Y29TUDRERkJQaVFoTUhC?=
+ =?utf-8?B?VUY2WjRDNW5rQXp1Rit3REpUaVpYaFArTWl1Q0VoQk8zYm1DRElDWDl6Q1h6?=
+ =?utf-8?B?c2ZtcmkrV2pVMmtBb203ZDlwR1E1a2h1N1pXWm9FUDR4S0YyT29TTUJoNGVm?=
+ =?utf-8?B?UFBqVFpTZDJkdkhrWCtlSnhjRE1FWFhzeUp3SEk0RnZTRjZibTBuV2dESFZG?=
+ =?utf-8?B?Y2dqVCtwWndRSndwa2s3aDdnQlY3R0h1UkFwV0RCTHpCZDhoMmxubEZHM05G?=
+ =?utf-8?B?SGtsbFY5aHJUSkZpY3lidk9sTWJKQ2pEdFM1RTd4TUpIcE1mS3ZLZDBSM0ZH?=
+ =?utf-8?B?ZEZScHlOelUwWTZJcmxtaXovdTc2ZXlaNmJPMlN0emNQRzhwTi9KTFVqQm5J?=
+ =?utf-8?B?RU4zNjRIRU4yOHY5T1RUN0lSRU4rRUpodS9VMXpwTm5PU1BsdlgzZlVHS1Y5?=
+ =?utf-8?B?eFpOZmJTamVKTDVYdUtBQ1l4Z0RQMmsyRGNuWVdKL0JtblpLTm9TVytCM3NN?=
+ =?utf-8?B?VTNyMjVLU1ZVTEhKMkVEUlA1c0xNR0syMWkzazgzTjdLdE5MdWNtZ0pGRkJO?=
+ =?utf-8?B?M2VweUl6eVgvVERxeCtLT1FCQk1GM0FvVmZ6c2pEZlJtb2R6MFp4KzJJK1RC?=
+ =?utf-8?B?ZTlPZHNwb1RoSjJZRkxyNnkrY2xsRC9oZjlNaE50Rlk5NVE3NCsySlhhTjc2?=
+ =?utf-8?B?OGdXL3MweVNnQ0k0YlpzU2ZrNk9vOGI5TmFML2NkbGdwRG5jZ3hSY0dkbmNs?=
+ =?utf-8?B?RlJPT1dlcHdhQUR4N1hQc1dnS3d2dnNNL0JqNEl4SkMwMUdxZTdsQiswT0Jt?=
+ =?utf-8?B?RnpsZ3ZyZ0FJQTZmQnF1TkVJTU9MS2dHRjROQjVVbkNSMDJCeEpQaGFUV0Vt?=
+ =?utf-8?B?emw1VmQ4aXd4WDZJbkZJSWIwWHN1OEkvVHoxbGFMTndVR1lLRUVKaUJUTmVk?=
+ =?utf-8?B?ODZGamVsZkRVcGs2QW9iV3c3ejlYem5hN0w5UW9MZFd5SU9FbTNxOGNEWmtx?=
+ =?utf-8?B?cmsvWGo3Wm9Kd2pTMCt6WXIxNjdzdWp2cWVjWmpPTmxTSDNIQXVNMmdtTlB4?=
+ =?utf-8?B?Mi96eFBCWDVXUVhPMzR0R01Eajdjb3NwcGkyTEtWNFU2L0pCSm03dFJmNlV2?=
+ =?utf-8?B?Rkd6d1d0MzhmdUNxRjZ4em12UjJKNFFJSkNERjdOVmtGNm1oc1NkdkRzWHh2?=
+ =?utf-8?B?anYwdWhnd1BMVlV5TER6cXJZcFdYTy9GZTFiSnhKaGNYTk8zSmg1NzY0NEpk?=
+ =?utf-8?B?bXpXNG5SRlZnR056UXVSMnl5bTBKamIxYWdVWEZiMDVteW1TclFDTEozQ3Jt?=
+ =?utf-8?B?TjZRbG5qb09aTjJCemp0d0NWNVFTQWhjbWc3d2w2ZWdUUFRtUnNwTk9pRkFp?=
+ =?utf-8?B?T0w1cGdmT0JyZy9MWGVDY1dOSWp0anVrSTJyUHRqdzFxdEpvR0NhQmhzYnRv?=
+ =?utf-8?B?T2tDNVhWUlBHSzJEY3ErbmdPNVl5bEZ1b0dsSUpJSnAwcVVidVFkMVBpOU1a?=
+ =?utf-8?B?bjVmZmpOa2JtYkFnUzZVZ0huSTNLUDI4M0UvNE1zY2ZTWlAzUVR5K09uZ1Nw?=
+ =?utf-8?B?eDlwc1Q4YXo3MlovWkE2NjhlR0piK3c1YWNOcEFDYjh4dm1TTGVDRmRreEt4?=
+ =?utf-8?B?MVNTdlo5RGhlcW5yb0xkcnJNWVhydFk0VWQ2cWxVRVBuUEQ3RHhHa1V6Uy9Q?=
+ =?utf-8?B?NlcvQlJjUDlMSmlFV2RObE1vMm15MDBQVXlBQmVUbjVucHc4WDVEdGhSVkRI?=
+ =?utf-8?B?UTZJNyt3ZW1TSVo2M2ozZkFWUklGQjNyTXJheWNoZzhjVnM0TGxPc2dqaVM1?=
+ =?utf-8?B?ZitNZE1SeXVIeWpuWWlKdXFTYjRVSytaaWFRckVTNXYyTXRBdVZPSkVPdVlN?=
+ =?utf-8?B?NnJ6b1JTUEIrNmtQSjh1bmVZQmxtTTUvMTg0Nm5zeWpmNk16dmozcUJjUFZs?=
+ =?utf-8?B?dzA3U3JFNVVFaUVBOXhnZUJGeWxBPT0=?=
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024)(7053199007);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: /vR6KrTlnK17mW60FndJAESQZdWEGpqdcjRNHzCmfChPe9S43uBd+aplx3+0dd5jqY9QGdxRc1ABXDu12AuyLRfW/8LMO257l31JJq4FQH0W+yuPpuf+zHP04LLq/5uOaajkiKvtJyijbQ3x/AmDw46/iF3I/Pdf+FY+znCHSkdNhwC5bRrAqX3RcBvi8M8bPiJGvz8Xg4/TdRkV4TNNXAbCG43p4INttvVMe/NBZAiJtl+5DVfPjeLX8JYZP1W74nE3AXedRe2KD32/iaOckrUDqw/9zXzRqy6/LaPpFXHHpf+vpxb3SE8pN8gKT+937Dgaf+8PL13jCLNWhbwHzp2D79JFxiz1KK3rm7unPW41RD21i2lg1jLddAxmbUUVlenLO0Xu4EvQIRNcbFBCFoOTtSg7bKUAyDrW9Ellk4kreZ+5SvjP5YJ4tKpE0UN1
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 09:46:23.5073 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb936bd7-ce59-4677-c06f-08de73899251
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00036F42.namprd05.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: OVZvTCtHaPmm7ZVeDNoXMGJpu4u3tG2NRRT9NR+VxRuDdIUa9jkzL5wUuWiN4F5Ow2Rqgn2qg9/1B8JISUxgLjgDD1Yrg8nSM3N6W/RHj3ulwrPkEEjBqm9g5IStO7wx1eH2k9+TTXGAtNDovy6/kfLvwzfvOq1C9iXFdW8Jn9wVu5p1GyYr2ZzwHJsA/oCV8c/uHyvTkxr+bPZ2ke0nD32chMoafbiyMVAbyAUL1+lkVh+gnDMQ+wm1VJHnb5DuhAb0nOpG6ESIDpXsAvTQ9Q8B/5/SjqF4PX4zndLohee5tW6hBWRWtV5oIRxqQWV2AbqtNX4RRpFUtHW+J2b6DE6Zs2JbaqErnCIKC+L1mP2/leiDwmHF3l0wRWuHie1NeoAMlcjrgvxqIhIR2hv4o88b5eSi2E3dJGaePYMgLvLhnsnWq49Q2CAiwPKwlXL7
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 10:01:45.7163 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84216788-7b42-418a-30b6-08de738bb805
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001B7.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB8203
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB7485
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,118 +167,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit,
+Hi,
 
-On 29/01/26 20:45, Kumar, Udit wrote:
-> 
-> On 1/29/2026 12:58 PM, Neha Malcom Francis wrote:
->> Depending on the phase selection (single or multi), the FPWM bits
->> configured forces the regulator to operate in PWM mode. In case of
->> multi-phase selection, the FPWM_MP bits enforce the regulator to also
->> operate in multi-phase. This fixes correct multi-phase operation.
->>
->> Fixes: 065a452ae6a1 ("power: regulator: tps65941: add regulator support")
->> Link: https://www.ti.com/lit/ds/symlink/tps6594-q1.pdf
->> Signed-off-by: Keerthy <j-keerthy@ti.com>
->> Signed-off-by: Takuma Fujiwara <t-fujiwara1@ti.com>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->> Tested on J721S2-EVM
->>
->> https://gist.github.com/nehamalcom/a74fb2a3b59421d0e04693c7d244fdb4
->>
->> Before the patch, the kernel TPS6594 regulator driver would warn about
->> overcurrent on a buck, this was due to incorrect multi-phase
->> configuration.
->> This patch resolves it.
->>
->>   drivers/power/regulator/tps65941_regulator.c | 13 ++++++++++---
->>   include/power/tps65941.h                     |  2 ++
->>   2 files changed, 12 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/
->> power/regulator/tps65941_regulator.c
->> index 2561d6f4c6c..e0297302914 100644
->> --- a/drivers/power/regulator/tps65941_regulator.c
->> +++ b/drivers/power/regulator/tps65941_regulator.c
->> @@ -63,13 +63,14 @@ static inline int tps65941_get_chip_id(struct
->> udevice *dev)
->>     static int tps65941_buck_enable(struct udevice *dev, int op, bool
->> *enable)
->>   {
->> -    int ret;
->> +    int ret, idx;
->>       unsigned int adr;
->>       struct dm_regulator_uclass_plat *uc_pdata;
->>         uc_pdata = dev_get_uclass_plat(dev);
->>       adr = uc_pdata->ctrl_reg;
->>   +    idx = dev->driver_data;
->>       ret = pmic_reg_read(dev->parent, adr);
->>       if (ret < 0)
->>           return ret;
->> @@ -84,10 +85,16 @@ static int tps65941_buck_enable(struct udevice
->> *dev, int op, bool *enable)
->>             return 0;
->>       } else if (op == PMIC_OP_SET) {
->> -        if (*enable)
->> +        if (*enable) {
->>               ret |= TPS65941_BUCK_MODE_MASK;
->> -        else
->> +            /* Enable FPWM */
->> +            ret |= TPS65941_BUCK_FPWM_MASK;
-> 
-> 
-> I am wondering, why you need to set this bit , I see default/reset value
-> is 1.
+On 2/5/26 00:35, Raphael Gallais-Pou wrote:
+> Drivers should extract device-tree data before probing via the
+> .of_to_plat hook.
+>
+> Implement it for stm32_dsi driver.  By doing so, it also solve a
+> variable shadowing in stm32_dsi_probe() where &clk was used as
+> peripheral clock and ref clock.
+>
+> For readability some struct have been renamed such as:
+>
+>    * struct stm32_dsi_priv *dsi -> struct stm32_dsi_priv *priv
+>    * struct clk clk -> struct clk pclk
+>
+> Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
+> ---
+> This patch has been tested on stm32mp157c-dk2 board.
+> ---
+>   drivers/video/stm32/stm32_dsi.c | 168 ++++++++++++++++++++++------------------
+>   1 file changed, 91 insertions(+), 77 deletions(-)
+>
 
-Even though the reset value is 1, NVM configurations done by HW can
-override this.
 
-> 
-> 
->> +            /* If Multiphase enable FPWM_MP */
->> +            if (idx == 12 || idx == 123 || idx == 1234)
->> +                ret |= TPS65941_BUCK_FPWM_MP_MASK;
-> 
-> you can use TPS65941_BUCK_ID_12, TPS65941_BUCK_ID_123 and and
-> TPS65941_BUCK_ID_1234
-> 
-> instead of 12, 123 and 1234
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Will make this change
-
-> 
-> 
->> +        } else {
->>               ret &= ~TPS65941_BUCK_MODE_MASK;
->> +        }
->>           ret = pmic_reg_write(dev->parent, adr, ret);
->>           if (ret)
->>               return ret;
->> diff --git a/include/power/tps65941.h b/include/power/tps65941.h
->> index a026ec56958..a8b1044b2f9 100644
->> --- a/include/power/tps65941.h
->> +++ b/include/power/tps65941.h
->> @@ -20,6 +20,8 @@
->>   #define TPS65941_BUCK_VOLT_MAX_HEX    0xFF
->>   #define TPS65941_BUCK_VOLT_MAX        3340000
->>   #define TPS65941_BUCK_MODE_MASK        0x1
->> +#define TPS65941_BUCK_FPWM_MASK        0x2
->> +#define TPS65941_BUCK_FPWM_MP_MASK    0x4
-> 
-> 
-> Check for alignment please
-
-Will rectify
-
-> 
-> 
->>     #define TPS65941_LDO_VOLT_MASK        0x7E
->>   #define TPS65941_LDO_VOLT_MAX_HEX    0x3A
-
-Thanks for the review!
-
--- 
-Thanking You
-Neha Malcom Francis
+Thanks
+Patrick
 
