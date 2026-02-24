@@ -4,56 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F793F4BB80
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 19:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC6B4F4BB7A
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 19:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AFC183642;
-	Tue, 24 Feb 2026 20:24:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id 2D51083642;
+	Tue, 24 Feb 2026 20:32:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="deuqBLUI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="daAwvkc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 243F883981; Tue, 24 Feb 2026 20:24:00 +0100 (CET)
-Received: from mail-244122.protonmail.ch (mail-244122.protonmail.ch
- [109.224.244.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0E57383981; Tue, 24 Feb 2026 20:32:02 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E3C382BF2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 20:23:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id 0C60F82BF2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 20:32:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=krotti83@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail; t=1771961037; x=1772220237;
- bh=yqhPeiSOn+H6uIMRcx+4JJeHmpSd8c/CAhtNCmEdt00=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=deuqBLUIC7bm8MIbj2eBB1ejFWwSbBwgfQ5f1qhSqAzq9Vq50P+0nDufQcB1xhYcs
- WVCuQ9C6WDuS9cgWerkkBD0pZc9g4TAXbaiS0G2OlO/f8EWhTualE0/1mz105JGOxG
- oy0AAjT/e9pKSFlVuwjzhSy8C2oyh9sVFFUOp/2bxH/yOCDYRnzGMZ+kATlwX06Ezc
- v56/lkdk+AW0AQLlXXsWq7e/T1iNYV5Yepd//FZVabtrb+Sm26aX7CjajK72U2iedV
- Zh07swYP+lldV0mPpAMv2Aw2ESNoybQKy/cD141Pk+yEY2BmiWrBgk7ZgGv4JbjDK/
- Yb6WuWQatLVZQ==
-Date: Tue, 24 Feb 2026 19:23:54 +0000
-To: Tom Rini <trini@konsulko.com>
-From: Johannes Krottmayer <krotti83@proton.me>
-Cc: u-boot@lists.denx.de
-Subject: Re: QEMU: arm64: bloblist not found and alloc space exhausted
-Message-ID: <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
-In-Reply-To: <20260224170908.GZ3233182@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b7cf4a975d2so1028952666b.2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 11:32:00 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771961519; cv=none;
+ d=google.com; s=arc-20240605;
+ b=iIFfew+PMjs2qegbmp013uWijXoLJMgIzN1iCNL8x3yg0kKrMCQlJ+Q4ztl+IjZO1B
+ TeUm1lg65O3b0BeETIICg6Smms6fzDEWrMCp/p1Vhyfj7nxWF5jRVaN8w4C2NVMFfKuZ
+ XZHwIVFMsjq1L72LV/D+QnvEirnZEHxJkM9F2jQlhzUWHPp2rCHx6etLdcC1On3LkVbQ
+ RspetkhTt4q/EHcrBES6AzJCRvsicqYo4eY/v+xg4b5E0iX2UFF9h0IJKEXAWDuqc/qy
+ R9ctWrQ+llepPNmtDk2007DHwpd1DehPrxO97zZMVAw8zhmVl4NyUp7ywFGDKT4ovq+m
+ Zvmw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=snW1AweIJvzhShHgR3CzM93sdEj0SY+8Rzi59/IESts=;
+ fh=fDTss1FC6xfwKRwB6ZYnZrdJYyzRA1L+cZTeDxC1HfA=;
+ b=JfN2b1ddacyBjyXTgOWdvgC7FLjsoSj5Oq3/o333DYr3GYGtmS6Zg17k900nZLVCDh
+ UKxexTbZbjH4LMxd4BJl1waXIlV/SBWFiFpre/WX4BdYIGe66Pf+Gduah9rBrPDKBOx0
+ 6cySqwAlVSft6Gzgi6uRVH5DDoX73rx8cCXh2IHBbOebs4XcuiVd9siBfkW8JeQVdAXg
+ y6s0XZQY8Z258pjEIEJ9UlXb2rpgD/PTsAqEtGPTZxXQ05Mklgw2iW7SRTatw7rrDxzX
+ etE3y/nLQM/DrDW7sToY9eoB5hudFtBuZCQQ0l3TrNOhPdIZWskMoMERF1IOfCtclh7U
+ ikMQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1771961519; x=1772566319; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=snW1AweIJvzhShHgR3CzM93sdEj0SY+8Rzi59/IESts=;
+ b=daAwvkc1HQYgusIqKEUWBg57/Bs3BnQTm8fwY/IbYGq8gWvZIvxlLHTW/oSRQwCIL3
+ kjDBmoa7mplSqtqCR92vcB+ZkKxABd1JrwmnSLlKtzHR8JUbUN71DTDCSE86XR7HbAoE
+ nTBBD6BmFosNTxU96nVt4egH5u1jxvNpbQvm4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771961519; x=1772566319;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=snW1AweIJvzhShHgR3CzM93sdEj0SY+8Rzi59/IESts=;
+ b=rUTkoLn8Por4mNAh8wASuYTydZHMnKp57Rc4eZpU6FAmf/cuo3k+1bMzJR/aUPkx4R
+ AW8QSPFuBR85gU2eaGCo3kWBWwALVv/9nX9tTPcyRGhdZl/lKynST8Z72m0PTuOOBFcG
+ j2zzUe/5PaWIyfqMPd09Lgpg7VYJVyD44xQAIhDGNQq5Sq76QVtpRE0ZXqPDA53AmgoH
+ AeB4GPHvxJCIsO6Fv6qaqXx/gd0JNLqUmX9QNZDPv8DJe8oaJDLLuMHMpcvtO1kleDjw
+ 1K3b/I6xBStFZ4WRZvqL0wbCYibl4AUEERQPefEbY+Ta9cxfJsZwgZYaRw/JuCykYbyK
+ jsWA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzvI4GQNw2Q3kX7eUe4nEjLqqzbGV8frdv6UDUYFjPNUbeE9UjvSWEbXOXSBHOGwAFmutXfT0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxoPBAgMPShzF8zYmk7+Vwkb5PHHDx42Av3PT4466RT+wTPsz3s
+ EPDmk1lUInbJsLf/ndXB6iuDNmnry2y/t99OgdRjQb+PjAup5o/m26fjcrDKmR80ZrR6Fmfj+CB
+ 4/r8iTJvxGCuODniCsVHgwiByfgBUeucub7EY5psU
+X-Gm-Gg: ATEYQzx7jeGxNX/wD+GDAdwMmQV+OaTFfuP09vQwDDiHkPKMwlPSUxEmDJi9i8qjwHM
+ 06i7qv9o6BYVvFNZfm6jRQ9P9rXJeKr6tQptQAFZMckEnkpg4z+F2XJP3OwZQplvm/c8DqsbKkG
+ muUHNVda4r7lTYjIy1AV0C0UuAwb8E1xZnKb3aD0u9L/ujhlq5hJALiAfURTVAUxcFSQKlnjrVW
+ Z8HxC4e4r/AVv80X7lAMTYARCxgLzBz5pf3TBnBhogGd45oJjUAkg/sXZw28p/k+5M2vJbjlkWm
+ XjRIMQ==
+X-Received: by 2002:a17:907:fdcb:b0:b72:58b6:b263 with SMTP id
+ a640c23a62f3a-b9081bfe5b1mr701567966b.60.1771961519390; Tue, 24 Feb 2026
+ 11:31:59 -0800 (PST)
+MIME-Version: 1.0
 References: <a1cd73a2-582b-447b-bb3c-e88afcf99545@proton.me>
  <20260224170908.GZ3233182@bill-the-cat>
-Feedback-ID: 148511850:user:proton
-X-Pm-Message-ID: 8b6d5ffab00302118e8d56c889307db77a64d144
-MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature";
- micalg=pgp-sha256;
- boundary="------83f846601591812f1c26b5d18e9e0f64a12baaf6f65fb2626b48ef837afda63f";
- charset=utf-8
+In-Reply-To: <20260224170908.GZ3233182@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 24 Feb 2026 12:31:45 -0700
+X-Gm-Features: AaiRm50JzamSiphR8D830SZbRV3zgBgPfnWQ80X619yok5PbnnbCmlG5bk15OAk
+Message-ID: <CAFLszTgx6MZmmjoa0LtFCors9H6HE8gSzvVveF0DHC_sktr+NQ@mail.gmail.com>
+Subject: Re: QEMU: arm64: bloblist not found and alloc space exhausted
+To: Tom Rini <trini@konsulko.com>
+Cc: Johannes Krottmayer <krotti83@proton.me>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,130 +110,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------83f846601591812f1c26b5d18e9e0f64a12baaf6f65fb2626b48ef837afda63f
-Content-Type: multipart/mixed;
- boundary=e16c49e482d16f9cdb562f3c6ccea9560054ccae384a9388bf032576b75b
-Message-ID: <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
-Date: Tue, 24 Feb 2026 20:23:51 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: QEMU: arm64: bloblist not found and alloc space exhausted
-To: Tom Rini <trini@konsulko.com>
-References: <a1cd73a2-582b-447b-bb3c-e88afcf99545@proton.me>
- <65qaCRisfTdS6ualFlbblE05vTDAqzvNRNDRt3UyiCGJpXvxpdTVo9Pfx3SFpjbCd5_uH1wrkUCMn8tmgbDO6g==@protonmail.internalid>
- <20260224170908.GZ3233182@bill-the-cat>
-Content-Language: en-US
-Cc: u-boot@lists.denx.de
-From: Johannes Krottmayer <krotti83@proton.me>
-In-Reply-To: <20260224170908.GZ3233182@bill-the-cat>
+Hi,
 
---e16c49e482d16f9cdb562f3c6ccea9560054ccae384a9388bf032576b75b
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Hello Tom!
-
-On 2/24/26 6:09 PM, Tom Rini wrote:
+On Tue, 24 Feb 2026 at 10:09, Tom Rini <trini@konsulko.com> wrote:
+>
 > On Tue, Feb 24, 2026 at 10:26:35AM +0000, Johannes Krottmayer wrote:
-> 
->> Hello,
->>
->> I'm tried to compile U-Boot for an QEMU AArch64 environment, but get
->> some error messages in SPL:
->>
->> --
->> Bloblist at 0 not found (err=-2)
->> alloc space exhausted ptr 400 limit 0
->> Bloblist at 0 not found (err=-2)
->>
->>
->> U-Boot 2026.01 (Feb 24 2026 - 10:22:15 +0100)
->> [...]
->> --
->>
->> Started the QEMU instance with the command line:
->> $ qemu-system-aarch64 -m 4G -machine virt -cpu cortex-a53 /
->> bios u-boot.bin
->> $
->>
->> Also the same errors when I use TF-A and OP-TEE with enabled
->> EL3 and EL2 in QEMU and "u-boot.bin" as BL33.
->>
->> Has somebody noticed the same issue?
->>
->> I used the configuration "qemu_arm64_defconfig".
-> 
+>
+> > Hello,
+> >
+> > I'm tried to compile U-Boot for an QEMU AArch64 environment, but get
+> > some error messages in SPL:
+> >
+> > --
+> > Bloblist at 0 not found (err=-2)
+> > alloc space exhausted ptr 400 limit 0
+> > Bloblist at 0 not found (err=-2)
+> >
+> >
+> > U-Boot 2026.01 (Feb 24 2026 - 10:22:15 +0100)
+> > [...]
+> > --
+> >
+> > Started the QEMU instance with the command line:
+> > $ qemu-system-aarch64 -m 4G -machine virt -cpu cortex-a53 /
+> > bios u-boot.bin
+> > $
+> >
+> > Also the same errors when I use TF-A and OP-TEE with enabled
+> > EL3 and EL2 in QEMU and "u-boot.bin" as BL33.
+> >
+> > Has somebody noticed the same issue?
+> >
+> > I used the configuration "qemu_arm64_defconfig".
+>
 > That's odd. We run it in CI, but as cortex-a57 not a53 with otherwise
 > similar arguments. Running with TF-A/OP-TEE is also in CI, but more
 > difficult to configure.
-> 
 
-I 
-have tried it now with the Cortex-A57 but running into the same
-issue without OP-TEE and TF-A. Using OP-TEE and TF-A works now
-without the issue because I have forgotten to pass the option
-TRANSFER_LIST=1 to TF-A and CFG_TRANSFER_LIST=y and
-CFG_MAP_EXT_DT_SECURE=y to OP-TEE.
+I can repeat this. I didn't dig into which memory-allocation fails.
+Somehow it is not fatal, but likely should be.
 
-Host OS: Debian 13 (Trixie)
-QEMU version:
-$ qemu-system-aarch64 --version
-QEMU emulator version 10.0.7 (Debian 1:10.0.7+ds-0+deb13u1+b1)
-Copyright (c) 2003-2025 Fabrice Bellard and the QEMU Project developers
-$
-
-BTW: doc/board/emulation/qemu-arm.rst doesn't mention how to build
-U-Boot with OP-TEE and TF-A. Should I include the build steps into the
-docs and create a patch for the doc? I think it's also useful for
-other users.
-
--- 
-Kind regards,
-
-Johannes K.
-
-
---e16c49e482d16f9cdb562f3c6ccea9560054ccae384a9388bf032576b75b
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="publickey - krotti83@proton.me -
- 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
-Content-Type: application/pgp-keys; filename="publickey - krotti83@proton.me
- - 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
-
-LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCkNvbW1lbnQ6IGh0dHBzOi8vZ29w
-ZW5wZ3Aub3JnClZlcnNpb246IEdvcGVuUEdQIDIuOS4wCgp4ak1FYUZyS2dSWUpLd1lCQkFIYVJ3
-OEJBUWRBdm9MdzByd3hVZEZsMyszSytnTWhkTnlTK1p3WjU2Q0hlc2xBCndyKzhzalBOSjJ0eWIz
-UjBhVGd6UUhCeWIzUnZiaTV0WlNBOGEzSnZkSFJwT0ROQWNISnZkRzl1TG0xbFBzTEEKRVFRVEZn
-b0Fnd1dDYUZyS2dRTUxDUWNKa05aaG1aenF4TUNlUlJRQUFBQUFBQndBSUhOaGJIUkFibTkwWVhS
-cApiMjV6TG05d1pXNXdaM0JxY3k1dmNtZnQwODBDTndEN0laNnB0eVgvVzhucHhhRFlwT0x6Zm05
-Y21aK0hUUGJZCkN3TVZDZ2dFRmdBQ0FRSVpBUUtiQXdJZUFSWWhCQnBkYmc2UkVwSmNUMWFzaHRa
-aG1aenF4TUNlQUFCdy9RRUEKOVVkYTBubVA4Q1g4UW1PciswNEY5U3g0c1NSUHhza0NsdE5rWlRW
-RHROb0JBTjFlL3I5TnFZbUx1MjI4eHlVbQpmMHBkVXFlallJTytPT0lFZFFhMEZQd0V6amdFYUZy
-S2dSSUtLd1lCQkFHWFZRRUZBUUVIUUJjYVpHMlZxK1MxCmV0Q2NSWDVJaGZnSHJCTFhIcGV1SzJC
-VmZxZFNFVlltQXdFSUI4SytCQmdXQ2dCd0JZSm9Xc3FCQ1pEV1labWMKNnNUQW5rVVVBQUFBQUFB
-Y0FDQnpZV3gwUUc1dmRHRjBhVzl1Y3k1dmNHVnVjR2R3YW5NdWIzSm44bk5IbWtwbApTakU0b1pU
-WDVDZVlsamVGcmowd2pNWERNWENXZzdNNytnc0Ntd3dXSVFRYVhXNE9rUktTWEU5V3JJYldZWm1j
-CjZzVEFuZ0FBZGdBQkFMc2p0elBMYjBnVytUQkFzVXNGNjNZUW1BRXBsUm55RWwxQ20rclJNZXJv
-QVA5dVRkVFUKdThGL25ab0RUS3BxcGM4L1RqakhkU2JWMzMyUmhBdW1NSmQ4Q3c9PQo9TXJhaAot
-LS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t
---e16c49e482d16f9cdb562f3c6ccea9560054ccae384a9388bf032576b75b--
-
---------83f846601591812f1c26b5d18e9e0f64a12baaf6f65fb2626b48ef837afda63f
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: ProtonMail
-
-wqsEARYIAF0Fgmmd+skJENZhmZzqxMCeNRQAAAAAABwAEHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcmdTkS7yWicRFbdiArUbAvfRFiEEGl1uDpESklxP
-VqyG1mGZnOrEwJ4AAM/wAQDmaWUpu2JmA+2cbvCbZeMyzaAg4AyOcs4X8dbQ
-IjhF/AD/WkU9f1JHImkv7LaGb4ZtQqKP6S4vW6uz/cfMZrOgew8=
-=mLxO
------END PGP SIGNATURE-----
-
-
---------83f846601591812f1c26b5d18e9e0f64a12baaf6f65fb2626b48ef837afda63f--
-
+Regards,
+Simon
