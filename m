@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FB9F357AD
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 14:27:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73823F357AD
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 14:27:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2CF183EC9;
-	Tue, 24 Feb 2026 15:26:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3826E83F26;
+	Tue, 24 Feb 2026 15:26:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aAVX8SzE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GpnVYj3s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 632F383F1F; Tue, 24 Feb 2026 15:26:35 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 17E0583F20; Tue, 24 Feb 2026 15:26:37 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D45583EC9
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:26:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0717583F0A
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:26:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-4638e238094so2611367b6e.3
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 06:26:33 -0800 (PST)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-463a0e14abfso3851124b6e.2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 06:26:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771943191; x=1772547991; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1771943193; x=1772547993; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l62/Ne6Q7YquMtJssoyxi0nFhSec25xR3qASohNQjac=;
- b=aAVX8SzEmNgkmjsPvrLNE9Fli70BlgmxLK9FrzI/fVOrF5lfjd1B50MZtiqMElmQJm
- XTU/njroa3EhGbA/EBg2FJ/SPvfTolRzmseYnxNRIy2RFjCggSGc72IrAkBsBuENFn/X
- +ZB517ht81Caj66cw7GmBgwl7sL+7k7GUS9ZY=
+ bh=AmjzLBOpGWTouu1eCAp4J0pdLkYx1N2bBR/fRpbgKf8=;
+ b=GpnVYj3sGNASuYV4qK2JvR+/famtU4eKb/4Jl53Jc+otC0LluImv4f63blVVWk/QEj
+ 4KaO7WE7sbYO5j7b2CTSR3mPJHmexfVqq24IGOHPbtmh6/+0EsiHKlFyqaLOwPZRspFX
+ Dlxg6rduNn1q0gm9A1uOAVO8EJcFwNDeV8exM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771943191; x=1772547991;
+ d=1e100.net; s=20230601; t=1771943193; x=1772547993;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=l62/Ne6Q7YquMtJssoyxi0nFhSec25xR3qASohNQjac=;
- b=eIZwbwrfhLU1cSdFMAkzXIYoon7TtvjLPtDytsTvGJw9O0aCUnqTgTSA0+4/+30wYQ
- NVqvQWfMslGIGwdCl8Yp+ttKV63Stk6iOXO2iAlIsOHqPX9UEnW4zj96230qI6ZxAGRG
- GBWLMdfck1HDp0YAORmrHDCehnRT2G1xAX7cPdtStGcbI7Iq3+cQ7i4DDgcVC1S6es+g
- CIb9vR7fQzJZ2G+w7AbsjALBq519mVfWXfyAR1jefXS54EYpkY8TM6kkANZDqmQM1vIz
- BAkme4Qt1TDBvcKbHA8pT4FziehOFcUyiGE0boEG7xdIcLPGB5n5MuCW7JGVVJ0y+/Zr
- 3o6w==
-X-Gm-Message-State: AOJu0YzP2QbnAu1tfPQSihCiQLorcVW6U99sgDdR2XT2QlhJFJDd0rbB
- b7ZI+FgAN3z2m684vocykFNrsDF46OAmaeHdYmx/pmppswPlaDGDtSgzYfA0tdESESrUkGgAI/8
- 450Q=
-X-Gm-Gg: ATEYQzy4HEtBNtV+T1YXQ5FJKPoBUEAxHG+AitMoCeWE2py72CqkbRsmzBEKgkCYn0K
- USX46JEappVTfYDueNt0oQQitQAhODZmhDyJ6xASHmIDEa3OsgnDvKYTw6YGIAV1y4k9Hoz5E0/
- gPtbQYBdOMwbL0gAPsPEqb9X8+pl7uhKCGsw91RDWwBUmzkXWfOYKcxRXUY0HZNK1Tw47gPYZFk
- lHN1bXHnwDIOmbOmKozy5Yjt4CdHt0PMM8TZjcQXj/AZmXwxqGFL9AxpvHV040dbH3rNFcxEp9z
- BX2XQzS7oRTVIbFlGrEt0uvhqiJbhSBU/Q4F6YBWxcM0GRBEcEgvilJpV1zOKcOPOjGxGwCVQaW
- gr6g8Lsb+aLCAy7hto8Ki7pNaXFTzj4O/fynaVt7Ri/CuwHOvN+QeY5dU/aB/93pLPhn/D2wHyj
- 6HX4EktV/HJ9sy3srX1CIZS06QVRYdWA==
-X-Received: by 2002:a05:6870:e196:b0:3e0:ffcb:2f84 with SMTP id
- 586e51a60fabf-4157b0ea219mr6021211fac.28.1771943191367; 
- Tue, 24 Feb 2026 06:26:31 -0800 (PST)
+ bh=AmjzLBOpGWTouu1eCAp4J0pdLkYx1N2bBR/fRpbgKf8=;
+ b=HiiuXWW/WlmbkQSqNKfOd6iiDgLu9Ta3N+V1K06ce/vjhNBLZmoKKwb97/xysqt02Z
+ e0i/elWcG5cbc0DcGhOF6v6NpzpIYxBiBFOiYau2BeApwyj0pl2dqv9c6XZ+ycno1cQh
+ PdOT0RwbSxBIgch3RbJmEpPu4w1S3SHhSv11S1ZHFM3lD2NXzzqwbQwpzqki10MDbGSf
+ iKNQa9txuLyliuAaRRGcLBlbc4pSBk98oMZrYRhcMacDXNnq5GSxyaVd+6smr9vgkMRr
+ HW3ThNDwnsvZy1l5BgmdtI9+xT/6RKHzcPxnruwEQGTAqookMZ1f01hwwEzwKENZO2eU
+ 67rQ==
+X-Gm-Message-State: AOJu0Yw8dav/mEvgI1sLr1mYP3Lzt9esZU72sWP5EIHBHBh04C8fwIUv
+ 5/hFhIFoURjn5L9eQ6NtXo5A9miZviEU4etA0irkCBmlnSw464YU4w6/5OPJNNWM+DidS4LEokC
+ bnF8=
+X-Gm-Gg: ATEYQzwE3nUQQHPT3h/fnBKPY2hwsw5sLLqRToShg4zbvoEK/nf/72/4B4l8IKU9lVo
+ 5RBZDkrG1ayF6nitsMD/y5heDqcDYAqpY07gNymiNuRflrKg2tjHXi/UNlz/ItOIoi0Vk5sINjl
+ 90qksFDZHFdF3BRGytQOE3NUEm/GSwlitYXh9daHAEcFMgBu2yJ+fDAJt6SKyCLH6ZKZJVNNM4S
+ nbzPOwCThJq1E6tN0lOOLPYUZan+Ol+42f89kEkNS8jtHHD8Io7tRobCxRxGW4K1/kw9LhqzmF8
+ lBiYnvdvZiJgsRdCk/HmqutdNUlaO2TIcXjhLiiHISboznM+8H567UAsGAcJkbZH4wnqLm+hO1D
+ rxoc3DI4h/TaCAlDVCuXRVAJCcbJk5kxWJ8+InPGK2tvkpQKYuG0k/GLxZN8cE7fk9D9RzedB+k
+ r/6+fGwcoSyBoDUXbvPxjCzZVp9De2bT8jm2psXRW/
+X-Received: by 2002:a05:687c:4093:b0:3ec:4067:3d1e with SMTP id
+ 586e51a60fabf-4157b15f486mr7105712fac.40.1771943193068; 
+ Tue, 24 Feb 2026 06:26:33 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cd5e168sm10199478fac.4.2026.02.24.06.26.29
+ 586e51a60fabf-4157cd5e168sm10199478fac.4.2026.02.24.06.26.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 06:26:30 -0800 (PST)
+ Tue, 24 Feb 2026 06:26:32 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Guillaume Ranquet <ranquet.guillaume@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 6/9] x86: Call bootm_final()
-Date: Tue, 24 Feb 2026 07:25:48 -0700
-Message-ID: <20260224142553.1608883-7-simon.glass@canonical.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo <ycliang@andestech.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Rick Chen <rick@andestech.com>
+Subject: [PATCH v2 7/9] riscv: Drop board_quiesce_devices()
+Date: Tue, 24 Feb 2026 07:25:49 -0700
+Message-ID: <20260224142553.1608883-8-simon.glass@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260224142553.1608883-1-simon.glass@canonical.com>
 References: <20260224142553.1608883-1-simon.glass@canonical.com>
@@ -97,62 +98,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The x86 code in bootm_announce_and_cleanup() is very similar to the new
-bootm_final() function, so just use the latter. Move over a useful
-comment.
+This is not used on RISC-V so drop it.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Drop the call to udc_disconnect()
 
- arch/x86/lib/bootm.c | 14 +-------------
- boot/bootm_final.c   |  5 +++++
- 2 files changed, 6 insertions(+), 13 deletions(-)
+ arch/riscv/include/asm/u-boot-riscv.h | 1 -
+ arch/riscv/lib/bootm.c                | 6 ------
+ 2 files changed, 7 deletions(-)
 
-diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-index 7a94dc877e3..cde4fbf3557 100644
---- a/arch/x86/lib/bootm.c
-+++ b/arch/x86/lib/bootm.c
-@@ -34,22 +34,10 @@ DECLARE_GLOBAL_DATA_PTR;
+diff --git a/arch/riscv/include/asm/u-boot-riscv.h b/arch/riscv/include/asm/u-boot-riscv.h
+index 543a1688db8..3a8fdb57136 100644
+--- a/arch/riscv/include/asm/u-boot-riscv.h
++++ b/arch/riscv/include/asm/u-boot-riscv.h
+@@ -16,7 +16,6 @@ int cleanup_before_linux(void);
  
- void bootm_announce_and_cleanup(void)
- {
--	printf("\nStarting kernel ...\n\n");
+ /* board/.../... */
+ int board_init(void);
+-void board_quiesce_devices(void);
+ int riscv_board_reserved_mem_fixup(void *fdt);
+ int riscv_fdt_copy_resv_mem_node(const void *src_fdt, void *dest_fdt);
+ 
+diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
+index 9544907ab1e..c6a008a4559 100644
+--- a/arch/riscv/lib/bootm.c
++++ b/arch/riscv/lib/bootm.c
+@@ -25,10 +25,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-__weak void board_quiesce_devices(void)
+-{
+-}
 -
- #ifdef CONFIG_SYS_COREBOOT
- 	timestamp_add_now(TS_START_KERNEL);
+ /**
+  * announce_and_cleanup() - Print message and prepare for kernel boot
+  *
+@@ -46,8 +42,6 @@ static void announce_and_cleanup(int fake)
+ 	bootstage_report();
  #endif
--	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
--#if IS_ENABLED(CONFIG_BOOTSTAGE_REPORT)
--	bootstage_report();
--#endif
+ 
+-	board_quiesce_devices();
 -
--	/*
--	 * Call remove function of all devices with a removal flag set.
--	 * This may be useful for last-stage operations, like cancelling
--	 * of DMA operation or releasing device internal buffers.
--	 */
--	dm_remove_devices_active();
-+	bootm_final(0);
- }
- 
- #if defined(CONFIG_OF_LIBFDT) && !defined(CONFIG_OF_NO_KERNEL)
-diff --git a/boot/bootm_final.c b/boot/bootm_final.c
-index dd7cac55f1e..7077702d8c7 100644
---- a/boot/bootm_final.c
-+++ b/boot/bootm_final.c
-@@ -18,5 +18,10 @@ void bootm_final(enum bootm_final_t flags)
- 	if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
- 		bootstage_report();
- 
-+	/*
-+	 * Call remove function of all devices with a removal flag set.
-+	 * This may be useful for last-stage operations, like cancelling
-+	 * of DMA operation or releasing device internal buffers.
-+	 */
- 	dm_remove_devices_active();
- }
+ 	/*
+ 	 * Call remove function of all devices with a removal flag set.
+ 	 * This may be useful for last-stage operations, like cancelling
 -- 
 2.43.0
 
