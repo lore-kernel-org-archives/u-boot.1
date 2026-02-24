@@ -4,96 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14033E9B266
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 13:56:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A998BE9B266
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 13:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E16CF83E13;
-	Tue, 24 Feb 2026 14:56:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 328E383E76;
+	Tue, 24 Feb 2026 14:56:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ycG9UpIy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rf1a5DbI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 523A283D3D; Tue, 24 Feb 2026 11:23:38 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CCC3D82A9E; Tue, 24 Feb 2026 14:46:07 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AC3C83642
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 11:23:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C55E682A9E
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 14:46:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-4377174e1ebso4093835f8f.3
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 02:23:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1771928615; x=1772533415; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qmzKwXZcnAhbjfmYmvH5khfegf+EZRvNKZc5/WgPL00=;
- b=ycG9UpIyBwdUi4LMmcAbFeZSSklWh+5WvMb3LG+dMRcgwhcxECUBXCD4ElLYNONJ03
- z+xdofp63rO0SD+/IkC7ZQ2iJLXNC+B34Dp+ZplP+7D2CHObuXPpV8HI3iNS44vXlXp3
- WAiuIuiOBtWK1vqe1zOIADP4GefoCnAn3uQqVAfDHNIZjH/k4bKbpSoGT+mhdDMt3Wof
- 2tf3MvPBFkytD3KGobKE/6JM0+el0iut1tNJrHVilzKE0NLEa/ixhtmZxmke6mxYN6V9
- e9398kJ8nsnJBSH7VLPzLSrNYMzhCJb/BI0sYN5s3XixnNoDs6WdVbdAJPojTuGy/CWn
- nsCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771928615; x=1772533415;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qmzKwXZcnAhbjfmYmvH5khfegf+EZRvNKZc5/WgPL00=;
- b=LlyO36+D82u8nvHXKxIxLvw6KNp8MAR+3M4L49zXmPi7BM3/voY7Hh/yb32IgbLafC
- Eh1EwUirkrvs9EvQ90KqYOqFax+7KSM33vFiNy5MNBCtgIQ/v1Ww6UH9N7ZXSuBF/4v3
- +w2lmtxXFjMR94iTU5McYMU+flPHtYIN/kTDGqcmcsi5E4+LBbbnxFfcdP3e6UyPTlEV
- bmgl/hGfEnZ6rNkudP6+3z05mHWvHnsi9icr10sNRBUHahesX3/Xj/WIhotZXhFtHrje
- mWJ0Jez0+XNzC6F2aOY0/IHQva8nQcBGzuNUqjUep3D6OVI4wuvqzCuY56So+DbuCfxA
- FtCw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5stT3SI6fwTud0CJ9uYqlTkka6kKMEU1TC8y9hm6GGOAxsHUTADIZLJBi7y3ul6MV/kMV0Cw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yypb7UgdsniCHjTNJPVBHxZEAB+5NbjHOSRuZVRL63aerxuvp2m
- SSMvEGTADsdLDd5MgWZHkNw3hH6s9jyhsxpHWBwTVIgFv+/UoSfgNy59juCj6QzOxxU=
-X-Gm-Gg: ATEYQzxLZDXe42Km8WbbTeX6ZEuIJ83fc3nFtYYRUPyUN8d2Vjpd8Q2BkxOP+CKtTip
- uST+YjyyOttD2hDGzH5Dkpy5JyUO2/tPVOZephXOjSMr4IKEnmdT42IoxJjYwpvwJlsCKi3mYUE
- 0Hc8+skjp4QvxuJ7AXYLYd4xead+CYqMY1pR7aXD4S+S4Y/stElOcYoqfXzzReCF/N2F/lk8rqm
- y1ZSwA84+DjEnLIrHsULXlwcYUyIeEi140TqcckTVeATWpyai8lkaP8rrhAVuVtbe0Yh9nLER8M
- +1LrnxEr8/qxYy7/oHFA6lE+1AR1jV8+0kzG4ulq2AQYM4ZE8OQuc0ESDi3m4j0jeNhzdFkSjR1
- lr5aOfyezBuDW4Da+DWNTGrItMObz0ey1EarV994eUAMsFsC0cs663DqH8oCOThjXQhBxflGRvL
- LuebXYdyCnlSuTZ6JLjmR4fYo6XVMj6tnX
-X-Received: by 2002:a05:6000:1865:b0:439:8a9d:66fc with SMTP id
- ffacd0b85a97d-4398a9d684emr1212031f8f.15.1771928615469; 
- Tue, 24 Feb 2026 02:23:35 -0800 (PST)
-Received: from [10.11.12.108] ([79.115.63.134])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43970d4bf89sm24515744f8f.29.2026.02.24.02.23.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Feb 2026 02:23:35 -0800 (PST)
-Message-ID: <4e4d660e-b9a1-48ce-aa60-ae63bea6bbde@linaro.org>
-Date: Tue, 24 Feb 2026 12:23:33 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YonWF1VU13Csv1bH23EXS2RDIfzvPfOVmTGrv2J+f3whoq3LDFO0N8VeT4i+mSkzD0m7zemUK7lLRajy1xs3WyZPMVhKrFMTDGfJy/nKfTWgd2USIz1urASk0qIU5HCVGAn/h07UZ/yz2wU3bJ34ucq8knqq3nu2ddeW2nD3FATwlB0jnFm9GD6bgnNZLarwOJCBCIqDGd5NWGmPEtl6LbxqnpuYlvXWgcYbgNDWhM/34/q4Xju60gVeJrsoBT2LeGKq87+bfzLSGfkR7BqajOwpK0bwzA8mX4c1mHpV/ceZW5g5WYdzth6LmxBNmBxro9Zkn1Gc9tK4fm9PkdJ+2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4RoOmWi0cxURHx9Vk40qlIbjDt3OBW3IVQ4c5p8Jdh0=;
+ b=Wd3Uewh8qy4f0B+7pGsZf/BOH+p+/MpFGtiGxVKTr6zp5MP3VfIMmZV1WDkDqXtf3/HXOGQwkjVpaj83aw7fGx67tlAeevLHR8SnboD+EteK4Ifn4mzKP/wSvpcTS1yj48hfXru9DohZTGVJ0zySz+4h3JZ/hHlE/vyCVx8+IzCB79dDICXgZMJTdgognq0dfu5IIi5zzFPTXdkrHbM1koZqeB2u9wzuSEXF6snt7ayFoA5Pi27VqAhrqJ5iC08xBtgcVvUVoVEU9ypd2iSbOE/4Dm/gv3UdIUAXWOgz1G4iQ769bYwCcoPinuaFJY54TdTElC4HTA1tKAC3fOb/qA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.194) smtp.rcpttodomain=phytec.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4RoOmWi0cxURHx9Vk40qlIbjDt3OBW3IVQ4c5p8Jdh0=;
+ b=rf1a5DbI/2Ff1okY93eFj/onEhtfm42OxlHkE7FopJ7e5Zc4SjnioJwlIMvRtViqliP473ajxwcC7OPLVQhTMhUGWZw6SxQt+5181VFM3c/WlNqye5dmSNpe5qEfuDUCZQmZJzml9kce6Em7J3ndr7XUviz1Wi3FyZlCrL8KsDE=
+Received: from SN6PR01CA0004.prod.exchangelabs.com (2603:10b6:805:b6::17) by
+ SJ2PR10MB7038.namprd10.prod.outlook.com (2603:10b6:a03:4c5::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.22; Tue, 24 Feb 2026 13:46:00 +0000
+Received: from SA2PEPF00003AE7.namprd02.prod.outlook.com
+ (2603:10b6:805:b6:cafe::37) by SN6PR01CA0004.outlook.office365.com
+ (2603:10b6:805:b6::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Tue,
+ 24 Feb 2026 13:45:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
+Received: from lewvzet200.ext.ti.com (198.47.23.194) by
+ SA2PEPF00003AE7.mail.protection.outlook.com (10.167.248.7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 13:45:59 +0000
+Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet200.ext.ti.com
+ (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Feb
+ 2026 07:45:59 -0600
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Feb
+ 2026 07:45:59 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 24 Feb 2026 07:45:59 -0600
+Received: from localhost (ti.dhcp.ti.com [172.24.233.157] (may be forged))
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61ODjvkw2818568;
+ Tue, 24 Feb 2026 07:45:58 -0600
+From: Devarsh Thakkar <devarsht@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>
+CC: <sjg@chromium.org>, <praneeth@ti.com>, <francesco@dolcini.it>,
+ <d.schultz@phytec.de>, <w.egorov@phytec.de>, <ggiordano@phytec.com>,
+ <bb@ti.com>, <anshuld@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>,
+ <s-joshi@ti.com>, <s-tripathi1@ti.com>, <k-malarvizhi@ti.com>,
+ <kamlesh@ti.com>, <s-jain1@ti.com>, <r-donadkar@ti.com>, <sen@ti.com>,
+ <devarsht@ti.com>
+Subject: [PATCH] arm: mach-k3: common: Clamp RAM end address to board-usable
+ region in spl_enable_cache()
+Date: Tue, 24 Feb 2026 19:15:57 +0530
+Message-ID: <20260224134557.2067046-1-devarsht@ti.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFH] SPI and SPI-NOR patch help
-To: Takahiro.Kuwano@infineon.com, miquel.raynal@bootlin.com, trini@konsulko.com
-Cc: mwalle@kernel.org, conor@kernel.org, u-boot@lists.denx.de,
- Hiroyuki.Saito2@infineon.com, venkatesh.abbarapu@amd.com, p-mantena@ti.com,
- vaishnav.a@ti.com, prasad.kummari@amd.com, pratyush@kernel.org,
- vigneshr@ti.com, marek.vasut+renesas@mailbox.org
-References: <20260213164607.GI2747538@bill-the-cat>
- <20260214-sternness-cling-4259916a8f73@spud>
- <DGG8OA1O1UEL.12RR559TX4XX6@kernel.org>
- <20260216153110.GV2747538@bill-the-cat> <87bjhmv20f.fsf@bootlin.com>
- <46b5a69c-f589-4c4e-99e8-6bf0c41be573@linaro.org>
- <90d5d396d2ec4888a4359ca4b2392b8d@infineon.com>
-Content-Language: en-US
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <90d5d396d2ec4888a4359ca4b2392b8d@infineon.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003AE7:EE_|SJ2PR10MB7038:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6dc542ae-4e06-4cb0-58a9-08de73ab0b37
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?l6Qpsd6lHJ+MJeYeoyHtSq1UAOQocdu8EGuMT4A7b0I4hDpWY2VgECNR3Uv2?=
+ =?us-ascii?Q?boxPHMsdSd9+vDk7X+fVbdWTtX91YnMlWDTzrfsh5pqfyhAjVz271l++piVZ?=
+ =?us-ascii?Q?jfWT8hJkKQgUaRzrLaMzMFJMFRu1vTGX0iylqEVdCAKGLFCTpeXg9IYznIiB?=
+ =?us-ascii?Q?vZLbnt+q6a2MbTSTddN5AlWd0OXLVJ5kJ+G6fDwG/3e/SiM0EjkPqmXs9+qI?=
+ =?us-ascii?Q?5t0tZ9xPkw6A18qTNy9nrNjkkqen07UkizRgEXef82qz+i7cCOxpbdVVlIwj?=
+ =?us-ascii?Q?n7pB34euyGKv3BbBcdmyQLCBFefVLEFRQCs+3A150mlSYR+4/8GNgsDssOyi?=
+ =?us-ascii?Q?eYn77bYKMJp6MVP0b3n5UjT90rjYDaFm9giw3fmUtZRAZ05hEJGbZRk1rTOm?=
+ =?us-ascii?Q?Q+ZYQ9IZqQmzqUh3gJeAoyTu/TWHcYviRvkwPUcmjMpC7a7ZcM/Mj8fHtmk1?=
+ =?us-ascii?Q?6JmaPkg0dhuEgPuZEmKsRepSOgoBYBgpEF1RynIpZES5K2wJlqUWx1Xhzo4w?=
+ =?us-ascii?Q?8evAu7PrBB2dXiiYrJFznol064ZVjlsSTOLCRVLcTywmZo1BWZcK1ejiqW9T?=
+ =?us-ascii?Q?4BpRI7C+rNGR81vVA3SmhxVAuSMOQwaLKUsAnp3BkML8v5e6xWescoFNJTWH?=
+ =?us-ascii?Q?+LGWTWKnsls7xmsCtwGF0btcB2hhkV5DS+HNDloXbC0SoHDvSwEYrdi9oJKy?=
+ =?us-ascii?Q?pgUu+2VpJVypWPMs5DfJJKZaaxB4YXBXfHTo3EX8B1A5+188WRpwxPCOszKw?=
+ =?us-ascii?Q?RDPfdO3xkVtIMl4Y3N2XJTy32JoCnUKum7DilMFtelpatGu7AjOxi63dvBk2?=
+ =?us-ascii?Q?RdAuOPGvRt3LdT/+UdsGFxnKr06FE4sJwsAvOmR2HNyaQzxe/JnIxVcdje6u?=
+ =?us-ascii?Q?DNmWUBEhYm+Za72iZdJml4jMrfoc5y9CqmEL/fSXvpMsuJFvtrG//WMwAJFZ?=
+ =?us-ascii?Q?eGZfzWfoqcyWKfZAesCqFJ5ycS6M+FjNJCMqw/T8FFgqlaqn9EQowcZkmxZK?=
+ =?us-ascii?Q?yIj/wq9drMgoxAPsXPOXH42oYM+Ugv94LZitSQLny68PW1ggCT/pbrTj9W4n?=
+ =?us-ascii?Q?kMZZXAHKrlMnj3qHHEluxnfi2AKwNEzIXRD4BYolTIdjgbO0KdK/9QGjDhYY?=
+ =?us-ascii?Q?22UjCj+tAhSzl5/riN1KUxUrRJQmoY7F/b/a41ZG9n1qe5YTLSi2X5XAayBa?=
+ =?us-ascii?Q?UKqJ4AJp1COe7Or9PcRjxHY3a1og81IPRaUu+m0iT4elqsyWICZdxFlVXVpn?=
+ =?us-ascii?Q?js+hQNiWtDz/G2xmqi/2DDj8ywNfHyuMPElouXNhMi5KQSshlveV3CAHWrhG?=
+ =?us-ascii?Q?U55RwqYz4frmzuePtuFTzAN2LGnkQioGk2slObq6n6PvNFppdwcUVWQHS38a?=
+ =?us-ascii?Q?aBHlOe0IuVK/cuulAwtRXV6YqMZyDUvvDJfqY1gMdWpG4fi9gErPrH6aChsk?=
+ =?us-ascii?Q?ERtrKCIIDuvpxggYbf844j1Z966gS+7x4As/SMliIA4HfkbD/JJxRC+GHbt9?=
+ =?us-ascii?Q?uEnlmIichkax3S6IOY8shT1LREbYPJR5J9REnijYQITLt2jhdcC+Gmjlyfh5?=
+ =?us-ascii?Q?8vMf0AdQ+KkPtHi6RQG9pWtzhXK3TLoCa23CkXrZAQ8zCyMhNJbmTvHn5T18?=
+ =?us-ascii?Q?NmOrlZ0wil1gz4CCE+TNi47XQY6g1eftAT1uWbFlSj2nSSDulOn+1pPcpJNg?=
+ =?us-ascii?Q?6ta+EA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: WgXeN0YyRtB4nkwiNqsTKggR5My9tGeGMS3xCs9EQCgmgtHWE8rl395J0J4I5PO8mjOBhVR9Udif0ZW+J5XJUmgUCrBDcU0dgp3U+Gb6LN3/F+cUFrUU6dGwjMgdUTZ0++8JaMS7j9zYcRaJtvfXsXM7oIuttphossetaiqnEz1bRD/XltgxMrelQCvqCJKG8Sv+T+HRJpKcOp5RBx3GeGZuxKeDvvbQTG1V6P7RHz8fTwPmeI6ZNhHzvv6iHh2VuR2Xt3zHojo7ahQqkn4pHRpIhbfjAZ7d+ITZ5EziAvpTISXyiQzIunBnAKlOGzAyrx5sdksyOwGk12izZ+ys1gVH6ldVFn0OmxOJWJW0gThl2MEdKdK+8dneoIV4ZvQTcsHtr8eN0RbaXf4aXhmtGo2gPuTUpnwWbsne4r9yRJzK/zzsMw5iLKcqlZSAcK1X
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 13:45:59.7177 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6dc542ae-4e06-4cb0-58a9-08de73ab0b37
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
+ Helo=[lewvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003AE7.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB7038
 X-Mailman-Approved-At: Tue, 24 Feb 2026 14:56:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,21 +162,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+commit ba20b2443c29 ("arm: mach-k3: common: Reserve video memory from
+end of the RAM") switched spl_enable_cache() to use gd->ram_top directly
+but omitted the board_get_usable_ram_top() call that limits RAM
+configuration and provides updated RAM end address per memory map
+used by board and impacts subsequent allocations and reservations.
+For e.g. here it impacts how high the TLB may be placed.
 
+On Verdin AM62 (512 MiB), the raw end of RAM (0xA0000000) is inside
+OP-TEE's region. board_get_usable_ram_top() in verdin-am62.c returns
+0x9C000000 to keep relocations below it, but spl_enable_cache() never
+called it. commit 42b3ee7fa524 ("arm: mach-k3: am62x: Enable memory
+firewall support") then enforced the OP-TEE firewall, turning the silent
+corruption into a hard hang.
 
-On 2/24/26 10:39 AM, Takahiro.Kuwano@infineon.com wrote:
->> Takahiro recently accepted becoming a designated reviewer for SPI NOR
->> in Linux, and I think his expertise would be highly valuable in U-Boot
->> as well. Takahiro, if you have the bandwidth, would you be open to
->> becoming a designated reviewer here too? Or maybe see how things are
->> going in Linux first? No pressure.
->>
-> Yes, I'm open to do that.
-> 
+Fix by calling board_get_usable_ram_top() after computing raw ram_top,
+consistent with setup_dest_addr() in board_f.c. A weak default is
+provided for boards that do not need to restrict the RAM top.
 
-Wonderful!
+Fixes: ba20b2443c29 ("arm: mach-k3: common: Reserve video memory from end of the RAM")
+Reported-by: Francesco Dolcini <francesco@dolcini.it>
+Link: https://lore.kernel.org/all/20260224102121.GB340942@francesco-nb/
+Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+---
+ arch/arm/mach-k3/common.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-> To sync with Linux, we need to isolate stacked/parallel support from core first.
-> https://patchwork.ozlabs.org/project/uboot/cover/20251119-amd-cleanup-v1-0-c555bd85e6e4@infineon.com/
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 0a686efa1319..2f3df5519c53 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -407,6 +407,11 @@ void k3_fix_rproc_clock(const char *path)
+ 		       path, a_core_frequency / 1000000, speed_grade);
+ }
+ 
++__weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
++{
++	return gd->ram_top;
++}
++
+ void spl_enable_cache(void)
+ {
+ #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+@@ -420,6 +425,7 @@ void spl_enable_cache(void)
+ 	gd->arch.tlb_size = PGTABLE_SIZE;
+ 
+ 	gd->ram_top += get_effective_memsize();
++	gd->ram_top = board_get_usable_ram_top(0);
+ 	gd->relocaddr = gd->ram_top;
+ 
+ 	ret = spl_reserve_video_from_ram_top();
+-- 
+2.39.1
 
-+1
