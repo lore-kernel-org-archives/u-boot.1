@@ -4,75 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE032EEC2B8
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 01:07:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B68EEC2B8
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 01:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 155CA82BF2;
-	Tue, 24 Feb 2026 02:07:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
+	by phobos.denx.de (Postfix) with ESMTP id C299C82BF2;
+	Tue, 24 Feb 2026 02:13:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xcQAmgb/";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6073783C8C; Tue, 24 Feb 2026 02:07:00 +0100 (CET)
-Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
- [IPv6:2a07:2ec0:3002::65])
+ id 4FFE583642; Tue, 24 Feb 2026 02:13:11 +0100 (CET)
+Received: from CH4PR04CU002.outbound.protection.outlook.com
+ (mail-northcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFF828063E
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 02:06:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=makrotopia.org
+ by phobos.denx.de (Postfix) with ESMTPS id BD2E78063E
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 02:13:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel@makrotopia.org
-Received: from local
- by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
- id 1vugsk-000000001gg-1ZOQ; Tue, 24 Feb 2026 01:06:34 +0000
-Date: Tue, 24 Feb 2026 01:06:30 +0000
-From: Daniel Golle <daniel@makrotopia.org>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: Re: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
-Message-ID: <aZz5lj7URFZc86xK@makrotopia.org>
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
- <CAFLszThSKbRjufnj4z4xunn-OEUv8kNRngNQ3=EpaNyvyV5ncg@mail.gmail.com>
- <aZc_f3lrmRdE9c3Z@makrotopia.org>
- <CAFLszTgxMeFvKx8nkVUa_PADiVFnv1UB69SyD+C3OiLY_7ku8w@mail.gmail.com>
- <aZypXx3liLvvB4zr@makrotopia.org>
- <a1d06225-bc17-411a-80ed-f39e0450dc29@iopsys.eu>
- <64a12e61-8e04-472e-8493-90b2e4a41d50@iopsys.eu>
- <aZztAL-RQ1LSf0-j@makrotopia.org>
- <5ade655f-b2df-4cb2-89ea-752b2958eca3@iopsys.eu>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e8wRu5emX9ncXwbmMgluiFlf9D3Rcv2tjB8eoEFhxR9e4uFEhe4ANKjsUmmo+j50sZnIwtaFpR96v/y/pjP3+I4wqnMINy9ADBcMcVzV35DShvemk5NRc92MIXFhzrXK7JLp17GilwvDCB/9oHhgUQT9Ep+HD0Icd5J/Tm2MxdSrTd8R7QuKe3L06qMY6JOeeemue9FHJlBmN8cM/LPHwoCsbqblKhhYEnkoGEpjvkA/8jCq+RWCQi/D61aOZxxAhAM7EedCHIWNgx7uzvdtypo4gfJRjL5PjNPPJbb9wmwkS5YVsymm3RznCMm+TKYIecu2QLYjO90CIxz6xkGxEw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KhGajmEwV5ZPf+zMuXOuUdN40xebgpefAKTlW1aAfsQ=;
+ b=peJzN1+Cehkxfa1esO3O23+RxenQW7IqPOc9NGgvt40lAsKkIrRjuHSZjHopOCYdlaIblkgVNXEo3mlD1YwvA8WQoilRZ8+VO3IELQjPiIr2RJKLWcxYq0t5NhtnatA7wMzwylrJyaMaBKFMVpARs6ofnIcQpmW1fhO5AF8IYpfhao+zbRpeYtM/YumQbuT/nXgs4NYnq6Vn1vpAiF4tvZFZhYcXS4S2iS2ytN3eREE02vtmhen451I7EQYebmmy06qIT2VLDDHSFWJ/B7y+cZN1+0Y0hLyBhQr08L+ZnspzMC0znuILrEBeILu6zUkYVbmOtEF7sVovmJAiNLE/Xw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KhGajmEwV5ZPf+zMuXOuUdN40xebgpefAKTlW1aAfsQ=;
+ b=xcQAmgb/NK/byM1OmBp86I95qHXyxcDAfeSiNory37T4iyfWbNqVr+t8K2I3NuxfHetX9HxzXSf2ltKuZkbf2w/Q3iYEgJ7PW9SbnASjuuimumqKV/8m7xpPBEtebw8vrf1IAWqIOaCVzqVpCdi+cgMNn6XEYybVDVVx3FYOxpY=
+Received: from SA1PR03CA0012.namprd03.prod.outlook.com (2603:10b6:806:2d3::15)
+ by SA2PR10MB4812.namprd10.prod.outlook.com (2603:10b6:806:115::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.21; Tue, 24 Feb
+ 2026 01:13:02 +0000
+Received: from SA2PEPF00001506.namprd04.prod.outlook.com
+ (2603:10b6:806:2d3:cafe::6f) by SA1PR03CA0012.outlook.office365.com
+ (2603:10b6:806:2d3::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.21 via Frontend Transport; Tue,
+ 24 Feb 2026 01:12:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ SA2PEPF00001506.mail.protection.outlook.com (10.167.242.38) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 01:13:02 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 23 Feb
+ 2026 19:13:02 -0600
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 23 Feb
+ 2026 19:13:01 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 23 Feb 2026 19:13:01 -0600
+Received: from [172.24.233.254] (santhoshkumark.dhcp.ti.com [172.24.233.254])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
+ 61O1Cxgw1325374; Mon, 23 Feb 2026 19:13:00 -0600
+Message-ID: <cb0c4c33-4e09-462a-9848-3bf4e0a092cc@ti.com>
+Date: Tue, 24 Feb 2026 06:42:59 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <5ade655f-b2df-4cb2-89ea-752b2958eca3@iopsys.eu>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] arm: dts: k3-am64-evm: Add "bootph-all"
+To: Tom Rini <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <u-boot@lists.denx.de>, <a-dutta@ti.com>, <s-k6@ti.com>
+References: <20260223061906.1794872-1-s-k6@ti.com>
+ <20260223061906.1794872-3-s-k6@ti.com>
+ <20260223152432.GC3233182@bill-the-cat>
+Content-Language: en-US
+From: Santhosh Kumar K <s-k6@ti.com>
+In-Reply-To: <20260223152432.GC3233182@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001506:EE_|SA2PR10MB4812:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9446f49-d4f7-44f0-e5ac-08de7341db67
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|82310400026|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cW0yVndFTFhtS3dMaUVVVHUxQXJHZTVsRTUyMHdDcGttWmtKWjBKTTlFandP?=
+ =?utf-8?B?MTVpeTFYYzBEejB5ZTJMVXJFSU9YNkp2M1JXZjhDb1FlQktzdUltK2JxQmxl?=
+ =?utf-8?B?SWR2bmx0SGpyVXJMOTBCdGlnZ29EZ3Q3YXp2dU5IMUxxeUNNbTl4U2NaV0J0?=
+ =?utf-8?B?K3ZQbDlkSHFMRW9DclZicTVXNkNCeTFZemJPNTQzNEZSOTU5TWdBeExMQVBv?=
+ =?utf-8?B?cjVvRlR0OUdhNTZmQlhIbWZzUG9zdGNnQzh1WXN2bEtGdDhHTnZtcHpsWWU1?=
+ =?utf-8?B?NEFiMWlyVFVINzd5YTdycktxa1h1a2dTL1dkR011U2cvTHlLZXAxa3lrS01E?=
+ =?utf-8?B?bHRiS053T0pjakFxYkFDMzllZmRVbFRZT04zbTJLZHFGK28vQ3ZETk9yWG5p?=
+ =?utf-8?B?QVIzeU13VVN3ZHRmL2hrVk5qYmlJcjlJMDUrejVHdmVKZit5K005MFpkSWI1?=
+ =?utf-8?B?VTZ4YlJTUEZ2SEcwVStPT0d3UlU4alM3dUw2dXFocElJdERvQmN0RVFKb2wr?=
+ =?utf-8?B?TGY3S3RTSWpqK2lmTEhweWc3dGdGTHpLMmpvd25BRFhmK3pnVkFIWjRvWHhZ?=
+ =?utf-8?B?VW12a3p6d1U5aWY4NGttQm5HTzU5TmVJOERpWFhyMmZRa05RVHprWmJ2ZzBQ?=
+ =?utf-8?B?QkZEd2RQcWtNUmI3VTZlbVM2S25QQ0Q4QWorc3JCVzRjSkUvUWFSN0FRRkg1?=
+ =?utf-8?B?M0cxQkk2VjJvV29aTkJlL0JkbGNyK2hqNzUwdThGU1JhSEhhMFN0VWlQSlBR?=
+ =?utf-8?B?RXpZclBZTEpZRzk3NlRLVDcvc1d2SFBQMjVvZ01mWTJ2ZVFQN2FGNVlCa2xv?=
+ =?utf-8?B?V2xjSFBjY2pYVFB4cG9JcjErcWoxUGY4VFBUVFlZREtodkxOMlRjb3dGOGZ6?=
+ =?utf-8?B?b0I1dUZkTjJXU3F6eW9id2w0eXVlTUthVHlNV2VYbytFbmsxWmVSc0lpbEZM?=
+ =?utf-8?B?VGIvbHErZGh0YitBU0ZiOXg5ZXdLbk01WHBSVThZYmJjNlpjYUYwcTNyMStM?=
+ =?utf-8?B?UjNaaTkvR2ZXRFNaMm5XdjFhM0dwaWpSRUpsTzMvcUZUYWV3TitDVmVDVzUy?=
+ =?utf-8?B?WTViMlRMVGdqcVlXK2NDQllUS082bkkzcVRpeTZoNUhsamRiNlFqdUNMS0xO?=
+ =?utf-8?B?L3hvWWR4TG5ra1AvRkNEYXJDZzFwVCtDUFoxMDIzYTFaTXFBS1FxTFFQYVpF?=
+ =?utf-8?B?cnlkYXcwTlFSenJUOHpZclFDUEVKM2EybDNoMTZyaWRHbGh4c1A2cmx3dHU3?=
+ =?utf-8?B?VG5pNUpPSi93blJ4TnBmTWZ5TlVHRFBrTHlXaG9sc0RZWHF3QmpHNWJiTnZt?=
+ =?utf-8?B?TEdMSnlhQjdCZ2RndHk5Sk11TjV5MSs5ZE5yZnVhaTBpVTRIcXNxK0grWjEw?=
+ =?utf-8?B?cXVEZkhhNW5GU2VKcVVPcS9SNXd6RjQyWDlFT2UvOWxBL2Z0eXpiblkrOW05?=
+ =?utf-8?B?MHdYQ2toUE1TVUJ5cW50ZWVNc0VZUXRvOFJBaDg1bWx4MjNFTnFxZWRTalh3?=
+ =?utf-8?B?WE1CUDgwS243Y2ZYWjdUaEprY2VLZVB0V21VV01mMGFhU0t6VWlaZEkxZGMr?=
+ =?utf-8?B?OEZGaXZndEdoa0lhOGVQbDY3ZXY3V2lyc3ZURXJQK3VybDF5WUtUaXE2QkEr?=
+ =?utf-8?B?czZMMmI5dVpVVFp3V0hXWTRnMGlqNnlIOE1jR3Y0VXhLUGFmdTVKUWVHeXVR?=
+ =?utf-8?B?WWpnVHJReXFGMEU1SzB3WHBvT29FRHlRN2k3dnFOTTNMTzBqVm1ESEw2M2Va?=
+ =?utf-8?B?cTQxRHVyNEFkdWZKK2d4UDhHQ2t6d2NqcGsxMjVsVENWMnZoeFYyT3l1TEpl?=
+ =?utf-8?B?R0dMdHRZUU5xalIwSFhFWlBIcmh0c0kwMDltQjVlSjg1YTc1MTQzZVU3RCtv?=
+ =?utf-8?B?aHJ5SWZtMDZOMXVzVEpVZFFib2ltOW91YXNaUER3ZnJ0djVyZlZaRjJEa0E5?=
+ =?utf-8?B?cVd3bW1FZFgrVi90cVl0b09heUxITGpmeUlZbWN3YjJ6akVBR0ZpME9jZG9z?=
+ =?utf-8?B?QktxMVZxc1RYM2c5NnR4a0J4ZE9jQkFiVDArcGo4cjhQQlY0amhUbTZzK3Jw?=
+ =?utf-8?B?L1Q5ckhlSE9HTVZKckpydFVyWTBSMElqT1N6TCtBankvUlZVYzh1NWRSUk9V?=
+ =?utf-8?B?YndpL054dXdVYmhTVkl5UlZVVHRXLzBxdHF6NDg2VWMxU3BRdkdxZWcrYWFw?=
+ =?utf-8?Q?bREIb4cgSSvzov1WLOaOHqA=3D?=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(1800799024)(82310400026)(376014)(36860700013);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: oLq6//6aGZfixm4tTywLtOUk7ZKYj6uf1Usrmtm7+VXwxpZ2iA8WeLZ/Rxc9uFVrVJbf95KzZTqOyxLVsUtn84ySKQ5cjm8YF0DPyxuOZKFo01B/yRxPlpNEzD2rdFuosG+NxjiT3d/PrbYeFRpm11evQ9NtUQ2ZHNx7lHFRYHg92fA7voSSxtXkwNQZ/ZdyVsUMZ//5efLHBUTe5rYaMMJ8xWf+KQd4Cyn4bXSWkxW/e8W0n7t9qiPBvPqrt3Lc61kMGb8StszsmhU4Wb3M5+Rlgd+THbKY2peO5xzL3jyAQ2zg69sT+abSSBU0txVJEuOmbxv8MZ1oHZc+tx9U7g/yqIane64aypkrs8ImGIE9ZUBnW00hw+LxKf9LEf4xs6k5zYxKn60gAuElvCleRYJaEacz03r1gBrvFawVCZxez1zd1701iB9qY/jde6xm
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 01:13:02.3619 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9446f49-d4f7-44f0-e5ac-08de7341db67
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001506.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR10MB4812
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,106 +169,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 24, 2026 at 03:40:47AM +0300, Mikhail Kshevetskiy wrote:
+Hello Tom,
+
+On 23/02/26 20:54, Tom Rini wrote:
+> On Mon, Feb 23, 2026 at 11:49:06AM +0530, Santhosh Kumar K wrote:
+>> Add 'bootph-all' for 'main-bcdma' node to pass it to the FDT in early
+>> stage to allow the BCDMA channel 0 to be allocated for OSPI NOR reads.
+>>
+>> Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am642-evm-u-boot.dtsi | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>> index 6469f43fca81..5048432ef8ca 100644
+>> --- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
+>> @@ -42,6 +42,7 @@
+>>   	      <0x00 0x484c2000 0x00 0x2000>;
+>>   	reg-names = "gcfg", "bchanrt", "rchanrt", "tchanrt", "ringrt",
+>>   		    "cfg", "tchan", "rchan";
+>> +	bootph-all;
+>>   };
 > 
-> On 2/24/26 03:12, Daniel Golle wrote:
-> > On Mon, Feb 23, 2026 at 10:32:32PM +0300, Mikhail Kshevetskiy wrote:
-> >> On 2/23/26 22:30, Mikhail Kshevetskiy wrote:
-> >>> There are UBI based block storage emulation, see CONFIG_UBI_BLOCK
-> >>> commits: 
-> >>> * 9daad11ad178646c288aca3615a7ba1e6039aed3 ("drivers: introduce UBI
-> >>> block abstraction")
-> >>> * aa5b67ce226267440e64fadc57d3a21e5842027c ("disk: support UBI partitions")
-> >>>
-> >> There is the block storage abstraction for mtd devices as well.
-> > During my evening walk outside I thought about this a bit more, and if
-> > it would be possible to use the ubiblock and mtdblock devices instead of
-> > introducing dedicated bootdevs and imagemap backends for both of them.
-> > In the simple case of only a single boot option this would probably
-> > work: bootmeth_openwrt detects the uImage.FIT on the raw block device
-> > and may go ahead, load and launch it.
-> >
-> > However, there is often more than one of them. And as they are stored in
-> > directly on MTD partitions or UBI volumes, knowing the name of the
-> > partition or volume, and which device it sits on is crucial for
-> > bootmeth_openwrt, which should support also complex multi-slot dual-boot
-> > arrangement, typically identifying the slots by UBI volume name or MTD
-> > partition name. When using the mtdblock or ubiblock devices this
-> > information is hidden, and can only be accessed in a very tricky way,
-> > especially for ubiblock devices, which lack a device parent. Matching
-> > the UCLASS type of the device parent of a block device in the bootmeth
-> > also feels sketchy and inappropriate.
+> What's the status on upstreaming that whole node right there? Thanks.
+
+'main_bcdma' node is already upstream [0] [1]
+
+[0] 
+https://elixir.bootlin.com/u-boot/v2026.04-rc2/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L141
+[1] 
+https://elixir.bootlin.com/u-boot/v2026.04-rc2/source/arch/arm/dts/k3-am642-evm-u-boot.dtsi#L34
+
+Thanks,
+Santhosh.
 > 
-> what about querying available partitions using the command 'read' way?
 
-Please explain how you imagine that to work. I mean, sure, we can read
-them, and then we know that they contain an uImage.FIT.
-
-mtdblock and ubiblock devices are generally whole-disk devices, each
-representing the backing MTD partition or UBI volume.
-
-So first of all, ubiblock devices in U-Boot only exist for already
-attached UBI devices, and only one UBI devices can be attached at a
-time.
-
-Apart from that problem (which would limit bootmeth_openwrt to operate
-on exactly one, and already attached UBI device, which is unfortunate,
-but not a complete show-stopper), there are often more than one UBI
-volumes holding an uImage.FIT blob. They can be identified by the
-out-of-band metadata, ie. the UBI volume name (or MTD partition label),
-typically "production" and "recovery", you get the idea, right?
-They **cannot** be identified by inband metadata (ie. anything you could
-read from inside that volume). While (in theory) we could add metadata
-to identify and distinguis "production" from "recovery" images, this
-(by definition) isn't possible in case of a symmetric A/B dual boot
-arrangement. Also, what I'm creating here is not a new design from
-scratch, but rather the formalization of a historically grown
-reality, present on countless consumer-grade devices out there.
-Making fundamental changes to the design (such as carrying additional
-metadata within the firmware image itself, instead of relying on
-out-of-band metadata like the MTD partition label or UBI volume name)
-will make the newly introduced bootmeth_openwrt de-facto incompatible
-with all existing OpenWrt devices out there -- and compatibility is an
-important part and purpose of the exercise.
-
-Hence, the user (or the bootmeth) need to identify which of the available
-UBI volumes or MTD partitions the system should boot from, and do so
-using aforementioned out-of-band, storage-type-specific metadata.
-
-Now, assuming that I'd have to use the ubiblock (for example), the only
-way to get back to those crucial bits of metadata would be to traverse
-from the blk device to the parent udevice, checking whether it's of type
-UCLASS_MTD and if the blk's type is part_type PART_TYPE_UBI, and then
-interpreting block_dev->hwpart as the volume name. Imho that's an overly
-intrusive operation, messing with the block_dev and ubi subsystem
-internals which should not be touched from outside of the respective
-subsystems.
-
-For mtdblock devices it's even much worse, I'd have to cast bdev's priv
-back into struct mtd_info in order to get to the partition label, and
-that feels extremely wrong (arguably, we could patch mtdblock.c to also
-set the hwpart string, but even that would still be more of a hack than
-actually being correct imho).
-
-> 
-> > So while having mtdblock and ubiblock devices is generally nice,
-> > especially if U-Boot has to access a filesystem (eg. squashfs) stored on
-> > them, for the case of OpenWrt it would at least be a bit ugly, as the
-> > metadata of the actual storage backend (MTD or UBI) is crucial. We need
-> > the UBI volume name or the label of the MTD partition.
-> >
-> > In a way you could say that OpenWrt uses block devices (eg. MMC) it
-> > boots from more like MTD, and not the other way around. And in some way,
-> > bootmeth_openwrt will do some extra lifting when started on a block
-> > device (extract the GPT partition name and present it as the bootflow's
-> > fname), while the imagemap API provides an abstraction to read raw
-> > images from all three storage backends (blk, mtd, ubi).
-> >
-> > That being said, I'm happy we have overcome things like block2mtd or
-> > gluebi, and do use the appropriate APIs (and filesystem types) on each
-> > class of storage devices in OpenWrt nowadays. Some of the helpful
-> > patterns borrowed from our MTD and UBI boot flows (avoiding a boot
-> > filesystem, identifying storage volumes, ...) remain, however, and are
-> > applied equally also on block storage (ie. MMC).
-> >
-> > tl;dr: We'd rather use block2mtd than using mtdblock ;)
