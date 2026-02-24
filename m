@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94246EFB810
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 08:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15265EFB801
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 08:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E27583642;
-	Tue, 24 Feb 2026 09:14:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 5624583642;
+	Tue, 24 Feb 2026 09:23:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="fTHawAk4";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="prZ0i+ek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B492983BC9; Tue, 24 Feb 2026 09:14:42 +0100 (CET)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id DA17183981; Tue, 24 Feb 2026 09:23:31 +0100 (CET)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70D0A80050
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 09:14:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EDD580050
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 09:23:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=p4/Lt4XcXffa0fcdOHo0Qk3bcK6iSeSnbT08+NTwOkv1v1ZeY43alaUhG+vl1uP2AiNRffNoGXgZ3e73OppNPZknLkA9hF5W7Z9Ag2dvDtb1AIR9A5j22WuSi6n3pjzdni5jHunn9givUNXKVTbYg4aV5YRV3G0WEISxOQli2Bcbk6CkyWKqgWUC8zT0ojU+eesqdCr5GIm0ge1lfwAmdiXIN/9MBDhGBwjHb5WODY6Ou+w2kB0Q33WJK/iCEV6zUB6RauKbuhwcj7A0AffAripmjKWlkwHgGPGrqydICvGpiTjp3kK4PqeamWHK2xb4eFNUprCslqV4mpwfqW5RGw==
+ b=LBUQnWmjy4iG213oq0W1L805hO+xUn/8CBrYW3o+fgSBttN7CO545q4eYIMsQd+TaK2xHPeCHJsu531H/3LoXerEDwJITN1IDhtfSTwu9+EIKhiSb4I+gKgRt7scy1Krm3t6FVkXNAkO6ebyJ23MK2YHQNbzezKvsLY4Jt3Ls/5+pN1jJ+TvuMjLeElo5veIpnqocBBNhmZIUS+LkpCj4RAs9RR0/A8Elk5dKJmzwx48JoDxu5eA4/ePluHNxBjq/61hQ8f5uq52ooUV7NVHtZuo0zo/OrQG5YnNrmZrV7Fj7HAzcHiKK26jOn2i6vv7mYF9DWc1wHF8DqFn/oECEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lOYIAK1T6dvSpc1FqO1+H06g3wZ9Q3OjZZF/YxyOQwg=;
- b=bpzU77uuBytbZcKVzNPMXQzDYG1hy1Mjvu7eE3IqRa/BjGS/3Eg4CI59xh8O81d/xBZJ7JGTXmYDKmMIoMHiE6Y4DAgxt+oLG+QJHmpwx77uIndGlTnbV5dYpMOvQVBrpBU8AoFuNEzJxF6xNKwyIcwqle5vS7xUKp8+UES5PJHUecRkzzNh052yivnF1sNqogIoY3ut20R8VE8Kgj7phWSOk/LvHijWpdwfeiC3qdO85fxDXT5fHkOeqXkQy7ECrinZWpbQuNI8MK8KOqQXFuos2MgCZKN27QIj4nhApjJKl6YBi+6QGHpdhwBvbQp6hl67ppmvexhAjaVW6FIziQ==
+ bh=9bMIVqgiqE0VRjdM1GvEGacrFdJv4JyV3scykHhiUiA=;
+ b=l2G2xMx0UpvvQNeyFxYodZ25Ddz5gKwI/Gq/EH/Vld+UJ0CgqcapFn74Qh8jmOvv17hI/lI/JcgGN/Js85/m8wRTrfAv+6ctnzeRuz3mbsLlTrUIfz+InxlWt8kic3OxzGUiTM2yrV3MM7Y3JNP2BuvWQzWQtHe/hspKEQues9We44vZYcmXgjWYQFCWlJMITiBeM2FsSPk531p8nsRpo4Ut6d2p9w4IlOwQekA58asIu1AFu+O1SAdoXp/+0vC5q+P4vKJldA9G02ZmavY2jJR/t2KLjwYqdwasyhWlcx1wCh9bfvjWH1REyLu50VLjd8mZnqiuKzBbRgTOFlvr9A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lOYIAK1T6dvSpc1FqO1+H06g3wZ9Q3OjZZF/YxyOQwg=;
- b=fTHawAk4N/WYKUMQRAvnvi1fBZzMsNiBtHpjrI7XBxnJp/ZP8wjcsopVwJeMWxHlQHKkbVZ74bkTY3Jdh2sZk3wF6/2wkP+oH0o6sZa7fZQZNVRyu9KJ2zaY6rhnTqhWNmdk/aWCL/N68amD3rk2GyyR4ozXcVzSxDdzvnHV9KXGKIMMW9GU7/at5rztaAyB+TZutAG/bl6b40J5GKolTJOhxwzKlb9+V1ikQOnf815JCRJ+aXeXpZbJ4yAqxwgYMOw5VA2fFnt2qu+NPa5cfuMpLCb693uYDDHm3PC54mW2IzyUl7FmbxQzqjDCJGq9JL3VxzdRy/kfIwZ9z+i4Dw==
+ bh=9bMIVqgiqE0VRjdM1GvEGacrFdJv4JyV3scykHhiUiA=;
+ b=prZ0i+ekOpQLMKBqeVupzDtfioBM0vvL8Gn3kLpol/5kuWtx88wgO7uAUvSHePbk37RICgqnfcfJJokD/fdIoWw8l7rTbeE3KD4oVnc6pTFhMbq9cbMc7uSn0klPl3Y0MncAiK96YrABAkRxgaHZMHIJAtdh02CspxXgbIx25kjmq2NE/ZsRVBOFIDgpr3g9RSYkuIrhuNAGVvJzrhPnX1j0w/ix922+I2Lpv18Ka9WImJ/ln6ofBiHs9seKIwUMeII2XTqQ6kMwU3pW8hn+17NkKQKOBP/EF4yGrcP19gdgYNi2t05+cAJGffMMZgyxDXk6Pfmknoyg2+7RCkibzA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com (2603:10b6:930:106::16)
- by SA1PR03MB7054.namprd03.prod.outlook.com (2603:10b6:806:33e::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Tue, 24 Feb
- 2026 08:14:35 +0000
-Received: from CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0]) by CY1PR03MB8121.namprd03.prod.outlook.com
- ([fe80::fe3c:a06b:8724:fab0%3]) with mapi id 15.20.9632.017; Tue, 24 Feb 2026
- 08:14:35 +0000
-Message-ID: <4d3e22e1-3f7f-4c19-a529-157eac6d0f61@altera.com>
-Date: Tue, 24 Feb 2026 16:14:26 +0800
+Received: from SJ2PR03MB7072.namprd03.prod.outlook.com (2603:10b6:a03:500::15)
+ by DS2PR03MB8466.namprd03.prod.outlook.com (2603:10b6:8:333::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.17; Tue, 24 Feb
+ 2026 08:23:26 +0000
+Received: from SJ2PR03MB7072.namprd03.prod.outlook.com
+ ([fe80::7d1c:7fcb:cd62:6cd8]) by SJ2PR03MB7072.namprd03.prod.outlook.com
+ ([fe80::7d1c:7fcb:cd62:6cd8%6]) with mapi id 15.20.9632.017; Tue, 24 Feb 2026
+ 08:23:26 +0000
+Message-ID: <52a4859d-d6e0-4e20-b78b-34213c230bc5@altera.com>
+Date: Tue, 24 Feb 2026 16:23:19 +0800
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v1] arm: socfpga: Add call to
  socfpga_sdram_apply_static_cfg()
-To: Sune Brian <briansune@gmail.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+To: "Chee, Tien Fong" <tienfong.chee@altera.com>,
+ Sune Brian <briansune@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
 References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
@@ -68,115 +68,113 @@ References: <CAN7C2SC4GTf004JyBeeVtnBPo=BvqorCy87ZFTNV4RkWFOJKbA@mail.gmail.com>
  <CAN7C2SAOLdokAaVcuMPWMTS4HsY-4d2dhnkwLadqsGS2qAsKaw@mail.gmail.com>
  <4b6327d1-681d-46a4-b672-6d53fbfa1e89@altera.com>
  <CAN7C2SCbyuBz4d8QmqGUNFBGjhGaSFyZD-J3GcYy9r3DGNSjvA@mail.gmail.com>
+ <4d3e22e1-3f7f-4c19-a529-157eac6d0f61@altera.com>
 Content-Language: en-US
-From: "Chee, Tien Fong" <tienfong.chee@altera.com>
-In-Reply-To: <CAN7C2SCbyuBz4d8QmqGUNFBGjhGaSFyZD-J3GcYy9r3DGNSjvA@mail.gmail.com>
-X-ClientProxiedBy: SG2P153CA0046.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::15)
- To LV8PR03MB8137.namprd03.prod.outlook.com
- (2603:10b6:408:295::8)
+From: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <4d3e22e1-3f7f-4c19-a529-157eac6d0f61@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI1PR02CA0058.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::9) To SJ2PR03MB7072.namprd03.prod.outlook.com
+ (2603:10b6:a03:500::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY1PR03MB8121:EE_|SA1PR03MB7054:EE_
-X-MS-Office365-Filtering-Correlation-Id: 232fa255-ffae-4841-8e1a-08de737cbdd8
+X-MS-TrafficTypeDiagnostic: SJ2PR03MB7072:EE_|DS2PR03MB8466:EE_
+X-MS-Office365-Filtering-Correlation-Id: 66cd572d-3d31-4954-4a73-08de737dfae1
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|8096899003|13003099007|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dW9PRzd5NlQ0NTlKcGlhMnhHT0oyMzJEV3lJY2tvVjZ1bllyQm81dmVUZUVG?=
- =?utf-8?B?OUk3ZmtGVSs0TUZ1OFlmWTFIeENZc05aR1RQMzFRWndDZlUxQkpZZGc0cG0z?=
- =?utf-8?B?MU5sT3lPMVNvZnIwQTBTbkVaZmpWcldlajhVaFZienZwZGZFTlhKT1UzV1ZG?=
- =?utf-8?B?OEYvVmU3WGkzbFlCRVo3eWVuS1IxTmtrb2ZYYy9pSmdlQ3NqY29Vd2JhQzdn?=
- =?utf-8?B?YTBXcG1KckVhWVoyaUVNekNUcjlSV1RnZVdZNDRuZ29jYmRLV3ZvSUlNMENy?=
- =?utf-8?B?V295bzNpdzRPMlRmcmx6NCtFd3BJWDlVaEc3ZjNtblpkYk14clJxcDVsbm5k?=
- =?utf-8?B?T3ZWMGZjRjhlLzNselYvZnRvdVFNaFdhS2cxQWl0QlpqbkJjcHRkRUJVc2Rz?=
- =?utf-8?B?N1QweXNydGc1T1Fvc1d4RUdVNWJLMFRocEU5T1ZpR0VKcnFrL0R3cWN6Y0g5?=
- =?utf-8?B?aC9qZWdSZFRHemNvc3ZJYW42dGN1NzJTNnRnMFZEeUY1VnNhbW40TGRYdmlY?=
- =?utf-8?B?TWRyRW5rZDhhUW9VcjBGcEI2SGtCRkFGNUx0OEdvd1o5VUtKT05SdGJzT1hV?=
- =?utf-8?B?K2JnRFFKcUljVC9LbnhiRnFGMFF2d2RSMDM0Q3QwV2pPZVVTc0lnNTl0bnJ6?=
- =?utf-8?B?UGRJSEFNRU1zcHY5QkFWUTRmQnA3UEVaWGk2WVFKZVNFNE55eTdJd1FQWldS?=
- =?utf-8?B?OVVzKzlKRUJrdHI5QllIT0U2YkFyTjlpR1d4aTFMUXNLTWZwNHVMZEdFOE1Q?=
- =?utf-8?B?MVFsOVNnRDZIdWNJdng2NGh5VGZuL1dvQUxoMEpBYmRVcTFOMktUK3BPMS9D?=
- =?utf-8?B?c29ZalIwMmdrRld5L3VqQng3NXluNHAvMnlId0hPSHRZaXB2WXhDYlhQUkpT?=
- =?utf-8?B?TmRqSmQ2SFVaOEFqR3lhOFRQaW1lamYwZHdCN1RZRDI4VHppMzM0NFgraE9u?=
- =?utf-8?B?cEp1VkpRQm8xU1NJemV0bGJJMUpKTTFaaWFVRDRaN3VVV2E3VzBIYklha1NV?=
- =?utf-8?B?dVFCUWlmQURiK01CSXRHRUUwaXhyME5QK3B5aG5JYmRBbVZhVzhtNlFuL1VS?=
- =?utf-8?B?OWgzL2ZpNXRuN2VtQzErUEN4SjVwMzl2WWM0MVFibzV0MWhzNTgxMVc1Ylly?=
- =?utf-8?B?U3I0SXBTdTUvTTB6RFhMbHh6d3JMUzEzeHlRTENtOVVYbzFDYXhMb1M3WVRS?=
- =?utf-8?B?RysxSU5sUjhmYWtKU0lrVk5nSDRrc3o3a2c5WFpGV2VrSTZUam84UXQwT2Z0?=
- =?utf-8?B?T3NZcGg4UlBKaUtOR2lWYlNpZzJrenZ6OXB2ZVdVc2xBSy9nbnExbUNxbWhn?=
- =?utf-8?B?dG5zMCtvYlFRSENhbDBOOCtqWkc4WmFDOTlBQTJsc3pWRG5JZmU4d0VpSzVz?=
- =?utf-8?B?ZmNYekdOQ3I2OGphc2dyL0ZyMDZHVHZWVE9ySS9mWFJkVkhZNWdrR281Y1Aw?=
- =?utf-8?B?dlpsSzBQeTc3aWszT0c4bEpHQW01OVZ2VmEwVFc5NmpXSi9hb1Jrb3R3ODVa?=
- =?utf-8?B?TmNXbzhLcWNDdndqYTJQekl2VTBGQTRRYW1mS1JHRmVMSmpTYmlBdmNuMFA5?=
- =?utf-8?B?ZDd2cllEZmpKaXZLRjBJZlUzbG85djVLQnp4Sm1va0tGUTB3cFE2MmtYdTZC?=
- =?utf-8?B?ZWhLYmVrWXdmZjFLampmZmE5a0I3TU5qV004Mkdpb3JrNm94VktHTGRwTDlp?=
- =?utf-8?B?bXE4WnNIcE9oMGMwR21tUWJBN2RKYUdqYkxMeHVEZElyVnJGd2YyenBma3l6?=
- =?utf-8?B?TVJBOTkyWnFrTHY2Y2Q1MVd2ZVRKWFFramdSdloxVTYxQit5aWJZVkg5dDhv?=
- =?utf-8?B?bjhMTHBQMUw4anhOWW1lZEprZnN1NkpxRHBFSU5TRGZCZE9la2JpTHdPNWw4?=
- =?utf-8?B?WjJJNGw0UU91enlwTUI2MjZDMksxeW1ORHZHMDlQQ2w4WGRnQ0ExSTlYSExl?=
- =?utf-8?B?UXVaYng0cllWMFRDaVVtMlA5aFYrZGNiVFg2SVlFMjVrbGVJeGJrNk0reVJt?=
- =?utf-8?B?ZWVtUktkMy9hK1ZKN04weGprVE1zUTlrYTBRNElpckU5Z2NaRk1wMzJoMmRM?=
- =?utf-8?B?ak5zeHpOeWgyM3hTMzRyYlNBMTJKK3hCVDR6WUxXUThicFA3ZmtXWGl1Mm1G?=
- =?utf-8?Q?EnzZ3MiZ7mLQuXBFvzs+TnKj2?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UEh4aStlR1RuekQzRUcrTExNMTRxMnYxRCtXbUVlRGlqZ1dWVzl3OHpiVExk?=
+ =?utf-8?B?Z2RRTm9WSStDMFlTZHpsZU5SZlhTc29UeHZzNWFNVU5oVFNmNHNOTk4zbTkv?=
+ =?utf-8?B?QUxNK0pITWFkY0FCQ2lHaDd4UXV1LzRYQlNOZUY5cGxKOFdRNTV5ZkNEcndJ?=
+ =?utf-8?B?ZzdqTTJkbjdDQm5YQjZ6bmFuaFJZK2kveCtrWEZ2bFF4dm85UkorY3R3MEwr?=
+ =?utf-8?B?by9kMHpxbW40NkRpQVk3b1NFVGg1d2ptUFowZUNrMWxFRWFLSUFrZDBsRXBV?=
+ =?utf-8?B?clJBRnlvWjlLQmhNRSt5WmE0cWlXUDlpVVViM2xqVzBWbDlKZFRkUWtKQU1r?=
+ =?utf-8?B?eGpaMlh5cmxzaGlOQ051Mkt4cVEvYkRJN2p1TFI1Tjg5TnZaT3pIcGU1TjRt?=
+ =?utf-8?B?WlFGWFdQd2F1OVlYeGlVdmxjbG5oN21pZ2R6M3RSeGJDMWxrQ1EvbVJ4UjBt?=
+ =?utf-8?B?K2dJaEdNeWN5SkFnZzJVSFVOSkpObllKY21xUWxqeHR0L294eXRaWHdQazRI?=
+ =?utf-8?B?dHJkclVKd1lCMndUNEY1ZTVmMEdxMDlKdndtRmxmMnBQa2M4NUZYUmZWZjlw?=
+ =?utf-8?B?OTdKT2RycUZRVmFvWUIrOXp4T2tuekVBQWlmRkFOTjk3VGxpMDZROVNUbnNO?=
+ =?utf-8?B?K0ROQkZlbjFGMmpEVVQ2MEhuSmNXcDQ0c3NCTXFHb25CRUU4ZWJIK0pIdCto?=
+ =?utf-8?B?OVNkRWtyeHBPSDQ4dWxtM2kvTG9SU0hzQmczdlcyb3NOL2JCWWhQWnc0S2ti?=
+ =?utf-8?B?dXRZQ2ZDSi9sbFducS9sNG9IR0hVVlFPeWVKdW5FNEZtMnJWVDIvUTd0STJI?=
+ =?utf-8?B?UXNiNGVNRjh3Z3FjeVFydENjWDVHQ1BHK1hjbHhJdmoyUlB0azQ0Q3pYa01O?=
+ =?utf-8?B?OFkrUlVxTnR4cCs3RG5JL0VUNjB6UTZuTE15aDFOMU4wNzdNMWdNWkw3bjBo?=
+ =?utf-8?B?T3FVQk5ic3E3YzYvdUhuWGRmRnpSMHJ0TzQ4ZExtejUzNzM1ajM0Z0FJaHFC?=
+ =?utf-8?B?WG5qVit4NWI4UGplWldnU2xiUmhKeWgrTitFOS96RmRvUXRJNEYvSk93R0pz?=
+ =?utf-8?B?SUdjK3RuNXpQeGZHYmpIWjJwa3pkTHpid3ZXWXF2cWZVQWVVYXNQcU9sRDBp?=
+ =?utf-8?B?Q2hOa0hPdUs3T0dvU2EwUFY1KzROazBSMGlqSXdqQjVmY2JaamwwWXYxczI3?=
+ =?utf-8?B?Qk9WeFprZldMWWFuQlI4dStWRHBwN29WYlovcjV0eFUybHdScytETURxa0xT?=
+ =?utf-8?B?VHA3NndYVWpBRTdIeFBMNUpIcldKVWNKYWNUT1d2eFpiYjZ1aWFya2FUelNu?=
+ =?utf-8?B?RSs5dyt2dFZJQy9iU1pvZ1N4ZTkvand5aWErTW9ZZlhMR3ljUDU0aEdheEJh?=
+ =?utf-8?B?cmVwZXpZQzhWQkhQaUthVHllWFFWTGN4Vmp5MkNrYUQyTHZBVFR2TjhNdmpx?=
+ =?utf-8?B?VTBYVVlpemlZRm8vL3g1SWU0K0xRSjRCSTVHR2I4c3ZzMCt4VHRzdndoRzNl?=
+ =?utf-8?B?N1d3dnAzYVNaOEkvOUgxcEgxT25DV3ZMdnVaTXdwZzY2TkJYTkFXT0k5NlJM?=
+ =?utf-8?B?UFBkS3llaWZlZUxwbGFXUkV6eEN2TlpCSFBVNjA2NmJMaWdSbm01eFVpb2h2?=
+ =?utf-8?B?UGk2cHNpVnl3YUhzcWU2aXlsL2l5dlhlR3dDOVlLa0dja280M3FsWUJ2ZytJ?=
+ =?utf-8?B?OG9yNHV2WUJ0azNkVi9FRWZOUWJlSmJJM1VyZ1Vrb2lIMnppU3pmMUpLM0Y5?=
+ =?utf-8?B?ZW56UTFNZW1SazRIaVE0WU1DTzlmbHA0bUloS3FZc2V4aGlBS1NSVXpmN0RX?=
+ =?utf-8?B?VUlXc20xamtSTG1TVVYvQ29QcWRma1FGc1JsWWdENzVwMXdZRnJMK3VhVWVG?=
+ =?utf-8?B?aXFPSnpGaVNIRTVDUWs1WnVIMTFnaXVIZ3QzRFYyZWZOY2tJUStHMmVyclJB?=
+ =?utf-8?B?RFArZmt3ZTJPOVNvUWY2cmlIVXpvRnFsMFA3dW5HUC9mS090K050YUNLcWZt?=
+ =?utf-8?B?cVhTMjQ5Z1pQeDJXVkVEYVk5a0d0Q0tOL2tURXFJTzBUOUdQRFRLRVUxSzZt?=
+ =?utf-8?B?dVE5U1FQazdrNFBLeE9vblIzMjRIR2YyK0xDVkc4eEVJOUJKenA1VXFMNUZm?=
+ =?utf-8?Q?+0lA=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY1PR03MB8121.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(8096899003)(13003099007)(7053199007);
- DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:SJ2PR03MB7072.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b3JDRnBBcnhDaTJObmUxSzUrcWhSK1JNTkkyMHV6TCs5Sk10dkNSTVlaSGNp?=
- =?utf-8?B?UnIveTFhOEI2dnBCcnVHdEtrNDQ5eXN0SE0vRXVDUThOTlAxT2FhZGI4bXpL?=
- =?utf-8?B?TDdZRVQ4QWhXQWszcmdqMGpsdGlWWjhSNFRreWhlNStZQ1RkbHhtVTY5SGVY?=
- =?utf-8?B?dnRHbDJUd0lDMHRYRWlXd0s1S05adk5pVmRtR0w1NlZxWDZnR0ZYc05vRnox?=
- =?utf-8?B?dCtBcnl6dTlidGZ0RU9xbzdvNFR3dFpyMDRsQnBjSjFLbVIvMUV1ckpQbXVX?=
- =?utf-8?B?eXpRM2hja2ZZZnhoaTJBZnk3cDNueERqZnBrODAwOFFCYXpPRVNqWWZPQzVG?=
- =?utf-8?B?cHNDUkhPeStaRkFHTHlnbTRNbGNsd2pqVDR2RVptaFlxRDhnMTlYV29oWm4x?=
- =?utf-8?B?MnBMaUR4NWREdGpMemhQa0k1T3lqR0JhMXdPeHc0SGZwelMrdklMVDE3YUNw?=
- =?utf-8?B?UFk3NHhuVzVaU2cwb09VY3lhNTlzdWlWSmN5Y1U1dENsTzVmU3hkS0gyb3lF?=
- =?utf-8?B?dDNLcTcwL1VGSG9WRWxtbmJ3U3QwUlBmUFVTU3lEZ0FINnVxMEs2QmFXcDBw?=
- =?utf-8?B?YUFkMHZoQkVNTSs4WjBVODgvRXB6WWR1WW9SeThrR2RJeEw3blJxWVBhK29X?=
- =?utf-8?B?TVpUWUU1bXpiMHRGbzlza0o4RjhsQllIOXFBSHExSXgxV3VhYUhGekt2ck1I?=
- =?utf-8?B?b0VPWkQyZ3k3ZThpcjFkTm4rNUhTd3o4RnIyRHJhK0R4UFhGM2ZKa1ZscTBH?=
- =?utf-8?B?NGNrTDY4VUZRQkloUzVndFJQbVJzc2xmUEJPSkdFMlZIKzVQRXB1SDZtSi9q?=
- =?utf-8?B?dkc4TnVybitJdCtOTkthMnh0N1p0eUZoYTRQQ3dXMThLSnh0QlFKZjlwMk0z?=
- =?utf-8?B?ZmlYWWtiTlAwRlFCbXd1bkplTzJsbHJBRmFjT0RuQTFqWjVzazY2b2ZlQWRz?=
- =?utf-8?B?NDl6Vy9Ma0RQZncydjl2RnJSMGdxREw5RndwV294RFpUbWQya21zK3RDTWZy?=
- =?utf-8?B?U3o4SXpNNjU3SDJhR1pueVNueVNHcGhnNm96LzNXaVlnTlNHN09ERjB1RmRy?=
- =?utf-8?B?UnZQTDhUeGdyeXpDMU51YWI0Z2kxYndKdEVvd3NGSElUSE53bXl0akdmT01Y?=
- =?utf-8?B?NVFYNzZVYnl4VU12dnZHNzJqR0hZMEZNeEN6ckhsUmlKQ3RrOVpFS0drdktG?=
- =?utf-8?B?U05sN0JTejI0SkJ2RStHKyt2aldzdnJqZkU5eHdjZ3pQT1BFcE5mdFZPcTJK?=
- =?utf-8?B?eWkxODRXSGFiRDJ2bFdoRnpRZmFMSWJqMGlPV2ZWd1p4T3lScU80MHgyZmhG?=
- =?utf-8?B?dXRDaW9VWGIxL1hIa1ZOZGEyOFZoZE1od3htVWp4OG91TGtVQkxUVkFxcFBp?=
- =?utf-8?B?RlhyYVdFWWpRNjllVE01NC9jTGljdDBYaGRHTlFaQ25KTG10ZTFDa2tISjlk?=
- =?utf-8?B?SEFpTWJqUzlHckluRWhnenlsdXp2YU9VemtMWmxCcUszWlp6Z1JKYUFyTDdi?=
- =?utf-8?B?Q09DSVV5TlVMcjRUZXg2clc5ZWk1dUxtSjNGbng5ZTZjTWM3eGYwSnpIclVi?=
- =?utf-8?B?c3hMRU1UU0FXOHhGNW5tYWUreFlrV3NjdDg1d0d6c3BrbFFidktnUW84alFt?=
- =?utf-8?B?YnFtd0NwSm11OEFMUHNORVNXVGlXSll0NFd3ZUtGTUJVeUdKODRFZVdZcFh0?=
- =?utf-8?B?Y0xaNUlHQ1htZzhuSW9CWUo2Umwxa1gwWkl1bVl1bU8xaTlNZ3U2WTRpZzYz?=
- =?utf-8?B?RWVFU2ZDZGNrV3lROGFXSW1ZZ0xsa3l4ZytUd0VzMzdtNUN2RE02MnkybmRD?=
- =?utf-8?B?UTJESFNaaVlWYTk0OU8wdXdQWGNXRlhIMzBHL1RuRlZJS08zeTlWS09aTTYv?=
- =?utf-8?B?R2FQblZhQmQ0bXJKZlFobEI3UG5tR1dPRzhKQmI5UTFveWFrUDI2cVZueDZT?=
- =?utf-8?B?UXVzYUJ2OElTTGdYWnNqWnk4VzIvazl0aEphRTlGS2x5QVp2c0drbGltTGpY?=
- =?utf-8?B?dTBuT1lXcVFsb3NPemlQZzhmQ0JLa1h2bE1BampabXBUR1BrL05oZk9TUzRG?=
- =?utf-8?B?U2lJc3ZkZEcyRW9xR083cnJhSlFxNmhEL0xMcnFFc0g4Mm5vcTAzai9RMzBq?=
- =?utf-8?B?dWt1eUJNaDllWi9tSmlVaVhDTjdFYitmTzJMODdsL21EUk9vSUt6ZkUvcVQr?=
- =?utf-8?B?UGN3eUNlVExmdkhvcVNyOS9TdExydnBFbUFTeXVTaDIxem9KekVjaDIxRGtK?=
- =?utf-8?B?V3prR1VOamZROEUvREdSc0JpN0NvOHFsVHk1NjhvdmJUSXdhTURSdXk0MVdn?=
- =?utf-8?B?ZU41cytZaUMwSVcyVmowbWNkREYrbWVCZUdpK2lQVmpuWlRybHdMSHNBOXFr?=
- =?utf-8?Q?D4jNM9RzCjJ4tkto=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OEM1VTFlakRjMStPdFVUNUYzd054UjlvejRyYXoxNERad3B6YlQyTEpDeVNC?=
+ =?utf-8?B?c3Uwck05TUJ1VnB2aUdrV1k3N3RORFdOaU9LdEkzMG5sSFB6STQvVWJpSUxo?=
+ =?utf-8?B?d1VmNFJiajVWWWpDYVo5ZVhIUHhWRUFWU3A1bkRCS1orbFI1MHlUeS8xZ0M5?=
+ =?utf-8?B?UFNWSEVwNE1VYlJmczBCOExkTzhhd3gyYzZQd21tY0F4WGU1TnZqak9YTklM?=
+ =?utf-8?B?SnhtZ3g5azFKZVVidENOUlo4Y1FpQTZnb3JlSm5EN2pZN05tMDd4TEhpaDNJ?=
+ =?utf-8?B?NzZYMUNkeHgxYldnZ3FqeE9yS21nWlRXUVB2azNsdTI4dUxobnNaSXNkZnVF?=
+ =?utf-8?B?TDBLcGEyYWg0VlZMS0x5bUlLR0dQZlZlelZraWtiUldpU3hralptQnRicUgw?=
+ =?utf-8?B?eEt4Rm8rdkxVbEdwME81ditENUtOYnc1MTF1M29tQkxPVlhQLzI1eW03NWFK?=
+ =?utf-8?B?ODVoTWJhOHdkKzBYMTBxWDdFODZpMjY0R0dYQVEzVkZpZ05oZVdiWHkxOEhD?=
+ =?utf-8?B?TkVCVU5iSUhRNjJXWkdBTjRIZWJ2bHFvTk1WOHh1dVJmYmxBZ3lPY2NYRXBk?=
+ =?utf-8?B?dnA0YVM3cmI5MzVlNmxzdW44cVY2TXhOakk1dzRESHMwMFMweDZUcE5mek1T?=
+ =?utf-8?B?STFUMVg4MzNOMUhyZXJ1N3g2MmpNdlFHMlBSUGk0U3RoaFd2ZEx4VWw2VXBS?=
+ =?utf-8?B?d1J6RXkrWndHam1PdlJEblRLbytmeXNnMTI2dXBOYVhCN0pObForZXJnMmZO?=
+ =?utf-8?B?TXFDaTBtYzNEYk03TzVsZFY5dzdSQUZTTkRmamM5V1dGa0wrc1pPZ2J4YnVW?=
+ =?utf-8?B?YXlHc1RGQ2lGd2NQMkVZdXRpeUszK0RhNnNFVm9yaS9SUFBpbGF2ZDkwbm5Z?=
+ =?utf-8?B?SEQ4K0VhVllYM2k5QldZcFRyOGlJZzFsTC93a1E3NUpIQnZGOURKZENOTG1Y?=
+ =?utf-8?B?clJ5WU02b2F0WUVUWW5TckEwa2N1UFlwTXp4QWlybVlaN1F3dU44QTVnSEVN?=
+ =?utf-8?B?dk5JZHBUZXhrUUVWV1NacENYRWNqUTdWbE54NVQ5bDBSYmZzdm1iQjlHN1Vt?=
+ =?utf-8?B?RVJUYjNHNzE0T2E3bzdlOUpVaDgxS3dtd1NqRm8rMU1TSnFTMVBwR3Y2MHZR?=
+ =?utf-8?B?SzE4YlRxbWU1a2phejFMU0x6UXNiQ2tENGg2WVdPWWdoaHRoQjlUNjRVL2ty?=
+ =?utf-8?B?T1gycTl0Ly9ZSUJRQklOQW52L2tVV3lBb1RpeXM4RTQvUElLYlVtRDNKMEtT?=
+ =?utf-8?B?NytjQWZIOUJVWXB5Tld4b3REQ0hqY2dxZ0YwUjl6R1NncXBXdjRaUEtoVjRa?=
+ =?utf-8?B?eFZpVkgyNzVZL2FmYUdyTHQ2L3B0UUdBRllDYTRtVEEyR3VnVk9vMlJlY3BS?=
+ =?utf-8?B?NWlEdnVNM09CRHVDU0UyR3VDTHJWVm9SWXRUb3RGOFU5VFJ0QTllUk9vZnU2?=
+ =?utf-8?B?ekhRVW1Jak9aak9ENHQ2Vjg4Wk9yRmRwVE1hUi9EZTR4SWFzS0lqNXN3Rkl3?=
+ =?utf-8?B?VXUyUnpkSXZrK2c0SUZQaDIvYURLLy90U1VQU2xUVFV2Nm13dmV1RDdManRv?=
+ =?utf-8?B?QjdsYVNWYVFnczMyblpFVE1kbVdGMllaY2RwTWdSV3gxM3hHZ0t5MVIyWk1X?=
+ =?utf-8?B?YTBqYlFlWVZQblB2Z0RTMk8wNTBxM1RCUG1xaTRJM2w4TFlxTEo3TjF4ekJG?=
+ =?utf-8?B?cnVDaE9mOFBqQlBkT1ZhNW42Rjh2R2t5enBvRFN1TXJydVR3YWVoZHRra2ZD?=
+ =?utf-8?B?UWhFcUZGUFJMeEduTWUvTW1ieHk5QUtpT1hadXRiclNVSHBMaEppQlcyRjJN?=
+ =?utf-8?B?TUJwZVJHaFJkaTFFOFU1ckNNVU1KTkhLSnNCdlIrT1RMRi9xZGNNcUN5K2ZH?=
+ =?utf-8?B?SnpzdFk1Y1craVlabzNEcG9qUVNWOHAwQklzT0U0Ulk4VFN1ZDBSbkk4MzhD?=
+ =?utf-8?B?Y05TcXVqOCtQNEVwN280ZzlVT0FTWjlOSjlDenNyQ1JmR081aFFOckltUmlR?=
+ =?utf-8?B?M2RxbWJkVGhJQjJlTkxLRzkwaEtlN2V3MllrQ3dMWDAvWERZWVQ1eFk4Zngx?=
+ =?utf-8?B?dzZsMEVjNkZleExSU2VoNWVKRGlPcktRODM3bEw1aTVpdmVVRnZDTjgwZFMy?=
+ =?utf-8?B?NXRleVVIbzBVanZrWGtDendWUWhmelZmV0d5VG5ZbnlTNnYxZ1NQWW95L2ZN?=
+ =?utf-8?B?bnpjTGViS1VRMlN2ZmtIZ2RwOWNDRXhVZnZDYURUakhRTlpNcklFbnFqTCt2?=
+ =?utf-8?B?T3ByVkxhaGtPYzZpMjJGS05hOURMU3RYUXcyZHprN20wQ2dqQ3IwdnQzWGJt?=
+ =?utf-8?B?cXNESnVSQ0ZsWExDeFRYUENJbGNpR0dZTERJd0xJT2gyZ3VITC9JRDhBKy95?=
+ =?utf-8?Q?BjAyoi4MHqS7uouc=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 232fa255-ffae-4841-8e1a-08de737cbdd8
-X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66cd572d-3d31-4954-4a73-08de737dfae1
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR03MB7072.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 08:14:35.0188 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 08:23:25.7027 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nUr2Rk/1nyhswGEM74hvAPbC0q6j8+0Q3fcCX5I7QAM2O+IAeWP7FlxM/9wHdMAMkpHWrvonray1YE9laaTGZ0Ou5ObJ6DR7EoSHGuXS0KM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB7054
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-MS-Exchange-CrossTenant-UserPrincipalName: oqwwmHSrsb5SuUbO+0rfYmzZoTeREAlQf1U0WTJAJBa3N+cKJSOIoseO3odh3lZESsOiix51xXgU4IicbAaIyjUQra9Wjnbe1PHTT3w6WbQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR03MB8466
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -193,146 +191,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alif,
+Hi Brian, Tien Fong,
 
-On 19/2/2026 10:21 am, Sune Brian wrote:
-> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
->
-> On Thu, Feb 19, 2026 at 8:18 AM Yuslaimi, Alif Zakuan
-> <alif.zakuan.yuslaimi@altera.com> wrote:
->>
->> On 13/2/2026 5:00 pm, Sune Brian wrote:
->>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
->>>
->>> On Fri, Feb 13, 2026 at 4:44 PM Sune Brian<briansune@gmail.com> wrote:
->>>> On Fri, Feb 13, 2026 at 3:18 PM Yuslaimi, Alif Zakuan
->>>> <alif.zakuan.yuslaimi@altera.com> wrote:
->>>>> Hi Brian,
->>>>>
->>>>> On 6/2/2026 11:09 pm, Sune Brian wrote:
->>>>>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
->>>>>>
->>>>>> Hi Alif,
->>>>>>
->>>>>> Since 2025.05 to the latest master.
->>>>>> I do not have any issue as you mentioned in this patch.
->>>>>> Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
->>>>>> I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
->>>>>> that GEN5 Cyclone can support.
->>>>>>
->>>>>> Not too sure what is missing from first place?
->>>>>>
->>>>>> Thanks,
->>>>>> Brian
->>>>> Based on the CycloneV address map which can be found here -
->>>>> https://www.intel.com/content/www/us/en/programmable/hps/cyclone-v/hps.html#sfo1411577374877.html.
->>>>>
->>>>> Bit 3 of staticcfg register has to be set to apply all the settings
->>>>> loaded in SDR registers to the memory interface, in this case the patch
->>>>> ensures the SDRAM controller applies the latest configuration after
->>>>> disabling FPGA SDRAM access.
->>>>>
->>>>> This is a safety and correctness fix for re-initializing the memory
->>>>> controller in the proper sequence during FPGA reconfiguration.
->>>>>
->>>> Hi Alif,
->>>>
->>>> Before I plan to undergo a test we got to understand why w/o this patch
->>>> SDRAM2FPGA works properly w/o issue.
->>>>
->>>>> If you have the time, can you help to test this patch with your setup?
->>>>> Although unlikely, we want to be sure that this patch will not break any
->>>>> existing GEN5 boards out there.
->>>> I might be wrong, I think static cfg has been done already?
->>>> Does the code here if not wrongly understood already finished that static cfg?
->>>>
->>>> ---> Quote start
->>>> void socfpga_sdram_apply_static_cfg(void)
->>>> {
->>>> const u32 applymask = 0x8;
->>>> u32 val = readl(&sdr_ctrl->static_cfg) | applymask;
->>>>
->>>> /*
->>>> * SDRAM staticcfg register specific:
->>>> * When applying the register setting, the CPU must not access
->>>> * SDRAM. Luckily for us, we can use i-cache here to help us
->>>> * circumvent the SDRAM access issue. The idea is to make sure
->>>> * that the code is in one full i-cache line by branching past
->>>> * it and back. Once it is in the i-cache, we execute the core
->>>> * of the code and apply the register settings.
->>>> *
->>>> * The code below uses 7 instructions, while the Cortex-A9 has
->>>> * 32-byte cachelines, thus the limit is 8 instructions total.
->>>> */
->>>> asm volatile(".align 5 \n"
->>>>        " b 2f \n"
->>>>        "1: str %0, [%1] \n"
->>>>        " dsb \n"
->>>>        " isb \n"
->>>>        " b 3f \n"
->>>>        "2: b 1b \n"
->>>>        "3: nop \n"
->>>>       : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
->>>> }
->>>> Quote end<---
->>>>
->>> I forgot to quote the func call location:
->>>
->>> void do_bridge_reset(int enable, unsigned int mask)
->>>
->>> During boot users are supposed to use bridge enable to
->>> control the needs of the HPS <-> SDRAM or H2F F2H LW etc.
->>> When calls if I am not wrongly understand it will reset and
->>> simply do that static cfg and simply do not require additional
->>> calls.
->>>
->> Thanks for pointing this out, Brian.
->>
+On 24/2/2026 4:14 pm, Chee, Tien Fong wrote:
 > Hi Alif,
+> 
+> On 19/2/2026 10:21 am, Sune Brian wrote:
+>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+>>
+>> On Thu, Feb 19, 2026 at 8:18 AM Yuslaimi, Alif Zakuan
+>> <alif.zakuan.yuslaimi@altera.com> wrote:
+>>> On 13/2/2026 5:00 pm, Sune Brian wrote:
+>>>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+>>>>
+>>>> On Fri, Feb 13, 2026 at 4:44 PM Sune Brian<briansune@gmail.com> wrote:
+>>>>> On Fri, Feb 13, 2026 at 3:18 PM Yuslaimi, Alif Zakuan
+>>>>> <alif.zakuan.yuslaimi@altera.com> wrote:
+>>>>>> Hi Brian,
+>>>>>>
+>>>>>> On 6/2/2026 11:09 pm, Sune Brian wrote:
+>>>>>>> [CAUTION: This email is from outside your organization. Unless you trust the sender, do not click on links or open attachments as it may be a fraudulent email attempting to steal your information and/or compromise your computer.]
+>>>>>>>
+>>>>>>> Hi Alif,
+>>>>>>>
+>>>>>>> Since 2025.05 to the latest master.
+>>>>>>> I do not have any issue as you mentioned in this patch.
+>>>>>>> Both RD/WR are used on the FPGA2SDRAM SDRAM2FPGA.
+>>>>>>> I tested 256 AXI3 or split 128 AXI3 x2 which is the maximum
+>>>>>>> that GEN5 Cyclone can support.
+>>>>>>>
+>>>>>>> Not too sure what is missing from first place?
+>>>>>>>
+>>>>>>> Thanks,
+>>>>>>> Brian
+>>>>>> Based on the CycloneV address map which can be found here -
+>>>>>> https://www.intel.com/content/www/us/en/programmable/hps/cyclone- 
+>>>>>> v/hps.html#sfo1411577374877.html.
+>>>>>>
+>>>>>> Bit 3 of staticcfg register has to be set to apply all the settings
+>>>>>> loaded in SDR registers to the memory interface, in this case the patch
+>>>>>> ensures the SDRAM controller applies the latest configuration after
+>>>>>> disabling FPGA SDRAM access.
+>>>>>>
+>>>>>> This is a safety and correctness fix for re-initializing the memory
+>>>>>> controller in the proper sequence during FPGA reconfiguration.
+>>>>>>
+>>>>> Hi Alif,
+>>>>>
+>>>>> Before I plan to undergo a test we got to understand why w/o this patch
+>>>>> SDRAM2FPGA works properly w/o issue.
+>>>>>
+>>>>>> If you have the time, can you help to test this patch with your setup?
+>>>>>> Although unlikely, we want to be sure that this patch will not break any
+>>>>>> existing GEN5 boards out there.
+>>>>> I might be wrong, I think static cfg has been done already?
+>>>>> Does the code here if not wrongly understood already finished that static cfg?
+>>>>>
+>>>>> ---> Quote start
+>>>>> void socfpga_sdram_apply_static_cfg(void)
+>>>>> {
+>>>>> const u32 applymask = 0x8;
+>>>>> u32 val = readl(&sdr_ctrl->static_cfg) | applymask;
+>>>>>
+>>>>> /*
+>>>>> * SDRAM staticcfg register specific:
+>>>>> * When applying the register setting, the CPU must not access
+>>>>> * SDRAM. Luckily for us, we can use i-cache here to help us
+>>>>> * circumvent the SDRAM access issue. The idea is to make sure
+>>>>> * that the code is in one full i-cache line by branching past
+>>>>> * it and back. Once it is in the i-cache, we execute the core
+>>>>> * of the code and apply the register settings.
+>>>>> *
+>>>>> * The code below uses 7 instructions, while the Cortex-A9 has
+>>>>> * 32-byte cachelines, thus the limit is 8 instructions total.
+>>>>> */
+>>>>> asm volatile(".align 5 \n"
+>>>>>        " b 2f \n"
+>>>>>        "1: str %0, [%1] \n"
+>>>>>        " dsb \n"
+>>>>>        " isb \n"
+>>>>>        " b 3f \n"
+>>>>>        "2: b 1b \n"
+>>>>>        "3: nop \n"
+>>>>>       : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
+>>>>> }
+>>>>> Quote end<---
+>>>>>
+>>>> I forgot to quote the func call location:
+>>>>
+>>>> void do_bridge_reset(int enable, unsigned int mask)
+>>>>
+>>>> During boot users are supposed to use bridge enable to
+>>>> control the needs of the HPS <-> SDRAM or H2F F2H LW etc.
+>>>> When calls if I am not wrongly understand it will reset and
+>>>> simply do that static cfg and simply do not require additional
+>>>> calls.
+>>>>
+>>> Thanks for pointing this out, Brian.
+>>>
+>> Hi Alif,
+>>
+>> Pic by pic.
+>>
+>>> I understand that you saw potential redundancy in this patch's explicit
+>>> re-application of the SDRAM static configuration, which may already be
+>>> handled by the existing call to socfpga_sdram_apply_static_cfg() during
+>>> bridge reset.
+>> This is following the old boot flow to the latest and not having issues
+>> under boot.scr with "bridge enable" and sub-bit bridge setup.
+>>
+>>> I would imagine your current flow works as the current code already
+>>> applies SDRAM configuration changes at the correct time during boot or
+>>> bridge reset. However, there are some cases or sequences where this
+>>> apply step could be missed - such as during partial reconfiguration.
+>> Not too understand this case even if you PR the bridge enable MUST
+>> be done after the reconfiguration phase aka "bridge enable".
+>> And PR itself has nothing to do with turning on F2H SDRAM the first time.
+>> One is the FPGA manager and the other is the HPS register unless it auto
+>> reset all bridge registers.
+>> I can also reload full bit during boot again and again and boot to linux w/o
+>> f2h issue.
+>>
+>>> This patch would then be needed as an extra safeguard in cases where SDR
+>>> registers are updated manually or outside the typical bridge reset sequence.
+>> If the user doesn't use f2h then turning on this bit for what purpose?
+>> As "bridge
+>> enable" under boot.scr have good control.
+> 
+> 
+> NAK as the TRM’s staticcfg.applycfg (bit 3) applies SDRAM-controller 
+> configuration to the memory interface (burst length membl, ECC/data 
+> width, timings, etc.).
+> 
+> It does not gate fpgaportrst.portrstn. The claim “after write to any SDR 
+> register” is too broad.
+> 
+> fpgaportrst.portrstn[13:0] is a live reset control for the FPGA ports.  
+> Writing 0 stretches reset, writing 1 releases reset. Its effect is 
+> immediate and independent of applycfg.
+> 
+> Thanks.
+> 
+> Best regards,
+> 
+> Tien Fong
 >
-> Pic by pic.
->
->> I understand that you saw potential redundancy in this patch's explicit
->> re-application of the SDRAM static configuration, which may already be
->> handled by the existing call to socfpga_sdram_apply_static_cfg() during
->> bridge reset.
-> This is following the old boot flow to the latest and not having issues
-> under boot.scr with "bridge enable" and sub-bit bridge setup.
->
->> I would imagine your current flow works as the current code already
->> applies SDRAM configuration changes at the correct time during boot or
->> bridge reset. However, there are some cases or sequences where this
->> apply step could be missed - such as during partial reconfiguration.
-> Not too understand this case even if you PR the bridge enable MUST
-> be done after the reconfiguration phase aka "bridge enable".
-> And PR itself has nothing to do with turning on F2H SDRAM the first time.
-> One is the FPGA manager and the other is the HPS register unless it auto
-> reset all bridge registers.
-> I can also reload full bit during boot again and again and boot to linux w/o
-> f2h issue.
->
->> This patch would then be needed as an extra safeguard in cases where SDR
->> registers are updated manually or outside the typical bridge reset sequence.
-> If the user doesn't use f2h then turning on this bit for what purpose?
-> As "bridge
-> enable" under boot.scr have good control.
 
-
-NAK as the TRM’s staticcfg.applycfg (bit 3) applies SDRAM-controller 
-configuration to the memory interface (burst length membl, ECC/data 
-width, timings, etc.).
-
-It does not gate fpgaportrst.portrstn. The claim “after write to any SDR 
-register” is too broad.
-
-fpgaportrst.portrstn[13:0] is a live reset control for the FPGA ports.  
-Writing 0 stretches reset, writing 1 releases reset. Its effect is 
-immediate and independent of applycfg.
-
-Thanks.
+Thank you both for your valuable inputs, we can proceed to drop this 
+patch as it has been determined that the changes are not relevant - 
+there is no need to apply staticcfg bit after controlling the reset for 
+F2H bridge.
 
 Best regards,
+Alif
 
-Tien Fong
-
+>
+> 
 
