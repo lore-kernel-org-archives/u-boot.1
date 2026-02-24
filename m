@@ -4,105 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE63EEC2B8
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 01:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE032EEC2B8
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 01:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF40783981;
-	Tue, 24 Feb 2026 02:06:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 155CA82BF2;
+	Tue, 24 Feb 2026 02:07:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kpEwqmx7";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EA748063E; Tue, 24 Feb 2026 02:06:57 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6073783C8C; Tue, 24 Feb 2026 02:07:00 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 064B183981
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 02:06:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFF828063E
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 02:06:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-385d9fb297dso53605741fa.2
- for <u-boot@lists.denx.de>; Mon, 23 Feb 2026 17:06:53 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771895213; cv=none;
- d=google.com; s=arc-20240605;
- b=FdQW0MEa2zjKm74NBtwLSdUGlFyj0KOuBnUbfgkeO3ZL9CU1zGNimADymCG03ISLSD
- V9WZKLLgp1HJOJ4cX40N52kuPZlVLAx5qbv9WOlklCCc2XkXQrSkMFy+EMBqIFiL4PEt
- gnw/aGLu0E+uDUdfVGTlapnhVrUD3bdj7JVgx9efCThuCxAqJmdjadeFn+raPJtq9YjW
- yK0AVt8raqbEtENp7XBEmjvTkRbPeWr8pXlwi+iwkAMmnADTOzjQ2/1TVFIcznN52o4W
- MKqys8ZJTd8PvP0A7m/z74UinX9tQf5EFvJc6Vwih+X4jPBzLOV6ZQ8RjD9idxqBRq7G
- cjdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=3c3uBeR0TYFrf9uQYzxpZNCvIXjrZiOFOwLtDZ4w1VY=;
- fh=7Uy8pHi96aZ9pVajzygr4tGhvRxHf5/2sAgtlx8KFsA=;
- b=fJdhDKfNJwV3TanVpzLZhF3rym5LRdC81wCxrjfgC2YjwNXxuO2YZOEiRaUeXK83eZ
- F4SDw7whfzZirYSjJtsvWy13u7sq3+3Bqw2yXqHsK7nj9S8OAzV5CCFnA6fTTsviM+Bh
- Ww6S91P2HO0yuhIWYpj8rwFtf0cvzut0ijkV7RK6Jg+9hmdkSE1Btx07gN98G1fsjcGW
- 0N1ySz9wfCUuq+7YeIysOmipeFDcbhgk8LQ8S07OPMvdgVQUT3eXYZTEmJJpqwoEhDFl
- zIkoBK04r0FmX7ZCATcVKjGumJsRwTe4CI7oFiJqj9gINGOxuwJpX/wOAJN78YdCMn9T
- xTEQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771895213; x=1772500013; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3c3uBeR0TYFrf9uQYzxpZNCvIXjrZiOFOwLtDZ4w1VY=;
- b=kpEwqmx7LUxy4DVMo3Mkfcykh01DRmdXN4lc2RWmcfCv96Eeisb73Vu61k5/KonX69
- rQMNyEQTgS0wxo+01iJMkbwNdyESoCBPcXP8aLW8qXeVXRtaSNDrL2xhEYqWaxWD6Mct
- ftLdeoX+SdRuszvIJj1+O4UieEEeA1VhpbpO+tqOQ0aoIlS9lLtwS1GC2tCpUFllCkWv
- jQDp5hcGhVfMySUQlt15eDk4ENNkDLQ/6VaPYzMcDKnpaUDEOv/tB2cy84S3/DYg8eOZ
- PuavLZLRlN+w8rFswG6QMl4bQHkXXNG6ru+ev3Zs5ohUogC/cMUZ4UcEwdqUcLxgbJNf
- kquA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771895213; x=1772500013;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3c3uBeR0TYFrf9uQYzxpZNCvIXjrZiOFOwLtDZ4w1VY=;
- b=FlieteYCTeyx7/G8pwM/uakpM1nYndNAfa6rgL3tn9+hn1FjEc29jxv5bXmzqRn9sQ
- KpXpoDJAjBe6FZcP8l1BW1JeKP4yfsovZUpxj86DLS+LEBxvWWwTcdxN//XZ/uDnYQdv
- PTJtTvH5bUf7YRo5XV10EIfjgO7d1jwoA+eD5KDecktadeqNIyiSt37J1LQONT07dJkO
- T6V8oNwHgq9eg8mssNa++oj00L0a48H5vKdhS6Bnv8yl1lpjO7N56C572wPmEAlbkXTC
- tSH3TncHol2Jk7dFuHG12ic28hjjLVefTA3p119wnGUr5gDgBsGJEVPsh0C9U2MyyZOn
- hT3g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUvPeMbaSAiSiq52mz57F20rTE7CrRMYFAEPMg0BJahNdBrA1+f94NXWiLUbMNcLZijDdMCfiM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyn9CFlyfvx3yF/Gap20mSTfCGcOQO/tEYKw0076Uie6ilEIm5Q
- ALZAnmczPdckexRenF4r1FDnqnor88tfy2+5XPjzL2xec3mOGWUfXHuvgsWXcIL7yCkmj132f/1
- GJvr/NV6z3pck7GR39CsIAhlv9FLBEhA=
-X-Gm-Gg: ATEYQzy2gvyf7uLkglQlvXeDtGLBq7q+1HZ1FXVMlovpblPM3YOWbRHqb0lCNQotSDW
- 0IxsjiCFPFNvE4ovIHIhZ5KqRRp7XkSm25KcJtiVyHbaG47za/heQqK7ivwRdJOhpvRoFWPRl+i
- DiC8kUFd4EEKWZdYcP2mA/6t6rLCJ+NskKF4WePeG6Y4NkRDTfvEkwsx7ebklmvrpmlOw4tDZyq
- 066g7T7Ik+HqneO3h4BvCzZwXszz/heSDeuysaA3QbxT4JCJygmCmbY7/2sVKNNV+l8QZ/XDA03
- qCIWioZe35jEgs7+QE7OZ3XoNZsj9R0fUVfRQQ==
-X-Received: by 2002:a2e:a813:0:b0:385:f0ce:e222 with SMTP id
- 38308e7fff4ca-389a5e9ad2cmr28486131fa.41.1771895212800; Mon, 23 Feb 2026
- 17:06:52 -0800 (PST)
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1vugsk-000000001gg-1ZOQ; Tue, 24 Feb 2026 01:06:34 +0000
+Date: Tue, 24 Feb 2026 01:06:30 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ David Lechner <dlechner@baylibre.com>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
+Subject: Re: [RFC PATCH 08/20] boot: image-loader: add UBI volume backend
+Message-ID: <aZz5lj7URFZc86xK@makrotopia.org>
+References: <cover.1771275704.git.daniel@makrotopia.org>
+ <47725c58588200f631c918a56b770454d5721954.1771275704.git.daniel@makrotopia.org>
+ <CAFLszThSKbRjufnj4z4xunn-OEUv8kNRngNQ3=EpaNyvyV5ncg@mail.gmail.com>
+ <aZc_f3lrmRdE9c3Z@makrotopia.org>
+ <CAFLszTgxMeFvKx8nkVUa_PADiVFnv1UB69SyD+C3OiLY_7ku8w@mail.gmail.com>
+ <aZypXx3liLvvB4zr@makrotopia.org>
+ <a1d06225-bc17-411a-80ed-f39e0450dc29@iopsys.eu>
+ <64a12e61-8e04-472e-8493-90b2e4a41d50@iopsys.eu>
+ <aZztAL-RQ1LSf0-j@makrotopia.org>
+ <5ade655f-b2df-4cb2-89ea-752b2958eca3@iopsys.eu>
 MIME-Version: 1.0
-References: <CGME20260223103749epcas1p2d9af2576eb9704b70a8572f7ccb8080f@epcas1p2.samsung.com>
- <2d9001dca4b0$74a82c10$5df88430$@samsung.com>
- <20260223184541.GD3233182@bill-the-cat>
-In-Reply-To: <20260223184541.GD3233182@bill-the-cat>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 24 Feb 2026 10:06:40 +0900
-X-Gm-Features: AaiRm52LT70rhUJU9cEHf_Z3d7nPST1xapR8Ofi8K5qiZ3SrmEi7GsTT7nHtp8Y
-Message-ID: <CALrBrZ0qZMRG=vfw07POB3WgsMJSdXGvp=4sLy7dYAprJ=nitQ@mail.gmail.com>
-Subject: Re: please pull u-boot-samsung master
-To: Tom Rini <trini@konsulko.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: Minkyu Kang <mk7.kang@samsung.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <5ade655f-b2df-4cb2-89ea-752b2958eca3@iopsys.eu>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,44 +89,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Charkraborty,
+On Tue, Feb 24, 2026 at 03:40:47AM +0300, Mikhail Kshevetskiy wrote:
+> 
+> On 2/24/26 03:12, Daniel Golle wrote:
+> > On Mon, Feb 23, 2026 at 10:32:32PM +0300, Mikhail Kshevetskiy wrote:
+> >> On 2/23/26 22:30, Mikhail Kshevetskiy wrote:
+> >>> There are UBI based block storage emulation, see CONFIG_UBI_BLOCK
+> >>> commits: 
+> >>> * 9daad11ad178646c288aca3615a7ba1e6039aed3 ("drivers: introduce UBI
+> >>> block abstraction")
+> >>> * aa5b67ce226267440e64fadc57d3a21e5842027c ("disk: support UBI partitions")
+> >>>
+> >> There is the block storage abstraction for mtd devices as well.
+> > During my evening walk outside I thought about this a bit more, and if
+> > it would be possible to use the ubiblock and mtdblock devices instead of
+> > introducing dedicated bootdevs and imagemap backends for both of them.
+> > In the simple case of only a single boot option this would probably
+> > work: bootmeth_openwrt detects the uImage.FIT on the raw block device
+> > and may go ahead, load and launch it.
+> >
+> > However, there is often more than one of them. And as they are stored in
+> > directly on MTD partitions or UBI volumes, knowing the name of the
+> > partition or volume, and which device it sits on is crucial for
+> > bootmeth_openwrt, which should support also complex multi-slot dual-boot
+> > arrangement, typically identifying the slots by UBI volume name or MTD
+> > partition name. When using the mtdblock or ubiblock devices this
+> > information is hidden, and can only be accessed in a very tricky way,
+> > especially for ubiblock devices, which lack a device parent. Matching
+> > the UCLASS type of the device parent of a block device in the bootmeth
+> > also feels sketchy and inappropriate.
+> 
+> what about querying available partitions using the command 'read' way?
 
-2026=EB=85=84 2=EC=9B=94 24=EC=9D=BC (=ED=99=94) 03:55, Tom Rini <trini@kon=
-sulko.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+Please explain how you imagine that to work. I mean, sure, we can read
+them, and then we know that they contain an uImage.FIT.
 
-> On Mon, Feb 23, 2026 at 07:37:49PM +0900, Minkyu Kang wrote:
->
-> > Dear Tom,
-> >
-> > The following changes since commit
-> eed514b11d04a2f8a949521ad3bffba3ec98bd2f:
-> >
-> >   video: correct label for cyclic video_idle (2026-01-29 10:00:59 -0600=
-)
-> >
-> > are available in the Git repository at:
-> >
-> >   https://source.denx.de/u-boot/custodians/u-boot-samsung.git master
-> >
-> > for you to fetch changes up to 11198fa347390eb449c2a0939f5f00cf510fe285=
-:
-> >
-> >   doc: board: samsung: exynos-mobile: remove requirement of stub device
-> tree
-> > (2026-02-23 15:35:33 +0900)
-> >
->
-> Unfortunately the exynos-mobile does not build in CI with this PR:
-> https://source.denx.de/u-boot/u-boot/-/jobs/1383183/viewer
->
-> --
-> Tom
->
+mtdblock and ubiblock devices are generally whole-disk devices, each
+representing the backing MTD partition or UBI volume.
 
-Could you please fix this?
-I think, it should define CONFIG_DEFAULT_DEVICE_TREE for exynos-mobile.
+So first of all, ubiblock devices in U-Boot only exist for already
+attached UBI devices, and only one UBI devices can be attached at a
+time.
 
-Thanks,
-Minkyu Kang.
+Apart from that problem (which would limit bootmeth_openwrt to operate
+on exactly one, and already attached UBI device, which is unfortunate,
+but not a complete show-stopper), there are often more than one UBI
+volumes holding an uImage.FIT blob. They can be identified by the
+out-of-band metadata, ie. the UBI volume name (or MTD partition label),
+typically "production" and "recovery", you get the idea, right?
+They **cannot** be identified by inband metadata (ie. anything you could
+read from inside that volume). While (in theory) we could add metadata
+to identify and distinguis "production" from "recovery" images, this
+(by definition) isn't possible in case of a symmetric A/B dual boot
+arrangement. Also, what I'm creating here is not a new design from
+scratch, but rather the formalization of a historically grown
+reality, present on countless consumer-grade devices out there.
+Making fundamental changes to the design (such as carrying additional
+metadata within the firmware image itself, instead of relying on
+out-of-band metadata like the MTD partition label or UBI volume name)
+will make the newly introduced bootmeth_openwrt de-facto incompatible
+with all existing OpenWrt devices out there -- and compatibility is an
+important part and purpose of the exercise.
 
->
+Hence, the user (or the bootmeth) need to identify which of the available
+UBI volumes or MTD partitions the system should boot from, and do so
+using aforementioned out-of-band, storage-type-specific metadata.
+
+Now, assuming that I'd have to use the ubiblock (for example), the only
+way to get back to those crucial bits of metadata would be to traverse
+from the blk device to the parent udevice, checking whether it's of type
+UCLASS_MTD and if the blk's type is part_type PART_TYPE_UBI, and then
+interpreting block_dev->hwpart as the volume name. Imho that's an overly
+intrusive operation, messing with the block_dev and ubi subsystem
+internals which should not be touched from outside of the respective
+subsystems.
+
+For mtdblock devices it's even much worse, I'd have to cast bdev's priv
+back into struct mtd_info in order to get to the partition label, and
+that feels extremely wrong (arguably, we could patch mtdblock.c to also
+set the hwpart string, but even that would still be more of a hack than
+actually being correct imho).
+
+> 
+> > So while having mtdblock and ubiblock devices is generally nice,
+> > especially if U-Boot has to access a filesystem (eg. squashfs) stored on
+> > them, for the case of OpenWrt it would at least be a bit ugly, as the
+> > metadata of the actual storage backend (MTD or UBI) is crucial. We need
+> > the UBI volume name or the label of the MTD partition.
+> >
+> > In a way you could say that OpenWrt uses block devices (eg. MMC) it
+> > boots from more like MTD, and not the other way around. And in some way,
+> > bootmeth_openwrt will do some extra lifting when started on a block
+> > device (extract the GPT partition name and present it as the bootflow's
+> > fname), while the imagemap API provides an abstraction to read raw
+> > images from all three storage backends (blk, mtd, ubi).
+> >
+> > That being said, I'm happy we have overcome things like block2mtd or
+> > gluebi, and do use the appropriate APIs (and filesystem types) on each
+> > class of storage devices in OpenWrt nowadays. Some of the helpful
+> > patterns borrowed from our MTD and UBI boot flows (avoiding a boot
+> > filesystem, identifying storage volumes, ...) remain, however, and are
+> > applied equally also on block storage (ie. MMC).
+> >
+> > tl;dr: We'd rather use block2mtd than using mtdblock ;)
