@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBAEF3C9A8
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 15:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65C6EF3C9AC
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 16:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 651F583981;
-	Tue, 24 Feb 2026 16:59:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A634283642;
+	Tue, 24 Feb 2026 17:04:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TdA6vTH8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ovgyAp1l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24BC483E13; Tue, 24 Feb 2026 16:59:11 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id C0A5383981; Tue, 24 Feb 2026 17:04:44 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 111E983642
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 16:59:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90AB182BF2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 17:04:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7d4c65d772cso5255451a34.1
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 07:59:09 -0800 (PST)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-45f0c1f1b54so3640077b6e.1
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 08:04:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771948748; x=1772553548; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771949081; x=1772553881; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DFmRa3aWXH4HxvM0P685ULYITq/siXfCAZSFBZ/r1GA=;
- b=TdA6vTH8HJFm0x/YiyxH8c5DNotfi3+dta2pefOVifoQuzVwXkIN4OWBvrloSHQk5T
- LlC1mTr4L/SdPA7MkUhEF8boVNAc9Y9OePW0QjluaRMjrkhClhV0sUlYPtI/ZtXwaUPu
- SGqz624PU+fjNBqoBE33gQSfJMDxniMJZSaNU=
+ bh=IjVHBpc2Ybnb5SYBC6NJRLVJKNfz/Q4ry/gz4XON90k=;
+ b=ovgyAp1lxEwLZWD1HXLIHVi3HHZEG83HfFTLtKz+Fm1Z+fXoWaZeJpCVpZ/ls1iTLp
+ 9zZ8DWggASkL4eWHx+EkHbd0veJIoJeecP7NbqhVRxPDit/CEwb0tyP5DtpZAEdlNhaS
+ LaRD01Wdw0yS6iop+sX2Zzf0simeBbLp7JLes=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771948748; x=1772553548;
+ d=1e100.net; s=20230601; t=1771949081; x=1772553881;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DFmRa3aWXH4HxvM0P685ULYITq/siXfCAZSFBZ/r1GA=;
- b=cbZFcczHQA2g6R5b3szDpSTuEQd2g1svroVhpAMZpQijAhjzuVeVxVsISnbWqeLHxl
- Ij+NzEEFN2n+KeSO3kxq/AlvyAL8SvZ26bb4KZncbBcrZFHngZrYk1sJ3X1IQ72TA9iH
- Kx0mlAacq9htDuOM/tgPBU76RIjOzTz5tqQlBFZD5TSMxLDJbK8qNFFTXCrfjO0raBiu
- A5rdHGylXa6qLA/cUZgZ27bpFw+X5I71OIT010aPo7IvsSoOSZ9RRB44AlrBlir/KC0F
- 45w4QwJz1cJIaBPMk/N69z4FsHqYk7HhW0TsBXScOkEZuKAECY9CMyWgnHHLNJGI6VmY
- G68w==
-X-Gm-Message-State: AOJu0Yy0ZNK5HnfYIr9Ss9FZswm8a83U88NviFR9Zbzx9gm3mxvTeAej
- x9O/nsEJNu8a3+qwEpCalgVFJPXXZJig8E5LwBO1Xd6YXjWj5EsKRU5S/4KJyQ/Acbc=
-X-Gm-Gg: AZuq6aKm/rUjv4u4qEtcdpwxhC7+Q3xb34cRnI2OP+p3nNyxtLNVnw6p0tIMGWIMSuC
- UhlMLLgyPODXJQJlcFhLoc/ntidiob6Qpp2kRgBMRwdqXPzLlJgEc2U3W6A2AEN4KsZxxsiYave
- MAL1MwzAwSSO/tfbVQbphVz8CSrbVIQ5lnbRrC55aqR39x2PnWcad1CbKBfFqlBpArBs2Lim1+B
- cnLPFmYcpvOwavfZKvI4Q8IwcQtudtZdTYv0ydqgr/pQxNFW1JLJ0YLF/7WbncMqO5tdrZAznCz
- wetnO6rM3AOlXGJRzA970ZK3N2M4pqAW7gePw8YEGhO/QhnJ7OXBqef8P/RgU9ejayYTBLSYjRV
- edP886l/4xnl4zQFFEoRj6vqK9irggGN3JQ5dk+xisXCIIQzHRo24LkTNzEg/iDTTsU7qUN5HKG
- aUC3U1pd6DzwY7Io+vWp3tdUbEvW+CL12a+RUTTW2Sj5/A9rKNOXdwqlqmoQ9A4bLVNb+YxNf7K
- QF801R9idIwzTSe4UGgEmrvOuPsFweF8VEfkyCADZEL4ru5KnI=
-X-Received: by 2002:a05:6870:d0c8:b0:409:50b3:273e with SMTP id
- 586e51a60fabf-4157abcb0b9mr7991693fac.10.1771948747679; 
- Tue, 24 Feb 2026 07:59:07 -0800 (PST)
+ bh=IjVHBpc2Ybnb5SYBC6NJRLVJKNfz/Q4ry/gz4XON90k=;
+ b=FkDM3qw/jlS1wX+rCHcAPUr2WEbgDw5HiPpNBtMArp4YlnCZtSOEflBkv5Y/yI8+Ms
+ iip8RuJltMv9F5C9aj41EaFDDXkZ2nN+vMnd3RwyChLLt4do1YWt5n32RpCNL6Eh/sWv
+ 2lPRg5ugMOk/3hyoXKbNEPTjAdpaQV8wmLnv2nr5Jxv3bILeG3o3nggxIwfeTv4UaYvu
+ M0XvWkuLEu0Y0Pse74gdZ3JPf1/HK4POEo8aBUMomXhD9Whn3lBAuvKbhd9Nc87UQclO
+ 4pHza5PVHqGbMsBzak9iIJBd37jrDtUUIWgp5+GV4X7o0L1wSK9Z5DWXhJsSfcm3Oj6W
+ 5YoA==
+X-Gm-Message-State: AOJu0YwS++j7YlrMnjx1bfjFPs0oNzCpT4ExQlYd8njc7IWeBoXX+lv1
+ a6RMRZ+0QFpIf0luHOpfqeElqYpxsFdywEuyn9tRpmFJuSuhJwTPfDguqosq1JhsSSA=
+X-Gm-Gg: AZuq6aL3tM9l2+gFT2R4Y6vdJW61Hdnl1XoaTmdUzypoaIR15CDxq3zQAbQ9AIt8qOn
+ 5GnJ1PiXrzg/fiNrlOwiy1vELaRiX+hM30A22CZykh86tmYsg+QYJG3Q2wPzi/Dx6qbAR0hpx5q
+ xVLQu1SsUIDB3f/r5IbCI0TPwnJlHaVtH8LdX92fxnycx3jmwj3hxhBEUcdsPfwVH989aWQEp+k
+ KMjswnjRHfdUAnaJ+zl2DvLVEEwcOuK6ybGJiDOBNZe5/plkQpx89ljHYMD4JNs5Yn+VyE4qMdZ
+ F+0ZvhNGmv6aFnUunNLW3iW1FvEPnHX1av3CmIRlFvI6hLHO9S4tl1NDJBU3MA81PpL4wOGZELE
+ GM2rUiCqd8NZhwiq+sTBuNw1fQ7BgaIJXHwcxJ+qlg5+sTj7emyC9IR5cdieTqpVxUCEvedCdPb
+ qzlir831oq6O8F0x2ELS3KbwE/cZKgnoufgLse5ZBsk9JauiXWZgZ1OefcKmuY032N+RIs6f7zG
+ IfhPtTikWqoRYfK37CcpUaR0SfP8FaUQlFD0DR7CzfcJyJlRS3BfwAByye1Ew==
+X-Received: by 2002:a05:6808:1824:b0:459:b564:e20e with SMTP id
+ 5614622812f47-464463d1b79mr6915583b6e.61.1771949080683; 
+ Tue, 24 Feb 2026 08:04:40 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-415a607a7d1sm6308737fac.14.2026.02.24.07.59.06
+ 586e51a60fabf-4157cf9f666sm10122997fac.7.2026.02.24.08.04.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 07:59:06 -0800 (PST)
-Date: Tue, 24 Feb 2026 09:59:04 -0600
+ Tue, 24 Feb 2026 08:04:40 -0800 (PST)
+Date: Tue, 24 Feb 2026 10:04:37 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo <ycliang@andestech.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Rick Chen <rick@andestech.com>
-Subject: Re: [PATCH v2 8/9] riscv: Call bootm_final()
-Message-ID: <20260224155904.GR3233182@bill-the-cat>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+Subject: Re: [PATCH v2 9/9] x86: Add cleanup_before_linux()
+Message-ID: <20260224160437.GS3233182@bill-the-cat>
 References: <20260224142553.1608883-1-simon.glass@canonical.com>
- <20260224142553.1608883-9-simon.glass@canonical.com>
+ <20260224142553.1608883-10-simon.glass@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h/jjG6Fo+BJVfQDC"
+ protocol="application/pgp-signature"; boundary="T7X1ayC2RSMplue0"
 Content-Disposition: inline
-In-Reply-To: <20260224142553.1608883-9-simon.glass@canonical.com>
+In-Reply-To: <20260224142553.1608883-10-simon.glass@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,34 +100,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---h/jjG6Fo+BJVfQDC
+--T7X1ayC2RSMplue0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 24, 2026 at 07:25:50AM -0700, Simon Glass wrote:
+On Tue, Feb 24, 2026 at 07:25:51AM -0700, Simon Glass wrote:
 
-> Make use of this function, adding some pieces needed by RISC-V
+> This function is not present on x86, but there is an x86-specific
+> version which is never called. This is a bug, meaning that APs are not
+> parked before booting.
 >=20
+> The original weak function was added in 2012 by:
+> commit f30fc4de4160 ("x86: Add a default implementation for cleanup_befor=
+e_linux()")
+>=20
+> At later change made use of the weak function but was actually dead
+> code. The Fixes tag reflects that.
+>=20
+> Add cleanup_before_linux(), making it call x86_cleanup_before_linux()
+>=20
+> Fixes: 99a573fb326f ("x86: mp: Park CPUs before running the OS")
 > Signed-off-by: Simon Glass <simon.glass@canonical.com>
-[snip]
-> +	if (IS_ENABLED(CONFIG_USB_DEVICE))
-> +		udc_disconnect();
 
-This is still a NAK because nothing does this today.
+We're at over 5 years since 99a573fb326f and over a decade since
+f30fc4de4160 and I don't think it was ever actually called. We should
+just be dropping this, not suddenly calling it.
 
 --=20
 Tom
 
---h/jjG6Fo+BJVfQDC
+--T7X1ayC2RSMplue0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3KxQAKCRAr4qD1Cr/k
-CjrMAP0ZN9/0Xdw5gzPCisuf8//240wcLK+S8gdQqJLcGLRNlwEAnQhuOigT88NZ
-jCmV5nWOtIu7FzFptniKtUoAFu4rkgw=
-=Evim
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3MFQAKCRAr4qD1Cr/k
+Ch2JAP9Sl9A0XdBA6UuUhj9NWhqycJitaBgNxVOpwtsoA3RdOQD8CSowO4o6RRvS
+b0fAUakPO8rLhOZ9j5PTkdzXEBHZwwc=
+=0CVx
 -----END PGP SIGNATURE-----
 
---h/jjG6Fo+BJVfQDC--
+--T7X1ayC2RSMplue0--
