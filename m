@@ -4,50 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85EAEF3C9A8
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 15:57:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBAEF3C9A8
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 15:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00B4683981;
-	Tue, 24 Feb 2026 16:57:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 651F583981;
+	Tue, 24 Feb 2026 16:59:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="TRjoXxFR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TdA6vTH8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F383383DCB; Tue, 24 Feb 2026 16:57:20 +0100 (CET)
-Received: from mta-65-228.siemens.flowmailer.net
- (mta-65-228.siemens.flowmailer.net [185.136.65.228])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 24BC483E13; Tue, 24 Feb 2026 16:59:11 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 735AD83642
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 16:57:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 111E983642
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 16:59:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id
- 20260224155717034fb6d1ca00020700 for <u-boot@lists.denx.de>;
- Tue, 24 Feb 2026 16:57:17 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=NV+XFajIUBbul0WBJC4Oa4wjnuOAqqNkVR5zXpbqYfw=;
- b=TRjoXxFRsdMnZumz6kKyDAiDpQrFkoCYc1YZ16i48UCtqWpxxAMNRu5KB80opglOsTb6i2
- CokR157Vi7cPA4epN8MlkWHAXRIy0SWb0J1k4IYFJSin/JvmUk0PeGr66RQZoWgn8t9YfT6N
- ojzGbpsQMx/pxBfn18jUEf7OPVmejbSPBx6o7NnNpl1NO63018awprlbr/Oj5Rg+wWYf5cF1
- VGBsMMv8znUFpoL7n2iMMq6NMlt+jtWBmgOKL+zq8Bc63p6BjjduhNMYkTRe56KjHTHpg+HZ
- 0uPijcbSKaEEudNw9iK8NFwSq67HOJVHOrNYdBhHL+FCniDTI1hfPoRA==;
-From: Ludwig Nussel <ludwig.nussel@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>
-Subject: [PATCH] bootm: fix booting kernel_noload image
-Date: Tue, 24 Feb 2026 16:57:10 +0100
-Message-ID: <20260224155712.286317-1-ludwig.nussel@siemens.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d4c65d772cso5255451a34.1
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 07:59:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771948748; x=1772553548; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DFmRa3aWXH4HxvM0P685ULYITq/siXfCAZSFBZ/r1GA=;
+ b=TdA6vTH8HJFm0x/YiyxH8c5DNotfi3+dta2pefOVifoQuzVwXkIN4OWBvrloSHQk5T
+ LlC1mTr4L/SdPA7MkUhEF8boVNAc9Y9OePW0QjluaRMjrkhClhV0sUlYPtI/ZtXwaUPu
+ SGqz624PU+fjNBqoBE33gQSfJMDxniMJZSaNU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771948748; x=1772553548;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DFmRa3aWXH4HxvM0P685ULYITq/siXfCAZSFBZ/r1GA=;
+ b=cbZFcczHQA2g6R5b3szDpSTuEQd2g1svroVhpAMZpQijAhjzuVeVxVsISnbWqeLHxl
+ Ij+NzEEFN2n+KeSO3kxq/AlvyAL8SvZ26bb4KZncbBcrZFHngZrYk1sJ3X1IQ72TA9iH
+ Kx0mlAacq9htDuOM/tgPBU76RIjOzTz5tqQlBFZD5TSMxLDJbK8qNFFTXCrfjO0raBiu
+ A5rdHGylXa6qLA/cUZgZ27bpFw+X5I71OIT010aPo7IvsSoOSZ9RRB44AlrBlir/KC0F
+ 45w4QwJz1cJIaBPMk/N69z4FsHqYk7HhW0TsBXScOkEZuKAECY9CMyWgnHHLNJGI6VmY
+ G68w==
+X-Gm-Message-State: AOJu0Yy0ZNK5HnfYIr9Ss9FZswm8a83U88NviFR9Zbzx9gm3mxvTeAej
+ x9O/nsEJNu8a3+qwEpCalgVFJPXXZJig8E5LwBO1Xd6YXjWj5EsKRU5S/4KJyQ/Acbc=
+X-Gm-Gg: AZuq6aKm/rUjv4u4qEtcdpwxhC7+Q3xb34cRnI2OP+p3nNyxtLNVnw6p0tIMGWIMSuC
+ UhlMLLgyPODXJQJlcFhLoc/ntidiob6Qpp2kRgBMRwdqXPzLlJgEc2U3W6A2AEN4KsZxxsiYave
+ MAL1MwzAwSSO/tfbVQbphVz8CSrbVIQ5lnbRrC55aqR39x2PnWcad1CbKBfFqlBpArBs2Lim1+B
+ cnLPFmYcpvOwavfZKvI4Q8IwcQtudtZdTYv0ydqgr/pQxNFW1JLJ0YLF/7WbncMqO5tdrZAznCz
+ wetnO6rM3AOlXGJRzA970ZK3N2M4pqAW7gePw8YEGhO/QhnJ7OXBqef8P/RgU9ejayYTBLSYjRV
+ edP886l/4xnl4zQFFEoRj6vqK9irggGN3JQ5dk+xisXCIIQzHRo24LkTNzEg/iDTTsU7qUN5HKG
+ aUC3U1pd6DzwY7Io+vWp3tdUbEvW+CL12a+RUTTW2Sj5/A9rKNOXdwqlqmoQ9A4bLVNb+YxNf7K
+ QF801R9idIwzTSe4UGgEmrvOuPsFweF8VEfkyCADZEL4ru5KnI=
+X-Received: by 2002:a05:6870:d0c8:b0:409:50b3:273e with SMTP id
+ 586e51a60fabf-4157abcb0b9mr7991693fac.10.1771948747679; 
+ Tue, 24 Feb 2026 07:59:07 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-415a607a7d1sm6308737fac.14.2026.02.24.07.59.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Feb 2026 07:59:06 -0800 (PST)
+Date: Tue, 24 Feb 2026 09:59:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Leo <ycliang@andestech.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Rick Chen <rick@andestech.com>
+Subject: Re: [PATCH v2 8/9] riscv: Call bootm_final()
+Message-ID: <20260224155904.GR3233182@bill-the-cat>
+References: <20260224142553.1608883-1-simon.glass@canonical.com>
+ <20260224142553.1608883-9-simon.glass@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="h/jjG6Fo+BJVfQDC"
+Content-Disposition: inline
+In-Reply-To: <20260224142553.1608883-9-simon.glass@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,128 +101,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-FIT images don't work without having to explicitly specify physical
-load addresses. Digging into that it looks like a flaw in
-bootm_load_os().
-It duplicates images->os for convenience. However, the code handling
-"kernel_noload" images then updates the load address in the copy with
-the value lmb_alloc_mem() returned. Later there's another call to
-lmb_alloc_mem() that uses the old value. This leads to havoc due
-to subsequent calls of lmb_alloc_mem() picking too low addresses.
 
-The "fix" is to mark the local variable const to avoid accidental
-assignments. This works but IMO the logic is still flawed somehow as
-this leads to overlapping lmb reservations. I guess the fixed
-reservation should only be done when the noload path wasn't hit.
+--h/jjG6Fo+BJVfQDC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Without the change:
-+ bootm 0x40200000#qemu-arm 0x40200000#qemu-arm 0x40000000
-   Using 'qemu-arm' configuration
-   Verifying Hash Integrity ... OK
-   Trying 'kernel' kernel subimage
-     Description:  Linux kernel
-     Created:      2026-02-24  14:10:09 UTC
-     Type:         Kernel Image (no loading done)
-     Compression:  gzip compressed
-     Data Start:   0x402000b8
-     Data Size:    12227440 Bytes = 11.7 MiB
-     Hash algo:    sha256
-     Hash value:   7ea661fdecdd1127edd419cfbf8bff52e2d5ac55c...
-   Verifying Hash Integrity ... sha256+ OK
-   Using 'qemu-arm' configuration
-   Verifying Hash Integrity ... OK
-   Trying 'ramdisk' ramdisk subimage
-     Description:  Initial ramdisk
-     Created:      2026-02-24  14:10:09 UTC
-     Type:         RAMDisk Image
-     Compression:  uncompressed
-     Data Start:   0x40da9528
-     Data Size:    1067114 Bytes = 1 MiB
-     Architecture: AArch64
-     OS:           Linux
-     Load Address: unavailable
-     Entry Point:  unavailable
-     Hash algo:    sha256
-     Hash value:   2a711dcb5f58615187645ccec615c67eddcfbb3138...
-   Verifying Hash Integrity ... sha256+ OK
-   Booting using the fdt blob at 0x40000000
-Working FDT set to 40000000
-   Uncompressing Kernel Image (no loading done) to 13a400000
-   Loading Ramdisk to 400fb000, end 401ff86a ... OK
-device tree - allocation error
-FDT creation failed!
-resetting ...
-Bloblist at 0 not found (err=-2)
-alloc space exhausted ptr 400 limit 0
-Bloblist at 0 not found (err=-2)
-[reset]
+On Tue, Feb 24, 2026 at 07:25:50AM -0700, Simon Glass wrote:
 
-After:
-+ bootm 0x40200000#qemu-arm 0x40200000#qemu-arm 0x40000000
-   Using 'qemu-arm' configuration
-   Verifying Hash Integrity ... OK
-   Trying 'kernel' kernel subimage
-     Description:  Linux kernel
-     Created:      2026-02-24  14:10:09 UTC
-     Type:         Kernel Image (no loading done)
-     Compression:  gzip compressed
-     Data Start:   0x402000b8
-     Data Size:    12227440 Bytes = 11.7 MiB
-     Hash algo:    sha256
-     Hash value:   7ea661fdecdd1127edd419cfbf8bff52e2d5ac55ce...
-   Verifying Hash Integrity ... sha256+ OK
-   Using 'qemu-arm' configuration
-   Verifying Hash Integrity ... OK
-   Trying 'ramdisk' ramdisk subimage
-     Description:  Initial ramdisk
-     Created:      2026-02-24  14:10:09 UTC
-     Type:         RAMDisk Image
-     Compression:  uncompressed
-     Data Start:   0x40da9528
-     Data Size:    1067114 Bytes = 1 MiB
-     Architecture: AArch64
-     OS:           Linux
-     Load Address: unavailable
-     Entry Point:  unavailable
-     Hash algo:    sha256
-     Hash value:   2a711dcb5f58615187645ccec615c67eddcfbb3138...
-   Verifying Hash Integrity ... sha256+ OK
-   Booting using the fdt blob at 0x40000000
-Working FDT set to 40000000
-   Uncompressing Kernel Image (no loading done) to 13a400000
-   Loading Ramdisk to 13a2fb000, end 13a3ff86a ... OK
-   Loading Device Tree to 000000013a1f8000, end 000000013a2fafff ... OK
-Working FDT set to 13a1f8000
+> Make use of this function, adding some pieces needed by RISC-V
+>=20
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+[snip]
+> +	if (IS_ENABLED(CONFIG_USB_DEVICE))
+> +		udc_disconnect();
 
-Starting kernel ...
+This is still a NAK because nothing does this today.
 
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
----
- boot/bootm.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--=20
+Tom
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 4bdca22ea8c..280efb26e90 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -602,7 +602,7 @@ static int handle_decomp_error(int comp_type, size_t uncomp_size,
- #ifndef USE_HOSTCC
- static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- {
--	struct image_info os = images->os;
-+	const struct image_info os = images->os;
- 	ulong load = os.load;
- 	ulong load_end;
- 	ulong blob_start = os.start;
-@@ -631,7 +631,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 			return 1;
- 
- 		load = (ulong)addr;
--		os.load = (ulong)addr;
-+		images->os.load = (ulong)addr;
- 		images->ep = (ulong)addr;
- 		debug("Allocated %lx bytes at %lx for kernel (size %lx) decompression\n",
- 		      req_size, load, image_len);
--- 
-2.43.0
+--h/jjG6Fo+BJVfQDC
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3KxQAKCRAr4qD1Cr/k
+CjrMAP0ZN9/0Xdw5gzPCisuf8//240wcLK+S8gdQqJLcGLRNlwEAnQhuOigT88NZ
+jCmV5nWOtIu7FzFptniKtUoAFu4rkgw=
+=Evim
+-----END PGP SIGNATURE-----
+
+--h/jjG6Fo+BJVfQDC--
