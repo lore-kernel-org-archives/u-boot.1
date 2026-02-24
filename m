@@ -4,113 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD0EF4BB62
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 17:24:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D331EF4BB65
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 17:32:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D141C83642;
-	Tue, 24 Feb 2026 18:24:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 068B483642;
+	Tue, 24 Feb 2026 18:32:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nd+xTGyZ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="PQSYUH6O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A40EE83981; Tue, 24 Feb 2026 18:24:52 +0100 (CET)
-Received: from mail-oo1-xc42.google.com (mail-oo1-xc42.google.com
- [IPv6:2607:f8b0:4864:20::c42])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 76A9A83D8A; Tue, 24 Feb 2026 18:32:05 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD05C82A9E
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 18:24:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11FA682A9E
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 18:32:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc42.google.com with SMTP id
- 006d021491bc7-6786b13984fso3903894eaf.2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 09:24:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771953888; x=1772558688; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Drzi52zggqR19JsLciuLQeUFEFbVAI4g2ZLKI27iBWI=;
- b=Nd+xTGyZYQzHbD17TuJnJ9/OTvHfI8ofJhMJt6HcbLBsddUkTXbE7F2Ub/o5otbJ3/
- vuFSc6BtbNAzh8gxC8GqcJgMwfR9XoLbC0Vuaz7qjGdkemcLTBuELN8J+XjXIpymXE8/
- sfE29pGBToZv7ALniSNj6irZoI53uO93OGJ7E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771953888; x=1772558688;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Drzi52zggqR19JsLciuLQeUFEFbVAI4g2ZLKI27iBWI=;
- b=TdxkIeH5FjCSteaGRpG/Ry+bxRfS9o1DXy+bDGAeTME8tjespVoh41iPyKBJkkdbAM
- kChrB1YzmQop+QoZtIT8wIqeaFNZoZjmfcRKJAAyMH4SKuFnxfF5cpDcyVZL1jTjVC8C
- 5HjlXOGXATtRUqogydAKAdAKJHsbaF9QiljZks7s87NcZNDmbxgF6r3OqqtPWH0TbCJ7
- WLYG1L7sGYzd7KDWntoLkAqnGKDlgG2N81DBvg5Y+60pe/nkpx2AIDnGPbpAlsnaoRws
- VP8xzi1OGTjibIqYmzWSfaFznpxBHREzB9XZcDeAw02+S1U7ybK2b0MXYzgzQvXLPwyC
- rnJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7fm8wA51YJ/48QP3uB+dJ5BRsZI4Dx/4UT0GMT5Ew6xRz4TAqAQQDl1WkApeN+wq+zVvRFb8=@lists.denx.de
-X-Gm-Message-State: AOJu0YypDKn7Gjd9n7R1mVl3CWUG48o/lnOWV0VgQG9J/2gteoKDii+/
- GBgIzexJn2CasID+qPCiHEqRMAyb3VvixTGBrggxgFolBh9Tp2Aw4uD6rfOED9ojucM=
-X-Gm-Gg: AZuq6aI2iCoRcGqFqda/f0wdWs536xuH3q+muZrrHSDCbbvINRJMpDZQlzIfEd/976M
- RBkrby0XcTtxFUXL7TeOLxWCYbxaOPfB53IahZ8kQt3ovEZElHOK0GnocAEFnVbiFs5ADhhj1OI
- i6nez7lOiQyxyu31k5SQFuf0Zu1QMu3Lhwecrr28WvDyCm5qMHV9CUfxV8KsSr1QKInmudrMm2p
- Zht/8JIGIwpTH24+62Fd1hC9cQq3V0xaet+xLDk9iFKCqGPvPn8VmPrjdC+zqWA4YIlbPyR9uiM
- IqBhpg5QR58UPz4lbixVuCYxY/tRLun2i8fi9xbPkQBvye4C2KYiKgI8Z4gIz2arxiYbhAfU0FG
- 2z1ayeaTPWt/RGgKoH+n4djqQuyoFTTsMohtg+xG34rpyZojb76+ZcoPW87weZKGRJulkM1Ijpo
- 9N/caWYt4MnjQZpOdasQFokte8IYfGnRi1xhPJEk2E3U3IDngT911+GkZ3s0sjFP073Hs4ogfHK
- LB123NXdblgfTRxcwtb2VtWRtzZjXSmHlSG8hm7HJJAXGAkI/8=
-X-Received: by 2002:a05:6820:162b:b0:664:85db:66bf with SMTP id
- 006d021491bc7-679c4709218mr6750343eaf.66.1771953888196; 
- Tue, 24 Feb 2026 09:24:48 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-679c5630a56sm9251843eaf.1.2026.02.24.09.24.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 09:24:47 -0800 (PST)
-Date: Tue, 24 Feb 2026 11:24:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- =?utf-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>,
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de,
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
-Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand
- FIT loading
-Message-ID: <20260224172444.GA3233182@bill-the-cat>
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <20260217174617.GD2747538@bill-the-cat>
- <20260223193219.GF3233182@bill-the-cat>
- <aZ2SI0rKuMEgSq1F@makrotopia.org>
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ehgh+RpP5HXKyqiJij90Xwol78OdHYErfVowWNM+Slw4Mw2kmuuw6aK+mD+lFv0ibmLumwP4m0BKi3ao0xVTROYOIQETN1TeJtQFCyAVQzasrDNbgWbAPS0eurpjFFCip9Qh13z9Pu1ityRG6wTnieua32rMb2uB7HLwlyqZRsuNWDRG5OQkNTZJHQ18mXBss8GneoWkJphhEbk4dpAJCru4nFJP/VVq8ZvilKaJhk4wIjuIu3I7UbOGUta2RfBj0es9JoiPHrs3+McBJkDs6biJjNbYIFTRYpwbLhr4f6H39j4w+12H0jyUswTpvjCubaiDFj1puvnd0HrCZf9l/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MhaCrHTgVWzWwnFoEnUfJYJ93/o94xT0fHU+KNPtfdc=;
+ b=YYZqDhfobtH9PHNGlBKRRcHZM95KHYFnANZzocrrpqdp12OYcXbQAEC57Lp6mecrHGd0ZSrkXI/JEp5HLPdxoyTZgmFYIJ6zeaN0qWy3bigjV56g0z6YWkw8PG4SIUInwL0i6K+P5XVPhRPd0iibHmSOQdJAHK4ata5+GaWt8MCdsuOrQsVAXMFXR7dHA9uf96QsjVWKo6RGr6zA5IER50TtkEw5qsNyqqpGReLccLBA/pSPnBU0sAQpNpVM+MqgU7ML7bd7OilcvWK0Ro7mjI4GVZ3IJ7I2C25XlBcTcUZmMnJasb79iBUVky5wRIaOvmlCzU/ZwULMNfz4FGQwpQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.60) smtp.rcpttodomain=st-md-mailman.stormreply.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MhaCrHTgVWzWwnFoEnUfJYJ93/o94xT0fHU+KNPtfdc=;
+ b=PQSYUH6Oq5LorrcV9IGCkhiS/wpur08BcJdyqTZlFh8ntAGSVeGjw1PUvlZ58ZB2T0tfVZ74GP6M8p+7cdLU4Wg1rWcm0BYkKGzsAWLu4tYuKTxHCJZXm5yVar9MYCIEPHSANrp4MeRyQUOdd2P9gbkPq3npr1vxp1kiBLqtSeG/0H3w7BYHPdmaWTKpP51UZGmOLRjuG/cOSMs0ccAGqyPkh5EAa1MBCCV6Qzhhx5+WLI+UPleCmfHJ667Ffd+ukr9WR5gNxbM0vuxiZsCCmlp+Qjjc2vkG8SS/x70Au2h6mtlm2FUs/YZII/AkXvCEVXMEUHM8eav+c7heAoaypw==
+Received: from AM8P189CA0014.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:218::19)
+ by DB9PR10MB7194.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:452::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.16; Tue, 24 Feb
+ 2026 17:32:00 +0000
+Received: from AMS1EPF0000004A.eurprd04.prod.outlook.com
+ (2603:10a6:20b:218:cafe::df) by AM8P189CA0014.outlook.office365.com
+ (2603:10a6:20b:218::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Tue,
+ 24 Feb 2026 17:32:05 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.60; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.60) by
+ AMS1EPF0000004A.mail.protection.outlook.com (10.167.16.134) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 17:31:59 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
+ (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
+ 2026 18:34:05 +0100
+Received: from localhost (10.48.87.93) by STKDAG1NODE1.st.com (10.75.128.132)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
+ 2026 18:31:57 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Tue, 24 Feb 2026 18:31:50 +0100
+Subject: [PATCH] stm32mp2: update part number for STM32MP251/3
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="z8MEdNvOpmbKHoGG"
-Content-Disposition: inline
-In-Reply-To: <aZ2SI0rKuMEgSq1F@makrotopia.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260224-update_mp251-3_part_number-v1-1-d8bf2033b3ed@foss.st.com>
+X-B4-Tracking: v=1; b=H4sIAIXgnWkC/x3MQQqEMAwAwK9IzluwsbroVxYp1UY3B2tJVQTx7
+ xaPc5kLEglTgq64QOjgxGvI0J8Cxr8LMyn22YAlNiWiUXv0biO7RKy1qmx0stmwLwOJMqjbZjT
+ T15sWchCFJj7f/Nff9wNMJidRbAAAAA==
+X-Change-ID: 20260224-update_mp251-3_part_number-42196c4f7d49
+To: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailer: b4 0.14.3
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS1EPF0000004A:EE_|DB9PR10MB7194:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7331d47-4b5a-4e1b-1835-08de73ca9da0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?T3FvQkI4UElwOFI1KzNVUEVsRExyQndlc2pHSlFYMTBtODJnTWlhY05PQXdS?=
+ =?utf-8?B?L2R5enZmV0svN3FjdHBNNWN0UDhZQld6enNYSEJBeEdaU3ZsUFpMMHdtR2k3?=
+ =?utf-8?B?Q2JzbEVlRjRFTTBvSytKZ3NtbENZWTkyejh2RGlRNG8xZk5GSUhqNEQweldK?=
+ =?utf-8?B?bkdoNzdRZll0Uk1PYmN2MXltcm9xWXpkVldvU0tMN0t3b3BwRXNiSUNlMTZW?=
+ =?utf-8?B?bWJoUVVHVEtSQW1UU21ZdndORitKUzRRTWI5bDU1U1J6QjlSa2JOSjVEY2VR?=
+ =?utf-8?B?bEJJcFpVSjgvazZMQmk2Zk5Qdnl3UnJjdDVDaThxeklMMEtJSU1VV045d0p5?=
+ =?utf-8?B?dU9FN3ZKNFRsTGRWYVhmV0tVc0VFbmd2ZmVlSnlPQWN2N013THh0VTdaNDhP?=
+ =?utf-8?B?emJaa0VKZ2FVVG5OUTBaaTNZVnZRblJ5MVRqK2trMW1oNncwV1R5dW9DNVo2?=
+ =?utf-8?B?OWhmYWdqWUhDUzNNQ2Y4bTU3ZncvclpHeDEzQXJTODhUUWx1RHQvc1ZvMFRz?=
+ =?utf-8?B?L25VeTJjcUVtSzdjdThQbUk2Qm9EQis0RlU4TzRaUnlKYVdFYk4yZWpLSXVl?=
+ =?utf-8?B?cnhhVW5XQS9pNENycGtWMjRkOWI5aXhDaEdFdkJkYTlNdUJmaFZTVWZiTW5n?=
+ =?utf-8?B?VDRnb3A3TG0rYjNhekdjQjJJc1dFRXJuanlIODFnRkpydnpTdWlCMDczcGtG?=
+ =?utf-8?B?ZzhWT2ZjU09UY1BzRWZLNUdPK3FoakpJYUcwaWd6S2hUUVRkMkdwZW5YMkpG?=
+ =?utf-8?B?TlF0ZERtUEp4QStlQURsTC9WYzR0NHFOUXlaOXdqbWNyTEZCb3JzQ1FrN3E5?=
+ =?utf-8?B?c2tlTzF2V09WdVdBalROcko3NlJZNWVLa0JXMk9tOWtrWDZtR0lTZmV0MXhN?=
+ =?utf-8?B?VVFieDdGNG43Z2dkTFhGQ3k1NFlEaXBLZnVLaW9hT2U2U0xXOEIxekdlYnY1?=
+ =?utf-8?B?Z3RiNEozUkthSzI3cHZBL0ZhRU85cG84NnMrZ1N2WEpyNjFEMWs4MC95Nmdh?=
+ =?utf-8?B?Q2xlNlhubnhLVUVvUWJOL0NJSDdYdEZSeFkrcWFDVFZCZzNVS2dxMnlmY2pk?=
+ =?utf-8?B?Z3NmTDJ6bUFuMnI3MHg4RHJMQ0pJYU91cmd3SEZzYXBzd2g4ZTRONmx4VnBL?=
+ =?utf-8?B?cy9OVitGdUNCM3ZkSjQxVlRSTW5KdFppdUE1MnJXL1VMbGJJWnI2c3dPUThp?=
+ =?utf-8?B?ZnBvWjhsSVZwbXV0YlZ3UDV1V2k4SUN4RVlUNG5TdTdnSk5IQzdxME9BcHJM?=
+ =?utf-8?B?VGQ1b3JEdzAxZk0rK3BneVhpRXdPT0xWYzdxVlJMWnF6TTEydWRWVzIyVXFm?=
+ =?utf-8?B?bmNaS1hNbzM1bWxXSkp5VCtJQzZNTDlWc2d2azFlcWF2b0FwUWlhNWNqVzh6?=
+ =?utf-8?B?K3hSNGxZMzlwUlp4RmJvcmx3aU90bnM1K3FzcjNuT3E4c3hKQnhadXFXZGNi?=
+ =?utf-8?B?U1U0aXRiN0F1MVp2VDh0d3pjdHhCS2NkazBMaXEzMjBGRklJMXFVMU5zSE1j?=
+ =?utf-8?B?amdJeStTSk8xUitRQ3VXczBRc3lSQUJoVzZWUlRydGJ6NGhxVmV3SGdzTVc0?=
+ =?utf-8?B?SHlaYSttdXQyR3pocVFSaEhxQzhQSlVtYWp3OHZTNVJ2NVQ0d2dVUVl1N2ZG?=
+ =?utf-8?B?QjBYekExZldxbmVjY2JiWFFhaTdVeEV4S283dUllZEZ3bFQ3QlAwUXdXNVRt?=
+ =?utf-8?B?aEwyYmQzWDQ1NENpV0hjcUY2ZytSU1VoUElPSU0ySFRtTUdvd1NSZlZQZWRy?=
+ =?utf-8?B?Tyt0MTdhbTF1Rkp1UGJtZ3RIak00OUJyTWxRdVg1ZkU3UWxtemNnNE4vME5o?=
+ =?utf-8?B?N25FejhwVGZpU1dhdUpjV0w2T0NxZmVpb3JtUi93eDYxalN0Z1hxL2I4RFRQ?=
+ =?utf-8?B?WVJzMzluajY5SUlaUnY0aGJ5UUpyeHFrb1VCdzlXTjNrRWNCV1JFNkVCVmpK?=
+ =?utf-8?B?K1Ria05KTTVsNVRGL1FwSzVoR1QyRWVReWo1Z3d1RVdVMHhPQ1dSZHpTVTVZ?=
+ =?utf-8?B?ZHkrS0lSbFJmSVV5cnRzakhLSTJObDZQMGFuZWlHV2hNcDlMeTVZbEVneWNr?=
+ =?utf-8?B?c1BsanRodEJRaXZHeFJVbmxNLzJ6c0pkby9yYkM3eGxVdUJ0aG9Ua0RyUXY5?=
+ =?utf-8?B?Y0R2NjNJNlNtMVNWcnh5STdOYTZuMTlFcEUzNDh5TUlBbGhGWEZvdm1aeXl6?=
+ =?utf-8?Q?Tuixutkbo2p4Mdfz1g+hJSGoLzqLPbBGVK6H1EdLjVug?=
+X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: C3LX8Zy+GKcoHnukGJ16thXiOR/RCC5ko+CDTRZsHEXLQlaWsF7mm/uC2V7bl03qX3rCmCz7V419IvUqVKbi04NfkRd6mZpD9P5AAJWZm1v/jcK7GFpsoDfN6bikOEZMNLvEfj1q+5Xh19hJxl3p/zTZpKTUfnKq1yicS2cN1tyPVDoq3NqYsXFgSKsXiP7l4R2d1lF0QycY4f/Lyf++op709o6N5i8zlAtuZZGD84a9TgKrYAXb0t1peBTOX4drHzg35hVNhpiWhZW5wj4KLEEa2DOXEviJPJUzID+OMm6Ymf6MdT5fPP4/mGOiiDirvRVocMK2vIsFF7Qx3I7wVAYrIaKt/Vw9EdXQrO7seAy7bSeh6klllZLfNK+w+wj2+/uinBX79Iu1adg/JLbMP6vW6Ih/0eoMvGUd/hLnP6ap6E0OnCfDce4q/AZBK8ZB
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 17:31:59.7446 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7331d47-4b5a-4e1b-1835-08de73ca9da0
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000004A.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB7194
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,124 +166,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+update part number for STM32MP251/3 for last cut revision.
 
---z8MEdNvOpmbKHoGG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+ arch/arm/mach-stm32mp/include/mach/sys_proto.h | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-On Tue, Feb 24, 2026 at 11:57:23AM +0000, Daniel Golle wrote:
-> On Mon, Feb 23, 2026 at 01:32:19PM -0600, Tom Rini wrote:
-> > On Tue, Feb 17, 2026 at 11:46:17AM -0600, Tom Rini wrote:
-> > > On Mon, Feb 16, 2026 at 09:21:14PM +0000, Daniel Golle wrote:
-> > >=20
-> > > > Hi all,
-> > > >=20
-> > > > This RFC series adds a new boot method for OpenWrt's "uImage.FIT wi=
-th
-> > > > embedded rootfs" firmware model, along with the underlying infrastr=
-ucture
-> > > > to load FIT images on-demand directly from storage devices without =
-copying
-> > > > them entirely to RAM first.
-> > > [snip]
-> > > > AI tool disclosure
-> > > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > >=20
-> > > > Major parts of this series were developed with assistance from GitH=
-ub
-> > > > Copilot (Claude Opus 4.6, Anthropic). The AI was used as a coding
-> > > > partner for scaffolding boilerplate, drafting documentation and com=
-mit
-> > > > messages, running checkpatch sweeps, and iterating on review feedba=
-ck.
-> > > > All architectural decisions, U-Boot subsystem integration, hardware
-> > > > testing, and final review were done by the human author. Every line=
- of
-> > > > code was reviewed and tested on real hardware before inclusion.
-> > >=20
-> > > First, I appreciate your honesty and explanation in the disclosure he=
-re.
-> > >=20
-> > > This topic comes up, and will keep coming up, and as a project we have
-> > > not yet decided on a position. I know that the Linux Kernel has come =
-up
-> > > with:
-> > > https://docs.kernel.org/next/process/generated-content.html
-> > > so far. But I think that:
-> > > https://docs.postmarketos.org/policies-and-processes/development/cont=
-ributing-and-ai.html
-> > > brings up points that are quite relevant too. Absolutely no one has b=
-een
-> > > happy with when gitlab or patchwork were unusable / unreachable (and =
-for
-> > > some people are still unusable) but it's because of all the AI scrape=
-rs
-> > > that things were unusable or now have anubis in front of them (blocki=
-ng
-> > > other humans now).
-> > >=20
-> > > With that said, I want to stress the "human is responsible" portion of
-> > > what both links say, and that given where exactly these changes are
-> > > aimed for, extra scrutiny is required. Things like:
-> > > https://cyberplace.social/@GossiTheDog/116080909947754833
-> > > show just how bad they are about introducing security bugs these days.
-> >=20
-> > Following up on this part I suppose, I see in CI you're working on v2
-> > but please make sure to follow up with the other outstanding questions
-> > I've asked before posting that. Thanks!
->=20
-> I've carefully reiterated over all your emails regarding the series and
-> my replies to them. Apart from your request to share an image making use
-> of the proposal to include dm-verity parameters in uImage.FIT (and use
-> the presence to decide whether has varifications of that subimage may be
-> skipped) I haven't found anything which hasn't been answered. But maybe
-> I missed something, of course.
+diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+index a875907ac3e..05ce869c428 100644
+--- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
++++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+@@ -61,20 +61,20 @@
+ /* ID for STM32MP25x = Device Part Number (RPN) (bit31:0) */
+ #define CPU_STM32MP257Cxx	0x00002000
+ #define CPU_STM32MP255Cxx	0x00082000
+-#define CPU_STM32MP253Cxx	0x000B2004
+-#define CPU_STM32MP251Cxx	0x000B3065
++#define CPU_STM32MP253Cxx	0x000B300C
++#define CPU_STM32MP251Cxx	0x000B306D
+ #define CPU_STM32MP257Axx	0x40002E00
+ #define CPU_STM32MP255Axx	0x40082E00
+-#define CPU_STM32MP253Axx	0x400B2E04
+-#define CPU_STM32MP251Axx	0x400B3E65
++#define CPU_STM32MP253Axx	0x400B3E0C
++#define CPU_STM32MP251Axx	0x400B3E6D
+ #define CPU_STM32MP257Fxx	0x80002000
+ #define CPU_STM32MP255Fxx	0x80082000
+-#define CPU_STM32MP253Fxx	0x800B2004
+-#define CPU_STM32MP251Fxx	0x800B3065
++#define CPU_STM32MP253Fxx	0x800B300C
++#define CPU_STM32MP251Fxx	0x800B306D
+ #define CPU_STM32MP257Dxx	0xC0002E00
+ #define CPU_STM32MP255Dxx	0xC0082E00
+-#define CPU_STM32MP253Dxx	0xC00B2E04
+-#define CPU_STM32MP251Dxx	0xC00B3E65
++#define CPU_STM32MP253Dxx	0xC00B3E0C
++#define CPU_STM32MP251Dxx	0xC00B3E6D
+ 
+ /* return CPU_STMP32MP...Xxx constants */
+ u32 get_cpu_type(void);
 
-There's:
-https://lore.kernel.org/u-boot/20260217150820.GB2747538@bill-the-cat/
-And I see you're using CI, but I didn't see an ack about the size
-investigations portion.
+---
+base-commit: c61d6f67f46f05149182b33c3c0ba5d9b6b46889
+change-id: 20260224-update_mp251-3_part_number-42196c4f7d49
 
-There's:
-https://lore.kernel.org/u-boot/20260217192000.GH2747538@bill-the-cat/
-And I didn't see anything about that.
+Best regards,
+-- 
+Patrice Chotard <patrice.chotard@foss.st.com>
 
-There's:
-https://lore.kernel.org/u-boot/20260217190554.GF2747538@bill-the-cat/
-https://lore.kernel.org/u-boot/20260219153100.GL3233182@bill-the-cat/
-Which go together and I think "human written only commit message" might
-well be a good policy as it helps ensure the patch in question has been
-read and summarized by the human author (and enforcement is on the
-honor system).
-
-Finally there's:
-https://lore.kernel.org/u-boot/20260217191536.GG2747538@bill-the-cat/
-where I was hoping for more feedback.
-
-I don't recall if we came to a conclusion, or just look again later,
-about if we should have this functionality both exposed via "bootm" and
-the new distro bootmeth, or not. It might be "talk more" and I'm leaning
-currently on saying the migration path is something openwrt holds
-downstream while getting things migrated?
-
-And in sum, this series will need to be split up a bit I strongly
-suspect. Being clear about the end goal is good but implementing each of
-the backends as well in a single series will make this too large to
-review.
-
---=20
-Tom
-
---z8MEdNvOpmbKHoGG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3e2AAKCRAr4qD1Cr/k
-CsuxAQCy/uhSo6DRfWYhF4vzkSGr7nr/5prH50qj/U2LmIxS/wEAle1i2YWE66D+
-7k4lLQBPS/rCR7OHhuWd/gNwLB1jLgA=
-=JYLj
------END PGP SIGNATURE-----
-
---z8MEdNvOpmbKHoGG--
