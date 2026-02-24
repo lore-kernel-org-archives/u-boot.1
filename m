@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B8EF4BB7A
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 19:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D8B1F4BB7F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 19:33:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66BE783DEB;
-	Tue, 24 Feb 2026 20:32:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1757283D8A;
+	Tue, 24 Feb 2026 20:33:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KAJnGECU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P1FcvVgc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB22A83DEA; Tue, 24 Feb 2026 20:32:10 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id BA03F83DCB; Tue, 24 Feb 2026 20:33:18 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7DB882BF2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 20:32:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EF3D83642
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 20:33:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-65c20dc9577so10912815a12.2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 11:32:08 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771961528; cv=none;
- d=google.com; s=arc-20240605;
- b=E+TH5dEdzzX4TgJ0QW7/3l1euPJk/SY/c1MxlW61Zfw6CEcsvobkdjwG/eK1mDoDSA
- faT5phmfHT+uOOJpuJKR2cio56kHk7SW1J9XbQYnb3eWUjt9Gspw6qQ9ofJR83AWmsOA
- d/O68lVBeiwwQua0New34mvB2ViKB3iNLKmEu3dT/08uCh796mA1oUJHNTmjNkvZ+85y
- wg7Hv+BZLE42KwnJqh7C867VgzhslSZ16NFmBe4ii8p8PpW56rbH0uMfq3JRGsY7kGc1
- 1OA3UQMf4asLOLhrlOxe3yNdZqdjz4VsWvfDIyp7zCiD+SfjpN4m01HtHfrokbze1B8K
- c0VA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=wOP6h8LAq4QtKGJzTrcgBJ1E8C2fTj2kf8+Oz4EKELI=;
- fh=3cGkqt4Xgv2w9dTeeIJFEJ5AO4AvGobPArcY4WlS1wc=;
- b=b8HPYurXR8vnUzffg03qTWDmhKOgZ6GRVs+EFsa8EmvjPkgrWBnTtPxDPHad4iExpi
- d+k1Uw9AWxhWeqEQ13fwCSeZoahOzNzQm0zzP6B07Er3Gb2wcQX/x8DEwmzeKR0BLPaG
- k/AZGfrR1iCu07/Y/slg9pjka8LIMho4tGCBxIp9IqW8uyxyDhDWBkk53c9Z6pQAylx5
- ZAHXbQIZOKCjRZ0MjhveFLouqSGb0CIuJQuA15DpbaPPF7lH4bkWD1rzVANOULKWT6e4
- +HJ2+yjaANXzuV3FI9l4XHJn3YKh8toI8bg81bUWGlbZnhVuxMGOq0i6+C1BlfK315k7
- Behw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d4c12ff3d5so5481697a34.2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 11:33:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771961528; x=1772566328; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wOP6h8LAq4QtKGJzTrcgBJ1E8C2fTj2kf8+Oz4EKELI=;
- b=KAJnGECUxzh4uJyRr6vCYG7gi9CvgEUdRkty16GMxeB57pLE0V5DC2u91PqmDyyCXb
- gP9gZsNVdoMXIJUUozm31WGrdqVusY8kyUHRF3nxh4eO6oJ2CDPoF9GAGzLlyR5wegB8
- 1s9g0UooX35th7pr6rkSogE9kQNPAPsDNL1y4=
+ d=konsulko.com; s=google; t=1771961595; x=1772566395; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=W8e4IJ0y2xB+EB05szidjlUlws2gliggkao465jG27U=;
+ b=P1FcvVgcUg1UfAGvZvergNXutp+zKpFxyYId8o868HDlk3uCMyDaHQhYMvB/5aaOnb
+ NoC6MfW2ugDzZSlLorkpXGD1M3AL89a0H/aDTxfw2fcCy7ZybidTPR7GZ/tzH9qR54t/
+ ZktCHh/3uTZBW2TrdDFeUZP7WibzPG8L0yiR4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771961528; x=1772566328;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wOP6h8LAq4QtKGJzTrcgBJ1E8C2fTj2kf8+Oz4EKELI=;
- b=MKcHiMCQEvf50owB2NO5AyrJiRywT2LFo3bCbt3ZI2PhestPoFJs6lAu+vHKM6dn15
- 47Zw+7xBETJjCBCLFt//442epBeWsAkBKJO8P2TxpIhggQVrEimwAxmJEneI714RPdhx
- VB4VHynZFueethctDa7G4VlpIIAJWl60VTdrS6wS2HiT29qyfnsCAdySFGkrJdQ8u0oS
- Wsw2xkRc2K5EEIofB4niwgb7rVyW36VTripjm108uhXUNygyT66p3mnBFFiHvMfBUTvy
- U1TzjILNtOJB5Ut9Ily68C6uhr1LpCFsxFv47fuWA+xhGyxCYijwgHI84cjjyBD6cD4P
- /8Hw==
-X-Gm-Message-State: AOJu0YywQQ0Qbj/79M/JbRlvm/6oW7MPzk7y7eUn5ngvlhAmR+3wGIB8
- /iNbPr9f6tB0CzVQQ+1Fu3RBZ6QSb8PodiZvCmc3bYpvVbkvjzkJaibTvgCH/HWOd17TXHRkWBH
- ydN3AxCeoU3ACZNb5QcDGltHe5H1H20w/55lEFwMDjo4e/DoJjjE=
-X-Gm-Gg: ATEYQzzwuiGoLs84LvEBo53ReAxnb9jjjgwmiVv9ImLqisNOKxaOhqqy+haKIne2C/Y
- Ql16vCRDcfpfED+BpXsAJ7y5jarHWl/TxTdY0yKFeLVFnw7nw2G1XLGNHK09HTsWtFDWK0JsD0F
- Q18jYPwQYrzEWTpO1qCCEdNJS714csvzonGaY6I8e5SSIXA/kOrBg4w3dB82WCAu/gqEM72dfHh
- Bwm150ArN+aK6xx+sKR4llteklPT4ko1cwi7VNb1vdWBSz7w3DWpW2yUQS4nW1gp5AO1s4TDHyQ
- rnjsjw==
-X-Received: by 2002:a05:6402:34d5:b0:65c:64a:2164 with SMTP id
- 4fb4d7f45d1cf-65ea4ee7b62mr8874871a12.12.1771961528284; Tue, 24 Feb 2026
- 11:32:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20260224183107.124914-1-trini@konsulko.com>
-In-Reply-To: <20260224183107.124914-1-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 24 Feb 2026 12:31:55 -0700
-X-Gm-Features: AaiRm52IhWPZOX_D3IRJXdkEZCIQ_qjJcMgWi7Bx-VnESo7DpPenDRFCjHwCPd4
-Message-ID: <CAFLszTjL3ot9nHwg5eeOJXJ3ymanQRAaEXcT2oRD6XyW_YE=+Q@mail.gmail.com>
-Subject: Re: [PATCH] Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab
-To: Tom Rini <trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1771961595; x=1772566395;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=W8e4IJ0y2xB+EB05szidjlUlws2gliggkao465jG27U=;
+ b=J3yCwvDLCB30sdTN1zbMOKzBeYvKDhZQl1vzcTa4/ELKRb67K3vCRMfABS5h+O9xkT
+ iiB24IuZqE2TMo8BV8DueZmmRK8OA7a504DUU+yY4Gbn4tkQbAD2TBhrS/ClbTRGevU+
+ Mx/8iYwYcaDhwc49II+BxcNJi7N5uqDtxGbE8/67lOo/Q3mI3oBXfn4uEpJY8wg941G+
+ It0kI+Jv0oP4cxeANHOVHDWO5GC7Zn8sNNEhTXY4pzauPB5AFK/hzscJwP+LiuWSdFiR
+ FhUn3E7Awc9dFNasji6dqEsb67Z5HLZB/YmmzJSRE3t/r0lTv0nrIK20QV7T/9yGO/YW
+ j/og==
+X-Gm-Message-State: AOJu0Yzit9S+B//aCgpb0Wy+TSq7Px4dSqQUASvx/iCq3ZAv7ua/YblB
+ TkgDOu6ZsssuHDYoVkjr5jSGkVc5epnlelUc9LOb5lY1wDjntbknCSDMGG4s+3LuX/8=
+X-Gm-Gg: AZuq6aIq2DOMCJrr33EUTZ4+pgbKPYo2TrthHAJF9DWbFvLgd7qZLyusbhIAZVIS053
+ pQ6xBkLmASrToAnjHfO90DujZDg0qsoeRvpjWUtg7bsBcF4eW23aGDheJ5Q7aJrpJ7VDlPBbuDy
+ jhWVFkpmvd4jPvd6OQIrMCt8TS8Y9Jm0M1oh2HBelmF7uBxzgmcrWPDEVBYI/3l79x1rrdj6Xzm
+ OY21lESlqdbLrf/UpqeU+Sg9igC4dCmdwWll3gwPT438Je9NQjhwemTXhur0C+Ifz6GXbp++DHJ
+ OOgwshb+XUYAHbIVWq4P9uHy7znJSI2xCqYgtFWIPrXlxDjhAXfIAkOWnxqkFyTKvBbxoaNUdRC
+ rFVhRXsE7UklaR4pclkrdN9Ejmw5EfWF4uuYwcw8wJXEXp1918rY2zojMpQh1zHfcYcGiwEOlTg
+ hxCcvYXTwoxtxvVm2zm17a+LoC6oefYfGSrYYagFm7R4NihqMp3fR7ZAhikRT+Vz1gNzdHEROch
+ 0qjmfBhEbkwPswYAtVtXouxl1bRxTqnY5Fj9OclH573ybnb9RI=
+X-Received: by 2002:a05:6830:6aa3:b0:7d1:8ced:55f5 with SMTP id
+ 46e09a7af769-7d52bf93b2fmr8000912a34.34.1771961595291; 
+ Tue, 24 Feb 2026 11:33:15 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d52d0386d2sm11673359a34.15.2026.02.24.11.33.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Feb 2026 11:33:14 -0800 (PST)
+Date: Tue, 24 Feb 2026 13:33:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Johannes Krottmayer <krotti83@proton.me>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: QEMU: arm64: bloblist not found and alloc space exhausted
+Message-ID: <20260224193312.GB3233182@bill-the-cat>
+References: <a1cd73a2-582b-447b-bb3c-e88afcf99545@proton.me>
+ <20260224170908.GZ3233182@bill-the-cat>
+ <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+kEooIX1rcIwUXh3"
+Content-Disposition: inline
+In-Reply-To: <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,37 +98,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Feb 2026 at 11:31, Tom Rini <trini@konsulko.com> wrote:
->
-> With the change to regularize the usage of TEST_PY_TEST_SPEC in the
-> sjg-lab stanza with commit c7f360f20d84 ("Gitlab: Rework sjg-lab calling
-> test.py to be closer to test.py stage") the leading "and " part of the
-> usage under qemu-x86_64 wasn't removed when it should have been. Do so
-> now.
->
-> Fixes: c7f360f20d84 ("Gitlab: Rework sjg-lab calling test.py to be closer to test.py stage")
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  .gitlab-ci.yml | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+--+kEooIX1rcIwUXh3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Feb 24, 2026 at 07:23:54PM +0000, Johannes Krottmayer wrote:
+> Hello Tom!
+>=20
+> On 2/24/26 6:09 PM, Tom Rini wrote:
+> > On Tue, Feb 24, 2026 at 10:26:35AM +0000, Johannes Krottmayer wrote:
+> >=20
+> > > Hello,
+> > >=20
+> > > I'm tried to compile U-Boot for an QEMU AArch64 environment, but get
+> > > some error messages in SPL:
+> > >=20
+> > > --
+> > > Bloblist at 0 not found (err=3D-2)
+> > > alloc space exhausted ptr 400 limit 0
+> > > Bloblist at 0 not found (err=3D-2)
+> > >=20
+> > >=20
+> > > U-Boot 2026.01 (Feb 24 2026 - 10:22:15 +0100)
+> > > [...]
+> > > --
+> > >=20
+> > > Started the QEMU instance with the command line:
+> > > $ qemu-system-aarch64 -m 4G -machine virt -cpu cortex-a53 /
+> > > bios u-boot.bin
+> > > $
+> > >=20
+> > > Also the same errors when I use TF-A and OP-TEE with enabled
+> > > EL3 and EL2 in QEMU and "u-boot.bin" as BL33.
+> > >=20
+> > > Has somebody noticed the same issue?
+> > >=20
+> > > I used the configuration "qemu_arm64_defconfig".
+> >=20
+> > That's odd. We run it in CI, but as cortex-a57 not a53 with otherwise
+> > similar arguments. Running with TF-A/OP-TEE is also in CI, but more
+> > difficult to configure.
+> >=20
+>=20
+> I have tried it now with the Cortex-A57 but running into the same
+> issue without OP-TEE and TF-A. Using OP-TEE and TF-A works now
+> without the issue because I have forgotten to pass the option
+> TRANSFER_LIST=3D1 to TF-A and CFG_TRANSFER_LIST=3Dy and
+> CFG_MAP_EXT_DT_SECURE=3Dy to OP-TEE.
+>=20
+> Host OS: Debian 13 (Trixie)
+> QEMU version:
+> $ qemu-system-aarch64 --version
+> QEMU emulator version 10.0.7 (Debian 1:10.0.7+ds-0+deb13u1+b1)
+> Copyright (c) 2003-2025 Fabrice Bellard and the QEMU Project developers
+> $
+>=20
+> BTW: doc/board/emulation/qemu-arm.rst doesn't mention how to build
+> U-Boot with OP-TEE and TF-A. Should I include the build steps into the
+> docs and create a patch for the doc? I think it's also useful for
+> other users.
 
->
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 08d01c41f358..245e422d72fa 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -795,5 +795,5 @@ vf2:
->  qemu-x86_64:
->    variables:
->      ROLE: qemu-x86_64
-> -    TEST_PY_TEST_SPEC: "and not sleep"
-> +    TEST_PY_TEST_SPEC: "not sleep"
->    <<: *sjg_lab_dfn
-> --
-> 2.43.0
->
+Yes, some doc updates would be appreciated and please CC the board
+maintainers as well. And perhaps the question I forgot to ask earlier
+is, are you seeing those as fatal errors, or just noting they exist?
+
+--=20
+Tom
+
+--+kEooIX1rcIwUXh3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ388QAKCRAr4qD1Cr/k
+Cr8eAQDmfGK02j9HfD/WODo551VAzo8nk93QtVv3K1oa9iEYPAEA0pCiMxlFSSbL
+r7ggp5Fq6yAXHDZRvKIEt2/NEY0T+QM=
+=3oLx
+-----END PGP SIGNATURE-----
+
+--+kEooIX1rcIwUXh3--
