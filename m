@@ -4,108 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D9F1F3C99F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 15:45:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6023DF3C99F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 15:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7D5383642;
-	Tue, 24 Feb 2026 16:45:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CB2D083642;
+	Tue, 24 Feb 2026 16:48:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TcfX//+C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J5a47T9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65F6983981; Tue, 24 Feb 2026 16:45:53 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6836783642; Tue, 24 Feb 2026 16:48:30 +0100 (CET)
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
+ [IPv6:2607:f8b0:4864:20::344])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 664EC82BF2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 16:45:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 18C373F1CE
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:45:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1771947951;
- bh=FXyQth1LYgLyIDxoRS6AfucN/dVl2JxkwyhP6zuhoKs=;
- h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
- In-Reply-To:Content-Type;
- b=TcfX//+CuyR33Jpzf+fr3GdZce/vYnMOW3USec8FOFOLzF7svIH/lFraOOn9CDsV1
- 6nXP5whtPTzIi1uqiVdFjt8vYrvGaGpg0hbAkF69s+oMqUGUt2UzHjdKUZnB6PVqPJ
- IsZ31qhTkqECM62Nh6OhDgrOV8lSEZYNiuIBr0LfPVa5kdfl1cO5W2EEMflRb0LQZv
- Kn0ByT7blJCRn8x1lV3NSKIYW5zbRmBrnKRI4seWeSlhbUFagKz/VZzj5QAW8ND7ub
- 3Bl6rjNKFzYuv0oZob84VK5a3HvJr91cb6RXpzD9kCcXAr90hbbQwoGZGx9aQQm5UK
- PrUmg11bWt/c2cHIEtG+fenz6tSf1EGm9FqD8c3T1+dZl2MXIxYhF2tZ+oqKvnaNje
- 9ssNAmE6QHw/GQvTCZcmXmWUkIj1K+lSkqa+hpb0Kgtuv5u3GUkmsq7utRYF33XePS
- prgjzoXE5/LIjSTLGTaHea/ma2JFB26wlSdlzaFRA9G8a0IqxYwUX8umKvQAhrelk1
- QDYdZFci6k8sgZmXQCFZOy1HTlCtJh3V/sHpzFZqWDpcby4Ojmb01k3lT7ssM7lmku
- wbRIj16HKYJ+6GccqPOwl3MyW1bf8GEBBJizbKD5GEEUYOohRshmvQwfg3O9PUrElT
- IVIoBsjMKRkir6E2GI7GRsB4=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4837246211bso59795305e9.0
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 07:45:51 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id F028D82BF2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 16:48:27 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x344.google.com with SMTP id
+ 46e09a7af769-7d4c68f0e47so3422874a34.1
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 07:48:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1771948107; x=1772552907; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vcXaHSkgOaAxwdkJkWb504Mk8nqRwn6Phrri6YJZFO0=;
+ b=J5a47T9DV8Ep70vy1pM7fHNLPLmpUUVSlctD4LoXo/GqqwtXK3fxPAvFL80G1Ne0Pn
+ n3chpPH+/zkqAcW1nA0jppUwk9dyMiGHlhaXaVtFTsfe+eoQVbBLKtEUzL93sA/IUTf9
+ rUnysCeSo63vDkgNSRidPlrmCTXDfTQTFwbR8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771947950; x=1772552750;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FXyQth1LYgLyIDxoRS6AfucN/dVl2JxkwyhP6zuhoKs=;
- b=d7GgP+cGo1dQPrWtSI/OMWe7OfQrmpSyZgA1OTefx6b3vI8uuayFXE30TeiYAEhuyW
- p4agkK7WU1+MHESeNkv+sl3lN0sICj/Ap0MN5kF8ba1wzGBs2ymlIuJzNkBv6AxGTUqv
- o0lUYMEkA+GSK55P3pYs75SwyLWjSzJ/a5/jLzDutSE2P/hmLULI21duheBH3/jQc2xX
- IsHDv0VwnZ5t9p2EFShz5PFG+3F9GFRM2gJgZj51PWMSBdp/DvqFba8as1q/E9VNyAAJ
- GYkcgR/wbdDuxjVpzTgEdAih9rLWm0DuB7Qt009x6KeaVPh/UYaw7q5E2LkdiCTzdr2Y
- sHqg==
+ d=1e100.net; s=20230601; t=1771948107; x=1772552907;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vcXaHSkgOaAxwdkJkWb504Mk8nqRwn6Phrri6YJZFO0=;
+ b=BNqxyPToBTkhaczpg8O53pDbnbKuViuZkD7gAk0+IQyzYehxDmh4063IP+26sfZLU9
+ MrdpEMRL+59BiHT7+Vxr5s2JE7CcNzoOuvKGa+QJ5afttUU1M4s9AAhoDZDU05iXsmsO
+ /MHgAWteYZDOjew4R2Y6FdQ4QEDYeCgBKyeP6FUhIPaY4AGJfYnVAeGL74M1LdJYR8xq
+ FRIgaCZgIGbTsbyOG3hCSoSRqAYHZC8hv9wpTU51PJYhlLMO+l2wGjSCXBhVrXjpTvmm
+ n3RqIaHg5EGjvc6SzNqF/kOMTnJJZuyx/yit8iOCmU0d1xwN4DfVhH3Qz+/XgT8h924X
+ NPrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXzwLn45NVTr23DfaQzwF3ix3Y5vLOAztTGhBZ1guSdMyeqkxpaJXgbp3ddE8i81XYCIpwixcQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJu33Vzziiz/y+ksOQ+is9XugOWKkl8GZlQLGzk8R2osYGW+4F
- OgmVvba2xDYpFzHAqcjzkrd7rrDZZvkWGt07iss856qqAMXc7wyE+nCyYB0RjAyQzy6h4tSW7kW
- nNM/4cGmlGlQL2A+9yKXbG8z+j3MaSRO5I0JAG5ktggt8aV5GEJvvWmON+vwJygpwJnn4iTreY5
- A3WBc=
-X-Gm-Gg: AZuq6aIj0+k1yNEJMnEv89+ltxXh3+zHX7ge/Uzqp4nVEXLG4wFt3r4to4pY0r8vbqV
- YNhyOX3HQ+Mm6btg17x+WJOQa/Z1u5znAl+9sDlrKn0xN1AxMXHCvdx/2kMV3VbHWSXyNwx9qhx
- aTEPFX5Oh0kdD6BD2U9QLl5XtMo6yndcx2mKkKIp7YoPHOf2jHcrH5t8PDWHlUOZrWchS1wZzUm
- ikFwWgzV158bmXjPv1GLou7EMMmYQQJyxiaREFB7bNYdgbZ1SOOKRcR8oNP7aFz82ApzrTUI3Ye
- LCMFeyV0WaUSefKNOrvxy4aydnpJicLQkX09PZWVYhzpSIi8kBzkpF/uQLetVVK+oU1eH38wtrz
- j1qF7GrJiUIqolIPuCvqRUuXKj5NIOdnqtswa0TMrB1fuITpvIs8O/xeD3lHKVRH2iLg7SCFvCR
- PL825xKymo9aeymrpxwItxmr10/j6Gc01K5g==
-X-Received: by 2002:a05:600c:a016:b0:477:fcb:2256 with SMTP id
- 5b1f17b1804b1-483a962e470mr214994425e9.17.1771947950640; 
- Tue, 24 Feb 2026 07:45:50 -0800 (PST)
-X-Received: by 2002:a05:600c:a016:b0:477:fcb:2256 with SMTP id
- 5b1f17b1804b1-483a962e470mr214994125e9.17.1771947950220; 
- Tue, 24 Feb 2026 07:45:50 -0800 (PST)
-Received: from [192.168.103.129]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483b8902ed2sm21163675e9.20.2026.02.24.07.45.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Feb 2026 07:45:49 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
-Message-ID: <db9de791-60fe-4308-b2d3-66ad6eb07684@gmx.de>
-Date: Tue, 24 Feb 2026 16:45:48 +0100
+ AJvYcCX8IJ9jjugssiy4YgN+ZlVnseNzUD4AhjzFiajdFza9Lumx8cEO7q9yrDXU2TvDVxWNSwZpL5Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yye4BC31JpiyiTKRWbeHDUN21syyffeA7G96PJc8YNilLrKu3uH
+ iWM2JnFieuli47wvsSOhL2H0t9V2TQMQlaSDIdBSOh6oSlchf9EuZf1v9CmSh3wF1J8=
+X-Gm-Gg: AZuq6aJWtEnX3pf1/5u/HLxYrZtMxs9MLVohyATg/Uv28Fp8bm7V+nnUTuHkXUXjsPv
+ tpPDWTObAnglY2IlTCWNse6I0nKV3YElkjZUD7k9E2U/SMobJywO4/In1F2rgus6RWSL8a0DwlC
+ beOuWIt/UYHY8HqthNA4FsK33RTRM4N5rRz24t8aVelZcyHREQqS2tZQ564uKTQpWxt4O8DP+cO
+ ZLrrlOUofFZszvTF+vCAUs8SHXVtfnKLZ+Dji+fQ6dOA8w+1HwctKGa0nMx+9bM0uAjL0M/bW79
+ ybhRdtc44kkWGtqhgLG7CRJAdxmrjef5uNgYHiTPCFQFu3S2qXB1L2DTbpkHYbVtNTCJ1Cfb7Nh
+ o6mVI3x4gcdEuAg+t8MH36Vjxr1msZqmin++kMz3gvGL087mT98og+7WtgZjSKLU/0fjBdikpNR
+ 3YUAaHXKxT/KCZhcFxNAD/8QDY0lQJx7jSHJ3J2zoNcCkIM5cyvnbcsZYLaBGymbuuwPLIBQGvf
+ EqS+Z5ArpQEoxAyacTKHWrxNAxd9j/wkoVZOYO7bFmLsgVsatg=
+X-Received: by 2002:a05:6830:4988:b0:7c9:5959:8de with SMTP id
+ 46e09a7af769-7d52be9584emr8683889a34.9.1771948106602; 
+ Tue, 24 Feb 2026 07:48:26 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d52d0386c6sm10910743a34.13.2026.02.24.07.48.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Feb 2026 07:48:25 -0800 (PST)
+Date: Tue, 24 Feb 2026 09:48:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Enric Balletbo i Serra <eballetbo@kernel.org>
+Cc: Eddie Kovsky <ekovsky@redhat.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
+Message-ID: <20260224154823.GQ3233182@bill-the-cat>
+References: <20260120164524.253188-1-ekovsky@redhat.com>
+ <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
+ <20260219172836.GN3233182@bill-the-cat>
+ <CALE0LRsCYT=h=X1fs_+H9WCWSeQSC2REfXRscg3eaK1=TVtNFg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] efi_selftest: fix buffer overflow
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260219184400.257008-1-vincent.stehle@arm.com>
- <20260219184400.257008-2-vincent.stehle@arm.com>
-Content-Language: en-US
-In-Reply-To: <20260219184400.257008-2-vincent.stehle@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+34cK6WU8BUCeHfg"
+Content-Disposition: inline
+In-Reply-To: <CALE0LRsCYT=h=X1fs_+H9WCWSeQSC2REfXRscg3eaK1=TVtNFg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,58 +106,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/19/26 19:43, Vincent Stehlé wrote:
-> The test of the UEFI LocateHandleBuffer() function clears a returned buffer
-> at some point to reuse it, but there is an error in the size computation,
-> which leads to a buffer overflow; fix it.
-> 
-> Fixes: 927ca890b09f ("efi_selftest: test protocol management")
-> Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->   lib/efi_selftest/efi_selftest_manageprotocols.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/lib/efi_selftest/efi_selftest_manageprotocols.c b/lib/efi_selftest/efi_selftest_manageprotocols.c
-> index 097b2ae3545..ccffa59095d 100644
-> --- a/lib/efi_selftest/efi_selftest_manageprotocols.c
-> +++ b/lib/efi_selftest/efi_selftest_manageprotocols.c
-> @@ -241,7 +241,7 @@ static int execute(void)
->   		return EFI_ST_FAILURE;
->   	}
->   	/* Clear the buffer, we are reusing it it the next step. */
-> -	boottime->set_mem(buffer, sizeof(efi_handle_t) * buffer_size, 0);
-> +	boottime->set_mem(buffer, sizeof(efi_handle_t) * count, 0);
->   
->   	/*
->   	 * Test LocateHandle with ByProtocol
 
-Hello Vincent,
+--+34cK6WU8BUCeHfg
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for reviewing the code and pointing to an issue.
+On Tue, Feb 24, 2026 at 01:08:23PM +0100, Enric Balletbo i Serra wrote:
+> Hi all,
+>=20
+> Thanks Eddie for the effort on doing this.
+>=20
+> On Thu, Feb 19, 2026 at 6:28=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Thu, Feb 19, 2026 at 09:51:05AM -0700, Eddie Kovsky wrote:
+> >
+> > > On 01/29/26, Mattijs Korpershoek wrote:
+> > > > Hi Eddie,
+> > > >
+> > > > Thank you for the patch.
+> > > >
+> > >
+> > > Hi Mattijs
+> > >
+> > > Thanks for the review.
+> > >
+> > > > On Tue, Jan 20, 2026 at 09:45, Eddie Kovsky <ekovsky@redhat.com> wr=
+ote:
+> > > >
+> > > > > The Engine API has been deprecated since the release of OpenSSL 3=
+=2E0. End
+> > > > > users have been advised to migrate to the new Provider interface.
+> > > > > Several distributions have already removed support for engines, w=
+hich is
+> > > > > preventing U-Boot from being compiled in those environments.
+> > > > >
+> > > > > Add support for the Provider API while continuing to support the =
+existing
+> > > > > Engine API on distros shipping older releases of OpenSSL.
+> > > > >
+> > > > > This is based on similar work contributed by Jan Stancek updating=
+ Linux
+> > > > > to use the Provider interface.
+> > > > >
+> > > > >     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+> > > > >     Author: Jan Stancek <jstancek@redhat.com>
+> > > > >     Date:   Fri Sep 20 19:52:48 2024 +0300
+> > > > >
+> > > > >         sign-file,extract-cert: use pkcs11 provider for OPENSSL M=
+AJOR >=3D 3
+> > > > >
+> > > > > The changes have been tested with the FIT signature verification =
+vboot
+> > > > > tests on Fedora 42 and Debian 13. All 30 tests pass with both the=
+ legacy
+> > > > > Engine library installed and with the Provider API.
+> > > > >
+> > > > > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+> > [snip]
+> > > Sure, I can update the comment for v4.
+> >
+> > Since we're talking about v4, can you please make sure that for v4 it:
+> > - Passes CI https://docs.u-boot.org/en/latest/develop/ci_testing.html as
+> >   that will cover some non-Linux host builds.
+> > - See if you can get access to a FreeBSD or OpenBSD host and make sure
+> >   the tools build still works there too? I was hoping Mark would have
+> >   commented / tested-by v3 because I do want to make sure the libressl
+> >   case still builds. At worst case, I have a freebie Oracle VM that's
+> >   FreeBSD based, so you can maybe spin one of those up as well?
+> >
+>=20
+> I wanted to provide some context on my testing efforts. I have
+> successfully tested these patches on Fedora and CentOS Stream 10,
+> where the engine support is already deprecated. These changes are
+> quite important because we are currently carrying them as a downstream
+> patch for some RPM packages.
+>=20
+> Regarding testing on OpenBSD and FreeBSD ( it uses openssl 3.0 by
+> default ), I tried, but I ran into some build issues that I couldn't
+> quickly resolve due to my limited experience with those environments.
+> Instead, I decided to test with an alpine+libressl container and can
+> confirm that the build of the tools does not break with these patches
+> applied, which should cover the libressl case you were concerned
+> about.
+>=20
+>    # make tools
+>    # ldd tools/mkimage
+>    /lib/ld-musl-x86_64.so.1 (0x7f12975f5000)
+>    libssl.so.60 =3D> /usr/lib/libssl.so.60 (0x7f12973a4000)
+>    libcrypto.so.57 =3D> /usr/lib/libcrypto.so.57 (0x7f129722a000)
+>    libc.musl-x86_64.so.1 =3D> /lib/ld-musl-x86_64.so.1 (0x7f12975f5000)
+>=20
+>    # strings /usr/lib/libcrypto.so.57 | grep -i "libressl"
+>    LibreSSL 4.2.1
+>    %s/libressl.cnf
+>=20
+> I'm happy to provide my tested-by tag if it helps move the patch
+> along. Feel free to include it in v4.
+>=20
+> Tested-by: Enric Balletbo i Serra <eballetbo@kernel.org>
 
-The fix looks incomplete to me:
+Thanks for doing that, I appreciate it. I'm much more confident the BSD
+cases will be fine now. I still really want to see v4 put through CI
+first just to catch any other oddities.
 
-In line 167 we allocate a buffer with LocateHandleBuffer(). Assigning 
-buffer_size in line 173 does not make any sense, as we free the buffer 
-in line 185.
+--=20
+Tom
 
-In line 223 we allocate another buffer with LocateHandleBuffer().
-Assigning the value of buffer_size value to count before the invocation 
-doesn't make much sense.
+--+34cK6WU8BUCeHfg
+Content-Type: application/pgp-signature; name="signature.asc"
 
-You fix in line 244 looks correct.
+-----BEGIN PGP SIGNATURE-----
 
-Line 249 sets count to an arbitrary value that is not related to the 
-size of the buffer.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3IRwAKCRAr4qD1Cr/k
+Cp7QAQDe8h0L1sUwDvZl4RXzgvtuxw5xF+xoFifOxHC1hIveSQEAln70fIrRrEd0
+QPlxM+2KB8WnfiM9h7aJMcrs5Ej7Wgw=
+=kh8O
+-----END PGP SIGNATURE-----
 
-Line 260 sets variable buffer_size and buffer_size is again used in line 
-306 to set count to an unused value.
-
-We should completely remove variable buffer_size from the function.
-
-Best regards
-
-Heinrich
+--+34cK6WU8BUCeHfg--
