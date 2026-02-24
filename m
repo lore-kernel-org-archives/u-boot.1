@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28F1F357AC
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 14:26:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4B2F357AC
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 14:26:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7339383D17;
-	Tue, 24 Feb 2026 15:26:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B27EF83D3D;
+	Tue, 24 Feb 2026 15:26:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mhCr2/Nd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J2EajYJj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F9CA83D3D; Tue, 24 Feb 2026 15:26:23 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id A333783E63; Tue, 24 Feb 2026 15:26:26 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F49682A9E
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:26:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C10783D3D
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 15:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-6726f320b54so3172711eaf.1
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 06:26:21 -0800 (PST)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-45f10d7eb81so2174824b6e.3
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 06:26:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1771943179; x=1772547979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AR29q89EEH5j4QYfmZNDBHtM4JAtR/n5Dv+kF3Z5OY4=;
- b=mhCr2/NdpAA7kGLTCSR4qoepsV5B2mNe7CktbroHfqrT9B7xzLGvciaF8yc1HQ3gro
- tUtBaudLO/lKQcMSeTdApTI1UT2a5uEMGRVjp3GfUR45zKHr8LHzQWrBACaeTAXre6z/
- gDZL/cRu9XI5PSHtB3DeoVadSo9yTIuQ9NFw0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771943179; x=1772547979;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1771943182; x=1772547982; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AR29q89EEH5j4QYfmZNDBHtM4JAtR/n5Dv+kF3Z5OY4=;
- b=NIGB024wCLtf+uzqjP9N2FlnOM0t8dlWbptirVH5PmCN3yp8alHxKn4rIGB9CKMgNp
- v6eZ8qUead7gMvofk6bAVS9JRu46ZNw8PIbnzx/F7Luo7aBlQJ0dsRBoDy9xsWeR9i6d
- B7GT4wnrk29V4+ozNUsPdX5m81SR8VJORVmUJBI4kN4wvSE745GU19Ownchfy79QwolV
- ZojX5sZIRnpPU0VnaRnFkBSfTbH/OwrPC7fE7+8aSdy78fwg03zr7KvAk1rviCndtFMv
- D5tHiE7DIe8MGjatEtMQTIfsjenZ/+Q5uas204Yo4HKdN1W4d5gunCVKWkDiztODVtx5
- IjjA==
-X-Gm-Message-State: AOJu0Yz4iF3P5dMvzMgLaByBNNap/uFNaJO1Ve4htdDUsG1FALSz7cKw
- sBsbhQKPbyn3gVrBYO1mJGQduqwK3x7saejbNFjZ0AkO4Fyf96lZrcm19CMm26l0DWdAN1DzK9z
- n5Eo=
-X-Gm-Gg: AZuq6aJbYTkBe4E9u/i5NLB92B+iEfOpREZhkTbOwIr+nuwGIvZMxrn9RUN/tGxezoD
- 6osuGn3x73aSzExw8z1NUE4iXpc0g63RI8A7ag3ItkXTl9cEdKkly0sFjvRX0vKphCBqPipzhJ6
- JZwbsqFv0DGVk+otS4n1lcxJKU2l0KN/HFEPRioIs+D5bEtYZyljJVaOWoplhOr8WPQaLcu5RYN
- dLOt+81EO/FPI/0M00fqE5weAVDspP2jmfgpokajd/rmBHrLFOcAFD8eCCbeBfwcB6LyovFS/eX
- ATKUU/h5LwfCgZXe/V08IwDxHJFntN1Km7QU/DxM/w1Oyro+r2j8eCe+8qdl89FHhxkUrXR/pw2
- kstK6yKQPs68FyH6TAWkjGCi38bjtEfmhNVjNwjPPKeaeWTKe2A5u+gVqA4QyG0mpQ61jhv/G3O
- vKlRU+KKhUCCYuy1fb3izC6c5gd3ahLUaZH4QRikMB
-X-Received: by 2002:a05:6820:820:b0:65e:f7e6:438c with SMTP id
- 006d021491bc7-679c44eb8b5mr6718200eaf.36.1771943179351; 
- Tue, 24 Feb 2026 06:26:19 -0800 (PST)
+ bh=FBcsoJNFnKy3A/unPBidag5O1euYThAXR/8KFzoye0o=;
+ b=J2EajYJjb5Oh+hydHIE5VrBo1GgSWkd+SGNSZ+G4kTlqNJ1hjUt5GyD1BSkgkyOK5s
+ FwmL/JRnOP48FIGxybvYbhI4kRkk2EudeHvcWX8gkvjVUTyEmLxoS5NmMdPa5TGr9qNS
+ 9Y6kpn3uVSKc0MQpTL/3sW6Er3yypIH8PnPSY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1771943182; x=1772547982;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=FBcsoJNFnKy3A/unPBidag5O1euYThAXR/8KFzoye0o=;
+ b=bMmCiMRbN9aDT1hpvXBNtCjr7l5/i67BiqBD3q4BGWmWClcuI0tw1enrqNa97iboMa
+ wfqk7MO9hIpn3w8bRH9J2lyUadMEI7sXcitZHRi14cN1ExadSsSlJrwNacR/5yb8zgtY
+ 6nKskW/gYRfe6lfmahnDoSOEoIIuqQSGAKZFeSda0rYBhZy0viG08R3YiMdNiRngPz2k
+ dlYckjiBEO9kZ3yE3auPQh+LjYybzKu/8/kEnodCvlqm4Jc+YkNt3RT37vzp1kkN1aI/
+ 7aFl7YbfJs3YVtqmExqynbau2ceOhGjPJ5PupFjDbv4ha7tWFSjG5tZm4+V76OoIUEP9
+ Befg==
+X-Gm-Message-State: AOJu0YzeXfJMTZCOWGbipDsS422sjVOpJnK6eKEiRB0R112ApaDvvflJ
+ EWZUece7scEaKy7tVXHkTxN8sdMZJ+gYt+42ukq56NPyDmDn7mPhMUhmQs76wO1+juu/1FKJgi0
+ 8wo4=
+X-Gm-Gg: ATEYQzwAVn+CDBtQYFltgrdnEmYfsDVD9bWk+JI7KGALWAiUr9jycxuwEJTG3u94iSg
+ KPHoZi8TYUclPgj2kCERwXzoz1ZL5g95W8G7ANTG2VzNoawZvgvgVx07DYh20VC+pSHRTtuhdSO
+ o5dz1CV9+4LzaBeFi8RSpj5lVfsS5Hl9azlCFbTRbju7YtGLqcdJufZsJxjyksPT2RomIqV/09/
+ tkRNcoVVn+lX7GtYRWHbQ6GPft0jzp0ZE3spD4Z92ZyA5O4GO8NrwacZHdBa04hDb2N5ghfAi71
+ swrwk+asDUCsVvWDWxq49FMPL0dm3S32lonuOXQNkwyF8lFYJpzjcWAUBTkg6/PndrQsYvLLRMi
+ mjSqMx+lW/bhTtY7hnKLQKt20FMj4NAHo7tG3g/a6ko+qtOrcyjtWq7LH3bMMJqn1u1T5XmdkST
+ fWsvNAgV5f2v0LdsMmpxqwGRruCbxwNQ==
+X-Received: by 2002:a05:6870:7193:b0:40e:e60d:16dd with SMTP id
+ 586e51a60fabf-4157b18bdddmr6056577fac.48.1771943182549; 
+ Tue, 24 Feb 2026 06:26:22 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cd5e168sm10199478fac.4.2026.02.24.06.26.17
+ 586e51a60fabf-4157cd5e168sm10199478fac.4.2026.02.24.06.26.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 06:26:18 -0800 (PST)
+ Tue, 24 Feb 2026 06:26:21 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 X-Google-Original-From: Simon Glass <simon.glass@canonical.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Aristo Chen <jj251510319013@gmail.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Bin Meng <bmeng.cn@gmail.com>, Greg Malysa <malysagreg@gmail.com>,
- Guillaume Ranquet <ranquet.guillaume@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Greg Malysa <malysagreg@gmail.com>,
  Jerome Forissier <jerome.forissier@arm.com>,
  "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, Leo <ycliang@andestech.com>,
- Martin Schwan <m.schwan@phytec.de>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Martin Schwan <m.schwan@phytec.de>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
+ Raymond Mao <raymond.mao@riscstar.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <stefan.roese@mailbox.org>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: [PATCH v2 0/9] bootm: Clean up arch-specific, pre-OS clean-up
-Date: Tue, 24 Feb 2026 07:25:42 -0700
-Message-ID: <20260224142553.1608883-1-simon.glass@canonical.com>
+Subject: [PATCH v2 1/9] boot: Create a function for final pre-boot steps
+Date: Tue, 24 Feb 2026 07:25:43 -0700
+Message-ID: <20260224142553.1608883-2-simon.glass@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260224142553.1608883-1-simon.glass@canonical.com>
+References: <20260224142553.1608883-1-simon.glass@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,76 +108,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each arch does something slightly different before booting the OS. Some
-archs even do different things depending on the CPU type.
+There are various functions which announce that booting is imminent and
+do related preparation. Most of these are arch-specific.
 
-It is quite hard to know what actually happens in the final milliseconds
-before the OS boot.
+In practice, most archs do the a similar thing. It would be better to
+have a common function, with perhaps some events for things that are
+really arch- and board-specific.
 
-This series attempts to start cleaning up U-Boot in this area.
+Create a new function for this. For now, nothing uses it. Be careful to
+avoid using BIT() macros which are not available with host tools.
 
-The basic intent is to create a new bootm_final() function which can be
-called by all archs. It provides some flags for a couple of necessary
-variations but otherwise it is generic.
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+---
 
-RISC-V, x86 and ARM are converted over to use this new function. For
-consistency, EFI loader is converted as well.
+(no changes since v1)
 
-A noteable change is that EFI_LOADER now does bootstage processing
-before boot, if enabled, thus producing a report.
-
-There is also a patch to drop EFI_GRUB_ARM32_WORKAROUND, as discussed
-recently on the mailing list.
-
-Future work could take this a little further:
-- Drop board_quiesce_devices() and rely on driver model for that
-- Similarly with udc_disconnect()
-- Look at converting EFI to use the same function
-
-Also, the comment for cleanup_before_linux() could use more details as
-to what it is supposed to do, to reduce the number of arch-specific
-variations. It currently does different things on differents archs and
-is mostly uncommented (apart from an ARM-specific note in a README).
-Ideally it would be commented with exactly what it should do, ideally
-at a high level so it is not just arch-specific.
-
-While some of these arch-specific differences are necessary, some are
-just due to the changes to code over time.
-
-Changes in v2:
-- Replace 'efi: Make use of bootm_final()' with a non-EFI patch
-- Drop comment about EFI
-- Drop the EFI change
-- Drop the call to udc_disconnect()
-- Drop the EFI_LOADER change
-- Drop patch 'efi: Drop EFI_GRUB_ARM32_WORKAROUND'
-- Update cover message to reflect dropping the EFI patches, etc.
-
-Simon Glass (9):
-  boot: Create a function for final pre-boot steps
-  bootm: Remove active devices in bootm_final()
-  bootm: Add a message when booting
-  bootstage: Add some missing dummy functions
-  bootm: Do bootstage processing in bootm_final()
-  x86: Call bootm_final()
-  riscv: Drop board_quiesce_devices()
-  riscv: Call bootm_final()
-  x86: Add cleanup_before_linux()
-
- MAINTAINERS                           |  1 +
- arch/riscv/include/asm/u-boot-riscv.h |  1 -
- arch/riscv/lib/bootm.c                | 24 +------------------
- arch/x86/cpu/cpu.c                    |  5 ++++
- arch/x86/lib/bootm.c                  | 14 +----------
- boot/Makefile                         |  2 +-
- boot/bootm_final.c                    | 34 +++++++++++++++++++++++++++
- include/bootm.h                       | 17 ++++++++++++++
- include/bootstage.h                   |  8 +++++++
- 9 files changed, 68 insertions(+), 38 deletions(-)
+ MAINTAINERS        |  1 +
+ boot/Makefile      |  2 +-
+ boot/bootm_final.c | 12 ++++++++++++
+ include/bootm.h    | 17 +++++++++++++++++
+ 4 files changed, 31 insertions(+), 1 deletion(-)
  create mode 100644 boot/bootm_final.c
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f8d4f6ee8b2..beebb491f28 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -983,6 +983,7 @@ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	boot/bootdev*.c
+ F:	boot/bootflow.c
++F:	boot/bootm_final.c
+ F:	boot/bootmeth*.c
+ F:	boot/bootstd.c
+ F:	cmd/bootdev.c
+diff --git a/boot/Makefile b/boot/Makefile
+index 7fb56e7ef37..12477fabe28 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -15,7 +15,7 @@ obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
+ 
+ endif
+ 
+-obj-y += image.o image-board.o
++obj-y += image.o image-board.o bootm_final.o
+ 
+ obj-$(CONFIG_ANDROID_AB) += android_ab.o
+ obj-$(CONFIG_ANDROID_BOOT_IMAGE) += image-android.o image-android-dt.o
+diff --git a/boot/bootm_final.c b/boot/bootm_final.c
+new file mode 100644
+index 00000000000..15ddbbe5e74
+--- /dev/null
++++ b/boot/bootm_final.c
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Cleanup before handing off to the OS
++ *
++ * Copyright 2025 Simon Glass <sjg@chromium.org>
++ */
++
++#include <bootm.h>
++
++void bootm_final(enum bootm_final_t flags)
++{
++}
+diff --git a/include/bootm.h b/include/bootm.h
+index 4060cec7fc0..32711eabb2e 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -16,6 +16,16 @@ struct cmd_tbl;
+ #define BOOTM_ERR_OVERLAP		(-2)
+ #define BOOTM_ERR_UNIMPLEMENTED	(-3)
+ 
++/**
++ * enum bootm_final_t - flags to control bootm_final()
++ *
++ * @BOOTM_FINAL_FAKE: true to do everything except actually boot; it then
++ *	returns to the caller
++ */
++enum bootm_final_t {
++	BOOTM_FINAL_FAKE	= 1 << 0,
++};
++
+ /**
+  * struct bootm_info() - information used when processing images to boot
+  *
+@@ -321,4 +331,11 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline);
+  */
+ int bootm_boot_start(ulong addr, const char *cmdline);
+ 
++/**
++ * bootm_final() - Announce and do cleanup before boot
++ *
++ * @flags: Flags to control what this function does
++ */
++void bootm_final(enum bootm_final_t flags);
++
+ #endif
 -- 
 2.43.0
 
-base-commit: 8fd76675efbe7af785ccc1ba1ac8b9f7e10f6715
-branch: bootma-us2
