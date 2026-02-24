@@ -4,164 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3065DE9B258
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 13:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDEB7E9B263
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 13:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1ECB82BF2;
-	Tue, 24 Feb 2026 14:38:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C80F82BF2;
+	Tue, 24 Feb 2026 14:56:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=rohde-schwarz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="D8r5Rw+a";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=rohde-schwarz.com header.i=@rohde-schwarz.com header.b="ptE3ovjP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A416883DEA; Tue, 24 Feb 2026 14:38:52 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CEA5183C5E; Tue, 24 Feb 2026 08:30:18 +0100 (CET)
+Received: from mail02.rohde-schwarz.com (mail02.rohde-schwarz.com
+ [80.246.32.97])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 215E582A9E
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 14:38:50 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nUbxjLFbjYBTSBcx9fdCaEV0oDAG5zC1DsFMgDIrFnGzzYgd4C7jGAqY9c4B8bgxsJ2mSPm8phrcL1+v5QjuT0s5Bn0y3EWwiHdXjy9Vw4GNNMq1fhAjER57sp1FlZ6fcjrSoj8XLP1gia3FsyuTP5s5ZunPxE8I05d5qA/WBpyhNCeo06Tiy5VZNaGsvsx3NW/mktJxjF7cDr6LVNYEyYSyqzUrVpWV+axHfavT8odTY7bplAt0Jp0o4AP2sB+CuFp6EFlzrjVNYVwjApifU91rnjitnTLVdeaeJj0MEpuPGTNpM8x6lT4g782uoh61ELUqAmPZJYZsICj/3btgWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NZ+aXph4v9Un7Nj5X0WZmuQmdqY1iigAeFqaiKhgLtY=;
- b=S3qWlNEJ8lUr31SYgYRvRCh3vOmuZ4BqW+ESHM3tojVdXfCTeM/BBdZfZ6JKlhFlZ7JEQs/aGCPGGNaECqIxOaR3MAtU5A8nlxobQX86F18RQrx0KKQoawTLbbQKAh7fReSWYcJ+hNwZR7MPV1/WQ2UZTfLhsFuvqzydmPZX/pMBmnLfeKXr6dVKTPlnj+A5BlDyy7hJGw3UbXiDCbO2gXnClBw4kv40YRgNjhf/BPc7iAPktH7e//7yaaQHCU3H3KhBqSop7tQfjVTXzLpCm8LJ6+CgzLa7uEfe2KIWzei691WkmlZrMy8MOC8dUvGmlkFz2vYu1XPegp3edp9QTg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NZ+aXph4v9Un7Nj5X0WZmuQmdqY1iigAeFqaiKhgLtY=;
- b=D8r5Rw+a/r4q5r0sfU1H+2idjrKTBVYkUrWyhu+3gUB9lL76MkWu3PK21DhyCRAy5j+Ny35EpOuBHXKmx+Lybbs9pIhGl+OyPz2QHliQiegKR4pTXCPOpQoySKc7zYk4LEvGnAsUc11o8vPyMq5X4efHxz/br3CC8lu1oF3wg/jCGg2WpS0BBMKyOVI9bTSXY0F1M6LW3b6whiUHUpwxf63UcfQUbvMIchi5cngWZEXr1LmS78odfuS9gn9uWB/MrNTHDdrVZVwU1wiXlDnABGWZdUGzRZX7Ajq5+1+8vtkNz1ikhVSA1G/8SxgS6GjD6mzhqPuZepskjJGlY9POiA==
-Received: from AS4P250CA0028.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5e3::16)
- by DB9PR10MB8215.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4c6::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Tue, 24 Feb
- 2026 13:38:45 +0000
-Received: from AMS1EPF00000091.eurprd05.prod.outlook.com
- (2603:10a6:20b:5e3:cafe::5c) by AS4P250CA0028.outlook.office365.com
- (2603:10a6:20b:5e3::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Tue,
- 24 Feb 2026 13:38:41 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- AMS1EPF00000091.mail.protection.outlook.com (10.167.242.88) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Tue, 24 Feb 2026 13:38:45 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
- 2026 14:40:52 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Tue, 24 Feb
- 2026 14:38:44 +0100
-Message-ID: <5ef95638-894c-4919-8ad5-750a1c35c4fd@foss.st.com>
-Date: Tue, 24 Feb 2026 14:38:45 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 7D64980050
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 08:30:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=rohde-schwarz.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dorde.stojicevic@rohde-schwarz.com
+Received: from securemail-mu-h4.rohde-schwarz.com (10.0.19.146) by
+ mail02.rohde-schwarz.com (172.21.64.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.39; Tue, 24 Feb 2026 08:30:16 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rohde-schwarz.com; s=mail25;
+ t=1771918216; bh=3xvdE4++zf2YGXohWIwMrVEOnBlJWZmkCqNhK1GpFhQ=;
+ h=From:Subject:Date:Message-ID:To;
+ b=ptE3ovjPjaI00V/eyC1aaA3A7vPNb+6u0/upgD354U2Zxa/hsPwoV64x3XoCcnLehzDSDoc9
+ rHlrubPdBq733BSrm96XsAvULps46q8WkSaoUeWSKpL3oaUifpdh3631bsxeIGCcHF9YeTtF
+ 5lPNbMhEZxw9Mh5t4z2h1UFgk3lCWbv0Ajw8uzA3WJgFr5FRAeorxP0O+3qg5hh7tsC4Zp3L
+ z3qoUSiNKy3xhgnQeh2vYZAQOFdCAqqB/iUIRcIVQphzpBWPPnRYfbTa2iHBr9XbPXa2dafI
+ IGyZo6JXno6DN2vtnTIPpsvgyJFDQJSkpr0KW1ZiOz7u/ZWXVz+i/w==
+Received: from GMU452.rsint.net ([10.0.225.105])
+ by gmu812.rsint.net (Totemo SMTP Server) with SMTP ID 67;
+ Tue, 24 Feb 2026 07:30:15 +0000 (GMT)
+Received: from GMU507.rsint.net (10.0.225.39) by GMU452.rsint.net
+ (10.0.225.105) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Tue, 24 Feb
+ 2026 08:30:15 +0100
+Received: from GMU508.rsint.net (10.0.225.40) by GMU507.rsint.net
+ (10.0.225.39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Tue, 24 Feb
+ 2026 08:30:13 +0100
+Received: from GMU508.rsint.net ([fe80::9ee:3531:ebaf:c342]) by
+ GMU508.rsint.net ([fe80::9ee:3531:ebaf:c342%7]) with mapi id 15.02.2562.027;
+ Tue, 24 Feb 2026 08:30:13 +0100
+From: Dorde Stojicevic <dorde.stojicevic@rohde-schwarz.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Quentin Schulz <quentin.schulz@cherry.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: RE:  Re: Re: Re: [PATCH] arm: Backward compatibility to U-Boot
+ v2020.04
+Thread-Index: AQHcl3ncEJfYzVFb9UKlk6xac1SP3rV1xmeAgBvH4YA=
+Date: Tue, 24 Feb 2026 07:30:13 +0000
+Message-ID: <f991777100194a22b350660b5977cf27@rohde-schwarz.com>
+References: <25380f75dd2443c0a882bcce78503511@rohde-schwarz.com>
+ <20260203170002.GO2603314@bill-the-cat>
+ <f8f1197e979b4998afb5dc952f7a8a63@rohde-schwarz.com>
+ <20260206015447.GP2603314@bill-the-cat>
+ <989f3c4aa5a04fd3b1c2efda1aedd459@rohde-schwarz.com>
+ <20260206150345.GT2603314@bill-the-cat>
+ <1000751cb4604e768e2f789c3dfda18e@rohde-schwarz.com>
+In-Reply-To: <1000751cb4604e768e2f789c3dfda18e@rohde-schwarz.com>
+Accept-Language: de-DE, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.0.9.40]
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/7] ARM: stm32mp: Add STM32MP21 support
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-CC: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, "Valentin
- Caron" <valentin.caron@foss.st.com>, Nicolas Le Bayon
- <nicolas.le.bayon@st.com>, Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Gatien Chevallier <gatien.chevallier@foss.st.com>, Marek Vasut
- <marek.vasut@mailbox.org>, Thomas Bourgoin <thomas.bourgoin@foss.st.com>,
- Lionel Debieve <lionel.debieve@foss.st.com>, Yann Gautier
- <yann.gautier@foss.st.com>, Simeon Marijon <simeon.marijon@foss.st.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Quentin Schulz
- <quentin.schulz@cherry.de>
-References: <20260203-upstream_add_stm32mp21_support-v1-0-48ca3409cce1@foss.st.com>
- <20260203-upstream_add_stm32mp21_support-v1-5-48ca3409cce1@foss.st.com>
- <3c678260-1859-42cc-8f84-0e0682f64b59@foss.st.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <3c678260-1859-42cc-8f84-0e0682f64b59@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF00000091:EE_|DB9PR10MB8215:EE_
-X-MS-Office365-Filtering-Correlation-Id: f150e9a2-1dc5-4341-6c4e-08de73aa085c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RUhlWFkvcVFzMHVXNEhiWDhTSVVKYWE2NWxRd0V1TWNHenV1ak9zd3pKVlpC?=
- =?utf-8?B?MjErRG8rbzFlSnZjdWVtVmtJRzgwbWl5Z01ZTzNUbVZpR2krZ29vakZmWXgw?=
- =?utf-8?B?R0gxTFlGN3haZ2RyWmN4REN3aXpNS3FEeEVJSmZ2VXdtQWUzeC9vREJSWEkv?=
- =?utf-8?B?R1d5UHR6d2FXNzNqUklKZTNrSXRmS3dsU0lHaXo3UjRvb3VqKzk2N0RRelBq?=
- =?utf-8?B?b0xBSFB6bXB1blNzdk8xd2ZZK2lmeG9lVGlOWGpIQ3lEMUZtWndGYW1TaGJl?=
- =?utf-8?B?Zi9pVi9lc01aeWNvTkhXSWtQL093MmpLa0l5Q285bEsyQ2Nvc2FNUUt5Wk04?=
- =?utf-8?B?YnZnaEN2K1A2VGpWUjVSanY1SkJreGxYaGZkazIvSDNMNW5DNjRNcFhubGJV?=
- =?utf-8?B?RlJ2Ymd1eEp2S3MxeG4zeWt6b0l2Q3dWTUwvZzhHSDQ4MVQ2YlJiODNPU3VX?=
- =?utf-8?B?aUU4YXhBSkg1ZlRSMjJPem95d0NFQkpOM1Z4SkY4RUZTMU1MLzJGWnh6eE15?=
- =?utf-8?B?L003UzlOb0plcmtOcFk4Y1RERng0N1F4cWhtaFZEWEd5WngrSitMaTdsN0hp?=
- =?utf-8?B?QStRaEF5NU5rZklGZkpiRjl4NXZKeTZFdEJkZ0lMVmQ1YlhseGJWcGx1K2hX?=
- =?utf-8?B?RDV3YkZ5WmZ1Z01xaVU2YWRHOWJjSmI2S3hOVmpLN2ROOW1QRmZqRXh5VWRY?=
- =?utf-8?B?NDNHV0Q1OThwdHhLcGVtMy9vYTBaMFJDVTlZWWZBNDRSUWk5QUFrMkxhVGtt?=
- =?utf-8?B?d25PWitzVFB3WjJ1N1F0Si9kVGwxVFg3dXNOR2YwTU0xUUM1MUZmZ2ZWaVJL?=
- =?utf-8?B?T1ZjNXVUaERXdjJ1YUl1YmZPMnI1NXhXVmRjcWNwMk9GbitsMXZoZm92TUND?=
- =?utf-8?B?WVdmd3FnWi9sVGhHWGpZcTg0cmxuYXVscVN5YXZqY1RpMlgxL0dYa2JmVkRQ?=
- =?utf-8?B?TG96OU1jTGdvcW5zcWtxTTBRT01lRGRnbXhRRkExdVYyTlFtWktHcXJHM0k0?=
- =?utf-8?B?eXpSNjlhVHg5a1ptanpqZTQzRjJrMmkxQm1CWVplb2VJeFR4c2pUeWlEYXJY?=
- =?utf-8?B?NWNmMzFwRS8xOHFZUmVHTWlleWhSLysrMTNBVjZhWGRXaDBXUGxzNml3Ynls?=
- =?utf-8?B?WlJLVXgvOHBSMndONG9tdk54eVlpaDFGWEtiM2MvMDR0cVMzT3Z1azN2NUJa?=
- =?utf-8?B?VDRlZlRzUVVDZ3pRTVFXamN3T3QrcEN4QllOOGxland0UnZFTE5BSXJEWDJD?=
- =?utf-8?B?dDNDYTV0ZzdRdldKeGh4Y0V1bE9HVXRmeUswRFUrYmFXSHVJWjBPaU5RU1ZU?=
- =?utf-8?B?eWhESG5ybFRpYW5POVpMSmpQWXBIdDlBTWJkYm00aW5xbHhjbXRBQnV5MGVv?=
- =?utf-8?B?Y2dEV1krUndtQm9FaU5lTmQvQlhVSmFnVzlLeldQKzFheWNZWE9IQzFJSitn?=
- =?utf-8?B?Y3AzYmFzUGRCNXlmbittYzZNQTEyTlhVN1l3Z3R4N2hnQTBzbmQzMTlMRFlq?=
- =?utf-8?B?azhEb21ldDhRcW1RZWQ4K3B6NldvdWhEcXNRQ1NvZVh1UVJDUXgrOXJ3Ukwy?=
- =?utf-8?B?UE9ZZkpxajNWNEJmLzkzMUQxbHVCNFVzTGZvTTNJVlZrazlnK0haRHJ1bFN5?=
- =?utf-8?B?VDVRa1h6anptZjk0QlFNRzZEZkdqeUVxL3RXenhBdVFFNXphcG40TFY4UVVR?=
- =?utf-8?B?WU9kclJ5amliVzhJck9FcDVMUU5USXBFcUNhbEZjY0srcGpGYUk5ZldoQThm?=
- =?utf-8?B?bWZ3WXUrdVdocFo3QXg1M0craGh1UnZWT255SS8rVjlveFVCR043ZDNhdy9D?=
- =?utf-8?B?dGlKdkZjRHdXcENQOWVLeFphWTBuc2gvblQvOERSNG0wYVllNW5odU4ySERx?=
- =?utf-8?B?eTYvaDg1Q1ZlWHNWQkVBc0pJOFg3U3RBOGZUU0twbUE0SjlrUzA3ODllWkha?=
- =?utf-8?B?WWRIQ2hYL0V5bi9TSVNoaVhXSmFmZkdoT0paZkdLNEM0Q2Z5WWpieEh4UEg2?=
- =?utf-8?B?dTE3dVhrZS9MRWQ2UFNSVDRwWXJneUxiRUJlb1BxVlhpNSt2Snk3cVd3V2JV?=
- =?utf-8?B?anVrNUJGYjRFOG01dVZUNG9Ea2NncENmYnJJcmNOQUFjbTUwK2pNb1d2dDB6?=
- =?utf-8?B?NE43dTkrWmtlc053TVUyYVMwZGt4WlhXaVA3NlFucVpzZmJyUXB6Y1M0NTlR?=
- =?utf-8?B?MDdEbDBnYzVmSHBSSzU3aXk2cHE4TEQ3UUJ6bnVXWUw5K1JXMndUc1hqUFF3?=
- =?utf-8?B?Wi9YbzU0WXR5OWIwMkIxS01raVBBPT0=?=
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wFCzZ+9Tl5j0vZ5s0BwK1Y5Jpx3eQtHnB2E9DmseG0V0usTL+hadsmW5xTdVP0+KbVbtELIcWsS/dTK4lxW0voZF7Ojj0aLSYUpYDL9G/NGiXmEKzoKqa4MdC+OlASGXOcl/aRLk8PtpL0m6YGbc/njCR03+VZrY9pcxnmRoQ7DnY/Fe1moRDWuZ6/lqPxg532fX1Pcc/vvC9cL0UGolbAuY5aKtIhDvXTBl/11aM2tHMu4C8vzy1AQ/gL1OqSvW+rCq3BqkbooMaDBmKjkjhs1eZtVQL9GpSe4JvazULpfFH9u/l98hyu4tD+ow+HejPNY5+Nhuw7kk/B/xV+96BEdF7D13QmGzfL6+IhcqZ1mNGttOOrF9NEqmyqqR4hwCEroL5I2J7Uum4ZKlJSS6kL9fJZHwtPyySK8PJC4zV7iNiS5tbasaB9ml2euTE0PB
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2026 13:38:45.4232 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f150e9a2-1dc5-4341-6c4e-08de73aa085c
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF00000091.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB8215
+X-IQAV: YES
+thread-topic: RE: *EXT* Re: Re: Re: [PATCH] arm: Backward compatibility to
+ U-Boot v2020.04 ***CAUTION_Invalid_Signature*** /ur/
+X-rus_sensitivity: 10
+msip_labels: MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Enabled=true;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_SetDate=2026-02-24T08:30:14Z;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Method=Privileged;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_Name=UNRESTRICTED;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_SiteId=74bddbd9-705c-456e-aabd-99beb719a2b2;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_ActionId=8b69e117-7756-4ef8-b52e-ebe0297deaf4;
+ MSIP_Label_9764cdcd-3664-4d05-9615-7cbf65a4f0a8_ContentBits=1
+Content-Type: multipart/related; type="multipart/alternative";
+ boundary="--=_Boundary_=--70=88B-1B1F76F7A7D-1"
+X-GBS-PROCJOB: =?utf-8?Q?Lk9ifsRzFrzoXbtWHBu95G1oPH4gYkDB5oeN40e/+9SoPn+7twRIKCVnW8V6?=
+ =?utf-8?Q?PPa/vqSGdwwUdVPEkHygDSodEognty3mt1Xj1++a+y9WBnHT+hlwJNnkgrHI?=
+ =?utf-8?Q?YG40cB5ks7jEwHB36f8jfh2Rv37TZviWf7CqdBEIZiZNZQkVoQQrRbXyO0Rz?=
+ =?utf-8?Q?TcjbQOcL4xaN3VJ5RqxpoQHO3A2ZE32clw=3D=3D?=
+X-Mailman-Approved-At: Tue, 24 Feb 2026 14:56:26 +0100
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,161 +110,255 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+----=_Boundary_=--70=88B-1B1F76F7A7D-1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
+SGkgYWxsLA0KDQpzb3JyeSB0aGF0IGl0IHRvb2sgYSB3aGlsZSB0byBnZXQgdGhlIHJlc3Bv
+bnNlIGZyb20gTHlueCBidXQgaXQgY291bGRuwrR0IGJlIGhlbHBlZCB1bmZvcnR1bmF0ZWx5
+Lg0KDQpJIGdvdCB0aGUgcmVzcG9uc2UgZnJvbSBMeW54Og0KDQoiIEhlbGxvIERvcmRlLg0K
+DQpJ4oCZdmUgZ290IGEgcmVwbGF5IGZyb20gb3VyIGVuZ2luZWVyaW5nIHRlYW0uIFdlIGRv
+IG5vdCBzdXBwb3J0IHUtYm9vdCwgc28gd2UgZG9u4oCZdCBoYXZlIGFueSBwbGFucyB0byBt
+YWtlIFNSUCDigJxBUk02NCBrZXJuZWzigJwgY29tcGF0aWJsZS4NCg0KV2Ugd29yayB3aXRo
+IGJvYXJkIHdpdGggZGVmYXVsdCB1LWJvb3QgKGZvciBub3cgaXQgaXMgVS1Cb290IFNQTCAy
+MDIwLjA0KS4NCg0KU28sIHlvdSBhcmUgZnJlZSB0byBtYWtlIGFueSBjaGFuZ2VzIGluIHUt
+Ym9vdCB0byBtYWtlIFNSUCBydW4gaW4gbmV3ZXN0IHZlcnNpb24gb2YgdS1ib290Lg0KIg0K
+DQpJIGFtIGEgYml0IHN1cnByaXNlZCBieSB0aGUgcmVzcG9uc2UgdGhhdCB0aGV5IGRvbsK0
+dCBzZWVtIHJlYWxseSBpbnRlcmVzdGVkIGluIGl0LCBidXQgaXQgaXMgaG93IGl0IGlzLiBT
+byB3ZSBhcmUgZnJlZSB0byBhcHBseSB0aGUgcGF0Y2ggdG8gb3VyIGxpa2luZy4NCg0KTGV0
+IG1lIGtub3cgaG93IHdlIHByb2NlZWQgZnJvbSBoZXJlDQpEb3JkZQ0KDQoNCkRvcmRlIFN0
+b2ppY2V2aWMNCg0KTmV0d29ya3MgYW5kIEN5YmVyc2VjdXJpdHkNCg0KUm9oZGUgJiBTY2h3
+YXJ6IFNJVCBHbWJIDQpIZW1taW5nZXIgU3RyYXNzZSA0MSB8IDcwNDk5IFN0dXR0Z2FydC1X
+ZWlsaW1kb3JmIHwgR2VybWFueQ0KUGhvbmU6ICs0OTcxMTY5OTQ1MTk1DQoNCkludGVybmV0
+OiB3d3cucm9oZGUtc2Nod2Fyei5jb20NCg0KDQoNCkdlc2Now6RmdHNmw7xocmVyIC8gTWFu
+YWdpbmcgRGlyZWN0b3I6IFJhbGYgS29lbnplbg0KQXVmc2ljaHRzcmF0c3ZvcnNpdHplbmRl
+ciAvIENoYWlyIG9mIHRoZSBTdXBlcnZpc29yeSBCb2FyZDogTWFyaW8gUGFvbGkNClNpdHog
+LyBSZWdpc3RlcmVkIE9mZmljZTogU3R1dHRnYXJ0DQpIYW5kZWxzcmVnaXN0ZXIgLyBDb21t
+ZXJjaWFsIFJlZ2lzdGVyOiBBRyBTdHV0dGdhcnQgSFJCIDc1OSA5MzQNClVtc2F0enN0ZXVl
+ci1JZGVudGlmaWthdGlvbnNudW1tZXIgKFVTdC1JZE5yLikgLyBWQVQgSWRlbnRpZmljYXRp
+b24gTm8uOiBERSAxMjEgOTYzIDI4Mw0KRWxla3Ryby1BbHRnZXLDpHRlIFJlZ2lzdGVyIChF
+QVIpIC8gV0VFRSBSZWdpc3RlciBOby46IERFIDg3NyA3MjcgNjcNCg0KDQoNCi0tLS0tT3Jp
+Z2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBTdG9qaWNldmljIERvcmRlICgxMVNJRVBUMSkg
+DQpTZW50OiBGcmlkYXksIEZlYnJ1YXJ5IDYsIDIwMjYgNDoxNyBQTQ0KVG86ICdUb20gUmlu
+aScgPHRyaW5pQGtvbnN1bGtvLmNvbT4NCkNjOiBRdWVudGluIFNjaHVseiA8cXVlbnRpbi5z
+Y2h1bHpAY2hlcnJ5LmRlPjsgdS1ib290QGxpc3RzLmRlbnguZGUNClN1YmplY3Q6IFJFOiAq
+RVhUKiBSZTogUmU6IFJlOiBbUEFUQ0hdIGFybTogQmFja3dhcmQgY29tcGF0aWJpbGl0eSB0
+byBVLUJvb3QgdjIwMjAuMDQgKioqQ0FVVElPTl9JbnZhbGlkX1NpZ25hdHVyZSoqKg0KDQpO
+aWNlLiDwn5iKDQoNCkZyb20gd2hhdCBJIGtub3csIEx5bnggd2FudGVkIHRoZSAiZmVhdHVy
+ZSIgb2YgYmVpbmcgYWJsZSB0byBpbXBlcnNvbmF0ZSBMaW51eCwgc28gb25jZSBpdMK0cyBi
+dWlsdGluIGJldHdlZW4gcmVhbCBPUyBhbmQgVS1Cb290LCBpdCBpcyBhIG5vLWJyYWluZXIg
+d2l0aCAibm90aGluZyB0byBiZSBjaGFuZ2VkIi4NCg0KQnV0IGl0IHNlZW1zIGxpa2UgdGhh
+dCBkZXRlY3Rpb24gaW4gVS1Cb290IHdhcyBub3Qgd29ya2luZyBwcm9wZXJseSwgdGhlbiBM
+eW54IGJ1aWx0IG9uIHRvcCAodW5hd2FyZSBvZiB0aGUgY2hlY2sgdGhhdCBuZWVkZWQgdG8g
+YmUgaW5wbGFjZSksIGFuZCB0aGVuIEkgY2FtZSB3aXRoIG15ICJxdWlja8K0bsK0ZGlydHki
+IHNvbHV0aW9uLiDwn5iKDQoNCk1heWJlIHRoZSByZWFsbHktcHJvcGVyLXNvbHV0aW9uIHdv
+dWxkIGJlIHRoYXQgTHlueCBqdXN0IGRvZXMgdGhlIGNvbXBsZXRlIHByb3BlciBpbXBlcnNv
+bmF0aW9uIG9mIExpbnV4LCBpZiB0aGF0IGlzIHdoYXQgdGhleSByZWFsbHkgd2FudCBhcyBh
+IGZlYXR1cmUuIEJ1dCB0byBjbGFyaWZ5IHRoaXMsIHdlIHdvdWxkIG5lZWQgc29tZSBvbmUg
+ZnJvbSB0aGVpciBzaWRlLiBJIGhhdmUgY29udGFjdCB3aXRoIHRoZW0sIHNob3VsZCBJIGVz
+dGFibGlzaCBhIHRyaWxhdGVyYWwgdGFsayBvbiB0aGlzIHRvcGljPw0KDQpHcmVldGluZ3Mg
+YW5kIG5pY2Ugd2Vla2VuZA0KRG9yZGUNCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0N
+CkZyb206IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+IA0KU2VudDogRnJpZGF5LCBG
+ZWJydWFyeSA2LCAyMDI2IDQ6MDQgUE0NClRvOiBTdG9qaWNldmljIERvcmRlICgxMVNJRVBU
+MSkgPGRvcmRlLnN0b2ppY2V2aWNAcm9oZGUtc2Nod2Fyei5jb20+DQpDYzogUXVlbnRpbiBT
+Y2h1bHogPHF1ZW50aW4uc2NodWx6QGNoZXJyeS5kZT47IHUtYm9vdEBsaXN0cy5kZW54LmRl
+DQpTdWJqZWN0OiAqRVhUKiBSZTogUmU6IFJlOiBbUEFUQ0hdIGFybTogQmFja3dhcmQgY29t
+cGF0aWJpbGl0eSB0byBVLUJvb3QgdjIwMjAuMDQgKioqQ0FVVElPTl9JbnZhbGlkX1NpZ25h
+dHVyZSoqKg0KDQpPbiBGcmksIEZlYiAwNiwgMjAyNiBhdCAwNjoyODozOUFNICswMDAwLCBE
+b3JkZSBTdG9qaWNldmljIHdyb3RlOg0KPiBIaSwNCj4gDQo+IHllcyBvZiBjb3Vyc2UuDQo+
+IA0KPiBIZXJlIGl0IGlzOg0KPiANCj4gJCBta2ltYWdlIC1sIGJ1aWxkL2VkN2N0LWNiLnNy
+cA0KPiBGSVQgZGVzY3JpcHRpb246IEx5bnhTZWN1cmUgMjAyNS4xMC4wLTM5ODQ0YjgwZTAg
+U1JQIChhYXJjaDY0KQ0KPiBDcmVhdGVkOiAgICAgICAgIFRodSBGZWIgIDUgMTM6NTg6MzEg
+MjAyNg0KPiAgSW1hZ2UgMCAoa2VybmVsLTEpDQo+ICAgRGVzY3JpcHRpb246ICBMeW54U2Vj
+dXJlIDIwMjUuMTAuMC0zOTg0NGI4MGUwIFNSUCAoYWFyY2g2NCkNCj4gICBDcmVhdGVkOiAg
+ICAgIFRodSBGZWIgIDUgMTM6NTg6MzEgMjAyNg0KPiAgIFR5cGU6ICAgICAgICAgS2VybmVs
+IEltYWdlDQo+ICAgQ29tcHJlc3Npb246ICB1bmNvbXByZXNzZWQNCj4gICBEYXRhIFNpemU6
+ICAgIDI2MjUxMjI2NCBCeXRlcyA9IDI1NjM1OS42MyBLaUIgPSAyNTAuMzUgTWlCDQo+ICAg
+QXJjaGl0ZWN0dXJlOiBBQXJjaDY0DQo+ICAgT1M6ICAgICAgICAgICBMaW51eA0KDQpTbywg
+d2UncmUgZ2V0dGluZyBzb21ld2hlcmUuIEl0IHNlZW1zIGxpa2UgYmVmb3JlIG91ciB2YWxp
+ZGF0aW9uIGNoZWNrIHdhc24ndCB3b3JraW5nIGFuZCBzbyBjbGFpbWluZyB0byBiZSBMaW51
+eCwgYnV0IG5vdCBiZWluZyBMaW51eCwgd2Fzbid0IGNhdWdodCBhbmQgZmFpbGVkLiBUaGUg
+cmlnaHQgcGF0aCBoZXJlIGlzIHRvIGFkZCBJSF9PU19MWU5YU0VDVVJFIHRvIGluY2x1ZGUv
+aW1hZ2UuaCBhbmQgaGFuZGxpbmcgb2YgaXQgaW4gdGhlIHZhcmlvdXMgYm9vdC8gZmlsZXMg
+dGhhdCBuZWVkIGl0LiBUaGVuIHRoZSBpdHMgc2hvdWxkIGhhdmUgJ29zID0gImx5bnhzZWN1
+cmUiJyBzbyB0aGF0IGl0IHNldHMgdGhhdCBmaWVsZCBjb3JyZWN0bHkuDQoNCi0tDQpUb20N
+Cg==
 
-On 2/24/26 14:30, Patrick DELAUNAY wrote:
-> Hi,
-> 
-> one error for CPU_STM32MP215Fxx value....
-> 
-> On 2/3/26 17:49, Patrice Chotard wrote:
->> STM32MP21 application processors (STM32 MPUs) based on a single
->> Arm Cortex®-A35 core running up to 1.5 GHz and Cortex®-M33 core
->> running at 300 MHz.
->>
->> It is pin-compatible with the STM32MP2 series in the VFBGA361
->> 10×10 mm package: the STM32MP21 uses a subset of the STM32MP23
->> pinout, which itself is a subset of the STM32MP25.
->>
->> More details available here :
->> https://www.st.com/en/microcontrollers-microprocessors/stm32mp2-series.html
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>   arch/arm/mach-stm32mp/Kconfig                  |  27 ++++
->>   arch/arm/mach-stm32mp/Kconfig.21x              |  37 +++++
->>   arch/arm/mach-stm32mp/Makefile                 |   3 +-
->>   arch/arm/mach-stm32mp/include/mach/stm32.h     |  12 +-
->>   arch/arm/mach-stm32mp/include/mach/sys_proto.h |  22 +++
->>   arch/arm/mach-stm32mp/stm32mp2/Makefile        |   1 +
->>   arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c     |   2 +
->>   arch/arm/mach-stm32mp/stm32mp2/cpu.c           |   2 +
->>   arch/arm/mach-stm32mp/stm32mp2/rifsc.c         |   1 +
->>   arch/arm/mach-stm32mp/stm32mp2/stm32mp21x.c    | 192 +++++++++++++++++++++++++
->>   board/st/common/Kconfig                        |   2 +-
->>   board/st/stm32mp2/Kconfig                      |  14 ++
->>   configs/stm32mp21_defconfig                    |  78 ++++++++++
->>   include/configs/stm32mp21_common.h             | 126 ++++++++++++++++
->>   include/configs/stm32mp21_st_common.h          |  51 +++++++
->>   15 files changed, 564 insertions(+), 6 deletions(-)
->>
-> 
-> ....
-> 
-> 
->>   diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
->> index 90f06a052d3..7f349f3b68d 100644
->> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
->> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
->> @@ -165,16 +165,20 @@ enum forced_boot_mode {
->>   #endif /* __ASSEMBLY__ */
->>   #endif /* CONFIG_STM32MP15X || CONFIG_STM32MP13X */
->>   -#if defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
->> +#if defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
->>   #define STM32_USART2_BASE        0x400E0000
->>   #define STM32_USART3_BASE        0x400F0000
->>   #define STM32_UART4_BASE        0x40100000
->>   #define STM32_UART5_BASE        0x40110000
->>   #define STM32_USART6_BASE        0x40220000
->> +#ifdef CONFIG_STM32MP25X
->>   #define STM32_UART9_BASE        0x402C0000
->> +#endif
->>   #define STM32_USART1_BASE        0x40330000
->>   #define STM32_UART7_BASE        0x40370000
->> +#ifdef CONFIG_STM32MP25X
->>   #define STM32_UART8_BASE        0x40380000
->> +#endif
->>   #define STM32_RCC_BASE            0x44200000
->>   #define STM32_TAMP_BASE            0x46010000
->>   #define STM32_SDMMC1_BASE        0x48220000
->> @@ -194,7 +198,7 @@ enum forced_boot_mode {
->>     #define TAMP_FWU_BOOT_IDX_MASK        GENMASK(3, 0)
->>   #define TAMP_FWU_BOOT_IDX_OFFSET    0
->> -#endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
->> +#endif /* defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
->>     /* offset used for BSEC driver: misc_read and misc_write */
->>   #define STM32_BSEC_SHADOW_OFFSET    0x0
->> @@ -218,14 +222,14 @@ enum forced_boot_mode {
->>   #define BSEC_OTP_MAC    57
->>   #define BSEC_OTP_BOARD    60
->>   #endif
->> -#if defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
->> +#if defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X)
->>   #define BSEC_OTP_SERIAL    5
->>   #define BSEC_OTP_RPN    9
->>   #define BSEC_OTP_REVID    102
->>   #define BSEC_OTP_PKG    122
->>   #define BSEC_OTP_BOARD    246
->>   #define BSEC_OTP_MAC    247
->> -#endif /* defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
->> +#endif /* defined(CONFIG_STM32MP21X) || defined(CONFIG_STM32MP23X) || defined(CONFIG_STM32MP25X) */
->>     #ifndef __ASSEMBLY__
->>   #include <asm/types.h>
->> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
->> index 2a4837184fc..47a6db79bca 100644
->> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
->> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
->> @@ -30,6 +30,20 @@
->>   #define CPU_STM32MP131Fxx    0x05010EC8
->>   #define CPU_STM32MP131Dxx    0x05010EC9
->>   +/* ID for STM32MP21x = Device Part Number (RPN) (bit31:0) */
->> +#define CPU_STM32MP211Axx    0x40073E7D
->> +#define CPU_STM32MP211Cxx    0x0007307D
->> +#define CPU_STM32MP211Dxx    0xC0073E7D
->> +#define CPU_STM32MP211Fxx    0x8007307D
->> +#define CPU_STM32MP213Axx    0x40073E1D
->> +#define CPU_STM32MP213Cxx    0x0007301D
->> +#define CPU_STM32MP213Dxx    0xC0073E1D
->> +#define CPU_STM32MP213Fxx    0x8007301D
->> +#define CPU_STM32MP215Axx    0x40033E0D
->> +#define CPU_STM32MP215Cxx    0x0003300D
->> +#define CPU_STM32MP215Dxx    0xC0033E0D
->> +#define CPU_STM32MP215Fxx    0x80
-> 
-> 
-> Strange value this part number, I assume:
-> 
-> #define CPU_STM32MP215Fxx    0x8003300D
+----=_Boundary_=--70=88B-1B1F76F7A7D-1
+Content-ID: <4B7C1F1AAC794A99@91AFE0312C212BF9>
+Content-Type: image/png; name="image001.png"
+Content-Disposition: inline; filename="image001.png"
+Content-Transfer-Encoding: base64
 
-Yes, i will fix it with the correct value when merging
+iVBORw0KGgoAAAANSUhEUgAAARgAAABGCAYAAAAXfYu/AAAKN2lDQ1BzUkdCIElFQzYxOTY2
+LTIuMQAAeJydlndUU9kWh8+9N71QkhCKlNBraFICSA29SJEuKjEJEErAkAAiNkRUcERRkaYI
+MijggKNDkbEiioUBUbHrBBlE1HFwFBuWSWStGd+8ee/Nm98f935rn73P3Wfvfda6AJD8gwXC
+TFgJgAyhWBTh58WIjYtnYAcBDPAAA2wA4HCzs0IW+EYCmQJ82IxsmRP4F726DiD5+yrTP4zB
+AP+flLlZIjEAUJiM5/L42VwZF8k4PVecJbdPyZi2NE3OMErOIlmCMlaTc/IsW3z2mWUPOfMy
+hDwZy3PO4mXw5Nwn4405Er6MkWAZF+cI+LkyviZjg3RJhkDGb+SxGXxONgAoktwu5nNTZGwt
+Y5IoMoIt43kA4EjJX/DSL1jMzxPLD8XOzFouEiSniBkmXFOGjZMTi+HPz03ni8XMMA43jSPi
+MdiZGVkc4XIAZs/8WRR5bRmyIjvYODk4MG0tbb4o1H9d/JuS93aWXoR/7hlEH/jD9ld+mQ0A
+sKZltdn6h21pFQBd6wFQu/2HzWAvAIqyvnUOfXEeunxeUsTiLGcrq9zcXEsBn2spL+jv+p8O
+f0NffM9Svt3v5WF485M4knQxQ143bmZ6pkTEyM7icPkM5p+H+B8H/nUeFhH8JL6IL5RFRMum
+TCBMlrVbyBOIBZlChkD4n5r4D8P+pNm5lona+BHQllgCpSEaQH4eACgqESAJe2Qr0O99C8ZH
+A/nNi9GZmJ37z4L+fVe4TP7IFiR/jmNHRDK4ElHO7Jr8WgI0IABFQAPqQBvoAxPABLbAEbgA
+D+ADAkEoiARxYDHgghSQAUQgFxSAtaAYlIKtYCeoBnWgETSDNnAYdIFj4DQ4By6By2AE3AFS
+MA6egCnwCsxAEISFyBAVUod0IEPIHLKFWJAb5AMFQxFQHJQIJUNCSAIVQOugUqgcqobqoWbo
+W+godBq6AA1Dt6BRaBL6FXoHIzAJpsFasBFsBbNgTzgIjoQXwcnwMjgfLoK3wJVwA3wQ7oRP
+w5fgEVgKP4GnEYAQETqiizARFsJGQpF4JAkRIauQEqQCaUDakB6kH7mKSJGnyFsUBkVFMVBM
+lAvKHxWF4qKWoVahNqOqUQdQnag+1FXUKGoK9RFNRmuizdHO6AB0LDoZnYsuRlegm9Ad6LPo
+EfQ4+hUGg6FjjDGOGH9MHCYVswKzGbMb0445hRnGjGGmsVisOtYc64oNxXKwYmwxtgp7EHsS
+ewU7jn2DI+J0cLY4X1w8TogrxFXgWnAncFdwE7gZvBLeEO+MD8Xz8MvxZfhGfA9+CD+OnyEo
+E4wJroRIQiphLaGS0EY4S7hLeEEkEvWITsRwooC4hlhJPEQ8TxwlviVRSGYkNimBJCFtIe0n
+nSLdIr0gk8lGZA9yPFlM3kJuJp8h3ye/UaAqWCoEKPAUVivUKHQqXFF4pohXNFT0VFysmK9Y
+oXhEcUjxqRJeyUiJrcRRWqVUo3RU6YbStDJV2UY5VDlDebNyi/IF5UcULMWI4kPhUYoo+yhn
+KGNUhKpPZVO51HXURupZ6jgNQzOmBdBSaaW0b2iDtCkVioqdSrRKnkqNynEVKR2hG9ED6On0
+Mvph+nX6O1UtVU9Vvuom1TbVK6qv1eaoeajx1UrU2tVG1N6pM9R91NPUt6l3qd/TQGmYaYRr
+5Grs0Tir8XQObY7LHO6ckjmH59zWhDXNNCM0V2ju0xzQnNbS1vLTytKq0jqj9VSbru2hnaq9
+Q/uE9qQOVcdNR6CzQ+ekzmOGCsOTkc6oZPQxpnQ1df11Jbr1uoO6M3rGelF6hXrtevf0Cfos
+/ST9Hfq9+lMGOgYhBgUGrQa3DfGGLMMUw12G/YavjYyNYow2GHUZPTJWMw4wzjduNb5rQjZx
+N1lm0mByzRRjyjJNM91tetkMNrM3SzGrMRsyh80dzAXmu82HLdAWThZCiwaLG0wS05OZw2xl
+jlrSLYMtCy27LJ9ZGVjFW22z6rf6aG1vnW7daH3HhmITaFNo02Pzq62ZLde2xvbaXPJc37mr
+53bPfW5nbse322N3055qH2K/wb7X/oODo4PIoc1h0tHAMdGx1vEGi8YKY21mnXdCO3k5rXY6
+5vTW2cFZ7HzY+RcXpkuaS4vLo3nG8/jzGueNueq5clzrXaVuDLdEt71uUnddd457g/sDD30P
+nkeTx4SnqWeq50HPZ17WXiKvDq/XbGf2SvYpb8Tbz7vEe9CH4hPlU+1z31fPN9m31XfKz95v
+hd8pf7R/kP82/xsBWgHcgOaAqUDHwJWBfUGkoAVB1UEPgs2CRcE9IXBIYMj2kLvzDecL53eF
+gtCA0O2h98KMw5aFfR+OCQ8Lrwl/GGETURDRv4C6YMmClgWvIr0iyyLvRJlESaJ6oxWjE6Kb
+o1/HeMeUx0hjrWJXxl6K04gTxHXHY+Oj45vipxf6LNy5cDzBPqE44foi40V5iy4s1licvvj4
+EsUlnCVHEtGJMYktie85oZwGzvTSgKW1S6e4bO4u7hOeB28Hb5Lvyi/nTyS5JpUnPUp2Td6e
+PJninlKR8lTAFlQLnqf6p9alvk4LTduf9ik9Jr09A5eRmHFUSBGmCfsytTPzMoezzLOKs6TL
+nJftXDYlChI1ZUPZi7K7xTTZz9SAxESyXjKa45ZTk/MmNzr3SJ5ynjBvYLnZ8k3LJ/J9879e
+gVrBXdFboFuwtmB0pefK+lXQqqWrelfrry5aPb7Gb82BtYS1aWt/KLQuLC98uS5mXU+RVtGa
+orH1futbixWKRcU3NrhsqNuI2ijYOLhp7qaqTR9LeCUXS61LK0rfb+ZuvviVzVeVX33akrRl
+sMyhbM9WzFbh1uvb3LcdKFcuzy8f2x6yvXMHY0fJjpc7l+y8UGFXUbeLsEuyS1oZXNldZVC1
+tep9dUr1SI1XTXutZu2m2te7ebuv7PHY01anVVda926vYO/Ner/6zgajhop9mH05+x42Rjf2
+f836urlJo6m06cN+4X7pgYgDfc2Ozc0tmi1lrXCrpHXyYMLBy994f9Pdxmyrb6e3lx4ChySH
+Hn+b+O31w0GHe4+wjrR9Z/hdbQe1o6QT6lzeOdWV0iXtjusePhp4tLfHpafje8vv9x/TPVZz
+XOV42QnCiaITn07mn5w+lXXq6enk02O9S3rvnIk9c60vvG/wbNDZ8+d8z53p9+w/ed71/LEL
+zheOXmRd7LrkcKlzwH6g4wf7HzoGHQY7hxyHui87Xe4Znjd84or7ldNXva+euxZw7dLI/JHh
+61HXb95IuCG9ybv56Fb6ree3c27P3FlzF3235J7SvYr7mvcbfjT9sV3qID0+6j068GDBgztj
+3LEnP2X/9H686CH5YcWEzkTzI9tHxyZ9Jy8/Xvh4/EnWk5mnxT8r/1z7zOTZd794/DIwFTs1
+/lz0/NOvm1+ov9j/0u5l73TY9P1XGa9mXpe8UX9z4C3rbf+7mHcTM7nvse8rP5h+6PkY9PHu
+p4xPn34D94Tz+49wZioAAAAJcEhZcwAADsMAAA7DAcdvqGQAABktSURBVHic7Z0JfBvFvcdn
+ZiWfsZMQP0JIKRQSIIaEhHLlPQolHyBQKGBZviQ7NtBw8zjDXUxoaSlQCARIHoYkRrJiy7Ic
+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
+4IL6P6va7OV2EOpcAAAAAElFTkSuQmCC
 
-Thanks
-
-> 
-> 
->> +CPU_STM32MP215Fxx
->>
->>   /* ID for STM32MP23x = Device Part Number (RPN) (bit31:0) */
->>   #define CPU_STM32MP235Cxx    0x00082182
->>   #define CPU_STM32MP233Cxx    0x000B318E
->> @@ -67,6 +81,7 @@ u32 get_cpu_type(void);
->>     #define CPU_DEV_STM32MP15    0x500
->>   #define CPU_DEV_STM32MP13    0x501
->> +#define CPU_DEV_STM32MP21    0x503
->>   #define CPU_DEV_STM32MP23    0x505
->>   #define CPU_DEV_STM32MP25    0x505
->>   @@ -102,6 +117,13 @@ u32 get_cpu_package(void);
->>   #define STM32MP15_PKG_AD_TFBGA257    1
->>   #define STM32MP15_PKG_UNKNOWN        0
->>   +/* package used for STM32MP21x */
->> +#define STM32MP21_PKG_CUSTOM        0
->> +#define STM32MP21_PKG_AL_VFBGA361    1
->> +#define STM32MP21_PKG_AN_VFBGA273    3
->> +#define STM32MP21_PKG_AO_VFBGA225    4
->> +#define STM32MP21_PKG_AM_TFBGA289    5
->> +
->>   /* package used for STM32MP23x */
->>   #define STM32MP23_PKG_CUSTOM        0
->>   #define STM32MP23_PKG_AL_VFBGA361    1
-> 
-> 
-> with the proposal for the define CPU_STM32MP215Fxx
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> 
-> Thanks
-> Patrick
-> 
-> 
-
+----=_Boundary_=--70=88B-1B1F76F7A7D-1--
