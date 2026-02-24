@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65C6EF3C9AC
-	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 16:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6052DF3C9AD
+	for <u-boot@archiver.kernel.org>; Tue, 24 Feb 2026 16:05:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A634283642;
-	Tue, 24 Feb 2026 17:04:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F0FD383642;
+	Tue, 24 Feb 2026 17:05:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ovgyAp1l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SjlzhE9J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0A5383981; Tue, 24 Feb 2026 17:04:44 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 801AC83E76; Tue, 24 Feb 2026 17:05:26 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90AB182BF2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 17:04:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6446082BF2
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 17:05:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-45f0c1f1b54so3640077b6e.1
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 08:04:42 -0800 (PST)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-46391f4c1f9so3371698b6e.0
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 08:05:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1771949081; x=1772553881; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1771949123; x=1772553923; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IjVHBpc2Ybnb5SYBC6NJRLVJKNfz/Q4ry/gz4XON90k=;
- b=ovgyAp1lxEwLZWD1HXLIHVi3HHZEG83HfFTLtKz+Fm1Z+fXoWaZeJpCVpZ/ls1iTLp
- 9zZ8DWggASkL4eWHx+EkHbd0veJIoJeecP7NbqhVRxPDit/CEwb0tyP5DtpZAEdlNhaS
- LaRD01Wdw0yS6iop+sX2Zzf0simeBbLp7JLes=
+ bh=zI5TPZHGIxJxvaH7u6/5UyqdOCtUIvQ4/3d+CPfcHeo=;
+ b=SjlzhE9JvKKF3DGpHXoRJUpL6PNcwPIXhxwvPtiG3h7LnuDXSHmhqDWrPQ+zxPJ2Kg
+ GzV2u4yHF0m1tlHP9E7YeYXQRYxhKAyfPzDoa9kZsc6tdxOL9urNBUBnUjHMjh4F+GU7
+ x+SYC3JmDjR0XNBbyompXq14cUMMa59egqBFc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771949081; x=1772553881;
+ d=1e100.net; s=20230601; t=1771949123; x=1772553923;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IjVHBpc2Ybnb5SYBC6NJRLVJKNfz/Q4ry/gz4XON90k=;
- b=FkDM3qw/jlS1wX+rCHcAPUr2WEbgDw5HiPpNBtMArp4YlnCZtSOEflBkv5Y/yI8+Ms
- iip8RuJltMv9F5C9aj41EaFDDXkZ2nN+vMnd3RwyChLLt4do1YWt5n32RpCNL6Eh/sWv
- 2lPRg5ugMOk/3hyoXKbNEPTjAdpaQV8wmLnv2nr5Jxv3bILeG3o3nggxIwfeTv4UaYvu
- M0XvWkuLEu0Y0Pse74gdZ3JPf1/HK4POEo8aBUMomXhD9Whn3lBAuvKbhd9Nc87UQclO
- 4pHza5PVHqGbMsBzak9iIJBd37jrDtUUIWgp5+GV4X7o0L1wSK9Z5DWXhJsSfcm3Oj6W
- 5YoA==
-X-Gm-Message-State: AOJu0YwS++j7YlrMnjx1bfjFPs0oNzCpT4ExQlYd8njc7IWeBoXX+lv1
- a6RMRZ+0QFpIf0luHOpfqeElqYpxsFdywEuyn9tRpmFJuSuhJwTPfDguqosq1JhsSSA=
-X-Gm-Gg: AZuq6aL3tM9l2+gFT2R4Y6vdJW61Hdnl1XoaTmdUzypoaIR15CDxq3zQAbQ9AIt8qOn
- 5GnJ1PiXrzg/fiNrlOwiy1vELaRiX+hM30A22CZykh86tmYsg+QYJG3Q2wPzi/Dx6qbAR0hpx5q
- xVLQu1SsUIDB3f/r5IbCI0TPwnJlHaVtH8LdX92fxnycx3jmwj3hxhBEUcdsPfwVH989aWQEp+k
- KMjswnjRHfdUAnaJ+zl2DvLVEEwcOuK6ybGJiDOBNZe5/plkQpx89ljHYMD4JNs5Yn+VyE4qMdZ
- F+0ZvhNGmv6aFnUunNLW3iW1FvEPnHX1av3CmIRlFvI6hLHO9S4tl1NDJBU3MA81PpL4wOGZELE
- GM2rUiCqd8NZhwiq+sTBuNw1fQ7BgaIJXHwcxJ+qlg5+sTj7emyC9IR5cdieTqpVxUCEvedCdPb
- qzlir831oq6O8F0x2ELS3KbwE/cZKgnoufgLse5ZBsk9JauiXWZgZ1OefcKmuY032N+RIs6f7zG
- IfhPtTikWqoRYfK37CcpUaR0SfP8FaUQlFD0DR7CzfcJyJlRS3BfwAByye1Ew==
-X-Received: by 2002:a05:6808:1824:b0:459:b564:e20e with SMTP id
- 5614622812f47-464463d1b79mr6915583b6e.61.1771949080683; 
- Tue, 24 Feb 2026 08:04:40 -0800 (PST)
+ bh=zI5TPZHGIxJxvaH7u6/5UyqdOCtUIvQ4/3d+CPfcHeo=;
+ b=JgQn6Y0Ea0QyA1tUDZ85wnw/aYulvHOyPNa9zj5IwYWeG5z0l+66PWq/+BZpwL+P/P
+ ia5Mevx6y2hHdNKeUYXLgWxOZOz2c4Od2TjW4mOdZHbdSTcuXhWJNc1pS9Hp3PUa97i2
+ izMCtG/SaR4dLxZdWHhW3/VakoBex6328DnPDDUVRzEPVjAIsnhMb95Ktv+3rXCj2nXY
+ o7ggYLEalGyrL+JrRsf1H7p5lpStjb2CiGVZjkByVAq7GmABepFgEPHUVXClseP896Ff
+ pdDeuxtInoLaGc6YFAG+HWv611IcEGse+2iZaB8ZbJv7NwZ476V1jPe2oNELi6zDm3qL
+ hOkw==
+X-Gm-Message-State: AOJu0YxCtwIkt9jeWnaiZBuEU3vt2R9k+yq6m9OUBxmsBmncDi4i+0hl
+ LYjNOYa8vneOWbhWMNVEzNet+zbAq+rcmGrohItU+fXeEBBSvwOUfte2IGG2POGKvfg=
+X-Gm-Gg: AZuq6aI9wl70poA4ByQmXu6e9I0Rnu+LfZCgIu9rBLkym42KE/2LIN6byso10etTmFQ
+ 8xwAUoEnr5kRu+7w553SWd/YoZ0h98G2mkD3U3rRWntlbro58dqrbKm73m1vztUV3UFE35Z+B3P
+ nbyg0wDVJLUVnHnI7F+iUJz8oG++5z9/VpSj41QfSiIQLODks8Tij/1UuIolzChxejMIePf0lAl
+ 3g2l0ojt8eOZcZ0FDn5eeTyFDO/74vWCBlKAK12jqz4jiAJLhALBCO9ar1I0OBuA4EfpHDJoqRN
+ ehhYWf6UrwRhuBrS/0zTERudhiSosu5JLU7uUA254r1HPb4Roeqdedx580CEbfrgSCLLbbJAbWh
+ dwN91OjzNEKYg9XPf6et0YxI3gJ1YcmUV1Odj8L00U1U2+2GTfP+WjPDBPciRk9LQooQXspYP+Q
+ nsqtAFFX7olNIqOiXZvG9Yx4C5wVXTKLCww0OMIYEgeSlSpW8/15i/QWFcIoLxAn6yxSNZBsQGh
+ ElB4o7xYmRwVFwRO1TIb8W5jdCgjU3ovvoJf5ZoaqjLaX6C3ySEPE0TdEH7ag==
+X-Received: by 2002:a05:6808:150d:b0:44f:775b:729f with SMTP id
+ 5614622812f47-46446226f70mr6052797b6e.28.1771949122658; 
+ Tue, 24 Feb 2026 08:05:22 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cf9f666sm10122997fac.7.2026.02.24.08.04.39
+ 5614622812f47-4644a17aa52sm7285579b6e.10.2026.02.24.08.05.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 08:04:40 -0800 (PST)
-Date: Tue, 24 Feb 2026 10:04:37 -0600
+ Tue, 24 Feb 2026 08:05:21 -0800 (PST)
+Date: Tue, 24 Feb 2026 10:05:19 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
- Bin Meng <bmeng.cn@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Jerome Forissier <jerome.forissier@arm.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@riscstar.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Subject: Re: [PATCH v2 9/9] x86: Add cleanup_before_linux()
-Message-ID: <20260224160437.GS3233182@bill-the-cat>
+Subject: Re: [PATCH v2 1/9] boot: Create a function for final pre-boot steps
+Message-ID: <20260224160519.GT3233182@bill-the-cat>
 References: <20260224142553.1608883-1-simon.glass@canonical.com>
- <20260224142553.1608883-10-simon.glass@canonical.com>
+ <20260224142553.1608883-2-simon.glass@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T7X1ayC2RSMplue0"
+ protocol="application/pgp-signature"; boundary="WtrIj1ln9NFpgCOP"
 Content-Disposition: inline
-In-Reply-To: <20260224142553.1608883-10-simon.glass@canonical.com>
+In-Reply-To: <20260224142553.1608883-2-simon.glass@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,45 +112,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---T7X1ayC2RSMplue0
+--WtrIj1ln9NFpgCOP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 24, 2026 at 07:25:51AM -0700, Simon Glass wrote:
+On Tue, Feb 24, 2026 at 07:25:43AM -0700, Simon Glass wrote:
 
-> This function is not present on x86, but there is an x86-specific
-> version which is never called. This is a bug, meaning that APs are not
-> parked before booting.
+> There are various functions which announce that booting is imminent and
+> do related preparation. Most of these are arch-specific.
 >=20
-> The original weak function was added in 2012 by:
-> commit f30fc4de4160 ("x86: Add a default implementation for cleanup_befor=
-e_linux()")
+> In practice, most archs do the a similar thing. It would be better to
+> have a common function, with perhaps some events for things that are
+> really arch- and board-specific.
 >=20
-> At later change made use of the weak function but was actually dead
-> code. The Fixes tag reflects that.
+> Create a new function for this. For now, nothing uses it. Be careful to
+> avoid using BIT() macros which are not available with host tools.
 >=20
-> Add cleanup_before_linux(), making it call x86_cleanup_before_linux()
->=20
-> Fixes: 99a573fb326f ("x86: mp: Park CPUs before running the OS")
 > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> ---
+>=20
+> (no changes since v1)
+>=20
+>  MAINTAINERS        |  1 +
+>  boot/Makefile      |  2 +-
+>  boot/bootm_final.c | 12 ++++++++++++
+>  include/bootm.h    | 17 +++++++++++++++++
+>  4 files changed, 31 insertions(+), 1 deletion(-)
+>  create mode 100644 boot/bootm_final.c
 
-We're at over 5 years since 99a573fb326f and over a decade since
-f30fc4de4160 and I don't think it was ever actually called. We should
-just be dropping this, not suddenly calling it.
+I don't think a new file for a function is worthwhile given the linker
+optimization related fun that then happens (even with LTO). This should
+just go in one of the existing bootm files.
 
 --=20
 Tom
 
---T7X1ayC2RSMplue0
+--WtrIj1ln9NFpgCOP
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3MFQAKCRAr4qD1Cr/k
-Ch2JAP9Sl9A0XdBA6UuUhj9NWhqycJitaBgNxVOpwtsoA3RdOQD8CSowO4o6RRvS
-b0fAUakPO8rLhOZ9j5PTkdzXEBHZwwc=
-=0CVx
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ3MPgAKCRAr4qD1Cr/k
+Cn70AQCTca0/U/bOW1NuLGtLZ0/1r1gT+svzKysSl4bCDNJv2gD+IPenpimdi62S
+wf+7gx9GA4TK6T3956gBfYYrS3MCsws=
+=fuzP
 -----END PGP SIGNATURE-----
 
---T7X1ayC2RSMplue0--
+--WtrIj1ln9NFpgCOP--
