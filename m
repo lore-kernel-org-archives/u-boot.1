@@ -4,120 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA282FD45F1
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 21:13:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C89FD45F1
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 21:35:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1ACE8366F;
-	Wed, 25 Feb 2026 22:13:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 6292583642;
+	Wed, 25 Feb 2026 22:35:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="aD+jBAlS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OTGFO2MJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEF6983AA9; Wed, 25 Feb 2026 22:13:54 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 644188366F; Wed, 25 Feb 2026 22:35:08 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE78782A9E
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 22:13:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A28082A9E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 22:35:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=han.xu@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qLGCY+At2VDWKalbYIXmhyAQ7KnxAiLXMyd5uYELe2K1iAjMa9O45uPTgCpUiz2sRYchMybOdf+EdqykRru+ejyg/foewTGAyMrNj5U20qbTY4SLzlWtruLF3Ml4P7Ny0dxUezBVEzRXHPf8iY/+6Oy6gstH0A4EMHHQSz6LyjrSBpap/4/hace4OfJm8Wlh6UXEg+nVRizuhPjNPL5IdS06w90ZsP7HW8AMGrljjSHqL99UTbPeSTbuuq4fzWwZSSwEmn9MZCtNjoYzuIbCeoT7u84Vdog9Fz9ADsIDbnu+NfWNqQHcYvt6Q4+/Z4yqYU5Gz6goEqP9jXSbOoO9Vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yppBI/0rATmKpRrOt5zcYp9gtSyrjE2bB2Hl/kOpAAY=;
- b=EvAWwab8NNKXHWXXbeaPEXJpIarnWK+E8Ge7RS+LK5QK5FrXSMADV9ik1IegFpK/T0MOMLzNbHZD48kWRw/jBBap/sM9mh0vRkfM3ZzVhVz6aTRAZHd9+ar0aZj9AVAsZPLZNbHW4IA/1OQBqKXrYBLMES8RStMVIA9bZ6HxNZig21Vklbzt1RpS94SMEKJdehaMgBXlzthXBSHMNzrRmR6fKnoxC3l2TvrV8r7K68hn+s/rhk/ea2+8o6oefGrqCRhyOa6yZRnyDyfFei4EPIsGtpl068c3/SfiTJ9cY3a+TwIjGQZYVi96YxAdBSRM6uB9SUEQxfWqqg9dN+If5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yppBI/0rATmKpRrOt5zcYp9gtSyrjE2bB2Hl/kOpAAY=;
- b=aD+jBAlS0p5SJCVXW55VEWi3Xp4kHrzN9JIZ3pYiw5TPi3p71wumFnlGuwdAhAdRIHpFU6uP1ZgmieCSN5Z/yujF/1XSbKxVOu90AVXQRdKjrfJ3tXXtlaQSCXeaGQiEscCicq9BGbdW4I9Qv33h5IPf6YM76Cw88gVOEwzdXO4UdqymWBJG9TN4VVfDelo0dNjjR4ftfSNnLozlFRTWRIyFDnfhhy2ulNEzCaH/CnxyowvUE+f1g+1V1HtWfYLwilA5s+YuOR1FBQ79gHiciOddkLoUQG5dKFwBJideSUvIB7AQ4/kCk7svZmxikxAAhBYagN1fo5fO7czh9+uBfw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from GV1PR04MB9071.eurprd04.prod.outlook.com (2603:10a6:150:22::11)
- by DB8PR04MB6955.eurprd04.prod.outlook.com (2603:10a6:10:11d::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
- 2026 21:13:51 +0000
-Received: from GV1PR04MB9071.eurprd04.prod.outlook.com
- ([fe80::7010:9f6:4361:43bf]) by GV1PR04MB9071.eurprd04.prod.outlook.com
- ([fe80::7010:9f6:4361:43bf%4]) with mapi id 15.20.9654.007; Wed, 25 Feb 2026
- 21:13:50 +0000
-From: Han Xu <han.xu@nxp.com>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Han Xu <han.xu@nxp.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] mmc: Add support for eMMC 5.1B specification
-Date: Wed, 25 Feb 2026 15:13:32 -0600
-Message-Id: <20260225211332.1896252-1-han.xu@nxp.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SN7PR04CA0074.namprd04.prod.outlook.com
- (2603:10b6:806:121::19) To GV1PR04MB9071.eurprd04.prod.outlook.com
- (2603:10a6:150:22::11)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d18c654458so37164a34.3
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 13:35:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772055305; x=1772660105; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yYtu5Zka3kN93H3P+c/6Cu2PbcenA+/yubdYjIBcb8k=;
+ b=OTGFO2MJP1XTn0QVhvztBGmKngIjKKxPrR2dS1R+rlxmcVlIv5v0cJ+mDlxHYqAhsl
+ 9/j/Nun3ljZenCXa5uWZ60LGRCq7qT9YuUMsBsITDyXYocNfiDQsn3bvG2MRE7SsdMQo
+ Kdzbk3RiC9BYkYIdbflVcLoz5WfRH4sRBGYqw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772055305; x=1772660105;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yYtu5Zka3kN93H3P+c/6Cu2PbcenA+/yubdYjIBcb8k=;
+ b=jMm6Wc/ATDWRhkL0o5o/N+w4dSlgGEVmHJ8SYFDS3IN5Dkpu39NGbk9KBpbnRLynew
+ 3i0Hgo8KgGlf7jPFxEe41Be3NPH4ekiz8v9SZo4PJ2NQg+F9z+eK88mm0to6XzGVrmB5
+ xEJEVEoctBKrQbzi7aFVtGw+Dy4DP9ZocQk28c2KlDZuwfit3UbkNDshNeG2IHLyWq9X
+ TVvHbmLQd3Sy3sagoISQp1Km1uQS7QImc4I/Z5ieAVKymGqeoYobH5D9caNtEdG6+/yS
+ zc50Jc1VYJU+UT2UwG1RmmdFLeypAjZf7VKfGrpThQ02T0dDOuDqF20kbF8Y3ZmWuQew
+ iRfg==
+X-Gm-Message-State: AOJu0YyJC0FC5cSxTglZGeaD/GkM0heb4s8P7z+miN67GWtk6MNrmB90
+ B7K/MsqBDeb/C5Dhh5E2WUuDT/uZoJ+1NIAk9T4D8ktuisQmhRZLS/6Pl/2r1Yp5XdP+Memug3t
+ Ky8ZYJN0=
+X-Gm-Gg: ATEYQzxJKBcB2cQjQGtYVx18AYgpQycbnCebsK7Kl8hQiN13G7PZftkLqBu4BHSjJ6N
+ CUzkorJqhPbCaNYqoGkgxFhAB1z3CIT4Oxoj+LunytAqICLB+UYEHHjXzuzjD8wTp8+h8UnLMC+
+ idG4wu/Hy5molA1PrjW0qg+nZq/unQxJd1a7mKZAVanDRfbUQKP4Cq+R0jqkrIgkGwpAEUaNb8p
+ mZnfZuvjQRVS2TL3J7quwwiTe8OgzKuU46y5rXeYZIiutWNLJVCwLtyKOqrD+ri47C7UibwnoUI
+ xTU6LpZzS+FSExYg1h+oHyM0tBugmIU15xfJNB33UCtpxfnJb0c0YhOgMnM5LXzS3HHSnDHcnMm
+ KploNo/0v3hD6BT/IN5Ah03NHvBonDxwhsMVyM4UbV4khQGkcg1rc7DmEFlKXSaabmXUheZaTPq
+ CdfowJ4i7sdYRQ7+lzNb89ujo4V2lzjI/Geb9VRtsxf+VCOi9Sy7eV1h7uVfbO69TMxFT6qKrkc
+ GhKtPjlRSZLDhwiVBeVlRVMJfJz1czw40pV0THbrfcWPtOnQUk=
+X-Received: by 2002:a05:6830:6210:b0:7d5:1850:b26d with SMTP id
+ 46e09a7af769-7d52bea886cmr9543150a34.0.1772055304590; 
+ Wed, 25 Feb 2026 13:35:04 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d586625e6bsm111053a34.17.2026.02.25.13.35.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Feb 2026 13:35:03 -0800 (PST)
+Date: Wed, 25 Feb 2026 15:35:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ludwig Nussel <ludwig.nussel@siemens.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] bootm: fix booting kernel_noload image
+Message-ID: <20260225213500.GW1593142@bill-the-cat>
+References: <20260224155712.286317-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV1PR04MB9071:EE_|DB8PR04MB6955:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0a73f1b1-e5e1-4666-13ba-08de74b2c5eb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|19092799006|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: NzSlKT2cJeBCMBf/qRMIYp19uh+3vviBNUp/WETjsxc6ROAISUx2JT2ZAZivitDxwx1ljoOhqE8NyOiPqe3O/KcF+UOJv3AEpPSqk4wy17Hk/dvMtd6qWfehX/T4uJtEg1YbnlqRbJIbP3MvYT5OnatkeTLa06/a11EZQblPCo8ErHB51JmqEBexypbqdLyNTDxRSnCEYzX+J6sOQky8KMgabUmEnXvzFfXNi0kkjBwIRlSR5yVQJ28pTYa7X0zVSaSVvCSm53wPy6Y5qJ2FCZq10WhTCwW9fKV+VSjONpOqsDcUZF2/r3IuuulxKbp0Z/YUlq8VOx6YtpXbX89fkCy+K/OHFLsrxAK9TryMHvGa56jbPLrwo2+2cYhKnHLFZMQNxojDIPG56s1jPcYWwwpcIi3+tA14qnzKs5iLlNjQv3Lzb5nyfnE0Rmdw+MPl5eUq55/JFTqCL///2pr0aY9ugYgIphVF8k6cZQDHCfXgjLk+oSoyqMtM54zB41WyG/MPbslvxXgbSBbD0o5lYMTvlRj+agXSVwMX7jx735TInn2q7bgObQLCqfrSikW0Y8m6CF6pBsgyzTKBYCI6e+icouRqblirE7ys9rg33iDZZKxhHNuDMAJHe++uxG6sxbMKunUIc8NMeIvzU1WoKWyvjuErZMIetGuSMgHqnXAJhs/V2AI0hz2Yve3y+wZFBUXu06u7JMOh5HYTgrQ7bS3MCDzMiOqRIjy9i433J3ZfsuVnxmEr2SNC4yWIZpic2sO+Fs3h/l9RP7BYJPQPCB+zjYeJOtFsepcNB9/M4Oc=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV1PR04MB9071.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(19092799006)(366016)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oeecpdHN5ddcZWTf6gdBZT7R+YmvJG+RVO82m4fpKuYCwqbbM6bKGvLTPN6M?=
- =?us-ascii?Q?o24BdY7l7n4Zhj9szCRsgUTjA//3pG8cKG6ItpadH6gDgP1dRCuCVahGiB2w?=
- =?us-ascii?Q?3lkQmq9oA16smpv7OhpXMco4TQiiA6P/9wT4hPsyJJHemypRQ8dSlVsd5UBQ?=
- =?us-ascii?Q?Dyr+5QZzdLCe9YVRXYKd8Qf8J/St54UtMLxyX/76ihj6FB3wp7IRJGPh+NcO?=
- =?us-ascii?Q?Ovv2+T4uMzWkjVPxPcOJnPikufUJIW1sg0rKgzIkhReyWrsowGm4zQGJb3gy?=
- =?us-ascii?Q?gLlQ3KkqguenqZgG8K1iCJa8devnCoki4qEdxJc9h4QuFB26TTKr/2dEjRrL?=
- =?us-ascii?Q?fHC2qIhkFdnG2f2KH6bXkjyjAU2CYTYTiWaGqeIANo/SCPUZGdC5+MeTlU9Z?=
- =?us-ascii?Q?Ji9myNJaCDYhppiFafo5e8eSLv6UNf4wOthGyM5wCPiyhK6nmTNGydDzp3yQ?=
- =?us-ascii?Q?FL+hz5YoQEXz8o014KnDxFaEtj7fjVf4Slfnb2qVcfTLh71CPJCBuR4jR2UR?=
- =?us-ascii?Q?PNX24ofXU92/oHJf2a1RtnNGzT6v29lBqRzuiiS+na8RPbUwi1rtBflcQUz+?=
- =?us-ascii?Q?N1Ujqnn6zU+Si1Mwggvnawa3VMr4PEZIFxyNjphoHOOTKoGBTDZvpYeIwBBT?=
- =?us-ascii?Q?odOdp+9Q+EshTI+p1SYiERjb+S1SXKtxrWXtj4PsoMQ9DtxuUjzA63PYEh6L?=
- =?us-ascii?Q?xuo4Vl9eAoSAKjolLdlvsASRhqjMNGCTN4mXGjRihc2PszrdWTrNgPFuqLJd?=
- =?us-ascii?Q?MW4UMtlQ5/q08CvpPqSDMAgd8Bu1gypwkeRfPC6z43GuApRQ0nzFC/kSn4Wh?=
- =?us-ascii?Q?dwVcmeex3sfLLOy3Shc+eABO4NrLWqe/ZI6iUXWyGDwq4MGFSNJOvU9MQUqX?=
- =?us-ascii?Q?TaSa8BNO3L1wVgN9QDGPEeqV/qLm1/pMFB12q6EspavbA2xsFuOkCmtddo7+?=
- =?us-ascii?Q?gU4lIrEMRKcXWaWTh6IJcH/09Pl8H75zSCHUV7BppSknY2vY9Ben813lZ48q?=
- =?us-ascii?Q?jZIT5HZwxzm7AKhj69SHFarQZujDbWy5jbarFMD+Ia7oDXh1JyEqRH7617dO?=
- =?us-ascii?Q?f9fVAe2wOsLzk+eHj2P5cLSHA+oUTAlJk63Z1i/ze1vzm/58ZMo/nProJqi9?=
- =?us-ascii?Q?EpVsTUF5fOJUQLpBRROVHXc3JV5svPO4gwznSykhNRcbkUwH1cI9JQL50m7x?=
- =?us-ascii?Q?3kpUJ5Pvq1MuhZiVRKLlbT8x9//8nsENgxLhr2UAUZHX1cZd3pMH3sWhhY3c?=
- =?us-ascii?Q?WsZrzEsp+EHn0pNHxpDefYSb90MeunHnAbFicwif3aZrizdLNDoBc2C5zdYd?=
- =?us-ascii?Q?d7p0iGKYDM4vV7Lu4Q5APyp6S67Ee+xTYL54zAGsvJJ/MFygt37V4VlPdnjz?=
- =?us-ascii?Q?9Yw0fNSouzvL8sMgdNAg7YB4J1ZG3oZg24HxZDfAA0WNTW9WFOZqYGwPMZbj?=
- =?us-ascii?Q?H36qaw0Yr29zsg8mgaF7HaG1r2Yc98+IMNTP6wsgogIXiO/j5fJ9rAl3FGBB?=
- =?us-ascii?Q?WVsEBh5B8EG/LEZPGG/XVeJjIEUMmbuq4UeBW7OVxmm09fNDNzQGDmyGaJF/?=
- =?us-ascii?Q?W+3d7ncAPjYwGsbUs1m1AVfrXrlELoEHhPBkJBd9Ve333SnoWrt22Ii9Xx3K?=
- =?us-ascii?Q?V/OoUxjzVzDinX7MRBqv7H+em2W2P4yd3HPMxU/UgQgHk3BfmwV5DNBCsJeH?=
- =?us-ascii?Q?9+/AFFEC0Y3JUeVbPwDgSp1bwOO9tq6/bp6GIQWBSCG8n01B?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0a73f1b1-e5e1-4666-13ba-08de74b2c5eb
-X-MS-Exchange-CrossTenant-AuthSource: GV1PR04MB9071.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 21:13:50.8560 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0wXI6C187BW4n+HrdeY26mWNZonU06WH0yBCDkyTq2gv8dEOrEH0GigayIGPTnlt
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6955
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="J2CLG+W/Ro7HB82/"
+Content-Disposition: inline
+In-Reply-To: <20260224155712.286317-1-ludwig.nussel@siemens.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,51 +97,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for eMMC specification version 5.1B by defining
-MMC_VERSION_5_1B and including it in the version array.
 
-eMMC 5.1B (JESD84-B51B) is a minor revision of the 5.1 specification
-that primarily addresses MDT (Manufacturing Date) adjustment for dates
-beyond 2025. This aligns with the Linux kernel commit 9996707822f82
-("mmc: core: Adjust MDT beyond 2025").
+--J2CLG+W/Ro7HB82/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Since the manufacturing date field is not currently used in U-Boot,
-this change has no functional impact beyond proper device recognition.
-It allows the driver to correctly identify and initialize eMMC devices
-that report version 5.1B in their Extended CSD register.
+On Tue, Feb 24, 2026 at 04:57:10PM +0100, Ludwig Nussel wrote:
 
-Signed-off-by: Han Xu <han.xu@nxp.com>
----
- drivers/mmc/mmc.c | 3 ++-
- include/mmc.h     | 1 +
- 2 files changed, 3 insertions(+), 1 deletion(-)
+> FIT images don't work without having to explicitly specify physical
+> load addresses. Digging into that it looks like a flaw in
+> bootm_load_os().
+> It duplicates images->os for convenience. However, the code handling
+> "kernel_noload" images then updates the load address in the copy with
+> the value lmb_alloc_mem() returned. Later there's another call to
+> lmb_alloc_mem() that uses the old value. This leads to havoc due
+> to subsequent calls of lmb_alloc_mem() picking too low addresses.
+>=20
+> The "fix" is to mark the local variable const to avoid accidental
+> assignments. This works but IMO the logic is still flawed somehow as
+> this leads to overlapping lmb reservations. I guess the fixed
+> reservation should only be done when the noload path wasn't hit.
+>=20
+> Without the change:
+> + bootm 0x40200000#qemu-arm 0x40200000#qemu-arm 0x40000000
+>    Using 'qemu-arm' configuration
+>    Verifying Hash Integrity ... OK
+>    Trying 'kernel' kernel subimage
+>      Description:  Linux kernel
+>      Created:      2026-02-24  14:10:09 UTC
+>      Type:         Kernel Image (no loading done)
+>      Compression:  gzip compressed
+>      Data Start:   0x402000b8
+>      Data Size:    12227440 Bytes =3D 11.7 MiB
+>      Hash algo:    sha256
+>      Hash value:   7ea661fdecdd1127edd419cfbf8bff52e2d5ac55c...
+>    Verifying Hash Integrity ... sha256+ OK
+>    Using 'qemu-arm' configuration
+>    Verifying Hash Integrity ... OK
+>    Trying 'ramdisk' ramdisk subimage
+>      Description:  Initial ramdisk
+>      Created:      2026-02-24  14:10:09 UTC
+>      Type:         RAMDisk Image
+>      Compression:  uncompressed
+>      Data Start:   0x40da9528
+>      Data Size:    1067114 Bytes =3D 1 MiB
+>      Architecture: AArch64
+>      OS:           Linux
+>      Load Address: unavailable
+>      Entry Point:  unavailable
+>      Hash algo:    sha256
+>      Hash value:   2a711dcb5f58615187645ccec615c67eddcfbb3138...
+>    Verifying Hash Integrity ... sha256+ OK
+>    Booting using the fdt blob at 0x40000000
+> Working FDT set to 40000000
+>    Uncompressing Kernel Image (no loading done) to 13a400000
+>    Loading Ramdisk to 400fb000, end 401ff86a ... OK
+> device tree - allocation error
+> FDT creation failed!
+> resetting ...
+> Bloblist at 0 not found (err=3D-2)
+> alloc space exhausted ptr 400 limit 0
+> Bloblist at 0 not found (err=3D-2)
+> [reset]
+>=20
+> After:
+> + bootm 0x40200000#qemu-arm 0x40200000#qemu-arm 0x40000000
+>    Using 'qemu-arm' configuration
+>    Verifying Hash Integrity ... OK
+>    Trying 'kernel' kernel subimage
+>      Description:  Linux kernel
+>      Created:      2026-02-24  14:10:09 UTC
+>      Type:         Kernel Image (no loading done)
+>      Compression:  gzip compressed
+>      Data Start:   0x402000b8
+>      Data Size:    12227440 Bytes =3D 11.7 MiB
+>      Hash algo:    sha256
+>      Hash value:   7ea661fdecdd1127edd419cfbf8bff52e2d5ac55ce...
+>    Verifying Hash Integrity ... sha256+ OK
+>    Using 'qemu-arm' configuration
+>    Verifying Hash Integrity ... OK
+>    Trying 'ramdisk' ramdisk subimage
+>      Description:  Initial ramdisk
+>      Created:      2026-02-24  14:10:09 UTC
+>      Type:         RAMDisk Image
+>      Compression:  uncompressed
+>      Data Start:   0x40da9528
+>      Data Size:    1067114 Bytes =3D 1 MiB
+>      Architecture: AArch64
+>      OS:           Linux
+>      Load Address: unavailable
+>      Entry Point:  unavailable
+>      Hash algo:    sha256
+>      Hash value:   2a711dcb5f58615187645ccec615c67eddcfbb3138...
+>    Verifying Hash Integrity ... sha256+ OK
+>    Booting using the fdt blob at 0x40000000
+> Working FDT set to 40000000
+>    Uncompressing Kernel Image (no loading done) to 13a400000
+>    Loading Ramdisk to 13a2fb000, end 13a3ff86a ... OK
+>    Loading Device Tree to 000000013a1f8000, end 000000013a2fafff ... OK
+> Working FDT set to 13a1f8000
+>=20
+> Starting kernel ...
+>=20
+> Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index c5705f4f215..f0e38efb262 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -2343,7 +2343,8 @@ static int mmc_startup_v4(struct mmc *mmc)
- 		MMC_VERSION_4_41,
- 		MMC_VERSION_4_5,
- 		MMC_VERSION_5_0,
--		MMC_VERSION_5_1
-+		MMC_VERSION_5_1,
-+		MMC_VERSION_5_1B
- 	};
- 
- #if CONFIG_IS_ENABLED(MMC_TINY)
-diff --git a/include/mmc.h b/include/mmc.h
-index 51d3f2f8dd5..9509c9e9543 100644
---- a/include/mmc.h
-+++ b/include/mmc.h
-@@ -54,6 +54,7 @@ struct bd_info;
- #define MMC_VERSION_4_5		MAKE_MMC_VERSION(4, 5, 0)
- #define MMC_VERSION_5_0		MAKE_MMC_VERSION(5, 0, 0)
- #define MMC_VERSION_5_1		MAKE_MMC_VERSION(5, 1, 0)
-+#define MMC_VERSION_5_1B	MAKE_MMC_VERSION(5, 1, 0xB)
- 
- #define MMC_CAP(mode)		(1 << mode)
- #define MMC_MODE_HS		(MMC_CAP(MMC_HS) | MMC_CAP(SD_HS))
--- 
-2.34.1
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--J2CLG+W/Ro7HB82/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ9rAQAKCRAr4qD1Cr/k
+CkubAP42W88R3EOZcTEm3AbMBKd1Mvlz0ehahoppAcSdSpyh+wEAsYGUgDS6WClC
+P4z5iiYm+U0lzhiZT0T7Gh2mXHFuDwE=
+=hadJ
+-----END PGP SIGNATURE-----
+
+--J2CLG+W/Ro7HB82/--
