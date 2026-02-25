@@ -4,97 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B069F55439
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 02:11:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C396BF5543A
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 02:12:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF77983D8A;
-	Wed, 25 Feb 2026 03:11:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FE9683E61;
+	Wed, 25 Feb 2026 03:12:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XWd3z9me";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IleWri+f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94D4583DCB; Wed, 25 Feb 2026 03:11:10 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id BB76D83E62; Wed, 25 Feb 2026 03:12:05 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5003383C39
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 03:11:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 093B283D8A
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 03:12:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-59e65b8e268so6363447e87.2
- for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 18:11:08 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1771985467; cv=none;
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-38706b10b3bso61800291fa.1
+ for <u-boot@lists.denx.de>; Tue, 24 Feb 2026 18:12:03 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1771985522; cv=none;
  d=google.com; s=arc-20240605;
- b=kFquSs4SymGPN5hrvS0Zwj1sqcklvrcB31unfuRCxJty/LEutilYe+c7LpOgPaoHDM
- cYt9SIU+ZbnrSVbFOssOtcuN/k9yAdYDTpbHe66unNOdrjwduSvuRayWQSTkjg9DZTjx
- BnIrC+ifAvHCRSzNrQ4Cq/cmEqVCws7ztkO7u5CzXoOXWjodAp6PJIyJSidBqz7uulzj
- MpGGMbn+e5uXn7/o0X4GiSnAfsKICmgXIAVByzY1Rx4DWIqKkz2sxs4QxIOuE3wMDaui
- KuUdQVV6dFiz8TIbMc5bqDnr+vMR17UNbTYUj57TAkblOPaNk/UiOGol7CkCX8vpu/Zy
- m1IQ==
+ b=IIg1Ab0tj/UiCkOZKDDvfd4bKDbhFJQIGG6GgiZ5cScjJNQpkHnTh3lHgLz/uOL/vT
+ a/jS4NIHmYBdesQlVH/CULkthno/ZZeRxyovV/RVJWxnUz8HTcaoHy/EfLgE8FK8nuRc
+ 6ZltvDKxA0jtR4J7DBJQ2clGbL4yXuvrDcVZeHR0EDMPv1lWBBmF0VLvEqPD1dCMqRdL
+ EXdKvwJXYfKWjFQ8GHeSZed/kRM12X70PIxNChDSsddfQ6/1UVeWbHaEMdzk7k2W78wX
+ WtSVPxTbXsZgVthR5LT4U5nat0oKu5wkXVAVqvGXQnjduXeXw31fQ68nW1j6PDkv3U99
+ hywA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=T9DgXH0tIKGwGlWyV4CXioovLCTk31acg66El+Pdssw=;
- fh=aavfnXacPzGMlWFMAegE47Ir0j69hy01IrlJMb2/G9g=;
- b=aYOshcm8x1jeMspafcUbz/p0LUp0Nf/MbDtXnKNDHyu5XlAiIYYfhwVNUhcabW84WY
- XIJi5KoFbzRq3T4M7cbND9GtaBIrHOSRxia05vi8EC3qRmmeVzzO9yh6cSYmMKfRa8Co
- eFCauo3so0Sv61neriDI7RCV3zM4GmOYkb8SwQXLWzR536bQY5pZ9NBYkWFLOxgKyvpM
- 7+J8Yil3rFMlP/ylsesVjwcaH9hHZLvgbw3Rl6AgV+0POvm4fdL83LZTM5oGMe2yK9PY
- yRsDop5se6Qh2nFwMsTa0bcOCsuX9cdD3L5NXF2a+fY1g4+HtpVmtpZ9jMdlm1kgCl/L
- oAIA==; darn=lists.denx.de
+ bh=o0CnUAgHSJUUad7/B1faEWh50lbFGnZZLZqR2hEYmBk=;
+ fh=AuDiTlI0tnweyyQBHRSvAo6ZtNIXxucrGMG0qe7ym8o=;
+ b=XTld5zkmrrqf/k/d/fTHqxsJ79c+kGd4Hc5zqxx1o9tJizICIT9nJa+iLcqWjwyK9t
+ BsTEXcThqDlaLVNi2XWzwENusXk+7LC1NGbL81zOhjT/BEfuxmQPIVQ3GIp88mCgmSOv
+ s40ocWRTeXxcGZ7P7i+k/WOr2CpV3YcYVhsmF7cG4cEBBrSAQK4ghINUQjU6bx7R7OmS
+ u/kipDi6w5HzWaRAK36j/cJL6PhwvRRgHBoGFdv/YXpY2ZH6eQRXo37Kwh7W0vjYDeQa
+ l0+HoaAORRWt4nlTk/qtiSQ4zqxJL8tcnH9d9nHoSax4eYX6T/XmF8iwr0m4G4szviED
+ 3keA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771985467; x=1772590267; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1771985522; x=1772590322; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=T9DgXH0tIKGwGlWyV4CXioovLCTk31acg66El+Pdssw=;
- b=XWd3z9meE5o8l7zooCZv/chOs2snqOPR8QA2gT1kiSPVHxdZ5ttyEN/3/2t1ajkj2Q
- ZbqslQEQ/roNundYn64eYwT6wORF7uO2xBvQL/uiokvPbb0i4E31pBUcuH1YDdsvIyyc
- Gjmis+pX+lYpGJ16k7ulEOJxNkh52/XGMpLE1dq14XdA5vFTIHju/haSI8kHFl55HjDs
- uEddkjIYGy0EWFo4qOA7Vnyd37sYX4gra7JE/Emb9jAiecjYdKS6Vb+YA8vsfUF/w2XC
- gFX+jv7EzDzd4kYodWV4TKpHNtfCzUoUOQsXzvY2XQyAEv9H6p+MMk2+MI7HhCzVMfvy
- aKIQ==
+ bh=o0CnUAgHSJUUad7/B1faEWh50lbFGnZZLZqR2hEYmBk=;
+ b=IleWri+fBTKWX6r/AXKzx8j66eJDNEenoRoe0cZaVN3M0VDg7r+qFoKSgJqywBSq/u
+ c4q/RAh72QdNwXv9jgGhePcxjj0e8hio92DXOX1olGLc3XZwT4aEMcqXCZwj4/dmgVb2
+ QTXlJy/tYhuJ/thswOJMef+u674DFzv0Hn7twgJjNs7gZE7OgQHIKzBM2Yni3WEdTviN
+ EHEmXY+Ko4D+JNN+UYYN8gwH97iSa0GuJHlAT8t12bw1xNg7jkMB4sDKZ5TKESipn8Lu
+ enoPizgZrqbfK8R5e4cdFREtIZUluL7qcbP9mmz4uuMZdWBV+9hp2QaYHu9yfJYbA+4S
+ 5j9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771985467; x=1772590267;
+ d=1e100.net; s=20230601; t=1771985522; x=1772590322;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T9DgXH0tIKGwGlWyV4CXioovLCTk31acg66El+Pdssw=;
- b=vTews1/CCGfEX2M2VYaPE8y3rmquZ8ZR06RcKcfvxYzZQReoLvQ8dGs2XhI1nJ7x1t
- SG4kKwxsjDy1wkwtDq6jCEW9NTGMP+ZkCWo1NIC+wQtNU2oJprbYqSTvbXbsZjgNRNK2
- AAr4FrvkziGWaQ5HpiU/yImfAI7e8JQLDsux8zuAgOA17f0JwaJgeg0JpBEWDi23Yecu
- ir03n9/G8XzI07OzPNAg4wIZS2GdNhkqis6WptG7D6zFiXNT8wromsH9Z1gAanaf0ZSr
- 5MB3hnH+JdP/ry8ioMFo7KK85AJlwyct6aBmAfjM1mgA2Ju6+aX6ddNdljW8DLFPKFkJ
- uDKQ==
-X-Gm-Message-State: AOJu0YxYEZadQFA3vVypEOx3VmozE1IciSyaiQJmaxsoeLE+WrSbBJnu
- xC2MAy5tPQ+oxhTyW8VgBwXRjUSDhTJlXLkk89bJhmMeGfSFvntakLUsxahV5xCWA4vdBaWG4Q8
- jFmoP/yBf306Ej2T2g1xCMWdLo0MAhm8=
-X-Gm-Gg: ATEYQzw/6cSXNGPeTX4HYvoQcxo/F68flHddDLUrvu+8GArkUGNlm9eSuc7H9IAr+L5
- zweyVBBg/j/MkWLbCQiqNH1CaxlM72f90D4ebF0toO1MMJLG3XV5uc006AS/rDwIdbdZIsdEz4s
- TaxSfr/fXzWY+DLTlOyP9vpLjHfOIv5CIgIZzsLBuuJnXI4kZhB6KLuO/XbDC0NCFvbpptyTi0B
- XeejzE4kDkb6YcMXGOACXmSSHA3X7g4Ug+GW2SR0WxoXpNIk880RCf/NAl97lWoW1bTI5liRZnm
- MJzD+bXAC8on0KcqSA+zBXstQM0=
-X-Received: by 2002:a05:6512:31d6:b0:59e:4785:c43e with SMTP id
- 2adb3069b0e04-5a0ed87fab5mr4800445e87.10.1771985467245; Tue, 24 Feb 2026
- 18:11:07 -0800 (PST)
+ bh=o0CnUAgHSJUUad7/B1faEWh50lbFGnZZLZqR2hEYmBk=;
+ b=kZvkFBB0N0yCTowdV2Ljwn+ReZYe77TQPTTV6VQy+769SYZRJOmvcvGom0PRytPbsM
+ 5t+osEuZ7wmnYKwkxaz1/+xa+zxHFFb/ofqltQuDQs1kx+AvFtUosaXag663s87vooUZ
+ fZjU8TOr2iBw29ezZaZ4tk2rnWWXwjmIMesgqTdUKLS3JS0m7DYGurkXFKpECZe8CLan
+ mDUeV/jDAeE3d5/nNbx6slFUKFhlBm7NkfLhc+d3fuGG/aOXoG10en13uSwimgm2c5qI
+ 1g1+qN8HE1MX5u08fK7N0CbB+jj+95e3wxFODbwTWRzVAgTAwGnL2trBqBjz0I3s33U+
+ dJpQ==
+X-Gm-Message-State: AOJu0YxHcOAO8ZWXnxQaY14N4rKgZDz9Xps5mULe0VIvB3zYWmcpv4tz
+ eaUC+aBsuWqYqxUbhKSubK1U7ISqX/ggfn+3MRxudTxSxHPcV6sZk/m9e0mRs7KRy07lKvL0IKt
+ flNoAQtpf0YdtXkV2emC+qrCJkw84y8A=
+X-Gm-Gg: ATEYQzziPPonuacGRxLSqYLvAIUpN7vdbANLg5tczJurbRni6Q2fCprxlxUH+iJ1Liq
+ f80DNmy/4+nWph7ZCfMcsp4yfaoakjFxjPrmUWk5UYWk4+L6PcopE9pP8fMcE8+hvlZS1tEBn7q
+ D3jWytPPWbYrAM1AdUWz8GIz0ctZJasy5apYsoO6kuIdPggzV0JhcgfFwpjhqxs/s8f0ZL4C17k
+ WS0Qwx0w6kh9/ERLRHq/Zh/21ATe4hGDu6HRGgOuB/++5YoMz4da1dheoRxkVKXUJenhVgKVST3
+ jJGZlVpmvcS74DUX8HoLRpRJuIg=
+X-Received: by 2002:a2e:bc87:0:b0:389:ddc6:a4fe with SMTP id
+ 38308e7fff4ca-389e2d2591cmr2467241fa.24.1771985521982; Tue, 24 Feb 2026
+ 18:12:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20260224-exynos-blkmap-dfu-v2-0-742cb9f27842@disroot.org>
-In-Reply-To: <20260224-exynos-blkmap-dfu-v2-0-742cb9f27842@disroot.org>
+References: <20260223-phy-usb-exynos7870-v2-0-5e91a25ef42d@disroot.org>
+In-Reply-To: <20260223-phy-usb-exynos7870-v2-0-5e91a25ef42d@disroot.org>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Wed, 25 Feb 2026 11:10:53 +0900
-X-Gm-Features: AaiRm52YoQs7ZbKxHRZrHaivGDXhnnG7DTpdtWOzUNI_hqLXosO8QOR9LIAb5sQ
-Message-ID: <CALrBrZ1ufCAKthmJ_bTW7ByHj0HQyk5bKJJC0MJvk2Yr9abQJw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] Exynos Mobile DFU and blkmap additions
+Date: Wed, 25 Feb 2026 11:11:45 +0900
+X-Gm-Features: AaiRm51j6H-T1QT2TsOyEq4LkXu2CikWaYC-l3_nv3fajhYC6vguL2OCdRhHi1o
+Message-ID: <CALrBrZ3q6qJdyNO1GKDSgF3tXndcAdSRhNsQ0Nv=eREEZN8okw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] Support for Samsung Exynos 7870 USB PHY device in
+ driver
 To: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Minkyu Kang <mk7.kang@samsung.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut@mailbox.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -117,43 +121,33 @@ X-Virus-Status: Clean
 Hi,
 
 
-2026=EB=85=84 2=EC=9B=94 25=EC=9D=BC (=EC=88=98) 00:55, Kaustabh Chakrabort=
+2026=EB=85=84 2=EC=9B=94 24=EC=9D=BC (=ED=99=94) 02:45, Kaustabh Chakrabort=
 y <kauschluss@disroot.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-> This series has two additions for support for blkmap and capsule updates
-> via DFU. The blkmap support is due to booting from sub-partitions from th=
-e
-> userdata partition.
->
-> The series also has a patch which fixes U-Boot builds from failing due
-> to the lack of a default fallback device tree.
->
-> This must go through u-boot-samsung. Would be nice to get this accepted
-> in this cycle itself.
+> This patch series aims to add support for the USB PHY in Exynos 7870
+> devices. This can be accomodated in the existing driver, the patches
+> implements the ability of multiple devices to be driven by the same
+> driver.
 >
 > Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 > ---
 > Changes in v2:
-> - add patch which reintroduces DEFAULT_DEVICE_TREE option
+> - NONE (collected reviews from Mattijs, +cc Marek)
 > - Link to v1:
-> https://lore.kernel.org/r/20260224-exynos-blkmap-dfu-v1-0-cfe615b68c88@di=
-sroot.org
+> https://lore.kernel.org/r/20251017-phy-usb-exynos7870-v1-0-5885b00f0c87@d=
+isroot.org
 >
 > ---
-> Kaustabh Chakraborty (3):
->       board: samsung: exynos-mobile: use blkmap for booting from userdata
-> subpartitions
->       board: samsung: exynos-mobile: add EFI capsule update support
->       configs: exynos-mobile: add DEFAULT_DEVICE_TREE option
+> Kaustabh Chakraborty (2):
+>       phy: samsung: add enum for variants based on SoCs
+>       phy: samsung: add support for exynos7870 USB PHY
 >
->  board/samsung/exynos-mobile/exynos-mobile.c   | 69
-> +++++++++++++++++++++++++++
->  board/samsung/exynos-mobile/exynos-mobile.env |  5 ++
->  configs/exynos-mobile_defconfig               | 11 ++++-
->  3 files changed, 84 insertions(+), 1 deletion(-)
+>  drivers/phy/phy-exynos-usbdrd.c | 271
+> ++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 261 insertions(+), 10 deletions(-)
 > ---
-> base-commit: 11198fa347390eb449c2a0939f5f00cf510fe285
-> change-id: 20260223-exynos-blkmap-dfu-244b6f487783
+> base-commit: 5e7624979083e2bc163e18165452d8ead462b58c
+> change-id: 20251014-phy-usb-exynos7870-c2f2ac44fd65
 >
 > Best regards,
 > --
@@ -164,5 +158,3 @@ applied to u-boot-samsung.
 
 Thanks,
 Minkyu Kang.
-
->
