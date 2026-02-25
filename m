@@ -4,129 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7F2AFD3768
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 15:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79AA6FD3762
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 15:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 890668408D;
-	Wed, 25 Feb 2026 16:23:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id BF6C483FC1;
+	Wed, 25 Feb 2026 16:49:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="DENWg4xj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ihA8U2bX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0492383FDB; Wed, 25 Feb 2026 16:23:00 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com (unknown
- [IPv6:2a01:111:f403:c20f::7])
+ id CB3F983F7D; Wed, 25 Feb 2026 16:49:07 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EA1A8408D
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 16:21:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6653483FF8
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 16:47:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=tempfail smtp.mailfrom=sparsh-kumar@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=raV3CMwEco7JmTjDPeCrg+nDRUMRdV/0El8ATNXWkS+lfN6xFoS9/X6LH/oRDTHs7gGL4oEvIeWz7uCxcVwgnS0jnAXgIM+xoHuuRZ6ARGQWxTNtGCaDriV8xvZ+pFf4eCUAYYSo4S3hUfl3vfsd2kYmhWABenG6UvKMKH+IabPKKWhJGf2xEMGTwi2Ac+FG8Xs6/3QIuZ4Xg58acvm2jg0hfPKiRWD3Uw58SeA70btwt7ioLLUVwqMnb1wSzLuz1WksIFlqcWUHwwMX+nz9ChbWszGIAmQGb/srzWOUjxGZFEgiRC166SpKlGXUMTvlBX5O6tHNIG9MrKOmeWPHdA==
+ b=lzkSDsrPsryMZw48BoN5zqhAKpwCt+rERoBTtI82x+aGDT5rmKExRhxoda9aaZlGVSL/dSLGpiF741bH5UKFXKOpfeh0SGCT+DjFUo64vhMU2p9ubAKEQzMIIMqTJPqHh+f5OZcVyzAvL3HHRCdiFLPbxB3h59E9YV6XGxzTwFFzRIOp2TTe+8lIfOq/lXEF/B30u+ej6rNotJZ8cD0mXFu4QFRnO0cS5PBEtebPj7mNCJtM2pyLXZrrv6UxTtwLXPocBNrrK0VofWsCfCSit0A/c0rn92cyT3oA5SA9Q8rP3TLcex96B6jQgKqKKXb5Gm+prRHjnbfpal9J8MBVFA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9jWHuH/cxs/NRFNKyCu5gahMgttceemQVQxeztiMQPs=;
- b=oxbJE0bXP1rdwr7OPOrRnDrggOGFt1UmAhON0HmmsrCPBrmst3wM7RO1G4+7SoQW3B4cNBoUEIi4aFYKhgYwZfmqP8nIhERMbPTaqneFi/xw2LLZdcpH+EW0F+drQcKdI3QiD2DCx+lQVMCs+ceE2+tPa87R+A/p15DO8IhuuTDXm/uW4wB9CWT4Zen6h2g16tC7iHohAXw9HTTVAgnV1HWLfUHnAmk2sOsgiw1U5JtTs32S/yDHGXDAnr1lewdObgQrhVtEr+lb6PGuycJNir4dtmahfpK0OK4ZPCPw0b7zrMSVZ4CaaWd4gdILceiF0Q4ZMHfeXbBtNKQtncaP7A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ bh=hL81RT98HmD/OGzBJOwHCoGsNWEyjQp7eCMZ/1x5tDU=;
+ b=Xe/BTPr7lGrMqceohCEw0ShbsuiNJBQryjVRoHPDrDEOFaH4bvetvRpBrqge0jT1BazCAGAA4nyYpnnLPJCcYPdNjPEjFTGH501zGr3pEeqeUWJdvnZjbbTVILYdwWjbKglPHC07qpHQwLbM/i7wPyEjOCeICDmnLSsSV5mOn2R50ccY6DGVtvkli1PLp9dimaLq1VkuMaU+8N6CgGZCMJN+sIaylK/fDjG8rf5VspfBrHOozLkflX7O8yLTUlpNGI1NVIaWrLuOaR0Ff+r0KMWpnJnPeRjdC4PCgfn4ghBNEL3ZDUNMrFTcfCZo8xbs/xf4ETncqw9sCi6ejtcSog==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9jWHuH/cxs/NRFNKyCu5gahMgttceemQVQxeztiMQPs=;
- b=DENWg4xja7S8eM3zra3QkrdGE9X3ng+YjQFWqLC40W7y83E3RCskPs2saM89xEXJ3w0Bp/M1bKFxoa8LL1Yox1RX1gO0vYQWlC7ugEum4ToVGhZAmWzy1+88f0F1xmOOvU8B+3g3Oqu8d3WXlxPjCU1eTj0uAIBB2/yXXFSlRoI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by PA4PR04MB7728.eurprd04.prod.outlook.com (2603:10a6:102:e8::20)
+ bh=hL81RT98HmD/OGzBJOwHCoGsNWEyjQp7eCMZ/1x5tDU=;
+ b=ihA8U2bXu25wooYiZX6doVGq+WLPJjbNYLZ2MEq3zz2rBSCryio371SuYNuhmkPqSoIIPY42N055YcRg1HOSsrFJHQUAWibZweo5gxVEciroWM/LclyfZFBXM5Xp5NJybnysFBwXSZ40SNSW8/aC+lM3rGvzKL7PlQCbYz/QzXA=
+Received: from BYAPR05CA0013.namprd05.prod.outlook.com (2603:10b6:a03:c0::26)
+ by SA6PR10MB8133.namprd10.prod.outlook.com (2603:10b6:806:436::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.11; Wed, 25 Feb
- 2026 15:21:28 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9632.017; Wed, 25 Feb 2026
- 15:21:28 +0000
-Message-ID: <8d802396-601a-433f-baac-5573a74a7faa@cherry.de>
-Date: Wed, 25 Feb 2026 16:21:25 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] doc: pstore: fix typo
-To: Aristo Chen <jj251510319013@gmail.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, Aristo Chen <aristo.chen@canonical.com>
-References: <20260220031841.15708-1-aristo.chen@canonical.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260220031841.15708-1-aristo.chen@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR07CA0145.eurprd07.prod.outlook.com
- (2603:10a6:802:16::32) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.21; Wed, 25 Feb
+ 2026 15:47:12 +0000
+Received: from CO1PEPF00012E84.namprd03.prod.outlook.com
+ (2603:10b6:a03:c0:cafe::c3) by BYAPR05CA0013.outlook.office365.com
+ (2603:10b6:a03:c0::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Wed,
+ 25 Feb 2026 15:47:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CO1PEPF00012E84.mail.protection.outlook.com (10.167.249.59) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Wed, 25 Feb 2026 15:47:10 +0000
+Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 25 Feb
+ 2026 09:47:07 -0600
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 25 Feb
+ 2026 09:47:07 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 25 Feb 2026 09:47:07 -0600
+Received: from [172.24.233.216] (uda0510137.dhcp.ti.com [172.24.233.216])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61PFl3uX204649;
+ Wed, 25 Feb 2026 09:47:04 -0600
+Message-ID: <e6d88daa-c00c-418b-a8df-3714c7254002@ti.com>
+Date: Wed, 25 Feb 2026 21:17:03 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] Re: [PATCH V2 0/9] board: k3: Sync rm-cfg with TIFS
+ v11.02.09 firmware
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <praneeth@ti.com>, <bb@ti.com>, 
+ <afd@ti.com>, <n-francis@ti.com>, <vishalm@ti.com>, <sebin.francis@ti.com>,
+ <d-gole@ti.com>, <a-kaur@ti.com>
+References: <20260225132425.3096103-1-sparsh-kumar@ti.com>
+ <20260225151047.GJ1593142@bill-the-cat>
+Content-Language: en-US
+From: Sparsh Kumar <sparsh-kumar@ti.com>
+In-Reply-To: <20260225151047.GJ1593142@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA4PR04MB7728:EE_
-X-MS-Office365-Filtering-Correlation-Id: af5ad335-4c19-4a20-8e03-08de74818c07
+X-MS-TrafficTypeDiagnostic: CO1PEPF00012E84:EE_|SA6PR10MB8133:EE_
+X-MS-Office365-Filtering-Correlation-Id: 792c0fe3-41b8-428c-a98e-08de7485236a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: WZysaC11eeWGoJJcrp/CTJKg7hzdUhZ0mwAfAp0ntx5cNauSdCmdseup68FuyO3kkOWhKk3tqk6GHGqteYBqs5cVIQRNQroBTOjVwM1t+KwQIeki7jR9lQHby41owj7je2A9lML0g7jpOEAtEs2JspbgE1H+/doYyIBqhwoDS3/g0kbrMp8RipouXOZdQU/r3lVMkEh9mIQBQdsrJeg0qGFjk+Qv5WpcRcjFORNGpfs0dWDrwvYCykQ1OjSV8JzPSyv/a4JDocTlQu2SKrxZT63Kpf0QeNCULfY0iRKFlhCNG4Mentmh2H16ru4CLNetKjq1O4Yn4W0N+jxJMXb2ltXb+HnObZ0VhVACaogF5nR26sw1ThSWABnrcu8xLGoir2V2h5H5Cits/MQ97FpeO7IWws08oMBF6ipvpNPvj0vp/qhxGHp6JAiAEukvgMNZiWjDuS7Wj+UYuvWneb0V3PrHirt/mrb+ACS3DE6lXZsVsJ+o/8ehk/2jMRy4Ni742dGtNcEFlIKfXflXcohsWulvInOEe2DRhzTvmChXTRNIeAsq7gn31gavCOpcCuhGlxdfsmwC5CRXhUE2TtSoJqS8rcAzDF9NDpqPe7mPj7aEk0nDX0jX0V6EZHMn/MLmdE3xgK13wZlrKhI/E4ZNoOXYWoZEDabEy8t/AfuQnBazLn0PuhcK3vRKuLafMwYcxNa6N0Bu/ncZAVy536c5+joGPrMdMA6jw/WzRk7V8hk=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|34070700014|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: jSpBA4pxfq+Hd7wnSNEmLhZcKCBJNsULz6flioF9Ad08c1coUkCJPXfv/BLZG0W7HXsrJZ1Gh0lvAdwkEsXQor8F+pBkqaCvZYHCsuUdT2ywon5PhZ67pjWfXUb5oju+zPA7U6ieXMkKjR+P+9keY4FsWdiUh84Ane8fLfliHE6KiFk0zW8qRtjzNO308UGYSv51Hk3ASksgScJ+VHcPmAjTqCbUOBvC0OlHwqRs9MYjOMfkSXHJif/SH5r/Y7LVtjEQEdEFiEBNmt65fzGmpOQPjDQmoUEFcLQ6aYLvl6jjDcL2tr2/v/T0mplh+M+J8XyYdNrVIYJJ3NZhupypVixUGOLpVg7MASW0ZpXB6NGDc07DXmwFkvD3qItbbczOk5YqU2pVAbdGJO3SqPaUjB4r243vcPfB+koBt6k4ieOuSEevlmCLHmDnPbolKOc+DS7it5W7mZIrVyeOFvYYp38gly12f6E/7qYUfF1pB0LMiQTdvwacNBKN02hx3h2cmCXK0uIhYEmED8q4kB9NoWz7hkLsJD5NhRYeDr257UBy8fcNLVLV33x4UbUiUaSV/uslbEmZz7uiO+vVhfy6mM385YknyeEItsVM+gpCPj0MGy0I//c7Y+8Iq03+aOjW2gATm4ZDleriO3JqmdHjv4YyP69AQBerjNN6HSafVW4dLUMJPBjM9WzgNgWYJaxs0DgnenDUj+n2l2T/pcmc5VNqv+FlC6fSoDQF1WiQZRojpMomXIgQpDRJPDK+9c1QsVB1aYw6uNSzIPeswd59QcQoXn+79mi4ysMMWFc/b8rFPXGHifzh/oZGzUhzQD/ne9F+CWBXYDbifvXdfuzing==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(34070700014)(36860700013)(376014)(82310400026);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TUIrVDhRd0w4aUtMcEhaYUVGU3ByaFZ5V2x3UHBLcjVRSHZKV0pLWHVVbnE5?=
- =?utf-8?B?Szc1RjJTb3ZTT0prMDRUZ0VvVFNGam56ZXg2VitENTF3L1NzTm0xR2JBY1Mx?=
- =?utf-8?B?aFV4ZnNmZUhwWkxoSVNtT0JLaks1NlhtYkdFS1BpZkxOMWZXa2lNYjJUeEdh?=
- =?utf-8?B?NzJxbEZNaWZhVktMSGdwd3FOb3lDdUZKRDZlSUJlZ05FOE9GQ01ZRjl1REV2?=
- =?utf-8?B?N1JhK3FvdVJTZ09XbTJLOVNRU3JkeWhNR09jUnRpNlhNdmhRYitCODUrb0Na?=
- =?utf-8?B?dDRLckZtNWZoZUxUVWNnRTh3a0V0dGgxNnhwY2RKb3Z3ckhTZnBQb3pyT0Vq?=
- =?utf-8?B?Wk0zUVhPWCt4UzdSTmhOREkwRzRMdDQ3UHRSQURmbkZYK1JwMlpYU2ppVENn?=
- =?utf-8?B?K2pBWVVKZmVKc1RFTVJRdE9WMlpGZzVoNVpiRTJ3RlNiZWlsbWFXY1NxMTNs?=
- =?utf-8?B?ZkdaZ3BGQUwvcnQ1WTJWZWxsUDhQc3FNb1VmVjdaeGt5c2lpNE90NlRYNDVK?=
- =?utf-8?B?SElpR3AxN0lMNzlNZ0JJV2Q1dGZJeExDSWN4UERKTUpKQVlPajI2dFZWNmFs?=
- =?utf-8?B?WmdwQ0oyVlFSMXlFYTFYaTYvWEhvQUlxZHRKTFNMbEZBYUpKRk9HY2JmMEtV?=
- =?utf-8?B?UkE4d2dDTDhJblhzV2F0Mmc4S0JIU3NlaFh5NVpkNlNxN0FWbDZON0dWZjMz?=
- =?utf-8?B?R01pZzBlbkJUaVhTUk1KeXNqLzJJMjNmSWVxUnlLT1lGbjFabTNiQjl3RjUv?=
- =?utf-8?B?YzBDUGd3MjRNNFhyMVJCb2F1ZzlJdmRpa3QyWDI1T2dGaW5nQmhqYmFtNVk3?=
- =?utf-8?B?QS9GWC9OWWl5cFB0YUYxWDl5WWMxUU9ZTk45cEdSbGx2MHo2akxCNVJFQlI4?=
- =?utf-8?B?OEk0cHVDYS9CN0N6RG5kaXJRazM1VENYK2h3elYxNW5HTksvWnkwNTVCaTlF?=
- =?utf-8?B?bjlWVHdQZnBzNVN0Q2tEenVHNDFPSHRyMzMzQzZsdFJRazgrZmU4cGlOQTN2?=
- =?utf-8?B?Sm13cmxKUnY4RnFSdjFVaHhGOXNsbnpWVERLSzRFZGNZVmNZRjVWZ3RMRHp5?=
- =?utf-8?B?Ty9oUUI5c0VYRXRpN3k4RmN1MXNTcU9YdkNGR3RjM0ZYRHdKN3pQdE9mSzlq?=
- =?utf-8?B?eEpJeGNadTZJTzFDNVRhaWdvKzZMcVM5MkREUUtzQytrZzByMU9CeGJhQStl?=
- =?utf-8?B?NEhLMko1eUJybXN0WWVVdXJqcEVhb0NkM29oREZYVzltSS9IZ011M1JINGVn?=
- =?utf-8?B?ZXAxZTBOazFFek01eEpZdUpqSFdyNlE1ZXlOUTQ2L0tDSk9Tck5QYXJTazdH?=
- =?utf-8?B?QVluNFM3WW5WSnU4THdvVEFCM2tzZXYxRWxGOFRHbXFqYmhZV0FEdjR1WjZ4?=
- =?utf-8?B?MUtMRVRic3lXZHVkeXJUSEcyMDhvMTNDeFpIRWhlTE51L2dqN0UxSVdUTnZN?=
- =?utf-8?B?Sk1uVzFRME1aVHBqZFZGWWtRRWNrK2xWdHpPZGMvcW1oRGVUOTlNTXdRQmFl?=
- =?utf-8?B?MEY4K3JjUGRrZXFjUGkwSlV2TmN3MkZBdDZHUW5vMC92Wi80b0JKbHZQdEls?=
- =?utf-8?B?cXQzTzZEVm1scXpjMGcxRDd2NHgvZUpBTXBNRE5OdDl4dFNQSE96WlVwcHlm?=
- =?utf-8?B?MENoeW5lUXkxa1hSR3JNdmorcmJtK3puUExlNTVrMjhPZXhPZ1FDOWJrWjN5?=
- =?utf-8?B?dUJaMGdVWDFFbjlZbU1HNjhZWkc0MUxDQjFvME5xbk5iSms0U1dEVXMrTUx3?=
- =?utf-8?B?NE9RUlNjMldlV05PR2VDSUJCM2xIYmpHNGVmbENaZHZhbVBMbWZkZzVqRW9R?=
- =?utf-8?B?T1l6RVV0UGoycFBxeVR1VWY4RWhCNHdCZDBkb1J1NEZTbFRQZ3hQV0JUQkx4?=
- =?utf-8?B?V2gyenVaVzE5RHdwVXlIVU1mV1JNU2tkQysvQVZUU1I2TkFEU0doZmc2SFkr?=
- =?utf-8?B?UWpMeG9xNTVnNVROU0lsNkhzZUJjM1lXajc5c1NNYkhrVXhjU2dDUVlXZEFi?=
- =?utf-8?B?cGd6R0VMRTdoRUVwMTVFbDY5M2dJQ3MwK3pTWXBVcmV0UHRqcG1UUjRQbmx2?=
- =?utf-8?B?bFM5TTlpV28xeGtDbElmUnNxM3JnR25uNDdaUFJ3cVhsWWUydHpVLzBXQ1NM?=
- =?utf-8?B?M0tWNGE5NmlUYnR2WHBHdDBlbU5MaUxJT2syYkIvTlpPaUk3My8xV01CMlhu?=
- =?utf-8?B?ckdqUS9oOTFpVjlQa21maEVYMjU0Z2gwV3FSUzByRG1uamhMQmhGUzBvN25H?=
- =?utf-8?B?VXFLb05jeU9zSHBTaGRMVW1UbVFQZzdnYnZvWU9pSjRHdUU1Y3IxdTNjTis0?=
- =?utf-8?B?WUdRMHVURE9Cc0xqRlA4bjFLVE5ScmtEWnMzSlN2L00yWGNRbmxOUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: af5ad335-4c19-4a20-8e03-08de74818c07
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 15:21:28.3688 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ne6ucccGHwVJuJGTWEHiF1a4In7c7TUj3jP0IzpNanzDkAEuU88DHEKwB5XUiKjgm7GGpZZRU3089uu9LLtpBtUANAdL89JnuqqJnXeZbYI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7728
+X-MS-Exchange-AntiSpam-MessageData-0: mcXJSX5LzO6eU0etefEch7UTDKqohOfZo7vMEaIxP/pC8aWPg4jjlUczC+vVESQEL+pS+ZcXO2012A7LFXQtB9laS750bT1s2Otm3thxilV5oBMxhU/AGODD4LuG0JMO+G3vgji4Hf2j3Fq0Dt4nQLaAb6EniNXVDtzZWj0AeOZZR1vjQCbJ0NLwRa+xJ0QpJxypbBI2oaetylxPn9gCQbdrLqag6N6wqadd4v3x9bzLFRfqZQzDBPfx+mTmwrDeyuXRvH6SnDoJgCcBJGzs7rQ5sK+4G7jlzeDA7jZq+Jm6pgCuOM2Ocrkt0e59TDwun/no52JXBkxkDJJvl9Jwu7rQK3LnIDx8+2VwDMxubCVfKp0QLslEds6h4wMu0wZbmPoxBWvOVB9N7GT7FTSUeMPnc1gsFFdcaeNO4GNCMXfWwIUNE7H4rQXcAyeSBfOG
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 15:47:10.5498 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 792c0fe3-41b8-428c-a98e-08de7485236a
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF00012E84.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR10MB8133
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,20 +136,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo Chen,
-
-There seems to be an issue with your git-send-email setup I believe. 
-Your email address differs from the Signed-off-by and specifically, the 
-body is missing the From: field you get when this is the case. See 
-https://lore.kernel.org/u-boot/20260224-device-tree-debug-no-phandle-v1-1-10bd3f3a3498@cherry.de/ 
-for an example on this looks like.
-
-On 2/20/26 4:18 AM, Aristo Chen wrote:
-> Use "parameters have been set" for correct grammar in the pstore
-> documentation.
+On 25/02/26 8:40 pm, Tom Rini wrote:
+> On Wed, Feb 25, 2026 at 06:54:16PM +0530, Sparsh Kumar wrote:
 > 
+>> This series updates the Resource Management (RM) configuration files
+>> for AM62 family devices to align with the TIFS v11.02.09 firmware.
+>>
+>> Background
+>> ----------
+>> With the latest TIFS firmware (v11.02.09), an additional virtual
+>> interrupt and event is reserved for MCU cores to DM usage on am62x,
+>> am62ax, and am62px devices. This series brings the rm-cfg and
+>> tifs-rm-cfg files in sync with these firmware changes across both
+>> TI reference boards and vendor boards.
+>>
+>> These changes are backward compatible with older TIFS firmware versions.
+>>
+>> Additionally, the am62x platform was originally introduced without a
+>> tifs-rm-cfg.yaml file, unlike other platforms in the AM62 family.
+>> This series addresses that gap and enables tifs-rm-cfg in binman for
+>> am625-sk and am62p-sk platforms.
+>>
+>> Changes
+>> -------
+>> TI reference boards (patches 1-4):
+>>    - Update rm-cfg.yaml for am62x, am62ax, am62px
+>>    - Sync am62px tifs-rm-cfg.yaml with TIFS firmware template
+>>    - Add missing tifs-rm-cfg.yaml for am62x
+>>    - Enable tifs-rm-cfg in binman for am625-sk and am62p-sk
+>>
+>> Vendor boards (patches 5-9):
+>>    - beagleplay (am62x-based)
+>>    - phytec phycore_am62x
+>>    - toradex verdin-am62
+>>    - phytec phycore_am62ax
+>>    - toradex verdin-am62p
+>>
+>> Note: For vendor boards, this series only updates the rm-cfg.yaml files
+>> with the required interrupt reservation. The tifs-rm-cfg.yaml files
+>> cannot be updated without access to the corresponding SysConfig files,
+>> as both rm-cfg.yaml and tifs-rm-cfg.yaml must remain in sync.
+> 
+> Do I read this right, and the vendor boards will now be broken?
+> 
+Hello Tom,
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+No, the vendor boards will not be broken by these changes.
 
-Thanks!
-Quentin
+While it is generally recommended to keep rm-cfg.yaml and 
+tifs-rm-cfg.yaml in sync, the specific changes in this series do not 
+require corresponding tifs-rm-cfg.yaml updates for vendor boards:
+
+   1. AM62ax and AM62px: The global events reservation change in 
+rm-cfg.yaml has no corresponding entry in tifs-rm-cfg.yaml, so no sync 
+is needed.
+   2. AM62x: The virtual interrupt change would ideally need a similar 
+update in tifs-rm-cfg.yaml, but none of the vendor boards have this 
+file. This series introduces tifs-rm-cfg.yaml only for TI reference 
+board to align with other K3 devices.
+
+-- 
+Best Regards,
+Sparsh
