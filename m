@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A93BCFD3776
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 17:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2011FD3776
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 17:13:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BF2983EA6;
-	Wed, 25 Feb 2026 18:12:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 822F883E8E;
+	Wed, 25 Feb 2026 18:13:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NWv8mPm3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pe5Le2At";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4611E83D77; Wed, 25 Feb 2026 18:12:53 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id DFA7D83EB3; Wed, 25 Feb 2026 18:13:02 +0100 (CET)
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
+ [IPv6:2607:f8b0:4864:20::342])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3180B83D77
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 18:12:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CFE983D77
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 18:13:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7d4cb7e10efso6497119a34.0
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 09:12:51 -0800 (PST)
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-7d4bc9e48bbso2896545a34.2
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 09:12:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772039570; x=1772644370; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772039579; x=1772644379; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wYYrl2+KL7B3J1OKw56DDGlp/ggReqgJUf5u2nsQzGc=;
- b=NWv8mPm3UpQgA7b9k3TiX502bahNNcx8Ck6RKZhWXB6U7uLv5xps1aah22E57HJmX5
- lpPZpaUXWlzXWVpzdaWX/QglN/QBg1wkVwC+PWLYfnR8YTw0KsgycrqLh7or2OdClET0
- yKZK41FBpbWTQNYY+tRNzm8i44ZX/u4snHUKs=
+ bh=N4t0IGzZVpNd6c/CPydj/i/dIgRZfnsF7TF9Zq6KrLA=;
+ b=pe5Le2AtJCgIbuEvNmzCUprGU+4oI8XTBuNO7pTKc3fyp01W+0XQ30Kqd4PCmfxgrD
+ C3WeIicegyxkZP4QctSgXe27lFtF7DVzWciAMuq2ApcyeKLnp+pFQTNbqFSPNz7PNM0K
+ 7/DbNvwQi4/9JHoRBHt0Kh/SNQ5KsgSsUdxwA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772039570; x=1772644370;
+ d=1e100.net; s=20230601; t=1772039579; x=1772644379;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wYYrl2+KL7B3J1OKw56DDGlp/ggReqgJUf5u2nsQzGc=;
- b=Do7WF+k3Xhs/+2A2BtkTfgXvwZJ0WFfjPDH5tMFB5Esb6L7tsG9NwbbPBtUHKFvVEM
- zOFAoqaFMx/oA2jY7etTnXpGxw5z4mDwdi/WchUYTKht5seLeM9B/cHGqHo6aqgHLUUJ
- r6P2QhKk+GlQilp4Z7/lmLx69JxRuUZkDTZZyXWn6/uKnL+3S+kD/o30KL/+VyleWhY7
- OZiaT6pTprArfTYLj72W9vU4oFdvMdZhE2wXNTF2vkCBv+m8iAjRQcE7xA4B6uaPws0z
- qpnFjUNWCc465Gw4ZtUdhXla1nTQCS6FJfKNH5+rlU6KyJnKMCRQDwsy73dWrKNl4YXr
- oQwQ==
-X-Gm-Message-State: AOJu0Yzr8ISHSQFOuxYP+v1MchSmAYq/owpb0tkdzW5taG7qZAS3+/58
- CrOTOfwInIE2bWeVc6RwSvQXNBfG2zhlhq+Zldxs8iEYoALHwQ1MxvgW5V3bwSzc/ek=
-X-Gm-Gg: ATEYQzwBrRRmtgP+6DUkDWhI1Ewt23dqqEMOaVaIRtVybuv7VNOmo5geHU/egt40Bbk
- 1FjwTa0pNiOjTj3XB1U6J2BunNfqgjrYRwB38oxX4aTdCuK1uFe2kjuXNIM4yqegLHMplEo4IUB
- +UNsqe+PzZ+coAuU5iNBsZ6sKOy52IQ06YPh1csXQqY64dkUtITNZh6teAelSdfCMBRQXA54Kyp
- +kfcn1BjyC6qE3KK+v9eGGFiuDQNzFRC9uy6BPClhwA0O3qOAHvkDVyU+wbNuxYuRzxxmCsMc3o
- yhaCeguWqjHtsG5nHFR5iF2PfPe/7JAkGi9SkDQNqicpkD3jCUojZniP9QOwYTAHHKwTcbS2Z1B
- iq5/HfUFsbHqx9xEdqGWur6RvokfdwyceTvPdSCTMnzUYe3xI8N+dLNJG07YIG9cxYi/lOo/Fv4
- BK1nK3C2JqGCsHCz+KqaXlKO0aUm8mfD1LDIawmfipvhQW/7i+KQpacncIC1cZBhgWFovdfAMFV
- qlXf2fitiCQ0Fkr5YDCvLN3sir7n33ERWbpSbezgs5/zyFzwog=
-X-Received: by 2002:a05:6870:5489:b0:3f9:ff05:438 with SMTP id
- 586e51a60fabf-415ffd23c46mr577007fac.24.1772039569669; 
- Wed, 25 Feb 2026 09:12:49 -0800 (PST)
+ bh=N4t0IGzZVpNd6c/CPydj/i/dIgRZfnsF7TF9Zq6KrLA=;
+ b=a+4EsIZzO0NZHSLK73ZTfPr0bUE+XzdSPRp3UbbwOP6b2Kzxkjaygus1qFjezS8DdG
+ DtJniLWkQegxe5MU6Ub43Yd2kGN2LRNTgw7vDzRRdDpfMTHqw7RQMJT5LeQtBpPNrrTC
+ 1bjbeI+ueCYkGsWdLIfxQEUYAzWCfujeSgev0ExzqNlncZOTpVv6UHul4IcnxMzwVUzG
+ 80Dvs+xywyXV2V8uWiwSI3HCMtHIBxMbbWWyj7hJ1i6fuNXFbg6E6PQS7rxuzl48Jbjg
+ caEUO/rrQJo4RjV9GwNKZKcV/qBgZSEsmEdeVe05+yOh8ZAEQYURagkaVpFr/tQHs621
+ 6/bw==
+X-Gm-Message-State: AOJu0YxrRPi0YJQjYZt1ZG14LigX1+pMfIhNTxaAIQV59y8/IQxmBuEY
+ Ss91YWYwuUKS/OD/dZhZJVXOA1yxn6D8h/zNqf+CVhSbq0ZRiXr9Za/Q+XoPTbnrCIlyyHtY8Ih
+ JZ5RVGLYyQA==
+X-Gm-Gg: ATEYQzxDcihtV9c9gMvT32LbZUA2BPcAyzk7bV9EdI0JkSHxCVnwNQh+YprSzh0+4iU
+ VAl4Az1aOqPdy509Yrjhve8aFDSWivDAfuS99yfqpT43YdBkIB5gxh0pQDm3v5zKwh1m59BOGxP
+ U9SnB4vJ0lqzZnis3LTmA60LosGUFE8An1uCCuIbO24CbQqNVc9Fgm2cUZa3//M2ho/BeSprpqu
+ Ol4h//bhh+la1VTQnNkk/5ke87W00MzXwGVwtlDoufnWoSmMeFDWJTqqBrbEhr78PQMweQlYO7V
+ dhds7fh3nzij+ajJsly+bx/iNe3umecW9j+w0tR6CDJ/LC1huXVrQxltbQq7vXu/omnaOZk/Rt0
+ 7I1YFfAyZL3liRzpSvhIcYyHmaDdkPtDXn+qm46zhjd+UPGlb4CmXrXF629sGjGwKJmbvqdTjXO
+ qgHrodxIn+cgRYoyVx3YGVEvR9h8E7EXVqVFOEZl0Za0yY05mLHq5EIMj8KHbBTBLOF330yoNO8
+ WYPgU6qaZk7hEIQa1g8RKTP8Tg6xCfV15UMrnPcWtJhxxxEIwI=
+X-Received: by 2002:a05:6830:2b2a:b0:7cf:ccc0:db0a with SMTP id
+ 46e09a7af769-7d582a8470emr612151a34.33.1772039578534; 
+ Wed, 25 Feb 2026 09:12:58 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cfa6624sm15533271fac.8.2026.02.25.09.12.48
+ 46e09a7af769-7d52d038752sm14195356a34.17.2026.02.25.09.12.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 09:12:48 -0800 (PST)
-Date: Wed, 25 Feb 2026 11:12:46 -0600
+ Wed, 25 Feb 2026 09:12:58 -0800 (PST)
+Date: Wed, 25 Feb 2026 11:12:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>,
- Christian Taedcke <christian.taedcke@weidmueller.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 3/6] test: fs_helper: Drop the size_gran argument
-Message-ID: <20260225171246.GQ1593142@bill-the-cat>
+Subject: Re: [PATCH 5/6] test: Add a helper class to create disk images
+Message-ID: <20260225171256.GR1593142@bill-the-cat>
 References: <20260225162357.3449937-1-sjg@chromium.org>
- <20260225162357.3449937-4-sjg@chromium.org>
+ <20260225162357.3449937-6-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9yxiVV/T7BJGa5IR"
+ protocol="application/pgp-signature"; boundary="3gj3FE3Ksv/oDMD7"
 Content-Disposition: inline
-In-Reply-To: <20260225162357.3449937-4-sjg@chromium.org>
+In-Reply-To: <20260225162357.3449937-6-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,36 +100,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9yxiVV/T7BJGa5IR
+--3gj3FE3Ksv/oDMD7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 25, 2026 at 09:23:47AM -0700, Simon Glass wrote:
+On Wed, Feb 25, 2026 at 09:23:49AM -0700, Simon Glass wrote:
 
 > From: Simon Glass <simon.glass@canonical.com>
 >=20
-> Nothing uses this argument, so make it a constant for now.
+> Provide a way to create disk images which consist of multiple filesystem
+> images.
 >=20
-> Also fix a pylint warning when checking for vfat/exfat.
+> Provide an option to use the current directory for images, instead of
+> persistent-data directory. This makes it easy for C tests to locate the
+> image.
 >=20
 > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> ---
+>=20
+>  test/py/tests/fs_helper.py | 97 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 97 insertions(+)
 
-It would be good to ask the author about why they added it and mentioned
-making 8.5MB filesystem images.
+It seems wrong to ignore the existing function to create disk images.
 
 --=20
 Tom
 
---9yxiVV/T7BJGa5IR
+--3gj3FE3Ksv/oDMD7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8tjgAKCRAr4qD1Cr/k
-CmIcAP9qaV6bBYNC8GxU8nLcng+qSaO6eltVjeCWvCdoYtmbEgEAk4ATm3T1GU8W
-lVtwCTcRRfiVItxVt/m56nwyz9ku0As=
-=b2zL
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8tlwAKCRAr4qD1Cr/k
+Ci4GAP47BBXzOJZm9IbiMPOH0JNVvQMxViCR8zJIvEpOUAr/oQD/QAEz9U1lmVgW
+0PKiUqsxMxWhWtu/dIqi6Fq1SL7z0g8=
+=UDAU
 -----END PGP SIGNATURE-----
 
---9yxiVV/T7BJGa5IR--
+--3gj3FE3Ksv/oDMD7--
