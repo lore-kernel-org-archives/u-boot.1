@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEC8F357DA
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 07:24:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36440F357DB
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 07:28:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CC5683E13;
-	Wed, 25 Feb 2026 08:24:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B63CD8366F;
+	Wed, 25 Feb 2026 08:28:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LX2iOROz";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hJS3r2Ur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A9B583E61; Wed, 25 Feb 2026 08:24:28 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 47D8583946; Wed, 25 Feb 2026 08:28:21 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9658D82A9E
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:24:26 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ by phobos.denx.de (Postfix) with ESMTPS id 751E582A9E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:28:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fLR144WFbz9tf7;
- Wed, 25 Feb 2026 08:24:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1772004264;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=n+vrH1Kc+T7EDNYes5tunI84dtce3gG+bBkUm/bU4pE=;
- b=LX2iOROzgY24shbnh+p7GCIjt2qTYxM5NHuJipo/zG8UfCgndDbBSZNUOHla97rNA+8e6I
- Xfcf/p/Ec1Qw/2I1KSdoht9idGGXnVk8/YYYUifSrv3BhXyLpwxKh3r6fuw7zU4Xi7k+qW
- JQFkvKcqVcaSBsMod/uAg2MRmbxSDnnv9wxL2eHFqOu25VRIv1KfElDchjWnVGAGz7vnQW
- NcwAho6h3QqtvdIWkHT+2j1GdtqQAJCh8aRf3Tkio83rAegzPVhnvd5sBqBwdya3eGngxc
- LEoRBye+KvZI0Dp3PXvhlm1xgoxfDUqieW4PWlj9ECQMzI4oKRqhTH8+csFoQw==
-Message-ID: <5a1d198b-a988-4493-acbe-b4dea2794102@mailbox.org>
-Date: Wed, 25 Feb 2026 08:24:22 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH 1/1] serial: serial_octeon_bootcmd.c: use correct Kconfig
- symbol
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Simon Glass <simon.glass@canonical.com>, Michal Simek
- <michal.simek@amd.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id AA1C43F264; 
+ Wed, 25 Feb 2026 07:28:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1772004499;
+ bh=hlk9HyQFLq8aQ7doGLflkwGevmgnNI7fmGo5Cu6+Qa8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=hJS3r2Urw9FAZxEKmkXi1zIf7qgtg9bnpcqLOk9MIw+vPkO8zUyiSR8+HrKDbRdvi
+ xxNQ7Q/b9MBpnKTOE6eWUs1ZccJijglTz0wupyPBpO/r+vBiLSVwSTmyxhpaZd4Z7f
+ A3koDNOTqY1VvjUhXYnjT4aG0LcbQrH273bDxXunoUBtQZZLStLBUDyFGGSYxT8RA/
+ 9yoQPb95pY33Kc7TODcgEipU1a/riXPgt8/HxCS9t3prFuXDWFE8eVHU1Gqq1vAp9R
+ 4O9wWHDnasYKGZh+MrslmWUx9C3R5xdZ1NvsYn8cvBB/6Qy9FuaEAhcDsAQ9jhd0jM
+ MNaCJRGdni1CNgh7ktVzAYPyNtNiC5jktA0kJI66XD2iLY4xtnAlnzG41UPkgFL+WD
+ VeRlB/5258aYfxIdEL8wmf3L72l3sg7qFTj1rvN3Clsip3BY+ffQXnp2MYrunkd0Jq
+ v1JKfAsL5OFvBKmGeGNvo/A/a1/O0kBgIbgvSo3NH+uqBn3mV2u++BbZqGBw16PJYt
+ mA4emLewAtrwnMvD8kU25+2fG+1NP6I8Viwv76rIzWbvrW+kWJMJvMOR+jcXptNw6i
+ Baet/cc/GqjM8UOmUJjB9as+AUgXP148eXuxc42+sA4gQtIE3tId3GVoAViUoSCWM5
+ av2SpSebL3EQ7zugF/e2Q8q8=
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Luca Weiss <luca.weiss@fairphone.com>, u-boot@lists.denx.de
-References: <20260225071008.49435-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20260225071008.49435-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: c5928c7d5b139295f71
-X-MBO-RS-META: 8xwbm693ao11gsafqj33r6r9zx4byirw
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Xuhui Lin <xuhui.lin@rock-chips.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] arm: rockchip: don't use non-existent
+ CONFIG_TPL_TINY_FRAMEWORK
+Date: Wed, 25 Feb 2026 08:28:17 +0100
+Message-ID: <20260225072817.50994-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,33 +80,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/25/26 08:10, Heinrich Schuchardt wrote:
-> CONFIG_SYS_IS_IN_ENV does not exist.
-> CONFIG_SYS_CONSOLE_IS_IN_ENV seems to be needed here.
-> 
-> Fixes: f1054661e50f ("serial: serial_octeon_bootcmd.c: Add PCI remote console support")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Symbol CONFIG_TPL_TINY_FRAMEWORK does not exist.
+Don't select it.
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/arm/mach-rockchip/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-Thanks,
-Stefan
-
-> ---
->   drivers/serial/Kconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-> index b84cb9ec781..3fb3492dcd0 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -1022,7 +1022,7 @@ config OCTEON_SERIAL_BOOTCMD
->   	bool "MIPS Octeon PCI remote bootcmd input"
->   	depends on ARCH_OCTEON
->   	depends on DM_SERIAL
-> -	select SYS_IS_IN_ENV
-> +	select SYS_CONSOLE_IS_IN_ENV
->   	select CONSOLE_MUX
->   	help
->   	 This driver supports remote input over the PCIe bus from a host
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 92bb4aa62f1..d00820b34bb 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -8,7 +8,6 @@ config ROCKCHIP_PX30
+ 	select SUPPORT_TPL
+ 	select SPL
+ 	select TPL
+-	select TPL_TINY_FRAMEWORK if TPL
+ 	select TPL_HAVE_INIT_STACK if TPL
+ 	imply SPL_SEPARATE_BSS
+ 	imply SPL_SERIAL
+-- 
+2.51.0
 
