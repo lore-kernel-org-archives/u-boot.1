@@ -4,98 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95BAFD3762
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 14:37:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BD6FD3764
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 14:39:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D88C683EC8;
-	Wed, 25 Feb 2026 15:36:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3079483FD6;
+	Wed, 25 Feb 2026 15:36:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="p/em0ZcR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OGiP/PA+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6700783FB5; Wed, 25 Feb 2026 15:35:49 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 6CF3983F60; Wed, 25 Feb 2026 15:36:01 +0100 (CET)
+Received: from mail-oi1-x233.google.com (unknown [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16BCD83FFF
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 15:32:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F238384010
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 15:33:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=tempfail smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-6774d63d2e0so2249718eaf.1
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 06:32:53 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-463f00cda04so4180119b6e.2
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 06:33:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772029967; x=1772634767;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xa40CRykofcYq1mlQsfoEvA28d2A6vpDTrbjhGpDXzc=;
- b=p/em0ZcRLAmDiB1SKAb5uKupSSCL3fhZa3VAd8/enuDGqU+S740CNijQq+o2jBZNVT
- 1ug4Ww8/FEshGymspfNiqiqXHpZcTCvZSVwpE0XvrSv2ZYKo5/wqgQVon+JzCd3JzgoB
- zJ2CfczQ9tRt/etZhGIv5FEC9iD5UXdBN5SMk6kPta3OSFLWrg+AHaTo9Ga87iLLwAu6
- b70O+6scZEezT7JURn8N1Jxng8PLSoAU2judcOwGaNQ/EGPJKYh4cvcW30CTZzale+xC
- H2G+VUl6rXE9jihm5QOBDuyQIJ7044j1XoI5NVA/bCq3wxVv99zqdSGC8ZYc7yqBKX5J
- N9Zg==
+ d=konsulko.com; s=google; t=1772030004; x=1772634804; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pGDb86MGZ4+xgJoAIjStrR3atv5DY5TiXvkrL3FvjHs=;
+ b=OGiP/PA+n84iaF16zkZbNvRZNvabkAcjjMKbs/NJEVL72/cPAkO0x9w3KamsfTr3bR
+ iBcAZaKDiLA3uzT7k2gEK2TVrNZdt6nVMRAUdnJZRHuPfgJqc/KBalgN81PHVe08YGBl
+ Emzi1+yERM2mup+2UYi+k5042hW9d7oZxn/D4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772029967; x=1772634767;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xa40CRykofcYq1mlQsfoEvA28d2A6vpDTrbjhGpDXzc=;
- b=Sow8g/xvBbbSjhjwmA28cg776fMnNCsUJ0UraYzRw52YgQCiLd5kt2uhxWGhmFSXg3
- Q+rYYLlr1UUFEq38Pj7ac/MVsHzl8VYSsifJzYlNlMIW/ioswR4mG/Hf1uA21fGJ6Mwz
- 0AiKWoqHXk9ioJYHSn24NDUGCqdqMtkeAj8M0Azvx4w+QUHqPYba8OS65tlqVi26DnUy
- Db6MPBISm11fdVGhzdj1vmbPY7gXufFDhIcaXYfTrCnWRi+HQ1/Mk6lY+7LcV8DC9uGA
- MSB6ThKIZ0LvPd3O5GnUvve26tNw3C3sMe8rtbCFUuxhR7YPi+c5r4+mqdusnfirqhCa
- 5W5g==
+ d=1e100.net; s=20230601; t=1772030004; x=1772634804;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pGDb86MGZ4+xgJoAIjStrR3atv5DY5TiXvkrL3FvjHs=;
+ b=iNGZ851koyY8ztgUUByOpmB6GY3+sJJ/w5v6Bjf/WU6OqKIaj1nQeGqGvKC+XR99bd
+ E0tRJk7d2H2h3e7UX3UUlkcZbmNHkrg9yozb1G2FvtK/lkux1Hc0DsBBDWJR5wM6kBUq
+ cUB3ThYtVRP29uPrc0Sq//QCEXu+tqQ/lsnXb3AliBIFdQhVkILtHp5z8ZauQFScBdqU
+ cciJAYKzcCjsQwuRfZAjYNGztgjHsS259T0WlO0yGfiFT8gTJlgRngU5BogC5ZKOPVTb
+ V1gZt7Bz60kH0oqW6QRIBHURBVGWOw34h69tkwTF9Nx26hpxaWRi43BfuQxQt0hqV0XV
+ IjHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUh4+E4aKTdSO3zEGHXHdbPW9D2aSE7jJ/XCn5wM4T82Nlsu3CaFeWo2YqU7Gx+1/mq08qJqt0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxvA/sYPpeb+IMyAsXF2oGg3EWm0u4AIplg9L3L1zfKnCl7UBb/
- xZ4HJb/nxxDFOCz3zn3O5PqdO0m/XCmm4F2RLTL/WaI5g2c79uuJ7IVtdKDNgtLzaRQ=
-X-Gm-Gg: ATEYQzxHloFIAKKWhdoSc7T/oO5SppsJW6nZfqWU8x0sGLKNmqreAdeB6WMYYAaunFx
- YhpucnP2RPgxN9iTRirBxFtvCqqQQOTOFl7PgojothLit9w+YEUGQfceFzwx1oLZM5fsWtwzUVA
- 6dMbhbiVt+/Z6oXjAa7XUG45t0T/qojI5R8B8hDXJHDmU8QQQHZQNihACz1D662i7Sqneue5iuv
- XRqMklxSxffMvHCSjWZhsJS/KABhi55X729Z5PSLvTRj5dEAjVG0zNshhWJWQaxv1Um4iGDfsjM
- CQzocGSna+vFgK+a2nZcueH12p06LOong5X/UvHnUA/8DT4j1lkOS2jiiZvV1hJ2RmhDqbPoRI2
- 44k0TMSlL6rbGh6V5zN6smoc7bBHnzPB28ZGz15KvSJSMOhN5NZsKYqkSCA4Iz6WrQwHomFb06x
- S+UgZuzTq7DZS43PK4E4dDuIpvGJ5EvyxH0JbAAC2eM77XEQrWuYKx/gDT+FMrVg2qn2KTbzZYh
- FkwCOoyuA==
-X-Received: by 2002:a05:6820:1903:b0:66e:4279:3de7 with SMTP id
- 006d021491bc7-679ef99ef2amr271533eaf.53.1772029967506; 
- Wed, 25 Feb 2026 06:32:47 -0800 (PST)
-Received: from ?IPV6:2600:8803:e7e4:500:146:def2:caeb:cb1f?
- ([2600:8803:e7e4:500:146:def2:caeb:cb1f])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-679e546f4a1sm2481562eaf.5.2026.02.25.06.32.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Feb 2026 06:32:46 -0800 (PST)
-Message-ID: <cc219fa7-669b-4ede-a416-4f7a76b28ba8@baylibre.com>
-Date: Wed, 25 Feb 2026 08:32:45 -0600
+ AJvYcCUNJrbFhcDuOYmcQkpJxR2f/m7c3Lg0O7vhZMd7RPfPjAKFBVkoW+SpXegz9TYT+vmr/LEV8PY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxaP+rsbVlJ80npm7/fSPQMlHdbaGE+kAuThHM3LX11ERo2mQJw
+ OXQmPBD9uyf9G9blKWvspMgu/+ksslI/5lwfjRZKKcGjqBf4p0+tK0VIrtnpBnIXofE=
+X-Gm-Gg: ATEYQzx1OGGPEKzI9LKKyFlvlHcuF8FuxsZEGjY2gVVdEsjEAIBeZz8mpDPqdpaTvfn
+ NIRUZ1eRhqc0gyC39BsAWvy5V/UAZ9ZPQSB8HxtPrLRBqn77UWFz2q0MjDpMrMqUjGy9CIl3ihA
+ lIdewYDsBQHDeH+w5zYQkezDZbNxjaB4g+VKzKj4dSHPZWrN72F3H4PGP7R/5EX+3+iI+rUM9g/
+ gznXf+ux7H2/jrUUZTHSwTmi3EVvVv9Tln+ye51lyr+TqctfzrZ3ElKLnB1digqvicMVIh+1kh1
+ pR6e26UgDBkdS38XslJ5oowXPMnTK5JdGyRtLCx4ZbwzJFbaRXDd/LaAKPdWRpWC1vGdpocIlBY
+ Ko42GocIdfBlWdUh8JoDJ/qWRsw/j9fTmKL6tRCfpX1XQi/aqxKo43zcg2PBTyLHaXgf0NaLt7x
+ bq5img7BmKXZSFUAdIZ1exGEXZnaG0R8VWjvFnlp7RpqOuQC8UAK2Nv7mnQSZz2h7lV8SJSZp0J
+ lD5fdlsI1edmKKdr4HJwKYt3u1+J+MNHj1ezHDxfak3X4j/A5M2tqYdNG/adQ==
+X-Received: by 2002:a05:6808:1b1e:b0:463:b5dc:11ea with SMTP id
+ 5614622812f47-464461796e2mr9302368b6e.5.1772030004617; 
+ Wed, 25 Feb 2026 06:33:24 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4644a1ae488sm9029863b6e.14.2026.02.25.06.33.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Feb 2026 06:33:23 -0800 (PST)
+Date: Wed, 25 Feb 2026 08:33:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] sandbox: symbol CONFIG_DM_SOUND does not exist
+Message-ID: <20260225143321.GC1593142@bill-the-cat>
+References: <20260225094233.44047-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: mtk-sd: add mediatek,mt8189-mmc compatible
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Julien Stephan <jstephan@baylibre.com>,
- u-boot@lists.denx.de
-References: <20260206-mtk-mmc-add-mt8189-compatible-v1-1-5243eb8b7e2b@baylibre.com>
- <aZ6gwSLjH8IYY_uE@nxa18884-linux.ap.freescale.net>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <aZ6gwSLjH8IYY_uE@nxa18884-linux.ap.freescale.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fV9w/cEvIGSCWhKm"
+Content-Disposition: inline
+In-Reply-To: <20260225094233.44047-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,78 +97,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/25/26 1:12 AM, Peng Fan wrote:
-> Hi David,
-> 
-> Thanks for your patch!
-> 
-> On Fri, Feb 06, 2026 at 02:50:06PM -0600, David Lechner wrote:
->> Add support for MediaTek MT8189 MMC controller.
->>
->> According to [1], this is similar to, but not quite the same as
->> mediatek,mt8196-mmc.
->>
->> Link: https://lore.kernel.org/linux-mediatek/20251203-mt8189-add-mmc-support-v1-1-f5ce43212fe9@collabora.com/ [1]
->> Signed-off-by: David Lechner <dlechner@baylibre.com>
->> ---
->> drivers/mmc/mtk-sd.c | 11 +++++++++++
->> 1 file changed, 11 insertions(+)
->>
->> diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
->> index 4928a880038..7a4bdee7496 100644
->> --- a/drivers/mmc/mtk-sd.c
->> +++ b/drivers/mmc/mtk-sd.c
->> @@ -1979,6 +1979,16 @@ static const struct msdc_compatible mt8183_compat = {
->> 	.use_dma_mode = true,
->> };
->>
->> +static const struct msdc_compatible mt8189_compat = {
->> +	.clk_div_bits = 12,
->> +	.pad_tune0 = true,
->> +	.async_fifo = true,
->> +	.data_tune = true,
->> +	.busy_check = true,
->> +	.stop_clk_fix = true,
->> +	.enhance_rx = true,
->> +};
->> +
->> static const struct udevice_id msdc_ids[] = {
->> 	{ .compatible = "mediatek,mt7620-mmc", .data = (ulong)&mt7620_compat },
->> 	{ .compatible = "mediatek,mt7621-mmc", .data = (ulong)&mt7621_compat },
->> @@ -1990,6 +2000,7 @@ static const struct udevice_id msdc_ids[] = {
->> 	{ .compatible = "mediatek,mt8512-mmc", .data = (ulong)&mt8512_compat },
->> 	{ .compatible = "mediatek,mt8516-mmc", .data = (ulong)&mt8516_compat },
->> 	{ .compatible = "mediatek,mt8183-mmc", .data = (ulong)&mt8183_compat },
->> +	{ .compatible = "mediatek,mt8189-mmc", .data = (ulong)&mt8189_compat },
-> 
-> I not see this compatible being in dts/upstream or arch/arm/dts/,
-> so has this patch been tested with upstream U-Boot?
 
+--fV9w/cEvIGSCWhKm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-It has been accepted upstream [1] but hasn't made it's way back to U-Boot
-yet (famously, the MMC pull request was rejected for Linux 7.0). And yes,
-I have tested this with Genio 720 EVK. I will be modifying [2] to use it in
-a .dts in U-Boot. I am still working on some other dependencies before
-submitting that.
+On Wed, Feb 25, 2026 at 10:42:33AM +0100, Heinrich Schuchardt wrote:
 
-[1]: https://lore.kernel.org/linux-mediatek/20251203-mt8189-add-mmc-support-v1-1-f5ce43212fe9@collabora.com/
-[2]: https://lore.kernel.org/u-boot/20260209-mtk-mt8391-initial-support-v1-2-b23ab9d0b9bc@baylibre.com/
+> The correct configuration symbol is CONFIG_SOUND.
+> But without CONFIG_SOUND_SANDBOX there will be no output.
+>=20
+> Imply both CONFIG_SOUND and CONFIG_SOUND_SANDBOX on the sandbox.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  arch/Kconfig | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index 4af0da2485f..f59fd80d0e2 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -250,7 +250,8 @@ config SANDBOX
+>  	# Re-enable this when fully implemented
+>  	# imply VIRTIO_BLK
+>  	imply VIRTIO_NET
+> -	imply DM_SOUND
+> +	imply SOUND
+> +	imply SOUND_SANDBOX
+>  	imply PCI_SANDBOX_EP
+>  	imply PCH
+>  	imply PHYLIB
 
-> 
-> Thanks
-> Peng
-> 
->> 	{}
->> };
->>
->>
->> ---
->> base-commit: e5e75ea8c7b8e6d9ce1ca8ec7a25fa8b3f6029a9
->> change-id: 20260206-mtk-mmc-add-mt8189-compatible-6a71d5c710dc
->>
->> Best regards,
->> -- 
->> David Lechner <dlechner@baylibre.com>
->>
->>
+We should just s/DM_SOUND/SOUND/ in here, and fixup
+drivers/sound/Kconfig's SOUND_SANDBOX entry in another (drop depends on
+SOUND, add default y since it depends on SANDBOX already).
 
+And thanks for going and fixing up a bunch of the odd symbols we have (I
+ran the script you want to import, there are *a*lot*) !
+
+--=20
+Tom
+
+--fV9w/cEvIGSCWhKm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8IMQAKCRAr4qD1Cr/k
+CvXoAQCCvdb4z45GLKlS6rpFTJ3EMTXF5LhobmOoXcPWxv3FtgD6An3x0bWdENYM
+dpspi8SrBKb0EIqHavIFpMQN1b054gk=
+=WgJP
+-----END PGP SIGNATURE-----
+
+--fV9w/cEvIGSCWhKm--
