@@ -4,110 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2E9FD374D
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 12:21:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DCA3FD3758
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 13:08:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE92783642;
-	Wed, 25 Feb 2026 13:21:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 773AA83642;
+	Wed, 25 Feb 2026 14:08:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KQvqLBpW";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Ka+ht8ui";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 574828366F; Wed, 25 Feb 2026 13:21:13 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 443558366F; Wed, 25 Feb 2026 14:08:14 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E2CD8003E
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 13:21:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00BB98003E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 14:03:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
+Authentication-Results: phobos.denx.de; spf=fail
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 057A13FB89
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 12:21:11 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 868BB3F73D
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 13:03:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1772022071;
- bh=blwVU64SNeG3eyozVZW0wbgNQXYARd+LlR3Lmx185hw=;
- h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
- In-Reply-To:Content-Type;
- b=KQvqLBpWH4MABQKFYPvm+qrw5ByzUsLsZNq+51pN98dA8Ex/yMtm3QNUUfPEXdecI
- bnn8rHdZ1JqLljCtCRrcIVX4d4GkjXHhezdZFvhzNTa7kBPAUgv8O6Nf8u4O16nLMK
- w1buBFVVTskx0PxLEuY8ICQLt3cMNqp+KhE5xXVkpz+1wQ0c4EhJpXenxYJSDqtR3L
- 8cPNcJpKq6DSr8ZDgsNRV2K3ZY5Fs4o9WBv32Jwkdexk8RaT+85zUqnTAt43tn3j8d
- Ne4g3q1tJ4HPUh/0bSg18uBnsIlv9GFu3nwpGl+uKrh49z6TBRUsvpRyS6fU/oVW0X
- glm29US+42ziXjEgGICtjX6AOj20Kynb3L7lZyh0O7mSEkgLMZn28RE/hA9fBjj9fa
- 4htsdr2xfJiLJ2Jy+RhfKEkhWjB1siFkJlbFg3nhTzdhJOuPyL7P3KOChCCecgrWnO
- tollFbekQXU8Ni1r4ecUZRpxNAVgnX94SyQ1FwcNuBqR7pKv7dM6jEj/gX6nh8cfaj
- Sq6SMCYJbdM3FvZ/NP8VhoR8BVwHkYO5KFyxUci628c9d7zrjldKOM841BPbhMgCpI
- RWbsXfutJ0rtl/A0YcNrp9dOkP+J7j3YG+PNrBeTh7crL6+Z9BwVYm9/JoiGF1i1cK
- CKe3yccX2kDXxAqz/cyNsJxU=
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-4376c206493so6671804f8f.0
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 04:21:10 -0800 (PST)
+ s=20251003; t=1772024599;
+ bh=m/uadMrH3RgN41uG6f4UgVxUsFmD34YIrj8tiWuWcrg=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Ka+ht8uieyPgmdgfqa/8dtEFPCazPHgi0ULDrfh0XFAwYqK2hpKJtj8q+vMMT7c91
+ QLXXJKXrIBl6T/GWCCgRIFz1pishThcomi5a7bTtMgCc6dS6DCtGHPNt5dz2xL9tAD
+ E9igBKDQR3zZzAyCZOwbQfQo6YmDwGroYqgqy4OoH/VbKIYUJNyyeIomMBUbQtjy9G
+ gEPeca3fn3cByPD5jd9evLYVQO6CtNhgwQEoZoiHCXO/s1VrXGi92sng2ATRclXziK
+ 1xu6tF+VnTZtpBlCQVTAvlmgEea9SStbkfIxttYgGccCNyuMdC80SSP07eRT2VVWp7
+ mhRUKLrMYnWCPifnxSVJQ7TspW2LIAQfvXzuLLERMxXSEcUVM1nmrS1yrQJ/E2KfdP
+ ideQQrIjCRqA2AQvz66p6B9/Isx4Ye0wIk+muCQT996zakpYlYpJ7s74bfyPsWgRX9
+ dOhbudxVv8JYK9PqD1xfKrzXR89yA01oaj+PK4OtVfLMxnOgXbro4KYXfO0KUpq5jx
+ zaIzAf93QrZBgvoXLyn3oH2wd+eQ+L8lgvjczwZN07FCLQAn4amVRtqDAgmTg5Iwog
+ 4qN5bQpLDDB0CusE1uOcLReq/cqy7BEvrLlgH3y1oNcPPrpBbzZv2PjoBKHhOvV7bo
+ qckx7X1hH1K7brla/xXVDXw0=
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-b8ff07df5e4so637732866b.3
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 05:03:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772022070; x=1772626870;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=blwVU64SNeG3eyozVZW0wbgNQXYARd+LlR3Lmx185hw=;
- b=VqI0+lhYKSVTcneBXboXEem2hNUIdMJgQtFMf9VFvKAKJiPTE06Cj02iW8EtdcL1UJ
- 1xZs+9VVP/yZ4Yng6vbnwurcrS8BgpLSrjBeGbMehsBpASYxUvN3iOQn5KScMhPmywtx
- qBW2z4r3YGcQXzPzOoWCeX5srGt7N862iiMhqDD/XlxE+jq1r/xBUlyL55Ixy2LZ/v1f
- rpdtfJ+FzLnJKbt0b/kwHpLOQE0zzxw+JgL9Z4q2FUBtzIsPi2lcJdwBljIHHUpbyhTw
- aW2LkPw/hK1MkwFzCbols3mn0c3tfb6PDmR40NWNZisPZP1yPbnVLdDLIeyaS9oFROa2
- U9eQ==
+ d=1e100.net; s=20230601; t=1772024599; x=1772629399;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m/uadMrH3RgN41uG6f4UgVxUsFmD34YIrj8tiWuWcrg=;
+ b=ss4MPBvtbW+Od015e7qS8YoYaDQHEVTOWiQduHkwIQsNdItRa7G1vt7yqjE/CFoRAL
+ Kno3OlPkALIyL78pR1fJZFQfhYago+fiUjzq+Dqa8ZpB5+NtqeJ/OJfe1guBKk/vVuMq
+ DBy3L1rNJftYZm3PNGxJNnhEDEBI0gaPacmafORvLHk4k/mLWCYwvIwKxiOxwulKIIe3
+ ZdF16rbD6mphG7mlUzYJ7NNfMmQZ4wCacV3QuOY6BnZEBHRLImfFeB8KSr+cHCyJELTH
+ aQGDcGnWbN7Oa+j76nE/MZ+N3Q+gN7Cj52K2L2g7EcjuHC0bGS/VePaF0mxcY+NuZ9pR
+ etqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGF6y/EdeUxMUjuMP6RYkHa6DO4Jklx9V585uQUuFUcgXaX2Dg3FEa7sjYqafVQeQ40MwcG6E=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNdxSRmmhR04Eac8XymxH+5mVCSbKYYbO7AW2Eim7G9iMEUT59
- /e3jmd6itZXhL7syQOC+l1scQ9f3gpmfb4G1pytXrxTAneBcJ8EYvNYd75mrzy0/g+Mp56GgUVL
- xE96FisqZYqrm9zWKcVCx8W5EHp7rn+29v26AMhI0luajDZvbgfE8TmoiM6Eekz7ipc3QNDk=
-X-Gm-Gg: ATEYQzxJGLusnQNO67mZCDfa89mrsY5AxjICVamQAa9eKbhSkeYcn4Z/C7JaSwHUihB
- T+Cs2Zh/X8iejF6CI+6XY+pBHSUEht9hP3JWFNnMKq2CJvbu/U0llEpgA+lWDnQ+2y73BR2GUd5
- IAAobnV5Zqq8C9o3WiZuhQEMLlo3WTJ02+2et00TljLUQAAm74POMLB1ELO2lroxIttsvolrfGG
- 0lxC/tpA/F9QZxAy7XMdyZG7sqtXhPgXxruyAdhwVseNSB2uy8yvTtkkKDb92tVFa+1ABLAEj2d
- cTh/JUyZprWzAHq+AREpJZVjWph2+XtzAvYl86j3FsHqBqEiWSQxsvqPzTTOHXI+gBrtBeLwHS9
- iRH4Qy+jX/z5Wjppz6jr5QrKrytT/z6G+3Uk38/xGuzu92jGfMGdTMYJgaa+emp+EtmFVK/d8jP
- ld+frozH95cwBjiU7B9wyE/BlsU91pe/ToxbnGuU6F4tYaOeUudw0=
-X-Received: by 2002:a05:6000:2881:b0:439:9282:e71d with SMTP id
- ffacd0b85a97d-43994294d13mr526171f8f.7.1772022070402; 
- Wed, 25 Feb 2026 04:21:10 -0800 (PST)
-X-Received: by 2002:a05:6000:2881:b0:439:9282:e71d with SMTP id
- ffacd0b85a97d-43994294d13mr526129f8f.7.1772022069993; 
- Wed, 25 Feb 2026 04:21:09 -0800 (PST)
-Received: from [192.168.103.130]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43970bf9feasm33611414f8f.6.2026.02.25.04.21.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Feb 2026 04:21:09 -0800 (PST)
-Message-ID: <d00103df-8188-4039-b618-dc48ab1c1a39@canonical.com>
-Date: Wed, 25 Feb 2026 13:21:08 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] boot: don't select non-existent CONFIG_VPL_CRYPTO
+ AJvYcCWK6sidwIL8KmCSPyvV/5RgseOrgMr4h1rjrw7g953JNPMEQBEcRRVFokbYFHDYgft0y6mI2Zg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy2qdwmt6GeMWrEWZeuq3juyeqIS+URi79alzt9VMAC5myo1lMX
+ zr9Otxx2std7mnJvEHOgHRBObTUbWRqD6aopM6q5UdBsbJ7UbRuMwrkUuYXJxsPuSZ5kLQ4+Lal
+ KyQ8BdGusofuFaXUh1UUklXh6sEB5u5+m7m5vskqZBFsjH4RmvGWuFqxGNdKvsbA/Zrv+jP4=
+X-Gm-Gg: ATEYQzwMIKtRqtfLCkl//bYVx/53nLle426jCaTPP8nTDo0WL+8ell4Yd/B5RBAuVU7
+ Aw0RZudhllopb8hZzrgxFdGhpqWBeD2t5PDPo5onb7NFNOPpdDu844dfhwdotVvXTfY2hzO/WZY
+ edyit9eGhes62mGQAfeydE2hc017YqK1eZC8iZsIBYy31xsd2R1xBk1hknzjcbsYCpG1qjfoMKv
+ RSH4/bjHXB6BuZK50/Bh7RVYH1kO0o99ZP2/2yriM8zmKA8aBjiSIe2bPqqljqJ7Vk2DzBbk3GG
+ C30E8v3FGJz4dHH7vwmxl4pZ2DyWqeg+I8TVzUvPHGwKPw6olZAm75hbry48MXoC1AVLbuHUjzB
+ 6k8PJQyqGk8/1hHJcIeX59cr+KQyQzuJKwUGT3lLaIZRaYl9PGk0Q/KoI1q3GdBQbJBt4B+mqg1
+ 5edvCRqN+/g5wZfYvty+NB80dIUQVWW+TW+jKH5aw4mMip
+X-Received: by 2002:a17:907:da16:b0:b80:751:ee62 with SMTP id
+ a640c23a62f3a-b90819ae26dmr973001266b.14.1772024598970; 
+ Wed, 25 Feb 2026 05:03:18 -0800 (PST)
+X-Received: by 2002:a17:907:da16:b0:b80:751:ee62 with SMTP id
+ a640c23a62f3a-b90819ae26dmr972997566b.14.1772024598476; 
+ Wed, 25 Feb 2026 05:03:18 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bd732eb1sm70098795e9.12.2026.02.25.05.03.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Feb 2026 05:03:17 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- George Chan <gchan9527@gmail.com>, Quentin Schulz
- <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20260225073711.51688-1-heinrich.schuchardt@canonical.com>
- <ee169196-69a3-4003-8531-0ffa4e76bf6b@cherry.de>
- <e9d98d0b-578a-41ef-9440-00ea615d224d@canonical.com>
-Content-Language: en-US
-In-Reply-To: <e9d98d0b-578a-41ef-9440-00ea615d224d@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] disk: fix DOS_PARTITION dependencies
+Date: Wed, 25 Feb 2026 14:03:12 +0100
+Message-ID: <20260225130312.60122-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,53 +114,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/25/26 10:06, Heinrich Schuchardt wrote:
-> On 2/25/26 09:37, Quentin Schulz wrote:
->> Hi Heinrich,
->>
->> On 2/25/26 8:37 AM, Heinrich Schuchardt wrote:
->>> Symbol CONFIG_VPL_CRYPTO does not exist.
->>
->> Correct but I have a hunch this was based off of SPL_FIT_SIGNATURE 
->> which does require crypto support, so I'm assuming VPL would too.
->>
->> But this symbol indeed never existed, and even if it did, it wouldn't 
->> compile anything else as far as I can tell since drivers/crypto is 
->> enabled by default in proper and only if CONFIG_SPL_CRYPTO is set for 
->> SPL, and only SPL (checking for !TPL and !VPL)... so something feels 
->> unfinished with VPL here to me.
->>
->> I'm not sure we're improving anything there but I don't think it makes 
->> things worse, as such
->>
->> Fixes: 4218456b3fac ("vbe: Add Kconfig options for VPL")
->>
->> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
->>
->> Thanks!
->> Quentin
-> 
-> Thank you for reviewing.
-> 
-> There is a symbol CONFIG_VPL_MBEDTLS_LIB_CRYPTO that might be used but 
-> then VPL_FIT_SIGNATURE support would have to depend on MBEDTLS.
-> 
-> Maybe Simon can inform us what his design intention was. Adding a 
-> defconfig actually testing VPL_FIT_SIGNATURE would be helpful.
-> 
-> Best regards
-> 
-> Heinrich
+* The symbol for the x86 architecture is CONFIG_X86 and not CONFIG_x86.
+* Correct the description. The partition type is called MBR.
 
-There are more non-existent symbols implied by VPL_FIT_SIGNATURE
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ disk/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-         imply VPL_RSA
-         imply VPL_RSA_VERIFY
+diff --git a/disk/Kconfig b/disk/Kconfig
+index a58717bda30..0a2ee7502ab 100644
+--- a/disk/Kconfig
++++ b/disk/Kconfig
+@@ -60,9 +60,9 @@ config TEGRA_PARTITION
+ 	  If unsure, say N.
+ 
+ config DOS_PARTITION
+-	bool "Enable MS Dos partition table"
++	bool "Enable Master Boot Record (MBR) partition table"
+ 	default y if BOOT_DEFAULTS
+-	default y if x86 || CMD_FAT || USB_STORAGE
++	default y if X86 || CMD_FAT || USB_STORAGE
+ 	select PARTITIONS
+ 	help
+ 	  traditional on the Intel architecture, USB sticks, etc.
+-- 
+2.51.0
 
-@Tom
-I wonder why the VPL feature was suggested if it was never tested or 
-used. Should we remove all of VPL?
-
-Best regards
-
-Heinrich
