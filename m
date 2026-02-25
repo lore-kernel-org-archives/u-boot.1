@@ -4,102 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFF0FD3767
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 15:22:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3691CFD3762
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 15:23:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 604BC84013;
-	Wed, 25 Feb 2026 15:46:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D42DE8406D;
+	Wed, 25 Feb 2026 16:18:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="evhfN7jf";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mDhNEc92";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D88C8401A; Wed, 25 Feb 2026 15:45:48 +0100 (CET)
-Received: from mail-vs1-xe2f.google.com (unknown [IPv6:2607:f8b0:4864:20::e2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 825D88406D; Wed, 25 Feb 2026 16:18:27 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com (unknown
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62B5284008
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 15:45:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D0A584129
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 16:16:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=tempfail smtp.mailfrom=raymondmaoca@gmail.com
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-5fdf6ad2517so4309888137.2
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 06:45:02 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772030681; cv=none;
- d=google.com; s=arc-20240605;
- b=H80vjt7KEJcVk4y/NaEP2FpFEC3PxldWGbrNimm5RxCzmMmahnuEMQJhoYFKwx2CHG
- wJyRB2NUHvuBw6OLcUaXOZBkzYVl2Miq9ShQIF9pnyH4pupH9YgO+w5FBIvtObdx6j21
- f/SZ7y3U6AJuPWZ6v5HsZSZS1KLcCyUTUdfKFzFLL6vajE7JZjj0QGHdtW8IOIeEAvUe
- JHlHz+qr3IRKqHol8/ORaTkZ5p0Z8HdLzgv7JgG2UycT/4lJVtdrtoupPDwAypYODGOT
- 0qXpKmDcJXaO66g3/bZ/Zur2Hpkq8bZVzFpBjall3n5d0uc4hkBX9+gCaXAIwzJEYHM7
- x2WQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=JRTTGByiTpydyzIXY2OsXfta3eF8pZE0zNgaSzFnyBo=;
- fh=NJC98CYmoOMuOUQ6moeWKWdStS9d0DkepP2bE5OamAA=;
- b=OqWKPeuq+pgrt310unHJZO/KeUynvtvIgsQjDNpVWCXegwsTn8n0M6zuC16yM0L7Jb
- dstkD3/FrRS1XvfSX0EXdreyiMRiJTCcKuC+FLV+CyVxmCucX/LHAVzL+ThoCLOBefx6
- 93XbjUIsUHixU0tnzHDsEOawiLtcCJrJAkH/nZ7vKj2ZzDWdbAnlY3VEnV62CAInGM4s
- gSOUyr91lDRTmKO98gFUN7qiD2aS7zkFEMrV45kA4LmXhB8M2hRd4kOMMrdt4+0l1KCE
- cKcCo0UP25gmQjcE6CA+bJnSoqIsoEjVAawZ/hDMSkgWSMyOrS0rIHP1XaPOC9WBELHE
- OKfg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1772030681; x=1772635481; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JRTTGByiTpydyzIXY2OsXfta3eF8pZE0zNgaSzFnyBo=;
- b=evhfN7jfSXxpM1CyUGfPKIN6gGjBX+RaYgkszBnKgIbG8L93lVgZGqYIeZ0KM0TXSF
- wsaUE7INauH6nLzWim3k13VF/QlPFdTVxQjYzvKLVs3fQX5rAYVPzhh0Z83TIG0/P7Gp
- /hBG5m262+YWROXC6rBkZ9F3jiilGcQvtrHbiG0dW08sP7phZz1ZnY8AsRcMuxrZhThB
- nTxuBNiAEBJ+SuGv43pEW5A5mZzSCssoOEjGeA2oQvSQEZm8R2cMQ7Ic2I5nKDtB8O7B
- +ycINBM08qO1ZgNtoRu0AI50jHwiOQOZLytw5HvUQ4oc6bGhik0E8RIPHBwoFUpkqirH
- 6KHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772030681; x=1772635481;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=JRTTGByiTpydyzIXY2OsXfta3eF8pZE0zNgaSzFnyBo=;
- b=VSGzftJD0io1FDyo/SNredOib2sXWjwnugvcWcYXIGwK/uDLUjpmd6O+wGgBLX25JT
- QWWvUUetsaL90U28emZ8z+29pNV0Y/RAlQN0TlXUJJO5UCXeEpctWEBkrOW2x0CmbeOq
- g9omffI5SoS6o4y0HrVi1Rcp7OULAf71msdciOKwIxI394/wnfd2PIbyD1mbweBgkmQQ
- +5ZZONea2siVLSwtRFZ9LKEHL4g40Bxu3uz2BY97Xk0VDXTDF3R6YANgYm0t7UR5Y78M
- FXIx+F7um3s8ervr1m4x2pKJYZ57cTyLxlkqXoJszRpZLVAQxMSaBBlFu/hjL3GmxFZ3
- b1ig==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/kOkk+CkuUJ6BOCF+ma/G7KYHvizBfGUL48k/kDvCAPvICka89n+DcL63UQ/AP0YrwGPcJ+I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzQ2W0tY6ObpwqMDL72K+TkCbn1WCIPeEfNipiFKlbfgWyTl2N
- m/5gUAny3YDJ+lHTyb3uWdsHPItlg+zVTnDlBLTKQgbWDWckkhq19lFdi6sv5Dkd/VicQu8zXub
- OLuWDL2LC4+5/wHrEpGK5kl3I1fZU8k8nRfxh
-X-Gm-Gg: ATEYQzzDe1+3LoW1rJOy5VQTmwdNoGkG6H2ZwE2TLfry4m4Gy2Xh8RbwBuaZKr0grwx
- ZPQKL2liUB3jjM4/1ZVol/2on1xQ8Ukrd8PCF4sb8Kun5RPomHFOmTJqm3rDJ3HsrCmjSDmAD5T
- KJx/mHD10TK5QhIu5CtnU7epeNr+r8vnii4MB2D6hrrM+mU1FRxL6swLNScdTP1vfn93RrU0s4k
- RomY+50ONvu6wio23Qz/9ImuuDhlgfFmtjF8SjWyOnOyhsJES2PQ9oBtNnUSXI7bU4UOHPgZPwX
- T4Gq7mzD
-X-Received: by 2002:a05:6102:3f4e:b0:5ef:2548:76b9 with SMTP id
- ada2fe7eead31-5ff13e5d91amr405581137.10.1772030681050; Wed, 25 Feb 2026
- 06:44:41 -0800 (PST)
+ spf=fail smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ec+HBhmsy7ONEaQBgD39ZNZFX5J5AGzvX927PB4/9AZyO3bxuSNl0+hFLCocCr9JTBFuxSaBrKycvGj1M9hv7IhVNnJUjZKiLrtjC5oPXlqWxEm/Gc9rurwBRn6v/qtu1aAJihMbav6EN0FSSCwQ7ujdIbXwT4k0bm9kcX7L4e4N/1V96VH2ZycrdCKzEnYEaFye4mZjWIcJOk51BesLT2Y1QUBrkjmoMRD8Y4RvRA9HQsjltkaz6tbMWvYL8xXKdP/ayX5wwiECbUvVGMFIV87bQd7kuDB5WSnE8iHnNydig9vsuTL3xf5OFN6iIQUQEBgZAprybgz1NT4Vkpktqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DKVMw6QxMHC4lQ9RMOQVMWOyRXIxgQiOJt8b3mvePoQ=;
+ b=b2jvzfF7HJoeuEw+IIx3A2O0qtkYUcAin7jq0IJlL+HVO+QsB+mB9zJo4V+l6eN2ELj3zReQZyXe8/Uw1jozNzoHrQFmw2KknjLlJHUXOF43nHk88tcwdQfkadm123lJx85FGj3BC9AZeQMElydJDkClFZ0O71Hy5W7+2GXHtSOsnjNinil08djcAcGbObsxsKOw182oHRWqnM8e3Bhn012LaPGGFYv5oCwNDJ2ns/7tjZvOV3mdH/6VBRDiHhhX+5Yf3cFIECZlNBQmlyox569JPJ6OQbiG00ECSSrtlrq6jE+2wfJODMC8uFrflSKQL4ylTuPJ+3C1Ho1jdruyRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DKVMw6QxMHC4lQ9RMOQVMWOyRXIxgQiOJt8b3mvePoQ=;
+ b=mDhNEc92xHExgNKADjXrUNHmcm9cJ1GKZw4SWIRU1smnFAFGw4mUFJBxTPdyer0hcJaC0xfowNQmqAD6c2oNVceMJm8CIb/efbY8j4DCT/OgRx++6zIh8kaQvvxcS9RqayNIvBcWzkL7H3OaPWIBsUXVprm4fnli20/T9uJlOf4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by GV2PR04MB12020.eurprd04.prod.outlook.com (2603:10a6:150:304::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
+ 2026 15:16:08 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9632.017; Wed, 25 Feb 2026
+ 15:16:08 +0000
+Message-ID: <80e1ce6f-10d3-4e9a-9fa4-f7b7e613e989@cherry.de>
+Date: Wed, 25 Feb 2026 16:14:36 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] video: Kconfig: fix indentation of help text
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de
+Cc: Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ion Agorria <ion@agorria.com>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Simon Glass <simon.glass@canonical.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20260219175301.2839586-1-dario.binacchi@amarulasolutions.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260219175301.2839586-1-dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR07CA0160.eurprd07.prod.outlook.com
+ (2603:10a6:802:16::47) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-References: <20260225072359.50691-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260225072359.50691-1-heinrich.schuchardt@canonical.com>
-From: Raymond Mao <raymondmaoca@gmail.com>
-Date: Wed, 25 Feb 2026 09:44:29 -0500
-X-Gm-Features: AaiRm53vO1zjLtu6m7fJg1rl_stughrE6aEgE_I_3iyTDZSXFmzY5rPRSeYtUFg
-Message-ID: <CAMDkj5w=HoumBCvDB9LTTXAQbLpExzTcaSGtf-5atOLQP_8YWQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] mbedtls: don't use non-existent
- CONFIG_TPL_LEGACY_CRYPTO.
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|GV2PR04MB12020:EE_
+X-MS-Office365-Filtering-Correlation-Id: 30c68a29-c0fb-4917-c2fa-08de7480cd47
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
+X-Microsoft-Antispam-Message-Info: hVhFExrULN0OPuR+V5i/pcZUd7fvZ7g7CX47/YW73I640Tce3ew1RkFIBKjI5MAQkihULuPI/gKy3Yib9Mt4VYO7ymZPToaKcYDRka8GnWyMFAt+NV2s3TuUMzqmfc7JISw70foDwTgQODD5PL8LJWSSaBv0++k/FPa3rZ972+LxEVtmM9MRKsDONL5JY1WnXxvFokgnM/o2TaustlNRCt8+g0cj4wHnBQJzfOdRufmEh9pm+EnHqdxCvZXaH58tsQi2Bz7ZmDr3jFHit1n9ACQOTQ3GcA/cu1VAs1FPwTpGCmoQVxrKXcnX4KjNoguQf9QP9TuX36cQUH83sHBDL4Bpq4diJXi8YaXOHOC70+SpK5tZAjwTIrRJEejxqrNwfHtcZXkDw43zxNx0t7H7vPVHbJVsX4/PqpwNt4OlislfrTGb9A/Iekm4j99efphNxKpHLNE7HX9c2UTbrRUNdWNFjXhIFVtyfWR+Wdjyt/9u4aani5PrSTLXW2fATPizIxwwNlqNoJHWrdk9Et6dgAE1RCpep1Z6y3Cs9DtVgI7WE2iP5rM65ncLbOS851w9GcpQp/A+lqbMaNx4UwVjyHnMoQOBFEScHKUSqEzGkZTcH7qGM8dXkD0KHUEL0gHvaa9mwHObiod6TN9pC/83b0hIUWiHiQLviLuxvir/VPxQoqNBim0LLwcus1wgBnsY3AqPgSb2dsczMP7EdHiKCBf2nxz+XB0VWTK/JrnPyZ0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SVV5a0s1NWE4SHYrWXdPaHVGSlNFUGx4V1BkL0dsd0dpYk1EeDV3bnVwOExP?=
+ =?utf-8?B?N3JiTVFNcmtQbEpSSDQ0QkcrcFpZZkpDVnBjUlhJTjF3RkdxT0ZqaUh5aWJV?=
+ =?utf-8?B?NDV1ZHNQN1crTHNjbEhkV3VjVEU2ZmROZHNPMnlvdGVnY21RM1ZuelEzVy9Z?=
+ =?utf-8?B?cDgvNlpnTVBucmt6aGJKSi9zWkIxYndIVVVXQXpqdTcweGxTSS9TSE81RTJR?=
+ =?utf-8?B?U05FUkRZRWh3ck5aQ1JCaXc3cThMenIrdjlBVkd0RmorbWVwdHczT2Y5YWVM?=
+ =?utf-8?B?TkRsQmp5c01zNmZ6TVVQVFZxNnFhWVZaRFZmOUNrRll2MS9odU54RGVNaVoy?=
+ =?utf-8?B?QnkwNmNaUnkwSmtvQmJhZzlacDZjMUd2b3lLZlVUY0FacXgycXBFWC81L2kz?=
+ =?utf-8?B?dUpIVnJZZFJqc01OMlJvd3BIMGxKKzI1bVBSRVV0aUFQZGdSZGxXd3ozY002?=
+ =?utf-8?B?T3dkSlJFTlRMWXUwY0Jvcy9CVDRSU2diWkFDZXBzMm1UTlllQVFyTytpZk8x?=
+ =?utf-8?B?WFpXcnJLNUhSckI1Y0Vyb0NWTnhYWC9saXp1K1dvWVZzc0xuZGhucGpxNml1?=
+ =?utf-8?B?cjBDb2JFUUF1bG9nMWZqV2o2ZU11UkhnYjhUVHIyY1AwdERFZFMxQU04Y1dR?=
+ =?utf-8?B?azE3TWg3eCttVWYySTIyUHUyYWZpcVZic0pPdnh1ajBDanliMHh3ZjFrVUI2?=
+ =?utf-8?B?aWhybTRqQ2ZrNWk4V1ZKNkVYZDhWN1gzMlp6cktxUmJWYldSOGdRWlp5STVt?=
+ =?utf-8?B?ZEQxU1o3RHp2Y2FpczN6d0dFN2RNUkJYejZBZkFKK1FiN0Vvc093bkk4aWlL?=
+ =?utf-8?B?VzQzV0dDR25wQzEwQnFVdksrN1dTSjQ0Z1RETy9jL3QwaWJ1S0JlazJUMVZM?=
+ =?utf-8?B?bU4ybDRmckFlejRWTzFKaHJ3TFhEOXhNbHJ5NW5OR2E1cEo1TVU0c25aLzBS?=
+ =?utf-8?B?SmtnL084di9sVFBBRFQ5dXFGa0NXN3VCczlscm5JUlhsN1A2QkZFMnhtZG1H?=
+ =?utf-8?B?ZjBIanE1akNUNU5MVk5QMjBFS2tIclloMnBzOG1sL3h6UHd1TWtDV1QrWnJL?=
+ =?utf-8?B?U0hkR015R1QxbFEvZjNveE1MUHdZczA4ZHZJNXFwOWJtWHlmVlROeTU0QXMz?=
+ =?utf-8?B?bDdLWWRpTStDcGExK2RLa3F3VzV6TkFRdXYyUGpheVNGSjBsN2kzRzVhUzNH?=
+ =?utf-8?B?VU10ZGh4clQ0YVJGNUNRTVBYOXgwQklHWFQzVU54d0xhMGkzMFFGUnd6dlJX?=
+ =?utf-8?B?QWdMOFVaemRYc2RSKzFhRFVRcGRqSnptbVMwWll5QWUvQU93bjFMYnNhZVhB?=
+ =?utf-8?B?cGtDSE1vZ0Z6dDZ4TUpYRXZTWEJpZ1U4aGpVVHMxZFlkckV4RjFiYk1jZEhv?=
+ =?utf-8?B?SCtteXp4aHl4a2drZ0RyR0FNZFB0WUdSeXNQcW96dmNxYm9SektpRFhpd1Vv?=
+ =?utf-8?B?azRsdXpDZGJKalhoTEhRM0FmeG8wMnNkdEF0RWhpTFJ0TnJUQ1prYk9FcVhY?=
+ =?utf-8?B?NDd4dWhYR1pncnp5L3dONkpJQXVKOCt3enRESUZhNTVjVnErb1RKZCt6R0tS?=
+ =?utf-8?B?c0t0cnFRWCtTbDduSnhwVFBGOFQ3TnFCM250em8vc2RKYUYyYjZSSGpaam1D?=
+ =?utf-8?B?QnR6Y211NjNpUEdrYWJsTW1ZdzB4SkdwRHZMV2szNVJ0eXNoeXRFNjdlNHhi?=
+ =?utf-8?B?amNGYjBvR2FRZm1Tc2ZTaDIxWGlycWNFbGxTWDFkMlRJQi9rVGZKUHloS3dO?=
+ =?utf-8?B?YXZURTNxVkVtU29NOGU4bXhha1ZMM3J5b2tSK2hpSHo2UTNDdjkwcU5MaERD?=
+ =?utf-8?B?U3N4dVk0b05XY3RlTGRmZ0t2YmxkUUJzeEkrQ09mZVZvcWhVN01kU05UMWRa?=
+ =?utf-8?B?d3NDcmFVWG1yd1liODYyN2dseFl5OTNoaTRLTHBWRFRvVVh2ekk3SllRbDFo?=
+ =?utf-8?B?YXFDbi9uMHgzUEFtZlhjYVdCbWVpa3ZxNndxekRWZlNoOHg0ZlZpaTg3U0Fk?=
+ =?utf-8?B?L0xxUUJBMFJGVE96YVNHUjFpb3o2MWZBa2I3RHVYYk5NNzZQeHBwOHJiRWtU?=
+ =?utf-8?B?TWx1bjNQSkgrNTB6ektpcnNGc21DSTZBUXcvL0loNWxlUXZoTk1yRm1Nb3ho?=
+ =?utf-8?B?UDV5TzRBU3d3SGZ5VTVZZ1lRK25mRVJiN01zejJBblpvd0kxMGU3RXFHV0w5?=
+ =?utf-8?B?VUM0c3ZqbmsyUitraFpKeHhyd0RRdmlEdUMvaHF2QUY2MndicGJCZEpmakhP?=
+ =?utf-8?B?aUdiazloWUp6c0l4bU1FbmZmdk1TU0lDcVd2NWFoZ3ZXNm1zRitLejhpa2dx?=
+ =?utf-8?B?cWRLSkErUFI1ZWNjOXBJbjRxVkgrUTJaMTdHaXNiNUplaUJyaFNaUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 30c68a29-c0fb-4917-c2fa-08de7480cd47
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 15:16:08.3730 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kOqlHIyvzNTtHqUaSAJpQmKwncdWJ0IEsnOAWzZLKA99LjYuHI8WjGS0yt7YJZLBFWEV/a+7IQrQyPE7A3FE28wveAkKS8DfYRsG6jQhqZY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB12020
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,34 +150,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Dario,
 
-On Wed, Feb 25, 2026 at 2:24=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Symbol CONFIG_TPL_LEGACY_CRYPTO does not exist.
-> Don't select it.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
+On 2/19/26 6:52 PM, Dario Binacchi wrote:
+> Fix the indentation of the help text for VIDEO_LCD_NOVATEK_NT35510 and
+> VIDEO_LCD_ORISETECH_OTM8009A to align with the standard Kconfig format.
+> 
 
-Reviewed-by: Raymond Mao <raymondmaoca@gmail.com>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
->  lib/mbedtls/Kconfig | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> index 789721ee6cd..1e0cf8579df 100644
-> --- a/lib/mbedtls/Kconfig
-> +++ b/lib/mbedtls/Kconfig
-> @@ -556,7 +556,6 @@ choice
->  config TPL_LEGACY_HASHING_AND_CRYPTO
->         bool "legacy crypto libraries"
->         select TPL_LEGACY_HASHING
-> -       select TPL_LEGACY_CRYPTO
->
->  config TPL_MBEDTLS_LIB
->         bool "MbedTLS libraries"
-> --
-> 2.51.0
->
+Thanks!
+Quentin
