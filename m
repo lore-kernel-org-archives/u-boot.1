@@ -4,85 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB28BFD3772
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98FEFFD3772
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:18:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 588328407D;
-	Wed, 25 Feb 2026 16:53:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C7C183F00;
+	Wed, 25 Feb 2026 17:18:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L0qzgWc8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="e9Yj7qZz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39D158407E; Wed, 25 Feb 2026 16:53:02 +0100 (CET)
-Received: from mail-ot1-x344.google.com (unknown [IPv6:2607:f8b0:4864:20::344])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 330E683FD4; Wed, 25 Feb 2026 17:18:08 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AACA283F36
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 16:51:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 701EC83F00
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:16:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x344.google.com with SMTP id
- 46e09a7af769-7d513bc15c7so5288140a34.1
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 07:51:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772034641; x=1772639441; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+lYOgWo2tLfrW88RJRJjtH1Z/9sDf/+Zu9dhfaZoii4=;
- b=L0qzgWc863zkbrDwKOykRn8Rgtuf3dvV8GLw+hW55rKuuIlZnKzjDoMRM7enQSkmv+
- 6U+BscAUzlqtoGUquM8BfcNCuo67Q7mIr8Ae6xwbZZzWWfaJW4V+9HM/DGQ/pWMX4jsh
- JNioY+MA4vetXMQ5YyMkKpCNW4vKVapOFbAXw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772034641; x=1772639441;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+lYOgWo2tLfrW88RJRJjtH1Z/9sDf/+Zu9dhfaZoii4=;
- b=dQeL0WyCCRyLgmaoHYPwvPMum4gULXTtWMSeE/aNpDaxWzxCMaSPPdvRpu44Q0R+Ur
- RGCQ0GzxK+CytXhee0yD+QWkI3Al7KN7Rad2ydp7Z69t+9bzucfV0xk3Ter96BbmMQ3r
- 1fjyZ4cQ4RPD7rGtqKPAnpzCFXjtLNwN0qOq3cFGVZ2JXE7vojdzcE1yFfkbLFLqFt73
- /cSM3IeUN1WxrIt70LiLTw9/kyLA2+ljF4I5cOm+h6pW7BM10DzcSP/84QRSc49PrinX
- nu6xkncEtLwQ6LbZe47qP/eSnNDg4UCKScL34EYvSBE4o7RwSaNX46mOgnHSXNik3r2s
- PhBA==
-X-Gm-Message-State: AOJu0Yz/erxePZgUeVqjBoKNQfDN84THjTR1goKzrzxESZvBFR1rA19f
- VBxlAyu92a2ZhZ7wzwXEwCJ0mqg04C62QU+qpJUneHJn5XM6QNluh8Zs1Y5wyKqUKg1XoS914BH
- AKEH7sAM=
-X-Gm-Gg: ATEYQzzILcAPt92jr2CxT1035gC3Tv1Z2kbqMksb9GLSK0uuqWUUaqT0mIDdeT8CDlf
- g70OIjFR1UYpphgji1Nu3g8lD/78QIIZc1KCtv0yC/YnTrcBSyvvZFU0VE7XQU8M+AzH9c9t8K8
- dJPYpcphazE+bW0Nd2VuY7TODjYMJT873U6CSkG3zDLrGuOrNGqF5ffOJ+t/HD76njZZEeQMtDd
- zRzYu9ynEQn5Trm6wBrZM6SSXansqzdlUQyvYPidPcLshQr/kMW2ryOTSmQOreP43d+wEzl3HMy
- bJSufFJ/tupL38XGnUXqBXtoCcp71iPiA7fzR8mi71Nyhbb0KjHCj2tPbxEBIQpssh+9v+w9luv
- pZ9AODalV2cT4EVwnZ6rwK2wcK5lcVanUfTLha+/tPq7U7RQ36MN78NlFobbh4SMsBloohsCIBi
- PjGhJXFw4HGeXOsbrVhRDVwBoKOT78TXX/HdQ0MU+VydRojL/yPiWE6OyvsFvYx4KTJ+lSO/pc0
- D89y1nqPfNKvZNsoiBgWfdNVWJTT+X4XDEAYFhrvI6g9pVxFqo=
-X-Received: by 2002:a05:6830:2a0c:b0:7d1:4f21:ff79 with SMTP id
- 46e09a7af769-7d52bf2172amr9202134a34.22.1772034641115; 
- Wed, 25 Feb 2026 07:50:41 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52d038b5bsm12625018a34.14.2026.02.25.07.50.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 07:50:40 -0800 (PST)
-Date: Wed, 25 Feb 2026 09:50:38 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] tools/atmelimage: add const qualifier to fix compiler
- warning
-Message-ID: <20260225155038.GL1593142@bill-the-cat>
-References: <b040fc218c68db39b51c9f8d7b180ddfc332d4e6.1772031799.git.daniel@makrotopia.org>
- <20260225150742.GH1593142@bill-the-cat>
- <aZ8R4NfCnbDvdGX2@makrotopia.org>
+ spf=tempfail smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id D0CF641B34;
+ Wed, 25 Feb 2026 16:16:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23684C116D0;
+ Wed, 25 Feb 2026 16:16:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772036195;
+ bh=mN4HFg+26zwjQVYRx076H7j15Q0uY8PuLLAugbNGFHU=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=e9Yj7qZzIUG2iPZSemmf5jKD6RJyylceJmvSf7hI/+72OXTuk1OhIg4dZKMBXjDcs
+ Ul19wf5x1OkM68Pi4ovV2YW6ekfBp3wSyMkCuDMcee0phoB4ZmEkLcxHGQ41z8cQRd
+ Mu1t8GNmdIro1eA4oUJotvC0TRyJVP1f0VVpX7PD3QAHJ6HxSfMhbkrxyamQqn81BG
+ iUVWjO1c/HeaQYAW+S0WW3bGLjddqJWUDBn1X35WV7gROkKO9K0ED4hY3Jawsl0VRt
+ woY6OGMfQZN3P/NmlARthC+2GZAup5lrGMYhrYRU71YbSekPiPVo93t2E7gzDTVWQP
+ pFFWdPtuFI2Ow==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Eddie Kovsky <ekovsky@redhat.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>
+Cc: Eddie Kovsky <ekovsky@redhat.com>, Tom Rini <trini@konsulko.com>, Tobias
+ Olausson <tobias@eub.se>, Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>, Enric
+ Balletbo i Serra <eballetb@redhat.com>, a.fatoum@pengutronix.de,
+ mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
+In-Reply-To: <aZc_efHFk1Q-iWvP@daedalus>
+References: <20260120164524.253188-1-ekovsky@redhat.com>
+ <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
+Date: Wed, 25 Feb 2026 17:16:32 +0100
+Message-ID: <87a4ww23z3.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="90wqKmKi5Uj7QfMe"
-Content-Disposition: inline
-In-Reply-To: <aZ8R4NfCnbDvdGX2@makrotopia.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,86 +73,311 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Eddie,
 
---90wqKmKi5Uj7QfMe
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Feb 19, 2026 at 09:51, Eddie Kovsky <ekovsky@redhat.com> wrote:
 
-On Wed, Feb 25, 2026 at 03:14:40PM +0000, Daniel Golle wrote:
-> On Wed, Feb 25, 2026 at 09:07:42AM -0600, Tom Rini wrote:
-> > On Wed, Feb 25, 2026 at 03:03:57PM +0000, Daniel Golle wrote:
-> >=20
-> > > tools/atmelimage.c: In function =E2=80=98atmel_find_pmecc_parameter_i=
-n_token=E2=80=99:
-> > > tools/atmelimage.c:64:31: error: assignment discards =E2=80=98const=
-=E2=80=99 qualifier from pointer target type [-Werror=3Ddiscarded-qualifier=
-s]
-> > > 64 |                         param =3D strstr(token, "=3D");
-> > >    |                               ^
-> > > cc1: all warnings being treated as errors
-> > >=20
-> > > Add 'const' qualifier to variable 'param' to prevent build failing
-> > > due to -Werror.
-> > >=20
-> > > Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> > > ---
-> > >  tools/atmelimage.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/tools/atmelimage.c b/tools/atmelimage.c
-> > > index 6a2d9d8feab..770f7a0de4e 100644
-> > > --- a/tools/atmelimage.c
-> > > +++ b/tools/atmelimage.c
-> > > @@ -55,7 +55,7 @@ static const char * const configs[] =3D {
-> > >  static int atmel_find_pmecc_parameter_in_token(const char *token)
-> > >  {
-> > >  	size_t pos;
-> > > -	char *param;
-> > > +	const char *param;
-> > > =20
-> > >  	debug("token: '%s'\n", token);
-> > > =20
-> >=20
-> > How / where are you triggering this problem? This is part of mkimage and
-> > built on CI every time (and on macOS and Windows, in Azure). Thanks!
->=20
-> I'm using archlinux on my workstation which got a fairly
-> recent version of GCC which is used to build the host tools:
-> gcc (GCC) 15.2.1 20260209
+> On 01/29/26, Mattijs Korpershoek wrote:
+>> Hi Eddie,
+>> 
+>> Thank you for the patch.
+>> 
+>
+> Hi Mattijs
+>
+> Thanks for the review.
+>
+>> On Tue, Jan 20, 2026 at 09:45, Eddie Kovsky <ekovsky@redhat.com> wrote:
+>> 
+>> > The Engine API has been deprecated since the release of OpenSSL 3.0. End
+>> > users have been advised to migrate to the new Provider interface.
+>> > Several distributions have already removed support for engines, which is
+>> > preventing U-Boot from being compiled in those environments.
+>> >
+>> > Add support for the Provider API while continuing to support the existing
+>> > Engine API on distros shipping older releases of OpenSSL.
+>> >
+>> > This is based on similar work contributed by Jan Stancek updating Linux
+>> > to use the Provider interface.
+>> >
+>> >     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+>> >     Author: Jan Stancek <jstancek@redhat.com>
+>> >     Date:   Fri Sep 20 19:52:48 2024 +0300
+>> >
+>> >         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
+>> >
+>> > The changes have been tested with the FIT signature verification vboot
+>> > tests on Fedora 42 and Debian 13. All 30 tests pass with both the legacy
+>> > Engine library installed and with the Provider API.
+>> >
+>> > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+>> 
+>> As a follow-up, can we look into reverting/removing
+>> commit 3a8b919932fd ("tools: avoid OpenSSL deprecation warnings") ?
+>> 
+>
+> Yes, we could certainly revert this once we've determined it's no longer
+> needed for CI. But it's outside the scope of what I'm proposing for this
+> patch.
 
-Ah. We dont' support 15.x yet due to:
-https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D121588
+Yes agreed, this can be done later on and is out of scope for this patch.
 
-But a v2 where you note that newer compilers find this would be good and
-get us ahead of problems once a newer gcc comes out with the fix.
+>
+>> This looks much better than v2 in my opinion.
+>> 
+>> Some additional comments below:
+>> 
+>> > ---
+>> > Changes in v3:
+>> >   - Removed Kconfig option
+>> >   - Changed macro symbol from CONFIG_OPENSSL_NO_DEPRECATED to
+>> >     USE_PKCS11_PROVIDER or USE_PKCS11_ENGINE
+>> > v2: https://lore.kernel.org/u-boot/20251027195834.71109-1-ekovsky@redhat.com/
+>> >
+>> > Changes in v2:
+>> >   - Remove default for new Kconfig option
+>> >   - Use #ifdef instead of IS_ENABLED macro
+>> >   - Remove comment after #endif
+>> >   - Remove unrelated checkpatch cleanup of 'sslErr' variable name
+>> > v1: https://lore.kernel.org/u-boot/20251017171329.255689-1-ekovsky@redhat.com/
+>> > ---
+>> >  lib/aes/aes-encrypt.c |  4 +-
+>> >  lib/rsa/rsa-sign.c    | 95 ++++++++++++++++++++++++++++++++++++++++++-
+>> >  2 files changed, 97 insertions(+), 2 deletions(-)
+>> >
+>> > diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
+>> > index 90e1407b4f09..4fc4ce232478 100644
+>> > --- a/lib/aes/aes-encrypt.c
+>> > +++ b/lib/aes/aes-encrypt.c
+>> > @@ -16,7 +16,9 @@
+>> >  #include <openssl/err.h>
+>> >  #include <openssl/ssl.h>
+>> >  #include <openssl/evp.h>
+>> > -#include <openssl/engine.h>
+>> > +#if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
+>> > +# include <openssl/engine.h>
+>> > +#endif
+>> >  #include <uboot_aes.h>
+>> >  
+>> >  #if OPENSSL_VERSION_NUMBER >= 0x10000000L
+>> > diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+>> > index 0e38c9e802fd..31269db65950 100644
+>> > --- a/lib/rsa/rsa-sign.c
+>> > +++ b/lib/rsa/rsa-sign.c
+>> > @@ -19,7 +19,47 @@
+>> >  #include <openssl/err.h>
+>> >  #include <openssl/ssl.h>
+>> >  #include <openssl/evp.h>
+>> > -#include <openssl/engine.h>
+>> > +#if OPENSSL_VERSION_MAJOR >= 3
+>> > +# define USE_PKCS11_PROVIDER
+>> > +# include <err.h>
+>> > +# include <openssl/provider.h>
+>> > +# include <openssl/store.h>
+>> > +#else
+>> > +# if !defined(OPENSSL_NO_ENGINE) && !defined(OPENSSL_NO_DEPRECATED_3_0)
+>> > +#  define USE_PKCS11_ENGINE
+>> > +#  include <openssl/engine.h>
+>> > +# endif
+>> > +#endif
+>> > +
+>> > +#ifdef USE_PKCS11_PROVIDER
+>> > +#define ERR(cond, fmt, ...)				\
+>> > +	do {						\
+>> > +		bool __cond = (cond);			\
+>> > +		drain_openssl_errors(__LINE__, 0);	\
+>> > +		if (__cond) {				\
+>> > +			errx(1, fmt, ## __VA_ARGS__);	\
+>> > +		}					\
+>> > +	} while (0)
+>> > +
+>> > +static void drain_openssl_errors(int l, int silent)
+>> > +{
+>> > +	const char *file;
+>> > +	char buf[120];
+>> > +	int e, line;
+>> > +
+>> > +	if (ERR_peek_error() == 0)
+>> > +		return;
+>> > +	if (!silent)
+>> > +		fprintf(stderr, "At main.c:%d:\n", l);
+>> > +
+>> > +	while ((e = ERR_peek_error_line(&file, &line))) {
+>> > +		ERR_error_string(e, buf);
+>> > +		if (!silent)
+>> > +			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
+>> > +		ERR_get_error();
+>> > +	}
+>> > +}
+>> > +#endif
+>> >  
+>> >  static int rsa_err(const char *msg)
+>> >  {
+>> > @@ -98,6 +138,7 @@ err_cert:
+>> >   * @evpp	Returns EVP_PKEY object, or NULL on failure
+>> >   * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
+>> >   */
+>> > +#ifdef USE_PKCS11_ENGINE
+>> >  static int rsa_engine_get_pub_key(const char *keydir, const char *name,
+>> >  				  ENGINE *engine, EVP_PKEY **evpp)
+>> >  {
+>> > @@ -157,6 +198,7 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
+>> >  
+>> >  	return 0;
+>> >  }
+>> > +#endif
+>> >  
+>> >  /**
+>> >   * rsa_get_pub_key() - read a public key
+>> > @@ -170,8 +212,10 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
+>> 
+>> With this change, the ENGINE pointer might be NULL (or undefined).
+>> Can we please update the documentation comment to reflect this?
+>> 
+>> For example, we could reword as:
+>>  * @engine	Engine to use or NULL when using pcks11 provider
+>> 
+>
+> Sure, I can update the comment for v4.
+>> >  static int rsa_get_pub_key(const char *keydir, const char *name,
+>> >  			   ENGINE *engine, EVP_PKEY **evpp)
+>> >  {
+>> > +#ifdef USE_PKCS11_ENGINE
+>> >  	if (engine)
+>> >  		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
+>> > +#endif
+>> >  	return rsa_pem_get_pub_key(keydir, name, evpp);
+>> >  }
+>> 
+>> Actually, looking even closer at this function, it's seems to be called
+>> only once.
+>> 
+>> Why can't we drop this function alltogether and call
+>> rsa_engine_get_pub_key() / rsa_pem_get_pub_key() directly in
+>> rsa_add_verify_data() ?
+>> 
+>> Reason I'm asking: in rsa_add_verify_data(), ENGINE *e is not used when
+>> we use PROVIDER. It seems weird (and error prone) to pass a NULL pointer
+>> to a function that does not need that argument
+>> 
+>
+> Yes, we could drop rsa_get_pub_key(). It is set up as a helper function and
+> only called once from rsa_add_verify_data().
+>
+> But I am hesitant to make any changes to the RSA API in this file. I
+> want to limit the scope of this patch so that the existing code is
+> unchanged for users of the Engine API. And I think removing this
+> function would require adding more #ifdefs around the error handling in
+> rsa_add_verify_data().
 
-> When trying to use the u-boot-size-test.sh scripts you had asked me for
-> it failed because of passing the '-E' parameter to buildman.
->=20
-> Also 'dtc' fails building for the same reason and that can be fixed by
-> picking commit dfe057874b34c ("scripts/dtc: Update to upstream versionv
-> 1.7.2-62-ga26ef6400bd8") from Linux.
-> However, that has far-reaching consequences such as the
-> -Wno-graph_child_address parameter no longer existing, and also dtc
-> became more strict and issues new warnings for many of the dts files in
-> U-Boot, so then the build failed because of that...
+I'm fine as well if you keep it this way.
 
-Good to know for the next time we sync up, which should be soon to avoid
-getting super out of date again.
+>
+>> >  
+>> > @@ -207,6 +251,37 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+>> >  		return -ENOENT;
+>> >  	}
+>> >  
+>> > +#ifdef USE_PKCS11_PROVIDER
+>> > +	EVP_PKEY *private_key = NULL;
+>> > +	OSSL_STORE_CTX *store;
+>> > +
+>> > +	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
+>> > +		ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
+>> > +	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
+>> > +		ERR(1, "OSSL_PROVIDER_try_load(default)");
+>> > +
+>> > +	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
+>> > +	ERR(!store, "OSSL_STORE_open");
+>> > +
+>> > +	while (!OSSL_STORE_eof(store)) {
+>> > +		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
+>> > +
+>> > +		if (!info) {
+>> > +			drain_openssl_errors(__LINE__, 0);
+>> > +			continue;
+>> > +		}
+>> > +		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
+>> > +			private_key = OSSL_STORE_INFO_get1_PKEY(info);
+>> > +			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
+>> > +		}
+>> > +		OSSL_STORE_INFO_free(info);
+>> > +		if (private_key)
+>> > +			break;
+>> > +	}
+>> > +	OSSL_STORE_close(store);
+>> > +
+>> > +	*evpp = private_key;
+>> > +#else
+>> >  	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
+>> >  		rsa_err("Failure reading private key");
+>> >  		fclose(f);
+>> > @@ -214,6 +289,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+>> >  	}
+>> >  	fclose(f);
+>> >  
+>> > +#endif
+>> >  	return 0;
+>> 
+>> This block should be
+>> 
+>>  	fclose(f);
+>> +#endif
+>> 
+>>  	return 0;
+>> 
+>> (not having a blank line between the fclose and the #endif)
+>> 
+>> >  }
+>
+> I'll clean that up in v4.
+>> >  
+>> > @@ -226,6 +302,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
+>> >   * @evpp	Returns EVP_PKEY object, or NULL on failure
+>> >   * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
+>> >   */
+>> > +#ifdef USE_PKCS11_ENGINE
+>> >  static int rsa_engine_get_priv_key(const char *keydir, const char *name,
+>> >  				   const char *keyfile,
+>> >  				   ENGINE *engine, EVP_PKEY **evpp)
+>> > @@ -293,6 +370,7 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
+>> >  
+>> >  	return 0;
+>> >  }
+>> > +#endif
+>> >  
+>> >  /**
+>> >   * rsa_get_priv_key() - read a private key
+>> > @@ -306,9 +384,11 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
+>> >  static int rsa_get_priv_key(const char *keydir, const char *name,
+>> >  			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
+>> >  {
+>> > +#ifdef USE_PKCS11_ENGINE
+>> >  	if (engine)
+>> >  		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
+>> >  					       evpp);
+>> > +#endif
+>> >  	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
+>> 
+>> Same remark as for rsa_engine_get_pub_key. Can't we drop this static
+>> function? It's only called once.
+>> 
+>> Maybe do a cleanup patch first, that gets rid of the static functions
+>> and then do the provider support in a second patch of the same series?
+>> 
+>> I think it will reduce the amount of #ifdefs, which seems a good
+>> argument.
+>> 
+>
+> Again, I am trying to limit the scope of this proposal to preserve the
+> existing code. If we remove the helper function rsa_get_priv_key() then
+> the #ifdef guards also have to move inside the caller rsa_sign(). And
+> since we would no longer be able to check the return value of
+> rsa_get_priv_key() additional guards would be needed to recreate the
+> return value logic that's already in the helper function.
 
---=20
-Tom
+No worries, I'm fine if you keep it this way for v4.
 
---90wqKmKi5Uj7QfMe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8aTgAKCRAr4qD1Cr/k
-Cgk4AP9CoIpucOvBGmFw3viqwTZVHVrc9v4gMpfV0qVMyO4kAwEAn1wbHioBz0fW
-ldj8wUyF+lBiO3tS3jxMQqpG6wSHGgA=
-=cTbV
------END PGP SIGNATURE-----
-
---90wqKmKi5Uj7QfMe--
+>
+>
+> Eddie
