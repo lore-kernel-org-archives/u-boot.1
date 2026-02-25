@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F659EF5862
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 06:31:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99039EF5862
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 06:36:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 785038366F;
-	Wed, 25 Feb 2026 07:31:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B2A98366F;
+	Wed, 25 Feb 2026 07:36:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="h1zCGatX";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="C/HQcGKa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0FC982A9E; Wed, 25 Feb 2026 07:31:04 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 3DDCF83DCB; Wed, 25 Feb 2026 07:36:04 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D827182A9E
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 07:31:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB26982A9E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 07:36:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,36 +31,33 @@ Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id ED6F941776; 
- Wed, 25 Feb 2026 06:31:01 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id F25B33FC45; 
+ Wed, 25 Feb 2026 06:36:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1772001062;
- bh=oeB4QAWsqJLi5MiZhsOA/O2Z6IT8oXoBmi1zVlUNFtY=;
+ s=20251003; t=1772001361;
+ bh=75gpR/4HZvyXpmS9N29OumsduVvGTSp97hyybtg8mnI=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=h1zCGatX68VlU/zaR4b1ERaYUEqGjGr5pW7kYPwvM+t5DNQ3A+FFQf23GnmpmkUyV
- deiGCP3myeDVVY6lim3o7r3Qb1MJuEn4umfgekIo7lZhzzqHH+rXmu0zufQ32pwodX
- C7tBB29G3VBeFQYkYICe7Dc6Q5E3KtKoi6tsJ93JH6hR+qqYyI0S3F96G54YdxqdJs
- YbeB+LFCjyd578TvzWJZJ1y0XrhkFr6ZdD0eYxh2+Gkz56lmyN/+wBUimtngrD6UbU
- cPpFs/bx3eRjsKo+EhtA5L7CHDYpl9/b984qZes5goBWpE+sVAewW3qDpjvRw55HYT
- BhhoGlrPSPqVYDQIJYS6GFEqBGBpUnTwEYMx4yGaS6fiGj4r7DdKXXTnJqdogjvAm/
- LhtueIx0IsulsyMWL1v4OTY8hPk8zEo7hbnqRTWRSuAtXTiEuDCxvxPzPGI++GxKGl
- Fa8JGHJ0Ptkr7RTOc+VkRoHGIR+qZAOdfmhBIUK0/L6p8+MAzcHlvzhV9t4p1qXJ/9
- Y9ek08TPZ7GGc7Bw+mkiqz+CesRFTdGkTjPSohWyoqcek5CgszLpgAXw30kw8OA3wq
- LirwXa3AjPWzpDqUn1caUbA1PC2EsJhT/h9ZG4gWf1Tt8sqERFwO6/hkO7pTLrCv/B
- SHCuGfRehYlYahgbPQzPnaMI=
+ b=C/HQcGKajRSlmj+6vYpJ0KBZgIGHB8Io4vxW6ETcPzfwFq6pTMoRkh6Ys4VXDen13
+ +ayifVeYg8UDBK3BEnfLjQTIpAYivwz0CkvSKUmvK7YocDxFC/jIlxXVj1WZ5vPAYg
+ TToLTRh7Stbt17x8A1FEOJJWG+TZSQzP2odYUL38c0rXG5wFehKv3ZZVE99Rr3TxAN
+ U893kOROLsh7BEkGV21g4BaKqb19EeUBoHChPpisrug5/OofQMk/aNSnKhjytAzd8i
+ ahLIXZytUsSWbfZpvHxs56FVmM4wzbeOJ6buSdmLbu9up1iybHxYHctXQldqlOkc/J
+ g+Sx1tlgG8qj7JxZszHnMr3udY6k3Sb8d1o30kHPsYCZSYcj4GpTKBMISVRreHu1C9
+ MnB9BZwRBTLYEZWJ51cCCFnh9B8wTjzpNv//3oCIm8Kjjr0hdpYyEU6oWBD3p1SB2Y
+ k46X4JenaGm8oDTbqLBJiPJeZz1cDUlxf/wjvQ0rOIT2sKU+u8N8/DKVXXrWq3cf2D
+ wCZYuRzIVPJzJmpKmVcshSzNkykHuRkXJDx3Yprq6Ftt4/wo4WVs/40V4UZomqL/3j
+ BLkI5nkQEfvVJsGLHvUFJAkV57/IkcSDS6ZoAnLfgk/N6fr9wHle9NMAjZj3Z0PK26
+ B9BmMs+SHU/IgosiSXn+VIBE=
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>
+To: Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Michal Simek <michal.simek@amd.com>
 Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Shawn Lin <shawn.lin@rock-chips.com>, u-boot@lists.denx.de,
+ Bernhard Messerklinger <bernhard.messerklinger@at.abb.com>,
+ u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] ufs: don't select non-existent CONFIG_PHY_MTK_UFS
-Date: Wed, 25 Feb 2026 07:31:00 +0100
-Message-ID: <20260225063100.46962-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] board/BuR/zynq: don't select non-existent SPL_BINMAN_FDT
+Date: Wed, 25 Feb 2026 07:35:59 +0100
+Message-ID: <20260225063559.47481-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -80,29 +77,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Symbol CONFIG_PHY_MTK_UFS does not exist.
+Symbol CONFIG_SPL_BINMAN_FDT does not exist.
 Don't select it.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-CONFIG_PHY_MTK_TPHY seems to be the only Mediatek PHY driver symbol
-in U-Boot.
----
- drivers/ufs/Kconfig | 1 -
+ board/BuR/zynq/Kconfig | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index 6c75bb2a079..69a5d91d9d2 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -26,7 +26,6 @@ config UFS_CADENCE
- config UFS_MEDIATEK
- 	tristate "MediaTek UFS Host Controller Driver"
- 	depends on UFS && ARCH_MEDIATEK
--	select PHY_MTK_UFS
- 	help
- 	  This selects the MediaTek specific additions to UFSHCD platform driver.
- 	  UFS host on Mediatek needs some vendor specific configuration before
+diff --git a/board/BuR/zynq/Kconfig b/board/BuR/zynq/Kconfig
+index b450a21bd98..c7010fb26b3 100644
+--- a/board/BuR/zynq/Kconfig
++++ b/board/BuR/zynq/Kconfig
+@@ -7,7 +7,6 @@ config TARGET_ZYNQ_BR
+ 	bool "Support BR Zynq builds"
+ 	depends on SYS_VENDOR = "BuR"
+ 	select BINMAN
+-	select SPL_BINMAN_FDT
+ 
+ endif
+ 
 -- 
 2.51.0
 
