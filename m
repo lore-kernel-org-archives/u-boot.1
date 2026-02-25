@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C309FD376A
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:36:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9976FFD3774
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D2BC84118;
-	Wed, 25 Feb 2026 17:21:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 73BCA8412C;
+	Wed, 25 Feb 2026 17:21:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OqsOnrqW";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Fp2E0My0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE96084129; Wed, 25 Feb 2026 17:20:58 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (unknown [IPv6:2a00:1450:4864:20::32c])
+ id 0CA0084132; Wed, 25 Feb 2026 17:21:04 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32F398416F
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ by phobos.denx.de (Postfix) with ESMTPS id 26C3D84120
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-483703e4b08so9949005e9.1
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:29 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48375f1defeso48149815e9.0
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1772036348; x=1772641148;
+ d=amarulasolutions.com; s=google; t=1772036339; x=1772641139;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fKC0I/zSUXCK7LI/x6OL7XjZ+Bj3ETz1H98338kwM5Q=;
- b=OqsOnrqWndfdOR+Liebc5uzruT+oofZ22EvA64nVyMDeetk2WzMiqvW/qPzB5Bte+P
- 4EIJf8PZAa/coXyN65C8Od7uUZFuoiCCuQ4hEbAWhvipWyeq0I/K1hVK3Az7K9FmtwS+
- a9RaGZvFXwp97pgSAsUCUmnKFiZcKcWOlN4zk=
+ bh=r6tAXVQt7ZycmjS5oFVFmcoK4X7swFXBbYv+fE4pNxo=;
+ b=Fp2E0My0Er1OYYEAjcykDYpqftiG2Hly1HmltBwvoqLT1DNfeYgCOoFc+wYP7YW+F9
+ HkYalxxbyuRHu9xKMWZGG0G/e32CR3bUtoHacOQfhaFgR1p/ASGkF98OcjTnwpNLPV2m
+ 2OIAfXIwonnr8vwIi4d9H9YeNq512YyqQxHs8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772036348; x=1772641148;
+ d=1e100.net; s=20230601; t=1772036339; x=1772641139;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=fKC0I/zSUXCK7LI/x6OL7XjZ+Bj3ETz1H98338kwM5Q=;
- b=Ye5rAbZKsHy/Vsy4BJ/c/gRpbQSHfC59jC+k2WCp0iRq6YUlt20VvgFPrtLNL+YBM3
- sHwzsSeNq0RUU1j9BVlJ4Kvn5R8WL43DL4tvdKRtMHg9YayIao7xO0dMWXDCGeE9eioD
- HC9dL7W0h5PUeka+ImVLkQQTY30qa6Ru+SdtX5yP0Tmc4cPp/6mJrmS58MVCLX0bpgj5
- p7FeAy6QshCtDSg8u9NJ38gi3QUG/YW6F7KQXAqtH2j7WPmOe1fbd1dEQEjwLOG7pP92
- d3WHWfwtim5nabjTei6bazchsTtKTZPyRE0tIPPbwEWlbefYAz8vgCaJIrJDrY4hVubN
- lR1Q==
-X-Gm-Message-State: AOJu0Yy3BGcI4c146YbEgz8Du5TqE5QwRv5fjX1SHwSyE8gkzYgJvZ8x
- SJeZ1iZhuEFuAB9ibSisGBq5v5IXYwjWeWz7/SLePI2f0+5PaQ00/YQ/upM/lYoZeQiwNhkkzaj
- g5Tvu
-X-Gm-Gg: ATEYQzzmKZb5fwiEmfrNPLGPqrt0tyHlLypoas5NY310VAIn36xahnK+W9g7FsDDS3P
- kc/8BHd3fN2eCMvJ5tcnxM3tHO/8hVX7hTRbaDTrKZmdY4deIdgwA2yUEF6dbpSbbpXAav4I2N9
- mSFueE31y3EJZYFHsBDV6zCTTxOvpk3Mzqz8BgmUcMO+jgebtdPqxPXWhoUikUG/J79TOjyzXlF
- N1il4WIXrOljWq9qOIlK89aSNFQuGqnp5BiRthCN+8AjUx9MpJsAUDC0s/KbjFmS33mVhl0swA2
- Y2SHrie/ErNRoPokchep4I7tgNEnBGhoyBF1/xCNSn+NPPa5Z6aA/l2HXBp+XKH4E9a7E2Z9qpq
- Q40QrdudP4amax63vfhaSwY8ZKw5+jrwg7v9YxhHlwFsF7Uzv9khQhfk3OlUvpXhtHzfoDFSmpJ
- ABqK5ITFvgoA5X1iA0AbvhkZdv2+ddx4R8xeinGhsNWZrtmlqmBL8jxmudkRBQ8lcRZTeW8W6/e
- +3IRmj3xw2P7OErD0QskLCEWkpVVfnvTzXZqI6JhneTTYm1
-X-Received: by 2002:a05:600c:3552:b0:477:9890:9ab8 with SMTP id
- 5b1f17b1804b1-483bd725417mr79218795e9.3.1772036348360; 
- Wed, 25 Feb 2026 08:19:08 -0800 (PST)
+ bh=r6tAXVQt7ZycmjS5oFVFmcoK4X7swFXBbYv+fE4pNxo=;
+ b=P94BIUNM0JpfqDgF3zKd39ZYW2DTSF3EDAKHAy8RSmF4Z4cGLXe3VvOhDJ0bnQt2+u
+ Jq9bExaMuQYI4ywITVgXwwhTN7cAolaBx32WNwEl3Hh/VUJdUVRSsOUPI8Jg3tXRGysM
+ D/IaFrjgHSbDi6XhH9DOOQo8BoDoWqwsrGsh5B3lqC/VhoBJNmitDMpDI3+lnDTbKaO3
+ xK+/yegit17G4vyvhT9Uws6RBLZlsaptBqjqyKhYgbY/avwkxqTX5hrACixuOFuB85Y4
+ VufmShdQHCgO4giOjKRkF8Fib+YPXG2+yXaAV3d3WVW8Cw/iDXARyse543WChkL+B0V7
+ fq1Q==
+X-Gm-Message-State: AOJu0YxShmvyX0B2uqneptwJCqpV1iiq+57Eq0uSSL+4Y5hmLc61lZov
+ 6GUIiG8LM+D9KmQVNNSUOT/xfdN+t5l78bQMhUeTpXD6DAYxzjI0zXgtNksisvefEkk7Su2BdYn
+ KMIwW
+X-Gm-Gg: ATEYQzxunznJ6xiOj2CZIUTo6BMW5KNladoU943U+21jd0/e5XvlPIrg7EmlMPusPNr
+ MevyVUFKuBbVBjwq0EgOJIiIp6SMPSXzc9X+2dDG1oOQULX4ykr+cpw661LhVEnpBEgbuTyD9/G
+ 2WZIVl0GZw9DOGJ9QLGZwWG7hvngXnDRoUKU9Md23WdjHdvfjvxO7vgFCJ+hL9lfS4yGInBIkMY
+ bYPEoD4HQAePwg3cG5jfPJYPunF0GRm8QapsDQaGOP6Cj1x2fwN7OG9fu4GOfX6GqDkju6yqHb5
+ EGivsiYHukb2+SkKrn+DzeZd6gSSWwo/0CiEphKeyrmpS8qeDVPoThpGGJNF0+2u6iX0yyxDlTq
+ 9JV9iTTtoVADSHXORVAE8dby4hNQTI7CL5xRHY+akSBXony2qjlihuELfOtVSKjajflNU/xyxdo
+ vobDwXHEHRJRwLBRp4zV+2uhVXSFGLyn+QkW7zKiRxCPRnagWFwtMlGc95XWdvk/b+XEBWMWeie
+ Bo5vyym/cRnc4cqd6TyNzvNICSguJ7JuYtrrtFZ0ehXmXYa
+X-Received: by 2002:a05:600c:19c9:b0:477:79c7:8994 with SMTP id
+ 5b1f17b1804b1-483a963d2d9mr247390685e9.30.1772036339263; 
+ Wed, 25 Feb 2026 08:18:59 -0800 (PST)
 Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.19.07
+ 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.18.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 08:19:07 -0800 (PST)
+ Wed, 25 Feb 2026 08:18:58 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v3 8/9] spi: stm32: extend support to STM32MP25
-Date: Wed, 25 Feb 2026 17:16:59 +0100
-Message-ID: <20260225161851.2475274-9-dario.binacchi@amarulasolutions.com>
+ Simon Glass <simon.glass@canonical.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 2/9] spi: sandbox_spi: support wordlen setup
+Date: Wed, 25 Feb 2026 17:16:53 +0100
+Message-ID: <20260225161851.2475274-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
 References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
@@ -101,32 +103,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SPI IP in this platform is fully compatible with the current driver
-implementation, requiring only a new compatible string.
+The driver currently ignores the word length configuration. Implement
+the set_wordlen operation to store and track the current word length.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
 ---
 
 Changes in v3:
-- Add Reviewed-by tag of Patrice Chotard
+- Add Reviewed-by tag of Simon Glass
+- Store wordlen in struct spi_slave data instead of driver private
+  data.
 
- drivers/spi/stm32_spi.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/spi/sandbox_spi.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
-index 9d095b280a70..b7bc5816cc13 100644
---- a/drivers/spi/stm32_spi.c
-+++ b/drivers/spi/stm32_spi.c
-@@ -684,6 +684,7 @@ static const struct dm_spi_ops stm32_spi_ops = {
+diff --git a/drivers/spi/sandbox_spi.c b/drivers/spi/sandbox_spi.c
+index 4cc016138b11..7c237ac8d371 100644
+--- a/drivers/spi/sandbox_spi.c
++++ b/drivers/spi/sandbox_spi.c
+@@ -61,6 +61,15 @@ uint sandbox_spi_get_mode(struct udevice *dev)
+ 	return priv->mode;
+ }
+ 
++static int sandbox_spi_set_wordlen(struct udevice *dev, unsigned int wordlen)
++{
++	struct spi_slave *slave = dev_get_parent_priv(dev);
++
++	slave->wordlen = wordlen;
++
++	return 0;
++}
++
+ static int sandbox_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 			    const void *dout, void *din, unsigned long flags)
+ {
+@@ -158,6 +167,7 @@ static const struct dm_spi_ops sandbox_spi_ops = {
+ 	.set_mode	= sandbox_spi_set_mode,
+ 	.cs_info	= sandbox_cs_info,
+ 	.get_mmap	= sandbox_spi_get_mmap,
++	.set_wordlen	= sandbox_spi_set_wordlen,
  };
  
- static const struct udevice_id stm32_spi_ids[] = {
-+	{ .compatible = "st,stm32mp25-spi", },
- 	{ .compatible = "st,stm32h7-spi", },
- 	{ }
- };
+ static const struct udevice_id sandbox_spi_ids[] = {
 -- 
 2.43.0
 
