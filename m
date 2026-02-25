@@ -4,173 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F547F55434
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 00:16:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37824F55431
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 00:16:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EECCB83F1F;
-	Wed, 25 Feb 2026 01:14:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 3749A83EDF;
+	Wed, 25 Feb 2026 01:14:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="nigI3lpE";
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="HjCb9dg6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F5C383F14; Wed, 25 Feb 2026 01:14:44 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
+ id 02A8283EEF; Wed, 25 Feb 2026 01:14:47 +0100 (CET)
+Received: from mail-244116.protonmail.ch (mail-244116.protonmail.ch
+ [109.224.244.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8803D83EDF
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 01:14:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D97E83C39
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 01:14:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=proton.me
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DYvtTe99b/G+4f3MygiYoJMeD3BEJAe+s/rB/ByX9y/KxR8rX7y3sIXLxrQZtEaBsqG8Vl+mFHfPTEdJficvKr26UkMxLYzv982cUFnLkoK68nHYpDljbpo/HaRIf4+0O57RTZAyJ0/GBq+fq1VsGCcJ61WkwFWD9uUyK4RqdzAqHZNRZVqX+WKoGE0Wbw1knFuszBxqEMXPsn8GVPOC/9LrCabTwJ1KIN+NHdVD5JHrcoqMVGy7zEytTDkyqc67V4FQefPnp1W1GN9Txn3OTynQLYSLl/ARQG/MSEhuHzqRjD1uKUrLsro0IpuJiIuIYK+G3eZvM7s80vzwH7cS3A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vaWeiiHIdR/JyHdvJWOZ9qxc1KTeEQrEUA002dqou6c=;
- b=vTEa9HtY7WIWFuBTI3zL4hTPOYLkNP59GnMNT75zNRHN3PdJeImhT6SAB22jKRG0f8zQ6gQYsqloEOzsTcJueLMAKL/GxfftQto2ZuTQ0eGYZXnQB7yVGz9E+IEZs5ijD17XcPxv5Y2exZeitqfKxYn80XMadh0P5OMjoyV2wPcKUJofGCfBeg2fJvx0oPJREbNhoDdZD8F4ZvWZpFmH5J+Vc1ylrmBAwdOyAk5tchGmEYBbnTg4idmpL2Vj+fi6jE0+WjoBXP698Z+1Ue2oDJNR9xtvHu0kTGIIxEedSK9Sbk0ZgDdlqyiFyvTMdeQRZcpCojMSmsvwnDJRNHeaqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vaWeiiHIdR/JyHdvJWOZ9qxc1KTeEQrEUA002dqou6c=;
- b=nigI3lpEGZ9nMZJZ52GfqPunIRUj114Ucya/9c2GEc2iUkFYHCyPe7He1kQ3PaaBge9kB3JTpcC/x/wvrnO/p7TiJDu7knEhiFCylUmcL0i5cm+yJmQTibANCLXLpPA8O21feCKKTe6cNQ54Ci+hY922qKA4mlnv6jymA2NgSMXWok+cmID4Rc3OC9XxQ59iM1D5AbM49u+Jrolj+52WqqOTvKrwnT7uaX+GpVdyZ9OPS+0lEQQb5hLeGjigxfG+M+LnAMvRpj98vD4yitCx6t5m5A3sd4LhluXTycWiwRKGMkpDx4LrWKOeG2aSIG+7FnTiVNduGPRLa3wxUS2lgg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VE1PR04MB7342.eurprd04.prod.outlook.com (2603:10a6:800:1a0::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.16; Wed, 25 Feb
- 2026 00:14:40 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9632.017; Wed, 25 Feb 2026
- 00:14:40 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Wed, 25 Feb 2026 09:29:36 +0800
-Subject: [PATCH 10/10] pinctrl: nxp: imx9: Guard pinctrl match table with
- CONFIG_IMX9[X]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260225-imx-pinctrl-v1-10-7a149ab8feba@nxp.com>
-References: <20260225-imx-pinctrl-v1-0-7a149ab8feba@nxp.com>
-In-Reply-To: <20260225-imx-pinctrl-v1-0-7a149ab8feba@nxp.com>
-To: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>
-Cc: Alice Guo <alice.guo@nxp.com>, Ye Li <ye.li@nxp.com>, 
- Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.3
-X-ClientProxiedBy: SI2PR02CA0035.apcprd02.prod.outlook.com
- (2603:1096:4:195::22) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=krotti83@proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=protonmail; t=1771978483; x=1772237683;
+ bh=h9UvGn4NPj4eXHx+GE5HWj8Ui9FP9X8Pq4y40g5wbH0=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=HjCb9dg6JOoEMr/J4Vc3gPIhVwSDn4zNcuya/+RmUYAYNIeLoebcu49Lh/dq0eLCD
+ BOAmrTciYkPlciDMcvWWNn1Jl8xu2qpOa6skTo+lffN+cY+FgdjaHO+bu3JBrxdZv1
+ rvBW931oHU8qa8iGeEBEv/7gN7G6VB1jRLhBjuC5EaARzeHPdJYQ3q+HQDiqjlgbhs
+ P9ZuWSn3VERrCjroNbKy9kkR8EW3zCK0LO2ztXu5pcwP+ijsQdnyB17iRfrixZMfeM
+ e+t0HjxQCCKOryaHJNNP0J7EnMUgyQG3AhYot15IkJuVtBLVjCZjxEgMCddjDyb80M
+ oGPLsEOPz4fug==
+Date: Wed, 25 Feb 2026 00:14:39 +0000
+To: Tom Rini <trini@konsulko.com>
+From: Johannes Krottmayer <krotti83@proton.me>
+Cc: u-boot@lists.denx.de, sjg@chromium.org
+Subject: Re: QEMU: arm64: bloblist not found and alloc space exhausted
+Message-ID: <02e49242-da72-4bcd-a428-f7e8c9aee742@proton.me>
+In-Reply-To: <20260224193312.GB3233182@bill-the-cat>
+References: <a1cd73a2-582b-447b-bb3c-e88afcf99545@proton.me>
+ <20260224170908.GZ3233182@bill-the-cat>
+ <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
+ <20260224193312.GB3233182@bill-the-cat>
+Feedback-ID: 148511850:user:proton
+X-Pm-Message-ID: 85f9d5f57846dace3f83f07ef832db0ce402e54e
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VE1PR04MB7342:EE_
-X-MS-Office365-Filtering-Correlation-Id: b82589bb-0a2d-4ebf-ec0e-08de7402de9b
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|366016|19092799006|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WFhwaDI0ZUhYblRBYXJzWGltMm5KNWpGZVVUY3BJM2VQSWNTYWlReTd4VUxH?=
- =?utf-8?B?TUNqWHYxOHE2a2xGeVg5UGl3emdXZEl3Ni9neUowWXBqbFBrMGsreXhud3R6?=
- =?utf-8?B?Z2FyMkRZOXJyZ3VqTDRQZy9zaDl5OEE3eW5Ba0puWU5EZ296VDRKazlMc09B?=
- =?utf-8?B?QStIemN6cVl6dWtwSUI5UUNvbkpVdkFVMXowNjJZcXMyTDFYR2xXY25HSWVH?=
- =?utf-8?B?L1dRRHZRbnRXc25hOHVGM3R6WmdadVBMaTR3b0tVTVdFQ2RhNnpid3gxYWpJ?=
- =?utf-8?B?YUc2MGo4akIyaTlqdGY2eWJxMTc4Y2tjbFQ5U1FGNmJ3eFhkZUZIUEwxSzA1?=
- =?utf-8?B?TFFra2ltV3BUR1crYmNrNUxQcEdwRmVQWkNmcWFMSWNxSGVsRDl5c3VhQlBJ?=
- =?utf-8?B?WXhsYXBDZ2R5WS9WemNlbjZUZVRlQTBBSmhYbjJoYkI5cmZIUTgyR0tMKzFx?=
- =?utf-8?B?aDRHYSt5anZRMGFyZlBqVTl6eHlWc2IwVi9aSkFIRmU2Qi9haDNkOFdoN0ZD?=
- =?utf-8?B?djhBd0VsTks3ZVg3TkdwcFpMOC9RL3l6b3lCZUMvRWFFd0N3VHpUZjFERnBq?=
- =?utf-8?B?TmhtVUt6Qll2eGhnYzRRSVlUakkxN0JEdndGL054bWU1SGJOK3F5Sk80YlZK?=
- =?utf-8?B?OU4xOS9OaFVHbFNFeEtxQk9TenVuNEo2RzByUGhUcTY4alNZZERxamhWNGNq?=
- =?utf-8?B?Zm1HQ3FQYmFCcWdvdDVWelJGUU9Qd1p5YllSeHFxV3o4VFhrRi9WVXJxQU9V?=
- =?utf-8?B?THRudXJMQ1gyc3JwZEpzb25oc1R2MndEeWkxaG5wSHBNZ0tNTDhVU3V6aTln?=
- =?utf-8?B?RXlaaEVHL3poREhjNmZmMjBWV25zNWx5OFVycWtxUFJWbnZHUWNkaFMrSG1p?=
- =?utf-8?B?T2VodnprSmRML3VyYnRnUjlLanhWelpOaWgvelYxWDl5ajdhQmNNbnRhSFJE?=
- =?utf-8?B?UitucWhMU1JZQVJKUWdxRDBKdU5TeVBOakxoaG1HbjJYSWlrY0s0Rk9Xemtw?=
- =?utf-8?B?WFFCU3dabHRSMUp0ZDNsSTF5QnIzYW9EdWxSSG5YM1RXVHZZTUxQZUdiZVoy?=
- =?utf-8?B?WTBrclJMVnBjWTU2SFVEaS9vMk56em9JK1QxOThSRy82SkhSTlliU2o3VVBJ?=
- =?utf-8?B?TXU0dkkycnRlc2ZyZkZtSjVUVDJVZ0p2aHlHODVYVDJHTDZ0TEIwR1VwV09S?=
- =?utf-8?B?TFNsaUJiL0VKaS9lYWVubWtPdnpOQnZFMkJpdHRGRWE3QUVxL3gzekp1RXdy?=
- =?utf-8?B?SXFSRzFSRnp4dlU1bThtZmdLa0dmc0poVXdUQjgzZnhCVFUrendZNE11b3Vl?=
- =?utf-8?B?dEZrbTlQLytyeEE2c0JwSm5vZjUxOWt4VE96RmtqS3Q5QWN3MTNQY202WC9M?=
- =?utf-8?B?cjQ5WFVrRlVHcGZqQlExczU3QmZ2QURKeXdIVVQxa1hFREh1cFQ4bFZ1cER5?=
- =?utf-8?B?QzFxa3VheUt6QzlDZldsSFRtUTZVYXZsOUNMN1Z4RGtiTWx0SmFzUGFSVDFa?=
- =?utf-8?B?SXBPMGxZdHdldnpPcmxmbklOUURycmRHb1E0aS9FaHdZTlRFcUpSUXZsTElp?=
- =?utf-8?B?VklINE1EcnhLNzZaU3FiemxBa3JETlBtczRsZ3o3bkpXK0pBcm96cU9pV1Fy?=
- =?utf-8?B?UCtqV1p3SVJ4UW5POHV2RHBBTmVkbnE4NjNNaklqTXk5em5GNDhzVlI5eHdy?=
- =?utf-8?B?VW1PYWcvcVFsSzMweWZaMGVGY0FLS2FNVDVmbW9zZTFaeGhhNGN0ZUpaYWxR?=
- =?utf-8?B?aDNVMEwxNGJWUEk1dXVJMllsbHRhd2srVTBFTFRvaGlEODM1RUgyUlV1WXR3?=
- =?utf-8?B?bHFFaU90ZmJnQlluVDBja1ZOWUdzOVpqejlMSTIvUzltaG42VTA2VGcvSitw?=
- =?utf-8?B?QjdQaXBzY0pCYmFCQ1h0TEZ6M3JVUHFmTGRlVXNiOFRlTURoWGVtOE95T01I?=
- =?utf-8?B?NXduUGd2Sk13REp6Wk9saUdxbE9ZTWFLZVdkWUc2eFZMSFJlY3FrUGQ5VlVL?=
- =?utf-8?B?SWpBVUhhSkI4ZU1mdTZYK0ZwL2dvWnBuSW0xQk0vVmlmSDdRSVBmVmN5Mndn?=
- =?utf-8?B?RVF2Z21XVW1DSFg4dTdlTHd3ZUxQUnZjL0Z1a1F1Vnd6L1ZQK1hadWlxYzNT?=
- =?utf-8?B?QXFpY1VoUTNMUjVMdGkvWnVGYU5rM09JU0FLWUZQZkdZeGhBSVl0bGpSeThh?=
- =?utf-8?Q?CACaj6nYhtP3rsgf/CUDLEY=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(366016)(19092799006)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y250b0pHazYyeWJ4OVY2OE1IbUMwR1d0VGxUcnkvRnNjTTZJM3lFNERLbDhs?=
- =?utf-8?B?QXpDL2tkYVlheG9TdnR5djEyaWJudXMvcGZMajNocURaTiswYys0cSszeUpy?=
- =?utf-8?B?ZFRFVU9vV1BxTXdRenlHRXNhaHQ2all2U2xoNXZwU1EvZkswbjVIVllHSjcy?=
- =?utf-8?B?Y0c0TjN6QmZNMG0zNEdsRU5oZWtYdjE2eEhOWUpVeTdLeFhNWWZac2pEdVI5?=
- =?utf-8?B?bUUrZGZta083S2hSMEdKa2N2aUpHL21sVDZHdHRIS0d5KzZvWkRkeHF6UUxl?=
- =?utf-8?B?NHhwNU9QT0dKb0luVStqRlpTRloyQ09tZEx3QStkUU91Mk5hQ2ZWaHJyMnRi?=
- =?utf-8?B?S0JBWUptQ2sxdU9LMU1zRzRWZTN4Tm9DL1p1MDdKdGJuaE4zQ1JmY0J1eEF6?=
- =?utf-8?B?WUxWZ3dLcS96Z3YyRk9WaE5Vdlk5WHRBanNxRDNUUWF2bXJoS1d1RlVVLzRE?=
- =?utf-8?B?cmhHckpDa2NpdGxDWDQ1MWtSMjZmWmEvb3VWei82OXpEbDN1OTdvcTBqVkF6?=
- =?utf-8?B?eDlqTnFzV0tHV2Nka3ZVTXkyOUhHVHZIb1cxOWpiYWVqRzhHbENvdTBmb1FJ?=
- =?utf-8?B?VmpTVFA0R09qcEc5ZWdpVm5QaVVwMC92ZnhZc2V0RlZHYTVtY1FYU2k4aTVQ?=
- =?utf-8?B?cm1UOXk2MS9zRzdJQTNTNkZUelNiRGVPWlJtdUlmVTVOendLZk5zeDJlWHBs?=
- =?utf-8?B?UmJLdmxrRkt2bjRUS0xOc252aGN5L3V1VXZlU000QUgvaUgvSE83cXVIVUQ4?=
- =?utf-8?B?WkgrcElzYW5hUHJjd3V3aStWMmw0Tlp2anZJeWxMNGtoU2NTaitDWitOYXQ2?=
- =?utf-8?B?N0ZIQUt4Q1o4M3hhK1Zxb2JYWVlLNUY0VWdZVUl4OTl6MHJYTHdtOTNwYWRw?=
- =?utf-8?B?cVFjUFd1N3ZlVWF0OWdYczBGT1JjSkl4N1lRTFBrR1g2STRZVXRMaUIzOTg1?=
- =?utf-8?B?K3ZEMzVLUjBXQWdGM0JnNCtOMzBjMmlJdFZjS3dtSXR2dkVnOW03UTh5clZy?=
- =?utf-8?B?MEduaHRiSm4vdjVSdGF2NkxrclpRMW15L2wwMEhVVGRTd3lpUUM0Mzh1ZmRD?=
- =?utf-8?B?ekgzQlpndnhaOHBjWTVGQ2h4VDQwY0ttOFViU3VHSnRVZlVoaUZpQkFOS1pF?=
- =?utf-8?B?RDdKTDI3RDFhQ0NOanM3NWZsaEFrdTBQVW5CWFcxS2prOHozY0VkV2xSZ0JN?=
- =?utf-8?B?UWhWN2ZJY1lkT3RSRm9JSEdCNGdmT3BLbGtEMXNLRTJUbWp0clErOGFidEdn?=
- =?utf-8?B?K3NZWkVqNVZnckdjdk10Ukd6b2pIUVRDaXQxbXlybGJLV3M1SjNTMHkxYnNp?=
- =?utf-8?B?S2F4V2tUT1FWK3pZSTkzREVHY2pmc1hmUjljOFJqUUdqdXBFYzF0YjBZTkZW?=
- =?utf-8?B?M0tpYVpITDlUZ0V5VFJYcGcvcFRVRTYvOVc0QTJRUTJuVHA4enYxVWZIYWRz?=
- =?utf-8?B?STY3a2szNWgxYmUrTU9DSVhtU2Q0RGdWdFB5c1hoZllWSVBkR2M3SjJZQjVU?=
- =?utf-8?B?aGgrSExyOUNvTmJqYyt6djU2ZmlPOHUwS1pTV3hzTHJGaXNTM0MrRlBXUGp3?=
- =?utf-8?B?YUlFZ1ZGOEJLYVhodVJLcXE3YkJuZnZreE5Ncmc0WmpjYW8wOVNkOVdpT1d0?=
- =?utf-8?B?ejhveENsOTlpQVFnaEd1eFE4ZllkcGJqS3hBckZZa2FHcWFuV0huMFlDWjlO?=
- =?utf-8?B?T2xiQUVBODFLWDN4Wk50WlhoZ1pZd2o1SVdId0NkdlZiWXQrMWlpbHRnSm1x?=
- =?utf-8?B?cUsxYVkrYzNiQS9ycm1yRXMyTXl3TkRDYnhUOU5uYXd1aElJRlVxZzM0QzYr?=
- =?utf-8?B?eFF2bFVIcFlybGdya2dVNm5lMWJsTElELzVoeVRIV3dkWWR6a3VaREZmS2Uz?=
- =?utf-8?B?Q1BScG9ZMmdDWG40bmc0YnIvUTNub1RMNzBCZTY3dUpsWUJHOHp3bW10Mm9G?=
- =?utf-8?B?VEdLbG5JRjhYS29KTHNhS2phK1VkQ1NCd282bnlpaGJNOWYvL1VtVXpJVERG?=
- =?utf-8?B?SHNkOFJ6YTArRXlqdW52bXhlcllSdERvanh5SlR3d2tDcy92N1MxY1VmeEFB?=
- =?utf-8?B?Q3BIMUUwSjBoZXZ6VURpMlZ1Y055OGtSaFJRc2xBL1dDZlkvWnRqekNmZ3BE?=
- =?utf-8?B?TU9ocSsySXkzRFU4SWYrcUVMNzMrNTdkQjJXdlBUVmNFZzRNazJiVTI4Um93?=
- =?utf-8?B?eXBoWThhUUxLOTIvVFpCQ3NnOGZKd0g3Y3hKamlLTlV6RHgrRWhRYnpaeHlp?=
- =?utf-8?B?N1lsRlJwSGFLNlVvOEswRnBnRVdFM1FqbkZNMitXQVpIT0N1d0VGRzJiNHkw?=
- =?utf-8?B?cEh1b3VDOWNpOENFN3Q2ZEhTdkdreTRPWEU2eFBkL3FLM21CcG5TQT09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b82589bb-0a2d-4ebf-ec0e-08de7402de9b
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 00:14:40.8045 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PS74ifBpe3CbVVhwGJ0juoimqNQzotpT2lzv6Ly5r+5Ht9ZBF4RBhiDmRzeH7CAoWjxan00zOwRF6poQ2J0zWw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7342
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+ micalg=pgp-sha256;
+ boundary="------fcb28e3b5632956ff0d96fc5ab0e03e700d143aa3181ad3a4726273b2693ac17";
+ charset=utf-8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -187,37 +72,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------fcb28e3b5632956ff0d96fc5ab0e03e700d143aa3181ad3a4726273b2693ac17
+Content-Type: multipart/mixed;
+ boundary=053b149810aa3f91acf04cf4e574fbae562da47935755a1639d51ad2a991
+Message-ID: <02e49242-da72-4bcd-a428-f7e8c9aee742@proton.me>
+Date: Wed, 25 Feb 2026 01:14:36 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: QEMU: arm64: bloblist not found and alloc space exhausted
+To: Tom Rini <trini@konsulko.com>
+References: <a1cd73a2-582b-447b-bb3c-e88afcf99545@proton.me>
+ <20260224170908.GZ3233182@bill-the-cat>
+ <37429ec3-d174-44d3-b113-bf6ce6d71096@proton.me>
+ <eWuRINFBfv8gwVVxMHtuvnYoN45dmah7hHtQGlyg7s7xi9zhiy4Vy4_X7_BsB9i919A5j6Z4MCUsrEZJUn1Hkw==@protonmail.internalid>
+ <20260224193312.GB3233182@bill-the-cat>
+Content-Language: en-US
+Cc: u-boot@lists.denx.de, sjg@chromium.org
+From: Johannes Krottmayer <krotti83@proton.me>
+In-Reply-To: <20260224193312.GB3233182@bill-the-cat>
 
-The i.MX9 pinctrl match table currently lists all SoC compatibles
-unconditionally, which may lead to unused entries being included when
-building for specific SoC variants. Guard each compatible entry with
-the corresponding CONFIG_IMX9[X] option so only the required SoC
-entries are compiled in, which reduces unnecessary data.
+--053b149810aa3f91acf04cf4e574fbae562da47935755a1639d51ad2a991
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- drivers/pinctrl/nxp/pinctrl-imx9.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Hello Tom!
 
-diff --git a/drivers/pinctrl/nxp/pinctrl-imx9.c b/drivers/pinctrl/nxp/pinctrl-imx9.c
-index 1b7e43901af..de22e29e953 100644
---- a/drivers/pinctrl/nxp/pinctrl-imx9.c
-+++ b/drivers/pinctrl/nxp/pinctrl-imx9.c
-@@ -17,8 +17,12 @@ static struct imx_pinctrl_soc_info imx9_pinctrl_soc_info __section(".data") = {
- };
- 
- static const struct udevice_id imx9_pinctrl_match[] = {
-+#if IS_ENABLED(CONFIG_IMX93)
- 	{ .compatible = "fsl,imx93-iomuxc", .data = (ulong)&imx9_pinctrl_soc_info },
-+#endif
-+#if IS_ENABLED(CONFIG_IMX91)
- 	{ .compatible = "fsl,imx91-iomuxc", .data = (ulong)&imx9_pinctrl_soc_info },
-+#endif
- 	{ /* sentinel */ }
- };
- 
+On 2/24/26 8:33 PM, Tom Rini wrote:
+> On Tue, Feb 24, 2026 at 07:23:54PM +0000, Johannes Krottmayer wrote:
+>> Hello Tom!
+>>
+>> On 2/24/26 6:09 PM, Tom Rini wrote:
+>>> On Tue, Feb 24, 2026 at 10:26:35AM +0000, Johannes Krottmayer wrote:
+>>>
+>>>> Hello,
+>>>>
+>>>> I'm tried to compile U-Boot for an QEMU AArch64 environment, but get
+>>>> some error messages in SPL:
+>>>>
+>>>> --
+>>>> Bloblist at 0 not found (err=-2)
+>>>> alloc space exhausted ptr 400 limit 0
+>>>> Bloblist at 0 not found (err=-2)
+>>>>
+>>>>
+>>>> U-Boot 2026.01 (Feb 24 2026 - 10:22:15 +0100)
+>>>> [...]
+>>>> --
+>>>>
+>>>> Started the QEMU instance with the command line:
+>>>> $ qemu-system-aarch64 -m 4G -machine virt -cpu cortex-a53 /
+>>>> bios u-boot.bin
+>>>> $
+>>>>
+>>>> Also the same errors when I use TF-A and OP-TEE with enabled
+>>>> EL3 and EL2 in QEMU and "u-boot.bin" as BL33.
+>>>>
+>>>> Has somebody noticed the same issue?
+>>>>
+>>>> I used the configuration "qemu_arm64_defconfig"
+.
+>>>
+>>> That's odd. We run it in CI, but as cortex-a57 not a53 with otherwise
+>>> similar arguments. Running with TF-A/OP-TEE is also in CI, but more
+>>> difficult to configure.
+>>>
+>>
+>> I have tried it now with the Cortex-A57 but running into the same
+>> issue without OP-TEE and TF-A. Using OP-TEE and TF-A works now
+>> without the issue because I have forgotten to pass the option
+>> TRANSFER_LIST=1 to TF-A and CFG_TRANSFER_LIST=y and
+>> CFG_MAP_EXT_DT_SECURE=y to OP-TEE.
+>>
+>> Host OS: Debian 13 (Trixie)
+>> QEMU version:
+>> $ qemu-system-aarch64 --version
+>> QEMU emulator version 10.0.7 (Debian 1:10.0.7+ds-0+deb13u1+b1)
+>> Copyright (c) 2003-2025 Fabrice Bellard and the QEMU Project developers
+>> $
+>>
+>> BTW: doc/board/emulation/qemu-arm.rst doesn't mention how to build
+>> U-Boot with OP-TEE and TF-A. Should I include the build steps into the
+>> docs and create a patch for the doc? I think it's also useful for
+>> other users.
+> 
+> Yes, some doc updates woul
+d be appreciated and please CC the board
+> maintainers as well. And perhaps the question I forgot to ask earlier
+> is, are you seeing those as fatal errors, or just noting they exist?
+> 
+
+I have created a pre-patch for the doc. As maintainer I see you with the
+script get_maintainer.pl:
+
+$ ./scripts/get_maintainer.pl ./doc/board/emulation/qemu-arm.rst
+Tom Rini <trini@konsulko.com> (maintainer:THE REST)
+u-boot@lists.denx.de (open list)
+$
+
+Created was the file by Tuomas Tynkkynen. Should I send (CC) the patch
+to him too?
+
+Thanks in advance!
 
 -- 
-2.51.0
+Kind regards,
+
+Johannes K.
+
+
+--053b149810aa3f91acf04cf4e574fbae562da47935755a1639d51ad2a991
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="publickey - krotti83@proton.me -
+ 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
+Content-Type: application/pgp-keys; filename="publickey - krotti83@proton.me
+ - 0x1A5D6E0E.asc"; name="publickey - krotti83@proton.me - 0x1A5D6E0E.asc"
+
+LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCkNvbW1lbnQ6IGh0dHBzOi8vZ29w
+ZW5wZ3Aub3JnClZlcnNpb246IEdvcGVuUEdQIDIuOS4wCgp4ak1FYUZyS2dSWUpLd1lCQkFIYVJ3
+OEJBUWRBdm9MdzByd3hVZEZsMyszSytnTWhkTnlTK1p3WjU2Q0hlc2xBCndyKzhzalBOSjJ0eWIz
+UjBhVGd6UUhCeWIzUnZiaTV0WlNBOGEzSnZkSFJwT0ROQWNISnZkRzl1TG0xbFBzTEEKRVFRVEZn
+b0Fnd1dDYUZyS2dRTUxDUWNKa05aaG1aenF4TUNlUlJRQUFBQUFBQndBSUhOaGJIUkFibTkwWVhS
+cApiMjV6TG05d1pXNXdaM0JxY3k1dmNtZnQwODBDTndEN0laNnB0eVgvVzhucHhhRFlwT0x6Zm05
+Y21aK0hUUGJZCkN3TVZDZ2dFRmdBQ0FRSVpBUUtiQXdJZUFSWWhCQnBkYmc2UkVwSmNUMWFzaHRa
+aG1aenF4TUNlQUFCdy9RRUEKOVVkYTBubVA4Q1g4UW1PciswNEY5U3g0c1NSUHhza0NsdE5rWlRW
+RHROb0JBTjFlL3I5TnFZbUx1MjI4eHlVbQpmMHBkVXFlallJTytPT0lFZFFhMEZQd0V6amdFYUZy
+S2dSSUtLd1lCQkFHWFZRRUZBUUVIUUJjYVpHMlZxK1MxCmV0Q2NSWDVJaGZnSHJCTFhIcGV1SzJC
+VmZxZFNFVlltQXdFSUI4SytCQmdXQ2dCd0JZSm9Xc3FCQ1pEV1labWMKNnNUQW5rVVVBQUFBQUFB
+Y0FDQnpZV3gwUUc1dmRHRjBhVzl1Y3k1dmNHVnVjR2R3YW5NdWIzSm44bk5IbWtwbApTakU0b1pU
+WDVDZVlsamVGcmowd2pNWERNWENXZzdNNytnc0Ntd3dXSVFRYVhXNE9rUktTWEU5V3JJYldZWm1j
+CjZzVEFuZ0FBZGdBQkFMc2p0elBMYjBnVytUQkFzVXNGNjNZUW1BRXBsUm55RWwxQ20rclJNZXJv
+QVA5dVRkVFUKdThGL25ab0RUS3BxcGM4L1RqakhkU2JWMzMyUmhBdW1NSmQ4Q3c9PQo9TXJhaAot
+LS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t
+--053b149810aa3f91acf04cf4e574fbae562da47935755a1639d51ad2a991--
+
+--------fcb28e3b5632956ff0d96fc5ab0e03e700d143aa3181ad3a4726273b2693ac17
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wqsEARYIAF0FgmmePu8JENZhmZzqxMCeNRQAAAAAABwAEHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcmc0ObWqifiuyVVAVqICgQlqFiEEGl1uDpESklxP
+VqyG1mGZnOrEwJ4AADFKAQClEMBEFO6+TjD9RvB65rd/rfWuZpVozsGwcp50
+MDdvQAEArHQKeQR9VVApov/IPqqcapv6/G96SB8RmVcwmD6sRQI=
+=DO3i
+-----END PGP SIGNATURE-----
+
+
+--------fcb28e3b5632956ff0d96fc5ab0e03e700d143aa3181ad3a4726273b2693ac17--
 
