@@ -4,122 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E27FD3762
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 14:36:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95BAFD3762
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 14:37:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3DD483F7D;
-	Wed, 25 Feb 2026 14:33:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D88C683EC8;
+	Wed, 25 Feb 2026 15:36:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oK6r9fL0";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="p/em0ZcR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A3A283F8E; Wed, 25 Feb 2026 14:25:50 +0100 (CET)
-Received: from PH0PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6700783FB5; Wed, 25 Feb 2026 15:35:49 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD2BB83F7D
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 14:24:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16BCD83FFF
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 15:32:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sparsh-kumar@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KUyvBnA77NczM84sdg9adsZ1VWZYyIkKgyDH60k74ktH1MEerWyUcXG7icz5A57SWFQfOVXAcBrUJ8ec0A9ry9z9fHCrR+3bUdWHG8E3d2r2N9vkOM7AS1D45xofwhyXNV3Lt4GsHulUfl+0dT9jFe6SUguwIVmXco1Iu/9PHfRTze7e/yCjSy/gu+lVjKMukB3CJHFUAjgUOue51nPBTOtzsANPShrUTMFc8QI9CF+ZtQ3Pnc9jqu+UtOAdspzhI5PDbMSYhmuk+G9tMd2KHQ7Q08gfFjY9aN8QGa714aBMedg2BU3X2Xb9lOrDdSqrrK99F/UQRJ0InNGYrRdCTg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jsuepanftanbiws3z8sxMfA0AxXDJ4w0P2yfAlfgYz0=;
- b=rTWier9/2eNz/OHWb+lZcR9r9w8M559iynClG/0pQWt0gm+ZFr2rtoXvl6E0R/U/IDf5stvuiK+iCpFnVPVGmjMrCtY8K3G8wPXY0hR2JR+VnisOobTTqOnwazqHgbYE7VXOkfkaDNxy/Bpi1nHwJzlCL/ZNf6YDG6/Y8qbDi/H48wAE4HYLlc559qbbNYxjccYLHjAC7nf6GeNF+4arjOnMwggnIrXoLM90Z+ActhAx8jtHeCKHhGj6bI5/QEFqzY/weIvDWjka2E3raZ/lyO9I4MEWzJlr88giJAMENljRm+4BBqQ6oJHQZvUwfLrPxCHfv5f6vOjeLvUvUcesHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jsuepanftanbiws3z8sxMfA0AxXDJ4w0P2yfAlfgYz0=;
- b=oK6r9fL0sZg8VUWs78Q2ik5v3ffXE/l1fxlvRkybZ0qLgcZSUegYk+kNKKHjCK8IawZjB6dfyyZ7NItx5/Aqy2Di5LSsyoZA1pydnDfOM3QUUUoVeMjuXdCcVKGgw/6Skr1tfO4VQ6hwqmvr+DmqrP4EfxMqzWJzxQX33CNtSMc=
-Received: from MN2PR15CA0006.namprd15.prod.outlook.com (2603:10b6:208:1b4::19)
- by PH7PR10MB5700.namprd10.prod.outlook.com (2603:10b6:510:125::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
- 2026 13:24:57 +0000
-Received: from BL6PEPF0001AB4D.namprd04.prod.outlook.com
- (2603:10b6:208:1b4:cafe::8a) by MN2PR15CA0006.outlook.office365.com
- (2603:10b6:208:1b4::19) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.23 via Frontend Transport; Wed,
- 25 Feb 2026 13:24:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- BL6PEPF0001AB4D.mail.protection.outlook.com (10.167.242.71) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Wed, 25 Feb 2026 13:24:55 +0000
-Received: from DFLE209.ent.ti.com (10.64.6.67) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 25 Feb
- 2026 07:24:49 -0600
-Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 25 Feb
- 2026 07:24:49 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 25 Feb 2026 07:24:49 -0600
-Received: from uda0510137.dhcp.ti.com (uda0510137.dhcp.ti.com [172.24.233.216])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61PDORGt011150;
- Wed, 25 Feb 2026 07:24:46 -0600
-From: Sparsh Kumar <sparsh-kumar@ti.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
- <praneeth@ti.com>, <bb@ti.com>
-CC: <afd@ti.com>, <n-francis@ti.com>, <vishalm@ti.com>,
- <sebin.francis@ti.com>, <d-gole@ti.com>, <a-kaur@ti.com>, Sparsh Kumar
- <sparsh-kumar@ti.com>
-Subject: [PATCH V2 5/9] board: beagle: beagleplay: rm-cfg: Update rm-cfg to
- reflect new resource reservation
-Date: Wed, 25 Feb 2026 18:54:21 +0530
-Message-ID: <20260225132425.3096103-6-sparsh-kumar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260225132425.3096103-1-sparsh-kumar@ti.com>
-References: <20260225132425.3096103-1-sparsh-kumar@ti.com>
+ spf=tempfail smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-6774d63d2e0so2249718eaf.1
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 06:32:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772029967; x=1772634767;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xa40CRykofcYq1mlQsfoEvA28d2A6vpDTrbjhGpDXzc=;
+ b=p/em0ZcRLAmDiB1SKAb5uKupSSCL3fhZa3VAd8/enuDGqU+S740CNijQq+o2jBZNVT
+ 1ug4Ww8/FEshGymspfNiqiqXHpZcTCvZSVwpE0XvrSv2ZYKo5/wqgQVon+JzCd3JzgoB
+ zJ2CfczQ9tRt/etZhGIv5FEC9iD5UXdBN5SMk6kPta3OSFLWrg+AHaTo9Ga87iLLwAu6
+ b70O+6scZEezT7JURn8N1Jxng8PLSoAU2judcOwGaNQ/EGPJKYh4cvcW30CTZzale+xC
+ H2G+VUl6rXE9jihm5QOBDuyQIJ7044j1XoI5NVA/bCq3wxVv99zqdSGC8ZYc7yqBKX5J
+ N9Zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772029967; x=1772634767;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xa40CRykofcYq1mlQsfoEvA28d2A6vpDTrbjhGpDXzc=;
+ b=Sow8g/xvBbbSjhjwmA28cg776fMnNCsUJ0UraYzRw52YgQCiLd5kt2uhxWGhmFSXg3
+ Q+rYYLlr1UUFEq38Pj7ac/MVsHzl8VYSsifJzYlNlMIW/ioswR4mG/Hf1uA21fGJ6Mwz
+ 0AiKWoqHXk9ioJYHSn24NDUGCqdqMtkeAj8M0Azvx4w+QUHqPYba8OS65tlqVi26DnUy
+ Db6MPBISm11fdVGhzdj1vmbPY7gXufFDhIcaXYfTrCnWRi+HQ1/Mk6lY+7LcV8DC9uGA
+ MSB6ThKIZ0LvPd3O5GnUvve26tNw3C3sMe8rtbCFUuxhR7YPi+c5r4+mqdusnfirqhCa
+ 5W5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUh4+E4aKTdSO3zEGHXHdbPW9D2aSE7jJ/XCn5wM4T82Nlsu3CaFeWo2YqU7Gx+1/mq08qJqt0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxvA/sYPpeb+IMyAsXF2oGg3EWm0u4AIplg9L3L1zfKnCl7UBb/
+ xZ4HJb/nxxDFOCz3zn3O5PqdO0m/XCmm4F2RLTL/WaI5g2c79uuJ7IVtdKDNgtLzaRQ=
+X-Gm-Gg: ATEYQzxHloFIAKKWhdoSc7T/oO5SppsJW6nZfqWU8x0sGLKNmqreAdeB6WMYYAaunFx
+ YhpucnP2RPgxN9iTRirBxFtvCqqQQOTOFl7PgojothLit9w+YEUGQfceFzwx1oLZM5fsWtwzUVA
+ 6dMbhbiVt+/Z6oXjAa7XUG45t0T/qojI5R8B8hDXJHDmU8QQQHZQNihACz1D662i7Sqneue5iuv
+ XRqMklxSxffMvHCSjWZhsJS/KABhi55X729Z5PSLvTRj5dEAjVG0zNshhWJWQaxv1Um4iGDfsjM
+ CQzocGSna+vFgK+a2nZcueH12p06LOong5X/UvHnUA/8DT4j1lkOS2jiiZvV1hJ2RmhDqbPoRI2
+ 44k0TMSlL6rbGh6V5zN6smoc7bBHnzPB28ZGz15KvSJSMOhN5NZsKYqkSCA4Iz6WrQwHomFb06x
+ S+UgZuzTq7DZS43PK4E4dDuIpvGJ5EvyxH0JbAAC2eM77XEQrWuYKx/gDT+FMrVg2qn2KTbzZYh
+ FkwCOoyuA==
+X-Received: by 2002:a05:6820:1903:b0:66e:4279:3de7 with SMTP id
+ 006d021491bc7-679ef99ef2amr271533eaf.53.1772029967506; 
+ Wed, 25 Feb 2026 06:32:47 -0800 (PST)
+Received: from ?IPV6:2600:8803:e7e4:500:146:def2:caeb:cb1f?
+ ([2600:8803:e7e4:500:146:def2:caeb:cb1f])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-679e546f4a1sm2481562eaf.5.2026.02.25.06.32.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Feb 2026 06:32:46 -0800 (PST)
+Message-ID: <cc219fa7-669b-4ede-a416-4f7a76b28ba8@baylibre.com>
+Date: Wed, 25 Feb 2026 08:32:45 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4D:EE_|PH7PR10MB5700:EE_
-X-MS-Office365-Filtering-Correlation-Id: ac42eac4-a4be-40ad-ef1b-08de74714405
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013|34070700014; 
-X-Microsoft-Antispam-Message-Info: OXLBoMlNUJUAes2ccUeHHzfbNIi9IHpzm2Q0aVOPZlNnCoVrPq9f1P7gehERJSAX6yKEgHY8aXo35lF2QoT1cjXtll6ZN9MlTmbSSGy3tqCjGArOnStI7tAfkppk0MRasXCFAQ2J1Lp7Dm0E9SQhwqjmglz2h+xn0gQfSSDZa+RYFlh4Klu75zM6fxxlI5U09ffJd50uRAfyzIylWpHXNepY4mHX4XeAW3sMoj2mp4nsvSS44LSZ00IPGQu+ygDD28utO7fUplJTOcDRIxf4Maa+GPppcUV3hODgqJWIW/cdG1jB3gnJJVVFWHc2qSDzpqyPn9ql2qF2IOaI6MFWw7PloNU3FU8VlWHZEHG0SrjV1rQ72sYDy6vSR9jEGPucQiwFx4Ag1qq4n6isKbRKTlcOzrbzYaKy/QAmwKTJ25JIMq9HDDxweN4vLZYNkMkgktVpROMYczpjGPbLk2hlJTj/u2WPgpdOzaNCkbFwmU5GvWeCqrAKWWIuN1MWd4DFsjERpnOJbdVVdIZLZV2o7IY7Mf761b6+4WmSjJOh78xZWXPbCnmb99m3c+VesqBbZVOXMmls1fexORWSfGiQCYYo0Vl03dja95/x21a7/5NWaypqiGN+n6CD9HTCJgfBzJKKe5vSkhbZrOralFvqalgll8Fm2lTaxvWcH61iTHBC8xKnHg/+lc9qn4nPAeSVh9pEXgvsL5zLfB+opPUOEhTEgFBpwyHDDXRiUJfRjC5ATYdLRXCSX1xI+m1DyAV3frKH+i0iZphmzHXmULm5SK4OzNoiBFc1hnFBAdDS+o2+f62iiljUe6VBc2egJCrI6vNH3JFiInORmn/ypx8EZA==
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013)(34070700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: eeM3JS+yuiecDudv+usUW0ghMJMQYmUoOQZQUBDbaJEdpJiU7nn+c9XmeGEw1qyT08U2kkQjVbmkPAUiyC+lgfOIfFHyUzVLHGfzA4KuUR8Thik/tgv1csYHfv3RkcIEElr44iz52RZ+UzI8BRJutMBFtQcdUu+NOBsPtJhj/XvwX5gvaVkHYY3P4miWV5OycBItQTeYNuYlzwv/kCiTqkQTigwCtBlMDGfSmXxGONGGWkmQ8aM1xNTNM+r3wydEaOivWbFfc04AebW6WvlZep111RyHeAY8oXocRZX6SnX+v18I4f4CMOW4Bg8EDMTBLtgNf8g7zTJIZSGn9G86J9XARgiwERAe59XkFolsQWGNnuPcOnU4Q8+DpEP3Oja6kv7j6xTkz+2cfkjwPp89SZB+1bLlwiBSywKJNWJ1T70rVL0d3DmHailQuRmtZxV7
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 13:24:55.3438 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac42eac4-a4be-40ad-ef1b-08de74714405
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4D.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB5700
-X-Mailman-Approved-At: Wed, 25 Feb 2026 14:33:08 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: mtk-sd: add mediatek,mt8189-mmc compatible
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>, Julien Stephan <jstephan@baylibre.com>,
+ u-boot@lists.denx.de
+References: <20260206-mtk-mmc-add-mt8189-compatible-v1-1-5243eb8b7e2b@baylibre.com>
+ <aZ6gwSLjH8IYY_uE@nxa18884-linux.ap.freescale.net>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <aZ6gwSLjH8IYY_uE@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,39 +112,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the latest v11.02.09 TIFS firmware, an additional
-virtual interrupt and event is reserved for MCU cores
-to DM usage on am62x devices.
+On 2/25/26 1:12 AM, Peng Fan wrote:
+> Hi David,
+> 
+> Thanks for your patch!
+> 
+> On Fri, Feb 06, 2026 at 02:50:06PM -0600, David Lechner wrote:
+>> Add support for MediaTek MT8189 MMC controller.
+>>
+>> According to [1], this is similar to, but not quite the same as
+>> mediatek,mt8196-mmc.
+>>
+>> Link: https://lore.kernel.org/linux-mediatek/20251203-mt8189-add-mmc-support-v1-1-f5ce43212fe9@collabora.com/ [1]
+>> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>> ---
+>> drivers/mmc/mtk-sd.c | 11 +++++++++++
+>> 1 file changed, 11 insertions(+)
+>>
+>> diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
+>> index 4928a880038..7a4bdee7496 100644
+>> --- a/drivers/mmc/mtk-sd.c
+>> +++ b/drivers/mmc/mtk-sd.c
+>> @@ -1979,6 +1979,16 @@ static const struct msdc_compatible mt8183_compat = {
+>> 	.use_dma_mode = true,
+>> };
+>>
+>> +static const struct msdc_compatible mt8189_compat = {
+>> +	.clk_div_bits = 12,
+>> +	.pad_tune0 = true,
+>> +	.async_fifo = true,
+>> +	.data_tune = true,
+>> +	.busy_check = true,
+>> +	.stop_clk_fix = true,
+>> +	.enhance_rx = true,
+>> +};
+>> +
+>> static const struct udevice_id msdc_ids[] = {
+>> 	{ .compatible = "mediatek,mt7620-mmc", .data = (ulong)&mt7620_compat },
+>> 	{ .compatible = "mediatek,mt7621-mmc", .data = (ulong)&mt7621_compat },
+>> @@ -1990,6 +2000,7 @@ static const struct udevice_id msdc_ids[] = {
+>> 	{ .compatible = "mediatek,mt8512-mmc", .data = (ulong)&mt8512_compat },
+>> 	{ .compatible = "mediatek,mt8516-mmc", .data = (ulong)&mt8516_compat },
+>> 	{ .compatible = "mediatek,mt8183-mmc", .data = (ulong)&mt8183_compat },
+>> +	{ .compatible = "mediatek,mt8189-mmc", .data = (ulong)&mt8189_compat },
+> 
+> I not see this compatible being in dts/upstream or arch/arm/dts/,
+> so has this patch been tested with upstream U-Boot?
 
-Update the rm-cfg to reflect this new reservation.
 
-Signed-off-by: Sparsh Kumar <sparsh-kumar@ti.com>
----
- board/beagle/beagleplay/rm-cfg.yaml | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+It has been accepted upstream [1] but hasn't made it's way back to U-Boot
+yet (famously, the MMC pull request was rejected for Linux 7.0). And yes,
+I have tested this with Genio 720 EVK. I will be modifying [2] to use it in
+a .dts in U-Boot. I am still working on some other dependencies before
+submitting that.
 
-diff --git a/board/beagle/beagleplay/rm-cfg.yaml b/board/beagle/beagleplay/rm-cfg.yaml
-index e4221f82f92..aa999c2ef67 100644
---- a/board/beagle/beagleplay/rm-cfg.yaml
-+++ b/board/beagle/beagleplay/rm-cfg.yaml
-@@ -513,7 +513,7 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 168
--            num_resource: 8
-+            num_resource: 7
-             type: 1802
-             host_id: 30
-             reserved: 0
-@@ -543,7 +543,7 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 909
--            num_resource: 627
-+            num_resource: 626
-             type: 1805
-             host_id: 128
-             reserved: 0
--- 
-2.34.1
+[1]: https://lore.kernel.org/linux-mediatek/20251203-mt8189-add-mmc-support-v1-1-f5ce43212fe9@collabora.com/
+[2]: https://lore.kernel.org/u-boot/20260209-mtk-mt8391-initial-support-v1-2-b23ab9d0b9bc@baylibre.com/
+
+> 
+> Thanks
+> Peng
+> 
+>> 	{}
+>> };
+>>
+>>
+>> ---
+>> base-commit: e5e75ea8c7b8e6d9ce1ca8ec7a25fa8b3f6029a9
+>> change-id: 20260206-mtk-mmc-add-mt8189-compatible-6a71d5c710dc
+>>
+>> Best regards,
+>> -- 
+>> David Lechner <dlechner@baylibre.com>
+>>
+>>
 
