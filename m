@@ -4,96 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB28FD375D
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 13:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B54BFD3760
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 13:20:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2952E83E61;
-	Wed, 25 Feb 2026 14:11:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1400C83E7A;
+	Wed, 25 Feb 2026 14:19:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QdueNFvU";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="AXXA9o4j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72EA083E63; Wed, 25 Feb 2026 14:11:31 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 9494783D8A; Wed, 25 Feb 2026 09:42:40 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD42383E36
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 14:10:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 875B53F201
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 13:10:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1772025055;
- bh=GmeOg8P+FjJPUlyraM8eHlwpprsOFiG4ja521dq9wvc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=QdueNFvUQDmUuzB5U3MSFnNsJZxMwvY3HgYJ4tCI6X/mQf7BWNjLvVKe3ylzTBeCh
- VxHIOGz93+7XXvEIXt8toe+1CJMCYywzqEwVnaC3kQOeifva10Oxs8P2oGvHXpEAow
- TrJGFnhLdXBiPFM3ph9RdhI0ksQTLeuKSkPQKEW5lp/XKLbUc8kFcgKU3FBA3Jt/8T
- S2ZmpXmQTG1/109PSdEXUvByerm7Dd3Hvra5ibWrAZQ4wTz42oTIlFvfC8MZBimrrD
- wTsqJCYpdGsQghr0iYEDdt9C2B+NbaocPU0sDrtOobpnscXAdFZB8nw918lpxTJtJv
- 4VCZZIr3P1FXLPq0kNomE2c8ArTPGH/xXCmRMEowOd2yXrg7/0WexUTlNgVg5cJEuQ
- 10xNIuxVn+wHlL2A5XvVJwnLdKNEzul12dx54eNdYzoAbaitL6klOfxaA2MoBJ/BrB
- DjNxUJIc6FnGF5ABUzFrlDuyfhUhys0zo91m8ws/ybzwiB6kz0ogZih15+ED63uRkt
- w20LTINO/JSzH6LLoXE0trzHTNdtBEcdpPN+gUzB5XJE0WzdBK0+6EX4XrTgpPnD0V
- krOdQhfYCorBg9oVyuIls0aCkTnadtDYYZtdWyVpYdOLzHhDMITZ7+BQCp3FZG39VL
- azE/X8RzFGCqzq1DPI8RSXmI=
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-436267b01c4so6568244f8f.0
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 05:10:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772025055; x=1772629855;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GmeOg8P+FjJPUlyraM8eHlwpprsOFiG4ja521dq9wvc=;
- b=O5AoGyupk/203ElK1Np4AcWt+DlF+2BClMRGxfJmQUprPyFNLT94XiX4xQhjT1OxgB
- TaZRME0s0ODf6XKFttYiRY3ch8ooHqhYG2qumDCWO1MLpYkEo07PNAUnZYsg5Vnewvj0
- mKkoefLCn3H9IINl5XT3P+YjWSq32TIhxQ33ZaxM3Ip2GTdh4VIi3+uEIDEtLbkp2Jiw
- uFDqiAf+4AI0hgDKhWXVk/IrnMrJo8wZFoXZ8pWxxQ5YpEwq+YVcqIQQnnTuWkns23of
- 28IOdc8mQ8lyi7Mhee+0hNg66Y4QeZd0t0ftiM82hPPxbh4hMCvOGQkEiCinhyyssZ3T
- PcIQ==
-X-Gm-Message-State: AOJu0Yw3YaKRMLrlOFtRQjKVTpTHblk3DIOmKhcmYw/tDR+ieSUmTwcv
- 3DMmqAc13nlVrcKPR1jtijqGVYuil8UdA/IgNJ+FXALvCU85XBDfrP4OE5Rnf+bpcESzkqfslUR
- dY4SAl9k6x31KguGTgQ51XnjFtBO66oscvM5OOarTsPqBcqRDSC01BkAQEMmr8Cy9BBG6g+o=
-X-Gm-Gg: ATEYQzygqSUq94rqdR/XH26xIqzle+Dz+09ADXoGKIoU+JNUpL5USU1YuMbDcJvfbbZ
- clnxSJ+74pvRrBK97iWXtA30eAqNplSGygtmdGw6abE/ZWlXFK+i2JnXx+05nB821eqO3cZ4Hpf
- IOqXwTomCj8Us0qTUw6oRlQY1wREEcyctQCn9PHWyXN588iiAfVY4UPWDpwAL6+nn+svLCFFZ6W
- oOQtWimaPmshqOeW7yhcwBBQVg8zLLl/32W0AbkFtiA6+Vy0JTmDYBloEJ+pqBxY2x0YuYUB3Ti
- bBmwCLy3TjPydFazUhga4G6wdr0c28qxc64shFNbdmxjLqtljKOasss+ycvGjnFRxsuskEdzJMl
- kuiLnFkVBMYDEekSxh2WWijj+NEZbyCN2yZYaxcSUO9e5YQjXV9K9OEG8P4WDC86xZ+gM90XJ18
- 7/j4SxcSDnw9mpmg/9xmtCYdCgU6jjhmQFYYq//qsMt+DC
-X-Received: by 2002:a05:6000:2c0e:b0:436:da9:4371 with SMTP id
- ffacd0b85a97d-4396f154441mr29156462f8f.5.1772025055014; 
- Wed, 25 Feb 2026 05:10:55 -0800 (PST)
-X-Received: by 2002:a05:6000:2c0e:b0:436:da9:4371 with SMTP id
- ffacd0b85a97d-4396f154441mr29156417f8f.5.1772025054468; 
- Wed, 25 Feb 2026 05:10:54 -0800 (PST)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43970bf9fb2sm34479617f8f.1.2026.02.25.05.10.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 05:10:53 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] scripts: add checkkconfigsymbols.py
-Date: Wed, 25 Feb 2026 14:10:51 +0100
-Message-ID: <20260225131051.60535-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id 73F9082A9E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 09:42:38 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MJUZYrzt2FbIJn/uMZEGVQCVX8Pqv18Eg8URCWbEsQY30BpYRDJ6qSAPr5oNLzB+JTOVAPWTODryYK3FrIpx/3cXdi/GagkbHdEqWZBhAF7lsP5gh7PR5WI6H0yi8Z1Qi410Ccit3yUZJZosjusGJxVkJ2/zTfICny5vywbpTdqMK0m4Y5gAkNBJQjQNfIo21nX3i+vB9Yql2J2kpWRr2cI/zN9tBgU/sunKlIHHunjm9JfZWBUD3k1IqJYqdXVW/0qIY15CUsxs2P/zIf1q2kjU03mVqJpsiOBWvVbhuSQ5+BQ68OusLH1ikG/dcnVdGA7v0RraMK7T1oof3LF03g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wKfhHuYSBDjarmIaNmFyC2di7kDu7HKgU3sV87Q9E2o=;
+ b=jP5m0aYx1FNOyeV5NGw75Asbp1PovZcWNc7GcqRhGtImJUmAShmqBHhal5IQm1bfLpvOpcEeycZtE48CmocXd7bOTcKnv+DqXzdQIfiJ460rW6KAO+9nA4Ut2SAnsEqIgwbc5OlckI9s7vd+c+UQb09fROv+IeV1wf+NIb/iAXzxpqGXwCeq2n9BgQiSEk2uedJ49AHdMeuUkwquz/zer1tvK0XpzMHeMxtWQ+Gq6JCO+9OwK85aj+ykncp/L79b1V3855Gvwo7d+vgQnnwKKixyv9odwcG1jtZaTuBspwJH96nHAEpw/xo2Zf1IInH9BrR0k4uX73XDw6MZKGL3GA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wKfhHuYSBDjarmIaNmFyC2di7kDu7HKgU3sV87Q9E2o=;
+ b=AXXA9o4jlxcvzlZmeE06EM+nWQeXmLhm2DycylcmTyJ7d0ZMHWWmat3ov+nLKN8wkDapg03rKWFJFStiDBJDKjzRdRai40Z7JDM7ywna6jseK6zbdwqNYzD9FnY6q1UYrV0fu1NVY2dc4/Sm5UF0/fq36acVewAv6ubksDAg7Ye26uCDc1NAaA3aXLZvhwOmZLFA5zTW0CS+Zs2GKTBS+8pa+NXoHz/sJ3C5jsrutxq3CnMVeyvbkYM/hZ3qEnOFX2TitIXHaqnuyU2BGCQprZ3URxPa4lQR9eP4qOarpQQhGrYYzN9jywaEaac/QXnLDiRQIsJiD/EuOkKgjtnlew==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by PH7PR03MB7134.namprd03.prod.outlook.com (2603:10b6:510:2b4::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
+ 2026 08:42:34 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9632.010; Wed, 25 Feb 2026
+ 08:42:34 +0000
+From: Boon Khai Ng <boon.khai.ng@altera.com>
+To: U-boot Openlist <u-boot@lists.denx.de>
+Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>, Tom Rini <trini@konsulko.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Lok Chen Huei <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: [PATCH v1] ddr: altera: Add delay before writing to MBRDADDR register
+Date: Wed, 25 Feb 2026 16:42:23 +0800
+Message-ID: <20260225084223.19498-1-boon.khai.ng@altera.com>
+X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR03CA0145.namprd03.prod.outlook.com
+ (2603:10b6:a03:33c::30) To SA3PR03MB7187.namprd03.prod.outlook.com
+ (2603:10b6:806:2f6::11)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|PH7PR03MB7134:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8e5e7671-a895-4020-48b7-08de7449d256
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?R8vVxgXc2x5QVzUr54Rbu+ODFr2vfHW/F+zQ1ocSL3uixAeZzUNa2Vxp0vuP?=
+ =?us-ascii?Q?g0oJotm0ToapvWDenzb6Lq5R/21wI8KoEXHU1jGC769yvu+W/mYsKv/JD66a?=
+ =?us-ascii?Q?N/xQviufzUCRAMbU1jwscOqtcB78FIlluSAD5NBM9i/72vi3RnEadef990vP?=
+ =?us-ascii?Q?kTw5yLrSowMMKbGNidoWw9H+V9NuQP93/0OOPHqlFp7NWDtpz/Db4Qt1lIzF?=
+ =?us-ascii?Q?qXWhO0Cc1gyWQUeK6ojI/5eTFgN15+rYKPsi1onoosr5IQMoFfUs/CT+cNL3?=
+ =?us-ascii?Q?7i3Gg4nVkYbDR28L1dQ3nllpk9uCMilssa2qRPWK5XhAjCObZXm9laQ+O7V+?=
+ =?us-ascii?Q?m97GZQemJub4Klme6E7uF6jUhg1YeqH/QyvnfiLUwgquyCaypYiOxvGE2rKx?=
+ =?us-ascii?Q?o2ZRePI5ZLozg9UxNS17occQlgVCk2mvIptM4FTYazbhCWqpQrgdqW8mWJIt?=
+ =?us-ascii?Q?UX+70VLxULSDDh0QXfI4ddSC2ZvlUWPZElGkLr9N4FvKXl8y57TRBeke4cYR?=
+ =?us-ascii?Q?7VUgCJy41DeN5OqtECNrEDIsy78bTISCk3wFVvZd0zm3uw490MIw13iwXBBc?=
+ =?us-ascii?Q?mhAf7LbaDA5Wi8rzVQG71m7XdKyk0zKeq7+PsQ4QrxZWBqIDoLNQi7RsIVov?=
+ =?us-ascii?Q?W641Z8H82d0xqH2nLdgXR/jgKVGIe6EEr9JaJ3CruhtbGUqSCiF3GqTgdLc2?=
+ =?us-ascii?Q?5d3SgC7hzxXV55pr/7VdNfrmZiRBWu8wYTdSt7UwWA7q64Sjg1syNJwF/b5P?=
+ =?us-ascii?Q?IaOByy3Vz5guamzqXKRupoVEQYv8ZUNbJm5favHJr+uhACTIBTyG16+O01LY?=
+ =?us-ascii?Q?8PsB0iBwdx9mpbsZaq3ZFf68rqlkE87qcX98BXhJlpFwLNWcBk0Hz0GYdIVa?=
+ =?us-ascii?Q?XE6BvAst1f34aCkZzEvYwk+sBP8lqkgLqXAsQZGuoru3sZ1ELe7KpUO1urtC?=
+ =?us-ascii?Q?BRZVNuA7MiBTuO84Yc5phgl6JsK8Pzu+jsND5Qe6npHqcFyi/g34SqZuQsKD?=
+ =?us-ascii?Q?b5FAef0q/nYigRG4oFUNjgbTwtd9FHZGznELcKGXPkdeg4kiGgTPcsisuKwC?=
+ =?us-ascii?Q?eXYOc0cXFwfQkrmXUebLyHhlh8V/N5qiWiZ5MnASTUN/rfFG1vZ/plhz1+ib?=
+ =?us-ascii?Q?hdgXqYdiqkqOkxuyp5SmiYU9KU91ugDk84eR3ToxK4y9KjSPbMfUgoN02g9w?=
+ =?us-ascii?Q?wPXPjgtS12soReMHSTwU36sMoNuBH+yy9AG5e823nwbLxpN7wc1Q13x1Luuq?=
+ =?us-ascii?Q?IAkCdNscFN7syhGnko6XqNG01rAytUAPzRPzp0tPPHCIhR+sFmAVtj7XPMOn?=
+ =?us-ascii?Q?GhFkuGSmKdpYZ14z+guD5Wqmh90DacTO5OePcoyGjvI4KkSCo9eg2UyszMgM?=
+ =?us-ascii?Q?l34uNW820jCWQBz5zBwA6BNLzemKFXjenaE15O7QDOEP0uud3Mt2pOaVdo82?=
+ =?us-ascii?Q?1Sw1xw1j+OtW4UxSyXp4FY2wrTklhcDpiUdx51Oc9r+Kj6bTN+uUII1TTLjP?=
+ =?us-ascii?Q?5c/UbkJZaGgoOW7p07tKbP8OqpCdSB83EHERVY9n2dQZfN9QFpL7gpkxLC3e?=
+ =?us-ascii?Q?iM/UpBh0RGw6MlAP61c=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ksxtesBqfEQ6owPu6Z/Oh2ApZVNNsa0Nqyw/lijQIrfVJBlLq9oY3ijLiIGW?=
+ =?us-ascii?Q?qo8yCzTV3QEfU3+SxmW9pBhhU94o43DWCo65JgObB5sBYRtP2INFqrshEl9g?=
+ =?us-ascii?Q?nEK97XYMEB/0gY4JvhrCuJ6Mdkof4A1miGr2RBclxhVP+sRsqSuMEuBD1EWT?=
+ =?us-ascii?Q?7oWHyAxvNVCoMmUf25/2U0s0wnLZLZ7ID73ILfFQ5JE8Sy7LqX5rI3o/t+2a?=
+ =?us-ascii?Q?NARYOzzILY/p0Yt7190NDojFOhyaQgYLT5Ewlw6NKQJ+7vRcjn8c3QN5QEQ3?=
+ =?us-ascii?Q?ZDUlUcJR4C2RGafmGw2dvHHGA6ryZRj3/1vJhDsTthmwgp/ydnmYx+NxBV1u?=
+ =?us-ascii?Q?IS787D2Lbf1SHokeVzDFu+NVQnWxQiz/R90/+cxmFJcVVUlge5BLNjvXXPJ/?=
+ =?us-ascii?Q?5wpg5koXUvSe7e0I/hj+2Sc4KLWPwnN61GbVvp/BB/fF5QET1sQig1W1joI0?=
+ =?us-ascii?Q?BN7YgBAur2mJn4qZYq4NgVzXVlONZ/C5synqjSE5MIRgj4fmDqmO6o2H8U2E?=
+ =?us-ascii?Q?T1Feu24R7e11Ehk3Cw190N16hsquW4SHlZLanRhvaqbeFJ9oqCqp04fvoGXZ?=
+ =?us-ascii?Q?7wAwT9mNz/qjaMitcXGsZ3HvhjA7ybkVSeuQ3hPzmONcOpLdTTSnof/3ce6N?=
+ =?us-ascii?Q?xlEhDO/yRpmBJrlAbZBl4+FDfKI9gBFYiwAzIVNfZKiEBUq3XnBarWEUMeWA?=
+ =?us-ascii?Q?S0fCy3x2Hf3NEy7LGs5WFVizHOPjGLz9pJk4dMyqmfdpP+2C/0RoiX8eMMLI?=
+ =?us-ascii?Q?dvZR9xvJGyjHcK6c1EMuAM/i2zISyIiWAapV5YPjFIYdKjP7xb8RiGdRGZXJ?=
+ =?us-ascii?Q?8PRxc5Uvk5S+se/iHDDwOPTqQEoD4OkoAOOb/bsH7ikw7/93SzQbZkIY95DG?=
+ =?us-ascii?Q?e0mr9vsriDiu1bcF+Cdu1ivpKDGsCwLiBamzP/s4kbkgGgN7BlmN4LoaKOlV?=
+ =?us-ascii?Q?BGOncm5fQCJ4LUf+wxgE23fSb/ReFTERVaNB1QH4JLdiIHYzni1gvQCdnm3D?=
+ =?us-ascii?Q?J9b8Ah21C1NDI9Q8Xk95eM4VlBV7bvi20wNzHJhVLAR0fmtnaF2sc0lCuj7N?=
+ =?us-ascii?Q?b/Ow3pPd910mHsn2s7qatTJL3kiReK5oKwiqJ6Wu6/oGKzNF6JcZ43NWSlfO?=
+ =?us-ascii?Q?JOzz2dYoX0rm8xmzPcZaTOyGquPkR8+QGhHG0KHf1+/Quk6Ew/q+eqt8Kr3s?=
+ =?us-ascii?Q?wo46oZ9LO6x7QJWcyhQpfVYvSpQ+tuliXjwnoX3SLcyAplp03JV1FeiRAKCc?=
+ =?us-ascii?Q?1qOS4DxOnMIazI9vvhG4NIQRxqhdEv+zN2NOt21I+gWxa9oM/Ai8SbuSLuP2?=
+ =?us-ascii?Q?0vFNKeN/a4MfDHFZ6iT50oer/hhQ05li7E80EGUjkwsRN1Noii16Jxn/e0I+?=
+ =?us-ascii?Q?MRXrP8NZFDKCy42j5dxhoEpAsBaWW8d8jntgxdNjgnwv5+ukkBYaH977DXg0?=
+ =?us-ascii?Q?vVO0C9GvsTlVuya9XG+XM7EQFdohm1vq2Z/u952iSeUidJP3QbpXJ3kA6Krd?=
+ =?us-ascii?Q?aV7UnYKEfDxkI1LSfr6/JMoq5ODdl9G9hN/Sx+j7EPIQTzmY2Ju1NCUd5UIt?=
+ =?us-ascii?Q?BxXtyRIfJ371qlAIHc/dHNy9Jzec70DbXwDZyD2GiPYpk7UVJ4MpEcyrox7B?=
+ =?us-ascii?Q?F1D+Ygp/n4yrUz2//0298BoJGdNYk8Cg7t49aq4KVi0AcByPpRMWgW71DNNh?=
+ =?us-ascii?Q?0dMuNkcDCl/5/P518EvyVYmb4I7XqHsWlqWyYbbyaJT2Bem89ynp6AFVoACi?=
+ =?us-ascii?Q?GRWBrcbaBg=3D=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e5e7671-a895-4020-48b7-08de7449d256
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 08:42:34.7747 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bysgTMUSny5mnp97lylKPP/ImyEMDXq0PX8OMsHY8lTF0Ne0MEMbLnbBO/VqrRNbITgkrKnldDEG5OWyMNVZVg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR03MB7134
+X-Mailman-Approved-At: Wed, 25 Feb 2026 14:19:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,505 +168,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add checkkconfigsymbols.py from Linux 7.0-rc1 (unchanged since v6.2).
-This tool allows to identify the usage of symbols that are not defined
-in Kconfig.
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Add a delay of 1ms before writing the address of the data for HIP
+interface into the Responder Mailbox Read Address Register.
+
+The UIBSSM mailbox require some time to settle down while waiting
+for the MBRDADATA_VALID bit to become 1 without this delay,
+specifically the board will timeout while waiting for
+MBRDDATA_VALID bit to 1 after setting to 1.
+
+This 1ms delay has been tested thoroughly and no intermittent issues
+with UIBSSM mailbox communication is observed.
+
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
 ---
- scripts/checkkconfigsymbols.py | 482 +++++++++++++++++++++++++++++++++
- 1 file changed, 482 insertions(+)
- create mode 100755 scripts/checkkconfigsymbols.py
+ drivers/ddr/altera/uibssm_mailbox.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/scripts/checkkconfigsymbols.py b/scripts/checkkconfigsymbols.py
-new file mode 100755
-index 00000000000..36c920e7131
---- /dev/null
-+++ b/scripts/checkkconfigsymbols.py
-@@ -0,0 +1,482 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0-only
-+
-+"""Find Kconfig symbols that are referenced but not defined."""
-+
-+# (c) 2014-2017 Valentin Rothberg <valentinrothberg@gmail.com>
-+# (c) 2014 Stefan Hengelein <stefan.hengelein@fau.de>
-+#
-+
-+
-+import argparse
-+import difflib
-+import os
-+import re
-+import signal
-+import subprocess
-+import sys
-+from multiprocessing import Pool, cpu_count
-+
-+
-+# regex expressions
-+OPERATORS = r"&|\(|\)|\||\!"
-+SYMBOL = r"(?:\w*[A-Z0-9]\w*){2,}"
-+DEF = r"^\s*(?:menu){,1}config\s+(" + SYMBOL + r")\s*"
-+EXPR = r"(?:" + OPERATORS + r"|\s|" + SYMBOL + r")+"
-+DEFAULT = r"default\s+.*?(?:if\s.+){,1}"
-+STMT = r"^\s*(?:if|select|imply|depends\s+on|(?:" + DEFAULT + r"))\s+" + EXPR
-+SOURCE_SYMBOL = r"(?:\W|\b)+[D]{,1}CONFIG_(" + SYMBOL + r")"
-+
-+# regex objects
-+REGEX_FILE_KCONFIG = re.compile(r".*Kconfig[\.\w+\-]*$")
-+REGEX_SYMBOL = re.compile(r'(?!\B)' + SYMBOL + r'(?!\B)')
-+REGEX_SOURCE_SYMBOL = re.compile(SOURCE_SYMBOL)
-+REGEX_KCONFIG_DEF = re.compile(DEF)
-+REGEX_KCONFIG_EXPR = re.compile(EXPR)
-+REGEX_KCONFIG_STMT = re.compile(STMT)
-+REGEX_FILTER_SYMBOLS = re.compile(r"[A-Za-z0-9]$")
-+REGEX_NUMERIC = re.compile(r"0[xX][0-9a-fA-F]+|[0-9]+")
-+REGEX_QUOTES = re.compile("(\"(.*?)\")")
-+
-+
-+def parse_options():
-+    """The user interface of this module."""
-+    usage = "Run this tool to detect Kconfig symbols that are referenced but " \
-+            "not defined in Kconfig.  If no option is specified, "             \
-+            "checkkconfigsymbols defaults to check your current tree.  "       \
-+            "Please note that specifying commits will 'git reset --hard\' "    \
-+            "your current tree!  You may save uncommitted changes to avoid "   \
-+            "losing data."
-+
-+    parser = argparse.ArgumentParser(description=usage)
-+
-+    parser.add_argument('-c', '--commit', dest='commit', action='store',
-+                        default="",
-+                        help="check if the specified commit (hash) introduces "
-+                             "undefined Kconfig symbols")
-+
-+    parser.add_argument('-d', '--diff', dest='diff', action='store',
-+                        default="",
-+                        help="diff undefined symbols between two commits "
-+                             "(e.g., -d commmit1..commit2)")
-+
-+    parser.add_argument('-f', '--find', dest='find', action='store_true',
-+                        default=False,
-+                        help="find and show commits that may cause symbols to be "
-+                             "missing (required to run with --diff)")
-+
-+    parser.add_argument('-i', '--ignore', dest='ignore', action='store',
-+                        default="",
-+                        help="ignore files matching this Python regex "
-+                             "(e.g., -i '.*defconfig')")
-+
-+    parser.add_argument('-s', '--sim', dest='sim', action='store', default="",
-+                        help="print a list of max. 10 string-similar symbols")
-+
-+    parser.add_argument('--force', dest='force', action='store_true',
-+                        default=False,
-+                        help="reset current Git tree even when it's dirty")
-+
-+    parser.add_argument('--no-color', dest='color', action='store_false',
-+                        default=True,
-+                        help="don't print colored output (default when not "
-+                             "outputting to a terminal)")
-+
-+    args = parser.parse_args()
-+
-+    if args.commit and args.diff:
-+        sys.exit("Please specify only one option at once.")
-+
-+    if args.diff and not re.match(r"^[\w\-\.\^]+\.\.[\w\-\.\^]+$", args.diff):
-+        sys.exit("Please specify valid input in the following format: "
-+                 "\'commit1..commit2\'")
-+
-+    if args.commit or args.diff:
-+        if not args.force and tree_is_dirty():
-+            sys.exit("The current Git tree is dirty (see 'git status').  "
-+                     "Running this script may\ndelete important data since it "
-+                     "calls 'git reset --hard' for some performance\nreasons. "
-+                     " Please run this script in a clean Git tree or pass "
-+                     "'--force' if you\nwant to ignore this warning and "
-+                     "continue.")
-+
-+    if args.commit:
-+        if args.commit.startswith('HEAD'):
-+            sys.exit("The --commit option can't use the HEAD ref")
-+
-+        args.find = False
-+
-+    if args.ignore:
-+        try:
-+            re.match(args.ignore, "this/is/just/a/test.c")
-+        except:
-+            sys.exit("Please specify a valid Python regex.")
-+
-+    return args
-+
-+
-+def print_undefined_symbols():
-+    """Main function of this module."""
-+    args = parse_options()
-+
-+    global COLOR
-+    COLOR = args.color and sys.stdout.isatty()
-+
-+    if args.sim and not args.commit and not args.diff:
-+        sims = find_sims(args.sim, args.ignore)
-+        if sims:
-+            print("%s: %s" % (yel("Similar symbols"), ', '.join(sims)))
-+        else:
-+            print("%s: no similar symbols found" % yel("Similar symbols"))
-+        sys.exit(0)
-+
-+    # dictionary of (un)defined symbols
-+    defined = {}
-+    undefined = {}
-+
-+    if args.commit or args.diff:
-+        head = get_head()
-+
-+        # get commit range
-+        commit_a = None
-+        commit_b = None
-+        if args.commit:
-+            commit_a = args.commit + "~"
-+            commit_b = args.commit
-+        elif args.diff:
-+            split = args.diff.split("..")
-+            commit_a = split[0]
-+            commit_b = split[1]
-+            undefined_a = {}
-+            undefined_b = {}
-+
-+        # get undefined items before the commit
-+        reset(commit_a)
-+        undefined_a, _ = check_symbols(args.ignore)
-+
-+        # get undefined items for the commit
-+        reset(commit_b)
-+        undefined_b, defined = check_symbols(args.ignore)
-+
-+        # report cases that are present for the commit but not before
-+        for symbol in sorted(undefined_b):
-+            # symbol has not been undefined before
-+            if symbol not in undefined_a:
-+                files = sorted(undefined_b.get(symbol))
-+                undefined[symbol] = files
-+            # check if there are new files that reference the undefined symbol
-+            else:
-+                files = sorted(undefined_b.get(symbol) -
-+                               undefined_a.get(symbol))
-+                if files:
-+                    undefined[symbol] = files
-+
-+        # reset to head
-+        reset(head)
-+
-+    # default to check the entire tree
-+    else:
-+        undefined, defined = check_symbols(args.ignore)
-+
-+    # now print the output
-+    for symbol in sorted(undefined):
-+        print(red(symbol))
-+
-+        files = sorted(undefined.get(symbol))
-+        print("%s: %s" % (yel("Referencing files"), ", ".join(files)))
-+
-+        sims = find_sims(symbol, args.ignore, defined)
-+        sims_out = yel("Similar symbols")
-+        if sims:
-+            print("%s: %s" % (sims_out, ', '.join(sims)))
-+        else:
-+            print("%s: %s" % (sims_out, "no similar symbols found"))
-+
-+        if args.find:
-+            print("%s:" % yel("Commits changing symbol"))
-+            commits = find_commits(symbol, args.diff)
-+            if commits:
-+                for commit in commits:
-+                    commit = commit.split(" ", 1)
-+                    print("\t- %s (\"%s\")" % (yel(commit[0]), commit[1]))
-+            else:
-+                print("\t- no commit found")
-+        print()  # new line
-+
-+
-+def reset(commit):
-+    """Reset current git tree to %commit."""
-+    execute(["git", "reset", "--hard", commit])
-+
-+
-+def yel(string):
-+    """
-+    Color %string yellow.
-+    """
-+    return "\033[33m%s\033[0m" % string if COLOR else string
-+
-+
-+def red(string):
-+    """
-+    Color %string red.
-+    """
-+    return "\033[31m%s\033[0m" % string if COLOR else string
-+
-+
-+def execute(cmd):
-+    """Execute %cmd and return stdout.  Exit in case of error."""
-+    try:
-+        stdout = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=False)
-+        stdout = stdout.decode(errors='replace')
-+    except subprocess.CalledProcessError as fail:
-+        exit(fail)
-+    return stdout
-+
-+
-+def find_commits(symbol, diff):
-+    """Find commits changing %symbol in the given range of %diff."""
-+    commits = execute(["git", "log", "--pretty=oneline",
-+                       "--abbrev-commit", "-G",
-+                       symbol, diff])
-+    return [x for x in commits.split("\n") if x]
-+
-+
-+def tree_is_dirty():
-+    """Return true if the current working tree is dirty (i.e., if any file has
-+    been added, deleted, modified, renamed or copied but not committed)."""
-+    stdout = execute(["git", "status", "--porcelain"])
-+    for line in stdout:
-+        if re.findall(r"[URMADC]{1}", line[:2]):
-+            return True
-+    return False
-+
-+
-+def get_head():
-+    """Return commit hash of current HEAD."""
-+    stdout = execute(["git", "rev-parse", "HEAD"])
-+    return stdout.strip('\n')
-+
-+
-+def partition(lst, size):
-+    """Partition list @lst into eveni-sized lists of size @size."""
-+    return [lst[i::size] for i in range(size)]
-+
-+
-+def init_worker():
-+    """Set signal handler to ignore SIGINT."""
-+    signal.signal(signal.SIGINT, signal.SIG_IGN)
-+
-+
-+def find_sims(symbol, ignore, defined=[]):
-+    """Return a list of max. ten Kconfig symbols that are string-similar to
-+    @symbol."""
-+    if defined:
-+        return difflib.get_close_matches(symbol, set(defined), 10)
-+
-+    pool = Pool(cpu_count(), init_worker)
-+    kfiles = []
-+    for gitfile in get_files():
-+        if REGEX_FILE_KCONFIG.match(gitfile):
-+            kfiles.append(gitfile)
-+
-+    arglist = []
-+    for part in partition(kfiles, cpu_count()):
-+        arglist.append((part, ignore))
-+
-+    for res in pool.map(parse_kconfig_files, arglist):
-+        defined.extend(res[0])
-+
-+    return difflib.get_close_matches(symbol, set(defined), 10)
-+
-+
-+def get_files():
-+    """Return a list of all files in the current git directory."""
-+    # use 'git ls-files' to get the worklist
-+    stdout = execute(["git", "ls-files"])
-+    if len(stdout) > 0 and stdout[-1] == "\n":
-+        stdout = stdout[:-1]
-+
-+    files = []
-+    for gitfile in stdout.rsplit("\n"):
-+        if ".git" in gitfile or "ChangeLog" in gitfile or      \
-+                ".log" in gitfile or os.path.isdir(gitfile) or \
-+                gitfile.startswith("tools/"):
-+            continue
-+        files.append(gitfile)
-+    return files
-+
-+
-+def check_symbols(ignore):
-+    """Find undefined Kconfig symbols and return a dict with the symbol as key
-+    and a list of referencing files as value.  Files matching %ignore are not
-+    checked for undefined symbols."""
-+    pool = Pool(cpu_count(), init_worker)
-+    try:
-+        return check_symbols_helper(pool, ignore)
-+    except KeyboardInterrupt:
-+        pool.terminate()
-+        pool.join()
-+        sys.exit(1)
-+
-+
-+def check_symbols_helper(pool, ignore):
-+    """Helper method for check_symbols().  Used to catch keyboard interrupts in
-+    check_symbols() in order to properly terminate running worker processes."""
-+    source_files = []
-+    kconfig_files = []
-+    defined_symbols = []
-+    referenced_symbols = dict()  # {file: [symbols]}
-+
-+    for gitfile in get_files():
-+        if REGEX_FILE_KCONFIG.match(gitfile):
-+            kconfig_files.append(gitfile)
-+        else:
-+            if ignore and re.match(ignore, gitfile):
-+                continue
-+            # add source files that do not match the ignore pattern
-+            source_files.append(gitfile)
-+
-+    # parse source files
-+    arglist = partition(source_files, cpu_count())
-+    for res in pool.map(parse_source_files, arglist):
-+        referenced_symbols.update(res)
-+
-+    # parse kconfig files
-+    arglist = []
-+    for part in partition(kconfig_files, cpu_count()):
-+        arglist.append((part, ignore))
-+    for res in pool.map(parse_kconfig_files, arglist):
-+        defined_symbols.extend(res[0])
-+        referenced_symbols.update(res[1])
-+    defined_symbols = set(defined_symbols)
-+
-+    # inverse mapping of referenced_symbols to dict(symbol: [files])
-+    inv_map = dict()
-+    for _file, symbols in referenced_symbols.items():
-+        for symbol in symbols:
-+            inv_map[symbol] = inv_map.get(symbol, set())
-+            inv_map[symbol].add(_file)
-+    referenced_symbols = inv_map
-+
-+    undefined = {}  # {symbol: [files]}
-+    for symbol in sorted(referenced_symbols):
-+        # filter some false positives
-+        if symbol == "FOO" or symbol == "BAR" or \
-+                symbol == "FOO_BAR" or symbol == "XXX":
-+            continue
-+        if symbol not in defined_symbols:
-+            if symbol.endswith("_MODULE"):
-+                # avoid false positives for kernel modules
-+                if symbol[:-len("_MODULE")] in defined_symbols:
-+                    continue
-+            undefined[symbol] = referenced_symbols.get(symbol)
-+    return undefined, defined_symbols
-+
-+
-+def parse_source_files(source_files):
-+    """Parse each source file in @source_files and return dictionary with source
-+    files as keys and lists of references Kconfig symbols as values."""
-+    referenced_symbols = dict()
-+    for sfile in source_files:
-+        referenced_symbols[sfile] = parse_source_file(sfile)
-+    return referenced_symbols
-+
-+
-+def parse_source_file(sfile):
-+    """Parse @sfile and return a list of referenced Kconfig symbols."""
-+    lines = []
-+    references = []
-+
-+    if not os.path.exists(sfile):
-+        return references
-+
-+    with open(sfile, "r", encoding='utf-8', errors='replace') as stream:
-+        lines = stream.readlines()
-+
-+    for line in lines:
-+        if "CONFIG_" not in line:
-+            continue
-+        symbols = REGEX_SOURCE_SYMBOL.findall(line)
-+        for symbol in symbols:
-+            if not REGEX_FILTER_SYMBOLS.search(symbol):
-+                continue
-+            references.append(symbol)
-+
-+    return references
-+
-+
-+def get_symbols_in_line(line):
-+    """Return mentioned Kconfig symbols in @line."""
-+    return REGEX_SYMBOL.findall(line)
-+
-+
-+def parse_kconfig_files(args):
-+    """Parse kconfig files and return tuple of defined and references Kconfig
-+    symbols.  Note, @args is a tuple of a list of files and the @ignore
-+    pattern."""
-+    kconfig_files = args[0]
-+    ignore = args[1]
-+    defined_symbols = []
-+    referenced_symbols = dict()
-+
-+    for kfile in kconfig_files:
-+        defined, references = parse_kconfig_file(kfile)
-+        defined_symbols.extend(defined)
-+        if ignore and re.match(ignore, kfile):
-+            # do not collect references for files that match the ignore pattern
-+            continue
-+        referenced_symbols[kfile] = references
-+    return (defined_symbols, referenced_symbols)
-+
-+
-+def parse_kconfig_file(kfile):
-+    """Parse @kfile and update symbol definitions and references."""
-+    lines = []
-+    defined = []
-+    references = []
-+
-+    if not os.path.exists(kfile):
-+        return defined, references
-+
-+    with open(kfile, "r", encoding='utf-8', errors='replace') as stream:
-+        lines = stream.readlines()
-+
-+    for i in range(len(lines)):
-+        line = lines[i]
-+        line = line.strip('\n')
-+        line = line.split("#")[0]  # ignore comments
-+
-+        if REGEX_KCONFIG_DEF.match(line):
-+            symbol_def = REGEX_KCONFIG_DEF.findall(line)
-+            defined.append(symbol_def[0])
-+        elif REGEX_KCONFIG_STMT.match(line):
-+            line = REGEX_QUOTES.sub("", line)
-+            symbols = get_symbols_in_line(line)
-+            # multi-line statements
-+            while line.endswith("\\"):
-+                i += 1
-+                line = lines[i]
-+                line = line.strip('\n')
-+                symbols.extend(get_symbols_in_line(line))
-+            for symbol in set(symbols):
-+                if REGEX_NUMERIC.match(symbol):
-+                    # ignore numeric values
-+                    continue
-+                references.append(symbol)
-+
-+    return defined, references
-+
-+
-+def main():
-+    try:
-+        print_undefined_symbols()
-+    except BrokenPipeError:
-+        # Python flushes standard streams on exit; redirect remaining output
-+        # to devnull to avoid another BrokenPipeError at shutdown
-+        devnull = os.open(os.devnull, os.O_WRONLY)
-+        os.dup2(devnull, sys.stdout.fileno())
-+        sys.exit(1)  # Python exits with error code 1 on EPIPE
-+
-+
-+if __name__ == "__main__":
-+    main()
+diff --git a/drivers/ddr/altera/uibssm_mailbox.c b/drivers/ddr/altera/uibssm_mailbox.c
+index deef61f1178..2316e602d3a 100644
+--- a/drivers/ddr/altera/uibssm_mailbox.c
++++ b/drivers/ddr/altera/uibssm_mailbox.c
+@@ -243,6 +243,8 @@ static u32 uib_mailbox_read_request(u32 target_read_addr, phys_addr_t csr_addr)
+ 		hang();
+ 	}
+ 
++	mdelay(1);
++
+ 	/* Write <target read address> to chms0034 MBRDADDR */
+ 	debug("%s: #2 Write 0x%x to UIB_R_MBRDADDR\n", __func__, target_read_addr);
+ 	writel(target_read_addr, csr_addr + UIB_R_MBRDADDR);
 -- 
-2.51.0
+2.43.7
 
