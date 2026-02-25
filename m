@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9976FFD3774
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8A99FD3774
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:38:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73BCA8412C;
-	Wed, 25 Feb 2026 17:21:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A6DE841F2;
+	Wed, 25 Feb 2026 17:33:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Fp2E0My0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PNMQdwzj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CA0084132; Wed, 25 Feb 2026 17:21:04 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id BA261841F7; Wed, 25 Feb 2026 17:33:01 +0100 (CET)
+Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com
+ [IPv6:2607:f8b0:4864:20::443])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26C3D84120
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-48375f1defeso48149815e9.0
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:05 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B04D841E6
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:32:39 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x443.google.com with SMTP id
+ d2e1a72fcca58-824b05d2786so5362794b3a.2
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:32:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1772036339; x=1772641139;
- darn=lists.denx.de; 
+ d=chromium.org; s=google; t=1772037157; x=1772641957; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r6tAXVQt7ZycmjS5oFVFmcoK4X7swFXBbYv+fE4pNxo=;
- b=Fp2E0My0Er1OYYEAjcykDYpqftiG2Hly1HmltBwvoqLT1DNfeYgCOoFc+wYP7YW+F9
- HkYalxxbyuRHu9xKMWZGG0G/e32CR3bUtoHacOQfhaFgR1p/ASGkF98OcjTnwpNLPV2m
- 2OIAfXIwonnr8vwIi4d9H9YeNq512YyqQxHs8=
+ bh=Hk90ND8ujHmqMREU/HXgN4STWEIdtbwjrxUu3I7hqUw=;
+ b=PNMQdwzjfdhRcvgDNzzs+lkXAzOnj671hR5SiG2JEtFdsjtGALmxXGG+9U5Y8kLSLA
+ yY5zvs2zlAp8fbPKZQ9wbZEoHEXrhKpr7ZtNnWPBHW3kbmpibZXA1SHat00Wq4p9mdM1
+ EngMgY6FXLTtgkeU20OI3VAYvNwVqtO8UTTCw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772036339; x=1772641139;
+ d=1e100.net; s=20230601; t=1772037157; x=1772641957;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=r6tAXVQt7ZycmjS5oFVFmcoK4X7swFXBbYv+fE4pNxo=;
- b=P94BIUNM0JpfqDgF3zKd39ZYW2DTSF3EDAKHAy8RSmF4Z4cGLXe3VvOhDJ0bnQt2+u
- Jq9bExaMuQYI4ywITVgXwwhTN7cAolaBx32WNwEl3Hh/VUJdUVRSsOUPI8Jg3tXRGysM
- D/IaFrjgHSbDi6XhH9DOOQo8BoDoWqwsrGsh5B3lqC/VhoBJNmitDMpDI3+lnDTbKaO3
- xK+/yegit17G4vyvhT9Uws6RBLZlsaptBqjqyKhYgbY/avwkxqTX5hrACixuOFuB85Y4
- VufmShdQHCgO4giOjKRkF8Fib+YPXG2+yXaAV3d3WVW8Cw/iDXARyse543WChkL+B0V7
- fq1Q==
-X-Gm-Message-State: AOJu0YxShmvyX0B2uqneptwJCqpV1iiq+57Eq0uSSL+4Y5hmLc61lZov
- 6GUIiG8LM+D9KmQVNNSUOT/xfdN+t5l78bQMhUeTpXD6DAYxzjI0zXgtNksisvefEkk7Su2BdYn
- KMIwW
-X-Gm-Gg: ATEYQzxunznJ6xiOj2CZIUTo6BMW5KNladoU943U+21jd0/e5XvlPIrg7EmlMPusPNr
- MevyVUFKuBbVBjwq0EgOJIiIp6SMPSXzc9X+2dDG1oOQULX4ykr+cpw661LhVEnpBEgbuTyD9/G
- 2WZIVl0GZw9DOGJ9QLGZwWG7hvngXnDRoUKU9Md23WdjHdvfjvxO7vgFCJ+hL9lfS4yGInBIkMY
- bYPEoD4HQAePwg3cG5jfPJYPunF0GRm8QapsDQaGOP6Cj1x2fwN7OG9fu4GOfX6GqDkju6yqHb5
- EGivsiYHukb2+SkKrn+DzeZd6gSSWwo/0CiEphKeyrmpS8qeDVPoThpGGJNF0+2u6iX0yyxDlTq
- 9JV9iTTtoVADSHXORVAE8dby4hNQTI7CL5xRHY+akSBXony2qjlihuELfOtVSKjajflNU/xyxdo
- vobDwXHEHRJRwLBRp4zV+2uhVXSFGLyn+QkW7zKiRxCPRnagWFwtMlGc95XWdvk/b+XEBWMWeie
- Bo5vyym/cRnc4cqd6TyNzvNICSguJ7JuYtrrtFZ0ehXmXYa
-X-Received: by 2002:a05:600c:19c9:b0:477:79c7:8994 with SMTP id
- 5b1f17b1804b1-483a963d2d9mr247390685e9.30.1772036339263; 
- Wed, 25 Feb 2026 08:18:59 -0800 (PST)
-Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.18.57
+ bh=Hk90ND8ujHmqMREU/HXgN4STWEIdtbwjrxUu3I7hqUw=;
+ b=PN9T981nj7DlbWHplo9JGcyyiG0O8ZPC1JTke1v/W6P9QOjj7ezMrwCPlW2YoSgJAV
+ aGeaLXZZfAW8x4GaMCbUd7cHz/wIr467wJnjCxENxgnd+yLn+5PZwawI8ow1AR8H6Nnx
+ 5GEiLOzhQZdfsR6K4rHnvJcNijTJC8tD3Uk9+VwPgh6p+SIOLTFIDxRotAX6zv1+YKF5
+ xI/SrdA4TC6ZbSyzEx2gZ9wRLyw6CMG2l+6jwHWNj4jGk60iERLORL1CwGyeDioielMx
+ ReWMlEQ8n2CsgwNvy/OwiQNRnJXhByAGN9w2wU4r2Sc8d/9ya9BTi92cmU5RINYm3kyj
+ UYQw==
+X-Gm-Message-State: AOJu0Yw+bUk89cGXIB6tc/6GWqkQYnCXz9EnKL0YDLdlgoMtVZeFZK4T
+ +AbjztioNfsUG6N/YXuP4BhMtIc79eTKK1zrqyA6cOn1MtdPVHny3oy2RBuJLlcns5VNtHXY5k+
+ cvjN/jg==
+X-Gm-Gg: ATEYQzzp6Aexn7NwdfbI6Mqg88jun26OHMYiecJ/HKYJQ2RSssjtks56PWX4lBzQVg9
+ yZL2kK4U/Z1RHNk+U9K9ZBd4w8wfwrzwIVyVRD6eFQ7Ab+HEGji8uH4ORHqQ1ywOF/Z0L6KP/q8
+ 7Ey4o23FgoH3UienKxSghyFOB4sGi2mFDdKAKrFgP3FcWYpc52LFEPNkwXqq6xxL+86GrSeWqIW
+ kNsgAyBJsIOX415dz27rDEvWQKAgHa1z1dMAZfEnyigc2/i2CJ/Jprn5WnxwRZxeEkpGmuban52
+ sUZRGI8rU/FSmq22Z8czZXBAVMrzMZWT0zsNenBkRgvJNA/PDbfXoOSqqNPxkDoFZVg1Pf6rnii
+ S6OEWR4iTeRCyce1IyhTjn17P9tdvHvhSXcsFMWVn39sd7T2c2SUAZvZydI8HpiGmlWyyM/uoUa
+ 5EmTGvdHm6Xno9IGSpFA==
+X-Received: by 2002:a05:6830:81e5:b0:7c7:6043:dd8f with SMTP id
+ 46e09a7af769-7d52be7b8d0mr10870202a34.15.1772036669987; 
+ Wed, 25 Feb 2026 08:24:29 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d52cf7874csm13534383a34.1.2026.02.25.08.24.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 08:18:58 -0800 (PST)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+ Wed, 25 Feb 2026 08:24:28 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <simon.glass@canonical.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/9] spi: sandbox_spi: support wordlen setup
-Date: Wed, 25 Feb 2026 17:16:53 +0100
-Message-ID: <20260225161851.2475274-3-dario.binacchi@amarulasolutions.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: [PATCH 4/6] test: Convert fs_helper to use a class
+Date: Wed, 25 Feb 2026 09:23:48 -0700
+Message-ID: <20260225162357.3449937-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
-References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260225162357.3449937-1-sjg@chromium.org>
+References: <20260225162357.3449937-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,50 +94,256 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The driver currently ignores the word length configuration. Implement
-the set_wordlen operation to store and track the current word length.
+From: Simon Glass <simon.glass@canonical.com>
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+It is somewhat inconvenient that callers to mk_fs() must create their
+own temporary directory. Convert it to a class so this can be handled
+automatically, using a context manager.
 
+Rather than specifying the file size in bytes, use MB since it is rare
+to need a smaller file.
+
+Update mk_fs() to use this new class.
+
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
-Changes in v3:
-- Add Reviewed-by tag of Simon Glass
-- Store wordlen in struct spi_slave data instead of driver private
-  data.
+ test/py/tests/fs_helper.py | 209 +++++++++++++++++++++++++++----------
+ 1 file changed, 154 insertions(+), 55 deletions(-)
 
- drivers/spi/sandbox_spi.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/drivers/spi/sandbox_spi.c b/drivers/spi/sandbox_spi.c
-index 4cc016138b11..7c237ac8d371 100644
---- a/drivers/spi/sandbox_spi.c
-+++ b/drivers/spi/sandbox_spi.c
-@@ -61,6 +61,15 @@ uint sandbox_spi_get_mode(struct udevice *dev)
- 	return priv->mode;
- }
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index 6649aa7bc47..531974d7dbe 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -7,14 +7,158 @@
  
-+static int sandbox_spi_set_wordlen(struct udevice *dev, unsigned int wordlen)
-+{
-+	struct spi_slave *slave = dev_get_parent_priv(dev);
-+
-+	slave->wordlen = wordlen;
-+
-+	return 0;
-+}
-+
- static int sandbox_spi_xfer(struct udevice *slave, unsigned int bitlen,
- 			    const void *dout, void *din, unsigned long flags)
- {
-@@ -158,6 +167,7 @@ static const struct dm_spi_ops sandbox_spi_ops = {
- 	.set_mode	= sandbox_spi_set_mode,
- 	.cs_info	= sandbox_cs_info,
- 	.get_mmap	= sandbox_spi_get_mmap,
-+	.set_wordlen	= sandbox_spi_set_wordlen,
- };
+ import re
+ import os
++import shutil
+ from subprocess import call, check_call, check_output, CalledProcessError
+ from subprocess import DEVNULL
++import tempfile
  
- static const struct udevice_id sandbox_spi_ids[] = {
+-# size_gran (int): Size granularity of file system image in bytes
+-SIZE_GRAN = 1 << 20
+ 
++class FsHelper:
++    """Creating a filesystem containing test files
+ 
+-def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
++    Usage:
++        with FsHelper(ubman.config, 'ext4', 10, 'mmc1') as fsh:
++            # create files in the self.srcdir directory
++            fsh.mk_fs()
++            # Now use the filesystem
++
++        # The filesystem and srcdir are erased after the 'with' statement.
++
++        To set the image filename:
++
++            with FsHelper(ubman.config, 'ext4', 10, 'mmc1') as fsh:
++                fsh.fs_img = 'myfile.img'
++                fsh.mk_fs()
++                ...
++
++        It is also possible to use an existing srcdir:
++
++            with FsHelper(ubman.config, 'fat32', 10, 'usb2') as fsh:
++                fsh.srcdir = src_dir
++                fsh.mk_fs()
++                ...
++
++    Properties:
++        fs_img (str): Filename for the filesystem image; this is set to a
++            default value but can be overwritten
++    """
++    def __init__(self, config, fs_type, size_mb, prefix):
++        """Set up a new object
++
++        Args:
++            config (u_boot_config): U-Boot configuration
++            fs_type (str): File system type: one of ext2, ext3, ext4, vfat,
++                fat12, fat16, fat32, exfat, fs_generic (which means vfat)
++            size_mb (int): Size of file system in MB
++            prefix (str): Prefix string of volume's file name
++        """
++        if ('fat' not in fs_type and 'ext' not in fs_type and
++             fs_type not in ['exfat', 'fs_generic']):
++            raise ValueError(f"Unsupported filesystem type '{fs_type}'")
++
++        self.config = config
++        self.fs_type = fs_type
++        self.size_mb = size_mb
++        self.prefix = prefix
++        self.quiet = True
++
++        # Use a default filename; the caller can adjust it
++        leaf = f'{prefix}.{fs_type}.img'
++        if config:
++            self.fs_img = os.path.join(config.persistent_data_dir, leaf)
++            if os.path.exists(self.fs_img):
++                os.remove(self.fs_img)
++        else:
++            self.fs_img = leaf
++
++        # Some distributions do not add /sbin to the default PATH, where mkfs
++        # lives
++        if '/sbin' not in os.environ["PATH"].split(os.pathsep):
++            os.environ["PATH"] += os.pathsep + '/sbin'
++
++        self.tmpdir = None
++        self.srcdir = None
++        self._do_cleanup = False
++
++    def _get_fs_args(self):
++        """Get the mkfs options and program to use
++
++        Returns:
++            tuple:
++                str: mkfs options, e.g. '-F 32' for fat32
++                str: mkfs program to use, e.g 'ext4' for ext4
++        """
++        if self.fs_type == 'fat12':
++            mkfs_opt = '-F 12'
++        elif self.fs_type == 'fat16':
++            mkfs_opt = '-F 16'
++        elif self.fs_type == 'fat32':
++            mkfs_opt = '-F 32'
++        elif self.fs_type.startswith('ext'):
++            mkfs_opt = f'-d {self.srcdir}'
++        else:
++            mkfs_opt = ''
++
++        if self.fs_type == 'exfat':
++            fs_lnxtype = 'exfat'
++        elif re.match('fat', self.fs_type) or self.fs_type == 'fs_generic':
++            fs_lnxtype = 'vfat'
++        else:
++            fs_lnxtype = self.fs_type
++        return mkfs_opt, fs_lnxtype
++
++    def mk_fs(self):
++        """Make a new filesystem and copy in the files"""
++        self.setup()
++        fs_img = self.fs_img
++        with open(fs_img, 'wb') as fsi:
++            fsi.truncate(self.size_mb << 20)
++        self._do_cleanup = True
++
++        mkfs_opt, fs_lnxtype = self._get_fs_args()
++        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
++                stdout=DEVNULL if self.quiet else None)
++
++        if self.fs_type.startswith('ext'):
++            # Disable metadata checksums which U-Boot does not support
++            check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
++        elif fs_lnxtype == 'exfat' and self.srcdir:
++            check_call(f'fattools cp {self.srcdir}/* {fs_img}', shell=True)
++        elif self.srcdir and os.listdir(self.srcdir):
++            flags = f"-smpQ{'' if self.quiet else 'v'}"
++            check_call(f'mcopy -i {fs_img} {flags} {self.srcdir}/* ::/',
++                    shell=True)
++
++    def setup(self):
++        """Set up the srcdir ready to receive files"""
++        if not self.srcdir:
++            if self.config:
++                self.srcdir = os.path.join(self.config.persistent_data_dir,
++                                           f'{self.prefix}.{self.fs_type}.tmp')
++                if os.path.exists(self.srcdir):
++                    shutil.rmtree(self.srcdir)
++                os.mkdir(self.srcdir)
++            else:
++                self.tmpdir = tempfile.TemporaryDirectory('fs_helper')
++                self.srcdir = self.tmpdir.name
++
++    def cleanup(self):
++        """Remove created image"""
++        if self.tmpdir:
++            self.tmpdir.cleanup()
++        if self._do_cleanup:
++            os.remove(self.fs_img)
++
++    def __enter__(self):
++        self.setup()
++        return self
++
++    def __exit__(self, extype, value, traceback):
++        self.cleanup()
++
++
++def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
++          fs_img=None, quiet=False):
+     """Create a file system volume
+ 
+     Args:
+@@ -29,59 +173,14 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False)
+     Raises:
+         CalledProcessError: if any error occurs when creating the filesystem
+     """
+-    if not fs_img:
+-        leaf = f'{prefix}.{fs_type}.img'
+-        fs_img = os.path.join(config.persistent_data_dir, leaf)
+-
+-    if fs_type == 'fat12':
+-        mkfs_opt = '-F 12'
+-    elif fs_type == 'fat16':
+-        mkfs_opt = '-F 16'
+-    elif fs_type == 'fat32':
+-        mkfs_opt = '-F 32'
+-    else:
+-        mkfs_opt = ''
+-
+-    if fs_type == 'exfat':
+-        fs_lnxtype = 'exfat'
+-    elif re.match('fat', fs_type) or fs_type == 'fs_generic':
+-        fs_lnxtype = 'vfat'
+-    else:
+-        fs_lnxtype = fs_type
+-
+-    if src_dir:
+-        if fs_lnxtype == 'ext4':
+-            mkfs_opt = mkfs_opt + ' -d ' + src_dir
+-        elif fs_lnxtype not in ('vfat', 'exfat'):
+-            raise ValueError(f'src_dir not implemented for fs {fs_lnxtype}')
+-
+-    count = (size + SIZE_GRAN - 1) // SIZE_GRAN
+-
+-    # Some distributions do not add /sbin to the default PATH, where mkfs lives
+-    if '/sbin' not in os.environ["PATH"].split(os.pathsep):
+-        os.environ["PATH"] += os.pathsep + '/sbin'
++    fsh = FsHelper(config, fs_type, size >> 20, prefix)
++    fsh.srcdir = src_dir
++    fsh.quiet = quiet
++    if fs_img:
++        fsh.fs_img = fs_img
++    fsh.mk_fs()
++    return fsh.fs_img
+ 
+-    try:
+-        check_call(f'rm -f {fs_img}', shell=True)
+-        check_call(f'truncate -s $(( {SIZE_GRAN} * {count} )) {fs_img}',
+-                   shell=True)
+-        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
+-                   stdout=DEVNULL if quiet else None)
+-        if fs_type == 'ext4':
+-            sb_content = check_output(f'tune2fs -l {fs_img}',
+-                                      shell=True).decode()
+-            if 'metadata_csum' in sb_content:
+-                check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
+-        elif fs_lnxtype == 'vfat' and src_dir:
+-            flags = f"-smpQ{'' if quiet else 'v'}"
+-            check_call(f'mcopy -i {fs_img} {flags} {src_dir}/* ::/',
+-                       shell=True)
+-        elif fs_lnxtype == 'exfat' and src_dir:
+-            check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
+-        return fs_img
+-    except CalledProcessError:
+-        call(f'rm -f {fs_img}', shell=True)
+-        raise
+ 
+ def setup_image(ubman, devnum, part_type, img_size=20, second_part=False,
+                 basename='mmc'):
 -- 
 2.43.0
 
