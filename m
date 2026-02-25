@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 387CDFD3773
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B5BAFD3773
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:50:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3DE4841C8;
-	Wed, 25 Feb 2026 17:28:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id BF07D84137;
+	Wed, 25 Feb 2026 17:23:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cUZZ6jNx";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZjvMfSe0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A601F841D2; Wed, 25 Feb 2026 17:28:42 +0100 (CET)
-Received: from mail-ot1-x343.google.com (unknown [IPv6:2607:f8b0:4864:20::343])
+ id 053508405F; Wed, 25 Feb 2026 17:22:39 +0100 (CET)
+Received: from mail-wm1-x335.google.com (unknown [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B116F83F5B
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:25:15 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de;
- spf=tempfail smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x343.google.com with SMTP id
- 46e09a7af769-7d4be94eeacso2165133a34.2
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:25:15 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC1028410B
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-48379a42f76so52869255e9.0
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772036673; x=1772641473; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1772036347; x=1772641147;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/ostxgX9G6zudXJVFP448SODHVezEsbG3mxXEMakc50=;
- b=cUZZ6jNx/FglFh2KjFFYW70lksRA9EcMa/141tRpVKWDczPYk5T09ClVaEHyZYpe3O
- 6jhIEpgvr2ePTcgPfekQT4/aeCaROesPXuKcTS+pgzx8RQ8CMi0pXTt1uumLRogt/OGA
- KiTLj4Aq8HOdkFnG/mJP2m/yb9W7CUtlAUsaU=
+ bh=FaPhWKiMQvyXcHp7drHPqMWTp28rxSNAljsxQHzSH14=;
+ b=ZjvMfSe0bc2hsZkU174Hk50+tyd0aIIWSlDg0vCsSjr+AhaX7vYQ5YjSoRbMOGmXSk
+ sey7nFe6XaRaw68Yp/ODR2qpoZ+5oBrJnDBHcb6DDdiw2MztPcFLwE6XPtq9JnG1PBsS
+ 92EI3qEC8l2IQ4PXJ+RUKtXtxBRUQHtZhF/DA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772036673; x=1772641473;
+ d=1e100.net; s=20230601; t=1772036347; x=1772641147;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/ostxgX9G6zudXJVFP448SODHVezEsbG3mxXEMakc50=;
- b=TsG+u1tIdiDQahBuQN99sbPjQPARfpyB+7BBwYMlP7JMrwtxGWj3MCH/+AT/920AfY
- MYsI81wTABzzXreoZAj1JvuAybI6o5FK/VoIWjyp/FL9IslEyIdN5kLC3GsAz3+EuYzW
- evFVHNWWWFEU+YGesUPPiomRM4PXH/FR82BQLKqzRQmTpX7IWC4dbdD8f3sbGYpEJMqt
- NHP+HCbxhJt99oFSFJntJCwU8D8JFQoUo244jSSrBG/LNC6CIvURMeANsmQUQUU2PObX
- OPyZ9sV1oSXEO5l2zGgh/XfyPmNatn6CUvb3AhO+aR8jgM7Y1YTGBLRLLo9Z28YG/NFt
- SJ9w==
-X-Gm-Message-State: AOJu0YzMZH27rJbnmCQ/CsG2vDjBcFU8vfO3pdinxXHAEcHwbgAQi7BR
- d7ESvZiOW4BPaYODyceRC8/+XThqpO59N4jCuPGdLxHjoJKlGZkGl+N9mH/Y81LGc5Bk+Ov1vy1
- y3xNDDw==
-X-Gm-Gg: ATEYQzxvXhsz0QNK9+7J7/1NTGOTJg1QSEyRH5fa4B3en0MXl+qBU+lXb7jaxdRNv9Z
- mhIBwxxOBZ/fP7ruihvAMjjkYC5XzFVuV2jp4LmBnlHuhoMeJsOijfMXrE48wQ6rauJEGiVCajn
- CGOfzFa6u/RCaUGCFEgHc0KFZHojCCYhloIxzhtxeVkvMmyRBZMU+AANj308+rdIe5nljSXhybA
- w1mbWVk38fYXs5wHCMtpQCozwWql3z5wOI2nMwEuuts8IERzyVavPFCE9QbsB0Z3ACAeEqVechQ
- IrUkDYopMjyZbrZTco8j9vHm0pDQDkB1li8AupbMbZQxecqQxoK0J6GJHcRgso3t+2Exfgq0hEE
- trd8Zziv38d1Ym/rQz4/2U2IrvRt7AjhXeccbPEeRygWvdedk31TwpE5MFHQRewZp+e7S9fia/j
- kOp6pfNbs1y/cEe7j9TA==
-X-Received: by 2002:a05:6830:730c:b0:7c7:2c63:f2d6 with SMTP id
- 46e09a7af769-7d52bee4aa5mr12479759a34.11.1772036671695; 
- Wed, 25 Feb 2026 08:24:31 -0800 (PST)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52cf7874csm13534383a34.1.2026.02.25.08.24.30
+ bh=FaPhWKiMQvyXcHp7drHPqMWTp28rxSNAljsxQHzSH14=;
+ b=eM+7mUhIwYnmSuQGadtkw9QLbOn+JpXZIMpahZlVSoSwIHygBRx+AeEp83nSdlRhx6
+ s0SPpJTA0tXvM9oymQxvHFaGnMAF7eSXXjrcGtlHd3Q/NKertoeVqg410Ee5QgxjmSJu
+ uzcD9IXSbDfNyiftR2ZH1ML3YU+KCoL3r5yhsSO0fUYUqBfnmoywnDGDtRncm9R2P/aF
+ I/m35wgIk5l4UesDDTX/6JC8RZG/GeO6amrXxwWU+WCB1H4mC01z3asBvXO8smdKFx/p
+ 1bNrMJPd880ANX+w+FZpp/OK4Zeg+MCIRc6yw87V7lDZDu1Ysq9USuHNTqjT2le/AaEh
+ ghiA==
+X-Gm-Message-State: AOJu0YyS+Q37Dfj75/Uk+ixJITmvHe0iY3ZgNp3w+6JxUGKmqNBdK7mO
+ VAwsub0i4h11d54N2B2XURUjbuReIchaM2s5wY6cM+Ehw0rz9UyuOQT+shcFY0KPrF88BqDqu5l
+ PdMON
+X-Gm-Gg: ATEYQzww1FXTf/nwR1vCz8citW6VH5p38h67Luq7AcIwx2FskfjuWYxbeLeDe2PvwX5
+ ALw0XRPBk80D/hL0x7fWth0pnh1L3a+l5xSl4cOCl8QdxLJ78Sl1AEL8/uXKZXOx3SmPKk8rgGa
+ VNeVi5hqklf7mjThHurpr+slDjgQHMJE97izoM1BpTyP0MHlgYcukefafO0UO4uTkfot5IVG3lY
+ DfQ6ryas31/6NvVLZvu9crKBSZwKn4RZ/QiJrh2AeRQJnMU61Eu+qEdb8+nkztL4x6xMdoogKp3
+ oLeO9HJN6gBDoA86YVrKP/1+wL1VyikrlzjbMlAaTQ2tlMDVJqEl13Lh8dB/vdH9BNInjmPeCJS
+ 6r3nL4FL46svI2ZpKwwTiowxFhGCxSdrRdXyToS337W/Ez2O+hMnS36b9nuUmeGLm+1FoSMQ6I2
+ LkkPLMDrHJcp9mp0FMpcZ89sMd0gGuktAOK2Cw7D1LPlol1n4jNEkU1NhFriBRL9MNe/lsU+LC8
+ 6qhif6hk9fPnv02w+ashURFa6zqtWSf5WqdzW9Q7Cvo5kkM
+X-Received: by 2002:a05:600c:3151:b0:45d:f81d:eae7 with SMTP id
+ 5b1f17b1804b1-483c21aab65mr13522945e9.28.1772036346832; 
+ Wed, 25 Feb 2026 08:19:06 -0800 (PST)
+Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.19.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 08:24:30 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
+ Wed, 25 Feb 2026 08:19:06 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH 5/6] test: Add a helper class to create disk images
-Date: Wed, 25 Feb 2026 09:23:49 -0700
-Message-ID: <20260225162357.3449937-6-sjg@chromium.org>
+Cc: linux-amarula@amarulasolutions.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v3 7/9] spi: stm32: add support for bits-per-word setting
+Date: Wed, 25 Feb 2026 17:16:58 +0100
+Message-ID: <20260225161851.2475274-8-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260225162357.3449937-1-sjg@chromium.org>
-References: <20260225162357.3449937-1-sjg@chromium.org>
+In-Reply-To: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
+References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,129 +101,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
+Implement the set_wordlen operation to allow dynamic bus width
+configuration. This is required for peripherals with non-standard
+requirements, such as display panels that need 9-bit word transfers
+during the initialization and setup phase.
 
-Provide a way to create disk images which consist of multiple filesystem
-images.
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-Provide an option to use the current directory for images, instead of
-persistent-data directory. This makes it easy for C tests to locate the
-image.
-
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
- test/py/tests/fs_helper.py | 97 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
+Changes in v3:
+- Move the stm32_spi_is_enabled() implementation in the previous patch
 
-diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 531974d7dbe..f27a3945aa9 100644
---- a/test/py/tests/fs_helper.py
-+++ b/test/py/tests/fs_helper.py
-@@ -157,6 +157,103 @@ class FsHelper:
-         self.cleanup()
+ drivers/spi/stm32_spi.c | 57 +++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 52 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
+index 70eb8735e03d..9d095b280a70 100644
+--- a/drivers/spi/stm32_spi.c
++++ b/drivers/spi/stm32_spi.c
+@@ -384,6 +384,44 @@ static int stm32_spi_set_speed(struct udevice *bus, uint hz)
+ 	return 0;
+ }
  
++static int _stm32_spi_set_wordlen(struct udevice *bus, unsigned int wordlen)
++{
++	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
++	bool spi_enabled;
++
++	if ((wordlen - 1) < SPI_CFG1_DSIZE_MIN ||
++	    (wordlen - 1) > SPI_CFG1_DSIZE) {
++		dev_err(bus, "Cannot set wordlen to %u [%d - %d]\n",
++			wordlen, SPI_CFG1_DSIZE_MIN + 1,
++			SPI_CFG1_DSIZE + 1);
++		return -EINVAL;
++	}
++
++	spi_enabled = stm32_spi_is_enabled(plat->base);
++	if (spi_enabled)
++		stm32_spi_disable(plat->base);
++
++	dev_dbg(bus, "bits_per_word=%d\n", wordlen);
++
++	priv->cur_bpw = wordlen;
++	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
++			priv->cur_bpw - 1);
++
++	if (spi_enabled)
++		stm32_spi_enable(plat->base);
++
++	return 0;
++}
++
++static int stm32_spi_set_wordlen(struct udevice *slave, unsigned int wordlen)
++{
++	struct udevice *bus = dev_get_parent(slave);
++
++	return _stm32_spi_set_wordlen(bus, wordlen);
++}
++
+ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 			  const void *dout, void *din, unsigned long flags)
+ {
+@@ -397,11 +435,19 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 	u32 xferlen;
+ 	u32 mode;
+ 	int xfer_status = 0;
++	int nb_words;
  
-+class DiskHelper:
-+    """Helper class for creating disk images containing filesystems
+ 	xferlen = bitlen / 8;
+ 
+-	if (xferlen <= SPI_CR2_TSIZE)
+-		writel(xferlen, base + STM32_SPI_CR2);
++	if (priv->cur_bpw <= 8)
++		nb_words = xferlen;
++	else if (priv->cur_bpw <= 16)
++		nb_words = DIV_ROUND_UP(xferlen * 8, 16);
++	else
++		nb_words = DIV_ROUND_UP(xferlen * 8, 32);
 +
-+    Usage:
-+        with DiskHelper(ubman.config, 0, 'mmc') as img, \
-+                FsHelper(ubman.config, 'ext4', 1, 'mmc') as fsh:
-+            # Write files to fsh.srcdir
-+            ...
-+
-+            # Create the filesystem
-+            fsh.mk_fs()
-+
-+            # Add this filesystem to the disk
-+            img.add_fs(fsh, DiskHelper.VFAT)
-+
-+            # Add more filesystems as needed (add another 'with' clause)
-+            ...
-+
-+            # Get the final disk image
-+            data = img.create()
-+    """
-+
-+    # Partition-type codes
-+    VFAT  = 0xc
-+    EXT4  = 0x83
-+
-+    def __init__(self, config, devnum, prefix, cur_dir=False):
-+        """Set up a new disk image
-+
-+        Args:
-+            config (u_boot_config): U-Boot configuration
-+            devnum (int): Device number (for filename)
-+            prefix (str): Prefix string of volume's file name
-+            cur_dir (bool): True to put the file in the current directory,
-+                instead of the persistent-data directory
-+        """
-+        self.fs_list = []
-+        self.fname = os.path.join('' if cur_dir else config.persistent_data_dir,
-+                                  f'{prefix}{devnum}.img')
-+        self.remove_img = True
-+        self._do_cleanup = False
-+
-+    def add_fs(self, fs_img, part_type, bootable=False):
-+        """Add a new filesystem
-+
-+        Args:
-+            fs_img (FsHelper): Filesystem to add
-+            part_type (DiskHelper.VFAT or DiskHelper.EXT4): Partition type
-+            bootable (bool): True to set the 'bootable' flag
-+        """
-+        self.fs_list.append([fs_img, part_type, bootable])
-+
-+    def create(self):
-+        """Create the disk image
-+
-+        Create an image with a partition table and the filesystems
-+        """
-+        spec = ''
-+        pos = 1   # Reserve 1MB for the partition table itself
-+        for fsi, part_type, bootable in self.fs_list:
-+            if spec:
-+                spec += '\n'
-+            spec += f'type={part_type:x}, size={fsi.size_mb}M, start={pos}M'
-+            if bootable:
-+                spec += ', bootable'
-+            pos += fsi.size_mb
-+
-+        img_size = pos
-+        try:
-+            check_call(f'qemu-img create {self.fname} {img_size}M', shell=True)
-+            self._do_cleanup = True
-+            check_call(f'printf "{spec}" | sfdisk {self.fname}', shell=True)
-+        except CalledProcessError:
-+            os.remove(self.fname)
-+            raise
-+
-+        pos = 1   # Reserve 1MB for the partition table itself
-+        for fsi, part_type, bootable in self.fs_list:
-+            check_call(
-+                f'dd if={fsi.fs_img} of={self.fname} bs=1M seek={pos} conv=notrunc',
-+                shell=True)
-+            pos += fsi.size_mb
-+        return self.fname
-+
-+    def cleanup(self):
-+        """Remove created file"""
-+        if self._do_cleanup:
-+            os.remove(self.fname)
-+
-+    def __enter__(self):
-+        return self
-+
-+    def __exit__(self, extype, value, traceback):
-+        if self.remove_img:
-+            self.cleanup()
-+
-+
- def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
-           fs_img=None, quiet=False):
-     """Create a file system volume
++	if (nb_words <= SPI_CR2_TSIZE)
++		writel(nb_words, base + STM32_SPI_CR2);
+ 	else
+ 		return -EMSGSIZE;
+ 
+@@ -409,6 +455,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 	priv->rx_buf = din;
+ 	priv->tx_len = priv->tx_buf ? xferlen : 0;
+ 	priv->rx_len = priv->rx_buf ? xferlen : 0;
++	dev_dbg(bus, "bitlen: %d, xferlen: %d, nb_words: %d\n",
++		bitlen, xferlen, nb_words);
+ 
+ 	mode = SPI_FULL_DUPLEX;
+ 	if (!priv->tx_buf)
+@@ -570,9 +618,7 @@ static int stm32_spi_probe(struct udevice *dev)
+ 	priv->fifo_size = stm32_spi_get_fifo_size(dev);
+ 	priv->cur_mode = SPI_FULL_DUPLEX;
+ 	priv->cur_xferlen = 0;
+-	priv->cur_bpw = SPI_DEFAULT_WORDLEN;
+-	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
+-			priv->cur_bpw - 1);
++	_stm32_spi_set_wordlen(dev, SPI_DEFAULT_WORDLEN);
+ 
+ 	for (i = 0; i < ARRAY_SIZE(plat->cs_gpios); i++) {
+ 		if (!dm_gpio_is_valid(&plat->cs_gpios[i]))
+@@ -633,6 +679,7 @@ static const struct dm_spi_ops stm32_spi_ops = {
+ 	.release_bus	= stm32_spi_release_bus,
+ 	.set_mode	= stm32_spi_set_mode,
+ 	.set_speed	= stm32_spi_set_speed,
++	.set_wordlen    = stm32_spi_set_wordlen,
+ 	.xfer		= stm32_spi_xfer,
+ };
+ 
 -- 
 2.43.0
 
