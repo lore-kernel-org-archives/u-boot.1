@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FD03FD3773
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D72D7FD3774
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:50:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3944184119;
-	Wed, 25 Feb 2026 17:22:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 868C884180;
+	Wed, 25 Feb 2026 17:25:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QVG23Wgq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JKc7K5Jb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A54F384127; Wed, 25 Feb 2026 17:22:10 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id BDCA18419A; Wed, 25 Feb 2026 17:25:24 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (unknown [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F96184194
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4833115090dso67263275e9.3
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:03 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43A3584179
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:24:50 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d4cb7e10efso6441360a34.0
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:24:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1772036342; x=1772641142;
- darn=lists.denx.de; 
+ d=chromium.org; s=google; t=1772036668; x=1772641468; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c1HZgE5igLhgG1kbZ9E0XuxbdbhDf2N+jj2WjzZAc+g=;
- b=QVG23WgqLGMuY+NiM1W/Q6tWbOLxtpz/1TdT/BHFh4Fn/Ick1HN6AslYL78PdwFCZ+
- f69s+RwWvxZj5shDEr8JsypSe4/8/VnDqczZBDS8XNIJelOf/IEEGLJm4TLt0I/ZI39T
- xdMxmlJWPi4Tkq16rff5aVijrmrl1KUFYhcHs=
+ bh=JP873GWmBvsqEQrgR6VU9gl7X7BolhunxjNnlLfh6i8=;
+ b=JKc7K5JbSqWSDHpsTakgog7MRZgFOfoTB9PvA1/XDdgJYcdJZuICUZcICLpvmhhyQT
+ YNapJP7pBojjkYqjEbntnJVSM9cQx2VNthSzmotOE3AqbVPhlUHX6R0gItzkcCfir8J8
+ jCKQsoecPVP2MEtboG8VNOGnjkPYkvAPA5NIE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772036342; x=1772641142;
+ d=1e100.net; s=20230601; t=1772036668; x=1772641468;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=c1HZgE5igLhgG1kbZ9E0XuxbdbhDf2N+jj2WjzZAc+g=;
- b=hoIDDqrbCbE7f5csP265AaovxXkS7mmsYDuOTSEtDwyin2Ie3jKXkkm4s8JsI8FlvC
- Z82lcPUmoJ2VD5CriR4ZE6tWv09ybCzTBIQXo5xYaRLoFZbpiz65HhxRC5hr5QS7IQNo
- FYXh2dpMitseRT//uZHqc85SgOGWigZSAWLdvUk32Lg4FnIxgqJSuG+/eYpEnFukcqdB
- TbOMk7RfRohR64t+CYQifEHJmA4PxAi5U2d3HshQiFTjE2l6NpDIbEoTRj8V3md12/AP
- mYSjqKpKeyVY/NGkAh2AgbKGttQVzLuZK+Gka4oTWyLpEkwkacuFsvmBVLIFqi+8E8sb
- nPWQ==
-X-Gm-Message-State: AOJu0Yz4hYL7oFacTD5ovuplyudFQFWA59iCc+kxeJc1l1S9BqC2BfCB
- 6U8O2t+50Bah6T+jYly2yK06R3X8dHWenC3ksvoJsexcriC1LG73d3O57Dqlbds68Q5MWo9dEoh
- gW6/T
-X-Gm-Gg: ATEYQzzpCCTAQj9hEYUNKh5BNZem9e5/NiHbvf60UtVbqEanmYRzmYy13BAlu5Pfjve
- mX9P0WsR0mBS6/hxZ4bRkSQTfD3x/kxhWsUtqUKEABA3aKLq/PXC0xGcW0Mi1Cb0oIo9CUmiSvJ
- UCS6elzyAuFf1vSPMRN0pAIE3jgmCV/hjL6L239o6+zwHhbwUoCWo6jywya2X1tO0QN1cgOYK88
- hPYsvYcGFeWNn5g0Dzaa1OaEXVG5/ZU00q+F45F/+29jkHXbPoV+iGudjyCXQ7DX5uACLyYtt/T
- T6BrhHADDLnTYig99/0mnZ+nIKW6/FFI3OKQCxlNJ57yarg2sKSM8XgXhZT52L1sIbkLdxZBvCM
- xdGrtir/FvoN1VLOueCQ8bvHOEj2E393UEdQMJfn54pdgfE6x3SGyekdfiEFY5/Vph96c41XsjY
- 0a+wmbEBVLOF/b6mt2nDDLzJhX3UIUu+DfTXPozbMDdJdUV2bU1yp9QzNMfu8UEK8UZ4wifOPea
- Y+v/ehhgJcHmWFWrdF/F7ykjm7UBy22ToEwB6h9HVRN5I7e
-X-Received: by 2002:a05:600c:45cc:b0:477:7a53:f493 with SMTP id
- 5b1f17b1804b1-483a95f554amr271793225e9.23.1772036342463; 
- Wed, 25 Feb 2026 08:19:02 -0800 (PST)
-Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.19.01
+ bh=JP873GWmBvsqEQrgR6VU9gl7X7BolhunxjNnlLfh6i8=;
+ b=ThCK/ZrioqgGCuGdmcPDHA8HCYvsXmfAeNCVK8OB/r71fPqjZIBm2uyOFWJhwnB4ov
+ nJ+kqHrJ4gg1OXaRDl/eVtSsyjHtNopBMihjxgmHkJfW0JLjSCdqu63j7KhPPz6CwaqM
+ cExwdZDHFXb80D7JjC8N4AjA5p+mURGmLshhlAFM7tb4qqvMKzVLwoLKztdQPFYVsO2z
+ InW9dnUtm2uKtuuGO1sPLNniZtrjqJwSjAGSq8HYj2qLScnUTtxJNy0JMWCPuRboqwJw
+ ySuFUTFUpGPOJLu36J8rO5FCJrvviFkZ+ij0I3WxtkELl3+jkKKAeR+VVC36nVBlolWP
+ Y/Jg==
+X-Gm-Message-State: AOJu0YxhVXV5mi5SAY3U3lqobO73agCM4s4MOdjmvuJ3fbMrRDL/h7kA
+ NRNeIY4b7EDQqqH4WRV5/aoFuLl1/CqksdHWs99BEhJYxHmD6TTRIeGLOSxnUk0cuZteiOp+Bc+
+ rNTc=
+X-Gm-Gg: ATEYQzwJATFhBwQ7HMSeOAxPmZSwrTB+LI02erUgvxpDhsL00NPE9ZSZvVp7tke93A9
+ 1HQuIWdSKfpy+pUjoGYE1nulPe53fFMkKv0StysjQ8fH6eeG/+VDjmCvosr/Jt+PsSRjLJcSbZV
+ G9zfP5rR/Z3wUCcsVjxuem9zfxj52mdD9pkQMrcuCZScI5nuDdvJHw44XqjRjgRe57i8AmL3JCR
+ qGdMk/PxGbsZjHorRLCjWE9KvUFeRg6pmJLPb6Vc/23WzPQVrFoCKqMDZo72GnsTKCju2XXOT5M
+ cxK5+40Tz2KGLWB2YCihcoyieu6p9u6iN3pkCyg0Bs+KaU50n9RJEInxWYeEhWS8oVxxVoqnJTS
+ GynyczBeVSLqidtOvKAAxmDgob9hrdvHnDsEj1VrDZB3ZURonCv7Tpyx8TS1ovPUT1b2HNdAp1i
+ ppHWLj3t2Jrichp2j7qrgoqOjqxxfd
+X-Received: by 2002:a05:6830:6d09:b0:7d1:9217:94e with SMTP id
+ 46e09a7af769-7d582a8a148mr473441a34.26.1772036667786; 
+ Wed, 25 Feb 2026 08:24:27 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d52cf7874csm13534383a34.1.2026.02.25.08.24.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 08:19:01 -0800 (PST)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+ Wed, 25 Feb 2026 08:24:26 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <simon.glass@canonical.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 4/9] test: dm: spi: add testcase for spi_set_wordlen()
-Date: Wed, 25 Feb 2026 17:16:55 +0100
-Message-ID: <20260225161851.2475274-5-dario.binacchi@amarulasolutions.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: [PATCH 3/6] test: fs_helper: Drop the size_gran argument
+Date: Wed, 25 Feb 2026 09:23:47 -0700
+Message-ID: <20260225162357.3449937-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
-References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20260225162357.3449937-1-sjg@chromium.org>
+References: <20260225162357.3449937-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,48 +93,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a unit test to verify that the SPI word length configuration is
-correctly handled by the SPI uclass and successfully passed down to
-the sandbox driver.
+From: Simon Glass <simon.glass@canonical.com>
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Simon Glass <simon.glass@canonical.com>
+Nothing uses this argument, so make it a constant for now.
 
+Also fix a pylint warning when checking for vfat/exfat.
+
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
-Changes in v3:
-- Add Reviewed-by tag of Simon Glass
+ test/py/tests/fs_helper.py | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
- test/dm/spi.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/test/dm/spi.c b/test/dm/spi.c
-index 249a9238fedc..a89ba06274fc 100644
---- a/test/dm/spi.c
-+++ b/test/dm/spi.c
-@@ -170,6 +170,22 @@ static int dm_test_spi_claim_bus(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_spi_claim_bus, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index aedf6af0aeb..6649aa7bc47 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -10,8 +10,11 @@ import os
+ from subprocess import call, check_call, check_output, CalledProcessError
+ from subprocess import DEVNULL
  
-+static int dm_test_spi_set_wordlen(struct unit_test_state *uts)
-+{
-+	struct spi_slave *slave;
-+	struct udevice *bus;
-+	const int busnum = 0, cs = 0;
+-def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+-          fs_img=None, quiet=False):
++# size_gran (int): Size granularity of file system image in bytes
++SIZE_GRAN = 1 << 20
 +
-+	ut_assertok(spi_get_bus_and_cs(busnum, cs, &bus, &slave));
-+	ut_assertok(spi_set_wordlen(slave, 8));
-+	ut_asserteq(8, sandbox_spi_get_wordlen(slave->dev));
-+	ut_assertok(spi_set_wordlen(slave, 9));
-+	ut_asserteq(9, sandbox_spi_get_wordlen(slave->dev));
 +
-+	return 0;
-+}
-+DM_TEST(dm_test_spi_set_wordlen, UTF_SCAN_PDATA | UTF_SCAN_FDT);
-+
- /* Test that sandbox SPI works correctly */
- static int dm_test_spi_xfer(struct unit_test_state *uts)
- {
++def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
+     """Create a file system volume
+ 
+     Args:
+@@ -20,7 +23,6 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+         size (int): Size of file system in bytes
+         prefix (str): Prefix string of volume's file name
+         src_dir (str): Root directory to use, or None for none
+-        size_gran (int): Size granularity of file system image in bytes
+         fs_img (str or None): Filename for image, or None to invent one
+         quiet (bool): Suppress non-error output
+ 
+@@ -50,10 +52,10 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+     if src_dir:
+         if fs_lnxtype == 'ext4':
+             mkfs_opt = mkfs_opt + ' -d ' + src_dir
+-        elif fs_lnxtype != 'vfat' and fs_lnxtype != 'exfat':
++        elif fs_lnxtype not in ('vfat', 'exfat'):
+             raise ValueError(f'src_dir not implemented for fs {fs_lnxtype}')
+ 
+-    count = (size + size_gran - 1) // size_gran
++    count = (size + SIZE_GRAN - 1) // SIZE_GRAN
+ 
+     # Some distributions do not add /sbin to the default PATH, where mkfs lives
+     if '/sbin' not in os.environ["PATH"].split(os.pathsep):
+@@ -61,7 +63,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+ 
+     try:
+         check_call(f'rm -f {fs_img}', shell=True)
+-        check_call(f'truncate -s $(( {size_gran} * {count} )) {fs_img}',
++        check_call(f'truncate -s $(( {SIZE_GRAN} * {count} )) {fs_img}',
+                    shell=True)
+         check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
+                    stdout=DEVNULL if quiet else None)
 -- 
 2.43.0
 
