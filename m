@@ -4,114 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20715FD3776
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 17:56:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62338FD377D
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 17:57:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9548C82A9E;
-	Wed, 25 Feb 2026 18:56:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E833882A9E;
+	Wed, 25 Feb 2026 18:57:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Ay3gi3F3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qy4gfwGJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6862A83AA9; Wed, 25 Feb 2026 18:56:07 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id CF78A83D8A; Wed, 25 Feb 2026 18:57:27 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D7F18003E
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 18:56:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 40E833F7D1
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:56:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1772042165;
- bh=tiEa+4yIMKfan08davoxfhoenEYMZUwxvIj51L/3GMk=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Ay3gi3F3u1frZRvKFYNUb8WVZNV1MHYbxpmDOo/EhEA0X1bjoSjph+p3d4PPyp3PH
- 3A8sO8hoj+nkWLHfxkfxFqhqTQZmIv0XPaClzwariO7PruYhrvk87azog4gnOFTbYQ
- c9y/wwGreuxdYVlz2NomZaeKrowgKovemoJgbZk/YTqDtpJO8gutpiM8c7rrqXtWfi
- X+wgoYqf9FXTjW0GNlI3Pq8s8a9xoWyOyQgQKodpff/Ry+UdNXW1IMSixUlIcxj6rC
- oTJG0Rmo7iTLUb+U+PolqEiowc9ZPigGVjviKz62/XOVL+9hiDBOHo1qQa+US0STGR
- Oic0H8HbTVR7t3nKwsDIX7ywa+u7KG5fQeTwddMbPglBXZR7QQVtCmRLGJ5FPqODMM
- q0BucLKNwgFK6pDkitf6zka8sDjSNuIeE7qQdSu8OVast6fPaR88OXNaemybb5aY3d
- FgNb9S846iR6c6iLI5gk9q4Ejjlav4xPUlOXsPmZxlp2XB/+H0bjqw3dCrS1yWoOX0
- +ui/CH+QLWUgCMQqgN6UymTtWN8ptnJouvA6RIgbtXbVQ1vNGQsd0Tuwx4r5B5lCmr
- FcVdK/vMjjkKuTWNBLB8h4AHMBhFrPSN3qtg0+Zw8/SJG2fE8FdR8d0zNlTpkWgGb5
- 7C/ERlUSMavUvQyLkKzUg9QI=
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-48069a43217so381815e9.1
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 09:56:05 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772042165; x=1772646965;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tiEa+4yIMKfan08davoxfhoenEYMZUwxvIj51L/3GMk=;
- b=FAOmt3TWTQ9f2ptj0Lae2qi+TBUCB6/HPDhK1wsJ+KztnxcoGx9fVPWp0aZEpzi//L
- 3EcrKqEW8jPZgX13bLxeVmzsgVdcyUiP+gGQVn4QPTxwguFS8L34s2PGSrD8iQlf3otE
- sW38lwVuFUYUTYgLTVhHHG6TV/L0q53JKiwKFZ+A6G2ZEuiLuzEkRdyIEJa4CP1mExoL
- 6aEzGeyWUmBqzO8izjGq6d+jOgxL95igvIIlXTwmE7SPXr1LHYxdfxoZ0CIANUpunU7b
- eIWEBNLv2PMHPehjWOprtphquc9K+2byGes78mzQsXCeoJ4De1iRp/qKOSR+Tzj/k3LO
- 2/6g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQygGgQBItw7wkXKc1oBRWyXJJau4h23jaQ7vLjWLz56dLG4GyA23w2b7iCxTmjPULwFOJvgw=@lists.denx.de
-X-Gm-Message-State: AOJu0YyM6ASgZxESFM5Me/vQMvuRF7UzE82xmYcTHxzVBzlzaSF7hcNT
- Tx5lIrgVinqmN1VpEj6nCTu++sBFzPS1+3sb8o3r2Dg925mgSx0V9qRsEUvsrq7UFzGNzI9LDwk
- cYeLY+InhWFFBQok7BaZ8oKFzWloDXQ7amNnLBUGKXn9WPu7Liybrzwq5bxFEMXHvrYKR4c0=
-X-Gm-Gg: ATEYQzyBb/bMmEYGqGBSEQd+JHldsHVIUC2iLvMZ2H2GqbGCAvYOlpZmCZ8Yklagm7z
- KFl/9EuEFgBm8MGSmNZefO7UzUvBIB92wDzf16y3pzBV27lcAUts2GPzCWyUh39DWJkkQ6arNbj
- RGHlfwHfDOxxKVirK30LXkYB/wqXEgwBvXXNUo04SJbBFLkkZU4MUaAEPCiRmHJ//ARB+BS2U+K
- gz2xfWzGP3S7mHnMTCbPeXsa0J0e1++bv+693gsW2Ee9xQ6euOU/0Q0AQ9KynsdSF5VnQqMr39Z
- hq6UarCqEu+cW4o7kYXdW2OtSDsmMLilojSXmT236Fuilc65u0hgzJEYkbVL3tlGss5IAukOwxV
- yi35VpOWlfD7HKGyp7OOy7wJ1HbixdoX7A8z6wDjD5vQcKOP3XwQlbw9tpPJyCj6hRPuqB7/6cZ
- iBFhFkNAIWObBAeJo1KzIcRc/buS1v+zE+CF298slZ1u/ZPxeuGe4=
-X-Received: by 2002:a05:600c:3155:b0:480:1c53:2085 with SMTP id
- 5b1f17b1804b1-483c2197fc3mr24356585e9.19.1772042164762; 
- Wed, 25 Feb 2026 09:56:04 -0800 (PST)
-X-Received: by 2002:a05:600c:3155:b0:480:1c53:2085 with SMTP id
- 5b1f17b1804b1-483c2197fc3mr24355995e9.19.1772042164203; 
- Wed, 25 Feb 2026 09:56:04 -0800 (PST)
-Received: from [192.168.103.130]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bd72bd66sm79612675e9.11.2026.02.25.09.56.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Feb 2026 09:56:03 -0800 (PST)
-Message-ID: <dc71a2ba-fe57-47dd-b010-409856c11f4a@canonical.com>
-Date: Wed, 25 Feb 2026 18:56:02 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 65C198003E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 18:57:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 4ACE360097;
+ Wed, 25 Feb 2026 17:57:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ABC82C116D0;
+ Wed, 25 Feb 2026 17:57:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772042244;
+ bh=Oy/dnG5o7YCc+kMJlXlea35TMJs2/qb8te2SBG0inQE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=qy4gfwGJ9C+wsIJAOKE4C6VwTZfGejYXPNp5ItOBAW/gurBoddUqE/xaDAeaIfmn9
+ XeaxPX7dFcqNX3zSKu/JlGksGu3MWmSxoC4i62tdbaR4bVDjpmTapmfhKJet+RA+nk
+ 1Cb0w6rF4pl1A+L3nUN/NTiV3OchP47LbBHhEGweFsGqwE/6JUbt4sYo7cNtlL885T
+ /SG4xQucjiSyn6OMs+rSbhR6OZFR5JWkZyeBg+N6WI07N8LVtsgHmeoXb1nCZUNb7T
+ w+R15/nvcuWaNOHuDNTWDZRwkLbM2qBHtEWchXQjO74sJCuUUp1mLhf85E8HIsXrHa
+ CtAaNavY6pa8Q==
+Date: Wed, 25 Feb 2026 17:57:20 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>,
+ Conor Dooley <conor.dooley@microchip.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/1] riscv: mpfs: SIFIVE_CLINT and SPL_SIFIVE_CLINT
+ don't exist
+Message-ID: <20260225-immovable-written-2928e53358ea@spud>
+References: <20260225175229.88858-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] riscv: don't imply non-existent CONFIG_IP_DYN.
-To: Conor Dooley <conor@kernel.org>
-Cc: Leo Yu-Chi Liang <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, 
- Conor Dooley <conor.dooley@microchip.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Anup Patel <anup@brainfault.org>,
- Atish Patra <atishp@atishpatra.org>, Green Wan <green.wan@sifive.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- E Shattow <e@freeshell.de>, Bin Meng <bmeng.cn@gmail.com>,
- Lukas Auer <lukas.auer@aisec.fraunhofer.de>, u-boot@lists.denx.de
-References: <20260225095414.45365-1-heinrich.schuchardt@canonical.com>
- <20260225-hurling-onto-c4dfac50d31e@spud>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20260225-hurling-onto-c4dfac50d31e@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JYdRKZgspZ8snmTx"
+Content-Disposition: inline
+In-Reply-To: <20260225175229.88858-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,36 +71,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/25/26 11:42, Conor Dooley wrote:
-> On Wed, Feb 25, 2026 at 10:54:14AM +0100, Heinrich Schuchardt wrote:
->> The symbol CONFIG_IP_DYN does not exist, but multiple contributors
->> copied an imply statement.
->>
->> Remove the imply IP_DYN statements.
->>
->> Fixes: 3fda0262c33f ("riscv: Add SiFive FU540 board support")
-> 
-> Should this not also be
-> Fixes: 64413e1b7ca ("riscv: Add Microchip MPFS Icicle Kit support")
-> Fixes: 70415e1e528 ("board: sifive: add HiFive Unmatched board support")
-> Fixes: 6f902b85b6e ("board: starfive: Add Kconfig for StarFive VisionFive v2 Board")
-> ?
-> Acked-by: Conor Dooley <conor.dooley@microchip.com>
-> 
-> Cheers,
-> Conor.
-> 
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   board/microchip/mpfs_generic/Kconfig | 1 -
->>   board/sifive/unleashed/Kconfig       | 1 -
->>   board/sifive/unmatched/Kconfig       | 1 -
->>   board/starfive/visionfive2/Kconfig   | 1 -
 
+--JYdRKZgspZ8snmTx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thank your for reviewing and for the additional Fixes tags. Patchwork 
-and b4 pick these up. So no need for v2 I guess.
+On Wed, Feb 25, 2026 at 06:52:29PM +0100, Heinrich Schuchardt wrote:
+> Don't imply non-existent symbols CONFIG_SIFIVE_CLINT and SPL_SIFIVE_CLINT.
+>=20
+> MPFS boards neither use SPL nor do they run main U-Boot in M-mode.
+> So we don't need CONFIG_(SPL_)ACLINT either.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+> 	Describe why ACLINT is not relevant here.
 
-Best regards
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
 
-Heinrich
+--JYdRKZgspZ8snmTx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaZ84AAAKCRB4tDGHoIJi
+0vpMAP0YZ/17PwlL6j+gVmP35EzGiHkgrZLq4EpmR/Dp16IELAEAx2PZivFDIIZU
+emkmRBQGn1ou3Pc4Dq/BG9g8PRiy+AA=
+=zMt/
+-----END PGP SIGNATURE-----
+
+--JYdRKZgspZ8snmTx--
