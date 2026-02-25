@@ -4,88 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F89FFD377B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 17:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B77FD3779
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 17:38:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B883283DEA;
-	Wed, 25 Feb 2026 18:30:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C7AC883AA9;
+	Wed, 25 Feb 2026 18:38:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NL1/zKug";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZeHi2wpO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 621EB83E61; Wed, 25 Feb 2026 18:30:48 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DEA283D77; Wed, 25 Feb 2026 18:38:23 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4533C83D8A
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 18:30:46 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7d4c3896e32so3054108a34.0
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 09:30:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772040645; x=1772645445; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0SXeypbAaIX9OEDE3RMtxfXJlTl9KOBBRGt0SOzeGp8=;
- b=NL1/zKugtAT2+Fh+MJmrgUX0AYRPPbKUBIATNlQCpUyviPUh05642IzIG6o2pdIuqE
- ZFE9wGNV44feJsGbJy5ADMSW/lvTZnNUMBmwg2QwdNRd0Gm7P46tpV+V/6CdZnOKdY4I
- G69CHqv6ALxoOpzO27IOO0Y/HdZqa/61X3LY4=
+ by phobos.denx.de (Postfix) with ESMTPS id 96B438003E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 18:38:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 41B883F743
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:38:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1772041101;
+ bh=/GK0utXERNA5aXCSHwfd7areEqLKsNXrVGnQYMfkz70=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ZeHi2wpOozpP/4hteRwKw5BH85++QhKZO/tgOYc/83olBpFiye73YFlzlF85ruZ3m
+ eMbEhOR+Tcsy+j1K8+8l7sDLm2PwDZWzBnU5BvpuIWRLdX4G8/f17Ria4Yvr0wcmGc
+ a4cEGQRHBlRw4bIKuBCAEfQ/kx9f6bX5D6MLP9L8CgC/ntUkw5+YyYbJ6GdYH2KLOM
+ AgHn4pL38vk7JGpkQsa35x3nW7iL2gswS5UT79cv8PNID+w/Z47A4ifCeSrafPWxHe
+ ekXZQ64eCaDUebrDPR3p5qjgB6t8crSmOvDqqOqQ8QLkBY7fO1wjhmUQ3GfVVajy+Q
+ jwVGI2enpBG7uFTZleHTWnyaBkISD0ZErMKNmabZPMh3V81D2bfPQGjXkyUXmHDedm
+ KjPxpVvduHVsa0AQjLU5hQnA3MRwqc1imApeosn7J1nxy05kgNSSeO9l6yEujPmKiy
+ wjg/OTPK8Kxk64q2U3k741ZOND/9MCh5kxeK531iKtDO9hjrn5+Fqrj6myUpWRNpYT
+ mAeFbg4xTVFq9gWJZWJ+eKOkD8M9VmdtnG9/tIogOKOJAiOQVcraD8dxgfN0d8/FWe
+ Rn0lF7ehXh0ZVTIGDOpOHvlc1nBFivlC9I5YoGsdEG6T/adpVIwTpd5xQX7oQZU+Fb
+ yBq5jc2AlD17qgKgxdk+vVhw=
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4836c819456so158545e9.3
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 09:38:21 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772040645; x=1772645445;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0SXeypbAaIX9OEDE3RMtxfXJlTl9KOBBRGt0SOzeGp8=;
- b=tytwekafHHAzS3hxL/E/89imn/hZCK2ndmKpX7Bs1pG37vw2ZTdRZF2nRLvT6Bz5ky
- bzHMX//9+FXodoKk+Qdd7gdLkaNRFoQBXvr6WOVo6XDrIIw/McW2dJq7LQuHPIJZ5uyS
- zeEq5lGocbr0w+tv8ZEGq92MFKoJ1AWXH93yeJd/8qypkVZ1vaxJgnwTPOW2Ff2Bf+Lj
- vzGXLTsKuLkWnNARQyrXbOGKXEl43qUarxaGs0jJv9NFjfuKguNzPuwOFhsxXOi2rx0l
- EQobFnWPOe5K+4NfrJ7N2ymLcKgSDtgXvQYfBIpKW+G986tS1K9I5UI82nOGQG9R9wv5
- 8giQ==
+ d=1e100.net; s=20230601; t=1772041101; x=1772645901;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/GK0utXERNA5aXCSHwfd7areEqLKsNXrVGnQYMfkz70=;
+ b=eC7ZXivCuaFgToHvmPKzsIDaFjBf0tbUms5TjY33APH1PH3e44JrdtMJEYP16dgAo2
+ z7ljnU3Qo5obdIg32RLK6qETrn9UE4PhZgwDXYiLLW3DxQf5TB2zyKlGmud618s306KV
+ FNtVuB6vi6CFynXh7ZayBZKAGrL2Pd/oSLALwcB3Od9Zx8ynooVHg8cys47KA+lZVPjM
+ sVe+eY5ittdQsnb0qlkmEvUYXdCApJ6LUzwKgiu8hXG+0NVM1gRHOr3ATG2kVd0MIwiW
+ QMzyM+IjCcMRPfoH74iBMDD4ZdBW+Xq1L57MEYEcBTfodqo/ap8bK8Duc3GqfnwImb4O
+ FK6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEqPcXg3Grum2jLvBHZ4zliF/VxSjXZDJWKX3JLHDbcUadoGU8H4r1OCDP6tfOp5pNWwMaXXA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvgLrJ8fDQgugnxhkUUnvQe8rvZqScpIuOkIQXZErIn7fhJniX
- xf7ccwuwqoICe2I40ohtR++7t+Pu7r6McfxaYpYF85EJpPja8AVef03vM0TRrMjiVMk=
-X-Gm-Gg: ATEYQzzp5VGGUUOgdBkSq6dWfSg0BArzHNf1M88VIgmxQ+C+qIVXD6TOfFNZqZe3a7H
- Cn06lWgPcPzY96xTc6szRZkDKH5JDRFzeqwa2SpJ4FxO6OMXXK4ZeKEpTH4YU9uB/BKWp4/7Jwc
- 1LdosJSXSCMy+UWvpSYEuxdmFgkhbcrQ0HH7K9MWpig25TbEgxRRdPdkLTOuv+bTpFJRTxHKg+y
- ei8xAgPKgcpad6Y7pGHxM1N/hoK1fsHUDwIQSyZW7NjQHexnn/u3rcFmDsFm+Gyu4UeblvFA1YR
- bt5dR+p5FhuNSnKhX0PXlYgcNXIBgaPeZni6Gxmkmbks3KVv1O+G9mTrJyxa3EZa906EiCqhzj3
- ILpRTdF0RZBN7AeFJc2k+ReEzc6wi5VSAIFJM1039MdaTjCE3ihxsCKYWelDCqZxZE0lYT6LgOf
- 9OXdlQHV+joTU+9mEMy3AUPJSo89UgRIRckkQtO+a2emGiVZhUTLlHlWs/798qwGB+52IFtLVJ6
- FSWvC0P7yxAR1O4eE7Il57l701ewTw0cbXuT+UGEVjIEkz3CF96cuccdQ3d6g==
-X-Received: by 2002:a05:6830:3592:b0:7c7:58e9:8e16 with SMTP id
- 46e09a7af769-7d52c219986mr10587378a34.14.1772040644909; 
- Wed, 25 Feb 2026 09:30:44 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d52d0725dbsm12544571a34.29.2026.02.25.09.30.43
+ AJvYcCWZ/Q0QT/ZOsmcXAJaXAKOcdh/ABn3wcvBU2q91ML9T1/1zbS3A1AOMWVIGdWGN2ePxvuanNjk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLbPeZFiLJCwflcYVAexZlfS6aG8kEpXX4WrQHgCMOo/7XCbqv
+ PZXNR3Ps96aBI8Sy9+gJ/xsnl3uNjPxFfGxK20AHCrgpkfmA2Hhh9u4r0BIIMgkGfvaAU02ogw7
+ zOBGUd1k+EHHgnOIMmvJgdXKCRchWAAhyLTBeaLy3EctxK+GtBFMaNGwrkYr8mePhWM+gEdhkhi
+ ipJUY=
+X-Gm-Gg: ATEYQzxftcXRoCOLnMBNKEOCqMXviITPrqd8/C8SZJBvFQcxOeBkJ4rDIwW3FFOdDkX
+ O/uVMYFAqa8iTvNezHiZOInqlRaqKJqfgrPlWTrb6KjkPkKDCuuPnGkr6ShYvFVEBe72xnjSJX0
+ k4ALLXYb8kWvMI/1Qvcx/jf5MCk+711a3q96eCsXtUHh5B93AEWGtX+ZT5iYTZRlSeW++KH/nBf
+ zhNMYYCvBb51CpnjSYjDDschYHywHTMFzrAqHsGl7/TYPARRCGp7a1ELZh0+c10EkJb+Z9xQTOh
+ vUjWg8PT6fFFXAXCRVtlYAfa810S1+hsb3bBChJKxgfqbDRZ/fRf1VaKfUxgyO+Q4XIZhz5gro2
+ qr1YdDeBSVzhRHKtWygk5I3ZVx+Dud2ypA01jKzbaswRYKvKbO6I5C1tyA8u5kDNrFk/wuU1ZS1
+ TBg8WMf4CqI6SvDfz1AIJf3lCW1+ijMhlzj1si+bU7RK/G
+X-Received: by 2002:a05:600c:6094:b0:47e:e8de:7420 with SMTP id
+ 5b1f17b1804b1-483a962f0c5mr267055775e9.22.1772041100882; 
+ Wed, 25 Feb 2026 09:38:20 -0800 (PST)
+X-Received: by 2002:a05:600c:6094:b0:47e:e8de:7420 with SMTP id
+ 5b1f17b1804b1-483a962f0c5mr267055205e9.22.1772041100415; 
+ Wed, 25 Feb 2026 09:38:20 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bd73ea7esm72374655e9.15.2026.02.25.09.38.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 09:30:44 -0800 (PST)
-Date: Wed, 25 Feb 2026 11:30:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Minkyu Kang <mk7.kang@samsung.com>,
- Kaustabh Chakraborty <kauschluss@disroot.org>,
- Henrik Grimler <henrik@grimler.se>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] arm: exynos: don't imply non-existent CONFIG_KEYBOARD
-Message-ID: <20260225173042.GT1593142@bill-the-cat>
-References: <20260225100023.46116-1-heinrich.schuchardt@canonical.com>
- <20260225143736.GD1593142@bill-the-cat>
- <2e092562-6c0a-46e0-8cd7-5d5226d304a2@canonical.com>
+ Wed, 25 Feb 2026 09:38:19 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] sandbox: symbol CONFIG_DM_SOUND does not exist
+Date: Wed, 25 Feb 2026 18:38:14 +0100
+Message-ID: <20260225173815.86528-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="odt3qYnUmAICwIbj"
-Content-Disposition: inline
-In-Reply-To: <2e092562-6c0a-46e0-8cd7-5d5226d304a2@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,61 +113,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The correct configuration symbol is CONFIG_SOUND.
 
---odt3qYnUmAICwIbj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Do not imply SOUND_SANDBOX.
+	In a future patch we could let it default to y.
+---
+ arch/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Wed, Feb 25, 2026 at 06:26:24PM +0100, Heinrich Schuchardt wrote:
-> On 2/25/26 15:37, Tom Rini wrote:
-> > On Wed, Feb 25, 2026 at 11:00:23AM +0100, Heinrich Schuchardt wrote:
-> >=20
-> > > Symbol CONFIG_KEYBOARD does not exist.
-> > > Don't imply it.
-> > >=20
-> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > ---
-> > >   arch/arm/mach-exynos/Kconfig | 1 -
-> > >   1 file changed, 1 deletion(-)
-> > >=20
-> > > diff --git a/arch/arm/mach-exynos/Kconfig b/arch/arm/mach-exynos/Kcon=
-fig
-> > > index b084b7284aa..06448e875ef 100644
-> > > --- a/arch/arm/mach-exynos/Kconfig
-> > > +++ b/arch/arm/mach-exynos/Kconfig
-> > > @@ -34,7 +34,6 @@ config ARCH_EXYNOS5
-> > >   	imply CMD_HASH
-> > >   	imply CRC32_VERIFY
-> > >   	imply HASH_VERIFY
-> > > -	imply KEYBOARD
-> > >   	imply USB_ETHER_ASIX
-> > >   	imply USB_ETHER_RTL8152
-> > >   	imply USB_ETHER_SMSC95XX
-> >=20
-> > Should this be DM_KEYBOARD ? I'm not sure about USB_KEYBOARD instead,
-> > but it looks like USB_KEYBOARD should be a depends on, not selects
-> > DM_KEYBOARD, too.
-> >=20
->=20
-> ARCH_EXYNOS5 depends on ARCH_EXYNOS.
-> ARCH_EXYNOS selects DM_KEYBOARD.
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 4af0da2485f..bd0b54ae0fb 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -250,7 +250,7 @@ config SANDBOX
+ 	# Re-enable this when fully implemented
+ 	# imply VIRTIO_BLK
+ 	imply VIRTIO_NET
+-	imply DM_SOUND
++	imply SOUND
+ 	imply PCI_SANDBOX_EP
+ 	imply PCH
+ 	imply PHYLIB
+-- 
+2.51.0
 
-Ah, I missed the 5 at the end in the patch context, sorry. Yes, we can
-just drop the "imply KEYBOARD" line.
-
---=20
-Tom
-
---odt3qYnUmAICwIbj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8xwQAKCRAr4qD1Cr/k
-CutEAQDLysq9fbBQGnI46j/LQLgeGG7pr2TVUDmSUazGqO1xuAD/YVt5Wozr8OfC
-Kwn5YUMyK1ngEwcB4JYrra97ttQuJQQ=
-=KMF2
------END PGP SIGNATURE-----
-
---odt3qYnUmAICwIbj--
