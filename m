@@ -4,119 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9950AEFD23D
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 10:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61369F357DA
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 10:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 178478366F;
-	Wed, 25 Feb 2026 11:11:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id AB59D8366F;
+	Wed, 25 Feb 2026 11:28:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="mbKEmZYQ";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Sqn1Mqnp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB29983D77; Wed, 25 Feb 2026 11:11:42 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id A81AA83AA9; Wed, 25 Feb 2026 11:28:39 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC40782A9E
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 11:11:40 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bL14OpFUY2ILoOQXSyBDuNWFqZ8LoHnNBtQQmwvFALt4iUIWr38meChw109O2XdnqXFWq8A6w6ZnJ/cJ0rXOFE+vxiGuKOOEfTUkgUhNAWm50ZyZLvG4DWBt37BTkloaM2CttlW8fzP43EfxkCK4ae52dX6/TpkAZino7yhG2aqGCaCM7z0wUDcb/WX0vs94IOJAvfpCuuLQZz4DQ/NeIyO18VdW4pzaOLX7R28zN5yfeY68fySIaXSS49rVuAoSnUufJfyeEPntebU3JZR7TGGbxKSl3qpb223AVjZR1qlAXkOzdX5WeLt2KF1+PTnsS1pBXsm03y4gqMtrkFXGFg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YN668rOSladDtOWBvH1lSeRxdIpEuBxR05RdTyMi70U=;
- b=xbhvagkPpbH6LSwuuRr6jBzZg5q0kYi7Z60ealuXgoLjev+WiNq2lQepI/ix56My7JgJxzecC9jALBvyHpqKIBDIaGSiXRamqlCQLou/B8SijEaLuLC2SQ7JFyj6z+kXSCN79yPX4+8v5lZqXVVVwADiAvZRlmPPnhykvl3XNg+9a7vcdQpETN86ySr3QQQu6EPDNei+2Y+Ime3mFLthyiNcbpqwEiPKz38fX1k6hgLDg4G3C3k4Q4rv/OElL9xtT9K/l89dT+RyJSk1hMrPhbjVr2ma5Q+ttck6Y6WLSU0S+YXtv4e/xYRmXNF3QsCd6WG9OYbxGQKPx+or+oGS2A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.60) smtp.rcpttodomain=amarulasolutions.com
- smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YN668rOSladDtOWBvH1lSeRxdIpEuBxR05RdTyMi70U=;
- b=mbKEmZYQF22nnOZPfqnJh/WGd38BfPFT0r7sWR/dPVnxPmcqD5ydEnPrdfQHFrs2RPW+Nr5BBzjqT2ow5Vfz33R6Ok2gtO1mkL4gfg7GDhgxSRu33e8BZQx3vFVl/95fbZ/EL4zppIYj+0HiHIkf24tjZutRt9KEQHOLPaJLTTCihjsIraJCgD+E3ADO/Yn6QKvuYucTFcT/qXMHfOXTLP/YiDbF2wq9TpyU2AHCRAJJBm2sRV7iXcSOKW6lhqCJzcNqFKQj6iJ+mw1A+cxEe8Qhbme2KAltuPIM1zh1kzWp0AdBT9mgv/sm9ETMtEDAcwE/7UE+LQ+k+u1sTzDnqg==
-Received: from DU2P251CA0029.EURP251.PROD.OUTLOOK.COM (2603:10a6:10:230::31)
- by VI1PR10MB3534.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:136::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
- 2026 10:11:36 +0000
-Received: from DU2PEPF00028D0E.eurprd03.prod.outlook.com
- (2603:10a6:10:230:cafe::7a) by DU2P251CA0029.outlook.office365.com
- (2603:10a6:10:230::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.23 via Frontend Transport; Wed,
- 25 Feb 2026 10:11:38 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.60)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.60 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.60; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.60) by
- DU2PEPF00028D0E.mail.protection.outlook.com (10.167.242.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9611.8 via Frontend Transport; Wed, 25 Feb 2026 10:11:36 +0000
-Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpO365.st.com
- (10.250.44.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 25 Feb
- 2026 11:13:43 +0100
-Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
- (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Wed, 25 Feb
- 2026 11:11:35 +0100
-Message-ID: <21e77ae6-73e0-4d06-95f7-31a9a043ece4@foss.st.com>
-Date: Wed, 25 Feb 2026 11:11:35 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id BDBB782A9E
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 11:28:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 652EE3F73D
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 10:28:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1772015317;
+ bh=ctdZIbLFUiQTv/bZUV0lHCnA1Ua2C2wOs2mx9zTJY18=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Sqn1Mqnpi1PF1edNb2bsQd6hTXpJieCiP556h/tWs6qWnDmCMbqxtJCld9ddBHjmp
+ VM4cVdZ2xdb7RQDeJwdMDlVqWUJUxQvp//YT7NmS/NNQpvE2A9t1XiA27o/I/By1at
+ Cs35gRYBsBJKIMfcB23TfCysYpygxFGiJS9xgG+leQiSBgtb7TmVNkJrJQ92gnfRZZ
+ 8GSh3A4SnlMZtcyexBEZL0YTWg6LOFzWOiiQio6WZ2JAVigGye1L57Ns/jaq+UMZ10
+ UujY6Mev3dMFmhpsxn2+ywFUC5kKm8RZkS9nHhS/ftNeSJx+lwp9va3exWQ0V6h4Rg
+ e9gp5OEQogT0o2GhcrbyMcOvDl0q2/v0wj9qoWsH0JGlJ4bIjr52whqIxTxiwW8kE8
+ s3G4eV1CDOQFIA8AUYlaAyPBmV9a7CwcwNPX/s5cVV6wqfMCB61hO8vWOTH8EmLOgH
+ YrC0OcteveAPLzJ+9AUVWCpBwIqP1BDVYwJZAfThxJZ2DdOFj7DnWVlJwG+pdFrdnO
+ kdlXDymKsRs3wteu9+WNf4lfINuDlIaCv/TZqV1DzjD8DxA9R7+9Q5Hrc3b1pVrlef
+ J24yJW+CKlycMW9kJoVX/C5PYNx367dGYt42AbX05RGQ2Rhy3UdqkWNYoa5UJ0TDP/
+ pBSDAWcNqO/dhCUvxEoJ3bKs=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-4376e25bb4dso4503309f8f.0
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 02:28:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772015317; x=1772620117;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ctdZIbLFUiQTv/bZUV0lHCnA1Ua2C2wOs2mx9zTJY18=;
+ b=pBZ8tZ8VOw/4q3Gtj/YRUGHstrILCUGLnSuwAOyoOfaQ//jA+csNoKRJ2RFIZd2VBk
+ fszeQtsqP2GySAbA1KmQwnHUAcMEpToiDbOongwL5O87D4XTusXHkTt7OJke/MyjE0CB
+ rzg0ZHLpVquG0yXRPJP0nKvJPjlPkvpcyIqoB5Y1yscnQbySBprhdbuuiSW2uT17BjXb
+ UrTjvsUA4HkjsyuMtapc7SmXhKoV0bXyejYUrcZgJmOiQNrLYIJsNpQp1yWZsMXOhIip
+ cZzhe0Wt2boUcXhVmDnDsUVaNUiQTzJI/CLDvsmJrlpmXKg2bLgKmtuXn4JOvy2tv0ke
+ SOCA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXiNJqb3dNF+jBnwzKWHcZs00/q6fCsj0TAwzanKoePzSCMeG4osrk2oNRTvWek2amVzd43HrU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAKnM6RLIdNpGIHCTcad+ZIGf98WaJ3xUQklhnqt5oy8YEb8h6
+ KTyjUepc4XxJflMGdGfWShGtvLdoIp81gNBaF/glrG4o7uM4uw5G2p14J9ow43Rdy3MeKfNShWX
+ SBVkOtB4iyoI87LLDlWYXK/mUDNRhrFWDUZBNPGcSHrN+9KeQg9/1dSqXqqcM93ylqQR2Lx8=
+X-Gm-Gg: ATEYQzyARzWHJsn+bjZzwGhechzLdMNs3O8VXt/mH5bsnU1jp6v0jm6qeKq/sLR8EyB
+ T1tW/feAIB9qw94jJQ9NZC5dwFhO+SdzykmQTD41TZ8DUZcSn2C945M/3P/gETYPwMJ721Xqi8C
+ KSkdeZsnuPYuODA71VCCQM3YRf6TjGcpEHU4oC+rzfFbF7h8yrK6rVnmD5RK47R2yj7auHrU2ch
+ tBqyTrn8Qke0BH1nkKSvWhcZPpz13RyA+K8ZOivks4XCeZVQZpU/RGQ+bMBgA6kIoxgJP0ZzYgA
+ 3D5owLJixao8ozkhA5MBdM151Fp88mdCKlSVgR3xow6k5YgMNpO+64uz7i8P28wLJIctQV8IHv0
+ i4EbyVFD0CTwVq2rln0JbC4cfxAdVN1EcLZkwRE6UKoSkSTTCzBuDuK/tlYHyNN7UiloYlH3uU+
+ 68duUkke1Z887lspYBypFEH64ZVGX6lTOg604wkQbqp1rz
+X-Received: by 2002:a5d:5888:0:b0:436:1946:c186 with SMTP id
+ ffacd0b85a97d-4396f16e368mr29618133f8f.10.1772015316930; 
+ Wed, 25 Feb 2026 02:28:36 -0800 (PST)
+X-Received: by 2002:a5d:5888:0:b0:436:1946:c186 with SMTP id
+ ffacd0b85a97d-4396f16e368mr29618105f8f.10.1772015316464; 
+ Wed, 25 Feb 2026 02:28:36 -0800 (PST)
+Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
+ [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43987f3ed03sm12582515f8f.16.2026.02.25.02.28.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Feb 2026 02:28:35 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Conor Dooley <conor.dooley@microchip.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] riscv: mpfs: SIFIVE_CLINT and SPL_SIFIVE_CLINT don't exist
+Date: Wed, 25 Feb 2026 11:28:31 +0100
+Message-ID: <20260225102831.48857-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/8] spi: stm32: extend support to STM32MP25
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <linux-amarula@amarulasolutions.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20260221094252.3103034-1-dario.binacchi@amarulasolutions.com>
- <20260221094252.3103034-8-dario.binacchi@amarulasolutions.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20260221094252.3103034-8-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.93]
-X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
- (10.75.128.132)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0E:EE_|VI1PR10MB3534:EE_
-X-MS-Office365-Filtering-Correlation-Id: 94c1d271-58f0-4643-0446-08de7456425f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014|7053199007; 
-X-Microsoft-Antispam-Message-Info: 9y3A8d1cVkJZy/3QNg2i+7ZBAbF+0Bo418q4GZDAEjKd4A+K6qv3mUamSEWBJdYebcLbLgMRWIFl6XqXT0g8/VNY9zAp0j04o47QuKi/HJMT6YrBtAvJI7DZNWQiuzMYE7cJB4bi9U+VNej0EnT6mrJwcY8P4scY83Ko0mvC0KIEPzY2TvtDWaHA2P6miOj4haU80kHkL0uE5PQ+wo3Qqt3stCz99WWSa/HkKfT2EY2GXvxHmthP3gtpu+N9FlSZz1HyFiKrqGq3b7+tk3uUphSrDCqyC1SXRD74XbF7AqCYVGtDSr8e2nxRDtR/1IBycYsTcLHMvAcesurJda/5qaT9ezWqp1Jg6FyGK9NZ4M/8f/svGRaUhaSvRpD/tjiOjrw0X75SjstQbjc/T/BE5NqrWSCCB1OO63Q+hPj0Gwr4zBQ0YapY5n9b2/A0eXNwYwkSqTPopFZ77iZi8nrLDD4j268UOI9RO/9ImU3eqphlIwd4+TDBITzO5fgCV1QKMYdRkeKBqtO/ZkJsJyFuZSCw/x3EY7dWajPnC/fmdbe/Y/IHQ4adhSAU9JFeF2NQ24IfDGD4OicuT9nyK9GDhi9Agh5yPzq3KTgjpCHcpqrs6iXilxgYMyWYypYR4CCBAvCykg0iOdn3NJdb44iDPvd0EXkemRXJPWQS2osmBdgbqOioQfPBFMcpCb5r9BJcc+OBMcd9bpSUn9cK+lkJOZPCZGd0LZRP2jDsfArkBsGWxQfv/ovIPXOwOi+EO3AEPRoPzZYh5/MoCxLqO+LXToBzgB2k4PRHnW4Ltl08xwfJyusHIJJbyuwtrQQWCoSZQfQ8T4LdYihh6FA2GjZ7DQ==
-X-Forefront-Antispam-Report: CIP:164.130.1.60; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: X7otHLj2npTo+yy2Fv2+1FZBeERisxtHaO4FgNqjXxFYi5oqxLYP+6ntpF6NZ2e9JXnthJ7wKhM1Tr+21C7hvHRojAfc7qdSR83j5RgRJJ+ZFHP70iduCkS2VSoItF1iP4o3srnqeczVWN1CEw4Fh4pBm1+1oclRV17HWvWXYHUsVSIB2h5VgAP5F/Y4M9QHKnhqWgVVHiS10stXIatx4rNoipatRON6PaVeftnhaZQc9MqtyL8jfz4zctPxX6RuxVjgj5F4ylRDXylbkG6JbMJKAwx9/bDj8fcJTpAFcJ+2toNZFGr2upWJdj6h/9E1fTrfO8uhi/jH22ESvgNiTFpqKxfqWAJM8T3rmZHcQftVbaO0tFzFst2K0Ii8xhT2CT+XZBCGxABMb82j23mHAY/0R9RVJ5x27b/+w0F1Rs3HP0IOrP5ZIz3sltysOdeF
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 10:11:36.1646 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 94c1d271-58f0-4643-0446-08de7456425f
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.60];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D0E.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3534
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,34 +113,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Don't imply non-existent symbols CONFIG_SIFIVE_CLINT and SPL_SIFIVE_CLINT.
 
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/riscv/cpu/mpfs/Kconfig | 2 --
+ 1 file changed, 2 deletions(-)
 
-On 2/21/26 10:42, Dario Binacchi wrote:
-> The SPI IP in this platform is fully compatible with the current driver
-> implementation, requiring only a new compatible string.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> ---
-> 
-> (no changes since v1)
-> 
->  drivers/spi/stm32_spi.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
-> index 39ea69c68174..903cc3702807 100644
-> --- a/drivers/spi/stm32_spi.c
-> +++ b/drivers/spi/stm32_spi.c
-> @@ -686,6 +686,7 @@ static const struct dm_spi_ops stm32_spi_ops = {
->  };
->  
->  static const struct udevice_id stm32_spi_ids[] = {
-> +	{ .compatible = "st,stm32mp25-spi", },
->  	{ .compatible = "st,stm32h7-spi", },
->  	{ }
->  };
+diff --git a/arch/riscv/cpu/mpfs/Kconfig b/arch/riscv/cpu/mpfs/Kconfig
+index bcf1ede818b..8054313d182 100644
+--- a/arch/riscv/cpu/mpfs/Kconfig
++++ b/arch/riscv/cpu/mpfs/Kconfig
+@@ -6,8 +6,6 @@ config MICROCHIP_MPFS
+ 	imply CPU
+ 	imply CPU_RISCV
+ 	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
+-	imply SIFIVE_CLINT if RISCV_MMODE
+-	imply SPL_SIFIVE_CLINT if SPL_RISCV_MMODE
+ 	imply CMD_CPU
+ 	imply SPL_CPU
+ 	imply SPL_OPENSBI
+-- 
+2.51.0
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
