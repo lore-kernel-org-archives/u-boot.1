@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3159AFD376A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D19FD3775
 	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:40:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D6B384062;
-	Wed, 25 Feb 2026 16:11:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B3E7D84127;
+	Wed, 25 Feb 2026 17:22:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qrGaZ1X1";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QNM4al3C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9822B84065; Wed, 25 Feb 2026 16:11:37 +0100 (CET)
-Received: from mail-ot1-x335.google.com (unknown [IPv6:2607:f8b0:4864:20::335])
+ id 4426A84120; Wed, 25 Feb 2026 17:21:09 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4603484064
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 16:11:12 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7d4ba9abbecso7152338a34.1
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 07:11:12 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E2A84171
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-480706554beso81229665e9.1
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772032251; x=1772637051; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zD1QGddwmfeh6Ju0wv1bxMncOVtCHWu0FgMos/5F+GA=;
- b=qrGaZ1X1bOg+ZNVygfUmkirDZHCjkNiQgdFqg0jXIepH6IM+dMS3YKZu8aatWOHRNb
- qrBNuKJKpIzDU6fWMW1P4DrCdYj33PzFKd7yiqEcqUlYmAIAEFI0qPZC8DKFIPLkb/MP
- Bi3tYSO3JOBCGRYoGPIiGQvduf0NrC6b6vjPc=
+ d=amarulasolutions.com; s=google; t=1772036336; x=1772641136;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=87tZXl2A99AxHhfTppqdnkU1d7h0JgGf/Rr9i4VdH+4=;
+ b=QNM4al3CHgxBAPIlkKfies61XShg2jc2Ux/irywxqJOWPRTEwFR7x0/xbNQv18FSl8
+ qitNK7CwlVLS+tyCqeSbSwjQot6k128EiVAUTt9z1i82yxGWoknBYLR1eCruL4pHH+bm
+ Yo/bXw677En/1LpWWG2TQ5YxNhAi3oTZJKVt8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772032251; x=1772637051;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zD1QGddwmfeh6Ju0wv1bxMncOVtCHWu0FgMos/5F+GA=;
- b=XfuOz1cbN+IsGzG16hn7fDac3b2B0A/XJ5b7BCldasiO2IdcKyXybfjWVEueufr+VL
- 612GXnc2+aHUm+ZjYfU59JdTWUAiAB6/LwvCo9EtPQ7UJCl21tlKh6m0IOD5am++sW4b
- nWB5+88FLYnDfsse0iWrUl0HjoT7NA15Vt0tnioLPFzWxDoIcLgZcaT0waBFxdmYblr6
- l6GcoQuPgYE6hS8NWlKA9hb/WJKHhbIe1h+zW2Gl4FU7oGGrhGqrZj8CB/2eU+jAwqOR
- mRid9POpc6d2SxFMV3L6XIHD7QzDGTYcUeXOkuRKfxwc+M3gMr6GN9LThJFFmhW0sPla
- cQ6w==
-X-Gm-Message-State: AOJu0Yw6UO5v/V4/X7CbPJmmJKGBAzVlRu0TvMS/gmFbIFVtN5oqY6od
- xYVwvsiZxGz73HfFMfLySd8qjunIuSirlfBWH4T+I5RXbg1+q6oEElgCiR/zH3Ehb54=
-X-Gm-Gg: ATEYQzwlAk7SuIkydUQzP88BzpWvDfaK5EfNQER0766ikPlA5Kcq8zUQ0Su6eZvaOXV
- qwFcsFhz7aNcIRCNvM3zScQVRs1AXd+BiEcbICQ3+l3qYPRRD/nTrKgH4Sz17HGt2bBI5Y4QdD8
- doFKUx+FR9OFDryb6Ww5HI+vzC3iko71a1PzKtn0donOJVi330mitrSBM7Bhu78GNrb3KbLEfEJ
- QF5JKmLxrp7x2vsOj6s+J+gGguf5cJ2vZG6MMgfQLeBDDixWq9XmzD4gCYpZxAJNeLiSK/X7slO
- UuOSnq32c690yCT0l9lBuFSY7zWnumYoIsK6aMuCcJC+OBHxhCcJCHQQvwp3/yMOsrNnbzqiCFY
- m5UnDSDNpNtI/hriDHcLwuA8u8/c47LGY59iXVimUrvWrzLq6KvrJ3ekVBoB0g43blAp+Y5P2QY
- weeT3TP/UWIeYXWq0yCSrA10yrDxxQ/DvhJg/c8ilWbME8httXy/MalC9SfVPktWc9alEjiQwT3
- gTwv8lup4KbPyq0m4yq0J9izkMpNdvzO2G3zt9ZGIQ/TQy4tqQ=
-X-Received: by 2002:a05:6870:249c:b0:414:64f2:398c with SMTP id
- 586e51a60fabf-4157ac74d6dmr8401805fac.13.1772032250573; 
- Wed, 25 Feb 2026 07:10:50 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cfa6624sm15160973fac.8.2026.02.25.07.10.49
+ d=1e100.net; s=20230601; t=1772036336; x=1772641136;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=87tZXl2A99AxHhfTppqdnkU1d7h0JgGf/Rr9i4VdH+4=;
+ b=bWDW7/To8iHnkmm8zzhCeXDrYjjmYe9LJTjE7sinOYyiZTuvJPsNqY95qhCaUZcHsQ
+ 08scbcagjUpgiyESdgiYXdSjB7Y5id2ui7JrVmMq17kxb7sRgbQgPHlaFZ4oLYk3rQCo
+ uhUiySVo8skBWost57PRxP6JvLQJtBOooxllLmFlEZ1l+abK3gUs/XNBqBPszy81VLOO
+ hMYUyrrr8/1KmHz1S8G39YwmK/z4vR9uZJia/0LpClBuWuHQLiO75rN3tSAwdw9ow8Q+
+ 97BEJMnrVzXPUw40T83UJlxLuEcT03Z7CgZO0BZ9sAeKvHQ/Kq5U0AqV9eqz/dpSmbCj
+ nKug==
+X-Gm-Message-State: AOJu0YxOzl6xEUP3WsevcKRG3SqUFKXXke66E7Rb01Apdl8S9IyjNoYV
+ OV2OsKJK7fXeAJP+jhPXuXRMYBDmk+5s1kOM6i+q8L3jHHUhPwG7oe/1E7dNjKvk8Ut9Qi4H4KW
+ 9Y3bv
+X-Gm-Gg: ATEYQzxiPctFrfrfnHaS9ldCNgImrCz/M36nEIF75gYbngvTSPDIRCxZDuEXHNU6qu8
+ b2gTqEtfSs/70at1e0ZSvUvoJwhzMmdDbS/YH5SUti4BguzP0NKXwP8pN0x/2EJSZj8MHSQbMi7
+ wqO6wYdACSo/W/jaR9DJuhN5F6vw45gv90dhxPHs9qMN7d3/rjfUXcAPD7JRA14t+u4ZVvVJKk1
+ MBB8ZHEOvDZKEKrfyinAXatfNMiTYbpWWdB2wR/Rpo44caiaM7LJF156ROHXuP3vk13SvwRvIE1
+ TLOEzLp5nVZnIv6Rm3hlBtTgQ3oYOGTStvwzcCwCPSoCqFzfr7FUOfi+8Txv6iuhrkh0U3X0+fa
+ kXP75c9bhvfTnzQ0uAEREe9aPMhyr/2OgRz30nuXPhHMllMV4AF0oqT3Z1+lC9XIEibfvaOQDms
+ v1dRBUZ1B8zD8K+NWp2LbXJDXC/7laELshxwf/dRWU57E09EHQnFYF8HKQg/eXm2XY3vJWhkrp+
+ n/oBOf6w4VYeA/uKQEco+PdY8gG/SSkR1XHj0szWoNXBZ2SnDzsRb4zxm8=
+X-Received: by 2002:a05:600c:5488:b0:483:71f7:2797 with SMTP id
+ 5b1f17b1804b1-483c217cb60mr17933945e9.14.1772036336164; 
+ Wed, 25 Feb 2026 08:18:56 -0800 (PST)
+Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.18.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 07:10:49 -0800 (PST)
-Date: Wed, 25 Feb 2026 09:10:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sparsh Kumar <sparsh-kumar@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, praneeth@ti.com, bb@ti.com,
- afd@ti.com, n-francis@ti.com, vishalm@ti.com, sebin.francis@ti.com,
- d-gole@ti.com, a-kaur@ti.com
-Subject: Re: [PATCH V2 0/9] board: k3: Sync rm-cfg with TIFS v11.02.09 firmware
-Message-ID: <20260225151047.GJ1593142@bill-the-cat>
-References: <20260225132425.3096103-1-sparsh-kumar@ti.com>
+ Wed, 25 Feb 2026 08:18:55 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Alexander Graf <agraf@csgraf.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Simon Glass <simon.glass@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v3 0/9] video: support Rocktech RK050HR345-CT106A panel
+Date: Wed, 25 Feb 2026 17:16:51 +0100
+Message-ID: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fjMc5HGU1SHyX/zh"
-Content-Disposition: inline
-In-Reply-To: <20260225132425.3096103-1-sparsh-kumar@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,66 +109,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds support for the Rocktech RK050HR345-CT106A panel.
+The initialization of this panel requires a 9-bit word length
+configuration. To support this, I have extended the STM32 SPI driver
+(including support for the STM32MP25 SoC) to implement the set_wordlen
+operation.
 
---fjMc5HGU1SHyX/zh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+To properly validate these changes and ensure the SPI uclass correctly
+handles the word length propagation, I have also implemented the
+corresponding logic in the sandbox driver and added a dedicated unit
+test.
 
-On Wed, Feb 25, 2026 at 06:54:16PM +0530, Sparsh Kumar wrote:
+I have grouped these patches together to provide a complete overview of
+the implementation and its verification.
 
-> This series updates the Resource Management (RM) configuration files
-> for AM62 family devices to align with the TIFS v11.02.09 firmware.
->=20
-> Background
-> ----------
-> With the latest TIFS firmware (v11.02.09), an additional virtual
-> interrupt and event is reserved for MCU cores to DM usage on am62x,
-> am62ax, and am62px devices. This series brings the rm-cfg and
-> tifs-rm-cfg files in sync with these firmware changes across both
-> TI reference boards and vendor boards.
->=20
-> These changes are backward compatible with older TIFS firmware versions.
->=20
-> Additionally, the am62x platform was originally introduced without a
-> tifs-rm-cfg.yaml file, unlike other platforms in the AM62 family.
-> This series addresses that gap and enables tifs-rm-cfg in binman for
-> am625-sk and am62p-sk platforms.
->=20
-> Changes
-> -------
-> TI reference boards (patches 1-4):
->   - Update rm-cfg.yaml for am62x, am62ax, am62px
->   - Sync am62px tifs-rm-cfg.yaml with TIFS firmware template
->   - Add missing tifs-rm-cfg.yaml for am62x
->   - Enable tifs-rm-cfg in binman for am625-sk and am62p-sk
->=20
-> Vendor boards (patches 5-9):
->   - beagleplay (am62x-based)
->   - phytec phycore_am62x
->   - toradex verdin-am62
->   - phytec phycore_am62ax
->   - toradex verdin-am62p
->=20
-> Note: For vendor boards, this series only updates the rm-cfg.yaml files
-> with the required interrupt reservation. The tifs-rm-cfg.yaml files
-> cannot be updated without access to the corresponding SysConfig files,
-> as both rm-cfg.yaml and tifs-rm-cfg.yaml must remain in sync.
+Changes in v3:
+- Use struct spi_slave data to access wordlen parameter instead
+  of driver private data.
+- Move the stm32_spi_is_enabled() helper to the new patch
+  "spi: stm32: add stm32_spi_is_enabled() helper"
+- Insert blank lines to separate code in ilitek-ili9806e.c
 
-Do I read this right, and the vendor boards will now be broken?
+Changes in v2:
+- Rplace tristate with bool in drivers/video/Kconfig
 
---=20
-Tom
+Dario Binacchi (9):
+  spi: add support for bits-per-word setting
+  spi: sandbox_spi: support wordlen setup
+  test: spi: add sandbox_spi_get_wordlen interface
+  test: dm: spi: add testcase for spi_set_wordlen()
+  spi: stm32: clean up buffer length assignment
+  spi: stm32: add stm32_spi_is_enabled() helper
+  spi: stm32: add support for bits-per-word setting
+  spi: stm32: extend support to STM32MP25
+  video: support Rocktech RK050HR345-CT106A panel
 
---fjMc5HGU1SHyX/zh
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/sandbox/include/asm/test.h |   8 +
+ drivers/spi/sandbox_spi.c       |  17 ++
+ drivers/spi/spi-uclass.c        |  22 +-
+ drivers/spi/stm32_spi.c         |  71 ++++++-
+ drivers/video/Kconfig           |   8 +
+ drivers/video/Makefile          |   1 +
+ drivers/video/ilitek-ili9806e.c | 356 ++++++++++++++++++++++++++++++++
+ include/spi.h                   |  14 ++
+ test/dm/spi.c                   |  16 ++
+ 9 files changed, 502 insertions(+), 11 deletions(-)
+ create mode 100644 drivers/video/ilitek-ili9806e.c
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.43.0
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8Q9wAKCRAr4qD1Cr/k
-CsuoAP0cV/HGLk8tB6sSHWKsaqcll6nk3RtP1U9Hc3QD0dZkIQEAvyAfAzgh8F/M
-e5QpYdvuJvQdJfRCYYDPi822aBXdZwg=
-=HktU
------END PGP SIGNATURE-----
-
---fjMc5HGU1SHyX/zh--
+base-commit: 4f70106beafe30df8b0528a3d8b2543cd48fe241
