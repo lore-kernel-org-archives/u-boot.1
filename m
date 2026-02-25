@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 805B9FD3774
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:38:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF88FD3774
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 16:40:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D247E84201;
-	Wed, 25 Feb 2026 17:34:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F0B1C8414E;
+	Wed, 25 Feb 2026 17:22:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lKdlxF9o";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mb4zcPke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F33A84205; Wed, 25 Feb 2026 17:34:35 +0100 (CET)
-Received: from mail-oi1-x236.google.com (unknown [IPv6:2607:f8b0:4864:20::236])
+ id F26B58410C; Wed, 25 Feb 2026 17:21:29 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (unknown [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13624841FF
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:33:44 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-4648447c899so1520957b6e.0
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:33:44 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADA2584154
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 17:19:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=fail
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso52656425e9.1
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 08:19:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772037203; x=1772642003; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1WNfFxsEMJDIH3GQafSto9Vr8NRCWgsyUzyB/CR82gA=;
- b=lKdlxF9oCtgyJZnzg8HuOKoscGWH1gOMLzUui7ohnkkYVSxOKZRq2TMS8vmt0uhe5k
- aQRSHY+xEQPqoI64JE4Zaa1iZAaFm/myfDrB9G0whde5536g1M+c6lDqXlOHEJJm+ksU
- OGpAyOK3RgrZSXRtXUsof7kbA2m5DSwE+OU+U=
+ d=amarulasolutions.com; s=google; t=1772036341; x=1772641141;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gwYALHZDBEirWjUwGBe95A54XbbI8IIK1ONmtW4T1Qs=;
+ b=mb4zcPkeJJhqyjL0n3y74rJU/RBgPmSg8X5432HIS7pwL/a0SZhS/kU9fIqiC6/Ble
+ qacfI679CsMQYNfOsSv5fEjbLFW5JvmrQ9Ncpd7TUrhWIyn2daNTXvKfYGD1X9pPFrLd
+ IBJW8l/V2fuSQIqKUaeLsZpl/zgCtzyZj4sIA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772037203; x=1772642003;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1WNfFxsEMJDIH3GQafSto9Vr8NRCWgsyUzyB/CR82gA=;
- b=VvvLkgj8nR6Dm4VcOPNYaMjr0Tx4If2UinTCSzZiUMyPSh6vX7flNFyMhKBzdVXk4r
- b1qrI8xyJifliIxj2T2vljJgXHEFYzaWoHCve8Oku3PiNuYsVH6b09tX7xDGRCrMPXne
- 1sfZOHhjm3pfI/AcFayPnS7y7h4UFZ5MVcfloZ5R6LNvRkTNGDx92XZXgsiC8ltaiBbv
- mqMGlXb0W2oTMjne48H/1TY4qQDevh8/lIcUiaU5RDz5qEMX5uXOhn1mytnhthPtYWzm
- Pd1uuQeH8B0kcjfBjmdsy+vp5x6ErOB8r2NqpBNUOXoxG+l4rEkP9U7J3pJXFIuV4fKB
- tnvg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUMT8n4303DE76jvsshivC7WH7/OwvFB8adn4a5qwlwyCmKYyEBJm2O1VPjxY++apcm4J945io=@lists.denx.de
-X-Gm-Message-State: AOJu0YxU7F6GCkYp73m273p9B0f7shge0sZpgwptgj/ZNfuD+Ui02w/V
- tIWUBQRM0hmyW7YmJYfPMUZiwpH9Qb9knxcrOBVTh6dG0sq602+t8Z/OWSpXU0QBnnQ=
-X-Gm-Gg: ATEYQzxC26KqH0pO7EUYABdLjuXXlnL8LSAzvdTOos+pB9/9aTpaMymhdhvI5HX7/Ii
- xIPQneaoxDNppw1jltVnj/iROz3fFNYZE06HJh+FbNz2nurz3X8l8M9CtfU9iv2uehHIkNQzhlV
- D2z4zlnXnJuMPIBWh1F38WxxVn149AcNI4BZXEAhOF+ujCLcOrg3a4DnyexrDkdeDUe0Wr/1hGh
- eHqqyGDlRUQiEa+59GkkZyQRBenUPf9s8y5bfZfkwGd5Rj2cxBQMwU2v7YDJqfM/zIjkw6ikE6S
- mCy7n7OyFyvrIGE4zfEDdC814djgdxgHZABEOA9KUcZcnSWUjbQDs/jTM/rIDOjLQF1c80GEE9P
- lwkCtMna5Xx7+sVOWFZNrXp2YugvhmIaxPJgIT7EzsY3R829KX77l4t9YuIlTnflTIi1eJzgQC4
- ZAYPlbagUCkkZSLuhVBRIc87I2WX21yHpd/6FfRqjsyj6wSgEUUpHeGTE0hPzdFW1IvCAJKiLrW
- Sncdk2P6olCfYMgiK/VnyExHHyhql8Tqzv8tZ4Ve2fcTvJfqXQ=
-X-Received: by 2002:a05:6808:4f4f:b0:45c:832a:cf43 with SMTP id
- 5614622812f47-464461d7739mr9335079b6e.14.1772037202586; 
- Wed, 25 Feb 2026 08:33:22 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4157cfa6624sm15408702fac.8.2026.02.25.08.33.21
+ d=1e100.net; s=20230601; t=1772036341; x=1772641141;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=gwYALHZDBEirWjUwGBe95A54XbbI8IIK1ONmtW4T1Qs=;
+ b=h5FoUNnW9TxFwzFlFqYp/gvfe9peK/eckymHHoFLzM6tOC6/jY7Qx+1T+WBKf9GPw8
+ fFXNxTIdACicFDvoDOWGDvPZ52cF7jfZzLcusHs+Pg+JG5buvkgdc/bidZBqApdxySuS
+ IuKSbqqROaPELPAflvC8NoMKSNUsBwgimMBuGfdU1AcP9j/rFABakUx+9I7ZtvJFqdDx
+ KLIlSh97qSk+uI0j1RBz25U6Qd/Ho9Oju0nkhgC+tGa2631f6piPRw5chiDvWCiQtSZj
+ 4BTAQNn/wjVr4q5U3kfxCoB920kKnl+95eW+hCBcKFMDVG8rwAs5mhkLsEuLWbNMtIuG
+ KtLg==
+X-Gm-Message-State: AOJu0YyAqZpRHoWiku4u07OaaZMvjltMFkmA8OGX4q1bHwiiRFggh0Rr
+ zTSVHtRnAVIvxk3k+3WY/5K16aj80PATu6SymPExS/Eg9QX2hpr0aDF/epq+KnyKcJjy0kAVh7T
+ bUFs6
+X-Gm-Gg: ATEYQzwozqWWPWeTN152O28vAUnpaXw0X5iF2gSIe8WAdpJ0JX3d/TljIPW39tBhz3D
+ imwSZc48qhT4i5JrCzbLcmSoyEdpu6/13gI9/ydx6JxUF2f7LREGC1tWUmBQ3cbDvWT83nmypXX
+ moy5LOY8MZoW5lgTGtGHjhpycFz45cSHtMQkQHPeM7he9w4bKNwVlaPccNL/t64QyBeysKB8ttq
+ BNbyLHkGs9L9H5A2oIrIt1q7BU/pyYF9x2Vb19MD0C0/WvfmLHOnFfPe+5Bki9BH90d0O/14mwL
+ HgTojSXL3XTr9QaGsWIh2otVAU4LuW5WsU7it1xjRx2iOhrC0Kny0IbirzxvqkB/UbJwxOdPHum
+ vHTJedSL3hxTuYBQSNav91bFGuM1KK2Daks91tdwiD6oqAFLoCrUYppB1owxBc9rC4YCfXrNzN1
+ USDtI3hKEQFjjQdO6lMzpnmT7baeUJ48S8n+HWwHopk69KCBMi8crsOhHxzZRCFOKbhFr8mpKk/
+ 23ud6Rnc7pgL7D8oy1/WVvQHlCbZMMah3WTE9lEDK6GFhIh
+X-Received: by 2002:a05:600c:4f95:b0:483:8e43:6def with SMTP id
+ 5b1f17b1804b1-483a95e5a97mr250975375e9.28.1772036340869; 
+ Wed, 25 Feb 2026 08:19:00 -0800 (PST)
+Received: from dario-ThinkPad-P14s-Gen-5.amarulasolutions.com ([2.196.43.111])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bd6f19f5sm186562265e9.1.2026.02.25.08.18.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Feb 2026 08:33:22 -0800 (PST)
-Date: Wed, 25 Feb 2026 10:33:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Padmarao Begari <padmarao.begari@amd.com>, u-boot@lists.denx.de,
- michal.simek@amd.com, git@amd.com, John Toomey <john.toomey@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Heiko Schocher <hs@nabladev.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: Re: [RFC PATCH v2] cmd: part: add dupcheck command to detect
- duplicate PARTUUIDs
-Message-ID: <20260225163319.GO1593142@bill-the-cat>
-References: <20260222070957.2756719-1-padmarao.begari@amd.com>
- <c1ae91ae-61f3-4a05-b975-2dc8feb41f70@cherry.de>
+ Wed, 25 Feb 2026 08:19:00 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Simon Glass <simon.glass@canonical.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 3/9] test: spi: add sandbox_spi_get_wordlen interface
+Date: Wed, 25 Feb 2026 17:16:54 +0100
+Message-ID: <20260225161851.2475274-4-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
+References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EaK6FrfQp4MyA1c/"
-Content-Disposition: inline
-In-Reply-To: <c1ae91ae-61f3-4a05-b975-2dc8feb41f70@cherry.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,94 +102,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add the sandbox_spi_get_wordlen() public interface to retrieve the
+internal word length state of the sandbox SPI device.
 
---EaK6FrfQp4MyA1c/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is intended for use in sandbox SPI test cases to verify that
+the word length is correctly propagated from the SPI uclass to
+the driver.
 
-On Wed, Feb 25, 2026 at 05:27:45PM +0100, Quentin Schulz wrote:
-> Hi Padmarao,
->=20
-> On 2/22/26 8:07 AM, Padmarao Begari wrote:
-> > Add a 'part dupcheck' subcommand that scans all block devices for
-> > duplicate partition UUIDs. This helps detect situations where the
-> > same disk image has been flashed to multiple boot devices (e.g.,
-> > USB stick and UFS), which can lead to unpredictable boot behavior
-> > when using PARTUUID-based root filesystem specifications. It
-> > iterates all block devices using blk_foreach_probe() and checks
-> > partition UUIDs via part_get_info().
-> >=20
-> > When duplicates are found, a warning is printed for each occurrence:
-> >=20
-> > Warning: duplicate PARTUUID 20c5fba5-0171-457f-b9cd-f5129cd07228
-> >    first seen on usb_mass_storage.lun0:3
-> >    also on ufs_scsi.id0lun0:3
-> >=20
-> > Add Kconfig option `CMD_PART_DUPCHECK` and update the `part` help
-> > text accordingly.
-> >=20
-> > Signed-off-by: John Toomey <john.toomey@amd.com>
-> > Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> > ---
-> > Changes in v2:
-> > -Add own kconfig symbol for dupcheck subcommand and guard it.
-> > ---
-> >   cmd/Kconfig |   7 ++++
-> >   cmd/part.c  | 104 +++++++++++++++++++++++++++++++++++++++++++++++++++-
-> >   2 files changed, 110 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 322ebe600c5..73d27fe2e28 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -1663,6 +1663,13 @@ config CMD_PART
-> >   	  Read and display information about the partition table on
-> >   	  various media.
-> > +config CMD_PART_DUPCHECK
-> > +	bool "part dupcheck"
-> > +	depends on CMD_PART
-> > +	help
-> > +	  Enable the 'part dupcheck' sub-command under 'part' to scan the
-> > +	  current partition table and report any duplicate partition UUIDs.
-> > +
-> >   config CMD_PCI
-> >   	bool "pci - Access PCI devices"
-> >   	help
-> > diff --git a/cmd/part.c b/cmd/part.c
-> > index 975a0a08a99..c4df5053936 100644
-> > --- a/cmd/part.c
-> > +++ b/cmd/part.c
-> > @@ -15,9 +15,12 @@
-> >    * Pavel Bartusek <pba@sysgo.com>
-> >    */
-> > +#include <blk.h>
-> >   #include <config.h>
-> >   #include <command.h>
-> > +#include <dm.h>
-> >   #include <env.h>
-> > +#include <malloc.h>
->=20
-> Can you check the size impact of adding those three include files if we
-> aren't enabling CMD_PART_DUPCHECK? I'm wondering if we shouldn't guard th=
-ose
-> includes with the Kconfig symbol as well?
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Reviewed-by: Simon Glass <simon.glass@canonical.com>
 
-Headers shouldn't have a size impact. If they do, that's a problem to
-figure out.
+---
 
---=20
-Tom
+Changes in v3:
+- Add Reviewed-by tag of Simon Glass
+- Get from struct spi_slave data.
 
---EaK6FrfQp4MyA1c/
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/sandbox/include/asm/test.h | 8 ++++++++
+ drivers/spi/sandbox_spi.c       | 7 +++++++
+ 2 files changed, 15 insertions(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/arch/sandbox/include/asm/test.h b/arch/sandbox/include/asm/test.h
+index 0e8d19ce2325..0438790028b9 100644
+--- a/arch/sandbox/include/asm/test.h
++++ b/arch/sandbox/include/asm/test.h
+@@ -243,6 +243,14 @@ uint sandbox_spi_get_speed(struct udevice *dev);
+  */
+ uint sandbox_spi_get_mode(struct udevice *dev);
+ 
++/**
++ * sandbox_spi_get_wordlen() - Get current wordlen setting of a sandbox spi slave
++ *
++ * @dev: Device to check
++ * Return: current wordlen
++ */
++uint sandbox_spi_get_wordlen(struct udevice *dev);
++
+ /**
+  * sandbox_get_pch_spi_protect() - Get the PCI SPI protection status
+  *
+diff --git a/drivers/spi/sandbox_spi.c b/drivers/spi/sandbox_spi.c
+index 7c237ac8d371..3ee97d67f4a0 100644
+--- a/drivers/spi/sandbox_spi.c
++++ b/drivers/spi/sandbox_spi.c
+@@ -61,6 +61,13 @@ uint sandbox_spi_get_mode(struct udevice *dev)
+ 	return priv->mode;
+ }
+ 
++uint sandbox_spi_get_wordlen(struct udevice *dev)
++{
++	struct spi_slave *slave = dev_get_parent_priv(dev);
++
++	return slave->wordlen;
++}
++
+ static int sandbox_spi_set_wordlen(struct udevice *dev, unsigned int wordlen)
+ {
+ 	struct spi_slave *slave = dev_get_parent_priv(dev);
+-- 
+2.43.0
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaZ8kTAAKCRAr4qD1Cr/k
-Cni8AP9IHPXxntT9xejQJ43/fheqzJxjlUH1wV4Z5GlSr6brKQD9Fh1gnIHx2jnF
-mblezR/B6NII2gGqFG98J7rVq0+JUw8=
-=S5/S
------END PGP SIGNATURE-----
-
---EaK6FrfQp4MyA1c/--
