@@ -4,146 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFA1F5545B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 05:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62CD6F5545D
+	for <u-boot@archiver.kernel.org>; Wed, 25 Feb 2026 05:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FBDC83D8A;
-	Wed, 25 Feb 2026 06:16:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AD1F683D8A;
+	Wed, 25 Feb 2026 06:24:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j7AEdEHn";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ttC/GPgc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF5C183DCB; Wed, 25 Feb 2026 06:16:45 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azhn150100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d909::])
+ id 923B783DCB; Wed, 25 Feb 2026 05:33:03 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AA5D83C39
- for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 06:16:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB91183C39
+ for <u-boot@lists.denx.de>; Wed, 25 Feb 2026 05:33:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GAxcbymrn7J+e5q+lnv57asC7uzV36TkrOIUDW9qjwCXbhu9UOoS8YRKTjscIoQGouZDOFfvVSPAKVqsbKbJ3xXO0glc/Pt4/iYZFRKLxmM2tD+O0+XK+NJ9NPu0stwOZGD/jWoiRNEd1AC5VFhN46YyoGPis6wVlLp6Eai9u5NgJ5Z2UypL3tttZHcXQl2wBLTQg6zh/OVkrEQIYbeuN4Ruy3abD2V8vI5P0s9VgXR7Ju82tplh94RvL5h8blbJQ3KHKDmfWLLsmw6a//sEiR3l2y6UM1anFYCLpCFJw/IFKByec++ep2ArkjN3eayeDCxH0/IV3MiQ+ICTxFNXUQ==
+ b=LDA3mXXIdsPZPPlXo1ryQ276ZeKisB1OI0Ya8Iqma/Fw/uYvwDgw7L8Fr50/xXEh8j/9EvmYV703M3AjPy2wRNjTifbFejPjHnRaO3H9e3QQ/XigZUFIDaTSaKp1wOTTeZSypyBGCoqmnV7HHZAy/EDcAH5XxPfS/vpoO2FHFU2CQSH9tuxAG0rnZ0mw1QDpJ1BLwMJfNFrXOmThuxCWLImViTPDVGv7aiaiQKRXef2tv0DtxQlv9iak1xY7i3KVKhWXDpd3fvSa+fBy8OgT8LO149Jwnhew5Cfsjz9cIEr3StY9wXO7LFSbzAc7iakuu5Ov1bIbdmUwTARX7XpCKA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hJwZnTIXwQ9UWAx5Xcpk8G/lSSrD/dhXkTc+L7rTWFw=;
- b=k0tIw7/rfe+7MJwJ5+XxUTI4HWx4cP8a0Jhps/ra8aJWaC020nWw0Jf8jmWoaUOIkmJYWxRjW/IcZkCrL1rljMwE957XMe/fS3unfYi1BFASgdr/01Ttm51z9acZ4Qz5CDJ0s5Wek51fnQHhznatr77/2zMYIKcQjBt5e231qTA7JrHsVdYVwVcCohFJNlt9aYi961P1+DdTz3TMuOnM6wYpmxjptaQP/N5tMCJRM6tI6wJhULXqN3jpOu20FtnJHZ6AM4cw2iuCen+BGWX6MToIhFuyoUguxK7dw8gE/2k+NNvuHDKDXot0DIOZpl0E1tJPpbaPSQjn3vMP0a1Q7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=5oePZj0UdbRYKte2dL6aqqUuZV53H8jVRF/mXpL96Ds=;
+ b=TnU4O+Mg5XIpTzBRZuHhzDiQ21aEm4CrwRU/pEGzKoDoFbZgOwgEaeI5SJ//vZ8Az4x0G6Dhnh3JCfdpSQMVSuCw5nrZnznLRetSiYon2C8x4EX+XOMG4zKYWKtKidnHpPMCPzvbDySA9jCa/6TPL7wj2GleLHz4jz4JnTgCmTh6qSXYFHRXiPsO8E+DNcQaQ7R97jP+J+mraFaF4EZnhVcnuLnj/gfOFBSbL6VMpdxHhnex+4A/DWBj6mc6obirBQ/Ch/lsWasG7t4c3lIb1MbVQ7fEjsLHDMe5OoTFk1h3v6Sko4R+oupwvLbkR3H1Ybut70Z2/NKQ9BIe99CiMw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hJwZnTIXwQ9UWAx5Xcpk8G/lSSrD/dhXkTc+L7rTWFw=;
- b=j7AEdEHnFCPuy7cGZviqtQA4T8sXFFT44bwCD7KkPwKL2EPGrPUOtQz9pgHcpuc3xCuLor9Z1ISAEZp5Wut3K/Y0EdiKsYTn2zl86lgEP796L3yq1Tuiyw4hHFtI/09aegIPZBSbANVuCYHRPUEsJzFWG0okdG2wUpytKyz4rF0=
-Received: from CH3P220CA0014.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1e8::16)
- by PH0PR10MB997642.namprd10.prod.outlook.com (2603:10b6:510:386::20)
+ bh=5oePZj0UdbRYKte2dL6aqqUuZV53H8jVRF/mXpL96Ds=;
+ b=ttC/GPgcmrhAtcumxOG4TVjqaB4LHvonM8EDaE1UE6JbYhgYYYVhZG6gwnwriYKRezOzq3Le0MqW9UBH2RGSTCkV9wK239MBHqufX6oauqJoI8W5D2kbgdqpo54nEdcL/vBx0OncQ5mRWK9PehWuTKJv321WnOHg0D4v0sUEV2GZUc2l8+rS9wH0XEgfUoM6WSGnvMxwZLaU+vjS1olpEdUjET7UhP8EgjI5pAGMjRZZWUi0Ot4HM7ry+SGci8cLYezTpmoH6NXdTPC14JzhPRhtvvxOvBqomOQ8Xten5GgtXAlwpohpfzbImz0pUr8A5Sd0vE7WSBBOBbaxDqMtig==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by SA3PR03MB7188.namprd03.prod.outlook.com (2603:10b6:806:2f7::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.22; Wed, 25 Feb
- 2026 05:16:41 +0000
-Received: from DM2PEPF00003FC3.namprd04.prod.outlook.com
- (2603:10b6:610:1e8:cafe::b1) by CH3P220CA0014.outlook.office365.com
- (2603:10b6:610:1e8::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.23 via Frontend Transport; Wed,
- 25 Feb 2026 05:16:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- DM2PEPF00003FC3.mail.protection.outlook.com (10.167.23.21) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Wed, 25 Feb 2026 05:16:40 +0000
-Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Feb
- 2026 23:16:40 -0600
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 24 Feb
- 2026 23:16:40 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 24 Feb 2026 23:16:40 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.53.178])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61P5Gan44018051;
- Tue, 24 Feb 2026 23:16:37 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <nm@ti.com>, <heiko.thiery@gmail.com>, <m-shah@ti.com>, 
- <j-keerthy@ti.com>, <n-francis@ti.com>, <bb@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Diwakar Dhyani <d-dhyani@ti.com>
-Subject: [v2 PATCH] mach-k3: Defer CTRL_MMR access until after TIFS version
- response
-Date: Wed, 25 Feb 2026 10:45:59 +0530
-Message-ID: <20260225051559.416445-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.14; Wed, 25 Feb
+ 2026 04:32:56 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9632.017; Wed, 25 Feb 2026
+ 04:32:56 +0000
+From: dinesh.maniyam@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Tien Fong <tien.fong.chee@altera.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH] arch: arm: mach-socfpga: Change U-Boot mailbox client ID
+Date: Wed, 25 Feb 2026 12:32:09 +0800
+Message-ID: <20260225043209.7512-1-dinesh.maniyam@altera.com>
+X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: BYAPR05CA0101.namprd05.prod.outlook.com
+ (2603:10b6:a03:e0::42) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC3:EE_|PH0PR10MB997642:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5ef877dd-d5f3-4bb6-351b-08de742d0f1c
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|SA3PR03MB7188:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a42e2d2-312d-43ca-218a-08de7426f248
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|34070700014|1800799024|376014|82310400026|12100799066;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?LlEEogUC8Ee5eHmTmA3UwKl5z7tuVPYwM2DQzGJQ3aEjjf0ZHulQvj5XcNBX?=
- =?us-ascii?Q?S5Wm0BiuUGB+SRhWchqR/Rv0HsV/rXmccdA8tjquUZlA865LOljOvS6f0OKy?=
- =?us-ascii?Q?sXJYKC9mCZDwSRPOzbFroSY+qDjAnXD7E24zeJ62TNaRXqlklQPwgEVoTBHi?=
- =?us-ascii?Q?jWQ7eOEMVY6X1M8o755tZpEEJALCw/fNadbv4u2qMnfjFb++V7s8PHOJDm3/?=
- =?us-ascii?Q?vntFOapSD6BCEmuzFA83Y3MrjJOLlbRv7IGsfMSRtFgyrF1y3BLvoG2Q7qxu?=
- =?us-ascii?Q?cXJCixztzxDWNmDLb5KtGeNPxI68fSwOTXx2WkguR2SXHQ2QWcEZQgN+tKZg?=
- =?us-ascii?Q?96qJw9we2S4wiKIVlpDXHb+mkYmuIgusw8k9PMytv9j/FnwM7utfRDTNzIfK?=
- =?us-ascii?Q?8s6CixB152dkK4V0D7V1Qc6dihEadjyNbdBw1olVIexMPFJsdyLZzg/AkWwN?=
- =?us-ascii?Q?0xawoEPu9sxAWOMLEhxOH00B7I9HXysekPJDfVu3HQ5dxhCuCxW/yR6v5bu4?=
- =?us-ascii?Q?FIHeLsU93TSk37xymGjcJVY0XnD0P6HadQAx9Q6YKMmv4AsWXMAkarnoh9h4?=
- =?us-ascii?Q?/owWbxb0+GhIKAsHSBqKfQiXun7DClH64IBI954KOMsusKMKA0BJEnhvpsmu?=
- =?us-ascii?Q?72Y+nK1HvSHHPQSIfT07SnZcHp9AWaDr4rYdmKlLTSc5YuamNt1sD74UVo0f?=
- =?us-ascii?Q?vWzjtlai9w7/fPq1ABUgvfl4LElt5ywuzc9i1izs9Omg3uy5H5teHUzvD961?=
- =?us-ascii?Q?qkNnkIk+yeKPkmusjBuqi/kcFKs3SIkNbpTlm5UV6u0blS2YjadvrX33spFU?=
- =?us-ascii?Q?eK8FxIDZPQXkT8ET20Kf/HgkCntvQNh977QAakXmL8qbBGaceRQdpdD4affn?=
- =?us-ascii?Q?wLpNeqMZ8kKtNti1jTqlX+Yckmt7veHS1LlR4D7bpx0NgLqowtuD7yVZqzDr?=
- =?us-ascii?Q?radX2losbpsxptMUuWKNTlg3uhGREkWRR3Yen9NQnhu9oet0Z1c7yaoUAKtW?=
- =?us-ascii?Q?XMozIGHazqYa6Kr+FbxljNZ6z/gs7dgzKZvqypELkxw8VqnxC4VcDrJpqoQI?=
- =?us-ascii?Q?FGaPRY3CrBJ3GL3e4ReYcTIMsnosu0M8QvCoyd+88SqOyeMlTFQgsc0f9Pff?=
- =?us-ascii?Q?D/n3COqlHt6sbrb18TXSDsjwcYcHrrY8GPBvF2dBxxQ93emXeFd9XXiejpx4?=
- =?us-ascii?Q?fgGqAVkm8ERQQbe8eS7R8dErzU/dSG4OYQsIO79OGJ7a/LhecFw6/wrNK6a+?=
- =?us-ascii?Q?adVdVhj/p3TV/+e1FTL/0Na1n8PLYCcGCD2G5fkAYSMjMBxSKgBGPF7vK6Qe?=
- =?us-ascii?Q?uURTiTxqJ/VrqWYV59gKVW5E+HQA6MiCNAXMqy4+DzWWOyjA5VhAY3TqNP9t?=
- =?us-ascii?Q?cHm4KuRp9hFQsQSO+MxGrvXXv9fn1S5KvMfIaLYCl3fGJIJS5Atl7J6NpUap?=
- =?us-ascii?Q?XD6LfpjnQkG3sT82jZFs5M6Qa6pb3i+yGgTaj6AlQWZyLjERTUb7Fo6VplOe?=
- =?us-ascii?Q?EE8PqRgqnI0rD+nNeCIH/cArd5mS1ABtm56UdYPA1AoW0/0NDviS8a1rzSj0?=
- =?us-ascii?Q?Xk5jO/oQJmLfR++V4d/NoNX9yxIXAyxpnS0GVCGg977o/CUXRM3v2rULw9Dj?=
- =?us-ascii?Q?sx9dYCkWpuhRQyHwkAvMGTQ=3D?=
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(36860700013)(34070700014)(1800799024)(376014)(82310400026)(12100799066);
- DIR:OUT; SFP:1501; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fLrPOrWJOLVvCAyreNQg7axHmipJbJPxctOsFLCdIn96WpbKBJkD3AzBi/7R?=
+ =?us-ascii?Q?w96g7maUgtkLFwuzeVGxfZb/dBZsKGPRihLAXL5MWiAimfREO2u/ycbVl8O7?=
+ =?us-ascii?Q?EWvcz5wy2UfTpCQWqPVz9k8sDkyqlmQTX+8Cqz2ZDgDPsVqrchn9klbmLJ4d?=
+ =?us-ascii?Q?az6hFDqhykH98suB09j7dPk/y0mKPcTVFBBzCh7VCFmtsnKP1C58bslCT2ks?=
+ =?us-ascii?Q?lhmafIoZEBS42nSjKcRGjXWzsRITZCf0StWF2vRo9w7FtyB/tH+9yeFHcJdD?=
+ =?us-ascii?Q?zUKnEMQPbVIVmYv/6us9kWKqq0rvKeE1XxzUfUspjNeFrgzIu4xk3E0K3vby?=
+ =?us-ascii?Q?Ie24vUhYkx3SrITI2FkOtZTkmbf8BXcZmtyFaxX/foXI7fKdkyLkJuQizlsV?=
+ =?us-ascii?Q?DupwBT5SAx3oktEqYvJa4p3tqywEaS8E9oXNELYpDcB/7oVM/7ZRJZTFKEp2?=
+ =?us-ascii?Q?M28ljbEI+IBqU+naUaMTKH9cwY/LTAIM1jt3hmDCy+6OYXH0fHIlMBBcR5qt?=
+ =?us-ascii?Q?ugvP9NkkmI30B2FSMRINBgaNJZVkVOPP6vBT9stvZP9XKGyOIFF1NsQG1yc/?=
+ =?us-ascii?Q?di6ozEZjTbR2FIs8WaPjzBuYbwjgni7f2C85bQBe/Z72c27NLYi5eCkomxMK?=
+ =?us-ascii?Q?QHNEt1SCI3kIPoB+cU1RWrw9bBmbfLhg1M4GrsZGihSoA3dIBMf/LCcayGEj?=
+ =?us-ascii?Q?tf3ORoak5Ex6ZXQtwRXTw7jhwrqIOnNb72plm1RNmp81SaZY1/WotsF3SX+8?=
+ =?us-ascii?Q?+8nk3HQmx57DFBEBarHuP6Z/YjBprU3YFlD2VxU5h8V9OYqXXSGXYCwfGUYq?=
+ =?us-ascii?Q?rMffNRvHXoo/J7teHk5QqCJRnKSrFX+UH1w/ry7FH5mYup6rwj1KNkJRAhUk?=
+ =?us-ascii?Q?64R2p/Iurn6CnsMh20O0rurxtwa/ehnNhyv/HFEo+ncnKnJD1YoDzfp0qNNt?=
+ =?us-ascii?Q?RPSQ0bBPPDHO8Lf+BCWogmVc+DTk94R9t5qwxW13+algrr9WzWybsUfZit99?=
+ =?us-ascii?Q?jXVWW8xRTm498Wy5Ys8OZQ6GEZDxU8Dmzho8kxF935Stav8VbCJZ5S9P8HEP?=
+ =?us-ascii?Q?wUXJlH4kCeLzuOFOQwSoAIn08x0qusirbLismjNbSSFaAh8ngCAQbJsuA4PL?=
+ =?us-ascii?Q?3CAdkpv56VEx0Q1Hmbc9nDNhxj5Sl4bygMaxEe7VRWp2oc4jYJnlEdJwB1L+?=
+ =?us-ascii?Q?q83lwtQ2p0pIUVi7uS3CU6Rrvx4uD5ooA9ODNSba1ht0KIwDvkog06NBJTG7?=
+ =?us-ascii?Q?Ls8FsPoopalC+hbgmp3+8uIglFL0aXDCKRBulTrAkJh0MAfqY+P6iIvwTJa8?=
+ =?us-ascii?Q?b8f6CAlcDHso9vQx6CEDYGfh3qVQS2240NSE+wte9TKlVgppHyEM1YMvk8gP?=
+ =?us-ascii?Q?awVeepUugu4lH6EAlKwx3Li4MClMIMk2FDliI/c/8/zAjrIGZ1QFtQu41twS?=
+ =?us-ascii?Q?Qy5qX5rZ0rG8Sb6N8b6OW8jEF8lVYEwUkbEvkMI2cd4yQJ6LsRiTdZNgJ38S?=
+ =?us-ascii?Q?VaSqj5Raq2A/jncFk+5+cq3PvJn0abA3HoV1biYBGVmSxcJe9ctZq848x+ah?=
+ =?us-ascii?Q?Yyz6hZDnBJ1qdUVt6Fo=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: u4YTZ0yJNa7TgwY7KDybaiJNe3i17ckR7IZJ/llJDW5gazNQ9xYPfgjCUEsMaqMRUDVOicn3oFihg61//uWD8QplZyCNQjTMq34llz0gid4mfmnj4cldBdpH09s3ATsTX9LK/2icK5OmZktDRNq44AGzhfpFFI9Mg09VRbp3dpfPtj0LOIVSGV0yDNeyLJ8Rf3n1zcMeDLSLH7cmcUitPcVYsmYN9vPszos5in8uXZnRMCrzd7RzfoIUJ651cuivL7tMZOzro254z8zkEEhqDFAhO98AkgSPQXrOBON+IeMeDyNS7xhWFbg+IdzHNQBsDxi0LSoxftltJXhpOlKND+YQ6OeBQ7z8pP3r/ZiOwZH+p8+VFFrhcXoSVtLxvL8Uv438JeQfF2cCwsBmwY9EpqrR7Ol3ojz8LlYZu7RiS5kabP14kii+Ck3v8KvP4gpU
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 05:16:40.8089 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ef877dd-d5f3-4bb6-351b-08de742d0f1c
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM2PEPF00003FC3.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB997642
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?j9nxfvMEqCI8gbJaRAHF1p0QigB19ua4ODGY2QVUXqtWrePkIFP5pKwepSZD?=
+ =?us-ascii?Q?xn5xwN1iEUJWMHdtXnBv2Rk8aGpx2qYHsBl1LgyyIsCKod+BSq6fiBY1AYkb?=
+ =?us-ascii?Q?0GuwJOyVcukZDf6aiKto8QjwN6A9PEr9xi0sif2hxphyTfrtg+t/CMQHoSLe?=
+ =?us-ascii?Q?jjddomxHYchApNc68XlS9XMI4Umyhz0cSqtLWfmtmQWD1hnyiPZRj9K38XPO?=
+ =?us-ascii?Q?FqUklpqcGv/N9ikmtb/CDnRK/38ZYzGKxax9zRpk+OkTwZwR9eVblBpUFHDT?=
+ =?us-ascii?Q?x8WgBVjjRD5YzQAUb/1u685LA+crPYI/zHB3FXy/Bv3pZELt0igyOToFygZe?=
+ =?us-ascii?Q?fkucv5/uWTC6MKPfvyBpIa9FoDhIf5+Anppz8dGnlv2mJUlS5x0Os12hEBaN?=
+ =?us-ascii?Q?kOYnkT8ydev66OMm/5Wip4kTPAN825278Lj+NUOj0vpoItKcQ+eQUSkcXNGr?=
+ =?us-ascii?Q?RwiiqT0zg237YlCxYvSZHih84F08JkZ6j/u/cE6qzVxFcSPVn1QJzdGF6A+E?=
+ =?us-ascii?Q?qkatAjwKT01lU0u4xHbrUe9Wu+AZUIg2W2FW61nfU0wHJu4gTQgKqEouumo0?=
+ =?us-ascii?Q?NuxWXten0IkJW209ErJYchLofQwHGwq8oFDSP0+YUl52w6EBHjn/+p5dvbV2?=
+ =?us-ascii?Q?BwwPlyTNqayHp4PDMlQtT907vbMEmf8I12/uiZ/MyfGxp4dbQn2+P1eVAseJ?=
+ =?us-ascii?Q?AxmaJD4v++b58swf4Mm3ZVSmn6ZzCWsDgBV7frze0rbI2J+/O+eGicakLdrC?=
+ =?us-ascii?Q?b8BZy6F0SBtrTB/YN30oILX9OnTPKEy6t3yG1PSm75g2Hvq6HStvQW0/TGoC?=
+ =?us-ascii?Q?izfatyVMu93SXpTHCeMR4Rg/6iv03qUfUSt5ZluscQMq5Ad1Js4Q82mR+fk3?=
+ =?us-ascii?Q?YWJjY+QtfJs3rGVvnwTO9GQlxVeo868sK9Na1C+YMz/Ary7Ki0nxsmQkvr+Y?=
+ =?us-ascii?Q?PZ0Lg/FqLrItmB5iKfZdcSeZ2UA5lu0EDE1rQKazjm+0EO/cmd+Oclkt7NIV?=
+ =?us-ascii?Q?UILRhSeJGT1hAuMRy+SmR7pykHhYeRr3/77JG9BLs7u1QcdPPOk8TNIZdVvm?=
+ =?us-ascii?Q?m9RY9SASP7jAAQsuxtc6VrtbJoQ7a3MJbn0tbJaI8oneTWcLj+hHz/vvg0tg?=
+ =?us-ascii?Q?SHj/p/SP9L8SwlhrBNGntMpM0P9HTC1e4KcIBn9j2Gh8MbDsO52OPVU8F09d?=
+ =?us-ascii?Q?nR5hB4Xn+9oFJlYMMazIqG0toMk3HGjV+8jyVIZ6DzFAxTpSTr5OR0sZlzkF?=
+ =?us-ascii?Q?UocY+7xEn86Spcg9xY9nsUPsWMZ2Wq/4W79One0pT1AilNOOv2P/xjPbSe/V?=
+ =?us-ascii?Q?k2w3b6XG20ERLubt2iUzuUbrxIpe6R8vOkJVFfXSnBxnysh4ZjNyPRDsC6+D?=
+ =?us-ascii?Q?eFoSz9msPf7wA0yqNS5HGrN64Iy8gvI2FnSqDGSjxVe7+eioigVsSo6CHY1r?=
+ =?us-ascii?Q?++5kPndlturjbi/ohyDzUfPQZrimzSJZl+feQ793EiochRCvqmsfIW1pRBYJ?=
+ =?us-ascii?Q?9AUGrlpU/k8drmARUTr1TJvXweS+N+ogc16IpXU/vjhZiN5X1WGQtuFm1Zpm?=
+ =?us-ascii?Q?k1JoasO1xgvTbSsvjDUAtUxnRBULlcIbZmef5XKx29YymfjsuPi4QRtjg7eO?=
+ =?us-ascii?Q?olm0eG8S4LaMD7mb909SA/etjFQkAkfSjn6M63KfXKdUFK1L5vNA1WNrZ/zc?=
+ =?us-ascii?Q?+NYXesiUEJQZJD9P4q5Bcegj9GA2ViG9VM0AEsBKlTpy9mxMH8cG3h4U69RE?=
+ =?us-ascii?Q?xU0FJXttYghEgQclK6pMuDUw/5TzMQw=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a42e2d2-312d-43ca-218a-08de7426f248
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2026 04:32:56.0652 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YwBlDuUB7X+33SsQ0s+Z1VQpQEsZhw7jV6wJz70JWfeg8IhliH7/ME2/EJUlBii1VjbVv9wzNQOehnjop8/s/enCQRJY004O1aVVK1aXUeA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR03MB7188
+X-Mailman-Approved-At: Wed, 25 Feb 2026 06:24:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,60 +165,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CTRL_MMR registers are firewalled at boot time, and TIFS unlock
-them as part of the system firmware initialization sequence.
+From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Current code assumes the CTRL_MMR space can be accessible at early
-stage of board_init_f execution by unlocking them.
+Changed MBOX_CLIENT_ID_UBOOT to be the same with ATF's mailbox
+client ID so that SDM can treat them as same client for related
+request. Otherwise, under some specific cases, like QSPI_OPEN in
+SPL stage used different client ID with ATF's client ID for QSPI
+exclusive access, then following QSPI access like QSPI_CLOSE via
+SMC call to ATF will fail.
 
-But on HS-SE devices, TIFS takes more time to complete initialization,
-and CTRL_MMR registers remains firewalled and not getting unlocked.
-Which results in any write to these registers are ignored.
-
-So, move the CTRL_MMR unlock to a point after the TIFS version message is
-received, ensuring that the firmware initialization has progressed and
-CTRL_MMR can be unlocked successfully.
-
-Fixes: 5e291ee34fd4 ("arch: mach-k3: Introduce basic files to support J722S SoC family")
-Reported-by: Diwakar Dhyani <d-dhyani@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
 ---
-Changelog:
-Changes in v2:
-- Moved control mmr after tifs version
-- updated commit msg
-link
-v1: https://lore.kernel.org/all/20260223144558.395289-1-u-kumar1@ti.com/
+ arch/arm/mach-socfpga/include/mach/mailbox_s10.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Test logs of v2:
-HS-FS: https://gist.github.com/uditkumarti/c66ecbe800b4b3549fec3e505fe26dbf#file-hs_fs
-HS-SE: https://gist.github.com/uditkumarti/c66ecbe800b4b3549fec3e505fe26dbf#file-hs_se
-
- arch/arm/mach-k3/j722s/j722s_init.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
-index 1180c75f551..32a3eed40d4 100644
---- a/arch/arm/mach-k3/j722s/j722s_init.c
-+++ b/arch/arm/mach-k3/j722s/j722s_init.c
-@@ -84,8 +84,6 @@ static void k3_spl_init(void)
- 	 */
- 	store_boot_info_from_rom();
+diff --git a/arch/arm/mach-socfpga/include/mach/mailbox_s10.h b/arch/arm/mach-socfpga/include/mach/mailbox_s10.h
+index 1a461de4819..0025ea2dbab 100644
+--- a/arch/arm/mach-socfpga/include/mach/mailbox_s10.h
++++ b/arch/arm/mach-socfpga/include/mach/mailbox_s10.h
+@@ -10,7 +10,7 @@
+ /* user define Uboot ID */
+ #include <linux/bitfield.h>
+ #include <linux/bitops.h>
+-#define MBOX_CLIENT_ID_UBOOT	0xB
++#define MBOX_CLIENT_ID_UBOOT	0x1
+ #define MBOX_ID_UBOOT		0x1
  
--	ctrl_mmr_unlock();
--
- 	/* Init DM early */
- 	ret = spl_early_init();
- 	if (ret)
-@@ -151,6 +149,8 @@ static void k3_spl_init(void)
- 	/* Output System Firmware version info */
- 	k3_sysfw_print_ver();
- 
-+	ctrl_mmr_unlock();
-+
- 	/* Output DM Firmware version info */
- 	if (IS_ENABLED(CONFIG_ARM64))
- 		k3_dm_print_ver();
+ #define MBOX_CMD_DIRECT	0
 -- 
-2.34.1
+2.43.7
 
