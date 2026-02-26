@@ -4,101 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B77DBFD9E1E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F56FD9E22
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F28A83E61;
-	Fri, 27 Feb 2026 00:45:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F87C83E81;
+	Fri, 27 Feb 2026 00:45:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ccVh2gnf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IDPXBPp9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8817F83E81; Fri, 27 Feb 2026 00:45:10 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 182BA83D1A; Fri, 27 Feb 2026 00:45:17 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A668983D1A
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76A1583E81
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-65c0891f4e9so2633063a12.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:07 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772149507; cv=none;
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-65fb991d7e7so1905628a12.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:13 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772149513; cv=none;
  d=google.com; s=arc-20240605;
- b=gL1NLsfGdaS65pyitIziHIEAB9sZDfTu6eSu1OFA8+M8hU4svPdRfxOlrglSo5ZO+1
- 1THIPpzqMYuWkEEgCgfdINDBXipbNHG895FHQRdEN+QM7VBeqLl+2/n3ZeUxLWDgoEoP
- KBco6PFwDtrmvH3T46BUnPoUKfxzje/pkW1E6RLQjQm57QCVyy1d6WY9R9V+zYuG57XN
- nRaTtUKQVTGIkQvm4/t/UcXZXzy+bCnyhRhAPB3myWXO/a9UIhz4m5DNdIGsFLtHfLIm
- /XxPKFzYY5wSkFVp73TDbegVRFArdack1+I7Es2Jgj8g4ATKNqlQot4pZq15dI9g6g38
- 6ZRg==
+ b=UP3c+QrpdW4p6K8A2rXBQf8STf+WNR+rTD+g9fj8cE5Z7dLq4T6pLazNTlJaMrBcOu
+ 2/3vCWjZAGCgTAJioqwaWpMJlZOLb0o7BMZgcKNLjLoMq1u/I8hQEvPITd8mgBGBonFk
+ xpSzPtk5QmBhmv6mLfOzeHN7vzgP/itByH11kls06Sln3N3yt/1hpQAHgwBjKUoWFejB
+ /QthPBy1OD4bWdX3ctgLon/AFP60cfIDHCQYy5erEichXulIb439e2kFdhqlh1sPoD3x
+ TjgWsjatjco8+2HgPM98do/yBsRiz2QzIHNUqlyHe49WtWOUtmQUPLdCvhYBvefCvjSI
+ Byhg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=xn75lOmn20KSMQzPcoN2xVPamcl2m/fsWDeIJ0lZAxk=;
- fh=mn5V3Z3EQoSFeSjXpIxLtWYvp4nMGxThUgcID4Uu8+w=;
- b=I3jGvZm+KT/vX8dbTkrbgQJkNM6CxaXAmbv27aMf/Xvp5QsfM2M0XEae5gunz0opUC
- KkmEOzG3vwz503usowKnHUIkDvCuEF6kwSlEtCEtz/zl48zigwewQKPaO6jzSp4FaTlM
- YGo5Rac0j35Gf8CW9UZj3JJ+62+4VNR4l3NQXo8vEvS9Mt+mvKiu1gsc+KEZtRSnPfNz
- QvfPAX7So032JUsMKWzXF7Hfw/33IUXJFH7qx2WwzvVPLHdL48OSIivEangE656xKh/Z
- T3XYZtRlRDtjnDDiNT9TynePTJsa0XVWqR0/hWP19VUFD07RIDqPJ5kh+CBXec463nBq
- bAOA==; darn=lists.denx.de
+ bh=SAVeAYgdZXdNLTYhp4QFsstqRj+a7+DivGGUpyy3Iq4=;
+ fh=EvbwqM8qZQ8pYolidgKb990duOAN85ANGMYxkqo3GNU=;
+ b=XedoWHRhPrzoaC6zhqGGhLrSvVmLl78cqYn/od0Sj9sWJ76pDwIO2f4+F+6TE6pyUN
+ /XJm0NMuMwCSp9n/urZeklzfnbp/NbfxlC9cnX193hMhJS93PjJ14T10TOpKmv/S7eNT
+ 2YzfwbVeWlnEHerrDEvMw9JUHbhJp3XGOMGm2N4K0SnN4n8mx6o31/8XOn2WMvAOpv3A
+ Vqc6nzcoSlC+pYYrYuXJMy3rU/ay/BqIaXDno3mYKaHKSBLcpXhW0EvL6JPCKNQj3tt3
+ 13HVEYvJHhZ7irKLaesw2vGNpX34SVpot0fDOMQQXJlp1QE2s2CD3ZqQjcoUe4YpT2Nr
+ p92Q==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149507; x=1772754307; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772149513; x=1772754313; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xn75lOmn20KSMQzPcoN2xVPamcl2m/fsWDeIJ0lZAxk=;
- b=ccVh2gnf1+9/FGZEeyKZ7yje/QXa8wPAdNuavHi4EYAxz0IGRWxJ8etoVAFPkjqR1W
- k75ftRe+THRdaKyD8YjX9h4CzHgicpSMwW4Rd3xnBZHY79TX7mGVzX1VJ+Ywj/C3p5/4
- tcL3d6phyqgvBGaCo70YQKlOvZ2jrLWWtZAo8=
+ bh=SAVeAYgdZXdNLTYhp4QFsstqRj+a7+DivGGUpyy3Iq4=;
+ b=IDPXBPp90m7vxjaLvrqOCHcqA6/OS+SwblRSR3UO9es7aeWoFwuh/+liUkMlOdUW6O
+ +M/a74ZyNnB4P4FK9sCTcY5yCH5kmJnoAlf6xSLa1+a8j5Ogc/lxIYYb4XZJ0usnCFcQ
+ Ck6e9Hztpnm7i/ccK13CrqxRn5+AMYYJT529Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149507; x=1772754307;
+ d=1e100.net; s=20230601; t=1772149513; x=1772754313;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xn75lOmn20KSMQzPcoN2xVPamcl2m/fsWDeIJ0lZAxk=;
- b=LIn2CeT6Yk8BIi8y2dswf01LVSdmJ/3ehoiG0PRCPtqkyDr8D5Q2E5yIFhuoKgpP/5
- H+GUffH2Vx5BWolhRK7KGhlNr50lwphX9bnjUpm1mWQgBY9lZxmI14NIlLirAWlFaGet
- I36g6/F85u1cLWaY/4R6tBmVD3HkbtdnFgp24+6bIjG5KWzXQLEfwD11G7UClKSPMJVv
- hwuU7M5CYJlUD9DiJORJl4NZT+8EZYSx/2lQ9/xbfvUhloaww0opSwYolzEXUEChg9Ds
- d2kapcXEzx0woZ9ayRA0wKBnuk4YzOj1PRpxq3rgDzpbPxSqQwi0TdCrcrKJGn+J8Ifz
- vf0Q==
-X-Gm-Message-State: AOJu0YySTt86loKuKQMDVbPPn13jZIxXZnLEzA/mnRYRjofmb/J/0Xoc
- 8/GDfask+wOVUAnbD7mwjYubKlT/KOzfHOftNNcn9G6ZcWtgNx6AtCDOnbZ3vVBYhqR+scRRD77
- Ji029psxvMqI+e6nhUC9joDsFR9aRr0N7yQrWrl6M
-X-Gm-Gg: ATEYQzwZrU7ZuSNO+2027rUMJDOa18zj1QewznL/uQojxuZqRZhm4xjbjp9C/OaDZK8
- lbI7hifAx1aiG8nwTLZKI3bS/6M4CiNw544rS05hHRvdmdzR4ki9LT2nvNbU6UNQG2Zgf7HKc2L
- g4FtnTGAec4azc5oE0lqP8f7ygP32n+sztfiLbrTG1gRDyXx3sDPNV7cFC57zxYDRMYwEr1Tvy7
- wAovWA4QZ9ymsMr6C7HhAE6Gou4iceFtesgYPwkDjuyNtr+r3/HDNyw+4KBxrApY9/Rslvk0jiA
- jMlCQ+GSpoiIsBGY
-X-Received: by 2002:a05:6402:5211:b0:659:4295:970 with SMTP id
- 4fb4d7f45d1cf-65fdd6d7431mr664108a12.8.1772149507129; Thu, 26 Feb 2026
- 15:45:07 -0800 (PST)
+ bh=SAVeAYgdZXdNLTYhp4QFsstqRj+a7+DivGGUpyy3Iq4=;
+ b=P3b/8qKDwz+MC73YVqTT2OQSS8G3bhtMdFR68SdMtud3PhuAKafN6W+m/UFYmjRnXD
+ a/1Mhc8cjVQEI1DiVfP4OrAfUkO9u2j4iP2/ZZ2XU28B6SEvB4vZ60+ky9WjOHcm450i
+ JIpcU7M+AY2H3APxtVvtuUKkVzm26NhLMC1Z9cCBVlvMvJiac/I85oA+nOl5UnLbmDVZ
+ nHqB5E7BOqZPU2qN0OBTLRTsOR7DfDVEfKA0DysAk0VBXmI1KvQot/iV77KKLLPuZbPQ
+ Q3msfWEHfzUTzOiQ2ViBgqgun8brVaNqInbZCoi4HiR0eInTMxv45B1naxpNcSi6vScu
+ FKWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX7aJ8ZemyyPwtyGDppBir/TWO+huBocLOKh8tIDc/St8jM8hZSjFd2xQ/ikbqPwQinOT7TpLw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzL1IFoJuQDwXWIUh+w4Jy6P/c3eWyZYe6FjucSPzzueo3MqNaL
+ lhWLUeDfylIW3ykeH8PpDMZxiOMd2tb7HMEPJohqIJQGyGaRRIdRJzSuH5E/xUFwyDXKw13OQuD
+ 7RFqs+r5ul9BJGydNfGdW+gAEo5g+hLUf+yDVOIU4
+X-Gm-Gg: ATEYQzyUh8lLJtjOHs43V09FQ8zqIRh6dJ8g1fLFUX0wPO/FsPVHPCL/GexonAAYiU2
+ 8iiuq8wNGk+qXhxFtjfkdvUpvIweRDKjzUNN5OFPNsMTyN0N3JD0J5dcPdhUUZUEn7oSphEGZxF
+ 30oHfpUP6UmolAD5t9/D6Uq/qgHmyjieapCPlK0M/YPTX6PMjWho61C+JCzks58mIGDRkF4dBdr
+ EaRrbGTA1M5Gbt8CR2kr6zyqHU35+njgcl1A2hMuRSIzf+EoJStNze4LadUJPQc/U23Wlqrlugk
+ 8Laiaw==
+X-Received: by 2002:a05:6402:42c4:b0:65f:82dc:f127 with SMTP id
+ 4fb4d7f45d1cf-65fddcfa881mr738114a12.17.1772149512821; Thu, 26 Feb 2026
+ 15:45:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20260225225040.2568118-1-sjg@chromium.org>
- <20260225225040.2568118-4-sjg@chromium.org>
- <647a1ce4-66c1-42f4-8841-69828cd665d2@cherry.de>
-In-Reply-To: <647a1ce4-66c1-42f4-8841-69828cd665d2@cherry.de>
+References: <cover.1771275704.git.daniel@makrotopia.org>
+ <20260217174617.GD2747538@bill-the-cat>
+ <20260223193219.GF3233182@bill-the-cat> <aZ2SI0rKuMEgSq1F@makrotopia.org>
+ <20260224172444.GA3233182@bill-the-cat> <aZ8IXfm1TEPMqb4a@makrotopia.org>
+ <20260225221611.GX1593142@bill-the-cat> <aZ-KgxENCGLR73lf@makrotopia.org>
+ <20260226184512.GL1593142@bill-the-cat>
+In-Reply-To: <20260226184512.GL1593142@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Feb 2026 16:44:49 -0700
-X-Gm-Features: AaiRm522yV7DPAuKoYe3XRY2jrbxLdnFiPk_TYGPZoMjS4f2VDz3WTiN7Bblcik
-Message-ID: <CAFLszTjcJc_WNRfz7h_rxAKkY-UoUAYD0G1PZh=eNccjBPGqoA@mail.gmail.com>
-Subject: Re: [PATCH 3/6] binman: test: Capture output from tests with warnings
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
- Alice Guo <alice.guo@nxp.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Aristo Chen <jj251510319013@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+Date: Thu, 26 Feb 2026 16:44:50 -0700
+X-Gm-Features: AaiRm516RSkV2OJ7eOip7k2a2G1Ih2TprbME6Lcb0_j0lZZec1we5vvElAsy_nI
+Message-ID: <CAFLszTjV5PK4OEz4Ry_n4KXp_PNy=D8tLK+2CZJyY0RqDnX84A@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand FIT
+ loading
+To: Tom Rini <trini@konsulko.com>
+Cc: Daniel Golle <daniel@makrotopia.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Kory Maincent <kory.maincent@bootlin.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, 
+ Aristo Chen <jj251510319013@gmail.com>,
+ =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>, Yannic Moog <y.moog@phytec.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
+ Frank Wunderlich <frank-w@public-files.de>, 
+ David Lechner <dlechner@baylibre.com>,
+ Osama Abdelkader <osama.abdelkader@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yegor Yefremov <yegorslists@googlemail.com>, 
+ Mike Looijmans <mike.looijmans@topic.nl>, Weijie Gao <weijie.gao@mediatek.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de, 
+ John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,44 +140,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi,
 
-On Thu, 26 Feb 2026 at 09:44, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Thu, 26 Feb 2026 at 11:45, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On 2/25/26 11:50 PM, Simon Glass wrote:
-> > From: Simon Glass <simon.glass@canonical.com>
-> >
-> > Tests are supposed to run silently and capture any output produced.
-> >
->
-> Fair enough. But how about making _DoTestFile() and other various
-> function calls actually eat stdout/stderr by default such that test
-> implementers don't have to remember doing that?
->
-> We can always return stderr, stdout to the caller of _DoTestFile() if we
-> wanted to be able to parse the output.
->
-> What do you think?
+> On Wed, Feb 25, 2026 at 11:49:23PM +0000, Daniel Golle wrote:
+> > On Wed, Feb 25, 2026 at 04:16:11PM -0600, Tom Rini wrote:
+> > > On Wed, Feb 25, 2026 at 02:34:05PM +0000, Daniel Golle wrote:
 
-It's actually quite painful to develop tests when output is captured.
-You cannot print state or see errors. So I try to capture it for the
-smallest possible code area.
+[..]
 
-I did actually add a 'patman test -N' flag to help with this but have
-not plumbed it into binman. I'm not sure if that would make the tool
-even harder to develop in.
+> > One thing which I'm anaway not interely decided about is whether to
+> > build fit_verity_build_params() (the function which reads the dm-verity
+> > parameters from FIT and generates the Linux cmdline arguments from that)
+> > on top of bootflow_cmdline_set_arg() or to just generate the whole
+> > string and use env_get(), env_set() on the "bootargs" env variable.
+> >
+> >
+> > Not using bootflow_cmdline_set_arg() would also mean that in the case of
+> > bootmeth_openwrt nothing would be using it, and that would free 688
+> > bytes, while fit_verity_build_params() might get a very tiny bit larger,
+> > certainly less than that.
+> >
+> > The thing is that it looks to me like bootflow/bootmeth is meant to ignore
+> > "bootargs" and overwrites it just before boot. On the other hand, having
+> > a generic feature such as generting the dm-mod.create=... Linux kernel
+> > cmdline parameter from the values stored in FIT depend on bootmeth, or
+> > even a specific bootmeth, also seems wrong.
+> >
+> > I'd be happy to hear your opinion about that.
+>
+> It should probably exist outside of the bootflow/bootmeth code, yes. As
+> we start expanding the real usage of bootflow/bootmeth we do need to
+> make sure that it's not doing things that violate user expectations, so
+> I'm not 100% sure if we are or aren't doing anything odd with bootargs,
+> depending on the flow.
 
->
-> > Fix testRemoveTemplate() so that the message about the missing openssl
-> > is captured, along with the invalid-images message.
-> >
-> > Fix testNxpImx9Image() as well, since it is expected that container.img
-> > and bl31.bin are missing.
-> >
->
-> Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
+We do have 'bootflow read' which reads the files and sets things up
+ready to boot. Bootstd is designed to keep the bootargs env var
+aligned which whatever is the current bootflow (bootflow select).
+
+But yes, it is useful to be able to do things 'manually' and we should
+try to avoid something which is automatic but cannot be decomposed for
+debugging, etc.
+
+[..]
 
 Regards,
 Simon
