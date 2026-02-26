@@ -4,138 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B56DFD8FC0
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 14:54:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31FC7FD8FC3
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 15:08:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B60A83E88;
-	Thu, 26 Feb 2026 15:54:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 713FE83D1A;
+	Thu, 26 Feb 2026 16:08:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="irCYgaG8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gHyg2brX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2FC783EB3; Thu, 26 Feb 2026 15:54:05 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C3F4F83D8A; Thu, 26 Feb 2026 16:08:48 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B99FC83D8A
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:54:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id A7C4A83AA9
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 16:08:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dLyiYjPtx6+WClJrBAPU+35HIycxHSrfEA+TOWiXCIyZhDX1H6QeAd6UJ8eoyAtCcb8pJQL7WOuzIpxMMZRfYzg2yWBuWae0wBiKOzkGOcMW65aMBAvw3t6mYR16xExzpPNmrxdyQbIykFf09mRZ8MxVaKyW0ItwefubewrEv0thQDIkRoGyn35qk60IaVSTlJjR1uAcWyylcRquKsjkTei4LcY95JpYmbLgEAPlZSstPACgLTwGXp2BcTGVAm1EZLeFjcKrsVw5hc9yjJdEVRhchRit7I6Ep3RX3q+LEfTvvZw8TaTDZ4EC6qbT0MB0wHZWgTJz6UMo8W68Rmarcg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lDyCMTQpkmT791FhJAYPQkhlEYXkuK+Nu1p5y40ihOY=;
- b=DOc65Ob+nEGNxxl1OMS2ZetcfvfvN3/27chp5hIic3kQyZuwDFjx0L1xuDOa+rX9V7wt/fvkLjPJhWYWlRXtWzkaseYhCtqV+9B6DXhUSa3N9iRi9q3i5au3D9gwin0pLyY/y4Qh3ILjzrsDlLnZyhhnBIJ6uQ/C3DJZMhb1FFNtM8eTlZVkOABHcfouUFFS9hRc7+JLBlYoaxFynMp+7bMQ+xA9QOKEYrom1diNPRArNhye2UB2+/YUdNy9WggooZiwqSagYAhoxiCc44h66Ob+SdOdznrOsXkjxMpSVevLc+PD/lBWQnCQy2PkcJAeM77C2QvpdQgtBs+nVIggBQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lDyCMTQpkmT791FhJAYPQkhlEYXkuK+Nu1p5y40ihOY=;
- b=irCYgaG82GFNSLiD7TTeNn9g0efaK3IOIwBlUROG1FTbjESmY/hqOGGXgQoWFQXxTpANu3JxFvqoj4C58iFp0QCiYnO4tmcw2tA62FwA1YZ5t2oroxq0pPF/y1k6sqtfmbc5ZVphY4lccZBCXLBDAoqu20Eqe8w0WVVsD0Mq8eo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by AS8PR04MB7621.eurprd04.prod.outlook.com (2603:10a6:20b:299::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Thu, 26 Feb
- 2026 14:54:01 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.013; Thu, 26 Feb 2026
- 14:54:01 +0000
-Message-ID: <8f18322a-e269-4839-a178-6cd2bf4aa488@cherry.de>
-Date: Thu, 26 Feb 2026 15:53:56 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] boot: don't select non-existent CONFIG_VPL_CRYPTO
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de
-References: <20260225073711.51688-1-heinrich.schuchardt@canonical.com>
- <ee169196-69a3-4003-8531-0ffa4e76bf6b@cherry.de>
- <e9d98d0b-578a-41ef-9440-00ea615d224d@canonical.com>
- <d00103df-8188-4039-b618-dc48ab1c1a39@canonical.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <d00103df-8188-4039-b618-dc48ab1c1a39@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0135.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:97::7) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d4c12ff3d5so908680a34.2
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 07:08:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772118525; x=1772723325; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ybwICn6/Djdi5RRSxG7lM5Rsg/aKl1PC4sz2K/nI6sY=;
+ b=gHyg2brXg7vfmZGgtJWAR4I3OJ4Q75lGaVyE64f4sjMYi7lusArh6and25VKaBCZB9
+ mXWdqgnbn7muvNm6c4Xgrg5Ftu3R33hlHvDPMPt72ehCG9JirFJU/zwPgph4yoc/undn
+ vWuMBv/jQv6S1+FoSwfZRzMAktYwfdZmQNoBA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772118525; x=1772723325;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ybwICn6/Djdi5RRSxG7lM5Rsg/aKl1PC4sz2K/nI6sY=;
+ b=b6vVTYGUcdxS7jqim6XNM+KrVsZ1rUkj/g2+04yP/K7N4Ay55zdkZy82r4Hu5PWOZ/
+ 6mIIxqZEh8PL5BwKT3uxIuDb1j5t4Z7vDr2Nr5Sp1eTqaZoSH8M9QWQgVOXJfzD8SZLG
+ pqMbAitNPmTRE5tyDeIhXnDE0Va+4teApy6omGMl1s6aC4FxY1ulJFPOaQXnOPXFe71E
+ BHQ4t7gXo7NNazVvpgGBBwy9xCRJu35LTeKgUpxk4ozSoPDrDPVKS8I1Yytdxf6ONZsk
+ dGkesCZggp40uItWPSeemkuNWmNd3rkaanot8iAxexL4RZWt1gZnYXYf8qC0+szvA+vM
+ dNOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVfKVGEupTwksWmSDXzn61zuKomT+9BWeGWTqErYbv+EqZFAHEiiwYSXEV0qHXV4lgvpn8dDSE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQ0EjUOSuyoC8DzpLa/Z+wkPIKwaZ/Rllwkfmnz9PONKjwkIFB
+ 0VIejumstBUIZwv8b7Yeh6CxMeOZAJ0H9ace7u7FA0L2f/IW0XP+RDbQBzWwo23RAjs=
+X-Gm-Gg: ATEYQzwfKIEKOsATkQ7D9un/rieZmAet5Svo1fKzxNt3mmKGwOTbpsusGAZphsGB6Ct
+ onLU06d+WNiMFtqjtHZDTUYurhHHeDHekcJugQX9657r67i9HaB/tvogfjFNm9ULS2aTE8RH5ID
+ 2klAhA7qRu9yPTaXs7INZdAveTaxWWaa4S2PnkT/HYx09fJImkxk2qp954zl2JFzro/BQv2/kFq
+ ltsl9OYdVriC6kfmmYzQOIuxMd9m9kTncfs/i8Qr6FqAop6HfXREw0WsL7z1ON+q54X+dCbO5WH
+ EViUc5qc3oQWHLXTi87Vqljd8QzwJGWFeQfUNF3ZTyWOfB9ONrUyS2yn9YCudrKb2Mn4ftPgVG5
+ RidpWmCqWTDjvQ4cVmLHP2yln7b+GMCZbO+7zKJA3onBTl+xgNb4EuwgtbsAh97lkAw5bdmLJ+T
+ vQcSfyt4YsMuzWEmF4NhChAZ/ERg7c2cbPti9FW+kY+NayKEcSiha/9k31d6PNF59KBsWn2QeeN
+ /kft0+yj+ubHN1u3TeacjCpOU7y04zXyNV9/dbvLHLQXHSdYYY=
+X-Received: by 2002:a05:6870:8a28:b0:409:7032:6872 with SMTP id
+ 586e51a60fabf-415ffe94a51mr2468366fac.53.1772118525262; 
+ Thu, 26 Feb 2026 07:08:45 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4160cf23977sm2016760fac.4.2026.02.26.07.08.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Feb 2026 07:08:44 -0800 (PST)
+Date: Thu, 26 Feb 2026 09:08:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Nikita Shubin <nikita.shubin@maquefel.me>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Aiden Park <aiden.park@intel.com>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>
+Subject: Re: [PATCH] serial: ns16550: Fix return-type warning
+Message-ID: <20260226150842.GE1593142@bill-the-cat>
+References: <20260226-serial_ns16550_fix_warning-v1-1-ea563e6a26e4@maquefel.me>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AS8PR04MB7621:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9fb29a32-c320-4eaf-cbaa-08de7546e088
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: pXdFiSDLCs4jnvQnmuRK3mXYr3ZAOiJC0sBCsizSKE8OUtfmHqW4q6Ckjh9kpisy+2N/5C6GZPpV+BJvt4tmNeFAo7+FQs/MOX8Z6Nm/2lm7qTM+3lxSf2TsvE9g96W2RkE0rm2EtmehGtffI41viYveNq2gytMNULsNNMWx6Oz5i2wIb/aLBusLcn4LUF7/YqhOxsGMYcGp7SM+qlY3zVJoQHdGy6BijAP9jkCZXzMDPb8d+7szxG0yrDhEoYWf+V2n6E5VAg3IiFqxe+3ZDCfg7pBZKVu3iwilRbNV0lKB6KgZbnYinCsPiTWiRx30cB8CBGfi5ga7NMwcJDBwy4zpDRPRXIZBm6b/2bAHjhc4K8cqIDcD6/bK4pJZSnmweQLz9POv+AtNEm4VqnUi1q+/p+NDvDcuFQduB3lDkQ+yPoZF9Ugyb2CAKlb3dwtCWaul9uL1eghuBbX9Cg7LlopXt7fOJqu0eeftDDjNmPFoYYGMagLBU7ddPbiqNiRr1i9czcvNXOSSxMX51js2KG0DLEnaSGwOxHqC7h2Bmn3zgHRTyzwbGOsmjAG+YyEKhR7xZ4/Qw21m9D83slgnEufMfbAPgWHIiNEl89+JT94O9yZa/Vn4HIgJJHOo6ps5ETnq3+WHIiNUtv9VbyDC6Wrt1Bx8L2fpjh7S9FjY15WK3ZmrLmQcNZ9jy+76Z2zp5IQ/047HtpHVI/4ZnunGzkGq0G93qH9xiz3Ew6v4zJw=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d3E1M00rbG4rSDV3aEIzSTNMZmxzY0JqOXh4cEhGcVp1N2FMSGNuWTVGT0dU?=
- =?utf-8?B?bHZtVy9jRXptR0ZsTms2VGptZisrNzZYOVlYT29xaXQxdEFIUVlxTlR5YXdD?=
- =?utf-8?B?UjRrL2x1T2hua0UyV2JFYW5kMmFmeGg2VTV2M3lxN0hsMmQyb2tOa2Fxb0kv?=
- =?utf-8?B?Z05zelRXdXZUZ0pVc00xdzhDOTZ6ZXRPWXhtS3VubHJIL0p2cHluK2t2UElw?=
- =?utf-8?B?L2VoUGJNN29rMUZBOUlGa3I5UWpqSGZJallZL3JzUmd0Q0x1S21oalBXSlNJ?=
- =?utf-8?B?QUJsQTNUS3dSOW5PSVc3ZXdUUGJERXNFR3ZFRFV6dWNLeWt5bUFqMlhzRUpG?=
- =?utf-8?B?STkrWlcxRUJTemRnWVZEVWtQV3Bsbm5RRlBDcWZ6Q3c4S1Q3OWx4TzdJN1FY?=
- =?utf-8?B?MGNmbjZwZ0YzdlFJSU1GWW81S3Z2NFJsK1FjMStPbW1ySldiMUFzMjhJamYx?=
- =?utf-8?B?S21xcDBCQWVJb0FlbzBxdkx5OWcrdkMvbUZBYzVqUTBnSHNHdDltSHFQNFli?=
- =?utf-8?B?V3B0b25naE1lMnBpYUZWQWtVS3cxV01lL1RxNkwxYVlRWThYREU2dHZmbUtz?=
- =?utf-8?B?azdBZnJOV2xKSmVIQnhPRXNxK2l4WHZTNXk3Qlh3UnlDWXp4bmk3dzVnYWg0?=
- =?utf-8?B?S1hHcVVvTXFQVVNBcGoyZDBRUkhJcVpNaU54dlBlczkyRGtBQ09WZFE2MHBz?=
- =?utf-8?B?SVdTN1Myc0poY1dWT3JKQllpY3Fvb1IrMzljWW1JcW9UVmRwTWFVR2ZxUm44?=
- =?utf-8?B?dGxOTkovbUZPWUpxTzhwZDEvWHhhL1VMZHBwYVl3akRTTWR0VnJidlRvSlJk?=
- =?utf-8?B?TThwZmJJMmpxaVptalA4QkE4bTFHQmNrbUduem8vRGdiakR6Q1M4ZG9ya282?=
- =?utf-8?B?ckxCRm5KVnpUS2xraFhpNEsxNzBqZ29xd3ExTWZINzMxdFl0cjJFSHdDUXRt?=
- =?utf-8?B?Mlo3RWVIcGRuWWM4bWJ5VnI4NVdxOGl3KzQvd0dHWVI5c21RcXBBcHZGaFN6?=
- =?utf-8?B?emRhT05TOUZoeWRUMURNODd6VXBvK2pjUmN1emxVYTRGUjNBT2dnQWF6Z3JZ?=
- =?utf-8?B?QnpKN0xRNG5GT0luSnpmZ2kxRlFVbDhqQVc4Z2ZzcHlXTEVIWUV1YTA2THl5?=
- =?utf-8?B?bjdQRjVhK2tRM2pOLzcxdkp2YUFqams3dEFtbG11SnR6bzBYS1lIbEswTVhZ?=
- =?utf-8?B?MEl5a1Jyc3FOSDgrWmhUU0gwMFdLZmZwc3ZXdkcwTE4vcC96Sjc5cWl6STVn?=
- =?utf-8?B?TE1kbXdEekxDM0hmMjFVRTd2Z29GaEZaQ3lpNGVnRWNJZ3JaR25ldzh4V0J6?=
- =?utf-8?B?OXljbUQvVTRKTGh6cUdORUlhZmtGTTJTVEovakpCMnNYV0g4TU1zSmQwYlFn?=
- =?utf-8?B?Y2tCZTI5SUcvRG1TemhmUkx4NXVsMHp2eW1vbFZybVdwOG9BaUlNSWNOY2gw?=
- =?utf-8?B?Z1dQKzdnWmdSZlM1VlNrUGFYSVdhcnRjNjRvU1FWdjl0Z3ZYVURlckUxemg1?=
- =?utf-8?B?ODErMlBoOWRiZzhOVHFGMnJpTmdrTG9yYXJaTTFvSDJabkJIVTJ5UWd3VFli?=
- =?utf-8?B?S3dXOGhSL1RudXBHWks1TGdyVWh1TGFOZEs1ZUh1Ym01cER2d2R1Mm9ia1dz?=
- =?utf-8?B?ZHBCazZ6azRBV242ZERjZXBDcW9BSVJrcUpxSTJJTEtUWC9ILyt2OFFRdGVH?=
- =?utf-8?B?R0VQcExpdThYNmZZdmxHYTREMkdUN1UvMXZxd0hXc3V5WTV0QVZUcnNYY3Yw?=
- =?utf-8?B?RllBREFRbDM0T1NhVkxTaGlVWk5NOVVsNjZTdFNYQktjSnB4VklDRVJCZjh3?=
- =?utf-8?B?cmdFOWdlTGNQZnVGWEtCRGt1d1ZoY2I1V2J5YzBKdlZJOHdNbUVLRWZLeHNJ?=
- =?utf-8?B?Nm9EUnRlRWZRejhFMVlrd3RRc1JtUHlLRTZic1dUYXRteFVkNVlnTEpyd2x3?=
- =?utf-8?B?T3dQbmhVKzhxYzl3UGh3RDRnQ2tFRGFzL1hCUW9iMGM4SlNKeEpOSEZjTjFG?=
- =?utf-8?B?M0p2akh1QjR4NzV3YWUxTFE0VUswYjBXbFY0QWFhSG4zQXBvT0xZMFRLZEoz?=
- =?utf-8?B?Y1I0VU90eGVISEwrRXlWWXBNM0YxSTJIbnVvRkFzUDl1MS92eDllWVB2a2sw?=
- =?utf-8?B?UmQzaU5rV2V2RkNWd3AzWTMyOU91cTFLMmtGY0Fzd3hXOXFlY2liWk54Sllo?=
- =?utf-8?B?eHMvR0tkVTc1VW1Vb0N2aTB5U2pVQ1FNWk9CcHc5cVJ2YzU1dzkya3czcER0?=
- =?utf-8?B?ekVyLzFGdk9TZXhsSUUwNTJXYjhGenovTDViODRZS0VxbzlLQkNtR3luRnJa?=
- =?utf-8?B?MzNUWE5JdDVONTZ2WDA0NlhwbWFjdzM2YlRod1kvVlgyYjNZL0cyUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9fb29a32-c320-4eaf-cbaa-08de7546e088
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 14:54:00.9761 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: a4IcVMpCSc8GfFANW6mEpVM/+60Tj4GbTuqug6/P9uQ2nhDtqsb58h2aar4Hp1DQoT4K0PH8ITysO34D71nKVc0FKAKuVveU9OtN3y5im10=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7621
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2dCL9ESU8V/d9jZU"
+Content-Disposition: inline
+In-Reply-To: <20260226-serial_ns16550_fix_warning-v1-1-ea563e6a26e4@maquefel.me>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,61 +101,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On 2/25/26 1:21 PM, Heinrich Schuchardt wrote:
-> On 2/25/26 10:06, Heinrich Schuchardt wrote:
->> On 2/25/26 09:37, Quentin Schulz wrote:
->>> Hi Heinrich,
->>>
->>> On 2/25/26 8:37 AM, Heinrich Schuchardt wrote:
->>>> Symbol CONFIG_VPL_CRYPTO does not exist.
->>>
->>> Correct but I have a hunch this was based off of SPL_FIT_SIGNATURE 
->>> which does require crypto support, so I'm assuming VPL would too.
->>>
->>> But this symbol indeed never existed, and even if it did, it wouldn't 
->>> compile anything else as far as I can tell since drivers/crypto is 
->>> enabled by default in proper and only if CONFIG_SPL_CRYPTO is set for 
->>> SPL, and only SPL (checking for !TPL and !VPL)... so something feels 
->>> unfinished with VPL here to me.
->>>
->>> I'm not sure we're improving anything there but I don't think it 
->>> makes things worse, as such
->>>
->>> Fixes: 4218456b3fac ("vbe: Add Kconfig options for VPL")
->>>
->>> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
->>>
->>> Thanks!
->>> Quentin
->>
->> Thank you for reviewing.
->>
->> There is a symbol CONFIG_VPL_MBEDTLS_LIB_CRYPTO that might be used but 
->> then VPL_FIT_SIGNATURE support would have to depend on MBEDTLS.
->>
->> Maybe Simon can inform us what his design intention was. Adding a 
->> defconfig actually testing VPL_FIT_SIGNATURE would be helpful.
->>
->> Best regards
->>
->> Heinrich
-> 
-> There are more non-existent symbols implied by VPL_FIT_SIGNATURE
-> 
->          imply VPL_RSA
->          imply VPL_RSA_VERIFY
-> 
-> @Tom
-> I wonder why the VPL feature was suggested if it was never tested or 
-> used. Should we remove all of VPL?
-> 
+--2dCL9ESU8V/d9jZU
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-As far as I remember, VPL was a necessary step to add support for VBE 
-(Verified Boot for Embedded) that Simon was working on. I don't think it 
-got realized entirely (upstream I mean) which may explain the current 
-state of VPL symbols.
+On Thu, Feb 26, 2026 at 05:02:47PM +0300, Nikita Shubin wrote:
 
-Cheers,
-Quentin
+> Fix compiler warning:
+>=20
+> drivers/serial/ns16550.c: In function =E2=80=98serial_in_dynamic=E2=80=99:
+> drivers/serial/ns16550.c:153:1: warning: control reaches end
+>     of non-void function [-Wreturn-type]
+>   153 | }
+>       | ^
+>=20
+> Fixes: 62cbde4c4e46 ("serial: ns16550: Support run-time configuration")
+> Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+
+I assume this is from gcc-15.x ? Thanks.
+
+--=20
+Tom
+
+--2dCL9ESU8V/d9jZU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaBh8gAKCRAr4qD1Cr/k
+CqiCAP9akLuZCTfYRNbTdrMLfO9gBF0YpvK/w/t6nUBcm8uxsQD/eYIyaPrk1PzA
+TEZ5+T/YlvjAwEJuRvjJJQN0KZyXhQc=
+=q5PN
+-----END PGP SIGNATURE-----
+
+--2dCL9ESU8V/d9jZU--
