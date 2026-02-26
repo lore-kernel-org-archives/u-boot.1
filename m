@@ -4,125 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F56FD9E22
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2B7FD9E22
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F87C83E81;
-	Fri, 27 Feb 2026 00:45:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7BDD583EDF;
+	Fri, 27 Feb 2026 00:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IDPXBPp9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I6TnJLKb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 182BA83D1A; Fri, 27 Feb 2026 00:45:17 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id BD8B683D1A; Fri, 27 Feb 2026 00:45:20 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76A1583E81
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89E1883E96
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-65fb991d7e7so1905628a12.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:13 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772149513; cv=none;
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-b90bc00578cso216381566b.0
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:16 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772149516; cv=none;
  d=google.com; s=arc-20240605;
- b=UP3c+QrpdW4p6K8A2rXBQf8STf+WNR+rTD+g9fj8cE5Z7dLq4T6pLazNTlJaMrBcOu
- 2/3vCWjZAGCgTAJioqwaWpMJlZOLb0o7BMZgcKNLjLoMq1u/I8hQEvPITd8mgBGBonFk
- xpSzPtk5QmBhmv6mLfOzeHN7vzgP/itByH11kls06Sln3N3yt/1hpQAHgwBjKUoWFejB
- /QthPBy1OD4bWdX3ctgLon/AFP60cfIDHCQYy5erEichXulIb439e2kFdhqlh1sPoD3x
- TjgWsjatjco8+2HgPM98do/yBsRiz2QzIHNUqlyHe49WtWOUtmQUPLdCvhYBvefCvjSI
- Byhg==
+ b=c7pkR6Bv8khuyiygzF9elNotYg1tq4MKCUxb34JIP78AKIJt8uKqJqiHbNf1z9NxDS
+ D2vK0mHyhIVgx3naebdO5dnO6p/+TnY3bH+FpdXnVHeWecEUaXWj5DvRScPptWAnLmj8
+ pX5yzEXSvVN3YGjsNIFq1vXCHf4JAUD7gHeySqGIelYBvIVNo1NPi0EJQVvha4l+iGfg
+ /fOa21ZSRs9ZFHxyw+rYxy3CIu4iHYOldlPlSgk55/LNNLw4zHg/NFCIwn1lRmKwfl5f
+ ErAkiI0uGHxBXiXkFYTWk88hAkttOM2S3IXEJW17hxtbHUdx2HeVjuKtQCwervZSF/74
+ uSHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=SAVeAYgdZXdNLTYhp4QFsstqRj+a7+DivGGUpyy3Iq4=;
- fh=EvbwqM8qZQ8pYolidgKb990duOAN85ANGMYxkqo3GNU=;
- b=XedoWHRhPrzoaC6zhqGGhLrSvVmLl78cqYn/od0Sj9sWJ76pDwIO2f4+F+6TE6pyUN
- /XJm0NMuMwCSp9n/urZeklzfnbp/NbfxlC9cnX193hMhJS93PjJ14T10TOpKmv/S7eNT
- 2YzfwbVeWlnEHerrDEvMw9JUHbhJp3XGOMGm2N4K0SnN4n8mx6o31/8XOn2WMvAOpv3A
- Vqc6nzcoSlC+pYYrYuXJMy3rU/ay/BqIaXDno3mYKaHKSBLcpXhW0EvL6JPCKNQj3tt3
- 13HVEYvJHhZ7irKLaesw2vGNpX34SVpot0fDOMQQXJlp1QE2s2CD3ZqQjcoUe4YpT2Nr
- p92Q==; darn=lists.denx.de
+ bh=xtxulF8U1JxZghy+56MvkPSqIJxSkt90cwA8ovzGAJk=;
+ fh=tTrm+NDWZ+bKYNPm5ycZeumOFFfXWCXTLR/O1kyndk4=;
+ b=jFx3gwqSf0xPLLG1lVPCJdhldUc1Klr8RUFFGERhUBwYZ5AzQCaf+x9Jk2YhINXdit
+ /1GHVPGWKnQxNyiiNKPPofodlpuyyqbInf3mMGm55j4rVYFtHnNtnFH6ep7rPo9YGkKV
+ s14H9EHIKki3CXlOpOAdDfi+fgRomV4VOLp4ogcS78/RYqPEkAlo9dFkzNo/gCFcnRGe
+ a0K5ruDloIZqh1h5sK+L1B/TEJ/y6o1V22zsXZ8Kkdskf+mk7MBN3HQ0YUVStcI/MBnb
+ 9tvHHZpHgtSi4TW4P18ThoGd4f/3asY+LfI25A14qinDfi8BTRrW++2sWVKCyiF9nt5O
+ t+kA==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149513; x=1772754313; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772149516; x=1772754316; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SAVeAYgdZXdNLTYhp4QFsstqRj+a7+DivGGUpyy3Iq4=;
- b=IDPXBPp90m7vxjaLvrqOCHcqA6/OS+SwblRSR3UO9es7aeWoFwuh/+liUkMlOdUW6O
- +M/a74ZyNnB4P4FK9sCTcY5yCH5kmJnoAlf6xSLa1+a8j5Ogc/lxIYYb4XZJ0usnCFcQ
- Ck6e9Hztpnm7i/ccK13CrqxRn5+AMYYJT529Y=
+ bh=xtxulF8U1JxZghy+56MvkPSqIJxSkt90cwA8ovzGAJk=;
+ b=I6TnJLKbJR3loO4ayPqeakwtnKTXZqLbS6PHXeRv3LnDAMvmz2VPCV682mYrt0cFrG
+ shqAYta3ZEuEOrkswKs1hlsVwc5nA/NIwOxMkOLiUzGdAGqPiNbbZzjl/QEF0DzOF4ou
+ PxnPzspHJLCiTT6UYeAP9YkkEk+UMT4b2tzwI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149513; x=1772754313;
+ d=1e100.net; s=20230601; t=1772149516; x=1772754316;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SAVeAYgdZXdNLTYhp4QFsstqRj+a7+DivGGUpyy3Iq4=;
- b=P3b/8qKDwz+MC73YVqTT2OQSS8G3bhtMdFR68SdMtud3PhuAKafN6W+m/UFYmjRnXD
- a/1Mhc8cjVQEI1DiVfP4OrAfUkO9u2j4iP2/ZZ2XU28B6SEvB4vZ60+ky9WjOHcm450i
- JIpcU7M+AY2H3APxtVvtuUKkVzm26NhLMC1Z9cCBVlvMvJiac/I85oA+nOl5UnLbmDVZ
- nHqB5E7BOqZPU2qN0OBTLRTsOR7DfDVEfKA0DysAk0VBXmI1KvQot/iV77KKLLPuZbPQ
- Q3msfWEHfzUTzOiQ2ViBgqgun8brVaNqInbZCoi4HiR0eInTMxv45B1naxpNcSi6vScu
- FKWQ==
+ bh=xtxulF8U1JxZghy+56MvkPSqIJxSkt90cwA8ovzGAJk=;
+ b=MCTKokhdEMhGyqimmFFNkbnrzsZ9qhtPk//oSF2npAcKFXtiPcfhstkGUc3AwTcYM7
+ m6sbZdyxSs1tnkpDlQX+Fm177h/m6pHqDuRdTNN8t3dxFA71DEj89kJUXc4U/1T7GVTd
+ r6KKQeKIj5bHNiWbbiO9z9ZoGz27HARY/D/uiIGraz6UgaApA/An2D4w3DhYX+iH9qqK
+ YWBdAaP8JbkZN6Sl5lsDVLZOTZpzEEy0lW8HwqupltZVbmo5m6PXsyQ2hdCTW54DHdXa
+ yMWR+iFcWsSiskPGaTORviGlV1lVwerMlP3D47AmBrJzKv5k4N9P7hNEjulfY5SYrPRe
+ 16Fw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7aJ8ZemyyPwtyGDppBir/TWO+huBocLOKh8tIDc/St8jM8hZSjFd2xQ/ikbqPwQinOT7TpLw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzL1IFoJuQDwXWIUh+w4Jy6P/c3eWyZYe6FjucSPzzueo3MqNaL
- lhWLUeDfylIW3ykeH8PpDMZxiOMd2tb7HMEPJohqIJQGyGaRRIdRJzSuH5E/xUFwyDXKw13OQuD
- 7RFqs+r5ul9BJGydNfGdW+gAEo5g+hLUf+yDVOIU4
-X-Gm-Gg: ATEYQzyUh8lLJtjOHs43V09FQ8zqIRh6dJ8g1fLFUX0wPO/FsPVHPCL/GexonAAYiU2
- 8iiuq8wNGk+qXhxFtjfkdvUpvIweRDKjzUNN5OFPNsMTyN0N3JD0J5dcPdhUUZUEn7oSphEGZxF
- 30oHfpUP6UmolAD5t9/D6Uq/qgHmyjieapCPlK0M/YPTX6PMjWho61C+JCzks58mIGDRkF4dBdr
- EaRrbGTA1M5Gbt8CR2kr6zyqHU35+njgcl1A2hMuRSIzf+EoJStNze4LadUJPQc/U23Wlqrlugk
- 8Laiaw==
-X-Received: by 2002:a05:6402:42c4:b0:65f:82dc:f127 with SMTP id
- 4fb4d7f45d1cf-65fddcfa881mr738114a12.17.1772149512821; Thu, 26 Feb 2026
- 15:45:12 -0800 (PST)
+ AJvYcCWZgHTbbombyQXKIZ7lBnAjEqGUTEDYo48mWTspsvP92hvGmiJXS+zZh1W8rm4Dd7cBnrz9XtA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwPHURMcYJQSBn1EJUvUkIwd+BEBFivUln4QZ6PxsStTvi7ErDo
+ rSgl3O0PbGNuRoHJSf3g5An22zottet4KhwaxaV8eig/4JLOtxMdXa2CY+X9XwE+fM3QHIQUx95
+ Jr3C5rAIofsZvU1vXcOtmSr+yLYJ8/74CQytfNxxy
+X-Gm-Gg: ATEYQzxHDtp/o/F4FhG3v6Yuu3Ai2rN6OaTOdW5GV4lvIv3QTGNPirB0pDwdyh/jhFi
+ GtgweBifRAWhI5mu9LKFWQIRBB7CwLnCuc3MrbV5HKbR9RH1tuZfzfVjf+pg5xxMAUcJ+mxy2BX
+ 3ZZw6N2Zfv2JIvkOTwDr9OgDQBNxQtZVHD18uMOu7uivDS9eucnKrFL1JHTKNd0JBYR9fkwWrJR
+ hK5DwPyK5Ukc2ui6fRFHqW9FJ6dIUqSY5oKHz0aVtocpLB8HQ0GBgdypniRXsEPoyCzE+oI4iRw
+ FZuvHw==
+X-Received: by 2002:a17:906:e0f:b0:b87:c92:25bf with SMTP id
+ a640c23a62f3a-b9376511177mr30979266b.33.1772149515945; Thu, 26 Feb 2026
+ 15:45:15 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1771275704.git.daniel@makrotopia.org>
- <20260217174617.GD2747538@bill-the-cat>
- <20260223193219.GF3233182@bill-the-cat> <aZ2SI0rKuMEgSq1F@makrotopia.org>
- <20260224172444.GA3233182@bill-the-cat> <aZ8IXfm1TEPMqb4a@makrotopia.org>
- <20260225221611.GX1593142@bill-the-cat> <aZ-KgxENCGLR73lf@makrotopia.org>
- <20260226184512.GL1593142@bill-the-cat>
-In-Reply-To: <20260226184512.GL1593142@bill-the-cat>
+References: <20260225073711.51688-1-heinrich.schuchardt@canonical.com>
+ <ee169196-69a3-4003-8531-0ffa4e76bf6b@cherry.de>
+ <e9d98d0b-578a-41ef-9440-00ea615d224d@canonical.com>
+ <d00103df-8188-4039-b618-dc48ab1c1a39@canonical.com>
+ <8f18322a-e269-4839-a178-6cd2bf4aa488@cherry.de>
+In-Reply-To: <8f18322a-e269-4839-a178-6cd2bf4aa488@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Feb 2026 16:44:50 -0700
-X-Gm-Features: AaiRm516RSkV2OJ7eOip7k2a2G1Ih2TprbME6Lcb0_j0lZZec1we5vvElAsy_nI
-Message-ID: <CAFLszTjV5PK4OEz4Ry_n4KXp_PNy=D8tLK+2CZJyY0RqDnX84A@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/20] boot: add OpenWrt boot method and on-demand FIT
- loading
-To: Tom Rini <trini@konsulko.com>
-Cc: Daniel Golle <daniel@makrotopia.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Kory Maincent <kory.maincent@bootlin.com>,
+Date: Thu, 26 Feb 2026 16:44:52 -0700
+X-Gm-Features: AaiRm51cyk_Y4-c3mJ60TTVHAoUyFkf9hrG-MuLLNXmIi7rEuxJj872IrYkr1Rw
+Message-ID: <CAFLszTgmgfwLtoS9hACwd9BS+L6Gm91j6i+QCvOGvweY7SchzA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] boot: don't select non-existent CONFIG_VPL_CRYPTO
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, 
- Aristo Chen <jj251510319013@gmail.com>,
- =?UTF-8?B?54mbIOW/l+Wujw==?= <Zone.Niuzh@hotmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- Frank Wunderlich <frank-w@public-files.de>, 
- David Lechner <dlechner@baylibre.com>,
- Osama Abdelkader <osama.abdelkader@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Yegor Yefremov <yegorslists@googlemail.com>, 
- Mike Looijmans <mike.looijmans@topic.nl>, Weijie Gao <weijie.gao@mediatek.com>,
- Alexander Stein <alexander.stein@ew.tq-group.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Paul HENRYS <paul.henrys_ext@softathome.com>, u-boot@lists.denx.de, 
- John Crispin <john@phrozen.org>, Paul Spooren <mail@aparcar.org>
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
+ George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -140,51 +118,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Quentin,
 
-On Thu, 26 Feb 2026 at 11:45, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 26 Feb 2026 at 07:54, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> On Wed, Feb 25, 2026 at 11:49:23PM +0000, Daniel Golle wrote:
-> > On Wed, Feb 25, 2026 at 04:16:11PM -0600, Tom Rini wrote:
-> > > On Wed, Feb 25, 2026 at 02:34:05PM +0000, Daniel Golle wrote:
-
-[..]
-
-> > One thing which I'm anaway not interely decided about is whether to
-> > build fit_verity_build_params() (the function which reads the dm-verity
-> > parameters from FIT and generates the Linux cmdline arguments from that)
-> > on top of bootflow_cmdline_set_arg() or to just generate the whole
-> > string and use env_get(), env_set() on the "bootargs" env variable.
-> >
-> >
-> > Not using bootflow_cmdline_set_arg() would also mean that in the case of
-> > bootmeth_openwrt nothing would be using it, and that would free 688
-> > bytes, while fit_verity_build_params() might get a very tiny bit larger,
-> > certainly less than that.
-> >
-> > The thing is that it looks to me like bootflow/bootmeth is meant to ignore
-> > "bootargs" and overwrites it just before boot. On the other hand, having
-> > a generic feature such as generting the dm-mod.create=... Linux kernel
-> > cmdline parameter from the values stored in FIT depend on bootmeth, or
-> > even a specific bootmeth, also seems wrong.
-> >
-> > I'd be happy to hear your opinion about that.
+> Hi Heinrich,
 >
-> It should probably exist outside of the bootflow/bootmeth code, yes. As
-> we start expanding the real usage of bootflow/bootmeth we do need to
-> make sure that it's not doing things that violate user expectations, so
-> I'm not 100% sure if we are or aren't doing anything odd with bootargs,
-> depending on the flow.
+> On 2/25/26 1:21 PM, Heinrich Schuchardt wrote:
+> > On 2/25/26 10:06, Heinrich Schuchardt wrote:
+> >> On 2/25/26 09:37, Quentin Schulz wrote:
+> >>> Hi Heinrich,
+> >>>
+> >>> On 2/25/26 8:37 AM, Heinrich Schuchardt wrote:
+> >>>> Symbol CONFIG_VPL_CRYPTO does not exist.
+> >>>
+> >>> Correct but I have a hunch this was based off of SPL_FIT_SIGNATURE
+> >>> which does require crypto support, so I'm assuming VPL would too.
+> >>>
+> >>> But this symbol indeed never existed, and even if it did, it wouldn't
+> >>> compile anything else as far as I can tell since drivers/crypto is
+> >>> enabled by default in proper and only if CONFIG_SPL_CRYPTO is set for
+> >>> SPL, and only SPL (checking for !TPL and !VPL)... so something feels
+> >>> unfinished with VPL here to me.
+> >>>
+> >>> I'm not sure we're improving anything there but I don't think it
+> >>> makes things worse, as such
+> >>>
+> >>> Fixes: 4218456b3fac ("vbe: Add Kconfig options for VPL")
+> >>>
+> >>> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >>>
+> >>> Thanks!
+> >>> Quentin
+> >>
+> >> Thank you for reviewing.
+> >>
+> >> There is a symbol CONFIG_VPL_MBEDTLS_LIB_CRYPTO that might be used but
+> >> then VPL_FIT_SIGNATURE support would have to depend on MBEDTLS.
+> >>
+> >> Maybe Simon can inform us what his design intention was. Adding a
+> >> defconfig actually testing VPL_FIT_SIGNATURE would be helpful.
+> >>
+> >> Best regards
+> >>
+> >> Heinrich
+> >
+> > There are more non-existent symbols implied by VPL_FIT_SIGNATURE
+> >
+> >          imply VPL_RSA
+> >          imply VPL_RSA_VERIFY
+> >
+> > @Tom
+> > I wonder why the VPL feature was suggested if it was never tested or
+> > used. Should we remove all of VPL?
+> >
+>
+> As far as I remember, VPL was a necessary step to add support for VBE
+> (Verified Boot for Embedded) that Simon was working on. I don't think it
+> got realized entirely (upstream I mean) which may explain the current
+> state of VPL symbols.
 
-We do have 'bootflow read' which reads the files and sets things up
-ready to boot. Bootstd is designed to keep the bootargs env var
-aligned which whatever is the current bootflow (bootflow select).
+Heinrich asked me the same thing this morning. From my understanding,
+the penultimate series was applied but later reverted. The final
+series was never applied. It's in the Concept tree for now and is
+running fine on an rk3399 board:
 
-But yes, it is useful to be able to do things 'manually' and we should
-try to avoid something which is automatic but cannot be decomposed for
-debugging, etc.
+https://concept.u-boot.org/u-boot/u-boot/-/jobs/300379
 
-[..]
+If there is any interest in getting these two series in I could resend.
 
 Regards,
 Simon
