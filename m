@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF068FD9E1A
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 22:05:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19C3FD9E19
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E01D83AA9;
-	Thu, 26 Feb 2026 23:05:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B4E283AA9;
+	Fri, 27 Feb 2026 00:01:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WmFkxkWj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mLZ1Mbki";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B87983D1A; Thu, 26 Feb 2026 23:05:33 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0C2F483D1A; Thu, 26 Feb 2026 21:58:54 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5941583642
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 23:05:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 229BD83642
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 21:58:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linusw@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 280956011F
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:05:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D22EEC19423
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:05:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772143529;
- bh=3ZbTNTpqwWK+vYDoLKERNgiG+SUF841jTBKF67BW68w=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=WmFkxkWjqDO1Zp9phJ66hkbVEWfhSwDv3B0ZpTxFb8WyOkqM8sMz7JAKqege/xEQW
- qIsNBfipZuQXB0b+velm6u+BlgWs7SNO7QAqSGw/QT/wRZhKtAAbpAXL+mP96/dgZB
- 8jpPTjDsxD687TvaHMqyJMjIuG0pav7wO72qOHxSYnD6KDHRFzbSE3FzfBf083Rtan
- RsYmGvV77mozF6UEQBLBKhGlqItXsOYxWPm1GUO1CtZ4gwFlhr6JWup8hB/dhyNCMw
- JIRHyyahqxMakeHbLNEdou1JSpxx+6CVzVdnv7EHRozHhL2Rv1kY01vHSBtg84+Gwk
- DU4cbvOuxWHHA==
-Received: by mail-yw1-f178.google.com with SMTP id
- 00721157ae682-79827d28fc4so14185777b3.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 14:05:29 -0800 (PST)
-X-Forwarded-Encrypted: i=1;
- AJvYcCXI/MsfXpbZxBzfhYP4ILFvORXGOji3LM0PNmAxxNlCs9lUcENZp8Axv/0QcTDJnj+AXYJtehY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtfglhTj+lChM++3YzVOEHGY16u0UWsHYFPLMx71WQ2KJyvDIC
- atcINt/gIttTLjvXfgwNEImajYGcSyDZyntpv37ehQVcxXhUFRbUwlWz8NufXabatzt3n+wQ0Hy
- 7aeEuAcwaRxxaR0p8eZbpHSSzpMf6vrU=
-X-Received: by 2002:a05:690c:e34a:b0:798:6a6b:5b0f with SMTP id
- 00721157ae682-798855a6876mr8033777b3.32.1772143529230; Thu, 26 Feb 2026
- 14:05:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5a10d311c79so1121250e87.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 12:58:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1772139531; x=1772744331; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s8Zs0Gh0Wn6Ugwpz24Kq8wR5rWC4YzeuifZ6QZF8pcU=;
+ b=mLZ1MbkiXM9p7VfCJW+VP2Q418+JCmhoHuhJhazknoJ9XugbDs2BksTg953FTOdbbX
+ KDu/jcaaa6THeFnc0J7s0+rfwFS+ftv+lqYn6PLRclOlIKQT0JcA0eeieCMDM7QG8Qso
+ ILo1YdR2c8hr25ns5DlEQdAkcB4oUfxmKZzScWStOVI/ykbDUPMMIIzHnGYaaHzEsAEl
+ 4xQElxNrnX3vpGGLiXfmfU/Gn7sjTIsgOegXTkvvGnYvpnbGc252MHyVp4WTqdY0BBsH
+ O6hAczzxMZd4/thzFNil0zWe5Nf37poOCfcv8j9KwE/3nYxwm1+1QpPAdHAtgRth+E4N
+ qeLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772139531; x=1772744331;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s8Zs0Gh0Wn6Ugwpz24Kq8wR5rWC4YzeuifZ6QZF8pcU=;
+ b=AkcjFJos40IUFXEGy96zudo3PvVUvPNipUwCOlx7mfgqvDOk3Pim8xGKjVpjWYpoSp
+ knJzKzoMkKoKvkh8Q5UmlVlt+8oKs9CVDQMNXA/OQn0UXKahUw9HhVs69AppEYPCj2t9
+ 9HjYubUHkz6T7fTnRi47eJJ1DawKJTLNKc/yTlbIuWWxtxVMDYC+Cw/tRH5J5lVrdsKk
+ 8QIvFRbKyeDGeRE0i9hJLe0tBkYweZ8yWBdHk4Fu6XP+Vv2PxJ6b2hqWSmpZkNrydPWh
+ oxLMJ98MVl5zW+IhPcS0Gl8+D6P0TmY1FJB2KYUYgBbUSqESKP9iUwdwmYGKfMpvGCTh
+ GDCA==
+X-Gm-Message-State: AOJu0Yztofd7a8kQ5ZLfhZXtKsnxXMGrrkw1mLqOVk/EMjjlmom8+v/W
+ F6aYufDAj5M2TBQOxg52SRN6g6g04W9LdK+tRRj/8CcUkQE/Zl95oerxWNtXW/Ki5Bs=
+X-Gm-Gg: ATEYQzyAoUDkpjWGubhKVkbFSSP9QxdgzMgIUAdInm2CprAJnKX9f5XbRFasEHkKk59
+ Y0kOCChrds11+gJRo71r85fowgls+dwF+nfVlO0Oiy1bgFtTDR2wSQyvQ1TwjxchCuuOPlgzpo+
+ Q/3IezQfpqxhfWbtzJFmalg7iSaXaZP6zi8YoxBytQTco3NKgCo/WP7kaJkYE/qfaZaULdXxdMN
+ v6HDqnaKoPwcJxxW7xw2ho8rNRcFznscYpDu4kxJUM2mLBV2W6kHSXdlL9W38kl612HbF/x+qzi
+ o03yfGWT1w20cZBdBRZvwGrqWhUfMAfuVCik0SEerk5RWGQ35cjpvhMG5/l0w7b0MpDcJjWnmjk
+ rihtpxyuj8vXMtFWelYT+sP5pww/08i7rksOZVlY0wg9i5pcFZ2hU/6VD8ErdsH69Cw9QB/Vf1r
+ SQJmDb8sfh2qyHKu/pzBPpsr1VmEtPwKHr5fX1WF7iNPAbwTtEHzGbfcyWKS1VFLtpaG//9ouzV
+ oXcvqD9sPNkwAb+TQHFKNdBHTfcUrHl1HzpyQIluLkDmsUN
+X-Received: by 2002:ac2:4f13:0:b0:59f:6edb:b7ea with SMTP id
+ 2adb3069b0e04-5a10ffd684amr180026e87.42.1772139530874; 
+ Thu, 26 Feb 2026 12:58:50 -0800 (PST)
+Received: from lnb0tqzjk.rasu.local (46-138-124-225.dynamic.spd-mgts.ru.
+ [46.138.124.225]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5a109e01949sm1334790e87.45.2026.02.26.12.58.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Feb 2026 12:58:50 -0800 (PST)
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] kconfig: fix buffer overflow in conf_get_default_confname()
+Date: Thu, 26 Feb 2026 23:58:46 +0300
+Message-Id: <20260226205846.57752-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <cover.1771856828.git.dan.carpenter@linaro.org>
- <62727b8bc822e07ad546d9e9fe4373a372a3f1b9.1771856828.git.dan.carpenter@linaro.org>
-In-Reply-To: <62727b8bc822e07ad546d9e9fe4373a372a3f1b9.1771856828.git.dan.carpenter@linaro.org>
-From: Linus Walleij <linusw@kernel.org>
-Date: Thu, 26 Feb 2026 23:05:18 +0100
-X-Gmail-Original-Message-ID: <CAD++jLkw0A8ZUXFCQYiPHHwA8o4nspT+GsEHfNdsNZjwU94Qig@mail.gmail.com>
-X-Gm-Features: AaiRm51tIPbcMQ8UIJZoGNzHAPEjgsLBBnwJnn2zxY5dF7yiLyuzWJc6fbcv4fI
-Message-ID: <CAD++jLkw0A8ZUXFCQYiPHHwA8o4nspT+GsEHfNdsNZjwU94Qig@mail.gmail.com>
-Subject: Re: [PATCH 1/4] scmi: pinctrl: add pinctrl message IDs
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Alice Guo <alice.guo@nxp.com>, 
- Ye Li <ye.li@nxp.com>, Jacky Bai <ping.bai@nxp.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, 
- Valentin Caron <valentin.caron@foss.st.com>, u-boot@lists.denx.de, 
- Vincent Guittot <vincent.guittot@linaro.org>,
- Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>, 
- Michal Simek <michal.simek@amd.com>, arm-scmi@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 27 Feb 2026 00:01:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,15 +96,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 23, 2026 at 3:33=E2=80=AFPM Dan Carpenter <dan.carpenter@linaro=
-.org> wrote:
+Use snprintf() instead of sprintf() when building the full config path
+to prevent potential buffer overflow.
 
-> Add all the pinctrl message IDs.  I renamed SCMI_MSG_PINCTRL_CONFIG_SET
-> to SCMI_PINCTRL_SETTINGS_CONFIGURE so the naming matches the spec better.
->
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+The function previously used sprintf() to concatenate SRCTREE environment
+variable with the expanded config name into a fixed-size buffer
+fullname[PATH_MAX+1]. Since getenv() can return arbitrarily long strings,
+this could lead to writing beyond the buffer boundary (CWE-120).
 
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+Changes:
+- Replace sprintf() with snprintf() with proper size checking
+- Add validation of snprintf() return value to detect truncation
+- Emit conf_warning() if the resulting path exceeds PATH_MAX
+- Return the unprefixed name as fallback on error, preserving behavior
 
-Yours,
-Linus Walleij
+This fixes the static analyzer warning:
+  confdata.c:119: buffer overflow via getenv() tainted input
+
+Reported-by: static analyzer Svace
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+---
+ scripts/kconfig/confdata.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/scripts/kconfig/confdata.c b/scripts/kconfig/confdata.c
+index d587b10d7f8..756e613fa47 100644
+--- a/scripts/kconfig/confdata.c
++++ b/scripts/kconfig/confdata.c
+@@ -152,7 +152,11 @@ char *conf_get_default_confname(void)
+ 	name = expand_string(conf_defname);
+ 	env = getenv(SRCTREE);
+ 	if (env) {
+-		sprintf(fullname, "%s/%s", env, name);
++		int ret = snprintf(fullname, sizeof(fullname), "%s/%s", env, name);
++		if (ret < 0 || ret >= (int)sizeof(fullname)) {
++			conf_warning("configuration path too long");
++			return name;
++		}
+ 		if (is_present(fullname))
+ 			return fullname;
+ 	}
+-- 
+2.39.2
+
