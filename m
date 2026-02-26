@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF03DFD9E25
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:50:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E9CFD9E25
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:50:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3890E83F69;
-	Fri, 27 Feb 2026 00:49:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E3FC83F98;
+	Fri, 27 Feb 2026 00:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C04GCE1E";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="auiU78du";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF4E983F2A; Fri, 27 Feb 2026 00:49:12 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 6926283F53; Fri, 27 Feb 2026 00:49:14 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80A9783F5B
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:49:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9D5783EC8
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:49:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-8cb3a8494c5so147811185a.2
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:49:03 -0800 (PST)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-8cb4acdacb2so169898185a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:49:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149741; x=1772754541; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772149746; x=1772754546; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J6oiMby/q3LycnjzTsd/33qPJtHW0cV8Xubh5OEj47U=;
- b=C04GCE1E0QXZBMdAG5687FcI1gQRYfESCmfi8VAs2Rnhk9y0fRRG6tlWNEKxcYYOod
- F1lb1xqDlR5593y4v2Z2AgoEiXdixPHycIDAHaswPd2OTBpDQJSKu8IVVXq/ADjpfIBg
- SiqSinHgSlvxfzm0z4Qo1HjbJKBAFnP6jQ2P8=
+ bh=8SKwtJ/iNsZlds1h5XpSe9Xmc77t0cpZNJsJv+VL6bk=;
+ b=auiU78duMsncso5M0ae+oNgAKLJr3h5CepqAb6gMvilbb2Bi8mMwJPn3XYq9ll65vL
+ PrwiKTuUXA39D+/OidTTZhtv0r0Jc5UVPWjfv0rkPsLGyRf9BOJcxZ7ZIcn7SVBgSadH
+ WTLx6yTniWGT7sAT63cR6GzXnKNLwy+Eh4rao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149741; x=1772754541;
+ d=1e100.net; s=20230601; t=1772149746; x=1772754546;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=J6oiMby/q3LycnjzTsd/33qPJtHW0cV8Xubh5OEj47U=;
- b=poOnr+O9xybG4g4ciqADoAayPnPQFjU7efq5aCLTd9u6p4vzqeoUkoOanx8ih4YFTS
- rKuUijQHylTxOVQPUO69yi60ZA0596P8cRuap4+hqVQ/WfKjytj/o03i18UbN2FGdmHs
- G4fFPn5gkbHmoxqe4F9zD4JM9TaRHaLiRv9ThcPI4yWZ9GtWmMhiKLTdMtYqnPMyffpT
- rEOPPfpleTQOHNEpvBr43FsorkD3bgP+CSNVxwC/gdfgBGjq/Gjt7pafyElifm0fwukz
- Ncb+iQTen5z8qNpbIk35nOJxlsxYeyIagq+OR0hOAMyFAKJogAA4a6rZ6jHyiITQDRmU
- bXEA==
-X-Gm-Message-State: AOJu0YxZKECeMzbCBs3/Tgp7pdPcN91qQL+5K+Ijr168Da2FOH6O1FYY
- 3yD5vPTWTYtAemWfkjP7GXfwv4Lv69H6KQwNlLn3u3LbqKViwdXLOoK1YvIYG2M8iQeQcM99gK7
- acMI=
-X-Gm-Gg: ATEYQzyH13738zpSwQ0rfxYMKWCMetGdJnDGxMbvCVq9LhZnfaWbBg2wG/qxSKGv3C3
- ILXX5Rp2C9DUB60s4aDpHMtNn4wXsyoAD3cwtL3dCySHZ7UFN9NuC/9dZFz/EkC3xgI8PYnfSMY
- IQcI297V7JW7fs9LnUc6AEFbGtK1qoYN4FKEz6ZTM5R86+tkYHSeZuJ94JImxVX56GdUUGClN1e
- xyUqSJ9Ewj4jlkUp9+8aGTW3X+gu14nb/282wUBR1jx2fIkODMkeUgGm52Bi2Gdi5BiCiP8DaAC
- yoVO6GUmUZPdYtv7U7qahJ7q+/OxlC4ORwzI+riazFYf7gWHjDDzCU64cxh/4nXwP9zswRbx+BQ
- S2eRIF7UZeQX5u3ucuH2SJvt4701cPw8Blzx9O7TEAm8anvfmt7+dM+yYs+0Vmy5MQXM3QXycqU
- CgENqNRQLJeg+Tu83GSA==
-X-Received: by 2002:a05:620a:4402:b0:8b2:2066:ffca with SMTP id
- af79cd13be357-8cbc8eae81cmr95569185a.82.1772149741504; 
- Thu, 26 Feb 2026 15:49:01 -0800 (PST)
+ bh=8SKwtJ/iNsZlds1h5XpSe9Xmc77t0cpZNJsJv+VL6bk=;
+ b=RCUEceFuubW+pYIXjNvxpg9Ty4/DaBWF7wGwGxskYpvTQR9A5MaW4JqkCRhj1Z96Cj
+ 1xkyt/qQWi8mD752LxxpDGy0UwRma8PtCLrWfNyMNjC4JLWbD1/LbSFu3WPp/zCQaqYX
+ vdymwAKXzZuMhVM7s+iVVfozxaxqtNSrUv8lfN5fCHTbeiIzzf6djam+tmCicYvOoDlK
+ DmPcypFIrOcilOV/5HL6UcuG/fTYH/7ActMHSGACLr8OwOR4zhpIs/I70bJdzEJLyCxp
+ CotyoQXsqrfUC+d5KTxUZz4slLqcJeVgiFKWgI0ol0/0GnSKtpiUuJXnOsZNQwQQCuNe
+ cgsA==
+X-Gm-Message-State: AOJu0YzVI5ALi4hHSV4hLVH3nPuE6F0/u6uOtqJXvHbpFvfjfwsRlnur
+ DC6XnfkJoh0fTsyVPIBx6Pa9sVyGakFG66r9AKLUjL5gI2LLyGMwShWF9LOr3luutwMIJnNoFZ9
+ VWQQ=
+X-Gm-Gg: ATEYQzz6LEWt8gaQjkdR+RYpJqVQSCYcBJrlI9S4v8Dr0BbVb9R9eKmmngkiYRLABk1
+ 39AkPMI8G2zrNJZQsHsT9rCussgSgeUSngX3bl7lkjPOLjTRTFrTBQC5sWwpA8Kx8HY9AKs1vlp
+ a4RxabBp7W4F8NrtUc+pz+GBzLHyUvyNDQ+n0OGhrH9ugF1oLhNtWCDSTbMQUNREL1I+sqNWyiM
+ ScdRhYwajdZGawPkB4oHJuJ/Da2+9DLvIfYtgo3aN0W8cpziJtD0NrUaU5PXpSVPxJMTikD8SVP
+ AlAX/I1yyzL9vfI7Ve1dMK9vTX89o0mBtp90ImaXI6XjHQiFpGr+1u8+J8IfYeZXeNoNEn/vdhb
+ +CmwnolzHKUt7+5JfTjLiXCxhIjH9qY2SPmIsat4lgTWPtx9x9LD/ANbeE8tq1wuja/ZGS+tyBK
+ oUoVpCl6989GJUWjvVUQ==
+X-Received: by 2002:a05:620a:29c1:b0:8cb:55cc:6245 with SMTP id
+ af79cd13be357-8cbc8d6f198mr126546985a.12.1772149745829; 
+ Thu, 26 Feb 2026 15:49:05 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.59
+ af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.49.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 15:49:00 -0800 (PST)
+ Thu, 26 Feb 2026 15:49:05 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -76,10 +76,10 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [RFC PATCH 10/16] binman: test: Move mkimage test files to
- test/mkimage/
-Date: Thu, 26 Feb 2026 16:47:50 -0700
-Message-ID: <20260226234802.345968-11-sjg@chromium.org>
+Subject: [RFC PATCH 12/16] binman: test: Move UEFI capsule test files to
+ test/capsule/
+Date: Thu, 26 Feb 2026 16:47:52 -0700
+Message-ID: <20260226234802.345968-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260226234802.345968-1-sjg@chromium.org>
 References: <20260226234802.345968-1-sjg@chromium.org>
@@ -103,238 +103,225 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move about a dozen test files for mkimage entries into a mkimage/
-subdirectory. Drop the numeric prefixes and the redundant mkimage_
-filename prefix, and update all references.
+Move about a dozen test files for UEFI capsule creation (signed,
+versioned, accept, revert) into a capsule/ subdirectory. Drop the
+numeric prefixes and the redundant capsule_ filename prefix, and
+update all references.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
- tools/binman/ftest.py                         | 32 +++++++++----------
- .../coll.dts}                                 |  0
- .../filename.dts}                             |  0
- .../image.dts}                                |  0
- .../image_bad.dts}                            |  0
- .../image_no_content.dts}                     |  0
- .../missing.dts}                              |  0
- .../missing_multiple.dts}                     |  0
- .../{156_mkimage.dts => mkimage/mkimage.dts}  |  0
- .../mult_data.dts}                            |  0
- .../mult_no_content.dts}                      |  0
- .../name.dts}                                 |  0
- .../special.dts}                              |  0
- .../{290_mkimage_sym.dts => mkimage/sym.dts}  |  0
- 14 files changed, 16 insertions(+), 16 deletions(-)
- rename tools/binman/test/{247_mkimage_coll.dts => mkimage/coll.dts} (100%)
- rename tools/binman/test/{254_mkimage_filename.dts => mkimage/filename.dts} (100%)
- rename tools/binman/test/{243_mkimage_image.dts => mkimage/image.dts} (100%)
- rename tools/binman/test/{245_mkimage_image_bad.dts => mkimage/image_bad.dts} (100%)
- rename tools/binman/test/{244_mkimage_image_no_content.dts => mkimage/image_no_content.dts} (100%)
- rename tools/binman/test/{229_mkimage_missing.dts => mkimage/missing.dts} (100%)
- rename tools/binman/test/{292_mkimage_missing_multiple.dts => mkimage/missing_multiple.dts} (100%)
- rename tools/binman/test/{156_mkimage.dts => mkimage/mkimage.dts} (100%)
- rename tools/binman/test/{252_mkimage_mult_data.dts => mkimage/mult_data.dts} (100%)
- rename tools/binman/test/{253_mkimage_mult_no_content.dts => mkimage/mult_no_content.dts} (100%)
- rename tools/binman/test/{242_mkimage_name.dts => mkimage/name.dts} (100%)
- rename tools/binman/test/{283_mkimage_special.dts => mkimage/special.dts} (100%)
- rename tools/binman/test/{290_mkimage_sym.dts => mkimage/sym.dts} (100%)
+ tools/binman/ftest.py                         | 30 +++++++++----------
+ .../accept.dts}                               |  0
+ .../accept_missing_guid.dts}                  |  0
+ .../accept_revert_missing.dts}                |  0
+ .../{311_capsule.dts => capsule/capsule.dts}  |  0
+ .../empty_type_missing.dts}                   |  0
+ .../missing_guid.dts}                         |  0
+ .../missing_index.dts}                        |  0
+ .../missing_key.dts}                          |  0
+ .../oemflags.dts}                             |  0
+ .../revert.dts}                               |  0
+ .../signed.dts}                               |  0
+ .../signed_ver.dts}                           |  0
+ .../version.dts}                              |  0
+ 14 files changed, 15 insertions(+), 15 deletions(-)
+ rename tools/binman/test/{319_capsule_accept.dts => capsule/accept.dts} (100%)
+ rename tools/binman/test/{321_capsule_accept_missing_guid.dts => capsule/accept_missing_guid.dts} (100%)
+ rename tools/binman/test/{323_capsule_accept_revert_missing.dts => capsule/accept_revert_missing.dts} (100%)
+ rename tools/binman/test/{311_capsule.dts => capsule/capsule.dts} (100%)
+ rename tools/binman/test/{322_empty_capsule_type_missing.dts => capsule/empty_type_missing.dts} (100%)
+ rename tools/binman/test/{318_capsule_missing_guid.dts => capsule/missing_guid.dts} (100%)
+ rename tools/binman/test/{317_capsule_missing_index.dts => capsule/missing_index.dts} (100%)
+ rename tools/binman/test/{316_capsule_missing_key.dts => capsule/missing_key.dts} (100%)
+ rename tools/binman/test/{315_capsule_oemflags.dts => capsule/oemflags.dts} (100%)
+ rename tools/binman/test/{320_capsule_revert.dts => capsule/revert.dts} (100%)
+ rename tools/binman/test/{312_capsule_signed.dts => capsule/signed.dts} (100%)
+ rename tools/binman/test/{314_capsule_signed_ver.dts => capsule/signed_ver.dts} (100%)
+ rename tools/binman/test/{313_capsule_version.dts => capsule/version.dts} (100%)
 
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index c2cea9e6618..8f5dcc2878c 100644
+index 6dbe2f76a6e..604efb8b996 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -3868,7 +3868,7 @@ class TestFunctional(unittest.TestCase):
-     def testMkimage(self):
-         """Test using mkimage to build an image"""
-         self._SetupSplElf()
--        data = self._DoReadFile('156_mkimage.dts')
-+        data = self._DoReadFile('mkimage/mkimage.dts')
+@@ -7517,7 +7517,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         # Just check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_SPL_DATA, data)
-@@ -3877,7 +3877,7 @@ class TestFunctional(unittest.TestCase):
-         """Test that binman still produces an image if mkimage is missing"""
-         self._SetupSplElf()
-         with terminal.capture() as (_, stderr):
--            self._DoTestFile('156_mkimage.dts',
-+            self._DoTestFile('mkimage/mkimage.dts',
-                              force_missing_bintools='mkimage')
-         err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
-@@ -5809,7 +5809,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageMissingBlob(self):
-         """Test using mkimage to build an image"""
-         with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('229_mkimage_missing.dts', allow_missing=True,
-+            self._DoTestFile('mkimage/missing.dts', allow_missing=True,
-                              allow_fake_blobs=True)
-         err = stderr.getvalue()
-         self.assertRegex(
-@@ -6118,7 +6118,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageImagename(self):
-         """Test using mkimage with -n holding the data too"""
-         self._SetupSplElf()
--        data = self._DoReadFile('242_mkimage_name.dts')
-+        data = self._DoReadFile('mkimage/name.dts')
+     def testCapsuleGen(self):
+         """Test generation of EFI capsule"""
+-        data = self._DoReadFile('311_capsule.dts')
++        data = self._DoReadFile('capsule/capsule.dts')
  
-         # Check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_SPL_DATA, data)
-@@ -6136,7 +6136,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageImage(self):
-         """Test using mkimage with -n holding the data too"""
-         self._SetupSplElf()
--        data = self._DoReadFile('243_mkimage_image.dts')
-+        data = self._DoReadFile('mkimage/image.dts')
+         self._CheckCapsule(data)
  
-         # Check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_SPL_DATA, data)
-@@ -6158,7 +6158,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test using mkimage with -n and no data"""
-         self._SetupSplElf()
-         with self.assertRaises(ValueError) as exc:
--            self._DoReadFile('244_mkimage_image_no_content.dts')
-+            self._DoReadFile('mkimage/image_no_content.dts')
-         self.assertIn('Could not complete processing of contents',
-                       str(exc.exception))
+@@ -7528,13 +7528,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = tools.read_file(self.TestFile("key.pem"))
+         self._MakeInputFile("key.crt", data)
  
-@@ -6166,7 +6166,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test using mkimage with imagename node and data-to-imagename"""
-         self._SetupSplElf()
-         with self.assertRaises(ValueError) as exc:
--            self._DoReadFile('245_mkimage_image_bad.dts')
-+            self._DoReadFile('mkimage/image_bad.dts')
-         self.assertIn('Cannot use both imagename node and data-to-imagename',
-                       str(exc.exception))
+-        data = self._DoReadFile('312_capsule_signed.dts')
++        data = self._DoReadFile('capsule/signed.dts')
  
-@@ -6181,7 +6181,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageCollection(self):
-         """Test using a collection referring to an entry in a mkimage entry"""
-         self._SetupSplElf()
--        data = self._DoReadFile('247_mkimage_coll.dts')
-+        data = self._DoReadFile('mkimage/coll.dts')
-         expect = U_BOOT_SPL_DATA + U_BOOT_DATA
-         self.assertEqual(expect, data[:len(expect)])
+         self._CheckCapsule(data, signed_capsule=True)
  
-@@ -6269,7 +6269,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test passing multiple files to mkimage in a mkimage entry"""
-         self._SetupSplElf()
-         self._SetupTplElf()
--        data = self._DoReadFile('252_mkimage_mult_data.dts')
-+        data = self._DoReadFile('mkimage/mult_data.dts')
-         # Size of files are packed in their 4B big-endian format
-         expect = struct.pack('>I', len(U_BOOT_TPL_DATA))
-         expect += struct.pack('>I', len(U_BOOT_SPL_DATA))
-@@ -6291,7 +6291,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             'spl-bss-pad': 'y',
-             'spl-dtb': 'y',
-         }
--        data = self._DoReadFileDtb('252_mkimage_mult_data.dts',
-+        data = self._DoReadFileDtb('mkimage/mult_data.dts',
-                                    use_expanded=True, entry_args=entry_args)[0]
-         pad_len = 10
-         tpl_expect = U_BOOT_TPL_DATA
-@@ -6320,14 +6320,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test passing multiple data files to mkimage with one data file having no content"""
-         self._SetupSplElf()
-         with self.assertRaises(ValueError) as exc:
--            self._DoReadFile('253_mkimage_mult_no_content.dts')
-+            self._DoReadFile('mkimage/mult_no_content.dts')
-         self.assertIn('Could not complete processing of contents',
-                       str(exc.exception))
+     def testCapsuleGenVersionSupport(self):
+         """Test generation of EFI capsule with version support"""
+-        data = self._DoReadFile('313_capsule_version.dts')
++        data = self._DoReadFile('capsule/version.dts')
  
-     def testMkimageFilename(self):
-         """Test using mkimage to build a binary with a filename"""
-         self._SetupSplElf()
--        retcode = self._DoTestFile('254_mkimage_filename.dts')
-+        retcode = self._DoTestFile('mkimage/filename.dts')
-         self.assertEqual(0, retcode)
-         fname = tools.get_output_filename('mkimage-test.bin')
-         self.assertTrue(os.path.exists(fname))
-@@ -6891,12 +6891,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageMissingBlobMultiple(self):
-         """Test missing blob with mkimage entry and multiple-data-files"""
-         with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=True)
-+            self._DoTestFile('mkimage/missing_multiple.dts', allow_missing=True)
-         err = stderr.getvalue()
-         self.assertIn("is missing external blobs and is non-functional", err)
+         self._CheckCapsule(data, version_check=True)
  
+@@ -7545,20 +7545,20 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = tools.read_file(self.TestFile("key.pem"))
+         self._MakeInputFile("key.crt", data)
+ 
+-        data = self._DoReadFile('314_capsule_signed_ver.dts')
++        data = self._DoReadFile('capsule/signed_ver.dts')
+ 
+         self._CheckCapsule(data, signed_capsule=True, version_check=True)
+ 
+     def testCapsuleGenCapOemFlags(self):
+         """Test generation of EFI capsule with OEM Flags set"""
+-        data = self._DoReadFile('315_capsule_oemflags.dts')
++        data = self._DoReadFile('capsule/oemflags.dts')
+ 
+         self._CheckCapsule(data, capoemflags=True)
+ 
+     def testCapsuleGenKeyMissing(self):
+         """Test that binman errors out on missing key"""
          with self.assertRaises(ValueError) as e:
--            self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=False)
-+            self._DoTestFile('mkimage/missing_multiple.dts', allow_missing=False)
-         self.assertIn("not found in input path", str(e.exception))
+-            self._DoReadFile('316_capsule_missing_key.dts')
++            self._DoReadFile('capsule/missing_key.dts')
  
-     def _PrepareSignEnv(self, dts='fit/sign.dts'):
-@@ -7002,7 +7002,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertIn("Both private key and public key certificate need to be provided",
+                       str(e.exception))
+@@ -7566,7 +7566,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenIndexMissing(self):
+         """Test that binman errors out on missing image index"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('317_capsule_missing_index.dts')
++            self._DoReadFile('capsule/missing_index.dts')
  
-     def testMkimageSpecial(self):
-         """Test mkimage ignores special hash-1 node"""
--        data = self._DoReadFile('283_mkimage_special.dts')
-+        data = self._DoReadFile('mkimage/special.dts')
+         self.assertIn("entry is missing properties: image-index",
+                       str(e.exception))
+@@ -7574,27 +7574,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenGuidMissing(self):
+         """Test that binman errors out on missing image GUID"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('318_capsule_missing_guid.dts')
++            self._DoReadFile('capsule/missing_guid.dts')
  
-         # Just check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_DATA, data)
-@@ -7085,7 +7085,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageSymbols(self):
-         """Test using mkimage to build an image with symbols in it"""
-         self._SetupSplElf('u_boot_binman_syms')
--        data = self._DoReadFile('290_mkimage_sym.dts')
-+        data = self._DoReadFile('mkimage/sym.dts')
+         self.assertIn("entry is missing properties: image-guid",
+                       str(e.exception))
  
-         image = control.images['image']
-         entries = image.GetEntries()
-diff --git a/tools/binman/test/247_mkimage_coll.dts b/tools/binman/test/mkimage/coll.dts
+     def testCapsuleGenAcceptCapsule(self):
+         """Test generationg of accept EFI capsule"""
+-        data = self._DoReadFile('319_capsule_accept.dts')
++        data = self._DoReadFile('capsule/accept.dts')
+ 
+         self._CheckEmptyCapsule(data, accept_capsule=True)
+ 
+     def testCapsuleGenRevertCapsule(self):
+         """Test generationg of revert EFI capsule"""
+-        data = self._DoReadFile('320_capsule_revert.dts')
++        data = self._DoReadFile('capsule/revert.dts')
+ 
+         self._CheckEmptyCapsule(data)
+ 
+     def testCapsuleGenAcceptGuidMissing(self):
+         """Test that binman errors out on missing image GUID for accept capsule"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('321_capsule_accept_missing_guid.dts')
++            self._DoReadFile('capsule/accept_missing_guid.dts')
+ 
+         self.assertIn("Image GUID needed for generating accept capsule",
+                       str(e.exception))
+@@ -7602,7 +7602,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenEmptyCapsuleTypeMissing(self):
+         """Test that capsule-type is specified"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('322_empty_capsule_type_missing.dts')
++            self._DoReadFile('capsule/empty_type_missing.dts')
+ 
+         self.assertIn("entry is missing properties: capsule-type",
+                       str(e.exception))
+@@ -7610,7 +7610,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenAcceptOrRevertMissing(self):
+         """Test that both accept and revert capsule are not specified"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('323_capsule_accept_revert_missing.dts')
++            self._DoReadFile('capsule/accept_revert_missing.dts')
+ 
+     def test_assume_size(self):
+         """Test handling of the assume-size property for external blob"""
+@@ -7857,7 +7857,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkeficapsuleMissing(self):
+         """Test that binman complains if mkeficapsule is missing"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('311_capsule.dts',
++            self._DoTestFile('capsule/capsule.dts',
+                              force_missing_bintools='mkeficapsule')
+         self.assertIn("Node '/binman/efi-capsule': Missing tool: 'mkeficapsule'",
+                       str(e.exception))
+@@ -7865,7 +7865,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkeficapsuleMissingOk(self):
+         """Test that binman deals with mkeficapsule being missing"""
+         with terminal.capture() as (stdout, stderr):
+-            ret = self._DoTestFile('311_capsule.dts',
++            ret = self._DoTestFile('capsule/capsule.dts',
+                                    force_missing_bintools='mkeficapsule',
+                                    allow_missing=True)
+         self.assertEqual(103, ret)
+diff --git a/tools/binman/test/319_capsule_accept.dts b/tools/binman/test/capsule/accept.dts
 similarity index 100%
-rename from tools/binman/test/247_mkimage_coll.dts
-rename to tools/binman/test/mkimage/coll.dts
-diff --git a/tools/binman/test/254_mkimage_filename.dts b/tools/binman/test/mkimage/filename.dts
+rename from tools/binman/test/319_capsule_accept.dts
+rename to tools/binman/test/capsule/accept.dts
+diff --git a/tools/binman/test/321_capsule_accept_missing_guid.dts b/tools/binman/test/capsule/accept_missing_guid.dts
 similarity index 100%
-rename from tools/binman/test/254_mkimage_filename.dts
-rename to tools/binman/test/mkimage/filename.dts
-diff --git a/tools/binman/test/243_mkimage_image.dts b/tools/binman/test/mkimage/image.dts
+rename from tools/binman/test/321_capsule_accept_missing_guid.dts
+rename to tools/binman/test/capsule/accept_missing_guid.dts
+diff --git a/tools/binman/test/323_capsule_accept_revert_missing.dts b/tools/binman/test/capsule/accept_revert_missing.dts
 similarity index 100%
-rename from tools/binman/test/243_mkimage_image.dts
-rename to tools/binman/test/mkimage/image.dts
-diff --git a/tools/binman/test/245_mkimage_image_bad.dts b/tools/binman/test/mkimage/image_bad.dts
+rename from tools/binman/test/323_capsule_accept_revert_missing.dts
+rename to tools/binman/test/capsule/accept_revert_missing.dts
+diff --git a/tools/binman/test/311_capsule.dts b/tools/binman/test/capsule/capsule.dts
 similarity index 100%
-rename from tools/binman/test/245_mkimage_image_bad.dts
-rename to tools/binman/test/mkimage/image_bad.dts
-diff --git a/tools/binman/test/244_mkimage_image_no_content.dts b/tools/binman/test/mkimage/image_no_content.dts
+rename from tools/binman/test/311_capsule.dts
+rename to tools/binman/test/capsule/capsule.dts
+diff --git a/tools/binman/test/322_empty_capsule_type_missing.dts b/tools/binman/test/capsule/empty_type_missing.dts
 similarity index 100%
-rename from tools/binman/test/244_mkimage_image_no_content.dts
-rename to tools/binman/test/mkimage/image_no_content.dts
-diff --git a/tools/binman/test/229_mkimage_missing.dts b/tools/binman/test/mkimage/missing.dts
+rename from tools/binman/test/322_empty_capsule_type_missing.dts
+rename to tools/binman/test/capsule/empty_type_missing.dts
+diff --git a/tools/binman/test/318_capsule_missing_guid.dts b/tools/binman/test/capsule/missing_guid.dts
 similarity index 100%
-rename from tools/binman/test/229_mkimage_missing.dts
-rename to tools/binman/test/mkimage/missing.dts
-diff --git a/tools/binman/test/292_mkimage_missing_multiple.dts b/tools/binman/test/mkimage/missing_multiple.dts
+rename from tools/binman/test/318_capsule_missing_guid.dts
+rename to tools/binman/test/capsule/missing_guid.dts
+diff --git a/tools/binman/test/317_capsule_missing_index.dts b/tools/binman/test/capsule/missing_index.dts
 similarity index 100%
-rename from tools/binman/test/292_mkimage_missing_multiple.dts
-rename to tools/binman/test/mkimage/missing_multiple.dts
-diff --git a/tools/binman/test/156_mkimage.dts b/tools/binman/test/mkimage/mkimage.dts
+rename from tools/binman/test/317_capsule_missing_index.dts
+rename to tools/binman/test/capsule/missing_index.dts
+diff --git a/tools/binman/test/316_capsule_missing_key.dts b/tools/binman/test/capsule/missing_key.dts
 similarity index 100%
-rename from tools/binman/test/156_mkimage.dts
-rename to tools/binman/test/mkimage/mkimage.dts
-diff --git a/tools/binman/test/252_mkimage_mult_data.dts b/tools/binman/test/mkimage/mult_data.dts
+rename from tools/binman/test/316_capsule_missing_key.dts
+rename to tools/binman/test/capsule/missing_key.dts
+diff --git a/tools/binman/test/315_capsule_oemflags.dts b/tools/binman/test/capsule/oemflags.dts
 similarity index 100%
-rename from tools/binman/test/252_mkimage_mult_data.dts
-rename to tools/binman/test/mkimage/mult_data.dts
-diff --git a/tools/binman/test/253_mkimage_mult_no_content.dts b/tools/binman/test/mkimage/mult_no_content.dts
+rename from tools/binman/test/315_capsule_oemflags.dts
+rename to tools/binman/test/capsule/oemflags.dts
+diff --git a/tools/binman/test/320_capsule_revert.dts b/tools/binman/test/capsule/revert.dts
 similarity index 100%
-rename from tools/binman/test/253_mkimage_mult_no_content.dts
-rename to tools/binman/test/mkimage/mult_no_content.dts
-diff --git a/tools/binman/test/242_mkimage_name.dts b/tools/binman/test/mkimage/name.dts
+rename from tools/binman/test/320_capsule_revert.dts
+rename to tools/binman/test/capsule/revert.dts
+diff --git a/tools/binman/test/312_capsule_signed.dts b/tools/binman/test/capsule/signed.dts
 similarity index 100%
-rename from tools/binman/test/242_mkimage_name.dts
-rename to tools/binman/test/mkimage/name.dts
-diff --git a/tools/binman/test/283_mkimage_special.dts b/tools/binman/test/mkimage/special.dts
+rename from tools/binman/test/312_capsule_signed.dts
+rename to tools/binman/test/capsule/signed.dts
+diff --git a/tools/binman/test/314_capsule_signed_ver.dts b/tools/binman/test/capsule/signed_ver.dts
 similarity index 100%
-rename from tools/binman/test/283_mkimage_special.dts
-rename to tools/binman/test/mkimage/special.dts
-diff --git a/tools/binman/test/290_mkimage_sym.dts b/tools/binman/test/mkimage/sym.dts
+rename from tools/binman/test/314_capsule_signed_ver.dts
+rename to tools/binman/test/capsule/signed_ver.dts
+diff --git a/tools/binman/test/313_capsule_version.dts b/tools/binman/test/capsule/version.dts
 similarity index 100%
-rename from tools/binman/test/290_mkimage_sym.dts
-rename to tools/binman/test/mkimage/sym.dts
+rename from tools/binman/test/313_capsule_version.dts
+rename to tools/binman/test/capsule/version.dts
 -- 
 2.43.0
 
