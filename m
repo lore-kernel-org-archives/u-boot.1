@@ -4,82 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C56CAFD9E1E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:01:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E31FD9E1E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:08:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8D2683E96;
-	Fri, 27 Feb 2026 00:01:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 22E6083E61;
+	Fri, 27 Feb 2026 00:08:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N5RVEGQe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="txwOi40p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D76CE83D1A; Thu, 26 Feb 2026 22:27:46 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F23383E63; Fri, 27 Feb 2026 00:08:36 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3AD183642
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:27:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B5D183AA9
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:08:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-59e5ea93a1aso1230053e87.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 13:27:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1772141264; x=1772746064; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vNNuuq9SjWJBUMJ1CcV8K0fwTD8oMtC7547+HsfwMpw=;
- b=N5RVEGQeS2A5+bRbX1PAGdmj4W3O7EXwsIOMS0bt0SH0ZbbDu7myXJR/WKL9A0isox
- IZXPKB356vDa7wGQyoopcD1os4zweX7OlcI8Hoy5I5Nu/MBpLWezQYW/LSmTAhluvK5n
- to+/d1kUs8pniWCIWkuJ9xHp/4+6NbCtA7SiQI6GJo7nSckGkBznR5XCtV2Pf1Uf1sHF
- sonBS+0TjZl8KpgQjIbSuvtTM69tI5NjPpmVFRhud5XgJHRtKvOCLGWu/qm4i2+ipf7U
- CYXHqUr1PvL17tCfSbSUiGvZP2T94oeok47GxS+QCt9j5CCEq1fZ2coFEddFLWTWz4+D
- izfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772141264; x=1772746064;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vNNuuq9SjWJBUMJ1CcV8K0fwTD8oMtC7547+HsfwMpw=;
- b=V/KX3PB2ikrCNwF24TmHDUoa5hIa+0ffFtn2aRelY5qiB7y1V7JXBB4mhrN41NPvow
- +J21uD4kFJuRpgTY7+HfP4mjszoVyXko0KhuDSMb2WPU/KdL63HzCikB8oID4DiKT3Yv
- SBI68yAx7am4vJt5HVBHZ1oVPnjypV8xq1vBhdy21pbMEET6StjhVJ0dKjbi11nWp0J3
- BWVcb0vjjjFSd579mMHuV+81nbs2Rm5oQXUph7k1t16VCxO8/fSiRCDwBsr2GPH8AfYy
- VlNldEK2oJPiJQAPRoIArTxwSvY4IzzRIHYL2e3B9r2VVZuuP1Eji0G38BvcMrm0Ho1u
- BTLw==
-X-Gm-Message-State: AOJu0Yz507Sg7Jcotbp//S0ez75tNGzGCCBUaX3BEVDK57RgGaKNKTt2
- m3bODHdJ/yUGMR2hNrkH/MwyQG1qHKGl7WOZtbNmmUU6VjwRxXyz9vK317gfXBRH74w=
-X-Gm-Gg: ATEYQzydVrlRI+L3mMYxylDPpdPL/ugxsFNxQUhEneo2kjsArfHlDp9/VTsEQjpAxF4
- xrvdtAnsijI5bLDpilGajNJRLJORJJAm2BX7v94KeJxjCyEuJVl73iiEXF2L6oVB0TDBLi0smyn
- KVd+fp6BJauQipjZIBqfrThTfIDGnBCAaCGpsvRDYeoijlt8JescKPLxOfOkcTIpI+fTR4jqHPK
- 2yYTEcV4U6/4XPC03NWGoYP4zEVOrdYQI6urUPZmQJLNiKxYqDuY0mTwfmW6HaWN2ZDBBGd637a
- 7aj+AtNzdmwcU4Nf8S4P3/3BKsG79xg7rdMhRM4Xl7cHy9gfT6u1gGhBeBlEg5lDy3+mJNaDQ76
- qV2u3JbrdMUfG4ckqXkajlUCoI4m28KpCLL9iZ74kgc+74yK48wj8fjmj4qo5kAsBPDpRm33Zrr
- axDlJfE8E3WRF/mYndLz49i5kihtZzq2yMEwg5VEWAMuzf7uWHgWb/5ZAbFe70I1fJhBseqjbln
- 0r9u6+JQC7MLEIoux4PV3ihl1GXAZZC3opPr34bIqR79Os4
-X-Received: by 2002:a05:6512:3b8f:b0:5a1:4c8:a622 with SMTP id
- 2adb3069b0e04-5a10ff833a5mr194083e87.1.1772141263690; 
- Thu, 26 Feb 2026 13:27:43 -0800 (PST)
-Received: from lnb0tqzjk.rasu.local (46-138-124-225.dynamic.spd-mgts.ru.
- [46.138.124.225]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5a109de967csm1336783e87.83.2026.02.26.13.27.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 13:27:43 -0800 (PST)
-From: Anton Moryakov <ant.v.moryakov@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] linux_compat: fix NULL pointer dereference in get_mem()
-Date: Fri, 27 Feb 2026 00:27:28 +0300
-Message-Id: <20260226212728.61889-1-ant.v.moryakov@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=praneeth@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lawon8vJn5q4Q1paakUG6E6iN/nfj/ObCZj0l0LqDE0yc1KrZPwSKyflZEBj51smdZl1vaUgb80l7+KzO2M/0+AIGCtXBwGwJkxx9fWPQp2hk1KVNtVE8H0lKPbjmaPt4CEslvage66vdXRclcfiCMoctI0IAfEtjL0FRLZLu5j0LSxFI6WUlEFbVp/mJpffo/Zvjc/oKB76onnikE8aFqwV9Z9ynbtGcF6Xrlk9zGOCDO5lIVgAAs/RHuoqL4DsXCITTYaYiWmTsQAbDW7+lPna0gAfJSCskv7PclAV5vZuteTGcoRi7GBkYfyGL1em8E8SpZbeLokMAjXozH3lPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=z+8RKwoMHtSCDKyDmpgmDLxXpoFYMrycqMMUpRWCdM8=;
+ b=EeoX4k05nWjhBY2nbEkuFA762Slxueq6Spp/SscKEDxP4UBc3tIhVIPfWJmKQvSoEnNOfS4Rdqa+XBqWiX8Q9CzX+0yZwD073hBiwCxZCse6JGeQUjoHQW+B8PTcWddRJKTpTdQ4ayCR7M4SSrLxHpFkI3iWdGF65U21NVHbX2yX0ZVeQX9cigjA0NrvWatE2mRvRTB3tVprOVZno4nNGH9HV29OIbDBzn8wWt9Fo9dcWDS7yufGpCppEn7EcvRwECY8UH4KRLMl4KtqzkzlnJM0HACg2vFceYKfdtenxi1bmHfkG1wWDDiHCRMu9japMA1r2ZojakgKXZ1bJ72C7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z+8RKwoMHtSCDKyDmpgmDLxXpoFYMrycqMMUpRWCdM8=;
+ b=txwOi40pFUhVCrvluqCNQOzvylDSmUnB3JOQTuHz6y3kZXrYCnqjvrHiaEN9n0JjMa3C2Mw0MZrmqvPmQtddFyfoM3SMyeNCFv0uRFSioAB0s7H3HDy5sFlHIiNHbi2IFxGrh0lMzXQIQni9KxpxCmRtfUUTj6F+R/wcIMhr4bw=
+Received: from CYXP220CA0005.NAMP220.PROD.OUTLOOK.COM (2603:10b6:930:ee::9) by
+ DS0PR10MB7978.namprd10.prod.outlook.com (2603:10b6:8:1aa::22) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9654.13; Thu, 26 Feb 2026 23:08:29 +0000
+Received: from CY4PEPF0000E9D1.namprd03.prod.outlook.com
+ (2603:10b6:930:ee:cafe::88) by CYXP220CA0005.outlook.office365.com
+ (2603:10b6:930:ee::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.26 via Frontend Transport; Thu,
+ 26 Feb 2026 23:08:51 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000E9D1.mail.protection.outlook.com (10.167.241.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9654.16 via Frontend Transport; Thu, 26 Feb 2026 23:08:29 +0000
+Received: from DLEE205.ent.ti.com (157.170.170.85) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 26 Feb
+ 2026 17:08:29 -0600
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 26 Feb
+ 2026 17:08:29 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 26 Feb 2026 17:08:29 -0600
+Received: from [10.249.32.53] ([10.249.32.53])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61QN8Slt3169496;
+ Thu, 26 Feb 2026 17:08:28 -0600
+Message-ID: <e052a1e6-2aa4-4ecf-acab-87e5491d5f93@ti.com>
+Date: Thu, 26 Feb 2026 17:08:28 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 27 Feb 2026 00:01:16 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] Update AM62AX and J722S CPSW PKTDMA Resource Sharing
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
+ <vigneshr@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ "Shilwant, Chirag" <c-shilwant@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>
+References: <20260224120557.1476390-1-s-vadapalli@ti.com>
+Content-Language: en-US
+From: "Bajjuri, Praneeth" <praneeth@ti.com>
+In-Reply-To: <20260224120557.1476390-1-s-vadapalli@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D1:EE_|DS0PR10MB7978:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75c85939-26e1-4e4d-80c7-08de758bf48f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|34020700016|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: +v6pJGc6c9tFuFlEJqOul9iYKlBJMNUoZO1k69zZHoOE5pm4X9rrfpAp7O44yibWmXj0N1YZhvjF+PgVHoQ/x7BjhRh/Dsb6qWSyE9sAEiboPB3MAnXjaJlrxGTGURR9pArBuOSFwun97P8WPA35en6qoNRF89734aHFo1fGxZskscZBho7jCL2HYKwZOt91JLm9KayCxXJBtOVv041XiBb+P9ysrbuA9X041rrOW/18FVEysNEbQU6bU3E1yTeG0swLWwkemFPEVCWo81uhyW28wlCc0j2CjqGjMJ5pP28oaqx9oX6aNU+dAvtuIqZTdu3UOn9fg+1Dh3/ERDN1LnIeOrlj54N9rh0B/vvbeAbbMDLpzSwDQSLJp1+fpjpZtRiISIK+nEeZKHOLsPjxzwHmYAq8ChEOVgrHihZfVg2MBfapZgcDSaAJZWm32hsxe9MvWzXbIgOHHlNX8tgHCEC1HEIb4XYD5Dd6ZFmW0LDe9JCpMOctGtBOXXEThmKp3NoiQ0Ew48L6WLdTPewBJwSoTrca0ooSxy0H9plmtj88s8qJn6iD3kdweQXWQZxqaTtJiTEjsyPUQ57mGkM6JijIcN3kAprCHgxRm+g1F+O9fuwmodtzLlhNxOf7kWD7LAiZ80R9P03UlGnTkiW57qqB4ZJ64kGldsBffLsjnKbX8Y5si0D311di8/w6m8g4mlUtReVx3wkvCxGD57SZ3EKY0HvzqDEhUWmHxDffpaaXFxexclIHV3pLYSEyFfr7IfExosnuhG/xYJ6a+3t2sggiE5uiTfyZ/njBln3QMes=
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(34020700016)(36860700013)(1800799024)(82310400026)(376014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: mrBy3EupADVPoJS6J+C60HCj9toPcdtIVVTm526SxBU9xVZblYYeNYKbMsMzToKg9t0HlCJvkBMZtrB4yQS7n3bUOY28MebEAx2doTkBih3Z4LSOa1H2G2Prx2TEyrqaJGRkfvNSxJGuzXCT26CzxxclsCVQyOhLdC4ZgsPS+6CxLF1docp9aUYeQzk2ahAf2l/KXUsQ7hyJlWJig6okjAelA9ojXQ/1OC7iYhCtaXKi5dYs87brgFZqp9bOHzvkTnZteL9FwgTxCllYLlZMoFVruJnuvwMWAv33kZHwlLaybzoNrvTcLx4fTBV6MBOVAoiAEWKnlnZ15nccshntzCiUBVbJ9XDF5+HlP4TCR4J1LBGL6iw1IASnAENxXroPJUx7MEg8QtuZ1gp+kRBDSMjysw1BgNN1CHnFViPhwqT/BvNn1JtMdEQxJeQoEdkg
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 23:08:29.6272 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75c85939-26e1-4e4d-80c7-08de758bf48f
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D1.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR10MB7978
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,40 +134,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add NULL check after memalign() call in get_mem() to prevent
-potential NULL pointer dereference (CWE-476).
 
-The function memalign() can return NULL on allocation failure.
-Dereferencing the returned pointer without checking for NULL
-may cause a crash in low-memory conditions.
 
-Changes:
-- Add NULL check after memalign() allocation
-- Return NULL on failure, consistent with function semantics
+On 2/24/2026 6:04 AM, Siddharth Vadapalli wrote:
+> Hello,
+> 
+> This series updates the resource sharing for CPSW PKTDMA resources
+> of the AM62AX and J722S SoCs while maintaining backward compatibility.
+> 
+> Series is based on commit
+> 4f70106beaf Prepare v2026.04-rc3
+> of the master branch of U-Boot.
+> 
+> The updated resource sharing changes made by this series have been validated
+> with Linux running on the A53 cores of both AM62AX and J722S SoCs verifying
+> Ethernet functionality.
 
-This fixes the static analyzer warning:
-  linux_compat.c:34: dereference of memalign return value without NULL check
+Chirag to comment if this is critical for 11.02 Release 62A release.
 
-Reported-by: static analyzer Svace
-Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
----
- lib/linux_compat.c | 3 +++
- 1 file changed, 3 insertions(+)
+Siddharth, Is there a jira bug tracker for this ?
 
-diff --git a/lib/linux_compat.c b/lib/linux_compat.c
-index 985e88eb397..e4a3293e3af 100644
---- a/lib/linux_compat.c
-+++ b/lib/linux_compat.c
-@@ -32,6 +32,9 @@ struct kmem_cache *get_mem(int element_sz)
- 	struct kmem_cache *ret;
- 
- 	ret = memalign(ARCH_DMA_MINALIGN, sizeof(struct kmem_cache));
-+	if (!ret)
-+		return NULL;
-+
- 	ret->sz = element_sz;
- 
- 	return ret;
--- 
-2.39.2
 
+> Test Logs:
+> 1. AM62A7-SK:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/ecc69e5d9cd3f09ca767bc2108ce1d0d
+> 2. J722S-EVM:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/d5b3509d548be194fbafb41480a6c15e
+> 
+> Regards,
+> Siddharth.
+> 
+> Siddharth Vadapalli (2):
+>    board: ti: am62ax: tifs-rm-cfg/rm-cfg: Update DMA resource sharing for
+>      CPSW
+>    board: ti: j722s: tifs-rm-cfg/rm-cfg: Update DMA resource sharing for
+>      CPSW
+> 
+>   board/ti/am62ax/rm-cfg.yaml      |  74 ++++++++++++++----
+>   board/ti/am62ax/tifs-rm-cfg.yaml | 112 ++++++++++++++++++++--------
+>   board/ti/j722s/rm-cfg.yaml       | 124 +++++++++++++++++++------------
+>   board/ti/j722s/tifs-rm-cfg.yaml  | 104 +++++++++++++++++---------
+>   4 files changed, 291 insertions(+), 123 deletions(-)
+> 
