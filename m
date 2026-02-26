@@ -4,103 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2B7FD9E22
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8841FD9E1E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BDD583EDF;
-	Fri, 27 Feb 2026 00:45:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FD7483F0A;
+	Fri, 27 Feb 2026 00:45:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I6TnJLKb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fKVIPJ70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD8B683D1A; Fri, 27 Feb 2026 00:45:20 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id CD06283D1A; Fri, 27 Feb 2026 00:45:26 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89E1883E96
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFCD283E96
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b90bc00578cso216381566b.0
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:16 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772149516; cv=none;
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-b936505e7a0so137981766b.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:21 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772149521; cv=none;
  d=google.com; s=arc-20240605;
- b=c7pkR6Bv8khuyiygzF9elNotYg1tq4MKCUxb34JIP78AKIJt8uKqJqiHbNf1z9NxDS
- D2vK0mHyhIVgx3naebdO5dnO6p/+TnY3bH+FpdXnVHeWecEUaXWj5DvRScPptWAnLmj8
- pX5yzEXSvVN3YGjsNIFq1vXCHf4JAUD7gHeySqGIelYBvIVNo1NPi0EJQVvha4l+iGfg
- /fOa21ZSRs9ZFHxyw+rYxy3CIu4iHYOldlPlSgk55/LNNLw4zHg/NFCIwn1lRmKwfl5f
- ErAkiI0uGHxBXiXkFYTWk88hAkttOM2S3IXEJW17hxtbHUdx2HeVjuKtQCwervZSF/74
- uSHQ==
+ b=Ka7PuLyH8RyFPbWNWQgo+NZbwtpxl3OGFBRIOLLogEsntRMXLTbKjWYqVjocFAhtoR
+ hTQTqNm4CPqAmJrJF4THcEBfVtLhQvxdSNWK2hU76ZCA5e1LpOQ4pkH1mvyTK5QupPIC
+ lfKJUG3HRMjTCmqVp74w1bqNxqaty+cZ3D0PmvBJjQW5whZP26bYuv+xCIuJCH5kVSPZ
+ R4/VNJIZ06EjMuzjFdA9Dl95ZUzf9EFfQBNuTHURNZa66aTHAyrI2OweJsjWRcdX3gur
+ jBuu/6kYliNX6ZmqDt5+TBaQtIlMqktD0Mp6CMPIExHM3uAJRX+jFhnCKCqOm33XboV8
+ 9dmg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=xtxulF8U1JxZghy+56MvkPSqIJxSkt90cwA8ovzGAJk=;
- fh=tTrm+NDWZ+bKYNPm5ycZeumOFFfXWCXTLR/O1kyndk4=;
- b=jFx3gwqSf0xPLLG1lVPCJdhldUc1Klr8RUFFGERhUBwYZ5AzQCaf+x9Jk2YhINXdit
- /1GHVPGWKnQxNyiiNKPPofodlpuyyqbInf3mMGm55j4rVYFtHnNtnFH6ep7rPo9YGkKV
- s14H9EHIKki3CXlOpOAdDfi+fgRomV4VOLp4ogcS78/RYqPEkAlo9dFkzNo/gCFcnRGe
- a0K5ruDloIZqh1h5sK+L1B/TEJ/y6o1V22zsXZ8Kkdskf+mk7MBN3HQ0YUVStcI/MBnb
- 9tvHHZpHgtSi4TW4P18ThoGd4f/3asY+LfI25A14qinDfi8BTRrW++2sWVKCyiF9nt5O
- t+kA==; darn=lists.denx.de
+ bh=bT6cK/wel2Tj/quaOTp6xZiGING8dDFl6mt8heHKN/k=;
+ fh=ww1AezHhUrUdgwpMh26fcq5DchE7hdDM1E6MkGEhdpY=;
+ b=CO+FyHIt+12PKEm5fRNnM0ApMCIdS5LOORZGmd8fUJJowiGJnQlAuq71KTaM4FiifD
+ nTJklMypicTZzVKMuBW8yCi4iOwaoxbA48oVBsrc9UpCdY/vQIbEDrZSQVSKyX7tJTFD
+ 97ZHcVd4ZaWwdbDb3bmha7WT+ZbSNrhcbRKq+jVM5yEr649Xj4/zcup1fZsHznpMZt8I
+ vZzdbCKBUU5LNW2EVYmLR7LIlh+lJtfeI7fDZ1R2Ntw8Zau2FbLlxsD6eIVNrVGF6n1m
+ 6Pa2sac8Hr5au3vpGO/W6hxiQ7RrcBs8wEfPd72eN2K7I38Z6fQ62cLrRa5wMv4DN2KW
+ jDRQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149516; x=1772754316; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772149521; x=1772754321; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xtxulF8U1JxZghy+56MvkPSqIJxSkt90cwA8ovzGAJk=;
- b=I6TnJLKbJR3loO4ayPqeakwtnKTXZqLbS6PHXeRv3LnDAMvmz2VPCV682mYrt0cFrG
- shqAYta3ZEuEOrkswKs1hlsVwc5nA/NIwOxMkOLiUzGdAGqPiNbbZzjl/QEF0DzOF4ou
- PxnPzspHJLCiTT6UYeAP9YkkEk+UMT4b2tzwI=
+ bh=bT6cK/wel2Tj/quaOTp6xZiGING8dDFl6mt8heHKN/k=;
+ b=fKVIPJ70W+ncPhRDnNu2viq0/Sp+gJPPpXFXcdXxqZVxXnXXBN4Hxc6uhVRFmwLRRJ
+ tCFLGDKxQp8D0VW4lMLOdMyrNz3U0X3yTY9FTMWRl1m3j9jI6urTBgvKRBr5I0JS9ykC
+ HQ0g2527ufpkyDdG0+3XfROriKE6LedxSJLgU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149516; x=1772754316;
+ d=1e100.net; s=20230601; t=1772149521; x=1772754321;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xtxulF8U1JxZghy+56MvkPSqIJxSkt90cwA8ovzGAJk=;
- b=MCTKokhdEMhGyqimmFFNkbnrzsZ9qhtPk//oSF2npAcKFXtiPcfhstkGUc3AwTcYM7
- m6sbZdyxSs1tnkpDlQX+Fm177h/m6pHqDuRdTNN8t3dxFA71DEj89kJUXc4U/1T7GVTd
- r6KKQeKIj5bHNiWbbiO9z9ZoGz27HARY/D/uiIGraz6UgaApA/An2D4w3DhYX+iH9qqK
- YWBdAaP8JbkZN6Sl5lsDVLZOTZpzEEy0lW8HwqupltZVbmo5m6PXsyQ2hdCTW54DHdXa
- yMWR+iFcWsSiskPGaTORviGlV1lVwerMlP3D47AmBrJzKv5k4N9P7hNEjulfY5SYrPRe
- 16Fw==
+ bh=bT6cK/wel2Tj/quaOTp6xZiGING8dDFl6mt8heHKN/k=;
+ b=cfhw5/+I0+xk5+WCnSH2Meh8v8lDp5Ra1xbfrxzdPWQqab7tWPveYoAVm+pYvt/vZx
+ Nij/LxiqNPm9uGu7fOFHlNgu8YHADaVyX3IsSDk046ItZZrUXqsYhVXMY0KStloSFJPz
+ zQ4naYPoPOihaazuALFjbHveWjauyE25YK7hqyaJa0we5KeRNZh+0r18NDuCCdcOBqSo
+ jDclRkePqgHAhf0jpiQjiJnr9OaqP9ndw4UIiwB1k2OZVVmui64rI84U6nKW46Z2a7FE
+ wCVFt8txueRj3AERYpXNCgThV8nJmY4tfVIYBWX2ikb82EKsnU1Sm4/jHN8YNtJWtDHy
+ 5Mvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZgHTbbombyQXKIZ7lBnAjEqGUTEDYo48mWTspsvP92hvGmiJXS+zZh1W8rm4Dd7cBnrz9XtA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPHURMcYJQSBn1EJUvUkIwd+BEBFivUln4QZ6PxsStTvi7ErDo
- rSgl3O0PbGNuRoHJSf3g5An22zottet4KhwaxaV8eig/4JLOtxMdXa2CY+X9XwE+fM3QHIQUx95
- Jr3C5rAIofsZvU1vXcOtmSr+yLYJ8/74CQytfNxxy
-X-Gm-Gg: ATEYQzxHDtp/o/F4FhG3v6Yuu3Ai2rN6OaTOdW5GV4lvIv3QTGNPirB0pDwdyh/jhFi
- GtgweBifRAWhI5mu9LKFWQIRBB7CwLnCuc3MrbV5HKbR9RH1tuZfzfVjf+pg5xxMAUcJ+mxy2BX
- 3ZZw6N2Zfv2JIvkOTwDr9OgDQBNxQtZVHD18uMOu7uivDS9eucnKrFL1JHTKNd0JBYR9fkwWrJR
- hK5DwPyK5Ukc2ui6fRFHqW9FJ6dIUqSY5oKHz0aVtocpLB8HQ0GBgdypniRXsEPoyCzE+oI4iRw
- FZuvHw==
-X-Received: by 2002:a17:906:e0f:b0:b87:c92:25bf with SMTP id
- a640c23a62f3a-b9376511177mr30979266b.33.1772149515945; Thu, 26 Feb 2026
- 15:45:15 -0800 (PST)
+ AJvYcCXS2s9Ntk3HO8JIIRobNC8M+kF5RkDIPHCsll/JoN+/1lR809YyU7i88g1Ztz2A2ZA15/6tRb4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRALPq2zPyXtM5RLx039j9ST6UnlydPrIwt1N1UDm+DDL2szsC
+ S34hJzxpoT6vMcBGH0ZHvSzB7NBzWt+cv1avpCmhPpM7U+3hUF/Rb8Q6POugtOU+SkbAIqgvvqI
+ REYaPopnmY/dftZfcjzzSlImh6iN8TbIG30Aep78w9TBH2cRXHqY=
+X-Gm-Gg: ATEYQzwLns2wjaPBSsXgwnAS9nAZPn0vBXbAtFMxsCwZoPbdMFneEoDGI1OoT0frK5o
+ K0ml44rc/rg0JzpIaLxAKAWcurwNHj4DKHo/SIgLKO6MQig21tmDXNABUFE6tZbQGevVJzLkSUF
+ vJ71BYpevWyxNUJkvUBExxs1k7MuO26QtammgOl1KNZF2PhvV/38aRXkQRp7kFQGjKFej/yNkrv
+ UlIsljUuAM7pfBtz9K+v8caaO+4oa69RXvuLkx+bUuT6nEcyJkB6ITl7CcqgTf7390p/1v/Tzj5
+ q5S+Gg==
+X-Received: by 2002:a17:907:97ce:b0:b93:56a4:d6d3 with SMTP id
+ a640c23a62f3a-b9356ed6a7amr299047266b.1.1772149521273; Thu, 26 Feb 2026
+ 15:45:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20260225073711.51688-1-heinrich.schuchardt@canonical.com>
- <ee169196-69a3-4003-8531-0ffa4e76bf6b@cherry.de>
- <e9d98d0b-578a-41ef-9440-00ea615d224d@canonical.com>
- <d00103df-8188-4039-b618-dc48ab1c1a39@canonical.com>
- <8f18322a-e269-4839-a178-6cd2bf4aa488@cherry.de>
-In-Reply-To: <8f18322a-e269-4839-a178-6cd2bf4aa488@cherry.de>
+References: <20260226-fdt_size_hint-v1-1-5a731a5f8d6d@maquefel.me>
+ <8fd72f0c-51ed-4721-a39f-1e41aa6665a0@cherry.de>
+In-Reply-To: <8fd72f0c-51ed-4721-a39f-1e41aa6665a0@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Feb 2026 16:44:52 -0700
-X-Gm-Features: AaiRm51cyk_Y4-c3mJ60TTVHAoUyFkf9hrG-MuLLNXmIi7rEuxJj872IrYkr1Rw
-Message-ID: <CAFLszTgmgfwLtoS9hACwd9BS+L6Gm91j6i+QCvOGvweY7SchzA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] boot: don't select non-existent CONFIG_VPL_CRYPTO
+Date: Thu, 26 Feb 2026 16:44:54 -0700
+X-Gm-Features: AaiRm52b3JxjeN2poSJLKDcXuzBE83Q3e9N3ggFQcgSA6hwQr1W7ZdxFWlqbUEk
+Message-ID: <CAFLszTjaUnQo1=VtCjdf2ocQVCnnT05j0wyd0KT0EKxf1e6opg@mail.gmail.com>
+Subject: Re: [PATCH RFC] binman: Make FDT size hint configurable
 To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, Kory Maincent <kory.maincent@bootlin.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>,
- George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de
+Cc: Nikita Shubin <nikita.shubin@maquefel.me>, u-boot@lists.denx.de, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Bryan Brattlof <bb@ti.com>, Yannic Moog <y.moog@phytec.de>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Chukun Pan <amadeus@jmu.edu.cn>, Moteen Shah <m-shah@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,74 +114,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi,
 
-On Thu, 26 Feb 2026 at 07:54, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Thu, 26 Feb 2026 at 09:21, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> Hi Heinrich,
+> Hi Nikita,
 >
-> On 2/25/26 1:21 PM, Heinrich Schuchardt wrote:
-> > On 2/25/26 10:06, Heinrich Schuchardt wrote:
-> >> On 2/25/26 09:37, Quentin Schulz wrote:
-> >>> Hi Heinrich,
-> >>>
-> >>> On 2/25/26 8:37 AM, Heinrich Schuchardt wrote:
-> >>>> Symbol CONFIG_VPL_CRYPTO does not exist.
-> >>>
-> >>> Correct but I have a hunch this was based off of SPL_FIT_SIGNATURE
-> >>> which does require crypto support, so I'm assuming VPL would too.
-> >>>
-> >>> But this symbol indeed never existed, and even if it did, it wouldn't
-> >>> compile anything else as far as I can tell since drivers/crypto is
-> >>> enabled by default in proper and only if CONFIG_SPL_CRYPTO is set for
-> >>> SPL, and only SPL (checking for !TPL and !VPL)... so something feels
-> >>> unfinished with VPL here to me.
-> >>>
-> >>> I'm not sure we're improving anything there but I don't think it
-> >>> makes things worse, as such
-> >>>
-> >>> Fixes: 4218456b3fac ("vbe: Add Kconfig options for VPL")
-> >>>
-> >>> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >>>
-> >>> Thanks!
-> >>> Quentin
-> >>
-> >> Thank you for reviewing.
-> >>
-> >> There is a symbol CONFIG_VPL_MBEDTLS_LIB_CRYPTO that might be used but
-> >> then VPL_FIT_SIGNATURE support would have to depend on MBEDTLS.
-> >>
-> >> Maybe Simon can inform us what his design intention was. Adding a
-> >> defconfig actually testing VPL_FIT_SIGNATURE would be helpful.
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
+> On 2/26/26 2:52 PM, Nikita Shubin wrote:
+> > [You don't often get email from nikita.shubin@maquefel.me. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
 > >
-> > There are more non-existent symbols implied by VPL_FIT_SIGNATURE
+> > The hardcoded 64KB FDT increment size causes excessive reallocations
+> > when building FIT images with large artifacts (e.g., 250+ MB rootfs):
 > >
-> >          imply VPL_RSA
-> >          imply VPL_RSA_VERIFY
+> > ```
+> >     ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+> >      16118  297.130    0.018  305.189    0.019 libfdt.py:947(resize)
+> >        870    9.876    0.011   15.211    0.017 fdt.py:56(BytesToValue)
+> >      16118    8.024    0.000    8.024    0.000 {built-in method _libfdt.fdt_resize}
+> > ```
 > >
-> > @Tom
-> > I wonder why the VPL feature was suggested if it was never tested or
-> > used. Should we remove all of VPL?
+> > Add support for configurable increment size via --fdt-inc-size option,
+> > with recommended value at least equal to total binary artifacts size
+> > to minimize resize operations and reduce build time.
 > >
 >
-> As far as I remember, VPL was a necessary step to add support for VBE
-> (Verified Boot for Embedded) that Simon was working on. I don't think it
-> got realized entirely (upstream I mean) which may explain the current
-> state of VPL symbols.
+> Does it *need* to be configurable though?
+>
+> After all, we kinda know what we're going to put into the device tree
+> right before inserting it no?
+>
+> I'm wondering if we cannot simply set the INC_SIZE based on the size of
+> the data we're going to include (+ size for the property name and some
+> overhead I guess). I'm assuming changing it before using fsw.property()
+> and reverting it to the default value after the method is called? I'm
+> assuming we may want to cap this such that we don't need to worry about
+> OOM with very big artifacts.
+>
+> I"m also wondering... is this code path also used when you put the data
+> external to the FIT? fit,external-offset (can be 0, the case for most
+> platforms except NXP). Maybe this is what you want? I'm not too verse
+> into fit generation and quickly reading tools/fit_image.c, it seems like
+> it expects an FDT with data properties and then relocate them outside
+> the FDT and set a data-offset property in lieu of the data properties...
+> That seems pretty inefficient to me, why insert the data inside the FDT
+> in the first place?
+>
+> The next question is how exactly you're planning to set this size.
+> Because as I see it now, this is only configurable when calling binman
+> manually and passing it an argument. Which means, this won't be used by
+> default when building U-Boot with make.
+>
+> This also will trip the coverage test though I'm not sure how we want to
+> test this feature to be honest.
 
-Heinrich asked me the same thing this morning. From my understanding,
-the penultimate series was applied but later reverted. The final
-series was never applied. It's in the Concept tree for now and is
-running fine on an rk3399 board:
+From memory, we had a discussion about incrementing the size by a
+calculated amount in one of the patches for adding signatures in the C
+code. I favoured doing the calculation but the author felt this was
+too complex.
 
-https://concept.u-boot.org/u-boot/u-boot/-/jobs/300379
+A better place to fix this is (sadly) in pylibfdt:
 
-If there is any interest in getting these two series in I could resend.
+    def property(self, name, val):
+        """Add a property
+
+        Write a new property with the given value to the device tree. The value
+        is taken as is and is not nul-terminated
+
+        Args:
+            name: Name of property to add
+            val: Value of property
+            quiet: Errors to ignore (empty to raise on all errors)
+
+        Raises:
+            FdtException on any error
+        """
+        while self.check_space(fdt_property_stub(self._fdt, name, val,
+                                                 len(val))):
+            pass
+
+i.e. pass len(val) to check_space() and have it increase size by at
+least that much (but a multiple of INC_SIZE).
 
 Regards,
 Simon
