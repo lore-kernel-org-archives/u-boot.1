@@ -4,89 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD6B7FCE096
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 14:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B289FCE095
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 14:38:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E4583D1A;
-	Thu, 26 Feb 2026 15:38:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EE2583E83;
+	Thu, 26 Feb 2026 15:38:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="URHEvQ1h";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ltgTxH53";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2F4383D1A; Thu, 26 Feb 2026 15:38:03 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2512383E83; Thu, 26 Feb 2026 15:38:14 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A75983AA9
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:38:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B36183AA9
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:38:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d4ba9abbecso955658a34.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 06:38:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772116680; x=1772721480; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6IUyz6T4SyeeBMYmDS7C8X32VIiCM89WBrbeFCtfFuo=;
- b=URHEvQ1hpycq7ozeazj1p+wonMcu5dzbMuqO2LBN3N5F5IWB9AmfAsIvmLlYGi5+6P
- +j1JqnqI1pJYwr6eOiDsCFi5lYiPwn2SSzfp3SueR83rUwqiBNx2KBmfNTM4S3agkdYz
- dD2PMuC0+QWXqsv1yyzYUr+9/+hfuptCVIB/M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772116680; x=1772721480;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6IUyz6T4SyeeBMYmDS7C8X32VIiCM89WBrbeFCtfFuo=;
- b=C6n6wSC/DMCErOPdiE1joAfvsta0gOnLu/s9paATqclREOPUwe0ly+hcbkCo/v75WT
- GLrDB8CFkitC3PmAmo+7nGEIw1t8BzC+ZLTcz+NXeVb+Ne97TVSxx420g+FJ0lmKW+qL
- ObMst7Xe9yKR6Hj5q6ZhT4B2yf5D39U6BIUEThdt7Uesc/z8P/HKjOTcMi10cbJadSbt
- 1ZJkIINbgNJElofGBR30VA4EETduz+4CRd0r1I0IVUhHFSR+4gHaoMP2cIQBocbWjcn0
- NlBn3o25wpPxEL78dGfL/6DeOzWNZ1o28RXcP4Jx0ss82T9nBDS5W/NgOLfKpq5DmcOD
- 2LPA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWkXgPpQrBg2jenCQnF0xVl6SC/8M+LAPk4ofowQDifzS4fa1L9nl7XNeUMnbrM91Op6NyHbpI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5oL9PDUzdvplcRF/tTKp0rtjlkyqu2qiX4Tn0FvDs5VpbXxuT
- tDUYQp+tBlsYuD9tDkrTap+eOi0YgOSi3Hy3gZ83/twurm+ojD0M9yOMdRjENoDaAuA=
-X-Gm-Gg: ATEYQzyalZqL/ZNm36zatVaSZQG35Ac5w53QRlW7p+3+Rj6pdZYa16rkV+UVji4V+h3
- S4XoTHQPCmglJ7tqTqybXa7VLyRtHcau3QXAdeOUI6iRqlUWZNIzo153XgWfh8qWvSXH6P3A4K2
- hfkPR+alNiFmz13c5PkYdIVBq8vAwU8PXz6XFk9B5M5mh+5aeN22z7ZGWrCd6buzW+d/FgVPIPI
- 8gzpHfCy1GiY2RYwwk/3/DRwkgEHKCQu+arHwj5Oz7+zUFzHiI4kS2p8AsOi9Gh00SR6Q5JBGn/
- N88iAaU0N2faqT+aj6FKoOCHOgxM4g1c0dDDufiQaYkU0vs8GZVuiqKPQPJHuXM6fzjwhKYODq/
- 5PJoQXie4VaNDeJYAj8qphu5nasTWtvzropAXeWY17UnOMCJVnyEgSV2E7mMBtxR1Agh09eLHzj
- /skk3i/Q7Ddt7T9UFsvSLDub4uic9TBKbiZrYqrEQt/vRgnQANP2Te6pPx2uLDpokAWj9iSut15
- 3Nt33ZcNYzCmYlHqxtH60U4ttPkfRtlvhq1l6X1XJqnC+qVi74=
-X-Received: by 2002:a05:6870:e243:b0:329:7f93:2b6 with SMTP id
- 586e51a60fabf-4157b10a9eemr12329753fac.29.1772116679713; 
- Thu, 26 Feb 2026 06:37:59 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4160d2cf00fsm1952068fac.20.2026.02.26.06.37.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 06:37:59 -0800 (PST)
-Date: Thu, 26 Feb 2026 08:37:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de, nm@ti.com,
- heiko.thiery@gmail.com, m-shah@ti.com, j-keerthy@ti.com,
- n-francis@ti.com, bb@ti.com, Diwakar Dhyani <d-dhyani@ti.com>
-Subject: Re: [v2 PATCH] mach-k3: Defer CTRL_MMR access until after TIFS
- version response
-Message-ID: <20260226143756.GC1593142@bill-the-cat>
-References: <20260225051559.416445-1-u-kumar1@ti.com>
- <50d29e78-1502-4dbd-ad24-a1025142947d@ti.com>
- <f21a0fba-0a19-4f95-88c3-41e0728fb888@ti.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Bku0yHETQ64mPzAnNyQ+wQ1lIP2/h1W3xYB9eOoHdraA1GMyCD2S+RnvIojOdKxcpb5mYq4oPeBq0LA4FjZkvJr/5i83+4J+z/r1cb0Q/8jXwIltT1FOpzahdPsO9q+Q8hCEpv2tsJ7BlKmMj50qf+MsNcDyUUO/QfjjaKxUkD8KaXVglra9s5oZY2N6uiTVwyg4CDA6+djm7xfGO1g/nVOGJ/1uecDU/CIELWKiTQm3xPxQ2c0y2OARGBtyCz84aLxoo2KIKDOQhqswZLZJX9bFLfjohY1q/xnJchpP1Quo/ge4u5r9NAledZgBKkEEQZU4giDR+HbwS5FBN61/kg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KAggqeWsFmCWkS0VVMPrW7+UIO9TgLK9nYPhu4GrF2k=;
+ b=m4T+T/iyUF1PczksYB3EdZkGnOyeQzLK5VdxdBf6fzBcCcf0CcH/n1q3G4qnVJZHCv82v7GzKmwzXt2b4hTwSLUTcP+oI9XKM1b5W5FA0DUiXK66c0IrNpi4EqWKYSdy4mKsU84xJTm+UQnP+vIyGH7k2k3YdBBLnlZjZ+jOn2EtOqwa4rsAS7gATrvyX87FIK5FQW6cqB831SjaGIZr4VbvIGZSSC1ZnSmzC4J6WSQHf9m+UblU7kVCH8Ug1K2LTbAG2v6JciQHokd9umymJujJuMvSikFUzGlTDDleZC/iJrritsh3hNY9+/Gq5ltb2/01KBfZVwp2r6Gdk07wqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KAggqeWsFmCWkS0VVMPrW7+UIO9TgLK9nYPhu4GrF2k=;
+ b=ltgTxH534WXLI0/Wk5dUsVgDRAiVVaRRm4reWmZ/aaL+TIuPggbTSnOIm9Ll1qSpdHA59diLpG91Gb4DSOLrWy3xWw5oaZ2ShXZc7aWlgN0Y6s0PNMB2DXcy4SH3O+LAGHmcb39Jvk5+Wb0ojeSuO/Zk0VVZjsPtiy5ATa5cMT0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PR3PR04MB7465.eurprd04.prod.outlook.com (2603:10a6:102:91::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.13; Thu, 26 Feb
+ 2026 14:38:10 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.013; Thu, 26 Feb 2026
+ 14:38:09 +0000
+Message-ID: <c9921674-11ab-4357-86ff-6c209a9e2392@cherry.de>
+Date: Thu, 26 Feb 2026 15:38:06 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] sandbox: don't imply non-existent CONFIG_KEYBOARD
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Jerome Forissier <jerome.forissier@arm.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+References: <20260225095830.45904-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260225095830.45904-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0091.eurprd06.prod.outlook.com
+ (2603:10a6:803:8c::20) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0NbWZ1VJUHCv2wnI"
-Content-Disposition: inline
-In-Reply-To: <f21a0fba-0a19-4f95-88c3-41e0728fb888@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PR3PR04MB7465:EE_
+X-MS-Office365-Filtering-Correlation-Id: 15a2b6c4-caa5-4892-8b8a-08de7544a985
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7142099003;
+X-Microsoft-Antispam-Message-Info: aU6P23FBF7QFlXv+vRCZJu5FmKtVYNpggMy8tNAGoshTzhO/6d8vSsqvKOv/IvUvxRlRJ9tQoH5q2977KCef7J1OQT2Go5o5r7Pr5BRmja4il1y9s/N/LEM7OevW3CN8Zn2PDTm0jqIfrRy52RLfoukvCxrgstsPj0+MwGavfHCId0un3EjDcD6Foc1HPBywNgNniz3v6c+2cnr1iU5A75TbPSPlx/QijmiAK4AESYVMhgeMAke16wuCl3jySW8Dw31I3uzImpjVKN2uMmYRnjceKTnp0iLOPiaYpE1Zydvrn1tIrzMHhUAcI7MSK6evL6ftSRhdnLXd0L895oLi2jnQr2LD+LsHOEtb7maaHBsTQfOQlkJsJLrVUPDg7Rsx0i+xZTD29iLL/b9OLDSVbwydJcKD8WVp1wTrPJVIi+JWAdoxSq6031x+PamPGErfabFHTWtpgnH4QL4LEi3qyPW4RhJFm2+j2/NpHCQBDCJrO3mbEt/rHUjvPvZMgT6CAirTYVwCW58AVoMhv/HaET4MU6jKJj/IgAfLRP/4peRff0IPF6bwyKaxIHCzllENkQ0NNNTcGIHMBhMjPYAIyEECBNzPieiNTE7oyWocN0QUzIaa37KnfxbUt6hKqYr/ooNcwCgxn8XWGVoIqgGSEditb7bHbj+C57JLVqUYzvQsE+5DPT3QHepckA+xQJbLjCKxh37opA/rJJ4u45dWaKeRUscw0LxRtmQn9MR2u2Y=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7142099003); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MzVOWTgyRzlmNEx1YktNRDAwQ1BDa3dDNWljdkxESVVpUlllVm1IVXBSL0lD?=
+ =?utf-8?B?OEwwRGtBUFkvN2N1N09qNDBMTHhQN3I0U2RzMVg2NXgrNTZ5N205SDFSeGdO?=
+ =?utf-8?B?Z1d5dFh3V2dtRDNqU1FNSjFMUjBYZ1ZuYThjekZ1U2tpUGJYRzZHNVdGak5W?=
+ =?utf-8?B?UFZhMDZvLzgyMDhwNWFScHNnYVFQWTc4REw0VW4wSjVuVUxzWkNyS0pjUHpT?=
+ =?utf-8?B?cnAwblVFQ08zSy9LVG9JNVhETXRXQWxicjdERitVUGU2aXlNbndCbSsvUzNB?=
+ =?utf-8?B?TlBwOVVoQS94L0VVVGNkZjdqb0JQdUJuQnVqSFFVRklSdEFja0Zzb0l3OHZo?=
+ =?utf-8?B?WVgwL1dtbU05UDZyaFRya1FxUmpUdzdOZ2xyMVJWVHQraUhuOE9hUUZZRUMr?=
+ =?utf-8?B?aWYxaGRVaTVJUlUzR3VjQWxDQTBZWTBTWDhsb1hCcVRFTTFNM1RQU2ZGVHZH?=
+ =?utf-8?B?S2srR2V6QjgwUzFFSHhXdjdEQW9oOE1GUENVMlFKWjRyekxKS0ZtT2Yybkhu?=
+ =?utf-8?B?NlNoLy9FRTk2eVhXWWZhK1F3Zm1aaFIxTkFCTmRWTFZIcEJWQkd5T25yYXo5?=
+ =?utf-8?B?MUpuMDUrUDh0Qy9IdWsyZVBxbUhpSFoyZCsrdmJoTWU2bUhlL1ZreU1PUzMx?=
+ =?utf-8?B?N2tURjFhWERVQm5ES1RoZkQ3T2dtaUVNc21xSnJ2blY4WkZ6aXJOd01NUW5G?=
+ =?utf-8?B?QS9kMkoyUldPNjh2eUpjNkl6TUd4SElRdG8reVNwQytTZ1FGRk5nNENsbFF2?=
+ =?utf-8?B?QUpSbWpIT3hoN2xGZVF0WTRDWmhQa09Pa0lvQXNOUkdDbmo3NEU0NHVjVy8x?=
+ =?utf-8?B?aUdtcU5PakVGbjRrR2o1M2UxaW4yUStlOXZ6RXc5cnBVRVJoUDdPUjJrZzZi?=
+ =?utf-8?B?MUdMb1UwNXlML1lNS2l2dzZHMVJRbTl1SHc1em9lSE5ycG1XK3ZnN2xRNmFT?=
+ =?utf-8?B?VjNyVm9vL2J4QzgwVjR2V1VUS0UrTEhQMmJYQXE5WkhXYVBDWk5KVUFKTXBr?=
+ =?utf-8?B?c0FZanVoTU1wbnFlN3hiRHg3ellTL1RLOTNJR091bWRYQm1zd25jMXJBZWpT?=
+ =?utf-8?B?MTEzVDBHUlNlZ0p0TTNsTWRWMFh5Zjg2S1VjbFlQVXE2Q3NPeTF2SEJOTE9S?=
+ =?utf-8?B?dW9lU1dxck5Xelk2SkF0Q2Z1ZVkrVkpXZVNublJia2VyLzBlRHhCZFJ5SGdZ?=
+ =?utf-8?B?amdNRElzSi9PbFRRenZkWkoweHU0bEZ5NmxwdGhLOElLUFpNVzdSL1ZvSnRT?=
+ =?utf-8?B?aVNmWnJyWDR4cVVsN2g1aXVGQUJ2cGhVSVpOYkY1SjIzdVR0UXM1Z0N2NDk5?=
+ =?utf-8?B?SDBRKzZFVGlsYlFpaForaGN0N2dUQTU0S01JeGE4L3ArZ0h2dFp5OWVSckxv?=
+ =?utf-8?B?d2UrUXQxZ2k0VE43L3lRdkRtZWIvSjZBUVRvVGpid01FaDVyTTErVW9veFo4?=
+ =?utf-8?B?MXhkRW5IZmJlR0grdzQ5ZStFNmM0Wnowd1lLcDk3ZFV6WnhPRDQ4SHlsa3NB?=
+ =?utf-8?B?cmhWQm9lZTN3ckFxSjRTajVXT3l1amY5UzZnZjVoQWphZWhyWUI3Ym1oZWZB?=
+ =?utf-8?B?RlloeGR2aHdyRHp2M3dnOGtscS9kTVByelRYNGhERmV2Rzg1UXg1S1hVWVcz?=
+ =?utf-8?B?cjN5QTNBNTg0WUlrQzMxeGZycldMRGJxMVYwL3pSeUtqdEk1NFgvYlF6M1ZK?=
+ =?utf-8?B?b3V0eG1CNk5UeHRQU1RYM0c3ZzZhY1hEV3pwK1VxamtMaTBnbTRHbFlkY05K?=
+ =?utf-8?B?bzhGMVBIeThJek8yTjUxc0p3bCtSK0FkMCsycXVjMU5Rc0wyMkdvSVlPbmxQ?=
+ =?utf-8?B?eURMYVZtdDdWZ1pnWnFIK3FWOWthWG8wTkJjeDBIZ1NFUVJWN0l5TXZoanJy?=
+ =?utf-8?B?NUdvNjlRT2RpR2Z4NW53Y05qZ0txVW83MW5BdGNLTGd0RDRGdXFhMG9ORFdt?=
+ =?utf-8?B?YTFtb2pLWGZTeC8ySGxIMS8vTXJ3RTVMOWhHdWZWR0p3Y1R5MGo1YkUrcXhp?=
+ =?utf-8?B?b0VFekFLOUVnNy9pQ3hmWFhpSERsM2RMYVhaWkFMbXYyeGhkRlhYNFF0L3pt?=
+ =?utf-8?B?VzFUbWNsdThUVUxYaitTOERGV2pINW1oenVJYVZva2cvbTBCb2RYUVE5ajA1?=
+ =?utf-8?B?bHUwVVJrMXc4ejRqZ2lCNUZKc2tVTThQSVVmazNSTUpGSTJNQWptQzByeFJq?=
+ =?utf-8?B?Y1ZLTjdIM25sNE1IOW9zQUFQK2tWUUtvQWpuT2laSmdHYkl1U2VOemMvdjdU?=
+ =?utf-8?B?eU1haDVvOGlGRmhacjE2NnZFMVVRMno0Y2hCbkdoYzZCY010cUplV2xTNkNT?=
+ =?utf-8?B?ZkxvUmJ3UzB4dExqT2RGYTRtWVZ5eFNXUmtQWkQ0a0ZxZVpDcm1IUT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 15a2b6c4-caa5-4892-8b8a-08de7544a985
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 14:38:09.6924 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lIp9MrfhLEzFAXqnn2k+g+ueXCCYlQBCxEH3gNiOdm0w+8Jw6TADIiStz3dzJcvxR+0sdIstbulM2e/PLhraIfXPRxulNlSBNnNMvNBYyIw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7465
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,53 +148,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---0NbWZ1VJUHCv2wnI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2/25/26 10:58 AM, Heinrich Schuchardt wrote:
+> Symbol CONFIG_KEYBOARD does not exist.
 
-On Thu, Feb 26, 2026 at 10:20:11AM +0530, Kumar, Udit wrote:
->=20
->=20
-> On 2/26/2026 10:04 AM, Vignesh Raghavendra wrote:
-> >=20
-> >=20
-> > On 25/02/26 10:45, Udit Kumar wrote:
-> >> The CTRL_MMR registers are firewalled at boot time, and TIFS unlock
-> >> them as part of the system firmware initialization sequence.
-> >>
-> >> Current code assumes the CTRL_MMR space can be accessible at early
-> >> stage of board_init_f execution by unlocking them.
-> >>
-> >> But on HS-SE devices, TIFS takes more time to complete initialization,
-> >> and CTRL_MMR registers remains firewalled and not getting unlocked.
-> >> Which results in any write to these registers are ignored.
-> >=20
-> > Hmm, this looks like something that can happen on other K3 SoCs too.
-> > Should we update all the other SoCs to follow the same logic?
->=20
-> Yes, we need to update all SOCs,
-> As Bryan pointed out, this issue is seen on other SOC as well[0].
->=20
-> I will post for other SOCs as different series.=20
+It used to. C.f. f60e6f676764 ("input: Remove legacy KEYBOARD option") 
+where platforms were all supposed to be migrated to use DM_KEYBOARD.
 
-Do you mean another iteration of this, as a series that addresses all of
-the SoCs? I'd prefer that (and cover letter explaining the situation) if
-possible and reasonable, thanks.
+DM_KEYBOARD is already automatically included for sandbox via the select 
+mechanism just above the git context here.
 
---=20
-Tom
+Funnily enough, select DM_SANDBOX was added before the imply KEYBOARD.
 
---0NbWZ1VJUHCv2wnI
-Content-Type: application/pgp-signature; name="signature.asc"
+See 93e1edffb02b ("Convert CONFIG_KEYBOARD to Kconfig") and 558e12571e3c 
+("sandbox, x86: select DM_KEYBOARD instead of default y entry").
 
------BEGIN PGP SIGNATURE-----
+I would recommend a fixes on f60e6f676764 as the symbol should have been 
+removed there.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaBawQAKCRAr4qD1Cr/k
-CnBYAP9qWJR+GvMGpMyzyKoxjn+VfODZJM5dTep+thmViN/nAAD/aloe1V5ccPfF
-tEdpAqd5RQ56Ov9sKa0XX6EPoJMc3g4=
-=5Aqt
------END PGP SIGNATURE-----
+Also, there's also a similar imply for exynos, in 
+arch/arm/mach-exynos/Kconfig. Which also has a companion DM_KEYBOARD 
+select in arch/arm/Kconfig under the MACH_EXYNOS symbol, so it can be 
+removed as well. I'll let you figure out the appropriate commit hash for 
+the Fixes tag.
 
---0NbWZ1VJUHCv2wnI--
+The change is fine, more info would be welcome (in a v2 for example) but 
+I don't think it warrants a blocker, as such:
+
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+QUentin
