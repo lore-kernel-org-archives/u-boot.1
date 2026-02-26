@@ -4,58 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE891FD8FD3
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 16:11:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9623DFD8FD3
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 16:21:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ADC583D8A;
-	Thu, 26 Feb 2026 17:11:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id F1FB583AA9;
+	Thu, 26 Feb 2026 17:21:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="dDRLVwtI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sfMasRCa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 177CB83E83; Thu, 26 Feb 2026 17:11:57 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 089D483E83; Thu, 26 Feb 2026 17:21:25 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2FB383AA9
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 17:11:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E18FA83642
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 17:21:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (xcpe-178-82-120-96.dyn.res.sunrise.net
- [178.82.120.96])
- by mail11.truemail.it (Postfix) with ESMTPA id 9D2E71FB45;
- Thu, 26 Feb 2026 17:11:53 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1772122314;
- bh=Q1cqXehaRM14LSi74n73rUZFC0315J0HZIlf/UnlVYE=; h=From:To:Subject;
- b=dDRLVwtIVar53rJPRvxY1uhWuKQS8LpqACEU62PskH/Xe/erknDLDwDz4F2A/nH65
- uzV1kmVVCqGjPEtupHs2nJSMT+StxjC8/ko2N4Ckw0gnY0EGoU7c+KX3SG4/sezkXK
- BmZMa/GySV/0Ba3EWxVcNZSo23+90zMn2P6Me+g+5oFJIgIfAEmh7tk3JFxgbo3LrW
- Wk92O0a+q4Gkb5t8mAAP9rhqkh8+soFk24IkCgQJEw2qtD+VZTzTrzTCv+6G9KsFuu
- JsM3I3WzDJCtjXaJAxkhncz2pzwT6cwY7sSeyvDw7XWZd1/K36DGxCRN/lLHZ7g8qj
- GyMU9oFWsuzQw==
-Date: Thu, 26 Feb 2026 17:11:49 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Stefan Eichenberger <eichest@gmail.com>, Tom Rini <trini@konsulko.com>,
- Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Francesco Dolcini <francesco@dolcini.it>,
- stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
- n-francis@ti.com, emanuele.ghidoli@toradex.com,
- francesco.dolcini@toradex.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
- restore
-Message-ID: <20260226160901.GA29510@francesco-nb>
-References: <20250314100734.23777-1-eichest@gmail.com>
- <20260226070502.GA6701@francesco-nb>
- <20260226142345.GB1593142@bill-the-cat>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-45f10d7eb81so423669b6e.3
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 08:21:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772122881; x=1772727681; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ylAy9gv4Up7G8nq4G+qhfmgho0VwZovrzn6CLk1G8Us=;
+ b=sfMasRCaeSvKvMQG1FJuVbL8azpJkkr7No0CYJMK66OL7j0mnlKPWGgt8sNq52Ws1i
+ ViKWCF1nNQJWlhJl8ulCXXF4WJ2CEds+QQziKz9OpPVWliFHc3erhO+UyrBYLCovc6IB
+ De2jx1avAwSFqAgzKMLAaVZOo9PXa1AgEjeyY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772122881; x=1772727681;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=ylAy9gv4Up7G8nq4G+qhfmgho0VwZovrzn6CLk1G8Us=;
+ b=laSbNigkJ+Mb18cKhR3M0yWJkz7JQwEubjkDTx2wXxcaC3Yw5onGWTpLxUEzFjScXQ
+ 2LHzmOvW/JZpzSBSfpcnub6LjWENlkD3QBO0QZjZ5kdtPTZ9bkSu+e+rcKuCmFG6C4MJ
+ nGB0jTZLaGtPuskeR4CbBH/WzgjJTlTc2QNPmIFW3P57oPH47JDdykK0m2sBN7iqZDLE
+ 7AG7pbbEXsMj70ZzgSu4z+4LwEoULl5tuCGW34yjEvabza8/GjPSrMKP3WMUe8Y3zQhy
+ vjt4KSS+s+1UrB6ACHjp5unXh+FmRprqRaele3S3rrNl7vRRRUOWYhLb4BkJ9WtGSPcw
+ aP6w==
+X-Gm-Message-State: AOJu0Yx9Vba6NqUt4M8pjRdWH0Y4sxUX5TwPCCRa53EPf9wmpDosTqyq
+ oz4umEc+yhpU4mNFiDE75co/HtlTcfL6PatHdUYxfAGWkglNSGbIKXrhaXosxwDdEnfr3tqz5fh
+ uSe1G1Qw=
+X-Gm-Gg: ATEYQzw336rbmbiGY0sYIjLOE7nV8GFjrhNUyaJKScRuvljXpl0bKZOnk0O92I7ccdZ
+ oSbC39zMnZCMIpAYTsn6YxnxcD1Vew7nNyaqkX3FCvqu1lqqeI8WtKVFlgUP9imvcQkji4NGJqc
+ ikM1VfesbhbRfzDt0UPlALHZ69iWxaqQNBDP/TsrfE28QCvk9mte50qeyO1laPHfmCKpWWAu6ms
+ WCaJpEXfb7F4mFTEVRKzOvDo/qMbl8etC6QVTbEU0Tp3E1IjfaQDqeWalyLh03Z3Y1pKx1ENl0m
+ gZH1msJMqXqTYDuAiklYgVhzKDr7yFPd7FFrQNwFoLWwCRF45PYAml1mPfklJJEtQdX6XHWoOoR
+ haNvS9QDDFT+AqMORl0UnpULIqAWhDeDY5QQtirLkl5Shvm0H2Ik09n0ov5m15I/xEGi64wNsQI
+ sg+IhT228jLZ6OLf1LMaYJq8ZRgxxvtfv+Iw66i/V4x7NRCk7/8HWpz6uu7PMoP2xofu/Z90B8z
+ 8vsdO9c2O0MBCh5wZ5UW8lJV+g7PmGFlOUNA3RIFpmLhFIMOg==
+X-Received: by 2002:a05:6808:1488:b0:45a:5584:9bf6 with SMTP id
+ 5614622812f47-4649ef953c7mr2220402b6e.39.1772122881597; 
+ Thu, 26 Feb 2026 08:21:21 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d58666ed17sm2203944a34.27.2026.02.26.08.21.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Feb 2026 08:21:21 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20260224183107.124914-1-trini@konsulko.com>
+References: <20260224183107.124914-1-trini@konsulko.com>
+Subject: Re: [PATCH] Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab
+Message-Id: <177212288064.15829.14919862925041332836.b4-ty@konsulko.com>
+Date: Thu, 26 Feb 2026 10:21:20 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260226142345.GB1593142@bill-the-cat>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,73 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Emanuele
+On Tue, 24 Feb 2026 12:31:07 -0600, Tom Rini wrote:
 
-Hello Tom,
-
-On Thu, Feb 26, 2026 at 08:23:45AM -0600, Tom Rini wrote:
-> On Thu, Feb 26, 2026 at 08:05:02AM +0100, Francesco Dolcini wrote:
-> > Hello Tom,
-> > 
-> > On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrote:
-> > > From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> > > 
-> > > The get_ram_size() function fails to restore the original RAM data when
-> > > the data cache is enabled. This issue was observed on an AM625 R5 SPL
-> > > with 512MB of RAM and is a regression that became visible with
-> > > commit bc07851897bd ("board: ti: Pull redundant DDR functions to a common
-> > > location and Fixup DDR size when ECC is enabled").
-> > > 
-> > > Observed boot failure messages:
-> > >   Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
-> > >   Authentication passed
-> > >   Starting ATF on ARM64 core...
-> > > 
-> > > The system then hangs. This indicates that without a data cache flush,
-> > > data in the cache is not coherent with RAM, preventing the system from
-> > > booting. This was verified by printing the content of this address when
-> > > the issue occurs.
-> > > 
-> > > Add a data cache flush after each restore operation to resolve this
-> > > issue.
-> > > 
-> > > Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to a common location and Fixup DDR size when ECC is enabled")
-> > > Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when cache is enabled")
-> > > Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> > 
-> > Tom, can we merge this?
-> > This is the last bit to solve the regression reported here,
-> > https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
+> With the change to regularize the usage of TEST_PY_TEST_SPEC in the
+> sjg-lab stanza with commit c7f360f20d84 ("Gitlab: Rework sjg-lab calling
+> test.py to be closer to test.py stage") the leading "and " part of the
+> usage under qemu-x86_64 wasn't removed when it should have been. Do so
+> now.
 > 
-> I wasn't happy with this at the time, and Stefan's last email in the
-> thread left me with the impression more investigation was needed and
-> likely something else was the root cause.
+> 
+> [...]
 
-I believe that this patch is needed.
+Applied to u-boot/master, thanks!
 
-On AM62 what is happening is the following.
-
-We have a cortex-R5 that is the first core booting (there is also a
-cortex-m4, but it's not relevant for this discussion).
-
-It runs from internal memory and it configures the DDR ram
-
-We load to DDR memory various pieces of firmware (TFA, U-Boot for the
-cortex A53, ...)
-
-We do execute get_ram_size(), that read/write the memory, and it is
-supposed to restore it back the original content
-
-However when we have the cache enabled, we might miss to write back the
-original memory content, where the other pieces of firmware are.
-
-And after that we start the cortex A53, running in DDR, and there the
-memory content might not be correct, because there is no cache coherency
-between the cortex-A and the cortex-R. And because of that we have
-crashes.
-
-Stefan: any comment here? Can you help?
-
-Francesco
+[1/1] Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab
+      commit: 437ea9f8be5afaebe2d8cbab6242f1182857f21e
+-- 
+Tom
 
 
