@@ -4,54 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA880FC5904
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 07:05:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F71BFC5903
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 07:56:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF01783C54;
-	Thu, 26 Feb 2026 08:05:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 7EB1D83C54;
+	Thu, 26 Feb 2026 08:56:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="PB2+H3h9";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FObqrqVK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11B3683D1A; Thu, 26 Feb 2026 08:05:10 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id 67DDF83D1A; Thu, 26 Feb 2026 08:56:38 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8421483AA9
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 08:05:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D24283AA9
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 08:56:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
- by mail11.truemail.it (Postfix) with ESMTPA id 507321FAF8;
- Thu, 26 Feb 2026 08:05:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1772089506;
- bh=gJ5jDBnwRZUqtfYb44Sq7zpwiLuzQ48QNl5gHXB0Vrg=; h=From:To:Subject;
- b=PB2+H3h96K1pIFN0wtkiQGleGJpDZVOkT4hFxCX0N8xFL9ioHV7EFvrf22rGvH+1V
- HxbBNxz/JqD23i+Q6iVmxeFa8AQ3B2mSGs84eL7xKDuROLoAMkx6/JszP1KEphPBqj
- jGd3F6ATpGK2N0QAPTHNjcxLF+y4HYpOoOyIqzYvLO4+NtO0UDjvcqtDEnug0BV/H7
- SScJXdmHA/UgmO8kVItzd1KFHFyjUcu9Xn30oH7jqdx0BPi6KdWYPe0+g538ui3DAx
- u807C7ym6NtJRKn++sIZBX8VI6cRvOctV9Daek8ffd2ML5bOp6movqbfPKVh8jSgAo
- rtbeDmy60679Q==
-Date: Thu, 26 Feb 2026 08:05:02 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: trini@konsulko.com, Stefan Eichenberger <eichest@gmail.com>
-Cc: stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
- n-francis@ti.com, emanuele.ghidoli@toradex.com,
- francesco.dolcini@toradex.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
- restore
-Message-ID: <20260226070502.GA6701@francesco-nb>
-References: <20250314100734.23777-1-eichest@gmail.com>
+ spf=pass smtp.mailfrom=patrice.chotard@foss.st.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ImLktxZlFi+houn+8GwXgHQCYmWV4ZtDUCy+lHSlZqo7dRNxNmkZqQhuOtTAIsOQ+lBXaaFKPBSKrY0hacPoZYrZlW+d5ZvfcxiOcuHyupr+7jtg2fSqjzIItdsWJdUAvW2WLrrmIwk/VW76wwG3H+mGVKWgO0jKOfoDFcmuMqbVoO0YhjxhZIj9ot4CQ0TbZNhaINE7YWUiJ5NKfm1s1M7xGSsrhwgyBF8jReJDodnX9UrQxIRwFzQd6/fXF/m8SGO/cLqf8RYRa6UeIOCX5nf7B9HRc6oHunz3vypwE1cwvuPC7VDP5FfytSzWLdgJ0IH+1dibPZ02fMEVm1gSSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OW4krvh+ErdGSXicAnnRmRONaOsCc7DQQUx8t4S6UYA=;
+ b=K+15w+OMZySldvDm0cMdy5Xy12Nl/eKMjT7vPUyspqWL/8AXt2ozDntZD1AXkP3OlgSGy7/G8giqcuriDqna0ypLOxDbrvh54eOUE5k1+P4BYCthtVSLgTcfQRXnQcMotMoZ7ipREywsUsDMmldso4Phicjha0GegYop4zG3K6VOaCXx7yko0SawKn0OeiRWuV0tjLyUkScu5w8XarrT4iskFzekcN5+8sZJAM3P8wfey/q9Z8V5+TWJrog8OvYPpKzApbHuS6jMwIR0mrrAjk5X85GpLYrxYEhihXYQ94k0r3H0z7QfYtBanSaERTJVSdDnoS4/wjAnGMmcbfpKiA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.59) smtp.rcpttodomain=amarulasolutions.com
+ smtp.mailfrom=foss.st.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=foss.st.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OW4krvh+ErdGSXicAnnRmRONaOsCc7DQQUx8t4S6UYA=;
+ b=FObqrqVKzYWCiJf5lbnH6nEzFf3nNvPnwlPEaehZRWu3xpJLbyrZBKuQU+4OAQVWfKCj6YRSe9TFLrIyt1ng1vooYMgGx0BRd5/7w8QRTSPmczK4LynPxFF9qfWM8T1wZ4ThVLg2Gyd0uwi7hQTP+xyjmtbFFAW+J9F02itBxRlDHd3hkUttDaLhQbczBH8he07VvmtxZ4WRkrjHsyJb+/8PCIaHn4Sj5+9ShtxntL54XP7ttN6M8i1dxk/rZsAjXn5g50lj+d70PATHzipidFqcBwUBF/l5yATMygIOfGWvXSlqWbBVxI1yADk2ZESszWOdRptE+OFN7nGMWnRLWA==
+Received: from AS4P189CA0042.EURP189.PROD.OUTLOOK.COM (2603:10a6:20b:5dd::20)
+ by VI1PR10MB3328.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:135::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Thu, 26 Feb
+ 2026 07:56:32 +0000
+Received: from AMS0EPF000001AA.eurprd05.prod.outlook.com
+ (2603:10a6:20b:5dd:cafe::8a) by AS4P189CA0042.outlook.office365.com
+ (2603:10a6:20b:5dd::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.25 via Frontend Transport; Thu,
+ 26 Feb 2026 07:56:32 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.59)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.59 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.59; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.59) by
+ AMS0EPF000001AA.mail.protection.outlook.com (10.167.16.150) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9632.12 via Frontend Transport; Thu, 26 Feb 2026 07:56:32 +0000
+Received: from STKDAG1NODE1.st.com (10.75.128.132) by smtpo365.st.com
+ (10.250.44.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 26 Feb
+ 2026 08:58:50 +0100
+Received: from [10.48.87.93] (10.48.87.93) by STKDAG1NODE1.st.com
+ (10.75.128.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.29; Thu, 26 Feb
+ 2026 08:56:31 +0100
+Message-ID: <00271afb-8dd1-4e12-8499-19fec0c7fb9c@foss.st.com>
+Date: Thu, 26 Feb 2026 08:56:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250314100734.23777-1-eichest@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 6/9] spi: stm32: add stm32_spi_is_enabled() helper
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+CC: <linux-amarula@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Jagan Teki <jagan@amarulasolutions.com>, "Tom
+ Rini" <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20260225161851.2475274-1-dario.binacchi@amarulasolutions.com>
+ <20260225161851.2475274-7-dario.binacchi@amarulasolutions.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20260225161851.2475274-7-dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.93]
+X-ClientProxiedBy: STKCAS1NODE1.st.com (10.75.128.134) To STKDAG1NODE1.st.com
+ (10.75.128.132)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001AA:EE_|VI1PR10MB3328:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8770dcd4-09c7-4d85-1772-08de750c8e86
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|36860700013|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: HfdSaw79o1gVL8wAtzUWmRpULFe0izXTosWjUFfk0hjwvYtV1vqAMOp+JF0vawAKvI9E7TbtKf8fuQYQckHeiZ87Asjsatb3Ug/3t/1vCNZe/RaubUXDNu6qoSeydnZTZoPHXQYY8ElQtILD9M4i8icoNj9wieoba1y6fBRrIg291fCKx7PiAIDNQ7pIj8iqb+c1+2sTsnHmomFRnqs4CrQ2PqUdrSRZrms4arons+XQyCXrVpNriFj2mR91uKrlSqaH+hlzXRkZyucIcMqiSLLbP7C6/wjiVHhpZzul+lVxIlpG3TEvg/WwmY3gAjg0v0Kn/7jJrfer/H7d6ntvQNoAn7B1CFhVChQ4rhcBRIvYF0ONHnPhefMmz8oy2GeMVHSC6wgPO00QkvApWJdRGun2D9TCEyipGNbnmNN6DIlhnd+PADt8Y2cMucTlkxBLqxPwgBwcuqAerCDZKjcqeMOyKkzZbLIruGsxFwj1SfK2+cHimegIDEzTllNEG7nAoR7PYEansLmt0UAPAhXRUJqcQ629fxV28zBSzBgxm+Yd6A3XGMqMA4mQq+proR1/QYY8Kt7Vy3MOgZEFZFlY+7EIfer5SsHcnv9q0FUSwxVZfZdchBVOT4tB14rGu8uEouhE4Qj5hkfokwdq/bGahtSo4XZH7Lzo5U1L2lCOoELkiHWCBdJlkE2xMlpgDm13f8nBeXIvtpAEeHIKHEya9z2IeZNUCqhFLy7gHQlduHwOjI9CQrgCwD0nxYFlpbsiGuI9/k7WEdT9waHY01/SUyp1WdTA6G4gLJV1yz6D8jXHsISnni0mqZtsbAbDHvW9slqHnrSOhjt86e4gp9+uHA==
+X-Forefront-Antispam-Report: CIP:164.130.1.59; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 8wMSkPth7x79uCzotdGvnezT+wP3+E/yG9HPrsBurcXSjjxL5CXurXNlrRrN3OGkVQsuHy9nNYQ0gnaJnxo8TAJcigWocdM7EUkgOGNmzsi7jXfwQoviWestJ9cgNNcqaqkALaeRa6floxsqWbqsj7ZXO1CentFFw+hAEUsYzdvntAeE2W9VM8YRfxkCrOg0ttClsYvJH9Mm3Jh29RjPDD6TVeIPhQj0601ceX8vpMaSwV9INb3S86rN/qpt0qU+epEM1J1eV0wIzE57VbwxoIgcTqklRgrxjxqvd8ii0C8hKWtcEKv5GSx+tjEnf4LQZh5MiYhXNc5VHiNYwswfAyYBlf3Sn/gd56of61F2SF9ygstiCJDIfL1imBMvxld4/bpP1rpOcCkYhNakxQI0bMSVBTlEP03HGJcQDF7dFtBkHR0LN/4abRG1qdAKAa4Y
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 07:56:32.3589 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8770dcd4-09c7-4d85-1772-08de750c8e86
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.59];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001AA.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3328
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,38 +132,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
 
-On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrote:
-> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> 
-> The get_ram_size() function fails to restore the original RAM data when
-> the data cache is enabled. This issue was observed on an AM625 R5 SPL
-> with 512MB of RAM and is a regression that became visible with
-> commit bc07851897bd ("board: ti: Pull redundant DDR functions to a common
-> location and Fixup DDR size when ECC is enabled").
-> 
-> Observed boot failure messages:
->   Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
->   Authentication passed
->   Starting ATF on ARM64 core...
-> 
-> The system then hangs. This indicates that without a data cache flush,
-> data in the cache is not coherent with RAM, preventing the system from
-> booting. This was verified by printing the content of this address when
-> the issue occurs.
-> 
-> Add a data cache flush after each restore operation to resolve this
-> issue.
-> 
-> Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to a common location and Fixup DDR size when ECC is enabled")
-> Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when cache is enabled")
-> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
-Tom, can we merge this?
-This is the last bit to solve the regression reported here,
-https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
+On 2/25/26 17:16, Dario Binacchi wrote:
+> Add a helper to check the SPE (SPI Enable) bit and replace the
+> open-coded bitwise check in stm32_spi_stopxfer() with this helper to
+> improve readability and consistency.
+> 
+> This is also a preparatory step for future driver updates that require
+> checking the SPI enable state across different code paths.
+> 
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
+> 
+> (Added in v3)
+> 
+>  drivers/spi/stm32_spi.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
+> index adba97915cd3..70eb8735e03d 100644
+> --- a/drivers/spi/stm32_spi.c
+> +++ b/drivers/spi/stm32_spi.c
+> @@ -192,6 +192,11 @@ static void stm32_spi_read_rxfifo(struct udevice *bus)
+>  	log_debug("%d bytes left\n", priv->rx_len);
+>  }
+>  
+> +static bool stm32_spi_is_enabled(void __iomem *base)
+> +{
+> +	return !!(readl(base + STM32_SPI_CR1) & SPI_CR1_SPE);
+> +}
+> +
+>  static int stm32_spi_enable(void __iomem *base)
+>  {
+>  	log_debug("\n");
+> @@ -245,9 +250,7 @@ static void stm32_spi_stopxfer(struct udevice *dev)
+>  
+>  	dev_dbg(dev, "\n");
+>  
+> -	cr1 = readl(base + STM32_SPI_CR1);
+> -
+> -	if (!(cr1 & SPI_CR1_SPE))
+> +	if (!stm32_spi_is_enabled(base))
+>  		return;
+>  
+>  	/* Wait on EOT or suspend the flow */
 
-Thanks,
-Francesco
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
+Thanks
+Patrice
