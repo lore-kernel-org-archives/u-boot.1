@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE9FFC5915
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 12:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7592AFC5937
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 12:08:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D77F083E88;
-	Thu, 26 Feb 2026 13:08:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20C5C83E83;
+	Thu, 26 Feb 2026 13:08:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Eq57QrLA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KDFDqZR1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C77983642; Thu, 26 Feb 2026 13:08:42 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
+ id 6E7A983642; Thu, 26 Feb 2026 13:08:45 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A2D383E81
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 13:08:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B92483642
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 13:08:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yOgJ95maXFGRwO2En0xI/RPfPyXAiUO46cADGHvGRRR92ieEvPdxiTdOPhrKAUyltXUlFvNnrU/sJhkpS/ZoPcJ7Z9qX068VRNt4ZArPLnOc0I+QpyE9zjWgIjdiNF4q29DO/UvrR7e97arZ49g3UZrUvUokKr0aPCCKfwhMPhrSv2P5Ns63EMtQ5DLHdj5s2jZ2/oZU9CvBwwt1Hs+kCO5N/rAg+XlyNL4oI/PEP3z/okwDrDkJS5VXH3SWk4+/1veQh3OH7g4XN2dJsn3TUaj3zuv9vp/CsqY24l7KxK3FsA9WG0xyPQQSvxh7I8CwWauH8ks0qPY8DtKeieXZng==
+ b=bETKYIDAMD40auWr9DGpskfuSP9b1ctY9vxpqlxF9h51aPqZ2waqx+ZocWCZSt1pQBF8VAlaUTjjgMHRF1k8vV2+add4YE3ovEhubxDUF0+kHWotSZVFL1aE94b6aXKHzZAZocT2Bb9zhM2bTWpMmSHKaAwbBoUrVqFIje51Xywbeals/7o18byufO5mut+JK8vpoXYyAPxaTONSIBj/dXGc1f4Wtk8EE6y6sBAnV0f4/FhQvXzk8kKYTNaXa8WZi+/NW3cWU0T+4CQORPusIRq/f2VKDymdtQTwo/9jVe0BAABO0tMEsF9b8ET1lgn+EUblt2f17mi5Gj6BmxjRkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JykcYFaMEueKP6rMj1HoyR5qUxfU+Ei9m2Rw2EBrzvc=;
- b=Ck8dVyzW9hDsSx7ltVAHPKSpCu7Zm4T47/yhIaaAqqHpLVp4fk07QhZlX5ICpvZlwmGAn6idoDU6mIHPGFQZbkupJg5d7MEICpQNpqeE1wS91EHyZbJY5hr217rKBGZgAjlmJ6/003067c2UpBR/2IIS8e+jVXkr/uUY66wksE8RDUCO0w7c0b98921fTo8E5Q6x5pFtToFhTFaZ8xurf0kqBSWkMf3rvmKkFKdpmC1guj+i69SFIyhDdJiSPJ9WtmAmeC5CJUhlOiEEN/5x2djGM8AZEy4xOPg2Be6j+iF5OGjLBCiPrAQb4XBtjptgLTEpqg94KPeZxO196z2mmw==
+ bh=NPJAC+wkfn5GXpi+MzGwCtE7M/IXH3k2DtwyyTZdYJ0=;
+ b=erQ5oXRapzpa5S/6CGm4b55yiqEprU1VOY01/Lj1f15nSUun2P5eSBlBQO9u5U2p8hOaUVrjra7bgWW7aNaqKVqVZuVIDDwbR5X61jM1BJN/0onsCFRk3pOMMfL14434mItrIfkTy+HwKdVw3CsCNwA3Ej1FwhLIR838rDP8I6nUoO3CJIdBCyts95AMEFz+oQneaGEHc5TjQJKNpUr78NfTIRiSNN+GdJDbbI1c6NC9c4TPywL37Hx5B8wSxAa+BL6PAPQyqJUQra2h7TtEmeIXjYVMp3XQTjo/JE6ooyIs+12KcLLHNvElS7wEfHOXxv8g6spE/kHnmhpmAMWZEw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JykcYFaMEueKP6rMj1HoyR5qUxfU+Ei9m2Rw2EBrzvc=;
- b=Eq57QrLA1NdV6N2GYWAgR8wTd8jVrzGopMmRdoc31XKMwtL5g4BCU4JwbGtNpJYywOhL/LPWWk3g8ZGC/FEOxK1Q3gBD/yzoQASRUBSZ2AjCfmFv5XUtM2E3mnm7OSYj0oSeFCzldbbMKxVnEf1gTmKV6rr06fIpFIsa0ewvQJs=
-Received: from CH0PR03CA0051.namprd03.prod.outlook.com (2603:10b6:610:b3::26)
- by CY8PR10MB7243.namprd10.prod.outlook.com (2603:10b6:930:7c::10)
+ bh=NPJAC+wkfn5GXpi+MzGwCtE7M/IXH3k2DtwyyTZdYJ0=;
+ b=KDFDqZR1kAwRnlGgPnVxrGsWt9FjQi6QmIO2KhKgqnNjTyyDJg0NnHd9nisUDFPq6VGqAFYmF4CcGRfw+lJ0Ag6hSwu+CBocenzJQQGKE3ao3iDHxlRD+0r/3XAG4Pgwsu3lj/qr2BUZMp/OjaF3KKzGaG8q8HjJsMYJ/gV2oBE=
+Received: from BN9PR03CA0703.namprd03.prod.outlook.com (2603:10b6:408:ef::18)
+ by BY5PR10MB4275.namprd10.prod.outlook.com (2603:10b6:a03:210::24)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.11; Thu, 26 Feb
- 2026 12:08:36 +0000
-Received: from CH2PEPF0000013D.namprd02.prod.outlook.com
- (2603:10b6:610:b3:cafe::c3) by CH0PR03CA0051.outlook.office365.com
- (2603:10b6:610:b3::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.22 via Frontend Transport; Thu,
- 26 Feb 2026 12:08:34 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.21; Thu, 26 Feb
+ 2026 12:08:37 +0000
+Received: from BN3PEPF0000B36F.namprd21.prod.outlook.com
+ (2603:10b6:408:ef:cafe::78) by BN9PR03CA0703.outlook.office365.com
+ (2603:10b6:408:ef::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.25 via Frontend Transport; Thu,
+ 26 Feb 2026 12:08:36 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CH2PEPF0000013D.mail.protection.outlook.com (10.167.244.69) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ BN3PEPF0000B36F.mail.protection.outlook.com (10.167.243.166) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 26 Feb 2026 12:08:36 +0000
-Received: from DLEE202.ent.ti.com (157.170.170.77) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9654.0 via Frontend Transport; Thu, 26 Feb 2026 12:08:35 +0000
+Received: from DFLE212.ent.ti.com (10.64.6.70) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 26 Feb
- 2026 06:08:36 -0600
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:08:33 -0600
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 26 Feb
- 2026 06:08:35 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 06:08:33 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 26 Feb 2026 06:08:35 -0600
+ Transport; Thu, 26 Feb 2026 06:08:33 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.50.71])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61QC8RJw2328866;
- Thu, 26 Feb 2026 06:08:33 -0600
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61QC8RJv2328866;
+ Thu, 26 Feb 2026 06:08:30 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <trini@konsulko.com>
 CC: <bb@ti.com>, <reatmon@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>, 
  <gehariprasath@ti.com>, <s-k6@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 2/2] doc: board: ti: Add support for config fragment builds
-Date: Thu, 26 Feb 2026 17:38:27 +0530
-Message-ID: <20260226120827.2258728-3-n-francis@ti.com>
+Subject: [PATCH 1/2] configs: k3_*: Add config fragments for enabling inline
+ ECC and/or BIST
+Date: Thu, 26 Feb 2026 17:38:26 +0530
+Message-ID: <20260226120827.2258728-2-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260226120827.2258728-1-n-francis@ti.com>
 References: <20260226120827.2258728-1-n-francis@ti.com>
@@ -93,30 +94,29 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000013D:EE_|CY8PR10MB7243:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1ce83e97-8bb8-453c-ad5d-08de752fc545
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36F:EE_|BY5PR10MB4275:EE_
+X-MS-Office365-Filtering-Correlation-Id: b5ac61f4-335c-4854-d1e9-08de752fc4ef
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|34020700016|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: 9wLhcd+UBbmDA0Yui2H5253by3LXioldd8YRg9ShgxwzOMJHlhQXFwLQg6fiZ53BlCjsKHvBTjOYM1MBaVaFIxzIBO4F4ASMOhu0hAsR60SpJ7udY0qCNksMpeTGN/FU7IdmHGM4pP65T/e+f1V2DqbDVxjo8hbTvWit6r+7TGLmE/I41+6DmopKE3fsquAbdDLuED3LdUzn5yW8Vce0jkmDFt7CqfwU8EluZP88LjKiGxZwJKwj7C3qp7tReS84YdUYuGN72Z7hZDeB731Co5Qby74Gdn4vlSFawzATNQk+vktAI5iV5zShacmBZm1LvmBUYIlcvCdx6uoncVwNxtwpb5gYcIp+oIQZJIalfdAHCVJz6hRIVTDhpVoHcmMl0Fd3UZSGSqtduq3D6bEBomNUDHn4TeapTUAjHgivspOfvZp6sLwzLu0xqAjDVcAebjdQTzI+MFx8+RRaCXd0YMJJ3lwsSveOKmJAerDh8atUP1x5mQze2ut+S0yCjKDGgS15pDXVwpnd4dbObxOSz90TPOHOYfissTEYxl0aseo98BXjEQwTUzJeNtDbiDAfJueKdOz+IigOAKgz6K56BmHrg3uyk+You+pprI+tKogtlSpvY9JVP+E5iI0gNMohvMyuXHEKzqeqHMSiyJVxNzpRne6UU2NgolQVqkaUrXbEm1E5UJqR+MBF2858YiqUxTrqZroy2MaL2eYb0ra15QMfkh6p4nbemc6GJz/ekXfyr/q8yS0WJjrA8NuQFpiRcSI9PKKPBvH7UKt8y4wilkQ7+cu1HieP90z2ZwGEJqdCkJ7fZrA+6mK0sZoqCKjqwK09jSmX1XbSlUiTDUjLKA==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(34020700016)(376014)(36860700013)(1800799024);
+ ARA:13230040|36860700013|34020700016|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: wSwm2iLz3bbEX138IYCgA2+mWRY8Mt0uV0uotws6sBn1DVsTDb6h4gxnYIPYCx0yorA8Mx1zRwQ2upmYPTjBBMgguLJLW+UGzQBdiXs4wtUWnzstDcbnHuJTstM757Z8iOSqbCPfD0Hdh+RMlpobW4oRA6pCQN9kGMX3o/Za7fxxoEkK9LKLPS73pGooyabHJEpM5sWxW7zLI6eG2TTNk4l6ClDqS16BZjEJyI6X0Y8SeKA0hN18d0zS3FSoSs4oRaatHFeyN5pW/A6G/wLrkdJNuoa0vYS98CvQaN8sweV81OZHOn/PQoveJkr1Ep4nMdEe1gtBl+nCZIcWUOek6e+Ih3tOERATPNcUBcFMfSldIGYvN80ff1FXqeJwDXVnNRs0+AhryLDoGOm1QKn3zRybvvWxouu0PSGD72c1gKtPNtVN7T6JYop6fQ00cuoqcH6Fp5YPEGPlXYH5ugyKn/NTHOR4MzaJa/0s/fHMxD8lhL7EIPgJ9Gdn4gPZBbEAXg0N+MhEapUH7mUXZLYUhrGdvtCruFnRU2pxBv79zOVaW4C9T+wpnUrZiI+nLbinf00QV3zE+eJQ1638UXAEMRo4Dox3JFEiHWVIRPkLrmWnT5zcMpEFYnT2nQAcXRdgyE6jQbydbso7OqNl3SlD98IQpe2D+dQSAeM5V5psUh1vluytQ+R8ph8/5xDFHE/g3dvXXuHJrQOSTpe+uFkb/eL4FFyeBI7ZNR5/h6ItRRbvFaWNUMv3ImJdqs9uJHd+4GmubiI+xcJ14J1d6jzOGQtpYHm0HeXoVt4+AAmZterJmVulQh20TxcIxfNJoVasXXnWXW8SDnX0xFt0/BoOrQ==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(34020700016)(82310400026)(376014)(1800799024);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: juaeA7WAETyBMig7XC0OJ9pDMnw+IShVwyXTf9HSSO5ckY616/IXgDU0hg3LTGy9I3u1FSuPGHLY0gWBz9wYekYyX0PvL6XXHxBRSIu4aNzTK6+UEQ0EdCqo/0WHBvbz0ZX1OtwTam3NbuksJMxi+rpDP1jMP9OG+hV9o3+3YUkt3PyS3vTFJ9qiOc4k6FInk7xzCBmCoCBuOj9MHiQ7X8sDK6IMkUuyMLidjx/Y7qgX0ydY3Rz0Hmt8gw/VxFmf81kTS/aSbDWKcNQrT5BDSsD4N0ooEkshCQUBqsjA4yLfPEVR9d4oBCtRq+N6ZykYtTqdVSjC/0eTHMXqSoEbMkXgJDMYHHD3L1fNyG9QUMdtPDvHYjmQF1BEJN5+cXjBxACA/Pqxkq3uB4HdeqZ83lQ8voCapt6UMpaB8g9I+bcL0e8Ks5TKrmOmKf3h0BpU
+X-MS-Exchange-AntiSpam-MessageData-0: ieaHTbcO20Pp0CQ6MFWxVw6fUKXWEe2UyhiUcw2z/OFMBEV/gKy9LPw194OSvY9hS1m7/cgHLmV2LWWCYoH1Yp5cOEOQyKOl7hibRtY04kcw5GwbEKDeJn1lZGur0ehh1UxDQVngqBZUK+zb4M7Y6jqQ/6xrnAKbEyECje31EPMEKz5j77mt0rIWdnhMgm/3eiW9Nod3FFisEVDRNPtvKM+T/5RwpO4AuZ9I5Nx0gaaSPspyBYibTo1a5h18tz3mJ+S5JBdSmYKcjk000m167v2dKhmu9FN946HEr6WToiD5huij+rS4bQl/AcYx6WTY8Z0D8tZBZD+lmSzoU4YCk+SMBAdZYKbOH3PgI8Atw7jSWHbHNMbn4uisifWGirIym9A3OHcf+xF+hTj2s2wm6hJ+VwnLiUwb/FXKn/vCtQYQsU/4sPm3r0yluTD+BwFU
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 12:08:36.5783 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ce83e97-8bb8-453c-ad5d-08de752fc545
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 12:08:35.9930 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b5ac61f4-335c-4854-d1e9-08de752fc4ef
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36F.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB7243
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR10MB4275
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,82 +133,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add sections dedicated to explaining how BIST and inline ECC can be
-enabled via the config fragments.
+Add config fragment support for enabling inline ECC and/or BIST on TI K3
+supported platforms.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
-New patch since v1
+Changes since v1:
+- move from configs/ to board/ti/common
 
- doc/board/ti/k3.rst | 55 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
+ board/ti/common/k3_bist.config       | 1 +
+ board/ti/common/k3_inline_ecc.config | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 100644 board/ti/common/k3_bist.config
+ create mode 100644 board/ti/common/k3_inline_ecc.config
 
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index ed04a57c167..4dae5b4733d 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -678,6 +678,61 @@ filesystem and then imported
-   fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}
-   env import -t ${loadaddr} ${filesize}
- 
-+Built-in Self-Test (BIST)
-+--------------------------
-+
-+Built-in Self-test (BIST) is a feature that allows self testing of the memory
-+areas and logic circuitry in an Integrated Circuit (IC) without any external
-+test equipment. In an embedded system, these tests are typically used during
-+boot time or shutdown of the system to check the health of an SoC. PBIST is used
-+to test the memory regions in the SoC and provides detection for permanent
-+faults. The primary use case for PBIST is when it is invoked at start-up
-+providing valuable information on any stuck-at bits in the memory. LBIST is used
-+to test the logic circuitry in an SoC associated with the CPU cores. There are
-+multiple LBIST instances in the SoC, and each has a different processor core
-+associated with it. There are LBIST tests that can be software-initiated.
-+
-+Current implementation triggers the BIST tests on the MAIN_R5_2_x cores and is
-+supported only on J784S4-EVM.
-+
-+LBIST/PBIST checks of the WKUP_DMSC0 and MCU_R5FSS0 cores and memories are run
-+in the WKUP/MCU domain; this check is part of HW POST. HW POST runs in hardware,
-+before the ROM code starts and can be selected by MCU_BOOTMODE[09:08] pins.
-+
-+Enable BIST in (:ref:`A72 SPL build <k3_rst_include_start_build_steps_uboot>`)
-+by including its config fragment.
-+
-+.. prompt:: bash $
-+
-+  make $UBOOT_CFG_CORTEXA k3_bist.config
-+
-+K3 DDR Subsystem (DDRSS) with Inline ECC
-+----------------------------------------
-+
-+For SDRAM data integrity, the DDRSS bridge supports inline ECC on the data
-+written to or read from the SDRAM. ECC is stored together with the data so that
-+a dedicated SDRAM device for ECC is not required. The 8-bit single error
-+correction double error detection (SECDED) ECC data is calculated over 64-bit
-+data quanta. For every 256-byte data block 32 bytes of ECC is stored inline.
-+Thus, 1/9th of the total SDRAM space is used for ECC storage and the remaining
-+8/9th of the SDRAM data space are seen as consecutive byte addresses. Even if
-+there are non-ECC protected regions the previously described 1/9th-8/9th rule
-+still applies and consecutive byte addresses are seen from system point of view.
-+J784S4 supports up to 3 ECC protected non-overlapping memory ranges. The current
-+U-Boot release supports a single region covering the entire SDRAM space.
-+
-+ECC is calculated for all accesses that are within the address ranges protected
-+by it. 1-bit error is correctable by ECC, but multi-bit and multiple 1-bit
-+errors are not correctable and will be treated as an uncorrectable error. Any
-+uncorrectable error will cause a bus abort.
-+
-+Enable inline ECC in (:ref:`R5 SPL build <k3_rst_include_start_build_steps_spl_r5>`)
-+by including its config fragment:
-+
-+.. prompt:: bash $
-+
-+  make $UBOOT_CFG_CORTEXR k3_inline_ecc.config
-+
- .. _k3_rst_refer_openocd:
- 
- Common Debugging environment - OpenOCD
+diff --git a/board/ti/common/k3_bist.config b/board/ti/common/k3_bist.config
+new file mode 100644
+index 00000000000..671dda1a9dc
+--- /dev/null
++++ b/board/ti/common/k3_bist.config
+@@ -0,0 +1 @@
++CONFIG_K3_BIST=y
+diff --git a/board/ti/common/k3_inline_ecc.config b/board/ti/common/k3_inline_ecc.config
+new file mode 100644
+index 00000000000..143c814b41c
+--- /dev/null
++++ b/board/ti/common/k3_inline_ecc.config
+@@ -0,0 +1 @@
++CONFIG_K3_INLINE_ECC=y
 -- 
 2.34.1
 
