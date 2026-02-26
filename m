@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC480FCE08D
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 14:23:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD6B7FCE096
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 14:38:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 490BC83EDF;
-	Thu, 26 Feb 2026 15:23:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B0E4583D1A;
+	Thu, 26 Feb 2026 15:38:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QA1SL5sV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="URHEvQ1h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A19B83E85; Thu, 26 Feb 2026 15:23:54 +0100 (CET)
-Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com
- [IPv6:2607:f8b0:4864:20::342])
+ id E2F4383D1A; Thu, 26 Feb 2026 15:38:03 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DC8083E8E
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:23:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A75983AA9
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:38:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-7d4be7c4ebeso619987a34.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 06:23:50 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d4ba9abbecso955658a34.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 06:38:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772115829; x=1772720629; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772116680; x=1772721480; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aIGb2NgcQcpWTRKd/6BmFAIfJ7PenRSBhdrEqGhrl6M=;
- b=QA1SL5sVU/oojqQ/9q0W3MD6atcDRT2xg1+VFiXAdYVjfI00S7yaohc4m8p6KKleJT
- w5+pAAV2yvr1Rs2fz0bsC3eSI3iYhndI5CIsZbLilkBw0DItu1jj45xNSawk1OGmGmja
- vHIXzBrbKRuX9XhzzVfSLz3l1Fr9kTlKScjW8=
+ bh=6IUyz6T4SyeeBMYmDS7C8X32VIiCM89WBrbeFCtfFuo=;
+ b=URHEvQ1hpycq7ozeazj1p+wonMcu5dzbMuqO2LBN3N5F5IWB9AmfAsIvmLlYGi5+6P
+ +j1JqnqI1pJYwr6eOiDsCFi5lYiPwn2SSzfp3SueR83rUwqiBNx2KBmfNTM4S3agkdYz
+ dD2PMuC0+QWXqsv1yyzYUr+9/+hfuptCVIB/M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772115829; x=1772720629;
+ d=1e100.net; s=20230601; t=1772116680; x=1772721480;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aIGb2NgcQcpWTRKd/6BmFAIfJ7PenRSBhdrEqGhrl6M=;
- b=DrYJmM9CbgeTuby4zRccUzfX8AYMb0C6N7IrW8jgBIp0avwGRiRX2glgzxVb3sBNWU
- Bu/EtTvEQwlb83oJSYNOM4G/zZAApLMch2S7QLFx8Rj2aT5/Z4nftdaRnPkdPghryCTK
- 9q9vWrXdUMpZYzzJ8a+WvWKJxeIp1JvsSFTm/21g9JVcbE7+ihdy7dwox8H1J1N5NYA2
- 2/8CAUGzfyNLbq1SYnTm0Fd8evJ0dO98uztv+3cjmJaxO6uCzA/q3ACj0xYJA75swQNj
- GIA/Kgqo6VPrshsJgYpZfrNALavaaLNCdjmDj4EA1F8EmZz3WrGrJXLk2qQUlmQUCG6X
- unlA==
+ bh=6IUyz6T4SyeeBMYmDS7C8X32VIiCM89WBrbeFCtfFuo=;
+ b=C6n6wSC/DMCErOPdiE1joAfvsta0gOnLu/s9paATqclREOPUwe0ly+hcbkCo/v75WT
+ GLrDB8CFkitC3PmAmo+7nGEIw1t8BzC+ZLTcz+NXeVb+Ne97TVSxx420g+FJ0lmKW+qL
+ ObMst7Xe9yKR6Hj5q6ZhT4B2yf5D39U6BIUEThdt7Uesc/z8P/HKjOTcMi10cbJadSbt
+ 1ZJkIINbgNJElofGBR30VA4EETduz+4CRd0r1I0IVUhHFSR+4gHaoMP2cIQBocbWjcn0
+ NlBn3o25wpPxEL78dGfL/6DeOzWNZ1o28RXcP4Jx0ss82T9nBDS5W/NgOLfKpq5DmcOD
+ 2LPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9DBAairpe9CEzbt6YV49ryvIVgpcD8Sn0GFghj13gaLikgTFFiUl44DaF+BCqv543DrrO3Ws=@lists.denx.de
-X-Gm-Message-State: AOJu0YwgW4ySzguxYB/GGKYRb9CcZYN8aud7ww07rsXNTxqLYu6Vq8rG
- Ryrfrlzd8405RMG9QecD5bx1PAz5ke3J3sRDuKXOHj0zIa4T0bEupp+SFAvNP/Jn1IQ=
-X-Gm-Gg: ATEYQzzRLZsAXxBo0nh8jh5w69rRE/mMGyRu2GXKwIX4s8eFAO5gmHTZ5y/vv68wZCJ
- ldhuaPLgxROPAaQfSG8Yy5V9U329z+DUNF6Jg7Ud072pkt18HIt9ev6njLtznMGwlqUWRWBKBtM
- 6fVnnYEcaeWbBQoMmfMsIvR8EDdls6+C8wyEaf1ORvKVKQzPP255bWofw5usAZZi6MTUxYeFCKk
- Hu1jh9MK6BNKj55C76jB8jOZNPUNsfrH56Ih98xUYYZ2tpVdArrCN1bajvg5dabisyyHC74MJoD
- 8blqX1hRn/p+FPFxGo/yTEANykhN/Hl/yXaIhGxZ+IUa9tDBr6Pt5Tjx030EyCQjQ0RCQvYfYgT
- nhFQs1Bx8IDqvEamsa9NRPHdBknErCIQz/PYskDxV9xWJWvKahjkPMzCb2Vd9wGhlPWa8rs4i+a
- yuUKd9qzDkT87hZEGgRgxRWdEcNXBjRGkH8EEJu9aMZqWpxdGSteNw/VH5G4MbYhm/JY695HQIM
- HGqkrilFyswNv0OGyDr5bpA6L31XP5/j/QIe1aVCixod7WYeNc=
-X-Received: by 2002:a05:6870:f61b:b0:409:95c6:f2dd with SMTP id
- 586e51a60fabf-4157ac7facfmr10757105fac.22.1772115828683; 
- Thu, 26 Feb 2026 06:23:48 -0800 (PST)
+ AJvYcCWkXgPpQrBg2jenCQnF0xVl6SC/8M+LAPk4ofowQDifzS4fa1L9nl7XNeUMnbrM91Op6NyHbpI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5oL9PDUzdvplcRF/tTKp0rtjlkyqu2qiX4Tn0FvDs5VpbXxuT
+ tDUYQp+tBlsYuD9tDkrTap+eOi0YgOSi3Hy3gZ83/twurm+ojD0M9yOMdRjENoDaAuA=
+X-Gm-Gg: ATEYQzyalZqL/ZNm36zatVaSZQG35Ac5w53QRlW7p+3+Rj6pdZYa16rkV+UVji4V+h3
+ S4XoTHQPCmglJ7tqTqybXa7VLyRtHcau3QXAdeOUI6iRqlUWZNIzo153XgWfh8qWvSXH6P3A4K2
+ hfkPR+alNiFmz13c5PkYdIVBq8vAwU8PXz6XFk9B5M5mh+5aeN22z7ZGWrCd6buzW+d/FgVPIPI
+ 8gzpHfCy1GiY2RYwwk/3/DRwkgEHKCQu+arHwj5Oz7+zUFzHiI4kS2p8AsOi9Gh00SR6Q5JBGn/
+ N88iAaU0N2faqT+aj6FKoOCHOgxM4g1c0dDDufiQaYkU0vs8GZVuiqKPQPJHuXM6fzjwhKYODq/
+ 5PJoQXie4VaNDeJYAj8qphu5nasTWtvzropAXeWY17UnOMCJVnyEgSV2E7mMBtxR1Agh09eLHzj
+ /skk3i/Q7Ddt7T9UFsvSLDub4uic9TBKbiZrYqrEQt/vRgnQANP2Te6pPx2uLDpokAWj9iSut15
+ 3Nt33ZcNYzCmYlHqxtH60U4ttPkfRtlvhq1l6X1XJqnC+qVi74=
+X-Received: by 2002:a05:6870:e243:b0:329:7f93:2b6 with SMTP id
+ 586e51a60fabf-4157b10a9eemr12329753fac.29.1772116679713; 
+ Thu, 26 Feb 2026 06:37:59 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4160d2cc08csm1883103fac.19.2026.02.26.06.23.47
+ 586e51a60fabf-4160d2cf00fsm1952068fac.20.2026.02.26.06.37.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 06:23:48 -0800 (PST)
-Date: Thu, 26 Feb 2026 08:23:45 -0600
+ Thu, 26 Feb 2026 06:37:59 -0800 (PST)
+Date: Thu, 26 Feb 2026 08:37:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Stefan Eichenberger <eichest@gmail.com>,
- stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
- n-francis@ti.com, emanuele.ghidoli@toradex.com,
- francesco.dolcini@toradex.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
- restore
-Message-ID: <20260226142345.GB1593142@bill-the-cat>
-References: <20250314100734.23777-1-eichest@gmail.com>
- <20260226070502.GA6701@francesco-nb>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de, nm@ti.com,
+ heiko.thiery@gmail.com, m-shah@ti.com, j-keerthy@ti.com,
+ n-francis@ti.com, bb@ti.com, Diwakar Dhyani <d-dhyani@ti.com>
+Subject: Re: [v2 PATCH] mach-k3: Defer CTRL_MMR access until after TIFS
+ version response
+Message-ID: <20260226143756.GC1593142@bill-the-cat>
+References: <20260225051559.416445-1-u-kumar1@ti.com>
+ <50d29e78-1502-4dbd-ad24-a1025142947d@ti.com>
+ <f21a0fba-0a19-4f95-88c3-41e0728fb888@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="D2XuMYMjZ86yTBtO"
+ protocol="application/pgp-signature"; boundary="0NbWZ1VJUHCv2wnI"
 Content-Disposition: inline
-In-Reply-To: <20260226070502.GA6701@francesco-nb>
+In-Reply-To: <f21a0fba-0a19-4f95-88c3-41e0728fb888@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,65 +104,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---D2XuMYMjZ86yTBtO
+--0NbWZ1VJUHCv2wnI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 26, 2026 at 08:05:02AM +0100, Francesco Dolcini wrote:
-> Hello Tom,
+On Thu, Feb 26, 2026 at 10:20:11AM +0530, Kumar, Udit wrote:
 >=20
-> On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrote:
-> > From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> >=20
-> > The get_ram_size() function fails to restore the original RAM data when
-> > the data cache is enabled. This issue was observed on an AM625 R5 SPL
-> > with 512MB of RAM and is a regression that became visible with
-> > commit bc07851897bd ("board: ti: Pull redundant DDR functions to a comm=
-on
-> > location and Fixup DDR size when ECC is enabled").
-> >=20
-> > Observed boot failure messages:
-> >   Warning: Did not detect image signing certificate. Skipping authentic=
-ation to prevent boot failure. This will fail on Security Enforcing(HS-SE) =
-devices
-> >   Authentication passed
-> >   Starting ATF on ARM64 core...
-> >=20
-> > The system then hangs. This indicates that without a data cache flush,
-> > data in the cache is not coherent with RAM, preventing the system from
-> > booting. This was verified by printing the content of this address when
-> > the issue occurs.
-> >=20
-> > Add a data cache flush after each restore operation to resolve this
-> > issue.
-> >=20
-> > Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to a comm=
-on location and Fixup DDR size when ECC is enabled")
-> > Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when cache i=
-s enabled")
-> > Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 >=20
-> Tom, can we merge this?
-> This is the last bit to solve the regression reported here,
-> https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
+> On 2/26/2026 10:04 AM, Vignesh Raghavendra wrote:
+> >=20
+> >=20
+> > On 25/02/26 10:45, Udit Kumar wrote:
+> >> The CTRL_MMR registers are firewalled at boot time, and TIFS unlock
+> >> them as part of the system firmware initialization sequence.
+> >>
+> >> Current code assumes the CTRL_MMR space can be accessible at early
+> >> stage of board_init_f execution by unlocking them.
+> >>
+> >> But on HS-SE devices, TIFS takes more time to complete initialization,
+> >> and CTRL_MMR registers remains firewalled and not getting unlocked.
+> >> Which results in any write to these registers are ignored.
+> >=20
+> > Hmm, this looks like something that can happen on other K3 SoCs too.
+> > Should we update all the other SoCs to follow the same logic?
+>=20
+> Yes, we need to update all SOCs,
+> As Bryan pointed out, this issue is seen on other SOC as well[0].
+>=20
+> I will post for other SOCs as different series.=20
 
-I wasn't happy with this at the time, and Stefan's last email in the
-thread left me with the impression more investigation was needed and
-likely something else was the root cause.
+Do you mean another iteration of this, as a series that addresses all of
+the SoCs? I'd prefer that (and cover letter explaining the situation) if
+possible and reasonable, thanks.
 
 --=20
 Tom
 
---D2XuMYMjZ86yTBtO
+--0NbWZ1VJUHCv2wnI
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaBXbgAKCRAr4qD1Cr/k
-CjNOAP9qY547uO3sZmL32pYjRt8slc2tdO+Gt0yte+wCwvPrGgEAsPvMZz1QVD8A
-tT7BA/+AsQcaUaRk1ckh/9BGK4UDQAw=
-=mIrM
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaBawQAKCRAr4qD1Cr/k
+CnBYAP9qWJR+GvMGpMyzyKoxjn+VfODZJM5dTep+thmViN/nAAD/aloe1V5ccPfF
+tEdpAqd5RQ56Ov9sKa0XX6EPoJMc3g4=
+=5Aqt
 -----END PGP SIGNATURE-----
 
---D2XuMYMjZ86yTBtO--
+--0NbWZ1VJUHCv2wnI--
