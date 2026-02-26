@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61F4CFD9E1E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:48:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 044F8FD9E25
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C98C83E96;
-	Fri, 27 Feb 2026 00:48:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B4B8883F54;
+	Fri, 27 Feb 2026 00:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NzrK6UCF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W3OvB37F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82FF383F36; Fri, 27 Feb 2026 00:48:53 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 2FAD883E96; Fri, 27 Feb 2026 00:48:55 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F9B183E96
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:48:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4CB483F32
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:48:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-899a2f4cdddso17950726d6.2
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:48:48 -0800 (PST)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-8cb40277a8bso155156585a.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:48:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149726; x=1772754526; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772149729; x=1772754529; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VjyolnpBA9mM0KAiwO2rRDAdb1GhRBU/mz9n3n7R0pc=;
- b=NzrK6UCFXbvF7IJ7lTn8qbW/Ll+5XilTDpS1HyzU0xhDQOnp2ubKbbSNHRXc3TzNU/
- BVTsovKgYB+Mik0aQc3PtFcFuEWPP7xMLtb4pzNFOuboV/nTxCj6lDFIvB4nHSNlPcLD
- xC9zpl17gaKvpBKp1NL+ljlEHVXVKrud60P30=
+ bh=Y9gDvEcP83juWzoq5Uc/gHk/PvpoVm28XpUau9mEmZA=;
+ b=W3OvB37Fe+tqH+wgw/8gkJA2LjBEt43P3FMXG2+JXgvl9tWxOSxotdGRUlf08FwbVj
+ awtDJdD0zBtCRkcQFLUUdAuAwjuK/CXuvGhDo5eY9i55W9OPGTboqaEOkIMV6WvpIuqM
+ flEJZ2mixHmyakNDb6uNOkI3EbICQyxB6iWPQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149726; x=1772754526;
+ d=1e100.net; s=20230601; t=1772149729; x=1772754529;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=VjyolnpBA9mM0KAiwO2rRDAdb1GhRBU/mz9n3n7R0pc=;
- b=XoiuhZnSISUBkQ3rkMH4pWLTroUkOvVhoobud37u/OlXWO9/1d1Q2LlRqCe3qJOyyl
- AA2V0jt9LccXPZs3oky0W6r1dkmMp994KvN8NnJpeUQPEQnXo4+r23FqSqYKjqsFFMPj
- JiJvGuArPGqiMarEUyde4l52C1CYZQxC35NAUyv0SZUrsQfMZkD9HVeGArm6eAQ/BeB4
- Vis5P9Fvhi/Pol2ihpBjhxwf7GiHbOUvwZ85iaUqee6df7jWVeUnUVI+skqvfKlWCo5F
- ejRpynu/dtHFhFdyAjxUPatZ0ZWIrBzRrlpp8TEtyKyV7HSU94/Gdn6PTJWBoX1/q9a7
- 6SiQ==
-X-Gm-Message-State: AOJu0YwUB0O8NgKcdx6k4pKmp8Y5RCJNQ6MgtRwhDR76xuJ78+oOiFr1
- R8V6fe7g83P5Zn78QBSovr4WbEj1gdTA6qdErYxZhYtqQ4WsUqegayJB07iPyWzZd/qHDK3Suyj
- b3jM=
-X-Gm-Gg: ATEYQzxSKmgFiElJYeT0glCsFxTtEGmdiKKts5V0t4CXqL+ZJXuwdbfT2XXyTh1bs7+
- LsNWGuqdLHMfQF09E5ldfDmnRH1tp5n4TtPE/ACAEhgboNlQJ5dk6YPkoFiGgLoyKFn5ZK8knjq
- ufatcWoHGrTjZ1izcnpbsgsXZbePjp5/jyFS8WRfNIdS9tc1ZTctRv2iT2M8NmmRZPK+m8yRPTV
- z4xAu2rEY6Ii5Kjhsrp9GlOy/q4vZkU6Pob3VNN+lM3dmrjmXUPJGmAHzIKLPDCXBv+r9PpYw6Z
- YHjk0GLpgKkcX9pDWkGnQYT5uhtq/zLU/yccoLnrsJ1puyE9zoJ7deni+CA4jFOyeYFxXfjenzZ
- mNnS0aNN9H1gFRh1eefbG6kZ+RVswMGJ8JmWp7Rp3xcjuEXxvw4Y3wvLqU5X81ccG+p2YAZAAMK
- DAEX+6kBqEtB024ZK0HqrEQK75xZUL
-X-Received: by 2002:a05:6214:2503:b0:882:4a63:63a7 with SMTP id
- 6a1803df08f44-899d1ead690mr14739096d6.60.1772149726176; 
- Thu, 26 Feb 2026 15:48:46 -0800 (PST)
+ bh=Y9gDvEcP83juWzoq5Uc/gHk/PvpoVm28XpUau9mEmZA=;
+ b=ilpV5XHGzpNGwA27Cvm2VuLrVZJxxmcCHg5iUvgzzb95M7/4jp/G9VXjnCNcFlvzM/
+ boT7/wxR1goMKz1/kXYQ+UEhwqMBc/VsKdQ30mD7SScQDWONLVRbq3HbC6StIa3MNQSA
+ Qpy+Ab64mp1DdtbHc24XMZSHbG8nyj+OGREXvS/wXxOS8Mql3lut7kEFziPJVgYdXc/5
+ gpryNAP3ntNfZl85yZS4yGJFd0YUY/X0aCGiwYuAti0raWjKNuRRIcwd1eM84XuhHj/O
+ hgBdVgRsCHRP5WWBFQ56g7Bp+zyZ6dkhGG94TqX+IA6NXWzuWhHnY5A0jwV/kNseeEEP
+ pyDg==
+X-Gm-Message-State: AOJu0Yy1omsbdbPgjWT5Bm0vgMtbieF0nuMttuCbWBIIHejW41I2yESk
+ 2T76NUQSzjGunq/SEd3cTgGtpIgBmGIth7Cdj7WrFKfxdXSYZd0LDbceRrE2raRweTPBet4mW+Q
+ aMpY=
+X-Gm-Gg: ATEYQzzTpQRKlOcNCHthV6UhtX8mrooIhOMIWgEtgGfFXWFYkpLlBb7BD1mKpTeB1ru
+ ibWrKXyWJZJFEIgDhp6aZMidrHWmO5zlewYlI6PQeJFEcF4/wZLZIrZUrK6eOF+fVWi6NM/4JuS
+ W+9/Ytiq92qnClyH31R6PZjzRKKiA6jzTAkA69AtO3LPR6whvckuoA+OLgQW3n/sybU2XtuQ68l
+ tU/7GgYeGNfbQB4LW/7EAbCpV+ktO8qdJYg/SRjnvB9+43nbz7nY7Uo9frEilIdAFXuP2qR3M1h
+ UU1aZnbZBW01CUjFTwHtqzgQ701PPMpiDloY9vBjzvhmKSkSqARb1q5MdNn40xYLbnWLtNz882o
+ dbhaVwAC5fufaed5OBLNzlOG3DwQqR2i+v8R+qybpyxoz2HkXgvCx5EoFnS+3IGRXvYPGuPZWp0
+ rnheN6KNLV9gmAGNGfdA==
+X-Received: by 2002:a05:620a:258d:b0:8cb:4113:2526 with SMTP id
+ af79cd13be357-8cbc8e7e87cmr109544585a.71.1772149728940; 
+ Thu, 26 Feb 2026 15:48:48 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.44
+ af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 15:48:45 -0800 (PST)
+ Thu, 26 Feb 2026 15:48:47 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Simon Glass <simon.glass@canonical.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>, Bryan Brattlof <bb@ti.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [RFC PATCH 03/16] binman: test: Move x86 and Intel test files to
- test/x86/
-Date: Thu, 26 Feb 2026 16:47:43 -0700
-Message-ID: <20260226234802.345968-4-sjg@chromium.org>
+Subject: [RFC PATCH 04/16] binman: test: Move FIT image test files to test/fit/
+Date: Thu, 26 Feb 2026 16:47:44 -0700
+Message-ID: <20260226234802.345968-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260226234802.345968-1-sjg@chromium.org>
 References: <20260226234802.345968-1-sjg@chromium.org>
@@ -103,615 +103,794 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move about 40 test files for x86 and Intel platform support (ROM,
-microcode, ME, IFWI, FSP, descriptor, reset16, start16, FIT) into an
-x86/ subdirectory. Drop the numeric prefixes and the redundant x86_
+Move about 40 test files for FIT images (signing, external data,
+split-elf, encryption, alignment, firmware loadables, templates) into
+a fit/ subdirectory. Drop the numeric prefixes and the redundant fit_
 filename prefix, and update all references.
+
+Rename the three signature.dts variants to have unique names:
+signature.dts, signature_multi_key.dts and signature_no_nodes.dts.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
- tools/binman/fdt_test.py                      |  2 +-
- tools/binman/ftest.py                         | 84 +++++++++----------
- .../descriptor_offset.dts}                    |  0
- .../test/{094_fmap_x86.dts => x86/fmap.dts}   |  0
- .../fmap_section.dts}                         |  0
- .../{043_intel_cmc.dts => x86/intel_cmc.dts}  |  0
- .../{147_intel_fit.dts => x86/intel_fit.dts}  |  0
- .../intel_fit_missing.dts}                    |  0
- .../{042_intel_fsp.dts => x86/intel_fsp.dts}  |  0
- .../intel_fsp_m.dts}                          |  0
- .../intel_fsp_s.dts}                          |  0
- .../intel_fsp_t.dts}                          |  0
- .../{050_intel_mrc.dts => x86/intel_mrc.dts}  |  0
- .../intel_refcode.dts}                        |  0
- .../{046_intel_vbt.dts => x86/intel_vbt.dts}  |  0
- .../{032_intel_vga.dts => x86/intel_vga.dts}  |  0
- .../no_ucode.dts}                             |  0
- .../optional_ucode.dts}                       |  0
- .../{144_x86_reset16.dts => x86/reset16.dts}  |  0
- .../reset16_spl.dts}                          |  0
- .../reset16_tpl.dts}                          |  0
- .../test/{029_x86_rom.dts => x86/rom.dts}     |  0
- .../rom_ifwi.dts}                             |  0
- .../rom_ifwi_nodata.dts}                      |  0
- .../rom_ifwi_nodesc.dts}                      |  0
- .../rom_ifwi_section.dts}                     |  0
- .../{031_x86_rom_me.dts => x86/rom_me.dts}    |  0
- .../rom_me_empty.dts}                         |  0
- .../rom_me_missing.dts}                       |  0
- .../rom_me_no_desc.dts}                       |  0
- .../single_ucode.dts}                         |  0
- .../{033_x86_start16.dts => x86/start16.dts}  |  0
- .../start16_spl.dts}                          |  0
- .../start16_tpl.dts}                          |  0
- .../symbols_tpl.dts}                          |  0
- .../tpl_ucode.dts}                            |  0
- .../test/{034_x86_ucode.dts => x86/ucode.dts} |  0
- .../ucode_missing_node.dts}                   |  0
- .../ucode_missing_node2.dts}                  |  0
- .../ucode_not_in_image.dts}                   |  0
- .../ucode_spl.dts}                            |  0
- .../ucode_spl_needs_retry.dts}                |  0
- 42 files changed, 43 insertions(+), 43 deletions(-)
- rename tools/binman/test/{141_descriptor_offset.dts => x86/descriptor_offset.dts} (100%)
- rename tools/binman/test/{094_fmap_x86.dts => x86/fmap.dts} (100%)
- rename tools/binman/test/{095_fmap_x86_section.dts => x86/fmap_section.dts} (100%)
- rename tools/binman/test/{043_intel_cmc.dts => x86/intel_cmc.dts} (100%)
- rename tools/binman/test/{147_intel_fit.dts => x86/intel_fit.dts} (100%)
- rename tools/binman/test/{148_intel_fit_missing.dts => x86/intel_fit_missing.dts} (100%)
- rename tools/binman/test/{042_intel_fsp.dts => x86/intel_fsp.dts} (100%)
- rename tools/binman/test/{152_intel_fsp_m.dts => x86/intel_fsp_m.dts} (100%)
- rename tools/binman/test/{153_intel_fsp_s.dts => x86/intel_fsp_s.dts} (100%)
- rename tools/binman/test/{154_intel_fsp_t.dts => x86/intel_fsp_t.dts} (100%)
- rename tools/binman/test/{050_intel_mrc.dts => x86/intel_mrc.dts} (100%)
- rename tools/binman/test/{100_intel_refcode.dts => x86/intel_refcode.dts} (100%)
- rename tools/binman/test/{046_intel_vbt.dts => x86/intel_vbt.dts} (100%)
- rename tools/binman/test/{032_intel_vga.dts => x86/intel_vga.dts} (100%)
- rename tools/binman/test/{037_x86_no_ucode.dts => x86/no_ucode.dts} (100%)
- rename tools/binman/test/{044_x86_optional_ucode.dts => x86/optional_ucode.dts} (100%)
- rename tools/binman/test/{144_x86_reset16.dts => x86/reset16.dts} (100%)
- rename tools/binman/test/{145_x86_reset16_spl.dts => x86/reset16_spl.dts} (100%)
- rename tools/binman/test/{146_x86_reset16_tpl.dts => x86/reset16_tpl.dts} (100%)
- rename tools/binman/test/{029_x86_rom.dts => x86/rom.dts} (100%)
- rename tools/binman/test/{111_x86_rom_ifwi.dts => x86/rom_ifwi.dts} (100%)
- rename tools/binman/test/{113_x86_rom_ifwi_nodata.dts => x86/rom_ifwi_nodata.dts} (100%)
- rename tools/binman/test/{112_x86_rom_ifwi_nodesc.dts => x86/rom_ifwi_nodesc.dts} (100%)
- rename tools/binman/test/{151_x86_rom_ifwi_section.dts => x86/rom_ifwi_section.dts} (100%)
- rename tools/binman/test/{031_x86_rom_me.dts => x86/rom_me.dts} (100%)
- rename tools/binman/test/{163_x86_rom_me_empty.dts => x86/rom_me_empty.dts} (100%)
- rename tools/binman/test/{164_x86_rom_me_missing.dts => x86/rom_me_missing.dts} (100%)
- rename tools/binman/test/{030_x86_rom_me_no_desc.dts => x86/rom_me_no_desc.dts} (100%)
- rename tools/binman/test/{035_x86_single_ucode.dts => x86/single_ucode.dts} (100%)
- rename tools/binman/test/{033_x86_start16.dts => x86/start16.dts} (100%)
- rename tools/binman/test/{048_x86_start16_spl.dts => x86/start16_spl.dts} (100%)
- rename tools/binman/test/{081_x86_start16_tpl.dts => x86/start16_tpl.dts} (100%)
- rename tools/binman/test/{155_symbols_tpl_x86.dts => x86/symbols_tpl.dts} (100%)
- rename tools/binman/test/{093_x86_tpl_ucode.dts => x86/tpl_ucode.dts} (100%)
- rename tools/binman/test/{034_x86_ucode.dts => x86/ucode.dts} (100%)
- rename tools/binman/test/{038_x86_ucode_missing_node.dts => x86/ucode_missing_node.dts} (100%)
- rename tools/binman/test/{039_x86_ucode_missing_node2.dts => x86/ucode_missing_node2.dts} (100%)
- rename tools/binman/test/{040_x86_ucode_not_in_image.dts => x86/ucode_not_in_image.dts} (100%)
- rename tools/binman/test/{049_x86_ucode_spl.dts => x86/ucode_spl.dts} (100%)
- rename tools/binman/test/{058_x86_ucode_spl_needs_retry.dts => x86/ucode_spl_needs_retry.dts} (100%)
+ tools/binman/ftest.py                         | 118 +++++++++---------
+ .../test/{275_fit_align.dts => fit/align.dts} |   0
+ .../{227_fit_bad_dir.dts => fit/bad_dir.dts}  |   2 +-
+ .../bad_dir_config.dts}                       |   2 +-
+ .../bad_oper.dts}                             |   0
+ .../encrypt_data.dts}                         |   0
+ .../encrypt_data_no_key.dts}                  |   0
+ .../external.dts}                             |   0
+ .../extract_replace.dts}                      |   0
+ .../test/{170_fit_fdt.dts => fit/fdt.dts}     |   0
+ .../fdt_compat.dts}                           |   0
+ .../{333_fit_fdt_dir.dts => fit/fdt_dir.dts}  |   0
+ .../fdt_list.dts}                             |   0
+ .../fdt_missing_prop.dts}                     |   0
+ .../fdt_name.dts}                             |   0
+ .../fdt_oper.dts}                             |   0
+ .../fdt_phase.dts}                            |   0
+ .../firmware_loadables.dts}                   |   0
+ .../binman/test/{161_fit.dts => fit/fit.dts}  |   0
+ .../{219_fit_gennode.dts => fit/gennode.dts}  |   0
+ .../image_subentry_alignment.dts}             |   0
+ .../key_name_hint_dir_signature.dts}          |   0
+ .../missing_blob.dts}                         |   0
+ .../replace_sibling.dts}                      |   0
+ .../test/{280_fit_sign.dts => fit/sign.dts}   |   0
+ .../signature.dts}                            |   0
+ .../signature_engine.dts}                     |   0
+ .../signature_engine_encrypt.dts}             |   0
+ .../signature_engine_pkcs11.dts}              |   0
+ .../signature_engine_pkcs11_object.dts}       |   0
+ .../signature_multi_key.dts}                  |   0
+ .../signature_no_nodes.dts}                   |   0
+ .../split_elf.dts}                            |   0
+ .../subentry_bintool.dts}                     |   0
+ .../subentry_hash.dts}                        |   0
+ .../tee_os_opt.dts}                           |   0
+ .../tee_os_opt_bad.dts}                       |   0
+ .../template.dts}                             |   0
+ 38 files changed, 61 insertions(+), 61 deletions(-)
+ rename tools/binman/test/{275_fit_align.dts => fit/align.dts} (100%)
+ rename tools/binman/test/{227_fit_bad_dir.dts => fit/bad_dir.dts} (71%)
+ rename tools/binman/test/{228_fit_bad_dir_config.dts => fit/bad_dir_config.dts} (71%)
+ rename tools/binman/test/{224_fit_bad_oper.dts => fit/bad_oper.dts} (100%)
+ rename tools/binman/test/{343_fit_encrypt_data.dts => fit/encrypt_data.dts} (100%)
+ rename tools/binman/test/{344_fit_encrypt_data_no_key.dts => fit/encrypt_data_no_key.dts} (100%)
+ rename tools/binman/test/{162_fit_external.dts => fit/external.dts} (100%)
+ rename tools/binman/test/{240_fit_extract_replace.dts => fit/extract_replace.dts} (100%)
+ rename tools/binman/test/{170_fit_fdt.dts => fit/fdt.dts} (100%)
+ rename tools/binman/test/{334_fit_fdt_compat.dts => fit/fdt_compat.dts} (100%)
+ rename tools/binman/test/{333_fit_fdt_dir.dts => fit/fdt_dir.dts} (100%)
+ rename tools/binman/test/{284_fit_fdt_list.dts => fit/fdt_list.dts} (100%)
+ rename tools/binman/test/{171_fit_fdt_missing_prop.dts => fit/fdt_missing_prop.dts} (100%)
+ rename tools/binman/test/{345_fit_fdt_name.dts => fit/fdt_name.dts} (100%)
+ rename tools/binman/test/{223_fit_fdt_oper.dts => fit/fdt_oper.dts} (100%)
+ rename tools/binman/test/{335_fit_fdt_phase.dts => fit/fdt_phase.dts} (100%)
+ rename tools/binman/test/{276_fit_firmware_loadables.dts => fit/firmware_loadables.dts} (100%)
+ rename tools/binman/test/{161_fit.dts => fit/fit.dts} (100%)
+ rename tools/binman/test/{219_fit_gennode.dts => fit/gennode.dts} (100%)
+ rename tools/binman/test/{167_fit_image_subentry_alignment.dts => fit/image_subentry_alignment.dts} (100%)
+ rename tools/binman/test/{355_key_name_hint_dir_fit_signature.dts => fit/key_name_hint_dir_signature.dts} (100%)
+ rename tools/binman/test/{168_fit_missing_blob.dts => fit/missing_blob.dts} (100%)
+ rename tools/binman/test/{277_replace_fit_sibling.dts => fit/replace_sibling.dts} (100%)
+ rename tools/binman/test/{280_fit_sign.dts => fit/sign.dts} (100%)
+ rename tools/binman/test/{340_fit_signature.dts => fit/signature.dts} (100%)
+ rename tools/binman/test/{360_fit_signature_engine.dts => fit/signature_engine.dts} (100%)
+ rename tools/binman/test/{361_fit_signature_engine_encrypt.dts => fit/signature_engine_encrypt.dts} (100%)
+ rename tools/binman/test/{362_fit_signature_engine_pkcs11.dts => fit/signature_engine_pkcs11.dts} (100%)
+ rename tools/binman/test/{363_fit_signature_engine_pkcs11_object.dts => fit/signature_engine_pkcs11_object.dts} (100%)
+ rename tools/binman/test/{341_fit_signature.dts => fit/signature_multi_key.dts} (100%)
+ rename tools/binman/test/{342_fit_signature.dts => fit/signature_no_nodes.dts} (100%)
+ rename tools/binman/test/{226_fit_split_elf.dts => fit/split_elf.dts} (100%)
+ rename tools/binman/test/{220_fit_subentry_bintool.dts => fit/subentry_bintool.dts} (100%)
+ rename tools/binman/test/{221_fit_subentry_hash.dts => fit/subentry_hash.dts} (100%)
+ rename tools/binman/test/{264_tee_os_opt_fit.dts => fit/tee_os_opt.dts} (100%)
+ rename tools/binman/test/{265_tee_os_opt_fit_bad.dts => fit/tee_os_opt_bad.dts} (100%)
+ rename tools/binman/test/{288_template_fit.dts => fit/template.dts} (100%)
 
-diff --git a/tools/binman/fdt_test.py b/tools/binman/fdt_test.py
-index 564c1770820..ef659c0f276 100644
---- a/tools/binman/fdt_test.py
-+++ b/tools/binman/fdt_test.py
-@@ -36,7 +36,7 @@ class TestFdt(unittest.TestCase):
-         node.DeleteProp('data')
- 
-     def testFdtNormal(self):
--        fname = self.GetCompiled('034_x86_ucode.dts')
-+        fname = self.GetCompiled('x86/ucode.dts')
-         dt = FdtScan(fname)
-         self._DeleteProp(dt)
- 
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index da3f6952596..51efd582d4d 100644
+index 51efd582d4d..11b56277346 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -1211,7 +1211,7 @@ class TestFunctional(unittest.TestCase):
-     def testPackX86Rom(self):
-         """Test that a basic x86 ROM can be created"""
+@@ -3991,7 +3991,7 @@ class TestFunctional(unittest.TestCase):
+     def testSimpleFit(self):
+         """Test an image with a FIT inside"""
          self._SetupSplElf()
--        data = self._DoReadFile('029_x86_rom.dts')
-+        data = self._DoReadFile('x86/rom.dts')
-         self.assertEqual(U_BOOT_DATA + tools.get_bytes(0, 3) + U_BOOT_SPL_DATA +
-                          tools.get_bytes(0, 2), data)
- 
-@@ -1220,7 +1220,7 @@ class TestFunctional(unittest.TestCase):
-         try:
-             TestFunctional._MakeInputFile('descriptor-empty.bin', b'')
-             with self.assertRaises(ValueError) as e:
--                self._DoTestFile('163_x86_rom_me_empty.dts')
-+                self._DoTestFile('x86/rom_me_empty.dts')
-             self.assertIn("Node '/binman/intel-descriptor': Cannot find Intel Flash Descriptor (FD) signature",
-                           str(e.exception))
-         finally:
-@@ -1229,14 +1229,14 @@ class TestFunctional(unittest.TestCase):
-     def testPackX86RomBadDesc(self):
-         """Test that the Intel requires a descriptor entry"""
-         with self.assertRaises(ValueError) as e:
--            self._DoTestFile('030_x86_rom_me_no_desc.dts')
-+            self._DoTestFile('x86/rom_me_no_desc.dts')
-         self.assertIn("Node '/binman/intel-me': No offset set with "
-                       "offset-unset: should another entry provide this correct "
-                       "offset?", str(e.exception))
- 
-     def testPackX86RomMe(self):
-         """Test that an x86 ROM with an ME region can be created"""
--        data = self._DoReadFile('031_x86_rom_me.dts')
-+        data = self._DoReadFile('x86/rom_me.dts')
-         expected_desc = tools.read_file(self.TestFile('descriptor.bin'))
-         if data[:0x1000] != expected_desc:
-             self.fail('Expected descriptor binary at start of image')
-@@ -1244,12 +1244,12 @@ class TestFunctional(unittest.TestCase):
- 
-     def testPackVga(self):
-         """Test that an image with a VGA binary can be created"""
--        data = self._DoReadFile('032_intel_vga.dts')
-+        data = self._DoReadFile('x86/intel_vga.dts')
-         self.assertEqual(VGA_DATA, data[:len(VGA_DATA)])
- 
-     def testPackStart16(self):
-         """Test that an image with an x86 start16 region can be created"""
--        data = self._DoReadFile('033_x86_start16.dts')
-+        data = self._DoReadFile('x86/start16.dts')
-         self.assertEqual(X86_START16_DATA, data[:len(X86_START16_DATA)])
- 
-     def testPackPowerpcMpc85xxBootpgResetvec(self):
-@@ -1318,7 +1318,7 @@ class TestFunctional(unittest.TestCase):
-             u-boot.dtb with the microcode removed
-             the microcode
-         """
--        first, pos_and_size = self._RunMicrocodeTest('034_x86_ucode.dts',
-+        first, pos_and_size = self._RunMicrocodeTest('x86/ucode.dts',
-                                                      U_BOOT_NODTB_DATA)
-         self.assertEqual(b'nodtb with microcode' + pos_and_size +
-                          b' somewhere in here', first)
-@@ -1335,7 +1335,7 @@ class TestFunctional(unittest.TestCase):
-         # We need the libfdt library to run this test since only that allows
-         # finding the offset of a property. This is required by
-         # Entry_u_boot_dtb_with_ucode.ObtainContents().
--        data = self._DoReadFile('035_x86_single_ucode.dts', True)
-+        data = self._DoReadFile('x86/single_ucode.dts', True)
- 
-         second = data[len(U_BOOT_NODTB_DATA):]
- 
-@@ -1368,21 +1368,21 @@ class TestFunctional(unittest.TestCase):
-     def testNoMicrocode(self):
-         """Test that a missing microcode region is detected"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('037_x86_no_ucode.dts', True)
-+            self._DoReadFile('x86/no_ucode.dts', True)
-         self.assertIn("Node '/binman/u-boot-dtb-with-ucode': No /microcode "
-                       "node found in ", str(e.exception))
- 
-     def testMicrocodeWithoutNode(self):
-         """Test that a missing u-boot-dtb-with-ucode node is detected"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('038_x86_ucode_missing_node.dts', True)
-+            self._DoReadFile('x86/ucode_missing_node.dts', True)
-         self.assertIn("Node '/binman/u-boot-with-ucode-ptr': Cannot find "
-                 "microcode region u-boot-dtb-with-ucode", str(e.exception))
- 
-     def testMicrocodeWithoutNode2(self):
-         """Test that a missing u-boot-ucode node is detected"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('039_x86_ucode_missing_node2.dts', True)
-+            self._DoReadFile('x86/ucode_missing_node2.dts', True)
-         self.assertIn("Node '/binman/u-boot-with-ucode-ptr': Cannot find "
-             "microcode region u-boot-ucode", str(e.exception))
- 
-@@ -1406,7 +1406,7 @@ class TestFunctional(unittest.TestCase):
-     def testMicrocodeNotInImage(self):
-         """Test that microcode must be placed within the image"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('040_x86_ucode_not_in_image.dts', True)
-+            self._DoReadFile('x86/ucode_not_in_image.dts', True)
-         self.assertIn("Node '/binman/u-boot-with-ucode-ptr': Microcode "
-                 "pointer _dt_ucode_base_size at fffffe14 is outside the "
-                 "section ranging from 00000000 to 0000002e", str(e.exception))
-@@ -1415,7 +1415,7 @@ class TestFunctional(unittest.TestCase):
-         """Test that we can cope with an image without microcode (e.g. qemu)"""
-         TestFunctional._MakeInputFile('u-boot',
-             tools.read_file(self.ElfTestFile('u_boot_no_ucode_ptr')))
--        data, dtb, _, _ = self._DoReadFileDtb('044_x86_optional_ucode.dts', True)
-+        data, dtb, _, _ = self._DoReadFileDtb('x86/optional_ucode.dts', True)
- 
-         # Now check the device tree has no microcode
-         self.assertEqual(U_BOOT_NODTB_DATA, data[:len(U_BOOT_NODTB_DATA)])
-@@ -1437,17 +1437,17 @@ class TestFunctional(unittest.TestCase):
- 
-     def testPackFsp(self):
-         """Test that an image with a FSP binary can be created"""
--        data = self._DoReadFile('042_intel_fsp.dts')
-+        data = self._DoReadFile('x86/intel_fsp.dts')
-         self.assertEqual(FSP_DATA, data[:len(FSP_DATA)])
- 
-     def testPackCmc(self):
-         """Test that an image with a CMC binary can be created"""
--        data = self._DoReadFile('043_intel_cmc.dts')
-+        data = self._DoReadFile('x86/intel_cmc.dts')
-         self.assertEqual(CMC_DATA, data[:len(CMC_DATA)])
- 
-     def testPackVbt(self):
-         """Test that an image with a VBT binary can be created"""
--        data = self._DoReadFile('046_intel_vbt.dts')
-+        data = self._DoReadFile('x86/intel_vbt.dts')
-         self.assertEqual(VBT_DATA, data[:len(VBT_DATA)])
- 
-     def testSplBssPad(self):
-@@ -1468,7 +1468,7 @@ class TestFunctional(unittest.TestCase):
- 
-     def testPackStart16Spl(self):
-         """Test that an image with an x86 start16 SPL region can be created"""
--        data = self._DoReadFile('048_x86_start16_spl.dts')
-+        data = self._DoReadFile('x86/start16_spl.dts')
-         self.assertEqual(X86_START16_SPL_DATA, data[:len(X86_START16_SPL_DATA)])
- 
-     def _PackUbootSplMicrocode(self, dts, ucode_second=False):
-@@ -1494,7 +1494,7 @@ class TestFunctional(unittest.TestCase):
-     def testPackUbootSplMicrocode(self):
-         """Test that x86 microcode can be handled correctly in SPL"""
-         self._SetupSplElf()
--        self._PackUbootSplMicrocode('049_x86_ucode_spl.dts')
-+        self._PackUbootSplMicrocode('x86/ucode_spl.dts')
- 
-     def testPackUbootSplMicrocodeReorder(self):
-         """Test that order doesn't matter for microcode entries
-@@ -1503,12 +1503,12 @@ class TestFunctional(unittest.TestCase):
-         u-boot-ucode entry we have not yet seen the u-boot-dtb-with-ucode
-         entry, so we reply on binman to try later.
-         """
--        self._PackUbootSplMicrocode('058_x86_ucode_spl_needs_retry.dts',
-+        self._PackUbootSplMicrocode('x86/ucode_spl_needs_retry.dts',
-                                     ucode_second=True)
- 
-     def testPackMrc(self):
-         """Test that an image with an MRC binary can be created"""
--        data = self._DoReadFile('050_intel_mrc.dts')
-+        data = self._DoReadFile('x86/intel_mrc.dts')
-         self.assertEqual(MRC_DATA, data[:len(MRC_DATA)])
- 
-     def testSplDtb(self):
-@@ -2055,7 +2055,7 @@ class TestFunctional(unittest.TestCase):
- 
-     def testPackStart16Tpl(self):
-         """Test that an image with an x86 start16 TPL region can be created"""
--        data = self._DoReadFile('081_x86_start16_tpl.dts')
-+        data = self._DoReadFile('x86/start16_tpl.dts')
-         self.assertEqual(X86_START16_TPL_DATA, data[:len(X86_START16_TPL_DATA)])
- 
-     def testSelectImage(self):
-@@ -2304,14 +2304,14 @@ class TestFunctional(unittest.TestCase):
-             the microcode
-         """
-         self._SetupTplElf('u_boot_ucode_ptr')
--        first, pos_and_size = self._RunMicrocodeTest('093_x86_tpl_ucode.dts',
-+        first, pos_and_size = self._RunMicrocodeTest('x86/tpl_ucode.dts',
-                                                      U_BOOT_TPL_NODTB_DATA)
-         self.assertEqual(b'tplnodtb with microc' + pos_and_size +
-                          b'ter somewhere in here', first)
- 
-     def testFmapX86(self):
-         """Basic test of generation of a flashrom fmap"""
--        data = self._DoReadFile('094_fmap_x86.dts')
-+        data = self._DoReadFile('x86/fmap.dts')
-         fhdr, fentries = fmap_util.DecodeFmap(data[32:])
-         expected = U_BOOT_DATA + MRC_DATA + tools.get_bytes(ord('a'), 32 - 7)
-         self.assertEqual(expected, data[:32])
-@@ -2335,7 +2335,7 @@ class TestFunctional(unittest.TestCase):
- 
-     def testFmapX86Section(self):
-         """Basic test of generation of a flashrom fmap"""
--        data = self._DoReadFile('095_fmap_x86_section.dts')
-+        data = self._DoReadFile('x86/fmap_section.dts')
-         expected = U_BOOT_DATA + MRC_DATA + tools.get_bytes(ord('b'), 32 - 7)
-         self.assertEqual(expected, data[:32])
-         fhdr, fentries = fmap_util.DecodeFmap(data[36:])
-@@ -2401,7 +2401,7 @@ class TestFunctional(unittest.TestCase):
- 
-     def testPackRefCode(self):
-         """Test that an image with an Intel Reference code binary works"""
--        data = self._DoReadFile('100_intel_refcode.dts')
-+        data = self._DoReadFile('x86/intel_refcode.dts')
-         self.assertEqual(REFCODE_DATA, data[:len(REFCODE_DATA)])
- 
-     def testSectionOffset(self):
-@@ -2556,20 +2556,20 @@ class TestFunctional(unittest.TestCase):
-     def testPackX86RomIfwi(self):
-         """Test that an x86 ROM with Integrated Firmware Image can be created"""
-         self._SetupIfwi('fitimage.bin')
--        data = self._DoReadFile('111_x86_rom_ifwi.dts')
-+        data = self._DoReadFile('x86/rom_ifwi.dts')
-         self._CheckIfwi(data)
- 
-     def testPackX86RomIfwiNoDesc(self):
-         """Test that an x86 ROM with IFWI can be created from an ifwi.bin file"""
-         self._SetupIfwi('ifwi.bin')
--        data = self._DoReadFile('112_x86_rom_ifwi_nodesc.dts')
-+        data = self._DoReadFile('x86/rom_ifwi_nodesc.dts')
-         self._CheckIfwi(data)
- 
-     def testPackX86RomIfwiNoData(self):
-         """Test that an x86 ROM with IFWI handles missing data"""
-         self._SetupIfwi('ifwi.bin')
-         with self.assertRaises(ValueError) as e:
--            data = self._DoReadFile('113_x86_rom_ifwi_nodata.dts')
-+            data = self._DoReadFile('x86/rom_ifwi_nodata.dts')
-         self.assertIn('Could not complete processing of contents',
-                       str(e.exception))
- 
-@@ -2577,7 +2577,7 @@ class TestFunctional(unittest.TestCase):
-         """Test that binman still produces an image if ifwitool is missing"""
-         self._SetupIfwi('fitimage.bin')
-         with terminal.capture() as (_, stderr):
--            self._DoTestFile('111_x86_rom_ifwi.dts',
-+            self._DoTestFile('x86/rom_ifwi.dts',
-                              force_missing_bintools='ifwitool')
-         err = stderr.getvalue()
-         self.assertRegex(err,
-@@ -3554,7 +3554,7 @@ class TestFunctional(unittest.TestCase):
- 
-     def testDescriptorOffset(self):
-         """Test that the Intel descriptor is always placed at at the start"""
--        data = self._DoReadFileDtb('141_descriptor_offset.dts')
-+        data = self._DoReadFileDtb('x86/descriptor_offset.dts')
-         image = control.images['image']
-         entries = image.GetEntries()
-         desc = entries['intel-descriptor']
-@@ -3778,22 +3778,22 @@ class TestFunctional(unittest.TestCase):
- 
-     def testPackReset16(self):
-         """Test that an image with an x86 reset16 region can be created"""
--        data = self._DoReadFile('144_x86_reset16.dts')
-+        data = self._DoReadFile('x86/reset16.dts')
-         self.assertEqual(X86_RESET16_DATA, data[:len(X86_RESET16_DATA)])
- 
-     def testPackReset16Spl(self):
-         """Test that an image with an x86 reset16-spl region can be created"""
--        data = self._DoReadFile('145_x86_reset16_spl.dts')
-+        data = self._DoReadFile('x86/reset16_spl.dts')
-         self.assertEqual(X86_RESET16_SPL_DATA, data[:len(X86_RESET16_SPL_DATA)])
- 
-     def testPackReset16Tpl(self):
-         """Test that an image with an x86 reset16-tpl region can be created"""
--        data = self._DoReadFile('146_x86_reset16_tpl.dts')
-+        data = self._DoReadFile('x86/reset16_tpl.dts')
-         self.assertEqual(X86_RESET16_TPL_DATA, data[:len(X86_RESET16_TPL_DATA)])
- 
-     def testPackIntelFit(self):
-         """Test that an image with an Intel FIT and pointer can be created"""
--        data = self._DoReadFile('147_intel_fit.dts')
-+        data = self._DoReadFile('x86/intel_fit.dts')
+-        data = self._DoReadFile('161_fit.dts')
++        data = self._DoReadFile('fit/fit.dts')
          self.assertEqual(U_BOOT_DATA, data[:len(U_BOOT_DATA)])
-         fit = data[16:32];
-         self.assertEqual(b'_FIT_   \x01\x00\x00\x00\x00\x01\x80}' , fit)
-@@ -3807,7 +3807,7 @@ class TestFunctional(unittest.TestCase):
-     def testPackIntelFitMissing(self):
-         """Test detection of a FIT pointer with not FIT region"""
+         self.assertEqual(U_BOOT_NODTB_DATA, data[-len(U_BOOT_NODTB_DATA):])
+         fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
+@@ -4000,7 +4000,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSimpleFitExpandsSubentries(self):
+         """Test that FIT images expand their subentries"""
+-        data = self._DoReadFileDtb('161_fit.dts', use_expanded=True)[0]
++        data = self._DoReadFileDtb('fit/fit.dts', use_expanded=True)[0]
+         self.assertEqual(U_BOOT_EXP_DATA, data[:len(U_BOOT_EXP_DATA)])
+         self.assertEqual(U_BOOT_NODTB_DATA, data[-len(U_BOOT_NODTB_DATA):])
+         fit_data = data[len(U_BOOT_EXP_DATA):-len(U_BOOT_NODTB_DATA)]
+@@ -4009,7 +4009,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSimpleFitImagePos(self):
+         """Test that we have correct image-pos for FIT subentries"""
+-        data, _, _, out_dtb_fname = self._DoReadFileDtb('161_fit.dts',
++        data, _, _, out_dtb_fname = self._DoReadFileDtb('fit/fit.dts',
+                                                         update_dtb=True)
+         dtb = fdt.Fdt(out_dtb_fname)
+         dtb.Scan()
+@@ -4066,7 +4066,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testFitExternal(self):
+         """Test an image with an FIT with external images"""
+-        data = self._DoReadFile('162_fit_external.dts')
++        data = self._DoReadFile('fit/external.dts')
+         fit_data = data[len(U_BOOT_DATA):-2]  # _testing is 2 bytes
+ 
+         # Size of the external-data region as set up by mkimage
+@@ -4094,7 +4094,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testFitExternalImagePos(self):
+         """Test that we have correct image-pos for external FIT subentries"""
+-        data, _, _, out_dtb_fname = self._DoReadFileDtb('162_fit_external.dts',
++        data, _, _, out_dtb_fname = self._DoReadFileDtb('fit/external.dts',
+                                                         update_dtb=True)
+         dtb = fdt.Fdt(out_dtb_fname)
+         dtb.Scan()
+@@ -4151,7 +4151,7 @@ class TestFunctional(unittest.TestCase):
+     def testFitMissing(self):
+         """Test that binman complains if mkimage is missing"""
          with self.assertRaises(ValueError) as e:
--            self._DoReadFile('148_intel_fit_missing.dts')
-+            self._DoReadFile('x86/intel_fit_missing.dts')
-         self.assertIn("'intel-fit-ptr' section must have an 'intel-fit' sibling",
+-            self._DoTestFile('162_fit_external.dts',
++            self._DoTestFile('fit/external.dts',
+                              force_missing_bintools='mkimage')
+         self.assertIn("Node '/binman/fit': Missing tool: 'mkimage'",
+                       str(e.exception))
+@@ -4159,7 +4159,7 @@ class TestFunctional(unittest.TestCase):
+     def testFitMissingOK(self):
+         """Test that binman still produces a FIT image if mkimage is missing"""
+         with terminal.capture() as (_, stderr):
+-            self._DoTestFile('162_fit_external.dts', allow_missing=True,
++            self._DoTestFile('fit/external.dts', allow_missing=True,
+                              force_missing_bintools='mkimage')
+         err = stderr.getvalue()
+         self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
+@@ -4211,7 +4211,7 @@ class TestFunctional(unittest.TestCase):
+         entry_args = {
+             'test-id': TEXT_DATA,
+         }
+-        data, _, _, _ = self._DoReadFileDtb('167_fit_image_subentry_alignment.dts',
++        data, _, _, _ = self._DoReadFileDtb('fit/image_subentry_alignment.dts',
+                                             entry_args=entry_args)
+         dtb = fdt.Fdt.FromData(data)
+         dtb.Scan()
+@@ -4233,7 +4233,7 @@ class TestFunctional(unittest.TestCase):
+     def testFitExtblobMissingOk(self):
+         """Test a FIT with a missing external blob that is allowed"""
+         with terminal.capture() as (stdout, stderr):
+-            self._DoTestFile('168_fit_missing_blob.dts',
++            self._DoTestFile('fit/missing_blob.dts',
+                              allow_missing=True)
+         err = stderr.getvalue()
+         self.assertRegex(err, "Image 'image'.*missing.*: atf-bl31")
+@@ -4255,7 +4255,7 @@ class TestFunctional(unittest.TestCase):
+         data = self._DoReadFile('172_scp.dts')
+         self.assertEqual(SCP_DATA, data[:len(SCP_DATA)])
+ 
+-    def CheckFitFdt(self, dts='170_fit_fdt.dts', use_fdt_list=True,
++    def CheckFitFdt(self, dts='fit/fdt.dts', use_fdt_list=True,
+                     default_dt=None, use_seq_num=True):
+         """Check an image with an FIT with multiple FDT images"""
+         def _CheckFdt(val, expected_data):
+@@ -4351,7 +4351,7 @@ class TestFunctional(unittest.TestCase):
+     def testFitFdtMissingList(self):
+         """Test handling of a missing 'of-list' entry arg"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('170_fit_fdt.dts')
++            self._DoReadFile('fit/fdt.dts')
+         self.assertIn("Generator node requires 'of-list' entry argument",
                        str(e.exception))
  
-@@ -3840,29 +3840,29 @@ class TestFunctional(unittest.TestCase):
-         """Test binman can assign symbols in a section with end-at-4gb"""
-         self._SetupSplElf('u_boot_binman_syms_x86')
-         self._SetupTplElf('u_boot_binman_syms_x86')
--        self._CheckSymbolsTplSection('155_symbols_tpl_x86.dts',
-+        self._CheckSymbolsTplSection('x86/symbols_tpl.dts',
-                                      [0xffffff04, 0xffffff20, 0xffffff3c,
-                                       0x04])
+@@ -4360,12 +4360,12 @@ class TestFunctional(unittest.TestCase):
+         entry_args = {
+             'of-list': '',
+         }
+-        data = self._DoReadFileDtb('170_fit_fdt.dts', entry_args=entry_args)[0]
++        data = self._DoReadFileDtb('fit/fdt.dts', entry_args=entry_args)[0]
  
-     def testPackX86RomIfwiSectiom(self):
-         """Test that a section can be placed in an IFWI region"""
-         self._SetupIfwi('fitimage.bin')
--        data = self._DoReadFile('151_x86_rom_ifwi_section.dts')
-+        data = self._DoReadFile('x86/rom_ifwi_section.dts')
-         self._CheckIfwi(data)
+     def testFitFdtMissingProp(self):
+         """Test handling of a missing 'fit,fdt-list' property"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('171_fit_fdt_missing_prop.dts')
++            self._DoReadFile('fit/fdt_missing_prop.dts')
+         self.assertIn("Generator node requires 'fit,fdt-list' property",
+                       str(e.exception))
  
-     def testPackFspM(self):
-         """Test that an image with a FSP memory-init binary can be created"""
--        data = self._DoReadFile('152_intel_fsp_m.dts')
-+        data = self._DoReadFile('x86/intel_fsp_m.dts')
-         self.assertEqual(FSP_M_DATA, data[:len(FSP_M_DATA)])
- 
-     def testPackFspS(self):
-         """Test that an image with a FSP silicon-init binary can be created"""
--        data = self._DoReadFile('153_intel_fsp_s.dts')
-+        data = self._DoReadFile('x86/intel_fsp_s.dts')
-         self.assertEqual(FSP_S_DATA, data[:len(FSP_S_DATA)])
- 
-     def testPackFspT(self):
-         """Test that an image with a FSP temp-ram-init binary can be created"""
--        data = self._DoReadFile('154_intel_fsp_t.dts')
-+        data = self._DoReadFile('x86/intel_fsp_t.dts')
-         self.assertEqual(FSP_T_DATA, data[:len(FSP_T_DATA)])
- 
-     def testMkimage(self):
-@@ -3927,7 +3927,7 @@ class TestFunctional(unittest.TestCase):
-     def testPackX86RomMeMissingDesc(self):
-         """Test that an missing Intel descriptor entry is allowed"""
+@@ -4376,7 +4376,7 @@ class TestFunctional(unittest.TestCase):
+         }
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFileDtb(
+-                '170_fit_fdt.dts',
++                'fit/fdt.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])[0]
+         self.assertIn("Generated 'default' node requires default-dt entry argument",
+@@ -4390,7 +4390,7 @@ class TestFunctional(unittest.TestCase):
+         }
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFileDtb(
+-                '170_fit_fdt.dts',
++                'fit/fdt.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])[0]
+         self.assertIn("default-dt entry argument 'test-fdt3' not found in fdt list: test-fdt1, test-fdt2",
+@@ -4402,7 +4402,7 @@ class TestFunctional(unittest.TestCase):
+         control.missing_blob_help['wibble'] = 'Wibble test'
+         control.missing_blob_help['another'] = 'Another test'
          with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('164_x86_rom_me_missing.dts', allow_missing=True)
-+            self._DoTestFile('x86/rom_me_missing.dts', allow_missing=True)
+-            self._DoTestFile('168_fit_missing_blob.dts',
++            self._DoTestFile('fit/missing_blob.dts',
+                              allow_missing=True)
          err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing.*: intel-descriptor")
  
-@@ -3937,7 +3937,7 @@ class TestFunctional(unittest.TestCase):
-         pathname = os.path.join(self._indir, 'fitimage.bin')
-         os.remove(pathname)
+@@ -5507,7 +5507,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             'of-list': 'test-fdt1 test-fdt2',
+         }
+         data = self._DoReadFileDtb(
+-            '219_fit_gennode.dts',
++            'fit/gennode.dts',
+             entry_args=entry_args,
+             use_real_dtb=True,
+             extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])
+@@ -5528,7 +5528,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             'keydir': 'devkeys',
+             'bmpblk': 'bmpblk.bin',
+         }
+-        data, _, _, _ = self._DoReadFileDtb('220_fit_subentry_bintool.dts',
++        data, _, _, _ = self._DoReadFileDtb('fit/subentry_bintool.dts',
+                 entry_args=entry_args)
+ 
+         expected = (GBB_DATA + GBB_DATA + tools.get_bytes(0, 8) +
+@@ -5541,7 +5541,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             'keydir': 'devkeys',
+         }
+         with terminal.capture() as (_, stderr):
+-            self._DoTestFile('220_fit_subentry_bintool.dts',
++            self._DoTestFile('fit/subentry_bintool.dts',
+                     force_missing_bintools='futility', entry_args=entry_args)
+         err = stderr.getvalue()
+         self.assertRegex(err, "Image 'image'.*missing bintools.*: futility")
+@@ -5550,7 +5550,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test an image with a FIT inside"""
+         self._SetupSplElf()
+         data, _, _, out_dtb_name = self._DoReadFileDtb(
+-            '221_fit_subentry_hash.dts', use_real_dtb=True, update_dtb=True)
++            'fit/subentry_hash.dts', use_real_dtb=True, update_dtb=True)
+ 
+         mkimage_dtb = fdt.Fdt.FromData(data)
+         mkimage_dtb.Scan()
+@@ -5604,14 +5604,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             'default-dt': 'test-fdt2',
+         }
+         self._DoReadFileDtb(
+-            '223_fit_fdt_oper.dts',
++            'fit/fdt_oper.dts',
+             entry_args=entry_args,
+             extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])[0]
+ 
+     def testFitFdtBadOper(self):
+         """Check handling of an FDT map when the section cannot be found"""
+         with self.assertRaises(ValueError) as exc:
+-            self._DoReadFileDtb('224_fit_bad_oper.dts')
++            self._DoReadFileDtb('fit/bad_oper.dts')
+         self.assertIn("Node '/binman/fit': subnode 'images/@fdt-SEQ': Unknown operation 'unknown'",
+                       str(exc.exception))
+ 
+@@ -5635,7 +5635,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         }
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         data = self._DoReadFileDtb(
+-            '226_fit_split_elf.dts',
++            'fit/split_elf.dts',
+             entry_args=entry_args,
+             extra_indirs=[test_subdir])[0]
+ 
+@@ -5728,7 +5728,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         with self.assertRaises(ValueError) as exc:
+             self._DoReadFileDtb(
+-                '226_fit_split_elf.dts',
++                'fit/split_elf.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir])[0]
+         self.assertIn(
+@@ -5755,7 +5755,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
          with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('111_x86_rom_ifwi.dts', allow_missing=True)
-+            self._DoTestFile('x86/rom_ifwi.dts', allow_missing=True)
-         err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing.*: intel-ifwi")
+             self._DoTestFile(
+-                '226_fit_split_elf.dts', entry_args=entry_args,
++                'fit/split_elf.dts', entry_args=entry_args,
+                 extra_indirs=[test_subdir], verbosity=3, **kwargs)
+             out = stdout.getvalue()
+             err = stderr.getvalue()
+@@ -5765,7 +5765,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test a FIT split-elf invalid fit,xxx directive in an image node"""
+         if not elf.ELF_TOOLS:
+             self.skipTest('Python elftools not available')
+-        err = self._check_bad_fit('227_fit_bad_dir.dts')
++        err = self._check_bad_fit('fit/bad_dir.dts')
+         self.assertIn(
+             "Node '/binman/fit': subnode 'images/@atf-SEQ': Unknown directive 'fit,something'",
+             err)
+@@ -5774,7 +5774,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test a FIT split-elf with invalid fit,xxx directive in config"""
+         if not elf.ELF_TOOLS:
+             self.skipTest('Python elftools not available')
+-        err = self._check_bad_fit('228_fit_bad_dir_config.dts')
++        err = self._check_bad_fit('fit/bad_dir_config.dts')
+         self.assertEqual(
+             "Node '/binman/fit': subnode 'configurations/@config-SEQ': Unknown directive 'fit,config'",
+             err)
+@@ -5986,7 +5986,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-diff --git a/tools/binman/test/141_descriptor_offset.dts b/tools/binman/test/x86/descriptor_offset.dts
+     def testExtractFit(self):
+         """Test extracting a FIT section"""
+-        self._DoReadFileRealDtb('240_fit_extract_replace.dts')
++        self._DoReadFileRealDtb('fit/extract_replace.dts')
+         image_fname = tools.get_output_filename('image.bin')
+ 
+         fit_data = control.ReadEntry(image_fname, 'fit')
+@@ -6005,7 +6005,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testExtractFitSubentries(self):
+         """Test extracting FIT section subentries"""
+-        self._DoReadFileRealDtb('240_fit_extract_replace.dts')
++        self._DoReadFileRealDtb('fit/extract_replace.dts')
+         image_fname = tools.get_output_filename('image.bin')
+ 
+         for entry_path, expected in [
+@@ -6024,7 +6024,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         new_data = b'x' * len(U_BOOT_DATA)
+         data, expected_fdtmap, _ = self._RunReplaceCmd(
+             'fit/kernel/u-boot', new_data,
+-            dts='240_fit_extract_replace.dts')
++            dts='fit/extract_replace.dts')
+         self.assertEqual(new_data, data)
+ 
+         path, fdtmap = state.GetFdtContents('fdtmap')
+@@ -6036,7 +6036,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         new_data = b'ub' * len(U_BOOT_NODTB_DATA)
+         data, expected_fdtmap, _ = self._RunReplaceCmd(
+             'fit/fdt-1/u-boot-nodtb', new_data,
+-            dts='240_fit_extract_replace.dts')
++            dts='fit/extract_replace.dts')
+         self.assertEqual(new_data, data)
+ 
+         # Will be repacked, so fdtmap must change
+@@ -6050,7 +6050,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         expected = new_data.ljust(len(U_BOOT_NODTB_DATA), b'\0')
+         data, expected_fdtmap, _ = self._RunReplaceCmd(
+             'fit/fdt-1/u-boot-nodtb', new_data,
+-            dts='240_fit_extract_replace.dts')
++            dts='fit/extract_replace.dts')
+         self.assertEqual(expected, data)
+ 
+         path, fdtmap = state.GetFdtContents('fdtmap')
+@@ -6510,7 +6510,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testFitTeeOsOptionalFit(self):
+         """Test an image with a FIT with an optional OP-TEE binary"""
+-        data = self.checkFitTee('264_tee_os_opt_fit.dts', 'tee.bin')
++        data = self.checkFitTee('fit/tee_os_opt.dts', 'tee.bin')
+ 
+         # There should be only one node, holding the data set up in SetUpClass()
+         # for tee.bin
+@@ -6524,7 +6524,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertEqual(U_BOOT_DATA, node.props['data'].bytes)
+ 
+         with terminal.capture() as (stdout, stderr):
+-            self.checkFitTee('264_tee_os_opt_fit.dts', '')
++            self.checkFitTee('fit/tee_os_opt.dts', '')
+         err = stderr.getvalue()
+         self.assertRegex(
+             err,
+@@ -6536,7 +6536,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testFitTeeOsOptionalFitBad(self):
+         """Test an image with a FIT with an optional OP-TEE binary"""
+         with self.assertRaises(ValueError) as exc:
+-            self.checkFitTee('265_tee_os_opt_fit_bad.dts', 'tee.bin')
++            self.checkFitTee('fit/tee_os_opt_bad.dts', 'tee.bin')
+         self.assertIn(
+             "Node '/binman/fit': subnode 'images/@tee-SEQ': Failed to read ELF file: Magic number does not match",
+             str(exc.exception))
+@@ -6545,14 +6545,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test an OP-TEE binary with wrong formats"""
+         self.make_tee_bin('tee.bad1', 123)
+         with self.assertRaises(ValueError) as exc:
+-            self.checkFitTee('264_tee_os_opt_fit.dts', 'tee.bad1')
++            self.checkFitTee('fit/tee_os_opt.dts', 'tee.bad1')
+         self.assertIn(
+             "Node '/binman/fit/images/@tee-SEQ/tee-os': OP-TEE paged mode not supported",
+             str(exc.exception))
+ 
+         self.make_tee_bin('tee.bad2', 0, b'extra data')
+         with self.assertRaises(ValueError) as exc:
+-            self.checkFitTee('264_tee_os_opt_fit.dts', 'tee.bad2')
++            self.checkFitTee('fit/tee_os_opt.dts', 'tee.bad2')
+         self.assertIn(
+             "Node '/binman/fit/images/@tee-SEQ/tee-os': Invalid OP-TEE file: size mismatch (expected 0x4, have 0xe)",
+             str(exc.exception))
+@@ -6701,7 +6701,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testFitAlign(self):
+         """Test an image with an FIT with aligned external data"""
+-        data = self._DoReadFile('275_fit_align.dts')
++        data = self._DoReadFile('fit/align.dts')
+         self.assertEqual(4096, len(data))
+ 
+         dtb = fdt.Fdt.FromData(data)
+@@ -6728,7 +6728,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         with terminal.capture() as (stdout, stderr):
+             data = self._DoReadFileDtb(
+-                '276_fit_firmware_loadables.dts',
++                'fit/firmware_loadables.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir])[0]
+ 
+@@ -6838,7 +6838,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test an image with a FIT inside where we replace its sibling"""
+         self._SetupSplElf()
+         fname = TestFunctional._MakeInputFile('once', b'available once')
+-        self._DoReadFileRealDtb('277_replace_fit_sibling.dts')
++        self._DoReadFileRealDtb('fit/replace_sibling.dts')
+         os.remove(fname)
+ 
+         try:
+@@ -6899,7 +6899,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=False)
+         self.assertIn("not found in input path", str(e.exception))
+ 
+-    def _PrepareSignEnv(self, dts='280_fit_sign.dts'):
++    def _PrepareSignEnv(self, dts='fit/sign.dts'):
+         """Prepare sign environment
+ 
+         Create private and public keys, add pubkey into dtb.
+@@ -7013,7 +7013,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             'default-dt': 'test-fdt2',
+         }
+         data = self._DoReadFileDtb(
+-            '284_fit_fdt_list.dts',
++            'fit/fdt_list.dts',
+             entry_args=entry_args,
+             extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])[0]
+         self.assertEqual(U_BOOT_NODTB_DATA, data[-len(U_BOOT_NODTB_DATA):])
+@@ -7069,7 +7069,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testTemplateFit(self):
+         """Test using a template in a FIT"""
+-        fit_data = self._DoReadFile('288_template_fit.dts')
++        fit_data = self._DoReadFile('fit/template.dts')
+         fname = os.path.join(self._indir, 'fit_data.fit')
+         tools.write_file(fname, fit_data)
+         out = tools.run('dumpimage', '-l', fname)
+@@ -7776,7 +7776,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         old_dir = os.getcwd()
+         try:
+             os.chdir(self._indir)
+-            self.CheckFitFdt('333_fit_fdt_dir.dts', False)
++            self.CheckFitFdt('fit/fdt_dir.dts', False)
+         finally:
+             os.chdir(old_dir)
+ 
+@@ -7785,7 +7785,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         old_dir = os.getcwd()
+         try:
+             os.chdir(self._indir)
+-            self.CheckFitFdt('333_fit_fdt_dir.dts', False,
++            self.CheckFitFdt('fit/fdt_dir.dts', False,
+                              default_dt='rockchip/test-fdt2')
+         finally:
+             os.chdir(old_dir)
+@@ -7798,7 +7798,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             }
+         testdir, dtb_list = self.SetupAlternateDts()
+         data = self._DoReadFileDtb(
+-            '334_fit_fdt_compat.dts', use_real_dtb=True, update_dtb=True,
++            'fit/fdt_compat.dts', use_real_dtb=True, update_dtb=True,
+             entry_args=entry_args, extra_indirs=[testdir])[0]
+ 
+         fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
+@@ -7831,7 +7831,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             }
+         testdir, dtb_list = self.SetupAlternateDts()
+         data = self._DoReadFileDtb(
+-            '335_fit_fdt_phase.dts', use_real_dtb=True, update_dtb=True,
++            'fit/fdt_phase.dts', use_real_dtb=True, update_dtb=True,
+             entry_args=entry_args, extra_indirs=[testdir])[0]
+         fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
+         fit = fdt.Fdt.FromData(fit_data)
+@@ -8039,7 +8039,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         keys_subdir = os.path.join(self._indir, "keys")
+         data = self._DoReadFileDtb(
+-            '340_fit_signature.dts',
++            'fit/signature.dts',
+             entry_args=entry_args,
+             extra_indirs=[test_subdir, keys_subdir])[0]
+ 
+@@ -8080,7 +8080,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         with unittest.mock.patch.dict('os.environ',
+                                       {'OPENSSL_ENGINES': ossl_engines_path}):
+             data = self._DoReadFileDtb(
+-                '360_fit_signature_engine.dts',
++                'fit/signature_engine.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir])[0]
+ 
+@@ -8121,7 +8121,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFileDtb(
+-                    '361_fit_signature_engine_encrypt.dts',
++                    'fit/signature_engine_encrypt.dts',
+                     entry_args=entry_args,
+                     extra_indirs=[test_subdir])
+ 
+@@ -8181,7 +8181,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+                                       {'OPENSSL_CONF': ossl_conf,
+                                        'SOFTHSM2_CONF': softhsm2_conf}):
+             data = self._DoReadFileDtb(
+-                '362_fit_signature_engine_pkcs11.dts',
++                'fit/signature_engine_pkcs11.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir])[0]
+ 
+@@ -8259,7 +8259,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+                                        'SOFTHSM2_CONF': softhsm2_conf,
+                                        'MKIMAGE_SIGN_PIN': '1234'}):
+             data = self._DoReadFileDtb(
+-                '363_fit_signature_engine_pkcs11_object.dts',
++                'fit/signature_engine_pkcs11_object.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir])[0]
+ 
+@@ -8294,7 +8294,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFileDtb(
+-                '340_fit_signature.dts',
++                'fit/signature.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir])[0]
+         self.assertIn(
+@@ -8320,7 +8320,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         keys_subdir2 = os.path.join(self._indir, "keys2")
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFileDtb(
+-                '341_fit_signature.dts',
++                'fit/signature_multi_key.dts',
+                 entry_args=entry_args,
+                 extra_indirs=[test_subdir, keys_subdir1, keys_subdir2])[0]
+         self.assertIn(
+@@ -8338,7 +8338,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         }
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         self._DoReadFileDtb(
+-            '342_fit_signature.dts',
++            'fit/signature_no_nodes.dts',
+             entry_args=entry_args,
+             extra_indirs=[test_subdir])[0]
+ 
+@@ -8354,7 +8354,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
+         with self.assertRaises(ValueError) as e:
+             self._DoReadFileDtb(
+-                    '355_key_name_hint_dir_fit_signature.dts',
++                    'fit/key_name_hint_dir_signature.dts',
+                     entry_args=entry_args,
+                     extra_indirs=[test_subdir])
+         self.assertIn(
+@@ -8368,7 +8368,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+         keys_subdir = os.path.join(self._indir, "keys")
+         data = self._DoReadFileDtb(
+-            '343_fit_encrypt_data.dts',
++            'fit/encrypt_data.dts',
+             extra_indirs=[keys_subdir])[0]
+ 
+         fit = fdt.Fdt.FromData(data)
+@@ -8402,13 +8402,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testSimpleFitEncryptedDataMissingKey(self):
+         """Test an image with a FIT containing data to be encrypted but with a missing key"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('344_fit_encrypt_data_no_key.dts')
++            self._DoReadFile('fit/encrypt_data_no_key.dts')
+ 
+         self.assertIn("Filename 'aes256.bin' not found in input path", str(e.exception))
+ 
+     def testFitFdtName(self):
+         """Test an image with an FIT with multiple FDT images using NAME"""
+-        self.CheckFitFdt('345_fit_fdt_name.dts', use_seq_num=False)
++        self.CheckFitFdt('fit/fdt_name.dts', use_seq_num=False)
+ 
+     def testRemoveTemplate(self):
+         """Test whether template is removed"""
+diff --git a/tools/binman/test/275_fit_align.dts b/tools/binman/test/fit/align.dts
 similarity index 100%
-rename from tools/binman/test/141_descriptor_offset.dts
-rename to tools/binman/test/x86/descriptor_offset.dts
-diff --git a/tools/binman/test/094_fmap_x86.dts b/tools/binman/test/x86/fmap.dts
+rename from tools/binman/test/275_fit_align.dts
+rename to tools/binman/test/fit/align.dts
+diff --git a/tools/binman/test/227_fit_bad_dir.dts b/tools/binman/test/fit/bad_dir.dts
+similarity index 71%
+rename from tools/binman/test/227_fit_bad_dir.dts
+rename to tools/binman/test/fit/bad_dir.dts
+index 51f4816c4c2..c6d5c7b0a87 100644
+--- a/tools/binman/test/227_fit_bad_dir.dts
++++ b/tools/binman/test/fit/bad_dir.dts
+@@ -2,7 +2,7 @@
+ 
+ /dts-v1/;
+ 
+-#include "226_fit_split_elf.dts"
++#include "split_elf.dts"
+ 
+ &atf {
+ 	fit,something = "bad";
+diff --git a/tools/binman/test/228_fit_bad_dir_config.dts b/tools/binman/test/fit/bad_dir_config.dts
+similarity index 71%
+rename from tools/binman/test/228_fit_bad_dir_config.dts
+rename to tools/binman/test/fit/bad_dir_config.dts
+index 825a346c3e6..bae805a9523 100644
+--- a/tools/binman/test/228_fit_bad_dir_config.dts
++++ b/tools/binman/test/fit/bad_dir_config.dts
+@@ -2,7 +2,7 @@
+ 
+ /dts-v1/;
+ 
+-#include "226_fit_split_elf.dts"
++#include "split_elf.dts"
+ 
+ &config {
+ 	fit,config = "bad";
+diff --git a/tools/binman/test/224_fit_bad_oper.dts b/tools/binman/test/fit/bad_oper.dts
 similarity index 100%
-rename from tools/binman/test/094_fmap_x86.dts
-rename to tools/binman/test/x86/fmap.dts
-diff --git a/tools/binman/test/095_fmap_x86_section.dts b/tools/binman/test/x86/fmap_section.dts
+rename from tools/binman/test/224_fit_bad_oper.dts
+rename to tools/binman/test/fit/bad_oper.dts
+diff --git a/tools/binman/test/343_fit_encrypt_data.dts b/tools/binman/test/fit/encrypt_data.dts
 similarity index 100%
-rename from tools/binman/test/095_fmap_x86_section.dts
-rename to tools/binman/test/x86/fmap_section.dts
-diff --git a/tools/binman/test/043_intel_cmc.dts b/tools/binman/test/x86/intel_cmc.dts
+rename from tools/binman/test/343_fit_encrypt_data.dts
+rename to tools/binman/test/fit/encrypt_data.dts
+diff --git a/tools/binman/test/344_fit_encrypt_data_no_key.dts b/tools/binman/test/fit/encrypt_data_no_key.dts
 similarity index 100%
-rename from tools/binman/test/043_intel_cmc.dts
-rename to tools/binman/test/x86/intel_cmc.dts
-diff --git a/tools/binman/test/147_intel_fit.dts b/tools/binman/test/x86/intel_fit.dts
+rename from tools/binman/test/344_fit_encrypt_data_no_key.dts
+rename to tools/binman/test/fit/encrypt_data_no_key.dts
+diff --git a/tools/binman/test/162_fit_external.dts b/tools/binman/test/fit/external.dts
 similarity index 100%
-rename from tools/binman/test/147_intel_fit.dts
-rename to tools/binman/test/x86/intel_fit.dts
-diff --git a/tools/binman/test/148_intel_fit_missing.dts b/tools/binman/test/x86/intel_fit_missing.dts
+rename from tools/binman/test/162_fit_external.dts
+rename to tools/binman/test/fit/external.dts
+diff --git a/tools/binman/test/240_fit_extract_replace.dts b/tools/binman/test/fit/extract_replace.dts
 similarity index 100%
-rename from tools/binman/test/148_intel_fit_missing.dts
-rename to tools/binman/test/x86/intel_fit_missing.dts
-diff --git a/tools/binman/test/042_intel_fsp.dts b/tools/binman/test/x86/intel_fsp.dts
+rename from tools/binman/test/240_fit_extract_replace.dts
+rename to tools/binman/test/fit/extract_replace.dts
+diff --git a/tools/binman/test/170_fit_fdt.dts b/tools/binman/test/fit/fdt.dts
 similarity index 100%
-rename from tools/binman/test/042_intel_fsp.dts
-rename to tools/binman/test/x86/intel_fsp.dts
-diff --git a/tools/binman/test/152_intel_fsp_m.dts b/tools/binman/test/x86/intel_fsp_m.dts
+rename from tools/binman/test/170_fit_fdt.dts
+rename to tools/binman/test/fit/fdt.dts
+diff --git a/tools/binman/test/334_fit_fdt_compat.dts b/tools/binman/test/fit/fdt_compat.dts
 similarity index 100%
-rename from tools/binman/test/152_intel_fsp_m.dts
-rename to tools/binman/test/x86/intel_fsp_m.dts
-diff --git a/tools/binman/test/153_intel_fsp_s.dts b/tools/binman/test/x86/intel_fsp_s.dts
+rename from tools/binman/test/334_fit_fdt_compat.dts
+rename to tools/binman/test/fit/fdt_compat.dts
+diff --git a/tools/binman/test/333_fit_fdt_dir.dts b/tools/binman/test/fit/fdt_dir.dts
 similarity index 100%
-rename from tools/binman/test/153_intel_fsp_s.dts
-rename to tools/binman/test/x86/intel_fsp_s.dts
-diff --git a/tools/binman/test/154_intel_fsp_t.dts b/tools/binman/test/x86/intel_fsp_t.dts
+rename from tools/binman/test/333_fit_fdt_dir.dts
+rename to tools/binman/test/fit/fdt_dir.dts
+diff --git a/tools/binman/test/284_fit_fdt_list.dts b/tools/binman/test/fit/fdt_list.dts
 similarity index 100%
-rename from tools/binman/test/154_intel_fsp_t.dts
-rename to tools/binman/test/x86/intel_fsp_t.dts
-diff --git a/tools/binman/test/050_intel_mrc.dts b/tools/binman/test/x86/intel_mrc.dts
+rename from tools/binman/test/284_fit_fdt_list.dts
+rename to tools/binman/test/fit/fdt_list.dts
+diff --git a/tools/binman/test/171_fit_fdt_missing_prop.dts b/tools/binman/test/fit/fdt_missing_prop.dts
 similarity index 100%
-rename from tools/binman/test/050_intel_mrc.dts
-rename to tools/binman/test/x86/intel_mrc.dts
-diff --git a/tools/binman/test/100_intel_refcode.dts b/tools/binman/test/x86/intel_refcode.dts
+rename from tools/binman/test/171_fit_fdt_missing_prop.dts
+rename to tools/binman/test/fit/fdt_missing_prop.dts
+diff --git a/tools/binman/test/345_fit_fdt_name.dts b/tools/binman/test/fit/fdt_name.dts
 similarity index 100%
-rename from tools/binman/test/100_intel_refcode.dts
-rename to tools/binman/test/x86/intel_refcode.dts
-diff --git a/tools/binman/test/046_intel_vbt.dts b/tools/binman/test/x86/intel_vbt.dts
+rename from tools/binman/test/345_fit_fdt_name.dts
+rename to tools/binman/test/fit/fdt_name.dts
+diff --git a/tools/binman/test/223_fit_fdt_oper.dts b/tools/binman/test/fit/fdt_oper.dts
 similarity index 100%
-rename from tools/binman/test/046_intel_vbt.dts
-rename to tools/binman/test/x86/intel_vbt.dts
-diff --git a/tools/binman/test/032_intel_vga.dts b/tools/binman/test/x86/intel_vga.dts
+rename from tools/binman/test/223_fit_fdt_oper.dts
+rename to tools/binman/test/fit/fdt_oper.dts
+diff --git a/tools/binman/test/335_fit_fdt_phase.dts b/tools/binman/test/fit/fdt_phase.dts
 similarity index 100%
-rename from tools/binman/test/032_intel_vga.dts
-rename to tools/binman/test/x86/intel_vga.dts
-diff --git a/tools/binman/test/037_x86_no_ucode.dts b/tools/binman/test/x86/no_ucode.dts
+rename from tools/binman/test/335_fit_fdt_phase.dts
+rename to tools/binman/test/fit/fdt_phase.dts
+diff --git a/tools/binman/test/276_fit_firmware_loadables.dts b/tools/binman/test/fit/firmware_loadables.dts
 similarity index 100%
-rename from tools/binman/test/037_x86_no_ucode.dts
-rename to tools/binman/test/x86/no_ucode.dts
-diff --git a/tools/binman/test/044_x86_optional_ucode.dts b/tools/binman/test/x86/optional_ucode.dts
+rename from tools/binman/test/276_fit_firmware_loadables.dts
+rename to tools/binman/test/fit/firmware_loadables.dts
+diff --git a/tools/binman/test/161_fit.dts b/tools/binman/test/fit/fit.dts
 similarity index 100%
-rename from tools/binman/test/044_x86_optional_ucode.dts
-rename to tools/binman/test/x86/optional_ucode.dts
-diff --git a/tools/binman/test/144_x86_reset16.dts b/tools/binman/test/x86/reset16.dts
+rename from tools/binman/test/161_fit.dts
+rename to tools/binman/test/fit/fit.dts
+diff --git a/tools/binman/test/219_fit_gennode.dts b/tools/binman/test/fit/gennode.dts
 similarity index 100%
-rename from tools/binman/test/144_x86_reset16.dts
-rename to tools/binman/test/x86/reset16.dts
-diff --git a/tools/binman/test/145_x86_reset16_spl.dts b/tools/binman/test/x86/reset16_spl.dts
+rename from tools/binman/test/219_fit_gennode.dts
+rename to tools/binman/test/fit/gennode.dts
+diff --git a/tools/binman/test/167_fit_image_subentry_alignment.dts b/tools/binman/test/fit/image_subentry_alignment.dts
 similarity index 100%
-rename from tools/binman/test/145_x86_reset16_spl.dts
-rename to tools/binman/test/x86/reset16_spl.dts
-diff --git a/tools/binman/test/146_x86_reset16_tpl.dts b/tools/binman/test/x86/reset16_tpl.dts
+rename from tools/binman/test/167_fit_image_subentry_alignment.dts
+rename to tools/binman/test/fit/image_subentry_alignment.dts
+diff --git a/tools/binman/test/355_key_name_hint_dir_fit_signature.dts b/tools/binman/test/fit/key_name_hint_dir_signature.dts
 similarity index 100%
-rename from tools/binman/test/146_x86_reset16_tpl.dts
-rename to tools/binman/test/x86/reset16_tpl.dts
-diff --git a/tools/binman/test/029_x86_rom.dts b/tools/binman/test/x86/rom.dts
+rename from tools/binman/test/355_key_name_hint_dir_fit_signature.dts
+rename to tools/binman/test/fit/key_name_hint_dir_signature.dts
+diff --git a/tools/binman/test/168_fit_missing_blob.dts b/tools/binman/test/fit/missing_blob.dts
 similarity index 100%
-rename from tools/binman/test/029_x86_rom.dts
-rename to tools/binman/test/x86/rom.dts
-diff --git a/tools/binman/test/111_x86_rom_ifwi.dts b/tools/binman/test/x86/rom_ifwi.dts
+rename from tools/binman/test/168_fit_missing_blob.dts
+rename to tools/binman/test/fit/missing_blob.dts
+diff --git a/tools/binman/test/277_replace_fit_sibling.dts b/tools/binman/test/fit/replace_sibling.dts
 similarity index 100%
-rename from tools/binman/test/111_x86_rom_ifwi.dts
-rename to tools/binman/test/x86/rom_ifwi.dts
-diff --git a/tools/binman/test/113_x86_rom_ifwi_nodata.dts b/tools/binman/test/x86/rom_ifwi_nodata.dts
+rename from tools/binman/test/277_replace_fit_sibling.dts
+rename to tools/binman/test/fit/replace_sibling.dts
+diff --git a/tools/binman/test/280_fit_sign.dts b/tools/binman/test/fit/sign.dts
 similarity index 100%
-rename from tools/binman/test/113_x86_rom_ifwi_nodata.dts
-rename to tools/binman/test/x86/rom_ifwi_nodata.dts
-diff --git a/tools/binman/test/112_x86_rom_ifwi_nodesc.dts b/tools/binman/test/x86/rom_ifwi_nodesc.dts
+rename from tools/binman/test/280_fit_sign.dts
+rename to tools/binman/test/fit/sign.dts
+diff --git a/tools/binman/test/340_fit_signature.dts b/tools/binman/test/fit/signature.dts
 similarity index 100%
-rename from tools/binman/test/112_x86_rom_ifwi_nodesc.dts
-rename to tools/binman/test/x86/rom_ifwi_nodesc.dts
-diff --git a/tools/binman/test/151_x86_rom_ifwi_section.dts b/tools/binman/test/x86/rom_ifwi_section.dts
+rename from tools/binman/test/340_fit_signature.dts
+rename to tools/binman/test/fit/signature.dts
+diff --git a/tools/binman/test/360_fit_signature_engine.dts b/tools/binman/test/fit/signature_engine.dts
 similarity index 100%
-rename from tools/binman/test/151_x86_rom_ifwi_section.dts
-rename to tools/binman/test/x86/rom_ifwi_section.dts
-diff --git a/tools/binman/test/031_x86_rom_me.dts b/tools/binman/test/x86/rom_me.dts
+rename from tools/binman/test/360_fit_signature_engine.dts
+rename to tools/binman/test/fit/signature_engine.dts
+diff --git a/tools/binman/test/361_fit_signature_engine_encrypt.dts b/tools/binman/test/fit/signature_engine_encrypt.dts
 similarity index 100%
-rename from tools/binman/test/031_x86_rom_me.dts
-rename to tools/binman/test/x86/rom_me.dts
-diff --git a/tools/binman/test/163_x86_rom_me_empty.dts b/tools/binman/test/x86/rom_me_empty.dts
+rename from tools/binman/test/361_fit_signature_engine_encrypt.dts
+rename to tools/binman/test/fit/signature_engine_encrypt.dts
+diff --git a/tools/binman/test/362_fit_signature_engine_pkcs11.dts b/tools/binman/test/fit/signature_engine_pkcs11.dts
 similarity index 100%
-rename from tools/binman/test/163_x86_rom_me_empty.dts
-rename to tools/binman/test/x86/rom_me_empty.dts
-diff --git a/tools/binman/test/164_x86_rom_me_missing.dts b/tools/binman/test/x86/rom_me_missing.dts
+rename from tools/binman/test/362_fit_signature_engine_pkcs11.dts
+rename to tools/binman/test/fit/signature_engine_pkcs11.dts
+diff --git a/tools/binman/test/363_fit_signature_engine_pkcs11_object.dts b/tools/binman/test/fit/signature_engine_pkcs11_object.dts
 similarity index 100%
-rename from tools/binman/test/164_x86_rom_me_missing.dts
-rename to tools/binman/test/x86/rom_me_missing.dts
-diff --git a/tools/binman/test/030_x86_rom_me_no_desc.dts b/tools/binman/test/x86/rom_me_no_desc.dts
+rename from tools/binman/test/363_fit_signature_engine_pkcs11_object.dts
+rename to tools/binman/test/fit/signature_engine_pkcs11_object.dts
+diff --git a/tools/binman/test/341_fit_signature.dts b/tools/binman/test/fit/signature_multi_key.dts
 similarity index 100%
-rename from tools/binman/test/030_x86_rom_me_no_desc.dts
-rename to tools/binman/test/x86/rom_me_no_desc.dts
-diff --git a/tools/binman/test/035_x86_single_ucode.dts b/tools/binman/test/x86/single_ucode.dts
+rename from tools/binman/test/341_fit_signature.dts
+rename to tools/binman/test/fit/signature_multi_key.dts
+diff --git a/tools/binman/test/342_fit_signature.dts b/tools/binman/test/fit/signature_no_nodes.dts
 similarity index 100%
-rename from tools/binman/test/035_x86_single_ucode.dts
-rename to tools/binman/test/x86/single_ucode.dts
-diff --git a/tools/binman/test/033_x86_start16.dts b/tools/binman/test/x86/start16.dts
+rename from tools/binman/test/342_fit_signature.dts
+rename to tools/binman/test/fit/signature_no_nodes.dts
+diff --git a/tools/binman/test/226_fit_split_elf.dts b/tools/binman/test/fit/split_elf.dts
 similarity index 100%
-rename from tools/binman/test/033_x86_start16.dts
-rename to tools/binman/test/x86/start16.dts
-diff --git a/tools/binman/test/048_x86_start16_spl.dts b/tools/binman/test/x86/start16_spl.dts
+rename from tools/binman/test/226_fit_split_elf.dts
+rename to tools/binman/test/fit/split_elf.dts
+diff --git a/tools/binman/test/220_fit_subentry_bintool.dts b/tools/binman/test/fit/subentry_bintool.dts
 similarity index 100%
-rename from tools/binman/test/048_x86_start16_spl.dts
-rename to tools/binman/test/x86/start16_spl.dts
-diff --git a/tools/binman/test/081_x86_start16_tpl.dts b/tools/binman/test/x86/start16_tpl.dts
+rename from tools/binman/test/220_fit_subentry_bintool.dts
+rename to tools/binman/test/fit/subentry_bintool.dts
+diff --git a/tools/binman/test/221_fit_subentry_hash.dts b/tools/binman/test/fit/subentry_hash.dts
 similarity index 100%
-rename from tools/binman/test/081_x86_start16_tpl.dts
-rename to tools/binman/test/x86/start16_tpl.dts
-diff --git a/tools/binman/test/155_symbols_tpl_x86.dts b/tools/binman/test/x86/symbols_tpl.dts
+rename from tools/binman/test/221_fit_subentry_hash.dts
+rename to tools/binman/test/fit/subentry_hash.dts
+diff --git a/tools/binman/test/264_tee_os_opt_fit.dts b/tools/binman/test/fit/tee_os_opt.dts
 similarity index 100%
-rename from tools/binman/test/155_symbols_tpl_x86.dts
-rename to tools/binman/test/x86/symbols_tpl.dts
-diff --git a/tools/binman/test/093_x86_tpl_ucode.dts b/tools/binman/test/x86/tpl_ucode.dts
+rename from tools/binman/test/264_tee_os_opt_fit.dts
+rename to tools/binman/test/fit/tee_os_opt.dts
+diff --git a/tools/binman/test/265_tee_os_opt_fit_bad.dts b/tools/binman/test/fit/tee_os_opt_bad.dts
 similarity index 100%
-rename from tools/binman/test/093_x86_tpl_ucode.dts
-rename to tools/binman/test/x86/tpl_ucode.dts
-diff --git a/tools/binman/test/034_x86_ucode.dts b/tools/binman/test/x86/ucode.dts
+rename from tools/binman/test/265_tee_os_opt_fit_bad.dts
+rename to tools/binman/test/fit/tee_os_opt_bad.dts
+diff --git a/tools/binman/test/288_template_fit.dts b/tools/binman/test/fit/template.dts
 similarity index 100%
-rename from tools/binman/test/034_x86_ucode.dts
-rename to tools/binman/test/x86/ucode.dts
-diff --git a/tools/binman/test/038_x86_ucode_missing_node.dts b/tools/binman/test/x86/ucode_missing_node.dts
-similarity index 100%
-rename from tools/binman/test/038_x86_ucode_missing_node.dts
-rename to tools/binman/test/x86/ucode_missing_node.dts
-diff --git a/tools/binman/test/039_x86_ucode_missing_node2.dts b/tools/binman/test/x86/ucode_missing_node2.dts
-similarity index 100%
-rename from tools/binman/test/039_x86_ucode_missing_node2.dts
-rename to tools/binman/test/x86/ucode_missing_node2.dts
-diff --git a/tools/binman/test/040_x86_ucode_not_in_image.dts b/tools/binman/test/x86/ucode_not_in_image.dts
-similarity index 100%
-rename from tools/binman/test/040_x86_ucode_not_in_image.dts
-rename to tools/binman/test/x86/ucode_not_in_image.dts
-diff --git a/tools/binman/test/049_x86_ucode_spl.dts b/tools/binman/test/x86/ucode_spl.dts
-similarity index 100%
-rename from tools/binman/test/049_x86_ucode_spl.dts
-rename to tools/binman/test/x86/ucode_spl.dts
-diff --git a/tools/binman/test/058_x86_ucode_spl_needs_retry.dts b/tools/binman/test/x86/ucode_spl_needs_retry.dts
-similarity index 100%
-rename from tools/binman/test/058_x86_ucode_spl_needs_retry.dts
-rename to tools/binman/test/x86/ucode_spl_needs_retry.dts
+rename from tools/binman/test/288_template_fit.dts
+rename to tools/binman/test/fit/template.dts
 -- 
 2.43.0
 
