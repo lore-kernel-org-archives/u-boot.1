@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49462FD8FD6
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 16:22:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F7FFD8FD2
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 16:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB2DE83F1F;
-	Thu, 26 Feb 2026 17:22:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C973483F2D;
+	Thu, 26 Feb 2026 17:30:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y/f09iBY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZPpIgdaJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BABE83642; Thu, 26 Feb 2026 17:22:30 +0100 (CET)
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com
- [IPv6:2607:f8b0:4864:20::344])
+ id 285FC83F2E; Thu, 26 Feb 2026 17:30:21 +0100 (CET)
+Received: from mail-oo1-xc44.google.com (mail-oo1-xc44.google.com
+ [IPv6:2607:f8b0:4864:20::c44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B59DF83642
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 17:22:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9922683EEF
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 17:30:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x344.google.com with SMTP id
- 46e09a7af769-7d513bc15c7so1217726a34.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 08:22:27 -0800 (PST)
+Received: by mail-oo1-xc44.google.com with SMTP id
+ 006d021491bc7-662f5c5507cso905757eaf.3
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 08:30:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772122946; x=1772727746; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772123417; x=1772728217; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Dur79IPJa2/SBPHl8gOY3FGPNBpZDwpejHRClEtQmy8=;
- b=Y/f09iBY4UN6hbn8v8P+GlkVYRvFdvlVOvKBKiLb40AcuirQ/MwXasL8Sfj9Iv7gxE
- 7zs1fh7S3vvB5ugwDNle2PUxR9K5dIgEu0l38i0nuDAY2nDyEdlQY1oqy8YGmgeImimb
- o0B8kwq7NHuGXF7zfFTfsnTz7yWOu4O5XTHD4=
+ bh=n33Gmd/yxomG3lEYbvgpGB3G5PqR1DQrXjPT7rP4Bfo=;
+ b=ZPpIgdaJpSxIAy6A0mlqdTJ7KfaKrXINXKtlCr0TfrcsccIJTLd8CH0cmZlKJH1/HE
+ VQhbwDV2fvvOAZNkRGNh34herpM5c6OhGrbPlhMp3D8oDesPzPmopEqm19VUb/X4f4WH
+ /fAM/Uq8taPNeqEVG3KoJkA21v/YVMDqu68EI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772122946; x=1772727746;
+ d=1e100.net; s=20230601; t=1772123417; x=1772728217;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dur79IPJa2/SBPHl8gOY3FGPNBpZDwpejHRClEtQmy8=;
- b=NmDytd9A9HA3iSzwjeSURq6ZDXPpfJKUs3wXcQYKVyRLow9J6LjRMF2+/XSc+20BKN
- kIKkB//OZ8iEaRNcP8eKxLkgMxoWOMUm7xCnTHVHruNYd9EhZF48Ax40vlHZ25hNiFj6
- A7StiVSCZ6L6wtOxg7TKHg+ULYtmaMAg6y42I4ILbnnh2pWRtwAjVWtkqDJ6DxBDBsG5
- eVUjny76qIHZbmyP27LBXkijZEtL9exenQ+VE4J5H3MMcT8UJodFPitos+Max+QRsLX9
- +yrggZ7ruMYa6r9OKRJ9VH4mzEGkIuSQCke40+fMAg5S087ESNfyDidZK/P9034v6iZb
- 2FUw==
-X-Gm-Message-State: AOJu0YxBBGbHO1Ky4nspNwWqkIX/Ntj0EXdVcj3ssZCAIsxMLOoBHkEC
- 35mdueh6wneRETygLtUxJix6l3ikEGEceXDMFeADsYL0MYSK+UGCIc+T6VncbcJeyW4=
-X-Gm-Gg: ATEYQzyfk1oG0GZHYflt+q8MJEazvUPStx+ihgr6+U49l6rBSVRQpXNOti4CJ+wwQVQ
- Zmf0PTEUPwDWHcFEheJWzvNudma/1ZuXG1fcXC+9dQnWFQiyP16VkTH1OpVlH36aCyjYGfpMMSH
- lK/fDoVA4iwwEDu7vwmDu6EgrJJpVWw0TZH5FHWQcQ2qNf5J9wBuKWSuMgss6xRpt7KCG2H3/MZ
- kX3FideVftTQ8y9ZDWk3TUBs2unOC8uChv4kGz0b6mW5d/U3GUOYN9/g3y30qc9hBYonXf0e3Pg
- XdtD2I1MuVFLq0Onf5Wbk2gFGSAuAGYyxvvw6qdwqvCCh2gPcIaXQZxgSNjpIDd/4b00gQNdoCO
- W98Kx7LB2MmYICr5swJdOSdbTAOXz/c1KKc71FPKZ7Xzya3WiJDdxQ9gWX4idpGPirV7sR5JL4F
- KXBZEH8pwwzWY6EXpBpsv+X4NkDHtplQsfX1LHalmKqiC+7WTQVUX2/S/AUlb+hytvKoJuuQJbJ
- zuYnpoyYsGVnOTgEskqMtgXyMNMnyQI5p7/ACQtFlGYBtWNlM4=
-X-Received: by 2002:a05:6830:61c4:b0:7d1:93e7:cd6f with SMTP id
- 46e09a7af769-7d586e9bea3mr1491717a34.13.1772122946372; 
- Thu, 26 Feb 2026 08:22:26 -0800 (PST)
+ bh=n33Gmd/yxomG3lEYbvgpGB3G5PqR1DQrXjPT7rP4Bfo=;
+ b=VOy/WXhf9h/NjpFZasdSJNPEGEo8BQr+0+RmC8Hg5549Fa6dQJQqsQarhIqBy7eQET
+ htKl8wzpV9DU6zrfyaFdkXFmYAu8HGsB6sRu4hr8o/VLTXL3cf9B408c+do3RaF8IA7K
+ Owpz7wMfXCQeFxh5C1ff1NtOX4OqUS1Vh9tB1LyjHJa0RamFLCp/+T/33GQBqxaS79f9
+ lP5oQIHrXHHwT2z0oeFEf9z92ExEQyUeU5ov2JgwgIK3SBojOjp0WnUZm/ZDbycvxuur
+ ioDC2BqF1p24WxKumhNpnWsCisURXacojOsSeXX7U7ZMwLQfQsTrGFLh34e541I+ZD5r
+ ugSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUx/2PpkDhJ+tgeAm3Pd1B1JeIbvxeZJx2aSqf5Jr1ogvsbX5ZF+pytUMQ/Z/gOweTa3IHnOeg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxj4uSqMtTQUY4xuelCS8M1WC97jmxaq4U1WWAyIXg94/ZU5T4o
+ 2XDZmBFt3hU7pu4rTMyrIpsVq2TVAQarRa2/QmY9DRQfPINyYeHaE2E++HbCC9AXQFg=
+X-Gm-Gg: ATEYQzxy1fLpZywmeNUlJuuB3YQXjtfwAGFfqSoDuzjX6EZIzWgm61387WP8lrtyqtv
+ eMYAsVoNi80fYIOLEwg2SVIDWHKxu5veuGcXfR2VZ6xjtqC47yzD7CaM66NNrlKvwb4UxH0760G
+ 4HEdKOg4+GAdYMUGqzsHLCeJtpEaPZUTL442zSIiMEgqIrtycMIK6b6jJ8I8LnyrU6nBc4jRTJ3
+ POHwBiYyTAjbTJrA0f3KJa7EVXXbdJVEHx1opSY8z3v6rpx44MOugc7fvRzGEB1hyXG2O8+B9CV
+ n7ER65Y5uG3lwcIltYqzJG0rJwPUgtOT1T8xkXZTJTQcGEnYkW6/zIg4hgIfJQexvKmhA2icdVC
+ hgsz2kIrEj2zLFoIcnrG87ak5J6WDS9YLToJkVnjH3xU2nu6hAWW/4q8Zk3lyw6/SGklbSHPUJ1
+ o+o6vLH5oJUt0DrkmWmF1W5I2njkSN1V0rEgT9hPMr6hC3mTSCZ9Wfk8tsCzG/TKACOPAEe+de7
+ 5uF5WEkZdiTwyaThpdtz5buphTfR8DRA8J/msesnE7ozYeHyQM=
+X-Received: by 2002:a05:6820:4688:b0:677:5e0a:a92d with SMTP id
+ 006d021491bc7-679c461f2f7mr7969122eaf.73.1772123417202; 
+ Thu, 26 Feb 2026 08:30:17 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d5866541fcsm2053487a34.21.2026.02.26.08.22.25
+ 586e51a60fabf-4160cf23977sm2191122fac.4.2026.02.26.08.30.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 08:22:25 -0800 (PST)
-Date: Thu, 26 Feb 2026 10:22:24 -0600
+ Thu, 26 Feb 2026 08:30:16 -0800 (PST)
+Date: Thu, 26 Feb 2026 10:30:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull fsl-qoriq-next-2026-02-25
-Message-ID: <20260226162224.GH1593142@bill-the-cat>
-References: <aZ_BtG4flBy7oN-N@nxa18884-linux.ap.freescale.net>
+To: Nikita Shubin <nikita.shubin@maquefel.me>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Aiden Park <aiden.park@intel.com>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>
+Subject: Re: [PATCH] serial: ns16550: Fix return-type warning
+Message-ID: <20260226163014.GI1593142@bill-the-cat>
+References: <20260226-serial_ns16550_fix_warning-v1-1-ea563e6a26e4@maquefel.me>
+ <20260226150842.GE1593142@bill-the-cat>
+ <fccdc13e79b3a0bed390d6fcc25f04c0fd93feff.camel@maquefel.me>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="m1r32Dtf/aqHP910"
+ protocol="application/pgp-signature"; boundary="YoLIGv1kGZzf9cik"
 Content-Disposition: inline
-In-Reply-To: <aZ_BtG4flBy7oN-N@nxa18884-linux.ap.freescale.net>
+In-Reply-To: <fccdc13e79b3a0bed390d6fcc25f04c0fd93feff.camel@maquefel.me>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,40 +104,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---m1r32Dtf/aqHP910
-Content-Type: text/plain; charset=us-ascii
+--YoLIGv1kGZzf9cik
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 26, 2026 at 11:44:52AM +0800, Peng Fan wrote:
+On Thu, Feb 26, 2026 at 07:28:36PM +0300, Nikita Shubin wrote:
+> Hi Tom.
+>=20
+> On Thu, 2026-02-26 at 09:08 -0600, Tom Rini wrote:
+> > On Thu, Feb 26, 2026 at 05:02:47PM +0300, Nikita Shubin wrote:
+> >=20
+> > > Fix compiler warning:
+> > >=20
+> > > drivers/serial/ns16550.c: In function =E2=80=98serial_in_dynamic=E2=
+=80=99:
+> > > drivers/serial/ns16550.c:153:1: warning: control reaches end
+> > > =C2=A0=C2=A0=C2=A0 of non-void function [-Wreturn-type]
+> > > =C2=A0 153 | }
+> > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | ^
+> > >=20
+> > > Fixes: 62cbde4c4e46 ("serial: ns16550: Support run-time
+> > > configuration")
+> > > Signed-off-by: Nikita Shubin <nikita.shubin@maquefel.me>
+> >=20
+> > I assume this is from gcc-15.x ? Thanks.
+>=20
+> Exactly,=20
+>=20
+> ```
+> $ riscv64-unknown-linux-gnu-gcc --version
+> riscv64-unknown-linux-gnu-gcc (Gentoo 15.2.1_p20260214 p5) 15.2.1
+> 20260214
+> ```
+>=20
+> To be precise.
 
-> Hi Tom,
->=20
-> Please pull fsl-qoriq-next-2026-02-25
->=20
-> --------------------------------------------
-> For SCMI, Power Domain and IOMMU,
-> validate device tree node before continuing,
-> to avoid boot failure.
-> --------------------------------------------
->=20
-> CI: https://github.com/u-boot/u-boot/pull/874
-
-I rebased this, carefully, to master because we need these fixes for the
-April release. Thanks!
+Could you please do a v2 noting the compiler version? We don't yet
+support gcc 15.x, but
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D121588 is just now fixed,
+so soon we should be able to.
 
 --=20
 Tom
 
---m1r32Dtf/aqHP910
+--YoLIGv1kGZzf9cik
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaBzOwAKCRAr4qD1Cr/k
-ClpBAQCn5bqwkwsBcGtjj1LCZvwYeXnHkkB77vwHkTu8zUmWkAD/c3CtP9eyMkLK
-Nti5OjJz1PpCI3x/iWpu9ZRk3B13CgI=
-=dPjF
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaB1FQAKCRAr4qD1Cr/k
+Csd5AQCp8VY2fDlql3pM8VaZx/52A102pnYIZZAYHXJBfCSPfgEAiCdNx9U8e/WW
+/it2W0CE89F63nQGZ4F18PRLr7B3nQk=
+=XSy3
 -----END PGP SIGNATURE-----
 
---m1r32Dtf/aqHP910--
+--YoLIGv1kGZzf9cik--
