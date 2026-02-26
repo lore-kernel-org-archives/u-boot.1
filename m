@@ -4,87 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF953FD9E1E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93092FD9E25
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11F4983FBC;
-	Fri, 27 Feb 2026 00:49:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CFA9B83FB6;
+	Fri, 27 Feb 2026 00:51:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bdX8jtl0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B8Dw75JY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A9A383F6E; Fri, 27 Feb 2026 00:49:22 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 59A3883FA6; Fri, 27 Feb 2026 00:51:10 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC84983F60
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:49:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F93D83F5D
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:51:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-899cbb1bea0so12983876d6.0
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:49:16 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7d19bfe1190so798193a34.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:51:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149754; x=1772754554; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kFDPYz7iIiInY4q5sSZxZ3Pg5yTA3i00N0TjIXDXSGM=;
- b=bdX8jtl0qKhL4+CS/iRjfnhSENVAiG1+7/oi5GY08ICiCWgPWItuMY0w2HUGuQ7ygy
- YnxNRs/qxT9vHQ1qpL02jIiPVyVwCdKZa4HxxOW2SIJ4o7OMCK3COmk/ybK5CP7g9A/w
- sBgqrDywLycigtBaOWGmDRJcMka3dQxGRtXOk=
+ d=konsulko.com; s=google; t=1772149866; x=1772754666; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=buJmrMuzlBiFojFbtxImLq4ewYgBXYMuLR9sk92vGFE=;
+ b=B8Dw75JY8OTPIcPfqUZVqVGNzROFIgeixU3T/KtqRZ4j89ekdefVJGGd1R6is9YtzD
+ AeUsOUHloVfjJf/s2fYyGvWyQqOAhfSAyUDxMipIT16RKFq322Xu/aoovpq9x4KT2d2Q
+ x9CasScepoFyChrOVyij+VmOAkTrG0l5yQeFE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149754; x=1772754554;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=kFDPYz7iIiInY4q5sSZxZ3Pg5yTA3i00N0TjIXDXSGM=;
- b=FZxhjbX6jspiKxFD/XjcmE5L6ogRvqOMjWohGfoaVzslIXzxzU5IVlwml3vIEX0KF+
- 9Ftigt3H/HyctmjBkPCW6xRWO0aamtUeIoGk9FAf5Xlmgt+azvbqZUkvub8UI5uyly5i
- 7oWIiWv+zzCUiAv2laWz0Y3bR2e2wTkB99MQftim/uq2KnTUUovk5e9neJ8zOJty6z7b
- 9aRYKnAAhq1PH5hnbk5tpfN0A9/X9NttsznaxCbQMx3A/z+RVjPKr9uKBw19Ybv9+72i
- 0I3yIwEZYlYoXKq4+0FaSKxNBZH+x8aLWquqZN17V1Xso4fOnJ6FS8Wlqmt+g4N51DC/
- f92Q==
-X-Gm-Message-State: AOJu0YypcpDtF6gRF2HmVV3Y56cKGo0M6JoYuML/qTmZ02BX+/AFK19y
- 7o02rEeKUR86l49VwRTT27Wvpj1D+p4pxflqJPiaj4N4gbMkq2cJh4J5zz0sudy71/56ttGlvxK
- vLcI=
-X-Gm-Gg: ATEYQzwCUg+WeTpNGF2rQdltF4y3p4OSCaJ70Xexqxr00wWhenyXqLdzsegpYGOXkgA
- X4cDbMR3pFmtBjppXF1C9VaYTm93yJ48c0dCZYBwYp8VeYFs+3mDcalgiuW3bSAzpjbFu/lnfOo
- IcSJG8cm2qEWGix9VxdJxQb+UyF96rnF/i5qViAzMkCYzHS6hXCeXbDeb6Kqi7SJ2mhYawIuLXE
- t5+TCGm11CQ1uwUz8aTuNiKn7JS6T/OXz9IrGmIdFjPaqP6hCHoDZOTslMC2awnXi8hmDaRWQCm
- HDXhlzPq4KqGJM2BZpbA6kvqVQ6zgOFt4XIeYfqlM7xHdVaAgzqreVVGyn6k1eN2fSPuv6NHf2N
- WDnYvnW6/CyoBpaFwirrCVZwUF2OSY4Dzw2ZASXiw+i+xYkVbrJJpkdnx5gDsurB0OhXzl+cPyp
- wWd85Wda3HsbJjRV0AYg==
-X-Received: by 2002:a05:6214:21c6:b0:899:a57e:887a with SMTP id
- 6a1803df08f44-899d1d84730mr14820296d6.8.1772149754498; 
- Thu, 26 Feb 2026 15:49:14 -0800 (PST)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.49.12
+ d=1e100.net; s=20230601; t=1772149866; x=1772754666;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=buJmrMuzlBiFojFbtxImLq4ewYgBXYMuLR9sk92vGFE=;
+ b=NNX+9tLcNB9QroXTFNeDaGK7ZSLKiaqX8z5GWWW8ATYXn4vG9VJuQJerdUGPvzMLEq
+ F1kE7ENo2grt8buSYsAmFqEj2TKMfHJNvgADj0/TN2CAzCTq0TC5FONFntmlY7BKnjpt
+ jBXoJD2wBEYE++ldsVUZFMXjPYR+KlNqF0vyabx/KtpXBYdBocGniqjxJrMdGeY9qH+n
+ TuhVO7YnAd1byr5Bqr/pAjVSfOWGNRlJbCExqfKMj2K6qQJtIu/ALGft20mrnSuo20Gt
+ y2CiFHplaPKOjqYsqzcxGIWuyn67j7NmKxrwrYvV98vxkm5kdb6sOw4TtpzcVR6xtDGd
+ t8uQ==
+X-Gm-Message-State: AOJu0YztUy62IqiKh9WxyO5yLUhzJgAoD2kuh3VnMy6XWD8v33f/tAy1
+ CqYhnzz1fsfsq5Yn+0a0rwA9kMqSn/6E5uQUkzgxX9xgBaMUCIxicAROpG6EGxIl1Zc=
+X-Gm-Gg: ATEYQzw8rhk/1x3PjcgwZtrbmYVZ0Q0gIS9iqBPuUuTf5iCuYZXiCJwCaVKRjHDguVL
+ cHj9eZR53rRmtxsKgRWGfvLXG7xsojy8uyG+bg6w0D8I7aP/eVE5oabGhCf80SWlwt3U6l28UDh
+ bNttvVA+SIieUzueuP5cCQH501QQHiNlE8YH5/z4WlNAMTB7huiKEFUOxJtSW1uTrq11DciIlwy
+ bSmvyEuUmmlQy578V+AkJjQNI437zCPOOIGt4brvcuvYrLW+AjKdRFyEQAJ81JKL379JDEiza6b
+ KlTgt8YBr0Ah9XVada2sLQfF69v3rCWDlIA7GaXBWjpz7L5//eFSSU86M3ezA+gh41Stb3UB/h8
+ CgnZH83s3/WaA4T5Kql6BVLF5C4PhZIi0kPWHurm6PcHI4VTz9hiW3SQT2jeugGXGuu4zBS/C0I
+ FXZ2IOGnTzCTVPx4bAtdLpaihmOq/pMVGo//84aZp8Bf+i1N8KxrloJOwBtty1cNb0erl2Fofgj
+ 8VCFrbvDIIOwdlifGuFWhV/AdcGIyvFrYnWHEwjH+ebmTgkA0I=
+X-Received: by 2002:a05:6830:4489:b0:7cf:d1ed:f9ff with SMTP id
+ 46e09a7af769-7d591bf91a2mr819187a34.34.1772149866157; 
+ Thu, 26 Feb 2026 15:51:06 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d58666e5c6sm2985045a34.25.2026.02.26.15.51.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 15:49:13 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <simon.glass@canonical.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Thu, 26 Feb 2026 15:51:05 -0800 (PST)
+Date: Thu, 26 Feb 2026 17:51:02 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
+ Simon Glass <simon.glass@canonical.com>, Alice Guo <alice.guo@nxp.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, Moteen Shah <m-shah@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [RFC PATCH 16/16] binman: doc: Update binman_tests.rst for
- subdirectory layout
-Date: Thu, 26 Feb 2026 16:47:56 -0700
-Message-ID: <20260226234802.345968-17-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260226234802.345968-1-sjg@chromium.org>
+Subject: Re: [RFC PATCH 00/16] binman: test: Organise test files into
+ subdirectories
+Message-ID: <20260226235102.GO1593142@bill-the-cat>
 References: <20260226234802.345968-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wIAt3NozYXHD0qb/"
+Content-Disposition: inline
+In-Reply-To: <20260226234802.345968-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,70 +110,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
 
-Update the documentation to reflect the new test file organisation:
-replace references to numbered test files with their new subdirectory
-paths, and update the guidance for adding new tests to describe the
-subdirectory structure instead of the old numbering scheme. Also fix
-a stale comment in ftest.py.
+--wIAt3NozYXHD0qb/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
----
+On Thu, Feb 26, 2026 at 04:47:40PM -0700, Simon Glass wrote:
 
- doc/develop/binman_tests.rst | 11 ++++++-----
- tools/binman/ftest.py        |  2 +-
- 2 files changed, 7 insertions(+), 6 deletions(-)
+> From: Simon Glass <simon.glass@canonical.com>
+>=20
+> There are about 350 numbered .dts test files in tools/binman/test/ and
+> we sometimes have trouble with numbers being reused.
+>=20
+> As an alternative approach, this series moves the files into thematic
+> subdirectories, without the numeric prefixes. This means it's no-longer
+> possible to simply type a three-digit number to get the right file, but
+> the names are shorter so it is still easy enough.
+>=20
+> The subdirectories chosen are: blob, capsule, cbfs, cros, entry, fdt,
+> fip, fit, mkimage, pack, security, symbols, vendor, x86, and xpl.
 
-diff --git a/doc/develop/binman_tests.rst b/doc/develop/binman_tests.rst
-index 78b02e6f435..e0baec05125 100644
---- a/doc/develop/binman_tests.rst
-+++ b/doc/develop/binman_tests.rst
-@@ -453,9 +453,10 @@ help with this, but your code will be different.
- 
- Generally you are adding a test because you are adding a new entry type
- ('etype'). So start by creating the shortest and simplest image-description you
--can, which contains the new etype. Put it in a numbered file in
--``tool/binman/test`` so that it comes last. All the numbers are unique and there
--are no gaps.
-+can, which contains the new etype. Put it in the appropriate subdirectory
-+under ``tools/binman/test`` with a descriptive filename (e.g. ``fit/`` for
-+FIT image tests, ``vendor/`` for vendor-specific tests, ``entry/`` for
-+general entry types).
- 
- Example from ``tools/binman/test/vendor/nxp_imx8.dts``:
- 
-@@ -610,7 +611,7 @@ In the above example, here are some possible steps:
- 
-         Entry_section.SetImagePos(self, image_pos)
- 
--   The solution is to add an entry, e.g. in ``340_nxp_imx8_non_empty.dts``:
-+   The solution is to add an entry, e.g. in ``vendor/nxp_imx8_non_empty.dts``:
- 
-    .. code-block:: devicetree
- 
-@@ -641,7 +642,7 @@ In the above example, here are some possible steps:
- 
-        def testNxpImx8ImageNonEmpty(self):
-            """Test that binman can produce an iMX8 image with something in it"""
--            data = self._DoReadFile('340_nxp_imx8_non_empty.dts')
-+            data = self._DoReadFile('vendor/nxp_imx8_non_empty.dts')
-             # check data here
- 
-    With that, the second red bit goes away, because the for() loop is now used.
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 0f1a799821d..2434e912d51 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -2130,7 +2130,7 @@ class TestFunctional(unittest.TestCase):
- 
-             # Unfortunately, compiling a source file always results in a file
-             # called source.dtb (see fdt_util.EnsureCompiled()). The test
--            # source file (e.g. test/075_fdt_update_all.dts) thus does not enter
-+            # source file (e.g. test/fdt/fdt_update_all.dts) thus does not enter
-             # binman as a file called u-boot.dtb. To fix this, copy the file
-             # over to the expected place.
-             start = 0
--- 
-2.43.0
+This seems much more maintainable, thank you.
 
+--=20
+Tom
+
+--wIAt3NozYXHD0qb/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaDcZgAKCRAr4qD1Cr/k
+ClfPAP49JvMl3PFag0e9lXub4mDxG+T+mpmkWCwMGLFx+Y1WvAD9Fmep52Dp23O+
+4S46agb5FctC322Z6D8lkWti+NNIuQQ=
+=5Nd5
+-----END PGP SIGNATURE-----
+
+--wIAt3NozYXHD0qb/--
