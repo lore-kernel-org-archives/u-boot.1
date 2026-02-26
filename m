@@ -4,76 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB848FCE081
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 13:44:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A18FCE082
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 13:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 791DC83E63;
+	by phobos.denx.de (Postfix) with ESMTP id 0E43683F26;
 	Thu, 26 Feb 2026 14:43:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=airoha.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="HI0jM1Vh";
+	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="IUEMAOES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98B5583D1A; Thu, 26 Feb 2026 09:52:22 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id 8215783D1A; Thu, 26 Feb 2026 12:59:41 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D540083AA9
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 09:52:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=airoha.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ar701363@airoha.com
-X-UUID: 7173e7a612f011f1bcd7499a721e883d-20260226
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=aoBiAiV0SOK6j4sCgY5g5CW19OhtF0w6xPTiXXlvFsE=; 
- b=HI0jM1VhyZfT20zGJFrxiT+BaL7xhMlG/70VGJZw/yB1paNihgGQsUNhRcymxefNOU1vI6YLGjFkk2h0T9WlUwLSHgY3CT4QhjZjSj244hx4Zi7Jwm642X09PLFlMmNF4vBTWN6AQbSQhuD15ewYn8Jnmh3Aah4XMJbjQ5y5XLY=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.11, REQID:e242c97d-21da-4678-987b-565641b1508d, IP:0,
- U
- RL:0,TC:0,Content:-25,EDM:-20,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACT
- ION:release,TS:-45
-X-CID-META: VersionHash:89c9d04, CLOUDID:c8e004ea-ef90-4382-9c6f-55f2a0689a6b,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102|836|888|898,TC:-5,Content:0|15|5
- 0,EDM:1,IP:nil,URL:99|1,File:130,RT:0,Bulk:nil,QS:nil,BEC:-1,COL:0,OSI:0,O
- SA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_ULS,TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 7173e7a612f011f1bcd7499a721e883d-20260226
-Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
- mailgw01.mediatek.com (envelope-from <ar701363@airoha.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 969779687; Thu, 26 Feb 2026 16:52:13 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Thu, 26 Feb 2026 16:52:11 +0800
-Received: from mediatek.com (172.18.153.125) by mtkmbs13n1.mediatek.inc
- (172.21.101.73) with Microsoft SMTP Server id 15.2.2562.29 via Frontend
- Transport; Thu, 26 Feb 2026 16:52:11 +0800
-Received: by arhtenbupstream01.localdomain (Postfix, from userid 1003)
- id AC21D1408D4; Thu, 26 Feb 2026 16:52:11 +0800 (CST)
-From: Tommy Shih <tommy.shih@airoha.com>
-To: Christian Marangi <ansuelsmth@gmail.com>, Jerome Forissier
- <jerome.forissier@arm.com>, Joe Hershberger <joe.hershberger@ni.com>, "Lucien
- . Jheng" <lucienzx159@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Ramon Fried <rfried.dev@gmail.com>, Tom
- Rini <trini@konsulko.com>, <daniel@makrotopia.org>,
- <frank-w@public-files.de>, <u-boot@lists.denx.de>
-CC: Tommy Shih <tommy.shih@airoha.com>, Lucien Jheng <lucien.jheng@airoha.com>
-Subject: [PATCH v2] net: phy: air_en8811: add support for Airoha AN8811HB PHY
-Date: Thu, 26 Feb 2026 16:52:00 +0800
-Message-ID: <20260226085208.429014-1-tommy.shih@airoha.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 6373E83642
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 12:59:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=weidmueller.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Christian.Taedcke-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XW26yP2LeffBkGb8wXZREzDhVEAzw8rcZLUU1U27zAHOH8ntsSYtSFKnPpXmb/WI0ee3jTVHedUK9eoRwjfYntol+C8q9ktAQ0DWXQWV/sqZPzMKIpg2mOs1xbvG1peXiCSQBE8f9399XtETBpjZfjc0Srw6j1CHXS570oD6DF7kK8qWF0yhH8cRkMx+sudrmF9LpU6SYLjxMUfMEDwI6Yk6ptq4drUDldIz78+GWE5l2MRTlbtTILYsWst8Q65/JImOPW+ZcdEp7b3QO1MyloeTk8My6Sy/PHLUoAWB+moJh3ypJIXUOLOrFfQHyfOLwVC6SjwhmTt1dacutiSrwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZVlhJOuGGGh+dyfKVYsm0l9/26TLg3+Uf2D+K6Q9wQE=;
+ b=ps176KDmldKF+1zHR3EjUYlc0GgjmMuwxht7qUrQejktS1vNQonxy5F3UjDMCinXAvLznJzspMq1qShUKHWNsSmlLcA3RxGaijz55091NkCwVhUnQtweNvktmcVAk/8bCOlr9BcwpSyGdF4Xd5ztPSqAQtDqCFibM9HIsdjoQ0xbJefGm+FxICVsJ29H86VdUxIdvxyJ0dSdm8RKuUx7wtHU2M8k1PjqZw4PdOu9ar81G8/OrpA+fMmWskeQR3ljJimJVcvUEh0njHuLfcSdyl2im2NcA9RVltYktCZrOBRjbO02tK9UZNeoumPPows7MqLc/FRgig4+vvK1ok//mw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weidmueller.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZVlhJOuGGGh+dyfKVYsm0l9/26TLg3+Uf2D+K6Q9wQE=;
+ b=IUEMAOESoGDujTCFCspytqw1R7cRu5LQGeAfdUL0NiWGs863v4EY3RUjDStlKHHawsOHscSnRZh9kxw64OmK3iTfuffy09lMcmyfJHPckS1ymrOUuwLWilA8n9j+Bk3Re5DkV9lONGdDf2WV4rkWvHyQK6m9MRTi66fOa/+BvBIkVGvStHa0vpBWBuWFn0Cf2sEbChfKSO6xJX3NOQnhR11jvau7oFP0cW/EBdzeRHQeE4k8xrzVDyeHUT56qfFCMcI98g+IBelSgqIjklLez3ASrGliqAI5vzmakKyB2w9feiuLCaJaMu8ght20KqkKeKmKIUiKrIUSTg5b0GLotg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB9199.eurprd08.prod.outlook.com (2603:10a6:20b:578::22)
+ by AS8PR08MB6309.eurprd08.prod.outlook.com (2603:10a6:20b:29f::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Thu, 26 Feb
+ 2026 11:59:37 +0000
+Received: from AS2PR08MB9199.eurprd08.prod.outlook.com
+ ([fe80::5022:16e9:45e4:f778]) by AS2PR08MB9199.eurprd08.prod.outlook.com
+ ([fe80::5022:16e9:45e4:f778%5]) with mapi id 15.20.9654.013; Thu, 26 Feb 2026
+ 11:59:37 +0000
+Message-ID: <2c47184c-7bb9-400c-aca2-0874209adef6@weidmueller.com>
+Date: Thu, 26 Feb 2026 12:59:35 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] test: fs_helper: Drop the size_gran argument
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+References: <20260225162357.3449937-1-sjg@chromium.org>
+ <20260225162357.3449937-4-sjg@chromium.org>
+ <20260225171246.GQ1593142@bill-the-cat>
+From: "Taedcke, Christian" <christian.taedcke-oss@weidmueller.com>
+In-Reply-To: <20260225171246.GQ1593142@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0148.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b8::13) To AS2PR08MB9199.eurprd08.prod.outlook.com
+ (2603:10a6:20b:578::22)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR08MB9199:EE_|AS8PR08MB6309:EE_
+X-MS-Office365-Filtering-Correlation-Id: 268efd0d-5d42-40f3-42ce-08de752e833c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: 8PqtRZvvu50ffQsX5LVyOOzUsh4NxEquh8BoxjI5fJJVLmx2GbPaPmwP0HNfabQ+Jzba1AtSJxNODKcYC/2bc2eBjiqn9FGcKHdwfGptoMGY3s+62Moz8CwwoLZRX6Bi06dSSp9KW/go0DJqzGFx16chMRYsUszynAcPnWyqeNCXjNicD4g533INLT2cPTq9EjD4QDLSwTZSqPbzn7xcGHxT+dBc3vFegIeuZWHO7zG8/CaxAM8iJZdlLNjNILEb1vUEWv6b0oQ3HSpQ02NfNXgw6rccxBQp2nvFW/1CqRyA8wrtfjAR0GfcwrWLvZNJVJb48joIx0iM+K/pAMqEz3jFwomC3NsFRwQf7jFyqvKa7fbQ7IDc+/moFOoEFRYmrJb/WZWc0iNOBybOdqLPwLocvOwXeFABAFlAKfNl8JmpgL9L/LXRprIqISr2LJu/biCPDVw1ShrlO4gUGAHkmKSUE2wfzB0SNQEMKagVt/5gnsGA0ey01OU+d3+YH5y78rw2RtiKKKURVHq9QVMT5sjKs5dqSBw0cmAU0pl417ySBZfHht/F7zsIHf5UnK93M0/4Cz+zLFof97jAweDZ1HFOPOL0jd7WKzNDcx9czgu0cn+cT1WkjEfNExPrlx9G/6cwI+AeN2sntKrXpKZZ0oJFBG/nBUzr8PgIHrIE8KSfb+xa9qDef/XtRwP+qVm7evdrf6xF9ESMrUNzMZTI80oygzS9Cq/VW1avdNewb+s=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB9199.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WndlWUNTOXYxci9TQk4raTNlNUI3N3dMQnFoeE1VTmFQeVlPeTBuT1FFam9Q?=
+ =?utf-8?B?MlphWmxNaWJhK2IwZ0djbU1tK09VMjBZUitXK1ZucTk0VXkyZ3NuUUFOTHdy?=
+ =?utf-8?B?Y2srVm9EcXhNL2RJNERFTmxtcUg4YTh1ZG1KRHMrR1RwdzV6dDcrWkFEaFZP?=
+ =?utf-8?B?MkNEUUNTb21ZM0xiSHFHTGdyWWQwYjZLQ29CN2xmSzZkbUxRQVIvNjV1YWxZ?=
+ =?utf-8?B?UGRCT0ZaUDZ1Y0xXMzZBZWJZaVZ6YjJydGg3NlJLbVp3cGFFOUMxR1lRRG5N?=
+ =?utf-8?B?cjFFZ1dQUC8yU24wdEdzQ09iUHFLYTF3QlRvQ3NrV216NkJRTWt6ODRrWVV0?=
+ =?utf-8?B?NmZWUlc5NGF4RVkwMGxvNnkzc2pYcmFXeXNMQ3dUQ2RsYnMyNnJoQkJLL0Iv?=
+ =?utf-8?B?ZWVTMFlISWk2aUFNaVB5TnhzV1RHSmN4c0JJeEp2QnpIVG5Rb3o5am1hMmdX?=
+ =?utf-8?B?OHAycG9lY3FVTnIwUkdkZVJ3VU5tU3p1emt6cC9DdnExd1d0TUxpd1Q2ZktR?=
+ =?utf-8?B?VkhGUm1xQ1llN2I2QlJNYWV3NndBR24zdlE4Q1NiVUY0L3F4UVd1c1I2RzlO?=
+ =?utf-8?B?di81d0pJNzFWRDMwcDRUS2lBRk9yVFB6Zm5hb0tZVy9xd0o2UDh1Y2tjKzVS?=
+ =?utf-8?B?UkFiRVQyTU1QNHRPLzU3bytnYmdmWlV0WjcyZnFNK3UwUE9RYy9zVUxqeStG?=
+ =?utf-8?B?K20rUTBHWDdld2lHVGxVQjJzdmNTWlJjUGoxOU5lSjNLQVV6OGNIQng2Ulcx?=
+ =?utf-8?B?WUFPOTJYSWpqMGw2UFI2eno5OHBFRDRZSjNyeXZ6N3RqOTJ1ZFBaNTNOWWFu?=
+ =?utf-8?B?Y3AveXBhb2dyVWMrbzhUeE5NWnpQRDV4QlEzT3FadHdwZUlNc1FxU2o1ckx4?=
+ =?utf-8?B?eWpadG56V0FDZCtwdjVJenA0TGFMS25WVFh5SDYrb1ovdHR0blFSSUYva1RN?=
+ =?utf-8?B?elo2VWk1cXh3WXZaMjZFL2pyK29IbkxGeGxrNHpzemtCRndWOHFJajhweXE2?=
+ =?utf-8?B?WUlWWVdaNUduelJESExZbmc1dlV5OFJwUjVRby9Jclp6VllJM2xSTmRIOUI4?=
+ =?utf-8?B?WXQ0UTdoOFJaZUliaDV1NEhQRlZUM0Myd2hNMzVTekg4Y0xCd1RwdnNLNENN?=
+ =?utf-8?B?MUpkNk12cGpJSW1kOXVFa1h2SmlYVnRiVG5ZMVFjcEpYOUc4N0RmK1MwN1J6?=
+ =?utf-8?B?NXNxakZFbkFSWCtOZmZDSlJlYVREVG82R1JTQVdyQTFiNGVhMDNrcEIvQjgw?=
+ =?utf-8?B?eU9ESVBvVCszS3pjQzJ0Z0ZGQ084N1ZKYTJQdzV2MERCMjljMlJvS3A0b1N1?=
+ =?utf-8?B?SWdpZ0pnRUNlZW84ZEJUTmsvbzB5RVNEM095elZWZkxYaGcwK283OG85bE5q?=
+ =?utf-8?B?ejJ3RnlvRlplVThFWGRwZmhxaGVqSXpNSlBrNi9QTlZZVFNRN09leWpPVlA0?=
+ =?utf-8?B?WUt0MWZmaVNJRk9zNy9qb0p1K053bzF5ajVvektOZUhyZC9hd3hRUEplRXVt?=
+ =?utf-8?B?Q1huaWtCaXFRMU51S0VvbkV4eFdKQ010QXMvWVRMekpXUjM0TE5ZaEtXRmsw?=
+ =?utf-8?B?UDBYR01aSlBCVXZucWNBNzFYNjB6WUhvVUlxOVBKS2NCVm9WTmw4SkFWSmoz?=
+ =?utf-8?B?K2lmd29NS1ExM2g3bnFlT2FySURSS1RLWllqaWkzVnE1UVlPdk9RZmRHT1R3?=
+ =?utf-8?B?SDZKaTJNRzVwMkdhTEJSRnFBY1J3WnlGWkFBMytxUlRudWVzMWNSbGNmdHFo?=
+ =?utf-8?B?WUNVbGt0cXJBYTB1bHYrR3FNVVlubG5XUThuSTBnMC9OOEszZXFNNzZCUEt3?=
+ =?utf-8?B?dS9CdGRBR1BxMHlVVlJ1QzNyZnlJc09rWlVQSmdKclJNK0ZFdndGdlZTd3My?=
+ =?utf-8?B?MlVhWVd2MDFsNzFhZWd3VUs0eHF6T1M1OW44d0RJL1FCaW1nUTVOMG53a2FK?=
+ =?utf-8?B?aE1OQVJzUmxsZWpVVGV5MnREWVFxRW8xZXpld1I4RUhXNVdmZ29sWU9KNVkw?=
+ =?utf-8?B?alg4UnpHRkhlMTdDNm5PSURqTzNEa0kxUVFUeEh0TTh6YWtnNHhlMFl2ekVl?=
+ =?utf-8?B?UlM1MDNGY0E1RnZVczBZMmlIOTFhVi9QWHVJVzNyUFRaTGl6TlI5V3lJcHJv?=
+ =?utf-8?B?ak9oYWw5NEFjaEk5UW9BUlNJT3VId1crMGJaN1dmazNBamV1V1ljWEtDNzFB?=
+ =?utf-8?B?WXVJY2JoRWdwNWwzcEgvdmN6MFNuWTZSTXpCTDJqVVpPL2FqNjN2enFEbDVR?=
+ =?utf-8?B?eEJiWUNLODVZTTdKSkJtd0R3eEVRTkFuWDFSSjhwQS9udmJnNDJqTTdFU0ow?=
+ =?utf-8?B?dFdCS2x4dlJPQ1FsL2F5Z3N2cEQyMERncWdhOENySWxkUm83ZzZydE9NTTVi?=
+ =?utf-8?Q?7gXoG3o/+jxET1A+5nV3AO4feWlA5gA3tXZEa?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 268efd0d-5d42-40f3-42ce-08de752e833c
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB9199.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 11:59:36.9951 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7Y3QHONkNvnkgB9nNe6mQNLpRGZ4jC9GIDzQ+SgCkroiDj1oTPbWjdM9bgsNBAVXCNvucHaBCf/bKjAy/BlU4Eox2lDFyEA1hV69ZEcoheLADbBXcw/U01YjYQMyy+im
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6309
 X-Mailman-Approved-At: Thu, 26 Feb 2026 14:43:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,950 +150,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the Airoha AN8811HB 2.5 Gigabit PHY to the existing
-en8811h driver. This PHY supports 10/100/1000/2500 Mbps speeds.
 
-Update the driver to recognize the AN8811HB PHY ID and handle its
-specific firmware loading requirements. The firmware loading mechanism
-remains consistent with the existing implementation.
 
-This driver is based on:
-  - Linux upstream PHY subsystem (v7.0-rc1)
-  - air_an8811hb v0.0.4 out-of-tree uboot driver written by
-    "Lucien.Jheng <lucien.jheng@airoha.com>"
+On 2/25/2026 6:12 PM, Tom Rini wrote:
+> On Wed, Feb 25, 2026 at 09:23:47AM -0700, Simon Glass wrote:
+> 
+>> From: Simon Glass <simon.glass@canonical.com>
+>>
+>> Nothing uses this argument, so make it a constant for now.
+>>
+>> Also fix a pylint warning when checking for vfat/exfat.
+>>
+>> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> 
+> It would be good to ask the author about why they added it and mentioned
+> making 8.5MB filesystem images.
+> 
 
-Tested on MT7987 RFB board.
+Thanks for checking with me. Initially i wanted to write tests that 
+create filesystem images that are slightly larger and slightly 
+smallerthan the minimal size of a fat16 image. But these tests do not exist.
 
-Link: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=6f1769ec5892ac41d82e820d94dcdc68e904aa99
-Link: https://patchwork.kernel.org/project/netdevbpf/patch/20260122071601.1057083-3-bjorn@mork.no/
-Signed-off-by: Tommy Shih <tommy.shih@airoha.com>
-Reviewed-by: Lucien.Jheng <lucienzx159@gmail.com>
+So i am ok with Simon's change to remove size_gran argument.
 
----
-
-Changes in v2:
-- Remove addition headers which are not used
-
- drivers/net/phy/airoha/Kconfig      |   2 +-
- drivers/net/phy/airoha/air_en8811.c | 689 ++++++++++++++++++++++++++--
- 2 files changed, 647 insertions(+), 44 deletions(-)
-
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-index 999564e4848..fcace9a24ac 100644
---- a/drivers/net/phy/airoha/Kconfig
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -8,4 +8,4 @@ config PHY_AIROHA_EN8811
- 	select FW_LOADER
- 	help
- 	  AIROHA EN8811H supported.
--
-+	  AIROHA AN8811HB supported.
-diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-index 1a628ede82b..0b974472732 100644
---- a/drivers/net/phy/airoha/air_en8811.c
-+++ b/drivers/net/phy/airoha/air_en8811.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Driver for the Airoha EN8811H 2.5 Gigabit PHY.
-+ * Driver for the Airoha EN8811H and AN8811HB 2.5 Gigabit PHY.
-  *
-  * Limitations of the EN8811H:
-  * - Only full duplex supported
-@@ -8,9 +8,8 @@
-  *
-  * Source originated from linux air_en8811h.c
-  *
-- * Copyright (C) 2025 Airoha Technology Corp.
-+ * Copyright (C) 2025, 2026 Airoha Technology Corp.
-  */
--
- #include <phy.h>
- #include <errno.h>
- #include <log.h>
-@@ -20,27 +19,15 @@
- #include <asm/unaligned.h>
- #include <linux/iopoll.h>
- #include <linux/bitops.h>
-+#include <linux/bitfield.h>
- #include <linux/compat.h>
- #include <dm/device_compat.h>
- #include <u-boot/crc.h>
- 
--#define EN8811H_PHY_ID		0x03a2a411
--
--#define AIR_FW_ADDR_DM		0x00000000
--#define AIR_FW_ADDR_DSP		0x00100000
--
--#define EN8811H_MD32_DM_SIZE	0x4000
--#define EN8811H_MD32_DSP_SIZE	0x20000
--
--#define EN8811H_FW_CTRL_1		0x0f0018
--#define EN8811H_FW_CTRL_1_START		0x0
--#define EN8811H_FW_CTRL_1_FINISH	0x1
--#define EN8811H_FW_CTRL_2		0x800000
--#define EN8811H_FW_CTRL_2_LOADING	BIT(11)
--
- /* MII Registers */
- #define AIR_AUX_CTRL_STATUS		0x1d
- #define AIR_AUX_CTRL_STATUS_SPEED_MASK	GENMASK(4, 2)
-+#define AIR_AUX_CTRL_STATUS_SPEED_10	0x0
- #define AIR_AUX_CTRL_STATUS_SPEED_100	0x4
- #define AIR_AUX_CTRL_STATUS_SPEED_1000	0x8
- #define AIR_AUX_CTRL_STATUS_SPEED_2500	0xc
-@@ -49,6 +36,7 @@
- #define AIR_PHY_PAGE_STANDARD		0x0000
- #define AIR_PHY_PAGE_EXTENDED_4		0x0004
- 
-+#define AIR_PBUS_MODE_ADDR_HIGH		0x1c
- /* MII Registers Page 4 */
- #define AIR_BPBUS_MODE			0x10
- #define AIR_BPBUS_MODE_ADDR_FIXED	0x0000
-@@ -63,8 +51,16 @@
- #define AIR_BPBUS_RD_DATA_LOW		0x18
- 
- /* Registers on MDIO_MMD_VEND1 */
--#define EN8811H_PHY_FW_STATUS		0x8009
--#define EN8811H_PHY_READY		0x02
-+#define AIR_PHY_MCU_CMD_1		0x800c
-+#define AIR_PHY_MCU_CMD_1_MODE1		0x0
-+#define AIR_PHY_MCU_CMD_2		0x800d
-+#define AIR_PHY_MCU_CMD_2_MODE1		0x0
-+#define AIR_PHY_MCU_CMD_3		0x800e
-+#define AIR_PHY_MCU_CMD_3_MODE1		0x1101
-+#define AIR_PHY_MCU_CMD_3_DOCMD		0x1100
-+#define AIR_PHY_MCU_CMD_4		0x800f
-+#define AIR_PHY_MCU_CMD_4_MODE1		0x0002
-+#define AIR_PHY_MCU_CMD_4_INTCLR	0x00e4
- 
- /* Registers on MDIO_MMD_VEND2 */
- #define AIR_PHY_LED_BCR			0x021
-@@ -77,7 +73,7 @@
- 
- #define AIR_PHY_LED_DUR_BLINK		0x023
- 
--#define AIR_PHY_LED_ON(i)	       (0x024 + ((i) * 2))
-+#define AIR_PHY_LED_ON(i)		(0x024 + ((i) * 2))
- #define AIR_PHY_LED_ON_MASK		(GENMASK(6, 0) | BIT(8))
- #define AIR_PHY_LED_ON_LINK1000		BIT(0)
- #define AIR_PHY_LED_ON_LINK100		BIT(1)
-@@ -90,7 +86,7 @@
- #define AIR_PHY_LED_ON_POLARITY		BIT(14)
- #define AIR_PHY_LED_ON_ENABLE		BIT(15)
- 
--#define AIR_PHY_LED_BLINK(i)	       (0x025 + ((i) * 2))
-+#define AIR_PHY_LED_BLINK(i)		(0x025 + ((i) * 2))
- #define AIR_PHY_LED_BLINK_1000TX	BIT(0)
- #define AIR_PHY_LED_BLINK_1000RX	BIT(1)
- #define AIR_PHY_LED_BLINK_100TX		BIT(2)
-@@ -104,21 +100,101 @@
- #define AIR_PHY_LED_BLINK_2500TX	BIT(10)
- #define AIR_PHY_LED_BLINK_2500RX	BIT(11)
- 
-+/* Registers on BUCKPBUS */
-+#define AIR_PHY_CONTROL			0x3a9c
-+#define AIR_PHY_CONTROL_SURGE_5R	BIT(3)
-+#define AIR_PHY_CONTROL_INTERNAL	BIT(11)
-+
-+/* Led definitions */
-+#define EN8811H_LED_COUNT		3
-+
-+/* Firmware registers */
-+#define AIR_FW_ADDR_DM			0x00000000
-+#define AIR_FW_ADDR_DSP			0x00100000
-+#define EN8811H_FW_CTRL_1		0x0f0018
-+#define EN8811H_FW_CTRL_1_START		0x0
-+#define EN8811H_FW_CTRL_1_FINISH	0x1
-+#define EN8811H_FW_CTRL_2		0x800000
-+#define EN8811H_FW_CTRL_2_LOADING	BIT(11)
-+#define EN8811H_PHY_FW_STATUS		0x8009
-+#define EN8811H_PHY_READY		0x02
-+#define AIR_PHY_FW_STATUS		0x8009
-+#define AIR_PHY_READY			0x02
-+
-+#define AIR_PHY_FW_CTRL_1		0x0f0018
-+#define AIR_PHY_FW_CTRL_1_START		0x0
-+#define AIR_PHY_FW_CTRL_1_FINISH	0x1
-+
-+/* EN8811H */
-+#define EN8811H_PHY_ID			0x03a2a411
-+#define EN8811H_MD32_DM_SIZE		0x4000
-+#define EN8811H_MD32_DSP_SIZE		0x20000
- #define EN8811H_FW_VERSION		0x3b3c
- 
- #define EN8811H_POLARITY		0xca0f8
- #define EN8811H_POLARITY_TX_NORMAL	BIT(0)
- #define EN8811H_POLARITY_RX_REVERSE	BIT(1)
--
- #define EN8811H_CLK_CGM			0xcf958
- #define EN8811H_CLK_CGM_CKO		BIT(26)
- #define EN8811H_HWTRAP1			0xcf914
- #define EN8811H_HWTRAP1_CKO		BIT(12)
- 
--#define clear_bit(bit, bitmap)	__clear_bit(bit, bitmap)
--
--/* Led definitions */
--#define EN8811H_LED_COUNT	3
-+/* AN8811HB */
-+#define AN8811HB_PHY_ID			0xc0ff04a0
-+#define AIR_MD32_DM_SIZE		0x8000
-+#define AIR_MD32_DSP_SIZE		0x20000
-+#define AIR_PHY_MD32FW_VERSION		0x3b3c
-+
-+#define AN8811HB_GPIO_OUTPUT		0x5cf8b8
-+#define AN8811HB_GPIO_OUTPUT_MASK	GENMASK(15, 0)
-+#define AN8811HB_GPIO_OUTPUT_345	(BIT(3) | BIT(4) | BIT(5))
-+#define AN8811HB_GPIO_OUTPUT_0115	(BIT(0) | BIT(1) | BIT(15))
-+#define AN8811HB_GPIO_SEL_1		0x5cf8bc
-+#define AN8811HB_GPIO_SEL_1_0_MASK	GENMASK(2, 0)
-+#define AN8811HB_GPIO_SEL_1_1_MASK	GENMASK(6, 4)
-+#define AN8811HB_GPIO_SEL_1_0		FIELD_PREP(AN8811HB_GPIO_SEL_1_0_MASK, 1)
-+#define AN8811HB_GPIO_SEL_1_1		FIELD_PREP(AN8811HB_GPIO_SEL_1_1_MASK, 0)
-+#define AN8811HB_GPIO_SEL_2		0x5cf8c0
-+#define AN8811HB_GPIO_SEL_2_15_MASK	GENMASK(30, 28)
-+#define AN8811HB_GPIO_SEL_2_15		FIELD_PREP(AN8811HB_GPIO_SEL_2_15_MASK, 2)
-+
-+#define AN8811HB_CRC_PM_SET1		0xf020c
-+#define AN8811HB_CRC_PM_MON2		0xf0218
-+#define AN8811HB_CRC_PM_MON3		0xf021c
-+#define AN8811HB_CRC_DM_SET1		0xf0224
-+#define AN8811HB_CRC_DM_MON2		0xf0230
-+#define AN8811HB_CRC_DM_MON3		0xf0234
-+#define AN8811HB_CRC_RD_EN		BIT(0)
-+#define AN8811HB_CRC_ST			(BIT(0) | BIT(1))
-+#define AN8811HB_CRC_CHECK_PASS		BIT(0)
-+
-+#define AN8811HB_TX_POLARITY		0x5ce004
-+#define AN8811HB_TX_POLARITY_NORMAL	BIT(7)
-+#define AN8811HB_RX_POLARITY		0x5ce61c
-+#define AN8811HB_RX_POLARITY_NORMAL	BIT(7)
-+
-+#define AN8811HB_HWTRAP1		0x5cf910
-+#define AN8811HB_HWTRAP2		0x5cf914
-+#define AN8811HB_HWTRAP2_CKO		BIT(28)
-+#define AN8811HB_HWTRAP2_PKG		(BIT(12) | BIT(13) | BIT(14))
-+#define AN8811HB_PRO_ID			0x5cf920
-+#define AN8811HB_PRO_ID_VERSION		GENMASK(3, 0)
-+
-+#define AN8811HB_CLK_DRV		0x5cf9e4
-+#define AN8811HB_CLK_DRV_CKO_MASK	GENMASK(14, 12)
-+#define AN8811HB_CLK_DRV_CKOPWD		BIT(12)
-+#define AN8811HB_CLK_DRV_CKO_LDPWD	BIT(13)
-+#define AN8811HB_CLK_DRV_CKO_LPPWD	BIT(14)
-+
-+#define AN8811HB_MCU_SW_RST		0x5cf9f8
-+#define AN8811HB_MCU_SW_RST_HOLD	BIT(16)
-+#define AN8811HB_MCU_SW_RST_RUN		(BIT(16) | BIT(0))
-+#define AN8811HB_MCU_SW_START		0x5cf9fc
-+#define AN8811HB_MCU_SW_START_EN	BIT(16)
-+
-+#define clear_bit(bit, bitmap)		__clear_bit(bit, bitmap)
-+
-+#define SCRIPT_NAME(name)		#name "_load_firmware"
- 
- struct led {
- 	unsigned long rules;
-@@ -191,11 +267,48 @@ enum air_led_trigger_netdev_modes {
- #define AIR_PHY_LED_DUR (AIR_PHY_LED_DUR_UNIT << AIR_PHY_LED_DUR_BLINK_64MS)
- 
- struct en8811h_priv {
--	int firmware_version;
-+	u32		firmware_version;
- 	bool		mcu_needs_restart;
- 	struct led	led[EN8811H_LED_COUNT];
-+	u32		pro_id;
-+	u32		pkg_sel;
-+	u32		mem_size;
-+	const char	*script_name;
- };
- 
-+static int air_pbus_reg_write(struct phy_device *phydev,
-+			      u32 pbus_reg, u32 pbus_data)
-+{
-+	int pbus_addr = (phydev->addr) + 8;
-+	struct mii_dev *bus = phydev->bus;
-+	int ret;
-+
-+	ret = bus->write(bus, pbus_addr, MDIO_DEVAD_NONE,
-+			 AIR_EXT_PAGE_ACCESS,
-+			 (pbus_reg >> 16));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = bus->write(bus, pbus_addr, MDIO_DEVAD_NONE,
-+			 AIR_PBUS_MODE_ADDR_HIGH,
-+			 ((pbus_reg & GENMASK(15, 6)) >> 6));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = bus->write(bus, pbus_addr, MDIO_DEVAD_NONE,
-+			 ((pbus_reg & GENMASK(5, 2)) >> 2),
-+			 (pbus_data & GENMASK(15, 0)));
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = bus->write(bus, pbus_addr, MDIO_DEVAD_NONE, 0x10,
-+			 ((pbus_data & GENMASK(31, 16)) >> 16));
-+	if (ret < 0)
-+		return ret;
-+
-+	return ret;
-+}
-+
- static int air_buckpbus_reg_write(struct phy_device *phydev,
- 				  u32 pbus_address, u32 pbus_data)
- {
-@@ -359,8 +472,8 @@ restore_page:
- static int air_write_buf(struct phy_device *phydev, unsigned long address,
- 			 unsigned long array_size, const unsigned char *buffer)
- {
--	unsigned int offset;
- 	int ret, saved_page;
-+	u32 offset;
- 	u16 val;
- 
- 	saved_page = phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-@@ -419,18 +532,144 @@ static int en8811h_wait_mcu_ready(struct phy_device *phydev)
- 	return ret;
- }
- 
--int en8811h_read_fw(void **fw, size_t *fwsize)
-+static int an8811hb_check_crc(struct phy_device *phydev,
-+			      u32 set1, u32 mon2, u32 mon3)
-+{
-+	int ret, retry = 10;
-+	u32 pbus_value;
-+
-+	/* Configure CRC */
-+	ret = air_buckpbus_reg_modify(phydev, set1, AN8811HB_CRC_RD_EN,
-+				      AN8811HB_CRC_RD_EN);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_buckpbus_reg_read(phydev, set1, &pbus_value);
-+	if (ret < 0)
-+		return ret;
-+
-+	debug("%d: reg 0x%x val 0x%x!\n", __LINE__, set1, pbus_value);
-+
-+	do {
-+		mdelay(300);
-+
-+		ret = air_buckpbus_reg_read(phydev, mon2, &pbus_value);
-+		if (ret < 0)
-+			return ret;
-+
-+		debug("%d: reg 0x%x val 0x%x!\n", __LINE__, mon2, pbus_value);
-+
-+		if (pbus_value & AN8811HB_CRC_ST) {
-+			ret = air_buckpbus_reg_read(phydev, mon3, &pbus_value);
-+			if (ret < 0)
-+				return ret;
-+
-+			debug("%d: reg 0x%x val 0x%x!\n", __LINE__, mon3,
-+			      pbus_value);
-+
-+			if (pbus_value & AN8811HB_CRC_CHECK_PASS)
-+				debug("CRC Check PASS!\n");
-+			else
-+				dev_err(phydev->dev, "CRC Check FAIL!(0x%lx)\n",
-+					pbus_value & AN8811HB_CRC_CHECK_PASS);
-+
-+			break;
-+		}
-+
-+		if (!retry) {
-+			dev_err(phydev->dev,
-+				"CRC Check is not ready.(Status %u)\n",
-+				pbus_value);
-+			return -ENODEV;
-+		}
-+	} while (--retry);
-+
-+	ret = air_buckpbus_reg_modify(phydev, set1, AN8811HB_CRC_RD_EN, 0);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_buckpbus_reg_read(phydev, set1, &pbus_value);
-+	if (ret < 0)
-+		return ret;
-+
-+	debug("%d: reg 0x%x val 0x%x!\n", __LINE__, set1, pbus_value);
-+
-+	return ret;
-+}
-+
-+static int an8811hb_mcu_assert(struct phy_device *phydev)
-+{
-+	int ret;
-+
-+	ret = air_pbus_reg_write(phydev, AN8811HB_MCU_SW_RST,
-+				 AN8811HB_MCU_SW_RST_HOLD);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_pbus_reg_write(phydev, AN8811HB_MCU_SW_START, 0);
-+	if (ret < 0)
-+		return ret;
-+
-+	debug("MCU asserted\n");
-+	mdelay(50);
-+
-+	return ret;
-+}
-+
-+static int an8811hb_mcu_deassert(struct phy_device *phydev)
-+{
-+	int ret;
-+
-+	ret = air_pbus_reg_write(phydev, AN8811HB_MCU_SW_START,
-+				 AN8811HB_MCU_SW_START_EN);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_pbus_reg_write(phydev, AN8811HB_MCU_SW_RST,
-+				 AN8811HB_MCU_SW_RST_RUN);
-+	if (ret < 0)
-+		return ret;
-+
-+	debug("MCU deasserted\n");
-+	mdelay(50);
-+
-+	return ret;
-+}
-+
-+static int an8811hb_surge_protect_cfg(struct phy_device *phydev)
-+{
-+	ofnode node = phy_get_ofnode(phydev);
-+	int ret = 0;
-+
-+	if (!ofnode_read_bool(node, "airoha,surge-5r")) {
-+		debug("Surge Protection mode - 0R\n");
-+		return ret;
-+	}
-+
-+	ret = air_buckpbus_reg_modify(phydev, AIR_PHY_CONTROL,
-+				      AIR_PHY_CONTROL_SURGE_5R,
-+				      AIR_PHY_CONTROL_SURGE_5R);
-+	if (ret < 0)
-+		return ret;
-+
-+	debug("Surge Protection mode - 5R\n");
-+
-+	return ret;
-+}
-+
-+static int en8811h_read_fw(void **fw, size_t *fwsize, struct en8811h_priv *priv)
- {
-+	const char *script_name = priv->script_name;
-+	u32 mem_size = priv->mem_size;
- 	void *buffer;
- 	int ret;
- 
--	buffer = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
-+	buffer = malloc(mem_size);
- 	if (!buffer)
- 		return -ENOMEM;
- 
--	ret = request_firmware_into_buf_via_script(buffer,
--						   EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE,
--						   "en8811h_load_firmware", fwsize);
-+	ret = request_firmware_into_buf_via_script(buffer, mem_size,
-+						   script_name, fwsize);
- 	if (ret) {
- 		free(buffer);
- 		return ret;
-@@ -450,7 +689,10 @@ static int en8811h_load_firmware(struct phy_device *phydev)
- 	void *buffer;
- 	int ret;
- 
--	ret = en8811h_read_fw(&buffer, &fw_size);
-+	priv->script_name = SCRIPT_NAME(en8811h);
-+	priv->mem_size = EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE;
-+
-+	ret = en8811h_read_fw(&buffer, &fw_size, priv);
- 	if (ret < 0) {
- 		dev_err(phydev->dev, "Failed to get firmware data\n");
- 		return -EINVAL;
-@@ -496,9 +738,12 @@ static int en8811h_load_firmware(struct phy_device *phydev)
- 		goto en8811h_load_firmware_out;
- 
- 	ret = en8811h_wait_mcu_ready(phydev);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
- 
- 	air_buckpbus_reg_read(phydev, EN8811H_FW_VERSION,
- 			      &priv->firmware_version);
-+
- 	dev_info(phydev->dev, "MD32 firmware version: %08x\n",
- 		 priv->firmware_version);
- 
-@@ -510,6 +755,130 @@ en8811h_load_firmware_out:
- 	return ret;
- }
- 
-+static int an8811hb_load_firmware(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	int ret, retry = 10;
-+	size_t fw_size;
-+	void *buffer;
-+	u32 reg_val;
-+
-+	ret = an8811hb_mcu_assert(phydev);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = an8811hb_mcu_deassert(phydev);
-+	if (ret < 0)
-+		return ret;
-+
-+	priv->script_name = SCRIPT_NAME(an8811hb);
-+	priv->mem_size = AIR_MD32_DM_SIZE + AIR_MD32_DSP_SIZE;
-+
-+	ret = en8811h_read_fw(&buffer, &fw_size, priv);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
-+				     AIR_PHY_FW_CTRL_1_START);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, AIR_MD32_DM_SIZE,
-+			    (unsigned char *)buffer);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = an8811hb_check_crc(phydev, AN8811HB_CRC_DM_SET1,
-+				 AN8811HB_CRC_DM_MON2, AN8811HB_CRC_DM_MON3);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, AIR_MD32_DSP_SIZE,
-+			    (unsigned char *)buffer + AIR_MD32_DM_SIZE);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = an8811hb_check_crc(phydev, AN8811HB_CRC_PM_SET1,
-+				 AN8811HB_CRC_PM_MON2, AN8811HB_CRC_PM_MON3);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
-+				     AIR_PHY_FW_CTRL_1_FINISH);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	ret = an8811hb_surge_protect_cfg(phydev);
-+	if (ret < 0) {
-+		dev_err(phydev->dev, "an8811hb_surge_protect_cfg fail. (ret=%d)\n", ret);
-+		goto an8811hb_load_firmware_out;
-+	}
-+
-+	do {
-+		mdelay(300);
-+
-+		ret = air_buckpbus_reg_read(phydev, AIR_PHY_FW_CTRL_1, &reg_val);
-+		if (ret < 0)
-+			goto an8811hb_load_firmware_out;
-+
-+		if (reg_val == AIR_PHY_FW_CTRL_1_FINISH)
-+			break;
-+
-+		debug("%d: reg 0x%x val 0x%x!\n", __LINE__, AIR_PHY_FW_CTRL_1,
-+		      reg_val);
-+
-+		ret = air_buckpbus_reg_write(phydev, AIR_PHY_FW_CTRL_1,
-+					     AIR_PHY_FW_CTRL_1_FINISH);
-+		if (ret < 0)
-+			goto an8811hb_load_firmware_out;
-+
-+	} while (--retry);
-+
-+	ret = en8811h_wait_mcu_ready(phydev);
-+	if (ret < 0)
-+		goto an8811hb_load_firmware_out;
-+
-+	air_buckpbus_reg_read(phydev, AIR_PHY_MD32FW_VERSION,
-+			      &priv->firmware_version);
-+
-+	debug("MD32 firmware version: %08x\n", priv->firmware_version);
-+
-+an8811hb_load_firmware_out:
-+	free(buffer);
-+	if (ret < 0)
-+		dev_err(phydev->dev, "Firmware loading failed: %d\n", ret);
-+
-+	return ret;
-+}
-+
-+int an8811hb_cko_cfg(struct phy_device *phydev)
-+{
-+	ofnode node = phy_get_ofnode(phydev);
-+	u32 pbus_value;
-+	int ret = 0;
-+
-+	if (!ofnode_read_bool(node, "airoha,phy-output-clock")) {
-+		ret = air_buckpbus_reg_modify(phydev, AN8811HB_CLK_DRV,
-+					      AN8811HB_CLK_DRV_CKO_MASK,
-+					      AN8811HB_CLK_DRV_CKOPWD    |
-+					      AN8811HB_CLK_DRV_CKO_LDPWD |
-+					      AN8811HB_CLK_DRV_CKO_LPPWD);
-+		if (ret < 0)
-+			return ret;
-+
-+		debug("CKO Output mode - Disabled\n");
-+	} else {
-+		ret = air_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
-+		if (ret < 0)
-+			return ret;
-+
-+		debug("CKO Output %dMHz - Enabled\n",
-+		      (pbus_value & AN8811HB_HWTRAP2_CKO) ? 50 : 25);
-+	}
-+
-+	return ret;
-+}
-+
- static int en8811h_restart_mcu(struct phy_device *phydev)
- {
- 	int ret;
-@@ -613,13 +982,30 @@ static int air_led_init(struct phy_device *phydev, u8 index, u8 state, u8 pol)
- 	return 0;
- }
- 
-+/**
-+ * air_leds_init - Initialize and configure LEDs for a phy device.
-+ *
-+ * @phydev: Pointer to the phy_device structure.
-+ * @num: Number of LEDs to initialize.
-+ * @dur: Duration for LED blink in milliseconds. It sets the duration
-+ *       for both the ON and OFF periods (OFF period will be half of `dur`).
-+ * @mode: LED operation mode. Supported modes are:
-+ *           - AIR_LED_MODE_DISABLE: Disables LED control.
-+ *           - AIR_LED_MODE_USER_DEFINE: Enables user-defined LED control.
-+ *
-+ * Initializes and configures LEDs on a phy device with a specified blink duration
-+ * and mode. Supports disabling or enabling user-defined control.
-+ * Return:
-+ * On success, returns 0. On error, it returns a negative value that denotes
-+ * the error code.
-+ */
-+
- static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
- {
- 	struct en8811h_priv *priv = phydev->priv;
- 	int ret, i;
- 
--	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_BLINK,
--			    dur);
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_BLINK, dur);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -707,10 +1093,121 @@ static int en8811h_config(struct phy_device *phydev)
- 		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
- 	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
- 				      EN8811H_POLARITY_RX_REVERSE |
--				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
-+				      EN8811H_POLARITY_TX_NORMAL,
-+				      pbus_value);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_leds_init(phydev, EN8811H_LED_COUNT, AIR_PHY_LED_DUR,
-+			    AIR_LED_MODE_USER_DEFINE);
-+	if (ret < 0) {
-+		dev_err(phydev->dev, "Failed to disable leds: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int an8811hb_config(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	u32 pbus_value = 0;
-+	ofnode node;
-+	int ret = 0;
-+
-+	node = phy_get_ofnode(phydev);
-+	if (!ofnode_valid(node))
-+		return 0;
-+
-+	/* If restart happened in .probe(), no need to restart now */
-+	if (priv->mcu_needs_restart) {
-+		ret = an8811hb_mcu_assert(phydev);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = an8811hb_mcu_deassert(phydev);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = en8811h_restart_mcu(phydev);
-+		if (ret < 0)
-+			return ret;
-+	} else {
-+		ret = an8811hb_load_firmware(phydev);
-+		if (ret) {
-+			dev_err(phydev->dev, "Load firmware fail.\n");
-+			return ret;
-+		}
-+		/* Next calls to .config() mcu needs to restart */
-+		priv->mcu_needs_restart = true;
-+	}
-+
-+	ret = air_buckpbus_reg_read(phydev, AN8811HB_PRO_ID, &pbus_value);
-+	if (ret < 0)
-+		return ret;
-+	priv->pro_id = (pbus_value & AN8811HB_PRO_ID_VERSION) + 1;
-+
-+	ret = air_buckpbus_reg_read(phydev, AN8811HB_HWTRAP2, &pbus_value);
-+	if (ret < 0)
-+		return ret;
-+	priv->pkg_sel = (pbus_value & AN8811HB_HWTRAP2_PKG) >> 12;
-+	debug("%s(%d) Version: E%d\n",
-+	      priv->pkg_sel ? "AN8811HBCN" : "AN8811HBN", priv->pkg_sel,
-+	      priv->pro_id);
-+
-+	/* Serdes polarity */
-+	pbus_value = 0;
-+	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-+		pbus_value &= ~AN8811HB_RX_POLARITY_NORMAL;
-+	else
-+		pbus_value |= AN8811HB_RX_POLARITY_NORMAL;
-+
-+	debug("1 pbus_value 0x%x\n", pbus_value);
-+	ret = air_buckpbus_reg_modify(phydev, AN8811HB_RX_POLARITY,
-+				      AN8811HB_RX_POLARITY_NORMAL, pbus_value);
-+	if (ret < 0)
-+		return ret;
-+
-+	pbus_value = 0;
-+	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-+		pbus_value &= ~AN8811HB_TX_POLARITY_NORMAL;
-+	else
-+		pbus_value |= AN8811HB_TX_POLARITY_NORMAL;
-+
-+	debug("2 pbus_value 0x%x\n", pbus_value);
-+	ret = air_buckpbus_reg_modify(phydev, AN8811HB_TX_POLARITY,
-+				      AN8811HB_TX_POLARITY_NORMAL, pbus_value);
- 	if (ret < 0)
- 		return ret;
- 
-+	/* Configure led gpio pins as output */
-+	if (priv->pkg_sel) {
-+		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
-+					      AN8811HB_GPIO_OUTPUT_MASK,
-+					      AN8811HB_GPIO_OUTPUT_0115);
-+		if (ret < 0)
-+			return ret;
-+		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_1,
-+					      AN8811HB_GPIO_SEL_1_0_MASK |
-+					      AN8811HB_GPIO_SEL_1_1_MASK,
-+					      AN8811HB_GPIO_SEL_1_0 |
-+					      AN8811HB_GPIO_SEL_1_1);
-+		if (ret < 0)
-+			return ret;
-+
-+		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_SEL_2,
-+					      AN8811HB_GPIO_SEL_2_15_MASK,
-+					      AN8811HB_GPIO_SEL_2_15);
-+		if (ret < 0)
-+			return ret;
-+	} else {
-+		ret = air_buckpbus_reg_modify(phydev, AN8811HB_GPIO_OUTPUT,
-+					      AN8811HB_GPIO_OUTPUT_345,
-+					      AN8811HB_GPIO_OUTPUT_345);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
- 	ret = air_leds_init(phydev, EN8811H_LED_COUNT, AIR_PHY_LED_DUR,
- 			    AIR_LED_MODE_USER_DEFINE);
- 	if (ret < 0) {
-@@ -718,9 +1215,91 @@ static int en8811h_config(struct phy_device *phydev)
- 		return ret;
- 	}
- 
-+	/* Co-Clock Output */
-+	ret = an8811hb_cko_cfg(phydev);
-+	if (ret)
-+		return ret;
-+
-+	printf("AN8811HB initialize OK !\n");
-+
-+	return 0;
-+}
-+
-+static int an8811hb_update_duplex(struct phy_device *phydev)
-+{
-+	int lpa;
-+
-+	if (phydev->autoneg == AUTONEG_ENABLE) {
-+		lpa = phy_read(phydev, MDIO_DEVAD_NONE, MII_LPA);
-+		if (lpa < 0)
-+			return lpa;
-+
-+		switch (phydev->speed) {
-+		case SPEED_2500:
-+		case SPEED_1000:
-+			phydev->duplex = DUPLEX_FULL;
-+			break;
-+		case SPEED_100:
-+			phydev->duplex = (lpa & LPA_100FULL) ? DUPLEX_FULL :
-+							       DUPLEX_HALF;
-+			break;
-+		case SPEED_10:
-+			phydev->duplex = (lpa & LPA_10FULL) ? DUPLEX_FULL :
-+							      DUPLEX_HALF;
-+			break;
-+		}
-+	} else {
-+		int bmcr = phy_read(phydev, MDIO_DEVAD_NONE, MII_BMCR);
-+
-+		if (phydev->speed == SPEED_2500)
-+			phydev->duplex = DUPLEX_FULL;
-+		else
-+			phydev->duplex = (bmcr & BMCR_FULLDPLX) ? DUPLEX_FULL :
-+								  DUPLEX_HALF;
-+	}
-+
- 	return 0;
- }
- 
-+static int an8811hb_parse_status(struct phy_device *phydev)
-+{
-+	int ret = 0, reg_value;
-+
-+	reg_value = phy_read(phydev, MDIO_DEVAD_NONE, AIR_AUX_CTRL_STATUS);
-+	if (reg_value < 0)
-+		return reg_value;
-+
-+	switch (reg_value & AIR_AUX_CTRL_STATUS_SPEED_MASK) {
-+	case AIR_AUX_CTRL_STATUS_SPEED_2500:
-+		phydev->speed = SPEED_2500;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_1000:
-+		phydev->speed = SPEED_1000;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_100:
-+		phydev->speed = SPEED_100;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_10:
-+		phydev->speed = SPEED_10;
-+		break;
-+	default:
-+		dev_err(phydev->dev,
-+			"Auto-neg error, defaulting to 2500M/FD\n");
-+		phydev->speed = SPEED_2500;
-+		phydev->duplex = DUPLEX_FULL;
-+		return 0;
-+	}
-+
-+	/* Update duplex mode based on speed and negotiation status */
-+	ret = an8811hb_update_duplex(phydev);
-+	if (ret < 0)
-+		return ret;
-+
-+	debug("Speed: %d, %s duplex\n", phydev->speed,
-+	      (phydev->duplex) ? "full" : "half");
-+	return ret;
-+}
-+
- static int en8811h_parse_status(struct phy_device *phydev)
- {
- 	int ret = 0, reg_value;
-@@ -742,7 +1321,8 @@ static int en8811h_parse_status(struct phy_device *phydev)
- 		phydev->speed = SPEED_100;
- 		break;
- 	default:
--		dev_err(phydev->dev, "Auto-neg error, defaulting to 2500M/FD\n");
-+		dev_err(phydev->dev,
-+			"Auto-neg error, defaulting to 2500M/FD\n");
- 		phydev->speed = SPEED_2500;
- 		break;
- 	}
-@@ -752,24 +1332,35 @@ static int en8811h_parse_status(struct phy_device *phydev)
- 
- static int en8811h_startup(struct phy_device *phydev)
- {
-+	u32 phy_id = phydev->phy_id;
- 	int ret = 0;
- 
- 	ret = genphy_update_link(phydev);
- 	if (ret)
- 		return ret;
- 
--	return en8811h_parse_status(phydev);
-+	if (phy_id == EN8811H_PHY_ID)
-+		ret = en8811h_parse_status(phydev);
-+	else if (phy_id == AN8811HB_PHY_ID)
-+		ret = an8811hb_parse_status(phydev);
-+
-+	return ret;
- }
- 
- static int en8811h_probe(struct phy_device *phydev)
- {
- 	struct en8811h_priv *priv;
-+	int phy_id;
- 
- 	priv = malloc(sizeof(*priv));
- 	if (!priv)
- 		return -ENOMEM;
- 	memset(priv, 0, sizeof(*priv));
- 
-+	debug("%s driver is probed.\n", phydev->drv->name);
-+	get_phy_id(phydev->bus, phydev->addr, MDIO_DEVAD_NONE, &phy_id);
-+	debug("phy id is 0x%x.\n", phy_id);
-+
- 	priv->led[0].rules = AIR_DEFAULT_TRIGGER_LED0;
- 	priv->led[1].rules = AIR_DEFAULT_TRIGGER_LED1;
- 	priv->led[2].rules = AIR_DEFAULT_TRIGGER_LED2;
-@@ -782,12 +1373,12 @@ static int en8811h_probe(struct phy_device *phydev)
- 	return 0;
- }
- 
--static int en8811h_read_page(struct phy_device *phydev)
-+static int air_phy_read_page(struct phy_device *phydev)
- {
- 	return phy_read(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS);
- }
- 
--static int en8811h_write_page(struct phy_device *phydev, int page)
-+static int air_phy_write_page(struct phy_device *phydev, int page)
- {
- 	return phy_write(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS, page);
- }
-@@ -798,8 +1389,20 @@ U_BOOT_PHY_DRIVER(en8811h) = {
- 	.mask = 0x0ffffff0,
- 	.config = &en8811h_config,
- 	.probe = &en8811h_probe,
--	.read_page = &en8811h_read_page,
--	.write_page = &en8811h_write_page,
-+	.read_page = &air_phy_read_page,
-+	.write_page = &air_phy_write_page,
-+	.startup = &en8811h_startup,
-+	.shutdown = &genphy_shutdown,
-+};
-+
-+U_BOOT_PHY_DRIVER(an8811hb) = {
-+	.name = "Airoha AN8811HB",
-+	.uid = AN8811HB_PHY_ID,
-+	.mask = 0x0ffffff0,
-+	.config = &an8811hb_config,
-+	.probe = &en8811h_probe,
-+	.read_page = &air_phy_read_page,
-+	.write_page = &air_phy_write_page,
- 	.startup = &en8811h_startup,
- 	.shutdown = &genphy_shutdown,
- };
 -- 
-2.43.0
+Christian Taedcke
+Software Developer
 
-base-commit: 8fd76675efbe7af785ccc1ba1ac8b9f7e10f6715
-branch: next
