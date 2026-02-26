@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BEDFD9E1E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF03DFD9E25
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:50:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE3C283F93;
-	Fri, 27 Feb 2026 00:49:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3890E83F69;
+	Fri, 27 Feb 2026 00:49:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kWUbOCPs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C04GCE1E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D180583F4E; Fri, 27 Feb 2026 00:49:08 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id AF4E983F2A; Fri, 27 Feb 2026 00:49:12 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4586583F39
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:49:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80A9783F5B
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:49:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-8cb40149037so145677385a.2
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:49:01 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-8cb3a8494c5so147811185a.2
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:49:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149739; x=1772754539; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772149741; x=1772754541; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9g5Guy7n83H3xtYV+5nuxSvROpBkoazCwXd1evsd8a0=;
- b=kWUbOCPsa2p1SJakcj9d3Sxb2xGznPEK/wa1J8mhvqQdPSR5Zl7ezWNoFNXuz7EKQw
- 6JqHIy/QVharLfMKHPYkIpLl50RLoMsfDEpLDqCra4T2fGOmxwDIYF8c80XJP1IgNsul
- F7lnZfwFe6PZ/t9/oZ2Kk3R25xHNZ38Ud+Wfg=
+ bh=J6oiMby/q3LycnjzTsd/33qPJtHW0cV8Xubh5OEj47U=;
+ b=C04GCE1E0QXZBMdAG5687FcI1gQRYfESCmfi8VAs2Rnhk9y0fRRG6tlWNEKxcYYOod
+ F1lb1xqDlR5593y4v2Z2AgoEiXdixPHycIDAHaswPd2OTBpDQJSKu8IVVXq/ADjpfIBg
+ SiqSinHgSlvxfzm0z4Qo1HjbJKBAFnP6jQ2P8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149739; x=1772754539;
+ d=1e100.net; s=20230601; t=1772149741; x=1772754541;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=9g5Guy7n83H3xtYV+5nuxSvROpBkoazCwXd1evsd8a0=;
- b=EqOKUVR8p94ppx0Fo7OU9b2cZ2N5OtSpYvbT29Atrv6PwU0nUYBRcH/P2lz7VgkNgU
- KVcixvNtbBPKpfQsLLOr5XGt8dmxu5eYlkmwJGsQK8vJBrfBpMYG+KM6szzdK6SJXO36
- UWEpZPkJP7yGWUFkOx9pB4l6c4uYLIak6iUrgZHyvyot+4Fbg4vCyIFJNzICEa7534eB
- aN9/YWQRSIxu9VbN2pnFd76G72u5oIZHWkMp5vicyzMBQaGN5rflIP2dAOoQuAvWNuUc
- o86Zi4BdnTQTovgXfVlAkJwYhZrAC9mrtxla8Jm3iPRHg5nIJF1I2KwSte5+5u+3xur+
- veqQ==
-X-Gm-Message-State: AOJu0YxFul/Xc2htjYsx9y4n0GNzANYjnKMn0PfoRyOBNg9PIdK1x5Ts
- mDlQB0bDFkyvWlefMWct2/U0w9V0FvrXwiu/upmr5a1x3LD+GgkaZF4vACfEI+wd4Ki9J9HcbKf
- oyyE=
-X-Gm-Gg: ATEYQzyjjlOdKswUwASfqE8BsKf6bx9cxQd9kC2XCg6FfWzyejdBcRERZKLjO/uwPpV
- b2l/q0d7DAa5jf5E+s5RpsiXuxv6gvwhTbHJCMIRqSzlY7tXkIXRqJdXuKUaFU7mcBXhaIog0hk
- 3i4H4Ra0mErt3+7v3xwqBwAYeMgFRzI4XQBxm+ibCtuDvgnf+Bl17p2A5agfzHcqVfnFLxt98XB
- beybzB9LzmiaWsV8eLOChxp4JnhGfdb01vA0gVppJjtb75fsVS0tye72wUwsxXlDQqfDnzXxvQB
- PP8roN9LqyzfI16gSIl4Fm7E3q31omO5lSO/hhhe4eIizIuAXL7r26oI3Nw63Uj/Sz3yFfMmNqw
- Q6zh2axpuHksP0yFy0vRHXhtrIYbKjYsvBuz2l1w7o90bRVOb/8fn0havCiC0mf97Jnf+iJimho
- Wca/d8/BLNMdyeO1mqPg==
-X-Received: by 2002:a05:620a:1905:b0:8cb:b22c:90f8 with SMTP id
- af79cd13be357-8cbc8de8614mr118850285a.49.1772149739473; 
- Thu, 26 Feb 2026 15:48:59 -0800 (PST)
+ bh=J6oiMby/q3LycnjzTsd/33qPJtHW0cV8Xubh5OEj47U=;
+ b=poOnr+O9xybG4g4ciqADoAayPnPQFjU7efq5aCLTd9u6p4vzqeoUkoOanx8ih4YFTS
+ rKuUijQHylTxOVQPUO69yi60ZA0596P8cRuap4+hqVQ/WfKjytj/o03i18UbN2FGdmHs
+ G4fFPn5gkbHmoxqe4F9zD4JM9TaRHaLiRv9ThcPI4yWZ9GtWmMhiKLTdMtYqnPMyffpT
+ rEOPPfpleTQOHNEpvBr43FsorkD3bgP+CSNVxwC/gdfgBGjq/Gjt7pafyElifm0fwukz
+ Ncb+iQTen5z8qNpbIk35nOJxlsxYeyIagq+OR0hOAMyFAKJogAA4a6rZ6jHyiITQDRmU
+ bXEA==
+X-Gm-Message-State: AOJu0YxZKECeMzbCBs3/Tgp7pdPcN91qQL+5K+Ijr168Da2FOH6O1FYY
+ 3yD5vPTWTYtAemWfkjP7GXfwv4Lv69H6KQwNlLn3u3LbqKViwdXLOoK1YvIYG2M8iQeQcM99gK7
+ acMI=
+X-Gm-Gg: ATEYQzyH13738zpSwQ0rfxYMKWCMetGdJnDGxMbvCVq9LhZnfaWbBg2wG/qxSKGv3C3
+ ILXX5Rp2C9DUB60s4aDpHMtNn4wXsyoAD3cwtL3dCySHZ7UFN9NuC/9dZFz/EkC3xgI8PYnfSMY
+ IQcI297V7JW7fs9LnUc6AEFbGtK1qoYN4FKEz6ZTM5R86+tkYHSeZuJ94JImxVX56GdUUGClN1e
+ xyUqSJ9Ewj4jlkUp9+8aGTW3X+gu14nb/282wUBR1jx2fIkODMkeUgGm52Bi2Gdi5BiCiP8DaAC
+ yoVO6GUmUZPdYtv7U7qahJ7q+/OxlC4ORwzI+riazFYf7gWHjDDzCU64cxh/4nXwP9zswRbx+BQ
+ S2eRIF7UZeQX5u3ucuH2SJvt4701cPw8Blzx9O7TEAm8anvfmt7+dM+yYs+0Vmy5MQXM3QXycqU
+ CgENqNRQLJeg+Tu83GSA==
+X-Received: by 2002:a05:620a:4402:b0:8b2:2066:ffca with SMTP id
+ af79cd13be357-8cbc8eae81cmr95569185a.82.1772149741504; 
+ Thu, 26 Feb 2026 15:49:01 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.57
+ af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 15:48:58 -0800 (PST)
+ Thu, 26 Feb 2026 15:49:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -76,9 +76,10 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [RFC PATCH 09/16] binman: test: Move ChromeOS test files to test/cros/
-Date: Thu, 26 Feb 2026 16:47:49 -0700
-Message-ID: <20260226234802.345968-10-sjg@chromium.org>
+Subject: [RFC PATCH 10/16] binman: test: Move mkimage test files to
+ test/mkimage/
+Date: Thu, 26 Feb 2026 16:47:50 -0700
+Message-ID: <20260226234802.345968-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260226234802.345968-1-sjg@chromium.org>
 References: <20260226234802.345968-1-sjg@chromium.org>
@@ -102,184 +103,238 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move about 10 test files for ChromeOS entries (GBB, vblock, FMAP)
-into a cros/ subdirectory. Drop the numeric prefixes and update all
-references.
+Move about a dozen test files for mkimage entries into a mkimage/
+subdirectory. Drop the numeric prefixes and the redundant mkimage_
+filename prefix, and update all references.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
- doc/develop/binman_tests.rst                  |  2 +-
- tools/binman/ftest.py                         | 22 +++++++++----------
- .../test/{067_fmap.dts => cros/fmap.dts}      |  0
- .../binman/test/{071_gbb.dts => cros/gbb.dts} |  0
- .../gbb_no_size.dts}                          |  0
- .../gbb_too_small.dts}                        |  0
- .../test/{074_vblock.dts => cros/vblock.dts}  |  0
- .../vblock_bad_entry.dts}                     |  0
- .../vblock_bad_phandle.dts}                   |  0
- .../vblock_content.dts}                       |  0
- .../vblock_no_content.dts}                    |  0
- 11 files changed, 12 insertions(+), 12 deletions(-)
- rename tools/binman/test/{067_fmap.dts => cros/fmap.dts} (100%)
- rename tools/binman/test/{071_gbb.dts => cros/gbb.dts} (100%)
- rename tools/binman/test/{073_gbb_no_size.dts => cros/gbb_no_size.dts} (100%)
- rename tools/binman/test/{072_gbb_too_small.dts => cros/gbb_too_small.dts} (100%)
- rename tools/binman/test/{074_vblock.dts => cros/vblock.dts} (100%)
- rename tools/binman/test/{077_vblock_bad_entry.dts => cros/vblock_bad_entry.dts} (100%)
- rename tools/binman/test/{076_vblock_bad_phandle.dts => cros/vblock_bad_phandle.dts} (100%)
- rename tools/binman/test/{189_vblock_content.dts => cros/vblock_content.dts} (100%)
- rename tools/binman/test/{075_vblock_no_content.dts => cros/vblock_no_content.dts} (100%)
+ tools/binman/ftest.py                         | 32 +++++++++----------
+ .../coll.dts}                                 |  0
+ .../filename.dts}                             |  0
+ .../image.dts}                                |  0
+ .../image_bad.dts}                            |  0
+ .../image_no_content.dts}                     |  0
+ .../missing.dts}                              |  0
+ .../missing_multiple.dts}                     |  0
+ .../{156_mkimage.dts => mkimage/mkimage.dts}  |  0
+ .../mult_data.dts}                            |  0
+ .../mult_no_content.dts}                      |  0
+ .../name.dts}                                 |  0
+ .../special.dts}                              |  0
+ .../{290_mkimage_sym.dts => mkimage/sym.dts}  |  0
+ 14 files changed, 16 insertions(+), 16 deletions(-)
+ rename tools/binman/test/{247_mkimage_coll.dts => mkimage/coll.dts} (100%)
+ rename tools/binman/test/{254_mkimage_filename.dts => mkimage/filename.dts} (100%)
+ rename tools/binman/test/{243_mkimage_image.dts => mkimage/image.dts} (100%)
+ rename tools/binman/test/{245_mkimage_image_bad.dts => mkimage/image_bad.dts} (100%)
+ rename tools/binman/test/{244_mkimage_image_no_content.dts => mkimage/image_no_content.dts} (100%)
+ rename tools/binman/test/{229_mkimage_missing.dts => mkimage/missing.dts} (100%)
+ rename tools/binman/test/{292_mkimage_missing_multiple.dts => mkimage/missing_multiple.dts} (100%)
+ rename tools/binman/test/{156_mkimage.dts => mkimage/mkimage.dts} (100%)
+ rename tools/binman/test/{252_mkimage_mult_data.dts => mkimage/mult_data.dts} (100%)
+ rename tools/binman/test/{253_mkimage_mult_no_content.dts => mkimage/mult_no_content.dts} (100%)
+ rename tools/binman/test/{242_mkimage_name.dts => mkimage/name.dts} (100%)
+ rename tools/binman/test/{283_mkimage_special.dts => mkimage/special.dts} (100%)
+ rename tools/binman/test/{290_mkimage_sym.dts => mkimage/sym.dts} (100%)
 
-diff --git a/doc/develop/binman_tests.rst b/doc/develop/binman_tests.rst
-index 745ca259d44..c7fa9ae6199 100644
---- a/doc/develop/binman_tests.rst
-+++ b/doc/develop/binman_tests.rst
-@@ -436,7 +436,7 @@ correct. You can to this with ``terminal.capture()``, for example:
- .. code-block:: python
- 
-     with terminal.capture() as (_, stderr):
--        self._DoTestFile('071_gbb.dts', force_missing_bintools='futility',
-+        self._DoTestFile('cros/gbb.dts', force_missing_bintools='futility',
-                          entry_args=entry_args)
-     err = stderr.getvalue()
-     self.assertRegex(err, "Image 'image'.*missing bintools.*: futility")
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 5284fd3a11a..c2cea9e6618 100644
+index c2cea9e6618..8f5dcc2878c 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -1816,7 +1816,7 @@ class TestFunctional(unittest.TestCase):
+@@ -3868,7 +3868,7 @@ class TestFunctional(unittest.TestCase):
+     def testMkimage(self):
+         """Test using mkimage to build an image"""
+         self._SetupSplElf()
+-        data = self._DoReadFile('156_mkimage.dts')
++        data = self._DoReadFile('mkimage/mkimage.dts')
  
-     def testFmap(self):
-         """Basic test of generation of a flashrom fmap"""
--        data = self._DoReadFile('067_fmap.dts')
-+        data = self._DoReadFile('cros/fmap.dts')
-         fhdr, fentries = fmap_util.DecodeFmap(data[32:])
-         expected = (U_BOOT_DATA + tools.get_bytes(ord('!'), 12) +
-                     U_BOOT_DATA + tools.get_bytes(ord('a'), 12))
-@@ -1898,7 +1898,7 @@ class TestFunctional(unittest.TestCase):
-             'keydir': 'devkeys',
-             'bmpblk': 'bmpblk.bin',
-         }
--        data, _, _, _ = self._DoReadFileDtb('071_gbb.dts', entry_args=entry_args)
-+        data, _, _, _ = self._DoReadFileDtb('cros/gbb.dts', entry_args=entry_args)
- 
-         # Since futility
-         expected = (GBB_DATA + GBB_DATA + tools.get_bytes(0, 8) +
-@@ -1908,14 +1908,14 @@ class TestFunctional(unittest.TestCase):
-     def testGbbTooSmall(self):
-         """Test for the Chromium OS Google Binary Block being large enough"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFileDtb('072_gbb_too_small.dts')
-+            self._DoReadFileDtb('cros/gbb_too_small.dts')
-         self.assertIn("Node '/binman/gbb': GBB is too small",
-                       str(e.exception))
- 
-     def testGbbNoSize(self):
-         """Test for the Chromium OS Google Binary Block having a size"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFileDtb('073_gbb_no_size.dts')
-+            self._DoReadFileDtb('cros/gbb_no_size.dts')
-         self.assertIn("Node '/binman/gbb': GBB must have a fixed size",
-                       str(e.exception))
- 
-@@ -1925,7 +1925,7 @@ class TestFunctional(unittest.TestCase):
-             'keydir': 'devkeys',
-         }
+         # Just check that the data appears in the file somewhere
+         self.assertIn(U_BOOT_SPL_DATA, data)
+@@ -3877,7 +3877,7 @@ class TestFunctional(unittest.TestCase):
+         """Test that binman still produces an image if mkimage is missing"""
+         self._SetupSplElf()
          with terminal.capture() as (_, stderr):
--            self._DoTestFile('071_gbb.dts', force_missing_bintools='futility',
-+            self._DoTestFile('cros/gbb.dts', force_missing_bintools='futility',
-                              entry_args=entry_args)
+-            self._DoTestFile('156_mkimage.dts',
++            self._DoTestFile('mkimage/mkimage.dts',
+                              force_missing_bintools='mkimage')
          err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing bintools.*: futility")
-@@ -1966,7 +1966,7 @@ class TestFunctional(unittest.TestCase):
-         entry_args = {
-             'keydir': 'devkeys',
-         }
--        data, _, _, _ = self._DoReadFileDtb('074_vblock.dts',
-+        data, _, _, _ = self._DoReadFileDtb('cros/vblock.dts',
-                                             entry_args=entry_args)
-         expected = U_BOOT_DATA + VBLOCK_DATA + U_BOOT_DTB_DATA
-         self.assertEqual(expected, data)
-@@ -1974,21 +1974,21 @@ class TestFunctional(unittest.TestCase):
-     def testVblockNoContent(self):
-         """Test we detect a vblock which has no content to sign"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('075_vblock_no_content.dts')
-+            self._DoReadFile('cros/vblock_no_content.dts')
-         self.assertIn("Node '/binman/vblock': Collection must have a 'content' "
-                       'property', str(e.exception))
- 
-     def testVblockBadPhandle(self):
-         """Test that we detect a vblock with an invalid phandle in contents"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('076_vblock_bad_phandle.dts')
-+            self._DoReadFile('cros/vblock_bad_phandle.dts')
-         self.assertIn("Node '/binman/vblock': Cannot find node for phandle "
-                       '1000', str(e.exception))
- 
-     def testVblockBadEntry(self):
-         """Test that we detect an entry that points to a non-entry"""
-         with self.assertRaises(ValueError) as e:
--            self._DoReadFile('077_vblock_bad_entry.dts')
-+            self._DoReadFile('cros/vblock_bad_entry.dts')
-         self.assertIn("Node '/binman/vblock': Cannot find entry for node "
-                       "'other'", str(e.exception))
- 
-@@ -2000,7 +2000,7 @@ class TestFunctional(unittest.TestCase):
-             'keydir': 'devkeys',
-         }
-         data = self._DoReadFileDtb(
--            '189_vblock_content.dts', use_real_dtb=True, update_dtb=True,
-+            'cros/vblock_content.dts', use_real_dtb=True, update_dtb=True,
-             entry_args=entry_args)[0]
-         hashlen = 32  # SHA256 hash is 32 bytes
-         self.assertEqual(U_BOOT_DATA, data[:len(U_BOOT_DATA)])
-@@ -2021,7 +2021,7 @@ class TestFunctional(unittest.TestCase):
-             'keydir': 'devkeys',
-         }
-         with terminal.capture() as (_, stderr):
--            self._DoTestFile('074_vblock.dts',
-+            self._DoTestFile('cros/vblock.dts',
-                              force_missing_bintools='futility',
-                              entry_args=entry_args)
+         self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
+@@ -5809,7 +5809,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkimageMissingBlob(self):
+         """Test using mkimage to build an image"""
+         with terminal.capture() as (stdout, stderr):
+-            self._DoTestFile('229_mkimage_missing.dts', allow_missing=True,
++            self._DoTestFile('mkimage/missing.dts', allow_missing=True,
+                              allow_fake_blobs=True)
          err = stderr.getvalue()
-diff --git a/tools/binman/test/067_fmap.dts b/tools/binman/test/cros/fmap.dts
+         self.assertRegex(
+@@ -6118,7 +6118,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkimageImagename(self):
+         """Test using mkimage with -n holding the data too"""
+         self._SetupSplElf()
+-        data = self._DoReadFile('242_mkimage_name.dts')
++        data = self._DoReadFile('mkimage/name.dts')
+ 
+         # Check that the data appears in the file somewhere
+         self.assertIn(U_BOOT_SPL_DATA, data)
+@@ -6136,7 +6136,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkimageImage(self):
+         """Test using mkimage with -n holding the data too"""
+         self._SetupSplElf()
+-        data = self._DoReadFile('243_mkimage_image.dts')
++        data = self._DoReadFile('mkimage/image.dts')
+ 
+         # Check that the data appears in the file somewhere
+         self.assertIn(U_BOOT_SPL_DATA, data)
+@@ -6158,7 +6158,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test using mkimage with -n and no data"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as exc:
+-            self._DoReadFile('244_mkimage_image_no_content.dts')
++            self._DoReadFile('mkimage/image_no_content.dts')
+         self.assertIn('Could not complete processing of contents',
+                       str(exc.exception))
+ 
+@@ -6166,7 +6166,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test using mkimage with imagename node and data-to-imagename"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as exc:
+-            self._DoReadFile('245_mkimage_image_bad.dts')
++            self._DoReadFile('mkimage/image_bad.dts')
+         self.assertIn('Cannot use both imagename node and data-to-imagename',
+                       str(exc.exception))
+ 
+@@ -6181,7 +6181,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkimageCollection(self):
+         """Test using a collection referring to an entry in a mkimage entry"""
+         self._SetupSplElf()
+-        data = self._DoReadFile('247_mkimage_coll.dts')
++        data = self._DoReadFile('mkimage/coll.dts')
+         expect = U_BOOT_SPL_DATA + U_BOOT_DATA
+         self.assertEqual(expect, data[:len(expect)])
+ 
+@@ -6269,7 +6269,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test passing multiple files to mkimage in a mkimage entry"""
+         self._SetupSplElf()
+         self._SetupTplElf()
+-        data = self._DoReadFile('252_mkimage_mult_data.dts')
++        data = self._DoReadFile('mkimage/mult_data.dts')
+         # Size of files are packed in their 4B big-endian format
+         expect = struct.pack('>I', len(U_BOOT_TPL_DATA))
+         expect += struct.pack('>I', len(U_BOOT_SPL_DATA))
+@@ -6291,7 +6291,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             'spl-bss-pad': 'y',
+             'spl-dtb': 'y',
+         }
+-        data = self._DoReadFileDtb('252_mkimage_mult_data.dts',
++        data = self._DoReadFileDtb('mkimage/mult_data.dts',
+                                    use_expanded=True, entry_args=entry_args)[0]
+         pad_len = 10
+         tpl_expect = U_BOOT_TPL_DATA
+@@ -6320,14 +6320,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test passing multiple data files to mkimage with one data file having no content"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as exc:
+-            self._DoReadFile('253_mkimage_mult_no_content.dts')
++            self._DoReadFile('mkimage/mult_no_content.dts')
+         self.assertIn('Could not complete processing of contents',
+                       str(exc.exception))
+ 
+     def testMkimageFilename(self):
+         """Test using mkimage to build a binary with a filename"""
+         self._SetupSplElf()
+-        retcode = self._DoTestFile('254_mkimage_filename.dts')
++        retcode = self._DoTestFile('mkimage/filename.dts')
+         self.assertEqual(0, retcode)
+         fname = tools.get_output_filename('mkimage-test.bin')
+         self.assertTrue(os.path.exists(fname))
+@@ -6891,12 +6891,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkimageMissingBlobMultiple(self):
+         """Test missing blob with mkimage entry and multiple-data-files"""
+         with terminal.capture() as (stdout, stderr):
+-            self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=True)
++            self._DoTestFile('mkimage/missing_multiple.dts', allow_missing=True)
+         err = stderr.getvalue()
+         self.assertIn("is missing external blobs and is non-functional", err)
+ 
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=False)
++            self._DoTestFile('mkimage/missing_multiple.dts', allow_missing=False)
+         self.assertIn("not found in input path", str(e.exception))
+ 
+     def _PrepareSignEnv(self, dts='fit/sign.dts'):
+@@ -7002,7 +7002,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testMkimageSpecial(self):
+         """Test mkimage ignores special hash-1 node"""
+-        data = self._DoReadFile('283_mkimage_special.dts')
++        data = self._DoReadFile('mkimage/special.dts')
+ 
+         # Just check that the data appears in the file somewhere
+         self.assertIn(U_BOOT_DATA, data)
+@@ -7085,7 +7085,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkimageSymbols(self):
+         """Test using mkimage to build an image with symbols in it"""
+         self._SetupSplElf('u_boot_binman_syms')
+-        data = self._DoReadFile('290_mkimage_sym.dts')
++        data = self._DoReadFile('mkimage/sym.dts')
+ 
+         image = control.images['image']
+         entries = image.GetEntries()
+diff --git a/tools/binman/test/247_mkimage_coll.dts b/tools/binman/test/mkimage/coll.dts
 similarity index 100%
-rename from tools/binman/test/067_fmap.dts
-rename to tools/binman/test/cros/fmap.dts
-diff --git a/tools/binman/test/071_gbb.dts b/tools/binman/test/cros/gbb.dts
+rename from tools/binman/test/247_mkimage_coll.dts
+rename to tools/binman/test/mkimage/coll.dts
+diff --git a/tools/binman/test/254_mkimage_filename.dts b/tools/binman/test/mkimage/filename.dts
 similarity index 100%
-rename from tools/binman/test/071_gbb.dts
-rename to tools/binman/test/cros/gbb.dts
-diff --git a/tools/binman/test/073_gbb_no_size.dts b/tools/binman/test/cros/gbb_no_size.dts
+rename from tools/binman/test/254_mkimage_filename.dts
+rename to tools/binman/test/mkimage/filename.dts
+diff --git a/tools/binman/test/243_mkimage_image.dts b/tools/binman/test/mkimage/image.dts
 similarity index 100%
-rename from tools/binman/test/073_gbb_no_size.dts
-rename to tools/binman/test/cros/gbb_no_size.dts
-diff --git a/tools/binman/test/072_gbb_too_small.dts b/tools/binman/test/cros/gbb_too_small.dts
+rename from tools/binman/test/243_mkimage_image.dts
+rename to tools/binman/test/mkimage/image.dts
+diff --git a/tools/binman/test/245_mkimage_image_bad.dts b/tools/binman/test/mkimage/image_bad.dts
 similarity index 100%
-rename from tools/binman/test/072_gbb_too_small.dts
-rename to tools/binman/test/cros/gbb_too_small.dts
-diff --git a/tools/binman/test/074_vblock.dts b/tools/binman/test/cros/vblock.dts
+rename from tools/binman/test/245_mkimage_image_bad.dts
+rename to tools/binman/test/mkimage/image_bad.dts
+diff --git a/tools/binman/test/244_mkimage_image_no_content.dts b/tools/binman/test/mkimage/image_no_content.dts
 similarity index 100%
-rename from tools/binman/test/074_vblock.dts
-rename to tools/binman/test/cros/vblock.dts
-diff --git a/tools/binman/test/077_vblock_bad_entry.dts b/tools/binman/test/cros/vblock_bad_entry.dts
+rename from tools/binman/test/244_mkimage_image_no_content.dts
+rename to tools/binman/test/mkimage/image_no_content.dts
+diff --git a/tools/binman/test/229_mkimage_missing.dts b/tools/binman/test/mkimage/missing.dts
 similarity index 100%
-rename from tools/binman/test/077_vblock_bad_entry.dts
-rename to tools/binman/test/cros/vblock_bad_entry.dts
-diff --git a/tools/binman/test/076_vblock_bad_phandle.dts b/tools/binman/test/cros/vblock_bad_phandle.dts
+rename from tools/binman/test/229_mkimage_missing.dts
+rename to tools/binman/test/mkimage/missing.dts
+diff --git a/tools/binman/test/292_mkimage_missing_multiple.dts b/tools/binman/test/mkimage/missing_multiple.dts
 similarity index 100%
-rename from tools/binman/test/076_vblock_bad_phandle.dts
-rename to tools/binman/test/cros/vblock_bad_phandle.dts
-diff --git a/tools/binman/test/189_vblock_content.dts b/tools/binman/test/cros/vblock_content.dts
+rename from tools/binman/test/292_mkimage_missing_multiple.dts
+rename to tools/binman/test/mkimage/missing_multiple.dts
+diff --git a/tools/binman/test/156_mkimage.dts b/tools/binman/test/mkimage/mkimage.dts
 similarity index 100%
-rename from tools/binman/test/189_vblock_content.dts
-rename to tools/binman/test/cros/vblock_content.dts
-diff --git a/tools/binman/test/075_vblock_no_content.dts b/tools/binman/test/cros/vblock_no_content.dts
+rename from tools/binman/test/156_mkimage.dts
+rename to tools/binman/test/mkimage/mkimage.dts
+diff --git a/tools/binman/test/252_mkimage_mult_data.dts b/tools/binman/test/mkimage/mult_data.dts
 similarity index 100%
-rename from tools/binman/test/075_vblock_no_content.dts
-rename to tools/binman/test/cros/vblock_no_content.dts
+rename from tools/binman/test/252_mkimage_mult_data.dts
+rename to tools/binman/test/mkimage/mult_data.dts
+diff --git a/tools/binman/test/253_mkimage_mult_no_content.dts b/tools/binman/test/mkimage/mult_no_content.dts
+similarity index 100%
+rename from tools/binman/test/253_mkimage_mult_no_content.dts
+rename to tools/binman/test/mkimage/mult_no_content.dts
+diff --git a/tools/binman/test/242_mkimage_name.dts b/tools/binman/test/mkimage/name.dts
+similarity index 100%
+rename from tools/binman/test/242_mkimage_name.dts
+rename to tools/binman/test/mkimage/name.dts
+diff --git a/tools/binman/test/283_mkimage_special.dts b/tools/binman/test/mkimage/special.dts
+similarity index 100%
+rename from tools/binman/test/283_mkimage_special.dts
+rename to tools/binman/test/mkimage/special.dts
+diff --git a/tools/binman/test/290_mkimage_sym.dts b/tools/binman/test/mkimage/sym.dts
+similarity index 100%
+rename from tools/binman/test/290_mkimage_sym.dts
+rename to tools/binman/test/mkimage/sym.dts
 -- 
 2.43.0
 
