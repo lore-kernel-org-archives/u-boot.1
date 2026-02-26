@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A40CFC5913
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 09:27:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D94FC5913
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 09:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D27A483C54;
-	Thu, 26 Feb 2026 10:27:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6530583C54;
+	Thu, 26 Feb 2026 10:28:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="yO1kouFi";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JPynsObd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B3C383D1A; Thu, 26 Feb 2026 10:27:38 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170130001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10c::1])
+ id 6037D83E63; Thu, 26 Feb 2026 10:28:13 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DDFD83AA9
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 10:27:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4479583AA9
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 10:28:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=e/Vo5Gbk8BG3QEI1K2hYv9Vsqf1mUh5c4JYO4wNvJh7giClW0j13JZKHugNfzs26kpFBIdnTATcIfYxQvuFn25eNKf8J9mjFIniFCOFY37oft2z9m1SU25v3CSzvy2xjRQ7iUmR+LyGO1G3FZx8hQpUeZOPzK4ryENVvRc81lKxTl+s34/OgdO6R3IFpfmshXflEyii+m0ZhCaCG2lfnatEMLHi7NKwaTNTwG8IZZfsA5P9KPnt/UZn2O2RzMlaeJgSIGCJEQjiw9f3tYJLfTlAgExZg+rZ2ZxotgLZTPI9udbglE/emppWrGQkvA7ppAhvYMHsttoQE3c256+PfJQ==
+ b=Eq2kAqFz/l3Q/Vxi2dpSJvsr4xgyIVTPJMzirRmW7ygOVTY5SVliRYugYsh6xDyLNfOu3sRZhrpRkE5zgW+aMm4soKVy4IGmTs9+gi3u0AET3mEEYu5i1vjJkYVtJW7MOy9tO2wVdJb5RfMUXSVwvTpVqG9c3w+yrfoAApN+yCtpTEn0qljvZrQfxPBneLUB2c0w6IGrN2HgHu5Jdk7uls8zDfToY28LCnGu2r0PzBY1kPRXgb3GClnTN1MtYDTv4hWoh62EJ0EfPWzjJbkcygSN1RewKXtRJxFLWdfIlqH3pdThgB7WP0P+PL2vREFaGErSOxniKFCPbQ6MADhOFg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=R923tQwskncAiJ8zfj2uIm31aaXbfvyiZ/B/MuQwilU=;
- b=w27pTyLC+kBq50fNAQzjS1FQdHQoyMYn4Gq7I3CI/ScNFbKGW0Xre+TksPS7Jc+ZclS/RtXAzhR/5eET0E7Mc/Q4SdQB4LGmnBdJiUbmstIrrBczQA/Y1Wk8qHZRPr+EMTvcAAIkRXmdXzPHgDvu3GJD2QsiXuS5cwgGatkFuZ7rRCSkyqZZyJnaAFL1Ekydn1gDMNB4+5aRYHsfeM1FCtG2LiCg614OoDFZnnUl/qRPppErIY0w9cdVCpiYAaNW0wQHh0CvQT5xjGQMs4pSKycR0OElCH+SF8TdUIBDmA4mV+hpZcJepyokrUsjEWJDmd3QqLzQE503QuNUXcYOlA==
+ bh=wIAnn+n+myw8Qff168KzoPmwygpfuHzqB9BD8MDQr0s=;
+ b=oJOQyH70u7Ihvn+XzZ5XJXQ5/u/GxMTa+MSzjSNpbPc2gS5MiNPJYCOtbWldy9xAHijdz+9W2Fto7/+CyRI5v3j44uqqI3q9zbNnV8i7WtbgOnDHNg5PTPbQ3PaM7JwP1e6MerYjM0pc/h6L7ckcbpMGidxg0PBvKd/XZeszsN54BLXUI8p4ffdKdeWesRWtid5Et4SujOl+PcFTRacIJMz8K1gKe3RjDudcEqaxxxf0uTZ3yc06K0Z0UMTcCrBE7KYfQwE4uB+yUBl4wqeg2EN81qz2Ah1bTsiP/m2v94DizQupK2zpdpwNnwpLf3o12GXJIzVkS5TUmO1g1LtYWA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=R923tQwskncAiJ8zfj2uIm31aaXbfvyiZ/B/MuQwilU=;
- b=yO1kouFitL39TO/s1IaodnLvaZwBfdHPZFzDkCiEebBThU/Wt7vWsMcOiVhXumhv/ihPtHvJxYaJ0v5rUdF4WY7TiU0w7AvXorOwj0UpGbvAy2GOG6ZKZxQU4K8g8lRVzPWDrlQ3g1ZNjxluZXTxzBphAOCYBtUhe+VusuP9lAI=
-Received: from BN1PR13CA0022.namprd13.prod.outlook.com (2603:10b6:408:e2::27)
- by DM4PR12MB6616.namprd12.prod.outlook.com (2603:10b6:8:8e::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.25; Thu, 26 Feb
- 2026 09:27:30 +0000
-Received: from BN1PEPF0000468D.namprd05.prod.outlook.com
- (2603:10b6:408:e2:cafe::82) by BN1PR13CA0022.outlook.office365.com
- (2603:10b6:408:e2::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.0 via Frontend Transport; Thu,
- 26 Feb 2026 09:27:29 +0000
+ bh=wIAnn+n+myw8Qff168KzoPmwygpfuHzqB9BD8MDQr0s=;
+ b=JPynsObdDxNEANqwpYKcdjDHS9jqxPSgNHR3yf7F++AMH1YwIfWPXHXNxMQS/95GtOKD7eHmPoAj8Zp31fiChTYQ25HH59lrLhkceh/GXYRmAoGmItqmjDnndR/f5mc3QEUutU/AH4AF47L62YQ4E0Y4WH5F6KjNE0niOrVOvjc=
+Received: from BN9PR03CA0420.namprd03.prod.outlook.com (2603:10b6:408:111::35)
+ by LV8PR12MB9270.namprd12.prod.outlook.com (2603:10b6:408:205::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9632.21; Thu, 26 Feb
+ 2026 09:28:07 +0000
+Received: from BN1PEPF0000468E.namprd05.prod.outlook.com
+ (2603:10b6:408:111:cafe::5c) by BN9PR03CA0420.outlook.office365.com
+ (2603:10b6:408:111::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.26 via Frontend Transport; Thu,
+ 26 Feb 2026 09:28:13 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,73 +59,65 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
 Received: from satlexmb08.amd.com (165.204.84.17) by
- BN1PEPF0000468D.mail.protection.outlook.com (10.167.243.138) with Microsoft
+ BN1PEPF0000468E.mail.protection.outlook.com (10.167.243.139) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9632.12 via Frontend Transport; Thu, 26 Feb 2026 09:27:29 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by satlexmb08.amd.com
+ 15.20.9632.12 via Frontend Transport; Thu, 26 Feb 2026 09:28:07 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
  (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Thu, 26 Feb
- 2026 03:27:29 -0600
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 26 Feb
- 2026 03:27:27 -0600
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 26 Feb
+ 2026 03:28:05 -0600
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 26 Feb
+ 2026 01:28:04 -0800
 Received: from localhost (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Thu, 26 Feb 2026 03:27:27 -0600
+ Transport; Thu, 26 Feb 2026 03:28:04 -0600
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Hrushikesh Salunke <h-salunke@ti.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- "Simon Glass" <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>, Tien
- Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>, Ye Li
- <ye.li@nxp.com>
-Subject: [PATCH] spl: Remake SPL elf from bin
-Date: Thu, 26 Feb 2026 10:27:16 +0100
-Message-ID: <da5461e758daf9c39c59b644e9abbe49e746229c.1772098034.git.michal.simek@amd.com>
+CC: Padmarao Begari <padmarao.begari@amd.com>, Prasad Kummari
+ <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: versal2: Enable GIC600 support
+Date: Thu, 26 Feb 2026 10:28:01 +0100
+Message-ID: <e3135eee33282281572fbc960aa45b5d0f355158.1772098079.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2546; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=+21M5cp8EHptdoKkdzHd8TPTyxxigK5ohXghGl8AO3w=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQuEPxqrnd2W1BOg9zlrEqOZ1M3GN5bGi0SaFkrEfzsy
- NtdfRu/d5SyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEFh1h+F8U/kOmt08z6/vi
- suW7amZEifh8EZwy/17ekssX9B568jAw/PeuKOR2+bwrR8hNKP7r85d7esuZVoZtcvoVGLHDIGj
- +ZU4A
+X-Developer-Signature: v=1; a=openpgp-sha256; l=731; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=nYSIKzoEBe+k3kcnKI/pUyhGqy0aKcPBe8kBAFGiQ7I=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWQuEFIS58rgcnJ90WD3Nft7nHrunY9/16/MvJqy6Jigu
+ 3+Ygp5iRykLgxgHg6yYIst0Jh2HNd+uLRVbHpkPM4eVCWQIAxenAEzkWRvDP02rSWtqqxhWhSrN
+ 0MqRvlZi7Sjz9MSWb+3H321hVzKQ0mFk2LvzQy/3yZDynhO31sq0LeqWVTvDZCM3v5ZD755Jlfl
+ kfgA=
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF0000468D:EE_|DM4PR12MB6616:EE_
-X-MS-Office365-Filtering-Correlation-Id: 25414aef-4d9d-4d10-38fe-08de75194354
+X-MS-TrafficTypeDiagnostic: BN1PEPF0000468E:EE_|LV8PR12MB9270:EE_
+X-MS-Office365-Filtering-Correlation-Id: a5bb4d3f-4856-4ef4-5348-08de751959a4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: WDAPsnR72tolV7YJ7ps3YX0NC9f32WrFAA12Am2Ags93Yqj0C+Ybcmyts6AErg7NEV6+GSgrDw5VTXl5wFA4yQvWKNvVMBoNDc4Cwcd5k2jKELEMF6D4vbPqxpc4qF82mFA3XbsPNgU5WOruVHjBV3R8++Zg5tENq9yk6DKfk5k/xEXfjbZgPkfvCdF5l+BC3s0RJgjiQnMfDgDlYn2McgEsKXNbhlTyd32yiS1SMPExXl9wbAqHqOvtMKkN01kUkbojwkdVzXG1krs9j3v1GVmQySPstYjvvzgS1ljx2pjtE3TlpCeLZe6M7U/FBdVqtQ7cVcBmTwxYp870cIl7xp29t9wER/kcf7eRaGgR4VIfZm6qwxmR32ysg9BuZtTkzzuhAeot3/7JBsnajBp3X2RuWrnmdF2O2aoU088QXz4ajMW1jXWy3rDzEVHv+tmqT/EjYtRzsGz7pXsBLGjA7se/iTZXYUCO6JPb+Mvj7XfjUK+7hVuDVE/krvQHUSZiLTBZMpn/UvNyOngFDPGKxjPbqG7EPSlaQPObcNEjf1SKe7U25SusrKdEHQIzOKu+KgIQcgf0W1pJDgfGfxXk0X5pM7zrsiGl0B+LD/yViCUGeRmctoHLhSgZCAEBFF08WZcm5N6S4xp3nRv82TT0SnIXSwjeDYZGlb1+p2KlvFHa3YjZ+TigERcZ9lGQiFOrfVa+zlq/vg749pDWVUReFEPx169WrHnnw92E40TzNIgXw1qSS6oQVuQ8cuJn07TFVyXOOLjMAZ1FU9RV0KuOV7zf8mGYbDjQmonXmlTcrmj4xXquBeoyxsQiRe/ungqBZn9IpFQXSZxj5Jkp5svBZQ==
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: CVORcUGCaLKih5wg4rtBGguMJipTic9WJNZoi5XIzt1bLT4A7tM/owXYrTl53UUvv8Jv8Ef1RBE0TY2yI6JDfrpqFFNwkRPmnMWIpwW6/5bCoqb12Mo2Gox7AF1B8CACp4kL+32bnlyiFQWz1O7MA2A2sWyWJ+hkblhHqu6YkiBij+4jCB8HTutxLBHmnBFXIChVWmSEQ0g+ge+cba4zVAoIUWcRD7SPA5GUpY3YvSjojyiyz9IKs/EFsoOVwahK9ZWjCmmpXjWahvJQhEfDVFzMBgyArkBGb0N0DUYlo1e0W5KGfOoUBADJRCEbmuHVxXWTc20gRbsHi9qRrmeBu1oAJ9iCsbv6fmvPDZOp/1l4h1sSDWDbDvzSNFFdR3GthqnQYqUS6NyKRgvPz17QknWIVN1sQt52Q4xR43Z//+nsB6T+dQdATPCH/aKKdzc9ptyJCIYfAL/ZQmOXQu74sLlmrxt3F5qUHHlvUtf0aJ5eavue62mIfw5d5KQxfkeY66EztnV6D7UOCgOrtbgcvNtJ/pCgykUxK6mpHQkAItcgjDOV1heWf08eFPoNOJOFui0jq8uzBNrN4W4bfngBXK0v0+MAHVQFkGXDnADKfSO2N7vqIgHLm0tHjFCNyRMwVayvrDtDRIHWvXbr5JGgT/U9RVdUysyF8KO8fzFMm2qwN3oTMXhIPUtsZ27q1aIr5JOkFkvMxxaF4SHcnhwlsnFtgxqBBZsLJ9YI2kGvNOulk6D0CS7+UCRKPz51azUth8aKy6jR0cOZSk0lA8XfUO646f9jxoYoI0wjFxqnodzvCasTpN4YjUeQpgMFiUzTL+idFq4+uGpDMttACokbJg==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: SWkCFslfZDWDB2vWq1yFtH2AJnZW0uDrGNPlfv+JDynA98gRSeWaFIWjOsPtUcA+q+qNlh9xarbaSrCRdRITnkXVAlkh+90lFoJzIMDqq/JoolzPkBp412P9hmGpY8nK8RQYHPkeKSJbA3EG6BkuUFpeeicFQtMSFEQWHIPtxy0TTTS+nTpMopeja9RibONZ7sjZCfs43l2Rf/e/D9+ULyA0qHozo0c1EaHZJys1DOTm2z2TplEeaTAGJHDVpEeOkv4qhpQv3vAQqCOvK7F3Q2Xhrr4zsJt2zB/CBYi/VIBtk7V0CwEEiXv/EA/rGRlqJEwPNnL8qtBn5alEnaA9X4g3i48NCSIDwnd4bQT08qXEBORmad/qTGUvrsjBCuHCYRuZJo0iPQrEfDhx76wKavMDIL2zHmEk67HlPQAAhU4mqEPKNcpIaTvtE9+n1d/y
+X-MS-Exchange-AntiSpam-MessageData-0: Wcvpzff2ppn3lBTqm5WKfsQLdh76YhqhTFAPaRrdxVRZA2vN8X49ez3RueoDXV71k629Yo+0AyYTNc76hc8niCEkDbtOyL8X1vMbwIGOA7Apji87Z3bqYfFCyzAH8erP6gzahqWJZ4dEJf4eCYsxcCavvMqDQ9OsSe146ILN2JboZHdPWdYHPhMbPzG61GQlViAdBIgeiBQdzt4OEnz9jMX9uSjXV0mgYFr/PQ4MlVY4OaRSGYq+yFhixS/G+vvbqW/v5uq89DUQzND3/yDmczbvSBKTUcavoQS/1BnYAHsE0XTtV7mQjZI6byOaesVC8KtRQ1OSbyk9ZePAsdU5zPxOYP8h77moQIvm9gtP5rMfuladkuJDNNseWheYVtMegWw6Rxa2wTncLfWh3AocG8/Pv7/hOocVScVUVc22Y7V0jW777TxlkOeo+kez2KI0
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 09:27:29.6993 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25414aef-4d9d-4d10-38fe-08de75194354
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 09:28:07.1311 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a5bb4d3f-4856-4ef4-5348-08de751959a4
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF0000468D.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF0000468E.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6616
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9270
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,70 +134,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Xilinx MB-V there is a need to use ELF file for SPL which is placed
-in BRAM (Block RAM) because tools for placing code to bitstream requires to
-use ELF. That's why introduce SPL_REMAKE_ELF similar to REMAKE_ELF option
-as was originally done by commit f4dc714aaa2d ("arm64: Turn u-boot.bin back
-into an ELF file after relocate-rela").
+From: Padmarao Begari <padmarao.begari@amd.com>
 
-There is already generic and simple linker script (arch/u-boot-elf.lds)
-which can be also used without any modification.
+Add and enable the GIC600 support configuration by default for
+Versal Gen 2.
 
+Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- Makefile           | 10 ++++++++++
- common/spl/Kconfig |  7 +++++++
- 2 files changed, 17 insertions(+)
+ arch/arm/mach-versal2/Kconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index d5ae954f3133..4d83f844ac9b 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1231,6 +1231,7 @@ ifneq ($(CONFIG_SPL_TARGET),)
- INPUTS-$(CONFIG_SPL) += $(CONFIG_SPL_TARGET:"%"=%)
- endif
- INPUTS-$(CONFIG_REMAKE_ELF) += u-boot.elf
-+INPUTS-$(CONFIG_SPL_REMAKE_ELF) += spl/u-boot-spl.elf
- INPUTS-$(CONFIG_EFI_APP) += u-boot-app.efi
- INPUTS-$(CONFIG_EFI_STUB) += u-boot-payload.efi
+diff --git a/arch/arm/mach-versal2/Kconfig b/arch/arm/mach-versal2/Kconfig
+index 2a595151d6fa..d1d8cbb815f6 100644
+--- a/arch/arm/mach-versal2/Kconfig
++++ b/arch/arm/mach-versal2/Kconfig
+@@ -43,6 +43,9 @@ config SYS_MEM_RSVD_FOR_MMU
+ config GICV3
+ 	def_bool y
  
-@@ -2001,6 +2002,15 @@ u-boot.elf: u-boot.bin u-boot-elf.lds FORCE
- 	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< u-boot-elf.o
- 	$(call if_changed,u-boot-elf)
- 
-+quiet_cmd_u-boot-spl-elf ?= LD      $@
-+	cmd_u-boot-spl-elf ?= $(LD) spl/u-boot-spl-elf.o -o $@ \
-+	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
-+	-T u-boot-elf.lds --defsym=$(CONFIG_PLATFORM_ELFENTRY)=$(CONFIG_SPL_TEXT_BASE) \
-+	-Ttext=$(CONFIG_SPL_TEXT_BASE)
-+spl/u-boot-spl.elf: spl/u-boot-spl.bin u-boot-elf.lds
-+	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< spl/u-boot-spl-elf.o
-+	$(call if_changed,u-boot-spl-elf)
++config GICV3_SUPPORT_GIC600
++	def_bool y
 +
- u-boot-elf.lds: arch/u-boot-elf.lds prepare FORCE
- 	$(call if_changed_dep,cpp_lds)
+ config SYS_MALLOC_LEN
+ 	default 0x2000000
  
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 996c9b8db4f8..0ee463d29705 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -707,6 +707,13 @@ config SPL_DRIVERS_MISC
- 	  option to build the drivers in drivers/misc as part of an SPL
- 	  build, for those that support building in SPL (not all drivers do).
- 
-+config SPL_REMAKE_ELF
-+	bool "Recreate an ELF image from raw SPL binary"
-+	help
-+	  Enable this to recreate an ELF image (spl/u-boot-spl.elf) from the raw
-+	  SPL binary (spl/u-boot-spl.bin), which may already have been statically
-+	  relocated and may already have a device-tree appended to it.
-+
- config SPL_ENV_SUPPORT
- 	bool "Support an environment"
- 	help
 -- 
 2.43.0
 
-base-commit: 421159c60e64fe1ab123f0f997951670a2701a65
+base-commit: da5461e758daf9c39c59b644e9abbe49e746229c
 branch: debian-sent3
