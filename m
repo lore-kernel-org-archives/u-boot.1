@@ -4,89 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5470FD9E25
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 617CDFD9E1E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66F1D83D1A;
-	Fri, 27 Feb 2026 00:48:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F02D283EDF;
+	Fri, 27 Feb 2026 00:48:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BnYsQL4+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ecjGXcrs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8848983E81; Fri, 27 Feb 2026 00:48:19 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id BF72C83F0A; Fri, 27 Feb 2026 00:48:36 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE80F83642
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:48:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DD6683EC8
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:48:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-8cb4136d865so173295485a.1
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:48:15 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-8cb4acdacb2so169831985a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:48:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772149694; x=1772754494; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7S9zVH+KmhptZXCwsHik0WHrjxKoxM8x6T0nEblmN7I=;
- b=BnYsQL4+TVSp/r2NL/hsvD8NqifNVNKMSzbE1ZLS3WcMMoln/JUSEGJH9q+hPM3ubH
- 0EgRXwvZbKsQ/4RyumGj9XhThnfrwmoNABRXK0DsgTv64b99HGbAOJPzL2BnmzotTx7B
- 591fTqRcBLKUAuZxrhbQ8DrTdcq+Jljv+Rgig=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149694; x=1772754494;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1772149711; x=1772754511; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7S9zVH+KmhptZXCwsHik0WHrjxKoxM8x6T0nEblmN7I=;
- b=U8GOrMJnGQ7elEwa69/LQ8GllkZinMDPDHEmevcu+/Bycj4jxYtcYnnXlll/zx/xwi
- e6b+e+gSsVwM+CBd9R+yMOHH0znWuxLMGMduf44rr/yHB3pR36hJGGTedWbfc6EtkcD1
- mg3CPkIAqJeM99xL6KZaR46QPrwXEV5OQFHkKMG8sXgRUppXvxFlCDh6HpXbsfeIbQz7
- 0QzBXGxpBBDILulj/ql5PKNHviTHBsVeAPewcnC2o02J0T4Q8U/QkU1zpSs0KP6W4Vrd
- wb/X+CttA2s/l7IGJeLeVTk+by+rFlQU8q9uP0Ei9OzfbAA83zrI5qR79t0SK+W1EnnI
- D3zA==
-X-Gm-Message-State: AOJu0YxuHe3H67ViJlQwltqKP0x2GOH6Q4h57B9Wq0ezgzl0mezgS1cS
- Sk8VwMlhmNoyuGRbIkzcDmd/hSM1Pwvpd9CRAGLyMm7XY/DvTMSBG83R/Xdyzs+v2knjTFFDN0k
- eQgE=
-X-Gm-Gg: ATEYQzzO4Yzf3SdJgUlv550ebJLD9lvAX0jbrG9fkRg+TKXxesKs0c2swOLyQ+osezF
- KiagIZYhLrWslMZfIUbdZW2tU5syfamPFJVxARTAl7utffq6RhYwJxApPMtQNkbwc2xSuPjt3Bj
- bTcFczuIvZ2dfw4SBuz0xhNVgqIPdMXNDY/A2Z7TU/jdhVNzxnmaNVKp7Zpb1jtXHV/LeWSCxMA
- jEBv8zHh35nebw8LihQzzdJxJO+/dGtXHoP/9m2qlLAelpYhG7yLR2OpxKufCnU7C0rBkuu8Qld
- AMNtRhfMfj//zGjWYvV06kSthXDCGB9WjThgrUyPJ62HlspCHbqPVlgbSxhkQ3nqPOh+HJuIg5R
- JJ7Dk6Q87GjvNpCZgeJpecUT36pNts/GN4LripEkbk89oO3HGg/FTwIzRhdb4ha/w9K9HdF4Vst
- LfK5gQmUDuTr9qxR7GSw==
-X-Received: by 2002:a05:620a:44c4:b0:8c6:3c46:a1b6 with SMTP id
- af79cd13be357-8cbc8dc417cmr128646285a.3.1772149693714; 
- Thu, 26 Feb 2026 15:48:13 -0800 (PST)
+ bh=00JrEfDfiekCKvWIjsfzJuxEPlomKqNdZuUpLnsSGTM=;
+ b=ecjGXcrsBR2YUezyadg7/HxeDPawVadQ3G67N2YYFEW0oXKfUSwLV7BDUMLISGpfbU
+ /B960039+7ilyJseWllVwB6dRc379dnkvc+d77jBjDkCMN0n1pqH7DPKmC2Fu8tvIpOx
+ eson9ctHjPDEMa/EqK7Po6r4tpbm0PUopqP1w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772149711; x=1772754511;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=00JrEfDfiekCKvWIjsfzJuxEPlomKqNdZuUpLnsSGTM=;
+ b=AR4xymIWI12Nt9IafrcEJX/yOPw6/upM/rmPr521aavqDSkcDhV071XeNncdusAX1D
+ 5s7gFTe0o5ocZDhbJBt9RP4g9BS9nQRWfSDgrqLCQl9Otvfwi2pqXhltBbhvYFUaDgxa
+ 4xPXNUFxHGqZBEynA6iFxjs1jjWcnNwlRMXzIdSTceRKxv6f0IZt7bpCYIfK1UQEZCyp
+ mqkPg15O3fZ+ccRZy7gdX0FaVNTgx4AuUS4bWLeV3uVeSP5bg4tcYrW429ihd4otSnHC
+ DvlKkRphWWW0ecIfOPoCKCtYOKedMnmpoylkE/zj+HRnQAi+wJvXet+zPfwHyRj4ZmF6
+ 6VQw==
+X-Gm-Message-State: AOJu0YzHKSi75ELmR16qcRPzYmbGsrw2yTLrkA8DT7NaS+jlX4w0A4rt
+ nlV5ryJUfpWhzKDONoduSNGGhSfabgaaJfozNn9vQusSxOFjJ1GoOLEE1LWTzp5WI18k/x3wRJ1
+ 0VM4=
+X-Gm-Gg: ATEYQzzNKR6jB7sqV5fhjXCqO4O9hph8LwQ4AN5mjqTaioOh0NN38O2hoGQXDvlWxCs
+ rqL8Fslz10ivhjPaapXvo/4Wjz5HumEOHOQUiCgm1H9ceP+8rUuPsOykBY1OgLch8QtzpGYiduV
+ PBwSlOT3kGQ6Gu3AYxMru/IAJNU/J/p1ESjzUWkXIpM9MnKx/5Dif6yYDhga4O2oPd+Y9dGSBZw
+ cVvZRDFkfRZL5ad+cME7rsRhOS4pQSXKbBW2CUdhn8rTJ1CFo6I5CE/lLp6T1/cFHmm+1PR23hr
+ G3j/V1lLnrpjN/rbmqRtNKwmlupcDSDPUy2bg+cvCNEqWuNfzoD5bfUZzOhlMGDJiVDEGK1rxim
+ iqsBDiDJg7+PCvG+cEOqrzVjbF4JVttZEnbyTgyLnk35Hq/HHj5nm2hEWucZdW8PjYZSRhnH5/b
+ Fz7z9lMXL3KFMuS9SFug==
+X-Received: by 2002:a05:620a:4496:b0:8bb:ac44:bd3c with SMTP id
+ af79cd13be357-8cbc8df0937mr105597285a.52.1772149710424; 
+ Thu, 26 Feb 2026 15:48:30 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.11
+ af79cd13be357-8cbbf68a0fbsm322024385a.22.2026.02.26.15.48.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 15:48:13 -0800 (PST)
+ Thu, 26 Feb 2026 15:48:29 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <simon.glass@canonical.com>, Alice Guo <alice.guo@nxp.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>, Moteen Shah <m-shah@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Simon Glass <simon.glass@canonical.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [RFC PATCH 00/16] binman: test: Organise test files into
- subdirectories
-Date: Thu, 26 Feb 2026 16:47:40 -0700
-Message-ID: <20260226234802.345968-1-sjg@chromium.org>
+Subject: [RFC PATCH 01/16] binman: test: Move pack/layout test files to
+ test/pack/
+Date: Thu, 26 Feb 2026 16:47:41 -0700
+Message-ID: <20260226234802.345968-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260226234802.345968-1-sjg@chromium.org>
+References: <20260226234802.345968-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,246 +103,17 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-There are about 350 numbered .dts test files in tools/binman/test/ and
-we sometimes have trouble with numbers being reused.
+Move about 50 test files related to basic layout, packing, alignment,
+sections, and image structure into a pack/ subdirectory. Drop the
+numeric prefixes from the filenames and update all references in
+ftest.py, entry_test.py, and binman_tests.rst
 
-As an alternative approach, this series moves the files into thematic
-subdirectories, without the numeric prefixes. This means it's no-longer
-possible to simply type a three-digit number to get the right file, but
-the names are shorter so it is still easy enough.
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+---
 
-The subdirectories chosen are: blob, capsule, cbfs, cros, entry, fdt,
-fip, fit, mkimage, pack, security, symbols, vendor, x86, and xpl.
-
-
-Simon Glass (16):
-  binman: test: Move pack/layout test files to test/pack/
-  binman: test: Move U-Boot variant test files to test/xpl/
-  binman: test: Move x86 and Intel test files to test/x86/
-  binman: test: Move FIT image test files to test/fit/
-  binman: test: Move FDT/fdtmap test files to test/fdt/
-  binman: test: Move blob test files to test/blob/
-  binman: test: Move security test files to test/security/
-  binman: test: Move CBFS test files to test/cbfs/
-  binman: test: Move ChromeOS test files to test/cros/
-  binman: test: Move mkimage test files to test/mkimage/
-  binman: test: Move FIP/TF-A test files to test/fip/
-  binman: test: Move UEFI capsule test files to test/capsule/
-  binman: test: Move vendor-specific test files to test/vendor/
-  binman: test: Move symbol test files to test/symbols/
-  binman: test: Move remaining test files to test/entry/
-  binman: doc: Update binman_tests.rst for subdirectory layout
-
- doc/develop/binman_tests.rst                  |  25 +-
+ doc/develop/binman_tests.rst                  |   2 +-
  tools/binman/entry_test.py                    |   2 +-
- tools/binman/fdt_test.py                      |   4 +-
- tools/binman/ftest.py                         | 924 +++++++++---------
- .../test/{023_blob.dts => blob/blob.dts}      |   0
- .../test/{157_blob_ext.dts => blob/ext.dts}   |   0
- .../ext_list.dts}                             |   0
- .../ext_list_fake.dts}                        |   0
- .../ext_list_missing.dts}                     |   0
- .../ext_missing.dts}                          |   0
- .../ext_missing_sect.dts}                     |   0
- .../ext_opt.dts}                              |   0
- .../test/{217_fake_blob.dts => blob/fake.dts} |   0
- .../missing.dts}                              |   0
- .../named_by_arg.dts}                         |   0
- .../{273_blob_symbol.dts => blob/symbol.dts}  |   0
- .../accept.dts}                               |   0
- .../accept_missing_guid.dts}                  |   0
- .../accept_revert_missing.dts}                |   0
- .../{311_capsule.dts => capsule/capsule.dts}  |   0
- .../empty_type_missing.dts}                   |   0
- .../missing_guid.dts}                         |   0
- .../missing_index.dts}                        |   0
- .../missing_key.dts}                          |   0
- .../oemflags.dts}                             |   0
- .../revert.dts}                               |   0
- .../signed.dts}                               |   0
- .../signed_ver.dts}                           |   0
- .../version.dts}                              |   0
- .../bad_arch.dts}                             |   0
- .../bad_compress.dts}                         |   0
- .../bad_type.dts}                             |   0
- .../test/{110_cbfs_name.dts => cbfs/name.dts} |   0
- .../no_contents.dts}                          |   0
- .../no_size.dts}                              |   0
- .../{114_cbfs_offset.dts => cbfs/offset.dts}  |   0
- .../test/{102_cbfs_raw.dts => cbfs/raw.dts}   |   0
- .../raw_compress.dts}                         |   0
- .../raw_ppc.dts}                              |   0
- .../replace.dts}                              |   0
- .../{104_cbfs_stage.dts => cbfs/stage.dts}    |   0
- .../{125_cbfs_update.dts => cbfs/update.dts}  |   0
- .../test/{067_fmap.dts => cros/fmap.dts}      |   0
- .../binman/test/{071_gbb.dts => cros/gbb.dts} |   0
- .../gbb_no_size.dts}                          |   0
- .../gbb_too_small.dts}                        |   0
- .../test/{074_vblock.dts => cros/vblock.dts}  |   0
- .../vblock_bad_entry.dts}                     |   0
- .../vblock_bad_phandle.dts}                   |   0
- .../vblock_content.dts}                       |   0
- .../vblock_no_content.dts}                    |   0
- .../test/{262_absent.dts => entry/absent.dts} |   0
- .../collection.dts}                           |   0
- .../collection_other.dts}                     |   0
- .../collection_section.dts}                   |   0
- .../{083_compress.dts => entry/compress.dts}  |   0
- .../compress_extra.dts}                       |   0
- .../compress_image.dts}                       |   0
- .../compress_image_less.dts}                  |   0
- .../compress_section.dts}                     |   0
- .../compress_section_size.dts}                |   0
- .../test/{096_elf.dts => entry/elf.dts}       |   0
- .../elf_strip.dts}                            |   0
- .../entry_args.dts}                           |   0
- .../entry_args_missing.dts}                   |   0
- .../entry_args_required.dts}                  |   0
- .../entry_args_unknown_datatype.dts}          |   0
- .../test/{174_env.dts => entry/env.dts}       |   0
- .../env_no_size.dts}                          |   0
- .../env_too_small.dts}                        |   0
- .../test/{084_files.dts => entry/files.dts}   |   0
- .../files_align.dts}                          |   0
- .../files_compress.dts}                       |   0
- .../files_no_pattern.dts}                     |   0
- .../files_none.dts}                           |   0
- .../test/{069_fill.dts => entry/fill.dts}     |   0
- .../fill_empty.dts}                           |   0
- .../fill_no_size.dts}                         |   0
- .../image_entryarg.dts}                       |   0
- .../test/{127_list.dts => entry/list.dts}     |   0
- .../name_prefix.dts}                          |   0
- .../test/{268_null.dts => entry/null.dts}     |   0
- .../offset_from_elf.dts}                      |   0
- .../{269_overlap.dts => entry/overlap.dts}    |   0
- .../overlap_bad.dts}                          |   0
- .../overlap_no_size.dts}                      |   0
- .../overlap_null.dts}                         |   0
- .../prop_test.dts}                            |   0
- .../read_image_skip.dts}                      |   0
- .../remove_template.dts}                      |   0
- .../{132_replace.dts => entry/replace.dts}    |   0
- .../replace_all.dts}                          |   0
- .../replace_multi.dts}                        |   0
- .../replace_repack.dts}                       |   0
- .../replace_section_deep.dts}                 |   0
- .../replace_section_simple.dts}               |   0
- .../replace_with_bintool.dts}                 |   0
- .../section_fname.dts}                        |   0
- .../section_timeout.dts}                      |   0
- .../{055_sections.dts => entry/sections.dts}  |   0
- .../{259_symlink.dts => entry/symlink.dts}    |   0
- .../test/{222_tee_os.dts => entry/tee_os.dts} |   0
- .../tee_os_opt.dts}                           |   0
- .../{286_template.dts => entry/template.dts}  |   0
- .../template_multi.dts}                       |   0
- .../template_phandle.dts}                     |   0
- .../template_phandle_dup.dts}                 |   0
- .../template_section.dts}                     |   0
- .../test/{066_text.dts => entry/text.dts}     |   0
- .../unique_names.dts}                         |   0
- .../unique_names_multi.dts}                   |   0
- .../unknown_contents.dts}                     |   0
- .../unknown_pos_size.dts}                     |   0
- .../alternates_fdt.dts}                       |   0
- .../alternates_fdtgrep.dts}                   |   0
- .../alternates_inval.dts}                     |   0
- .../alternates_spl.dts}                       |   0
- .../alternates_vpl.dts}                       |   0
- .../bootph_prop.dts}                          |   0
- .../compress_dtb.dts}                         |   0
- .../compress_dtb_invalid.dts}                 |   0
- .../compress_dtb_prepend_invalid.dts}         |   0
- .../compress_dtb_prepend_length.dts}          |   0
- .../compress_dtb_zstd.dts}                    |   0
- .../decode_image.dts}                         |   0
- .../decode_image_nohdr.dts}                   |   0
- .../test/{115_fdtmap.dts => fdt/fdtmap.dts}   |   0
- .../fdtmap_alt_format.dts}                    |   0
- .../fdtmap_hdr.dts}                           |   0
- .../fdtmap_hdr_endbad.dts}                    |   0
- .../fdtmap_hdr_middle.dts}                    |   0
- .../fdtmap_hdr_missing.dts}                   |   0
- .../fdtmap_hdr_nosize.dts}                    |   0
- .../fdtmap_hdr_pos.dts}                       |   0
- .../fdtmap_hdr_start.dts}                     |   0
- .../fdtmap_hdr_startbad.dts}                  |   0
- .../hdr_no_location.dts}                      |   0
- .../test/{194_fdt_incl.dts => fdt/incl.dts}   |   0
- .../incl_tpl.dts}                             |   0
- .../incl_vpl.dts}                             |   0
- .../list_fdtmap.dts}                          |   0
- .../no_alt_format.dts}                        |   0
- .../{060_fdt_update.dts => fdt/update.dts}    |   0
- .../update_all.dts}                           |   0
- .../update_all_repack.dts}                    |   0
- .../update_bad.dts}                           |   0
- .../{169_atf_bl31.dts => fip/atf_bl31.dts}    |   0
- .../bad_align.dts}                            |   0
- .../binman/test/{354_bl1.dts => fip/bl1.dts}  |   0
- .../collection.dts}                           |   0
- .../binman/test/{203_fip.dts => fip/fip.dts}  |   0
- .../test/{207_fip_ls.dts => fip/ls.dts}       |   0
- .../{209_fip_missing.dts => fip/missing.dts}  |   0
- .../{205_fip_no_type.dts => fip/no_type.dts}  |   0
- .../test/{201_opensbi.dts => fip/opensbi.dts} |   0
- .../test/{204_fip_other.dts => fip/other.dts} |   0
- .../{208_fip_replace.dts => fip/replace.dts}  |   0
- .../binman/test/{172_scp.dts => fip/scp.dts}  |   0
- .../test/{210_fip_size.dts => fip/size.dts}   |   0
- .../test/{206_fip_uuid.dts => fip/uuid.dts}   |   0
- .../test/{275_fit_align.dts => fit/align.dts} |   0
- .../{227_fit_bad_dir.dts => fit/bad_dir.dts}  |   2 +-
- .../bad_dir_config.dts}                       |   2 +-
- .../bad_oper.dts}                             |   0
- .../encrypt_data.dts}                         |   0
- .../encrypt_data_no_key.dts}                  |   0
- .../external.dts}                             |   0
- .../extract_replace.dts}                      |   0
- .../test/{170_fit_fdt.dts => fit/fdt.dts}     |   0
- .../fdt_compat.dts}                           |   0
- .../{333_fit_fdt_dir.dts => fit/fdt_dir.dts}  |   0
- .../fdt_list.dts}                             |   0
- .../fdt_missing_prop.dts}                     |   0
- .../fdt_name.dts}                             |   0
- .../fdt_oper.dts}                             |   0
- .../fdt_phase.dts}                            |   0
- .../firmware_loadables.dts}                   |   0
- .../binman/test/{161_fit.dts => fit/fit.dts}  |   0
- .../{219_fit_gennode.dts => fit/gennode.dts}  |   0
- .../image_subentry_alignment.dts}             |   0
- .../key_name_hint_dir_signature.dts}          |   0
- .../missing_blob.dts}                         |   0
- .../replace_sibling.dts}                      |   0
- .../test/{280_fit_sign.dts => fit/sign.dts}   |   0
- .../signature.dts}                            |   0
- .../signature_engine.dts}                     |   0
- .../signature_engine_encrypt.dts}             |   0
- .../signature_engine_pkcs11.dts}              |   0
- .../signature_engine_pkcs11_object.dts}       |   0
- .../signature_multi_key.dts}                  |   0
- .../signature_no_nodes.dts}                   |   0
- .../split_elf.dts}                            |   0
- .../subentry_bintool.dts}                     |   0
- .../subentry_hash.dts}                        |   0
- .../tee_os_opt.dts}                           |   0
- .../tee_os_opt_bad.dts}                       |   0
- .../template.dts}                             |   0
- .../coll.dts}                                 |   0
- .../filename.dts}                             |   0
- .../image.dts}                                |   0
- .../image_bad.dts}                            |   0
- .../image_no_content.dts}                     |   0
- .../missing.dts}                              |   0
- .../missing_multiple.dts}                     |   0
- .../{156_mkimage.dts => mkimage/mkimage.dts}  |   0
- .../mult_data.dts}                            |   0
- .../mult_no_content.dts}                      |   0
- .../name.dts}                                 |   0
- .../special.dts}                              |   0
- .../{290_mkimage_sym.dts => mkimage/sym.dts}  |   0
+ tools/binman/ftest.py                         | 120 +++++++++---------
  .../4gb_and_skip_at_start_together.dts}       |   0
  .../align_default.dts}                        |   0
  .../assume_size.dts}                          |   0
@@ -397,320 +164,7 @@ Simon Glass (16):
  .../test/{024_sorted.dts => pack/sorted.dts}  |   0
  .../unit_address.dts}                         |   0
  .../{079_uses_pos.dts => pack/uses_pos.dts}   |   0
- .../encrypted_invalid_iv_file.dts}            |   0
- .../encrypted_key_file.dts}                   |   0
- .../encrypted_key_source.dts}                 |   0
- .../encrypted_missing_key.dts}                |   0
- .../encrypted_no_algo.dts}                    |   0
- .../test/{090_hash.dts => security/hash.dts}  |   0
- .../hash_bad_algo.dts}                        |   0
- .../hash_no_algo.dts}                         |   0
- .../hash_section.dts}                         |   0
- .../key_name_hint_dir_spl_pubkey_dtb.dts}     |   0
- .../pre_load.dts}                             |   0
- .../pre_load_invalid_algo.dts}                |   0
- .../pre_load_invalid_key.dts}                 |   0
- .../pre_load_invalid_padding.dts}             |   0
- .../pre_load_invalid_sha.dts}                 |   0
- .../pre_load_pkcs.dts}                        |   0
- .../pre_load_pss.dts}                         |   0
- .../section_ignore_hash_signature.dts}        |   0
- .../sign_non_fit.dts}                         |   0
- .../spl_pubkey_dtb.dts}                       |   0
- .../x509_cert.dts}                            |   0
- .../xilinx_bootgen_sign.dts}                  |   0
- .../xilinx_bootgen_sign_enc.dts}              |   0
- .../base.dts}                                 |   0
- .../base_expand.dts}                          |   0
- .../comp.dts}                                 |   0
- .../disable.dts}                              |   0
- .../{260_symbols_elf.dts => symbols/elf.dts}  |   0
- .../expand.dts}                               |   0
- .../nodtb.dts}                                |   0
- .../{187_symbols_sub.dts => symbols/sub.dts}  |   0
- .../{053_symbols.dts => symbols/symbols.dts}  |   0
- .../{149_symbols_tpl.dts => symbols/tpl.dts}  |   0
- .../nxp_ddrfw_imx95.dts}                      |   0
- .../{339_nxp_imx8.dts => vendor/nxp_imx8.dts} |   0
- .../nxp_imx8_csf.dts}                         |   0
- .../nxp_imx8_csf_fast_auth.dts}               |   0
- .../nxp_imx8_imagename.dts}                   |   0
- .../nxp_imx95.dts}                            |   0
- .../powerpc_mpc85xx_bootpg_resetvec.dts}      |   0
- .../renesas_rcar4_sa0.dts}                    |   0
- .../renesas_rcar4_sa0_size.dts}               |   0
- .../rockchip_tpl.dts}                         |   0
- .../ti_board_cfg.dts}                         |   0
- .../ti_board_cfg_combined.dts}                |   0
- .../ti_board_cfg_no_type.dts}                 |   0
- .../ti_board_cfg_phony.dts}                   |   0
- .../test/{351_ti_dm.dts => vendor/ti_dm.dts}  |   0
- .../ti_secure.dts}                            |   0
- .../ti_secure_firewall.dts}                   |   0
- .../ti_secure_firewall_missing_property.dts}  |   0
- .../ti_secure_rom.dts}                        |   0
- .../ti_secure_rom_a.dts}                      |   0
- .../ti_secure_rom_b.dts}                      |   0
- .../ti_secure_rom_combined.dts}               |   0
- .../descriptor_offset.dts}                    |   0
- .../test/{094_fmap_x86.dts => x86/fmap.dts}   |   0
- .../fmap_section.dts}                         |   0
- .../{043_intel_cmc.dts => x86/intel_cmc.dts}  |   0
- .../{147_intel_fit.dts => x86/intel_fit.dts}  |   0
- .../intel_fit_missing.dts}                    |   0
- .../{042_intel_fsp.dts => x86/intel_fsp.dts}  |   0
- .../intel_fsp_m.dts}                          |   0
- .../intel_fsp_s.dts}                          |   0
- .../intel_fsp_t.dts}                          |   0
- .../{050_intel_mrc.dts => x86/intel_mrc.dts}  |   0
- .../intel_refcode.dts}                        |   0
- .../{046_intel_vbt.dts => x86/intel_vbt.dts}  |   0
- .../{032_intel_vga.dts => x86/intel_vga.dts}  |   0
- .../no_ucode.dts}                             |   0
- .../optional_ucode.dts}                       |   0
- .../{144_x86_reset16.dts => x86/reset16.dts}  |   0
- .../reset16_spl.dts}                          |   0
- .../reset16_tpl.dts}                          |   0
- .../test/{029_x86_rom.dts => x86/rom.dts}     |   0
- .../rom_ifwi.dts}                             |   0
- .../rom_ifwi_nodata.dts}                      |   0
- .../rom_ifwi_nodesc.dts}                      |   0
- .../rom_ifwi_section.dts}                     |   0
- .../{031_x86_rom_me.dts => x86/rom_me.dts}    |   0
- .../rom_me_empty.dts}                         |   0
- .../rom_me_missing.dts}                       |   0
- .../rom_me_no_desc.dts}                       |   0
- .../single_ucode.dts}                         |   0
- .../{033_x86_start16.dts => x86/start16.dts}  |   0
- .../start16_spl.dts}                          |   0
- .../start16_tpl.dts}                          |   0
- .../symbols_tpl.dts}                          |   0
- .../tpl_ucode.dts}                            |   0
- .../test/{034_x86_ucode.dts => x86/ucode.dts} |   0
- .../ucode_missing_node.dts}                   |   0
- .../ucode_missing_node2.dts}                  |   0
- .../ucode_not_in_image.dts}                   |   0
- .../ucode_spl.dts}                            |   0
- .../ucode_spl_needs_retry.dts}                |   0
- .../test/{036_u_boot_img.dts => xpl/img.dts}  |   0
- .../pack_dtb.dts}                             |   0
- .../spl_bss_pad.dts}                          |   0
- .../spl_dtb.dts}                              |   0
- .../spl_expand.dts}                           |   0
- .../spl_nodtb.dts}                            |   0
- .../test/{078_u_boot_tpl.dts => xpl/tpl.dts}  |   0
- .../tpl_bss_pad.dts}                          |   0
- .../tpl_nodtb.dts}                            |   0
- .../test/{255_u_boot_vpl.dts => xpl/vpl.dts}  |   0
- .../vpl_bss_pad.dts}                          |   0
- .../vpl_nodtb.dts}                            |   0
- 367 files changed, 480 insertions(+), 479 deletions(-)
- rename tools/binman/test/{023_blob.dts => blob/blob.dts} (100%)
- rename tools/binman/test/{157_blob_ext.dts => blob/ext.dts} (100%)
- rename tools/binman/test/{215_blob_ext_list.dts => blob/ext_list.dts} (100%)
- rename tools/binman/test/{218_blob_ext_list_fake.dts => blob/ext_list_fake.dts} (100%)
- rename tools/binman/test/{216_blob_ext_list_missing.dts => blob/ext_list_missing.dts} (100%)
- rename tools/binman/test/{158_blob_ext_missing.dts => blob/ext_missing.dts} (100%)
- rename tools/binman/test/{159_blob_ext_missing_sect.dts => blob/ext_missing_sect.dts} (100%)
- rename tools/binman/test/{266_blob_ext_opt.dts => blob/ext_opt.dts} (100%)
- rename tools/binman/test/{217_fake_blob.dts => blob/fake.dts} (100%)
- rename tools/binman/test/{173_missing_blob.dts => blob/missing.dts} (100%)
- rename tools/binman/test/{068_blob_named_by_arg.dts => blob/named_by_arg.dts} (100%)
- rename tools/binman/test/{273_blob_symbol.dts => blob/symbol.dts} (100%)
- rename tools/binman/test/{319_capsule_accept.dts => capsule/accept.dts} (100%)
- rename tools/binman/test/{321_capsule_accept_missing_guid.dts => capsule/accept_missing_guid.dts} (100%)
- rename tools/binman/test/{323_capsule_accept_revert_missing.dts => capsule/accept_revert_missing.dts} (100%)
- rename tools/binman/test/{311_capsule.dts => capsule/capsule.dts} (100%)
- rename tools/binman/test/{322_empty_capsule_type_missing.dts => capsule/empty_type_missing.dts} (100%)
- rename tools/binman/test/{318_capsule_missing_guid.dts => capsule/missing_guid.dts} (100%)
- rename tools/binman/test/{317_capsule_missing_index.dts => capsule/missing_index.dts} (100%)
- rename tools/binman/test/{316_capsule_missing_key.dts => capsule/missing_key.dts} (100%)
- rename tools/binman/test/{315_capsule_oemflags.dts => capsule/oemflags.dts} (100%)
- rename tools/binman/test/{320_capsule_revert.dts => capsule/revert.dts} (100%)
- rename tools/binman/test/{312_capsule_signed.dts => capsule/signed.dts} (100%)
- rename tools/binman/test/{314_capsule_signed_ver.dts => capsule/signed_ver.dts} (100%)
- rename tools/binman/test/{313_capsule_version.dts => capsule/version.dts} (100%)
- rename tools/binman/test/{106_cbfs_bad_arch.dts => cbfs/bad_arch.dts} (100%)
- rename tools/binman/test/{109_cbfs_bad_compress.dts => cbfs/bad_compress.dts} (100%)
- rename tools/binman/test/{126_cbfs_bad_type.dts => cbfs/bad_type.dts} (100%)
- rename tools/binman/test/{110_cbfs_name.dts => cbfs/name.dts} (100%)
- rename tools/binman/test/{108_cbfs_no_contents.dts => cbfs/no_contents.dts} (100%)
- rename tools/binman/test/{107_cbfs_no_size.dts => cbfs/no_size.dts} (100%)
- rename tools/binman/test/{114_cbfs_offset.dts => cbfs/offset.dts} (100%)
- rename tools/binman/test/{102_cbfs_raw.dts => cbfs/raw.dts} (100%)
- rename tools/binman/test/{105_cbfs_raw_compress.dts => cbfs/raw_compress.dts} (100%)
- rename tools/binman/test/{103_cbfs_raw_ppc.dts => cbfs/raw_ppc.dts} (100%)
- rename tools/binman/test/{142_replace_cbfs.dts => cbfs/replace.dts} (100%)
- rename tools/binman/test/{104_cbfs_stage.dts => cbfs/stage.dts} (100%)
- rename tools/binman/test/{125_cbfs_update.dts => cbfs/update.dts} (100%)
- rename tools/binman/test/{067_fmap.dts => cros/fmap.dts} (100%)
- rename tools/binman/test/{071_gbb.dts => cros/gbb.dts} (100%)
- rename tools/binman/test/{073_gbb_no_size.dts => cros/gbb_no_size.dts} (100%)
- rename tools/binman/test/{072_gbb_too_small.dts => cros/gbb_too_small.dts} (100%)
- rename tools/binman/test/{074_vblock.dts => cros/vblock.dts} (100%)
- rename tools/binman/test/{077_vblock_bad_entry.dts => cros/vblock_bad_entry.dts} (100%)
- rename tools/binman/test/{076_vblock_bad_phandle.dts => cros/vblock_bad_phandle.dts} (100%)
- rename tools/binman/test/{189_vblock_content.dts => cros/vblock_content.dts} (100%)
- rename tools/binman/test/{075_vblock_no_content.dts => cros/vblock_no_content.dts} (100%)
- rename tools/binman/test/{262_absent.dts => entry/absent.dts} (100%)
- rename tools/binman/test/{198_collection.dts => entry/collection.dts} (100%)
- rename tools/binman/test/{246_collection_other.dts => entry/collection_other.dts} (100%)
- rename tools/binman/test/{199_collection_section.dts => entry/collection_section.dts} (100%)
- rename tools/binman/test/{083_compress.dts => entry/compress.dts} (100%)
- rename tools/binman/test/{186_compress_extra.dts => entry/compress_extra.dts} (100%)
- rename tools/binman/test/{182_compress_image.dts => entry/compress_image.dts} (100%)
- rename tools/binman/test/{183_compress_image_less.dts => entry/compress_image_less.dts} (100%)
- rename tools/binman/test/{185_compress_section.dts => entry/compress_section.dts} (100%)
- rename tools/binman/test/{184_compress_section_size.dts => entry/compress_section_size.dts} (100%)
- rename tools/binman/test/{096_elf.dts => entry/elf.dts} (100%)
- rename tools/binman/test/{097_elf_strip.dts => entry/elf_strip.dts} (100%)
- rename tools/binman/test/{062_entry_args.dts => entry/entry_args.dts} (100%)
- rename tools/binman/test/{063_entry_args_missing.dts => entry/entry_args_missing.dts} (100%)
- rename tools/binman/test/{064_entry_args_required.dts => entry/entry_args_required.dts} (100%)
- rename tools/binman/test/{065_entry_args_unknown_datatype.dts => entry/entry_args_unknown_datatype.dts} (100%)
- rename tools/binman/test/{174_env.dts => entry/env.dts} (100%)
- rename tools/binman/test/{175_env_no_size.dts => entry/env_no_size.dts} (100%)
- rename tools/binman/test/{176_env_too_small.dts => entry/env_too_small.dts} (100%)
- rename tools/binman/test/{084_files.dts => entry/files.dts} (100%)
- rename tools/binman/test/{190_files_align.dts => entry/files_align.dts} (100%)
- rename tools/binman/test/{085_files_compress.dts => entry/files_compress.dts} (100%)
- rename tools/binman/test/{087_files_no_pattern.dts => entry/files_no_pattern.dts} (100%)
- rename tools/binman/test/{086_files_none.dts => entry/files_none.dts} (100%)
- rename tools/binman/test/{069_fill.dts => entry/fill.dts} (100%)
- rename tools/binman/test/{080_fill_empty.dts => entry/fill_empty.dts} (100%)
- rename tools/binman/test/{070_fill_no_size.dts => entry/fill_no_size.dts} (100%)
- rename tools/binman/test/{188_image_entryarg.dts => entry/image_entryarg.dts} (100%)
- rename tools/binman/test/{127_list.dts => entry/list.dts} (100%)
- rename tools/binman/test/{056_name_prefix.dts => entry/name_prefix.dts} (100%)
- rename tools/binman/test/{268_null.dts => entry/null.dts} (100%)
- rename tools/binman/test/{274_offset_from_elf.dts => entry/offset_from_elf.dts} (100%)
- rename tools/binman/test/{269_overlap.dts => entry/overlap.dts} (100%)
- rename tools/binman/test/{271_overlap_bad.dts => entry/overlap_bad.dts} (100%)
- rename tools/binman/test/{272_overlap_no_size.dts => entry/overlap_no_size.dts} (100%)
- rename tools/binman/test/{270_overlap_null.dts => entry/overlap_null.dts} (100%)
- rename tools/binman/test/{045_prop_test.dts => entry/prop_test.dts} (100%)
- rename tools/binman/test/{191_read_image_skip.dts => entry/read_image_skip.dts} (100%)
- rename tools/binman/test/{346_remove_template.dts => entry/remove_template.dts} (100%)
- rename tools/binman/test/{132_replace.dts => entry/replace.dts} (100%)
- rename tools/binman/test/{143_replace_all.dts => entry/replace_all.dts} (100%)
- rename tools/binman/test/{133_replace_multi.dts => entry/replace_multi.dts} (100%)
- rename tools/binman/test/{139_replace_repack.dts => entry/replace_repack.dts} (100%)
- rename tools/binman/test/{278_replace_section_deep.dts => entry/replace_section_deep.dts} (100%)
- rename tools/binman/test/{241_replace_section_simple.dts => entry/replace_section_simple.dts} (100%)
- rename tools/binman/test/{239_replace_with_bintool.dts => entry/replace_with_bintool.dts} (100%)
- rename tools/binman/test/{261_section_fname.dts => entry/section_fname.dts} (100%)
- rename tools/binman/test/{202_section_timeout.dts => entry/section_timeout.dts} (100%)
- rename tools/binman/test/{055_sections.dts => entry/sections.dts} (100%)
- rename tools/binman/test/{259_symlink.dts => entry/symlink.dts} (100%)
- rename tools/binman/test/{222_tee_os.dts => entry/tee_os.dts} (100%)
- rename tools/binman/test/{263_tee_os_opt.dts => entry/tee_os_opt.dts} (100%)
- rename tools/binman/test/{286_template.dts => entry/template.dts} (100%)
- rename tools/binman/test/{287_template_multi.dts => entry/template_multi.dts} (100%)
- rename tools/binman/test/{309_template_phandle.dts => entry/template_phandle.dts} (100%)
- rename tools/binman/test/{310_template_phandle_dup.dts => entry/template_phandle_dup.dts} (100%)
- rename tools/binman/test/{289_template_section.dts => entry/template_section.dts} (100%)
- rename tools/binman/test/{066_text.dts => entry/text.dts} (100%)
- rename tools/binman/test/{237_unique_names.dts => entry/unique_names.dts} (100%)
- rename tools/binman/test/{238_unique_names_multi.dts => entry/unique_names_multi.dts} (100%)
- rename tools/binman/test/{057_unknown_contents.dts => entry/unknown_contents.dts} (100%)
- rename tools/binman/test/{041_unknown_pos_size.dts => entry/unknown_pos_size.dts} (100%)
- rename tools/binman/test/{328_alternates_fdt.dts => fdt/alternates_fdt.dts} (100%)
- rename tools/binman/test/{329_alternates_fdtgrep.dts => fdt/alternates_fdtgrep.dts} (100%)
- rename tools/binman/test/{332_alternates_inval.dts => fdt/alternates_inval.dts} (100%)
- rename tools/binman/test/{331_alternates_spl.dts => fdt/alternates_spl.dts} (100%)
- rename tools/binman/test/{330_alternates_vpl.dts => fdt/alternates_vpl.dts} (100%)
- rename tools/binman/test/{347_bootph_prop.dts => fdt/bootph_prop.dts} (100%)
- rename tools/binman/test/{124_compress_dtb.dts => fdt/compress_dtb.dts} (100%)
- rename tools/binman/test/{250_compress_dtb_invalid.dts => fdt/compress_dtb_invalid.dts} (100%)
- rename tools/binman/test/{248_compress_dtb_prepend_invalid.dts => fdt/compress_dtb_prepend_invalid.dts} (100%)
- rename tools/binman/test/{249_compress_dtb_prepend_length.dts => fdt/compress_dtb_prepend_length.dts} (100%)
- rename tools/binman/test/{251_compress_dtb_zstd.dts => fdt/compress_dtb_zstd.dts} (100%)
- rename tools/binman/test/{128_decode_image.dts => fdt/decode_image.dts} (100%)
- rename tools/binman/test/{129_decode_image_nohdr.dts => fdt/decode_image_nohdr.dts} (100%)
- rename tools/binman/test/{115_fdtmap.dts => fdt/fdtmap.dts} (100%)
- rename tools/binman/test/{213_fdtmap_alt_format.dts => fdt/fdtmap_alt_format.dts} (100%)
- rename tools/binman/test/{116_fdtmap_hdr.dts => fdt/fdtmap_hdr.dts} (100%)
- rename tools/binman/test/{137_fdtmap_hdr_endbad.dts => fdt/fdtmap_hdr_endbad.dts} (100%)
- rename tools/binman/test/{135_fdtmap_hdr_middle.dts => fdt/fdtmap_hdr_middle.dts} (100%)
- rename tools/binman/test/{119_fdtmap_hdr_missing.dts => fdt/fdtmap_hdr_missing.dts} (100%)
- rename tools/binman/test/{138_fdtmap_hdr_nosize.dts => fdt/fdtmap_hdr_nosize.dts} (100%)
- rename tools/binman/test/{118_fdtmap_hdr_pos.dts => fdt/fdtmap_hdr_pos.dts} (100%)
- rename tools/binman/test/{117_fdtmap_hdr_start.dts => fdt/fdtmap_hdr_start.dts} (100%)
- rename tools/binman/test/{136_fdtmap_hdr_startbad.dts => fdt/fdtmap_hdr_startbad.dts} (100%)
- rename tools/binman/test/{120_hdr_no_location.dts => fdt/hdr_no_location.dts} (100%)
- rename tools/binman/test/{194_fdt_incl.dts => fdt/incl.dts} (100%)
- rename tools/binman/test/{195_fdt_incl_tpl.dts => fdt/incl_tpl.dts} (100%)
- rename tools/binman/test/{257_fdt_incl_vpl.dts => fdt/incl_vpl.dts} (100%)
- rename tools/binman/test/{130_list_fdtmap.dts => fdt/list_fdtmap.dts} (100%)
- rename tools/binman/test/{214_no_alt_format.dts => fdt/no_alt_format.dts} (100%)
- rename tools/binman/test/{060_fdt_update.dts => fdt/update.dts} (100%)
- rename tools/binman/test/{082_fdt_update_all.dts => fdt/update_all.dts} (100%)
- rename tools/binman/test/{134_fdt_update_all_repack.dts => fdt/update_all_repack.dts} (100%)
- rename tools/binman/test/{061_fdt_update_bad.dts => fdt/update_bad.dts} (100%)
- rename tools/binman/test/{169_atf_bl31.dts => fip/atf_bl31.dts} (100%)
- rename tools/binman/test/{211_fip_bad_align.dts => fip/bad_align.dts} (100%)
- rename tools/binman/test/{354_bl1.dts => fip/bl1.dts} (100%)
- rename tools/binman/test/{212_fip_collection.dts => fip/collection.dts} (100%)
- rename tools/binman/test/{203_fip.dts => fip/fip.dts} (100%)
- rename tools/binman/test/{207_fip_ls.dts => fip/ls.dts} (100%)
- rename tools/binman/test/{209_fip_missing.dts => fip/missing.dts} (100%)
- rename tools/binman/test/{205_fip_no_type.dts => fip/no_type.dts} (100%)
- rename tools/binman/test/{201_opensbi.dts => fip/opensbi.dts} (100%)
- rename tools/binman/test/{204_fip_other.dts => fip/other.dts} (100%)
- rename tools/binman/test/{208_fip_replace.dts => fip/replace.dts} (100%)
- rename tools/binman/test/{172_scp.dts => fip/scp.dts} (100%)
- rename tools/binman/test/{210_fip_size.dts => fip/size.dts} (100%)
- rename tools/binman/test/{206_fip_uuid.dts => fip/uuid.dts} (100%)
- rename tools/binman/test/{275_fit_align.dts => fit/align.dts} (100%)
- rename tools/binman/test/{227_fit_bad_dir.dts => fit/bad_dir.dts} (71%)
- rename tools/binman/test/{228_fit_bad_dir_config.dts => fit/bad_dir_config.dts} (71%)
- rename tools/binman/test/{224_fit_bad_oper.dts => fit/bad_oper.dts} (100%)
- rename tools/binman/test/{343_fit_encrypt_data.dts => fit/encrypt_data.dts} (100%)
- rename tools/binman/test/{344_fit_encrypt_data_no_key.dts => fit/encrypt_data_no_key.dts} (100%)
- rename tools/binman/test/{162_fit_external.dts => fit/external.dts} (100%)
- rename tools/binman/test/{240_fit_extract_replace.dts => fit/extract_replace.dts} (100%)
- rename tools/binman/test/{170_fit_fdt.dts => fit/fdt.dts} (100%)
- rename tools/binman/test/{334_fit_fdt_compat.dts => fit/fdt_compat.dts} (100%)
- rename tools/binman/test/{333_fit_fdt_dir.dts => fit/fdt_dir.dts} (100%)
- rename tools/binman/test/{284_fit_fdt_list.dts => fit/fdt_list.dts} (100%)
- rename tools/binman/test/{171_fit_fdt_missing_prop.dts => fit/fdt_missing_prop.dts} (100%)
- rename tools/binman/test/{345_fit_fdt_name.dts => fit/fdt_name.dts} (100%)
- rename tools/binman/test/{223_fit_fdt_oper.dts => fit/fdt_oper.dts} (100%)
- rename tools/binman/test/{335_fit_fdt_phase.dts => fit/fdt_phase.dts} (100%)
- rename tools/binman/test/{276_fit_firmware_loadables.dts => fit/firmware_loadables.dts} (100%)
- rename tools/binman/test/{161_fit.dts => fit/fit.dts} (100%)
- rename tools/binman/test/{219_fit_gennode.dts => fit/gennode.dts} (100%)
- rename tools/binman/test/{167_fit_image_subentry_alignment.dts => fit/image_subentry_alignment.dts} (100%)
- rename tools/binman/test/{355_key_name_hint_dir_fit_signature.dts => fit/key_name_hint_dir_signature.dts} (100%)
- rename tools/binman/test/{168_fit_missing_blob.dts => fit/missing_blob.dts} (100%)
- rename tools/binman/test/{277_replace_fit_sibling.dts => fit/replace_sibling.dts} (100%)
- rename tools/binman/test/{280_fit_sign.dts => fit/sign.dts} (100%)
- rename tools/binman/test/{340_fit_signature.dts => fit/signature.dts} (100%)
- rename tools/binman/test/{360_fit_signature_engine.dts => fit/signature_engine.dts} (100%)
- rename tools/binman/test/{361_fit_signature_engine_encrypt.dts => fit/signature_engine_encrypt.dts} (100%)
- rename tools/binman/test/{362_fit_signature_engine_pkcs11.dts => fit/signature_engine_pkcs11.dts} (100%)
- rename tools/binman/test/{363_fit_signature_engine_pkcs11_object.dts => fit/signature_engine_pkcs11_object.dts} (100%)
- rename tools/binman/test/{341_fit_signature.dts => fit/signature_multi_key.dts} (100%)
- rename tools/binman/test/{342_fit_signature.dts => fit/signature_no_nodes.dts} (100%)
- rename tools/binman/test/{226_fit_split_elf.dts => fit/split_elf.dts} (100%)
- rename tools/binman/test/{220_fit_subentry_bintool.dts => fit/subentry_bintool.dts} (100%)
- rename tools/binman/test/{221_fit_subentry_hash.dts => fit/subentry_hash.dts} (100%)
- rename tools/binman/test/{264_tee_os_opt_fit.dts => fit/tee_os_opt.dts} (100%)
- rename tools/binman/test/{265_tee_os_opt_fit_bad.dts => fit/tee_os_opt_bad.dts} (100%)
- rename tools/binman/test/{288_template_fit.dts => fit/template.dts} (100%)
- rename tools/binman/test/{247_mkimage_coll.dts => mkimage/coll.dts} (100%)
- rename tools/binman/test/{254_mkimage_filename.dts => mkimage/filename.dts} (100%)
- rename tools/binman/test/{243_mkimage_image.dts => mkimage/image.dts} (100%)
- rename tools/binman/test/{245_mkimage_image_bad.dts => mkimage/image_bad.dts} (100%)
- rename tools/binman/test/{244_mkimage_image_no_content.dts => mkimage/image_no_content.dts} (100%)
- rename tools/binman/test/{229_mkimage_missing.dts => mkimage/missing.dts} (100%)
- rename tools/binman/test/{292_mkimage_missing_multiple.dts => mkimage/missing_multiple.dts} (100%)
- rename tools/binman/test/{156_mkimage.dts => mkimage/mkimage.dts} (100%)
- rename tools/binman/test/{252_mkimage_mult_data.dts => mkimage/mult_data.dts} (100%)
- rename tools/binman/test/{253_mkimage_mult_no_content.dts => mkimage/mult_no_content.dts} (100%)
- rename tools/binman/test/{242_mkimage_name.dts => mkimage/name.dts} (100%)
- rename tools/binman/test/{283_mkimage_special.dts => mkimage/special.dts} (100%)
- rename tools/binman/test/{290_mkimage_sym.dts => mkimage/sym.dts} (100%)
+ 53 files changed, 62 insertions(+), 62 deletions(-)
  rename tools/binman/test/{098_4gb_and_skip_at_start_together.dts => pack/4gb_and_skip_at_start_together.dts} (100%)
  rename tools/binman/test/{200_align_default.dts => pack/align_default.dts} (100%)
  rename tools/binman/test/{326_assume_size.dts => pack/assume_size.dts} (100%)
@@ -761,116 +215,752 @@ Simon Glass (16):
  rename tools/binman/test/{024_sorted.dts => pack/sorted.dts} (100%)
  rename tools/binman/test/{054_unit_address.dts => pack/unit_address.dts} (100%)
  rename tools/binman/test/{079_uses_pos.dts => pack/uses_pos.dts} (100%)
- rename tools/binman/test/{302_encrypted_invalid_iv_file.dts => security/encrypted_invalid_iv_file.dts} (100%)
- rename tools/binman/test/{305_encrypted_key_file.dts => security/encrypted_key_file.dts} (100%)
- rename tools/binman/test/{304_encrypted_key_source.dts => security/encrypted_key_source.dts} (100%)
- rename tools/binman/test/{303_encrypted_missing_key.dts => security/encrypted_missing_key.dts} (100%)
- rename tools/binman/test/{301_encrypted_no_algo.dts => security/encrypted_no_algo.dts} (100%)
- rename tools/binman/test/{090_hash.dts => security/hash.dts} (100%)
- rename tools/binman/test/{092_hash_bad_algo.dts => security/hash_bad_algo.dts} (100%)
- rename tools/binman/test/{091_hash_no_algo.dts => security/hash_no_algo.dts} (100%)
- rename tools/binman/test/{099_hash_section.dts => security/hash_section.dts} (100%)
- rename tools/binman/test/{356_key_name_hint_dir_spl_pubkey_dtb.dts => security/key_name_hint_dir_spl_pubkey_dtb.dts} (100%)
- rename tools/binman/test/{230_pre_load.dts => security/pre_load.dts} (100%)
- rename tools/binman/test/{235_pre_load_invalid_algo.dts => security/pre_load_invalid_algo.dts} (100%)
- rename tools/binman/test/{236_pre_load_invalid_key.dts => security/pre_load_invalid_key.dts} (100%)
- rename tools/binman/test/{233_pre_load_invalid_padding.dts => security/pre_load_invalid_padding.dts} (100%)
- rename tools/binman/test/{234_pre_load_invalid_sha.dts => security/pre_load_invalid_sha.dts} (100%)
- rename tools/binman/test/{231_pre_load_pkcs.dts => security/pre_load_pkcs.dts} (100%)
- rename tools/binman/test/{232_pre_load_pss.dts => security/pre_load_pss.dts} (100%)
- rename tools/binman/test/{165_section_ignore_hash_signature.dts => security/section_ignore_hash_signature.dts} (100%)
- rename tools/binman/test/{281_sign_non_fit.dts => security/sign_non_fit.dts} (100%)
- rename tools/binman/test/{306_spl_pubkey_dtb.dts => security/spl_pubkey_dtb.dts} (100%)
- rename tools/binman/test/{279_x509_cert.dts => security/x509_cert.dts} (100%)
- rename tools/binman/test/{307_xilinx_bootgen_sign.dts => security/xilinx_bootgen_sign.dts} (100%)
- rename tools/binman/test/{308_xilinx_bootgen_sign_enc.dts => security/xilinx_bootgen_sign_enc.dts} (100%)
- rename tools/binman/test/{336_symbols_base.dts => symbols/base.dts} (100%)
- rename tools/binman/test/{337_symbols_base_expand.dts => symbols/base_expand.dts} (100%)
- rename tools/binman/test/{338_symbols_comp.dts => symbols/comp.dts} (100%)
- rename tools/binman/test/{282_symbols_disable.dts => symbols/disable.dts} (100%)
- rename tools/binman/test/{260_symbols_elf.dts => symbols/elf.dts} (100%)
- rename tools/binman/test/{197_symbols_expand.dts => symbols/expand.dts} (100%)
- rename tools/binman/test/{196_symbols_nodtb.dts => symbols/nodtb.dts} (100%)
- rename tools/binman/test/{187_symbols_sub.dts => symbols/sub.dts} (100%)
- rename tools/binman/test/{053_symbols.dts => symbols/symbols.dts} (100%)
- rename tools/binman/test/{149_symbols_tpl.dts => symbols/tpl.dts} (100%)
- rename tools/binman/test/{353_nxp_ddrfw_imx95.dts => vendor/nxp_ddrfw_imx95.dts} (100%)
- rename tools/binman/test/{339_nxp_imx8.dts => vendor/nxp_imx8.dts} (100%)
- rename tools/binman/test/{364_nxp_imx8_csf.dts => vendor/nxp_imx8_csf.dts} (100%)
- rename tools/binman/test/{365_nxp_imx8_csf_fast_auth.dts => vendor/nxp_imx8_csf_fast_auth.dts} (100%)
- rename tools/binman/test/{366_nxp_imx8_imagename.dts => vendor/nxp_imx8_imagename.dts} (100%)
- rename tools/binman/test/{359_nxp_imx95.dts => vendor/nxp_imx95.dts} (100%)
- rename tools/binman/test/{150_powerpc_mpc85xx_bootpg_resetvec.dts => vendor/powerpc_mpc85xx_bootpg_resetvec.dts} (100%)
- rename tools/binman/test/{357_renesas_rcar4_sa0.dts => vendor/renesas_rcar4_sa0.dts} (100%)
- rename tools/binman/test/{358_renesas_rcar4_sa0_size.dts => vendor/renesas_rcar4_sa0_size.dts} (100%)
- rename tools/binman/test/{291_rockchip_tpl.dts => vendor/rockchip_tpl.dts} (100%)
- rename tools/binman/test/{293_ti_board_cfg.dts => vendor/ti_board_cfg.dts} (100%)
- rename tools/binman/test/{294_ti_board_cfg_combined.dts => vendor/ti_board_cfg_combined.dts} (100%)
- rename tools/binman/test/{295_ti_board_cfg_no_type.dts => vendor/ti_board_cfg_no_type.dts} (100%)
- rename tools/binman/test/{352_ti_board_cfg_phony.dts => vendor/ti_board_cfg_phony.dts} (100%)
- rename tools/binman/test/{351_ti_dm.dts => vendor/ti_dm.dts} (100%)
- rename tools/binman/test/{296_ti_secure.dts => vendor/ti_secure.dts} (100%)
- rename tools/binman/test/{324_ti_secure_firewall.dts => vendor/ti_secure_firewall.dts} (100%)
- rename tools/binman/test/{325_ti_secure_firewall_missing_property.dts => vendor/ti_secure_firewall_missing_property.dts} (100%)
- rename tools/binman/test/{297_ti_secure_rom.dts => vendor/ti_secure_rom.dts} (100%)
- rename tools/binman/test/{299_ti_secure_rom_a.dts => vendor/ti_secure_rom_a.dts} (100%)
- rename tools/binman/test/{300_ti_secure_rom_b.dts => vendor/ti_secure_rom_b.dts} (100%)
- rename tools/binman/test/{298_ti_secure_rom_combined.dts => vendor/ti_secure_rom_combined.dts} (100%)
- rename tools/binman/test/{141_descriptor_offset.dts => x86/descriptor_offset.dts} (100%)
- rename tools/binman/test/{094_fmap_x86.dts => x86/fmap.dts} (100%)
- rename tools/binman/test/{095_fmap_x86_section.dts => x86/fmap_section.dts} (100%)
- rename tools/binman/test/{043_intel_cmc.dts => x86/intel_cmc.dts} (100%)
- rename tools/binman/test/{147_intel_fit.dts => x86/intel_fit.dts} (100%)
- rename tools/binman/test/{148_intel_fit_missing.dts => x86/intel_fit_missing.dts} (100%)
- rename tools/binman/test/{042_intel_fsp.dts => x86/intel_fsp.dts} (100%)
- rename tools/binman/test/{152_intel_fsp_m.dts => x86/intel_fsp_m.dts} (100%)
- rename tools/binman/test/{153_intel_fsp_s.dts => x86/intel_fsp_s.dts} (100%)
- rename tools/binman/test/{154_intel_fsp_t.dts => x86/intel_fsp_t.dts} (100%)
- rename tools/binman/test/{050_intel_mrc.dts => x86/intel_mrc.dts} (100%)
- rename tools/binman/test/{100_intel_refcode.dts => x86/intel_refcode.dts} (100%)
- rename tools/binman/test/{046_intel_vbt.dts => x86/intel_vbt.dts} (100%)
- rename tools/binman/test/{032_intel_vga.dts => x86/intel_vga.dts} (100%)
- rename tools/binman/test/{037_x86_no_ucode.dts => x86/no_ucode.dts} (100%)
- rename tools/binman/test/{044_x86_optional_ucode.dts => x86/optional_ucode.dts} (100%)
- rename tools/binman/test/{144_x86_reset16.dts => x86/reset16.dts} (100%)
- rename tools/binman/test/{145_x86_reset16_spl.dts => x86/reset16_spl.dts} (100%)
- rename tools/binman/test/{146_x86_reset16_tpl.dts => x86/reset16_tpl.dts} (100%)
- rename tools/binman/test/{029_x86_rom.dts => x86/rom.dts} (100%)
- rename tools/binman/test/{111_x86_rom_ifwi.dts => x86/rom_ifwi.dts} (100%)
- rename tools/binman/test/{113_x86_rom_ifwi_nodata.dts => x86/rom_ifwi_nodata.dts} (100%)
- rename tools/binman/test/{112_x86_rom_ifwi_nodesc.dts => x86/rom_ifwi_nodesc.dts} (100%)
- rename tools/binman/test/{151_x86_rom_ifwi_section.dts => x86/rom_ifwi_section.dts} (100%)
- rename tools/binman/test/{031_x86_rom_me.dts => x86/rom_me.dts} (100%)
- rename tools/binman/test/{163_x86_rom_me_empty.dts => x86/rom_me_empty.dts} (100%)
- rename tools/binman/test/{164_x86_rom_me_missing.dts => x86/rom_me_missing.dts} (100%)
- rename tools/binman/test/{030_x86_rom_me_no_desc.dts => x86/rom_me_no_desc.dts} (100%)
- rename tools/binman/test/{035_x86_single_ucode.dts => x86/single_ucode.dts} (100%)
- rename tools/binman/test/{033_x86_start16.dts => x86/start16.dts} (100%)
- rename tools/binman/test/{048_x86_start16_spl.dts => x86/start16_spl.dts} (100%)
- rename tools/binman/test/{081_x86_start16_tpl.dts => x86/start16_tpl.dts} (100%)
- rename tools/binman/test/{155_symbols_tpl_x86.dts => x86/symbols_tpl.dts} (100%)
- rename tools/binman/test/{093_x86_tpl_ucode.dts => x86/tpl_ucode.dts} (100%)
- rename tools/binman/test/{034_x86_ucode.dts => x86/ucode.dts} (100%)
- rename tools/binman/test/{038_x86_ucode_missing_node.dts => x86/ucode_missing_node.dts} (100%)
- rename tools/binman/test/{039_x86_ucode_missing_node2.dts => x86/ucode_missing_node2.dts} (100%)
- rename tools/binman/test/{040_x86_ucode_not_in_image.dts => x86/ucode_not_in_image.dts} (100%)
- rename tools/binman/test/{049_x86_ucode_spl.dts => x86/ucode_spl.dts} (100%)
- rename tools/binman/test/{058_x86_ucode_spl_needs_retry.dts => x86/ucode_spl_needs_retry.dts} (100%)
- rename tools/binman/test/{036_u_boot_img.dts => xpl/img.dts} (100%)
- rename tools/binman/test/{026_pack_u_boot_dtb.dts => xpl/pack_dtb.dts} (100%)
- rename tools/binman/test/{047_spl_bss_pad.dts => xpl/spl_bss_pad.dts} (100%)
- rename tools/binman/test/{051_u_boot_spl_dtb.dts => xpl/spl_dtb.dts} (100%)
- rename tools/binman/test/{285_spl_expand.dts => xpl/spl_expand.dts} (100%)
- rename tools/binman/test/{052_u_boot_spl_nodtb.dts => xpl/spl_nodtb.dts} (100%)
- rename tools/binman/test/{078_u_boot_tpl.dts => xpl/tpl.dts} (100%)
- rename tools/binman/test/{193_tpl_bss_pad.dts => xpl/tpl_bss_pad.dts} (100%)
- rename tools/binman/test/{192_u_boot_tpl_nodtb.dts => xpl/tpl_nodtb.dts} (100%)
- rename tools/binman/test/{255_u_boot_vpl.dts => xpl/vpl.dts} (100%)
- rename tools/binman/test/{258_vpl_bss_pad.dts => xpl/vpl_bss_pad.dts} (100%)
- rename tools/binman/test/{256_u_boot_vpl_nodtb.dts => xpl/vpl_nodtb.dts} (100%)
 
+diff --git a/doc/develop/binman_tests.rst b/doc/develop/binman_tests.rst
+index 5e44686b8ad..745ca259d44 100644
+--- a/doc/develop/binman_tests.rst
++++ b/doc/develop/binman_tests.rst
+@@ -331,7 +331,7 @@ Here is a simple test:
+ 
+     def testSimple(self):
+         """Test a simple binman with a single file"""
+-        data = self._DoReadFile('005_simple.dts')
++        data = self._DoReadFile('pack/simple.dts')
+         self.assertEqual(U_BOOT_DATA, data)
+ 
+ This test tells Binman to build an image using the description. Then it checks
+diff --git a/tools/binman/entry_test.py b/tools/binman/entry_test.py
+index 40d74d401a2..7f00358e008 100644
+--- a/tools/binman/entry_test.py
++++ b/tools/binman/entry_test.py
+@@ -26,7 +26,7 @@ class TestEntry(unittest.TestCase):
+     def GetNode(self):
+         binman_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
+         fname = fdt_util.EnsureCompiled(
+-            os.path.join(binman_dir,('test/005_simple.dts')))
++            os.path.join(binman_dir,('test/pack/simple.dts')))
+         dtb = fdt.FdtScan(fname)
+         return dtb.GetNode('/binman/u-boot')
+ 
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 296de3dc218..9cd4317aeed 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -816,7 +816,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testBoard(self):
+         """Test that we can run it with a specific board"""
+-        self._SetupDtb('005_simple.dts', 'sandbox/u-boot.dtb')
++        self._SetupDtb('pack/simple.dts', 'sandbox/u-boot.dtb')
+         TestFunctional._MakeInputFile('sandbox/u-boot.bin', U_BOOT_DATA)
+         result = self._DoBinman('build', '-n', '-b', 'sandbox')
+         self.assertEqual(0, result)
+@@ -843,19 +843,19 @@ class TestFunctional(unittest.TestCase):
+         will come from the device-tree compiler (dtc).
+         """
+         with self.assertRaises(Exception) as e:
+-            self._RunBinman('build', '-d', self.TestFile('001_invalid.dts'))
++            self._RunBinman('build', '-d', self.TestFile('pack/invalid.dts'))
+         self.assertIn("FATAL ERROR: Unable to parse input tree",
+                 str(e.exception))
+ 
+     def testMissingNode(self):
+         """Test that a device tree without a 'binman' node generates an error"""
+         with self.assertRaises(Exception) as e:
+-            self._DoBinman('build', '-d', self.TestFile('002_missing_node.dts'))
++            self._DoBinman('build', '-d', self.TestFile('pack/missing_node.dts'))
+         self.assertIn("does not have a 'binman' node", str(e.exception))
+ 
+     def testEmpty(self):
+         """Test that an empty binman node works OK (i.e. does nothing)"""
+-        result = self._RunBinman('build', '-d', self.TestFile('003_empty.dts'))
++        result = self._RunBinman('build', '-d', self.TestFile('pack/empty.dts'))
+         self.assertEqual(0, len(result.stderr))
+         self.assertEqual(0, result.return_code)
+ 
+@@ -863,25 +863,25 @@ class TestFunctional(unittest.TestCase):
+         """Test that an invalid entry is flagged"""
+         with self.assertRaises(Exception) as e:
+             result = self._RunBinman('build', '-d',
+-                                     self.TestFile('004_invalid_entry.dts'))
++                                     self.TestFile('pack/invalid_entry.dts'))
+         self.assertIn("Unknown entry type 'not-a-valid-type' in node "
+                 "'/binman/not-a-valid-type'", str(e.exception))
+ 
+     def testSimple(self):
+         """Test a simple binman with a single file"""
+-        data = self._DoReadFile('005_simple.dts')
++        data = self._DoReadFile('pack/simple.dts')
+         self.assertEqual(U_BOOT_DATA, data)
+ 
+     def testSimpleDebug(self):
+         """Test a simple binman run with debugging enabled"""
+-        self._DoTestFile('005_simple.dts', debug=True)
++        self._DoTestFile('pack/simple.dts', debug=True)
+ 
+     def testDual(self):
+         """Test that we can handle creating two images
+ 
+         This also tests image padding.
+         """
+-        retcode = self._DoTestFile('006_dual_image.dts')
++        retcode = self._DoTestFile('pack/dual_image.dts')
+         self.assertEqual(0, retcode)
+ 
+         image = control.images['image1']
+@@ -905,13 +905,13 @@ class TestFunctional(unittest.TestCase):
+     def testBadAlign(self):
+         """Test that an invalid alignment value is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('007_bad_align.dts')
++            self._DoTestFile('pack/bad_align.dts')
+         self.assertIn("Node '/binman/u-boot': Alignment 23 must be a power "
+                       "of two", str(e.exception))
+ 
+     def testPackSimple(self):
+         """Test that packing works as expected"""
+-        retcode = self._DoTestFile('008_pack.dts')
++        retcode = self._DoTestFile('pack/pack.dts')
+         self.assertEqual(0, retcode)
+         self.assertIn('image', control.images)
+         image = control.images['image']
+@@ -953,7 +953,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testPackExtra(self):
+         """Test that extra packing feature works as expected"""
+-        data, _, _, out_dtb_fname = self._DoReadFileDtb('009_pack_extra.dts',
++        data, _, _, out_dtb_fname = self._DoReadFileDtb('pack/pack_extra.dts',
+                                                         update_dtb=True)
+ 
+         self.assertIn('image', control.images)
+@@ -1059,35 +1059,35 @@ class TestFunctional(unittest.TestCase):
+     def testPackAlignPowerOf2(self):
+         """Test that invalid entry alignment is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('010_pack_align_power2.dts')
++            self._DoTestFile('pack/pack_align_power2.dts')
+         self.assertIn("Node '/binman/u-boot': Alignment 5 must be a power "
+                       "of two", str(e.exception))
+ 
+     def testPackAlignSizePowerOf2(self):
+         """Test that invalid entry size alignment is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('011_pack_align_size_power2.dts')
++            self._DoTestFile('pack/pack_align_size_power2.dts')
+         self.assertIn("Node '/binman/u-boot': Alignment size 55 must be a "
+                       "power of two", str(e.exception))
+ 
+     def testPackInvalidAlign(self):
+         """Test detection of an offset that does not match its alignment"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('012_pack_inv_align.dts')
++            self._DoTestFile('pack/pack_inv_align.dts')
+         self.assertIn("Node '/binman/u-boot': Offset 0x5 (5) does not match "
+                       "align 0x4 (4)", str(e.exception))
+ 
+     def testPackInvalidSizeAlign(self):
+         """Test that invalid entry size alignment is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('013_pack_inv_size_align.dts')
++            self._DoTestFile('pack/pack_inv_size_align.dts')
+         self.assertIn("Node '/binman/u-boot': Size 0x5 (5) does not match "
+                       "align-size 0x4 (4)", str(e.exception))
+ 
+     def testPackOverlap(self):
+         """Test that overlapping regions are detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('014_pack_overlap.dts')
++            self._DoTestFile('pack/pack_overlap.dts')
+         self.assertIn("Node '/binman/u-boot-align': Offset 0x3 (3) overlaps "
+                       "with previous entry '/binman/u-boot' ending at 0x4 (4)",
+                       str(e.exception))
+@@ -1095,20 +1095,20 @@ class TestFunctional(unittest.TestCase):
+     def testPackEntryOverflow(self):
+         """Test that entries that overflow their size are detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('015_pack_overflow.dts')
++            self._DoTestFile('pack/pack_overflow.dts')
+         self.assertIn("Node '/binman/u-boot': Entry contents size is 0x4 (4) "
+                       "but entry size is 0x3 (3)", str(e.exception))
+ 
+     def testPackImageOverflow(self):
+         """Test that entries which overflow the image size are detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('016_pack_image_overflow.dts')
++            self._DoTestFile('pack/pack_image_overflow.dts')
+         self.assertIn("Section '/binman': contents size 0x4 (4) exceeds section "
+                       "size 0x3 (3)", str(e.exception))
+ 
+     def testPackImageSize(self):
+         """Test that the image size can be set"""
+-        retcode = self._DoTestFile('017_pack_image_size.dts')
++        retcode = self._DoTestFile('pack/pack_image_size.dts')
+         self.assertEqual(0, retcode)
+         self.assertIn('image', control.images)
+         image = control.images['image']
+@@ -1116,7 +1116,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testPackImageSizeAlign(self):
+         """Test that image size alignemnt works as expected"""
+-        retcode = self._DoTestFile('018_pack_image_align.dts')
++        retcode = self._DoTestFile('pack/pack_image_align.dts')
+         self.assertEqual(0, retcode)
+         self.assertIn('image', control.images)
+         image = control.images['image']
+@@ -1125,27 +1125,27 @@ class TestFunctional(unittest.TestCase):
+     def testPackInvalidImageAlign(self):
+         """Test that invalid image alignment is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('019_pack_inv_image_align.dts')
++            self._DoTestFile('pack/pack_inv_image_align.dts')
+         self.assertIn("Section '/binman': Size 0x7 (7) does not match "
+                       "align-size 0x8 (8)", str(e.exception))
+ 
+     def testPackAlignPowerOf2Inv(self):
+         """Test that invalid image alignment is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('020_pack_inv_image_align_power2.dts')
++            self._DoTestFile('pack/pack_inv_image_align_power2.dts')
+         self.assertIn("Image '/binman': Alignment size 131 must be a power of "
+                       "two", str(e.exception))
+ 
+     def testImagePadByte(self):
+         """Test that the image pad byte can be specified"""
+         self._SetupSplElf()
+-        data = self._DoReadFile('021_image_pad.dts')
++        data = self._DoReadFile('pack/image_pad.dts')
+         self.assertEqual(U_BOOT_SPL_DATA + tools.get_bytes(0xff, 1) +
+                          U_BOOT_DATA, data)
+ 
+     def testImageName(self):
+         """Test that image files can be named"""
+-        retcode = self._DoTestFile('022_image_name.dts')
++        retcode = self._DoTestFile('pack/image_name.dts')
+         self.assertEqual(0, retcode)
+         image = control.images['image1']
+         fname = tools.get_output_filename('test-name')
+@@ -1163,7 +1163,7 @@ class TestFunctional(unittest.TestCase):
+     def testPackSorted(self):
+         """Test that entries can be sorted"""
+         self._SetupSplElf()
+-        data = self._DoReadFile('024_sorted.dts')
++        data = self._DoReadFile('pack/sorted.dts')
+         self.assertEqual(tools.get_bytes(0, 1) + U_BOOT_SPL_DATA +
+                          tools.get_bytes(0, 2) + U_BOOT_DATA, data)
+ 
+@@ -1171,7 +1171,7 @@ class TestFunctional(unittest.TestCase):
+         """Test that an entry at offset 0 is not given a new offset"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('025_pack_zero_size.dts')
++            self._DoTestFile('pack/pack_zero_size.dts')
+         self.assertIn("Node '/binman/u-boot-spl': Offset 0x0 (0) overlaps "
+                       "with previous entry '/binman/u-boot' ending at 0x4 (4)",
+                       str(e.exception))
+@@ -1185,7 +1185,7 @@ class TestFunctional(unittest.TestCase):
+         """Test that the end-at-4gb property requires a size property"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('027_pack_4gb_no_size.dts')
++            self._DoTestFile('pack/pack_4gb_no_size.dts')
+         self.assertIn("Image '/binman': Section size must be provided when "
+                       "using end-at-4gb", str(e.exception))
+ 
+@@ -1194,7 +1194,7 @@ class TestFunctional(unittest.TestCase):
+         together"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('098_4gb_and_skip_at_start_together.dts')
++            self._DoTestFile('pack/4gb_and_skip_at_start_together.dts')
+         self.assertIn("Image '/binman': Provide either 'end-at-4gb' or "
+                       "'skip-at-start'", str(e.exception))
+ 
+@@ -1202,7 +1202,7 @@ class TestFunctional(unittest.TestCase):
+         """Test that the end-at-4gb property checks for offset boundaries"""
+         self._SetupSplElf()
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('028_pack_4gb_outside.dts')
++            self._DoTestFile('pack/pack_4gb_outside.dts')
+         self.assertIn("Node '/binman/u-boot': Offset 0x0 (0) size 0x4 (4) "
+                       "is outside the section '/binman' starting at "
+                       '0xffffffe0 (4294967264) of size 0x20 (32)',
+@@ -1621,7 +1621,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testPackUnitAddress(self):
+         """Test that we support multiple binaries with the same name"""
+-        data = self._DoReadFile('054_unit_address.dts')
++        data = self._DoReadFile('pack/unit_address.dts')
+         self.assertEqual(U_BOOT_DATA + U_BOOT_DATA, data)
+ 
+     def testSections(self):
+@@ -1669,7 +1669,7 @@ class TestFunctional(unittest.TestCase):
+         try:
+             state.SetAllowEntryExpansion(False)
+             with self.assertRaises(ValueError) as e:
+-                self._DoReadFile('059_change_size.dts', True)
++                self._DoReadFile('pack/change_size.dts', True)
+             self.assertIn("Node '/binman/_testing': Cannot update entry size from 2 to 3",
+                           str(e.exception))
+         finally:
+@@ -2037,7 +2037,7 @@ class TestFunctional(unittest.TestCase):
+     def testUsesPos(self):
+         """Test that the 'pos' property cannot be used anymore"""
+         with self.assertRaises(ValueError) as e:
+-           data = self._DoReadFile('079_uses_pos.dts')
++           data = self._DoReadFile('pack/uses_pos.dts')
+         self.assertIn("Node '/binman/u-boot': Please use 'offset' instead of "
+                       "'pos'", str(e.exception))
+ 
+@@ -2065,7 +2065,7 @@ class TestFunctional(unittest.TestCase):
+         # We should only get the expected message in verbose mode
+         for verbosity in (0, 2):
+             with terminal.capture() as (stdout, stderr):
+-                retcode = self._DoTestFile('006_dual_image.dts',
++                retcode = self._DoTestFile('pack/dual_image.dts',
+                                            verbosity=verbosity,
+                                            images=['image2'])
+             self.assertEqual(0, retcode)
+@@ -2231,7 +2231,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testExtendSize(self):
+         """Test an extending entry"""
+-        data, _, map_data, _ = self._DoReadFileDtb('088_extend_size.dts',
++        data, _, map_data, _ = self._DoReadFileDtb('pack/extend_size.dts',
+                                                    map=True)
+         expect = (tools.get_bytes(ord('a'), 8) + U_BOOT_DATA +
+                   MRC_DATA + tools.get_bytes(ord('b'), 1) + U_BOOT_DATA +
+@@ -2255,7 +2255,7 @@ class TestFunctional(unittest.TestCase):
+         """Test an extending entry which fails to provide contents"""
+         with terminal.capture() as (stdout, stderr):
+             with self.assertRaises(ValueError) as e:
+-                self._DoReadFileDtb('089_extend_size_bad.dts', map=True)
++                self._DoReadFileDtb('pack/extend_size_bad.dts', map=True)
+         self.assertIn("Node '/binman/_testing': Cannot obtain contents when "
+                       'expanding entry', str(e.exception))
+ 
+@@ -2384,7 +2384,7 @@ class TestFunctional(unittest.TestCase):
+         """Test that overlapping regions are detected"""
+         with terminal.capture() as (stdout, stderr):
+             with self.assertRaises(ValueError) as e:
+-                self._DoTestFile('014_pack_overlap.dts', map=True)
++                self._DoTestFile('pack/pack_overlap.dts', map=True)
+         map_fname = tools.get_output_filename('image.map')
+         self.assertEqual("Wrote map file '%s' to show errors\n" % map_fname,
+                          stdout.getvalue())
+@@ -2406,7 +2406,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSectionOffset(self):
+         """Tests use of a section with an offset"""
+-        data, _, map_data, _ = self._DoReadFileDtb('101_sections_offset.dts',
++        data, _, map_data, _ = self._DoReadFileDtb('pack/sections_offset.dts',
+                                                    map=True)
+         self.assertEqual('''ImagePos    Offset      Size  Name
+ 00000000  00000000  00000038  image
+@@ -2691,7 +2691,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testEntryExpand(self):
+         """Test extending an entry after it is packed"""
+-        data = self._DoReadFile('121_entry_extend.dts')
++        data = self._DoReadFile('pack/entry_extend.dts')
+         self.assertEqual(b'aaa', data[:3])
+         self.assertEqual(U_BOOT_DATA, data[3:3 + len(U_BOOT_DATA)])
+         self.assertEqual(b'aaa', data[-3:])
+@@ -2699,13 +2699,13 @@ class TestFunctional(unittest.TestCase):
+     def testEntryExtendBad(self):
+         """Test extending an entry after it is packed, twice"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('122_entry_extend_twice.dts')
++            self._DoReadFile('pack/entry_extend_twice.dts')
+         self.assertIn("Image '/binman': Entries changed size after packing",
+                       str(e.exception))
+ 
+     def testEntryExtendSection(self):
+         """Test extending an entry within a section after it is packed"""
+-        data = self._DoReadFile('123_entry_extend_section.dts')
++        data = self._DoReadFile('pack/entry_extend_section.dts')
+         self.assertEqual(b'aaa', data[:3])
+         self.assertEqual(U_BOOT_DATA, data[3:3 + len(U_BOOT_DATA)])
+         self.assertEqual(b'aaa', data[-3:])
+@@ -2845,7 +2845,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testFindFdtmapMissing(self):
+         """Test failing to locate an FDP map"""
+-        data = self._DoReadFile('005_simple.dts')
++        data = self._DoReadFile('pack/simple.dts')
+         self.assertEqual(None, fdtmap.LocateFdtmap(data))
+ 
+     def testFindImageHeader(self):
+@@ -2869,7 +2869,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testFindImageHeaderMissing(self):
+         """Test failing to locate an image header"""
+-        data = self._DoReadFile('005_simple.dts')
++        data = self._DoReadFile('pack/simple.dts')
+         self.assertEqual(None, image_header.LocateHeaderOffset(data))
+ 
+     def testReadImage(self):
+@@ -2899,7 +2899,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testReadImageFail(self):
+         """Test failing to read an image image's FDT map"""
+-        self._DoReadFile('005_simple.dts')
++        self._DoReadFile('pack/simple.dts')
+         image_fname = tools.get_output_filename('image.bin')
+         with self.assertRaises(ValueError) as e:
+             image = Image.FromFile(image_fname)
+@@ -2944,7 +2944,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testListCmdFail(self):
+         """Test failing to list an image"""
+-        self._DoReadFile('005_simple.dts')
++        self._DoReadFile('pack/simple.dts')
+         tmpdir = None
+         try:
+             tmpdir, updated_fname = self._SetupImageInTmpdir()
+@@ -3236,7 +3236,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testPackAlignSection(self):
+         """Test that sections can have alignment"""
+-        self._DoReadFile('131_pack_align_section.dts')
++        self._DoReadFile('pack/pack_align_section.dts')
+ 
+         self.assertIn('image', control.images)
+         image = control.images['image']
+@@ -3533,7 +3533,7 @@ class TestFunctional(unittest.TestCase):
+         """Test contracting an entry after it is packed"""
+         try:
+             state.SetAllowEntryContraction(True)
+-            data = self._DoReadFileDtb('140_entry_shrink.dts',
++            data = self._DoReadFileDtb('pack/entry_shrink.dts',
+                                        update_dtb=True)[0]
+         finally:
+             state.SetAllowEntryContraction(False)
+@@ -3543,7 +3543,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testEntryShrinkFail(self):
+         """Test not being allowed to contract an entry after it is packed"""
+-        data = self._DoReadFileDtb('140_entry_shrink.dts', update_dtb=True)[0]
++        data = self._DoReadFileDtb('pack/entry_shrink.dts', update_dtb=True)[0]
+ 
+         # In this case there is a spare byte at the end of the data. The size of
+         # the contents is only 1 byte but we still have the size before it
+@@ -3943,7 +3943,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testPackOverlapZero(self):
+         """Test that zero-size overlapping regions are ignored"""
+-        self._DoTestFile('160_pack_overlap_zero.dts')
++        self._DoTestFile('pack/pack_overlap_zero.dts')
+ 
+     def _CheckSimpleFitData(self, fit_data, kernel_data, fdt1_data):
+         # The data should be inside the FIT
+@@ -4173,7 +4173,7 @@ class TestFunctional(unittest.TestCase):
+     def testPadInSections(self):
+         """Test pad-before, pad-after for entries in sections"""
+         data, _, _, out_dtb_fname = self._DoReadFileDtb(
+-            '166_pad_in_sections.dts', update_dtb=True)
++            'pack/pad_in_sections.dts', update_dtb=True)
+         expected = (U_BOOT_DATA + tools.get_bytes(ord('!'), 12) +
+                     U_BOOT_DATA + tools.get_bytes(ord('!'), 6) +
+                     U_BOOT_DATA)
+@@ -4448,7 +4448,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSkipAtStart(self):
+         """Test handling of skip-at-start section"""
+-        data = self._DoReadFile('177_skip_at_start.dts')
++        data = self._DoReadFile('pack/skip_at_start.dts')
+         self.assertEqual(U_BOOT_DATA, data)
+ 
+         image = control.images['image']
+@@ -4465,7 +4465,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSkipAtStartPad(self):
+         """Test handling of skip-at-start section with padded entry"""
+-        data = self._DoReadFile('178_skip_at_start_pad.dts')
++        data = self._DoReadFile('pack/skip_at_start_pad.dts')
+         before = tools.get_bytes(0, 8)
+         after = tools.get_bytes(0, 4)
+         all = before + U_BOOT_DATA + after
+@@ -4485,7 +4485,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSkipAtStartSectionPad(self):
+         """Test handling of skip-at-start section with padding"""
+-        data = self._DoReadFile('179_skip_at_start_section_pad.dts')
++        data = self._DoReadFile('pack/skip_at_start_section_pad.dts')
+         before = tools.get_bytes(0, 8)
+         after = tools.get_bytes(0, 4)
+         all = before + U_BOOT_DATA + after
+@@ -4506,7 +4506,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSectionPad(self):
+         """Testing padding with sections"""
+-        data = self._DoReadFile('180_section_pad.dts')
++        data = self._DoReadFile('pack/section_pad.dts')
+         expected = (tools.get_bytes(ord('&'), 3) +
+                     tools.get_bytes(ord('!'), 5) +
+                     U_BOOT_DATA +
+@@ -4516,7 +4516,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testSectionAlign(self):
+         """Testing alignment with sections"""
+-        data = self._DoReadFileDtb('181_section_align.dts', map=True)[0]
++        data = self._DoReadFileDtb('pack/section_align.dts', map=True)[0]
+         expected = (b'\0' +                         # fill section
+                     tools.get_bytes(ord('&'), 1) +   # padding to section align
+                     b'\0' +                         # fill section
+@@ -5033,7 +5033,7 @@ class TestFunctional(unittest.TestCase):
+ 
+     def testAlignDefault(self):
+         """Test that default alignment works on sections"""
+-        data = self._DoReadFile('200_align_default.dts')
++        data = self._DoReadFile('pack/align_default.dts')
+         expected = (U_BOOT_DATA + tools.get_bytes(0, 8 - len(U_BOOT_DATA)) +
+                     U_BOOT_DATA)
+         # Special alignment for section
+@@ -5618,7 +5618,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def test_uses_expand_size(self):
+         """Test that the 'expand-size' property cannot be used anymore"""
+         with self.assertRaises(ValueError) as e:
+-           data = self._DoReadFile('225_expand_size_bad.dts')
++           data = self._DoReadFile('pack/expand_size_bad.dts')
+         self.assertIn(
+             "Node '/binman/u-boot': Please use 'extend-size' instead of 'expand-size'",
+             str(e.exception))
+@@ -6580,7 +6580,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testSectionInner(self):
+         """Test an inner section with a size"""
+-        data = self._DoReadFile('267_section_inner.dts')
++        data = self._DoReadFile('pack/section_inner.dts')
+         expected = U_BOOT_DATA + tools.get_bytes(0, 12)
+         self.assertEqual(expected, data)
+ 
+@@ -7615,7 +7615,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def test_assume_size(self):
+         """Test handling of the assume-size property for external blob"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('326_assume_size.dts', allow_missing=True,
++            self._DoTestFile('pack/assume_size.dts', allow_missing=True,
+                              allow_fake_blobs=True)
+         self.assertIn("contents size 0xa (10) exceeds section size 0x9 (9)",
+                       str(e.exception))
+@@ -7623,7 +7623,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def test_assume_size_ok(self):
+         """Test handling of the assume-size where it fits OK"""
+         with terminal.capture() as (stdout, stderr):
+-            self._DoTestFile('327_assume_size_ok.dts', allow_missing=True,
++            self._DoTestFile('pack/assume_size_ok.dts', allow_missing=True,
+                              allow_fake_blobs=True)
+         err = stderr.getvalue()
+         self.assertRegex(
+@@ -7633,7 +7633,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def test_assume_size_no_fake(self):
+         """Test handling of the assume-size where it fits OK"""
+         with terminal.capture() as (stdout, stderr):
+-            self._DoTestFile('327_assume_size_ok.dts', allow_missing=True)
++            self._DoTestFile('pack/assume_size_ok.dts', allow_missing=True)
+         err = stderr.getvalue()
+         self.assertRegex(
+             err,
+diff --git a/tools/binman/test/098_4gb_and_skip_at_start_together.dts b/tools/binman/test/pack/4gb_and_skip_at_start_together.dts
+similarity index 100%
+rename from tools/binman/test/098_4gb_and_skip_at_start_together.dts
+rename to tools/binman/test/pack/4gb_and_skip_at_start_together.dts
+diff --git a/tools/binman/test/200_align_default.dts b/tools/binman/test/pack/align_default.dts
+similarity index 100%
+rename from tools/binman/test/200_align_default.dts
+rename to tools/binman/test/pack/align_default.dts
+diff --git a/tools/binman/test/326_assume_size.dts b/tools/binman/test/pack/assume_size.dts
+similarity index 100%
+rename from tools/binman/test/326_assume_size.dts
+rename to tools/binman/test/pack/assume_size.dts
+diff --git a/tools/binman/test/327_assume_size_ok.dts b/tools/binman/test/pack/assume_size_ok.dts
+similarity index 100%
+rename from tools/binman/test/327_assume_size_ok.dts
+rename to tools/binman/test/pack/assume_size_ok.dts
+diff --git a/tools/binman/test/007_bad_align.dts b/tools/binman/test/pack/bad_align.dts
+similarity index 100%
+rename from tools/binman/test/007_bad_align.dts
+rename to tools/binman/test/pack/bad_align.dts
+diff --git a/tools/binman/test/059_change_size.dts b/tools/binman/test/pack/change_size.dts
+similarity index 100%
+rename from tools/binman/test/059_change_size.dts
+rename to tools/binman/test/pack/change_size.dts
+diff --git a/tools/binman/test/006_dual_image.dts b/tools/binman/test/pack/dual_image.dts
+similarity index 100%
+rename from tools/binman/test/006_dual_image.dts
+rename to tools/binman/test/pack/dual_image.dts
+diff --git a/tools/binman/test/003_empty.dts b/tools/binman/test/pack/empty.dts
+similarity index 100%
+rename from tools/binman/test/003_empty.dts
+rename to tools/binman/test/pack/empty.dts
+diff --git a/tools/binman/test/121_entry_extend.dts b/tools/binman/test/pack/entry_extend.dts
+similarity index 100%
+rename from tools/binman/test/121_entry_extend.dts
+rename to tools/binman/test/pack/entry_extend.dts
+diff --git a/tools/binman/test/123_entry_extend_section.dts b/tools/binman/test/pack/entry_extend_section.dts
+similarity index 100%
+rename from tools/binman/test/123_entry_extend_section.dts
+rename to tools/binman/test/pack/entry_extend_section.dts
+diff --git a/tools/binman/test/122_entry_extend_twice.dts b/tools/binman/test/pack/entry_extend_twice.dts
+similarity index 100%
+rename from tools/binman/test/122_entry_extend_twice.dts
+rename to tools/binman/test/pack/entry_extend_twice.dts
+diff --git a/tools/binman/test/140_entry_shrink.dts b/tools/binman/test/pack/entry_shrink.dts
+similarity index 100%
+rename from tools/binman/test/140_entry_shrink.dts
+rename to tools/binman/test/pack/entry_shrink.dts
+diff --git a/tools/binman/test/225_expand_size_bad.dts b/tools/binman/test/pack/expand_size_bad.dts
+similarity index 100%
+rename from tools/binman/test/225_expand_size_bad.dts
+rename to tools/binman/test/pack/expand_size_bad.dts
+diff --git a/tools/binman/test/088_extend_size.dts b/tools/binman/test/pack/extend_size.dts
+similarity index 100%
+rename from tools/binman/test/088_extend_size.dts
+rename to tools/binman/test/pack/extend_size.dts
+diff --git a/tools/binman/test/089_extend_size_bad.dts b/tools/binman/test/pack/extend_size_bad.dts
+similarity index 100%
+rename from tools/binman/test/089_extend_size_bad.dts
+rename to tools/binman/test/pack/extend_size_bad.dts
+diff --git a/tools/binman/test/022_image_name.dts b/tools/binman/test/pack/image_name.dts
+similarity index 100%
+rename from tools/binman/test/022_image_name.dts
+rename to tools/binman/test/pack/image_name.dts
+diff --git a/tools/binman/test/021_image_pad.dts b/tools/binman/test/pack/image_pad.dts
+similarity index 100%
+rename from tools/binman/test/021_image_pad.dts
+rename to tools/binman/test/pack/image_pad.dts
+diff --git a/tools/binman/test/001_invalid.dts b/tools/binman/test/pack/invalid.dts
+similarity index 100%
+rename from tools/binman/test/001_invalid.dts
+rename to tools/binman/test/pack/invalid.dts
+diff --git a/tools/binman/test/004_invalid_entry.dts b/tools/binman/test/pack/invalid_entry.dts
+similarity index 100%
+rename from tools/binman/test/004_invalid_entry.dts
+rename to tools/binman/test/pack/invalid_entry.dts
+diff --git a/tools/binman/test/002_missing_node.dts b/tools/binman/test/pack/missing_node.dts
+similarity index 100%
+rename from tools/binman/test/002_missing_node.dts
+rename to tools/binman/test/pack/missing_node.dts
+diff --git a/tools/binman/test/008_pack.dts b/tools/binman/test/pack/pack.dts
+similarity index 100%
+rename from tools/binman/test/008_pack.dts
+rename to tools/binman/test/pack/pack.dts
+diff --git a/tools/binman/test/027_pack_4gb_no_size.dts b/tools/binman/test/pack/pack_4gb_no_size.dts
+similarity index 100%
+rename from tools/binman/test/027_pack_4gb_no_size.dts
+rename to tools/binman/test/pack/pack_4gb_no_size.dts
+diff --git a/tools/binman/test/028_pack_4gb_outside.dts b/tools/binman/test/pack/pack_4gb_outside.dts
+similarity index 100%
+rename from tools/binman/test/028_pack_4gb_outside.dts
+rename to tools/binman/test/pack/pack_4gb_outside.dts
+diff --git a/tools/binman/test/010_pack_align_power2.dts b/tools/binman/test/pack/pack_align_power2.dts
+similarity index 100%
+rename from tools/binman/test/010_pack_align_power2.dts
+rename to tools/binman/test/pack/pack_align_power2.dts
+diff --git a/tools/binman/test/131_pack_align_section.dts b/tools/binman/test/pack/pack_align_section.dts
+similarity index 100%
+rename from tools/binman/test/131_pack_align_section.dts
+rename to tools/binman/test/pack/pack_align_section.dts
+diff --git a/tools/binman/test/011_pack_align_size_power2.dts b/tools/binman/test/pack/pack_align_size_power2.dts
+similarity index 100%
+rename from tools/binman/test/011_pack_align_size_power2.dts
+rename to tools/binman/test/pack/pack_align_size_power2.dts
+diff --git a/tools/binman/test/009_pack_extra.dts b/tools/binman/test/pack/pack_extra.dts
+similarity index 100%
+rename from tools/binman/test/009_pack_extra.dts
+rename to tools/binman/test/pack/pack_extra.dts
+diff --git a/tools/binman/test/018_pack_image_align.dts b/tools/binman/test/pack/pack_image_align.dts
+similarity index 100%
+rename from tools/binman/test/018_pack_image_align.dts
+rename to tools/binman/test/pack/pack_image_align.dts
+diff --git a/tools/binman/test/016_pack_image_overflow.dts b/tools/binman/test/pack/pack_image_overflow.dts
+similarity index 100%
+rename from tools/binman/test/016_pack_image_overflow.dts
+rename to tools/binman/test/pack/pack_image_overflow.dts
+diff --git a/tools/binman/test/017_pack_image_size.dts b/tools/binman/test/pack/pack_image_size.dts
+similarity index 100%
+rename from tools/binman/test/017_pack_image_size.dts
+rename to tools/binman/test/pack/pack_image_size.dts
+diff --git a/tools/binman/test/012_pack_inv_align.dts b/tools/binman/test/pack/pack_inv_align.dts
+similarity index 100%
+rename from tools/binman/test/012_pack_inv_align.dts
+rename to tools/binman/test/pack/pack_inv_align.dts
+diff --git a/tools/binman/test/019_pack_inv_image_align.dts b/tools/binman/test/pack/pack_inv_image_align.dts
+similarity index 100%
+rename from tools/binman/test/019_pack_inv_image_align.dts
+rename to tools/binman/test/pack/pack_inv_image_align.dts
+diff --git a/tools/binman/test/020_pack_inv_image_align_power2.dts b/tools/binman/test/pack/pack_inv_image_align_power2.dts
+similarity index 100%
+rename from tools/binman/test/020_pack_inv_image_align_power2.dts
+rename to tools/binman/test/pack/pack_inv_image_align_power2.dts
+diff --git a/tools/binman/test/013_pack_inv_size_align.dts b/tools/binman/test/pack/pack_inv_size_align.dts
+similarity index 100%
+rename from tools/binman/test/013_pack_inv_size_align.dts
+rename to tools/binman/test/pack/pack_inv_size_align.dts
+diff --git a/tools/binman/test/015_pack_overflow.dts b/tools/binman/test/pack/pack_overflow.dts
+similarity index 100%
+rename from tools/binman/test/015_pack_overflow.dts
+rename to tools/binman/test/pack/pack_overflow.dts
+diff --git a/tools/binman/test/014_pack_overlap.dts b/tools/binman/test/pack/pack_overlap.dts
+similarity index 100%
+rename from tools/binman/test/014_pack_overlap.dts
+rename to tools/binman/test/pack/pack_overlap.dts
+diff --git a/tools/binman/test/160_pack_overlap_zero.dts b/tools/binman/test/pack/pack_overlap_zero.dts
+similarity index 100%
+rename from tools/binman/test/160_pack_overlap_zero.dts
+rename to tools/binman/test/pack/pack_overlap_zero.dts
+diff --git a/tools/binman/test/025_pack_zero_size.dts b/tools/binman/test/pack/pack_zero_size.dts
+similarity index 100%
+rename from tools/binman/test/025_pack_zero_size.dts
+rename to tools/binman/test/pack/pack_zero_size.dts
+diff --git a/tools/binman/test/166_pad_in_sections.dts b/tools/binman/test/pack/pad_in_sections.dts
+similarity index 100%
+rename from tools/binman/test/166_pad_in_sections.dts
+rename to tools/binman/test/pack/pad_in_sections.dts
+diff --git a/tools/binman/test/181_section_align.dts b/tools/binman/test/pack/section_align.dts
+similarity index 100%
+rename from tools/binman/test/181_section_align.dts
+rename to tools/binman/test/pack/section_align.dts
+diff --git a/tools/binman/test/267_section_inner.dts b/tools/binman/test/pack/section_inner.dts
+similarity index 100%
+rename from tools/binman/test/267_section_inner.dts
+rename to tools/binman/test/pack/section_inner.dts
+diff --git a/tools/binman/test/180_section_pad.dts b/tools/binman/test/pack/section_pad.dts
+similarity index 100%
+rename from tools/binman/test/180_section_pad.dts
+rename to tools/binman/test/pack/section_pad.dts
+diff --git a/tools/binman/test/101_sections_offset.dts b/tools/binman/test/pack/sections_offset.dts
+similarity index 100%
+rename from tools/binman/test/101_sections_offset.dts
+rename to tools/binman/test/pack/sections_offset.dts
+diff --git a/tools/binman/test/005_simple.dts b/tools/binman/test/pack/simple.dts
+similarity index 100%
+rename from tools/binman/test/005_simple.dts
+rename to tools/binman/test/pack/simple.dts
+diff --git a/tools/binman/test/177_skip_at_start.dts b/tools/binman/test/pack/skip_at_start.dts
+similarity index 100%
+rename from tools/binman/test/177_skip_at_start.dts
+rename to tools/binman/test/pack/skip_at_start.dts
+diff --git a/tools/binman/test/178_skip_at_start_pad.dts b/tools/binman/test/pack/skip_at_start_pad.dts
+similarity index 100%
+rename from tools/binman/test/178_skip_at_start_pad.dts
+rename to tools/binman/test/pack/skip_at_start_pad.dts
+diff --git a/tools/binman/test/179_skip_at_start_section_pad.dts b/tools/binman/test/pack/skip_at_start_section_pad.dts
+similarity index 100%
+rename from tools/binman/test/179_skip_at_start_section_pad.dts
+rename to tools/binman/test/pack/skip_at_start_section_pad.dts
+diff --git a/tools/binman/test/024_sorted.dts b/tools/binman/test/pack/sorted.dts
+similarity index 100%
+rename from tools/binman/test/024_sorted.dts
+rename to tools/binman/test/pack/sorted.dts
+diff --git a/tools/binman/test/054_unit_address.dts b/tools/binman/test/pack/unit_address.dts
+similarity index 100%
+rename from tools/binman/test/054_unit_address.dts
+rename to tools/binman/test/pack/unit_address.dts
+diff --git a/tools/binman/test/079_uses_pos.dts b/tools/binman/test/pack/uses_pos.dts
+similarity index 100%
+rename from tools/binman/test/079_uses_pos.dts
+rename to tools/binman/test/pack/uses_pos.dts
 -- 
 2.43.0
 
-base-commit: 4d060dd7ce03abf83bce96fb9c65a8b8e715fe88
-branch: bini-us
