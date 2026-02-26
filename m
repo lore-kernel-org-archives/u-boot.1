@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA8EFD9E10
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 20:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5182FD9E14
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 21:46:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B25C383E63;
-	Thu, 26 Feb 2026 21:40:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E5C4483AA9;
+	Thu, 26 Feb 2026 22:46:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DUSM9+hI";
+	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="UFKtQcyJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1622983E8E; Thu, 26 Feb 2026 20:32:39 +0100 (CET)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 102EE83D1A; Thu, 26 Feb 2026 22:46:42 +0100 (CET)
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
+ [IPv6:2001:df5:b000:5::4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D11283D1A
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 20:32:36 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=blfizzyy@gmail.com
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-824a9348603so496663b3a.2
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 11:32:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1772134355; x=1772739155; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=G1vx/jeIl8YtRxBnYTtmCsOHyWLUgb9eFDD5PAZxUV8=;
- b=DUSM9+hIJblavgLmsY7MN5C1Ht6YDoJPf0avZqMtPpQi7YZ8m04r5MrXoTB0AhuEA6
- bz0oNiDkzv2pfq3Inj3zaWmGo7WsVj2XePHEk2AxM8k2kQxCtBHnC0EnHcnHJrOngyCe
- ZtFRN5wmeuhAo3dXGHCqTDBXAkZcMirC6Jipu4OyG+DoU9QY5UT7kP43Gj0xs4rLuy2r
- Y1Pv/Vmjtkvgiq6NNzI9Pe6Yvrhv63N3o/tOqNa7Pck0rCOlJogpFQDvrkflB1gmiXOQ
- caG8pXv0l0FREoN2JgxfIuThbcOBdF8+NxPlZoYnaEsdpTW+zOT3w/CTRtX2N9Nw8AtJ
- g8bA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772134355; x=1772739155;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G1vx/jeIl8YtRxBnYTtmCsOHyWLUgb9eFDD5PAZxUV8=;
- b=gJqtakQcEsrLFgXmuskIcGYMLuqXsUZjQ6+VZWtrCj19A/uxQoyw609hPAsAReBHWO
- jp240beJyr0KFOy/Ww20txwnJufk9nHmv2OTYEcyl0E3X2e7sbuldenxpDJrmC/ScDmc
- Rhns7QOPM7rqd7QhgeEOGkxKArf93i9O8MoO5uqzwmzdRTwyANOPC5UwXCl12eJoEcHl
- /phkzcpXBTRdg++Xq680bYYRx0doWTfKdSF3RyKFlLRqwE7vgcvaleDCAMzHHn+tVv6G
- b3ZdTihNWqC3iY50Ck4rkcl2rDlvlSRgklG864rs+d7fVF1EsOtN5GxJzEML7kaYNtN/
- WPwA==
-X-Gm-Message-State: AOJu0YyVEZs8rkWKCacBoysY1bSTb6wvQvAk5E8ujdUvYwvsD5SqMXjt
- RMkzlVIjsY4vSxx00ozVx5n/33Oe8FlL3lSzD4yV8ikakofmD2tHZZsVuq0G6uMH
-X-Gm-Gg: ATEYQzx8y9mPs8SDPxEfxxrJ15yZZH9TaTaXEvj1Mq6+btOgJTv/KbxJ2xJv6yizQap
- NfWrKJEXlEPbz7b6e266Ta0krgOHCSwQB0/Xx2JsScq1HbiJwRXCH+ZU+hh9SuwMeivQAPon4c/
- Si2/10eVZGRbDafyq28LdVHeXiCH/wke90u+nX/Pa/KmepQGprYDuwmd/LCq9e1fDEWiLe14iCX
- 4EYpMmzsJc69RU6p6jOBJLNLweN/lj/C1gwOwBNKCNeyWmbCf5mjnkKmg/Vkso9baRZD4YAdq4f
- c6JCyyJZQPf8GAxjzYEt9BUixxaDrQ3Qv6VUVbeEehFC6nwcPVL2GKHxmBryvQgJWrXE5vNQDTS
- 4gX2+6ePpT0P5CroS5KXTNgSZNm4u7O0Qc76Vqfb0wwWTtP1VcXhICZSjNoqpYD5mreAJQJPTxz
- PEJf5QHsZA5/wIz8HfCM7S0+W9kcIWneJvG1SQ64y1312ItUN7VpavWCIRBzE=
-X-Received: by 2002:a05:6a20:729c:b0:38b:d9b0:e944 with SMTP id
- adf61e73a8af0-395c3af178fmr355744637.53.1772134354513; 
- Thu, 26 Feb 2026 11:32:34 -0800 (PST)
-Received: from localhost.localdomain ([2401:4900:88b7:799:4d33:657c:6c3c:3b52])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2adfb6b9b32sm49097505ad.66.2026.02.26.11.32.30
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 26 Feb 2026 11:32:34 -0800 (PST)
-From: Ajit Singh <blfizzyy@gmail.com>
-To: u-boot@lists.denx.de,
-	u-boot-qcom@groups.io
-Cc: Lukasz Majewski <lukma@denx.de>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Luca Weiss <luca.weiss@fairphone.com>, Ajit Singh <blfizzyy@gmail.com>
-Subject: [PATCH] clk: qcom: sc7280: add missing SDCC1 clocks
-Date: Fri, 27 Feb 2026 01:02:17 +0530
-Message-ID: <20260226193217.82657-1-blfizzyy@gmail.com>
-X-Mailer: git-send-email 2.50.1
+ by phobos.denx.de (Postfix) with ESMTPS id 41F1883642
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:46:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=alliedtelesis.co.nz
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Ronan.Dalton@alliedtelesis.co.nz
+Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 56ADE2C0304;
+ Fri, 27 Feb 2026 10:46:33 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+ s=mail181024; t=1772142393;
+ bh=+sCnGGuvn5U//P0isOY73kXO1Zn8CjP4GVRUSLlxs8Y=;
+ h=From:To:Subject:Date:References:In-Reply-To:From;
+ b=UFKtQcyJK9MxCeIbI9YWHRm64TzmpG+KoPMzhiID2opAjd2NaTczz5QTY+m66GVtS
+ 9nZNt9fgG7oOSkJRb1IFeRSjbstW2ylCx9VyWvKNU7ZZDY5Sn5OCammeSUwcZn3vYL
+ LKzdz0BgqEiqe09cN12X5wnlxfkxZwdolkmSsLyn8pXLxiKVPAwErvNGhlfkxERMnX
+ 3fCqG/muXbqlw0AodoL2Q3HSf9EYClb6HihUqm+D4qh30Wal6rD4RIYi+H2UsiZ293
+ iLiqESS3NbQdFNjLUAFsk6jBpcu0MVELMS+R3f1oH3N6JzWQe21G+362Ju5FHxrGYo
+ M2WVEC1+sQfWw==
+Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by
+ svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
+ id <B69a0bf390000>; Fri, 27 Feb 2026 10:46:33 +1300
+Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8:f753:6de:11c0:a008) by
+ svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8:f753:6de:11c0:a008) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.39; Fri, 27 Feb 2026 10:46:33 +1300
+Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
+ svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
+ 15.02.1748.039; Fri, 27 Feb 2026 10:46:33 +1300
+From: Ronan Dalton <Ronan.Dalton@alliedtelesis.co.nz>
+To: "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] usb: Fix USB read configuration error on some devices
+Thread-Topic: [PATCH] usb: Fix USB read configuration error on some devices
+Thread-Index: AQHcoiQSuGyGCqWzE0ybxFJ4VBL9WbWLSLyAgAMqE4CABkG4AA==
+Date: Thu, 26 Feb 2026 21:46:33 +0000
+Message-ID: <853b645b96d05c8e1a193e1ab10458b7e8228a9f.camel@alliedtelesis.co.nz>
+References: <20260220044709.1065540-1-ronan.dalton@alliedtelesis.co.nz>
+ <c9179461-cc40-49b6-ab10-086f4e5c1eda@mailbox.org>
+ <4550f320c271db50ff8af455244eadad0f435099.camel@alliedtelesis.co.nz>
+In-Reply-To: <4550f320c271db50ff8af455244eadad0f435099.camel@alliedtelesis.co.nz>
+Accept-Language: en-US, en-NZ
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.33.12.18]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <ECE008D01B294C4E9E23D9829BEF713A@alliedtelesis.co.nz>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 26 Feb 2026 21:40:10 +0100
+X-SEG-SpamProfiler-Analysis: v=2.4 cv=d/NWygjE c=1 sm=1 tr=0 ts=69a0bf39
+ a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=BhaoXNk7gXQA:10
+ a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=hCYQpMK8XeWRj9S7-g8A:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-SEG-SpamProfiler-Score: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,29 +95,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add GCC_SDCC1_AHB_CLK and GCC_SDCC1_APPS_CLK gate clocks.
-Required on platforms where SDCC1 is used for eMMC.
-
-Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=a3cc092196ef63570c8744c3ac88c3c6c67ab44b
-
-Signed-off-by: Ajit Singh <blfizzyy@gmail.com>
----
- drivers/clk/qcom/clock-sc7280.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
-index 7b6ed826023..acdaccf7462 100644
---- a/drivers/clk/qcom/clock-sc7280.c
-+++ b/drivers/clk/qcom/clock-sc7280.c
-@@ -155,6 +155,8 @@ static const struct gate_clk sc7280_clks[] = {
- 	GATE_CLK(GCC_UFS_1_CLKREF_EN, 0x8c000, BIT(0)),
- 	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x14008, BIT(0)),
- 	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x14004, BIT(0)),
-+	GATE_CLK(GCC_SDCC1_AHB_CLK,  0x75004, BIT(0)),
-+	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x75008, BIT(0)),
- };
- 
- static int sc7280_enable(struct clk *clk)
--- 
-2.50.1 (Apple Git-155)
-
+SGkgTWFyZWssDQoNCk9uIFN1biwgMjAyNi0wMi0yMiBhdCAyMjoxMyArMDAwMCwgUm9uYW4gRGFs
+dG9uIHdyb3RlOg0KPiBPbiBGcmksIDIwMjYtMDItMjAgYXQgMjI6NTQgKzAxMDAsIE1hcmVrIFZh
+c3V0IHdyb3RlOg0KPiA+IA0KPiA+IERvZXMgdGhlIGZvbGxvd2luZyBhbHNvIG1ha2UgdGhlIFVT
+QiBzdGljayB3b3JrID8NCj4gPiANCj4gPiA9PiBzZXRlbnYgdXNiX3Bnb29kX2RlbGF5IDIwMDAN
+Cj4gPiA9PiB1c2IgcmVzZXQNCj4gPiANCj4gPiA/DQo+IA0KPiBJdCBkb2VzIG5vdC4NCg0KSSBq
+dXN0IHdhbnRlZCB0byBmb2xsb3ctdXAgdG8gY2hlY2sgdGhlIHN0YXR1cyBvZiB0aGlzIHBhdGNo
+LiBHaXZlbg0KdGhhdCB5b3VyIHN1Z2dlc3RlZCB3b3JrYXJvdW5kIGRvZXMgbm90IGZpeCB0aGUg
+aXNzdWUsIGRvIHlvdSBoYXZlIGFueQ0KZnVydGhlciBjb21tZW50cyBvbiB0aGUgcGF0Y2g/DQoN
+ClRoYW5rcywNClJvbmFuLg0K
