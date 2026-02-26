@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5182FD9E14
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 21:46:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF068FD9E1A
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 22:05:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C4483AA9;
-	Thu, 26 Feb 2026 22:46:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
+	by phobos.denx.de (Postfix) with ESMTP id 6E01D83AA9;
+	Thu, 26 Feb 2026 23:05:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="UFKtQcyJ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WmFkxkWj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 102EE83D1A; Thu, 26 Feb 2026 22:46:42 +0100 (CET)
-Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
- [IPv6:2001:df5:b000:5::4])
+ id 9B87983D1A; Thu, 26 Feb 2026 23:05:33 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41F1883642
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:46:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5941583642
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 23:05:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=alliedtelesis.co.nz
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=Ronan.Dalton@alliedtelesis.co.nz
-Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 56ADE2C0304;
- Fri, 27 Feb 2026 10:46:33 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
- s=mail181024; t=1772142393;
- bh=+sCnGGuvn5U//P0isOY73kXO1Zn8CjP4GVRUSLlxs8Y=;
- h=From:To:Subject:Date:References:In-Reply-To:From;
- b=UFKtQcyJK9MxCeIbI9YWHRm64TzmpG+KoPMzhiID2opAjd2NaTczz5QTY+m66GVtS
- 9nZNt9fgG7oOSkJRb1IFeRSjbstW2ylCx9VyWvKNU7ZZDY5Sn5OCammeSUwcZn3vYL
- LKzdz0BgqEiqe09cN12X5wnlxfkxZwdolkmSsLyn8pXLxiKVPAwErvNGhlfkxERMnX
- 3fCqG/muXbqlw0AodoL2Q3HSf9EYClb6HihUqm+D4qh30Wal6rD4RIYi+H2UsiZ293
- iLiqESS3NbQdFNjLUAFsk6jBpcu0MVELMS+R3f1oH3N6JzWQe21G+362Ju5FHxrGYo
- M2WVEC1+sQfWw==
-Received: from svr-chch-ex2.atlnz.lc (Not Verified[2001:df5:b000:bc8::76]) by
- svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
- id <B69a0bf390000>; Fri, 27 Feb 2026 10:46:33 +1300
-Received: from svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8:f753:6de:11c0:a008) by
- svr-chch-ex2.atlnz.lc (2001:df5:b000:bc8:f753:6de:11c0:a008) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.39; Fri, 27 Feb 2026 10:46:33 +1300
-Received: from svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567]) by
- svr-chch-ex2.atlnz.lc ([fe80::a9eb:c9b7:8b52:9567%15]) with mapi id
- 15.02.1748.039; Fri, 27 Feb 2026 10:46:33 +1300
-From: Ronan Dalton <Ronan.Dalton@alliedtelesis.co.nz>
-To: "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] usb: Fix USB read configuration error on some devices
-Thread-Topic: [PATCH] usb: Fix USB read configuration error on some devices
-Thread-Index: AQHcoiQSuGyGCqWzE0ybxFJ4VBL9WbWLSLyAgAMqE4CABkG4AA==
-Date: Thu, 26 Feb 2026 21:46:33 +0000
-Message-ID: <853b645b96d05c8e1a193e1ab10458b7e8228a9f.camel@alliedtelesis.co.nz>
-References: <20260220044709.1065540-1-ronan.dalton@alliedtelesis.co.nz>
- <c9179461-cc40-49b6-ab10-086f4e5c1eda@mailbox.org>
- <4550f320c271db50ff8af455244eadad0f435099.camel@alliedtelesis.co.nz>
-In-Reply-To: <4550f320c271db50ff8af455244eadad0f435099.camel@alliedtelesis.co.nz>
-Accept-Language: en-US, en-NZ
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.33.12.18]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <ECE008D01B294C4E9E23D9829BEF713A@alliedtelesis.co.nz>
-Content-Transfer-Encoding: base64
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linusw@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 280956011F
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:05:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D22EEC19423
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 22:05:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772143529;
+ bh=3ZbTNTpqwWK+vYDoLKERNgiG+SUF841jTBKF67BW68w=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=WmFkxkWjqDO1Zp9phJ66hkbVEWfhSwDv3B0ZpTxFb8WyOkqM8sMz7JAKqege/xEQW
+ qIsNBfipZuQXB0b+velm6u+BlgWs7SNO7QAqSGw/QT/wRZhKtAAbpAXL+mP96/dgZB
+ 8jpPTjDsxD687TvaHMqyJMjIuG0pav7wO72qOHxSYnD6KDHRFzbSE3FzfBf083Rtan
+ RsYmGvV77mozF6UEQBLBKhGlqItXsOYxWPm1GUO1CtZ4gwFlhr6JWup8hB/dhyNCMw
+ JIRHyyahqxMakeHbLNEdou1JSpxx+6CVzVdnv7EHRozHhL2Rv1kY01vHSBtg84+Gwk
+ DU4cbvOuxWHHA==
+Received: by mail-yw1-f178.google.com with SMTP id
+ 00721157ae682-79827d28fc4so14185777b3.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 14:05:29 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXI/MsfXpbZxBzfhYP4ILFvORXGOji3LM0PNmAxxNlCs9lUcENZp8Axv/0QcTDJnj+AXYJtehY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtfglhTj+lChM++3YzVOEHGY16u0UWsHYFPLMx71WQ2KJyvDIC
+ atcINt/gIttTLjvXfgwNEImajYGcSyDZyntpv37ehQVcxXhUFRbUwlWz8NufXabatzt3n+wQ0Hy
+ 7aeEuAcwaRxxaR0p8eZbpHSSzpMf6vrU=
+X-Received: by 2002:a05:690c:e34a:b0:798:6a6b:5b0f with SMTP id
+ 00721157ae682-798855a6876mr8033777b3.32.1772143529230; Thu, 26 Feb 2026
+ 14:05:29 -0800 (PST)
 MIME-Version: 1.0
-X-SEG-SpamProfiler-Analysis: v=2.4 cv=d/NWygjE c=1 sm=1 tr=0 ts=69a0bf39
- a=Xf/6aR1Nyvzi7BryhOrcLQ==:117 a=xqWC_Br6kY4A:10 a=BhaoXNk7gXQA:10
- a=IkcTkHD0fZMA:10 a=HzLeVaNsDn8A:10 a=hCYQpMK8XeWRj9S7-g8A:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-SEG-SpamProfiler-Score: 0
+References: <cover.1771856828.git.dan.carpenter@linaro.org>
+ <62727b8bc822e07ad546d9e9fe4373a372a3f1b9.1771856828.git.dan.carpenter@linaro.org>
+In-Reply-To: <62727b8bc822e07ad546d9e9fe4373a372a3f1b9.1771856828.git.dan.carpenter@linaro.org>
+From: Linus Walleij <linusw@kernel.org>
+Date: Thu, 26 Feb 2026 23:05:18 +0100
+X-Gmail-Original-Message-ID: <CAD++jLkw0A8ZUXFCQYiPHHwA8o4nspT+GsEHfNdsNZjwU94Qig@mail.gmail.com>
+X-Gm-Features: AaiRm51tIPbcMQ8UIJZoGNzHAPEjgsLBBnwJnn2zxY5dF7yiLyuzWJc6fbcv4fI
+Message-ID: <CAD++jLkw0A8ZUXFCQYiPHHwA8o4nspT+GsEHfNdsNZjwU94Qig@mail.gmail.com>
+Subject: Re: [PATCH 1/4] scmi: pinctrl: add pinctrl message IDs
+To: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Alice Guo <alice.guo@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Jacky Bai <ping.bai@nxp.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>, 
+ Valentin Caron <valentin.caron@foss.st.com>, u-boot@lists.denx.de, 
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>, 
+ Michal Simek <michal.simek@amd.com>, arm-scmi@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,12 +90,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTWFyZWssDQoNCk9uIFN1biwgMjAyNi0wMi0yMiBhdCAyMjoxMyArMDAwMCwgUm9uYW4gRGFs
-dG9uIHdyb3RlOg0KPiBPbiBGcmksIDIwMjYtMDItMjAgYXQgMjI6NTQgKzAxMDAsIE1hcmVrIFZh
-c3V0IHdyb3RlOg0KPiA+IA0KPiA+IERvZXMgdGhlIGZvbGxvd2luZyBhbHNvIG1ha2UgdGhlIFVT
-QiBzdGljayB3b3JrID8NCj4gPiANCj4gPiA9PiBzZXRlbnYgdXNiX3Bnb29kX2RlbGF5IDIwMDAN
-Cj4gPiA9PiB1c2IgcmVzZXQNCj4gPiANCj4gPiA/DQo+IA0KPiBJdCBkb2VzIG5vdC4NCg0KSSBq
-dXN0IHdhbnRlZCB0byBmb2xsb3ctdXAgdG8gY2hlY2sgdGhlIHN0YXR1cyBvZiB0aGlzIHBhdGNo
-LiBHaXZlbg0KdGhhdCB5b3VyIHN1Z2dlc3RlZCB3b3JrYXJvdW5kIGRvZXMgbm90IGZpeCB0aGUg
-aXNzdWUsIGRvIHlvdSBoYXZlIGFueQ0KZnVydGhlciBjb21tZW50cyBvbiB0aGUgcGF0Y2g/DQoN
-ClRoYW5rcywNClJvbmFuLg0K
+On Mon, Feb 23, 2026 at 3:33=E2=80=AFPM Dan Carpenter <dan.carpenter@linaro=
+.org> wrote:
+
+> Add all the pinctrl message IDs.  I renamed SCMI_MSG_PINCTRL_CONFIG_SET
+> to SCMI_PINCTRL_SETTINGS_CONFIGURE so the naming matches the spec better.
+>
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+
+Reviewed-by: Linus Walleij <linusw@kernel.org>
+
+Yours,
+Linus Walleij
