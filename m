@@ -4,83 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0D1FD9E1E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:41:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B77DBFD9E1E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Feb 2026 23:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6C8B83E61;
-	Fri, 27 Feb 2026 00:41:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F28A83E61;
+	Fri, 27 Feb 2026 00:45:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N7hSui8v";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ccVh2gnf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3216A83E63; Fri, 27 Feb 2026 00:41:19 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 8817F83E81; Fri, 27 Feb 2026 00:45:10 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B4E283D1A
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:41:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A668983D1A
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 00:45:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d1872504cbso1446144a34.0
- for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:41:16 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-65c0891f4e9so2633063a12.1
+ for <u-boot@lists.denx.de>; Thu, 26 Feb 2026 15:45:07 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772149507; cv=none;
+ d=google.com; s=arc-20240605;
+ b=gL1NLsfGdaS65pyitIziHIEAB9sZDfTu6eSu1OFA8+M8hU4svPdRfxOlrglSo5ZO+1
+ 1THIPpzqMYuWkEEgCgfdINDBXipbNHG895FHQRdEN+QM7VBeqLl+2/n3ZeUxLWDgoEoP
+ KBco6PFwDtrmvH3T46BUnPoUKfxzje/pkW1E6RLQjQm57QCVyy1d6WY9R9V+zYuG57XN
+ nRaTtUKQVTGIkQvm4/t/UcXZXzy+bCnyhRhAPB3myWXO/a9UIhz4m5DNdIGsFLtHfLIm
+ /XxPKFzYY5wSkFVp73TDbegVRFArdack1+I7Es2Jgj8g4ATKNqlQot4pZq15dI9g6g38
+ 6ZRg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=xn75lOmn20KSMQzPcoN2xVPamcl2m/fsWDeIJ0lZAxk=;
+ fh=mn5V3Z3EQoSFeSjXpIxLtWYvp4nMGxThUgcID4Uu8+w=;
+ b=I3jGvZm+KT/vX8dbTkrbgQJkNM6CxaXAmbv27aMf/Xvp5QsfM2M0XEae5gunz0opUC
+ KkmEOzG3vwz503usowKnHUIkDvCuEF6kwSlEtCEtz/zl48zigwewQKPaO6jzSp4FaTlM
+ YGo5Rac0j35Gf8CW9UZj3JJ+62+4VNR4l3NQXo8vEvS9Mt+mvKiu1gsc+KEZtRSnPfNz
+ QvfPAX7So032JUsMKWzXF7Hfw/33IUXJFH7qx2WwzvVPLHdL48OSIivEangE656xKh/Z
+ T3XYZtRlRDtjnDDiNT9TynePTJsa0XVWqR0/hWP19VUFD07RIDqPJ5kh+CBXec463nBq
+ bAOA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772149275; x=1772754075; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=geBLoK1uHQilY5Otus2VYGzBoRaEnnAvsMKd2z6feps=;
- b=N7hSui8v6l97SjKBIYj4lEju3nkIXQN7kMOXNxtQXlG9tPckOXDPKqXX0M2/J2yBB2
- hIdBjjk1C0WHrFf0pdfnnwochyRt57S7duJ7GPMce6xnsBTp+baUMvlBP137BlSlKbZv
- 8SYr9N0z36hap0Wf5U726ZD6xJIdh17jhNEKs=
+ d=chromium.org; s=google; t=1772149507; x=1772754307; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xn75lOmn20KSMQzPcoN2xVPamcl2m/fsWDeIJ0lZAxk=;
+ b=ccVh2gnf1+9/FGZEeyKZ7yje/QXa8wPAdNuavHi4EYAxz0IGRWxJ8etoVAFPkjqR1W
+ k75ftRe+THRdaKyD8YjX9h4CzHgicpSMwW4Rd3xnBZHY79TX7mGVzX1VJ+Ywj/C3p5/4
+ tcL3d6phyqgvBGaCo70YQKlOvZ2jrLWWtZAo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772149275; x=1772754075;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=geBLoK1uHQilY5Otus2VYGzBoRaEnnAvsMKd2z6feps=;
- b=LylPoxVbnJAG2jRtOdVUoBwil1q+XqWSgiRng0RvS5HSo+6WHhkVt5K+Wp93ctjyon
- y4GQMcID+6vIlXzcFydgQEUdcv3jUpKxuh5YWLwgAzvI0FdmNHdxQ6HYKQifzo/17QKK
- jUw2hj3L7/3B+jAxC9jvr9jVrIMD7clhTGqEO8IO/soU9mo7P9WOPvTCTMM81aiqKvyU
- icHgk3YgbsWg2f9fyywvbpTLpfF2fougLQT1viKPHvdd/iY6u9hkN1vibpFko3knrhm1
- Rq60GsoZS3FUz8LNBRu1MTSVyQc2eLozDxijK2uWXOGa+KdwxEyM/krvyYlM//J9yXGU
- /Rzg==
-X-Gm-Message-State: AOJu0YxHqocP4mNpaDCyYn44tjG17pDUu0+sxL7jGtKdI/GKyLsybswl
- um3VpfLHI+JSDNyixIUysKL0XnQdjmP8RYk8IGJl92ShRqo0g6fJo8hQv2j0maGyyzY=
-X-Gm-Gg: ATEYQzwlZ5RbjndtVRHbC/O51NLN3sbDikdtiLMmHT8xvhTs5y1+uKZxQS7NsgeDaHh
- S7pUioI2L3hwJmrp51Ut5xEcvpEp2P4KdoRgRRwfI/VfVMyC5gmrBNfcN24LlcRhHvFxGH79rcw
- cFioXs4Azf2vcaNOf35ElumeHO7Yh2K85OAyHjJLyk00xNT2OxexvQNYYANKd+KXtB8iEVvSjD5
- CLsiBeZs7Gh0OF+cBnLaZ7kiBIp0N0YXoJso+O+kGl+Da/7Py5lv3Rn4qG/4kwEUyVxYS1eL9Bz
- CnMXyT9facLDp/tz0fC70YpEXrq93lVSKn2r39RID+NgxIopMrepXkLPd0nnU/ybyhRtUlw6dtu
- Dd/eMa1lRwnorcaFdtHudXyuIzy/Lfw+xhpb64vE5/NnGA3Ir5e0a96yYV4sOM3MXGJ89iq3Hdp
- 2bjLP8KPOA5HIMyOOKGWYmn1VIcL4QbMMr9v4k8Zalgie57ZUM+kwPcsfK0eieNm6iQckaJuJAK
- DsAucegqzqK8yrHkAb6h3K2XiPBkD+YlC5MTYOyjy/G20kO7l0=
-X-Received: by 2002:a05:6830:3986:b0:7c7:48b7:640a with SMTP id
- 46e09a7af769-7d5856d877bmr2760856a34.7.1772149275197; 
- Thu, 26 Feb 2026 15:41:15 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d586653f6asm3037472a34.19.2026.02.26.15.41.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Feb 2026 15:41:14 -0800 (PST)
-Date: Thu, 26 Feb 2026 17:41:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anton Moryakov <ant.v.moryakov@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] kconfig: fix buffer overflow in
- conf_get_default_confname()
-Message-ID: <20260226234112.GN1593142@bill-the-cat>
-References: <20260226210513.58593-1-ant.v.moryakov@gmail.com>
+ d=1e100.net; s=20230601; t=1772149507; x=1772754307;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xn75lOmn20KSMQzPcoN2xVPamcl2m/fsWDeIJ0lZAxk=;
+ b=LIn2CeT6Yk8BIi8y2dswf01LVSdmJ/3ehoiG0PRCPtqkyDr8D5Q2E5yIFhuoKgpP/5
+ H+GUffH2Vx5BWolhRK7KGhlNr50lwphX9bnjUpm1mWQgBY9lZxmI14NIlLirAWlFaGet
+ I36g6/F85u1cLWaY/4R6tBmVD3HkbtdnFgp24+6bIjG5KWzXQLEfwD11G7UClKSPMJVv
+ hwuU7M5CYJlUD9DiJORJl4NZT+8EZYSx/2lQ9/xbfvUhloaww0opSwYolzEXUEChg9Ds
+ d2kapcXEzx0woZ9ayRA0wKBnuk4YzOj1PRpxq3rgDzpbPxSqQwi0TdCrcrKJGn+J8Ifz
+ vf0Q==
+X-Gm-Message-State: AOJu0YySTt86loKuKQMDVbPPn13jZIxXZnLEzA/mnRYRjofmb/J/0Xoc
+ 8/GDfask+wOVUAnbD7mwjYubKlT/KOzfHOftNNcn9G6ZcWtgNx6AtCDOnbZ3vVBYhqR+scRRD77
+ Ji029psxvMqI+e6nhUC9joDsFR9aRr0N7yQrWrl6M
+X-Gm-Gg: ATEYQzwZrU7ZuSNO+2027rUMJDOa18zj1QewznL/uQojxuZqRZhm4xjbjp9C/OaDZK8
+ lbI7hifAx1aiG8nwTLZKI3bS/6M4CiNw544rS05hHRvdmdzR4ki9LT2nvNbU6UNQG2Zgf7HKc2L
+ g4FtnTGAec4azc5oE0lqP8f7ygP32n+sztfiLbrTG1gRDyXx3sDPNV7cFC57zxYDRMYwEr1Tvy7
+ wAovWA4QZ9ymsMr6C7HhAE6Gou4iceFtesgYPwkDjuyNtr+r3/HDNyw+4KBxrApY9/Rslvk0jiA
+ jMlCQ+GSpoiIsBGY
+X-Received: by 2002:a05:6402:5211:b0:659:4295:970 with SMTP id
+ 4fb4d7f45d1cf-65fdd6d7431mr664108a12.8.1772149507129; Thu, 26 Feb 2026
+ 15:45:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1EqOIOXbyCe4ctpF"
-Content-Disposition: inline
-In-Reply-To: <20260226210513.58593-1-ant.v.moryakov@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260225225040.2568118-1-sjg@chromium.org>
+ <20260225225040.2568118-4-sjg@chromium.org>
+ <647a1ce4-66c1-42f4-8841-69828cd665d2@cherry.de>
+In-Reply-To: <647a1ce4-66c1-42f4-8841-69828cd665d2@cherry.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 26 Feb 2026 16:44:49 -0700
+X-Gm-Features: AaiRm522yV7DPAuKoYe3XRY2jrbxLdnFiPk_TYGPZoMjS4f2VDz3WTiN7Bblcik
+Message-ID: <CAFLszTjcJc_WNRfz7h_rxAKkY-UoUAYD0G1PZh=eNccjBPGqoA@mail.gmail.com>
+Subject: Re: [PATCH 3/6] binman: test: Capture output from tests with warnings
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
+ Alice Guo <alice.guo@nxp.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Aristo Chen <jj251510319013@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tom Rini <trini@konsulko.com>, Yannic Moog <y.moog@phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,59 +116,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---1EqOIOXbyCe4ctpF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 26 Feb 2026 at 09:44, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>
+> Hi Simon,
+>
+> On 2/25/26 11:50 PM, Simon Glass wrote:
+> > From: Simon Glass <simon.glass@canonical.com>
+> >
+> > Tests are supposed to run silently and capture any output produced.
+> >
+>
+> Fair enough. But how about making _DoTestFile() and other various
+> function calls actually eat stdout/stderr by default such that test
+> implementers don't have to remember doing that?
+>
+> We can always return stderr, stdout to the caller of _DoTestFile() if we
+> wanted to be able to parse the output.
+>
+> What do you think?
 
-On Fri, Feb 27, 2026 at 12:05:13AM +0300, Anton Moryakov wrote:
+It's actually quite painful to develop tests when output is captured.
+You cannot print state or see errors. So I try to capture it for the
+smallest possible code area.
 
-> Use snprintf() instead of sprintf() when building the full config path
-> to prevent potential buffer overflow.
->=20
-> The function previously used sprintf() to concatenate SRCTREE environment
-> variable with the expanded config name into a fixed-size buffer
-> fullname[PATH_MAX+1]. Since getenv() can return arbitrarily long strings,
-> this could lead to writing beyond the buffer boundary (CWE-120).
->=20
-> Changes:
-> - Replace sprintf() with snprintf() with proper size checking
-> - Add validation of snprintf() return value to detect truncation
-> - Emit conf_warning() if the resulting path exceeds PATH_MAX
-> - Return the unprefixed name as fallback on error, preserving behavior
->=20
-> This fixes the static analyzer warning:
->   confdata.c:119: buffer overflow via getenv() tainted input
->=20
-> Reported-by: static analyzer Svace
-> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
-> ---
->  scripts/kconfig/confdata.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+I did actually add a 'patman test -N' flag to help with this but have
+not plumbed it into binman. I'm not sure if that would make the tool
+even harder to develop in.
 
-In this case I think we would be better served by resyncing with the
-linux kernel which has:
-commit b6f7e9f7050b9f8e5fe60d86e05c0740295a54bf
-Author: Masahiro Yamada <yamada.masahiro@socionext.com>
-Date:   Mon May 27 23:37:22 2019 +0900
+>
+> > Fix testRemoveTemplate() so that the message about the missing openssl
+> > is captured, along with the invalid-images message.
+> >
+> > Fix testNxpImx9Image() as well, since it is expected that container.img
+> > and bl31.bin are missing.
+> >
+>
+> Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-    kconfig: require the argument of --defconfig
-
-And removes this particular code.
-
---=20
-Tom
-
---1EqOIOXbyCe4ctpF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaDaGAAKCRAr4qD1Cr/k
-CmTXAPwLq6snvM+25cTCRwGDNJ2fxc1yFFELr97pWMMC5S52TQEA/ZvSVXlL6oZi
-Exog8J5j7t+fvLrQEoNGnBeOmoUIjgs=
-=5hXr
------END PGP SIGNATURE-----
-
---1EqOIOXbyCe4ctpF--
+Regards,
+Simon
