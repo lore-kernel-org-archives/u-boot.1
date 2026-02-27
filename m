@@ -4,124 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A585EFD5335
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 10:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 495D1FD7F91
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 10:30:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20BD083AA9;
-	Fri, 27 Feb 2026 11:13:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ACF5683AA9;
+	Fri, 27 Feb 2026 11:30:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AeH6abnD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JQ9GRICm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89C9183E7A; Fri, 27 Feb 2026 11:13:21 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azhn150100002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d91c::2])
+ id 8839983BB1; Fri, 27 Feb 2026 11:30:33 +0100 (CET)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazhn150130000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d911::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E2B183642
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 11:13:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20BA783642
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 11:30:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kakd5IQDOwqcdufNU2cNlj/TMKiTMo7a78l/uWGLXeZXHUYgwxH4srUFWdB4Kr597iSq/JAbHBz5uNNnRmvNVQo0J9zePZTmuyvbHYqbS+gvUfm4K1cg3eEMQmu0Fd72p7a80+sW8DowfbRLorjElq9j7dTfxy2oVyFw4OngSyl4cXZu7NBjhnedgG2ciqT0ImFiVAV5lDTHVazDMIOCmuz3S+IvOUJU25b/dwf371slQOLlOrDjHZR3KXhQGEc+UryUbwV5mA07XlpLWpYlqXdW8P5jcZbzv41AVArU1zXOuqoirs3irWiREmZhqMH8ZOPFNPv3krfc/XsX3Y6bhA==
+ b=X+lnQsCyPWIKOGF5V+YGwQBahc6hmFGqGmkP8rt9sxqgFzPRYkuavnpvaq/LYjq0p0gzn0xMrTrRQgDOAv1CUcyLn0MJAn7V/FgbqxxdYgF+3wa3MN5V7B2tOt+ZFHrfV+I8WRXdEHU/TlYfOjqvKbURwgvM5dsiwBB19kr8NxZCTQ1nJyFoIlZNYSLv50VSsrjesWEqID8Ia/VdMsEmRjXsrTAJjrhKrTwMFvvofoHDj+Qy/mNXl0I+3B8oaXdu3LYYgto5ULHvpQ3KyknsJIWjRLErxeCiAZJ50djoFsC16qukBSiuSkHAUjpDlCS5ANTMltbQQFWXsIhQdWwlzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x6WFWI0nOh9GTTo1aAc40NOtijh/Iw2ptb9zDtb2ZKU=;
- b=LwJQEH8adYr22R0TR+NhnCEnQYKHW3w4ce8Ndjtq1FXzz2COXZ+NOJov2+dR707HbbcOUMNYrOcngkrzp57kEDpC6yeIBhnRIOkRO1byIJT7wcvUxLXvREsj/r+cZfA/PgRCoH/eR2VUfV52PJlWNpxaNbXSD+HBWisst/daqHQtA6fEwK+Sr0BnkWUibebYion1nFw/6ZYc/JLxyZ3VlHOogEz/8QWAAOIOOuoVKxzB5LIkZBDZ9S4CcU7qB28WEw+29P1Q+nMRqeQX1No4Yw6oz0V1+inU8FynGRoSaSef+vyx6crRaeGF0IihhVFAP1F7j7lyvxG8G3qOT+SYZg==
+ bh=m7VOXb6sG/dSuIIjdwMfQ1HFvoY+SsYLjSp16+iPAFs=;
+ b=m05qlJtFv1xqGue6BN6Mqok7zUh8UInt4xwIefl4jtzWFo1z9QCP24OUAny5HuGHYOsBi6LAbHS/LpFN+efNzS7gtzajminJ0NQKLM9e2Uonl0TQ+BamCnI1tPL5eZWEYY3HSTIL940MyjSFr7LUgEQUuFe+skzrQuuAowdM0ex2dDepaIVSLgcXmBDuMgPf7X0zCD7LYE6DF6cq9sQ0/nrlTY44bSewSV6rA8mnhgVbt6JHXtTNAaNrjDqEf1CFpVzHxcr0QRZGKBRdBXcKeHAE3HVXRKQprHERX2/yis6JMbp3Ka3tVuiENeepv02o2mu+nnYRWjzGr6LjzVSKaQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x6WFWI0nOh9GTTo1aAc40NOtijh/Iw2ptb9zDtb2ZKU=;
- b=AeH6abnD+R8itvQukcNeZy/vWWhFjy2Lg05m7nAG+jjcoBnthjOoGkNVlWYs1WNrlZy1yMmMHBvRnqj++NHa0VLk2Yr14NlhsQ/aWlz2PTEG6L+odQan+AIA/JhsdYyyUCzBxuwp5nr1AZ1uy262flgFrCBrgk7bcYsuFcVk8VA=
-Received: from BYAPR02CA0070.namprd02.prod.outlook.com (2603:10b6:a03:54::47)
- by LV3PR10MB7940.namprd10.prod.outlook.com (2603:10b6:408:20f::13)
+ bh=m7VOXb6sG/dSuIIjdwMfQ1HFvoY+SsYLjSp16+iPAFs=;
+ b=JQ9GRICmgICmqMXHJgs9mq3e114mP9h3/XjW2eIlbiQ8uzCgCy97zdGcEmv3djKYVF4X6DwJEWnrUGO6hGHTJMOT4lNKWcZYqlcS7NXmIAznpwx9gwfNY0pOA7vntrMqe5zj4N6jWTkZhKvDYpV6S4IEHa2GVXMVxd7/YNFawyo=
+Received: from PH7PR17CA0006.namprd17.prod.outlook.com (2603:10b6:510:324::28)
+ by EAYPR10MB997806.namprd10.prod.outlook.com (2603:10b6:303:2c2::22)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
- 2026 10:13:14 +0000
-Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
- (2603:10b6:a03:54:cafe::12) by BYAPR02CA0070.outlook.office365.com
- (2603:10b6:a03:54::47) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.27 via Frontend Transport; Fri,
- 27 Feb 2026 10:13:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.13; Fri, 27 Feb
+ 2026 10:30:28 +0000
+Received: from SN1PEPF000397B5.namprd05.prod.outlook.com
+ (2603:10b6:510:324:cafe::9c) by PH7PR17CA0006.outlook.office365.com
+ (2603:10b6:510:324::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.26 via Frontend Transport; Fri,
+ 27 Feb 2026 10:30:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ SN1PEPF000397B5.mail.protection.outlook.com (10.167.248.59) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9654.16 via Frontend Transport; Fri, 27 Feb 2026 10:13:13 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9654.16 via Frontend Transport; Fri, 27 Feb 2026 10:30:26 +0000
+Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
- 2026 04:13:12 -0600
-Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE211.ent.ti.com
+ 2026 04:30:25 -0600
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE211.ent.ti.com
  (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
- 2026 04:13:12 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 04:30:25 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 27 Feb 2026 04:13:12 -0600
+ Transport; Fri, 27 Feb 2026 04:30:25 -0600
 Received: from [172.24.18.150] (ltpw0g6znt.dhcp.ti.com [172.24.18.150])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RAD8HY3560148;
- Fri, 27 Feb 2026 04:13:08 -0600
-Message-ID: <c8e7db77-5c9f-490c-a5e5-30607fde09aa@ti.com>
-Date: Fri, 27 Feb 2026 15:43:07 +0530
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RAUN5Y3583889;
+ Fri, 27 Feb 2026 04:30:24 -0600
+Message-ID: <dfd8356a-2e93-47e3-883b-9605173a1db0@ti.com>
+Date: Fri, 27 Feb 2026 16:00:22 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
- restore
-To: Tom Rini <trini@konsulko.com>, Stefan Eichenberger <eichest@gmail.com>
-CC: Francesco Dolcini <francesco@dolcini.it>, Emanuele Ghidoli
- <ghidoliemanuele@gmail.com>, <stefan.eichenberger@toradex.com>,
- <s-k6@ti.com>, <w.egorov@phytec.de>, <emanuele.ghidoli@toradex.com>,
- <francesco.dolcini@toradex.com>, <u-boot@lists.denx.de>
-References: <20250314100734.23777-1-eichest@gmail.com>
- <20260226070502.GA6701@francesco-nb> <20260226142345.GB1593142@bill-the-cat>
- <20260226160901.GA29510@francesco-nb> <aaB1DifzODCVv4SU@eichest-laptop>
- <20260226163117.GJ1593142@bill-the-cat>
+Subject: Re: FIT Verification
+To: Nagabhushan D <nagabhushand34@gmail.com>, Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, Manorit Chawdhry <m-chawdhry@ti.com>
+References: <CAA-ybFQ=DbZzcGq_=HLFx_Gp_D1YKj=oKYXtD0HKPuVYcQyyoQ@mail.gmail.com>
+ <CAFLszTisAAQJb53Z9bifbMd9fQL-1iXnmbsyZMRDovAYYF87oQ@mail.gmail.com>
 Content-Language: en-US
 From: "Francis, Neha" <n-francis@ti.com>
-In-Reply-To: <20260226163117.GJ1593142@bill-the-cat>
+In-Reply-To: <CAFLszTisAAQJb53Z9bifbMd9fQL-1iXnmbsyZMRDovAYYF87oQ@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|LV3PR10MB7940:EE_
-X-MS-Office365-Filtering-Correlation-Id: de6da774-2365-49e1-7a31-08de75e8d10b
+X-MS-TrafficTypeDiagnostic: SN1PEPF000397B5:EE_|EAYPR10MB997806:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7cf832f0-07ee-4835-c8b0-08de75eb38cf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|34020700016|82310400026|1800799024|12100799066;
-X-Microsoft-Antispam-Message-Info: WkG58zElV+CX27jAgHNMKhSaVjiEYVzw/iGsrqzOzQI+OHADoPpMEfxVoREWJqugd6HHTIFjjLbRyHBY8Ow48fovUjnNepQQCnoMVFVetz/YAH3H6LRncZaE72L67JpY+3SobIjmxm1fClszgcMU5xbfYgHe20IXmlhXKu+4RIfxFNto0Zkli9W555oaVox6CAgSHuK+lAhehs3wyf6mvoM27hGhfDEM1WsUouoh3V7fTocra8bYSq5wK/KVX4yQ0RyUaSIos/CQwQry/9S6NLxzAKcVp6fPQzAvssBGn4iHfcVRDRaLEEsV0r/3bOS9GQQqnmcR0mVt5QpEGKNuM74fuaYg6EP30EpqhmWzy77LKJ2p7vVjh4V9q+Vxb2ppIwe3OMkvc47QRaizmWiLhrwknP5rlarjssr5aQnRmRVwLG5RaIBV08l8dIF7bfDCnMy1tuomLmOjdkG2RnijyTnRd07nkaSfLh7pQTxrM74nqoCeRd/lCgrwXqvxzmk1TFF62Aph5qvdPqpuT9epYdAN1Y6Fk0B2bhSysa4E6wCktieO5DN6dP0v7gOtIglSC7JcW8WL7yvsR21fTtEIrJ+vxy92Pq4YK2xxT22Ji4I5IkF6hHcJ8ji2ASllKJVfDc2Ez/dgodKNnHJZaFQAzjVpowut/3kVvSC0yh0tAr4H6NCza1yPeHTPaSaKBavVKdrQyDQ6ZTuMwDjruS02XvvBMr17J17xsY8ya9PUODEP4383PWWPNXoX6WCtoTCW0IMazH/Q7ys2jUkxWi6lWYjXdV43VcZzGC1ajurkTb0=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(34020700016)(82310400026)(1800799024)(12100799066);
+ ARA:13230040|82310400026|376014|36860700013|34020700016|1800799024|12100799066;
+X-Microsoft-Antispam-Message-Info: R00ook1jw5sxNR6AbVUTuiPk0DDNhm7iYKiUrFQcGT0/lKkQ8/RGlVbbeGH8/irh8NG4UuDNdIATXxIbnPGJo9wwot/KG0JUaxFfJBhuI1c2JFBATsCLcEXcshrzTWkaDiUKlJTjIY1+eg/Uc6WDxdcFLb09Db8TIo8sXYUYTreaNLMPxXhGuNt7/+22euczPlK6dDNn0rBLHSi4MDuGXJ5lgVKKmkbT4EaARVaHKJd4WL8jjCp5FG4ObVvYRHbUtt8n/DifOeFpd+QDQ00eEcJp64VGZmpl6grhvsuyrWgUREC5LGd+OKIJrDWjbPpKGlPS7PvdWwnWcnJsbAqMyK/XkQuRGoN7HfCSxgTCOZSPNngLWdlxEM/HMVsUismiYK4Lq6lhE+MidPDv5/6On6FTKFwkE3GqNAr+2ODkcFF3GP77+HMUExktntm2SIjco+IDRQnUUpQsoeuiaFQWEUBRer2hUMJAxIFgo2XBaWFzldma0E1RlRd1PUrDJf0WNQqUoh+61VTkp1dCizCzIOouxBg1jKz5pXIpBBF/64+ZlTfOW/2pHcxKoeGq5RzArwaLsI4uHMObvBs7ClLxIDgA8EuUZu4KTgyW5WgD0/IV71Ww13yLeKXhakbFbOzNEcpnW5z0g+eyrzL9jUZn6ST1nPjMXJyktbp1+Mzp720z/a93PqNVW4IBlJWhNC5tIfAOD5PaikeF1fdzlip8A52yBJaw8Jfq3K0THJDL6yy2szPTpIiMO7RFWeTLmyRXyYH+h6uQO1jUJVqRFpVsRw==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(34020700016)(1800799024)(12100799066);
  DIR:OUT; SFP:1501; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wYKZwKaaCHbFh8vZAgqjOKCu1B4er0jT3TfdKtnhHc9U4djcwZYC+KmZSq3P2Rj4Kv5n1gciT9m0XivUJYR5N7rIoyqBV05r+qoS3FNGdfI4S43xjD5K6dqzFjX2DHEDxqaADtNKO+gDz7abSEepDR+iTbBXzEW9SfwxUr6MsprbLa00MWRJks5B6IQgM9FLclc/hYXeIxPdRIn3LroSMfscKJvr8isNh2PNMVBRNRFWhfcvr/w42v8oMOkhzJFev/j+avLJ4YVgKQ/oY28W3jlVnI5BvPA/mIC9mlEdRFMvYaX5PhAHr3297N1ZcNOu93s3xEpJfbyq5djyHa/rbKiRWHmwgkF7gH/EymAjUxk7nbjyRmwg4TjcxZDlBbX+3pDjjcO7MiwoQpbSkQw3J2UuiU4n821oZj6fzIRm5KKUq+KIm+Njh87BPHY9zMRY
+X-MS-Exchange-AntiSpam-MessageData-0: 8UKE7DV0EUpIaS7GvkoGrWWFLhXrI8Zh4D9QyjHTOY/Zh3ihE5SnWtJ2a5vNYVSGcX9u4vUl6JaW/f+7FyZpXvYtRcY2bWI84jxJMq8tWMJSUvmXNNYyKL72XpzhvcapfovrDXyXEj4c1oCYneB4aTuvXuytU6DE46I8zYJ+e6h+wFBdZcJXKT7rZNFeSoyNTqn3yEA8okh2iu3YoH0qUvpebPHTMTRccpq2g4A4Wb54h+2Y+nXFGO89aPj+JxJ+P7F/1Cilop85fxoWsVRFje2l1X9BEbJo0fh0z/r8VH1VbEEtUHBfRXH2B0EK9N7pSxMPJ3k23X0ML5DSNULxjw7XwjZTAbCVUSnV2iocGxeJVK3bs3OdvBEmiqc10ZXewVortewap4uOif2R2GA9cvrO1ExIKndFi5EclqRrtqM7OU1TrXnHZ65viPzUVzRi
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 10:13:13.1875 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: de6da774-2365-49e1-7a31-08de75e8d10b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 10:30:26.3412 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cf832f0-07ee-4835-c8b0-08de75eb38cf
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023CB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B5.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7940
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: EAYPR10MB997806
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,102 +132,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Nagabhushan
 
++ Manorit do correct me if I'm wrong
 
-On 2/26/2026 10:01 PM, Tom Rini wrote:
-> On Thu, Feb 26, 2026 at 05:30:06PM +0100, Stefan Eichenberger wrote:
->> Hi Francesco and Tom,
->>
->> On Thu, Feb 26, 2026 at 05:11:49PM +0100, Francesco Dolcini wrote:
->>> +Emanuele
->>>
->>> Hello Tom,
->>>
->>> On Thu, Feb 26, 2026 at 08:23:45AM -0600, Tom Rini wrote:
->>>> On Thu, Feb 26, 2026 at 08:05:02AM +0100, Francesco Dolcini wrote:
->>>>> Hello Tom,
->>>>>
->>>>> On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrote:
->>>>>> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
->>>>>>
->>>>>> The get_ram_size() function fails to restore the original RAM data when
->>>>>> the data cache is enabled. This issue was observed on an AM625 R5 SPL
->>>>>> with 512MB of RAM and is a regression that became visible with
->>>>>> commit bc07851897bd ("board: ti: Pull redundant DDR functions to a common
->>>>>> location and Fixup DDR size when ECC is enabled").
->>>>>>
->>>>>> Observed boot failure messages:
->>>>>>   Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
->>>>>>   Authentication passed
->>>>>>   Starting ATF on ARM64 core...
->>>>>>
->>>>>> The system then hangs. This indicates that without a data cache flush,
->>>>>> data in the cache is not coherent with RAM, preventing the system from
->>>>>> booting. This was verified by printing the content of this address when
->>>>>> the issue occurs.
->>>>>>
->>>>>> Add a data cache flush after each restore operation to resolve this
->>>>>> issue.
->>>>>>
->>>>>> Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to a common location and Fixup DDR size when ECC is enabled")
->>>>>> Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when cache is enabled")
->>>>>> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
->>>>>
->>>>> Tom, can we merge this?
->>>>> This is the last bit to solve the regression reported here,
->>>>> https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
->>>>
->>>> I wasn't happy with this at the time, and Stefan's last email in the
->>>> thread left me with the impression more investigation was needed and
->>>> likely something else was the root cause.
->>>
->>> I believe that this patch is needed.
->>>
->>> On AM62 what is happening is the following.
->>>
->>> We have a cortex-R5 that is the first core booting (there is also a
->>> cortex-m4, but it's not relevant for this discussion).
->>>
->>> It runs from internal memory and it configures the DDR ram
->>>
->>> We load to DDR memory various pieces of firmware (TFA, U-Boot for the
->>> cortex A53, ...)
->>>
->>> We do execute get_ram_size(), that read/write the memory, and it is
->>> supposed to restore it back the original content
->>>
->>> However when we have the cache enabled, we might miss to write back the
->>> original memory content, where the other pieces of firmware are.
->>>
->>> And after that we start the cortex A53, running in DDR, and there the
->>> memory content might not be correct, because there is no cache coherency
->>> between the cortex-A and the cortex-R. And because of that we have
->>> crashes.
->>>
->>> Stefan: any comment here? Can you help?
->>
->> I think what you wrote summarises the issue well. If I recall correctly,
->> I "fixed" the issue last time by simply calling get_ram_size() once
->> before enabling the cache. This was in commit 4164289db882e. The SPL
->> then informs U-Boot of the memory size via fdt fixup. However, something
->> has probably changed now (possibly in the R5 SPL), meaning the cache is
->> enabled earlier, so the cache is enabled again when get_ram_size() is
->> called.
->>
->> For the AMP use case, either "get_ram_size" should not be called once
->> the cache is enabled, or a similar patch to the one I proposed is
->> required.
+On 2/27/2026 5:14 AM, Simon Glass wrote:
+> +Neha Malcom Francis
 > 
-> I would lean towards the former if at all possible.
+> Hi,
 > 
+> On Wed, 25 Feb 2026 at 01:54, Nagabhushan D <nagabhushand34@gmail.com> wrote:
+>>
+>> Hi Team,
+>> I am a recent graduate working in Embedded stream. Currently exploring secure booting on TI boards. I went through some of the writings on github - https://github.com/ARM-software/u-boot/blob/master/doc/uImage.FIT/signature.txt and other sources by TI. I would like to get few confusions cleared by this mail and thanks for take some time for this.
 
-Just trying to understand, what is the reasoning behind ensuring get_ram_size is
-not called if cache is not enabled? Wasn't get_ram_size written with the
-possibility of cache being enabled (existence of dcache_en logic); then this
-patch is a valid fix right?
+I'm linking a couple of links [0] and [1] that should clear up everything if you
+haven't stumbled upon them already.
 
-In parallel, I do agree we need to have a code analysis w.r.t dram_init, we are
-making certain cache and dram calls spuriously making this confusing.
+>>
+>> 1. Can I try out only fitImage verification with hs fs boards only?
+> 
+> Neha may know about that one.
+
+No, both GP/HS can enforce fitImage auth (check FIT_SIGNATURE_ENFORCE)
+
+> 
+>> 2. Can I try it with ti dummy keys or any other way to know if the flow/fit signing is correct?
+> 
+> There are tests which check signature verification using sandbox,
+> which might be the easiest way to try it out. See test_fit.py
+
+Yes sandbox testing would work, as well as building with the TI dummy key.
+
+> 
+> Regards,
+> Simon
+
+[0]
+https://software-dl.ti.com/processor-sdk-linux/esd/AM62AX/latest/exports/docs/linux/Foundational_Components_Kernel_Users_Guide.html#creating-the-kernel-fitimage-for-high-security-device-gp-devices
+(this is our SDK doc, just in case you need more help to follow along, more or
+less the same as what the upstream docs talk about)
+
+[1] https://docs.u-boot.org/en/latest/board/ti/k3.html#fit-signature-signing
 
 -- 
 Thanking You
