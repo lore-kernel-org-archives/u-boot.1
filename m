@@ -4,125 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5029FEFB47
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 13:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35728FEFB4D
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 13:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD1A083EF9;
-	Fri, 27 Feb 2026 14:19:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 6269683F1F;
+	Fri, 27 Feb 2026 14:20:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="L4Km14Nm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LgkoukIW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EC9F83E63; Fri, 27 Feb 2026 12:04:54 +0100 (CET)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id 5C2E083E76; Fri, 27 Feb 2026 13:07:56 +0100 (CET)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 264AD83642
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 12:04:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32BDC83AA9
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 13:07:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s+Hrk+n7LOS9yisgk1Ruhfecp+2BJqupmFPuJTYLLads8XxJZ8WLtzGA0PN4MtEkauQd37cLpcp+43tu6wheYz2XVJ1p/oMjArRDndMn9tHdoHdv9Nx3zANaMJZuEsbgTiCNkPyBUzo/v9GavrZlDfwXYY4Gbal5pFUs8ipwm0uJGl46U6umsf4sQNT3vqT5Nvi9XZhOtInHuZz70o5Cq9jav+jBzwx10wtBk5bxXsQd9bM4JcUiBjrqYIbaPD8ia2lxsdLNmZ7ZuEQS+6BTYSKuDBVfZiA8K6Rt1Ym6b99W9PiaumOewYHmCh+TQhwRHQbb+R792ijgbNNsL5yA3A==
+ b=Yc5yq3TG1lcVlNI183ZkVjx0e0/r6dhq7oylJXkR2cvvtBdrdbuctPpE8zbnNqucdOt7K+m+Dbn1Yb82RiXWPZiiYCOCdCLD8rNMM061txs+lZD+FadE2YBg8zdDM0YaJxhqJhG64go4z/iBRmLKVkJrpPGlzuqW0SiXYN3EtRs7IcAisE75Oy1+wr5CZsQhfqOVZH5I6mUvklxFNWEFOMI0YW4M+6oiWD4GVFDxu52/WQ/NL2KbF1g/3gO+/p1PtgwH5Is9vyj690jaqV2A1cVjY8L8t8SXchghXTSk6/tztAgqQuJI7D3xFH33Xlzs5FxDBT4VlLrnEDM21LDt+g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iBybjjz26U7W0AbWjU7xr/8iI8svETSPY389iSgMLIE=;
- b=AKJC6OAfOUkIvunNg3yxiSg5FyOVbDwZW35h+MnByxkwuFvRoGU0QMDyxRwP6Ki3Qp86TKd6ViE3HtbSLUbEGtasVt/LS5zypysE9vjkQqNUhGAAPTRnhRlzOSkBQ7yq9I1b1hg/VGcwXxf18z0QPBUlAuyVdofbg/jfBQXbc2ytQ4UggCbIlPGGEqhHSFYHpWeT6ME4CS/+IRB7+i75L3T+BeJqpZ5i2dXiH+KISlqWU6Gj3F4bLog4vzBJrOvYGyEOg2eiGG3C+b5a5Awy5alJKx4KpyrLx35mxUf101VAl2Uil++FjXl7gdnPfiijT/O/nn/jPADGyN4NmuA8Ng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=9JsyjJjq4J4f7xS3URKo7pX+n0HwrOLEOGsXjakYMUk=;
+ b=OiQnNizBcBiilEDktrNK0ESYS26ZpnXOvIykgrYHXgJOe+kGeyyv9+Wkt0n7FMawJSsLmpGN8PqA3jCGOX56MUGyyD8l8LMI2bPUNXYZVdqqm+gHGEQC6VtzYwPHcXQEnLUCOCj+8DkQDf+QrBFdurIvFjcYKGZqcCTxUf1dtTKVZ/qs5jQz2OMQMNTjjySP2nW0xze6L5UBHzfE6GfHNymT0yn66EBpFzNbShyvg4FJ5J0ISnr+79vGRglBi8giUIQHSxRuSErvPE7lkXPXsnjHNH0pm4SQvL/CgRCkpGwHtbpg0HLIn6oRtALRKSMHd2Jd97FrbgzJimW+QjkMwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iBybjjz26U7W0AbWjU7xr/8iI8svETSPY389iSgMLIE=;
- b=L4Km14NmUkFPZ+JKKyviG+SDFMHjq5+BPHb75h8rb5lVQQDSZECEYUJyF+Ffx+Pklekl7v5lT1XFDqmCbgKjjLgLXv4jdO1eaaXQCEvayJm7GrXRbS5OO/TnfXOhLlVJZo2kKvtHgCIjBEt9k0ioj7tlmd1ZOpOAHotvcDgXhyh64mshCuZCZ7P1TWT0H9vcFEZyV6fBE/xUaTpT8rvNSNBIgrvVgpDJY+lvymPy2zleEme/qiBRmfFcSoXU2VpF7d9CLZ8JxJcritUt5qulkDlky8WDVt3nBpnyLczgpX80vdqDLIrCaJwLa6+L7OiEVFvOmAHTmkPhYWNH//pnVw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by SA0PR03MB5531.namprd03.prod.outlook.com (2603:10b6:806:bd::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
- 2026 11:04:48 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9654.014; Fri, 27 Feb 2026
- 11:04:48 +0000
-From: Boon Khai Ng <boon.khai.ng@altera.com>
-To: U-boot Openlist <u-boot@lists.denx.de>
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>, Tom Rini <trini@konsulko.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: [PATCH v1] spi: designware: add support for bits-per-word DT binding
-Date: Fri, 27 Feb 2026 19:04:34 +0800
-Message-ID: <20260227110434.5058-1-boon.khai.ng@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BYAPR01CA0044.prod.exchangelabs.com (2603:10b6:a03:94::21)
- To SA3PR03MB7187.namprd03.prod.outlook.com
- (2603:10b6:806:2f6::11)
+ bh=9JsyjJjq4J4f7xS3URKo7pX+n0HwrOLEOGsXjakYMUk=;
+ b=LgkoukIW2aYQIkNIknqeex0u4Za+rAb8uZtXdVO2opDxVJ2xCDQVHpyAsbh2soSw3gG4xxbfGK44BZtLDW0s/htPkvYP7FYW7qthTqVSwqZr7ynWwvmNS+7hcV1T/t5TQ3OdMQ1U5JxF8eYWhxX1AHwAUnsWpqzDSZIkW10Z+DM=
+Received: from BN9PR03CA0600.namprd03.prod.outlook.com (2603:10b6:408:10d::35)
+ by PH0PR10MB997780.namprd10.prod.outlook.com (2603:10b6:510:3b1::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.16; Fri, 27 Feb
+ 2026 12:07:51 +0000
+Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
+ (2603:10b6:408:10d:cafe::9e) by BN9PR03CA0600.outlook.office365.com
+ (2603:10b6:408:10d::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.27 via Frontend Transport; Fri,
+ 27 Feb 2026 12:07:23 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9654.0 via Frontend Transport; Fri, 27 Feb 2026 12:07:50 +0000
+Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
+ 2026 06:07:48 -0600
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
+ 2026 06:07:47 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 27 Feb 2026 06:07:47 -0600
+Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RC7k3G3705661;
+ Fri, 27 Feb 2026 06:07:47 -0600
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+Date: Fri, 27 Feb 2026 17:37:37 +0530
+Subject: [PATCH] clk: scmi: Fix protocol version fetch for non-CCF
+ platforms
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260227-ccf-v1-1-a22c19460b74@ti.com>
+X-B4-Tracking: v=1; b=H4sIAAiJoWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDIyNz3eTkNN0U8zQTg0RjY0sL02QloMqCotS0zAqwKdGxtbUA7Xgr8FU
+ AAAA=
+To: <u-boot@lists.denx.de>
+CC: Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>, Tom Rini
+ <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Patrice
+ Chotard" <patrice.chotard@foss.st.com>, Alice Guo <alice.guo@nxp.com>,
+ "Patrick Delaunay" <patrick.delaunay@foss.st.com>, Valentin Caron
+ <valentin.caron@foss.st.com>, <anshuld@ti.com>, <vigneshr@ti.com>, "Kamlesh
+ Gurudasani" <kamlesh@ti.com>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1772194066; l=1811;
+ i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
+ bh=TP6nziCl+XxpmgHHureFrsxX2K8X8H1DZhkvT7jfPRc=;
+ b=7XNvOWyN9CmNNiuNoUyZ5ZMi5my1u5otvix8ECFS0dEfYmGk3NtjK6/2Nu98ywpqcrkmw2/2s
+ Jk/muDWqFCqDoAkVqvYQBQdkn7eng2Ft0DNldr2dOV+819QzzU3BNH4
+X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
+ pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|SA0PR03MB5531:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1442443a-f9f6-4d4f-3cde-08de75f005bd
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|PH0PR10MB997780:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb608aa9-8740-45f0-1330-08de75f8d422
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: NnGxpt7r+VL2ZIVtD8GphvvHswD1vhiaq2NuuvEVqBD9c/hIuan8GHMpWP6HWc6174iZXjvlnoo3CZvb8qkF8RhSOBNz9WmX/HJXPRp6/pkn2dJBxpYlGUwIG8r8MRjFmnIjQ/nAWRJWIFUXz2P7aTlbdNz7zuGqU5/Co+mtyICteUr9dYFkpVpnjuuO+xd729CccGtOq+XVMQv6RjnhnCOHFDoKxcNP2GuchGVVPHZmAwX6TO1ZRRPUlmoQmt2IFIrBDtIm0jkEcynKYS3IVIpiDnVmxy2nWp7PsntVnxqjGKPF+FEG6BeajHx5vKb01ADQImfCwLXgCHj/xUuRPkK+L7RsklONAnU8ObbXIcUv1ijqjh+kvMMtlj9xESWeaMBH5cFoCUA0nrbu1bDLFxAVhoQAck4qd02RATllQpoi27pHGenir16MTtoyALGycEs83mvTFl/+PqFszHxTIqpvt/lkRRk8n1VHsGxIPxPVFKPpwfCoAiKJMHb6xjawZAj5qPYQ1g7z16dDvtrTtHYBDa3wK6qNdI/C0FG5xbovzfTBYHYS/dMkl76kjLNPZSco1UW6BohnBzDS0q8bgTaCjsiQYWiF6g6TQ4BaCTa0av9zUewo0yRSiXWnBYlYWrm8gfQl8qIIaUhUiLLzo976HrJd5maqyRLzkZfAYR9hrE0376L8xZrDwHZFLLAwobIlW5BlqU25EieWFTbqqKSB8fWeuLJlh60Nzm0HH38=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|34020700016|1800799024|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: JuhQIulnbnJuQZDsIUtAl1KTqa3HEHdgrCt4IwyvczrPc2XNA13P09U2/qNv8QOQSv0LKKYH9SkN/AHP1HcVHodzYUFccJAezDN/FSN3xVirVOSYl7PHM3YniE+fXBm1Md3xZXhOhpZwBz8bnlb/Jgo8PqxeakIBwurjpfeWjkthPQcDLojgsmbUzxX+p+N4ek6QYm+dw/fMFs6wbQRmuPyIqGRo4XjNUelhY7CTZlSKiX9QWWnYpLIsvH27Iy8rJXwA1+7eWIPNsptNTEWpXLr2T/ZkfkCpmnt28f05EV638BgcQAv+NVx5KXpXI5AXKvM+6a6vm2YwJd5EuTSM4we65q24Wp/FsjAe7QVrPIMbad3qWXP/qCjOzaFY6sOIVB208RXxR7Fj85kelZfq4YUvrHkUEUTWHjT6/Lq0TJfVNm7Gw+0KudQC3CBRSThYVrs+zShp2lNAkruddFBlYoz7GvVW4eK9+GblONkFEWKaH94lnHZnh1fOA3KrnxIGwG7/iRz35sKe0PEmo0qS3GQNVAFKIDkBY1enCcmbwFuS/TxQ3ShJDZdx6/tIUpmmS6i47IA4ZGp7I5dp++rt6NFRCDSFqjOr8VR1rvpEvPaOffquFfebJdID1301K0W7aGh8cmuAAIPIH+6yE9G9A+e9ddgx9jjvNFybUC3mfKXeoKjWd0sX8MWYdx2+UMyZqB7hoEPz19FVzirizM59xODjmFuxfiFUO0IgwpW8qT6C3nIJymMYWa9Sna+5hV+7ijMdGgenSfN6tvJF//P2qPbxbVGVQjCPvOTG+8izvXF+zl4jMXQ4y8GMtfaS2v/Q81j1JgGb1nPjCWqmwav29Q==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700013)(34020700016)(1800799024)(376014)(82310400026);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?e61FnhWcEMFn24dVvSWuR2AcyQNo945T1O8N6mqZCIpxeXdKJU9kvVGPCAlc?=
- =?us-ascii?Q?+EoIPM0a9FBgDoCd3n9RJMrRWrm05fRu4io4dpt3UV60RtymjTV//vwAOC+3?=
- =?us-ascii?Q?3XfVRPmjAZP3piq2Yl8qIHCMDVXrGJ+yjAA+ohtskE9K/880p5UZNay0XXAa?=
- =?us-ascii?Q?455hLrtRhvHnY/YXJ0C0F4VZ/1PX3tnNRK2LM0QLOi3o3IaCKyFs1mJdMh0N?=
- =?us-ascii?Q?hB+ojEfAsjSWq1OiMg2nYpsnfXC15Z7ggm1HxfxxvrKdtbYHEt6YeblbNBJl?=
- =?us-ascii?Q?56eMW8MwXzzDGXGoyppmIIqjET98Cl4gDufrazpvL+9YsDueUqppEpTjDm+7?=
- =?us-ascii?Q?SCL/T/JwQ+qLNOHdLwMONI567IIw0XqVzUkQxtJyD2eipS4NLa34gOx9QS0K?=
- =?us-ascii?Q?CKC7B4F8YCqpyQ+VXyIrFA5Lbz4kkGV7MQUUvcHwB+G7TdhryFsVBv0dd0v0?=
- =?us-ascii?Q?Tt4fgv0V+BOjQU5C62nowpEEuQ0ac3Sz4x3p3JULG80FbP0aMPI4cPPd2i/q?=
- =?us-ascii?Q?71aPrWi+O2A7pLyAqCiUMI2yWoJ7eiaVpHc2qw7ed5HkpxQQ8YegVX9xfUH9?=
- =?us-ascii?Q?gER2eiSCQq2p3/J+4DBdenKrR0sdU23IP5qqX/8NUiQ4hIKC+o2Mmk9R8puE?=
- =?us-ascii?Q?hYMAtUGEaLuBQZ0h9XNaMIo/qgr37up8WFq1rmjza5F1/F/oQxPsPEA1Zqrh?=
- =?us-ascii?Q?AdHAtM8vAmv0DOmvFomIsKbWONlLpwCDnjKN/SAbWR61/jrvj3iOgMbZwSJQ?=
- =?us-ascii?Q?ptOYEj/MpWKOnhPkTuGkpSuvhOYmtZFLK5UIItlu3B3Xu6OGIwwYivdu3N5y?=
- =?us-ascii?Q?62KOFwcuz1wmVfJF4yX6NiDYdATXCe8hc8qFbFGXwHkyAZgexq4KvNjGlmvr?=
- =?us-ascii?Q?LuSoD7QNoXf7DPOJ5nF2DfZmQNk0mrLkQrqqq/tALrN71xz+/g+CJSMY2obQ?=
- =?us-ascii?Q?Nj+ytgFg+rX41GWkE/iDOe6n1pP/2XiTTCb4tIUwfQsogCOdredzJWL9Dam3?=
- =?us-ascii?Q?1x0I62ws5tHz6tuACu60S7RVkAKpI0sQfDgPSmFnW9xpjRHhaJfQp7VxFfAK?=
- =?us-ascii?Q?zLwPeEkH/6Fm28qFuYLX26KNVg7wu68s01BkYkBD5aBxghFxaSu8O1ZFML0L?=
- =?us-ascii?Q?UkgNI4qP7J3dJI/bF1O/vd3aqosNymUffSxXheFZbvrq4XvCghJ5YHVydG0v?=
- =?us-ascii?Q?JHIhF5t8XS8cp4ZSw9LLHOo6S0qAxkwzXo05H2e/XakV0M6WfksBpV5cdRha?=
- =?us-ascii?Q?zn1kLb0bE2Xcg6mNOwrruYVdTPvXSHEw+rw2zAR83A3leCob8H3P+dzQA7Xe?=
- =?us-ascii?Q?nEFIh4iJpMSFN8rw/W+8hgvTcMxsUNWFxFBhSbrg26Bp0AT8FWzpa+9FSNg2?=
- =?us-ascii?Q?76amqP3U1Bo/0QO6CFCWGOPo0SV7n7t9aK15SlRJ7QnNCRkV5EMcGM7rhFH2?=
- =?us-ascii?Q?7EqoBSG3yJtBKiYK6U3aGrNBh19pCmk3BpmTzMGPEQFh9lFDF2qg/vsGSu07?=
- =?us-ascii?Q?rYjr/F6Y9WhngfnnPsRdwTG2V7pPXzLuzakEbY5y//PlgTj9V79JdV6tstOu?=
- =?us-ascii?Q?cJfNv2jXzaJIRJ9WmDLZak8Rmig3CfNy1BQWADn0kbOCOUUrLBNArcnjfPOR?=
- =?us-ascii?Q?JyyZHioGlzMisBxkHQKqXQYp/ri70vtzfIjVHTWrBjC3qECFZ2H09/zZJShJ?=
- =?us-ascii?Q?AApVPE97yetSwfMKAasC8pdLMnVuRkLUsDZXRYZH9IQkheIs5OWvYEbXnbnp?=
- =?us-ascii?Q?Ou13aXla0Q=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1442443a-f9f6-4d4f-3cde-08de75f005bd
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 11:04:48.4960 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8AlsI1kkb+0hzeP7Ay520nynhhhxMV3ZlC8aLRpPNn7sWDQraBE0ha4p+AVU443tYfzHb1rOr3Xx0KwNuMfPIw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR03MB5531
+X-MS-Exchange-AntiSpam-MessageData-0: Gj7SZvyyPI2RcXfTlHBLWZpccEcm3ZxJUTbJnfg09AXd3bAFp96ncOw66gfiVNIYjGBH950buSJHUlK/gG1Ts4nm/2IbuztQcBPPa7xe+GbT6EugnNYpSQuX8malrbg54R7S7eY5J3NMG6H6e9glThSwW2usPANW+3OARRo//L6sXbJPbfx/xS0+UOSzrIyyAgr9c0c8qLcLiYJWOxWRnSmT3TTYH0UM3a4ZNfMZrBzHedAaKHgZEXpaPaxi+wyzT0kdRDSStixX6Ehf8iUaS1BGD5UuWVxes5HbDqzfTnP58/lHF8BDVQQpURWDmy4q9SD5EByDyX6AUHKLGr7MPt1hhmTgkDfY06mbwb+GKgvCLQ+qPLZqUecFbr4tATyfswdV9xfXAvG0z5M3gc6TlqfC3kPLo0qkB9gN/eAwTGdtAkYBONNYf5VTJj9YfDIf
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 12:07:50.3433 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb608aa9-8740-45f0-1330-08de75f8d422
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DF.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB997780
 X-Mailman-Approved-At: Fri, 27 Feb 2026 14:19:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -140,47 +145,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the bits-per-word device tree binding.
+The SCMI clock protocol version was only being fetched when CLK_CCF
+was enabled. On non-CCF platforms, the probe function returned early
+without fetching the version, leaving priv->version as 0.
 
-Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+This caused issues because code paths like scmi_clk_gate() and
+scmi_clk_get_permissions() depend on priv->version to determine
+which protocol message format to use, even in non-CCF mode.
+
+Fix this by moving the scmi_generic_protocol_version() call before
+the CLK_CCF check, ensuring the version is fetched for both CCF and
+non-CCF platforms.
+
+Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
 ---
- drivers/spi/designware_spi.c | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
+ drivers/clk/clk_scmi.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/spi/designware_spi.c b/drivers/spi/designware_spi.c
-index b520c727900..c41436a1dfb 100644
---- a/drivers/spi/designware_spi.c
-+++ b/drivers/spi/designware_spi.c
-@@ -359,6 +359,7 @@ static int dw_spi_probe(struct udevice *bus)
- 	dw_spi_init_t init = (dw_spi_init_t)dev_get_driver_data(bus);
- 	struct dw_spi_plat *plat = dev_get_plat(bus);
- 	struct dw_spi_priv *priv = dev_get_priv(bus);
-+	u32 bits_per_word = 8;
- 	int ret;
- 	u32 version;
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index ee237ed6337..12c7b1e8254 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -341,6 +341,12 @@ static int scmi_clk_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
  
-@@ -384,8 +385,19 @@ static int dw_spi_probe(struct udevice *bus)
- 		version >> 24, version >> 16, version >> 8, version,
- 		priv->max_xfer);
- 
--	/* Currently only bits_per_word == 8 supported */
--	priv->bits_per_word = 8;
-+	ret = ofnode_read_u32(dev_ofnode(bus), "bits-per-word", &bits_per_word);
++	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK, &priv->version);
 +	if (ret) {
-+		debug("%s no bits-per-word not found\n", __func__);
-+	} else {
-+		if (bits_per_word >= 4 && bits_per_word <= priv->max_xfer) {
-+			debug("%s %d bits-per-word found\n", __func__, bits_per_word);
-+		} else {
-+			printf("ignoring invalid bits-per-word %d\n", bits_per_word);
-+			bits_per_word = 8;
-+		}
++		dev_dbg(dev, "%s: get SCMI clock management protocol version failed\n", __func__);
++		return ret;
 +	}
 +
-+	priv->bits_per_word = bits_per_word;
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return 0;
  
- 	priv->tmode = 0; /* Tx & Rx */
+@@ -352,12 +358,6 @@ static int scmi_clk_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
  
+-	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK, &priv->version);
+-	if (ret) {
+-		dev_dbg(dev, "%s: get SCMI clock management protocol version failed\n", __func__);
+-		return ret;
+-	}
+-
+ 	clk_scmi_bulk = kzalloc(num_clocks * sizeof(*clk_scmi), GFP_KERNEL);
+ 	if (!clk_scmi_bulk)
+ 		return -ENOMEM;
+
+---
+base-commit: f6963fc232603007c661411fb31c57f1a9678a87
+change-id: 20260227-ccf-d7f40a33985c
+
+Best regards,
 -- 
-2.43.7
+Kamlesh Gurudasani <kamlesh@ti.com>
 
