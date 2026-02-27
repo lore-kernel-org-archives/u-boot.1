@@ -4,131 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35728FEFB4D
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 13:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A7CFEFB4F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 13:46:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6269683F1F;
-	Fri, 27 Feb 2026 14:20:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 267B683E76;
+	Fri, 27 Feb 2026 14:46:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LgkoukIW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AzztuwTd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C2E083E76; Fri, 27 Feb 2026 13:07:56 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 846BE83E81; Fri, 27 Feb 2026 14:46:30 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32BDC83AA9
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 13:07:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DACF83CDF
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 14:46:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Yc5yq3TG1lcVlNI183ZkVjx0e0/r6dhq7oylJXkR2cvvtBdrdbuctPpE8zbnNqucdOt7K+m+Dbn1Yb82RiXWPZiiYCOCdCLD8rNMM061txs+lZD+FadE2YBg8zdDM0YaJxhqJhG64go4z/iBRmLKVkJrpPGlzuqW0SiXYN3EtRs7IcAisE75Oy1+wr5CZsQhfqOVZH5I6mUvklxFNWEFOMI0YW4M+6oiWD4GVFDxu52/WQ/NL2KbF1g/3gO+/p1PtgwH5Is9vyj690jaqV2A1cVjY8L8t8SXchghXTSk6/tztAgqQuJI7D3xFH33Xlzs5FxDBT4VlLrnEDM21LDt+g==
+ b=qw0ISnMbFrOvVoE3QLPeQONLTKhkMkN2mA50tgkAUTylFON2RwSGfVHj0IYA+9jtbMuK4XUzKOcxKuJIcxNLbETh+EePsP+oLp8ISgMx34fTKOx9jG30897e6Terrp0AblSNiFstlGO8ufy3jSu48X4vryIMvEyIHRN+cV/BvTbRTvMMxZgDF+61zg7lyuRojyx5E/44baovMPI7KWUaBVvh4Vva7gsxQaLvreyiKcMjjbsvfllNRJ2vc59lxd1l1827DEGFeTKfUbJQCqPybAtTGZ4RSGM0oQBvj48orQE9Rrtkl2iYO5p/mZ6ZyQcTjz9jCSrkcz1UWpNohiK64g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9JsyjJjq4J4f7xS3URKo7pX+n0HwrOLEOGsXjakYMUk=;
- b=OiQnNizBcBiilEDktrNK0ESYS26ZpnXOvIykgrYHXgJOe+kGeyyv9+Wkt0n7FMawJSsLmpGN8PqA3jCGOX56MUGyyD8l8LMI2bPUNXYZVdqqm+gHGEQC6VtzYwPHcXQEnLUCOCj+8DkQDf+QrBFdurIvFjcYKGZqcCTxUf1dtTKVZ/qs5jQz2OMQMNTjjySP2nW0xze6L5UBHzfE6GfHNymT0yn66EBpFzNbShyvg4FJ5J0ISnr+79vGRglBi8giUIQHSxRuSErvPE7lkXPXsnjHNH0pm4SQvL/CgRCkpGwHtbpg0HLIn6oRtALRKSMHd2Jd97FrbgzJimW+QjkMwg==
+ bh=bDg1H/M29AmhLIoGqF0Oh93h4G2xC+AZAsplcXMmlnY=;
+ b=a3TM5aKnvZI8IzUHnWT62dDfqrV053ZkSJCzTnSGp9V0+grJT69dRt6Pbf9DzUY1z1o3FEzX/EeYsU7OPhk4f0fR498h6bXoirilK6YeOQGpTLTavomS0o3S4NYf1Y2MChVHZJjCy7bjVrgBN5aQIsyD84he/MnUxtx7gUx3fB54GFIcK7lmbvfqd2HUDfJ/7R8qeUHd8rBw8bMz5lrQt4ZZt6sCHEXW1rRIHHjcDTLy6vFK3ZgxvRlLUYoNUhtW5Mk9aFRIGWUeC2afdKB6Fg5lreUXa6lXNHhoLlRjvqzXQIbXuHObFb8THQz/nLiwoo2Q0v7ZS2rH0UsPHnLKoA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
+ 198.47.23.195) smtp.rcpttodomain=foss.st.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9JsyjJjq4J4f7xS3URKo7pX+n0HwrOLEOGsXjakYMUk=;
- b=LgkoukIW2aYQIkNIknqeex0u4Za+rAb8uZtXdVO2opDxVJ2xCDQVHpyAsbh2soSw3gG4xxbfGK44BZtLDW0s/htPkvYP7FYW7qthTqVSwqZr7ynWwvmNS+7hcV1T/t5TQ3OdMQ1U5JxF8eYWhxX1AHwAUnsWpqzDSZIkW10Z+DM=
-Received: from BN9PR03CA0600.namprd03.prod.outlook.com (2603:10b6:408:10d::35)
- by PH0PR10MB997780.namprd10.prod.outlook.com (2603:10b6:510:3b1::20)
+ bh=bDg1H/M29AmhLIoGqF0Oh93h4G2xC+AZAsplcXMmlnY=;
+ b=AzztuwTdLeTJQ3PuST8e/2zhpH9EAZEr5IsxwTQhL/8eVbl7LEvwxnFWnCS2wCF9DSadgAK2m7ReFXI20s6akU+LZzQxJcagMIbYAu4FFWvSOOWP40OllPf2CgZv/scm16DIMN5KaJuDIxkjQ+Waun6/l37Qo31Q2Ksnlb7Li2U=
+Received: from CY5PR15CA0080.namprd15.prod.outlook.com (2603:10b6:930:18::32)
+ by CH3PR10MB7611.namprd10.prod.outlook.com (2603:10b6:610:176::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.16; Fri, 27 Feb
- 2026 12:07:51 +0000
-Received: from BN2PEPF000055DF.namprd21.prod.outlook.com
- (2603:10b6:408:10d:cafe::9e) by BN9PR03CA0600.outlook.office365.com
- (2603:10b6:408:10d::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
+ 2026 13:46:23 +0000
+Received: from CY4PEPF0000EE33.namprd05.prod.outlook.com
+ (2603:10b6:930:18:cafe::e9) by CY5PR15CA0080.outlook.office365.com
+ (2603:10b6:930:18::32) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.27 via Frontend Transport; Fri,
- 27 Feb 2026 12:07:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ 27 Feb 2026 13:46:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- BN2PEPF000055DF.mail.protection.outlook.com (10.167.245.9) with Microsoft
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000EE33.mail.protection.outlook.com (10.167.242.39) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9654.0 via Frontend Transport; Fri, 27 Feb 2026 12:07:50 +0000
-Received: from DFLE202.ent.ti.com (10.64.6.60) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9654.16 via Frontend Transport; Fri, 27 Feb 2026 13:46:22 +0000
+Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
- 2026 06:07:48 -0600
-Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 07:46:21 -0600
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
- 2026 06:07:47 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 07:46:21 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 27 Feb 2026 06:07:47 -0600
+ Transport; Fri, 27 Feb 2026 07:46:21 -0600
 Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RC7k3G3705661;
- Fri, 27 Feb 2026 06:07:47 -0600
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RDkKbx3826165;
+ Fri, 27 Feb 2026 07:46:20 -0600
 From: Kamlesh Gurudasani <kamlesh@ti.com>
-Date: Fri, 27 Feb 2026 17:37:37 +0530
-Subject: [PATCH] clk: scmi: Fix protocol version fetch for non-CCF
- platforms
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260227-ccf-v1-1-a22c19460b74@ti.com>
-X-B4-Tracking: v=1; b=H4sIAAiJoWkC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDIyNz3eTkNN0U8zQTg0RjY0sL02QloMqCotS0zAqwKdGxtbUA7Xgr8FU
- AAAA=
-To: <u-boot@lists.denx.de>
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
 CC: Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>, Tom Rini
- <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Patrice
- Chotard" <patrice.chotard@foss.st.com>, Alice Guo <alice.guo@nxp.com>,
- "Patrick Delaunay" <patrick.delaunay@foss.st.com>, Valentin Caron
- <valentin.caron@foss.st.com>, <anshuld@ti.com>, <vigneshr@ti.com>, "Kamlesh
- Gurudasani" <kamlesh@ti.com>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1772194066; l=1811;
- i=kamlesh@ti.com; s=20230614; h=from:subject:message-id;
- bh=TP6nziCl+XxpmgHHureFrsxX2K8X8H1DZhkvT7jfPRc=;
- b=7XNvOWyN9CmNNiuNoUyZ5ZMi5my1u5otvix8ECFS0dEfYmGk3NtjK6/2Nu98ywpqcrkmw2/2s
- Jk/muDWqFCqDoAkVqvYQBQdkn7eng2Ft0DNldr2dOV+819QzzU3BNH4
-X-Developer-Key: i=kamlesh@ti.com; a=ed25519;
- pk=db9XKPVWDGJVqj2jDqgnPQd6uQf3GZ3oaQa4bq1odGo=
+ <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>, "Alice
+ Guo" <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>, <anshuld@ti.com>,
+ <vigneshr@ti.com>
+Subject: Re: [PATCH] clk: scmi: Fix protocol version fetch for non-CCF
+ platforms
+In-Reply-To: <b131c7fd-dde7-41ec-8012-1bc829e2ba1a@mailbox.org>
+References: <20260227-ccf-v1-1-a22c19460b74@ti.com>
+ <b131c7fd-dde7-41ec-8012-1bc829e2ba1a@mailbox.org>
+Date: Fri, 27 Feb 2026 19:16:19 +0530
+Message-ID: <87pl5qz4d0.fsf@kamlesh.mail-host-address-is-not-set>
+MIME-Version: 1.0
+Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000055DF:EE_|PH0PR10MB997780:EE_
-X-MS-Office365-Filtering-Correlation-Id: bb608aa9-8740-45f0-1330-08de75f8d422
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE33:EE_|CH3PR10MB7611:EE_
+X-MS-Office365-Filtering-Correlation-Id: af5cf208-57c0-4def-24bf-08de76069848
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|34020700016|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: JuhQIulnbnJuQZDsIUtAl1KTqa3HEHdgrCt4IwyvczrPc2XNA13P09U2/qNv8QOQSv0LKKYH9SkN/AHP1HcVHodzYUFccJAezDN/FSN3xVirVOSYl7PHM3YniE+fXBm1Md3xZXhOhpZwBz8bnlb/Jgo8PqxeakIBwurjpfeWjkthPQcDLojgsmbUzxX+p+N4ek6QYm+dw/fMFs6wbQRmuPyIqGRo4XjNUelhY7CTZlSKiX9QWWnYpLIsvH27Iy8rJXwA1+7eWIPNsptNTEWpXLr2T/ZkfkCpmnt28f05EV638BgcQAv+NVx5KXpXI5AXKvM+6a6vm2YwJd5EuTSM4we65q24Wp/FsjAe7QVrPIMbad3qWXP/qCjOzaFY6sOIVB208RXxR7Fj85kelZfq4YUvrHkUEUTWHjT6/Lq0TJfVNm7Gw+0KudQC3CBRSThYVrs+zShp2lNAkruddFBlYoz7GvVW4eK9+GblONkFEWKaH94lnHZnh1fOA3KrnxIGwG7/iRz35sKe0PEmo0qS3GQNVAFKIDkBY1enCcmbwFuS/TxQ3ShJDZdx6/tIUpmmS6i47IA4ZGp7I5dp++rt6NFRCDSFqjOr8VR1rvpEvPaOffquFfebJdID1301K0W7aGh8cmuAAIPIH+6yE9G9A+e9ddgx9jjvNFybUC3mfKXeoKjWd0sX8MWYdx2+UMyZqB7hoEPz19FVzirizM59xODjmFuxfiFUO0IgwpW8qT6C3nIJymMYWa9Sna+5hV+7ijMdGgenSfN6tvJF//P2qPbxbVGVQjCPvOTG+8izvXF+zl4jMXQ4y8GMtfaS2v/Q81j1JgGb1nPjCWqmwav29Q==
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(36860700013)(34020700016)(1800799024)(376014)(82310400026);
+ ARA:13230040|1800799024|82310400026|376014|34020700016|36860700013; 
+X-Microsoft-Antispam-Message-Info: ltwPGZQFuI8T4Ybd9MEsm1Wlwi1CKfseWW5yzSvzdJTuubA9NRTdv64feU1vfd82RTyzEI3qWB916io/ek1cYV4US6ihz4DYOXW4il2o9xxRquGUmw4ag4wOFn12T3vciOmSYyB22jPCsBisKPaUnbYrEJQ8uF47m2W7TzTPJmjhmFeJ1Z6plDcpJEz3Lq2u/NxuIWZNr1j2jmU76cEsZ2nRmfXMfL3AUjJDy8gENOO3prDKxdEi+sJUWJvIxTET1h1CqbkJLG3iTa3+C0F33INHwYkGUiGesxm8BNUyB6tkPDfTLekvEUqRP3DG4bkgYyX9jkBY3aon6FZH3sDYNxmAm1ve++iALNFOp2KYf7RKKXxh3G5C3B4yawQauauc78aMCb+ROwNMVCQa5h0aGs6JzqhooMrWRBWXe8AV9CAkyE2y6kovqfcV/A4GTTl53M3WIBPNL6bEJy7isMRayUBYtzfJxW38IGvkJWBTpDfadN6SMhAKK8fVAIgTyGBpstoUrlHnHliRqDZ68PMAl85wOVKnlDWL9LgVuwepeVWXWdv15p2kh58XqpdqjIlwdqie0+Vj2q+LOwKwcUJJj2uLedSAFRQNej8v+1qkdcSvfdRSGqV0ro/z1DO4YYY4TA5Yfb3KMUYVo053t87iR8ZE66t4wrTS3x6FVTDRez9pI4e1DfTO6pKG3OHof8+TwcjzUXW1UJGIFPoJRmHbDzNPW0J6sqi3ahz3mrLDPBbHepOkOakP9MYLNYLc5V8XqR+lXu1xVEmxzDYEEsTILSVbborWYkPjNPgUEHFX+2/P9LoKMAOxPzBzJyzbPmCtvkN0nnHy6QRdqgoSMn8ClA==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(34020700016)(36860700013);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Gj7SZvyyPI2RcXfTlHBLWZpccEcm3ZxJUTbJnfg09AXd3bAFp96ncOw66gfiVNIYjGBH950buSJHUlK/gG1Ts4nm/2IbuztQcBPPa7xe+GbT6EugnNYpSQuX8malrbg54R7S7eY5J3NMG6H6e9glThSwW2usPANW+3OARRo//L6sXbJPbfx/xS0+UOSzrIyyAgr9c0c8qLcLiYJWOxWRnSmT3TTYH0UM3a4ZNfMZrBzHedAaKHgZEXpaPaxi+wyzT0kdRDSStixX6Ehf8iUaS1BGD5UuWVxes5HbDqzfTnP58/lHF8BDVQQpURWDmy4q9SD5EByDyX6AUHKLGr7MPt1hhmTgkDfY06mbwb+GKgvCLQ+qPLZqUecFbr4tATyfswdV9xfXAvG0z5M3gc6TlqfC3kPLo0qkB9gN/eAwTGdtAkYBONNYf5VTJj9YfDIf
+X-MS-Exchange-AntiSpam-MessageData-0: ViDRikM8Od02ycgeqodv7Us2OYvC9qRoC2n9wFuIMC4VcU9HCgfFDoyiRmQc1vrdIPAxR4eekJ8sg2Xp3+bArLkw1TipK6gTIZ0FiUUNmlzWBZzl+JvaDIIKZiUNhA/QuMlUl1TKkgSFpnQ6im/QVJLv7ZH6ZCv3Ueo5rVsX2RGYa0k5LfA0w7908RQWSe7Wshbo5s4xZRcY0xxg81rJyygwEAvvxMC4HdZiNKgATN/Q6Vk74IYVo94IjaKqZWfJLTjQ55okAMMeLy+TEqtf2KXPDeRR8SWTHEh0JuQTs5dBlKO+60JSlghpEVoCigXEeJao2VF26ZYvsLz7k3/UO6PvSwQj8U5ezl9u/zIktI40QVkaEbalDAPMRr6XwKK9MGy00qFd0l+WlL0BVX+jk0Cc6GEGjNELlsHOCMfxpfG9KsI1zgL47eIZ+QHadJvT
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 12:07:50.3433 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb608aa9-8740-45f0-1330-08de75f8d422
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 13:46:22.9128 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: af5cf208-57c0-4def-24bf-08de76069848
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000055DF.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE33.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB997780
-X-Mailman-Approved-At: Fri, 27 Feb 2026 14:19:56 +0100
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7611
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,59 +135,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SCMI clock protocol version was only being fetched when CLK_CCF
-was enabled. On non-CCF platforms, the probe function returned early
-without fetching the version, leaving priv->version as 0.
+Marek Vasut <marek.vasut@mailbox.org> writes:
 
-This caused issues because code paths like scmi_clk_gate() and
-scmi_clk_get_permissions() depend on priv->version to determine
-which protocol message format to use, even in non-CCF mode.
+> On 2/27/26 1:07 PM, Kamlesh Gurudasani wrote:
+>> The SCMI clock protocol version was only being fetched when CLK_CCF
+>> was enabled. On non-CCF platforms, the probe function returned early
+>> without fetching the version, leaving priv->version as 0.
+>> 
+>> This caused issues because code paths like scmi_clk_gate() and
+>> scmi_clk_get_permissions() depend on priv->version to determine
+>> which protocol message format to use, even in non-CCF mode.
+>> 
+>> Fix this by moving the scmi_generic_protocol_version() call before
+>> the CLK_CCF check, ensuring the version is fetched for both CCF and
+>> non-CCF platforms.
+> Which platforms are these non-CCF platforms you refer to ? Which 
+> platforms are broken right now ? Those details should be included in the 
+> CM .
+We noticed this on am62lx_evm which is yet to be upstreamed.
 
-Fix this by moving the scmi_generic_protocol_version() call before
-the CLK_CCF check, ensuring the version is fetched for both CCF and
-non-CCF platforms.
+It should fail for all "CONFIG_SCMI_FIRMWARE" "~CONFIG_CLK_CCF"
 
-Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
----
- drivers/clk/clk_scmi.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+But the failure case "0" is favoring the devices which are using scmi
+clock protocol version less than 0x20001 (or 0x30000).
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index ee237ed6337..12c7b1e8254 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -341,6 +341,12 @@ static int scmi_clk_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
-+	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK, &priv->version);
-+	if (ret) {
-+		dev_dbg(dev, "%s: get SCMI clock management protocol version failed\n", __func__);
-+		return ret;
-+	}
-+
- 	if (!CONFIG_IS_ENABLED(CLK_CCF))
- 		return 0;
- 
-@@ -352,12 +358,6 @@ static int scmi_clk_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
--	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK, &priv->version);
--	if (ret) {
--		dev_dbg(dev, "%s: get SCMI clock management protocol version failed\n", __func__);
--		return ret;
--	}
--
- 	clk_scmi_bulk = kzalloc(num_clocks * sizeof(*clk_scmi), GFP_KERNEL);
- 	if (!clk_scmi_bulk)
- 		return -ENOMEM;
+I can't really say if following devices use SCMI Server version greater
+than 0x20001 and are getting affected by this. 
 
----
-base-commit: f6963fc232603007c661411fb31c57f1a9678a87
-change-id: 20260227-ccf-d7f40a33985c
+As am62lx_evm is not upstreamed yet, not sure if I should add that in
+commit message. Let me know what you think.
 
-Best regards,
--- 
-Kamlesh Gurudasani <kamlesh@ti.com>
+Devices with "CONFIG_SCMI_FIRMWARE" "~CONFIG_CLK_CCF":
+am62lx_evm cm3588-nas-rk3588 coolpi-4b-rk3588s coolpi-cm5-evb-rk3588
+coolpi-cm5-genbook-rk3588 evb-rk3588 gameforce-ace-rk3588s
+generic-rk3588 jaguar-rk3588 khadas-edge2-rk3588s mnt-reform2-rk3588
+nanopc-t6-rk3588 nanopi-r6c-rk3588s nanopi-r6s-rk3588s neu6a-io-rk3588
+neu6b-io-rk3588 nova-rk3588s odroid-m2-rk3588s orangepi-5-max-rk3588
+orangepi-5-plus-rk3588 orangepi-5-rk3588s orangepi-5-ultra-rk3588
+quartzpro64-rk3588 rock-5-itx-rk3588 rock-5c-rk3588s
+rock5a-rk3588s rock5b-rk3588 sige7-rk3588 stm32mp15-odyssey stm32mp15
+stm32mp15_trusted tiger-rk3588 toybrick-rk3588 turing-rk1-rk3588
+
+Regards,
+Kamlesh
 
