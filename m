@@ -4,108 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 825A4FEFB6D
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 16:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C29FFEFB6E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 16:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D03F383E96;
-	Fri, 27 Feb 2026 17:18:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B9D8183D1A;
+	Fri, 27 Feb 2026 17:22:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZ9IIX0Y";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="O0ASq4+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B3FE83EB3; Fri, 27 Feb 2026 17:18:01 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7488F83E8E; Fri, 27 Feb 2026 17:22:50 +0100 (CET)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D31883D1A
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 17:17:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E2D883CDF
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 17:22:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-65f71ed7c6cso4047781a12.0
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 08:17:58 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772209078; cv=none;
- d=google.com; s=arc-20240605;
- b=KE6cquaWAQkykhd9vV/v48Skwxsgp0MHxLwlauTAr2IY9nPrRwaUwibkscOSsg2G+c
- g0ccaHZ3lAfjKXrScLLY9YybXsY4Qnqpko3LMNOf+NZNIwpkTPkcJsIDAqgdsbzeJCMZ
- 2Cc+QlWpD4AO2yjbqDrvPB0p367jhaTpYBc5pmdyo561LJ5Yeuk3JBXo8bHKxzDvl1Jx
- 6WLhXvEsVN1mUjBdG32FpCD9s+kxJSHFijZLdZsu/mcFqmBO1f+bAVH0gPjPeI7qeb5Y
- Es/ERbT0gvWW6tX6xriMxiUP4qP52eEM7J6xG+GPY+ObTlOsbMbVVkDKo8jNI5uTQ9uV
- n6Pw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=9E43+iAtf/At7aVSs3d4vH+h81hofeUaMUKXnXDEYSY=;
- fh=LclY4ejrLzs8JlJ1qvDXbouoyshlGcwAUgubiLx2wNY=;
- b=Zvk+ZISNKIJ0xvklc83uOcH+MVEJFvHdVoeqER3jpA6r4wp+3tYG0slpIRqCJIX3g3
- ha+NrlTQLPvWCp27p/0yxma2ql/frp7yd4MbipvITodJOUXXwEQTiEnozEXXlr1eE2Ld
- 0RyUY6aIvzEo7Ps5XF4uP868hxgE+mTKT50/vM9Jx5kh+vVFsXs00M6fEm4z8+a+CWSv
- IPL5SMB0jxP64DoLm0hweZ/0mA9TDLvqKJz7zdsYMriw47146/xQnel4Fyxh7NCSITcn
- h/rxN38BNAT47H2S93RLHEeWuajbwYDm7G/3RW6ZZu/5dLC/r4yjKZePFZKGvqKIsqbf
- HMLw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772209078; x=1772813878; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9E43+iAtf/At7aVSs3d4vH+h81hofeUaMUKXnXDEYSY=;
- b=gZ9IIX0YBLnWORhDDC1dpVtw0vBi3iRD9DDuj77ErJ8S5AiToQ/5FFx3BmqaEtIlOS
- bkMYWqwQcXBcgQGggvQN/hQXhKKWDL0IQY+JkCTphbBz3qEXu4RYVZ1zbbeJSzGp6oL0
- Fek6/jBVOvEXZtEVVK7QfYokDAcOFCug1PK1o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772209078; x=1772813878;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9E43+iAtf/At7aVSs3d4vH+h81hofeUaMUKXnXDEYSY=;
- b=WOf9NY3hW24NEwBp4fUiIGEPk6vK9JUtNIMwmVE10KYVIumQMSps2feVPV/sUlV+U/
- E5KzKwBNLpANIUPgRJxtlz8/6/dn3PYAzLvO3hU4QiYczL83juM/rtqyMQuOlpCWX5h0
- hsqVTK/H4jlwxrn9RBztE16aHIUJoYbijA8jwLSaRIxG962piwS2HFasQcg21g4ARu3j
- mYcUxwox2Ak7IGiJ7mRqLBkWeEgJ3ESpLYi2PZQVX/EbRHzga45X4qFuAEfy4OBw6rky
- p0vb6WzDE3zT/7krvxUeEqv4Ch3fsN23eI6/KOmI69TTZVAGzYOxmAvXVRNjhgQmp9d6
- b6sA==
-X-Gm-Message-State: AOJu0YyEcKyCkuzsNgxXsIhWX+PCROmkSuh9mYKbbzm/Wr2r1I4SLHUr
- 4apndUtIAA/gmam6qDLZAJ1CDjY3O2aZ/jxNRXVujVw+Esf9nFsUT3FjsyMqqhmA7VmdDEP5D+N
- fmOBdablwaoOx8TaKTRwyJYthyIhR4Xkw8VojkKfX
-X-Gm-Gg: ATEYQzxp87T0Mn9YhN9jlaFY3DEdY7YY8UsDV7EmTvAjO3+HtbABj61J++PJQBPobd/
- kzvf0mBW63WBGd+LsxbCoiSlQSZFIKtW0JgdIRJM75EJeGIm0+H2FdANy6BOj+sbtU4n0luM7TC
- TuXGhPYkJ3f//Qi9JIg5hPVtJgw0yeYodiO++zXQ03gXkeWkavRFjUHizOfzjTt4yhB0fROi7Zd
- DyZQIGsMuRjr3Zis7oZsUPuj44cFnkABx8q0PeQliAZSvddJvr6Hj0UScV6wjb1EeVvI7zb2cAS
- bkVPQw==
-X-Received: by 2002:a05:6402:f23:b0:65f:730d:8026 with SMTP id
- 4fb4d7f45d1cf-65fdd6d76efmr1515577a12.9.1772209077743; Fri, 27 Feb 2026
- 08:17:57 -0800 (PST)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AnxNg2KG8wPfGkLIWtlD/lLzJYwLgoSKV22yQtz4rFkamJgWBqCUR0J2+EmKP0TwFyxcZaVJQWL97PAa9PHHSK5JXcwcAiggHzPux1eT4vfFZHNXNtUQfbECtZImVHfZaqXTNp/kfYKqwEz+QeVbGwFPzpP4tzqPEfzjXGAw9ZPVoJfSFkeHB3ROhrFAnCfjsN5hzCO8D2E9/0w5I41JRQeZBY7N7Z5S41jNbDJUmTeog7g+FBpt/OFGYUeQc5O7K/L7RCscbpSNNMxR/Ih+nxNfXBfo8o12AhdU28YNOirbf7R+I523BRvzCy90wym84TaR7s70Lf54c/g+Us3SZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ffa8aMF/CDT8iO8myPE3fu8Jm09oDO6DB9zSqbt+32E=;
+ b=KOIV/QDYdq57GED4cybl/U15gJunGQmt7GZHSnK/kVusoqgrUZPlYowzSaR5si283qDg0w98wxz0289UpyAunVCBdnwYGxdKw7Q9ba5LaXQg7n83IwAyO65ymIo+dVb+qDaM89rV17Id28bfF5CpSIKy6q7GXQEkRNUfUGRqsfs2E4TLNKkhDNwsVsDJBHmXZVlIBcTgA1r/CYlndcirRtUMYcCafOk4QJvG5tVFvdWtIBQl+s3cmaQLKNXqjPsAMzrX3WFEyhFi4gqAIvt3+RHri7ReVye+5OnKhkg74T2sji3efx/EbJwWU3JKTPzDFyJLmkycFMzaupSc6tYvuA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ffa8aMF/CDT8iO8myPE3fu8Jm09oDO6DB9zSqbt+32E=;
+ b=O0ASq4+6PXJH3NKoKw93fDcG/GC1IoLxvLJuJj7xumlpvCp6MmSoov/S1ck8uvkBnqxPiH1EsVZR5Im3n81crrkBAial2ogLGJAiq/yXOw4ZQ/NNJm1Yi/rdah498B6AXQiBGjAFR4hCPDtWigcdAC+yeKyXp0mmE2wjzy1rNtQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by AMBPR04MB12288.eurprd04.prod.outlook.com (2603:10a6:20b:730::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
+ 2026 16:22:46 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.013; Fri, 27 Feb 2026
+ 16:22:46 +0000
+Message-ID: <0a00c978-9059-4bb1-aba1-dda5c59db815@cherry.de>
+Date: Fri, 27 Feb 2026 17:22:40 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] kconfig: fix buffer overflow in
+ conf_get_default_confname()
+To: Anton Moryakov <ant.v.moryakov@gmail.com>, u-boot@lists.denx.de
+References: <20260226205846.57752-1-ant.v.moryakov@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260226205846.57752-1-ant.v.moryakov@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VE1PR03CA0036.eurprd03.prod.outlook.com
+ (2603:10a6:803:118::25) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-References: <20260226234802.345968-1-sjg@chromium.org>
- <20260226235102.GO1593142@bill-the-cat>
-In-Reply-To: <20260226235102.GO1593142@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 27 Feb 2026 09:17:46 -0700
-X-Gm-Features: AaiRm53mg_HQTV1ULMQUeQ9bD0SByoE-xlNkmFmVDMefmhaB42iFnAWgr9ow8Dk
-Message-ID: <CAFLszTi6HyLAh1J79suitFKTU0L7QRHjHWr4K4VmwZ9L1=PGzQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/16] binman: test: Organise test files into
- subdirectories
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
- Simon Glass <simon.glass@canonical.com>, Alice Guo <alice.guo@nxp.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>, 
- Bryan Brattlof <bb@ti.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Michal Simek <michal.simek@amd.com>, Moteen Shah <m-shah@ti.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Yannic Moog <y.moog@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AMBPR04MB12288:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3eb335a4-0fcf-4a4f-6bbf-08de761c714c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: Oyjz+1rxg985AAKo9BWtavqJylJoiXP+e6ux795lzIpcJzdbp2AhIyr00fMpoDaJOhY7TuIrJWs3Zgcu095VfEW8/KtbO+mbpZP7CBzCPBqfCCyvNj2oXJEVetKCzWkrYpSMpLNi/imdNXDXq8I7l9nrux7QNHad5jkF+Oxdfh9aWIhus0L1DsF7bRDsrP8s/Evffrf5b46HzfvxVdvhU8HJtE/s5w4crtjtd7tGNOAwp6e6mKz6cGv1VitpO3ggvrIBTX4x9wQXgFiwbIabmTaI8+oM+oPCYT1eXXwNXQ6LsM9q9poQciWw/mrtf4H1UOHWMkBPy3uCX24CQImnY+6pFu/30ov2V8l3utbTaJ87LJSz/3Q0nLoN7d8N6eTSy/qY+U+g87vtvumUtC2uJx3xraoUx9FlZ6moOiVxVWw2N7+np119cfmzQDmxcZnXa3KrKDvgKk7EH84+q3Td+am4OefnxRlbR9o7WlQuPk+2D9r9nRFnVrgv/Bdf7czd75wgMgi6cuajP7FI5tbYPY/2lDlbgg0X7LYk6OSTs1/S4/hPrXdUByE9gWAcnawODQdWbs+an93QQWI0Pae/5HCLtsy5GPSsWH/DNtf/Xp2rfeGG+APqqtwxHJaR6zhcPxYMHP20Oo71rybtI+ICeZ3GadhOXS6MisSNxNWmmS/faDHvGLtaN8NiVq4lmD6VVV9Hct4ZemHi75qcW8y+J9X4boBAckTqTaC0wpXVK5o=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TGNGZXRzODUyMGN3TlkxS0FDdWMwdEtUU05ERTdmbkdROTR0aUlQbWdNSmZV?=
+ =?utf-8?B?OU1ZTmxDRE9mbGRWSU54MUVKSEVla2dnTmJvNTRZODF5TGdqbDA2VTMraWhF?=
+ =?utf-8?B?THgyRUQyUUUrVTZEMXZ6NnhrUU5PSFJhbkFFZEJ0dzcxdEFkUnZ3ZTBIQ2M5?=
+ =?utf-8?B?SkFpZ09XYXBmQkpBT1ZGL1J0a1RrS2EyNDFiLzd0RU5selZVRDhCaUY2Wngv?=
+ =?utf-8?B?cjMrakpjaWNyR2xvcGJKT25hTElad2pmOG5CQzZkTzJNbHkwVDJiTkFMV0M0?=
+ =?utf-8?B?cmZTdDdUOU9Eb280TVdqWUlJOXJweitDV0Q2TjBKdWhKbkFKbmZmeHhNQXJY?=
+ =?utf-8?B?ZDdIazZ0aVJPaGszUURXRXlLcXR5dGhSN0ZtaDJ6Q3dHOXdWbGlPRFNvM1Bl?=
+ =?utf-8?B?SXpoSUJ5VGF6Rmc1cHZCaVdvRnYxUjhHN25JeG9TM1ZmU0hCcVAycnlHamJI?=
+ =?utf-8?B?VVRwK0ExVjNicDVKWGw5TlJHUWlaZWxaRnhxTGVKOG85Zy83YXg5ZThkUUtZ?=
+ =?utf-8?B?U2ViY1BYWmJ1QnlXWUZMOVFpRFFQekhQdkhocjFXZklMeU95SDNaSmVPc2Fh?=
+ =?utf-8?B?bmNmKzM2YTJsaU5hNnNBTGVyRDFtMXFjMXllTkxrV0paNDdxdThoT2drRi9M?=
+ =?utf-8?B?b2hnUDJyUlZvZjFXZlRyKzYvL3ZjZHVhL2hYZ1QvVytqNysxdWNDVFU0ZFhZ?=
+ =?utf-8?B?dlZQSmFmRmhpdEpGbE95ck5ScG91ZG1venVhWHJTdWJJR3hkU2w0dWZkN2ts?=
+ =?utf-8?B?b0w3QUhGK2Rud0JaVlZXRG5nN01ZZ2pYOEhNNEY3U1d3QVBxRTlraHFwVjVj?=
+ =?utf-8?B?THExM204QXpvelJCT01CL1N2YTJNWGJlTUEzZWRpZ2djN1owSzFYcmZwVnEv?=
+ =?utf-8?B?V1hCalVIWkVoQUU2eFBtamYwRVVVcCt6aXZReUtVNEFIVThMRGUxZEtNdU1H?=
+ =?utf-8?B?eVBZQy9pVzZKSjhvU2JiRmpRNkc4WHUvRDdhWXZwWnhObjZCTVJtZWNCYVlT?=
+ =?utf-8?B?cGZaQWFFTXJLNlBIRkgrZjZFK0g5RUpLaVhVOXdYR2RxaE5rWTJHQXlKcXU0?=
+ =?utf-8?B?ajJDMlcwUlNCeEo3QmdqR3JmczNsRk5xQzB3cDFQMnhRTjJTdXpPdzIyZk5h?=
+ =?utf-8?B?bnh2YW9zUEFBOVRiL1FEcDhEZDR5ZUdvTytpekl5U2NZU3RnOHpWc1BQbDV1?=
+ =?utf-8?B?SlBIcy9wYmdKYlJQTHc1elV6elU3SnI0T0ZydmJQZlZhZDM5ZWpmN0lTVm5G?=
+ =?utf-8?B?NnNmT0R2SWc0Nk1xdnFYVTZvTklpSC9XNmI0NmhKaFdlSnlHb2tuVTZPU3Nl?=
+ =?utf-8?B?S2o5b3hjN1VzV0hydmQzckZJaHdEUEQrQzIwSGpCeFZUZXNuZzIrdmYrb2Vo?=
+ =?utf-8?B?TTEvTE9VZkR2cVg5L3pmWEpuNktqS2xQc3gwS0FRWTZ3ZUI4V1hLeitzYVZJ?=
+ =?utf-8?B?T1F2dXdnUVQrMGhZY2NxamY0Uml1R0ludGlrYzhkREpkVmRmZFJzeDl0cXFO?=
+ =?utf-8?B?QXJ1OXExWjJLRVdRaU5tejM3UTZFNmE3NkxYNHA0bGlLd1pGNXJvNEh5b3h6?=
+ =?utf-8?B?ZmhUclYzRlEwL25FNUJxWjYvT3pzQVgzeTRkdWhaR3d2V3c1eXZYN29aajRj?=
+ =?utf-8?B?RnFNVlhLMm5QTGo3MU5LdS9XZXZKSmd3YmszWjVubTQ5NGNEa0xZdUpPMVZr?=
+ =?utf-8?B?K3RCVldxRU4wMUFFRUJrS1ZsZ0NIUUovNGkxTVYveDBuY3dnMkJZVU1PaXVv?=
+ =?utf-8?B?Y2hIZVVHQU9GbHNNVkxKd1lCbUdQSHpsS29wemNibmgwaXE2THFRMjBVZWx4?=
+ =?utf-8?B?SUFvUEhiMitxcEhJV1FGVUI2VXRWbS8xZzNTVExrU1dYWFY2azRWSmZMODF4?=
+ =?utf-8?B?NHVzNjh5cnl5djdQNzhsY2VTV2lGMGRNRE43V0QyWmRHa1ZXVkRZNUI4Z3JT?=
+ =?utf-8?B?ZUx6Vk9LQU9LazZoZzdwa2hSY3JycFZhZHBXMm4ramFJNXhVWk9MMkYvL1E3?=
+ =?utf-8?B?N0dFb0l4OVRhQldHZUw5a3hZVDMyb0ZlMDZJMmxTSUlNdVFqVS83MUJwOFRQ?=
+ =?utf-8?B?ZFNYN1RDakFPVlZwZGNxejg0aWVDcERudkdvWlZRR3NJYXhIWHlHVWdSRWd0?=
+ =?utf-8?B?enNLRjByOXE2dForY25PZkM5RUdlK3BlMlpnMkljN0tGV3QvZFhnanRISUF6?=
+ =?utf-8?B?SXVtblBCcFVmMlR2T2EzWGVxQlRkK1d3NmJKZWV2Qkx5b3EySmhySlBEQmZ3?=
+ =?utf-8?B?TkpORWJYNmlMU0tHOVVZekhEMEpsVUhKNksvNUtZOXpudEtNVDNUenJrQWda?=
+ =?utf-8?B?NFgzQVl3Nyt3QkVpZm1uYnhLQ0VvL1NienhtTGRtVHpIYm82V1Rmdz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3eb335a4-0fcf-4a4f-6bbf-08de761c714c
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 16:22:46.6750 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wPt5jmlN2Nah8HN82DPvn0I4iWqdnt/Ak/EtCu+XDa8ILQQDyxCbciyuEzSVKF2iltF/fwZQm/LBdocmPQYHcu6f+34tVwZwkCSBa8H9Mmg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR04MB12288
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,29 +144,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Anton,
 
-On Thu, 26 Feb 2026 at 16:51, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Feb 26, 2026 at 04:47:40PM -0700, Simon Glass wrote:
->
-> > From: Simon Glass <simon.glass@canonical.com>
-> >
-> > There are about 350 numbered .dts test files in tools/binman/test/ and
-> > we sometimes have trouble with numbers being reused.
-> >
-> > As an alternative approach, this series moves the files into thematic
-> > subdirectories, without the numeric prefixes. This means it's no-longer
-> > possible to simply type a three-digit number to get the right file, but
-> > the names are shorter so it is still easy enough.
-> >
-> > The subdirectories chosen are: blob, capsule, cbfs, cros, entry, fdt,
-> > fip, fit, mkimage, pack, security, symbols, vendor, x86, and xpl.
->
-> This seems much more maintainable, thank you.
+On 2/26/26 9:58 PM, Anton Moryakov wrote:
+> Use snprintf() instead of sprintf() when building the full config path
+> to prevent potential buffer overflow.
+> 
+> The function previously used sprintf() to concatenate SRCTREE environment
+> variable with the expanded config name into a fixed-size buffer
+> fullname[PATH_MAX+1]. Since getenv() can return arbitrarily long strings,
+> this could lead to writing beyond the buffer boundary (CWE-120).
+> 
+> Changes:
+> - Replace sprintf() with snprintf() with proper size checking
+> - Add validation of snprintf() return value to detect truncation
+> - Emit conf_warning() if the resulting path exceeds PATH_MAX
+> - Return the unprefixed name as fallback on error, preserving behavior
+> 
+> This fixes the static analyzer warning:
+>    confdata.c:119: buffer overflow via getenv() tainted input
+> 
+> Reported-by: static analyzer Svace
+> Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 
-Yes, I hope so. I could perhaps do a series to split ftest.py along
-the same lines, but let's see how this one pans out.
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Regards,
-Simon
+Thanks!
+Quentin
