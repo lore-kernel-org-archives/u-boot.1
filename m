@@ -4,93 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A51FEFB6A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 16:13:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 825A4FEFB6D
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 16:18:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A0CC83D1A;
-	Fri, 27 Feb 2026 17:13:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D03F383E96;
+	Fri, 27 Feb 2026 17:18:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xemk1AkD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZ9IIX0Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ACE283E76; Fri, 27 Feb 2026 17:13:32 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 0B3FE83EB3; Fri, 27 Feb 2026 17:18:01 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E329E83CDF
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 17:13:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D31883D1A
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 17:17:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-48375f1defeso16104945e9.0
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 08:13:28 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-65f71ed7c6cso4047781a12.0
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 08:17:58 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772209078; cv=none;
+ d=google.com; s=arc-20240605;
+ b=KE6cquaWAQkykhd9vV/v48Skwxsgp0MHxLwlauTAr2IY9nPrRwaUwibkscOSsg2G+c
+ g0ccaHZ3lAfjKXrScLLY9YybXsY4Qnqpko3LMNOf+NZNIwpkTPkcJsIDAqgdsbzeJCMZ
+ 2Cc+QlWpD4AO2yjbqDrvPB0p367jhaTpYBc5pmdyo561LJ5Yeuk3JBXo8bHKxzDvl1Jx
+ 6WLhXvEsVN1mUjBdG32FpCD9s+kxJSHFijZLdZsu/mcFqmBO1f+bAVH0gPjPeI7qeb5Y
+ Es/ERbT0gvWW6tX6xriMxiUP4qP52eEM7J6xG+GPY+ObTlOsbMbVVkDKo8jNI5uTQ9uV
+ n6Pw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=9E43+iAtf/At7aVSs3d4vH+h81hofeUaMUKXnXDEYSY=;
+ fh=LclY4ejrLzs8JlJ1qvDXbouoyshlGcwAUgubiLx2wNY=;
+ b=Zvk+ZISNKIJ0xvklc83uOcH+MVEJFvHdVoeqER3jpA6r4wp+3tYG0slpIRqCJIX3g3
+ ha+NrlTQLPvWCp27p/0yxma2ql/frp7yd4MbipvITodJOUXXwEQTiEnozEXXlr1eE2Ld
+ 0RyUY6aIvzEo7Ps5XF4uP868hxgE+mTKT50/vM9Jx5kh+vVFsXs00M6fEm4z8+a+CWSv
+ IPL5SMB0jxP64DoLm0hweZ/0mA9TDLvqKJz7zdsYMriw47146/xQnel4Fyxh7NCSITcn
+ h/rxN38BNAT47H2S93RLHEeWuajbwYDm7G/3RW6ZZu/5dLC/r4yjKZePFZKGvqKIsqbf
+ HMLw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1772208808; x=1772813608; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MPcO1lADfCIwooBwHdiKK/1ffxUy9HdRNQy+Tz1AAFE=;
- b=Xemk1AkDTORoJ37WVyb3w6yAG/E2H75g1RmfO5Ar3EbUN26ygBKdXx2jWm55HurOxP
- UTp9p++fybrv91ldCsRTmiYyitIDWw5SnF0lLmIIlFuOWXBurwusCzMJ6qeHq8LK773H
- JgXGMCxfu0DU9bipZe+F3XlpjLEDJlqnnmFJrPXWe2PF7nrR4/9FLU6xjttziTdA1v+Z
- vQOG0wbtStb+76e0gOOKwZSuznPTQyOlnEFcfe9ICFzUQBEq2yElTY8CI8WMYF5VyLzc
- eNRhI+QIA3zbkbwB796l7nJX7SfP7EyVkEYX9ShXO0TzuXV66LhQoh/oL34JqfcSGSUg
- oLeQ==
+ d=chromium.org; s=google; t=1772209078; x=1772813878; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9E43+iAtf/At7aVSs3d4vH+h81hofeUaMUKXnXDEYSY=;
+ b=gZ9IIX0YBLnWORhDDC1dpVtw0vBi3iRD9DDuj77ErJ8S5AiToQ/5FFx3BmqaEtIlOS
+ bkMYWqwQcXBcgQGggvQN/hQXhKKWDL0IQY+JkCTphbBz3qEXu4RYVZ1zbbeJSzGp6oL0
+ Fek6/jBVOvEXZtEVVK7QfYokDAcOFCug1PK1o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772208808; x=1772813608;
- h=content-transfer-encoding:in-reply-to:content-language:from
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MPcO1lADfCIwooBwHdiKK/1ffxUy9HdRNQy+Tz1AAFE=;
- b=rxjkTp235B0bKqNsQMl+aFpg4bJBnpUqrFSc/uJ93BHtbQZqOFKqsCz+cKIVCRwqac
- Tl1BClzrtfRn/oyqnCbKjovBz6Tu9cuVJjL6ZJbMWYyswLMzLREtoMHzgYpjPwY+zAEd
- FQMOwlbMebnciqSZcTOXJzbDpapgxPOvotB1tRoQfB10QTtFN48sGadMH9k9WL7n5qKt
- 4cZ6IFEMypI9g5f9mrK9STS+Tesb/bhofBEWQKAc9P/ZIMnMIyTgpEBTTacGrj3hxgbG
- jO3N3rhJMWfQO6+2N+eI7U+X/uM1KFtRxzQ8rR4iDNJaTvTdQHh8jAWQdi2OwFjRu0MG
- 93Qw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUQYexYKdJVmCT46B+sRR9uzfNqHlLyJNm+AJYURTcY7PMzdKM8W+c2NDc1BlGpRrE4aUejmVM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7giD0QHPDowrZz4pLeIBAr5XcqHH3buIe8ghscagyviqxzMHH
- cE3KMKezcKtxZtcp7OFhELOTAideIvg7ZAXZdp8BjqgCRi2l1Ewl0UKz/V+yvcEVzJNNC1bpi1d
- +Zqj1
-X-Gm-Gg: ATEYQzyAGXFhDtWQwhVpehdUr/ZELDmWMqvK3l2hwIJ2ePHs1V2Fbz0DzfCLPxLwD7f
- Jop0x0cHXh7RxpHPDzsm3o4MDLQ82BJREjX65qgwXiomhs85tyNjXI8niH5KKcT4jjrxZ4Uubms
- xJ/I585tLgOpB7hckSUlegWSRDiEqi1HQJemQY/FeDhh1dBD+ubI4UZbHdIGwHLlnhYfxjACesD
- SRH5sJyOsuKtwsS+GSSfHKnMDNKJ4/09nymV2uWziUr2OqBxlhwBEmMcSru3ZEuWYXGj1ezy6v8
- xyaqmaIXKNhn3OlLXelkmHZQINFdi6ZzHmBSRxyv3k3+hOV9dPFEBQMkp0ekomYzO5VWzq1jZsa
- SRVbn02s7srYGP2CGhfBnbJF81fx24BzW7j0HUs5GVGfwUhOxF0Q2IuaMQSl5AKD3DbRpHi5xwa
- zZaWVmuT6hrOz693fmk4cAQxn/Uf2LLOdwnqtssyP+VATvGdaKBbQcD9QiWeuW4Albjw==
-X-Received: by 2002:a05:600c:4715:b0:47d:18b0:bb9a with SMTP id
- 5b1f17b1804b1-483c9c2a51cmr51021265e9.33.1772208808178; 
- Fri, 27 Feb 2026 08:13:28 -0800 (PST)
-Received: from [192.168.1.36] (p4fc3dfb8.dip0.t-ipconnect.de. [79.195.223.184])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-483bfb789efsm111959205e9.2.2026.02.27.08.13.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 27 Feb 2026 08:13:27 -0800 (PST)
-Message-ID: <89ee5c39-0a2b-4418-bd00-6e85345079d3@linaro.org>
-Date: Fri, 27 Feb 2026 17:13:26 +0100
+ d=1e100.net; s=20230601; t=1772209078; x=1772813878;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9E43+iAtf/At7aVSs3d4vH+h81hofeUaMUKXnXDEYSY=;
+ b=WOf9NY3hW24NEwBp4fUiIGEPk6vK9JUtNIMwmVE10KYVIumQMSps2feVPV/sUlV+U/
+ E5KzKwBNLpANIUPgRJxtlz8/6/dn3PYAzLvO3hU4QiYczL83juM/rtqyMQuOlpCWX5h0
+ hsqVTK/H4jlwxrn9RBztE16aHIUJoYbijA8jwLSaRIxG962piwS2HFasQcg21g4ARu3j
+ mYcUxwox2Ak7IGiJ7mRqLBkWeEgJ3ESpLYi2PZQVX/EbRHzga45X4qFuAEfy4OBw6rky
+ p0vb6WzDE3zT/7krvxUeEqv4Ch3fsN23eI6/KOmI69TTZVAGzYOxmAvXVRNjhgQmp9d6
+ b6sA==
+X-Gm-Message-State: AOJu0YyEcKyCkuzsNgxXsIhWX+PCROmkSuh9mYKbbzm/Wr2r1I4SLHUr
+ 4apndUtIAA/gmam6qDLZAJ1CDjY3O2aZ/jxNRXVujVw+Esf9nFsUT3FjsyMqqhmA7VmdDEP5D+N
+ fmOBdablwaoOx8TaKTRwyJYthyIhR4Xkw8VojkKfX
+X-Gm-Gg: ATEYQzxp87T0Mn9YhN9jlaFY3DEdY7YY8UsDV7EmTvAjO3+HtbABj61J++PJQBPobd/
+ kzvf0mBW63WBGd+LsxbCoiSlQSZFIKtW0JgdIRJM75EJeGIm0+H2FdANy6BOj+sbtU4n0luM7TC
+ TuXGhPYkJ3f//Qi9JIg5hPVtJgw0yeYodiO++zXQ03gXkeWkavRFjUHizOfzjTt4yhB0fROi7Zd
+ DyZQIGsMuRjr3Zis7oZsUPuj44cFnkABx8q0PeQliAZSvddJvr6Hj0UScV6wjb1EeVvI7zb2cAS
+ bkVPQw==
+X-Received: by 2002:a05:6402:f23:b0:65f:730d:8026 with SMTP id
+ 4fb4d7f45d1cf-65fdd6d76efmr1515577a12.9.1772209077743; Fri, 27 Feb 2026
+ 08:17:57 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: sc7280: add missing SDCC1 clocks
-To: Ajit Singh <blfizzyy@gmail.com>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-Cc: Lukasz Majewski <lukma@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Luca Weiss <luca.weiss@fairphone.com>
-References: <20260226193217.82657-1-blfizzyy@gmail.com>
-From: Casey Connolly <casey.connolly@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20260226193217.82657-1-blfizzyy@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260226234802.345968-1-sjg@chromium.org>
+ <20260226235102.GO1593142@bill-the-cat>
+In-Reply-To: <20260226235102.GO1593142@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 27 Feb 2026 09:17:46 -0700
+X-Gm-Features: AaiRm53mg_HQTV1ULMQUeQ9bD0SByoE-xlNkmFmVDMefmhaB42iFnAWgr9ow8Dk
+Message-ID: <CAFLszTi6HyLAh1J79suitFKTU0L7QRHjHWr4K4VmwZ9L1=PGzQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/16] binman: test: Organise test files into
+ subdirectories
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Simon Glass <simon.glass@canonical.com>, Alice Guo <alice.guo@nxp.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>, 
+ Bryan Brattlof <bb@ti.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Michal Simek <michal.simek@amd.com>, Moteen Shah <m-shah@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Yannic Moog <y.moog@phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,36 +122,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Thu, 26 Feb 2026 at 16:51, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Feb 26, 2026 at 04:47:40PM -0700, Simon Glass wrote:
+>
+> > From: Simon Glass <simon.glass@canonical.com>
+> >
+> > There are about 350 numbered .dts test files in tools/binman/test/ and
+> > we sometimes have trouble with numbers being reused.
+> >
+> > As an alternative approach, this series moves the files into thematic
+> > subdirectories, without the numeric prefixes. This means it's no-longer
+> > possible to simply type a three-digit number to get the right file, but
+> > the names are shorter so it is still easy enough.
+> >
+> > The subdirectories chosen are: blob, capsule, cbfs, cros, entry, fdt,
+> > fip, fit, mkimage, pack, security, symbols, vendor, x86, and xpl.
+>
+> This seems much more maintainable, thank you.
 
-On 26/02/2026 20:32, Ajit Singh wrote:
-> Add GCC_SDCC1_AHB_CLK and GCC_SDCC1_APPS_CLK gate clocks.
-> Required on platforms where SDCC1 is used for eMMC.
-> 
-> Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=a3cc092196ef63570c8744c3ac88c3c6c67ab44b
-> 
-> Signed-off-by: Ajit Singh <blfizzyy@gmail.com>
+Yes, I hope so. I could perhaps do a series to split ftest.py along
+the same lines, but let's see how this one pans out.
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> ---
->  drivers/clk/qcom/clock-sc7280.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
-> index 7b6ed826023..acdaccf7462 100644
-> --- a/drivers/clk/qcom/clock-sc7280.c
-> +++ b/drivers/clk/qcom/clock-sc7280.c
-> @@ -155,6 +155,8 @@ static const struct gate_clk sc7280_clks[] = {
->  	GATE_CLK(GCC_UFS_1_CLKREF_EN, 0x8c000, BIT(0)),
->  	GATE_CLK(GCC_SDCC2_AHB_CLK, 0x14008, BIT(0)),
->  	GATE_CLK(GCC_SDCC2_APPS_CLK, 0x14004, BIT(0)),
-> +	GATE_CLK(GCC_SDCC1_AHB_CLK,  0x75004, BIT(0)),
-> +	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x75008, BIT(0)),
->  };
->  
->  static int sc7280_enable(struct clk *clk)
-
--- 
-// Casey (she/her)
-
+Regards,
+Simon
