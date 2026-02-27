@@ -4,31 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025FBFEFB5A
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 15:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD094FEFB56
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 15:23:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34FC983E76;
-	Fri, 27 Feb 2026 16:20:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 15CF383EB3;
+	Fri, 27 Feb 2026 16:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B808883E81; Fri, 27 Feb 2026 16:20:50 +0100 (CET)
+ id CD42E83E8E; Fri, 27 Feb 2026 16:23:31 +0100 (CET)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5992D83CDF
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 16:20:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2240A83CDF
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 16:23:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=lst.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
 Received: by verein.lst.de (Postfix, from userid 2005)
- id 42DE068B05; Fri, 27 Feb 2026 16:20:46 +0100 (CET)
+ id EAEE468B05; Fri, 27 Feb 2026 16:23:26 +0100 (CET)
+In-Reply-To: <20260227152046.42DE068B05@verein.lst.de>
+References: <20260227152046.42DE068B05@verein.lst.de>
 From: Torsten Duwe <duwe@lst.de>
-Subject: [PATCH 0/9] ARM: RPi5: Enable PCIe
+Subject: [PATCH 1/9] ARM: bcm283x: Add bcm2712 PCIe memory window
 To: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger <mbrugger@suse.com>
 Cc: Tom Rini <trini@konsulko.com>,"Jan Čermák" <sairon@sairon.cz>,Andrea della Porta <andrea.porta@suse.com>,"Ivan T. Ivanov" <iivanov@suse.de>, Stanimir Varbanov <stanimir.varbanov@suse.com>, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,Paul Barker <paul.barker.ct@bp.renesas.com>,Patrice Chotard <patrice.chotard@foss.st.com>,Christian Marangi <ansuelsmth@gmail.com>,Patrick Delaunay <patrick.delaunay@foss.st.com>,Huan Zhou <me@per1cycle.org>,Gabriel Fernandez <gabriel.fernandez@foss.st.com>,Kever Yang <kever.yang@rock-chips.com>,Jonas Karlman <jonas@kwiboo.se>,Joseph Chen <chenjh@rock-chips.com>,Elaine Zhang <zhangqing@rock-chips.com>, u-boot@lists.denx.de
-Message-Id: <20260227152046.42DE068B05@verein.lst.de>
-Date: Fri, 27 Feb 2026 16:20:46 +0100 (CET)
+Message-Id: <20260227152326.EAEE468B05@verein.lst.de>
+Date: Fri, 27 Feb 2026 16:23:26 +0100 (CET)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -45,15 +47,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+From: Torsten Duwe <duwe@suse.de>
 
-here is a rework of the RPi5 PCIe changes, hopefully the way you
-requested. This first series only enables the BCM2712 root complexes
-and allows for PCI enumeration. In order to be useful besides any
-already-supported PCIe hardware in a generic adapter, at least one
-serious NVMe fix is needed, as well as some device tree trickery,
-which I'll both follow up with in order to demonstrate the
-functionality.
+Add a mapping region for the PCIe bus address spaces to the BCM2712
+memory controller setup. Generously merging the PCIe address spaces
+works sufficiently well for a boot loader.
 
-	Torsten
+Signed-off-by: Torsten Duwe <duwe@suse.de>
+---
+ arch/arm/mach-bcm283x/init.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+index 7a1de22e0ae..7a2faaa4de6 100644
+--- a/arch/arm/mach-bcm283x/init.c
++++ b/arch/arm/mach-bcm283x/init.c
+@@ -18,7 +18,7 @@
+ #ifdef CONFIG_ARM64
+ #include <asm/armv8/mmu.h>
+ 
+-#define MEM_MAP_MAX_ENTRIES (4)
++#define MEM_MAP_MAX_ENTRIES (5)
+ 
+ static struct mm_region bcm283x_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 	{
+@@ -83,6 +83,14 @@ static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		/* Whole PCIe section */
++		.virt = 0x1800000000UL,
++		.phys = 0x1800000000UL,
++		.size = 0x0800000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
++			 PTE_BLOCK_NON_SHARE |
++			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+ 		/* SoC bus */
+ 		.virt = 0x107c000000UL,
+-- 
+2.51.0
 
