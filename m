@@ -4,113 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258B2FEFB6F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 23:28:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D941104891D
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 23:42:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13BED83E81;
-	Sat, 28 Feb 2026 00:27:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8540C83CDF;
+	Sat, 28 Feb 2026 00:42:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FXvLCnka";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jVZ1IFKt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DD2183EB3; Sat, 28 Feb 2026 00:27:57 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 3399F83E81; Sat, 28 Feb 2026 00:42:22 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A60483A1B
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 00:27:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4A0083A1B
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 00:42:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-65f73225f45so4442408a12.1
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 15:27:54 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772234874; cv=none;
- d=google.com; s=arc-20240605;
- b=BXUPLKAuLhzVc94zQwJCR+BVcOVIehAu/fPMr/yD9Wzg9nsMQTs0YcvdyXW3h59Be0
- 8EA2VgvaQovMLObAXyrBnCXggaHeMJ9Tf7TYI8QG1aaDzKHb+wrV2z6JL7zxRoA51bDc
- MGu6sl69s2J0FWhANox3dHkYpGDLhxlh+cP7CakYMoFOynPylVNaBpKv3eOk5g8SEzi6
- OGoXFcZVEJQ8BQ/+7vYn55vF0KiVW4HJ1iNxC5WvUFNkKNOYsv3sa3KuxBu8tnqWI3Ea
- astmmmWygQ2U/mytjcDoYrpHOzMVH/Xcii6eiXkqehGSHgb5NRdhYmAsHzTsovSnLWsZ
- dnAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=F8HaAGbA7nu2Wf7Qr5bMrRubiIpbIQb69KFuJC/KNcA=;
- fh=uFfMeDWXvxBgJQo4Ok+l4D/5E3ZRFKnyz3dfEUYz0a8=;
- b=O1X0JaUyYLa5d/7SIibZSpdm8EUgTFlEeq6ap4wc6POlIxggSKHTf/JZ9YATUMB7as
- lRm3u6secyeggtMvvPlxkbmUzM4XUFBPO8+I7Pc40F7qgduPdIyVOVZwKxKNAo0rtnOf
- zyxn5h6FeSTq6bdtOpG5WmGe/A0FZje7H1kIggZM2VpBOvuCs/fiNI/Em42mLYBvPsd0
- +8Pzkdc9h1jae0QjZaHqLqyeAaihBnSFSYh6RiPONGmZRnu33znfGHYnKEc39Mk741Fb
- jtjYUZhmOO9hYbITu2mqfPsSN7WaefTh6nBM/vSfcfZXXhFxvzWlnr8HELAuw98f5/Rv
- c6Lg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d19bfe1190so2015381a34.1
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 15:42:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772234874; x=1772839674; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F8HaAGbA7nu2Wf7Qr5bMrRubiIpbIQb69KFuJC/KNcA=;
- b=FXvLCnkaPGf5Yj3qaMwF+Dp+IP7WMd+UPgg133AHucUK9KRia/ekO48keDT51C0kV8
- 8KS/GcBIHFXj8mlIvHJANWO8sd7bbM2dDJTZpSnfCH7CVJ/1pnsu+NbEK1uvPOP8bwpm
- Te4wZLiP6k/jTJlS5yH/fOq9sSNd11lAKSgQY=
+ d=konsulko.com; s=google; t=1772235738; x=1772840538; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=V0xgGrSQtmr2pIwSXaA/TT+Kc7vnFKND49nhWRtLVUY=;
+ b=jVZ1IFKtvgoUpwn0aTuQ3pxLJNOrGwg35ucbbpMlQ7Syrrk0MAI39/v2qURfYBMAHb
+ Bp+ucM5dXnfumq9JToYhfIRUFD/9ovKmxPghKAGbEcyPg6mYaLddCniqDWjiknEhpZ8X
+ osjM9bTEF4F5sFm36nEgHyLbkXwWHaMCWK3Fg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772234874; x=1772839674;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F8HaAGbA7nu2Wf7Qr5bMrRubiIpbIQb69KFuJC/KNcA=;
- b=JGwYE+V32x4nlR5wAKzUwXnu481vFwMX1hrTEUs6ksnMdCikkCamR47TY5wJCITQYJ
- ZQPntMs1Q1cnbCDYeNhbEw/onkaovhsK+vszfPPnpnwAkYRdwyigYAHkC5xvil8DTZD0
- Lw8k8wF3te6oG7830hPShNIHE21oBLAHrLPBdSKjGUO5e4CiPaXulmTeWOtB4OCokpvS
- 33yLBq3vtQ2wzh/7+yg0uAWDnAmvYxyYwMexv4jT6IFyxuSqLzEGbfG7U/Cg8r4VKOYN
- tyIcpPyIAKy+tB+AdjMvosEpzVtuavxOcm++GzqeUugnrqrQy7O19befzNSGun2QYsZS
- 4bog==
-X-Gm-Message-State: AOJu0YwimY3kX7XDImWemGEnMbTMb9XI7N0oxotwoddf6yOHmgNCS1i8
- jnAWw9LaKvGvsSqs7BnhK/G3zwiQih/sOmyrR/1Uc/QvKyUUYWjEx89ZMj4d7WKKn0Nx6BCGEZw
- bhXMrO83og29fAv2UVQgd7gvEwIZjNwvNfMgLvYxf
-X-Gm-Gg: ATEYQzybS5Rb1tstZhzPF/D0GZETvuISHgjf8dNc1ELJ6/Naw2z+LGv8UAScKm3MrZX
- rd1eZLh8oc6sf+NLPNY2gVVseyU+yKJUNCkTmflsqEBq02gVIbK/V53+UokSIG8gsam9A7U713H
- ZSFK1SrFwRKDi94VdKuDc4AdU2OIN9sWt9YW1HhhNVZxyi+5GczMdNLm0MY8t28KrefKdDMI9QG
- Oo49zPTQjO8y8bFJgQArr/JiC3N8pLzMHEDFJUDDEVthnYDLqJ2+/rhWrmEfv44InvAADzJu3X0
- Bbamuw==
-X-Received: by 2002:a05:6402:5245:b0:65a:382e:7254 with SMTP id
- 4fb4d7f45d1cf-65fdd6e2174mr3099165a12.13.1772234874261; Fri, 27 Feb 2026
- 15:27:54 -0800 (PST)
+ d=1e100.net; s=20230601; t=1772235738; x=1772840538;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=V0xgGrSQtmr2pIwSXaA/TT+Kc7vnFKND49nhWRtLVUY=;
+ b=I1eARGSNKgpvIRqOag7Up/dl7smx76j/h7lE9HvrNCPPE8N67SD+4o8y4UwTFXT1TC
+ ovJfN3I/baTKDw0HRylePoRlIlXeX2/X7jYY6qe+TKMzf7RQkky14OR1jOV5nwxZsYe8
+ p5/jmZRjMcaMyzruu+1Onk3XX6QNrM1dZXjs/8WAh9fR5QHXmDVuCgmsHBLK8ikZjtH3
+ 3IG+JRoLCo2hGydq1e8JgRPd5jcEcT+f8QQHmiCSUS2leuitxpbQVQrxBmEe5LEMuEAa
+ D246bMhOyLGyysVLlHgwTDAJnn+GnpWP4Z/Ggyq+3GnXuY6Taruz8pk0UkQVxtrW4mZ+
+ oc6w==
+X-Gm-Message-State: AOJu0YzfXZ5AwPpmLPbrUYTeE9mSGFKijq2rx9DutqkYfbNb3owt2g8E
+ pxX2+17hlxKacmm7myF/DYuR99T1wmwuO599zVM2z6OuQcRc0x76pz5p/6da/HX+FYc=
+X-Gm-Gg: ATEYQzxZJZER4vQ/lNH8u1wHgHFHVBpB7yn+J59Qp52sd33Nwq3/7HgzW3WEw49Z5z1
+ pfBghf2HJwqrFJBwT6LE/NgkJ4yPTIxTnkZlUEPnzRAPtoD5rWxAcQWbs4wxUO+CF9Xs7tFFvf7
+ a9m8sKF5jNybPOKZIPf4fKBWrej9bdqDNRrRDzYbCKn9AP9CgcBATjrCtJZAaxo5hgN2L+4RzTG
+ NGsYm78CnYJ8u0EQFmuy1rgbMxek0N4VnTSc4UXS05oFrctJsCoqNZP91Ey5mu++A8RiXI9g2Fr
+ wve+Wv9Fp/AE2HYY3QHHwqs9zPAQXakFT8G2zl94S51S34E9aQjWcLr8x4JnVsiolkr6IXokzci
+ CownG/NPRmM/Qb+WBPuY3q7JxNnUwGclTJMWbYVSu7Jwwk5yPdgcxx5jBaWVtsFNWmY18CNEWn5
+ +bKxDH+VC8xJm3D2ernXmB0Mt77Zja6MiVGEzIm55sHMHGDWxWtP3GoNhTEniXPXtEpyad/syh3
+ dpLmXCQFjQ4zAQReffJDxMnj06HiTxCReOYxls+59aG6AWdUac=
+X-Received: by 2002:a05:6830:6581:b0:7d1:49a9:6b53 with SMTP id
+ 46e09a7af769-7d591bf8f07mr3372648a34.33.1772235738213; 
+ Fri, 27 Feb 2026 15:42:18 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d58644dd17sm5257754a34.5.2026.02.27.15.42.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Feb 2026 15:42:17 -0800 (PST)
+Date: Fri, 27 Feb 2026 17:42:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH 5/6] test: Add a helper class to create disk images
+Message-ID: <20260227234215.GB1593142@bill-the-cat>
+References: <20260225162357.3449937-1-sjg@chromium.org>
+ <20260225162357.3449937-6-sjg@chromium.org>
+ <20260225171256.GR1593142@bill-the-cat>
+ <CAFLszTjvQFS1BGU8QFA-Q8jiqac8jQj28_u6P=dKTo6xTrKFiQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20260224142553.1608883-1-simon.glass@canonical.com>
- <20260224161302.GX3233182@bill-the-cat>
-In-Reply-To: <20260224161302.GX3233182@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 27 Feb 2026 16:27:42 -0700
-X-Gm-Features: AaiRm50D7vnTR1_PXBjBKEBw-NeBU01rqCOqas4hr8izDg0CCRxwOxKpcRYn4r4
-Message-ID: <CAFLszTg86o0jPEboB=XPiDTn4s4pZnryDK+P=BKmzKY292DbgQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/9] bootm: Clean up arch-specific, pre-OS clean-up
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
- Aristo Chen <jj251510319013@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Greg Malysa <malysagreg@gmail.com>, 
- Guillaume Ranquet <ranquet.guillaume@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@arm.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
- Kuan-Wei Chiu <visitorckw@gmail.com>, 
- Leo <ycliang@andestech.com>, Martin Schwan <m.schwan@phytec.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wTJ+aNofBJNh24ef"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjvQFS1BGU8QFA-Q8jiqac8jQj28_u6P=dKTo6xTrKFiQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,71 +100,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Tue, 24 Feb 2026 at 09:13, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Feb 24, 2026 at 07:25:42AM -0700, Simon Glass wrote:
->
-> > Each arch does something slightly different before booting the OS. Some
-> > archs even do different things depending on the CPU type.
-> >
-> > It is quite hard to know what actually happens in the final milliseconds
-> > before the OS boot.
-> >
-> > This series attempts to start cleaning up U-Boot in this area.
-> >
-> > The basic intent is to create a new bootm_final() function which can be
-> > called by all archs. It provides some flags for a couple of necessary
-> > variations but otherwise it is generic.
-> >
-> > RISC-V, x86 and ARM are converted over to use this new function. For
-> > consistency, EFI loader is converted as well.
->
-> Please include all architectures in v3, ARM is still not shown in this
-> series.
->
-> > A noteable change is that EFI_LOADER now does bootstage processing
-> > before boot, if enabled, thus producing a report.
-> >
-> > There is also a patch to drop EFI_GRUB_ARM32_WORKAROUND, as discussed
-> > recently on the mailing list.
-> >
-> > Future work could take this a little further:
-> > - Drop board_quiesce_devices() and rely on driver model for that
->
-> Potentially, but there's non-trivial uses that don't fit in driver model
-> today either.
->
-> > - Similarly with udc_disconnect()
->
-> Please look at mainline code again.
->
-> > - Look at converting EFI to use the same function
->
-> You said a few lines above EFI was converted? Please make sure your
-> cover letter is consistent and correct in v3.
->
-> > Also, the comment for cleanup_before_linux() could use more details as
-> > to what it is supposed to do, to reduce the number of arch-specific
-> > variations. It currently does different things on differents archs and
-> > is mostly uncommented (apart from an ARM-specific note in a README).
-> > Ideally it would be commented with exactly what it should do, ideally
-> > at a high level so it is not just arch-specific.
-> >
-> > While some of these arch-specific differences are necessary, some are
-> > just due to the changes to code over time.
->
-> This is due to the entry requirements for Linux being architecture
-> specific. This is more consistent than it was 15 years ago (especially
-> since RISC-V looked at arm64 and copy/pasted as much as they could,
-> which is a good thing!) but still an inherently architecture-specific
-> thing, so yes, we may only end up with limited overlap.
+--wTJ+aNofBJNh24ef
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Just to pick up on this point, yes different Linux interfaces are
-needed, but that is not the target of this series. I am more talking
-about the differences which are either unintended, or just a rusult of
-there being more development on some archs than others.
+On Fri, Feb 27, 2026 at 03:14:38PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 25 Feb 2026 at 10:12, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Feb 25, 2026 at 09:23:49AM -0700, Simon Glass wrote:
+> >
+> > > From: Simon Glass <simon.glass@canonical.com>
+> > >
+> > > Provide a way to create disk images which consist of multiple filesys=
+tem
+> > > images.
+> > >
+> > > Provide an option to use the current directory for images, instead of
+> > > persistent-data directory. This makes it easy for C tests to locate t=
+he
+> > > image.
+> > >
+> > > Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> > > ---
+> > >
+> > >  test/py/tests/fs_helper.py | 97 ++++++++++++++++++++++++++++++++++++=
+++
+> > >  1 file changed, 97 insertions(+)
+> >
+> > It seems wrong to ignore the existing function to create disk images.
+>=20
+> Can we do this in steps? I have a pending series to rework the test
+> images (and move them to the persistent dir) but it is at least 10
+> patches, so I figured I should start with this.
 
-Regards,
-Simon
+Yes, as doing this in steps you should convert the existing disk image
+part to be available too via the class and not construct a new one. And
+I want to say that given what you said on the call about more generic
+imagre creation I'm wary about this "cleanup" leading to something odd
+being built on top of it.
+
+--=20
+Tom
+
+--wTJ+aNofBJNh24ef
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaIr1AAKCRAr4qD1Cr/k
+Cnj3AP4r2I6jzFPDBtGqpPnS1fl4XxBATwtVGnVPf3w+xvUQfwD/fBw6M1jVh7uP
+6YGQl9qcJdEDG2yhITYvF8+d6iqIvAY=
+=n2N9
+-----END PGP SIGNATURE-----
+
+--wTJ+aNofBJNh24ef--
