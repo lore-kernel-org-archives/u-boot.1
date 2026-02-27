@@ -4,96 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B29FEFB6E
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 17:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE329FEFB6E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 17:47:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05C1D83D1A;
-	Fri, 27 Feb 2026 18:39:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BDAA83D1A;
+	Fri, 27 Feb 2026 18:47:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cq2d5Cx3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K3vDG8nH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 821A883D1A; Fri, 27 Feb 2026 18:39:29 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id C829D83E76; Fri, 27 Feb 2026 18:47:51 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D23E683CDF
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 18:39:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C22083CDF
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 18:47:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-45effa36240so1747082b6e.1
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 09:39:26 -0800 (PST)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d4be7c4ebeso379250a34.1
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 09:47:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772213965; x=1772818765; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772214468; x=1772819268; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1srLfxqNiUws/k6FZXFi/Yz+Z0dI00qn1j2xdpf297s=;
- b=Cq2d5Cx30DER/3I66cwsMBfKM4owcPYpsZ4H9ipubfAMR5bH+FmwvZVRlNi9sU1hOO
- fCM/iy/Xe6+4Gi8ZYFQV/ALRDzfW1z1kQPv1Kv1uayVVPyUyAkO4A4xkxEcONGo+ffvm
- +pOuaLZsMe5HFphzZdeX4zrQFJOLWew8yegUQ=
+ bh=51d17kBgh6KloDTD50bXUyGdARiCV2TDWRQp5N/oTTA=;
+ b=K3vDG8nHpLmzyVEb6eV2OIrfDIQWt1oqcCLk3IPGMwRLrCWHPTm/Sxw7UEUDj2Ojsk
+ uKdm5cQMIDi1s1nTSMJiQEfpFYBZzhAxMvDqQj0A6cOkUu7ik1bZW81klT6NOejHGB/U
+ HyisSZoR/fNj7aB631h0XqOFa9XnELFbAP/GE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772213965; x=1772818765;
+ d=1e100.net; s=20230601; t=1772214468; x=1772819268;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1srLfxqNiUws/k6FZXFi/Yz+Z0dI00qn1j2xdpf297s=;
- b=UILCtEizOGCjiQEbEG/8G+Wt4WeI5ARSeKU/XxQciw4eMLZy73+GbBWQrbEsTBSmDs
- 2pkBrzSKhhVMXK9YddlA0TMgzsUlNqR5NDUpVJJE259noKwjF3fr+8yQaz1o/CQj2M94
- 8aOXJyJxryPzzQKOcSpmIfdV8CfXkaRJDzJE06IDaIhYr76fGcJuOFT6dOoB5BlNAuZz
- e834h+W7R0fG33YTPiXi8EMg6MSqKopebCdKto81iysdVoWXfj0V3ayZDyV6XlArstC8
- A25Kv8qjtqrziZBHJdIgGwkzdsr3S74OcdKeK+DAMAUAY03bygrnUtkJaTxcBy61qNM+
- d1cQ==
+ bh=51d17kBgh6KloDTD50bXUyGdARiCV2TDWRQp5N/oTTA=;
+ b=o1oJ08ZzWmgs5Jy5oc9rMmDEIDQOmEFZvDdmyHMDXFGk7UV+aNdKynoolxR1p/bJ2D
+ I7bwTbnB4Sb51ymP67ZdllX2qEn8z4CjFmpoGP+g2BXqsTty9YC+MzRZIrD3uBjG23sg
+ Wc6O7L4Hk+rCTsVIa4wyBM7J410MeZHCxAzJpED2SAtcwPXyX1wHrDicue/3mENorEce
+ yVMygeUBcnzjudttEGGIpOgkVJZF7CQoQwfDIxIy1AJ91I5/FI618w5+jPa8sUG2I/ol
+ CqPoJoWdxrX9aER4QISE/5cMQQK0wMCOt94eXsAPKKm3Gj9gn1BxFzlSlduCBGWv8cIM
+ Eaag==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWexEzGdJNjkNBdnRMyK1hgLQ81fW5VnaxJ1bl8kgnxpBkTCM/6PlfVFHO8g+KIvUgp/dwBSig=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTHID8TTWwuRlda2m1T7c65cBr6HscY60XdyMSw3tVkCa1acZ3
- L6qdcC+lgO8G89m0M5KXfheJUOdJ+F/gMDUCd2F2aRXNMJBeCZi7JUwGymra5jI3A2o=
-X-Gm-Gg: ATEYQzxfGt6TdzQqvRHqNjIxPrNWO7i283c+KLKq30NoYtl88t2XDjC6LB3wM79bI79
- DvsA9DeTe+wcOPGQmdJUY/BemsAj6KycxdJKMXwnh4vIh41xeRvPAU3kE39r4gxLBYamulxeWD8
- jWzpKawWYt6i2E78CWeOWBWLPHQB2/8qQ3mT1eQtgM8tQ+zzIdaqTX9QfchZ5wqLmHursT83ufF
- tyGJEQfoRwONRw9ENkhPUyVXV9ylZpRGjaLj/AfZxhGK7VAl5/nv3cjZ1kJtruSgDtQE70+G1gA
- WbKT6HjLZ4YPEqQ6mzhEi3ak5DdBYJghGPGpSV3+rbXubEH4ftJMCLkEg5MVsBd2PrhP65ZwGqk
- v0ZYioIUmrcxkAcNbAyKvAcZnD8r4gSXoaSN9oZh/xF8r0U4soRmWG0qmsEI41LoCnQT0toi54n
- 20VJe99Y0nKhMQJKprRD/Qq4bvKU+8x2k76w4Voyu9urWbW0YP170X0ov4m7PCOzSQE1hMDos1W
- bqYPJyclSGoz2XyIvuVCS+9JrChWdMZSKjz3HahnLF1cwVndv8=
-X-Received: by 2002:a05:6808:f87:b0:450:cc23:98c6 with SMTP id
- 5614622812f47-464bec615bemr1903619b6e.56.1772213965450; 
- Fri, 27 Feb 2026 09:39:25 -0800 (PST)
+ AJvYcCWq6lVRmriVGvrZIKe8L2HrW/X/nREELatSNnPkOIcicEzYg0j08ecTY25GqHKbTBVisWxAUmM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyss06nXeuMDjdi8boVG2HwucowmHC6pyU4vduW2FkLKxZTGFzG
+ CBX4DCwDKa/1TCPIGWTkpHlAfUbELy6+r4dqAnnkEmW2dJS9rQ0RtqFLkPoNF4SOvf0=
+X-Gm-Gg: ATEYQzziGYYlW1eXBBQ0fj4si+H72BdZ6RWumqJyTLyNZmGPz5Hp7iAMOo+uzIw/yIt
+ D6lgeB4cazJyBzWYvEMzK3VC1/DXhSJNV6yQL5vKYZqs/H86u5VRSoYKsRjfg8nVnUdSM3c8D+w
+ Yu4kdUXhn34VqpnA5l5GL7B2mieR4WYEtaqV3o8aeFk0fcbes/JFgfWv1jNklqXwxDg1kFNpZTb
+ EdvY8QXi6+1Zv3SElzBZE81miuj7HchhzeWS8xpbL1CmBQm11McATRaK9/dlkIcwVgn1RsoEd2d
+ 4j07hI2XRZghx465vbJzdmBHdh1oiTmdsVMjXcVVPAEUYnDMul0PQh+bQGkU8xdada1s3hX2jap
+ 4KZaXHPlYyzX8AWOiYgZXjEanDKNjKMwgPoebp9/2CWOGVL+z9JpPv8Y31yUFQVWhLLXNKjJADF
+ W8lxRwBDcHLo/igfHEYuXWp/P8UyXnkbSUFy4N9LpUJ8DXnppnS8s+HajXdxWABy1A7I+EPso8X
+ NvgK0EXMlm672yTUSRRsorNOdTdisyrPGWZEs62M9sKSSaO8mk=
+X-Received: by 2002:a05:6830:6103:b0:7c7:61e0:a4ee with SMTP id
+ 46e09a7af769-7d591b27af1mr3845429a34.11.1772214467717; 
+ Fri, 27 Feb 2026 09:47:47 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb352720sm2393797b6e.2.2026.02.27.09.39.23
+ 46e09a7af769-7d5866541fcsm4668187a34.21.2026.02.27.09.47.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Feb 2026 09:39:24 -0800 (PST)
-Date: Fri, 27 Feb 2026 11:39:22 -0600
+ Fri, 27 Feb 2026 09:47:47 -0800 (PST)
+Date: Fri, 27 Feb 2026 11:47:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: "Francis, Neha" <n-francis@ti.com>,
- Stefan Eichenberger <eichest@gmail.com>,
- Francesco Dolcini <francesco@dolcini.it>,
- stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
- emanuele.ghidoli@toradex.com, francesco.dolcini@toradex.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
- restore
-Message-ID: <20260227173922.GV1593142@bill-the-cat>
-References: <20250314100734.23777-1-eichest@gmail.com>
- <20260226070502.GA6701@francesco-nb>
- <20260226142345.GB1593142@bill-the-cat>
- <20260226160901.GA29510@francesco-nb>
- <aaB1DifzODCVv4SU@eichest-laptop>
- <20260226163117.GJ1593142@bill-the-cat>
- <c8e7db77-5c9f-490c-a5e5-30607fde09aa@ti.com>
- <34966334-4658-4fe2-8b6f-550969c1f91f@gmail.com>
+To: Eddie Kovsky <ekovsky@redhat.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ a.fatoum@pengutronix.de, mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Subject: Re: [PATCH v3] Add support for OpenSSL Provider API
+Message-ID: <20260227174744.GW1593142@bill-the-cat>
+References: <20260120164524.253188-1-ekovsky@redhat.com>
+ <87ikckmbbi.fsf@kernel.org> <aZc_efHFk1Q-iWvP@daedalus>
+ <20260219172836.GN3233182@bill-the-cat> <aaHWNU0LQqJ0zNDD@daedalus>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p1G5u38snRIlWCk0"
+ protocol="application/pgp-signature"; boundary="HicwZ0FQDFA7UKXw"
 Content-Disposition: inline
-In-Reply-To: <34966334-4658-4fe2-8b6f-550969c1f91f@gmail.com>
+In-Reply-To: <aaHWNU0LQqJ0zNDD@daedalus>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,162 +106,124 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---p1G5u38snRIlWCk0
+--HicwZ0FQDFA7UKXw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 27, 2026 at 11:39:44AM +0100, Emanuele Ghidoli wrote:
->=20
->=20
-> On 2/27/26 11:13, Francis, Neha wrote:
+On Fri, Feb 27, 2026 at 10:36:53AM -0700, Eddie Kovsky wrote:
+> On 02/19/26, Tom Rini wrote:
+> > On Thu, Feb 19, 2026 at 09:51:05AM -0700, Eddie Kovsky wrote:
 > >=20
-> >=20
-> > On 2/26/2026 10:01 PM, Tom Rini wrote:
-> >> On Thu, Feb 26, 2026 at 05:30:06PM +0100, Stefan Eichenberger wrote:
-> >>> Hi Francesco and Tom,
-> >>>
-> >>> On Thu, Feb 26, 2026 at 05:11:49PM +0100, Francesco Dolcini wrote:
-> >>>> +Emanuele
-> >>>>
-> >>>> Hello Tom,
-> >>>>
-> >>>> On Thu, Feb 26, 2026 at 08:23:45AM -0600, Tom Rini wrote:
-> >>>>> On Thu, Feb 26, 2026 at 08:05:02AM +0100, Francesco Dolcini wrote:
-> >>>>>> Hello Tom,
-> >>>>>>
-> >>>>>> On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrot=
-e:
-> >>>>>>> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> >>>>>>>
-> >>>>>>> The get_ram_size() function fails to restore the original RAM dat=
-a when
-> >>>>>>> the data cache is enabled. This issue was observed on an AM625 R5=
- SPL
-> >>>>>>> with 512MB of RAM and is a regression that became visible with
-> >>>>>>> commit bc07851897bd ("board: ti: Pull redundant DDR functions to =
-a common
-> >>>>>>> location and Fixup DDR size when ECC is enabled").
-> >>>>>>>
-> >>>>>>> Observed boot failure messages:
-> >>>>>>>   Warning: Did not detect image signing certificate. Skipping aut=
-hentication to prevent boot failure. This will fail on Security Enforcing(H=
-S-SE) devices
-> >>>>>>>   Authentication passed
-> >>>>>>>   Starting ATF on ARM64 core...
-> >>>>>>>
-> >>>>>>> The system then hangs. This indicates that without a data cache f=
-lush,
-> >>>>>>> data in the cache is not coherent with RAM, preventing the system=
- from
-> >>>>>>> booting. This was verified by printing the content of this addres=
-s when
-> >>>>>>> the issue occurs.
-> >>>>>>>
-> >>>>>>> Add a data cache flush after each restore operation to resolve th=
-is
-> >>>>>>> issue.
-> >>>>>>>
-> >>>>>>> Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to =
-a common location and Fixup DDR size when ECC is enabled")
-> >>>>>>> Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when c=
-ache is enabled")
-> >>>>>>> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.c=
-om>
-> >>>>>>
-> >>>>>> Tom, can we merge this?
-> >>>>>> This is the last bit to solve the regression reported here,
-> >>>>>> https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
-> >>>>>
-> >>>>> I wasn't happy with this at the time, and Stefan's last email in the
-> >>>>> thread left me with the impression more investigation was needed and
-> >>>>> likely something else was the root cause.
-> >>>>
-> >>>> I believe that this patch is needed.
-> >>>>
-> >>>> On AM62 what is happening is the following.
-> >>>>
-> >>>> We have a cortex-R5 that is the first core booting (there is also a
-> >>>> cortex-m4, but it's not relevant for this discussion).
-> >>>>
-> >>>> It runs from internal memory and it configures the DDR ram
-> >>>>
-> >>>> We load to DDR memory various pieces of firmware (TFA, U-Boot for the
-> >>>> cortex A53, ...)
-> >>>>
-> >>>> We do execute get_ram_size(), that read/write the memory, and it is
-> >>>> supposed to restore it back the original content
-> >>>>
-> >>>> However when we have the cache enabled, we might miss to write back =
-the
-> >>>> original memory content, where the other pieces of firmware are.
-> >>>>
-> >>>> And after that we start the cortex A53, running in DDR, and there the
-> >>>> memory content might not be correct, because there is no cache coher=
-ency
-> >>>> between the cortex-A and the cortex-R. And because of that we have
-> >>>> crashes.
-> >>>>
-> >>>> Stefan: any comment here? Can you help?
-> >>>
-> >>> I think what you wrote summarises the issue well. If I recall correct=
-ly,
-> >>> I "fixed" the issue last time by simply calling get_ram_size() once
-> >>> before enabling the cache. This was in commit 4164289db882e. The SPL
-> >>> then informs U-Boot of the memory size via fdt fixup. However, someth=
-ing
-> >>> has probably changed now (possibly in the R5 SPL), meaning the cache =
-is
-> >>> enabled earlier, so the cache is enabled again when get_ram_size() is
-> >>> called.
-> >>>
-> >>> For the AMP use case, either "get_ram_size" should not be called once
-> >>> the cache is enabled, or a similar patch to the one I proposed is
-> >>> required.
-> >>
-> >> I would lean towards the former if at all possible.
-> >>
-> >=20
-> > Just trying to understand, what is the reasoning behind ensuring get_ra=
-m_size is
-> > not called if cache is not enabled? Wasn't get_ram_size written with the
-> > possibility of cache being enabled (existence of dcache_en logic); then=
- this
-> > patch is a valid fix right?
-> >=20
-> > In parallel, I do agree we need to have a code analysis w.r.t dram_init=
-, we are
-> > making certain cache and dram calls spuriously making this confusing.
-> >=20
+> > > On 01/29/26, Mattijs Korpershoek wrote:
+> > > > Hi Eddie,
+> > > >=20
+> > > > Thank you for the patch.
+> > > >=20
+> > >=20
+> > > Hi Mattijs
+> > >=20
+> > > Thanks for the review.
+> > >=20
+> > > > On Tue, Jan 20, 2026 at 09:45, Eddie Kovsky <ekovsky@redhat.com> wr=
+ote:
+> > > >=20
+> > > > > The Engine API has been deprecated since the release of OpenSSL 3=
+=2E0. End
+> > > > > users have been advised to migrate to the new Provider interface.
+> > > > > Several distributions have already removed support for engines, w=
+hich is
+> > > > > preventing U-Boot from being compiled in those environments.
+> > > > >
+> > > > > Add support for the Provider API while continuing to support the =
+existing
+> > > > > Engine API on distros shipping older releases of OpenSSL.
+> > > > >
+> > > > > This is based on similar work contributed by Jan Stancek updating=
+ Linux
+> > > > > to use the Provider interface.
+> > > > >
+> > > > >     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+> > > > >     Author: Jan Stancek <jstancek@redhat.com>
+> > > > >     Date:   Fri Sep 20 19:52:48 2024 +0300
+> > > > >
+> > > > >         sign-file,extract-cert: use pkcs11 provider for OPENSSL M=
+AJOR >=3D 3
+> > > > >
+> > > > > The changes have been tested with the FIT signature verification =
+vboot
+> > > > > tests on Fedora 42 and Debian 13. All 30 tests pass with both the=
+ legacy
+> > > > > Engine library installed and with the Provider API.
+> > > > >
+> > > > > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+> > [snip]
+> > > Sure, I can update the comment for v4.
 >=20
-> Hello Tom,
-> I agree with Francis.
+> Hi Tom
 >=20
-> When I proposed commit 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size()
-> when cache is enabled"), I was not considering the presence of other acto=
-rs
-> (other cores, DMA engines, etc.).
+> >=20
+> > Since we're talking about v4, can you please make sure that for v4 it:
+> > - Passes CI https://docs.u-boot.org/en/latest/develop/ci_testing.html as
+> >   that will cover some non-Linux host builds.
 >=20
-> That patch fixes what I had overlooked at the time. We need to restore the
-> actual RAM contents, not only what is perceived by the core executing
-> get_ram_size().
->=20
-> To me this patch sounds intrinsically correct.
+> I don't have resources available to set up a Gitlab runner. Based on the
+> documentation you provided it seems like this wouldn't be effective for
+> me as a non-custodian.
 
-Alright. Can I please get some Reviewed / Tested by tags? Thanks.
+Yes, correct, today using Azure is the easy option.
+
+> I did use GitHub to trigger an Azure pipeline. There was one failure and
+> several errors in the binman Command Line test.
+>=20
+>     https://github.com/u-boot/u-boot/pull/875/checks?check_run_id=3D65015=
+204887
+
+And the full log is:
+https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D12893&view=3Dl=
+ogs&j=3Dc59aff74-743b-5f08-f408-4a608a489153&t=3Df2ea3536-b291-5a39-ad92-02=
+20c9b8101a
+
+and so yes, it's from your changes.
+
+> These are PKCS11 errors, so of course I thought my patch was to blame.
+> But I'm seeing the same errors on Debian 13 running 'binman test'
+> manually on the master branch.
+
+Some of the tests are indeed more frustrating than others to run either
+outside of CI, or outside of the containers, or both. I would recommend
+looking at the portion of .azure-pipelines.yml for that job for the
+steps to replicate, and if it doesn't work inside of your host (and
+https://docs.u-boot.org/en/latest/build/gcc.html is still missing
+things) it's easiest to just pull and run the CI container.
+
+> > - See if you can get access to a FreeBSD or OpenBSD host and make sure
+> >   the tools build still works there too? I was hoping Mark would have
+> >   commented / tested-by v3 because I do want to make sure the libressl
+> >   case still builds. At worst case, I have a freebie Oracle VM that's
+> >   FreeBSD based, so you can maybe spin one of those up as well?
+> >=20
+>=20
+> I spent some time again setting up OpenBSD and FreeBSD virtual machines, =
+but I was
+> unable to reproduce the build environment for U-Boot. But thanks to
+> Enric and Mark's work it looks like we have the LibreSSL use case
+> covered now.
+
+Yes, thanks.
 
 --=20
 Tom
 
---p1G5u38snRIlWCk0
+--HicwZ0FQDFA7UKXw
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaHWxgAKCRAr4qD1Cr/k
-ChPFAQDDf0dcw2KIMC0383CVdQpgfhY85twcf09VIBwJZ09vvwD/dL6xTJcukeyt
-L54yuucuJZpc5g4s9tuHyh5jmge6lAU=
-=Xbjq
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaHYwAAKCRAr4qD1Cr/k
+CkCoAP9vhL5f2/lCIQLKnJOeE2/LhGZCpB06hvgFyxz4bcxeSQEAp+cilu64SNr8
+FvTt7mE38A7n5BVFp6H6sCfLhqhtnwc=
+=UCqh
 -----END PGP SIGNATURE-----
 
---p1G5u38snRIlWCk0--
+--HicwZ0FQDFA7UKXw--
