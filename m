@@ -4,95 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A6AD104891D
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 22:14:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258B2FEFB6F
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 23:28:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D377483E76;
-	Fri, 27 Feb 2026 23:14:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13BED83E81;
+	Sat, 28 Feb 2026 00:27:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n3v5ABf3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FXvLCnka";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C077983E81; Fri, 27 Feb 2026 23:14:52 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 4DD2183EB3; Sat, 28 Feb 2026 00:27:57 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4335483CDF
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 23:14:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A60483A1B
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 00:27:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-65f812e0c83so4829345a12.2
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 14:14:50 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772230490; cv=none;
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-65f73225f45so4442408a12.1
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 15:27:54 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772234874; cv=none;
  d=google.com; s=arc-20240605;
- b=K7yJP4Uh7rbkKBZgWWnlaqNIV//MkyxEpTyP4ZDnEvR9PnbDDVZijq2VYJHxkbXUbC
- ow1SoOHq+tTSKijYwCW0xQuRe0CgcCvpr7NvtaswHJH62otNKkedqhPPkFtqTepgNvFB
- pVuJuy2sFap/XCWw37O9ZmoMfAbcoLL9OHkn+lZu9Cu5f4iP5C1PzbGkE9xM47x+Ja3M
- g6qRHiNtNzOrTcJpda5cLlNyiNjbECoGiIa+ahLHd4YS1waVBbfn0Oi8aflRZR31zZ8Y
- k2zqOkbqM7NzSpeW3UfVIeRa23t8SSZQJBiFOd49NNthaWlfNqA6g7bep4lGHV4hleIO
- D0kA==
+ b=BXUPLKAuLhzVc94zQwJCR+BVcOVIehAu/fPMr/yD9Wzg9nsMQTs0YcvdyXW3h59Be0
+ 8EA2VgvaQovMLObAXyrBnCXggaHeMJ9Tf7TYI8QG1aaDzKHb+wrV2z6JL7zxRoA51bDc
+ MGu6sl69s2J0FWhANox3dHkYpGDLhxlh+cP7CakYMoFOynPylVNaBpKv3eOk5g8SEzi6
+ OGoXFcZVEJQ8BQ/+7vYn55vF0KiVW4HJ1iNxC5WvUFNkKNOYsv3sa3KuxBu8tnqWI3Ea
+ astmmmWygQ2U/mytjcDoYrpHOzMVH/Xcii6eiXkqehGSHgb5NRdhYmAsHzTsovSnLWsZ
+ dnAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=O7zzEed4PuTqK2aL8AEhuwgNafYG+GxAXECAQ1ZW8JU=;
- fh=92gG7ptBGCvu2IuC2gq9NtcCuhK2VousJBpQ3Ju8FEI=;
- b=IzsGu+Md2MpAPW+8UfkET/rQNQChfSzPUpQKZrq8I7IYN4ph3vBMTYxIeL1i+oAdeR
- SnO9d2RFCFYTmhLYFalVfTu+acwet4hf7B4K8pZ579Blj8fL82Ln0se/j4n9CkUdErTK
- CsENCZy7kHika3+EyeEQKqV9yzZYKqBkZ9ke4tmR3dwKlzWck4nPdPrE0DtADcvTCCof
- aPEptKU/wYAmFo3fyc1kuv23Tqd32EXqIp18oWs7xaapHsLTYppH8g1ywa2G7x8Mg8/F
- o5uzMhdkq0ISrRENnSuuuJiUeoGK/Gt7RljxgrcY7i6L03drW1eXEW/QguuAiFitiEZD
- cvqg==; darn=lists.denx.de
+ bh=F8HaAGbA7nu2Wf7Qr5bMrRubiIpbIQb69KFuJC/KNcA=;
+ fh=uFfMeDWXvxBgJQo4Ok+l4D/5E3ZRFKnyz3dfEUYz0a8=;
+ b=O1X0JaUyYLa5d/7SIibZSpdm8EUgTFlEeq6ap4wc6POlIxggSKHTf/JZ9YATUMB7as
+ lRm3u6secyeggtMvvPlxkbmUzM4XUFBPO8+I7Pc40F7qgduPdIyVOVZwKxKNAo0rtnOf
+ zyxn5h6FeSTq6bdtOpG5WmGe/A0FZje7H1kIggZM2VpBOvuCs/fiNI/Em42mLYBvPsd0
+ +8Pzkdc9h1jae0QjZaHqLqyeAaihBnSFSYh6RiPONGmZRnu33znfGHYnKEc39Mk741Fb
+ jtjYUZhmOO9hYbITu2mqfPsSN7WaefTh6nBM/vSfcfZXXhFxvzWlnr8HELAuw98f5/Rv
+ c6Lg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772230490; x=1772835290; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772234874; x=1772839674; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O7zzEed4PuTqK2aL8AEhuwgNafYG+GxAXECAQ1ZW8JU=;
- b=n3v5ABf3BcxqU/MHwSczaoCWkefhr/fEatpBU11tJS72ZU6Q6jaBKhN6aW5Tctf9kd
- lwi0gAEtQEYkGmeQSRTC7aKXttpA5K6THiB0F/YootiXpRcs9Xv1Fjx37yjBIew8hgk3
- i5ZOtBeRkncmaEehY3ep8JQ05F52RuvgqlK4k=
+ bh=F8HaAGbA7nu2Wf7Qr5bMrRubiIpbIQb69KFuJC/KNcA=;
+ b=FXvLCnkaPGf5Yj3qaMwF+Dp+IP7WMd+UPgg133AHucUK9KRia/ekO48keDT51C0kV8
+ 8KS/GcBIHFXj8mlIvHJANWO8sd7bbM2dDJTZpSnfCH7CVJ/1pnsu+NbEK1uvPOP8bwpm
+ Te4wZLiP6k/jTJlS5yH/fOq9sSNd11lAKSgQY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772230490; x=1772835290;
+ d=1e100.net; s=20230601; t=1772234874; x=1772839674;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O7zzEed4PuTqK2aL8AEhuwgNafYG+GxAXECAQ1ZW8JU=;
- b=H1ksfdgnwAlWDWZm0beBQPLl1qiIzYCyXHrMqCfivb1JyVxMXHBKeS+sQIZScH+sYD
- e4AY8DWybKMm6gMuDkOf8pU37YVDgWZ7fKjc8OjW2O770QxQ1m4uA4zNYdjkDIhapjzG
- WkVYMgnIOGxMgVsY1BDykNy0V2IvGaVYjZ33pGLkpycCjQKtFVrJt5djtRBv5r3QbTRQ
- X/+oN2aHgG7OA97vx6LSaXZVx5chPD6XzkRDK2qjvTg78u5S8qWyS2Hh1Gx4VFChvjQO
- qRkmRNa1ciALfNU9dQVj0W7qZdtHLrqXjYoS7AXX0SxyTDF+fUZacEAgwFXbrBdrdrG6
- ki/g==
-X-Gm-Message-State: AOJu0YzUaG7ep5PjRCJo3QcI6ooz+yA6FGRwsr8wGkN8KZSr1mmeHcGz
- l4G+D6HWNF6nmUA/i3VUugZLbvMZ1J3bAA5bL7S/V7TqlgjTrA+aZ3KNOeIIemQUDlLbLCTWAxh
- 8Q6bewOCrYw35379Zx36uQN1i9GoqiM2ieU4zEC/nCifRq1W3ETM=
-X-Gm-Gg: ATEYQzxcP5PvwNxrwIyHzhIFnccScd2EFWY+miE6vUDaDigYtIlwOFceUerbInhuXws
- x8p873F6g+OT88IkQ9l5opHMcNGW/d4wvrpdojry/MZ1DVtepS+NpoweDIcG5NaOXlbIu7a1SHX
- ZFjyrTEBQO17OVdTvuk4jPm7Pe6jGztF5GV3w+TTUIDAuLKKPGokBzVAEDuo7ogzfRM0UGemhXE
- hChropEnIDc7gHVcMvJT5nwtBcR00yWky4YkFTVhjfacR1VS7shzsEguL3bzmVghGpfW5NG9b+T
- LcFbeQ==
-X-Received: by 2002:a05:6402:35c7:b0:658:e665:766c with SMTP id
- 4fb4d7f45d1cf-65fdd6bec33mr3185201a12.8.1772230489587; Fri, 27 Feb 2026
- 14:14:49 -0800 (PST)
+ bh=F8HaAGbA7nu2Wf7Qr5bMrRubiIpbIQb69KFuJC/KNcA=;
+ b=JGwYE+V32x4nlR5wAKzUwXnu481vFwMX1hrTEUs6ksnMdCikkCamR47TY5wJCITQYJ
+ ZQPntMs1Q1cnbCDYeNhbEw/onkaovhsK+vszfPPnpnwAkYRdwyigYAHkC5xvil8DTZD0
+ Lw8k8wF3te6oG7830hPShNIHE21oBLAHrLPBdSKjGUO5e4CiPaXulmTeWOtB4OCokpvS
+ 33yLBq3vtQ2wzh/7+yg0uAWDnAmvYxyYwMexv4jT6IFyxuSqLzEGbfG7U/Cg8r4VKOYN
+ tyIcpPyIAKy+tB+AdjMvosEpzVtuavxOcm++GzqeUugnrqrQy7O19befzNSGun2QYsZS
+ 4bog==
+X-Gm-Message-State: AOJu0YwimY3kX7XDImWemGEnMbTMb9XI7N0oxotwoddf6yOHmgNCS1i8
+ jnAWw9LaKvGvsSqs7BnhK/G3zwiQih/sOmyrR/1Uc/QvKyUUYWjEx89ZMj4d7WKKn0Nx6BCGEZw
+ bhXMrO83og29fAv2UVQgd7gvEwIZjNwvNfMgLvYxf
+X-Gm-Gg: ATEYQzybS5Rb1tstZhzPF/D0GZETvuISHgjf8dNc1ELJ6/Naw2z+LGv8UAScKm3MrZX
+ rd1eZLh8oc6sf+NLPNY2gVVseyU+yKJUNCkTmflsqEBq02gVIbK/V53+UokSIG8gsam9A7U713H
+ ZSFK1SrFwRKDi94VdKuDc4AdU2OIN9sWt9YW1HhhNVZxyi+5GczMdNLm0MY8t28KrefKdDMI9QG
+ Oo49zPTQjO8y8bFJgQArr/JiC3N8pLzMHEDFJUDDEVthnYDLqJ2+/rhWrmEfv44InvAADzJu3X0
+ Bbamuw==
+X-Received: by 2002:a05:6402:5245:b0:65a:382e:7254 with SMTP id
+ 4fb4d7f45d1cf-65fdd6e2174mr3099165a12.13.1772234874261; Fri, 27 Feb 2026
+ 15:27:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20260225162357.3449937-1-sjg@chromium.org>
- <20260225162357.3449937-6-sjg@chromium.org>
- <20260225171256.GR1593142@bill-the-cat>
-In-Reply-To: <20260225171256.GR1593142@bill-the-cat>
+References: <20260224142553.1608883-1-simon.glass@canonical.com>
+ <20260224161302.GX3233182@bill-the-cat>
+In-Reply-To: <20260224161302.GX3233182@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 27 Feb 2026 15:14:38 -0700
-X-Gm-Features: AaiRm530FUtB0ZVMhj73XfCnWezjUij8lT_BzHEOFmyLRobzD9IWf2ZbrFoshGY
-Message-ID: <CAFLszTjvQFS1BGU8QFA-Q8jiqac8jQj28_u6P=dKTo6xTrKFiQ@mail.gmail.com>
-Subject: Re: [PATCH 5/6] test: Add a helper class to create disk images
+Date: Fri, 27 Feb 2026 16:27:42 -0700
+X-Gm-Features: AaiRm50D7vnTR1_PXBjBKEBw-NeBU01rqCOqas4hr8izDg0CCRxwOxKpcRYn4r4
+Message-ID: <CAFLszTg86o0jPEboB=XPiDTn4s4pZnryDK+P=BKmzKY292DbgQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] bootm: Clean up arch-specific, pre-OS clean-up
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+ Aristo Chen <jj251510319013@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Greg Malysa <malysagreg@gmail.com>, 
+ Guillaume Ranquet <ranquet.guillaume@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@arm.com>, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, 
+ Leo <ycliang@andestech.com>, Martin Schwan <m.schwan@phytec.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Raymond Mao <raymond.mao@riscstar.com>, Rick Chen <rick@andestech.com>, 
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,30 +129,69 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 25 Feb 2026 at 10:12, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 24 Feb 2026 at 09:13, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Feb 25, 2026 at 09:23:49AM -0700, Simon Glass wrote:
+> On Tue, Feb 24, 2026 at 07:25:42AM -0700, Simon Glass wrote:
 >
-> > From: Simon Glass <simon.glass@canonical.com>
+> > Each arch does something slightly different before booting the OS. Some
+> > archs even do different things depending on the CPU type.
 > >
-> > Provide a way to create disk images which consist of multiple filesystem
-> > images.
+> > It is quite hard to know what actually happens in the final milliseconds
+> > before the OS boot.
 > >
-> > Provide an option to use the current directory for images, instead of
-> > persistent-data directory. This makes it easy for C tests to locate the
-> > image.
+> > This series attempts to start cleaning up U-Boot in this area.
 > >
-> > Signed-off-by: Simon Glass <simon.glass@canonical.com>
-> > ---
+> > The basic intent is to create a new bootm_final() function which can be
+> > called by all archs. It provides some flags for a couple of necessary
+> > variations but otherwise it is generic.
 > >
-> >  test/py/tests/fs_helper.py | 97 ++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 97 insertions(+)
+> > RISC-V, x86 and ARM are converted over to use this new function. For
+> > consistency, EFI loader is converted as well.
 >
-> It seems wrong to ignore the existing function to create disk images.
+> Please include all architectures in v3, ARM is still not shown in this
+> series.
+>
+> > A noteable change is that EFI_LOADER now does bootstage processing
+> > before boot, if enabled, thus producing a report.
+> >
+> > There is also a patch to drop EFI_GRUB_ARM32_WORKAROUND, as discussed
+> > recently on the mailing list.
+> >
+> > Future work could take this a little further:
+> > - Drop board_quiesce_devices() and rely on driver model for that
+>
+> Potentially, but there's non-trivial uses that don't fit in driver model
+> today either.
+>
+> > - Similarly with udc_disconnect()
+>
+> Please look at mainline code again.
+>
+> > - Look at converting EFI to use the same function
+>
+> You said a few lines above EFI was converted? Please make sure your
+> cover letter is consistent and correct in v3.
+>
+> > Also, the comment for cleanup_before_linux() could use more details as
+> > to what it is supposed to do, to reduce the number of arch-specific
+> > variations. It currently does different things on differents archs and
+> > is mostly uncommented (apart from an ARM-specific note in a README).
+> > Ideally it would be commented with exactly what it should do, ideally
+> > at a high level so it is not just arch-specific.
+> >
+> > While some of these arch-specific differences are necessary, some are
+> > just due to the changes to code over time.
+>
+> This is due to the entry requirements for Linux being architecture
+> specific. This is more consistent than it was 15 years ago (especially
+> since RISC-V looked at arm64 and copy/pasted as much as they could,
+> which is a good thing!) but still an inherently architecture-specific
+> thing, so yes, we may only end up with limited overlap.
 
-Can we do this in steps? I have a pending series to rework the test
-images (and move them to the persistent dir) but it is at least 10
-patches, so I figured I should start with this.
+Just to pick up on this point, yes different Linux interfaces are
+needed, but that is not the target of this series. I am more talking
+about the differences which are either unintended, or just a rusult of
+there being more development on some archs than others.
 
 Regards,
 Simon
