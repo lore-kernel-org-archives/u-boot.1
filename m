@@ -4,82 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AFF7FD0040
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 22:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5070AFD0045
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 22:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABA7D83F14;
+	by phobos.denx.de (Postfix) with ESMTP id EE5F283F1F;
 	Sat, 28 Feb 2026 23:16:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="f9h4kO0t";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="t3YzjgqG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fjikIS/t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 425AC83EF9; Sat, 28 Feb 2026 23:16:55 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id 42AFA83EC9; Sat, 28 Feb 2026 23:16:55 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B38F983CDF
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 23:16:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8F8983EC6
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 23:16:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fNfgQ2WZzz9tWv;
- Sat, 28 Feb 2026 23:16:50 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fNfgR3bdlz9tZ3;
+ Sat, 28 Feb 2026 23:16:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1772317010;
+ s=mail20150812; t=1772317011;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Tb1NSP9ef5gRhl86l02lED+D51as2tEHZQkHmsykgbY=;
- b=f9h4kO0tU6vCXygZsd0HbEeTTP8hzAc5CvpkDeVvxuqL3OWBf4fk/DPj4iexcjgUTI0WFf
- n7RPfgHSa+OipZUTsFNOoEqgSe/PO5Lo0tGVcgzpioMNDXb1EJuqMECKCHh1sx8pPg2W2v
- pQia4LILZZcLoJmwIbxgKkDzGqaI6wTaBxN+JofyxxOeFnj+IJrLyxXPC5gmgOKEQUSYi4
- IUATLdQovsJORH3tbsBsADu8SjGC0qHxt2hOxNhsmdWGHbjK70by7yWwEhiWHcXbi2V9WZ
- s2Pyt4xLZ+xCq9K29L+90YVWOcZnG0pT3f19iPkSH6lCAi3j0uxxPftrIcLraA==
-Message-ID: <40018ce7-5fed-4eb4-8888-601f99747109@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1772317009;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Tb1NSP9ef5gRhl86l02lED+D51as2tEHZQkHmsykgbY=;
- b=t3YzjgqGmyrSfAn36hi8vdJpuzI17wqd2pXMPzY8GJzG7ITBdZt2rkgaaj7wwNBl+6PEC5
- DpDauAOsvHg/beItAruO9SJ7Q4siiXicRpO+nshsvWkxHP7oVoPI/CtUTnwF8PP2B96onS
- OdF43KT+vbV51al8KBNP7rzCGBaJXvYfGenhPj9YFENPa9mEyh6ODeOhi0dDB5FnFZRidO
- EFiTb207EQjg36Ai9tqkYfflQUMHzyViYBN1hZFJWpbymnyQklgrapRKw53iwhlwt1b9Z5
- 3FYv8SVvahAtqZrRO+H5JsuVqIW/ugVrv+ApQP/q5H3lwTXttC2O8p3ntCBimQ==
-Date: Mon, 23 Feb 2026 20:23:25 +0100
+ bh=RZA+p3fvLIvS1mSr7YOvtkZzsJBaIF+jZ3lWEjc/FwI=;
+ b=fjikIS/tGHLbPq5afMMOVT7yMjA1DQJUh2AKnojHHohsrJYBeIJ9/sB6qUVaw4cqoSKEv3
+ DdV5ste7OctsO/gNldcBKq+ny8c09f6EP87aG2ntj8kiyjseaTNM2pH5+KXQXG9cdxH0Va
+ BhBzo+eoO+dTrupiYl1lRWcqR9wYUEF7UXjZl3JQBM4+1YUDL0Xrx40vHMkvIbh80Sr38u
+ uprzBqmKJLPnix+mbfrB62veLe419ontnpuCGWiMMOittgp9HPstJHF3Anzv3Z7pk6eXiM
+ gdI9PhQintG5g0piCSR+lKCgSyXYr5zhqrIK+CSJSeV+DlBZpe4DvPfpwNRvpg==
+Message-ID: <4d8848d2-3a4e-4025-aeac-c15592b16276@mailbox.org>
+Date: Fri, 27 Feb 2026 12:51:54 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] gunzip: Implement chunked decompression
-To: Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome@forissier.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
-References: <20260219003351.388722-1-marek.vasut+renesas@mailbox.org>
- <CAFLszTj42WZF3DTOt4HxskNW3qyZJ5_pQ66RsBNdbr13rXTFeg@mail.gmail.com>
- <2acea5e6-5760-40b3-b8e7-952fc355e621@mailbox.org>
- <CAFLszTjRjpFRxxQJt2hNXzuMn9O3Kgcwrh10XpAMXqczK146NQ@mail.gmail.com>
+Subject: Re: [PATCH] usb: cdns3: fix cdns3_bind() to avoid returning error and
+ probe parent
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, marex@denx.de,
+ trini@konsulko.com, minda.chen@starfivetech.com
+Cc: u-boot@lists.denx.de, srk@ti.com
+References: <20260227055954.3916518-1-s-vadapalli@ti.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAFLszTjRjpFRxxQJt2hNXzuMn9O3Kgcwrh10XpAMXqczK146NQ@mail.gmail.com>
+In-Reply-To: <20260227055954.3916518-1-s-vadapalli@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: iduzrh9abb3dxfyctthzcpko8xbecemy
-X-MBO-RS-ID: 7540cb6cf590ca78b72
+X-MBO-RS-ID: c84ea563ec6c84e44f2
+X-MBO-RS-META: ok1g5hscurwoe365gxdrsaed8i3r4qeu
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,38 +76,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/23/26 6:41 PM, Simon Glass wrote:
-
-Hello Simon,
-
->>>> +       /*
->>>> +        * Allow runtime configuration of decompression chunk on
->>>> +        * sandbox to better cover the chunked decompression
->>>> +        * functionality without having to use > 4 GiB files.
->>>> +        */
->>>> +       const ulong minchunk = 0x400;
->>>> +       const ulong maxchunk = SZ_4G - minchunk;
->>>> +       const ulong chunk =
->>>> +               CONFIG_IS_ENABLED(SANDBOX,
->>>> +                                 (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
->>>> +                                        minchunk, maxchunk)),
->>>> +                                 (maxchunk));
->>>>
->>>
->>> As you mentioned in the last version, there is a compression test in
->>> compression.c - could you add a version of this function that takes
->>> maxchunk as an argument and call it from that test? Reading an
->>> environment variable to avoid passing a parameter seems pretty odd to
->>> me :-)
->> Do we not want to test the command line interface ?
+On 2/27/26 6:59 AM, Siddharth Vadapalli wrote:
+> While commit bfb530e06ca6 ("usb: cdns3: use VBUS Valid to determine role
+> for dr_mode OTG") enhances the driver, it causes boot failure for non-USB
+> boot mode when the 'dr_mode' is 'otg'. The reason for it is that the
+> cdns3_get_otg_mode() function reads the USB Controller registers to
+> determine the appropriate role. If the boot mode happens to be USB, then
+> the USB Controller will be powered ON and the registers are accessible.
+> For non-USB boot modes, the USB Controller is not necessarily powered ON
+> as a result of which the register accesses cause boot failure.
 > 
-> Yes it is a good idea to test it, although we don't need to
-> exhaustively test each compression case. I suggest using the dedicated
-> compression/decompression tests to check detailed features, with the
-> cmdline tests just checking for basic functionality.
-The compression tests already test the memory-to-memory inflate path, 
-but they are not suitable to test the gzwrite inflate+write to block 
-storage path. The existing gzwrite test is suitable exactly for that. So 
-no, I don't see the compressions tests as a good place for gzwrite test. 
-The command line gzwrite test on the other hand is already there and is 
-testing exactly the inflate+write path.
+> Another issue is that the error code from cdns3_get_otg_mode() is returned
+> as-is by cdns3_bind(). The cdns3_bind() function already has a comment
+> near the 'fail' label stating that an error code should __not__ be returned
+> as it will cause the board to hang.
+> 
+> Fix the aforementioned issues in the following manner:
+> 1. Probe the parent device before calling cdns3_get_otg_mode() to ensure
+>     that the USB Controller is powered ON and its registers are accessible.
+> 2. If cdns3_get_otg_mode() returns an error code, instead of returning
+>     the error code, jump to the 'fail' label and return '0'.
+
+[...]
+
+> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+> index 10bc4cabed4..a775567b3bc 100644
+> --- a/drivers/usb/cdns3/core.c
+> +++ b/drivers/usb/cdns3/core.c
+> @@ -461,9 +461,18 @@ int cdns3_bind(struct udevice *parent)
+>   
+>   	/* Use VBUS Valid to determine role */
+>   	if (dr_mode == USB_DR_MODE_OTG) {
+> +		/*
+> +		 * Since we perform register accesses in cdns3_get_otg_mode(),
+> +		 * we need to ensure that the parent has been probed and that
+> +		 * the USB Controller is powered ON.
+> +		 */
+> +		ret = device_probe(parent);
+> +		if (ret)
+> +			goto fail;
+> +
+>   		ret = cdns3_get_otg_mode(parent, &dr_mode);
+>   		if (ret < 0)
+> -			return ret;
+> +			goto fail;
+>   	}
+Can you instead move this logic into driver .probe() ? Then you wouldn't 
+need the device_probe() hackage.
