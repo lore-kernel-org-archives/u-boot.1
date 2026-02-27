@@ -4,121 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A7CFEFB4F
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 13:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D94EFEFB55
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 14:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 267B683E76;
-	Fri, 27 Feb 2026 14:46:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 72F5F83E76;
+	Fri, 27 Feb 2026 15:08:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AzztuwTd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pKpTSeJw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 846BE83E81; Fri, 27 Feb 2026 14:46:30 +0100 (CET)
-Received: from CH1PR05CU001.outbound.protection.outlook.com
- (mail-northcentralusazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EFCE883E76; Fri, 27 Feb 2026 15:08:05 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DACF83CDF
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 14:46:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6215483CDF
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 15:08:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qw0ISnMbFrOvVoE3QLPeQONLTKhkMkN2mA50tgkAUTylFON2RwSGfVHj0IYA+9jtbMuK4XUzKOcxKuJIcxNLbETh+EePsP+oLp8ISgMx34fTKOx9jG30897e6Terrp0AblSNiFstlGO8ufy3jSu48X4vryIMvEyIHRN+cV/BvTbRTvMMxZgDF+61zg7lyuRojyx5E/44baovMPI7KWUaBVvh4Vva7gsxQaLvreyiKcMjjbsvfllNRJ2vc59lxd1l1827DEGFeTKfUbJQCqPybAtTGZ4RSGM0oQBvj48orQE9Rrtkl2iYO5p/mZ6ZyQcTjz9jCSrkcz1UWpNohiK64g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bDg1H/M29AmhLIoGqF0Oh93h4G2xC+AZAsplcXMmlnY=;
- b=a3TM5aKnvZI8IzUHnWT62dDfqrV053ZkSJCzTnSGp9V0+grJT69dRt6Pbf9DzUY1z1o3FEzX/EeYsU7OPhk4f0fR498h6bXoirilK6YeOQGpTLTavomS0o3S4NYf1Y2MChVHZJjCy7bjVrgBN5aQIsyD84he/MnUxtx7gUx3fB54GFIcK7lmbvfqd2HUDfJ/7R8qeUHd8rBw8bMz5lrQt4ZZt6sCHEXW1rRIHHjcDTLy6vFK3ZgxvRlLUYoNUhtW5Mk9aFRIGWUeC2afdKB6Fg5lreUXa6lXNHhoLlRjvqzXQIbXuHObFb8THQz/nLiwoo2Q0v7ZS2rH0UsPHnLKoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=foss.st.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bDg1H/M29AmhLIoGqF0Oh93h4G2xC+AZAsplcXMmlnY=;
- b=AzztuwTdLeTJQ3PuST8e/2zhpH9EAZEr5IsxwTQhL/8eVbl7LEvwxnFWnCS2wCF9DSadgAK2m7ReFXI20s6akU+LZzQxJcagMIbYAu4FFWvSOOWP40OllPf2CgZv/scm16DIMN5KaJuDIxkjQ+Waun6/l37Qo31Q2Ksnlb7Li2U=
-Received: from CY5PR15CA0080.namprd15.prod.outlook.com (2603:10b6:930:18::32)
- by CH3PR10MB7611.namprd10.prod.outlook.com (2603:10b6:610:176::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
- 2026 13:46:23 +0000
-Received: from CY4PEPF0000EE33.namprd05.prod.outlook.com
- (2603:10b6:930:18:cafe::e9) by CY5PR15CA0080.outlook.office365.com
- (2603:10b6:930:18::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.27 via Frontend Transport; Fri,
- 27 Feb 2026 13:46:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- CY4PEPF0000EE33.mail.protection.outlook.com (10.167.242.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9654.16 via Frontend Transport; Fri, 27 Feb 2026 13:46:22 +0000
-Received: from DLEE211.ent.ti.com (157.170.170.113) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
- 2026 07:46:21 -0600
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
- 2026 07:46:21 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 27 Feb 2026 07:46:21 -0600
-Received: from localhost (kamlesh.dhcp.ti.com [172.24.233.19])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RDkKbx3826165;
- Fri, 27 Feb 2026 07:46:20 -0600
-From: Kamlesh Gurudasani <kamlesh@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-CC: Lukasz Majewski <lukma@denx.de>, Peng Fan <peng.fan@nxp.com>, Tom Rini
- <trini@konsulko.com>, Patrice Chotard <patrice.chotard@foss.st.com>, "Alice
- Guo" <alice.guo@nxp.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>, <anshuld@ti.com>,
- <vigneshr@ti.com>
-Subject: Re: [PATCH] clk: scmi: Fix protocol version fetch for non-CCF
- platforms
-In-Reply-To: <b131c7fd-dde7-41ec-8012-1bc829e2ba1a@mailbox.org>
-References: <20260227-ccf-v1-1-a22c19460b74@ti.com>
- <b131c7fd-dde7-41ec-8012-1bc829e2ba1a@mailbox.org>
-Date: Fri, 27 Feb 2026 19:16:19 +0530
-Message-ID: <87pl5qz4d0.fsf@kamlesh.mail-host-address-is-not-set>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d4c9537f90so1470478a34.0
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 06:08:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772201280; x=1772806080; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TklCZlAjE/xMY6piCQrb9rY7vwOz+6ocEkqlHtu1zt8=;
+ b=pKpTSeJw33U7MGvAaV86FGXs56El8JL1yp2R4zINr9oAfaSS9kxn4tby+1XB4JpS5E
+ i6BX9+srsnAHmAP4TwHpfkM/GlAiLvFMjeO4Ai4y6npuZNzYfsro9x5txQlycG8g4Zs7
+ LYIe+BX94Bo5h0lYR3hD5undUtgBKb+MCCrD8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772201280; x=1772806080;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TklCZlAjE/xMY6piCQrb9rY7vwOz+6ocEkqlHtu1zt8=;
+ b=jmY+DfohltewiTX9tgNAt+C4xgvAuzmvNhFsqbBou2ybPK5TkJaEY+eP4mZmh4bP54
+ +9iECi+89b9XZacIFhVPLGRUQoeqj3pOzFRMw6ZyKMUA+B12F1DfVgRAIR+OhkDGc9If
+ lisEkEtM+Su9k2pLKbXWnQ2ClbNu4Jb9sV7h1uwUurOfJWBmPLByFAkiS8TomhyVZMdR
+ nJEy5Iu/S/8R8tb9euR2e1QCgStXav0hhLX2TGy9eNXwK8dt3XxbM9T5v2ziqSWgS6mz
+ M2u7Ij8pBAxCE0FjICza9wFrU7rcgAoiUYu62qpPlG9f+ciItx7L9tUJI76KlEcDGzC6
+ hxrQ==
+X-Gm-Message-State: AOJu0Yw3O2ZTBxrV276pdHTuNoWn/ZqcLonZETVljmFY2AEgjJ0XBcqJ
+ FQZnNEUBAMxAXxESV2ZgrGjK+76QcRLF6IELR+TWLYuDuM4e8257SXxQiLWikddwpAjnAmZsPPR
+ FcOuH
+X-Gm-Gg: ATEYQzyMZcQy/3t+2rmmaH20hZygaE1fhgk8cj9BSBAq84TllNycW9Jaule2km8eN9r
+ 4Ri3zx03x4qZ3fIZe5z/AV7l/A8lXEcubd1JFRJH5dcVZCGafRcdbosfoObS7HsY+EGMTEJWLcl
+ AvLjGG+6njy+uLm7yHwq53QY/hgaVdt6AElAcUSxgNexnWF5g9AqqF2j15wonLGelGnsgAOo3H8
+ qfkb4vEUJaZGuul03jE1u35HknGH+ewuoUHiqlGz3DX57mVtd1RlfbQtdLtLtpjYGK/2qbw0ksi
+ pr7mJDbCyupy4SwhHtlq7oe+QzmcNmLebs5hsMT/k6cHFbVriDhJrRRjv+al1kU1qC2cX3pwkZN
+ BVwj1zVJUNS58UzNJY/TMur9FhIQoB11Ac4eEkWy4Tis+764diQiDOl1v2cCFSvjXmi5kYNF/hf
+ zTtB/r7BhPF2iU/V8PciSMQESYo1BGp0jXPaU9NIe0q8h/I3bvl6fpqeavpOVm8UFU/3jv/MSPA
+ BUKGil5/5LcXxUzt4DqP8iNYRcPdfS6xiYfLrptFc/lJCpFO6k=
+X-Received: by 2002:a05:6870:6121:b0:3ff:4bcd:cc37 with SMTP id
+ 586e51a60fabf-41626f9b095mr1970077fac.30.1772201279847; 
+ Fri, 27 Feb 2026 06:07:59 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4160d2cc08csm4387787fac.19.2026.02.27.06.07.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Feb 2026 06:07:59 -0800 (PST)
+Date: Fri, 27 Feb 2026 08:07:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Boon Khai Ng <boon.khai.ng@altera.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] spi: designware: add support for bits-per-word DT
+ binding
+Message-ID: <20260227140756.GP1593142@bill-the-cat>
+References: <20260227110434.5058-1-boon.khai.ng@altera.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE33:EE_|CH3PR10MB7611:EE_
-X-MS-Office365-Filtering-Correlation-Id: af5cf208-57c0-4def-24bf-08de76069848
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|376014|34020700016|36860700013; 
-X-Microsoft-Antispam-Message-Info: ltwPGZQFuI8T4Ybd9MEsm1Wlwi1CKfseWW5yzSvzdJTuubA9NRTdv64feU1vfd82RTyzEI3qWB916io/ek1cYV4US6ihz4DYOXW4il2o9xxRquGUmw4ag4wOFn12T3vciOmSYyB22jPCsBisKPaUnbYrEJQ8uF47m2W7TzTPJmjhmFeJ1Z6plDcpJEz3Lq2u/NxuIWZNr1j2jmU76cEsZ2nRmfXMfL3AUjJDy8gENOO3prDKxdEi+sJUWJvIxTET1h1CqbkJLG3iTa3+C0F33INHwYkGUiGesxm8BNUyB6tkPDfTLekvEUqRP3DG4bkgYyX9jkBY3aon6FZH3sDYNxmAm1ve++iALNFOp2KYf7RKKXxh3G5C3B4yawQauauc78aMCb+ROwNMVCQa5h0aGs6JzqhooMrWRBWXe8AV9CAkyE2y6kovqfcV/A4GTTl53M3WIBPNL6bEJy7isMRayUBYtzfJxW38IGvkJWBTpDfadN6SMhAKK8fVAIgTyGBpstoUrlHnHliRqDZ68PMAl85wOVKnlDWL9LgVuwepeVWXWdv15p2kh58XqpdqjIlwdqie0+Vj2q+LOwKwcUJJj2uLedSAFRQNej8v+1qkdcSvfdRSGqV0ro/z1DO4YYY4TA5Yfb3KMUYVo053t87iR8ZE66t4wrTS3x6FVTDRez9pI4e1DfTO6pKG3OHof8+TwcjzUXW1UJGIFPoJRmHbDzNPW0J6sqi3ahz3mrLDPBbHepOkOakP9MYLNYLc5V8XqR+lXu1xVEmxzDYEEsTILSVbborWYkPjNPgUEHFX+2/P9LoKMAOxPzBzJyzbPmCtvkN0nnHy6QRdqgoSMn8ClA==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(376014)(34020700016)(36860700013);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ViDRikM8Od02ycgeqodv7Us2OYvC9qRoC2n9wFuIMC4VcU9HCgfFDoyiRmQc1vrdIPAxR4eekJ8sg2Xp3+bArLkw1TipK6gTIZ0FiUUNmlzWBZzl+JvaDIIKZiUNhA/QuMlUl1TKkgSFpnQ6im/QVJLv7ZH6ZCv3Ueo5rVsX2RGYa0k5LfA0w7908RQWSe7Wshbo5s4xZRcY0xxg81rJyygwEAvvxMC4HdZiNKgATN/Q6Vk74IYVo94IjaKqZWfJLTjQ55okAMMeLy+TEqtf2KXPDeRR8SWTHEh0JuQTs5dBlKO+60JSlghpEVoCigXEeJao2VF26ZYvsLz7k3/UO6PvSwQj8U5ezl9u/zIktI40QVkaEbalDAPMRr6XwKK9MGy00qFd0l+WlL0BVX+jk0Cc6GEGjNELlsHOCMfxpfG9KsI1zgL47eIZ+QHadJvT
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 13:46:22.9128 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: af5cf208-57c0-4def-24bf-08de76069848
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE33.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7611
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="eJHHAqMTYkbrTF08"
+Content-Disposition: inline
+In-Reply-To: <20260227110434.5058-1-boon.khai.ng@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,47 +103,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Marek Vasut <marek.vasut@mailbox.org> writes:
 
-> On 2/27/26 1:07 PM, Kamlesh Gurudasani wrote:
->> The SCMI clock protocol version was only being fetched when CLK_CCF
->> was enabled. On non-CCF platforms, the probe function returned early
->> without fetching the version, leaving priv->version as 0.
->> 
->> This caused issues because code paths like scmi_clk_gate() and
->> scmi_clk_get_permissions() depend on priv->version to determine
->> which protocol message format to use, even in non-CCF mode.
->> 
->> Fix this by moving the scmi_generic_protocol_version() call before
->> the CLK_CCF check, ensuring the version is fetched for both CCF and
->> non-CCF platforms.
-> Which platforms are these non-CCF platforms you refer to ? Which 
-> platforms are broken right now ? Those details should be included in the 
-> CM .
-We noticed this on am62lx_evm which is yet to be upstreamed.
+--eJHHAqMTYkbrTF08
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-It should fail for all "CONFIG_SCMI_FIRMWARE" "~CONFIG_CLK_CCF"
+On Fri, Feb 27, 2026 at 07:04:34PM +0800, Boon Khai Ng wrote:
 
-But the failure case "0" is favoring the devices which are using scmi
-clock protocol version less than 0x20001 (or 0x30000).
+> Add support for the bits-per-word device tree binding.
+>=20
+> Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+> ---
+>  drivers/spi/designware_spi.c | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/spi/designware_spi.c b/drivers/spi/designware_spi.c
+> index b520c727900..c41436a1dfb 100644
+> --- a/drivers/spi/designware_spi.c
+> +++ b/drivers/spi/designware_spi.c
+> @@ -359,6 +359,7 @@ static int dw_spi_probe(struct udevice *bus)
+>  	dw_spi_init_t init =3D (dw_spi_init_t)dev_get_driver_data(bus);
+>  	struct dw_spi_plat *plat =3D dev_get_plat(bus);
+>  	struct dw_spi_priv *priv =3D dev_get_priv(bus);
+> +	u32 bits_per_word =3D 8;
+>  	int ret;
+>  	u32 version;
+> =20
+> @@ -384,8 +385,19 @@ static int dw_spi_probe(struct udevice *bus)
+>  		version >> 24, version >> 16, version >> 8, version,
+>  		priv->max_xfer);
+> =20
+> -	/* Currently only bits_per_word =3D=3D 8 supported */
+> -	priv->bits_per_word =3D 8;
+> +	ret =3D ofnode_read_u32(dev_ofnode(bus), "bits-per-word", &bits_per_wor=
+d);
+> +	if (ret) {
+> +		debug("%s no bits-per-word not found\n", __func__);
+> +	} else {
+> +		if (bits_per_word >=3D 4 && bits_per_word <=3D priv->max_xfer) {
+> +			debug("%s %d bits-per-word found\n", __func__, bits_per_word);
+> +		} else {
+> +			printf("ignoring invalid bits-per-word %d\n", bits_per_word);
+> +			bits_per_word =3D 8;
+> +		}
+> +	}
+> +
+> +	priv->bits_per_word =3D bits_per_word;
+> =20
+>  	priv->tmode =3D 0; /* Tx & Rx */
+> =20
 
-I can't really say if following devices use SCMI Server version greater
-than 0x20001 and are getting affected by this. 
+I don't see this binding in v7.0-rc1, did I miss it? Thanks.
 
-As am62lx_evm is not upstreamed yet, not sure if I should add that in
-commit message. Let me know what you think.
+--=20
+Tom
 
-Devices with "CONFIG_SCMI_FIRMWARE" "~CONFIG_CLK_CCF":
-am62lx_evm cm3588-nas-rk3588 coolpi-4b-rk3588s coolpi-cm5-evb-rk3588
-coolpi-cm5-genbook-rk3588 evb-rk3588 gameforce-ace-rk3588s
-generic-rk3588 jaguar-rk3588 khadas-edge2-rk3588s mnt-reform2-rk3588
-nanopc-t6-rk3588 nanopi-r6c-rk3588s nanopi-r6s-rk3588s neu6a-io-rk3588
-neu6b-io-rk3588 nova-rk3588s odroid-m2-rk3588s orangepi-5-max-rk3588
-orangepi-5-plus-rk3588 orangepi-5-rk3588s orangepi-5-ultra-rk3588
-quartzpro64-rk3588 rock-5-itx-rk3588 rock-5c-rk3588s
-rock5a-rk3588s rock5b-rk3588 sige7-rk3588 stm32mp15-odyssey stm32mp15
-stm32mp15_trusted tiger-rk3588 toybrick-rk3588 turing-rk1-rk3588
+--eJHHAqMTYkbrTF08
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Kamlesh
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaGlOQAKCRAr4qD1Cr/k
+Cph/AQDLzVCWkl6fXpOQJARoVgDn/NjcGBlMoq8XaPnb/JdL5gEA3yQv/QbeBCZg
+pvf1l01/cz+64tfCZs4hv+9uvK8K3ww=
+=exjS
+-----END PGP SIGNATURE-----
+
+--eJHHAqMTYkbrTF08--
