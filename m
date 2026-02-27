@@ -4,83 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A2DFEFB56
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 14:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3288CFEFB54
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 15:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68CAE83E88;
-	Fri, 27 Feb 2026 15:50:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7340783E81;
+	Fri, 27 Feb 2026 16:03:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C0ov+eKi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v5Jb7Cd7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9908C83E8E; Fri, 27 Feb 2026 15:50:34 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 752DA83E88; Fri, 27 Feb 2026 16:03:43 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BDEA83E76
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 15:50:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A5F483E76
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 16:03:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-464bc03efd8so799466b6e.2
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 06:50:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772203831; x=1772808631; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=htlb5FTGsrD04CIaEwN5BttPGjlNDVSZK7DNVvRlb6o=;
- b=C0ov+eKiVGYPOe+X1Fhlq69QbH0fLHa3gRCM/LEsX7UZ++fKi1GauGjTj2NXfsCjrO
- 20AHriXHFITtcGD5tBu9kZqo1JvvY9dOQG+1T7BjSX1wFDLYjMYh8Y7BdX8061V8/SpE
- Rj0O44Tkz6sWZzoRgNgzejV41T4xQDqGBNstg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772203831; x=1772808631;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=htlb5FTGsrD04CIaEwN5BttPGjlNDVSZK7DNVvRlb6o=;
- b=PdckPnldMyVRfuJlZKIn+6OB/gwz8jBYc5Ip3tSNmJpEnfaHU5xxRUScuwJKnWUGwa
- cc2GhknyEVqxxb0tl7yfrgx5BqqIG7ZlrP3aYMzAUuqBFE9omOeN2NiX2boNp+b0UQzP
- 4+ml8I3kyOLCgofQQLMWjG1UDES/rvvbpusqwMamjaRCIrwy/nOiZl4ZrVMudj03Tt1g
- O1f4OJoBwCBaYCIqvE/9fFFcAA/pf+/OWHKlyrYVnh2ZVOxsV0IRhaC4OVrn/ix07Gbe
- iScrhXQ05RyoKTQ2UaQqyxGI7iCb8ZPWxd2Fd0tJ+1M5yYZXaYvRo4moVs0q/YYqIWQn
- oe8g==
-X-Gm-Message-State: AOJu0Yxqc2/PQk8cKClVFRg6JpyqhivnLTh84/6NbzwrhjSZ6DN3y/JD
- OOmWVKbn/XgrdweKJawlgSD45qlbML++Q1GJh9K90Lnq0THC4qpg+SKRzDgQQNhoyYh3CEaL/Rd
- T0rBJOCA=
-X-Gm-Gg: ATEYQzwXRmY1HWnCK8lUlgwjldWZ9FFSkjBJNlD2gVK2t3D9LNdOM8d4K8RDlYxUdru
- uRSY8Quom36ZC2jA5znnEtR5pv6wFYvqISoc0Hy/f4a7Gqzto5E4szWOsHnInx+rhRqh11Gf2BZ
- BGvCk1wwKS5cavwwu0lFvMjXc1JJ4/GvY8cmEi/J3Q4fA6hlD7nrKu79vtPClQDjmgG/Rf21xVf
- zK8/v+psGhgkLu7d4YYcJOFWjsqrOdEmco3aenxbBYBa1um8T8fjaH/qyKDYAkkpdvMej01fWvx
- Ox6EzN6snqId/l4MgXQKt4UpHV7BNzW/5Vpki8VHLqiRSKSYKODZ2AIgZDHf0ceYppFZ3N+0R+q
- eO/be4PFI9GdaTe84nfe3pZMlCfT6DP3TxoJnLyF2TWJXVACQXo9pHESj/IFKx2ixHAZG/4K9kg
- D5+HD1/6zLeSKauZviRA6w2myo94PcSeaC2RYMqgc8QZWLYjaQ/Lg0xhZIpyC5SjykF5HIZOgGk
- wqw6P4dJAVStZ9n6twIwpUQoFEP2JHibQg1iso/B1RtjJvFMdU=
-X-Received: by 2002:a05:6808:4f4a:b0:45f:2042:8fbe with SMTP id
- 5614622812f47-464bec2bd6cmr1772937b6e.13.1772203830955; 
- Fri, 27 Feb 2026 06:50:30 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb59be78sm2199268b6e.13.2026.02.27.06.50.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Feb 2026 06:50:30 -0800 (PST)
-Date: Fri, 27 Feb 2026 08:50:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: =?iso-8859-1?Q?S=E9bastien?= Szymanski <sebastien.szymanski@armadeus.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] kconfig/[mn]conf: handle backspace (^H) key
-Message-ID: <20260227145028.GS1593142@bill-the-cat>
-References: <20260227-kfconfig-backspace-v1-1-b8467ef50ebc@armadeus.com>
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Sa+VJ5ZPbWT/otcFM6OHYim2Pu6f3Tgp2yrptFmYXiukjku8NAm7y4l+c+0MI+zDAX/J7M2f5QG1WQOzafrBQiCbTjawNnJAa9Zu/13gM/rRuvTVVuzsdaQLrMbatdkGgXpAeRWnfN7HQDaSrknw0sT/rzi79sdjUe92FrIQkb54TE5qjJ+c/2Vbn/MXbR67TP7YdCpMvUZNJXq7lQzHVqbVgCn6dn9ldJznfepMpzetfhxdXyX0ud0ctdq87plTAUrAAftHCd/I7NNEqt9xGMQG7k/bfiwcDRJSl1plAzzXCpOCccZsMdYLlIaLqwG56w6fCo7m4nk8jPuRLGmi1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OCM3AeMkFsWR/6kuZUbI7UHUC/yXWmNVAWHjNMgnuGA=;
+ b=S9m/thjQFeSfod9GzR4JWGXcUD5+r6SfFzKxzQj3KTJHGshs02FpxtBYjK0jZa6wUuCM7fi6qdzC4vUrFDdxo7w0lACm+2mKH6qRr4oX3WKeLAkXZvFV7UXsYvMuawJleSImTVnZorM2Yx/l2BwddjkWA8h5vGaKCINSdN8CRLI1RAvTPBFBqzR/8WZq2xeQBRSLmpCoWjo+OEv0Axau+U64IIktPzyiExOdV5BfoReA92c/V2+9kur2wV1xHhfj54zZlAg8q51NtDRqRNiJ1kqgs+4JQynd43FdtwKrzLFxb6gUPzTWVhGFcn4eyyRDk9vcWk8BoPCer15nUD4ifQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OCM3AeMkFsWR/6kuZUbI7UHUC/yXWmNVAWHjNMgnuGA=;
+ b=v5Jb7Cd71mISfwwK1Eo1hXye9cp+uQiNw4djr2fV8nGr6O+P3UlyBqVu9+B7PFxg1gmgW0OTnUzk+gyPOAGtXhmllzZMBUxrQCLibCJB3CP86hPg5YKavX5/OunHmoUPiyI5gBlf/R4zPxXnAqL8C5is6Icq+/ANUSgfZTLUIbw=
+Received: from PH8PR07CA0032.namprd07.prod.outlook.com (2603:10b6:510:2cf::6)
+ by SJ1PR10MB6003.namprd10.prod.outlook.com (2603:10b6:a03:45e::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Fri, 27 Feb
+ 2026 15:03:35 +0000
+Received: from CY4PEPF0000E9CD.namprd03.prod.outlook.com
+ (2603:10b6:510:2cf:cafe::12) by PH8PR07CA0032.outlook.office365.com
+ (2603:10b6:510:2cf::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9632.26 via Frontend Transport; Fri,
+ 27 Feb 2026 15:03:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ CY4PEPF0000E9CD.mail.protection.outlook.com (10.167.241.132) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9654.16 via Frontend Transport; Fri, 27 Feb 2026 15:03:33 +0000
+Received: from DLEE206.ent.ti.com (157.170.170.90) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
+ 2026 09:03:27 -0600
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 27 Feb
+ 2026 09:03:26 -0600
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 27 Feb 2026 09:03:26 -0600
+Received: from [10.249.139.123] ([10.249.139.123])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 61RF3KP8227007;
+ Fri, 27 Feb 2026 09:03:21 -0600
+Message-ID: <0980b08b-ef08-4ae5-8656-4b6c211a1680@ti.com>
+Date: Fri, 27 Feb 2026 20:33:19 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HhZVb3sQp9uE+nSI"
-Content-Disposition: inline
-In-Reply-To: <20260227-kfconfig-backspace-v1-1-b8467ef50ebc@armadeus.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/6] 64-bit PCIe for AM64, AM69, J7200, J722S and J784S4
+To: Tom Rini <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <anshuld@ti.com>, <d-gole@ti.com>, <n-francis@ti.com>, 
+ <bb@ti.com>, <jm@ti.com>, <s-k6@ti.com>, <afd@ti.com>, <u-kumar1@ti.com>, 
+ <marek.vasut+renesas@mailbox.org>, <a-dutta@ti.com>,
+ <neil.armstrong@linaro.org>, <semen.protsenko@linaro.org>,
+ <peng.fan@nxp.com>, <george.mccollister@konsulko.com>,
+ <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+References: <20260227115841.333073-1-s-vadapalli@ti.com>
+ <20260227143509.GQ1593142@bill-the-cat>
+Content-Language: en-US
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <20260227143509.GQ1593142@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CD:EE_|SJ1PR10MB6003:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d773048-fad3-490c-f2e9-08de76116017
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|376014|1800799024|34020700016|82310400026; 
+X-Microsoft-Antispam-Message-Info: W15hoxee9mZnD1K58/BvKChwEq9+Lqr4leHFpz96FVolD3Kk1BwE/DphX3xGaSAIyC5u6dV1uvz3GVUR2f6kIN4JtIRKxqY+WMi0cKO2l59bp5kKDfRnEGPX/DsCEMjbY9DIABh2O5jjzuVRzLEa8loPsPnz4sMkIYfeYA54WjeqfPoOPPKJs8Hkl8SXMEwF4DIGxk96hGNlQWHBn5M7QvEI+orfuiXRlyYYjuwyNkABCDtvfQpISptG3VLtGmbUirCKETzoQZTWeH3tFJNRZ8brYqnhVtO/AiX7EpByw1Cdv2c5k+uBtLCWVtZVEVch2WWLyNVCgb2i5xZpYTw6J5E1jqBw3hANfit9qOLAHACKTTbFEBQANr1kcJS0whsXwRNLKtZKV1PrDvb9gcF0bSrYc8csfLm6VafGWCgho+k4RCKKdKD17xS3V0BE5F5ePjcgwOvbjnGpD0zL+dkDCq9bb8iZnL0BhL++glG+EIjSUzOyiG7YUaKo30B3EcGmdcx3P7s9MMLh1N3Eb9eFpsdB/bOiSeqX4eLaiMtOyCAI0fhEWCRexiXp3Dna71FclNvCHMdEuQVGbeUsrgjh50MFVcNDTzfwN04LRqp71aLm/1Er/yHhUXSr4CBTJGhRp3ARK0gJXdgaHESZ/aibNMwyKU253kwwd81TDI6Dj5ru99QbBwAv+miqtr7dsFryVj35chWtpYVFvKDM1lIRQ9qc5yNjfP9r0Bl0+w8q4UiOrtB12yymBfg3t+VeLTCCdW/bJhLnoTGPedolkYeanw==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(1800799024)(34020700016)(82310400026);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: zyUL2Kb6YBSHiWRHEb2aZmOa9qNisLjnHrI/kt6ty+vXvUJ7LanSKAg+L/VRHQ2t4fFY7zQrR0QtzQf4aHM6clO0nMxFzB70q+t003/3CJHdQxoLvIyKO30WSI/kgLhpU1194LyvEACi+v53zhmXxqz3lysG5piOlwLrAJGWzeXwrhxQ9p8LRwh3pnTd6Ro5LT1uaaDHd4XUofb5r2jGFUUeBu02YDY9pqOylu3o41gUR0/CfRylo5CdwOa+Xn2Gj3r46UYNxz0WhIF3ollWK7tfvYj49KDglF6Xwphi3c7Wieupz1bZhKf8NlOnfSMQW7jCYMPggDwj0qPuejHhNId3D581SH7oY9nXwklj04RWtMV1zNVwPAnOUHcfkcWHYst3cAtRqiiFxelYGksnY5F8i6TCUFJ994FCxY5o0auWx+wc9680XQ2uBGbSNoVT
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 15:03:33.1030 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d773048-fad3-490c-f2e9-08de76116017
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CD.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR10MB6003
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,46 +139,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 27/02/26 8:05 PM, Tom Rini wrote:
+> On Fri, Feb 27, 2026 at 05:28:28PM +0530, Siddharth Vadapalli wrote:
+>> Hello,
+>>
+>> This series is based on commit
+>> 437ea9f8be5 Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab
+>> of the master branch of U-Boot.
+>>
+>> Since Linux device-tree has switched to 64-bit Address space for the
+>> PCIe Controllers on TI SoCs, currently, U-Boot needs to support the
+>> same. This series adds support for 64-bit addressing for PCIe along with
+>> enabling Root-Complex mode of operation for AM69 and J784S4 SoCs.
+> 
+> At what tag did the device trees change? Thanks.
+The DT sync with Linux by the following commit dated 30th July 2025 
+changed the PCIe Controller from 32-bit Address Windows to 64-bit 
+Address Windows:
+https://github.com/u-boot/u-boot/commit/ecec23fc9a9f0eb48b761722c492cbbd4bb2e546
 
---HhZVb3sQp9uE+nSI
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I noticed the PCIe Root-Complex failures for TI SoCs in U-Boot just a 
+few days ago. Hence the delay in posting this series to fix the issue.
 
-On Fri, Feb 27, 2026 at 03:48:26PM +0100, S=E9bastien Szymanski wrote:
+The MMU changes are needed for J7200 (support for Root-Complex mode 
+already exists) and AM69, J784S4 (introduced in this series). MMU 
+changes for the other supported SoCs (AM64 and J722S) aren't needed 
+coincidentally since their Address Windows fall in the 'Flash 
+Peripherals' region that is already setup.
 
-> This is in the mainline kernel since v5.1-rc3:
-> 9c38f1f04408 ("kconfig/[mn]conf: handle backspace (^H) key")
->=20
-> Quoting the commit's log:
->=20
-> "
-> Backspace is not working on some terminal emulators which do not send the
-> key code defined by terminfo. Terminals either send '^H' (8) or '^?' (127=
-).
-> But currently only '^?' is handled. Let's also handle '^H' for those
-> terminals.
-> "
->=20
-> Signed-off-by: S=E9bastien Szymanski <sebastien.szymanski@armadeus.com>
+CONFIG_SYS_PCI_64BIT however is needed for all platforms (both those 
+which are already supported and those being introduced by this series).
 
-My only concern here is that we're unintentionally behind on re-syncing
-scripts/kconfig/ with the Linux kernel, and so unless this is critical
-I'd like to defer this in favour of a full re-sync (at least up to 6.1
-which is where the kbuild side is up to currently).
-
---=20
-Tom
-
---HhZVb3sQp9uE+nSI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaGvNAAKCRAr4qD1Cr/k
-CkMXAQDND780667KPMpYne8y0KZJNmoTs3aRCWn5Py6hQ2hQRQD/eSFUt7C/PoJa
-uKQwdLiTrsi1sK4qO1qtYApdj12tFws=
-=SoF7
------END PGP SIGNATURE-----
-
---HhZVb3sQp9uE+nSI--
+Regards,
+Siddharth.
