@@ -4,137 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9206FFEFB70
-	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 17:24:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B29FEFB6E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Feb 2026 17:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5FCA83D1A;
-	Fri, 27 Feb 2026 18:24:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 05C1D83D1A;
+	Fri, 27 Feb 2026 18:39:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="dCVWCZ3R";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Cq2d5Cx3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EC8283E8E; Fri, 27 Feb 2026 18:24:17 +0100 (CET)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 821A883D1A; Fri, 27 Feb 2026 18:39:29 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 123E983CDF
- for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 18:24:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id D23E683CDF
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 18:39:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xoP7HbpGuuPNRE2gM4EE4QT1wxNJZCsLIbleoS/95IgXKkBj36pIGh6pMG4h0bJeEr9eFzOlZdcOceXdAaBF1dDSp+GY3j4Q0/nRdCUihK0llvhyqYufxu11AvalLHeYe2Qp0m0JHKnzieso4Xdm2iFrSaVRcaAl+ouj8quoKDV0/sE6mYy+30sulzH22KxRpDmB6t0x5neHOv9ohTu1S/YUMd5OpSmrmRcZs1y37W8sHlAxJabPqNx0ZLVzfK5WxKJCWnsAx+oM7lD7wAdSKT1de82YRtbmguzSYA344uq84D0yuqolqyiZ9tOKvo4zPF+tU2ebMAVAHF9OiR2Y4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fiYloTphyDJSZ7qkyT5Ajip6wFeuiMnUrTZxWaFtaLY=;
- b=LgKM1W7TTqMIgyrgjxrTWk3QgxK4282EnJTTQfyCtkBlBTeMqWgjZHIK2L72dA+7Uiack70uKsCjLNFiviN3f8BRq0YSzq94ZI4DEvFtCoGAbXuGd4Ej4/gJkvtZAOUWP/WrdSOWgBvbwB5M2Ehp92y3+jM/LcG+ufqEkN5JZBWCB3cl+yfVwualGu6/7nifLqtfpmAA30Lx5Wx8eenQkDcQPifeI67bMYani3fxnabeyWRzQDIq/VGTp4zILyAFo+gD8yKfgvD9MOLjPBrRU6tMtWJuBNoYSbFXJU3xAuodskUsGKSUmA77ET2UzxpIGasFi80105+rO3kGdq0vzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fiYloTphyDJSZ7qkyT5Ajip6wFeuiMnUrTZxWaFtaLY=;
- b=dCVWCZ3R1pT2pxPhKnw99tXhe3Q/1eLwflTJyEzXpm6/v21MDMbHZPH8DS5MRDocA//OU5Z3Up1KBXFDJ710ZH5SIdd8sAjelgfddu+b3A7Msqwmu00ixcAKvBGLvnLoTA/Hwc9xbKXx7G4mhEQQuzaptYYtOKnDqlRWWlX2nXM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by DB8PR04MB6972.eurprd04.prod.outlook.com (2603:10a6:10:11c::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.15; Fri, 27 Feb
- 2026 17:24:13 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.013; Fri, 27 Feb 2026
- 17:24:13 +0000
-Message-ID: <15c6cb6f-e927-4820-8ece-b8283fe0d4e2@cherry.de>
-Date: Fri, 27 Feb 2026 18:23:59 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 01/16] binman: test: Move pack/layout test files to
- test/pack/
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Yannic Moog <y.moog@phytec.de>
-References: <20260226234802.345968-1-sjg@chromium.org>
- <20260226234802.345968-2-sjg@chromium.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260226234802.345968-2-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1P291CA0011.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::8) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-45effa36240so1747082b6e.1
+ for <u-boot@lists.denx.de>; Fri, 27 Feb 2026 09:39:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772213965; x=1772818765; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1srLfxqNiUws/k6FZXFi/Yz+Z0dI00qn1j2xdpf297s=;
+ b=Cq2d5Cx30DER/3I66cwsMBfKM4owcPYpsZ4H9ipubfAMR5bH+FmwvZVRlNi9sU1hOO
+ fCM/iy/Xe6+4Gi8ZYFQV/ALRDzfW1z1kQPv1Kv1uayVVPyUyAkO4A4xkxEcONGo+ffvm
+ +pOuaLZsMe5HFphzZdeX4zrQFJOLWew8yegUQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772213965; x=1772818765;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1srLfxqNiUws/k6FZXFi/Yz+Z0dI00qn1j2xdpf297s=;
+ b=UILCtEizOGCjiQEbEG/8G+Wt4WeI5ARSeKU/XxQciw4eMLZy73+GbBWQrbEsTBSmDs
+ 2pkBrzSKhhVMXK9YddlA0TMgzsUlNqR5NDUpVJJE259noKwjF3fr+8yQaz1o/CQj2M94
+ 8aOXJyJxryPzzQKOcSpmIfdV8CfXkaRJDzJE06IDaIhYr76fGcJuOFT6dOoB5BlNAuZz
+ e834h+W7R0fG33YTPiXi8EMg6MSqKopebCdKto81iysdVoWXfj0V3ayZDyV6XlArstC8
+ A25Kv8qjtqrziZBHJdIgGwkzdsr3S74OcdKeK+DAMAUAY03bygrnUtkJaTxcBy61qNM+
+ d1cQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWexEzGdJNjkNBdnRMyK1hgLQ81fW5VnaxJ1bl8kgnxpBkTCM/6PlfVFHO8g+KIvUgp/dwBSig=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTHID8TTWwuRlda2m1T7c65cBr6HscY60XdyMSw3tVkCa1acZ3
+ L6qdcC+lgO8G89m0M5KXfheJUOdJ+F/gMDUCd2F2aRXNMJBeCZi7JUwGymra5jI3A2o=
+X-Gm-Gg: ATEYQzxfGt6TdzQqvRHqNjIxPrNWO7i283c+KLKq30NoYtl88t2XDjC6LB3wM79bI79
+ DvsA9DeTe+wcOPGQmdJUY/BemsAj6KycxdJKMXwnh4vIh41xeRvPAU3kE39r4gxLBYamulxeWD8
+ jWzpKawWYt6i2E78CWeOWBWLPHQB2/8qQ3mT1eQtgM8tQ+zzIdaqTX9QfchZ5wqLmHursT83ufF
+ tyGJEQfoRwONRw9ENkhPUyVXV9ylZpRGjaLj/AfZxhGK7VAl5/nv3cjZ1kJtruSgDtQE70+G1gA
+ WbKT6HjLZ4YPEqQ6mzhEi3ak5DdBYJghGPGpSV3+rbXubEH4ftJMCLkEg5MVsBd2PrhP65ZwGqk
+ v0ZYioIUmrcxkAcNbAyKvAcZnD8r4gSXoaSN9oZh/xF8r0U4soRmWG0qmsEI41LoCnQT0toi54n
+ 20VJe99Y0nKhMQJKprRD/Qq4bvKU+8x2k76w4Voyu9urWbW0YP170X0ov4m7PCOzSQE1hMDos1W
+ bqYPJyclSGoz2XyIvuVCS+9JrChWdMZSKjz3HahnLF1cwVndv8=
+X-Received: by 2002:a05:6808:f87:b0:450:cc23:98c6 with SMTP id
+ 5614622812f47-464bec615bemr1903619b6e.56.1772213965450; 
+ Fri, 27 Feb 2026 09:39:25 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-464bb352720sm2393797b6e.2.2026.02.27.09.39.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Feb 2026 09:39:24 -0800 (PST)
+Date: Fri, 27 Feb 2026 11:39:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: "Francis, Neha" <n-francis@ti.com>,
+ Stefan Eichenberger <eichest@gmail.com>,
+ Francesco Dolcini <francesco@dolcini.it>,
+ stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
+ emanuele.ghidoli@toradex.com, francesco.dolcini@toradex.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
+ restore
+Message-ID: <20260227173922.GV1593142@bill-the-cat>
+References: <20250314100734.23777-1-eichest@gmail.com>
+ <20260226070502.GA6701@francesco-nb>
+ <20260226142345.GB1593142@bill-the-cat>
+ <20260226160901.GA29510@francesco-nb>
+ <aaB1DifzODCVv4SU@eichest-laptop>
+ <20260226163117.GJ1593142@bill-the-cat>
+ <c8e7db77-5c9f-490c-a5e5-30607fde09aa@ti.com>
+ <34966334-4658-4fe2-8b6f-550969c1f91f@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DB8PR04MB6972:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3df6c240-bc9b-4670-2b1c-08de76250690
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
-X-Microsoft-Antispam-Message-Info: B6Yxmoi54+TWkMNxF/UFykvXF6mV4gbUapIzJtBmvhYJnc+/KQeiyJtALFjOmAzv9DEgBt5bZjAOxrlpiX/zbPUKt+h0f1qZLRXatylAH9ERI5vzltXqEot+7VJWWRgNEjSMXHiaYF85qYfBmoQILD3xa7dm/uaJLCMywE746WeA5Iv8i5xjEcXAYNcSb2cgt4mjoVgcqQJrkZBNFwq5RDCWkz+w0I+esBW84L6QQ/BUwF54luFSiJYC52hQQwgC16smtRrbruupRf850BgKqz2p4CcLwMmVqZUs7gqVZelU45cCqZHdJjTFRQ+57j+TxhmB4YcxY/Ol1YqU4CNx4bOHu6yJvI474V0sAWrcwxP6+rNRwvxYukqe6RcacQ//HMNnOXtI30SWBKikd+zHGQGjcQFz10zKQbVoe/L5Y/GOnUHppZxoRzp0oclOH5LvXgeQqypx9LFJEx7DBY49GdUkv6YazXCcTzDMXs+qxAg/i6kiQdonHGspP+2CmD9lT3iIejJGXp4TgOKjIDCXLQTJXV91ecZCbFPgBsXYT+lIsjb6Av+Eqr26TUL9IElucYAbQL5hLUH8NcrhIgQJI6M0n/7KaQCR+4JXYno50WdGRW0nG3kS10kCUOsCevNQVpnng2WYjSqe363XVNC4SOdOcZHDOH0brFBoLRmu6ymBtsCf1+wegH6NNCXDGTMafzChaRd6XrkEVDqKHi7NGCw9vqV1iV5x9IhzAIbuM2Y=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YjBaR25XdTNDOThLL0kzc1FsT3F2RlN3aVdkYU9udHZjMWRMbGYyd0VQMXZO?=
- =?utf-8?B?dzQ5UTFMak5pMjBaSlNaTlNNQ1VqdjVlSnlUSU5sRWYxdVpQNGJxMll0a2l2?=
- =?utf-8?B?WVMwaGQ2bzJ0aU5FUDBWNCtHL3lKbE4yaEhaMkYzWUFXMWRLbjc3UTFEbHRn?=
- =?utf-8?B?TXdSUmxia0p6RDg4SFlFRVpydDMyTVdCS0Y4SWVXM3pZWFNrYkhzYjRya3hG?=
- =?utf-8?B?OGdvMHVTaElaMlc3bU1iUjlBTTZueDVRNTBJdk5nTjFKZ1REY0tkdVJxUzZQ?=
- =?utf-8?B?NDJxdWhHRlhRbzhBcVIxcTFpK2hnM2dCRnpTeHdYNzVxTjBVeGIrRkZRSHlP?=
- =?utf-8?B?RHY0WmlaYkRVUit1OS85WnBaQjRTeWtkTVpyNEpTcHVMVEhVbURvZFh5Q25G?=
- =?utf-8?B?RUNDckdUOWxydnNsNEZqRGFTK3crR2pBSHZjbVlnSzAvMTRyWmRaWHpVOERQ?=
- =?utf-8?B?KzcrWVZNSWRCSWxscnJmMzRIKzg5MXhLRDNBTWZRL245ZVhsTnpYSXBjQWs1?=
- =?utf-8?B?UzhwaURkOWM4VisvS0YvQ1VuS3VtUlpYSjA0VUdaMTltSnF2N0VwWUpjYkxa?=
- =?utf-8?B?TUlUN2Z2blJBWjRBSDA1eDUvTUpQQ2pKM0lWVFpETFczTmVqOXVwZlJEdFNj?=
- =?utf-8?B?dWtMSUJ6RDlXcTh6ZVk1TWdBUXFzTkIxa3RHdkZPODNsRG52NEZ5Vy9JQTFz?=
- =?utf-8?B?U0V1L2E4U040ZjREQm1PK1VuNytwbnhYL1BnQWEvZXJ4RXc5TWNva3pLK0p5?=
- =?utf-8?B?NE9CUzF1K04zUE5SdVBJMGV1QTZRTXE2SHd0UlA1aWt0bjRXYVZEd24reVpp?=
- =?utf-8?B?OTRXL29URmp3MDQxbktDNTgwMG5tRjlneVlUYlptVUlwV2JvNnptaTNESDJp?=
- =?utf-8?B?Vjdkb2tzaTI2YnpCVkpObmFpNlV0UGJNb0ZaMlVGdndleEdQc1NkY2dSbGZy?=
- =?utf-8?B?bU0rTGlJZ2J2SmUxRmQ4UlVVSWowQWlBZXl4bFpSSVBnc1NjVElGVmpaS1Fo?=
- =?utf-8?B?SmlhNS9lRW9SdEVhL1pBSEo2MzMrdTFlNHNxTktLVXhTWDV6ekxRN0F1Mjh4?=
- =?utf-8?B?aFh2cHI2bFVCTmNjeVlVWXhrWld5bnloK3QzblZGNldjL3BmblVLWGlDeVc3?=
- =?utf-8?B?UGNCV01yVzA3WUxCWCsrKzVuK1g2cDNDc0F4QUVSazBzZ21ZWVRnVEQrOHR0?=
- =?utf-8?B?MlF4Sml2R1Y0MHQxRURaSWVGRW1Dalo2V05IdEF1aTNkM0lkc3B2bUE3d2VM?=
- =?utf-8?B?Q2c0RHp0V3pjdGJyNkpRMHF1ZVJ5UDV0TUIzU2o0VDZrSzhPVzBjWDY2SlAw?=
- =?utf-8?B?V1hOSE1KOWRka2wwbStkdHhWRmJuZTFHb3VOWDdKZCtodEk3OUxtSDlkaTFJ?=
- =?utf-8?B?ZzRnSFRBOFN1VW5CckU3dGpsZk9CMGZCQTZzZmZwZk14cndUMkh5UjNyZW9Y?=
- =?utf-8?B?Z0V3THlUcklVL2czYW1uUWRZelppS3FUMDR3bWNwQ1luSWY2VThueTg4aHZI?=
- =?utf-8?B?aC9QcUZqUkpzNi93RS9sOFdNOHEwTVExMmxNTW5pSzF4ZGRUQ3piTXRvSHIw?=
- =?utf-8?B?NC9wdzU2V3NzeXdRdFZabGtZUS9za3NHRUtBU3hBT0syZElrQ3BUYXEwZStM?=
- =?utf-8?B?UFE5SVlnaTlqU3hBZXczVk9zVlJOckRkTTYyWjZweXVGdi9EbTc1V0VtUHAv?=
- =?utf-8?B?Nm8wYjhkNEtJaWxNY04ycjU1ODdVMThZVFJHdWdKNjVsM3M0Rmd0cEUrQWVj?=
- =?utf-8?B?NldCRVBRMUFST3FLV3FLYnVqK2NkL3k4bjR6MVdWWmtLQkNENVY4YWJRMG1I?=
- =?utf-8?B?azBQQkhYbU9qL2ZwZHc0bk5rWFJLVFBiK0xPNDlHaENHSWJaN0NsWU5TNGpL?=
- =?utf-8?B?a0I4cytWZEVDcTV1RmxrczZLUzEzOVAvTjJvK0NRZ1lua01qalJPdXB1d0kx?=
- =?utf-8?B?dlFiREFxZVZHd2UwbFM0TmcyOE1xNDZWdGM1ejZ0Q29nd0JOZThtNDZ1QVZt?=
- =?utf-8?B?R05tVjZuaStlbHkxWDBZWGNvT0p2UG5GTVQ1RFZBbWE0ZXJDNUpzUDJUOHVY?=
- =?utf-8?B?Ly9VOTl1WCsyb0EzRnExQjVvOHdWQ2Fnekt3VlJlYWo5ZmVCMWlPZ2lHQ0tt?=
- =?utf-8?B?UFd3MU9PbDJYeEZEck1QdjlZRzljOVRrK1dBTnR0SU9ld3dRMU5mSHpsdnhn?=
- =?utf-8?B?OW96WmpLaHJ2NUcwc1Q5MU1jcUlzY3M0SUNYai9ZbG5QRk9MU1luK3loc1hP?=
- =?utf-8?B?VG5XclVUc0hUZ2pGVG5kclBaNHFlNEdJSEtCcGVocVpFcThnVlkyWlpXRGY3?=
- =?utf-8?B?bDNpL1ZmVEtsQjB3THFDVG0xNWd1WnR4MnJLZjgrVHc5d2dmRlNtdz09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3df6c240-bc9b-4670-2b1c-08de76250690
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2026 17:24:13.0454 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kKsy5ziMl9Ts5qHQgxBDvX/YpwJz3Fed21vPu08n0E4MkiR8QaowFeSG+O1x35LX5LKO8PBHB/1W87HKJSgzJc/BYdhyac2W1tM1coOVN3c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6972
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p1G5u38snRIlWCk0"
+Content-Disposition: inline
+In-Reply-To: <34966334-4658-4fe2-8b6f-550969c1f91f@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,18 +111,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 2/27/26 12:47 AM, Simon Glass wrote:
-> From: Simon Glass <simon.glass@canonical.com>
-> 
-> Move about 50 test files related to basic layout, packing, alignment,
-> sections, and image structure into a pack/ subdirectory. Drop the
-> numeric prefixes from the filenames and update all references in
-> ftest.py, entry_test.py, and binman_tests.rst
-> 
+--p1G5u38snRIlWCk0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Fri, Feb 27, 2026 at 11:39:44AM +0100, Emanuele Ghidoli wrote:
+>=20
+>=20
+> On 2/27/26 11:13, Francis, Neha wrote:
+> >=20
+> >=20
+> > On 2/26/2026 10:01 PM, Tom Rini wrote:
+> >> On Thu, Feb 26, 2026 at 05:30:06PM +0100, Stefan Eichenberger wrote:
+> >>> Hi Francesco and Tom,
+> >>>
+> >>> On Thu, Feb 26, 2026 at 05:11:49PM +0100, Francesco Dolcini wrote:
+> >>>> +Emanuele
+> >>>>
+> >>>> Hello Tom,
+> >>>>
+> >>>> On Thu, Feb 26, 2026 at 08:23:45AM -0600, Tom Rini wrote:
+> >>>>> On Thu, Feb 26, 2026 at 08:05:02AM +0100, Francesco Dolcini wrote:
+> >>>>>> Hello Tom,
+> >>>>>>
+> >>>>>> On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrot=
+e:
+> >>>>>>> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+> >>>>>>>
+> >>>>>>> The get_ram_size() function fails to restore the original RAM dat=
+a when
+> >>>>>>> the data cache is enabled. This issue was observed on an AM625 R5=
+ SPL
+> >>>>>>> with 512MB of RAM and is a regression that became visible with
+> >>>>>>> commit bc07851897bd ("board: ti: Pull redundant DDR functions to =
+a common
+> >>>>>>> location and Fixup DDR size when ECC is enabled").
+> >>>>>>>
+> >>>>>>> Observed boot failure messages:
+> >>>>>>>   Warning: Did not detect image signing certificate. Skipping aut=
+hentication to prevent boot failure. This will fail on Security Enforcing(H=
+S-SE) devices
+> >>>>>>>   Authentication passed
+> >>>>>>>   Starting ATF on ARM64 core...
+> >>>>>>>
+> >>>>>>> The system then hangs. This indicates that without a data cache f=
+lush,
+> >>>>>>> data in the cache is not coherent with RAM, preventing the system=
+ from
+> >>>>>>> booting. This was verified by printing the content of this addres=
+s when
+> >>>>>>> the issue occurs.
+> >>>>>>>
+> >>>>>>> Add a data cache flush after each restore operation to resolve th=
+is
+> >>>>>>> issue.
+> >>>>>>>
+> >>>>>>> Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to =
+a common location and Fixup DDR size when ECC is enabled")
+> >>>>>>> Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when c=
+ache is enabled")
+> >>>>>>> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.c=
+om>
+> >>>>>>
+> >>>>>> Tom, can we merge this?
+> >>>>>> This is the last bit to solve the regression reported here,
+> >>>>>> https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
+> >>>>>
+> >>>>> I wasn't happy with this at the time, and Stefan's last email in the
+> >>>>> thread left me with the impression more investigation was needed and
+> >>>>> likely something else was the root cause.
+> >>>>
+> >>>> I believe that this patch is needed.
+> >>>>
+> >>>> On AM62 what is happening is the following.
+> >>>>
+> >>>> We have a cortex-R5 that is the first core booting (there is also a
+> >>>> cortex-m4, but it's not relevant for this discussion).
+> >>>>
+> >>>> It runs from internal memory and it configures the DDR ram
+> >>>>
+> >>>> We load to DDR memory various pieces of firmware (TFA, U-Boot for the
+> >>>> cortex A53, ...)
+> >>>>
+> >>>> We do execute get_ram_size(), that read/write the memory, and it is
+> >>>> supposed to restore it back the original content
+> >>>>
+> >>>> However when we have the cache enabled, we might miss to write back =
+the
+> >>>> original memory content, where the other pieces of firmware are.
+> >>>>
+> >>>> And after that we start the cortex A53, running in DDR, and there the
+> >>>> memory content might not be correct, because there is no cache coher=
+ency
+> >>>> between the cortex-A and the cortex-R. And because of that we have
+> >>>> crashes.
+> >>>>
+> >>>> Stefan: any comment here? Can you help?
+> >>>
+> >>> I think what you wrote summarises the issue well. If I recall correct=
+ly,
+> >>> I "fixed" the issue last time by simply calling get_ram_size() once
+> >>> before enabling the cache. This was in commit 4164289db882e. The SPL
+> >>> then informs U-Boot of the memory size via fdt fixup. However, someth=
+ing
+> >>> has probably changed now (possibly in the R5 SPL), meaning the cache =
+is
+> >>> enabled earlier, so the cache is enabled again when get_ram_size() is
+> >>> called.
+> >>>
+> >>> For the AMP use case, either "get_ram_size" should not be called once
+> >>> the cache is enabled, or a similar patch to the one I proposed is
+> >>> required.
+> >>
+> >> I would lean towards the former if at all possible.
+> >>
+> >=20
+> > Just trying to understand, what is the reasoning behind ensuring get_ra=
+m_size is
+> > not called if cache is not enabled? Wasn't get_ram_size written with the
+> > possibility of cache being enabled (existence of dcache_en logic); then=
+ this
+> > patch is a valid fix right?
+> >=20
+> > In parallel, I do agree we need to have a code analysis w.r.t dram_init=
+, we are
+> > making certain cache and dram calls spuriously making this confusing.
+> >=20
+>=20
+> Hello Tom,
+> I agree with Francis.
+>=20
+> When I proposed commit 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size()
+> when cache is enabled"), I was not considering the presence of other acto=
+rs
+> (other cores, DMA engines, etc.).
+>=20
+> That patch fixes what I had overlooked at the time. We need to restore the
+> actual RAM contents, not only what is perceived by the core executing
+> get_ram_size().
+>=20
+> To me this patch sounds intrinsically correct.
 
-Thanks!
-Quentin
+Alright. Can I please get some Reviewed / Tested by tags? Thanks.
+
+--=20
+Tom
+
+--p1G5u38snRIlWCk0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaHWxgAKCRAr4qD1Cr/k
+ChPFAQDDf0dcw2KIMC0383CVdQpgfhY85twcf09VIBwJZ09vvwD/dL6xTJcukeyt
+L54yuucuJZpc5g4s9tuHyh5jmge6lAU=
+=Xbjq
+-----END PGP SIGNATURE-----
+
+--p1G5u38snRIlWCk0--
