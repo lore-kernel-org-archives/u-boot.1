@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D46811048922
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 01:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7080D1048925
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 01:43:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A18A583E81;
-	Sat, 28 Feb 2026 02:42:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6735F83EF9;
+	Sat, 28 Feb 2026 02:43:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="km0J9j4x";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="aNr1yua6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F5C8801BE; Sat, 28 Feb 2026 02:42:50 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id D3B9983EEF; Sat, 28 Feb 2026 02:42:58 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB2B283E81
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 02:42:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42E6283EEF
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 02:42:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R4U2BPM0JcwM5oNizFcVVQgomhPZQ2zxB+DAFPm7neVspMxk/YjuvfId5GbiakBF1TFKZNYqQRqpL8awMCYicCfGLy7++I96QpsKQFoMme0Bfa8Tkk37QhrQzUUNG3RVLR88LDZZDuSxSuOcI+BjNt7gSsta1yXKg2jyagruUqi/1ITujyKdZjChxB1sBBcn1Se+cRZdJyvpa6c8jvGE8K2pao10XE94xXzfRdNLFqw6ntjd+3Q90T/IoWg3HMssRKDiUHs6EteQ3pUrmPMy7UUrzwuaOkPgZcpALlUeQugf6ra7PfHMsgPJjDF1a5MsMBIptrNJXQo+d9Bhp1/NlQ==
+ b=ulptwuj3sIwnJ6/EwTvOYZ8DiGSvmfL03wrTB2Hn3nKCwB9YdJzBCwqcv6YVb+NYEcVSB4OPRPnCT12e6++8AVvN7MAAXlWXwaDPumDt878qLl8zDDNoyXVnxlXbo/gxGparJszH5CJGw15Rub8mo4C6VJS3mWimCJ9IuWLZSXaxLYe98YfmjKbCmYQsjqMcMoFFNn9lPKtC2P1AguNQyf3bOwo71cLY2e+GxqNurlHutvoTUc3GBo7O+n/qbnud01b4b91XVW7LXu5/biGg4cYOwrEF8n2GeKu8S43F7g/JjTj+FlCrTGa/VP1b570S+3NtRxY1o/jd1BQY0jOwcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ih/rtWFpWo+qG+5Gc0VXIZ+VOAtxeN5Oq0dAVhf20Hw=;
- b=yZ5/fdKz6HW55qAE4ssz3D+EozIJhYyONy2UNd8XN629sST3pvxXDBkaUQ+ok3wZyZfXIY9KtGc7zuqsUlu9NX+dUKgidzrtsyMqNSA+DTfCM9lYGt0MtlgON8YNzAzwFA7o5Nt19fzsNA6vlv3VnC5zHmmpsdNTcEfAqBplfDu+rxdRRndYLwm/6CZuappfaRmbhbPTRWyCqE8hUChEIsSzY5FNIOT4B6Pwst5F9GIHm+uGHzicRv4IgvLA+cDbWxFrMytJ//Va39FT4MWJxB1sX0bKKG36ws2WBAtcRG/RqoBZBBerwXwGgPOXs7jkbU4CFzJSn7vCNTR2AT197g==
+ bh=jooZTkGYL0HyEvUYxNg94UbLq2Z9wCIb23sbVwgynKA=;
+ b=ZsPEjW4UIQb9WiHubxNcpOhxweKpf8lY0S6Kso3y9EL99cpsf38jK1BWWwqFRUkFKBAqbsWmgtIhh5sIqr7mRkHOHWAPYdBYXi4CuaAOyu1eu8N3LrK/TB7MyZSTCrTyD/vJ0N9I6RfpwmjWbwqv5hwzqllcVgJI5xjWvKpSikg9Wbsjhjz9FRfXZ7jE+nFJUvx43/jX4AVDr6rWz8o1Gli/GR4SflYZoYhctqalyejdGo0pTB4QGaCfq1AFOSdqDeZyRE2/a+s3w7iT8Yq0X+GSVkRPsw0bKQ8VDEo70h912ndi9W4KOdhVLJTt7Q4/dFK9PrfCX57OKLAr7Hezdw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ih/rtWFpWo+qG+5Gc0VXIZ+VOAtxeN5Oq0dAVhf20Hw=;
- b=km0J9j4xmbIbQIR1Xae3z2Ka2nMSfj5gK3rtgUTaXKHXIgZmdyEEDbCdtgDJrDXeXQednCSLMKJXKh7NaeRnbgEWeX3k22rscqoNxVEWm3yyMpXbSVG1ldBHS71lTIfFiwPHa/HZESHWTLKM1LJaCCTjLOkUUFIupV6Lu0uyKht3YX7DzY6uIudQp2xThZif9BaINQ2k1szSZTzmV0Bta40KV5vA5kfOthp4ssgqnhmzSwBoiNpRasHTJ5klk60UzXxjVS/IbUw8QIqy6e+sKaAY6R1DZg+7fxxTQq9eed65MTWF4Pz3Lwl0dSIxauUV5BfVr3TueHBWiYKesP1ofg==
+ bh=jooZTkGYL0HyEvUYxNg94UbLq2Z9wCIb23sbVwgynKA=;
+ b=aNr1yua6SIIcONLdjF0aq7RQPNr0lEihLY3pt14n/iDYjdp9RnOT6WCsOpXqdicUMjuyjsoEXrY+XAlu85utumw61oQAN5mhGZlw0ml3H/Qh0f834AetOjsGrHnatFdEkG32/tEvKzcv4DmpC+yaRHaUYF39LgB0O0acyt5qrST1emVf6k/1vL1uMz4adDkNh+s5vDwuPUnz14Bw64Ncb0HvO2iG049gZJs0GRyiBRMTN2eKF9H3xNyKXj7YK6jX+jM4CaLWjUEgxLNcSehz+Xpd1udTKFyaESzE5gXFRywvgACjZb+Hygf3ew5uKnpJe0wwQ6JAcda1Cgc/qpjROg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by MI3PR04MB12440.eurprd04.prod.outlook.com (2603:10a6:290:75::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.16; Sat, 28 Feb
- 2026 01:42:46 +0000
+ 2026 01:42:54 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::cf3:c5b0:7a0c:d11b%5]) with mapi id 15.20.9654.014; Sat, 28 Feb 2026
- 01:42:46 +0000
+ 01:42:54 +0000
 From: alice.guo@oss.nxp.com
-Date: Sat, 28 Feb 2026 08:22:19 +0800
-Subject: [PATCH v2 01/13] imx9: scmi: Get DDR size through SM SCMI API
+Date: Sat, 28 Feb 2026 08:22:20 +0800
+Subject: [PATCH v2 02/13] imx95/imx94: Remove board_phys_sdram_size from
+ each board
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260228-imx952-v1-1-0a360e7e8cb7@nxp.com>
+Message-Id: <20260228-imx952-v1-2-0a360e7e8cb7@nxp.com>
 References: <20260228-imx952-v1-0-0a360e7e8cb7@nxp.com>
 In-Reply-To: <20260228-imx952-v1-0-0a360e7e8cb7@nxp.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
@@ -89,66 +90,66 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|MI3PR04MB12440:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b1a61b7-090e-400b-ed81-08de766aac05
+X-MS-Office365-Filtering-Correlation-Id: 1df85e95-a39d-496d-4937-08de766ab0d5
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|376014|52116014|1800799024|366016|19092799006|38350700014;
-X-Microsoft-Antispam-Message-Info: 0czuTRo7xUSjdfYSDuIY7wB4sdtn+eGX1BWZkG64nkhEAGW3cWxvh2bl8fyjdo8Ri8lQZPxGg4gZE/P3GEYI3ajmDyeJB0DnKZmzKrI8EyDXfajHkTwxzY5fOtBpYB9FxyYG0tpgUVyHmAn+Vouyc9gOYY7eh+W1IvkqMHfVTAvN8nk6L9wiFqCs8lfs1IAKQqZo1W0h7njka9xp6Y9VizSYymEYmK2Khq+ZhrGpOBzHFXUXbb5swNhqFSASReBhWwpIp2VkGj4vNtGhmAMqmlE35YvM+G51Iq3GilgEvqJU/z5OmI0lbRps00Bdw41YyKmtnQcKpnVzjwS4qeaIJQCAytAoxO74azlmPuWk4xMzHRGQtsvPPP9e5u8duF26HfR4XhZfY2hHCLsFxCy3OmJ4fsWsokFZQ5jr95pZe/kBg0Q6kXny74OlTZvA+UZM6YmwdunbrYAAqyQfULCdB9JwtbPV8YEnejDsJTya6MirNAWqB9NziyY0LtKQ8xOEhitpV9f2AqKi5KqZqwIf33aKrUV+KqqosZ1LwNEdWbOK+rE9ieOG/oiK4mRklMIXq+xwry8NBX6gWfVqhp0BDHJ38SyWfFzRArf+nW20mW3E2NKOmx2hqah+clod9AIbLZctBdSvs02zjMD5FU16VzdL+oiAdXt/PbIcFaDGL1MCuW86924Or09tAoSeQJ/azUGE7/1DajboIzZkn3wwdz3CysWlQlM6LkTP14bXczjPnlN5quBrwrOd30wKGDfPAfSLgE4zLmlZaIF4jKLi4QACtmesRCQ42pd8lqmE4+o=
+X-Microsoft-Antispam-Message-Info: rnowICYTVW60OniMT3rW1l9D1dTbSeWPnfzV82jrlL8M60WDRR7lyMPKeaSd78USlOM3LGYbUF3zwqKF0gylgYBf0eu2rwnjBCDiw3869UaW8PtEEdL5Og7j+L0ELGeUBzR1pYemzadGC0Hr+5st5pFam0ZPMZSamSXwch5NO0t5ZFORFeODqZvo8PnvZCeDVzN2AkYPGqwEBVjpWmdLJEtxsFdD5iwEHpsD6IXpLctDwDu3tKbw+DEr+ggO0ld+XKRiPIQZerJbktEm7YpLwNoCykMA7myZZ0Igc3epMBQXcnxojVyS++xjVjjPpDzWBw2rCDjIwINJg804iWTApcw+Tudk0RLYL2y8oFtCF3zDsZnJb7yPEpoRNtMdmhtxyslYB2uUx5h7/l+SZeZTc88r8jl1q7MJ3axQEkVP/8VIEOcD5s/FsP6L309S4h2ZI5mcTjy2qizLioymu+wa0m3EYTWztDzNz33jT3Lodbuuh+JFbRENF/osc8ZDIK0nGIUteUCZb8fqSNDLdsoHqrSSVnhbxNFLXQ+eQNxBNozRxK2vKig2XMjqjiwV/8WZ9QuZxA7g4TDQA7h3rg0vZLe57nFtD0Ajjd3Qq9IGCg3+zFZzo8W7I0ARjdUbruzRW8YyreLTIlVCwGoousZ4jcEeF8RNczQwJKgIXPgtsOwPxZe8RoCYM4FOuRxuVIe7+MoIG07zPMIlzLolOhOKBrDxEMp5HO+Il5PCMnXIYNTZsvGK0V3T7OjhWvjhNPDPFv5/gswxPRo3hqCt7ExsfPw3JUh1lEIymNsrMnyXZG8=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(376014)(52116014)(1800799024)(366016)(19092799006)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aU8xTU5GTmZNbk1mSXNQQXRkSXhyY21wMkdFNG93UjJjYW8wSG9UYTVUTlUz?=
- =?utf-8?B?UWUzMGdkdTV4TmhhdFczVmVQTWd4UjB3NVBlLytZQXBHNXRtejdzL1hGMmxv?=
- =?utf-8?B?blUxMmFqVUZBYWZZcm41d3d1M1d3QUpCb2pibUdOZkhqQk1MWFc5ZUIzSHhy?=
- =?utf-8?B?Q01RenU1Vm1oTEpybjJFWmlaU3ZER3FWNnNJV0xrZXNXNm9ZZDZCZWhKbDVp?=
- =?utf-8?B?M3dzSWh2TkdDMTVWRWQrOGdkVmZ3SGVlQnppWE9JQ0sza0hJcVluZkZRQlFL?=
- =?utf-8?B?RjNSTkFkamo0dXcxM0JtQzkwY2I3UGkzb1NDb3lDbVJCdWhaRW9SUEFRQjcz?=
- =?utf-8?B?TDlZbmM3OTI4aFU2SGF4YWdUSjhFUVhIazJVVWVuUnpMZVhtcGlTREtib0Ra?=
- =?utf-8?B?WGU3VkwwRWcxZU8wWWdlUWh2TmV2bTVPeCs4TXFQTzdwRythdk1PMk1ONFU0?=
- =?utf-8?B?RGcyYnFHcmlDZEsvaVY0eG5wVXlHUmVyTUZRSzFXTERZa05JNFgvaW1lYS8y?=
- =?utf-8?B?V1YvSnFBaFkzNVZDRzlwZGFtNkFUeW12YW9KUGtKNkptd0VMbDB4dG9iYkJD?=
- =?utf-8?B?WC8zdi9RNEdMclA0QnlkQkdIUXozUFllK3k5eUJqaDBmcFEvWXNLQWJWL2pw?=
- =?utf-8?B?VllOY2FBcnlUaWRhOUkwU1RJd1hIT3JibFRoVTdHVWJleHhnY3NMcjdvZDlS?=
- =?utf-8?B?dVl2VGxZelVielZncXl6RmVhTC9QYWtsQ0VNemNvTnlIWlR2UVcySzMwTmJ2?=
- =?utf-8?B?Qm4zYW1JSmR0dEd6akNVYVZwci92WURoRzRaTEZOcXlLeXN6UG93OHd6WjRr?=
- =?utf-8?B?aUlrRFhYcDRtR2swMElDd3c4T1FQQ01Pd3VOUUFQY2JQS0pTZGxwNmlVREN6?=
- =?utf-8?B?ZkR4ZGcxZWMxUEZmaWZZVEFmWDdNNi9YMFFKcCtjWE95a2hVN0N5U1RPRTl3?=
- =?utf-8?B?Wm9OdUJjU0kvQnZRRW50YmRtcWVUVG5uSUQwdW5UNkxOczlxdVNjaThtN240?=
- =?utf-8?B?bGpsa05sOE5ldmFzWkN2K250eWc1UDVuUVFob0NxdEx6dndHUTVndVFwQ3l5?=
- =?utf-8?B?NjJ2TUxXbXZBQnhVdlpTbW43TGVrUDh1Q0FHRUpFRnhSazkzQ3dEc3FMZ1dQ?=
- =?utf-8?B?ZXBMR1hPWHpsU0U5N3BVUjY3eDZYNEVKUW1DY3BkNmZlZy9RTDc4MHQ5dWs4?=
- =?utf-8?B?RW9mRDBHckgzeGtwSWpIbVRJdm1IL0xKNjZsQ2w4ZWdqVUE2R1pROU5VUWhJ?=
- =?utf-8?B?ZkRMYm5PMGRtVStzY1pieHVDbThxelUrdmVRT05NcWZheWZnUS9FVmhlNGQr?=
- =?utf-8?B?cHlLektNaUpyb3A5UlErYTVsdHBnd3h4Qi9HRHh3NmVSNnRpR1JXUGs2SDBB?=
- =?utf-8?B?VFdNa2V6VjdTanN5MjhWY3BYbnBaSFYvQkgyemJscm14clhvcmRYZjFFSmZJ?=
- =?utf-8?B?Lzc0cE52aXdZTllHWVZJcHQzUGhmSmk1Tm5QMkNrT1IyYnA3a0haeUhWRkhC?=
- =?utf-8?B?MTBWQjBlUWoyV0tYSG9FY1F4KzVNRlFwVEpIWFVIS3pjb3gxamlzaFM0RERF?=
- =?utf-8?B?akVoMjVZV2M5eitGTm1ORnFodStuNmNpbkxUSXZJU3g4Y3J2MzhjNXFhWmJF?=
- =?utf-8?B?emJjc2poQVNHdEhkaFk4SmJ6d1RVZUVzRnhKOXdVYUg3eE9vNHRaQ3pHV0xv?=
- =?utf-8?B?MXcxMnYzSWhxSUxLWlhjUjgvcktzbGZpSmxvT0lvSG5kaWJwWW9IZEtGMlky?=
- =?utf-8?B?Q2s3aDdTTDRIYXNMQXpRSlBLRDl4cWE3NTJuMFdyTTl6WC9nUG5VZXN2eFdS?=
- =?utf-8?B?eTViUTJhS3d2bVl4cnhVd2ZheGpwck1FemZ2UEsvT01MTUdFT2FwaDNpSkVK?=
- =?utf-8?B?SHZieW9PbHplcFJGemNpQlVCMy9YZExDM3Yyekt1NWJob1ZhK3RMWnVpb3hJ?=
- =?utf-8?B?cFF5V0UwUHZaRlg4TW9PZmJ6aGVlOU9SWlRJczZGNDRUNWh1Y3c1QkFqWW04?=
- =?utf-8?B?L1k0UG1Ta2VYQWMrdWlvbVR3bDUwSjhiemR4cVU5Y1Bwd3FLMHZ4SjdkQitJ?=
- =?utf-8?B?RWpzQi9KL3ovdEJlZ0pKVlVEM05pYlhWS01FZ3RVZWdsL25tVzFhTFA1L1Np?=
- =?utf-8?B?OHBUdEI4V3Y4V2kzMFY3QnQ2RFIzeDBIY1Y4eFFyVlBmMlNJcUJ0eHNvcVhy?=
- =?utf-8?B?Q3VkQ3hHRjdZRHNFOW5jUlg3UnMzNWxXUEFkRFV4dlNrazBhTGRwSlh1bHk4?=
- =?utf-8?B?Z01mclRLcTVadXU5ZDNIbTMrMlZUdEdmQXVJMU9UdU1uckwrS0IwbVJLa2pz?=
- =?utf-8?B?Rk41R1FWTTJ4d2h0MkJhenVsQk5ndytKcEpSOXBRcHdZU0QvenU1UT09?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MmJDaVRITzFuWU1ybld3WkxFd01GU0RyQWdqSUsvQU5WRFFRUFBwWTFnTVlk?=
+ =?utf-8?B?ZlJRVUVDQUd2QkhERWNLakNFVkdvMXFRUVNwNEVaZFZmUUZuc1hqSDd1TTcw?=
+ =?utf-8?B?U3E3eUZ5RzV5THU1NDF5SUVjSmpGc0tHMUdaVjRlV1lwSG4rek0xaDFPZVlo?=
+ =?utf-8?B?K1lCMUw1UUVnaytzY3VmZTV1enVUcVF6L1lSNWxxWG4rY00vYUFmL2RhRmdz?=
+ =?utf-8?B?bE4razZSQWtkZmhsTVhWOGp1WHA0M0hjNk5kN0lxTjB1NExFdmpHRXpEL1Iy?=
+ =?utf-8?B?Yk9hYllLVTJqb0J0MU8vQWMyNDFkS0Uzb2l3VXEwdHMwdnhidFhpL3JpcG1n?=
+ =?utf-8?B?VjZSdGcyNXFGYXQ4Y1ZnNllXVWlUWVg1VVJlaHdScU1VbjBFWjAveU16RzR5?=
+ =?utf-8?B?SEdBdXhwVDRxbmVkaStOL1hUQUR6YU9qbjNWOVhzdFhpM3dHUmFYM1hVQnFm?=
+ =?utf-8?B?aWtYcFdrZmZIb3Bsdis1akptcXlJNVdZRnR0ZmlCRHlkL2RnQWl6eU5nSWtx?=
+ =?utf-8?B?ckMvemNYWDJKaTg1dXJzOS9HYnNMNi8vUDA2RGd0OFoxdHhWUWt1NnNCSjhs?=
+ =?utf-8?B?dHQrU1FlbE1rejNNRUpsMlk4N3Vac3lMT2tMTFB4SGpvSlBZNzMxdHppRFpW?=
+ =?utf-8?B?SjhIVXhxYTA1QzdTVk5sMks3TWVnbitjQVFwejhEbVJwc0RyWG1UbzAxN25B?=
+ =?utf-8?B?ZWlsb2NhcDFSTEJGdTZIV2JJSTlSNnJnQmZOY3RhdHpIUlpTZDBtNndzbE1a?=
+ =?utf-8?B?SDJCUkQxMmRZMndyMFNaNFZVdTV2NU50UWltM2c5RHRNUzJNZWlpNTF5NlRZ?=
+ =?utf-8?B?bUtHNTVGcXQ3QW1vZGxDUXlOZmg0U2paNVZSWkk2NS8zZGUxczRtOTV5T0dl?=
+ =?utf-8?B?cFdsUEN5YUFXMjIyenB3RFlwdDg5T2ZNTWc0V3BURzJQQTBKS2o0T2Q2bmJC?=
+ =?utf-8?B?RENNdDJoR2JZaW1qd2FNVlJyT0xxNHo0eGVKeEI2YktoejlXTkFENHg5dnVm?=
+ =?utf-8?B?YWhrR0FWZ1FXY0NGRzdkSmlldDVkYytoRVA5T0UzcFNFODRjQWg5cGF0MUYw?=
+ =?utf-8?B?TG9YcFFTTjdRaHZKU2RQcE5HeURzN2dmQVo3ZmF1UlVDY29EdGRzR3lnMWEy?=
+ =?utf-8?B?T3B1L0RKQWVuVXl5U1BVOE81aE93UlUvd1A2aENwSW1HSVc5bkpUajZ2TGNV?=
+ =?utf-8?B?YXNnd0RqYWhqT1V5K2pzeFpMUnAwem5NTUUzYXl6T3ZQa21OYWFuc203WDBj?=
+ =?utf-8?B?cmFDdFRuMjZnM1ZOcHNXQXNnZnFqaHBERmNhamxjSkN0STUvNTVXbXBlU1F0?=
+ =?utf-8?B?Q3gzaE5TdUVYbUlUT0NOR3h3ZG5YVWl1OTBpaXVDSFFuKzYwb1hUbitZejEy?=
+ =?utf-8?B?enFXQkYyNUlYWWVJWXFiYUQwNk92N2ZXNUhhb2R0SlQ5TUlYSXZrUUt0a0Jl?=
+ =?utf-8?B?c2NSQ3JzeW1NekNzZklLYTZQT3dYbnJVZmx1Q1hlVDMxbm5EQ0VLdWpkSGhZ?=
+ =?utf-8?B?M2d6NktBME1tR1JlT2VUSEdWaVRhL2lSWnY5aEIyNzNsdzQ5VlowUUdDVXBn?=
+ =?utf-8?B?V0lLVDkzakNxbGpsN2dpWmVjTmZxaERqQW9qcURxa0pRMzNnY2w2aUx3Qnhk?=
+ =?utf-8?B?SytqaTVpRFlwbXhINXplQTdsRXZtUHVSKzJFRnJOVktMSEV0STNId1YrY3hM?=
+ =?utf-8?B?V0d0WktXU1NVSmFSWnV3VWNkYXh4Q05URG0rYkFtRlViVHZFejFpTDg2MnJo?=
+ =?utf-8?B?TlB6OEloU0pBbEVocjJxTkUvTmtxY2JIaHlEOW4yVUxXYnZLSVJIUnRjUzZ3?=
+ =?utf-8?B?RWRpSmJaaUVjUzdjRkZTK0NVdmNKQlEwOGZnNTMzMjViV3hlcFRoRjhrakJ0?=
+ =?utf-8?B?amxMcGlyemJralhaMlJxM3BNV3EvOFdYUG5pV1drL1FGN3RvR1hFSWlvTzhW?=
+ =?utf-8?B?UG5PMkN2WmpDSVUyNE5xYnVERXJtSGphSzIwWUZZQ3hTWkIvNEhPcnJmQ0E5?=
+ =?utf-8?B?NDlSR2pPTEhoR1lQMjF1UTNFdVlPemxKVWY5ckF6T2Zub1ZySC9VSVRNV1k4?=
+ =?utf-8?B?MUZnaFp2b1JBYXpsUVQwdTdFTU9WaC9GOWQrSTZOdUszZkhMdll6YlcvNXhu?=
+ =?utf-8?B?MWswNFczK2tzd0xjWjhsRkVSelBoQkRDNFR3bFpkMEJPSmswZ2ZyVmFKQitZ?=
+ =?utf-8?B?LzVQM2tZRlZReTRDNCtUR0E1TkpxWkRLdm5zZEhzRDhaTWJPYVNQazRhTndC?=
+ =?utf-8?B?S01JS0VuemtpVzdwcEcwRDBQMlJQdno0TjRQMmZNNWlKN2FoSXFtL25NWnZ1?=
+ =?utf-8?B?NjlhZFBUU1ZxZVhxdmtDcXNEU1RYQjI5VGtKaWtJamRFNFVSUWdkdz09?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b1a61b7-090e-400b-ed81-08de766aac05
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1df85e95-a39d-496d-4937-08de766ab0d5
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2026 01:42:45.9273 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2026 01:42:54.0654 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qN6fHaXlF1R8UrXDclElSEA6K5ZhkQppgLBf45ZntsmW1+l8+/GppUH+l9Zl1NyVdciCk51Z1SIU/aubua8dWw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7ojm7P9wKrbS9UcPUBzxsYXTh8OglkZ9KGQsjDDyLTlHzm5711j4OjnVD0XLWxWJzBBuK4EjcUTMif7IrDN5Sg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MI3PR04MB12440
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -168,190 +169,50 @@ X-Virus-Status: Clean
 
 From: Ye Li <ye.li@nxp.com>
 
-System Manager(SM) has implemented the MISC protocol to retrieve DDR
-information. Using this API, U-Boot can obtain the DDR size dynamically
-instead of relying on static configuration macros.
+Change to use default board_phys_sdram_size implementation in soc.c,
+which will call SM API to get DDR size.
 
-This change addresses the DDR ECC enabled case, where 1/8 of the total
-DDR size is reserved for ECC data. The scmi_misc_ddrinfo() returns the
-DDR size with EEC overhead already deducted.
-
-Implementation details:
-- Query the DDR size via scmi_misc_ddrinfo()
-- Replace direct REG_DDR_CS[0,1]_BNDS register reads with SCMI call
-- Switch from PHYS_SDRAM[x]_SIZE macros to runtime detection
-- Secure memory size is set to 2GB (0x80000000)
-- For backward compatibility with older SM firmware, fall back to
-  static PHYS_SDRAM[x]_SIZE configuration if the SCMI call fails
+If board has special implementation for DDR size, then board_phys_sdram_size
+could be implemented in board file to override the default one in soc.c.
 
 Signed-off-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 ---
- arch/arm/include/asm/mach-imx/sys_proto.h | 37 +++++++++++++++
- arch/arm/mach-imx/imx9/scmi/soc.c         | 75 +++++++++++++++++++++++++------
- include/scmi_protocols.h                  |  3 +-
- 3 files changed, 100 insertions(+), 15 deletions(-)
+ board/nxp/imx94_evk/imx94_evk.c | 7 -------
+ board/nxp/imx95_evk/imx95_evk.c | 7 -------
+ 2 files changed, 14 deletions(-)
 
-diff --git a/arch/arm/include/asm/mach-imx/sys_proto.h b/arch/arm/include/asm/mach-imx/sys_proto.h
-index 46da7a1eff5..13857b921a0 100644
---- a/arch/arm/include/asm/mach-imx/sys_proto.h
-+++ b/arch/arm/include/asm/mach-imx/sys_proto.h
-@@ -254,6 +254,43 @@ struct scmi_rom_passover_get_out {
- 	u32 passover[(sizeof(rom_passover_t) + 8) / 4];
- };
+diff --git a/board/nxp/imx94_evk/imx94_evk.c b/board/nxp/imx94_evk/imx94_evk.c
+index 2aeb21c1de7..4731b79b55d 100644
+--- a/board/nxp/imx94_evk/imx94_evk.c
++++ b/board/nxp/imx94_evk/imx94_evk.c
+@@ -26,10 +26,3 @@ int board_late_init(void)
  
-+/**
-+ * struct scmi_ddr_info_out - Get DDR memory region info
-+ * @status: Error code
-+ * @attributes: Region attributes:
-+ *              Bit[31] ECC enable.
-+ *              Set to 1 if ECC enabled.
-+ *              Set to 0 if ECC disabled or not configured.
-+ *              Bits[30:18] Reserved, must be zero.
-+ *              Bits[17:16] Number of DDR memory regions.
-+ *              Bits[15:11] Reserved, must be zero.
-+ *              Bits[10:8] Width.
-+ *              Bus width is 16 << this field.
-+ *              So 0=16, 1=32, 2=64, etc.
-+ *              Bits[7:5] Reserved, must be zero.
-+ *              Bits[4:0] DDR type.
-+ *              Set to 0 if LPDDR5.
-+ *              Set to 1 if LPDDR5X.
-+ *              Set to 2 if LPDDR4.
-+ *              Set to 3 if LPDDR4X
-+ * @mts: DDR speed in megatransfers per second
-+ * @startlow: The lower 32 bits of the physical start address of the region
-+ * @starthigh: The upper 32 bits of the physical start address of the region
-+ * @endlow: The lower 32 bits of the physical end address of the region. This
-+ *          excludes any DDR used to store ECC data
-+ * @endhigh: The upper 32 bits of the physical end address of the region. This
-+ *           excludes any DDR used to store ECC data
-+ */
-+struct scmi_ddr_info_out {
-+	s32 status;
-+	u32 attributes;
-+	u32 mts;
-+	u32 startlow;
-+	u32 starthigh;
-+	u32 endlow;
-+	u32 endhigh;
-+};
-+
- #endif
- 
- /* For i.MX ULP */
-diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
-index c1458ccca3c..2ac2a93e796 100644
---- a/arch/arm/mach-imx/imx9/scmi/soc.c
-+++ b/arch/arm/mach-imx/imx9/scmi/soc.c
-@@ -58,6 +58,34 @@ uint32_t scmi_get_rom_data(rom_passover_t *rom_data)
  	return 0;
  }
- 
-+int scmi_misc_ddrinfo(u32 ddrc_id, struct scmi_ddr_info_out *out)
-+{
-+	u32 in = ddrc_id;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_IMX_MISC,
-+		.message_id = SCMI_MISC_DDR_INFO_GET,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)out,
-+		.out_msg_sz = sizeof(*out),
-+	};
-+	int ret;
-+	struct udevice *dev;
-+
-+	ret = uclass_get_device_by_name(UCLASS_CLK, "protocol@14", &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret != 0 || out->status != 0) {
-+		printf("Failed to get ddr cfg, scmi_err = %d\n",
-+		       out->status);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- #if IS_ENABLED(CONFIG_ENV_IS_IN_MMC)
- __weak int board_mmc_get_env_dev(int devno)
- {
-@@ -335,25 +363,44 @@ void enable_caches(void)
- 
- __weak int board_phys_sdram_size(phys_size_t *size)
- {
-+	struct scmi_ddr_info_out ddr_info = {0};
-+	int ret;
-+	u32 ddrc_id = 0, ddrc_num = 1;
- 	phys_size_t start, end;
--	phys_size_t val;
- 
- 	if (!size)
- 		return -EINVAL;
- 
--	val = readl(REG_DDR_CS0_BNDS);
--	start = (val >> 16) << 24;
--	end   = (val & 0xFFFF);
--	end   = end ? end + 1 : 0;
--	end   = end << 24;
--	*size = end - start;
 -
--	val = readl(REG_DDR_CS1_BNDS);
--	start = (val >> 16) << 24;
--	end   = (val & 0xFFFF);
--	end   = end ? end + 1 : 0;
--	end   = end << 24;
--	*size += end - start;
-+	*size = 0;
-+	do {
-+		ret = scmi_misc_ddrinfo(ddrc_id++, &ddr_info);
-+		if (ret) {
-+			/* if get DDR info failed, fall to default config */
-+			*size = PHYS_SDRAM_SIZE;
-+#ifdef PHYS_SDRAM_2_SIZE
-+			*size += PHYS_SDRAM_2_SIZE;
-+#endif
-+			return 0;
-+		} else {
-+			ddrc_num = ((ddr_info.attributes >> 16) & 0x3);
-+			start = ddr_info.starthigh;
-+			start <<= 32;
-+			start += ddr_info.startlow;
-+
-+			end = ddr_info.endhigh;
-+			end <<= 32;
-+			end += ddr_info.endlow;
-+
-+			*size += end + 1 - start;
-+
-+			debug("ddr info attr 0x%x, start 0x%x 0x%x, end 0x%x 0x%x, mts %u\n",
-+			      ddr_info.attributes, ddr_info.starthigh, ddr_info.startlow,
-+			      ddr_info.endhigh, ddr_info.endlow, ddr_info.mts);
-+		}
-+	} while (ddrc_id < ddrc_num);
-+
-+	/* SM reports total DDR size, need remove secure memory */
-+	*size -= PHYS_SDRAM - 0x80000000;
+-int board_phys_sdram_size(phys_size_t *size)
+-{
+-	*size = PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE;
+-
+-	return 0;
+-}
+diff --git a/board/nxp/imx95_evk/imx95_evk.c b/board/nxp/imx95_evk/imx95_evk.c
+index 620a69b53e5..99a37e0593f 100644
+--- a/board/nxp/imx95_evk/imx95_evk.c
++++ b/board/nxp/imx95_evk/imx95_evk.c
+@@ -14,10 +14,3 @@ int board_late_init(void)
  
  	return 0;
  }
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index ecab021b472..555ffa0a61b 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -54,7 +54,8 @@ enum scmi_discovery_id {
- };
- 
- enum scmi_imx_misc_message_id {
--	SCMI_MISC_ROM_PASSOVER_GET = 0x7
-+	SCMI_MISC_ROM_PASSOVER_GET = 0x7,
-+	SCMI_MISC_DDR_INFO_GET = 0x22,
- };
- 
- /*
+-
+-int board_phys_sdram_size(phys_size_t *size)
+-{
+-	*size = PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE;
+-
+-	return 0;
+-}
 
 -- 
 2.43.0
