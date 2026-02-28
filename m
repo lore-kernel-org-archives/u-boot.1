@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBDA8FEE4EE
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBFDFFEE4EE
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:24:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65A1283F39;
-	Sat, 28 Feb 2026 19:23:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AE62B83F53;
+	Sat, 28 Feb 2026 19:23:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B7YaYnHc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CL2yQmuh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26C1283CDF; Sat, 28 Feb 2026 19:23:32 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id F37EE83F20; Sat, 28 Feb 2026 19:23:34 +0100 (CET)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBC4683F2D
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD7583F2D
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-899ee491af3so1967376d6.1
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:29 -0800 (PST)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-506a019a7f3so40105201cf.3
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772303008; x=1772907808; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772303011; x=1772907811; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aqRBRhuTrQNzxSNFkExxNBJqVl5SIf0PVIBQrpckXic=;
- b=B7YaYnHcqLNCNaUzZBx845ksG8RlkJfEUUo7csnOJaQnJzPBB1TDi9at+34EralmDv
- /WAA9CUh7BrZSnfoofMCh0hs7ebU9MPrJ+J4049VK0MIi0fZ4qlYrxeMfL3wN8nvAvLW
- fsMY/mjGGJOqV9rCGE8/SV7t6xHZxqtVgmEQo=
+ bh=AbSPbayxnzwqrPANUf/rz4pVcO1SzIRJ9asVAgOndoA=;
+ b=CL2yQmuhfe0J30A100ERnbKjX4OvfKsbpdJlNXzWz6511TnqQsPp65aM/DeDmf7+f+
+ WvygXZ/zWS0uzUMgDGv8sHEXi6WGSxwAxDdXgdA94jhDjOQLHa0KhOonYuKr5JZuGRxx
+ 6OzcgQbY7p0VnES1OcYiL1KrzeQcJe2XXqKfk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772303008; x=1772907808;
+ d=1e100.net; s=20230601; t=1772303011; x=1772907811;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=aqRBRhuTrQNzxSNFkExxNBJqVl5SIf0PVIBQrpckXic=;
- b=BYp+S1lToEQd3ZPqoyf7R7r08Q/WsT5oU6sCnz63re+UC9oR4XfsjtZqy8a6G4O+Xq
- Qr+Orjj5OjJevIfJvKoCYVaQCgkPW8+URiJGo6t96sOOysEZwzadTrUU2V+y3oVhdoXL
- lYE6XMP1f+nGHhMM7xWpKtSfs6wiXO8ZnWj5X60jidj4yK8lyetrP56hw5s1O6fXiLEo
- sWSF1SWb+XpMWVzJRnjrLontanulI4lfC3TM0fBcdkMovKb6rdFL4X2doGXaw5QWlhoy
- 6d7FW3O1aC4SYL7+eAAlrAnOSFrTQjbetTb0ANxj7Y/6DkZVjnsq5n1xlxg7ap7ifCcA
- +y1Q==
-X-Gm-Message-State: AOJu0YwlWsPGzDO7H+AvX3TTo/dbZrL4G7iVBs1Hp0iIhkJQ866fTkpj
- 996gFiNd9IYOW9G5hLRVZGwNZS+LwzY/0flXgtqTCUR03BZdNPMlJzd6A2COTLqIYe1aRPGfnFZ
- Ar8I=
-X-Gm-Gg: ATEYQzy1WzsB+nC3pi4+XIIHooq0FWAIAeHROB6icKmRJn8IMwYo8JTvwNUkb3cEY3Z
- X324oPLX3z9LVbo3grPUFAKMfKTRMh5E6KoTLxY9BhT6s3OAyiZKIa4Vfn7yJowXUdQe07E2ZpW
- FKyvH6sxEHUUOXlsF9rubIxfz7HT29OKy7MFOhRGCUK4C41No+CszDxJiAmO1hp4UnGBv+2MpSV
- ka8HAN0jywiQxqGLYzJ1vIMpN+MuvDPrOM/yT7c0vAnMcgmk3FXflRYCPqQKmSuvxO4sxWqs9w7
- bnBw/Laga3H9HDGwQHxPM5yb61eEovttFM5CccGKQF17I9fiA6EbCpKueJc+Fzth2TGGawmnatq
- 9pgAPW9f9IcYweUUeN2IB/930vwf4vaxljzxJoHtXuK9Crj3u0wUn3iH3x8NCAsTwZH41IxM78+
- zRORsbUGG0i78Cj7yy5w==
-X-Received: by 2002:ac8:5d10:0:b0:506:bb47:cd0a with SMTP id
- d75a77b69052e-507529dc2f9mr83196881cf.57.1772303008070; 
- Sat, 28 Feb 2026 10:23:28 -0800 (PST)
+ bh=AbSPbayxnzwqrPANUf/rz4pVcO1SzIRJ9asVAgOndoA=;
+ b=DFZdIhpQlqpfWtq5gcW1SHWRAhWFGNS8bAGVr37qtVaQSe2KNdOKOvwjMRo5OZIoYg
+ NHEeA8Ya0cYJLB3cUWwZt0CkrR711BHn9OsPjXCOFNFLoXhw9zhfIMuPPMjb/8Q8WL2/
+ /9olUOtJ48pEEZHs9fP7EBUj3JJsxQ/Lvd2l1UzAiZDziQsPycG5Axm3tWPHLpxBYuhh
+ HjrtjRO1JbCtSJ8BMzv78OcrIOI9yE2ByrYSHuPbR8G0qEwV/W5u8L8G61BT4QQ1CWIu
+ Lllpuwhzot55GBqoFNEddDfoqtfX96UZ8H5QSx3+8WuYhbxJ9qPYxJIhjniuM7tltz2x
+ WLGw==
+X-Gm-Message-State: AOJu0YxmEdwvjOhooFE1f483zZi2Ipe1FEbIWQrGNPoGIEdKZMRh9JAX
+ YHbv4EAxwSfZMDv0tWtL793hyMmLU5IoOWrceyJkuNYEIFIjkkN9NFLvAD+yEmm4AhYj3T5m46u
+ ue7Q=
+X-Gm-Gg: ATEYQzwyIT2VxH64Vbjb1SkLjpJaY3Mwn27uJm/WTgJA7t6ihjWNio8YZnZ/Vl7XGZa
+ /rZH9R9uEv73kDSgM8V49YsWHFuatLbrGp3eYSlIsAAk3rRAA0onloV+HHQgxwbW3X/VAZJArf6
+ h3NgdqXTXHfhWsKk7YiM1uMrw/qKWHb5MxvKpItFOpltbnv5Frt8OBF6L1w53K6fLbPPjsGWt1H
+ 0SpDQy8xDPfO4WhVwcRbwNRBOxRfcHFLptdknpzUaO9+BXZli70ho12vysvNVA1lvKVuFOWvub2
+ /OzIC/1qrXuooiyABpKcRVX3Agtzj9QyutxXrJSfv/Nn/NI4T+V4JzCDmkLzeUxqJs2YF5cBQ5P
+ 5PMcC6mxRcV9aJ3SVOSRrhA+vPMHFR0CQJiwq3AqA8wUhEAhm9SdDKn5/vcuqGg6KG88MCQpWPc
+ GG/v5lT3pEs4PRrlRaiRVdqW24fA3I
+X-Received: by 2002:ac8:7c4b:0:b0:4f1:c6be:c853 with SMTP id
+ d75a77b69052e-50752792e61mr94644641cf.25.1772303010945; 
+ Sat, 28 Feb 2026 10:23:30 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.26
+ d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Feb 2026 10:23:27 -0800 (PST)
+ Sat, 28 Feb 2026 10:23:29 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 4/7] test: fs_helper: Drop the size_gran argument
-Date: Sat, 28 Feb 2026 11:22:44 -0700
-Message-ID: <20260228182304.3728735-5-sjg@chromium.org>
+Subject: [PATCH v2 5/7] test: Convert fs_helper to use a class
+Date: Sat, 28 Feb 2026 11:22:45 -0700
+Message-ID: <20260228182304.3728735-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260228182304.3728735-1-sjg@chromium.org>
 References: <20260228182304.3728735-1-sjg@chromium.org>
@@ -97,63 +97,256 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Nothing uses this argument, so make it a constant for now.
+It is somewhat inconvenient that callers to mk_fs() must create their
+own temporary directory. Convert it to a class so this can be handled
+automatically, using a context manager.
+
+Rather than specifying the file size in bytes, use MB since it is rare
+to need a smaller file.
+
+Update mk_fs() to use this new class.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Christian Taedcke <christian.taedcke@weidmueller.com>
-
 ---
 
-Changes in v2:
-- Split the pylint fix into a separate commit
+(no changes since v1)
 
- test/py/tests/fs_helper.py | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ test/py/tests/fs_helper.py | 209 +++++++++++++++++++++++++++----------
+ 1 file changed, 154 insertions(+), 55 deletions(-)
 
 diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 47340295fbb..72e18588288 100644
+index 72e18588288..fac811f352e 100644
 --- a/test/py/tests/fs_helper.py
 +++ b/test/py/tests/fs_helper.py
-@@ -10,8 +10,11 @@ import os
+@@ -7,14 +7,158 @@
+ 
+ import re
+ import os
++import shutil
  from subprocess import call, check_call, check_output, CalledProcessError
  from subprocess import DEVNULL
++import tempfile
  
--def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
--          fs_img=None, quiet=False):
-+# size_gran (int): Size granularity of file system image in bytes
-+SIZE_GRAN = 1 << 20
+-# size_gran (int): Size granularity of file system image in bytes
+-SIZE_GRAN = 1 << 20
+ 
++class FsHelper:
++    """Creating a filesystem containing test files
+ 
+-def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
++    Usage:
++        with FsHelper(ubman.config, 'ext4', 10, 'mmc1') as fsh:
++            # create files in the self.srcdir directory
++            fsh.mk_fs()
++            # Now use the filesystem
++
++        # The filesystem and srcdir are erased after the 'with' statement.
++
++        To set the image filename:
++
++            with FsHelper(ubman.config, 'ext4', 10, 'mmc1') as fsh:
++                fsh.fs_img = 'myfile.img'
++                fsh.mk_fs()
++                ...
++
++        It is also possible to use an existing srcdir:
++
++            with FsHelper(ubman.config, 'fat32', 10, 'usb2') as fsh:
++                fsh.srcdir = src_dir
++                fsh.mk_fs()
++                ...
++
++    Properties:
++        fs_img (str): Filename for the filesystem image; this is set to a
++            default value but can be overwritten
++    """
++    def __init__(self, config, fs_type, size_mb, prefix):
++        """Set up a new object
++
++        Args:
++            config (u_boot_config): U-Boot configuration
++            fs_type (str): File system type: one of ext2, ext3, ext4, vfat,
++                fat12, fat16, fat32, exfat, fs_generic (which means vfat)
++            size_mb (int): Size of file system in MB
++            prefix (str): Prefix string of volume's file name
++        """
++        if ('fat' not in fs_type and 'ext' not in fs_type and
++             fs_type not in ['exfat', 'fs_generic']):
++            raise ValueError(f"Unsupported filesystem type '{fs_type}'")
++
++        self.config = config
++        self.fs_type = fs_type
++        self.size_mb = size_mb
++        self.prefix = prefix
++        self.quiet = True
++
++        # Use a default filename; the caller can adjust it
++        leaf = f'{prefix}.{fs_type}.img'
++        if config:
++            self.fs_img = os.path.join(config.persistent_data_dir, leaf)
++            if os.path.exists(self.fs_img):
++                os.remove(self.fs_img)
++        else:
++            self.fs_img = leaf
++
++        # Some distributions do not add /sbin to the default PATH, where mkfs
++        # lives
++        if '/sbin' not in os.environ["PATH"].split(os.pathsep):
++            os.environ["PATH"] += os.pathsep + '/sbin'
++
++        self.tmpdir = None
++        self.srcdir = None
++        self._do_cleanup = False
++
++    def _get_fs_args(self):
++        """Get the mkfs options and program to use
++
++        Returns:
++            tuple:
++                str: mkfs options, e.g. '-F 32' for fat32
++                str: mkfs program to use, e.g 'ext4' for ext4
++        """
++        if self.fs_type == 'fat12':
++            mkfs_opt = '-F 12'
++        elif self.fs_type == 'fat16':
++            mkfs_opt = '-F 16'
++        elif self.fs_type == 'fat32':
++            mkfs_opt = '-F 32'
++        elif self.fs_type.startswith('ext'):
++            mkfs_opt = f'-d {self.srcdir}'
++        else:
++            mkfs_opt = ''
++
++        if self.fs_type == 'exfat':
++            fs_lnxtype = 'exfat'
++        elif re.match('fat', self.fs_type) or self.fs_type == 'fs_generic':
++            fs_lnxtype = 'vfat'
++        else:
++            fs_lnxtype = self.fs_type
++        return mkfs_opt, fs_lnxtype
++
++    def mk_fs(self):
++        """Make a new filesystem and copy in the files"""
++        self.setup()
++        fs_img = self.fs_img
++        with open(fs_img, 'wb') as fsi:
++            fsi.truncate(self.size_mb << 20)
++        self._do_cleanup = True
++
++        mkfs_opt, fs_lnxtype = self._get_fs_args()
++        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
++                stdout=DEVNULL if self.quiet else None)
++
++        if self.fs_type.startswith('ext'):
++            # Disable metadata checksums which U-Boot does not support
++            check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
++        elif fs_lnxtype == 'exfat' and self.srcdir:
++            check_call(f'fattools cp {self.srcdir}/* {fs_img}', shell=True)
++        elif self.srcdir and os.listdir(self.srcdir):
++            flags = f"-smpQ{'' if self.quiet else 'v'}"
++            check_call(f'mcopy -i {fs_img} {flags} {self.srcdir}/* ::/',
++                    shell=True)
++
++    def setup(self):
++        """Set up the srcdir ready to receive files"""
++        if not self.srcdir:
++            if self.config:
++                self.srcdir = os.path.join(self.config.persistent_data_dir,
++                                           f'{self.prefix}.{self.fs_type}.tmp')
++                if os.path.exists(self.srcdir):
++                    shutil.rmtree(self.srcdir)
++                os.mkdir(self.srcdir)
++            else:
++                self.tmpdir = tempfile.TemporaryDirectory('fs_helper')
++                self.srcdir = self.tmpdir.name
++
++    def cleanup(self):
++        """Remove created image"""
++        if self.tmpdir:
++            self.tmpdir.cleanup()
++        if self._do_cleanup:
++            os.remove(self.fs_img)
++
++    def __enter__(self):
++        self.setup()
++        return self
++
++    def __exit__(self, extype, value, traceback):
++        self.cleanup()
 +
 +
-+def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
++def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
++          fs_img=None, quiet=False):
      """Create a file system volume
  
      Args:
-@@ -20,7 +23,6 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
-         size (int): Size of file system in bytes
-         prefix (str): Prefix string of volume's file name
-         src_dir (str): Root directory to use, or None for none
--        size_gran (int): Size granularity of file system image in bytes
-         fs_img (str or None): Leaf filename for image, or None to use a
-             default name. The image is always placed under
-             persistent_data_dir.
-@@ -55,7 +57,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
-         elif fs_lnxtype != 'vfat' and fs_lnxtype != 'exfat':
-             raise ValueError(f'src_dir not implemented for fs {fs_lnxtype}')
+@@ -31,59 +175,14 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False)
+     Raises:
+         CalledProcessError: if any error occurs when creating the filesystem
+     """
+-    if not fs_img:
+-        fs_img = f'{prefix}.{fs_type}.img'
+-    fs_img = os.path.join(config.persistent_data_dir, fs_img)
+-
+-    if fs_type == 'fat12':
+-        mkfs_opt = '-F 12'
+-    elif fs_type == 'fat16':
+-        mkfs_opt = '-F 16'
+-    elif fs_type == 'fat32':
+-        mkfs_opt = '-F 32'
+-    else:
+-        mkfs_opt = ''
+-
+-    if fs_type == 'exfat':
+-        fs_lnxtype = 'exfat'
+-    elif re.match('fat', fs_type) or fs_type == 'fs_generic':
+-        fs_lnxtype = 'vfat'
+-    else:
+-        fs_lnxtype = fs_type
+-
+-    if src_dir:
+-        if fs_lnxtype == 'ext4':
+-            mkfs_opt = mkfs_opt + ' -d ' + src_dir
+-        elif fs_lnxtype != 'vfat' and fs_lnxtype != 'exfat':
+-            raise ValueError(f'src_dir not implemented for fs {fs_lnxtype}')
+-
+-    count = (size + SIZE_GRAN - 1) // SIZE_GRAN
+-
+-    # Some distributions do not add /sbin to the default PATH, where mkfs lives
+-    if '/sbin' not in os.environ["PATH"].split(os.pathsep):
+-        os.environ["PATH"] += os.pathsep + '/sbin'
++    fsh = FsHelper(config, fs_type, size >> 20, prefix)
++    fsh.srcdir = src_dir
++    fsh.quiet = quiet
++    if fs_img:
++        fsh.fs_img = os.path.join(config.persistent_data_dir, fs_img)
++    fsh.mk_fs()
++    return fsh.fs_img
  
--    count = (size + size_gran - 1) // size_gran
-+    count = (size + SIZE_GRAN - 1) // SIZE_GRAN
+-    try:
+-        check_call(f'rm -f {fs_img}', shell=True)
+-        check_call(f'truncate -s $(( {SIZE_GRAN} * {count} )) {fs_img}',
+-                   shell=True)
+-        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
+-                   stdout=DEVNULL if quiet else None)
+-        if fs_type == 'ext4':
+-            sb_content = check_output(f'tune2fs -l {fs_img}',
+-                                      shell=True).decode()
+-            if 'metadata_csum' in sb_content:
+-                check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
+-        elif fs_lnxtype == 'vfat' and src_dir:
+-            flags = f"-smpQ{'' if quiet else 'v'}"
+-            check_call(f'mcopy -i {fs_img} {flags} {src_dir}/* ::/',
+-                       shell=True)
+-        elif fs_lnxtype == 'exfat' and src_dir:
+-            check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
+-        return fs_img
+-    except CalledProcessError:
+-        call(f'rm -f {fs_img}', shell=True)
+-        raise
  
-     # Some distributions do not add /sbin to the default PATH, where mkfs lives
-     if '/sbin' not in os.environ["PATH"].split(os.pathsep):
-@@ -63,7 +65,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
- 
-     try:
-         check_call(f'rm -f {fs_img}', shell=True)
--        check_call(f'truncate -s $(( {size_gran} * {count} )) {fs_img}',
-+        check_call(f'truncate -s $(( {SIZE_GRAN} * {count} )) {fs_img}',
-                    shell=True)
-         check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
-                    stdout=DEVNULL if quiet else None)
+ def setup_image(ubman, devnum, part_type, img_size=20, second_part=False,
+                 basename='mmc'):
 -- 
 2.43.0
 
