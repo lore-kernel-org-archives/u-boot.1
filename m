@@ -4,64 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A37AFD004A
-	for <u-boot@archiver.kernel.org>; Sun,  1 Mar 2026 01:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C7BDFD0049
+	for <u-boot@archiver.kernel.org>; Sun,  1 Mar 2026 02:25:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B46983A8C;
-	Sun,  1 Mar 2026 02:39:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E47E883A8C;
+	Sun,  1 Mar 2026 03:25:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ApIq+rST";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f0qhzE8Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C05283CDF; Sun,  1 Mar 2026 02:39:08 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EE51183EC6; Sat, 28 Feb 2026 21:20:21 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDBEB838BB
- for <u-boot@lists.denx.de>; Sun,  1 Mar 2026 02:39:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6710A83CDF
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 21:20:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fNl8l2hfLz9vJh;
- Sun,  1 Mar 2026 02:39:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1772329143;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NpBXKmBuJkTMHapq4/p5R53KJcxBve0OXYLq30riY4o=;
- b=ApIq+rSTrIZa8C1HQv5as6iO7BfieLXaxJ5986YjOsKlLtqizBuVA43Ttlj+NJShkXzd7H
- 8a/ZyFVimVdZycTDFsz+f3Wn0gylPgTV8KFC5TKaFlM7KXuzGJk0vqQj7GOATNJhlc7YS5
- 3mqeFNeNTuv7D+WqeJZWEbCy21nnXe/M+uXdGB/OFmsBrAgpInF3QcKYsxGHUMsil0tyYu
- mHkkblUQzG+qCGJfyEu8tbOP8ZvPTK+QVK0Cp5AbtJW+ZLpIYdTweKvocb4yWPyhZxXKmy
- j58ODm9LNa8ghJEtQMJJEN5DsELaLDGIfZuwDkQEgO5GcIhvZJaKav5smPntPw==
-Message-ID: <f19e58ad-58ed-4d5b-a348-6d2270e546f0@mailbox.org>
-Date: Sun, 1 Mar 2026 02:20:30 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d4b9c839b1so1613896a34.1
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 12:20:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1772310017; x=1772914817; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ymExqhrPL2glKKNom7SSRnX83uCq1WHzQ9cMnWd+vJo=;
+ b=f0qhzE8Zc+piEg+EkClKtAsps5uTDDce+5Clz7ChOaKiIoaiNnYJK6bbDZphozLt8f
+ Dnfas6GRIUIoHHz6t/d3rD9bjtBj7oOMGoroOTaebnMcapLTz/wRiGRiESmQZFM8gK6h
+ sfOyXHF3D+KWS8U5aGD2TR5rhHnWgljwoHN6w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772310017; x=1772914817;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ymExqhrPL2glKKNom7SSRnX83uCq1WHzQ9cMnWd+vJo=;
+ b=Izspu/d0R4w4UZW6z5m3RhHy52wtodlS7hYU63iaML5NpYnNab6DyFOzCvGt+ufC4o
+ aXYvSe8/o8VYWBTJyjm+vPJ0tMKaHtN6+6/WwMQDR9AhusuEp7vcvxu9i2Xx2nPiMXMN
+ sHvJyIoHiWj0/pznSUERoa5lq24PyJD3fgy3/mHvXwgRHGWPYM/2is8kQ/oFXpqJb5FX
+ d2Ii24XtqNnlGlcB6SWBAycSnnl5actsICPVhiLqottarm3fytj/jO5e5OuDXGbbMfbF
+ Z/pW+LmQ/8ppUW7N4+ZGjdC9D77yMBofeJDZkoZaynuegKphfZ91MfDbVdJYDWvP9kNs
+ IE2g==
+X-Gm-Message-State: AOJu0YwADMz6+S0UwsGECjkWjdbRO6YMbFGJmjPUwztKl2ZGpWvrpYUc
+ I/KVQ6Bk+ki14s9jHz6B581m0jziZ9u4iI04svYT7Am+oS0bYsHtXzFQey9MBvU9CF2z5EvhknL
+ rUIE=
+X-Gm-Gg: ATEYQzwm07jTrO4FDvfQUQEGz2KWrxtdhMSHsSv6bnwBJPCkZiv8xGchGNMK1LXSwUC
+ rMbBwt00yQlpKi6p+h+z4jI4wIz/VVgqVmG7EHzMI9oQ6GEJ7tDrtYWi8vh9z7eOtTTTZ6D9b+r
+ 5r4jQ8jy7Wz4oQb0kW5aXOeP2ErKz7KY/WIGlvQF/PUnjIIDiew2eao2hcYXNJjtZQr55balsgR
+ wsrhnMmQWboTCWQPKO7R1XKMKOzhcfhPC1A+WkeqcADcNbY3joGnmFwQKeQg7RZFQJYuGwxKaRz
+ 45S6fxER9vhi1C5ePJqbLjxyBDAFCpijkWt9GniXYixGoritDH1Qq20TwF2Y4o4SMy7MIUtixi/
+ h3oNMaOLTb4WPdlsIZiLNs2pBkPTt2G4B0eNV3T/p2LpPbroMKN797mqRpTt4X14Mv64X8q4KWC
+ CxtMwhb7pOO49A8U3Udg==
+X-Received: by 2002:a05:6830:390e:b0:7d4:aa58:2bef with SMTP id
+ 46e09a7af769-7d591c2292emr5275246a34.34.1772310017511; 
+ Sat, 28 Feb 2026 12:20:17 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d58644edfbsm6978361a34.6.2026.02.28.12.20.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 28 Feb 2026 12:20:16 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>,
+ Aristo Chen <jj251510319013@gmail.com>, Benjamin ROBIN <dev@benjarobin.fr>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Michal Simek <monstr@monstr.eu>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Rick Chen <rick@andestech.com>,
+ Scott McNutt <smcnutt@psyent.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Thomas Chou <thomas@wytron.com.tw>,
+ Vishnu Singh <v-singh1@ti.com>, Wolfgang Denk <wd@denx.de>,
+ Wolfgang Wallner <wolfgang.wallner@at.abb.com>, Yao Zi <me@ziyao.cc>,
+ uboot-snps-arc@synopsys.com,
+ =?UTF-8?q?=E7=89=9B=20=E5=BF=97=E5=AE=8F?= <Zone.Niuzh@hotmail.com>
+Subject: [PATCH v3 00/17] bootm: Clean up arch-specific, pre-OS clean-up
+Date: Sat, 28 Feb 2026 13:19:48 -0700
+Message-ID: <20260228202011.1834493-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: cdns3: fix cdns3_bind() to avoid returning error and
- probe parent
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, marex@denx.de
-Cc: trini@konsulko.com, minda.chen@starfivetech.com, u-boot@lists.denx.de,
- srk@ti.com
-References: <20260227055954.3916518-1-s-vadapalli@ti.com>
- <4d8848d2-3a4e-4025-aeac-c15592b16276@mailbox.org>
- <c5e0e61b-a8ab-4186-9460-84221d843542@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <c5e0e61b-a8ab-4186-9460-84221d843542@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: fdae751768352ce1e88
-X-MBO-RS-META: mr33pkkbn6iz8rwd6wnkc4askfqkqzsm
+X-Mailman-Approved-At: Sun, 01 Mar 2026 03:25:38 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,49 +118,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/1/26 2:02 AM, Siddharth Vadapalli wrote:
+From: Simon Glass <simon.glass@canonical.com>
 
->>> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
->>> index 10bc4cabed4..a775567b3bc 100644
->>> --- a/drivers/usb/cdns3/core.c
->>> +++ b/drivers/usb/cdns3/core.c
->>> @@ -461,9 +461,18 @@ int cdns3_bind(struct udevice *parent)
->>>       /* Use VBUS Valid to determine role */
->>>       if (dr_mode == USB_DR_MODE_OTG) {
->>> +        /*
->>> +         * Since we perform register accesses in cdns3_get_otg_mode(),
->>> +         * we need to ensure that the parent has been probed and that
->>> +         * the USB Controller is powered ON.
->>> +         */
->>> +        ret = device_probe(parent);
->>> +        if (ret)
->>> +            goto fail;
->>> +
->>>           ret = cdns3_get_otg_mode(parent, &dr_mode);
->>>           if (ret < 0)
->>> -            return ret;
->>> +            goto fail;
->>>       }
->> Can you instead move this logic into driver .probe() ? Then you 
->> wouldn't need the device_probe() hackage.
->>
-> 
-> There are two users of cdns3_bind() which have registered their 
-> own .bind() callback as cdns3_bind():
-> 1. cdns3-starfive.c driver
-> 2. cdns3-ti.c driver
-> Since .bind() is called before .probe()
+Each arch does something slightly different before booting the OS. Some
+archs even do different things depending on the CPU type.
 
-.bind callback is meant to BIND the driver instance (to a DT node), it 
-is not meant to initialize the hardware. .probe callback is meant to 
-initialize the hardware. This is fundamental part of the U-Boot DM lazy 
-initialization scheme. If something does initialize hardware in .bind, 
-then it is very likely wrong.
+It is quite hard to know what actually happens in the final milliseconds
+before the OS boot.
 
-> , and, since cdns3_bind() is also 
-> the .bind() callback of the above drivers, device_probe() has to be 
-> added here itself. Moreover, it is only due to the register accesses 
-> being performed by the recently introduced cdns3_get_otg_mode() function 
-> that we need the USB Controller to be powered ON at this stage.
-So, can we fix this so the HW initialization won't be happening in bind, 
-but instead in .probe ?
+This series attempts to start cleaning up U-Boot in this area.
+
+The basic intent is to create a new bootm_final() function which can be
+called by all archs. It provides some flags for a couple of necessary
+variations but otherwise it is generic.
+
+All architectures are converted over to use this new function.
+
+board_quiesce_devices() is moved into bootm_final() so that all archs
+benefit from it.
+
+This series fixes a bug in device_remove() is fixed where removing a
+parent with specialised flags (e.g. DM_REMOVE_ACTIVE_ALL) could leave
+children activated, since they do not match the flags. This fixes is
+needed to avoid bootm_final() causing test failures on sandbox.
+
+Future work could take this a little further:
+- Convert EFI loader to use the same function
+- Improve comments for cleanup_before_linux() across architectures
+
+Changes in v3:
+- Add dm: device_remove() fix for child removal with specialised flags
+- Add new patch for ARC conversion
+- Add new patch for ARM conversion (requested by Tom)
+- Add new patch for MIPS conversion
+- Add new patch for MicroBlaze conversion
+- Add new patch for Nios2 conversion
+- Add new patch for PowerPC conversion
+- Add new patch for SH conversion
+- Add new patch for Xtensa conversion
+- Add new patch for bootstage stashing, needed for ARM conversion
+- Add new patch for m68k conversion
+- Add new patch for sandbox conversion
+- Convert all remaining architectures
+- Drop cleanup_before_linux() patch
+- Drop the DMA comment move (now in the introductory patch)
+- Drop udc_disconnect()
+- Fix "the a" typo
+- Introduce with all common functionality (not empty)
+- Move board_quiesce_devices() into bootm_final() instead of dropping it
+- Move bootstage dummies earlier in the series
+- Move earlier in the series so bootm_final() can use bootstage from the start
+- Put bootm_final() in bootm.c instead of a separate file
+- Put in bootm.c instead of a separate file
+- Squash in patches 2, 3 and 5 from v2
+- Squash introductory patches so bootm_final() is introduced non-empty
+- Squash with the previous riscv patches
+- Update cover letter to match current series
+
+Changes in v2:
+- Drop patch 'efi: Drop EFI_GRUB_ARM32_WORKAROUND'
+- Update cover message to reflect dropping the EFI patches, etc.
+
+Simon Glass (17):
+  dm: Move flags_remove() check before child removal
+  dm: Remove children when parent is removed by flags
+  bootstage: Add some missing dummy functions
+  bootm: Create bootm_final() for pre-boot cleanup
+  x86: Call bootm_final()
+  riscv: Call bootm_final()
+  bootm: Stash bootstage data in bootm_final()
+  arm: Call bootm_final()
+  arc: Call bootm_final()
+  microblaze: Call bootm_final()
+  mips: Call bootm_final()
+  powerpc: Call bootm_final()
+  m68k: Call bootm_final()
+  nios2: Call bootm_final()
+  sh: Call bootm_final()
+  xtensa: Call bootm_final()
+  sandbox: Call bootm_final()
+
+ arch/arc/lib/bootm.c                  |  4 +---
+ arch/arm/lib/bootm.c                  | 27 +--------------------
+ arch/m68k/lib/bootm.c                 |  2 ++
+ arch/microblaze/lib/bootm.c           |  4 +---
+ arch/mips/lib/bootm.c                 |  7 +-----
+ arch/nios2/lib/bootm.c                |  2 ++
+ arch/powerpc/lib/bootm.c              |  7 +-----
+ arch/riscv/include/asm/u-boot-riscv.h |  1 -
+ arch/riscv/lib/bootm.c                | 24 +------------------
+ arch/sandbox/lib/bootm.c              |  2 ++
+ arch/sh/lib/bootm.c                   |  2 ++
+ arch/x86/lib/bootm.c                  | 14 +----------
+ arch/xtensa/lib/bootm.c               |  2 ++
+ boot/bootm.c                          | 23 ++++++++++++++++++
+ drivers/core/device-remove.c          | 34 +++++++++++++++++----------
+ include/bootm.h                       | 20 ++++++++++++++++
+ include/bootstage.h                   |  8 +++++++
+ 17 files changed, 90 insertions(+), 93 deletions(-)
+
+-- 
+2.43.0
+
+base-commit: f6963fc232603007c661411fb31c57f1a9678a87
+branch: bootma-us3
