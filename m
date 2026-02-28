@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03115FEE4C8
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0BC4FEE4C8
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 197F383E76;
-	Sat, 28 Feb 2026 19:23:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8F8AF83F0A;
+	Sat, 28 Feb 2026 19:23:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dpvTyj/6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QmYVhRhV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AADC883EEF; Sat, 28 Feb 2026 19:23:23 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 8110483F00; Sat, 28 Feb 2026 19:23:25 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5153383CDF
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F80283EC6
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-506a1b23c05so37609231cf.0
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:21 -0800 (PST)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-506cb1b63d0so39294751cf.2
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772302998; x=1772907798; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qHfF1r5DwSDccRvHx+VicBqpeeFGtPSH5BiqYv0/2O0=;
- b=dpvTyj/6qsWngVQts6z/iIudnJKgFPKJDPb3KgnVjTM1HMwpJAyK9q8rLZGUeiaXgg
- FmEjfxNLNi8jteDEuiUQs/MbdPEajDn3VmS+DHuWmv6wJYNKnBoSWtxNkX9+c/3Fp6+j
- GX+3+A8ySiyWILHzqfeV98VS04i4BSsfSqUDo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772302998; x=1772907798;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1772303001; x=1772907801; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qHfF1r5DwSDccRvHx+VicBqpeeFGtPSH5BiqYv0/2O0=;
- b=RWyadqaF9uHUUHvBKRDIg0aQtnnoKnQ+H/bpeATFGd4wjpIuV9Fiht0wLvlXl76MRZ
- al0DmTQ+a52JUOPVJ4k197QfrhHOtso9YMxjoFsGvspzLkblxv689dQXOg72eDEXogOp
- TvQqkGvibDZNzHQr/Y2wvO8Hbb1vyQMke63PpWEOdEGDk2KlfERnMow1r9iuYZcR2kWK
- fzA3qJefEhOEsJM7m8Pflb0Dxm0zMDceV11O4QIhyvmmzMjvX2Th5/pOAalJ3llJosS3
- iTnwNzjBajfSztxevwb1WJ8Jb0Mh7eGezEAxltWpmdicfqaCDQdEWc9dmWxQX7sce+33
- vbNA==
-X-Gm-Message-State: AOJu0YyAJSQOKFsixI5AftWgHM81pOAgbaiak5fzx127G9HvC3KWEbMt
- uKzZL5QrZ/ssn8Yc5EsHFUDicr1ypjV6dRpvw5nhJaHG/FUJNN03a+lfe/zAlRerIHVyLAC4BNK
- myuM=
-X-Gm-Gg: ATEYQzxqh1PJ1Fbi6dzSr+2x2WKhTLv6OsC33Ap+9MFeMyGYEu/mHON4u/8pbM7Xujq
- Ht1mPMWM+s1cOSar+1jT7c5jZ8hh/lf8DFs5ohZlPE+HO2tLFCmZo0aQi3w7CNnJH8Fz4dU9zaZ
- VuAdoLP3qkvHHBMDwDmdiT6+RfpYumHN5u1jWr0S82NkeUtedcJrScMgRhzL0ptBXUznyfN1x1R
- 74HHMeFA1Xjg+U6bGOblqvItG9mVLSazVvoYvVMIq64Etw0StAq8TOVKboG2FpDxX7tkoowvpBS
- OjkvDSe0kVcNn711oZlfaVhPzvDmWke2K6wC//mLpreLPHiPc0E6fIY3b1SxlvQoS5yDcTYr+gD
- fQda6dXPybdyouX746RNeYBAqvkK6gq5W63LO8LV/0XyrCgiRqLC7PZicBfsWxP7OFOcb8+QVXo
- Alv7Zegc5Dlz9zyWl1jA==
-X-Received: by 2002:ac8:5ac5:0:b0:501:4446:2ce with SMTP id
- d75a77b69052e-5075288b728mr103891551cf.49.1772302998289; 
- Sat, 28 Feb 2026 10:23:18 -0800 (PST)
+ bh=IsKuajzTKQozsW/QbloHx+PiVsPF/sJahRdcvT8/8HU=;
+ b=QmYVhRhVwdmRJgGKXiwQM7TEpATU+W9Vn4MzMRk8ZLPgsBbvkh4zwlqRGtUHgRVG/+
+ jfyWnDQwUCK05VEOsq/t0rv0JAOMTBJPRqQMKvv2lWl3YyieKTEiIFAFfRernYXzzhai
+ 3tAZgLN5ObY7nWZUJ6ziA/Giy9RDl1PolJLxw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772303001; x=1772907801;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=IsKuajzTKQozsW/QbloHx+PiVsPF/sJahRdcvT8/8HU=;
+ b=o3L0QLw3gY5nb9qlLxZowwpy9srfohbAXsPRQd55Sc+XaLzaL7fNL/cGVFByzLtkzz
+ szI7JctfhxNX4XVeZdZV4hqMoQDSG+NYVlz8YfLUqyBfqPtXcVQOaEqJjrrdqjlcXliV
+ 1tEOTkZ3n/eRVtFGi07EZRkzH6qj3+adTTXiyU7uU8INu6PChqC5TpYbgcomUFXlzTpD
+ FBE+TlFLIgIZwQZNL8v4vzjeH4xHevK0x1laWWR8jSP/n2henSdNxHcOiX3wDfzBVa+V
+ ocQh6KC2t5oe6cT0w71WO6Jd1KpBP4bXDKxolvwutBYeAPWHKSL/8TGIoOQfCA91Wm4q
+ W//g==
+X-Gm-Message-State: AOJu0YxBKydKoDYiWqu5R6X70z2MohJMd7s7NX5D4a0YAxVcGa6YyWmi
+ M0dgYho4ogNCGR+3BE1CMMlnlFqHQdIbmbNb6ts0I7wEpsVKZuu+NYSl4dXE3h0QIRtmKRlyrdK
+ zO0s=
+X-Gm-Gg: ATEYQzwggUOWtjBlm2Vixk2nxlc10tB/cGUuKuMH7bqGl54bl7eWRsTsk8hmNSI0AIP
+ hdgWHkGvpnCBWUpR9eF/kxS2jG5ZIEa1WcFR1CvVPb2ckjLYTX2hKLCSO+Kv13hGKkvyW3IUs7g
+ zC8e75Dx4hyKVmykz/7296rX2Ix20iiqUEmgkq8FVsSGp9k9s4HfNvTIO+PXaf6VjHARFjKkodK
+ +4j98kj3DZmsPNVRIHrnvPMmJlyoHXLwHw4eNdVMqJl495JdS+ctpJWOzJcOp7UE/3c3u6c7Tbp
+ RkrD7eknuSj0pFKcQlNz6Hlbw6ecX/pl8KqYvspMWqZc24AuitpBNgWIaEtktPKi9FAtYlQe6rX
+ V5PSJ2X/Bu4YEBgal4kcVDNV4Sj2Vj3ip6a5AX+odjTVdjpuALsLsvMeHkO205dk01lAr8I6yrj
+ AnTZwTR+MIvwXX0bisqg==
+X-Received: by 2002:a05:622a:286:b0:4ed:ddd9:1402 with SMTP id
+ d75a77b69052e-50752782e77mr95134921cf.24.1772303001311; 
+ Sat, 28 Feb 2026 10:23:21 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.16
+ d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Feb 2026 10:23:17 -0800 (PST)
+ Sat, 28 Feb 2026 10:23:20 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 0/7] Provide classes for building disk images with FS
- partitions
-Date: Sat, 28 Feb 2026 11:22:40 -0700
-Message-ID: <20260228182304.3728735-1-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: [PATCH v2 1/7] test: fs_helper: Allow passing the image filename
+Date: Sat, 28 Feb 2026 11:22:41 -0700
+Message-ID: <20260228182304.3728735-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260228182304.3728735-1-sjg@chromium.org>
+References: <20260228182304.3728735-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,35 +97,55 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Refactor the test filesystem helper into a class-based design, reducing
-duplication and making it easier to create disk images for testing. Add
-a helper class for creating disk images with partition tables.
+The mk_fs() function always generates its own image filename from the
+prefix and fs_type. Some callers need to specify a custom leaf name
+while still keeping the image under the persistent-data directory.
 
-Convert a test over to use it. Provide a few other minor improvements as
-well.
+Add an fs_img parameter that accepts a leaf filename. When provided,
+it is joined with persistent_data_dir instead of the default name.
+
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+
+---
 
 Changes in v2:
 - Split the quiet flag into a separate commit
 - Fix fs_img to accept only a leaf name, always under persistent_data_dir
-- Add new patch to split the quiet flag out of the previous patch
-- Split the pylint fix into a separate commit
-- Explain why setup_image() is left to later
 
-Simon Glass (7):
-  test: fs_helper: Allow passing the image filename
-  test: fs_helper: Add a quiet flag to mk_fs()
-  test: Update comment for fs_helper.setup_image()
-  test: fs_helper: Drop the size_gran argument
-  test: Convert fs_helper to use a class
-  test: Add a helper class to create disk images
-  test: Convert test_efi_bootmgr to use FsHelper
+ test/py/tests/fs_helper.py | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
- test/py/tests/fs_helper.py        | 310 +++++++++++++++++++++++++-----
- test/py/tests/test_efi_bootmgr.py |  38 ++--
- 2 files changed, 273 insertions(+), 75 deletions(-)
-
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index b8a22b22806..bd9169b2a4d 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -9,7 +9,8 @@ import re
+ import os
+ from subprocess import call, check_call, check_output, CalledProcessError
+ 
+-def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
++def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
++          fs_img=None):
+     """Create a file system volume
+ 
+     Args:
+@@ -19,11 +20,15 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
+         prefix (str): Prefix string of volume's file name
+         src_dir (str): Root directory to use, or None for none
+         size_gran (int): Size granularity of file system image in bytes
++        fs_img (str or None): Leaf filename for image, or None to use a
++            default name. The image is always placed under
++            persistent_data_dir.
+ 
+     Raises:
+         CalledProcessError: if any error occurs when creating the filesystem
+     """
+-    fs_img = f'{prefix}.{fs_type}.img'
++    if not fs_img:
++        fs_img = f'{prefix}.{fs_type}.img'
+     fs_img = os.path.join(config.persistent_data_dir, fs_img)
+ 
+     if fs_type == 'fat12':
 -- 
 2.43.0
 
-base-commit: f6963fc232603007c661411fb31c57f1a9678a87
-branch: testfs2
