@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 181ECFEE4F7
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 20:22:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4019BFEE4EE
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 20:22:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D05D83F8F;
-	Sat, 28 Feb 2026 21:20:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BDF283FA3;
+	Sat, 28 Feb 2026 21:20:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F8WG2K1K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kX4R3Hgr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A72183F9B; Sat, 28 Feb 2026 21:20:52 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 3385083F5B; Sat, 28 Feb 2026 21:20:55 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C86F83CDF
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 21:20:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E16983CDF
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 21:20:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d596ab0917so1355325a34.1
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 12:20:50 -0800 (PST)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7d596ab0917so1355350a34.1
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 12:20:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772310048; x=1772914848; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772310050; x=1772914850; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B06FIsJ0OkggQ7iQ0jXWlVAKo2U8JetevJa6foi79nM=;
- b=F8WG2K1KNsxVFCIPTLTJ7JsK0/fGJM5mfBi4y1HF1zldLqP/pty0+d/Zhv6KjtQjT/
- 7eUXfvntxi7emLZst1BwbTadPCmQShR/JSYPmsOx+pUWXU60dyr/tjybotPqsXaKt08B
- NizlFUB3B4774MMBAzTzM0FrYLhVZS4Kl7Xxk=
+ bh=wywvcCo54gqj0LBFob2ISbsDYruEo/5wuk9p8SjRFm0=;
+ b=kX4R3Hgr089BxfxBkxEwrBbEtWtXaJK75zEDt0GAka0+Zfa0TPi4z7MmR0Vn4PKjAT
+ 0AVR+l2tnH//qN010CxNyl4Mke5tDOZIu1gGQklzdHmfhZwu4bM9Em+lGSDybeP9fjlM
+ 0ZTUYlK+F0er187gI488i+RHPx0skAxabj3+g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772310048; x=1772914848;
+ d=1e100.net; s=20230601; t=1772310050; x=1772914850;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=B06FIsJ0OkggQ7iQ0jXWlVAKo2U8JetevJa6foi79nM=;
- b=xQ2BvgEeCZiULxvjanijvsVdAj8LIntAbB2vNValhwnCuojrF++mMT6MPF7Y19iPw+
- Wqs09v9EzoX8GEVduRjKrkv/ZyjkXR8Tu1y774u/cZvUNvodIMOJ+ljEjVht9xH0NoBh
- eQSwRVu4aEwktRLUelzAJwMN9pu5PhniycTFQrrQDU8m8zk4fs++bW8gL2LUmO8XOXxW
- OFrsJk4S0hbkBYIDvNf6/0HeBdAlIAJGjWT5JCQW7mE3d1fFKyZQdHA1+JbTZGROyi6W
- TCpF3y8Ymz5ZWNL96uimNzKn9A+KSCkx6P/6cdb5iede57wldsV++K/iI1yqmIVqADgm
- Gm4g==
-X-Gm-Message-State: AOJu0YzUisqXXA2VmQem//78xVSI06k5YxplH3d9ZEgixDoLKREwAatw
- gCZjM2JY80g2a0ZwPFnqUuzQn2RFFPgkE9Fdrd0accbxKGxYBXYVTlympjjRUnHuah/pC6rhdch
- Hup0=
-X-Gm-Gg: ATEYQzx9TK2oTSBF2w6s6n9u0/AzW1mAbvuWHOQWWQzwiGqeI2EwZiVuYG6axxOKd4O
- IV8XqhkS4ipYAvhffW+JB+s20je8KsL+gVowfurkkwSGYragv0du0HKXz0SQRe01KD/5wsXRIur
- 6leo2pmFWXzwLoOTfa5nRrYSKo53rJ5AjDdygWlRVTje3qKhljOB59I+gLXdsOBvNhq1MPrsGCr
- 27EH+MZJhv6Tmv/xXM7S9MHuuXGo3oaXGbu9W6nxAyEPWnIqThqzwMmP/6a0SlvQX0seqBA/iy9
- 06kR/s7sBYOJddDSNVVDia+WAnh2rW3au2xbHTBewhsoG3dzUW5+BSsV0Wtqp7gH15OrMgW5x0G
- +j6IFkyZkRDV6VLYFEe5J6KeXEHcgysk+vVfSiBKa2tDdkr1n3R5DDJ83XYA3iTSsCm71snw3WC
- 9LCaW/HPPfuetHcrhocg==
-X-Received: by 2002:a05:6830:264f:b0:7d1:89b9:9205 with SMTP id
- 46e09a7af769-7d5856c012fmr7240176a34.3.1772310047770; 
- Sat, 28 Feb 2026 12:20:47 -0800 (PST)
+ bh=wywvcCo54gqj0LBFob2ISbsDYruEo/5wuk9p8SjRFm0=;
+ b=cYrQ9tWdkOEaD/u9umlcfCc8miEbvutKekoXSoWuv3nzNr2PmM1W8kcnDKSUTivUcz
+ ElUjkwAA8g+2Zy8ZfEqmwH1qUDELHH4pV1SVLWrrZezjqGX3HSCs0AINOe+x8aGts/7O
+ a2FhG6+BSYSejCgwrj1xY7FQEHSNJrTRXj4vUtLykoCqCDBIRBqnIkpISIiXp9OhK0le
+ cm3R9Xv6K1cTBFCj9KJyrrUuwQn5U6aO8Pdgn8w5GGR1NssJP6YUXDfny1PTDz3nfVa5
+ Lkw0RXCyf8mteTkaFUHMbFivoIEnaZhDlyPKmt+rkVYAGX/rWUJA4Mh1cDpEivzBdkGy
+ AG/g==
+X-Gm-Message-State: AOJu0Yyp0RlTFCFV4ymkK5wHD/1F0AO7b2URlbYMdKlkByoxR2vJbGvy
+ BNaxXHiALQa/5KOKlJjTdy4Rz9utzzXjS9/hQ6Iyf6HpqCnieppPl9MdxydcVT7QlTD8vfmMcmR
+ l3rE=
+X-Gm-Gg: ATEYQzxlAOakf3IdZ1Ku9Icg6e7Hf7ZwNuBUKKctTD9tZIdLRV+KqwaxugCi+BPHG3f
+ knv771YvasQ9l0StWj3uiLNAoourIygeHPva9pc+lGJ+cpTzdOmygpbePBRaSmyG5C7/tiVNDMO
+ D9Ydvytget3WgF7WjL046OBOGjV6bELkH1NRIw2UAARvGZFZhAPiFzWIhc8mUsvT2hE4ihJg9XS
+ PQbuuK+gyjQT2VzyE7JWdPxMwdbZRH14QJKNwgE6aGtYW5FIcrbKlIbeYQP+YHyb9ja0DfKQS4N
+ dFlCCaBaM7X0xfemq7PNc2R7ZTfHt6Rwv+wUbdxBbF5IUv87BMvXdtWYtY6pMxjM7XmLnehcj/B
+ 2Y5QCj3905YWEUmRuM2wjhuZ6MghKlmbcqcFugPAsrrh7o6VCkDWjjHzjcnOXAcwPqN0+ZyrM67
+ T/GfEhN0Po26kXDeOoRg==
+X-Received: by 2002:a05:6830:4101:b0:7c7:620:b1b4 with SMTP id
+ 46e09a7af769-7d591d94084mr4451641a34.0.1772310050691; 
+ Sat, 28 Feb 2026 12:20:50 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d58644edfbsm6978361a34.6.2026.02.28.12.20.46
+ 46e09a7af769-7d58644edfbsm6978361a34.6.2026.02.28.12.20.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Feb 2026 12:20:46 -0800 (PST)
+ Sat, 28 Feb 2026 12:20:48 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Scott McNutt <smcnutt@psyent.com>, Thomas Chou <thomas@wytron.com.tw>,
  Yao Zi <me@ziyao.cc>
-Subject: [PATCH v3 14/17] nios2: Call bootm_final()
-Date: Sat, 28 Feb 2026 13:20:02 -0700
-Message-ID: <20260228202011.1834493-15-sjg@chromium.org>
+Subject: [PATCH v3 15/17] sh: Call bootm_final()
+Date: Sat, 28 Feb 2026 13:20:03 -0700
+Message-ID: <20260228202011.1834493-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260228202011.1834493-1-sjg@chromium.org>
 References: <20260228202011.1834493-1-sjg@chromium.org>
@@ -101,31 +101,31 @@ From: Simon Glass <simon.glass@canonical.com>
 Add a call to bootm_final() before jumping to the kernel. This adds
 the "Starting kernel" message, bootstage tracking,
 board_quiesce_devices() and dm_remove_devices_active() which were not
-previously called on Nios2.
+previously called on SH.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 
 ---
 
 Changes in v3:
-- Add new patch for Nios2 conversion
+- Add new patch for SH conversion
 
- arch/nios2/lib/bootm.c | 2 ++
+ arch/sh/lib/bootm.c | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/arch/nios2/lib/bootm.c b/arch/nios2/lib/bootm.c
-index 294ebfb508b..6004e83bf0c 100644
---- a/arch/nios2/lib/bootm.c
-+++ b/arch/nios2/lib/bootm.c
-@@ -41,6 +41,8 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
- 	if ((flag != 0) && (flag != BOOTM_STATE_OS_GO))
- 		return 1;
+diff --git a/arch/sh/lib/bootm.c b/arch/sh/lib/bootm.c
+index 1c118870dad..81d5957edaa 100644
+--- a/arch/sh/lib/bootm.c
++++ b/arch/sh/lib/bootm.c
+@@ -92,6 +92,8 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 			images->rd_end - images->rd_start);
+ 	}
  
 +	bootm_final(0);
 +
- 	/* flushes data and instruction caches before calling the kernel */
- 	disable_interrupts();
- 	flush_dcache_all();
+ 	/* Boot kernel */
+ 	kernel();
+ 
 -- 
 2.43.0
 
