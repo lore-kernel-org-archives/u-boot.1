@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128C6FEE4EE
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC32FEE4EE
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:23:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D48BF83EC6;
-	Sat, 28 Feb 2026 19:23:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 203C583F2A;
+	Sat, 28 Feb 2026 19:23:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ejpx4GRD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cGzri2kC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B170083F2D; Sat, 28 Feb 2026 19:23:28 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 688A483F32; Sat, 28 Feb 2026 19:23:30 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93B5683EC6
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ECA083F20
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-50335b926c2so31466211cf.2
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:26 -0800 (PST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-506bad34f51so26581301cf.2
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772303004; x=1772907804; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772303006; x=1772907806; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xqmK8Wi/riQfxqqYSkEy4WoA9ZmSeEbmCexTKD20P3E=;
- b=Ejpx4GRDEV2atwOsOeOHf+3JP14pLf+nkJdydURyw7g9HforeVlnh1MYcUFODtQ7yE
- 3hjSr8U/+vLGd5BOg03cs9Oq3VtN2UuiBAYm3enFtcji8cl5SmV8WlVIPVJC5fDM6ZSR
- RjUE2t8E7eqvFPTA9erkwig+lepyPYp4fdsIQ=
+ bh=kn0/oOxOxPKcRQr4xGZ8nauvyqeAQseAxufDbTk6Tls=;
+ b=cGzri2kC0u4FXlWs1/PKYpi6VXpizf9qlbgW982Fpv6rpD1Xqrv1oHTROUmjc9aD9O
+ ekzWLzq3f36/KGA5TQ5KblLa14uBwJfn97pRMigjETZQfoo4ftZrY/ksTADoYBv2PBFK
+ F8TaT7aqn+4VwkVS37GU90bAUhFu93/FEflaQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772303004; x=1772907804;
+ d=1e100.net; s=20230601; t=1772303006; x=1772907806;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xqmK8Wi/riQfxqqYSkEy4WoA9ZmSeEbmCexTKD20P3E=;
- b=LPuaE6wHZBP74FSYN2a8xPw739bX1TXANie0hlWyFy63VkzyTVqTdZfSZBFatlb4wk
- rzpXj32qaOiWN0HXB4/wZsV0nSpTqI4lHz5c0HHC4xeGHi4MaXCQPuFZ+SQWsHJRL5Fp
- GWTsWnOjpkrNfiCulG1WGblRc9b16u7g9KLoepU6MHlnh70IzXJMNnbQUJh8FmGzMTxH
- Rx5BnJi4ZyrAbS17fwtj/iyAzxYJZ887BDbaqngIi1kCALMUpf8oBN/wgOX6kCqT5Qos
- GijUCf8ZYaUP7su/V786SvhTIpDJGZmYao47BQXKtl1JdX2A0oWuB6XYaoUxvLbC8BZ9
- Aq0w==
-X-Gm-Message-State: AOJu0Yyi/m7P/bt/YNF6AoJEiaajuutVuOMKuWozjCSA7UzWuLdNBZHJ
- rSx4ngMdUXZlzVCH+W61hcuO6OFCG3puFhLaZ4qicOkNBxaVD0EXienmHIcbWTmwQ4NhP/hYmf/
- hewY=
-X-Gm-Gg: ATEYQzxBDXMJZk2qmnpDQyILMinehYufGaw4Dw9ps+Ars1l2NqY8mRdalJwuu7/59gT
- RPJXkup9DLnqPJoPvL3wfjHP53zFiCpfy6EGMQjrT0LRjPZSjNusY/VnJj9cw8u3yUOSY00ewdg
- BjZvltLDJSvlRBSIyW+x4qOT/a6JMUOmJTSnxI6BMeE2JsYUXOJmGmZiskOoPjh1qhFvpw7xwzc
- LlT4RLJoPAym0+tzrLI7IDNtpEZ4j8SpohTsbD+WgFRVhdc+5GARv8XP1MPglboFbnYI/9EyJfj
- 08SHjhLChelg0YxUWn3Ix7lmO/g+DET6wdPE+8GAPPHeyRT3EbrIZOAnj/ZiA6fa2yb7XbYZoBY
- ehbJF9C/2MvuziGAA5xtOJRItqI7ifOXLv6qJs71i7kuua/9l15LS2O6xww3+iP0aT1tkbBZ2ew
- lA886M0DKimnPXOoe07oVF1IG2Ynu8
-X-Received: by 2002:ac8:57d3:0:b0:501:3df2:fd60 with SMTP id
- d75a77b69052e-507527cb205mr112166861cf.12.1772303004136; 
- Sat, 28 Feb 2026 10:23:24 -0800 (PST)
+ bh=kn0/oOxOxPKcRQr4xGZ8nauvyqeAQseAxufDbTk6Tls=;
+ b=eOFTw0GgRIKodWSAYdP95VFBz46Z2JQP/GUlK/O6uxD5bENZOuQAt627fVTGsJIQG5
+ ekfjII89nzEFgTw8ruH1NY6zHjzQyGiTjWTbnD19F7txEcDt79GNTFyPMRgw5+/Pbq4R
+ K1ZFpxYykLxDZbhVSR5kmqIV4ka4K/DKKLx7HkWQi2I61gZZtbhMJdyxD2iWurmoH6Fx
+ eeyZW+ZQp/3jjNUH9GdjXHRbAoNf4l0l52EtiMdoqXwyaaMn5YeZd15dzelEKv4v5+kB
+ wvs1iAiYe2Jj1HKaAJA+Cryhkzyqj1H/B9AIXBxjdFm9YZ3lBGjAD4unNDwmcUccwzek
+ jZrQ==
+X-Gm-Message-State: AOJu0YzYA+m5OH2c120SsdY68c8wsObDKCl2l+k9GrZ19IcqAK7sYdLe
+ N6mlCtVMSPzRCdVm+RAYxmRHkFv9RJaN3qh9TVl20eiA/Wgo7dg4jm850+5qPttVDbZdfjNhXAH
+ 1zbU=
+X-Gm-Gg: ATEYQzwnNNxueAEQ5T82kfLym6MjRSuE3ykaaS0jlGeswulEPZ6Aa0qSEUBoa7sX9OV
+ fq0+a3OQPEJ+MmszRa1onL1ZXfqLgZ8mXgYnxFJX9AIayGPOQRpkE6MahpkALXWLb0c5Xo68VLd
+ pVatzQt+MRocgit0Skj2VbzL+NEMsXRxWzDuElLCr6cfrr/j0YeGfszI2QW69z07+FYScIxCdl+
+ U1+6D8x2kl/BLv55kJsFpgzYcKP0FV2k7pK25BduGdcPqoYM2BKxUoGVpi2N6QUdrMbpevjJE5y
+ OuGh15PR3WHrwpWbRx5PHWFF6hHmlyEQrj+w/2PhR0Cw+7r+j7gEQL33q/nHwFkqRSA4DXkwbWf
+ fwnTDwbDODZPhd9T96pBRiaR1D+ctdB73XMohrbjuGb5UveU+bCoxBSwu6iwjrpYWKtYHWSZX87
+ 2CGXceiedZgdw7tf05YSZLuDUlkK8o
+X-Received: by 2002:a05:622a:1449:b0:506:bdd1:794 with SMTP id
+ d75a77b69052e-50752a27d9fmr89621791cf.76.1772303006480; 
+ Sat, 28 Feb 2026 10:23:26 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.21
+ d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Feb 2026 10:23:22 -0800 (PST)
+ Sat, 28 Feb 2026 10:23:25 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 2/7] test: fs_helper: Add a quiet flag to mk_fs()
-Date: Sat, 28 Feb 2026 11:22:42 -0700
-Message-ID: <20260228182304.3728735-3-sjg@chromium.org>
+Subject: [PATCH v2 3/7] test: Update comment for fs_helper.setup_image()
+Date: Sat, 28 Feb 2026 11:22:43 -0700
+Message-ID: <20260228182304.3728735-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260228182304.3728735-1-sjg@chromium.org>
 References: <20260228182304.3728735-1-sjg@chromium.org>
@@ -97,65 +97,30 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-In many cases callers only want to see warnings and errors from the
-filesystem-creation tools, not their normal output.
-
-Add a quiet parameter to mk_fs() that suppresses the output of mkfs
-and switches mcopy from verbose to quiet mode.
+This function actually allows creating two partitions now, so update its
+comment to match that.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
-Changes in v2:
-- Add new patch to split the quiet flag out of the previous patch
+(no changes since v1)
 
- test/py/tests/fs_helper.py | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ test/py/tests/fs_helper.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index bd9169b2a4d..4b123ab0afd 100644
+index 4b123ab0afd..47340295fbb 100644
 --- a/test/py/tests/fs_helper.py
 +++ b/test/py/tests/fs_helper.py
-@@ -8,9 +8,10 @@
- import re
- import os
- from subprocess import call, check_call, check_output, CalledProcessError
-+from subprocess import DEVNULL
+@@ -85,7 +85,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
  
- def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
--          fs_img=None):
-+          fs_img=None, quiet=False):
-     """Create a file system volume
+ def setup_image(ubman, devnum, part_type, img_size=20, second_part=False,
+                 basename='mmc'):
+-    """Create a disk image with a single partition
++    """Create a disk image with one or two partitions
  
      Args:
-@@ -23,6 +24,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
-         fs_img (str or None): Leaf filename for image, or None to use a
-             default name. The image is always placed under
-             persistent_data_dir.
-+        quiet (bool): Suppress non-error output
- 
-     Raises:
-         CalledProcessError: if any error occurs when creating the filesystem
-@@ -63,14 +65,17 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
-         check_call(f'rm -f {fs_img}', shell=True)
-         check_call(f'truncate -s $(( {size_gran} * {count} )) {fs_img}',
-                    shell=True)
--        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True)
-+        check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
-+                   stdout=DEVNULL if quiet else None)
-         if fs_type == 'ext4':
-             sb_content = check_output(f'tune2fs -l {fs_img}',
-                                       shell=True).decode()
-             if 'metadata_csum' in sb_content:
-                 check_call(f'tune2fs -O ^metadata_csum {fs_img}', shell=True)
-         elif fs_lnxtype == 'vfat' and src_dir:
--            check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/', shell=True)
-+            flags = f"-smpQ{'' if quiet else 'v'}"
-+            check_call(f'mcopy -i {fs_img} {flags} {src_dir}/* ::/',
-+                       shell=True)
-         elif fs_lnxtype == 'exfat' and src_dir:
-             check_call(f'fattools cp {src_dir}/* {fs_img}', shell=True)
-         return fs_img
+         ubman (ConsoleBase): Console to use
 -- 
 2.43.0
 
