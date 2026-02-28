@@ -4,146 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02279FEE4F2
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 16:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03115FEE4C8
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 18:23:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28C3A83F37;
-	Sat, 28 Feb 2026 16:59:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 197F383E76;
+	Sat, 28 Feb 2026 19:23:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="DUU7g6zK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dpvTyj/6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A3283E63; Sat, 28 Feb 2026 12:45:18 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AADC883EEF; Sat, 28 Feb 2026 19:23:23 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FD32801BE
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 12:45:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5153383CDF
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 19:23:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=awPmAdnaJlMnQPpGoiv60yAV5gIu0fScsfubCS6WcWRuoTcZbuJ6Sa0GGfDTV232p7eGx7rzXRC24YIGR/iBbVD1wMzQB330ybg8gQKmPftcMoVxw3frAovPrquCldH8a+6MGRfxHOa8R9uKbSYxwAVFROO0jGircfDmBCCbBql3br8nESn9JVf3msxTl18FgwHjMETT/b+HjkHjRZFR5VWQca0x1h9eDTNomirmE39rZPSvPz8jys9UY7GGRtnQThRcXb/RQ9ky5IJy6Gsjkv+dW9W0w31/aVNRgJX2HR8NOFGeED1mNQi9GPOwLV/sqWvziU4v5LD6Kv24IQSOQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jDX7FNlp8QH0sVsTeZtWB4Xh4sY26TdJl8GP/5OSims=;
- b=fa5zGY1nYoFszF9QumLJevuL0XEc72dmOMoR64p+HcU0i1pPlMNucIL91CWtfHKh+dhC/HAI9PqsieV2mGKqicA/sD1xhi1rf2OTPiq/LC1ttrL6py08nGLFHGjgWSQuDbMZ0izKb7Z6CzPE5Yzkx6wz7S2XeP7RYM0bKBX1HAOJezEm9K3XxhSMHvzAa1eb9q06FcRDVfynfggnyhBX9LiKBI9F+UgAKLN1iLfozDGriIPyFNQA4/GQyf1Iym5I4Xnhtv9Iajmy2UXeDTUJ716sZn+40Q58D4HKaqznZlYuRBWybY4d6bjOluN5CPLII2FfX+VYSlmkeD5u9evMwg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jDX7FNlp8QH0sVsTeZtWB4Xh4sY26TdJl8GP/5OSims=;
- b=DUU7g6zK5oxqcVZ7k2z3ccQihIduK4mLh5u+mDkhjvXoRtiTIXNl80eG308XF5e//dLy7kK4TNNRC9nOSjSqevCz5hYfzSlcFKhDKKkG8go+8HfQgBhux5ZXRzZfWlszuBDM0kD9tBhMwL0Gp01jcMjxH/RIXOyYDUqRmgnlD0jpAg4mVclavK+LxWYF8WFHqSh+nsh/3VWUmNudBx97Ij4mvM8tUOs9Yy59dlX7G/y2lV1BRggc2uZtc9PXQpsPCljpLK3woYY/ggu+ScDC54l4rJ5znSj/l36p8Irxho6QGQ3EE6EeaVSxOA5ab7LEQWKl/GhnfkaAdlGMB+hiIw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PA6PR04MB11713.eurprd04.prod.outlook.com (2603:10a6:102:51f::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Sat, 28 Feb
- 2026 11:45:14 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9632.017; Sat, 28 Feb 2026
- 11:45:14 +0000
-Date: Sat, 28 Feb 2026 19:47:06 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: alice.guo@oss.nxp.com
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>,
- Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
- Frank Li <Frank.Li@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jacky Bai <ping.bai@nxp.com>, Rasmus Villemoes <ravi@prevas.dk>,
- =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Jindong Yue <jindong.yue@nxp.com>, Ji Luo <ji.luo@nxp.com>,
- Niko Mauno <niko.mauno@vaisala.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>, Adam Ford <aford173@gmail.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- David Zang <davidzangcs@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
- Marek Vasut <marex@nabladev.com>, Joseph Guo <qijian.guo@nxp.com>,
- Simon Glass <sjg@chromium.org>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v2 12/13] arm: dts: Add U-Boot device tree for i.MX952 EVK
-Message-ID: <aaLVuoFhbnVLm3OX@shlinux89>
-References: <20260228-imx952-v1-0-0a360e7e8cb7@nxp.com>
- <20260228-imx952-v1-12-0a360e7e8cb7@nxp.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260228-imx952-v1-12-0a360e7e8cb7@nxp.com>
-X-ClientProxiedBy: SG2PR04CA0204.apcprd04.prod.outlook.com
- (2603:1096:4:187::16) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-506a1b23c05so37609231cf.0
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 10:23:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1772302998; x=1772907798; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qHfF1r5DwSDccRvHx+VicBqpeeFGtPSH5BiqYv0/2O0=;
+ b=dpvTyj/6qsWngVQts6z/iIudnJKgFPKJDPb3KgnVjTM1HMwpJAyK9q8rLZGUeiaXgg
+ FmEjfxNLNi8jteDEuiUQs/MbdPEajDn3VmS+DHuWmv6wJYNKnBoSWtxNkX9+c/3Fp6+j
+ GX+3+A8ySiyWILHzqfeV98VS04i4BSsfSqUDo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772302998; x=1772907798;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qHfF1r5DwSDccRvHx+VicBqpeeFGtPSH5BiqYv0/2O0=;
+ b=RWyadqaF9uHUUHvBKRDIg0aQtnnoKnQ+H/bpeATFGd4wjpIuV9Fiht0wLvlXl76MRZ
+ al0DmTQ+a52JUOPVJ4k197QfrhHOtso9YMxjoFsGvspzLkblxv689dQXOg72eDEXogOp
+ TvQqkGvibDZNzHQr/Y2wvO8Hbb1vyQMke63PpWEOdEGDk2KlfERnMow1r9iuYZcR2kWK
+ fzA3qJefEhOEsJM7m8Pflb0Dxm0zMDceV11O4QIhyvmmzMjvX2Th5/pOAalJ3llJosS3
+ iTnwNzjBajfSztxevwb1WJ8Jb0Mh7eGezEAxltWpmdicfqaCDQdEWc9dmWxQX7sce+33
+ vbNA==
+X-Gm-Message-State: AOJu0YyAJSQOKFsixI5AftWgHM81pOAgbaiak5fzx127G9HvC3KWEbMt
+ uKzZL5QrZ/ssn8Yc5EsHFUDicr1ypjV6dRpvw5nhJaHG/FUJNN03a+lfe/zAlRerIHVyLAC4BNK
+ myuM=
+X-Gm-Gg: ATEYQzxqh1PJ1Fbi6dzSr+2x2WKhTLv6OsC33Ap+9MFeMyGYEu/mHON4u/8pbM7Xujq
+ Ht1mPMWM+s1cOSar+1jT7c5jZ8hh/lf8DFs5ohZlPE+HO2tLFCmZo0aQi3w7CNnJH8Fz4dU9zaZ
+ VuAdoLP3qkvHHBMDwDmdiT6+RfpYumHN5u1jWr0S82NkeUtedcJrScMgRhzL0ptBXUznyfN1x1R
+ 74HHMeFA1Xjg+U6bGOblqvItG9mVLSazVvoYvVMIq64Etw0StAq8TOVKboG2FpDxX7tkoowvpBS
+ OjkvDSe0kVcNn711oZlfaVhPzvDmWke2K6wC//mLpreLPHiPc0E6fIY3b1SxlvQoS5yDcTYr+gD
+ fQda6dXPybdyouX746RNeYBAqvkK6gq5W63LO8LV/0XyrCgiRqLC7PZicBfsWxP7OFOcb8+QVXo
+ Alv7Zegc5Dlz9zyWl1jA==
+X-Received: by 2002:ac8:5ac5:0:b0:501:4446:2ce with SMTP id
+ d75a77b69052e-5075288b728mr103891551cf.49.1772302998289; 
+ Sat, 28 Feb 2026 10:23:18 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-507449a66f1sm78508601cf.12.2026.02.28.10.23.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 28 Feb 2026 10:23:17 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
+Subject: [PATCH v2 0/7] Provide classes for building disk images with FS
+ partitions
+Date: Sat, 28 Feb 2026 11:22:40 -0700
+Message-ID: <20260228182304.3728735-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PA6PR04MB11713:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9332fa17-acba-44be-fab0-08de76bed640
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|7416014|52116014|376014|366016|1800799024|38350700014;
-X-Microsoft-Antispam-Message-Info: SWdL2tJV1tq2Cl3WHQCgDNhd/hv47E1eBPVj7rKQQvgVkO3BAGo/TQtauv9oNNmbGZAMVgqGDqbyyfTR+4Q76Iv5IWZRAL769lJBUDKMzAil6bt2kaJXvEcetfMLkCWLGQLvk45bmQa3BtROrp9l0L0u4T3eJsOJhzgXBg7287jw2sYkaH/RiiVOBcY4lKB7sak1QCcoO9pRUYEG4Bivnng2oYAtN7oVRTfeKufb6DbOs9Zfxk4I0K/Xn3GO7Chy0XIlc1EpebAgVEvD+565TvUSNHJ3ehzC+V7FToCd/a0OFs8WLaOkvis9Jx3xKr4s0fYOQJ8xLtjRghZEfyxZM+OR9yV/8OSIowIAQOZxE5PVroLFaqJON4aSbIswm5Ja1I1oJzeckjvRtRmmx8tvAGOkscth2mDfe6aWJd/aEQ+d7FyUxRZJpcv3KT5rue26IjDSiP50GxwNX8MNtivg55UT0/EQ9+DqFWzSuiw20C7NelFjjU7qiTT3u/AFFEqXryg0R7w/YKZjazskBa1efrh5ccBwibUJIXwGtHXMZgTvm3OpffalBjAIebk98RFBl5NrSUebQS9NTxBd4ogjyI7D2yPO0Xlm85+4Y7WCldTfu1lvuJVAn0b3kjJulvl1aGzH/r72XzkZhjixEqjEYCXaaJGj5klIbr/wY+1QOzxtnqDJ5BLOyPWvRVhNPw/MAbLSnSUvCZrqe+dowVq5Hl9kzgFczlxF1fQ1WI4VK278Vbt0YmpRqhDZTdno2RJ3DircneSQJXnB4tnENL+gj+ta7OK+O+WlryRl2m5Do/s=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(7416014)(52116014)(376014)(366016)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7bguIY67p7ze9rT+XPY53zZNiDW+nyIEzx7yIEFKyj0i/kHTB5XA5Jc0AQBW?=
- =?us-ascii?Q?AGzB1YIcCxs6E2vxPaOY0Xt0Q4mdz99L3QeoOd8+QAsf7nxVevCsOn9Vck0J?=
- =?us-ascii?Q?NfBDdbeIwQm0UaTDsCm704swMAZWm/QVOGiukhNNv0eskG7p+YwsK+VNRO/k?=
- =?us-ascii?Q?7JvhmRSra6ZEEQ8Tt7U8IKxgKk6gx+rJojx+QHKrLGq6n9cj2OD5oKaQL2rA?=
- =?us-ascii?Q?5vlisGmvimJCNGxcKBIwJ/qRyIh3pzYT8Hff8VW1c+Q0b5F883hFvPd1Wf08?=
- =?us-ascii?Q?sc62nJZq0sQXqYNYrfXk2JaD7eifjGjh9ax0wqpqYQ5FrcdvCQaacm29ff8u?=
- =?us-ascii?Q?cmBucLsYrG13G58NjASSiUxp0ZCvq09YJsVhgGeks4Kj6KP6dVQbbvlxh4g8?=
- =?us-ascii?Q?mMVFIpVsbB+A3LsJsSi2vFxqqYuzZ/K8puwn843nwQJCe3Q0jm/gV8ssrhAE?=
- =?us-ascii?Q?3sysAWjsIDaxbBsIo0WbKaJpz4ky5WTYV526W6F3jE0zKLwLqsR3u43PC7nw?=
- =?us-ascii?Q?pt/H7Q6vwFwFBo1IyvBnwovMt2wdHdiSw6X8vvUglOSttO4iED05CZX6NZYq?=
- =?us-ascii?Q?JyUoTnzS8wXoo1L7UWfXfm5hH8WJ1QlNDzxCZd/h5SQgmeiF4xWzPb/kR0Pj?=
- =?us-ascii?Q?n/2+UBpDHRSkQ6pNhQtsuEFcjmyNF/YJ1MUqS8ttN39c4IJZJRBZnqSQY797?=
- =?us-ascii?Q?fTtLBbomJ7dwHwUMYZxUNdP/Xwi6RDCXLqFekqPigTx5ea7paFdhGsJZJkdl?=
- =?us-ascii?Q?ROokNOOla/MwcagyjVL921uYaR55ruudkzotvpYY7Vuw+DZ1Oyzw+WQEaOuz?=
- =?us-ascii?Q?Awa+ae9Edtytz4gpsIAq7ZK+D4VB2vL0nVOuwps5T3ZjPaXVascC2zRxlrE4?=
- =?us-ascii?Q?YLw0CP6R5i7YnDgFWSa5+vXFjsJnpp72Bkn8p6LFz9xtBfWeqiIfcaAogxB/?=
- =?us-ascii?Q?uLbRFHEWzFgw/GoMyrfDdeufsMfiCrtRBj51IyEdEL+EayL57Wv2/ngqteJT?=
- =?us-ascii?Q?gMOg9zZTNHKeWvBKuvQFU7xCFJIaLpY9/eORRiNgbsFRLOYLcOHPv8ThaDNo?=
- =?us-ascii?Q?ZyzylhZ8CLRLraVge84pzXocgyTf0w/Z3ymlqwzjH5mSINpJUOKo70mpOnDq?=
- =?us-ascii?Q?mn4NzDVgzuSH8m1xatkeDMorjGzaMPGPxkjrn5Z8YCmA1MSANljWbLDzOfP5?=
- =?us-ascii?Q?Sdxt/+f2ElEZN/m0WG0LXBQ0P7j6wBXNNf/gwd7x435SZ5uQs4a6k8BRyGPW?=
- =?us-ascii?Q?x1tvXgnk8CXwv6LQuga1SF6ljCrJwgrrXo1Bcix1gHOZ0nsZh5u6KWt7WLiK?=
- =?us-ascii?Q?QUMIgNs3euyuC6sZnPB35G8lLCAVqeo8igEIxE1VwHGhI9CN4t/U+8PfQX6g?=
- =?us-ascii?Q?2hg9BaS4dHxwpeO2FoNF8bj2yebUnzdNh/DBrZvIAqyKFhI6CnqOKJ9Oz5By?=
- =?us-ascii?Q?2okUGMMK3iTd9y0XHalxnvgUH38q6U1f7q9rnG6SFyhHd370j774wjCe8Br/?=
- =?us-ascii?Q?h5ZHyfGLvipbEj6T0sKrQczC3R1ojyaXQTzvzpes/4qolnY1aGwXmLBw6fqI?=
- =?us-ascii?Q?9cYH3KWXfLVnSyHlHyz+GnTtcYOixjePym+yK8KC7LV/eY7QNukjcGShYdEV?=
- =?us-ascii?Q?BgdrsGnqWsczb1490yNzUKW6Jw+/kFJ0bQHuLMMPrawZigCsle/ZUrqNNWDU?=
- =?us-ascii?Q?OIVhq/82jNWwobEuXwcF6aHD2IP9qvuyYCuMdYaSxD4PuEOROd9DW0rtUEbu?=
- =?us-ascii?Q?2ncd6gv50Q=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9332fa17-acba-44be-fab0-08de76bed640
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2026 11:45:14.4999 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4TufoYz3GZp09PiauaHeCDHCt1W8qlvLveJrF7FZ6bAm7wRDqOZSz7KlIZXQAKy3hMZMk/EpP//ryRY6xcKARw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR04MB11713
-X-Mailman-Approved-At: Sat, 28 Feb 2026 16:59:36 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,11 +94,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Feb 28, 2026 at 08:22:30AM +0800, alice.guo@oss.nxp.com wrote:
->From: Alice Guo <alice.guo@nxp.com>
->
->Add U-Boot specific device tree configuration for i.MX952 EVK board.
->
->Signed-off-by: Alice Guo <alice.guo@nxp.com>
+From: Simon Glass <simon.glass@canonical.com>
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Refactor the test filesystem helper into a class-based design, reducing
+duplication and making it easier to create disk images for testing. Add
+a helper class for creating disk images with partition tables.
+
+Convert a test over to use it. Provide a few other minor improvements as
+well.
+
+Changes in v2:
+- Split the quiet flag into a separate commit
+- Fix fs_img to accept only a leaf name, always under persistent_data_dir
+- Add new patch to split the quiet flag out of the previous patch
+- Split the pylint fix into a separate commit
+- Explain why setup_image() is left to later
+
+Simon Glass (7):
+  test: fs_helper: Allow passing the image filename
+  test: fs_helper: Add a quiet flag to mk_fs()
+  test: Update comment for fs_helper.setup_image()
+  test: fs_helper: Drop the size_gran argument
+  test: Convert fs_helper to use a class
+  test: Add a helper class to create disk images
+  test: Convert test_efi_bootmgr to use FsHelper
+
+ test/py/tests/fs_helper.py        | 310 +++++++++++++++++++++++++-----
+ test/py/tests/test_efi_bootmgr.py |  38 ++--
+ 2 files changed, 273 insertions(+), 75 deletions(-)
+
+-- 
+2.43.0
+
+base-commit: f6963fc232603007c661411fb31c57f1a9678a87
+branch: testfs2
