@@ -4,101 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6B6FEE4F2
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 15:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A7FFEE4ED
+	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 15:59:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07E1783DBF;
-	Sat, 28 Feb 2026 16:59:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E39183EEF;
+	Sat, 28 Feb 2026 16:59:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cLc6KsKt";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="t9qZ4VRW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A62C83DBF; Sat, 28 Feb 2026 09:51:33 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 69E9883DBF; Sat, 28 Feb 2026 12:26:50 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22A40801BE
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 09:51:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2FB21801BE
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 12:26:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aristo.chen@canonical.com
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id AF1F63F197
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 08:51:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1772268690;
- bh=I33hZ1WhYdVxJGpqwtLUd+6qsGz5VMbDFbJjqtaRMyY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=cLc6KsKt/7HuEZm8hLmceqwrJyNH4+TV1pExpAxI/ApZTVUCstulZHgbiL9FiUjKu
- /Twe7D00G+gfCSyTtGHF3ZxJwN+88wIQlmNAsN281kQ/kNBhtdRcC3VL1Wkc794al+
- Zgk/0u0dv+0ao2gNsrUPSCZxULFJE+gJVvlKxMwiqKte6vfVcZyb1D/z07LS19YWZl
- 5DecjW/OczYg28eLp02mD0bGaDV8nkeOM+Fy3s44uDPPnzy6wMl1JYDmZeoKZYFb+r
- 2LQPT0BnTqclbGGKXlrUJqVJ1U+sbDulwjqUrvlVeUYtDWVIrcTyxYDyhF+PHCMY2F
- lO3ldNGmdyd2NUpOF69+lw+w8Cx4LzBDqLY5fuaGiBSWyLg2aQyrP67FyYVAcnRSB4
- YH2itUENRAdaMT65WYff74FVnou5B/6QIQRQX2K+HmLKLU9wGtWsZWP9jcZ0iHsXfy
- zcXslKxPe8FMEGhMM8DACdnbFG7E5G3EqqoPUkXiq/4Tc4+02Ly3LDRJUTwrTZaxWx
- aAC0t96CaHBupCt/YLVwAJ7Tj78iPKuKZUs0zZOm5QTRwhOcUhNoA7ItBrxzEulsie
- KXTiJpmHgaSJ3Vr14ThHexOcONsltVTi72UiRHDg0/Lj7bx2BzIebAnXx9bC+Zl0C1
- pTnBMZ2DJHEiCg3ZK2IUE/fw=
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-2adaa9c4b89so42164515ad.0
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 00:51:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772268689; x=1772873489;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I33hZ1WhYdVxJGpqwtLUd+6qsGz5VMbDFbJjqtaRMyY=;
- b=q2Wt59hpzYfv3Dv6eusqMBr+Nut8ghra9dJF/VKvF1kzlTrxGpRvuxrL+CmVotWb7c
- oWxR8KliTzDyEXpcjqs9O/o0yEVBlXPzsZ56BThVPnP8pZFvCd5ZwnJmmDpckVFW8c2X
- rWEElkVTFL5Sc4dSYv34Z3K+3xLQAm43MqcWn66xkKl1x6HUh4/lr8qOWKezcxgKG3Ly
- uIYthKHfdvHCX2e+4RDkB8rrYhVoxwQkZAhvTlcO46aErMwx89mt7HBymXicqhL4g5jz
- v2A2jxBtIABrqL49N0w4I1wu9MZjpO6r0Uh9i/1GSS/0rjukaB5RYrpBMH4DBGtAkVq8
- wVjg==
-X-Gm-Message-State: AOJu0YxKUu+M57S1K665r+WP3k8jIFhab5b9dWjNRgBZCv6ZeSzaJb0P
- UOIgbsDW0xBXHvsP1aeDb7sZYZsInp2N8+qgPnXiuA4tda1FQBVyaO18pof9+WXsp46iwbyM2Y9
- kqHIE0jSAk5AfXfrKfR9OO3K653bl/HRr+Hw+hOHLCUkAoZBPdg9Uhj8y/jDq5vra4wlLGKmIYR
- WGcccQOQ==
-X-Gm-Gg: ATEYQzwdHjVoayAWIF9ESUcqAPLwV9goXrihJcCAwrPvzUP63vMFji5skUpNSGy71Fy
- 9ahrQUk7AqGBiDimlRkFLDGIY34f7ls9QfIVbZJe8jIVQ67gdRYosOwYQxZMzMoiixwzsInMHTY
- FlNcvTCHsOpPPiiDBO4HZuW7u+kq/olQHs7/kyZT1fX/drLtSPIMLaNUnpwzcX1rrn97CzU5zir
- 4iiOfg/Ydfzxm5KZe1oO5YmMr6A1BZoHNNwH9kc8kUd29WF8mAtnRol2Km8wDyfZxZq8OaS0D3W
- cCvb/W4fc1V46nR7Crtq7kBPCvbJLUFzXy0Xi6xQ+MZnBR8JLOvTfNOw7DM0DIp2fG6ACYYLd5z
- 1nbCzrjLhuRtnOSzqt5NtD/cl5dAiqwuWO8a9ZhdZSzfdVC8khdnVbI8cVLIM1wIvMYPnxi73
-X-Received: by 2002:a17:902:ccd0:b0:2aa:f43d:7c41 with SMTP id
- d9443c01a7336-2ae2b6500cfmr54471895ad.10.1772268688931; 
- Sat, 28 Feb 2026 00:51:28 -0800 (PST)
-X-Received: by 2002:a17:902:ccd0:b0:2aa:f43d:7c41 with SMTP id
- d9443c01a7336-2ae2b6500cfmr54471775ad.10.1772268688597; 
- Sat, 28 Feb 2026 00:51:28 -0800 (PST)
-Received: from noble-uboot.lxd (124-218-37-86.cm.dynamic.apol.com.tw.
- [124.218.37.86]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2adfb5b53f4sm77114665ad.18.2026.02.28.00.51.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Feb 2026 00:51:27 -0800 (PST)
-From: Aristo Chen <aristo.chen@canonical.com>
-To: u-boot@lists.denx.de
-Cc: Aristo Chen <aristo.chen@canonical.com>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Shiji Yang <yangshiji66@outlook.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH v1 1/1] rsa: fix incorrect positive EINVAL in
- padding_pss_verify()
-Date: Sat, 28 Feb 2026 08:50:26 +0000
-Message-ID: <20260228085121.3355465-1-aristo.chen@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=k0DIRseZfg8HVq+tgvNgNoA6fj22cDs2M7z7GShGSletmiA9cfeZ7LebdYfpa5wckuExTy5UrltwJmiTrEy2N8rhNlWdnE5AZE4Ym7rgM1I1lECTt1rPCcNWgWL1N7tfolP/R2QcE1fWNu1/5lz1NF/ZbFXwWQtAumKhH4QLXbRiFzWOvpNBmD8Tjq6QwgwNggCULEkoVKbFFdTvmzRViWB75FV9IIZT6qru37ZTVFiU7iivz2L7Tr5lEVYlovl6+X75vLJoi2Jo92IkwOqeu00MLQ/Nkj5ZfOhU9RgmJY+LRxxqkKCpTuLSXK0uFTBnx7vGsjWnu28qc80n0BJNSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nzXNR9RP4lB6R9BO0NuLt1JZ1hjaTMi1zvP5wtxgi2k=;
+ b=MAyPY4IRDAzz0ea7gP0uTQMZBqsmE3Iit20SCaz/IPWMz95oOr8C6Jh0NtLCKUw4fGzix6d2DIs3QTZ+XrPEXD/aXBE1cgtR2qgEqpcdnM3XOmP3YyLYeE6jqCbC2n2Ck+hnrRRmJH11tH9QVRDWi0DYcYjhnTTuxQ3Gm0CDTPvAb8h4tVWIZ2QJumz5x1lRqzhpU3x5AZZNlLxr7B9qF8JksX4lNeGnE2zj++rpO7j7/6cIochu7jnpA/ri1O9D1KFU/hd+EkUGUcf8Qjh3AYny9UEc9E0ozZKZBo+liBWYxW7Q6LRZEkKx+mm05yfPrvdz9CAl2mpGgSwB+ONATg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nzXNR9RP4lB6R9BO0NuLt1JZ1hjaTMi1zvP5wtxgi2k=;
+ b=t9qZ4VRWPT0g+l/ubwtklxWA/ZBNQBmlxwGH6gnvSxwlb7u3Z/twghrPFq6IiEib0hgV/dNa5YyU46ISa3jHrnhcqEfqaSxMdsOCkRYFPHdf81JPkHqrMdzaHN2hLdd4RG5Wt/gL8i8USDdUw8j0Rhv+/5DyjQq1TF8uraXKUJrZ+tQfiRnXZwQMa8QEC0mQeimeMHLFepjSkMGv91K2nAqWm8TlLwPUOOVVCvxEKP2eVuqa6mBb4hM7fxc2tldah9YxVqaXl8r1ORACgCpccMsiTSktV99+pWa6qChoJ6oIHP4AjwKLKQrk+Lz1rRzcECuk/x4teyFFNL5gXJVIhw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AM9PR04MB8067.eurprd04.prod.outlook.com (2603:10a6:20b:3e5::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.16; Sat, 28 Feb
+ 2026 11:26:45 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9632.017; Sat, 28 Feb 2026
+ 11:26:45 +0000
+Date: Sat, 28 Feb 2026 19:28:33 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: alice.guo@oss.nxp.com
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
+ Frank Li <Frank.Li@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jacky Bai <ping.bai@nxp.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Jindong Yue <jindong.yue@nxp.com>, Ji Luo <ji.luo@nxp.com>,
+ Niko Mauno <niko.mauno@vaisala.com>,
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Adam Ford <aford173@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ David Zang <davidzangcs@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Shawn Guo <shawnguo@kernel.org>,
+ Marek Vasut <marex@nabladev.com>, Joseph Guo <qijian.guo@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Alice Guo <alice.guo@nxp.com>
+Subject: Re: [PATCH v2 01/13] imx9: scmi: Get DDR size through SM SCMI API
+Message-ID: <aaLRYQcI1HRzT8Jp@shlinux89>
+References: <20260228-imx952-v1-0-0a360e7e8cb7@nxp.com>
+ <20260228-imx952-v1-1-0a360e7e8cb7@nxp.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260228-imx952-v1-1-0a360e7e8cb7@nxp.com>
+X-ClientProxiedBy: SI1PR02CA0060.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::17) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 28 Feb 2026 16:59:24 +0100
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM9PR04MB8067:EE_
+X-MS-Office365-Filtering-Correlation-Id: 66c3e125-4e8f-414a-96f0-08de76bc4106
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|19092799006|376014|52116014|366016|7416014|38350700014;
+X-Microsoft-Antispam-Message-Info: f4xPaDGf/YOn+RaSITjFVfWrWFSPcFiHEyqd32Am8AsK6rJvhDFHxdbtp9gqIGHGsTm9CENGIYtTI4zOgbLl+o5ooFUIANEQPBCMM90Sj8XnAVqSvRFWXcXx9kG/MM13t7JWWpFisVcak5xRVAsscO6HtUj1yrrhdTFjWdHjUuJCsTMcbdY90W6thpyN6AsT19ARTnBa7bbxmQbrMtxo0ryTfDAvdCfpZg6KR/+qhTg2QTmGoGBvdccNMm+5kU0+yMBsdeOZ6l3wBFCFc0gD+WITpy74FL1+Zbdga/RiSXYexfJgC0voGtPGIJMUB5l5xxJwVP2Dnmet/VOMnVwmtjEXEOYHfIVS8Ha1hz96RRRenb4mAFI6c7232u3k8NA42h/5Mu29uYyd/fD3lFPvHD/IzVsUj41zR3LRYVjiu3iwmHN3mv8yoTMm2SOn4xrALwjaYncrHaIKHvePnKZBBnLnIKy8IjFPB78RFxma0sY4c/oOWQgaEDLZR3iU4SB/z4F1cBniFYxRH5wvhYQDHZK5D9q1+yR9+kkMU5xdyoBZ0O84ExIhZuBQg2Dw6aLmEHebgSaNjOMoEEvgwLV3VqBbT0AeSMJoBj0OsmqUMyZBm8eDdm7PyaCnU9pca43h/Vf7hnh49FG2qobLPsYebMBn/Jyra/T5YZIc+rR51+nDy71+Cx7PgCgzvHY8rN0oyK5xKp9IbKY90eRvt9mtU0U1Gjv9cpqJklgGkvyYE+uSICwhD6rSLp6aUNeM17YE/vo+d1/3cipqnIkyMEtrH4cfPw0JedLkdhUontnP5xQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(19092799006)(376014)(52116014)(366016)(7416014)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6B9gB37WoEsdeK1JOHPmNod6K3XKYdYKm0IEl0VKVFPKteP/PgFHWiLZc66+?=
+ =?us-ascii?Q?aG887wJculOK3NQbZwdijpT0NSh1iMiFbRfl2FxlryjwsCIO39z2ARgI1WOs?=
+ =?us-ascii?Q?sanx/1RT6SGUwKHsLR1NORqIJl888nonuqcR4bbclQ96Yn/Fe+mXqvuQV24D?=
+ =?us-ascii?Q?qtjex99JNqy7etki5whUjDbZDXFUZJ1mi4pFQ/bJJ3NUeMQhHKKMOCzu+wU3?=
+ =?us-ascii?Q?bfjqjPtptGiMvjez+NpF4jfe/tyar+ygmStbZK97MBuP9J/yQhFSHN8sEv09?=
+ =?us-ascii?Q?Gtlo5tfaGwHwbLKTierf3jDdfdGs2jQqNNrBWtya63YbNflSZaDvdmHZgSVQ?=
+ =?us-ascii?Q?twzAGh1yt7F8eJ9Hc/RNvoR7ABmszurKPsX3DWc8MkFOmW3014Cft2vFFGFf?=
+ =?us-ascii?Q?tsfdaZkDZXJVjSJvVErrE1WT568HH5RYHAOAmNC7EjAsVSZSQ+ESWd3i5sLf?=
+ =?us-ascii?Q?VB91VSwZIqKoEIK6gLi6Jc46YXuyXCmbGgOYqi7235CqmnWHZIjKRt85SLdo?=
+ =?us-ascii?Q?FYWzbJI8FGCtbNAkbdspVHQ6F6/29HUCZxT9iOAKXOArSs0rTYSFqtxfyH2U?=
+ =?us-ascii?Q?+5Q+mpTAtrdG3zTj5ki7ROgaQQsynRYr1yiElR7ej7QMCNxtqWtsPNsVplhv?=
+ =?us-ascii?Q?pPL+4Fum/WQo6ZJds1jeVxWLKp73Iu8PRMp8Zs9rtrzZ5XrMF+SFIgf3OwKO?=
+ =?us-ascii?Q?22JZ6CE1b9hfTZcxD1WUZ44Fn/dQZhKPWxRlZcVzsfYAjTmcpQmx6eXchyiG?=
+ =?us-ascii?Q?u8yxpv/jFE9iKIICu1z8PYDcFEe4Q4lLuo0t+5k+/fq7t/t9aidziaGYxHd3?=
+ =?us-ascii?Q?ipty8WAhNJDElzrUevpUAg+IA1/fEuAyUDhEKTPCmwOsbeTNRsoW2qlqe2FQ?=
+ =?us-ascii?Q?vwRMUv9vHUbVV953HIxlgMpufiSo8ZQEL3/wTMEbEHsl890xGqacMHIv8Spq?=
+ =?us-ascii?Q?xy5xfVbrgCUX1qZSceFexeTkDWb41eCJQNad3tYS2wZrMEj3ragmgACRbVZ5?=
+ =?us-ascii?Q?RRjCVebU9jBck1oSUpo+0Z5Au8xj03qMm8foY/KyVATlg4dJn+3Nbm5xDRxm?=
+ =?us-ascii?Q?UsQIGBY3nvsmN5b578UH0zWAqcr5eEXkEEH1DLTgyhXJUVexzu7NBTtM49Fj?=
+ =?us-ascii?Q?79wJQcHpRewBAq9Qd9OVD5Z4KLok5uRr1IjvVIbaZnvuGayBDoaAhZQC1wjQ?=
+ =?us-ascii?Q?kau+DKFG/puckAfsj1/Dfnf7zQxxW6sRo+1lSpW+kqbzgM948Dkio5vMQBJp?=
+ =?us-ascii?Q?/ksFQDXzpuf3mechJ8jeVMp+AhzMV8gHSUA2DtelckaxJ/MG2VGUiPG9ycnE?=
+ =?us-ascii?Q?tqytT5GIpXTD14KrXXk36Ocg2tkKM2pqRp/VGySlbMEJWJZ1BuKdpAz4lv4A?=
+ =?us-ascii?Q?wBhSoKFN1VHrIiFQHs8300i3RKhk4lC8NMp+9Y3IaJMebD8IEqGnrVxc7/Tw?=
+ =?us-ascii?Q?4+i1XdhxjRwaXQfFweBYrJGf5KgNSpDkDN1tO+Yd2ske+KhUsJ8XRGn5w+4G?=
+ =?us-ascii?Q?gb0/XtjUhGZxRIspLI71jBEdvxc7F6d5etQYA65iZufHTPIlg640MlcZYXyX?=
+ =?us-ascii?Q?/0P4z91oiyzxe2vyWCcYlRtNXcTDUl+/4z/exKoSR3akvoqYy4al1b6pmmDT?=
+ =?us-ascii?Q?ulSm2hduqsDLJ8gcebGQ20gNW4LDhRqluC9z/aHkZfN9Lv/zRpGhnioJMREX?=
+ =?us-ascii?Q?+Mm8dTAOBDgO628hhaTNqiJZO8IqKQUARsbE6uxaLn/Yl7mxKtF4aYT1kGWK?=
+ =?us-ascii?Q?nShJTl452g=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66c3e125-4e8f-414a-96f0-08de76bc4106
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2026 11:26:45.3322 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: soaWyH75/fgCDiZgUdb5PLBDyQ12jAQqwTk+eN9/Ud0I/7wwfbIee9Zu73/9Lu1+fg03ZliEmDnE6IYUz4GEJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8067
+X-Mailman-Approved-At: Sat, 28 Feb 2026 16:59:36 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,30 +160,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All other error paths in padding_pss_verify() return negative error
-codes (-EINVAL, -ENOMEM), which is the same as the rest of the U-Boot
-RSA stack. The positive value is inconsistent with U-Boot's convention
-and is a potential bug: any caller that tests (ret < 0) to detect
-failure would incorrectly treat a malformed PSS signature as a success.
+On Sat, Feb 28, 2026 at 08:22:19AM +0800, alice.guo@oss.nxp.com wrote:
+>From: Ye Li <ye.li@nxp.com>
+>
+>System Manager(SM) has implemented the MISC protocol to retrieve DDR
+>information. Using this API, U-Boot can obtain the DDR size dynamically
+>instead of relying on static configuration macros.
+>
+>This change addresses the DDR ECC enabled case, where 1/8 of the total
+>DDR size is reserved for ECC data. The scmi_misc_ddrinfo() returns the
+>DDR size with EEC overhead already deducted.
+>
+>Implementation details:
+>- Query the DDR size via scmi_misc_ddrinfo()
+>- Replace direct REG_DDR_CS[0,1]_BNDS register reads with SCMI call
+>- Switch from PHYS_SDRAM[x]_SIZE macros to runtime detection
+>- Secure memory size is set to 2GB (0x80000000)
 
-Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
----
- lib/rsa/rsa-verify.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Nit:
+I misunderstood in V1, it is 256MB. Drop this line.
 
-diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
-index 3169c3a6dd1..28d1a915d94 100644
---- a/lib/rsa/rsa-verify.c
-+++ b/lib/rsa/rsa-verify.c
-@@ -274,7 +274,7 @@ int padding_pss_verify(struct image_sign_info *info,
- 	if (db_nopad[0] != 0x01) {
- 		printf("%s: invalid pss padding ", __func__);
- 		printf("(leftmost byte of db after 0-padding isn't 0x01)\n");
--		ret = EINVAL;
-+		ret = -EINVAL;
- 		goto out;
- 	}
- 
--- 
-2.43.0
+>- For backward compatibility with older SM firmware, fall back to
+>  static PHYS_SDRAM[x]_SIZE configuration if the SCMI call fails
+>
+>Signed-off-by: Ye Li <ye.li@nxp.com>
+>Signed-off-by: Alice Guo <alice.guo@nxp.com>
 
+Otherwise:
+
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
