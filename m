@@ -4,62 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5070AFD0045
-	for <u-boot@archiver.kernel.org>; Sat, 28 Feb 2026 22:17:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02786FD0046
+	for <u-boot@archiver.kernel.org>; Sun,  1 Mar 2026 00:11:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE5F283F1F;
-	Sat, 28 Feb 2026 23:16:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0B0FA83EC6;
+	Sun,  1 Mar 2026 01:11:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fjikIS/t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q2BR2WdX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42AFA83EC9; Sat, 28 Feb 2026 23:16:55 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8EEEA83EC9; Sun,  1 Mar 2026 01:11:20 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8F8983EC6
- for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 23:16:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE343838BB
+ for <u-boot@lists.denx.de>; Sun,  1 Mar 2026 01:11:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4fNfgR3bdlz9tZ3;
- Sat, 28 Feb 2026 23:16:51 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1772317011;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RZA+p3fvLIvS1mSr7YOvtkZzsJBaIF+jZ3lWEjc/FwI=;
- b=fjikIS/tGHLbPq5afMMOVT7yMjA1DQJUh2AKnojHHohsrJYBeIJ9/sB6qUVaw4cqoSKEv3
- DdV5ste7OctsO/gNldcBKq+ny8c09f6EP87aG2ntj8kiyjseaTNM2pH5+KXQXG9cdxH0Va
- BhBzo+eoO+dTrupiYl1lRWcqR9wYUEF7UXjZl3JQBM4+1YUDL0Xrx40vHMkvIbh80Sr38u
- uprzBqmKJLPnix+mbfrB62veLe419ontnpuCGWiMMOittgp9HPstJHF3Anzv3Z7pk6eXiM
- gdI9PhQintG5g0piCSR+lKCgSyXYr5zhqrIK+CSJSeV+DlBZpe4DvPfpwNRvpg==
-Message-ID: <4d8848d2-3a4e-4025-aeac-c15592b16276@mailbox.org>
-Date: Fri, 27 Feb 2026 12:51:54 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-65f812e0c83so6258323a12.2
+ for <u-boot@lists.denx.de>; Sat, 28 Feb 2026 16:11:16 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772323875; cv=none;
+ d=google.com; s=arc-20240605;
+ b=cIPj+MEul00RpDVOkqzrsGIA1Dwwu6TXgMCFaiC/zhq7pG8Qbsxsy8ZPi5TwAa1Y9m
+ TV8uw3w7ShbmKHF7qeY5hIK3LBMZli13d6lLyZ+g8Sl/xjMbgd4HmP/9mZc+9tnguFXM
+ vFdy5YjxeWeVeALY0mAUyUah5Rtcn06fYYleM10dTMC1tLy/yxywyJwXj1P7rklpdTkd
+ nwH+SJ/YGb/cGs+6UQxzWMTmVc9g2rIUWDEJsC3bMFIrSZj7z9sMzL3Wa7zZJBP4WNrs
+ fjmzkG/vjYnP8m7WyxqWy+UZidM/ESX1xQs0Qpdp5+zI1gfxizDWIkHsuXoQnhUfapO4
+ Sd2w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=MxnJXGZbgmDTdosPJMdCw156p7Z2ftYnEZ17bb+WKys=;
+ fh=KlxOvR6ovko/Tq4+AAoilf1juvoiIsDuyXSo1REyiUo=;
+ b=DiETCajYX9I+nbTvYZIbGjXrdlcOIgem3hb3nCiyuIifzizSYlw/OYKjjtDYfbNWy+
+ iCKopxmcV0PHtky8aEmZRgNKnDQKTaj2Zgaevu8ML6f1CErW0FR97AIvahbOEFUijmCK
+ +w+zGWpU1Ycfg49s/m3KDgdA3y18MXZzBp3L2d0OOikc+WMk/AifDsaRAxOrAeemj2Bj
+ janzOSmztBPdRJzYZ4IGqpfRG3Zj6U+8VvIO5Fo2eKh+dVGsR017Yu7pq2qtvEFdmpa9
+ rqhUeyjttbpXVpyGnTVMemCbOr9ivwAqxLfH5Q+73Fakae8OdYCakvCSwwulwFVSnsFC
+ Mg5w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1772323875; x=1772928675; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MxnJXGZbgmDTdosPJMdCw156p7Z2ftYnEZ17bb+WKys=;
+ b=Q2BR2WdXmy4mbAAm7ppgoTaaZwsxHm6t+lxkjue1FyAFd7sgYisoX+TIxyc4zYgsz5
+ yald/2M+jhAUoCbSfJ+sQnPOWvHK7D2m37O7+uqhuc1D3sfLNgWPiMkzLmNf4KgMCUaC
+ WeVTAd4igMzB/NAanFunccZhdJzeYAeUHf4ko=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772323875; x=1772928675;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MxnJXGZbgmDTdosPJMdCw156p7Z2ftYnEZ17bb+WKys=;
+ b=rOZ9SnsjOU5VOmjGa8yEgd4Cq6DIvubgfy0nqQBpTuuC1HfkDN1hlHAknQcCk+4At6
+ pUTb+f2gRQM77J9sp8vAvrWeraGhJn1ZegSyIbgCKOfxUrZ4RIG7JB9EO+3FjT4cD+hF
+ bhId8Xw/CcyigYkus6bzAycLF2aiVHABO1bkD48hy+PPmNd6f8RFO2PKwP/s+LYq+I+v
+ lzNzNyR1zSoB7tzSMAxGMv7B32cct0ypdarNCXx3S3Yz8cUbaXnMJa/iznm2L6s0yd3f
+ jSNPemeYJBe03Zd9wB43A//6VWSJkvfIJ+33iCSUMBHWDcDSc8+UlXOVDVXzfQ/UYSN6
+ +Msg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJ0uPflALsdCL/oipxUwzbBvI6wYj9P0I0S1vILnXVKSk9E4x3jhtRrtCdwQX7Bj+744ODvWw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYJ7YyUAVdo0DpA4gvM5koptCF8fy1aFiUj9ma7PMxBoZMEDCi
+ wjgEIrJ+z3USj6qgSEc40vQW4i/7GLUOrCw4Lnqz1EyZxJ8EOP2G1IUPqyM6G9LduMaIwyD7Us2
+ vOuGa8Nevl7S2jMr07FVY3KJDwXPF8AIZQrWfMRbs
+X-Gm-Gg: ATEYQzx+Fy1CnbHh0pCynt/0nvsVoA8Q1M8cypUFoO2asS4+TXVWz2LtcFAM1qmwpSa
+ 1faUASXKtOnKAcU1yisTMdwRsi0ZZZla5UrGFyB88Azig5FpRLUqqNJbM9aGn7tWJ9SVyGES61z
+ BpFmyrszE7QKILpDYrTaRZV0Utrdqot5o73lzub3hNwcw/BbyiAsRTibERqYwwNdJd9wm2csQYQ
+ IgJQoLJBHo+y/HJEXQ6ommtm1z5Hzd3HznpqVb2gZRLbc6IYA11Gncv9KSeRRo/ZWkhA9vE4PGA
+ kEdjQw==
+X-Received: by 2002:a05:6402:1444:b0:65f:ab99:2d4d with SMTP id
+ 4fb4d7f45d1cf-65fddaf7260mr5355908a12.19.1772323875505; Sat, 28 Feb 2026
+ 16:11:15 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: cdns3: fix cdns3_bind() to avoid returning error and
- probe parent
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, marex@denx.de,
- trini@konsulko.com, minda.chen@starfivetech.com
-Cc: u-boot@lists.denx.de, srk@ti.com
-References: <20260227055954.3916518-1-s-vadapalli@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260227055954.3916518-1-s-vadapalli@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: c84ea563ec6c84e44f2
-X-MBO-RS-META: ok1g5hscurwoe365gxdrsaed8i3r4qeu
+References: <20260219003351.388722-1-marek.vasut+renesas@mailbox.org>
+ <CAFLszTj42WZF3DTOt4HxskNW3qyZJ5_pQ66RsBNdbr13rXTFeg@mail.gmail.com>
+ <2acea5e6-5760-40b3-b8e7-952fc355e621@mailbox.org>
+ <CAFLszTjRjpFRxxQJt2hNXzuMn9O3Kgcwrh10XpAMXqczK146NQ@mail.gmail.com>
+ <40018ce7-5fed-4eb4-8888-601f99747109@mailbox.org>
+In-Reply-To: <40018ce7-5fed-4eb4-8888-601f99747109@mailbox.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 28 Feb 2026 17:11:03 -0700
+X-Gm-Features: AaiRm501AI1kzmbd3nsxf1468A0Eh7hvR22duqmNVH-RJG4d-1PqxVZIDrSR-E4
+Message-ID: <CAFLszTiENqOipUbkFAoNMwF1ut1ya1TDQ7+gf7PGNd5w2cbheg@mail.gmail.com>
+Subject: Re: [PATCH v2] gunzip: Implement chunked decompression
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
+ Alexander Graf <agraf@csgraf.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome@forissier.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Tom Rini <trini@konsulko.com>, Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,50 +120,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/27/26 6:59 AM, Siddharth Vadapalli wrote:
-> While commit bfb530e06ca6 ("usb: cdns3: use VBUS Valid to determine role
-> for dr_mode OTG") enhances the driver, it causes boot failure for non-USB
-> boot mode when the 'dr_mode' is 'otg'. The reason for it is that the
-> cdns3_get_otg_mode() function reads the USB Controller registers to
-> determine the appropriate role. If the boot mode happens to be USB, then
-> the USB Controller will be powered ON and the registers are accessible.
-> For non-USB boot modes, the USB Controller is not necessarily powered ON
-> as a result of which the register accesses cause boot failure.
-> 
-> Another issue is that the error code from cdns3_get_otg_mode() is returned
-> as-is by cdns3_bind(). The cdns3_bind() function already has a comment
-> near the 'fail' label stating that an error code should __not__ be returned
-> as it will cause the board to hang.
-> 
-> Fix the aforementioned issues in the following manner:
-> 1. Probe the parent device before calling cdns3_get_otg_mode() to ensure
->     that the USB Controller is powered ON and its registers are accessible.
-> 2. If cdns3_get_otg_mode() returns an error code, instead of returning
->     the error code, jump to the 'fail' label and return '0'.
+Hi Marek,
 
-[...]
+On Sat, 28 Feb 2026 at 15:16, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 2/23/26 6:41 PM, Simon Glass wrote:
+>
+> Hello Simon,
+>
+> >>>> +       /*
+> >>>> +        * Allow runtime configuration of decompression chunk on
+> >>>> +        * sandbox to better cover the chunked decompression
+> >>>> +        * functionality without having to use > 4 GiB files.
+> >>>> +        */
+> >>>> +       const ulong minchunk = 0x400;
+> >>>> +       const ulong maxchunk = SZ_4G - minchunk;
+> >>>> +       const ulong chunk =
+> >>>> +               CONFIG_IS_ENABLED(SANDBOX,
+> >>>> +                                 (clamp(env_get_ulong("gzwrite_chunk", 10, maxchunk),
+> >>>> +                                        minchunk, maxchunk)),
+> >>>> +                                 (maxchunk));
+> >>>>
+> >>>
+> >>> As you mentioned in the last version, there is a compression test in
+> >>> compression.c - could you add a version of this function that takes
+> >>> maxchunk as an argument and call it from that test? Reading an
+> >>> environment variable to avoid passing a parameter seems pretty odd to
+> >>> me :-)
+> >> Do we not want to test the command line interface ?
+> >
+> > Yes it is a good idea to test it, although we don't need to
+> > exhaustively test each compression case. I suggest using the dedicated
+> > compression/decompression tests to check detailed features, with the
+> > cmdline tests just checking for basic functionality.
+> The compression tests already test the memory-to-memory inflate path,
+> but they are not suitable to test the gzwrite inflate+write to block
+> storage path. The existing gzwrite test is suitable exactly for that. So
+> no, I don't see the compressions tests as a good place for gzwrite test.
+> The command line gzwrite test on the other hand is already there and is
+> testing exactly the inflate+write path.
 
-> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
-> index 10bc4cabed4..a775567b3bc 100644
-> --- a/drivers/usb/cdns3/core.c
-> +++ b/drivers/usb/cdns3/core.c
-> @@ -461,9 +461,18 @@ int cdns3_bind(struct udevice *parent)
->   
->   	/* Use VBUS Valid to determine role */
->   	if (dr_mode == USB_DR_MODE_OTG) {
-> +		/*
-> +		 * Since we perform register accesses in cdns3_get_otg_mode(),
-> +		 * we need to ensure that the parent has been probed and that
-> +		 * the USB Controller is powered ON.
-> +		 */
-> +		ret = device_probe(parent);
-> +		if (ret)
-> +			goto fail;
-> +
->   		ret = cdns3_get_otg_mode(parent, &dr_mode);
->   		if (ret < 0)
-> -			return ret;
-> +			goto fail;
->   	}
-Can you instead move this logic into driver .probe() ? Then you wouldn't 
-need the device_probe() hackage.
+OK I'll leave this to you.
+
+Regards,
+Simon
