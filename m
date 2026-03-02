@@ -4,85 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53FB9EA4E33
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 16:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 913E9EA4E3E
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 16:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 929EF83F30;
-	Mon,  2 Mar 2026 17:04:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC19683F2D;
+	Mon,  2 Mar 2026 17:32:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ubLz83QD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fOnfbQVi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACCC083F4C; Mon,  2 Mar 2026 17:04:24 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id B792183F30; Mon,  2 Mar 2026 17:23:46 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCF5D83F0A
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 17:04:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D37583F2A
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 17:23:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-662f9aeb782so3751541eaf.3
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 08:04:21 -0800 (PST)
+ spf=pass smtp.mailfrom=rgallaispou@gmail.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-4377174e1ebso3445280f8f.3
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 08:23:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772467460; x=1773072260; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6Yz2sBTNtY7i746kpTho7llhphLyuU+TzcJSP/vY5tQ=;
- b=ubLz83QDGpG7JXDFoDheNb74/WyCFUenEgGgShHMYXZPBJzOssh76a41MA0hJ+U/2k
- 2Ihmtkb3Ceiit6A57nO+0zS3gfOkXAKyryGfIVcVrYt+VIkMHSD6wi/ftpRcJh0tuyxd
- +L4++ODOUUGui0EO72FgUFzst/m7eA1FX+5jA=
+ d=gmail.com; s=20230601; t=1772468624; x=1773073424; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NQiaIkD0Xucvghuix62C/hLs4g3HxkTwiG5Td5ptXaA=;
+ b=fOnfbQVifmfHE1OTwwump/vLXNsQkTkq0eevUQyC6paPUpZHtPZgI+/7SvVbT8UFTh
+ 2sghL8a/sdLGWnp+k4CYk2BkVbTfKR7JvB6IpAPXSAMK8SSDvaCV7El38lzrmFIe2JjO
+ v1XJ8MSgja2tHIWPgkpQHW/hl7bqzwN+Sn4vAnfIqFLJmft/w9q6BazZgu4IfLP4VK6K
+ y5ilHqHSw1BnsxIgw3H9lYONI8TyYC72b3VLEhqqnmnbYrUgKOwnM4UBouz5cCkZYU1p
+ YCepth2vMzK+n+x0/KDSTCyL6R7ZMTtrzslZvP9c8ez2xplgCTK7rGSS6eJp7AXaKxdd
+ fbGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772467460; x=1773072260;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6Yz2sBTNtY7i746kpTho7llhphLyuU+TzcJSP/vY5tQ=;
- b=ivJZvL0GL6/Bf5/RaX4b3p8WHiiYCxKR/PqysclLTOKKSVpvMIaMSXHNSy9bWWYbPR
- Tc6BBj6HwLyVDp9u5cwxpxKJFJfYeEAkSBr2sHO3vybg7YJKlLP89l4O+vM+ITib8PR3
- KDrL2bYmioJ1EmgNz8XLe04unUYoyBFtH0o94yhnT2oXTi9QKtlY4y1KAatwyWvvM0oq
- H3TdZ9CW4rt3cCeARlcUJu5gX3Ij+BmtevRqO3flPCsZ1AhwMxkPzYsOPubj2TndVqHz
- TL3NdT8M9VXi3XzgX09cUo4cLd/iuyfaol3iZJ2EaL43j1Qsmy1Komg9V8bXZIFLVlHF
- QaZw==
-X-Gm-Message-State: AOJu0YzvcFraZjlxnzKag3xIa3MsOV+Bc80a7c+Kly/JDuaPlVWluob5
- eHpnhEbGmhv/pXjqv1CcHn0R3B1fXwtsZeHHiovU8tU89ex0Kkevy0FMkrjCMfcRF9A=
-X-Gm-Gg: ATEYQzwrhr3l1Ex7KB590R9r4g7Now0l7gjFneRe91R2x7a9kybo6NBbLs6GMFqWEVE
- eeS/S6wpAGuO144wVwgmFys6gOXKPO2+BDUwY88EBRQjmV1H/7lc01pSWix4dZb10CQpFpq+Xiq
- Dkzjl1y0h68wvzQRQbLv59G4MLsXZTSQDvg9FFfDW639MNq+xP2UHGZoXoKD8cuu3HlRw/sc7W+
- +tviyrsW3sRBH8n7DQIdO4IwTUpAu8ng6tnHiJg5plwmrYDSrtTDAmEfu7U+de1oThQV9PFb6An
- 1rTt0LwTYs7kC+NFN2b3esFV9pZzYbIuWt86MTLeMaUkUJ4tvficoTYWk4LZpmQ7kjQOukhs1LD
- jX7/pu3UGI2GyCd8ZjuwAQqYa0f/W98785IfBeut2r7/eOXpFYM4zpM5HimZJ19qoUcwxaW4CWD
- yaDPGXScHntuJVY3ZFESnj0EQchnhUZa6zRvhuXihUjh8ddoCxsjg7EVpKjhdXZ7yGxPYtsdAgu
- lVsD4ZHH3I4umRMIhMmenyvuTHGB6ObmtLJBWC+xZXWlkaMahM=
-X-Received: by 2002:a05:6820:808:b0:679:c549:2045 with SMTP id
- 006d021491bc7-679faf27dccmr7133845eaf.51.1772467460385; 
- Mon, 02 Mar 2026 08:04:20 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41640b99b39sm7494956fac.10.2026.03.02.08.04.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2026 08:04:19 -0800 (PST)
-Date: Mon, 2 Mar 2026 10:04:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
- Christian Taedcke <christian.taedcke@weidmueller.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2 6/7] test: Add a helper class to create disk images
-Message-ID: <20260302160417.GG1388590@bill-the-cat>
-References: <20260228182304.3728735-1-sjg@chromium.org>
- <20260228182304.3728735-7-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1772468624; x=1773073424;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NQiaIkD0Xucvghuix62C/hLs4g3HxkTwiG5Td5ptXaA=;
+ b=Cc9zGbV69Gm4GmwTtAJFoZXxsiHRvJ5T7w3HVMhZ9Eo8q0HHzCcHAVu5FztC6eLZ9Z
+ VYZpq+WoB7xKq5CYPbTw0ufqImUiHlq6aBhWj0ZwqggvsIbpzp6xNBJCPymR2keoia7T
+ i/LiaaeECFZ5LhKeh/7SIg1aRfXYdoRsfdTaL1qSfBiU/m++QJ/EO2Yx64bFMMGR58l6
+ DnBVzUtxgpl1m3wtCXX2BcwBQwewmSvqLv2foDOIRkIGdkV9oHD8kzPk2AIeZzagiFA/
+ a8Np1/tq2+cDhyKKyjm+jPM47yfbcR1PNheS43vK4l+FdknFQxXEMUo9wRazyt+Rg6Sa
+ 7GbQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2S6a8RVigdqTzqHHEITWCp1bjJLs7f9hTahQ4PB2K9V4cnFUcIswdhOn2oYyB04Y+Faa74DE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXKNLMeTR6dTeNVpylS7Hs+sKcRfqIwDyQk+aI/r0YVeuTV/Wp
+ titU0b18zK380DtjD8rh9Otv6M3N6RhP5X0lv35mfyuWkx52hH+PYVKn
+X-Gm-Gg: ATEYQzxVfn2RebGRSeVCIpXTBv1Nm/DE3NAd79eRhQwJ4l9jNdludLRUOPtWy8O/G47
+ MGDTvMQG7agem9VJXcidMqcSNMff7xPBxCeQgPRe/TqLOJKomQbX22FrpY7mCTujv0dt6YqWhGw
+ SIVGcsN1A/HqepOK8JmAoHdFWFoFgU7P/dVJseZ+B3kZjG59hShd+RpCQCpXaHjYz+EJm+iioAw
+ kL98f5SHqzCeOjekT3nhz6WE3i5Vd1F9pBAYixHj+j1YKIOjmzYsRcaL5NubjnaVRNFwz6sRCp/
+ nHQaPnqo1owiaIifR/OEaDWzeF718GmheuDMOmgRQd2Ekw3StbVo1GAs72MYj4fdkfQDlxbAQXL
+ cU8H5EniejWtPafIn3MBSp+P3obtQJpirgbnQa4y8GZq71DYMb+ks4PgV+UNcPQH/645UwZuwJt
+ d4JHL0EJE6yERFXg18R0Nxs8QGJPTt67FF3TJjuOjVpw0a7nwrXweG7I2wu9QYP+a50LNyAvpxX
+ zHyrS3xhg==
+X-Received: by 2002:a05:600c:8108:b0:47e:e9c9:23bc with SMTP id
+ 5b1f17b1804b1-483c9bfa168mr196055325e9.30.1772468623764; 
+ Mon, 02 Mar 2026 08:23:43 -0800 (PST)
+Received: from ?IPV6:2001:861:3385:e20:f99c:d6cf:27e6:2b03?
+ ([2001:861:3385:e20:f99c:d6cf:27e6:2b03])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bd6f26d7sm434625235e9.3.2026.03.02.08.23.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Mar 2026 08:23:43 -0800 (PST)
+Message-ID: <beec85d9-a580-4ae3-854d-3c957b888eb2@gmail.com>
+Date: Mon, 2 Mar 2026 17:23:23 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vhsQCCO9sMJ7vxkp"
-Content-Disposition: inline
-In-Reply-To: <20260228182304.3728735-7-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] video: stm32: dsi: add .of_to_plat callback
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>
+References: <20260205-dsi-v1-1-eb5805068e97@gmail.com>
+ <50a9f6c3-4284-460c-a429-49b4a53c836e@foss.st.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Rapha=C3=ABl_Gallais-Pou?= <rgallaispou@gmail.com>
+In-Reply-To: <50a9f6c3-4284-460c-a429-49b4a53c836e@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 02 Mar 2026 17:32:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,53 +108,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---vhsQCCO9sMJ7vxkp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Can this one be picked up for v2026.04 or is there something I should do ?
 
-On Sat, Feb 28, 2026 at 11:22:46AM -0700, Simon Glass wrote:
-> From: Simon Glass <simon.glass@canonical.com>
->=20
-> Provide a way to create disk images which consist of multiple filesystem
-> images.
->=20
-> Provide an option to use the current directory for images, instead of
-> persistent-data directory. This makes it easy for C tests to locate the
-> image.
+Best regards,
+Raphaël
 
-This is something we don't want, however. We need to not be adding more
-files to the source directory as part of tests. This is a general bad
-practice.
+On 2/24/26 11:01, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> On 2/5/26 00:35, Raphael Gallais-Pou wrote:
+>> Drivers should extract device-tree data before probing via the
+>> .of_to_plat hook.
+>>
+>> Implement it for stm32_dsi driver.  By doing so, it also solve a
+>> variable shadowing in stm32_dsi_probe() where &clk was used as
+>> peripheral clock and ref clock.
+>>
+>> For readability some struct have been renamed such as:
+>>
+>>    * struct stm32_dsi_priv *dsi -> struct stm32_dsi_priv *priv
+>>    * struct clk clk -> struct clk pclk
+>>
+>> Signed-off-by: Raphael Gallais-Pou <rgallaispou@gmail.com>
+>> ---
+>> This patch has been tested on stm32mp157c-dk2 board.
+>> ---
+>>   drivers/video/stm32/stm32_dsi.c | 168 +++++++++++++++++++++ 
+>> +------------------
+>>   1 file changed, 91 insertions(+), 77 deletions(-)
+>>
+> 
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> Thanks
+> Patrick
+> 
 
-And in the likely event that you're going to note that python is slow,
-please try your suggestion of 2019[1] and see about making U-Boot be a
-python library, and if that doesn't work, look for other ways to speed
-up python? Given all of the real time machine learning demos that are
-built upon Python, it seems like piping data around fast should be
-something that can be solved.
-
-> The setup_image() function is used from a lot of places and that code
-> itself needs some work, so this is left for a future series.
-
-You're back to editoralizing in commit messages, and since you do
-provide a helper for mk_fs you also simply could for setup_image.
-
-[1]: https://lists.denx.de/pipermail/u-boot/2019-October/388732.html
-
---=20
-Tom
-
---vhsQCCO9sMJ7vxkp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaW1AQAKCRAr4qD1Cr/k
-CgUEAQCf82PSRsnz+EsacogCpM0N5I2sCVS4ZfGuMFRUZYWKagEAu0CRbeIq0hCO
-mSVf83BSysQTYmAMkYbKp4/9jNwHAgY=
-=1oFc
------END PGP SIGNATURE-----
-
---vhsQCCO9sMJ7vxkp--
