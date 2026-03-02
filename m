@@ -4,123 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D2AE9B344
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 09:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE0EE9B34D
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 09:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 531A283E63;
-	Mon,  2 Mar 2026 10:49:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 730E083E63;
+	Mon,  2 Mar 2026 10:57:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FnXRymCA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hO9EYr+0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0E6183EC6; Mon,  2 Mar 2026 10:49:22 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED75183EC6; Mon,  2 Mar 2026 10:57:53 +0100 (CET)
+Received: from PH8PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azhn150120000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d91c::])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5590183CDF
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 10:49:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CD9183CDF
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 10:57:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-483a2338616so26460235e9.0
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 01:49:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1772444959; x=1773049759; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=NfUpctEpUNQEOAISJBQIbdqwi/+97Hw5Kxf/Ai7gfok=;
- b=FnXRymCARmVBcxEjv8bzohZA1Zv+H3v3XnVy4adKw3IJ7IgpD3swPh/l7F14vsEWPZ
- 36IjJfeCDXeCTjEmkanbZUW4T7UMLgWL2GQ3Wi6vs/RhOWyqmwn7svYwqoIlsryyEmJJ
- nOprn0TEbwNtAoYVZBONc2j4BPEoaY/bXarIxn5mlVHRBiCLvquLBoTduwJrwhxjgbJg
- 66SkK1mpGSOm5vwuilhsb45YIRG4OFDNEJlQ4NXC8J/DibVzTaG6wWqPCTrwuspVGyfC
- vtBv3Sslu7OUUK+SpZRU4ZtbEaAjATEG/C/kRVQUThsryfcOlMmWciL444a4OvD6d5vo
- LrQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772444959; x=1773049759;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NfUpctEpUNQEOAISJBQIbdqwi/+97Hw5Kxf/Ai7gfok=;
- b=ZclbMa5FCL5NMQaT1yQ72tQZEm1sQKTxJNHITdpClr3dJYVLGAFXCQ5PW3Xcu/Lrzn
- j1m8MWZsPkokNYzjOxn7iXkAZvI4Ai3A42XIlD1iYATcx72wqwI1YPyfIYzVCRo1DpNB
- td6921+84WGovTSjh6HGskE6hpVu5BC536L5whuZAmyEosYLzfbGcEAsoNDPa7CA0Uts
- kp/+Zq0RYAFNIyyudzIj+2T/kCvKC9IDWa5UkTu2Sju5cE/TUK2vMImnWix/6d4zNIpz
- DFQnRT65WTAFIQObVfbkHIajuq9qMGI5XAaHu5ntwvs6dpIuKaQeyp7sKf+Ru68JsIrE
- DbcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKP6yS4k4lL2DiuXqAMbw5r6EUp5KwrwjLTL9GAJdNmt+4Wu3fP2KuP0PhzSD44HAklOTiG+U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7Nggv9cki4UyOvbDk33RzKVMcTsLODcJ8lsFesGMj2SD6iqIY
- vyb1RGIHxMjBWnnjJIv5k/lXXpEV/5ftHW5cw1XZOUrB2rJK4uBqy74hGjrGANYtr9I=
-X-Gm-Gg: ATEYQzwz4j/bXM8UsMdI2kj6Cyd8FKIUF/hxE5kUv7VAxkjDFwPFrjxvZF1Z9JU2ol5
- 7C/kXcCZZAV9bBUUUDSncJ9zxdmwZlVp1HHYVfns4qg+7H9s++FnZWcTzgVWBmSHsM5BRtKpXSb
- LCO+4ntta32ec+qedsUMMyEBEtWsQA4JwvyDAUEfTUMaYC2nE/UCqMyu5hwcaTOol0tyZESbyHv
- NdZTU4fQLkqkvHRhJKku1X6hwxhDWka7cLdgg31ZqS8yibkZlXB8Pcydmz/hxphaiPwz2RINPnQ
- sReAvl2HWbUoT4I8YvzIygrr9x1X9gYe3s9HzmIjs9CRfsvhJcSYY8tY4usp7LAtBt/3b1kDB+t
- IiA6mVFNEI56LJ1//4t7R/UFn8JQrgdKURelt75CTEE6Xn3NxjA1xadR605NDASMiZEUKTFAXi8
- FiwqZk7XKjJGFUn0+xu0gWgfTjx9lNaHid79sMz2PYL5fW0kwbgBLjRJf6X8fKLyB76Lnq66ryQ
- UpYb+Q2x9nHTIg=
-X-Received: by 2002:a05:600c:c04b:10b0:483:79a6:e7e1 with SMTP id
- 5b1f17b1804b1-483c9ba7e28mr145860455e9.7.1772444958601; 
- Mon, 02 Mar 2026 01:49:18 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:106d:1080:c342:61e:309c:3478?
- ([2a01:e0a:106d:1080:c342:61e:309c:3478])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4399c765c67sm28111046f8f.32.2026.03.02.01.49.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Mar 2026 01:49:18 -0800 (PST)
-Message-ID: <42718ff6-d698-4c6c-8b00-e5106c40f8f4@linaro.org>
-Date: Mon, 2 Mar 2026 10:49:17 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=a7lGnbm7KBaK79QAR5GERRC3PxCDWhDqK+5U5bf60a1wRpJiFpc0Vv5TmYO0r0zQabASZ4oWU8IHVicBvQGqMYWoRtMY/hh/nspmAFptSojAzM8MusWFzNaPTtVWnuUJ2pFybFEaDypmlVzaGJ4VLAETygsw0x2vTq38ADki0YXYoOyoqO0u8LXtI/QPJik6tugR4Sy5RAkRTEWcgDDzvIke99IF8IaV+LPgzOR6cFrziuuyEd9jdJKWbtW8hHf9XJjycvXsxqiK+zv322/o5MMjuOG5KOV+0LzeKf0wpfaIUF1Ml298ihj+MStaMRkPLoJBvSpm6WoDmOpprbVNug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PplL3gZb6SHwpi3zB31DmeGJiqBqn0y6GdYxjszOt0I=;
+ b=h6CZ7puf4gvGgZvqOze74NVh4zSg8MPAX3j1k8ZHLdxhCeSjAIkIybuSuZD5IikOdv5c2Y4BlIoW3yfrBaa7nfAI+XJsDLdATB7+FzedostqozT8JvKaPfIxaqGr/aQWwvm2CsNnH9BLZhUzdbtgk+eiu/NyVwfWvLm3mfZEma1/9x8Iz+fxPX67ILKbF76HkaA56oY9k01xrrLfvOZQrWuI+3SQeT1z/TQnqhuPIjbhFjqnrGWS/+0DfxNV98Z6Euqa3SH47RbHnPAaAjXc1R0Rw4dVHnO0DP+tiZbQ2KAh63yQvHYjG1bMrhteT92eJU6T7cEPta88x/bMTEAJ2A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PplL3gZb6SHwpi3zB31DmeGJiqBqn0y6GdYxjszOt0I=;
+ b=hO9EYr+02GFHphov7UtauwPZzFJjOtuEYl6GZMdSitiTkYsL/nD/OWnLBPSQrERkgjjJic7ap1aNFRwbdjM8F54LrfEVLidC41avAi6j6Lg0t6D+yFyh9P6Dq27tp+8kXMTQ/5NjBKfsNYnVt6lHlRBVS4q51H6FXG4V7LI6WYE=
+Received: from BL0PR02CA0050.namprd02.prod.outlook.com (2603:10b6:207:3d::27)
+ by MW4PR10MB6629.namprd10.prod.outlook.com (2603:10b6:303:22e::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.16; Mon, 2 Mar
+ 2026 09:57:47 +0000
+Received: from BL02EPF00021F68.namprd02.prod.outlook.com
+ (2603:10b6:207:3d:cafe::54) by BL0PR02CA0050.outlook.office365.com
+ (2603:10b6:207:3d::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.19 via Frontend Transport; Mon,
+ 2 Mar 2026 09:57:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BL02EPF00021F68.mail.protection.outlook.com (10.167.249.4) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9654.16 via Frontend Transport; Mon, 2 Mar 2026 09:57:46 +0000
+Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Mar
+ 2026 03:57:28 -0600
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Mar
+ 2026 03:57:28 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 2 Mar 2026 03:57:28 -0600
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6229vO56082759;
+ Mon, 2 Mar 2026 03:57:25 -0600
+Message-ID: <95205612-acfd-4623-8264-828f7823a156@ti.com>
+Date: Mon, 2 Mar 2026 15:27:23 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/1] ufs: don't select non-existent CONFIG_PHY_MTK_UFS
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Shawn Lin
- <shawn.lin@rock-chips.com>, u-boot@lists.denx.de
-References: <20260225063100.46962-1-heinrich.schuchardt@canonical.com>
- <578013ec-1f37-4d66-8d6b-c268a5b660be@cherry.de>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <578013ec-1f37-4d66-8d6b-c268a5b660be@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [v2 PATCH] mach-k3: Defer CTRL_MMR access until after TIFS
+ version response
+To: Tom Rini <trini@konsulko.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>,
+ <nm@ti.com>, <heiko.thiery@gmail.com>, <m-shah@ti.com>, <j-keerthy@ti.com>,
+ <n-francis@ti.com>, <bb@ti.com>, Diwakar Dhyani <d-dhyani@ti.com>,
+ <u-kumar1@ti.com>
+References: <20260225051559.416445-1-u-kumar1@ti.com>
+ <50d29e78-1502-4dbd-ad24-a1025142947d@ti.com>
+ <f21a0fba-0a19-4f95-88c3-41e0728fb888@ti.com>
+ <20260226143756.GC1593142@bill-the-cat>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20260226143756.GC1593142@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F68:EE_|MW4PR10MB6629:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7e389900-b858-44ba-3608-08de7842281a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|376014|34020700016|1800799024|12100799066;
+X-Microsoft-Antispam-Message-Info: QNRkHyXV7SOsQ1zZcweePoQrH98ShGSDjNGcUMw1GRwN1RUPTTBcaOmj4RDvc+bFZ3SAz4IffopOrLDegQ40iuTNfRhtR1mjdIAbusTw7j0nV2HygDUDEsyiP4eID4zoYvMnpjFJcBnWo1zxJcy6OcgnKWKhEcXattacQSIsIEMNwr7BQ9pL2LgmXLsZU1cBWNqZAdslTWgyvFTGBJI8WitNzw2WYojVnTWDSehSJt/3dRAf/JRgi0gUQNsknU0rNIvdAcllicOzADps7S5zaN/vXzcqdv256013pA0/pBICv/oz3eUmWkCw7wPy3sA6yMAeyESLcCHiRl4NIv3tHC8ldrUA4+fGTKFtk2aTSe21GrxSl9wFvhSVT6vFgq2g7r5zk7vsCNwUjB7JL+fz+z1GBegWv2wwTdGdg7WKjiZEH8/4uW9WWXOXVPCbjgyCBWSNyMqV7s7ZdAeFWLMo6mjgekoVC35LajRBoMrE4OdtMPEp7v12hYC2uoCcDMCf9ax24fFvi4N+VrqR6Wvi/9KocpGMsihFZA5JVe+RZK5RrI/f8PP32Rm4RW2YGS7xuuZvz9PTuSNTq0O0RtUqSerObhGmtMWkyeO2/5QzGtDl/Y8L57JJ+f3GgX0jpjthqj4gKqH4f4wFKkSjyckwKVmTNm9OKCcENi5dkEt0N+zcfLWwu3d16Ijqg410QZEvI7motyDmdIpFAYq1C/AVQL7MSXD7BEWekl9B74aRAju69VsRrQKtTjnYFK495jrxoG5B8VBVnHup5Y+UTVt3UJnAlR3MNwTFE+yWK2pBV9rvRkxPZ1SohMnlGnlGf+dwq/rhU5nS5zlNhEuVoYAhmQ==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(34020700016)(1800799024)(12100799066);
+ DIR:OUT; SFP:1501; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: JrP3SCEGZV0TeZ92aU+PUvrFrZngvXZwvaTwkI8goNRs48+pSk0OfDYpG90nSOz+fEpJaX54XOUvJMk+THZ8t2w4uvASN0RItRLz46K1+aEYVeLnZ8hFoPCw7tCT3Uzt2mOek6LltJraF6xKzG/b67OHG+g7oa8l0p6zeVZOae/kN2auXTBvct0NCLrX0pT85iTbd0Y+/0ZqulZ7s6Gw4mzWCLJKodbnhuT0NqvGpHWjWuOYyXNPsTEOaG/0J6KSrpiGbRWZ6ps5lWCjAP02f6tNH0/7yP3HEMVkH+4LWxQwrWUZcnTS4JCOOVYNLDPE6WmdiAXla//0cTA68iOBeqhmoNrKh3j9LObmkwJeOeYdc2Pr4+/gJShIp6B/NcgMlC15Koqyu/4ui0j3io2SY1uVqjiuiLzNaLpq3B8fv35Lg1WbYTzfPpC/HWhNhYwN
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 09:57:46.7975 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7e389900-b858-44ba-3608-08de7842281a
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F68.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6629
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,37 +134,44 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/26/26 13:38, Quentin Schulz wrote:
-> Hi Heinrich, Igor,
-> 
-> On 2/25/26 7:31 AM, Heinrich Schuchardt wrote:
->> Symbol CONFIG_PHY_MTK_UFS does not exist.
->> Don't select it.
+
+
+On 2/26/2026 8:07 PM, Tom Rini wrote:
+> On Thu, Feb 26, 2026 at 10:20:11AM +0530, Kumar, Udit wrote:
 >>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->> CONFIG_PHY_MTK_TPHY seems to be the only Mediatek PHY driver symbol
->> in U-Boot.
+>>
+>> On 2/26/2026 10:04 AM, Vignesh Raghavendra wrote:
+>>>
+>>>
+>>> On 25/02/26 10:45, Udit Kumar wrote:
+>>>> The CTRL_MMR registers are firewalled at boot time, and TIFS unlock
+>>>> them as part of the system firmware initialization sequence.
+>>>>
+>>>> Current code assumes the CTRL_MMR space can be accessible at early
+>>>> stage of board_init_f execution by unlocking them.
+>>>>
+>>>> But on HS-SE devices, TIFS takes more time to complete initialization,
+>>>> and CTRL_MMR registers remains firewalled and not getting unlocked.
+>>>> Which results in any write to these registers are ignored.
+>>>
+>>> Hmm, this looks like something that can happen on other K3 SoCs too.
+>>> Should we update all the other SoCs to follow the same logic?
+>>
+>> Yes, we need to update all SOCs,
+>> As Bryan pointed out, this issue is seen on other SOC as well[0].
+>>
+>> I will post for other SOCs as different series. 
 > 
-> This binds against mediatek,mt6878-ufshci compatible property. We have no DT in U-Boot with that compatible. I couldn't find any mention of this compatible or this SoC's support in the kernel mailing list(s) either...
-> 
-> The PHY symbol was actually defined in patch 1 of the series, see https://lore.kernel.org/u-boot/20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org/
-> 
-> Considering the kernel binding for the Mediatek UFS controller requires PHYs, I'm assuming the series shouldn't have been partially merged, especially the controller part without the PHY. (Note that the kernel binding still doesn't list MT6878 as supported).
-> 
-> @Igor, maybe you can work on a v2 for the first patch in your series so we don't need to revert the UFS controller part since it's unusable today as is (first because no DT with this compatible is found, and that even if it was, there's no PHY driver while it is required for the controller to work). If the PHY is not required by the code, then it doesn't follow the Mediatek UFS upstream binding (providing mediatek,ufs.yaml is where MT6878 support would be) and shouldn't have been accepted as is. We do not want to drift apart from the kernel bindings any more than we already are.
+> Do you mean another iteration of this, as a series that addresses all of
+> the SoCs? I'd prefer that (and cover letter explaining the situation) if
+> possible and reasonable, thanks.
 
-I should've probably merged the PHY driver at the same time.
-
-Neil
-
-> 
-> Cheers,
-> Quentin
+Looks in general mmr-unlock can not be moved on all SOCs after FW print version.
+I am seeing boot failure on other SOCs, need to debug more on this different behavior.  
+ 
 
