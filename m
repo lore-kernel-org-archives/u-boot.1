@@ -4,147 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76602EA4E07
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 14:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42727EA4E07
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 14:19:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E54E183F4C;
-	Mon,  2 Mar 2026 15:18:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BD7983F3F;
+	Mon,  2 Mar 2026 15:18:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="m2XSCfo8";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="m2XSCfo8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="awzw3Ug+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A745583F4C; Mon,  2 Mar 2026 15:18:55 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 502D783F2A; Mon,  2 Mar 2026 15:18:58 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53AB983F0A
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 15:18:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DA2C83F30
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 15:18:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=sBiJhWwkKn0O+4akRNyoyNYBIkWWuJ3glL7BG3nGgBVGqkWg3rCcaaV0iyY1wawDvOeoRkbvLOZ+R4dUMHy9ofULvxoCnaOJ1RjDn+iM46nrF+1KjVPnbqGwF5XpE0qN3Bbvqrwk+s1+UarDscxK/39uxMxefv9XZvx2ZgqMcXRMWhUdrELAZ2oaYGW/j5jHf86ybw7DdSOZrcHf1cTlk0xSGrT2lOezFClC3OK/mRtVzXkiiCdIkfOMhiatBr9oOaymvFGGHi7V2RTEaQA/XvlndQKHjGk6z+9chCa4MYVqXkiW1PmblmG6DcaRkcwMkKPwHAabJegfhrESbOqobQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
- b=KDJIAEPpIpr8Ke/xhSB7yL/cmci4dI3x2uHNK8M3/zpDOSjeGCgc7x/SQiBjPSaMbrret2iI+0pFZeoe53mjAepgp8/LCT/1NK7h2AIVoLylOqovrduunUs4++WMlFsk5fD6vDHKc8vE+fvEo2GE69tNU5807m5aF9VPPNlvh+3t5ho0ZKBaSiALAkZPcJEeign72KrIT1Nkyx8MVtOe0nSABFtRF4VeAOaxIfa/yqfmDsAX6KVHIxTWUGWI3/V90Mn5o+wCaqHz/IxEQOPA/UPcVX4ewIOqOVX7ACcC+XhepRXEZqt+J1EXv8VpoUKSEESvxlfLk7r0sG+/V2tlVQ==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=konsulko.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
- b=m2XSCfo8MID4Yjhl67IWKZNU0qBNh3RLohiPO0ikWgFQSIk0kV03dDBBk1m01whOJDhaVX0t7+gpLizEeosbPrneWMFsGBFS7KpYeRwLK/tONWzMbj2eBwzSwDAHkPlQh2p9Ncc+fyO3uQiNcVTmndWG3HbdQFWPzNYq0zX4QBM=
-Received: from DU7P189CA0014.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:552::21)
- by AMDPR08MB11459.eurprd08.prod.outlook.com (2603:10a6:20b:71a::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.20; Mon, 2 Mar
- 2026 14:18:50 +0000
-Received: from DB1PEPF000509E9.eurprd03.prod.outlook.com
- (2603:10a6:10:552:cafe::30) by DU7P189CA0014.outlook.office365.com
- (2603:10a6:10:552::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.20 via Frontend Transport; Mon,
- 2 Mar 2026 14:18:49 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DB1PEPF000509E9.mail.protection.outlook.com (10.167.242.59) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.16
- via Frontend Transport; Mon, 2 Mar 2026 14:18:50 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ypUcHE/wAYggwtBGQYQyoaTCvY6zWmabNlG8QxaWYRa0ooRqtRVNnneU/OQHiesHIxdMDkuI9mZSri9TftyfNuh/BsXrPzrlTaRkEG/ZerjUFsZ2tEpz8704anqPmWHl8fwmYvAerk44wLKo1Y2SpRRrESUAkR1EjR1Z7OLXDaMD1KNQRmGHyprfj0g0X+pwGmlH/ZzrVYLQftZNGjIpHJduqDX6vtI69J7r9EYKULko9qTBAb8ZR3xYYY+q6bF5Ry/7p/hjqhrwRblE7I3wEWaA/aJIdfgLrTv1cnUiWsJF/Vzk5h/I7HvhUSQ1uJiddWhkkWrYN9MNvOAkDeEXDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
- b=dlj2e/B819Gc6j1xqzwfpkaXE1oujB5X5tz2NrIdLvvB17gLP0IP0XAkNK/l8zjxlDZ7Z59+iVL5Xpe6tCZsd50KfgtaA0LvzIetxXPJDcpOG2UD/m93M+o5su+UfHikk4eZikP5HMAa1S5ggPuUS/rMeOdJDxILA3MMe0u0wSHyY8hYmceAp5Dz/kf5JO0hZ/fknFdRWa+KPFgjV/VO4+Sh2BnG3N/pWx5j51kvx7ScPNnOqJSarJPZipLWTBvlIDQWMJhLgQJln3bcx7B1cx/09T5D5q5dZH/o9/6yIRGV+LrSppa0mz9K4i11xfdcBoXqIFSnDW4r0jZRd7wPAw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
- b=m2XSCfo8MID4Yjhl67IWKZNU0qBNh3RLohiPO0ikWgFQSIk0kV03dDBBk1m01whOJDhaVX0t7+gpLizEeosbPrneWMFsGBFS7KpYeRwLK/tONWzMbj2eBwzSwDAHkPlQh2p9Ncc+fyO3uQiNcVTmndWG3HbdQFWPzNYq0zX4QBM=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by VI0PR08MB11625.eurprd08.prod.outlook.com
- (2603:10a6:800:30b::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Mon, 2 Mar
- 2026 14:17:40 +0000
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3%5]) with mapi id 15.20.9654.020; Mon, 2 Mar 2026
- 14:17:40 +0000
-Message-ID: <99c81520-9f2f-43b9-81d6-c60fab345533@arm.com>
-Date: Mon, 2 Mar 2026 15:17:39 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] net: do not use non-existent CONFIG_DM_CLK
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- u-boot@lists.denx.de, nd@arm.com
-References: <20260225061426.45981-1-heinrich.schuchardt@canonical.com>
- <45e3b935-6e0a-471f-b87f-6c03edd4f237@arm.com>
- <20260227144909.GR1593142@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260227144909.GR1593142@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0583.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:276::13) To AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-439b7c2788dso626998f8f.1
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 06:18:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1772461133; x=1773065933; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=seHkhcGJo4RwIMqIZLPaGsoZAhbraRzzRxMciKT4FLA=;
+ b=awzw3Ug+e+hjiUrTMBFaUYixQrL/jKF1FOH8nNDzaGofXshh6rHksAGTrALKtY7V5C
+ wKabV/pZS9am7CHw4dLppL3L1IdMrtvZlC3K3VnyjTf2gwvjB6YeV9MN6HiGmsWbk3Qe
+ E7sGXrH+HzdvjeVChWkk4u3e/kwnnbsH4xMqjrMxy6D95lqd4eWR2J+Fo9V7qgl8IHg4
+ nqL68vODXAS1CIyGK7RHAXt/t5CDv1VbH8QPqutxF+nr3WXjaFL15+zOli3YtPO4q6HS
+ u8FAiHX72ONkPS38NSty0Tu07sH5fsubLtpjgqr/BnFrfZnvzAsjWxlX28UD0OrmUAzn
+ BG5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772461133; x=1773065933;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=seHkhcGJo4RwIMqIZLPaGsoZAhbraRzzRxMciKT4FLA=;
+ b=BeKhbzW6wfTS/9FsNLFa7n3oI+EYJhKYDG9Sydb4S6BTS7hSK7sxhGVIij+xSknHWL
+ F78Mv2tz7Srg897UYx76klG6Uc1X3sJHNjisC5tQvQEhoafHmG4Q67pu/BnAYbxI75mz
+ FB2M6INw+McSxJ783ePz1XNhmYZKM0kvar5RJ1KFrt+KtC4D+5klouxSW6Pc8eHuHKbX
+ 1GR4X+56lbY76LgtCM2VhH9xsUTpFMw91xlbSW7X59Ig1kQhajO7uxY/ckk3o/s0IgPs
+ BSjTJbkpJdhElbE2dvMYJadOSW5hp1NBCKRK36OfLsDIuS5dg0G3woXHb/1X6DW82gaW
+ DUqg==
+X-Gm-Message-State: AOJu0YwBOOSkFhZKAqKuPEVcR/OzEuMBy1MlwX00EcHdvpLKS9z2v9k5
+ zW46/XmhiA5uayMclDhtxG6KZf0J0kVsT9OXz71W9f2N0kvPl43CDXd18+2qWIw2dNU=
+X-Gm-Gg: ATEYQzyMtaegvp+3+inuHzVb6sZrT8eYzgOu/aJMdSADBjBbGB6ytpu57uMt6NTRJ+x
+ scOaOJ3UcGCvVoKPjjPR24Zfs08zUqbx8TPqAjbFtl7IqtyU5yoY2sSxTQ40KZz4HsiSKhD1ugQ
+ PtwMIAyxDwZBJSlCmp+DlPp4eEktHYy53VcQIPVvbM7vRzyRGsRMAV3xtpLdAdOPZ9QcMMX9sB2
+ cYAzYBssGa9XFaiq6iyXqGGaM9iR28k4dU1dH76ScMWMl0iirc8YNnNGIIiNN5QVvYka0znAtl8
+ F2zy4GfMLaI5WNw3UPxL8KkXSZdc++jqWccK8RYM7UOY3vGL8HhG4IuTBqvHhUwP2yBTYIDCOKm
+ 8Fhvqvk3g1knjpr8ozd9UgGsSw/H7II/nspSaJgMR/30XiiVgFkiAL3oZFPGWfuQpd6n11ZM4H6
+ 6E4rnFOMelSd9mqRdU29TK+ra+AymwDhuPPcoebXgWRBb/kXyJhu601q9Z27kzFqyFmz4YlDF3/
+ Q81vZw=
+X-Received: by 2002:a05:600c:a085:b0:483:badb:618f with SMTP id
+ 5b1f17b1804b1-483c9bc5b7dmr208334905e9.25.1772461133159; 
+ Mon, 02 Mar 2026 06:18:53 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:106d:1080:708a:e1be:4bc3:1ed9?
+ ([2a01:e0a:106d:1080:708a:e1be:4bc3:1ed9])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483c3b44207sm302646185e9.7.2026.03.02.06.18.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Mar 2026 06:18:52 -0800 (PST)
+Message-ID: <3668a0b7-f3a4-4b54-8026-e5d5c1a3abfa@linaro.org>
+Date: Mon, 2 Mar 2026 15:18:52 +0100
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|VI0PR08MB11625:EE_|DB1PEPF000509E9:EE_|AMDPR08MB11459:EE_
-X-MS-Office365-Filtering-Correlation-Id: d474695b-ad45-4c1f-211e-08de7866a067
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info-Original: 6hmD93amGIEundSv8eccoHcrwuhydmSaNVMIOKYpj3IQDBFNLTTR4ACLKp8R/amXYwA9NK1pQlyzWYRoYw2zehX8QJ6LdfoedSKIrhxZSdBmUPUUb/fWFEOyZ2sShy9TBu0V42p9wmU5Qk9BwDDTEvyDlETWwyEjno2bGeILjUxPeoGqRABPwnAjHaYM7K194Mt7JAY5eq98NPuHk/1dJxwfcmjHSsNbtW68JxYvR3wv1SAK3lEvXwWxLRc8isZRwOx8C+QlbCbuSoRiPKIgt8DPi/Om8+L18RRf+3Lj3Wa1bVD8gpl4isbmHTWwikLniuTDtjZFhKY1I7ddCXzSwmRITSltdnThOyObAWa7ibQXnX5n0Gbbv7M1aL0MayKrF6IprLU6G1tB41KcaKljsa6fGdaDRSTSgfYEVZizybookNo+8/Jb5pW6pUmZ3HrxIIGye3ojHlg8WOlVIdpMXoEnG58kjPlZcLVlHxB4wVfjNPjlp7u5E54QyQ/MOz/Pd4RmF8KCoIeR7GqHXDn4mdE33GMRJRDr4VnMdJ7So0dCx9VmxmIRyGANtE37lDOE1EUOEW/rYxbWa+keLcRy2Itbot5vEVi6Jc746nl6R9uAz/FxNioG7JgzUmNs4k79lmQYLzDSCyTJNb9YlTbBhzUs2Nqaqm1L9MRXZAJxi/Ex3UYiIEYCi203Cx+aGssharxX5+pVYWEdKi9MMPNQNRoMi1E8+EbG3cN2FbJV6dI=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB11625
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB1PEPF000509E9.eurprd03.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: f01a7cc9-ae6c-4b8f-0052-08de78667660
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|35042699022|36860700013|376014|14060799003;
-X-Microsoft-Antispam-Message-Info: KE0ZpiaBFoNUqiy7Y63QO8qrVNGnizYMQn1PF2Huw9BVJNZ4GXStDsP53feLirlAX6jytmAm0+tTEB4gaFf6qCHd6tk8VjPRC1JggAFcxyyyVjhRnMiDHpvXOEfNsQtEsPaRD5wdTqntNB1JVuSN6/1v7SXrtJwjobWyZ9HK0XAwU31iVT/CSkjwC/fuftnPtEznxsoh7V2jzDXt30xezziNQngV3pbaMRhrcK/DxvDlCdpPzky8oEpgEMv1e6WCFfgQhBpH28ie7wsN6Uf5QSkTdh6OlX3irYhJW2pVx4csxphx47Sa1HAzniEhh17RcCmMQbDqUgPn+jaacFJptFVks4G2IxKx8zAHThiYktsJURfAe+253Xgu84NGWcZQ+GWVUmIq4HvSWvHIiipYPV6/d/yCkZbpxTtdUod6v0J2AuqPYOiCgkkhop8tPXBRjlKrrgtUh8NsAfn2dhq5t5K8bVaVJJnQtqXtW2nvihioVQ06+RqGt8UHYCMPEQ755kT7UrKW8ukF4n/mLVCJI/jj4stD+OylbcFL+coklCOhl3OLIOz41OucYzDXK+r98h9KBj4d0IibUQQ4A/HU9q7ki2t2xHRjCr/JuuBSRyBUEMsxTMejtFuFuywmhsxNE5xDDrlFtie7gOqvn3CpSMw3FLMtJ0E669LHn21wF00k6E3uZ2nWsmxpi5IQvtdsp0Z64WVVaUDzbaWlBqL37EGS/oH54d6jWsPNV7+acccEx3lSRs/u2ToSDV0TxM086siYEvrLenFJ8Tj556elR3BqwR906Ke31agdAv/T6rpwdxrhB59jOhvhdBHShlHIB2isXN7su/ZtngU111TSVQ==
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(35042699022)(36860700013)(376014)(14060799003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ikHH29JfpXrxayJSUGZ0iY/RfVTwQMgjfecQK5OSpZHXBf9NafZ9VJHdp5drpirtVtoG9iw6oa9a5B+vhB1yb6AkvBWb8EI1RCdLp6a0At4gNicNb4Q1VDvDetgsCKiO+U9MCOps/ADDR7+EaD5vATUphlKcCGwSs6FadLTzRxsE1heRBNlHTvGz0MNQbRH/VYlgLp3EkgStoiMjeCdE8Uu3vg0LfjQk2vPlCWvJs69pA7N3bEdD1E7XHCHEKYBk21JETpACZgC9bNpXrr1uN76ttrsJ7z/ck3d/Rx5PjIsJ4N5bglFs0Umkp3LDHvd/GmqTEU4zjIMh3FhqBlpmRi12lr2YHDhjsAusnGsFLqGgcEQ/gnf/Rg5J9Zqn41CwFJ67w/1RrFbpW2V7YF2S1FNLvAVFL73T70DIxxrhVt7ubMhDAAds3JzqqmeikkRd
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 14:18:50.5200 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d474695b-ad45-4c1f-211e-08de7866a067
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E9.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMDPR08MB11459
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] ufs: Disable UTP command timeout in slow mode
+To: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, git@amd.com,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neha Malcom Francis <n-francis@ti.com>
+References: <e6deb9086afab9d2bdd53db8ecbc7db93af5204d.1764169598.git.michal.simek@amd.com>
+ <176555459951.1592278.10213529530179974819.b4-ty@linaro.org>
+ <CAHTX3d+kSNa98KSMk0Sg7kKq5Dj-NXayVJgcCOSU-DptaxeNSg@mail.gmail.com>
+ <7a90c0b7-b548-4129-ba4a-935104fada6f@amd.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <7a90c0b7-b548-4129-ba4a-935104fada6f@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,47 +129,46 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 27/02/2026 15:49, Tom Rini wrote:
-> On Fri, Feb 27, 2026 at 11:03:32AM +0100, Jerome Forissier wrote:
->> Hi Heinrich,
->>
->> On 25/02/2026 07:14, Heinrich Schuchardt wrote:
->>> For enabling the clock driver we use symbol CONFIG_CLK.
->>> Select this symbol for the HiSilicon Fast Ethernet Controller driver.
->>>
->>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>> ---
->>> @Jerome
->>>
->>> I could not find any usage of the drivers.
->>> Should they be removed?
->>
->> You mean no defconfig enables them? It could be that some project
->> downstream depends on them though. But do we care if we don't build them
->> upstream? Tom, what do you think?
+On 2/24/26 08:11, Michal Simek wrote:
+> Hi Tom,
 > 
-> In this case, there never was a "DM_CLK" symbol, even for driver model
-> using CLK, it should just have been CLK to start with.
+> On 2/16/26 09:03, Michal Simek wrote:
+>> Hi Neil,
+>>
+>> pá 12. 12. 2025 v 16:50 odesílatel Neil Armstrong
+>> <neil.armstrong@linaro.org> napsal:
+>>>
+>>> Hi,
+>>>
+>>> On Wed, 26 Nov 2025 16:06:41 +0100, Michal Simek wrote:
+>>>> When the UFS controller is operating in slow (PWM) mode,
+>>>> the driver is disabled the timeout for UTP send commands.
+>>>> In high-speed mode, the timeout remains enabled to
+>>>> detect stalled or failed transfers. This change ensures reliable
+>>>> operation in slow mode, where command completion may take longer
+>>>> and timeouts are not required.
+>>>>
+>>>> [...]
+>>>
+>>> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (u-boot-ufs-next)
+>>>
+>>> [1/1] ufs: Disable UTP command timeout in slow mode
+>>>        https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/868ec1f0cb77ecd6cd8ab1d40feb38e238c6f1d2
+>>>
+>>
+>> Are you going to send a pull request to Tom to get this to the next branch?
+> 
+> Can you please take this to v2026.04 release? I didn't get any reply from Neil on this one.
+> 
+> Thanks,
+> Michal
 
+Sorry I was busy, I forgot to send it, rebasing, testing it in CI and sending to tom.
 
-I think the question is more bout HIFEMAC_ETH and HIFEMAC_MDIO which don't
-seem to be used anywhere:
-
-jerome@builder:~/work/u-boot (master)$ git grep HIFEMAC_ETH
-drivers/net/Kconfig:config HIFEMAC_ETH
-drivers/net/Makefile:obj-$(CONFIG_HIFEMAC_ETH) += hifemac.o
-jerome@builder:~/work/u-boot (master)$ git grep HIFEMAC_MDIO
-drivers/net/Kconfig:config HIFEMAC_MDIO
-drivers/net/Makefile:obj-$(CONFIG_HIFEMAC_MDIO) += hifemac_mdio.o
-jerome@builder:~/work/u-boot (master)$
-
-Thanks,
--- 
-Jerome
+Neil
