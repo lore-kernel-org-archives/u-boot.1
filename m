@@ -4,147 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 616E0EA4E07
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 14:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A20B4EA4E09
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 14:36:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4639283F4D;
-	Mon,  2 Mar 2026 15:29:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AC4683F2D;
+	Mon,  2 Mar 2026 15:36:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="PQ5Odmkk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M/C4KU4M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20EEF83F53; Mon,  2 Mar 2026 15:29:56 +0100 (CET)
-Received: from OS8PR02CU002.outbound.protection.outlook.com
- (mail-japanwestazolkn190120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d406::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B532983F30; Mon,  2 Mar 2026 15:36:42 +0100 (CET)
+Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
+ [IPv6:2607:f8b0:4864:20::a36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5AAA83F30
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 15:29:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89F9483F0A
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 15:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=forbidden405@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PmGA3NSOi2L1z9vQ9iTMPQtcH8IMEjGht5Gielw5WqyuoH+SdfFqPZTcajEE/HmvaYFK4vuPempaf8FM+UWZZcks353ofuc0B1N2Blau8Tz0nhXabWjABn8/ZsMvl0gKIyNOOgc4NdOw2B9QMHQHd3YVSZgbo6TP+K0tIQv7qbk66lHy8RAQvac2dG1mHDk9lh0VP3uOIeUVR/oKfhYvgUFN4xlZBoi1IewFYV2WxtaC7JFTsxUdIYQmXPfG5hVVEmpETqYKFHtTc1bzSLhnd6BvLrW8aSYdRt1/+2yTEuu/NYLsJr5HxlupwbR+yqCWA1tjx7R88ECwRWD2rUttkw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eEU4lxm/82zNUiE2ze3yDVcda1phqD5MIq0UeN2dQNI=;
- b=AH1AhlS/4LyF7ujhuRpLKkwtzbizCzq9HAPwY9G5HSYFtmeZlhdUWMgaYsnXHz/mlIu08WClpuUurxg7Fj1+5ehQv2Up8DYkKzSb/3LOEzLbOvb1332mRevip+ggXPdkxVNdtiEZZl2a64colMy7Zej4JKOQiHq58C1VQXq0asOMGo6MOXx4wBloRCc2ragolu8A02MVr7QJzgBezpSSj0dT2YVTYPA8w22TFSov3snVDppRQS918LMgd21Jue8lhNZxY/IHY/WX+0JTLZGf83Hy1KfKnex602azkfuw6W2BGzGH32C8uxQAGqu6IgjmO9w4x4ZcFiDZKxsMDVmaDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eEU4lxm/82zNUiE2ze3yDVcda1phqD5MIq0UeN2dQNI=;
- b=PQ5OdmkkSiLAW7dkCy9ChN0mzR6lKHUuyVgiSxZV0vVVMI9ajtez9sg2w1pNs8Fnmm000KU9+Vvnjf/CrSBgKVFxEfl4UZ9Rrtq1lJBoZasi8tZc+fuDsbqbqW6MFItpkinEGv7CRHBmr4DPKMxjiTPTyUXIObFcNS/DdTjN47zvNl6VU9H7LkKJxxt+n5nt0gl+VIBls3xTRC/9tUxaxn9kAOf8cAW/2DTp/yk6l9JRn91OMLzuaRYcPtRI24LYHEI+5AV3VwjBKk+CpWCE5a0e8sZnYq6bjOMSNsEl0BeobKQRdcrmkCMDwlSB4JmIxZVe1KJh5Wg4LU8+abCtcQ==
-Received: from SEYPR02MB5557.apcprd02.prod.outlook.com (2603:1096:101:52::6)
- by TYZPR02MB9052.apcprd02.prod.outlook.com (2603:1096:405:39c::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.20; Mon, 2 Mar
- 2026 14:29:49 +0000
-Received: from SEYPR02MB5557.apcprd02.prod.outlook.com
- ([fe80::4718:ae53:48d1:20ee]) by SEYPR02MB5557.apcprd02.prod.outlook.com
- ([fe80::4718:ae53:48d1:20ee%5]) with mapi id 15.20.9654.020; Mon, 2 Mar 2026
- 14:29:49 +0000
-Message-ID: <SEYPR02MB5557D6DDDE0CF13F325F067E967EA@SEYPR02MB5557.apcprd02.prod.outlook.com>
-Date: Mon, 2 Mar 2026 22:29:45 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] net: do not use non-existent CONFIG_DM_CLK
-To: Tom Rini <trini@konsulko.com>, Jerome Forissier <jerome.forissier@arm.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- u-boot@lists.denx.de, nd@arm.com
-References: <20260225061426.45981-1-heinrich.schuchardt@canonical.com>
- <45e3b935-6e0a-471f-b87f-6c03edd4f237@arm.com>
- <20260227144909.GR1593142@bill-the-cat>
- <99c81520-9f2f-43b9-81d6-c60fab345533@arm.com>
- <20260302142525.GB1388590@bill-the-cat>
-Content-Language: en-US
-From: Yang Xiwen <forbidden405@outlook.com>
-In-Reply-To: <20260302142525.GB1388590@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SI2PR01CA0013.apcprd01.prod.exchangelabs.com
- (2603:1096:4:191::9) To SEYPR02MB5557.apcprd02.prod.outlook.com
- (2603:1096:101:52::6)
-X-Microsoft-Original-Message-ID: <184d15ea-17d8-4dad-9d84-06ff6b0a9ec6@outlook.com>
+ spf=pass smtp.mailfrom=raymondmaoca@gmail.com
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-56a91535e5bso1700363e0c.1
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 06:36:40 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772462199; cv=none;
+ d=google.com; s=arc-20240605;
+ b=f4FuRKEH1CMnuPabpLmubGLQTKI12fQN41lyMFMIf8ZJg2DdZT66jiGwzwYUaINJIm
+ S9darSTNehmT3fGpwv6w1pPASDjoC2QHafa6Lj1YeK3sLtBgsCIojpFfunOmOETz3WUr
+ PZonAbBB27YvJtDeXtNnNMEJRxWlZkldqSa59lA3tdOhXWw6dRt8w8s0UwBd5eV4MmM3
+ cH3KDC6+lxBUB8lv3xdpwAIVuIAXLhuKzWsz82R93N7mEOyJWUIxvqZa1S2Qv3tXL8Kk
+ PWtUlD05fkiF3qoFuj6iOqZ0P2nhU8U4oC0QEyez2vCH4EME4uj8Uy+qFGfrPxH9dw33
+ BnNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=rdYAXY0tHqrE4pkxVs5o7f8zFKFe8d2TIriJFZVDnF4=;
+ fh=tPwwI4X+LUkETeoS52cf5CpLbPWcVyNq89ADPeomfZQ=;
+ b=jkTgfFHYkBaFxVRrxblmJ6l/iwT2lIkTm33lAPqsgMvL2xx3B2qaS6hOv3kiC30Wjq
+ 5QtiUZwUoDRIX5xCbw7E3iYkFCgatCCkqfyG/oa964p/S8u2mFVJoGkjLN1MSk8zmjGZ
+ 5hKxd3/0su79ItK2yjt/Zw6XVju6kjmuquqaUw04NTu4QrG2h5+64vy1aqzO+atqNZ8l
+ k6aH/NON9wFHEwjazgcF/64dSJyNuC5E1c9rJbRr0HrN6X3U9e67It/WkSm8zhg+XvJy
+ m2WhVEWQFhAAcckmIviAb4J1lMmB8GRynJzsq8O5nfQHJFt2VTXeico2urs6w9L5ZwzL
+ SX6w==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1772462199; x=1773066999; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rdYAXY0tHqrE4pkxVs5o7f8zFKFe8d2TIriJFZVDnF4=;
+ b=M/C4KU4MJf4BA33d8Q+F31ZFLP2xTpinqmhcDFjDradEANYyjeaXPxli3m7wvPkFF6
+ WkLhB0nhkk6tZUOd6pZKN7NmafCmrMubt+OLqWhKgHVCi1wvUtT7K9OLIiWOtqCAqwCX
+ HrW1DwAi8um5ejtyFpYasvTluGKAjxGE2+vuuQje/6eazyhKaFid9GxpbsBU8gDo760p
+ lQDIV29jf+T9rK2aIcvdDqltPwaNuUz3DfWO3VnEOxkL1CubT0C19mvXSe/oWZkff7bs
+ GzQXcPkuz1m++JlAtH2XDaQONYa4LVR0NiycYcRn1xwI7TfuGTj1LPWltg3pK1BGKtH4
+ P3Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772462199; x=1773066999;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=rdYAXY0tHqrE4pkxVs5o7f8zFKFe8d2TIriJFZVDnF4=;
+ b=M+iZhTN7ajspglnMmpp5TVc361u9aBEqK70RFJ35ql2uIVVDcac1iclSy/KYrfon6O
+ 7OS+U6g4sxWHHVIs87I4d0OWCIf0d/T545FGHRjrpCe8twj5s8b++mSxBCaCsfTY4XDf
+ f8qQrbM3BXbj002Ra5RNNu7gCtDd4EeOmLaJIGnOc50mypSVTSXLS8X//03pyS+WfQTj
+ Rzi4dbuJpnTx1QkJDAWqFAoAjK+Z6FSP907sXcfK2zLtfYK+a6JYk8BQdN0N7c2zHAVT
+ iUc5e7yooL34AgIV+YrO+0L/wF5yYLLhpc3xwMRfCJHbeGjTR4wIePhR88nui2JtDZwf
+ ycTw==
+X-Gm-Message-State: AOJu0YybrcPWxbw7Z+mMNPZfMFdCSnXW8PY+/qRx+Q26vvKoCgSBj9Cu
+ U/5k083i2zzUXArhCEKZt+uQswGKDR1hS7COjL8DgMRsAHOenoJ0TfcEfabuSnfxKJUJh6ATjb6
+ zDcO0PKJNEY6zG+fPx9wZsVaxNyfVbRxt59lA
+X-Gm-Gg: ATEYQzxO9pYHVQWcxzdPaXu0amWvtA1nBDUa1vToLimaFqzXdFls8j8qnZguMqupOqg
+ 7pHWO9P12MpK3vfnnEwnEIz1tkdPXIsZiQqomTRGFFSOvZaF+PAee8mVgIejqdf8I0zQRtFRXOQ
+ Ofx4fgFZE92Aw8SRxRCbaEY9v4XeSdlFsMnpg/GnSHlbSHvOMMWAlihZkmKCPFnrjqBBihaF+aA
+ 5SVNTWjQ5ySCJ9pj3vURqMPo276a3eEXkgXO3x/DIbX2/WrfP6HXjF7Pmrv+MwsqNqgvLQATL68
+ 7tkNvSpO
+X-Received: by 2002:a05:6102:390e:b0:5fd:f509:c97 with SMTP id
+ ada2fe7eead31-5ff323b66d0mr4252142137.18.1772462199125; Mon, 02 Mar 2026
+ 06:36:39 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEYPR02MB5557:EE_|TYZPR02MB9052:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4540936f-4b5b-474a-2e7f-08de786828da
-X-MS-Exchange-SLBlob-MailProps: YfhX3sd/0TXC3SDMOKasxb1Truxn0Xe/HeUFtDLjIWVyLFJ93P6GiZMbpi6qAjQKtEMYZI3/5Lkhq1w4zuu0Ws0kukjhvqkDRZ8+CVEzQHcrIvoNVkEHj8ACWBCX5vbVy0/1i6gWxN4z+I9vTVNlvSYer6QLS/5DpdadaD1BVLb3fH3JKdVF/SMKyyHSNGybyCkjzdhX+HPlPIc5jDQk4hlQgsAUGxP9VqWabco31S8fWZh0YcYHJFz/xtsCk05l7dswE1nHCXjo0R2NXpPAYv3AYL1UXZR2aW4bl/4iMkQsqn3S8Mpvx0dowdC1L1TB2JWurRZ67r6R9v8cb6Dmq/8E/NVpI054lmeGoM+c8mwRoWUFNwLT9S6tG7pwrXXnMor2j3O5aBhnNOg8OLmndUoRctLbqJiO3KnNiQxVN+RvsVf0Ik5bS0sHIFYhvON4UHdaFx/leeP3azzUEkWALMO4fBmXNBpN0hGdmyNJzOkRTc/4/sIHBMTwbB9u0CyWjf0FkF6H7WtCO4wEZMozSYt+wCfU8oSR+twYHfMO0ReGPJdGP+7OXLSj9UXzKmLEtr0FGv02W9pIPInK2SzpwNIucHSI1viirmUg7l9fyyypmY8ivsFhXldPwBMa0AemKGmpKPmreV7Z9HSejewNtdNU7+QJ8qDdOSZ89os60WDuovvhmDTDyGJT+0cQ+bg1I3zLnbRvdokkT/EyzByTVMcfKrH0Ahp2N5ShYeAGdktldYmsYAd9OltAkXN8vmquFeLHxtoq9E/JUbb1dv0RIQtwkNv9gcKutEDWWPE8mTE=
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|5072599009|461199028|15080799012|8060799015|23021999003|19110799012|6090799003|53005399003|40105399003|3412199025|440099028|12091999003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?b1FjVlZNcU5TL01UTFd0TFRIaTExbzR6QmlkdmZWdGl2M3dWV1pzbDEzaGc3?=
- =?utf-8?B?dDBJbndGVXdXT083a3hkUVVLbnZYUFNvdkpSMHNpTUo3NjV3OE9sdVdPTTBr?=
- =?utf-8?B?bUJoclBUR0JPbGNqWE9SK21PYllCZGxpbTN0YXNxZm1lakxWOUZrZ1dEVWZD?=
- =?utf-8?B?ZlZtU09ZSXpGYU1Uc20wZE4xNTJoYnRXS2o0UEh6aE55SzBteHpsSnkvYVhp?=
- =?utf-8?B?UDhRV1VMdGV0NzArbk53VmR6QVcrelpTVFBFZjNQclBkRlpYZk1vaGpNOGNu?=
- =?utf-8?B?RXB4YUduazh1U2Ezb1dnMTBEeVoxOXJXVStLZTlpQ1ZuV2ZZdzFOeTdIanZW?=
- =?utf-8?B?STVTa1NYU3VnYTMwVzZVRWl3bUNSNXN1YkN0TmVSUXZKTFpDWkljMEtScVVn?=
- =?utf-8?B?bXpVRlFnVTBobDBqUlcvQm13eTFSQURKV05rR043dnhMZnRaeTNZREtNd25s?=
- =?utf-8?B?OWFWUkllK1EzWU9VSHdubDJxZzVBVkhSdkRMQlpjdmo2Rko3bG9vZ2JHejFl?=
- =?utf-8?B?VUx0ckhPdVRlSENwL3BRemxGTFROcGNKblhDcFR2WHVqWGFVVnZKYUROS3Rm?=
- =?utf-8?B?cmtyRVFtSzVEcDRjMzg4bjFBdTcvamtLVmZJcStlMFNNUkJiSTZnbEVmZ0d3?=
- =?utf-8?B?dmtJOHB4aUYwbzd5ckx2a3g3cjUyZ1dva25TTGNDbzJBQWtjR3BOeFBxNVVq?=
- =?utf-8?B?Zk4zTEdsaGtVMWZlVFM2Z0FzSnloOGVSSHF4KytFOHYrdlYzcmNoRXFvdm5o?=
- =?utf-8?B?b0hjZDlFRCtEZUFVeXJXem9XZW1qTWsyaUMzMTJ0UUlNRkpsWHVwcEthVUFK?=
- =?utf-8?B?S2xnUEZyU0NQNHVMYmp6WkRSMTU5TGtydlFVWkdXSWpmdjhwZFpGdTFVZXVE?=
- =?utf-8?B?UUV3K1lNUm5Tc2VacjFtUG1zTXZ4OTYxV21NdGQyRXVWVWN3Rzgrb3VnYUdN?=
- =?utf-8?B?dC9SY0NYSVdiK2F4czRJdFV4VmhDYmFYZ0dDdm9yd0hoRHgxMFpFNEJFTDZl?=
- =?utf-8?B?R20rUm5wUXMxdkhsUmg4QlBVaG5qYmRBaFZsREdDZUxRcmpOOUEvQ3djT0N4?=
- =?utf-8?B?S3pidnJzaEFXQ1lmZjEyUUtCUGRnc2VlQWh5MzZTb3VKM0hmSkFQYXV3SUtH?=
- =?utf-8?B?b051SWswZnZrTFpEWWxRcm5qSklZUGVGZHN2d1BSU0RaKytXTVhQOVRWYW9O?=
- =?utf-8?B?TmI4elNTbGMxL3owQmV4NGhUcUFXdVArTFlwZFNoaW5JMEtuckNQR0IrUUZY?=
- =?utf-8?B?WEljdm1ONXVpMEZUc2NvRkVKSnV1bXU5OVZrVHlJQ1pRVlloZz09?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eWthcEZFRTgwT01VTExGa2tHaHVPSy9VYURzQXY3YkkzbVBDQjdkY1hYZUJ6?=
- =?utf-8?B?QktTL0sxRFJ0R3REbGx4SFZoRG5DZFRoaDhtYmpiSXI1S1VBNERJR3E5Tnlw?=
- =?utf-8?B?THYwN3phWm53QjczWmtxekhOM090ZytYT083eHpvL1U3MjVTSzdGOHpNK2E2?=
- =?utf-8?B?eDRLYklXckl5dlFxaS9TRWpabzFhdTMzUjVHVElnektGRExEcTRmNTN6ck9u?=
- =?utf-8?B?TEFuSjNXYTdGUm5SR3hMTHN3dzhrZDExdFg1Q1JsOUY0R1pIUXBzYTFmcUMw?=
- =?utf-8?B?cFNrbTNseTNOb1BJWE41ejBlMnVSekhZUjVnSVh0RHhnNXgrWVZVZkV4L0Z4?=
- =?utf-8?B?WUY5eEJ4K3hpYXlkeTdLcXVDS3dsVHFhYW5LUmZHbm5lUjBISE5oSlNKSE0w?=
- =?utf-8?B?TnA4UDE2cmljeWNlZTFmUVVWSms1d0N6NFpNSlRhZUQ2Q2d4NUpOV2hkTTFR?=
- =?utf-8?B?N1JMZFNQQk5pNDZZNUc3M0JMbFhtVWxHeHZmSTFPNmJ5YkVNZGlwRVJKNlhC?=
- =?utf-8?B?MjU1S01zbXBEMWRDRlZqNjFBOFNQRUNUejVML3k2b3VSZk0vdXNDeHQ1YUw2?=
- =?utf-8?B?Z0UrMTlEWG0wUFV3SW04THYzTWVxdDU3YzFMWWNxa1FQT3RtU0F0eFV5K0Mv?=
- =?utf-8?B?S0VXUDJZVGt1Q0hjYkpLdTVsN0FCTS9CRGNYMWZUKzFlSGtHUFJtaWVaTGYw?=
- =?utf-8?B?QjBHaC9ucDB0NTJmTE9QWTN3ZVptamF1aEQzempQbzJMMVg5NVgwc0RWdEdw?=
- =?utf-8?B?Rkc4UmoyTWl4djdXdWF1a09kZFkwaDZNVzdBTzNNVUxkSThHdEhBQXBQcnU4?=
- =?utf-8?B?aFdYNTBWd2o1dWxTMjF6OWREbXR4MkZ5eENPNGRFTUhCU1ZZMEc2YktaZmFF?=
- =?utf-8?B?eWx5QUxEaEkyWWhsL1pJYXFCMGh1czBKbHhEbFAxY2xtdUd4N21scGJkMDVG?=
- =?utf-8?B?NmN0Z1dGNWx0NDh1RDhkZnRSWnc5L2Z4YUJZcG5EK05VZS9USDJlM1JHOGFt?=
- =?utf-8?B?U0VtcE1kakVMRkFadDJlcWtHdGtmK3VHdjNjaG9UUy9aQjc2KzFzdnNmZGFu?=
- =?utf-8?B?ek0wYkhUeUdWekFhNjQwNUZwZVp0eXg4eTB6eS96NGR0eE82aWhtY0ZCclk5?=
- =?utf-8?B?M1NkajdwUVlVbG9mTUdYV3Vmb20venBXTWNRVVprTlJSNEYvWUIvdDg1MnRQ?=
- =?utf-8?B?T0hIWHEyRVVWZGxnd29ySjNWSmRKc2hSRU5UR3c5UnM5QkxBT2thVDBMZVJZ?=
- =?utf-8?B?M2prcmpvbGlwU0FoOHJmNk0xS2hBZlRhaGYvdENtbUlFMUIzRjZGRmd6QmVj?=
- =?utf-8?B?MVhaZGh2bFNscUc0NnFaTXVTYlFzKy9GRkZTR0wza1pYd0VOUC9ueVo4UHVq?=
- =?utf-8?B?ZDI2YUhKTHNHeklzbWZPVTg5MTY1bWNjNFhpeTJEeXRPMDIrYklGQks5aElG?=
- =?utf-8?B?M1FYaUZOTHo4N2tZMzg1aWdaclBrUFFnRjJxdnAwOWlZNzhYR3djUFNCYndK?=
- =?utf-8?B?UmQ1dU5wcUNDZEF2TnFLTnJpaXFoMHFaT3dxU1dhUkducFNyc2tqV0p2OWc1?=
- =?utf-8?B?UXV6cWhscndydmpuMzNKSVZFUXdHdDZpZXF0QWVWem8vWlpSMmpmRWhiQ1Vr?=
- =?utf-8?B?RW1FQWwvRkZ0aDE5RW9ZV2dmem5BMTYxemJrOXhGZEV4VEx3OTZhUitrRnNO?=
- =?utf-8?B?ODk0VDhRY0FpYnoxQituTGYxYWFaK1hkaVd5SWJYNzNnamZyRnVaUzgxMkxH?=
- =?utf-8?B?OXNtNkEyRTc5d1hjY3VHL2d0SzM0L3ZqbTE4S2JlZG9NYmlrMnhmOGZ2UkZR?=
- =?utf-8?B?eFhzWmZnNWFtdjVramw0WkhSVEs4TTNsamVIaVc5VWZwOGE2cUV5Um1ZbWVm?=
- =?utf-8?B?OStmNktjbGVYRzYrNFVrbWZBSzByb2s5QW9TOEpTUDhVOWJycG1ycm1TckRq?=
- =?utf-8?B?VndYckxrOGhPZXVZaC9kS2FwRUt3cnZOTlRkY3IwSlhsL0FaL1JQelZHZ0dh?=
- =?utf-8?B?V1NITkxvSzNnPT0=?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4540936f-4b5b-474a-2e7f-08de786828da
-X-MS-Exchange-CrossTenant-AuthSource: SEYPR02MB5557.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 14:29:49.3839 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB9052
+References: <20260210151459.2348758-1-raymondmaoca@gmail.com>
+ <CAMDkj5w5C8rg1tL2gf7RTd9RtCWwMwCfDqpNRB6up0Y3QWPYSw@mail.gmail.com>
+In-Reply-To: <CAMDkj5w5C8rg1tL2gf7RTd9RtCWwMwCfDqpNRB6up0Y3QWPYSw@mail.gmail.com>
+From: Raymond Mao <raymondmaoca@gmail.com>
+Date: Mon, 2 Mar 2026 09:36:28 -0500
+X-Gm-Features: AaiRm500WlP0yW5N0OU6tsbqeABoIKoNyudYbwoCKVpeH-80DqXsvC55uHxjIHU
+Message-ID: <CAMDkj5xBXvza4Sa_pNQ_rsbJdt08uAsgqw9=EL_g3-vUUjWQvg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/16] Add board support for Spacemit K1 SoC in SPL
+To: u-boot@lists.denx.de
+Cc: uboot@riscstar.com, u-boot-spacemit@groups.io, raymond.mao@riscstar.com, 
+ rick@andestech.com, ycliang@andestech.com, trini@konsulko.com,
+ lukma@denx.de, 
+ hs@nabladev.com, jh80.chung@samsung.com, peng.fan@nxp.com, xypron.glpk@gmx.de, 
+ randolph@andestech.com, dlan@gentoo.org, junhui.liu@pigmoral.tech, 
+ neil.armstrong@linaro.org, quentin.schulz@cherry.de, samuel@sholland.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,57 +119,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/2/2026 10:25 PM, Tom Rini wrote:
-> On Mon, Mar 02, 2026 at 03:17:39PM +0100, Jerome Forissier wrote:
->>
->> On 27/02/2026 15:49, Tom Rini wrote:
->>> On Fri, Feb 27, 2026 at 11:03:32AM +0100, Jerome Forissier wrote:
->>>> Hi Heinrich,
->>>>
->>>> On 25/02/2026 07:14, Heinrich Schuchardt wrote:
->>>>> For enabling the clock driver we use symbol CONFIG_CLK.
->>>>> Select this symbol for the HiSilicon Fast Ethernet Controller driver.
->>>>>
->>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>>> ---
->>>>> @Jerome
->>>>>
->>>>> I could not find any usage of the drivers.
->>>>> Should they be removed?
->>>> You mean no defconfig enables them? It could be that some project
->>>> downstream depends on them though. But do we care if we don't build them
->>>> upstream? Tom, what do you think?
->>> In this case, there never was a "DM_CLK" symbol, even for driver model
->>> using CLK, it should just have been CLK to start with.
->>
->> I think the question is more bout HIFEMAC_ETH and HIFEMAC_MDIO which don't
->> seem to be used anywhere:
->>
->> jerome@builder:~/work/u-boot (master)$ git grep HIFEMAC_ETH
->> drivers/net/Kconfig:config HIFEMAC_ETH
->> drivers/net/Makefile:obj-$(CONFIG_HIFEMAC_ETH) += hifemac.o
->> jerome@builder:~/work/u-boot (master)$ git grep HIFEMAC_MDIO
->> drivers/net/Kconfig:config HIFEMAC_MDIO
->> drivers/net/Makefile:obj-$(CONFIG_HIFEMAC_MDIO) += hifemac_mdio.o
->> jerome@builder:~/work/u-boot (master)$
-> Ah, OK, sorry. Yang Xiwen, is there a platform that will be submitted
-> upstream that enables this driver? Thanks!
+Hi Tom, Leo and Rick,
 
+Can I get help from you to get this series merged?
 
-Not yet. I was going to upstream a HiSilicon SoC Hi3798MV200 that will 
-use this driver. But the progress is interrupted. I don't have free time 
-to finish upstreaming it now.
+Thanks and regards,
+Raymond
 
-
-Maybe i will resume working on the platform in the future. But it may 
-take years i think.
-
-
-Feel free to drop this driver if you think it's not useful.
-
-
-
--- 
-Regards,
-Yang Xiwen
-
+On Wed, Feb 25, 2026 at 9:53=E2=80=AFAM Raymond Mao <raymondmaoca@gmail.com=
+> wrote:
+>
+> Hi all,
+>
+> Any further comments on this series?
+>
+> Raymond
+>
+> On Tue, Feb 10, 2026 at 10:15=E2=80=AFAM Raymond Mao <raymondmaoca@gmail.=
+com> wrote:
+> >
+> > From: Raymond Mao <raymond.mao@riscstar.com>
+> >
+> > This patch series introduces full support for the k1 SoC in SPL for
+> > multiple boards.
+> >
+> > The series enables the board by:
+> > 1. Adding the base board definition with device tree.
+> > 2. Bringing up essential clock sources and tree.
+> > 3. Initializing I2C buses for peripheral communication.
+> > 4. Integrating the PMIC driver for power management.
+> > 5. Adding regulator drivers for voltage domain control.
+> >
+> > Change in v2:
+> >   - Use read_poll_timeout() in k1 i2c driver.
+> >   - Abandon to parse offset and size from Kconfig & Makefile for binman=
+.
+> >   - Abandon to attach firmware image into the patch set.
+> >   - Update the related document and some minor changes.
+> >
+> > Junhui Liu (1):
+> >   clk: spacemit: Add support for K1 SoC
+> >
+> > Raymond Mao (15):
+> >   spacemit: k1: support multi-board infrastructure
+> >   spacemit: k1: enable SPL with debug UART
+> >   configs: k1: enable early timer support
+> >   reset: k1: add SPL support and enable TWSI8 reset
+> >   dt-bindings: clock: import k1-syscon from upstream
+> >   dts: k1: import dts file from upstream folder
+> >   dts: k1: enable clocks in SPL
+> >   board: k1: initialize clock and serial devices in SPL
+> >   configs: k1: add default option for clock driver in SPL
+> >   i2c: k1: add I2C driver support
+> >   spacemit: k1: add TLV EEPROM support in SPL
+> >   spacemit: k1: Add DDR firmware support to SPL
+> >   power: pmic: add support for Spacemit P1 PMIC
+> >   power: regulator: add support for Spacemit P1 SoC
+> >   board: k1: enable pmic in spl
+> >
+> >  arch/riscv/Kconfig                            |   10 +-
+> >  arch/riscv/cpu/k1/Kconfig                     |    6 +
+> >  arch/riscv/dts/Makefile                       |    1 +
+> >  arch/riscv/dts/k1-spl.dts                     |  228 +++
+> >  arch/riscv/dts/k1.dtsi                        |  666 +++++-
+> >  board/spacemit/bananapi-f3/MAINTAINERS        |    6 -
+> >  board/spacemit/bananapi-f3/Makefile           |    5 -
+> >  board/spacemit/{bananapi-f3 =3D> k1}/Kconfig    |   11 +-
+> >  board/spacemit/k1/MAINTAINERS                 |   11 +
+> >  board/spacemit/k1/Makefile                    |   27 +
+> >  board/spacemit/{bananapi-f3 =3D> k1}/board.c    |    0
+> >  board/spacemit/k1/spl.c                       |  347 ++++
+> >  board/spacemit/k1/tlv_codes.h                 |   22 +
+> >  configs/bananapi-f3_defconfig                 |   24 -
+> >  configs/spacemit_k1_defconfig                 |   76 +
+> >  doc/board/spacemit/bananapi-f3.rst            |    2 +-
+> >  drivers/clk/Kconfig                           |    5 +-
+> >  drivers/clk/Makefile                          |    1 +
+> >  drivers/clk/spacemit/Kconfig                  |   31 +
+> >  drivers/clk/spacemit/Makefile                 |    7 +
+> >  drivers/clk/spacemit/clk-k1.c                 | 1795 +++++++++++++++++
+> >  drivers/clk/spacemit/clk_common.h             |   79 +
+> >  drivers/clk/spacemit/clk_ddn.c                |   93 +
+> >  drivers/clk/spacemit/clk_ddn.h                |   53 +
+> >  drivers/clk/spacemit/clk_mix.c                |  403 ++++
+> >  drivers/clk/spacemit/clk_mix.h                |  224 ++
+> >  drivers/clk/spacemit/clk_pll.c                |  157 ++
+> >  drivers/clk/spacemit/clk_pll.h                |   81 +
+> >  drivers/i2c/Kconfig                           |    7 +
+> >  drivers/i2c/Makefile                          |    1 +
+> >  drivers/i2c/k1_i2c.c                          |  516 +++++
+> >  drivers/i2c/k1_i2c.h                          |   69 +
+> >  drivers/power/pmic/Kconfig                    |   17 +
+> >  drivers/power/pmic/Makefile                   |    1 +
+> >  drivers/power/pmic/pmic_spacemit_p1.c         |   94 +
+> >  drivers/power/regulator/Kconfig               |   15 +
+> >  drivers/power/regulator/Makefile              |    1 +
+> >  .../power/regulator/spacemit_p1_regulator.c   |  460 +++++
+> >  drivers/reset/Kconfig                         |    7 +
+> >  drivers/reset/Makefile                        |    2 +-
+> >  drivers/reset/reset-spacemit-k1.c             |    4 -
+> >  include/configs/bananapi-f3.h                 |   13 -
+> >  include/configs/k1.h                          |   19 +
+> >  .../dt-bindings/clock/spacemit,k1-syscon.h    |  253 +++
+> >  include/power/spacemit_p1.h                   |  163 ++
+> >  include/soc/spacemit/k1-syscon.h              |  149 ++
+> >  46 files changed, 5997 insertions(+), 165 deletions(-)
+> >  create mode 100644 arch/riscv/dts/k1-spl.dts
+> >  delete mode 100644 board/spacemit/bananapi-f3/MAINTAINERS
+> >  delete mode 100644 board/spacemit/bananapi-f3/Makefile
+> >  rename board/spacemit/{bananapi-f3 =3D> k1}/Kconfig (63%)
+> >  create mode 100644 board/spacemit/k1/MAINTAINERS
+> >  create mode 100644 board/spacemit/k1/Makefile
+> >  rename board/spacemit/{bananapi-f3 =3D> k1}/board.c (100%)
+> >  create mode 100644 board/spacemit/k1/spl.c
+> >  create mode 100644 board/spacemit/k1/tlv_codes.h
+> >  delete mode 100644 configs/bananapi-f3_defconfig
+> >  create mode 100644 configs/spacemit_k1_defconfig
+> >  create mode 100644 drivers/clk/spacemit/Kconfig
+> >  create mode 100644 drivers/clk/spacemit/Makefile
+> >  create mode 100644 drivers/clk/spacemit/clk-k1.c
+> >  create mode 100644 drivers/clk/spacemit/clk_common.h
+> >  create mode 100644 drivers/clk/spacemit/clk_ddn.c
+> >  create mode 100644 drivers/clk/spacemit/clk_ddn.h
+> >  create mode 100644 drivers/clk/spacemit/clk_mix.c
+> >  create mode 100644 drivers/clk/spacemit/clk_mix.h
+> >  create mode 100644 drivers/clk/spacemit/clk_pll.c
+> >  create mode 100644 drivers/clk/spacemit/clk_pll.h
+> >  create mode 100644 drivers/i2c/k1_i2c.c
+> >  create mode 100644 drivers/i2c/k1_i2c.h
+> >  create mode 100644 drivers/power/pmic/pmic_spacemit_p1.c
+> >  create mode 100644 drivers/power/regulator/spacemit_p1_regulator.c
+> >  delete mode 100644 include/configs/bananapi-f3.h
+> >  create mode 100644 include/configs/k1.h
+> >  create mode 100644 include/dt-bindings/clock/spacemit,k1-syscon.h
+> >  create mode 100644 include/power/spacemit_p1.h
+> >  create mode 100644 include/soc/spacemit/k1-syscon.h
+> >
+> > --
+> > 2.25.1
+> >
