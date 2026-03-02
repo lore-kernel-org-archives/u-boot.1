@@ -4,42 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE96E9B37D
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 13:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7FDE9B37D
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 13:07:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 464D183F2A;
-	Mon,  2 Mar 2026 14:00:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
+	by phobos.denx.de (Postfix) with ESMTP id 2BBCD83F2A;
+	Mon,  2 Mar 2026 14:07:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0144083F2D; Mon,  2 Mar 2026 14:00:34 +0100 (CET)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9381D83F0A
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 14:00:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lst.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
-Received: by verein.lst.de (Postfix, from userid 107)
- id BBE8068CFE; Mon,  2 Mar 2026 14:00:29 +0100 (CET)
-Received: from rocky.lan (dynamic-095-114-042-014.95.114.pool.telefonica.de
- [95.114.42.14])
- by verein.lst.de (Postfix) with ESMTPSA id 9B7D668BEB;
- Mon,  2 Mar 2026 13:59:50 +0100 (CET)
-Date: Mon, 2 Mar 2026 13:59:40 +0100
-From: Torsten Duwe <duwe@lst.de>
-To: Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger
- <mbrugger@suse.com>, Andrea della Porta <andrea.porta@suse.com>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH v0] Fix NVMe for non-zero bus offsets
-Message-ID: <20260302135940.550e6051@rocky.lan>
-Organization: LST e.V.
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="f5ReKnbR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 21CF783F30; Mon,  2 Mar 2026 14:07:56 +0100 (CET)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0267E83F0A
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 14:07:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vHiaK9QftRc8X8MgxKWsxU8BxH6HMP79fP6NFEH12Am8QIGxuwx+fLJQTH7cJ9cRqUcfvXikuO21hqPIlEsNqfLIHw3r9fCajc59SUeJDI5fpgcBrFDCvKRNp00cyn7Dxk1D2BAbtbM5tctXTF5gPoXhz4y90KsBcPR9FPNlS5OW+lQMiKk5OzHifWJU/oD2NbBUP4PlexpSZMzYe9r+hUXNLzZgSgTvG3meGed7LFHjXVRGxG9Ym9G0Djhw4wcLT81xo4nLpFuBNj3iYrhlegpFw3uWD9rC9hI60MNButZh8Lk2T2uXkUeBmMg/1BDBfOz1aVCC+x7585bFOGwWtw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VvGVnmSiqUniN4QNtT8bkrYmay5zQUXInV/OmSWrd7Q=;
+ b=rYuhYlkgkdZSEMB+JdbJebvrhJPXSShv0NOpJbxxcFAU5X3w0v4zkYt7MTzhNRIXbky+cETki1SksEruR1PTkB2ti8U2dbUMT6Rgwc3OpO25Web2d5wax9KNU4tfoFyFTbVTqzken0eWYtLn4+RAhCo3c+jaLdXB5g7VfiJwL+6OdpZW36gbWdJK5uincsG9GeAmC+JZexs3Sz8Um1x8qlsxm5VZTIoZ94p619uqup+j9MPlwgtc94zOFKOYonlEoSAelgL+w6LKzorUZiti4OdwLPbaECk1DQCroCDNpmZxdUip1DRF/GlJbPlLKiKgSHi9RpexPp6T59KyiTsv4g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VvGVnmSiqUniN4QNtT8bkrYmay5zQUXInV/OmSWrd7Q=;
+ b=f5ReKnbRr7FeRpBKBrB1+eXkxxqkaRlea7TNou6L+DGt386lrMd/Ec2moclTzlnlfg1HhvjueoBxyRJx2ycgGZRfEfYFtM8Ulpg4buG3M3LrUjAsGimtYmwgLDUdtZb29ikQb77AEMSQuyXqn8WeU0LPuXuyX9m/PfJZstAoLuI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by AS8PR04MB8818.eurprd04.prod.outlook.com (2603:10a6:20b:42d::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.21; Mon, 2 Mar
+ 2026 13:07:51 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.015; Mon, 2 Mar 2026
+ 13:07:51 +0000
+Message-ID: <d194a890-6921-472b-935f-8b2d01c1289c@cherry.de>
+Date: Mon, 2 Mar 2026 14:07:49 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/1] led: led_pwm: fix active-low behavior
+To: Svyatoslav Ryhel <clamor95@gmail.com>,
+ Ivan Vozvakhov <i.vozvakhov@vk.team>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Cc: u-boot@lists.denx.de
+References: <20260209180718.32451-1-clamor95@gmail.com>
+ <20260209180718.32451-2-clamor95@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260209180718.32451-2-clamor95@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: VI1PR04CA0060.eurprd04.prod.outlook.com
+ (2603:10a6:802:2::31) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AS8PR04MB8818:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0337ee6f-2857-4f1c-2168-08de785cb5b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: g1QFJRcjt/I9/By7m8/oTz8HJkRwkS/KANLogWWqLo1SnvWBWHxEyLJswfKg7+Bd+YhuouBbKa9onx5WfXir3keymwxKtPlnTpMpbIMwQe2+ziyJGd50dihFK7ndy9jEQDJth8tv0MdZYcA06yx0vB1WDJcTM++nLB2ehEZrqq+Az7RhVHJ6PEhnhhxkDny5xwaWFRPkKWFLANeQIp78fGLa3zUkvZJPfwOyZMkoahwY7UegdfjCafUf62cjh+KO8X0KwLajOL+HNvppBufEnvUuoPIt6Yxr6LYKXp1+9MrmoCATvwj8FE5ABqjS8Nu7nuFbcRhieWGDhWuWC1Xw6vn1U9415N0Rc7tL7u24x3bB3KdmSUvyxuLGflpftaQpEo3yApByqUv7Aer4pJWHjBHY1Fa7kXvu5vXXUUBTAE/ZNHwREkX+CrQv5HH7Kj6enQcjn5nBpJC5syyOeiSWbxZinoaRlHx9NkBzk3KSXPDKfXCqR659pOj+a5TEDo7GFPUgu4ciRYDyxz+Wqz0GqyyNSi98DCj7dj8S8E/8SwB+GYycmgOt6YIt3t57AE5ig0jEt3L0ETXHYp1eqLjp0wushM+SI6ZNHGk2UVYCEc4nU0jdvKY9z7NDYfjQ0Id/oCHgK2IRRJcPcRkvbtMjB4wOJl3vP2ljUCuOpSx+8GJdXtd+C8YJYzcdbc/W7wQVIZ/ZpKgW89y9s6zzTrjpkJDKGEH0UYdX2mz/qNaozp4=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SXZWQVgrMVJtc0J3U3BwejNTMUluQ2dQRU9BcklnbEFyQ1hTZlh1UC96ZnJx?=
+ =?utf-8?B?MDluVGpoZlFWZUhFRXpTQmJySFR6Y0Z4UCtNRnFTRnBMSmJPN202SXlKZDN3?=
+ =?utf-8?B?R0pFcW4rcWJvSXdaK3FWUEpWRW9OVjVJekVWSGpJYlQvdG03cHNXbFV0d0pl?=
+ =?utf-8?B?ZmFZSTBxSGE1MVoxYlZvMklFS09tdGpyOVVmdVVWOUNRMXpzcGZiVjlKa3N4?=
+ =?utf-8?B?ZE9Nc3lSVkxaK09iMTRFeWROVTY0M1Y5Q1RBSmJmaURaMDVsZnZvUTFxcUxa?=
+ =?utf-8?B?RGs1TXRFRkZnYmJsTXdaRVNuZmw0OHNlN005TUJNZzBsaFVzT1BYM2hqRHVL?=
+ =?utf-8?B?NTVmYzVsNmdYTmhMVS9UajkzRXVnellNaEp6aHM4QWFoVW1Xb3lUelFHWWEw?=
+ =?utf-8?B?aTBFVEhLcU9OMTh1N05POEEzaE1FeThFMEhKUTI1alAycHcyUElsSWo4YWRZ?=
+ =?utf-8?B?RnR1Vm9TZHQva2RkTitBd01ZS2V1bEJ1RUNXRUsyeVZ0WHVWMnhvby9KeUtR?=
+ =?utf-8?B?NGZyc09pZ2R0UjkveEZMUHdlbVd5VFRsWXI1YUNaZS9hSVFOQlZlUEtOQUFt?=
+ =?utf-8?B?ZmlDdXF0Wm1yaEQyZ0xSUnpFbGVsWVUyY3VBZlNFaXhocXdVcTlGLytnV09F?=
+ =?utf-8?B?QjY1RlJ1SkZvNnFqYjdmdkI3c08xQ3Q3WnZYTUJiNC8vbVBMckJpUWR3R0hv?=
+ =?utf-8?B?OS83VDRPRVJURFltbDZhNndmTUxSZXdsM01iSUVUV0xBTmJXcVNSNjQ2b1Ar?=
+ =?utf-8?B?RHp3bnhnczNhS3l6RGx1UDhuUHYvajRhTGlBSnZtRVcvbW5aQndhNjRZRDhP?=
+ =?utf-8?B?QlNab2FmM2pkYktGRVE3TjMzelRMTDVpTHY4MTh2eHdpRXhhalYxOFpBQ013?=
+ =?utf-8?B?NGV6aVhibGM3MXpteFVVaEE5NW01SUFIRVh1cWh4VTlTb29RSnk5Q0cwWVRs?=
+ =?utf-8?B?ZTRvNjVmcWVwS2NnbmN6NkxTL2dSQ3hBUW9zZnFVdjlDdlZaU0FEN2h2Q21j?=
+ =?utf-8?B?eUY0MU9CNjdrM04zS0lTMDk2dVpQcGwvc1pjTlFzNFVHQ0xqNUxHU1Jqc0JQ?=
+ =?utf-8?B?eUpMc1NlbkNHcU5BdVRIclhzRWttUWI5dW02NjA4ajBDWk1XTlc4YlRxanZp?=
+ =?utf-8?B?WXd3Vk9rcExGOEk3V29mT3NVWTdpNUxCSzlrSVN3TmZQNlh0SzhjRUx6N2Ex?=
+ =?utf-8?B?TDFFM0FaWTFkMHFtRE05M3laUWw1bm81L2FQVXVIU2x6S3R6UUg1U1RZK1Yz?=
+ =?utf-8?B?cHQxNmdsOHZ6M1lZcnNSZ1ZuL1lNQy9SRFN1dWJIQ2p0a1NZM0pNMlVjcjNJ?=
+ =?utf-8?B?eHFPMjZ6VlpqUnYrRUVqOTVKTlJqcU5HaDJLQkdYVXlOY1lGaFE3SnFYdlRx?=
+ =?utf-8?B?VUVPR3ROZ20zemxadGlQTFRLQTRsTXVOZEsrajN2cU1RTlRKVmF2YVA5RDhm?=
+ =?utf-8?B?UVYrV0tmcVZvWTdQb25iM2xubTZCeTVVbDZrSkk0L1htSitQcjFvVERNWFZl?=
+ =?utf-8?B?SUF1dWJ6K0NXejVhVDNvMVdqTjJITHNoN0EwOVNkdWlJSFlFNmk3UGtOWVVy?=
+ =?utf-8?B?ZTdXVnhkRGlVYTBxSW9pT2p5VTBsUnZQREdGUVVZUnRzc3VNak5DMVZ5QzhS?=
+ =?utf-8?B?NzBXa09jVU0vR2VpcFZFRjJQL0pqcXZEYU9oMG82Y0ZRMFpOWk1CU2hWOHh2?=
+ =?utf-8?B?NTFiV004MFBXSUcvUmhLMFJjRCtGU29ZWmMzQndZMUN0UmtPb2pCNDFvOEVs?=
+ =?utf-8?B?YWJnUnRjbDNVQ0E0eXMwV1dpcjAxUU95c2hLd1VubzI2amk3b0w4TGNremU3?=
+ =?utf-8?B?QXdXa3ltZXYycTRKWG10M211V0k1TGZvdHU3bEZ4T0ZVWWU3bUorZlpYYlc5?=
+ =?utf-8?B?K3g0RDF5dDQ5K2pwTVhRQjY0cDVZN1VhUzF4NXZvNmZYNnluQ3laS2k5R1p3?=
+ =?utf-8?B?djZSYWJOTklpOER3aDVrMGVoaGl2NXRzUFlKYkVLbGZwWjBDQzRHOUxLa2NW?=
+ =?utf-8?B?Nk95NFZ3a3JrUmtyMDBtL29BNEFsOVgwdVh1QWE5Y1RTaGw1TEZ2dzhQQ0FU?=
+ =?utf-8?B?TnZBY2JhdVY5eXI3dFdNbmw2b2hjUURpZDlPMHl0L0JSWWpiUGpFRkltVkVp?=
+ =?utf-8?B?aHdrOVpKUFFWZDFpOU4rMGlhRFlsY3JNWTlBY2MyU1hnR3NiR2hOKzM2K05M?=
+ =?utf-8?B?NkpnNUxXc2VFbUt6OGVFM1VCS3JLVTFBZ1l3UTdUbnQ2MGU1bzFGSTlUdTBt?=
+ =?utf-8?B?SDRXZlFWczNqa0xnOUJTaC8xK3grNnQ0NHBtZzlQTysxVjFaV2NhZjZ1bWxW?=
+ =?utf-8?B?Ynd0RWNiVjN1ekNJWnZSM2RQeXlNRGVBMXVlUmREWHgxNUlJMWYxZz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0337ee6f-2857-4f1c-2168-08de785cb5b8
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 13:07:51.5728 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lzypI6/e2ImS8KB5nUHlk5SaCkf+61oX+BTJv7NAKm8E9Lh6OtaS0JEqiqe9BLsFmZYSC2kh7QzCqdI9WK3G+7PLER5bX+DfDPqWf/rL02E=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8818
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,133 +147,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Svyatoslav, Jonas,
 
-working on the RPi5 I found that the U-Boot NVMe code is lacking a significant
-feature. The NVMe protocol heavily relies on device access into main memory,
-in the medieval times of computing this was called "bus master DMA". The NVMe
-device must generate memory addresses and read or write contents there. The
-current U-Boot code does in no way account for PCIe bridges in the path that
-add an offset to such "inbound accesses". Consequently, U-Boot can only boot
-from NVMe on platforms where this address offset is zero.
-(These are surprisingly many!)
+On 2/9/26 7:07 PM, Svyatoslav Ryhel wrote:
+> From: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+> 
+> In the case of active-low behavior the Duty Cycle needs to be set to 100%.
+> The PWM driver takes care of this but the LED_PWM driver does not take
+> this into account. Adjust LED_PWM to take into account polarity of PWM.
+> 
+> Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>   drivers/led/led_pwm.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/led/led_pwm.c b/drivers/led/led_pwm.c
+> index 15dd836509b..7edfa286468 100644
+> --- a/drivers/led/led_pwm.c
+> +++ b/drivers/led/led_pwm.c
+> @@ -34,7 +34,7 @@ static int led_pwm_enable(struct udevice *dev)
+>   	if (ret)
+>   		return ret;
+>   
+> -	ret = pwm_set_enable(priv->pwm, priv->channel, true);
+> +	ret = pwm_set_enable(priv->pwm, priv->channel, priv->active_low);
+>   	if (ret)
+>   		return ret;
+>   
+> @@ -52,7 +52,7 @@ static int led_pwm_disable(struct udevice *dev)
+>   	if (ret)
+>   		return ret;
+>   
+> -	ret = pwm_set_enable(priv->pwm, priv->channel, false);
+> +	ret = pwm_set_enable(priv->pwm, priv->channel, priv->active_low);
 
-This proposed patch uses the already existent dev_phys_to_bus(), which can
-dig up the correct offset from associated DT nodes and subtract it. I have
-no strong opinion on the macro naming, and whether it should silently pull
-in the "dev" from the outer scope or have it better passed explicitly.
+This feels wrong. Why would both enable and disable paths use the exact 
+same value for pwm_set_enable()?
 
-Signed-off-by: Torsten Duwe <duwe@lst.de>
+I can also see that the disable path doesn't actually call 
+pwm_set_invert() unlike in the enable path. I'm assuming this means we 
+cannot call disable before enable and have consistent behavior?
 
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index 2b14437f69c..98b9cec47d6 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -12,6 +12,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <memalign.h>
-+#include <phys2bus.h>
- #include <time.h>
- #include <dm/device-internal.h>
- #include <linux/compat.h>
-@@ -27,6 +28,8 @@
- #define IO_TIMEOUT		30
- #define MAX_PRP_POOL		512
- 
-+#define BUS_ADDR(a)		dev_phys_to_bus(dev->udev, (a))
-+
- static int nvme_wait_csts(struct nvme_dev *dev, u32 mask, u32 val)
- {
- 	int timeout;
-@@ -91,12 +100,12 @@ static int nvme_setup_prps(struct nvme_dev *dev, u64 *prp2,
- 	i = 0;
- 	while (nprps) {
- 		if ((i == (prps_per_page - 1)) && nprps > 1) {
--			*(prp_pool + i) = cpu_to_le64((ulong)prp_pool +
--					page_size);
-+			*(prp_pool + i) = cpu_to_le64(BUS_ADDR((ulong)prp_pool +
-+								page_size));
- 			i = 0;
- 			prp_pool += page_size;
- 		}
--		*(prp_pool + i++) = cpu_to_le64(dma_addr);
-+		*(prp_pool + i++) = cpu_to_le64(BUS_ADDR(dma_addr));
- 		dma_addr += page_size;
- 		nprps--;
- 	}
-@@ -393,8 +406,8 @@ static int nvme_configure_admin_queue(struct nvme_dev *dev)
- 	dev->ctrl_config |= NVME_CC_IOSQES | NVME_CC_IOCQES;
- 
- 	writel(aqa, &dev->bar->aqa);
--	nvme_writeq((ulong)nvmeq->sq_cmds, &dev->bar->asq);
--	nvme_writeq((ulong)nvmeq->cqes, &dev->bar->acq);
-+	nvme_writeq(BUS_ADDR((ulong)nvmeq->sq_cmds), &dev->bar->asq);
-+	nvme_writeq(BUS_ADDR((ulong)nvmeq->cqes), &dev->bar->acq);
- 
- 	result = nvme_enable_ctrl(dev);
- 	if (result)
-@@ -420,7 +436,7 @@ static int nvme_alloc_cq(struct nvme_dev *dev, u16 qid,
- 
- 	memset(&c, 0, sizeof(c));
- 	c.create_cq.opcode = nvme_admin_create_cq;
--	c.create_cq.prp1 = cpu_to_le64((ulong)nvmeq->cqes);
-+	c.create_cq.prp1 = cpu_to_le64(BUS_ADDR((ulong)nvmeq->cqes));
- 	c.create_cq.cqid = cpu_to_le16(qid);
- 	c.create_cq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
- 	c.create_cq.cq_flags = cpu_to_le16(flags);
-@@ -437,7 +453,7 @@ static int nvme_alloc_sq(struct nvme_dev *dev, u16 qid,
- 
- 	memset(&c, 0, sizeof(c));
- 	c.create_sq.opcode = nvme_admin_create_sq;
--	c.create_sq.prp1 = cpu_to_le64((ulong)nvmeq->sq_cmds);
-+	c.create_sq.prp1 = cpu_to_le64(BUS_ADDR((ulong)nvmeq->sq_cmds));
- 	c.create_sq.sqid = cpu_to_le16(qid);
- 	c.create_sq.qsize = cpu_to_le16(nvmeq->q_depth - 1);
- 	c.create_sq.sq_flags = cpu_to_le16(flags);
-@@ -458,14 +474,14 @@ int nvme_identify(struct nvme_dev *dev, unsigned nsid,
- 	memset(&c, 0, sizeof(c));
- 	c.identify.opcode = nvme_admin_identify;
- 	c.identify.nsid = cpu_to_le32(nsid);
--	c.identify.prp1 = cpu_to_le64(dma_addr);
-+	c.identify.prp1 = cpu_to_le64(BUS_ADDR(dma_addr));
- 
- 	length -= (page_size - offset);
- 	if (length <= 0) {
- 		c.identify.prp2 = 0;
- 	} else {
- 		dma_addr += (page_size - offset);
--		c.identify.prp2 = cpu_to_le64(dma_addr);
-+		c.identify.prp2 = cpu_to_le64(BUS_ADDR(dma_addr));
- 	}
- 
- 	c.identify.cns = cpu_to_le32(cns);
-@@ -490,7 +506,7 @@ int nvme_get_features(struct nvme_dev *dev, unsigned fid, unsigned nsid,
- 	memset(&c, 0, sizeof(c));
- 	c.features.opcode = nvme_admin_get_features;
- 	c.features.nsid = cpu_to_le32(nsid);
--	c.features.prp1 = cpu_to_le64(dma_addr);
-+	c.features.prp1 = cpu_to_le64(BUS_ADDR(dma_addr));
- 	c.features.fid = cpu_to_le32(fid);
- 
- 	ret = nvme_submit_admin_cmd(dev, &c, result);
-@@ -516,7 +532,7 @@ int nvme_set_features(struct nvme_dev *dev, unsigned fid, unsigned dword11,
- 
- 	memset(&c, 0, sizeof(c));
- 	c.features.opcode = nvme_admin_set_features;
--	c.features.prp1 = cpu_to_le64(dma_addr);
-+	c.features.prp1 = cpu_to_le64(BUS_ADDR(dma_addr));
- 	c.features.fid = cpu_to_le32(fid);
- 	c.features.dword11 = cpu_to_le32(dword11);
- 
-@@ -785,8 +805,8 @@ static ulong nvme_blk_rw(struct udevice *udev, lbaint_t blknr,
- 		c.rw.slba = cpu_to_le64(slba);
- 		slba += lbas;
- 		c.rw.length = cpu_to_le16(lbas - 1);
--		c.rw.prp1 = cpu_to_le64(temp_buffer);
--		c.rw.prp2 = cpu_to_le64(prp2);
-+		c.rw.prp1 = cpu_to_le64(BUS_ADDR(temp_buffer));
-+		c.rw.prp2 = cpu_to_le64(BUS_ADDR(prp2));
- 		status = nvme_submit_sync_cmd(dev->queues[NVME_IO_Q],
- 				&c, NULL, IO_TIMEOUT);
- 		if (status)
+The kernel seems to use active_low as a way to invert the duty cycle if 
+I'm understanding the code properly. In U-Boot, it seems we don't handle 
+that at all and always pass the "normal" duty cycle. Maybe there's 
+something we need to do there.
+
+I'm also assuming there are setups where PWM should be enabled but with 
+a duty cycle of 0?
+
+I'm also unsure what's the difference between active-low and 
+PWM_POLARITY_INVERTED (I've seen them both mentioned or mixed in the 
+kernel DTSes).
+
+I don't have experience with PWM so maybe that's a just a 
+misunderstanding from my side?
+
+Cheers,
+Quentin
