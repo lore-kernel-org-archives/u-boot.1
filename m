@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97962EB363C
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 22:10:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CE5EB363C
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 22:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7670783F4D;
-	Mon,  2 Mar 2026 23:10:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C09CC83F63;
+	Mon,  2 Mar 2026 23:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YFgQnPep";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mXlYWkeu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDF9483F5B; Mon,  2 Mar 2026 23:10:34 +0100 (CET)
+ id 4609C83F4D; Mon,  2 Mar 2026 23:10:35 +0100 (CET)
 Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
  [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0AA783F4D
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 23:10:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 175D883F59
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 23:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-464ba2bb3aeso3933000b6e.1
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 14:10:31 -0800 (PST)
+ 5614622812f47-45f194e9a98so1981504b6e.3
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 14:10:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772489430; x=1773094230; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772489432; x=1773094232; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RzbUxau7C0NlNp1xki7A2bmJ+7raJZDu40jCfJ3vPe4=;
- b=YFgQnPepn+9xca1QDE4aBR9TXXd2LebtS2Om3+LRv6s1F9kgzYWs2TcTodLzXIgT4o
- Lq0diGMT9zkBUGgdC62aQd7CcuIFEzuDL32Hvy32RKnrEyFA0YjrozTSIbdlrEluBMDZ
- ExxF8reO7JRk9uk59sX552Im16PKHgmHrAK4M=
+ bh=CQ2WU5tFBVhlmCmHYosGTPnElwIZHtJo3z3en6NQ7f8=;
+ b=mXlYWkeutKJLNrSUwOEq8B4XkSt6AdI0L668CnRQ68BcBwnPoM22PKo2imN9NcrnqU
+ zTKbyWsTihxCMXfirGCy/I9Y8NmIn6xL6ZbUaf5N2YBEpKlXRQox0CxO97MdhCVCSDyu
+ j3wdqhUGhs0owGNoikitmJAYCA13cG9ompxxM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772489430; x=1773094230;
+ d=1e100.net; s=20230601; t=1772489432; x=1773094232;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=RzbUxau7C0NlNp1xki7A2bmJ+7raJZDu40jCfJ3vPe4=;
- b=CeS4bpUsH8FA9qCXq3JYwUWOKKHpdL7xp0B+6yEP0jlzGP60j43toSqF3VFlbdKq7k
- VjO5uOVkiZ4FQBJaEBdRzj2n5EJYg9sLC96Zwnz6e0TvTZfxp9JPpHq5EzvjNm5gBSsY
- O8BMGnZY/N7ZowoySRlu86RgNflLSfTZwf1yYdo4H6HeogrSZ+SpCpW3dSMNAOAO9Zdg
- ct/hGmC8kKdzt7I3jYg0xrEpqPJseeWDeTwBJieumo8DQ7dOnRQNr2hz/xKCb4bF4lBL
- 2oyTcGiU/KOXlAJVxfOnDO1o5/B333BeCnCtqYWQgfJO2KCEhyLyvHVTqaGTw/KlteFf
- ZJgg==
-X-Gm-Message-State: AOJu0YxMQfON0EBTFLP73AMbR5J2nQD97ReJ+ZG9VUIhifsS103B+N9G
- ehHxtkGFaGmCVnPT9yt5G3PZWMmjpmJXkpQmttk4yAoEa0aE2cnOWPUdStiHnTeXU9o=
-X-Gm-Gg: ATEYQzzPN9Mww7ErsKfwRLndnIAlt3d1sA96dmCjt5QdBIhGYlLMzYUE2f/2BpjzCQ9
- NC5b8rYH0wbcKVz9mWNHnoOIIobxfqL0NWJSX2kS92dzwolWZuCRF5qgKtYhUMrEUzfJmFuR2qk
- gXwNTzYHvUhCq342t1QO3JRqQLSeDdk2w8wAT60VjOaXihd9Npgqabs8ELlNNJ83J60Hvcg/9y3
- keWz3RGK91WAfMmFDyTUNdOn8YgMbhledLSBXNRwoZEAkqvYvcSutEeHv52q6Ccbr5D77AJyTFF
- ItLa/B8hkpG70StDtjIzkwMRKUbsaKT8dCSibF4bh+lbKG1eyTHz+lbI0J6InRZ1sNOsSNzUAGK
- /37Qvd3HzWATJxvzIbHfvLCOWMlpVuYdUG7EdegfQBxaeq2hMVCA/bAVosJrqywNaQWVbtlDuez
- o5BX0zVwch3oobP5xLcS7lzS75mJPXa73w99olvVZuiV0xrwh2Jq4DRJ13NNBGxsbSeT9GWy3tK
- Pd+6xOIfu9mpy/YwCkBdD3NKl9nIp5Bcn/oktxRBTo5iRFULg==
-X-Received: by 2002:a05:6808:350b:b0:44f:f5de:5519 with SMTP id
- 5614622812f47-464bef07e72mr7028533b6e.18.1772489430525; 
- Mon, 02 Mar 2026 14:10:30 -0800 (PST)
+ bh=CQ2WU5tFBVhlmCmHYosGTPnElwIZHtJo3z3en6NQ7f8=;
+ b=NXbrlP7Y8nlSDpeYvl1uqnzXsWqqBFnF/cIkDmlzDPCUk1VQN2ypjmC5Dz04eKe0SW
+ 754PwMVPvh2C433lwYVA2huwCjZ1okg4c4TVTGxXwlzPC5/9XNYinZLOCtWLiNzngjln
+ BrX1EeOewwpLlKSMZpynKAujT8xmLh9LLy70mXYph9PFf5L3tvD13kKM4dAyBVFZnLu0
+ LynW3vWCfaJVc1ixHg0md/Yuh8XHRvdeIhnPku4q7sgoJUjoDTXVL3CtET3tXK59oobu
+ RhDGOtv41KEJHm7I+eZ2We+9z7a+jsRqBhz7V0/XYN7HmaJhbmzouA6YWUV0rhJAG2Bz
+ 6nxw==
+X-Gm-Message-State: AOJu0YwekZosUmZ09RpE8c6YOssjQLWtkPF9HgJXgwQKgWX5qiu7limQ
+ Csx5iBgm0dKHkS8GTecVqePQtnrEmYOmDWOJzeDojyVk5JEllUTXOHLXpA1apljMxZ4=
+X-Gm-Gg: ATEYQzwJxZCeodxIhAplMCUK/Uvo+QO5jrHto0Qng8oZv6eZ9A9o52ynnhVOZ8CplwK
+ LiCvh4mr/xD1fsQn5vGEKXyrIJKHlofUYq/NpcbUFY7FH9fY9loc+Sqqf6VAwqEC+K0sY/JLcPs
+ tOokmDPjyuznVY0GIDVnwGsq0bj2pho+QuEE62XOfKdXkKWw1zCd42J8pQ+62QNv+s5dQOcghD7
+ e+g7PE/KC4kPi3mIxXv1W501ajRD4aDNq9kA6mqBmEwiZ9Sv9VN5t5yq10h1CvS2cX9vtpEdn3f
+ l3Jx0xgLJUxKTxZW+7cq9PlJmeslBsjy7ee44rfU82hqvjrNercY9XFp6KJBmsbCinTpoR5nhnV
+ /50Nb9mBrU0D7de9nkO0RXwXB9rLOEoI8upIaGpFArxRrxlN0etgDN8EZug9aQSZLAXlv12l9tx
+ e/EPcrqYsZH8HyDM9E6SOPBF4K7ksI+nDdbx5tHUABi2vU924L8fVlIfAcHovFVIMtHAZhio6Zf
+ UOZeXkscKnY6XWF/BacwqaZ45hEIFnURgFG9lGI9kN84OFVVw==
+X-Received: by 2002:a05:6808:6d83:b0:45e:e4c9:4915 with SMTP id
+ 5614622812f47-464bebe3f2bmr8029950b6e.35.1772489431805; 
+ Mon, 02 Mar 2026 14:10:31 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb35290fsm8447013b6e.4.2026.03.02.14.10.29
+ 5614622812f47-464bb35290fsm8447013b6e.4.2026.03.02.14.10.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2026 14:10:30 -0800 (PST)
+ Mon, 02 Mar 2026 14:10:31 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- =?utf-8?q?Vincent_Stehl=C3=A9?= <Vincent.Stehle@arm.com>
-In-Reply-To: <7e073f33-16ad-475e-9d28-54e8006f3a31@gmx.de>
-References: <7e073f33-16ad-475e-9d28-54e8006f3a31@gmx.de>
-Subject: Re: Pull request efi-2026-04-rc4
-Message-Id: <177248942968.3682557.9032108492010348585.b4-ty@konsulko.com>
-Date: Mon, 02 Mar 2026 16:10:29 -0600
+To: stefan.eichenberger@toradex.com, s-k6@ti.com, w.egorov@phytec.de, 
+ n-francis@ti.com, emanuele.ghidoli@toradex.com, 
+ francesco.dolcini@toradex.com, Stefan Eichenberger <eichest@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250314100734.23777-1-eichest@gmail.com>
+References: <20250314100734.23777-1-eichest@gmail.com>
+Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
+ restore
+Message-Id: <177248943073.3682557.9502261507089275302.b4-ty@konsulko.com>
+Date: Mon, 02 Mar 2026 16:10:30 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,22 +99,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 27 Feb 2026 14:19:23 +0100, Heinrich Schuchardt wrote:
+On Fri, 14 Mar 2025 11:06:49 +0100, Stefan Eichenberger wrote:
 
-> The following changes since commit 437ea9f8be5afaebe2d8cbab6242f1182857f21e:
+> The get_ram_size() function fails to restore the original RAM data when
+> the data cache is enabled. This issue was observed on an AM625 R5 SPL
+> with 512MB of RAM and is a regression that became visible with
+> commit bc07851897bd ("board: ti: Pull redundant DDR functions to a common
+> location and Fixup DDR size when ECC is enabled").
 > 
->    Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab (2026-02-26
-> 09:06:33 -0600)
-> 
-> are available in the Git repository at:
-> 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2026-04-rc4
+> Observed boot failure messages:
+>   Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+>   Authentication passed
+>   Starting ATF on ARM64 core...
 > 
 > [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] common/memsize.c: Fix get_ram_size() original data restore
+      commit: 8d24789abed0822fbe41a2f9d72cf19650159dc6
 -- 
 Tom
 
