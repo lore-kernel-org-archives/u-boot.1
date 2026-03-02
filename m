@@ -4,133 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 226DEC624C6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 09:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D2AE9B344
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 09:49:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C75E883E63;
-	Mon,  2 Mar 2026 10:28:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 531A283E63;
+	Mon,  2 Mar 2026 10:49:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gGqnTS9m";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FnXRymCA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD26583CDF; Mon,  2 Mar 2026 10:27:59 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B0E6183EC6; Mon,  2 Mar 2026 10:49:22 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FFA883CDF
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 10:27:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 5590183CDF
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 10:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=q94CdrebPh0YUhtg9VKXlYEEyizkyXNeyickbhZNINxUUxAWZ5xqYo2vjm/QNeHBW+kmn+zDt+1q7iQX07F8sKi2Ve1aFrDLjPBH4wKtg4Gjz/CLN1OctaKEjM7r66TETRNUSxHqPzif8UZZLZHWfE9umZ2iITSQQ76jwy5dEBFX1H0s86YT+k3aqOrPXX3C9E8PRdT6/2cUNy7CdMyYTkv4nO/kY7bsDQyynmZeQ+OHaJlJ9JiOcAOrPMs4T32wqN9aKrjvoZ3oq7OQYVERz0z163qwRBU1vAnKJ6JmRjRbYLR+Egb9TxWABFrFK6TZmYRAutICRBlLi6xXaqYO7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ndQ2xjBX+rUhzHBZWb/i7FegoUOz4OzHNn3sh/yMz7c=;
- b=Q83W3CkWpGU5t2Fb2fcxOKEuicJ2rgliFTXrZX6TXDRsdYGA7VqQ7z9kttbBPJdyy6hz5+dIKaaAOc4wRnM4yVcz8vKiygW8o/BX+rQV7R7bgPo6t4fIOLORiZMTqrJ/SVr60FCAnSQSTOO7C7zbxZ2YQ/cZH8EGy0DFxcYX9aBiGPG2Ybrf1uGBWAKTbIJL1P1baQdu9YIvL9bfJcT0Mo5YraszUh8BusNtQnmYVYKqjxJyAgGC/x49rnZhJTctkaT1Ts1JW9Stf8uMGaHtAmKcw46NA+kLSHGwRfV03DZPKPXl6qFTFnwoXNTOkL9JCrxivkx8pQ07oSzRORayWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ndQ2xjBX+rUhzHBZWb/i7FegoUOz4OzHNn3sh/yMz7c=;
- b=gGqnTS9mkMIQISpWpRa3Hx3Vy9KnkpHBvKd7VrSOdaNYkSeIpb/Pd3y0zMcCl/H1Hqj/s9tsl8wKN1qcVqMIj7ghl196w0U9FBSxdJpKRx+7qGNzCMpVtcBqerrphLn0WpUKM5mvIRehSIpJ8cyp07Fek+IQXyhd1YJeWmv3nq4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by PA1PR04MB12200.eurprd04.prod.outlook.com (2603:10a6:102:560::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.21; Mon, 2 Mar
- 2026 09:27:55 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.015; Mon, 2 Mar 2026
- 09:27:54 +0000
-Message-ID: <b40a1260-81dd-4591-ae15-0b6f6c95c972@cherry.de>
-Date: Mon, 2 Mar 2026 10:27:38 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-483a2338616so26460235e9.0
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 01:49:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1772444959; x=1773049759; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=NfUpctEpUNQEOAISJBQIbdqwi/+97Hw5Kxf/Ai7gfok=;
+ b=FnXRymCARmVBcxEjv8bzohZA1Zv+H3v3XnVy4adKw3IJ7IgpD3swPh/l7F14vsEWPZ
+ 36IjJfeCDXeCTjEmkanbZUW4T7UMLgWL2GQ3Wi6vs/RhOWyqmwn7svYwqoIlsryyEmJJ
+ nOprn0TEbwNtAoYVZBONc2j4BPEoaY/bXarIxn5mlVHRBiCLvquLBoTduwJrwhxjgbJg
+ 66SkK1mpGSOm5vwuilhsb45YIRG4OFDNEJlQ4NXC8J/DibVzTaG6wWqPCTrwuspVGyfC
+ vtBv3Sslu7OUUK+SpZRU4ZtbEaAjATEG/C/kRVQUThsryfcOlMmWciL444a4OvD6d5vo
+ LrQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772444959; x=1773049759;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NfUpctEpUNQEOAISJBQIbdqwi/+97Hw5Kxf/Ai7gfok=;
+ b=ZclbMa5FCL5NMQaT1yQ72tQZEm1sQKTxJNHITdpClr3dJYVLGAFXCQ5PW3Xcu/Lrzn
+ j1m8MWZsPkokNYzjOxn7iXkAZvI4Ai3A42XIlD1iYATcx72wqwI1YPyfIYzVCRo1DpNB
+ td6921+84WGovTSjh6HGskE6hpVu5BC536L5whuZAmyEosYLzfbGcEAsoNDPa7CA0Uts
+ kp/+Zq0RYAFNIyyudzIj+2T/kCvKC9IDWa5UkTu2Sju5cE/TUK2vMImnWix/6d4zNIpz
+ DFQnRT65WTAFIQObVfbkHIajuq9qMGI5XAaHu5ntwvs6dpIuKaQeyp7sKf+Ru68JsIrE
+ DbcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKP6yS4k4lL2DiuXqAMbw5r6EUp5KwrwjLTL9GAJdNmt+4Wu3fP2KuP0PhzSD44HAklOTiG+U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx7Nggv9cki4UyOvbDk33RzKVMcTsLODcJ8lsFesGMj2SD6iqIY
+ vyb1RGIHxMjBWnnjJIv5k/lXXpEV/5ftHW5cw1XZOUrB2rJK4uBqy74hGjrGANYtr9I=
+X-Gm-Gg: ATEYQzwz4j/bXM8UsMdI2kj6Cyd8FKIUF/hxE5kUv7VAxkjDFwPFrjxvZF1Z9JU2ol5
+ 7C/kXcCZZAV9bBUUUDSncJ9zxdmwZlVp1HHYVfns4qg+7H9s++FnZWcTzgVWBmSHsM5BRtKpXSb
+ LCO+4ntta32ec+qedsUMMyEBEtWsQA4JwvyDAUEfTUMaYC2nE/UCqMyu5hwcaTOol0tyZESbyHv
+ NdZTU4fQLkqkvHRhJKku1X6hwxhDWka7cLdgg31ZqS8yibkZlXB8Pcydmz/hxphaiPwz2RINPnQ
+ sReAvl2HWbUoT4I8YvzIygrr9x1X9gYe3s9HzmIjs9CRfsvhJcSYY8tY4usp7LAtBt/3b1kDB+t
+ IiA6mVFNEI56LJ1//4t7R/UFn8JQrgdKURelt75CTEE6Xn3NxjA1xadR605NDASMiZEUKTFAXi8
+ FiwqZk7XKjJGFUn0+xu0gWgfTjx9lNaHid79sMz2PYL5fW0kwbgBLjRJf6X8fKLyB76Lnq66ryQ
+ UpYb+Q2x9nHTIg=
+X-Received: by 2002:a05:600c:c04b:10b0:483:79a6:e7e1 with SMTP id
+ 5b1f17b1804b1-483c9ba7e28mr145860455e9.7.1772444958601; 
+ Mon, 02 Mar 2026 01:49:18 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:106d:1080:c342:61e:309c:3478?
+ ([2a01:e0a:106d:1080:c342:61e:309c:3478])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4399c765c67sm28111046f8f.32.2026.03.02.01.49.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Mar 2026 01:49:18 -0800 (PST)
+Message-ID: <42718ff6-d698-4c6c-8b00-e5106c40f8f4@linaro.org>
+Date: Mon, 2 Mar 2026 10:49:17 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] rsa: fix incorrect positive EINVAL in
- padding_pss_verify()
-To: Aristo Chen <aristo.chen@canonical.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Shiji Yang <yangshiji66@outlook.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Anton Moryakov <ant.v.moryakov@gmail.com>
-References: <20260228085121.3355465-1-aristo.chen@canonical.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260228085121.3355465-1-aristo.chen@canonical.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 1/1] ufs: don't select non-existent CONFIG_PHY_MTK_UFS
+To: Quentin Schulz <quentin.schulz@cherry.de>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Tuyen Dang <tuyen.dang.xa@renesas.com>, Shawn Lin
+ <shawn.lin@rock-chips.com>, u-boot@lists.denx.de
+References: <20260225063100.46962-1-heinrich.schuchardt@canonical.com>
+ <578013ec-1f37-4d66-8d6b-c268a5b660be@cherry.de>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <578013ec-1f37-4d66-8d6b-c268a5b660be@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0234.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b2::18) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA1PR04MB12200:EE_
-X-MS-Office365-Filtering-Correlation-Id: c6150aa0-95fc-4f62-ec30-08de783dfbdb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: /IapTRzmI/uWKvCJf8UXz8EhrtqGE0Be7i7w44dDK7q6c1y3ifM/gzUdECSfkCnz0wbkrojBsgEpLgmU/spe5NI1wC0yYnELHXkMMRgLNprXUiJqUocpfk5wot+O+QiIHxKupV9IP5/IJGdygQn5WxxtN2S7ey1UT8rUJKKzu3m64IMn7+5TXWfyj1UdSIEGHYPSg/CQQ2ngGQhBFPQ+Jziqmy+sdw96iwxGtP8xxm1lu4PU4Gr3CBbAAcCOfRn8prnQ7IOjRPTVKWjM5tFEG9bIWOcZqi5R8AmsqOt/Ncvz5VG0txcEtKlyXcaNx/nUjskGmb69RFl2OJlWGdPm6jU8OgWCal0TU6Wx1nLQ+Y3iWBnqotdz/xGYfQWnkD/sRemTFhQlA2yWSHqEdPHKDvNS2AH/7w+iDzUFpAcndn8vptSG7VLWhaHf20q1qNqE4cRyh6720qvKvA4lRSNUtmLLz+MTt5F8l5UvxyycHS4rd774ZNI3fgN7akWxW510LTQHaj/sZJXzKtTwSovtMUaQlq5iF3nqD0KUpVZJpR/KsVEiUW5KPwgeqpaSEiHu2ozkwX9jAfTmbNsq/tefuLoY2dPbO/97VEJmpKBnLGMOptHluMm6WAAZjSqcXuXY7Bl8QDzGoOIpDDtym5bAEMNbMbQwj4ec68JnlGwsSdJtPuXc4SVXxkX5dc8CY/6K
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b3VqSDJxL3ZscTRNQW5idzYwV0tEWWVrVm9CSHIycEFPZW0vcCtRZGlaMWdF?=
- =?utf-8?B?RWVVZG1GazZPNUlwVUFWYTlmMlBKV1VLNmZ1UFJmN2xaa2JwcU1IQWtsUGtj?=
- =?utf-8?B?RzI1YnFHY1p3ZnY5ZmE4U1l2cmpmMncxQWpZaHpFdDY3VlhYTCtId3gwN0sr?=
- =?utf-8?B?a09DM0I4SVJTUGpZY1ZCKzFZeXNESzJldFArUGxBUm50TXZLL0RWTm9qSndN?=
- =?utf-8?B?YXhzZHlFc0hlWTJJbkpWTGUvQUNkZFRqaDBzdFF4eWVUaFJHQ1NkTVpDVzFa?=
- =?utf-8?B?cG9iY00yL0ptNTB0MXFReDNzajZqWGRSMGRTa0NXQk1YM2NvaENhOEY1MkQv?=
- =?utf-8?B?R3laRXFuVVRudmJBbll3MTRMVFl3emk5RlpoV1RSVEJ6aWNiS1ozM1lISUln?=
- =?utf-8?B?b0dnSFR0NWo5ZkZBL0lvUmZwUlFnYTNPQUlaeG5VNEJGNU5zUGFOS0V3WURK?=
- =?utf-8?B?V0l6a3hnV3A3TlZVTER1WHpyWWx3NnpHclV6amJjNWh2aTBDdDUvcUY5NTFu?=
- =?utf-8?B?NStqdnNadFJJanJLSzVYQVRsRE13d0s4MWlSL01UM3F1T2Q5eVUxbGFtZXhK?=
- =?utf-8?B?c052KzZyY0hEMzc1SzZrR2RSR1BiQnNvYmdFeXRqcVRZa3FMak81ZnAyb0Zn?=
- =?utf-8?B?L3NLaHpSVGZNMVJKTUIrSEgyVmcrWElKNnJTSC9CY0VZRmRXbXBNTjRMdGhr?=
- =?utf-8?B?Q1l4K3YxTFJBZkZyRUhEbCtkSzh0enMrcjZQbE9SZ1JRTXVhMjZsV3NNczZ1?=
- =?utf-8?B?dEpPU1FQVEtGM0d3TTNtTVJ4OVNxd1FDQ0hqSkErWUtOc1RJQk96SHhscUpE?=
- =?utf-8?B?UmgyUW95cy82dGlPTUpuOStJTDNFeVZMZVVVTGtWbVp1UHZFaGRGbDJnVDU3?=
- =?utf-8?B?YXdibW5XL0xmNmNjOExoNUE0VStTRHNYS0dYTmJLZDg4eVN6T1B2bWFWNVd5?=
- =?utf-8?B?VWhpY2g4NktzWWpHeklQVzJUdDR3QkduUGtVYlU5U1hXK2hRaysvRVVLQTV1?=
- =?utf-8?B?SEZKcUhDR2JIUTlLVUkvUFVlSjNGT0MwaW9EZ1hpanRiZVQ4QjVqN0cyTlhY?=
- =?utf-8?B?UDhYQlNVMXJQN2M5dS90UFlhcTByWjNPNmszZnR0b0R0QU5GOVc4aGd0UWM4?=
- =?utf-8?B?MXovT3FOTUxKeEQ5RVU5Znl5cTQ2VFhpLzVpSEt5Uzl6VkM5cW1sakZ6ZUVr?=
- =?utf-8?B?YUNrMktBK3NRZjNXZ1Z4VkdDYndWL1BJTG9UNkwwWjVVQ0dUNGticmVGSGI3?=
- =?utf-8?B?NFppZnhXRmVIeXZzK2pmanhVbytyamlINThBK3ZpQmJtS3B1QTNQSktoc29Y?=
- =?utf-8?B?Q053Rm9WTkJBVFhtZWhsNGYwNVVmcFhBTXJzNCtMNTJmR2lVNGtPZ21VZmpU?=
- =?utf-8?B?RHlmOFU4Ymh0TjkvQW93Si9NZDFtMFlDUmFOYnMzT1dzUDB4TzRBeHh3cmg2?=
- =?utf-8?B?ZkdIWHZwTHMrZnZNNHhWcU9IMnlsRFQrWFRMUzBWVjlEMGpVVkdzVXk3ZXZa?=
- =?utf-8?B?Vm9rMXBhUzBXU29yV1Ryb0YwcTRBdVBoYmxwV1FvbjVGQ0dOT3VtaHdhT3do?=
- =?utf-8?B?VWo2Rzl4S2hlTnJFbnFmWEQzSlE3NlZ2ejREVGlLYWdKeTB2ZnVXMmJTU1FO?=
- =?utf-8?B?bHNON2czcEI4UmpEdi9iakdBSm1sQ1MyeG1Oc0EwUjBFTjVyODl0dUg5a1pN?=
- =?utf-8?B?K3VjM0tnUDg1dkx5UmswK1RYd2d0cVJRcE9KSmRGZ2ZGaXY1UzA4MEtGZTFJ?=
- =?utf-8?B?Q093NG11c0JuWEpmMXRPcDRQZ1RBM051a29jaTJBTDBvTjIrL1Z2VWlaM3JZ?=
- =?utf-8?B?d3JtWjZ5RUw1NlZnZjVMSEN4ejNtS3A4R1FIV3pEd0ovRlNod3FMRWxOUXFK?=
- =?utf-8?B?OHdibld4R3E1d1NrRjFjMFZpbnE1aHZnSWxZcVFiNEg3WDdod3RNd0tkZUlp?=
- =?utf-8?B?ekZ6aDV5Y1FnWnh5VW5JazZzellDK0pUVTBOTEo3YTRtZG9XZ3c0UHNIVkFt?=
- =?utf-8?B?UTYrVFFTUTlBMzZPbUVCYTQyZjFVYm13RHMzOG9laGZmSVp3MHBsYnd6TzhV?=
- =?utf-8?B?NTlGdVpIdzVXNFZJcHVwa3l3a3N5MkZvZlBSMHdEYjdTSHV3c2lMRS9rWERE?=
- =?utf-8?B?cUdzUXJrbytuNC9tTGhDbGFhT3JUZmpOaExUZGU1UC9lc2RBSUVybWJnSzBq?=
- =?utf-8?B?RE95UjJWNnJkT3lIN05iRi9rbFJDU0RGQmJ1LzFxelI3bkJCalZsSHFrT0VK?=
- =?utf-8?B?ZllEVG1VZGlaMnphdlpGUFhxWFVROFBjaGN6N2Y3N1JHWGo3bHlra3Jia2ZE?=
- =?utf-8?B?WmluR2ZPRXdtRmdCVXpMVVZiSEZFTWlhZEx6RkF4SDd3R2NuQ3FQQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6150aa0-95fc-4f62-ec30-08de783dfbdb
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 09:27:54.8333 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: esulzdiGQkt2dyxMOsoDQ5lH0NVcyBIVPmhhc/Br/BjsPrGvc+/V7uVOHfHNN//FhhZvRUn8uO79L0ZSV+6NvJGjwsB1qEkXtdtThZK8paU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB12200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,33 +132,37 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
-
-On 2/28/26 9:50 AM, Aristo Chen wrote:
-> All other error paths in padding_pss_verify() return negative error
-> codes (-EINVAL, -ENOMEM), which is the same as the rest of the U-Boot
-> RSA stack. The positive value is inconsistent with U-Boot's convention
-
-It is consistent with the function doc though.
-
-> and is a potential bug: any caller that tests (ret < 0) to detect
-> failure would incorrectly treat a malformed PSS signature as a success.
+On 2/26/26 13:38, Quentin Schulz wrote:
+> Hi Heinrich, Igor,
 > 
+> On 2/25/26 7:31 AM, Heinrich Schuchardt wrote:
+>> Symbol CONFIG_PHY_MTK_UFS does not exist.
+>> Don't select it.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> CONFIG_PHY_MTK_TPHY seems to be the only Mediatek PHY driver symbol
+>> in U-Boot.
+> 
+> This binds against mediatek,mt6878-ufshci compatible property. We have no DT in U-Boot with that compatible. I couldn't find any mention of this compatible or this SoC's support in the kernel mailing list(s) either...
+> 
+> The PHY symbol was actually defined in patch 1 of the series, see https://lore.kernel.org/u-boot/20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org/
+> 
+> Considering the kernel binding for the Mediatek UFS controller requires PHYs, I'm assuming the series shouldn't have been partially merged, especially the controller part without the PHY. (Note that the kernel binding still doesn't list MT6878 as supported).
+> 
+> @Igor, maybe you can work on a v2 for the first patch in your series so we don't need to revert the UFS controller part since it's unusable today as is (first because no DT with this compatible is found, and that even if it was, there's no PHY driver while it is required for the controller to work). If the PHY is not required by the code, then it doesn't follow the Mediatek UFS upstream binding (providing mediatek,ufs.yaml is where MT6878 support would be) and shouldn't have been accepted as is. We do not want to drift apart from the kernel bindings any more than we already are.
 
-They would also miss an error in step 14, since memcmp returns non-zero 
-(but potentially positive) return value.
+I should've probably merged the PHY driver at the same time.
 
-There's no documentation for the crypto padding verify function pointer, 
-c.f. elixir.bootlin.com/u-boot/v2026.01/source/include/image.h#L1604 so 
-maybe we should be explicit that it may return >0 for an error too.
+Neil
 
-The main question is, is there anyone in our code base that is checking 
-< 0 for an error?
+> 
+> Cheers,
+> Quentin
 
-Cheers,
-Quentin
