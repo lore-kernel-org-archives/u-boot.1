@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF052EB3637
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 22:09:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C84E3EB363C
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 22:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB20A83A1B;
-	Mon,  2 Mar 2026 23:09:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B01B83A1B;
+	Mon,  2 Mar 2026 23:10:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LwwVBcBv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l5daZG1P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 899FC83F0A; Mon,  2 Mar 2026 23:09:42 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 7566383A1B; Mon,  2 Mar 2026 23:10:30 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BDAD8063E
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 23:09:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B13983F30
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 23:10:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-45f194e9a98so1981165b6e.3
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 14:09:40 -0800 (PST)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d4c3484268so3864560a34.0
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 14:10:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772489379; x=1773094179; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Np7MBhsKoVqUTI9MuFr81PUWcKJjqw79opbY0eDHDGU=;
- b=LwwVBcBvqoGABgNY4YvTOh0BCWfPa401FUxfBCcDd+0gJn6xQYwDNxMmxxyJbqz+A4
- Mo+OIoysRY6Cn5g+0JcFXTpAkXJEmTqQn8gG17/w/WsplAq7TzBHHub3H9kswxvgQ57m
- Lj/UDlnlxj+p90MNVsGyZCYN0JJVGhA4r9HcA=
+ d=konsulko.com; s=google; t=1772489426; x=1773094226; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5wM+HcNIQrSiaj0hScDBgOi4OaosF81F5dwEm5GgTSU=;
+ b=l5daZG1P/2snawEJNC04sRQyCYj/TIM+xmPy0cBVZzRs6tPP6bd/dU8W3YnjwYJHZ6
+ jf+iu0N9aYlo3/mOgZ+aPqPzr5m/hZBerGccOLlAvJwXvt5cObyrg3nbNYtRONFtg7t8
+ kzkUZmE8Pv5/Iio6gQ+EL9hHYNMX2LSFsXT00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772489379; x=1773094179;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Np7MBhsKoVqUTI9MuFr81PUWcKJjqw79opbY0eDHDGU=;
- b=ifcNKU5cdqoZ5YEFX/fQVKHr+4zf2JNz+tLPdox/G7LIbI6SHe8PU067+h8Udp8NZW
- BulmdEjnBPrajnJipcbyX381YJ/ueSJNTaWUy1/3gYB9j4LScmEMJ03XvAWazf7u4elc
- RUkJ1RA1XGajsQ9xi2oom3YZuGOfInwtCGlCtxoOD1NPiNwuBWsteXFxalJjNKKrrUbM
- HNrk8uaWwpOEnzA273TbQAcjGEBxCniltefs0qCQavPCVN/DjfUUAsZEftwAnJiYvkC3
- 8uadw1PgJ5mCjZHoHDtsrHHqKjLBlcKmSpIzk8iWYL7Oh81+rqhVHtExYr9gpLeKhwaK
- sg8w==
-X-Gm-Message-State: AOJu0Yxc/Lh5d0miPKlIoZQW9pHjeZDa4C9Ut+0W7BkR8QUomCvrqcRy
- 0ZMqVYUPBIT6BCdoZ29dwLr8QIPUOObcDDYt4zU1VhRk4si0TGoUb5TItodwH9+hAYMwu3baIPw
- fRWKxwHA=
-X-Gm-Gg: ATEYQzwGwb/1v47J2yV+3pE5YR+QFfFi+hXmQzWhjCoZmseAdLIMzD9+Yl0qVr0zrYj
- yiv3YHDNvgx5D1qeAnBxfmIg4A3tc+63JZtOnQc2rHlUJjNMjf0aWeZlF8KV7lsBrbso0p4XN7m
- ajyTcQWaiJzdlTCox5GZBQ7Wp0WMxB02x9tu0JVOgEZHG8eGUAhGy9X0UEkcDaNOkCF4enFJ+8E
- 8Lftz/mXGQQJTHD/OB64Hm8nJfzE69zm23T8CvUJrw7XtfmRR0BfCwFoWCH6tlTZd9C7tkvY+mx
- dnH7lfUaFQI7d77rgm1ahWfskvXWh3YYRaFWJmpfqigFJYzgxyX/W2LAXtl4SFVEoTobsVvqcx1
- fQhlXvc8uotpQDGPw+5E5H6Pb3+TCvx/NyTwXX6kxau5zGtvVk62Ohac83sG2IuxLs4DkxbbQg9
- VzHkAKHk85XzdsA3SUBjzd6OuOGjcugH5+IRGH4hF5Pg6C4R9HvO3k5m6Z2MvWlGsbASaJYZTup
- TqdEpsFUB4BRBZ56SIKKJIeQwkWAcYw3OYEiwhgO/vGO7NuThdkHA==
-X-Received: by 2002:a05:6808:6718:b0:44d:bcb0:1409 with SMTP id
- 5614622812f47-464bea613a1mr6587490b6e.22.1772489378961; 
- Mon, 02 Mar 2026 14:09:38 -0800 (PST)
-Received: from bill-the-cat.. (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1772489426; x=1773094226;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=5wM+HcNIQrSiaj0hScDBgOi4OaosF81F5dwEm5GgTSU=;
+ b=TKHKzolNhINPJM0GlPp1u9vMGbx4kE5icTDkOj6TeWBKVUM2JG9o9Ol/shkwBUb4Qd
+ qUDd1yvJSmnJy79Si24sGou7Lv9UdJGBy8ifkYOaC2WLKylp8YncYXv7hYMaSusi/qBR
+ Ri8wzM17eM3BvtN4XqFa1rgMVWztcNCog74AxO8cLzc2GF6niCHdCFZl9eMVeIE6UoTx
+ 7FqZHrOlYZOfsmGEtZDdfeOlDLs3PilJklJa7/GlV/fk9/q8n8F5NZeBAQxlffsHlKKX
+ h3xALXKiyk0CxqHK0tb8V5L316ztMgE6/wREKUsOBspdpSzEgfA6wgZU8s2iCtqOuB4E
+ VG7A==
+X-Gm-Message-State: AOJu0YxQjg/8IGp/xl0MefF6txASbNThJuYvqNCm6pQy68VExpBW1tHh
+ GhFHSkdXePfwhY/zjXPNrFrFRpffYsXgOqTM9k+ZYFL2PeKmndkckbCz77wE7eqd14c=
+X-Gm-Gg: ATEYQzxzfXZ1qTt6un7sbP2tRHjH/xeCVoXfuI55w+kX/2QYECSYjkQfDgrWbos8XCt
+ 8I+Wmv552nGyi4Ky+Iibo+rxcnUkx9860YJJbRAc1wpsx6/znCOxPKaDn3hdbI6/8ajPyvrhS/b
+ 2MH54+gUT01nOzBXoXiBdeIKvgP6wdTA9P0NOvaMcEJBSkmfa98on7Xldzm7ICtpB/00VUYRcIH
+ 1UpqTTROKXYdEYmmQFersAcKWPs7FUwCgQXzam7XLK14LNitYax/kI/X9ZqZFzvIpDSU2Q74rwT
+ ECuoQg1NRw93H7vafgl8kpsYESJOOp2ChcWIHk6F1v1NHpfl46d1n9pMwHNgL2/5OsfUqjFmgPt
+ f2oQlCkCutfMd2+y8xbvvsmYD1Bg06RyZvt4ec2m5TDsSJjUu/wAZQJXkxqV13US/nzKatzbpJP
+ Tax9qd0JNXXmE8qkvIDj5b3Lm5+fH+5+O+g7RUrhh7IzFT6W8i4p2UeGFnPfGg0VQD8wyYb1TQc
+ +nh+nGI6pwaohKf5NlXzIutohysdCuqG0xmdV6X/DHAzn++HA==
+X-Received: by 2002:a05:6830:6d05:b0:7d0:3a38:8fa2 with SMTP id
+ 46e09a7af769-7d591c1af77mr7851657a34.36.1772489426176; 
+ Mon, 02 Mar 2026 14:10:26 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb0991f5sm8401674b6e.0.2026.03.02.14.09.38
- for <u-boot@lists.denx.de>
+ 46e09a7af769-7d586653f6asm12169132a34.19.2026.03.02.14.10.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2026 14:09:38 -0800 (PST)
+ Mon, 02 Mar 2026 14:10:25 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] FIT: Address Secure Boot Bypass for Signed FIT Images
-Date: Mon,  2 Mar 2026 16:09:37 -0600
-Message-ID: <20260302220937.3682128-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, hs@nabladev.com, brian.ruley@gehealthcare.com, 
+ emanuele.ghidoli@toradex.com, kory.maincent@bootlin.com, 
+ peng.fan@oss.nxp.com, primoz.fiser@norik.com, 
+ sebastien.szymanski@armadeus.com
+In-Reply-To: <20260228220641.362277-1-festevam@gmail.com>
+References: <20260228220641.362277-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20260228
+Message-Id: <177248942492.3682483.38373118579273816.b4-ty@konsulko.com>
+Date: Mon, 02 Mar 2026 16:10:24 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,148 +99,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a flaw in how U-Boot verifies and generates signatures for FIT
-images. To prevent mix and match style attacks, it is recommended to
-use signed configurations. How this is supposed to work is documented in
-doc/usage/fit/signature.rst.
+On Sat, 28 Feb 2026 19:06:41 -0300, Fabio Estevam wrote:
 
-Crucially, the `hashed-nodes` property of the `signature` node contains
-which nodes of the FIT device tree were hashed as part of the signature
-and should be verified. However, this property itself is not part of the
-hash and can therefore be modified by an attacker. Furthermore, the
-signature only contains the name of each node and not the path in the
-device tree to the node.
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit f6963fc232603007c661411fb31c57f1a9678a87:
+> 
+>   Merge tag 'mmc-next-2026-02-26' of https://source.denx.de/u-boot/custodians/u-boot-mmc into next (2026-02-26 10:23:12 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-This patch reworks the code to address this specific oversight.
+Merged into u-boot/next, thanks!
 
-Thanks to Apple Security Engineering and Architecture (SEAR) for
-reporting this issue and then coming up with a fix.
-
-Reported-by: Apple Security Engineering and Architecture (SEAR)
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-I assume one question will be about adding a test case. I have been
-asked to not share the testcase for a few releases yet, so plan to add
-that later in the year.
----
- boot/image-fit-sig.c | 31 +++++++++++++++++++++++--------
- include/image.h      | 12 ++++++++++++
- tools/image-host.c   |  9 +++++++--
- 3 files changed, 42 insertions(+), 10 deletions(-)
-
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index f23e9d5d0b0f..dce8bbe30e93 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -44,12 +44,6 @@ struct image_region *fit_region_make_list(const void *fit,
- 	debug("Hash regions:\n");
- 	debug("%10s %10s\n", "Offset", "Size");
- 
--	/*
--	 * Use malloc() except in SPL (to save code size). In SPL the caller
--	 * must allocate the array.
--	 */
--	if (!IS_ENABLED(CONFIG_XPL_BUILD) && !region)
--		region = calloc(sizeof(*region), count);
- 	if (!region)
- 		return NULL;
- 	for (i = 0; i < count; i++) {
-@@ -62,6 +56,23 @@ struct image_region *fit_region_make_list(const void *fit,
- 	return region;
- }
- 
-+int fit_region_add_hashed_nodes(struct image_region *region, int count,
-+					const char* hashed_nodes, int hashed_nodes_len)
-+{
-+	/* Add the spacer to ensure the hashed strings and hashed-nodes cannot "overlap". */
-+	const char* HASHED_NODES_SPACER = "hashed-nodes";
-+	region[count].data = HASHED_NODES_SPACER;
-+	region[count].size = strlen(HASHED_NODES_SPACER);
-+	count++;
-+
-+	region[count].data = hashed_nodes;
-+	region[count].size = hashed_nodes_len;
-+	count++;
-+
-+	/* Now add the actual hashed-nodes value. */
-+	return count;
-+}
-+
- static int fit_image_setup_verify(struct image_sign_info *info,
- 				  const void *fit, int noffset,
- 				  const void *key_blob, int required_keynode,
-@@ -376,10 +387,14 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
- 		count++;
- 	}
- 
--	/* Allocate the region list on the stack */
--	struct image_region region[count];
-+	/* Allocate the region list on the stack, +2 for the hashed-nodes */
-+	struct image_region region[count+2];
- 
- 	fit_region_make_list(fit, fdt_regions, count, region);
-+
-+	/* Add the hashed-nodes */
-+	count = fit_region_add_hashed_nodes(region, count, prop, prop_len);
-+
- 	if (info.crypto->verify(&info, region, count, fit_value,
- 				fit_value_len)) {
- 		*err_msgp = "Verification failed";
-diff --git a/include/image.h b/include/image.h
-index 34efac6056dd..5b847527b586 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1771,6 +1771,18 @@ struct image_region *fit_region_make_list(const void *fit,
- 		struct fdt_region *fdt_regions, int count,
- 		struct image_region *region);
- 
-+/**
-+ * fit_region_add_hashed_nodes() - Add a list of hashed nodes to the regions
-+ *
-+ * @region:		List of regions to add to
-+ * @count:		Number of existing regions (Note: region needs to have space for an additional two regions)
-+ * @hashed_nodes:		List of hashed nodes
-+ * @hashed_nodes_len:	Length of list
-+ * Return: The updated count value (i.e. count+2).
-+ */
-+int fit_region_add_hashed_nodes(struct image_region *region, int count,
-+		const char* hashed_nodes, int hashed_nodes_len);
-+
- static inline int fit_image_check_target_arch(const void *fdt, int node)
- {
- #ifndef USE_HOSTCC
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 48d69191c921..1e7c38a9a211 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -1018,13 +1018,15 @@ static int fit_config_get_regions(const void *fit, int conf_noffset,
- 		return -EINVAL;
- 	}
- 
--	/* Build our list of data blocks */
--	region = fit_region_make_list(fit, fdt_regions, count, NULL);
-+	/* Allocate the region array, +2 for the hashed-nodes region. */
-+	region = calloc(count+2, sizeof(*region));
- 	if (!region) {
- 		fprintf(stderr, "Out of memory hashing configuration '%s/%s'\n",
- 			conf_name, sig_name);
- 		return -ENOMEM;
- 	}
-+	/* Build our list of data blocks */
-+	fit_region_make_list(fit, fdt_regions, count, region);
- 
- 	/* Create a list of all hashed properties */
- 	debug("Hash nodes:\n");
-@@ -1043,6 +1045,9 @@ static int fit_config_get_regions(const void *fit, int conf_noffset,
- 		strcpy(region_prop + len, node_inc.strings[i]);
- 	strlist_free(&node_inc);
- 
-+	/* Add the hashed-nodes. */
-+	count = fit_region_add_hashed_nodes(region, count, region_prop, len);
-+
- 	*region_countp = count;
- 	*regionp = region;
- 	*region_propp = region_prop;
 -- 
-2.43.0
+Tom
+
 
