@@ -4,125 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE0EE9B34D
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 09:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28804E9B368
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 11:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 730E083E63;
-	Mon,  2 Mar 2026 10:57:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 471E283EC6;
+	Mon,  2 Mar 2026 12:13:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hO9EYr+0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="duWfl952";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED75183EC6; Mon,  2 Mar 2026 10:57:53 +0100 (CET)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azhn150120000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d91c::])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DFFDC83F0A; Mon,  2 Mar 2026 12:13:53 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CD9183CDF
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 10:57:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8329F83CDF
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 12:13:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a7lGnbm7KBaK79QAR5GERRC3PxCDWhDqK+5U5bf60a1wRpJiFpc0Vv5TmYO0r0zQabASZ4oWU8IHVicBvQGqMYWoRtMY/hh/nspmAFptSojAzM8MusWFzNaPTtVWnuUJ2pFybFEaDypmlVzaGJ4VLAETygsw0x2vTq38ADki0YXYoOyoqO0u8LXtI/QPJik6tugR4Sy5RAkRTEWcgDDzvIke99IF8IaV+LPgzOR6cFrziuuyEd9jdJKWbtW8hHf9XJjycvXsxqiK+zv322/o5MMjuOG5KOV+0LzeKf0wpfaIUF1Ml298ihj+MStaMRkPLoJBvSpm6WoDmOpprbVNug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PplL3gZb6SHwpi3zB31DmeGJiqBqn0y6GdYxjszOt0I=;
- b=h6CZ7puf4gvGgZvqOze74NVh4zSg8MPAX3j1k8ZHLdxhCeSjAIkIybuSuZD5IikOdv5c2Y4BlIoW3yfrBaa7nfAI+XJsDLdATB7+FzedostqozT8JvKaPfIxaqGr/aQWwvm2CsNnH9BLZhUzdbtgk+eiu/NyVwfWvLm3mfZEma1/9x8Iz+fxPX67ILKbF76HkaA56oY9k01xrrLfvOZQrWuI+3SQeT1z/TQnqhuPIjbhFjqnrGWS/+0DfxNV98Z6Euqa3SH47RbHnPAaAjXc1R0Rw4dVHnO0DP+tiZbQ2KAh63yQvHYjG1bMrhteT92eJU6T7cEPta88x/bMTEAJ2A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=gmail.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PplL3gZb6SHwpi3zB31DmeGJiqBqn0y6GdYxjszOt0I=;
- b=hO9EYr+02GFHphov7UtauwPZzFJjOtuEYl6GZMdSitiTkYsL/nD/OWnLBPSQrERkgjjJic7ap1aNFRwbdjM8F54LrfEVLidC41avAi6j6Lg0t6D+yFyh9P6Dq27tp+8kXMTQ/5NjBKfsNYnVt6lHlRBVS4q51H6FXG4V7LI6WYE=
-Received: from BL0PR02CA0050.namprd02.prod.outlook.com (2603:10b6:207:3d::27)
- by MW4PR10MB6629.namprd10.prod.outlook.com (2603:10b6:303:22e::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.16; Mon, 2 Mar
- 2026 09:57:47 +0000
-Received: from BL02EPF00021F68.namprd02.prod.outlook.com
- (2603:10b6:207:3d:cafe::54) by BL0PR02CA0050.outlook.office365.com
- (2603:10b6:207:3d::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.19 via Frontend Transport; Mon,
- 2 Mar 2026 09:57:45 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- BL02EPF00021F68.mail.protection.outlook.com (10.167.249.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9654.16 via Frontend Transport; Mon, 2 Mar 2026 09:57:46 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Mar
- 2026 03:57:28 -0600
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 2 Mar
- 2026 03:57:28 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 2 Mar 2026 03:57:28 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6229vO56082759;
- Mon, 2 Mar 2026 03:57:25 -0600
-Message-ID: <95205612-acfd-4623-8264-828f7823a156@ti.com>
-Date: Mon, 2 Mar 2026 15:27:23 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-48371bb515eso66136815e9.1
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 03:13:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1772450031; x=1773054831; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=U9SKma+k3uAdJ2Zh2X9X3sCtyVMd0cIblDh2g+leL8c=;
+ b=duWfl952vnl8LLp8XsF8wg4hz9/3vGm6LCHnSY6TPFVI4iKw/w+8UEnon1PEWu+rF8
+ 31N789e6M56XX84vo+bk+AOi9wnSELPhznOjvpuiOeRC+kmE0eSEMZyfgM/anASDNrJf
+ IAKi7ZPmZ8flB0vQgtn2vlcvD+DHe2tsJkG7q+gCQAsSiluD2H4RC9sTztnFucqSsRAt
+ fX76ncH+XVwIxvLrOktzfFuCfmVa3sxYDZ3UB4ik//0pNbK5ozUkUubUi1jrLi8Q+6P8
+ 7vKNI3njZf0vk2RXHukjQOP4e/yBLKpnUH1fjlGQo8KPeDYzqvwisdPDY4RqHAl1iPKx
+ sR0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772450031; x=1773054831;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=U9SKma+k3uAdJ2Zh2X9X3sCtyVMd0cIblDh2g+leL8c=;
+ b=f2oBWRapkppKwJTVd+koI60oBzszg7flaKrcJ76tsRaKcq5oK+6kZHadBNP6KlGq7Q
+ DSe3tyU/OaPa94sssKcVV8vbVZd6Zt3SzSRz344dviYFd041dHMwL+KqcStW1pdS9NOr
+ wOXSjB/MkX3pVgBarQfvwoctnZhaB4eMrji9yHnzjybgGfvfFQAHh9ObNDevm7DMVkdk
+ unYJL/Kva1Z3AeyU8zvRkoENuzZIeEkt++HDwNKBdaZUNhnXk6eQMfNqAQ92Hr0jNaUw
+ wlK+Xhi/PvhobPFJYuaFAHfgg1LhbvqYSQRjo4OKKN0Vz4soFk3K8GJQqJ6tCmKBMVdx
+ BnNA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBJnzBJ4k9G2GFCe1oApOLkwBe6zc/mvc10vGyDXdcXTWhoKo+mR2qnCA177TiA58PCgJp5dc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZlbWvYVDqrJ53Pt8xqNolludj4pTr9Lygb7MpWYefZf+kvD0l
+ FwY3LNc7Hp+KvPdBaTAWaiNzMiqKVoWFGlrImXnzrsUkApMBxVB/NS+U
+X-Gm-Gg: ATEYQzz9uDuFkH32bgDDphagIs7X4j5+t9qwf9k/I0+Yv1djhzxNSHEWgEg//5a2df2
+ tp6yry7L8Zsc8zFsdimIK+KxQ8sSmgqmo66eNSXnkNKittx8iHLvKiUxmOZp9gGuFkEDmlgOPdZ
+ +M+aClbcUWh92Fmwn1a8M0H1KWMP/Nj7xpAESRwna6lIn23Yw/jpsyoJxq4skDKbZj93RX3NKLi
+ 0HP4h8TuTnstZvH6gtuARSKe5F7TZaG7dq7LyDbDUmK3hyxBrnOLcV4gjOiP9Key3Eo7UhgeEle
+ 6P6vX+RRi0s03kzMUa+wuJQrr4M7hFafsgRZpZgjo8C1HFHkwZUH50u+8ADTxVgJSF9ag5A1nSS
+ WDYWBylPZvDO89VCz2pLk3PS1J3O1ek/EbNcT4jj+3kIp9as3/t/N1HcLdQYacJDYbI605FCJH4
+ F+ncgtRF7eyrzwJUoWvuamNIImHoljb9oSlmUx4So1FspPEc4rNcAXaOLYbqzO8NWlaU5rTQ==
+X-Received: by 2002:a05:600c:6388:b0:480:4a90:1af2 with SMTP id
+ 5b1f17b1804b1-483c9c2c2damr221142585e9.35.1772450030543; 
+ Mon, 02 Mar 2026 03:13:50 -0800 (PST)
+Received: from [192.168.68.74] (93-34-120-147.ip49.fastwebnet.it.
+ [93.34.120.147]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-483bfb87067sm132235365e9.12.2026.03.02.03.13.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Mar 2026 03:13:50 -0800 (PST)
+Message-ID: <55ddc7bf-f48e-4767-8d57-8a8b5215a6aa@gmail.com>
+Date: Mon, 2 Mar 2026 12:13:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [v2 PATCH] mach-k3: Defer CTRL_MMR access until after TIFS
- version response
+Subject: Re: [PATCH v1] common/memsize.c: Fix get_ram_size() original data
+ restore
 To: Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>,
- <nm@ti.com>, <heiko.thiery@gmail.com>, <m-shah@ti.com>, <j-keerthy@ti.com>,
- <n-francis@ti.com>, <bb@ti.com>, Diwakar Dhyani <d-dhyani@ti.com>,
- <u-kumar1@ti.com>
-References: <20260225051559.416445-1-u-kumar1@ti.com>
- <50d29e78-1502-4dbd-ad24-a1025142947d@ti.com>
- <f21a0fba-0a19-4f95-88c3-41e0728fb888@ti.com>
- <20260226143756.GC1593142@bill-the-cat>
+Cc: "Francis, Neha" <n-francis@ti.com>,
+ Stefan Eichenberger <eichest@gmail.com>,
+ Francesco Dolcini <francesco@dolcini.it>, stefan.eichenberger@toradex.com,
+ s-k6@ti.com, w.egorov@phytec.de, emanuele.ghidoli@toradex.com,
+ francesco.dolcini@toradex.com, u-boot@lists.denx.de
+References: <20250314100734.23777-1-eichest@gmail.com>
+ <20260226070502.GA6701@francesco-nb> <20260226142345.GB1593142@bill-the-cat>
+ <20260226160901.GA29510@francesco-nb> <aaB1DifzODCVv4SU@eichest-laptop>
+ <20260226163117.GJ1593142@bill-the-cat>
+ <c8e7db77-5c9f-490c-a5e5-30607fde09aa@ti.com>
+ <34966334-4658-4fe2-8b6f-550969c1f91f@gmail.com>
+ <20260227173922.GV1593142@bill-the-cat>
 Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20260226143756.GC1593142@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+In-Reply-To: <20260227173922.GV1593142@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00021F68:EE_|MW4PR10MB6629:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7e389900-b858-44ba-3608-08de7842281a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|376014|34020700016|1800799024|12100799066;
-X-Microsoft-Antispam-Message-Info: QNRkHyXV7SOsQ1zZcweePoQrH98ShGSDjNGcUMw1GRwN1RUPTTBcaOmj4RDvc+bFZ3SAz4IffopOrLDegQ40iuTNfRhtR1mjdIAbusTw7j0nV2HygDUDEsyiP4eID4zoYvMnpjFJcBnWo1zxJcy6OcgnKWKhEcXattacQSIsIEMNwr7BQ9pL2LgmXLsZU1cBWNqZAdslTWgyvFTGBJI8WitNzw2WYojVnTWDSehSJt/3dRAf/JRgi0gUQNsknU0rNIvdAcllicOzADps7S5zaN/vXzcqdv256013pA0/pBICv/oz3eUmWkCw7wPy3sA6yMAeyESLcCHiRl4NIv3tHC8ldrUA4+fGTKFtk2aTSe21GrxSl9wFvhSVT6vFgq2g7r5zk7vsCNwUjB7JL+fz+z1GBegWv2wwTdGdg7WKjiZEH8/4uW9WWXOXVPCbjgyCBWSNyMqV7s7ZdAeFWLMo6mjgekoVC35LajRBoMrE4OdtMPEp7v12hYC2uoCcDMCf9ax24fFvi4N+VrqR6Wvi/9KocpGMsihFZA5JVe+RZK5RrI/f8PP32Rm4RW2YGS7xuuZvz9PTuSNTq0O0RtUqSerObhGmtMWkyeO2/5QzGtDl/Y8L57JJ+f3GgX0jpjthqj4gKqH4f4wFKkSjyckwKVmTNm9OKCcENi5dkEt0N+zcfLWwu3d16Ijqg410QZEvI7motyDmdIpFAYq1C/AVQL7MSXD7BEWekl9B74aRAju69VsRrQKtTjnYFK495jrxoG5B8VBVnHup5Y+UTVt3UJnAlR3MNwTFE+yWK2pBV9rvRkxPZ1SohMnlGnlGf+dwq/rhU5nS5zlNhEuVoYAhmQ==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(376014)(34020700016)(1800799024)(12100799066);
- DIR:OUT; SFP:1501; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: JrP3SCEGZV0TeZ92aU+PUvrFrZngvXZwvaTwkI8goNRs48+pSk0OfDYpG90nSOz+fEpJaX54XOUvJMk+THZ8t2w4uvASN0RItRLz46K1+aEYVeLnZ8hFoPCw7tCT3Uzt2mOek6LltJraF6xKzG/b67OHG+g7oa8l0p6zeVZOae/kN2auXTBvct0NCLrX0pT85iTbd0Y+/0ZqulZ7s6Gw4mzWCLJKodbnhuT0NqvGpHWjWuOYyXNPsTEOaG/0J6KSrpiGbRWZ6ps5lWCjAP02f6tNH0/7yP3HEMVkH+4LWxQwrWUZcnTS4JCOOVYNLDPE6WmdiAXla//0cTA68iOBeqhmoNrKh3j9LObmkwJeOeYdc2Pr4+/gJShIp6B/NcgMlC15Koqyu/4ui0j3io2SY1uVqjiuiLzNaLpq3B8fv35Lg1WbYTzfPpC/HWhNhYwN
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 09:57:46.7975 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e389900-b858-44ba-3608-08de7842281a
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F68.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6629
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,37 +115,123 @@ X-Virus-Status: Clean
 
 
 
-On 2/26/2026 8:07 PM, Tom Rini wrote:
-> On Thu, Feb 26, 2026 at 10:20:11AM +0530, Kumar, Udit wrote:
+On 2/27/26 18:39, Tom Rini wrote:
+> On Fri, Feb 27, 2026 at 11:39:44AM +0100, Emanuele Ghidoli wrote:
 >>
 >>
->> On 2/26/2026 10:04 AM, Vignesh Raghavendra wrote:
+>> On 2/27/26 11:13, Francis, Neha wrote:
 >>>
 >>>
->>> On 25/02/26 10:45, Udit Kumar wrote:
->>>> The CTRL_MMR registers are firewalled at boot time, and TIFS unlock
->>>> them as part of the system firmware initialization sequence.
+>>> On 2/26/2026 10:01 PM, Tom Rini wrote:
+>>>> On Thu, Feb 26, 2026 at 05:30:06PM +0100, Stefan Eichenberger wrote:
+>>>>> Hi Francesco and Tom,
+>>>>>
+>>>>> On Thu, Feb 26, 2026 at 05:11:49PM +0100, Francesco Dolcini wrote:
+>>>>>> +Emanuele
+>>>>>>
+>>>>>> Hello Tom,
+>>>>>>
+>>>>>> On Thu, Feb 26, 2026 at 08:23:45AM -0600, Tom Rini wrote:
+>>>>>>> On Thu, Feb 26, 2026 at 08:05:02AM +0100, Francesco Dolcini wrote:
+>>>>>>>> Hello Tom,
+>>>>>>>>
+>>>>>>>> On Fri, Mar 14, 2025 at 11:06:49AM +0100, Stefan Eichenberger wrote:
+>>>>>>>>> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+>>>>>>>>>
+>>>>>>>>> The get_ram_size() function fails to restore the original RAM data when
+>>>>>>>>> the data cache is enabled. This issue was observed on an AM625 R5 SPL
+>>>>>>>>> with 512MB of RAM and is a regression that became visible with
+>>>>>>>>> commit bc07851897bd ("board: ti: Pull redundant DDR functions to a common
+>>>>>>>>> location and Fixup DDR size when ECC is enabled").
+>>>>>>>>>
+>>>>>>>>> Observed boot failure messages:
+>>>>>>>>>   Warning: Did not detect image signing certificate. Skipping authentication to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+>>>>>>>>>   Authentication passed
+>>>>>>>>>   Starting ATF on ARM64 core...
+>>>>>>>>>
+>>>>>>>>> The system then hangs. This indicates that without a data cache flush,
+>>>>>>>>> data in the cache is not coherent with RAM, preventing the system from
+>>>>>>>>> booting. This was verified by printing the content of this address when
+>>>>>>>>> the issue occurs.
+>>>>>>>>>
+>>>>>>>>> Add a data cache flush after each restore operation to resolve this
+>>>>>>>>> issue.
+>>>>>>>>>
+>>>>>>>>> Fixes: bc07851897bd ("board: ti: Pull redundant DDR functions to a common location and Fixup DDR size when ECC is enabled")
+>>>>>>>>> Fixes: 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size() when cache is enabled")
+>>>>>>>>> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+>>>>>>>>
+>>>>>>>> Tom, can we merge this?
+>>>>>>>> This is the last bit to solve the regression reported here,
+>>>>>>>> https://lore.kernel.org/all/20260224152405.GD340942@francesco-nb/
+>>>>>>>
+>>>>>>> I wasn't happy with this at the time, and Stefan's last email in the
+>>>>>>> thread left me with the impression more investigation was needed and
+>>>>>>> likely something else was the root cause.
+>>>>>>
+>>>>>> I believe that this patch is needed.
+>>>>>>
+>>>>>> On AM62 what is happening is the following.
+>>>>>>
+>>>>>> We have a cortex-R5 that is the first core booting (there is also a
+>>>>>> cortex-m4, but it's not relevant for this discussion).
+>>>>>>
+>>>>>> It runs from internal memory and it configures the DDR ram
+>>>>>>
+>>>>>> We load to DDR memory various pieces of firmware (TFA, U-Boot for the
+>>>>>> cortex A53, ...)
+>>>>>>
+>>>>>> We do execute get_ram_size(), that read/write the memory, and it is
+>>>>>> supposed to restore it back the original content
+>>>>>>
+>>>>>> However when we have the cache enabled, we might miss to write back the
+>>>>>> original memory content, where the other pieces of firmware are.
+>>>>>>
+>>>>>> And after that we start the cortex A53, running in DDR, and there the
+>>>>>> memory content might not be correct, because there is no cache coherency
+>>>>>> between the cortex-A and the cortex-R. And because of that we have
+>>>>>> crashes.
+>>>>>>
+>>>>>> Stefan: any comment here? Can you help?
+>>>>>
+>>>>> I think what you wrote summarises the issue well. If I recall correctly,
+>>>>> I "fixed" the issue last time by simply calling get_ram_size() once
+>>>>> before enabling the cache. This was in commit 4164289db882e. The SPL
+>>>>> then informs U-Boot of the memory size via fdt fixup. However, something
+>>>>> has probably changed now (possibly in the R5 SPL), meaning the cache is
+>>>>> enabled earlier, so the cache is enabled again when get_ram_size() is
+>>>>> called.
+>>>>>
+>>>>> For the AMP use case, either "get_ram_size" should not be called once
+>>>>> the cache is enabled, or a similar patch to the one I proposed is
+>>>>> required.
 >>>>
->>>> Current code assumes the CTRL_MMR space can be accessible at early
->>>> stage of board_init_f execution by unlocking them.
+>>>> I would lean towards the former if at all possible.
 >>>>
->>>> But on HS-SE devices, TIFS takes more time to complete initialization,
->>>> and CTRL_MMR registers remains firewalled and not getting unlocked.
->>>> Which results in any write to these registers are ignored.
 >>>
->>> Hmm, this looks like something that can happen on other K3 SoCs too.
->>> Should we update all the other SoCs to follow the same logic?
+>>> Just trying to understand, what is the reasoning behind ensuring get_ram_size is
+>>> not called if cache is not enabled? Wasn't get_ram_size written with the
+>>> possibility of cache being enabled (existence of dcache_en logic); then this
+>>> patch is a valid fix right?
+>>>
+>>> In parallel, I do agree we need to have a code analysis w.r.t dram_init, we are
+>>> making certain cache and dram calls spuriously making this confusing.
+>>>
 >>
->> Yes, we need to update all SOCs,
->> As Bryan pointed out, this issue is seen on other SOC as well[0].
+>> Hello Tom,
+>> I agree with Francis.
 >>
->> I will post for other SOCs as different series. 
+>> When I proposed commit 1c64b98c1ec4 ("common/memsize.c: Fix get_ram_size()
+>> when cache is enabled"), I was not considering the presence of other actors
+>> (other cores, DMA engines, etc.).
+>>
+>> That patch fixes what I had overlooked at the time. We need to restore the
+>> actual RAM contents, not only what is perceived by the core executing
+>> get_ram_size().
+>>
+>> To me this patch sounds intrinsically correct.
 > 
-> Do you mean another iteration of this, as a series that addresses all of
-> the SoCs? I'd prefer that (and cover letter explaining the situation) if
-> possible and reasonable, thanks.
+> Alright. Can I please get some Reviewed / Tested by tags? Thanks.
+> 
 
-Looks in general mmr-unlock can not be moved on all SOCs after FW print version.
-I am seeing boot failure on other SOCs, need to debug more on this different behavior.  
- 
-
+Reviewed-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
