@@ -4,45 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92509EA4E24
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 15:43:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEAEFEA4E2F
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 16:03:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8A0183F2A;
-	Mon,  2 Mar 2026 16:43:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lst.de
+	by phobos.denx.de (Postfix) with ESMTP id 48D4283F2A;
+	Mon,  2 Mar 2026 17:03:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F350183F2A; Mon,  2 Mar 2026 16:43:10 +0100 (CET)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1C6483F2D
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 16:43:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lst.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=duwe@lst.de
-Received: by verein.lst.de (Postfix, from userid 107)
- id 48E2768BFE; Mon,  2 Mar 2026 16:43:06 +0100 (CET)
-Received: from rocky.lan (dynamic-095-114-042-014.95.114.pool.telefonica.de
- [95.114.42.14])
- by verein.lst.de (Postfix) with ESMTPSA id E98B76732A;
- Mon,  2 Mar 2026 16:42:56 +0100 (CET)
-Date: Mon, 2 Mar 2026 16:42:56 +0100
-From: Torsten Duwe <duwe@lst.de>
-To: Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Matthias Brugger
- <mbrugger@suse.com>, Andrea della Porta <andrea.porta@suse.com>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [hack] help U-Boot find the correct PCIe inbound offset for NVMe on
- Raspberry Pi 5
-Message-ID: <20260302164256.29af9995@rocky.lan>
-In-Reply-To: <20260302135940.550e6051@rocky.lan>
-References: <20260302135940.550e6051@rocky.lan>
-Organization: LST e.V.
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.50; aarch64-suse-linux-gnu)
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n9uL8A2R";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0D97683F2D; Mon,  2 Mar 2026 17:03:38 +0100 (CET)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EA6D683F0A
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 17:03:35 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-679f6ee3fb0so2030374eaf.2
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 08:03:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772467414; x=1773072214; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ucT4feQz6fyd2SucYaNhANmjwT1prO/vX1SN/ePreJs=;
+ b=n9uL8A2RwtRKTz6W52MpeYilvwYW+x99k+XRJovfFN3I43UoITkJ7QHi5K8vX4KQ/V
+ yidlwaOz4dnbPR06um5O4ebnlEutbdtx0q5INJ1fdlZQ8UUA8CkTV9mdxb3EH0ig6tnp
+ oCKa2xetwAvhOQsgl09rty+8UqaAHfN20dKFI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772467414; x=1773072214;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ucT4feQz6fyd2SucYaNhANmjwT1prO/vX1SN/ePreJs=;
+ b=LcolhzjhdgmHOGy22bNW9AVKk6+kPcnOL56VSNEvPJALz66J/E+EYQvM1ihNbc97mT
+ khxzOvPHLvZijFWRpvpeUs3XGNH9cGBWAEaP12lN6VuWxbpZdTcjriWsnVQxICJkYx2Y
+ /DkVCMyLNHrqN1bNMFhWjhLGhY1vbLv0XJYnh16eBVXXvXY9KZmBQLUqIXmxK69pASZN
+ ikMrPTDsvS2NR1lfqcGBdsO+z30WwTQ/x5qHp/R/qBuG6uo8uV8S9gDQWBiLV/BmlHSa
+ OMol/QuipqWXEaEjJNM4qnJ5oEXSOQque8z4RY8Vs0NLqTQH+wa5SE8CLbOegICdhtu/
+ n3kQ==
+X-Gm-Message-State: AOJu0Yza5YJEBTwN+sLdnPqEy1F8W1MLuwjvNcOuSFxXdY4/yT+CBEdT
+ BMl2tSQ7pXCL+nW3JvGc4+7p8lpMRZjwcwjk+GbRpAD4LGgjJqRofZBDRO5aLk8c1ds=
+X-Gm-Gg: ATEYQzy3TtubfyjxYq225HdMGioIdQOLAj47OQS/anr+2EIkgLf+EsubexJrbXMByRP
+ J2BocjV8YMpE++dbojknHrD+dxC2oc7OAYIslQ404wegl2EZmd+G7CsWrovPXjMueYq8YeNDNOy
+ FozSxHgX4ac8vX2e9+ydMz2SmTYyhjRWzNLYoVw5WPEX+m7ql8Q9oRvDf6eY4oWlWGCa5vc5t00
+ LIJRn+DNJx63keKUIfjdHARpxNEY77cNVRbBdUkD1NzVQfcY5SbaBmUjDJA7bUy7oljGEoa02d6
+ 7NNAIDYdaSOe3u4K24VwOTFZQ/CSBhCieFWRspXSNG3LciVAmg0kvGfqhqHqo6vivM7boq2nHkD
+ c+4nQRinm0pKZTC8/BSxc6MNc68NiW6iqa+nOmQUmqucxOkl5uXel/3NmFgO0KdAy5EzSCQCwnA
+ 1oFO8M7jS0+X4K322C2b5xGeYpzE2Ymxml+OeoyjvIwy150f138cOknFvHHBdl7bqHcaTqPie0i
+ c6+t9ill+57nefEIhg812y7TQjl8+p95DKo9ifOHzz4G4O2swE=
+X-Received: by 2002:a05:6820:e03:b0:67a:2e3:2236 with SMTP id
+ 006d021491bc7-67a02e33328mr3502365eaf.23.1772467414316; 
+ Mon, 02 Mar 2026 08:03:34 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-679f2db737bsm9501582eaf.15.2026.03.02.08.03.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Mar 2026 08:03:33 -0800 (PST)
+Date: Mon, 2 Mar 2026 10:03:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v2 1/7] test: fs_helper: Allow passing the image filename
+Message-ID: <20260302160331.GC1388590@bill-the-cat>
+References: <20260228182304.3728735-1-sjg@chromium.org>
+ <20260228182304.3728735-2-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/WlWSufVpOssNuI+"
+Content-Disposition: inline
+In-Reply-To: <20260228182304.3728735-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,50 +99,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Mar 2026 13:59:40 +0100
-Torsten Duwe <duwe@lst.de> wrote:
 
-> This proposed patch uses the already existent dev_phys_to_bus(),
-> which can dig up the correct offset from associated DT nodes and
-> subtract it.
+--/WlWSufVpOssNuI+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Just to make it clear, that patch is a necessary but not a sufficient
-condition to boot the RPi5 from NVMe. The PCIe bus node above
-the NVMe is generated dynamically has no DT node with dma-ranges and so
-dev_phys_to_bus() still returns zero. In order to test NVMe on the
-RPi5 you can either:
+On Sat, Feb 28, 2026 at 11:22:41AM -0700, Simon Glass wrote:
 
-hard code the 64GiB value when building your private U-Boot binary:
+> From: Simon Glass <simon.glass@canonical.com>
+>=20
+> The mk_fs() function always generates its own image filename from the
+> prefix and fs_type. Some callers need to specify a custom leaf name
+> while still keeping the image under the persistent-data directory.
+>=20
+> Add an fs_img parameter that accepts a leaf filename. When provided,
+> it is joined with persistent_data_dir instead of the default name.
+>=20
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+>=20
 
--#define BUS_ADDR(a)         dev_phys_to_bus(dev->udev, (a))
-+#define BUS_ADDR(a)            ((a)+0x1000000000LL)
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-OR use this tricky DT change Andrea has prepared:
+--=20
+Tom
 
---- a/dts/upstream/src/arm64/broadcom/bcm2712.dtsi
-+++ b/dts/upstream/src/arm64/broadcom/bcm2712.dtsi
-@@ -571,6 +571,15 @@
- 				<0x03000000 0xff 0xfffff000 0x10 0x00131000 0x00 0x00001000>; 
- 			status = "disabled";
-+
-+			pci@0,0 {
-+				reg = <0x00 0x00 0x00 0x00 0x00>;
-+				device_type = "pci";
-+				#address-cells = <0x03>;
-+				#size-cells = <0x02>;
-+				ranges;
-+				dma-ranges;
-+			};
- 		};
- 
- 		pcie2: pcie@1000120000 {
+--/WlWSufVpOssNuI+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This pci@0,0 node needs to be below the pcie@1000110000 RC node so it
-can "bridge" dev_phys_to_bus() to the RC node when it climbs up the
-device tree and so helps it find the correct value.
+-----BEGIN PGP SIGNATURE-----
 
-AFAICS the proper fix should be to add some dma-ranges property when
-dynamic PCI devices are created during enumeration/scan or make
-dev_phys_to_bus() skip those nodes for the lookup.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaW00AAKCRAr4qD1Cr/k
+ClV+AQC6MAbGxqPaMCX/LTaB39xTcVHP7HK0WsrMuwgqT0aatAD/ZJBA9ggLz/eP
+GkJ5NqzpUOF2hq+12c2y4E2Avb/tKgM=
+=WfzL
+-----END PGP SIGNATURE-----
 
-	Torsten
+--/WlWSufVpOssNuI+--
