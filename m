@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD65FEA4E2F
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 16:04:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53FB9EA4E33
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 16:04:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4D4283F2A;
-	Mon,  2 Mar 2026 17:04:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 929EF83F30;
+	Mon,  2 Mar 2026 17:04:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IDFUe4eY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ubLz83QD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1AB583F61; Mon,  2 Mar 2026 17:04:02 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id ACCC083F4C; Mon,  2 Mar 2026 17:04:24 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03A6483F0A
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 17:04:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCF5D83F0A
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 17:04:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d596a5be31so3777353a34.3
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 08:03:59 -0800 (PST)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-662f9aeb782so3751541eaf.3
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 08:04:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772467439; x=1773072239; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772467460; x=1773072260; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0UlM+fcijIQzEdlMcgUZSe+0gg9bX40aEn1fWDtJM3g=;
- b=IDFUe4eYGGxg6ddGfN8jFIsan8PFFuD7ioK4fyhuy528SkeVzzKcfoGvnn0n/fzzfT
- Wm+7zcdipLbfBhayCqFJBwfzaCmnyjDdMKrmj1KDuV9Bk5eJshmjWlI5HUrHT8NQTyyc
- mV6n0JKjCiBvnSv8hQkIKdW8U8NjtTld4/Mh8=
+ bh=6Yz2sBTNtY7i746kpTho7llhphLyuU+TzcJSP/vY5tQ=;
+ b=ubLz83QDGpG7JXDFoDheNb74/WyCFUenEgGgShHMYXZPBJzOssh76a41MA0hJ+U/2k
+ 2Ihmtkb3Ceiit6A57nO+0zS3gfOkXAKyryGfIVcVrYt+VIkMHSD6wi/ftpRcJh0tuyxd
+ +L4++ODOUUGui0EO72FgUFzst/m7eA1FX+5jA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772467439; x=1773072239;
+ d=1e100.net; s=20230601; t=1772467460; x=1773072260;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0UlM+fcijIQzEdlMcgUZSe+0gg9bX40aEn1fWDtJM3g=;
- b=Qw2Qo/f8dl3ZFV3tcHp9iTihK7YXQhdYLq010IQYsJehRfDMFqzTJefdfhPz5rB9ia
- 6LiXmoYdwLGCc4suVTc4IlcXTKKyBXZoG4AcrP7W4yrm6qwpAp1s6XlAbbQOqNfzGg2J
- Cf8DJ7n0jkof9yI2FryiTx2ijY2ikz30JugJxaHNqT8fRYxx+hWfctqJuxMpGxRaY2et
- 31R0jZll0SuoZ9yOxrQJFFEP8ijZeJIw73C5/0YVZNNugPU4pkSoxYvm/5PNLoQw7pmV
- NrIQNKnLROabnH9IaEuOCtcdko6McRbcZzpwtEpvR+hmAeMWX+9XTBzjvqflUgMcybPp
- PTpw==
-X-Gm-Message-State: AOJu0YyHhJ8g7G3PeHsdp5OOsNvJyDG7cuv1d5DTBGKDE4Ofk2SPmgtP
- RC3/TdMXUm5INnHe4uK+8OrsGIwACwV2sJnNLeUQwpNx5ikmM57COCYHh1bj0vZHibU=
-X-Gm-Gg: ATEYQzy92R1a/5DZ2PCg9uemLWt0ecSgdAosFudNMvRC6UQCyGjAaMZHD1ej3MK3UTN
- 0H10RXheVA/nPX54Mx3VbmSS6dFYMDYOzMuPlZ9vrw1xRO7FI2bHXnPoU5qtug/sIilKQ61+BEp
- mjkJ8FmxGU3O+rmJseoZ7jCY4ImQtCa4BDhPEXrwHsRcT/CkuVHtS1z6OPeMaHIsSgScym7zP7o
- +VIh2zSdsmbCnRGJZgN6YmbWqRnXH6UwGapVZzFDoWEJqrIPpeo1Z4kfJ+9KQ+BADBZoULgB+Vc
- vCpkKcCSsr2bAeku0NuDo2gzUWS2C9E2Fy8DvM0y0xQJhyiXto17eaqUsu+2JZcA16LHHALZHAs
- AqMErlJYzh24PI5z+AIxQ9fHEBVuZvbJY/lp4TBIHhNf5H43jBgSZZNSdMotp8FCcDbOwrhwdZQ
- Qf7rch7fDElWOmXWmuM4n+QHoEpKeCYC7hgOaFBltkCkVRPBuXMfdJga1cfUTHU+JxPJqMlNtSL
- StD7U4RDdXRStsqd6Poi7Uamn8wpauTdTkA7HvHofGDm80ON+A=
-X-Received: by 2002:a05:6808:191b:b0:45e:b647:ef5a with SMTP id
- 5614622812f47-464be9489famr6390846b6e.3.1772467438643; 
- Mon, 02 Mar 2026 08:03:58 -0800 (PST)
+ bh=6Yz2sBTNtY7i746kpTho7llhphLyuU+TzcJSP/vY5tQ=;
+ b=ivJZvL0GL6/Bf5/RaX4b3p8WHiiYCxKR/PqysclLTOKKSVpvMIaMSXHNSy9bWWYbPR
+ Tc6BBj6HwLyVDp9u5cwxpxKJFJfYeEAkSBr2sHO3vybg7YJKlLP89l4O+vM+ITib8PR3
+ KDrL2bYmioJ1EmgNz8XLe04unUYoyBFtH0o94yhnT2oXTi9QKtlY4y1KAatwyWvvM0oq
+ H3TdZ9CW4rt3cCeARlcUJu5gX3Ij+BmtevRqO3flPCsZ1AhwMxkPzYsOPubj2TndVqHz
+ TL3NdT8M9VXi3XzgX09cUo4cLd/iuyfaol3iZJ2EaL43j1Qsmy1Komg9V8bXZIFLVlHF
+ QaZw==
+X-Gm-Message-State: AOJu0YzvcFraZjlxnzKag3xIa3MsOV+Bc80a7c+Kly/JDuaPlVWluob5
+ eHpnhEbGmhv/pXjqv1CcHn0R3B1fXwtsZeHHiovU8tU89ex0Kkevy0FMkrjCMfcRF9A=
+X-Gm-Gg: ATEYQzwrhr3l1Ex7KB590R9r4g7Now0l7gjFneRe91R2x7a9kybo6NBbLs6GMFqWEVE
+ eeS/S6wpAGuO144wVwgmFys6gOXKPO2+BDUwY88EBRQjmV1H/7lc01pSWix4dZb10CQpFpq+Xiq
+ Dkzjl1y0h68wvzQRQbLv59G4MLsXZTSQDvg9FFfDW639MNq+xP2UHGZoXoKD8cuu3HlRw/sc7W+
+ +tviyrsW3sRBH8n7DQIdO4IwTUpAu8ng6tnHiJg5plwmrYDSrtTDAmEfu7U+de1oThQV9PFb6An
+ 1rTt0LwTYs7kC+NFN2b3esFV9pZzYbIuWt86MTLeMaUkUJ4tvficoTYWk4LZpmQ7kjQOukhs1LD
+ jX7/pu3UGI2GyCd8ZjuwAQqYa0f/W98785IfBeut2r7/eOXpFYM4zpM5HimZJ19qoUcwxaW4CWD
+ yaDPGXScHntuJVY3ZFESnj0EQchnhUZa6zRvhuXihUjh8ddoCxsjg7EVpKjhdXZ7yGxPYtsdAgu
+ lVsD4ZHH3I4umRMIhMmenyvuTHGB6ObmtLJBWC+xZXWlkaMahM=
+X-Received: by 2002:a05:6820:808:b0:679:c549:2045 with SMTP id
+ 006d021491bc7-679faf27dccmr7133845eaf.51.1772467460385; 
+ Mon, 02 Mar 2026 08:04:20 -0800 (PST)
 Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb59b656sm7462508b6e.12.2026.03.02.08.03.57
+ 586e51a60fabf-41640b99b39sm7494956fac.10.2026.03.02.08.04.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2026 08:03:58 -0800 (PST)
-Date: Mon, 2 Mar 2026 10:03:56 -0600
+ Mon, 02 Mar 2026 08:04:19 -0800 (PST)
+Date: Mon, 2 Mar 2026 10:04:17 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2 5/7] test: Convert fs_helper to use a class
-Message-ID: <20260302160356.GF1388590@bill-the-cat>
+Subject: Re: [PATCH v2 6/7] test: Add a helper class to create disk images
+Message-ID: <20260302160417.GG1388590@bill-the-cat>
 References: <20260228182304.3728735-1-sjg@chromium.org>
- <20260228182304.3728735-6-sjg@chromium.org>
+ <20260228182304.3728735-7-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BSIAYhQhMFr4hJaW"
+ protocol="application/pgp-signature"; boundary="vhsQCCO9sMJ7vxkp"
 Content-Disposition: inline
-In-Reply-To: <20260228182304.3728735-6-sjg@chromium.org>
+In-Reply-To: <20260228182304.3728735-7-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,41 +100,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BSIAYhQhMFr4hJaW
+--vhsQCCO9sMJ7vxkp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 28, 2026 at 11:22:45AM -0700, Simon Glass wrote:
-
+On Sat, Feb 28, 2026 at 11:22:46AM -0700, Simon Glass wrote:
 > From: Simon Glass <simon.glass@canonical.com>
 >=20
-> It is somewhat inconvenient that callers to mk_fs() must create their
-> own temporary directory. Convert it to a class so this can be handled
-> automatically, using a context manager.
+> Provide a way to create disk images which consist of multiple filesystem
+> images.
+>=20
+> Provide an option to use the current directory for images, instead of
+> persistent-data directory. This makes it easy for C tests to locate the
+> image.
 
-Instead how about:
-Create a class around mk_fs (and later setup_image) to handle the common
-tasks of image creation.  Many callers of fs_helper.mk_fs create their
-own scratch directories while users of fs_helper.setup_image rely on one
-being returned. Unify this by adding 'srcdir' as a field while converting
-to a class.
+This is something we don't want, however. We need to not be adding more
+files to the source directory as part of tests. This is a general bad
+practice.
 
-And I didn't try out a 'git show -w' to see if that makes it clear the
-underlying logic wasn't changed in mk_fs.
+And in the likely event that you're going to note that python is slow,
+please try your suggestion of 2019[1] and see about making U-Boot be a
+python library, and if that doesn't work, look for other ways to speed
+up python? Given all of the real time machine learning demos that are
+built upon Python, it seems like piping data around fast should be
+something that can be solved.
+
+> The setup_image() function is used from a lot of places and that code
+> itself needs some work, so this is left for a future series.
+
+You're back to editoralizing in commit messages, and since you do
+provide a helper for mk_fs you also simply could for setup_image.
+
+[1]: https://lists.denx.de/pipermail/u-boot/2019-October/388732.html
 
 --=20
 Tom
 
---BSIAYhQhMFr4hJaW
+--vhsQCCO9sMJ7vxkp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaW06wAKCRAr4qD1Cr/k
-CsnyAQDCU3f8g1HvYmAIU5gmd1iVlIvE8N1jmja6d88NoHTrGgEAv7qJiukXGDdG
-Bf4K37fCRNB/qPZ+OgMFNE46KWKQvAg=
-=VnLa
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaW1AQAKCRAr4qD1Cr/k
+CgUEAQCf82PSRsnz+EsacogCpM0N5I2sCVS4ZfGuMFRUZYWKagEAu0CRbeIq0hCO
+mSVf83BSysQTYmAMkYbKp4/9jNwHAgY=
+=1oFc
 -----END PGP SIGNATURE-----
 
---BSIAYhQhMFr4hJaW--
+--vhsQCCO9sMJ7vxkp--
