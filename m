@@ -4,33 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C036EA4E06
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 13:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E822EA4E04
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 13:54:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2CBF83F30;
-	Mon,  2 Mar 2026 14:53:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3777E83F63;
+	Mon,  2 Mar 2026 14:53:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vY7Pvsgz";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UY3aQvAW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FF9583F5B; Mon,  2 Mar 2026 14:53:53 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 228BB83F3F; Mon,  2 Mar 2026 14:53:54 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAE2283F0A
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 14:53:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4895683F2D
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 14:53:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fPgQ60kk8z9v7B;
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fPgQ64plPz9v7S;
  Mon,  2 Mar 2026 14:53:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1772459630;
@@ -38,26 +39,27 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9vVZUGmnWDk2H8RXYo4eJ5C7Vxw3O8KtaPPkAhmjqrM=;
- b=vY7PvsgzlrRcW93gqRrF2v8/qYZMLn5lfMDX2Vhbfy0ChLujMKUoHCV7F4JIDSEhNY67Kz
- VboCGKb61hHFnPM0iUcoP/ZYbFktCf/mkirxcoTWMOxRmEPnt8ZG66Qkrw+1oWaDfGnqU0
- G2esmHAoVNefFgwPf3gNWv4RImlKPl844wAkoMzMAWFUhFNHoS701v97M5fy1ceNwp2BUU
- s60GGHlqrSu4DMq26tfVQuOpG30sX0VJIw/fSF1AJjKzIBb/U4wZargzSByuyDEUkten/2
- JAE3CCvtJmI3ahZCXY78PZ1UqitfsBB/VSUqzG7MVTkQnW8t0jt1QIekQ2mncw==
-Message-ID: <6ea0b36b-00cb-433b-9834-dc4a26a0e2be@mailbox.org>
-Date: Mon, 2 Mar 2026 13:54:43 +0100
+ bh=CyQAl5loqlLOkZQW54reJGQOCeTvbz1OBiqiiYP368Y=;
+ b=UY3aQvAWkz1KYt0LF9JvYGT1J7xT6lQenj5dO+Kk/9C16bJdWQc7stfIQDnseHRXYT0q0t
+ WN+PCfc0aiq2RNERrcXSc0foxWkRwhL9f6wedFzcppbOU8bbc5MVUaBQLi6AniGdgPWySh
+ qQlFTytwsGet4/dv5Tbwmm3uAT4K4WiQF3QTXFhIM69/OY6YcDuN44O5btQCMiRx5DQghz
+ fNcWU70q6UQJSpVKPR5iS1cex2VhHVLcjRVwfPGut1CghNXKfny/6cvVG5jGQapVOHcoAQ
+ emIOUGDy2BiVIPQmi27enUNkAJM528B52P/qdRMwhhrFkX9sdfClL5mGiuhaZQ==
+Message-ID: <c1fba062-91e1-41f1-957f-114f255839f3@mailbox.org>
+Date: Mon, 2 Mar 2026 13:59:50 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 3/4] usb: Add code spacing in usb_bulk_msg function
+Subject: Re: [PATCH v3 4/4] usb: Convert ad-hoc poll/timeout sequences in
+ usb.c to iopoll
 To: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>, u-boot@lists.denx.de
 References: <20260302044532.2891813-2-ronan.dalton@alliedtelesis.co.nz>
- <20260302044532.2891813-6-ronan.dalton@alliedtelesis.co.nz>
+ <20260302044532.2891813-8-ronan.dalton@alliedtelesis.co.nz>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20260302044532.2891813-6-ronan.dalton@alliedtelesis.co.nz>
+In-Reply-To: <20260302044532.2891813-8-ronan.dalton@alliedtelesis.co.nz>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: nnxbrqgtdp4p58jwii6hibmkpuyuaaws
-X-MBO-RS-ID: 705ab5f1bfb2d0ae066
+X-MBO-RS-ID: 27bd0b48bb81731ca9b
+X-MBO-RS-META: rmte9jh39amckediiqj5fou45mi364ha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,4 +78,36 @@ X-Virus-Status: Clean
 
 On 3/2/26 5:45 AM, Ronan Dalton wrote:
 
-Commit message is missing , what is the rationale for this change ?
+[...]
+
+> @@ -276,19 +279,22 @@ int usb_control_msg(struct usb_device *dev, unsigned int pipe,
+>   int usb_bulk_msg(struct usb_device *dev, unsigned int pipe,
+>   			void *data, int len, int *actual_length, int timeout)
+>   {
+> +	volatile unsigned long usb_status;
+> +
+>   	if (len < 0)
+>   		return -EINVAL;
+>   
+> +	if (timeout < 0)
+> +		return -EINVAL;
+> +
+>   	dev->status = USB_ST_NOT_PROC; /*not yet processed */
+>   
+>   	if (submit_bulk_msg(dev, pipe, data, len) < 0)
+>   		return -EIO;
+>   
+> -	while (timeout--) {
+> -		if (!((volatile unsigned long)dev->status & USB_ST_NOT_PROC))
+> -			break;
+> -		mdelay(1);
+> -	}
+> +	read_poll_timeout((volatile unsigned long), usb_status,
+> +			  !(usb_status & USB_ST_NOT_PROC), 1000,
+> +			  timeout * 1000UL, dev->status);
+
+Maybe this could use an error check here too ?
+
+With that fixed:
+
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
