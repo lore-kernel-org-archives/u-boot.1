@@ -4,140 +4,147 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0365EA4E09
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 14:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76602EA4E07
+	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 14:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA01983F2A;
-	Mon,  2 Mar 2026 15:14:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id E54E183F4C;
+	Mon,  2 Mar 2026 15:18:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="jVzxjkqn";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="m2XSCfo8";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="m2XSCfo8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C45B983F2D; Mon,  2 Mar 2026 15:13:58 +0100 (CET)
+ id A745583F4C; Mon,  2 Mar 2026 15:18:55 +0100 (CET)
 Received: from OSPPR02CU001.outbound.protection.outlook.com
  (mail-norwayeastazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 905EF83F0A
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 15:13:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 53AB983F0A
+ for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 15:18:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=sBiJhWwkKn0O+4akRNyoyNYBIkWWuJ3glL7BG3nGgBVGqkWg3rCcaaV0iyY1wawDvOeoRkbvLOZ+R4dUMHy9ofULvxoCnaOJ1RjDn+iM46nrF+1KjVPnbqGwF5XpE0qN3Bbvqrwk+s1+UarDscxK/39uxMxefv9XZvx2ZgqMcXRMWhUdrELAZ2oaYGW/j5jHf86ybw7DdSOZrcHf1cTlk0xSGrT2lOezFClC3OK/mRtVzXkiiCdIkfOMhiatBr9oOaymvFGGHi7V2RTEaQA/XvlndQKHjGk6z+9chCa4MYVqXkiW1PmblmG6DcaRkcwMkKPwHAabJegfhrESbOqobQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
+ b=KDJIAEPpIpr8Ke/xhSB7yL/cmci4dI3x2uHNK8M3/zpDOSjeGCgc7x/SQiBjPSaMbrret2iI+0pFZeoe53mjAepgp8/LCT/1NK7h2AIVoLylOqovrduunUs4++WMlFsk5fD6vDHKc8vE+fvEo2GE69tNU5807m5aF9VPPNlvh+3t5ho0ZKBaSiALAkZPcJEeign72KrIT1Nkyx8MVtOe0nSABFtRF4VeAOaxIfa/yqfmDsAX6KVHIxTWUGWI3/V90Mn5o+wCaqHz/IxEQOPA/UPcVX4ewIOqOVX7ACcC+XhepRXEZqt+J1EXv8VpoUKSEESvxlfLk7r0sG+/V2tlVQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=konsulko.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
+ b=m2XSCfo8MID4Yjhl67IWKZNU0qBNh3RLohiPO0ikWgFQSIk0kV03dDBBk1m01whOJDhaVX0t7+gpLizEeosbPrneWMFsGBFS7KpYeRwLK/tONWzMbj2eBwzSwDAHkPlQh2p9Ncc+fyO3uQiNcVTmndWG3HbdQFWPzNYq0zX4QBM=
+Received: from DU7P189CA0014.EURP189.PROD.OUTLOOK.COM (2603:10a6:10:552::21)
+ by AMDPR08MB11459.eurprd08.prod.outlook.com (2603:10a6:20b:71a::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.20; Mon, 2 Mar
+ 2026 14:18:50 +0000
+Received: from DB1PEPF000509E9.eurprd03.prod.outlook.com
+ (2603:10a6:10:552:cafe::30) by DU7P189CA0014.outlook.office365.com
+ (2603:10a6:10:552::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.20 via Frontend Transport; Mon,
+ 2 Mar 2026 14:18:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB1PEPF000509E9.mail.protection.outlook.com (10.167.242.59) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.16
+ via Frontend Transport; Mon, 2 Mar 2026 14:18:50 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PxOwggwjdhxKoIv6scI71M1xHpuNJcnGxOv3wVChIN+Snbwt8P03Hsx4HM7/bqcLVPakCvtos7ZL6+9W+iv4QMe2cyH7xBRZidYoKHXYawGdAz/9MqGz4SQuuGaOf4PvtPDRgBj5E0bJNP/es/Cy/Y2eRp0LZ7L7DPRzUw0SXvjpQrjBiNJ5FX8lnsiQw+XQ00cJDnZZn8TcByA9q4vUB4S2z6N/IyjAIQ6Lq2pFGxDYs4cBrMaHPgQtLMLp4rviXflWC4q+q4D45NmzaLYUy3F5ya0YnFjS+phClKmSdC2Sv+XI0cb3YI0G6vN1XdaH5LStLTDDoPBhrkqrptZuVA==
+ b=ypUcHE/wAYggwtBGQYQyoaTCvY6zWmabNlG8QxaWYRa0ooRqtRVNnneU/OQHiesHIxdMDkuI9mZSri9TftyfNuh/BsXrPzrlTaRkEG/ZerjUFsZ2tEpz8704anqPmWHl8fwmYvAerk44wLKo1Y2SpRRrESUAkR1EjR1Z7OLXDaMD1KNQRmGHyprfj0g0X+pwGmlH/ZzrVYLQftZNGjIpHJduqDX6vtI69J7r9EYKULko9qTBAb8ZR3xYYY+q6bF5Ry/7p/hjqhrwRblE7I3wEWaA/aJIdfgLrTv1cnUiWsJF/Vzk5h/I7HvhUSQ1uJiddWhkkWrYN9MNvOAkDeEXDg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M1BfGiXAH87prjOIMpCt2jqEVPVwlQ0pjgl7SPT4f7s=;
- b=xzWNGDP8S6bxuM+pGcmzxasKS6xVfpB6IZMykBmaZGGwMQH98kpG7nY96GijqLGbGrpsFM2OQw8r63rC50l4e4SC3r2+xg8R17QCAOjbOn9O293xIOeEGoqIGYRMvI8UQbAEPUF5hUiYDnuI0SHDH4TTc7HecTALkhC/VeC35wQoIaYSsuyIL4uNBZIZQpSHTyliVsfrgJu1UOcH8HdAMZJF2l9LX55eF3dRArieHV2vuq7PNw3z7ApSO5oPRbr6trhaKr85wSlnBuIrPd5OLITuT6b2PDkkDE6sQxxCAJR9NmTjW4/jbQCII1LEFjhIL72o5wiKtYxtumCyiBQtFg==
+ bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
+ b=dlj2e/B819Gc6j1xqzwfpkaXE1oujB5X5tz2NrIdLvvB17gLP0IP0XAkNK/l8zjxlDZ7Z59+iVL5Xpe6tCZsd50KfgtaA0LvzIetxXPJDcpOG2UD/m93M+o5su+UfHikk4eZikP5HMAa1S5ggPuUS/rMeOdJDxILA3MMe0u0wSHyY8hYmceAp5Dz/kf5JO0hZ/fknFdRWa+KPFgjV/VO4+Sh2BnG3N/pWx5j51kvx7ScPNnOqJSarJPZipLWTBvlIDQWMJhLgQJln3bcx7B1cx/09T5D5q5dZH/o9/6yIRGV+LrSppa0mz9K4i11xfdcBoXqIFSnDW4r0jZRd7wPAw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M1BfGiXAH87prjOIMpCt2jqEVPVwlQ0pjgl7SPT4f7s=;
- b=jVzxjkqndAY7yAWUY9ZWaB0+ESNO29bBXGursU3OZ4MU6ILfLInw+ZkXrF/nYcHW2CblC7SkRfxFbFb3mnYuz5XEU9aiotqRloq46J/PRIlVJFMaNoT86VjVt7DzqkXRmCuCT59Myh9NnaVaq3g9ehfmyhhpRmwB8cu9IEEbj5c=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by AM9PR04MB8764.eurprd04.prod.outlook.com (2603:10a6:20b:40b::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.21; Mon, 2 Mar
- 2026 14:13:53 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%5]) with mapi id 15.20.9654.015; Mon, 2 Mar 2026
- 14:13:52 +0000
-Message-ID: <564aefbb-f2cc-4409-a9ed-a599f517fe51@cherry.de>
-Date: Mon, 2 Mar 2026 15:13:16 +0100
+ bh=krSVunAurDXPs7lo5fmCzV+CutEtpPiXtr/gFpk7RtI=;
+ b=m2XSCfo8MID4Yjhl67IWKZNU0qBNh3RLohiPO0ikWgFQSIk0kV03dDBBk1m01whOJDhaVX0t7+gpLizEeosbPrneWMFsGBFS7KpYeRwLK/tONWzMbj2eBwzSwDAHkPlQh2p9Ncc+fyO3uQiNcVTmndWG3HbdQFWPzNYq0zX4QBM=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16) by VI0PR08MB11625.eurprd08.prod.outlook.com
+ (2603:10a6:800:30b::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Mon, 2 Mar
+ 2026 14:17:40 +0000
+Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
+ ([fe80::29d7:e9ba:ff69:a0c3%5]) with mapi id 15.20.9654.020; Mon, 2 Mar 2026
+ 14:17:40 +0000
+Message-ID: <99c81520-9f2f-43b9-81d6-c60fab345533@arm.com>
+Date: Mon, 2 Mar 2026 15:17:39 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] power: pmic: enable sysreset function with device
- tree property
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de, Andy Yan <andyshrk@163.com>,
- Jonas Karlman <jonas@kwiboo.se>, Neil Armstrong <neil.armstrong@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>,
- Christian Hewitt <christianshewitt@gmail.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>
-References: <20260209183948.34807-1-clamor95@gmail.com>
- <20260209183948.34807-2-clamor95@gmail.com>
+Subject: Re: [PATCH 1/1] net: do not use non-existent CONFIG_DM_CLK
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ u-boot@lists.denx.de, nd@arm.com
+References: <20260225061426.45981-1-heinrich.schuchardt@canonical.com>
+ <45e3b935-6e0a-471f-b87f-6c03edd4f237@arm.com>
+ <20260227144909.GR1593142@bill-the-cat>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260209183948.34807-2-clamor95@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jerome Forissier <jerome.forissier@arm.com>
+In-Reply-To: <20260227144909.GR1593142@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0066.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:26::17) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+X-ClientProxiedBy: LO4P123CA0583.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:276::13) To AM0PR08MB11733.eurprd08.prod.outlook.com
+ (2603:10a6:20b:740::16)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|AM9PR04MB8764:EE_
-X-MS-Office365-Filtering-Correlation-Id: a26165d3-1ece-496d-f682-08de7865eebe
+X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|VI0PR08MB11625:EE_|DB1PEPF000509E9:EE_|AMDPR08MB11459:EE_
+X-MS-Office365-Filtering-Correlation-Id: d474695b-ad45-4c1f-211e-08de7866a067
+x-checkrecipientrouted: true
+NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info-Original: 6hmD93amGIEundSv8eccoHcrwuhydmSaNVMIOKYpj3IQDBFNLTTR4ACLKp8R/amXYwA9NK1pQlyzWYRoYw2zehX8QJ6LdfoedSKIrhxZSdBmUPUUb/fWFEOyZ2sShy9TBu0V42p9wmU5Qk9BwDDTEvyDlETWwyEjno2bGeILjUxPeoGqRABPwnAjHaYM7K194Mt7JAY5eq98NPuHk/1dJxwfcmjHSsNbtW68JxYvR3wv1SAK3lEvXwWxLRc8isZRwOx8C+QlbCbuSoRiPKIgt8DPi/Om8+L18RRf+3Lj3Wa1bVD8gpl4isbmHTWwikLniuTDtjZFhKY1I7ddCXzSwmRITSltdnThOyObAWa7ibQXnX5n0Gbbv7M1aL0MayKrF6IprLU6G1tB41KcaKljsa6fGdaDRSTSgfYEVZizybookNo+8/Jb5pW6pUmZ3HrxIIGye3ojHlg8WOlVIdpMXoEnG58kjPlZcLVlHxB4wVfjNPjlp7u5E54QyQ/MOz/Pd4RmF8KCoIeR7GqHXDn4mdE33GMRJRDr4VnMdJ7So0dCx9VmxmIRyGANtE37lDOE1EUOEW/rYxbWa+keLcRy2Itbot5vEVi6Jc746nl6R9uAz/FxNioG7JgzUmNs4k79lmQYLzDSCyTJNb9YlTbBhzUs2Nqaqm1L9MRXZAJxi/Ex3UYiIEYCi203Cx+aGssharxX5+pVYWEdKi9MMPNQNRoMi1E8+EbG3cN2FbJV6dI=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE; SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR08MB11625
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB1PEPF000509E9.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: f01a7cc9-ae6c-4b8f-0052-08de78667660
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|7416014|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info: ksjSSzR2Uu474zzoPYSwqxbAPMuHo/18Z1TPVsbW9wUlD3lSvUWJPaKnjhvbt3EuV3ZuSAu/U7CZ1zq/qgNZEeiPRJbquhmdbjkLY2EColNSMot5jDVB6LCiTuJK1M28gTNQsLg3SqL7aQr6AnNKi5p80KDcGvYIzGicf7aLCuEGax9TH4MLIRILM0a1HkfvbFg11ZGRqIpuBbP5kBMsmUH0I9mBez4/a4Fc0NtdgTZpqV0suNM4XTynUoVyhLj6QRNGAcYRdialMqwYl5B0SaGEUhgkgHbnPqVZJMg1/phe11ZTODuPCYZhzH8p9AS0yx1GpjKjChD/OMNpCCIi6h34jPOlR0o6lkvzjYM26a1tYRchBEsOYL6qyU0Az5DchoLFwclOd1/o55u09M90KFSFYNiH6ZzZX39iRuRpevmCwH3BBuPY4kDIfHVY4CPnSpFeg/QUU7JmbC2h/j2rt2M0eiBEl+h0A4GHTNqulVVaz8/0/+oDPMk0hVWppHkKIK/FbuG51Z/7/WaXzOoKagik+t91AiXPOwIxOR05Zg6P9f6BVr2OliXYD9kCEaAozUU8pPdOp8GL6bbe+crjZ9PyibIdWgsJfE6sTbR15GTqQg9IUH8tmDd25RqjSxP8JcCeVg4UhMauJbbwEGVlnh2Mi+s1Gfub6BFIts0SaFIDIUloM9niAsqYckFpec0Sl74unumyIXYPaBw7DoWpbyN1pORrp2PIkwxBD4NegLQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(7416014)(366016)(7053199007); DIR:OUT;
- SFP:1101; 
+ ARA:13230040|1800799024|82310400026|35042699022|36860700013|376014|14060799003;
+X-Microsoft-Antispam-Message-Info: KE0ZpiaBFoNUqiy7Y63QO8qrVNGnizYMQn1PF2Huw9BVJNZ4GXStDsP53feLirlAX6jytmAm0+tTEB4gaFf6qCHd6tk8VjPRC1JggAFcxyyyVjhRnMiDHpvXOEfNsQtEsPaRD5wdTqntNB1JVuSN6/1v7SXrtJwjobWyZ9HK0XAwU31iVT/CSkjwC/fuftnPtEznxsoh7V2jzDXt30xezziNQngV3pbaMRhrcK/DxvDlCdpPzky8oEpgEMv1e6WCFfgQhBpH28ie7wsN6Uf5QSkTdh6OlX3irYhJW2pVx4csxphx47Sa1HAzniEhh17RcCmMQbDqUgPn+jaacFJptFVks4G2IxKx8zAHThiYktsJURfAe+253Xgu84NGWcZQ+GWVUmIq4HvSWvHIiipYPV6/d/yCkZbpxTtdUod6v0J2AuqPYOiCgkkhop8tPXBRjlKrrgtUh8NsAfn2dhq5t5K8bVaVJJnQtqXtW2nvihioVQ06+RqGt8UHYCMPEQ755kT7UrKW8ukF4n/mLVCJI/jj4stD+OylbcFL+coklCOhl3OLIOz41OucYzDXK+r98h9KBj4d0IibUQQ4A/HU9q7ki2t2xHRjCr/JuuBSRyBUEMsxTMejtFuFuywmhsxNE5xDDrlFtie7gOqvn3CpSMw3FLMtJ0E669LHn21wF00k6E3uZ2nWsmxpi5IQvtdsp0Z64WVVaUDzbaWlBqL37EGS/oH54d6jWsPNV7+acccEx3lSRs/u2ToSDV0TxM086siYEvrLenFJ8Tj556elR3BqwR906Ke31agdAv/T6rpwdxrhB59jOhvhdBHShlHIB2isXN7su/ZtngU111TSVQ==
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(35042699022)(36860700013)(376014)(14060799003);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aFZKKzJXZkJmMVlYZE9ZUEhvY2hweGZ6NnF3alhpNmkrYkwrR2krbTJjUDNL?=
- =?utf-8?B?Yml0OTBKK25ySWZKNEhiRFhjTGd5TjMrSmVMZ2F4RG9qWWN4cXM0UTV2WWhx?=
- =?utf-8?B?YUFId2w3Uks3STNXSFdzVjR1bDg5R3lHQXcrUEZoa0I3UTFZUVQ2ZjZBUHU1?=
- =?utf-8?B?MzdzS243UGhyeEdHVkVUWGR3MGl0TU4wSVV3dlRGVVRyekh6eDAxUEo1Y3hJ?=
- =?utf-8?B?SFJaSVg3Z3hlVzdkbFYrQyt4UjVNeXlqYjdlcFpGYWJEOE1UMmFxVmZoYi95?=
- =?utf-8?B?MWc0cGkzOXMweE0zcmFGOWtFYkhZTjg2TWdDOHVLb1AvWHdQSkEyV2RlSC9U?=
- =?utf-8?B?T1RjNGxkZXVuOUhZYXdlcnN0RTliODUxWkZoV2s4ZHdxMHFhM2dmNjZ1MFZo?=
- =?utf-8?B?TDF6c0kyYlBYYndiRXRyTHFQN1BXZ3dRMllOemVqY1B6dE1qNkh3Y2RuNDRv?=
- =?utf-8?B?MTlRNVEwMVJOeHRWOWVpWnVpU25LMEFOTmdXZWZXZk1wcVlMM1Jjc3ZlanFN?=
- =?utf-8?B?Y2NlT0NrN1dIKzQ0WWhJNk9wU0pidU5qRUZOSFBEeExXSVk1M1B4K3dmekJw?=
- =?utf-8?B?bGt1Rm5aTXZMSjJmMERtVDUwTWQyaXFnWC9PUktVK1NtS2lTcmFpQ0o3alJZ?=
- =?utf-8?B?aGc0YXVBNmxoa2RXSFdCQUdodHJnRFlSRUZOcXo3UnNOZlo4UFlHOXZDNjZL?=
- =?utf-8?B?eGNFS2I5U3J2Ym1Eem5ra2J4S1pYUHhWVmdySnFncHVCUGFOaGNXQ1FlQjlp?=
- =?utf-8?B?T0VjRnF2dHBqOEpML1RKdGtPODJXMFVlTTJaY1FKN1VVLytRMVBKd2ovZ29k?=
- =?utf-8?B?RVJEYkxwL0lWY2FjakR1YU5KVFV2WkhtaUJHWVZnSTUvUmUvclFtRjdvSHZu?=
- =?utf-8?B?S3BsSW1uYmdQKzZncXdUaTlQcVJKUWJBMVF6OTI1VXZ6bHkxTEdnbVl6WUhG?=
- =?utf-8?B?TlNiMTZTN1plTmJheXBkMVNzemxDQUxGMHpMT011VS9xYitPZzVHVVo2M2kx?=
- =?utf-8?B?Q3FPN0x3WEpkcTNIbWx6clF6U0ZHdVRNcTRiTVQyNmpNeUtSVzhoTlZuV2oy?=
- =?utf-8?B?V3FMQnJ5akZDQmVwN3hDOUQ1YjBTR2Jxa2x2dy9NOFJSaEFRMU8vZVFpaGNF?=
- =?utf-8?B?VlozMksyQjlYVTNKYVh6WVJBTUlHQmVZcndzMGNLUVJMT1NqaklCVzZ4akUv?=
- =?utf-8?B?SkRRTHNoRlM5dENoazhjK244ZG4zbUJTd3RhQTdCYmFJSDhFa1JBVmVhRXlM?=
- =?utf-8?B?MFN3T0dCY3oxdWFhQ2FBMWptVCtZQkZlOU5IbysyK0szNVc1dzlVUVdjSmho?=
- =?utf-8?B?ZUZWT1JNMkFVNU0vN1FjUFhWQ3p6UEVFV2FTUHhlOU5UWmhHRThqL3Vkc0o2?=
- =?utf-8?B?Tno1VWJoTng2cjEybklrZG5qdWZyc3YyZ1Z5UDFCbGpheFNrdEhsSUprREkw?=
- =?utf-8?B?blBjM2RwSFpnb2hVUkowcmpLN2lGRGw4SStoUGh3MXRpK1dKNkpxcU5GSzJj?=
- =?utf-8?B?Wloxb00rL2I3NEhnMVNFdmVQbGFpY2haQ2M5SEZFY2JGYzF0UjN5c1FleHVC?=
- =?utf-8?B?eXNGZkpERXExbEhYaTlncGtVcWtzZ0hZSlc0RHpHdGZ5UXduSUZHbzUyZ1R2?=
- =?utf-8?B?RUEzOHZ3UnZvZVNldzUzUUI4eFZ0Q01RVW9zVGo2ZlVTNnprOWNZSitJMHZH?=
- =?utf-8?B?cEEreDd6Z3FHR3RRdkRqcExoY1IvNk9hRFRKdlM5YkFRL3RaSHZzc2pGTi9x?=
- =?utf-8?B?bWZrSENCTk5TTG40Zk1zT2o5V2JaaGFJQmE2bDR6OVVuZFFqbG1teDhObVBj?=
- =?utf-8?B?d0F4dE56RHF2UGlnbjBhcURjU2htcUZXeXNvZWt1UzRzM2FKQlhPd3VVUlVj?=
- =?utf-8?B?TDU5ZnVQN0t4NHJaSFQybXI3TUxlMTVWbE5JQXJGcnk4N0JhNk1sTlhaT2dE?=
- =?utf-8?B?WlVQRzBIZTJ1ekFIb1pCZnhNaE0rTldSRis4NU1Hc1RidkRSbXg4Rnk3Sk5L?=
- =?utf-8?B?MEdpRTRGY0FvYnJ4cUJMMGFvZUxyaWtmSFc3SjZHMVFOeUdBelZBVjFVbUVI?=
- =?utf-8?B?NHl5N0prem1QWnVjcnNRRXVkRVdwY2M5QzN1UlB3OGtUQXk5U1l4a0Z0THhJ?=
- =?utf-8?B?S2VKS1pXVkFBcVBNUjBOd0pvSlgva0RUZzVnZnRId3RqSzgvZW1TaGd0dWZL?=
- =?utf-8?B?aDkvSlhwbHNGQWZTK09xcm16cytRYytDUVNrNW56UWlXTDNuYjA3cWNOejlh?=
- =?utf-8?B?QlVValRGNE5wZmlrSG4vSzB0M0g2UDM0TDZlVnNZOTdLTkNKM3NLQWVrZWVV?=
- =?utf-8?B?NkJiZ3VOTHlzZ3BwekpLbHlZWk4wdFVlUW0vSmRkVyt4TjJDK2dhQT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: a26165d3-1ece-496d-f682-08de7865eebe
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 14:13:52.7098 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: v6vGrfLWetbL8wUB+yJj6L+M8hvzZCVqbbs02/iMTo0qTlBfhrAV86ReB/C7rsTwoLOZu0nkM9T7JPv/jPZf27rzyQ3rNcZP4fkdSXZOnFQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8764
+X-MS-Exchange-AntiSpam-MessageData-0: ikHH29JfpXrxayJSUGZ0iY/RfVTwQMgjfecQK5OSpZHXBf9NafZ9VJHdp5drpirtVtoG9iw6oa9a5B+vhB1yb6AkvBWb8EI1RCdLp6a0At4gNicNb4Q1VDvDetgsCKiO+U9MCOps/ADDR7+EaD5vATUphlKcCGwSs6FadLTzRxsE1heRBNlHTvGz0MNQbRH/VYlgLp3EkgStoiMjeCdE8Uu3vg0LfjQk2vPlCWvJs69pA7N3bEdD1E7XHCHEKYBk21JETpACZgC9bNpXrr1uN76ttrsJ7z/ck3d/Rx5PjIsJ4N5bglFs0Umkp3LDHvd/GmqTEU4zjIMh3FhqBlpmRi12lr2YHDhjsAusnGsFLqGgcEQ/gnf/Rg5J9Zqn41CwFJ67w/1RrFbpW2V7YF2S1FNLvAVFL73T70DIxxrhVt7ubMhDAAds3JzqqmeikkRd
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2026 14:18:50.5200 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d474695b-ad45-4c1f-211e-08de7866a067
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E9.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMDPR08MB11459
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,144 +161,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
 
-On 2/9/26 7:39 PM, Svyatoslav Ryhel wrote:
-> Add a condition to enable the PMIC sysreset function via the
-> system-power-controller device tree property in addition to the existing
-> Kconfig dependency, provided the PMIC supports it.
+
+On 27/02/2026 15:49, Tom Rini wrote:
+> On Fri, Feb 27, 2026 at 11:03:32AM +0100, Jerome Forissier wrote:
+>> Hi Heinrich,
+>>
+>> On 25/02/2026 07:14, Heinrich Schuchardt wrote:
+>>> For enabling the clock driver we use symbol CONFIG_CLK.
+>>> Select this symbol for the HiSilicon Fast Ethernet Controller driver.
+>>>
+>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>> ---
+>>> @Jerome
+>>>
+>>> I could not find any usage of the drivers.
+>>> Should they be removed?
+>>
+>> You mean no defconfig enables them? It could be that some project
+>> downstream depends on them though. But do we care if we don't build them
+>> upstream? Tom, what do you think?
 > 
+> In this case, there never was a "DM_CLK" symbol, even for driver model
+> using CLK, it should just have been CLK to start with.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de> # RK8xx
 
-I've added in Cc people who have contributed to devices that will lose 
-support for sysreset once this gets merged.
+I think the question is more bout HIFEMAC_ETH and HIFEMAC_MDIO which don't
+seem to be used anywhere:
 
-Because they are missing a system-power-controller property in the RK8xx 
-PMIC Device Tree node, the following device trees will be impacted:
+jerome@builder:~/work/u-boot (master)$ git grep HIFEMAC_ETH
+drivers/net/Kconfig:config HIFEMAC_ETH
+drivers/net/Makefile:obj-$(CONFIG_HIFEMAC_ETH) += hifemac.o
+jerome@builder:~/work/u-boot (master)$ git grep HIFEMAC_MDIO
+drivers/net/Kconfig:config HIFEMAC_MDIO
+drivers/net/Makefile:obj-$(CONFIG_HIFEMAC_MDIO) += hifemac_mdio.o
+jerome@builder:~/work/u-boot (master)$
 
-dts/upstream/src/arm64/amlogic/meson-g12b-odroid-go-ultra.dts
-dts/upstream/src/arm64/rockchip/rk3326-anbernic-rg351m.dtsi
-dts/upstream/src/arm64/rockchip/rk3326-odroid-go.dtsi
-dts/upstream/src/arm64/rockchip/rk3399-evb-ind.dts
-dts/upstream/src/arm64/rockchip/rk3566-anbernic-rgxx3.dtsi
-dts/upstream/src/arm64/rockchip/rk3566-powkiddy-rk2023.dtsi
-dts/upstream/src/arm64/rockchip/rk3566-powkiddy-x55.dts
-dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5.dtsi
-dts/upstream/src/arm64/rockchip/rk3588s-coolpi-4b.dts
-dts/upstream/src/arm64/rockchip/rk3588s-indiedroid-nova.dts
-
-If it's an oversight, you may want to add the property in a -u-boot.dtsi 
-and upstream the property to the kernel DTS to avoid carrying it 
-forever. From my side, this patch does what's expected based on the 
-(lack of) presence of the property so this is a green light for me 
-regardless if the above Device Trees are actually wrong.
-
-As far as I could tell, the sysreset driver only implements the poweroff 
-functionality which can be called by either the poweroff CLI command or 
-the efi_reset_system_boottime function (no clue when/where this is 
-called, some EFI thing I guess).
-
-Thanks!
-Quentin
-
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->   drivers/power/pmic/max77663.c         | 4 +++-
->   drivers/power/pmic/max8907.c          | 3 ++-
->   drivers/power/pmic/palmas.c           | 4 +++-
->   drivers/power/pmic/pmic_tps65910_dm.c | 4 +++-
->   drivers/power/pmic/rk8xx.c            | 4 +++-
->   drivers/power/pmic/tps80031.c         | 4 +++-
->   6 files changed, 17 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max77663.c
-> index c2a7cbf7e40..a06042e2918 100644
-> --- a/drivers/power/pmic/max77663.c
-> +++ b/drivers/power/pmic/max77663.c
-> @@ -46,7 +46,9 @@ static int max77663_bind(struct udevice *dev)
->   	ofnode regulators_node;
->   	int children, ret;
->   
-> -	if (IS_ENABLED(CONFIG_SYSRESET_MAX77663)) {
-> +	if (IS_ENABLED(CONFIG_SYSRESET_MAX77663) &&
-> +	    (dev_read_bool(dev, "maxim,system-power-controller") ||
-> +	     dev_read_bool(dev, "system-power-controller"))) {
->   		ret = device_bind_driver_to_node(dev, MAX77663_RST_DRIVER,
->   						 "sysreset", dev_ofnode(dev),
->   						 NULL);
-> diff --git a/drivers/power/pmic/max8907.c b/drivers/power/pmic/max8907.c
-> index a7ef70177de..34bef0c8cd6 100644
-> --- a/drivers/power/pmic/max8907.c
-> +++ b/drivers/power/pmic/max8907.c
-> @@ -48,7 +48,8 @@ static int max8907_bind(struct udevice *dev)
->   	int children, ret;
->   
->   	if (IS_ENABLED(CONFIG_SYSRESET_MAX8907) &&
-> -	    dev_read_bool(dev, "maxim,system-power-controller")) {
-> +	    (dev_read_bool(dev, "maxim,system-power-controller") ||
-> +	     dev_read_bool(dev, "system-power-controller"))) {
->   		ret = device_bind_driver_to_node(dev, MAX8907_RST_DRIVER,
->   						 "sysreset", dev_ofnode(dev),
->   						 NULL);
-> diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-> index 37d4190fabe..e5b497dfc39 100644
-> --- a/drivers/power/pmic/palmas.c
-> +++ b/drivers/power/pmic/palmas.c
-> @@ -48,7 +48,9 @@ static int palmas_bind(struct udevice *dev)
->   	ofnode subnode, gpio_node;
->   	int children, ret;
->   
-> -	if (IS_ENABLED(CONFIG_SYSRESET_PALMAS)) {
-> +	if (IS_ENABLED(CONFIG_SYSRESET_PALMAS) &&
-> +	    (dev_read_bool(dev, "ti,system-power-controller") ||
-> +	     dev_read_bool(dev, "system-power-controller"))) {
->   		ret = device_bind_driver_to_node(dev, PALMAS_RST_DRIVER,
->   						 "sysreset", dev_ofnode(dev),
->   						 NULL);
-> diff --git a/drivers/power/pmic/pmic_tps65910_dm.c b/drivers/power/pmic/pmic_tps65910_dm.c
-> index de8d805566a..bce35603275 100644
-> --- a/drivers/power/pmic/pmic_tps65910_dm.c
-> +++ b/drivers/power/pmic/pmic_tps65910_dm.c
-> @@ -61,7 +61,9 @@ static int pmic_tps65910_bind(struct udevice *dev)
->   	ofnode regulators_node;
->   	int children, ret;
->   
-> -	if (IS_ENABLED(CONFIG_SYSRESET_TPS65910)) {
-> +	if (IS_ENABLED(CONFIG_SYSRESET_TPS65910) &&
-> +	    (dev_read_bool(dev, "ti,system-power-controller") ||
-> +	     dev_read_bool(dev, "system-power-controller"))) {
->   		ret = device_bind_driver(dev, TPS65910_RST_DRIVER,
->   					 "sysreset", NULL);
->   		if (ret) {
-> diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-> index d11f7a7886e..95b71d2fe49 100644
-> --- a/drivers/power/pmic/rk8xx.c
-> +++ b/drivers/power/pmic/rk8xx.c
-> @@ -220,7 +220,9 @@ static int rk8xx_bind(struct udevice *dev)
->   
->   	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
->   
-> -	if (CONFIG_IS_ENABLED(SYSRESET)) {
-> +	if (CONFIG_IS_ENABLED(SYSRESET) &&
-> +	    (dev_read_bool(dev, "rockchip,system-power-controller") ||
-> +	     dev_read_bool(dev, "system-power-controller"))) {
->   		ret = device_bind_driver_to_node(dev, "rk8xx_sysreset",
->   						 "rk8xx_sysreset",
->   						 dev_ofnode(dev), NULL);
-> diff --git a/drivers/power/pmic/tps80031.c b/drivers/power/pmic/tps80031.c
-> index a2f935b0c6d..6004a14cd6c 100644
-> --- a/drivers/power/pmic/tps80031.c
-> +++ b/drivers/power/pmic/tps80031.c
-> @@ -46,7 +46,9 @@ static int tps80031_bind(struct udevice *dev)
->   	ofnode regulators_node;
->   	int children, ret;
->   
-> -	if (IS_ENABLED(CONFIG_SYSRESET_TPS80031)) {
-> +	if (IS_ENABLED(CONFIG_SYSRESET_TPS80031) &&
-> +	    (dev_read_bool(dev, "ti,system-power-controller") ||
-> +	     dev_read_bool(dev, "system-power-controller"))) {
->   		ret = device_bind_driver(dev, TPS80031_RST_DRIVER,
->   					 "sysreset", NULL);
->   		if (ret) {
-
+Thanks,
+-- 
+Jerome
