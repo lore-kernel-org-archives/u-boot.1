@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EBEEB3644
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 00:06:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED2EEB3644
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 00:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE55983F63;
-	Tue,  3 Mar 2026 01:05:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5477A83F93;
+	Tue,  3 Mar 2026 01:05:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dx3blPiP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MrSiXrGn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25DA083F93; Tue,  3 Mar 2026 01:05:17 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id D7ABD83F9B; Tue,  3 Mar 2026 01:05:17 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C2D380517
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 01:05:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C074283F63
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 01:05:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-415e568a7ecso106924fac.0
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 16:05:13 -0800 (PST)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-414ffb4c0a0so213499fac.2
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 16:05:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772496312; x=1773101112;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772496307; x=1773101107;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+474sToWnQzk13Ci4hT5ZlUt/5jLNvIiPXdecBxKTNo=;
- b=dx3blPiPhraDxEoVGeDEFnLzkGpKvOxEJFTVGj6fEucdn957D4gyoVJMrV58IKnH//
- MGbxi3SeBz0kxWgXzVouIDzchb7vnFfyBL4qHAW15CEabkDPMm3sCjrskfk1A+4NkewK
- ipREdcpaXYkO7MJC5MfkNW8N0Z8LFhWgN4k2TQiM4fPllYIPTL21KqDHv91j/2BhwfK3
- GXXQaIt8VAM/kLs+Ca5sVWOAHDD6HfG/Dj0bEM3WoAzq30Wq9Gxgk/An95QuRq6An3PK
- vdB/ZryhiexLAy2G2Y436ZfNo7UueMY9cW84sOzlrstSLivnn2rjzkaaGjZ/f7WZqC8Y
- LSjw==
+ :reply-to; bh=BtJUfaQqgxYZpqIvTMsaQLVOyl+mi1JoATK8kXgxei0=;
+ b=MrSiXrGn0RALhTprVvBXWuxhey8m1hpJz+7tvIzA1mNq0QjezVdJ7tj79R8uuff/F7
+ uVrEjuYaW8pdb+hd/qHzEDnz6xOlletHTCJ3SJbhnpbbMtLjdlJe7/WiFgpcy/Okpgga
+ P6ct/LaSIliFPftm5qeHoX49WPPTx2B5Dm7utJwTjWmPYJVka75BFFV1kDYD4HRFvH0Z
+ wIXB8Lp8K9idzocJMVaipZePdOGAuXDQfdur7cxX5zXx3qlJzcnRVqdCZvKUcGP6nNXP
+ Ly1Gtu0fyABvVM9rAMNtPMQLC3VIGhQXlBLzmSnPG6EHUuLWZf6wH8s+51tIi1qkV85H
+ GP5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772496312; x=1773101112;
+ d=1e100.net; s=20230601; t=1772496307; x=1773101107;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=+474sToWnQzk13Ci4hT5ZlUt/5jLNvIiPXdecBxKTNo=;
- b=oLZoxKUkKiY/1v2nXQywLFifQM0dz818PonEmrnDTYpp1DxlJo3yfQDzAFwoCmuFpV
- 9RnxypZTdeGpk56C3uAeoWk1oWZEsRaWq45bHeW0gjq6AXGbor4g/LNHmXU657lL9yaJ
- b6RGlKh2yroWjU2XOlwiPli1KL94oTs9js2GVf14RFEr4d4axxyj0twZiqxRfhVHzviN
- 2fxOxoI/Hu4d+WcA76A+juvnwUm1nyJp0KGxZsYJs6jroGdAc9jwvZUib4PtzPEeRX+s
- CTzWlYVd+8C2VI17SXZy4FYw8yDKD8EtJdEHVN3QoFweaSsBGAacLBOJ+ONGCSR5/dBL
- 0tdg==
+ bh=BtJUfaQqgxYZpqIvTMsaQLVOyl+mi1JoATK8kXgxei0=;
+ b=FkNdppC98JIXGLUJZxaQ40O+pxCeCmXghl8KNXi9SikhifRvOEqy052EHg8km/rONa
+ SUiav+j6YBUsxWVMXQu20zdq8kuuF2FU/uYXMc33hyNrUqUZSy3WPjGejfGnjiWeCUva
+ 2EXuxXG2WUhbDQa1iWKl/pQRZ8cwJvKxSkXWjrPsVFsPUjPmKCqjwD2eZSATyUOCDnlY
+ UngZGmx8jFEwhfoNCMbdqEbdiYwwgxpGuHylSbYf6NEtPFOfCupmF1o7LONeRBzs53Xf
+ OGc3tUPicUowsxy9tRGZjSDJx6W6t8PMdMg6O1R0ICTpnR1CY7+/SFXOTPNzKMQokawa
+ fxVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVP9KdvWimLtTUMQdKiyYbILpV0sD7eiLK3n4W1HnuZjMyiTbOrY6d9n/DkUEZ/nxYWRpNMt5k=@lists.denx.de
-X-Gm-Message-State: AOJu0YwoxS7pEKlKQdMm1kgwZobEv9zZqopLfF4J6Nr4+SJmE9hTgziT
- fv2LS12uhkmZkwYcMclLyeVvkdmozXpOFFuPpDP00GpBWzNOTCNhOFPGcX5LVEPMiwpLR9RBca4
- RPi0V
-X-Gm-Gg: ATEYQzyoUUdEonFr9+jST+/3Lx7G4haI7VQeMztVJFe8Mx1wpBgRS3AeGlPxQX0FuWU
- 9I1vN1LLiITOOuWHSnCg1CnU5TTRmNim88FRY3H7wcMLUQrn8HxSjjDkTNw7LoRGiWAKGuSQH6i
- 535wRjOe4LoAg39DRr8W/dvWG2B3/NsbB31/komO1SCUCbEG5eW6vcV70putAkbeyC2ItQBb5J7
- 72fwqd59bMlcKWySzI0YPowxFmcwJwf7vAAJXnqiNd4/Eky7Y7YZOi5hjb0PQ4l/e+Zf1ZsyjLM
- hI1ZXf1V+MWpXVgNNrgARyjpVWPA0iE1IyILXr1rbjz7rzjRpurHa5RXvQJz/2hGMc0VsKNGJbB
- q7pA0SbfYmTJRhhC1hIlgEai4yrj9OZcpHG571DiBgqGOWGjqhlnxTjuvykxNpV6J+q3QMNZjIa
- ZwmDCKY8EUlkYwSd42ZwB8ONITnYXXB4mhZqh6jQU=
-X-Received: by 2002:a05:6870:702b:b0:404:16e5:9afc with SMTP id
- 586e51a60fabf-41626e886dbmr7246836fac.19.1772496311614; 
- Mon, 02 Mar 2026 16:05:11 -0800 (PST)
+ AJvYcCU3jdYY4/O2AXwrm3erqiBi0NlWXCgYbMeF1hCgouJFN0ZytG8VMTjQw8lCL08lVDx8J0ZFqVk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3Njygve7ncrUtaRqq8o9ZUPdv+AE1GYKRbzWa9Ii09zujG8yQ
+ oSDFS/sQcC/BxbimG+kqBj+YdRG+kW/LHpwNW4VGgHg7Ax6Kcay9Hjrn4rISJWML/MQ=
+X-Gm-Gg: ATEYQzzdlRiPH2cZIb2kUDvGrA829EJ5bcGZ88R3DQg8ycpfL65ZXF9LG903LZ8aFU/
+ B1KPl2TSGIerHDlYda5HtxSOv290Lo4HFzjocjQ+oPM15Qpv3ZVhWl4TJptf2WrJM5s1VZvRp4q
+ NAotJyVVyIIHfTnze9hIwfYBXL6WBO8jvztfDKsYSpygNlLqNcuznNRoyA4BGJf4IYA+DPm43pe
+ o19yjuF6HNi3uUnKC/u3vBe9DR8lhthhH1FvynHY/7iO2Qn53c6o0P9kS4Aur6GsCS9VKqB9bCt
+ oiM2CsgQxueQysz/QyEQ+i1uPZJ82pmeuwXX/JgKs2HCKlIZF8MgFywmycflhsmu/Y7COl0i7V6
+ PnIPGRocIE8qmQQimSRaYGpfhG6RoVfmYpJ28ABWTo3GWTQww5VjRZdemF9wxzIDaOceKIfqoar
+ 2HB8lAm1yD/WiK55QVFxQxv1gyVYJo
+X-Received: by 2002:a05:6871:28a3:b0:409:b5a3:42bb with SMTP id
+ 586e51a60fabf-41627055cb8mr8847772fac.31.1772496307126; 
+ Mon, 02 Mar 2026 16:05:07 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:4c09:7c6b:bc48:f2f7])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4160cf239e0sm13878551fac.1.2026.03.02.16.05.10
+ 586e51a60fabf-4160cf239e0sm13878551fac.1.2026.03.02.16.05.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2026 16:05:11 -0800 (PST)
+ Mon, 02 Mar 2026 16:05:06 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 02 Mar 2026 18:03:21 -0600
-Subject: [PATCH 12/14] clk: mediatek: mt8518: convert to struct mtk_parent
+Date: Mon, 02 Mar 2026 18:03:16 -0600
+Subject: [PATCH 07/14] clk: mediatek: mt8188: convert to struct mtk_parent
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260302-clk-mtk-unify-mux-parents-v1-12-32f45085f4d0@baylibre.com>
+Message-Id: <20260302-clk-mtk-unify-mux-parents-v1-7-32f45085f4d0@baylibre.com>
 References: <20260302-clk-mtk-unify-mux-parents-v1-0-32f45085f4d0@baylibre.com>
 In-Reply-To: <20260302-clk-mtk-unify-mux-parents-v1-0-32f45085f4d0@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +90,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=63220;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=55294;
  i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=sdHAf67qi2QgiERvdAA5K5s6zxE45+dsELD3I32dcnk=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBppiWYjY7ZQVNNuzICaOKjb/EAsoAV0rGrxz8GN
- sidyVV1Jd6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaaYlmBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AhgIH/jaqrahaUpdHPRvAi/1KQls8etqlFbJgOCZFGwS
- +RKII1mdCxuigNpg1CooNUIv/VpQtLKcAWEnZvuO1l/9M9lccPkNtaemgufrizkBxeD7L81FYSI
- gp4dyAFLzjkSwvSUyTjzQ0DHNTUb9JjDOwbCaIWIF7OoCiOcVohE+oc2rrFRqaoBFTGKJ02I74k
- /e+YjlNg5Xe3IH/yu4J3IW6hOHGaXtEmiWwMFkZDtguC3AV4OEyPJcfftESWUXiJjdhvAqeqNBE
- xj+PkvZ2GgJFsDjP5E2a31MP58cRP/7T0nD6ceB05gt+ZpS/avBKyBgEup0oKuFJtY3C/hiB8/Y
- i9Ok=
+ bh=yf3zWqxMUn0PJBW0leYASgs8GXapP+GCp/Xdxul6WLM=;
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBppiV43ax0/14FwSQp2u96zOi5GOP32nKkJATGm
+ MqwVypurFiJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaaYleBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AsvwH/jtFfYE0wmhpnezlYxlmonGt0B0/10qYuX0VOBd
+ G5oYKZYRZ6ykNpIL+Ax+u+VHZLn3nZCko2VCuQCZ6z1EFhLl2Qzh0V8E74L93FegmBJa/TVf7PE
+ vSb+lEMaDy1e+YJ9LpzehNEUetZlUkP+76qxwby5O7gH4L+lWGAGEErRB5W7ehPSDu7QK+43gmX
+ fSBZXVgucvTAR4arCDCDDb0XbnN1fHQ/MvBSXmOT/2pvGw9/bWfoe5NZTQBnjZ13EVo3gTBu8zF
+ Q4Ps2+ENyUsMabjYQRzBF9sSA7uNjKstqAzVZc8rCyHME+K6T8ftUDJVytxTt+hrYgpvPJSfkiF
+ tpl8=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -126,2242 +125,1822 @@ type for mux parent arrays.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt8518.c | 2206 ++++++++++++++++++-------------------
- 1 file changed, 1103 insertions(+), 1103 deletions(-)
+ drivers/clk/mediatek/clk-mt8188.c | 1704 ++++++++++++++++++-------------------
+ 1 file changed, 852 insertions(+), 852 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt8518.c b/drivers/clk/mediatek/clk-mt8518.c
-index c19828def06..cb798f9985f 100644
---- a/drivers/clk/mediatek/clk-mt8518.c
-+++ b/drivers/clk/mediatek/clk-mt8518.c
-@@ -134,1125 +134,1125 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
- 	FACTOR1(CLK_TOP_AHB_INFRA_D2, CLK_TOP_AXIBUS_SEL, 1, 2),
+diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+index 9d1da23d066..22764e744f6 100644
+--- a/drivers/clk/mediatek/clk-mt8188.c
++++ b/drivers/clk/mediatek/clk-mt8188.c
+@@ -190,375 +190,375 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
+ 	FACTOR1(CLK_TOP_ULPOSC1_D16, CLK_TOP_ULPOSC1, 1, 16),
  };
  
--static const int uart0_parents[] = {
+-static const int axi_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D24
+-	CLK_TOP_MAINPLL_D4_D4,
+-	CLK_TOP_MAINPLL_D7_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_ULPOSC1_D4
 -};
 -
--static const int emi1x_parents[] = {
+-static const int spm_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_DMPLL
+-	CLK_TOP_ULPOSC1_D10,
+-	CLK_TOP_MAINPLL_D7_D4,
+-	CLK_TOP_CLK32K
 -};
 -
--static const int emi_ddrphy_parents[] = {
--	CLK_TOP_EMI1X_SEL,
--	CLK_TOP_EMI1X_SEL
+-static const int scp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D3,
+-	CLK_TOP_MAINPLL_D3
 -};
 -
--static const int msdc1_parents[] = {
--	CLK_TOP_CLK_NULL,
+-static const int bus_aximem_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D7_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D6
+-};
+-
+-static const int vpp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MMPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_MMPLL_D7,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_MMPLL_D5,
+-	CLK_TOP_TVDPLL1,
+-	CLK_TOP_TVDPLL2,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4
+-};
+-
+-static const int ethdr_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MMPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_MMPLL_D7,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_MMPLL_D5_D4,
+-	CLK_TOP_TVDPLL1,
+-	CLK_TOP_TVDPLL2,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4
+-};
+-
+-static const int ipe_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_IMGPLL,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MMPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D7
+-};
+-
+-static const int cam_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_TVDPLL1,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_MMPLL_D4,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MMPLL_D7,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_IMGPLL
+-};
+-
+-static const int ccu_parents[] = {
 -	CLK_TOP_CLK26M,
 -	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MMPLL_D2,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D12
--};
--
--static const int pwm_mm_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D12
--};
--
--static const int pmicspi_parents[] = {
--	CLK_TOP_UNIVPLL_D20,
--	CLK_TOP_USB20_48M,
--	CLK_TOP_UNIVPLL_D16,
--	CLK_TOP_CLK26M,
--	CLK_TOP_CLK26M_D2
--};
--
--static const int nfi2x_parents[] = {
--	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D4_D2,
 -	CLK_TOP_MAINPLL_D4,
--	CLK_TOP_MAINPLL_D5,
+-	CLK_TOP_UNIVPLL_D5,
 -	CLK_TOP_MAINPLL_D6,
--	CLK_TOP_MAINPLL_D7,
--	CLK_TOP_MAINPLL_D8,
--	CLK_TOP_MAINPLL_D10,
--	CLK_TOP_MAINPLL_D12
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_MMPLL_D7,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D7
 -};
 -
--static const int ddrphycfg_parents[] = {
+-static const int ccu_ahb_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D16
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_MMPLL_D7,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D7
 -};
 -
--static const int smi_parents[] = {
--	CLK_TOP_CLK_NULL,
+-static const int img_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
+-	CLK_TOP_IMGPLL,
 -	CLK_TOP_UNIVPLL_D4,
--	CLK_TOP_MAINPLL_D7,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D14
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_MMPLL_D7,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D5_D2
+-};
+-
+-static const int camtm_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D4_D4,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D6_D4
+-};
+-
+-static const int dsp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp1_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MMPLL_D5,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp2_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MMPLL_D5,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp3_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MMPLL_D5,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp4_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp5_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp6_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int dsp7_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_MMPLL_D4,
+-	CLK_TOP_MAINPLL_D3,
+-	CLK_TOP_UNIVPLL_D3
+-};
+-
+-static const int mfg_core_tmp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_UNIVPLL_D7
+-};
+-
+-static const int camtg_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_192M_D8,
+-	CLK_TOP_UNIVPLL_D6_D8,
+-	CLK_TOP_UNIVPLL_192M_D4,
+-	CLK_TOP_UNIVPLL_192M_D10,
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_UNIVPLL_192M_D16,
+-	CLK_TOP_UNIVPLL_192M_D32
+-};
+-
+-static const int camtg2_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_192M_D8,
+-	CLK_TOP_UNIVPLL_D6_D8,
+-	CLK_TOP_UNIVPLL_192M_D4,
+-	CLK_TOP_UNIVPLL_192M_D10,
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_UNIVPLL_192M_D16,
+-	CLK_TOP_UNIVPLL_192M_D32
+-};
+-
+-static const int camtg3_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_192M_D8,
+-	CLK_TOP_UNIVPLL_D6_D8,
+-	CLK_TOP_UNIVPLL_192M_D4,
+-	CLK_TOP_UNIVPLL_192M_D10,
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_UNIVPLL_192M_D16,
+-	CLK_TOP_UNIVPLL_192M_D32
+-};
+-
+-static const int uart_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D8
+-};
+-
+-static const int spi_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D5_D4,
+-	CLK_TOP_MAINPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D4_D4,
+-	CLK_TOP_UNIVPLL_D5_D4
+-};
+-
+-static const int msdc5hclk_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D6_D2
+-};
+-
+-static const int msdc50_0_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MSDCPLL,
+-	CLK_TOP_MSDCPLL_D2,
+-	CLK_TOP_UNIVPLL_D4_D4,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D4_D2
+-};
+-
+-static const int msdc30_1_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D7_D2,
+-	CLK_TOP_MSDCPLL_D2
+-};
+-
+-static const int msdc30_2_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D7_D2,
+-	CLK_TOP_MSDCPLL_D2
+-};
++static const struct mtk_parent axi_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D4),
++};
++
++static const struct mtk_parent spm_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D10),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D4),
++	TOP_PARENT(CLK_TOP_CLK32K),
++};
++
++static const struct mtk_parent scp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++};
++
++static const struct mtk_parent bus_aximem_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++};
++
++static const struct mtk_parent vpp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D5),
++	TOP_PARENT(CLK_TOP_TVDPLL1),
++	TOP_PARENT(CLK_TOP_TVDPLL2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++};
++
++static const struct mtk_parent ethdr_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_TVDPLL1),
++	TOP_PARENT(CLK_TOP_TVDPLL2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++};
++
++static const struct mtk_parent ipe_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_IMGPLL),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7),
++};
++
++static const struct mtk_parent cam_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_TVDPLL1),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_IMGPLL),
++};
++
++static const struct mtk_parent ccu_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++};
++
++static const struct mtk_parent ccu_ahb_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++};
++
++static const struct mtk_parent img_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_IMGPLL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++};
++
++static const struct mtk_parent camtm_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++};
++
++static const struct mtk_parent dsp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp1_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MMPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp2_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MMPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp3_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MMPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp4_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp5_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp6_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent dsp7_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_MMPLL_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++};
++
++static const struct mtk_parent mfg_core_tmp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++};
++
++static const struct mtk_parent camtg_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D10),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D16),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D32),
++};
++
++static const struct mtk_parent camtg2_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D10),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D16),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D32),
++};
++
++static const struct mtk_parent camtg3_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D10),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D16),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D32),
++};
++
++static const struct mtk_parent uart_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
++};
++
++static const struct mtk_parent spi_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++};
++
++static const struct mtk_parent msdc5hclk_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++};
++
++static const struct mtk_parent msdc50_0_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MSDCPLL),
++	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++};
++
++static const struct mtk_parent msdc30_1_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
++};
++
++static const struct mtk_parent msdc30_2_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
++};
+ 
+-static const int intdir_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D4
+-};
+-
+-static const int aud_intbus_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D4_D4,
+-	CLK_TOP_MAINPLL_D7_D4
++static const struct mtk_parent intdir_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++};
++
++static const struct mtk_parent aud_intbus_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D4),
+ };
+ 
+-static const int audio_h_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D7,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2
++static const struct mtk_parent audio_h_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
+ };
+ 
+-static const int pwrap_ulposc_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_ULPOSC1_D10,
+-	CLK_TOP_ULPOSC1_D7,
+-	CLK_TOP_ULPOSC1_D8,
+-	CLK_TOP_ULPOSC1_D16,
+-	CLK_TOP_MAINPLL_D4_D8,
+-	CLK_TOP_UNIVPLL_D5_D8,
+-	CLK_TOP_TVDPLL1_D16
++static const struct mtk_parent pwrap_ulposc_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D10),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D7),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D8),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D16),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D8),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D16),
+ };
+ 
+-static const int atb_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D5_D2
++static const struct mtk_parent atb_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
+ };
+ 
+-static const int sspm_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D7_D2,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D9,
+-	CLK_TOP_MAINPLL_D4_D2
++static const struct mtk_parent sspm_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D9),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
+ };
+ 
+ /*
+@@ -566,580 +566,580 @@ static const int sspm_parents[] = {
+  * TVDPLL1 on eDP and TVDPLL2 on DP to avoid changing the "other" PLL rate
+  * in dual output case, which would lead to corruption of functionality loss.
+  */
+-static const int dp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_TVDPLL2_D2,
+-	CLK_TOP_TVDPLL2_D4,
+-	CLK_TOP_TVDPLL2_D8,
+-	CLK_TOP_TVDPLL2_D16
++static const struct mtk_parent dp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D2),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D4),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D8),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D16),
+ };
+-
+-static const int edp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_TVDPLL1_D2,
+-	CLK_TOP_TVDPLL1_D4,
+-	CLK_TOP_TVDPLL1_D8,
+-	CLK_TOP_TVDPLL1_D16
++
++static const struct mtk_parent edp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D2),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D4),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D8),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D16),
+ };
+-
+-static const int dpi_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_TVDPLL1_D2,
+-	CLK_TOP_TVDPLL2_D2,
+-	CLK_TOP_TVDPLL1_D4,
+-	CLK_TOP_TVDPLL2_D4,
+-	CLK_TOP_TVDPLL1_D8,
+-	CLK_TOP_TVDPLL2_D8,
+-	CLK_TOP_TVDPLL1_D16,
+-	CLK_TOP_TVDPLL2_D16
+-};
+-
+-static const int disp_pwm0_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_ULPOSC1_D2,
+-	CLK_TOP_ULPOSC1_D4,
+-	CLK_TOP_ULPOSC1_D16,
+-	CLK_TOP_ETHPLL_D4
+-};
+-
+-static const int disp_pwm1_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_ULPOSC1_D2,
+-	CLK_TOP_ULPOSC1_D4,
+-	CLK_TOP_ULPOSC1_D16
 -};
 -
 -static const int usb_parents[] = {
--	CLK_TOP_CLK_NULL,
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D16,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D20
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D5_D2
 -};
 -
--static const int spinor_parents[] = {
--	CLK_TOP_CLK26M_D2,
+-static const int ssusb_xhci_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D40,
--	CLK_TOP_UNIVPLL_D24,
--	CLK_TOP_UNIVPLL_D20,
--	CLK_TOP_MAINPLL_D20,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_UNIVPLL_D12
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D5_D2
 -};
 -
--static const int eth_parents[] = {
+-static const int usb_2p_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D40,
--	CLK_TOP_UNIVPLL_D24,
--	CLK_TOP_UNIVPLL_D20,
--	CLK_TOP_MAINPLL_D20
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D5_D2
 -};
 -
--static const int aud1_parents[] = {
+-static const int ssusb_xhci_2p_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_APLL1_SRC_SEL
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D5_D2
 -};
 -
--static const int aud2_parents[] = {
+-static const int usb_3p_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_APLL2_SRC_SEL
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D5_D2
+-};
+-
+-static const int ssusb_xhci_3p_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D5_D2
 -};
 -
 -static const int i2c_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_USB20_48M,
--	CLK_TOP_UNIVPLL_D12,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_UNIVPLL_D8
+-	CLK_TOP_MAINPLL_D4_D8,
+-	CLK_TOP_UNIVPLL_D5_D4
 -};
 -
--static const int aud_i2s0_m_parents[] = {
--	CLK_TOP_AUD1,
--	CLK_TOP_AUD2
--};
--
--static const int aud_spdifin_parents[] = {
+-static const int seninf_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D2,
--	CLK_TOP_TVDPLL
--};
--
--static const int dbg_atclk_parents[] = {
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D5,
--	CLK_TOP_CLK_NULL,
+-	CLK_TOP_UNIVPLL_D4_D4,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D7,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MMPLL_D6,
 -	CLK_TOP_UNIVPLL_D5
 -};
 -
--static const int png_sys_parents[] = {
+-static const int seninf1_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_MAINPLL_D7,
--	CLK_TOP_MAINPLL_D6,
--	CLK_TOP_MAINPLL_D5,
--	CLK_TOP_UNIVPLL_D3
--};
--
--static const int sej_13m_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_CLK26M_D2
--};
--
--static const int imgrz_sys_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D6,
--	CLK_TOP_MAINPLL_D7,
--	CLK_TOP_MAINPLL_D5,
--	CLK_TOP_UNIVPLL_D4,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL_D6
--};
--
--static const int graph_eclk_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D6,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_UNIVPLL_D16,
--	CLK_TOP_MAINPLL_D7,
--	CLK_TOP_UNIVPLL_D4,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_UNIVPLL_D24,
--	CLK_TOP_MAINPLL_D8
--};
--
--static const int fdbi_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D12,
--	CLK_TOP_MAINPLL_D14,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_UNIVPLL_D12,
--	CLK_TOP_UNIVPLL_D16,
--	CLK_TOP_UNIVPLL_D24,
--	CLK_TOP_TVDPLL_D2,
--	CLK_TOP_TVDPLL_D4,
--	CLK_TOP_TVDPLL_D8,
--	CLK_TOP_TVDPLL_D16
--};
--
--static const int faudio_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D24,
--	CLK_TOP_APLL1_D4,
--	CLK_TOP_APLL2_D4
--};
--
--static const int fa2sys_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_APLL1_SRC_SEL,
--	CLK_TOP_RG_APLL1_D2,
--	CLK_TOP_RG_APLL1_D4,
--	CLK_TOP_RG_APLL1_D8,
--	CLK_TOP_RG_APLL1_D16,
--	CLK_TOP_CLK26M_D2,
--	CLK_TOP_RG_APLL1_D3
--};
--
--static const int fa1sys_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_APLL2_SRC_SEL,
--	CLK_TOP_RG_APLL2_D2,
--	CLK_TOP_RG_APLL2_D4,
--	CLK_TOP_RG_APLL2_D8,
--	CLK_TOP_RG_APLL2_D16,
--	CLK_TOP_CLK26M_D2,
--	CLK_TOP_RG_APLL2_D3
--};
--
--static const int fasm_m_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D12,
+-	CLK_TOP_UNIVPLL_D4_D4,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D7,
 -	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_MAINPLL_D7
--};
--
--static const int fecc_ck_parents[] = {
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D4,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D3,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D3
--};
--
--static const int pe2_mac_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D11,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_UNIVPLL_D12,
--	CLK_TOP_UNIVPLL_D10
--};
--
--static const int cmsys_parents[] = {
--	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_MAINPLL_D5,
--	CLK_TOP_APLL2,
--	CLK_TOP_APLL2_D2,
--	CLK_TOP_APLL2_D4,
--	CLK_TOP_APLL2_D3
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_UNIVPLL_D5
 -};
 -
 -static const int gcpu_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D4,
--	CLK_TOP_MAINPLL_D5,
 -	CLK_TOP_MAINPLL_D6,
--	CLK_TOP_MAINPLL_D7,
--	CLK_TOP_UNIVPLL_D4,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_UNIVPLL_D3
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MMPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D5_D2
 -};
 -
--static const int spis_ck_parents[] = {
--	CLK_TOP_CLK_NULL,
+-static const int venc_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D12,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
 -	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D4,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_MMPLL_D9,
+-	CLK_TOP_UNIVPLL_D4_D4,
 -	CLK_TOP_MAINPLL_D4,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D3
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D5
 -};
 -
--static const int apll1_ref_parents[] = {
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL
+-static const int vdec_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MMPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_MAINPLL_D5,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MMPLL_D6,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_TVDPLL2,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_IMGPLL,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MMPLL_D9
 -};
 -
--static const int int_32k_parents[] = {
+-static const int pwm_parents[] = {
 -	CLK_TOP_CLK32K,
--	CLK_TOP_CLK26M_D793
--};
--
--static const int apll1_src_parents[] = {
--	CLK_TOP_APLL1,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL
--};
--
--static const int apll2_src_parents[] = {
--	CLK_TOP_APLL2,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL
--};
--
--static const int faud_intbus_parents[] = {
--	CLK_TOP_CLK_NULL,
 -	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D11,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_RG_APLL2_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M_D2,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_RG_APLL1_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D20
+-	CLK_TOP_UNIVPLL_D4_D8,
+-	CLK_TOP_UNIVPLL_D6_D4
 -};
 -
--static const int axibus_parents[] = {
--	CLK_TOP_CLK_NULL,
+-static const int mcupm_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_MAINPLL_D11,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D12,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M_D2,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_APLL2_D8
+-	CLK_TOP_MAINPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D7_D4
 -};
 -
--static const int hapll1_parents[] = {
+-static const int spmi_p_mst_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_APLL1_SRC_SEL,
--	CLK_TOP_RG_APLL1_D2,
--	CLK_TOP_RG_APLL1_D4,
--	CLK_TOP_RG_APLL1_D8,
--	CLK_TOP_RG_APLL1_D16,
--	CLK_TOP_CLK26M_D2,
--	CLK_TOP_CLK26M_D8,
--	CLK_TOP_RG_APLL1_D3
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_ULPOSC1_D8,
+-	CLK_TOP_ULPOSC1_D10,
+-	CLK_TOP_ULPOSC1_D16,
+-	CLK_TOP_ULPOSC1_D7,
+-	CLK_TOP_CLK32K,
+-	CLK_TOP_MAINPLL_D7_D8,
+-	CLK_TOP_MAINPLL_D6_D8,
+-	CLK_TOP_MAINPLL_D5_D8
 -};
 -
--static const int hapll2_parents[] = {
+-static const int spmi_m_mst_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_APLL2_SRC_SEL,
--	CLK_TOP_RG_APLL2_D2,
--	CLK_TOP_RG_APLL2_D4,
--	CLK_TOP_RG_APLL2_D8,
--	CLK_TOP_RG_APLL2_D16,
--	CLK_TOP_CLK26M_D2,
--	CLK_TOP_CLK26M_D4,
--	CLK_TOP_RG_APLL2_D3
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_ULPOSC1_D8,
+-	CLK_TOP_ULPOSC1_D10,
+-	CLK_TOP_ULPOSC1_D16,
+-	CLK_TOP_ULPOSC1_D7,
+-	CLK_TOP_CLK32K,
+-	CLK_TOP_MAINPLL_D7_D8,
+-	CLK_TOP_MAINPLL_D6_D8,
+-	CLK_TOP_MAINPLL_D5_D8
 -};
 -
--static const int spinfi_parents[] = {
+-static const int dvfsrc_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D24,
--	CLK_TOP_UNIVPLL_D20,
--	CLK_TOP_MAINPLL_D22,
--	CLK_TOP_UNIVPLL_D16,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_UNIVPLL_D12,
--	CLK_TOP_UNIVPLL_D10,
--	CLK_TOP_MAINPLL_D11
+-	CLK_TOP_ULPOSC1_D10,
+-	CLK_TOP_UNIVPLL_D6_D8,
+-	CLK_TOP_MSDCPLL_D16
 -};
 -
--static const int msdc0_parents[] = {
--	CLK_TOP_CLK_NULL,
+-static const int tl_parents[] = {
 -	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D5_D4,
+-	CLK_TOP_MAINPLL_D4_D4
+-};
+-
+-static const int aes_msdcfde_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_MAINPLL_D4_D4,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D6
+-};
+-
+-static const int dsi_occ_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D4_D2
+-};
+-
+-static const int wpe_vpp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MMPLL_D6_D2,
+-	CLK_TOP_UNIVPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_UNIVPLL_D4_D2,
+-	CLK_TOP_MMPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_MMPLL_D7,
 -	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D12,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_APMIXED_MMPLL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MMPLL_D2
+-	CLK_TOP_MAINPLL_D5,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_TVDPLL1,
+-	CLK_TOP_UNIVPLL_D4
 -};
 -
--static const int msdc0_clk50_parents[] = {
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
+-static const int hdcp_parents[] = {
 -	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D6
--};
--
--static const int msdc2_parents[] = {
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M,
--	CLK_TOP_UNIVPLL_D6,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_UNIVPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D16,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MMPLL_D2,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_MAINPLL_D12,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_APMIXED_MMPLL
--};
--
--static const int disp_dpi_ck_parents[] = {
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK26M,
--	CLK_TOP_TVDPLL_D2,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_TVDPLL_D4,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_TVDPLL_D8,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_CLK_NULL,
--	CLK_TOP_TVDPLL_D16
-+static const struct mtk_parent uart0_parents[] = {
+-	CLK_TOP_UNIVPLL_D4_D8,
+-	CLK_TOP_MAINPLL_D5_D8,
+-	CLK_TOP_UNIVPLL_D6_D4
++
++static const struct mtk_parent dpi_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D2),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D2),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D4),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D4),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D8),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D8),
++	TOP_PARENT(CLK_TOP_TVDPLL1_D16),
++	TOP_PARENT(CLK_TOP_TVDPLL2_D16),
 +};
 +
-+static const struct mtk_parent emi1x_parents[] = {
++static const struct mtk_parent disp_pwm0_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_DMPLL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D2),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D4),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D16),
++	TOP_PARENT(CLK_TOP_ETHPLL_D4),
 +};
 +
-+static const struct mtk_parent emi_ddrphy_parents[] = {
-+	TOP_PARENT(CLK_TOP_EMI1X_SEL),
-+	TOP_PARENT(CLK_TOP_EMI1X_SEL),
-+};
-+
-+static const struct mtk_parent msdc1_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++static const struct mtk_parent disp_pwm1_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MMPLL_D2),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D12),
-+};
-+
-+static const struct mtk_parent pwm_mm_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+};
-+
-+static const struct mtk_parent pmicspi_parents[] = {
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D20),
-+	TOP_PARENT(CLK_TOP_USB20_48M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D16),
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+};
-+
-+static const struct mtk_parent nfi2x_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D4),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D5),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D6),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D8),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D10),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D12),
-+};
-+
-+static const struct mtk_parent ddrphycfg_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+};
-+
-+static const struct mtk_parent smi_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D14),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D2),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D4),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D16),
 +};
 +
 +static const struct mtk_parent usb_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D16),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D20),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
 +};
 +
-+static const struct mtk_parent spinor_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
++static const struct mtk_parent ssusb_xhci_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D40),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D20),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D20),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
 +};
 +
-+static const struct mtk_parent eth_parents[] = {
++static const struct mtk_parent usb_2p_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D40),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D20),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D20),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
 +};
 +
-+static const struct mtk_parent aud1_parents[] = {
++static const struct mtk_parent ssusb_xhci_2p_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_APLL1_SRC_SEL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
 +};
 +
-+static const struct mtk_parent aud2_parents[] = {
++static const struct mtk_parent usb_3p_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_APLL2_SRC_SEL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++};
++
++static const struct mtk_parent ssusb_xhci_3p_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
 +};
 +
 +static const struct mtk_parent i2c_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_USB20_48M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
 +};
 +
-+static const struct mtk_parent aud_i2s0_m_parents[] = {
-+	TOP_PARENT(CLK_TOP_AUD1),
-+	TOP_PARENT(CLK_TOP_AUD2),
-+};
-+
-+static const struct mtk_parent aud_spdifin_parents[] = {
++static const struct mtk_parent seninf_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D2),
-+	TOP_PARENT(CLK_TOP_TVDPLL),
-+};
-+
-+static const struct mtk_parent dbg_atclk_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D5),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
 +};
 +
-+static const struct mtk_parent png_sys_parents[] = {
++static const struct mtk_parent seninf1_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D6),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
-+};
-+
-+static const struct mtk_parent sej_13m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+};
-+
-+static const struct mtk_parent imgrz_sys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D6),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+};
-+
-+static const struct mtk_parent graph_eclk_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D6),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D16),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D8),
-+};
-+
-+static const struct mtk_parent fdbi_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D12),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D14),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D2),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D4),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D8),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D16),
-+};
-+
-+static const struct mtk_parent faudio_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
-+	TOP_PARENT(CLK_TOP_APLL1_D4),
-+	TOP_PARENT(CLK_TOP_APLL2_D4),
-+};
-+
-+static const struct mtk_parent fa2sys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_APLL1_SRC_SEL),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D2),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D4),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D8),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D16),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D3),
-+};
-+
-+static const struct mtk_parent fa1sys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_APLL2_SRC_SEL),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D2),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D4),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D8),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D16),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D3),
-+};
-+
-+static const struct mtk_parent fasm_m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+};
-+
-+static const struct mtk_parent fecc_ck_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D3),
-+};
-+
-+static const struct mtk_parent pe2_mac_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D11),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+};
-+
-+static const struct mtk_parent cmsys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D5),
-+	TOP_PARENT(CLK_TOP_APLL2),
-+	TOP_PARENT(CLK_TOP_APLL2_D2),
-+	TOP_PARENT(CLK_TOP_APLL2_D4),
-+	TOP_PARENT(CLK_TOP_APLL2_D3),
 +};
 +
 +static const struct mtk_parent gcpu_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D4),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D5),
 +	TOP_PARENT(CLK_TOP_MAINPLL_D6),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D7),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
 +};
 +
-+static const struct mtk_parent spis_ck_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++static const struct mtk_parent venc_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D9),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5),
++};
++
++static const struct mtk_parent vdec_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MMPLL_D6),
 +	TOP_PARENT(CLK_TOP_MAINPLL_D4),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++	TOP_PARENT(CLK_TOP_TVDPLL2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_IMGPLL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D9),
 +};
 +
-+static const struct mtk_parent apll1_ref_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+};
-+
-+static const struct mtk_parent int_32k_parents[] = {
++static const struct mtk_parent pwm_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK32K),
-+	TOP_PARENT(CLK_TOP_CLK26M_D793),
-+};
-+
-+static const struct mtk_parent apll1_src_parents[] = {
-+	TOP_PARENT(CLK_TOP_APLL1),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+};
-+
-+static const struct mtk_parent apll2_src_parents[] = {
-+	TOP_PARENT(CLK_TOP_APLL2),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+};
-+
-+static const struct mtk_parent faud_intbus_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D11),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D20),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
 +};
 +
-+static const struct mtk_parent axibus_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++static const struct mtk_parent mcupm_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D11),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D12),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_APLL2_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D4),
 +};
 +
-+static const struct mtk_parent hapll1_parents[] = {
++static const struct mtk_parent spmi_p_mst_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_APLL1_SRC_SEL),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D2),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D4),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D8),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D16),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+	TOP_PARENT(CLK_TOP_CLK26M_D8),
-+	TOP_PARENT(CLK_TOP_RG_APLL1_D3),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D8),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D10),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D16),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D7),
++	TOP_PARENT(CLK_TOP_CLK32K),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D8),
 +};
 +
-+static const struct mtk_parent hapll2_parents[] = {
++static const struct mtk_parent spmi_m_mst_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_APLL2_SRC_SEL),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D2),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D4),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D8),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D16),
-+	TOP_PARENT(CLK_TOP_CLK26M_D2),
-+	TOP_PARENT(CLK_TOP_CLK26M_D4),
-+	TOP_PARENT(CLK_TOP_RG_APLL2_D3),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D8),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D10),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D16),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D7),
++	TOP_PARENT(CLK_TOP_CLK32K),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D8),
 +};
 +
-+static const struct mtk_parent spinfi_parents[] = {
++static const struct mtk_parent dvfsrc_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D24),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D20),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D22),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D16),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D12),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D10),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D11),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D10),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
++	TOP_PARENT(CLK_TOP_MSDCPLL_D16),
 +};
 +
-+static const struct mtk_parent msdc0_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++static const struct mtk_parent tl_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D12),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_APMIXED_MMPLL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MMPLL_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
 +};
 +
-+static const struct mtk_parent msdc0_clk50_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++static const struct mtk_parent aes_msdcfde_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
 +	TOP_PARENT(CLK_TOP_MAINPLL_D6),
-+};
-+
-+static const struct mtk_parent msdc2_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D16),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MMPLL_D2),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_MAINPLL_D12),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_APMIXED_MMPLL),
 +};
 +
-+static const struct mtk_parent disp_dpi_ck_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
++static const struct mtk_parent dsi_occ_parents[] = {
 +	TOP_PARENT(CLK_TOP_CLK26M),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D2),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D4),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D8),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_CLK_NULL),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D16),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++};
++
++static const struct mtk_parent wpe_vpp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MMPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MMPLL_D7),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_TVDPLL1),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++};
++
++static const struct mtk_parent hdcp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D8),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
+ };
+ 
+-static const int hdcp_24m_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_192M_D4,
+-	CLK_TOP_UNIVPLL_192M_D8,
+-	CLK_TOP_UNIVPLL_D6_D8
++static const struct mtk_parent hdcp_24m_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_192M_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
+ };
+ 
+-static const int hdmi_apb_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_MSDCPLL_D2
++static const struct mtk_parent hdmi_apb_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
+ };
+ 
+-static const int snps_eth_250m_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_ETHPLL_D2
++static const struct mtk_parent snps_eth_250m_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_ETHPLL_D2),
+ };
+ 
+-static const int snps_eth_62p4m_ptp_parents[] = {
+-	CLK_TOP_APLL2_D3,
+-	CLK_TOP_APLL1_D3,
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_ETHPLL_D8
+-};
+-
+-static const int snps_eth_50m_rmii_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_ETHPLL_D10
++static const struct mtk_parent snps_eth_62p4m_ptp_parents[] = {
++	TOP_PARENT(CLK_TOP_APLL2_D3),
++	TOP_PARENT(CLK_TOP_APLL1_D3),
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_ETHPLL_D8),
++};
++
++static const struct mtk_parent snps_eth_50m_rmii_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_ETHPLL_D10),
+ };
+ 
+-static const int adsp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_UNIVPLL_D4_D4,
+-	CLK_TOP_UNIVPLL_D4,
+-	CLK_TOP_ULPOSC1_D2,
+-	CLK_TOP_ULPOSC1,
+-	CLK_TOP_ADSPPLL,
+-	CLK_TOP_ADSPPLL_D2,
+-	CLK_TOP_ADSPPLL_D4,
+-	CLK_TOP_ADSPPLL_D8
++static const struct mtk_parent adsp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D4),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D2),
++	TOP_PARENT(CLK_TOP_ULPOSC1),
++	TOP_PARENT(CLK_TOP_ADSPPLL),
++	TOP_PARENT(CLK_TOP_ADSPPLL_D2),
++	TOP_PARENT(CLK_TOP_ADSPPLL_D4),
++	TOP_PARENT(CLK_TOP_ADSPPLL_D8),
+ };
+ 
+-static const int audio_local_bus_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_MAINPLL_D4_D4,
+-	CLK_TOP_MAINPLL_D7_D2,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D7,
+-	CLK_TOP_MAINPLL_D4,
+-	CLK_TOP_UNIVPLL_D6,
+-	CLK_TOP_ULPOSC1,
+-	CLK_TOP_ULPOSC1_D4,
+-	CLK_TOP_ULPOSC1_D2
++static const struct mtk_parent audio_local_bus_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
++	TOP_PARENT(CLK_TOP_ULPOSC1),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D4),
++	TOP_PARENT(CLK_TOP_ULPOSC1_D2),
+ };
+ 
+-static const int asm_h_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D5_D2
++static const struct mtk_parent asm_h_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
+ };
+ 
+-static const int asm_l_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_UNIVPLL_D6_D4,
+-	CLK_TOP_UNIVPLL_D6_D2,
+-	CLK_TOP_MAINPLL_D5_D2
++static const struct mtk_parent asm_l_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
+ };
+ 
+-static const int apll1_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1_D4
++static const struct mtk_parent apll1_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1_D4),
+ };
+ 
+-static const int apll2_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL2_D4
++static const struct mtk_parent apll2_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL2_D4),
+ };
+ 
+-static const int apll3_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL3_D4
++static const struct mtk_parent apll3_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL3_D4),
+ };
+ 
+-static const int apll4_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL4_D4
++static const struct mtk_parent apll4_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL4_D4),
+ };
+ 
+-static const int apll5_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL5_D4
++static const struct mtk_parent apll5_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL5_D4),
+ };
+ 
+-static const int i2so1_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2,
+-	CLK_TOP_APLL3,
+-	CLK_TOP_APLL4,
+-	CLK_TOP_APLL5
++static const struct mtk_parent i2so1_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
++	TOP_PARENT(CLK_TOP_APLL3),
++	TOP_PARENT(CLK_TOP_APLL4),
++	TOP_PARENT(CLK_TOP_APLL5),
+ };
+ 
+-static const int i2so2_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2,
+-	CLK_TOP_APLL3,
+-	CLK_TOP_APLL4,
+-	CLK_TOP_APLL5
++static const struct mtk_parent i2so2_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
++	TOP_PARENT(CLK_TOP_APLL3),
++	TOP_PARENT(CLK_TOP_APLL4),
++	TOP_PARENT(CLK_TOP_APLL5),
+ };
+ 
+-static const int i2si1_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2,
+-	CLK_TOP_APLL3,
+-	CLK_TOP_APLL4,
+-	CLK_TOP_APLL5
++static const struct mtk_parent i2si1_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
++	TOP_PARENT(CLK_TOP_APLL3),
++	TOP_PARENT(CLK_TOP_APLL4),
++	TOP_PARENT(CLK_TOP_APLL5),
+ };
+ 
+-static const int i2si2_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2,
+-	CLK_TOP_APLL3,
+-	CLK_TOP_APLL4,
+-	CLK_TOP_APLL5
++static const struct mtk_parent i2si2_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
++	TOP_PARENT(CLK_TOP_APLL3),
++	TOP_PARENT(CLK_TOP_APLL4),
++	TOP_PARENT(CLK_TOP_APLL5),
+ };
+ 
+-static const int dptx_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2,
+-	CLK_TOP_APLL3,
+-	CLK_TOP_APLL4,
+-	CLK_TOP_APLL5
++static const struct mtk_parent dptx_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
++	TOP_PARENT(CLK_TOP_APLL3),
++	TOP_PARENT(CLK_TOP_APLL4),
++	TOP_PARENT(CLK_TOP_APLL5),
+ };
+ 
+-static const int aud_iec_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1,
+-	CLK_TOP_APLL2,
+-	CLK_TOP_APLL3,
+-	CLK_TOP_APLL4,
+-	CLK_TOP_APLL5
++static const struct mtk_parent aud_iec_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1),
++	TOP_PARENT(CLK_TOP_APLL2),
++	TOP_PARENT(CLK_TOP_APLL3),
++	TOP_PARENT(CLK_TOP_APLL4),
++	TOP_PARENT(CLK_TOP_APLL5),
+ };
+ 
+-static const int a1sys_hp_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL1_D4
++static const struct mtk_parent a1sys_hp_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL1_D4),
+ };
+ 
+-static const int a2sys_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL2_D4
++static const struct mtk_parent a2sys_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL2_D4),
+ };
+ 
+-static const int a3sys_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL3_D4,
+-	CLK_TOP_APLL4_D4,
+-	CLK_TOP_APLL5_D4
++static const struct mtk_parent a3sys_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL3_D4),
++	TOP_PARENT(CLK_TOP_APLL4_D4),
++	TOP_PARENT(CLK_TOP_APLL5_D4),
+ };
+ 
+-static const int a4sys_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_APLL3_D4,
+-	CLK_TOP_APLL4_D4,
+-	CLK_TOP_APLL5_D4
++static const struct mtk_parent a4sys_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_APLL3_D4),
++	TOP_PARENT(CLK_TOP_APLL4_D4),
++	TOP_PARENT(CLK_TOP_APLL5_D4),
+ };
+ 
+-static const int ecc_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_MAINPLL_D4_D4,
+-	CLK_TOP_MAINPLL_D5_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_MAINPLL_D6,
+-	CLK_TOP_UNIVPLL_D6
++static const struct mtk_parent ecc_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D4),
++	TOP_PARENT(CLK_TOP_MAINPLL_D5_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D6),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6),
+ };
+ 
+-static const int spinor_parents[] = {
+-	CLK_TOP_CLK26M,
+-	CLK_TOP_CLK13M,
+-	CLK_TOP_MAINPLL_D7_D8,
+-	CLK_TOP_UNIVPLL_D6_D8
++static const struct mtk_parent spinor_parents[] = {
++	TOP_PARENT(CLK_TOP_CLK26M),
++	TOP_PARENT(CLK_TOP_CLK13M),
++	TOP_PARENT(CLK_TOP_MAINPLL_D7_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D6_D8),
+ };
+ 
+-static const int ulposc_parents[] = {
+-	CLK_TOP_ULPOSC1,
+-	CLK_TOP_ETHPLL_D2,
+-	CLK_TOP_MAINPLL_D4_D2,
+-	CLK_TOP_ETHPLL_D10
++static const struct mtk_parent ulposc_parents[] = {
++	TOP_PARENT(CLK_TOP_ULPOSC1),
++	TOP_PARENT(CLK_TOP_ETHPLL_D2),
++	TOP_PARENT(CLK_TOP_MAINPLL_D4_D2),
++	TOP_PARENT(CLK_TOP_ETHPLL_D10),
+ };
+ 
+-static const int srck_parents[] = {
+-	CLK_TOP_ULPOSC1_D10,
+-	CLK_TOP_CLK26M
++static const struct mtk_parent srck_parents[] = {
++	TOP_PARENT(CLK_TOP_ULPOSC1_D10),
++	TOP_PARENT(CLK_TOP_CLK26M),
  };
  
  static const struct mtk_composite top_muxes[] = {
- 	/* CLK_MUX_SEL0 */
--	MUX(CLK_TOP_UART0_SEL, uart0_parents, 0x000, 0, 1),
--	MUX(CLK_TOP_EMI1X_SEL, emi1x_parents, 0x000, 1, 1),
--	MUX(CLK_TOP_EMI_DDRPHY_SEL, emi_ddrphy_parents, 0x000, 2, 1),
--	MUX(CLK_TOP_MSDC1_SEL, msdc1_parents, 0x000, 4, 8),
--	MUX(CLK_TOP_PWM_MM_SEL, pwm_mm_parents, 0x000, 18, 1),
--	MUX(CLK_TOP_UART1_SEL, uart0_parents, 0x000, 19, 1),
--	MUX(CLK_TOP_SPM_52M_SEL, uart0_parents, 0x000, 22, 1),
--	MUX(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x000, 23, 3),
-+	MUX_MIXED(CLK_TOP_UART0_SEL, uart0_parents, 0x000, 0, 1),
-+	MUX_MIXED(CLK_TOP_EMI1X_SEL, emi1x_parents, 0x000, 1, 1),
-+	MUX_MIXED(CLK_TOP_EMI_DDRPHY_SEL, emi_ddrphy_parents, 0x000, 2, 1),
-+	MUX_MIXED(CLK_TOP_MSDC1_SEL, msdc1_parents, 0x000, 4, 8),
-+	MUX_MIXED(CLK_TOP_PWM_MM_SEL, pwm_mm_parents, 0x000, 18, 1),
-+	MUX_MIXED(CLK_TOP_UART1_SEL, uart0_parents, 0x000, 19, 1),
-+	MUX_MIXED(CLK_TOP_SPM_52M_SEL, uart0_parents, 0x000, 22, 1),
-+	MUX_MIXED(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x000, 23, 3),
- 	/* CLK_MUX_SEL1 */
--	MUX(CLK_TOP_NFI2X_SEL, nfi2x_parents, 0x004, 0, 3),
--	MUX(CLK_TOP_DDRPHYCFG_SEL, ddrphycfg_parents, 0x004, 15, 1),
--	MUX(CLK_TOP_SMI_SEL, smi_parents, 0x004, 16, 4),
--	MUX(CLK_TOP_USB_SEL, usb_parents, 0x004, 20, 3),
-+	MUX_MIXED(CLK_TOP_NFI2X_SEL, nfi2x_parents, 0x004, 0, 3),
-+	MUX_MIXED(CLK_TOP_DDRPHYCFG_SEL, ddrphycfg_parents, 0x004, 15, 1),
-+	MUX_MIXED(CLK_TOP_SMI_SEL, smi_parents, 0x004, 16, 4),
-+	MUX_MIXED(CLK_TOP_USB_SEL, usb_parents, 0x004, 20, 3),
- 	/* CLK_MUX_SEL8 */
--	MUX(CLK_TOP_SPINOR_SEL, spinor_parents, 0x040, 0, 3),
--	MUX(CLK_TOP_ETH_SEL, eth_parents, 0x040, 6, 3),
--	MUX(CLK_TOP_AUD1_SEL, aud1_parents, 0x040, 22, 1),
--	MUX(CLK_TOP_AUD2_SEL, aud2_parents, 0x040, 23, 1),
--	MUX(CLK_TOP_I2C_SEL, i2c_parents, 0x040, 28, 3),
-+	MUX_MIXED(CLK_TOP_SPINOR_SEL, spinor_parents, 0x040, 0, 3),
-+	MUX_MIXED(CLK_TOP_ETH_SEL, eth_parents, 0x040, 6, 3),
-+	MUX_MIXED(CLK_TOP_AUD1_SEL, aud1_parents, 0x040, 22, 1),
-+	MUX_MIXED(CLK_TOP_AUD2_SEL, aud2_parents, 0x040, 23, 1),
-+	MUX_MIXED(CLK_TOP_I2C_SEL, i2c_parents, 0x040, 28, 3),
- 	/* CLK_SEL_9 */
--	MUX(CLK_TOP_AUD_I2S0_M_SEL, aud_i2s0_m_parents, 0x044, 12, 1),
--	MUX(CLK_TOP_AUD_I2S3_M_SEL, aud_i2s0_m_parents, 0x044, 15, 1),
--	MUX(CLK_TOP_AUD_I2S4_M_SEL, aud_i2s0_m_parents, 0x044, 16, 1),
--	MUX(CLK_TOP_AUD_I2S6_M_SEL, aud_i2s0_m_parents, 0x044, 18, 1),
-+	MUX_MIXED(CLK_TOP_AUD_I2S0_M_SEL, aud_i2s0_m_parents, 0x044, 12, 1),
-+	MUX_MIXED(CLK_TOP_AUD_I2S3_M_SEL, aud_i2s0_m_parents, 0x044, 15, 1),
-+	MUX_MIXED(CLK_TOP_AUD_I2S4_M_SEL, aud_i2s0_m_parents, 0x044, 16, 1),
-+	MUX_MIXED(CLK_TOP_AUD_I2S6_M_SEL, aud_i2s0_m_parents, 0x044, 18, 1),
- 	/* CLK_MUX_SEL13 */
--	MUX(CLK_TOP_PWM_SEL, pwm_mm_parents, 0x07c, 0, 1),
--	MUX(CLK_TOP_AUD_SPDIFIN_SEL, aud_spdifin_parents, 0x07c, 2, 2),
--	MUX(CLK_TOP_UART2_SEL, uart0_parents, 0x07c, 4, 1),
--	MUX(CLK_TOP_DBG_ATCLK_SEL, dbg_atclk_parents, 0x07c, 7, 3),
--	MUX(CLK_TOP_PNG_SYS_SEL, png_sys_parents, 0x07c, 16, 3),
--	MUX(CLK_TOP_SEJ_13M_SEL, sej_13m_parents, 0x07c, 22, 1),
-+	MUX_MIXED(CLK_TOP_PWM_SEL, pwm_mm_parents, 0x07c, 0, 1),
-+	MUX_MIXED(CLK_TOP_AUD_SPDIFIN_SEL, aud_spdifin_parents, 0x07c, 2, 2),
-+	MUX_MIXED(CLK_TOP_UART2_SEL, uart0_parents, 0x07c, 4, 1),
-+	MUX_MIXED(CLK_TOP_DBG_ATCLK_SEL, dbg_atclk_parents, 0x07c, 7, 3),
-+	MUX_MIXED(CLK_TOP_PNG_SYS_SEL, png_sys_parents, 0x07c, 16, 3),
-+	MUX_MIXED(CLK_TOP_SEJ_13M_SEL, sej_13m_parents, 0x07c, 22, 1),
- 	/* CLK_MUX_SEL14 */
--	MUX(CLK_TOP_IMGRZ_SYS_SEL, imgrz_sys_parents, 0xc0, 0, 3),
--	MUX(CLK_TOP_GRAPH_ECLK_SEL, graph_eclk_parents, 0xc0, 8, 4),
--	MUX(CLK_TOP_FDBI_SEL, fdbi_parents, 0xc0, 12, 4),
--	MUX(CLK_TOP_FAUDIO_SEL, faudio_parents, 0xc0, 16, 2),
--	MUX(CLK_TOP_FA2SYS_SEL, fa2sys_parents, 0xc0, 24, 3),
--	MUX(CLK_TOP_FA1SYS_SEL, fa1sys_parents, 0xc0, 27, 3),
--	MUX(CLK_TOP_FASM_M_SEL, fasm_m_parents, 0xc0, 30, 2),
-+	MUX_MIXED(CLK_TOP_IMGRZ_SYS_SEL, imgrz_sys_parents, 0xc0, 0, 3),
-+	MUX_MIXED(CLK_TOP_GRAPH_ECLK_SEL, graph_eclk_parents, 0xc0, 8, 4),
-+	MUX_MIXED(CLK_TOP_FDBI_SEL, fdbi_parents, 0xc0, 12, 4),
-+	MUX_MIXED(CLK_TOP_FAUDIO_SEL, faudio_parents, 0xc0, 16, 2),
-+	MUX_MIXED(CLK_TOP_FA2SYS_SEL, fa2sys_parents, 0xc0, 24, 3),
-+	MUX_MIXED(CLK_TOP_FA1SYS_SEL, fa1sys_parents, 0xc0, 27, 3),
-+	MUX_MIXED(CLK_TOP_FASM_M_SEL, fasm_m_parents, 0xc0, 30, 2),
- 	/* CLK_MUX_SEL15 */
--	MUX(CLK_TOP_FASM_H_SEL, fasm_m_parents, 0xC4, 0, 2),
--	MUX(CLK_TOP_FASM_L_SEL, fasm_m_parents, 0xC4, 2, 2),
--	MUX(CLK_TOP_FECC_CK_SEL, fecc_ck_parents, 0xC4, 18, 6),
--	MUX(CLK_TOP_PE2_MAC_SEL, pe2_mac_parents, 0xC4, 24, 3),
--	MUX(CLK_TOP_CMSYS_SEL, cmsys_parents, 0xC4, 28, 3),
-+	MUX_MIXED(CLK_TOP_FASM_H_SEL, fasm_m_parents, 0xC4, 0, 2),
-+	MUX_MIXED(CLK_TOP_FASM_L_SEL, fasm_m_parents, 0xC4, 2, 2),
-+	MUX_MIXED(CLK_TOP_FECC_CK_SEL, fecc_ck_parents, 0xC4, 18, 6),
-+	MUX_MIXED(CLK_TOP_PE2_MAC_SEL, pe2_mac_parents, 0xC4, 24, 3),
-+	MUX_MIXED(CLK_TOP_CMSYS_SEL, cmsys_parents, 0xC4, 28, 3),
- 	/* CLK_MUX_SEL16 */
--	MUX(CLK_TOP_GCPU_SEL, gcpu_parents, 0xC8, 0, 3),
--	MUX(CLK_TOP_SPIS_CK_SEL, spis_ck_parents, 0xC8, 4, 8),
-+	MUX_MIXED(CLK_TOP_GCPU_SEL, gcpu_parents, 0xC8, 0, 3),
-+	MUX_MIXED(CLK_TOP_SPIS_CK_SEL, spis_ck_parents, 0xC8, 4, 8),
- 	/* CLK_MUX_SEL17 */
--	MUX(CLK_TOP_APLL1_REF_SEL, apll1_ref_parents, 0xCC, 6, 3),
--	MUX(CLK_TOP_APLL2_REF_SEL, apll1_ref_parents, 0xCC, 9, 3),
--	MUX(CLK_TOP_INT_32K_SEL, int_32k_parents, 0xCC, 12, 1),
--	MUX(CLK_TOP_APLL1_SRC_SEL, apll1_src_parents, 0xCC, 13, 2),
--	MUX(CLK_TOP_APLL2_SRC_SEL, apll2_src_parents, 0xCC, 15, 2),
-+	MUX_MIXED(CLK_TOP_APLL1_REF_SEL, apll1_ref_parents, 0xCC, 6, 3),
-+	MUX_MIXED(CLK_TOP_APLL2_REF_SEL, apll1_ref_parents, 0xCC, 9, 3),
-+	MUX_MIXED(CLK_TOP_INT_32K_SEL, int_32k_parents, 0xCC, 12, 1),
-+	MUX_MIXED(CLK_TOP_APLL1_SRC_SEL, apll1_src_parents, 0xCC, 13, 2),
-+	MUX_MIXED(CLK_TOP_APLL2_SRC_SEL, apll2_src_parents, 0xCC, 15, 2),
- 	/* CLK_MUX_SEL19 */
--	MUX(CLK_TOP_FAUD_INTBUS_SEL, faud_intbus_parents, 0xD4, 8, 8),
--	MUX(CLK_TOP_AXIBUS_SEL, axibus_parents, 0xD4, 24, 8),
-+	MUX_MIXED(CLK_TOP_FAUD_INTBUS_SEL, faud_intbus_parents, 0xD4, 8, 8),
-+	MUX_MIXED(CLK_TOP_AXIBUS_SEL, axibus_parents, 0xD4, 24, 8),
- 	/* CLK_MUX_SEL21 */
--	MUX(CLK_TOP_HAPLL1_SEL, hapll1_parents, 0xDC, 0, 4),
--	MUX(CLK_TOP_HAPLL2_SEL, hapll2_parents, 0xDC, 4, 4),
--	MUX(CLK_TOP_SPINFI_SEL, spinfi_parents, 0xDC, 8, 4),
-+	MUX_MIXED(CLK_TOP_HAPLL1_SEL, hapll1_parents, 0xDC, 0, 4),
-+	MUX_MIXED(CLK_TOP_HAPLL2_SEL, hapll2_parents, 0xDC, 4, 4),
-+	MUX_MIXED(CLK_TOP_SPINFI_SEL, spinfi_parents, 0xDC, 8, 4),
- 	/* CLK_MUX_SEL22 */
--	MUX(CLK_TOP_MSDC0_SEL, msdc0_parents, 0xF4, 0, 8),
--	MUX(CLK_TOP_MSDC0_CLK50_SEL, msdc0_clk50_parents, 0xF4, 8, 6),
--	MUX(CLK_TOP_MSDC2_SEL, msdc2_parents, 0xF4, 15, 8),
--	MUX(CLK_TOP_MSDC2_CLK50_SEL, msdc0_clk50_parents, 0xF4, 23, 6),
-+	MUX_MIXED(CLK_TOP_MSDC0_SEL, msdc0_parents, 0xF4, 0, 8),
-+	MUX_MIXED(CLK_TOP_MSDC0_CLK50_SEL, msdc0_clk50_parents, 0xF4, 8, 6),
-+	MUX_MIXED(CLK_TOP_MSDC2_SEL, msdc2_parents, 0xF4, 15, 8),
-+	MUX_MIXED(CLK_TOP_MSDC2_CLK50_SEL, msdc0_clk50_parents, 0xF4, 23, 6),
- 	/* CLK_MUX_SEL23 */
--	MUX(CLK_TOP_DISP_DPI_CK_SEL, disp_dpi_ck_parents, 0xF8, 0, 6),
--	MUX(CLK_TOP_SPI1_SEL, spis_ck_parents, 0xF8, 6, 8),
--	MUX(CLK_TOP_SPI2_SEL, spis_ck_parents, 0xF8, 14, 8),
--	MUX(CLK_TOP_SPI3_SEL, spis_ck_parents, 0xF8, 22, 8),
-+	MUX_MIXED(CLK_TOP_DISP_DPI_CK_SEL, disp_dpi_ck_parents, 0xF8, 0, 6),
-+	MUX_MIXED(CLK_TOP_SPI1_SEL, spis_ck_parents, 0xF8, 6, 8),
-+	MUX_MIXED(CLK_TOP_SPI2_SEL, spis_ck_parents, 0xF8, 14, 8),
-+	MUX_MIXED(CLK_TOP_SPI3_SEL, spis_ck_parents, 0xF8, 22, 8),
+ 	/* CLK_CFG_0 */
+-	MUX_GATE(CLK_TOP_AXI, axi_parents, 0x020, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_SPM, spm_parents, 0x020, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_SCP, scp_parents, 0x020, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_BUS_AXIMEM, bus_aximem_parents, 0x020, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_AXI, axi_parents, 0x020, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_SPM, spm_parents, 0x020, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_SCP, scp_parents, 0x020, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_BUS_AXIMEM, bus_aximem_parents, 0x020, 24, 4, 31),
+ 	/* CLK_CFG_1 */
+-	MUX_GATE(CLK_TOP_VPP, vpp_parents, 0x02C, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_ETHDR, ethdr_parents, 0x02C, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_IPE, ipe_parents, 0x02C, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_CAM, cam_parents, 0x02C, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_VPP, vpp_parents, 0x02C, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_ETHDR, ethdr_parents, 0x02C, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_IPE, ipe_parents, 0x02C, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_CAM, cam_parents, 0x02C, 24, 4, 31),
+ 	/* CLK_CFG_2 */
+-	MUX_GATE(CLK_TOP_CCU, ccu_parents, 0x038, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_CCU_AHB, ccu_ahb_parents, 0x038, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_IMG, img_parents, 0x038, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_CAMTM, camtm_parents, 0x038, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_CCU, ccu_parents, 0x038, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_CCU_AHB, ccu_ahb_parents, 0x038, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_IMG, img_parents, 0x038, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_CAMTM, camtm_parents, 0x038, 24, 4, 31),
+ 	/* CLK_CFG_3 */
+-	MUX_GATE(CLK_TOP_DSP, dsp_parents, 0x044, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_DSP1, dsp1_parents, 0x044, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_DSP2, dsp2_parents, 0x044, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_DSP3, dsp3_parents, 0x044, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_DSP, dsp_parents, 0x044, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_DSP1, dsp1_parents, 0x044, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_DSP2, dsp2_parents, 0x044, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_DSP3, dsp3_parents, 0x044, 24, 4, 31),
+ 	/* CLK_CFG_4 */
+-	MUX_GATE(CLK_TOP_DSP4, dsp4_parents, 0x050, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_DSP5, dsp5_parents, 0x050, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_DSP6, dsp6_parents, 0x050, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_DSP7, dsp7_parents, 0x050, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_DSP4, dsp4_parents, 0x050, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_DSP5, dsp5_parents, 0x050, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_DSP6, dsp6_parents, 0x050, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_DSP7, dsp7_parents, 0x050, 24, 4, 31),
+ 	/* CLK_CFG_5 */
+-	MUX_GATE(CLK_TOP_MFG_CORE_TMP, mfg_core_tmp_parents, 0x05C, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_CAMTG, camtg_parents, 0x05C, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_CAMTG2, camtg2_parents, 0x05C, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_CAMTG3, camtg3_parents, 0x05C, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_MFG_CORE_TMP, mfg_core_tmp_parents, 0x05C, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_CAMTG, camtg_parents, 0x05C, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_CAMTG2, camtg2_parents, 0x05C, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_CAMTG3, camtg3_parents, 0x05C, 24, 4, 31),
+ 	/* CLK_CFG_6 */
+-	MUX_GATE(CLK_TOP_UART, uart_parents, 0x068, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_SPI, spi_parents, 0x068, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_MSDC50_0_HCLK, msdc5hclk_parents, 0x068, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_MSDC50_0, msdc50_0_parents, 0x068, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_UART, uart_parents, 0x068, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_SPI, spi_parents, 0x068, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_MSDC50_0_HCLK, msdc5hclk_parents, 0x068, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_MSDC50_0, msdc50_0_parents, 0x068, 24, 4, 31),
+ 	/* CLK_CFG_7 */
+-	MUX_GATE(CLK_TOP_MSDC30_1, msdc30_1_parents, 0x074, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_MSDC30_2, msdc30_2_parents, 0x074, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_INTDIR, intdir_parents, 0x074, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_AUD_INTBUS, aud_intbus_parents, 0x074, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_MSDC30_1, msdc30_1_parents, 0x074, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_MSDC30_2, msdc30_2_parents, 0x074, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_INTDIR, intdir_parents, 0x074, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_AUD_INTBUS, aud_intbus_parents, 0x074, 24, 4, 31),
+ 	/* CLK_CFG_8 */
+-	MUX_GATE(CLK_TOP_AUDIO_H, audio_h_parents, 0x080, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_PWRAP_ULPOSC, pwrap_ulposc_parents, 0x080, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_ATB, atb_parents, 0x080, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_SSPM, sspm_parents, 0x080, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_AUDIO_H, audio_h_parents, 0x080, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_PWRAP_ULPOSC, pwrap_ulposc_parents, 0x080, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_ATB, atb_parents, 0x080, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_SSPM, sspm_parents, 0x080, 24, 4, 31),
+ 	/* CLK_CFG_9 */
+-	MUX_GATE(CLK_TOP_DP, dp_parents, 0x08C, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_EDP, edp_parents, 0x08C, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_DPI, dpi_parents, 0x08C, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_DISP_PWM0, disp_pwm0_parents, 0x08C, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_DP, dp_parents, 0x08C, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_EDP, edp_parents, 0x08C, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_DPI, dpi_parents, 0x08C, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_DISP_PWM0, disp_pwm0_parents, 0x08C, 24, 4, 31),
+ 	/* CLK_CFG_10 */
+-	MUX_GATE(CLK_TOP_DISP_PWM1, disp_pwm1_parents, 0x098, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_USB_TOP, usb_parents, 0x098, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_SSUSB_XHCI, ssusb_xhci_parents, 0x098, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_USB_TOP_2P, usb_2p_parents, 0x098, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_DISP_PWM1, disp_pwm1_parents, 0x098, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_USB_TOP, usb_parents, 0x098, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_SSUSB_XHCI, ssusb_xhci_parents, 0x098, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_USB_TOP_2P, usb_2p_parents, 0x098, 24, 4, 31),
+ 	/* CLK_CFG_11 */
+-	MUX_GATE(CLK_TOP_SSUSB_XHCI_2P, ssusb_xhci_2p_parents, 0x0A4, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_USB_TOP_3P, usb_3p_parents, 0x0A4, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_SSUSB_XHCI_3P, ssusb_xhci_3p_parents, 0x0A4, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_I2C, i2c_parents, 0x0A4, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_SSUSB_XHCI_2P, ssusb_xhci_2p_parents, 0x0A4, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_USB_TOP_3P, usb_3p_parents, 0x0A4, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_SSUSB_XHCI_3P, ssusb_xhci_3p_parents, 0x0A4, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_I2C, i2c_parents, 0x0A4, 24, 4, 31),
+ 	/* CLK_CFG_12 */
+-	MUX_GATE(CLK_TOP_SENINF, seninf_parents, 0x0B0, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_SENINF1, seninf1_parents, 0x0B0, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_GCPU, gcpu_parents, 0x0B0, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_VENC, venc_parents, 0x0B0, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_SENINF, seninf_parents, 0x0B0, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_SENINF1, seninf1_parents, 0x0B0, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_GCPU, gcpu_parents, 0x0B0, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_VENC, venc_parents, 0x0B0, 24, 4, 31),
+ 	/* CLK_CFG_13 */
+-	MUX_GATE(CLK_TOP_VDEC, vdec_parents, 0x0BC, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_PWM, pwm_parents, 0x0BC, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_MCUPM, mcupm_parents, 0x0BC, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_SPMI_P_MST, spmi_p_mst_parents, 0x0BC, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_VDEC, vdec_parents, 0x0BC, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_PWM, pwm_parents, 0x0BC, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_MCUPM, mcupm_parents, 0x0BC, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_SPMI_P_MST, spmi_p_mst_parents, 0x0BC, 24, 4, 31),
+ 	/* CLK_CFG_14 */
+-	MUX_GATE(CLK_TOP_SPMI_M_MST, spmi_m_mst_parents, 0x0C8, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_DVFSRC, dvfsrc_parents, 0x0C8, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_TL, tl_parents, 0x0C8, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_AES_MSDCFDE, aes_msdcfde_parents, 0x0C8, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_SPMI_M_MST, spmi_m_mst_parents, 0x0C8, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_DVFSRC, dvfsrc_parents, 0x0C8, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_TL, tl_parents, 0x0C8, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_AES_MSDCFDE, aes_msdcfde_parents, 0x0C8, 24, 4, 31),
+ 	/* CLK_CFG_15 */
+-	MUX_GATE(CLK_TOP_DSI_OCC, dsi_occ_parents, 0x0D4, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_WPE_VPP, wpe_vpp_parents, 0x0D4, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_HDCP, hdcp_parents, 0x0D4, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_HDCP_24M, hdcp_24m_parents, 0x0D4, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_DSI_OCC, dsi_occ_parents, 0x0D4, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_WPE_VPP, wpe_vpp_parents, 0x0D4, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_HDCP, hdcp_parents, 0x0D4, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_HDCP_24M, hdcp_24m_parents, 0x0D4, 24, 4, 31),
+ 	/* CLK_CFG_16 */
+-	MUX_GATE(CLK_TOP_HDMI_APB, hdmi_apb_parents, 0x0E0, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_SNPS_ETH_250M, snps_eth_250m_parents, 0x0E0, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_SNPS_ETH_62P4M_PTP, snps_eth_62p4m_ptp_parents, 0x0E0, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_SNPS_ETH_50M_RMII, snps_eth_50m_rmii_parents, 0x0E0, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_HDMI_APB, hdmi_apb_parents, 0x0E0, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_SNPS_ETH_250M, snps_eth_250m_parents, 0x0E0, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_SNPS_ETH_62P4M_PTP, snps_eth_62p4m_ptp_parents, 0x0E0, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_SNPS_ETH_50M_RMII, snps_eth_50m_rmii_parents, 0x0E0, 24, 4, 31),
+ 	/* CLK_CFG_17 */
+-	MUX_GATE(CLK_TOP_ADSP, adsp_parents, 0x0EC, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_AUDIO_LOCAL_BUS, audio_local_bus_parents, 0x0EC, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_ASM_H, asm_h_parents, 0x0EC, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_ASM_L, asm_l_parents, 0x0EC, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_ADSP, adsp_parents, 0x0EC, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_AUDIO_LOCAL_BUS, audio_local_bus_parents, 0x0EC, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_ASM_H, asm_h_parents, 0x0EC, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_ASM_L, asm_l_parents, 0x0EC, 24, 4, 31),
+ 	/* CLK_CFG_18 */
+-	MUX_GATE(CLK_TOP_APLL1, apll1_parents, 0x0F8, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_APLL2, apll2_parents, 0x0F8, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_APLL3, apll3_parents, 0x0F8, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_APLL4, apll4_parents, 0x0F8, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_APLL1, apll1_parents, 0x0F8, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_APLL2, apll2_parents, 0x0F8, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_APLL3, apll3_parents, 0x0F8, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_APLL4, apll4_parents, 0x0F8, 24, 4, 31),
+ 	/* CLK_CFG_19 */
+-	MUX_GATE(CLK_TOP_APLL5, apll5_parents, 0x0104, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_I2SO1, i2so1_parents, 0x0104, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_I2SO2, i2so2_parents, 0x0104, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_I2SI1, i2si1_parents, 0x0104, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_APLL5, apll5_parents, 0x0104, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_I2SO1, i2so1_parents, 0x0104, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_I2SO2, i2so2_parents, 0x0104, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_I2SI1, i2si1_parents, 0x0104, 24, 4, 31),
+ 	/* CLK_CFG_20 */
+-	MUX_GATE(CLK_TOP_I2SI2, i2si2_parents, 0x0110, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_DPTX, dptx_parents, 0x0110, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_AUD_IEC, aud_iec_parents, 0x0110, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_A1SYS_HP, a1sys_hp_parents, 0x0110, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_I2SI2, i2si2_parents, 0x0110, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_DPTX, dptx_parents, 0x0110, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_AUD_IEC, aud_iec_parents, 0x0110, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_A1SYS_HP, a1sys_hp_parents, 0x0110, 24, 4, 31),
+ 	/* CLK_CFG_21 */
+-	MUX_GATE(CLK_TOP_A2SYS, a2sys_parents, 0x011C, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_A3SYS, a3sys_parents, 0x011C, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_A4SYS, a4sys_parents, 0x011C, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_ECC, ecc_parents, 0x011C, 24, 4, 31),
++	MUX_GATE_MIXED(CLK_TOP_A2SYS, a2sys_parents, 0x011C, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_A3SYS, a3sys_parents, 0x011C, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_A4SYS, a4sys_parents, 0x011C, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_ECC, ecc_parents, 0x011C, 24, 4, 31),
+ 	/* CLK_CFG_22 */
+-	MUX_GATE(CLK_TOP_SPINOR, spinor_parents, 0x0128, 0, 4, 7),
+-	MUX_GATE(CLK_TOP_ULPOSC, ulposc_parents, 0x0128, 8, 4, 15),
+-	MUX_GATE(CLK_TOP_SRCK, srck_parents, 0x0128, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_SPINOR, spinor_parents, 0x0128, 0, 4, 7),
++	MUX_GATE_MIXED(CLK_TOP_ULPOSC, ulposc_parents, 0x0128, 8, 4, 15),
++	MUX_GATE_MIXED(CLK_TOP_SRCK, srck_parents, 0x0128, 16, 4, 23),
  };
  
- static const struct mtk_gate_regs top0_cg_regs = {
+ static const int mt8188_id_top_offs_map[] = {
 
 -- 
 2.43.0
