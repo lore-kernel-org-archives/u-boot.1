@@ -4,138 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C85D1EDA68D
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 16:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809FFEDA698
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 16:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA0C6839DF;
-	Tue,  3 Mar 2026 17:00:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 0E692839DF;
+	Tue,  3 Mar 2026 17:01:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="oNEoBQzg";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="int83BuQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50F9083F63; Tue,  3 Mar 2026 17:00:36 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id CE81783F59; Tue,  3 Mar 2026 17:01:11 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44FF3838BB
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 17:00:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66330838BB
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 17:01:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mQ5OfkUXk0NiNBWRQP85UU3c9WCONOhmK/RN3K9bQyA2ODBtvUA63DxS8gXFTMpniqK7d8hCfgZ3YO1hxHkhUgw3sWBlNlDLvSt1e4y2MRS38aDodWrKONpd4z2i7wUmDFxLzkhkmxTNavhjSmXQG4e1cUKzO2Oxl2wybxJYdJ2Rmp9yBJmR5gelTpV2gXnJPurswR5ZKt1Z8fZ0sFjQcRd+IOyFD+GTKi1EHK+BPGseade6bs68siih9SLEEOa5nV8WTLAZRf6zqp9C4IlH4rCClaGFzcollYFhFFbsjOuCk+6l791gkewYwMYp+jhHGrlTydqwYS7QqJexZXJU6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hUXdZg7ioXLFo3/ln4at4catxgWCE3K/vflGUAgA884=;
- b=oLpZ5wGGkWT59y7ClqHlywS1ll1VEUCvkU8Pr0MNrROTSqZR4utdUVTFMLgdYCoENyXO8HoNg+4aHXgU4L8/8ifYT5mAR2aJa1gVa8H9f5/VBWc3cmQyLz+mYnByuYv3LmWrQCv1OadK5F5eiXo6mL+bp6HiXlMAht4rF26j+BculA2nJHiS/3465DIGyavFcPGXp2LSe5bHFTcDzJn9MsN/kZY2HjMsgc6dEcsat76I2SjyQqEfwUuHRjqVPiLNTNtljQjRCey1EFr8Qx7QIs61Gz3/X/FSA4kDrXtEWNhe4Flo23iwBP+H2an9LOqgyYCJJ76yFjWAEdGe5p6xSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hUXdZg7ioXLFo3/ln4at4catxgWCE3K/vflGUAgA884=;
- b=oNEoBQzgHSO40hfo5DwQYle0EEfPk7pfi1TMlxRbgBy+iZZsW4aofa9PdF4hTY32JF/k0zfq8JnmIDcBy73yIt9Vomdlo5reLP752m6fCvHvRDXIYZhUH7LJVU71oyJnSKkLvQ0+lO+795jzFtJRxP0Og0G2SZgP1w/X5pDqC1Q=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by VI1PR04MB7008.eurprd04.prod.outlook.com (2603:10a6:803:13b::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
- 2026 16:00:30 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
- 16:00:29 +0000
-Message-ID: <35da4878-a939-4cec-9433-dce1baa97191@cherry.de>
-Date: Tue, 3 Mar 2026 17:00:25 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 15/16] binman: test: Move remaining test files to
- test/entry/
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Neha Malcom Francis
- <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Yannic Moog <y.moog@phytec.de>
-References: <20260226234802.345968-1-sjg@chromium.org>
- <20260226234802.345968-16-sjg@chromium.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20260226234802.345968-16-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0209.eurprd06.prod.outlook.com
- (2603:10a6:802:2c::30) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 4DE9E600B0;
+ Tue,  3 Mar 2026 16:01:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F5D8C19422;
+ Tue,  3 Mar 2026 16:01:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772553668;
+ bh=oILrhc2Dmaiqw9iiRs260CWqDOcegZOiRxEc8pAcRzs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=int83BuQI2uUXErTOSuLZxpuyjMZ9Iw8JX2k+t8WY0PC3KWULK/4khsnjo3/ttB8q
+ +RxPx8uVVipTIWC6U30oUUqp2yrRLsc/cGyZqlYlWcx4RpMLVyIdps1+ampYCmlo4v
+ v0IyfwdAthU69hTUTwaBd/VH7gKVpAt6etrT3tk8xEQxuMH3Y0w1ygArqN+dCcwr2M
+ mD3kTbnN1NJr4wPjlBspmMqT1m7SN2bJ8V8+tv7GvoSlmCcEnEAZ40FieLW9IaH4b2
+ OkMi0TziVrv3uGb6ZX9+C7KAPU2AWrzjSVfMmvjTjUemj11lPlRDHqqBsHpvwWbnpd
+ 2WRXdGhbmrUaQ==
+Date: Tue, 3 Mar 2026 16:01:03 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: "Ng, Boon Khai" <boon.khai.ng@altera.com>,
+ U-boot Openlist <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] spi: designware: add support for bits-per-word DT
+ binding
+Message-ID: <20260303-choosing-chivalry-6f892a14eaef@spud>
+References: <20260227110434.5058-1-boon.khai.ng@altera.com>
+ <20260227140756.GP1593142@bill-the-cat>
+ <a66c8ed7-0f88-4e1f-a212-30e39f675df2@altera.com>
+ <20260303143721.GM1388590@bill-the-cat>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|VI1PR04MB7008:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7b0cc9f3-abd8-4b1d-4dbb-08de793dfe09
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info: f5d5zrrXz3iMen6AqEau1ssK8lcBAD0ADzhJQzQ0rWzE1DhRIcJl8gqMupuNoc5J9NAbD4BjYz4vw2f1TcHgos03mTOUGmglSD9EzR5eHlWO0cvrv3gbYFkl6qC41x7+Xghn7ZjUjg3XRkUDQTo8qYBuaWKLe9cKZx6LyP8NaItXjk8dk5Hi1SbpG7h5CoTYoiH756pJrh8UG75Y/XfzGzJMs5r8ENJamJbPieRgglxeb8FKH4zB5UWuxLgtqqTRck0LWMS14f6Fd5DzKRwtoh8cDia8WUTz/6bgPl97WeqojZQeWVMJEoKTHzO4Ei+7CxZFRouqY7a7cLTO5zIcMyO61rFhEMjBq60JBQGbRg3m42EmGKYc3IGAOiRIRPUVFejw9y0JtAWLRvHiQkxd1cR+mOzYqkR9KEoAJYLUOQmtXZ2DVgvMII40uptxiQNNjIXZ8p4lFdAD/ASscvbUets9xCy89bfF5Xtt257LFMk9f8Bw/vh4nBbmeZlw3xwd85DN6Ff6TGCYI9bc3GJW+TW8OlYmHW29G9gYu5TEKLUs/JN0/L145KtO56PDl4oI+xiByJekIJt64TMJ3kCYCv6Uee3dei3vO8vN97mXhUL1YyZB6j/6ugzHxycl1ZtmQ1tn+idYo3tzEkRFEwQHuErntMqQvMLAnqMmcZn/LG70fd3DJOi0WqFgeuqERSDCfKU9NzX9RgxcKJErao0ETLVUUCSJ/rLKNvdQrR3Ut9M=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZENETFFMdVV6N2c5Y0FMTHFadlhsQ3VJTlZremw2NUNYSE56SjFyamxQay9B?=
- =?utf-8?B?SWlBcHRwZXRhVWR4R3B5azRRVTFENVNRNHQ4TG9ubWxmVkhvSW43cXdrWGNP?=
- =?utf-8?B?RmVqREtzbkJIWkp4WC80Q25qQ3p4MmozZi9LN0Q2Nno5VmxBbjRRaDcxT0J2?=
- =?utf-8?B?TjZ0MFpRMEJnQzVhNk1KL0NQZHBMRGhPc1dpNDRqdmoxVGx2U3lBeWJRbkRT?=
- =?utf-8?B?cEhlb3UrZlRaTEdHMmE0SlEvSnJFdnhvRFZlQnFoKzR5Q2k0RnZmVHkwSWpN?=
- =?utf-8?B?RE80QlhnTWJtSE5BZHpXb3gyYUtUWDlXelZ5VktXdSt5Mlo5ZkdQREF2Mzls?=
- =?utf-8?B?QmdSVVRqUTU2MEphU0V0ZzZBeHBiWEtGMHFVYnBjZHNFdkd0UnVlR3BHSnpI?=
- =?utf-8?B?cTRyVDh5YjhBQlBuUVVpVXBPeFp1b0ZCTWR0VG5ybFNEWmtLb2JNT2h4OERT?=
- =?utf-8?B?VkJzb3dLOUt5c09oQTEvOFdadHUrNXJXc291VWhoK0xKOHhsSnpqQzhqc0dS?=
- =?utf-8?B?UnlGV1hrUTRIODZoNTBXTDNMZHlwMURqUW1JenZqajJ2TUc3N2dEK1pQckth?=
- =?utf-8?B?RUdUbVl5TFcwZWxBU2tWa0RtNEVhNitDODFhNUFpSUlPNEJ5WmI2VzJ6Y2ND?=
- =?utf-8?B?aEJPd1BKY0daSktnYmIxcXMvR2NpbVdjOGJhbWQ3dmFXUlBQUFJRVXEyZWs3?=
- =?utf-8?B?QkdhbmYzbHRrYURTRDFXWWN5dEpwdzhLMG9Ucm9uczNldERybmFvOVQwdnNu?=
- =?utf-8?B?cXFlajhWcUwxKytJdm5CMFphSVNieWxUZnQ1MUVpWTVtelVRQ1pYYnhBN0gy?=
- =?utf-8?B?MkJDcjVWY2VjWFJ6N2VaUE5jS3ZrU1hSU3BqQjlzODdHbEtWTlVEY1kwKzZ3?=
- =?utf-8?B?WUdkKzhXMXJEQS9LRmVhVUxaM3d4OFhWOTVYTFp4aEZrS2xRYU5oWFRZZ1lB?=
- =?utf-8?B?a21iSXhENHlldWRTQWxLSkNHQTRqL01uVUtHYmJDNlFGQWNFSnFYWVRuTGc5?=
- =?utf-8?B?eERWbGVWS1g2eEwvd0d0MTNCUGZuOTVUOWhZMkwwMmlVbHNyaC9WWHl0SXZs?=
- =?utf-8?B?UjZ5Rk8ybTBvSnJaTWc1S1BySXRKUHpRVzFXQWhFSTlYL054QUVBVndUMm1y?=
- =?utf-8?B?bFJnODZuWkc2Z2tTeXhGOHhZcW5JcUV6RW4rYnVPek5Zek96cm9MczRoRmJN?=
- =?utf-8?B?Z1pqQ1h2REozSncyUTF4VXQ2T2hBMldrOFM4dzRvQnc4M0RCMFJCeGVyb05E?=
- =?utf-8?B?NFZXTUp5Q2hacDFVQktaQVcvbmRaMjd6TlZDMGVsT2h6K3J6eUZyZU5sQ0Za?=
- =?utf-8?B?cVNlbW5EK0R0M0tvaXRHL05hSWhmLzZ6OENBd3ZyWm0rd2ZEU2FZN2UzWWJi?=
- =?utf-8?B?em1mUDNnamdLcWFVNlU5L21SOUJHbkVaeVFkQ29oOFBjTHRwbWd0MjhXTVF5?=
- =?utf-8?B?QjdHOE1vbmNWUkM5ZVJMdUxMY0l0VnJYbnJ3SGIxbGZUSU5VK0FKaTdxbE80?=
- =?utf-8?B?azgxcFRGSkJacGRnTWtVa2wwRmU2ZElZclF2dVoxR21HQlgxVU5UenRHNTRL?=
- =?utf-8?B?cWxoelNrQUwraXpUVURqNWhmcnlkMHdNOXBEejhyN0gxWHJEcm43UVZVdXZa?=
- =?utf-8?B?UzVoaEJOZnlpTXI0bk5ub0ZMaEN2V21qREhUb2pNcDNrdysxc1VHeHhSVXMy?=
- =?utf-8?B?MldMR2JFbEJvc2lhN0UxU2Zuc0I0SDZpVXRvWjdxSFZZK2Rxemh3TC9SV3Rs?=
- =?utf-8?B?ZGk3alhCT01UMFl6UTJ6NHlSSHNQbnlJVGloWlN0QkxwZ0ZpL1diT0xZUXVl?=
- =?utf-8?B?WmtyZkZqdms3RldqSFAyM3lrNFhHeWgyNHNBUDlHczRPM0d3dktIRHllTTFL?=
- =?utf-8?B?T3RUOUtoOHhOS1dSa1B6M0lNNFFzdmNvQm41UThMS2FjZWtlSkhJWjdpeFVq?=
- =?utf-8?B?T09HOGtKSVBPMzVPeUxxQ2F3RExEVitEbmEreG8rUytBd1NyMnU2VUF2QUt3?=
- =?utf-8?B?MVRIazQ0OE5CbnhSZ3NhK0w5aTRCbmtJNmN3WU9Kam5nOElQYjlpT3NuL0ti?=
- =?utf-8?B?M1NwdHFmL3VURkNGdHN3WjVoUFFGczhDdTA0NUVxalNBU0Y1cUwxN2ZSVXZ3?=
- =?utf-8?B?RG5xVWVSKzJxSVlVR0g3TlBtZVVsWEdSSU8xNDA0Ri9yZS9xN3U4RSttcnlk?=
- =?utf-8?B?WTRmK3hNK3ltbmJXWHVVNGxVWE13MFJUK1BseXN6c1ZDWnJjRHdlRVpoUWNx?=
- =?utf-8?B?OVQzMUlkQ3Y0NG5jMVBtbU9JS3VwWUowRDVrTkZ4Z0t5L2xaRmo4UTdSVlFP?=
- =?utf-8?B?bGZCSUNGT3g5YUVRY2UxUVFTUFpDV29kNm8yVE1MZzA4MWhzQk1EUT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b0cc9f3-abd8-4b1d-4dbb-08de793dfe09
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 16:00:29.6487 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JaEgGJPrdGYxkpJ4r0jL99qfibkG+Qd9wRoEydFrfCde9KPLJs/tEBSb2uNyUdj13RfMyhqVUuNrJ+gzR+trRhgsV6P3JJsBNKyxrzXciiE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7008
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NOTvkjGUhkGjsIHD"
+Content-Disposition: inline
+In-Reply-To: <20260303143721.GM1388590@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,22 +77,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 2/27/26 12:47 AM, Simon Glass wrote:
-> From: Simon Glass <simon.glass@canonical.com>
-> 
-> Move the remaining 60 or so test files into an entry/ subdirectory.
-> These cover general entry types and features: entry args, fill, text,
-> env, compress, replace, template, collection, ELF, overlap, listing,
-> sections, symlink, TEE OS, and other miscellaneous entries. Drop the
-> numeric prefixes and update all references.
-> 
+--NOTvkjGUhkGjsIHD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-What about files/*.dat, blob_syms*, key.pem (seems to be used in 
-security/ as well, but duplication/symlink should be fine?).
+On Tue, Mar 03, 2026 at 08:37:21AM -0600, Tom Rini wrote:
+> On Tue, Mar 03, 2026 at 03:59:35PM +0800, Ng, Boon Khai wrote:
+> > Hi Tom,
+> >=20
+> > > I don't see this binding in v7.0-rc1, did I miss it? Thanks.
+> > >=20
+> >=20
+> > This binding was not introduce in Linux. This is a per-requisite commit
+> > to support the Agilex Smart NIC 60xx board https://www.silicom-usa.com/=
+wp-content/uploads/2024/02/FPGA-SmartNIC-N6010-AgileX-Based.pdf
+> >=20
+> > During the initialization stage, this board require a spi communication=
+ to
+> > configure the chip's PLL and also to check the chip's status.
+> >=20
+> > and it require the specific spi bits-per-word=3D16 setting.
+> >=20
+> > Can i add the binding at U-Boot?
+> > https://github.com/u-boot/u-boot/blob/master/doc/device-tree-bindings/s=
+pi/snps%2Cdw-apb-ssi.txt
+>=20
+> Why would this be inappropraite for the Linux kernel, once the system is
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Did you mean "inappropraite", or actually appropriate? Guess it
+doesn't really matter to me, since the former would be asking "why would
+linux not want this" and the latter would be "why would linux want
+this". And I guess, as U-Boot maintainer the former is more important so
+inappropriate is actually what you meant. I, of course, always approach
+things with the latter mindset ;)
 
-Thanks!
-Quentin
+> fully supported in Linux is the first question to answer. Thanks.
+
+The property doesn't make sense to me in a linux context. bits_per_word
+as explained here is a device setting should be set in the device driver,
+and is almost always per-compatible so doesn't even need to come from dt
+at all. What a controller can support is also effectively always
+determinable from the compatible of the controller, and is often a range.
+
+Looking at the linux driver, all dw spi controllers appear to be able to
+support 4-16 bits per word with select devices also supporting 32. The
+check is done at runtime, it has no need for a property at all. The
+device driver effectively decides what is done for the transfer, within
+the range of supported values by the controller, based on what it sets
+in its spi_device struct. I don't know if u-boot has similar
+functionality in its code, but looking at dm_spi_slave_plat which I
+think is your version of spi_device, that information is not there.
+
+Were this submitted to linux with the current explanation, the feedback
+would be to set bits_per_word in the driver for whatever this "chip"
+that's being talked about is, presumably that means setting it in some
+sort of clock driver given that it controls a PLL?
+
+Cheers,
+Conor.
+
+--NOTvkjGUhkGjsIHD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaacFswAKCRB4tDGHoIJi
+0tLSAP9NmtGEqeHABapQVtcjFEw5YrWrJyQaPXgLtIkyDWatNQEAiFngA18ouMKg
+fBm2qvwi4zveKisRVYV5fzG3GPR7+Qs=
+=9MoC
+-----END PGP SIGNATURE-----
+
+--NOTvkjGUhkGjsIHD--
