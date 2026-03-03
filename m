@@ -4,123 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94ECBEDEBF9
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 22:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 946CCEDEBF9
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 22:36:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED7AC83E7F;
-	Tue,  3 Mar 2026 23:30:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=novatechautomation.com
+	by phobos.denx.de (Postfix) with ESMTP id CBE87839DF;
+	Tue,  3 Mar 2026 23:36:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=NOVATECHWEB.onmicrosoft.com header.i=@NOVATECHWEB.onmicrosoft.com header.b="IsF8pZDv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gtPjUbg8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D35E483F2D; Tue,  3 Mar 2026 23:30:12 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazon11022081.outbound.protection.outlook.com [52.101.53.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A2A4583E7F; Tue,  3 Mar 2026 23:36:21 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95E32839DF
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 23:30:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=novatechautomation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=eric.schikschneit@novatechautomation.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ucqarWoYGh0orwULddX2m2X/9oU/STRjgkHChm4bY8kQHCIe2NzZEZZ/Eu7S1tkF3yTfDU7A0r7vIUTDelwvUh37OjlQpBN9aCyPghZmSaSZZugrfo2IuP+rP4rmdt/Mp/3TMBHus6y1ZAjkIRtpdYm1zRzxJunrlrvJoulyzKpVTcQVflh+DKIHBULM5uaVUEwOb++JQYTnbKZAIqwJ1I4B4d/vKb7w4ofX2J8tZ+9I9jcLrCkAcFihx82GT0k+yWnL6cdLxrBGLjXtfEdM7ksrURf1DL86L/PLlZ5RIUyQtpLeKkqZXf4YuaB8RUiKMcsd3hvSUl38IaHEvFk5RA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XuSX0n5GEWJynYhbzXhzl6OuqUJiVGV5+w2F4kLEJwM=;
- b=xWdVjabjTFmHsFHNKUYs9+kcIGaU+nYcbhK2zc8RodHLhAsztjaRE6Yfq6w4c3ti1Iq8359di2I0c5EZsQqG/bJgMPH3Mn2faeFHDNJ9rHz2TbqmFHR/wUlRQYRWmDzqOniyEdrrV+logpMujwjMjUabF8Sa51i4tVoNf0wzJHjU8BEiaTvK3wpLQ6ObV8Ct5MGIYupDfsBKHq3yg6e97Y8WuxzDiNZ6aW6HuoIPgx0uC6cRwBlvz0u0CzxMn7i1Ez2wLKm0Bjg1tPdOvYUOj8E2EiXVooeExqg4OtyNE1y/HV0wkjcKKWbr0StDuQBtg1ODwE4HaURoDpsaxe61Kw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=novatechautomation.com; dmarc=pass action=none
- header.from=novatechautomation.com; dkim=pass
- header.d=novatechautomation.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 72CC8838BB
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 23:36:19 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-65f92a597a1so8680120a12.0
+ for <u-boot@lists.denx.de>; Tue, 03 Mar 2026 14:36:19 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772577379; cv=none;
+ d=google.com; s=arc-20240605;
+ b=OCeRY8nPYdtZOnj5y8SoFYoRyoRnjHWr8UrN16eUxjnET07pOC/+Z/9okF8JOwC49y
+ 9ritOLMTHtHL8ExEyKmQSYXpjzQky70BL0uY2wJTcz65G2UHDME7Pb9jt5SVXj7gCgps
+ IVcHcpsn9wz3RwTDeJ8nVDMWRVZgAOBJR6bwfUYGG6tYSxrytXmMo9rOjKuzzDaGTBK7
+ Mc7zGAudw41jOKsQbtTeYYzWUBeOOpRb9w9BggCtk7uDdU2oPuuvPerDmPqwI26u+edI
+ XJVpyAsZq6yKaIMS8kospDRtpdCludMyxx2xGUQWRgR4o5gGDyXWbLllZ91s9kOylFGo
+ DDNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=5dN5w4dWlafjtKkwMzboWdEtBSlgZRTPvOCVSO4jy/4=;
+ fh=y88EDaYy9H+d+/vyESG5znfcSzemuCaVIpKX0g41HHA=;
+ b=gHTjVTkZvP1aLe+icgfwDWhS9J2a8GiG6B+nHgHFZ67F3qCrxdk9v/e8D3vbfiZ3tp
+ JSsSW9Lg9sVa4SkaE3Jt9p4mGRRiwe3HSNyDFZgCa3m1JT1m2GkP5+garBXXANa6en3g
+ ji0lX97Uwz5JsH9VRArJwbS9hxyVpFfM939OVKY8WmNcRsvv15Qmc0T3aFgQpjdSU6oD
+ bKQOxvSFtrJKcsg5YMOGkshCPqMLySWcos+5MnJ3O+irlTG3ubiGCmbwJ6yfgoHZ/u9K
+ arlw1u4ifxJ4yvoNt8G8WwaET62mPO5H6IBJkc2oIKkAdi5dQjrFAfbxcC7kkmeqbLmX
+ YoQw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=NOVATECHWEB.onmicrosoft.com; s=selector2-NOVATECHWEB-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XuSX0n5GEWJynYhbzXhzl6OuqUJiVGV5+w2F4kLEJwM=;
- b=IsF8pZDvxuY7t7xanw+FVwvAWGwh/Aur/QfoVPiUP8J/+3tdzOCNAHdZre9S1YyaxANG5HQ3nT/lUGi6cgMS4OH0aZ97fV6AmY50tgtFx2Xyo78WdTxL/KDnJolDDFMvEQ4Rlv6MgpguC1uGhbfGNFcaR9OXBG17MQ+3dX6bB0o=
-Received: from SJ2PR07MB9711.namprd07.prod.outlook.com (2603:10b6:a03:4fa::13)
- by SA6PR07MB10717.namprd07.prod.outlook.com (2603:10b6:806:424::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
- 2026 22:29:55 +0000
-Received: from SJ2PR07MB9711.namprd07.prod.outlook.com
- ([fe80::12bb:dffa:2e93:aad1]) by SJ2PR07MB9711.namprd07.prod.outlook.com
- ([fe80::12bb:dffa:2e93:aad1%6]) with mapi id 15.20.9632.010; Tue, 3 Mar 2026
- 22:29:55 +0000
-From: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Fix x86 baytrail boot flow, UPD/VPD Updates
-Thread-Topic: Fix x86 baytrail boot flow, UPD/VPD Updates
-Thread-Index: AQHcq1tWoQp7KrDHkEGVSJPn96oLZQ==
-Date: Tue, 3 Mar 2026 22:29:55 +0000
-Message-ID: <SJ2PR07MB97117FB8BBBD7DC1F5CE5A21817FA@SJ2PR07MB9711.namprd07.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=novatechautomation.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SJ2PR07MB9711:EE_|SA6PR07MB10717:EE_
-x-ms-office365-filtering-correlation-id: 6eee583c-1d1d-415c-8212-08de79746508
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700021;
-x-microsoft-antispam-message-info: nfEIcAK5BemuJr8Du2ecetA14Lx7LJGhcBXo5gCjhEoRRpW/zWIUuWvzbRq+R5Mmgp+pc+5NnDCwgvPStbVshj8lpiIIUB7goddDbsCpTH7p7wBjSbx7YGKF3nVYpkxfxNxC0dVZy+pvL8FhDox4pl0sSFymX86XxwRPAaptjouHkdmDxN+cDawPRyLNnv94phU/VJVLy3LqYZQbVJeuUZY1qoHkR94E/WzPl2lkZKl+RVozVuUkvqrA6FExShnmGKYM7bi1hcSOKRhr2LMNOyaHj9eALg3VqamA5mIslvqTiEcl5r2qGaC5TQYGlvaxzJ5Ty0hPcoNjdX1GLmOTGeF+p5Ba6lC2COdEH+4fuimVrGVlLhX+1TbtTcNTnLZih5lxqLBNhCesfW3IitOgIGj/N9sD/9FlvvxsLdANtQcYkhpvY/5ccwJ1txNsa+WUZzmadppHW+z2teW0uUvXP1wvxpAi0QIMt/jJ3yiDVqebGDqgYwuQepJs7GunpQyksI1Yjk+jOIeFZ21ttLqozjOAbqObc5yzT1I3FQYXxLBilkbPa+WqpcU4PpyVdwglTqKzi51bTz2P775r5tAG7HO/2a779Ei2V4LR8yva8F4DCK1SyksC6H5qBkZvSCqpyVupYGLYz7X3NQ50ochFSQ2BtIzqwsXvJ8NQDdJh42FJEO9XMh/zpiXrXLV6xeOzIVazkVQ6Xsr/BX9YpmE/Qbg7t0qwSLnbI2ZYsw7vRO1mwbVUineTei9u0UXITZE/l1M0Az7LcRaEwuodlt6TC85WAiEML4XHBCUfHJY5rss=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR07MB9711.namprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700021); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?s6NJsLm60KbxlCVVHfDczlJaC6g+LrO2sDOyHOVZJN0aqZbnN5Ts5tQNiL?=
- =?iso-8859-1?Q?GjugBkpLV8Aujgyc0a7JrMdBuWIRFe6Xpl6VG2sW691EldMOr5q2DTPTYv?=
- =?iso-8859-1?Q?QRBstdYBCp/ayAPzc7R/oXKhvVijb4Qzjc2wMBRXf3tTqy/uU7rj2s9KnK?=
- =?iso-8859-1?Q?z0VuO6Ed1872Ag8Yh/Mx4WyLKiTBUjwtzE/k5/zkc8nLLqVdQ27DEOUifB?=
- =?iso-8859-1?Q?viobtBt7wZtpt8Hmj5kSTGe9Tf8DC24dNoXLyUtufcRxYqdxeTVHYaRM2R?=
- =?iso-8859-1?Q?0FmoLA1Uz8JQ0Tw32vLL+mxHKcSm0aPu+8dnj7YwDdjdr7dKQo0I4wjKmp?=
- =?iso-8859-1?Q?k/uIEKOH0pBTzCCKTRFZDBZrjJA4W8w6oyfHP/BTZw93NC63J6o1xuhttN?=
- =?iso-8859-1?Q?QfY1mBqCQYQcgK8jHdAYzeTPbJlnn9eEhcRV36egL1jh7wCiPGE4k16jOk?=
- =?iso-8859-1?Q?d80SpdEMfChtOJq4t3i7bD77LQT+Y5CREJ06/ibMQzjZ4qlcmw2423C+0O?=
- =?iso-8859-1?Q?ispJ5Lklwf5UUjuSu0eSMxp+poM+BFF23NsN1CqOqy2TBt9GUbX2EYL0KV?=
- =?iso-8859-1?Q?AaJ61fAtH37E6jrCLJ3RZeFI+FAAb0vnlhTGZQ7IddEFPfVbtkGkD1136A?=
- =?iso-8859-1?Q?wM+14cySGUb9rZNUmVN2PxQzycaG41xxwuf1gO3UVWd5WL13i1Ut8N+9K2?=
- =?iso-8859-1?Q?TsJk4UZ7bvu41YwWWf/7MlR2bxbSwiIRF5tIwWAmROEtm0wtbcfF6Mcqf/?=
- =?iso-8859-1?Q?zO3BvMWCr+Vc2z2MkJzeXZou4Jr2PlGCghwegtdBzJWwLRSMENlSvyt5Nz?=
- =?iso-8859-1?Q?AowV3lKrVrrl75er1G0OKwQyyjNto7S1eonivE1zJ5cHaQJHWvgrmlcPb+?=
- =?iso-8859-1?Q?GNRHBFHUIKLZYacTX7tI8Bn7AAOeMSUW9cAzdCmsFnXf9poa9EucaKQD3l?=
- =?iso-8859-1?Q?D5F6qEBBuCSmYZ3Z1LKwOvSZjbSVS45lrv1/NrPMVMZiJctgP1R9LH21XQ?=
- =?iso-8859-1?Q?wuUmVtXbXloSrxvtQkG5FtjXKGQQs7GQrfqVBNh+VgM1O00tSkm6Vmdm08?=
- =?iso-8859-1?Q?vCPBpA4oyAqgFCOu+8/HqYRpQBnPn3t4IrLT/RWP5bOjRTmW5znvKpPfeu?=
- =?iso-8859-1?Q?NBhaYBPbgCKDUUJEhPkM1sndcbdzYJa4/ohqXItWqyyBriOvxhbWmW2s1w?=
- =?iso-8859-1?Q?m3CrGkPOBCmd/aUqflegKSkMT+Oi1vSOi6iC7Vo7HGbIx3EQouWjkCYMWn?=
- =?iso-8859-1?Q?mYvZj6gVlSda0AY5nH3mCFNt2PaG2AaM7CmMLNkt76f30UX8fIXl+5dd1m?=
- =?iso-8859-1?Q?sS8cKZTkL9HsC3brneBoebckZ6T+VCYrMIpOF1Wg6mnCztN7zeMX2tVMS6?=
- =?iso-8859-1?Q?epzOtxizyZv+Jtn46dugSMIFFwDDA0lMdsDhYlSF9CwU1csK6R0/MqyD+M?=
- =?iso-8859-1?Q?SD+wGNE2o4cvpQGhyRSByetDOvICE7zyHxvFTyVr9n8WUGdmBAEJPzHIVJ?=
- =?iso-8859-1?Q?33NwZ8Jcj5UCn3wTgLLE/ynB/Iwpe+zp05B/GqqAajravUspAUJDlggGlx?=
- =?iso-8859-1?Q?PhnajIJ30XUW4HOXohLOZuXU3upLoK6DsFz5Bbl+4wmLQQZitL+JSyWBuw?=
- =?iso-8859-1?Q?HhzK6xb2eONLIkEU60pWrUuDfN7q3B75sl9gI2S7vLbtQzxigzCqAwE7qe?=
- =?iso-8859-1?Q?ZaC2m6O2zDgkCPzlAo2cgav7R9FcmSmbpn8/HlqXlZisntxghQqH+RNjE8?=
- =?iso-8859-1?Q?/VtJec647eWUrgJpVoSmtfHx7e5A48VsOy7znzZz7flfvM/rSVJGcPuEsU?=
- =?iso-8859-1?Q?bn0AFc069y7TXO46uG7kP1oZuo76aaVa4CiwHzvJcDNFPD2EvCE9?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ d=chromium.org; s=google; t=1772577379; x=1773182179; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=5dN5w4dWlafjtKkwMzboWdEtBSlgZRTPvOCVSO4jy/4=;
+ b=gtPjUbg8AwL019XSGbK62H2A9zZKfQ8S8lW0RRb9Yqsn9Gc9YkPXmScqYCiNGVeI7z
+ 6XpPowyf/WXxFOLyL9+crCliBLxLwSvUNdUxcLBNcWA5sw0yrVmoYbiXKwsiskAfKRdo
+ t0NHxI4yeWD4/qEj7Q6wMJ1wk0dFw3zzfW6E8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772577379; x=1773182179;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5dN5w4dWlafjtKkwMzboWdEtBSlgZRTPvOCVSO4jy/4=;
+ b=VATVG0I0RhiCypscw8OZQcnr37VGWDRtS+xwnpez7aKqKrGiH2oFurVUZv6Bcqq+ZH
+ Wa7CPo8/Ph2LpPc/8xaSapE0GByZWkzHR45tNRQK9CPcbxi5xRNHWnMo2LU0vJR+M3FP
+ sOXCrxUNo81IUuFj5jiN/JtjBUoyJAKJRJ9BAsUEaLeYriahmOTSUDYAqAzX9bpSMo/k
+ 86q+8wM4COLpYHkvBg0hjUVD1i6q/lzuMCz8v0ofr6Qh68CiIIbNM8f+4PDBaQvYB1sG
+ HWh55YhHrwJXkUjtOmQwbY91Jo2Gww80l6zg57co6Go4kkB0n/1HixNN7vTNR/QhuR53
+ jCfw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUP4bYFj8WZMI3jCS9hgfHCblAuYd4Vbo/wlySFedRlt7elXeUEqgOR2xHb2B2zsdyr6UebYnU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBMY1EjRTsUOvRGCYBDYeIC9vRRUbD3IJ6Jz3s4BE/Ily8fcp1
+ af5M/TuP4xKeHntD80hJ/tQE4YRW2+DHdSr7jP5kKdZRoxXSQeSm9/AFxpvnhcKWONrX63vF4kc
+ 5NbJjAfymsboH92q3tNcaPy+STcbILlQXP09vNgo0
+X-Gm-Gg: ATEYQzzcYlSVikDX1aCN4RgcuREq/PY8hiD7wB+8+7PaR7LBzLnwuda1Fm77/viRW21
+ 9wMApHxxMEgo0roGm8KnVNfJfWOa9fSZwUr76s/BLrh//rZzs1zhl/E1Z3SeijahfSohqPzhAfP
+ G5bhVF6Pbvp21IpYHNP3W6qXPI7VNC3Nu9/Y7K04n/8CtPHgwAQanCRsLUfGBCNCxelWKRK7xKe
+ ocAWL+qKpVaAUBXwIg61l0ULQz6g7Rq0n/FrtSLMlox35Bmpl7bYj4Eo3LCufjcv01f0yRJONo3
+ ftgKkeMZKNuhzjwn
+X-Received: by 2002:a05:6402:270e:b0:660:a0b3:e76b with SMTP id
+ 4fb4d7f45d1cf-660a0b3eac0mr2669743a12.15.1772577378855; Tue, 03 Mar 2026
+ 14:36:18 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: novatechautomation.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR07MB9711.namprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6eee583c-1d1d-415c-8212-08de79746508
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Mar 2026 22:29:55.1247 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: eb0f6598-d3e5-4ff3-a8b8-fe893d304059
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0DmQVmoN+hk4fZGqJJh2nuTUZhij7IZs62ifh+J9OTejozHq/L8PRDXgXMO4R5/rDGp+9YunR7Zlb1JcgAxRG42U7D54WMVz9R/zvA7OXCH4sYzjXQYxGk+6QMQw+Sncmpv8WkURqZw9if/1o7C2/Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR07MB10717
+References: <SJ2PR07MB97117FB8BBBD7DC1F5CE5A21817FA@SJ2PR07MB9711.namprd07.prod.outlook.com>
+In-Reply-To: <SJ2PR07MB97117FB8BBBD7DC1F5CE5A21817FA@SJ2PR07MB9711.namprd07.prod.outlook.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 3 Mar 2026 15:36:07 -0700
+X-Gm-Features: AaiRm504Bp_mQ4oUO6aCwisbqt8uxl07l1cu4G1u91sOCakWVrhxGruPy-UqHYE
+Message-ID: <CAFLszTiGqVULDZKKqo7T5djXFjX8CHWKWJWTUoBBvHDMZN2=xw@mail.gmail.com>
+Subject: Re: Fix x86 baytrail boot flow, UPD/VPD Updates
+To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,22 +109,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After much research into this.. I tried building the config: =0A=
-som-db5800-som-6867_defconfig =0A=
-=0A=
-which uses the baytrail E3845 from the master branch, commit ID: 8d24789abe=
-d0822fbe41a2f9d72cf19650159dc6=0A=
-=0A=
-with GCC version: 11.5.0=0A=
-on Ubuntu: 24.04.4=0A=
-=0A=
-When built from that environment u-boot gets past the stage that I was trou=
-bleshooting.=0A=
-This has been confirmed on both the Advantech SOM-DB5800 as well as our cus=
-tom hardware. In light of this discovery, please disregard my previous two =
-patch submissions:=0A=
-"Fix x86 baytrail boot flow."=0A=
-"Fix x86 baytrail boot flow, UPD/VPD Updates"=0A=
-=0A=
-Eric Schikschneit=0A=
-Senior Embedded Linux Engineer III=A0 =
+Hi Eric,
+
+On Tue, 3 Mar 2026 at 15:29, Eric Schikschneit
+<eric.schikschneit@novatechautomation.com> wrote:
+>
+> After much research into this.. I tried building the config:
+> som-db5800-som-6867_defconfig
+>
+> which uses the baytrail E3845 from the master branch, commit ID: 8d24789abed0822fbe41a2f9d72cf19650159dc6
+>
+> with GCC version: 11.5.0
+> on Ubuntu: 24.04.4
+>
+> When built from that environment u-boot gets past the stage that I was troubleshooting.
+> This has been confirmed on both the Advantech SOM-DB5800 as well as our custom hardware. In light of this discovery, please disregard my previous two patch submissions:
+> "Fix x86 baytrail boot flow."
+> "Fix x86 baytrail boot flow, UPD/VPD Updates"
+
+Thank you very much for following up and confirming this!
+
+>
+> Eric Schikschneit
+> Senior Embedded Linux Engineer III
+
+Regards,
+Simon
