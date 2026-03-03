@@ -4,131 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0482EEDA69D
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 16:48:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49862EDA6B4
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 17:06:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC676839DF;
-	Tue,  3 Mar 2026 17:48:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id CBCD4839DF;
+	Tue,  3 Mar 2026 18:06:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="W1lhiaHY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hka+EL4d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6214583F2D; Tue,  3 Mar 2026 17:47:59 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8890083F2D; Tue,  3 Mar 2026 18:06:00 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46E88838BB;
- Tue,  3 Mar 2026 17:47:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 24FB6838BB
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 18:05:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tz/YfIImPcTDToMmbLokZcPLgEsBAHOp8adaAzeTkQwVhWUg33H8zaf0CdkBugCnfrEgfA8cdyPaFTjqP/nylp1GztMksffyqgCjwWked9ybobzUx1pHqT3IzvNzb+eyN4zOvR5UggohRwfq7/px7IokJk060pSCRnG/iV9XmDkY/sW8v35rjEKmHBDyQZy8wGV0rqeBrv5ybeyamtt+zraIuom2BZscG8qeo06CzhJS446jqzRuBspGWi1u6Ftt0j1oKUSh348PMwq5frZ938iCW0zj0/m1CWyv6hH1ouPnVyI3ZM7W2f7a8lkL5jWzGXKOtB6WSLuvXCiRUsZzjQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BiHcvwOIKFXu6PZSxahMhhtBxZZKorQ4IeVQNqqYJc8=;
- b=kxSAeo0+N4LIl5rwWZjLQvYD0En3UHE3U2XRM74X9jq2IJzEpH1aDzfJKa+VD4N26vKSm+lyaXXeaWjd1+/AcfcbQFGxfJlBwCh92tIRW39QIXGQqzDkTCaR6JnF0hV5iyEcsO2CJHa56B2lkneAYmXlPff7K0ZHEA3D4scoI63FG3rQ+OThbYmWNYGk55SUkwavypsXGO5/LcCU9hTlUegVej5Q5sBxPxGb8mWX4ZhpfI/VZu5PY04Hl9wyDV0m54+PCbVju4zHd/Q5BTB0wpuHzx5zYAErGEMEEcl1LyI8kA1na/V+e7yHlJJ8uCs4qLVOojuBfkbRE4Bd0+RZ2g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BiHcvwOIKFXu6PZSxahMhhtBxZZKorQ4IeVQNqqYJc8=;
- b=W1lhiaHY/Z0DE0C++v3vV2Omb/RvB35Y4TlFX/xQ7hSjYScKtT7HrauxNWs2n9iBN9JCarSC8YcrQi/ZnWcH8THQXTcyjo+MQJ3dvj0cCsUs3GF1wFOZULkGaJNS6kXeZiDfVpEz6HCynp6PQ07iWglc96mvKhOke8C/5tREuNE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by DU4PR04MB12112.eurprd04.prod.outlook.com (2603:10a6:10:641::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
- 2026 16:47:55 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
- 16:47:55 +0000
-Message-ID: <125d5679-6ef5-490a-b09e-6517ec3cf1af@cherry.de>
-Date: Tue, 3 Mar 2026 17:47:51 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: Binman and blobs
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: U-Boot Custodians <u-boot-custodians@lists.denx.de>,
- Neha Malcom Francis <n-francis@ti.com>
-References: <CAFLszTgrGjthPK8uxD0fErNfgaGYawiv6ojF42sakLj7oVejQg@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszTgrGjthPK8uxD0fErNfgaGYawiv6ojF42sakLj7oVejQg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0157.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::18) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7d1872504cbso3354461a34.0
+ for <u-boot@lists.denx.de>; Tue, 03 Mar 2026 09:05:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1772557557; x=1773162357; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LKHWIVh6QjvlQiA1keFnA7bYL8wo7qGHdsmmoFcDwsg=;
+ b=Hka+EL4dz8TZpZIIg5LQ6gE120cZGuhZ7QBXd2eLRlqCpM6yUypw+1hlfW2d0syLE4
+ ou3RgJY5EgMLe4EJPUiOHp+KWSg5EUS02W7qQ97VyV+L3kcOkT1F34E95ccgtNQM+QoL
+ onLwwA4nb8vC136nQB+xYxR6Um35mFz/LTZcY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772557557; x=1773162357;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LKHWIVh6QjvlQiA1keFnA7bYL8wo7qGHdsmmoFcDwsg=;
+ b=oj5Nv3rJkcEY5o+1Q2lZPVE4dHwdPXks391Ew5ApFIsDoRIF0ReqV6PZcKHn/ydgKB
+ 9eHrHv+6xIXXY4cjWWBkOg7LrsivuOSzmcudW5a5DXb4UX0XOpqHho1t+F0dpwQ2KaXc
+ rm9+MUcXD+cDYdbxiw1mw+mEa3CdRQi+kswo8GXim3Ecy00BZYYLAaPpCv9pauqgAomF
+ uLVSLwynuZcC14/1NGkR3ZIvwpgdzo4MYK7C4sAe9tFx/Swef2+LUipTPVoJ73oiZrK1
+ IUfNV18ReLSY6Vw4FrKlN1D2YqlU7gI8iSpim4XCGu6QYGEnp32KrWq+/ehH4TKd8cGs
+ FKgw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4IeypFk95OyJjjsLbLaWMHPns/ppddT9faSfQ98WRShwXIwYYtFjso0hdZVTdAxuywlwyn/Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw1n9Lc/ExKDeulF7W2buZKxQwhYPE4sUOpcooJlewP4zCi6MzD
+ nm95eyHWjRgzPkJyFwsU8EWBh40bfaNmU0m5iGBEZ+wNlRkyhbKo0anJEOHkQLs3QIk=
+X-Gm-Gg: ATEYQzx1O8nrjvY6aNZUvkX8c7vut1R624aE2RjSNcWPLUQe6Z+TJ/KMi2Ie2sJULj7
+ LKs+pTLX/g14Z7IDtIszflSOE4q7LDhDl50PK5iLRiw3pqU1k/Gg5b86tljDj3xuZRtFHd4uCrT
+ ax/JSKZLqFV/NVaj78qUgSs1gUpjhoAMWb4Hia6MrJQvuL8E1wR6QMERxOrmHMMDrQOGhI5UlPt
+ HRqpXVc3gBn1itwZHl557HJ4M9q9Eenmr293t0pBfYG/dy/IcnIqcdtP3QQp4j9TJh+8zQZymVc
+ Smk832uBFphHfloLqE4avpbHzgRnL3MvKgV/cqjfmkD5RCX26q4K5FKheog1X7ex1+VN570bOP3
+ UXueW5ufR3SdzTBWPUWJiZqwfJuYc3EvpiH16A7GBsNBN3vNfRIxm1zeLH8PehN6mGSrPmBixs3
+ IjErfMvzzocVfztTwpECUk/JsEFV2NYmyhNtMzClaebo4+x+CZybxU2PFqEo2Ug+ddCe+TUdvA/
+ 5yV6imrhPxUJToaWqNrE7K9u9n+Tq5STi2afI58VBLb3Omd+9g=
+X-Received: by 2002:a05:6830:65d2:10b0:7d1:89b9:9205 with SMTP id
+ 46e09a7af769-7d5be323cf8mr1185748a34.3.1772557556825; 
+ Tue, 03 Mar 2026 09:05:56 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d58644dd17sm13393228a34.5.2026.03.03.09.05.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Mar 2026 09:05:56 -0800 (PST)
+Date: Tue, 3 Mar 2026 11:05:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Ng, Boon Khai" <boon.khai.ng@altera.com>
+Cc: Conor Dooley <conor@kernel.org>, U-boot Openlist <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: Re: [PATCH v1] spi: designware: add support for bits-per-word DT
+ binding
+Message-ID: <20260303170554.GR1388590@bill-the-cat>
+References: <20260227110434.5058-1-boon.khai.ng@altera.com>
+ <20260227140756.GP1593142@bill-the-cat>
+ <a66c8ed7-0f88-4e1f-a212-30e39f675df2@altera.com>
+ <20260303143721.GM1388590@bill-the-cat>
+ <20260303-choosing-chivalry-6f892a14eaef@spud>
+ <ca14a108-6308-4b48-981a-a0d20b716ded@altera.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DU4PR04MB12112:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4af48315-265b-43f8-e6fd-08de79449e2f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|7142099003;
-X-Microsoft-Antispam-Message-Info: Yxp5cuiqHgz5FFMy1ZJXtu/WBkUP611Qk13Ir9EfEATbYkMd/TtgMbanlhT+I6bdzGiphELWcqO3hf/xKkvXV7Q18sH9YIZJS7AZ6NuunbpaPR+1aDO+ckzBCDQpIYeHjuoS7+VQA3oPreq7s191RamxUcNnXxwe5wi5sbi+KgXc78jJUhrPUwEGP9hoEYf9iCzcvBdR7x2nldHb2up3frw2wV72Trkbb7tcUots4+rvGi6N8OQA/+f+5oA2Otit+K5aJH0gph3QWLN9wpuxJvCIcsCbAxOZngIGtGkSmbF6N8f2cyrVPtutjZdGgr3PD8PEpAn3B0fYMfyxor2npgOKZmVyOTBFEroyM9TjXvE4YAAFX1yvp+m6UDcji9m1QFyHv4zkyQ5V1XWi9VLbN2pU6N6onQp2tJOXhdJT7+PszhBRFKI/Nh4npVRu3J2Uwx4G67qxXbjZutijfgA9n7LTnU6eYSUyY+l8hNQUGXobZi9ChCLYGPk41aSAd/HD2II+vHX9WrKl7tBfgF2YrPWRSQy6gqNel6tiuj3NRY7Rtmty6JmbflesZWm3+CURV6kT8LKhz5AdDkShrH9h1S1k/eM2SCEu+CLT7O8U/r1hgn7ivMPqf3gXZGSog6apYBvdxpmmiruI+26cNTJL1HreI6kR41sPGNp4NNImQc2joItE2lDu+mxq1i4/PdNanv6iHMISvmN952nr1JY80kBbnS48cMP6iU1g9eMmxbA=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(7142099003); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U3RUTm4zM1RjK1NWbklnRXZLUmVzcVRTVWR5cTJGOE9Qa1J3V1lYZ0dSSmUz?=
- =?utf-8?B?cSt4MDFTM2pvSzU1czQ1YlhGQlhnTXlwOW8zZXh1SStNWDVLUEhwbk1ON1pw?=
- =?utf-8?B?MzdMOEVtbFdIM2lpQzBzbmNkSkdqb242T2dLODYxQm15V05yM0tKSXpqTnY0?=
- =?utf-8?B?cnBWVXBESjNheTh0alN0OVJlR0s1WlIwbTVXUXdaV3FoYVI5eGJuL01nbnAv?=
- =?utf-8?B?eFhNQmlNRUVkUkVoK2thK0xWcHZ1UVA1SnJvenRlK2ZvZS9vVS9GRmRqVFFU?=
- =?utf-8?B?TGFKM2lFeGoycHZjamZtbDFPaGt4ZnR5V2YvalZNekhkQzZ3YzR5RmNhemtD?=
- =?utf-8?B?Qytkc1hhc2lPT3diK1lhcmtkaEJnbFYxenl3QndFYUdXeU5WT2VEcytVSGRt?=
- =?utf-8?B?Rks0NytCSSsvWktVSnU5YWZvY1BrTmlQQTFBUmE4UmpGSWd4cWZBUEJKRWlp?=
- =?utf-8?B?d0N0ejQvd3JKZ0NhdnFlaHZZdGdhV0FJeUVFV3FHREJQRHVJM1pTZm11SlNh?=
- =?utf-8?B?NWRGcThTUGNnWG9UaFJlNy93eEt2QVkwZTFhSjQyUzRneEpoWGZDMjU3U0px?=
- =?utf-8?B?THJ5L0xmZ2YrdFJtWVhwZkFzRnNZYUduTFdqR3dXVk1HeTM4TXZMNXlNVUQr?=
- =?utf-8?B?d0NLbjJoajdxZGl2QytZVThQbjRRMGkycFpFNlp3TGx3M2dMSlNOTEV1ME5B?=
- =?utf-8?B?T2laR0pzUlM5ajFRMnNKQ0xvdEJ3Uk9yQ2lMdHY3cTh3VFNvdmt3U2lybzU3?=
- =?utf-8?B?VTd1Q3MrL0s1emJlNzFJMkNtOGl5M2RmcC8yS0pVV0M4ODVhS0E4aTYzSS94?=
- =?utf-8?B?dmZwNmYzL0FjbnBoWE5JMG80c09lRnhYcFhUVFczSUk2Y1V3SThxaDBlZWk5?=
- =?utf-8?B?YThha1hDaVk5UVlqV0tsN3p2aEM0cjgyTXBjTWFZeFQxeE1rVnJLVlRGd3Bs?=
- =?utf-8?B?eUIrOXR4WjRHR1dZSzJkV0l1RzhtSEx5c1d5T3dyMHdOUEJoeDVQZHpyZFN6?=
- =?utf-8?B?MHUzandqMFVkRHhZWkpBSDNpUS9oQWwwKzFSbUxvYkdKYWRjRXF3L3JFYWVX?=
- =?utf-8?B?aFRDRGx4VGFoSjEzblZxdnFxNUVadTNvUHU1SkZIdDdva1ZvY2FIN0J0UVBq?=
- =?utf-8?B?WUhQdmx3cmJZUmhMN1I4YklVSEsrQm0wKzV0QzFzck5ZMy9GV1h0SWRmSEZE?=
- =?utf-8?B?eXF6SUMram9WTWIwWnZ4eHQ0T1dBY1BsSlRjdGhDODN0VmJELzRKTjliaGlH?=
- =?utf-8?B?SzQ1Z2NiWTJuRzhNYllKNXFVZGZqdzdSNlRGOEhaSmNSRlRwRmNFSVZuV2lz?=
- =?utf-8?B?ZkJqTG5MK292bTJCWEl5YnZnSXl2UTRkVUswQjdiRTM5WWdqWHRXdTVaOE4w?=
- =?utf-8?B?K2ZteHJoVHhicXY1U1I3SVZ3VEp6cElCSEN5V2JHTDQ5MnAvbkVsK2N4L0pp?=
- =?utf-8?B?UTNHdlBMMld2cDhzSmh3VEVuWnF0OEo5L2NZRUowMjZvUFlJbDVhcy83TUR6?=
- =?utf-8?B?bGpicFNCR0N4UWhVSTFvNk9rajFCa0J0V2R2SWt3TzNORWthbW0vVmFncUJm?=
- =?utf-8?B?NGorSFV2aXJEYUpKZXNjMmFaVEpob0VMN2lEK1BYS1ZncFowUHRWRTJ1emFY?=
- =?utf-8?B?Mi83NmR5OFAyZDhIbjRmQTZVbkVKL1FNcUloTnNSbDhsUU5BanczOGNGRUUx?=
- =?utf-8?B?MGhnMjJFYldvZmJnbmcvN3FZNElMOVpqYkdGeUk2c3dVclIxOXRYeG1GMVBP?=
- =?utf-8?B?M08wQWJ0T3kvUHh0YXcwa2JDUEtEbzFmTjZ6MDNVZ3NyZ1k5THBab1B2ckVC?=
- =?utf-8?B?T2MyNXFrSXVDMzNYSmhzVTBlZjVyODhDSkZXSkQ0UFc0Y3B4NlZzT1gxYUVx?=
- =?utf-8?B?SGRDSXE0a1hRYVI3N1VkM084TWhMNHUzSThJYVdYRTkyRUY2NkkwQ0VPN3Q0?=
- =?utf-8?B?Y0Npdk1SQmxFWGpkNitYcDNmNHdKVnNSTUJsakprRHhJZ2lYK3ZmekdIb1dp?=
- =?utf-8?B?OWxGK1RYWWt6RytaeVA2VTYxdVdyT042bXNMQzRjYXQ0OHhvUEw3WGVPeWtq?=
- =?utf-8?B?L0YxdjhFZ1hWNGpCT1ArUW1IUlh4bEhPZExUcGhWN08ybmNsYzNNekpPZTZM?=
- =?utf-8?B?MU5NYnZCNGZCMEwvbVJYaXNwTnRzVittdXRGUGUyR09Cd2VkOXQ0MVBoT3Mw?=
- =?utf-8?B?WGdkWFNDcnd6N1A2NnpENVZsN1lUKzBWSFM2Y0s4Y0NtTGR2OXVTaVEzRWRp?=
- =?utf-8?B?b0lVQ3pKbFIxVmw4RnJ0UVhNbjFOai9YMlU0N01ucjN0TlFpcWcweE0wMlBz?=
- =?utf-8?B?Sk9QczVqRkZNYUVVRnZXZzl3VUJkS1JVbXlWTUxyQnBtTmhpSXJ3QT09?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4af48315-265b-43f8-e6fd-08de79449e2f
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 16:47:55.2973 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fCvQ0sSpzrWhe7vEFBVHENPhMaGcUqPXSYtDJt0milvNZspCi50CVjFZzfEuSckHwyvSc0toZtf+bwxoel7T5u0prdfYG94/d1l3kusCy9M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB12112
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="acRQW546VY0CdNBk"
+Content-Disposition: inline
+In-Reply-To: <ca14a108-6308-4b48-981a-a0d20b716ded@altera.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,67 +109,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 3/3/26 4:14 PM, Simon Glass wrote:
-> Hi,
-> 
-> At present binman handles finding/building tools needed to build images.
-> 
-> There is no equivalent mechanism for the firmware blobs themselves.
-> Users must manually obtain these and point binman at them.
-> 
-> This is quite painful at present. Each board requires some splunking,
-> reading vendor documentation, etc.
-> 
-> I believe we could create a similar setup for blobs, where they are
-> described in the image description (compatible string) and there is a
-> way to build them, download them, etc.
-> 
-> What do people think?
-> 
+--acRQW546VY0CdNBk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I don't like what we're doing for bintools already. We don't necessarily 
-know what we're building (e.g. build_from_git() which only allows 
-building a given branch's HEAD or the default branch's HEAD), we 
-download stuff without enforcing checksum (e.g. 
-fetch_from_drive()/fetch_from_url()) from places we don't control, and 
-downloading from the distro's package manager is APT-centric (and racey, 
-since apt-get update can be run from two Binman processes at a time and 
-that is still racey to date, apt-get install can be made 
-multiprocess-safe but is also racey in older versions of APT). At least, 
-we can bypass all that if the bintool is already present on the system.
+On Wed, Mar 04, 2026 at 01:00:13AM +0800, Ng, Boon Khai wrote:
+> Hi Conor, Tom,
+>=20
+> > > Why would this be inappropraite for the Linux kernel, once the system=
+ is
+> > > fully supported in Linux is the first question to answer. Thanks.
+>=20
+> As Conor mentioned, the bits_per_word setting is obtained from the
+> controller and validated at runtime.
+>=20
+> Additionally, bits_per_word can also be sourced from ACPI, as shown in the
+> Linux SPI driver code
+>=20
+> https://github.com/torvalds/linux/blob/af4e9ef3d78420feb8fe58cd9a1ab80c50=
+1b3c08/drivers/spi/spi.c#L2739C7-L2739C20
+>=20
+> > in its spi_device struct. I don't know if u-boot has similar
+> > functionality in its code, but looking at dm_spi_slave_plat which I
+> > think is your version of spi_device, that information is not there.
+> >=20
+> Currently, U-Boot only supports an hardcoded 8-bit bits_per_word
+> configuration.
 
-This already isn't giving me much trust in doing that for binaries that 
-are going to be running on the target. This is us trying to come up with 
-yet another build system, I'm not sure it is worth it. But I can see the 
-UX improvement even though compiling for Rockchip is kinda muscle memory 
-at this point to me so I don't see the high cost newcomers may experience.
+Thanks. And can we reasonably follow what Linux does here instead?
 
-There are build systems (Yocto) that deny network access outside of 
-fetching source code. That is, binman won't be allowed to fetch anything 
-from the network once the u-boot recipe is outside of the do_fetch task 
-(fetching U-Boot source code). Therefore, it is an absolute must that 
-the same binman nodes must be compiled with the blobs available in-tree 
-vs building them with binman. We also must guarantee binary 
-reproducibility, things that Yocto does right now (at least for 
-OpenEmbedded-Core, which admittedly doesn't contain TF-A or OP-TEE OS) 
-and Buildroot aims to do IIRC. Reproducibility isn't that easy to 
-achieve and we would need tests to guarantee that (Yocto does as part of 
-the CI). Then you have the question of multi-toolchain support or 
-support for different flags in binary vs U-Boot itself. We very well 
-could compile TF-A with clang but U-Boot with GCC for example.
+--=20
+Tom
 
-We should be able to replace the binaries without getting a new version 
-(commit hash) of U-Boot. E.g. there may be a CVE fixed in TF-A but we 
-shouldn't have to wait for either TF-A or U-Boot to do a new release to 
-get this fix in.
+--acRQW546VY0CdNBk
+Content-Type: application/pgp-signature; name="signature.asc"
 
-What exactly are you trying to prevent from happening or to improve? 
-Should we somehow force documentation for boards to contain instructions 
-on how to build/fetch those binaries and make that part of our CI insted 
-of mocking the binaries? Note that this also will increase the time 
-spent in CI, which is already quite long.
+-----BEGIN PGP SIGNATURE-----
 
-Cheers,
-Quentin
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaacU7gAKCRAr4qD1Cr/k
+CpCOAP9WkpcUsUGpA77HB7th60u4HfuipYKpibVra82Px2urzwD/XY4UN7netN1z
+PR6aCmzDJyq6KXflpqk2Arzwm6zwqw8=
+=TGwC
+-----END PGP SIGNATURE-----
+
+--acRQW546VY0CdNBk--
