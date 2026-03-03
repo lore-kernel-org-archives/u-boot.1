@@ -4,89 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D64EB363D
-	for <u-boot@archiver.kernel.org>; Mon,  2 Mar 2026 22:18:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71109EB3644
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 00:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52A8983A1B;
-	Mon,  2 Mar 2026 23:18:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 796AA83F7D;
+	Tue,  3 Mar 2026 01:05:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HokieHA9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lk84YCpq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AEF583F0A; Mon,  2 Mar 2026 23:18:33 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 4997883F63; Tue,  3 Mar 2026 01:05:08 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AA3B8063E
- for <u-boot@lists.denx.de>; Mon,  2 Mar 2026 23:18:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8D7280517
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 01:05:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-45f18e8f2f5so3420480b6e.3
- for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 14:18:30 -0800 (PST)
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-4163a7c7ca5so234791fac.1
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 16:05:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772489909; x=1773094709; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tLOgHlxw+vky3el/nFievB1E7T9D2ANNXrnN5TXQ1ac=;
- b=HokieHA9iR3Kuij1ftWwZKe2Z65Yf8AGWUR3tYNixk8O776qacR2J4Lb93UeuajyFl
- tmbUxV2nD4eKKi2bxbB8BsGVrNZb5vD8kZDO5EHmOmx2xmSzQaxDGWc0z6H9b7DzDVcV
- Girxrngg/DnP31Uw0yvKpVT3sylt8DVwltmSk=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772496301; x=1773101101;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UvpnwV1rkALhOoONp6hhjnwJTJ9ZdqvnLz+XDbGZl3w=;
+ b=lk84YCpqHDVVnCQnfocphTgb85Ptke5leBYkG1bT4aJ96DfKL9zoA6xPa2lXBtzUju
+ q0GYotPLo1O+g7T1f1uF3FXInddZwNvybHGc9bJbwq4JOVNnhsSt8CDCJUu5kStCnDyN
+ JQt1eyYYBXo5aIu06EYBpkEdvUybcS0VrP01C2Yg2Rsv4eTP6jhQ/wmLJRhQQuQRvqiZ
+ Iqw1FEzspJryxmP3j8+U6ZZqoynrAh8i0M1Nl5hotBMnURZFQZVLDpAj0yuGIroCTe8y
+ GW279CdbU0sEa8QyvARm1PWCo7jjjmNqtA7HVD3Ewbw9QDzItfiT/iEzI4K5iQyrse2b
+ oVOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772489909; x=1773094709;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tLOgHlxw+vky3el/nFievB1E7T9D2ANNXrnN5TXQ1ac=;
- b=Q1wxvQErkDrDcxFwF4QbXSNSJuI0wMkmUb88bwBBZkr+S+SNRpYxiZQfSbo5F5IDra
- dLb2GySffHlj405KCaqWjEHqJVuBVFbMLM86dZS/h5udG4+rueENx5DzgVTqOORu9Hki
- gQ8lRgboNfOQf2AHXAw9c1LMLH84FJjp/uCXcDST9bulXeD2nJ7XuJmyMvc1y7L+McSo
- 4BggJc1JQtcK2u47HUAuoxuISHStS9dpKJyV70xKXeSYA5q4IKzg9pa08+FeTqNoZKXK
- EqUMOUgSV2bvhmaFpXF6L/m87Nx9YeqxqyeuKzJR+LE7UWrnX2ID78nHcnksbQUgzOMg
- hUOw==
+ d=1e100.net; s=20230601; t=1772496301; x=1773101101;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UvpnwV1rkALhOoONp6hhjnwJTJ9ZdqvnLz+XDbGZl3w=;
+ b=W3OEhar14owVtBPmQxojru33TfGd81ssxQKPGIyzYLc1wLQmo4j1yUXGp8yWRDsKr3
+ hkbsgufVpvYOWU7YqCm0Agr2Ha07KcwvHYVcApl5+qcT6MnX5hvo5lusLK7yvCXFYRA9
+ 67ZDrlnshP6eaxFhcFjx/ncIC3eKGF6CuLoYt57ExPdHeP4Pi8mfOK3kN5LryCriNEwy
+ xy03axLh7uawBPV8L7BHByBjg60xFzpJnwIeK5WgHo3h84PzfYoQU5SpJF4Ng6EILEyu
+ DGezevudPy+5+lYJ8znYDNJonSgnbTOKRIT2Jp1MdtqcCJtvsuR5j7d31PQd4c5eujiF
+ ahbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCViVJOVZBRePnzOa+ddQC/TKUWRkla3/Lu3YUHqVVQ7dr6C75iw8NrhO1Nt6+U8RUchP7a8BMw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwAoWOXRu9R3pbQegtbNEOTQ0zNexDNUwUerTbRPEZiC6hMtvUQ
- IR+/rzrj5IccOhIlsEBjKhz5h/LU8MVxU7dOKwsWrcPkc03Lblof5jEU4GWwyOHUB50=
-X-Gm-Gg: ATEYQzxjwb8QHYfUSje8h9ptQ7ikszXgq0Jny3kd0I99rOm+7Cvy344gEGK75Z/UAiv
- SIk1U2ZqcuHx6gg1dfR4sIe9LhELLIGV2RHYNJEdTvROsUU+YBfCdGtsk0Uxt15g4KwJpitks8U
- OcyLhVv2MOzYf+GTPltbVfuyh0sXNOMC8Rtty/3p/AKnREljx90QW6s0yERxK+02XkI+Dd5Of49
- q90Q0dqRHBkph2siGxxhLAmNWrRmcoSBul+ovc7zoZUpOdVsRTDNnvOQxBMArisljObFA1ZENNA
- Zr6gI5GKozRMtHRTtc7X8E4lGO6Z5CBVfT7H8OdKKXOseTykDX29XPQPWQ/rURwye+Xt+3HMX64
- 6Se609l1lsHw9Jxuv65bP8bgVoQehqL2ACoq1TFPcHS88yOvbGtmToN3XWG4ChfsqXhLYxzzHX7
- 4Lfm4+6+SOEBNmkPxTdWhVV4xGJqukI8HL0hjRjnlwoMeF6EvPF8e3fLAGB57Z39ATuiBl2nwUl
- FuZtFq6uwsQkRe/5EFWEFl3A4WIOR2jn8kR+ayygAizCHonKok=
-X-Received: by 2002:a05:6808:ed0:b0:45f:2788:b00a with SMTP id
- 5614622812f47-464becaa16bmr7308481b6e.33.1772489909265; 
- Mon, 02 Mar 2026 14:18:29 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41640b99b39sm8360284fac.10.2026.03.02.14.18.28
+ AJvYcCVKHjWoArReQd3Xe2il5sMEPi+JBmeUWqyztIIbOdZ4Udhl2Wac+NeBOx601J0YtHrfT8mQ9hs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy2aKyYRK1/FpL5d1YD8BsoWfaokqv59VlN7l5k1eitJ/UDMze+
+ LlmygQYCvEKNPhYJT+Wce3ZkN/hxVVmDiNrXu5pzHdF8HL19aw5zjY7h90gL1ZIwknI=
+X-Gm-Gg: ATEYQzx/4Xw+pCgBLU9XTbQvbbWIlzMcxIUPwCiz1UEYiCAKUVfdGTVn8j6bfHJb6aY
+ 7MM2Vtfmmjz8zt8d/G7444CiUDT2uzmf93PJ6F0Iy6j4Uzez9sxSwULv/I01zuexn2fwXM7UKzP
+ lHj59ga0O1K7JVjwub2FYZZAmY5o+vIPlbjBBTGZcwfHNHvtkcLXCt5Eh/hydnjPzDw7CtESIMd
+ +IP43MJNirPzP6dY6dxL5STLsAARB2TkJ3Tw7c5GR6xx7BWSD4UkLcZCtgqe24kx+8OoTP6WoPC
+ Cu7oYWoWcB7GVWmkCBV2ix0pZOo2L5R6pPcAOSbyxBmDw9/HXSSyURjnaQya3uh8gvewwAVFPCX
+ ssQoaL5WPyPMs8ZOGDhvCf8TeR/VaPec6OBBdKtNQGpkX1Ps3C8WLL/xPsONkSC96EZXTVWb41a
+ vCd1fCyRMCluZs3zduLJU/e1q2uFdS
+X-Received: by 2002:a05:6870:b1c2:b0:3e8:98e4:56d with SMTP id
+ 586e51a60fabf-4162704275amr8164598fac.41.1772496301317; 
+ Mon, 02 Mar 2026 16:05:01 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:4c09:7c6b:bc48:f2f7])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4160cf239e0sm13878551fac.1.2026.03.02.16.05.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Mar 2026 14:18:28 -0800 (PST)
-Date: Mon, 2 Mar 2026 16:18:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Chawdhry, Manorit" <m-chawdhry@ti.com>
-Cc: "Francis, Neha" <n-francis@ti.com>,
- Nagabhushan D <nagabhushand34@gmail.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: FIT Verification
-Message-ID: <20260302221826.GK1388590@bill-the-cat>
-References: <CAA-ybFQ=DbZzcGq_=HLFx_Gp_D1YKj=oKYXtD0HKPuVYcQyyoQ@mail.gmail.com>
- <CAFLszTisAAQJb53Z9bifbMd9fQL-1iXnmbsyZMRDovAYYF87oQ@mail.gmail.com>
- <dfd8356a-2e93-47e3-883b-9605173a1db0@ti.com>
- <6c7588a2-254b-4e26-9174-925b1c66619c@ti.com>
+ Mon, 02 Mar 2026 16:05:00 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 00/14] clk: mediatek: unify mux clocks
+Date: Mon, 02 Mar 2026 18:03:09 -0600
+Message-Id: <20260302-clk-mtk-unify-mux-parents-v1-0-32f45085f4d0@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uUH9+/V5qFTATvXc"
-Content-Disposition: inline
-In-Reply-To: <6c7588a2-254b-4e26-9174-925b1c66619c@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/2WOwW6DMAxAfwXlPG8hMNqiatp/TD04wWERJGFJQ
+ KCq/76USr30+Cz7PV9ZpGAosra4skCLica7DOVbwdQvup7AdJmZ4KLhFRegxgFsGmB2Rm9g5xU
+ mDORShFLq6hMJpeac5fspkDbr7v65PDjQ35wT6TFklmLEPdEW52fhbrfpWB5POebVEGGpgIOqj
+ 6TyRl3r7lviNhoZ6F15+3WPvaqEqJ7PBrJ+oR3lNmGMsCYcQY/Yw1JmOR46dTpIJZqGv8olxnz
+ srTWpLXwwvXEfjtbELrfbPyZ38P5CAQAA
+X-Change-ID: 20260302-clk-mtk-unify-mux-parents-1bf35aeabf00
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3678; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=6iab5LkIYu6QqRsZJyF3OHb+cIcN9XcvHsQ1rEelhlU=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBppiVJ5/N18lI5rrOPFnxcYUGhc8qR/+nTGd29R
+ +Cmsbr7ucCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaaYlSRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A1HEH/RZd3JHGLuRs1lg8RC9lOWyrBYpkgkIbBJ+ehLv
+ 8/6jRQRzqAeipuZCFOFBI/OUVfffginqTOtZtbS1vL5wnpp/s9ONks0wx1F6H5xpRMEYTc9tkXA
+ +U6RnqBX4/Pqv8Em/iPjI+RKYQvNDsfMgYy4yzYqgKo/CUuwvVN4VpdqgN/8xaavRVU8Yr76MQP
+ cPHh3clu3hHQGDK2bfHi4T3yR9p5mPyU8/HoIzL6YsKjIMrNU8wHVjpbW+5EFbjL54NhlLe4jYU
+ oxTIb6jguJFfoQ39SHiEBNTLdzdWr0Srq9VFMc6FqaarQYXDXscMF3xlUki6tqxVPEU65Z7LgWy
+ LbVg=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,99 +123,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The MediaTek clock driver currently have two ways to indicate the parent
+tree that contains the parent clock. This adds to code complexity and
+makes it more difficult to know the "right thing" to do in new drivers.
 
---uUH9+/V5qFTATvXc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The plan here is to convert all mux clocks to use the more robust option
+of using struct mtk_parent to specify parent clocks. Then we can remove
+dead and duplicate code and macros.
 
-On Fri, Feb 27, 2026 at 04:24:37PM +0530, Chawdhry, Manorit wrote:
-> Hi Neha, Nagabhushan,
->=20
-> On 2/27/2026 4:00 PM, Francis, Neha wrote:
-> > Hi Nagabhushan
-> >=20
-> > + Manorit do correct me if I'm wrong
-> >=20
-> > On 2/27/2026 5:14 AM, Simon Glass wrote:
-> > > +Neha Malcom Francis
-> > >=20
-> > > Hi,
-> > >=20
-> > > On Wed, 25 Feb 2026 at 01:54, Nagabhushan D <nagabhushand34@gmail.com=
-> wrote:
-> > > >=20
-> > > > Hi Team,
-> > > > I am a recent graduate working in Embedded stream. Currently explor=
-ing secure booting on TI boards. I went through some of the writings on git=
-hub - https://github.com/ARM-software/u-boot/blob/master/doc/uImage.FIT/sig=
-nature.txt and other sources by TI. I would like to get few confusions clea=
-red by this mail and thanks for take some time for this.
-> >=20
-> > I'm linking a couple of links [0] and [1] that should clear up everythi=
-ng if you
-> > haven't stumbled upon them already.
-> >=20
-> > > >=20
-> > > > 1. Can I try out only fitImage verification with hs fs boards only?
-> > >=20
-> > > Neha may know about that one.
-> >=20
-> > No, both GP/HS can enforce fitImage auth (check FIT_SIGNATURE_ENFORCE)
-> >=20
->=20
-> FIT_SIGNATURE_ENFORCE is something that wasn't upstreamed.. it's something
-> internally that we had tried to flow flush it and just left it at an RFC
-> stage [2]
->=20
-> But to answer yes, all the keys and everything is contains within U-boot =
-so
-> regardless of HS/GP or whatever device, it should work fine if you follow
-> the guide.
->=20
-> > >=20
-> > > > 2. Can I try it with ti dummy keys or any other way to know if the =
-flow/fit signing is correct?
-> > >=20
-> > > There are tests which check signature verification using sandbox,
-> > > which might be the easiest way to try it out. See test_fit.py
-> >=20
-> > Yes sandbox testing would work, as well as building with the TI dummy k=
-ey.
-> >=20
-> > >=20
-> > > Regards,
-> > > Simon
-> >=20
-> > [0]
-> > https://software-dl.ti.com/processor-sdk-linux/esd/AM62AX/latest/export=
-s/docs/linux/Foundational_Components_Kernel_Users_Guide.html#creating-the-k=
-ernel-fitimage-for-high-security-device-gp-devices
-> > (this is our SDK doc, just in case you need more help to follow along, =
-more or
-> > less the same as what the upstream docs talk about)
-> >=20
-> > [1] https://docs.u-boot.org/en/latest/board/ti/k3.html#fit-signature-si=
-gning
-> >=20
->=20
-> [2]: https://lore.kernel.org/u-boot/20240111-b4-upstream-fit-signature-en=
-force-v1-1-2b91be31866e@ti.com/
+The conversion to the static const struct mtk_parent arrays was done
+by script to minimize the chance of error (and save time).
 
-And someone picking this up again would be appreciated.
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+David Lechner (14):
+      clk: mediatek: move common PARENT macros to header
+      clk: mediatek: mt7622: convert to struct mtk_parent
+      clk: mediatek: mt7981: convert to struct mtk_parent
+      clk: mediatek: mt7987: convert to struct mtk_parent
+      clk: mediatek: mt7988: convert to struct mtk_parent
+      clk: mediatek: mt8183: convert to struct mtk_parent
+      clk: mediatek: mt8188: convert to struct mtk_parent
+      clk: mediatek: mt8195: convert to struct mtk_parent
+      clk: mediatek: mt8365: convert to struct mtk_parent
+      clk: mediatek: mt8512: convert to struct mtk_parent
+      clk: mediatek: mt8516: convert to struct mtk_parent
+      clk: mediatek: mt8518: convert to struct mtk_parent
+      clk: mediatek: remove CLK_PARENT_MIXED flag
+      clk: mediatek: refactor duplicate *_mux_get_rate()
 
---=20
-Tom
+ drivers/clk/mediatek/clk-mt7622.c |   96 +-
+ drivers/clk/mediatek/clk-mt7623.c |  153 ++-
+ drivers/clk/mediatek/clk-mt7629.c |   75 +-
+ drivers/clk/mediatek/clk-mt7981.c |  236 +++--
+ drivers/clk/mediatek/clk-mt7986.c |   15 +-
+ drivers/clk/mediatek/clk-mt7987.c |   79 +-
+ drivers/clk/mediatek/clk-mt7988.c |   83 +-
+ drivers/clk/mediatek/clk-mt8183.c |  584 +++++------
+ drivers/clk/mediatek/clk-mt8188.c | 1522 +++++++++++++--------------
+ drivers/clk/mediatek/clk-mt8189.c |   16 +-
+ drivers/clk/mediatek/clk-mt8195.c | 1364 ++++++++++++------------
+ drivers/clk/mediatek/clk-mt8365.c |  450 ++++----
+ drivers/clk/mediatek/clk-mt8512.c |  620 +++++------
+ drivers/clk/mediatek/clk-mt8516.c |  704 ++++++-------
+ drivers/clk/mediatek/clk-mt8518.c | 2088 ++++++++++++++++++-------------------
+ drivers/clk/mediatek/clk-mtk.c    |  104 +-
+ drivers/clk/mediatek/clk-mtk.h    |   59 +-
+ 17 files changed, 4121 insertions(+), 4127 deletions(-)
+---
+base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
+change-id: 20260302-clk-mtk-unify-mux-parents-1bf35aeabf00
+prerequisite-message-id: <20260302-mtk-mt8189-clocks-v3-0-c48ec60344fd@baylibre.com>
+prerequisite-patch-id: 81f2dd4fd7c1632736c08180d6b9f6aef5fe1e7f
+prerequisite-patch-id: 0414664c8d24f8303d238aa1c4389072ba9f8613
+prerequisite-patch-id: b63492590bec532b0347be3b495cd1779b0ad3ce
+prerequisite-patch-id: 9e03fea677d2d9b5ae6860e700f62b27db270e64
+prerequisite-patch-id: 3d5661f9e55292a30f57617848a7b10e67844402
+prerequisite-patch-id: ccbc73b2bc1dc41beb295604088d63773cea15ef
+prerequisite-patch-id: aa76b6b028374f20551955eafe56a1e0c1daa75d
+prerequisite-message-id: <20260223-clk-mtk-remove-clk-bypass-xtal-flag-v1-0-a7dc97bc2660@baylibre.com>
+prerequisite-patch-id: 15ac11765ddddcf378e0e227a9fb5876636aa8e6
+prerequisite-patch-id: 90b4781a99ea5eb40eb6c943dee86dd8a9fabe06
+prerequisite-patch-id: 80d270c12e6eb32a3ba7898566022bb2be3f584c
+prerequisite-patch-id: 7c5b9d822900b1a91e772e55561fcb093a9387e2
+prerequisite-patch-id: 5a520115a1494b9d6ff6190b7209816f7c3aa4e0
+prerequisite-patch-id: 7e30fd6d0049029a97e21473932bfde6abfc584b
+prerequisite-patch-id: 0700411359ab89ebd24c4c3d17a5864e41289547
 
---uUH9+/V5qFTATvXc
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaYMrgAKCRAr4qD1Cr/k
-CrA3AP46yWcwE+GUmnijJVMpVQ5KCe+QWvzfkKxxCe1+qU3M/wEAvbl5vHuGgdta
-n2tTQJXzIg3IyLL4tVc711E4ksw/1Qc=
-=Q0qg
------END PGP SIGNATURE-----
-
---uUH9+/V5qFTATvXc--
