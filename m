@@ -4,150 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E468EEC1427
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 10:41:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A64BEEC142E
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 11:07:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18E5C838BB;
-	Tue,  3 Mar 2026 11:41:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E57BE838BB;
+	Tue,  3 Mar 2026 12:07:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="USkyUMgP";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="USkyUMgP";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="SryKzHk6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B39A83E7F; Tue,  3 Mar 2026 11:41:42 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id B39FE83E7F; Tue,  3 Mar 2026 12:07:53 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D46B68063E
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 11:41:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 774A08063E
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 12:07:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=GlCzmBtE+DVGpuaDbBhnAFUhuxKKVUDUTf5X3R44cx62s2EnqB5z64EDMiJmWsYuLBMBZDoK875dEuBvUKuNlqGfoAJft05kmcW1h50khKKYUhx4OVFls6BZTETGmuskafdeFbeKjOmo4QPqZw8MeousaQLF4UmUlTDixvomd+ox6cz2wvXM0BnN/66tpGvti6EbwabVE/+AWjvGVyZVJW8X+71B83hOWRnANblFX/l2X2TIv7aeS1AzjNlF73Oa9K4p5F+nIC1IjAVZOETTjVRj/TFyiLsIk4qVrp0wc0982dojY2Ga55oi4BfgiqY9EMXGaPivSY7igQO/xnDOaw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jMEtb9hQRfm7PNmUtcFah3tthwNa6mTltmZzDzzInoc=;
- b=c1RSZ4BNlgmh/J5nRPDA082bqmFr25IzceU8qyT05R5PxgteeVIgt4BjOGqgCM9KV7owiC9kBRkTvjBrBqx7bp6lgB1MHavOLJAkpXXfOlDIZLOtL3Q0A/51IQVzPR4nywi1m5bd6TiOo2hQAs9sAfqz3xSrlEo0JEzkEvVK9qVny1q4DEaSsTpbLpoOG0mNnHOJJkec3NCVMvrEDHhRAsbGaBrDZAMaH+WCXRYzht0A2Hn49V2gKO0nRRBdyhzCyOu235r9qQC4bjZxaqaCMH3qZffyWEo7rj8M/0Jvii/eakxQ45lKmQ/BvzqAnrTF/PeS/0wht0/dfwMlKLvqzw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=konsulko.com smtp.mailfrom=arm.com; dmarc=pass
- (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
- (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jMEtb9hQRfm7PNmUtcFah3tthwNa6mTltmZzDzzInoc=;
- b=USkyUMgP54gMvF2bEE9x3cQQW/GLKaTsorg8rvgkXQVOJxI8g6dSvjub8B8bM6CPsTc10L753Hwg98dPhArXJg8zOXTKifEF9Vegzac67itw3vUwaAG9D7fz6oZlmX+/M09hvqYRs+rQoUdAHWPsbY6HjPNKD4try91VbOmmFbg=
-Received: from DB8P191CA0002.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:130::12)
- by AS8PR08MB6694.eurprd08.prod.outlook.com (2603:10a6:20b:39e::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
- 2026 10:41:36 +0000
-Received: from DU6PEPF00009529.eurprd02.prod.outlook.com
- (2603:10a6:10:130:cafe::b7) by DB8P191CA0002.outlook.office365.com
- (2603:10a6:10:130::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.19 via Frontend Transport; Tue,
- 3 Mar 2026 10:41:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DU6PEPF00009529.mail.protection.outlook.com (10.167.8.10) with Microsoft SMTP
- Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.16 via
- Frontend Transport; Tue, 3 Mar 2026 10:41:36 +0000
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DoODhaf3oLbsUZdSvbuHzNsrYpev02dfIIz+Aotqs6eKmADgKa6j8MZY2smvEevvYeSjCQwglNsfqXLzwnYlaWa1jrv5cFLJc4G7BljpkabDVoQVnXfkstULvOzig+p+1BmV7H14jttD5/IRaiuATs7DpGj7cXup7QOWXj8/3WLnkObTypGTkxwvTUlosR1naIlB8svFzBibtmetSpQd5KgOs5hqc/N8WMl2uUPfohivQOizFXvV7/j7G23WWE8P74nmj5amaa+U4prEpvLKGqJ5A5Pkqvj5yuWXOphKA0vmeq7vRJ+e+1q5Tyv3ZfUjBUs/LQSlX5FvQSMlebCH2g==
+ b=ceGg1V5Yo7DIwMUySmSKZhDCBdOPbG59ROdeYvQEzhq49dtgLIzFHnjJed5Je6lrbLbD1VDb70+GNnbJvw2bELfTBKVHErPSJXtYeIGKPU0kOkDr+cA2q4YQIUE8IVl40zRzIKO8MyV2LwI7nZodtoeOEGMgcFWpDBHz7RY554cgAMqhg41ORak5pquRtl2qCP2SmoYdFFOKL5EPbTXxf50TRgfmwKg1CZM3B1COaeVLsh0XNy4YYt0dpyQNvKJZW4HhHgp5Z7EhjgKCHfjmmMsVmKYnFbFEybbzt6i7nwzm9yRD24LTk9w4LJNhglFjPFzyIpZrJNMWbR3/uE813g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jMEtb9hQRfm7PNmUtcFah3tthwNa6mTltmZzDzzInoc=;
- b=G/6ClU4DbFFx5gFQIVm429XLxt4/gSD9a/dYcKK12TimgtTtte6GVHWEzxbmVsx5rwbSrATaKnL7bQ7VVJ55RqKMdiPqhAPo/gpVObAI3CpOZvieMJH2TOUhc9QJAiTXqhfeRuxjajOpOH+Qt0ElmK+hpdSw1MaffgprljYxybAqTEJo7sP82Qd/GQDchixQ14x3wPRAxiMxIOulKU90Jas42ABIbT++ByNs+x0EBA5xxslDcxV418oS/ArpjiHHq8DvYqI+g3HjbAeVPjF+5n8Qc0jdJLEqG7Qid29FCAJSWODzuL+14SOXdwcqtq6E69p5ZPM/c03dHPQzgZGhZw==
+ bh=ilftRNWvVSQIR8GLCGjPHo+swMOkg4QwdSRRbyV95O0=;
+ b=ZiwXmAp93FFBzzf3t2iOn9TFjNj7kPp3Ny0zLKzY0Z3erwYn159CfMFn4VcTo1QBTog1TmCQTDYTjEXVfiM5VW5JamdiWJ+OsTjI+tgEiZBdWW847d91I1cW/xDfizOdlESvb2jWeQFuphb+QR3xRtPG3Yflm1FSK3ejYQpUw8dwGt9tdJkNgWzu+j6N1dqdTzbxMhzSo8ocuNm/QkOnDWBbIaA5HcfydOUAoZ2ALImsUkF+/s4gEfC3Xf6RVpif17Q3sW8vFzdSPjBq6mAA9cCc7S+bDz0mkN+wGhRpdwY1+K6kusysm1Xyc03CmK3jq5UQ9RR/VjfIwzTT5xbz1g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jMEtb9hQRfm7PNmUtcFah3tthwNa6mTltmZzDzzInoc=;
- b=USkyUMgP54gMvF2bEE9x3cQQW/GLKaTsorg8rvgkXQVOJxI8g6dSvjub8B8bM6CPsTc10L753Hwg98dPhArXJg8zOXTKifEF9Vegzac67itw3vUwaAG9D7fz6oZlmX+/M09hvqYRs+rQoUdAHWPsbY6HjPNKD4try91VbOmmFbg=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16) by DU0PR08MB8373.eurprd08.prod.outlook.com
- (2603:10a6:10:40a::12) with Microsoft SMTP Server (version=TLS1_2,
+ bh=ilftRNWvVSQIR8GLCGjPHo+swMOkg4QwdSRRbyV95O0=;
+ b=SryKzHk67jhkHQAH1lw6+0HynlaRQqDs3m1fr63vEJRtiqoWn1Tur7VULQK0mi/NWgQWyk8mAHbsDmlTPC5OqwY/abJCHiu3IgleNlV9T9MZATgfjMvIeObCk6tTvbc08359OHJMh2hzQ2+BWMB9/YJgP4fL00H8jJskdrbuPlY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by DB9PR04MB9329.eurprd04.prod.outlook.com (2603:10a6:10:36f::9) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
- 2026 10:40:33 +0000
-Received: from AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3]) by AM0PR08MB11733.eurprd08.prod.outlook.com
- ([fe80::29d7:e9ba:ff69:a0c3%5]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
- 10:40:33 +0000
-Message-ID: <75ce7bf5-840b-47b5-b6d6-cd24d46bb951@arm.com>
-Date: Tue, 3 Mar 2026 11:40:32 +0100
+ 2026 11:07:49 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
+ 11:07:49 +0000
+Message-ID: <9a229a29-7ba1-4f23-8940-7be3d56ad7da@cherry.de>
+Date: Tue, 3 Mar 2026 12:07:13 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: Security Disclosure: Multiple buffer overflow vulnerabilities in
- NFS client
-To: Tom Rini <trini@konsulko.com>, "Lee, Sin Liang" <slee3846@gatech.edu>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Kim, Taesoo" <taesoo@gatech.edu>, "Zhang, Cen" <czhang887@gatech.edu>,
- "anshuld@ti.com" <anshuld@ti.com>, "bb@ti.com" <bb@ti.com>
-References: <MW4PR07MB86367A3DBC308E10144FE6A6AA73A@MW4PR07MB8636.namprd07.prod.outlook.com>
- <20260227184202.GZ1593142@bill-the-cat>
- <MW4PR07MB86365FC9B8024035576E2C7DAA73A@MW4PR07MB8636.namprd07.prod.outlook.com>
- <20260227220730.GA1593142@bill-the-cat>
+Subject: Re: [PATCH v1 1/1] led: led_pwm: fix active-low behavior
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Ivan Vozvakhov <i.vozvakhov@vk.team>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ u-boot@lists.denx.de
+References: <20260209180718.32451-1-clamor95@gmail.com>
+ <20260209180718.32451-2-clamor95@gmail.com>
+ <d194a890-6921-472b-935f-8b2d01c1289c@cherry.de>
+ <CAPVz0n3Tsx2rvfmBhDQDyW-_fLm3XLiPzzna3ZCxbt=LeQAF3w@mail.gmail.com>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@arm.com>
-In-Reply-To: <20260227220730.GA1593142@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: LO4P265CA0056.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2af::23) To AM0PR08MB11733.eurprd08.prod.outlook.com
- (2603:10a6:20b:740::16)
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAPVz0n3Tsx2rvfmBhDQDyW-_fLm3XLiPzzna3ZCxbt=LeQAF3w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR2P281CA0127.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9e::15) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: AM0PR08MB11733:EE_|DU0PR08MB8373:EE_|DU6PEPF00009529:EE_|AS8PR08MB6694:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3fc795a0-f0fd-471b-7761-08de791171aa
-x-checkrecipientrouted: true
-NoDisclaimer: true
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|DB9PR04MB9329:EE_
+X-MS-Office365-Filtering-Correlation-Id: a31e34bc-a41b-4ebd-233e-08de79151b0a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info-Original: 2OsZaNYudJ/HrtgyWsbshTjWHyPwN51Dfedck/etJayoqehlMZtfeledc1/UqVaUwtlRz/kGXv/thxwYnlhr6QfLAUMPrb3bnfaIo7/5wQ9A1A78gP22qUc4R6w9YAfoRjjdHrcDxCdJNPfjHLc1/6NtAOefnYLzIb25WdobI8UqAGq7UfoOAa0n1ZJgI50cPlPeQYBqCh7voP/FscmRXswgGOpuT9dkFDgRJfAd+M3z+V5RKsU+l4YuQYJUnCF6m4KffPJwlFTmlMgyupg0wSPwavKUXjYRMZ1wb1UFobQ21NCeKiufV8aANSEn61/niiHLRKV5oDYZpYS9To/RQdrkz1vwV44jI2njLfJFzOGuWfOneU8cT3I0w47DLJm1qIJk8eEaf0bJmKdZDkJgWvUIZbXBKQRutN10+8FVhXITJzbanIg4rrGF41HJNhCduiqgtKciPgzE1widI6OVIyX9dx64oDkGFf45SwzdqDNckAO98C24KzfhHSjb9rE3vcI75xjudCSDq/NAhmip2Nd8YQwu6vDGRPzfxH7Ti1CuFeW5KFnteDAGA3J9K8CRMtdtAvAOGm9Fug7LmPRfU2/tKJrxOHhjJTrJ/jUxy2Tic3usOEm4y+LPQdiM+/xTmcdMhGv/5AYhb/TqpIAtJSxFkPoOwz3PpJFAj2vUvUtgHytbPaaQX7Czq2Vq4LTa
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:AM0PR08MB11733.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB8373
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU6PEPF00009529.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 2d3d547d-dc89-488f-c3c7-08de79114c0f
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|35042699022|1800799024|36860700013|376014|82310400026|14060799003;
-X-Microsoft-Antispam-Message-Info: EJrHPvjqqQLu6j+sn0R2MMU4CeTj45zCpGj6fRap3Dz4uKnwMnl3nJy8EIZvXyaiU8AvwJyxY1zj2sjrJD1bA3lOLJ7m99lRZmkQays7psUyeV/pbs7+9E2ZapqB19nsZZcNjybtr2fiqblqxnDZAhwm/G3QXKLAY4IdjyJvePYBJJjTh6Ru5xFONdk6MNA6hpqqAKkDVv4MNeMSnugGvDF6L2u21pKdtJQmWST1URpVX2xQxP5hvZSnwiTpEbjlsFEMmXM0G4aXDlHnul2jjP8D9Fax6X1XLYhWB+l35J6pwg5DzAWVTiHcanyEVM/Ynajmuj53qcqwxsvTdyEPK/U/QpXphjzhLREnYOpfIjeXqeuCpZnao6q++hCwEnQt+ZaMXivwJkZArgb5fB9zzgGcRo0KLjK6yFtXm3LQuHs6h7oOyFdYaQUo4WgRiuyoPzck7uKuqjIm4YDEesM6w6r01pd9fm7R27bTFVtRZmIwaNK0wEbhqtsugyISL6dz5z0RNUvzRPNrMPLAALzdrD9c6yJcRogeRfZR1C4N1ro1nPpFR4a85Hdjvk1F9h24oqNYzDBbOOdwX7ukT/qB3RmGtVUKa0gGRKCbt4XN6iSS3qZ+mynQ2EDAGR3uiMjjaSUvOgCwmJJueszlV5Pc9I1RKCHs3k6U054qGGVbn0teWHkfpyUuFeAsAJsZfqk4M0V/BS72vO9WhVusU8bcHQHDJuzmpGN5YVQdTp3obCvamqvga1597ojGxs9wO84MViPghFUPGhquu6S893cceg==
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(35042699022)(1800799024)(36860700013)(376014)(82310400026)(14060799003);
- DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: KHBbyzcQuhWcqsodUo3oQVQCL/GLfz0a8Ng1ZhOLeStPhpSkEFuVFA7cMjjxw0tNvcjas5GubeG+3ps9LZjFbk1doWe136ve0DpopMwdm0ub1gk2ljfcrIORToYPoE1tLvHfu2cDl2RIG9XfDaRZT0YlbryxSMgAn6SWBGC1fPXzY3l8DIobT+vEbrqmFxR3xT9uNkj6Rr50O33wDz17HpYmP2f3lc97ipIfNKgubQ9nMW5x/4lgisPot+MblhWnTa2F3q9QOCJq8SZ0tJjmjeXPeIbdqxkTRDLnoedXxaaQxRcCbgzuDT2Wjtv2UdFiJ3/fu7JCk5KKaOV4gChvfo8XekNFyUHCjJSbmySNHNSi6qix/OpYiWmXOiVbeKleXdX1uikKR3/KXZMpZ6qAIC7SboEjUaYqVjQCfK9RoUrOOl9jINKuNH9A4O5xoZM4G3uKfi6F1Ou1ijGjoWKHIxc6ISPqoKqnDqNnRxnYJIyY3fauQ+lLb4hXLJHtPlxl24PB5XeKPkG/Uq8/tK2TMZWENWN69bXFDI6WnT/h73uY6HrqvZNTgHCAHxsV1gAkvjSUfhjghPW+9+NlFx4ZU1nU313LEWiN17tCc5FoLtkP33/tx+UGmtHURQir/RPvDulxsvVOgdvf2dG2Fy0SufY6SlhWQFCV0y6cjpBQaSXYbdXCjW3xiYMCLW/sFq+Ad1n9mAdM+0Y7NK6LliYEky3DORQXS0dpatnWH8PtXcE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 1rsrA5hLhtahXcrDRg2p3qRX00NHD+CabsFGF4/JbO3nNvvG5nbR/jlae7wij/qUG8wYoGnM+tOdxP4doqX8Y+yOQlDjIwwpEb856scPEA5UB2CbbTyKDhqKIfaiqrJ2BY1FX0hyYrabfKUUHwcU1L0imJA/1xRODDCCNoz5RjhGgg2crrCofAmpsuKdRk9baB1032EdOK/RtIAMwztOO+6ZIrT4UfWQhV89jgMQ2qd+Ai2pJswC+ham8MhbAGyHFE15qC1Qcesqj7zCTZpvkPWnucDxRLWgMTbFeRu/AuEfei3BmEF94MclH88D/p6/5ZbvjzRgE96IPcIgwu54heGegNOFcy/QDzOq5+iJYVrJHNSk53jvDN8/Bu8P37BkWv6YacdZRsVhcp9RnICmB5G1nXaYPQA4icBYq+NrX9NHWR0hgAc42SdBwJ+jNYMA
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 10:41:36.0506 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3fc795a0-f0fd-471b-7761-08de791171aa
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009529.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6694
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MGs0MVlkd2h0WUwya0d6OVZ0VVA4ZnVJNmRBVnUvb3g1T2J1UWE2V29CRkk5?=
+ =?utf-8?B?dmtmVS9NSjYvN2QvWnBreUVnUWpzS2kxSjkrMzRjQnRWb1M1TjNjS1VSOThn?=
+ =?utf-8?B?YkhKcWY5ZEQ0dFlJRGVXZWg1ZXlxY1RtSEFlMk5uMGRHbkx4UndQc3JrSXdi?=
+ =?utf-8?B?ak80ZnJJZDUzVTVFQ3YyQ1BCdlBKczEyR1dOWlIyUjhkZHZmVmdBcmN5WTkr?=
+ =?utf-8?B?WnFpZWJRdlpIZFg1THIzaE81Z2dZTnRzNm5IQ3grUG9ObnNhUWNlVzVvcGpp?=
+ =?utf-8?B?cEJtSmF3YUpGMGdZcFNScXJyMXc2MUhyWC9pV1M2VVUzTkRyT3RXSXI1VlhI?=
+ =?utf-8?B?c0IyNitLR3dCRXFWUEp4KzZCL08zT292ZE9GZktDMHNOeWJEM3hiWU5uWnEx?=
+ =?utf-8?B?OE5aMmM0RWNNYWZkVVlCWk9EM1V5ZVR0RXdKcG4vV1RVd3BSbFV1N0tiVE1K?=
+ =?utf-8?B?VkUySFRYbjlCQXNVaTI1MWJoTEVWSXZxM1dlVkgyT1U5T1J0aWNya3Z1UnNy?=
+ =?utf-8?B?bjVBdTdacFpGNkRkbGFqT0QzeWRyTE9ZczNDLzhvWDZOWVk3UER4cWh4YWhH?=
+ =?utf-8?B?bmVkQlI5bThJTGtQaU1scVlmV3Z0Sk1IRndHcitOUit1Njl0Ry8xMjQwbnUr?=
+ =?utf-8?B?UzF6K0kxTWVqSitOcTBsUFEvN0R6QXZBMGs1dEQ0YlhHd0d5VWVFYzJYMXho?=
+ =?utf-8?B?Q1ozMkE5OHlGbXFIazFOekRXM0kyYXNhOWNiMDB2R2FiU3E1eW41bDRySUtP?=
+ =?utf-8?B?eDNtcEN0Mk96czVzUGg1TTEzdzlNSjNxa3lZSTROcTU1bEo1bTIvNGxrdis0?=
+ =?utf-8?B?SE40Y3VQTmFtYmtaRkFBd2xlelhyVFZPVWtMSmdVVHh2TWJuRGZLdS82QmV6?=
+ =?utf-8?B?M2NwWVRnRVViWFRFQUY5T2pyeDJlNnBzc0VOdWZVWGZsSnhBK0RIbkNKNDVQ?=
+ =?utf-8?B?eU4xOVUyOGNWclI0cE5zUXRCUFcyTVFkUkZhY2tNWEFiM3lra2hDWUdIVHdB?=
+ =?utf-8?B?dC9McVdhN2c4Ymo5SDY1TGUrMGlwcWxtb2JMOW5HSXJkRXhHVFJSMzJRczJO?=
+ =?utf-8?B?YU1TZys1Z3paaVl3cE5ybDROc1pMOG5HQ3F5bzhOZzcrRWo5RWtXM2NBa1dP?=
+ =?utf-8?B?dXNwUGZDdm5iakVydVF3TDlqT1VHa25aaEs0K0VpWlUxOVB1djR6dHJ0N1Y5?=
+ =?utf-8?B?UWp1bmJjalBtdEZFOTZYQTRiMlYxaFJjSE1GZlBVU0h3a2U0SlRLMnpMcElP?=
+ =?utf-8?B?S0dTek0wRGpTeHNQMHRBWnZqVTNZNzZTakFoTFlBZDhxV1dVcHNPUGdJTVRy?=
+ =?utf-8?B?TVg0Zi9QVzFlVkJhMXVWem1ZL2RXTXQzZ3V2K1FwcnFONWlJT0NqZlZKYzdt?=
+ =?utf-8?B?TnVieHJmaXJDa2R3ZTlZOC9CTjV2NDJRZGlkd0ZpMmlCZmhhaDd5cXRKcmlC?=
+ =?utf-8?B?d29nQ1hiT0ZCeVNVQXFJemlIMFNMSkpFbVcxK0xqZTRTRTBsMkhLSTUxT2tw?=
+ =?utf-8?B?a0ZvaE0veDN3UVRFYmU3ZXVKL3FwNFFwa096WEVlajJkSjlCdVFKd05INDla?=
+ =?utf-8?B?Kzg2K1BIZjJZcEoxbVZJY3RLd1JXRGg5aXpkQkNKNnEyU2lGRmk3TFFzL1pj?=
+ =?utf-8?B?eVFlUXZzYU54ZlZXQ0RaWjhVNDVBR1N0TVBHMUhXRTNIYWs4ODdyRGZrKzM3?=
+ =?utf-8?B?aUpYRmFvTDdzWUhnYSt1aTZyZHBaTENMVTVMdVc4UWxYT1U2VFUzUU8xayt5?=
+ =?utf-8?B?Mkp3WDE2Tmg4NnlvUit0b01xYk1HWkdrUHByRkg2UmdIVTlYUXVqWGpXNlVs?=
+ =?utf-8?B?NklmREN5cW1paHI4YndHM1pVcGhFaXl3OWh5Z1RWTzVFUG5EdnBFZUw0M2N6?=
+ =?utf-8?B?Vis4UCt0b2FybnpHa1hLNm14RGNQbExCalZvYUo0a0dYejRGMko1K01OVG53?=
+ =?utf-8?B?aXNqS3Y4ZENMUXN1TW51SHBsa3VXbUNGVHFHSEFXNktwbVFicTBRVy8wUlRu?=
+ =?utf-8?B?Y1dKZ2JwaGV6OS9NWmx1WDJlTFU1cnkxVkRqM2F4RG9hYXY4b052UVQ0VHlY?=
+ =?utf-8?B?aUY5VnlwazFQVXlGd3duRkZXdGE4RkNxeFNCUVBsUzI2dTVVNkhhUGJ6dmdq?=
+ =?utf-8?B?dE1tdXB6dEl1VG5UTzZlU3E2MXdRVnZuZHk3MXo5UGxLMXZ1aEpFbFlOSnQ2?=
+ =?utf-8?B?cmlxc1RpVnNadGxxNk1IUlA0Zkg1RExoYWtTU0dVOG9HNzJxR1ZZMUNCVUpZ?=
+ =?utf-8?B?V0JGV1U4L0RheURSVkdOVXRtL295K0c0Y3FadVBZaHdQV2tsdWtkTEc2NUVv?=
+ =?utf-8?B?OUxheEtjQkN3VXZpcGpNSklzS1JySlBQT1NLV3RiMyttZ3BSc1F0Zz09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a31e34bc-a41b-4ebd-233e-08de79151b0a
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 11:07:48.9580 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cp/ycL3qiCAMBkbxKcrTHa2YCvJZdpsVZjXwZLyf7fVucvUDKqbbOPFv+cdXlZBXfS1efYcIu/C+1me0EJPpIFE8CPzFFfQMMMAVBk4yrTc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9329
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -164,80 +149,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Svyatoslav,
 
-
-On 27/02/2026 23:07, Tom Rini wrote:
-> On Fri, Feb 27, 2026 at 09:28:44PM +0000, Lee, Sin Liang wrote:
->
->> Thank you for the quick response. We will follow the  submission guideli=
-nes for our fixes and attribution.
->> In the meantime, would you be able to confirm the reported vulnerabiliti=
-es on your side? That would help us make sure we are aligned on impact and =
-scope as we finalize the fixes.
->
-> I'm adding our networking custodian to the thread, for when he has time
-> to take a look.
-
-Thanks Tom. Where can I find the report?
-
-Thanks,
---
-Jerome
-
->
->> Regards,
->> Sin Liang
+On 3/3/26 8:13 AM, Svyatoslav Ryhel wrote:
+> пн, 2 бер. 2026 р. о 15:07 Quentin Schulz <quentin.schulz@cherry.de> пише:
 >>
+>> Hi Svyatoslav, Jonas,
 >>
->> ________________________________
->> From: Tom Rini
->> Sent: Friday, February 27, 2026 1:42 PM
->> To: Lee, Sin Liang
->> Cc: u-boot@lists.denx.de; Kim, Taesoo; Zhang, Cen; anshuld@ti.com; bb@ti=
-.com
->> Subject: Re: Security Disclosure: Multiple buffer overflow vulnerabiliti=
-es in NFS client
->>
->> On Fri, Feb 27, 2026 at 06:25:14PM +0000, Lee, Sin Liang wrote:
->>
->>> Dear U-Boot Maintainers,
+>> On 2/9/26 7:07 PM, Svyatoslav Ryhel wrote:
+>>> From: Jonas Schwöbel <jonasschwoebel@yahoo.de>
 >>>
->>> I'm Sin Liang Lee, a member of Team Atlanta<https://uk01.z.antigena.com=
-/l/FkXD3Ugm3o395hSGihLLjAsEOr97ZZG9yHPkWSFCru6du~q0rO0A9lPeOIDFs~icGGG2caue=
-tha9bTyQwPhsFDZCxgr_yTluQpnzuqlBqPPnhsEacg7k~eV3QgS3i-KPZYPgSLmwQm6FkD_rnc7=
-9dT_wGaI2_RcoAV-FtVTtR5ZERydkTR2aruAxMSROlBu62FMJeds3 > from Georgia Instit=
-ute of Technology, winners of DARPA's AI Cyber Challenge (AIxCC)<https://ai=
-cyberchallenge.com/>. We're reaching out to submit a vulnerability report t=
-hat we identified using our system, ATLANTIS, in your project. This effort =
-is part of DARPA's initiative to apply competition technologies to real-wor=
-ld open source projects.
+>>> In the case of active-low behavior the Duty Cycle needs to be set to 100%.
+>>> The PWM driver takes care of this but the LED_PWM driver does not take
+>>> this into account. Adjust LED_PWM to take into account polarity of PWM.
 >>>
->>> We have built an AI-enhanced CRS (Cyber Reasoning System) for automatic=
- vulnerability detection and repair. Using a combination of targeted fuzzin=
-g (via OSS-Fuzz infrastructure) and AI-assisted static analysis, we identif=
-ied four buffer overflow vulnerabilities in the U-Boot NFS client reply par=
-sers (net/nfs-common.c). These affect the current upstream codebase and inc=
-lude a signedness bypass of the mitigation introduced for CVE-2019-14193.
+>>> Signed-off-by: Jonas Schwöbel <jonasschwoebel@yahoo.de>
+>>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>>> ---
+>>>    drivers/led/led_pwm.c | 4 ++--
+>>>    1 file changed, 2 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/drivers/led/led_pwm.c b/drivers/led/led_pwm.c
+>>> index 15dd836509b..7edfa286468 100644
+>>> --- a/drivers/led/led_pwm.c
+>>> +++ b/drivers/led/led_pwm.c
+>>> @@ -34,7 +34,7 @@ static int led_pwm_enable(struct udevice *dev)
+>>>        if (ret)
+>>>                return ret;
+>>>
+>>> -     ret = pwm_set_enable(priv->pwm, priv->channel, true);
+>>> +     ret = pwm_set_enable(priv->pwm, priv->channel, priv->active_low);
+>>>        if (ret)
+>>>                return ret;
+>>>
+>>> @@ -52,7 +52,7 @@ static int led_pwm_disable(struct udevice *dev)
+>>>        if (ret)
+>>>                return ret;
+>>>
+>>> -     ret = pwm_set_enable(priv->pwm, priv->channel, false);
+>>> +     ret = pwm_set_enable(priv->pwm, priv->channel, priv->active_low);
 >>
->> Ah, so that explains the squashfs report last week. I am glad to see
->> that part of the challenge now is fixing and not just reporting the
->> issues. Please see
->> https://docs.u-boot.org/en/latest/develop/sending_patches.html for how
->> to correctly submit patches to the project. And while we do not
->> currently have formal guidelines around AI-assisted contributions,
->> please see:
->> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/=
-Documentation/process/coding-assistants.rst
->> for how the Linux Kernel expects things to be attributed and note that
->> we also are requesting that the commit message be human and not
->> AI-written/assisted. Thanks!
+>> This feels wrong. Why would both enable and disable paths use the exact
+>> same value for pwm_set_enable()?
 >>
->> --
->> Tom
->
+> 
+> Hello Quentin!
+> 
+> You are mixing up the LED with the PWM that controls it.
+> pwm_set_enable() triggers a PWM configuration update; therefore, the
+> process is the same for both enabling and disabling.
+> 
 
-IMPORTANT NOTICE: The contents of this email and any attachments are confid=
-ential and may also be privileged. If you are not the intended recipient, p=
-lease notify the sender immediately and do not disclose the contents to any=
- other person, use it for any purpose, or store or copy the information in =
-any medium. Thank you.
+Does it? All drivers in drivers/pwm actually write to their registers in 
+the set_config callback, some even re-enable the PWM controller if it 
+was running before entering the set_config function.
+
+The sunxi driver notably does not do anything on set_invert callback, 
+it's only applied on next call to set_enable.
+
+pwm_set_enable() clearly states it's for enabling or disabling the PWM. 
+So why would we call pwm_set_enable(,,false) in led_pwm_enable() if 
+active-low property isn't set in the DT? Why would we call 
+pwm_set_enable(,,true) in led_pwm_disable() if the active-low property 
+is set?
+
+>> I can also see that the disable path doesn't actually call
+>> pwm_set_invert() unlike in the enable path. I'm assuming this means we
+>> cannot call disable before enable and have consistent behavior?
+>>
+> 
+> The inversion setting is only relevant when the PWM is enabled. Since
+> the disable operation forces the duty cycle to 0, the inversion state
+> is inconsequential.
+> 
+
+If you have inverted polarity, I'm assuming you need 100% duty cycle to 
+turn the LED off.. So we definitely need to have the PWM running and the 
+inversion setting configured, no?
+
+>> The kernel seems to use active_low as a way to invert the duty cycle if
+>> I'm understanding the code properly. In U-Boot, it seems we don't handle
+>> that at all and always pass the "normal" duty cycle. Maybe there's
+>> something we need to do there.
+>>
+> 
+> In U-Boot PWM should handle this in the set_invert operation.
+> 
+>> I'm also assuming there are setups where PWM should be enabled but with
+>> a duty cycle of 0?
+>>
+> 
+> A duty cycle of 0 is equivalent to pwm being turned off. In general
+
+I don't think that's necessarily true? What happens to the PWM pin when 
+the PWM controller is disabled? You're not driving the line low (or high 
+for inverted polarity) so who's to say the state of the LED is off?
+
+> most devices won't work on very low duty cycles. Fan needs at least
+> 30%, LEDs make no sense below 10%, also most Display are not usable
+> below 10%
+> 
+>> I'm also unsure what's the difference between active-low and
+>> PWM_POLARITY_INVERTED (I've seen them both mentioned or mixed in the
+>> kernel DTSes).
+>>
+> 
+> These are properties of two different device classes: active-low is
+> used with PWM-LEDs, while PWM_POLARITY_INVERTED is strictly a PWM
+> property.
+> 
+
+Sure... but don't they mean the same thing? It seems we are not reading 
+the flag property in the PWM cell in the PWM LED driver and only read 
+the active-low property to decide on the polarity. What are we supposed 
+to do if we only have one of both enabled? Assume it's inverted 
+polarity? Then what do we do if both are enabled, is it doubly-inverted, 
+meaning normal polarity? Or is it a simple binary OR?
+
+I unfortunately don't have HW to test this.
+
+Cheers,
+Quentin
