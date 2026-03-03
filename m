@@ -4,57 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FB1EC0461
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 09:18:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E0F1EC0466
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 09:18:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 234A283F69;
+	by phobos.denx.de (Postfix) with ESMTP id 7FFB983F80;
 	Tue,  3 Mar 2026 10:18:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=lixiang.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lixiang-com.20200927.dkim.feishu.cn header.i=@lixiang-com.20200927.dkim.feishu.cn header.b="0sbuRC5c";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="eWHNBcvY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 692CA83F6D; Tue,  3 Mar 2026 07:29:48 +0100 (CET)
-Received: from lf-2-36.ptr.blmpb.com (lf-2-36.ptr.blmpb.com [101.36.218.36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D9A1A83F4D; Tue,  3 Mar 2026 08:59:49 +0100 (CET)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84BE883F75
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 07:29:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=lixiang.com
+ by phobos.denx.de (Postfix) with ESMTPS id 491708063E
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 08:59:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=suruitong@lixiang.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lixiang-com.20200927.dkim.feishu.cn; t=1772519375;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=75szUCEjcFpJhEXcP9ETTkDaWTeZNLlAsCzi8g83xUk=;
- b=0sbuRC5cICTWdfD9XU68gpfcz45Y+k9W031y9dMx7YYgnqn4zkBFPqyDz4E5eMu9ruzJMg
- yr+YPigg4b1ku6nc7lbsFKP1XkPNp/GPEfQgTJ/qvTaZsSmsbtZO80/guwPIIz+pQFDKIN
- ymw0IAAS3n0iHXuRnppdPJXnJibYHDd5OpVF0BkRtnTJkuLQz0gZF9X0FDFWj6vsLklced
- J6OueNDvOnGof+LAkYo7YrhrxQz0uxZv0FmNMEMdmv2C0mhkBmpAcJZs2Ka+JSkRo1jq58
- M5YnSadTfAxNj/SzXYjsASVTTsl1beclcOM+3ufkX/+BiXBv6KPv0sCcGr5qNQ==
-Cc: <mkorpershoek@kernel.org>, <trini@konsulko.com>, 
- "Ruitong Su" <suruitong@lixiang.com>
-References: <20260303062926.3335004-1-suruitong@lixiang.com>
-From: "Ruitong Su" <suruitong@lixiang.com>
-Subject: [PATCH 2/2] fastboot: Wire UFS backend into command and getvar
- dispatch
-X-Lms-Return-Path: <lba+269a67fcd+7a9b10+lists.denx.de+suruitong@lixiang.com>
-Received: from SSOC4-SH.company.local ([220.248.55.70]) by smtp.feishu.cn with
- ESMTPS; Tue, 03 Mar 2026 14:29:32 +0800
-To: <u-boot@lists.denx.de>
-Date: Tue,  3 Mar 2026 14:29:26 +0800
-Message-Id: <20260303062926.3335004-3-suruitong@lixiang.com>
-Mime-Version: 1.0
-X-Original-From: Ruitong Su <suruitong@lixiang.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20260303062926.3335004-1-suruitong@lixiang.com>
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dyIe9K+CEvxNSYH9G5b8FLpzruL8TiJX/xKh8L+pSjYUki+OzUcbfcpveJZkIMG3WKyaZ4yBns9d2Z07+fx+9iEJXxqg0vD5R+DGiwPVVSaNzEOpBcgyJM4nLTdHOw2u/FbbyGS3H0jOXTNEv1bre7ApLcztHUnh/Ndt2j6Zvy/9kLjLfZiRxL1IUYQkkReyokn0IftAI5sCJLzS+h8auG1RQl/F5UlrrnqQITB10w92/P6Oi6E5y5VCu69ZkZDjkKwCmWN0XHKtE6F45b3tsn/BttCbLY64XBb27HLKnotYG8kREwlBxmi+f1VqmCcm8qQV+WLDqqLFqbPvqdCM0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AL+AMzhlEqANnuWBpNKXexwzYxzDH30n2b5F/vV3KaA=;
+ b=JOqZpC8nKY6CVCHuC6GKRva4cvdcq2qiIDITKWWkYmxH4TbrWC16s4vW6v1mGSKuFNZPeqL7NL3WlYm4haU1jxpwKuz/ESZ3WVVBRtY5kf8vR+9mmqCa05+4afbvknKu8OiFnDJ2ZdYCq1lSYMDyR4vb+XpjScCYXrdIGHW6KjzeKaUsIsv4xJQf8DSSS2kyMgxpfkxDr2GWJRfEBV3Ak44LWUMrHJVyvFcNfqL1WP/D7eRuMWC1ZOpp9mu0MmPD1RTdlFZqx3IXip17hKzRLZh2rh+rIZaFYqd5LJxTZsi4Aao8tyHLuKBL/qLHXwFXUZ7JdmcK3qIotIEyyEgR7A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AL+AMzhlEqANnuWBpNKXexwzYxzDH30n2b5F/vV3KaA=;
+ b=eWHNBcvYDqzkk29KrxT8ALU5bDKb9BAy2XkESNk5nMp2LAIwJ9FDDZNsxVf2uBmppy1BeJvwFYN7swdZaXmvCU8suPU6Vfz436Z6iLXFhlvmDlgUIds53i1B92GVqso7e04nuxMv3ISiT8hyNqESJfjtMnWBGHPpVXEeY+bZPemTeaw/OOG6ehbEuBGppaYRCjjeK63StMnjItWov9PW9cWgHY8NifWTThVoGDKzRxK5pG0JK3OeRleBCxplBddqzGTVBWuTR/DoJlpF48n/e7h7u79q2mzYqA0NDz1dUID91hP/i9BR/eVXV2MUMEYKUb8k4JBhsjziIsqbILTVBg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by BLAPR03MB5410.namprd03.prod.outlook.com (2603:10b6:208:29c::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Tue, 3 Mar
+ 2026 07:59:44 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9654.015; Tue, 3 Mar 2026
+ 07:59:44 +0000
+Message-ID: <a66c8ed7-0f88-4e1f-a212-30e39f675df2@altera.com>
+Date: Tue, 3 Mar 2026 15:59:35 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] spi: designware: add support for bits-per-word DT
+ binding
+To: Tom Rini <trini@konsulko.com>
+Cc: U-boot Openlist <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+References: <20260227110434.5058-1-boon.khai.ng@altera.com>
+ <20260227140756.GP1593142@bill-the-cat>
+Content-Language: en-US
+From: "Ng, Boon Khai" <boon.khai.ng@altera.com>
+In-Reply-To: <20260227140756.GP1593142@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SI1PR02CA0030.apcprd02.prod.outlook.com
+ (2603:1096:4:1f4::8) To SA3PR03MB7187.namprd03.prod.outlook.com
+ (2603:10b6:806:2f6::11)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|BLAPR03MB5410:EE_
+X-MS-Office365-Filtering-Correlation-Id: 683cb3f0-98b4-48db-8246-08de78fad49f
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: ON8oEXiMtPSYQWhv23IAwurDeEX2PFs45C7QGgG20+B2S6gH8Cb+xLEoOX8clNxBnUXeAA9kFvQe/gkdFUJxbTuLnvmheqfo6ZYRgZR8/5fDO+4ZE3lObeSXSGD0OGNUtbyeNkR9r/l/+UZfObmUclCyL3WTKemTBDLVHl6S7bOgU0veFWDTvBohkb4Q5jy6wyES1NJOdrm8nS5aHm23vri+QlfHtkRnq2CVPgPLaoNeE9+aelaW0k2nIt5Y2AQG0XscwsPfSqFc9VJoTeYcP4L2SkeBKjMpxKQ9lSqRfp1mUqmhttXPYiZ3KMTNrfPDrOE0SjtcVofh74TzjSPfKumu0/KBH2m7moBGX6WcVN0fdDe9X3xasKYFm4m0ZAK4NlYtT0gFa9f0jHC1UCqtLJV3sybxRy8iNekmIEbgEwNBFgCpgbf/d+wixiuNkX4mM175Bii915jDtqoqBJPQNpFJknGMa7UJSqbViHQb65D2FMaL1IF7tONoG4IFVL3gnwZeiWAA7lnCfbkd/BOvj6lFO25C024wUfQjVKhibKLDSuogoqI2clzAX7P4doysEFC5H2MvP0/xq9g5NozCUQXdnJYPDibqx7ZWtEM/ydO3X/DcoSPXywnTtrwSXCf9xQyHCZ/7wv9RoSUFbEnrv+JzFu41jW46bcQU7boevyrEciDV2C4cT4yGFIdE7mAu
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?czcxeld4d2xETjV0dy83SlNvZmVESy9QODRrUzdnS2tEYk9Nck1Nd0hsQVFh?=
+ =?utf-8?B?bmFEZDlIcjZBaFAyZnQ1MWNic3I1Tk96dnlKMStCSTFSdFFPa0lDTmpsN2Vu?=
+ =?utf-8?B?bWUwNlRZWm4wWEcxQWI4aDNBdThONnIwc0ZNNnBROExNcHNyNmdrZVU1QVo2?=
+ =?utf-8?B?eE51eGFCbGJoUkFSalpmdU8xMGlhMnpuSDM5NExJYitJLzRpT0dvRjJFbEtD?=
+ =?utf-8?B?di9FdkQrOFFvWENFNm9lai9LVWJmOGRzc01KeS9sdExmMDkyMXZ2bnlMeHRm?=
+ =?utf-8?B?ZkxEa0ZEdHU0QXc4NGpyS0w3LzMxbDlBaWNpZW5xdEwrS3BHSnVNNWJPc21I?=
+ =?utf-8?B?VnZEMHhMZHBSZE4zbkNPTnAwNVdPRFlCUW1iYWhEUlhwdElDdmdVbVNzK1FL?=
+ =?utf-8?B?ZkdLVVRJMnRNQW5Uam5VWmRCcWtEeDBlaUxhTlg0MjliZGhQSCtkS3VJK1Nr?=
+ =?utf-8?B?YWV0NU1Zckdwa1R1NVhGL21SVGl2M2NIalRqaE4vK25BOUYvZ2F5MjIwc2pH?=
+ =?utf-8?B?aGdVT2dja21GSUZxanFmUVB5ejlYMTNVTmxTUVhrcWs5TXl3UjZ2ZnhEbDYx?=
+ =?utf-8?B?ZlhOM3NROURheE9TS1BzMmswVCthY00zQk5XRGFIa1Nja1dBTjhkeDArWlli?=
+ =?utf-8?B?eUxyL2FOLys4MVRJZ05RRTNtSjdlQ0Q5R1Nxd0Q1RytIUm95MkRlUWRHb3Jj?=
+ =?utf-8?B?eXh0NThVNkpacmJIMnNQTU5qaTB0dHBURGhMK3RIMnZDaXBtMUdMTENmRkpK?=
+ =?utf-8?B?RGJaZzVnOGc5NlBPeEpRZFN5c2U4MXJjSEZMa3RJTCtzVEVlV2orblM1cWpn?=
+ =?utf-8?B?K1lsSzBvVkhMZXRTSWpYZ1dLMHdDbERaUVJqQ1JYMVdxMWNsRWtUVGJHUWdD?=
+ =?utf-8?B?NHJBM3dnS0E1OE9ocmxjM1hZWHd2MmtzTmNVVE1pY1pjZzZIVkhwRGR2VGxy?=
+ =?utf-8?B?RWlMTlJ2ck9MdlNXZXBKL2Ewdi9SYUxZV0Vzd3B0R2VUQ29McWhBT3JVc0ow?=
+ =?utf-8?B?RG9RL2pxUFJ5b1lubVFwUGtrQzdjVFZmVmpaVGZzUXVtY1Q5cHl3K0c0M2FU?=
+ =?utf-8?B?Umgyd3RxYUorSWN1ZkxhZm1KOTkweEdMaDExakQxM2NSOHZQM2c3Z0Z3TjE2?=
+ =?utf-8?B?a0JYQkdmSEpLZjN3RzRyUFdXTm1wQmlBYkU2dHM0dVp3dWd1QmhGUVVnb1Q5?=
+ =?utf-8?B?UXBmeTdaUzB2Y2F2Z2p3ZkVSSlgyWlQxTjlVTnNLWFJqMnpMUDVDNXBzNmho?=
+ =?utf-8?B?czd5am5lZ1QzTXNMV1liYUw3ZzhGKy9YSlZXVVdsMzAzbnZ3bGRaamJxcEcw?=
+ =?utf-8?B?OW5zRVJOaGhPN1ZMT2lleU0rZ2gxZzMwN3ZnOU9wclJhZHA0cE5lek5CS1Fy?=
+ =?utf-8?B?NE84elVQdUFUeUNXTEQ5TkM1UlhweWZjV05haEtyWHZ1NE82Z3ozYWhmN0xB?=
+ =?utf-8?B?bkFNWjlkZzFEelJoVVFMZGt3V2M0YkhOcmtSN0VETDh4T3lVYURURWhxejdj?=
+ =?utf-8?B?czE1NENpTDlLVnBBYkdkeXUzcHFWTWRuWDQ5b2oxQUhLUnBJQ2M3OFhQano3?=
+ =?utf-8?B?Z3JHZlNKMWl4OEJudjhkNHBOUzA2dlVKOENtbmZFd1ZVUlpHcVBGd1VYT3pC?=
+ =?utf-8?B?bTNVVmtLcmJLZFErN2xORWluYm14OVlVT0tkYVplNDdQRWNYTU15MEowUC9x?=
+ =?utf-8?B?dyt3TFQwQXNSSGN0TWNUN21QdGZ5YlFyelR4dFI3NzYvWVE2cHNJTEVSYnBj?=
+ =?utf-8?B?RFBGenBHYkZqTFQrUW1pdlkvbWVpMHI4SmFvTldXZE14ZWx3ZlFKQWdHWGpV?=
+ =?utf-8?B?Mkp2UGZzTzBJKzhKeC9jTHNPU09WRjZGSzZDaWhPYklQbmpGWkc3TFpock95?=
+ =?utf-8?B?SStWOXBZZmM0TytmSTFBWk5vZVNrUmdZTUwraTNTQ3kyc0FGbDFhYVhoWlFS?=
+ =?utf-8?B?ZENIVDQ4azJBSlpibjBpTUU0YkhqNGdHZ1oxTjVldHJCQXNpOVJvSkQxMy9J?=
+ =?utf-8?B?ZE5CQWlrS0tsVjJwS3JvS3ZIRDIweUxCSlA2MGQ0NzI0cXFhRGREYVVBNmR3?=
+ =?utf-8?B?NjBrampGV3ozTkRLcm9ESmdncklCdlRpcDVtdGxYbDgwdFZxN1hxdmJzcnl6?=
+ =?utf-8?B?RXdGS3ZNYlRHSmF3YXpZYzlPUXpqZDRDcGVvTU9ibm15dDlMSU51cFRNMlZB?=
+ =?utf-8?B?Y3lMNFdiZWhrWitwVUtTVUwxNERRRmdXSzZpSXpuc2twWFJjYWl4a0ZQbDU3?=
+ =?utf-8?B?REhMWGtHQnByemRaK2haNXFBOUFYV1FTd3ZadVV5L3dlOEJ0TmtMSjg5TDRW?=
+ =?utf-8?B?WHJ4bU1lbklIdEZ5dUZrQkk4cDIzRTlhMHQza2Rzd3dVSFZEbWFpZjNwNHR5?=
+ =?utf-8?Q?W9jwdx1yCysuPnck=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 683cb3f0-98b4-48db-8246-08de78fad49f
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 07:59:44.3521 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wGbSc0/kaGlZj90BLTEbAbrIqFKhaJMDAJro2AoIh19t/cNRxBOqCaC+x/k/bidaYn3K9mEMqkQEDF6uBQnfAA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR03MB5410
 X-Mailman-Approved-At: Tue, 03 Mar 2026 10:17:57 +0100
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,104 +155,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hook the UFS flash backend into the fastboot command dispatcher
-(flash, erase) and the getvar partition-size/has-slot lookup path.
+Hi Tom,
 
-This follows the same IS_ENABLED() pattern used by the existing
-MMC, NAND, and SPI flash backends in fb_command.c and fb_getvar.c.
+> I don't see this binding in v7.0-rc1, did I miss it? Thanks.
+> 
 
-Signed-off-by: Ruitong Su <suruitong@lixiang.com>
----
- drivers/fastboot/fb_command.c | 8 ++++++++
- drivers/fastboot/fb_getvar.c  | 6 ++++++
- 2 files changed, 14 insertions(+)
+This binding was not introduce in Linux. This is a per-requisite commit
+to support the Agilex Smart NIC 60xx board 
+https://www.silicom-usa.com/wp-content/uploads/2024/02/FPGA-SmartNIC-N6010-AgileX-Based.pdf
 
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 18d86988f4c..aaf5b1eaf6a 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -12,6 +12,7 @@
- #include <fb_mmc.h>
- #include <fb_nand.h>
- #include <fb_spi_flash.h>
-+#include <fb_ufs.h>
- #include <part.h>
- #include <stdlib.h>
- #include <vsprintf.h>
-@@ -354,6 +355,10 @@ static void __maybe_unused flash(char *cmd_parameter, =
-char *response)
- 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI))
- 		fastboot_spi_flash_write(cmd_parameter, fastboot_buf_addr,
- 					 image_size, response);
-+
-+	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
-+		fastboot_ufs_flash_write(cmd_parameter, fastboot_buf_addr,
-+					 image_size, response);
- }
-=20
- /**
-@@ -378,6 +383,9 @@ static void __maybe_unused erase(char *cmd_parameter, c=
-har *response)
-=20
- 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI))
- 		fastboot_spi_flash_erase(cmd_parameter, response);
-+
-+	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
-+		fastboot_ufs_erase(cmd_parameter, response);
- }
-=20
- /**
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index e8aa0e09aa6..d761592eb57 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -10,6 +10,7 @@
- #include <fb_block.h>
- #include <fb_nand.h>
- #include <fb_spi_flash.h>
-+#include <fb_ufs.h>
- #include <fs.h>
- #include <part.h>
- #include <version.h>
-@@ -135,6 +136,11 @@ static int getvar_get_part_info(const char *part_name,=
- char *response,
- 						     response);
- 		if (r >=3D 0 && size)
- 			*size =3D disk_part.size * disk_part.blksz;
-+	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS)) {
-+		r =3D fastboot_ufs_get_part_info(part_name, &dev_desc,
-+					       &disk_part, response);
-+		if (r >=3D 0 && size)
-+			*size =3D disk_part.size * disk_part.blksz;
- 	} else {
- 		fastboot_fail("this storage is not supported in bootloader", response);
- 		r =3D -ENODEV;
---=20
-2.50.1
+During the initialization stage, this board require a spi communication 
+to configure the chip's PLL and also to check the chip's status.
 
-=E5=A3=B0=E6=98=8E=EF=BC=9A=E8=BF=99=E5=B0=81=E9=82=AE=E4=BB=B6=E5=8F=AA=E5=
-=85=81=E8=AE=B8=E6=96=87=E4=BB=B6=E6=8E=A5=E6=94=B6=E8=80=85=E9=98=85=E8=AF=
-=BB=EF=BC=8C=E6=9C=89=E5=BE=88=E9=AB=98=E7=9A=84=E6=9C=BA=E5=AF=86=E6=80=A7=
-=E8=A6=81=E6=B1=82=E3=80=82=E7=A6=81=E6=AD=A2=E5=85=B6=E4=BB=96=E4=BA=BA=E4=
-=BD=BF=E7=94=A8=E3=80=81=E6=89=93=E5=BC=80=E3=80=81=E5=A4=8D=E5=88=B6=E6=88=
-=96=E8=BD=AC=E5=8F=91=E9=87=8C=E9=9D=A2=E7=9A=84=E4=BB=BB=E4=BD=95=E5=86=85=
-=E5=AE=B9=E3=80=82=E5=A6=82=E6=9E=9C=E6=9C=AC=E9=82=AE=E4=BB=B6=E9=94=99=E8=
-=AF=AF=E5=9C=B0=E5=8F=91=E7=BB=99=E4=BA=86=E4=BD=A0=EF=BC=8C=E8=AF=B7=E8=81=
-=94=E7=B3=BB=E9=82=AE=E4=BB=B6=E5=8F=91=E5=87=BA=E8=80=85=E5=B9=B6=E5=88=A0=
-=E9=99=A4=E8=BF=99=E4=B8=AA=E6=96=87=E4=BB=B6=E3=80=82=E6=9C=BA=E5=AF=86=E5=
-=8F=8A=E6=B3=95=E5=BE=8B=E7=9A=84=E7=89=B9=E6=9D=83=E5=B9=B6=E4=B8=8D=E5=9B=
-=A0=E4=B8=BA=E8=AF=AF=E5=8F=91=E9=82=AE=E4=BB=B6=E8=80=8C=E6=94=BE=E5=BC=83=
-=E6=88=96=E4=B8=A7=E5=A4=B1=E3=80=82=E4=BB=BB=E4=BD=95=E6=8F=90=E5=87=BA=E7=
-=9A=84=E8=A7=82=E7=82=B9=E6=88=96=E6=84=8F=E8=A7=81=E5=8F=AA=E5=B1=9E=E4=BA=
-=8E=E4=BD=9C=E8=80=85=E7=9A=84=E4=B8=AA=E4=BA=BA=E8=A7=81=E8=A7=A3=EF=BC=8C=
-=E5=B9=B6=E4=B8=8D=E4=B8=80=E5=AE=9A=E4=BB=A3=E8=A1=A8=E6=9C=AC=E5=85=AC=E5=
-=8F=B8=E3=80=82
-Disclaimer: This email is intended to be read only by the designated recipi=
-ent of the document and has high confidentiality requirements. Anyone else =
-is prohibited from using, opening, copying or forwarding any of the content=
-s inside. If this email was sent to you by mistake, please contact the send=
-er of the email and delete this file immediately. Confidentiality and legal=
- privileges are not waived or lost by misdirected emails. Any views or opin=
-ions expressed in the email are those of the author and do not necessarily =
-represent those of the Company.
+and it require the specific spi bits-per-word=16 setting.
+
+Can i add the binding at U-Boot?
+https://github.com/u-boot/u-boot/blob/master/doc/device-tree-bindings/spi/snps%2Cdw-apb-ssi.txt
+
+Regards
+Boon Khai.
 
