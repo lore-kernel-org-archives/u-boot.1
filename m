@@ -4,63 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809FFEDA698
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 16:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1433AEDA68D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 16:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E692839DF;
-	Tue,  3 Mar 2026 17:01:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id ED1CB839DF;
+	Tue,  3 Mar 2026 17:04:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="int83BuQ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hE6Z50jG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE81783F59; Tue,  3 Mar 2026 17:01:11 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id BCFE783F7D; Tue,  3 Mar 2026 17:04:10 +0100 (CET)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66330838BB
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 17:01:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F9CA838BB
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 17:04:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4DE9E600B0;
- Tue,  3 Mar 2026 16:01:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F5D8C19422;
- Tue,  3 Mar 2026 16:01:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772553668;
- bh=oILrhc2Dmaiqw9iiRs260CWqDOcegZOiRxEc8pAcRzs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=int83BuQI2uUXErTOSuLZxpuyjMZ9Iw8JX2k+t8WY0PC3KWULK/4khsnjo3/ttB8q
- +RxPx8uVVipTIWC6U30oUUqp2yrRLsc/cGyZqlYlWcx4RpMLVyIdps1+ampYCmlo4v
- v0IyfwdAthU69hTUTwaBd/VH7gKVpAt6etrT3tk8xEQxuMH3Y0w1ygArqN+dCcwr2M
- mD3kTbnN1NJr4wPjlBspmMqT1m7SN2bJ8V8+tv7GvoSlmCcEnEAZ40FieLW9IaH4b2
- OkMi0TziVrv3uGb6ZX9+C7KAPU2AWrzjSVfMmvjTjUemj11lPlRDHqqBsHpvwWbnpd
- 2WRXdGhbmrUaQ==
-Date: Tue, 3 Mar 2026 16:01:03 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: "Ng, Boon Khai" <boon.khai.ng@altera.com>,
- U-boot Openlist <u-boot@lists.denx.de>,
- Tien Fong Chee <tien.fong.chee@altera.com>,
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Chen Huei Lok <chen.huei.lok@altera.com>,
- Kok Kiang Hea <kok.kiang.hea@altera.com>
-Subject: Re: [PATCH v1] spi: designware: add support for bits-per-word DT
- binding
-Message-ID: <20260303-choosing-chivalry-6f892a14eaef@spud>
-References: <20260227110434.5058-1-boon.khai.ng@altera.com>
- <20260227140756.GP1593142@bill-the-cat>
- <a66c8ed7-0f88-4e1f-a212-30e39f675df2@altera.com>
- <20260303143721.GM1388590@bill-the-cat>
+ header.from=cherry.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ffkr3nz4LsznvKsdwJLnCHvYhdzJTdakO6XYI2iwgjzBT3Gx6sOtiZJgteX+j3WURSnFJiHZ1Xtt1xQ3OkSnT9wfR1UnHpIm6Y9iNiGI0gEi+FiWlX9IVztcVX4CZsaH35nrlNyjML+Y4V5joZYO21piwRzDTRg6dHDcvCG4PQbrJqVtm0AjyQErJA5yR60FAt4mRHAeZ6BzmjCqkUJp1q/eka72ohqpMjnSAwrzCeuwoNtL7neHgU2CUwdsS0cMXJbGVqr/rnMKrHzwx76qkwgijrc6pUPzvPk6/sheMrqDwie8NAzztWEPecH6bY8PupVqIdqUTYC5tPf2EPb9Ww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fWZjPRrg5L2Mg7yuHm0fjPzvM+5TQt48UwQo3M11elc=;
+ b=a9PBAR9Fga3fE693CA5UyHQRdJlqOW8x+gmG5m8d4EdSiDhss9drN0EtulQBgMoV1mREQbhUcr40p5zP3LNP6m4a8RO8SkPzjGsdBQcXtagC9VVzzHE4POKrboabniL4HId8+Og5ORx5TzvTaQN/9MqOWRl/1ebPI/REYoAIbtNfWMQVwgrdur6o/7oQyrecL6fD/taGn/WI9OTpR1tQolOmscBnSvq2DCpeCDXgOWQOW35TSjPzOhemRhyY/dxdD/j20T8i6XUbTBNAfcWAAtOxKqHKdVyhRplYWGzTmqjglz5sh32DJoP6/Q8YyW/uEonGkycF/ouuGOFHBjCW3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fWZjPRrg5L2Mg7yuHm0fjPzvM+5TQt48UwQo3M11elc=;
+ b=hE6Z50jGJ/Q2/V9q8l+xnD4L/yQDOQ8ojuUjWlmTmSv1Nnbv793jiSWDyufJ8dZwGgTwcqd0giAxOtGskxtw/dTcebyc8vlxw+n5GYJetFxSoeQ7Jl5KzXd7YSBcWff67XhyvfJZFzBzp2S2Am1yU09i2bN/m6t5umLkTy1XMC4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PAXPR04MB8576.eurprd04.prod.outlook.com (2603:10a6:102:217::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.21; Tue, 3 Mar
+ 2026 16:04:06 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9654.022; Tue, 3 Mar 2026
+ 16:04:06 +0000
+Message-ID: <cd06e974-6efa-48fe-8b18-d776cf9c465d@cherry.de>
+Date: Tue, 3 Mar 2026 17:04:01 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 16/16] binman: doc: Update binman_tests.rst for
+ subdirectory layout
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Yannic Moog <y.moog@phytec.de>
+References: <20260226234802.345968-1-sjg@chromium.org>
+ <20260226234802.345968-17-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20260226234802.345968-17-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0198.eurprd06.prod.outlook.com
+ (2603:10a6:802:2c::19) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NOTvkjGUhkGjsIHD"
-Content-Disposition: inline
-In-Reply-To: <20260303143721.GM1388590@bill-the-cat>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PAXPR04MB8576:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f4cf05a-6260-42f5-2835-08de793e7f4c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: lxOqYiOoViSEmeS9yeMgEMVqyOa+hk+yj4dgUtpX3goYvbLsQk9gt2zHb26duombMhAGaSbZkp8Za+0eSUOz5lpWFrh+wacmYin5uqNHUnzjQemi2B9k0Zb4wt5xdNdnclhD1enaVekAV1RSfYwMzikuEBEa1W8ucYq9R+usp0ZP9b5x8kdCxvfAFVRbvT8THk3krFqIA0G0qUlx4Z9T+mzxR4yTjgPiDScKuds9SLIQRe5x1EEbRXxKysldsNxaKKYmOmHP7UxelHCrgvxq+PgrFz6yNpmeTqoEuCsdyVdmQuN4lvg29adIwFYyFmL2qcUjZ79a8RVNaPXFWZlluT2TNdaUwkeclMHJs4BiVoDQtJqLj5op6pAGW3KGPk46u/3hOqbxqv0GbKjgHW1nykjorMAO+ktrC/7P3KGhaYdPmpZUbiiD9nNgBuQ/r1DmS9dBxXrqzSFsg6uxbfmRT6fG6Ln0KI896wqdP3nSFCOnbH+ZdJtjhbNMBSVGfHaUZMJ8iTVUqazq4Qcff1Z9J139g69wRNi7zllB5iCyLpDgj636rDTILPryvnlpcy8+qervpjiV23ApJjtl7FiCIGXqMXAg42iVZKm0G4KIr9n8r3RhqNLfQw/0qcJHy6BM07HCOVFwj6UhoXoMHKtER/S8AjP3+nYRLjTCGoXXrprygw9Zym7b0cnf4hAiu4uqPHLh/w7HxtuF9R6YHopZeJvQvNMs+N+vu9pdWbbyCl4=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dUxteVpGZmxFd3RXaTN5NW5CdTRpRWwwRlVFZjI5dU1ubno4Y3VHU3gyV0Jw?=
+ =?utf-8?B?azJxRDZhZTA5NEVmeWdZNmVDK2lMZGNpbVZvTk1kQit3YlAvZTJSYVA1RUM2?=
+ =?utf-8?B?aXNaRTZFZC9FbkNCYTBTejdBaFViQlYvK1oxSmIvQ0U5VS9ybmFyc2ZnWWZU?=
+ =?utf-8?B?dkNHQ2VQSE1WLzFhUzE3YjB4b2RZOWE5U1h4T08ydWRvMW5IeXp0ZjZ1REll?=
+ =?utf-8?B?OVVSWG5xOUJTQzBJMkhHQjhOWEFXTkg5NzQ1R09MaWhiZDI4cy9xZ3o5Qkth?=
+ =?utf-8?B?QWhsYnNuK2licmJUNWpBVWtNc2RyeU5KRzI5WmZaTFp2WWNCK1NhTStaQytN?=
+ =?utf-8?B?TjJtUldHUFp0eVl0UG5VcXJ0VklrOTlXc0NjQjkwUE4zV2I4NHZqSlJ3dFV0?=
+ =?utf-8?B?WnoxMmkwQ05BVEh4bSt4MjByY1NaNmo1Vk5YQ3hBcGF3d0k4V296Nlg3cmpO?=
+ =?utf-8?B?MFU2RDlBOUFmdWpwbHljK0dFVDVGeTlBRWpzVy9XdDVicjFnay92YVcvK24x?=
+ =?utf-8?B?T2tCdFB6MmFaaDcxNzVxajRYZkRVbWpSWXNNU1pDNEpnaWMzMkxNUjByeGtK?=
+ =?utf-8?B?bXlZeXE1OUc2eFRNMlVMSVZRdzdaRGk2QzA0Z0FiY05OTHZjbm9BSVFjUVp3?=
+ =?utf-8?B?WTQyNkNybElwbk1pem9XeGhrN0doMTd0RnRTYjFOd1QyeGxTWngzRDJmWXZk?=
+ =?utf-8?B?Ny9sVFpHZDEvbkRWTkt1YUtNNll3TDMwc3g4RVJMWlRSYjRoaTl4cVk3VUsy?=
+ =?utf-8?B?RVJaSFZpSkxoeGZoMjFFamREZTlINWxjTGh5eHVtVEdMNm5NbzZPRHdzVFNn?=
+ =?utf-8?B?cjc5bGZZb2IrQzdlSVpCS29ITzZ4UDBnaTVyb29EWmFsdGZ2R3BGRS9WSEZG?=
+ =?utf-8?B?bVpmNHpWZndOb2hQRWJta21Wc1pEa1AwUSsrUGhmTXhQRXMvcVJkUGswOHd0?=
+ =?utf-8?B?OEdOa3dQL2J4Z2duSVhaNHZSTk1nTEZoU2puYWRKaEpBNjhka0hITnhNTHlX?=
+ =?utf-8?B?ak9pRStHRFZ1R0MrNUJUb3dtbUVCL28yaHF4VVhNMjRTU0c2MERvNUJRalY1?=
+ =?utf-8?B?eUJLZC81NFVlbTJwWFJPZGZqZkVidU5KTmpWRkZOQllaY2VLRUZMaWJVSzlZ?=
+ =?utf-8?B?bnJSNTFvcWdyMlEvTi9ja2F0R3ZBM1pzS0VZRU5wWHprR1dENkkxVGdhRkdu?=
+ =?utf-8?B?UTE3a3JGS1BpNVh4T2FOYnV4Y0Rlb0l4a2t3QjhHb1RTQXFWTVBYVGE5WmlL?=
+ =?utf-8?B?SlJ4OVRLUlpjU05TdHNsbk9oQ09rTG84RkxEbFdSUldodDFJRm1iUkdzOXFt?=
+ =?utf-8?B?ZFpnbHRFUnRMeERnZ0U2U1k1VHlzYlQvWkd3M0ZJNUJTLytqbXBjRkozYnow?=
+ =?utf-8?B?UlJZRzBHd242bXBYMFVsOERxVkFvSGFheDJFeFg5SWpJQUUzUnBlSjRaM3Iv?=
+ =?utf-8?B?RVEzQjZOaTdKc2J1K2NZS2NYSktseXI5cU1jamt2eTZ1emwwSlpDZ2ljclJR?=
+ =?utf-8?B?Z2lvdUFTejczeWxlalFOTngwZlFSR29QTjZaN0tnbGthWTgrRUxOZ3FUVVVH?=
+ =?utf-8?B?Z25SUDlvUHBob2lNdDdpYmZ1bE9IYUxJQisxcTJ4T2x2MnhyTEtJZVVyOUNS?=
+ =?utf-8?B?L1IxTXJSRFYxdzh4Z2ZLSUZ5ZGVqNSt0T1NDWUdlWGFTR2Jlamdxd2Y3aURu?=
+ =?utf-8?B?Uy9EbDNDZXdQYlgyOGllM2ppdm0wUVVHbUVIOFlNUmR0dnRocisxVjhUY3JP?=
+ =?utf-8?B?b0JWSzl2Y0JIcWM5ZjBXb0FTcHdtTXhuRmFJSHhWMEtGbFBJWHF6Y0haTnNR?=
+ =?utf-8?B?bEFraXArYlE5WHgzMDgwTkEzSE5mN2tHSU1oelRLVzVtUXE0K1ZVVkxTZmVu?=
+ =?utf-8?B?N0RHU1piZjRiMjVldTJ3NlhialRnUzNqQnV6M3dkRzhSR010dmwvclUvMkw5?=
+ =?utf-8?B?NDZwWlR4bDQxbWN6OGRabjhqaDBjaHBsTXFDcG5JVXF1ZTdET0kyZFdsQWtn?=
+ =?utf-8?B?bWF1L25HTHJibVcvd0NFbkc4RjhJV1d1TkVQOTY5OHh5d0lhRjVlVlcxNnRT?=
+ =?utf-8?B?QTB1RXVtRzBlSTBGM1lhN2oxSDRoZnBNeE5JVnNxckhkMmV4TWQxb3djYTJT?=
+ =?utf-8?B?ckVVbjJkdi9wbE5wc2FTbXRVOUxLREUycVY0ZWFldjhrMkV0NUtVUHdhbk8z?=
+ =?utf-8?B?OVN2eW8zOUV0ck9XT1p3NlhwVTR4aHBKWHlOS1pSdGswSmpjbkFwdU9MTEFk?=
+ =?utf-8?B?TE9ZbXNySDJOdGFPY3RPdVF4US9HZ1BLelcweTJSYVlLRzl3amZzQm42bWxY?=
+ =?utf-8?B?cUZkdCs4K0tiS3gwb2pHSHlud0dldFREMmdnemtvUmt2eVROSURiQT09?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f4cf05a-6260-42f5-2835-08de793e7f4c
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2026 16:04:06.5239 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jiHa5gNFgjScv17+xe40kp+vzPX1zID6kiNc+6y2o6SafXaMbQ5ANnO7apP5Aev9qhyeNlFil1l2tIHZaWixlGXfqQUwYhKsthsJaX5bHjA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8576
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,76 +151,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---NOTvkjGUhkGjsIHD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2/27/26 12:47 AM, Simon Glass wrote:
+> From: Simon Glass <simon.glass@canonical.com>
+> 
+> Update the documentation to reflect the new test file organisation:
+> replace references to numbered test files with their new subdirectory
+> paths, and update the guidance for adding new tests to describe the
+> subdirectory structure instead of the old numbering scheme. Also fix
+> a stale comment in ftest.py.
+> 
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> ---
+> 
+>   doc/develop/binman_tests.rst | 11 ++++++-----
+>   tools/binman/ftest.py        |  2 +-
+>   2 files changed, 7 insertions(+), 6 deletions(-)
+> 
+> diff --git a/doc/develop/binman_tests.rst b/doc/develop/binman_tests.rst
+> index 78b02e6f435..e0baec05125 100644
+> --- a/doc/develop/binman_tests.rst
+> +++ b/doc/develop/binman_tests.rst
+> @@ -453,9 +453,10 @@ help with this, but your code will be different.
+>   
+>   Generally you are adding a test because you are adding a new entry type
+>   ('etype'). So start by creating the shortest and simplest image-description you
+> -can, which contains the new etype. Put it in a numbered file in
+> -``tool/binman/test`` so that it comes last. All the numbers are unique and there
+> -are no gaps.
+> +can, which contains the new etype. Put it in the appropriate subdirectory
+> +under ``tools/binman/test`` with a descriptive filename (e.g. ``fit/`` for
+> +FIT image tests, ``vendor/`` for vendor-specific tests, ``entry/`` for
+> +general entry types).
+>   
 
-On Tue, Mar 03, 2026 at 08:37:21AM -0600, Tom Rini wrote:
-> On Tue, Mar 03, 2026 at 03:59:35PM +0800, Ng, Boon Khai wrote:
-> > Hi Tom,
-> >=20
-> > > I don't see this binding in v7.0-rc1, did I miss it? Thanks.
-> > >=20
-> >=20
-> > This binding was not introduce in Linux. This is a per-requisite commit
-> > to support the Agilex Smart NIC 60xx board https://www.silicom-usa.com/=
-wp-content/uploads/2024/02/FPGA-SmartNIC-N6010-AgileX-Based.pdf
-> >=20
-> > During the initialization stage, this board require a spi communication=
- to
-> > configure the chip's PLL and also to check the chip's status.
-> >=20
-> > and it require the specific spi bits-per-word=3D16 setting.
-> >=20
-> > Can i add the binding at U-Boot?
-> > https://github.com/u-boot/u-boot/blob/master/doc/device-tree-bindings/s=
-pi/snps%2Cdw-apb-ssi.txt
->=20
-> Why would this be inappropraite for the Linux kernel, once the system is
+This is an awkward wording, the content in the parentheses seem to apply 
+to "descriptive filename" but it only explains the "appropriate 
+subdirectory" part.
 
-Did you mean "inappropraite", or actually appropriate? Guess it
-doesn't really matter to me, since the former would be asking "why would
-linux not want this" and the latter would be "why would linux want
-this". And I guess, as U-Boot maintainer the former is more important so
-inappropriate is actually what you meant. I, of course, always approach
-things with the latter mindset ;)
+What about:
 
-> fully supported in Linux is the first question to answer. Thanks.
+Put it under ``tools/binman/test`` in the appropriate subdirectory (e.g. 
+``fit/`` for FIT image tests, ``vendor/`` for vendor-specific tests, 
+``entry/`` for general entry types) with a descriptive filename.
 
-The property doesn't make sense to me in a linux context. bits_per_word
-as explained here is a device setting should be set in the device driver,
-and is almost always per-compatible so doesn't even need to come from dt
-at all. What a controller can support is also effectively always
-determinable from the compatible of the controller, and is often a range.
+?
 
-Looking at the linux driver, all dw spi controllers appear to be able to
-support 4-16 bits per word with select devices also supporting 32. The
-check is done at runtime, it has no need for a property at all. The
-device driver effectively decides what is done for the transfer, within
-the range of supported values by the controller, based on what it sets
-in its spi_device struct. I don't know if u-boot has similar
-functionality in its code, but looking at dm_spi_slave_plat which I
-think is your version of spi_device, that information is not there.
+>   Example from ``tools/binman/test/vendor/nxp_imx8.dts``:
+>   
+> @@ -610,7 +611,7 @@ In the above example, here are some possible steps:
+>   
+>           Entry_section.SetImagePos(self, image_pos)
+>   
+> -   The solution is to add an entry, e.g. in ``340_nxp_imx8_non_empty.dts``:
+> +   The solution is to add an entry, e.g. in ``vendor/nxp_imx8_non_empty.dts``:
+>   
 
-Were this submitted to linux with the current explanation, the feedback
-would be to set bits_per_word in the driver for whatever this "chip"
-that's being talked about is, presumably that means setting it in some
-sort of clock driver given that it controls a PLL?
+This should be with the patch changing the filename + path.
+
+>      .. code-block:: devicetree
+>   
+> @@ -641,7 +642,7 @@ In the above example, here are some possible steps:
+>   
+>          def testNxpImx8ImageNonEmpty(self):
+>              """Test that binman can produce an iMX8 image with something in it"""
+> -            data = self._DoReadFile('340_nxp_imx8_non_empty.dts')
+> +            data = self._DoReadFile('vendor/nxp_imx8_non_empty.dts')
+
+Ditto.
+
+>               # check data here
+>   
+>      With that, the second red bit goes away, because the for() loop is now used.
+> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> index 0f1a799821d..2434e912d51 100644
+> --- a/tools/binman/ftest.py
+> +++ b/tools/binman/ftest.py
+> @@ -2130,7 +2130,7 @@ class TestFunctional(unittest.TestCase):
+>   
+>               # Unfortunately, compiling a source file always results in a file
+>               # called source.dtb (see fdt_util.EnsureCompiled()). The test
+> -            # source file (e.g. test/075_fdt_update_all.dts) thus does not enter
+> +            # source file (e.g. test/fdt/fdt_update_all.dts) thus does not enter
+
+Ditto.
 
 Cheers,
-Conor.
-
---NOTvkjGUhkGjsIHD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaacFswAKCRB4tDGHoIJi
-0tLSAP9NmtGEqeHABapQVtcjFEw5YrWrJyQaPXgLtIkyDWatNQEAiFngA18ouMKg
-fBm2qvwi4zveKisRVYV5fzG3GPR7+Qs=
-=9MoC
------END PGP SIGNATURE-----
-
---NOTvkjGUhkGjsIHD--
+Quentin
