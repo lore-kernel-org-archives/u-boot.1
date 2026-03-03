@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76F43EC0461
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 09:18:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FB1EC0461
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 09:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D809583F53;
-	Tue,  3 Mar 2026 10:17:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 234A283F69;
+	Tue,  3 Mar 2026 10:18:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=lixiang.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lixiang-com.20200927.dkim.feishu.cn header.i=@lixiang-com.20200927.dkim.feishu.cn header.b="sUCERwIq";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=lixiang-com.20200927.dkim.feishu.cn header.i=@lixiang-com.20200927.dkim.feishu.cn header.b="0sbuRC5c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A053F83F64; Tue,  3 Mar 2026 07:29:46 +0100 (CET)
-Received: from lf-2-32.ptr.blmpb.com (lf-2-32.ptr.blmpb.com [101.36.218.32])
+ id 692CA83F6D; Tue,  3 Mar 2026 07:29:48 +0100 (CET)
+Received: from lf-2-36.ptr.blmpb.com (lf-2-36.ptr.blmpb.com [101.36.218.36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 609A483F6D
+ by phobos.denx.de (Postfix) with ESMTPS id 84BE883F75
  for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 07:29:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=lixiang.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=suruitong@lixiang.com
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lixiang-com.20200927.dkim.feishu.cn; t=1772519373;
+ s=s1; d=lixiang-com.20200927.dkim.feishu.cn; t=1772519375;
  h=from:subject:mime-version:from:date:message-id:subject:to:cc:
  reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=qyyA5gyCwIp5TRngPmdIRD+gZzFbud37bW5yTu9n7Do=;
- b=sUCERwIqeUuCycU60TjcjlHtzHABDKGR2fTB5AVWsVablvYGn7APTQJTYT2/3EAxjjnJ19
- CXu7owgIAFHKSuBVA4PZlvwQc9YgyQMhXiY7Gq8eJnvM1gdVnROGdk9UYVYMhEfQPyu+Rr
- e10O2h0L6GHXLqLXKGVenI1ZyAG83YcOtIS/fIqLbTdAva8aSiDGClWeVymWlqsEpXKOLm
- jBdgnCaIdUeshlhYHO8kBZsYEPcnFwekNlIFZn3I9P3DDr1h3KnWJG49AqUaMdguKatI25
- 4wrwvP+2XRrM8PNilsB/cSUDAqVYDDHjVXCOvNfYhNEsiO1xpUXPc6WYcbLM5g==
-From: "Ruitong Su" <suruitong@lixiang.com>
-Date: Tue,  3 Mar 2026 14:29:25 +0800
-Mime-Version: 1.0
+ bh=75szUCEjcFpJhEXcP9ETTkDaWTeZNLlAsCzi8g83xUk=;
+ b=0sbuRC5cICTWdfD9XU68gpfcz45Y+k9W031y9dMx7YYgnqn4zkBFPqyDz4E5eMu9ruzJMg
+ yr+YPigg4b1ku6nc7lbsFKP1XkPNp/GPEfQgTJ/qvTaZsSmsbtZO80/guwPIIz+pQFDKIN
+ ymw0IAAS3n0iHXuRnppdPJXnJibYHDd5OpVF0BkRtnTJkuLQz0gZF9X0FDFWj6vsLklced
+ J6OueNDvOnGof+LAkYo7YrhrxQz0uxZv0FmNMEMdmv2C0mhkBmpAcJZs2Ka+JSkRo1jq58
+ M5YnSadTfAxNj/SzXYjsASVTTsl1beclcOM+3ufkX/+BiXBv6KPv0sCcGr5qNQ==
 Cc: <mkorpershoek@kernel.org>, <trini@konsulko.com>, 
  "Ruitong Su" <suruitong@lixiang.com>
 References: <20260303062926.3335004-1-suruitong@lixiang.com>
-To: <u-boot@lists.denx.de>
-Message-Id: <20260303062926.3335004-2-suruitong@lixiang.com>
-In-Reply-To: <20260303062926.3335004-1-suruitong@lixiang.com>
+From: "Ruitong Su" <suruitong@lixiang.com>
+Subject: [PATCH 2/2] fastboot: Wire UFS backend into command and getvar
+ dispatch
+X-Lms-Return-Path: <lba+269a67fcd+7a9b10+lists.denx.de+suruitong@lixiang.com>
 Received: from SSOC4-SH.company.local ([220.248.55.70]) by smtp.feishu.cn with
- ESMTPS; Tue, 03 Mar 2026 14:29:30 +0800
-Subject: [PATCH 1/2] fastboot: Add UFS flash backend
-X-Mailer: git-send-email 2.50.1
-X-Lms-Return-Path: <lba+269a67fcb+57717f+lists.denx.de+suruitong@lixiang.com>
+ ESMTPS; Tue, 03 Mar 2026 14:29:32 +0800
+To: <u-boot@lists.denx.de>
+Date: Tue,  3 Mar 2026 14:29:26 +0800
+Message-Id: <20260303062926.3335004-3-suruitong@lixiang.com>
+Mime-Version: 1.0
 X-Original-From: Ruitong Su <suruitong@lixiang.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20260303062926.3335004-1-suruitong@lixiang.com>
 X-Mailman-Approved-At: Tue, 03 Mar 2026 10:17:57 +0100
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
@@ -70,345 +71,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a fastboot backend for UFS (Universal Flash Storage) devices.
-UFS devices are accessed through the SCSI subsystem, with each UFS
-LUN exposed as a separate SCSI block device.
+Hook the UFS flash backend into the fastboot command dispatcher
+(flash, erase) and the getvar partition-size/has-slot lookup path.
 
-The key feature is multi-LUN partition addressing using the syntax
-"<scsi_dev>#<partition_name>" (e.g. "0#system", "1#boot_a").
-Unqualified names fall back to the default SCSI device configured
-via CONFIG_FASTBOOT_FLASH_UFS_DEV.
-
-The implementation reuses the existing fb_block helpers for raw
-image, sparse image, and erase operations, adding only the
-UFS-specific partition lookup and GPT handling logic on top.
-
-Partition lookup uses a quiet iteration via part_get_info() instead
-of the verbose part_get_info_by_name() / part_get_info_by_dev_and_
-name_or_num(), which avoids noisy console output during fastboot
-getvar probing (has-slot, partition-size queries).
+This follows the same IS_ENABLED() pattern used by the existing
+MMC, NAND, and SPI flash backends in fb_command.c and fb_getvar.c.
 
 Signed-off-by: Ruitong Su <suruitong@lixiang.com>
 ---
- MAINTAINERS               |   1 +
- drivers/fastboot/Kconfig  |  30 ++++++-
- drivers/fastboot/Makefile |   1 +
- drivers/fastboot/fb_ufs.c | 164 ++++++++++++++++++++++++++++++++++++++
- include/fb_ufs.h          |  49 ++++++++++++
- 5 files changed, 243 insertions(+), 2 deletions(-)
- create mode 100644 drivers/fastboot/fb_ufs.c
- create mode 100644 include/fb_ufs.h
+ drivers/fastboot/fb_command.c | 8 ++++++++
+ drivers/fastboot/fb_getvar.c  | 6 ++++++
+ 2 files changed, 14 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f8d4f6ee8b2..071102f47fd 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1197,6 +1197,7 @@ F:	cmd/fastboot.c
- F:	doc/android/fastboot*.rst
- F:	include/fastboot.h
- F:	include/fastboot-internal.h
-+F:	include/fb_ufs.h
- F:	include/net/fastboot_tcp.h
- F:	include/net/fastboot_udp.h
- F:	drivers/fastboot/
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 576c3ef8a45..8569bec5d9b 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -92,7 +92,7 @@ config FASTBOOT_FLASH
- 	bool "Enable FASTBOOT FLASH command"
- 	default y if ARCH_SUNXI && ( MMC || MTD_RAW_NAND )
- 	default y if ARCH_ROCKCHIP && MMC
--	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH || BLK
-+	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH || BLK |=
-| (UFS && SCSI)
- 	select IMAGE_SPARSE
- 	help
- 	  The fastboot protocol includes a "flash" command for writing
-@@ -124,12 +124,38 @@ config FASTBOOT_FLASH_SPI
- 	bool "FASTBOOT on SPI flash"
- 	depends on DM_SPI_FLASH
-=20
-+config FASTBOOT_FLASH_UFS
-+	bool "FASTBOOT on UFS"
-+	depends on UFS && SCSI
-+	help
-+	  This enables support for the fastboot "flash" and "erase"
-+	  commands on UFS (Universal Flash Storage) devices. UFS
-+	  devices are accessed through the SCSI subsystem, with each
-+	  UFS LUN exposed as a separate SCSI block device.
-+
-+	  Partitions are addressed using the syntax
-+	  "<scsi_dev>#<partition_name>" (e.g. "0#system") to
-+	  disambiguate across multiple UFS LUNs. Unqualified names
-+	  fall back to the default SCSI device number.
-+
- config FASTBOOT_FLASH_BLOCK
- 	bool "FASTBOOT on block device"
- 	depends on BLK
-=20
- endchoice
-=20
-+config FASTBOOT_FLASH_UFS_DEV
-+	int "Define FASTBOOT UFS default SCSI device number"
-+	depends on FASTBOOT_FLASH_UFS
-+	default 0
-+	help
-+	  The default SCSI device number for UFS fastboot operations.
-+	  UFS LUNs are exposed as SCSI block devices by the UFS driver.
-+	  Use "scsi scan" followed by "scsi info" to discover the
-+	  mapping between SCSI device numbers and UFS LUNs. Typically
-+	  device 0 corresponds to UFS LUN 0. When the partition name
-+	  does not contain a "#" separator, this device is used.
-+
- config FASTBOOT_FLASH_MMC_DEV
- 	int "Define FASTBOOT MMC FLASH default device"
- 	depends on FASTBOOT_FLASH_MMC
-@@ -227,7 +253,7 @@ config FASTBOOT_FLASH_BLOCK_DEVICE_ID
-=20
- config FASTBOOT_GPT_NAME
- 	string "Target name for updating GPT"
--	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
-+	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && EFI_PARTITION
- 	default "gpt"
- 	help
- 	  The fastboot "flash" command supports writing the downloaded
-diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-index a341af076d1..93a5227b737 100644
---- a/drivers/fastboot/Makefile
-+++ b/drivers/fastboot/Makefile
-@@ -7,4 +7,5 @@ obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) +=3D fb_block.o
- # MMC reuses block implementation
- obj-$(CONFIG_FASTBOOT_FLASH_MMC) +=3D fb_block.o fb_mmc.o
- obj-$(CONFIG_FASTBOOT_FLASH_NAND) +=3D fb_nand.o
-+obj-$(CONFIG_FASTBOOT_FLASH_UFS) +=3D fb_block.o fb_ufs.o
- obj-$(CONFIG_FASTBOOT_FLASH_SPI) +=3D fb_spi_flash.o
-diff --git a/drivers/fastboot/fb_ufs.c b/drivers/fastboot/fb_ufs.c
-new file mode 100644
-index 00000000000..1273c946491
---- /dev/null
-+++ b/drivers/fastboot/fb_ufs.c
-@@ -0,0 +1,164 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2026 Li Auto Inc.
-+ *
-+ * UFS (Universal Flash Storage) backend for fastboot.
-+ *
-+ * UFS devices in U-Boot are accessed through the SCSI subsystem, with
-+ * each UFS LUN exposed as a separate SCSI block device.  This backend
-+ * provides UFS-aware partition lookup with multi-LUN addressing, layered
-+ * on top of the generic fb_block helpers for the actual I/O.
-+ *
-+ * Partition addressing uses the syntax "<scsi_dev>#<partition_name>"
-+ * (e.g. "0#system") to disambiguate across multiple UFS LUNs.
-+ * Unqualified names fall back to CONFIG_FASTBOOT_FLASH_UFS_DEV.
-+ */
-+
-+#include <blk.h>
-+#include <fastboot.h>
-+#include <fastboot-internal.h>
-+#include <fb_block.h>
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index 18d86988f4c..aaf5b1eaf6a 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -12,6 +12,7 @@
+ #include <fb_mmc.h>
+ #include <fb_nand.h>
+ #include <fb_spi_flash.h>
 +#include <fb_ufs.h>
-+#include <image-sparse.h>
-+#include <part.h>
-+#include <vsprintf.h>
-+#include <linux/printk.h>
+ #include <part.h>
+ #include <stdlib.h>
+ #include <vsprintf.h>
+@@ -354,6 +355,10 @@ static void __maybe_unused flash(char *cmd_parameter, =
+char *response)
+ 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI))
+ 		fastboot_spi_flash_write(cmd_parameter, fastboot_buf_addr,
+ 					 image_size, response);
 +
-+static struct blk_desc *fastboot_ufs_get_dev(char *response, int dev_num)
-+{
-+	struct blk_desc *dev_desc;
++	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
++		fastboot_ufs_flash_write(cmd_parameter, fastboot_buf_addr,
++					 image_size, response);
+ }
+=20
+ /**
+@@ -378,6 +383,9 @@ static void __maybe_unused erase(char *cmd_parameter, c=
+har *response)
+=20
+ 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_SPI))
+ 		fastboot_spi_flash_erase(cmd_parameter, response);
 +
-+	dev_desc =3D blk_get_dev("scsi", dev_num);
-+	if (!dev_desc || dev_desc->type =3D=3D DEV_TYPE_UNKNOWN) {
-+		pr_err("invalid UFS/SCSI device %d\n", dev_num);
-+		fastboot_fail("invalid UFS device", response);
-+		return NULL;
-+	}
-+
-+	return dev_desc;
-+}
-+
-+static int fb_ufs_find_part(struct blk_desc *dev_desc, const char *name,
-+			    struct disk_partition *info)
-+{
-+	int i;
-+	int ret;
-+
-+	for (i =3D 1; ; i++) {
-+		ret =3D part_get_info(dev_desc, i, info);
-+		if (ret)
-+			return ret;
-+		if (!strcmp(name, (char *)info->name))
-+			return i;
-+	}
-+}
-+
-+int fastboot_ufs_get_part_info(const char *part_name,
-+			       struct blk_desc **dev_desc,
-+			       struct disk_partition *part_info,
-+			       char *response)
-+{
-+	int dev_num =3D CONFIG_FASTBOOT_FLASH_UFS_DEV;
-+	char name_buf[32];
-+	const char *name =3D part_name;
-+	int ret;
-+
-+	if (!part_name || !*part_name) {
-+		fastboot_fail("partition not given", response);
-+		return -ENOENT;
-+	}
-+
-+	/* Parse "<dev>#<name>" syntax for multi-LUN addressing */
-+	if (strchr(part_name, '#')) {
-+		if (sscanf(part_name, "%d#%31s", &dev_num, name_buf) !=3D 2) {
-+			fastboot_fail("invalid partition spec", response);
-+			return -EINVAL;
-+		}
-+		name =3D name_buf;
-+	}
-+
-+	*dev_desc =3D blk_get_dev("scsi", dev_num);
-+	if (!*dev_desc || (*dev_desc)->type =3D=3D DEV_TYPE_UNKNOWN) {
-+		fastboot_fail("no such device", response);
-+		return -ENODEV;
-+	}
-+
-+	ret =3D fb_ufs_find_part(*dev_desc, name, part_info);
-+	if (ret < 0) {
-+		fastboot_fail("no such partition", response);
-+		return -ENOENT;
-+	}
-+
-+	return ret;
-+}
-+
-+void fastboot_ufs_flash_write(const char *cmd, void *download_buffer,
-+			      u32 download_bytes, char *response)
-+{
-+	struct blk_desc *dev_desc;
-+	struct disk_partition info =3D {0};
-+
-+#if CONFIG_IS_ENABLED(EFI_PARTITION)
-+	{
-+		int dev_num =3D CONFIG_FASTBOOT_FLASH_UFS_DEV;
-+		char op_buf[16];
-+		const char *op =3D cmd;
-+
-+		if (strchr(cmd, '#')) {
-+			if (sscanf(cmd, "%d#%15s", &dev_num, op_buf) =3D=3D 2)
-+				op =3D op_buf;
-+		}
-+
-+		if (!strcmp(op, CONFIG_FASTBOOT_GPT_NAME)) {
-+			dev_desc =3D fastboot_ufs_get_dev(response, dev_num);
-+			if (!dev_desc)
-+				return;
-+
-+			printf("%s: updating GPT on scsi %d\n",
-+			       __func__, dev_num);
-+			if (is_valid_gpt_buf(dev_desc, download_buffer)) {
-+				printf("%s: invalid GPT - refusing to write\n",
-+				       __func__);
-+				fastboot_fail("invalid GPT partition",
-+					      response);
-+				return;
-+			}
-+			if (write_mbr_and_gpt_partitions(dev_desc,
-+							 download_buffer)) {
-+				printf("%s: writing GPT partitions failed\n",
-+				       __func__);
-+				fastboot_fail("writing GPT partitions failed",
-+					      response);
-+				return;
-+			}
-+			part_init(dev_desc);
-+			printf("........ success\n");
-+			fastboot_okay(NULL, response);
-+			return;
-+		}
-+	}
-+#endif
-+
-+	if (fastboot_ufs_get_part_info(cmd, &dev_desc, &info, response) < 0)
-+		return;
-+
-+	if (is_sparse_image(download_buffer)) {
-+		fastboot_block_write_sparse_image(dev_desc, &info, cmd,
-+						  download_buffer, response);
-+	} else {
-+		fastboot_block_write_raw_image(dev_desc, &info, cmd,
-+					       download_buffer,
-+					       download_bytes, response);
-+	}
-+}
-+
-+void fastboot_ufs_erase(const char *cmd, char *response)
-+{
-+	struct blk_desc *dev_desc;
-+	struct disk_partition info;
-+
-+	if (fastboot_ufs_get_part_info(cmd, &dev_desc, &info, response) < 0)
-+		return;
-+
-+	fastboot_block_raw_erase(dev_desc, &info, cmd, 0, response);
-+}
-diff --git a/include/fb_ufs.h b/include/fb_ufs.h
-new file mode 100644
-index 00000000000..d64d5aca81a
---- /dev/null
-+++ b/include/fb_ufs.h
-@@ -0,0 +1,49 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2026 Li Auto Inc.
-+ */
-+
-+#ifndef _FB_UFS_H_
-+#define _FB_UFS_H_
-+
-+struct blk_desc;
-+struct disk_partition;
-+
-+/**
-+ * fastboot_ufs_get_part_info() - Look up partition on UFS device
-+ *
-+ * Supports two naming conventions:
-+ *   "<scsi_dev>#<partition_name>"  -- explicit LUN targeting (e.g. "0#sys=
-tem")
-+ *   "<partition_name>"             -- searches on default UFS SCSI device
-+ *
-+ * @part_name: Partition specifier (see above)
-+ * @dev_desc: Pointer to returned block device descriptor
-+ * @part_info: Pointer to returned partition info
-+ * @response: Pointer to fastboot response buffer
-+ * Return: Partition number on success, negative on error
-+ */
-+int fastboot_ufs_get_part_info(const char *part_name,
-+			       struct blk_desc **dev_desc,
-+			       struct disk_partition *part_info,
-+			       char *response);
-+
-+/**
-+ * fastboot_ufs_flash_write() - Write downloaded image to UFS partition
-+ *
-+ * @cmd: Partition specifier ("0#system", "0#gpt", etc.)
-+ * @download_buffer: Pointer to downloaded image data
-+ * @download_bytes: Size of downloaded image
-+ * @response: Pointer to fastboot response buffer
-+ */
-+void fastboot_ufs_flash_write(const char *cmd, void *download_buffer,
-+			      u32 download_bytes, char *response);
-+
-+/**
-+ * fastboot_ufs_erase() - Erase a UFS partition
-+ *
-+ * @cmd: Partition specifier ("0#userdata", etc.)
-+ * @response: Pointer to fastboot response buffer
-+ */
-+void fastboot_ufs_erase(const char *cmd, char *response);
-+
-+#endif /* _FB_UFS_H_ */
++	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
++		fastboot_ufs_erase(cmd_parameter, response);
+ }
+=20
+ /**
+diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+index e8aa0e09aa6..d761592eb57 100644
+--- a/drivers/fastboot/fb_getvar.c
++++ b/drivers/fastboot/fb_getvar.c
+@@ -10,6 +10,7 @@
+ #include <fb_block.h>
+ #include <fb_nand.h>
+ #include <fb_spi_flash.h>
++#include <fb_ufs.h>
+ #include <fs.h>
+ #include <part.h>
+ #include <version.h>
+@@ -135,6 +136,11 @@ static int getvar_get_part_info(const char *part_name,=
+ char *response,
+ 						     response);
+ 		if (r >=3D 0 && size)
+ 			*size =3D disk_part.size * disk_part.blksz;
++	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS)) {
++		r =3D fastboot_ufs_get_part_info(part_name, &dev_desc,
++					       &disk_part, response);
++		if (r >=3D 0 && size)
++			*size =3D disk_part.size * disk_part.blksz;
+ 	} else {
+ 		fastboot_fail("this storage is not supported in bootloader", response);
+ 		r =3D -ENODEV;
 --=20
 2.50.1
 
