@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546E9EDEBE5
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 19:56:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C44CFEDEBEB
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 19:56:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DA3183F61;
-	Tue,  3 Mar 2026 20:55:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C42883F2D;
+	Tue,  3 Mar 2026 20:55:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lzGufRJP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eab2TrUk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C187F83F9A; Tue,  3 Mar 2026 20:55:54 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 3295C83F61; Tue,  3 Mar 2026 20:55:55 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB70883F61
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 20:55:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B381383F75
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 20:55:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7d19d3c7208so4662763a34.0
- for <u-boot@lists.denx.de>; Tue, 03 Mar 2026 11:55:51 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-4638fe85a7eso2582546b6e.2
+ for <u-boot@lists.denx.de>; Tue, 03 Mar 2026 11:55:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772567750; x=1773172550;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772567751; x=1773172551;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=l3xP1fevMeLte5tnBbRaXD9Bg5RfwsGc6PhwSpXmM40=;
- b=lzGufRJP9UonyiXE/g0+tJg2yj0vku8XCXnZYMHExCwuZrreq3LkUVwyBKE0pV5pCY
- NlVYztpUnd/p/2daFgJUbWia6NpNr75OFGhccvpmZa0PNgsq++jSS2frVgkQbTiJ77DM
- uFTSi4O3q8DH8RXWRGDMiYsxdMVykBBzQs+iLES5yMPqQbxO7gHPzS8+gGAMSK5bhDqA
- 4P8Ajr+tjV9FIQF7NqwfNp2xJYkZ5/3geSBdbesGcOb4Hcl6ektoisoZY3w2prQY2Blr
- v0bKU6N1xVk4YgVhE5QDnf9Q1zraGrOuLnbDO23eMVwRbcymRqR4k6E4xbu1Aj2pSKYX
- 0iVg==
+ :reply-to; bh=2U4yFrETj7YOZZfTFlxwRTXo/V+HG+/VSRfCwhGywMw=;
+ b=eab2TrUk/RASnWYXDp0qghP07nWKV+Yd8Hav3zRlMWB59Miz2d9eMLFU80Cs7vfvlP
+ udoP/kCz08VEhxCfOimKxn+AYkNtnrg3Sl5lEgqb2QrdhwcpmlHm/aoZPZLWQUyQTVqI
+ 5FYfja2p24bXWnBYieLCsoTrz/EWbhqUnKny6aNUX3TPNnwX/s2FUksdDWb5JG9UH+Y6
+ 9pQc5pr5Cl5riNwesa6cRPb6Tfx7ki+FdrZzx90uxYM7gji/YNDb54LDRcOKMCvYlXTC
+ DFi/8n3PcnsQF9OanKbJs74wwu5IDe1ahghk9A6caHG4W6uElZ9SIwAJeV6kwAPdoUgT
+ +8OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772567750; x=1773172550;
+ d=1e100.net; s=20230601; t=1772567751; x=1773172551;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=l3xP1fevMeLte5tnBbRaXD9Bg5RfwsGc6PhwSpXmM40=;
- b=bb/gKjqHMnDWawZnHQNsapAR3CtejuNiFoxsl1kW2jVOwDQtLb3S10DGPV3tXr4WZY
- mBr3FKZQwTiSoq9IFUfpXleQzGT7pGhlLE5PTDSxIEzVKZ3gce5qOPpmyq3WzN0eNYcq
- KEAoEMox4dXOitC9NrAuo6mENYKbMFqNnLmc+ma68AKF6w++h7edd3KhySXvu+kU96Nh
- 2eD6B/Ob9tejv1H9E0o1N5x53RBThV5g6WqCnQTtONQ4R0lU87khD/DnEgBlHr2fEiJ9
- AsBW2STgA0VK8zoKss7PAfdcR0QHIlbe7bZtuNpoWBKvOfZ1r5FlHLWS3s7UeSnNpWCh
- pd8w==
+ bh=2U4yFrETj7YOZZfTFlxwRTXo/V+HG+/VSRfCwhGywMw=;
+ b=s51tCvb10LVP6O2yAO1AWiDpn0Yy7WpGpHqx8kpg9iLE4RIbBbwuPphfYJTfcn/pN8
+ NKySjqvIr/OQ/ZaEeYn3o58pOyMgtUrCPKWZGOh+UqUYP/olOMizM1LkZpDZ5Hcacw4o
+ Vz21y0MpRuO9DNBFVqEsiYX7O8V9UdUahsg4JZs/hc31n+AIIYCcoL3JatChXkuG0zwf
+ 5Rzu+oOs4iqLwVlIjEPZqQHUpONh5SkjZqc2fnrkEzdIuJgRizHJ9C4NlBe4VEYfS1w+
+ 3ZSh/JVLDX8eNJWxNRyW7yerUgdvZ8i6yJDBrJy3TLvHKYAlmiRWFBk58vtJJfENWHtD
+ JIRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWEUFvsx9aVBsdW5491NoRWLLni0ShupTwUUxStNVx9Uz2wWpKwaekqEn6Y7xd7/L+zH462zE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0w9CLmeL+iuOhUxTw7mNE+j6ObSN2Iy7W7X+XmpvPwQlXXmiQ
- vzaGv8DAhUTn5cRd6OuIk2DWokB/7jqcFcgkeTIeyvvOAG24nU8/VVC701X5QuE9KdM=
-X-Gm-Gg: ATEYQzwYEv55UX320b1DVo55aXA5OrWanvYrWj2lsidicrNmYEE5EfZuENeDMdFmGtt
- cBMUH/YlwfoI9Phn+3WFmSRwAItGVqJSDKC9wxeZBTL8Fv4TCKfmU+28c2KXPX+9ECny+rjA/Sf
- nBTt3m9MHL6M/HiLc48ZZulHdCjvSEZ7ZgwxAmIsWapBPi6GvLhCUiT2qb1AfpSKWR9cFpHcPeI
- 4b1vxaEqkfZTTsIhyo542cGjL12a+4t8y2WVZI768aqZ9uFNezXeKg+HhEqlNamNJi9471VJaSg
- oFF9B9tnAUUuRDniey2UVbcZIFn9ffwV8jQSpae6kn0r0qvM/tCKO/q9HzIOLvAYpyu6asK+tcM
- zBENChqyjMjUJcTYLdT0DMdboWJxx6hPXf7n2QuRthIUIC2LzxmhQmIDHOHWyG17kJhSdToUU2J
- PnrofiD09SNuOk2kd2lObPGV0zTxnk
-X-Received: by 2002:a05:6808:1705:b0:45f:16d1:8f5c with SMTP id
- 5614622812f47-464bed66f46mr9472355b6e.28.1772567750452; 
- Tue, 03 Mar 2026 11:55:50 -0800 (PST)
+ AJvYcCXCvJkxqtwn49BA9MeRrZdZRDJJo7S1C474PTzyNuYOuay4ZdVe9UPk7LRIheO/ZKfgDDjOhFs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yywx9/EkwR23Gkjc3zXBeon9nBHuGceSFF9NS+yfV2DQDdwUfd5
+ P2hs54SrrBo1SZ+DweOcduKwel7pqDiVYykEbZIH3GbPz7TQETjzgaz5mkzYSCSgVcw=
+X-Gm-Gg: ATEYQzyHqMR4lsn63Ph7TZK2Nj1f335Il6HHzhEc67Hl62KIoriJPZEggatMSMHczMH
+ iJnhPJM3ncP8iMY6dUFwIPJp/BH3NNfUCAYxzTbv4Mj5lYg/5n0fX3pQEc6vm8iCoTgF0OfKJr+
+ uu1h/JEDTNbfOmpr7D8xjQCUOkkPEympO19uYqoyuMrEEBJ3QcUVxjhc92oAJbYxblBTIZwYsR0
+ +XO+pj21n+mAEisTpQEV0H8t67+R/JXtIG2IWV9FnhN0837xYNbtwNsaZtHbkBjvVLM2iWCMaFE
+ ql279MBFcyKQHgvoQyrVOh4An1idBxu1yVfZGM9gcov6zrXUBtbTFgcpmrCOpdR7r8tuRLOlmvG
+ dIUoaD0zJZUsD6s7JKc6IrdP2opj54xBNj9kEN6yCKlsSrd0ozYmJQ1FUHdsZsd2WUK4Srl4bMl
+ Ap7fzjGoDvJca/6BrfsXhLXifAoee2
+X-Received: by 2002:a05:6808:518e:b0:45e:6697:b7cd with SMTP id
+ 5614622812f47-464bea288a5mr8852712b6e.20.1772567751266; 
+ Tue, 03 Mar 2026 11:55:51 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:e10b:3ef0:5af1:d180])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb352592sm9995183b6e.1.2026.03.03.11.55.49
+ 5614622812f47-464bb352592sm9995183b6e.1.2026.03.03.11.55.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 03 Mar 2026 11:55:50 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 03 Mar 2026 13:54:50 -0600
-Subject: [PATCH v4 2/7] clk: mediatek: refactor parent rate lookup
- functions
+Date: Tue, 03 Mar 2026 13:54:51 -0600
+Subject: [PATCH v4 3/7] clk: mediatek: add mtk_clk_id_is_* helper functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260303-mtk-mt8189-clocks-v4-2-ee85f8dd2f0d@baylibre.com>
+Message-Id: <20260303-mtk-mt8189-clocks-v4-3-ee85f8dd2f0d@baylibre.com>
 References: <20260303-mtk-mt8189-clocks-v4-0-ee85f8dd2f0d@baylibre.com>
 In-Reply-To: <20260303-mtk-mt8189-clocks-v4-0-ee85f8dd2f0d@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +90,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7056; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9976; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=4KgrOon9zRQOTihb6tZ+rADYYDy0Wzjy9yMIqHn7qzk=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBppzyckS+oDKFrmM2XlL8t07RGiury0aF06+d5n
- efSqCXF0JCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaac8nBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ai6QH/0/EIZMhBB8QKxywGPsm9HMJSWoeW7vWHDoCHAt
- Pt/xwd81n6ti1KpSsCiw6RdpRL/rolHhnaiM6xDmvB6aOxQBy7V2hHMyaPQW0VdXK7rdXxeu2PS
- CUvHFLld2KL4QWNZcQ2xRMa4BJF+dfaDmgkerfYW54xo2CFoQ0/hSPGTQKrFqIvnNC9X5qYprv2
- ZeoSWN+N8ha5QBI6B6gMxhyUfoJwAR+3u9Fr37lpafATI7Oz3Hoq+I4f37sQ+WBW0mA9amYaJGM
- PSk40DTw3Oh8sKaahNFZbcno9773HbNeLMiIs8R1s0xApkwnBY6XSrE8llFy628x1Qo0ya2ERlF
- KdZc=
+ bh=xnN7P6lF0HuTj3gyX4uOwNpmZooaaZFaGBrKaDqxBwE=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBppzyjzndqbm6id3LmYtvao9GGcLMtPfTUE81dH
+ jJB8hE6UgKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaac8oxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A2JQH/RVNCl7K/RMtwtrO6rR/1PbcUy2JQA+ukmBUD+N
+ KAtlQKC7Om30P//6vZe9e16ed8irJKQVkx05kTtgR7LEW+o1IpOnxNxJ0kEbhBOtXOrhRR8VgWT
+ pDLN7Q9icM6QfbMraFBaXPenseK+CF9p9LBNGF0ofFc8Sy+6qxrwl4Pkhc67nQewidTsZHAaHw6
+ WY7hHR5900KbPDxJIjIGq5aharZtJH50YciT49LDV4AXeq2/q6Dtv/uhXEH/WERI/u5h2pFA0rD
+ keiOC4sHi+1CbcdLNy/CU1hiG3VwrkIEkAm9Ck1P+W9pN+3efu83z2qhcP/BBJHKypXTSCO9RA9
+ sHGI=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -120,214 +119,283 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor duplicate parent rate lookup code into a common function.
+Add helper functions to check if a clock ID corresponds to a particular
+clock type (mux, gate, fdiv). This simplifies the code and makes it more
+readable.
 
-Instead of relying on rules like X is always the parent of Y, we use
-the driver ops pointer to make sure we are actually getting the correct
-parent clock device. This allows the same function to be called from
-different clock types and will allow future chip-specific clock drivers
-to not have to follow the rules as strictly.
+Additionally, it removes the restriction that fdivs_offs < muxes_offs <
+gates_offs by making the checking more strict in some places. This will
+allow future drivers to not have to define a mapping to meet this
+requirement.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mtk.c | 126 ++++++++++++++++++-----------------------
- 1 file changed, 54 insertions(+), 72 deletions(-)
+ drivers/clk/mediatek/clk-mtk.c | 128 ++++++++++++++++++++---------------------
+ 1 file changed, 64 insertions(+), 64 deletions(-)
 
 diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
-index b3f05bf5a21..921c3c0ff6a 100644
+index 921c3c0ff6a..7fbd10b8666 100644
 --- a/drivers/clk/mediatek/clk-mtk.c
 +++ b/drivers/clk/mediatek/clk-mtk.c
-@@ -168,6 +168,53 @@ static ulong mtk_clk_find_parent_rate(struct clk *clk, int id,
- 	return clk_get_rate(&parent);
+@@ -85,6 +85,34 @@ static int mtk_common_clk_get_unmapped_id(struct clk *clk)
+ 	return -ENOENT;
  }
  
-+const struct clk_ops mtk_clk_apmixedsys_ops;
-+const struct clk_ops mtk_clk_topckgen_ops;
-+const struct clk_ops mtk_clk_infrasys_ops;
-+
-+static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
-+				  const int parent, u16 flags)
++static bool mtk_clk_id_is_pll(const struct mtk_clk_tree *tree, int mapped_id)
 +{
-+	struct udevice *parent_dev;
-+
-+	switch (flags & CLK_PARENT_MASK) {
-+	case CLK_PARENT_APMIXED:
-+		/* APMIXEDSYS can be parent or grandparent. */
-+		if (dev_get_driver_ops(clk->dev) == &mtk_clk_apmixedsys_ops)
-+			parent_dev = clk->dev;
-+		else if (dev_get_driver_ops(priv->parent) == &mtk_clk_apmixedsys_ops)
-+			parent_dev = priv->parent;
-+		else if (dev_get_driver_ops(dev_get_parent(priv->parent)) == &mtk_clk_apmixedsys_ops)
-+			parent_dev = dev_get_parent(priv->parent);
-+		else
-+			return -EINVAL;
-+
-+		break;
-+	case CLK_PARENT_TOPCKGEN:
-+		if (dev_get_driver_ops(clk->dev) == &mtk_clk_topckgen_ops)
-+			parent_dev = clk->dev;
-+		else if (dev_get_driver_ops(priv->parent) == &mtk_clk_topckgen_ops)
-+			parent_dev = priv->parent;
-+		else
-+			return -EINVAL;
-+
-+		break;
-+	case CLK_PARENT_INFRASYS:
-+		if (dev_get_driver_ops(clk->dev) != &mtk_clk_infrasys_ops)
-+			return -EINVAL;
-+
-+		parent_dev = clk->dev;
-+		break;
-+	case CLK_PARENT_XTAL:
-+		return priv->tree->xtal_rate;
-+	default:
-+		parent_dev = NULL;
-+		break;
-+	}
-+
-+	return mtk_clk_find_parent_rate(clk, parent, parent_dev);
++	return tree->plls && mapped_id < tree->num_plls;
 +}
 +
- static int mtk_clk_mux_set_parent(void __iomem *base, u32 parent,
- 				  u32 parent_type,
- 				  const struct mtk_composite *mux)
-@@ -470,7 +517,7 @@ static ulong mtk_apmixedsys_get_rate(struct clk *clk)
- 	/* GATE handling */
- 	if (priv->tree->gates && clk->id >= priv->tree->gates_offs) {
- 		gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
--		return mtk_clk_find_parent_rate(clk, gate->parent, NULL);
-+		return mtk_find_parent_rate(priv, clk, gate->parent, gate->flags);
- 	}
- 
- 	pll = &priv->tree->plls[clk->id];
-@@ -637,39 +684,13 @@ static ulong mtk_topckgen_get_factor_rate(struct clk *clk, u32 off)
- 	const struct mtk_fixed_factor *fdiv = &priv->tree->fdivs[off];
- 	ulong rate;
- 
--	switch (fdiv->flags & CLK_PARENT_MASK) {
--	case CLK_PARENT_APMIXED:
--		rate = mtk_clk_find_parent_rate(clk, fdiv->parent,
--						priv->parent);
--		break;
--	case CLK_PARENT_TOPCKGEN:
--		rate = mtk_clk_find_parent_rate(clk, fdiv->parent, NULL);
--		break;
--
--	case CLK_PARENT_XTAL:
--	default:
--		rate = priv->tree->xtal_rate;
--	}
--
-+	rate = mtk_find_parent_rate(priv, clk, fdiv->parent, fdiv->flags);
- 	if (IS_ERR_VALUE(rate))
- 		return rate;
- 
- 	return mtk_factor_recalc_rate(fdiv, rate);
- }
- 
--static ulong mtk_topckgen_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
--					   const int parent, u16 flags)
--{
--	switch (flags & CLK_PARENT_MASK) {
--	case CLK_PARENT_XTAL:
--		return priv->tree->xtal_rate;
--	case CLK_PARENT_APMIXED:
--		return mtk_clk_find_parent_rate(clk, parent, priv->parent);
--	default:
--		return mtk_clk_find_parent_rate(clk, parent, NULL);
--	}
--}
--
- static ulong mtk_topckgen_get_mux_rate(struct clk *clk, u32 off)
++static bool mtk_clk_id_is_fclk(const struct mtk_clk_tree *tree, int mapped_id)
++{
++	return tree->fclks && mapped_id < tree->num_fclks;
++}
++
++static bool mtk_clk_id_is_fdiv(const struct mtk_clk_tree *tree, int mapped_id)
++{
++	return tree->fdivs && mapped_id >= tree->fdivs_offs &&
++	       mapped_id < tree->fdivs_offs + tree->num_fdivs;
++}
++
++static bool mtk_clk_id_is_mux(const struct mtk_clk_tree *tree, int mapped_id)
++{
++	return tree->muxes && mapped_id >= tree->muxes_offs &&
++	       mapped_id < tree->muxes_offs + tree->num_muxes;
++}
++
++static bool mtk_clk_id_is_gate(const struct mtk_clk_tree *tree, int mapped_id)
++{
++	return tree->gates && mapped_id >= tree->gates_offs &&
++	       mapped_id < tree->gates_offs + tree->num_gates;
++}
++
+ static int mtk_dummy_enable(struct clk *clk)
  {
- 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -687,33 +708,14 @@ static ulong mtk_topckgen_get_mux_rate(struct clk *clk, u32 off)
- 	if (mux->flags & CLK_PARENT_MIXED) {
- 		const struct mtk_parent *parent = &mux->parent_flags[index];
+ 	return 0;
+@@ -375,15 +403,10 @@ static const int mtk_apmixedsys_of_xlate(struct clk *clk,
+ 		return ret;
  
--		return mtk_topckgen_find_parent_rate(priv, clk, parent->id,
--						     parent->flags);
-+		return mtk_find_parent_rate(priv, clk, parent->id, parent->flags);
- 	}
+ 	/* apmixedsys only uses plls and gates. */
++	if (!mtk_clk_id_is_pll(tree, clk->id) && !mtk_clk_id_is_gate(tree, clk->id))
++		return -ENOENT;
  
- 	if (mux->parent[index] == CLK_XTAL &&
- 	    !(priv->tree->flags & CLK_BYPASS_XTAL))
- 		return priv->tree->xtal_rate;
- 
--	return mtk_topckgen_find_parent_rate(priv, clk, mux->parent[index],
--					     mux->flags);
--}
+-	if (tree->plls && clk->id < tree->num_plls)
+-		return 0;
 -
--static ulong mtk_find_parent_rate(struct mtk_clk_priv *priv, struct clk *clk,
--				  const int parent, u16 flags)
--{
--	switch (flags & CLK_PARENT_MASK) {
--	case CLK_PARENT_XTAL:
--		return priv->tree->xtal_rate;
--	/* Assume the second level parent is always APMIXED */
--	case CLK_PARENT_APMIXED:
--		priv = dev_get_priv(priv->parent);
--		fallthrough;
--	case CLK_PARENT_TOPCKGEN:
--		return mtk_clk_find_parent_rate(clk, parent, priv->parent);
--	default:
--		return mtk_clk_find_parent_rate(clk, parent, NULL);
--	}
-+	return mtk_find_parent_rate(priv, clk, mux->parent[index], mux->flags);
+-	if (tree->gates && clk->id >= tree->gates_offs &&
+-	    clk->id < tree->gates_offs + tree->num_gates)
+-		return 0;
+-
+-	return -ENOENT;
++	return 0;
  }
  
- static ulong mtk_topckgen_get_rate(struct clk *clk)
-@@ -725,7 +727,7 @@ static ulong mtk_topckgen_get_rate(struct clk *clk)
- 	    clk->id < tree->gates_offs + tree->num_gates) {
+ static unsigned long __mtk_pll_recalc_rate(const struct mtk_pll_data *pll,
+@@ -497,7 +520,7 @@ static ulong mtk_apmixedsys_set_rate(struct clk *clk, ulong rate)
+ 	u32 pcw = 0;
+ 	u32 postdiv;
+ 
+-	if (priv->tree->gates && clk->id >= priv->tree->gates_offs)
++	if (!mtk_clk_id_is_pll(priv->tree, clk->id))
+ 		return -EINVAL;
+ 
+ 	mtk_pll_calc_values(priv, clk->id, &pcw, &postdiv, rate);
+@@ -515,7 +538,7 @@ static ulong mtk_apmixedsys_get_rate(struct clk *clk)
+ 	u32 pcw;
+ 
+ 	/* GATE handling */
+-	if (priv->tree->gates && clk->id >= priv->tree->gates_offs) {
++	if (mtk_clk_id_is_gate(priv->tree, clk->id)) {
+ 		gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
+ 		return mtk_find_parent_rate(priv, clk, gate->parent, gate->flags);
+ 	}
+@@ -541,7 +564,7 @@ static int mtk_apmixedsys_enable(struct clk *clk)
+ 	u32 r;
+ 
+ 	/* GATE handling */
+-	if (priv->tree->gates && clk->id >= priv->tree->gates_offs) {
++	if (mtk_clk_id_is_gate(priv->tree, clk->id)) {
+ 		gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
+ 		return mtk_gate_enable(priv->base, gate);
+ 	}
+@@ -579,7 +602,7 @@ static int mtk_apmixedsys_disable(struct clk *clk)
+ 	u32 r;
+ 
+ 	/* GATE handling */
+-	if (priv->tree->gates && clk->id >= priv->tree->gates_offs) {
++	if (mtk_clk_id_is_gate(priv->tree, clk->id)) {
+ 		gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
+ 		return mtk_gate_disable(priv->base, gate);
+ 	}
+@@ -649,23 +672,11 @@ static const int mtk_topckgen_of_xlate(struct clk *clk,
+ 		return ret;
+ 
+ 	/* topckgen only uses fclks, fdivs, muxes and gates. */
++	if (!mtk_clk_id_is_fclk(tree, clk->id) && !mtk_clk_id_is_fdiv(tree, clk->id) &&
++	    !mtk_clk_id_is_mux(tree, clk->id) && !mtk_clk_id_is_gate(tree, clk->id))
++		return -ENOENT;
+ 
+-	if (tree->fclks && clk->id < tree->num_fclks)
+-		return 0;
+-
+-	if (tree->fdivs && clk->id >= tree->fdivs_offs &&
+-	    clk->id < tree->fdivs_offs + tree->num_fdivs)
+-		return 0;
+-
+-	if (tree->muxes && clk->id >= tree->muxes_offs &&
+-	    clk->id < tree->muxes_offs + tree->num_muxes)
+-		return 0;
+-
+-	if (tree->gates && clk->id >= tree->gates_offs &&
+-	    clk->id < tree->gates_offs + tree->num_gates)
+-		return 0;
+-
+-	return -ENOENT;
++	return 0;
+ }
+ 
+ static ulong mtk_factor_recalc_rate(const struct mtk_fixed_factor *fdiv,
+@@ -723,21 +734,22 @@ static ulong mtk_topckgen_get_rate(struct clk *clk)
+ 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 
+-	if (tree->gates && clk->id >= tree->gates_offs &&
+-	    clk->id < tree->gates_offs + tree->num_gates) {
++	if (mtk_clk_id_is_fclk(tree, clk->id))
++		return tree->fclks[clk->id].rate;
++
++	if (mtk_clk_id_is_fdiv(tree, clk->id))
++		return mtk_topckgen_get_factor_rate(clk, clk->id - tree->fdivs_offs);
++
++	if (mtk_clk_id_is_mux(tree, clk->id))
++		return mtk_topckgen_get_mux_rate(clk, clk->id - tree->muxes_offs);
++
++	if (mtk_clk_id_is_gate(tree, clk->id)) {
  		const struct mtk_gate *gate = &tree->gates[clk->id - tree->gates_offs];
  
--		return mtk_clk_find_parent_rate(clk, gate->parent, NULL);
-+		return mtk_find_parent_rate(priv, clk, gate->parent, gate->flags);
+ 		return mtk_find_parent_rate(priv, clk, gate->parent, gate->flags);
  	}
  
- 	if (clk->id < priv->tree->fdivs_offs)
-@@ -963,18 +965,7 @@ static ulong mtk_infrasys_get_factor_rate(struct clk *clk, u32 off)
- 	const struct mtk_fixed_factor *fdiv = &priv->tree->fdivs[off];
+-	if (clk->id < priv->tree->fdivs_offs)
+-		return priv->tree->fclks[clk->id].rate;
+-	else if (clk->id < priv->tree->muxes_offs)
+-		return mtk_topckgen_get_factor_rate(clk, clk->id -
+-						    priv->tree->fdivs_offs);
+-	else
+-		return mtk_topckgen_get_mux_rate(clk, clk->id -
+-						 priv->tree->muxes_offs);
++	return -ENOENT;
+ }
+ 
+ static int mtk_clk_mux_enable(struct clk *clk)
+@@ -746,7 +758,7 @@ static int mtk_clk_mux_enable(struct clk *clk)
+ 	const struct mtk_composite *mux;
+ 	u32 val;
+ 
+-	if (clk->id < priv->tree->muxes_offs)
++	if (!mtk_clk_id_is_mux(priv->tree, clk->id))
+ 		return 0;
+ 
+ 	mux = &priv->tree->muxes[clk->id - priv->tree->muxes_offs];
+@@ -778,8 +790,7 @@ static int mtk_topckgen_enable(struct clk *clk)
+ 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 
+-	if (tree->gates && clk->id >= tree->gates_offs &&
+-	    clk->id < tree->gates_offs + tree->num_gates) {
++	if (mtk_clk_id_is_gate(tree, clk->id)) {
+ 		const struct mtk_gate *gate = &tree->gates[clk->id - tree->gates_offs];
+ 
+ 		return mtk_gate_enable(priv->base, gate);
+@@ -794,7 +805,7 @@ static int mtk_clk_mux_disable(struct clk *clk)
+ 	const struct mtk_composite *mux;
+ 	u32 val;
+ 
+-	if (clk->id < priv->tree->muxes_offs)
++	if (!mtk_clk_id_is_mux(priv->tree, clk->id))
+ 		return 0;
+ 
+ 	mux = &priv->tree->muxes[clk->id - priv->tree->muxes_offs];
+@@ -819,8 +830,7 @@ static int mtk_topckgen_disable(struct clk *clk)
+ 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
+ 	const struct mtk_clk_tree *tree = priv->tree;
+ 
+-	if (tree->gates && clk->id >= tree->gates_offs &&
+-	    clk->id < tree->gates_offs + tree->num_gates) {
++	if (mtk_clk_id_is_gate(tree, clk->id)) {
+ 		const struct mtk_gate *gate = &tree->gates[clk->id - tree->gates_offs];
+ 
+ 		return mtk_gate_disable(priv->base, gate);
+@@ -836,8 +846,7 @@ static int mtk_common_clk_set_parent(struct clk *clk, struct clk *parent)
+ 	int parent_unmapped_id;
+ 	u32 parent_type;
+ 
+-	if (!priv->tree->muxes || clk->id < priv->tree->muxes_offs ||
+-	    clk->id >= priv->tree->muxes_offs + priv->tree->num_muxes)
++	if (!mtk_clk_id_is_mux(priv->tree, clk->id))
+ 		return 0;
+ 
+ 	if (!parent_priv)
+@@ -917,20 +926,11 @@ static const int mtk_infrasys_of_xlate(struct clk *clk,
+ 		return ret;
+ 
+ 	/* ifrasys only uses fdivs, muxes and gates. */
++	if (!mtk_clk_id_is_fdiv(tree, clk->id) && !mtk_clk_id_is_mux(tree, clk->id) &&
++	    !mtk_clk_id_is_gate(tree, clk->id))
++		return -ENOENT;
+ 
+-	if (tree->fdivs && clk->id >= tree->fdivs_offs &&
+-	    clk->id < tree->fdivs_offs + tree->num_fdivs)
+-		return 0;
+-
+-	if (tree->muxes && clk->id >= tree->muxes_offs &&
+-	    clk->id < tree->muxes_offs + tree->num_muxes)
+-		return 0;
+-
+-	if (tree->gates && clk->id >= tree->gates_offs &&
+-	    clk->id < tree->gates_offs + tree->num_gates)
+-		return 0;
+-
+-	return -ENOENT;
++	return 0;
+ }
+ 
+ static int mtk_clk_infrasys_enable(struct clk *clk)
+@@ -939,7 +939,7 @@ static int mtk_clk_infrasys_enable(struct clk *clk)
+ 	const struct mtk_gate *gate;
+ 
+ 	/* MUX handling */
+-	if (!priv->tree->gates || clk->id < priv->tree->gates_offs)
++	if (!mtk_clk_id_is_gate(priv->tree, clk->id))
+ 		return mtk_clk_mux_enable(clk);
+ 
+ 	gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
+@@ -952,7 +952,7 @@ static int mtk_clk_infrasys_disable(struct clk *clk)
+ 	const struct mtk_gate *gate;
+ 
+ 	/* MUX handling */
+-	if (!priv->tree->gates || clk->id < priv->tree->gates_offs)
++	if (!mtk_clk_id_is_gate(priv->tree, clk->id))
+ 		return mtk_clk_mux_disable(clk);
+ 
+ 	gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
+@@ -1004,13 +1004,13 @@ static ulong mtk_infrasys_get_rate(struct clk *clk)
+ 	struct mtk_clk_priv *priv = dev_get_priv(clk->dev);
  	ulong rate;
  
--	switch (fdiv->flags & CLK_PARENT_MASK) {
--	case CLK_PARENT_TOPCKGEN:
--		rate = mtk_clk_find_parent_rate(clk, fdiv->parent,
--						priv->parent);
--		break;
--	case CLK_PARENT_XTAL:
--		rate = priv->tree->xtal_rate;
--		break;
--	default:
--		rate = mtk_clk_find_parent_rate(clk, fdiv->parent, NULL);
--	}
--
-+	rate = mtk_find_parent_rate(priv, clk, fdiv->parent, fdiv->flags);
- 	if (IS_ERR_VALUE(rate))
- 		return rate;
- 
-@@ -1024,20 +1015,11 @@ static ulong mtk_infrasys_get_rate(struct clk *clk)
+-	if (clk->id < priv->tree->fdivs_offs) {
++	if (mtk_clk_id_is_fclk(priv->tree, clk->id)) {
+ 		rate = priv->tree->fclks[clk->id].rate;
+-	} else if (clk->id < priv->tree->muxes_offs) {
++	} else if (mtk_clk_id_is_fdiv(priv->tree, clk->id)) {
+ 		rate = mtk_infrasys_get_factor_rate(clk, clk->id -
+ 						    priv->tree->fdivs_offs);
+ 	/* No gates defined or ID is a MUX */
+-	} else if (!priv->tree->gates || clk->id < priv->tree->gates_offs) {
++	} else if (!mtk_clk_id_is_gate(priv->tree, clk->id)) {
+ 		rate = mtk_infrasys_get_mux_rate(clk, clk->id -
  						 priv->tree->muxes_offs);
  	/* Only valid with muxes + gates implementation */
- 	} else {
--		struct udevice *parent = NULL;
- 		const struct mtk_gate *gate;
- 
- 		gate = &priv->tree->gates[clk->id - priv->tree->gates_offs];
--		if (gate->flags & CLK_PARENT_TOPCKGEN)
--			parent = priv->parent;
--		/*
--		 * Assume xtal_rate to be declared if some gates have
--		 * XTAL as parent
--		 */
--		else if (gate->flags & CLK_PARENT_XTAL)
--			return priv->tree->xtal_rate;
- 
--		rate = mtk_clk_find_parent_rate(clk, gate->parent, parent);
-+		rate = mtk_find_parent_rate(priv, clk, gate->parent, gate->flags);
- 	}
- 
- 	return rate;
 
 -- 
 2.43.0
