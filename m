@@ -4,70 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4590FE67A6B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 06:30:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E56EE67A81
+	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 07:13:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0AAC83F7D;
-	Tue,  3 Mar 2026 07:30:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=alliedtelesis.co.nz
+	by phobos.denx.de (Postfix) with ESMTP id B3F8583F2D;
+	Tue,  3 Mar 2026 08:13:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=alliedtelesis.co.nz header.i=@alliedtelesis.co.nz header.b="l0QEwsNk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dj0DBHAM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8613383F7F; Tue,  3 Mar 2026 07:30:01 +0100 (CET)
-Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz
- [202.36.163.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D67C883F30; Tue,  3 Mar 2026 08:13:51 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D03A83F75
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 07:29:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=alliedtelesis.co.nz
+ by phobos.denx.de (Postfix) with ESMTPS id 389CE8063E
+ for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 08:13:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ronand@alliedtelesis.co.nz
-Received: from svr-chch-seg1.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 60B732C030A;
- Tue,  3 Mar 2026 19:29:52 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
- s=mail181024; t=1772519392;
- bh=4fyZ2GwR0i0miW6w8VPlNLSTI0mIR8+Kp7bZIvEZtkQ=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=l0QEwsNkTQQFiebl1oQbRQ+V7skJlGDMyLwFj1Px8/AGK1BVXIyhFKfBaaWULTska
- R5Pf0g7KzpyiE+QjipvntBUbOpbJkYDqV8YhEDAQYKCZ4//s8KPliko5BtGWIH4aLm
- 9uRs04d7kA2FVfGCtKMwt+Amw+3mYp19uCz2Uwy8P729TkW5ec/FaUAnEywm8yKdcE
- L7i2JkxGYOG5Pf6jLDvU1LkykVNhcuXborywelXKHnMlsUHxRqJGXPRH4q9AqXjbr0
- KLQTios38LTHA32bnjRajROtD9SEaXoRyGdmQm84vJat+Zh9PPTH0bHEYJ7fcMmLtd
- Zt3WDQMgJ+0VA==
-Received: from pat.atlnz.lc (Not Verified[10.32.16.33]) by
- svr-chch-seg1.atlnz.lc with Trustwave SEG (v8, 2, 6, 11305)
- id <B69a67fe00000>; Tue, 03 Mar 2026 19:29:52 +1300
-Received: from ronand-dl.ws.atlnz.lc (ronand-dl.ws.atlnz.lc [10.33.12.18])
- by pat.atlnz.lc (Postfix) with ESMTP id E070413ED5A;
- Tue,  3 Mar 2026 19:29:51 +1300 (NZDT)
-Received: by ronand-dl.ws.atlnz.lc (Postfix, from userid 1930)
- id D76A684004F; Tue,  3 Mar 2026 19:29:51 +1300 (NZDT)
-From: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>
-To: u-boot@lists.denx.de
-Cc: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>,
- Marek Vasut <marex@denx.de>, Philip Oberfichtner <pro@denx.de>
-Subject: [PATCH v4 4/4] usb: Convert ad-hoc poll/timeout sequences in usb.c to
- iopoll
-Date: Tue,  3 Mar 2026 19:25:07 +1300
-Message-ID: <20260303062503.3392544-8-ronan.dalton@alliedtelesis.co.nz>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260303062503.3392544-2-ronan.dalton@alliedtelesis.co.nz>
-References: <20260303062503.3392544-2-ronan.dalton@alliedtelesis.co.nz>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-439af00d33cso2104368f8f.1
+ for <u-boot@lists.denx.de>; Mon, 02 Mar 2026 23:13:49 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772522028; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Vwc3Nvwmb2KMlA8u63Mz7rH+oRToFgeWwMAwrArTw9L/qSwgKlccXryD5Fdv3L41GQ
+ ThP1OuQC6xLo9FUouDletu37p+GNsP80dNFAwPlcdzCozUbGvzapB1bhywO+bWgZnIiu
+ PjfEmH1A7FgNorPiPyATnP/uDgr5tfEBkQmLnQvs20A3xkFuzE+8kd71NdhLc7osTYfO
+ 942lMBY3CWjzABiKbEN/RkVDduZ1JK05/eKqvjSE6EBGzN8BniS+Uiim/zOIuvsZ6XX/
+ 1aHhHlimlUTYQwf1I5wA7lOMpXEs5j4n/Y0WmDQAPQ6kOl5a5wx6q0ofKyoOjWeM0JdW
+ Q/3A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=chMLpIXRS9JNXtPxQXb9i/eIRG5vVDmpZecgviys6QQ=;
+ fh=R+57Z9LKwwX94+2l4P9iCqOXXnEAiLXjIBiXRemyTtY=;
+ b=ReyF3QD9QhtvobUbh2NkseqPI756hv1+JVgvyYj0d6IWP/H4yZNk6L4xNlssTgldzt
+ t/8qgMvzmUIzYsnxpAV9msvDTQ8bUz3JPIM9LcFBzKQLzP3w9pFAD0GyVvP3jh8NUf5N
+ 0JtfFfTCJUSx0q7qlp6UiL1Xoii6JYAgIF+IHOMtgovA8O7adddhSvsv1EmSDm8lCwMn
+ 03nZ77dTd4PlO/3SbrV1d0mPBeezS91dQOAa8CLj9yOe6gTUsMVBccew8xXJmdkOr2cP
+ TkqSukrUyUBU73JAcb9nZmx6MsP/k8SZV+ULeifH7FI0HLZtQ8mDcYWEgwsiKzF2+uyf
+ t1Pg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1772522028; x=1773126828; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=chMLpIXRS9JNXtPxQXb9i/eIRG5vVDmpZecgviys6QQ=;
+ b=dj0DBHAMIvMmEuRxdbVNpn+A5W0HMNmdunO8MTh4D7hUCl3afOZSUkTqr4ZVeaUQzj
+ agmT1L+JY4Mo9h5hwkc/GcAggRbZWjBZJ7HQVvB8Vom6PlLiGnxrWcNH3Nqtxzf8yrK/
+ wYO4drWH/8iLseVwFD/gVCltO0RaYAZbhUhB0f0tYeZ3lmcQHZSwFR/Sv/aegHfSq623
+ 8eAtCNO3vfNWO6jiDRdlh4wgnz7O8H7i+U/Tw4kyzqSAR4cC0kVlK276ixOdAFNiNd4J
+ pRSpB4RkHcFkkZoDPw/EGdTKOgVsNAhPK66dAToRnSDmsrawUA6QlzzI7xXf7ebAlUBE
+ nOUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772522028; x=1773126828;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=chMLpIXRS9JNXtPxQXb9i/eIRG5vVDmpZecgviys6QQ=;
+ b=FpFmzaHfauGFFJE6hk5p3o7m6ny6W5TCMjjn5PCh9Itihf++EQ/eUEYm+G7U4ika6q
+ Tt3xhshtX3TW5+Fo9f2fRq4pRls7ccfQKUPd3j/OrjqNKkKlxZVP4FbkLtWfVKmrdr4G
+ gmEHUVMhQctSa1RXIjS9eybusYa41wMdikfZPB388Oz8UF8JHmhByWOzkEIIgz0J9ZHt
+ eMgsI7lF3op+txDkFz8B0SjVtWVvdB2XMZqklwpxApEg7U98svumg4kFSBYyryHKXMqO
+ XauCngnjZvhbMdvQfMsML8+1D3aT3/jkCnIf9W9ji0M7cOSU97IxFrR7/1k3nkp3N5iv
+ cEcA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU5/2jhq/3ZFCYyHtQ/cosGTHjm4sib6hR/a5Mf1cxWP0JFuRoSKsMJzZVP1xLAIhunrCBZo5Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtXvaC1Ij1XBDSRKeWoAkeyolgMMEgfcBRL/5QU8Ghz1sQL/ey
+ aSQS2UG/4QHx6Bi6xcO77K30+EFmbVd33wJkriEtlCiin5UIZPhQXosMKqM0KD2x3axejD+xCAo
+ mEt49ycyWwybrBc0tSy335z/+qTKna5CAMeJq
+X-Gm-Gg: ATEYQzy0ijueKQkxdBdWrMTURUJf9HBKUOu/F04/9V2vWYEOIlrDqWWxWANMH6+Frpt
+ Lg7GROjZ5EN5T7akoEt8HyxchKFocky8Wjugl10+BZoQzHYztO4KzQlTTn7w+Z/xl0qKnY4ZDs3
+ g2AyUJq/YWm+rLAY0xutM438uFhnp9XM+RYJ2OZrS+MuBv4ikJzgs7H7fjnwkuMRpKQr2PAGfCS
+ CZ/ShBE/AZ8HCTfy0DyxMiFr1AdJwKvUCtlElDAIgjJr/K8uzmL7DAj8U42MYLYGJi3tEb/sKSl
+ aFvqKxNz
+X-Received: by 2002:adf:fec5:0:b0:439:ac32:9117 with SMTP id
+ ffacd0b85a97d-439ac3291camr13506730f8f.6.1772522028249; Mon, 02 Mar 2026
+ 23:13:48 -0800 (PST)
 MIME-Version: 1.0
+References: <20260209180718.32451-1-clamor95@gmail.com>
+ <20260209180718.32451-2-clamor95@gmail.com>
+ <d194a890-6921-472b-935f-8b2d01c1289c@cherry.de>
+In-Reply-To: <d194a890-6921-472b-935f-8b2d01c1289c@cherry.de>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 3 Mar 2026 09:13:36 +0200
+X-Gm-Features: AaiRm53NjHdKEClIz-3N0wOdVj7NW0Ur3-CQ1gnQV8UYdteKTusm5rg2_1_BQgg
+Message-ID: <CAPVz0n3Tsx2rvfmBhDQDyW-_fLm3XLiPzzna3ZCxbt=LeQAF3w@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] led: led_pwm: fix active-low behavior
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Ivan Vozvakhov <i.vozvakhov@vk.team>, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-SEG-SpamProfiler-Analysis: v=2.4 cv=d/NWygjE c=1 sm=1 tr=0 ts=69a67fe0
- a=KLBiSEs5mFS1a/PbTCJxuA==:117 a=Yq5XynenixoA:10 a=D029-m6IjDprw9L5G2cA:9
- a=3ZKOabzyN94A:10
-X-SEG-SpamProfiler-Score: 0
-x-atlnz-ls: pat
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,125 +119,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The usb_control_msg and usb_bulk_msg functions in usb.c use a while loop
-and delay to wait for a USB control message to be processed. iopoll
-provides a macro to do this for us which can be used instead.
+=D0=BF=D0=BD, 2 =D0=B1=D0=B5=D1=80. 2026=E2=80=AF=D1=80. =D0=BE 15:07 Quent=
+in Schulz <quentin.schulz@cherry.de> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Hi Svyatoslav, Jonas,
+>
+> On 2/9/26 7:07 PM, Svyatoslav Ryhel wrote:
+> > From: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
+> >
+> > In the case of active-low behavior the Duty Cycle needs to be set to 10=
+0%.
+> > The PWM driver takes care of this but the LED_PWM driver does not take
+> > this into account. Adjust LED_PWM to take into account polarity of PWM.
+> >
+> > Signed-off-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > ---
+> >   drivers/led/led_pwm.c | 4 ++--
+> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/led/led_pwm.c b/drivers/led/led_pwm.c
+> > index 15dd836509b..7edfa286468 100644
+> > --- a/drivers/led/led_pwm.c
+> > +++ b/drivers/led/led_pwm.c
+> > @@ -34,7 +34,7 @@ static int led_pwm_enable(struct udevice *dev)
+> >       if (ret)
+> >               return ret;
+> >
+> > -     ret =3D pwm_set_enable(priv->pwm, priv->channel, true);
+> > +     ret =3D pwm_set_enable(priv->pwm, priv->channel, priv->active_low=
+);
+> >       if (ret)
+> >               return ret;
+> >
+> > @@ -52,7 +52,7 @@ static int led_pwm_disable(struct udevice *dev)
+> >       if (ret)
+> >               return ret;
+> >
+> > -     ret =3D pwm_set_enable(priv->pwm, priv->channel, false);
+> > +     ret =3D pwm_set_enable(priv->pwm, priv->channel, priv->active_low=
+);
+>
+> This feels wrong. Why would both enable and disable paths use the exact
+> same value for pwm_set_enable()?
+>
 
-Replace the while loops with calls to the read_poll_timeout macro. Also
-add a check for timeout being negative at the start of the functions and
-return -EINVAL in that case, since a negative timeout doesn't make
-sense.
+Hello Quentin!
 
-This also fixes a bug where usb_control_msg would check if timeout was
-equal to 0 to determine if a timeout occurred, when it should have been
-checking if it was -1 instead. This caused -1 to be returned by the
-function in most cases when a timeout occurred instead of the correct
-error code of -ETIMEDOUT.
+You are mixing up the LED with the PWM that controls it.
+pwm_set_enable() triggers a PWM configuration update; therefore, the
+process is the same for both enabling and disabling.
 
-usb_bulk_msg now returns -ETIMEDOUT instead of -EIO on timeout.
+> I can also see that the disable path doesn't actually call
+> pwm_set_invert() unlike in the enable path. I'm assuming this means we
+> cannot call disable before enable and have consistent behavior?
+>
 
-Signed-off-by: Ronan Dalton <ronan.dalton@alliedtelesis.co.nz>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Philip Oberfichtner <pro@denx.de>
----
-Changes for v2:
-- Changed headline, previously called:
-  usb: Fix timeout check in usb_control_msg
-- Fix timeout check bug by using iopoll instead of just fixing the if
-  statement
-- Update usb_bulk_msg to also use iopoll as well
-Changes for v3:
-- No changes
-Changes for v4:
-- Return -ETIMEDOUT from usb_bulk_msg function on timeout
-- Update commit message to mention usb_bulk_msg return value change
+The inversion setting is only relevant when the PWM is enabled. Since
+the disable operation forces the duty cycle to 0, the inversion state
+is inconsequential.
 
- common/usb.c | 34 ++++++++++++++++++++++------------
- 1 file changed, 22 insertions(+), 12 deletions(-)
+> The kernel seems to use active_low as a way to invert the duty cycle if
+> I'm understanding the code properly. In U-Boot, it seems we don't handle
+> that at all and always pass the "normal" duty cycle. Maybe there's
+> something we need to do there.
+>
 
-diff --git a/common/usb.c b/common/usb.c
-index 1c139d86e90..488ec0532b1 100644
---- a/common/usb.c
-+++ b/common/usb.c
-@@ -40,6 +40,7 @@
- #include <errno.h>
- #include <usb.h>
- #include <linux/delay.h>
-+#include <linux/iopoll.h>
-=20
- #define USB_BUFSIZ	512
-=20
-@@ -224,8 +225,12 @@ int usb_control_msg(struct usb_device *dev, unsigned=
- int pipe,
- 			void *data, unsigned short size, int timeout)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(struct devrequest, setup_packet, 1);
-+	volatile unsigned long usb_status;
- 	int err;
-=20
-+	if (timeout < 0)
-+		return -EINVAL;
-+
- 	if ((timeout =3D=3D 0) && (!asynch_allowed)) {
- 		/* request for a asynch control pipe is not allowed */
- 		return -EINVAL;
-@@ -253,14 +258,12 @@ int usb_control_msg(struct usb_device *dev, unsigne=
-d int pipe,
- 	 * interrupt handler may set the status when the USB operation has
- 	 * been completed.
- 	 */
--	while (timeout--) {
--		if (!((volatile unsigned long)dev->status & USB_ST_NOT_PROC))
--			break;
--		mdelay(1);
--	}
-+	err =3D read_poll_timeout((volatile unsigned long), usb_status,
-+				!(usb_status & USB_ST_NOT_PROC), 1000,
-+				timeout * 1000UL, dev->status);
-=20
--	if (timeout =3D=3D 0)
--		return -ETIMEDOUT;
-+	if (err =3D=3D -ETIMEDOUT)
-+		return err;
-=20
- 	if (dev->status)
- 		return -1;
-@@ -276,22 +279,29 @@ int usb_control_msg(struct usb_device *dev, unsigne=
-d int pipe,
- int usb_bulk_msg(struct usb_device *dev, unsigned int pipe,
- 			void *data, int len, int *actual_length, int timeout)
- {
-+	volatile unsigned long usb_status;
-+	int err;
-+
- 	if (len < 0)
- 		return -EINVAL;
-=20
-+	if (timeout < 0)
-+		return -EINVAL;
-+
- 	dev->status =3D USB_ST_NOT_PROC; /*not yet processed */
-=20
- 	if (submit_bulk_msg(dev, pipe, data, len) < 0)
- 		return -EIO;
-=20
--	while (timeout--) {
--		if (!((volatile unsigned long)dev->status & USB_ST_NOT_PROC))
--			break;
--		mdelay(1);
--	}
-+	err =3D read_poll_timeout((volatile unsigned long), usb_status,
-+				!(usb_status & USB_ST_NOT_PROC), 1000,
-+				timeout * 1000UL, dev->status);
-=20
- 	*actual_length =3D dev->act_len;
-=20
-+	if (err =3D=3D -ETIMEDOUT)
-+		return err;
-+
- 	if (dev->status =3D=3D 0)
- 		return 0;
- 	else
---=20
-2.53.0
+In U-Boot PWM should handle this in the set_invert operation.
 
+> I'm also assuming there are setups where PWM should be enabled but with
+> a duty cycle of 0?
+>
+
+A duty cycle of 0 is equivalent to pwm being turned off. In general
+most devices won't work on very low duty cycles. Fan needs at least
+30%, LEDs make no sense below 10%, also most Display are not usable
+below 10%
+
+> I'm also unsure what's the difference between active-low and
+> PWM_POLARITY_INVERTED (I've seen them both mentioned or mixed in the
+> kernel DTSes).
+>
+
+These are properties of two different device classes: active-low is
+used with PWM-LEDs, while PWM_POLARITY_INVERTED is strictly a PWM
+property.
+
+> I don't have experience with PWM so maybe that's a just a
+> misunderstanding from my side?
+>
+> Cheers,
+> Quentin
