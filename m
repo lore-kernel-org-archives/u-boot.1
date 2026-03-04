@@ -4,95 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 946CCEDEBF9
-	for <u-boot@archiver.kernel.org>; Tue,  3 Mar 2026 22:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55926EDEC08
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 03:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBE87839DF;
-	Tue,  3 Mar 2026 23:36:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 342C183F0A;
+	Wed,  4 Mar 2026 04:54:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=makrotopia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gtPjUbg8";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2A4583E7F; Tue,  3 Mar 2026 23:36:21 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B109083F75; Wed,  4 Mar 2026 04:54:01 +0100 (CET)
+Received: from pidgin.makrotopia.org (pidgin.makrotopia.org
+ [IPv6:2a07:2ec0:3002::65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72CC8838BB
- for <u-boot@lists.denx.de>; Tue,  3 Mar 2026 23:36:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A779D83E7F
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 04:53:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=makrotopia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-65f92a597a1so8680120a12.0
- for <u-boot@lists.denx.de>; Tue, 03 Mar 2026 14:36:19 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772577379; cv=none;
- d=google.com; s=arc-20240605;
- b=OCeRY8nPYdtZOnj5y8SoFYoRyoRnjHWr8UrN16eUxjnET07pOC/+Z/9okF8JOwC49y
- 9ritOLMTHtHL8ExEyKmQSYXpjzQky70BL0uY2wJTcz65G2UHDME7Pb9jt5SVXj7gCgps
- IVcHcpsn9wz3RwTDeJ8nVDMWRVZgAOBJR6bwfUYGG6tYSxrytXmMo9rOjKuzzDaGTBK7
- Mc7zGAudw41jOKsQbtTeYYzWUBeOOpRb9w9BggCtk7uDdU2oPuuvPerDmPqwI26u+edI
- XJVpyAsZq6yKaIMS8kospDRtpdCludMyxx2xGUQWRgR4o5gGDyXWbLllZ91s9kOylFGo
- DDNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=5dN5w4dWlafjtKkwMzboWdEtBSlgZRTPvOCVSO4jy/4=;
- fh=y88EDaYy9H+d+/vyESG5znfcSzemuCaVIpKX0g41HHA=;
- b=gHTjVTkZvP1aLe+icgfwDWhS9J2a8GiG6B+nHgHFZ67F3qCrxdk9v/e8D3vbfiZ3tp
- JSsSW9Lg9sVa4SkaE3Jt9p4mGRRiwe3HSNyDFZgCa3m1JT1m2GkP5+garBXXANa6en3g
- ji0lX97Uwz5JsH9VRArJwbS9hxyVpFfM939OVKY8WmNcRsvv15Qmc0T3aFgQpjdSU6oD
- bKQOxvSFtrJKcsg5YMOGkshCPqMLySWcos+5MnJ3O+irlTG3ubiGCmbwJ6yfgoHZ/u9K
- arlw1u4ifxJ4yvoNt8G8WwaET62mPO5H6IBJkc2oIKkAdi5dQjrFAfbxcC7kkmeqbLmX
- YoQw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772577379; x=1773182179; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5dN5w4dWlafjtKkwMzboWdEtBSlgZRTPvOCVSO4jy/4=;
- b=gtPjUbg8AwL019XSGbK62H2A9zZKfQ8S8lW0RRb9Yqsn9Gc9YkPXmScqYCiNGVeI7z
- 6XpPowyf/WXxFOLyL9+crCliBLxLwSvUNdUxcLBNcWA5sw0yrVmoYbiXKwsiskAfKRdo
- t0NHxI4yeWD4/qEj7Q6wMJ1wk0dFw3zzfW6E8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772577379; x=1773182179;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5dN5w4dWlafjtKkwMzboWdEtBSlgZRTPvOCVSO4jy/4=;
- b=VATVG0I0RhiCypscw8OZQcnr37VGWDRtS+xwnpez7aKqKrGiH2oFurVUZv6Bcqq+ZH
- Wa7CPo8/Ph2LpPc/8xaSapE0GByZWkzHR45tNRQK9CPcbxi5xRNHWnMo2LU0vJR+M3FP
- sOXCrxUNo81IUuFj5jiN/JtjBUoyJAKJRJ9BAsUEaLeYriahmOTSUDYAqAzX9bpSMo/k
- 86q+8wM4COLpYHkvBg0hjUVD1i6q/lzuMCz8v0ofr6Qh68CiIIbNM8f+4PDBaQvYB1sG
- HWh55YhHrwJXkUjtOmQwbY91Jo2Gww80l6zg57co6Go4kkB0n/1HixNN7vTNR/QhuR53
- jCfw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUP4bYFj8WZMI3jCS9hgfHCblAuYd4Vbo/wlySFedRlt7elXeUEqgOR2xHb2B2zsdyr6UebYnU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBMY1EjRTsUOvRGCYBDYeIC9vRRUbD3IJ6Jz3s4BE/Ily8fcp1
- af5M/TuP4xKeHntD80hJ/tQE4YRW2+DHdSr7jP5kKdZRoxXSQeSm9/AFxpvnhcKWONrX63vF4kc
- 5NbJjAfymsboH92q3tNcaPy+STcbILlQXP09vNgo0
-X-Gm-Gg: ATEYQzzcYlSVikDX1aCN4RgcuREq/PY8hiD7wB+8+7PaR7LBzLnwuda1Fm77/viRW21
- 9wMApHxxMEgo0roGm8KnVNfJfWOa9fSZwUr76s/BLrh//rZzs1zhl/E1Z3SeijahfSohqPzhAfP
- G5bhVF6Pbvp21IpYHNP3W6qXPI7VNC3Nu9/Y7K04n/8CtPHgwAQanCRsLUfGBCNCxelWKRK7xKe
- ocAWL+qKpVaAUBXwIg61l0ULQz6g7Rq0n/FrtSLMlox35Bmpl7bYj4Eo3LCufjcv01f0yRJONo3
- ftgKkeMZKNuhzjwn
-X-Received: by 2002:a05:6402:270e:b0:660:a0b3:e76b with SMTP id
- 4fb4d7f45d1cf-660a0b3eac0mr2669743a12.15.1772577378855; Tue, 03 Mar 2026
- 14:36:18 -0800 (PST)
+ spf=pass smtp.mailfrom=daniel@makrotopia.org
+Received: from local
+ by pidgin.makrotopia.org with esmtpsa (TLS1.3:TLS_AES_256_GCM_SHA384:256)
+ (Exim 4.99) (envelope-from <daniel@makrotopia.org>)
+ id 1vxdIx-000000000hp-1A3P; Wed, 04 Mar 2026 03:53:47 +0000
+Date: Wed, 4 Mar 2026 03:53:38 +0000
+From: Daniel Golle <daniel@makrotopia.org>
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>,
+ Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de
+Subject: [PATCH] clk: mediatek: mt7622: fix infracfg and pericfg clock
+ operations
+Message-ID: <a54fd4a7284da506020cb614919096067b195277.1772596281.git.daniel@makrotopia.org>
 MIME-Version: 1.0
-References: <SJ2PR07MB97117FB8BBBD7DC1F5CE5A21817FA@SJ2PR07MB9711.namprd07.prod.outlook.com>
-In-Reply-To: <SJ2PR07MB97117FB8BBBD7DC1F5CE5A21817FA@SJ2PR07MB9711.namprd07.prod.outlook.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Mar 2026 15:36:07 -0700
-X-Gm-Features: AaiRm504Bp_mQ4oUO6aCwisbqt8uxl07l1cu4G1u91sOCakWVrhxGruPy-UqHYE
-Message-ID: <CAFLszTiGqVULDZKKqo7T5djXFjX8CHWKWJWTUoBBvHDMZN2=xw@mail.gmail.com>
-Subject: Re: Fix x86 baytrail boot flow, UPD/VPD Updates
-To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,29 +58,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eric,
+The MT7622 infracfg and pericfg drivers both use
+mtk_common_clk_infrasys_init() for probe, which populates struct
+mtk_clk_priv and stores gate definitions in the clk_tree. However,
+both drivers were incorrectly wired to mtk_clk_gate_ops which expects
+struct mtk_cg_priv with separately populated gates/num_gates/gates_offs
+fields from mtk_common_clk_gate_init().
 
-On Tue, 3 Mar 2026 at 15:29, Eric Schikschneit
-<eric.schikschneit@novatechautomation.com> wrote:
->
-> After much research into this.. I tried building the config:
-> som-db5800-som-6867_defconfig
->
-> which uses the baytrail E3845 from the master branch, commit ID: 8d24789abed0822fbe41a2f9d72cf19650159dc6
->
-> with GCC version: 11.5.0
-> on Ubuntu: 24.04.4
->
-> When built from that environment u-boot gets past the stage that I was troubleshooting.
-> This has been confirmed on both the Advantech SOM-DB5800 as well as our custom hardware. In light of this discovery, please disregard my previous two patch submissions:
-> "Fix x86 baytrail boot flow."
-> "Fix x86 baytrail boot flow, UPD/VPD Updates"
+Since those fields were never set, any attempt to enable an infracfg or
+pericfg gate clock (e.g. CLK_INFRA_TRNG) would fail with -EINVAL.
 
-Thank you very much for following up and confirming this!
+Switch both to mtk_clk_infrasys_ops and struct mtk_clk_priv to match
+the init function.
 
->
-> Eric Schikschneit
-> Senior Embedded Linux Engineer III
+Fixes: 72ab603b201 ("clk: mediatek: add driver for MT7622")
+Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+---
+ drivers/clk/mediatek/clk-mt7622.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Regards,
-Simon
+diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk-mt7622.c
+index 782eb14e9c5..c1cc57f2e8c 100644
+--- a/drivers/clk/mediatek/clk-mt7622.c
++++ b/drivers/clk/mediatek/clk-mt7622.c
+@@ -821,8 +821,8 @@ U_BOOT_DRIVER(mtk_clk_infracfg) = {
+ 	.id = UCLASS_CLK,
+ 	.of_match = mt7622_infracfg_compat,
+ 	.probe = mt7622_infracfg_probe,
+-	.priv_auto	= sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
++	.priv_auto	= sizeof(struct mtk_clk_priv),
++	.ops = &mtk_clk_infrasys_ops,
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
+ 
+@@ -831,8 +831,8 @@ U_BOOT_DRIVER(mtk_clk_pericfg) = {
+ 	.id = UCLASS_CLK,
+ 	.of_match = mt7622_pericfg_compat,
+ 	.probe = mt7622_pericfg_probe,
+-	.priv_auto	= sizeof(struct mtk_cg_priv),
+-	.ops = &mtk_clk_gate_ops,
++	.priv_auto	= sizeof(struct mtk_clk_priv),
++	.ops = &mtk_clk_infrasys_ops,
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
+ 
+-- 
+2.53.0
