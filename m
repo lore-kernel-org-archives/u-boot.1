@@ -4,139 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3731FEF8FE1
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 13:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DCD8EF8FEA
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 13:52:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05766838BB;
-	Wed,  4 Mar 2026 14:18:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id C45A583F61;
+	Wed,  4 Mar 2026 14:52:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="FnT77Qyu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EEBNW9gO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 181D283F8A; Wed,  4 Mar 2026 13:09:19 +0100 (CET)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BBF8C839A8; Wed,  4 Mar 2026 14:52:55 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DBCE83F7F
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 13:09:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 033FF838BB
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 14:52:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YCnA2VmYnkHSWYcq+BwuL1Lv6pfWT48jzFSv+iS96J6dox3AxAyOdty4GC6lFrsFa6I9B+sDk4eKUU9riwKWpGBgIJk9MpZV9qncgJOSXq3uPV1KiHUibBbgmzDy2yLYyD1/YkTbkNHomt/iR6duo0JUPxAX+FnsG7blsUcS47QUCvU9YRQRM4rbZ/l7m5EtcmZ6o070IBiUnOqOdchVOSAtOO3E8zzkC3Tjb6tgzhYgBTSl4AXFkKXfD4jLOl+2liEA2EoqnWegrXeGytFinVykYqaQ4z5XViIt6bRVcf3bBci94stkU2odKO/+9w3Jiv3ou4Jr8x8n85CFYIA/Ew==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IKnvx9Pabj4ZhDA0Tq0VAHlMi+S19eCiul8u7HE+cHY=;
- b=Qg7U9KyKjrBgEGW/g78+1ZDwlzFg1aqduxRzqgX5Ew1jbh0c0TPhwzCkWAtI1X8m8pLbe2bq0D3bJaguzpjaJ6g+YY8K7xFV43JtxEWnQtzZ90NowCRvmyDolUBHOqHw8a175Ick+542yBTNnzGbkAfhZerpd31JUdUNKnLsXpd8NQsr2app3/SZDklW6NJOjey/3HqQ0eaDkiphg9SQOtihmlphZhsv/9bLZqK4wZRfVstcvX5QWnw9p3Pi4tKuIUPInQr0axpz0Vq5fygBOC8Pm63B39tkn07/o+UnR4GVobRhPNM8rEJ5QnghWOfh4+FkvmFL1tKC0hhtYJNGgg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IKnvx9Pabj4ZhDA0Tq0VAHlMi+S19eCiul8u7HE+cHY=;
- b=FnT77Qyu3MlVSZoSVeGASctWbRJXIe3et8p7VlolgVK9MShySLT6O9gi+Rn0m0hp5SB6W25mOC7UBjFK5//SXBae7dAsUAZjLoIeUWwjVfei2uAJxKaEnRl3MYosw6Ms74Xj5a+8qEtoY6HK+CJrkkoVNoF34a33Bj0KlEMvAIopFFanA2AHIPZYTOFesqRysdJvWle4kAU/3bQLcTQ10qp+RGlFOQMboxx3V8KgHFH2O43wrDo2Ha0G4TEwD35hGpxlGePNsh3wXoq12a+/A72m5czTappI8dVHDcnB2RbJU0ZkiUGVSNhLkLz5r5TdaOGhMGCPPvRcEKqBsDhfZg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by PH0PR03MB6234.namprd03.prod.outlook.com (2603:10b6:510:ea::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.17; Wed, 4 Mar
- 2026 12:09:12 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
- 12:09:12 +0000
-Message-ID: <f51afc6d-7051-4d41-9b5c-1be2cd7b816b@altera.com>
-Date: Wed, 4 Mar 2026 20:09:04 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: socfpga: arria10: Disable CONFIG_USE_TINY_PRINTF
-To: Dinh Nguyen <dinguyen@kernel.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>,
- Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
-References: <20260304035307.16125-1-dinesh.maniyam@altera.com>
- <d1f767bb-85ad-4b63-b695-161b12cfcc0b@kernel.org>
-Content-Language: en-US
-From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-In-Reply-To: <d1f767bb-85ad-4b63-b695-161b12cfcc0b@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI1PR02CA0024.apcprd02.prod.outlook.com
- (2603:1096:4:1f4::12) To PH7PR03MB6942.namprd03.prod.outlook.com
- (2603:10b6:510:157::18)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7d4c85307b2so4836460a34.0
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 05:52:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1772632371; x=1773237171; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WtLwvVxcuMhapW2dH4pdufMXrcwRkHK8O/a5cuIHxOg=;
+ b=EEBNW9gOa5tSVZlKjplen66HDeW7xON/x8WFuAEFDTNaCAgV7kLBzBUNDZmRW+bT+U
+ Ly9JWVrpwhJaRZQ+DbsFeTKJtfOqmiDrvjtC/0S2UHjS5gPha71EgfAP9bntiYZU9uNu
+ RJDFuv8h8A067+wK2SEnQKAvTqumhOCIZGpHk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772632371; x=1773237171;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WtLwvVxcuMhapW2dH4pdufMXrcwRkHK8O/a5cuIHxOg=;
+ b=SbKnMYI8v8FJ3xtJ2hOoHdPGaZNNUvBlLy68GkOxsuPUQPlHen+rDmuuTTpkVsQP9t
+ /s6YFKMROJIfwDOaLsKUHPFpzDcDDmFAIz4weSYrYIXajFFT8TE5PNzxdbo7lSjfIDIv
+ f1Kfyt1EHm3waRTUBpY3NPNrXWKDP/j8+tVgUS/mTU1xft0KUpZgSEKBWugMDjukCFTv
+ Y1RL3Q2XlSnPCcsS8a32GLUDHw+HLr0tABwECZaQzpHRd9L9IHTGkXG/mFYu4WeU7Z/7
+ GLTBPDYOKM1dv8Psugp00wQvgk/J+FbO0JvZSOnSHz1MbaIHR1MhY/pqieRMUMEpl2N/
+ pgQA==
+X-Gm-Message-State: AOJu0YyLqUPC+yQtEVQCAvh8dxxlSPwq24HWFixH1vFq8WK7V9nJEFf3
+ 92umAxgA4fG8cKZFZGXfYNB3SDddmPNEU38kx6vshfyIy2NNqO2QMZMG4assBqpw2aa+ZmJTM2I
+ oigU=
+X-Gm-Gg: ATEYQzzo6w0ChUKkzinQ6sZBuavuCeNf2PzF6bztBOuj3RQ+kBusyte7bry7+TOvd0H
+ ctw4RUWBqYlx6j6fL/4xA/KqA70Q9FaPFRpUTj+sWt7j4aumPjL4s9iN4+rV3UByeE43SC66SEF
+ +XvIXpQfLt6WO7O283okoDrMTSVG4JhoTrASipVSYXx0XvzlSibY0Fo4XHIORvadWgR1cDOZrTa
+ +QBoT/yFVfad9wvIWvgADHT2QW82RE3pexCbqDRMuoZnrtafzZyrp1BUvK/5vBg9SqEv5OQOBy1
+ Mn2vLPWSFv87qabD6x8WZy+6LVf9/ZodoefHlnco53+4nd0fROkjxtN9GBdd4y0AzfGDSU3mqaf
+ hu61KL5T0XHZy5sRvq1jE+xXXwcZ/97CSGHUaX6Tx8KD+xYYYH8YYjsM6o7aMxlbF4c9U4XglgH
+ WCLwcLgPlNTO323aLaKQ==
+X-Received: by 2002:a05:6830:924:b0:7d1:94d0:e8f1 with SMTP id
+ 46e09a7af769-7d6d12682f3mr1069386a34.15.1772632370982; 
+ Wed, 04 Mar 2026 05:52:50 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d586226d14sm15599418a34.0.2026.03.04.05.52.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Mar 2026 05:52:49 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>, Tom Rini <trini@konsulko.com>,
+ Ludwig <ludwig.nussel@siemens.com>,
+ Simon Glass <simon.glass@canonical.com>,
+ Daniel Golle <daniel@makrotopia.org>,
+ Enric Balletbo i Serra <eballetbo@kernel.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: [PATCH] boot: Add fit_config_get_hash_list() to build signed node list
+Date: Wed,  4 Mar 2026 06:51:48 -0700
+Message-ID: <20260304135202.1535134-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|PH0PR03MB6234:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d81692d-2aee-47cb-dea2-08de79e6d86b
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: S4yDp3kkJyGtPhJNSORZqYBHJPMLAyeA3tXpyJdqK/GW+0Tpp3GNIoEG5cqmgcIRU1TAkoiBUyqOLBHxf4bR/yJvf3EwZ6ai1jUwusJV5AcLBnW8EWr+TGYnVitt2C0M8hg9ZAKK81TXxDWjWBBbEQMyCsa149DyMijqJtwwFj50y3Z9Zf/oDeMLkKyQVC2/ttd7gNhZSPCv+i56zetpctkXvYcZ/8LzsadH40gSD0Bgq7KqJg3BFczCI6JMZwS9fxsSCLb1GJUiQ6l71Kvj+Ljnvl6BIAKaEazEhBnmKgHdMqogVR2+4lUXeQxVjm05LCzvOwDVREGk5xhJ2hsPZkjn198u3TolY1sAC4b7t0MUILjefdgjCOf7ruMjnxK1joJxpuQBHJCFq5D3BJT5qOPHtghotHOwxgCAo2A/Ajegjf+Q9UQ5+s0qlI4UXrhX/Wamf1zMT2HZj9sDXKpAttNHXp7HdIhIC94kg6eLbpG8OKvip6jfrpBiHSSuMmWFAX2P0EaFEDppnC8ScianwW6LI/YkCbUwqrldyQEYp5umZPJ/7jIsrpF0pkBsByOWPAwebFPnI9A+7NiHXeLih5eY3bj9w81BhTGYqLSxg04rKsK3dGW6tyuKIpWD5WJH/JERlHC6lnIgPRoSDI3RyLQfOI/oFRKnGWe0PCb8bE+lkkBRFH4cH/gZH8S6AWFlUopZkHz93NQN5GSO+zvfwDrq1wTgUO9WnTtjpxp1qHs=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YVZaWXpCQ1d5T1VHUFR1MWREclJxcHRSaHZBeSs3dWtlWkE2SkNBQjBIbEoz?=
- =?utf-8?B?Z2JzbjhqUG52SitVeXF3cC92WjFxMXRhc2g5QWlQd3d5ZjY3Ryt1dVdjU3hw?=
- =?utf-8?B?ZXVEelp3RWZ3SjJZV05SeTBDenZKZTV0UFh1SU41U09Sb0JYaUtYK3pSWHhG?=
- =?utf-8?B?TVV0UHZURE1vSExQcGtqNjFGWjgwYzgvdE9BQVoxQWIvQktxclJqZzlrN2xJ?=
- =?utf-8?B?R0ROVWNBNU90dDFJVWNwN28yUnZjRFFBbjRoWnlab2VTcGNiUG1nVy9QZUNk?=
- =?utf-8?B?V3l1b1RCWkp1L09seUg4TUd0a3hISXZ2N0diOThDT1I5YVBZVXg0RGpvd1N6?=
- =?utf-8?B?SkFMbnFWaXU1eStMa0dEa1YwaS92QmdncWhpWVJXY09md3h3M3FxUENZRlpv?=
- =?utf-8?B?YjBmanFwRmE4UXZ3Mkt0b0h0RDV2TkN5SVBCRlZYcjROdHBkWDN1Q1JjUFRC?=
- =?utf-8?B?aElkNHhnVXhUK042SnBMRzlScHNvWWRLeWNEZUJ5TzZialRSWXUxRHNtWGsr?=
- =?utf-8?B?eDdNNnZaWTJ1aElKOUo1cHNRcFgyYW04c2ZWd2Y0aUlOUCt3YWNDWFRva2Mw?=
- =?utf-8?B?SnN2bldScGtuaGpyZHcxbHRxQzE4aHRSVDVXMWlDUGhLOWpsVkR2azYwcEVC?=
- =?utf-8?B?TzZpTmtya0VsRkxFZ0JjNzBiUHcydElDTFVUQ1R5UWpSUmU1QUc5WXJ2QkVQ?=
- =?utf-8?B?VktQbktPbjRuYXJ6V1RVeTVJTGdDQk9wdC85Y1V0VnlpYUthWmtMVWdEZkhG?=
- =?utf-8?B?QmVNSmpjOG1iaVVIOExxTlJSc3RnbDk4UlNTU3pZSzhXbmFYMFdRZXlVMjla?=
- =?utf-8?B?RkpsYkNSWFJTcG5TUjZOR0YzR0hOMVljaTJiOU4zOTRqT3p2ZmpaQnFNS3R5?=
- =?utf-8?B?bHd3U2lCNVhMakcxakNobENxWUxyNUNtcXVLUDNhbm42SVhzS3k2VjZkdWxV?=
- =?utf-8?B?VC9SZm1sMi9wK1VNUmI1OEhXdzRScnB5K0IxZHRHTDNnbm8rQnh6UzkzSi9Y?=
- =?utf-8?B?UFF3UENLS1pWNFovMFJZa3RyVWRmKzVhbDlxbGltcXFXUHJuT0FKZDAyMWJt?=
- =?utf-8?B?Vk1udGJ4STNZU2xTbU05ampMekkrM3pXYWZaUit2RE9Sbk9HUG14M2hndVdJ?=
- =?utf-8?B?anhlanMzMnBid1dUQjJBWk9qTVYyMDJvdFZVamI0Y0tLK2hBNjN2WGVaQW5x?=
- =?utf-8?B?b3o5N2w2Q3ZoV3FLZm5CZWluUHVJclFocnltaHo2TS94Z0k1cTNUWFJ5ZWJq?=
- =?utf-8?B?MHRVQXNJNUQyZ2JhdDcxanc0bm02cTFsYnpCSU5iekJCVWZ0QlJ2YWI4ZjBi?=
- =?utf-8?B?Wmlmdyt1cXIvWmJpdVdiY1ZISUNiSDRQelZxVnB6K20wUlVmUUNkWng4NDBT?=
- =?utf-8?B?VVcwYXFWSjNhbWZzVDVtQ0h4TGdFRUg3eEUzS2lZblVFZngwL21Nb1YwY3Vw?=
- =?utf-8?B?Tk1iVnIzTnVsUk95UHBJUEltYVd0eW5Vdit3UmF3L2xmcTREZWttQkl6Tm5E?=
- =?utf-8?B?dHVRek9WeWRVRHEza3MwemloMjlqQUYxajBHcjBSUDl5bkRyV0MveHRHQU9j?=
- =?utf-8?B?SExVSjUxQ21mUmxrWWRvODlGMk56ZkR0cEpPTnFTbThlV3UzamJOT1RWdTBV?=
- =?utf-8?B?cUx2TklSejlobjkwQ2syVjJ2bHd2eitzQ2FvM0NHU0NuNi8rNFNtQlQ3Rzd4?=
- =?utf-8?B?UEF6enlPbmhsTlI1bDQ5azFDaGlWaXpKN2NPNXZsT1NjMUFSaXk4TU9XdDY1?=
- =?utf-8?B?dk03aFRjWTVmdlRMRjVyazJIV0FqTTRZaGJGVnVrbVNUVktwSUNoMnltcVRQ?=
- =?utf-8?B?RlZDMzVkM3o5RUZaUVlsVkRrbFNTY2FCeU1uNENmTTRHMXVBaFVPMW5lZjFm?=
- =?utf-8?B?U0k0YU5oRGJtcG9hL1ZvcXloWEU4TXpSL3Nad3RScTVrM1VWbnI3TGR6ajdD?=
- =?utf-8?B?RlRrSDNnaUZlWm9xT2l6QWs0U0NjeEdheng2MElnMnR0MlA5NU0zK1BjbjZR?=
- =?utf-8?B?Wjk2Uk5NM0RySjZCOENLcG9UeW4wUmUzclpMRVZ4cDhoU2pPTyt1ZGpLM1dI?=
- =?utf-8?B?V1hreXBjOUR3ZUZBb1RSRVIxaENLbkpuWlByYUFTK2xTNm9pU0xsNWVEV3hN?=
- =?utf-8?B?dEhOWDdBS29XSGhqL0l3M2lTS1hkOS9xZmh4d0tZbVo0NVlFZGE5Tld1MWF0?=
- =?utf-8?B?S1gvV1hEd2kwRFRyZExJK3h3THIrMGt3T0JrRTNUVllIUmpoNSttZWpIM2RG?=
- =?utf-8?B?cEkzUGFjdkVLaVovZFhMalpyMHdRSEFBR09Vc2U1NWVqeDZDWVh1NC8wZnFZ?=
- =?utf-8?B?QVM0TjkzNlBOcVFWZTBLU0pSWnNGR2o3eDJOM1JybGJBMndRYmR2cXRHYWNS?=
- =?utf-8?Q?zcHwR/zexgAX359o=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d81692d-2aee-47cb-dea2-08de79e6d86b
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 12:09:11.9157 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gCnIrUgce2oPS2FW4Lc4PU6UkI+ESMgpMH45SDvG/G3qKRz10d4HzoF5y2z2EMQQMfGD9bXD2Nvjws5ISU4TPlQKhV1QQm/COwFUUt/UBqw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6234
-X-Mailman-Approved-At: Wed, 04 Mar 2026 14:18:02 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,74 +95,344 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Simon Glass <simon.glass@canonical.com>
 
-On 4/3/2026 2:58 pm, Dinh Nguyen wrote:
-> [CAUTION: This email is from outside your organization. Unless you 
-> trust the sender, do not click on links or open attachments as it may 
-> be a fraudulent email attempting to steal your information and/or 
-> compromise your computer.]
->
-> On 3/3/26 21:53, dinesh.maniyam@altera.com wrote:
->> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
->>
->> CONFIG_USE_TINY_PRINTF is enabled by default, disable it.
->> Arria 10 has 256KB of onchip ram and it is enough to support full 
->> printf.
->> Full printf allows us to have more complex format printing, example %ll.
->
-> Do you have a size diff for the SPL with this change?
->
-> No, disabling CONFIG_SPL_USE_TINY_PRINTF does not introduce a size 
-> increase in SPL
-> The implementation should be safe and allows richer formatting support 
-> when needed.
->>
->> Signed-off-by: Ley Foon Tan <ley.foon.tan@intel.com>
->
-> Is the above contact valid? Also, try to just include contacts returned
-> from get_maintainer.
->
-> I will remove the invalid contact.
->
->> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
->> ---
->>   arch/arm/mach-socfpga/Kconfig     | 1 -
->>   configs/socfpga_arria10_defconfig | 1 +
->>   2 files changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/mach-socfpga/Kconfig 
->> b/arch/arm/mach-socfpga/Kconfig
->> index f2e959b5662..ba01ec08be2 100644
->> --- a/arch/arm/mach-socfpga/Kconfig
->> +++ b/arch/arm/mach-socfpga/Kconfig
->> @@ -101,7 +101,6 @@ config TARGET_SOCFPGA_ARRIA10
->>       select SPL_SYSCON if SPL
->>       select ETH_DESIGNWARE_SOCFPGA
->>       imply FPGA_SOCFPGA
->> -     imply SPL_USE_TINY_PRINTF
->>
->>   config SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
->>       bool "Always reprogram Arria 10 FPGA"
->> diff --git a/configs/socfpga_arria10_defconfig 
->> b/configs/socfpga_arria10_defconfig
->> index b32f40ae408..d5feabe5ce0 100644
->> --- a/configs/socfpga_arria10_defconfig
->> +++ b/configs/socfpga_arria10_defconfig
->> @@ -69,3 +69,4 @@ CONFIG_USB=y
->>   CONFIG_USB_DWC2=y
->>   # CONFIG_SPL_WDT is not set
->>   # CONFIG_TOOLS_MKEFICAPSULE is not set
->> +# CONFIG_USE_TINY_PRINTF is not set
->
-> This does not disable CONFIG_SPL_USE_TINY_PRINTF, you need to add this:
->
-> # CONFIG_SPL_USE_TINY_PRINTF is not set
->
-> Dinh
->
-> Yes, you are right!
-> I will resubmit v2.
->
-> Dinesh
->
+The hashed-nodes property in a FIT signature node lists which FDT paths
+are included in the signature hash. It is intended as a hint so should
+not be used for verification.
+
+Add a function to build the node list from scratch by iterating the
+configuration's image references. Skip properties known not to be image
+references. For each image, collect the path plus all hash and cipher
+subnodes.
+
+Use the new function in fit_config_check_sig() instead of reading
+'hashed-nodes'.
+
+Update the docs to cover this. The FIT spec can be updated separately.
+
+Signed-off-by: Simon Glass <simon.glass@canonical.com>
+---
+
+ boot/image-fit-sig.c        | 227 +++++++++++++++++++++++++++++-------
+ doc/usage/fit/signature.rst |  19 ++-
+ 2 files changed, 195 insertions(+), 51 deletions(-)
+
+diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+index f23e9d5d0b0..f426ead13c0 100644
+--- a/boot/image-fit-sig.c
++++ b/boot/image-fit-sig.c
+@@ -18,6 +18,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ #include <u-boot/hash-checksum.h>
+ 
+ #define IMAGE_MAX_HASHED_NODES		100
++#define FIT_MAX_HASH_PATH_BUF		4096
+ 
+ /**
+  * fit_region_make_list() - Make a list of image regions
+@@ -229,6 +230,179 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
+ 	return 0;
+ }
+ 
++/**
++ * fit_config_add_hash() - Add hash nodes for one image to the node list
++ *
++ * Adds the image path, all its hash-* subnode paths, and its cipher
++ * subnode path (if present) to the packed buffer.
++ *
++ * @fit:		FIT blob
++ * @image_noffset:	Image node offset (e.g. /images/kernel-1)
++ * @node_inc:		Array of path pointers to fill
++ * @count:		Pointer to current count (updated on return)
++ * @max_nodes:		Maximum entries in @node_inc
++ * @buf:		Buffer for packed path strings
++ * @buf_used:		Pointer to bytes used in @buf (updated on return)
++ * @buf_len:		Total size of @buf
++ * Return: 0 on success, -ve on error
++ */
++static int fit_config_add_hash(const void *fit, int image_noffset,
++			       char **node_inc, int *count, int max_nodes,
++			       char *buf, int *buf_used, int buf_len)
++{
++	int noffset, hash_count, ret, len;
++
++	if (*count >= max_nodes)
++		return -ENOSPC;
++
++	ret = fdt_get_path(fit, image_noffset, buf + *buf_used,
++			   buf_len - *buf_used);
++	if (ret < 0)
++		return -ENOENT;
++	len = strlen(buf + *buf_used) + 1;
++	node_inc[(*count)++] = buf + *buf_used;
++	*buf_used += len;
++
++	/* Add all this image's hash subnodes */
++	hash_count = 0;
++	for (noffset = fdt_first_subnode(fit, image_noffset);
++	     noffset >= 0;
++	     noffset = fdt_next_subnode(fit, noffset)) {
++		const char *name = fit_get_name(fit, noffset, NULL);
++
++		if (strncmp(name, FIT_HASH_NODENAME,
++			    strlen(FIT_HASH_NODENAME)))
++			continue;
++		if (*count >= max_nodes)
++			return -ENOSPC;
++		ret = fdt_get_path(fit, noffset, buf + *buf_used,
++				   buf_len - *buf_used);
++		if (ret < 0)
++			return -ENOENT;
++		len = strlen(buf + *buf_used) + 1;
++		node_inc[(*count)++] = buf + *buf_used;
++		*buf_used += len;
++		hash_count++;
++	}
++
++	if (!hash_count) {
++		printf("No hash nodes in image '%s'\n",
++		       fdt_get_name(fit, image_noffset, NULL));
++		return -ENOMSG;
++	}
++
++	/* Add this image's cipher node if present */
++	noffset = fdt_subnode_offset(fit, image_noffset, FIT_CIPHER_NODENAME);
++	if (noffset != -FDT_ERR_NOTFOUND) {
++		if (noffset < 0)
++			return -EIO;
++		if (*count >= max_nodes)
++			return -ENOSPC;
++		ret = fdt_get_path(fit, noffset, buf + *buf_used,
++				   buf_len - *buf_used);
++		if (ret < 0)
++			return -ENOENT;
++		len = strlen(buf + *buf_used) + 1;
++		node_inc[(*count)++] = buf + *buf_used;
++		*buf_used += len;
++	}
++
++	return 0;
++}
++
++/**
++ * fit_config_get_hash_list() - Build the list of nodes to hash
++ *
++ * Works through every image referenced by the configuration and collects the
++ * node paths: root + config + all referenced images with their hash and
++ * cipher subnodes.
++ *
++ * Properties known not to be image references (description, compatible,
++ * default, load-only) are skipped, so any new image type is covered by default.
++ *
++ * @fit:	FIT blob
++ * @conf_noffset: Configuration node offset
++ * @node_inc:	Array to fill with path string pointers
++ * @max_nodes:	Size of @node_inc array
++ * @buf:	Buffer for packed null-terminated path strings
++ * @buf_len:	Size of @buf
++ * Return: number of entries in @node_inc, or -ve on error
++ */
++static int fit_config_get_hash_list(const void *fit, int conf_noffset,
++				    char **node_inc, int max_nodes,
++				    char *buf, int buf_len)
++{
++	const char *conf_name;
++	int image_count;
++	int prop_offset;
++	int used = 0;
++	int count = 0;
++	int ret, len;
++
++	conf_name = fit_get_name(fit, conf_noffset, NULL);
++
++	/* Always include the root node and the configuration node */
++	if (max_nodes < 2)
++		return -ENOSPC;
++
++	len = 2;  /* "/" + nul */
++	if (len > buf_len)
++		return -ENOSPC;
++	strcpy(buf, "/");
++	node_inc[count++] = buf;
++	used += len;
++
++	len = snprintf(buf + used, buf_len - used, "%s/%s", FIT_CONFS_PATH,
++		       conf_name) + 1;
++	if (used + len > buf_len)
++		return -ENOSPC;
++	node_inc[count++] = buf + used;
++	used += len;
++
++	/* Process each image referenced by the config */
++	image_count = 0;
++	fdt_for_each_property_offset(prop_offset, fit, conf_noffset) {
++		const char *prop_name;
++		int img_count, i;
++
++		fdt_getprop_by_offset(fit, prop_offset, &prop_name, NULL);
++		if (!prop_name)
++			continue;
++
++		/* Skip properties that are not image references */
++		if (!strcmp(prop_name, FIT_DESC_PROP) ||
++		    !strcmp(prop_name, FIT_COMPAT_PROP) ||
++		    !strcmp(prop_name, FIT_DEFAULT_PROP))
++			continue;
++
++		img_count = fdt_stringlist_count(fit, conf_noffset, prop_name);
++		for (i = 0; i < img_count; i++) {
++			int noffset;
++
++			noffset = fit_conf_get_prop_node_index(fit,
++							       conf_noffset,
++							       prop_name, i);
++			if (noffset < 0)
++				continue;
++
++			ret = fit_config_add_hash(fit, noffset, node_inc,
++						  &count, max_nodes, buf, &used,
++						  buf_len);
++			if (ret < 0)
++				return ret;
++
++			image_count++;
++		}
++	}
++
++	if (!image_count) {
++		printf("No images in config '%s'\n", conf_name);
++		return -ENOMSG;
++	}
++
++	return count;
++}
++
+ /**
+  * fit_config_check_sig() - Check the signature of a config
+  *
+@@ -269,20 +443,16 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
+ 		FIT_DATA_POSITION_PROP,
+ 		FIT_DATA_OFFSET_PROP,
+ 	};
+-
+-	const char *prop, *end, *name;
++	char *node_inc[IMAGE_MAX_HASHED_NODES];
++	char hash_buf[FIT_MAX_HASH_PATH_BUF];
+ 	struct image_sign_info info;
+ 	const uint32_t *strings;
+-	const char *config_name;
+ 	uint8_t *fit_value;
+ 	int fit_value_len;
+-	bool found_config;
+ 	int max_regions;
+-	int i, prop_len;
+ 	char path[200];
+ 	int count;
+ 
+-	config_name = fit_get_name(fit, conf_noffset, NULL);
+ 	debug("%s: fdt=%p, conf='%s', sig='%s'\n", __func__, key_blob,
+ 	      fit_get_name(fit, noffset, NULL),
+ 	      fit_get_name(key_blob, required_keynode, NULL));
+@@ -297,45 +467,12 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
+ 		return -1;
+ 	}
+ 
+-	/* Count the number of strings in the property */
+-	prop = fdt_getprop(fit, noffset, "hashed-nodes", &prop_len);
+-	end = prop ? prop + prop_len : prop;
+-	for (name = prop, count = 0; name < end; name++)
+-		if (!*name)
+-			count++;
+-	if (!count) {
+-		*err_msgp = "Can't get hashed-nodes property";
+-		return -1;
+-	}
+-
+-	if (prop && prop_len > 0 && prop[prop_len - 1] != '\0') {
+-		*err_msgp = "hashed-nodes property must be null-terminated";
+-		return -1;
+-	}
+-
+-	/* Add a sanity check here since we are using the stack */
+-	if (count > IMAGE_MAX_HASHED_NODES) {
+-		*err_msgp = "Number of hashed nodes exceeds maximum";
+-		return -1;
+-	}
+-
+-	/* Create a list of node names from those strings */
+-	char *node_inc[count];
+-
+-	debug("Hash nodes (%d):\n", count);
+-	found_config = false;
+-	for (name = prop, i = 0; name < end; name += strlen(name) + 1, i++) {
+-		debug("   '%s'\n", name);
+-		node_inc[i] = (char *)name;
+-		if (!strncmp(FIT_CONFS_PATH, name, strlen(FIT_CONFS_PATH)) &&
+-		    name[sizeof(FIT_CONFS_PATH) - 1] == '/' &&
+-		    !strcmp(name + sizeof(FIT_CONFS_PATH), config_name)) {
+-			debug("      (found config node %s)", config_name);
+-			found_config = true;
+-		}
+-	}
+-	if (!found_config) {
+-		*err_msgp = "Selected config not in hashed nodes";
++	/* Build the node list from the config, ignoring hashed-nodes */
++	count = fit_config_get_hash_list(fit, conf_noffset,
++					 node_inc, IMAGE_MAX_HASHED_NODES,
++					 hash_buf, sizeof(hash_buf));
++	if (count < 0) {
++		*err_msgp = "Failed to build hash node list";
+ 		return -1;
+ 	}
+ 
+diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
+index e5b5a8432e9..da08cc75c3a 100644
+--- a/doc/usage/fit/signature.rst
++++ b/doc/usage/fit/signature.rst
+@@ -353,20 +353,27 @@ meantime.
+ Details
+ -------
+ The signature node contains a property ('hashed-nodes') which lists all the
+-nodes that the signature was made over.  The image is walked in order and each
+-tag processed as follows:
++nodes that the signature was made over.  The signer (mkimage) writes this
++property as a record of what was included in the hash.  During verification,
++however, U-Boot does not read 'hashed-nodes'. Instead it rebuilds the node
++list from the configuration's own image references (kernel, fdt, ramdisk,
++etc.), since 'hashed-nodes' is not itself covered by the signature. The
++rebuilt list always includes the root node, the configuration node, each
++referenced image node and its hash/cipher subnodes.
++
++The image is walked in order and each tag processed as follows:
+ 
+ DTB_BEGIN_NODE
+     The tag and the following name are included in the signature
+-    if the node or its parent are present in 'hashed-nodes'
++    if the node or its parent are present in the node list
+ 
+ DTB_END_NODE
+     The tag is included in the signature if the node or its parent
+-    are present in 'hashed-nodes'
++    are present in the node list
+ 
+ DTB_PROPERTY
+     The tag, the length word, the offset in the string table, and
+-    the data are all included if the current node is present in 'hashed-nodes'
++    the data are all included if the current node is present in the node list
+     and the property name is not 'data'.
+ 
+ DTB_END
+@@ -374,7 +381,7 @@ DTB_END
+ 
+ DTB_NOP
+     The tag is included in the signature if the current node is present
+-    in 'hashed-nodes'
++    in the node list
+ 
+ In addition, the signature contains a property 'hashed-strings' which contains
+ the offset and length in the string table of the strings that are to be
+-- 
+2.43.0
+
+base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
+branch: fitg
