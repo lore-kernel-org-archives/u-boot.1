@@ -4,58 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486EEEDEC1E
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 07:31:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB34AEDEC1E
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 07:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B74B83D8A;
-	Wed,  4 Mar 2026 08:31:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id E47E883D8A;
+	Wed,  4 Mar 2026 08:51:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19F9383F61; Wed,  4 Mar 2026 08:31:49 +0100 (CET)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDF72838BB
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 08:31:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
+ id 0692683F61; Wed,  4 Mar 2026 08:51:13 +0100 (CET)
+Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
+ by phobos.denx.de (Postfix) with ESMTP id 9BB31838BB
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 08:51:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sha@pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.whiteo.stw.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <sha@pengutronix.de>)
- id 1vxghu-0003C2-Ev; Wed, 04 Mar 2026 08:31:46 +0100
-Received: from dude02.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::28])
- by drehscheibe.grey.stw.pengutronix.de with esmtps (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <sha@pengutronix.de>) id 1vxghs-003fxA-2P;
- Wed, 04 Mar 2026 08:31:46 +0100
-Received: from sha by dude02.red.stw.pengutronix.de with local (Exim 4.98.2)
- (envelope-from <sha@pengutronix.de>) id 1vxghu-0000000GKdZ-06sU;
- Wed, 04 Mar 2026 08:31:46 +0100
-Date: Wed, 4 Mar 2026 08:31:46 +0100
-From: Sascha Hauer <s.hauer@pengutronix.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] FIT: Address Secure Boot Bypass for Signed FIT Images
-Message-ID: <aaff4oDKlkINa8H7@pengutronix.de>
-References: <20260302220937.3682128-1-trini@konsulko.com>
+ dmarc=fail (p=none dis=none) header.from=socionext.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hayashi.kunihiko@socionext.com
+Received: from unknown (HELO kinkan3-ex.css.socionext.com) ([172.31.9.52])
+ by mx.socionext.com with ESMTP; 04 Mar 2026 16:51:06 +0900
+Received: from mail.mfilter.local (mail-arc02.css.socionext.com [10.213.46.40])
+ by kinkan3-ex.css.socionext.com (Postfix) with ESMTP id C49D72069FEA;
+ Wed,  4 Mar 2026 16:51:06 +0900 (JST)
+Received: from kinkan3.css.socionext.com ([172.31.9.51]) by m-FILTER with
+ ESMTP; Wed, 4 Mar 2026 16:51:06 +0900
+Received: from plum.e01.socionext.com (unknown [10.212.245.39])
+ by kinkan3.css.socionext.com (Postfix) with ESMTP id 5627F1776;
+ Wed,  4 Mar 2026 16:51:06 +0900 (JST)
+From: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+Subject: [PATCH] image-fit: Fix mismatched parameter type in comment
+Date: Wed,  4 Mar 2026 16:51:00 +0900
+Message-Id: <20260304075100.3637609-1-hayashi.kunihiko@socionext.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260302220937.3682128-1-trini@konsulko.com>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: sha@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,33 +56,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The functions use 'ulong', however, the comments said 'uint32_t'.
+Update the comments to match the prototype.
 
-On Mon, Mar 02, 2026 at 04:09:37PM -0600, Tom Rini wrote:
-> There is a flaw in how U-Boot verifies and generates signatures for FIT
-> images. To prevent mix and match style attacks, it is recommended to
-> use signed configurations. How this is supposed to work is documented in
-> doc/usage/fit/signature.rst.
-> 
-> Crucially, the `hashed-nodes` property of the `signature` node contains
-> which nodes of the FIT device tree were hashed as part of the signature
-> and should be verified. However, this property itself is not part of the
-> hash and can therefore be modified by an attacker. Furthermore, the
-> signature only contains the name of each node and not the path in the
-> device tree to the node.
-> 
-> This patch reworks the code to address this specific oversight.
+Signed-off-by: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+---
+ boot/image-fit.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-As this breaks compatibility between old U-Boot and new FIT images and
-the other way round it would be good to introduce a version field to FIT
-images. With that at least newer U-Boot versions could print a more
-meaningful error message than just "image verification failed" which
-gives no clue what had actually happened.
-
-Sascha
-
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index e7c7212195f..067ad236081 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -881,7 +881,7 @@ static int fit_image_get_address(const void *fit, int noffset, char *name,
+  * fit_image_get_load() - get load addr property for given component image node
+  * @fit: pointer to the FIT format image header
+  * @noffset: component image node offset
+- * @load: pointer to the uint32_t, will hold load address
++ * @load: pointer to the ulong, will hold load address
+  *
+  * fit_image_get_load() finds load address property in a given component
+  * image node. If the property is found, its value is returned to the caller.
+@@ -899,7 +899,7 @@ int fit_image_get_load(const void *fit, int noffset, ulong *load)
+  * fit_image_get_entry() - get entry point address property
+  * @fit: pointer to the FIT format image header
+  * @noffset: component image node offset
+- * @entry: pointer to the uint32_t, will hold entry point address
++ * @entry: pointer to the ulong, will hold entry point address
+  *
+  * This gets the entry point address property for a given component image
+  * node.
 -- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+2.34.1
+
