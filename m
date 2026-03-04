@@ -4,88 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0645AEFCE3B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 18:51:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2189DEFCE37
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 20:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5401B838BB;
-	Wed,  4 Mar 2026 19:51:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E85A838BB;
+	Wed,  4 Mar 2026 21:15:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qSENakYC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QyQAqZdQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77C8383D8A; Wed,  4 Mar 2026 19:51:20 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 4F0C183AA9; Wed,  4 Mar 2026 21:15:10 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1179783642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 19:51:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D607483642
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 21:15:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7d4b9c839b1so3760359a34.1
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 10:51:17 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-660be63279bso2697681a12.1
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 12:15:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772650276; x=1773255076; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RFPeAx7f9578aMGhe5JrCy2rmVQXsZJe+z2aMC1Ww6A=;
- b=qSENakYC1kS3A2T9OGpDlXr4a7LL3MU9qTbwpSOuA+giLwuESBx198qQNWoSd2yBOY
- kUU3Q/o+1ds1SNhQrE2wm6HSb5/rLzD+0ai3ppWdX03K4RVjV7GZjAMApEiIn8kUT3Pn
- mPya4UiaSuBDrHMMyAjtPPUkOCXrUyWoBppUQ=
+ d=linaro.org; s=google; t=1772655307; x=1773260107; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0AtHyk90PFkVRS5Cm1VJyL2cjGcCEZ5vB3rOJGv6KRY=;
+ b=QyQAqZdQy7y2vUE53pEShOfKZdEZOpLa/83NDmU2mIwnqKpF0Hbxxuu41ADum8g2rw
+ LKlEJDtnH7KQcAPqb9XsBhXC9JURsHZlXwnN3NEQBwuH6jaSkse8kw5cLi7C1ZPCm6C9
+ n6tmnGHK2l8sNgApmI8BsWwFC7GPW9vkEeu1o+fz0b9pcOtM2a15o0jxzU91G/srrfO9
+ 8q6PeKRMTSc1Itg8NWbrw6vCa197n+CcnD6tsnUnAWkxHEZfPUQaRufW1q2B2aOCKiTH
+ umVlsn5v+gna53hF4Cm5nByzQbOwFLco1z9shzVlKehwFc7Kd5un5R+ry0FaFhzdnnJo
+ jqfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772650276; x=1773255076;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RFPeAx7f9578aMGhe5JrCy2rmVQXsZJe+z2aMC1Ww6A=;
- b=Ed+tqCXdU9Jwwm8AYE0+ge08glsJ31UNOZkujvf29WEP/3OeeGRwPGb18j6C6w+FBo
- nF6wOdds056wW0DnldeQMlpkeXgur6oY9tYFCdOQYNnbkBhw6HCT33FRfd3AFGWVf0pV
- gJG52KZx/wDDZfZwhzWWMiYumMa/fk08scAtaK+Mkr8ZkhojOmKKacQEfvmjrakw+4nV
- hp0Xuk3uXNUdv1WfqtUtXPHP7UQE8KSz4AiS1SG4yZNf8KEXTtBsRhMiJ9g4tHsY8rYw
- 54PPwO8E+PQBtTkTyLCuFFLtK53tC8lpzBRkGCb84aUiNrNrpgnlIlU7mp+PAMFHfueZ
- vzMw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUCYbFE0E5N/Eryp5wfCB8tBZ/6m9PDC3cRHjEnJZux1V3HrDblZh+p2Kkm6dOjKQpUQPDr/i0=@lists.denx.de
-X-Gm-Message-State: AOJu0YztuV/xQctuRfuPoDgznRprBJ5c1h64gVq59/qIZWVC61tB3mFz
- 3MNnhLwziuaAJGkQGKTsA6LGtySm+wzxycZKIgDknaJ2mEpvy+KieHnWyjNjezeB/ak=
-X-Gm-Gg: ATEYQzx5u5pBNxaKVw07+Ayyd1dYA338mZ3o/bzEZdPee7gRi0nyqjQ1u1+2eo3RytA
- MZelCDCJkuM+nIHdR0pgV+v4f5588ykuqWtLWQXM9En0oeW4QDthES+hR8gcDUE4IYcFvmJOU15
- F4JzTSR3BKmDD27ek64w18q8r0NmHlGDDya7nrfT72JmoZQuMdQO0yvIpvSdN2irWTlIH7l9b/J
- +YfAkWVc/BqPoi4e6xwtWmxt0haOQVUoiwhqad2RLlwmojiCSZVacrYFEbofNdYhuC7K/qT6hV4
- 7HjN2Y0y7a0D8L3ErbEmDYIcF9YHK38zrcJpU+XtlZafII9mlzK5/x7+6VnAdrTZ8UY7S2SRi3W
- lrBmL+KFFkWoZ2sYQsuVgt9yxEerVBjTVZU0kyigVmQGqJMUyOsUb03I1OvRow5USl/VjQco4jQ
- VdkZAvgC9Wf3bmqu+UwbGricu1AOg5XMKG0WN5d5iV99Y5uS9Uqy+j66tqMpyEvyDguVCGlwEaO
- qIE1+twtlCf9oBjgHHPOI3UJV3CiE5L28tRbdKsJdEHfOKO4TM=
-X-Received: by 2002:a05:6830:368a:b0:7ab:e111:1a57 with SMTP id
- 46e09a7af769-7d6da1e7931mr1777143a34.31.1772650276629; 
- Wed, 04 Mar 2026 10:51:16 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d58666f30esm16065402a34.26.2026.03.04.10.51.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Mar 2026 10:51:15 -0800 (PST)
-Date: Wed, 4 Mar 2026 12:51:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: m-chawdhry@ti.com, c-vankar@ti.com, neil.armstrong@linaro.org,
- marek.vasut+renesas@mailbox.org, u-kumar1@ti.com, j-keerthy@ti.com,
- semen.protsenko@linaro.org, afd@ti.com, anshuld@ti.com,
- peng.fan@nxp.com, ahalaney@redhat.com, mkorpershoek@kernel.org,
- n-francis@ti.com, u-boot@lists.denx.de, srk@ti.com
-Subject: Re: [PATCH v5 00/10] Add PCIe Boot support for TI J784S4 SoC
-Message-ID: <20260304185113.GC1388590@bill-the-cat>
-References: <20260216102858.2745657-1-s-vadapalli@ti.com>
+ d=1e100.net; s=20230601; t=1772655307; x=1773260107;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0AtHyk90PFkVRS5Cm1VJyL2cjGcCEZ5vB3rOJGv6KRY=;
+ b=OmLWWk7x0IOSVvH4JjGqWLO9N+AFgL8uBnq69l1e7x+w50pejLgl2qrMO7mW70H15i
+ MwsuG1aDjOVmiuJRpeFEDYNq9efZBbPgTlbUKbLdfNaTtxzNgB/29NRSVwat11vZ6hWx
+ E5axhPLkzTa6fSnHqI3BNuMhvGxiDJIhBcwkfTTuHUDSSB2rhDK2DftP4iymiCuDuZ+/
+ 4oAOeEFHjLSB0yI3RMU9U4LJjli+koMTHd1+j00fY8mzgNBLkQQXMUQiKC5vlnjIcQh3
+ bZqHy2iLBkpBcVx56UaUknw4PqFOoGEb9XZwdvkzgeVcV8suXoMZvGJi4YQ8/rO0k2ys
+ GvCg==
+X-Gm-Message-State: AOJu0Yzxzem3xuITYhQy42nDKCot4TRZOggecY2KsuV0Dfx4corhTAZG
+ Nv6lRMNhtwN6BPePmHiTgZLLzrAQiHi9GbcXpcvjPzrWSN23tERrYadYLN8gvxXZNeo=
+X-Gm-Gg: ATEYQzwW82tXyMDzMwFDED116ajg9p/A9JPDXqbyps4zKuqsajXMwpB6jp7kGSucMtB
+ ZoPR64D7KVu5GSzANDd40GZj3utK0k12rs4U/ixALiT+M0v0WktfS+GvfDzyVJq4fazYbDeV3vu
+ S65Ze85PpWBfXWeWJmDg3S/12aA0fqtN/5poiMu/4ymOgCT45cMfkIoAyrk2qv+D112gGFy5Hg3
+ MjzFYhGCxvt8Mzcw3gKWoKovFJYQgqkYsdPTjKeftQ13n3d1LQMX4frTgDroD/W9gi+nQrKfZTl
+ vfnx5Rs0/eiVGWkK/vtTz4TIbF8AtTC/4F4kdWTn6HtGxOJrrZsaLfZMFWwceWJlWvpRZU1cfp4
+ v4Pw9ojBfbWqnjR1gch9Kz8FaFnSE1Q/HyawugWOlKBdeWxh/oRtkGKPME7BwzRiBj+LesQMgG+
+ MJ9USm4kofjgFC/xmGTFaegxRjpZjYOD6SdVCK9Fe36DqjuM8KzmELDkwZSfYzWNrrqziT0Sw/Z
+ Ona
+X-Received: by 2002:a17:907:970c:b0:b8f:de69:b597 with SMTP id
+ a640c23a62f3a-b93ef784a49mr242995866b.7.1772655307108; 
+ Wed, 04 Mar 2026 12:15:07 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:106d:1080:73bc:1eca:d39e:509?
+ ([2a01:e0a:106d:1080:73bc:1eca:d39e:509])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b93c8e3d060sm321786566b.56.2026.03.04.12.15.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Mar 2026 12:15:06 -0800 (PST)
+Message-ID: <88393bb3-c241-4be9-8268-1ccd047ba1c9@linaro.org>
+Date: Wed, 4 Mar 2026 21:15:03 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6gEhwZn44u6juGCd"
-Content-Disposition: inline
-In-Reply-To: <20260216102858.2745657-1-s-vadapalli@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-ufs-20260304
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,67 +121,59 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---6gEhwZn44u6juGCd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a (very) late PR for master with a few UFS fixes and changes.
 
-On Mon, Feb 16, 2026 at 03:58:28PM +0530, Siddharth Vadapalli wrote:
+Thanks,
+Neil
 
-> Hello,
->=20
-> This series adds PCIe endpoint boot support for the TI J784S4 SoC.
-> Series is based on commit
-> f9ffeec4bdc board: toradex: Make A53 get RAM size from DT in K3 boards
-> of the master branch of U-Boot.
->=20
-> v4 of this series is at:
-> https://patchwork.ozlabs.org/project/uboot/cover/20251201110103.845413-1-=
-h-salunke@ti.com/
-> Changes since v4:
-> - Addressed Udit's feedback:
->   i) Patch 6 has been updated by limiting changes to disabling CONFIG_SPL=
-_PCI_ENDPOINT
->      and CONFIG_SPL_PHY (CONFIG_PCIE_CDNS_TI_EP, CONFIG_SPL_PHY_CADENCE_T=
-ORRENT and
->      CONFIG_SPL_PHY_J721E_WIZ don't need to be disabled as pointed out by=
- Udit).
->   ii) Commit message of patch 8 has been updated to indicate that althoug=
-h PCIe Boot
->       is supported in Hardware for J742S2 SoC, it is not yet enabled in S=
-oftware.
->   iii) Documentation in patch 10 has been updated with complete set of de=
-vice-tree
->        changes included and the C Program to transfer bootloaders has als=
-o been
->        simplified and documented with the usage of appropriate variable n=
-ames.
->=20
-> PCIe Boot Logs (J784S4-EVM running Linux as Root-Complex transfers
-> bootloaders to another J784S4-EVM configured for PCIe Boot):
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/2d157003818441fe79a139d=
-0dec1058a
+The following changes since commit 437ea9f8be5afaebe2d8cbab6242f1182857f21e:
 
-With current next this introduces a failure to build on j784s4_evm_a72.
+   Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab (2026-02-26 09:06:33 -0600)
 
---=20
-Tom
+are available in the Git repository at:
 
---6gEhwZn44u6juGCd
-Content-Type: application/pgp-signature; name="signature.asc"
+   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-ufs-20260304
 
------BEGIN PGP SIGNATURE-----
+for you to fetch changes up to 47905f28468e3524cb5f775f52928cdcc568815a:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaah/HgAKCRAr4qD1Cr/k
-Cv2NAQCkLh/7qo/X5nyA5SRghD4yTn4byhi6M+97lRDucgEnmQD/XVrJP2LfoJ+y
-kxiQ7EDIexBIJBc6Ucq7aYrXtYV8CwQ=
-=8jZz
------END PGP SIGNATURE-----
+   drivers: ufs: remove unused ufs_post_bind() declaration (2026-03-02 15:20:02 +0100)
 
---6gEhwZn44u6juGCd--
+----------------------------------------------------------------
+A few fixes/missing changes for UFS:
+- remove unused ufs_post_bind() declaration
+- Disable UTP command timeout in slow mode
+- Missing MediaTek UFS PHY Driver to be used with the UFS driver
+
+----------------------------------------------------------------
+Igor Belwon (1):
+       phy: Add MediaTek UFS PHY Driver
+
+Julien Stephan (1):
+       drivers: ufs: remove unused ufs_post_bind() declaration
+
+Padmarao Begari (1):
+       ufs: Disable UTP command timeout in slow mode
+
+  drivers/phy/Kconfig                 |  10 ++
+  drivers/phy/Makefile                |   1 +
+  drivers/phy/phy-mtk-ufs.c           | 190 ++++++++++++++++++++++++++++++++++++
+  drivers/ufs/cdns-platform.c         |   1 -
+  drivers/ufs/ufs-amd-versal2.c       |   1 -
+  drivers/ufs/ufs-pci.c               |   1 -
+  drivers/ufs/ufs-qcom.c              |   1 -
+  drivers/ufs/ufs-renesas-rcar-gen5.c |   1 -
+  drivers/ufs/ufs-renesas.c           |   1 -
+  drivers/ufs/ufs-rockchip.c          |   1 -
+  drivers/ufs/ufs-uclass.c            |  12 ++-
+  drivers/ufs/ufshcd-dwc.c            |   1 -
+  include/ufs.h                       |   9 --
+  13 files changed, 208 insertions(+), 22 deletions(-)
+  create mode 100644 drivers/phy/phy-mtk-ufs.c
