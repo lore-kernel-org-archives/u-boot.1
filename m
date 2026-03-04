@@ -4,134 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B841CEF8FFC
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 16:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49600EF9014
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 16:58:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE0CA838BB;
-	Wed,  4 Mar 2026 17:33:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 73BEA838BB;
+	Wed,  4 Mar 2026 17:58:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Twpj7Lfq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sX+2KR7h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EADB3839A8; Wed,  4 Mar 2026 17:33:44 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A9C7E839A8; Wed,  4 Mar 2026 17:58:24 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDF5E83642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 17:33:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 821E883642
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 17:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ltfAhI0kHkoKJNJ892sGLq4NUzUM5KHdbb69NjjVI2pO2yaLMTQmewmqJ6hHYAEQqCo5fUuri/dTancxR+3XmL6o+CqMY8Zlyf/bEobW5jKHWjcQ6WjIIxsxs2/5PPc7bIj0nwzXpesAOhQ4Egf7UDlBvHTimitDovsiPKI/qsRDPqDnWAs4ix3CfW0v+dOJz3OUA3JFpZUUAmObnoZ7SmtfiwSmjd1q6mgS+keHBWLFpRRo6uJDq5P4by3wGWoaiW3xWl6105XmSqp1lP3D+jgiASKi7eHBrzuDX75nLZnM5LcjjooHJqNQRkDDPpN+QKRAPetwt0TTQ9WpCO/60Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sMoCdTDttkuGfUdM42ZN2WzvONAjDE9sNZHSOUQon6s=;
- b=fdxBN/OGl/idRmCnGBc+6moPvP6zbtI4da1ntVEisxmO2O4pi1tkp4MNi5qW12Z2zqlI3j7nsPpNGHyffKplC3eaq4SyuoNRUPc/zjdTsWjSt7+EYqPjZnn/XxwjAEbEJ8Ar8ggO0UasSLDvOQ+X4tlv91QAjraqD4AirlVeOQz1R4QWOIVOwOUX72FRsxl/lwbB+E7ES0FkP5c3d7qpi1Cc09yvzpeotP9kjpqbm7Ae5fnanhSOH+K7X0ceQ8RbbCpSkCO2VG2i9vvJ7a9lDmjmSuS6tDw3wgDIFD39cZlscdt1rcfn9Ml4kLo+xtvX1xmCljRrTFJHpXNYkcsseg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sMoCdTDttkuGfUdM42ZN2WzvONAjDE9sNZHSOUQon6s=;
- b=Twpj7Lfq/ggglAMKoxKg20g40nbKrCItJcIUC7RRDydPf/ofU3aJXc0jJU6x/SklXiDYFCvETDLn/yHmEHbb1pkOYcCap8G1zxgqJ/kMAGgjs9GRsMR73TGrgtlEmircGtHiR2jIY/aBy8Uhb8UFLD4wSa2xADAZMfksJcOrmq0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
- by PA1PR04MB10940.eurprd04.prod.outlook.com (2603:10a6:102:480::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Wed, 4 Mar
- 2026 16:33:40 +0000
-Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
- ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
- 16:33:39 +0000
-Message-ID: <ff92c314-b0fb-48ae-acf1-195ecb3163e7@cherry.de>
-Date: Wed, 4 Mar 2026 17:33:36 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] FIT: Address Secure Boot Bypass for Signed FIT Images
-To: Sascha Hauer <s.hauer@pengutronix.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260302220937.3682128-1-trini@konsulko.com>
- <aaff4oDKlkINa8H7@pengutronix.de>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <aaff4oDKlkINa8H7@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0902CA0060.eurprd09.prod.outlook.com
- (2603:10a6:802:1::49) To GVXPR04MB12038.eurprd04.prod.outlook.com
- (2603:10a6:150:2be::5)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-798527f822cso71631327b3.3
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 08:58:21 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772643500; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Om2E8vNJlL1J9ZtAJbJa7/wYekYjZWO/DfWjM/Dyga+QSxPs6TBWUOUE1HLcZGJIbj
+ ZBxQAQqDEnqP8MIQCSMv9qB0HXLFGLeE5pqAVSnOR3X+66bvZKD01uV/0PD6JNf9lpA+
+ rlfy2ZkTFposg2y/nGjAsVbBotEGPg1iysM85Xlr3L838LPahkqERvSy54448rcqUA2/
+ Fk9SoFU33j3Wvzp+etvgH/9QRTQC2Zf08ELPWyqn0YXfUKCrvIMFPNpxPfuoCERtsvCh
+ xlhYlEvphtQQONWBx8QQlJ6Ps3ZTptjrosgLI6mGlP3NV1I9Eqg9ta7+WWfzDFOc+8/4
+ YvGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=xt18cPvoWKrLT01kwXx3ulDN5ehJI7qee/sQ0YZLSa4=;
+ fh=XCHfK9cvwT5KXND9XJ6v0xpO/957vqY6/yM96lKMONA=;
+ b=XfsKRpm1A9rHXcSpR0XsjPqtb8RZfiIyq39i5eXtUKaZ93kPtIrsgIvn1MBmpFNxwO
+ nLMkPJ95kxs80THa2iqI8636bTsCKe90m6JupsA8+4CNUyLIU0SFhR8sWz0q16+pvEfD
+ I20gwYRVP2Jbv2VNClxj1nEEYGvlZPHJLLUzavMHEtaOpO1KBfuM4V5mB4gJAMc+GEAO
+ y4XQHyJs0HcDEXCpLItsr+Haahs8AXdcH7nfHPe+GE0JfUSjmvfgXj7wcoy+G4wiGi73
+ F/U0QGjAnI1vk3HFLAUN1bk2Q2CWlkKnOYkI1DJXl1MY2sR11h+Y1Dbxe8ZFQgej4UYP
+ rQlg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1772643500; x=1773248300; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xt18cPvoWKrLT01kwXx3ulDN5ehJI7qee/sQ0YZLSa4=;
+ b=sX+2KR7hXzKeCKp7jMs1kL2wjGgUYjuakG+EgrvoxVBEZx/oDstfXbgKkVKZGjoCSv
+ 08lv7kmUsWamre71FPpmmixsHcpIIer8jMhaFER/x3LiDIyrSIv8Nf4MRHSQVFddVhjR
+ xE6oC6krxuxgqB/Ulueev8d9WGs7u9Swiqsk8yzQlJO+JnH97lrRz/jPv7GNGJ2vSucX
+ fT2vcKnzTYC7QDmzcaIGXfWAP74G7iFCF+l5kCVlEbqvT2GASmaFAx17JysUmqo5Mtcx
+ BOhM0MBWNFbXrDw7ntLj5mD7VcU3stO297q64M7GLJafaCIYDqu4sQcgAqIId6VWAWgu
+ DvfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772643500; x=1773248300;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xt18cPvoWKrLT01kwXx3ulDN5ehJI7qee/sQ0YZLSa4=;
+ b=vPTWJe2hXioqZfsqFz9nGS2XDNQsphkmEFYHpOMuynklC2ephMkHfzm8iX/fCTddv+
+ sS9AfFRKkmzu97IZruqdFtFAz3XPGsrW8uCtmIMnoK9SlMrsPW5aZp1hgAme6pjH+X2t
+ RvMsuEjBzLDCl38mUDPuhfHCLU1s6kBcEoj0RbdPTNq5h6uiCZFZPrvcIfTb1Q7pz5/s
+ 3NAUYwgM9E4x+XGJlJNR9B9BzuGFot80ooSls5NTGGM5Hy1HJ8xiwsGbdtbMou3rqZ3D
+ nrKO/Pnv7wVXRh+te+R2xcZ+qanOCJg14iV0hopUXNwwJGHDHITeC+GzFL3QT3TeZoCB
+ U7dQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEeZjx2PubPONnc8/unybLWkUtTnu77Lmrz5t3xDtJ+IbwOfn9JwpTBENKmWgpOhzNXU3+ilM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwPds64BnvneE3g1Y7JPO4TqF9FnlOyXERgJNaufR6CVz8Y5zuc
+ 3MzhSPE1wU3Wf1WuQzktX/2QJ5UAd0LwKZdoBTaKzJQwe90eOU+1W2Q8xeb58htL8CAqWhTGx3j
+ ue9nVMkNRwjA33D3s3rIwPGi88BWXzJKLWvxZvNMUhA==
+X-Gm-Gg: ATEYQzxKCEr20X9r+bvPG7UYg63JxbF97U7Ia9fZkeyrxrS2Ab9AwUxkUAoiGrNebds
+ Hjvrl7bmG1mhVAR1nTLbYeDH0SqFpOiwloavYDNwtuLe00ifRzE9k1VD6qlEE+r4DLCsBnrFRcv
+ SxMcWbqsoJz2d13ZO36DZXSQcxZud0Vo1+sY5nJMtspiWILlq2vhdnrG4UX75lOALi2FqlVPqUv
+ 05Y4/qn8gR22IeDK+Yly392RGXaoWAVJkpGnDbEk/rnk3F0OOjk1934e1vXnxKxr6ahl4LJ8dJa
+ t0YbNnmYaaSpVZDa5bYPUmv5cfMxkWdjzosdgyOT1qScHEN7C3RNXyZ2r6SaCYdnNjQX+RH17Y2
+ P9Vkkni1rLJQXN7XEYMm6L1r1PEu2EqLdomBUlGEyD50+YA5V+RogYEXw+zAyKHNAACUpnrAHVc
+ LNJvf3IXnLy+ALCVs7bxljosRyIP+2Pf/BLVXCjYPZfPXca96Yz63p/Ck+s8wrB6KmRbmq3tPw2
+ a2I9b6n6r2U9J5ERlvY3Cj/+/jcWVMCzIXI/RiYhv2M81J66iZhuR3XBym5L2HBUGjgLxTqreky
+ /zNqEdqNKOogSdx1P6NJAZ5praRh91s9tGUfCjsbf1DZ
+X-Received: by 2002:a05:690e:d5b:b0:649:d33f:2273 with SMTP id
+ 956f58d0204a3-64cf9b5aeddmr2139775d50.28.1772643500189; Wed, 04 Mar 2026
+ 08:58:20 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA1PR04MB10940:EE_
-X-MS-Office365-Filtering-Correlation-Id: e3597b82-95d6-4ebf-7e46-08de7a0bca97
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|10070799003|376014|366016|7142099003; 
-X-Microsoft-Antispam-Message-Info: hFUUGYa+XTuiE9ZD29g13xBrZt4mx0KW+MiFDmpqtc2/p+z9CNcsFoyUWQ4Sv9sMNy+SKfBBIF006ACXKSZp4m9xPJ8JUmx/FsujSg1r1ovTehbySUvyqk9AUGvMXgd8w0uTyMdc2CiJpStjKVlDcJXOLEEP97F+5Nn1dTHfzoB1nZEt/rNZ+jqJIyLiFspRFdCufXIMn16kK1nJkb4PDQ4T6ZJmuXVwjH/UYO3xXhMWYi4w4foNSCn1Srehurl84jaKr3gMTYo1yic7q7+oiDp7N3fiTDa43Q6omLgTmrEQG8A4ZtCq1XMjpWhwqvGPyw4MQOqnV7gp7cCy+gyOq1J8rCJE3fcNCIzuKft/EZPrwS4wt/CdPLehnPULAXn98sIP8BnJIzmV93nj5q/Cz5eECs8Lq8kVxc4JfGtzz/Y5m29MklMfdCV+kC4Xz5yaFWLJFc6c1Oy9QmwAmWRJyrIEVV+gVOHHjuEXQZ7ESD/YWcLTfcvjrQ06InBHB7psT3ZBIaoisQlLF1IcYrwLL4LLu4yk7I3wz/06pkOdKfZZyKcWtPdhan26A3l37XDoWlj7wlFZ9krtM3/WzFIWVT7g8Wy9EcWyobDU3brn1QYYRhLiYntMGbRqf/kmo1nuKmXlsFSRLYccztCdoIPL1nLlLRkhYPIqYD+ynoCicm/j9UXmoVvxxtXsdOtkyQxjz8goq4qUHkqV7u20sJjV1A4HKyIN0GrHnS9EZE/A8EE=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(10070799003)(376014)(366016)(7142099003); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M3FLMnoyeFhLL1FENTl0VjM0QkNJRStobVhobVVkOHg3OUZQYlJCRUpXWlBj?=
- =?utf-8?B?TFFiOUx6WkU4M0Y2emRlK1JGeE5uVytJZklVSmx1QncrakN6OWRTa2xQVkN1?=
- =?utf-8?B?cjNhVXZQaVIvd3YvRjBWQ25tWG1ZUVM2bmQ0QW9jM3NyOU85NmdDTDJuanRO?=
- =?utf-8?B?dWp5VnF3N0NjdXJHeHNhT2RDbTVrMWl4ZWQyaHRUTzdBUFZPQzJ6NXV2Y0Q0?=
- =?utf-8?B?QUpDNTI5emtpWkJhSk9aY042MW1Yd3k0bC85M2RxMkdSUURJZUtsK3FJQWVz?=
- =?utf-8?B?MG84MG4yYndva1NQTWZCbmYzVFkxMlpYNEpaUWRsOVRuQ0RTQkdMdUpiMnVV?=
- =?utf-8?B?Y1FkVXZ1ajFKRmRGRnovRDFjR2R2YWlxbWlJZlZSdXNCbTNNQkZUcnArc2pB?=
- =?utf-8?B?NnpDR1lqN25xNlFiUzR2dFBBTXM0ai9lVENnZ1c2ejlweWFVQ3RqZmNzLzNN?=
- =?utf-8?B?QnNSdzNNUG5GdXcxdzNXc1R2M2RsZENBZm4zbS83ZnJxOC91amZTdGxDb3hx?=
- =?utf-8?B?aUppbXJaMWdvT1NSSEMzNjRQS3lGM3k2TTNRWmZ5VUlIemhYMTJqdXhWK0JI?=
- =?utf-8?B?YUVmWllqRXNMQ0VMUlFQZWlyUnlYR0NZbjZ4Ym14MEIzd2dTTmVQV0tMNWYr?=
- =?utf-8?B?QUlYTDRTRW9WVHNPYldGQlBpOENnMU95U1hReGxYaVZnZjBsUUZOZU90T2o4?=
- =?utf-8?B?bGlBZ1BRa1RmN21nbmJ2ZnhsTFd5c2RvdHJrL2E1bFR0bU9LWWpTckJpMWZC?=
- =?utf-8?B?dUpCUHhTaXdPUE9mRkgxU013WXNWUFk4dUpXVS9VcS9rUC9DRmdQbFY4TGxP?=
- =?utf-8?B?YjZJeTdSL0xkeG5GQ2VEdWltWlMrbmNNTTFLU0c1ZkU0YWdrb29vWW4zclBz?=
- =?utf-8?B?M1hOdXdvWkNYMjQxU25BaEpZSFNhaFhSVnFhRUFHTzZLRFRtZk9nOHBLazkr?=
- =?utf-8?B?UnJjdnIwaTVTVFBsZmFWMUJ2Z29Ibkp1N0dRdGo1NGJGbS80K1BKcWJWUUFz?=
- =?utf-8?B?MVhuSkg2aFdnRmhRbktEWStZOFJBWjV1MkluR1M0MHRqYUxHYWE4TmR5VUoy?=
- =?utf-8?B?bVh6SHc2anN5UzE5dEh4cUxaK0pSM25QMFozbnMxYmszeHIxOEp0bUpPbUpm?=
- =?utf-8?B?cmhoNW1zNzNJTVNtRFp1ekRQNnIycmpPalVrSUpiWnErZlUyblZLTmpqd05G?=
- =?utf-8?B?WDZ5NlFtU1h3ckF2L0dKaHplLzVvVG81a204Z0VFV0RkamtUVE9IT0JsMVgv?=
- =?utf-8?B?TUJPSGVhSWQ4VEplbU9ZZjZ2elA3dE40SWZHOTM1N2hMQTlrMG9hUVVpbkpM?=
- =?utf-8?B?cS9mMytQdzNmdFE1clR2ZFdoajkzSW9COUltWTVMOEp1eHozdHNHUG1vWHdM?=
- =?utf-8?B?S3htRlNvVzhibHJSeXRFbWNBY0FwNmgwbEJNVWN0WmRvRVJhYVlqQ1ZUTHN5?=
- =?utf-8?B?U3ZwdTgxYnBHSFN5VDA0VWtzZ3F3N2tLTnlaaERoOUZhTVRtbGkwOXR4Mmp3?=
- =?utf-8?B?VlpwejAvQnlROElieDQ0MHQzZmJnL0NmVFVBblNVUGhvbXpuOXlsc3BqdW94?=
- =?utf-8?B?cDJEQitVUUFsd1o5aXVBYXRCY1BXZnpic3djNThiSHgxb1orVHZ3Sm9YcE5h?=
- =?utf-8?B?SS9vQi9IYXgzdVB4NkhLWkV3OXBkeDgzOUtINVpkOWR1dytqZllGNGNHUkha?=
- =?utf-8?B?RzdDMlN6VFJGT1dYVnRvTWlmZzNWMHRubytvWWNOcUpZdEdpWXRTMVlVQUti?=
- =?utf-8?B?UXhJdDFyYkROekExK2Z1Z25LKzhIMzBUUjNQOGZ6NFc3ZHlRdDBicWxiY0k3?=
- =?utf-8?B?blhFd25sblVOb2ozRkY5bk5ET0ZySVgxSXp3QkJYSEIzRlQyV25hWEZiK2d0?=
- =?utf-8?B?L3puOWMyTWdXNzRDbFlkUmc1V2xBMUs1SlZOSFA2SnVPRzZhTTFpYTZIWCtV?=
- =?utf-8?B?MUxScFUvRGxvTVdGcTJXbHlDNlNRL3cxVlM0T1VSTlgzR0VxVzlDYlRyUFBE?=
- =?utf-8?B?bGJiMldvNVcvZFpHODUwYUhVcklkUEhBNDFUTEdFOEJDRkNXcXRJVmpQSXgx?=
- =?utf-8?B?RjBOYW1ldmdmZkhGbHBkd2lodlVlV1lpa2dKOFg5Z1kvc21TV1JoUVlnZTNO?=
- =?utf-8?B?OVMwMjI0cXFoc3dFbS9HU2RCanM0UWlrS0h5UGNYNVhERlB6TE9EQzl0RkNX?=
- =?utf-8?B?b2w0SUQzWWtSQzJkd214TFFjaFk1bDZLSUw2NmlmbkRyV2xuVzY1T1UvNGFF?=
- =?utf-8?B?ZFJUblhuQUZKR0E3bGNUWWowMVRQQ1VSbzdBeUd4Z1JxU05CM0ptL3FpeHRX?=
- =?utf-8?B?Yjh1UzN5K041NlVPQWhyT0VEbE56blU0VHVGaE9qei9LbTMwTjBCWVYrZDR0?=
- =?utf-8?Q?Bihr8Dct+0iLaf8Or0rJP9Mx+iRxCbQ/5OXGi?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3597b82-95d6-4ebf-7e46-08de7a0bca97
-X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 16:33:39.6665 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q2PAUQerJ+hywqeeaPnsFcYElfzmt3oxUmL/tPOHVMZuatuixu7b+Ju1uLCyPHHuaXuBrRzhI8ziOzYM1Ns7Gle/UtzGjEKvAk4o4lQpc6A=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10940
+References: <20260214024736.3726811-1-simon.glass@canonical.com>
+ <177256385549.3975993.592734328770415000.b4-ty@konsulko.com>
+ <20260304-robe-praising-5509e3a984cd@spud>
+ <20260304150145.GX1388590@bill-the-cat>
+ <20260304-acquaint-wager-688fd7fbae6a@spud>
+ <20260304151154.GY1388590@bill-the-cat>
+ <20260304-germproof-gawk-d26040529131@spud>
+ <20260304154549.GZ1388590@bill-the-cat>
+In-Reply-To: <20260304154549.GZ1388590@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 4 Mar 2026 18:57:42 +0200
+X-Gm-Features: AaiRm50O50hB2cBnTxUp6RyJoMrRZy05J_yoAV2tOjcIef9Xx698ptCmbJ4ATJg
+Message-ID: <CAC_iWjKehyCeLfmPWGUHAHF5YXaynWMzyYnuc-wqZmDmjQQnZg@mail.gmail.com>
+Subject: Re: [PATCH] kbuild: unexport sub_make_done to fix child make
+ invocations
+To: Tom Rini <trini@konsulko.com>
+Cc: Conor Dooley <conor@kernel.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, 
+ Simon Glass <simon.glass@canonical.com>, Sughosh Ganu <sughosh.ganu@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,49 +127,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sascha,
+Hi Tom
 
-On 3/4/26 8:31 AM, Sascha Hauer wrote:
-> Hi Tom,
-> 
-> On Mon, Mar 02, 2026 at 04:09:37PM -0600, Tom Rini wrote:
->> There is a flaw in how U-Boot verifies and generates signatures for FIT
->> images. To prevent mix and match style attacks, it is recommended to
->> use signed configurations. How this is supposed to work is documented in
->> doc/usage/fit/signature.rst.
->>
->> Crucially, the `hashed-nodes` property of the `signature` node contains
->> which nodes of the FIT device tree were hashed as part of the signature
->> and should be verified. However, this property itself is not part of the
->> hash and can therefore be modified by an attacker. Furthermore, the
->> signature only contains the name of each node and not the path in the
->> device tree to the node.
->>
->> This patch reworks the code to address this specific oversight.
-> 
-> As this breaks compatibility between old U-Boot and new FIT images and
-> the other way round it would be good to introduce a version field to FIT
-> images. With that at least newer U-Boot versions could print a more
 
-How do we decide when to bump this version?
 
-> meaningful error message than just "image verification failed" which
-> gives no clue what had actually happened.
-> 
+On Wed, 4 Mar 2026 at 17:45, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Mar 04, 2026 at 03:24:45PM +0000, Conor Dooley wrote:
+> > On Wed, Mar 04, 2026 at 09:11:54AM -0600, Tom Rini wrote:
+> > > On Wed, Mar 04, 2026 at 03:09:40PM +0000, Conor Dooley wrote:
+> > > > On Wed, Mar 04, 2026 at 09:01:45AM -0600, Tom Rini wrote:
+> > > > > On Wed, Mar 04, 2026 at 09:54:22AM +0000, Conor Dooley wrote:
+> > > > > > On Tue, Mar 03, 2026 at 12:50:55PM -0600, Tom Rini wrote:
+> > > > > > > On Fri, 13 Feb 2026 19:47:34 -0700, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > The exported sub_make_done variable leaks into the environment of all
+> > > > > > > > child processes. When make targets like tcheck spawn independent make
+> > > > > > > > invocations with O=, those child makes inherit sub_make_done=1, skip
+> > > > > > > > the KBUILD_OUTPUT setup and try to build in the source tree.
+> > > > > > > >
+> > > > > > > > There is a workaround that resets sub_make_done to 0 for specific test
+> > > > > > > > targets, but this isn't great since it has tolist every target that
+> > > > > > > > spawns independent make invocations.
+> > > > > > > >
+> > > > > > > > [...]
+> > > > > > >
+> > > > > > > Applied to u-boot/master, thanks!
+> > > > > > >
+> > > > > > > [1/1] kbuild: unexport sub_make_done to fix child make invocations
+> > > > > > >       commit: 4284306d22c5b6d64ecd62b462551d9d313c8104
+> > > > > >
+> > > > > >
+> > > > > > This breaks the build for me:
+> > > > > > make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- O=build microchip_mpfs_generic_defconfig
+> > > > > >   GEN     Makefile
+> > > > > > #
+> > > > > > # configuration written to .config
+> > > > > > #
+> > > > > > make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- O=build
+> > > > > >   HOSTCC  scripts/basic/fixdep
+> > > > > >   GEN     Makefile
+> > > > > >   HOSTCC  scripts/kconfig/conf.o
+> > > > > >   YACC    scripts/kconfig/zconf.tab.[ch]
+> > > > > >   LEX     scripts/kconfig/zconf.lex.c
+> > > > > >   HOSTCC  scripts/kconfig/zconf.tab.o
+> > > > > >   HOSTLD  scripts/kconfig/conf
+> > > > > > scripts/kconfig/conf  --syncconfig Kconfig
+> > > > > > ***
+> > > > > > *** Configuration file ".config" not found!
+> > > > > > ***
+> > > > > > *** Please run some configurator (e.g. "make oldconfig" or
+> > > > > > *** "make menuconfig" or "make xconfig").
+> > > > > > ***
+> > > > > > make[4]: *** [/stuff/u-boot/scripts/kconfig/Makefile:75: syncconfig] Error 1
+> > > > > > make[3]: *** [/stuff/u-boot/Makefile:702: syncconfig] Error 2
+> > > > > > make[2]: *** [../Makefile:189: __sub-make] Error 2
+> > > > > > make[1]: *** No rule to make target 'include/config/auto.conf', needed by 'include/config/uboot.release'.  Stop.
+> > > > > > make: *** [Makefile:189: __sub-make] Error 2
+> > > > >
+> > > > > That's odd. What host distro and make? I don't see that on Ubuntu 24.04.
+> > > >
+> > > > Originally my CI found it in a docker container with "from: ubuntu:noble",
+> > > > so 24.04. I reproduced it locally on debian unstable with make 4.4.1
+> > >
+> > > That's even more puzzling (noble is 24.04) since that sounds very close
+> > > to our CI too. Can you please look more in to what's going on?
+> >
+> > Can I assume your CI also sets O=<something> then? Is the CI config
+> > stuff in tree, or somewhere else?
+>
+> We use buildman, which in turn does separate output directories. We
+> also, in Azure, have one job that uses O= specifically. Things are
+> defiend in .gitlab-ci.yml and .azure-pipelines.yml
 
-Here, only signed FIT images with required = conf actually won't work as 
-far as I understood, the rest will work as usual. So we would need to 
-keep track of which version(s) of the FIT are supported by which part(s) 
-of the code, or error out saying it is not supported as soon as it is 
-parsed but it actually is supported, making incompatibility wider for no 
-reason?
+I get the same error with
+make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- qemu_arm64_lwip_defconfig O=build
+make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- O=build
+  HOSTCC  scripts/basic/fixdep
+  GEN     Makefile
+  HOSTCC  scripts/kconfig/conf.o
+  YACC    scripts/kconfig/zconf.tab.[ch]
+  LEX     scripts/kconfig/zconf.lex.c
+  HOSTCC  scripts/kconfig/zconf.tab.o
+  HOSTLD  scripts/kconfig/conf
+scripts/kconfig/conf  --syncconfig Kconfig
+***
+*** Configuration file ".config" not found!
+***
+*** Please run some configurator (e.g. "make oldconfig" or
+*** "make menuconfig" or "make xconfig").
+***
+make[4]: *** [/home/apalos/work/u-boot-tpm/scripts/kconfig/Makefile:75:
+syncconfig] Error 1
+make[3]: *** [/home/apalos/work/u-boot-tpm/Makefile:702: syncconfig] Error 2
+make[2]: *** [../Makefile:189: __sub-make] Error 2
+make[1]: *** No rule to make target 'include/config/auto.conf', needed
+by 'include/config/uboot.release'.  Stop.
+make: *** [Makefile:189: __sub-make] Error 2
 
-Not saying it's a bad idea, just that it's not as simple as putting a 
-version field in there. Also, I'm assuming this would need to be part of 
-the FIT spec. And I'm wondering if this isn't rather a shortcoming of 
-U-Boot implementation for FIT signature verification rather than an 
-issue with the spec, so why should the spec bump the version if an 
-implementer got it wrong?
+Also the patch has a Fixes tag, but it doesn't actually fix anything.
+It just tries to improve something. Can we revert it on master at
+least? Do you want me to send a patch?
 
-Cheers,
-Quentin
+Cheers
+/Ilias
+>
+> --
+> Tom
