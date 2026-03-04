@@ -4,78 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0489DEFCE3B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 18:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0645AEFCE3B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 18:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3113E838BB;
-	Wed,  4 Mar 2026 19:49:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5401B838BB;
+	Wed,  4 Mar 2026 19:51:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FoUbOr5l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qSENakYC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E71C83AA9; Wed,  4 Mar 2026 19:49:22 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 77C8383D8A; Wed,  4 Mar 2026 19:51:20 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AAC383642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 19:49:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1179783642
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 19:51:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-8c9f6b78ca4so943101685a.0
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 10:49:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7d4b9c839b1so3760359a34.1
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 10:51:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772650159; x=1773254959; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zj30fUGTZ3bSvhem4rSZRFbQGzSWV9/GW1fIM9FpgH8=;
- b=FoUbOr5lDZkr90yPPrMQL5ifYp3i5+IEENjWRIG56VTg1ryanbx/XOggQIjy3xVviP
- sPZriFkJqreyWAwzxjcblHoHYpaD+qhKmypc9Pnl3bzH3zLanJzoYnZSpOIP2vZZMFmx
- gHtG5CiEY8ZVmQoXehItNevprcJJjc5xYx3j8=
+ d=konsulko.com; s=google; t=1772650276; x=1773255076; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RFPeAx7f9578aMGhe5JrCy2rmVQXsZJe+z2aMC1Ww6A=;
+ b=qSENakYC1kS3A2T9OGpDlXr4a7LL3MU9qTbwpSOuA+giLwuESBx198qQNWoSd2yBOY
+ kUU3Q/o+1ds1SNhQrE2wm6HSb5/rLzD+0ai3ppWdX03K4RVjV7GZjAMApEiIn8kUT3Pn
+ mPya4UiaSuBDrHMMyAjtPPUkOCXrUyWoBppUQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772650159; x=1773254959;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zj30fUGTZ3bSvhem4rSZRFbQGzSWV9/GW1fIM9FpgH8=;
- b=r+By63jK4Jg2auldD96X9u6SbViXxRZ9I5EBlfpS5wVSWPAOPYL6oEmx1WZA0g4pBA
- m3/yv8dFUj4oZtuYRwraLm1HoytY3WtrhnC8Kkmr6mwa6tsA8zili7d+ToiC4V5UUPEp
- SyIi3WCQOamUhQSH6i8wNZiLx5+UDaGtzsRqlks1DhsfS8ZUUhYwLD24Nwij4Pz5jvLJ
- SdLp5YtEVSq2S7SB4gcQES19NSHhHxXEa2FYUvJzlS3qJESLXQfqg2p6tGq7ZIjeTkcv
- AXk+jeCZ9nEiXk6XtAsgPW1KNl6gIHsDHLp81FZRsJbmM13sR0gfIerNMzaid0aQ4Nn6
- yPcA==
-X-Gm-Message-State: AOJu0YwQBL5OzPvIDAns4m0q7sSq7aY9C56qKiFjpnBuHDsmVm/qNsgV
- DHXr55l3QQvlxoybLXoGRVhswUe/k5ZAVTCXWTENKLLcMxCy5BbhFb3DagWJAD0DQRbPc3TURqy
- GFVg=
-X-Gm-Gg: ATEYQzxW2fP5M2+5LBtk///jylP6/Hc8/DWpn7hhyQYKHk/5QPEn3tsZHkNak8VK92Y
- GToPf+fsJVyfXnH59/4zp1TS92ETebN23HJXU0O89DyvAYDgaHRo+UNZPAxA9gV/LugwNtmHcs3
- SPIDR7RfEWIHh9OLFcA9H4Rb9V3kRnJDABZ2Qjow2ulg5juTQmyyQiAFENJiepK43ibLZH780h7
- ITpO+q/JLZovdglcLanWG8/y42Qs/ImrRuIZrCS51185Yh4OLAY0xJmqmhaDFr/uGaictpUTdYH
- Z40uSwR0/CiBQnvmmdmUmxEEHwIEcIwGSBa1iU4eWY/xSd3JiAO+WDTU1c3zh/PlSPRy+zN+dVh
- pQ0tCGbMhJYvh1t4Z6FrY7CLfX0rrDHbF1wAU6rUpNTRmRd41GsW0AIF8LForsYpoa+EFbg0lsK
- mUSyYohG3SE6uwGgPkXg==
-X-Received: by 2002:a05:620a:45a8:b0:8cb:68ed:cc26 with SMTP id
- af79cd13be357-8cd5aed61eemr396622685a.6.1772650158653; 
- Wed, 04 Mar 2026 10:49:18 -0800 (PST)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cbbf68a0fbsm1653227885a.22.2026.03.04.10.49.17
+ d=1e100.net; s=20230601; t=1772650276; x=1773255076;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RFPeAx7f9578aMGhe5JrCy2rmVQXsZJe+z2aMC1Ww6A=;
+ b=Ed+tqCXdU9Jwwm8AYE0+ge08glsJ31UNOZkujvf29WEP/3OeeGRwPGb18j6C6w+FBo
+ nF6wOdds056wW0DnldeQMlpkeXgur6oY9tYFCdOQYNnbkBhw6HCT33FRfd3AFGWVf0pV
+ gJG52KZx/wDDZfZwhzWWMiYumMa/fk08scAtaK+Mkr8ZkhojOmKKacQEfvmjrakw+4nV
+ hp0Xuk3uXNUdv1WfqtUtXPHP7UQE8KSz4AiS1SG4yZNf8KEXTtBsRhMiJ9g4tHsY8rYw
+ 54PPwO8E+PQBtTkTyLCuFFLtK53tC8lpzBRkGCb84aUiNrNrpgnlIlU7mp+PAMFHfueZ
+ vzMw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCYbFE0E5N/Eryp5wfCB8tBZ/6m9PDC3cRHjEnJZux1V3HrDblZh+p2Kkm6dOjKQpUQPDr/i0=@lists.denx.de
+X-Gm-Message-State: AOJu0YztuV/xQctuRfuPoDgznRprBJ5c1h64gVq59/qIZWVC61tB3mFz
+ 3MNnhLwziuaAJGkQGKTsA6LGtySm+wzxycZKIgDknaJ2mEpvy+KieHnWyjNjezeB/ak=
+X-Gm-Gg: ATEYQzx5u5pBNxaKVw07+Ayyd1dYA338mZ3o/bzEZdPee7gRi0nyqjQ1u1+2eo3RytA
+ MZelCDCJkuM+nIHdR0pgV+v4f5588ykuqWtLWQXM9En0oeW4QDthES+hR8gcDUE4IYcFvmJOU15
+ F4JzTSR3BKmDD27ek64w18q8r0NmHlGDDya7nrfT72JmoZQuMdQO0yvIpvSdN2irWTlIH7l9b/J
+ +YfAkWVc/BqPoi4e6xwtWmxt0haOQVUoiwhqad2RLlwmojiCSZVacrYFEbofNdYhuC7K/qT6hV4
+ 7HjN2Y0y7a0D8L3ErbEmDYIcF9YHK38zrcJpU+XtlZafII9mlzK5/x7+6VnAdrTZ8UY7S2SRi3W
+ lrBmL+KFFkWoZ2sYQsuVgt9yxEerVBjTVZU0kyigVmQGqJMUyOsUb03I1OvRow5USl/VjQco4jQ
+ VdkZAvgC9Wf3bmqu+UwbGricu1AOg5XMKG0WN5d5iV99Y5uS9Uqy+j66tqMpyEvyDguVCGlwEaO
+ qIE1+twtlCf9oBjgHHPOI3UJV3CiE5L28tRbdKsJdEHfOKO4TM=
+X-Received: by 2002:a05:6830:368a:b0:7ab:e111:1a57 with SMTP id
+ 46e09a7af769-7d6da1e7931mr1777143a34.31.1772650276629; 
+ Wed, 04 Mar 2026 10:51:16 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d58666f30esm16065402a34.26.2026.03.04.10.51.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Mar 2026 10:49:17 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@arm.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] kbuild: strip sub_make_done from test-script environment
-Date: Wed,  4 Mar 2026 11:48:53 -0700
-Message-ID: <20260304184900.3104058-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ Wed, 04 Mar 2026 10:51:15 -0800 (PST)
+Date: Wed, 4 Mar 2026 12:51:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: m-chawdhry@ti.com, c-vankar@ti.com, neil.armstrong@linaro.org,
+ marek.vasut+renesas@mailbox.org, u-kumar1@ti.com, j-keerthy@ti.com,
+ semen.protsenko@linaro.org, afd@ti.com, anshuld@ti.com,
+ peng.fan@nxp.com, ahalaney@redhat.com, mkorpershoek@kernel.org,
+ n-francis@ti.com, u-boot@lists.denx.de, srk@ti.com
+Subject: Re: [PATCH v5 00/10] Add PCIe Boot support for TI J784S4 SoC
+Message-ID: <20260304185113.GC1388590@bill-the-cat>
+References: <20260216102858.2745657-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6gEhwZn44u6juGCd"
+Content-Disposition: inline
+In-Reply-To: <20260216102858.2745657-1-s-vadapalli@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,69 +102,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The exported sub_make_done variable leaks into the environment of all
-child processes. When make targets like tcheck spawn independent
-make-invocations with O=, those child-makes inherit sub_make_done=1,
-skip the KBUILD_OUTPUT setup and try to build in the source tree.
 
-A global 'unexport sub_make_done' cannot be used because the build
-system itself re-invokes the top-level Makefile for syncconfig (via
-'$(MAKE) -f $(srctree)/Makefile syncconfig'). Without sub_make_done,
-that child make re-enters the KBUILD_OUTPUT block and recomputes
-abs_objtree. With a relative O= path this resolves to a nested
-directory (e.g. build/build/) where .config does not exist.
+--6gEhwZn44u6juGCd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Instead, use 'env -u sub_make_done' in the test-target recipes so only
-the test scripts see a clean environment. This allows their child make
-invocations to process O= correctly without affecting internal kbuild
-recursion.
+On Mon, Feb 16, 2026 at 03:58:28PM +0530, Siddharth Vadapalli wrote:
 
-This is not strictly a bugfix, but compare with:
+> Hello,
+>=20
+> This series adds PCIe endpoint boot support for the TI J784S4 SoC.
+> Series is based on commit
+> f9ffeec4bdc board: toradex: Make A53 get RAM size from DT in K3 boards
+> of the master branch of U-Boot.
+>=20
+> v4 of this series is at:
+> https://patchwork.ozlabs.org/project/uboot/cover/20251201110103.845413-1-=
+h-salunke@ti.com/
+> Changes since v4:
+> - Addressed Udit's feedback:
+>   i) Patch 6 has been updated by limiting changes to disabling CONFIG_SPL=
+_PCI_ENDPOINT
+>      and CONFIG_SPL_PHY (CONFIG_PCIE_CDNS_TI_EP, CONFIG_SPL_PHY_CADENCE_T=
+ORRENT and
+>      CONFIG_SPL_PHY_J721E_WIZ don't need to be disabled as pointed out by=
+ Udit).
+>   ii) Commit message of patch 8 has been updated to indicate that althoug=
+h PCIe Boot
+>       is supported in Hardware for J742S2 SoC, it is not yet enabled in S=
+oftware.
+>   iii) Documentation in patch 10 has been updated with complete set of de=
+vice-tree
+>        changes included and the C Program to transfer bootloaders has als=
+o been
+>        simplified and documented with the usage of appropriate variable n=
+ames.
+>=20
+> PCIe Boot Logs (J784S4-EVM running Linux as Root-Complex transfers
+> bootloaders to another J784S4-EVM configured for PCIe Boot):
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/2d157003818441fe79a139d=
+0dec1058a
 
-commit 27529f1cb02d ("kbuild: skip parsing pre sub-make code for recursion")
+With current next this introduces a failure to build on j784s4_evm_a72.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+--=20
+Tom
 
-Changes in v2:
-- Use recipe-level env -u to avoid breaking relative O= builds
+--6gEhwZn44u6juGCd
+Content-Type: application/pgp-signature; name="signature.asc"
 
- Makefile | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/Makefile b/Makefile
-index 5df869213b6..65bac2e5b26 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2737,21 +2737,19 @@ help:
- 	@echo  'Execute "make" or "make all" to build all targets marked with [*] '
- 	@echo  'For further info see the ./README file'
- 
--ifneq ($(filter tests pcheck qcheck tcheck,$(MAKECMDGOALS)),)
--export sub_make_done := 0
--endif
-+run_tests = $(Q)env -u sub_make_done $(srctree)/test/run
- 
- tests check:
--	$(srctree)/test/run
-+	$(run_tests)
- 
- pcheck:
--	$(srctree)/test/run parallel
-+	$(run_tests) parallel
- 
- qcheck:
--	$(srctree)/test/run quick
-+	$(run_tests) quick
- 
- tcheck:
--	$(srctree)/test/run tools
-+	$(run_tests) tools
- 
- # Documentation targets
- # ---------------------------------------------------------------------------
--- 
-2.43.0
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaah/HgAKCRAr4qD1Cr/k
+Cv2NAQCkLh/7qo/X5nyA5SRghD4yTn4byhi6M+97lRDucgEnmQD/XVrJP2LfoJ+y
+kxiQ7EDIexBIJBc6Ucq7aYrXtYV8CwQ=
+=8jZz
+-----END PGP SIGNATURE-----
 
-base-commit: 80d0a2f6016d32b4e732a4d6eae8341d68fafe5e
-branch: fix-kbuild2
+--6gEhwZn44u6juGCd--
