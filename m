@@ -4,96 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F06EF8FF4
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 15:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AECF4EF8FF4
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 15:45:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9B7C83BB1;
-	Wed,  4 Mar 2026 16:28:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E2D90838BB;
+	Wed,  4 Mar 2026 16:45:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SfK7ethu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cla9VFAn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D44C83D8A; Wed,  4 Mar 2026 16:28:12 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 13C3A83642; Wed,  4 Mar 2026 16:45:56 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2B2083642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 16:28:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D06C0839A8
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 16:45:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-463b3697846so6043149b6e.0
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 07:28:09 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-40f20af93aaso843969fac.1
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 07:45:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772638088; x=1773242888;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=UnTLBGYKRl+gp4pSGB20iDcoLB8pTrBBEXIHnQ8RlJk=;
- b=SfK7ethuKBtXbIcrOSPaNYPwwzGHKVfbtHor+LY3GHpRIE/clVaXjKq21bNkU7zHlN
- 1HlRmNiX5/M6kaSybz+Wuqi4+FgwC8ivvKM/Q51Hz/VjJjhn6/O2B7BPBz+IEi7Hy0jC
- 0/Rh1uUM2NZLKHHcI2CRmHeuOqv10qhHqKbN3FWyj8mlElaoKRH9+sw6rXHM1e+c9srg
- o1DU8WB/wWtQ9E6n8C5y1mX6d8gWYO7FELDgsugR9piZ47Hudz2vTGv4CErmIE0sUEJi
- sUpxjNVMC721uylcRj/yGhAB7G9xqyJs6k1vwRmbsok87rpITkczApA9sGrJm2+gVTjE
- h3hQ==
+ d=konsulko.com; s=google; t=1772639152; x=1773243952; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pc2RPUB+AfwhQ+ht0QCawi8C4BX1SFxaKCcSQFvI1w0=;
+ b=cla9VFAnTpircmlNXRLV6GH7iMKodd3p2Srjq5X7DOAEXvD1wUiePq6lSgyDC40/ig
+ FSTSGzmHTZGrQobVw70c5y/X8fCbC+FVasIvHDhJ+01jo8ySRtiQ64HP4/6SnglM0vCx
+ t7KZQAig40beL7mt9qkdxesa8qMG5xzUak+40=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772638088; x=1773242888;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UnTLBGYKRl+gp4pSGB20iDcoLB8pTrBBEXIHnQ8RlJk=;
- b=kIz3dN3ALgWnZks0nwz1fShedHPiOMpwNUjS8cAO3HKNgHAp8qDKbADtJB9qp7yhW1
- LEkecvXIAYlmxZCgCmLFiCdu0sUWcV12uLsgdFWYuZiJXQy23IPyF9EscJeYODnQHJHX
- fOZazGZLM0kkp2uPUEzAQLyhb+V8NF8USEQ1oCukP38tMrdIXbG3luzRpjo/pgkPyz7F
- 98jAwRKTWe7+beN3SZ1qEYpDLLpQsKtOfjHpeY1r4QoiD8i5WhEdiNyZm9KwNvux/Mek
- wAmSzIqENKEYYXE6GaidAEm1M9OcSBKEO7Hz+hdvDnv1KeGEkVG7hAUAduJfIKQhtzfu
- mOLA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWu9/M5P+uY14WMmwXZpHzkAf13oYz3W830mQwKX7FKbES8A8/zcpnPvOqwDb7PuAHXd2Bb1uI=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywno8UCCrGuDY9eGvElaELH6G7oHkVrcBn9JG6r1kcBQDRVbE94
- XeU9KL9VigxpbwAjtlSDYy66HBmecldlR2PT30RAZng044gDVf6BUE9EXWDv8vloAo0=
-X-Gm-Gg: ATEYQzyd5cWir0wTh79LUWFm6WvFxPsAjBfk3kjAT+qh1t/8wTG2FLnd25WoNV8Gdo/
- 7Q6d/u7DHbThbLD5EoMmtXubN9KfLANKMmNnak3BerYWlwWhNHjmZ+ucCmAliCAnl3H0bDkxHW8
- vX1n65ZjrI56uS1XfZ8buYxnNwttQWTqOFihFqj959z1+M13ocRIu3ZZQOOQUYXTWkB0tnLGDNo
- TtoGEzE43VW9ICcm7F3KZA5wrAIbvnQ+y9HaWj/9SP6Wbj0le7TX3pDRTf3S8eEi3S+2nuU6WJv
- zftz9p8DDd+05bR3V/nOldHTt8uZXdVezo/Dg2h6NhYfdmky9MGS/WcS5+QMIhbNpVFfupePFhX
- 9reYVM7JrHl/cnUurLNH1ubcZSlBjQcPPrUBBOTm7IpEERPqfdcc5xAg67welouUAif72k6GXnw
- +cC1TgSkY5zShDY3jTDik6T5027poZ9yFS9mKksM77grtT0KIbLYa6cvn+I1+Jca/7kmlY1odJl
- Q==
-X-Received: by 2002:a05:6808:e8e:b0:45e:fff5:89b4 with SMTP id
- 5614622812f47-4650c68c4c0mr3344520b6e.10.1772638088612; 
- Wed, 04 Mar 2026 07:28:08 -0800 (PST)
-Received: from ?IPV6:2600:8803:e7e4:500:d719:8353:352f:b2e0?
- ([2600:8803:e7e4:500:d719:8353:352f:b2e0])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4160cf2572bsm16777461fac.2.2026.03.04.07.28.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Mar 2026 07:28:08 -0800 (PST)
-Message-ID: <60ce40c2-8f47-4e7e-afb5-fb502e8894eb@baylibre.com>
-Date: Wed, 4 Mar 2026 09:28:07 -0600
+ d=1e100.net; s=20230601; t=1772639152; x=1773243952;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pc2RPUB+AfwhQ+ht0QCawi8C4BX1SFxaKCcSQFvI1w0=;
+ b=gEfSZjqmKoJYBlyqIKlMEgb6lmwqmsi03kSyYtf3X1KoI3zCkjk9oSAJQghcFczPLW
+ Jmsuv/QVaKYSO+nRQnS5pzKWcYIlX9BJh+eU2HOAM4MJ8CocBaBszV3EAouRUYR5zzqA
+ 84CEqB0zS5RyDd04RZtQPMgSa1l/xrfaijtRsrdtGvfTA356B+qxt1EffLnXTbbGmRRs
+ HHmhEe2fniCyT9AatqBcVDgPXZNyNi51drI7mN9V7vgoeBHfJ5v7rznaNWWwzamuMx6J
+ nnbPwvpAH+m5kzENuVZrso4UyGzXpdprG8NAink3/e+Bb0wQB0kmscH1zD2cDqh+n4v4
+ P0Hg==
+X-Gm-Message-State: AOJu0Ywvj/15Li5pKUOfynwB3r06wssd6vZvNnSXhLEvLKZPR+ctzoks
+ +opKYrjm7y2I82Z4kufHjwvJRNpDZL5tjAzb/Z52Zwk1pJXILNMPVqg9eD+KNTDMeoo=
+X-Gm-Gg: ATEYQzx+ZjM2O9F7+kacRYy0I8Wp9pcS9BhfHoL/UUoZCm5ow2JTfq31Ksqq1SFwbCI
+ zMLlC9yeF5vzktnxKZMToJvu6dfn1+tjgRO3d/JghSdZfxWvj+H4nnIwl4FFuGQ7JFAV+A4zVI2
+ DAbI6cjda6FKInMS1PvBZPxh6n1wjgoBCW4N/75O3Y/zFP0kTd+kBDVBw3/bBVgmcDQ/C2dbTPn
+ MSaYHAJYlbx/fusAL7C+amS4fasEHQKbRyssV1K/nD+Hxx2D9GgExhQ0rN2Un7HZs1P4rPP1c0l
+ wYNm46EJhy+ZnarPIEWrLzC8Pyq9J50RxX4U/OfPYtPyfGhC8mzffTAXZftPYTdiu0+kUosx2w5
+ n6TS45viXh1Xs1WgLMUtDzZ/ZOCUwzJnaVwVuJYOFY1Nc351a9J3Env7OX0BRfwy6HQRNojzvU2
+ 5ipPzuGVwwq66n9Ih0b4h0nA15O7vxVIlfKAjpFaLyx+A0QW7ZV9oyDITRjcMLN3ymgo+prC3pY
+ BNkIcUDytGYz90RxrDuzE1yN4V3U2428lDQRxKz03ZzyPallUg=
+X-Received: by 2002:a05:6870:c1d5:b0:409:794e:fed with SMTP id
+ 586e51a60fabf-416abb18f8dmr1196137fac.47.1772639152369; 
+ Wed, 04 Mar 2026 07:45:52 -0800 (PST)
+Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4160d277316sm17754668fac.17.2026.03.04.07.45.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Mar 2026 07:45:51 -0800 (PST)
+Date: Wed, 4 Mar 2026 09:45:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <simon.glass@canonical.com>,
+ Sughosh Ganu <sughosh.ganu@arm.com>
+Subject: Re: [PATCH] kbuild: unexport sub_make_done to fix child make
+ invocations
+Message-ID: <20260304154549.GZ1388590@bill-the-cat>
+References: <20260214024736.3726811-1-simon.glass@canonical.com>
+ <177256385549.3975993.592734328770415000.b4-ty@konsulko.com>
+ <20260304-robe-praising-5509e3a984cd@spud>
+ <20260304150145.GX1388590@bill-the-cat>
+ <20260304-acquaint-wager-688fd7fbae6a@spud>
+ <20260304151154.GY1388590@bill-the-cat>
+ <20260304-germproof-gawk-d26040529131@spud>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: mediatek: mt7622: fix infracfg and pericfg clock
- operations
-To: Daniel Golle <daniel@makrotopia.org>, Lukasz Majewski <lukma@denx.de>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <a54fd4a7284da506020cb614919096067b195277.1772596281.git.daniel@makrotopia.org>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <a54fd4a7284da506020cb614919096067b195277.1772596281.git.daniel@makrotopia.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="49PoW/c3JTvnrPQj"
+Content-Disposition: inline
+In-Reply-To: <20260304-germproof-gawk-d26040529131@spud>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,71 +106,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/3/26 9:53 PM, Daniel Golle wrote:
-> The MT7622 infracfg and pericfg drivers both use
-> mtk_common_clk_infrasys_init() for probe, which populates struct
-> mtk_clk_priv and stores gate definitions in the clk_tree. However,
-> both drivers were incorrectly wired to mtk_clk_gate_ops which expects
-> struct mtk_cg_priv with separately populated gates/num_gates/gates_offs
-> fields from mtk_common_clk_gate_init().
-> 
-> Since those fields were never set, any attempt to enable an infracfg or
-> pericfg gate clock (e.g. CLK_INFRA_TRNG) would fail with -EINVAL.
-> 
-> Switch both to mtk_clk_infrasys_ops and struct mtk_clk_priv to match
-> the init function.
-> 
-> Fixes: 72ab603b201 ("clk: mediatek: add driver for MT7622")
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
-> ---
 
-I think this clock framework was initially designed to only have one
-infracfg clock registered, but in this case, it should be safe to have
-more than one because it isn't using CLK_PARENT_INFRASYS. So this seems
-like the best solution for now.
+--49PoW/c3JTvnrPQj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: David Lechner <dlechner@baylibre.com>
+On Wed, Mar 04, 2026 at 03:24:45PM +0000, Conor Dooley wrote:
+> On Wed, Mar 04, 2026 at 09:11:54AM -0600, Tom Rini wrote:
+> > On Wed, Mar 04, 2026 at 03:09:40PM +0000, Conor Dooley wrote:
+> > > On Wed, Mar 04, 2026 at 09:01:45AM -0600, Tom Rini wrote:
+> > > > On Wed, Mar 04, 2026 at 09:54:22AM +0000, Conor Dooley wrote:
+> > > > > On Tue, Mar 03, 2026 at 12:50:55PM -0600, Tom Rini wrote:
+> > > > > > On Fri, 13 Feb 2026 19:47:34 -0700, Simon Glass wrote:
+> > > > > >=20
+> > > > > > > The exported sub_make_done variable leaks into the environmen=
+t of all
+> > > > > > > child processes. When make targets like tcheck spawn independ=
+ent make
+> > > > > > > invocations with O=3D, those child makes inherit sub_make_don=
+e=3D1, skip
+> > > > > > > the KBUILD_OUTPUT setup and try to build in the source tree.
+> > > > > > >=20
+> > > > > > > There is a workaround that resets sub_make_done to 0 for spec=
+ific test
+> > > > > > > targets, but this isn't great since it has tolist every targe=
+t that
+> > > > > > > spawns independent make invocations.
+> > > > > > >=20
+> > > > > > > [...]
+> > > > > >=20
+> > > > > > Applied to u-boot/master, thanks!
+> > > > > >=20
+> > > > > > [1/1] kbuild: unexport sub_make_done to fix child make invocati=
+ons
+> > > > > >       commit: 4284306d22c5b6d64ecd62b462551d9d313c8104
+> > > > >=20
+> > > > >=20
+> > > > > This breaks the build for me:
+> > > > > make ARCH=3Driscv CROSS_COMPILE=3Driscv64-unknown-linux-gnu- O=3D=
+build microchip_mpfs_generic_defconfig
+> > > > >   GEN     Makefile
+> > > > > #
+> > > > > # configuration written to .config
+> > > > > #
+> > > > > make ARCH=3Driscv CROSS_COMPILE=3Driscv64-unknown-linux-gnu- O=3D=
+build
+> > > > >   HOSTCC  scripts/basic/fixdep
+> > > > >   GEN     Makefile
+> > > > >   HOSTCC  scripts/kconfig/conf.o
+> > > > >   YACC    scripts/kconfig/zconf.tab.[ch]
+> > > > >   LEX     scripts/kconfig/zconf.lex.c
+> > > > >   HOSTCC  scripts/kconfig/zconf.tab.o
+> > > > >   HOSTLD  scripts/kconfig/conf
+> > > > > scripts/kconfig/conf  --syncconfig Kconfig
+> > > > > ***
+> > > > > *** Configuration file ".config" not found!
+> > > > > ***
+> > > > > *** Please run some configurator (e.g. "make oldconfig" or
+> > > > > *** "make menuconfig" or "make xconfig").
+> > > > > ***
+> > > > > make[4]: *** [/stuff/u-boot/scripts/kconfig/Makefile:75: syncconf=
+ig] Error 1
+> > > > > make[3]: *** [/stuff/u-boot/Makefile:702: syncconfig] Error 2
+> > > > > make[2]: *** [../Makefile:189: __sub-make] Error 2
+> > > > > make[1]: *** No rule to make target 'include/config/auto.conf', n=
+eeded by 'include/config/uboot.release'.  Stop.
+> > > > > make: *** [Makefile:189: __sub-make] Error 2
+> > > >=20
+> > > > That's odd. What host distro and make? I don't see that on Ubuntu 2=
+4.04.
+> > >=20
+> > > Originally my CI found it in a docker container with "from: ubuntu:no=
+ble",
+> > > so 24.04. I reproduced it locally on debian unstable with make 4.4.1
+> >=20
+> > That's even more puzzling (noble is 24.04) since that sounds very close
+> > to our CI too. Can you please look more in to what's going on?
+>=20
+> Can I assume your CI also sets O=3D<something> then? Is the CI config
+> stuff in tree, or somewhere else?
 
+We use buildman, which in turn does separate output directories. We
+also, in Azure, have one job that uses O=3D specifically. Things are
+defiend in .gitlab-ci.yml and .azure-pipelines.yml
 
-FWIW, I've been slowing working on some major cleanups to MediaTek clocks
-to avoid that kind of restriction.
+--=20
+Tom
 
-I would also be interested to see the output of the `clk dump` command
-on this board to see if there are any other problems we have missed.
+--49PoW/c3JTvnrPQj
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
->  drivers/clk/mediatek/clk-mt7622.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk-mt7622.c
-> index 782eb14e9c5..c1cc57f2e8c 100644
-> --- a/drivers/clk/mediatek/clk-mt7622.c
-> +++ b/drivers/clk/mediatek/clk-mt7622.c
-> @@ -821,8 +821,8 @@ U_BOOT_DRIVER(mtk_clk_infracfg) = {
->  	.id = UCLASS_CLK,
->  	.of_match = mt7622_infracfg_compat,
->  	.probe = mt7622_infracfg_probe,
-> -	.priv_auto	= sizeof(struct mtk_cg_priv),
-> -	.ops = &mtk_clk_gate_ops,
-> +	.priv_auto	= sizeof(struct mtk_clk_priv),
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaahTqgAKCRAr4qD1Cr/k
+Cm4uAP4uTm0sqJA/0zPDgQaz44Qh7/CxdoZgetPuGh/lwGr4rgD9GZr77ISzM8m0
+uozmtlap8Rh/IsNKRa4I3kxM35HNBwA=
+=C7zn
+-----END PGP SIGNATURE-----
 
-While we are here, I wouldn't mind getting rid of these random tab
-indents before the `=`.
-
-> +	.ops = &mtk_clk_infrasys_ops,
->  	.flags = DM_FLAG_PRE_RELOC,
->  };
->  
-> @@ -831,8 +831,8 @@ U_BOOT_DRIVER(mtk_clk_pericfg) = {
->  	.id = UCLASS_CLK,
->  	.of_match = mt7622_pericfg_compat,
->  	.probe = mt7622_pericfg_probe,
-> -	.priv_auto	= sizeof(struct mtk_cg_priv),
-> -	.ops = &mtk_clk_gate_ops,
-> +	.priv_auto	= sizeof(struct mtk_clk_priv),
-> +	.ops = &mtk_clk_infrasys_ops,
->  	.flags = DM_FLAG_PRE_RELOC,
->  };
->  
-
-
+--49PoW/c3JTvnrPQj--
