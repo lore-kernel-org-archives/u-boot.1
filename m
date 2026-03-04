@@ -4,128 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7CBEEDEC04
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 04:23:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B055EDEC03
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 04:23:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3997083FD4;
-	Wed,  4 Mar 2026 05:22:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5F62083FDB;
+	Wed,  4 Mar 2026 05:22:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="MxGuK8aP";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="aUVibwxe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5101A83F61; Wed,  4 Mar 2026 04:44:17 +0100 (CET)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id 4B24B83F61; Wed,  4 Mar 2026 04:46:43 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DFDE83E7F
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 04:44:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 445BF83E7F
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 04:46:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ spf=pass smtp.mailfrom=boon.khai.ng@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ePARaU8nbj0NON5hJnDK79CpVPotMOfpeXpCBGP44X4KsPfvGYwlfnUyfIBqy9rz4r/N+KQSK/626w2yYo8VKwTBJnargPP+k5OOuiEf3XST2TRRlakCX2fTlFtx5Vp/JeS96j0T86TZZREuEqS9V0I9Ld0ESSyAd9iPSFWyXttVmK9xXifZxgKl2UH4qKNfA1xCJWLvykfXLOvNsf4ADv3l58hoAraZYQ0qCTByHykq2GYJbo3FSMzv06Vka91hyTVYXjGDlC2U78XMJbv/P4qN5sYWfDKWVYXmNfPLKqcwFYAYyho2UNr00RlnlpRyidt9kGSWLj1DXAcxn6aYUA==
+ b=CIc1TZRwh9V/4IA9Ok++Zx87oY5D3bgvc2gW5TT8K2jojad41X3qI3gFEnlnbLqXTmiCzf38eurq4zPGB372pLtVWG/5fBuQcIsWuxAWiStHT3tz0fvQHNVH0pDV/BA3/YG31c4tJLfug8pGbgQE0q/dzX/CgYkMigbyhk/xM/Qqhgz2O1y4sKrNZZVtCMzUsRhU3u9BqHA6IImYQZ+fh8ldmpvnfq3PQ9fm4jEQ2yBamath+7769U8ADDdt6Sv3b8N5pvD+tGtgTG64AVotiYXyd7qUoYaul3Xd8cJPdMKpA2Q/gO2rAw/0vhdUpC3Z+rveOro+B9RFNfjMkFZGxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qGgR7PPFx+W8wRk8BxUZr4aps2+rrzRUcuRsFcpzySY=;
- b=IsPxAr0UyFY21Jy9mwKJ0/BaPCbF3XwHPZqagWh6p3biGRRnY5kRKiN00eE3HfkG7Q/8us3RcO9lRtJXO1pEuOElepLNSOXzr7tHct4Nf036hnZyTqxFKZhWF8od9QW9Wk9mGKaclomYyrilM0yeu/Rp45ZvfzI/rjc7Gcl4j1OTNmvyp3+GFeqIsttq/64rb6jTJb1elev+Ng3XO6EnlU3ZoLw+djMs3Sem3faqIK3wbuvtf/aCsngdCoQfRnEOI28XOWUhnFiMz8FwgZnN3x287oNs5N+Fb5pnrg5E26pKNzFGMsxTAQ4yfJ29ZBuM385yZTMpXVgPfEXIgK9mOw==
+ bh=SM9/ESF8nvyTKoZIxB1pQm3E01P/n0NOWlhx85HiM4E=;
+ b=XUYroPfO5EB2ZtdcOGiTVPwrsRzCapZtm0uoMmbYf+mOQyudB2WT7750AWdKLQv4mT6DyjqO96U2njI0rKdQ/J4j4qVb1Qm3qtbbxXwx/MqxNeh0H3LwaxNDxkRr/MJ3l8kNFjgj1PFAIPwYybq6lC8jZCHUYh9pUpnJlOp3IHnysnzW/X34soccjsrvsy7zjGuU3RtwOjhN2/IyodPLMUrZgCEUBAPjGrUlFDlKMNGP3dXQJ2oELzi4u7ph1Mpem4KD3pw1VWOdyHXZ/INmfcfoBmmZWq2MxgaE2yByib3gQ3kbG6aYvMv7TGKwX7+E5TCyZ6NrAny3Y1N2zEKo5A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qGgR7PPFx+W8wRk8BxUZr4aps2+rrzRUcuRsFcpzySY=;
- b=MxGuK8aPmjJWljwLhHmJyklHaOoyDXHrTD8ywF1+5qOmzhnWiwVwvFe8P/fGXat7rGWLNswe6x5z4LShYD5HzhZehCP8XN7z5K4Wu5aO5dzheDK4tlh2FLqu/oTEJmOygWCoetfZNG56RKiV+JaraI+ZQMruvc5XGBjV1Q3dmj26yaP3KybROyfkYalyYbAAF7Bt0G7GRJYcHYQzvwGOMAa6KAgZ0OeeG5/vlMXb7P/DLM2mDXo24ITndiYzro++H4pa3twh0Teb+cOopEVWoF9esTmMCeewPPgY/tGNQtnFPDJN6j/ieNNrK9Akbs9dNpRCJrLdkGi8r/PwD4lu7A==
+ bh=SM9/ESF8nvyTKoZIxB1pQm3E01P/n0NOWlhx85HiM4E=;
+ b=aUVibwxePeA8M1uTKXfgT97QbDf+lWxpIm1D0xifcwnlhz/1yMwuZp0Ml/0V9gmEnfrFNKWNpMPf9YF8Nb/YXmYQpU+X5FHZ/Sd2ia3S8qQ/Y4sO+YPV+OYKUzQQv/QY3YE4CUu+W1lLph0te8HK/aLh9aOQJmLh8aYWR+Eicn1LTVVyJdAdoWbfXRo4xuuu6Q6gxzZL6VpSLZeipXIhHyP1MM2PW8Cf+quCkaAp5tJIuSPvni6SZZXkHI6gKAVKGkV6wZ8k1c8tLRjDuZruFNVISZ2IbTSZ3GY4iOEeqC0GVKJ3WVEWPaesh/FaG1vKBXTEcRJdXTZEqCLUV47fgg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by PH0PR03MB6574.namprd03.prod.outlook.com (2603:10b6:510:b9::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Wed, 4 Mar
- 2026 03:44:11 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
- 03:44:11 +0000
-From: dinesh.maniyam@altera.com
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
+ by DS7PR03MB8072.namprd03.prod.outlook.com (2603:10b6:8:252::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.21; Wed, 4 Mar
+ 2026 03:46:35 +0000
+Received: from SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53]) by SA3PR03MB7187.namprd03.prod.outlook.com
+ ([fe80::7000:d55:b39c:2e53%7]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
+ 03:46:35 +0000
+From: Boon Khai Ng <boon.khai.ng@altera.com>
+To: U-boot Openlist <u-boot@lists.denx.de>
+Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Dinesh Maniyam <dinesh.maniyam@altera.com>, Marek Vasut <marex@denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Tien Fong <tien.fong.chee@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
- Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH] arm: socfpga: Ensure FPGA in user mode before enabling the
- bridges
-Date: Wed,  4 Mar 2026 11:43:54 +0800
-Message-ID: <20260304034354.2871-1-dinesh.maniyam@altera.com>
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>, Tom Rini <trini@konsulko.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Chen Huei Lok <chen.huei.lok@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>
+Subject: [PATCH v1] arm: dts: agilex5: Set DTB filename and kernel node
+ removal for non-secure boot
+Date: Wed,  4 Mar 2026 11:46:23 +0800
+Message-ID: <20260304034623.13323-1-boon.khai.ng@altera.com>
 X-Mailer: git-send-email 2.43.7
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0265.namprd03.prod.outlook.com
- (2603:10b6:a03:3a0::30) To PH7PR03MB6942.namprd03.prod.outlook.com
- (2603:10b6:510:157::18)
+X-ClientProxiedBy: SJ0PR03CA0390.namprd03.prod.outlook.com
+ (2603:10b6:a03:3a1::35) To SA3PR03MB7187.namprd03.prod.outlook.com
+ (2603:10b6:806:2f6::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|PH0PR03MB6574:EE_
-X-MS-Office365-Filtering-Correlation-Id: 95c71966-f739-45bb-c21d-08de79a04c12
+X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|DS7PR03MB8072:EE_
+X-MS-Office365-Filtering-Correlation-Id: 52892fb4-c11c-480b-db49-08de79a0a1dd
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: FnQcP1EWHAIaSF0EPneck42DYultt+FIiiJPVSrAMDsvX+JUOO2yi0T2AfvsBpwFBEkiLedpMBjqBSemn+wd6qmwY4EwueRVBqrulVXjF9LRppNjclBf2h91/7GhnwHG7sULrGCOr+l7qvXftB4z4aWxpJ4rXZc+yo6Nwk9FOnTWRQHAjj0UEYwrF3vT6bBQGFbQXl/zWdNkRIQTGu+62ogWjiE1ONWnoL/n8HJICIJvpXkfhjq2UlwW9I4W+cCzZ7s8YfUe8KHQPvGYO6JgqgKv+kwMYOJBMeDKexPY8nmHHEfR58VkZJiVnb0EtSl6v+J9fY/CplQBvFESwfq7jOi83FriYbeMz9NRfkJsigu46P2kk7ngH8YyS5+MgoymMwmdKJqfmPRzLqGcqV7/0oPYBjhDXCVKy9GujSmzcu8OFSVWlgl2w236g1r/blrxIeCGyfDJyP1SEyZ2vF/wmmuki8i8WK3Lvp0P0r2BlIl3qkQ2PceFqf1snwn/2AB5swMEQ3bl4XFb5Zu4juN2rgFGwaC2iQl/o77rJNj78A4iWEWXu1UoH3ZvCvT4Zc0YHO2ol36nfQV+750b+yjkff4njiRXcx3tHwo/+cIofaXgAbEC2+Ra66ifRHTWOmQh8zh5D6lBbJQ3xPQ7Dcgc9/wS2C+UMzxIOXWASyEaNsX3ZJAhwsCLprk6GULa9DZMFCkJVeZdL+KIoxCpW5s3M7JuiJ01sh6nVDTHsVa/L+8=
+X-Microsoft-Antispam-Message-Info: ZE03m5qK34FprC+Dj38UUya0SQhQ63gzpytxtDeRJj9wsnbbO0Bwccdshg8QAeLbk5T64WM6IKyOkYIgkFW2Njd8urhsn4x1ylolYXtMsFMi5TlYpgOsDSR0By6fcD+TbtX6mb4ypZutMTLImd7HOYLvkpEQpKspjoE2m7aiZ4dRcod+XKvpefHoS2Y0SUTkTIixzNpJuER4K6sQ/RFjfANd6Nw+MOtXIOtTknKHPJZJjRbm6Y1HaQGCmMu4487xc4lsSrqffj/Nwb8iZsoxQu72et6URK+tiF9BeZiCzN8vSdYH2Bp/vnvz6wf9td2pxMY2tNdXgo51AxyYX/kBPIe4najp7GcdmOklUyTGDX98yVJdivfWAjP6R+VQGYjo+6IimSS9yXFqe3sxhxSfWPyHaIp5Ce5it7xiQbnITUfR6Wo8zP7V6yzvEkGhGKBZqcZku3cwoDUQs5XgjBNCnmeN3JFTeHKDzzRfUw1EQbFHhNsYdwrf/qla7L/bkOBcLorbcnYJnKPfdwf6mXewIQqWpwp0bx3mKzwMdUwjsF8Zg/JxdcRyZAAanCGrgQj9tiljcGNWuxMY/8vVRsMI2aexEfahYiIlRGRXp5fratak5zNPHrt+ulOMq4DCC/f8etaOMkrvf4Yg+EtPkuUsb4yFtWA8JHu+P1Z1tdVp+5rZCHu0w3hS+eM4/zA3xlN/rc4eNLJfJfHkpDEHwbY9elL+a1TdtdhYR6of9qHThNs=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kYqrgr55nFP0TxPmObmPLyGjouqz+UL3CE2gvxxLk5cTloeRCFqBqrY0wNiM?=
- =?us-ascii?Q?fS92fkY2P7i1MqEGM1pZdQ5Ru30qwZbBGnU4AOAPKovMiP6cyBw9WLD+/2Or?=
- =?us-ascii?Q?BjMHFGZ0BYrl+c5sMetizrneazq8Yrikw2tXDtX5MnZgfE8R/uUz/Ct2axcP?=
- =?us-ascii?Q?pZQuuwSEVSHv/bumsj8pTFvZgVH4lmn2TOvOVdCQoaAE6D05yuWtBsxivnRI?=
- =?us-ascii?Q?yQI2Sc0gA8Y0dsq13dq2SUm8ais120DWB1X7mZWjsXr7eSKjMoEecD27AHQd?=
- =?us-ascii?Q?gNRF9DW9xU5bt4SkSEL6o7tK6W1o6Din587gDEF66+aBoYo5E+NAYUF1FXt7?=
- =?us-ascii?Q?0WaKiAl+ryg4KpDDm5XaCUrkNjAeKwtirUcYReeYVqqngO+wgSvWMHoia+pf?=
- =?us-ascii?Q?/Qo/K1f2YkOvqLLpjIMGNAmls7SCpLXTYwRmdYvHbUO/WkrQDwFCtsRTpXU4?=
- =?us-ascii?Q?xORQtvYlCNbRxlFocRtYqFOaK1lkUGYEgmBcWz7/hH7G/FphNvg6pJA3t0NY?=
- =?us-ascii?Q?q3ZEWnYI1MNTFgBA2Xr4PThaUS9T3vmSyDYaCmfd4/o9BcbD2poKhrHgeelo?=
- =?us-ascii?Q?gumVa+jMrIbrCJFfk1OQV0olyEo85ZKkztI4NjvX3I7JvcSpE6jJYMQHoJr3?=
- =?us-ascii?Q?oLNOMefCc9aaK+MNfQBw0lVC4vK9ECh12CrPBS5XsedyAkgjPsxhoX3FhzQA?=
- =?us-ascii?Q?8vnn2LMmn4Njp8tUrXXlsT+EekEh1CTR0EdICofX4p36Zu5tvPACaVkyAN18?=
- =?us-ascii?Q?GbUIRbes8vHHEklqcH2IAnhzqcmkjZg28eILInmGPSPdQIjJHrxkoPNrwVnj?=
- =?us-ascii?Q?4F/lN8ZStJ0u8H0cQeMWKvZ/3ruIrrdPbjR/0ppElQ4C/Jjv+vR07DZUpV19?=
- =?us-ascii?Q?kR0gWLQAakEpxRwwjRUXU9nIPVWoFDDzNxV6QPes5XkXZ23nWmEyS1ax2R54?=
- =?us-ascii?Q?/q7wVrzvlMi77+jaS0ad2dNk69CC4K4O6FYBAGxegq9QR16zIiHxfbRPYtHE?=
- =?us-ascii?Q?mniPUR/IqfmTzr5bjg/fefrz0rOfFgHfZuzQfRCTMjk1cq7a8mql0ygAoHyr?=
- =?us-ascii?Q?kVl2BgAPPbk4ANHpOavUDj54dWje6j5Bh/hvX/ZJL6p5q/grE5zxNwr5ro3V?=
- =?us-ascii?Q?or6WgQwu5a4045XTgsAPIyAxW6FBdaiCZmF5u1Wc1OUEpnqZeqE+CS2bCP4Z?=
- =?us-ascii?Q?YABGUrmY+E69Z8vd2FNNGS4G+MDLKmwvsN6SRXDhDFGMgtZNusL9Qmq5ecba?=
- =?us-ascii?Q?uhQwChOhb0ni7pW8WT8AYcvuSXFusMly+xZg9S6kgYTMuVPsW8VFrAQqaxbN?=
- =?us-ascii?Q?CHpzaIclxgvOWrdk+b/pQuNZXfOhBFi2Xl2e2TZopJBB/24WFBeYpfiLavrZ?=
- =?us-ascii?Q?gQUWBuAhB0SXlSJo9PsnoFuIbUI1K3HpkvNN01/FKVUGhNnbxVNqUyS/xIqJ?=
- =?us-ascii?Q?BCSDwYKXsap8moJrQ84LfJuHldMETSfxAjBwo4dlPkc+W3LpJ+1J2p80a5ty?=
- =?us-ascii?Q?5EolpAakRRII6aALju2GZO+fQD1SkYi08pDllh6e5d22h9M4bsf+Glwkz7np?=
- =?us-ascii?Q?Xc2JR71RtcLI3oUK08oCMZoqVGJP54klZUCRHk9T0kjH3mfPBPERhnbA2tJl?=
- =?us-ascii?Q?WO7qug1BusizJUnU9nk5oBjEHR60B5C3bIfoCfNvIFnpnHnZo6TrrvgbFw7+?=
- =?us-ascii?Q?Wb+A50X0x28BjSKhjhywTcrgObi4rM/3HRivWWWHVmYw6CNyPygS41l2ILA6?=
- =?us-ascii?Q?WL9U2dEaCAIdp463wpfdkIIN8hq0dVw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1d38h5j2FACPcVZohEqCBmXFSkGzZnb8VFoWcfOVcDioKBjLh0ASk8M+LK/D?=
+ =?us-ascii?Q?afmSxf8MbrI7XIJ7KyfpkErLZTMXkaNx317roK4G9LEQDhHgg7BOC+KTvyMS?=
+ =?us-ascii?Q?XKABzaksg1Tbka98eyUnq9SzDYsBJtkkXI6ACKJbHfeU7NpVfg8T0UhqsOBT?=
+ =?us-ascii?Q?pVKiJ78IPMdd+KL5DR4AZwB3k1Sq/D7XB37L4HWm948Q3tfK2anRWjEa1IW6?=
+ =?us-ascii?Q?UfrgkinlZdaEA1QZPYePgHeGAIWIgDKrybvZzuZvNyzZAgWBqlKCJJsIvE3T?=
+ =?us-ascii?Q?ip7m05bpAFn5mReOOqoE4yjelxvLLWFDRllQHWOBPmbr/vMm7+RzDLxJuzh9?=
+ =?us-ascii?Q?GdSR/mYQd4iK7fBrk3co0WVz3MFND7u7C6qTShem7uqXOTS4xt3l6FZ0RK2l?=
+ =?us-ascii?Q?V6h28/gGINSyrwlY6rLu7nXmZRZcYtb9X6EHgEoRFy3VCi8Hqf4shNpYI95p?=
+ =?us-ascii?Q?6tBw+Lr5k4LvFui8rm688Dj8WHWM2IvDnGtEUrm4hRNQ74+lGTVMzAsysp/7?=
+ =?us-ascii?Q?9qCoNo+HUJLZif///fCoO5TNJtpTbkic6vRs4S52Nt7BT2S3hH7iRlPdscSG?=
+ =?us-ascii?Q?NcUNtMpUCVwuLe68kHd0sZmM+oNmHl+P7MCECnJQv17dKpmPu9Bm9C3TNMTN?=
+ =?us-ascii?Q?AX4v9JcJXZoA+aVsbT9dQx4zpXz4+pgWrelR1441sblO0Q/clHmUe/KFPdUr?=
+ =?us-ascii?Q?FyQHMtPLsNE/VLggkbw/oIXDMdSrt7vGd37t8qLegyT5lvTYMGJcPOxumibf?=
+ =?us-ascii?Q?cy5zgfRAEDG6ZHZlTdA72ljMeO5vlgSEhM8bkCT0szavjBAxyNk7qVMnLrec?=
+ =?us-ascii?Q?ImViTkmtekxyYp3AYP4aTAJz46mK28DfHoaK3hMFROdXjGrk1n5Lf1sxnlj9?=
+ =?us-ascii?Q?eyzwWc88AG6HyzxlcDNfpewAEPU5/wNuTP2CIoROwHENhY6Tr/z8+Mx6j2a2?=
+ =?us-ascii?Q?rmeIEge9ycOmtcLp0/ERf4qI9Kj5HnjgJpxSLyHeMaVw602xOcZOR9Q7dkwJ?=
+ =?us-ascii?Q?29jM4S8zPBqsBZG6MbGjBvenCuQ9fEk+BNIUqXpV9XY27mRDpCbBFwWmvYjQ?=
+ =?us-ascii?Q?WYLGPZEVbhPAbETd0p/L7sNXkrsSq3SlSVJsM3HKduZXWpz58wmqNWVBAdjR?=
+ =?us-ascii?Q?8UCLm2AeD9jUUJ/VZbUrA/A0kRAyBSip4cY7EPfg9NMvcBghzzv3fbjuLNd/?=
+ =?us-ascii?Q?t45m7MLQSGrYAQOb5a98x57h9mQcBWyTVEtJe3keOVBpwGS08T5+Wq644c+m?=
+ =?us-ascii?Q?nug/rY9YTfIxk1mT8BudhfMWVtapWOQlZ6NpF+c13jRnWpFhwo/XEboo1PxQ?=
+ =?us-ascii?Q?zGY0sHimiUFL7w3sDJd/33DPll3PVMKJ2rioI/eDGoC+Y4CQ9mdH79/cA1tB?=
+ =?us-ascii?Q?ysjcwQf4vBywGg6SBwVJsfM0cTzL2xChalfHgk47BmPyQrj9gApiChN3t7ba?=
+ =?us-ascii?Q?0OlXqqtD1tzWmFhhGT5nXflQxHt5Db37gIsHLEhAsBUcfc+hKfTSbNTVMwXw?=
+ =?us-ascii?Q?2UqUJk5MgX0PHhIXx2B2+58T8TGboOYr78fL08kGF67Mk4k3P4aB0sWkCOjj?=
+ =?us-ascii?Q?/TJZvqjP44Iee46/QvkPMLnoPnSAtZZXmrnxkxcDqretIFnzDxHycSQaPPIf?=
+ =?us-ascii?Q?yOxlHgDlEB40ZGmRp4Dq/S1X69HQvGfVORCSFK9Hk/iZhLyZExR6K9hYprGq?=
+ =?us-ascii?Q?sOhzsT2Xx7CyKwJJ3vBJK0XLazMYXiNhRXY5I5q8SEfi1V+OaowL7xNk95pv?=
+ =?us-ascii?Q?6fijkQqvOA=3D=3D?=
 X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95c71966-f739-45bb-c21d-08de79a04c12
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52892fb4-c11c-480b-db49-08de79a0a1dd
+X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 03:44:11.4245 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 03:46:35.3756 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: oOUuwnFNjH/FzZuhetEBTJ54oDIoab3W9DLEVPyp9ymKy2QWojaNCkXq2o49pXPNnaLPQowbtJABIifKUVsyFC/aFkqtX9uq2Rcs+/RPQnw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6574
+X-MS-Exchange-CrossTenant-UserPrincipalName: XRh3ZJklN4nI8KK/wN7WSAXKr3RH/sNyP3GLK6Z6ri+A9YoFgt+yDug6/Ddh5QD9Adc/xYOzoANuygzjgBjDjg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB8072
 X-Mailman-Approved-At: Wed, 04 Mar 2026 05:22:07 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -143,50 +144,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 
-Unexpected behavior and error can occur if FPGA is accessed in unknown
-state.Always checking with FPGA in user mode is required to ensure
-system stability.
+Set the DTB filename in fdt_0_blob node and remove kernel node from binman
+node for non-secure boot scenarios.
 
-Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
 ---
- arch/arm/mach-socfpga/misc_arria10.c | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+ arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/mach-socfpga/misc_arria10.c b/arch/arm/mach-socfpga/misc_arria10.c
-index 7e0f3875b7c..6b25ab917ca 100644
---- a/arch/arm/mach-socfpga/misc_arria10.c
-+++ b/arch/arm/mach-socfpga/misc_arria10.c
-@@ -13,6 +13,7 @@
- #include <ns16550.h>
- #include <spi_flash.h>
- #include <watchdog.h>
-+#include <asm/arch/fpga_manager.h>
- #include <asm/arch/misc.h>
- #include <asm/arch/pinmux.h>
- #include <asm/arch/reset_manager.h>
-@@ -126,10 +127,16 @@ int print_cpuinfo(void)
- 
- void do_bridge_reset(int enable, unsigned int mask)
- {
--	if (enable)
--		socfpga_reset_deassert_bridges_handoff();
--	else
-+	if (enable) {
-+		if (is_fpgamgr_user_mode()) {
-+			socfpga_reset_deassert_bridges_handoff();
-+		} else {
-+			puts("Bridges: Failed to enable because FPGA is not ");
-+			puts("in user mode\n");
-+		}
-+	} else {
- 		socfpga_bridges_reset();
-+	}
- }
- 
- /*
+diff --git a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+index c03f78b2fdf..b4b8f54b969 100644
+--- a/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_agilex5_socdk-u-boot.dtsi
+@@ -217,3 +217,13 @@
+ 		};
+ 	};
+ };
++
++#if !defined(CONFIG_SOCFPGA_SECURE_VAB_AUTH)
++&fdt_0_blob {
++	filename = "arch/arm/dts/socfpga_agilex5_socdk.dtb";
++};
++
++&binman {
++	/delete-node/ kernel;
++};
++#endif
 -- 
 2.43.7
 
