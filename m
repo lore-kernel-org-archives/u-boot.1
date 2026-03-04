@@ -4,116 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70464EF8FFC
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 16:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B841CEF8FFC
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 16:33:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B940C838BB;
-	Wed,  4 Mar 2026 17:23:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE0CA838BB;
+	Wed,  4 Mar 2026 17:33:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="umMvn4gR";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Twpj7Lfq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B80083642; Wed,  4 Mar 2026 17:23:50 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EADB3839A8; Wed,  4 Mar 2026 17:33:44 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A8F83F86
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 17:23:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDF5E83642
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 17:33:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-48372efa020so62629635e9.2
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 08:23:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1772641427; x=1773246227; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=dMekguA8jdl5ZFuyXD/NcG3LhwOMmuMycntzWBlcvgU=;
- b=umMvn4gRGviDv6lFtV0yu9fDt8YpViC3nkxBfoNGRQB517HkKMAbs1Gj5k4EzDfdFj
- 5VYgSwKM9RTpbntdrAIUwXlKOG6RtQ67uTnsbL+krL4IegjVVxqshIR3vfAxQ5xSYww1
- aoxVfTe5jp7Ch9ITv8ES1hcx1dUFAvLmSWkpgOVRRvscizfTAytp1f6A0qOyHPoYiRqq
- RZ7XvhwcVfiSpp56HdTzcKYIFQTj2Le07ab9SvyqjuFTiM8NswlqQEwX38ImgeTGMLlB
- 4SZY6URhlrQO8KM7SDh5vIbdaoYGLw+Jmpbawlf+qWl/QMVLqxz9yu/0kl4Fwdh1MDK9
- gGAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772641427; x=1773246227;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dMekguA8jdl5ZFuyXD/NcG3LhwOMmuMycntzWBlcvgU=;
- b=nAAnhVVgbe4Ooo05aqWTNX+a6x3ppzlGuxvsyCsGNRxqJ/H3+PeCb+PaILz/WINgu/
- MuUtGDF96xURb90GxBjcKues5dNQEwyqtL7Tx0ibbminJDQOy7ynhvPqryXVYS/GXLwu
- MYB2X9nqlV92oE7D5LzFgY9Hq2/o/PpkxNFUr+8pRNhytm/yQHV531dnP2VvYEZQGZlu
- H4janrMzWTKnh9r8OUxnVzj1uo2G3ARtIXJ645sF09XfXgjZsdQGL95AjtCqYvPXsfpo
- Z5VebdyOiLCS2o9neGha5rilaRG2MJVRemJ0GTaNyDDE7FEBZNw58C8WnqBwRDsKiuqJ
- UXGw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6v+IVnwxL8VeAURioA4l8IivwUf75CBzAFWw6vbEd1vimzbGKbeiWK1rrstl+yzg1+NaF3A8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzjAA9T6usmBhLEAlgrX8Fy6FxfjcO7xa8VVJ86i+NdVq4RTtOz
- uMHbpoKOPo+G7tyLrhni4KMdimkW9beIeW2R/ZtRmYoKBXwL4W9Ad6DhinyVlBEVf14=
-X-Gm-Gg: ATEYQzxCEies/qzay39IJP/Bro1cpw8D87ynnKBOCQqTxR2xYubTH6ui0KUikxw1z0O
- sh6ycEUiGCo9YELG4I9n6PloJuzehWdwzuzbuiQmK+rb61SJQtqNWexk3CPHY5982kfJrsxhSZW
- 8R6trT+otIR5B0r6JeYyxStsnbOwJl81zwBkSx9BJuZNqe1KkKHPR+favUtxS2NqqJfIY7AOM79
- u2jpAHzolSDs+EvMr+a+adk6vrAQtqGJNG3wgbDQlWCGUnMJojtHdBD+FruPAyNqPsa0ZnYm5ni
- lNkdey0Ghr16Dj6/gyMBqJP6C/zsRJk30qgmbA/M9fhGW3puG7RGLP5TxADJleLDt/j4NZ+YCkf
- lMgF6A1A+PwekxZ6Ga6fFItXr81TGOy4f8+CNGQTVZ7MARPeY3MBeJ3q8VJWljGKgTASUSMW7E8
- 3NI21N9XX8iDcctj5HwoIxuVyQkAQ7GXhG8BfkZGCRKbaZyGT3EAw9bu4rYUFawn/AaoapkqZJU
- XDI
-X-Received: by 2002:a05:600c:3ba2:b0:47a:814c:ee95 with SMTP id
- 5b1f17b1804b1-4851984bc7dmr45180575e9.12.1772641426530; 
- Wed, 04 Mar 2026 08:23:46 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:106d:1080:da6:dde3:e477:94d2?
- ([2a01:e0a:106d:1080:da6:dde3:e477:94d2])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439b503425asm26636633f8f.25.2026.03.04.08.23.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Mar 2026 08:23:46 -0800 (PST)
-Message-ID: <d25dd1a8-282a-4c0b-84fc-85dc29a7edc8@linaro.org>
-Date: Wed, 4 Mar 2026 17:23:45 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ltfAhI0kHkoKJNJ892sGLq4NUzUM5KHdbb69NjjVI2pO2yaLMTQmewmqJ6hHYAEQqCo5fUuri/dTancxR+3XmL6o+CqMY8Zlyf/bEobW5jKHWjcQ6WjIIxsxs2/5PPc7bIj0nwzXpesAOhQ4Egf7UDlBvHTimitDovsiPKI/qsRDPqDnWAs4ix3CfW0v+dOJz3OUA3JFpZUUAmObnoZ7SmtfiwSmjd1q6mgS+keHBWLFpRRo6uJDq5P4by3wGWoaiW3xWl6105XmSqp1lP3D+jgiASKi7eHBrzuDX75nLZnM5LcjjooHJqNQRkDDPpN+QKRAPetwt0TTQ9WpCO/60Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sMoCdTDttkuGfUdM42ZN2WzvONAjDE9sNZHSOUQon6s=;
+ b=fdxBN/OGl/idRmCnGBc+6moPvP6zbtI4da1ntVEisxmO2O4pi1tkp4MNi5qW12Z2zqlI3j7nsPpNGHyffKplC3eaq4SyuoNRUPc/zjdTsWjSt7+EYqPjZnn/XxwjAEbEJ8Ar8ggO0UasSLDvOQ+X4tlv91QAjraqD4AirlVeOQz1R4QWOIVOwOUX72FRsxl/lwbB+E7ES0FkP5c3d7qpi1Cc09yvzpeotP9kjpqbm7Ae5fnanhSOH+K7X0ceQ8RbbCpSkCO2VG2i9vvJ7a9lDmjmSuS6tDw3wgDIFD39cZlscdt1rcfn9Ml4kLo+xtvX1xmCljRrTFJHpXNYkcsseg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sMoCdTDttkuGfUdM42ZN2WzvONAjDE9sNZHSOUQon6s=;
+ b=Twpj7Lfq/ggglAMKoxKg20g40nbKrCItJcIUC7RRDydPf/ofU3aJXc0jJU6x/SklXiDYFCvETDLn/yHmEHbb1pkOYcCap8G1zxgqJ/kMAGgjs9GRsMR73TGrgtlEmircGtHiR2jIY/aBy8Uhb8UFLD4wSa2xADAZMfksJcOrmq0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com (2603:10a6:150:2be::5)
+ by PA1PR04MB10940.eurprd04.prod.outlook.com (2603:10a6:102:480::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Wed, 4 Mar
+ 2026 16:33:40 +0000
+Received: from GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78]) by GVXPR04MB12038.eurprd04.prod.outlook.com
+ ([fe80::6c04:8947:f2f0:5e78%6]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
+ 16:33:39 +0000
+Message-ID: <ff92c314-b0fb-48ae-acf1-195ecb3163e7@cherry.de>
+Date: Wed, 4 Mar 2026 17:33:36 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] fastboot: Add UFS flash backend
-To: Ruitong Su <suruitong@lixiang.com>, u-boot@lists.denx.de
-Cc: mkorpershoek@kernel.org, trini@konsulko.com
-References: <20260303062926.3335004-1-suruitong@lixiang.com>
- <20260303062926.3335004-2-suruitong@lixiang.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260303062926.3335004-2-suruitong@lixiang.com>
+Subject: Re: [PATCH] FIT: Address Secure Boot Bypass for Signed FIT Images
+To: Sascha Hauer <s.hauer@pengutronix.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20260302220937.3682128-1-trini@konsulko.com>
+ <aaff4oDKlkINa8H7@pengutronix.de>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <aaff4oDKlkINa8H7@pengutronix.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0902CA0060.eurprd09.prod.outlook.com
+ (2603:10a6:802:1::49) To GVXPR04MB12038.eurprd04.prod.outlook.com
+ (2603:10a6:150:2be::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12038:EE_|PA1PR04MB10940:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3597b82-95d6-4ebf-7e46-08de7a0bca97
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|10070799003|376014|366016|7142099003; 
+X-Microsoft-Antispam-Message-Info: hFUUGYa+XTuiE9ZD29g13xBrZt4mx0KW+MiFDmpqtc2/p+z9CNcsFoyUWQ4Sv9sMNy+SKfBBIF006ACXKSZp4m9xPJ8JUmx/FsujSg1r1ovTehbySUvyqk9AUGvMXgd8w0uTyMdc2CiJpStjKVlDcJXOLEEP97F+5Nn1dTHfzoB1nZEt/rNZ+jqJIyLiFspRFdCufXIMn16kK1nJkb4PDQ4T6ZJmuXVwjH/UYO3xXhMWYi4w4foNSCn1Srehurl84jaKr3gMTYo1yic7q7+oiDp7N3fiTDa43Q6omLgTmrEQG8A4ZtCq1XMjpWhwqvGPyw4MQOqnV7gp7cCy+gyOq1J8rCJE3fcNCIzuKft/EZPrwS4wt/CdPLehnPULAXn98sIP8BnJIzmV93nj5q/Cz5eECs8Lq8kVxc4JfGtzz/Y5m29MklMfdCV+kC4Xz5yaFWLJFc6c1Oy9QmwAmWRJyrIEVV+gVOHHjuEXQZ7ESD/YWcLTfcvjrQ06InBHB7psT3ZBIaoisQlLF1IcYrwLL4LLu4yk7I3wz/06pkOdKfZZyKcWtPdhan26A3l37XDoWlj7wlFZ9krtM3/WzFIWVT7g8Wy9EcWyobDU3brn1QYYRhLiYntMGbRqf/kmo1nuKmXlsFSRLYccztCdoIPL1nLlLRkhYPIqYD+ynoCicm/j9UXmoVvxxtXsdOtkyQxjz8goq4qUHkqV7u20sJjV1A4HKyIN0GrHnS9EZE/A8EE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GVXPR04MB12038.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(10070799003)(376014)(366016)(7142099003); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M3FLMnoyeFhLL1FENTl0VjM0QkNJRStobVhobVVkOHg3OUZQYlJCRUpXWlBj?=
+ =?utf-8?B?TFFiOUx6WkU4M0Y2emRlK1JGeE5uVytJZklVSmx1QncrakN6OWRTa2xQVkN1?=
+ =?utf-8?B?cjNhVXZQaVIvd3YvRjBWQ25tWG1ZUVM2bmQ0QW9jM3NyOU85NmdDTDJuanRO?=
+ =?utf-8?B?dWp5VnF3N0NjdXJHeHNhT2RDbTVrMWl4ZWQyaHRUTzdBUFZPQzJ6NXV2Y0Q0?=
+ =?utf-8?B?QUpDNTI5emtpWkJhSk9aY042MW1Yd3k0bC85M2RxMkdSUURJZUtsK3FJQWVz?=
+ =?utf-8?B?MG84MG4yYndva1NQTWZCbmYzVFkxMlpYNEpaUWRsOVRuQ0RTQkdMdUpiMnVV?=
+ =?utf-8?B?Y1FkVXZ1ajFKRmRGRnovRDFjR2R2YWlxbWlJZlZSdXNCbTNNQkZUcnArc2pB?=
+ =?utf-8?B?NnpDR1lqN25xNlFiUzR2dFBBTXM0ai9lVENnZ1c2ejlweWFVQ3RqZmNzLzNN?=
+ =?utf-8?B?QnNSdzNNUG5GdXcxdzNXc1R2M2RsZENBZm4zbS83ZnJxOC91amZTdGxDb3hx?=
+ =?utf-8?B?aUppbXJaMWdvT1NSSEMzNjRQS3lGM3k2TTNRWmZ5VUlIemhYMTJqdXhWK0JI?=
+ =?utf-8?B?YUVmWllqRXNMQ0VMUlFQZWlyUnlYR0NZbjZ4Ym14MEIzd2dTTmVQV0tMNWYr?=
+ =?utf-8?B?QUlYTDRTRW9WVHNPYldGQlBpOENnMU95U1hReGxYaVZnZjBsUUZOZU90T2o4?=
+ =?utf-8?B?bGlBZ1BRa1RmN21nbmJ2ZnhsTFd5c2RvdHJrL2E1bFR0bU9LWWpTckJpMWZC?=
+ =?utf-8?B?dUpCUHhTaXdPUE9mRkgxU013WXNWUFk4dUpXVS9VcS9rUC9DRmdQbFY4TGxP?=
+ =?utf-8?B?YjZJeTdSL0xkeG5GQ2VEdWltWlMrbmNNTTFLU0c1ZkU0YWdrb29vWW4zclBz?=
+ =?utf-8?B?M1hOdXdvWkNYMjQxU25BaEpZSFNhaFhSVnFhRUFHTzZLRFRtZk9nOHBLazkr?=
+ =?utf-8?B?UnJjdnIwaTVTVFBsZmFWMUJ2Z29Ibkp1N0dRdGo1NGJGbS80K1BKcWJWUUFz?=
+ =?utf-8?B?MVhuSkg2aFdnRmhRbktEWStZOFJBWjV1MkluR1M0MHRqYUxHYWE4TmR5VUoy?=
+ =?utf-8?B?bVh6SHc2anN5UzE5dEh4cUxaK0pSM25QMFozbnMxYmszeHIxOEp0bUpPbUpm?=
+ =?utf-8?B?cmhoNW1zNzNJTVNtRFp1ekRQNnIycmpPalVrSUpiWnErZlUyblZLTmpqd05G?=
+ =?utf-8?B?WDZ5NlFtU1h3ckF2L0dKaHplLzVvVG81a204Z0VFV0RkamtUVE9IT0JsMVgv?=
+ =?utf-8?B?TUJPSGVhSWQ4VEplbU9ZZjZ2elA3dE40SWZHOTM1N2hMQTlrMG9hUVVpbkpM?=
+ =?utf-8?B?cS9mMytQdzNmdFE1clR2ZFdoajkzSW9COUltWTVMOEp1eHozdHNHUG1vWHdM?=
+ =?utf-8?B?S3htRlNvVzhibHJSeXRFbWNBY0FwNmgwbEJNVWN0WmRvRVJhYVlqQ1ZUTHN5?=
+ =?utf-8?B?U3ZwdTgxYnBHSFN5VDA0VWtzZ3F3N2tLTnlaaERoOUZhTVRtbGkwOXR4Mmp3?=
+ =?utf-8?B?VlpwejAvQnlROElieDQ0MHQzZmJnL0NmVFVBblNVUGhvbXpuOXlsc3BqdW94?=
+ =?utf-8?B?cDJEQitVUUFsd1o5aXVBYXRCY1BXZnpic3djNThiSHgxb1orVHZ3Sm9YcE5h?=
+ =?utf-8?B?SS9vQi9IYXgzdVB4NkhLWkV3OXBkeDgzOUtINVpkOWR1dytqZllGNGNHUkha?=
+ =?utf-8?B?RzdDMlN6VFJGT1dYVnRvTWlmZzNWMHRubytvWWNOcUpZdEdpWXRTMVlVQUti?=
+ =?utf-8?B?UXhJdDFyYkROekExK2Z1Z25LKzhIMzBUUjNQOGZ6NFc3ZHlRdDBicWxiY0k3?=
+ =?utf-8?B?blhFd25sblVOb2ozRkY5bk5ET0ZySVgxSXp3QkJYSEIzRlQyV25hWEZiK2d0?=
+ =?utf-8?B?L3puOWMyTWdXNzRDbFlkUmc1V2xBMUs1SlZOSFA2SnVPRzZhTTFpYTZIWCtV?=
+ =?utf-8?B?MUxScFUvRGxvTVdGcTJXbHlDNlNRL3cxVlM0T1VSTlgzR0VxVzlDYlRyUFBE?=
+ =?utf-8?B?bGJiMldvNVcvZFpHODUwYUhVcklkUEhBNDFUTEdFOEJDRkNXcXRJVmpQSXgx?=
+ =?utf-8?B?RjBOYW1ldmdmZkhGbHBkd2lodlVlV1lpa2dKOFg5Z1kvc21TV1JoUVlnZTNO?=
+ =?utf-8?B?OVMwMjI0cXFoc3dFbS9HU2RCanM0UWlrS0h5UGNYNVhERlB6TE9EQzl0RkNX?=
+ =?utf-8?B?b2w0SUQzWWtSQzJkd214TFFjaFk1bDZLSUw2NmlmbkRyV2xuVzY1T1UvNGFF?=
+ =?utf-8?B?ZFJUblhuQUZKR0E3bGNUWWowMVRQQ1VSbzdBeUd4Z1JxU05CM0ptL3FpeHRX?=
+ =?utf-8?B?Yjh1UzN5K041NlVPQWhyT0VEbE56blU0VHVGaE9qei9LbTMwTjBCWVYrZDR0?=
+ =?utf-8?Q?Bihr8Dct+0iLaf8Or0rJP9Mx+iRxCbQ/5OXGi?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3597b82-95d6-4ebf-7e46-08de7a0bca97
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12038.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 16:33:39.6665 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Q2PAUQerJ+hywqeeaPnsFcYElfzmt3oxUmL/tPOHVMZuatuixu7b+Ju1uLCyPHHuaXuBrRzhI8ziOzYM1Ns7Gle/UtzGjEKvAk4o4lQpc6A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10940
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,358 +143,54 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sascha,
 
-On 3/3/26 07:29, Ruitong Su wrote:
-> Add a fastboot backend for UFS (Universal Flash Storage) devices.
-> UFS devices are accessed through the SCSI subsystem, with each UFS
-> LUN exposed as a separate SCSI block device.
+On 3/4/26 8:31 AM, Sascha Hauer wrote:
+> Hi Tom,
 > 
-> The key feature is multi-LUN partition addressing using the syntax
-> "<scsi_dev>#<partition_name>" (e.g. "0#system", "1#boot_a").
-> Unqualified names fall back to the default SCSI device configured
-> via CONFIG_FASTBOOT_FLASH_UFS_DEV.
+> On Mon, Mar 02, 2026 at 04:09:37PM -0600, Tom Rini wrote:
+>> There is a flaw in how U-Boot verifies and generates signatures for FIT
+>> images. To prevent mix and match style attacks, it is recommended to
+>> use signed configurations. How this is supposed to work is documented in
+>> doc/usage/fit/signature.rst.
+>>
+>> Crucially, the `hashed-nodes` property of the `signature` node contains
+>> which nodes of the FIT device tree were hashed as part of the signature
+>> and should be verified. However, this property itself is not part of the
+>> hash and can therefore be modified by an attacker. Furthermore, the
+>> signature only contains the name of each node and not the path in the
+>> device tree to the node.
+>>
+>> This patch reworks the code to address this specific oversight.
+> 
+> As this breaks compatibility between old U-Boot and new FIT images and
+> the other way round it would be good to introduce a version field to FIT
+> images. With that at least newer U-Boot versions could print a more
 
-I get this is a cool feature, but multi-LUN is exactly like multi-block,
-so could you try to extend the block to support multiple different block
-devices instead ? no need to limit this to UFS...
+How do we decide when to bump this version?
 
-Thanks,
-Neil
+> meaningful error message than just "image verification failed" which
+> gives no clue what had actually happened.
+> 
 
-> 
-> The implementation reuses the existing fb_block helpers for raw
-> image, sparse image, and erase operations, adding only the
-> UFS-specific partition lookup and GPT handling logic on top.
-> 
-> Partition lookup uses a quiet iteration via part_get_info() instead
-> of the verbose part_get_info_by_name() / part_get_info_by_dev_and_
-> name_or_num(), which avoids noisy console output during fastboot
-> getvar probing (has-slot, partition-size queries).
-> 
-> Signed-off-by: Ruitong Su <suruitong@lixiang.com>
-> ---
->   MAINTAINERS               |   1 +
->   drivers/fastboot/Kconfig  |  30 ++++++-
->   drivers/fastboot/Makefile |   1 +
->   drivers/fastboot/fb_ufs.c | 164 ++++++++++++++++++++++++++++++++++++++
->   include/fb_ufs.h          |  49 ++++++++++++
->   5 files changed, 243 insertions(+), 2 deletions(-)
->   create mode 100644 drivers/fastboot/fb_ufs.c
->   create mode 100644 include/fb_ufs.h
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f8d4f6ee8b2..071102f47fd 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1197,6 +1197,7 @@ F:	cmd/fastboot.c
->   F:	doc/android/fastboot*.rst
->   F:	include/fastboot.h
->   F:	include/fastboot-internal.h
-> +F:	include/fb_ufs.h
->   F:	include/net/fastboot_tcp.h
->   F:	include/net/fastboot_udp.h
->   F:	drivers/fastboot/
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index 576c3ef8a45..8569bec5d9b 100644
-> --- a/drivers/fastboot/Kconfig
-> +++ b/drivers/fastboot/Kconfig
-> @@ -92,7 +92,7 @@ config FASTBOOT_FLASH
->   	bool "Enable FASTBOOT FLASH command"
->   	default y if ARCH_SUNXI && ( MMC || MTD_RAW_NAND )
->   	default y if ARCH_ROCKCHIP && MMC
-> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH || BLK
-> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || DM_SPI_FLASH || BLK || (UFS && SCSI)
->   	select IMAGE_SPARSE
->   	help
->   	  The fastboot protocol includes a "flash" command for writing
-> @@ -124,12 +124,38 @@ config FASTBOOT_FLASH_SPI
->   	bool "FASTBOOT on SPI flash"
->   	depends on DM_SPI_FLASH
->   
-> +config FASTBOOT_FLASH_UFS
-> +	bool "FASTBOOT on UFS"
-> +	depends on UFS && SCSI
-> +	help
-> +	  This enables support for the fastboot "flash" and "erase"
-> +	  commands on UFS (Universal Flash Storage) devices. UFS
-> +	  devices are accessed through the SCSI subsystem, with each
-> +	  UFS LUN exposed as a separate SCSI block device.
-> +
-> +	  Partitions are addressed using the syntax
-> +	  "<scsi_dev>#<partition_name>" (e.g. "0#system") to
-> +	  disambiguate across multiple UFS LUNs. Unqualified names
-> +	  fall back to the default SCSI device number.
-> +
->   config FASTBOOT_FLASH_BLOCK
->   	bool "FASTBOOT on block device"
->   	depends on BLK
->   
->   endchoice
->   
-> +config FASTBOOT_FLASH_UFS_DEV
-> +	int "Define FASTBOOT UFS default SCSI device number"
-> +	depends on FASTBOOT_FLASH_UFS
-> +	default 0
-> +	help
-> +	  The default SCSI device number for UFS fastboot operations.
-> +	  UFS LUNs are exposed as SCSI block devices by the UFS driver.
-> +	  Use "scsi scan" followed by "scsi info" to discover the
-> +	  mapping between SCSI device numbers and UFS LUNs. Typically
-> +	  device 0 corresponds to UFS LUN 0. When the partition name
-> +	  does not contain a "#" separator, this device is used.
-> +
->   config FASTBOOT_FLASH_MMC_DEV
->   	int "Define FASTBOOT MMC FLASH default device"
->   	depends on FASTBOOT_FLASH_MMC
-> @@ -227,7 +253,7 @@ config FASTBOOT_FLASH_BLOCK_DEVICE_ID
->   
->   config FASTBOOT_GPT_NAME
->   	string "Target name for updating GPT"
-> -	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
-> +	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && EFI_PARTITION
->   	default "gpt"
->   	help
->   	  The fastboot "flash" command supports writing the downloaded
-> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-> index a341af076d1..93a5227b737 100644
-> --- a/drivers/fastboot/Makefile
-> +++ b/drivers/fastboot/Makefile
-> @@ -7,4 +7,5 @@ obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
->   # MMC reuses block implementation
->   obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
->   obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
-> +obj-$(CONFIG_FASTBOOT_FLASH_UFS) += fb_block.o fb_ufs.o
->   obj-$(CONFIG_FASTBOOT_FLASH_SPI) += fb_spi_flash.o
-> diff --git a/drivers/fastboot/fb_ufs.c b/drivers/fastboot/fb_ufs.c
-> new file mode 100644
-> index 00000000000..1273c946491
-> --- /dev/null
-> +++ b/drivers/fastboot/fb_ufs.c
-> @@ -0,0 +1,164 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2026 Li Auto Inc.
-> + *
-> + * UFS (Universal Flash Storage) backend for fastboot.
-> + *
-> + * UFS devices in U-Boot are accessed through the SCSI subsystem, with
-> + * each UFS LUN exposed as a separate SCSI block device.  This backend
-> + * provides UFS-aware partition lookup with multi-LUN addressing, layered
-> + * on top of the generic fb_block helpers for the actual I/O.
-> + *
-> + * Partition addressing uses the syntax "<scsi_dev>#<partition_name>"
-> + * (e.g. "0#system") to disambiguate across multiple UFS LUNs.
-> + * Unqualified names fall back to CONFIG_FASTBOOT_FLASH_UFS_DEV.
-> + */
-> +
-> +#include <blk.h>
-> +#include <fastboot.h>
-> +#include <fastboot-internal.h>
-> +#include <fb_block.h>
-> +#include <fb_ufs.h>
-> +#include <image-sparse.h>
-> +#include <part.h>
-> +#include <vsprintf.h>
-> +#include <linux/printk.h>
-> +
-> +static struct blk_desc *fastboot_ufs_get_dev(char *response, int dev_num)
-> +{
-> +	struct blk_desc *dev_desc;
-> +
-> +	dev_desc = blk_get_dev("scsi", dev_num);
-> +	if (!dev_desc || dev_desc->type == DEV_TYPE_UNKNOWN) {
-> +		pr_err("invalid UFS/SCSI device %d\n", dev_num);
-> +		fastboot_fail("invalid UFS device", response);
-> +		return NULL;
-> +	}
-> +
-> +	return dev_desc;
-> +}
-> +
-> +static int fb_ufs_find_part(struct blk_desc *dev_desc, const char *name,
-> +			    struct disk_partition *info)
-> +{
-> +	int i;
-> +	int ret;
-> +
-> +	for (i = 1; ; i++) {
-> +		ret = part_get_info(dev_desc, i, info);
-> +		if (ret)
-> +			return ret;
-> +		if (!strcmp(name, (char *)info->name))
-> +			return i;
-> +	}
-> +}
-> +
-> +int fastboot_ufs_get_part_info(const char *part_name,
-> +			       struct blk_desc **dev_desc,
-> +			       struct disk_partition *part_info,
-> +			       char *response)
-> +{
-> +	int dev_num = CONFIG_FASTBOOT_FLASH_UFS_DEV;
-> +	char name_buf[32];
-> +	const char *name = part_name;
-> +	int ret;
-> +
-> +	if (!part_name || !*part_name) {
-> +		fastboot_fail("partition not given", response);
-> +		return -ENOENT;
-> +	}
-> +
-> +	/* Parse "<dev>#<name>" syntax for multi-LUN addressing */
-> +	if (strchr(part_name, '#')) {
-> +		if (sscanf(part_name, "%d#%31s", &dev_num, name_buf) != 2) {
-> +			fastboot_fail("invalid partition spec", response);
-> +			return -EINVAL;
-> +		}
-> +		name = name_buf;
-> +	}
-> +
-> +	*dev_desc = blk_get_dev("scsi", dev_num);
-> +	if (!*dev_desc || (*dev_desc)->type == DEV_TYPE_UNKNOWN) {
-> +		fastboot_fail("no such device", response);
-> +		return -ENODEV;
-> +	}
-> +
-> +	ret = fb_ufs_find_part(*dev_desc, name, part_info);
-> +	if (ret < 0) {
-> +		fastboot_fail("no such partition", response);
-> +		return -ENOENT;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +void fastboot_ufs_flash_write(const char *cmd, void *download_buffer,
-> +			      u32 download_bytes, char *response)
-> +{
-> +	struct blk_desc *dev_desc;
-> +	struct disk_partition info = {0};
-> +
-> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
-> +	{
-> +		int dev_num = CONFIG_FASTBOOT_FLASH_UFS_DEV;
-> +		char op_buf[16];
-> +		const char *op = cmd;
-> +
-> +		if (strchr(cmd, '#')) {
-> +			if (sscanf(cmd, "%d#%15s", &dev_num, op_buf) == 2)
-> +				op = op_buf;
-> +		}
-> +
-> +		if (!strcmp(op, CONFIG_FASTBOOT_GPT_NAME)) {
-> +			dev_desc = fastboot_ufs_get_dev(response, dev_num);
-> +			if (!dev_desc)
-> +				return;
-> +
-> +			printf("%s: updating GPT on scsi %d\n",
-> +			       __func__, dev_num);
-> +			if (is_valid_gpt_buf(dev_desc, download_buffer)) {
-> +				printf("%s: invalid GPT - refusing to write\n",
-> +				       __func__);
-> +				fastboot_fail("invalid GPT partition",
-> +					      response);
-> +				return;
-> +			}
-> +			if (write_mbr_and_gpt_partitions(dev_desc,
-> +							 download_buffer)) {
-> +				printf("%s: writing GPT partitions failed\n",
-> +				       __func__);
-> +				fastboot_fail("writing GPT partitions failed",
-> +					      response);
-> +				return;
-> +			}
-> +			part_init(dev_desc);
-> +			printf("........ success\n");
-> +			fastboot_okay(NULL, response);
-> +			return;
-> +		}
-> +	}
-> +#endif
-> +
-> +	if (fastboot_ufs_get_part_info(cmd, &dev_desc, &info, response) < 0)
-> +		return;
-> +
-> +	if (is_sparse_image(download_buffer)) {
-> +		fastboot_block_write_sparse_image(dev_desc, &info, cmd,
-> +						  download_buffer, response);
-> +	} else {
-> +		fastboot_block_write_raw_image(dev_desc, &info, cmd,
-> +					       download_buffer,
-> +					       download_bytes, response);
-> +	}
-> +}
-> +
-> +void fastboot_ufs_erase(const char *cmd, char *response)
-> +{
-> +	struct blk_desc *dev_desc;
-> +	struct disk_partition info;
-> +
-> +	if (fastboot_ufs_get_part_info(cmd, &dev_desc, &info, response) < 0)
-> +		return;
-> +
-> +	fastboot_block_raw_erase(dev_desc, &info, cmd, 0, response);
-> +}
-> diff --git a/include/fb_ufs.h b/include/fb_ufs.h
-> new file mode 100644
-> index 00000000000..d64d5aca81a
-> --- /dev/null
-> +++ b/include/fb_ufs.h
-> @@ -0,0 +1,49 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2026 Li Auto Inc.
-> + */
-> +
-> +#ifndef _FB_UFS_H_
-> +#define _FB_UFS_H_
-> +
-> +struct blk_desc;
-> +struct disk_partition;
-> +
-> +/**
-> + * fastboot_ufs_get_part_info() - Look up partition on UFS device
-> + *
-> + * Supports two naming conventions:
-> + *   "<scsi_dev>#<partition_name>"  -- explicit LUN targeting (e.g. "0#system")
-> + *   "<partition_name>"             -- searches on default UFS SCSI device
-> + *
-> + * @part_name: Partition specifier (see above)
-> + * @dev_desc: Pointer to returned block device descriptor
-> + * @part_info: Pointer to returned partition info
-> + * @response: Pointer to fastboot response buffer
-> + * Return: Partition number on success, negative on error
-> + */
-> +int fastboot_ufs_get_part_info(const char *part_name,
-> +			       struct blk_desc **dev_desc,
-> +			       struct disk_partition *part_info,
-> +			       char *response);
-> +
-> +/**
-> + * fastboot_ufs_flash_write() - Write downloaded image to UFS partition
-> + *
-> + * @cmd: Partition specifier ("0#system", "0#gpt", etc.)
-> + * @download_buffer: Pointer to downloaded image data
-> + * @download_bytes: Size of downloaded image
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +void fastboot_ufs_flash_write(const char *cmd, void *download_buffer,
-> +			      u32 download_bytes, char *response);
-> +
-> +/**
-> + * fastboot_ufs_erase() - Erase a UFS partition
-> + *
-> + * @cmd: Partition specifier ("0#userdata", etc.)
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +void fastboot_ufs_erase(const char *cmd, char *response);
-> +
-> +#endif /* _FB_UFS_H_ */
+Here, only signed FIT images with required = conf actually won't work as 
+far as I understood, the rest will work as usual. So we would need to 
+keep track of which version(s) of the FIT are supported by which part(s) 
+of the code, or error out saying it is not supported as soon as it is 
+parsed but it actually is supported, making incompatibility wider for no 
+reason?
 
+Not saying it's a bad idea, just that it's not as simple as putting a 
+version field in there. Also, I'm assuming this would need to be part of 
+the FIT spec. And I'm wondering if this isn't rather a shortcoming of 
+U-Boot implementation for FIT signature verification rather than an 
+issue with the spec, so why should the spec bump the version if an 
+implementer got it wrong?
+
+Cheers,
+Quentin
