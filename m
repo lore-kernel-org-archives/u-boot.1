@@ -4,113 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49600EF9014
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 16:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 642BCEF8FFC
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 17:04:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73BEA838BB;
-	Wed,  4 Mar 2026 17:58:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C56A9838BB;
+	Wed,  4 Mar 2026 18:04:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sX+2KR7h";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mdIBhn4o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9C7E839A8; Wed,  4 Mar 2026 17:58:24 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 8B1F683F61; Wed,  4 Mar 2026 18:04:16 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 821E883642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 17:58:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F4DA83642
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 18:04:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-798527f822cso71631327b3.3
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 08:58:21 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772643500; cv=none;
- d=google.com; s=arc-20240605;
- b=Om2E8vNJlL1J9ZtAJbJa7/wYekYjZWO/DfWjM/Dyga+QSxPs6TBWUOUE1HLcZGJIbj
- ZBxQAQqDEnqP8MIQCSMv9qB0HXLFGLeE5pqAVSnOR3X+66bvZKD01uV/0PD6JNf9lpA+
- rlfy2ZkTFposg2y/nGjAsVbBotEGPg1iysM85Xlr3L838LPahkqERvSy54448rcqUA2/
- Fk9SoFU33j3Wvzp+etvgH/9QRTQC2Zf08ELPWyqn0YXfUKCrvIMFPNpxPfuoCERtsvCh
- xlhYlEvphtQQONWBx8QQlJ6Ps3ZTptjrosgLI6mGlP3NV1I9Eqg9ta7+WWfzDFOc+8/4
- YvGw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=xt18cPvoWKrLT01kwXx3ulDN5ehJI7qee/sQ0YZLSa4=;
- fh=XCHfK9cvwT5KXND9XJ6v0xpO/957vqY6/yM96lKMONA=;
- b=XfsKRpm1A9rHXcSpR0XsjPqtb8RZfiIyq39i5eXtUKaZ93kPtIrsgIvn1MBmpFNxwO
- nLMkPJ95kxs80THa2iqI8636bTsCKe90m6JupsA8+4CNUyLIU0SFhR8sWz0q16+pvEfD
- I20gwYRVP2Jbv2VNClxj1nEEYGvlZPHJLLUzavMHEtaOpO1KBfuM4V5mB4gJAMc+GEAO
- y4XQHyJs0HcDEXCpLItsr+Haahs8AXdcH7nfHPe+GE0JfUSjmvfgXj7wcoy+G4wiGi73
- F/U0QGjAnI1vk3HFLAUN1bk2Q2CWlkKnOYkI1DJXl1MY2sR11h+Y1Dbxe8ZFQgej4UYP
- rQlg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d4c4cacf78so3498295a34.0
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 09:04:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1772643500; x=1773248300; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xt18cPvoWKrLT01kwXx3ulDN5ehJI7qee/sQ0YZLSa4=;
- b=sX+2KR7hXzKeCKp7jMs1kL2wjGgUYjuakG+EgrvoxVBEZx/oDstfXbgKkVKZGjoCSv
- 08lv7kmUsWamre71FPpmmixsHcpIIer8jMhaFER/x3LiDIyrSIv8Nf4MRHSQVFddVhjR
- xE6oC6krxuxgqB/Ulueev8d9WGs7u9Swiqsk8yzQlJO+JnH97lrRz/jPv7GNGJ2vSucX
- fT2vcKnzTYC7QDmzcaIGXfWAP74G7iFCF+l5kCVlEbqvT2GASmaFAx17JysUmqo5Mtcx
- BOhM0MBWNFbXrDw7ntLj5mD7VcU3stO297q64M7GLJafaCIYDqu4sQcgAqIId6VWAWgu
- DvfA==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772643853; x=1773248653;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vxT4AGCsCJ3rgHtDRDxP7fbHyfVDexnqbegFk+DCMgU=;
+ b=mdIBhn4ok7LQevSgwBTWLkBT+Hudb8PV0ur6bUPOIxriGaM6XHG2zOfqJaUbuHEFLj
+ KRFVriPlTGGtFLDjESODkDYKnTCyPKPobQsf/fSG0YN1cphPvrJbg6ow0WRznvEsLtt+
+ pAglY7dm2FEU9DIdFwRWFL/sGRrtD7n88abTtaWUdRoYl81Z1MIdNQ+0ckJYP8w1Px4v
+ TVEE+p4lmlQGaNs7tpY8FU0WxPP0s4ccijJf2AfgGvGEBqiNyeapMe1CpXH+ldOnOAzw
+ eIxclvRt5p2jTgSsryiMt3HmxyrKe0h6sy+RrRaXLscUzECKJCNl8aaTBM9N874A4ju5
+ kQZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772643500; x=1773248300;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1772643853; x=1773248653;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xt18cPvoWKrLT01kwXx3ulDN5ehJI7qee/sQ0YZLSa4=;
- b=vPTWJe2hXioqZfsqFz9nGS2XDNQsphkmEFYHpOMuynklC2ephMkHfzm8iX/fCTddv+
- sS9AfFRKkmzu97IZruqdFtFAz3XPGsrW8uCtmIMnoK9SlMrsPW5aZp1hgAme6pjH+X2t
- RvMsuEjBzLDCl38mUDPuhfHCLU1s6kBcEoj0RbdPTNq5h6uiCZFZPrvcIfTb1Q7pz5/s
- 3NAUYwgM9E4x+XGJlJNR9B9BzuGFot80ooSls5NTGGM5Hy1HJ8xiwsGbdtbMou3rqZ3D
- nrKO/Pnv7wVXRh+te+R2xcZ+qanOCJg14iV0hopUXNwwJGHDHITeC+GzFL3QT3TeZoCB
- U7dQ==
+ bh=vxT4AGCsCJ3rgHtDRDxP7fbHyfVDexnqbegFk+DCMgU=;
+ b=gmK/Yr1gW0wu9prfTQaK8wB0dLBolvEPlllcemUm0CjpGQu8vCze15c1700mepZh8l
+ d+7hdUZuq4ZZDDGXZhhM5wIoOOQdeEAfy2s21hmlRN4UYR8b8d5oKQQmn42ldEu+Wg3g
+ 9Gr/i8aqiEGLeNkoUnZ5VPfkX+DEWmz/8Jnd1JTDVDQInVrC966MtuXCmbSS7EADDUm8
+ HbqEH83/JskGC8rcD2YUDduM00D2d1QF5p73S6kxCTFpQ3J6mXf+siN6wWouZC/UwSOx
+ jYzxD2DSkp7zNaNBpegyqWmg3W3Zei/QBSOMWE0BDOdrR+DOc6CsA+bVEbLvBNQq6kBp
+ PgIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWEeZjx2PubPONnc8/unybLWkUtTnu77Lmrz5t3xDtJ+IbwOfn9JwpTBENKmWgpOhzNXU3+ilM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPds64BnvneE3g1Y7JPO4TqF9FnlOyXERgJNaufR6CVz8Y5zuc
- 3MzhSPE1wU3Wf1WuQzktX/2QJ5UAd0LwKZdoBTaKzJQwe90eOU+1W2Q8xeb58htL8CAqWhTGx3j
- ue9nVMkNRwjA33D3s3rIwPGi88BWXzJKLWvxZvNMUhA==
-X-Gm-Gg: ATEYQzxKCEr20X9r+bvPG7UYg63JxbF97U7Ia9fZkeyrxrS2Ab9AwUxkUAoiGrNebds
- Hjvrl7bmG1mhVAR1nTLbYeDH0SqFpOiwloavYDNwtuLe00ifRzE9k1VD6qlEE+r4DLCsBnrFRcv
- SxMcWbqsoJz2d13ZO36DZXSQcxZud0Vo1+sY5nJMtspiWILlq2vhdnrG4UX75lOALi2FqlVPqUv
- 05Y4/qn8gR22IeDK+Yly392RGXaoWAVJkpGnDbEk/rnk3F0OOjk1934e1vXnxKxr6ahl4LJ8dJa
- t0YbNnmYaaSpVZDa5bYPUmv5cfMxkWdjzosdgyOT1qScHEN7C3RNXyZ2r6SaCYdnNjQX+RH17Y2
- P9Vkkni1rLJQXN7XEYMm6L1r1PEu2EqLdomBUlGEyD50+YA5V+RogYEXw+zAyKHNAACUpnrAHVc
- LNJvf3IXnLy+ALCVs7bxljosRyIP+2Pf/BLVXCjYPZfPXca96Yz63p/Ck+s8wrB6KmRbmq3tPw2
- a2I9b6n6r2U9J5ERlvY3Cj/+/jcWVMCzIXI/RiYhv2M81J66iZhuR3XBym5L2HBUGjgLxTqreky
- /zNqEdqNKOogSdx1P6NJAZ5praRh91s9tGUfCjsbf1DZ
-X-Received: by 2002:a05:690e:d5b:b0:649:d33f:2273 with SMTP id
- 956f58d0204a3-64cf9b5aeddmr2139775d50.28.1772643500189; Wed, 04 Mar 2026
- 08:58:20 -0800 (PST)
+ AJvYcCWfH/unxlhpBPTQ7l8sk+yXHcYTagdUB4aRsv2a0z2C9z0SQVi1zriUAd2j07Pymj7fvP7h4AU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRJdqpAgDzo2q6DhBs5QLYryVV102l0qurlrmmhHzaRbQjjPky
+ 4AJLWMobTCeYrdP/nNdIoDHV5wKx86I0JfSrgkUgLniI33+ry+6K5dcHTAcN3TqSiidk33yTY8K
+ ccqWL
+X-Gm-Gg: ATEYQzzdAyFodk/2t+KgddwB7DEkV369G9mwhIVyYXnBcmbvLTqXewy7ujlEAmT5BgJ
+ 4cLXdu+AegWpR8s+pwjFaxtkNd4wJ0nrXTbqaY2Vr83+UwbKz45FpEZOko4GVT+9sU1aNzGm0m4
+ veVuGPydLEu5cCwA+9XxK418v0+i9O1cDu8T/vVn4eTIIHUHrZxEZwcgfuj2RXatTscRoxLS9US
+ 86XpoDhJ9D3/b5i5f4FkcVvPf5BfD7sDL/EMkIr13FCA6340PtDcycZGLdlqX/KIPOliUCYvKUz
+ o6fJFB2YkR/LKXdjIpmhl2xZ8MDLLFyM2L+KPx54CiSk8gVDpB4bLJge2vXBw36GrAjrFAfrTsP
+ lVJjFy3UuMdA/7DWA361pJVB/nVzfWMp7ckMUY8fbNi/ZfQDmNLY/K4/Iy8rSWY7Tou85cC8tud
+ 82q5Y6a6lV/lYGSp/mi5Lcim+nDKFq
+X-Received: by 2002:a05:6830:6004:b0:7c9:5959:8de with SMTP id
+ 46e09a7af769-7d6c7f5e597mr1753043a34.9.1772643852787; 
+ Wed, 04 Mar 2026 09:04:12 -0800 (PST)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:d719:8353:352f:b2e0])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d586653d8csm17355260a34.22.2026.03.04.09.04.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Mar 2026 09:04:12 -0800 (PST)
+From: David Lechner <dlechner@baylibre.com>
+Date: Wed, 04 Mar 2026 11:04:03 -0600
+Subject: [PATCH] clk: mediatek: mt8188: fix CLK_TOP_CLK26M rate
 MIME-Version: 1.0
-References: <20260214024736.3726811-1-simon.glass@canonical.com>
- <177256385549.3975993.592734328770415000.b4-ty@konsulko.com>
- <20260304-robe-praising-5509e3a984cd@spud>
- <20260304150145.GX1388590@bill-the-cat>
- <20260304-acquaint-wager-688fd7fbae6a@spud>
- <20260304151154.GY1388590@bill-the-cat>
- <20260304-germproof-gawk-d26040529131@spud>
- <20260304154549.GZ1388590@bill-the-cat>
-In-Reply-To: <20260304154549.GZ1388590@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 4 Mar 2026 18:57:42 +0200
-X-Gm-Features: AaiRm50O50hB2cBnTxUp6RyJoMrRZy05J_yoAV2tOjcIef9Xx698ptCmbJ4ATJg
-Message-ID: <CAC_iWjKehyCeLfmPWGUHAHF5YXaynWMzyYnuc-wqZmDmjQQnZg@mail.gmail.com>
-Subject: Re: [PATCH] kbuild: unexport sub_make_done to fix child make
- invocations
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor@kernel.org>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, 
- Simon Glass <simon.glass@canonical.com>, Sughosh Ganu <sughosh.ganu@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260304-clk-mtk-fix-mt8188-rates-v1-1-c71fb26179b3@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MSwqAMAwFryJZG2itn+pVxEWpUYNfWhFBvLvB1
+ TAw7z0QKTBFaJIHAl0ced9EdJqAn9w2EnIvDpnKSmVUjn6ZcT1nHPgWWm0tBndSxNpXxjib674
+ oQeZHIGn+67Z73w9WCf0VagAAAA==
+X-Change-ID: 20260304-clk-mtk-fix-mt8188-rates-9c733a841d56
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Julien Masson <jmasson@baylibre.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1348; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=0KIQRmU8hnCWLpp6g0ByZBacqzHS0xSi9/xqBfZTZrM=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpqGYFB41vY1fqCkoAnxCJtWAaZPNcsPDvK7Z1Z
+ oMJ2+ChQmGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaahmBRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AglYH/1wBkP6Z1zESaX5vgncTP35bIO9xBqUo/wARzma
+ tBZ9c81lYffsyDD1odyopaGlIc0aQC0ATmmFmkbJXbfVKA08WUFt7Hx9E1zw+1A9Y6GP7Hk6WvM
+ wlHwppibgpX+65aCoOMTTXyGU0Ac0LHI0aypsk70e2nH6mzD/e1L8y4c6LZ3eIaKy2rv9uJOz8i
+ W4JjILUfy/5M++HeSGQKLRekAa6YF6j7Lnje9B8sYkRR/QVUzJL5WwM9RtLISeDcFuYxlsZd4lq
+ A033m0jD5rsygUauE4/T5qf26BAthmRPmN3HkjW87NIDNlU5x7Oa4zuQq9qsQgC7wzH1AycDAr6
+ 97NE=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,110 +123,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Change CLK_TOP_CLK26M rate from 260_000_000 to 26_000_000. As the name
+implies, this clocks is 26 MHz, not 260 MHz.
 
+Fixes: 11f3cc46322a ("clk: mediatek: add MT8188 clock driver")
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+This fixes a bug in master, the intention is for this to go through
+master. I have some other changes prepared (not sent yet) for the next
+branch that will conflict with this. I assume the thing to do there is
+wait for the next rc release when master gets merged back into next?
+---
+ drivers/clk/mediatek/clk-mt8188.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk-mt8188.c
+index 64aeaa5949f..5a38fb0fd49 100644
+--- a/drivers/clk/mediatek/clk-mt8188.c
++++ b/drivers/clk/mediatek/clk-mt8188.c
+@@ -98,7 +98,7 @@ static const struct mtk_fixed_clk top_fixed_clks[] = {
+ 	FIXED_CLK0(CLK_TOP_466M_FMEM, 533000000),
+ 	FIXED_CLK0(CLK_TOP_PEXTP_PIPE, 250000000),
+ 	FIXED_CLK0(CLK_TOP_DSI_PHY, 500000000),
+-	FIXED_CLK0(CLK_TOP_CLK26M, 260000000),
++	FIXED_CLK0(CLK_TOP_CLK26M, 26000000),
+ 	FIXED_CLK0(CLK_TOP_CLK32K, 32000),
+ };
+ 
 
-On Wed, 4 Mar 2026 at 17:45, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Mar 04, 2026 at 03:24:45PM +0000, Conor Dooley wrote:
-> > On Wed, Mar 04, 2026 at 09:11:54AM -0600, Tom Rini wrote:
-> > > On Wed, Mar 04, 2026 at 03:09:40PM +0000, Conor Dooley wrote:
-> > > > On Wed, Mar 04, 2026 at 09:01:45AM -0600, Tom Rini wrote:
-> > > > > On Wed, Mar 04, 2026 at 09:54:22AM +0000, Conor Dooley wrote:
-> > > > > > On Tue, Mar 03, 2026 at 12:50:55PM -0600, Tom Rini wrote:
-> > > > > > > On Fri, 13 Feb 2026 19:47:34 -0700, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > The exported sub_make_done variable leaks into the environment of all
-> > > > > > > > child processes. When make targets like tcheck spawn independent make
-> > > > > > > > invocations with O=, those child makes inherit sub_make_done=1, skip
-> > > > > > > > the KBUILD_OUTPUT setup and try to build in the source tree.
-> > > > > > > >
-> > > > > > > > There is a workaround that resets sub_make_done to 0 for specific test
-> > > > > > > > targets, but this isn't great since it has tolist every target that
-> > > > > > > > spawns independent make invocations.
-> > > > > > > >
-> > > > > > > > [...]
-> > > > > > >
-> > > > > > > Applied to u-boot/master, thanks!
-> > > > > > >
-> > > > > > > [1/1] kbuild: unexport sub_make_done to fix child make invocations
-> > > > > > >       commit: 4284306d22c5b6d64ecd62b462551d9d313c8104
-> > > > > >
-> > > > > >
-> > > > > > This breaks the build for me:
-> > > > > > make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- O=build microchip_mpfs_generic_defconfig
-> > > > > >   GEN     Makefile
-> > > > > > #
-> > > > > > # configuration written to .config
-> > > > > > #
-> > > > > > make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- O=build
-> > > > > >   HOSTCC  scripts/basic/fixdep
-> > > > > >   GEN     Makefile
-> > > > > >   HOSTCC  scripts/kconfig/conf.o
-> > > > > >   YACC    scripts/kconfig/zconf.tab.[ch]
-> > > > > >   LEX     scripts/kconfig/zconf.lex.c
-> > > > > >   HOSTCC  scripts/kconfig/zconf.tab.o
-> > > > > >   HOSTLD  scripts/kconfig/conf
-> > > > > > scripts/kconfig/conf  --syncconfig Kconfig
-> > > > > > ***
-> > > > > > *** Configuration file ".config" not found!
-> > > > > > ***
-> > > > > > *** Please run some configurator (e.g. "make oldconfig" or
-> > > > > > *** "make menuconfig" or "make xconfig").
-> > > > > > ***
-> > > > > > make[4]: *** [/stuff/u-boot/scripts/kconfig/Makefile:75: syncconfig] Error 1
-> > > > > > make[3]: *** [/stuff/u-boot/Makefile:702: syncconfig] Error 2
-> > > > > > make[2]: *** [../Makefile:189: __sub-make] Error 2
-> > > > > > make[1]: *** No rule to make target 'include/config/auto.conf', needed by 'include/config/uboot.release'.  Stop.
-> > > > > > make: *** [Makefile:189: __sub-make] Error 2
-> > > > >
-> > > > > That's odd. What host distro and make? I don't see that on Ubuntu 24.04.
-> > > >
-> > > > Originally my CI found it in a docker container with "from: ubuntu:noble",
-> > > > so 24.04. I reproduced it locally on debian unstable with make 4.4.1
-> > >
-> > > That's even more puzzling (noble is 24.04) since that sounds very close
-> > > to our CI too. Can you please look more in to what's going on?
-> >
-> > Can I assume your CI also sets O=<something> then? Is the CI config
-> > stuff in tree, or somewhere else?
->
-> We use buildman, which in turn does separate output directories. We
-> also, in Azure, have one job that uses O= specifically. Things are
-> defiend in .gitlab-ci.yml and .azure-pipelines.yml
+---
+base-commit: f473a453b0c03d0042b4422de1d822274d2e2d4e
+change-id: 20260304-clk-mtk-fix-mt8188-rates-9c733a841d56
 
-I get the same error with
-make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- qemu_arm64_lwip_defconfig O=build
-make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- O=build
-  HOSTCC  scripts/basic/fixdep
-  GEN     Makefile
-  HOSTCC  scripts/kconfig/conf.o
-  YACC    scripts/kconfig/zconf.tab.[ch]
-  LEX     scripts/kconfig/zconf.lex.c
-  HOSTCC  scripts/kconfig/zconf.tab.o
-  HOSTLD  scripts/kconfig/conf
-scripts/kconfig/conf  --syncconfig Kconfig
-***
-*** Configuration file ".config" not found!
-***
-*** Please run some configurator (e.g. "make oldconfig" or
-*** "make menuconfig" or "make xconfig").
-***
-make[4]: *** [/home/apalos/work/u-boot-tpm/scripts/kconfig/Makefile:75:
-syncconfig] Error 1
-make[3]: *** [/home/apalos/work/u-boot-tpm/Makefile:702: syncconfig] Error 2
-make[2]: *** [../Makefile:189: __sub-make] Error 2
-make[1]: *** No rule to make target 'include/config/auto.conf', needed
-by 'include/config/uboot.release'.  Stop.
-make: *** [Makefile:189: __sub-make] Error 2
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-Also the patch has a Fixes tag, but it doesn't actually fix anything.
-It just tries to improve something. Can we revert it on master at
-least? Do you want me to send a patch?
-
-Cheers
-/Ilias
->
-> --
-> Tom
