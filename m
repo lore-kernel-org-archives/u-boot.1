@@ -4,112 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8B5EB7ED7
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 12:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3731FEF8FE1
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 13:18:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 778D2838BB;
-	Wed,  4 Mar 2026 13:29:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 05766838BB;
+	Wed,  4 Mar 2026 14:18:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dizC6sgP";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="FnT77Qyu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50D99839A8; Wed,  4 Mar 2026 13:29:42 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 181D283F8A; Wed,  4 Mar 2026 13:09:19 +0100 (CET)
+Received: from SN4PR0501CU005.outbound.protection.outlook.com
+ (mail-southcentralusazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A54F83642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 13:29:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DBCE83F7F
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 13:09:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-660d2e48383so1923647a12.1
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 04:29:40 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772627380; cv=none;
- d=google.com; s=arc-20240605;
- b=RyR/6gqSH/YkjgvW0vPDsKhsFMVjfKlmi1mJ6zL4pvHr8Y2dJVMU1PfovBfCp2s43O
- vqEXsAox0ZnuztiU/Nc6sdt2CnyhyaF9ND6C3TUqth92vzEbu+eKQIOtm3ZhokAjAit6
- pJRgLdpJJwTKSeoNfINvsXIbEnRrz62z0+/gSPQIGebr7Sd+OhmTboYM6/ptLlaAmdJF
- EO5lOAwAX+ofMb+Xh4Qt0iIH7EKUNZuQ52FFzmlaU9k+g5DMRYHkWsSdBNYRzxSrT/0n
- Ozrb2gf6+jldNfNyAH9T7cZLJvneP9u6hqyCOSmZF2HsT+txHBN5qZ6BTmr3YDKmyOmN
- SVIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=G4MQESiPC/PXsnj0l6xHngILWkCiFJP4K0GxK4yfV9w=;
- fh=SRwQtMjPzvIYQNZe9O0twcj57Zv+WcIStWaW8fLsCfs=;
- b=bBxASKy8BZKux+En16UL8BX2BRF2F4k138lbkjVPzDOedgs52Jp+AdMKKCwWgaVmfu
- V5qiHaS3viLlFJjuXre6F/pzy40+1s0LRgxcTictdn2jzqKIh9e6xOsoUjWkJ8zBV7Ac
- 6Z3Jzo7Nh828xKE+MW8G1A8NTwF3vCM4+1vPsx2mMjOPxyNT8VANp0HpGCPf3QpjY2bz
- FiDSkZsLM85rUzuGe6NoOGm8U77wTTL6sN7anIE6qJGTPRuTDhcXd24kWNGVvHN/X35T
- CgeuNovGr7TPBLmkwBtsq1+HuloKZWXmofY+jWTDF2ns1SDl1tG76otdEOATEcExfFe2
- 7hwQ==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1772627380; x=1773232180; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G4MQESiPC/PXsnj0l6xHngILWkCiFJP4K0GxK4yfV9w=;
- b=dizC6sgPtd8kN/4WW3Y7BebMocnKaFRmPYTjOtN+TWGN0R5qvmFi52XFDZdqhGZIkG
- Y+eBxitjOtWYCCAoWOCbC5IuxlLXSXSUu4i4ifCfUhKvcjrrcxX1PN5FxSmZ60KiSVXo
- 0Gug+/SRzLhqrzQdTr7/t3Iroihvit6gu9ioDsfwlbt6cTRuSRO6g3LA44r6hlDlfLFt
- ZvlGOVQdnO4EKjs0RP/xwJ/fLvem/aV3QmOOkUwZ5Tgf0Lp0ErcKMMF+V9VhL0bVXpeq
- ncH8+rU8cAEjlwixGoHgDy0NeGDZ8DVRrmjPi484FuLJaOWgNJNfae5PYvtrwFvWcJsa
- 71Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772627380; x=1773232180;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G4MQESiPC/PXsnj0l6xHngILWkCiFJP4K0GxK4yfV9w=;
- b=Hn/fuFWOdmqcB58oNRZFBFutGUoWgHAgkiJhbaXLn9yTPKJkqaMKcs/wTwq9rOBQnZ
- nedpzcwBs5+Ui2Q9yhOp2eBDl/yQGYHszUfeJu/6FbCZQJzxLxtUK14EH75NMt3Vv+kz
- G48aH1KvrfvxSiXV1ZyyEuH0szG6ROHnUB/Vx2YJI7aapqdpc+mgi3iZASAGTAAzR6ai
- Xs45Eye37F4X2eSI3Yspa/22fwf9aiSp28DTohlnCRYQPVmRcsQSB36cOR7kX4V9YS2g
- k0vto/cK4wWfju/l1rHp7OJ1YG0SE57oCP153dtgmmOuJUz5p3NA3+Q5kBeO+FMhvZu1
- 2p9g==
-X-Gm-Message-State: AOJu0YxrY8No+5qrmWAjVULbi7g5nzMCEdsMxAJdoBVFnzAPC0g0+lz1
- gGv75IoYSU5i7MaoWj5h0zLQbasaenvlzNm5i6+j38VdKDHGdQFrvaVM5V3nqRB/QNAzzHJTz4U
- fdXSV+c1vtFBFqU1PUUdYN0zgTUyCfx0=
-X-Gm-Gg: ATEYQzy38gpyTj6D75Lr/vscxfn1mzu11yFjgVq3BGGpap15AcdsgZD3raF2Q0orgwU
- Y1XiLTbCuM7Fbooz0m3W7GMyxTwFaylN5jsp3BIa5A17S1pFt3HhWQSL5Bxm/Zulpnlz1P5ED+x
- tPs9KoQ9qVxLAOT+RtnrQucjTnP16upIgR7Vd+5nwygelwhH1TeT6alli6xKBtR2jELak0vJvDN
- rozhfvT9EcVJbf79z/NhyM/+GUHETnt087mPhp+WGxvAKawMst3vH5dctV2OMpqGDuoOrbF1ZGw
- BuTHGz+dtnGYeQKEs2VtEOb8uimmfabuLlAkgW9Sy0STAOUe3fq5otqUhKoK/BbRTre/3LXS4qf
- uTsHctHSoOqr6Y8dTdeB84yDC1prHaGmUvkkR6TB/haDAxl/EWTxRnfjeJEU=
-X-Received: by 2002:a05:6402:2809:b0:65c:5a7b:bd99 with SMTP id
- 4fb4d7f45d1cf-660f00d67fdmr1051166a12.31.1772627379262; Wed, 04 Mar 2026
- 04:29:39 -0800 (PST)
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YCnA2VmYnkHSWYcq+BwuL1Lv6pfWT48jzFSv+iS96J6dox3AxAyOdty4GC6lFrsFa6I9B+sDk4eKUU9riwKWpGBgIJk9MpZV9qncgJOSXq3uPV1KiHUibBbgmzDy2yLYyD1/YkTbkNHomt/iR6duo0JUPxAX+FnsG7blsUcS47QUCvU9YRQRM4rbZ/l7m5EtcmZ6o070IBiUnOqOdchVOSAtOO3E8zzkC3Tjb6tgzhYgBTSl4AXFkKXfD4jLOl+2liEA2EoqnWegrXeGytFinVykYqaQ4z5XViIt6bRVcf3bBci94stkU2odKO/+9w3Jiv3ou4Jr8x8n85CFYIA/Ew==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IKnvx9Pabj4ZhDA0Tq0VAHlMi+S19eCiul8u7HE+cHY=;
+ b=Qg7U9KyKjrBgEGW/g78+1ZDwlzFg1aqduxRzqgX5Ew1jbh0c0TPhwzCkWAtI1X8m8pLbe2bq0D3bJaguzpjaJ6g+YY8K7xFV43JtxEWnQtzZ90NowCRvmyDolUBHOqHw8a175Ick+542yBTNnzGbkAfhZerpd31JUdUNKnLsXpd8NQsr2app3/SZDklW6NJOjey/3HqQ0eaDkiphg9SQOtihmlphZhsv/9bLZqK4wZRfVstcvX5QWnw9p3Pi4tKuIUPInQr0axpz0Vq5fygBOC8Pm63B39tkn07/o+UnR4GVobRhPNM8rEJ5QnghWOfh4+FkvmFL1tKC0hhtYJNGgg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IKnvx9Pabj4ZhDA0Tq0VAHlMi+S19eCiul8u7HE+cHY=;
+ b=FnT77Qyu3MlVSZoSVeGASctWbRJXIe3et8p7VlolgVK9MShySLT6O9gi+Rn0m0hp5SB6W25mOC7UBjFK5//SXBae7dAsUAZjLoIeUWwjVfei2uAJxKaEnRl3MYosw6Ms74Xj5a+8qEtoY6HK+CJrkkoVNoF34a33Bj0KlEMvAIopFFanA2AHIPZYTOFesqRysdJvWle4kAU/3bQLcTQ10qp+RGlFOQMboxx3V8KgHFH2O43wrDo2Ha0G4TEwD35hGpxlGePNsh3wXoq12a+/A72m5czTappI8dVHDcnB2RbJU0ZkiUGVSNhLkLz5r5TdaOGhMGCPPvRcEKqBsDhfZg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by PH0PR03MB6234.namprd03.prod.outlook.com (2603:10b6:510:ea::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.17; Wed, 4 Mar
+ 2026 12:09:12 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
+ 12:09:12 +0000
+Message-ID: <f51afc6d-7051-4d41-9b5c-1be2cd7b816b@altera.com>
+Date: Wed, 4 Mar 2026 20:09:04 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: socfpga: arria10: Disable CONFIG_USE_TINY_PRINTF
+To: Dinh Nguyen <dinguyen@kernel.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Tien Fong <tien.fong.chee@altera.com>, Kok Kiang <kok.kiang.hea@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
+References: <20260304035307.16125-1-dinesh.maniyam@altera.com>
+ <d1f767bb-85ad-4b63-b695-161b12cfcc0b@kernel.org>
+Content-Language: en-US
+From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
+In-Reply-To: <d1f767bb-85ad-4b63-b695-161b12cfcc0b@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: SI1PR02CA0024.apcprd02.prod.outlook.com
+ (2603:1096:4:1f4::12) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
 MIME-Version: 1.0
-References: <20251108-vop2-pt2-v6-0-d04c699262fb@mainlining.org>
- <20251108-vop2-pt2-v6-7-d04c699262fb@mainlining.org>
-In-Reply-To: <20251108-vop2-pt2-v6-7-d04c699262fb@mainlining.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 4 Mar 2026 12:29:27 +0000
-X-Gm-Features: AaiRm51LfXVlgph0yoYZ_9tBhd5jursp2zcZZEwfnX6WT671YRIugbq62D27roc
-Message-ID: <CALeDE9OTnFa4gs1XnGsdN2X0Db2aYAsSLafr8pYf+MQuRSpuXQ@mail.gmail.com>
-Subject: Re: [PATCH v6 07/12] video: rockchip: vop2: Add video bridge support
-To: dang.huynh@mainlining.org
-Cc: u-boot@lists.denx.de, Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Ondrej Jirman <megi@xff.cz>,
- Ion Agorria <ion@agorria.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Dragan Simic <dsimic@manjaro.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Jonas Karlman <jonas@kwiboo.se>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Piotr Zalewski <pZ010001011111@proton.me>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|PH0PR03MB6234:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d81692d-2aee-47cb-dea2-08de79e6d86b
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: S4yDp3kkJyGtPhJNSORZqYBHJPMLAyeA3tXpyJdqK/GW+0Tpp3GNIoEG5cqmgcIRU1TAkoiBUyqOLBHxf4bR/yJvf3EwZ6ai1jUwusJV5AcLBnW8EWr+TGYnVitt2C0M8hg9ZAKK81TXxDWjWBBbEQMyCsa149DyMijqJtwwFj50y3Z9Zf/oDeMLkKyQVC2/ttd7gNhZSPCv+i56zetpctkXvYcZ/8LzsadH40gSD0Bgq7KqJg3BFczCI6JMZwS9fxsSCLb1GJUiQ6l71Kvj+Ljnvl6BIAKaEazEhBnmKgHdMqogVR2+4lUXeQxVjm05LCzvOwDVREGk5xhJ2hsPZkjn198u3TolY1sAC4b7t0MUILjefdgjCOf7ruMjnxK1joJxpuQBHJCFq5D3BJT5qOPHtghotHOwxgCAo2A/Ajegjf+Q9UQ5+s0qlI4UXrhX/Wamf1zMT2HZj9sDXKpAttNHXp7HdIhIC94kg6eLbpG8OKvip6jfrpBiHSSuMmWFAX2P0EaFEDppnC8ScianwW6LI/YkCbUwqrldyQEYp5umZPJ/7jIsrpF0pkBsByOWPAwebFPnI9A+7NiHXeLih5eY3bj9w81BhTGYqLSxg04rKsK3dGW6tyuKIpWD5WJH/JERlHC6lnIgPRoSDI3RyLQfOI/oFRKnGWe0PCb8bE+lkkBRFH4cH/gZH8S6AWFlUopZkHz93NQN5GSO+zvfwDrq1wTgUO9WnTtjpxp1qHs=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YVZaWXpCQ1d5T1VHUFR1MWREclJxcHRSaHZBeSs3dWtlWkE2SkNBQjBIbEoz?=
+ =?utf-8?B?Z2JzbjhqUG52SitVeXF3cC92WjFxMXRhc2g5QWlQd3d5ZjY3Ryt1dVdjU3hw?=
+ =?utf-8?B?ZXVEelp3RWZ3SjJZV05SeTBDenZKZTV0UFh1SU41U09Sb0JYaUtYK3pSWHhG?=
+ =?utf-8?B?TVV0UHZURE1vSExQcGtqNjFGWjgwYzgvdE9BQVoxQWIvQktxclJqZzlrN2xJ?=
+ =?utf-8?B?R0ROVWNBNU90dDFJVWNwN28yUnZjRFFBbjRoWnlab2VTcGNiUG1nVy9QZUNk?=
+ =?utf-8?B?V3l1b1RCWkp1L09seUg4TUd0a3hISXZ2N0diOThDT1I5YVBZVXg0RGpvd1N6?=
+ =?utf-8?B?SkFMbnFWaXU1eStMa0dEa1YwaS92QmdncWhpWVJXY09md3h3M3FxUENZRlpv?=
+ =?utf-8?B?YjBmanFwRmE4UXZ3Mkt0b0h0RDV2TkN5SVBCRlZYcjROdHBkWDN1Q1JjUFRC?=
+ =?utf-8?B?aElkNHhnVXhUK042SnBMRzlScHNvWWRLeWNEZUJ5TzZialRSWXUxRHNtWGsr?=
+ =?utf-8?B?eDdNNnZaWTJ1aElKOUo1cHNRcFgyYW04c2ZWd2Y0aUlOUCt3YWNDWFRva2Mw?=
+ =?utf-8?B?SnN2bldScGtuaGpyZHcxbHRxQzE4aHRSVDVXMWlDUGhLOWpsVkR2azYwcEVC?=
+ =?utf-8?B?TzZpTmtya0VsRkxFZ0JjNzBiUHcydElDTFVUQ1R5UWpSUmU1QUc5WXJ2QkVQ?=
+ =?utf-8?B?VktQbktPbjRuYXJ6V1RVeTVJTGdDQk9wdC85Y1V0VnlpYUthWmtMVWdEZkhG?=
+ =?utf-8?B?QmVNSmpjOG1iaVVIOExxTlJSc3RnbDk4UlNTU3pZSzhXbmFYMFdRZXlVMjla?=
+ =?utf-8?B?RkpsYkNSWFJTcG5TUjZOR0YzR0hOMVljaTJiOU4zOTRqT3p2ZmpaQnFNS3R5?=
+ =?utf-8?B?bHd3U2lCNVhMakcxakNobENxWUxyNUNtcXVLUDNhbm42SVhzS3k2VjZkdWxV?=
+ =?utf-8?B?VC9SZm1sMi9wK1VNUmI1OEhXdzRScnB5K0IxZHRHTDNnbm8rQnh6UzkzSi9Y?=
+ =?utf-8?B?UFF3UENLS1pWNFovMFJZa3RyVWRmKzVhbDlxbGltcXFXUHJuT0FKZDAyMWJt?=
+ =?utf-8?B?Vk1udGJ4STNZU2xTbU05ampMekkrM3pXYWZaUit2RE9Sbk9HUG14M2hndVdJ?=
+ =?utf-8?B?anhlanMzMnBid1dUQjJBWk9qTVYyMDJvdFZVamI0Y0tLK2hBNjN2WGVaQW5x?=
+ =?utf-8?B?b3o5N2w2Q3ZoV3FLZm5CZWluUHVJclFocnltaHo2TS94Z0k1cTNUWFJ5ZWJq?=
+ =?utf-8?B?MHRVQXNJNUQyZ2JhdDcxanc0bm02cTFsYnpCSU5iekJCVWZ0QlJ2YWI4ZjBi?=
+ =?utf-8?B?Wmlmdyt1cXIvWmJpdVdiY1ZISUNiSDRQelZxVnB6K20wUlVmUUNkWng4NDBT?=
+ =?utf-8?B?VVcwYXFWSjNhbWZzVDVtQ0h4TGdFRUg3eEUzS2lZblVFZngwL21Nb1YwY3Vw?=
+ =?utf-8?B?Tk1iVnIzTnVsUk95UHBJUEltYVd0eW5Vdit3UmF3L2xmcTREZWttQkl6Tm5E?=
+ =?utf-8?B?dHVRek9WeWRVRHEza3MwemloMjlqQUYxajBHcjBSUDl5bkRyV0MveHRHQU9j?=
+ =?utf-8?B?SExVSjUxQ21mUmxrWWRvODlGMk56ZkR0cEpPTnFTbThlV3UzamJOT1RWdTBV?=
+ =?utf-8?B?cUx2TklSejlobjkwQ2syVjJ2bHd2eitzQ2FvM0NHU0NuNi8rNFNtQlQ3Rzd4?=
+ =?utf-8?B?UEF6enlPbmhsTlI1bDQ5azFDaGlWaXpKN2NPNXZsT1NjMUFSaXk4TU9XdDY1?=
+ =?utf-8?B?dk03aFRjWTVmdlRMRjVyazJIV0FqTTRZaGJGVnVrbVNUVktwSUNoMnltcVRQ?=
+ =?utf-8?B?RlZDMzVkM3o5RUZaUVlsVkRrbFNTY2FCeU1uNENmTTRHMXVBaFVPMW5lZjFm?=
+ =?utf-8?B?U0k0YU5oRGJtcG9hL1ZvcXloWEU4TXpSL3Nad3RScTVrM1VWbnI3TGR6ajdD?=
+ =?utf-8?B?RlRrSDNnaUZlWm9xT2l6QWs0U0NjeEdheng2MElnMnR0MlA5NU0zK1BjbjZR?=
+ =?utf-8?B?Wjk2Uk5NM0RySjZCOENLcG9UeW4wUmUzclpMRVZ4cDhoU2pPTyt1ZGpLM1dI?=
+ =?utf-8?B?V1hreXBjOUR3ZUZBb1RSRVIxaENLbkpuWlByYUFTK2xTNm9pU0xsNWVEV3hN?=
+ =?utf-8?B?dEhOWDdBS29XSGhqL0l3M2lTS1hkOS9xZmh4d0tZbVo0NVlFZGE5Tld1MWF0?=
+ =?utf-8?B?S1gvV1hEd2kwRFRyZExJK3h3THIrMGt3T0JrRTNUVllIUmpoNSttZWpIM2RG?=
+ =?utf-8?B?cEkzUGFjdkVLaVovZFhMalpyMHdRSEFBR09Vc2U1NWVqeDZDWVh1NC8wZnFZ?=
+ =?utf-8?B?QVM0TjkzNlBOcVFWZTBLU0pSWnNGR2o3eDJOM1JybGJBMndRYmR2cXRHYWNS?=
+ =?utf-8?Q?zcHwR/zexgAX359o=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d81692d-2aee-47cb-dea2-08de79e6d86b
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 12:09:11.9157 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gCnIrUgce2oPS2FW4Lc4PU6UkI+ESMgpMH45SDvG/G3qKRz10d4HzoF5y2z2EMQQMfGD9bXD2Nvjws5ISU4TPlQKhV1QQm/COwFUUt/UBqw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6234
+X-Mailman-Approved-At: Wed, 04 Mar 2026 14:18:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,169 +153,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Dang,
+Hi,
 
-Finally started to play with this patch set.
-
-> From: Dang Huynh <dang.huynh@mainlining.org>
+On 4/3/2026 2:58 pm, Dinh Nguyen wrote:
+> [CAUTION: This email is from outside your organization. Unless you 
+> trust the sender, do not click on links or open attachments as it may 
+> be a fraudulent email attempting to steal your information and/or 
+> compromise your computer.]
 >
-> Add support for video bridge to VOP2 so we can use the MIPI DSI
-> bridge driver that we have.
-
-I see a link failure when using this patch set with the
-anbernic-rgxx3-rk3566_defconfig using 2026.04-rc3.
-
-/usr/bin/ld.bfd: drivers/video/rockchip/rk_vop2.o: in function
-`rk_display_init':
-/builddir/build/BUILD/uboot-tools-2026.04-build/u-boot-2026.04-rc3/drivers/video/rockchip/rk_vop2.c:422:(.text.rk_vop2_probe+0x360):
-undefined reference to `display_in_use'
-/usr/bin/ld.bfd:
-/builddir/build/BUILD/uboot-tools-2026.04-build/u-boot-2026.04-rc3/drivers/video/rockchip/rk_vop2.c:437:(.text.rk_vop2_probe+0x388):
-undefined reference to `display_read_timing'
-/usr/bin/ld.bfd:
-/builddir/build/BUILD/uboot-tools-2026.04-build/u-boot-2026.04-rc3/drivers/video/rockchip/rk_vop2.c:492:(.text.rk_vop2_probe+0x794):
-undefined reference to `display_enable'
-
-Cheers,
-Peter
-
-
-> Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> Signed-off-by: Dang Huynh <dang.huynh@mainlining.org>
-> ---
->  drivers/video/rockchip/rk_vop2.c | 81 +++++++++++++++++++++++++++++-----------
->  1 file changed, 59 insertions(+), 22 deletions(-)
+> On 3/3/26 21:53, dinesh.maniyam@altera.com wrote:
+>> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+>>
+>> CONFIG_USE_TINY_PRINTF is enabled by default, disable it.
+>> Arria 10 has 256KB of onchip ram and it is enough to support full 
+>> printf.
+>> Full printf allows us to have more complex format printing, example %ll.
 >
-> diff --git a/drivers/video/rockchip/rk_vop2.c b/drivers/video/rockchip/rk_vop2.c
-> index 992f215d416..156daafa0c3 100644
-> --- a/drivers/video/rockchip/rk_vop2.c
-> +++ b/drivers/video/rockchip/rk_vop2.c
-> @@ -13,10 +13,12 @@
->  #include <dm/device_compat.h>
->  #include <edid.h>
->  #include <log.h>
-> +#include <panel.h>
->  #include <regmap.h>
->  #include <reset.h>
->  #include <syscon.h>
->  #include <video.h>
-> +#include <video_bridge.h>
->  #include <asm/global_data.h>
->  #include <asm/gpio.h>
->  #include <asm/io.h>
-> @@ -291,6 +293,7 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
->         int vop_id, port_id, win_id;
->         struct display_timing timing;
->         struct udevice *disp;
-> +       struct udevice *bridge;
->         int ret;
->         u32 remote_phandle;
->         struct display_plat *disp_uc_plat;
-> @@ -357,8 +360,11 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
->                         return -EINVAL;
->                 }
+> Do you have a size diff for the SPL with this change?
 >
-> +               if (IS_ENABLED(CONFIG_VIDEO_BRIDGE))
-> +                       uclass_find_device_by_ofnode(UCLASS_VIDEO_BRIDGE, remote, &bridge);
-> +
->                 uclass_find_device_by_ofnode(UCLASS_DISPLAY, remote, &disp);
-> -               if (disp)
-> +               if (disp || bridge)
->                         break;
->         };
->         compat = ofnode_get_property(remote, "compatible", NULL);
-> @@ -390,27 +396,49 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
->         if (ret < 0)
->                 return ret;
+> No, disabling CONFIG_SPL_USE_TINY_PRINTF does not introduce a size 
+> increase in SPL
+> The implementation should be safe and allows richer formatting support 
+> when needed.
+>>
+>> Signed-off-by: Ley Foon Tan <ley.foon.tan@intel.com>
 >
-> -       disp_uc_plat = dev_get_uclass_plat(disp);
-> -       debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
-> -       if (display_in_use(disp)) {
-> -               debug("   - device in use\n");
-> -               return -EBUSY;
-> -       }
-> +       if (bridge) {
-> +               /* video bridge detected, probe it */
-> +               ret = device_probe(bridge);
-> +               if (ret) {
-> +                       dev_err(dev, "Failed to probe video bridge: %d\n", ret);
-> +                       return ret;
-> +               }
+> Is the above contact valid? Also, try to just include contacts returned
+> from get_maintainer.
 >
-> -       disp_uc_plat->source_id = vop_id;
-> -       disp_uc_plat->src_dev = dev;
-> +               /* Attach the DSI controller and the display to the bridge. */
-> +               ret = video_bridge_attach(bridge);
-> +               if (ret) {
-> +                       dev_err(dev, "Failed to attach video bridge: %d\n", ret);
-> +                       return ret;
-> +               }
+> I will remove the invalid contact.
 >
-> -       ret = device_probe(disp);
-> -       if (ret) {
-> -               debug("%s: device '%s' display won't probe (ret=%d)\n",
-> -                     __func__, dev->name, ret);
-> -               return ret;
-> -       }
-> +               ret = video_bridge_get_display_timing(bridge, &timing);
-> +               if (ret) {
-> +                       dev_err(dev, "Failed to read timings: %d\n", ret);
-> +                       return ret;
-> +               }
-> +       } else {
-> +               disp_uc_plat = dev_get_uclass_plat(disp);
-> +               debug("Found device '%s', disp_uc_priv=%p\n", disp->name, disp_uc_plat);
-> +               if (display_in_use(disp)) {
-> +                       debug("   - device in use\n");
-> +                       return -EBUSY;
-> +               }
+>> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+>> ---
+>>   arch/arm/mach-socfpga/Kconfig     | 1 -
+>>   configs/socfpga_arria10_defconfig | 1 +
+>>   2 files changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-socfpga/Kconfig 
+>> b/arch/arm/mach-socfpga/Kconfig
+>> index f2e959b5662..ba01ec08be2 100644
+>> --- a/arch/arm/mach-socfpga/Kconfig
+>> +++ b/arch/arm/mach-socfpga/Kconfig
+>> @@ -101,7 +101,6 @@ config TARGET_SOCFPGA_ARRIA10
+>>       select SPL_SYSCON if SPL
+>>       select ETH_DESIGNWARE_SOCFPGA
+>>       imply FPGA_SOCFPGA
+>> -     imply SPL_USE_TINY_PRINTF
+>>
+>>   config SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
+>>       bool "Always reprogram Arria 10 FPGA"
+>> diff --git a/configs/socfpga_arria10_defconfig 
+>> b/configs/socfpga_arria10_defconfig
+>> index b32f40ae408..d5feabe5ce0 100644
+>> --- a/configs/socfpga_arria10_defconfig
+>> +++ b/configs/socfpga_arria10_defconfig
+>> @@ -69,3 +69,4 @@ CONFIG_USB=y
+>>   CONFIG_USB_DWC2=y
+>>   # CONFIG_SPL_WDT is not set
+>>   # CONFIG_TOOLS_MKEFICAPSULE is not set
+>> +# CONFIG_USE_TINY_PRINTF is not set
 >
-> -       ret = display_read_timing(disp, &timing);
-> -       if (ret) {
-> -               debug("%s: Failed to read timings\n", __func__);
-> -               return ret;
-> +               disp_uc_plat->source_id = vop_id;
-> +               disp_uc_plat->src_dev = dev;
-> +
-> +               ret = device_probe(disp);
-> +               if (ret) {
-> +                       debug("%s: device '%s' display won't probe (ret=%d)\n",
-> +                             __func__, dev->name, ret);
-> +                       return ret;
-> +               }
-> +
-> +               ret = display_read_timing(disp, &timing);
-> +               if (ret) {
-> +                       debug("%s: Failed to read timings\n", __func__);
-> +                       return ret;
-> +               }
->         }
+> This does not disable CONFIG_SPL_USE_TINY_PRINTF, you need to add this:
 >
->         /* Set clock rate on video port to display timings */
-> @@ -453,9 +481,18 @@ static int rk_display_init(struct udevice *dev, ulong fbbase, ofnode vp_node)
+> # CONFIG_SPL_USE_TINY_PRINTF is not set
 >
->         rkvop2_mode_set(dev, &timing, vop_id, port_id, platdata);
+> Dinh
 >
-> -       ret = display_enable(disp, 1 << l2bpp, &timing);
-> -       if (ret)
-> -               return ret;
-> +       if (bridge) {
-> +               /* Attach the DSI controller and the display to the bridge. */
-> +               ret = video_bridge_set_backlight(bridge, 60);
-> +               if (ret) {
-> +                       dev_err(dev, "Failed to start the video bridge: %d\n", ret);
-> +                       return ret;
-> +               }
-> +       } else {
-> +               ret = display_enable(disp, 1 << l2bpp, &timing);
-> +               if (ret)
-> +                       return ret;
-> +       }
+> Yes, you are right!
+> I will resubmit v2.
 >
->         uc_priv->xsize = timing.hactive.typ;
->         uc_priv->ysize = timing.vactive.typ;
->
-> --
-> 2.51.2
->
+> Dinesh
 >
