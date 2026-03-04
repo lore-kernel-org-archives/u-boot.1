@@ -4,112 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2189DEFCE37
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 20:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B9CEFCE44
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 20:24:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E85A838BB;
-	Wed,  4 Mar 2026 21:15:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 419A5838BB;
+	Wed,  4 Mar 2026 21:24:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QyQAqZdQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SpHGFsY0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F0C183AA9; Wed,  4 Mar 2026 21:15:10 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 91CE183D8A; Wed,  4 Mar 2026 21:24:49 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D607483642
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 21:15:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48C0283642
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 21:24:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-660be63279bso2697681a12.1
- for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 12:15:07 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b9359c0ec47so790701366b.0
+ for <u-boot@lists.denx.de>; Wed, 04 Mar 2026 12:24:47 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772655887; cv=none;
+ d=google.com; s=arc-20240605;
+ b=IWkPhFB2hzowjNX5eFLRYwJyLgyykrqaYkEc5pSzSIvgbj1uT6+mxYXRRNHWbVDHpA
+ i0RsrqPMrMLge5KPttZWLP1xLWE0jiEX2Szb1meEZ7HY4HU1OtwBIXptVmae8U8vcs9x
+ LSTHka8MhtyHV/YsM/BtwRhYHBmHEf9m/29neTlgRqj9ywZZBZx4jFm3rJBD1WXcItHO
+ K47tTWCtaZ6OGJXEER2KxkNE0j7iAqUDsRfZSbDYJCWQ/Aqn17wyELD0xgUDFjgLkKRo
+ 3PEXk2s7LTbHJyF4QEaBRCp5tbiGW+vrvpKiYd05JaehDQnAAHAFJ9DXs9MdMiaHrxq5
+ IjVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=6DuzNvm7YAiv3VaFliNJsnXwtVneNFL8xiYQI39XveA=;
+ fh=QboySXJXsW0tZFJwNBjG2DvEsmNlfTgj+KDYRxkLN0w=;
+ b=JgOxDQHwqeQu9/3Eb9GNzZO1riVEjxdPh99FIzSine/3BGd4UmB+dbitcFNHNqOAxe
+ UbmI8GMZgSWFT4HqPY90tExQlrbsl0pyJq3U1NDW4mMVUHyrrCr/AqfLRJZX1HSdZi4i
+ CCDxkXjkbIAP/0NPa7AJ6vbZEsTEmT3MgZROndxqrnID/jeouOEdI42tOgPdjYqFE6Nv
+ w1f35N3CHf0YcAz5DqJQJFICcHphEzCj3UsEsMX/lmoOUsD6FL8gaZZwwJxF05osWy7+
+ njyyQuJjnd2L+mPJJD9uzFU+ltU8+s1pjNKzPSWnwZfV8JCPGOTd9+GKAUm6Vrj3cHZM
+ 9DXg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1772655307; x=1773260107; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0AtHyk90PFkVRS5Cm1VJyL2cjGcCEZ5vB3rOJGv6KRY=;
- b=QyQAqZdQy7y2vUE53pEShOfKZdEZOpLa/83NDmU2mIwnqKpF0Hbxxuu41ADum8g2rw
- LKlEJDtnH7KQcAPqb9XsBhXC9JURsHZlXwnN3NEQBwuH6jaSkse8kw5cLi7C1ZPCm6C9
- n6tmnGHK2l8sNgApmI8BsWwFC7GPW9vkEeu1o+fz0b9pcOtM2a15o0jxzU91G/srrfO9
- 8q6PeKRMTSc1Itg8NWbrw6vCa197n+CcnD6tsnUnAWkxHEZfPUQaRufW1q2B2aOCKiTH
- umVlsn5v+gna53hF4Cm5nByzQbOwFLco1z9shzVlKehwFc7Kd5un5R+ry0FaFhzdnnJo
- jqfg==
+ d=gmail.com; s=20230601; t=1772655887; x=1773260687; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6DuzNvm7YAiv3VaFliNJsnXwtVneNFL8xiYQI39XveA=;
+ b=SpHGFsY09RlT1EKcwUlDTOxJ6uzrn5lZEDHxC2a51eSBWj1PRNPY/BuIA4HpkQ7Xll
+ snbr1H8dzQqn7noH1+AcWZGvGnuiV6oDeeTods7uOAf/Z6noNDDf4D/pS40rvMrsvuv3
+ W+FK3LZIhm7Px9Dz3O+6RYqifMxUy13fCaTD3Yr9kSOkA4kP6AWYIdx7Eyh0h00ntwv0
+ +JQgo/xGxd53bn6QlE7PHFSCBgP4onCiWrDaCbGgJNlqqA67bL/D890OVNVqAWWdKmK2
+ viErJm+v++p1rqXHgyMRWo+QlmF8CF9uFwiJsS4AV0qY6AKPfd5/Tpxv8rqv/sLhIbT1
+ oGwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772655307; x=1773260107;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0AtHyk90PFkVRS5Cm1VJyL2cjGcCEZ5vB3rOJGv6KRY=;
- b=OmLWWk7x0IOSVvH4JjGqWLO9N+AFgL8uBnq69l1e7x+w50pejLgl2qrMO7mW70H15i
- MwsuG1aDjOVmiuJRpeFEDYNq9efZBbPgTlbUKbLdfNaTtxzNgB/29NRSVwat11vZ6hWx
- E5axhPLkzTa6fSnHqI3BNuMhvGxiDJIhBcwkfTTuHUDSSB2rhDK2DftP4iymiCuDuZ+/
- 4oAOeEFHjLSB0yI3RMU9U4LJjli+koMTHd1+j00fY8mzgNBLkQQXMUQiKC5vlnjIcQh3
- bZqHy2iLBkpBcVx56UaUknw4PqFOoGEb9XZwdvkzgeVcV8suXoMZvGJi4YQ8/rO0k2ys
- GvCg==
-X-Gm-Message-State: AOJu0Yzxzem3xuITYhQy42nDKCot4TRZOggecY2KsuV0Dfx4corhTAZG
- Nv6lRMNhtwN6BPePmHiTgZLLzrAQiHi9GbcXpcvjPzrWSN23tERrYadYLN8gvxXZNeo=
-X-Gm-Gg: ATEYQzwW82tXyMDzMwFDED116ajg9p/A9JPDXqbyps4zKuqsajXMwpB6jp7kGSucMtB
- ZoPR64D7KVu5GSzANDd40GZj3utK0k12rs4U/ixALiT+M0v0WktfS+GvfDzyVJq4fazYbDeV3vu
- S65Ze85PpWBfXWeWJmDg3S/12aA0fqtN/5poiMu/4ymOgCT45cMfkIoAyrk2qv+D112gGFy5Hg3
- MjzFYhGCxvt8Mzcw3gKWoKovFJYQgqkYsdPTjKeftQ13n3d1LQMX4frTgDroD/W9gi+nQrKfZTl
- vfnx5Rs0/eiVGWkK/vtTz4TIbF8AtTC/4F4kdWTn6HtGxOJrrZsaLfZMFWwceWJlWvpRZU1cfp4
- v4Pw9ojBfbWqnjR1gch9Kz8FaFnSE1Q/HyawugWOlKBdeWxh/oRtkGKPME7BwzRiBj+LesQMgG+
- MJ9USm4kofjgFC/xmGTFaegxRjpZjYOD6SdVCK9Fe36DqjuM8KzmELDkwZSfYzWNrrqziT0Sw/Z
- Ona
-X-Received: by 2002:a17:907:970c:b0:b8f:de69:b597 with SMTP id
- a640c23a62f3a-b93ef784a49mr242995866b.7.1772655307108; 
- Wed, 04 Mar 2026 12:15:07 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:106d:1080:73bc:1eca:d39e:509?
- ([2a01:e0a:106d:1080:73bc:1eca:d39e:509])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b93c8e3d060sm321786566b.56.2026.03.04.12.15.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Mar 2026 12:15:06 -0800 (PST)
-Message-ID: <88393bb3-c241-4be9-8268-1ccd047ba1c9@linaro.org>
-Date: Wed, 4 Mar 2026 21:15:03 +0100
+ d=1e100.net; s=20230601; t=1772655887; x=1773260687;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6DuzNvm7YAiv3VaFliNJsnXwtVneNFL8xiYQI39XveA=;
+ b=Mpt+Iah4K9HpmWuA1TOsvxVDj78iwquJR0B8uPtvCgY8qgLiCJrjB3ZbO29WwwLdpj
+ sxCuHxbERHhJHKlznRbzf8sfbDf4hb6sXM2u3BSiV1D9Cdf6C1Ttb/OiKN/W/lhaPg3/
+ cYwdPwEwtl/pPAGOUxbjAhpRkEqI8ubMnyDIwFTiSjm9kiOt15AU0Gh2X0zLWQnNucwd
+ qxHck9M7p7lE8AAWLgaPSaULZz6JB1mp4uxGQF8PwpZoFAgq8/xk88kZmZeX6/5L33+E
+ zgI2FmEg8vBbCMlOPCzzd0O7Ob4kZhT0uMvLekEe/tzgoTU9EHaVibOvD2SE2ctzpI5z
+ gd9Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQDBH1npURvb9TuTGkEka+/JsL4aYS+k/DyUG68QfEs0BgaOxjhuYzX1+JRIfiVYIqgCNn6i8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyjKBoWCm3rHRQaOqPmQy18vhvm2sDnUJfh3gyElgxDUnUcs9O+
+ kYxqfODYeuiiMthY1U/ttZKVrKnwSq8PvnNPFqhsQkhOCktJDykK/7ai3v4OdNNHvLEzM8LIVRt
+ 0+0rbNokrIVYkJY2h2N3f3N9YOWRWhUk=
+X-Gm-Gg: ATEYQzyk5lhzz2OFAcePIVEtW+UnhPV72Nt0UPV20d+AQ2DunHytDd0Wcu6gFuA652U
+ EYBvtTEPVXRWfe3d1a9nVn2u95ULv02FcQXlY9EIghiTE/xSyz6VxrDnhrloyP+QiJzINJAK77x
+ c5pQ8q5TDyKhZl7FKwQtEhk3dDVhzb4x2f0ysGgj5OKZYPfojmPm/Igcls/EB/IXRLYT/60t7tC
+ L4emn9HYyElC6DmmGvpLudW9b2FPVWW3epp0fY0rZOf1pAyn4bggXgzxzf8mr7tyND0x5Imw+rG
+ snPQQhiX6rQ1k0lxAlvwInJJq33EtPS8Ykt9FtGh3QvTR8BJMBRO2h+rNpnTMycD4zsnfYleFIc
+ BckqAyOWYvbeaowNnX0gIkmfGqwfdbzBhMOkpcehMEhBYvPec
+X-Received: by 2002:a17:906:dc92:b0:b8a:f61a:edf2 with SMTP id
+ a640c23a62f3a-b93f1453438mr204818266b.50.1772655886472; Wed, 04 Mar 2026
+ 12:24:46 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-ufs-20260304
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20260302135940.550e6051@rocky.lan>
+ <20260302164256.29af9995@rocky.lan>
+ <khr5tpfjql6l5ide644d7x6v2km6m3u4jnlbxq5zsbqefui65i@dlwpybwg3fym>
+In-Reply-To: <khr5tpfjql6l5ide644d7x6v2km6m3u4jnlbxq5zsbqefui65i@dlwpybwg3fym>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 4 Mar 2026 20:24:35 +0000
+X-Gm-Features: AaiRm50aIihkt1JfZ6mxe1IXYcnA9Ee7vAG3yn_CV6MNJRtq4RBW9HSAUDeIOQs
+Message-ID: <CALeDE9NK_KvEitadfcYJQXe7bjoM7JRH3gAh0UzrjtLyUjJjpQ@mail.gmail.com>
+Subject: Re: [hack] help U-Boot find the correct PCIe inbound offset for NVMe
+ on Raspberry Pi 5
+To: Pedro Falcato <pfalcato@suse.de>
+Cc: Torsten Duwe <duwe@lst.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Andrea della Porta <andrea.porta@suse.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,59 +116,77 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Wed, 4 Mar 2026 at 19:43, Pedro Falcato <pfalcato@suse.de> wrote:
+>
+> Hi Torsten,
+>
+> On Mon, Mar 02, 2026 at 04:42:56PM +0100, Torsten Duwe wrote:
+> > On Mon, 2 Mar 2026 13:59:40 +0100
+> > Torsten Duwe <duwe@lst.de> wrote:
+> >
+> > > This proposed patch uses the already existent dev_phys_to_bus(),
+> > > which can dig up the correct offset from associated DT nodes and
+> > > subtract it.
+> >
+> > Just to make it clear, that patch is a necessary but not a sufficient
+> > condition to boot the RPi5 from NVMe. The PCIe bus node above
+> > the NVMe is generated dynamically has no DT node with dma-ranges and so
+> > dev_phys_to_bus() still returns zero. In order to test NVMe on the
+> > RPi5 you can either:
+> >
+>
+> Say I wanted to test NVMe booting on the pi5 (which I actually do).
+> I would need:
+> 1) this patch
+> 2) one of the two BUS_ADDR() related diffs
+> 3) the fixes posted in https://lore.kernel.org/u-boot/20251105163553.15F2A227AAC@verein.lst.de/
 
-This is a (very) late PR for master with a few UFS fixes and changes.
+I believe that series has been replaced with:
+https://lore.kernel.org/u-boot/20260227152046.42DE068B05@verein.lst.de/T/#t
 
-Thanks,
-Neil
+> 4) anything else?
 
-The following changes since commit 437ea9f8be5afaebe2d8cbab6242f1182857f21e:
+Enable NVME support in the defconfig
 
-   Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab (2026-02-26 09:06:33 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-ufs-20260304
-
-for you to fetch changes up to 47905f28468e3524cb5f775f52928cdcc568815a:
-
-   drivers: ufs: remove unused ufs_post_bind() declaration (2026-03-02 15:20:02 +0100)
-
-----------------------------------------------------------------
-A few fixes/missing changes for UFS:
-- remove unused ufs_post_bind() declaration
-- Disable UTP command timeout in slow mode
-- Missing MediaTek UFS PHY Driver to be used with the UFS driver
-
-----------------------------------------------------------------
-Igor Belwon (1):
-       phy: Add MediaTek UFS PHY Driver
-
-Julien Stephan (1):
-       drivers: ufs: remove unused ufs_post_bind() declaration
-
-Padmarao Begari (1):
-       ufs: Disable UTP command timeout in slow mode
-
-  drivers/phy/Kconfig                 |  10 ++
-  drivers/phy/Makefile                |   1 +
-  drivers/phy/phy-mtk-ufs.c           | 190 ++++++++++++++++++++++++++++++++++++
-  drivers/ufs/cdns-platform.c         |   1 -
-  drivers/ufs/ufs-amd-versal2.c       |   1 -
-  drivers/ufs/ufs-pci.c               |   1 -
-  drivers/ufs/ufs-qcom.c              |   1 -
-  drivers/ufs/ufs-renesas-rcar-gen5.c |   1 -
-  drivers/ufs/ufs-renesas.c           |   1 -
-  drivers/ufs/ufs-rockchip.c          |   1 -
-  drivers/ufs/ufs-uclass.c            |  12 ++-
-  drivers/ufs/ufshcd-dwc.c            |   1 -
-  include/ufs.h                       |   9 --
-  13 files changed, 208 insertions(+), 22 deletions(-)
-  create mode 100644 drivers/phy/phy-mtk-ufs.c
+> Thanks,
+> Pedro
+>
+> > hard code the 64GiB value when building your private U-Boot binary:
+> >
+> > -#define BUS_ADDR(a)         dev_phys_to_bus(dev->udev, (a))
+> > +#define BUS_ADDR(a)            ((a)+0x1000000000LL)
+> >
+> > OR use this tricky DT change Andrea has prepared:
+> >
+> > --- a/dts/upstream/src/arm64/broadcom/bcm2712.dtsi
+> > +++ b/dts/upstream/src/arm64/broadcom/bcm2712.dtsi
+> > @@ -571,6 +571,15 @@
+> >                               <0x03000000 0xff 0xfffff000 0x10 0x00131000 0x00 0x00001000>;
+> >                       status = "disabled";
+> > +
+> > +                     pci@0,0 {
+> > +                             reg = <0x00 0x00 0x00 0x00 0x00>;
+> > +                             device_type = "pci";
+> > +                             #address-cells = <0x03>;
+> > +                             #size-cells = <0x02>;
+> > +                             ranges;
+> > +                             dma-ranges;
+> > +                     };
+> >               };
+> >
+> >               pcie2: pcie@1000120000 {
+> >
+> > This pci@0,0 node needs to be below the pcie@1000110000 RC node so it
+> > can "bridge" dev_phys_to_bus() to the RC node when it climbs up the
+> > device tree and so helps it find the correct value.
+> >
+> > AFAICS the proper fix should be to add some dma-ranges property when
+> > dynamic PCI devices are created during enumeration/scan or make
+> > dev_phys_to_bus() skip those nodes for the lookup.
+> >
+> >       Torsten
