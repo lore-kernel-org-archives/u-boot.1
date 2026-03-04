@@ -4,60 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF817EDEC16
-	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 06:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486EEEDEC1E
+	for <u-boot@archiver.kernel.org>; Wed,  4 Mar 2026 07:31:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35529839A8;
-	Wed,  4 Mar 2026 07:58:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B74B83D8A;
+	Wed,  4 Mar 2026 08:31:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bYWOUuBf";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BA0183D8A; Wed,  4 Mar 2026 07:58:07 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 19F9383F61; Wed,  4 Mar 2026 08:31:49 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C08AA838BB
- for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 07:58:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id DDF72838BB
+ for <u-boot@lists.denx.de>; Wed,  4 Mar 2026 08:31:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinguyen@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AB7D960097;
- Wed,  4 Mar 2026 06:58:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95FE8C19423;
- Wed,  4 Mar 2026 06:58:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772607482;
- bh=IOqwr6MNxR3cdUwktbD+9o/8qEcV8Vhergjv1YvZc6o=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bYWOUuBfdfxq8BzXPB16cmSt3+Nj+HkX8ujnN4HE1f7zIXiXPZALAyctan5kfoSdz
- AXATan/oo2DwB28hJl7sNQi9NIoYcUE5u8iWxwGz8vT+seQOXCMFU1dmIBrLbJd921
- e/bK0J0+R5N6lwtHYfhEVGc24dGiOmJ1hZA9QycxX6BhiAwJk62GYFEy90wuwxPwVs
- 1QSPgGwK7R+aXQ+zo2APQ4/O5E46U81exNvb6YgvqkQ3s2Hup/FZ9GxM3qbQlJ6di0
- EKYQ8WNSZ7+JfX5uzAUGh2bZch5QHAsxdpNkQleMsgYbqxJd9hEPCkEBxtGulOOUIE
- 8qK0eNIUGvKzQ==
-Message-ID: <d1f767bb-85ad-4b63-b695-161b12cfcc0b@kernel.org>
-Date: Wed, 4 Mar 2026 00:58:00 -0600
+ spf=pass smtp.mailfrom=sha@pengutronix.de
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.whiteo.stw.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <sha@pengutronix.de>)
+ id 1vxghu-0003C2-Ev; Wed, 04 Mar 2026 08:31:46 +0100
+Received: from dude02.red.stw.pengutronix.de ([2a0a:edc0:0:1101:1d::28])
+ by drehscheibe.grey.stw.pengutronix.de with esmtps (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <sha@pengutronix.de>) id 1vxghs-003fxA-2P;
+ Wed, 04 Mar 2026 08:31:46 +0100
+Received: from sha by dude02.red.stw.pengutronix.de with local (Exim 4.98.2)
+ (envelope-from <sha@pengutronix.de>) id 1vxghu-0000000GKdZ-06sU;
+ Wed, 04 Mar 2026 08:31:46 +0100
+Date: Wed, 4 Mar 2026 08:31:46 +0100
+From: Sascha Hauer <s.hauer@pengutronix.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] FIT: Address Secure Boot Bypass for Signed FIT Images
+Message-ID: <aaff4oDKlkINa8H7@pengutronix.de>
+References: <20260302220937.3682128-1-trini@konsulko.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: socfpga: arria10: Disable CONFIG_USE_TINY_PRINTF
-Content-Language: en-US
-To: dinesh.maniyam@altera.com, u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Chin-Liang See <clsee@altera.com>, Tien Fong <tien.fong.chee@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>, Ley Foon Tan <ley.foon.tan@intel.com>
-References: <20260304035307.16125-1-dinesh.maniyam@altera.com>
-From: Dinh Nguyen <dinguyen@kernel.org>
-In-Reply-To: <20260304035307.16125-1-dinesh.maniyam@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260302220937.3682128-1-trini@konsulko.com>
+X-Sent-From: Pengutronix Hildesheim
+X-URL: http://www.pengutronix.de/
+X-Accept-Language: de,en
+X-Accept-Content-Type: text/plain
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: sha@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,54 +72,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-
-On 3/3/26 21:53, dinesh.maniyam@altera.com wrote:
-> From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+On Mon, Mar 02, 2026 at 04:09:37PM -0600, Tom Rini wrote:
+> There is a flaw in how U-Boot verifies and generates signatures for FIT
+> images. To prevent mix and match style attacks, it is recommended to
+> use signed configurations. How this is supposed to work is documented in
+> doc/usage/fit/signature.rst.
 > 
-> CONFIG_USE_TINY_PRINTF is enabled by default, disable it.
-> Arria 10 has 256KB of onchip ram and it is enough to support full printf.
-> Full printf allows us to have more complex format printing, example %ll.
-
-Do you have a size diff for the SPL with this change?
+> Crucially, the `hashed-nodes` property of the `signature` node contains
+> which nodes of the FIT device tree were hashed as part of the signature
+> and should be verified. However, this property itself is not part of the
+> hash and can therefore be modified by an attacker. Furthermore, the
+> signature only contains the name of each node and not the path in the
+> device tree to the node.
 > 
-> Signed-off-by: Ley Foon Tan <ley.foon.tan@intel.com>
+> This patch reworks the code to address this specific oversight.
 
-Is the above contact valid? Also, try to just include contacts returned 
-from get_maintainer.
+As this breaks compatibility between old U-Boot and new FIT images and
+the other way round it would be good to introduce a version field to FIT
+images. With that at least newer U-Boot versions could print a more
+meaningful error message than just "image verification failed" which
+gives no clue what had actually happened.
 
+Sascha
 
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
-> ---
->   arch/arm/mach-socfpga/Kconfig     | 1 -
->   configs/socfpga_arria10_defconfig | 1 +
->   2 files changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-> index f2e959b5662..ba01ec08be2 100644
-> --- a/arch/arm/mach-socfpga/Kconfig
-> +++ b/arch/arm/mach-socfpga/Kconfig
-> @@ -101,7 +101,6 @@ config TARGET_SOCFPGA_ARRIA10
->   	select SPL_SYSCON if SPL
->   	select ETH_DESIGNWARE_SOCFPGA
->   	imply FPGA_SOCFPGA
-> -	imply SPL_USE_TINY_PRINTF
->   
->   config SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
->   	bool "Always reprogram Arria 10 FPGA"
-> diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
-> index b32f40ae408..d5feabe5ce0 100644
-> --- a/configs/socfpga_arria10_defconfig
-> +++ b/configs/socfpga_arria10_defconfig
-> @@ -69,3 +69,4 @@ CONFIG_USB=y
->   CONFIG_USB_DWC2=y
->   # CONFIG_SPL_WDT is not set
->   # CONFIG_TOOLS_MKEFICAPSULE is not set
-> +# CONFIG_USE_TINY_PRINTF is not set
-
-This does not disable CONFIG_SPL_USE_TINY_PRINTF, you need to add this:
-
-# CONFIG_SPL_USE_TINY_PRINTF is not set
-
-Dinh
-
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
