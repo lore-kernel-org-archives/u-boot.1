@@ -4,54 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D43EF3D332
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 16:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C78F3D332
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 16:49:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA89683F9D;
-	Thu,  5 Mar 2026 17:44:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A1E5083FAF;
+	Thu,  5 Mar 2026 17:49:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="EzrvzvBq";
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="bUnW+xPN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 674F083FA3; Thu,  5 Mar 2026 17:44:56 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id CE81D83FB2; Thu,  5 Mar 2026 17:49:55 +0100 (CET)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AA8683F7F
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 17:44:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC35683F7F
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 17:49:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1772729059;
- bh=8vwWv2sMtSR5AGae6hcomUZKVmYLHHMdmfBJ/5M5BTg=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=EzrvzvBqf3CZ2+voNMEFOnsvT+RC59wTFZ+HnZpq7LGe2uzs2baz6FCwA+MeJ/mUu
- vuk9bD9GW6j6s/huATvvgFM06TBPK3rL7CauAFZGlQhFZNaGuPpjfy+SdiZ4dm3qo9
- uJF/O2WKFkKDz5RRIPnFuUvUdvMl0RetvbqRnKjKlQeNjnqNNFRTBNTNnxphkSxg71
- nWv5hy+Ce8JyP+2UwYl/KpOe2ecY9N9zAA2TlwOHerr6mTdzBX9ETrQWy5Fgpc52nt
- obYipxaU4KFpJXBSN8SLi/BQgZNEbiwsUFyF1nTiDnj5n9CAVnATPJhqWf2IwRGSH9
- qzbTNCDZQeaIw==
-Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
+ s=s2025; t=1772729383;
+ bh=79+1yHXP+Ur6vnFH9FGfhjLuOkv/6+82/K7hd9+iCqA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=bUnW+xPNcQHj0LLYKh+fZ5p8gaMCLLE1IY+GHbSEn8R3n3jKMmqE+7yK5o9jlI2Fe
+ DUqfOFMgzVRwwILiduVf96ahYBU56MdnD2Ec3V8MHmMMXQrg4suQTWvRjYJW1VkV2N
+ JHnrsFIGNe8qwLP5OzxzF1+JsG5pMySKScf9xW6N6X5dF7NKfERuo1lkXPTXbhgXoa
+ lMZfoPvoKbSn0fkenoUuDXqhby31yVEN+V7PTO09xX+8doSLOnOaZK0mgG+E/7X9On
+ s4bM4n9SULT9m8PjW+MnsFxd57MmtkDezvbRshAaEAcPxEuUejpd2LlPWkAMtLiDio
+ YjlG7XeTRUU5A==
+Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
+ [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id A9A4EB22022D;
- Thu,  5 Mar 2026 17:44:17 +0100 (CET)
-From: E Shattow <e@freeshell.de>
+ by freeshell.de (Postfix) with ESMTPSA id 6D98CB22013F;
+ Thu,  5 Mar 2026 17:49:42 +0100 (CET)
+Message-ID: <25743232-fc5f-4d7f-89ce-b1101e6043f0@freeshell.de>
+Date: Thu, 5 Mar 2026 08:49:39 -0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/3] Add upstream board Xunlong Orange Pi RV
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	E Shattow <e@freeshell.de>
-Subject: [PATCH v4 3/3] doc: board: starfive: Add Xunlong OrangePi RV
-Date: Thu,  5 Mar 2026 08:43:08 -0800
-Message-ID: <20260305164328.33789-4-e@freeshell.de>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <20260305164328.33789-1-e@freeshell.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
 References: <20260305164328.33789-1-e@freeshell.de>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20260305164328.33789-1-e@freeshell.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,74 +70,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-OrangePi RV is a board that uses the same EEPROM product serial identifier
-as the StarFive VisionFive 2 1.3b.
 
-In fact it is not completely compatible with the StarFive VisionFive 2
-1.3b for use with Linux Kernel however it is good enough for use with
-U-Boot SPL and U-Boot Main. Describe how to set the devicetree search path
-and, for advanced users, suggest that it is possible to update the EEPROM
-data with an invented "XOPIRV" identifier for automatic board detection.
 
-Signed-off-by: E Shattow <e@freeshell.de>
----
- doc/board/starfive/index.rst       |  1 +
- doc/board/starfive/orangepi_rv.rst | 35 ++++++++++++++++++++++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 doc/board/starfive/orangepi_rv.rst
+On 3/5/26 08:43, E Shattow wrote:
+> Xunlong Orange Pi RV patches are now in the Linux v6.19 release, so let's
+> introduce support for this board.
+> 
+> Note: The content of EEPROM is known to not be unique on this board, and
+> an (optional) invented "XOPIRV" identifier is implemented with this
+> series. Without, there are reports that the board is detected in U-Boot as
+> StarFive VisionFive 2 1.3b, and is then functional enough to load the
+> devicetree prior to booting Linux.
+> 
+> Changes since v3:
+> - Collect tags (no code changes)
+> - Cherry-picked dts subtree patches dropped as redundant:
+>   Drop patch 1/5 "dt-bindings: riscv: starfive: add xunlong,orangepi-rv"
+>   Drop patch 2/5 "riscv: dts: starfive: add Orange Pi RV"
+> 
+> Changes since v2:
+> - Collect tags (no code changes)
+> - Adjust missing S-o-by tag to first of tags list order for patch 4
+>   "configs: starfive: Add Orange Pi RV to visionfive2".
+> 
+> Changes since RFC v1:
+> - Cherrypick from devicetree-rebasing instead of importing upstream dts
+>   as -u-boot.dtsi overrides.
+> - Add basic documentation
+> - Mention invented "XOPIRV" identifier in commit messages
+> - Rebase on origin/next
+> 
+> E Shattow (3):
+>   board: starfive: visionfive2: Add Orange Pi RV selection by product_id
+>   configs: starfive: Add Orange Pi RV to visionfive2
+>   doc: board: starfive: Add Xunlong OrangePi RV
+> 
+>  board/starfive/visionfive2/spl.c              |  3 ++
+>  .../visionfive2/starfive_visionfive2.c        |  2 ++
+>  configs/starfive_visionfive2_defconfig        |  2 +-
+>  doc/board/starfive/index.rst                  |  1 +
+>  doc/board/starfive/orangepi_rv.rst            | 35 +++++++++++++++++++
+>  5 files changed, 42 insertions(+), 1 deletion(-)
+>  create mode 100644 doc/board/starfive/orangepi_rv.rst
+> 
+> 
+> base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
 
-diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
-index f85d7376b44..0996e0a68aa 100644
---- a/doc/board/starfive/index.rst
-+++ b/doc/board/starfive/index.rst
-@@ -10,5 +10,6 @@ StarFive
-    milk-v_mars
-    milkv_marscm_emmc
-    milkv_marscm_lite
-+   orangepi_rv
-    pine64_star64
-    visionfive2
-diff --git a/doc/board/starfive/orangepi_rv.rst b/doc/board/starfive/orangepi_rv.rst
-new file mode 100644
-index 00000000000..29cc58a1e2b
---- /dev/null
-+++ b/doc/board/starfive/orangepi_rv.rst
-@@ -0,0 +1,35 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Xunlong OrangePi RV
-+===================
-+
-+U-Boot for the OrangePi RV uses the same U-Boot binaries as the VisionFive 2
-+board. In U-Boot SPL the actual board is detected as a VisionFive2 1.3b due to
-+a manufacturer problem and having the same EEPROM data as VisionFive2 1.3b.
-+
-+Device-tree selection
-+---------------------
-+
-+U-Boot will set variable $fdtfile to starfive/jh7110-starfive-visionfive-2-v1.3b.dtb
-+
-+This is sufficient for U-Boot however fails to work correctly with the Linux Kernel.
-+
-+To overrule this selection the variable can be set manually and saved in the
-+environment
-+
-+::
-+
-+    env set fdtfile starfive/jh7110-orangepi-rv.dtb
-+    env save
-+
-+EEPROM modification
-+-------------------
-+
-+For advanced users and developers an EEPROM identifier product serial number
-+beginning with "XOPIRV" will match the OrangePi RV and automatically set the
-+correct device-tree at U-Boot SPL phase. The procedure for writing EEPROM data
-+is not detailed here however is similar to that of the Pine64 Star64 and Milk-V
-+Mars CM. The write-protect disable pads on the Orange Pi RV circuit board
-+bottom are labeled WP and GND near the M.2 connector.
-+
-+.. include:: jh7110_common.rst
--- 
-2.50.0
-
+Well that's embarrassing as I thought I'd collected the tags but it
+doesn't show up in what I sent to the list. Re-sending shortly,
+disregard this thread and sorry for the noise. -E
