@@ -4,108 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCEC4EF8FE4
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 17:27:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD62EF8FE4
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 17:27:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A516283F93;
+	by phobos.denx.de (Postfix) with ESMTP id F225983FD3;
 	Thu,  5 Mar 2026 18:26:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=at.abb.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NG+YOJDQ";
+	dkim=pass (2048-bit key; unprotected) header.d=at.abb.com header.i=@at.abb.com header.b="dCbHMXCz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C561A83F2D; Thu,  5 Mar 2026 16:06:41 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 754D8839A8; Thu,  5 Mar 2026 16:57:30 +0100 (CET)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6F8D81E18
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 16:06:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6725881E18
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 16:57:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=at.abb.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4648448e387so5438362b6e.1
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 07:06:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772723198; x=1773327998; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WtqYFWJepXd1RuG7xJODikd0Qqri7bB0LyHvsU1C8go=;
- b=NG+YOJDQemLWv7gYANE1Qlv0SoZ+Z7h4RemeqEU18XPBw9tMN5ibDTiAP5p4wNYGPS
- KbxF91OwukAj/50l9+/y0g1sPaizjXPJz5va8wX2ToAMDa0+MdvtAKy5kw71KKA9vM2r
- 0KVo7OcLjhn0Ra7UwoFlR701+OUa7DQJsVEus=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772723198; x=1773327998;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WtqYFWJepXd1RuG7xJODikd0Qqri7bB0LyHvsU1C8go=;
- b=QEkg11/8XPGoDIhIE8UWNtTU9778KuCobClQgc8cgIo+OWhITqMXGjhugw6gSbgDvP
- oWCgBc7JCbK9ktgV39EPF8rsoijL0LtzgK6p+8K+cx7GLcR2JO3Nx92H4vn2HDAib1WX
- jzhiABntM7Ay5vmdvzGAB0CH9og7jZ9l7TfgZud7/VHkMLZ9sWevrFCUsu8lLr/aEO+5
- E6rfEfPQE3XyRAuupZZUsUqvVsWGvrMaGWUapPYc5nGuJtIktnpCIF7nNT53K9bHLmn/
- lGKXieWOkyxRoor3hStKOcOSL/fqMaDVIX+rZa3d/37rxKecRXpZdvXOaKwb8gUoSXks
- HBKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVILzRsMs6XNo/zpZe3CwYGxjC5pvNPQuDTU2cwEKnjym7z9xXeWXzLV/wuIexy+HdNFClCryo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3Igqc18PyLyYkpeLuTwjFQ8P2SqIjpOUjZ+ClXN1jwSZgzRDQ
- hQ0reu8+xOGqncarvqKhnSK8O5EBqfDhySAyz2LiwZWFw3lHvvDN83mKbB63jzdzEMc=
-X-Gm-Gg: ATEYQzwFO0QHAQal/SYQb1hkhcjmPyemednGWvpKZgb9XawpWm9NuKhlhoyBOjfy48y
- K3liW9LcM7Oc9WJicW36hArVge0Ir1oRysquKKVUJKP/kJpYY6lX+y0W/T4KXxS4iAvhX9t9JOH
- Ulqw7YVVLJxzZvz3cs2wWHG4wUv2WQVpbd/3ySDC/XPbaBI4R1Ee865pNen07QGaVMGuiMfaBn6
- i5sYwitgkeYs5f7NQnp0iCjGDbdgL1ZcEER4WEeJSam9OoBHps2kie6bezknxkyHK8CN5nz2xV0
- RthG8e0WGl1JvDoOnSi/RfzFxRdUYUTyCE5Rn15B+tnAbJ8PMWCqOkMW1Sq3TuZGftDa2O+qECW
- LX6Kz5IaShN0pXrVrjVhLj3/M7cETbiF486i12r/Zae/DT43AXrA5dVEWLrS5yWGviGGZON5xtC
- 1bP/kRJ2azG02URt/lNOQSGcZu8P9Q+Cpo4w9BPbS8uhOd99SfYyyCcOLPeAZNekIfmlOmlE70L
- 8T88S9JZYYbnj8Z8z+hLO70Pgt5C8NIjUbKbNyg2bnI2lABIAqkVUXJxL1aEQ==
-X-Received: by 2002:a05:6808:c2f4:b0:45e:a555:4f1e with SMTP id
- 5614622812f47-4651acd0ae7mr2920705b6e.38.1772723198339; 
- Thu, 05 Mar 2026 07:06:38 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb0991f5sm13560528b6e.0.2026.03.05.07.06.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 07:06:37 -0800 (PST)
-Date: Thu, 5 Mar 2026 09:06:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: alice.guo@oss.nxp.com, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Ji Luo <ji.luo@nxp.com>,
- Ranjani Vaidyanathan <ranjani.vaidyanathan@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <ravi@prevas.dk>,
- =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Jacky Bai <ping.bai@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Frank Li <Frank.Li@nxp.com>, Niko Mauno <niko.mauno@vaisala.com>,
- Adam Ford <aford173@gmail.com>, Joseph Guo <qijian.guo@nxp.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- David Zang <davidzangcs@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Fedor Ross <fedor.ross@ifm.com>, Sumit Garg <sumit.garg@kernel.org>,
- Shawn Guo <shawnguo@kernel.org>, Marek Vasut <marex@nabladev.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>,
- Primoz Fiser <primoz.fiser@norik.com>,
- Simon Glass <sjg@chromium.org>, Alice Guo <alice.guo@nxp.com>
-Subject: Re: [PATCH v3 11/13] arm64: dts: freescale: Add i.MX952 EVK basic
- device tree
-Message-ID: <20260305150634.GF1388590@bill-the-cat>
-References: <20260302-imx952-v1-0-069d6167c0cb@nxp.com>
- <20260302-imx952-v1-11-069d6167c0cb@nxp.com>
- <CAOMZO5Dz9PNPWqqBOvwquvQYmh+Oy24KQ79d5qcxKn8EbyH1ew@mail.gmail.com>
+ spf=pass smtp.mailfrom=wolfgang.wallner@at.abb.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rrWyCg+qyxYCWls0VS5Pt4kMs4WmNgLoE6Ld42ZClOvaW4Nt1Fosxywpo6RY5a1jqoP0uSwPn5JhBQP4aGK4acFYS//WdbaEFSz7Nfpwcf87V/Sw2MysNZpxxa9zv63HGHW+W8Asat4gJ6BhiRD/mimpjAKbH+DBYTMHZvFNKCEs10LxRlofMfqsXrtia7S2rp3SR1/jn7Q1tDm5cWUTmWUvSMeS9LnKOO1aAW0RcO9ISRzd87BSHc3d3DyDqaTRz1VypCMPYtcuMG951+Jc7ks0glvb8OrTUe7otCXNG6MfFN5as/2c7rx55h46A6uyDaJZBCnkpJShoPncAuwsfg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EbNZYiVgHOJqRJsuwFpcBuTSJgE2UpPJHkKd8erTPTg=;
+ b=rOvN1MWWHmS9ZfqI8Bgn6faC1TQYil0CIpJD43xky6Ta5AQoEslogzDSMDTSQYhBqaNTMdc2bryA6SQZV1GS+DNERQE5QuDoeOCo2ppAA1G/zqY6bs/bMFqV22A+rwkHFO8VC04Kgi4A/GMCQK2s9afPb1VuRRiL2wTLjzcPLdDP80Du1zzZbOznNCvSbhDnO+d3av+MBqiTlbrjcHDdCYo6GAcmHLeggNUWyQ97J3ZThwJKcytbfcdvBdBfSltLEg4UzqeWq6TB74Fx0cCcjEEbmwA6Q/SNGW/nlyAUFX8QT8ozFMHB9hdGUTu+yo4gUJ7EdP0cRbilUKkZ4CA0/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=at.abb.com; dmarc=pass action=none header.from=at.abb.com;
+ dkim=pass header.d=at.abb.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=at.abb.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EbNZYiVgHOJqRJsuwFpcBuTSJgE2UpPJHkKd8erTPTg=;
+ b=dCbHMXCzqCxriSn0dFa6bdsLD85ED7FSy9jqeDnCRBTWucmHgQn546YsRrMeMJQzF8Ib30XsDUwPhx0pCfQ8iUOCELz/8C6DX0iX6QQD3nKNj787W48EDA+r3PV2P0jUSFuoOyZ34z+0oHHVrpnZC2/P7haTYtNRD4BEqeQCv71BY3orLZIUznN9gnBfknl25cMwm4S9YD3Yhzhqgr4o+6jCa0A72evK4SaeXZYrRh+oXSmXQhlGiVinewF6ZFRRTBa8PTvBLyVLgQ+GOOQKxf5PPkj39fKeVj7/yeotp82V4wi5LkDgM87uqzJOibxXw/URd3v0OiiRInsUlPGU5Q==
+Received: from DB9PR06MB8512.eurprd06.prod.outlook.com (2603:10a6:10:36c::17)
+ by AM8PR06MB7491.eurprd06.prod.outlook.com (2603:10a6:20b:365::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.18; Thu, 5 Mar
+ 2026 15:57:26 +0000
+Received: from DB9PR06MB8512.eurprd06.prod.outlook.com
+ ([fe80::c595:643c:30dd:131d]) by DB9PR06MB8512.eurprd06.prod.outlook.com
+ ([fe80::c595:643c:30dd:131d%7]) with mapi id 15.20.9678.017; Thu, 5 Mar 2026
+ 15:57:26 +0000
+From: Wolfgang Wallner <wolfgang.wallner@at.abb.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>, Heinrich Schuchardt
+ <heinrich.schuchardt@canonical.com>
+CC: Tom Rini <trini@konsulko.com>, Bernhard Messerklinger
+ <bernhard.messerklinger@at.abb.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH 1/1] board/BuR/zynq: don't select non-existent
+ SPL_BINMAN_FDT
+Thread-Topic: [PATCH 1/1] board/BuR/zynq: don't select non-existent
+ SPL_BINMAN_FDT
+Thread-Index: AQHcpiEFiqnSIGFc1ECF9pWg1xnpe7WU8ViAgAFpgqCACckrqQ==
+Date: Thu, 5 Mar 2026 15:57:26 +0000
+Message-ID: <DB9PR06MB851219E4216DE482BDD1561CB37DA@DB9PR06MB8512.eurprd06.prod.outlook.com>
+References: <20260225063559.47481-1-heinrich.schuchardt@canonical.com>
+ <a1a57943-efcd-456d-a6c5-cf3d1d87b385@cherry.de>
+ <DB9PR06MB8512053633B5A7EA47C3A040B373A@DB9PR06MB8512.eurprd06.prod.outlook.com>
+In-Reply-To: <DB9PR06MB8512053633B5A7EA47C3A040B373A@DB9PR06MB8512.eurprd06.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Enabled=True;
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SiteId=372ee9e0-9ce0-4033-a64a-c07073a91ecd;
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_SetDate=2026-03-05T15:57:25.720Z;
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Name=Internal;
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_ContentBits=1;
+ MSIP_Label_d792d246-d363-40e2-82bc-6f0655128b68_Method=Standard; 
+x-processedbytemplafy: true
+templafy-owa-emailsignature-processed: true
+templafy-owa-emailsignature-version: 1.1.0.1
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=at.abb.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR06MB8512:EE_|AM8PR06MB7491:EE_
+x-ms-office365-filtering-correlation-id: b392f260-d827-403f-db80-08de7acfe5a2
+x-abb-o365-outbound: ABBOUTBOUND1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700021;
+x-microsoft-antispam-message-info: 6soun8FVjSAykkV0CRIrzsG8gmEE9ILrLSsiLM0IgsAamUS4g8gLogpVj4DlSWZSFptNKBkCAlkvKrjnzCfkEhXOaMsSEWLAI2aJH4F/oSQ1mZIYt1cxsZhwoUGSfNIGlA2KI7gBJ23gQpR3U7kdwOQ5Y5tDVQKMFQIsKsIe63DH2x2mKXU4jbyKIE7QW5oW1+Zu+9bkrb7tdv158CqKaujAXoeNeanSjcpcjrbfUaeDCEs4c3toUW4y0U2cKeVzNXXzQTm2KCT3drWRYq/2Cy5+xvRgBx/TCLvtyhKfY/Ha7BAihiDi1DebBrS3/0wrW18eaPBSyI14GHWlpY2Sxf8MtuiTw9FFUVODWpZ7HozSsx4IpDsuvWY7LfONesBfYub45RlS3cRlxG2kusIQL6gIzKPt9Pa9VtdsuNsLCNsuipgUHjCTHdONfaG5yHpYgdNqmT9XUACjpGUzcqMyEq0baEN1TOJlaUGSIpbQYQJS/SXpP1PZpEVMd0lceAo30jNkWWjgD7rI5YR1LNlbdkYENQajl6+wYm84VR0OQ5kgjLLHu/VUVhBf+SjDBsMy4iQFBSbkD0JXlcm2hKdzRXmG4Zaf8Tau1Vbc6MqkKuyqDuphahHUXo/Upyc+X6PK6Aa8N82D293YqjejocUykmO+XjrULY592bjo5e0AYJctsAXqKtjmma3kPwONylGRklw/BQuMx9mIjS4LZLc5uJfnk2rgSTVi4RAE8ayizvXlsBvtaG8KHIEjGV0DasKy05nx3LBkmrKggrEpM5UicpWF/THh1gWvwAgUiU72E0s=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR06MB8512.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(38070700021); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?HOl3o5Qv4paLQ9rMuA5q7MEstTIvQ0/H4v89mjutu2qiqG7dWH4jO0+T9A?=
+ =?iso-8859-1?Q?iHjoishSU21rxUK87aJ7jXJ6+mpsgHJgpSFQIilPcI1VZLKS1Qln2s3kIu?=
+ =?iso-8859-1?Q?xMglUjBeAA5wgeVOZ3b3r6vzQewvLFfbpqpxu6M0V4QhdOz2Fg9rJ4Qnw6?=
+ =?iso-8859-1?Q?QX3b7eNSYo8CFCWmKTpJk2pkktcJd9BRjpM8B5hOWu4+yvVgPaBeL538N1?=
+ =?iso-8859-1?Q?0s/bkz3bQh7OwvCT/h7fPjGoIMzCCUbKdk8q3iN0wSRDGXDPLmLSdThgA3?=
+ =?iso-8859-1?Q?wYoKTfPucqePrXFVaGdUhM1COabq2kSFzgdi3oaWFQiNc4ITkN4Zcyq29t?=
+ =?iso-8859-1?Q?QCqMNV3dPAAbATYdcBhVt+rw0aWlHYlm4x40GoLesKLZoChpVrZ63CFqux?=
+ =?iso-8859-1?Q?INDWk4uzOsNHY7GxjwMT7QLiUQIHjSsPsm/p49tRTkdEDCJtBfN6ZcrNhQ?=
+ =?iso-8859-1?Q?IYe8actwZpAu9ygrF3gl8kxc/nzs45rT39bFGs6Jzdl290IGRRIEh6BMOj?=
+ =?iso-8859-1?Q?yxVvqQFRrWgrRNDIPgDVbvf7806iMoVCxJLBoHakWZoBwLPWorLZHFCy8m?=
+ =?iso-8859-1?Q?CAvDkkUpobwDXdbTeWqNwFjiWQhBG6zdyHSTP+vZ49WVopJqt1wX5OGaf+?=
+ =?iso-8859-1?Q?fk64CGOyxMQeWVqA4cZEnfRtls4lgx+1Uq4rl0ovTJbyJ1RvHElIvvmPad?=
+ =?iso-8859-1?Q?Jcx+JJLfHV0k63HELlBf2sbDsiaQ7w+QrTz5ow/kWgN0suQcbOpYo4WY74?=
+ =?iso-8859-1?Q?ymWbOMMop1tI2WuQjqq3pUZHZze/j6gJtSV42jJCFTFWc9Vk5Y8sBLec8i?=
+ =?iso-8859-1?Q?HXJ3w8QSSipCQDwf/rNSENAtZ7dGwC4vUvX9RBkWM9DRumQdF2dnyFVb0U?=
+ =?iso-8859-1?Q?WbU1Er0qBmH3wD4XP7Nw0GKTPczYU9nWQowCWNEjZKcri9oBGSTVHydXTV?=
+ =?iso-8859-1?Q?jqehjop/2pDO6XEQgK8e1+6bW17dDf+1bvZHTCCMd8DBRkSKxxkOV9GRcE?=
+ =?iso-8859-1?Q?f+h5CfEbcv+zjDqxF/EZW2Qa8A4QtgqYP1O59X6ogxhjNIFU7S0QPZQ/cb?=
+ =?iso-8859-1?Q?YAsrEQ7+io7LyUJbYTZ2XBV5OKIZ0ZvLBYsEW9fRj/p0XwgC2Ic/yWfPa6?=
+ =?iso-8859-1?Q?ffqk8GCFqDr2Ts4xl3E77Bo/dVdKGpdDqZJcSVSKtqION0g3wmgiY1CJvZ?=
+ =?iso-8859-1?Q?BcN7CaTayBhn6BreGy5eK9iW2VN0vUJ2GLwiZGXdDY1+1Fav1OwKYHgX8v?=
+ =?iso-8859-1?Q?9nvunXhVhGg9887e0sJ2mFkXGZ3q6Znlv+dBSWbgVbIViSvhk/oGgtd+7P?=
+ =?iso-8859-1?Q?2xXNPoy4A4LkSPPCbeal4vVROcTFv2fMahxzefISMyrr4Jw7dxpk0adh6e?=
+ =?iso-8859-1?Q?6XnODryg0DgN48PSFjLV6kFUX7jK+CwoFvDpn+x52at+blItxB3vvj98gs?=
+ =?iso-8859-1?Q?jVt3T+s47jZy9CI8zMXx1QuvgX9fApAzBZ/SAAcGNBFDYyfmJhwpj454oY?=
+ =?iso-8859-1?Q?ZU4X6lLEURWl/w6C8OABGVpcyAUYgDnZKq4KLsR+95iNK18kFoaBNmolWm?=
+ =?iso-8859-1?Q?iHnITFBIyqzupPa+05SsJIJPK6x9VE067i2VKwrL/9ml3uAS4oMMhr8ibz?=
+ =?iso-8859-1?Q?v5xa68KNUyiBW9YifsYeU9YtuOtG3arxmn4UTzsDF9lHCJyfgTr3Km7jQq?=
+ =?iso-8859-1?Q?ubTC4CQAJ7nesG+vhJXc8qQRHNHzoEdH7lKHyaUF54N5qlrzqf9rMIURyU?=
+ =?iso-8859-1?Q?s/9yxq15ZBJs/4xFzxd8Lqdnl6NMRfqjzYoNm946UzaC0jeVw88rHUF6q0?=
+ =?iso-8859-1?Q?+RfpgxwgBA=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vRNU/iFXzYgbmj4N"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5Dz9PNPWqqBOvwquvQYmh+Oy24KQ79d5qcxKn8EbyH1ew@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-OriginatorOrg: at.abb.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR06MB8512.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b392f260-d827-403f-db80-08de7acfe5a2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Mar 2026 15:57:26.2458 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 372ee9e0-9ce0-4033-a64a-c07073a91ecd
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 1zwdsNrdYWcebUcfWFkIC3q6LTqA3u5YqSbUCPQcZdUsf+vBvKc4KJFpnUDlIUDalmxmC4KChQl6WXmAqplxyylu4ckF5OZI+zi1fzs4vEI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR06MB7491
 X-Mailman-Approved-At: Thu, 05 Mar 2026 18:26:47 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -123,54 +156,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---vRNU/iFXzYgbmj4N
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Mar 05, 2026 at 11:00:11AM -0300, Fabio Estevam wrote:
-> Hi Alice,
->=20
-> On Mon, Mar 2, 2026 at 3:41=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
-> >
-> > From: Peng Fan <peng.fan@nxp.com>
-> >
-> > Add i.MX952 EVK basic device tree, with UART1, SDHC[1,2] supported.
-> >
-> > Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> > Signed-off-by: Shawn Guo <shawnguo@kernel.org>
-> >
-> > [ upstream commit: a5aa8551d0046ec701e8962f83361165ccf640a4 ]
-> >
-> > (cherry picked from commit bf18a0f083bdf73f806a3afb9b606b2cb0fcafb3)
-> > ---
-> >  dts/upstream/src/arm64/freescale/imx952-evk.dts | 217 ++++++++++++++++=
-++++++++
-> >  1 file changed, 217 insertions(+)
->=20
-> Shouldn't we add this temporarily to arch/arm/dts instead?
->=20
-> Then, when it reaches dts/upstream, we can move to OF_UPSTREAM.
->=20
-> Tom, what is your preference?
-
-This was a correctly done cherry-pick with our script
-(bf18a0f083bdf73f806a3afb9b606b2cb0fcafb3 is the commit in
-devicetree-rebasing) and may go in dts/upstream.
-
---=20
-Tom
-
---vRNU/iFXzYgbmj4N
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaamb+gAKCRAr4qD1Cr/k
-CrOyAP0ey8upbWkD8bH1O5UUihAXJNf9brUUf00hhSI16huwNwD/XccmfJ7FWmEw
-U/qZJd/hh+6zuh4uRwrSDZhnazsMVgM=
-=mhVT
------END PGP SIGNATURE-----
-
---vRNU/iFXzYgbmj4N--
+Hi all,=0A=
+=0A=
+From:=A0U-Boot <u-boot-bounces@lists.denx.de> on behalf of Wolfgang Wallner=
+ <wolfgang.wallner@at.abb.com>=0A=
+> =A0=0A=
+> [...]=0A=
+>=0A=
+> Just by reviewing the code I think that both the patch by Heinrich as wel=
+l as the explanation by Quentin make sense and this define was not necessar=
+y.=0A=
+> But I'm currently working from home without access to the required boards=
+ to test the patch.=0A=
+> I will provide more detailed feedback next week.=0A=
+=0A=
+Looks good to me.=0A=
+=0A=
+Reviewed-by: Wolfgang Wallner <wolfgang.wallner@at.abb.com>=0A=
+Tested-by: Wolfgang Wallner <wolfgang.wallner@at.abb.com>=0A=
+=0A=
+Tested on an X90CP154.=0A=
+=0A=
+Kind regards,=0A=
+Wolfgang=
