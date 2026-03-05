@@ -4,128 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE735EEF30C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 06:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CCB6EEF30C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 06:41:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 246C283F75;
-	Thu,  5 Mar 2026 07:39:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 8507983F8F;
+	Thu,  5 Mar 2026 07:41:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="V4ec8cPl";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BgjNCDzx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9061683F8A; Thu,  5 Mar 2026 06:58:21 +0100 (CET)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id BE36D83F93; Thu,  5 Mar 2026 07:41:04 +0100 (CET)
+Received: from PH0PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7ABDE83F2E
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 06:58:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C21B083EDF
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 07:41:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eN9sr14WvHL+7+7r/T5gltuSLmLMNnzv3tQZIa5CySENjLnF/4iWda9Z6o4E6iGqlC9Bwlm/nRKkUr8N4bn3ZWeq3bjA+K7VS9QSux4XreevdgOeQDhyEvuV3SmHEU4m9n9Uw6hioguqoT85kfTsFf7kT6GcgBYHPc7dC9Am4h5bXhI6mq7XQSKUyoNee69+mszc3dtHTq8jm+1/NfSpcPpiX0FzpmZRIoipI6oduoFJzr8aOIZWJhFZHm89Ld6axepbEMf4C4Zkq6R6OcRefmHfhqrdxUGWeQ9eAq3fHeKnFtR9B1eiWRpmrzfg/iRNO+OT4zarzD/jQWp+clMPVA==
+ b=iIW301M90qCKik4YJnIhdL4yRhmLU4q6hpak11VnnDa6d0DPDMeTOJpH6tF6brDmVnVSxVmgn7NII5ir9PlYNCeCL7zk6Mid164AR5R5Vj4gJui4VeWOPYA2HwTzMY03zo3upWzJqxzdsmg9b8KRbORhJhnFN9KO+grWCvSrxEmgB7nFcuS6ONKdYAEsTIVYyI0eSCjccRMoTu2Si5q5xg9JLiHZTr9Q7SJxCI6foeUeq5Qya+xLkH+cVQ7yFnTd6Ejy4pqjaQuyTjLbjC2m3NnjfjvALGKSl3iS2t2zjG4Li0wbodJYLS1GH96TLoRz2N4/GYxBhGhnu0anvtY60g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dlqf4U6ZKfvHbBjQ2lQ/itsb5jl2LrS95Y5NHslmYOc=;
- b=Tmfql/4/3Bxx5yWziAZVEI8gr07hWykl0cqZbwzs4ryv9eL8hd8wjnQS1EMAYskaj3KjgIkWRTa6Wa0o+kcTwW2Y4tGhWv0wYu42kImFpzk95sUNxfQdRkqYBkXnRfkvH2jiwoF66Lt2rfAcaBjTQmjo+RTsHleXS4iWqVxxFgz2ayj/AHKJdeXXkBbNXyEyIzQzgvBsOgjELhEMrOxrEMJZRAIBpZHr2cps3oiF4qgOMqf6Fek7p+1UYSgYw1MttvqzlUn0oKIfjU5oDvhdzKmIbUlq9CVVyBQ0t1o7uKPihrYSrFv5pmfYdg8zOnBK+DOvPru9FdWW96ENFgRMUw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ bh=2BiDP8K4UvOcZg7XaJ94hIgzbQ0eFsnCfDOYSy+t1bk=;
+ b=YkNGuYZgx9kGCcdGsOIEsQ1TxnaaoeJx8SEfqMWfCH+323s1eoy5xy+WQMf3UuLwr5aDwwjAVvR1ah0R59wdbYEvhj/df/2lOI/95Cjw4ukEneRPYQpuQWt3exeDEzQejCqaGE2maG+q8dFioHDPTJ3Q/dz6ugrPhY7fEcd74k9nddfC6umZSu1sjyeU+aTJ8Y5cHtWWCA++/G+mOzHaAtP6BVQbYsxN7vX+xLrqhGMdwrvElAdEqTUI9uFg3CTqRw8rt5Ngz0itt2qgoM5HEZ7lubQPmHZ4bv4K1Fo7F/lSdnt7OdrghB2Cm58RdXLwW2Rg2mSUpq5oLH8HumttXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dlqf4U6ZKfvHbBjQ2lQ/itsb5jl2LrS95Y5NHslmYOc=;
- b=V4ec8cPl6k23SO36ACXS+ssKDQIXY3yqauU4s2t6c3jReVstJxsQQ2Bk96jcjpZGyI+XuDRxEbu7xKMyma1KJdOGFkDHnReisvXS7RChKYhp4LBamKbLOZ+rhQjXvoN6dDuW2wfGH/3Q8zL38+Q9l1W+9ly12mkuDW8JeS3OkGi4y62Lv3xEOXj2O6EdUjUMAIQYLvcFbao/VE+5AExpYzwQ5xBTidf8WW79626hkWE2sD7hLT+Yn03Xb62kDebeuW4LQKLpQ5RoiIhQKs6oJeP0cpHv/xdiDvYD2LEcvpS38iTdAhJpJaWxGqLAdvmz2AQv02yEgH5ot8QNfzpr+g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by SA1PR03MB6514.namprd03.prod.outlook.com (2603:10b6:806:1c5::14)
+ bh=2BiDP8K4UvOcZg7XaJ94hIgzbQ0eFsnCfDOYSy+t1bk=;
+ b=BgjNCDzxuJtScrKIHNzZh2qH4MaIumRAF1K2ZxqRptiaBpyuIbRZIZuu2eNrc0j36YJyMeQ5Sl6Mtwy4+5qEjHomEuEF0mQP2FcvmS8ixwuqdiN41ZJWlT9K3OyekqqQ6jfT6OuWQwC8vM60F/obuov18zgw/7SyEZc1Zhh4H14=
+Received: from BL0PR02CA0124.namprd02.prod.outlook.com (2603:10b6:208:35::29)
+ by MW4PR12MB5601.namprd12.prod.outlook.com (2603:10b6:303:168::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Thu, 5 Mar
- 2026 05:58:15 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9654.022; Thu, 5 Mar 2026
- 05:58:15 +0000
-From: dinesh.maniyam@altera.com
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Dinh Nguyen <dinguyen@kernel.org>, Simon Glass <sjg@chromium.org>,
- Tien Fong <tien.fong.chee@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
- Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
-Subject: [PATCH v2] configs: socfpga: arria10: Disable
- CONFIG_SPL_USE_TINY_PRINTF
-Date: Thu,  5 Mar 2026 13:58:04 +0800
-Message-ID: <20260305055804.21580-1-dinesh.maniyam@altera.com>
-X-Mailer: git-send-email 2.43.7
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.17; Thu, 5 Mar
+ 2026 06:40:56 +0000
+Received: from BL02EPF00021F6A.namprd02.prod.outlook.com
+ (2603:10b6:208:35:cafe::91) by BL0PR02CA0124.outlook.office365.com
+ (2603:10b6:208:35::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.23 via Frontend Transport; Thu,
+ 5 Mar 2026 06:40:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BL02EPF00021F6A.mail.protection.outlook.com (10.167.249.6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Thu, 5 Mar 2026 06:40:55 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Thu, 5 Mar
+ 2026 00:40:55 -0600
+Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 5 Mar
+ 2026 00:40:54 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Thu, 5 Mar 2026 00:40:47 -0600
+From: Pranav Tilak <pranav.vinaytilak@amd.com>
+To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
+CC: <git@amd.com>, <padmarao.begari@amd.com>, <Pranav.VinayTilak@amd.com>,
+ Pranav Tilak <pranav.vinaytilak@amd.com>, Jerome Forissier
+ <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: lwip: scale buffer pool size with TFTP block size
+Date: Thu, 5 Mar 2026 12:10:11 +0530
+Message-ID: <20260305064033.8726-1-pranav.vinaytilak@amd.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0020.namprd05.prod.outlook.com
- (2603:10b6:a03:33b::25) To PH7PR03MB6942.namprd03.prod.outlook.com
- (2603:10b6:510:157::18)
-MIME-Version: 1.0
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|SA1PR03MB6514:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1b82369b-0efb-466b-0275-08de7a7c3123
-X-MS-Exchange-AtpMessageProperties: SA
+X-MS-TrafficTypeDiagnostic: BL02EPF00021F6A:EE_|MW4PR12MB5601:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2cd4aa1e-3fe1-4cc3-0f47-08de7a82277a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: DMzGd/ZwQ1c0T3Gk3NqYfjC3ISqXcrm019vqgkuaJR6pe811+hWA3+/z6oXn9N1KWAW6MZ9gIWyOExaJfP0JL4CKjuFsQygtQ4DTvz4QB67AjIkDr52GUc7GVeR50biFyAUttaVEfVCJXMVIh7wHhhg543+pZ77DglGgwNKR9PtyEmHLcl5t6JqYF0ZR4QfthXlWUHMQc483cBD2uCmo1FO6kO88rABWEk+RsxetBZLzjlztF4MjbfqiEfftBHqKybvZATBUFM6yBM9eMy3beoYdxtx+nM4cw+F8lx38g1D+qMCmAzarqkZ1HAFY5HpTFaEccCf/J3Fn9Zbv+4B5MKUz8wTm9HfNHM4rR+ohzjTRsezU7m0O+LZzvZTAfEoTsTCtl/OS8VoKUP7l8wBeAxxFcRRNwoIi7yjM+PCFsUocnJ08dSmr9+hqF9nBUk20kRlT+753tG872f2hkkBmTvuSYa+TXngqSha3JEl/iWKd4e33Il+qh1dlb/EEc9Wjk8SPXexrKocbYlqw52QMNs5hb6VTLgZHVw3NB4gUVA5P6Gd99W6EaweM3Oi/q+O6z9qohS9Lqz8Vnb3NGH5g8YfXBBVTqfTZXtxffssw2TaJ2RrNSdhj+cKB9D86gDOmFsdSfRrr5eUVduy//P33JiRMPkUkoWoPnZThdho2WZGKVoWNuaZky+bWQ9aGqNrFizF0E+RSqfcVC9ie3p/x+zSspOhnEQ/nMTL4pYFhKLQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700016; 
+X-Microsoft-Antispam-Message-Info: HdB2LG01wnwt9u0pdaVjAwjeB8kZxmMU08/L2/68NA90z79rxDLu9UiG8y5AIaKDwYB4cO004hm6gSXHycUIsot1xlgmRtdAubzmDJkqp+Us4ch8+DR4kEKPlvGiz3b+KOBkSc1PXysd7m1t217OunIH0ARlESANqj1dt5shGhcJBTX8VeZPQfcuk8o2mwSRzYOcPBLNe+/XIoFPiws65lEorQONQFHBo5k5k0EYOVt6a1McUzo9wDWex5Znv1F36FpbOafbq6JDL/lDbONhdPTzkeRE3kbUQ8ZVmdj8JVejv4Sio4xAQr3AbWeAPGisV4PRaFu8ZGPf8vXrA9OSujnaoRKHCbA1kW/SmqRKl0FvEHbBs0veH12rbRj6s0Dpwbjc841vUoUwHF5H+DFCRbKsyfRKhaY5+kA2JrLfYxLshr03ji8RfGR0lTOlBVxkj7il8zSfQ+1lkRc59ozzTv1MEERWHkWrYh+o8g8miTzXajdZ6Y0Il9tR/zTZqdPIM1alA5o7GhVMCqb7M0ds/5hdpQmli4a6Ww1yzY4axU4bW7LMYg8CDF8FPbFvjagVYWu3ukeEMkrSt8+8foDKkV5DdDKkigD0uY4C5Oobikw6OY45KuZusKYqVBCcX06oDFjqit6QQ2JCL+uF6peSCX82Wb+sn/gHQiY3LnyHcdr4Dg2k+OehKgZuOZ/O1h8e4wsU8TkQ2laSZvOds+SGh8JIFfQADnublS2bEbbS93eqsk/I3untsVFVY4xE9RaHyH0BQFonFn/u7VaufXGxEg==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700016); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?q6sPdeESPXycL+ceoAjNLvTZKmBce7z5hZzRzbW2KlNeAsiDklEAuPXo5zBG?=
- =?us-ascii?Q?PCrpbMkkHzbxSX0cnonpq01jNPZC8MqncFlmP7Bm8y9lb4Dmxs77fl9ePWGO?=
- =?us-ascii?Q?cnP+X2k8wn8id7Hnfg+Ve8PTVzsSQzPTwj0x3bl2W7u4simGLZulNOdFpMcq?=
- =?us-ascii?Q?OI0tB9pqxNXL160ca56pIj5+9TpCLoniFzRYUbmZsrMFnsQXF2UwswnNf7bC?=
- =?us-ascii?Q?Zf0q756RWW3X0OttdDm3EzQs5VHeDPoy9aDTwSbqSfiIkm0Ki7sDUmevCWRD?=
- =?us-ascii?Q?pDl2Fiw8bSoq+14xTunXxw11VW/FpmJdBxPwWmGhRzxhttxVgZYDLwaoONsi?=
- =?us-ascii?Q?A4dDkwRzqGvg0e+IcpRTT8K/RyXXuCYx8uEFrPs6XdwGkV4gO68M1e2uNx0a?=
- =?us-ascii?Q?VCtHmd+BnFrrrXetLBj6NoNY+lffjZrfHDl1xm9UYGW2uoNmhG6vRBopV4IQ?=
- =?us-ascii?Q?Vn3MZlMlXQeyklHeK8uoGjXlG8IivF1duoF8/M4cSny2iaATJhplp05HTanV?=
- =?us-ascii?Q?9TWmUB+nyKn/UfcVydEnh5qLrtBlyM8yA66FJb45h4sfq4IuFBGUP7hosj8H?=
- =?us-ascii?Q?wZ7SZHATHInfGsvODQQ4BxZbFmebi4Gx5up1S116xHiZX9hhVSzPER6kZ/gX?=
- =?us-ascii?Q?5iqzh+Qzjw4CQ0wLTensjRdeoWnuw33WNYNI4JdHtyXRQSU4LGrd4NI2Ag4d?=
- =?us-ascii?Q?AZQ+jXX3tqOwyTxSYjAJR3wMQAzTwecmsac8QCAl5Qv6U2DhGaMyrtk/J9mF?=
- =?us-ascii?Q?rLC8FKrPEVINfFFm0d5RzcTU6gwcRi+KpHBOCr9BS/h0iU/++fpOIupYATI+?=
- =?us-ascii?Q?CKe+XNaWrHDTWmrs/xkyGRlcT5BSdyV5cEBY6fDyetn43KnoRJDkVkXKNkWX?=
- =?us-ascii?Q?PdcyaYo51wqbku3PBR2DpIoEXE2Q0LyzCh+oLQvs2EgaNDD+om+vgy7oCR7k?=
- =?us-ascii?Q?I3oFw+petU+mwgh0IJTbKcr0IVYXSqwOMZLISnyo/v2Vky1VH2H85dFBC84a?=
- =?us-ascii?Q?hQkFhnedunhiibpdOp3QNm6RrgnNxeOwXudK6rb2C52QsL5fXJIwDKKBlqZE?=
- =?us-ascii?Q?qf6DrRyzcE0OPaFwjn8pTVfqjpnqwUCBztb7IgHyIYlgsqqWZfAW2Ubi6FUq?=
- =?us-ascii?Q?qHSZl9qtRaS/XfoefzJCkSn7ZQs9TQrxLCZj8UYqSIqkGTr8XVRicgWhoJSM?=
- =?us-ascii?Q?lOTD28VC2FMwVsOlMOm/zihFk4Ru08LA9iDu+qb5mo8KGJVUFcX27lsl3iUl?=
- =?us-ascii?Q?EDIqyfRoZO1JYn4IvmtVyk1WgR1zIQ/8spSXKKgjjcrS6w+rcxYvkqvkdUi6?=
- =?us-ascii?Q?B4XZv0efkOyTA5hlinylT4sP8rgsyzPMftgcgLOCfRA0s2dxL+ypzUJcwQni?=
- =?us-ascii?Q?3Q+Q9NycJgp8wqSdcdbHfuK0ZtHCydLyaUGn7e4vYTRB24qo+5BZjYkIy+Hj?=
- =?us-ascii?Q?h91Kqf7MkJxI84Zyu7Ty10+b+cJNpY+zlu/0g1Try8uX4o4L/p6edVU1Brlh?=
- =?us-ascii?Q?+mwSwT73yDs+R2ZTYYF94130086Sp4hEnD4W5L9knXicp9YVWN3uO0FjSWBC?=
- =?us-ascii?Q?BLC2qej8MfRmBS6xlcI5rahfXE7ghD6+jQOdnV9ZidHaKKCd8MI4vW0m4C0V?=
- =?us-ascii?Q?zy3HF90I/593SagANoRhFhK3277PT3YD9Qsx9zGQfiMN7xpLDL6h9NmaxEdJ?=
- =?us-ascii?Q?adyt0H94XUYPZHuHCYe7HCtGU9Z7rvHVmpe9vGl91HPnDlKDFdKGBovGtQ40?=
- =?us-ascii?Q?r2hmJUUCnEZYwdW4+ShQ5C52NP05rxY=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b82369b-0efb-466b-0275-08de7a7c3123
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2026 05:58:15.6390 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RLJRZI8XfQsFFuifvSPtUl2sWAHpIAZImdR2EHC8kAAsbDVCvaknOQV9Wgz3beQlFm9YmOEOkIN5s/kDOpmZpS2TIA06yw3vCdXl72LOBkY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB6514
-X-Mailman-Approved-At: Thu, 05 Mar 2026 07:39:36 +0100
+X-MS-Exchange-AntiSpam-MessageData-0: RPZ7NbtkBmyRY/KNFpPJO6zguZOwFd4XFeYG7xWg72qW/ScqCGY8jy70YyuiAYgL2xVNoa6W24Hnat5ngXbnOjDSlZrgw5g+XkjV2H3YY8hohZ48JEtHIpW9gIh1nr5FQIWJAFMPdhBWWrivf/usd0B73m/oBUpbmyRvkHoqaZzAQCQIiwLMubLFVP0bLCGpzTrAHeiDyMfAQ7nFR37L8Xd1otTkS0yX1ha31+CuRJ/4lTlz5bgd91rAnsCL6Xd1a3eNYbLk2ZkrWvuuDrumjG9KpnvzP9C7ocHwriZILPj82CXMmj0TBV3gx9awPF4KGLY6cTQ6PZ56B/5DQ2kKTyZUlvUEDF+vvZ08MY7jt2b77iyt1k9T97NimjKByu2F1cSwkVb9ItqTxrf7T1xr8za/buTv9Gmg0UdWkcGdjo1MjgqeuCw9ecFe4M03eL3c
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2026 06:40:55.9400 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2cd4aa1e-3fe1-4cc3-0f47-08de7a82277a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00021F6A.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5601
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,39 +127,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+TFTP transfers fail when tftpblocksize is set to 8192 or larger due to
+insufficient buffer resources for IP fragment reassembly.
 
-CONFIG_SPL_USE_TINY_PRINTF is enabled by default, disable it.
-Arria 10 has 256KB of onchip ram and it is enough to support full printf.
-Full printf allows us to have more complex format printing, example %ll.
+Adjust PBUF_POOL_SIZE and IP_REASS_MAX_PBUFS based on
+CONFIG_TFTP_BLOCKSIZE to support larger TFTP transfers
+while keeping memory usage efficient.
 
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+- CONFIG_TFTP_BLOCKSIZE >= 12288:PBUF_POOL_SIZE=18, IP_REASS_MAX_PBUFS=12
+
+- CONFIG_TFTP_BLOCKSIZE >= 8192:PBUF_POOL_SIZE=12, IP_REASS_MAX_PBUFS=6
+
+- CONFIG_TFTP_BLOCKSIZE undefined: PBUF_POOL_SIZE=8, IP_REASS_MAX_PBUFS=4
+
+Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
 ---
- arch/arm/mach-socfpga/Kconfig     | 1 -
- configs/socfpga_arria10_defconfig | 1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ lib/lwip/u-boot/lwipopts.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
-index f2e959b5662..ba01ec08be2 100644
---- a/arch/arm/mach-socfpga/Kconfig
-+++ b/arch/arm/mach-socfpga/Kconfig
-@@ -101,7 +101,6 @@ config TARGET_SOCFPGA_ARRIA10
- 	select SPL_SYSCON if SPL
- 	select ETH_DESIGNWARE_SOCFPGA
- 	imply FPGA_SOCFPGA
--	imply SPL_USE_TINY_PRINTF
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+index e8a2c9d7a0a..b4ff31096fe 100644
+--- a/lib/lwip/u-boot/lwipopts.h
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -65,7 +65,14 @@
+ #define MEM_ALIGNMENT                   8
  
- config SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
- 	bool "Always reprogram Arria 10 FPGA"
-diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
-index b32f40ae408..74ec07cf3e4 100644
---- a/configs/socfpga_arria10_defconfig
-+++ b/configs/socfpga_arria10_defconfig
-@@ -69,3 +69,4 @@ CONFIG_USB=y
- CONFIG_USB_DWC2=y
- # CONFIG_SPL_WDT is not set
- # CONFIG_TOOLS_MKEFICAPSULE is not set
-+# CONFIG_SPL_USE_TINY_PRINTF is not set
+ #define MEMP_NUM_TCP_SEG                16
++
++#if defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >= 12288
++#define PBUF_POOL_SIZE                  18
++#elif defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >= 8192
++#define PBUF_POOL_SIZE                  12
++#else
+ #define PBUF_POOL_SIZE                  8
++#endif
+ 
+ #define LWIP_ARP                        1
+ #define ARP_TABLE_SIZE                  4
+@@ -76,7 +83,15 @@
+ #define IP_REASSEMBLY                   1
+ #define IP_FRAG                         1
+ #define IP_REASS_MAXAGE                 3
++
++#if defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >= 12288
++#define IP_REASS_MAX_PBUFS              12
++#elif defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >= 8192
++#define IP_REASS_MAX_PBUFS              6
++#else
+ #define IP_REASS_MAX_PBUFS              4
++#endif
++
+ #define IP_FRAG_USES_STATIC_BUF         0
+ 
+ #define IP_DEFAULT_TTL                  255
 -- 
-2.43.7
+2.34.1
 
