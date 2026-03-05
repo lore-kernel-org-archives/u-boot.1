@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47030F30946
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 11:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0F9F30956
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 13:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23EBC80212;
-	Thu,  5 Mar 2026 12:43:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 4175C8382A;
+	Thu,  5 Mar 2026 14:08:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="trOmGHHq";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C6F7800AE; Thu,  5 Mar 2026 12:43:31 +0100 (CET)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ id C7A7E839A8; Thu,  5 Mar 2026 14:08:37 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D72F283EDF
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 12:43:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
+ by phobos.denx.de (Postfix) with ESMTPS id D56C981E18
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 14:08:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1vy772-0002ho-EE; Thu, 05 Mar 2026 12:43:28 +0100
-Message-ID: <66d7ba0c-07d9-4b1b-929b-bbc410d7ffb8@pengutronix.de>
-Date: Thu, 5 Mar 2026 12:43:26 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 544DA61340;
+ Thu,  5 Mar 2026 13:08:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8692EC116C6;
+ Thu,  5 Mar 2026 13:08:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772716113;
+ bh=JYs9VmaDmj301rTuk4BsC2Q7Ha4fjctxCUGlaAeWkfY=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=trOmGHHq6t6/GHAF/AXHekgJfQ4ZZzhCnH2/RNOn4oWgYl16i/11hFQG8vMfGgXBB
+ haMTXQTxQVUYQLGmQXs4H/0bxRj7wH64Us0I4ohzX/l1E0KwOIFyHTpE8Jt07oCo3y
+ FvOjKqUcECgoJGtkgtlPlA2MvSF6GPPVUNtAWSd3Vpjnl5dKgzaM7bdWaFUWNZf7X9
+ p/ZSftBh6H56cNDVPSAHcIS411pCLHi8TLW8kOf76SLb4hRoMVCvRW/pWeTpvzJ0iG
+ WH7W4DWVUjl4C2mZLYq+sduggd8KL7KYUrHpgSppkqxiaG5HBeYnA5YB7wa2AwjF3B
+ GFU3X+eMrqBpA==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ lukma@denx.de, mkorpershoek@kernel.org
+Cc: u-boot@lists.denx.de, srk@ti.com, s-vadapalli@ti.com
+Subject: Re: [PATCH] common: spl: spl_dfu.c: Fix warning associated with PCI
+ subclass_code
+In-Reply-To: <20260305103815.999886-1-s-vadapalli@ti.com>
+References: <20260305103815.999886-1-s-vadapalli@ti.com>
+Date: Thu, 05 Mar 2026 14:08:30 +0100
+Message-ID: <87h5qumnjl.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] boot: Add fit_config_get_hash_list() to build signed node
- list
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Ludwig <ludwig.nussel@siemens.com>,
- Simon Glass <simon.glass@canonical.com>, Daniel Golle
- <daniel@makrotopia.org>, Enric Balletbo i Serra <eballetbo@kernel.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-References: <20260304135202.1535134-1-sjg@chromium.org>
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Content-Language: en-US, de-DE, de-BE
-In-Reply-To: <20260304135202.1535134-1-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,356 +69,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+Hi Siddharth,
 
-On 3/4/26 2:51 PM, Simon Glass wrote:
-> From: Simon Glass <simon.glass@canonical.com>
-> 
-> The hashed-nodes property in a FIT signature node lists which FDT paths
-> are included in the signature hash. It is intended as a hint so should
-> not be used for verification.
-> 
-> Add a function to build the node list from scratch by iterating the
-> configuration's image references. Skip properties known not to be image
-> references. For each image, collect the path plus all hash and cipher
-> subnodes.
-> 
-> Use the new function in fit_config_check_sig() instead of reading
-> 'hashed-nodes'.
-> 
-> Update the docs to cover this. The FIT spec can be updated separately.
+Thank you for the patch.
 
-Thanks very much, I had something similar in mind.
-Otherwise, the compatibility break would've been a nightmare.
+On Thu, Mar 05, 2026 at 16:08, Siddharth Vadapalli <s-vadapalli@ti.com> wrote:
 
-Cheers,
-Ahmad
+> The subclass_code member of the pci_ep_header structure is a 1-byte
+> field. The macro PCI_CLASS_MEMORY_RAM is a concetation of baseclass_code
+> and subclass_code as follows:
+> 	PCI_BASE_CLASS_MEMORY: 0x05
+> 	Subclass Code for RAM: 0x00
+> 	PCI_CLASS_MEMORY_RAM:  0x0500
+> Hence, instead of extracting it via an implicity type conversion from int
+> to u8 which throws a warning, explicitly mask the bits to extract the
 
-> 
-> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+What's the exact warning string? With which compiler version?
+
+Is there an example defconfig that I can use to reproduce this?
+
+Thanks
+Mattijs
+
+> subclass_code.
+>
+> Fixes: cde77583cf0b ("spl: Add support for Device Firmware Upgrade (DFU) over PCIe")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 > ---
-> 
->  boot/image-fit-sig.c        | 227 +++++++++++++++++++++++++++++-------
->  doc/usage/fit/signature.rst |  19 ++-
->  2 files changed, 195 insertions(+), 51 deletions(-)
-> 
-> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-> index f23e9d5d0b0..f426ead13c0 100644
-> --- a/boot/image-fit-sig.c
-> +++ b/boot/image-fit-sig.c
-> @@ -18,6 +18,7 @@ DECLARE_GLOBAL_DATA_PTR;
->  #include <u-boot/hash-checksum.h>
+>
+> Hello,
+>
+> This patch is based on commit
+> f473a453b0c kbuild: Drop phandle from diff between base DT and U-Boot augmented DT if DEVICE_TREE_DEBUG=1of the master branch of U-Boot.
+>
+> Regards,
+> Siddharth.
+>
+>  common/spl/spl_dfu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/spl/spl_dfu.c b/common/spl/spl_dfu.c
+> index b09f82790c9..7d21bb4d16a 100644
+> --- a/common/spl/spl_dfu.c
+> +++ b/common/spl/spl_dfu.c
+> @@ -64,7 +64,7 @@ static int dfu_over_pcie(void)
+>  	hdr.deviceid = CONFIG_SPL_PCI_DFU_DEVICE_ID;
+>  	hdr.vendorid = CONFIG_SPL_PCI_DFU_VENDOR_ID;
+>  	hdr.baseclass_code = PCI_BASE_CLASS_MEMORY;
+> -	hdr.subclass_code = PCI_CLASS_MEMORY_RAM;
+> +	hdr.subclass_code = PCI_CLASS_MEMORY_RAM & 0xff;
 >  
->  #define IMAGE_MAX_HASHED_NODES		100
-> +#define FIT_MAX_HASH_PATH_BUF		4096
->  
->  /**
->   * fit_region_make_list() - Make a list of image regions
-> @@ -229,6 +230,179 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
->  	return 0;
->  }
->  
-> +/**
-> + * fit_config_add_hash() - Add hash nodes for one image to the node list
-> + *
-> + * Adds the image path, all its hash-* subnode paths, and its cipher
-> + * subnode path (if present) to the packed buffer.
-> + *
-> + * @fit:		FIT blob
-> + * @image_noffset:	Image node offset (e.g. /images/kernel-1)
-> + * @node_inc:		Array of path pointers to fill
-> + * @count:		Pointer to current count (updated on return)
-> + * @max_nodes:		Maximum entries in @node_inc
-> + * @buf:		Buffer for packed path strings
-> + * @buf_used:		Pointer to bytes used in @buf (updated on return)
-> + * @buf_len:		Total size of @buf
-> + * Return: 0 on success, -ve on error
-> + */
-> +static int fit_config_add_hash(const void *fit, int image_noffset,
-> +			       char **node_inc, int *count, int max_nodes,
-> +			       char *buf, int *buf_used, int buf_len)
-> +{
-> +	int noffset, hash_count, ret, len;
-> +
-> +	if (*count >= max_nodes)
-> +		return -ENOSPC;
-> +
-> +	ret = fdt_get_path(fit, image_noffset, buf + *buf_used,
-> +			   buf_len - *buf_used);
-> +	if (ret < 0)
-> +		return -ENOENT;
-> +	len = strlen(buf + *buf_used) + 1;
-> +	node_inc[(*count)++] = buf + *buf_used;
-> +	*buf_used += len;
-> +
-> +	/* Add all this image's hash subnodes */
-> +	hash_count = 0;
-> +	for (noffset = fdt_first_subnode(fit, image_noffset);
-> +	     noffset >= 0;
-> +	     noffset = fdt_next_subnode(fit, noffset)) {
-> +		const char *name = fit_get_name(fit, noffset, NULL);
-> +
-> +		if (strncmp(name, FIT_HASH_NODENAME,
-> +			    strlen(FIT_HASH_NODENAME)))
-> +			continue;
-> +		if (*count >= max_nodes)
-> +			return -ENOSPC;
-> +		ret = fdt_get_path(fit, noffset, buf + *buf_used,
-> +				   buf_len - *buf_used);
-> +		if (ret < 0)
-> +			return -ENOENT;
-> +		len = strlen(buf + *buf_used) + 1;
-> +		node_inc[(*count)++] = buf + *buf_used;
-> +		*buf_used += len;
-> +		hash_count++;
-> +	}
-> +
-> +	if (!hash_count) {
-> +		printf("No hash nodes in image '%s'\n",
-> +		       fdt_get_name(fit, image_noffset, NULL));
-> +		return -ENOMSG;
-> +	}
-> +
-> +	/* Add this image's cipher node if present */
-> +	noffset = fdt_subnode_offset(fit, image_noffset, FIT_CIPHER_NODENAME);
-> +	if (noffset != -FDT_ERR_NOTFOUND) {
-> +		if (noffset < 0)
-> +			return -EIO;
-> +		if (*count >= max_nodes)
-> +			return -ENOSPC;
-> +		ret = fdt_get_path(fit, noffset, buf + *buf_used,
-> +				   buf_len - *buf_used);
-> +		if (ret < 0)
-> +			return -ENOENT;
-> +		len = strlen(buf + *buf_used) + 1;
-> +		node_inc[(*count)++] = buf + *buf_used;
-> +		*buf_used += len;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/**
-> + * fit_config_get_hash_list() - Build the list of nodes to hash
-> + *
-> + * Works through every image referenced by the configuration and collects the
-> + * node paths: root + config + all referenced images with their hash and
-> + * cipher subnodes.
-> + *
-> + * Properties known not to be image references (description, compatible,
-> + * default, load-only) are skipped, so any new image type is covered by default.
-> + *
-> + * @fit:	FIT blob
-> + * @conf_noffset: Configuration node offset
-> + * @node_inc:	Array to fill with path string pointers
-> + * @max_nodes:	Size of @node_inc array
-> + * @buf:	Buffer for packed null-terminated path strings
-> + * @buf_len:	Size of @buf
-> + * Return: number of entries in @node_inc, or -ve on error
-> + */
-> +static int fit_config_get_hash_list(const void *fit, int conf_noffset,
-> +				    char **node_inc, int max_nodes,
-> +				    char *buf, int buf_len)
-> +{
-> +	const char *conf_name;
-> +	int image_count;
-> +	int prop_offset;
-> +	int used = 0;
-> +	int count = 0;
-> +	int ret, len;
-> +
-> +	conf_name = fit_get_name(fit, conf_noffset, NULL);
-> +
-> +	/* Always include the root node and the configuration node */
-> +	if (max_nodes < 2)
-> +		return -ENOSPC;
-> +
-> +	len = 2;  /* "/" + nul */
-> +	if (len > buf_len)
-> +		return -ENOSPC;
-> +	strcpy(buf, "/");
-> +	node_inc[count++] = buf;
-> +	used += len;
-> +
-> +	len = snprintf(buf + used, buf_len - used, "%s/%s", FIT_CONFS_PATH,
-> +		       conf_name) + 1;
-> +	if (used + len > buf_len)
-> +		return -ENOSPC;
-> +	node_inc[count++] = buf + used;
-> +	used += len;
-> +
-> +	/* Process each image referenced by the config */
-> +	image_count = 0;
-> +	fdt_for_each_property_offset(prop_offset, fit, conf_noffset) {
-> +		const char *prop_name;
-> +		int img_count, i;
-> +
-> +		fdt_getprop_by_offset(fit, prop_offset, &prop_name, NULL);
-> +		if (!prop_name)
-> +			continue;
-> +
-> +		/* Skip properties that are not image references */
-> +		if (!strcmp(prop_name, FIT_DESC_PROP) ||
-> +		    !strcmp(prop_name, FIT_COMPAT_PROP) ||
-> +		    !strcmp(prop_name, FIT_DEFAULT_PROP))
-> +			continue;
-> +
-> +		img_count = fdt_stringlist_count(fit, conf_noffset, prop_name);
-> +		for (i = 0; i < img_count; i++) {
-> +			int noffset;
-> +
-> +			noffset = fit_conf_get_prop_node_index(fit,
-> +							       conf_noffset,
-> +							       prop_name, i);
-> +			if (noffset < 0)
-> +				continue;
-> +
-> +			ret = fit_config_add_hash(fit, noffset, node_inc,
-> +						  &count, max_nodes, buf, &used,
-> +						  buf_len);
-> +			if (ret < 0)
-> +				return ret;
-> +
-> +			image_count++;
-> +		}
-> +	}
-> +
-> +	if (!image_count) {
-> +		printf("No images in config '%s'\n", conf_name);
-> +		return -ENOMSG;
-> +	}
-> +
-> +	return count;
-> +}
-> +
->  /**
->   * fit_config_check_sig() - Check the signature of a config
->   *
-> @@ -269,20 +443,16 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
->  		FIT_DATA_POSITION_PROP,
->  		FIT_DATA_OFFSET_PROP,
->  	};
-> -
-> -	const char *prop, *end, *name;
-> +	char *node_inc[IMAGE_MAX_HASHED_NODES];
-> +	char hash_buf[FIT_MAX_HASH_PATH_BUF];
->  	struct image_sign_info info;
->  	const uint32_t *strings;
-> -	const char *config_name;
->  	uint8_t *fit_value;
->  	int fit_value_len;
-> -	bool found_config;
->  	int max_regions;
-> -	int i, prop_len;
->  	char path[200];
->  	int count;
->  
-> -	config_name = fit_get_name(fit, conf_noffset, NULL);
->  	debug("%s: fdt=%p, conf='%s', sig='%s'\n", __func__, key_blob,
->  	      fit_get_name(fit, noffset, NULL),
->  	      fit_get_name(key_blob, required_keynode, NULL));
-> @@ -297,45 +467,12 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
->  		return -1;
->  	}
->  
-> -	/* Count the number of strings in the property */
-> -	prop = fdt_getprop(fit, noffset, "hashed-nodes", &prop_len);
-> -	end = prop ? prop + prop_len : prop;
-> -	for (name = prop, count = 0; name < end; name++)
-> -		if (!*name)
-> -			count++;
-> -	if (!count) {
-> -		*err_msgp = "Can't get hashed-nodes property";
-> -		return -1;
-> -	}
-> -
-> -	if (prop && prop_len > 0 && prop[prop_len - 1] != '\0') {
-> -		*err_msgp = "hashed-nodes property must be null-terminated";
-> -		return -1;
-> -	}
-> -
-> -	/* Add a sanity check here since we are using the stack */
-> -	if (count > IMAGE_MAX_HASHED_NODES) {
-> -		*err_msgp = "Number of hashed nodes exceeds maximum";
-> -		return -1;
-> -	}
-> -
-> -	/* Create a list of node names from those strings */
-> -	char *node_inc[count];
-> -
-> -	debug("Hash nodes (%d):\n", count);
-> -	found_config = false;
-> -	for (name = prop, i = 0; name < end; name += strlen(name) + 1, i++) {
-> -		debug("   '%s'\n", name);
-> -		node_inc[i] = (char *)name;
-> -		if (!strncmp(FIT_CONFS_PATH, name, strlen(FIT_CONFS_PATH)) &&
-> -		    name[sizeof(FIT_CONFS_PATH) - 1] == '/' &&
-> -		    !strcmp(name + sizeof(FIT_CONFS_PATH), config_name)) {
-> -			debug("      (found config node %s)", config_name);
-> -			found_config = true;
-> -		}
-> -	}
-> -	if (!found_config) {
-> -		*err_msgp = "Selected config not in hashed nodes";
-> +	/* Build the node list from the config, ignoring hashed-nodes */
-> +	count = fit_config_get_hash_list(fit, conf_noffset,
-> +					 node_inc, IMAGE_MAX_HASHED_NODES,
-> +					 hash_buf, sizeof(hash_buf));
-> +	if (count < 0) {
-> +		*err_msgp = "Failed to build hash node list";
->  		return -1;
->  	}
->  
-> diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
-> index e5b5a8432e9..da08cc75c3a 100644
-> --- a/doc/usage/fit/signature.rst
-> +++ b/doc/usage/fit/signature.rst
-> @@ -353,20 +353,27 @@ meantime.
->  Details
->  -------
->  The signature node contains a property ('hashed-nodes') which lists all the
-> -nodes that the signature was made over.  The image is walked in order and each
-> -tag processed as follows:
-> +nodes that the signature was made over.  The signer (mkimage) writes this
-> +property as a record of what was included in the hash.  During verification,
-> +however, U-Boot does not read 'hashed-nodes'. Instead it rebuilds the node
-> +list from the configuration's own image references (kernel, fdt, ramdisk,
-> +etc.), since 'hashed-nodes' is not itself covered by the signature. The
-> +rebuilt list always includes the root node, the configuration node, each
-> +referenced image node and its hash/cipher subnodes.
-> +
-> +The image is walked in order and each tag processed as follows:
->  
->  DTB_BEGIN_NODE
->      The tag and the following name are included in the signature
-> -    if the node or its parent are present in 'hashed-nodes'
-> +    if the node or its parent are present in the node list
->  
->  DTB_END_NODE
->      The tag is included in the signature if the node or its parent
-> -    are present in 'hashed-nodes'
-> +    are present in the node list
->  
->  DTB_PROPERTY
->      The tag, the length word, the offset in the string table, and
-> -    the data are all included if the current node is present in 'hashed-nodes'
-> +    the data are all included if the current node is present in the node list
->      and the property name is not 'data'.
->  
->  DTB_END
-> @@ -374,7 +381,7 @@ DTB_END
->  
->  DTB_NOP
->      The tag is included in the signature if the current node is present
-> -    in 'hashed-nodes'
-> +    in the node list
->  
->  In addition, the signature contains a property 'hashed-strings' which contains
->  the offset and length in the string table of the strings that are to be
-
--- 
-Pengutronix e.K.                  |                             |
-Steuerwalder Str. 21              | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
-
+>  	ret = pci_ep_write_header(dev, fn, &hdr);
+>  	if (ret) {
+> -- 
+> 2.51.1
