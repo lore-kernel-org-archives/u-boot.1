@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D608F513E1
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 21:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E497F513E6
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 22:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1BA683F75;
-	Thu,  5 Mar 2026 22:57:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 6ABD283F2D;
+	Thu,  5 Mar 2026 23:36:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="Ak6Weejk";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="z9L55B18";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 618D583F8F; Thu,  5 Mar 2026 22:57:02 +0100 (CET)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ id D904383F2E; Thu,  5 Mar 2026 23:36:18 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C95B7839A8
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 22:56:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=s2025; t=1772747816;
- bh=cWxYPB3nilIYkJX4euuQvQJqwt9F97CV1qZuqIaxOZ8=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=Ak6WeejkSO9MkwJ88miKlW9BVK2SLUYLEXs4kMJGknZ5jJPCUtcudH7Kh6FDGSQYk
- KvcmkoAaHyKgN0Ntk0sX54pc0U9DqDcBEicI/FBSHRNq5KCnWOJ0gxDWzguL+W6e1h
- cL0hPGCFnSsXpjKmLRRofIWeXoCaKqLqEbb4GZElOMgvsb+XjMpHybiZ8KjLIRljLz
- scJUcoYrOcFT6yD6cOpn/7asfXvPzOk8AXdXhtwHVldxfYLz4ox8oXCV5ddu771bBS
- ZeUP5lfpcKECAjOTXoZ/ib0dahnfiBSZSgXou/VDMfFFzUyQja9tlwJlxeC8DWFVsh
- iSYDIBlrByPMg==
-Received: from [IPV6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc] (unknown
- [IPv6:2605:59ca:364f:d400:1b91:6b30:22c2:fffc])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id E122EB220345;
- Thu,  5 Mar 2026 22:56:55 +0100 (CET)
-Message-ID: <4cebe05b-ee50-4188-816e-2f8d525ea8b6@freeshell.de>
-Date: Thu, 5 Mar 2026 13:56:52 -0800
+ by phobos.denx.de (Postfix) with ESMTPS id 50537839A8
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 23:36:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=e821=BG=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1772750174;
+ bh=E64ILDSm94k9T5rq0frA3WdUHp7UoMQsqH8LkIkWDhM=;
+ b=z9L55B18IhaWQmDa+pfZfJz18P5LPLI+GPV4Pk0hxLRDnZXndz8edZyz9coE4NpFmEJjt7ZWl
+ r8MaTjfxSlEfRhRApP8xCH/YAQljfnkihaMSPpoapw86nDrBYDiO/XaxOIwsUDcfX+T446i+Vpq
+ ZLDyHvqlEfT+XcQ4hqoFt9MepTE//RhqmDcMAJSee2P8Yw1sejRoRz5eGF9sKF56GAuqVy3WJhb
+ RygIIEgHfirQOK3Pj6GI2BWe9Re5fYJQUYrSCcfAuCP9nIQxfBDA55uWAy74t0Pgjj4XPWgbNJr
+ E0xBsHzovpJqzovOIl8zjI8xPTbETJ0cqF5C6wsqL4YQ==
+X-Forward-Email-ID: 69aa055a87915799587b96c8
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.6.39
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+	u-boot@lists.denx.de
+Subject: [PATCH] net: lwip: Fix PBUF_POOL_BUFSIZE when PROT_TCP_LWIP is
+ disabled
+Date: Thu,  5 Mar 2026 22:36:03 +0000
+Message-ID: <20260305223606.3163779-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: board: starfive: jh7110 common give build output dir
- by env not arg
-From: E Shattow <e@freeshell.de>
-To: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20260305205649.61100-1-e@freeshell.de>
- <24982c23-3ee6-4e33-8608-5af6dd612297@freeshell.de>
-Content-Language: en-US
-In-Reply-To: <24982c23-3ee6-4e33-8608-5af6dd612297@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,67 +70,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The PBUF_POOL_BUFSIZE ends up being only 592 bytes, instead of 1514,
+when PROT_TCP_LWIP Kconfig option is disabled. This results in a full
+Ethernet frame requiring three PBUFs instead of just one.
 
-On 3/5/26 13:05, E Shattow wrote:
-> 
-> 
-> On 3/5/26 12:56, E Shattow wrote:
->> Describe build with output directory as O=<dir> environment variable
->> and not unrelated -O <output sync> command line argument.
->>
->> Fixes: 8304f3226700 ("doc: board: starfive: update jh7110 common description")
->> Signed-off-by: E Shattow <e@freeshell.de>
->> ---
->>  doc/board/starfive/jh7110_common.rst | 10 +++++-----
->>  1 file changed, 5 insertions(+), 5 deletions(-)
->>
->> diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/jh7110_common.rst
->> index 77102fcc189..b0b60da0dc3 100644
->> --- a/doc/board/starfive/jh7110_common.rst
->> +++ b/doc/board/starfive/jh7110_common.rst
->> @@ -162,8 +162,8 @@ Build U-Boot
->>         git -C opensbi.git checkout v1.7
->>         # always clean build directory when building OpenSBI due to incomplete
->>         # dependency tracking
->> -       make -C opensbi.git -O opensbi clean
->> -       make -C opensbi.git -O opensbi PLATFORM=generic
->> +       make -C opensbi.git O=opensbi clean
->> +       make -C opensbi.git O=opensbi PLATFORM=generic
->>  
->>  4.  Now build the First Stage BootLoader (U-Boot Secondary Program Loader) and
->>      Second Boot Loader (OpenSBI + U-Boot Main):
->> @@ -171,9 +171,9 @@ Build U-Boot
->>      .. code-block:: console
->>  
->>         git clone https://source.denx.de/u-boot/u-boot.git u-boot.git
->> -       make -C u-boot.git -O u-boot starfive_visionfive2_defconfig
->> +       make -C u-boot.git O=u-boot starfive_visionfive2_defconfig
-> 
->>         export OPENSBI=opensbi/build/platform/generic/firmware/fw_dynamic.bin
-> 
-> Oh and what is this OPENSBI directory ? That's not correct, either.
-> 
+This happens because the PBUF_POOL_BUFSIZE constants depends on the
+value of a TCP_MSS constant, something that defaults to 536 when
+PROT_TCP_LWIP=n.
 
-Replying myself, follow-up patch for the OPENSBI path typo is submitted
-at: https://lore.kernel.org/u-boot/20260305214922.97337-1-e@freeshell.de
+  PBUF_POOL_BUFSIZE = LWIP_MEM_ALIGN_SIZE(TCP_MSS + 40 + PBUF_LINK_HLEN)
 
->> -       make -C u-boot.git -O u-boot
->> +       make -C u-boot.git O=u-boot
->>  
->>      This will generate the U-Boot SPL image object post-processed with StarFive
->>      SPL headers (u-boot/spl/u-boot-spl.bin.normal.out) as well as the FIT image
->> @@ -191,7 +191,7 @@ Build U-Boot
->>           --set-val SPL_DEBUG_UART_BASE 0x10000000 \
->>           --set-val DEBUG_UART_SHIFT 2
->>  
->> -        make -C u-boot.git -O u-boot olddefconfig
->> +        make -C u-boot.git O=u-boot olddefconfig
->>  
->>  Boot description
->>  ----------------
->>
->> base-commit: b26cc03b7cecaabdb306c2f68eebde764161a545
-> 
-> -E
+Ensure that a full Ethernet frame fits inside a single PBUF by moving
+the define of TCP_MSS outside the PROT_TCP_LWIP ifdef block.
 
--E
+Fixes: 1c41a7afaa15 ("net: lwip: build lwIP")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ lib/lwip/u-boot/lwipopts.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+index e8a2c9d7a0a6..96aae3ad1f4f 100644
+--- a/lib/lwip/u-boot/lwipopts.h
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -121,9 +121,9 @@
+ #define LWIP_UDP                        0
+ #endif
+ 
++#define TCP_MSS                         1460
+ #if defined(CONFIG_PROT_TCP_LWIP)
+ #define LWIP_TCP                        1
+-#define TCP_MSS                         1460
+ #define TCP_WND                         CONFIG_LWIP_TCP_WND
+ #define LWIP_WND_SCALE                  1
+ #define TCP_RCV_SCALE                   0x7
+-- 
+2.53.0
+
