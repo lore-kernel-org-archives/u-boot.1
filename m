@@ -4,42 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6966F3D31C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 16:14:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBA0F3D32A
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 16:44:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C937983F9D;
-	Thu,  5 Mar 2026 17:14:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id AB91083F61;
+	Thu,  5 Mar 2026 17:44:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="AoT2YN7H";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9704D83E81; Thu,  5 Mar 2026 17:14:17 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9681183F9D
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 17:14:15 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B8CA2339;
- Thu,  5 Mar 2026 08:14:08 -0800 (PST)
-Received: from debian (X72Y076X74-2.nice.arm.com [10.34.129.38])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 4468D3F694;
- Thu,  5 Mar 2026 08:14:14 -0800 (PST)
-From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/4] test/py: add ECPT tests
-Date: Thu,  5 Mar 2026 17:13:49 +0100
-Message-ID: <20260305161349.2317130-5-vincent.stehle@arm.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260305161349.2317130-1-vincent.stehle@arm.com>
-References: <20260305161349.2317130-1-vincent.stehle@arm.com>
+ id 9527383F75; Thu,  5 Mar 2026 17:44:13 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ECEC8063E
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 17:44:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=s2025; t=1772729039;
+ bh=6Bsobrvds5Kep7Fr7pTfCzw19bxwLeD+IZNGxmUUHgQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=AoT2YN7Hrv4NkVPcQwXZGSDzjK/pzsIyXmc8EduLZCmlG7SGxU71K4cz8piMwn83H
+ c1qwrojyO7Q6mtRebcYIRfJsjLFqrrymVOLHOrxw105+KpahxxKDIRVITDjcefiRNj
+ dxflw6nGD4FhVz98Gtrp+UD7gOjubOIKW/sC63ltCf+WE7pFKaCMwGtaoIQvxyZk+F
+ 9ngbJiT7rO3zAZ4Q07EgOXfpJWkAtdAKsg31YPXYA8WXK3yEuDdzbqAKjZqsx/LsaG
+ 8kJmr5hxGkWfIUZPW+D+trINH+4RN5XxAgeyWWo9QyYnTufYEbmGklnPLJJmCevlAr
+ dDRocj5XJYWwg==
+Received: from hay.lan (unknown [IPv6:2605:59ca:364f:d400:6ecf:39ff:fe00:8375])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 98784B220091;
+ Thu,  5 Mar 2026 17:43:57 +0100 (CET)
+From: E Shattow <e@freeshell.de>
+To: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de,
+	E Shattow <e@freeshell.de>
+Subject: [PATCH v4 0/3] Add upstream board Xunlong Orange Pi RV
+Date: Thu,  5 Mar 2026 08:43:05 -0800
+Message-ID: <20260305164328.33789-1-e@freeshell.de>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -57,66 +66,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a couple of EFI Conformance Profiles Table (ECPT) tests, which exercise
-the "efidebug ecpt" command.
+Xunlong Orange Pi RV patches are now in the Linux v6.19 release, so let's
+introduce support for this board.
 
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- test/py/tests/test_efi_ecpt.py | 42 ++++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 test/py/tests/test_efi_ecpt.py
+Note: The content of EEPROM is known to not be unique on this board, and
+an (optional) invented "XOPIRV" identifier is implemented with this
+series. Without, there are reports that the board is detected in U-Boot as
+StarFive VisionFive 2 1.3b, and is then functional enough to load the
+devicetree prior to booting Linux.
 
-diff --git a/test/py/tests/test_efi_ecpt.py b/test/py/tests/test_efi_ecpt.py
-new file mode 100644
-index 00000000000..5e7c79c4577
---- /dev/null
-+++ b/test/py/tests/test_efi_ecpt.py
-@@ -0,0 +1,42 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+""" Unit test for the EFI Conformance Profiles Table (ECPT)
-+"""
-+
-+import pytest
-+
-+
-+@pytest.mark.buildconfigspec('cmd_efidebug')
-+@pytest.mark.buildconfigspec('efi_ecpt')
-+def test_efi_ecpt(ubman) -> None:
-+    """ Unit test for the ECPT
-+    This test assumes nothing about the ECPT contents, it just checks that the
-+    ECPT table is there and that the efidebug ecpt command does not fail.
-+
-+    Args:
-+        ubman -- U-Boot console
-+    """
-+    response = ubman.run_command('efidebug tables')
-+    assert ('36122546-f7e7-4c8f-bd9b-eb8525b50c0b  '
-+            'EFI Conformance Profiles Table') in response
-+
-+    response = ubman.run_command('efidebug ecpt')
-+    assert 'Unknown command' not in response
-+    assert 'Configure UEFI environment' not in response
-+    assert 'Usage:' not in response
-+    assert 'table not present' not in response
-+
-+
-+@pytest.mark.buildconfigspec('cmd_efidebug')
-+@pytest.mark.buildconfigspec('efi_ecpt')
-+@pytest.mark.buildconfigspec('efi_ebbr_2_1_conformance')
-+def test_efi_ecpt_ebbr_2_1(ubman) -> None:
-+    """ Unit test for the ECPT, with EBBR 2.1 profile
-+    This test uses the efidebug ecpt command to dump the ECPT and check that
-+    the EBBR 2.1 conformance profile is there.
-+
-+    Args:
-+        ubman -- U-Boot console
-+    """
-+    response = ubman.run_command('efidebug ecpt')
-+    assert ('cce33c35-74ac-4087-bce7-8b29b02eeb27  '
-+            'EFI EBBR 2.1 Conformance Profile') in response
+Changes since v3:
+- Collect tags (no code changes)
+- Cherry-picked dts subtree patches dropped as redundant:
+  Drop patch 1/5 "dt-bindings: riscv: starfive: add xunlong,orangepi-rv"
+  Drop patch 2/5 "riscv: dts: starfive: add Orange Pi RV"
+
+Changes since v2:
+- Collect tags (no code changes)
+- Adjust missing S-o-by tag to first of tags list order for patch 4
+  "configs: starfive: Add Orange Pi RV to visionfive2".
+
+Changes since RFC v1:
+- Cherrypick from devicetree-rebasing instead of importing upstream dts
+  as -u-boot.dtsi overrides.
+- Add basic documentation
+- Mention invented "XOPIRV" identifier in commit messages
+- Rebase on origin/next
+
+E Shattow (3):
+  board: starfive: visionfive2: Add Orange Pi RV selection by product_id
+  configs: starfive: Add Orange Pi RV to visionfive2
+  doc: board: starfive: Add Xunlong OrangePi RV
+
+ board/starfive/visionfive2/spl.c              |  3 ++
+ .../visionfive2/starfive_visionfive2.c        |  2 ++
+ configs/starfive_visionfive2_defconfig        |  2 +-
+ doc/board/starfive/index.rst                  |  1 +
+ doc/board/starfive/orangepi_rv.rst            | 35 +++++++++++++++++++
+ 5 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 doc/board/starfive/orangepi_rv.rst
+
+
+base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
 -- 
-2.51.0
+2.50.0
 
