@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253E1F33A75
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 14:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C53BF33A78
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 14:49:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9869E83F75;
+	by phobos.denx.de (Postfix) with ESMTP id D831783F93;
 	Thu,  5 Mar 2026 15:49:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ugerpb0H";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RU4mqfwy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3A6E83F7F; Thu,  5 Mar 2026 15:49:46 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id D8F9B83F2D; Thu,  5 Mar 2026 15:49:47 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9FB481E18
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 15:49:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C357A83F61
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 15:49:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-4163a7c7ca5so2786450fac.1
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 06:49:44 -0800 (PST)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-4648447c899so5044947b6e.0
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 06:49:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772722183; x=1773326983; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1772722184; x=1773326984; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XBSl+p4e3tzKaixPCERQDXKbUT8/Qnh+9u0e0TCQ9yY=;
- b=ugerpb0HcdZkt8XtsaAKhdg2chfz+8WwM12uOyS3YsBCk1K8UsuEq7w5/QeBsVDSIY
- qHGjevGelxTWzeRuK3Mz/RHgzoI76dq3jJNwWmDqh2UGHlVY8RlG6M27BhzxcD13+bwR
- +NRoVSYHR9guW5SMUFqcekvO9eeMKOtTVpFls=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=WpKUdLKQvbOXJRBnQEgdd5m/xZwrJRJpPheq8vXRbwk=;
+ b=RU4mqfwyyM5F0/8j7Ylu0C/BjBbiI61dwp2hTl8EYSGEwo71iB6W/2Ss/FmayRt98U
+ pJUNge+Omvc88J5JuupvIGnT4hcbesA5B/y7ZlFCagACVbh7F0ev1tM34w0a803Ghuiv
+ x601397pyoYd5w9gh5TQUuMTUWVxMK2L1P+iQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772722183; x=1773326983;
+ d=1e100.net; s=20230601; t=1772722184; x=1773326984;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=XBSl+p4e3tzKaixPCERQDXKbUT8/Qnh+9u0e0TCQ9yY=;
- b=UxKsG82mmA/fD/VxNxZqgxbXLN8WVWNTV7PKxLeEep9kGwTBjQOJcAy20rMJeyi0aj
- GGS+YurPTculd6t8ZxRw5lexmVFRhPPT2T2Zc8uU97Wp5kwniA7XROgfc9f83xvaFcHB
- ZFOTW/rVKPMbSTe7jiEdbAnaAn3xq89sf4Sr6pFxYAQOWjeHHU9Ibt8iI3PgrUMeI7zr
- +1FXa3QqATs43NT2x36USAFUIgnnikTwkeVhbNq/0juEISshkXMsE4q1JAX4UXLf+EK5
- vMcmufd8/8RQAzYTieDe7uB7ogpuFhOEXV1G9naVK5OipFmSoET281JpSoijjg39Wxj7
- DtSA==
-X-Gm-Message-State: AOJu0YxggM7l1jWXXSy++dnRGziDE+FHRH7pBestUf/GrimLSlt9upIe
- iol1sqHDR/UO5qvvJagOLDXJlq/DZk40g/rWU88OyQvZdq5sUkANH75G7WMcrLYl5+c=
-X-Gm-Gg: ATEYQzyp58e58HKP9LCivHgeqrogoHyP6IqUhLBGX8MsI3l+HvxFBEDP2W2d7vPeV38
- mJVWvAM+JesieAFGictNqd4D0UzsJArbuXRhvkqr6CPt3NlckHsMlg+7P3p2e+Y1UKdUWFY0kBf
- qzsD9nYrvh0UN/2JdSOCB24L+JH8Ss6X2cigQAV1c+wPvEhmA+zxvZpffq9OvCRWOX3VdDBqleZ
- iYUKj5odpzzVjNroyRilWE/gfGCTo4NRcUpksrFBur/Xhjy/nNmolNOfEFuJF0vMvnXXvPo+Sd+
- 63aX7kqc0kBAj90XKPNTP9XD05/81UAWm5orhFYeghZSVXbB0qIiDxP3AI5RrEwlqgUNpGLgTKw
- dQILqyPJF93MEq9XjWP1FJCDJg5ZOVl1ZtXDxyRdejzGjz9BWqjy/I5NzrAD4TgRsdwcawF817r
- 0QRZnUSRKdyUsjjtjRM9cVKHv/vEzpgl28H3l6QzUYDlOGRLrssVZF8Z5tHnIICMPuFiY9JZ0Zs
- FMRz3oizh9wguzRGoIVytd+Ev50AxXzYdIfgMS0GApGTVv+Bw==
-X-Received: by 2002:a05:6870:a68a:b0:40a:40c8:a6ad with SMTP id
- 586e51a60fabf-416ab4f0bbfmr3153405fac.1.1772722183494; 
- Thu, 05 Mar 2026 06:49:43 -0800 (PST)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=WpKUdLKQvbOXJRBnQEgdd5m/xZwrJRJpPheq8vXRbwk=;
+ b=IFAKFN8LiXhzkaB1VhQhjAbZ5jzEdpW6Kj+I7yw6fShoxRQcizN+D994r56BP2kCj2
+ iINSadWJK/w87xCB2o2Rl2AaazJPd/cOojxp5KFKIN4DajGGUVt7rBBnugNnP3Uptc9z
+ clo/dAZGj0ESR2kuDXsrmtbKQt9cgHkOZimdA1atudg3rYTqfMmBPAEVvWStBuQpv8H7
+ mYQSXTLs0iU2R6JY8SXrhXD4WFKCuwUN9O/+iE+q9jmF5rwiKYx1GseuBo1d4FcSdx/N
+ bJUpPSSKtuRggY6S1FMqA+ATh3rYj/vRejmbJKQHmDHwq3OK8KtGo5l34KSsHu6CQNRz
+ q6fQ==
+X-Gm-Message-State: AOJu0YzBvCikmHaRQLH2U1ZsZuPJX0SEaVuL3CkdKhvVzPIyEUfCGuKm
+ xB+P9qPjLyBTQDWRNJWTYEJ2Mvlw0VYixLpMzhQSzfT45oqTlEq2ex2/Y5om5Hhn3fkFtUwvMVa
+ j6wXc2tw=
+X-Gm-Gg: ATEYQzwNQJNwh/o4ubqVlsGQFcJ4qVkxBvdPdE+Qfc/wFxs2En72jjCrC0B/56ozn/K
+ 8KQlcRYycclZGK+1Jy/hNPlrGUqTsH+ql9GzgTS1UtWPfWX4IQ5riaLi0ymu7MiNSQ4xANyLpKG
+ nzyoCHu9xf9Dvn+wFuceeM4UhneoX667PGBUy6uxRlOQN54bwRVsg3escTvoveBx55UvQUSxjoQ
+ 222/hYmyqz6WvQzVD9r116y2F29em6BRRdeCuxR2aSK+azthBOoE7hBVwcMted1UgkQknuSSkYM
+ mqZiJe4nnCIJpoZro2lORzuAVdOQTzVSKlk/HMhn0ERxe+JGlMe2SlZWm9ZGVuIpvv9IfboLFlV
+ /ZmZVczwarfs/NRkGrZUTFc8J5+BupnMzNmywBtqVMLlVDxxpaKnWRX2rucY/URSCfR6TE35Jnj
+ ggYEuuYVxZ8urkEoX4GKFfh9aDVQ2V+pnAboB9dMicsvSu+GRNB6wqbSKQzVjJUD8+yP6d+G+XC
+ ND40BROG99+8BX4v5kf8hk7Imv61Dj8kHKfa/8gGstCwySAmg==
+X-Received: by 2002:a05:6808:4f0e:b0:450:4628:e3ce with SMTP id
+ 5614622812f47-4651ab995dcmr3150740b6e.15.1772722184411; 
+ Thu, 05 Mar 2026 06:49:44 -0800 (PST)
 Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4160cf2572bsm19246871fac.2.2026.03.05.06.49.42
+ 586e51a60fabf-4160cf2572bsm19246871fac.2.2026.03.05.06.49.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 06:49:43 -0800 (PST)
+ Thu, 05 Mar 2026 06:49:44 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <88393bb3-c241-4be9-8268-1ccd047ba1c9@linaro.org>
-References: <88393bb3-c241-4be9-8268-1ccd047ba1c9@linaro.org>
-Subject: Re: [GIT PULL] Please pull u-boot-ufs-20260304
-Message-Id: <177272218274.529370.2649525527856773041.b4-ty@konsulko.com>
-Date: Thu, 05 Mar 2026 08:49:42 -0600
+To: u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>
+In-Reply-To: <d54cb34ded118c72997e68445144e44daab13570.1772157012.git.daniel@makrotopia.org>
+References: <d54cb34ded118c72997e68445144e44daab13570.1772157012.git.daniel@makrotopia.org>
+Subject: Re: [PATCH v2] tools/atmelimage: add const qualifier to fix
+ compiler warning
+Message-Id: <177272218385.529370.6025429978032580118.b4-ty@konsulko.com>
+Date: Thu, 05 Mar 2026 08:49:43 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,21 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 04 Mar 2026 21:15:03 +0100, Neil Armstrong wrote:
+On Fri, 27 Feb 2026 01:50:46 +0000, Daniel Golle wrote:
 
-> This is a (very) late PR for master with a few UFS fixes and changes.
-> 
-> Thanks,
-> Neil
-> 
-> The following changes since commit 437ea9f8be5afaebe2d8cbab6242f1182857f21e:
-> 
->    Gitlab: Fix TEST_PY_TEST_SPEC for qemu-x86_64 in sjg-lab (2026-02-26 09:06:33 -0600)
+> More strict checks in GCC 15 expose a new warning:
+> tools/atmelimage.c: In function ‘atmel_find_pmecc_parameter_in_token’:
+> tools/atmelimage.c:64:31: error: assignment discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+> 64 |                         param = strstr(token, "=");
+>    |                               ^
+> cc1: all warnings being treated as errors
 > 
 > [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/1] tools/atmelimage: add const qualifier to fix compiler warning
+      commit: 35d9b9c70ea4998aebc723273dca123dd1c3953f
 -- 
 Tom
 
