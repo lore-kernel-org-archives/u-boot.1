@@ -4,87 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F772F47CA6
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 18:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0001F47CAD
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 18:21:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A3383E81;
-	Thu,  5 Mar 2026 19:07:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CF93283E81;
+	Thu,  5 Mar 2026 19:21:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hY2hvCgZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d0JcPU1O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA69083F2D; Thu,  5 Mar 2026 19:07:26 +0100 (CET)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 42A0683F2D; Thu,  5 Mar 2026 19:21:16 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C361E839A8
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 19:07:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CAF4839A8
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 19:21:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-4648447e29bso3367477b6e.0
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 10:07:24 -0800 (PST)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7d4d8712b40so3890166a34.2
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 10:21:14 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772734873; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jBc5fgzF0SY7zsW9pUGa3/WOHIKDL88CS5N7azH4pxkDR6FhoH/8+7eDhKghA+BTEv
+ SvNqrRHgUVvnFEo/aqFN8F5yOHRHSb1g0RLu7DQakLIJqtKhEReE/PKQ6hgB2DVMQmhr
+ LkcH+9Ry3x65xhLMcIyg91ZBrlKoxn8SGdRaE4kXH+dTZGRO0pVu2l1dSfZS5KzQEFwP
+ FPd4xBGzetoMXooDXcswraF5piINiP9sLTfRmuHXiadhVkFHeI7gsf2ZKE4C3kivPsXS
+ TFiBwfqFRJ40UWjNvYafR6FDZqqau8wnxQF0nkaNrzFAxWcoM/sPyIylpmGrbcCu9yaM
+ LCbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=AofvTloBjNU4wRam0dud/rtPrUTabhRsyji0yZTsjtY=;
+ fh=mD9epQ3K6GAhWjgJAp6xksZxGN8f+e+RTn8jGe1Ak9Q=;
+ b=BNYXq1YAri1vDGE6UrT2DrunwxIXRLH0VnFxf/mF/SOFX0Le9FrIP/2beyPfxxczvQ
+ Wy1q0pLsDOWSF1M347xJ0ZmbHoaErw/tXgZcXd1jvrKR72PHQXoCgcvsJeYW/0EfUROy
+ FxT+RG2zd8m99Vjyx5McyZ7pNjyM2TeQq5tReGkY5Vr9qO9Rz5ncOGZCDn2IeBAsX/1f
+ 1KEw/L5OkZcPP4/8qcpFTWonjrRguRUGeZ/jv85oljlqoeygVL7XAJNy9OEbFhPRjHkE
+ /f5q1P20Ea92x09htadC43d+aigEcdhvLOEacH4RwgnZMx7iEXC9VC3ZEY3w91fGGr4y
+ z+GA==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772734043; x=1773338843; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fQ1ETp7v5/LPcFCofo2J8UViolpWM7LyaOxmKzsu53s=;
- b=hY2hvCgZAkwSiRDnwv+7uvuZYnzsATWCd4jn0w3lr7PPcmMFOTcktWHpwz/h3uSfYi
- Ny3LGRLSdRel4j+wgOyYgb1leOsX00tg6uBmVN/edr98jIbeEQR6NYCkJwI6S8InmERi
- WGPkw0cUXBA+NQABaEM1oE9SAmHBvv0hWkOoA=
+ d=gmail.com; s=20230601; t=1772734873; x=1773339673; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AofvTloBjNU4wRam0dud/rtPrUTabhRsyji0yZTsjtY=;
+ b=d0JcPU1OzAyUvfj9Ppg/NtpPbjmaqP0K0B4uJpuDLSU/ukROReYuccbbMfJVh9LeI2
+ ywutA2gaHXF/2GujCgUiJDSpax+mhu32OnpSVrUyLBVLwzezKxuwdat46rQSGBXhLKdP
+ 59G3SAMND5WNy+AVpcjFx/K/4A2EO96i3P6tHu75R60TNcjGbDz6W26wNIcTByeMr4fP
+ BVtvex2S+6IDXT6jQqgDlNNznxFciS4Z1aZo/BwQ7KLZZqD9dX4xmJTC6TpcOooAiZ7x
+ AfavnXM3j6O9yJ/SYZRAnQzi9T3WBKuF8VaN6rM9mEA/igM+qy5K8G7o4CsAwBhtY3EJ
+ SVjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772734043; x=1773338843;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fQ1ETp7v5/LPcFCofo2J8UViolpWM7LyaOxmKzsu53s=;
- b=dfmCP3eY8hKbk6hpA5S8dyrUQkEUppAMb5HRnBDbYQa8jR9rbF7TtrF8TwXT0Nk9B4
- MfDLCQs7lLf6J+c0KexU9+XDAXnB4Tv9HNyIR9GzBXGtZK3bQ7kqnGORxQZw/QRwNho/
- 4wTRL6pNav7hQYxU9bKoQWjHGJljcQlqmG4NW837h1dKLc1VDsvWcGzNKdMbiaixmJAs
- ET6VGyq7VUsmfGYdVcDRgvHjUNxL2t1OCVr23i12L0vWxZN9abu1oeBs1JyhpK+1n44V
- 5tGCvIYK6reUnIQILiKcrLqbGjRgQzT8ZR59pkI34S/VbxV2dlXH3UaH+MgFO1K8+bot
- m6rg==
-X-Gm-Message-State: AOJu0YytZSFz4igcB6YeBl4JdAb41tW61Cw0vUQ1RDqjUy1niIRLJM+s
- Hk+6Wg0zR7n2IRTXIPu38IofbUAKHhoOGN0tyH+REzcTZy9vzLnlGlF1tbPJdU5u6+i2Yg9+uD9
- qL8UOXFg=
-X-Gm-Gg: ATEYQzzRWSHlMDodwmzMZYhetOaXO/1p2+J3W3mvnYLbECYSEOyXbC7dWIN8C1wT57f
- YSuVZ0Lel6xjvj7tWWHSwI5WuoDfx5evffz8OucnxcHJnApor7o88p2pxWcqc9aOzAYodcmvlyG
- dBJm69H7/2uIE1ooIaLYrsEeqJmBsiOPrdxtlKe8+px6iQnvRLDMQ0MiXzNHVWy4G/8C+X2wdl4
- PBOtHFQHm+igXn53cD3sQdF5Nsl2NDaYrCnFkAbLtTPu4RfmpdVG/5/jqQcisKAp/KAe5gg1G7/
- Px0f8+TtVbvrIYKxlEhOIuE6p+RVxzkfRLJWygoDNHJKGx5REnvMNM41RzomtIHIVgoiEsZaCHS
- 2YQqOkbfNLaENz/A4QG1noq4apqppwSN8IWZPTSHvsOYp6wT/WsNJKIvZchto+BK16JFAswFtes
- MtttW6HsFVq1z0EAAY2IbxmnxDRfzRVV9J4ow3tPL01YKJy64R5ofW8BvIKq7hsZogdFmebiVmt
- i8C39Zi4caJ4YXF+O/n71Tpm+7m8LHSwX3WllespFtdGLGCgrs=
-X-Received: by 2002:a05:6808:bc3:b0:44d:ae36:dd86 with SMTP id
- 5614622812f47-4651ad35211mr3042876b6e.59.1772734043404; 
- Thu, 05 Mar 2026 10:07:23 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
- [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-464bb5e417fsm13505690b6e.16.2026.03.05.10.07.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 10:07:22 -0800 (PST)
-Date: Thu, 5 Mar 2026 12:07:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <sjg@chromium.org>,
- "Nussel, Ludwig" <ludwig.nussel@siemens.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sascha Hauer <s.hauer@pengutronix.de>
-Subject: Re: [PATCH] FIT: Address Secure Boot Bypass for Signed FIT Images
-Message-ID: <20260305180720.GG1388590@bill-the-cat>
-References: <20260302220937.3682128-1-trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1772734873; x=1773339673;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=AofvTloBjNU4wRam0dud/rtPrUTabhRsyji0yZTsjtY=;
+ b=OrirJphsSFFznx6EUfjkWrBz3Q+iui4328J1MiN9q3QPXEDEi1us2/Kdtxn/qz4rcB
+ TT2hKttY14E+ENZSBISLikaFN8SKw1eh0EsC5Wbp+HMU53YW1+8P6QojGBFSUH6RtKk2
+ Ci1umvI5TB7kKtIICQ8FRjlHLV55YkHEYiKssobFv5acQAOpiRDMyOPTWgZPW9P2zWxa
+ wSaQR7WL3kyo50ZICXBIgkAy5n35G4WTMCfyvUeKHeSDUIxq/QUtjqE8QusgOd74AkEY
+ N8u2OStcvDxIZ9K7fznXD77fzGjRkEyg8/azzjPe3fJQdUd+J1fbIpbtn9A2FNwoFtZ2
+ ZHag==
+X-Gm-Message-State: AOJu0YzxOQuzeYM/uRU54GUNwxxZ1988a1PDUH/QNXZ4AQphp6kwNlwI
+ ewBqdEs0FcF/T6wjFb7za6ok0S4G+/UigYRe4fyMrM2MQ66tRozwH+Z5/o1tqZN451CFJqHmQV5
+ OX46RXmgWKCEdEDw9s6RY/oSurDYFHbFNqg==
+X-Gm-Gg: ATEYQzyZETZSBQmKtonj0RYkiXeP5SCBw7SSiVd5NKK4yZV2+O+DQeiSHmEoTj69TZo
+ tt6D7Y+FjFMRV4I1iGQifOZt7y6hkaEZSuubXGXr/agcTAoj1WVbXuCZIXrj3dojeZ9UEM7woLz
+ HeI7YvY0H7BHvawgGg7RT8p6IUHi6FWXpIGOccFJoWVQBSx4V0a4qkqet9FokxKleBM3HbHHGhP
+ 54qD7xD67+q/Il4MQFGPvMvOYFCkkLCqmkkp+oVmElZBZIete3I7iuzEcqzQSGmsfxXM1muggm6
+ RVTddxhHkhTPOpSzog==
+X-Received: by 2002:a05:6830:924:b0:7d1:94d0:e8f1 with SMTP id
+ 46e09a7af769-7d6d12682f3mr3958885a34.15.1772734872781; Thu, 05 Mar 2026
+ 10:21:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="D3wt+fBvBVK5ZAI3"
-Content-Disposition: inline
-In-Reply-To: <20260302220937.3682128-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAN7C2SBrPb6hY_tJMioS4uWs=uZ2dC-0Qrx9C=_M1ht5hJGRgw@mail.gmail.com>
+In-Reply-To: <CAN7C2SBrPb6hY_tJMioS4uWs=uZ2dC-0Qrx9C=_M1ht5hJGRgw@mail.gmail.com>
+From: Sune Brian <briansune@gmail.com>
+Date: Fri, 6 Mar 2026 02:21:01 +0800
+X-Gm-Features: AaiRm52hpFUDHDm_PzeVFL5TR5M-ixc2KVdqgzbSdBe8X49jzg5MVbOIrcDmugw
+Message-ID: <CAN7C2SCXOWXbu2gN9nTWMsStJ5vfLHf0HEnS-FyTAAHn78pQWg@mail.gmail.com>
+Subject: Re: [BUG] Latest GEN5 socfpga handoff python script sanity issue
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tien Fong Chee <tien.fong.chee@altera.com>
+Cc: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,52 +115,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---D3wt+fBvBVK5ZAI3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Sorry for the noise here.
 
-On Mon, Mar 02, 2026 at 04:09:37PM -0600, Tom Rini wrote:
+After git pull from the latest master.
+The issue seems gone, not sure why.
+Just discard this report first
+Not sure what is the root cause.
 
-> There is a flaw in how U-Boot verifies and generates signatures for FIT
-> images. To prevent mix and match style attacks, it is recommended to
-> use signed configurations. How this is supposed to work is documented in
-> doc/usage/fit/signature.rst.
->=20
-> Crucially, the `hashed-nodes` property of the `signature` node contains
-> which nodes of the FIT device tree were hashed as part of the signature
-> and should be verified. However, this property itself is not part of the
-> hash and can therefore be modified by an attacker. Furthermore, the
-> signature only contains the name of each node and not the path in the
-> device tree to the node.
->=20
-> This patch reworks the code to address this specific oversight.
->=20
-> Thanks to Apple Security Engineering and Architecture (SEAR) for
-> reporting this issue and then coming up with a fix.
->=20
-> Reported-by: Apple Security Engineering and Architecture (SEAR)
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+Thanks,
+Brian
 
-I just want to thank everyone who has looked in this and worked out
-another solution to the problem. This is why our policy is to have
-things disclosed in public and worked out in public, and has been an
-excellent demonstration of how open source is supposed to work.
-Thank you all!
-
---=20
-Tom
-
---D3wt+fBvBVK5ZAI3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaanGVQAKCRAr4qD1Cr/k
-CrbiAQCDMiagpwze82lFSFp1X29hlFTeFPl0Z5MCoTRuNckkXQD/Qq2xU2O0uNQG
-RoMsMlUPVoJFA1kcp6UjOzO67bEYAQg=
-=Uf0/
------END PGP SIGNATURE-----
-
---D3wt+fBvBVK5ZAI3--
+On Thu, Mar 5, 2026 at 11:06=E2=80=AFAM Sune Brian <briansune@gmail.com> wr=
+ote:
+>
+> Dear all,
+>
+> Issue:
+> Current handoff script generated files show missing behavior.
+> When using two IIC to FPGA "pinmux_config.h" shows
+> 1, /* I2C3USEFPGA */
+> 1, /* I2C2USEFPGA */
+>
+> However after SPL under uboot simply reading via md.l shows
+> 0xFFD08728 is not set.
+> Based on cv_5_HPS_tech_ref.pdf register 0xFFD08724 is properly
+> set to 1.
+>
+> Possible test and run:
+> Even manually modifying the pinmux_config.h
+> 0, /* I2C3USEFPGA */
+> 0, /* I2C2USEFPGA */
+> still introduces 0xFFD08724 set to 1.
+>
+> Based on the above situation:
+> distro or kernel basically fail to communicate the missing setup bus.
+> Manually set under uboot command can resolve the kernel bus issue.
+>
+> Not much data on conversion and format of iocsr_config.h from hiof so
+> cannot fix this on my side.
+>
+> Thanks,
+> Brian
