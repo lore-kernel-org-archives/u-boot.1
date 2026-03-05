@@ -4,124 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6DD5EEF308
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 05:56:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE735EEF30C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 06:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD26183F61;
-	Thu,  5 Mar 2026 06:56:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 246C283F75;
+	Thu,  5 Mar 2026 07:39:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dt9GgGup";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="V4ec8cPl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07B7F83F75; Thu,  5 Mar 2026 06:56:13 +0100 (CET)
-Received: from SN4PR2101CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::1])
+ id 9061683F8A; Thu,  5 Mar 2026 06:58:21 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DDD783F2E
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 06:56:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7ABDE83F2E
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 06:58:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
+ spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QKjzYQsxzfictIkKr6mdBq7ex+B1R4L3j7yAmTQzkvuGTwHmuTeRVAxGPyKdStb6zjqaz6IJbTMkQiRMAaywq1HpqCqAiWXHk/ZrjrBkLWsccPYARQysnrLBdibeumjrO9bhaRZ0JM9l+sMWwKeBGLUBD1wrRb8RiQ2kyqpJQSQBpJnmTYoEPrEz8ErVxXUrjOme6Ai9Xe8TqziDdmgZg1n9CinSmjcwffBwYeIcGis8lp5WEqub95GXo8NeAo92ZaKPlK00TIWqIJQ123z27TuLDbxjhdtaAbMpzRj9wZ7R2C70TgnQkMKsYmy+Kk4+OY3EIXus4/xtHjpbCMOgIA==
+ b=eN9sr14WvHL+7+7r/T5gltuSLmLMNnzv3tQZIa5CySENjLnF/4iWda9Z6o4E6iGqlC9Bwlm/nRKkUr8N4bn3ZWeq3bjA+K7VS9QSux4XreevdgOeQDhyEvuV3SmHEU4m9n9Uw6hioguqoT85kfTsFf7kT6GcgBYHPc7dC9Am4h5bXhI6mq7XQSKUyoNee69+mszc3dtHTq8jm+1/NfSpcPpiX0FzpmZRIoipI6oduoFJzr8aOIZWJhFZHm89Ld6axepbEMf4C4Zkq6R6OcRefmHfhqrdxUGWeQ9eAq3fHeKnFtR9B1eiWRpmrzfg/iRNO+OT4zarzD/jQWp+clMPVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=etpIfXuQ8wXHfbGKJWtpLbBN2HNtOMdofoNOtKIrXnk=;
- b=m1o7Q/W3LQwk1FBxQZDv7TDxp9LTbddWOGVUXTv2Z7d2M5G5icgoa3Mbllt8pTUJ8tMq7SSeIHgid2fGqJbOfvOVqWNJ7lApjMfZUZuIMmcaspk6ZUFlQ4dbvV8WnZea/eHJGKNofqMqu/xZi0Nw/5c9h8Te3mlkYC1UlMU3n2Krz0mW7eRJrYAIel8wJjWr7ZEjC5KvyO87kFQ+/0HnXQxGamoT/h0RI2dyN58TQYbfac9S1TpZ+gtUNmNKZHNqYJJ88LJkPJn/P1NDD2PadftxvQROiR+vBK7HTMRamEwpJkmZXr5sA5QDKHq09Y1RO/8RLi5Ys5Wbe67bYV0k6A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ bh=dlqf4U6ZKfvHbBjQ2lQ/itsb5jl2LrS95Y5NHslmYOc=;
+ b=Tmfql/4/3Bxx5yWziAZVEI8gr07hWykl0cqZbwzs4ryv9eL8hd8wjnQS1EMAYskaj3KjgIkWRTa6Wa0o+kcTwW2Y4tGhWv0wYu42kImFpzk95sUNxfQdRkqYBkXnRfkvH2jiwoF66Lt2rfAcaBjTQmjo+RTsHleXS4iWqVxxFgz2ayj/AHKJdeXXkBbNXyEyIzQzgvBsOgjELhEMrOxrEMJZRAIBpZHr2cps3oiF4qgOMqf6Fek7p+1UYSgYw1MttvqzlUn0oKIfjU5oDvhdzKmIbUlq9CVVyBQ0t1o7uKPihrYSrFv5pmfYdg8zOnBK+DOvPru9FdWW96ENFgRMUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=etpIfXuQ8wXHfbGKJWtpLbBN2HNtOMdofoNOtKIrXnk=;
- b=dt9GgGupH4AD5PClO6mqNsQGgwxfkUs+Mro/E+NM49Aqq7fj579/QyMk2NcKNa9D2OW1RsmiEbyoazMlrq3KIUeLYab5kI8thCrWa8OOV5SuhmGQ5LsRKuY0PweZSLOwTIKBNqOAcPg7lV88VqRNEWh4Kyhf8RHoyObmzFBI/8Q=
-Received: from CH5P220CA0003.NAMP220.PROD.OUTLOOK.COM (2603:10b6:610:1ef::21)
- by SN4PR10MB5544.namprd10.prod.outlook.com (2603:10b6:806:1eb::22)
+ bh=dlqf4U6ZKfvHbBjQ2lQ/itsb5jl2LrS95Y5NHslmYOc=;
+ b=V4ec8cPl6k23SO36ACXS+ssKDQIXY3yqauU4s2t6c3jReVstJxsQQ2Bk96jcjpZGyI+XuDRxEbu7xKMyma1KJdOGFkDHnReisvXS7RChKYhp4LBamKbLOZ+rhQjXvoN6dDuW2wfGH/3Q8zL38+Q9l1W+9ly12mkuDW8JeS3OkGi4y62Lv3xEOXj2O6EdUjUMAIQYLvcFbao/VE+5AExpYzwQ5xBTidf8WW79626hkWE2sD7hLT+Yn03Xb62kDebeuW4LQKLpQ5RoiIhQKs6oJeP0cpHv/xdiDvYD2LEcvpS38iTdAhJpJaWxGqLAdvmz2AQv02yEgH5ot8QNfzpr+g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
+ by SA1PR03MB6514.namprd03.prod.outlook.com (2603:10b6:806:1c5::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.18; Thu, 5 Mar
- 2026 05:56:06 +0000
-Received: from CH1PEPF0000AD7B.namprd04.prod.outlook.com
- (2603:10b6:610:1ef:cafe::af) by CH5P220CA0003.outlook.office365.com
- (2603:10b6:610:1ef::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.23 via Frontend Transport; Thu,
- 5 Mar 2026 05:56:00 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
-Received: from flwvzet200.ext.ti.com (198.47.21.194) by
- CH1PEPF0000AD7B.mail.protection.outlook.com (10.167.244.58) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Thu, 5 Mar 2026 05:56:04 +0000
-Received: from DFLE203.ent.ti.com (10.64.6.61) by flwvzet200.ext.ti.com
- (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 4 Mar
- 2026 23:56:03 -0600
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 4 Mar
- 2026 23:56:02 -0600
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 4 Mar 2026 23:56:02 -0600
-Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 6255tvrT1776913;
- Wed, 4 Mar 2026 23:55:58 -0600
-Message-ID: <b0d3eb09-add7-4a14-98d2-84061adf9fdf@ti.com>
-Date: Thu, 5 Mar 2026 11:27:48 +0530
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Thu, 5 Mar
+ 2026 05:58:15 +0000
+Received: from PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
+ ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9654.022; Thu, 5 Mar 2026
+ 05:58:15 +0000
+From: dinesh.maniyam@altera.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Dinh Nguyen <dinguyen@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Tien Fong <tien.fong.chee@altera.com>,
+ Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
+ Boon Khai <boon.khai.ng@altera.com>, Alif <alif.zakuan.yuslaimi@altera.com>
+Subject: [PATCH v2] configs: socfpga: arria10: Disable
+ CONFIG_SPL_USE_TINY_PRINTF
+Date: Thu,  5 Mar 2026 13:58:04 +0800
+Message-ID: <20260305055804.21580-1-dinesh.maniyam@altera.com>
+X-Mailer: git-send-email 2.43.7
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR05CA0020.namprd05.prod.outlook.com
+ (2603:10b6:a03:33b::25) To PH7PR03MB6942.namprd03.prod.outlook.com
+ (2603:10b6:510:157::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-CC: <m-chawdhry@ti.com>, <c-vankar@ti.com>, <neil.armstrong@linaro.org>,
- <marek.vasut+renesas@mailbox.org>, <u-kumar1@ti.com>, <j-keerthy@ti.com>,
- <semen.protsenko@linaro.org>, <afd@ti.com>, <anshuld@ti.com>,
- <peng.fan@nxp.com>, <ahalaney@redhat.com>, <mkorpershoek@kernel.org>,
- <n-francis@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>,
- <s-vadapalli@ti.com>
-Subject: Re: [PATCH v5 00/10] Add PCIe Boot support for TI J784S4 SoC
-To: Tom Rini <trini@konsulko.com>
-References: <20260216102858.2745657-1-s-vadapalli@ti.com>
- <20260304185113.GC1388590@bill-the-cat>
-Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <20260304185113.GC1388590@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7B:EE_|SN4PR10MB5544:EE_
-X-MS-Office365-Filtering-Correlation-Id: a90e3ad1-85e6-43f8-d865-08de7a7be35a
+X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|SA1PR03MB6514:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b82369b-0efb-466b-0275-08de7a7c3123
+X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700016|376014|34020700016|1800799024; 
-X-Microsoft-Antispam-Message-Info: krZENTyQq39d0jYjSQhjMDwO5wfihpXJ99yCeHizj27ZXWX3IZdIFJpds/6OWwCtvn/l5lZonylQK/NN+XVggFrWpPw7SA4yxw2iaOuOsQxB7kPDVZxOh5XGNsBfVW0ZLiPjcx4NOrl6KqqCemdD1+/6Bvj8b0QmZUGMYUGopIaGVZrdI8izdsr8lGXZ/w9izzVE6s+y0JYLFO/CtJGHehM5DEBtkNmE8hbYZnjHRZF6YafYP0TCLOgQkuVgiGqeaFec+mCXhPHQjopbiEdS4jL7juNXCH3/nqP0gZ20JmqMQoq2kwavlYu7uTWClY/AKLm0nRwrzcONwQN1zw5kEAMwThJGwKRxMJVc86AVpUlIodnA47PnmKgZeMI9Wow9vqJZw25+pSgXaPNzslhWkayI5jjgE/6A4dlvLNpBhUzBJ+7zyi09vx1SEz8TFlnRdJOBQFGX7Wpfl7zhBEPaxsB6/+z8kAh6qhi3ehE+k4/IsrYUXI/2rxM1GzH+QGrnbUADS0Nfk7xFRDnLMOeLlvn/lp7c2CcLkjqYsKVOYiS3gxAVdzt06ihcdVMp1S8LPM+hdoZhaOx8EVJpWYYbwXZ+tyKI0aJll7SYF21z0PoCXcFcydK8ZSOgw5QQjf/PDdMa1w+Nls5yvT/6xTO1BQfnny5yZJrjvVwn9OiZbhhoKyFKBVTYUOsloQSkeh2UzcsecWRMF4MWv6Vho/sW0fv6wgSLXITebWGcDoaNKoA=
-X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700016)(376014)(34020700016)(1800799024);
- DIR:OUT; SFP:1101; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: DMzGd/ZwQ1c0T3Gk3NqYfjC3ISqXcrm019vqgkuaJR6pe811+hWA3+/z6oXn9N1KWAW6MZ9gIWyOExaJfP0JL4CKjuFsQygtQ4DTvz4QB67AjIkDr52GUc7GVeR50biFyAUttaVEfVCJXMVIh7wHhhg543+pZ77DglGgwNKR9PtyEmHLcl5t6JqYF0ZR4QfthXlWUHMQc483cBD2uCmo1FO6kO88rABWEk+RsxetBZLzjlztF4MjbfqiEfftBHqKybvZATBUFM6yBM9eMy3beoYdxtx+nM4cw+F8lx38g1D+qMCmAzarqkZ1HAFY5HpTFaEccCf/J3Fn9Zbv+4B5MKUz8wTm9HfNHM4rR+ohzjTRsezU7m0O+LZzvZTAfEoTsTCtl/OS8VoKUP7l8wBeAxxFcRRNwoIi7yjM+PCFsUocnJ08dSmr9+hqF9nBUk20kRlT+753tG872f2hkkBmTvuSYa+TXngqSha3JEl/iWKd4e33Il+qh1dlb/EEc9Wjk8SPXexrKocbYlqw52QMNs5hb6VTLgZHVw3NB4gUVA5P6Gd99W6EaweM3Oi/q+O6z9qohS9Lqz8Vnb3NGH5g8YfXBBVTqfTZXtxffssw2TaJ2RrNSdhj+cKB9D86gDOmFsdSfRrr5eUVduy//P33JiRMPkUkoWoPnZThdho2WZGKVoWNuaZky+bWQ9aGqNrFizF0E+RSqfcVC9ie3p/x+zSspOhnEQ/nMTL4pYFhKLQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: ZSincCqMwePVL+ez8Q+roMjhdSwRPxgDYMOC2RG4WrMVNbAG2yYVszckWAoa/oiNSR9ek/049rRrDHB4yuF0CArukHU/bT7dtJiR9mmDxGZihnw4H4AYLisaPovIQObtLuVg67y76PysjAjGGLU+4MezBThb8qnVjspBvka2348kbDNBVzz1eEA+Bkr05PUGWxWnZ+NhH1ijHr771xEMYo9OxjoQFdVnOSPCODuq6w2jaLTwtz3b/JgyR93GrKeVuFuKIGaOVvhSqV5X3ZEsQ9OS5o2JdthD2hORSsbrUyTzcH95evF5SDUSVaOCbmLKrmgSOZHHkBYLWtim4gReob5ZfwtE1Fo8ha7darH3Bast+ZMBmNr5YRlCJ/HUnkD+g8TGW5fyjqUtMmcsDkMMelxqJTCXOFjn7XW04at3Gc4v5YsOfBQC2DYJBEbjz9VM
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2026 05:56:04.6162 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a90e3ad1-85e6-43f8-d865-08de7a7be35a
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
- Helo=[flwvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7B.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5544
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?q6sPdeESPXycL+ceoAjNLvTZKmBce7z5hZzRzbW2KlNeAsiDklEAuPXo5zBG?=
+ =?us-ascii?Q?PCrpbMkkHzbxSX0cnonpq01jNPZC8MqncFlmP7Bm8y9lb4Dmxs77fl9ePWGO?=
+ =?us-ascii?Q?cnP+X2k8wn8id7Hnfg+Ve8PTVzsSQzPTwj0x3bl2W7u4simGLZulNOdFpMcq?=
+ =?us-ascii?Q?OI0tB9pqxNXL160ca56pIj5+9TpCLoniFzRYUbmZsrMFnsQXF2UwswnNf7bC?=
+ =?us-ascii?Q?Zf0q756RWW3X0OttdDm3EzQs5VHeDPoy9aDTwSbqSfiIkm0Ki7sDUmevCWRD?=
+ =?us-ascii?Q?pDl2Fiw8bSoq+14xTunXxw11VW/FpmJdBxPwWmGhRzxhttxVgZYDLwaoONsi?=
+ =?us-ascii?Q?A4dDkwRzqGvg0e+IcpRTT8K/RyXXuCYx8uEFrPs6XdwGkV4gO68M1e2uNx0a?=
+ =?us-ascii?Q?VCtHmd+BnFrrrXetLBj6NoNY+lffjZrfHDl1xm9UYGW2uoNmhG6vRBopV4IQ?=
+ =?us-ascii?Q?Vn3MZlMlXQeyklHeK8uoGjXlG8IivF1duoF8/M4cSny2iaATJhplp05HTanV?=
+ =?us-ascii?Q?9TWmUB+nyKn/UfcVydEnh5qLrtBlyM8yA66FJb45h4sfq4IuFBGUP7hosj8H?=
+ =?us-ascii?Q?wZ7SZHATHInfGsvODQQ4BxZbFmebi4Gx5up1S116xHiZX9hhVSzPER6kZ/gX?=
+ =?us-ascii?Q?5iqzh+Qzjw4CQ0wLTensjRdeoWnuw33WNYNI4JdHtyXRQSU4LGrd4NI2Ag4d?=
+ =?us-ascii?Q?AZQ+jXX3tqOwyTxSYjAJR3wMQAzTwecmsac8QCAl5Qv6U2DhGaMyrtk/J9mF?=
+ =?us-ascii?Q?rLC8FKrPEVINfFFm0d5RzcTU6gwcRi+KpHBOCr9BS/h0iU/++fpOIupYATI+?=
+ =?us-ascii?Q?CKe+XNaWrHDTWmrs/xkyGRlcT5BSdyV5cEBY6fDyetn43KnoRJDkVkXKNkWX?=
+ =?us-ascii?Q?PdcyaYo51wqbku3PBR2DpIoEXE2Q0LyzCh+oLQvs2EgaNDD+om+vgy7oCR7k?=
+ =?us-ascii?Q?I3oFw+petU+mwgh0IJTbKcr0IVYXSqwOMZLISnyo/v2Vky1VH2H85dFBC84a?=
+ =?us-ascii?Q?hQkFhnedunhiibpdOp3QNm6RrgnNxeOwXudK6rb2C52QsL5fXJIwDKKBlqZE?=
+ =?us-ascii?Q?qf6DrRyzcE0OPaFwjn8pTVfqjpnqwUCBztb7IgHyIYlgsqqWZfAW2Ubi6FUq?=
+ =?us-ascii?Q?qHSZl9qtRaS/XfoefzJCkSn7ZQs9TQrxLCZj8UYqSIqkGTr8XVRicgWhoJSM?=
+ =?us-ascii?Q?lOTD28VC2FMwVsOlMOm/zihFk4Ru08LA9iDu+qb5mo8KGJVUFcX27lsl3iUl?=
+ =?us-ascii?Q?EDIqyfRoZO1JYn4IvmtVyk1WgR1zIQ/8spSXKKgjjcrS6w+rcxYvkqvkdUi6?=
+ =?us-ascii?Q?B4XZv0efkOyTA5hlinylT4sP8rgsyzPMftgcgLOCfRA0s2dxL+ypzUJcwQni?=
+ =?us-ascii?Q?3Q+Q9NycJgp8wqSdcdbHfuK0ZtHCydLyaUGn7e4vYTRB24qo+5BZjYkIy+Hj?=
+ =?us-ascii?Q?h91Kqf7MkJxI84Zyu7Ty10+b+cJNpY+zlu/0g1Try8uX4o4L/p6edVU1Brlh?=
+ =?us-ascii?Q?+mwSwT73yDs+R2ZTYYF94130086Sp4hEnD4W5L9knXicp9YVWN3uO0FjSWBC?=
+ =?us-ascii?Q?BLC2qej8MfRmBS6xlcI5rahfXE7ghD6+jQOdnV9ZidHaKKCd8MI4vW0m4C0V?=
+ =?us-ascii?Q?zy3HF90I/593SagANoRhFhK3277PT3YD9Qsx9zGQfiMN7xpLDL6h9NmaxEdJ?=
+ =?us-ascii?Q?adyt0H94XUYPZHuHCYe7HCtGU9Z7rvHVmpe9vGl91HPnDlKDFdKGBovGtQ40?=
+ =?us-ascii?Q?r2hmJUUCnEZYwdW4+ShQ5C52NP05rxY=3D?=
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b82369b-0efb-466b-0275-08de7a7c3123
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2026 05:58:15.6390 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RLJRZI8XfQsFFuifvSPtUl2sWAHpIAZImdR2EHC8kAAsbDVCvaknOQV9Wgz3beQlFm9YmOEOkIN5s/kDOpmZpS2TIA06yw3vCdXl72LOBkY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB6514
+X-Mailman-Approved-At: Thu, 05 Mar 2026 07:39:36 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,43 +142,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05/03/26 00:21, Tom Rini wrote:
-> On Mon, Feb 16, 2026 at 03:58:28PM +0530, Siddharth Vadapalli wrote:
-> 
->> Hello,
->>
->> This series adds PCIe endpoint boot support for the TI J784S4 SoC.
->> Series is based on commit
->> f9ffeec4bdc board: toradex: Make A53 get RAM size from DT in K3 boards
->> of the master branch of U-Boot.
->>
->> v4 of this series is at:
->> https://patchwork.ozlabs.org/project/uboot/cover/20251201110103.845413-1-h-salunke@ti.com/
->> Changes since v4:
->> - Addressed Udit's feedback:
->>    i) Patch 6 has been updated by limiting changes to disabling CONFIG_SPL_PCI_ENDPOINT
->>       and CONFIG_SPL_PHY (CONFIG_PCIE_CDNS_TI_EP, CONFIG_SPL_PHY_CADENCE_TORRENT and
->>       CONFIG_SPL_PHY_J721E_WIZ don't need to be disabled as pointed out by Udit).
->>    ii) Commit message of patch 8 has been updated to indicate that although PCIe Boot
->>        is supported in Hardware for J742S2 SoC, it is not yet enabled in Software.
->>    iii) Documentation in patch 10 has been updated with complete set of device-tree
->>         changes included and the C Program to transfer bootloaders has also been
->>         simplified and documented with the usage of appropriate variable names.
->>
->> PCIe Boot Logs (J784S4-EVM running Linux as Root-Complex transfers
->> bootloaders to another J784S4-EVM configured for PCIe Boot):
->> https://gist.github.com/Siddharth-Vadapalli-at-TI/2d157003818441fe79a139d0dec1058a
-> 
-> With current next this introduces a failure to build on j784s4_evm_a72.
-It builds for me without any issues. I have checkout out to next:
-c0ca147ac62 Merge tag 'u-boot-imx-next-20260228' of 
-https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next
-and don't see any issues when building A72 SPL / U-Boot proper for J784S4.
+From: Dinesh Maniyam <dinesh.maniyam@altera.com>
 
-Could you please share the build error that you are observing? Or is it a 
-warning being treated as an error?
+CONFIG_SPL_USE_TINY_PRINTF is enabled by default, disable it.
+Arria 10 has 256KB of onchip ram and it is enough to support full printf.
+Full printf allows us to have more complex format printing, example %ll.
 
-Regards,
-Siddharth.
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+---
+ arch/arm/mach-socfpga/Kconfig     | 1 -
+ configs/socfpga_arria10_defconfig | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/arch/arm/mach-socfpga/Kconfig b/arch/arm/mach-socfpga/Kconfig
+index f2e959b5662..ba01ec08be2 100644
+--- a/arch/arm/mach-socfpga/Kconfig
++++ b/arch/arm/mach-socfpga/Kconfig
+@@ -101,7 +101,6 @@ config TARGET_SOCFPGA_ARRIA10
+ 	select SPL_SYSCON if SPL
+ 	select ETH_DESIGNWARE_SOCFPGA
+ 	imply FPGA_SOCFPGA
+-	imply SPL_USE_TINY_PRINTF
+ 
+ config SOCFPGA_ARRIA10_ALWAYS_REPROGRAM
+ 	bool "Always reprogram Arria 10 FPGA"
+diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
+index b32f40ae408..74ec07cf3e4 100644
+--- a/configs/socfpga_arria10_defconfig
++++ b/configs/socfpga_arria10_defconfig
+@@ -69,3 +69,4 @@ CONFIG_USB=y
+ CONFIG_USB_DWC2=y
+ # CONFIG_SPL_WDT is not set
+ # CONFIG_TOOLS_MKEFICAPSULE is not set
++# CONFIG_SPL_USE_TINY_PRINTF is not set
+-- 
+2.43.7
 
