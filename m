@@ -4,125 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A19EF3092A
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 10:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47030F30946
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 11:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E83D483FC6;
-	Thu,  5 Mar 2026 11:39:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 23EBC80212;
+	Thu,  5 Mar 2026 12:43:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D3B8gJQb";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0592E83F9D; Thu,  5 Mar 2026 11:39:00 +0100 (CET)
-Received: from MW6PR02CU001.outbound.protection.outlook.com
- (mail-westus2azlp170120002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c007::2])
+ id 6C6F7800AE; Thu,  5 Mar 2026 12:43:31 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 883FA83FBC
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 11:38:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D72F283EDF
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 12:43:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=F6VpdSFY3hKBpBpyIuHufQPOUyukFqT6BYeNNHNRHtSX0PbGlk5fi1n/TvTNdAbsT6cvp/wrT9FivJDL+bU/zcV0YTD6gS+sWm9WWJuwkBxfqmB/ZBUdmiItz2B5qk/XmpYeKiVYZxsxg8KVmHaXnJoTln5OAy0eBxVosj83sXzXmqPG/YYHC3M3Niku4PP4bDczbYGuLCm4XIaYNAs7SuAJQzp20j2jNpvN5UCMNrfPxFjGmJRW3LW+Phdhad11WLAxxVJzDOffSWOxmhK7FPsbZqDmd9KybbsRg57+mMYmBnS5sU7BRdy7T8P0ljN9rkfb7YbZQlFpB16k6aIP8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G1LtaTMFJfNoQbNwUGZmoC/FnpMnfC73Q78CxNeun/g=;
- b=pqUOLORI+4KTAz2vywqBQjyBhaDmam81AqkgE70bQJxlgsESuQTMQprJLirae9GPOVDM0qUEHSxbDsN+dQdm5b5BRY+okx7kCVLeSL7IRUKszb9qKjz5XqMLd5Zz45lewy9doPA4Td1bxW+XCl6XyagCtEACsavy0faDttlbGJP2/Dj8gz+CQLj11FjtZr49ZQ297mRwd4bauQT7zCYwy8U5vUifKfcUS+sumE9YURgF6xFJfIP2bBuSMeBmbXNRiKlhD6MN3ovoToVDHE1ADccmmvv5o4TGdZjEHnb3TWS1LJ8ghDlz4Pj9oHN/AzNOckNvZtNv4IxJjtVdFAlppA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G1LtaTMFJfNoQbNwUGZmoC/FnpMnfC73Q78CxNeun/g=;
- b=D3B8gJQbliZQC6OsfAEF1Wi4dui9jQTy7z+9sfffhsiQsAPxBajKQma0wAjtO1O9b1facK1bjOgDEEtIPzjCXtJkiHxwMdBD44uIRh/wX9DyV/l9MUWgHkP7Jnx2ZfimQ33G2RY/w+slobHgu2ER2lLQ97Mjq7T7jlP7RCvylKk=
-Received: from SJ0PR03CA0132.namprd03.prod.outlook.com (2603:10b6:a03:33c::17)
- by PH5PR10MB997759.namprd10.prod.outlook.com (2603:10b6:510:39e::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Thu, 5 Mar
- 2026 10:38:54 +0000
-Received: from SJ5PEPF000001D7.namprd05.prod.outlook.com
- (2603:10b6:a03:33c:cafe::3d) by SJ0PR03CA0132.outlook.office365.com
- (2603:10b6:a03:33c::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.23 via Frontend Transport; Thu,
- 5 Mar 2026 10:38:51 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SJ5PEPF000001D7.mail.protection.outlook.com (10.167.242.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Thu, 5 Mar 2026 10:38:53 +0000
-Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 5 Mar
- 2026 04:38:53 -0600
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 5 Mar
- 2026 04:38:53 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 5 Mar 2026 04:38:53 -0600
-Received: from [10.24.73.74] (uda0492258.dhcp.ti.com [10.24.73.74])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 625Acmo11700378;
- Thu, 5 Mar 2026 04:38:49 -0600
-Message-ID: <5fa4af89-41a7-4e0a-9921-6881a33d0a09@ti.com>
-Date: Thu, 5 Mar 2026 16:10:39 +0530
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1vy772-0002ho-EE; Thu, 05 Mar 2026 12:43:28 +0100
+Message-ID: <66d7ba0c-07d9-4b1b-929b-bbc410d7ffb8@pengutronix.de>
+Date: Thu, 5 Mar 2026 12:43:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-CC: <m-chawdhry@ti.com>, <c-vankar@ti.com>, <neil.armstrong@linaro.org>,
- <marek.vasut+renesas@mailbox.org>, <u-kumar1@ti.com>, <j-keerthy@ti.com>,
- <semen.protsenko@linaro.org>, <afd@ti.com>, <anshuld@ti.com>,
- <peng.fan@nxp.com>, <mkorpershoek@kernel.org>, <n-francis@ti.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH v5 00/10] Add PCIe Boot support for TI J784S4 SoC
-To: Tom Rini <trini@konsulko.com>
-References: <20260216102858.2745657-1-s-vadapalli@ti.com>
- <20260304185113.GC1388590@bill-the-cat>
- <b0d3eb09-add7-4a14-98d2-84061adf9fdf@ti.com>
-Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <b0d3eb09-add7-4a14-98d2-84061adf9fdf@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D7:EE_|PH5PR10MB997759:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ef44950-f19b-4677-a0f7-08de7aa365e3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|34020700016|36860700016|1800799024; 
-X-Microsoft-Antispam-Message-Info: 3Qqvm/JV+tS7RVAFMrFW6/vibLzjRZR5UpRtwWFSghNB8YN0e7JjDNusXSOUrOd35BBoHomXMHyNY/fc4VmibeBN8WA2jlFHb/Sv+NB2yu6+KXOPiIHFEUr7+ngUPlGp11ImOxr+N7f+KOF3VFPZChwF6i9jmllmc3q3362PvhmINnxIbjGYvuzjor4/VklnoUQuE99skKn2BYSD812YHrgcijTVRVjVmpvLY67ZtMSJl/tATEsD/nIg5I6BgxVCl//9hLJApSiF9KTHD7QeUv4GbGADuYmMhtJJn4KhpsppPsGCvMYYg4PtSz67WFc0kjrF9Cp1K0oyRG7jirV3b4zUcsFSZW/32u0RpGv/un+hTWJQDbYMSmj+eVnODlFS3SSLInXa93sSrFhMiQXxcIbP+9ke3QAUetw/9wL547EqmrE73m+qr7paR74+eAo/8U9XZEnF7Et2akIudo5qf81pE4WKmT2EgwgWmrRY5C2daKENU6CJoqy80OJADhOuOo/hNcQiIdc6E0hn7UfQHW+j3H3vdURL5oXaNOkThAn+UqfH51fmhrpTbb0VKKQW6BuxxoZ3oikgLpQRi6xOo4QPY69gv8Awe+nApBi7UdieZybV1QGXAQ4UBfkIlLZALi88YlYaAXRKRoaoCoAXE1ecdsxAfQH7A5nXX+U7Cey1XilrZIAV5z83NmJYASHi8+GdKoFeA2oiSBOMA3ELEQ==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(34020700016)(36860700016)(1800799024);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: wGVkoWqSz1IS1emTgkTxjyLtIaYym1/rWmzCsZZlRsPsWJQLQ0YblTdxa3ysC6KutyvikW3InE32HRefnzi/C7sQJ18gZG4TQnbPxAYhCloP1GL4AUAVBUy5o5xkdLZ6Jek4CUKMw/V+SWvE6ARaY9AE7IzPCspOfxvdau6CCqMlyM1Y8H3jJkgq28FyZj823ZFtmImJB3ksMuL4YWCL+SVFar9LC8Cmec5b1oU6v56ciqtFMin85aKIcFOF+7JY8aNrELosfBDO5vzcB3/bWzr/hSmlodCz6wtihdf3AIJgnGfiVkUZ05J5G+mVg0g+nuCDxWYDHq0qExoqITDQTTRySu8fGCVzCBcTk64VHzf6Z4h1ygXEo/DlPqD5dRaHLHklEwBlOyguo8+nq9jX5+m723R4MerEcjkVGC9mEJ8kJnxhDCXr8rmr424YUYjC
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2026 10:38:53.9563 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ef44950-f19b-4677-a0f7-08de7aa365e3
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH5PR10MB997759
+Subject: Re: [PATCH] boot: Add fit_config_get_hash_list() to build signed node
+ list
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Ludwig <ludwig.nussel@siemens.com>,
+ Simon Glass <simon.glass@canonical.com>, Daniel Golle
+ <daniel@makrotopia.org>, Enric Balletbo i Serra <eballetbo@kernel.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20260304135202.1535134-1-sjg@chromium.org>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Content-Language: en-US, de-DE, de-BE
+In-Reply-To: <20260304135202.1535134-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,59 +66,356 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05/03/26 11:27, Siddharth Vadapalli wrote:
-> On 05/03/26 00:21, Tom Rini wrote:
->> On Mon, Feb 16, 2026 at 03:58:28PM +0530, Siddharth Vadapalli wrote:
->>
->>> Hello,
->>>
->>> This series adds PCIe endpoint boot support for the TI J784S4 SoC.
->>> Series is based on commit
->>> f9ffeec4bdc board: toradex: Make A53 get RAM size from DT in K3 boards
->>> of the master branch of U-Boot.
->>>
->>> v4 of this series is at:
->>> https://patchwork.ozlabs.org/project/uboot/ 
->>> cover/20251201110103.845413-1-h-salunke@ti.com/
->>> Changes since v4:
->>> - Addressed Udit's feedback:
->>>    i) Patch 6 has been updated by limiting changes to disabling 
->>> CONFIG_SPL_PCI_ENDPOINT
->>>       and CONFIG_SPL_PHY (CONFIG_PCIE_CDNS_TI_EP, 
->>> CONFIG_SPL_PHY_CADENCE_TORRENT and
->>>       CONFIG_SPL_PHY_J721E_WIZ don't need to be disabled as pointed out 
->>> by Udit).
->>>    ii) Commit message of patch 8 has been updated to indicate that 
->>> although PCIe Boot
->>>        is supported in Hardware for J742S2 SoC, it is not yet enabled in 
->>> Software.
->>>    iii) Documentation in patch 10 has been updated with complete set of 
->>> device-tree
->>>         changes included and the C Program to transfer bootloaders has 
->>> also been
->>>         simplified and documented with the usage of appropriate variable 
->>> names.
->>>
->>> PCIe Boot Logs (J784S4-EVM running Linux as Root-Complex transfers
->>> bootloaders to another J784S4-EVM configured for PCIe Boot):
->>> https://gist.github.com/Siddharth-Vadapalli-at- 
->>> TI/2d157003818441fe79a139d0dec1058a
->>
->> With current next this introduces a failure to build on j784s4_evm_a72.
-> It builds for me without any issues. I have checkout out to next:
-> c0ca147ac62 Merge tag 'u-boot-imx-next-20260228' of https://gitlab.denx.de/ 
-> u-boot/custodians/u-boot-imx into next
-> and don't see any issues when building A72 SPL / U-Boot proper for J784S4.
+Hello Simon,
+
+On 3/4/26 2:51 PM, Simon Glass wrote:
+> From: Simon Glass <simon.glass@canonical.com>
 > 
-> Could you please share the build error that you are observing? Or is it a 
-> warning being treated as an error?
-To fix the warning associated with 'subclass_code', I have posted the 
-following patch:
-https://patchwork.ozlabs.org/project/uboot/patch/20260305103815.999886-1-s-vadapalli@ti.com/
+> The hashed-nodes property in a FIT signature node lists which FDT paths
+> are included in the signature hash. It is intended as a hint so should
+> not be used for verification.
+> 
+> Add a function to build the node list from scratch by iterating the
+> configuration's image references. Skip properties known not to be image
+> references. For each image, collect the path plus all hash and cipher
+> subnodes.
+> 
+> Use the new function in fit_config_check_sig() instead of reading
+> 'hashed-nodes'.
+> 
+> Update the docs to cover this. The FIT spec can be updated separately.
 
-Assuming that the above is the fix for the same build failure that you were 
-referring to, please let me know if the fix can be taken along with this 
-series.
+Thanks very much, I had something similar in mind.
+Otherwise, the compatibility break would've been a nightmare.
 
-Regards,
-Siddharth.
+Cheers,
+Ahmad
+
+> 
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> ---
+> 
+>  boot/image-fit-sig.c        | 227 +++++++++++++++++++++++++++++-------
+>  doc/usage/fit/signature.rst |  19 ++-
+>  2 files changed, 195 insertions(+), 51 deletions(-)
+> 
+> diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
+> index f23e9d5d0b0..f426ead13c0 100644
+> --- a/boot/image-fit-sig.c
+> +++ b/boot/image-fit-sig.c
+> @@ -18,6 +18,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>  #include <u-boot/hash-checksum.h>
+>  
+>  #define IMAGE_MAX_HASHED_NODES		100
+> +#define FIT_MAX_HASH_PATH_BUF		4096
+>  
+>  /**
+>   * fit_region_make_list() - Make a list of image regions
+> @@ -229,6 +230,179 @@ int fit_image_verify_required_sigs(const void *fit, int image_noffset,
+>  	return 0;
+>  }
+>  
+> +/**
+> + * fit_config_add_hash() - Add hash nodes for one image to the node list
+> + *
+> + * Adds the image path, all its hash-* subnode paths, and its cipher
+> + * subnode path (if present) to the packed buffer.
+> + *
+> + * @fit:		FIT blob
+> + * @image_noffset:	Image node offset (e.g. /images/kernel-1)
+> + * @node_inc:		Array of path pointers to fill
+> + * @count:		Pointer to current count (updated on return)
+> + * @max_nodes:		Maximum entries in @node_inc
+> + * @buf:		Buffer for packed path strings
+> + * @buf_used:		Pointer to bytes used in @buf (updated on return)
+> + * @buf_len:		Total size of @buf
+> + * Return: 0 on success, -ve on error
+> + */
+> +static int fit_config_add_hash(const void *fit, int image_noffset,
+> +			       char **node_inc, int *count, int max_nodes,
+> +			       char *buf, int *buf_used, int buf_len)
+> +{
+> +	int noffset, hash_count, ret, len;
+> +
+> +	if (*count >= max_nodes)
+> +		return -ENOSPC;
+> +
+> +	ret = fdt_get_path(fit, image_noffset, buf + *buf_used,
+> +			   buf_len - *buf_used);
+> +	if (ret < 0)
+> +		return -ENOENT;
+> +	len = strlen(buf + *buf_used) + 1;
+> +	node_inc[(*count)++] = buf + *buf_used;
+> +	*buf_used += len;
+> +
+> +	/* Add all this image's hash subnodes */
+> +	hash_count = 0;
+> +	for (noffset = fdt_first_subnode(fit, image_noffset);
+> +	     noffset >= 0;
+> +	     noffset = fdt_next_subnode(fit, noffset)) {
+> +		const char *name = fit_get_name(fit, noffset, NULL);
+> +
+> +		if (strncmp(name, FIT_HASH_NODENAME,
+> +			    strlen(FIT_HASH_NODENAME)))
+> +			continue;
+> +		if (*count >= max_nodes)
+> +			return -ENOSPC;
+> +		ret = fdt_get_path(fit, noffset, buf + *buf_used,
+> +				   buf_len - *buf_used);
+> +		if (ret < 0)
+> +			return -ENOENT;
+> +		len = strlen(buf + *buf_used) + 1;
+> +		node_inc[(*count)++] = buf + *buf_used;
+> +		*buf_used += len;
+> +		hash_count++;
+> +	}
+> +
+> +	if (!hash_count) {
+> +		printf("No hash nodes in image '%s'\n",
+> +		       fdt_get_name(fit, image_noffset, NULL));
+> +		return -ENOMSG;
+> +	}
+> +
+> +	/* Add this image's cipher node if present */
+> +	noffset = fdt_subnode_offset(fit, image_noffset, FIT_CIPHER_NODENAME);
+> +	if (noffset != -FDT_ERR_NOTFOUND) {
+> +		if (noffset < 0)
+> +			return -EIO;
+> +		if (*count >= max_nodes)
+> +			return -ENOSPC;
+> +		ret = fdt_get_path(fit, noffset, buf + *buf_used,
+> +				   buf_len - *buf_used);
+> +		if (ret < 0)
+> +			return -ENOENT;
+> +		len = strlen(buf + *buf_used) + 1;
+> +		node_inc[(*count)++] = buf + *buf_used;
+> +		*buf_used += len;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * fit_config_get_hash_list() - Build the list of nodes to hash
+> + *
+> + * Works through every image referenced by the configuration and collects the
+> + * node paths: root + config + all referenced images with their hash and
+> + * cipher subnodes.
+> + *
+> + * Properties known not to be image references (description, compatible,
+> + * default, load-only) are skipped, so any new image type is covered by default.
+> + *
+> + * @fit:	FIT blob
+> + * @conf_noffset: Configuration node offset
+> + * @node_inc:	Array to fill with path string pointers
+> + * @max_nodes:	Size of @node_inc array
+> + * @buf:	Buffer for packed null-terminated path strings
+> + * @buf_len:	Size of @buf
+> + * Return: number of entries in @node_inc, or -ve on error
+> + */
+> +static int fit_config_get_hash_list(const void *fit, int conf_noffset,
+> +				    char **node_inc, int max_nodes,
+> +				    char *buf, int buf_len)
+> +{
+> +	const char *conf_name;
+> +	int image_count;
+> +	int prop_offset;
+> +	int used = 0;
+> +	int count = 0;
+> +	int ret, len;
+> +
+> +	conf_name = fit_get_name(fit, conf_noffset, NULL);
+> +
+> +	/* Always include the root node and the configuration node */
+> +	if (max_nodes < 2)
+> +		return -ENOSPC;
+> +
+> +	len = 2;  /* "/" + nul */
+> +	if (len > buf_len)
+> +		return -ENOSPC;
+> +	strcpy(buf, "/");
+> +	node_inc[count++] = buf;
+> +	used += len;
+> +
+> +	len = snprintf(buf + used, buf_len - used, "%s/%s", FIT_CONFS_PATH,
+> +		       conf_name) + 1;
+> +	if (used + len > buf_len)
+> +		return -ENOSPC;
+> +	node_inc[count++] = buf + used;
+> +	used += len;
+> +
+> +	/* Process each image referenced by the config */
+> +	image_count = 0;
+> +	fdt_for_each_property_offset(prop_offset, fit, conf_noffset) {
+> +		const char *prop_name;
+> +		int img_count, i;
+> +
+> +		fdt_getprop_by_offset(fit, prop_offset, &prop_name, NULL);
+> +		if (!prop_name)
+> +			continue;
+> +
+> +		/* Skip properties that are not image references */
+> +		if (!strcmp(prop_name, FIT_DESC_PROP) ||
+> +		    !strcmp(prop_name, FIT_COMPAT_PROP) ||
+> +		    !strcmp(prop_name, FIT_DEFAULT_PROP))
+> +			continue;
+> +
+> +		img_count = fdt_stringlist_count(fit, conf_noffset, prop_name);
+> +		for (i = 0; i < img_count; i++) {
+> +			int noffset;
+> +
+> +			noffset = fit_conf_get_prop_node_index(fit,
+> +							       conf_noffset,
+> +							       prop_name, i);
+> +			if (noffset < 0)
+> +				continue;
+> +
+> +			ret = fit_config_add_hash(fit, noffset, node_inc,
+> +						  &count, max_nodes, buf, &used,
+> +						  buf_len);
+> +			if (ret < 0)
+> +				return ret;
+> +
+> +			image_count++;
+> +		}
+> +	}
+> +
+> +	if (!image_count) {
+> +		printf("No images in config '%s'\n", conf_name);
+> +		return -ENOMSG;
+> +	}
+> +
+> +	return count;
+> +}
+> +
+>  /**
+>   * fit_config_check_sig() - Check the signature of a config
+>   *
+> @@ -269,20 +443,16 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
+>  		FIT_DATA_POSITION_PROP,
+>  		FIT_DATA_OFFSET_PROP,
+>  	};
+> -
+> -	const char *prop, *end, *name;
+> +	char *node_inc[IMAGE_MAX_HASHED_NODES];
+> +	char hash_buf[FIT_MAX_HASH_PATH_BUF];
+>  	struct image_sign_info info;
+>  	const uint32_t *strings;
+> -	const char *config_name;
+>  	uint8_t *fit_value;
+>  	int fit_value_len;
+> -	bool found_config;
+>  	int max_regions;
+> -	int i, prop_len;
+>  	char path[200];
+>  	int count;
+>  
+> -	config_name = fit_get_name(fit, conf_noffset, NULL);
+>  	debug("%s: fdt=%p, conf='%s', sig='%s'\n", __func__, key_blob,
+>  	      fit_get_name(fit, noffset, NULL),
+>  	      fit_get_name(key_blob, required_keynode, NULL));
+> @@ -297,45 +467,12 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
+>  		return -1;
+>  	}
+>  
+> -	/* Count the number of strings in the property */
+> -	prop = fdt_getprop(fit, noffset, "hashed-nodes", &prop_len);
+> -	end = prop ? prop + prop_len : prop;
+> -	for (name = prop, count = 0; name < end; name++)
+> -		if (!*name)
+> -			count++;
+> -	if (!count) {
+> -		*err_msgp = "Can't get hashed-nodes property";
+> -		return -1;
+> -	}
+> -
+> -	if (prop && prop_len > 0 && prop[prop_len - 1] != '\0') {
+> -		*err_msgp = "hashed-nodes property must be null-terminated";
+> -		return -1;
+> -	}
+> -
+> -	/* Add a sanity check here since we are using the stack */
+> -	if (count > IMAGE_MAX_HASHED_NODES) {
+> -		*err_msgp = "Number of hashed nodes exceeds maximum";
+> -		return -1;
+> -	}
+> -
+> -	/* Create a list of node names from those strings */
+> -	char *node_inc[count];
+> -
+> -	debug("Hash nodes (%d):\n", count);
+> -	found_config = false;
+> -	for (name = prop, i = 0; name < end; name += strlen(name) + 1, i++) {
+> -		debug("   '%s'\n", name);
+> -		node_inc[i] = (char *)name;
+> -		if (!strncmp(FIT_CONFS_PATH, name, strlen(FIT_CONFS_PATH)) &&
+> -		    name[sizeof(FIT_CONFS_PATH) - 1] == '/' &&
+> -		    !strcmp(name + sizeof(FIT_CONFS_PATH), config_name)) {
+> -			debug("      (found config node %s)", config_name);
+> -			found_config = true;
+> -		}
+> -	}
+> -	if (!found_config) {
+> -		*err_msgp = "Selected config not in hashed nodes";
+> +	/* Build the node list from the config, ignoring hashed-nodes */
+> +	count = fit_config_get_hash_list(fit, conf_noffset,
+> +					 node_inc, IMAGE_MAX_HASHED_NODES,
+> +					 hash_buf, sizeof(hash_buf));
+> +	if (count < 0) {
+> +		*err_msgp = "Failed to build hash node list";
+>  		return -1;
+>  	}
+>  
+> diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
+> index e5b5a8432e9..da08cc75c3a 100644
+> --- a/doc/usage/fit/signature.rst
+> +++ b/doc/usage/fit/signature.rst
+> @@ -353,20 +353,27 @@ meantime.
+>  Details
+>  -------
+>  The signature node contains a property ('hashed-nodes') which lists all the
+> -nodes that the signature was made over.  The image is walked in order and each
+> -tag processed as follows:
+> +nodes that the signature was made over.  The signer (mkimage) writes this
+> +property as a record of what was included in the hash.  During verification,
+> +however, U-Boot does not read 'hashed-nodes'. Instead it rebuilds the node
+> +list from the configuration's own image references (kernel, fdt, ramdisk,
+> +etc.), since 'hashed-nodes' is not itself covered by the signature. The
+> +rebuilt list always includes the root node, the configuration node, each
+> +referenced image node and its hash/cipher subnodes.
+> +
+> +The image is walked in order and each tag processed as follows:
+>  
+>  DTB_BEGIN_NODE
+>      The tag and the following name are included in the signature
+> -    if the node or its parent are present in 'hashed-nodes'
+> +    if the node or its parent are present in the node list
+>  
+>  DTB_END_NODE
+>      The tag is included in the signature if the node or its parent
+> -    are present in 'hashed-nodes'
+> +    are present in the node list
+>  
+>  DTB_PROPERTY
+>      The tag, the length word, the offset in the string table, and
+> -    the data are all included if the current node is present in 'hashed-nodes'
+> +    the data are all included if the current node is present in the node list
+>      and the property name is not 'data'.
+>  
+>  DTB_END
+> @@ -374,7 +381,7 @@ DTB_END
+>  
+>  DTB_NOP
+>      The tag is included in the signature if the current node is present
+> -    in 'hashed-nodes'
+> +    in the node list
+>  
+>  In addition, the signature contains a property 'hashed-strings' which contains
+>  the offset and length in the string table of the strings that are to be
+
+-- 
+Pengutronix e.K.                  |                             |
+Steuerwalder Str. 21              | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
+
