@@ -4,99 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E7E0EEF31C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 08:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77766EEF31C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Mar 2026 08:50:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79FAC83FC1;
-	Thu,  5 Mar 2026 09:49:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 06C8383FD9;
+	Thu,  5 Mar 2026 09:50:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SylJRm/Y";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1Hbxy8ZW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD7A383FB5; Thu,  5 Mar 2026 09:49:26 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id F1FB383FD6; Thu,  5 Mar 2026 09:50:37 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D090B83FAA
- for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 09:49:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 058B383FDE
+ for <u-boot@lists.denx.de>; Thu,  5 Mar 2026 09:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-439cd6b0aedso543972f8f.1
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 00:49:24 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-6615c461d3fso388519a12.2
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 00:50:34 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1772700633; cv=none;
+ d=google.com; s=arc-20240605;
+ b=A7LQw6f3yovMMhNWcmCWyeD96602PhFYsbQvq5CZGxTAGKq+Vh83cRNe2rpUTm9yQy
+ 6Av8BWGnk+UNHrJ0CCocPHtClcGqoublolW8zP5NP27EMQsjxCVMMFQzRKpsBFSKR0M2
+ OreFzmSdblev0MfiHXs+XVjN0priw9cSGJqcG8PGk5sYvWJLqiSkrd9skev2Ssk8I5Y8
+ 8fTTQRa36ry8ofHy0wPmpgp/RBdyE2nQuzUmjHLwP/klqK8z0cEgwXJ0FjSYPGdACLd7
+ UZ1uyy+NvbURdsxtj1lf1lfB5kYVP50uUpXh7N+a7RwYv2TmrSzp6W8nZM6yeZY0yNPb
+ QToA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=e7bbRM6HdbFGZHM4Cb5lQbBqrtAtyxCvnLjKbZ61zv4=;
+ fh=7mdw+v5nq8+FyOe43d7uOomobnWlhsvf9giFNY1o4oY=;
+ b=FAKIIrZipg21ler+NdX9WnBbUaRyd9SDsEXfKmCj03CCzw1bxfI2ymqij8Yl9vh7r/
+ a9Y71TGLS0EMDrP0NVhNZVClPPLbfyYbo5EfTBvsIFbiQKIVCuQ9jxNAMKi86sh26ymn
+ qP6/MlFGZLzmbY32itu3S8J39PXDruy3mVkjBeOiQURdGcRiJQn3eyPXxx2i/GNv0ARU
+ fgVsX0jS8SbJSDG9kxWr9KXsmgm0qJyoukOHGdNcGQ1EG5D7pF2xmQQ5QVr7XTGgeYQy
+ b8oaA2492naMrcDq9kiNyae3lYrsCVRH2h6aYVl/tVAT7afOPM8MPivTwxOLMdlrojmb
+ msIw==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772700564; x=1773305364;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772700633; x=1773305433;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=yU0IhtiE5SdT3b0e+WiUHkJgsHBG/DzDdu31HrhiRTQ=;
- b=SylJRm/Y+GWoaF10wcC8ObN5JJO0P5OUQgBQCKXGZXI9EWOz+XZNQmDjg0UTwu0MK1
- MWs3fgKSt2cG/g74MyNwpdg1Efv05E4YMrQto/sUf+/l9X/JYjfQ5wcFEMBMKnfPPyH9
- 3o/NVTOUhJ3udPOM+27fu+iB9Z7fO0NAf3M3jAWpS8wx+TwPEofvdS9kpMasF+9kn6xY
- zXU15Eg+reCGdlp7N9e77YYnTvsmeodjq1t6IyPbb/YiNggTQdnLGT3HBzN1LdjcpUpA
- eiAphQTPAmED1H41NfIHyK+hiCquBowPZELJk7+UMsTxhtRZUyloXy8QU1eHL3v3qOL2
- chsw==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=e7bbRM6HdbFGZHM4Cb5lQbBqrtAtyxCvnLjKbZ61zv4=;
+ b=1Hbxy8ZWkD80BAb6ubZuSNKOHZEx/oq3Vbt5I7P3ID/ib+k6FDYIbjcoMxtnL7IKtt
+ gl5qIdaC6ONZlO+vIX6q0DWpP3btQl+6WCPu6F1DqBXAgftW9hI/zvdh3KhEyrsFR0lo
+ zCzh4UTUziIfoh2TZG/UDuR3DZECnB9YUk5RcjFI1RauqoGKqIearxaRb1MvoSMZX2YR
+ DxITxGyS3OB0M4uKAT/ti/5lZ6DjowVeBYN6Epf0tr46usH0WYhw9A60VbZoj1CpSWfz
+ +GUn7tdQNqQj1O72Umlb+dh5ExtM0jTwysB5hRBFPUhnKMCP0S3O7JvQ6htS2y7DZxQB
+ A5VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772700564; x=1773305364;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=yU0IhtiE5SdT3b0e+WiUHkJgsHBG/DzDdu31HrhiRTQ=;
- b=J100v1puPZ6kgASgubk4ne45Edkbx/pmKi9mvw5dgTt7oaFqIBNU3rl6I5SlsipAnp
- wOFcKS7fGfDNQhwW3eoIWL0FvCpnLnVVd/JdZari8eIR8gsGRNna1U7+rHkYvjfbL88q
- JcHEnuKu//PHMbmcl/0pPPvdcAQXruLLq2i2aK3veLNgJG1ZQcqVZyn1OISSCkwvvtab
- QK3ZRINwUezpY5kvCluNQi9g2vXLLrn2v44Acwm0w6RTK4XN1ikTqXgzP728qBWFQyes
- pA/2UOIQ1OxR0F1bWjhyVJQ9GZwvu423BmRgxqm8XCqk4tcXWYn4yxKLH4t0DPjRN+ti
- 8esg==
-X-Gm-Message-State: AOJu0Yw0zkvH3oyGO4ImJVexeoLvkKUkDwXYkO6xZ1eHiYI9k89qBKhc
- 323ofQT5iHABFHil3FR1ob/jazKui+RKeu9Y9HUOxmlsBZ+T5VDoSQopI/YBy1UGNj8=
-X-Gm-Gg: ATEYQzzFASe5kdVnTwrguLfx4OziOsOFlvlGH76+TJ3Lg9NQTQQ3YLLgkU8ib15Z7vv
- CzLe9143UfG2JibFLJBvGrAv7bLaiS6lu2j5pyUWhWLUM+rlKdZgu4Xy1mvqKlMm6/9le8vWRSb
- TDGUwUmJqHMrA8KxOcqL+QhdL+Zd8cRJFJg0iD7hq6a8be8pUKMEhnpPFCMZ39Gjuo9Hpc0N1B9
- DEn89Ebyvj0CAU/FY1TzpWZr6wmBRm8t+Lgc7+k/kgnUO/7S9Xb0P45gTW68hsJ1gZ0UvinHtGH
- Jstxxk/IrUVRNd5ML0EJxJFHnz7Utvw8dHI/PdAVdLUqW3hRobw2vJywvhrAV1V2rSJMCIIM6al
- zk65y0SQBkR2wSRfE1lOc64kFntEM9Hq+wSkHbNo3GrEHtZpwoAz9aASfDXAt7Dfe/EMTQQ6qJw
- RQ5UaUd9RY8pdCdlsiRlxijI38cHvhCmjL3e0TvkZr1lYdVxMZsR7wcY5qK72wFtAwMdxBQIuH9
- 6bbBjFI7NhKr6X6wK7prg==
-X-Received: by 2002:a5d:5c8a:0:b0:439:b1be:819f with SMTP id
- ffacd0b85a97d-439c7f650d2mr9498958f8f.2.1772700564242; 
- Thu, 05 Mar 2026 00:49:24 -0800 (PST)
-Received: from [192.168.1.64]
- (2a02-8428-e55b-1101-1e41-304e-170b-482f.rev.sfr.net.
- [2a02:8428:e55b:1101:1e41:304e:170b:482f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439b03db76bsm33638231f8f.18.2026.03.05.00.49.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 00:49:24 -0800 (PST)
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Thu, 05 Mar 2026 09:49:04 +0100
-Subject: [PATCH v3 3/3] drivers: ufs: fix typo in struct ufs_dev_cmd kernel-doc
+ d=1e100.net; s=20230601; t=1772700633; x=1773305433;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=e7bbRM6HdbFGZHM4Cb5lQbBqrtAtyxCvnLjKbZ61zv4=;
+ b=r116Zfw5EDWRzh6jAm6/GqPs3fctNOCaxyeMbHRqGB13Ogpff9jtGpzklUT+Y9B1hF
+ 2dP2jd3obdEqreL4SyfraYXodaAMtZowFooosC0xxee3ManNaQAHwISNtMRGp/DaUead
+ YybqQNuGUJ3c3cy2aTKHoseQnFplr0YtQWTUJVR7B4QqyyH8jMMhfz8q6ryPitL0eemo
+ //QS7vd+HKr9JW4H53z+YlvHDt38HECnNpL/ALBeIaGZt3fe+ccNSbNlPs6zp0gJFRzz
+ GUlGGcz3ZiXOx8Bz24jrxqdwSaT9qZj0Zo34BkH++h+omOndT3nNow1B2Exadm5Qkaz4
+ zgeg==
+X-Gm-Message-State: AOJu0YzUPhzek0pGGzvT2vRU3zGuM+8ls8XB9fzVjfRElrPeNl5HNRwW
+ dhwh2EeLnqoZEs8SMHBvSnFR+B4Q8VolGk6E0FukhAuVYZCRUSZCFcNloWAtyAGqG8d33QU7vRG
+ mGol6Qo/K5MQXFMRQHwMhsvWA4LDyrkGmLKW8g7peGg==
+X-Gm-Gg: ATEYQzyuS67GgHbCrxV2HEGHF9RnvRVCcp3oQrzgOV3kA3DTygIQS75PR8Gi7WK+jGj
+ DjDcWFWrjlGSfHCnbo/7wK5SWESiC5MPgcZ6moiqsdSCX3g3Xwdn7/8KuolxjXM7HVeKUmCpy06
+ UIswMAi1YVAOvE7w3bnfwsY8bCfBMSMbgBzmEI/qgKxb+JuIe36ITTU2Sn/zfb1adacTPqsFgz4
+ PJppmqjJdaXKc/dToKpFDJcwXGYhylG3oOXkEJ217ErZpCkL0Uw5Aix4tSIjWBEXEKmC9LzvXn6
+ QYaAJFu9b/+vnwsUjcZn+atALBMQWf8H1fiXHlgkOv7OSGEemoPcSwIXYolFA0eJMsHNw6WuoKU
+ i15+orp59ZS1z+LvVNH8dvZEAStc=
+X-Received: by 2002:a17:907:2da5:b0:b8f:d13:dec8 with SMTP id
+ a640c23a62f3a-b93f11efb87mr287584966b.22.1772700633267; Thu, 05 Mar 2026
+ 00:50:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260305-ufs-ufs_hba_ops-cleanup-v3-3-e153ffab98f5@baylibre.com>
-References: <20260305-ufs-ufs_hba_ops-cleanup-v3-0-e153ffab98f5@baylibre.com>
-In-Reply-To: <20260305-ufs-ufs_hba_ops-cleanup-v3-0-e153ffab98f5@baylibre.com>
-To: u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+References: <20260210-ufs-ufs_hba_ops-cleanup-v2-0-dd73da21aa92@baylibre.com>
+ <20260210-ufs-ufs_hba_ops-cleanup-v2-2-dd73da21aa92@baylibre.com>
+ <405d7b14-fdb3-4ee6-a986-3951053ff319@linaro.org>
+In-Reply-To: <405d7b14-fdb3-4ee6-a986-3951053ff319@linaro.org>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Thu, 5 Mar 2026 09:50:04 +0100
+X-Gm-Features: AaiRm50QPNLz7kqAhFA36tFer4kO5k7fEzlIIA1-KzQY0sWLdPRAojX92bRp-nE
+Message-ID: <CAEHHSvZ03hmGRx8KgfjsvgQgCrZbE76m-=jZNKP=f7-o6Medvw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] drivers: ufs: add helper for phy_initialization
+ callback
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Shawn Lin <shawn.lin@rock-chips.com>, Bryan Brattlof <bb@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Jared McArthur <j-mcarthur@ti.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Shawn Lin <shawn.lin@rock-chips.com>, 
+ Bryan Brattlof <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Jared McArthur <j-mcarthur@ti.com>, 
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Michal Simek <michal.simek@amd.com>, dlechner@baylibre.com, 
- Julien Stephan <jstephan@baylibre.com>
-X-Mailer: b4 0.14.3
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Michal Simek <michal.simek@amd.com>, dlechner@baylibre.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,27 +129,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix "associated" typo in struct ufs_dev_cmd kernel-doc.
+Le mer. 4 mars 2026 =C3=A0 17:17, Neil Armstrong
+<neil.armstrong@linaro.org> a =C3=A9crit :
+>
+> On 2/10/26 17:22, Julien Stephan wrote:
+> > Introduce ufshcd_ops_phy_initialization() as a helper for invoking the
+> > phy_initialization callback from ufs_hba_ops.
+> >
+> > This mirrors the existing helper pattern used for other ufs_hba_ops
+> > callbacks and keeps the call sites consistent and easier to maintain.
+> >
+> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> > ---
+> >   drivers/ufs/ufs-rockchip.c | 10 ++++------
+> >   drivers/ufs/ufs.h          |  8 ++++++++
+> >   2 files changed, 12 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+> > index 0384244387d..cad753d5990 100644
+> > --- a/drivers/ufs/ufs-rockchip.c
+> > +++ b/drivers/ufs/ufs-rockchip.c
+> > @@ -30,12 +30,10 @@ static int ufs_rockchip_hce_enable_notify(struct uf=
+s_hba *hba,
+> >       ufshcd_dme_reset(hba);
+> >       ufshcd_dme_enable(hba);
+> >
+> > -     if (hba->ops->phy_initialization) {
+> > -             err =3D hba->ops->phy_initialization(hba);
+> > -             if (err)
+> > -                     dev_err(hba->dev,
+> > -                             "Phy init failed (%d)\n", err);
+> > -     }
+> > +     ret =3D ufshcd_ops_phy_initialization(hba);
+> > +     if (err)
+> > +             dev_err(hba->dev,
+> > +                     "Phy init failed (%d)\n", err);
+>
+> So this fails with:
+> drivers/ufs/ufs-rockchip.c:32:9: error: 'ret' undeclared (first use in th=
+is function)
+> 2342
+>     32 |         ret =3D ufshcd_ops_phy_initialization(hba);
+>
+>
+> It should probably be: "err =3D"
 
-Signed-off-by: Julien Stephan <jstephan@baylibre.com>
----
- drivers/ufs/ufs.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Neil,
 
-diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index 74125b1ab31..0f6c93fbce7 100644
---- a/drivers/ufs/ufs.h
-+++ b/drivers/ufs/ufs.h
-@@ -509,7 +509,7 @@ struct ufs_query {
- };
- 
- /**
-- * struct ufs_dev_cmd - all assosiated fields with device management commands
-+ * struct ufs_dev_cmd - all associated fields with device management commands
-  * @type: device management command type - Query, NOP OUT
-  * @tag_wq: wait queue until free command slot is available
-  */
+Thank you for catching this. I sent a new version.
+Sorry for that.
 
--- 
-2.52.0
+Julien
 
+>
+> I'll drop this serie from the PR, please fix and resend a new version.
+>
+> Neil
+>
+> >
+> >       return err;
+> >   }
+> > diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
+> > index bc839a43704..74125b1ab31 100644
+> > --- a/drivers/ufs/ufs.h
+> > +++ b/drivers/ufs/ufs.h
+> > @@ -756,6 +756,14 @@ static inline int ufshcd_ops_link_startup_notify(s=
+truct ufs_hba *hba,
+> >       return 0;
+> >   }
+> >
+> > +static inline int ufshcd_ops_phy_initialization(struct ufs_hba *hba)
+> > +{
+> > +     if (hba->ops && hba->ops->phy_initialization)
+> > +             return hba->ops->phy_initialization(hba);
+> > +
+> > +     return 0;
+> > +}
+> > +
+> >   static inline int ufshcd_vops_device_reset(struct ufs_hba *hba)
+> >   {
+> >       if (hba->ops && hba->ops->device_reset)
+> >
+>
