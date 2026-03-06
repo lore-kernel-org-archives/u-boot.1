@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A398BFCB611
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 15:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7816BFCB61E
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 16:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D367F83FA6;
-	Fri,  6 Mar 2026 16:12:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 94B92838FA;
+	Fri,  6 Mar 2026 17:17:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p1SmNwS8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jAviu7e6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFC8583FAF; Fri,  6 Mar 2026 16:12:42 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 09C97839A8; Fri,  6 Mar 2026 17:17:20 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7067839A8
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 16:12:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 844B18382A
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 17:17:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-409de4132b5so3028803fac.1
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 07:12:40 -0800 (PST)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d4ba9abbecso11090343a34.1
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 08:17:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1772809959; x=1773414759; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YgW6+aOulfzgNq4/w+LEZ/Q5PnM3mVWyB8O9S502c20=;
- b=p1SmNwS8vS2eJ/KvAsKsCzVW7/S2PsBvgkuUtwKovTnJg6UdDNwMaSquVm3QIPO/G8
- vZGKsSP6Kqw1JwhVm+qjaYudi5VwqxAW8PFlcN9uW9NH8Wn+21uSqfWpM+jTvfbrrbMu
- i3EBXw7q6sAiL07Swi8vv6Mp5tFeTLtHEgR3U=
+ d=konsulko.com; s=google; t=1772813836; x=1773418636; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9QspLKATHx05YzsPhU6YHusOnI3ZpZ0Gkvg6mHCx6E4=;
+ b=jAviu7e665oEFW39UbJyWv5PU84eirAShTRm3bmCldkphabFBW8qK8nd9TNGjItP6o
+ 0JkhYCk9ePl/bHy87gzbB06VFsC5whtUvK6pR0Jye1xEhYxC4N4QMzqGVAm7PFDBkBO+
+ +1gpl26MlK1Kqd3cVFX239CqFy/YAhxKOxyj8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772809959; x=1773414759;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YgW6+aOulfzgNq4/w+LEZ/Q5PnM3mVWyB8O9S502c20=;
- b=udRK4/ccjWh021K8uKr4YXtocSQIdCVSjvcnxspSgG0c0hiDLeOe/GI5l6qaK7E6Io
- 8MvtRj1hOAGS1i3yYKTWdO/EJrvX+TTnYRlAZzPWm3SPL1nPcZD0t+cixhoWY3DmCQDc
- r+uIM4Qd2krVG4PwBvwAjYC5vgjrwrSrs7bN3eDpWZnvxZD/8eFrPT5h25V8hJx/Xy9M
- CZHamtY9gQE7H7b83fI5h4nAwXVq9XI2gJBBwbvteJFo/1pOs3R5L32rxD3eZInTpfaa
- ACuFU+9GqXHo/o7Qnn7dbvGbwLkvzftOWeeM+FADKoHHIg/CIwxVIkCqFTSsQN4dyYs/
- rybg==
-X-Gm-Message-State: AOJu0YwpmlNIaFMM72JMimFQXOkW7phUN0wDhr6p7wCvLBwx7XJ9kNbA
- CGb1w3x41LF9D2kvQF+9F0AhAMLTKKP0xaVyfUeH7J8FkHIBAlIAHV9eiykLQEdDOCk=
-X-Gm-Gg: ATEYQzysGzwoIY2v/LrqIVLinM+zMVByO2dfm4eW9Fxy9YhIoMgODz2sH4hFk8vvCsL
- gVISpZ1dt54843Hgw5UXFX4ConKi0G/QNXNExRBt0YJWBuf4WpJpMLHjqugNfR/ZHKo80MXqXi8
- vZM44ZUeWXm3AGJeJ5ZlYrNf5zFCpqt19BVRlZThK6uKPuQcPY8htfZivUdRlGnUbtg4UqA7FLA
- 6GspkXKhRCld2AcvXCxMtxgcNiqzG5zf7IeMqebITHHZLNMg4a6/aLerl5e506Drt6BzrVWqLfI
- lzNue/QJvtY31I1dI9oXDcDK3wVXvGsX1fYImvydph+waiizcXyXD83pvCoa8mhgRlTwEuG4V/T
- aAA38HIkPHsuPhvoUz94zYm5u+m5AKwvrawLZ3v+flDGkf9rpGkzPyq1h9jSrp3asKML1zYcK4/
- J9IgV/hHu4/S03i83D3O8r6nRIuCUOE0J1s8av2vSakOcwCAYOo0hvW3KL+AqreWxzAR3Yc8dAy
- R4lkWcGO3KX3QmUQuDFVG7TKdcrXAOboLKh8Ev0YetkcwKVLGc=
-X-Received: by 2002:a05:6871:5383:b0:416:5a0:47d3 with SMTP id
- 586e51a60fabf-416e3f0cdd7mr1458019fac.13.1772809959430; 
- Fri, 06 Mar 2026 07:12:39 -0800 (PST)
-Received: from bill-the-cat (fixed-189-203-103-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1772813836; x=1773418636;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=9QspLKATHx05YzsPhU6YHusOnI3ZpZ0Gkvg6mHCx6E4=;
+ b=tGWQ4p9059DT0ESk7AJTTnroRHIvS/g55cjHaSAheGn3RfMqgTFDEXsW7gb+7lRnJx
+ quZ/EZtURGW7oNbEYPC9BJnvxwxbXs2jawfHgynhyAcNwVxCIh/ZMCaF/ha5SqbhJxF5
+ 2hpSsm16iQwJQOJbg3WKnQkQB9tW4JXE/xDFaw1qSyqikmzOaX93hgHSpd+OVk3dIi/h
+ agsSZgwVKgESBze+IQKuedJqAqpKVg4bNUAsW/EEPU8J73t7NUobIud3s3/wBS3YACeg
+ +zLd/h9tbTrtqpH5DOr0yw0JFM0kVlhJ47UgIRxS4sopVJppCpzbhRX/NFRayjjfax/F
+ QHvg==
+X-Gm-Message-State: AOJu0YyzOq9agqJ4ETj1aNJg3gkNoWJoP5oJIWzVSHIFKew5Vsl1n72V
+ IXCIBCkOTTLAeDzHa3Dxgx7t/ORbAGALPvJRJ/zZyJC2EPQLjyoPkUIsglFS11ZXhxI=
+X-Gm-Gg: ATEYQzyjk7oykJYIPrS0ixRzXSdSoTdXdJKaOWvaemLkzLDn7pI77Xwlgd9mUI+csC1
+ uDJJX9g3fgqfp3FJgORuCVa3Qu/KFBo5K9bv4j+qr5wkk/TpvbYLER//g4xroZ3gFHLkPD7UFRn
+ 9TUhqvTFB2M7xCgHbDHUud4gi3zyfR9OZb497oQQ4/Hl9Gsc0tNGb1aBg8vuj1G0AeEyWWjJVak
+ fLvROjxnPHgDWe3UaYYgMWKRSflSuj8/eufYdJIfgNfcyzx3ZxYeKjZkZBGZw7iCzlzUt/+QXGP
+ cVsM8nrngFYQ8xjI3OoFbtIIHx3QH3WBUFFLHpXRFkdEk8yqtE2N+ODHeaVGcS63m3BUTT55Aki
+ JtV9tDsfz3buc+rCSs1oCfTjAQf61M3xcVgcte8dYXOYwOkDB+Mm3P9yPQ9sEhsGgfjpeizCvo/
+ IsJ5mq6x9mOb3Ij/n0n/rH6ciugnSm+Z4qDZp7H+cCkB9HRzG94Oo7JUx0ToLeeuYu6JzEU++AD
+ N+qBFJ6M893HKw1gWegdWeW7EI8gwKepVMWD0mwB4swYWKwfQ==
+X-Received: by 2002:a05:6820:4513:b0:679:a484:fae0 with SMTP id
+ 006d021491bc7-67b9bca2000mr1173942eaf.28.1772813836213; 
+ Fri, 06 Mar 2026 08:17:16 -0800 (PST)
+Received: from [127.0.1.1] (fixed-189-203-103-235.totalplay.net.
  [189.203.103.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-416e6560e20sm1532277fac.4.2026.03.06.07.12.37
+ 586e51a60fabf-416e65f73e5sm1694902fac.9.2026.03.06.08.17.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 07:12:38 -0800 (PST)
-Date: Fri, 6 Mar 2026 09:12:36 -0600
+ Fri, 06 Mar 2026 08:17:15 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Vishnu Singh <v-singh1@ti.com>
-Subject: Re: [PATCH v4 08/17] arm: Call bootm_final()
-Message-ID: <20260306151236.GP1388590@bill-the-cat>
-References: <20260306023638.2678886-1-sjg@chromium.org>
- <20260306023638.2678886-9-sjg@chromium.org>
+To: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <871pi0u59e.fsf@kernel.org>
+References: <871pi0u59e.fsf@kernel.org>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20260303 into next
+Message-Id: <177281383551.1132884.1544198296697113592.b4-ty@konsulko.com>
+Date: Fri, 06 Mar 2026 10:17:15 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="duOgHK85hEAPuRVe"
-Content-Disposition: inline
-In-Reply-To: <20260306023638.2678886-9-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,43 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 03 Mar 2026 19:39:25 +0100, Mattijs Korpershoek wrote:
 
---duOgHK85hEAPuRVe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Here is a PR for next
+> 
+> Fastboot:
+> * mmc: make boot partition offset configurable for bootloader offsets
+> * arch: imx8qxp: Override weak fb_mmc_get_boot_offset
+> 
+> CI:
+> * https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/29417
+> 
+> [...]
 
-On Thu, Mar 05, 2026 at 07:36:17PM -0700, Simon Glass wrote:
+Merged into u-boot/next, thanks!
 
-> From: Simon Glass <simon.glass@canonical.com>
->=20
-> The ARM announce_and_cleanup() duplicates the common pre-boot steps.
-> Replace it with a call to bootm_final().
->=20
-> Drop the ARM weak board_quiesce_devices() definition since it is now
-> called from bootm_final() and the generic weak definition in bootm.h
-> is used instead.
->=20
-> Note that the printf() ordering changes slightly: it now prints before
-> bootstage processing rather than after, matching x86 and RISC-V.
->=20
-> Signed-off-by: Simon Glass <simon.glass@canonical.com>
->=20
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+-- 
 Tom
 
---duOgHK85hEAPuRVe
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaaru5AAKCRAr4qD1Cr/k
-Cs59APwP8Ks8Mny/H6h4SBatpZOgSE5MXX2SKccKHYfEMJ4f1wD/cLNsPCBTe5Yo
-G7k5DPzG+fnRAjSwxhCRpqlis8bUgwk=
-=sWF3
------END PGP SIGNATURE-----
-
---duOgHK85hEAPuRVe--
