@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A6A5F513E9
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADC1F513ED
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 405068401F;
-	Fri,  6 Mar 2026 03:37:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 440418402F;
+	Fri,  6 Mar 2026 03:37:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N3JJW7CC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KicCoBW5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BFCB83FEE; Fri,  6 Mar 2026 03:37:29 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 4407583FFA; Fri,  6 Mar 2026 03:37:30 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 981A783F9D
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81C9883FF9
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-899fc265126so70213546d6.1
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:25 -0800 (PST)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-899f5d337f7so59206556d6.0
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772764644; x=1773369444; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772764646; x=1773369446; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m7cFBkHB1czKTTYQWm0iXwUKSl6kktUFYyLTIp60S1E=;
- b=N3JJW7CCqRuOJrUjTtGomfMydUi4JlleJPoV0Yp8Cm92avfOOv4b8bUefJdQAwKdPG
- +pZP52wr1un2N2M52Y9+H8qG4oszK5iGzj+IORnOuXogbAxVGiGn0D8YMnLR1Ly6l9vo
- haj/5yjJ3tVc874kJnD60kMdkQPXxzweFik0I=
+ bh=o04F+CXR/pmtmayAdTBJ2v95xOWmCrYqOmh3y0xfA9g=;
+ b=KicCoBW54u5JI0YKQn59uI+x07q8iFVsZD0d3YDnTUBg8zksIEaZko7b+KcmZMw08B
+ O6QJ+lZWKPUMaSEJ88uB5+ZTQXt3V1snvpeDDOYNAjh56JxgURIp3ucpeBFxXDz5lQ+z
+ ie2v6ObjYo33z/bV9Or1LRblpmWPE1rKrf9iA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772764644; x=1773369444;
+ d=1e100.net; s=20230601; t=1772764646; x=1773369446;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=m7cFBkHB1czKTTYQWm0iXwUKSl6kktUFYyLTIp60S1E=;
- b=hCYZ+hO4CZtbnt9UXR8B0n7bqi9qFvTQHyd3eRmVbicrNHuryhya0mQP3K41veroL/
- 4CTVotTkgOa6+wHGG9+qUsAefeEGri2+vTz9iGrTeoPJ8IeXY22qrmsspfBvyHvzAUSC
- 2wJQgF1oCEUc4GQNwv/hj2VzcFVJQNpnGDfjOEeVKJBVqqDHwYNLzJReOJuCECZ+RpSu
- cNfwcG1WvGVthxssJPPX9zQo9oylBTwNnkJQT3XU/bW+f1E8KWOHjmgdU9fCDTI1HKHA
- Qpatr1yxEiIWz+4lS8eDcP3YRHt6D3LLJw/kRGHOyfiTC6+qP2RFKOIgUayntRk0OO6t
- oHJA==
-X-Gm-Message-State: AOJu0YzoZhV/Krj1JWF38SvLYvambT4Q9cTwZGCAXTwfhQnfeOYFCt6q
- cwfa9oAsH8H06siSHcAN7MYMcztEqasmwF3BLYjCCvKxcvi+PGOeFoGbfM373Bs2b0h7FRL5cub
- Dcvo=
-X-Gm-Gg: ATEYQzxdzk7X7VxEWg6puepPM6xklHO3dVpPEqS12p2MbhhQa/3CBlGp1m6nytrIq1R
- oaaiLGxtM0h42VN+ronfZtO9U0oSNmy2MS6qACgqDbkJB+JNzWD6StKLAvinHte6fsU7yE0oad8
- UVNqC9dxjUjnuFYAT2lRUK+tpOGtrEDOslwORwA+n/BNGQRxu5Jj7doEO0nzvYIxdQfHL8K8Zqx
- uhPUtCQBMuDDxjbnK4BcjWgamkOE1QVlFAjdQeJmEUgq3yYHWEJmFdaB7+xBMNM/P+kTGWYdTQK
- UlPlt6l+4C+u9zyPpvH1XU9i85Q45T0bYC5owW/4xw8I0OzQml18hr169CXO27DOR/0WwT0bz81
- /iugqNazyp5NCKml6rkfLJMJmBoSrmBKiiAihIEeg6myToK992/S7/LDaHk6gE6moL/6syrbWt3
- L+HC78TmZgj3QOvc+dfQ==
-X-Received: by 2002:a05:6214:5096:b0:899:f2af:bd7a with SMTP id
- 6a1803df08f44-89a30b16bdamr6036586d6.56.1772764643884; 
- Thu, 05 Mar 2026 18:37:23 -0800 (PST)
+ bh=o04F+CXR/pmtmayAdTBJ2v95xOWmCrYqOmh3y0xfA9g=;
+ b=l9IpG9lJXVUIdZhzEOAzvwL1wi1l6E2xRRYnGNhDB5W/uy+82G15J3jUVMhieczy4g
+ PaKG/JopITINH+Su15gSbyPfxZHD6XOTz/9pWIQ+XPUzrnxpwxrazQOpHjYs/+2tPn+I
+ dy9xyRc5wVR+t+O4VSVNIHrj0Z7qS7+WLhUozhhn0v1W2sQNDFmQ92J9QNIjuDPpBNfG
+ OZwO8DUFp6CIl5AYi6OPhTHmx8j3u5/MznnOSqYKVWympHuzMJSNm1HnsLvNFCODa9vZ
+ PT/j7hJtabTc3NFX/oA4sPv2S8NsLuWcFg1UOeMgvdkpxnjqKCFllopUbUd4iCaAVExG
+ Y3FQ==
+X-Gm-Message-State: AOJu0Yx0WO46K6EXwqOfJGiRWa0nzJjhWZBjoN0QdCLSjqHDqxLDuHw5
+ wfi5lr1ZlGC9oT00JQjP20vjv4gyxM6FmaptyiG+veGtlobC13VzmkComcU9GVOY7/jqxT3wZ25
+ cRyU=
+X-Gm-Gg: ATEYQzziu0hagLIfGs22/4xaYbIbtW0fQu6ciTZyoevXzI5SmX9lXvjcFlk3ZT9X5Sh
+ V2WXn35ejepnMVeWm9W3qzTlMyHvbmdI3e9tbsi9z8MRV9UrH+oWGL+H6a79cMsANrHLKkWU44s
+ Yxdk3YOINekIMG8TX2+3Hp5sgC0y1Vc9/EfeudCP8QD/RPsScbYKr5UwsG3PzHjkQMjEPNwAgXv
+ sIGJvwTPcb73kjs23r+DzfU6wM48yP32nxcyPWWFoFLWVqgklqjRgRjFwmUnQSAJQDTWgSBs5wm
+ VXdsH6u2hNvUxXVY/ziipnJvPaBFENjI3HlYJ0SqJOfPdAzhDY1e0ybiIV3rIuAJjFmz2C/4l3I
+ 7lgan0rlKmXi4Ka4t0iIjYrauekaK1NDXAiaGcMD83WdCxxy/hVL08lIoHuvFzyatP08L1ULkpb
+ CPJwN6GWsAaC45qwtjB9VTJznWA47s
+X-Received: by 2002:a05:6214:2242:b0:89a:a0a:c0f7 with SMTP id
+ 6a1803df08f44-89a249056ddmr68080506d6.33.1772764645683; 
+ Thu, 05 Mar 2026 18:37:25 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.22
+ 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 18:37:23 -0800 (PST)
+ Thu, 05 Mar 2026 18:37:25 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Alison Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@sysam.it>,
- Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH v4 13/17] m68k: Call bootm_final()
-Date: Thu,  5 Mar 2026 19:36:22 -0700
-Message-ID: <20260306023638.2678886-14-sjg@chromium.org>
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Scott McNutt <smcnutt@psyent.com>, Thomas Chou <thomas@wytron.com.tw>,
+ Yao Zi <me@ziyao.cc>
+Subject: [PATCH v4 14/17] nios2: Call bootm_final()
+Date: Thu,  5 Mar 2026 19:36:23 -0700
+Message-ID: <20260306023638.2678886-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306023638.2678886-1-sjg@chromium.org>
 References: <20260306023638.2678886-1-sjg@chromium.org>
@@ -101,35 +101,33 @@ From: Simon Glass <simon.glass@canonical.com>
 Add a call to bootm_final() before jumping to the kernel. This adds
 the "Starting kernel" message, bootstage tracking,
 board_quiesce_devices() and dm_remove_devices_active() which were not
-previously called on m68k.
+previously called on Nios2.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
-Acked-by: Angelo Dureghello <angelo@kernel-space.org>
-Tested-by: Angelo Dureghello <angelo@kernel-space.org>
 
 ---
 
 (no changes since v3)
 
 Changes in v3:
-- Add new patch for m68k conversion
+- Add new patch for Nios2 conversion
 
- arch/m68k/lib/bootm.c | 2 ++
+ arch/nios2/lib/bootm.c | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
-index 3dcff8076e3..7e36ac73169 100644
---- a/arch/m68k/lib/bootm.c
-+++ b/arch/m68k/lib/bootm.c
-@@ -65,6 +65,8 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
- 
- 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
+diff --git a/arch/nios2/lib/bootm.c b/arch/nios2/lib/bootm.c
+index 294ebfb508b..6004e83bf0c 100644
+--- a/arch/nios2/lib/bootm.c
++++ b/arch/nios2/lib/bootm.c
+@@ -41,6 +41,8 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 	if ((flag != 0) && (flag != BOOTM_STATE_OS_GO))
+ 		return 1;
  
 +	bootm_final(0);
 +
- 	/*
- 	 * Linux Kernel Parameters (passing board info data):
- 	 *   sp+00: Ignore, side effect of using jsr to jump to kernel
+ 	/* flushes data and instruction caches before calling the kernel */
+ 	disable_interrupts();
+ 	flush_dcache_all();
 -- 
 2.43.0
 
