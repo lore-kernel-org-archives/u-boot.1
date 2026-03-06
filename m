@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDA7F0180E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 08:58:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24AD5F01812
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 08:59:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33E1283F9D;
-	Fri,  6 Mar 2026 09:58:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D33B883F7F;
+	Fri,  6 Mar 2026 09:58:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="RB8kyCiO";
+	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="GZEl3vtG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAE20839A8; Fri,  6 Mar 2026 09:58:39 +0100 (CET)
-Received: from mail-244120.protonmail.ch (mail-244120.protonmail.ch
- [109.224.244.120])
+ id 676D1839A8; Fri,  6 Mar 2026 09:58:43 +0100 (CET)
+Received: from mail-10625.protonmail.ch (mail-10625.protonmail.ch
+ [79.135.106.25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF1AB83F2D
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 09:58:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CB8783F98
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 09:58:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philip@philipmolloy.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail; t=1772787517; x=1773046717;
- bh=1pY87M5pGYz852DIxnUXjO5fesmLfEZnre9AuTD3QyE=;
+ s=protonmail; t=1772787520; x=1773046720;
+ bh=L6oRhtrGCxl6uQOwOEDFJO5XM2tombOwEVBbHxnNcK8=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=RB8kyCiOX4g60Qx9kLXqpqZ/XljuTrK8d9CtFy+r2+fa1Evk6245iWTDBgm+JvPCD
- ZkWWdWK12Uwm9Kgmk/bm35xG2HQKN+3D9gs7tc1/hhC3baMiTDvCLdJA9tmsbSO5DC
- /UJdlgjK3kQT/GJHpTmDMgF0QABj1b8bw3DpaPWa+0T0bxllk3p109w9WwW70yPOR7
- swUNgIwJUJQnogW+AVF8TUlJNsS6GPl7UMdZ9RBYfd3i5RFsRIRv5nOEZUQA49BgHG
- PlySNWvUH70PTUPg3fBmF/RBM9pnMxoJxbo5si+zB3WuLWG7Hz/jhZD8xXHEuWv51w
- Dhc/DNOYaPxng==
-Date: Fri, 06 Mar 2026 08:58:34 +0000
+ b=GZEl3vtGLtg9/77Q04mVv0TUQsDu9/0tLcOlOObw2hkbkkdJW5iP2/r0NhXNbKmPL
+ Hpfcf8h91kFbaPHQ1Dzd6VuJpsopcrgvufPyqbF59gxK5B+z0LjoNOfySNH2OY//NV
+ wvKWOp3doSENOFdGM3dgptAsOVHpVGorautQcYPNDG5c+eaEZwlqUcu2KOD8YV1R2Y
+ 6hU5eNsdXBP5mH3t1mc4cw7T7DmSMT5ssQZkPEy8gKt3+mPUGE9hk+zKsEN82gOBJ3
+ dkvQ69HO5iXoG2qvfs3dYejzQjPEGGNNmOv3KuRZjVsGegbWHkxNcuM5ZCg32kUwYY
+ ENvoDB6XENEUQ==
+Date: Fri, 06 Mar 2026 08:58:38 +0000
 To: u-boot@lists.denx.de
 From: Philip Molloy <philip@philipmolloy.com>
 Cc: linux@analog.com, Philip Molloy <philip.molloy@analog.com>,
  Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/4] ddr: imx: Remove undefined declarations
-Message-ID: <20260306085824.886254-3-philip@philipmolloy.com>
+Subject: [PATCH 3/4] ddr: imx: Remove unused macros
+Message-ID: <20260306085824.886254-4-philip@philipmolloy.com>
 In-Reply-To: <20260306085824.886254-1-philip@philipmolloy.com>
 References: <20260306085824.886254-1-philip@philipmolloy.com>
 Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 665a39a4bf44f88c7a2484f7526eac2acb4d88f6
+X-Pm-Message-ID: 5945549702b9fb6cbead913fb1122ba9dba72506
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -81,32 +81,31 @@ Signed-off-by: Philip Molloy <philip.molloy@analog.com>
 
 diff --git a/arch/arm/include/asm/arch-imx8m/ddr.h b/arch/arm/include/asm/a=
 rch-imx8m/ddr.h
-index 5092ccae188..bf2d1f6bc40 100644
+index bf2d1f6bc40..47086d6b9f1 100644
 --- a/arch/arm/include/asm/arch-imx8m/ddr.h
 +++ b/arch/arm/include/asm/arch-imx8m/ddr.h
-@@ -707,7 +707,6 @@ extern struct dram_timing_info dram_timing;
- void ddr_load_train_firmware(enum fw_type type);
- int ddr_init(struct dram_timing_info *timing_info);
- int ddr_cfg_phy(struct dram_timing_info *timing_info);
--void load_lpddr4_phy_pie(void);
- void ddrphy_trained_csr_save(struct dram_cfg_param *param, unsigned int nu=
-m);
- void *dram_config_save(struct dram_timing_info *info, unsigned long base);
- void board_dram_ecc_scrub(void);
+@@ -13,7 +13,6 @@
+ #define DDRC_DDR_SS_GPR0=09=090x3d000000
+ #define DDRC_IPS_BASE_ADDR_0=09=090x3f400000
+ #define IP2APB_DDRPHY_IPS_BASE_ADDR(X)=09(0x3c000000 + (X * 0x2000000))
+-#define DDRPHY_MEM(X)=09=09=09(0x3c000000 + (X * 0x2000000) + 0x50000)
+=20
+ struct ddrc_freq {
+ =09u32 res0[8];
 diff --git a/arch/arm/include/asm/arch-imx9/ddr.h b/arch/arm/include/asm/ar=
 ch-imx9/ddr.h
-index a8e3f7354c7..f6ae3baf3b0 100644
+index f6ae3baf3b0..6c2069b9707 100644
 --- a/arch/arm/include/asm/arch-imx9/ddr.h
 +++ b/arch/arm/include/asm/arch-imx9/ddr.h
-@@ -103,7 +103,6 @@ extern struct dram_timing_info dram_timing;
- void ddr_load_train_firmware(enum fw_type type);
- int ddr_init(struct dram_timing_info *timing_info);
- int ddr_cfg_phy(struct dram_timing_info *timing_info);
--void load_lpddr4_phy_pie(void);
- void ddrphy_trained_csr_save(struct dram_cfg_param *param, unsigned int nu=
-m);
- void *dram_config_save(struct dram_timing_info *info, unsigned long base);
- void board_dram_ecc_scrub(void);
+@@ -35,7 +35,6 @@
+ #define REG_SRC_DPHY_SINGLE_RESET_SW_CTRL=09(SRC_DPHY_BASE_ADDR + 0x24)
+=20
+ #define IP2APB_DDRPHY_IPS_BASE_ADDR(X)=09(DDR_PHY_BASE + ((X) * 0x2000000)=
+)
+-#define DDRPHY_MEM(X)=09=09=09(DDR_PHY_BASE + ((X) * 0x2000000) + 0x50000)
+=20
+ /* PHY State */
+ enum pstate {
 --=20
 2.53.0
 
