@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B42F513E9
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A6A5F513E9
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04CA284010;
+	by phobos.denx.de (Postfix) with ESMTP id 405068401F;
 	Fri,  6 Mar 2026 03:37:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iB3SSg5e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N3JJW7CC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8387D83FEC; Fri,  6 Mar 2026 03:37:26 +0100 (CET)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 1BFCB83FEE; Fri,  6 Mar 2026 03:37:29 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3E0383FF8
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 981A783F9D
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-506c02ec1b3so96735701cf.0
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:23 -0800 (PST)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-899fc265126so70213546d6.1
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772764642; x=1773369442; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772764644; x=1773369444; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PTeRQxvHJPHk4ioHAjThjn31LwGd1K9swZHP2/Mbk+E=;
- b=iB3SSg5e2phI+WT8f/bXom0+PShXxj1BhK8vhrzvd6XW1bnXMI7fMtAEx+waWXiuAq
- FRYYBaAABIklh/acuWSqMphqLtrA3WC8rrDIUjUrkD7H5UR355+2kBml2vvnxoPdwKp1
- qNjw0sBGnq8Z/52NsRbIk2EpWRuBKXJNK/g3s=
+ bh=m7cFBkHB1czKTTYQWm0iXwUKSl6kktUFYyLTIp60S1E=;
+ b=N3JJW7CCqRuOJrUjTtGomfMydUi4JlleJPoV0Yp8Cm92avfOOv4b8bUefJdQAwKdPG
+ +pZP52wr1un2N2M52Y9+H8qG4oszK5iGzj+IORnOuXogbAxVGiGn0D8YMnLR1Ly6l9vo
+ haj/5yjJ3tVc874kJnD60kMdkQPXxzweFik0I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772764642; x=1773369442;
+ d=1e100.net; s=20230601; t=1772764644; x=1773369444;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=PTeRQxvHJPHk4ioHAjThjn31LwGd1K9swZHP2/Mbk+E=;
- b=M2seNl6/L6RC2MkVbgBf7l93RXle9/xJz8J8tkGK3PmD1JlwVaE8cqv3SLVEVEumfm
- QtG1ghQ7FJsOVhtBy11lzrPsRLroQH2rTJBQ+jeoA3RHChfFWp+XLjAuU2GYV6yez38K
- mj3SlJLKzM9O8+XDRATY//n13fa+aWcsqp368SKkWt6GeVLL/PD7HOCKU0N5+gXnWdiU
- EfnUhDa/Enoor62vmJ+qa9h0ohVB8bFHh4oOKVcka3cg0h0yqAXMLcw9J6tmhAinD5OH
- B6tNq/yaa9a3D6h8oU+fWYH1eDGO+gFhW4rKeTDKWrEtow7f3gHgrjm8V/d9qGhBPaXh
- ff8Q==
-X-Gm-Message-State: AOJu0YzeSFpRs/xw6WOK7E5I/L3pSifvs13cieE99ezy9YAKna3fv+Z4
- U645x28VrumxrELsKu2z/dGaiqTRXm26DJ1lN+NUPT5/s01fwG8rpeBj4CiSN8FLMqbnNX9IHyr
- XPGU=
-X-Gm-Gg: ATEYQzxbdyXXA/XSlu5KgQBqVmxVu71/OaMeKLcPwoC8YSHQg+eh9LDWs6Xdu5WrNv1
- CFGUnxDFmnmyYl+Pb5lUsXrRzxuQML55cJZUryQapd9u/l/vCLEiHVL2jPTtyZyPle8RnkE+Sd4
- C28UhB0PGgwo1Cr34/iHcncHNfU/fm5K/pRBgIhoJJfr/8LqwPrIrHjdqEh/njr0xRZtYcn3AgP
- wjDR/+M/xSRuRtRlGV8IK7emsY7V5DTqfgr6KDVBBh8cLrmJqDhpWkX/R51ni7i7+d3d1fSVdHM
- e/0Zzdciq29ogiXy81lf8IvIECGkX+wI4a/vgVJXHZC8NbCpDwhhe9ps2DieEURWktLwWnYHK9n
- ojnIA7btnzAFvwRZR5Rmai8VPsrnALGjQBmI9pi4qQksMpDV4NQIH77Srg4JadF0rZMBwf1WU4E
- 02s0Je1U9T49ZudOm7Rg==
-X-Received: by 2002:ac8:7d06:0:b0:501:4b9d:ad19 with SMTP id
- d75a77b69052e-508e6947452mr61120541cf.22.1772764642163; 
- Thu, 05 Mar 2026 18:37:22 -0800 (PST)
+ bh=m7cFBkHB1czKTTYQWm0iXwUKSl6kktUFYyLTIp60S1E=;
+ b=hCYZ+hO4CZtbnt9UXR8B0n7bqi9qFvTQHyd3eRmVbicrNHuryhya0mQP3K41veroL/
+ 4CTVotTkgOa6+wHGG9+qUsAefeEGri2+vTz9iGrTeoPJ8IeXY22qrmsspfBvyHvzAUSC
+ 2wJQgF1oCEUc4GQNwv/hj2VzcFVJQNpnGDfjOEeVKJBVqqDHwYNLzJReOJuCECZ+RpSu
+ cNfwcG1WvGVthxssJPPX9zQo9oylBTwNnkJQT3XU/bW+f1E8KWOHjmgdU9fCDTI1HKHA
+ Qpatr1yxEiIWz+4lS8eDcP3YRHt6D3LLJw/kRGHOyfiTC6+qP2RFKOIgUayntRk0OO6t
+ oHJA==
+X-Gm-Message-State: AOJu0YzoZhV/Krj1JWF38SvLYvambT4Q9cTwZGCAXTwfhQnfeOYFCt6q
+ cwfa9oAsH8H06siSHcAN7MYMcztEqasmwF3BLYjCCvKxcvi+PGOeFoGbfM373Bs2b0h7FRL5cub
+ Dcvo=
+X-Gm-Gg: ATEYQzxdzk7X7VxEWg6puepPM6xklHO3dVpPEqS12p2MbhhQa/3CBlGp1m6nytrIq1R
+ oaaiLGxtM0h42VN+ronfZtO9U0oSNmy2MS6qACgqDbkJB+JNzWD6StKLAvinHte6fsU7yE0oad8
+ UVNqC9dxjUjnuFYAT2lRUK+tpOGtrEDOslwORwA+n/BNGQRxu5Jj7doEO0nzvYIxdQfHL8K8Zqx
+ uhPUtCQBMuDDxjbnK4BcjWgamkOE1QVlFAjdQeJmEUgq3yYHWEJmFdaB7+xBMNM/P+kTGWYdTQK
+ UlPlt6l+4C+u9zyPpvH1XU9i85Q45T0bYC5owW/4xw8I0OzQml18hr169CXO27DOR/0WwT0bz81
+ /iugqNazyp5NCKml6rkfLJMJmBoSrmBKiiAihIEeg6myToK992/S7/LDaHk6gE6moL/6syrbWt3
+ L+HC78TmZgj3QOvc+dfQ==
+X-Received: by 2002:a05:6214:5096:b0:899:f2af:bd7a with SMTP id
+ 6a1803df08f44-89a30b16bdamr6036586d6.56.1772764643884; 
+ Thu, 05 Mar 2026 18:37:23 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.20
+ 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 18:37:21 -0800 (PST)
+ Thu, 05 Mar 2026 18:37:23 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Andy Fleming <afleming@gmail.com>, Mario Six <mario.six@gdsys.cc>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Stefan Roese <stefan.roese@mailbox.org>, Wolfgang Denk <wd@denx.de>
-Subject: [PATCH v4 12/17] powerpc: Call bootm_final()
-Date: Thu,  5 Mar 2026 19:36:21 -0700
-Message-ID: <20260306023638.2678886-13-sjg@chromium.org>
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Alison Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@sysam.it>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>
+Subject: [PATCH v4 13/17] m68k: Call bootm_final()
+Date: Thu,  5 Mar 2026 19:36:22 -0700
+Message-ID: <20260306023638.2678886-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306023638.2678886-1-sjg@chromium.org>
 References: <20260306023638.2678886-1-sjg@chromium.org>
@@ -98,42 +98,38 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Replace the open-coded bootstage_fdt_add_report() and
-bootstage_report() with a call to bootm_final(). This also adds the
-"Starting kernel" message, board_quiesce_devices() and
-dm_remove_devices_active() which were not previously called on
-PowerPC.
+Add a call to bootm_final() before jumping to the kernel. This adds
+the "Starting kernel" message, bootstage tracking,
+board_quiesce_devices() and dm_remove_devices_active() which were not
+previously called on m68k.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
+Tested-by: Angelo Dureghello <angelo@kernel-space.org>
 
 ---
 
 (no changes since v3)
 
 Changes in v3:
-- Add new patch for PowerPC conversion
+- Add new patch for m68k conversion
 
- arch/powerpc/lib/bootm.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ arch/m68k/lib/bootm.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/powerpc/lib/bootm.c b/arch/powerpc/lib/bootm.c
-index dc44bf3ab3a..f9351a17a48 100644
---- a/arch/powerpc/lib/bootm.c
-+++ b/arch/powerpc/lib/bootm.c
-@@ -54,12 +54,7 @@ static void boot_jump_linux(struct bootm_headers *images)
+diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
+index 3dcff8076e3..7e36ac73169 100644
+--- a/arch/m68k/lib/bootm.c
++++ b/arch/m68k/lib/bootm.c
+@@ -65,6 +65,8 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
  
  	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
  
--#ifdef CONFIG_BOOTSTAGE_FDT
--	bootstage_fdt_add_report();
--#endif
--#ifdef CONFIG_BOOTSTAGE_REPORT
--	bootstage_report();
--#endif
 +	bootm_final(0);
- 
- #if defined(CONFIG_SYS_INIT_RAM_LOCK) && !defined(CONFIG_E500)
- 	unlock_ram_in_cache();
++
+ 	/*
+ 	 * Linux Kernel Parameters (passing board info data):
+ 	 *   sp+00: Ignore, side effect of using jsr to jump to kernel
 -- 
 2.43.0
 
