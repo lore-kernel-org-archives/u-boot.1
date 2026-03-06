@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24307F51416
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 22:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1320FCC07D
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 22:08:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D363E83FD9;
-	Fri,  6 Mar 2026 23:07:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 425D184006;
+	Fri,  6 Mar 2026 23:07:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="uMUTvM+9";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="M86ZyrIq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AF5A83FF5; Fri,  6 Mar 2026 23:07:13 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id BE65F83FA3; Fri,  6 Mar 2026 23:07:13 +0100 (CET)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5387F83F86
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 23:07:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DFBE83F00
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 23:07:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7d598f60eeaso7357099a34.2
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 14:07:10 -0800 (PST)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7d596ab0917so6022341a34.1
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 14:07:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772834829; x=1773439629;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1772834830; x=1773439630;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5BtRg2os/D5YoxsSmA9rYLTwSa994wBU44pISL9m97Y=;
- b=uMUTvM+9CNgfn2/oArK2Oob95M8qFiinlkJdU7LCHegEyX7BF/7JBXcGkzrglvxxOf
- 7D+u/tDem2QLbMHHNBMYpJhOeOKUYy4g8gA52XQMxWWxSK/vQpinivJBHyBxzi3T6zpL
- N3IfuIfXWLunS0fCXjMp7fPB+tpt4NZm74okcY9Z7QIL54YL5TL7oJskSELKl+foSOyY
- iZYKTGdy7joBEgNIHcdoRCmbYevLTr/paAf5aO4ZGwxWRbEFOtbucQaVZfRp2O82Ze4u
- ImixWliOFkQDC5bTTOQutzIzhRWtoJYES9D3NmIEI+MIKVTMA8P3WVNnt3iN7ujpHprU
- rfFg==
+ :reply-to; bh=Ju1kh1ViyBQkY65NM8OoLTA74RCB42e7xA4bcC1HkA8=;
+ b=M86ZyrIqd/ZODESF+lxgi7Qes0a88QeFaRJNfonyCHknz8NombdG1hnprO2M78BnJ9
+ 8s5QtEzSNDlkrTZWfSGv/rIu+AANnUokQP8FeAR2Hyd9vOjusvwN7V+Oop41gHSbvoR7
+ id0G73Q2nU8yJGXytmAGMBLnbJf1bbV8w8dSEQ49JUVsS4i4C/MsNrjKXKWtPTzYLnf8
+ YdfYID7VXlpIjbjqG8DHGDo3joDygNmGMBkFFTMsq8dxjyMqcrq7XSVCw2G2xilMNp6H
+ O0q0Vf6UKhK0AzRyGqxg5eUowki9EhvRHgbLT64mWOiUDmY/jyAu/C4Y03B9Xj6bkpHg
+ RfBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772834829; x=1773439629;
+ d=1e100.net; s=20230601; t=1772834830; x=1773439630;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=5BtRg2os/D5YoxsSmA9rYLTwSa994wBU44pISL9m97Y=;
- b=UlPsSK8D/CUfly+X7+h9xJvwfWXFfywZVnwLCgvhu35+sra4kmZJlb6FTzEgwgnjfX
- SIt9VRxh0vqlH4g5KsEk8mfAIBnJg8NWw+c0pLBiiSBmDsCp14w7TMmPLAxF6koOK3Fc
- STl4ojUn/1zyLohSYMRih845mam3c3BXa5kEWUTO8Ca6G7L7MCTqfND/P3yPRKNqEdgE
- uE7h9fLJ6M/0cPrjOb8isurMpA/qsXXXtLvk6lgrnB1ZvDS0fRM71zQtxS0yQoCATeJL
- pnA/5YI0S6/0ILPmAeUekWfdZaRvfCMmT4AJ2X8fwdRPLbWuNyaTVmagxMGASla/9Cy1
- P5SA==
+ bh=Ju1kh1ViyBQkY65NM8OoLTA74RCB42e7xA4bcC1HkA8=;
+ b=Q5H9OOnJrEkBtiZN9Fra3vLgPJvrDeWca4LrczO3qyTASlefruhV6Tdb8Hvi+CxuRB
+ q+AHBCkBvIMvunT1fWQivkp5MO3MRgvd23dAbU1fktAE9DxW/iiTg/2p4ehSp57mJ+wU
+ a+CK/96o2nloS35V4uJwpAJhADNzT4JYDrcEUhwZhdAohFoAOIe07T965+VT34sMeA4n
+ 46C0tDodny54D7VkCxz/sQBJ4f9FqSbBcb/nk2FooSqn8qzw9R7REzQydm1dTfH1yDFa
+ VcIQR0Mi2cqPjW/Ece8G2pD5EsITsoORYfYCAuoKC5oXe1siEC0ZL95AL6oUeqx6wAPr
+ CNVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWA7L10sZIwcbW8vUR8+Q+/qsvnTnGBeb0AiaueNN8XKxMFJbfP0FMfzX+Q4JpS4suaW6IGxgs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf6PeAhLUaagUznC5NoPc00buUsP/7aLBiw2EgU66x3aE5CkuM
- L1hU8s6unxjoZCvQYneuxETAui+PV3ougtY6wpverUoZJpwkkeubBOUSrq64uXA6Oaw=
-X-Gm-Gg: ATEYQzx1NVr65ze0lk3a8WmcbN75HZR033w9YDUiSWQ/B7f4MtYM1S4SIc7AHl7qoYd
- 1ZyOLiTxnDyW3ZHOwx1KJwY9ePdSJGWwzR7w9lVO6tLLdpl6vc45xn6JA6O3J7MnGJW3JAGi4m9
- gqjvZ1ncqSnx4MOhBhGa+A37I7ImQok8itxFa9ZphCCyo54Yf7rsm3LrBiWrO6Vpvgv0QIhN2cf
- LgmMm/UB8ANBGkoLpyFZgnds875b0Y/NItMWuE88foXlMwX3hEjsZlW/RUF5YHaSDuF/Qqgjmxq
- swGzJ8AzM/pwrTHIKwPzOuhEOLISANCoU8j8zxa6qdSs0iF84uX+U3QSn1R2zjN853h4Cgs+lVr
- ethCzmGa01bCvPsPcCSg4SNLYqB1+6sdPwF7/pYPf3HH+Pu9TSf6LukGH9J3U9veH6ZVlZUCnNX
- 15f2oQFv7mSdwjE8niAlntQrlBo13N
-X-Received: by 2002:a05:6830:4acb:b0:7d1:50c0:1a24 with SMTP id
- 46e09a7af769-7d726f3896dmr2922321a34.21.1772834829048; 
+ AJvYcCUkAPdAw1DjLUFHgujBIz84L7tnW6Hprw6YTVqfKNvt8OyQ9SjDoeJvL/VNCW8oZFjiFFt0gx4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyrSLh8YeU5iwejDnOTD/gsTtY9ouHTapBf17D553Ix4j2l9qn5
+ bvTgXLS6wB8A5JpqOCtkMXzFdfhtR8fRsh+eAxQVaf9IM/FoY3Uycspkzv9WM6Ix6ic=
+X-Gm-Gg: ATEYQzwmq4dBpIAjD0ztjdeHZxXJ+UYf0H0SZ3PcHnjN/rGQm8Vfrzm6br/JzakehjY
+ lQo7GrUAN5FXU4YlfBih774REV/oMkEFwfbKMOsXt/FY+/8ffOvmbvXdxw/v31taoNEkf8t3tfT
+ +CYAqATqrSuak/Vll44QpELSEp9iiELJvioF2vQGbHil6foqQ2HfJr3P8xs5ikQxcIXTqqey4wz
+ ivkzAIlz/ZfPANEnDpvNqBuWEMor+gcsN931xcLe3gf1fNLsPXMmw7LmY72nHPuZO17nf7i3Dzq
+ s0E1ifw1dRvG52MRJB8CaSqvJDpBybs1PAzjOQJuwlT1Zzb8c2HHJbnesYWF0aYGw1CHa3RBF6k
+ web7vRMs++QzFneSu7fOjdMbyZcF+VzpVORIU5oqhKHdgVLF5+GZ3c7eYAz2DcJkvGVhZtjXGpl
+ zlsS0Rr3TPdIt7B2krAV4kyw0ikZOM
+X-Received: by 2002:a9d:624d:0:b0:7d1:48dd:b439 with SMTP id
+ 46e09a7af769-7d71d15742dmr3317067a34.1.1772834829894; 
  Fri, 06 Mar 2026 14:07:09 -0800 (PST)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:6d78:b98b:fc05:ddbe])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d728c5b830sm1707548a34.1.2026.03.06.14.07.08
+ 46e09a7af769-7d728c5b830sm1707548a34.1.2026.03.06.14.07.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 14:07:08 -0800 (PST)
+ Fri, 06 Mar 2026 14:07:09 -0800 (PST)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 06 Mar 2026 16:05:53 -0600
-Subject: [PATCH v2 6/9] clk: mediatek: mt7623: change to struct mtk_parent
+Date: Fri, 06 Mar 2026 16:05:54 -0600
+Subject: [PATCH v2 7/9] clk: mediatek: mt7629: change to struct mtk_parent
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-6-b253b49f17b2@baylibre.com>
+Message-Id: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-7-b253b49f17b2@baylibre.com>
 References: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
 In-Reply-To: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -90,17 +90,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=23557;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=15504;
  i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=2n+FZbdP+Q9xj8W2Q67o1Eg7NDMyJwnkeYSCQKvtLTM=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpq0/rqUHVGtVgue63L3ZiOsSkSjcj3RqVKP7OX
- T12KJ2mYpGJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaatP6xYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AHAkIAJhV/6fMvikBQZm4jbV/SAKFB+5CY6HwZOgrl/J
- 4xzwNQrv92B5j0eFx1VYQ5G/ScuC1nTWm26DRioKPCJL8xwdcT0S2vYRDn6kiVgjDlSDzXDI3Ir
- qtdVMU92fXF+Glxlx4gE47C80se7uyGhyHR42dQYf+IPbis91R2Pn7IqWiZKOjO9eBjqRqHsDCt
- pAaM4eLPut20uZN8xipwFhdEZAKZWLYVa32S3citDeb3LIZAWVT9kWruQTluBG/HTJmSqVauISR
- tn1e0MEk6Sy6S0fYRI6RzuODnDntjAPiTv8O3OP0j2zg92UFy6b0SkHoKy0hMON/nVqUnJyW46x
- leXI=
+ bh=RLAExgiZpoxrI4YsksgB/zx7S4Ft+QdHFVoD45FK2Lk=;
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpq0/yeQ2hGMDJ8Hk5O+flP/XrWWoOrslS5tCtq
+ LEQhNWHwuyJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaatP8hYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AhBMIAJIMPAHREwH7xu/JRGM9MT0ZYdg3AQbSJEksgNZ
+ QF4K0i/Ff6IDQsHp/cZREbPYpX8CwsZGls1fcJRVUUu+uQPl8S0+4PytUCZd7PbB/FFgcQKCGMW
+ b271UInGS9pQlcoBfi5XQNCywE4XVJkcFPruYr8qqDXgndoLe+TUv9LQ8F1++9hRbjbKfV5XYm/
+ fvg4YpYuAzzaFGJiYXR7EpFXbp5N9S0VGrnfyZG+Af7aKdz3Rv7QtgAWRUBoQrWJNv5+UFfQvx8
+ PtlWEQnuDE78Xu3IoX6X0RKcNmtyHicBY2fallnJyaA1/2K3UT/WN0AujJvStapZdCg9QLv+5F6
+ axLY=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -125,15 +125,15 @@ specifically handles this case.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7623.c | 774 +++++++++++++++++++-------------------
- 1 file changed, 387 insertions(+), 387 deletions(-)
+ drivers/clk/mediatek/clk-mt7629.c | 440 +++++++++++++++++++-------------------
+ 1 file changed, 220 insertions(+), 220 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk-mt7623.c
-index 4d16610f4d0..16424ba2de6 100644
---- a/drivers/clk/mediatek/clk-mt7623.c
-+++ b/drivers/clk/mediatek/clk-mt7623.c
-@@ -375,399 +375,399 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
- 	FACTOR1(CLK_TOP_8BDAC, CLK_TOP_UNIVPLL_D2, 1, 1),
+diff --git a/drivers/clk/mediatek/clk-mt7629.c b/drivers/clk/mediatek/clk-mt7629.c
+index 85011f5327b..b82212ec664 100644
+--- a/drivers/clk/mediatek/clk-mt7629.c
++++ b/drivers/clk/mediatek/clk-mt7629.c
+@@ -152,271 +152,271 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
+ 	FACTOR1(CLK_TOP_PCIE0_MAC_EN, CLK_TOP_UNIVPLL1_D4, 1, 1),
  };
  
 -static const int axi_parents[] = {
@@ -143,8 +143,8 @@ index 4d16610f4d0..16424ba2de6 100644
 -	CLK_TOP_SYSPLL1_D4,
 -	CLK_TOP_UNIVPLL_D5,
 -	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_MMPLL_D2,
--	CLK_TOP_DMPLL_D2
+-	CLK_TOP_UNIVPLL_D7,
+-	CLK_TOP_DMPLL
 -};
 -
 -static const int mem_parents[] = {
@@ -157,55 +157,55 @@ index 4d16610f4d0..16424ba2de6 100644
 -	CLK_TOP_SYSPLL1_D8
 -};
 -
--static const int mm_parents[] = {
+-static const int eth_parents[] = {
 -	CLK_XTAL,
--	CLK_TOP_VENCPLL,
 -	CLK_TOP_SYSPLL1_D2,
+-	CLK_TOP_UNIVPLL1_D2,
 -	CLK_TOP_SYSPLL1_D4,
 -	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_UNIVPLL2_D2,
+-	CLK_TOP_SGMIIPLL_D2,
+-	CLK_TOP_UNIVPLL_D7,
 -	CLK_TOP_DMPLL
 -};
 -
 -static const int pwm_parents[] = {
 -	CLK_XTAL,
+-	CLK_TOP_UNIVPLL2_D4
+-};
+-
+-static const int sgmii_ref_1_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SGMIIPLL_D2
+-};
+-
+-static const int nfi_infra_parents[] = {
+-	CLK_XTAL,
+-	CLK_XTAL,
+-	CLK_XTAL,
+-	CLK_XTAL,
+-	CLK_XTAL,
+-	CLK_XTAL,
+-	CLK_TOP_UNIVPLL2_D8,
+-	CLK_TOP_UNIVPLL3_D4,
+-	CLK_TOP_SYSPLL1_D8,
+-	CLK_TOP_UNIVPLL1_D8,
+-	CLK_TOP_SYSPLL4_D2,
+-	CLK_TOP_SYSPLL2_D4,
 -	CLK_TOP_UNIVPLL2_D4,
 -	CLK_TOP_UNIVPLL3_D2,
--	CLK_TOP_UNIVPLL1_D4
--};
--
--static const int vdec_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_VDECPLL,
--	CLK_TOP_SYSPLL_D5,
 -	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_VENCPLL,
--	CLK_TOP_MSDCPLL_D2,
--	CLK_TOP_MMPLL_D2
+-	CLK_TOP_SYSPLL_D7
 -};
 -
--static const int mfg_parents[] = {
+-static const int flash_parents[] = {
 -	CLK_XTAL,
--	CLK_TOP_MMPLL,
--	CLK_TOP_DMPLL_X2,
--	CLK_TOP_MSDCPLL,
--	CLK_XTAL,
--	CLK_TOP_SYSPLL_D3,
--	CLK_TOP_UNIVPLL_D3,
--	CLK_TOP_UNIVPLL1_D2
--};
--
--static const int camtg_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL_D26,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_SYSPLL3_D2,
+-	CLK_TOP_UNIVPLL_D80_D4,
+-	CLK_TOP_SYSPLL2_D8,
 -	CLK_TOP_SYSPLL3_D4,
--	CLK_TOP_MSDCPLL_D2,
--	CLK_TOP_MMPLL_D2
+-	CLK_TOP_UNIVPLL3_D4,
+-	CLK_TOP_UNIVPLL1_D8,
+-	CLK_TOP_SYSPLL2_D4,
+-	CLK_TOP_UNIVPLL2_D4
 -};
 -
 -static const int uart_parents[] = {
@@ -213,235 +213,43 @@ index 4d16610f4d0..16424ba2de6 100644
 -	CLK_TOP_UNIVPLL2_D8
 -};
 -
--static const int spi_parents[] = {
+-static const int spi0_parents[] = {
 -	CLK_XTAL,
 -	CLK_TOP_SYSPLL3_D2,
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL2_D4,
 -	CLK_TOP_SYSPLL4_D2,
 -	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_UNIVPLL1_D8
--};
--
--static const int usb20_parents[] = {
--	CLK_XTAL,
 -	CLK_TOP_UNIVPLL1_D8,
--	CLK_TOP_UNIVPLL3_D4
--};
--
--static const int msdc30_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_MSDCPLL_D2,
--	CLK_TOP_SYSPLL2_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL1_D4,
--	CLK_TOP_UNIVPLL2_D4,
--};
--
--static const int aud_intbus_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_SYSPLL3_D2,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_UNIVPLL3_D2,
--	CLK_TOP_UNIVPLL2_D4
--};
--
--static const int pmicspi_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_SYSPLL3_D4,
--	CLK_TOP_SYSPLL2_D8,
--	CLK_TOP_SYSPLL1_D16,
--	CLK_TOP_UNIVPLL3_D4,
--	CLK_TOP_UNIVPLL_D26,
--	CLK_TOP_DMPLL_D2,
--	CLK_TOP_DMPLL_D4
--};
--
--static const int scp_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_TOP_DMPLL_D2,
--	CLK_TOP_DMPLL_D4
--};
--
--static const int dpi0_tve_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_MIPIPLL,
--	CLK_TOP_MIPIPLL_D2,
--	CLK_TOP_MIPIPLL_D4,
--	CLK_XTAL,
--	CLK_TOP_TVDPLL,
--	CLK_TOP_TVDPLL_D2,
--	CLK_TOP_TVDPLL_D4
--};
--
--static const int dpi1_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_TVDPLL,
--	CLK_TOP_TVDPLL_D2,
--	CLK_TOP_TVDPLL_D4
--};
--
--static const int hdmi_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_HDMIPLL,
--	CLK_TOP_HDMIPLL_D2,
--	CLK_TOP_HDMIPLL_D3
--};
--
--static const int apll_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_AUDPLL,
--	CLK_TOP_AUDPLL_D4,
--	CLK_TOP_AUDPLL_D8,
--	CLK_TOP_AUDPLL_D16,
--	CLK_TOP_AUDPLL_D24,
--	CLK_XTAL,
 -	CLK_XTAL
 -};
 -
--static const int rtc_parents[] = {
--	CLK_TOP_32K_INTERNAL,
--	CLK_TOP_32K_EXTERNAL,
+-static const int spi1_parents[] = {
 -	CLK_XTAL,
--	CLK_TOP_UNIVPLL3_D8
--};
--
--static const int nfi2x_parents[] = {
+-	CLK_TOP_SYSPLL3_D2,
 -	CLK_XTAL,
--	CLK_TOP_SYSPLL2_D2,
--	CLK_TOP_SYSPLL_D7,
--	CLK_TOP_UNIVPLL3_D2,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_UNIVPLL3_D4,
 -	CLK_TOP_SYSPLL4_D4,
--	CLK_XTAL
--};
--
--static const int emmc_hclk_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_SYSPLL2_D2
--};
--
--static const int flash_parents[] = {
--	CLK_TOP_CLK26M_D8,
--	CLK_XTAL,
--	CLK_TOP_SYSPLL2_D8,
--	CLK_TOP_SYSPLL3_D4,
--	CLK_TOP_UNIVPLL3_D4,
 -	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_UNIVPLL2_D4
--};
--
--static const int di_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_TVD2PLL,
--	CLK_TOP_TVD2PLL_D2,
--	CLK_XTAL
--};
--
--static const int nr_osd_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_VENCPLL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_DMPLL
--};
--
--static const int hdmirx_bist_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL_D3,
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D16,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_VENCPLL,
--	CLK_XTAL
--};
--
--static const int intdir_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_MMPLL,
--	CLK_TOP_SYSPLL_D2,
--	CLK_TOP_UNIVPLL_D2
--};
--
--static const int asm_parents[] = {
--	CLK_XTAL,
 -	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_SYSPLL_D5
--};
--
--static const int ms_card_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL3_D8,
--	CLK_TOP_SYSPLL4_D4
--};
--
--static const int ethif_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_SYSPLL_D5,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_DMPLL,
--	CLK_TOP_DMPLL_D2
--};
--
--static const int hdmirx_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL_D52
--};
--
--static const int cmsys_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_SYSPLL_D5,
--	CLK_TOP_SYSPLL2_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_SYSPLL3_D2,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_XTAL,
+-	CLK_TOP_UNIVPLL1_D8,
 -	CLK_XTAL
 -};
 -
--static const int clk_8bdac_parents[] = {
--	CLK_TOP_32K_INTERNAL,
--	CLK_TOP_8BDAC,
+-static const int msdc30_0_parents[] = {
 -	CLK_XTAL,
--	CLK_XTAL
--};
--
--static const int aud2dvd_parents[] = {
--	CLK_TOP_AUD_48K_TIMING,
--	CLK_TOP_AUD_44K_TIMING
--};
--
--static const int padmclk_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL_D26,
--	CLK_TOP_UNIVPLL_D52,
--	CLK_TOP_UNIVPLL_D108,
--	CLK_TOP_UNIVPLL2_D8,
 -	CLK_TOP_UNIVPLL2_D16,
--	CLK_TOP_UNIVPLL2_D32
+-	CLK_TOP_UNIV48M
 -};
+-
+-static const int msdc30_1_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_UNIVPLL2_D16,
+-	CLK_TOP_UNIV48M,
+-	CLK_TOP_SYSPLL2_D4,
+-	CLK_TOP_UNIVPLL2_D4,
+-	CLK_TOP_SYSPLL_D7,
+-	CLK_TOP_SYSPLL2_D2,
+-	CLK_TOP_UNIVPLL2_D2
 +static const struct mtk_parent axi_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
@@ -449,8 +257,8 @@ index 4d16610f4d0..16424ba2de6 100644
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_MMPLL_D2),
-+	TOP_PARENT(CLK_TOP_DMPLL_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
++	TOP_PARENT(CLK_TOP_DMPLL),
 +};
 +
 +static const struct mtk_parent mem_parents[] = {
@@ -463,55 +271,55 @@ index 4d16610f4d0..16424ba2de6 100644
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
 +};
 +
-+static const struct mtk_parent mm_parents[] = {
++static const struct mtk_parent eth_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_VENCPLL),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
 +	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
++	TOP_PARENT(CLK_TOP_SGMIIPLL_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
 +	TOP_PARENT(CLK_TOP_DMPLL),
 +};
 +
 +static const struct mtk_parent pwm_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
++};
++
++static const struct mtk_parent sgmii_ref_1_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SGMIIPLL_D2),
++};
++
++static const struct mtk_parent nfi_infra_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	XTAL_PARENT(CLK_XTAL),
++	XTAL_PARENT(CLK_XTAL),
++	XTAL_PARENT(CLK_XTAL),
++	XTAL_PARENT(CLK_XTAL),
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
++	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
 +	TOP_PARENT(CLK_TOP_UNIVPLL3_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D4),
-+};
-+
-+static const struct mtk_parent vdec_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_VDECPLL),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_VENCPLL),
-+	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
-+	TOP_PARENT(CLK_TOP_MMPLL_D2),
++	TOP_PARENT(CLK_TOP_SYSPLL_D7),
 +};
 +
-+static const struct mtk_parent mfg_parents[] = {
++static const struct mtk_parent flash_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_MMPLL),
-+	TOP_PARENT(CLK_TOP_DMPLL_X2),
-+	TOP_PARENT(CLK_TOP_MSDCPLL),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D3),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+};
-+
-+static const struct mtk_parent camtg_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D26),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D80_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D8),
 +	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
-+	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
-+	TOP_PARENT(CLK_TOP_MMPLL_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
 +};
 +
 +static const struct mtk_parent uart_parents[] = {
@@ -519,403 +327,300 @@ index 4d16610f4d0..16424ba2de6 100644
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
 +};
 +
-+static const struct mtk_parent spi_parents[] = {
++static const struct mtk_parent spi0_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
 +	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
 +	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
++	XTAL_PARENT(CLK_XTAL),
 +};
 +
-+static const struct mtk_parent usb20_parents[] = {
++static const struct mtk_parent spi1_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+};
-+
-+static const struct mtk_parent msdc30_parents[] = {
++	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
 +	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_MSDCPLL_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL4_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
++	XTAL_PARENT(CLK_XTAL),
 +};
 +
++static const struct mtk_parent msdc30_0_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D16),
++	TOP_PARENT(CLK_TOP_UNIV48M),
++};
++
++static const struct mtk_parent msdc30_1_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D16),
++	TOP_PARENT(CLK_TOP_UNIV48M),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL_D7),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
+ };
+ 
+-static const int ap2wbmcu_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL1_D2,
+-	CLK_TOP_UNIV48M,
+-	CLK_TOP_SYSPLL1_D8,
+-	CLK_TOP_UNIVPLL2_D4,
+-	CLK_TOP_SYSPLL_D7,
+-	CLK_TOP_SYSPLL2_D2,
+-	CLK_TOP_UNIVPLL2_D2
++static const struct mtk_parent ap2wbmcu_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
++	TOP_PARENT(CLK_TOP_UNIV48M),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL_D7),
++	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
+ };
+ 
+-static const int audio_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL3_D4,
+-	CLK_TOP_SYSPLL4_D4,
+-	CLK_TOP_SYSPLL1_D16
++static const struct mtk_parent audio_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL4_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D16),
+ };
+ 
+-static const int aud_intbus_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL1_D4,
+-	CLK_TOP_SYSPLL4_D2,
+-	CLK_TOP_DMPLL_D4
+-};
 +static const struct mtk_parent aud_intbus_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
 +	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
++	TOP_PARENT(CLK_TOP_DMPLL_D4),
 +};
-+
+ 
+-static const int pmicspi_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL1_D8,
+-	CLK_TOP_SYSPLL3_D4,
+-	CLK_TOP_SYSPLL1_D16,
+-	CLK_TOP_UNIVPLL3_D4,
+-	CLK_XTAL,
+-	CLK_TOP_UNIVPLL2_D4,
+-	CLK_TOP_DMPLL_D8
 +static const struct mtk_parent pmicspi_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
 +	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D8),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D16),
 +	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D26),
-+	TOP_PARENT(CLK_TOP_DMPLL_D2),
-+	TOP_PARENT(CLK_TOP_DMPLL_D4),
-+};
-+
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
++	TOP_PARENT(CLK_TOP_DMPLL_D8),
+ };
+ 
+-static const int scp_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL1_D8,
+-	CLK_TOP_UNIVPLL2_D2,
+-	CLK_TOP_UNIVPLL2_D4
 +static const struct mtk_parent scp_parents[] = {
 +	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	TOP_PARENT(CLK_TOP_DMPLL_D2),
-+	TOP_PARENT(CLK_TOP_DMPLL_D4),
-+};
-+
-+static const struct mtk_parent dpi0_tve_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_MIPIPLL),
-+	TOP_PARENT(CLK_TOP_MIPIPLL_D2),
-+	TOP_PARENT(CLK_TOP_MIPIPLL_D4),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_TVDPLL),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D2),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D4),
-+};
-+
-+static const struct mtk_parent dpi1_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_TVDPLL),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D2),
-+	TOP_PARENT(CLK_TOP_TVDPLL_D4),
-+};
-+
-+static const struct mtk_parent hdmi_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_HDMIPLL),
-+	TOP_PARENT(CLK_TOP_HDMIPLL_D2),
-+	TOP_PARENT(CLK_TOP_HDMIPLL_D3),
-+};
-+
-+static const struct mtk_parent apll_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_AUDPLL),
-+	TOP_PARENT(CLK_TOP_AUDPLL_D4),
-+	TOP_PARENT(CLK_TOP_AUDPLL_D8),
-+	TOP_PARENT(CLK_TOP_AUDPLL_D16),
-+	TOP_PARENT(CLK_TOP_AUDPLL_D24),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+};
- 
--static const int aud_mux_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_AUD1PLL_98M,
--	CLK_TOP_AUD2PLL_90M,
--	CLK_TOP_HADDS2PLL_98M,
--	CLK_TOP_AUD_EXTCK1_DIV,
--	CLK_TOP_AUD_EXTCK2_DIV
-+static const struct mtk_parent rtc_parents[] = {
-+	TOP_PARENT(CLK_TOP_32K_INTERNAL),
-+	TOP_PARENT(CLK_TOP_32K_EXTERNAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D8),
-+};
-+
-+static const struct mtk_parent nfi2x_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D7),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D4),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent emmc_hclk_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-+};
-+
-+static const struct mtk_parent flash_parents[] = {
-+	TOP_PARENT(CLK_TOP_CLK26M_D8),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+};
-+
-+static const struct mtk_parent di_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_TVD2PLL),
-+	TOP_PARENT(CLK_TOP_TVD2PLL_D2),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent nr_osd_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_VENCPLL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_DMPLL),
-+};
-+
-+static const struct mtk_parent hdmirx_bist_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D3),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D16),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_VENCPLL),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent intdir_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_MMPLL),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D2),
-+};
-+
-+static const struct mtk_parent asm_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
 +	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
-+};
-+
-+static const struct mtk_parent ms_card_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D4),
-+};
-+
-+static const struct mtk_parent ethif_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+	TOP_PARENT(CLK_TOP_DMPLL),
-+	TOP_PARENT(CLK_TOP_DMPLL_D2),
-+};
-+
-+static const struct mtk_parent hdmirx_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D52),
-+};
-+
-+static const struct mtk_parent cmsys_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent clk_8bdac_parents[] = {
-+	TOP_PARENT(CLK_TOP_32K_INTERNAL),
-+	TOP_PARENT(CLK_TOP_8BDAC),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent aud2dvd_parents[] = {
-+	TOP_PARENT(CLK_TOP_AUD_48K_TIMING),
-+	TOP_PARENT(CLK_TOP_AUD_44K_TIMING),
-+};
-+
-+static const struct mtk_parent padmclk_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D26),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D52),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D108),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D32),
-+};
-+
-+static const struct mtk_parent aud_mux_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_AUD1PLL_98M),
-+	TOP_PARENT(CLK_TOP_AUD2PLL_90M),
-+	TOP_PARENT(CLK_TOP_HADDS2PLL_98M),
-+	TOP_PARENT(CLK_TOP_AUD_EXTCK1_DIV),
-+	TOP_PARENT(CLK_TOP_AUD_EXTCK2_DIV),
  };
  
--static const int aud_src_parents[] = {
--	CLK_TOP_AUD_MUX1_SEL,
--	CLK_TOP_AUD_MUX2_SEL
-+static const struct mtk_parent aud_src_parents[] = {
-+	TOP_PARENT(CLK_TOP_AUD_MUX1_SEL),
-+	TOP_PARENT(CLK_TOP_AUD_MUX2_SEL),
+-static const int atb_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL1_D2,
+-	CLK_TOP_SYSPLL_D5
++static const struct mtk_parent atb_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
++	TOP_PARENT(CLK_TOP_SYSPLL_D5),
+ };
+ 
+-static const int hif_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL1_D2,
+-	CLK_TOP_UNIVPLL1_D2,
+-	CLK_TOP_SYSPLL1_D4,
+-	CLK_TOP_UNIVPLL_D5,
+-	-1,
+-	CLK_TOP_UNIVPLL_D7
++static const struct mtk_parent hif_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	VOID_PARENT,
++	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
+ };
+ 
+-static const int sata_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_UNIVPLL2_D4
++static const struct mtk_parent sata_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
+ };
+ 
+-static const int usb20_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_UNIVPLL3_D4,
+-	CLK_TOP_SYSPLL1_D8
++static const struct mtk_parent usb20_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
+ };
+ 
+-static const int aud1_parents[] = {
+-	CLK_XTAL
++static const struct mtk_parent aud1_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
+ };
+ 
+-static const int irrx_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_SYSPLL4_D16
++static const struct mtk_parent irrx_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_SYSPLL4_D16),
+ };
+ 
+-static const int crypto_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_UNIVPLL_D3,
+-	CLK_TOP_UNIVPLL1_D2,
+-	CLK_TOP_SYSPLL1_D2,
+-	CLK_TOP_UNIVPLL_D5,
+-	CLK_TOP_SYSPLL_D5,
+-	CLK_TOP_UNIVPLL2_D2,
+-	CLK_TOP_SYSPLL_D2
++static const struct mtk_parent crypto_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
++	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
++	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
++	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
++	TOP_PARENT(CLK_TOP_SYSPLL_D5),
++	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
++	TOP_PARENT(CLK_TOP_SYSPLL_D2),
+ };
+ 
+-static const int gpt10m_parents[] = {
+-	CLK_XTAL,
+-	CLK_TOP_CLKXTAL_D4
++static const struct mtk_parent gpt10m_parents[] = {
++	XTAL_PARENT(CLK_XTAL),
++	TOP_PARENT(CLK_TOP_CLKXTAL_D4),
  };
  
  static const struct mtk_composite top_muxes[] = {
+ 	/* CLK_CFG_0 */
 -	MUX_GATE(CLK_TOP_AXI_SEL, axi_parents, 0x40, 0, 3, 7),
 -	MUX_GATE(CLK_TOP_MEM_SEL, mem_parents, 0x40, 8, 1, 15),
 -	MUX_GATE(CLK_TOP_DDRPHYCFG_SEL, ddrphycfg_parents, 0x40, 16, 1, 23),
--	MUX_GATE_FLAGS(CLK_TOP_MM_SEL, mm_parents, 0x40, 24, 3, 31,
--		       CLK_MUX_DOMAIN_SCPSYS),
--
--	MUX_GATE(CLK_TOP_PWM_SEL, pwm_parents, 0x50, 0, 2, 7),
--	MUX_GATE(CLK_TOP_VDEC_SEL, vdec_parents, 0x50, 8, 4, 15),
--	MUX_GATE_FLAGS(CLK_TOP_MFG_SEL, mfg_parents, 0x50, 16, 3, 23,
--		       CLK_MUX_DOMAIN_SCPSYS),
--	MUX_GATE(CLK_TOP_CAMTG_SEL, camtg_parents, 0x50, 24, 3, 31),
--
--	MUX_GATE(CLK_TOP_UART_SEL, uart_parents, 0x60, 0, 1, 7),
--	MUX_GATE(CLK_TOP_SPI0_SEL, spi_parents, 0x60, 8, 3, 15),
--	MUX_GATE(CLK_TOP_USB20_SEL, usb20_parents, 0x60, 16, 2, 23),
--	MUX_GATE(CLK_TOP_MSDC30_0_SEL, msdc30_parents, 0x60, 24, 3, 31),
--
--	MUX_GATE(CLK_TOP_MSDC30_1_SEL, msdc30_parents, 0x70, 0, 3, 7),
--	MUX_GATE(CLK_TOP_MSDC30_2_SEL, msdc30_parents, 0x70, 8, 3, 15),
--	MUX_GATE(CLK_TOP_AUDIO_SEL, msdc30_parents, 0x70, 16, 1, 23),
--	MUX_GATE(CLK_TOP_AUDINTBUS_SEL, aud_intbus_parents, 0x70, 24, 3, 31),
--
--	MUX_GATE(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x80, 0, 4, 7),
--	MUX_GATE(CLK_TOP_SCP_SEL, scp_parents, 0x80, 8, 2, 15),
--	MUX_GATE(CLK_TOP_DPI0_SEL, dpi0_tve_parents, 0x80, 16, 3, 23),
--	MUX_GATE(CLK_TOP_DPI1_SEL, dpi1_parents, 0x80, 24, 2, 31),
--
--	MUX_GATE(CLK_TOP_TVE_SEL, dpi0_tve_parents, 0x90, 0, 3, 7),
--	MUX_GATE(CLK_TOP_HDMI_SEL, hdmi_parents, 0x90, 8, 2, 15),
--	MUX_GATE(CLK_TOP_APLL_SEL, apll_parents, 0x90, 16, 3, 23),
--
--	MUX_GATE(CLK_TOP_RTC_SEL, rtc_parents, 0xA0, 0, 2, 7),
--	MUX_GATE(CLK_TOP_NFI2X_SEL, nfi2x_parents, 0xA0, 8, 3, 15),
--	MUX_GATE(CLK_TOP_EMMC_HCLK_SEL, emmc_hclk_parents, 0xA0, 24, 2, 31),
--
--	MUX_GATE(CLK_TOP_FLASH_SEL, flash_parents, 0xB0, 0, 3, 7),
--	MUX_GATE(CLK_TOP_DI_SEL, di_parents, 0xB0, 8, 2, 15),
--	MUX_GATE(CLK_TOP_NR_SEL, nr_osd_parents, 0xB0, 16, 3, 23),
--	MUX_GATE(CLK_TOP_OSD_SEL, nr_osd_parents, 0xB0, 24, 3, 31),
--
--	MUX_GATE(CLK_TOP_HDMIRX_BIST_SEL, hdmirx_bist_parents, 0xC0, 0, 3, 7),
--	MUX_GATE(CLK_TOP_INTDIR_SEL, intdir_parents, 0xC0, 8, 2, 15),
--	MUX_GATE(CLK_TOP_ASM_I_SEL, asm_parents, 0xC0, 16, 2, 23),
--	MUX_GATE(CLK_TOP_ASM_M_SEL, asm_parents, 0xC0, 24, 3, 31),
--
--	MUX_GATE(CLK_TOP_ASM_H_SEL, asm_parents, 0xD0, 0, 2, 7),
--	MUX_GATE(CLK_TOP_MS_CARD_SEL, ms_card_parents, 0xD0, 16, 2, 23),
--	MUX_GATE_FLAGS(CLK_TOP_ETHIF_SEL, ethif_parents, 0xD0, 24, 3, 31,
--		       CLK_MUX_DOMAIN_SCPSYS),
--
--	MUX_GATE(CLK_TOP_HDMIRX26_24_SEL, hdmirx_parents, 0xE0, 0, 1, 7),
--	MUX_GATE(CLK_TOP_MSDC30_3_SEL, msdc30_parents, 0xE0, 8, 3, 15),
--	MUX_GATE(CLK_TOP_CMSYS_SEL, cmsys_parents, 0xE0, 16, 4, 23),
--
--	MUX_GATE(CLK_TOP_SPI1_SEL, spi_parents, 0xE0, 24, 3, 31),
--	MUX_GATE(CLK_TOP_SPI2_SEL, spi_parents, 0xF0, 0, 3, 7),
--	MUX_GATE(CLK_TOP_8BDAC_SEL, clk_8bdac_parents, 0xF0, 8, 2, 15),
--	MUX_GATE(CLK_TOP_AUD2DVD_SEL, aud2dvd_parents, 0xF0, 16, 1, 23),
--
--	MUX(CLK_TOP_PADMCLK_SEL, padmclk_parents, 0x100, 0, 3),
--
--	MUX(CLK_TOP_AUD_MUX1_SEL, aud_mux_parents, 0x12c, 0, 3),
--	MUX(CLK_TOP_AUD_MUX2_SEL, aud_mux_parents, 0x12c, 3, 3),
--	MUX(CLK_TOP_AUDPLL_MUX_SEL, aud_mux_parents, 0x12c, 6, 3),
--
--	MUX_GATE(CLK_TOP_AUD_K1_SRC_SEL, aud_src_parents, 0x12c, 15, 1, 23),
--	MUX_GATE(CLK_TOP_AUD_K2_SRC_SEL, aud_src_parents, 0x12c, 16, 1, 24),
--	MUX_GATE(CLK_TOP_AUD_K3_SRC_SEL, aud_src_parents, 0x12c, 17, 1, 25),
--	MUX_GATE(CLK_TOP_AUD_K4_SRC_SEL, aud_src_parents, 0x12c, 18, 1, 26),
--	MUX_GATE(CLK_TOP_AUD_K5_SRC_SEL, aud_src_parents, 0x12c, 19, 1, 27),
--	MUX_GATE(CLK_TOP_AUD_K6_SRC_SEL, aud_src_parents, 0x12c, 20, 1, 28),
+-	MUX_GATE(CLK_TOP_ETH_SEL, eth_parents, 0x40, 24, 3, 31),
 +	MUX_GATE_MIXED(CLK_TOP_AXI_SEL, axi_parents, 0x40, 0, 3, 7),
 +	MUX_GATE_MIXED(CLK_TOP_MEM_SEL, mem_parents, 0x40, 8, 1, 15),
 +	MUX_GATE_MIXED(CLK_TOP_DDRPHYCFG_SEL, ddrphycfg_parents, 0x40, 16, 1, 23),
-+	MUX_GATE_MIXED_FLAGS(CLK_TOP_MM_SEL, mm_parents, 0x40, 24, 3, 31,
-+			     CLK_MUX_DOMAIN_SCPSYS),
-+
++	MUX_GATE_MIXED(CLK_TOP_ETH_SEL, eth_parents, 0x40, 24, 3, 31),
+ 
+ 	/* CLK_CFG_1 */
+-	MUX_GATE(CLK_TOP_PWM_SEL, pwm_parents, 0x50, 0, 2, 7),
+-	MUX_GATE(CLK_TOP_F10M_REF_SEL, irrx_parents, 0x50, 8, 1, 15),
+-	MUX_GATE(CLK_TOP_NFI_INFRA_SEL, nfi_infra_parents, 0x50, 16, 4, 23),
+-	MUX_GATE(CLK_TOP_FLASH_SEL, flash_parents, 0x50, 24, 3, 31),
 +	MUX_GATE_MIXED(CLK_TOP_PWM_SEL, pwm_parents, 0x50, 0, 2, 7),
-+	MUX_GATE_MIXED(CLK_TOP_VDEC_SEL, vdec_parents, 0x50, 8, 4, 15),
-+	MUX_GATE_MIXED_FLAGS(CLK_TOP_MFG_SEL, mfg_parents, 0x50, 16, 3, 23,
-+			     CLK_MUX_DOMAIN_SCPSYS),
-+	MUX_GATE_MIXED(CLK_TOP_CAMTG_SEL, camtg_parents, 0x50, 24, 3, 31),
-+
++	MUX_GATE_MIXED(CLK_TOP_F10M_REF_SEL, irrx_parents, 0x50, 8, 1, 15),
++	MUX_GATE_MIXED(CLK_TOP_NFI_INFRA_SEL, nfi_infra_parents, 0x50, 16, 4, 23),
++	MUX_GATE_MIXED(CLK_TOP_FLASH_SEL, flash_parents, 0x50, 24, 3, 31),
+ 
+ 	/* CLK_CFG_2 */
+-	MUX_GATE(CLK_TOP_UART_SEL, uart_parents, 0x60, 0, 1, 7),
+-	MUX_GATE(CLK_TOP_SPI0_SEL, spi0_parents, 0x60, 8, 3, 15),
+-	MUX_GATE(CLK_TOP_SPI1_SEL, spi1_parents, 0x60, 16, 3, 23),
+-	MUX_GATE(CLK_TOP_MSDC50_0_SEL, uart_parents, 0x60, 24, 3, 31),
 +	MUX_GATE_MIXED(CLK_TOP_UART_SEL, uart_parents, 0x60, 0, 1, 7),
-+	MUX_GATE_MIXED(CLK_TOP_SPI0_SEL, spi_parents, 0x60, 8, 3, 15),
-+	MUX_GATE_MIXED(CLK_TOP_USB20_SEL, usb20_parents, 0x60, 16, 2, 23),
-+	MUX_GATE_MIXED(CLK_TOP_MSDC30_0_SEL, msdc30_parents, 0x60, 24, 3, 31),
-+
-+	MUX_GATE_MIXED(CLK_TOP_MSDC30_1_SEL, msdc30_parents, 0x70, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_MSDC30_2_SEL, msdc30_parents, 0x70, 8, 3, 15),
-+	MUX_GATE_MIXED(CLK_TOP_AUDIO_SEL, msdc30_parents, 0x70, 16, 1, 23),
-+	MUX_GATE_MIXED(CLK_TOP_AUDINTBUS_SEL, aud_intbus_parents, 0x70, 24, 3, 31),
-+
-+	MUX_GATE_MIXED(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x80, 0, 4, 7),
-+	MUX_GATE_MIXED(CLK_TOP_SCP_SEL, scp_parents, 0x80, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_DPI0_SEL, dpi0_tve_parents, 0x80, 16, 3, 23),
-+	MUX_GATE_MIXED(CLK_TOP_DPI1_SEL, dpi1_parents, 0x80, 24, 2, 31),
-+
-+	MUX_GATE_MIXED(CLK_TOP_TVE_SEL, dpi0_tve_parents, 0x90, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_HDMI_SEL, hdmi_parents, 0x90, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_APLL_SEL, apll_parents, 0x90, 16, 3, 23),
-+
-+	MUX_GATE_MIXED(CLK_TOP_RTC_SEL, rtc_parents, 0xA0, 0, 2, 7),
-+	MUX_GATE_MIXED(CLK_TOP_NFI2X_SEL, nfi2x_parents, 0xA0, 8, 3, 15),
-+	MUX_GATE_MIXED(CLK_TOP_EMMC_HCLK_SEL, emmc_hclk_parents, 0xA0, 24, 2, 31),
-+
-+	MUX_GATE_MIXED(CLK_TOP_FLASH_SEL, flash_parents, 0xB0, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_DI_SEL, di_parents, 0xB0, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_NR_SEL, nr_osd_parents, 0xB0, 16, 3, 23),
-+	MUX_GATE_MIXED(CLK_TOP_OSD_SEL, nr_osd_parents, 0xB0, 24, 3, 31),
-+
-+	MUX_GATE_MIXED(CLK_TOP_HDMIRX_BIST_SEL, hdmirx_bist_parents, 0xC0, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_INTDIR_SEL, intdir_parents, 0xC0, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_ASM_I_SEL, asm_parents, 0xC0, 16, 2, 23),
-+	MUX_GATE_MIXED(CLK_TOP_ASM_M_SEL, asm_parents, 0xC0, 24, 3, 31),
-+
-+	MUX_GATE_MIXED(CLK_TOP_ASM_H_SEL, asm_parents, 0xD0, 0, 2, 7),
-+	MUX_GATE_MIXED(CLK_TOP_MS_CARD_SEL, ms_card_parents, 0xD0, 16, 2, 23),
-+	MUX_GATE_MIXED_FLAGS(CLK_TOP_ETHIF_SEL, ethif_parents, 0xD0, 24, 3, 31,
++	MUX_GATE_MIXED(CLK_TOP_SPI0_SEL, spi0_parents, 0x60, 8, 3, 15),
++	MUX_GATE_MIXED(CLK_TOP_SPI1_SEL, spi1_parents, 0x60, 16, 3, 23),
++	MUX_GATE_MIXED(CLK_TOP_MSDC50_0_SEL, uart_parents, 0x60, 24, 3, 31),
+ 
+ 	/* CLK_CFG_3 */
+-	MUX_GATE(CLK_TOP_MSDC30_0_SEL, msdc30_0_parents, 0x70, 0, 3, 7),
+-	MUX_GATE(CLK_TOP_MSDC30_1_SEL, msdc30_1_parents, 0x70, 8, 3, 15),
+-	MUX_GATE(CLK_TOP_AP2WBMCU_SEL, ap2wbmcu_parents, 0x70, 16, 3, 23),
+-	MUX_GATE(CLK_TOP_AP2WBHIF_SEL, ap2wbmcu_parents, 0x70, 24, 3, 31),
++	MUX_GATE_MIXED(CLK_TOP_MSDC30_0_SEL, msdc30_0_parents, 0x70, 0, 3, 7),
++	MUX_GATE_MIXED(CLK_TOP_MSDC30_1_SEL, msdc30_1_parents, 0x70, 8, 3, 15),
++	MUX_GATE_MIXED(CLK_TOP_AP2WBMCU_SEL, ap2wbmcu_parents, 0x70, 16, 3, 23),
++	MUX_GATE_MIXED(CLK_TOP_AP2WBHIF_SEL, ap2wbmcu_parents, 0x70, 24, 3, 31),
+ 
+ 	/* CLK_CFG_4 */
+-	MUX_GATE(CLK_TOP_AUDIO_SEL, audio_parents, 0x80, 0, 2, 7),
+-	MUX_GATE(CLK_TOP_AUD_INTBUS_SEL, aud_intbus_parents, 0x80, 8, 2, 15),
+-	MUX_GATE(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x80, 16, 3, 23),
+-	MUX_GATE(CLK_TOP_SCP_SEL, scp_parents, 0x80, 24, 2, 31),
++	MUX_GATE_MIXED(CLK_TOP_AUDIO_SEL, audio_parents, 0x80, 0, 2, 7),
++	MUX_GATE_MIXED(CLK_TOP_AUD_INTBUS_SEL, aud_intbus_parents, 0x80, 8, 2, 15),
++	MUX_GATE_MIXED(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x80, 16, 3, 23),
++	MUX_GATE_MIXED(CLK_TOP_SCP_SEL, scp_parents, 0x80, 24, 2, 31),
+ 
+ 	/* CLK_CFG_5 */
+-	MUX_GATE(CLK_TOP_ATB_SEL, atb_parents, 0x90, 0, 2, 7),
+-	MUX_GATE_FLAGS(CLK_TOP_HIF_SEL, hif_parents, 0x90, 8, 3, 15,
+-		       CLK_MUX_DOMAIN_SCPSYS),
+-	MUX_GATE(CLK_TOP_SATA_SEL, sata_parents, 0x90, 16, 1, 23),
+-	MUX_GATE(CLK_TOP_U2_SEL, usb20_parents, 0x90, 24, 2, 31),
++	MUX_GATE_MIXED(CLK_TOP_ATB_SEL, atb_parents, 0x90, 0, 2, 7),
++	MUX_GATE_MIXED_FLAGS(CLK_TOP_HIF_SEL, hif_parents, 0x90, 8, 3, 15,
 +			     CLK_MUX_DOMAIN_SCPSYS),
-+
-+	MUX_GATE_MIXED(CLK_TOP_HDMIRX26_24_SEL, hdmirx_parents, 0xE0, 0, 1, 7),
-+	MUX_GATE_MIXED(CLK_TOP_MSDC30_3_SEL, msdc30_parents, 0xE0, 8, 3, 15),
-+	MUX_GATE_MIXED(CLK_TOP_CMSYS_SEL, cmsys_parents, 0xE0, 16, 4, 23),
-+
-+	MUX_GATE_MIXED(CLK_TOP_SPI1_SEL, spi_parents, 0xE0, 24, 3, 31),
-+	MUX_GATE_MIXED(CLK_TOP_SPI2_SEL, spi_parents, 0xF0, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_8BDAC_SEL, clk_8bdac_parents, 0xF0, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_AUD2DVD_SEL, aud2dvd_parents, 0xF0, 16, 1, 23),
-+
-+	MUX_MIXED(CLK_TOP_PADMCLK_SEL, padmclk_parents, 0x100, 0, 3),
-+
-+	MUX_MIXED(CLK_TOP_AUD_MUX1_SEL, aud_mux_parents, 0x12c, 0, 3),
-+	MUX_MIXED(CLK_TOP_AUD_MUX2_SEL, aud_mux_parents, 0x12c, 3, 3),
-+	MUX_MIXED(CLK_TOP_AUDPLL_MUX_SEL, aud_mux_parents, 0x12c, 6, 3),
-+
-+	MUX_GATE_MIXED(CLK_TOP_AUD_K1_SRC_SEL, aud_src_parents, 0x12c, 15, 1, 23),
-+	MUX_GATE_MIXED(CLK_TOP_AUD_K2_SRC_SEL, aud_src_parents, 0x12c, 16, 1, 24),
-+	MUX_GATE_MIXED(CLK_TOP_AUD_K3_SRC_SEL, aud_src_parents, 0x12c, 17, 1, 25),
-+	MUX_GATE_MIXED(CLK_TOP_AUD_K4_SRC_SEL, aud_src_parents, 0x12c, 18, 1, 26),
-+	MUX_GATE_MIXED(CLK_TOP_AUD_K5_SRC_SEL, aud_src_parents, 0x12c, 19, 1, 27),
-+	MUX_GATE_MIXED(CLK_TOP_AUD_K6_SRC_SEL, aud_src_parents, 0x12c, 20, 1, 28),
++	MUX_GATE_MIXED(CLK_TOP_SATA_SEL, sata_parents, 0x90, 16, 1, 23),
++	MUX_GATE_MIXED(CLK_TOP_U2_SEL, usb20_parents, 0x90, 24, 2, 31),
+ 
+ 	/* CLK_CFG_6 */
+-	MUX_GATE(CLK_TOP_AUD1_SEL, aud1_parents, 0xA0, 0, 1, 7),
+-	MUX_GATE(CLK_TOP_AUD2_SEL, aud1_parents, 0xA0, 8, 1, 15),
+-	MUX_GATE(CLK_TOP_IRRX_SEL, irrx_parents, 0xA0, 16, 1, 23),
+-	MUX_GATE(CLK_TOP_IRTX_SEL, irrx_parents, 0xA0, 24, 1, 31),
++	MUX_GATE_MIXED(CLK_TOP_AUD1_SEL, aud1_parents, 0xA0, 0, 1, 7),
++	MUX_GATE_MIXED(CLK_TOP_AUD2_SEL, aud1_parents, 0xA0, 8, 1, 15),
++	MUX_GATE_MIXED(CLK_TOP_IRRX_SEL, irrx_parents, 0xA0, 16, 1, 23),
++	MUX_GATE_MIXED(CLK_TOP_IRTX_SEL, irrx_parents, 0xA0, 24, 1, 31),
+ 
+ 	/* CLK_CFG_7 */
+-	MUX_GATE(CLK_TOP_SATA_MCU_SEL, scp_parents, 0xB0, 0, 2, 7),
+-	MUX_GATE(CLK_TOP_PCIE0_MCU_SEL, scp_parents, 0xB0, 8, 2, 15),
+-	MUX_GATE(CLK_TOP_PCIE1_MCU_SEL, scp_parents, 0xB0, 16, 2, 23),
+-	MUX_GATE(CLK_TOP_SSUSB_MCU_SEL, scp_parents, 0xB0, 24, 2, 31),
++	MUX_GATE_MIXED(CLK_TOP_SATA_MCU_SEL, scp_parents, 0xB0, 0, 2, 7),
++	MUX_GATE_MIXED(CLK_TOP_PCIE0_MCU_SEL, scp_parents, 0xB0, 8, 2, 15),
++	MUX_GATE_MIXED(CLK_TOP_PCIE1_MCU_SEL, scp_parents, 0xB0, 16, 2, 23),
++	MUX_GATE_MIXED(CLK_TOP_SSUSB_MCU_SEL, scp_parents, 0xB0, 24, 2, 31),
+ 
+ 	/* CLK_CFG_8 */
+-	MUX_GATE(CLK_TOP_CRYPTO_SEL, crypto_parents, 0xC0, 0, 3, 7),
+-	MUX_GATE(CLK_TOP_SGMII_REF_1_SEL, sgmii_ref_1_parents, 0xC0, 8, 1, 15),
+-	MUX_GATE(CLK_TOP_10M_SEL, gpt10m_parents, 0xC0, 16, 1, 23),
++	MUX_GATE_MIXED(CLK_TOP_CRYPTO_SEL, crypto_parents, 0xC0, 0, 3, 7),
++	MUX_GATE_MIXED(CLK_TOP_SGMII_REF_1_SEL, sgmii_ref_1_parents, 0xC0, 8, 1, 15),
++	MUX_GATE_MIXED(CLK_TOP_10M_SEL, gpt10m_parents, 0xC0, 16, 1, 23),
  };
  
  /* infracfg */
