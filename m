@@ -4,84 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F5AFCC055
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:17:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0D1FCC05D
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 19:06:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D92D28407E;
-	Fri,  6 Mar 2026 19:14:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5416783F2D;
+	Fri,  6 Mar 2026 20:06:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iG9uUQOM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m5092s+C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E047283F2D; Fri,  6 Mar 2026 19:14:29 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id E9D3E83F8A; Fri,  6 Mar 2026 20:05:59 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 506588408D
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:14:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF48D83F00
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 20:05:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-8cb3825b0fbso933639585a.0
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:14:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-48336a6e932so61833565e9.3
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 11:05:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772820865; x=1773425665; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dpqd2ijmQrXCNoPXwzGshFsG5MrEA++IJ9Z1nwRjcZg=;
- b=iG9uUQOMvDZ+R4kue1Oqpl4EAIoBmiDFTxZ7a0UF8BqsL1nkpUGKKQ+O8YvA6EXT46
- DH/u9OK2A+lOR4pGRGT3yffDgaPGz0ikfd35E23v5+VvgTde5jjbBhD4XJ98jmQLlf9t
- bbSckHUWgQN/j2XegGFuUHhn8RYV0UPS/XbyE=
+ d=gmail.com; s=20230601; t=1772823957; x=1773428757; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BZj/AVe2gzMuCV2Pp8MKVic9ReXVH7/+mfvstqkS7Us=;
+ b=m5092s+C8JgCpdVZUDbMI/nzSbEIC72Bkcz+mNArUDiJSGroPucQSOLV4vkyKohk7/
+ Obh7WAyKelcMYGyaTr9+w3PF2ZkT7TjIBM3FHbuZcOkxNsaMadWaZkJPlx8IIhAsssZu
+ d0iNRhwE8s2+rX4PfnzOPN4Gho5sN+ERLkTJBa54uWOxRVnuTHu8ngS0lSzG3GulAhE5
+ Qje4WDT+k4vJT7ehzkge5NnnGzVJLXA2I7RDAO0G7WGVqwphImWWAS4TsomKhNWLD/z/
+ Sut23HqMDwQX/WC07QL7/oDRssbLZ8lw0lpxjrzzHSBFNwAwKC39l3LFJjy5RPxOHOjh
+ E7vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772820865; x=1773425665;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=dpqd2ijmQrXCNoPXwzGshFsG5MrEA++IJ9Z1nwRjcZg=;
- b=actvgImwjQbTadZPsqvkzI4E/yMdIPus4Q8vG3sRmTeCz/VuAKYtKFm3Qcu7w91FYc
- cz+azmNgSdQRp8r8e8xnOPyifXLuGB5PrybmYNgK8FE+D1nJuSQjr5Qba15cyWnVb5Rz
- LdvpYCtOUWNVjzQGZJg9EpjD5QCZzkUGUh1shEw6BEdW8UOTs6k4TLXS8Dapx5wgUS50
- JuY3nrx/IyzNJqBcx8vgxNYd5drLpyylIeDCvcJk+jEFU9aJKKHjLeay1CHwxT34bgVw
- HwbjcHz0+xumW3eBGcxqfDFneAz70WcecsOmN+LWMKev4B4t4+9VA3gfVZC23nEYYNpx
- hd5w==
-X-Gm-Message-State: AOJu0YyO1+a5NwVHCAFCIlIe+B+xU5ZiK9UxFMa+puJLRH2ny9jbS7lk
- +iH0CWmNrO5AoVbOnkzRmQurDm3CADbHH0NMGvP/jyPL7dRZ5U5VdliDJzLIsONh5AqUwAY/mC7
- 62Bg=
-X-Gm-Gg: ATEYQzyrqR1h3WcBbZVPBJBxmhLDk+6o170GkSubznGS97QcAZQKjobYe3KNCZ6aecS
- Leir2c75zciTCigVHh5TNZv8wfKcAbsF1mN060pHmALmukgH5+0/wf1WanbKG3c1BcNFxw6+CFu
- KsimrxvJKzB4sIt2DBy5sg0pHczidMzWLeAQT6Ystv3atefvf0eAWFDmkwYgEwBSB6E1VAOMzny
- GMztjQv2dUmZADw5UhfBnAKZzCN+nwcToEcc/vtnb4wBogZjl//u64E/C+HgIKfbTgp5DBgF5id
- UOnPtEVrgvGnOnkTaul+iXUUTLVi2e16NOUFvbLAgZexjKMOvaVEnhRpdXeWZ8KmSmIsbIvnkTA
- Cq8v036bu0KYl6w4l6jRPWQQRmDy9S1BhQKj0x4ROSwxXuBfnP5hWqNb4z2bPJWgLVcKzF3JP4o
- 2Ds0fVsoBu8YTjUpwJ+g==
-X-Received: by 2002:a05:620a:40c3:b0:8c6:ed6b:5865 with SMTP id
- af79cd13be357-8cd6d29e6e6mr407077485a.0.1772820865597; 
- Fri, 06 Mar 2026 10:14:25 -0800 (PST)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.14.23
+ d=1e100.net; s=20230601; t=1772823957; x=1773428757;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BZj/AVe2gzMuCV2Pp8MKVic9ReXVH7/+mfvstqkS7Us=;
+ b=XPQJam9oxEuSy4SxTqBDTgwlqkDzmmdmd+gGx0vYZrrH25YBPY/HDbN/dh6+edtcJs
+ pS8kj749hY20NMYM7mfTRvxVNHP76lWwE6NyTXjXQ0lqDY26UV3t9gvcDFokz3bfB+8v
+ V5MQAJ6DdvF9rslMJhDNpB13TUM7n+Dp8te9Hzm9OoVS5m5V36XxYgs8QJRa3QMeGH3d
+ Bnb983enNlWz/LPw22aXQtBVNyPct/zaRlwqUX63sx/VHyqvTW7FarQO9WhBn5yX/9jn
+ xRrABUCQlBcV9Oo+0sY5xYTgXW+v3jeuhKnbc934DTBqoE3bcoycLPjpbCFZ6wPSD/j5
+ 4NHw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDVdWsnsGTBbSeRrOjmWijoys0QVL0M9QC9Nl85hHg5Sk0Byum3OKLOXDPHZ8bXwUm7wJt5uU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQiAs2KKCC2FAWxrUULRgHy/eE9rJs0AjVgmMj8DemEyUZkCnd
+ tmg2MRLdV+DHeQrL81xpoYcabtrL5GkgWKGvDj92Wkej+wiF6TQsZHAi
+X-Gm-Gg: ATEYQzwm9p3JhJO0VYi6J/SCj5VWwTPk9L/p4pxgTQlnjDoiyyHgby19zEZIMX4BSbV
+ kd1iH0s2ZGG7enKbLtditRu3TS7HhZy07X7WglRhrNOAe8rIgEvOuQL8WcS8wK732NAvNJs5CAa
+ l57aEvAAj6MyrDqnGpHqg+AETUDnAVpVy7D8mYyt55aSnAlwhXx7QQ3H7uajNEcaGkp2Yb1b0Ca
+ Uy93XUuWc2HdQnSHFAAICoQ24Dy7T8gMbjEFHuhPQ1xxtX6LalvaqI7NL7wFEzONLi7Ja0cm3xz
+ Mrzs9Te0KBCF3u3JdbCIDVcGeJhPk3oNeGkMk2iyuVWFDSfj12Tt9D2FnViOLWJ7C+xOpPRI7uD
+ 4R+sspkyVdo/14/zcARA3HS0xWsWQizAOihGfjkFBDb6wAqhwUkNGT6FW882fqfDspcZsT72xnT
+ pkP0/HYiEtrVpwYagBwF3nTrY6BQzros488SgmSJY8jq5IH1No5oCNjKY=
+X-Received: by 2002:a05:600c:1e86:b0:483:5310:dc67 with SMTP id
+ 5b1f17b1804b1-4852695b81cmr51543425e9.20.1772823957007; 
+ Fri, 06 Mar 2026 11:05:57 -0800 (PST)
+Received: from Ansuel-XPS24 (93-34-88-122.ip49.fastwebnet.it. [93.34.88.122])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-439dae45786sm6701065f8f.32.2026.03.06.11.05.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 10:14:25 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <simon.glass@canonical.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Simon Glass <sjg@chromium.org>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH v2 23/23] binman: doc: Update binman_tests.rst for
- subdirectory layout
-Date: Fri,  6 Mar 2026 11:12:51 -0700
-Message-ID: <20260306181304.2426352-24-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260306181304.2426352-1-sjg@chromium.org>
-References: <20260306181304.2426352-1-sjg@chromium.org>
+ Fri, 06 Mar 2026 11:05:56 -0800 (PST)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Paul Kocialkowski <paulk@sys-base.io>, Chen-Yu Tsai <wens@kernel.org>,
+ Justin Klaassen <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/5] misc: fs_loader: reorg and split to FS and FW loader +
+ FIP loader
+Date: Fri,  6 Mar 2026 20:05:34 +0100
+Message-ID: <20260306190542.22920-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,65 +109,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
+This series mainly rework the FS loader to permit reading firmware from
+container that are not exactly a readable filesystem.
 
-Update the guidance for adding new tests to describe the subdirectory
-structure instead of the numbering scheme.
+One scenario is when a firmware is shipped in a FIP container as
+a generic blob with an UUID.
 
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
----
+FIP are mostly used on ARM in the context of ATF.
+In such context U-Boot is loaded as BL31 and the PHY firmware
+can't be stored in the FIT image for the kernel as U-Boot should
+not depend on the presence of the kernel to correctly enable PHY
+for Ethernet port.
 
-Changes in v2:
-- Fix awkward wording per Quentin's suggestion
-- Move file-reference updates to the patches that rename those files
-- Drop RFC prefix
-- Use literalinclude for nxp_imx8.dts example
+To handle such case the PHY firmware is stored in FIP with a
+predictable UUID.
 
- doc/develop/binman_tests.rst | 28 ++++++----------------------
- 1 file changed, 6 insertions(+), 22 deletions(-)
+One example is with Airoha 8811H firmware where the FIP can
+have a blob with UUID "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2".
+(generated from command "uuidgen -n @dns --md5 --name en8811h.bin")
 
-diff --git a/doc/develop/binman_tests.rst b/doc/develop/binman_tests.rst
-index 74a2d0e8ef2..40865912911 100644
---- a/doc/develop/binman_tests.rst
-+++ b/doc/develop/binman_tests.rst
-@@ -453,31 +453,15 @@ help with this, but your code will be different.
- 
- Generally you are adding a test because you are adding a new entry type
- ('etype'). So start by creating the shortest and simplest image-description you
--can, which contains the new etype. Put it in a numbered file in
--``tool/binman/test`` so that it comes last. All the numbers are unique and there
--are no gaps.
-+can, which contains the new etype. Put it under ``tools/binman/test`` in the
-+appropriate subdirectory (e.g. ``fit/`` for FIT image tests, ``vendor/`` for
-+vendor-specific tests, ``entry/`` for general entry types) with a descriptive
-+filename.
- 
- Example from ``tools/binman/test/vendor/nxp_imx8.dts``:
- 
--.. code-block:: devicetree
--
--    // SPDX-License-Identifier: GPL-2.0+
--
--    /dts-v1/;
--
--    / {
--        #address-cells = <1>;
--        #size-cells = <1>;
--
--        binman {
--            nxp-imx8mimage {
--                args;    /* TODO: Needed by mkimage etype superclass */
--                nxp,boot-from = "sd";
--                nxp,rom-version = <1>;
--                nxp,loader-address = <0x10>;
--            };
--        };
--    };
-+.. literalinclude:: ../../tools/binman/test/vendor/nxp_imx8.dts
-+   :language: devicetree
- 
- Note that you should use tabs in the file, not spaces. You can see that this has
- been cut down to the bare minimum, just enough to include the etype and the
+With these example DTS entry:
+
+fs_loader0: fip-loader {
+	bootph-all;
+	compatible = "u-boot,fip-loader";
+	phandlepart = <&mmc0 0>;
+	partoffset = <0x100>;
+};
+
+mdio {
+  en8811: ethernet-phy@f {
+    reg = <0xf>;
+    firmware-name = "d39d2cf2-9bd0-3ca7-93e9-e71b4f9250b2";
+    firmware-loader = <&fs_loader0>;
+  };
+};
+
+And PHY driver using the get_fw_loader_from_node() and the
+common request_firmware_into_buf() it's possible to
+load the PHY firmware transparently by just declaring
+the required entry in the DTS.
+
+get_fw_loader_from_node() is implemented to actual get the
+loader from DT. This was something that was already in mind
+from when the FS loader was implemented but then it was
+never implemented in favor of a single loader per device.
+
+The first patch is a minor fixup for something that probably
+won't ever happen.
+
+The second one is a good reworking of the FS and FW loader
+moving the internal struct to a dedicated header. (this is
+really to enforce what drivers should use and what
+driver should not mess with)
+
+Then there is the request_firmware_size() new OP to get only
+the size of the firmware. Useful for case where the firmware
+size is not always the same and change across different version.
+(the patter might be get size -> alloc buffer -> get firmware).
+
+Then the FIP loader as a basic parser of FIP. This only
+read the FIP header, loop all the entry and search for a
+matching UUID. If nothing is found then no firmware blob.
+Very simple implementation.
+
+This is being CI tested on [0]
+
+[0] https://github.com/u-boot/u-boot/pull/884
+
+Changes v2:
+- Better handle header include to fix compilation error
+  on some devices
+- Fix typo for for ubifs fix commit
+
+Christian Marangi (5):
+  misc: fs_loader: fix ubifs not unmounted on dev_get_priv error
+  misc: fs_loader: reorganize and split to FS and FW loader
+  misc: fw_loader: implement generic get_fw_loader_from_node()
+  misc: fw_loader: introduce FIP loader driver
+  misc: fw_loader: implement request_firmware_size() OP
+
+ drivers/misc/Kconfig                     |  16 +
+ drivers/misc/Makefile                    |   2 +-
+ drivers/misc/fw_loader/Makefile          |   5 +
+ drivers/misc/fw_loader/fip_loader.c      | 610 +++++++++++++++++++++++
+ drivers/misc/{ => fw_loader}/fs_loader.c | 180 +++----
+ drivers/misc/fw_loader/fw_loader.c       | 184 +++++++
+ drivers/misc/fw_loader/internal.h        |  63 +++
+ include/dm/uclass-id.h                   |   3 +-
+ include/fs_loader.h                      |  47 +-
+ include/fw_loader.h                      |  43 ++
+ 10 files changed, 982 insertions(+), 171 deletions(-)
+ create mode 100644 drivers/misc/fw_loader/Makefile
+ create mode 100644 drivers/misc/fw_loader/fip_loader.c
+ rename drivers/misc/{ => fw_loader}/fs_loader.c (62%)
+ create mode 100644 drivers/misc/fw_loader/fw_loader.c
+ create mode 100644 drivers/misc/fw_loader/internal.h
+
 -- 
-2.43.0
+2.51.0
 
