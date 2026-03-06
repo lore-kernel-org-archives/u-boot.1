@@ -4,130 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F63AF0182B
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 12:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59182F0182F
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 12:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD769838BB;
-	Fri,  6 Mar 2026 13:02:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 77372838BB;
+	Fri,  6 Mar 2026 13:20:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uYbOE56Y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lHCDDFyt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72959839A8; Fri,  6 Mar 2026 13:02:47 +0100 (CET)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1BA72839A8; Fri,  6 Mar 2026 13:20:45 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A165A836D3
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 13:02:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 316F6836D3
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 13:20:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ofS8BHMp1EnLWhIPGpisLHKYy+QsL48CKLAeTfPTZOCgZF2x0ykZ+WvXTTj8byOi4m3SH0DD8+N59BwQKUvIX8y8d6NDi3bCnRwUTL06jpZFeJ4zxx2tpZBXion4zpFK1ggdmJNMy/OdhhtmgqPatSLSLEJim/SnKK3ykmaIUDYCyreBoIfv75/cARUFofz0rwcRtzEz6I9IRLeQt+vra2vE9YOmnSxbXRX2MWsgZzlsuj+yS4xZDHmjMvgDpDn6MWJNf7Snj4tQy6jk91nalofZVkYN5pDUTut7unkAZQeo0DDN5Ql5jQy8mSoDdvJ1pQUrTxYNoIDgUFkkAbJixQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+Aktkd2TMWpuJxExyQ8I4ab0VOmUhYOJ1GwNvBKRkVU=;
- b=h9sgJAO0LfRrsNFLdWxGH922yPcC3gkv632YYdWUO435nXqDOcnIGRyRB+uZyDnXncMj38K4dhi4y0ZanRR1PX/Ne9sn0go7trVjku46j6BNG+890Ng9XTWZU2EZihJ2/RhqFXxAlvudOjBq6qlg3FPQtlI6fBd2kt79v37J6ur0SmfVuU9QOG7nE68kV5HoeRJfy34b9jOr/iuTrhpIwM/GFsTqQPSypXyo7WE9M1+TT76lBVFk7U+LKPEmU/Z2ySvt3BVvHqniEOVN9nxm7zBiaipsGzXGt+60ueTCTeD4wmtm+KAfocDI71aMZ45KDL56wUbwmLxEBXjdUxpPAQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+Aktkd2TMWpuJxExyQ8I4ab0VOmUhYOJ1GwNvBKRkVU=;
- b=uYbOE56YxlhPmSWJYs9pe7u02ds7WqfCmWLk7Wvr3pky9oKNtObg9jWDmhhOxshD6RC9tqdyyknfcNctXTNAq/2r57v5CQtN0gmsabNX+IEuWHoJK86GJ/GB2dpxu8zDnDUPSln/Fj6IVyp9fx4lSJ6f/Ze0UJ6Rm99wb9Xn/qI=
-Received: from CYXPR02CA0067.namprd02.prod.outlook.com (2603:10b6:930:cd::18)
- by CY8PR10MB7244.namprd10.prod.outlook.com (2603:10b6:930:6c::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.17; Fri, 6 Mar
- 2026 12:02:41 +0000
-Received: from CY4PEPF0000EE36.namprd05.prod.outlook.com
- (2603:10b6:930:cd:cafe::e9) by CYXPR02CA0067.outlook.office365.com
- (2603:10b6:930:cd::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.19 via Frontend Transport; Fri,
- 6 Mar 2026 12:02:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CY4PEPF0000EE36.mail.protection.outlook.com (10.167.242.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Fri, 6 Mar 2026 12:02:40 +0000
-Received: from DLEE215.ent.ti.com (157.170.170.118) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Mar
- 2026 06:02:40 -0600
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 6 Mar
- 2026 06:02:40 -0600
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 6 Mar 2026 06:02:40 -0600
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 626C2d5P3766414;
- Fri, 6 Mar 2026 06:02:39 -0600
-From: Anshul Dalal <anshuld@ti.com>
-Date: Fri, 6 Mar 2026 17:32:37 +0530
-Subject: [PATCH next] include: env: ti: move board specific scripts out of
- ti_common
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4838c15e3cbso83912865e9.3
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 04:20:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1772799642; x=1773404442; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KyYhBbwPj0kc5IOht8mbDPOAxWpBjLk6+yLmjI51lBs=;
+ b=lHCDDFythbLXq+OkzDjmB6cYdmcLnhYsP2HfQS/BhXhP2R52HYFKctqkCVgzJDEua/
+ WNvc1/WMZf5JePYW+Q7RRLLBLK/5/IDNxPxvsCwh3JgkQ7CT67P8UPJKIeMnDavS/22u
+ KkMmcF74/cJngw+SbWCS8JvUVRmXHuLmB8RxFVX78Tn8672YsuzOrjowmgxXl02WEWXb
+ rFqLJ5pdtsIDXn2KwQ5GPGpwFhwLgaevBA0gyT11n/5GA3iHIkEPNQADABYP+NnPl+tc
+ FHoSYQtQ4Sl/y7En8UX2e/jV4wUOdU6TQ+6SX3F/55jyvCy8zXuIZXKYYt3LyN7YxFbb
+ V42Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772799642; x=1773404442;
+ h=content-transfer-encoding:in-reply-to:content-language:from
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KyYhBbwPj0kc5IOht8mbDPOAxWpBjLk6+yLmjI51lBs=;
+ b=gpMNcNpqUsYloSYIfpR1FZWy1gFjNf4tigXzHOqzMoIg4ySv4D4Gtcy4SHQXcIYHDk
+ YyH5baQ8ge/eqUu8vD7ObQ6CLKckRvEhM+ldORu/mTNbQbhLIzpJI5/VQ/BGF4eN9d8K
+ 1aJ1FEv3WNOrzfKghOClqTvulMbJYz4XTTZhbhPTR+fJq5XXjXF2vgPnjOUsyIT0vl/b
+ ZVhIgW/kXb735j7EdzhIxxWXgJ5NeQlrvEgNys+0Pa+bkqmUW0nfDFH45/5iwC12qOom
+ aIKkB5Qul0nd1baIyMAWstmYxWEaozkHP9sYxvf5oiygGKUTWs/SzJOH8kt87tZppzXI
+ 62IQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjI4x3ljmP29EZqsAiRVNYHa8ME6XSYXWSQLsJMgmAMWQAiTYydnkd3wCj27wKf8yT9JkZbJg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyI6p6zvAgJyEGRXM9j/lm2PFet0rNhXHMdt5zR1xx1Puw2QdB7
+ V+z/wTYIyTdkuQ6wFANJTYUVba4qhGsj8y8L6xFxRoegN0Z0mLqOw0gP5bHhGQ==
+X-Gm-Gg: ATEYQzwoCyFuVsZeKsC5JjSlAvYXtiI9BnP4izHoud6jTEgKxjPEFW19lzx6dgPXFy2
+ HKFlWR/CSQGuvYVX1INEWkYk39f+frHhTQw0YEkSXsYoQiayu1njTtgRgcdCMxX6QNLhzbwmhSb
+ nMK8qZ9piMw+DKMLB4bCybQjEFfPrsW85JSQZF5Q7bWQ5KivSXPEoIO8BkWWhLuJJK9sxrVB2xi
+ frOiHmykn751CSWI4kHbESngBV/FSlHDz0RNKI5+hZRYsLS6sFIPg6cqx0FgEy71L14K3cuJ+ug
+ PbCghMniVWnrB5yKyzKGZ5ivMrjEKnankzpWlJv+oWLJNcFaT6Yxy2Ey5rjOOkY6z1ZKS/Ygbb0
+ OdiquPUHx2DXYfxBwRW3MDE2tbOAgU54nnXr2WJUOAWkTf4+dWADE1zv7bIFja0S+AFizaL1zus
+ IKqX3Lz6k9gRE0PtpVUfXFB7Kzf1J+ZJHpe64eKpA+II8Z2kAo/XubkUeK4IPc+0mQqr+JBwyln
+ 0k=
+X-Received: by 2002:a05:600c:1991:b0:479:35e7:a0e3 with SMTP id
+ 5b1f17b1804b1-48526977699mr30102875e9.30.1772799642344; 
+ Fri, 06 Mar 2026 04:20:42 -0800 (PST)
+Received: from ?IPV6:2001:9e8:9a:2e10:8e6b:a3e7:bb3f:2f93?
+ ([2001:9e8:9a:2e10:8e6b:a3e7:bb3f:2f93])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4851fb3668csm195166005e9.13.2026.03.06.04.20.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Mar 2026 04:20:41 -0800 (PST)
+Message-ID: <2a396f16-b03a-4a6f-9594-e0129859c277@gmail.com>
+Date: Fri, 6 Mar 2026 13:20:40 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 11/17] mips: Call bootm_final()
+To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>
+References: <20260306023638.2678886-1-sjg@chromium.org>
+ <20260306023638.2678886-12-sjg@chromium.org>
+From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20260306023638.2678886-12-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20260306-board_init_env_introduce-v1-1-22220dddfa47@ti.com>
-X-B4-Tracking: v=1; b=H4sIAFzCqmkC/x2MwQrCMBAFf6Xs2UDaSAV/RaSs2afuZSObWAql/
- 27wNnOY2anCFZWuw06OVasW6zKeBspvtheCSnea4jTHFOfwKOyyqGlbYGuH5kW+GSEJX5DPPLI
- k6vnH8dTtv76RYWt0P44ftcl3sXAAAAA=
-X-Change-ID: 20260306-board_init_env_introduce-3da7ec4a1ad3
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, "Beleswar
- Padhi" <b-padhi@ti.com>, Bryan Brattlof <bb@ti.com>, Anshul Dalal
- <anshuld@ti.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1772798558; l=2782;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=X1P92T+0AeHPUpn+F6Rk412KYWHmxrw8CARQnt6cdJs=;
- b=oLK0r1eFRAPSTMmlqCDOhuGtotCMY8TyZEJXpHZ/6Y509g2ZPnLl2D0vfbNjAKMrcxYFN5K5y
- 9iFXPe1IbKYDhg8sngInRjJMv1bwi7wozMFcE521WJ1M/r0311l7s6H
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE36:EE_|CY8PR10MB7244:EE_
-X-MS-Office365-Filtering-Correlation-Id: 344472c0-da31-4a9e-f2d9-08de7b78447f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|34020700016|82310400026|36860700016|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: 2aOYy9i900xYy/x2lYzfndoPBL51oKzWFYmaDIm4ZcmoXoQ6XVQ215NUtF7ft+dzZsk6p0N3VWJ/lA/EutTJfBnX7rb2lWOskkXFsmRM5b6Fi1bwIkzIBLqRc2p7BjkRZV/h127aiQWnh5i0zdVHSep5ArqWexlImPPrkfUCvK9fHw3NKSczmM/+kAtwMvuVynixD6UuH2FTDE7a+9dV9u2YxrNz5PoT6NCbN49BK1ha6IqOY2aOYRrncOaBBYOXFD4xkayjBRDYedMqGJq69qzHzapZEYd+rIoWoIJ8q1Y0rLYoGghUPIjgPPlLLTl35WlPh9WmKHuUQACJwpABLe2yu8qBp8xM38CJP2mK+CKjNPt3exaCA715CagdjZupu/WIYVP7hMYDCZFuXdx/l2SL2xM+V88IpZG26wEnxwKhPEGn80ZLicv7fnV8vbDeVuyFJyAjJLzx7de4OmaC6I0pheG5EPfOCwF3H9snC3J+D9K7u+Td91hgOMiqfLeKhSN9HTYadvY2Xl0JXmMasgNddl+9fHr6PMxk0ueICjLMTTvLNAG0CLdVb9yrPywhuzPta7UJw96QSywQAhB2KTLx/cR5djzbpjxIv6iDCXdGwQvlrPddz68a9ba+WxKanL+v81R+QhTTOtMOZBRXntMcX5XsxbjQnY6nbIkBwmzYAQ/THXLxop8U8phGit3TE8OT/nz0P/QH7aEKBvQsUYCQhBZHGyTx1OgDmEJsHAo+Tu2yHOJ37Njgyf0jlygXqX4THj3cmVkvhcB0aW6aeQ==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(34020700016)(82310400026)(36860700016)(376014)(1800799024);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: lVilbhVbZmjQidTXGduf2oYFLWxNbp6RpzzgfDTDAZsKFu7AqAdD2pMpMmV2aTYYgstEgTFVCJ0hTfA7eUuyNzHkKR7zr+m/fXvWyB/jSs5+A4YDYvEneQuGNLb7X1akzmfWXoSCKl20FZISJ/eei5HjDRiV2M0zRl59zwPcBWZMAg3AX/rgE6H6G9P5euN+dxDfLSoXn7vqJCnYgWr/e+Z8LQFqdZNiwXl0SIyF6DYtBxYZW9uvG+5rX2Mx5SDTQdlIN0lFeA5rnV7t+PKY2RKlI5rMP3F7EIga6B/Y6qfs9tGjXiL7hxy0ED38FGxAmmKBVOl9cCChgW2LjW+YPQnv51WTsbK5MnUnn7Hh/Ihs22zbnKf0D/dgfgfQ25tjU1ffYQkTmxdL5ri0P3q+nkdyB4hMjd25BbDNxjNHnUHrV5+oBWqEWtXcZIT08qQx
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2026 12:02:40.7922 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 344472c0-da31-4a9e-f2d9-08de7b78447f
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE36.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB7244
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,79 +105,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-bootcmd_ti_mmc had cpsw0_qsgmii_phyinit related scripts even though this
-was only relevant for the j721e/j7200 SoCs. This patch instead factors
-out those scripts into a generic 'board_init' which is called as part of
-bootcmd_ti_mmc.
 
-This allows boards to more easily add custom behaviour to the ti_mmc
-bootflow instead of having to modify the ti_common.env file.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- board/ti/j7200/j7200.env     | 8 ++++++++
- board/ti/j721e/j721e.env     | 8 ++++++++
- include/env/ti/ti_common.env | 8 +++-----
- 3 files changed, 19 insertions(+), 5 deletions(-)
+On 3/6/26 03:36, Simon Glass wrote:
+> From: Simon Glass <simon.glass@canonical.com>
+> 
+> Replace the open-coded bootstage_fdt_add_report() and
+> bootstage_report() with a call to bootm_final(). This also adds the
+> "Starting kernel" message, board_quiesce_devices() and
+> dm_remove_devices_active() which were not previously called on MIPS.
+> 
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+> 
+> ---
+> 
+> (no changes since v3)
+> 
+> Changes in v3:
+> - Add new patch for MIPS conversion
+> 
+>   arch/mips/lib/bootm.c | 7 +------
+>   1 file changed, 1 insertion(+), 6 deletions(-)
+> 
 
-diff --git a/board/ti/j7200/j7200.env b/board/ti/j7200/j7200.env
-index e22a954d8db..7bb63825c52 100644
---- a/board/ti/j7200/j7200.env
-+++ b/board/ti/j7200/j7200.env
-@@ -37,3 +37,11 @@ main_cpsw0_qsgmii_phyinit=
- #if CONFIG_TARGET_J7200_A72_EVM
- rproc_fw_binaries= 1 /lib/firmware/j7200-mcu-r5f0_1-fw 2 /lib/firmware/j7200-main-r5f0_0-fw 3 /lib/firmware/j7200-main-r5f0_1-fw
- #endif
-+
-+#if CONFIG_CMD_REMOTEPROC
-+board_init=
-+	if env exists do_main_cpsw0_qsgmii_phyinit;
-+		then run main_cpsw0_qsgmii_phyinit;
-+	fi;
-+	run boot_rprocs;
-+#endif
-diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
-index 34f5f63d60a..9ecf7bfabde 100644
---- a/board/ti/j721e/j721e.env
-+++ b/board/ti/j721e/j721e.env
-@@ -37,3 +37,11 @@ main_cpsw0_qsgmii_phyinit=
- #if CONFIG_TARGET_J721E_A72_EVM
- rproc_fw_binaries= 1 /lib/firmware/j7-mcu-r5f0_1-fw 2 /lib/firmware/j7-main-r5f0_0-fw 3 /lib/firmware/j7-main-r5f0_1-fw 4 /lib/firmware/j7-main-r5f1_0-fw 5 /lib/firmware/j7-main-r5f1_1-fw 6 /lib/firmware/j7-c66_0-fw 7 /lib/firmware/j7-c66_1-fw 8 /lib/firmware/j7-c71_0-fw
- #endif
-+
-+#if CONFIG_CMD_REMOTEPROC
-+board_init=
-+	if env exists do_main_cpsw0_qsgmii_phyinit;
-+		then run main_cpsw0_qsgmii_phyinit;
-+	fi;
-+	run boot_rprocs;
-+#endif
-diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
-index a0ed83f52ac..62b93eb25c4 100644
---- a/include/env/ti/ti_common.env
-+++ b/include/env/ti/ti_common.env
-@@ -24,12 +24,10 @@ get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
- run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
- bootcmd_ti_mmc=
- 	run init_${boot};
--#if CONFIG_CMD_REMOTEPROC
--	if env exists do_main_cpsw0_qsgmii_phyinit;
--		then run main_cpsw0_qsgmii_phyinit;
-+	if test -n ${board_init}; then
-+		echo Running board_init ...;
-+		run board_init;
- 	fi;
--	run boot_rprocs;
--#endif
- 	if test ${boot_fit} -eq 1;
- 		then run get_fit_${boot}; run get_fit_overlaystring; run run_fit;
- 	else;
+Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
 
----
-base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
-change-id: 20260306-board_init_env_introduce-3da7ec4a1ad3
-
-Best regards,
 -- 
-Anshul Dalal <anshuld@ti.com>
+- Daniel
 
