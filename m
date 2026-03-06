@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E666FCC055
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B735FCC050
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:16:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 408D284068;
-	Fri,  6 Mar 2026 19:14:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 831498404A;
+	Fri,  6 Mar 2026 19:14:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IAsA5oM6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aMzweBsT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37F2984067; Fri,  6 Mar 2026 19:14:18 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 8E63A8404A; Fri,  6 Mar 2026 19:14:20 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA7818401A
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:14:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F41D8401A
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:14:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-8cd767d2d70so4786985a.3
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:14:15 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-8cd75abd09dso18498485a.0
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:14:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772820854; x=1773425654; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772820857; x=1773425657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T54+6IIkF3Oxy41ODbMVjmE2DIPJ3EYVV1g6uvRhf+U=;
- b=IAsA5oM6duxEoTZx4Znt4e1dnYlcTsp1+1Tnlds6JCWVSkdgToVN0+qytYkfabjPhR
- tqKMplwtvpWq+e17LitUVlkTSMGyyZXQuKnkEe/AY1t7tnZk0RGQGUJIn3EBRJKWR0ST
- kyG8j/L/ohfpuQcbDk1UYXvkN9N3ie788JX64=
+ bh=ydmNE+6dEBPZqSZVUsUndXRqv3iG1hBQkQxuJtm9Rh4=;
+ b=aMzweBsTyYLJtjMBBDSfVcB9JxuYJAV+PCMhJqivl7fe9ZCNxtFSI1H1iUCvczW7K0
+ qALzeL8++ZQ/eNQpW6WmgEZEr0WMjkMwvuUT5zaONrEgMJI5ZVIYxFdFTeFPse2+QULR
+ xtSDeYT0FfmQxwMv6G77y7k6qYek3SuIkqp1U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772820854; x=1773425654;
+ d=1e100.net; s=20230601; t=1772820857; x=1773425657;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=T54+6IIkF3Oxy41ODbMVjmE2DIPJ3EYVV1g6uvRhf+U=;
- b=g3CYGIfT8rqUoyzN+4dLTeXHyeMT59IHs11l1QP6pyXR/McdWmqOovk4C6m8fcPirt
- rvI96nxrHNoTJe4/PyU750hxITbh/Q64uXga0TrKKAlsti5nSDXwPUkeXRGl3r7tY7RL
- xf0qp3DwNlxCQTHbfe4BJxjgM5uU7Q9ptlc5qT8hgx0SDTVtw4Hm8ZFD3Bcs3lgjqJw/
- adU3Kg7wybeXkhgXChFPhOqnI4DEQfm9RL22/egN9yTOMKbyCnFuC+DwGFhVDR1Isyfk
- oHEiLBwp6Q6wUAqfLoGh/gupUIWmeh1XowkhcYqRmYnLBTkRl55BT4ovxBwkGq+d0SHc
- GNsw==
-X-Gm-Message-State: AOJu0YzuTjyPUgkRz7cnUQ/jP9C8u8x/+fBNH5V9+Ebnl7q9YduMViLA
- G5DMaRQlCnkp9dITkZX5uq6UHZaO3dbVB6l5+44DwPLnS7suXRqR8UxUwDnhQT6AK8yg5JCgYpo
- rgdA=
-X-Gm-Gg: ATEYQzwA/ne8vTnqie+HRW2DA7vujzfjXTJxUtPzR0ggDPJ2DavhcHN3hgtdX/a7QP7
- 28Oyxr7IO0r3AFminWxFiBTeNB2q/T3M0FOcVqTdfepyLsDHy3S+TK3JrFi5QGXheOuvudpxBz6
- VqDzqW+nSaWGWSxrUZSViC9vHZ7MwDBTI6bvAQnj7cKSMbTgsfkVCgbII4EYv1RkFq3knuM0DdR
- ZCeMN2GOO++G10R9tE6FMpvuZ2dLm6CaYjbhoPw33KaofPaXa//nulGgj0jbDSuuYjBCIW0TyQg
- HcZeJJ4lOQ4drutS+Ie05aXsqWtVhaN6Ao90tGutAB1Y4Nw+hcLojJYDfxJWuIloPSzjZVJBt6q
- 7dWYhG+1ifL+K9SrVBdcZ96CypkAbvmHqpl9Oe2ZnZTl8UR+Dz7WhD7OcyVJgUaFPmraeI2bl2R
- bOWlWgSUKevgyxpYF++w==
-X-Received: by 2002:a05:620a:290e:b0:8cb:d9a2:1347 with SMTP id
- af79cd13be357-8cd6d464c4amr380992485a.57.1772820854230; 
- Fri, 06 Mar 2026 10:14:14 -0800 (PST)
+ bh=ydmNE+6dEBPZqSZVUsUndXRqv3iG1hBQkQxuJtm9Rh4=;
+ b=SPFdjHY32y1uI1gGgaG6GCDnbjr5YQyuK0rZDq5kRHepEP3S+eJrWUAuPHJG0iyq13
+ 6KOKVH5rs4D+wYgKlGwSct0IW2+QSeVEa1U5HJJ0pmB6Ozhw6G49Hdbs97IEaEBzcJg5
+ GuEVKtHt9aWuT6FfxvyKv77C1vLwIEzG5KTlbqC1OzB0dSNNvBU8RoDH3103J+AF5OvI
+ 4IPZqEZOyCvZDVUjhWY6tYaDow/Jc53uu8rnvDqehHcnrBEFLxY/OqkqiiohvYj79wcY
+ ZeSD1n/q3sLCNVbYucothteoaVHp5rciyrPmM4A5PjTaMXZJVJt2/E/kjRiFENSQe1tX
+ AU3g==
+X-Gm-Message-State: AOJu0YwLFtoYUJuBgZTJ4Vyt1OSmB5SPQEqd6S/K3O1iapfspa+43cji
+ JkUz/mS9fP35EulXFY+ec2l3Iyi7F/jQY6kkr5hHAZXjXNxear1zjJImAXbigERWq8Byu9uIqtW
+ 3Eog=
+X-Gm-Gg: ATEYQzygP0pjOw04XP1sKqKcB+IZO0xy0mM+aNveWDFjM2bnpfdwD+Kv/eBG0xCTA7h
+ h49m3xJ5MRsT8X60mVW5tXZjasCz/NakAcSUuTn1q7C2WC82OV27nV3iv6Ku7aepESxlHqByQEl
+ jxHz7UaNp1cXFnYGNrsAxBz1+iCUWVC6XE2GxUCc1npFPd470GFFT6AInEGKxEoOCioq1/sZDZC
+ mM5HLdzrsApQ2sCh6jBO5QzW5Qp5NWSdmfD1h3oORpuz2uF/x5dl598kxIo8Hssy4kC8Zc8uLOZ
+ f3eCxjtP+Bsug89wjljDcKJ9ZjxQVJ5rB4gCq3ZpMbDzvfW1pvI6/c0qfoSi9OC/1eGwqig+SAB
+ 89LN+UQ81K7JzxrrjmRM3EGN6ab9xZhmoEa10JfmWjemTRyENWuiv6qR5bWiRPcQ+NWuA43R3cp
+ QLil3ahVul8TgmgN5Baw==
+X-Received: by 2002:a05:620a:254e:b0:85c:bb2:ad9c with SMTP id
+ af79cd13be357-8cd6d4b4ee3mr404013585a.53.1772820856626; 
+ Fri, 06 Mar 2026 10:14:16 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.14.12
+ af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.14.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 10:14:13 -0800 (PST)
+ Fri, 06 Mar 2026 10:14:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Simon Glass <simon.glass@canonical.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v2 18/23] binman: test: Move FIT signing test data to test/fit/
-Date: Fri,  6 Mar 2026 11:12:46 -0700
-Message-ID: <20260306181304.2426352-19-sjg@chromium.org>
+Subject: [PATCH v2 19/23] binman: test: Move shared key files to test/security/
+Date: Fri,  6 Mar 2026 11:12:47 -0700
+Message-ID: <20260306181304.2426352-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306181304.2426352-1-sjg@chromium.org>
 References: <20260306181304.2426352-1-sjg@chromium.org>
@@ -103,158 +102,167 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move the signing-related test data (keys, certificates, OpenSSL and
-SoftHSM2 configuration, dummy engine source) into the fit/ subdirectory
-alongside the FIT DTS test files. Drop the 340_ prefix from files that
-had it. Update the Makefile and all ftest.py references.
+Move key.key and key.pem into the security/ subdirectory. These are
+used by security, vendor, and capsule tests but security is the most
+natural home for key material. Update all references.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
 Changes in v2:
-- Add new patch to move FIT signing test data
+- Add new patch to move shared key files
 
- tools/binman/ftest.py                         |  20 +++++++++---------
- tools/binman/test/Makefile                    |   2 +-
- tools/binman/test/{ => fit}/aes256.bin        | Bin
- .../binman/test/{ => fit}/dummy-rsa-engine.c  |   0
- .../dummy-rsa4096.crt}                        |   0
- .../{340_openssl.conf => fit/openssl.conf}    |   0
- .../test/{340_rsa2048.key => fit/rsa2048.key} |   0
- .../{340_softhsm2.conf => fit/softhsm2.conf}  |   0
- 8 files changed, 11 insertions(+), 11 deletions(-)
- rename tools/binman/test/{ => fit}/aes256.bin (100%)
- rename tools/binman/test/{ => fit}/dummy-rsa-engine.c (100%)
- rename tools/binman/test/{340_dummy-rsa4096.crt => fit/dummy-rsa4096.crt} (100%)
- rename tools/binman/test/{340_openssl.conf => fit/openssl.conf} (100%)
- rename tools/binman/test/{340_rsa2048.key => fit/rsa2048.key} (100%)
- rename tools/binman/test/{340_softhsm2.conf => fit/softhsm2.conf} (100%)
+ tools/binman/ftest.py                    | 32 ++++++++++++------------
+ tools/binman/test/{ => security}/key.key |  0
+ tools/binman/test/{ => security}/key.pem |  0
+ 3 files changed, 16 insertions(+), 16 deletions(-)
+ rename tools/binman/test/{ => security}/key.key (100%)
+ rename tools/binman/test/{ => security}/key.pem (100%)
 
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 601d1f7eb8c..76d17e6d986 100644
+index 76d17e6d986..612237d0b41 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -7927,7 +7927,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             'default-dt': 'test-fdt1',
-             'atf-bl31-path': 'bl31.elf',
+@@ -6859,7 +6859,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testX509Cert(self):
+         """Test creating an X509 certificate"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
          }
--        data = tools.read_file(self.TestFile("340_rsa2048.key"))
-+        data = tools.read_file(self.TestFile("fit/rsa2048.key"))
-         self._MakeInputFile("keys/rsa2048.key", data)
+@@ -6872,7 +6872,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
-@@ -7964,7 +7964,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             'atf-bl31-path': 'bl31.elf',
+     def testX509CertMissing(self):
+         """Test that binman still produces an image if openssl is missing"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': 'keyfile',
          }
+@@ -7198,7 +7198,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
--        x509_pubkey = '340_dummy-rsa4096.crt'
-+        x509_pubkey = 'fit/dummy-rsa4096.crt'
-         data = tools.read_file(self.TestFile(x509_pubkey))
-         self._MakeInputFile('dev.crt', data)
- 
-@@ -8039,7 +8039,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-         prefix = "testFitSignPKCS11Simple."
-         # Configure SoftHSMv2
--        data = tools.read_file(self.TestFile('340_softhsm2.conf'))
-+        data = tools.read_file(self.TestFile('fit/softhsm2.conf'))
-         softhsm2_conf = self._MakeInputFile(f'{prefix}softhsm2.conf', data)
-         softhsm2_tokens_dir = self._MakeInputDir(f'{prefix}softhsm2.tokens')
- 
-@@ -8070,7 +8070,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
- 
-         # Make OpenSSL use softhsm2 engine
--        ossl_conf = self.TestFile('340_openssl.conf')
-+        ossl_conf = self.TestFile('fit/openssl.conf')
-         with unittest.mock.patch.dict('os.environ',
-                                       {'OPENSSL_CONF': ossl_conf,
-                                        'SOFTHSM2_CONF': softhsm2_conf}):
-@@ -8114,7 +8114,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-         prefix = "testFitSignPKCS11Object."
-         # Configure SoftHSMv2
--        data = tools.read_file(self.TestFile('340_softhsm2.conf'))
-+        data = tools.read_file(self.TestFile('fit/softhsm2.conf'))
-         softhsm2_conf = self._MakeInputFile(f'{prefix}softhsm2.conf', data)
-         softhsm2_tokens_dir = self._MakeInputDir(f'{prefix}softhsm2.tokens')
- 
-@@ -8147,7 +8147,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         # Make OpenSSL use softhsm2 engine and configure PIN for token
-         # The PIN is incorrect on purpose, the correct one will be passed by
-         # MKIMAGE_SIGN_PIN
--        ossl_conf = self.TestFile('340_openssl.conf')
-+        ossl_conf = self.TestFile('fit/openssl.conf')
-         with unittest.mock.patch.dict('os.environ',
-                                       {'OPENSSL_CONF': ossl_conf,
-                                        'SOFTHSM2_CONF': softhsm2_conf,
-@@ -8204,9 +8204,9 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             'default-dt': 'test-fdt1',
-             'atf-bl31-path': 'bl31.elf',
+     def testPackTiSecure(self):
+         """Test that an image with a TI secured binary can be created"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
          }
--        data = tools.read_file(self.TestFile("340_rsa2048.key"))
-+        data = tools.read_file(self.TestFile("fit/rsa2048.key"))
-         self._MakeInputFile("keys1/rsa2048.key", data)
--        data = tools.read_file(self.TestFile("340_rsa2048.key"))
-+        data = tools.read_file(self.TestFile("fit/rsa2048.key"))
-         self._MakeInputFile("keys2/conf-rsa2048.key", data)
+@@ -7208,7 +7208,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         test_subdir = os.path.join(self._indir, TEST_FDT_SUBDIR)
-@@ -8257,7 +8257,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testPackTiSecureFirewall(self):
+         """Test that an image with a TI secured binary can be created"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
+         }
+@@ -7220,7 +7220,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-     def testSimpleFitEncryptedData(self):
-         """Test an image with a FIT containing data to be encrypted"""
--        data = tools.read_file(self.TestFile("aes256.bin"))
-+        data = tools.read_file(self.TestFile("fit/aes256.bin"))
-         self._MakeInputFile("keys/aes256.bin", data)
+     def testPackTiSecureFirewallMissingProperty(self):
+         """Test that an image with a TI secured binary can be created"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
+         }
+@@ -7232,7 +7232,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testPackTiSecureMissingTool(self):
+         """Test that an image with a TI secured binary (non-functional) can be created
+         when openssl is missing"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
+         }
+@@ -7245,7 +7245,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         keys_subdir = os.path.join(self._indir, "keys")
-@@ -8277,7 +8277,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testPackTiSecureROM(self):
+         """Test that a ROM image with a TI secured binary can be created"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
+         }
+@@ -7261,7 +7261,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         # Retrieve the key name from the FIT removing any null byte
-         key_name = fit.GetProps(subnode)['key-name-hint'].bytes.replace(b'\x00', b'')
--        with open(self.TestFile(key_name.decode('ascii') + '.bin'), 'rb') as file:
-+        with open(self.TestFile('fit/' + key_name.decode('ascii') + '.bin'), 'rb') as file:
-             key = file.read()
-         iv = fit.GetProps(subnode)['iv'].bytes.hex()
-         enc_data = fit.GetProps(node)['data'].bytes
-diff --git a/tools/binman/test/Makefile b/tools/binman/test/Makefile
-index d5e4c0f556a..6b42db6559f 100644
---- a/tools/binman/test/Makefile
-+++ b/tools/binman/test/Makefile
-@@ -85,7 +85,7 @@ blob_syms: blob_syms.c
- elf_sections: CFLAGS += $(LDS_EFL_SECTIONS)
- elf_sections: elf_sections.c
+     def testPackTiSecureROMCombined(self):
+         """Test that a ROM image with a TI secured binary can be created"""
+-        keyfile = self.TestFile('key.key')
++        keyfile = self.TestFile('security/key.key')
+         entry_args = {
+             'keyfile': keyfile,
+         }
+@@ -7331,7 +7331,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
--dummy-rsa-engine.so: dummy-rsa-engine.c
-+dummy-rsa-engine.so: $(SRC)fit/dummy-rsa-engine.c
- 	$(CC) -fPIC -shared -lcrypto -lssl -o $@ $<
+     def testSplPubkeyDtb(self):
+         """Test u_boot_spl_pubkey_dtb etype"""
+-        data = tools.read_file(self.TestFile("key.pem"))
++        data = tools.read_file(self.TestFile("security/key.pem"))
+         self._MakeInputFile("key.crt", data)
+         self._DoReadFileRealDtb('security/spl_pubkey_dtb.dts')
+         image = control.images['image']
+@@ -7353,7 +7353,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test xilinx-bootgen etype"""
+         bootgen = bintool.Bintool.create('bootgen')
+         self._CheckBintool(bootgen)
+-        data = tools.read_file(self.TestFile("key.key"))
++        data = tools.read_file(self.TestFile("security/key.key"))
+         self._MakeInputFile("psk.pem", data)
+         self._MakeInputFile("ssk.pem", data)
+         self._SetupPmuFwlElf()
+@@ -7382,7 +7382,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         """Test xilinx-bootgen etype"""
+         bootgen = bintool.Bintool.create('bootgen')
+         self._CheckBintool(bootgen)
+-        data = tools.read_file(self.TestFile("key.key"))
++        data = tools.read_file(self.TestFile("security/key.key"))
+         self._MakeInputFile("psk.pem", data)
+         self._MakeInputFile("ssk.pem", data)
+         self._SetupPmuFwlElf()
+@@ -7414,7 +7414,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
- clean:
-diff --git a/tools/binman/test/aes256.bin b/tools/binman/test/fit/aes256.bin
+     def testXilinxBootgenMissing(self):
+         """Test that binman still produces an image if bootgen is missing"""
+-        data = tools.read_file(self.TestFile("key.key"))
++        data = tools.read_file(self.TestFile("security/key.key"))
+         self._MakeInputFile("psk.pem", data)
+         self._MakeInputFile("ssk.pem", data)
+         self._SetupPmuFwlElf()
+@@ -7523,9 +7523,9 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testSignedCapsuleGen(self):
+         """Test generation of EFI capsule"""
+-        data = tools.read_file(self.TestFile("key.key"))
++        data = tools.read_file(self.TestFile("security/key.key"))
+         self._MakeInputFile("key.key", data)
+-        data = tools.read_file(self.TestFile("key.pem"))
++        data = tools.read_file(self.TestFile("security/key.pem"))
+         self._MakeInputFile("key.crt", data)
+ 
+         data = self._DoReadFile('capsule/signed.dts')
+@@ -7540,9 +7540,9 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testCapsuleGenSignedVer(self):
+         """Test generation of signed EFI capsule with version information"""
+-        data = tools.read_file(self.TestFile("key.key"))
++        data = tools.read_file(self.TestFile("security/key.key"))
+         self._MakeInputFile("key.key", data)
+-        data = tools.read_file(self.TestFile("key.pem"))
++        data = tools.read_file(self.TestFile("security/key.pem"))
+         self._MakeInputFile("key.crt", data)
+ 
+         data = self._DoReadFile('capsule/signed_ver.dts')
+diff --git a/tools/binman/test/key.key b/tools/binman/test/security/key.key
 similarity index 100%
-rename from tools/binman/test/aes256.bin
-rename to tools/binman/test/fit/aes256.bin
-diff --git a/tools/binman/test/dummy-rsa-engine.c b/tools/binman/test/fit/dummy-rsa-engine.c
+rename from tools/binman/test/key.key
+rename to tools/binman/test/security/key.key
+diff --git a/tools/binman/test/key.pem b/tools/binman/test/security/key.pem
 similarity index 100%
-rename from tools/binman/test/dummy-rsa-engine.c
-rename to tools/binman/test/fit/dummy-rsa-engine.c
-diff --git a/tools/binman/test/340_dummy-rsa4096.crt b/tools/binman/test/fit/dummy-rsa4096.crt
-similarity index 100%
-rename from tools/binman/test/340_dummy-rsa4096.crt
-rename to tools/binman/test/fit/dummy-rsa4096.crt
-diff --git a/tools/binman/test/340_openssl.conf b/tools/binman/test/fit/openssl.conf
-similarity index 100%
-rename from tools/binman/test/340_openssl.conf
-rename to tools/binman/test/fit/openssl.conf
-diff --git a/tools/binman/test/340_rsa2048.key b/tools/binman/test/fit/rsa2048.key
-similarity index 100%
-rename from tools/binman/test/340_rsa2048.key
-rename to tools/binman/test/fit/rsa2048.key
-diff --git a/tools/binman/test/340_softhsm2.conf b/tools/binman/test/fit/softhsm2.conf
-similarity index 100%
-rename from tools/binman/test/340_softhsm2.conf
-rename to tools/binman/test/fit/softhsm2.conf
+rename from tools/binman/test/key.pem
+rename to tools/binman/test/security/key.pem
 -- 
 2.43.0
 
