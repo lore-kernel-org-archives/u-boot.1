@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56C38FCC065
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 19:09:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FE4FCC05D
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 19:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2589C84010;
-	Fri,  6 Mar 2026 20:08:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6609883F86;
+	Fri,  6 Mar 2026 20:08:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="har4b/4E";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X3MFsCln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81ABD84006; Fri,  6 Mar 2026 20:08:40 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 02F3584013; Fri,  6 Mar 2026 20:08:42 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 569A983F2D
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 20:08:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D493683F86
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 20:08:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-8cb3e0093e3so917427985a.0
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 11:08:38 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-8c70ab3b5fcso1300389485a.2
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 11:08:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772824116; x=1773428916; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772824118; x=1773428918; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=37VhEnwkvOwheDAokYqgagKbkmDOjP/u0WIhE4CKZ3M=;
- b=har4b/4EEVZJlShkDgOItTsgBaCaCMy7hnoY++oAK6YIzJD4GifO+FSKmO/KCKC/h/
- og2s6r35DAiZXLSMKT9bc6GQ/KNJfIkxoKkXIz0E1E0d4KF0I+1h3+3az8IPqP4kXBRy
- 4OxHJ0ogsNtsOpDllg7LmzpwkdYNTuYeePPKg=
+ bh=fuj3UxY1I7ws4ZH8ihRYBr6354fkPTaOiMDPWo1dCyM=;
+ b=X3MFsClnMx/8iWCwV9R/sZ1L8o4XljXEUWCnV7W1h6F5JYuPNbMtxPGcSLhDt/tamu
+ T68B3b7HCpqe7Ur1NcF6oj0A0QwVHYtxl8YnaNQXHen0pkP682qcfOdF4pC0g27BZyQo
+ C+aCm1M5G5Uyo4tmsV+aJXt0vCqWogVY1sEcY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772824116; x=1773428916;
+ d=1e100.net; s=20230601; t=1772824118; x=1773428918;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=37VhEnwkvOwheDAokYqgagKbkmDOjP/u0WIhE4CKZ3M=;
- b=HNoKlEu2lFRPbJuziQnTuGVo86shCCiI0Hbph39R7vBvDxtWqvQc0H3+djFXpoNFBP
- JupU8AjgxLHEdpLAi5pLQjC9RIjlPQHOWog+ipA6z+bER5/lUSA9uHplwD8J0b37NPoJ
- BFmQ1Vj2vSzg7HiO8QBlebZZv/v6ZzM6peF+cvc9fchrAaZYHhiFU1vFBU+uMerKSXCA
- 3bmhFVhoYlvVT/qwgIGfHklIABR85/gDK+EFYAilTdXoJIzU7iWbPYSAKapAaZajDcEt
- so9L3YEG/7a6MH4FRShwVN66Q47CcukTBtKuV6DJzKl2t3F6jgkfJaVRIPFC7B7SDwZZ
- rqqQ==
-X-Gm-Message-State: AOJu0YxI2gt4R/GtVaSHe3te8G3eZ/X462YqZ8Ha9aEABbDR09FYNPfZ
- smPY3zsvPdWoiY7KLd6CAYrR1zeBwRrN3GqZenjsakBv++wVP49dB88WgHU0JpLKtol5Xn/6pNi
- SRd4=
-X-Gm-Gg: ATEYQzzJcJwo7wX6UOfIX8qzkzfmTv736MLoR7RAGflxTDxKb6qdy3RbpbIDwB/yGnT
- QVrZjsBdDB1eEfskLJeoWno4f9MJvJou2xHF1g/8KEvNDDeBSpCqdYJzHaZ2fUgwBIgG5EKKKxP
- Afm+v/V1pqZfr7iuiXlw0F7iHz4+eY2D8wVtPGciq+V3v2+rs0NMvMO4LbqVKLdf/JEo8tdLZL0
- gC6+ed249KzNay6eTvXAmrPQgMiO/Bq+oTWNA8zOJ6sFYUCs3uoXu4VyN9K5ZJaC0PI6I091iqi
- DhgOEwKm3F7nFtkWTnZ6eWrRXVXeZnW70CcwCNdd5fBW+iusNxEXZSBTcQhvGNOociDybuODkIK
- Kt35LL6LJrQIfV9AwZvzHObre5Zw+PH4lLSVrWEcOJ+Wd3WHVj0LE7cD125eZEO1KjBQBO2OHvW
- islyyyaJ8yT+XcT7GZhQ==
-X-Received: by 2002:a05:620a:472a:b0:8c7:1106:1a44 with SMTP id
- af79cd13be357-8cd6d4b5daamr407270585a.79.1772824116325; 
- Fri, 06 Mar 2026 11:08:36 -0800 (PST)
+ bh=fuj3UxY1I7ws4ZH8ihRYBr6354fkPTaOiMDPWo1dCyM=;
+ b=NhKC/cQbJ63wKI7QUrOX7soGOquN0bG4VuLzovDcM6rbD17ZfppmF3fYNLb3rniTqH
+ Juhv2ii0PFkaopn1fVMpu+bZ5lsoiKxqvc6GSMyjHGvh7wt/ybodBcmJDDoSn8HUgr+7
+ n7Y+Yvaraw5qnbyYUrdv9C/xxWRhnatM9n9E4OctwJa3DVoWZ4FcSO0cxXFEFjnBKTZN
+ k042b6v/KcJc7pCLSt6IcCigkw8FRkRszPR1JzKVcOuCJ+QQ5rwk6tDiW76fUrpQty1k
+ RaTsw92W/tzVVaFHgHKhiaremCWC4Txk/3/JiBWN+JXHvW/qALBbTOJxstcR1DbV7ds6
+ 5t1Q==
+X-Gm-Message-State: AOJu0YxywFXFgDwkPDU9QdP+fS6nlwoS7Y47fS4k9kVMhSFqf5FAHTpB
+ 436r5QcO9NBnhCvlcNg+C6LRkRV8edpQHKBXSyGgCEAcaaRS7r6MuWMKwwKaFPFoxwfiFZifY9d
+ E+Yk=
+X-Gm-Gg: ATEYQzyLgrkwbVMoAnmzjPqbI/cUPabpiZFyrlkrnUUwrSlLoA+WFwrMA5mKAbfDviQ
+ gvW+5ar5xVGblLtxQCCQrhsygTzWVImHEji1SHGh0minYKxugK1qslEnEhOaAtvrBxf4LE7WVun
+ gD2TR6CjzzVx8x/UrYRkHF5p2O7OuJ64dmD7b/l/LTsH0awOT6CtPFDH6yf82o7JIlUGFKJZAmh
+ VOS/1F3Qc279j9j+fNy3Cp8tTuUDma1hRj47PK5OaDcx6WgGTIo5GHQtOA4voLSHswCaEPPJBt9
+ h8NZgTuJAlWWJtierBxv3P/3ruE75G59zCCVv6CoQ8DGOfTYpYBfgIRyFtbA1rXmJd6CBgE6duC
+ XyTTzD2V5G6AyR+8gEUFZyPzkkWRayO4ruNDCDsbk2g/NmKC6Uw0aCKZsmpgexgty+eNLjqIpfk
+ DNagpZMn+V1QFgZUhlog==
+X-Received: by 2002:a05:620a:711a:b0:8cb:4de9:ead6 with SMTP id
+ af79cd13be357-8cd6d3f0ad6mr406143485a.9.1772824118091; 
+ Fri, 06 Mar 2026 11:08:38 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cd6f54ceaesm164372285a.40.2026.03.06.11.08.34
+ af79cd13be357-8cd6f54ceaesm164372285a.40.2026.03.06.11.08.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 11:08:35 -0800 (PST)
+ Fri, 06 Mar 2026 11:08:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v3 5/7] test: Convert fs_helper to use a class
-Date: Fri,  6 Mar 2026 12:08:11 -0700
-Message-ID: <20260306190818.3586749-6-sjg@chromium.org>
+Subject: [PATCH v3 6/7] test: Add a helper class to create disk images
+Date: Fri,  6 Mar 2026 12:08:12 -0700
+Message-ID: <20260306190818.3586749-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306190818.3586749-1-sjg@chromium.org>
 References: <20260306190818.3586749-1-sjg@chromium.org>
@@ -97,121 +97,123 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Create a class around mk_fs() (and later setup_image()) to handle the
-common tasks of image creation. Many callers of fs_helper.mk_fs()
-create their own scratch directories while users of
-fs_helper.setup_image() rely on one being returned. Unify this by
-adding 'srcdir' as a field while converting to a class.
-
-The class delegates to the existing mk_fs() function for the actual
-filesystem creation, adding lifecycle management for scratch
-directories and the image file.
+Provide a way to create disk images which consist of multiple filesystem
+images.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
 Changes in v3:
-- Rewrite the commit message as suggested by Tom Rini
-- Make the class a thin wrapper that delegates to mk_fs()
+- Remove cur_dir parameter from DiskHelper as suggested by Tom Rini
+- Remove editorialising from commit message
 
- test/py/tests/fs_helper.py | 82 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 82 insertions(+)
+Changes in v2:
+- Explain why setup_image() is left to later
+
+ test/py/tests/fs_helper.py | 95 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 95 insertions(+)
 
 diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 72e18588288..07c011fa430 100644
+index 07c011fa430..9e0f24f28b4 100644
 --- a/test/py/tests/fs_helper.py
 +++ b/test/py/tests/fs_helper.py
-@@ -7,13 +7,95 @@
- 
- import re
- import os
-+import shutil
- from subprocess import call, check_call, check_output, CalledProcessError
- from subprocess import DEVNULL
-+import tempfile
- 
- # size_gran (int): Size granularity of file system image in bytes
- SIZE_GRAN = 1 << 20
+@@ -96,6 +96,101 @@ class FsHelper:
+         self.cleanup()
  
  
-+class FsHelper:
-+    """Creating a filesystem containing test files
++class DiskHelper:
++    """Helper class for creating disk images containing filesystems
 +
 +    Usage:
-+        with FsHelper(ubman.config, 'ext4', 10, 'mmc1') as fsh:
-+            # create files in the self.srcdir directory
++        with DiskHelper(ubman.config, 0, 'mmc') as img, \
++                FsHelper(ubman.config, 'ext4', 1, 'mmc') as fsh:
++            # Write files to fsh.srcdir
++            ...
++
++            # Create the filesystem
 +            fsh.mk_fs()
-+            # Now use the filesystem
 +
-+        # The filesystem and srcdir are erased after the 'with' statement.
++            # Add this filesystem to the disk
++            img.add_fs(fsh, DiskHelper.VFAT)
 +
-+        It is also possible to use an existing srcdir:
++            # Add more filesystems as needed (add another 'with' clause)
++            ...
 +
-+            with FsHelper(ubman.config, 'fat32', 10, 'usb2') as fsh:
-+                fsh.srcdir = src_dir
-+                fsh.mk_fs()
-+                ...
-+
-+    Properties:
-+        fs_img (str): Filename for the filesystem image
++            # Get the final disk image
++            data = img.create()
 +    """
-+    def __init__(self, config, fs_type, size_mb, prefix):
-+        """Set up a new object
++
++    # Partition-type codes
++    VFAT  = 0xc
++    EXT4  = 0x83
++
++    def __init__(self, config, devnum, prefix):
++        """Set up a new disk image
 +
 +        Args:
 +            config (u_boot_config): U-Boot configuration
-+            fs_type (str): File system type: one of ext2, ext3, ext4, vfat,
-+                fat12, fat16, fat32, exfat, fs_generic (which means vfat)
-+            size_mb (int): Size of file system in MB
++            devnum (int): Device number (for filename)
 +            prefix (str): Prefix string of volume's file name
 +        """
-+        if ('fat' not in fs_type and 'ext' not in fs_type and
-+             fs_type not in ['exfat', 'fs_generic']):
-+            raise ValueError(f"Unsupported filesystem type '{fs_type}'")
-+
-+        self.config = config
-+        self.fs_type = fs_type
-+        self.size_mb = size_mb
-+        self.prefix = prefix
-+        self.quiet = True
-+        self.fs_img = None
-+        self.tmpdir = None
-+        self.srcdir = None
++        self.fs_list = []
++        self.fname = os.path.join(config.persistent_data_dir,
++                                  f'{prefix}{devnum}.img')
++        self.remove_img = True
 +        self._do_cleanup = False
 +
-+    def mk_fs(self):
-+        """Make a new filesystem and copy in the files"""
-+        self.setup()
-+        self._do_cleanup = True
-+        self.fs_img = mk_fs(self.config, self.fs_type, self.size_mb << 20,
-+                            self.prefix, self.srcdir, quiet=self.quiet)
++    def add_fs(self, fs_img, part_type, bootable=False):
++        """Add a new filesystem
 +
-+    def setup(self):
-+        """Set up the srcdir ready to receive files"""
-+        if not self.srcdir:
-+            if self.config:
-+                self.srcdir = os.path.join(self.config.persistent_data_dir,
-+                                           f'{self.prefix}.{self.fs_type}.tmp')
-+                if os.path.exists(self.srcdir):
-+                    shutil.rmtree(self.srcdir)
-+                os.mkdir(self.srcdir)
-+            else:
-+                self.tmpdir = tempfile.TemporaryDirectory('fs_helper')
-+                self.srcdir = self.tmpdir.name
++        Args:
++            fs_img (FsHelper): Filesystem to add
++            part_type (DiskHelper.VFAT or DiskHelper.EXT4): Partition type
++            bootable (bool): True to set the 'bootable' flag
++        """
++        self.fs_list.append([fs_img, part_type, bootable])
++
++    def create(self):
++        """Create the disk image
++
++        Create an image with a partition table and the filesystems
++        """
++        spec = ''
++        pos = 1   # Reserve 1MB for the partition table itself
++        for fsi, part_type, bootable in self.fs_list:
++            if spec:
++                spec += '\n'
++            spec += f'type={part_type:x}, size={fsi.size_mb}M, start={pos}M'
++            if bootable:
++                spec += ', bootable'
++            pos += fsi.size_mb
++
++        img_size = pos
++        try:
++            check_call(f'qemu-img create {self.fname} {img_size}M', shell=True)
++            self._do_cleanup = True
++            check_call(f'printf "{spec}" | sfdisk {self.fname}', shell=True)
++        except CalledProcessError:
++            os.remove(self.fname)
++            raise
++
++        pos = 1   # Reserve 1MB for the partition table itself
++        for fsi, part_type, bootable in self.fs_list:
++            check_call(
++                f'dd if={fsi.fs_img} of={self.fname} bs=1M seek={pos} conv=notrunc',
++                shell=True)
++            pos += fsi.size_mb
++        return self.fname
 +
 +    def cleanup(self):
-+        """Remove created image"""
-+        if self.tmpdir:
-+            self.tmpdir.cleanup()
++        """Remove created file"""
 +        if self._do_cleanup:
-+            os.remove(self.fs_img)
++            os.remove(self.fname)
 +
 +    def __enter__(self):
-+        self.setup()
 +        return self
 +
 +    def __exit__(self, extype, value, traceback):
-+        self.cleanup()
++        if self.remove_img:
++            self.cleanup()
 +
 +
  def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
