@@ -4,80 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97920F513E9
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:39:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E39F513F4
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 05:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32B7F84057;
-	Fri,  6 Mar 2026 03:37:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 856C383F75;
+	Fri,  6 Mar 2026 06:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T6NrL3uS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pD0vaNnv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3106083FEE; Fri,  6 Mar 2026 03:37:36 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6BBB883F86; Fri,  6 Mar 2026 06:05:05 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2F9484006
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82D2283F2D
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 06:05:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-506e287dd53so75187561cf.1
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772764652; x=1773369452; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mmdQnnOLrN2xFK0qzqb8HrGH33ntVcfRjOD+B3kYlig=;
- b=T6NrL3uSrNYw5v8Hu679rb/0fAqhzcPvrBW7oBZfL4V9fjHg3R1KhO+NgdHbgOQpGH
- +3U6rNhoX6xzsRcd1+UaU5OqO0kr3s5HgHRZZd6rm4wjYQBG9gRBCvPLsc7hWRgJN9yn
- AIzj4W9RxiqCn6PpJlC/jF8HBR8ezQ3rII5x8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772764652; x=1773369452;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=mmdQnnOLrN2xFK0qzqb8HrGH33ntVcfRjOD+B3kYlig=;
- b=mtRxKD2+s390oCFDrOxP849f12sRHMQkK3grMlYln/39f0OqBbi/hOfhCgnfoZ/4Oc
- AEtKzdJI1Ltha5Zxp+Jlx8gm/b48Lk+6IdGaAT38zsmiiqymfzvcVGdZJs8mckyv3sSk
- MgGI7ec+YslhUXPmP26BhXyFlkA0GoNXbvjEc1WjwHqdG7IU/VCiMJcoZAE5snKmNu6Y
- soclmSyj2+AhEXiC4E27wC/HFt3ITII2Bn90psmyfxZMSDpNoSoEGJeXCMRPAUOHsCrZ
- 9I73zbnCgPEihtyyPEnnlGIFidVUJbNAbuZQcqsk5tiB6lf8mvrStF80DN5/bc6F//rE
- VJGw==
-X-Gm-Message-State: AOJu0YzDrTClpP1yWZBZbjD4bXmPxGqrvtS+VXSQjQ9a4TQraJSpFKFv
- h9CNta6/k+tKsVK13PiintYAjlr0Kz20MdFtOomNq+k2b9OOkEx68wkt2UKGaUiWIXl+sPX2/ZP
- 5Css=
-X-Gm-Gg: ATEYQzzJnb4X4me43dINVyocpqRRlA9ykFa1BItYLLlmR/R+fKYXSvkvt+KDhR8mBYO
- 3x1fQKIfkZ3UtbPLdnS2yjj3/SSXTlEmtdrr2szhiQohsKLvZF9MO2zkl7bL5sDE5mInRSrUMnt
- XgnxE57VSpf50RwAUArV80Fhl6KszDaKhWVsQR5cNEHRvkILb/KuLBxC6rEvUE2XRblKSpHvBgt
- h3aJmN8tT0HowOyP8sFDERN24AHlQKl6v/w1gbgqsvUjSdelMZ8PQv1GRhPvTrKAkR1xubkuaNn
- vy3u/uZaFpr0ChxVs9X2vn/BPGbPCGopAAkijuYZLk11c9YlWXOw+sef5Usq11vulM6fHSm1r8P
- mX+nM8Ao8g6Gajj5NXSv7+VIR7U5pVLBHleMmVKUzq406AY+z1P5mbr/MV1MwdYkfJzn9M9xbVF
- tUEy5dZOi1797UQDfYJA==
-X-Received: by 2002:a05:622a:2ce:b0:4eb:a192:de99 with SMTP id
- d75a77b69052e-508f497a09cmr7547231cf.76.1772764651894; 
- Thu, 05 Mar 2026 18:37:31 -0800 (PST)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 18:37:30 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 17/17] sandbox: Call bootm_final()
-Date: Thu,  5 Mar 2026 19:36:26 -0700
-Message-ID: <20260306023638.2678886-18-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260306023638.2678886-1-sjg@chromium.org>
-References: <20260306023638.2678886-1-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OotpSPFe4bihT8es4ljojAwmKeWV7uJhT87pWQWpMSmoVwhkUt3igzfyR7ssuLitkgxo1nd/JfJmaPyUivCOH3YCkm0NykeMdrI2TgE36HwDyuKknKPnx9jRoTRB1/6T817/n7203NltJfRD295defikqhoY6NGTV1AzHk32PFLLNkxCEHk257Gp3guNB/XR3nDz4P9jD/okHgYY6aSEmCncYSDzTpgVz815GEi/akZ7immNWQ1QVoPnRHhH/MyB80U0RyLRvN9/KuX3y8+x5a87IvwEAulre3HVguDZJYdVyymrloBJgBfNUTCvTOXa9VB+BNVuHeKJD7ayv0Qtcg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HgGlpf8TnUu+Jic9ToTGXH38J9dAfjG7yu0nTejqgdw=;
+ b=lmj14WSw2poj+TSmUOS3bgaW4Q8jR9i2/WKNnM5kjlgFy+P1u+0jq3adYdPAvYNAkk6FkkU2/cDzIR6ccR7fFLPMrmxedeyvSM6KjEiyFbePrg7WkL3yuYLYXBFo3FN4WrVmD79tfd4m9TtNzcTma+0S2mVoqOZWcjMWmHu7FX9bGR5ENL0FymBoq0k29lePFLXqIF44rpk/ofmGY5cy0uA957ZbTYCkUYMO2X00Cbp2FI+dJy84eb8cM6c1VWtop9T5SuK6e/oyloAqY1sO3FNB5u33QY4fRpc0dccqfZNL+shDuQmOwyhrDAkXki2UgwfxA2NgxC1KafvP0YUwtw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HgGlpf8TnUu+Jic9ToTGXH38J9dAfjG7yu0nTejqgdw=;
+ b=pD0vaNnv+k9xkKXOLmOSaGVTOg9246ZfK8gzBlPcCPPGe5k8saOY7hWrU/7B/rHNpyH7Y0JHAKvHd9vXcgwZ4GudcDRsTHeoIQJBlKjosgCBNue7dKjdr1/DAX9MAQTo8GmrL2RKLvJ9/zEEt5YFfmNwexrxbnjY9QGTnfYXpPo=
+Received: from SA0PR11CA0111.namprd11.prod.outlook.com (2603:10b6:806:d1::26)
+ by CO1PR10MB4788.namprd10.prod.outlook.com (2603:10b6:303:94::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Fri, 6 Mar
+ 2026 05:04:58 +0000
+Received: from SA2PEPF00003F65.namprd04.prod.outlook.com
+ (2603:10b6:806:d1:cafe::8c) by SA0PR11CA0111.outlook.office365.com
+ (2603:10b6:806:d1::26) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.23 via Frontend Transport; Fri,
+ 6 Mar 2026 05:04:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SA2PEPF00003F65.mail.protection.outlook.com (10.167.248.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Fri, 6 Mar 2026 05:04:56 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 5 Mar
+ 2026 23:04:19 -0600
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 5 Mar
+ 2026 23:04:19 -0600
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 5 Mar 2026 23:04:19 -0600
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62654Hf03178570;
+ Thu, 5 Mar 2026 23:04:18 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 6 Mar 2026 10:34:17 +0530
+Message-ID: <DGVFQRGRKPW4.3LLLZIHTKSFG2@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH] common: spl: spl_dfu.c: Fix warning associated with PCI
+ subclass_code
+From: Anshul Dalal <anshuld@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>,
+ <lukma@denx.de>, <mkorpershoek@kernel.org>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260305103815.999886-1-s-vadapalli@ti.com>
+In-Reply-To: <20260305103815.999886-1-s-vadapalli@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F65:EE_|CO1PR10MB4788:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ab0b26f-d6c6-4650-af2a-08de7b3de94e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|34020700016|82310400026|36860700016|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: tio1VznRR2Pp75OAMRwQBfEmvEKPhXmJeeLYnNXhHaT6yYl3rz0ZeCOeV9l06OnkYBEaP4Snum5YgW/Gf/KMOqqEKX5HEWqmLBhtP5xdFspzde3CVgX02ICYmBBJGYXtZJchedGw/Symttacahv4imWMvCRisNnKDCrG5IA2rh8+ql/UcbAI0luYX/fBZGujYv0BNXW8CSd6bmbfQaQkawOJ1hIGvwtnbwE+1AoTBgTy8xjs6EV+f047UfbGgUdqb8zOt4JnyuR/YVJ45H0Ls4wkIjFCJlZF0ca2EFnnz2uCuuL0dN+YkKeWnBuu+EGLA84oO6WlAKtmqSaE0Wcxmd7Pur5LbnK3IFNUvoZk8QRg4hpjLCceAkLILlX0ebtkJcciYP6ouncayaxbi+3WM1imwVHQhvDXulwEShnhBexx8BywA50uCEEalgNE12L2rrUKl47MdkswHXCVyFhTpDRQ1jrMzVMWVi63LCj4KCDDYMnyPEe9cKcXEjBx4ucI5IQlCWv+1S/33brp3gMsv21jQLC0uZdQxnkIIxR5E5e2UZkwkfuAON66EtpCmH7aB11AFyP3akiZO06Z+rJlZA6EdXXL/q3vMqD1ngt6W1RmIDd/4f1mBW7H0phWLmxk+YmYYWs4k+X1n+Gwk5kLee83uAe3g5uFVabWCT23SMwhBi5j0rLrx0HQ+MIGrFKcz3R5kiBpTfGor+VDXIjfOZj544YjCMoZGPFsLHcnOJf+lOqoVy0FZdAejMLgk2o3mM5595XY/HX7dUuXliP+Ag==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(34020700016)(82310400026)(36860700016)(376014)(1800799024);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: T8COgr2tR6RQXZaEfcLQxFMwPWHO+yXPteNOtqEdHRGi9J+lmXb7fGehJfpljB8uLIyAgcEPRrmUVTQMUgxUIivoWsnxlE5WPxVaFg8Ayy+PSl9UO7vzFplOXk97uMTbmTDUoOWnGTP9dve0DqkQvfKAgKs1XE6Hum2RuqNmMyYXOpclY7AUGDwZvollimOschD5zNGnf5eFnWg2t05J5nh2qk372hBLgzgt8UgBaHoGLkIJh9ZTSvFe21AuC4lINvUhZN6k1YDqFGBnRm7yrCOzpGXpX1u/ddxW7UKG0uJu4AhHp1FT9788NL8dtC4ztEkmi5XzJKXXU4UHbqDVK7S+AlfbwuqxQ9N2CO5jOkEW1OdnTVvs7/kf6FDHSQGADF9oiPfVJXlCuhGft4JTFFmdGRcIOstzn/kDuMzPdOOdiai4/Bdg6dWDSHTUBb5T
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2026 05:04:56.9963 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ab0b26f-d6c6-4650-af2a-08de7b3de94e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003F65.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4788
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +132,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Simon Glass <simon.glass@canonical.com>
+On Thu Mar 5, 2026 at 4:08 PM IST, Siddharth Vadapalli wrote:
+> The subclass_code member of the pci_ep_header structure is a 1-byte
+> field. The macro PCI_CLASS_MEMORY_RAM is a concetation of baseclass_code
+> and subclass_code as follows:
+> 	PCI_BASE_CLASS_MEMORY: 0x05
+> 	Subclass Code for RAM: 0x00
+> 	PCI_CLASS_MEMORY_RAM:  0x0500
+> Hence, instead of extracting it via an implicity type conversion from int
+> to u8 which throws a warning, explicitly mask the bits to extract the
+> subclass_code.
+>
+> Fixes: cde77583cf0b ("spl: Add support for Device Firmware Upgrade (DFU) =
+over PCIe")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
-Add a call to bootm_final() before the simulated kernel jump. This
-adds the "Starting kernel" message, bootstage tracking,
-board_quiesce_devices() and dm_remove_devices_active() which were not
-previously called on sandbox.
+I was able to reproduce the issue on am62x_evm_a53_defconfig with the
+following diff:
 
-Signed-off-by: Simon Glass <simon.glass@canonical.com>
+	diff --git a/arch/arm/mach-k3/include/mach/am62_spl.h b/arch/arm/mach-k3/i=
+nclude/mach/am62_spl.h
+	index 2c9139d2cc0..07ae5e99e49 100644
+	--- a/arch/arm/mach-k3/include/mach/am62_spl.h
+	+++ b/arch/arm/mach-k3/include/mach/am62_spl.h
+	@@ -12,6 +12,7 @@
+	 #define BOOT_DEVICE_OSPI		0x01
+	 #define BOOT_DEVICE_QSPI		0x02
+	 #define BOOT_DEVICE_SPI			0x03
+	+#define BOOT_DEVICE_PCIE			0x03
+	 #define BOOT_DEVICE_CPGMAC		0x04
+	 #define BOOT_DEVICE_ETHERNET_RGMII	0x04
+	 #define BOOT_DEVICE_ETHERNET_RMII	0x05
+	diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defco=
+nfig
+	index 281fa3fea15..a828ad164f1 100644
+	--- a/configs/am62x_evm_a53_defconfig
+	+++ b/configs/am62x_evm_a53_defconfig
+	@@ -1,4 +1,9 @@
+	 CONFIG_ARM=3Dy
+	+CONFIG_SPL_PCI_DFU=3Dy
+	+CONFIG_SPL_PCI_ENDPOINT=3Dy
+	+CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS=3D0x0
+	+CONFIG_SPL_PCI_DFU_VENDOR_ID=3D0x0
+	+CONFIG_SPL_PCI_DFU_DEVICE_ID=3D0x0
+	 CONFIG_ARCH_K3=3Dy
+	 CONFIG_SYS_MALLOC_F_LEN=3D0x8000
+	 CONFIG_TI_COMMON_CMD_OPTIONS=3Dy
 
----
+The patch looks good to me and fixes the build warning :)
 
-Changes in v4:
-- Pass flag directly instead of using BOOTM_FINAL_FAKE
+Tested-by: Anshul Dalal <anshuld@ti.com>
 
-Changes in v3:
-- Add new patch for sandbox conversion
-
- arch/sandbox/lib/bootm.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/sandbox/lib/bootm.c b/arch/sandbox/lib/bootm.c
-index 44ba8b52e13..7a5f6f7d36e 100644
---- a/arch/sandbox/lib/bootm.c
-+++ b/arch/sandbox/lib/bootm.c
-@@ -73,6 +73,7 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
- 
- 	if (flag & (BOOTM_STATE_OS_GO | BOOTM_STATE_OS_FAKE_GO)) {
- 		bootstage_mark(BOOTSTAGE_ID_RUN_OS);
-+		bootm_final(flag);
- 		printf("## Transferring control to Linux (at address %08lx)...\n",
- 		       images->ep);
- 		printf("sandbox: continuing, as we cannot run Linux\n");
--- 
-2.43.0
+> ---
+>
+> Hello,
+>
+> This patch is based on commit
+> f473a453b0c kbuild: Drop phandle from diff between base DT and U-Boot aug=
+mented DT if DEVICE_TREE_DEBUG=3D1of the master branch of U-Boot.
+>
+> Regards,
+> Siddharth.
+>
+>  common/spl/spl_dfu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/common/spl/spl_dfu.c b/common/spl/spl_dfu.c
+> index b09f82790c9..7d21bb4d16a 100644
+> --- a/common/spl/spl_dfu.c
+> +++ b/common/spl/spl_dfu.c
+> @@ -64,7 +64,7 @@ static int dfu_over_pcie(void)
+>  	hdr.deviceid =3D CONFIG_SPL_PCI_DFU_DEVICE_ID;
+>  	hdr.vendorid =3D CONFIG_SPL_PCI_DFU_VENDOR_ID;
+>  	hdr.baseclass_code =3D PCI_BASE_CLASS_MEMORY;
+> -	hdr.subclass_code =3D PCI_CLASS_MEMORY_RAM;
+> +	hdr.subclass_code =3D PCI_CLASS_MEMORY_RAM & 0xff;
+> =20
+>  	ret =3D pci_ep_write_header(dev, fn, &hdr);
+>  	if (ret) {
 
