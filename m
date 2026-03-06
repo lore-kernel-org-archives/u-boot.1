@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10999FCC050
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045BAFCC055
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AB4B83FC5;
-	Fri,  6 Mar 2026 19:14:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8D08784010;
+	Fri,  6 Mar 2026 19:14:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y0uHwSSw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CPCTeFVu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7622884008; Fri,  6 Mar 2026 19:13:59 +0100 (CET)
+ id D69F884010; Fri,  6 Mar 2026 19:14:00 +0100 (CET)
 Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
  [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12BF783FF5
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:13:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8469483FFA
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:13:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-8cb3e22435fso829859485a.1
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:13:56 -0800 (PST)
+ af79cd13be357-8cb39647a70so917658585a.0
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:13:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772820834; x=1773425634; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772820837; x=1773425637; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MkcqcGzA/lp0L9ACiUlj/YeOyxOKbGcxtzEvOkuEfRU=;
- b=Y0uHwSSwHIhMugWg4Ng24CliT/VW8uMdx1NWg+Q+jASiWj138ZEHuPG6Ukbr3x4tDi
- 1WundrJyfRw7qw/8LdwVqUXrwVHq7s5lN2PXBXZaM/ZYGsgTFtGw+yvUgGWbU6E7M9yV
- lxeJVoDpj1PdkqxP4X+KcjAdnQGTvmIyffL+4=
+ bh=j2SyCMS70bCpi0Q/xnv+60R+0OG4xHwYINBEJ+/ddcw=;
+ b=CPCTeFVuQHTHaSJVRZZbMu4EcGjDXeb1/MV38g3ypG7R6g5yaS4SM0p4b9mSNUAuoL
+ ON8N7sZvYNrRP4Hnwm81beX54cKsWxZA8Bbjwru8gwBu9fGE7vq+ooJctnudrdkjugTC
+ Xho/QS3BnMUAjmXepeQCQRD7Bfl/aaGYF3WhY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772820834; x=1773425634;
+ d=1e100.net; s=20230601; t=1772820837; x=1773425637;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=MkcqcGzA/lp0L9ACiUlj/YeOyxOKbGcxtzEvOkuEfRU=;
- b=YG0KufTYd4dBf6O4tR9bjy56VfhLvn5jQqll/ikOHF6b9DTKc2nVnQce1ZJQVlKIVX
- AfNycCKB5ZLDfc5WLwdNkVMCz+u3e05IH43WnmM5tDfF5m1KBAxCKBr868R2Kbc+Buoy
- ZxEU7VqoAFpyYdCrLpF8vpUh2YewKddfNxjEb1tBZaxiaM+jwaZSjVDEUkCPYlI/EYsq
- s8YnqD4v6iyDNexyLLZh6uXAwIxel/JbP+0Di2+gB26JCU9u5DcSA5iv2AijeQoKnZgt
- /vtn/QCQBvAeUUaPhcrRlz4bmEbPZDfWfxKL3uUI7ThOHadv+vQxEvFQq038ouqeNL7C
- GJrA==
-X-Gm-Message-State: AOJu0Yxx0oTYRlI4+rL+rjKEy/Mjyh6lm73Iql/ydy+9NzlY/QeYNHb4
- NTDrNLQcruxMb5Uv4/R6ElLz13SFVEC2764LdorXcYX2F1pmXPaiuhqHhQPHxJkUPa0+ieIvOZR
- Uah4=
-X-Gm-Gg: ATEYQzxQ4YptbgvtCnGKhYfU3d9DG3z52wjqpHqaud/AXrydc095HtIxHupBj14EHb1
- O9Z0un+ule9T2mYkaWv1uN9tKGsrOe0JH/m3+mzh4/LEliEz+peJfk/UIclBd3OP6iqm7Fujj5u
- r0tavBjaK7CLEDD8xrsxvoEmtksEP/pkd5vjD4xIga19fkLnefITPFw3mgWawiNe72jOor1t6Gu
- AxorNE0aUmRNAfSH05UNiPOameFgVod2yZkCpoiF1Cj4XRPofWAamKpNc8v6MV6012bxB+OCAVR
- ag8r3fIsckwy/oyALc5r50JuNYxVjs/voRX4FH4Qi/EiE5nZxPzYaLzF76iJkWe7GYUOF5YyYD/
- JXnnW7d+2WtxGXeM5HHIMO4ER1MBckTVveXFmSTCFANIzMRK9Iuk+shv8NzQNUHAqfLkvLouB1B
- 41kdGAa4r3+EdyRdoNww==
-X-Received: by 2002:ae9:c309:0:b0:8cd:75a9:eabe with SMTP id
- af79cd13be357-8cd75a9ec4fmr54106285a.9.1772820834294; 
- Fri, 06 Mar 2026 10:13:54 -0800 (PST)
+ bh=j2SyCMS70bCpi0Q/xnv+60R+0OG4xHwYINBEJ+/ddcw=;
+ b=VnMfnfnO8Y+yIJzWx8jHW/rEqErptBQSOSIjStMKqkhm5v4al2M0RxTeP0RguPWeJB
+ Mvs0HZ/6J1c6z08VzkZNvX5nuAmopmRB71kvPV47E3Tvh7IL9Qfe48+dsTQH+TmSn0n0
+ 51NYVgNbhPGk5wb9c2vFr0UMviiVgVlrkfa1mK1jrpCnl7BKGGE0ZDNYZtqMlnsyAK83
+ A5FeqCA8R4V468O8q3J+SfOlX+oQmJ5XS3yk0OJ1r+eu7g53NnOhzQK5rT+1Jtmig2Tj
+ TtIzzuTvlHyNGTwGb1/h1s6YVIbGfGIf94Jqr0AtsYz5s/baymWq8VyZMZ3i4zDDxlJ9
+ uttA==
+X-Gm-Message-State: AOJu0YzueElPd8dIjUwn3o+8NfYqCSJ/zWi2eBTmjM11DMN/Uec207lc
+ QKpwERTGnXLAQ14Xxo37a8c1wIOsl1lRG1sN0H++pLrGjF4fmGrvcLirNKkaFBCXgKpqfH79In7
+ vVPc=
+X-Gm-Gg: ATEYQzyi6+61McxPfEe9uf1+TLY1TPW8Lk8ouS4bZ5hJa68TGLrPUxUHp2dBKgMiy1r
+ a2N5KV2++87438p9FPDmHOSIaPlhs1WgyIRUud3O10xxoyXV7onnjoSLc4QTn15IfzZ7wexaH0c
+ 3skvAv6HW7euDqm/0ShiNChlK0o8NkoFXBX8Tg3yAdAZTgj9uQvPgAYaykZHcmifz7yZpIBvrPS
+ YkJq7jVK8jPglVrUySno2INPoiU9X7+w8vkyBwvFa91r9dGLoaaaDQiD/v4J8cEnLmwJtKYM7p/
+ aJaZjB9HyIlbxyLWm/oTPjh/B0QpDd8CoaOUAZ+sdXlex5BVwDYMMk8HkKSfL3MQ/RWE2jpAJyw
+ 6BM98GA1Ttb/blcLqKnBOfXG6HqUP/QuABnsYENd9syFUNLMp+YiD7qzaUK4GYP/akEQV1ylyb4
+ KKeIpEPR4S7IUXvb+yOA==
+X-Received: by 2002:a05:620a:470b:b0:8c6:f411:5eec with SMTP id
+ af79cd13be357-8cd6d4fb195mr393056485a.38.1772820836670; 
+ Fri, 06 Mar 2026 10:13:56 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.13.52
+ af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.13.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 10:13:53 -0800 (PST)
+ Fri, 06 Mar 2026 10:13:56 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -76,10 +76,9 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v2 11/23] binman: test: Move mkimage test files to
- test/mkimage/
-Date: Fri,  6 Mar 2026 11:12:39 -0700
-Message-ID: <20260306181304.2426352-12-sjg@chromium.org>
+Subject: [PATCH v2 12/23] binman: test: Move FIP/TF-A test files to test/fip/
+Date: Fri,  6 Mar 2026 11:12:40 -0700
+Message-ID: <20260306181304.2426352-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306181304.2426352-1-sjg@chromium.org>
 References: <20260306181304.2426352-1-sjg@chromium.org>
@@ -103,241 +102,234 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move about a dozen test files for mkimage entries into a mkimage/
-subdirectory. Drop the numeric prefixes and the redundant mkimage_
-filename prefix, and update all references.
+Move about 15 test files for ARM Trusted Firmware FIP, ATF BL31, SCP,
+OpenSBI, and BL1 entries into a fip/ subdirectory. Drop the numeric
+prefixes and the redundant fip_ filename prefix, and update all
+references.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
 (no changes since v1)
 
- tools/binman/ftest.py                         | 32 +++++++++----------
- .../coll.dts}                                 |  0
- .../filename.dts}                             |  0
- .../image.dts}                                |  0
- .../image_bad.dts}                            |  0
- .../image_no_content.dts}                     |  0
- .../missing.dts}                              |  0
- .../missing_multiple.dts}                     |  0
- .../{156_mkimage.dts => mkimage/mkimage.dts}  |  0
- .../mult_data.dts}                            |  0
- .../mult_no_content.dts}                      |  0
- .../name.dts}                                 |  0
- .../special.dts}                              |  0
- .../{290_mkimage_sym.dts => mkimage/sym.dts}  |  0
- 14 files changed, 16 insertions(+), 16 deletions(-)
- rename tools/binman/test/{247_mkimage_coll.dts => mkimage/coll.dts} (100%)
- rename tools/binman/test/{254_mkimage_filename.dts => mkimage/filename.dts} (100%)
- rename tools/binman/test/{243_mkimage_image.dts => mkimage/image.dts} (100%)
- rename tools/binman/test/{245_mkimage_image_bad.dts => mkimage/image_bad.dts} (100%)
- rename tools/binman/test/{244_mkimage_image_no_content.dts => mkimage/image_no_content.dts} (100%)
- rename tools/binman/test/{229_mkimage_missing.dts => mkimage/missing.dts} (100%)
- rename tools/binman/test/{292_mkimage_missing_multiple.dts => mkimage/missing_multiple.dts} (100%)
- rename tools/binman/test/{156_mkimage.dts => mkimage/mkimage.dts} (100%)
- rename tools/binman/test/{252_mkimage_mult_data.dts => mkimage/mult_data.dts} (100%)
- rename tools/binman/test/{253_mkimage_mult_no_content.dts => mkimage/mult_no_content.dts} (100%)
- rename tools/binman/test/{242_mkimage_name.dts => mkimage/name.dts} (100%)
- rename tools/binman/test/{283_mkimage_special.dts => mkimage/special.dts} (100%)
- rename tools/binman/test/{290_mkimage_sym.dts => mkimage/sym.dts} (100%)
+ tools/binman/ftest.py                         | 30 +++++++++----------
+ .../{169_atf_bl31.dts => fip/atf_bl31.dts}    |  0
+ .../bad_align.dts}                            |  0
+ .../binman/test/{347_bl1.dts => fip/bl1.dts}  |  0
+ .../collection.dts}                           |  0
+ .../binman/test/{203_fip.dts => fip/fip.dts}  |  0
+ .../test/{207_fip_ls.dts => fip/ls.dts}       |  0
+ .../{209_fip_missing.dts => fip/missing.dts}  |  0
+ .../{205_fip_no_type.dts => fip/no_type.dts}  |  0
+ .../test/{201_opensbi.dts => fip/opensbi.dts} |  0
+ .../test/{204_fip_other.dts => fip/other.dts} |  0
+ .../{208_fip_replace.dts => fip/replace.dts}  |  0
+ .../binman/test/{172_scp.dts => fip/scp.dts}  |  0
+ .../test/{210_fip_size.dts => fip/size.dts}   |  0
+ .../test/{206_fip_uuid.dts => fip/uuid.dts}   |  0
+ 15 files changed, 15 insertions(+), 15 deletions(-)
+ rename tools/binman/test/{169_atf_bl31.dts => fip/atf_bl31.dts} (100%)
+ rename tools/binman/test/{211_fip_bad_align.dts => fip/bad_align.dts} (100%)
+ rename tools/binman/test/{347_bl1.dts => fip/bl1.dts} (100%)
+ rename tools/binman/test/{212_fip_collection.dts => fip/collection.dts} (100%)
+ rename tools/binman/test/{203_fip.dts => fip/fip.dts} (100%)
+ rename tools/binman/test/{207_fip_ls.dts => fip/ls.dts} (100%)
+ rename tools/binman/test/{209_fip_missing.dts => fip/missing.dts} (100%)
+ rename tools/binman/test/{205_fip_no_type.dts => fip/no_type.dts} (100%)
+ rename tools/binman/test/{201_opensbi.dts => fip/opensbi.dts} (100%)
+ rename tools/binman/test/{204_fip_other.dts => fip/other.dts} (100%)
+ rename tools/binman/test/{208_fip_replace.dts => fip/replace.dts} (100%)
+ rename tools/binman/test/{172_scp.dts => fip/scp.dts} (100%)
+ rename tools/binman/test/{210_fip_size.dts => fip/size.dts} (100%)
+ rename tools/binman/test/{206_fip_uuid.dts => fip/uuid.dts} (100%)
 
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 87055a53bdf..43f421178cb 100644
+index 43f421178cb..1e83e6140b4 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -3868,7 +3868,7 @@ class TestFunctional(unittest.TestCase):
-     def testMkimage(self):
-         """Test using mkimage to build an image"""
-         self._SetupSplElf()
--        data = self._DoReadFile('156_mkimage.dts')
-+        data = self._DoReadFile('mkimage/mkimage.dts')
+@@ -4247,12 +4247,12 @@ class TestFunctional(unittest.TestCase):
  
-         # Just check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_SPL_DATA, data)
-@@ -3877,7 +3877,7 @@ class TestFunctional(unittest.TestCase):
-         """Test that binman still produces an image if mkimage is missing"""
-         self._SetupSplElf()
-         with terminal.capture() as (_, stderr):
--            self._DoTestFile('156_mkimage.dts',
-+            self._DoTestFile('mkimage/mkimage.dts',
-                              force_missing_bintools='mkimage')
-         err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing bintools.*: mkimage")
-@@ -5809,7 +5809,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageMissingBlob(self):
-         """Test using mkimage to build an image"""
-         with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('229_mkimage_missing.dts', allow_missing=True,
-+            self._DoTestFile('mkimage/missing.dts', allow_missing=True,
-                              allow_fake_blobs=True)
-         err = stderr.getvalue()
-         self.assertRegex(
-@@ -6118,7 +6118,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageImagename(self):
-         """Test using mkimage with -n holding the data too"""
-         self._SetupSplElf()
--        data = self._DoReadFile('242_mkimage_name.dts')
-+        data = self._DoReadFile('mkimage/name.dts')
+     def testPackBl31(self):
+         """Test that an image with an ATF BL31 binary can be created"""
+-        data = self._DoReadFile('169_atf_bl31.dts')
++        data = self._DoReadFile('fip/atf_bl31.dts')
+         self.assertEqual(ATF_BL31_DATA, data[:len(ATF_BL31_DATA)])
  
-         # Check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_SPL_DATA, data)
-@@ -6136,7 +6136,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageImage(self):
-         """Test using mkimage with -n holding the data too"""
-         self._SetupSplElf()
--        data = self._DoReadFile('243_mkimage_image.dts')
-+        data = self._DoReadFile('mkimage/image.dts')
+     def testPackScp(self):
+         """Test that an image with an SCP binary can be created"""
+-        data = self._DoReadFile('172_scp.dts')
++        data = self._DoReadFile('fip/scp.dts')
+         self.assertEqual(SCP_DATA, data[:len(SCP_DATA)])
  
-         # Check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_SPL_DATA, data)
-@@ -6158,7 +6158,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test using mkimage with -n and no data"""
-         self._SetupSplElf()
-         with self.assertRaises(ValueError) as exc:
--            self._DoReadFile('244_mkimage_image_no_content.dts')
-+            self._DoReadFile('mkimage/image_no_content.dts')
-         self.assertIn('Could not complete processing of contents',
-                       str(exc.exception))
+     def CheckFitFdt(self, dts='fit/fdt.dts', use_fdt_list=True,
+@@ -5046,7 +5046,7 @@ class TestFunctional(unittest.TestCase):
  
-@@ -6166,7 +6166,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test using mkimage with imagename node and data-to-imagename"""
-         self._SetupSplElf()
-         with self.assertRaises(ValueError) as exc:
--            self._DoReadFile('245_mkimage_image_bad.dts')
-+            self._DoReadFile('mkimage/image_bad.dts')
-         self.assertIn('Cannot use both imagename node and data-to-imagename',
-                       str(exc.exception))
+     def testPackOpenSBI(self):
+         """Test that an image with an OpenSBI binary can be created"""
+-        data = self._DoReadFile('201_opensbi.dts')
++        data = self._DoReadFile('fip/opensbi.dts')
+         self.assertEqual(OPENSBI_DATA, data[:len(OPENSBI_DATA)])
  
-@@ -6181,7 +6181,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageCollection(self):
-         """Test using a collection referring to an entry in a mkimage entry"""
-         self._SetupSplElf()
--        data = self._DoReadFile('247_mkimage_coll.dts')
-+        data = self._DoReadFile('mkimage/coll.dts')
-         expect = U_BOOT_SPL_DATA + U_BOOT_DATA
-         self.assertEqual(expect, data[:len(expect)])
+     def testSectionsSingleThread(self):
+@@ -5234,7 +5234,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-@@ -6269,7 +6269,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test passing multiple files to mkimage in a mkimage entry"""
-         self._SetupSplElf()
-         self._SetupTplElf()
--        data = self._DoReadFile('252_mkimage_mult_data.dts')
-+        data = self._DoReadFile('mkimage/mult_data.dts')
-         # Size of files are packed in their 4B big-endian format
-         expect = struct.pack('>I', len(U_BOOT_TPL_DATA))
-         expect += struct.pack('>I', len(U_BOOT_SPL_DATA))
-@@ -6291,7 +6291,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-             'spl-bss-pad': 'y',
-             'spl-dtb': 'y',
-         }
--        data = self._DoReadFileDtb('252_mkimage_mult_data.dts',
-+        data = self._DoReadFileDtb('mkimage/mult_data.dts',
-                                    use_expanded=True, entry_args=entry_args)[0]
-         pad_len = 10
-         tpl_expect = U_BOOT_TPL_DATA
-@@ -6320,14 +6320,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         """Test passing multiple data files to mkimage with one data file having no content"""
-         self._SetupSplElf()
-         with self.assertRaises(ValueError) as exc:
--            self._DoReadFile('253_mkimage_mult_no_content.dts')
-+            self._DoReadFile('mkimage/mult_no_content.dts')
-         self.assertIn('Could not complete processing of contents',
-                       str(exc.exception))
+     def testFip(self):
+         """Basic test of generation of an ARM Firmware Image Package (FIP)"""
+-        data = self._DoReadFile('203_fip.dts')
++        data = self._DoReadFile('fip/fip.dts')
+         hdr, fents = fip_util.decode_fip(data)
+         self.assertEqual(fip_util.HEADER_MAGIC, hdr.name)
+         self.assertEqual(fip_util.HEADER_SERIAL, hdr.serial)
+@@ -5266,7 +5266,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-     def testMkimageFilename(self):
-         """Test using mkimage to build a binary with a filename"""
-         self._SetupSplElf()
--        retcode = self._DoTestFile('254_mkimage_filename.dts')
-+        retcode = self._DoTestFile('mkimage/filename.dts')
-         self.assertEqual(0, retcode)
-         fname = tools.get_output_filename('mkimage-test.bin')
-         self.assertTrue(os.path.exists(fname))
-@@ -6891,12 +6891,12 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageMissingBlobMultiple(self):
-         """Test missing blob with mkimage entry and multiple-data-files"""
-         with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=True)
-+            self._DoTestFile('mkimage/missing_multiple.dts', allow_missing=True)
-         err = stderr.getvalue()
-         self.assertIn("is missing external blobs and is non-functional", err)
+     def testFipOther(self):
+         """Basic FIP with something that isn't a external blob"""
+-        data = self._DoReadFile('204_fip_other.dts')
++        data = self._DoReadFile('fip/other.dts')
+         hdr, fents = fip_util.decode_fip(data)
  
+         self.assertEqual(2, len(fents))
+@@ -5277,13 +5277,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testFipNoType(self):
+         """FIP with an entry of an unknown type"""
          with self.assertRaises(ValueError) as e:
--            self._DoTestFile('292_mkimage_missing_multiple.dts', allow_missing=False)
-+            self._DoTestFile('mkimage/missing_multiple.dts', allow_missing=False)
-         self.assertIn("not found in input path", str(e.exception))
+-            self._DoReadFile('205_fip_no_type.dts')
++            self._DoReadFile('fip/no_type.dts')
+         self.assertIn("Must provide a fip-type (node name 'u-boot' is not a known FIP type)",
+                       str(e.exception))
  
-     def _PrepareSignEnv(self, dts='fit/sign.dts'):
-@@ -7002,7 +7002,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testFipUuid(self):
+         """Basic FIP with a manual uuid"""
+-        data = self._DoReadFile('206_fip_uuid.dts')
++        data = self._DoReadFile('fip/uuid.dts')
+         hdr, fents = fip_util.decode_fip(data)
  
-     def testMkimageSpecial(self):
-         """Test mkimage ignores special hash-1 node"""
--        data = self._DoReadFile('283_mkimage_special.dts')
-+        data = self._DoReadFile('mkimage/special.dts')
+         self.assertEqual(2, len(fents))
+@@ -5297,7 +5297,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-         # Just check that the data appears in the file somewhere
-         self.assertIn(U_BOOT_DATA, data)
-@@ -7085,7 +7085,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testMkimageSymbols(self):
-         """Test using mkimage to build an image with symbols in it"""
-         self._SetupSplElf('u_boot_binman_syms')
--        data = self._DoReadFile('290_mkimage_sym.dts')
-+        data = self._DoReadFile('mkimage/sym.dts')
+     def testFipLs(self):
+         """Test listing a FIP"""
+-        data = self._DoReadFileRealDtb('207_fip_ls.dts')
++        data = self._DoReadFileRealDtb('fip/ls.dts')
+         hdr, fents = fip_util.decode_fip(data)
  
-         image = control.images['image']
-         entries = image.GetEntries()
-diff --git a/tools/binman/test/247_mkimage_coll.dts b/tools/binman/test/mkimage/coll.dts
+         tmpdir = None
+@@ -5353,7 +5353,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testFipExtractOneEntry(self):
+         """Test extracting a single entry fron an FIP"""
+-        self._DoReadFileRealDtb('207_fip_ls.dts')
++        self._DoReadFileRealDtb('fip/ls.dts')
+         image_fname = tools.get_output_filename('image.bin')
+         fname = os.path.join(self._indir, 'output.extact')
+         control.ExtractEntries(image_fname, fname, None, ['atf-fip/u-boot'])
+@@ -5363,7 +5363,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testFipReplace(self):
+         """Test replacing a single file in a FIP"""
+         expected = U_BOOT_DATA + tools.get_bytes(0x78, 50)
+-        data = self._DoReadFileRealDtb('208_fip_replace.dts')
++        data = self._DoReadFileRealDtb('fip/replace.dts')
+         updated_fname = tools.get_output_filename('image-updated.bin')
+         tools.write_file(updated_fname, data)
+         entry_name = 'atf-fip/u-boot'
+@@ -5387,13 +5387,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testFipMissing(self):
+         with terminal.capture() as (stdout, stderr):
+-            self._DoTestFile('209_fip_missing.dts', allow_missing=True)
++            self._DoTestFile('fip/missing.dts', allow_missing=True)
+         err = stderr.getvalue()
+         self.assertRegex(err, "Image 'image'.*missing.*: rmm-fw")
+ 
+     def testFipSize(self):
+         """Test a FIP with a size property"""
+-        data = self._DoReadFile('210_fip_size.dts')
++        data = self._DoReadFile('fip/size.dts')
+         self.assertEqual(0x100 + len(U_BOOT_DATA), len(data))
+         hdr, fents = fip_util.decode_fip(data)
+         self.assertEqual(fip_util.HEADER_MAGIC, hdr.name)
+@@ -5414,14 +5414,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testFipBadAlign(self):
+         """Test that an invalid alignment value in a FIP is detected"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('211_fip_bad_align.dts')
++            self._DoTestFile('fip/bad_align.dts')
+         self.assertIn(
+             "Node \'/binman/atf-fip\': FIP alignment 31 must be a power of two",
+             str(e.exception))
+ 
+     def testFipCollection(self):
+         """Test using a FIP in a collection"""
+-        data = self._DoReadFile('212_fip_collection.dts')
++        data = self._DoReadFile('fip/collection.dts')
+         entry1 = control.images['image'].GetEntries()['collection']
+         data1 = data[:entry1.size]
+         hdr1, fents2 = fip_util.decode_fip(data1)
+@@ -5583,7 +5583,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+ 
+     def testPackBl1(self):
+         """test if an image with a bl1 binary can be created"""
+-        data = self._DoReadFile('347_bl1.dts')
++        data = self._DoReadFile('fip/bl1.dts')
+         self.assertEqual(ATF_BL1_DATA, data[:len(ATF_BL1_DATA)])
+ 
+     def testRenesasRCarGen4SA0Image(self):
+diff --git a/tools/binman/test/169_atf_bl31.dts b/tools/binman/test/fip/atf_bl31.dts
 similarity index 100%
-rename from tools/binman/test/247_mkimage_coll.dts
-rename to tools/binman/test/mkimage/coll.dts
-diff --git a/tools/binman/test/254_mkimage_filename.dts b/tools/binman/test/mkimage/filename.dts
+rename from tools/binman/test/169_atf_bl31.dts
+rename to tools/binman/test/fip/atf_bl31.dts
+diff --git a/tools/binman/test/211_fip_bad_align.dts b/tools/binman/test/fip/bad_align.dts
 similarity index 100%
-rename from tools/binman/test/254_mkimage_filename.dts
-rename to tools/binman/test/mkimage/filename.dts
-diff --git a/tools/binman/test/243_mkimage_image.dts b/tools/binman/test/mkimage/image.dts
+rename from tools/binman/test/211_fip_bad_align.dts
+rename to tools/binman/test/fip/bad_align.dts
+diff --git a/tools/binman/test/347_bl1.dts b/tools/binman/test/fip/bl1.dts
 similarity index 100%
-rename from tools/binman/test/243_mkimage_image.dts
-rename to tools/binman/test/mkimage/image.dts
-diff --git a/tools/binman/test/245_mkimage_image_bad.dts b/tools/binman/test/mkimage/image_bad.dts
+rename from tools/binman/test/347_bl1.dts
+rename to tools/binman/test/fip/bl1.dts
+diff --git a/tools/binman/test/212_fip_collection.dts b/tools/binman/test/fip/collection.dts
 similarity index 100%
-rename from tools/binman/test/245_mkimage_image_bad.dts
-rename to tools/binman/test/mkimage/image_bad.dts
-diff --git a/tools/binman/test/244_mkimage_image_no_content.dts b/tools/binman/test/mkimage/image_no_content.dts
+rename from tools/binman/test/212_fip_collection.dts
+rename to tools/binman/test/fip/collection.dts
+diff --git a/tools/binman/test/203_fip.dts b/tools/binman/test/fip/fip.dts
 similarity index 100%
-rename from tools/binman/test/244_mkimage_image_no_content.dts
-rename to tools/binman/test/mkimage/image_no_content.dts
-diff --git a/tools/binman/test/229_mkimage_missing.dts b/tools/binman/test/mkimage/missing.dts
+rename from tools/binman/test/203_fip.dts
+rename to tools/binman/test/fip/fip.dts
+diff --git a/tools/binman/test/207_fip_ls.dts b/tools/binman/test/fip/ls.dts
 similarity index 100%
-rename from tools/binman/test/229_mkimage_missing.dts
-rename to tools/binman/test/mkimage/missing.dts
-diff --git a/tools/binman/test/292_mkimage_missing_multiple.dts b/tools/binman/test/mkimage/missing_multiple.dts
+rename from tools/binman/test/207_fip_ls.dts
+rename to tools/binman/test/fip/ls.dts
+diff --git a/tools/binman/test/209_fip_missing.dts b/tools/binman/test/fip/missing.dts
 similarity index 100%
-rename from tools/binman/test/292_mkimage_missing_multiple.dts
-rename to tools/binman/test/mkimage/missing_multiple.dts
-diff --git a/tools/binman/test/156_mkimage.dts b/tools/binman/test/mkimage/mkimage.dts
+rename from tools/binman/test/209_fip_missing.dts
+rename to tools/binman/test/fip/missing.dts
+diff --git a/tools/binman/test/205_fip_no_type.dts b/tools/binman/test/fip/no_type.dts
 similarity index 100%
-rename from tools/binman/test/156_mkimage.dts
-rename to tools/binman/test/mkimage/mkimage.dts
-diff --git a/tools/binman/test/252_mkimage_mult_data.dts b/tools/binman/test/mkimage/mult_data.dts
+rename from tools/binman/test/205_fip_no_type.dts
+rename to tools/binman/test/fip/no_type.dts
+diff --git a/tools/binman/test/201_opensbi.dts b/tools/binman/test/fip/opensbi.dts
 similarity index 100%
-rename from tools/binman/test/252_mkimage_mult_data.dts
-rename to tools/binman/test/mkimage/mult_data.dts
-diff --git a/tools/binman/test/253_mkimage_mult_no_content.dts b/tools/binman/test/mkimage/mult_no_content.dts
+rename from tools/binman/test/201_opensbi.dts
+rename to tools/binman/test/fip/opensbi.dts
+diff --git a/tools/binman/test/204_fip_other.dts b/tools/binman/test/fip/other.dts
 similarity index 100%
-rename from tools/binman/test/253_mkimage_mult_no_content.dts
-rename to tools/binman/test/mkimage/mult_no_content.dts
-diff --git a/tools/binman/test/242_mkimage_name.dts b/tools/binman/test/mkimage/name.dts
+rename from tools/binman/test/204_fip_other.dts
+rename to tools/binman/test/fip/other.dts
+diff --git a/tools/binman/test/208_fip_replace.dts b/tools/binman/test/fip/replace.dts
 similarity index 100%
-rename from tools/binman/test/242_mkimage_name.dts
-rename to tools/binman/test/mkimage/name.dts
-diff --git a/tools/binman/test/283_mkimage_special.dts b/tools/binman/test/mkimage/special.dts
+rename from tools/binman/test/208_fip_replace.dts
+rename to tools/binman/test/fip/replace.dts
+diff --git a/tools/binman/test/172_scp.dts b/tools/binman/test/fip/scp.dts
 similarity index 100%
-rename from tools/binman/test/283_mkimage_special.dts
-rename to tools/binman/test/mkimage/special.dts
-diff --git a/tools/binman/test/290_mkimage_sym.dts b/tools/binman/test/mkimage/sym.dts
+rename from tools/binman/test/172_scp.dts
+rename to tools/binman/test/fip/scp.dts
+diff --git a/tools/binman/test/210_fip_size.dts b/tools/binman/test/fip/size.dts
 similarity index 100%
-rename from tools/binman/test/290_mkimage_sym.dts
-rename to tools/binman/test/mkimage/sym.dts
+rename from tools/binman/test/210_fip_size.dts
+rename to tools/binman/test/fip/size.dts
+diff --git a/tools/binman/test/206_fip_uuid.dts b/tools/binman/test/fip/uuid.dts
+similarity index 100%
+rename from tools/binman/test/206_fip_uuid.dts
+rename to tools/binman/test/fip/uuid.dts
 -- 
 2.43.0
 
