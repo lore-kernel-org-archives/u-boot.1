@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F09F513ED
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:37:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4033F513ED
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:37:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C29C838BB;
-	Fri,  6 Mar 2026 03:37:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6884983F8F;
+	Fri,  6 Mar 2026 03:37:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kwDmMqza";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cDeshat0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1138383F75; Fri,  6 Mar 2026 03:37:06 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 9B2DD83F9D; Fri,  6 Mar 2026 03:37:07 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F19B3836D3
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86101839A8
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-899ee87355dso70715096d6.1
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:03 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-899fc9853b7so68970276d6.2
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772764622; x=1773369422; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772764624; x=1773369424; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MD6qqBthLnoeLu2mNA/rGg9pLlumgB9HqToA5L2/vYU=;
- b=kwDmMqzap+EveZipXfHHgH2rvjPMxRpiHScskmq1/uDt5ZwmqayxT3G4NRp54guCZE
- dCFWIIfX52oJnm++6+9tw1MhHW1yPafRBbk1hJL0hPcPn3O2luv8r5L3f55Yj2NPNBQ4
- aLMwd0Xf9Mw+d/F8+mLlsry8wwaNrN9fT38cA=
+ bh=mMecNIGwwIFkrvghiGTISWnaq3Ku25+rXm7IRA18quM=;
+ b=cDeshat08qYYWmk8bbMPg1FilFmN0PiEk+BBME7fWOyaAAuDryBNzsByqFn3rOBgVT
+ Nr7pOKO3olrQo4i7zMZUFC31bHocgVBBablCLbm5ZmDc4s9LTPHPpYRDVSayhY3hlKog
+ BJftLoxa2UQ/emFzhoBl5ATrOOCkpqwx7lS5g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772764622; x=1773369422;
+ d=1e100.net; s=20230601; t=1772764624; x=1773369424;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=MD6qqBthLnoeLu2mNA/rGg9pLlumgB9HqToA5L2/vYU=;
- b=NJGno2HtcxDcW6dy+EtSTSLs5fhvjRGow7ygj9/Qw/vjQR6vb7tUbN8nwsgyog4208
- UtY3i9ktO+K8TDVplrrgJFYSxOt86es8mkS9HwMc1cu+9eRZyAwV2a76wLOjuRIeFsSv
- r8yn7jATLEAqry4jbk6ihgmMBViNFCF9RUbW4IggrLCvaU2JJaQ/H7jTQwKPtmS9ZF/S
- zlXY6zX1Pi2rds1IW3grMbFtgApnfGj/uk+3Tm5+L73hu60kg+tcltLRWFRqIQP0eZe7
- 4FC4pn+68PxhnnrmF12k7HVYUhbDirNLcIzb8LvPRM0WM/2u/HPhrScYm2JLQwkWP4pp
- PDTw==
-X-Gm-Message-State: AOJu0YxixKnCl98BaA6si7qcipoXXbSvW79PbiucPKWn/sdtAvpbpQ5w
- WuJMP7vgeM8uGxeuCNEiWCptxtlnVpwQ8JJEThVQawzk+wTCsCdZD7qI1G7uUx1ucP8IoBsH0M8
- WhqU=
-X-Gm-Gg: ATEYQzzFXunFwPyv92wjmXDvUCnF/D0KrLfhPk2wEL4pSRgMUzr5w21rRetNX/S45Ft
- NWaO7ML4wP1xMMO6dESW0NQhjSKGou/nF+mPapI7SYt4SVHQV9ZCJ28jYo6aoHjhRTH59zcu/70
- eoT+enclmAZB4S7R7B/0J26GSTjhjE6k6/RzfGVrC7SGZg+1Oqze6E4buuvjZfOTC8myLYmFSc/
- onEvNDvVKXhD036ZqqMssu0gY3tVXIpdVjUiIP6r+qHVZYq/niQ1lthzuPq7NNnsUumNVdrQi0x
- 7O+z/58EeLy7VrmXIiNpXZ9/FtIR+dibp7z38BMMV/1aDf1Z2VwBbc/odDyn5SiYu2M7vGdN66P
- Ie8g9VkXnIkJkHRmkvq4/jclRp1M8kDdFv8U4JTTXz2SG+HVxfg2XztcJIe6GaldmK6u2h0VEoW
- Ts3frjW4TMiG0DWJGuPw==
-X-Received: by 2002:a05:622a:2:b0:4f1:b93e:8d60 with SMTP id
- d75a77b69052e-508f491c586mr7959891cf.33.1772764622061; 
- Thu, 05 Mar 2026 18:37:02 -0800 (PST)
+ bh=mMecNIGwwIFkrvghiGTISWnaq3Ku25+rXm7IRA18quM=;
+ b=A6HwmTnkzwdLS7CfxHG+uWei8h/A7+YeHkq0tLYfNsa9Kk3ttVOxlsiN//jhUD5tYv
+ NES9SUDt4l6XnwyTlp44TufvITGmYxjrp1QYnyx6lRe979x7jw5X/kKhM4JjyyetvUgG
+ 6leUgE+Hutzowl9mp8zzb/1Pz1ciAHgvzFruPROybJIReBNzx1wGJMe4jCCNWH2ltjj0
+ 8PGisQaxjYwCLnPTFfXLK0dc1l0RToHKwFcc+BH/N/0A/hIekN8mQgKk3OZNTqN2vK+p
+ MgJNorGz4o5owbmRJ+70w3SEBkiOvdVXymCUicq9lhrPYnBJNwTbeBotFf8O/ECJ/yHr
+ 8LSg==
+X-Gm-Message-State: AOJu0YyyzQeJSj39Y8p+eJbg4yOEnyqHaFDKtS8RRwKATKEVmh/9iYhl
+ +WAyCuc3hYw2ZQFqsxYenClDpJB9wFsGcXtO4fOAauLzUcPXv2t7Z/kdW6IQoiPyc66NaaaMvBG
+ 1tBw=
+X-Gm-Gg: ATEYQzwS7zxapx7V3yYid5iBuhNKoqxNJKJxYk7dI6xEtmI2udnSB4PM6ammEo/bSYQ
+ PQCAJr8KkK+w2AH3d7JAKlsdH1bZdhqRV672D8CaleHGCPGcoJ9TCV9X05N/QheE+TUFSb2t7dS
+ 9xfB7tisK9EBAdOPUGtAWyap3WD1gi8YXup8Cru4F+bbPkGB+93semmTlt1pgYhWUr1nyN8f4TC
+ v/UjBnTwAvK48DHvJ3xXkKXVrCb/4ep/LCCoLm8TEskGMX+X8eqdfONWjZ2YepJ92EJOOirQ+fm
+ JTX0oSMZilbeVK+15LHkCodF+V5fT9v6d+XkoKXZ5CzQrZ1Z0ZwDoMJ6j/sU25PcapGT9oCB6sl
+ gj7f7J0DpeKOZlgug7QE3PGWEqJjtG1vvi/pahINCpnr1L1leBjzvFx8rvu8sfdUHAn1Z0dcLfx
+ eD3ZeRXT8iturkJxyUIw==
+X-Received: by 2002:a05:6214:1d06:b0:899:fad1:64e7 with SMTP id
+ 6a1803df08f44-89a30af1ca2mr6204776d6.47.1772764623830; 
+ Thu, 05 Mar 2026 18:37:03 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.00
+ 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 18:37:01 -0800 (PST)
+ Thu, 05 Mar 2026 18:37:03 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
  Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 01/17] dm: Move flags_remove() check before child removal
-Date: Thu,  5 Mar 2026 19:36:10 -0700
-Message-ID: <20260306023638.2678886-2-sjg@chromium.org>
+Subject: [PATCH v4 02/17] dm: Remove children when parent is removed by flags
+Date: Thu,  5 Mar 2026 19:36:11 -0700
+Message-ID: <20260306023638.2678886-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306023638.2678886-1-sjg@chromium.org>
 References: <20260306023638.2678886-1-sjg@chromium.org>
@@ -97,69 +97,54 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move the flags_remove() call before device_chld_remove() and save the
-result in a separate variable. This is just a refactoring with no
-behaviour change, preparing for the next commit which needs to know
-whether the parent will be removed before deciding how to remove its
-children.
+When dm_remove_devices_active() removes devices using specialised flags
+like DM_REMOVE_ACTIVE_ALL, a parent device may match (e.g. MMC has
+DM_FLAG_OS_PREPARE) while its children do not. This deactivates the
+parent but leaves children activated, an inconsistent state.
+
+Later, when uclass_destroy() calls device_remove() with DM_REMOVE_NORMAL
+on the already-deactivated parent, it returns early without touching the
+children. The subsequent device_unbind() then fails because the children
+are still activated.
+
+Fix this by dropping only the DM_REMOVE_ACTIVE_ALL requirement for child
+removal when the parent is being removed. This ensures children are
+removed along with their parent, while still preserving other flags like
+DM_REMOVE_NON_VITAL so that vital devices remain protected.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 ---
 
 (no changes since v1)
 
- drivers/core/device-remove.c | 23 ++++++++++++-----------
- 1 file changed, 12 insertions(+), 11 deletions(-)
+ drivers/core/device-remove.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/core/device-remove.c b/drivers/core/device-remove.c
-index 437080ed778..03ef49c4db0 100644
+index 03ef49c4db0..557afb8d817 100644
 --- a/drivers/core/device-remove.c
 +++ b/drivers/core/device-remove.c
-@@ -198,7 +198,7 @@ static int flags_remove(uint flags, uint drv_flags)
- int device_remove(struct udevice *dev, uint flags)
- {
- 	const struct driver *drv;
--	int ret;
-+	int ret, cret;
+@@ -219,10 +219,19 @@ int device_remove(struct udevice *dev, uint flags)
+ 	cret = flags_remove(flags, drv->flags);
  
- 	if (!dev)
- 		return -EINVAL;
-@@ -210,6 +210,14 @@ int device_remove(struct udevice *dev, uint flags)
- 	if (ret)
- 		return ret;
- 
-+	/*
-+	 * Remove the device if called with the "normal" remove flag set,
-+	 * or if the remove flag matches any of the drivers remove flags
-+	 */
-+	drv = dev->driver;
-+	assert(drv);
-+	cret = flags_remove(flags, drv->flags);
-+
  	/*
++	 * Remove all children. If this device is being removed due to
++	 * active-DMA or OS-prepare flags, drop the active-flag requirement
++	 * for children so they are removed even without matching active
++	 * flags, since a deactivated device must not have activated
++	 * children. Preserve other flags (e.g. DM_REMOVE_NON_VITAL) so
++	 * that vital children are still protected.
++	 *
  	 * If the child returns EKEYREJECTED, continue. It just means that it
  	 * didn't match the flags.
-@@ -218,17 +226,10 @@ int device_remove(struct udevice *dev, uint flags)
+ 	 */
+-	ret = device_chld_remove(dev, NULL, flags);
++	ret = device_chld_remove(dev, NULL,
++				 cret ? flags :
++				 (flags & ~DM_REMOVE_ACTIVE_ALL));
  	if (ret && ret != -EKEYREJECTED)
  		return ret;
  
--	/*
--	 * Remove the device if called with the "normal" remove flag set,
--	 * or if the remove flag matches any of the drivers remove flags
--	 */
--	drv = dev->driver;
--	assert(drv);
--	ret = flags_remove(flags, drv->flags);
--	if (ret) {
-+	if (cret) {
- 		log_debug("%s: When removing: flags=%x, drv->flags=%x, err=%d\n",
--			  dev->name, flags, drv->flags, ret);
--		return ret;
-+			  dev->name, flags, drv->flags, cret);
-+		return cret;
- 	}
- 
- 	ret = uclass_pre_remove_device(dev);
 -- 
 2.43.0
 
