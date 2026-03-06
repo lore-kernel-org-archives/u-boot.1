@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E366AF513ED
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:37:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09AFF513E9
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 02:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02D63836D3;
-	Fri,  6 Mar 2026 03:37:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B51C83FBC;
+	Fri,  6 Mar 2026 03:37:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I53tKIB+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FJaWKohP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C695E83F9D; Fri,  6 Mar 2026 03:37:11 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 960F083F9B; Fri,  6 Mar 2026 03:37:14 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5509F83F2E
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18F8483F9B
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 03:37:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-899fa9610bbso81888346d6.0
- for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:09 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-899ee87355dso70716416d6.1
+ for <u-boot@lists.denx.de>; Thu, 05 Mar 2026 18:37:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772764628; x=1773369428; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772764629; x=1773369429; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+3vhtq7nm0SYDak4q7umxFHjs0yEt1ngkRA8hiQBkXo=;
- b=I53tKIB+4WEqEyXqdNlNSG9IglG6xAYPK/LYLv/QpfzsfFnEqUZ8zZYOURrV+pTN/F
- 0KnRjjoR+lT6Tgj6qlXoSVcQCVsXuhBQ4PusCp87ePP4QuZSGosLS2E9yBwZI9pNKEzZ
- oNprP6/HVdhcZoM3VAkDDnI7FP4DoMj7qFVIc=
+ bh=wiee4PDnsbFCAqlerT0THOld0kTgVJ2plLZffMZf5Ok=;
+ b=FJaWKohPqHL9bTcvuml42g5vLOLq9jt02Wrifurn5V5G25mlV35v4PBD+46OvfVwXU
+ F3BjLbqqqrb6HcH1kfkaGXzK6gVrVuwDls9S2uV90RwbDBJWbBWxLmvoqiUrhFR/fkiK
+ kImoRHL0w5mVzOa/OOUsJceDeNTWimclQZgs4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772764628; x=1773369428;
+ d=1e100.net; s=20230601; t=1772764629; x=1773369429;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+3vhtq7nm0SYDak4q7umxFHjs0yEt1ngkRA8hiQBkXo=;
- b=gqEhGen+3CFfWj3DHeW0lxc5HZ4nNASAuU4Xn+zxu9pUMWyNm6Gu6Cr0Sc653ak7Qe
- z2zaSRhXWAz/PTfM1RjjWgqX4pOKz/4iP28MQh7mFZxTzAsMRtgXt1ggDCOu09poNpvC
- jYe9o/8CR/r21pgr4ErNnKb5EW0a7MMBiwgxSzN3estIZRpXQl50i0y8une4IdVScvfw
- eVA+6rJHqSjmry+4J0DP7BGi2PtgvJ+57V+9BHknI+Rnbhzo1bwk+aXRVA+24wKVsTIb
- FH1/JWoKuaswR7a/M/FERHwSIEHph5J7/Y6cFV0cTjrUjTrSbMiNlKxBRUlqnesYJyPt
- bzfw==
-X-Gm-Message-State: AOJu0YzhqwQpxL/3p6WoP3h/kWesxNKOuNMexq0ujLQiog7G1v/AZL1n
- NQYTAIMUVK4qKswkXppOCUl5hWSVC5TqeRYhgdpj6pNt7c3LaUKNZLH+UXfTFVJSgBuM6e6eeHH
- CGNA=
-X-Gm-Gg: ATEYQzyjDCakNG9UiMj7gx/cqCs2/Nk22tEssnQTxdSgGzV3eTIpQr370zS7/VX7GEI
- pnioe2jrWIlf0+zI8FbbaSgBA7P7pPJaHIhD0lPR7tQYx33ec37MyUFyW/BuqFticXXk/XsIr2i
- bG/3fyev8W526pYDd2ev+EZB3iBcha3dqkfRMi4pVe3p4mfShpi+vE6L/07VsZ3hr3rHCOVlsyL
- txit+yoNkP9aU1Dh8d9zrNMq/k/0Ug9qH63he3IO1dFBovah8y4rbYfxkeVfMekSaQUooQU9N3F
- RQHxwp7q5xEpujdGeqnNlYyZj9L4zNUIfnocF7bu/XvTdwTdUowMXfIlhpKo5fFQpu8QStymvYT
- PlKviDC3dNB6hOInkj+24xzIrr6ScmM9Q793dgprzRaCNfIDp1KwBcxjPxo9Y5kALFAQ4lGj8BI
- Y631QH+tM2RlxR4ROHHQ==
-X-Received: by 2002:a05:6214:f07:b0:89a:b94:3cbb with SMTP id
- 6a1803df08f44-89a30a368c7mr6723336d6.22.1772764627566; 
- Thu, 05 Mar 2026 18:37:07 -0800 (PST)
+ bh=wiee4PDnsbFCAqlerT0THOld0kTgVJ2plLZffMZf5Ok=;
+ b=MGrEvixPhoA15+6gpxTFHhjCdK0ZkO/ID/WH+WgzWZWuYKRK9VtEvCu1ZHVGHBloRB
+ HIWJw1479cZ6c78ufgVp/sx2qoh2owlIlpACqPrA1BjfSKIh8AJ9LDqzAjIiVolKNIZl
+ AV2XVKF03iDpZyFielg72Y/wD2Q4JTjOnns4EtlA6o6bNQsjmLggFJa3Ylv3sl4/ZXbb
+ DpKtIdhoUOHAIviNzqDEMt5sfrdfN0wdIPyxGNcnBZVvlpGajgPcup0H6toHU0gvmM8u
+ Zfn6pTd5zOFFpXJflOdWtela2LDQcCU0H4/pQv1lJXR1ivpeqtODjl5ztm3eyjJHSpLF
+ RXpQ==
+X-Gm-Message-State: AOJu0YzeLFyGgryPu/VioOTIepObDNZ3o7K9+h3dDDaOGi5u0ytYD6o7
+ tXUJaDo2Yvk+7y7njFCsqv9eVZWNeGHEsLQJIlFPPzMjknQJ2w45yuS03LlBUb8zoRK1rpSslYh
+ A6Lo=
+X-Gm-Gg: ATEYQzzSkRnkNB7lY/Nf8aLKFk6v1IfrTfqVB09ToDYZoltaj6pVITEI4wT9aVxeLk0
+ hk4lEON5GgpCOzRAWwwgFNE2x8NQoP/r9QnAP56qMlUqEX3nTfKn5IhPCAfubten25v6FbpA6Zr
+ Nk4H6wd2OapFWXICeAX2vnwIB4KAKW18K8Q2IMX093O1AzPtXDkvhup3uov/l0c+t0gN/p3rgPI
+ YXNqT+UM5O/VLTWBYE/NU1k7/83VBWWBbjuXeNxSxqdPJmoUhQ8nIH1tMed9SPwv/EDGnECTkJk
+ zj7ppz1wHIvB8X4AemyvEfqU2lMUytHVnJSPrabwlknwFYgjc/YdVokc2JFJ2DO0yfSu4NCr6kJ
+ 27YaUhB8qHVcwgq+nd/G/2yEmIXYCmAjxF01y7U+S08E65zZLP2UBxrgocH6N8UkVoNVYukqUmo
+ GZyEmoVVLhkusP9ssrOA==
+X-Received: by 2002:a05:6214:19c6:b0:899:efd1:9e07 with SMTP id
+ 6a1803df08f44-89a30a67a12mr7084946d6.30.1772764629316; 
+ Thu, 05 Mar 2026 18:37:09 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.05
+ 6a1803df08f44-89a316e8eb2sm1063436d6.35.2026.03.05.18.37.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Mar 2026 18:37:06 -0800 (PST)
+ Thu, 05 Mar 2026 18:37:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
- Aristo Chen <jj251510319013@gmail.com>, Benjamin ROBIN <dev@benjarobin.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sughosh Ganu <sughosh.ganu@arm.com>,
- Wolfgang Wallner <wolfgang.wallner@at.abb.com>,
- =?UTF-8?q?=E7=89=9B=20=E5=BF=97=E5=AE=8F?= <Zone.Niuzh@hotmail.com>
-Subject: [PATCH v4 04/17] bootm: Create bootm_final() for pre-boot cleanup
-Date: Thu,  5 Mar 2026 19:36:13 -0700
-Message-ID: <20260306023638.2678886-5-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Guillaume Ranquet <ranquet.guillaume@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 05/17] x86: Call bootm_final()
+Date: Thu,  5 Mar 2026 19:36:14 -0700
+Message-ID: <20260306023638.2678886-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306023638.2678886-1-sjg@chromium.org>
 References: <20260306023638.2678886-1-sjg@chromium.org>
@@ -101,98 +98,49 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-There are various functions which announce that booting is imminent and
-do related preparation. Most of these are arch-specific.
-
-In practice, most archs do a similar thing. It would be better to
-have a common function, with perhaps some events for things that are
-really arch- and board-specific.
-
-Create a new bootm_final() function with the common pre-boot steps:
-printing the "Starting kernel" message, recording bootstage data,
-optionally writing bootstage to the FDT and printing a report, and
-removing active devices.
-
-Be careful to avoid using BIT() macros which are not available with host
-tools.
+The x86 code in bootm_announce_and_cleanup() is very similar to the new
+bootm_final() function, so just use the latter.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
 
 ---
 
-Changes in v4:
-- Print '(fake run for tracing)' when flag is set
-- Use BOOTM_STATE_OS_FAKE_GO instead of new enum bootm_final_t
+(no changes since v3)
 
 Changes in v3:
-- Fix "the a" typo
-- Introduce with all common functionality (not empty)
-- Put in bootm.c instead of a separate file
-- Squash in patches 2, 3 and 5 from v2
+- Drop the DMA comment move (now in the introductory patch)
 
- boot/bootm.c    | 22 ++++++++++++++++++++++
- include/bootm.h | 10 ++++++++++
- 2 files changed, 32 insertions(+)
+ arch/x86/lib/bootm.c | 14 +-------------
+ 1 file changed, 1 insertion(+), 13 deletions(-)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 4bdca22ea8c..cba10b5dce7 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -7,6 +7,7 @@
- #ifndef USE_HOSTCC
- #include <bootm.h>
- #include <bootstage.h>
-+#include <dm/root.h>
- #include <cli.h>
- #include <command.h>
- #include <cpu_func.h>
-@@ -1194,6 +1195,27 @@ void __weak switch_to_non_secure_mode(void)
+diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
+index 7a94dc877e3..cde4fbf3557 100644
+--- a/arch/x86/lib/bootm.c
++++ b/arch/x86/lib/bootm.c
+@@ -34,22 +34,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ void bootm_announce_and_cleanup(void)
  {
+-	printf("\nStarting kernel ...\n\n");
+-
+ #ifdef CONFIG_SYS_COREBOOT
+ 	timestamp_add_now(TS_START_KERNEL);
+ #endif
+-	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
+-#if IS_ENABLED(CONFIG_BOOTSTAGE_REPORT)
+-	bootstage_report();
+-#endif
+-
+-	/*
+-	 * Call remove function of all devices with a removal flag set.
+-	 * This may be useful for last-stage operations, like cancelling
+-	 * of DMA operation or releasing device internal buffers.
+-	 */
+-	dm_remove_devices_active();
++	bootm_final(0);
  }
  
-+void bootm_final(int flag)
-+{
-+	printf("\nStarting kernel ...%s\n\n",
-+	       (flag & BOOTM_STATE_OS_FAKE_GO) ?
-+	       " (fake run for tracing)" : "");
-+
-+	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_HANDOFF, "start_kernel");
-+
-+	if (IS_ENABLED(CONFIG_BOOTSTAGE_FDT) && IS_ENABLED(CONFIG_CMD_FDT))
-+		bootstage_fdt_add_report();
-+	if (IS_ENABLED(CONFIG_BOOTSTAGE_REPORT))
-+		bootstage_report();
-+
-+	/*
-+	 * Call remove function of all devices with a removal flag set.
-+	 * This may be useful for last-stage operations, like cancelling
-+	 * of DMA operation or releasing device internal buffers.
-+	 */
-+	dm_remove_devices_active();
-+}
-+
- #else /* USE_HOSTCC */
- 
- #if defined(CONFIG_FIT_SIGNATURE)
-diff --git a/include/bootm.h b/include/bootm.h
-index 4060cec7fc0..f6958be751a 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -321,4 +321,14 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline);
-  */
- int bootm_boot_start(ulong addr, const char *cmdline);
- 
-+/**
-+ * bootm_final() - Announce and do cleanup before boot
-+ *
-+ * This performs the common pre-boot steps: printing the "Starting kernel"
-+ * message, recording bootstage data, and removing active devices.
-+ *
-+ * @flag: Boot state flags (BOOTM_STATE_OS_FAKE_GO prints a fake-run message)
-+ */
-+void bootm_final(int flag);
-+
- #endif
+ #if defined(CONFIG_OF_LIBFDT) && !defined(CONFIG_OF_NO_KERNEL)
 -- 
 2.43.0
 
