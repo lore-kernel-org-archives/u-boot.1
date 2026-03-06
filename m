@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045BAFCC055
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:15:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DDB8FCC055
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 18:15:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D08784010;
-	Fri,  6 Mar 2026 19:14:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF88A838BB;
+	Fri,  6 Mar 2026 19:14:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CPCTeFVu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h9uXfMOr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D69F884010; Fri,  6 Mar 2026 19:14:00 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 5649D8382A; Fri,  6 Mar 2026 19:14:03 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8469483FFA
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:13:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CCF6D8400F
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 19:14:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-8cb39647a70so917658585a.0
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:13:58 -0800 (PST)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-8cd751a4e93so17596385a.0
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 10:14:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1772820837; x=1773425637; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1772820839; x=1773425639; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j2SyCMS70bCpi0Q/xnv+60R+0OG4xHwYINBEJ+/ddcw=;
- b=CPCTeFVuQHTHaSJVRZZbMu4EcGjDXeb1/MV38g3ypG7R6g5yaS4SM0p4b9mSNUAuoL
- ON8N7sZvYNrRP4Hnwm81beX54cKsWxZA8Bbjwru8gwBu9fGE7vq+ooJctnudrdkjugTC
- Xho/QS3BnMUAjmXepeQCQRD7Bfl/aaGYF3WhY=
+ bh=pfJGJu+zOHA++QAl9nmPWEDrAOkPJSxXijNs4k44RC8=;
+ b=h9uXfMOrlUqIEVqdql/lvoXqrJJ1qTsOxtrc5TNkkVoZ7hF0ZVIBVL1rpV58q/oy5F
+ kTNMugch4tZ9b3C7m1caorsCZA9kasrC/XXquzVFxUQn1oDrqZ+gC+PQoUM6OFNNVT1P
+ 7g6StKhNUKrbc3szuhzJUoBviSMqOeblJKHJg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772820837; x=1773425637;
+ d=1e100.net; s=20230601; t=1772820839; x=1773425639;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=j2SyCMS70bCpi0Q/xnv+60R+0OG4xHwYINBEJ+/ddcw=;
- b=VnMfnfnO8Y+yIJzWx8jHW/rEqErptBQSOSIjStMKqkhm5v4al2M0RxTeP0RguPWeJB
- Mvs0HZ/6J1c6z08VzkZNvX5nuAmopmRB71kvPV47E3Tvh7IL9Qfe48+dsTQH+TmSn0n0
- 51NYVgNbhPGk5wb9c2vFr0UMviiVgVlrkfa1mK1jrpCnl7BKGGE0ZDNYZtqMlnsyAK83
- A5FeqCA8R4V468O8q3J+SfOlX+oQmJ5XS3yk0OJ1r+eu7g53NnOhzQK5rT+1Jtmig2Tj
- TtIzzuTvlHyNGTwGb1/h1s6YVIbGfGIf94Jqr0AtsYz5s/baymWq8VyZMZ3i4zDDxlJ9
- uttA==
-X-Gm-Message-State: AOJu0YzueElPd8dIjUwn3o+8NfYqCSJ/zWi2eBTmjM11DMN/Uec207lc
- QKpwERTGnXLAQ14Xxo37a8c1wIOsl1lRG1sN0H++pLrGjF4fmGrvcLirNKkaFBCXgKpqfH79In7
- vVPc=
-X-Gm-Gg: ATEYQzyi6+61McxPfEe9uf1+TLY1TPW8Lk8ouS4bZ5hJa68TGLrPUxUHp2dBKgMiy1r
- a2N5KV2++87438p9FPDmHOSIaPlhs1WgyIRUud3O10xxoyXV7onnjoSLc4QTn15IfzZ7wexaH0c
- 3skvAv6HW7euDqm/0ShiNChlK0o8NkoFXBX8Tg3yAdAZTgj9uQvPgAYaykZHcmifz7yZpIBvrPS
- YkJq7jVK8jPglVrUySno2INPoiU9X7+w8vkyBwvFa91r9dGLoaaaDQiD/v4J8cEnLmwJtKYM7p/
- aJaZjB9HyIlbxyLWm/oTPjh/B0QpDd8CoaOUAZ+sdXlex5BVwDYMMk8HkKSfL3MQ/RWE2jpAJyw
- 6BM98GA1Ttb/blcLqKnBOfXG6HqUP/QuABnsYENd9syFUNLMp+YiD7qzaUK4GYP/akEQV1ylyb4
- KKeIpEPR4S7IUXvb+yOA==
-X-Received: by 2002:a05:620a:470b:b0:8c6:f411:5eec with SMTP id
- af79cd13be357-8cd6d4fb195mr393056485a.38.1772820836670; 
- Fri, 06 Mar 2026 10:13:56 -0800 (PST)
+ bh=pfJGJu+zOHA++QAl9nmPWEDrAOkPJSxXijNs4k44RC8=;
+ b=eF4Z24QSrm+nsrYs0S8iNVvrqG9qVah+Euf/YTHB8pTHVYErFlPw/bRdO2odm4Z5j+
+ AYnU07PeE+6rI1FqV/XlFG0PJqFbriWgSeI/BF1MD5K4Qct+U+k12gp7BAg3Lh66sh/K
+ U/98UwS1PJb8gbu6+zx34VH45SQ56XjIpnP9V6rQPh+RdhHr6RLCoXdi1ALj4PdADXaW
+ FIRwr6bdbuaOo6vhkYY5WoT0cBjZx0G9gWmUricpPNWGJF+Us8nwady7zbQJNt0sUm9G
+ bN6KN/Gt5UIRZFkk1emPEVdlZfSm/HzD7OuNAM1J/62omqF9tIJvv5NEgUFrfm/Gxo7a
+ nsCg==
+X-Gm-Message-State: AOJu0Yz6+9Q27oGwWFHgAOP2SFQJe9s8E7pln1C9E/XCIWjgqboI3nAQ
+ i7bdsOLklC28bFk60iPFBKMzz2P8B9qrqc9ftL9778osF9BCbdNryugMEMS3slm4KMNRDEhcGSc
+ 29ag=
+X-Gm-Gg: ATEYQzxOn77dYYJ08HcbXcafFzi6kAv/Ci/ua+rAlzD6W07FUso/hlFtfbNee4eDpRK
+ PlESfdZmrJtl1c6LDJo32Su7NMl+/pn5qJNuASJh46prwFtVg09HjLziwyF5+OF9YzIy2ugArrn
+ eTEqTH2e0Q4NH+C0xcsKxSu2ApjwHhEit2RSoqwFyFTMgu93NKuJhA8qoxUQu0hE+vFUknRTJmB
+ QSdjkDj2wDEP3xvyTHJvp6wQ/1RUcKd6rRFKXYkEIP1j2CWEdA5ySuuz0Zc6wGeU7V7kdgM0Nt2
+ AgkpDeapvKJuNSvtAfpdmnqQAMEvRgRlLZYTmJC09aMmW/6Wm+NvFZcf4HFZqX/FcPhSjWkKEPk
+ V5L9aXx5cEv+lj5plAw26+rE8ykL334Ok4PYrqi5A+u9wvPNT6tUh2tps7AVDq+m5MTQ83KyPpy
+ EC4BZnto90gp5ZpVJLXA==
+X-Received: by 2002:a05:620a:4114:b0:8c5:1fd2:e9ef with SMTP id
+ af79cd13be357-8cd6d371588mr386737485a.28.1772820839017; 
+ Fri, 06 Mar 2026 10:13:59 -0800 (PST)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.13.54
+ af79cd13be357-8cd6f5736c0sm155930885a.49.2026.03.06.10.13.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 10:13:56 -0800 (PST)
+ Fri, 06 Mar 2026 10:13:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
@@ -76,9 +76,10 @@ Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
  Simon Glass <sjg@chromium.org>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v2 12/23] binman: test: Move FIP/TF-A test files to test/fip/
-Date: Fri,  6 Mar 2026 11:12:40 -0700
-Message-ID: <20260306181304.2426352-13-sjg@chromium.org>
+Subject: [PATCH v2 13/23] binman: test: Move UEFI capsule test files to
+ test/capsule/
+Date: Fri,  6 Mar 2026 11:12:41 -0700
+Message-ID: <20260306181304.2426352-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260306181304.2426352-1-sjg@chromium.org>
 References: <20260306181304.2426352-1-sjg@chromium.org>
@@ -102,234 +103,228 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-Move about 15 test files for ARM Trusted Firmware FIP, ATF BL31, SCP,
-OpenSBI, and BL1 entries into a fip/ subdirectory. Drop the numeric
-prefixes and the redundant fip_ filename prefix, and update all
-references.
+Move about a dozen test files for UEFI capsule creation (signed,
+versioned, accept, revert) into a capsule/ subdirectory. Drop the
+numeric prefixes and the redundant capsule_ filename prefix, and
+update all references.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
 (no changes since v1)
 
  tools/binman/ftest.py                         | 30 +++++++++----------
- .../{169_atf_bl31.dts => fip/atf_bl31.dts}    |  0
- .../bad_align.dts}                            |  0
- .../binman/test/{347_bl1.dts => fip/bl1.dts}  |  0
- .../collection.dts}                           |  0
- .../binman/test/{203_fip.dts => fip/fip.dts}  |  0
- .../test/{207_fip_ls.dts => fip/ls.dts}       |  0
- .../{209_fip_missing.dts => fip/missing.dts}  |  0
- .../{205_fip_no_type.dts => fip/no_type.dts}  |  0
- .../test/{201_opensbi.dts => fip/opensbi.dts} |  0
- .../test/{204_fip_other.dts => fip/other.dts} |  0
- .../{208_fip_replace.dts => fip/replace.dts}  |  0
- .../binman/test/{172_scp.dts => fip/scp.dts}  |  0
- .../test/{210_fip_size.dts => fip/size.dts}   |  0
- .../test/{206_fip_uuid.dts => fip/uuid.dts}   |  0
- 15 files changed, 15 insertions(+), 15 deletions(-)
- rename tools/binman/test/{169_atf_bl31.dts => fip/atf_bl31.dts} (100%)
- rename tools/binman/test/{211_fip_bad_align.dts => fip/bad_align.dts} (100%)
- rename tools/binman/test/{347_bl1.dts => fip/bl1.dts} (100%)
- rename tools/binman/test/{212_fip_collection.dts => fip/collection.dts} (100%)
- rename tools/binman/test/{203_fip.dts => fip/fip.dts} (100%)
- rename tools/binman/test/{207_fip_ls.dts => fip/ls.dts} (100%)
- rename tools/binman/test/{209_fip_missing.dts => fip/missing.dts} (100%)
- rename tools/binman/test/{205_fip_no_type.dts => fip/no_type.dts} (100%)
- rename tools/binman/test/{201_opensbi.dts => fip/opensbi.dts} (100%)
- rename tools/binman/test/{204_fip_other.dts => fip/other.dts} (100%)
- rename tools/binman/test/{208_fip_replace.dts => fip/replace.dts} (100%)
- rename tools/binman/test/{172_scp.dts => fip/scp.dts} (100%)
- rename tools/binman/test/{210_fip_size.dts => fip/size.dts} (100%)
- rename tools/binman/test/{206_fip_uuid.dts => fip/uuid.dts} (100%)
+ .../accept.dts}                               |  0
+ .../accept_missing_guid.dts}                  |  0
+ .../accept_revert_missing.dts}                |  0
+ .../{311_capsule.dts => capsule/capsule.dts}  |  0
+ .../empty_type_missing.dts}                   |  0
+ .../missing_guid.dts}                         |  0
+ .../missing_index.dts}                        |  0
+ .../missing_key.dts}                          |  0
+ .../oemflags.dts}                             |  0
+ .../revert.dts}                               |  0
+ .../signed.dts}                               |  0
+ .../signed_ver.dts}                           |  0
+ .../version.dts}                              |  0
+ 14 files changed, 15 insertions(+), 15 deletions(-)
+ rename tools/binman/test/{319_capsule_accept.dts => capsule/accept.dts} (100%)
+ rename tools/binman/test/{321_capsule_accept_missing_guid.dts => capsule/accept_missing_guid.dts} (100%)
+ rename tools/binman/test/{323_capsule_accept_revert_missing.dts => capsule/accept_revert_missing.dts} (100%)
+ rename tools/binman/test/{311_capsule.dts => capsule/capsule.dts} (100%)
+ rename tools/binman/test/{322_empty_capsule_type_missing.dts => capsule/empty_type_missing.dts} (100%)
+ rename tools/binman/test/{318_capsule_missing_guid.dts => capsule/missing_guid.dts} (100%)
+ rename tools/binman/test/{317_capsule_missing_index.dts => capsule/missing_index.dts} (100%)
+ rename tools/binman/test/{316_capsule_missing_key.dts => capsule/missing_key.dts} (100%)
+ rename tools/binman/test/{315_capsule_oemflags.dts => capsule/oemflags.dts} (100%)
+ rename tools/binman/test/{320_capsule_revert.dts => capsule/revert.dts} (100%)
+ rename tools/binman/test/{312_capsule_signed.dts => capsule/signed.dts} (100%)
+ rename tools/binman/test/{314_capsule_signed_ver.dts => capsule/signed_ver.dts} (100%)
+ rename tools/binman/test/{313_capsule_version.dts => capsule/version.dts} (100%)
 
 diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 43f421178cb..1e83e6140b4 100644
+index 1e83e6140b4..43292941576 100644
 --- a/tools/binman/ftest.py
 +++ b/tools/binman/ftest.py
-@@ -4247,12 +4247,12 @@ class TestFunctional(unittest.TestCase):
+@@ -7517,7 +7517,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
  
-     def testPackBl31(self):
-         """Test that an image with an ATF BL31 binary can be created"""
--        data = self._DoReadFile('169_atf_bl31.dts')
-+        data = self._DoReadFile('fip/atf_bl31.dts')
-         self.assertEqual(ATF_BL31_DATA, data[:len(ATF_BL31_DATA)])
+     def testCapsuleGen(self):
+         """Test generation of EFI capsule"""
+-        data = self._DoReadFile('311_capsule.dts')
++        data = self._DoReadFile('capsule/capsule.dts')
  
-     def testPackScp(self):
-         """Test that an image with an SCP binary can be created"""
--        data = self._DoReadFile('172_scp.dts')
-+        data = self._DoReadFile('fip/scp.dts')
-         self.assertEqual(SCP_DATA, data[:len(SCP_DATA)])
+         self._CheckCapsule(data)
  
-     def CheckFitFdt(self, dts='fit/fdt.dts', use_fdt_list=True,
-@@ -5046,7 +5046,7 @@ class TestFunctional(unittest.TestCase):
+@@ -7528,13 +7528,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = tools.read_file(self.TestFile("key.pem"))
+         self._MakeInputFile("key.crt", data)
  
-     def testPackOpenSBI(self):
-         """Test that an image with an OpenSBI binary can be created"""
--        data = self._DoReadFile('201_opensbi.dts')
-+        data = self._DoReadFile('fip/opensbi.dts')
-         self.assertEqual(OPENSBI_DATA, data[:len(OPENSBI_DATA)])
+-        data = self._DoReadFile('312_capsule_signed.dts')
++        data = self._DoReadFile('capsule/signed.dts')
  
-     def testSectionsSingleThread(self):
-@@ -5234,7 +5234,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self._CheckCapsule(data, signed_capsule=True)
  
-     def testFip(self):
-         """Basic test of generation of an ARM Firmware Image Package (FIP)"""
--        data = self._DoReadFile('203_fip.dts')
-+        data = self._DoReadFile('fip/fip.dts')
-         hdr, fents = fip_util.decode_fip(data)
-         self.assertEqual(fip_util.HEADER_MAGIC, hdr.name)
-         self.assertEqual(fip_util.HEADER_SERIAL, hdr.serial)
-@@ -5266,7 +5266,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenVersionSupport(self):
+         """Test generation of EFI capsule with version support"""
+-        data = self._DoReadFile('313_capsule_version.dts')
++        data = self._DoReadFile('capsule/version.dts')
  
-     def testFipOther(self):
-         """Basic FIP with something that isn't a external blob"""
--        data = self._DoReadFile('204_fip_other.dts')
-+        data = self._DoReadFile('fip/other.dts')
-         hdr, fents = fip_util.decode_fip(data)
+         self._CheckCapsule(data, version_check=True)
  
-         self.assertEqual(2, len(fents))
-@@ -5277,13 +5277,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testFipNoType(self):
-         """FIP with an entry of an unknown type"""
+@@ -7545,20 +7545,20 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = tools.read_file(self.TestFile("key.pem"))
+         self._MakeInputFile("key.crt", data)
+ 
+-        data = self._DoReadFile('314_capsule_signed_ver.dts')
++        data = self._DoReadFile('capsule/signed_ver.dts')
+ 
+         self._CheckCapsule(data, signed_capsule=True, version_check=True)
+ 
+     def testCapsuleGenCapOemFlags(self):
+         """Test generation of EFI capsule with OEM Flags set"""
+-        data = self._DoReadFile('315_capsule_oemflags.dts')
++        data = self._DoReadFile('capsule/oemflags.dts')
+ 
+         self._CheckCapsule(data, capoemflags=True)
+ 
+     def testCapsuleGenKeyMissing(self):
+         """Test that binman errors out on missing key"""
          with self.assertRaises(ValueError) as e:
--            self._DoReadFile('205_fip_no_type.dts')
-+            self._DoReadFile('fip/no_type.dts')
-         self.assertIn("Must provide a fip-type (node name 'u-boot' is not a known FIP type)",
+-            self._DoReadFile('316_capsule_missing_key.dts')
++            self._DoReadFile('capsule/missing_key.dts')
+ 
+         self.assertIn("Both private key and public key certificate need to be provided",
+                       str(e.exception))
+@@ -7566,7 +7566,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenIndexMissing(self):
+         """Test that binman errors out on missing image index"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('317_capsule_missing_index.dts')
++            self._DoReadFile('capsule/missing_index.dts')
+ 
+         self.assertIn("entry is missing properties: image-index",
+                       str(e.exception))
+@@ -7574,27 +7574,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenGuidMissing(self):
+         """Test that binman errors out on missing image GUID"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('318_capsule_missing_guid.dts')
++            self._DoReadFile('capsule/missing_guid.dts')
+ 
+         self.assertIn("entry is missing properties: image-guid",
                        str(e.exception))
  
-     def testFipUuid(self):
-         """Basic FIP with a manual uuid"""
--        data = self._DoReadFile('206_fip_uuid.dts')
-+        data = self._DoReadFile('fip/uuid.dts')
-         hdr, fents = fip_util.decode_fip(data)
+     def testCapsuleGenAcceptCapsule(self):
+         """Test generationg of accept EFI capsule"""
+-        data = self._DoReadFile('319_capsule_accept.dts')
++        data = self._DoReadFile('capsule/accept.dts')
  
-         self.assertEqual(2, len(fents))
-@@ -5297,7 +5297,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self._CheckEmptyCapsule(data, accept_capsule=True)
  
-     def testFipLs(self):
-         """Test listing a FIP"""
--        data = self._DoReadFileRealDtb('207_fip_ls.dts')
-+        data = self._DoReadFileRealDtb('fip/ls.dts')
-         hdr, fents = fip_util.decode_fip(data)
+     def testCapsuleGenRevertCapsule(self):
+         """Test generationg of revert EFI capsule"""
+-        data = self._DoReadFile('320_capsule_revert.dts')
++        data = self._DoReadFile('capsule/revert.dts')
  
-         tmpdir = None
-@@ -5353,7 +5353,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self._CheckEmptyCapsule(data)
  
-     def testFipExtractOneEntry(self):
-         """Test extracting a single entry fron an FIP"""
--        self._DoReadFileRealDtb('207_fip_ls.dts')
-+        self._DoReadFileRealDtb('fip/ls.dts')
-         image_fname = tools.get_output_filename('image.bin')
-         fname = os.path.join(self._indir, 'output.extact')
-         control.ExtractEntries(image_fname, fname, None, ['atf-fip/u-boot'])
-@@ -5363,7 +5363,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testFipReplace(self):
-         """Test replacing a single file in a FIP"""
-         expected = U_BOOT_DATA + tools.get_bytes(0x78, 50)
--        data = self._DoReadFileRealDtb('208_fip_replace.dts')
-+        data = self._DoReadFileRealDtb('fip/replace.dts')
-         updated_fname = tools.get_output_filename('image-updated.bin')
-         tools.write_file(updated_fname, data)
-         entry_name = 'atf-fip/u-boot'
-@@ -5387,13 +5387,13 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
- 
-     def testFipMissing(self):
-         with terminal.capture() as (stdout, stderr):
--            self._DoTestFile('209_fip_missing.dts', allow_missing=True)
-+            self._DoTestFile('fip/missing.dts', allow_missing=True)
-         err = stderr.getvalue()
-         self.assertRegex(err, "Image 'image'.*missing.*: rmm-fw")
- 
-     def testFipSize(self):
-         """Test a FIP with a size property"""
--        data = self._DoReadFile('210_fip_size.dts')
-+        data = self._DoReadFile('fip/size.dts')
-         self.assertEqual(0x100 + len(U_BOOT_DATA), len(data))
-         hdr, fents = fip_util.decode_fip(data)
-         self.assertEqual(fip_util.HEADER_MAGIC, hdr.name)
-@@ -5414,14 +5414,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-     def testFipBadAlign(self):
-         """Test that an invalid alignment value in a FIP is detected"""
+     def testCapsuleGenAcceptGuidMissing(self):
+         """Test that binman errors out on missing image GUID for accept capsule"""
          with self.assertRaises(ValueError) as e:
--            self._DoTestFile('211_fip_bad_align.dts')
-+            self._DoTestFile('fip/bad_align.dts')
-         self.assertIn(
-             "Node \'/binman/atf-fip\': FIP alignment 31 must be a power of two",
-             str(e.exception))
+-            self._DoReadFile('321_capsule_accept_missing_guid.dts')
++            self._DoReadFile('capsule/accept_missing_guid.dts')
  
-     def testFipCollection(self):
-         """Test using a FIP in a collection"""
--        data = self._DoReadFile('212_fip_collection.dts')
-+        data = self._DoReadFile('fip/collection.dts')
-         entry1 = control.images['image'].GetEntries()['collection']
-         data1 = data[:entry1.size]
-         hdr1, fents2 = fip_util.decode_fip(data1)
-@@ -5583,7 +5583,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         self.assertIn("Image GUID needed for generating accept capsule",
+                       str(e.exception))
+@@ -7602,7 +7602,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenEmptyCapsuleTypeMissing(self):
+         """Test that capsule-type is specified"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('322_empty_capsule_type_missing.dts')
++            self._DoReadFile('capsule/empty_type_missing.dts')
  
-     def testPackBl1(self):
-         """test if an image with a bl1 binary can be created"""
--        data = self._DoReadFile('347_bl1.dts')
-+        data = self._DoReadFile('fip/bl1.dts')
-         self.assertEqual(ATF_BL1_DATA, data[:len(ATF_BL1_DATA)])
+         self.assertIn("entry is missing properties: capsule-type",
+                       str(e.exception))
+@@ -7610,7 +7610,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testCapsuleGenAcceptOrRevertMissing(self):
+         """Test that both accept and revert capsule are not specified"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoReadFile('323_capsule_accept_revert_missing.dts')
++            self._DoReadFile('capsule/accept_revert_missing.dts')
  
-     def testRenesasRCarGen4SA0Image(self):
-diff --git a/tools/binman/test/169_atf_bl31.dts b/tools/binman/test/fip/atf_bl31.dts
+     def test_assume_size(self):
+         """Test handling of the assume-size property for external blob"""
+@@ -7857,7 +7857,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkeficapsuleMissing(self):
+         """Test that binman complains if mkeficapsule is missing"""
+         with self.assertRaises(ValueError) as e:
+-            self._DoTestFile('311_capsule.dts',
++            self._DoTestFile('capsule/capsule.dts',
+                              force_missing_bintools='mkeficapsule')
+         self.assertIn("Node '/binman/efi-capsule': Missing tool: 'mkeficapsule'",
+                       str(e.exception))
+@@ -7865,7 +7865,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+     def testMkeficapsuleMissingOk(self):
+         """Test that binman deals with mkeficapsule being missing"""
+         with terminal.capture() as (stdout, stderr):
+-            ret = self._DoTestFile('311_capsule.dts',
++            ret = self._DoTestFile('capsule/capsule.dts',
+                                    force_missing_bintools='mkeficapsule',
+                                    allow_missing=True)
+         self.assertEqual(103, ret)
+diff --git a/tools/binman/test/319_capsule_accept.dts b/tools/binman/test/capsule/accept.dts
 similarity index 100%
-rename from tools/binman/test/169_atf_bl31.dts
-rename to tools/binman/test/fip/atf_bl31.dts
-diff --git a/tools/binman/test/211_fip_bad_align.dts b/tools/binman/test/fip/bad_align.dts
+rename from tools/binman/test/319_capsule_accept.dts
+rename to tools/binman/test/capsule/accept.dts
+diff --git a/tools/binman/test/321_capsule_accept_missing_guid.dts b/tools/binman/test/capsule/accept_missing_guid.dts
 similarity index 100%
-rename from tools/binman/test/211_fip_bad_align.dts
-rename to tools/binman/test/fip/bad_align.dts
-diff --git a/tools/binman/test/347_bl1.dts b/tools/binman/test/fip/bl1.dts
+rename from tools/binman/test/321_capsule_accept_missing_guid.dts
+rename to tools/binman/test/capsule/accept_missing_guid.dts
+diff --git a/tools/binman/test/323_capsule_accept_revert_missing.dts b/tools/binman/test/capsule/accept_revert_missing.dts
 similarity index 100%
-rename from tools/binman/test/347_bl1.dts
-rename to tools/binman/test/fip/bl1.dts
-diff --git a/tools/binman/test/212_fip_collection.dts b/tools/binman/test/fip/collection.dts
+rename from tools/binman/test/323_capsule_accept_revert_missing.dts
+rename to tools/binman/test/capsule/accept_revert_missing.dts
+diff --git a/tools/binman/test/311_capsule.dts b/tools/binman/test/capsule/capsule.dts
 similarity index 100%
-rename from tools/binman/test/212_fip_collection.dts
-rename to tools/binman/test/fip/collection.dts
-diff --git a/tools/binman/test/203_fip.dts b/tools/binman/test/fip/fip.dts
+rename from tools/binman/test/311_capsule.dts
+rename to tools/binman/test/capsule/capsule.dts
+diff --git a/tools/binman/test/322_empty_capsule_type_missing.dts b/tools/binman/test/capsule/empty_type_missing.dts
 similarity index 100%
-rename from tools/binman/test/203_fip.dts
-rename to tools/binman/test/fip/fip.dts
-diff --git a/tools/binman/test/207_fip_ls.dts b/tools/binman/test/fip/ls.dts
+rename from tools/binman/test/322_empty_capsule_type_missing.dts
+rename to tools/binman/test/capsule/empty_type_missing.dts
+diff --git a/tools/binman/test/318_capsule_missing_guid.dts b/tools/binman/test/capsule/missing_guid.dts
 similarity index 100%
-rename from tools/binman/test/207_fip_ls.dts
-rename to tools/binman/test/fip/ls.dts
-diff --git a/tools/binman/test/209_fip_missing.dts b/tools/binman/test/fip/missing.dts
+rename from tools/binman/test/318_capsule_missing_guid.dts
+rename to tools/binman/test/capsule/missing_guid.dts
+diff --git a/tools/binman/test/317_capsule_missing_index.dts b/tools/binman/test/capsule/missing_index.dts
 similarity index 100%
-rename from tools/binman/test/209_fip_missing.dts
-rename to tools/binman/test/fip/missing.dts
-diff --git a/tools/binman/test/205_fip_no_type.dts b/tools/binman/test/fip/no_type.dts
+rename from tools/binman/test/317_capsule_missing_index.dts
+rename to tools/binman/test/capsule/missing_index.dts
+diff --git a/tools/binman/test/316_capsule_missing_key.dts b/tools/binman/test/capsule/missing_key.dts
 similarity index 100%
-rename from tools/binman/test/205_fip_no_type.dts
-rename to tools/binman/test/fip/no_type.dts
-diff --git a/tools/binman/test/201_opensbi.dts b/tools/binman/test/fip/opensbi.dts
+rename from tools/binman/test/316_capsule_missing_key.dts
+rename to tools/binman/test/capsule/missing_key.dts
+diff --git a/tools/binman/test/315_capsule_oemflags.dts b/tools/binman/test/capsule/oemflags.dts
 similarity index 100%
-rename from tools/binman/test/201_opensbi.dts
-rename to tools/binman/test/fip/opensbi.dts
-diff --git a/tools/binman/test/204_fip_other.dts b/tools/binman/test/fip/other.dts
+rename from tools/binman/test/315_capsule_oemflags.dts
+rename to tools/binman/test/capsule/oemflags.dts
+diff --git a/tools/binman/test/320_capsule_revert.dts b/tools/binman/test/capsule/revert.dts
 similarity index 100%
-rename from tools/binman/test/204_fip_other.dts
-rename to tools/binman/test/fip/other.dts
-diff --git a/tools/binman/test/208_fip_replace.dts b/tools/binman/test/fip/replace.dts
+rename from tools/binman/test/320_capsule_revert.dts
+rename to tools/binman/test/capsule/revert.dts
+diff --git a/tools/binman/test/312_capsule_signed.dts b/tools/binman/test/capsule/signed.dts
 similarity index 100%
-rename from tools/binman/test/208_fip_replace.dts
-rename to tools/binman/test/fip/replace.dts
-diff --git a/tools/binman/test/172_scp.dts b/tools/binman/test/fip/scp.dts
+rename from tools/binman/test/312_capsule_signed.dts
+rename to tools/binman/test/capsule/signed.dts
+diff --git a/tools/binman/test/314_capsule_signed_ver.dts b/tools/binman/test/capsule/signed_ver.dts
 similarity index 100%
-rename from tools/binman/test/172_scp.dts
-rename to tools/binman/test/fip/scp.dts
-diff --git a/tools/binman/test/210_fip_size.dts b/tools/binman/test/fip/size.dts
+rename from tools/binman/test/314_capsule_signed_ver.dts
+rename to tools/binman/test/capsule/signed_ver.dts
+diff --git a/tools/binman/test/313_capsule_version.dts b/tools/binman/test/capsule/version.dts
 similarity index 100%
-rename from tools/binman/test/210_fip_size.dts
-rename to tools/binman/test/fip/size.dts
-diff --git a/tools/binman/test/206_fip_uuid.dts b/tools/binman/test/fip/uuid.dts
-similarity index 100%
-rename from tools/binman/test/206_fip_uuid.dts
-rename to tools/binman/test/fip/uuid.dts
+rename from tools/binman/test/313_capsule_version.dts
+rename to tools/binman/test/capsule/version.dts
 -- 
 2.43.0
 
