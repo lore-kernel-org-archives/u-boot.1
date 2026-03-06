@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CB9EFCC05D
-	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 19:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD3AFCC065
+	for <u-boot@archiver.kernel.org>; Fri,  6 Mar 2026 19:08:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C290C83F86;
-	Fri,  6 Mar 2026 20:06:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0255C83FC0;
+	Fri,  6 Mar 2026 20:08:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IVSmc2++";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jPFZ9IBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB00983FD4; Fri,  6 Mar 2026 20:06:06 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 1C9A783F86; Fri,  6 Mar 2026 20:08:31 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D620783F00
- for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 20:06:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F97D83F00
+ for <u-boot@lists.denx.de>; Fri,  6 Mar 2026 20:08:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-439c9bdc1eeso3255563f8f.3
- for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 11:06:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-8cb420f7500so910645685a.2
+ for <u-boot@lists.denx.de>; Fri, 06 Mar 2026 11:08:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1772823964; x=1773428764; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=XYJOhPmhJ1dAFAHFRgHG4U33pX6thzJ6giUMeoK5bJM=;
- b=IVSmc2++JZJHhQI5ol5OsLirDPlLri6uNHIQqlo2UfCAmoinGEIYgZbRB9AsJ5k/dT
- gjDchLhAN1ckq13vUoXGnahj5Twqr7aEbjBTXzfeQfgHD53aMi1qe+SIKfioToXBOSDy
- E1EHRtjFhxqaFtHuYac/Mo82p/ICdTQ+xSRMUdHVRtesPQuUmfrekrA/EPvxb5pEG/a3
- D2iovd5U3rM2Ev/ZMm+GmALg8/KHX366UwP1vn/4W9ej6k9XpA3DjAbXUAIdoR+e8VR+
- 0gNTr5+svV2tuupGMQq3ZfE99fbaYHRp4/Jo3fie/1Ge+ydnAzHEzPsjN+2WbOl/fqxo
- b69A==
+ d=chromium.org; s=google; t=1772824106; x=1773428906; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cIx42QZfZLnQoLdNxte38iqCyTcIqNQQ7aXWCzWE5dE=;
+ b=jPFZ9IBbCNHqL07L1TU8iSqYt8ACqyYz9a3Q9xCXKvoEMoaaBgNPzQ2sHdlo8YM3ZA
+ H0lkoUK/NQZsFwUemWEStxmp/S3x4k07knBko483WhhDXCC8TwxZwGl4tHXZ4m0lYCWI
+ bAPT25UZdaRv2Bql0D+4RQdChaPnsLT3xHRDE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772823964; x=1773428764;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=XYJOhPmhJ1dAFAHFRgHG4U33pX6thzJ6giUMeoK5bJM=;
- b=LRB36i7r/iqQETjWD5QGe6fUwCYipxY4PdxqeXqvh9q9QZNJ+m2F7XwiBQL2qQ/jt6
- SoYt85Rb1Azv93Teo+ufVAPtyUoGK3HUZI2yZG68REquC5tI44NSbPGBKH1cLF8xt31+
- N+ioVOGl4aKfy6Bh0l9AVHTQ5Gekbf3OBO+doJ78c3Ga+dTzArnMcPYRcH+Hj56FH50R
- F9fIyYxBvJ01xpRVtEU4UCzTHel17KXwy+/3Go13ofIp4JQya1TY9XYX4dfWcVNfGPOg
- uoXWHSfL7L1Yg6tB098j9TtHzCkVlxZckf24Uj+KhwjpuK2GY01HnmoJjW5Fg0V4sg13
- x/Lw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQQnF8BWDTPSMu/OjKq2jbhfYEnrhCbtdf68xb9RAahu0YG8SXbmSPX59fTLibVkV5vBcqcnM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzMo8DBzvXHaaMM3+Q2dv2ltZKIZvAbEBd2EFmivAaKrQ59Djl3
- huSpt9DX7NUwPIXS+47C841K5tDRXURy3Wnqx4zXKZwMTNzVIszI0TAj
-X-Gm-Gg: ATEYQzxHpmK80AK49YBoktFn6jZslDFDY9wRV0by1QX/TcY7j7EKa8bNvJOkG3FtEO6
- OCqrtT3IfSXCV45xxN7ycY4NPYhfIkGfv9q4XTswfSONbGNVIB2LlVLj6cY+pADfVPme1QjM0YU
- nuL1rH5yCRKDLjaFeou6AMF/YQtg3AMBsjxJ/xxEV1NuWFws7VCPXE4WqQVSxgQqLCAd/n22SRn
- 3huKPEDrmeBipy/Ac6atGNZ6bLmti4lVHGQsM0N1nvt1EHfjvZ4WRlk7lu4Gws3j9zaVaSlUrF6
- G91NSQyh/9I5jgqTwmNHZgFS9lxUxX/3kkkvB4yQ1wWV1ua18SPZSfnknSxn3ZzIy+M56/lpUv5
- GUN511HFRTa8Gfn5lEOl+lnckAN4vERGlfH1TLeKgTPbXSnzyxMqajkdf6LTrDpo2pj28vRK3lz
- AYl1AhIOd5qpSt3v5FiQqamXXf5dxSZNvN72eaUcVPR/5nqQVrF/B7xDI=
-X-Received: by 2002:a05:6000:4210:b0:439:becb:6286 with SMTP id
- ffacd0b85a97d-439da87c5a7mr5371508f8f.54.1772823963979; 
- Fri, 06 Mar 2026 11:06:03 -0800 (PST)
-Received: from Ansuel-XPS24 (93-34-88-122.ip49.fastwebnet.it. [93.34.88.122])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-439dae45786sm6701065f8f.32.2026.03.06.11.06.02
+ d=1e100.net; s=20230601; t=1772824106; x=1773428906;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cIx42QZfZLnQoLdNxte38iqCyTcIqNQQ7aXWCzWE5dE=;
+ b=e15ZExQROd2MmNLlok3Aw6QloPKVBmZeG260j7c43RB4ntl0dunvz1n3fSpzwll9Qe
+ dPivWgO+JheFM1rm3caj2lRN6YSDX2/BGwBgJnr0xtYMncp9js5hKsnUHnmjYvfACQXS
+ cEkMU3sakkgYjzHGpKn0R3KVljnzQXyHydCODjxPkQ8z9lghxJON1tfcdVWY8p5tqVmX
+ gQHjNCbY+lmF6RLSHtSH0+On2PJjAWs4sMTeHQlOYO+QEzFyDhbQIRMAmi6JO6LX4ZdA
+ fGJhGhkwg9NrF4qn9Xv0KPYP4BZV1nsv/ni0jnm9P6qLBGMpTo4zR/CRs/EY9DIPTD/b
+ ocUA==
+X-Gm-Message-State: AOJu0YwuOTQ0yv5oHeNl8q0efgzPuemh/wC7zk7RIpj60wg6rtljqdTr
+ GPc/QNqQpkpiIxlcKHKnE/V5qVGh0ctxqqFao2vYyD1KM9lytP8ks/pmYC+IrDYP6hqTtc31Bfo
+ 9szs=
+X-Gm-Gg: ATEYQzyilLLPcfVagJLnCZcX+PQ+FpjYZ7pGtJDd2kqyDg53dQXkB+tbuE5/M5hL1Ri
+ A9/T1TNphs3IJLww0zK7B5OmkOo2lz02UUa0S8ctIsuH2C1fIQbuu+8TUYl3EhiCgPg0ebxJy0N
+ kcTqNU+3gDXk8LEla5d3vDrQs74SGsVXmKEKsBMNK3k0snGjAG9MO/gdbdyPkFn4u47b3zEcuQl
+ v2LD/SpiZRuZKS8RkkVa3Dz6Zkml326zu6Sm5d6iRfLThUlF5+BE1Lg2ulT6JUkNeMzJB9EVKnL
+ bbioS+YjFx5/yhSNo3Zc4+E428tQZCXC6wFXkChs4PehPuHh4DfKgeElzPX2nlAbFhPodQ6Q0R6
+ P7Hjr4Qi+xSSSSB9Q39OqmXUw+E5O+SHMpTaK53OQYssxmrikKYFePgJGRiP8onptc93Za0UEwq
+ cKRSnAzyi5vB4A6GrJ7w==
+X-Received: by 2002:a05:620a:4687:b0:8c6:a64e:92b4 with SMTP id
+ af79cd13be357-8cd6d54ba17mr392230985a.78.1772824105884; 
+ Fri, 06 Mar 2026 11:08:25 -0800 (PST)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-8cd6f54ceaesm164372285a.40.2026.03.06.11.08.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Mar 2026 11:06:03 -0800 (PST)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Peng Fan <peng.fan@nxp.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Paul Kocialkowski <paulk@sys-base.io>, Chen-Yu Tsai <wens@kernel.org>,
- Justin Klaassen <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 5/5] misc: fw_loader: implement request_firmware_size() OP
-Date: Fri,  6 Mar 2026 20:05:39 +0100
-Message-ID: <20260306190542.22920-6-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260306190542.22920-1-ansuelsmth@gmail.com>
-References: <20260306190542.22920-1-ansuelsmth@gmail.com>
+ Fri, 06 Mar 2026 11:08:25 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>
+Subject: [PATCH v3 0/7] Provide classes for building disk images with FS
+ partitions
+Date: Fri,  6 Mar 2026 12:08:06 -0700
+Message-ID: <20260306190818.3586749-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,242 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It might be useful to get the firmware size before reading it to allocate the
-correct size. This is needed for case where the firmware size change across
-different firmware version and is not always the same. In such case the only way
-to handle this scenario is to allocate a big-enough buffer to read the firmware.
+Create a class around mk_fs() to handle the common tasks of image
+creation, such as managing scratch directories and cleaning up. Add a
+helper class for creating disk images with partition tables.
 
-To better handle this, introduce the request_firmware_size() OP to get the
-firmware size before reading it. This way proper buffer can be allocated and
-dynamic firmware size can be better supported.
+Start with a few small cleanups to mk_fs(), then convert a test over
+to use the new classes.
 
-Both FS and FIP lodaer are updated to handle the new .get_size() handler.
+Changes in v3:
+- Rewrite the commit message as suggested by Tom Rini
+- Make the class a thin wrapper that delegates to mk_fs()
+- Remove cur_dir parameter from DiskHelper as suggested by Tom Rini
+- Remove editorialising from commit message
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- drivers/misc/fw_loader/fip_loader.c | 35 +++++++++++++++
- drivers/misc/fw_loader/fs_loader.c  | 70 ++++++++++++++++++++++++-----
- drivers/misc/fw_loader/fw_loader.c  | 20 +++++++++
- drivers/misc/fw_loader/internal.h   |  1 +
- include/fw_loader.h                 |  9 ++++
- 5 files changed, 124 insertions(+), 11 deletions(-)
+Changes in v2:
+- Split the quiet flag into a separate commit
+- Fix fs_img to accept only a leaf name, always under persistent_data_dir
+- Add new patch to split the quiet flag out of the previous patch
+- Split the pylint fix into a separate commit
+- Explain why setup_image() is left to later
 
-diff --git a/drivers/misc/fw_loader/fip_loader.c b/drivers/misc/fw_loader/fip_loader.c
-index 376e1d2a59d8..a285f785db37 100644
---- a/drivers/misc/fw_loader/fip_loader.c
-+++ b/drivers/misc/fw_loader/fip_loader.c
-@@ -523,6 +523,40 @@ out:
- 	return ret;
- }
- 
-+/**
-+ * fw_get_fip_firmware_size - get firmware size.
-+ * @dev: An instance of a driver.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+static int fw_get_fip_firmware_size(struct udevice *dev)
-+{
-+	struct fip_toc_entry ent;
-+	struct fip_storage_info info = { };
-+	int ret;
-+
-+	ret = fw_parse_storage_info(dev, &info);
-+	if (ret)
-+		goto out;
-+
-+	struct firmware *firmwarep = dev_get_priv(dev);
-+
-+	if (!firmwarep) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+
-+	ret = parse_fip_firmware(firmwarep, &info, &ent);
-+	if (ret)
-+		goto out;
-+
-+	ret = ent.size;
-+
-+out:
-+	fw_storage_info_release(dev, &info);
-+	return ret;
-+}
-+
- static int fip_loader_probe(struct udevice *dev)
- {
- 	struct device_plat *plat = dev_get_plat(dev);
-@@ -533,6 +567,7 @@ static int fip_loader_probe(struct udevice *dev)
- 		return ret;
- 
- 	plat->get_firmware = fw_get_fip_firmware;
-+	plat->get_size = fw_get_fip_firmware_size;
- 
- 	return 0;
- };
-diff --git a/drivers/misc/fw_loader/fs_loader.c b/drivers/misc/fw_loader/fs_loader.c
-index 4ae01b9c8f0d..d6b9f4998815 100644
---- a/drivers/misc/fw_loader/fs_loader.c
-+++ b/drivers/misc/fw_loader/fs_loader.c
-@@ -93,15 +93,8 @@ static int select_fs_dev(struct device_plat *plat)
- 	return ret;
- }
- 
--/**
-- * fw_get_filesystem_firmware - load firmware into an allocated buffer.
-- * @dev: An instance of a driver.
-- *
-- * Return: Size of total read, negative value when error.
-- */
--static int fw_get_filesystem_firmware(struct udevice *dev)
-+static int __fw_get_filesystem_firmware_prepare(struct udevice *dev)
- {
--	loff_t actread = 0;
- 	char *storage_interface, *dev_part, *ubi_mtdpart, *ubi_volume;
- 	int ret;
- 
-@@ -126,6 +119,28 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 		ret = select_fs_dev(dev_get_plat(dev));
- 	}
- 
-+	return ret;
-+}
-+
-+static void __fw_get_filesystem_firmware_release(struct udevice *dev)
-+{
-+#ifdef CONFIG_CMD_UBIFS
-+	umount_ubifs();
-+#endif
-+}
-+
-+/**
-+ * fw_get_filesystem_firmware - load firmware into an allocated buffer.
-+ * @dev: An instance of a driver.
-+ *
-+ * Return: Size of total read, negative value when error.
-+ */
-+static int fw_get_filesystem_firmware(struct udevice *dev)
-+{
-+	loff_t actread = 0;
-+	int ret;
-+
-+	ret = __fw_get_filesystem_firmware_prepare(dev);
- 	if (ret)
- 		goto out;
- 
-@@ -147,9 +162,41 @@ static int fw_get_filesystem_firmware(struct udevice *dev)
- 	}
- 
- out:
--#ifdef CONFIG_CMD_UBIFS
--	umount_ubifs();
--#endif
-+	__fw_get_filesystem_firmware_release(dev);
-+	return ret;
-+}
-+
-+/**
-+ * fw_get_filesystem_firmware_size - get firmware size.
-+ * @dev: An instance of a driver.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+static int fw_get_filesystem_firmware_size(struct udevice *dev)
-+{
-+	loff_t size = 0;
-+	int ret;
-+
-+	ret = __fw_get_filesystem_firmware_prepare(dev);
-+	if (ret)
-+		goto out;
-+
-+	struct firmware *firmwarep = dev_get_priv(dev);
-+
-+	if (!firmwarep)
-+		return -ENOMEM;
-+
-+	ret = fs_size(firmwarep->name, &size);
-+
-+	if (ret) {
-+		debug("Error: %d Failed to get size for %s.\n",
-+		      ret, firmwarep->name);
-+	} else {
-+		ret = size;
-+	}
-+
-+out:
-+	__fw_get_filesystem_firmware_release(dev);
- 	return ret;
- }
- 
-@@ -163,6 +210,7 @@ static int fs_loader_probe(struct udevice *dev)
- 		return ret;
- 
- 	plat->get_firmware = fw_get_filesystem_firmware;
-+	plat->get_size = fw_get_filesystem_firmware_size;
- 
- 	return 0;
- };
-diff --git a/drivers/misc/fw_loader/fw_loader.c b/drivers/misc/fw_loader/fw_loader.c
-index d2446fdc07da..d5973fce4b9c 100644
---- a/drivers/misc/fw_loader/fw_loader.c
-+++ b/drivers/misc/fw_loader/fw_loader.c
-@@ -162,3 +162,23 @@ int request_firmware_into_buf(struct udevice *dev,
- 
- 	return plat->get_firmware(dev);
- }
-+
-+int request_firmware_size(struct udevice *dev, const char *name)
-+{
-+	struct device_plat *plat;
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	ret = _request_firmware_prepare(dev, name, NULL, 0, 0);
-+	if (ret < 0) /* error */
-+		return ret;
-+
-+	plat = dev_get_plat(dev);
-+
-+	if (!plat->get_size)
-+		return -EOPNOTSUPP;
-+
-+	return plat->get_size(dev);
-+}
-diff --git a/drivers/misc/fw_loader/internal.h b/drivers/misc/fw_loader/internal.h
-index 5513e043925f..4701b494bf3f 100644
---- a/drivers/misc/fw_loader/internal.h
-+++ b/drivers/misc/fw_loader/internal.h
-@@ -36,6 +36,7 @@ struct device_plat {
- 	char *ubivol;
- 
- 	int (*get_firmware)(struct udevice *dev);
-+	int (*get_size)(struct udevice *dev);
- };
- 
- /**
-diff --git a/include/fw_loader.h b/include/fw_loader.h
-index 7053c7bc6f05..1af3db385161 100644
---- a/include/fw_loader.h
-+++ b/include/fw_loader.h
-@@ -39,6 +39,15 @@ int request_firmware_into_buf(struct udevice *dev,
- 			      const char *name,
- 			      void *buf, size_t size, u32 offset);
- 
-+/**
-+ * request_firmware_size - Get firmware size.
-+ * @dev: An instance of a driver.
-+ * @name: Name of firmware file.
-+ *
-+ * Return: Size of firmware, negative value when error.
-+ */
-+int request_firmware_size(struct udevice *dev, const char *name);
-+
- /**
-  * request_firmware_into_buf_via_script() -
-  * Load firmware using a U-Boot script and copy to buffer
+Simon Glass (7):
+  test: fs_helper: Allow passing the image filename
+  test: fs_helper: Add a quiet flag to mk_fs()
+  test: Update comment for fs_helper.setup_image()
+  test: fs_helper: Drop the size_gran argument
+  test: Convert fs_helper to use a class
+  test: Add a helper class to create disk images
+  test: Convert test_efi_bootmgr to use FsHelper
+
+ test/py/tests/fs_helper.py        | 205 ++++++++++++++++++++++++++++--
+ test/py/tests/test_efi_bootmgr.py |  38 ++----
+ 2 files changed, 211 insertions(+), 32 deletions(-)
+
 -- 
-2.51.0
+2.43.0
 
+base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
+branch: testfs3
