@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D441EA852E
-	for <u-boot@archiver.kernel.org>; Sun,  8 Mar 2026 15:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41AD6EA852E
+	for <u-boot@archiver.kernel.org>; Sun,  8 Mar 2026 15:42:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CED583F53;
-	Sun,  8 Mar 2026 16:42:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0857283F8A;
+	Sun,  8 Mar 2026 16:42:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Y7S3R6Pt";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Ahprn5u1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D13A683F6D; Sun,  8 Mar 2026 16:42:14 +0100 (CET)
-Received: from mail-m1973171.qiye.163.com (mail-m1973171.qiye.163.com
- [220.197.31.71])
+ id 894E283F75; Sun,  8 Mar 2026 16:42:23 +0100 (CET)
+Received: from mail-m1973176.qiye.163.com (mail-m1973176.qiye.163.com
+ [220.197.31.76])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45E8680517
- for <u-boot@lists.denx.de>; Sun,  8 Mar 2026 16:42:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7E8780517
+ for <u-boot@lists.denx.de>; Sun,  8 Mar 2026 16:42:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [IPV6:2409:8934:ee:296f:9c9e:9480:b564:39f3] (unknown
  [IPV6:2409:8934:ee:296f:9c9e:9480:b564:39f3])
- by smtp.qiye.163.com (Hmail) with ESMTP id 362542e68;
- Sun, 8 Mar 2026 23:42:08 +0800 (GMT+08:00)
-Message-ID: <acdfb715-85c1-4218-89df-4ce00b4dcc62@rock-chips.com>
-Date: Sun, 8 Mar 2026 23:42:08 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 362542e6e;
+ Sun, 8 Mar 2026 23:42:17 +0800 (GMT+08:00)
+Message-ID: <404d6688-e568-447e-aa14-811d766946ac@rock-chips.com>
+Date: Sun, 8 Mar 2026 23:42:16 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/6] ARM: dts: rockchip: Add spi_flash label to
- rk3288-veyron
+Subject: Re: [PATCH v3 3/6] ARM: dts: rockchip: move edp assigned-clocks to
+ edp node on rk3288
 To: Johan Jonker <jbx6244@gmail.com>
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, sumit.garg@kernel.org,
  trini@konsulko.com, u-boot@lists.denx.de, hl@rock-chips.com,
  jagan@amarulasolutions.com, jernej.skrabec@gmail.com, w.egorov@phytec.de,
  jonas@kwiboo.se, michael@amarulasolutions.com
 References: <a6eba53c-a2db-44fc-9785-d817dbb4ef11@gmail.com>
- <12e44bc6-4e45-43e4-9c61-0816b90ce75f@gmail.com>
+ <31a98155-90cd-4896-9dad-002e6a53b4fa@gmail.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <12e44bc6-4e45-43e4-9c61-0816b90ce75f@gmail.com>
+In-Reply-To: <31a98155-90cd-4896-9dad-002e6a53b4fa@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9cce1cef2003afkunma30fc64315be92e
+X-HM-Tid: 0a9cce1d10a703afkunm5fac21ba15be971
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDQ01CVh1LHxhPTE1LSEJLGlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTEoaVk8YQh1NQ01CTR5ITlYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlJT0tCQUNCSE9BHh5BSUJNHUFCGEIeQUJPQ0tBGU5NT0FIQh1IWVdZFh
  oPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=Y7S3R6PtOsX+wO99idjjBMQYZyEFR2YTtDe5CKdBtXP2xaOi9LejbkzMrUMXMljO8kuUM4Qg6UiOP40kz1v4Nk2m8wKdc+e8etl0NC+4XJOXR9v21bBRDYzEa1hPonkwY3+NOYyj9gwIjcoV86nX6LJQtfkTAxZ0MilZHjtiiqI=;
+ b=Ahprn5u1Eexrc49p+nnmiNBelZMgDXN/86lv1izOhkMZ4LidSAut/ApmNvtbzS/clQbesyyESUUwisXInR0flWTwk7s6NzlKNcnyGUECDFBPZc1AKKFUhmPuHdUUaK+PQSImfhCdBlJ1q8zQzME03aTfkDpqCBG0Hl6SPi93gwc=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=TnAT9xFrH2p/GszcKSxg2z++9oUxroqnzNUUz0Nt0Z0=;
+ bh=wi2U4mHqoq4JVvhBIECPCkXMsDfZrp8syaS/8KwYaVA=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,38 +77,50 @@ X-Virus-Status: Clean
 
 
 On 2026/1/17 06:12, Johan Jonker wrote:
-> The u-boot,spl-boot-order property requires a label at a boot
-> device node. In order to migrate to OF_UPSTREAM more easier
-> add a spi_flash label to the rk3288-veyron.dtsi file.
+> The rk3288 power-controller node contains an assigned-clocks property
+> that conflicts with the bindings. From the git history it shows that they
+> wanted to assign the rk3288 EDP_24M clock input centrally before an edp
+> node was available. Move the edp assigned-clocks property to the edp node
+> to reduce dtbs_check output.
 >
 > Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> Link: https://patch.msgid.link/8a423a6f-bfdc-4947-aef9-35ee7c4f6ca2@gmail.com
+> Link: https://patch.msgid.link/7d6fa223-ab90-4c44-9180-54df78467ea5@gmail.com
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 >
-> [ upstream commit: ac7116a626e00d3024adedb43b74bdf2ce45efc2 ]
+> [ upstream commit: 10712ce694a67304a99dbba20f8cb146ca5f4fd6 ]
 >
-> (cherry picked from commit 38e6f7cd300f66cc9f657cd0e8881a01acc664d0)
+> (cherry picked from commit e1b4137b6bbc9998b13cde2eba0655cfdd358c69)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   dts/upstream/src/arm/rockchip/rk3288.dtsi | 5 ++---
+>   1 file changed, 2 insertions(+), 3 deletions(-)
 >
-> diff --git a/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi b/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi
-> index 260d6c92cfd1..2d6cf08d00f9 100644
-> --- a/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi
-> +++ b/dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi
-> @@ -388,7 +388,7 @@
+> diff --git a/dts/upstream/src/arm/rockchip/rk3288.dtsi b/dts/upstream/src/arm/rockchip/rk3288.dtsi
+> index 7e284b4fecdc..7477fc5da3ec 100644
+> --- a/dts/upstream/src/arm/rockchip/rk3288.dtsi
+> +++ b/dts/upstream/src/arm/rockchip/rk3288.dtsi
+> @@ -741,9 +741,6 @@
+>   			#address-cells = <1>;
+>   			#size-cells = <0>;
 >
->   	rx-sample-delay-ns = <12>;
->
-> -	flash@0 {
-> +	spi_flash: flash@0 {
->   		compatible = "jedec,spi-nor";
->   		spi-max-frequency = <50000000>;
->   		reg = <0>;
+> -			assigned-clocks = <&cru SCLK_EDP_24M>;
+> -			assigned-clock-parents = <&xin24m>;
+> -
+>   			/*
+>   			 * Note: Although SCLK_* are the working clocks
+>   			 * of device without including on the NOC, needed for
+> @@ -1193,6 +1190,8 @@
+>   		compatible = "rockchip,rk3288-dp";
+>   		reg = <0x0 0xff970000 0x0 0x4000>;
+>   		interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
+> +		assigned-clocks = <&cru SCLK_EDP_24M>;
+> +		assigned-clock-parents = <&xin24m>;
+>   		clocks = <&cru SCLK_EDP>, <&cru PCLK_EDP_CTRL>;
+>   		clock-names = "dp", "pclk";
+>   		phys = <&edp_phy>;
 > --
 > 2.39.5
 >
