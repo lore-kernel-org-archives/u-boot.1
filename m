@@ -4,59 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C61EA8521
-	for <u-boot@archiver.kernel.org>; Sun,  8 Mar 2026 15:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDBD3EA8521
+	for <u-boot@archiver.kernel.org>; Sun,  8 Mar 2026 15:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6409180517;
-	Sun,  8 Mar 2026 16:05:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C38680517;
+	Sun,  8 Mar 2026 16:08:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ReXSbR7U";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GOLsCqP0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28C74838BB; Sun,  8 Mar 2026 16:05:19 +0100 (CET)
-Received: from mail-m15591.qiye.163.com (mail-m15591.qiye.163.com
- [101.71.155.91])
+ id 98748839D5; Sun,  8 Mar 2026 16:08:31 +0100 (CET)
+Received: from mail-m49248.qiye.163.com (mail-m49248.qiye.163.com
+ [45.254.49.248])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D91F780212
- for <u-boot@lists.denx.de>; Sun,  8 Mar 2026 16:05:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45C6A80212
+ for <u-boot@lists.denx.de>; Sun,  8 Mar 2026 16:08:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [IPV6:2409:8934:ee:296f:9c9e:9480:b564:39f3] (unknown
  [IPV6:2409:8934:ee:296f:9c9e:9480:b564:39f3])
- by smtp.qiye.163.com (Hmail) with ESMTP id 36250d4ba;
- Sun, 8 Mar 2026 23:05:10 +0800 (GMT+08:00)
-Message-ID: <40b98c82-bd3a-41c5-8570-ecc479455446@rock-chips.com>
-Date: Sun, 8 Mar 2026 23:05:09 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 36250d5aa;
+ Sun, 8 Mar 2026 23:08:26 +0800 (GMT+08:00)
+Message-ID: <9f536f5a-6cc2-4152-a1bd-953703f72573@rock-chips.com>
+Date: Sun, 8 Mar 2026 23:08:26 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] rockchip: rk3588: include all addressable DRAM in
- memory map
-To: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>
-References: <20260203-rk3588-mem-map-v1-1-04005ea48fe5@cherry.de>
+Subject: Re: [PATCH v2] phy: rockchip: naneng-combphy: Enable U3 port for
+ USB3OTG on RK3568
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20260106233646.3184154-1-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20260203-rk3588-mem-map-v1-1-04005ea48fe5@cherry.de>
+In-Reply-To: <20260106233646.3184154-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9ccdfb157403afkunm4f82a15c15b9ae4
+X-HM-Tid: 0a9ccdfe141303afkunm7d2ad93d15ba193
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSU4ZVk0fGR9IT0kaTUkZSlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSEpMVklNTkgaH0tCSxpMTVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlJT0tCQUNCSE9BHh5BSUJNHUFCGEIeQUJPQ0tBGU5NT0FIQh1IWVdZFh
  oPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=ReXSbR7UzdyUGm7hlod3OuYmgEXM8xh1cBNaAYh3OiVa/breMK759+8j8Hdxq+fo+2nd66Kypc0y2nd72gQRYlQ54vRTqatDUNHmLOuODoDHBe3/T56ibPNKnioRxjr1stTSsjrL9/DTYUEOExW+Av7dWZzx5o/KHXQpEzKxnNo=;
+ b=GOLsCqP0l+85VfaiektM6/i+xWC6vNOErfj+kVFTaGPSJLSo2knQcEFRDB0XGtU3OJwX5LBsIFs6g5mriJVRhlVD3wFWnKI48gUFd5hymLyVJqXeo1YDqYNlLwgh+EobxgeRf/b6OsVyjZVXLyPX38Yy5wFkvii6jPD2d3IzcU4=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=Li/INCWipr97MI7uarpu+0naYmo8a2swE8VyjMWYI4k=;
+ bh=jCECnjRGJCRjUgf4gHI+3fMs3QCxltoPFqi4tNy2tOk=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,82 +73,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2026/2/3 17:58, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 2026/1/7 07:36, Jonas Karlman wrote:
+> The USB OTG U3 port may have been disabled early, add support to the
+> COMBPHY driver to re-enable the U3 port.
 >
-> The ATAGS set by Rockchip DDR init blob[1] specify DRAM banks above the
-> first addressable 4GiB which we haven't done in the mem_map for RK3588
-> yet.
+> This matches changes made in the Linux commit 7bb14b61b7d0 ("phy:
+> rockchip: naneng-combphy: Enable U3 OTG port for RK3568").
 >
-> For 4GiB DRAM, the 256MiB missing from the first addressable 4GiB (due
-> to MMIO) are accessible at the end of the 8GiB address space. For 8GiB,
-> 4-8GiB address space is used for the additional 4GiB and the missing
-> 256MiB are at the end of 12GiB address space. For 12, 4-12GiB and the
-> missing 256MiB at the end of 20GiB address space. For 16GiB, 4-~16GiB
-> with two holes (reasons unknown) around 16GiB and the missing 256MiB is
-> at the end of 20GiB address space. For 32GiB, 4-16~GiB with two holes
-> and then 16GiB to 32GiB address space (so likely missing 256MiB from
-> MMIO address space).
->
-> [1] https://gist.github.com/Kwiboo/1c020d37e3adbc9d0d79dc003d921977
->
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> This is the RK3588 counterpart to RK3568's[1] which is required for
-> Marek's patch[2] to not crash RK35xx series of SoCs when booting.
->
-> This (plus patch[2]) has been tested on 4, 8 and 16GiB by TFTP'ing a
-> kernel and DTB into the various DRAM regions above 4GiB and booting this
-> kernel+dtb combination.
->
-> Note that I have zero clue as to what this is actually doing as I cannot
-> understand where this mem_map is actually used, hence the RFC.
->
-> [1] https://lore.kernel.org/u-boot/20260129193153.2232395-1-jonas@kwiboo.se/
-> [2] https://lore.kernel.org/u-boot/20260127234856.1503030-1-marek.vasut+renesas@mailbox.org/
+> v2: No change, drop second patch
 > ---
->   arch/arm/mach-rockchip/rk3588/rk3588.c | 18 ++++++++++++++++++
->   1 file changed, 18 insertions(+)
+>   drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 8 ++++++++
+>   1 file changed, 8 insertions(+)
 >
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index 55d2caab4fe..438642ca529 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -87,6 +87,24 @@ static struct mm_region rk3588_mem_map[] = {
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
->   	},  {
-> +		.virt = 0x100000000UL,
-> +		.phys = 0x100000000UL,
-> +		.size = 0x2fc000000UL,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
-> +		.virt = 0x3fc500000UL,
-> +		.phys = 0x3fc500000UL,
-> +		.size = 0x3a00000UL,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
-> +		.virt = 0x400000000UL,
-> +		.phys = 0x400000000UL,
-> +		.size = 0x400000000UL,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
->   		.virt = 0x900000000,
->   		.phys = 0x900000000,
->   		.size = 0x150000000,
->
-> ---
-> base-commit: 16fcbcb2ee25ea042c1e9cfbc04f7a5554746b64
-> change-id: 20260202-rk3588-mem-map-053661aa7e46
->
-> Best regards,
-> --
-> Quentin Schulz <quentin.schulz@cherry.de>
+> diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> index d602f965d6aa..82353ae7678c 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+> @@ -399,6 +399,14 @@ static int rk3568_combphy_cfg(struct rockchip_combphy_priv *priv)
+>   		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
+>   		param_write(priv->phy_grf, &cfg->pipe_txelec_sel, false);
+>   		param_write(priv->phy_grf, &cfg->usb_mode_set, true);
+> +		switch (priv->id) {
+> +		case 0:
+> +			param_write(priv->pipe_grf, &cfg->u3otg0_port_en, true);
+> +			break;
+> +		case 1:
+> +			param_write(priv->pipe_grf, &cfg->u3otg1_port_en, true);
+> +			break;
+> +		}
+>   		break;
+>   	case PHY_TYPE_SATA:
+>   		writel(0x41, priv->mmio + 0x38);
