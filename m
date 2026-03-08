@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 847EBF55104
-	for <u-boot@archiver.kernel.org>; Sat,  7 Mar 2026 18:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928A6FCB63B
+	for <u-boot@archiver.kernel.org>; Sun,  8 Mar 2026 14:16:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B50C583A8C;
-	Sat,  7 Mar 2026 19:22:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C4689838BB;
+	Sun,  8 Mar 2026 15:16:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J95wxG4g";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gDKMwV+p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6BFC83BC7; Sat,  7 Mar 2026 17:36:39 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 1E94183952; Sun,  8 Mar 2026 15:12:20 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC80E839A8
- for <u-boot@lists.denx.de>; Sat,  7 Mar 2026 17:36:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDC618063E
+ for <u-boot@lists.denx.de>; Sun,  8 Mar 2026 15:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-359863611faso2825097a91.3
- for <u-boot@lists.denx.de>; Sat, 07 Mar 2026 08:36:37 -0800 (PST)
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-8299f1ca894so1259056b3a.2
+ for <u-boot@lists.denx.de>; Sun, 08 Mar 2026 07:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1772901396; x=1773506196; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zMvXJLbfLARkl8MQPzoaxzah3408Fyfoe5ahfNMaIxE=;
- b=J95wxG4gzCrOS11HiTe6hGNlj4UMgR6y361VFH6Avika+dXYs1NjHM1CJaVlm0S4MN
- DipZtgHhMHy2MfjS/rO/bJAz5vMMV2o26fbQtDkzRZl9Li4jGUF9X3T6QM4TTHzQqz98
- zpowQKC473Dkh1BAnWFaYKFRuSdLbeTJpwTTM+SxqZsw3D0X2B89HH1YBvWDOrzc+Q2q
- IAro3ZJUO0gnYsHYerlM0LA7wWY4GT0l/HCJGfKCECqkdtwu7CjOAvDy64R7ZQMcSqqg
- gHuxuWQhRv+FAdpthkpmr6G22cLZfxzrAMvwUUn3lO68g+Bw7VjsC1h6j5+SgGAIIWWL
- nitg==
+ d=gmail.com; s=20230601; t=1772979136; x=1773583936; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ASLVh2GIQTuOSc6U52oG3fbFpGSs/iGsprbsbxBbhOw=;
+ b=gDKMwV+pF/L1SQxfTepPQL988G088xfqmsK3JDgCPs4zymrUTCqd8c9hG2nQTIs+zq
+ CPAl+pME7FxD/fZRAIj7umoGuZQTs5tt2m09cfi+mhVojATb8nruByEz/Spm9syH85gl
+ MVMazJy1c3fVTWUU5GYOCIyuJiuNvqU8lrre7O2wztn6DAnFeIlWKjUSDIrJANDwk99g
+ C1l2cknd27ONnTTAiggDvA7fIUwDfNPQ7DXwxDaqEtpNk1eGQAl5Q7DQdBJ4kBECBXR0
+ 1U9C7zDIRbg79mjJ1CWJgbwn3HIgnhiox212PRPXE+Qnoc7Izo5V2/sl3OHYAJ8Gk6M2
+ qfRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772901396; x=1773506196;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zMvXJLbfLARkl8MQPzoaxzah3408Fyfoe5ahfNMaIxE=;
- b=PWRG0Vh83RoW9xGtkBPE98TlP03FIXoMN5rnaEF2nhKYQb2+gyIjKtnKjjGt+c6Dl9
- C3ORIV/hXMyq/zN/Nw79qUC8emVQ7zQPrs4GYu1gr8a5rRHii5IBIu1ZzPvsAuexZDzY
- /Eag7p+eGQDjp/zqOC8mnUUMWw1Ezqhwd7Eg7bDq76uiCwOCLmcaYWKnkqPxyvqlznmf
- bS0vBI6Y0Fq1O0oSdL5ttLjNanDx190rIn+PAcIPWHg4YGHIgPglsvqT9o42mTrEiwFr
- oH3jq8K72Z5Rn/IuhPinq8z0s7O8QyG/bPDsotjBA3INLDzy8+PkL1wylS87oa1a+euh
- Dhhg==
-X-Gm-Message-State: AOJu0Yz8P/zRQhk1ugs2fD1VOglv/agYs4Xh+HgUuGXTuzNT4JmkVzKI
- CqyeuphTdGfR9H5n/K5Tdv9N+vdbb+UJMA9/g+qYoXz3dHdYHD8/g4Ku
-X-Gm-Gg: ATEYQzwGIurGGiUQTAC8jpzRpJvwunk1EIczl4DD4LRLFwoEW8qwQdI23ZXC/45YQ3I
- 6rJ/ArRzQs3CpzBHcEBADdCqWQ4SzUWNf/rFXbDhOF5u6kRj0gCVNxH0LSaBWORnMkbp3Vuf0gp
- efm2G3W3+2IHbcvfxZA1gWiPcBnvo0g7S+t3X0fwnvIWHZ+6b1vu2lzCxgvH0FJ24MKkllwcngv
- owHt88ARZrtnp86E1ZGSmuCLVmAiXl0VxU3RSgfEr7NOBAGl2ShsUkSmw1W29CNXhowsyVB+QNC
- yeDg1obSd8pzp0M65EXxLxRLPvbAqY8mPZ3fH08evoqyldB1gGu84VguuOVQOHOO9Q6DjVblC9e
- q0n7P8MW1KyfLI7LQN7ng4MtlQwOBZmLK61idBCKUdniFRo2A2GX1crEprz0z3gW+1x3cHeEAmr
- DlEIugaU77USSUTONGzAcV7vpkzY8/xMQqFICTfcvjLDHD+EyhvldZL2Ur0jISFdgrst4=
-X-Received: by 2002:a17:90b:51:b0:359:7b9a:2cf4 with SMTP id
- 98e67ed59e1d1-359be12f79amr5827385a91.0.1772901396084; 
- Sat, 07 Mar 2026 08:36:36 -0800 (PST)
-Received: from google.com (61-230-19-63.dynamic-ip.hinet.net. [61.230.19.63])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-359b2d60767sm8770924a91.8.2026.03.07.08.36.33
+ d=1e100.net; s=20230601; t=1772979136; x=1773583936;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ASLVh2GIQTuOSc6U52oG3fbFpGSs/iGsprbsbxBbhOw=;
+ b=wnzI6FKvM/cPzfY4pqoHFrZ2E1E57TEzjPrFfK56riZGrU+PCK1shAc+dKHB8rwBnd
+ HcIQSjU/UxwE4tO5RIDhQTbBokRg3lgzDRv1ZKdET100aIFBMktf9+TLppClrC50YqHl
+ pEq0PYF3Dc0ow8hqBPrlj8nwf5cZXblUAXa1HX2snMkmSePgzurnL80eUdPei5H2d7O8
+ zRk7vOz/woNtIXiPU4mXu5bpXVlBViafWfk7scthXpVyjHibttkqeyrQnb9RYdvQOTD6
+ BdMGzqbbnh7z81DDsJiSH937RwnrjbfKb05th17Wv/WCCWkypJRO9CrQpKNWJPpzzXUw
+ 7jjw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWML0ApEBcG2dCwprXOE24epf7wG0hqh0vUOpwhEjXRYleUE5HMqa1LJw7fuxSCvxhn6JtxmqU=@lists.denx.de
+X-Gm-Message-State: AOJu0YzNtLeCMBVPdOvxBtNm2j46VbiOU2gxCWc+9ayFlXbz+7SDfDQL
+ 8Uf/Xnjq2yq7pOxfQYdqXtG3I2lSbSc0frqpfNFF5qY/sZm6YD2f+jHw
+X-Gm-Gg: ATEYQzyfnfi+XQIBTaZ80mK+WM/p39kETLPo3OU9eJttNEj0DpUgYlsiv9DqpyXhyuo
+ rcRCXDvfaZcrj9rp59EGcYcMRE3LBzWIBlPsbHgazut/QxUxwoOJ8zpwxaE6joEKMO7VErPjDaF
+ nY5B3X4T9TzZ5YWicN8txrUvSGs7PZ1sgp76q8EjI93cyCYSaEUIeBNOVOEX0lXQnN5cOkoR8rd
+ G6ymK0gBrLtFN8YZs4I1VuOHmcIn6AEIx4TUrJ/jXfLH+vZwaPDU/08TX8/EwpRkzZI8S4aEcJs
+ wD0A+7ul8dci99oJkic6x65VyxcL2V2gQJupOfFcg+g99cCJ0qH743XI7f9AUbz4oUNJZxHMx8/
+ IleuHbppy9CG3pJNuA3IeKqcS6KAkdPA89LzIJZOR+iqs7r5tPDmRJN8JK0ofppxF7PiRCjoegQ
+ yMQt7SNK37xroQuP5W+eyLwnyAv211MneoUNbmNzRDHx61IyaX/yLNDv0JimYixqNVzZrmnNrBh
+ 1asPvsxWL/aQYX9aQPdTw==
+X-Received: by 2002:a05:6a00:1815:b0:821:8492:7f66 with SMTP id
+ d2e1a72fcca58-829a2ded871mr7157667b3a.22.1772979136138; 
+ Sun, 08 Mar 2026 07:12:16 -0700 (PDT)
+Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-829a463a1adsm7273605b3a.11.2026.03.08.07.12.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Mar 2026 08:36:35 -0800 (PST)
-Date: Sun, 8 Mar 2026 00:36:30 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <simon.glass@canonical.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Alison Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@sysam.it>
-Subject: Re: [PATCH v4 13/17] m68k: Call bootm_final()
-Message-ID: <aaxUDuHNHSQI74ir@google.com>
-References: <20260306023638.2678886-1-sjg@chromium.org>
- <20260306023638.2678886-14-sjg@chromium.org>
+ Sun, 08 Mar 2026 07:12:15 -0700 (PDT)
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+To: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
+ marek.vasut+renesas@mailbox.org
+Cc: ericwouds@gmail.com, kabel@kernel.org, vladimir.oltean@nxp.com,
+ frank-w@public-files.de, daniel@makrotopia.org, ansuelsmth@gmail.com,
+ mkorpershoek@kernel.org, skylake.huang@mediatek.com, tommy.shih@airoha.com,
+ lucien.jheng@airoha.com, u-boot@lists.denx.de,
+ "Lucien.Jheng" <lucienzx159@gmail.com>
+Subject: [PATCH v2 0/2] phy: add common PHY polarity properties support
+Date: Sun,  8 Mar 2026 22:06:12 +0800
+Message-Id: <20260308140614.50489-1-lucienzx159@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260306023638.2678886-14-sjg@chromium.org>
-X-Mailman-Approved-At: Sat, 07 Mar 2026 19:22:24 +0100
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 08 Mar 2026 15:16:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,49 +103,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 05, 2026 at 07:36:22PM -0700, Simon Glass wrote:
-> From: Simon Glass <simon.glass@canonical.com>
-> 
-> Add a call to bootm_final() before jumping to the kernel. This adds
-> the "Starting kernel" message, bootstage tracking,
-> board_quiesce_devices() and dm_remove_devices_active() which were not
-> previously called on m68k.
-> 
-> Signed-off-by: Simon Glass <simon.glass@canonical.com>
-> Acked-by: Angelo Dureghello <angelo@kernel-space.org>
-> Tested-by: Angelo Dureghello <angelo@kernel-space.org>
+This series ports PHY polarity inversion support via generic device tree
+properties from Linux kernel, synchronizing with Merge tag 'phy-for-7.0'
+of git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy.
 
-FWIW:
+Patch 1 introduces a new PHY_COMMON_PROPS library providing helper
+functions (phy_get_rx_polarity, phy_get_tx_polarity, and their
+"manual" variants) for PHY drivers to read standard polarity properties
+from the device tree. The PHY_POL_NORMAL, PHY_POL_INVERT, and
+PHY_POL_AUTO constants are consumed from dts/upstream/include, which is
+already on the compiler include path.
 
-Acked-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+Patch 2 updates the Airoha EN8811H PHY driver to use the new standard
+rx-polarity and tx-polarity properties, with backward compatibility
+fallback to the now-deprecated airoha,pnswap-rx and airoha,pnswap-tx
+boolean properties.
 
-Regards,
-Kuan-Wei
+Changes in v2:
+- Drop DT binding patches (v1 patches 1 and 3): already merged via
+  the DTS upstream subtree merge (tag 'v7.0-rc2-dts')
+- Drop creation of include/dt-bindings/phy/phy.h: the header is now
+  provided by dts/upstream/include/dt-bindings/phy/phy.h, which is
+  already in the build's include search path
 
-> 
-> ---
-> 
-> (no changes since v3)
-> 
-> Changes in v3:
-> - Add new patch for m68k conversion
-> 
->  arch/m68k/lib/bootm.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
-> index 3dcff8076e3..7e36ac73169 100644
-> --- a/arch/m68k/lib/bootm.c
-> +++ b/arch/m68k/lib/bootm.c
-> @@ -65,6 +65,8 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
->  
->  	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
->  
-> +	bootm_final(0);
-> +
->  	/*
->  	 * Linux Kernel Parameters (passing board info data):
->  	 *   sp+00: Ignore, side effect of using jsr to jump to kernel
-> -- 
-> 2.43.0
-> 
+Lucien.Jheng (2):
+  phy: add common PHY properties support
+  net: phy: air_en8811h: use standard rx-polarity/tx-polarity properties
+
+ drivers/net/phy/airoha/Kconfig       |   1 +
+ drivers/net/phy/airoha/air_en8811.c  |  91 +++++++--
+ drivers/phy/Kconfig                  |   8 +
+ drivers/phy/Makefile                 |   1 +
+ drivers/phy/phy-common-props.c       | 286 +++++++++++++++++++++++++++
+ include/linux/phy/phy-common-props.h |  70 +++++++
+ 6 files changed, 442 insertions(+), 15 deletions(-)
+ create mode 100644 drivers/phy/phy-common-props.c
+ create mode 100644 include/linux/phy/phy-common-props.h
+
+--
+2.34.1
+
