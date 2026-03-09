@@ -4,58 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FAFAFCA192
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 21:37:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C460FCA197
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 22:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F11F983BC8;
-	Mon,  9 Mar 2026 22:37:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 566C383BC8;
+	Mon,  9 Mar 2026 23:14:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="TUkwc6V1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U02EAAxa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8A7A83F20; Mon,  9 Mar 2026 22:37:23 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D537983BC8; Mon,  9 Mar 2026 23:14:04 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D44C83A8C
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 22:37:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1773092239;
- bh=eX1S3JzJ+Cg/bw8qDPecazT0YR4VzM59FmD4E0opmAk=;
- b=TUkwc6V1RT6inrlQ4nYiLRd8a505Bb6MKJt9NjiQrU/WBx01/9QuOfkjBCWc0PUdovFzZlA40
- HcWzJ+JXN1l1jMxYEDcCECHy6+YFHJpXWvSY7IPaJdCmaeR3+TZouHMjT6xbs7R8W+MhrthWSgw
- qh06DPd1RTdSvOjAfeNzm80VWf+Eeb7jsi+0O2b2aCufqhoLznd85GCthWOHpCuQjfhIPXqYMsw
- m25IFKgNzimKTnOU5JW6els93m0uRFN5Dg2OS9eHH2bHpKVXLDuQTVl/ZuVANjrSQXImdqQ0ObY
- DYTDMm/97tfvAxfPD+2WMxzBfRX3Z/601cNY7Ucvhv4w==
-X-Forward-Email-ID: 69af3d8876762a90c7fa47b2
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.6.49
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Eugen Hristev <eugen.hristev@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, u-boot@lists.denx.de
-Subject: [PATCH v2] rockchip: rk3588-rock-5b: Remove USB-C controller from
- u-boot.dtsi
-Date: Mon,  9 Mar 2026 21:37:06 +0000
-Message-ID: <20260309213708.535186-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.53.0
+ by phobos.denx.de (Postfix) with ESMTPS id 582B5839DF
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 23:14:01 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-4670464029eso958150b6e.2
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 15:14:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1773094440; x=1773699240; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nr6sgQwH3T3L6yTkMiInEzKM0CYQt1IWg7N6q2pajMA=;
+ b=U02EAAxaPlC2/1NPTVMrjVC32DJ2X56HLGBU+o6eEBTaNFAJtRsLtMujj2txUklDNR
+ TVoR+tNcKfBQALH7MK6hw1D70Eeb5/hpmS+ZmuOcBHKtiBhjHDCgktz9SCk94BBa9P2J
+ S7oF3HlfAupvcNC3MW04wn8a6BNL1qLCR0B8s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773094440; x=1773699240;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Nr6sgQwH3T3L6yTkMiInEzKM0CYQt1IWg7N6q2pajMA=;
+ b=Nn1e7l3YnC7FBm5HG4LbcQ+BGIJrtm/5hrOZfBs1+2bvtwHwBtGyZ+jLrRzJiug69M
+ gkOAUOxKTXQnBold0TgdKQCjgxwV08h9KNdaxexEhWQM0z+ZPb1G+VR7Yo9Gl1rFORvH
+ 7614SPTQBrQDzto4+WsbPbCfO6O3Z/2thxm2qKD8uw4MBSe48fboBUAIPAJhZTpanAh9
+ Dtuz3LV89LJe2/zcpTqb4cdr/+5pAnMUFBsFRuxkpNgf+AhiJR7ThMxk7zckMawJLaLz
+ k7zNHRS0Lys5+wQzlRYWRoi0mNk9IJ0kfBhQ6HN2+seyu2TuBQPBbXfT1hewKzmg84D5
+ HB+Q==
+X-Gm-Message-State: AOJu0YwoU8xYt9yNvugMNPZcyR9VHGt/89g7q/HVd/ppMELNcOkEL1cF
+ +oT5ZgHMRnby03nPdx38fRR2S/GbokbRvnCZBFckKqNlXpBT/tkRu4LcRnh66d8OgvA=
+X-Gm-Gg: ATEYQzyerngKcdBup5LWlrICXe4S8oXvBsT7VI6ob5EjZ+VwrFNMO9Siih1YZxh/bYr
+ CNvNqVbd6mqsm7dhCgOAqZ8WvCGxQnYr0/ve/0vXfv2olBSmKtDAs+IxSwUyrGSJQT5IcMzOO63
+ QwY92bG9gKWgE9n2QGIf2FlAzLtzfNft93r+JX+DSqzW8WEd3vh+LL3Deo1y2Ait9jbqhBImbwc
+ +yw0f8xRLW9/K7chjrEB0CSW1eQ9VapbzECn0j+JwSFvgt2oPDYT6IAEjQ2LkFxKXD6RPszq1Nw
+ t1vDDR94urZeIj4pxVh3peymlHL9GStzYCRNyPrsbI+tUmgZ6IuOsOwQvEbPBZQJeHmR6rECl47
+ Y+Z3+3XiLzfAfo72h7JIxHokbrMHTXU4ZUY84GXNJ6YI95Ff2+R71TddUsaDG+AjOWUEKdQWy51
+ ofZYF37Rzu0uzaM7pY3pA8O98D6+HvjnqPr6bWm8QoyLEelGZqwUYm9Wtuu6IfM5m3OubexL94A
+ CBnij3MWr520/ui0TEPnoXJYcgtT+3LwtFJe/Et/e8v6Q==
+X-Received: by 2002:a05:6808:4f1f:b0:467:4a7:e3f6 with SMTP id
+ 5614622812f47-46704a7e7aemr2842534b6e.2.1773094439946; 
+ Mon, 09 Mar 2026 15:13:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-466ed12cb34sm4777219b6e.11.2026.03.09.15.13.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 15:13:59 -0700 (PDT)
+Date: Mon, 9 Mar 2026 16:13:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?Q?Rapha=EBl?= Gallais-Pou <rgallaispou@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20260309221357.GG1388590@bill-the-cat>
+References: <20260309212331.GF1388590@bill-the-cat>
+ <22806ad3-cdc4-4f5b-94e7-21e541abf9cb@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+ZZho3zpl62p5EQV"
+Content-Disposition: inline
+In-Reply-To: <22806ad3-cdc4-4f5b-94e7-21e541abf9cb@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,87 +100,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit 12049db76437 ("rockchip: rk3588-rock-5b: Add USB-C controller
-to u-boot.dtsi") added the USB-C controller node to the ROCK 5B board
-u-boot.dtsi, this and related usb nodes are now part of upstream DT.
 
-Remove the upstream USB-C controller related DT nodes from u-boot.dtsi,
-including the temporary used dr_mode and maximum-speed props of the
-usb_host0_xhci node. Only usbc0 status = "okay" is kept ensuring USB-C
-power delivery continues to work as intended.
+--+ZZho3zpl62p5EQV
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
----
-Changes in v2:
-- Update commit message to mention the intended removal of the temporary
-  used dr_mode and maximum-speed props
-- Collect r-b tags
----
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 43 +------------------------
- 1 file changed, 1 insertion(+), 42 deletions(-)
+On Mon, Mar 09, 2026 at 11:05:27PM +0100, Rapha=EBl Gallais-Pou wrote:
+> Hi Tom,
+>=20
+> Regarding both stm32_dsi errors:
+>=20
+> It seems those errors are not linked to the patch you merged recently,
+> because it does not change the lines mentioned by Coverity.
 
-diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-index e07b549c767f..ddc177344ebd 100644
---- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-@@ -19,33 +19,6 @@
- 	bootph-some-ram;
- };
- 
--&i2c4 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&i2c4m1_xfer>;
--	status = "okay";
--
--	usbc0: usb-typec@22 {
--		compatible = "fcs,fusb302";
--		reg = <0x22>;
--		interrupt-parent = <&gpio3>;
--		interrupts = <RK_PB4 IRQ_TYPE_LEVEL_LOW>;
--		pinctrl-names = "default";
--		status = "okay";
--
--		usb_con: connector {
--			compatible = "usb-c-connector";
--			label = "USB-C";
--			data-role = "dual";
--			power-role = "sink";
--			try-power-role = "sink";
--			op-sink-microwatt = <1000000>;
--			sink-pdos =
--				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>,
--				<PDO_VAR(5000, 20000, 5000)>;
--		};
--	};
--};
--
- &saradc {
- 	bootph-pre-ram;
- 	vdd-microvolts = <1800000>;
-@@ -63,20 +36,6 @@
- 	};
- };
- 
--&u2phy0 {
--	status = "okay";
--};
--
--&u2phy0_otg {
--	status = "okay";
--};
--
--&usbdp_phy0 {
--	status = "okay";
--};
--
--&usb_host0_xhci {
--	dr_mode = "peripheral";
--	maximum-speed = "high-speed";
-+&usbc0 {
- 	status = "okay";
- };
--- 
-2.53.0
+Ah, likely so, yes.
 
+> Calls to device_chld_{remove, unbind} are introduced by commit a6d047c0a8=
+6b
+> ("video: stm32: remove all child of DSI bridge when its probe failed").
+>=20
+> My guess is that since my patch changed the file, it triggered the Coveri=
+ty
+> Scan for the whole file.
+>=20
+> Regardless, ret is overwritten right after the calls, so I don't think
+> checking the return value matters here except if there is a log informati=
+on.
+>=20
+> Tell me if you want me to provide a fix, but in this case I'm not sure to
+> see the point.
+
+It would be good to match the usual pattern (drivers/scsi/scsi.c and
+drivers/ata/sata.c) even if it's an unlikey chain of events. Please send
+a patch, thanks!
+
+--=20
+Tom
+
+--+ZZho3zpl62p5EQV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaa9GIQAKCRAr4qD1Cr/k
+CgRTAP9Vzb1kIwOBWN2itCbcS9N9JdbX/FPUeQiJY+S4IWrwXwD/QfgTttM2etNt
+qj8Yrm/oBpiGnt142y/uktbNtClRuQI=
+=fvXP
+-----END PGP SIGNATURE-----
+
+--+ZZho3zpl62p5EQV--
