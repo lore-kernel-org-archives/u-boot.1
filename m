@@ -4,99 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8028FF41808
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD47F41807
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:54:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E816D83A8C;
-	Mon,  9 Mar 2026 16:48:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CE41683A8C;
+	Mon,  9 Mar 2026 16:54:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zs/CPKHI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ko67wSpz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A664783A8C; Mon,  9 Mar 2026 16:48:34 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 2CBCE83F82; Mon,  9 Mar 2026 16:54:11 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C752283952
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:48:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0656583952
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:54:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b79f8f7ea43so1877741266b.2
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:48:30 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773071310; cv=none;
- d=google.com; s=arc-20240605;
- b=fcbuuRzauLn9oJ4c4tHvi/OVeMIq3ofM62mlSI/IxMHFZabWXO53cIf5k8tdjBjO07
- /lq0JhmFriP2m7dTjjufR7sUoVHpZ4qp+Ae23i6nYnRO7jmstF+WcZ/IaQ6zh8t/xE9K
- 8ZqNcgCXUmmfelvJljs7oLiVQo5DR1sbLikQ2AHITkpiaNw6DIU7QeCNjRcdSnb+Vwih
- 2HjjXFrtWtPs7afFog2F9ZGLbWt239I9LbRuTreaBKMtJ7YuLt3LD+Y+oKKCEmQVMJ7f
- pKBonyy/z6eMx4+Xmuv7x0WzGNHEkbPN/TmFipb0NkmK8EQd+7crjAFPeJKm5PDM6J+d
- Wiow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=b2OUUFSmGbu3dqUEVKEELAfduu/bYQ/Vn8zKpHySMFU=;
- fh=up0zHCCNwW0ZFtBGuVKBG5zPGJEUx8NZHjRKjuMZiDc=;
- b=arsUW9pVeFeezIOuTOwS+8A38eCGhfwjHl8kBgkAftFHdumpgGDDNa3cfG7sonA0bw
- MpF8dEKCT65XflGMYrzb+TdlzwU4YCVVl1KbMvmTupKF9qPFbwtO5g+up0gtfXn04sl1
- yR9m3VLLTSSCa17VpCRCFx7EN5ZzyVd0CO+YDlojtpphtknppR2BKiGhar0haLVmQiR7
- zOYiHigagfUYXu5tjGHwMIUT4tf/g4e5fqpagcEOLAqfzVGIv5RT6UazlaJ/hO+YGBBF
- OpsRiuhMn6lPKzbJBDC6flPGGSipBFVJYfju1gpdDaQoOnyilBHQdHossUfc0o82Ndyd
- gsWA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4806ce0f97bso106883995e9.0
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:54:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773071310; x=1773676110; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=b2OUUFSmGbu3dqUEVKEELAfduu/bYQ/Vn8zKpHySMFU=;
- b=Zs/CPKHIkfcGOmT2dkpzuGgbLg8PaAczl9/cviXJrVSVGkQ6LKbIiB9l/Kp+g1vBWs
- HS3gJhhUoHNb/FbF+6xvcT5frn6SEiWtlUADnY27IAzKaYDOu+0fuQ565Guo0DGMgDk6
- FDJ0aEBPVjyrD+g4kpXy5E1MrwIYSRXtmHr4U=
+ d=gmail.com; s=20230601; t=1773071648; x=1773676448; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QGiPkdKR+XWGlegOibRZVdoacz0wL2hrVGXx2XKjYtA=;
+ b=ko67wSpzHlZwh+w3TW7HNkk31qzRZ7eCasQDxOwrP1TQ/IT14d6iJw3vwU2oTRs22+
+ q2QZXc1CGHZZ2wKosZGpJ/3RUpbkUME0thTPW68viEKSWwvj/5rdb/AqvztBfQW4SryC
+ JCh3g6E1/ChybnpsxgpuiFRWQo91Z3AEKr1L+c/XrPgv9AzMP5TQkq7cW5TpaAj4ZGQ4
+ 4NogoF7uFdNM6Cw0S4P/2rQaw5BpJEjQqe+lhjIdnFl/C02OOlxw0pjRd+mlRNlogtZT
+ 8EIC8To6JmJA6ip3QVQErhlSrVNWYoNL3Ra7Ab87b/ExZrDNsN9hCgRTKvPBoOoCVdmw
+ lYOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773071310; x=1773676110;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1773071648; x=1773676448;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b2OUUFSmGbu3dqUEVKEELAfduu/bYQ/Vn8zKpHySMFU=;
- b=KvM7yKuktcUrfJilw+ie61polYFIr5EMhKShDnmJJ6mg1UPTnChpgy/Jh/Yykf65n+
- wYuYtJ5Ij5Y8YlOWQZcS07/iO02NVKbYncXdYO0hHVCXj/cR9+OaNpcK2n7aMpz2F2eR
- 2G148wdGK5SHbkMCzk+sAEpqgd8GwhAgca8W7pjue8q/07hxfg4oYUUZY2zQgDWfZdT0
- H1mzUtzsd2jBIkMoGIfN4efN5WhqsviigiMWc4rWEtWhO1TNhau1u+WmSBtGCvEJyQ5J
- wo4PL9Hft8VeF8LdzrGH5Ybis2P/G/9/X5uHVkAZS99STOAMHwjf0W32SnDRfPuDIUp0
- M4/g==
-X-Gm-Message-State: AOJu0YxCiivzwmXtcKWmNxh4QDQ7qbldEaXjjYTZjITf5G1L785qn1vf
- g1ToptZMl+pdjmy1FMCiF4nfoJZzu9jlLbWD0u401l+BR7keuxNE1kEYF6ggvJ43x2f5X8gJzAU
- jgpWZZGhpVUOfFRUr+muNrPbdhzeqMHmvMuW8hT/+
-X-Gm-Gg: ATEYQzwql3YR6AGNYOO75ktAsk3MF4q8+aIuuPqAkFRs7bQU8SFttcq/mcIUDoYrbI/
- PMjDFslwKrlWyZwTcbnqXB394HLrIPkXuzmi4cV5nPBfGwtyuiNjef/GJ/C3cddYnzx+GgxXF18
- 8CqSTrw9OeTE3L3YaKkVIJdB368opmF1E/KnTXP74G7fsHr4iVLYNhp18yYjC0YCVDRjr/gyLP2
- Eq2iBmLercrvQtHmEt1WNjQ32X68HTdGEuNQ2CG/aOWuck+WdMiwbqXvUxSKJEURZ3hBRmsS5e8
- gJ9XWA==
-X-Received: by 2002:a17:907:94d3:b0:b94:1a0b:d79c with SMTP id
- a640c23a62f3a-b942db91f32mr686506066b.21.1773071310178; Mon, 09 Mar 2026
- 08:48:30 -0700 (PDT)
+ bh=QGiPkdKR+XWGlegOibRZVdoacz0wL2hrVGXx2XKjYtA=;
+ b=w6v1wxqJ0RV4h0IgqyZ4Hsq+yclAgz/e7ZmMzDQihlCCfdp4h8ig+alIknYd7yl+DW
+ ii6Ho9uc1mp2S5ewBgnjMJM9K7Gn0Sg6WjpnDBR5tpBVCsafWbB+pCTnPtWfkcPxYuEe
+ 5BczRrUEbQloswOHopnB/r7zKMGy8ZfI4mkQXvvBKHkwL0sRHi8XvYum0LPaOTPCSDtm
+ ooeiRCYrlWZQpw39sXjOEQgGlbTo3oak3oHKlCpn6hPnWSuBEzd+JBGQjgwOy+ciK98h
+ /JxNKVI+oBWpjEzZRgqc4f3OypC3g8EXA7TcF5DJbSMT5RPcgwn+QBP/M3LMBwzic8wI
+ Z4Aw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW7ljQC1q3YiUCeo1pROGrZTwJu76nF6E/vj6GgjizCDd+9ArX58UH0yhfyqpMUPC1QOGFnM8w=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCWe58BzCFZNRzG49i+V2jYjbq0ypB975K486ew6qy3o3bVX7p
+ yCrB13n1iZl4ETI2OZAlFqIo4VVqNMakWL2zslbBpoJgtezuHpDJH3QL
+X-Gm-Gg: ATEYQzwK/jvYUpVlXqu5epvlRHA5vhkt7P9RPBm/Ovz+vWzWA5uLbfc0C/KcLLBlDLv
+ FInqxRIbWf8FVnRNAVjDDD4M6jaRB8IWs0/6GY0X7PL90W65J/T9TSwZMXJzNjxL/M1Dbag+kMR
+ TlXg60w0N1ppz4aMxrHg7B541wB1XjtROnh53Ic6VUk2/N/x4CsqQ8uVopv6Wi5L4jc9vjjqvdW
+ KBnP/I2qQxVlUKwIBaSgVf8o7bPuoyQ3CO6SGdyrL4KV1mdYkWaoRJ2+ThLfPPj9Q8bLnQAcPo4
+ GQjVnKPTYFFyTNq6hZutiDaUE4g08CZnRYU+WtDblGSzKFTP2Ij9ddYonO5hWrQkAWRreeTXI3h
+ rutnhBBeGwGM9UmZbdoWwOL8Ig2cjG126t8X+C0Xm5DbrIEjnDDX3CMaaIxto/xJQs2lqn1DJgN
+ v6MB3wDNAHTUf69hHdMBQcCmIgUa8qozfHRjuUQRvt0viITAYLqEluTpI7COb3ou5l4ZoHJizRz
+ sC/A2cLhYOrv8YiqUb+8mHZaIuUmsmSp9B4G7vx8uH2
+X-Received: by 2002:a05:600c:a12:b0:480:3ad0:93c0 with SMTP id
+ 5b1f17b1804b1-4852695d1e2mr189431735e9.23.1773071647970; 
+ Mon, 09 Mar 2026 08:54:07 -0700 (PDT)
+Received: from emanueleg-nb.corp.toradex.com
+ (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-485358cd26bsm84408215e9.8.2026.03.09.08.54.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 08:54:07 -0700 (PDT)
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1 0/2] DDR configuration refactor and 16GB dual-rank support
+Date: Mon,  9 Mar 2026 16:53:06 +0100
+Message-ID: <20260309155342.145432-1-ghidoliemanuele@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260306012019.800588-1-sjg@chromium.org>
- <20260306151215.GM1388590@bill-the-cat>
-In-Reply-To: <20260306151215.GM1388590@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Mar 2026 09:48:17 -0600
-X-Gm-Features: AaiRm52ZcynuYFW0b-TZIKwGUZSVo29-c8vKz5gF7XEUya0l9rKK4aceVFMbpro
-Message-ID: <CAFLszTjmP_41AZ_zUr2_b-B8zgz_M1d1JUJ+q9vwsQT1yCo4CA@mail.gmail.com>
-Subject: Re: [PATCH v2] boot: Add fit_config_get_hash_list() to build signed
- node list
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ludwig <ludwig.nussel@siemens.com>, 
- Ahmad Fatoum <a.fatoum@pengutronix.de>, Simon Glass <simon.glass@canonical.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Enric Balletbo i Serra <eballetbo@kernel.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,41 +100,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-On Fri, 6 Mar 2026 at 08:12, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Mar 05, 2026 at 06:20:09PM -0700, Simon Glass wrote:
->
-> > From: Simon Glass <simon.glass@canonical.com>
-> >
-> > The hashed-nodes property in a FIT signature node lists which FDT paths
-> > are included in the signature hash. It is intended as a hint so should
-> > not be used for verification.
-> >
-> > Add a function to build the node list from scratch by iterating the
-> > configuration's image references. Skip properties known not to be image
-> > references. For each image, collect the path plus all hash and cipher
-> > subnodes.
-> >
-> > Use the new function in fit_config_check_sig() instead of reading
-> > 'hashed-nodes'.
-> >
-> > Update the test_vboot kernel@ test case: fit_check_sign now catches the
-> > attack at signature-verification time (the @-suffixed node is hashed
-> > instead of the real one, causing a mismatch) rather than at
-> > fit_check_format() time.
-> >
-> > Update the docs to cover this. The FIT spec can be updated separately.
-> >
-> > Signed-off-by: Simon Glass <simon.glass@canonical.com>
->
-> Thanks again for looking in to this!
->
-> Closes: https://lore.kernel.org/u-boot/20260302220937.3682128-1-trini@konsulko.com/
-> Reported-by: Apple Security Engineering and Architecture (SEAR)
-> Tested-by: Tom Rini <trini@konsulko.com>
+This series refactors the DDR configuration handling for the
+Toradex Aquila AM69 board and adds support for a 16GB dual-rank
+memory configuration, while changing the HW_CFG pins value to
+DDR configurations mapping.
 
-OK good!
+Emanuele Ghidoli (2):
+  board: toradex: aquila-am69: refactor memory configuration
+  board: toradex: aquila-am69: Add support for 16GB dual rank memory
+    configuration
 
-- Simon
+ board/toradex/aquila-am69/Makefile            |  1 +
+ board/toradex/aquila-am69/aquila-am69.c       | 26 ++++++---
+ board/toradex/aquila-am69/aquila_ddrs.h       | 15 ++++++
+ board/toradex/aquila-am69/aquila_ddrs_16GB.h  | 11 ----
+ .../aquila-am69/aquila_ddrs_16GB_rank_2.c     | 54 +++++++++++++++++++
+ board/toradex/aquila-am69/aquila_ddrs_8GB.h   | 11 ----
+ 6 files changed, 88 insertions(+), 30 deletions(-)
+ create mode 100644 board/toradex/aquila-am69/aquila_ddrs.h
+ delete mode 100644 board/toradex/aquila-am69/aquila_ddrs_16GB.h
+ create mode 100644 board/toradex/aquila-am69/aquila_ddrs_16GB_rank_2.c
+ delete mode 100644 board/toradex/aquila-am69/aquila_ddrs_8GB.h
+
+-- 
+2.43.0
+
