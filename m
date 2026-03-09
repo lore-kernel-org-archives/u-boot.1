@@ -4,59 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0098DF417E3
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 14:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED0C8F417EE
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 14:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31A6683FE1;
-	Mon,  9 Mar 2026 15:40:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C76783A8C;
+	Mon,  9 Mar 2026 15:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BJML0jDp";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YtVl5fAd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7DC783952; Mon,  9 Mar 2026 15:40:19 +0100 (CET)
-Received: from mail-m49215.qiye.163.com (mail-m49215.qiye.163.com
- [45.254.49.215])
+ id C3ABC83BC8; Mon,  9 Mar 2026 15:45:56 +0100 (CET)
+Received: from mail-m1973195.qiye.163.com (mail-m1973195.qiye.163.com
+ [220.197.31.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51AAF83F75
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 15:40:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F2A283952
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 15:45:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [120.36.72.154])
- by smtp.qiye.163.com (Hmail) with ESMTP id 3646e82b1;
- Mon, 9 Mar 2026 22:40:07 +0800 (GMT+08:00)
-Message-ID: <9c1373b7-d577-4568-802c-95bf24974b94@rock-chips.com>
-Date: Mon, 9 Mar 2026 22:40:07 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 364718617;
+ Mon, 9 Mar 2026 22:45:48 +0800 (GMT+08:00)
+Message-ID: <da735b83-597c-4410-8299-a5f4c44e250c@rock-chips.com>
+Date: Mon, 9 Mar 2026 22:45:47 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/12] arch: arm: rockchip: Add initial support for
- RK3506
+Subject: Re: [PATCH v4 1/3] rockchip: Add initial RK3582 support
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>
-Cc: Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de
-References: <20260131233843.3419737-1-jonas@kwiboo.se>
- <20260131233843.3419737-13-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: FUKAUMI Naoki <naoki@radxa.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20260107230747.3552391-1-jonas@kwiboo.se>
+ <20260107230747.3552391-2-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20260131233843.3419737-13-jonas@kwiboo.se>
+In-Reply-To: <20260107230747.3552391-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9cd30a838303afkunm074da33216bc771
+X-HM-Tid: 0a9cd30fb5b903afkunm02b9810d16bd47b
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSkIYVkhMH09CSh0YTBpLQ1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaQh0aVh0ZThkdH0sYS08fQlYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTElVSk5PWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=BJML0jDpUleJjm806NZRlP+gDlBTkEBIMyIterCZk68/yWKXOxCybo1JnooKiSoHcSPKTZIGoN0PSs9EYIahis81PUkgPCUyJorGqOm3yNx/k1IJGZ7TL6QJYGxAl5DGQ2d0IaByGVQvPG0V9aj+VhAT2YxpHCof7yfmoN2bq4Y=;
+ b=YtVl5fAdruF+Ttow4X7cq8+KRp5gPd+kL17X2LjBf6J95NAmMuXbK9OAGmi0AD0LCO/Q4oVHN6ryePxBv5SG7nAO0HAlQJCiezHgcfxwjg2+Tn8Rzg8gPEyf6eCYMDu1WAUiZQuY6OnYXG5TUJetXtt7+1DWlIRGzLW6+Y9TWz4=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=YTi0LpVh7oreZTlBfEPE0GGyd6JNs/TuWkReawstgYI=;
+ bh=D3S2SGuBoE4YYZNHzjN57hu8417GO86ZCUdbYsI8T2g=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,412 +73,280 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2026/2/1 07:38, Jonas Karlman wrote:
-> Rockchip RK3506 is a ARM-based SoC with tri-core Cortex-A7.
+On 2026/1/8 07:07, Jonas Karlman wrote:
+> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
+> What blocks are disabled/non-working is indicated by ip-state in OTP.
 >
-> Add initial arch support for the RK3506 SoC.
+> This add initial support for RK3582 by using ft_system_setup() to mark
+> any cpu, gpu and/or vdec/venc node with status=fail as indicated by
+> ip-state.
+>
+> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
+> cores, the gpu and one vdec/venc core is always failed/disabled.
+>
+> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
+> the required DT fixups for RK3582 board variants.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org> # drivers/usb/gadget
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> Changes in v2:
-> - Enable SPL_ARMV7_SET_CORTEX_SMPEN
-> - Drop read_brom_bootsource_id() now that default impl support 0x81
-> - Fix mac1 and otg1 access to ddr memory
-> - Collect a-b tag
-> ---
->   arch/arm/include/asm/arch-rk3506/boot0.h      |   9 ++
->   arch/arm/include/asm/arch-rk3506/gpio.h       |   9 ++
->   arch/arm/mach-rockchip/Kconfig                |  44 ++++++
->   arch/arm/mach-rockchip/Makefile               |   1 +
->   arch/arm/mach-rockchip/rk3506/Kconfig         |  15 +++
->   arch/arm/mach-rockchip/rk3506/Makefile        |   5 +
->   arch/arm/mach-rockchip/rk3506/clk_rk3506.c    |  16 +++
->   arch/arm/mach-rockchip/rk3506/rk3506.c        | 125 ++++++++++++++++++
->   arch/arm/mach-rockchip/rk3506/syscon_rk3506.c |  19 +++
->   drivers/usb/gadget/Kconfig                    |   1 +
->   include/configs/rk3506_common.h               |  38 ++++++
->   11 files changed, 282 insertions(+)
->   create mode 100644 arch/arm/include/asm/arch-rk3506/boot0.h
->   create mode 100644 arch/arm/include/asm/arch-rk3506/gpio.h
->   create mode 100644 arch/arm/mach-rockchip/rk3506/Kconfig
->   create mode 100644 arch/arm/mach-rockchip/rk3506/Makefile
->   create mode 100644 arch/arm/mach-rockchip/rk3506/clk_rk3506.c
->   create mode 100644 arch/arm/mach-rockchip/rk3506/rk3506.c
->   create mode 100644 arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
->   create mode 100644 include/configs/rk3506_common.h
+> Changes in v4:
+> - Update policy to always fail gpu for RK3582
+> - Drop code and comment related to RK3583
+> - Update rkvdec node name to match latest mainline Linux DT patches
 >
-> diff --git a/arch/arm/include/asm/arch-rk3506/boot0.h b/arch/arm/include/asm/arch-rk3506/boot0.h
-> new file mode 100644
-> index 000000000000..8ae46f25a87a
-> --- /dev/null
-> +++ b/arch/arm/include/asm/arch-rk3506/boot0.h
-> @@ -0,0 +1,9 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/* Copyright Contributors to the U-Boot project. */
-> +
-> +#ifndef __ASM_ARCH_BOOT0_H__
-> +#define __ASM_ARCH_BOOT0_H__
-> +
-> +#include <asm/arch-rockchip/boot0.h>
-> +
-> +#endif
-> diff --git a/arch/arm/include/asm/arch-rk3506/gpio.h b/arch/arm/include/asm/arch-rk3506/gpio.h
-> new file mode 100644
-> index 000000000000..5516e649b80b
-> --- /dev/null
-> +++ b/arch/arm/include/asm/arch-rk3506/gpio.h
-> @@ -0,0 +1,9 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/* Copyright Contributors to the U-Boot project. */
-> +
-> +#ifndef __ASM_ARCH_GPIO_H__
-> +#define __ASM_ARCH_GPIO_H__
-> +
-> +#include <asm/arch-rockchip/gpio.h>
-> +
-> +#endif
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 92bb4aa62f11..dcaf15a3161e 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -317,6 +317,49 @@ config ROCKCHIP_RK3399
->   	  and video codec support. Peripherals include Gigabit Ethernet,
->   	  USB2 host and OTG, SDIO, I2S, UARTs, SPI, I2C and PWMs.
+> Changes in v3:
+> - Apply same policy for RK3582/RK3583 to match vendor U-Boot
+>    linux-6.1-stan-rkr6 tag, allow use of the GPU and one vdec core.
+> - Update rkvdec node name to match latest mainline Linux DT patches.
+>
+> Changes in v2:
+> - Refactor code to first apply policy to ip-state and then fail cores
+>    based on the updated ip-state
+> - Add support for failing rkvdec and rkvenc cores
+> - Append soc compatible to board model
+> - Not picking up t-b tag due to significant changes to patch
+> ---
+>   arch/arm/mach-rockchip/rk3588/rk3588.c | 215 +++++++++++++++++++++++++
+>   1 file changed, 215 insertions(+)
+>
+> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> index 6324c6f12867..c1138ffcb87f 100644
+> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> @@ -7,6 +7,7 @@
+>   #define LOG_CATEGORY LOGC_ARCH
 >   
-> +config ROCKCHIP_RK3506
-> +	bool "Support Rockchip RK3506"
-> +	select CPU_V7A
-> +	select SUPPORT_SPL
-> +	select SPL
-> +	select CLK
-> +	select PINCTRL
-> +	select RAM
-> +	select REGMAP
-> +	select SYSCON
-> +	select BOARD_LATE_INIT
-> +	select DM_REGULATOR_FIXED
-> +	select DM_RESET
-> +	imply BOOTSTD_FULL
-> +	imply DM_RNG
-> +	imply ENV_RELOC_GD_ENV_ADDR
-> +	imply FIT
-> +	imply LEGACY_IMAGE_FORMAT
-> +	imply MISC
-> +	imply MISC_INIT_R
-> +	imply OF_LIBFDT_OVERLAY
-> +	imply OF_LIVE
-> +	imply RNG_ROCKCHIP
-> +	imply ROCKCHIP_COMMON_BOARD
-> +	imply ROCKCHIP_COMMON_STACK_ADDR
-> +	imply ROCKCHIP_EXTERNAL_TPL
-> +	imply ROCKCHIP_OTP
-> +	imply SPL_ARMV7_SET_CORTEX_SMPEN
-> +	imply SPL_CLK
-> +	imply SPL_DM_SEQ_ALIAS
-> +	imply SPL_FIT_SIGNATURE
-> +	imply SPL_LOAD_FIT
-> +	imply SPL_OF_CONTROL
-> +	imply SPL_PINCTRL
-> +	imply SPL_RAM
-> +	imply SPL_REGMAP
-> +	imply SPL_SERIAL
-> +	imply SPL_SYSCON
-> +	imply SYS_ARCH_TIMER
-> +	imply SYSRESET
-> +	help
-> +	  The Rockchip RK3506 is a ARM-based SoC with a tri-core Cortex-A7.
+>   #include <dm.h>
+> +#include <fdt_support.h>
+>   #include <misc.h>
+>   #include <spl.h>
+>   #include <asm/armv8/mmu.h>
+> @@ -240,6 +241,16 @@ int rockchip_dram_init_banksize_fixup(struct bd_info *bd)
+>   
+>   #define RK3588_OTP_CPU_CODE_OFFSET		0x02
+>   #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
+> +#define RK3588_OTP_IP_STATE_OFFSET		0x1d
 > +
->   config ROCKCHIP_RK3528
->   	bool "Support Rockchip RK3528"
->   	select ARM64
-> @@ -745,6 +788,7 @@ source "arch/arm/mach-rockchip/rk3308/Kconfig"
->   source "arch/arm/mach-rockchip/rk3328/Kconfig"
->   source "arch/arm/mach-rockchip/rk3368/Kconfig"
->   source "arch/arm/mach-rockchip/rk3399/Kconfig"
-> +source "arch/arm/mach-rockchip/rk3506/Kconfig"
->   source "arch/arm/mach-rockchip/rk3528/Kconfig"
->   source "arch/arm/mach-rockchip/rk3568/Kconfig"
->   source "arch/arm/mach-rockchip/rk3576/Kconfig"
-> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-> index 06fb527b21a0..d3bc0689f893 100644
-> --- a/arch/arm/mach-rockchip/Makefile
-> +++ b/arch/arm/mach-rockchip/Makefile
-> @@ -42,6 +42,7 @@ obj-$(CONFIG_ROCKCHIP_RK3308) += rk3308/
->   obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328/
->   obj-$(CONFIG_ROCKCHIP_RK3368) += rk3368/
->   obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399/
-> +obj-$(CONFIG_ROCKCHIP_RK3506) += rk3506/
->   obj-$(CONFIG_ROCKCHIP_RK3528) += rk3528/
->   obj-$(CONFIG_ROCKCHIP_RK3568) += rk3568/
->   obj-$(CONFIG_ROCKCHIP_RK3576) += rk3576/
-> diff --git a/arch/arm/mach-rockchip/rk3506/Kconfig b/arch/arm/mach-rockchip/rk3506/Kconfig
-> new file mode 100644
-> index 000000000000..92f187458c66
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/rk3506/Kconfig
-> @@ -0,0 +1,15 @@
-> +if ROCKCHIP_RK3506
+> +#define FAIL_CPU_CLUSTER0		GENMASK(3, 0)
+> +#define FAIL_CPU_CLUSTER1		GENMASK(5, 4)
+> +#define FAIL_CPU_CLUSTER2		GENMASK(7, 6)
+> +#define FAIL_GPU			GENMASK(4, 1)
+> +#define FAIL_RKVDEC0			BIT(6)
+> +#define FAIL_RKVDEC1			BIT(7)
+> +#define FAIL_RKVENC0			BIT(0)
+> +#define FAIL_RKVENC1			BIT(2)
+>   
+>   int checkboard(void)
+>   {
+> @@ -285,3 +296,207 @@ int checkboard(void)
+>   
+>   	return 0;
+>   }
 > +
-> +config ROCKCHIP_BOOT_MODE_REG
-> +	default 0xff910200
-> +
-> +config ROCKCHIP_STIMER_BASE
-> +	default 0xff980000
-> +
-> +config SYS_SOC
-> +	default "rk3506"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "rk3506_common"
-> +
-> +endif
-> diff --git a/arch/arm/mach-rockchip/rk3506/Makefile b/arch/arm/mach-rockchip/rk3506/Makefile
-> new file mode 100644
-> index 000000000000..a1760bd0f0a3
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/rk3506/Makefile
-> @@ -0,0 +1,5 @@
-> +# SPDX-License-Identifier: GPL-2.0-or-later
-> +
-> +obj-y += rk3506.o
-> +obj-y += clk_rk3506.o
-> +obj-y += syscon_rk3506.o
-> diff --git a/arch/arm/mach-rockchip/rk3506/clk_rk3506.c b/arch/arm/mach-rockchip/rk3506/clk_rk3506.c
-> new file mode 100644
-> index 000000000000..96723f403cfe
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/rk3506/clk_rk3506.c
-> @@ -0,0 +1,16 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +// Copyright Contributors to the U-Boot project.
-> +
-> +#include <dm.h>
-> +#include <asm/arch-rockchip/cru_rk3506.h>
-> +
-> +int rockchip_get_clk(struct udevice **devp)
+> +static int fdt_path_del_node(void *fdt, const char *path)
 > +{
-> +	return uclass_get_device_by_driver(UCLASS_CLK,
-> +				DM_DRIVER_GET(rockchip_rk3506_cru), devp);
+> +	int nodeoffset;
+> +
+> +	nodeoffset = fdt_path_offset(fdt, path);
+> +	if (nodeoffset < 0)
+> +		return nodeoffset;
+> +
+> +	return fdt_del_node(fdt, nodeoffset);
 > +}
 > +
-> +void *rockchip_get_cru(void)
+> +static int fdt_path_set_name(void *fdt, const char *path, const char *name)
 > +{
-> +	return (void *)RK3506_CRU_BASE;
-> +}
-> diff --git a/arch/arm/mach-rockchip/rk3506/rk3506.c b/arch/arm/mach-rockchip/rk3506/rk3506.c
-> new file mode 100644
-> index 000000000000..2ed1dcc128e0
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/rk3506/rk3506.c
-> @@ -0,0 +1,125 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +// Copyright Contributors to the U-Boot project.
+> +	int nodeoffset;
 > +
-> +#define LOG_CATEGORY LOGC_ARCH
+> +	nodeoffset = fdt_path_offset(fdt, path);
+> +	if (nodeoffset < 0)
+> +		return nodeoffset;
 > +
-> +#include <dm.h>
-> +#include <misc.h>
-> +#include <asm/arch-rockchip/bootrom.h>
-> +#include <asm/arch-rockchip/hardware.h>
-> +
-> +#define SGRF_BASE			0xff210000
-> +
-> +#define FIREWALL_DDR_BASE		0xff5f0000
-> +#define FW_DDR_MST1_REG			0x24
-> +#define FW_DDR_MST2_REG			0x28
-> +#define FW_DDR_MST3_REG			0x2c
-> +
-> +const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
-> +	[BROM_BOOTSOURCE_EMMC] = "/soc/mmc@ff480000",
-> +	[BROM_BOOTSOURCE_SD] = "/soc/mmc@ff480000",
-> +};
-> +
-> +void board_debug_uart_init(void)
-> +{
+> +	return fdt_set_name(fdt, nodeoffset, name);
 > +}
 > +
-> +int arch_cpu_init(void)
+> +/*
+> + * RK3582 is a variant of the RK3588S with some IP blocks disabled. What blocks
+> + * are disabled/non-working is indicated by ip-state in OTP. ft_system_setup()
+> + * is used to mark any cpu, gpu and/or vdec/venc node with status=fail as
+> + * indicated by ip-state. Apply same policy as vendor U-Boot for RK3582, i.e.
+> + * two big cpu cores, the gpu and one vdec/venc core is always failed. Enable
+> + * OF_SYSTEM_SETUP to use the required DT fixups for RK3582 board variants.
+> + */
+> +int ft_system_setup(void *blob, struct bd_info *bd)
 > +{
-> +	u32 val;
-> +
-> +	if (!IS_ENABLED(CONFIG_SPL_BUILD))
-> +		return 0;
-> +
-> +	/* Select non-secure OTPC */
-> +	rk_clrreg(SGRF_BASE + 0x100, BIT(1));
-> +
-> +	/* Set the sdmmc/emmc to access ddr memory */
-> +	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-> +	writel(val & 0xffff00ff, FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-> +
-> +	/* Set the fspi to access ddr memory */
-> +	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-> +	writel(val & 0xff00ffff, FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-> +
-> +	/* Set the mac0 to access ddr memory */
-> +	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-> +	writel(val & 0xf0ffffff, FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
-> +
-> +	/* Set the mac1 to access ddr memory */
-> +	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST2_REG);
-> +	writel(val & 0xfffffff0, FIREWALL_DDR_BASE + FW_DDR_MST2_REG);
-> +
-> +	/* Set the otg1 to access ddr memory */
-> +	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST3_REG);
-> +	writel(val & 0xfff0ffff, FIREWALL_DDR_BASE + FW_DDR_MST3_REG);
-> +
-> +	return 0;
-> +}
-> +
-> +#define HP_TIMER_BASE			CONFIG_ROCKCHIP_STIMER_BASE
-> +#define HP_CTRL_REG			0x04
-> +#define TIMER_EN			BIT(0)
-> +#define HP_LOAD_COUNT0_REG		0x14
-> +#define HP_LOAD_COUNT1_REG		0x18
-> +
-> +void rockchip_stimer_init(void)
-> +{
-> +	u32 reg;
-> +
-> +	if (!IS_ENABLED(CONFIG_XPL_BUILD))
-> +		return;
-> +
-> +	reg = readl(HP_TIMER_BASE + HP_CTRL_REG);
-> +	if (reg & TIMER_EN)
-> +		return;
-> +
-> +	asm volatile("mcr p15, 0, %0, c14, c0, 0" : : "r" (CONFIG_COUNTER_FREQUENCY));
-> +	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT0_REG);
-> +	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT1_REG);
-> +	writel((TIMER_EN << 16) | TIMER_EN, HP_TIMER_BASE + HP_CTRL_REG);
-> +}
-> +
-> +#define RK3506_OTP_CPU_CODE_OFFSET		0x02
-> +#define RK3506_OTP_SPECIFICATION_OFFSET		0x08
-> +
-> +int checkboard(void)
-> +{
-> +	u8 cpu_code[2], specification;
+> +	static const char * const cpu_node_names[] = {
+> +		"cpu@0", "cpu@100", "cpu@200", "cpu@300",
+> +		"cpu@400", "cpu@500", "cpu@600", "cpu@700",
+> +	};
+> +	int parent, node, i, comp_len, len, ret;
+> +	bool cluster1_removed = false;
+> +	u8 cpu_code[2], ip_state[3];
 > +	struct udevice *dev;
-> +	char suffix[2];
-> +	int ret;
+> +	char soc_comp[16];
+> +	const char *comp;
+> +	void *data;
+> +
+> +	if (!IS_ENABLED(CONFIG_OF_SYSTEM_SETUP))
+> +		return 0;
 > +
 > +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
-> +		return 0;
+> +		return -ENOSYS;
 > +
 > +	ret = uclass_get_device_by_driver(UCLASS_MISC,
 > +					  DM_DRIVER_GET(rockchip_otp), &dev);
 > +	if (ret) {
 > +		log_debug("Could not find otp device, ret=%d\n", ret);
-> +		return 0;
+> +		return ret;
 > +	}
 > +
-> +	/* cpu-code: SoC model, e.g. 0x35 0x06 */
-> +	ret = misc_read(dev, RK3506_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
+> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
 > +	if (ret < 0) {
 > +		log_debug("Could not read cpu-code, ret=%d\n", ret);
-> +		return 0;
+> +		return ret;
 > +	}
 > +
-> +	/* specification: SoC variant, e.g. 0xA for RK3506J */
-> +	ret = misc_read(dev, RK3506_OTP_SPECIFICATION_OFFSET, &specification, 1);
+> +	log_debug("cpu-code: %02x %02x\n", cpu_code[0], cpu_code[1]);
+> +
+> +	/* only fail cores on rk3582 */
+> +	if (!(cpu_code[0] == 0x35 && cpu_code[1] == 0x82))
+> +		return 0;
+> +
+> +	ret = misc_read(dev, RK3588_OTP_IP_STATE_OFFSET, &ip_state, 3);
 > +	if (ret < 0) {
-> +		log_debug("Could not read specification, ret=%d\n", ret);
-> +		return 0;
+> +		log_err("Could not read ip-state, ret=%d\n", ret);
+> +		return ret;
 > +	}
-> +	specification &= 0x1f;
 > +
-> +	/* for RK3506J i.e. '@' + 0xA = 'J' */
-> +	suffix[0] = specification > 1 ? '@' + specification : '\0';
-> +	suffix[1] = '\0';
+> +	log_debug("ip-state: %02x %02x %02x (otp)\n",
+> +		  ip_state[0], ip_state[1], ip_state[2]);
 > +
-> +	printf("SoC:   RK%02x%02x%s\n", cpu_code[0], cpu_code[1], suffix);
+> +	/* policy: fail entire big core cluster when one or more core is bad */
+> +	if (ip_state[0] & FAIL_CPU_CLUSTER1)
+> +		ip_state[0] |= FAIL_CPU_CLUSTER1;
+> +	if (ip_state[0] & FAIL_CPU_CLUSTER2)
+> +		ip_state[0] |= FAIL_CPU_CLUSTER2;
+> +
+> +	/* policy: always fail one big core cluster on rk3582 */
+> +	if (!(ip_state[0] & (FAIL_CPU_CLUSTER1 | FAIL_CPU_CLUSTER2)))
+> +		ip_state[0] |= FAIL_CPU_CLUSTER2;
+> +
+> +	/* policy: always fail gpu on rk3582 */
+> +	ip_state[1] |= FAIL_GPU;
+> +
+> +	/* policy: always fail one rkvdec core on rk3582 */
+> +	if (!(ip_state[1] & (FAIL_RKVDEC0 | FAIL_RKVDEC1)))
+> +		ip_state[1] |= FAIL_RKVDEC1;
+> +
+> +	/* policy: always fail one rkvenc core on rk3582 */
+> +	if (!(ip_state[2] & (FAIL_RKVENC0 | FAIL_RKVENC1)))
+> +		ip_state[2] |= FAIL_RKVENC1;
+> +
+> +	log_debug("ip-state: %02x %02x %02x (policy)\n",
+> +		  ip_state[0], ip_state[1], ip_state[2]);
+> +
+> +	/* cpu cluster1: ip_state[0]: bit4~5 */
+> +	if ((ip_state[0] & FAIL_CPU_CLUSTER1) == FAIL_CPU_CLUSTER1) {
+> +		log_debug("remove cpu-map cluster1\n");
+> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster1");
+> +		cluster1_removed = true;
+> +	}
+> +
+> +	/* cpu cluster2: ip_state[0]: bit6~7 */
+> +	if ((ip_state[0] & FAIL_CPU_CLUSTER2) == FAIL_CPU_CLUSTER2) {
+> +		log_debug("remove cpu-map cluster2\n");
+> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
+> +	} else if (cluster1_removed) {
+> +		/* cluster nodes must be named in a continuous series */
+> +		log_debug("rename cpu-map cluster2\n");
+> +		fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
+> +	}
+> +
+> +	/* gpu: ip_state[1]: bit1~4 */
+> +	if (ip_state[1] & FAIL_GPU) {
+> +		log_debug("fail gpu\n");
+> +		fdt_status_fail_by_pathf(blob, "/gpu@fb000000");
+> +	}
+> +
+> +	/* rkvdec: ip_state[1]: bit6,7 */
+> +	if (ip_state[1] & FAIL_RKVDEC0) {
+> +		log_debug("fail rkvdec0\n");
+> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdc38000");
+> +		fdt_status_fail_by_pathf(blob, "/iommu@fdc38700");
+> +	}
+> +	if (ip_state[1] & FAIL_RKVDEC1) {
+> +		log_debug("fail rkvdec1\n");
+> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdc40000");
+> +		fdt_status_fail_by_pathf(blob, "/iommu@fdc40700");
+> +	}
+> +
+> +	/* rkvenc: ip_state[2]: bit0,2 */
+> +	if (ip_state[2] & FAIL_RKVENC0) {
+> +		log_debug("fail rkvenc0\n");
+> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdbd0000");
+> +		fdt_status_fail_by_pathf(blob, "/iommu@fdbdf000");
+> +	}
+> +	if (ip_state[2] & FAIL_RKVENC1) {
+> +		log_debug("fail rkvenc1\n");
+> +		fdt_status_fail_by_pathf(blob, "/video-codec@fdbe0000");
+> +		fdt_status_fail_by_pathf(blob, "/iommu@fdbef000");
+> +	}
+> +
+> +	parent = fdt_path_offset(blob, "/cpus");
+> +	if (parent < 0) {
+> +		log_err("Could not find /cpus, parent=%d\n", parent);
+> +		return parent;
+> +	}
+> +
+> +	/* cpu: ip_state[0]: bit0~7 */
+> +	for (i = 0; i < 8; i++) {
+> +		/* fail any bad cpu core */
+> +		if (!(ip_state[0] & BIT(i)))
+> +			continue;
+> +
+> +		node = fdt_subnode_offset(blob, parent, cpu_node_names[i]);
+> +		if (node >= 0) {
+> +			log_debug("fail cpu %s\n", cpu_node_names[i]);
+> +			fdt_status_fail(blob, node);
+> +		} else {
+> +			log_err("Could not find %s, node=%d\n",
+> +				cpu_node_names[i], node);
+> +			return node;
+> +		}
+> +	}
+> +
+> +	node = fdt_path_offset(blob, "/");
+> +	if (node < 0) {
+> +		log_err("Could not find /, node=%d\n", node);
+> +		return node;
+> +	}
+> +
+> +	snprintf(soc_comp, sizeof(soc_comp), "rockchip,rk35%x", cpu_code[1]);
+> +
+> +	for (i = 0, comp_len = 0;
+> +	     (comp = fdt_stringlist_get(blob, node, "compatible", i, &len));
+> +	     i++) {
+> +		/* stop at soc compatible */
+> +		if (!strcmp(comp, soc_comp) ||
+> +		    !strcmp(comp, "rockchip,rk3588s") ||
+> +		    !strcmp(comp, "rockchip,rk3588"))
+> +			break;
+> +
+> +		log_debug("compatible[%d]: %s\n", i, comp);
+> +		comp_len += len + 1;
+> +	}
+> +
+> +	/* truncate to only include board compatible */
+> +	fdt_setprop_placeholder(blob, node, "compatible", comp_len, &data);
+> +
+> +	/* append soc compatible */
+> +	fdt_appendprop_string(blob, node, "compatible", soc_comp);
+> +	fdt_appendprop_string(blob, node, "compatible", "rockchip,rk3588s");
 > +
 > +	return 0;
 > +}
-> diff --git a/arch/arm/mach-rockchip/rk3506/syscon_rk3506.c b/arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
-> new file mode 100644
-> index 000000000000..2548b0fa2d3a
-> --- /dev/null
-> +++ b/arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
-> @@ -0,0 +1,19 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +// Copyright Contributors to the U-Boot project.
-> +
-> +#include <dm.h>
-> +#include <asm/arch-rockchip/clock.h>
-> +
-> +static const struct udevice_id rk3506_syscon_ids[] = {
-> +	{ .compatible = "rockchip,rk3506-grf", .data = ROCKCHIP_SYSCON_GRF },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(rockchip_rk3506_syscon) = {
-> +	.name = "rockchip_rk3506_syscon",
-> +	.id = UCLASS_SYSCON,
-> +	.of_match = rk3506_syscon_ids,
-> +#if CONFIG_IS_ENABLED(OF_REAL)
-> +	.bind = dm_scan_fdt_dev,
-> +#endif
-> +};
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index ebb306852a65..baa2eb61ea33 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -89,6 +89,7 @@ config USB_GADGET_PRODUCT_NUM
->   	default 0x350b if ROCKCHIP_RK3588
->   	default 0x350c if ROCKCHIP_RK3528
->   	default 0x350e if ROCKCHIP_RK3576
-> +	default 0x350f if ROCKCHIP_RK3506
->   	default 0x4ee0 if ARCH_SNAPDRAGON
->   	default 0x0
->   	help
-> diff --git a/include/configs/rk3506_common.h b/include/configs/rk3506_common.h
-> new file mode 100644
-> index 000000000000..5e4ef67289f0
-> --- /dev/null
-> +++ b/include/configs/rk3506_common.h
-> @@ -0,0 +1,38 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/* Copyright Contributors to the U-Boot project. */
-> +
-> +#ifndef __CONFIG_RK3506_COMMON_H
-> +#define __CONFIG_RK3506_COMMON_H
-> +
-> +#define CFG_CPUID_OFFSET		0xa
-> +
-> +#include "rockchip-common.h"
-> +
-> +#define CFG_IRAM_BASE			0xfff80000
-> +
-> +#define CFG_SYS_SDRAM_BASE		0
-> +#define SDRAM_MAX_SIZE			0xc0000000
-> +
-> +#ifndef ROCKCHIP_DEVICE_SETTINGS
-> +#define ROCKCHIP_DEVICE_SETTINGS
-> +#endif
-> +
-> +#define ENV_MEM_LAYOUT_SETTINGS			\
-> +	"scriptaddr=0x00500000\0"		\
-> +	"script_offset_f=0xffe000\0"		\
-> +	"script_size_f=0x2000\0"		\
-> +	"pxefile_addr_r=0x00600000\0"		\
-> +	"kernel_addr_r=0x02080000\0"		\
-> +	"kernel_comp_addr_r=0x08000000\0"	\
-> +	"fdt_addr_r=0x01e00000\0"		\
-> +	"fdtoverlay_addr_r=0x01f00000\0"	\
-> +	"ramdisk_addr_r=0x06000000\0"		\
-> +	"kernel_comp_size=0x2000000\0"
-> +
-> +#define CFG_EXTRA_ENV_SETTINGS			\
-> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
-> +	ENV_MEM_LAYOUT_SETTINGS			\
-> +	ROCKCHIP_DEVICE_SETTINGS		\
-> +	"boot_targets=" BOOT_TARGETS "\0"
-> +
-> +#endif /* __CONFIG_RK3506_COMMON_H */
