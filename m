@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DF2FCA18E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 21:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E08B1FCA193
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 21:23:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A31483A8C;
-	Mon,  9 Mar 2026 22:19:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5194D83A8C;
+	Mon,  9 Mar 2026 22:23:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CKNmS0CO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tr+TwXUZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A30583BC8; Mon,  9 Mar 2026 22:19:37 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1B42183F20; Mon,  9 Mar 2026 22:23:38 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C84BB83952
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 22:19:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1773091173;
- bh=kuhpxkc90eWGjKcFCbD2Ed+nVMTnZCRt4ynYrTz5cuk=;
- b=CKNmS0CO0wIng8PIyPqOI4MyE1/sJeh7mYsTxv+H9fR7jZKeMvrkUCSkmnZ42Qcvq9uCBMpNH
- meYVvv8a9bc0Z6FAUHBm8FwZ29crgbadZZTNon050bZdsdoD/Vuani/13yRS4w0iPuLNehaOSXp
- I5chnhziBSdDXIQ8/jPovf26pvC61Z9vdl3Fm+D5glcL4pbV/bMNND9ZsvoIQcooYEe2hdQ0L74
- sSsVAl0M2GZkKqDKjEuMobO3SZojwznJ1xWHrQItQSe7p+W943qYSF9S6Y2F/59WX9RQqQqE0QM
- WCf4bri41LFU71oObpmPOzdABxwzmPmD6cOB+AdTKt/A==
-X-Forward-Email-ID: 69af396473df1871069cad60
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.6.49
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <25eb3b47-976e-41ff-b51d-fc828314e200@kwiboo.se>
-Date: Mon, 9 Mar 2026 22:19:28 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 2BF6083952
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 22:23:35 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d4c383f2fcso8747653a34.0
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 14:23:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1773091414; x=1773696214; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ttMlNV9ur382IZEn5HMq6DCjRslfnNUza4hwX5uzK+Q=;
+ b=tr+TwXUZNOs7z1vI6thGFhtOnSXs8J5MUWLSiZsm6d+Q1SuwG5d6JgmiBh47gDDUAe
+ sjZ/ZCGCb1j0Jz3kNbaOMjXGFFj/ZvaQjCXC4OBq5rNzfiooDmedghOZJlAOEotKyoNQ
+ oFJzrGT+6yN/vMN8u2j+mXIDjGKnmUCGuycJQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773091414; x=1773696214;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ttMlNV9ur382IZEn5HMq6DCjRslfnNUza4hwX5uzK+Q=;
+ b=XtlOKbTHuTwTysYdRVI2WLgwhPsVzGXHkqwxidtVyZmbSgGXew6Sq3wWp6xD+JmAZ5
+ MWUr7hexZgHaisHz9uziapiRIymVuq1WtYwSLRtnVzuDCw99lJsZtr5ZbCqEtlcUZOXM
+ C4J1zkFI1XKgv4Z7seWBc2tGYBUujcWEa7w79TyiW4nSJc7bUxQpPgO7cnSkhl1iZpkZ
+ Wofl+zOo6OcuHkjoKOoZwPBzR5rWlqsYieE3sDuSCvV8ML3ODqIXsk5vIKQUtxuDQpCE
+ I7uXI8IvuHKJZcXwV4Skt1OjreUYiEnGmVt9fzOD0Q+6c8OwHrth3LFCe2rPqUHXJ3Mc
+ C6rQ==
+X-Gm-Message-State: AOJu0YxA2hkmpJpdwWlj4zdT068nSzQAyORILfpcNtEyuliPirhqBJFu
+ OlBaEbB8AtzA7CU8/cNU96SN/xwFnQ6LbXpGJ1ew5u3P/V9jSj6mZn0ojFmBHrUEFI60hpw3KWQ
+ KAvVrUDc=
+X-Gm-Gg: ATEYQzyff919ix6kOfC45gEOvWbxLuVMCQvU8AdRxCEXHUo31RqtUHFzFcMr5oKCi88
+ XIRDLLU9edNpdsJ52Wn9+djqf383PqQa8xhE0dIh+pw9Ppwbjp06Ul2d8FWgknDnhaHhC4uc9Sx
+ 5gWDev4ZAdfX1ZUjTt9OHlIdhr7EaN4rxB4I4WQJ2W9fUWghNAvyzBlLyeyvcsyzf9WlVipdIe2
+ kRJZePbbOdUX6UuETCCl2DIybq5lsvgQb421dnzE/1t9JVEOvPUkF5/iyyrhbxfipAnVPDqHAGN
+ sqo2QqHXa2E+tN4A4YHfhFU95fLR1xHgddxniL5kuDV1I12JCmNbITjCI7tJ/i47+nSS6B7IjUL
+ ynsgJz2GS9KjxooyyJRVSKOnPfSgjPT9KylyBUsYhPauxmqmL5HszgT5YBWC73XowJ4QSCgOhmK
+ FzCI9ovjrVRAo/xdqbV+5vAIYpg4bpy+3WODFcN4Kag7vEVHojko50iXlYI7DIgqEOQPY+Cce+I
+ 3N9PY3Q+zE6UFpbsP8ok+h6NNHnEBlfIoOupj4w93CwD8TYt2sPLvXu
+X-Received: by 2002:a05:6830:4121:b0:7d5:60a:8e09 with SMTP id
+ 46e09a7af769-7d726f57503mr9239434a34.9.1773091413843; 
+ Mon, 09 Mar 2026 14:23:33 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d74cbe7f8dsm2424185a34.8.2026.03.09.14.23.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 14:23:33 -0700 (PDT)
+Date: Mon, 9 Mar 2026 15:23:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Raphael Gallais-Pou <rgallaispou@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20260309212331.GF1388590@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: lwip: scale buffer pool size with TFTP block size
-To: "Vinay Tilak, Pranav" <Pranav.VinayTilak@amd.com>,
- Jerome Forissier <jerome.forissier@arm.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Simek, Michal" <michal.simek@amd.com>, "git (AMD-Xilinx)" <git@amd.com>,
- "Begari, Padmarao" <Padmarao.Begari@amd.com>, Tom Rini <trini@konsulko.com>,
- "nd@arm.com" <nd@arm.com>
-References: <20260305064033.8726-1-pranav.vinaytilak@amd.com>
- <a3262e83-95dd-46fe-a0cf-fd6d7e429ab1@arm.com>
- <PH0PR12MB70963209D076B0D27A12FFDFFB79A@PH0PR12MB7096.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <PH0PR12MB70963209D076B0D27A12FFDFFB79A@PH0PR12MB7096.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MihG4kppl3vYr9U7"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,127 +97,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+
+--MihG4kppl3vYr9U7
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hey all,
+
+Unfortunately for such a small set of changes (rc3 to rc4) a lot of new
+Coverity scan issues have popped up. Please let me know if these appear
+to be real issues or something that we can mark as intentional / false
+positive. Thanks!
+
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Mar 9, 2026, 2:11=E2=80=AFPM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
+
+
 Hi,
 
-On 3/9/2026 2:19 PM, Vinay Tilak, Pranav wrote:
-> [Public]
-> 
-> Hi Jerome,
-> 
->> -----Original Message-----
->> From: Jerome Forissier <jerome.forissier@arm.com>
->> Sent: Monday, March 9, 2026 1:38 PM
->> To: Vinay Tilak, Pranav <Pranav.VinayTilak@amd.com>; u-boot@lists.denx.de;
->> Simek, Michal <michal.simek@amd.com>
->> Cc: git (AMD-Xilinx) <git@amd.com>; Begari, Padmarao
->> <Padmarao.Begari@amd.com>; Tom Rini <trini@konsulko.com>;
->> nd@arm.com
->> Subject: Re: [PATCH] net: lwip: scale buffer pool size with TFTP block size
->>
->> Caution: This message originated from an External Source. Use proper caution
->> when opening attachments, clicking links, or responding.
->>
->>
->> Hi Pranav,
->>
->> On 05/03/2026 07:40, Pranav Tilak wrote:
->>> TFTP transfers fail when tftpblocksize is set to 8192 or larger due to
->>> insufficient buffer resources for IP fragment reassembly.
->>>
->>> Adjust PBUF_POOL_SIZE and IP_REASS_MAX_PBUFS based on
->>> CONFIG_TFTP_BLOCKSIZE to support larger TFTP transfers while keeping
->>> memory usage efficient.
->>>
->>> - CONFIG_TFTP_BLOCKSIZE >= 12288:PBUF_POOL_SIZE=18,
->>> IP_REASS_MAX_PBUFS=12
->>>
->>> - CONFIG_TFTP_BLOCKSIZE >= 8192:PBUF_POOL_SIZE=12,
->>> IP_REASS_MAX_PBUFS=6
->>>
->>> - CONFIG_TFTP_BLOCKSIZE undefined: PBUF_POOL_SIZE=8,
->>> IP_REASS_MAX_PBUFS=4
->>
->> How are these values computed? Could you find a formula instead of using
->> #if/#elif/#else/endif?
-> 
-> We can use this formula for calculating the values of PBUF_POOL_SIZE and IP_REASS_MAX_PBUFS.
-> 1500 (MTU) - 20 (IP header) = 1480 usable bytes/fragments.
-> IP_REASS_MAX_PBUFS = (((CONFIG_TFTP_BLOCKSIZE) + 1479) / 1480) + 2
-> [ceiling division to calculate fragment count + some headroom for next block sync].
-> PBUF_POOL_SIZE = (IP_REASS_MAX_PBUFS) * 2
-> [Reassembly buffers * 2].
+Please find the latest report on new defect(s) introduced to *Das U-Boot*
+found with Coverity Scan.
 
-The lwip comment for IP_REASS_MAX_PBUFS only suggest PBUF_POOL_SIZE is
-more than 2x IP_REASS_MAX_PBUFS when both IPv4 and IPv6 is enabled.
+   - *New Defects Found:* 4
+   - *Defects Shown:* Showing 4 of 4 defect(s)
 
-Maybe something like following should work?
+Defect Details
 
-  #if defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE > 4096
-  #define PBUF_POOL_SIZE                  (((CONFIG_TFTP_BLOCKSIZE + 1479) / 1480) + 6)
-  #else
-  [...]
-  #define IP_REASS_MAX_PBUFS              (PBUF_POOL_SIZE - 4)
 
-That seem to work great when I test with TFTP_BLOCKSIZE=16352 on my
-Rockchip boards together with a PBUF_POOL_BUFSIZE fix [1].
+** CID 644836:       Error handling issues  (CHECKED_RETURN)
+/drivers/video/stm32/stm32_dsi.c: 497           in stm32_dsi_probe()
 
-[1] https://lore.kernel.org/u-boot/20260309210642.522626-1-jonas@kwiboo.se/
 
-Regards,
-Jonas
+___________________________________________________________________________=
+__________________
+*** CID 644836:         Error handling issues  (CHECKED_RETURN)
+/drivers/video/stm32/stm32_dsi.c: 497             in stm32_dsi_probe()
+491     	priv->hw_version =3D dsi_read(plat->base, DSI_VERSION) & VERSION;
+492     	if (priv->hw_version !=3D HWVER_130 &&
+493     	    priv->hw_version !=3D HWVER_131) {
+494     		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version=
+);
+495     		dev_dbg(dev, "remove and unbind all DSI child\n");
+496     		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
+>>>     CID 644836:         Error handling issues  (CHECKED_RETURN)
+>>>     Calling "device_chld_unbind" without checking return value (as is d=
+one elsewhere 6 out of 7 times).
+497     		device_chld_unbind(dev, NULL);
+498     		ret =3D -ENODEV;
+499     		goto err_clk;
+500     	}
+501
+502     	return 0;
 
-> 
-> We can scale only if CONFIG_TFTP_BLOCKSIZE > 4096 else use the default values.
->>
->> Thanks,
->> --
->> Jerome
->>
->>> Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
->>> ---
->>>  lib/lwip/u-boot/lwipopts.h | 15 +++++++++++++++
->>>  1 file changed, 15 insertions(+)
->>>
->>> diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
->>> index e8a2c9d7a0a..b4ff31096fe 100644
->>> --- a/lib/lwip/u-boot/lwipopts.h
->>> +++ b/lib/lwip/u-boot/lwipopts.h
->>> @@ -65,7 +65,14 @@
->>>  #define MEM_ALIGNMENT                   8
->>>
->>>  #define MEMP_NUM_TCP_SEG                16
->>> +
->>> +#if defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >=
->> 12288
->>> +#define PBUF_POOL_SIZE                  18
->>> +#elif defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >=
->> 8192
->>> +#define PBUF_POOL_SIZE                  12
->>> +#else
->>>  #define PBUF_POOL_SIZE                  8
->>> +#endif
->>>
->>>  #define LWIP_ARP                        1
->>>  #define ARP_TABLE_SIZE                  4
->>> @@ -76,7 +83,15 @@
->>>  #define IP_REASSEMBLY                   1
->>>  #define IP_FRAG                         1
->>>  #define IP_REASS_MAXAGE                 3
->>> +
->>> +#if defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >=
->> 12288
->>> +#define IP_REASS_MAX_PBUFS              12
->>> +#elif defined(CONFIG_TFTP_BLOCKSIZE) && CONFIG_TFTP_BLOCKSIZE >=
->> 8192
->>> +#define IP_REASS_MAX_PBUFS              6
->>> +#else
->>>  #define IP_REASS_MAX_PBUFS              4
->>> +#endif
->>> +
->>>  #define IP_FRAG_USES_STATIC_BUF         0
->>>
->>>  #define IP_DEFAULT_TTL                  255
-> 
-> Thanks,
-> Pranav Tilak
+** CID 644835:         (TAINTED_SCALAR)
+/common/menu.c: 589           in bootmenu_loop()
+/common/menu.c: 589           in bootmenu_loop()
 
+
+___________________________________________________________________________=
+__________________
+*** CID 644835:           (TAINTED_SCALAR)
+/common/menu.c: 589             in bootmenu_loop()
+583     			c =3D cli_ch_process(cch, c);
+584     		}
+585     	}
+586
+587     	key =3D bootmenu_conv_key(c);
+588
+>>>     CID 644835:           (TAINTED_SCALAR)
+>>>     Using tainted variable "(int)(unsigned char)c" as an index into an =
+array "_ctype".
+589     	if (key =3D=3D BKEY_NONE && isalnum(c)) {
+590     		key =3D BKEY_SHORTCUT;
+591     		cch->shortcut_key =3D bootmenu_conv_shortcut_key(menu, c);
+592     	}
+593
+594     	return key;
+/common/menu.c: 589             in bootmenu_loop()
+583     			c =3D cli_ch_process(cch, c);
+584     		}
+585     	}
+586
+587     	key =3D bootmenu_conv_key(c);
+588
+>>>     CID 644835:           (TAINTED_SCALAR)
+>>>     Using tainted variable "(int)(unsigned char)c" as an index into an =
+array "_ctype".
+589     	if (key =3D=3D BKEY_NONE && isalnum(c)) {
+590     		key =3D BKEY_SHORTCUT;
+591     		cch->shortcut_key =3D bootmenu_conv_shortcut_key(menu, c);
+592     	}
+593
+594     	return key;
+
+** CID 644834:       Error handling issues  (CHECKED_RETURN)
+/drivers/video/stm32/stm32_dsi.c: 496           in stm32_dsi_probe()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 644834:         Error handling issues  (CHECKED_RETURN)
+/drivers/video/stm32/stm32_dsi.c: 496             in stm32_dsi_probe()
+490     	/* check hardware version */
+491     	priv->hw_version =3D dsi_read(plat->base, DSI_VERSION) & VERSION;
+492     	if (priv->hw_version !=3D HWVER_130 &&
+493     	    priv->hw_version !=3D HWVER_131) {
+494     		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version=
+);
+495     		dev_dbg(dev, "remove and unbind all DSI child\n");
+>>>     CID 644834:         Error handling issues  (CHECKED_RETURN)
+>>>     Calling "device_chld_remove" without checking return value (as is d=
+one elsewhere 4 out of 5 times).
+496     		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
+497     		device_chld_unbind(dev, NULL);
+498     		ret =3D -ENODEV;
+499     		goto err_clk;
+500     	}
+501
+
+** CID 644833:       Memory - illegal accesses  (NEGATIVE_RETURNS)
+/common/menu.c: 589           in bootmenu_loop()
+
+
+___________________________________________________________________________=
+__________________
+*** CID 644833:         Memory - illegal accesses  (NEGATIVE_RETURNS)
+/common/menu.c: 589             in bootmenu_loop()
+583     			c =3D cli_ch_process(cch, c);
+584     		}
+585     	}
+586
+587     	key =3D bootmenu_conv_key(c);
+588
+>>>     CID 644833:         Memory - illegal accesses  (NEGATIVE_RETURNS)
+>>>     Using variable "c" as an index to array "_ctype".
+589     	if (key =3D=3D BKEY_NONE && isalnum(c)) {
+590     		key =3D BKEY_SHORTCUT;
+591     		cch->shortcut_key =3D bootmenu_conv_shortcut_key(menu, c);
+592     	}
+593
+594     	return key;
+
+
+
+View Defects in Coverity Scan
+<https://scan.coverity.com/projects/das-u-boot?tab=3Doverview>
+
+Best regards,
+
+The Coverity Scan Admin Team
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--MihG4kppl3vYr9U7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaa86TAAKCRAr4qD1Cr/k
+CrX5APwKNeeZm9LQQv2acb5K7jlV4ezFWd5RxJBoHR+ON2VhZgEAyW5+42l/JyLu
+LO/SMBkkIAgtKWZpVngOSVQXKfMk6QU=
+=8tgs
+-----END PGP SIGNATURE-----
+
+--MihG4kppl3vYr9U7--
