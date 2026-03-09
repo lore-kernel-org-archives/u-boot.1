@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D06F41808
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:11:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 847C5F41808
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:11:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FA9B83F9A;
-	Mon,  9 Mar 2026 16:10:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B97C83F75;
+	Mon,  9 Mar 2026 16:10:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NVqN9s0/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y7qr2KKs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5792783F20; Mon,  9 Mar 2026 16:10:49 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 04FBE83F75; Mon,  9 Mar 2026 16:10:52 +0100 (CET)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F4FA83F59
+ by phobos.denx.de (Postfix) with ESMTPS id E44F383F82
  for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:10:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-40423dbe98bso2891223fac.2
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-4171ff4cb2cso644307fac.1
  for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1773069046; x=1773673846; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=u2RNPqW+U0ZQ8xsCF78JdrYIfZ/mW7bGZmRrE7ZBMKk=;
- b=NVqN9s0/Vrdv9cRMMpmB7HzUly/ELYKRFLdqnjnga5h6q9ZbKSc1SYNtRBrtRmI/xn
- v/eS5qfOiE/m9CRwPwxnrnzaNVUA556K06TscC9iPoNoPTk8GC+ZVeErhJx1dyUWlTMV
- MlQtFfkyGrnAnXJcyAAEhJ/nqoa0qnLPW6Xl0=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RXQPQf4MsG/Dfn0HKiaXxCNE8UhNXflcPpbVvy8t8Zw=;
+ b=Y7qr2KKsdmpkMtLxn+/TNhDFenx4I+uots4UX+O4ePBFpMvKYxGK7e06f+x+S1/eFk
+ 6h6T3X4hq4RSu7vWPU8ayi4J+D/kjnZfPPb5ztyYJ1JUwQke9wip/K7Yf/SRULKi8cio
+ WTRyT/1ysvQI6AnPqpW/h8rcdG5frm4PdL62E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1773069046; x=1773673846;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=u2RNPqW+U0ZQ8xsCF78JdrYIfZ/mW7bGZmRrE7ZBMKk=;
- b=ChP3xg6RDySfT05cZg7c0DbtAaVeZPWXi/RN/E8cakeirTg1mWI3uXx3bPvkV4noxw
- 2QeoLCyhMlgivD0wsKUFLOr3EVLKVa6gM5A0a228hqVWbyCEkGeTiUsk4HS/2lt7KvRV
- BzBYROng6Qpvr3d1zfG2V7XRJHIU6A0s5hc12DHOVMwjWBEeWs6qM/v0ZAu6YIpOeMps
- xIp9rAMTQe0OWh/C4SmTfi+wHRQ8o8tKp0yRmWhmWnncC5jJGon6h0Isc039uUldMrLh
- MlE66yhRdd2L1BfySlcX9AG9aQMewKpZToAjwE5R4mX3RZkAvX8/kXi1CiQIQTgSz6+3
- hz6g==
-X-Gm-Message-State: AOJu0Yxptm5b7q+/1XdqZm4ZnCU+Ka4O7NAgN7caHzD4iRzaF8YqNhRl
- h7ZeNS31KSL7mIUo/Ovlj/7YrNEWUCKgupQOCZ/9eGukCWjcCnEEYAtyuet7GRSpjXw=
-X-Gm-Gg: ATEYQzwXQ3gYi7x8VsTeU6ff8eZI8HLsEQ/ZiS+Ef/JNJxliuL6/4IeOEG89IX1BTku
- 6Zmq9ymKeXGPohSHCxi40AVMz5OpI63peWi3YToV4cJ3asIuykQDe4Lx+WzJx1M13IDnmH14tKm
- a7bl9Mtud1dXNvqh/j6gCfhuD+gRPI0RE7zFPBj2D/BeBugt/L1sRY9U3ijDLGA8ZKt3SkPdqJZ
- uR3sHNWaxDvMph39zHczefuRpvNr613rC1Zv+csNwIvGhcJZ/xYD4NUvTSzLlT4fEGE0kADSNGT
- ZtISSg5Q4dACYGZbowMaOWOvlpHc260eqJtI8R5B3Uz6glEBsp00baXR1y2zNK6skm/dXUyR3Mt
- bxTufGRFX9WkmOTL3bXujv3hk25MRDr3dqsf3obUjlKHvrpJuGBHNLYG+Sx5VikjN5YapHmaF6x
- 1bMxXq5tLeMSKD+CR5DGt3Sw1T8j/0uxJsP8YUZcbAYVF/AvqwkBbCYbyZ2KBUqEyy93FiPKsPJ
- gewmjRQRLUO+sWKoZjJ5HOpdb4qn2wI+TlzlQGtUl6XZFy3f5ROIJ8=
-X-Received: by 2002:a05:6871:728:b0:40e:dcbd:e92d with SMTP id
- 586e51a60fabf-416e38cea72mr6385755fac.0.1773069045709; 
- Mon, 09 Mar 2026 08:10:45 -0700 (PDT)
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=RXQPQf4MsG/Dfn0HKiaXxCNE8UhNXflcPpbVvy8t8Zw=;
+ b=N4leQVWS95Vjjkr6ZZzFTcXiofgf5Vl5Y1RzHdpgOsqy2itN4NGxpsX5ysb/ZmBBx5
+ frMIvfATUB0WuDxoSWGz5wzOIG4mE35UviVb/eTfLt7OSFMVy7A9JO0v0/agv8Id2RLs
+ nGdKSDSvzSMT2X+vEUgxPrJZVYyjOxNG1w5hBN4t4p4SD6Ip9cxLfV+FJS7kaPw7jh3n
+ L2ZWSRTvnT7onmv6NLlR7DF1pYNkZvWBKvLhyeQphqX6V+5yQJzcLyErDlDbXAy45FWr
+ Da8xX3WA+oeFoZex0NkR+84suYNQ9GEcEjqb4IS7omhH0jn182kFPtJ6yPD0pGbM2Z8g
+ I8gg==
+X-Gm-Message-State: AOJu0Yxc5p+t1Jk1J5MoRYA/tXmHDvg6RQPEe7xlXZEsMo57lCB5dgOS
+ pcx42euIvmbXQ+CIR01pGcPtOfgvNp4Hu2ZjqoTwRcwwu7eWYxI2GGKO4HXlfjF0znEYfR3kPGW
+ 8+HEZ5fc=
+X-Gm-Gg: ATEYQzy6nBzR0LZO4VItSJybGP9h7JXewCV9QloGfWTaDy0LYCfDOxktbt5U5tJxNE/
+ gfxi7Y01etyncGhmhCvsNRN+lzH0Jd56vW6wqHjW973suBXltX59tp+41HDJOkhkwW2TT3xW6mi
+ +GggxSWC9Mbe4LCVP6GdK5ckQf7CpMefdZGFHuPp9TYHcbPKbkVwJEoP15vur0AULrJ/BMKxE26
+ d4Pua6Y6DRJrozKt3dGiFAMq6gTkd0jLUn90Yxp3N6jCpVKra8pkaucWO0UTHbVSo9cnRd4rUIv
+ Hz+AwAHZ93Re7DgONZSnOucg1AJjfFFa386AUctzOGiPId7Wvbw+HflvsqzTVYBH/FAtqKa94Dc
+ iqKvywXihyL1KrflWNvNmgUMlap1gVRW9bGiNNK4vGteYBUfdulnCSXpuv3sfX3Fgm4gE9KW5tG
+ /jzI/aXGizd8b1nUxM44qb4HmatCZvi0z+33pGDL36xpz/c4iERYIuBms520FdNTz2L59Asq42q
+ OYgxnRRgkNXD7EcXjdVv02Tyeb+1LrnLIcL0nV1JTfi
+X-Received: by 2002:a05:6820:81c7:b0:67b:b718:1a49 with SMTP id
+ 006d021491bc7-67bb7181bf0mr1207815eaf.54.1773069046504; 
+ Mon, 09 Mar 2026 08:10:46 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
  by smtp.gmail.com with ESMTPSA id
  586e51a60fabf-416e65b1cacsm9376128fac.8.2026.03.09.08.10.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 08:10:45 -0700 (PDT)
+ Mon, 09 Mar 2026 08:10:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Ludwig Nussel <ludwig.nussel@siemens.com>
-In-Reply-To: <20260224155712.286317-1-ludwig.nussel@siemens.com>
-References: <20260224155712.286317-1-ludwig.nussel@siemens.com>
-Subject: Re: [PATCH] bootm: fix booting kernel_noload image
-Message-Id: <177306904503.2117441.16116722120521605409.b4-ty@konsulko.com>
+To: u-boot@lists.denx.de, Martin Schwan <m.schwan@phytec.de>
+Cc: Simon Glass <sjg@chromium.org>, Andreas Pretzsch <apr@cn-eng.de>
+In-Reply-To: <20260218-wip-bootmeth-rauc-tests-v3-1-64aeea6d1032@phytec.de>
+References: <20260218-wip-bootmeth-rauc-tests-v3-1-64aeea6d1032@phytec.de>
+Subject: Re: [PATCH v3] test: boot: Add test for bootmeth_rauc
+Message-Id: <177306904585.2117441.10016162647069280239.b4-ty@konsulko.com>
 Date: Mon, 09 Mar 2026 09:10:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -94,23 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Feb 2026 16:57:10 +0100, Ludwig Nussel wrote:
+On Wed, 18 Feb 2026 14:35:07 +0100, Martin Schwan wrote:
 
-> FIT images don't work without having to explicitly specify physical
-> load addresses. Digging into that it looks like a flaw in
-> bootm_load_os().
-> It duplicates images->os for convenience. However, the code handling
-> "kernel_noload" images then updates the load address in the copy with
-> the value lmb_alloc_mem() returned. Later there's another call to
-> lmb_alloc_mem() that uses the old value. This leads to havoc due
-> to subsequent calls of lmb_alloc_mem() picking too low addresses.
+> Add a simple unit test for testing the RAUC bootmethod. Provide only the
+> very basic tests for now, running a scan and list, to verify correct
+> detection of the RAUC bootmethod. More advanced boot tests of this
+> bootmethod can be added in a separate patch.
+> 
+> This requires another mmc image (mmc9) to contain the following
+> partitions:
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] bootm: fix booting kernel_noload image
-      commit: fe6484b402759dba6024cf2f8c212b27f769a0d7
+[1/1] test: boot: Add test for bootmeth_rauc
+      commit: 36add050eea439f0b2a15e4ea0d3a8e21216f159
 -- 
 Tom
 
