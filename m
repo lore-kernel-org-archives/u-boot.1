@@ -4,100 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83846EF371D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 08:54:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F16EF371A
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 09:05:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8BB3839DF;
-	Mon,  9 Mar 2026 09:54:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=egym.com
+	by phobos.denx.de (Postfix) with ESMTP id 23268839DF;
+	Mon,  9 Mar 2026 10:05:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=egym.com header.i=@egym.com header.b="PLxK5iK3";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bKpBMQh0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B829D83A8C; Mon,  9 Mar 2026 09:54:11 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 7F35C83A8C; Mon,  9 Mar 2026 10:05:28 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31F9383952
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 09:54:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 414EC83952
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 10:05:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=egym.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cibil.pankiras@egym.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-38a3486419cso33143721fa.3
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 01:54:07 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773046447; cv=none;
- d=google.com; s=arc-20240605;
- b=V4tGgaFtcwFbiXJhv156NHXPHob9aoqVvlHiRC6bKbVR1QkNzjDVzP60+kpvAcCAmA
- x9GG81FcX/Um/LR+2CHoRvT/30W7CBX2lA+/svh7msOlsXODsOGUHKMuBaxx3CMTVP/1
- iTAsghp7PQS6oc76urOCpkZc9JJ1R+bgY5e8HEWl69HQnwnLpDUW45I7AYIHR26tnenr
- t802pN6Lqn5OfSRZtBK8ze/cQU+1FIkMnjKQZWY8ZODaPGZKAW+Wl0RNu1cc6b0tMKc4
- FNIX/AZ11BttIYr60URn8yAxA8Su8LknXqa0UVQNJ/rst8Kj1DoTAr7AlSQBPxBlS4vN
- 9ySw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=1RPfaVRzuABLNso4Uj4qhD6naNtSgbMZ0SJG/a7C15U=;
- fh=HaIPtZf3Pgz85VsN9CYaHBIYxht2i2ce9rjxgwF9FyU=;
- b=IN4p9Ljbi3+2EfsV4JyooW2zUX3BgKfJlN8q22tLb5qnDQ0zwI01JP4fu6tTxtYCFQ
- HhTG9hzkErZPRfYkT8VbqcJOejvF+KQvXGh6iG4x39+C7t9j6IDtkIk2sqDgGj3oq+EC
- SCvdgNHmEety0ALDpgvoz0+u2SRqic6sMkcWCEuondRhv9F86BNM1enBQo4p7lLWoFl4
- uFolM9Sa+e7Rg6LMpVgxrShC+A+60xQYiq2EBmAY77sYjHlue3FOL5csE+XaqJSz1iJR
- xreCgDOKR+lFNnJ+181qBX+mdV0+7DDR6Gm/gSVw3Os2SyI95JY2AN5iot0LBJ3zeoXb
- 1VmA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=msp@baylibre.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4852e09e23dso14938365e9.0
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 02:05:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=egym.com; s=egymcom; t=1773046447; x=1773651247; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1RPfaVRzuABLNso4Uj4qhD6naNtSgbMZ0SJG/a7C15U=;
- b=PLxK5iK306O/vXgYK1BX8rYIs8vJWqpP4qeE8EhSiPYd4zcOkQ4tujBAlEcW72byrO
- lmAtBbJKSJagiFYGwZG/3Mxj2f5THVrQTBR6/Ppif9hFBFBW2HdZG8Ol0I2gVSK/z4H1
- GZJWttooQjjt0XsFywFaXfMx7cN1psiu9pBsw=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773047123; x=1773651923;
+ darn=lists.denx.de; 
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ewZpSNKQpkoPaKEiT5/IIf36Q/pndUsUr6eLbIAoZSg=;
+ b=bKpBMQh0rIeO5ZCqX2xXGqo5Ym9+gAQ/6pfne7J0TdVYZfd/hQstil1C0KFjTJY/Nz
+ UD3L4x/lZpWEDYCAe+N0zXxiyqNSrR2YeLQ8easBCuk3UJl6ZFZokxhQ0TeNGmm1HIUa
+ mEQnLIXW+9tYKhJD40zAu/hdH2C/KvkbTuP/L1qFIObvGWM+B3Fla4S6jT02v/3vosoC
+ wyAD6KGleOyRI5OXJuJOh0VA5dhNd6MVwQKfH0msn87SmeyJKuWI17waYckx2M2qlw3/
+ pwWksXnZuiZgb0IalTiq0AizXIIrkYlitPs2Od/5XOmvjg/kRLVVh+xT0z6mBLVV0KTs
+ Agsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773046447; x=1773651247;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=1RPfaVRzuABLNso4Uj4qhD6naNtSgbMZ0SJG/a7C15U=;
- b=HBX98xWi9Fbw+X4uCTucAFEvtXVB61AnVppyftENdvfM7H2ce8W76NFdfbgej+WLt8
- DTEddTAtxmFkFGqsc1FJTxONhNsHC0OMQMEkrKy1VoBHt690SHrZa9Mi2bVZqXBxXj5A
- 7NSJTbtRip8H06HT8FVsn+yPGuSXOTzEiqLsAjXjDbZ3dEWB+CGqd1sTMLdz71r5LydN
- TlIrd0YIGgU5YIx5J0j/tF6j5svKX6JppMHh5TjjxB6heYIh7Br1+RIVIs6SvJU6D249
- aZ5sWh2mLsabGVDLwcEom2YU8iysgLE3e02WtQCB7ii2Hrha/oy3UOt30+S9YyZ1X0jb
- qGBw==
-X-Gm-Message-State: AOJu0YzPzHiNAmx6Q6QtnEeG4MssuHNc842OG1dO237Rz8AGEzgq1hHl
- PAbNZRpo9tTOA0ocUZS0C2jpi0AqZS0N9nfoJyA//azwqvZpLLefYUam+XEd2/egpTKYUIviCjR
- zmeI4m4H+UR9Pdnv+pWu0gR6z/Wlf/Qp/pmXPXwqMxOgOVelg4A+EgcMf+4ZwEvgkWcEqPty/LC
- T4od3o4wMdCVMREJuualoQMPGoPS1634RIJhQ8PA==
-X-Gm-Gg: ATEYQzyyB/78HM43JY1K8bDHGC+M/jfvw4TglKzzKeYZhdcHU0TM/P6Nx+Of7DCUdXg
- LVH5o868BL0o2TUKs+6vVypyiVLQ1EBljnAW01POKrhIhSs7KM/d44WFfRAf8L4vqT1cqaPaoR9
- 1Ajo+EbRtN2zMkOBW3jOBG1+azfMPF85E7J26VR6CjfJMXKpksZgW81zMpik9UswecS2ZtCbogW
- ngIS1gHYZP25RVy1oX/EIf+UyaqadQYGSzQkdUU3Ud9ALfi8qs6mpBRsKNFpiXPDxaFyPp9dkpV
- 8/npJocMSE1j7tAbubf0W7FdHfZVo+x2o/EkDml4xyJTYvXr76fia49l2dG3+JxOkFN/SiwBfgS
- yuqyztdWpgH88xxHXmnJK3JlM
-X-Received: by 2002:a2e:be9f:0:b0:389:eed3:5685 with SMTP id
- 38308e7fff4ca-38a40d65498mr30540651fa.16.1773046446768; Mon, 09 Mar 2026
- 01:54:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20260206104701.34358-1-cibil.pankiras@egym.com>
-In-Reply-To: <20260206104701.34358-1-cibil.pankiras@egym.com>
-From: Cibil Pankiras <cibil.pankiras@egym.com>
-Date: Mon, 9 Mar 2026 09:53:55 +0100
-X-Gm-Features: AaiRm50btSP7_N04ZEBYyfF5xxWfgC3-SVBmXvpfk70T_lqh6bM48eFpJd0MBnE
-Message-ID: <CAK3EG+=BUz=1srAZFaOaYoMeGQ_bL=q8aeOZFiSj1-d4uGT+Mg@mail.gmail.com>
-Subject: Re: [PATCH v2] pinctrl: bcm283x: Fix GPIO pull state register values
- for BCM2711
-To: u-boot@lists.denx.de
-Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ d=1e100.net; s=20230601; t=1773047123; x=1773651923;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ewZpSNKQpkoPaKEiT5/IIf36Q/pndUsUr6eLbIAoZSg=;
+ b=Ym6ESm1TmbcNc4YRFUwgBmXS8yDU1SUzL3S/KpAn1jY/Q0ZvXH6F/OKjUVnHFrENk+
+ Hxp4QDphOm3GIr3H63bPxa50TfJnc8ac9ldUnd49A/xMkokAnfV8GnppSgFfr4LE7zN4
+ csvCdWOtZ6s46IPJXLL6XhWTrQh8H+mubeegME9goCGehE0BqGH2bFM6RpEROEGmL1ne
+ ZQ5V34KaqxCfXAvYL9pPmuzjVM16BIBud17+HFm8TaHoUaIDk4eWfinVjbwl1r+c/gi1
+ pzFHcIkkoKAt2jELRU7b5wABms2/CRkMo78vSrPWNAh7SlEw/QajgKTzJxr0OcXAL1vp
+ QnPQ==
+X-Gm-Message-State: AOJu0Yxe6Hnn2tiNLsYP7J39gHTwZ00A1D9MBD8nvLVlVXJEgTVXVd1q
+ vthhvMBYsiVSpcheK/4nAJ+QFhlqlwbbC5JVpHGFVzbqejWbiCSQW29SogxbLmENodw=
+X-Gm-Gg: ATEYQzwfMeNoGtpiZbMPjdqBOFhm/gHzwdvUTsDjNh8umYaFh5pkw/nVAJ2YceTczXT
+ RjJ0wx7koIW1dJaNnmgtoT3onrdlYcoogqY2OmnOVJKRul1Y7ggFS5h/gACTU4Kxf2YFNz1weKJ
+ OnQE6dtV6ZKcT/htMIyv3XxHPuZJrBzckvFv30V1qNspLdr+D2qzXLIA9F9BHHCc09Wf2Ewyr2f
+ 77eZ/g2RGLFnIvD2Klf/J5v8sKcRdV4gyCWV090ZFtdhUqrbFY8mcpcVNKLza5HVHnmK6Y97Txy
+ /Y/z7vU/0dK0NwskqhKtNFmTYlzqo2eqdH6uQrdCyVy9TcfCAsL+88OMcB8VE3UHix9s37PaD2x
+ 49U9clal5hd/Nu+vPaxlb4BOI/N1aQpn+GwfZdU6pnUlHnqpHtuppZqU5S5bx9k8tSGchoirA4y
+ OOHl+1nf3alNgg+AU=
+X-Received: by 2002:a05:600c:4591:b0:47e:e78a:c834 with SMTP id
+ 5b1f17b1804b1-48526978664mr167709435e9.34.1773047122406; 
+ Mon, 09 Mar 2026 02:05:22 -0700 (PDT)
+Received: from localhost ([195.52.25.213]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-48534fa65a6sm75865005e9.2.2026.03.09.02.05.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 02:05:21 -0700 (PDT)
+Mime-Version: 1.0
+Content-Type: multipart/signed;
+ boundary=c3fe5a942fb8099bdb8f7abdc87e4fbdc88c22f16a732d95df923f963b8d;
+ micalg=pgp-sha512; protocol="application/pgp-signature"
+Date: Mon, 09 Mar 2026 10:05:10 +0100
+Message-Id: <DGY4QTSVH7B9.21Y389AGHLKPM@baylibre.com>
+Cc: <u-boot@lists.denx.de>, "Marc Murphy" <marc.murphy@sancloud.com>,
+ "Rasmus Villemoes" <ravi@prevas.dk>, "Kory Maincent"
+ <kory.maincent@bootlin.com>, "Marek Vasut"
+ <marek.vasut+renesas@mailbox.org>, "Romain Gantois"
+ <romain.gantois@bootlin.com>, "Parvathi Pudi" <parvathi@couthit.com>,
+ "Basharath Hussain Khaja" <basharath@couthit.com>, "Paul Barker"
+ <paul.barker@sancloud.com>, "Andrew F. Davis" <afd@ti.com>
+Subject: Re: [PATCH v4 00/10] arm: am335x: Switch to upstream devicetree
+From: "Markus Schneider-Pargmann" <msp@baylibre.com>
+To: "Tom Rini" <trini@konsulko.com>, "Markus Schneider-Pargmann (TI.com)"
+ <msp@baylibre.com>
+X-Mailer: aerc 0.21.0
+References: <20260127-topic-am33-evm-oftree-v2026-01-v4-0-0dadb0710ce7@baylibre.com>
+ <20260306151106.GL1388590@bill-the-cat>
+In-Reply-To: <20260306151106.GL1388590@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,80 +105,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 6, 2026 at 11:47=E2=80=AFAM Cibil Pankiras <cibil.pankiras@egym=
-.com> wrote:
->
-> BCM2711 has different pull-up/down register values compared to BCM2835
->
-> - BCM2835: NONE=3D0, DOWN=3D1, UP=3D2
-> - BCM2711: NONE=3D0, UP=3D1, DOWN=3D2
->
-> This patch fixes the pull state register values for BCM2711.
->
-> Fixes: 2c39d975f87c ("pinctrl: bcm283x: Add GPIO pull-up/down control for=
- BCM2835 and BCM2711")
-> Signed-off-by: Cibil Pankiras <cibil.pankiras@egym.com>
-> ---
-> Changes in v2:
-> - Moved pull value swap logic to bcm2711_gpio_set_pull()
-> - Updated the function header comment for bcm2711_gpio_set_pull()
-> ---
->  drivers/pinctrl/broadcom/pinctrl-bcm283x.c | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->
-> diff --git a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c b/drivers/pinctrl=
-/broadcom/pinctrl-bcm283x.c
-> index 4ecc8bac645a..90eee88eb137 100644
-> --- a/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> +++ b/drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> @@ -30,6 +30,11 @@ struct bcm283x_pinctrl_priv {
->
->  #define MAX_PINS_PER_BANK 16
->
-> +/* pull states for BCM2711 */
-> +#define BCM2711_PULL_NONE 0
-> +#define BCM2711_PULL_UP   1
-> +#define BCM2711_PULL_DOWN 2
-> +
->  static void bcm2835_gpio_set_func_id(struct udevice *dev, unsigned int g=
-pio,
->                                      int func)
->  {
-> @@ -93,6 +98,17 @@ static void bcm2711_gpio_set_pull(struct udevice *dev,=
- unsigned int gpio, int pu
->         u32 bit_shift;
->         u32 pull_bits;
->
-> +       if (!device_is_compatible(dev, "brcm,bcm2711-gpio"))
-> +               return;
-> +
-> +       /* BCM2711's pull values differ from BCM2835 */
-> +       if (pull =3D=3D BCM2835_PUD_UP)
-> +               pull =3D BCM2711_PULL_UP;
-> +       else if (pull =3D=3D BCM2835_PUD_DOWN)
-> +               pull =3D BCM2711_PULL_DOWN;
-> +       else
-> +               pull =3D BCM2711_PULL_NONE;
-> +
->         /* Findout which GPIO_PUP_PDN_CNTRL register to use */
->         reg_offset =3D BCM2711_GPPUD_CNTRL_REG0 + BCM2711_PUD_REG_OFFSET(=
-gpio);
->
-> --
-> 2.43.0
->
+--c3fe5a942fb8099bdb8f7abdc87e4fbdc88c22f16a732d95df923f963b8d
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-Hello Matthias,
+Hi Tom,
 
-Could you please review this patch when you have time?
+On Fri Mar 6, 2026 at 4:11 PM CET, Tom Rini wrote:
+> On Tue, Jan 27, 2026 at 05:48:14PM +0100, Markus Schneider-Pargmann (TI.c=
+om) wrote:
+>
+>> The series is split into two logical groups:
+>>=20
+>> - Patches 1-3: Fixes for am335x-evm to boot and support the LCD panel
+>>   with the current u-boot devicetree.
+>> - Patches 4-10: Make upstream devicetree working with uboot. This
+>>   adds tick-timer, adds compatibility of the board code for different
+>>   USB probing and updates the defconfig.
+>>=20
+>> The series has been tested on am335x-evm. Note that I don't have all
+>> other boards built with the am335x_*evm_*defconfig, so tests are
+>> appreciated. buildman reports builds are working.
+>
+> Bad news, good news. Bad news is that this fails on Beaglebone Black:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1392729
 
-Warm Regards,
-Cibil
+Indeed, bad news and good news, thank you! I will fix it this week!
 
---=20
-EGYM SE, Einsteinstra=C3=9Fe 172, 81677 M=C3=BCnchen
-Gesch=C3=A4ftsf=C3=BChrende Direktoren:=20
-Patrick Meininger, Philipp Roesch-Schlanderer, Florian Sauter
-Gerichtsstand=20
-M=C3=BCnchen | Amtsgericht M=C3=BCnchen HRB 303509=C2=A0|=C2=A0USt.-Id. DE2=
-75313632
+Best
+Markus
+
+--c3fe5a942fb8099bdb8f7abdc87e4fbdc88c22f16a732d95df923f963b8d
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iKMEABYKAEsWIQSJYVVm/x+5xmOiprOFwVZpkBVKUwUCaa6NRxsUgAAAAAAEAA5t
+YW51MiwyLjUrMS4xMiwyLDIRHG1zcEBiYXlsaWJyZS5jb20ACgkQhcFWaZAVSlMQ
+XwD/aFmDPmM4ui0lTgJihD6W79SIW1a3fOkUWNt2+xVkUWQBAKAx3iavtTnyFQuV
+l+k/izS6oNpBLvAXMVp6qwSD9cEL
+=9uKv
+-----END PGP SIGNATURE-----
+
+--c3fe5a942fb8099bdb8f7abdc87e4fbdc88c22f16a732d95df923f963b8d--
