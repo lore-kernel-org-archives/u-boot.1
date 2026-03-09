@@ -4,78 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7143BEA854D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 02:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1445EA8542
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 03:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7902B8063E;
-	Mon,  9 Mar 2026 03:33:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
+	by phobos.denx.de (Postfix) with ESMTP id E8E4983952;
+	Mon,  9 Mar 2026 04:02:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="LgUFo6Nh";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DCtb35YJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0010807C0; Mon,  9 Mar 2026 03:33:18 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5ECA1839D5; Mon,  9 Mar 2026 04:02:45 +0100 (CET)
+Received: from mail-m49239.qiye.163.com (mail-m49239.qiye.163.com
+ [45.254.49.239])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43A6480517
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 03:33:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1055D8063E
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 04:02:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0x0f.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3598cab697eso4731581a91.1
- for <u-boot@lists.denx.de>; Sun, 08 Mar 2026 19:33:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1773023593; x=1773628393; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Tr0GZ6OYcnyElUR8KXyH//zJbM8C3Lpxzg5eES+9eh0=;
- b=LgUFo6NhOw/bwXZopg+olQlrCydPLA+FwdpTtUGJEQZ5PuvfTM9VZ8LSJ0dVbs6rrp
- ClFR6Kt5sHPcYYabMyQ3ykl+r4qO5nZ6pj606Yh0K0qwFBx4zHyiH9nBDObmxaVvtGsS
- wvqYrweFhJB0QGEXyox+e8DS/r/F6cqn1EmVM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773023593; x=1773628393;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tr0GZ6OYcnyElUR8KXyH//zJbM8C3Lpxzg5eES+9eh0=;
- b=QnrOiuOnmt/ud99eQgiwkZSfvr19pyT7m1tAqUGxyztTfvqcuvVk6CJl4pN+ukr2Yc
- rc8erPpr5jScidN8kSrl39uTyUrchhcydlj8i8dQO4zabCD2eyZgsQBssGOnLJPbUSTq
- 4oGVMawfL677NYgvFZTCf8NzerKS0PhCyXYrFOtDovn52WdSsBvQbhqQ2gFqSffr1SvB
- 4/hK3LGKHtC+u4LC6rfwpIDdSiVdhlPWBz+sx5tvLmY+hTkFZpaQwlf83GIC3b7yBdoR
- 1vIjKsLWT4DquVCGnAabC7WOqsFIJbOtQCv4q5TSOAIb1qsncYvVUTb+H7d2C9H4cFvY
- IGLg==
-X-Gm-Message-State: AOJu0Yybj2m50RU/krcsOsJUxp4+bUbJFMTQoTKsG3bOBw7QsLlOl+gG
- BhIwo6TrFUdb3aiv8ekxeZMTzXt+pusAA2i+QKWI5j8bdZwIV0hg8tchI6ZVxgW3+nE=
-X-Gm-Gg: ATEYQzxwV1Oyz6miL2v8xx23yeTTBWZ7RqqjM2sntBt6UyJsPyRZ7vDXcE4BWDlBdUG
- B+TxxQ3l43hw5VmhOE/R9jHVTbK+siJ+2kb5KSmYTtHNnvmQxd7LnR6+uJdxuXcYbxlU4rNoLT9
- gTdl46kZ/HJCxIYnvh/wy+k/cRNBAzpsMkxHMfHL0GWUJhjdKvvXJ3/9KamOteEbSyHQzXRcVfj
- EKP/aG9SbS62rwre2O6Q6VNcp8/iB/VH5HvtGtRxdazGqwFlbdanHSHRXNX0ISs7GUW/t7kymHO
- M5LbpV802jYQIQML7cLBdNJYIPgC5ER9U57ExQrNRiHVyy8j7xpHgOpWd/2eFBhKFv1tH3DKvvA
- 8MQ4wTXJq9Is/qfts0eO7JcSVnbVgnZMLx3O1CmNCiQSzXbuFb/6x/6uU5bC7tsphnnogxT0xsT
- fSKbwQDn6WXmQd25pqt9o4VtLgQ3a3GMPdcyUg1qDM1XnBUiEXkHNAZ7H0Tf1gJErVCiUOE7sSc
- fPR
-X-Received: by 2002:a17:90b:1dcb:b0:359:85b0:4023 with SMTP id
- 98e67ed59e1d1-359be394911mr7475029a91.16.1773023593339; 
- Sun, 08 Mar 2026 19:33:13 -0700 (PDT)
-Received: from shiro (p1766150-ipxg00e01sizuokaden.shizuoka.ocn.ne.jp.
- [153.167.218.150]) by smtp.googlemail.com with ESMTPSA id
- 98e67ed59e1d1-359bbbaf51bsm4637689a91.1.2026.03.08.19.33.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Mar 2026 19:33:13 -0700 (PDT)
-From: Daniel Palmer <daniel@0x0f.com>
-To: visitorckw@gmail.com
-Cc: u-boot@lists.denx.de,
-	Daniel Palmer <daniel@0x0f.com>
-Subject: [PATCH] serial: goldfish: Add DEBUG_UART support
-Date: Mon,  9 Mar 2026 11:32:34 +0900
-Message-ID: <20260309023234.640209-1-daniel@0x0f.com>
-X-Mailer: git-send-email 2.51.0
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.60.65] (unknown [110.83.51.2])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 36304ab97;
+ Mon, 9 Mar 2026 11:02:40 +0800 (GMT+08:00)
+Message-ID: <b3fda56a-d146-4493-a947-acfaada89894@rock-chips.com>
+Date: Mon, 9 Mar 2026 11:02:40 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Kever Yang <kever.yang@rock-chips.com>
+Subject: Re: [PATCH v2 02/12] rockchip: board: qnap-ts433: drop DW_MMC config
+ options
+To: Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org,
+ philipp.tomsich@vrull.eu
+Cc: trini@konsulko.com, u-boot@lists.denx.de
+References: <20260114082822.4007128-1-heiko@sntech.de>
+ <20260114082822.4007128-3-heiko@sntech.de>
+Content-Language: en-US
+In-Reply-To: <20260114082822.4007128-3-heiko@sntech.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Tid: 0a9cd08bf95a03afkunm1a416669162beaf
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaS0JLVkxJTE1DTB1PSEIeQlYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSktVQ0hVTkpVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
+ JLS1kG
+DKIM-Signature: a=rsa-sha256;
+ b=DCtb35YJX554wouEpJO0lSX7wj5kFq0Tr3EDcA4noX6Q9VXDyF+ov603tqhz3RzpOfxpUD0gl+l8/AKsd+h+Qt3eotcfbsPIPzQKubWXBXrvSEdExN1vL4N9ViHv7DRI4GTUD+b7w7iRDiRgizp1OzEZKotb7diPVSf1ZWfrgFM=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=BH6Q5HqJwRzzFNOyxiJZXNE8JnXMLlAt69DB7NRrKJA=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,83 +72,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add debug support for the goldfish tty so it can be used for
-early debugging. This will be really useful when adding support
-for relocation etc.
 
-Signed-off-by: Daniel Palmer <daniel@0x0f.com>
----
- doc/board/emulation/qemu-m68k.rst | 10 ++++++++++
- drivers/serial/Kconfig            |  8 ++++++++
- drivers/serial/serial_goldfish.c  | 18 ++++++++++++++++++
- 3 files changed, 36 insertions(+)
+On 2026/1/14 16:28, Heiko Stuebner wrote:
+> The TS433 does not have a SD-card slot, just the separate SDHCI-controlled
+> EMMC on the board.
+>
+> So drop the 2 config options.
+>
+> Fixes: d3cacb79e706 ("board: rockchip: add support for Qnap TS433 devices")
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-diff --git a/doc/board/emulation/qemu-m68k.rst b/doc/board/emulation/qemu-m68k.rst
-index 6c4de54cf6a8..2f2e6bd6444a 100644
---- a/doc/board/emulation/qemu-m68k.rst
-+++ b/doc/board/emulation/qemu-m68k.rst
-@@ -31,6 +31,16 @@ The minimal QEMU command line to get U-Boot up and running is:
- Note that the `-nographic` option is used to redirect the console to stdio,
- which connects to the emulated Goldfish TTY device.
- 
-+Debugging U-Boot
-+----------------
-+
-+If you need early debugging output enable `CONFIG_DEBUG_UART_GOLDFISH`.
-+The base address for the UART can be found by activating the QEMU monitor,
-+running `info qtree`, and then looking for the goldfish tty device and
-+taking the mmio address.
-+
-+Baud rate doesn't matter.
-+
- Hardware Support
- ----------------
- The following QEMU virt peripherals are supported in U-Boot:
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index b84cb9ec781d..f6a696e6c94c 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -510,6 +510,14 @@ config DEBUG_UART_XTENSA_SEMIHOSTING
- 	  start up driver model. The driver will be available until the real
- 	  driver model serial is running.
- 
-+config DEBUG_UART_GOLDFISH
-+	bool "Goldfish TTY"
-+	help
-+	  Select this to enable the debug UART using the Goldfish TTY driver.
-+	  This provides basic serial output from the console without needing to
-+	  start up driver model. The driver will be available until the real
-+	  driver model serial is running.
-+
- endchoice
- 
- config DEBUG_UART_BASE
-diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
-index 4ac2cfb62315..58c494918786 100644
---- a/drivers/serial/serial_goldfish.c
-+++ b/drivers/serial/serial_goldfish.c
-@@ -115,3 +115,21 @@ U_BOOT_DRIVER(serial_goldfish) = {
- 	.priv_auto = sizeof(struct goldfish_tty_priv),
- 	.flags	= DM_FLAG_PRE_RELOC,
- };
-+
-+#ifdef CONFIG_DEBUG_UART_GOLDFISH
-+
-+#include <debug_uart.h>
-+
-+static inline void _debug_uart_init(void)
-+{
-+}
-+
-+static inline void _debug_uart_putc(int ch)
-+{
-+	void *base = (void *)CONFIG_DEBUG_UART_BASE;
-+
-+	__raw_writel(ch, base + GOLDFISH_TTY_PUT_CHAR);
-+}
-+
-+DEBUG_UART_FUNCS
-+#endif
--- 
-2.51.0
-
+Thanks,
+- Kever
+> ---
+>   configs/qnap-ts433-rk3568_defconfig | 2 --
+>   1 file changed, 2 deletions(-)
+>
+> diff --git a/configs/qnap-ts433-rk3568_defconfig b/configs/qnap-ts433-rk3568_defconfig
+> index 1e494073bc9..ebcd3b69e90 100644
+> --- a/configs/qnap-ts433-rk3568_defconfig
+> +++ b/configs/qnap-ts433-rk3568_defconfig
+> @@ -51,8 +51,6 @@ CONFIG_LED=y
+>   CONFIG_LED_GPIO=y
+>   CONFIG_MISC=y
+>   CONFIG_SUPPORT_EMMC_RPMB=y
+> -CONFIG_MMC_DW=y
+> -CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_ROCKCHIP=y
