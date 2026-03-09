@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 847C5F41808
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B85F41807
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:13:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B97C83F75;
-	Mon,  9 Mar 2026 16:10:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8945A83F14;
+	Mon,  9 Mar 2026 16:13:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y7qr2KKs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NY8r4wD6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04FBE83F75; Mon,  9 Mar 2026 16:10:52 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 56BEB83BC7; Mon,  9 Mar 2026 16:13:23 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E44F383F82
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:10:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FE3583A8C
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:13:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-4171ff4cb2cso644307fac.1
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:10:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-50902b1006cso17722291cf.3
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:13:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773069046; x=1773673846; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RXQPQf4MsG/Dfn0HKiaXxCNE8UhNXflcPpbVvy8t8Zw=;
- b=Y7qr2KKsdmpkMtLxn+/TNhDFenx4I+uots4UX+O4ePBFpMvKYxGK7e06f+x+S1/eFk
- 6h6T3X4hq4RSu7vWPU8ayi4J+D/kjnZfPPb5ztyYJ1JUwQke9wip/K7Yf/SRULKi8cio
- WTRyT/1ysvQI6AnPqpW/h8rcdG5frm4PdL62E=
+ d=chromium.org; s=google; t=1773069196; x=1773673996; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HnqVX58OrrM4/U8Z7Ben+ExMjxZh0pszMCrUOmdovgQ=;
+ b=NY8r4wD6erfK2QCXJPHbb/NSxef3QyQZWKrFrp++rxDpWLv/dha31LES4W0N9evFgZ
+ K9RM/E9ZeklBcSxhc9v1sZC25Tq0xDURp4ZGjO7I3pms7tZE1nKv30WteKqqzFxZZXyw
+ 8Z1U4/O+wupJXhykGsd8K0dOdsCSzL0dKhXK4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773069046; x=1773673846;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=RXQPQf4MsG/Dfn0HKiaXxCNE8UhNXflcPpbVvy8t8Zw=;
- b=N4leQVWS95Vjjkr6ZZzFTcXiofgf5Vl5Y1RzHdpgOsqy2itN4NGxpsX5ysb/ZmBBx5
- frMIvfATUB0WuDxoSWGz5wzOIG4mE35UviVb/eTfLt7OSFMVy7A9JO0v0/agv8Id2RLs
- nGdKSDSvzSMT2X+vEUgxPrJZVYyjOxNG1w5hBN4t4p4SD6Ip9cxLfV+FJS7kaPw7jh3n
- L2ZWSRTvnT7onmv6NLlR7DF1pYNkZvWBKvLhyeQphqX6V+5yQJzcLyErDlDbXAy45FWr
- Da8xX3WA+oeFoZex0NkR+84suYNQ9GEcEjqb4IS7omhH0jn182kFPtJ6yPD0pGbM2Z8g
- I8gg==
-X-Gm-Message-State: AOJu0Yxc5p+t1Jk1J5MoRYA/tXmHDvg6RQPEe7xlXZEsMo57lCB5dgOS
- pcx42euIvmbXQ+CIR01pGcPtOfgvNp4Hu2ZjqoTwRcwwu7eWYxI2GGKO4HXlfjF0znEYfR3kPGW
- 8+HEZ5fc=
-X-Gm-Gg: ATEYQzy6nBzR0LZO4VItSJybGP9h7JXewCV9QloGfWTaDy0LYCfDOxktbt5U5tJxNE/
- gfxi7Y01etyncGhmhCvsNRN+lzH0Jd56vW6wqHjW973suBXltX59tp+41HDJOkhkwW2TT3xW6mi
- +GggxSWC9Mbe4LCVP6GdK5ckQf7CpMefdZGFHuPp9TYHcbPKbkVwJEoP15vur0AULrJ/BMKxE26
- d4Pua6Y6DRJrozKt3dGiFAMq6gTkd0jLUn90Yxp3N6jCpVKra8pkaucWO0UTHbVSo9cnRd4rUIv
- Hz+AwAHZ93Re7DgONZSnOucg1AJjfFFa386AUctzOGiPId7Wvbw+HflvsqzTVYBH/FAtqKa94Dc
- iqKvywXihyL1KrflWNvNmgUMlap1gVRW9bGiNNK4vGteYBUfdulnCSXpuv3sfX3Fgm4gE9KW5tG
- /jzI/aXGizd8b1nUxM44qb4HmatCZvi0z+33pGDL36xpz/c4iERYIuBms520FdNTz2L59Asq42q
- OYgxnRRgkNXD7EcXjdVv02Tyeb+1LrnLIcL0nV1JTfi
-X-Received: by 2002:a05:6820:81c7:b0:67b:b718:1a49 with SMTP id
- 006d021491bc7-67bb7181bf0mr1207815eaf.54.1773069046504; 
- Mon, 09 Mar 2026 08:10:46 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-416e65b1cacsm9376128fac.8.2026.03.09.08.10.45
+ d=1e100.net; s=20230601; t=1773069196; x=1773673996;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HnqVX58OrrM4/U8Z7Ben+ExMjxZh0pszMCrUOmdovgQ=;
+ b=OatW8cY5rXYbbxpw8Cp3q+JCi9RclSyP5XsbqBNLv2r3rTVWjhqVDDT1LEeyoRDdBk
+ rzj28KjtZbzSIi0j3sxAYvo8BDR9zpaSBs/cuM3N8rC2Krt69nMHUFRUUkfTxwlgmjSm
+ Kf2ZryjzqRPjrsQ4lqA3n4PW43iDTcciQhPudEqStXqik1NBn6cSzbVibUvgoF7TZT1h
+ uap1PABDNo0PQdKeMO36hAYpYzfQg/VSzdJDjQc7+b1Vs0JpOU78cw1K6m0hyRDe2Su6
+ iJP1MgwoJOqX0U0Zay19Ji0mmOB/gM96VfkiICNAnWQvK9T/r7X/mbiNAG7ummZArTpL
+ tk4g==
+X-Gm-Message-State: AOJu0YxHCBCbSP8F5UzuYvQuaNLMdxRXF3GeWT+SZapTrhdaHAqO3Px7
+ 96UgWUy2I9Z1K4T0U3izzpZDNe++9/wa635IQ9ottFE9wiTwL7fXj/ecp9yeNoyuw4DuscfNo8J
+ 01WI=
+X-Gm-Gg: ATEYQzz9FIyohmOKizpGauGdx5o+dNjlv/F9BN7IOhTF3wb+fJNiNBygdNL0814TiVp
+ G6P124l23adnOhkvtjuE/4dHZPOX5tnBurnzIMFz/PVp/B3rt4tBCMTdFO0h0WrmmrQK6/Pu7Qe
+ P3KlTjbdXLnPAQO0ErTfkAGLic/PpKr/dW7j6VkXNZM7n6Jk2vozK1Dmf2ssPlGSIRduHhxOihw
+ TOlBLa0mTAIEPA7EyEvdi5Fdl0TR4NGQSjuvbDsKqMoToaBkIxygG4hioLYixvHKG8ymCenFn81
+ Nysl0xs76ynpBtFr5qjjFk3AcEHONCniEfwtm0RAcHdVysFQ5yVYSvC4Lvt22GV8S7Pz17xGNt4
+ DNC7zfgNu9P3T2pJaB4Y4PdnXpR1h7xGFTOzQazpr6Ciwhwm4evCsm/LPTxB5Wi1VWoBk18C4I/
+ 8wJV518g1K6NGp8YLB/g==
+X-Received: by 2002:ac8:7d84:0:b0:4ee:280:2e49 with SMTP id
+ d75a77b69052e-508f496ea91mr147855401cf.66.1773069196462; 
+ Mon, 09 Mar 2026 08:13:16 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-5091a7dec85sm19337291cf.32.2026.03.09.08.13.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 08:10:46 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Martin Schwan <m.schwan@phytec.de>
-Cc: Simon Glass <sjg@chromium.org>, Andreas Pretzsch <apr@cn-eng.de>
-In-Reply-To: <20260218-wip-bootmeth-rauc-tests-v3-1-64aeea6d1032@phytec.de>
-References: <20260218-wip-bootmeth-rauc-tests-v3-1-64aeea6d1032@phytec.de>
-Subject: Re: [PATCH v3] test: boot: Add test for bootmeth_rauc
-Message-Id: <177306904585.2117441.10016162647069280239.b4-ty@konsulko.com>
-Date: Mon, 09 Mar 2026 09:10:45 -0600
+ Mon, 09 Mar 2026 08:13:15 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: [PATCH v4 0/5] Provide a class for building filesystem images
+Date: Mon,  9 Mar 2026 09:12:59 -0600
+Message-ID: <20260309151307.831537-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,23 +92,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Feb 2026 14:35:07 +0100, Martin Schwan wrote:
+Create a class around mk_fs() to handle the common tasks of image
+creation, such as managing scratch directories and cleaning up.
 
-> Add a simple unit test for testing the RAUC bootmethod. Provide only the
-> very basic tests for now, running a scan and list, to verify correct
-> detection of the RAUC bootmethod. More advanced boot tests of this
-> bootmethod can be added in a separate patch.
-> 
-> This requires another mmc image (mmc9) to contain the following
-> partitions:
-> 
-> [...]
+Start with a few small cleanups to mk_fs(), then convert the helper
+to use a class.
 
-Applied to u-boot/next, thanks!
+Changes in v4:
+- Use an explicit list for fs_type validation
+- Drop 'test: Add a helper class to create disk images'
+- Drop 'test: Convert test_efi_bootmgr to use FsHelper'
 
-[1/1] test: boot: Add test for bootmeth_rauc
-      commit: 36add050eea439f0b2a15e4ea0d3a8e21216f159
+Changes in v3:
+- Rewrite the commit message as suggested by Tom Rini
+- Make the class a thin wrapper that delegates to mk_fs()
+
+Changes in v2:
+- Split the quiet flag into a separate commit
+- Fix fs_img to accept only a leaf name, always under persistent_data_dir
+- Add new patch to split the quiet flag out of the previous patch
+- Split the pylint fix into a separate commit
+
+Simon Glass (5):
+  test: fs_helper: Allow passing the image filename
+  test: fs_helper: Add a quiet flag to mk_fs()
+  test: Update comment for fs_helper.setup_image()
+  test: fs_helper: Drop the size_gran argument
+  test: Convert fs_helper to use a class
+
+ test/py/tests/fs_helper.py | 111 ++++++++++++++++++++++++++++++++++---
+ 1 file changed, 103 insertions(+), 8 deletions(-)
+
 -- 
-Tom
+2.43.0
 
-
+base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
+branch: testfs4
