@@ -4,139 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08A21EF3717
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 12:00:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF97F3C242
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 12:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C0E83BC8;
-	Mon,  9 Mar 2026 13:00:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BEB7F83BC7;
+	Mon,  9 Mar 2026 13:16:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LkLNlnAA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HZZ/wStZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65CDA83CDF; Mon,  9 Mar 2026 13:00:17 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 3915E83BC8; Mon,  9 Mar 2026 13:16:01 +0100 (CET)
+Received: from SA9PR02CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170130001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10c::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A91F805D7
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 13:00:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B416805D7
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 13:15:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1773057614; x=1773662414; i=xypron.glpk@gmx.de;
- bh=a61U5k71punNQ9IWdmYmA+x0Dw1cnskO+1FUCcLd/jY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=LkLNlnAAr64WARUcF5w1QXQBhD9ejfyJN1DmSC1cBgFCElGTxG8fVTORGHKPXTnQ
- o991dutxpTvx4z42Df9c7J4LD2Vc2/qCrxBeUJMBYtHAjLNSgdDMba5rvV7ZKMJuR
- SlD+JjpYo0TpZcpCPqUwRYGRCCONokNJq0niDk2pLeDVD4XitCIPFeqxPp12IGot7
- 6LpwnbuRR2KPC4iZoBZcnoMmRYCQsLflsRfH2hSEAeKhDF5eMooxLz8Y2qej434xj
- V57t3wllUtftsrhwxnB0AExCrbSFp3cO6ep7nhTOXroLBlKZdrlxNkbRZlJSKQPhp
- KvL/AV7NCf3YGVupXA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Msq24-1vfi2o2MMi-017WUU; Mon, 09
- Mar 2026 13:00:14 +0100
-Message-ID: <e64fbdeb-9893-4665-8c04-87fa3c044a5f@gmx.de>
-Date: Mon, 9 Mar 2026 13:00:13 +0100
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VZjXqnvNtMCQ6ksMpOzlFku94UV6DVvIdcRgLFvW6iT8EIc0DdWro57bRdKSYhn2OMPy58W7uADs4mClJ9SXVKNcJf1zKqVg+n7OL1OODq7lZlSX34zEf79KdcjlXizzVDWUmOECmC3JT/LPv8elHtuiBpOMx7lEaRYVd2BzCV0QC4B+2fHUyTfZLx413IpvJrb0Ssct+xMvmXwClwWXPAgw4jjW7Qg7fIidUFFiT8l+PZvtWRk+sPn0RP2rFlUS0lMHMOu2Du3JR5NmJrBnSspi28zIaKKvnd/dZTiMsB/NEAlrOBlksIgJuEA7VwSAEqwmafgf3SwZcPdp+pLK6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fu6HY90YB37QH7tYjGh9W6/ElhT8sqnq79hrEWTRsis=;
+ b=I8BwBlUe5sIUzNNkJr/yiyP6MT+blXuDiiXDT7TgT/YJHuz3fwOcRit0ysVdMhPsUlyxCp4njMIz20g9gx7F1WrztMi06k0/NzmKGQrywwVy0Osf6hXGt7Fd0LnwvQRev9nr0M6iT3k3VRewbXfqLN6sZo+a9KoZXT6JejbpJxWRqTy6bb+PE7Vcp6YjKHPG145+mFHz73+uKjnTW7SVvAX0h1ZlXKT0gJDUHs/k3M0PCMk5Jl50bPflKwx19YMEfMBxADTcXlehL4ZHAOFekkXf8ujipGFeJui6S2C8XHSlTceX1c0xw+uYGvwqnUwiaKgfGdJQJ0Ldd5PB59euYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fu6HY90YB37QH7tYjGh9W6/ElhT8sqnq79hrEWTRsis=;
+ b=HZZ/wStZ0GDvmv2uvpcxzdvb5GENnyTxzcJgXcPLARyVXiA+X9xAaeiNy69owqgigrwlG7SV3VUCkhtGMYFLOe2I5eQxIk26dLKZdciO8FkTFUmfycxu2mUWLB3rWGGAqj+rO155pd8h/nx8Gx/JXeX1m1L8ObCVlwrK0y/CU9c=
+Received: from BN0PR02CA0048.namprd02.prod.outlook.com (2603:10b6:408:e5::23)
+ by CH0PR10MB5132.namprd10.prod.outlook.com (2603:10b6:610:c2::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.24; Mon, 9 Mar
+ 2026 12:15:52 +0000
+Received: from BN2PEPF000044AB.namprd04.prod.outlook.com
+ (2603:10b6:408:e5:cafe::32) by BN0PR02CA0048.outlook.office365.com
+ (2603:10b6:408:e5::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.25 via Frontend Transport; Mon,
+ 9 Mar 2026 12:15:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ BN2PEPF000044AB.mail.protection.outlook.com (10.167.243.106) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Mon, 9 Mar 2026 12:15:52 +0000
+Received: from DLEE200.ent.ti.com (157.170.170.75) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Mar
+ 2026 07:15:51 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 9 Mar
+ 2026 07:15:51 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 9 Mar 2026 07:15:51 -0500
+Received: from [10.24.50.78] (lt5cd606227n.dhcp.ti.com [10.24.50.78])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 629CFmBY561592;
+ Mon, 9 Mar 2026 07:15:49 -0500
+Message-ID: <7c954d64-73d1-4c11-8d38-4a41b6550c54@ti.com>
+Date: Mon, 9 Mar 2026 17:45:48 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] configs: starfive: Add Orange Pi RV to visionfive2
-To: E Shattow <e@freeshell.de>
-Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Leo Liang <ycliang@andestech.com>,
- Tom Rini <trini@konsulko.com>
-References: <20260305164328.33789-1-e@freeshell.de>
- <20260305164328.33789-3-e@freeshell.de>
+Subject: Re: [PATCH] board: ti: j7*: Update rm-cfg and tifs-rm-cfg
+To: Dominik Haller <d.haller@phytec.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+CC: "n-francis@ti.com" <n-francis@ti.com>, "trini@konsulko.com"
+ <trini@konsulko.com>, "afd@ti.com" <afd@ti.com>, "u-kumar1@ti.com"
+ <u-kumar1@ti.com>, "anshuld@ti.com" <anshuld@ti.com>
+References: <20260226-board-cfg-update-v1-1-9d434890f537@ti.com>
+ <66762e9343f0f5e00d60224115c4355e097a09cb.camel@phytec.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20260305164328.33789-3-e@freeshell.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:BGFQXMKb1/9kN3pSCUYFPFVrFwYY8eUmRy5XbV2U1Ip+rx5GQqm
- iEOdec1Yp7rZwu7rOJulTa5irnjEps2bSSSH/sVvwNqMtiyQ+1v5fFLk8D45A9lGSrxGxDl
- zCckm9RMfm1BF+NVRx5HjueYSTkoz2FV/sJafqPbDVBPHTJadsGYmg+qwYPSyxKp0iv2DuW
- J4RJj+fFFmuCFMtGZ3BVw==
-UI-OutboundReport: notjunk:1;M01:P0:/UR4Rxx9fq4=;JvA1+E7IxwlW+4+is36OVCmw+Lf
- 89OjXE9z1IZCuNjMRKlPe9b6eUt+w3qLdRrJ0OCAh9yc34yl6iUHgluMpFPvRS9+dL5yMRbz4
- W4DVSQF2xjmFfPnAi128aWfOO5D0oZhwAXieGcgDXewb7yXVKWH1piDdXz2dj3l/vt4SHYdHI
- 1plkONZJnpveTTwxg3TU+qdnQRvWFnG6o3xQe2c/UNCZQGGH2VmKqzABuijJTDQKI7JW4tvxd
- c9ViPgOgfhm6x2oTiiV/FO3GfR/XHW+kMMvG8xQsbWYlSNBYQsvZA6qtWqkYwEAg5+UCccgaN
- 7stan2EB29JFMfrrdqTeMznlRdib0H1q/GKorvY4DKSVSm9W9Gv92EC4V5/jEtOUmbuB5+qYV
- OWn0fDYYWwCBpLOUwkesbOawexNsOSxI+qU6Hl4tcos4I90LWVAnHVoG8R9tw4l2k762uYLoA
- /dyKl4URVgZTLDucXEdILXDRBA/rd/VzThJdawVDOBwA/0cXHC3GH4ZGEDhToVAI1kzclDCvB
- FrMydWY7mfvwy93TmJc83BbwMy+iG0ZxrKcEfXzNhJSCD711AvqrD1iii7fx+3O5gbfZE8jfz
- 6nN8jUiinPylTGC0ZeaYhdrhO187nhoFfKz77yG8rjuhrq9ycPdoer+ZMqAZyH0BDywx6MVX5
- glLPTcquSYLl8cKgn21K3WqKhEOeO4VfideZ2S7wHYi0OYFHyoxkEFebe5GrxstyXYXVr3Vcr
- LjeUI0yDkC1z7smvnM9olRYBA6rWSgbkG4rIEtxR5OjlBq8DgfNBj7DFaWbObpL5oMoSwIqjU
- C8wFB1z9TmFgF1BdVBsbh08qJTlz4b7Vbyobl+ARhDVAFlSef4BMOBP0eK1jr5zm2kC0pklr8
- b4dMMxetPcei4rSEBoplhmUiBl60p58uugTSm5bDwjYjZ0QAZYOtYLbohOCm3BVCuieO8/Qqu
- 1he0ocFBLm2EEk76RNsbfBFBrDBfdQY3/ZmGBENFpKrarsRMU4TR4rvIRQL+T30j3OAwQ0/Vy
- ozS0Szi+U6swvYJNEm0fqVQvRMmzk73NaZwUTjN6/VqCim3NT/aEQaKcdyC7YfCef/rLbm13/
- X/zxu30AYEQsRRwmT3xyZo4YAeD1vTLUmazpLNkPFHbtLrSQZ0QBApb6gcCY3umnFv4gt587t
- NkflBmHL5jsha8spKjViDkw8OSbcGdoh/2+UCcUmN/FBTD9X/Zz8oh4e2tJfvUtaNwCNXqk65
- kSIs7sZp7TKNHMHrc5KhS5Ne9fjUej6qdPW/NwzFghQ9OW3nIcwnAG06tFnhoPvTqHdZwSp2E
- FJZm9wBszNHZlFR/yJ2ymKk00iqdJu84Kve4oiK0dMCRCLnwT/+ya3Iozj3tP6ZyH7m9+9nJf
- l+ZdSWEjX8ukX1oI9U1iSqus4q5fI5PYKMVWuds8RPKouP4J4BPzxPQSJOWD3dRuuQBsiz1lT
- OlZ7nqrYFPCSOuv6bo20jGuTOMmLQf6Ta8XcZ37kQkomSoB45aCJ18fREAl+aatKmIwJDbkOQ
- wxZCKgMYx5lWuLizaG0NFNJrJH7fjbMA82A4BtkuyetzJezARpET2eLk/xEWmOEG0kmitOiN3
- pSS16h2s2Z6/lyQvQ66iH/XJUFWqRW49c1Uj0u/WtphoaJf90PNklCOWyKnWltv2eqBpuOicM
- foj6SeRY19Xg0/HIahKF2I031ZBcjKdb+H2y6NU6cn8ju5nPmmqP/YMY/raIpSWpbusIDTpNo
- /dUN7dA/x/71ikGB29tpdk5XH9Q1U4UxS3COnJku9CnvkP6ypUxfANK7LWNTVm7gThJArHOpj
- YUGAPIoYsojA2tVVK9zXsQJ6irYnoVmI7Z138p60P1z2NkOV8TWY+fkZMZ4PeNR5P9I797t/G
- ruWH716YtEH3n2EgaR6c/iBOqkeDS4LPseCz2LOVGEeTFB9Z+XqQBysO+gv59tFG7aSsdsfMM
- qZdqFRu5MQqiYkRU0x6DK2fjPJZ7fRlMBjmdkPoXjOtQ/d5VEqRGJkTaDBsAAmOfDuTry4lEP
- vb573vjUF1grJF/czytghXDlTJeyQxv22FyEbiiASbodKz0RCCrQhISclsXfuk3OtNnQWFVSU
- c589m5/ZYfQWIGZnVHUD6xABdgqxbupzDcoYrmEEPPUjFFT15KG1ONxPUwr9sLIrIu2ZmUBSx
- UIwjwIajfH2hdkCJfyU2z2icGIHvxBJH3csx/brxQaq7LbWeSj1FwphF/91YohwtR6+2pkOOq
- R8kgqLS9jIkeRpdpMMwdOMX7aThor910/nxbeIjZt2MAvd8p+0+uKfGrjweWffStjyTV8r+ov
- wq2uKuTgwyCE/daKWPz1kjMJDn1E+mm3nUNPCOaIM1sIuplg6qKxt4lLOlCbevYepLDwFHfSk
- zAVPeq6OUovRxXIl3PshXAMe2IRrm9lDwtPdrwHDVdIS0Cvaq58owxmGKziuphbmtbVs3E73g
- jICsDtHAvtB9pqXuPTD1gsKHXro69s8ddumP3ISCTmuk90MjXLdeELXR73Weh/FXn1r9nJ2a3
- 0YiO6Zr1XaX/Ywnn6rAqAyMmamZ0DrkeOoGDBHv3YEtBaCHD1LKfqEsR1eh2MN3s8bIOiQZeb
- EIoGxfJCQ5VU88OE1ZVrZS/uKvMn7zFHOxzU+3sbl2QE7XP/RMyJ8nM8+1fMNufWuCx4NNm16
- l8WQg94p3K9o7blmKRo0vP13eSpffB6U/R0cIzpo0OwJ66c91jEVq7nAnl1OqPgTqq+pBMnal
- YyMQzlIgPbhG6/ymzahTzGBZx2EVi1l0BkSuam5nq93A9oPNn1JK2+gkqr+vY7r7GFahgYImT
- 1POMHu182oZnEH53A2WK+HItBpqA0GCtzRLpVi3DpjxMVAFAwvXPi8MFWmtdZTBWdzcCwU/5G
- rJWWbHvuonOg6gtsAWv7ZZ7o1pxuYQzs4UTQYGbEYamCyHDn2zOJAgWWxln/oRwQcZTeRfsDG
- 8jSt6iC+lGi/FXCq6UyjSRIl3lvaZtQSyu7/ekSxvEr/g2VI6/C887mTHENgouQvtwVLhAQ1Y
- hAb5dwHo7zWoOlmT+cU8M91O7ixwdBLZs3PnTddF0j2HdyXVN256rHbmkVx3zqXxZC8si/Fcs
- 1zvfot02HgYYShed0fyjFbvfjd9I1Ahqm349aaWxrqRH3oln2jsOTnSNg3znOZtSeeEjvTzyc
- hdBRSDHP9Vbx5QeNNEoh6mrFOpvlVlFUel7Tr9p/7DiVzlchspLLunFdOIAvJ6mHk9P2yMOIL
- 7nDBs2QnEAuF/YekqUY3u04UMyzdCMP0S88aBmB9r9ewq0YSvwHbgxbvqVN1Lah46NbuEJQGz
- 9edx95gkq+f/a/JTW98RQzVMoGi9JMEkJX5/sPH3MndRO30A3edwvD8KCilewMPIJUXGAfBx3
- 2Bv4u1MBeku2c3Enk2FiBiz0P7sinp9cLOVD1hBb2NJ4WpCMV1krMHxgENd78w9GKXLkJshQ8
- mpSwhrYwWMPCLqmM9/DMjW98hZdA3DnHyPkUmKzv6D4H5bAzCtPYm4qK4v592u+4fiDe500o0
- HmNcTC1ysIHLazrw7diPtuYqtUQFysgSvymq+CtJztbWs0HDX8AHvWvSCw+SZMK8uhrQUMAQe
- cD+UbDZFq3Te1CHxlvW+0/3s/z/n4Te8h56J/JBWbVF+al6oZSS3J6iSn9tzWXg/CIDhp37ku
- QDNlTBo6kvOazXqtBvQTqCvZQqPwQvnOknOC3D+z5SNlXnSF0jTnRvjb6q7pA6KM7Qk316Hp2
- sj+zttoxWmH9qJDKIUchaWM2A9K24BHH5tsJ4s+uxXiOBI3gAu9cuFanYJ7BWVVSBRSAOp3pW
- GyWv40pyXvphFAzDkROUCXctaNMeJ97UmGRi3mFdl0jGs4rt1DiNmG374EdjHnLVGMfgUG30t
- 1YgWvvhU3TstGp3MJgbrMva8QGyKq0sf6T1aljKYzUeIV7GFeKMuoKyUuCyD1BxM0ws2zZn7V
- 4oAMLxHE2VcEKN0VU/+jruXfdUsVod5Tw9Es5xVh4szsJrTsXIVdmRRXibayjiq5xFUWho8N8
- 10taLJCNxEwDL5vJbgX3tZMJgSY5+m4IVP8v/cfcpvoPO0lFJLlQEXMxDlPbExyMnQ28LeuCo
- pSPoIcsy754ihU+BXInLpdLVKKQw3ARX0/qjhtvJjHW0/c6FkDVpwJOYvFV/JI3x+Iqhp9wEg
- O6ZYnpbU335CLDskVPgmxyqymeGOJkY8Q5ZKIkmhuYFTkgJe3Pbz/6nl3h7Z3KT+PYNbp7Bh4
- cS+wwZhyQpPToy9UuaJQoivILqcXY69tEEfJje4eflO32np8Tqw0TSvCncRWp4D6e+WCv0tqX
- wgsHGQfKPJOKge4CQukjfckmiRXkfD6Dy6TYp7pidU3YBXlYI9MIkWHRdjMsxbMkFvKvO2Ep5
- oN7sJzDWfruX6Dk6EWMCdi8siNeTQuedXpN7F5n52y3IxUdc8KOODtQpcAjf6zZUvApf+fTo+
- e3iFdoqvEBvZt1I7xH7a3AP+mRD0qfxg9/VzxFJ/dZzedUclwFhXTAm/wFj8UMzs5K4GIgJrR
- WBbZskV4gmMh45LDBqINLPJLIAzlX3rmtifraKatfVxReUzzwkhXm8ljS2zlL3wkRA1PVGwyt
- i1OaKIy69oBOZ1wPVtfa3rKUOaicJKXvg9c+PuxgYeebA8B4CUrU6bt9JDtfYhBj9EH4WPPqY
- puSRx3Gz0mV5KiUqObJ0p8g9oHpLoNJfFvTQoFl5DpEo7JeygYg+pxQzF7ZbBH/uuliNN8YaF
- YTh1fMnXhV5b5Wqe/nP+R1p2rVVWKwe0ujz80N+4V1JTNAldB50x1ZkB0vJzSEFlZg1UEYmea
- K6UOO9rx6HBiPYyffeImqb3ZshLEDHvLRWiaSsQkjdTKNnIx+eyDjLLl3clBUpiEIKKg+SL0X
- MECt3G+zIsTToH7yzFgZaOyqRfcXa2Tq8N6IqGaT8JpARhFIRrmQvbpTJA5j7td+ePnSyWBw/
- fLjYuBwtfm0zGeFYq3bxKuRO7uG6N8oEjrHwKR5lFYNzhhS2zMbeCq5i6H6GkVJQQ2dqb32Yi
- nIcHZAjMtGXAEXYspL3Iy2C5J+JmtgAZbTBwgYoRhuBCaAlpgNOLihAzw0DYzgnG/orYUao28
- O5IeCW22vxFAwY9KUM0hSSOf1CcHuB+OTUIXgbsGX74EksRABoNU5Twy/WMgVZIOnaTz5nT3E
- bwcEyjMmEt7aiQuoO6TnBNuUNW5bR
+From: "Chawdhry, Manorit" <m-chawdhry@ti.com>
+In-Reply-To: <66762e9343f0f5e00d60224115c4355e097a09cb.camel@phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044AB:EE_|CH0PR10MB5132:EE_
+X-MS-Office365-Filtering-Correlation-Id: cf448ddd-f22a-4a80-9283-08de7dd59b63
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|36860700016|1800799024; 
+X-Microsoft-Antispam-Message-Info: Vl6u+kbIRG8F3iwSMfObaPlGPWhQ6I7HLpTG3uZvysvcsSCAHFcGrTCTHOpcJrpQIFhonl5GjylEd571QoSPRRHV4WERyDBnL5Tg7xISvOyHO/ygQIRdfo8721DfyTd4OxRFDH4hanq0wk5d3Rqef3ZxiYX8PJs5fyy236KiDQ/6dwEq8SHnoM2Nc2SZiqidFtVPsizUMy3CwlCa6umDlC0olk/ZaH8jWwhYcroDFkpvLQlWkn6asPrSauvRxu3Qe8LLD0V6FsV2Ebuytsjlhqd9OF3uqhRgsAmxBR4cUjj/Hqy/4lQOET/V41pcSiGSWWkL04MQKSWyyqhXcHxxIYhQdTP2JnPpLDZ6fUpwrTttVnf5Y/A7zLGBfH9RYfnaI8jPb1xZxG2kmpEBJezKDXw7wkg9OcO+lwYuUpAxXm75kVf7qZc5fJnsMh7nTMx4WGpEhIKcf9E8ImDGIgXQ0p7YrtxVeCfrpaYxwy4fCj6ZeNPV3+mzFslqltDSIz5FJjLHbQsTzO3D35N/4QXBy5JMQ1efSOYlQxq7B4y6LT6L+9CT9XxHWNQKpmHJoqvZMRoAgg8pZRL//1MkyLEfo+GgGlKWLCNhoCQHPDsJaYtmfRbEK6dBzPn1LXmitnh6qWw4hgjJ0w0WxTwpV/LOmxkoc0yCvbc/7dh+biJZEDohENNcSi894qUltWZz62NCgiPl3eqQhTATfo5eXMEAYKkqwHMahqFRv20H290V9QVa6+Rr6/kwLj5Vnatj1U0iIdkvUW8ty8yR8lytNvMLHg==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE; SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: uMdm5m9MoZPi7+u7BQcz+pd4CtobUzz2ScSIGLS015v6z7nNfo0Gnpcsb/8YY0U4eVM214Lo7NKYNuE716Qypa3F6tBjAwYPQFYbaiw4eerQEnsB4Ix8iFnHBzcdbB3m9Y12Dlnu3swC710Gg3vU6Ut3zxAZP0ktd5DzqHNewFMSnfUHBM/CdG8H5kDfESZCPrZge+/OW40f0ldsZ3fOW1RHF1l/v4gJXds3iOmM69zWTlUhiQahsMGygBiRh2brbIDLbPdkZKKeCvX+Ld2PjP9MEXbxe7prJspCIHnVelYFeFiZkavNqXcHaqln2uw9ORr+ll6g0aXeTk7B5GrD6nUBWWVITWsjYpOM2SSm/rCxyEQ+rRtyrcT27isWch9C//ijwWz9STAY13HUaiY4zPvy/q1HMeF1d4mvEv4jP81S2Uam/mHmCfEKrliqS0cQ
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Mar 2026 12:15:52.0540 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cf448ddd-f22a-4a80-9283-08de7dd59b63
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044AB.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB5132
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,37 +136,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/5/26 17:43, E Shattow wrote:
-> Add Orange Pi RV to visionfive2 CONFIG_OF_LIST
->=20
-> Signed-off-by: E Shattow <e@freeshell.de>
-> Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+Hi Dominik,
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+On 3/4/2026 3:54 AM, Dominik Haller wrote:
+> Hi Manorit,
+>
+> is this relevant for the vendor boards too?
+> Phytec AM68, Toradex AM69 and the AI-Beagleboards are in the tree so
+> far. I don't know about the others but for our default ci builds we're
+> just pulling in all the binaries from ti-linux-firmware.
+>
+Checked with the firmware team, the following is repurposing GPU host ID 
+to a new A72/A53 host
+by adding IAs and IRs (from the end to allow backward compatibility) to 
+this host id.
 
-> ---
->   configs/starfive_visionfive2_defconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_v=
-isionfive2_defconfig
-> index a754134a313..7c957cc0ea1 100644
-> --- a/configs/starfive_visionfive2_defconfig
-> +++ b/configs/starfive_visionfive2_defconfig
-> @@ -80,7 +80,7 @@ CONFIG_WGET_HTTPS=3Dy
->   CONFIG_CMD_BOOTSTAGE=3Dy
->   CONFIG_OF_BOARD=3Dy
->   CONFIG_DEVICE_TREE_INCLUDES=3D"starfive-visionfive2-u-boot.dtsi"
-> -CONFIG_OF_LIST=3D"starfive/jh7110-deepcomputing-fml13v01 starfive/jh711=
-0-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marsc=
-m-lite starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2=
--v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
-> +CONFIG_OF_LIST=3D"starfive/jh7110-deepcomputing-fml13v01 starfive/jh711=
-0-milkv-mars starfive/jh7110-milkv-marscm-emmc starfive/jh7110-milkv-marsc=
-m-lite starfive/jh7110-orangepi-rv starfive/jh7110-pine64-star64 starfive/=
-jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v=
-1.3b"
->   CONFIG_MULTI_DTB_FIT=3Dy
->   CONFIG_ENV_OVERWRITE=3Dy
->   CONFIG_ENV_IS_IN_SPI_FLASH=3Dy
+I don't think it's necessary given they're saying that backward 
+compatibility is maintained but
+ig it'd be nice to update to maintain the compatibility ( as well as 
+test if something is getting
+affected for your boards )
 
+Regards,
+Manorit
+
+> Dominik
+>
+> On Do, 2026-02-26 at 17:07 +0530, Manorit Chawdhry wrote:
+>> Repurpose the allocated resources with version V11.02.07 of
+>> k3-resource-partition.
+>>
+>> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+>> ---
+>>   board/ti/j7200/rm-cfg.yaml       |  8 ++++----
+>>   board/ti/j721e/rm-cfg.yaml       | 10 +++++-----
+>>   board/ti/j721s2/rm-cfg.yaml      | 14 +++++++-------
+>>   board/ti/j722s/rm-cfg.yaml       |  2 +-
+>>   board/ti/j784s4/rm-cfg.yaml      | 40 ++++++++++++++++++++----------
+>> ----------
+>>   board/ti/j784s4/tifs-rm-cfg.yaml | 26 +++++++++++++-------------
+>>   6 files changed, 50 insertions(+), 50 deletions(-)
