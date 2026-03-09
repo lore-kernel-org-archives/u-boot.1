@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7909BF41808
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71568F41808
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:14:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D067E83FAF;
-	Mon,  9 Mar 2026 16:13:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F322B83FDE;
+	Mon,  9 Mar 2026 16:13:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZtVOQs3j";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mK6v/rgW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49AC983BC7; Mon,  9 Mar 2026 16:13:43 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 5A96783BC7; Mon,  9 Mar 2026 16:13:50 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB5F383F53
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:13:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85BCA83F9B
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:13:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-5091d71aa11so9072431cf.1
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:13:28 -0700 (PDT)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-50905b779dfso24672741cf.3
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:13:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773069205; x=1773674005; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773069207; x=1773674007; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GijFLuqRg8WVk+Ej7Pnwl/z3kbQfOIIU/Jg4kwTdxjo=;
- b=ZtVOQs3jlQkuRWwc5I4MgwZ49gixyMgh5h2iVCKVsA0vUpfuZu/J30OOgNfKTC3sZv
- YbR53s500f0dfYjDT71GnSH1a7SB3VKfVOQesAJ9+N44wlbeDLPNCCz4GmZSaVysRNad
- 4gr66gOg74ljZrnuHU89Iq9KAS4n/UTMgUM+M=
+ bh=8WvjNSoWKwYDtdAnyuw3U1MtS7S9LyaNosylbi9IRtA=;
+ b=mK6v/rgW7gk58tJ3EQM6SCtTvMtnzG+EVtBNcr2fCQQbdT+AbU4cvI0DKxKxXk6STs
+ TKEtcZaJPh9npipAlyMyeDiNLp7zzGU87G42R+Sj5dn/nY0PI0S0hOPULovd0novWq/c
+ gE/m1FmWE3FoZIKecTlY2Nh/NHVt3k0T5oaJA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773069205; x=1773674005;
+ d=1e100.net; s=20230601; t=1773069207; x=1773674007;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=GijFLuqRg8WVk+Ej7Pnwl/z3kbQfOIIU/Jg4kwTdxjo=;
- b=GWY8R/KpFLVrtdctB5qZ2zhi1Z6KLKIYChUtOexn6im+v2raC6L9eUwQoRqg5Y1nEL
- 5dOdlpj2FsUzIDVq6yxeaMXUkqsxWWy2vk9j8sLZo+Cv533pLYb3gn9v8aS4ECQxHuo3
- K9FY61y7e65HY4A0rkoxTas5vx+y36K7O9YbXwKWJ7jz//DHFqMgZtfNWLMOGOjNtKKZ
- tjHwKejzAe168kMS+tiAKIc39Wy9g801qXFQUSP9IbjnJrjwyfJ8zP2R2bFN3CnhJfEe
- GgUB1RLq+7JG71+H4Q9b464MexL2ENWFmmGe21PogUpuAMCvqRYmpp4iG6P3NtRW4wHZ
- sBQA==
-X-Gm-Message-State: AOJu0YxPUewBg4CLu3bkOgCYKobil222sr2CFT58P8xdfoN6dRTAHcAW
- PAR/pClm4zqlZEGAS2y2YKi9sOmBrJN0ULP5WscDVWOSjOIGYjX5luqg3xvclDRmNkvYKygP5wl
- 9sxk=
-X-Gm-Gg: ATEYQzxpJ10PReHEsUm4pCnTOWemVjk8zmhI5zqM1cI7EW0aEu5bj/uLcBRBBennrGn
- U0zvAEn3sqvPC+ILJXjJ7i/rktjevksj/DeU8njPxjfXH8c/LqXjo1WC4dUoZTfEWZ1Kx/FrGIm
- CaiAAVlXD3+8M67SZatNawXyWBuYq+pIlID9kB1/bUmkl414QKz1mm5u23Xv44limfFK5e79h49
- 3e8c/UbVx5rA9z+sgkpyY50qYBjQ6rW+EGshH9fy2u/jK1WuzMH29aghVAx1LOYnB1Zc72G/R3i
- VOszC8QaSdivefL+ghrl0Q2mt6DnyKvgAp4bYfKIMjTDHmJwHfyA0soIT8wViyTrummZ/UtiXWy
- u2ZQmG4RQs/L38wXmU8CKVPCmvNSH9TjYoJruSqP8fFOvFe7GZ2NKmGbgsXxIBxtwSsFs/rjJCV
- lSSo4ONiOicKMgEcLtEg==
-X-Received: by 2002:a05:622a:1ba4:b0:4ee:26e9:98ac with SMTP id
- d75a77b69052e-508f4abe6e9mr135291801cf.16.1773069205546; 
- Mon, 09 Mar 2026 08:13:25 -0700 (PDT)
+ bh=8WvjNSoWKwYDtdAnyuw3U1MtS7S9LyaNosylbi9IRtA=;
+ b=S9zgdJ+0s+mgh1V1PUmrcsdtz2egA5WgO9cd/o++2UX6KKhwCGUC00oWXCvZczrrTH
+ wJsc+YtB1FOaM5WG4MEaZrOun+3tNigTCgEmDVFc4N3A8/S/ukxrjkfq/QC2xtl4LdTK
+ QIZmXnq2IkSSKeLc6WIvL4Wd7Q+brkdpI50IKpYpIvcFKW1+jv5TTWFLDoeQh72bUcwS
+ hB/1mqyBEwr7xOilxUslBQVAdBgTjf89v+X3s3oU67Bz310K1H83jWDSMA4SK2J9Ee1x
+ vsWryGlh6HPsyzpvVkZhw5wSfPUeKwzDUHt/Zse+bvMmMEYZNb6E9lM01P4jPP1FU+U3
+ 3Eyw==
+X-Gm-Message-State: AOJu0YwRjEdCVUqNG2FFm/ZNoYFahYDP6+eBgbZZJ02ecr4ttGGeovHJ
+ rHxPGFwP616g3zhJo0Czc8rMpsg6B8Gvx2Ly+IR2HSBc7N4rxaW9+9PWFcu9fGG9lQH8Q0KLys0
+ n6Dg=
+X-Gm-Gg: ATEYQzwTkJvNWnkiOMd/6MzsTpLgl0zvJ4DK8iPujw3BM5qJ+Vt8ZrqqNTZKHum9Yst
+ kP2mHbgQp2RP6TmW9/8QWmSR15Ibtvxcv6Z7g9vLycHgAp4KrR1Yl4M+5VgU2aYRcahXcbWb0dN
+ lewXIS+QXYDFSuHP8iG5B5s1REOzHyFi0FkXbWbT8Lm1zBFs+AzErURm8gJztCNDbXFjwX3pbs6
+ Pd2fDefebfbmEb7uIxEboTkU0QKamhE6nByNYQUSdAKpqoLNsjGPXJDYJi5iufRKMMoWTUCkbl3
+ YJeWC7ECaxCyMzKM3RLpkx/mlHDJhZRPscAsKhl8cbaS7Fxw4QzczZ7dRcbkmUZ5QWU0rQMnjdm
+ cllkVSk3HN3GIK81EijsWy/1LtR2Y+RzHqHnoe7HMksqwSvOaLx/SD+O/vLlORTXakCus/6oxFv
+ YCqqUdjPuJw0koC6O5ag==
+X-Received: by 2002:a05:622a:10d:b0:4f3:565b:c52c with SMTP id
+ d75a77b69052e-508f493b52cmr159847321cf.39.1773069207438; 
+ Mon, 09 Mar 2026 08:13:27 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5091a7dec85sm19337291cf.32.2026.03.09.08.13.23
+ d75a77b69052e-5091a7dec85sm19337291cf.32.2026.03.09.08.13.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 08:13:24 -0700 (PDT)
+ Mon, 09 Mar 2026 08:13:26 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <simon.glass@canonical.com>,
  Christian Taedcke <christian.taedcke@weidmueller.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v4 3/5] test: Update comment for fs_helper.setup_image()
-Date: Mon,  9 Mar 2026 09:13:02 -0600
-Message-ID: <20260309151307.831537-4-sjg@chromium.org>
+Subject: [PATCH v4 4/5] test: fs_helper: Drop the size_gran argument
+Date: Mon,  9 Mar 2026 09:13:03 -0600
+Message-ID: <20260309151307.831537-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260309151307.831537-1-sjg@chromium.org>
 References: <20260309151307.831537-1-sjg@chromium.org>
@@ -97,31 +97,65 @@ X-Virus-Status: Clean
 
 From: Simon Glass <simon.glass@canonical.com>
 
-This function actually allows creating two partitions now, so update its
-comment to match that.
+Nothing uses this argument, so make it a constant for now.
 
 Signed-off-by: Simon Glass <simon.glass@canonical.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Christian Taedcke <christian.taedcke@weidmueller.com>
+
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- test/py/tests/fs_helper.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Split the pylint fix into a separate commit
+
+ test/py/tests/fs_helper.py | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 4b123ab0afd..47340295fbb 100644
+index 47340295fbb..72e18588288 100644
 --- a/test/py/tests/fs_helper.py
 +++ b/test/py/tests/fs_helper.py
-@@ -85,7 +85,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+@@ -10,8 +10,11 @@ import os
+ from subprocess import call, check_call, check_output, CalledProcessError
+ from subprocess import DEVNULL
  
- def setup_image(ubman, devnum, part_type, img_size=20, second_part=False,
-                 basename='mmc'):
--    """Create a disk image with a single partition
-+    """Create a disk image with one or two partitions
+-def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+-          fs_img=None, quiet=False):
++# size_gran (int): Size granularity of file system image in bytes
++SIZE_GRAN = 1 << 20
++
++
++def mk_fs(config, fs_type, size, prefix, src_dir=None, fs_img=None, quiet=False):
+     """Create a file system volume
  
      Args:
-         ubman (ConsoleBase): Console to use
+@@ -20,7 +23,6 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+         size (int): Size of file system in bytes
+         prefix (str): Prefix string of volume's file name
+         src_dir (str): Root directory to use, or None for none
+-        size_gran (int): Size granularity of file system image in bytes
+         fs_img (str or None): Leaf filename for image, or None to use a
+             default name. The image is always placed under
+             persistent_data_dir.
+@@ -55,7 +57,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+         elif fs_lnxtype != 'vfat' and fs_lnxtype != 'exfat':
+             raise ValueError(f'src_dir not implemented for fs {fs_lnxtype}')
+ 
+-    count = (size + size_gran - 1) // size_gran
++    count = (size + SIZE_GRAN - 1) // SIZE_GRAN
+ 
+     # Some distributions do not add /sbin to the default PATH, where mkfs lives
+     if '/sbin' not in os.environ["PATH"].split(os.pathsep):
+@@ -63,7 +65,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000,
+ 
+     try:
+         check_call(f'rm -f {fs_img}', shell=True)
+-        check_call(f'truncate -s $(( {size_gran} * {count} )) {fs_img}',
++        check_call(f'truncate -s $(( {SIZE_GRAN} * {count} )) {fs_img}',
+                    shell=True)
+         check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True,
+                    stdout=DEVNULL if quiet else None)
 -- 
 2.43.0
 
