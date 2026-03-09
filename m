@@ -4,101 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B433EFCD9B
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 17:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE282FCA16D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 18:10:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE45983A8C;
-	Mon,  9 Mar 2026 18:43:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id F27AD83A8C;
+	Mon,  9 Mar 2026 19:10:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gROwvGYX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dkp4BaGk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECCD683F14; Mon,  9 Mar 2026 18:43:48 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id DF46A83A8C; Mon,  9 Mar 2026 19:10:24 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1451A80050
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 18:43:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D804A83A8C
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 19:09:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-661b08b04deso3438346a12.2
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 10:43:42 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773078221; cv=none;
- d=google.com; s=arc-20240605;
- b=PRru12MOo8XRxj9+UpjbDhFbqqH/68dS16e4riQ3ajRyxmvxaZEqXuPtR4u1LMr+at
- /3Ki2Qc89AkP803L9iEi8y073NA7tnzLm3TZcqLmX3dKkqVXVc/wI9+feuxyOBceV/uz
- PMlyaa6dNZJsccWIIeXQWxdx4we6ggerJyDm5Y4a0R29S7VDn1VuQf2tjxgGSJSRKn4j
- 0GEy3TyEeb7hh7CAqtmwpdjpHBF+vPtGggFAp1c+wWKEMNTNCXtF1cfDwSQgF0kqqSyG
- 2RTxCbjqvW5C40OPkvLW+jz+RD18RW/8BQwThSuVG3uNYDPFazdJVBNHCoskRCxsjkA4
- m3hA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=23R098OgI4vjs8wNAHi+M8vzRHO7a3XHn6n62mPMELs=;
- fh=rTso9aQYfzhdqnRu1vDrq4hglxFakK++rYCRH72GyJQ=;
- b=DEKlrf3Ibtb+kgqeqElPsSDQ1jSWZaUkze1yvcllJHYLPDHNcNmBrrrM9maAnyWwvI
- JPwAq3R+WzT9UR62z6FIMrdburAkVjyhQe+2Czjhpw4RRNWMcQBbstX5sKuci7HBaLCc
- V8a5NPj7/y/x9G0lifQ+G+Hclt/mXQrYNbfT77al691ZpqZ9NpltjQtUWKio9JswFWBi
- jXvkkl+EwG0gTdCinA0MaLhDCYx6chUrWX3yreEphGNLaJ6mzlYIgxBH2u/Kglucj7Ac
- TRY4RXBn1qttxwulf6YF8b0jHXlxs+LDkANnUJ793iv7UY0hx14pasrKWOSWx70e9w1J
- a3Fg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d74aa6bcdbso719958a34.2
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 11:09:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773078221; x=1773683021; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=23R098OgI4vjs8wNAHi+M8vzRHO7a3XHn6n62mPMELs=;
- b=gROwvGYXBkpmpMF1GdYlhDKCoxouW2xEQ81Kn+aoJgZLzhVttdSgG22hX5r8zcTe+h
- RC1iEDvzmTdthnEfeIF0MJwn+AAMbxJ34Ie34MlZhuv+2k0RXPRhe/lGeyO938HjfkO9
- 7vjpGIssqzhi6VQxVfsgcjEklbWehsaHb4ndo=
+ d=konsulko.com; s=google; t=1773079794; x=1773684594; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LdGkvKfqCaDxSTkOgbk0GCcGDHb44c1C0d2M3OT4O0U=;
+ b=dkp4BaGkQA9e7ln9asGSkcI/mbqP/0Qkp8hdTxgYgS/m2SbQOT+JdCxYw7sq4GaJ0J
+ gEnC5cE3srG6a3y8idzPyVLb0xBdHlc5V/LkkLTEI1NRQqh1FQapulfW8fSv1O12NeZe
+ LOADWzNGCieGx3/fEpabjwqjqCSjV+UOnFcDo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773078221; x=1773683021;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1773079794; x=1773684594;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=23R098OgI4vjs8wNAHi+M8vzRHO7a3XHn6n62mPMELs=;
- b=CzdHCYtN9jM9I7O2HC6ZSKdtn3oBnk0pvhhyLjDn4TWHoVr973aO1ffjAoRhW45wuF
- wateLJfCoXFcjWTKAmMurMYbE8Iq+o63XvWG9YYVNd6HwDsX2BfyyFvK/v6pXyGtn40Z
- FOgpNZazI3qIXb39CKRLHZPnZ4ynyDXR8Wz6YSIywuMmCyQj4kOHUQsVR4BeFHCTAKq5
- Q8iSK4E2jcWeYUihNpMmfFgy+49ZlFNcfq81ZSyuH6u2wMMj6sLENSLwOQ3jQ+g+DMCR
- V4rbALDlASm1XNFEpMQkfL1WAzpqd4WQD3KSC4e4PtNgkEjkvCGoTfQu7GVPJkG1aKQI
- t0LQ==
-X-Gm-Message-State: AOJu0YxyTeRDIXmd9O/em2dsCJujYLJsghKWPhkSWQ3RprpPsDQb4F75
- VdWoHGe9DM6sMPuPVeLmrTbs62hdappqAYcjdBTTL9Fc2SB1le97jsN0nt3RK4YNicDV5q0ZOB6
- Czbam1Vpa0JHajkuPIBECm+vpaLmEgYNyqeij2zbd
-X-Gm-Gg: ATEYQzwGFup/76i73ASiDbX0N18w1ySfUO4zIPwg67JEPjPX3mIpqXfyPqUMSXJUec5
- sxHla1NHqWM/94BelrUVgn0RChIxdNCOdOiGIGDzSBSmNPi1wNX7n9FY2JkYIF3SxVKqZ/oAEuz
- Dgn+hmaydSpo4B55Zfc4PMgCc4MMToS34n5CP4o6V0dgRmrjImoTf2o23V2WLdr9sebVZ1/sLvH
- ecPf5qGMLlvU5Tmmy5NgBmaFdsGnOyNJe62LqlW4p8WOtGzYng5CiG7wfs2l264DDe40I5cW/Rr
- L16Vww==
-X-Received: by 2002:a05:6402:146b:b0:65a:16fc:d81 with SMTP id
- 4fb4d7f45d1cf-6619d53acd6mr6935171a12.22.1773078221473; Mon, 09 Mar 2026
- 10:43:41 -0700 (PDT)
+ bh=LdGkvKfqCaDxSTkOgbk0GCcGDHb44c1C0d2M3OT4O0U=;
+ b=mUWf4uvaoSrULs/WmA+L2XD06/hMC8UQMDLM27t1ax1HTYr0DUFWDS2hQrHczWd8wp
+ I0Mjqh1OxPI7V47wmG8w9xLpaS2C44GNKoPioVjSrotD6PNJ5AchMDpNfWGS/72HPyWr
+ pipO9g4Z4JIDyDrAq/LCM4UbYPjde7eXJWZMjlpdf4ZrvGTyAC7Oy+mJfsroD4Dd2DsY
+ YeCn0ROdR9esVmFJ0E7rGlqKHHCaU6YhQaWQ/pCiDG1DTaDCt2P+BU8jsrj4We8bGSNj
+ L4nC/OjyXYPYOXsSSzdJo7u/iLw97FIMhD2eXEskefGXePBS+5nj1npNy1Zpur0JrGwj
+ mfrw==
+X-Gm-Message-State: AOJu0YyX9cyy+Dy8cTkRvGChEiHUJTjjt/t7niyh5SxQbwmIiwMQ6O32
+ cB8zC1Y6PPyt+mnn972ImkLfx1Ym84akvANBTxJFfGY9akShcz8vJ/het9Tc3M1HhyH2VTPvmtc
+ GGBaVmww=
+X-Gm-Gg: ATEYQzyVRo4SEEles7gw6+1e0EKU86jVY2AI3xMY2MQpCT3iwdNdrClC7w5ufVaWMAV
+ U2B0r5s54LfakJROFVpUogGXD/EYKyUwsXHZw7BSTFAwkUu+5TkU9ChpF2tfAo4TvVmuUy+CmeA
+ 1OPvb7GNkJOlHoLccRxpDL6be1BwTKeK+cHGTgeAiU0L/OQpJj/FcmO8StovwusTpEGMWf+4b9p
+ FLQjszmvBvomH9NBTyIKaRLZX9/Lq0ZnL+EGDR/QiBxilFyJ+gXOWovz+cSqCR3kTOjSfyca6h2
+ lKzG1u646QtOXxosaXeQOYK6rPfec22t/RRVdkt80OS74huc4GVbCrJbwgH7/6IAQ7ZnuBmgrnV
+ JiubexmgSHNb0HdfspC+2Syk0kQh24CWeyrSn+e1J6ks3YqxgqyBxTEeOCFAGXv28vCWCADU2Uh
+ 27phS1EgjGUgLwyfyddJUY5+hdsuXpZctycU7OZ1aFapBAVW4N4hBEedXp59WfK3eSq0nDXSGsM
+ 712bMmuEENqTT1tfWToN6qTpBaqpz3kjvyafC+i8UzZyNVQ
+X-Received: by 2002:a05:6830:620f:b0:7cf:d30d:b12d with SMTP id
+ 46e09a7af769-7d72702d7e8mr8269442a34.32.1773079794542; 
+ Mon, 09 Mar 2026 11:09:54 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d73adb0c1bsm4750258a34.26.2026.03.09.11.09.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 11:09:54 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH] doc: Use sys.path.append for pytests being found
+Date: Mon,  9 Mar 2026 12:09:52 -0600
+Message-ID: <20260309180953.3640434-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260306012019.800588-1-sjg@chromium.org>
- <34161583f77cb999a04789bf6798d6fbd2c4e234.camel@siemens.com>
-In-Reply-To: <34161583f77cb999a04789bf6798d6fbd2c4e234.camel@siemens.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Mar 2026 11:43:29 -0600
-X-Gm-Features: AaiRm52Sn950lRiktLavYWsMHhEPoQOvuoFBSIjR4E0bOdc-tuoS7J_4ftRaTEU
-Message-ID: <CAFLszTj_hRfCU6V2O08qOF-8LsOZ_tinxPKVaNKypwwa=2H_sQ@mail.gmail.com>
-Subject: Re: [PATCH v2] boot: Add fit_config_get_hash_list() to build signed
- node list
-To: "Nussel, Ludwig" <ludwig.nussel@siemens.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "daniel@makrotopia.org" <daniel@makrotopia.org>, 
- "trini@konsulko.com" <trini@konsulko.com>,
- "mkorpershoek@kernel.org" <mkorpershoek@kernel.org>, 
- "a.fatoum@pengutronix.de" <a.fatoum@pengutronix.de>, 
- "simon.glass@canonical.com" <simon.glass@canonical.com>,
- "eballetbo@kernel.org" <eballetbo@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,60 +93,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ludwig,
+Rather than having our "docs" build tagets modify PTYHONPATH, have
+doc/conf.py append the required paths at runtime instead. This will
+ensure that our builds from readthedocs will also find all of the
+required files.
 
-On Mon, 9 Mar 2026 at 11:29, Nussel, Ludwig <ludwig.nussel@siemens.com> wrote:
->
-> On Thu, 2026-03-05 at 18:20 -0700, Simon Glass wrote:
-> > From: Simon Glass <simon.glass@canonical.com>
-> >
-> > The hashed-nodes property in a FIT signature node lists which FDT paths
-> > are included in the signature hash. It is intended as a hint so should
-> > not be used for verification.
-> >
-> > Add a function to build the node list from scratch by iterating the
-> > configuration's image references. Skip properties known not to be image
-> > references. For each image, collect the path plus all hash and cipher
-> > subnodes.
-> >
-> > Use the new function in fit_config_check_sig() instead of reading
-> > 'hashed-nodes'.
->
-> While growing more grey hair trying to wrap my head around this I found
-> a mean trap. mkimage reads a 'sign-images' property to determine which
-> images to include in the hash regions. Without that property only
-> kernel, fdt and script properties are included at image generation time
-> (see fit_config_get_image_list()).
->
-> The new verification code works without such a weird hardcoded list. So
-> as soon as a FIT image has e.g. a ramdisk and it's not listed in 'sign-
-> images' the verification fails.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Yes I noticed that...I was thinking we could have mkimage report an
-error, but fit_check_sign does do this check.
+Currently this is empy for example:
+https://docs.u-boot.org/en/latest/develop/pytest/test_bind.html
+But with these changes:
+https://u-boot--903.org.readthedocs.build/en/903/develop/pytest/test_bind.html
+---
+ Makefile    | 3 +--
+ doc/conf.py | 2 ++
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-When designing all this I felt it was nice to have a sign-images
-property which explicltly contains the things to sign, since it makes
-you think about what you are doing. But perhaps we could just do
-without it?
+diff --git a/Makefile b/Makefile
+index 5df869213b63..88543808ff58 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2759,8 +2759,7 @@ DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs epubdocs cleandocs \
+ 	       linkcheckdocs dochelp refcheckdocs texinfodocs infodocs
+ PHONY += $(DOC_TARGETS)
+ $(DOC_TARGETS): scripts_basic FORCE
+-	$(Q)PYTHONPATH=$(srctree)/test/py/tests:$(srctree)/test/py \
+-	$(MAKE) $(build)=doc $@
++	$(Q)$(MAKE) $(build)=doc $@
+ 
+ PHONY += checkstack ubootrelease ubootversion
+ 
+diff --git a/doc/conf.py b/doc/conf.py
+index 84d028feda83..bf60fe14315a 100644
+--- a/doc/conf.py
++++ b/doc/conf.py
+@@ -34,6 +34,8 @@ if os.environ.get("READTHEDOCS", "") == "True":
+ # add these directories to sys.path here. If the directory is relative to the
+ # documentation root, use os.path.abspath to make it absolute, like shown here.
+ sys.path.insert(0, os.path.abspath('sphinx'))
++sys.path.append(os.path.abspath('../test/py/tests'))
++sys.path.append(os.path.abspath('../test/py'))
+ from load_config import loadConfig
+ 
+ # -- General configuration ------------------------------------------------
+-- 
+2.43.0
 
->
-> > +static int fit_config_add_hash(const void *fit, int image_noffset,
-> > +                            char **node_inc, int *count, int max_nodes,
-> > +                            char *buf, int *buf_used, int buf_len)
->
-> Took me a while to figure out that a function with the same name is
-> also in tools/image-host.c. Might make sense to pick a different one :-
-> )
->
->
-> cu
-> Ludwig
->
-> --
-> Ludwig Nussel
-> Siemens AG
-> www.siemens.com
-
-Regards,
-Simon
