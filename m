@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB5FF41808
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D06F41808
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A693E83F53;
-	Mon,  9 Mar 2026 16:10:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FA9B83F9A;
+	Mon,  9 Mar 2026 16:10:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fhGg6UET";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NVqN9s0/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FE4383F98; Mon,  9 Mar 2026 16:10:49 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 5792783F20; Mon,  9 Mar 2026 16:10:49 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6095A83F20
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:10:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F4FA83F59
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:10:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso4435217fac.0
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:10:46 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-40423dbe98bso2891223fac.2
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773069045; x=1773673845; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773069046; x=1773673846; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QEGyNcZFaoWzYbjYPwj5C11I+8TBOjapJWXP4B7IKxM=;
- b=fhGg6UETaFHx0oop8LluDMzUw21xyS8wFSQfPkPsLESTyGJgICG1vdzNB4m7NPT0o3
- L/l23fpbxOwL/fhDXEC9PXg/gO83+Ptttjq+1Miii7O4+ogrQwis6BhL+JAzcd21yYt+
- 6v9lrOqVfef/8gg41DEFTEpMyHpZEVcWjdCPo=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=u2RNPqW+U0ZQ8xsCF78JdrYIfZ/mW7bGZmRrE7ZBMKk=;
+ b=NVqN9s0/Vrdv9cRMMpmB7HzUly/ELYKRFLdqnjnga5h6q9ZbKSc1SYNtRBrtRmI/xn
+ v/eS5qfOiE/m9CRwPwxnrnzaNVUA556K06TscC9iPoNoPTk8GC+ZVeErhJx1dyUWlTMV
+ MlQtFfkyGrnAnXJcyAAEhJ/nqoa0qnLPW6Xl0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773069045; x=1773673845;
+ d=1e100.net; s=20230601; t=1773069046; x=1773673846;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=QEGyNcZFaoWzYbjYPwj5C11I+8TBOjapJWXP4B7IKxM=;
- b=vmpr8zwYnEN/uvU0xTVvy+xo9E49Yef+y/Qo4bdJe4CEb7eiuDpJ3e4nt75mmml9jq
- Po+sy6kYxbyYXAxh1DAdxX8tHopDkTFuWwkZZ6N2GgrbUs4Unti3vRFOtbW/XESSoqQG
- +GpG+k+ua+KUjiCmod3W1cZejL97c0BOLUpHr5X1kYcfXvk7gBQmWg5TTCGj5U9sPhna
- rK6xUAJuAbIJqkN36Fy+RjlIR9rFOgP8VhZWL8x3lL7GIyXlPaRg3VO29JMibqQJAeNT
- R5z3uZ+zNQUnOBdzGQUllUcKKRvjTO8/MqPAawGorMbQ/rwe8/G1Kj3QlYkcSoIl+XEM
- IXyQ==
-X-Gm-Message-State: AOJu0YzD3bt9vU0OIgKRRp2ataifcAnTVHB1uRWFqG8rMDeuJWr1E1u+
- 467TSLvsoQcGo4D/z1z67gq52gxyNkVVHxk9sEKWllOGGD0qTwUfFhtvgP2Yrbnr1SwNryQYnCn
- V8BlRLy4=
-X-Gm-Gg: ATEYQzxCL7dqGuUCgQUu0RgkUS1K1vZqWztMpW/3tdqNsmgz7HQwWzV+9VrhBHOmyDT
- PtH3Xl4m/PSAmPTZb+yqElXKOLjQFGzpvAHmaZq05NwThw6wYiy/Qg4dJF6lxeNSD/gf41NbcXd
- jmtYoEXpsd1wbQodTWV+Gd3/NSYv7GhkXeT12uj9POBAUtSHT5/XL+JZAMKNIQ1gZ7mDxPUDMNL
- vCUN2kHuaMuNHav7suOTI6DWt/fHsLnqlglWD5A0GvduGlsmIlpb/PdbwHcE/LIK+7zEfp6jCH/
- bbzaZGI5tbfFi1xTUNS/2kXIwuaroMAcpj3SvLCP4IdWgJSyZzF2i0H4p+Yd+fFoHcF1PYJRsr1
- v/O6AY7VSLQzOvvypkNu80ClaTo1CjUJBa4Rc1RVpurXMToxFFYP3ZH6b9SZKzE54xpPcQ4botT
- xj5uWphJpJ16YxSgJO/SOUuYGYWCB2ulpJZjJ5ZsVrogkCApIo0pkj1lXubvAx07+yY2MjQtLnz
- wPDCXU2XgLu1EJOGtPUa3+xQprNM8sN8GHxi7FmbFeZet4tyiRwKZ4=
-X-Received: by 2002:a05:6870:210c:b0:417:28be:32a7 with SMTP id
- 586e51a60fabf-41728be436cmr2665186fac.4.1773069044899; 
- Mon, 09 Mar 2026 08:10:44 -0700 (PDT)
+ :references:in-reply-to:to:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=u2RNPqW+U0ZQ8xsCF78JdrYIfZ/mW7bGZmRrE7ZBMKk=;
+ b=ChP3xg6RDySfT05cZg7c0DbtAaVeZPWXi/RN/E8cakeirTg1mWI3uXx3bPvkV4noxw
+ 2QeoLCyhMlgivD0wsKUFLOr3EVLKVa6gM5A0a228hqVWbyCEkGeTiUsk4HS/2lt7KvRV
+ BzBYROng6Qpvr3d1zfG2V7XRJHIU6A0s5hc12DHOVMwjWBEeWs6qM/v0ZAu6YIpOeMps
+ xIp9rAMTQe0OWh/C4SmTfi+wHRQ8o8tKp0yRmWhmWnncC5jJGon6h0Isc039uUldMrLh
+ MlE66yhRdd2L1BfySlcX9AG9aQMewKpZToAjwE5R4mX3RZkAvX8/kXi1CiQIQTgSz6+3
+ hz6g==
+X-Gm-Message-State: AOJu0Yxptm5b7q+/1XdqZm4ZnCU+Ka4O7NAgN7caHzD4iRzaF8YqNhRl
+ h7ZeNS31KSL7mIUo/Ovlj/7YrNEWUCKgupQOCZ/9eGukCWjcCnEEYAtyuet7GRSpjXw=
+X-Gm-Gg: ATEYQzwXQ3gYi7x8VsTeU6ff8eZI8HLsEQ/ZiS+Ef/JNJxliuL6/4IeOEG89IX1BTku
+ 6Zmq9ymKeXGPohSHCxi40AVMz5OpI63peWi3YToV4cJ3asIuykQDe4Lx+WzJx1M13IDnmH14tKm
+ a7bl9Mtud1dXNvqh/j6gCfhuD+gRPI0RE7zFPBj2D/BeBugt/L1sRY9U3ijDLGA8ZKt3SkPdqJZ
+ uR3sHNWaxDvMph39zHczefuRpvNr613rC1Zv+csNwIvGhcJZ/xYD4NUvTSzLlT4fEGE0kADSNGT
+ ZtISSg5Q4dACYGZbowMaOWOvlpHc260eqJtI8R5B3Uz6glEBsp00baXR1y2zNK6skm/dXUyR3Mt
+ bxTufGRFX9WkmOTL3bXujv3hk25MRDr3dqsf3obUjlKHvrpJuGBHNLYG+Sx5VikjN5YapHmaF6x
+ 1bMxXq5tLeMSKD+CR5DGt3Sw1T8j/0uxJsP8YUZcbAYVF/AvqwkBbCYbyZ2KBUqEyy93FiPKsPJ
+ gewmjRQRLUO+sWKoZjJ5HOpdb4qn2wI+TlzlQGtUl6XZFy3f5ROIJ8=
+X-Received: by 2002:a05:6871:728:b0:40e:dcbd:e92d with SMTP id
+ 586e51a60fabf-416e38cea72mr6385755fac.0.1773069045709; 
+ Mon, 09 Mar 2026 08:10:45 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-416e65b1cacsm9376128fac.8.2026.03.09.08.10.44
+ 586e51a60fabf-416e65b1cacsm9376128fac.8.2026.03.09.08.10.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 08:10:44 -0700 (PDT)
+ Mon, 09 Mar 2026 08:10:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <zajec5@gmail.com>
-Cc: =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>
-In-Reply-To: <20260221100011.29049-1-zajec5@gmail.com>
-References: <20260221100011.29049-1-zajec5@gmail.com>
-Subject: Re: [PATCH 0/6] fw_env: cleanup flash_write_buf()
-Message-Id: <177306904416.2117441.5373411047335015619.b4-ty@konsulko.com>
-Date: Mon, 09 Mar 2026 09:10:44 -0600
+To: u-boot@lists.denx.de, Ludwig Nussel <ludwig.nussel@siemens.com>
+In-Reply-To: <20260224155712.286317-1-ludwig.nussel@siemens.com>
+References: <20260224155712.286317-1-ludwig.nussel@siemens.com>
+Subject: Re: [PATCH] bootm: fix booting kernel_noload image
+Message-Id: <177306904503.2117441.16116722120521605409.b4-ty@konsulko.com>
+Date: Mon, 09 Mar 2026 09:10:45 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,33 +94,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 21 Feb 2026 11:00:05 +0100, Rafał Miłecki wrote:
+On Tue, 24 Feb 2026 16:57:10 +0100, Ludwig Nussel wrote:
 
-> From: Rafał Miłecki <rafal@milecki.pl>
-> 
-> I found flash_write_buf() somehow more difficult to follow than needed.
-> Some code turned out to be inconsistent and some not really needed.
-> 
-> There is a set of 6 patches that should be small enough to make them easy
-> to review. I was wondering if I should squash patches 5 and 6 but ended up
-> with sending two smaller diffs.
+> FIT images don't work without having to explicitly specify physical
+> load addresses. Digging into that it looks like a flaw in
+> bootm_load_os().
+> It duplicates images->os for convenience. However, the code handling
+> "kernel_noload" images then updates the load address in the copy with
+> the value lmb_alloc_mem() returned. Later there's another call to
+> lmb_alloc_mem() that uses the old value. This leads to havoc due
+> to subsequent calls of lmb_alloc_mem() picking too low addresses.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/6] fw_env: use "erasesize" variable in writing loop
-      commit: 1197954d5896f431716a61b4242c98c336753948
-[2/6] fw_env: allocate buffer of proper size in flash_write_buf()
-      commit: d80d88cb87d7f291c7abc9168d69f30f994b852f
-[3/6] fw_env: add ROUND_UP() helper
-      commit: 2f28f4116a173891f5c88e1ae3de374241bb1121
-[4/6] fw_env: unify calculation of "blockstart" in flash_write_buf()
-      commit: 1d175b2108d7e0aa74a182ac1ebde58a4f129371
-[5/6] fw_env: move "erasesize" calculation up in a code
-      commit: ffd8024efcb9868b654b319b29949347e6fe92ef
-[6/6] fw_env: drop unneeded variables from flash_write_buf()
-      commit: 667fa1a1cd52abe8f96ce903d58322b7b126d9ea
+[1/1] bootm: fix booting kernel_noload image
+      commit: fe6484b402759dba6024cf2f8c212b27f769a0d7
 -- 
 Tom
 
