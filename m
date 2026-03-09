@@ -4,63 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2832AF41807
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB2A8F41807
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D93D683FD9;
-	Mon,  9 Mar 2026 16:23:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F5A383F1F;
+	Mon,  9 Mar 2026 16:26:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="nZj5XBeo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sxCZzkmL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDA3783BC8; Mon,  9 Mar 2026 16:23:08 +0100 (CET)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 279DA83A8C; Mon,  9 Mar 2026 16:26:11 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCAF283FA3
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:23:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AAF383F1F
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:26:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 053B91A2D82
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 15:23:04 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D04965FFB8;
- Mon,  9 Mar 2026 15:23:03 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1E00310369BFC; Mon,  9 Mar 2026 16:23:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1773069783; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=9QLKowyY578g63F0Ab650p/jnUXnEVMxYAtikV/S6x8=;
- b=nZj5XBeon1HIESgnWG8TDrCPcQPGNEG2sPgKGLXa68WRaCFNSp3zlPClh81d92DIBX4LM2
- nsgr0aG2vPnYR2b+KPpkkk3g7bxKgdTKkhFodHFVV0FnTR5TcrlTmajZANFCI8mlnC3va9
- SObOPZeLuH2bNavCN4cr4gkBfMksnLB+ezyZ5lYBg834Vys+kexNDPCqziTF0h3WnRi88Y
- hWmbl/cTtxs1PwaERzdD+81A8FGF39a4FwLIj+VV33w+QlJxkKUVaqjzthpoFGeqqW7QXO
- CjcPciHy7/lZZgKz1f1lSAeJbHdMYjjGnOTOf7+/BJDAJVPVCD/QynkFyBsFHw==
-From: Richard Genoud <richard.genoud@bootlin.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
- Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH 4/4] mtd: nand: raw: sunxi_spl: remove user data length reset
-Date: Mon,  9 Mar 2026 16:22:51 +0100
-Message-ID: <20260309152251.70837-5-richard.genoud@bootlin.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260309152251.70837-1-richard.genoud@bootlin.com>
-References: <20260309152251.70837-1-richard.genoud@bootlin.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d741f61ee5so1252819a34.1
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:26:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1773069964; x=1773674764; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sJX77lhRTqnE54nYAjn1xPUIqwVxjx6ApwOY4recnzM=;
+ b=sxCZzkmLA2/OfLYJkzdZgRfjTL61dLC29Me9zjO48WGOSlkOEr+GmY/zissQGRmdFq
+ fk3fiHWrciVTLpll8mhfz65xBhKPlvGTo7l+8f3fQHopQI5GNThWW5JrbZMBfGMkaSM5
+ 63ZYnHkC1hucHGcoGxG+tft86U4p9izHjvN5g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773069964; x=1773674764;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sJX77lhRTqnE54nYAjn1xPUIqwVxjx6ApwOY4recnzM=;
+ b=GsanNPJWrP1tPcb+8sy/gu4OeIhuu70gm02fA6zubTt645+2DzyQt/OwH3Z/AYwjz4
+ ahpPzxvhgEVyou/NpGiIK00BtQTahWdOWtEfSS6st5nTbhb291dJQ5mZs2FUJL/K+ZuZ
+ QiViVKz+gClA/vfpqM3X+WWGbtxDvdqQhTucOJ5zErFIW8wLMhuEoxQYZMZUQlt3r+Xv
+ 3LzPK0Y4Ol+PZAw9iIodf3RZR2mg0XK3h2J87tpgf340u3DvUsNxRrgMQCFZ1QtI6wUE
+ RiiR4HWg4DbCUB9o/jseYDhH9TybNcc+4GITkYuLZPdCkCVZBKrepgdCOQjYHV619X43
+ IKVQ==
+X-Gm-Message-State: AOJu0Yw6F/GMHHRdLyMUMHYra0VRkQL/ngjnXiuK4AOC8mpJVA9wJ74Y
+ 7AEcUTFKbioarHCSESb5kULbGM+9Ts9BahncLA7sghGHJKFJnvU9lrNHldtYAOnS22qdCGphhdb
+ HkUyV8J0=
+X-Gm-Gg: ATEYQzxnBwpXWiBMT/WfIoib613jJcxdTsecgc2VAtC39k2vvlH76oXF7TatzyLsiDx
+ rs5pMRmY9TDF6xgq8SmakussNywX8QFS6nBsc9zCGVRpVQPKV/PvBuyfatlt/i8a0aHbBSvvPsE
+ iPEvxzS8bxETQRDvDzPwY5V54YKoCzcyUcqRTE5Jtp6AnRtAwfvVvX+pjeWpnhLBVexGmOmbI9w
+ XmWB71mcSdAz87MkVDVWqThlkSVbyYd3G+voqMUuTYpqCbgt2d+WGnPhm8wD5AKojY28cS0pG/4
+ 3lbi6HokiEwaK2hxXZTNCHgVar3ycDgUxfXe+2aUqZj55PuyTcnT8mfrj/L1CeyrmCSa8E9EVdk
+ YT8ecnf0LEKCOgunw0Fzk9bDtJBFSekbC0I3YzjNChFFK5IrcoImgkZaH6V57OAXaIgczwK0MnJ
+ mo3CXSRJPy1tnNyX+bMDzy/tlk5MNVzQK6gcpdYerZBjqtLNhyOGoXPL+6s7f3SYBpz7y1Pi9CX
+ isV5PqX/NZsk98qiCYVOpTN5XXE5Gi63uqy1tUVUwpuKg==
+X-Received: by 2002:a05:6830:81d1:b0:7d7:48cc:ccdb with SMTP id
+ 46e09a7af769-7d748cccd6emr2392272a34.19.1773069963960; 
+ Mon, 09 Mar 2026 08:26:03 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
+ [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d74062da77sm3625497a34.18.2026.03.09.08.26.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 08:26:03 -0700 (PDT)
+Date: Mon, 9 Mar 2026 09:26:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Simon Glass <simon.glass@canonical.com>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v4 1/5] test: fs_helper: Allow passing the image filename
+Message-ID: <20260309152601.GZ1388590@bill-the-cat>
+References: <20260309151307.831537-1-sjg@chromium.org>
+ <20260309151307.831537-2-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="PVAH6KclVVEZ6BtF"
+Content-Disposition: inline
+In-Reply-To: <20260309151307.831537-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,48 +100,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-No need to reset user data length registers in SPL.
 
-In SPL, only the first user data length register is used, so we don't
-need to reset all of them.
+--PVAH6KclVVEZ6BtF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
----
- drivers/mtd/nand/raw/sunxi_nand_spl.c | 17 -----------------
- 1 file changed, 17 deletions(-)
+On Mon, Mar 09, 2026 at 09:13:00AM -0600, Simon Glass wrote:
 
-diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-index 7dd7a7b44427..2497a964b1ee 100644
---- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
-+++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-@@ -225,22 +225,6 @@ static int nand_change_column(u16 column)
- 	return 0;
- }
- 
--/*
-- * On H6/H616 the user_data length has to be set in specific registers
-- * before writing.
-- */
--static void sunxi_nfc_reset_user_data_len(const struct nfc_config *nfc)
--{
--	int loop_step = NFC_REG_USER_DATA_LEN_CAPACITY;
--
--	/* not all SoCs have this register */
--	if (!NFC_REG_USER_DATA_LEN(nfc, 0))
--		return;
--
--	for (int i = 0; i < nfc->caps->max_ecc_steps; i += loop_step)
--		writel_nfc(0, NFC_REG_USER_DATA_LEN(nfc, i));
--}
--
- static void sunxi_nfc_set_user_data_len(const struct nfc_config *nfc,
- 					int len, int step)
- {
-@@ -348,7 +332,6 @@ static int nand_read_page(const struct nfc_config *conf, u32 offs,
- 		 */
- 		nand_change_column(oob_off);
- 
--		sunxi_nfc_reset_user_data_len(conf);
- 		sunxi_nfc_set_user_data_len(conf, user_data_sz, nfc_step);
- 
- 		nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_OP);
+> From: Simon Glass <simon.glass@canonical.com>
+>=20
+> The mk_fs() function always generates its own image filename from the
+> prefix and fs_type. Some callers need to specify a custom leaf name
+> while still keeping the image under the persistent-data directory.
+>=20
+> Add an fs_img parameter that accepts a leaf filename. When provided,
+> it is joined with persistent_data_dir instead of the default name.
+>=20
+> Signed-off-by: Simon Glass <simon.glass@canonical.com>
+>=20
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--PVAH6KclVVEZ6BtF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaa7mhgAKCRAr4qD1Cr/k
+Cs17AQCtdhGjXBpD0d3Ep+WlvlcTZcHXc4GCyaB2Z0iV+WZ3HwEApNH19tdZKvID
+f+qXbHPunwJFr4E8zf9TnG3YSx9yGQs=
+=XhAw
+-----END PGP SIGNATURE-----
+
+--PVAH6KclVVEZ6BtF--
