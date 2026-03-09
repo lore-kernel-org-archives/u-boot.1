@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFDEBF41807
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE95F41807
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:54:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31E9283952;
+	by phobos.denx.de (Postfix) with ESMTP id 983F983F9A;
 	Mon,  9 Mar 2026 16:54:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Nt3EAr/M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xs5M2SgO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2606483952; Mon,  9 Mar 2026 16:54:12 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 62E3C83F82; Mon,  9 Mar 2026 16:54:13 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4F1183F20
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:54:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E59183F6E
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:54:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-48539cbb7b1so9348195e9.3
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:54:09 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4852b81c73aso20793425e9.3
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:54:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773071649; x=1773676449; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1773071650; x=1773676450; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uD0FEmQWQLok9PLRZG/6uMlQQ4eFPxLXvGHHkTAWk2s=;
- b=Nt3EAr/MysRYbKFr5hNJHsy6r09l0/Yun7YLEjtF6WlmxhS5v0TnVW6gnTG5g2yWVm
- TpEqXfuXaJ9bpIoT2ZykYWjF3NBkfA8o3sKX65GSP85jeVol3wyXQUIxPWzaadHnN/1Y
- MHh6qhDS7kon/Q6z++H1xs5kzFp95IzjvB9f2QgZRr6DbyFOqemkVop1jCWEanSsvy34
- Ugmz+n49yjjNrEcRnwzeCZ9vbsLuB7kyYtByDfyCi3W158uYazAnebVpHNYwPMH+eLb7
- EqNYQTn5pMhnqNWwMlnNcnx3GrTx1nGRTlgwvsbj8Fe7F0T5GpTr9NX+AaEC4rVRyo2k
- A8AQ==
+ bh=VlYHr6DV1+lzIJfEtwTWpstQfr4dYTfU6NHtm/K2IGs=;
+ b=Xs5M2SgOuj/dgl+r/cpzQ/W11slARgsRP2WhVqohYU+a7DsX0GE1QSpEkVJTP44otR
+ P7EevEwhaguHGJ4n2g4ywrrlY6ZvHin2EMdyRZvC/cY9mKWQMZyCWBN7vNbVzPpZC03k
+ qNxry9J0mw/hVa2Z67MgztOCPwl6DAmodzx0jN7xzYxbHe7e/xa2kLtxEyViEnqcS/z3
+ hLjSdV3ULxw88Wig1heY9rWzDfCcllnT2RpHwJMpA/KXxYKC2EP+YY7KcrEIHMmYXvKd
+ ksla1sbwY7Kssx3o3oOwNJwmKiDSU+sH3ORGrZa2z91zCrDUE8aUCpweGKbm+nzSNlgA
+ M1KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773071649; x=1773676449;
+ d=1e100.net; s=20230601; t=1773071650; x=1773676450;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=uD0FEmQWQLok9PLRZG/6uMlQQ4eFPxLXvGHHkTAWk2s=;
- b=hH5Aid0oKvGHWK7uPjSTTtaEUDRFiweoeM0bnTEVBqzcqosCDxa4yoeVgEM0y3ivr2
- wDwLfmSh/zkmwvkS5TPEFuhuQlKdgg6zVXWGiLXhLoe/g9tdt9hxQUvLY+odU2Hnx9Dm
- 9FuJfLKRPwVV3Bm6FcimmpGXz1FmTSut7RIRXQdfb8du6RamdGAcaDX6Bn9PItw0qNwB
- AlW+bBS6+n2xs0gPvj8hOx6k56qPyuFrDV6v9p5pYWBLI28AFTZKLuab9GHmGgNKvvzn
- 6CQQXyoZV8JE63ap5acm2Gp90YPqaZbPmTC+k2Ylga+CUj7Fbe/4N2FmdeTn+46ubidH
- dnow==
+ bh=VlYHr6DV1+lzIJfEtwTWpstQfr4dYTfU6NHtm/K2IGs=;
+ b=eNjvMvGmkQQUj9+6++F5y4/hGmFi1xj+siRa4HGrBYC2lT10HLsXAGWa3tJhKBuQxq
+ XsQUTiPZw5gMij1RO6Q13umhG0JIfcvjlL6q+A97V3Uivj4S6iuT8aEO+LQEAn8gz/2s
+ qslfEkGgHpah5zKW9q1pmcul4VJnqE2166CFNPGwDjGgpzon4RwbUnz+uedwW5tWaQee
+ NAs7etcLxRB8fiMbfCyc1D/lv/t4Q1pwtGNAL/6Pjg7PcarjysNfwPtJVF9cxnsssY8c
+ eieNA+ZQtl0mwAeAtexkkLvDl1Ywm31dZS+FmUFY2rfZhFkhQDkdwndrzZh/2TnJWZpt
+ YxLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3M5ue3VZm6E9ShoBIhaQUXbiiRwjZ5cF241tiNSDXpdJ8ucFtH9L3UEZFjI6zmu8x34l0ZvI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1r22wPSMinQsB76G0Z2DGS7yhSsp5C8+/qJFCU+6I+UKu5GzJ
- gxrxOlFwLH/lWVSlATHwzKpSxWkpObWoHvz5Nf9AvwxxGWvNISwhOnnB
-X-Gm-Gg: ATEYQzwJC1FPHTJy+VpcNwq/btaU9F4fXxVF8T3ydKgO0WHV0uA1iSOWFud1/uqI70G
- rxjUHGq5DTMY2iB6K2H+hfGX/yR8vCPVOSKVr5W9LLOw1XBNlkjVknjWduIaKPH+AphDN/J0JVH
- /XMNpBs47mp6qXXyDZmeS0XowyrwhUSoQHgnVjMueabyN3SyokU7qZ8fkTksxFAWEU+hdKvkqg1
- E4E5ME89mPnMuE0xAZ41mlJk3Cf0it+rQSGKDKcB92Pmb7IIb3qe0ay2GW4hlj3nCON+AdAhpeb
- qi5Uq4+oEeAtfWVTtDWaLMK9GYCC2x6LGsg+ne9M+lKBvBv2EfJItBmp24s8w4ZqJXwxfrV0JPO
- xSqW4sdxnvtUdcD7EG2kGdlWhKiVRPms+3r/tOsv7LuDauJ853915+8Ij7GgySEstrcpQFv7+qk
- uSL1pWDRAI22VoFmsaE08pKXvDsbIRadfZq76o/WJLhhyyFpIG8PbZnKZynbeoNAycGZthOxxbw
- DXlT1KDomHQHNsWI/Nqg4nAoojuPIJqtbCWB9jEBamO
-X-Received: by 2002:a05:600c:8b6d:b0:485:364e:9328 with SMTP id
- 5b1f17b1804b1-485364e9569mr86922585e9.16.1773071648705; 
- Mon, 09 Mar 2026 08:54:08 -0700 (PDT)
+ AJvYcCUaUerZ5Jn2QJlFc1UfBoiR1xTWj5qluJuCTKf1k1UAtSoNZeUhb5k7NGxEA7XpQbSJJy2AwEE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyh/pW/0bW45I4W6QC/fqCYwKf6OALxpyqzzT8bi/0EZ0MyPvFR
+ gCCRkVX2jf7GVl3vrVOp9s7UxVHB13g1edBEZvI3B1Tx0NI+3W9FT8HrlIizfR8pztU=
+X-Gm-Gg: ATEYQzxKxCpsfqB/lmDbDMwIVLxVNWzdIFkMDxwt2kA6ah5lXnciViTL/bh+D+mUFd7
+ lMyfhYKlxtTQgRsREQ3dh17okGC2PuFPZOOHiWUi9xPZ9217CXA6DrLXP0L8AxnoHTyDmhTKm3P
+ EuOQ9vJL8rtooeP72KFfuVrkg/jv31f1A852M2V/OYPt7GfXzmUNqykXWJSVi0h7jkcGvlnJ50f
+ lm2JW8+DDgBtmg9+SQE7wVRD9CGh77URhRwLWiUvxNGf2RLfGhSS4Sg1gSVe7fxlcWpGpq5zQs6
+ XHZpbl3GaqlZWESwhkzpmT1/rgSaR7gY9GcZ+9QeiCN9gq/DPlOqXRy6Yl69ljz0zw4paG1+Oni
+ EGm/c1MQyhCeUvNCeJuwC9Kl4zQ2+ZZ4gY5eZy4X3u8p+vdNPsABtldAn2D8lBa4DME2iB5XKqj
+ /Lvp1XVnRJ4TwtqzcLOCUPyjDEWybh+w1Hrtvs+EjwirycAS4CaGV2+RByKJAeUVd6RFPjkB+Kg
+ /ISk3bIYxBs/J7nWSueVQNbIaVPxS/XlKZUm8c8xWKC
+X-Received: by 2002:a05:600c:1d0b:b0:485:4136:99a8 with SMTP id
+ 5b1f17b1804b1-48541369c0cmr11145895e9.22.1773071649398; 
+ Mon, 09 Mar 2026 08:54:09 -0700 (PDT)
 Received: from emanueleg-nb.corp.toradex.com
  (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-485358cd26bsm84408215e9.8.2026.03.09.08.54.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 08:54:08 -0700 (PDT)
+ Mon, 09 Mar 2026 08:54:09 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1 1/2] board: toradex: aquila-am69: refactor memory
- configuration
-Date: Mon,  9 Mar 2026 16:53:07 +0100
-Message-ID: <20260309155342.145432-2-ghidoliemanuele@gmail.com>
+Subject: [PATCH v1 2/2] board: toradex: aquila-am69: Add support for 16GB dual
+ rank memory configuration
+Date: Mon,  9 Mar 2026 16:53:08 +0100
+Message-ID: <20260309155342.145432-3-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260309155342.145432-1-ghidoliemanuele@gmail.com>
 References: <20260309155342.145432-1-ghidoliemanuele@gmail.com>
@@ -106,129 +106,137 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-The memory controller configuration doesn't depend only on the memory
-size, so refactor the code to use the memory configuration read from
-the HW_CFG pin instead of the memory size.
-Additionally, make use of one header file for all the memory
-configurations.
+Move the existing 16GB single-rank configuration to HW_CFG 0x03 and use
+the previous HW_CFG 0x01 value for the new 16GB dual-rank configuration.
+
+There is no hardware using the former 16GB single-rank configuration,
+so reuse the HW_CFG value for the new 16GB dual-rank configuration,
+which will be used in production.
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- board/toradex/aquila-am69/aquila-am69.c      | 18 +++++++++++-------
- board/toradex/aquila-am69/aquila_ddrs.h      | 14 ++++++++++++++
- board/toradex/aquila-am69/aquila_ddrs_16GB.h | 11 -----------
- board/toradex/aquila-am69/aquila_ddrs_8GB.h  | 11 -----------
- 4 files changed, 25 insertions(+), 29 deletions(-)
- create mode 100644 board/toradex/aquila-am69/aquila_ddrs.h
- delete mode 100644 board/toradex/aquila-am69/aquila_ddrs_16GB.h
- delete mode 100644 board/toradex/aquila-am69/aquila_ddrs_8GB.h
+ board/toradex/aquila-am69/Makefile            |  1 +
+ board/toradex/aquila-am69/aquila-am69.c       |  8 ++-
+ board/toradex/aquila-am69/aquila_ddrs.h       |  1 +
+ .../aquila-am69/aquila_ddrs_16GB_rank_2.c     | 54 +++++++++++++++++++
+ 4 files changed, 63 insertions(+), 1 deletion(-)
+ create mode 100644 board/toradex/aquila-am69/aquila_ddrs_16GB_rank_2.c
 
+diff --git a/board/toradex/aquila-am69/Makefile b/board/toradex/aquila-am69/Makefile
+index aa71c4bbb210..aa657ac8a420 100644
+--- a/board/toradex/aquila-am69/Makefile
++++ b/board/toradex/aquila-am69/Makefile
+@@ -6,4 +6,5 @@
+ obj-y	+= aquila-am69.o
+ obj-y	+= ddrs_patch.o
+ obj-y	+= aquila_ddrs_16GB.o
++obj-y	+= aquila_ddrs_16GB_rank_2.o
+ obj-y	+= aquila_ddrs_8GB.o
 diff --git a/board/toradex/aquila-am69/aquila-am69.c b/board/toradex/aquila-am69/aquila-am69.c
-index e0975d5bc6fe..c3df14fc7c96 100644
+index c3df14fc7c96..0c7123a059e4 100644
 --- a/board/toradex/aquila-am69/aquila-am69.c
 +++ b/board/toradex/aquila-am69/aquila-am69.c
-@@ -17,8 +17,7 @@
- #include <spl.h>
- 
- #include "../common/tdx-common.h"
--#include "aquila_ddrs_16GB.h"
--#include "aquila_ddrs_8GB.h"
-+#include "aquila_ddrs.h"
- #include "ddrs_patch.h"
- 
+@@ -23,8 +23,9 @@
  #define CTRL_MMR_CFG0_MCU_ADC1_CTRL	0x40F040B4
-@@ -27,14 +26,19 @@
- #define HW_CFG_MEM_SZ_16GB		0x01
+ 
+ #define HW_CFG_MEM_SZ_32GB		0x00
+-#define HW_CFG_MEM_SZ_16GB		0x01
++#define HW_CFG_MEM_SZ_16GB_RANK_2	0x01
  #define HW_CFG_MEM_SZ_8GB		0x02
++#define HW_CFG_MEM_SZ_16GB		0x03
  
--#define HW_CFG_MEM_SZ_MASK		0x03
-+#define HW_CFG_MEM_CFG_MASK		0x03
+ #define HW_CFG_MEM_CFG_MASK		0x03
  
- DECLARE_GLOBAL_DATA_PTR;
- static u8 hw_cfg;
- 
-+static u8 aquila_am69_memory_cfg(void)
-+{
-+	return hw_cfg & HW_CFG_MEM_CFG_MASK;
-+}
-+
- static u64 aquila_am69_memory_size(void)
- {
--	switch (hw_cfg & HW_CFG_MEM_SZ_MASK) {
-+	switch (aquila_am69_memory_cfg()) {
+@@ -41,6 +42,7 @@ static u64 aquila_am69_memory_size(void)
+ 	switch (aquila_am69_memory_cfg()) {
  	case HW_CFG_MEM_SZ_32GB:
  		return SZ_32G;
++	case HW_CFG_MEM_SZ_16GB_RANK_2:
  	case HW_CFG_MEM_SZ_16GB:
-@@ -79,12 +83,12 @@ static void update_ddr_timings(void)
- 	int ret = 0;
- 	void *fdt = (void *)gd->fdt_blob;
- 
--	switch (aquila_am69_memory_size()) {
--	case SZ_8G:
-+	switch (aquila_am69_memory_cfg()) {
-+	case HW_CFG_MEM_SZ_8GB:
+ 		return SZ_16G;
+ 	case HW_CFG_MEM_SZ_8GB:
+@@ -88,6 +90,10 @@ static void update_ddr_timings(void)
  		ret = aquila_am69_fdt_apply_ddr_patch(fdt, aquila_am69_ddrss_patch_8GB,
  						      MULTI_DDR_CFG_INTRLV_SIZE_8GB);
  		break;
--	case SZ_16G:
-+	case HW_CFG_MEM_SZ_16GB:
++	case HW_CFG_MEM_SZ_16GB_RANK_2:
++		ret = aquila_am69_fdt_apply_ddr_patch(fdt, aquila_am69_ddrss_patch_16GB_rank_2,
++						      MULTI_DDR_CFG_INTRLV_SIZE_16GB);
++		break;
+ 	case HW_CFG_MEM_SZ_16GB:
  		ret = aquila_am69_fdt_apply_ddr_patch(fdt, aquila_am69_ddrss_patch_16GB,
  						      MULTI_DDR_CFG_INTRLV_SIZE_16GB);
- 		break;
 diff --git a/board/toradex/aquila-am69/aquila_ddrs.h b/board/toradex/aquila-am69/aquila_ddrs.h
-new file mode 100644
-index 000000000000..3f6cecf5405f
---- /dev/null
+index 3f6cecf5405f..7a58be3fd299 100644
+--- a/board/toradex/aquila-am69/aquila_ddrs.h
 +++ b/board/toradex/aquila-am69/aquila_ddrs.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
+@@ -10,5 +10,6 @@
+ 
+ extern struct ddrss_patch *aquila_am69_ddrss_patch_8GB[4];
+ extern struct ddrss_patch *aquila_am69_ddrss_patch_16GB[4];
++extern struct ddrss_patch *aquila_am69_ddrss_patch_16GB_rank_2[4];
+ 
+ #endif // __AQUILA_DDRS_H
+diff --git a/board/toradex/aquila-am69/aquila_ddrs_16GB_rank_2.c b/board/toradex/aquila-am69/aquila_ddrs_16GB_rank_2.c
+new file mode 100644
+index 000000000000..c24e22b620b5
+--- /dev/null
++++ b/board/toradex/aquila-am69/aquila_ddrs_16GB_rank_2.c
+@@ -0,0 +1,54 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * Copyright (c) Toradex - https://www.toradex.com/
++ * This contains a diff against the 32GB register settings created from
++ * the 16GB dual rank tool output.
++
++ * The 16GB dtsi file was generated with the following tool revisions:
++ *     - SysConfig: Revision 1.26.2+4477
++ *     - Jacinto7_DDRSS_RegConfigTool: Revision 0.12.0
++ * This file was generated on Fri Mar 06 2026 10:39:50 GMT+0100 (Central European Standard Time)
 + */
-+#ifndef __AQUILA_DDRS_H
-+#define __AQUILA_DDRS_H
 +
-+#define MULTI_DDR_CFG_INTRLV_SIZE_8GB 9
-+#define MULTI_DDR_CFG_INTRLV_SIZE_16GB 11
++#include <asm/u-boot.h>
++#include <linux/kernel.h>
++#include "ddrs_patch.h"
 +
-+extern struct ddrss_patch *aquila_am69_ddrss_patch_8GB[4];
-+extern struct ddrss_patch *aquila_am69_ddrss_patch_16GB[4];
++#define DDRSS_PLL_FHS_CNT 3
 +
-+#endif // __AQUILA_DDRS_H
-diff --git a/board/toradex/aquila-am69/aquila_ddrs_16GB.h b/board/toradex/aquila-am69/aquila_ddrs_16GB.h
-deleted file mode 100644
-index 0740c0ef25cd..000000000000
---- a/board/toradex/aquila-am69/aquila_ddrs_16GB.h
-+++ /dev/null
-@@ -1,11 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (C) 2025 Toradex - https://www.toradex.com/
-- */
--#ifndef __AQUILA_DDRS_16GB_H
--#define __AQUILA_DDRS_16GB_H
--
--#define MULTI_DDR_CFG_INTRLV_SIZE_16GB 11
--extern struct ddrss_patch *aquila_am69_ddrss_patch_16GB[4];
--
--#endif // __AQUILA_DDRS_16GB_H
-diff --git a/board/toradex/aquila-am69/aquila_ddrs_8GB.h b/board/toradex/aquila-am69/aquila_ddrs_8GB.h
-deleted file mode 100644
-index c82f236d55f5..000000000000
---- a/board/toradex/aquila-am69/aquila_ddrs_8GB.h
-+++ /dev/null
-@@ -1,11 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (C) 2025 Toradex - https://www.toradex.com/
-- */
--#ifndef __AQUILA_DDRS_8GB_H
--#define __AQUILA_DDRS_8GB_H
--
--#define MULTI_DDR_CFG_INTRLV_SIZE_8GB 9
--extern struct ddrss_patch *aquila_am69_ddrss_patch_8GB[4];
--
--#endif // __AQUILA_DDRS_8GB_H
++#define DDRSS_CTL_268_DATA 0x01010000
++#define DDRSS_CTL_270_DATA 0x00000FFF
++#define DDRSS_CTL_271_DATA 0x1FFF1000
++#define DDRSS_CTL_272_DATA 0x01FF0000
++#define DDRSS_CTL_273_DATA 0x000101FF
++
++#define DDRSS_PI_73_DATA 0x00080100
++
++static struct ddr_reg_patch ctl_patch[] = {
++	{ 268, DDRSS_CTL_268_DATA},
++	{ 270, DDRSS_CTL_270_DATA},
++	{ 271, DDRSS_CTL_271_DATA},
++	{ 272, DDRSS_CTL_272_DATA},
++	{ 273, DDRSS_CTL_273_DATA}
++};
++
++static struct ddr_reg_patch pi_patch[] = {
++	{ 73, DDRSS_PI_73_DATA},
++};
++
++static struct ddrss_patch ddrss_ctrl_patch = {
++	.ddr_fhs_cnt = DDRSS_PLL_FHS_CNT,
++	.ctl_patch = ctl_patch,
++	.ctl_patch_num = ARRAY_SIZE(ctl_patch),
++	.pi_patch = pi_patch,
++	.pi_patch_num = ARRAY_SIZE(pi_patch),
++	.phy_patch = NULL,
++	.phy_patch_num = 0
++};
++
++struct ddrss_patch *aquila_am69_ddrss_patch_16GB_rank_2[4] = {
++	&ddrss_ctrl_patch,
++	&ddrss_ctrl_patch,
++	&ddrss_ctrl_patch,
++	&ddrss_ctrl_patch
++};
 -- 
 2.43.0
 
