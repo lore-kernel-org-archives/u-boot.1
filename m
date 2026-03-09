@@ -4,80 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61D8FCA17E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 19:52:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 229B0FCA189
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 21:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 172AC83A8C;
-	Mon,  9 Mar 2026 20:52:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 33CB383A8C;
+	Mon,  9 Mar 2026 22:02:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UDnB03n0";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xHhn5LZJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7310483F6D; Mon,  9 Mar 2026 20:52:49 +0100 (CET)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F2BB683BC8; Mon,  9 Mar 2026 22:02:46 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9B1C83A8C
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 20:52:46 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-67bb5e4d06eso416505eaf.1
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 12:52:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773085965; x=1773690765; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=q1eh9aL0bB6AlON4iZ60d9w0xToODj0otb5stdvFLHM=;
- b=UDnB03n0NkGuUv2UPLAEGeho0xTYUzwSa88OaEClLACzLrCAqs9hT6PAF/wwoiCc64
- joM5V81T0xMpTS96h0hhuSlFlqqVIewaU45diIdrmXPFskWCQxS6wpeQE9/9/cZjM5xr
- ODY9fSW+RjPy8w/nITyrDMq6ZX6ScgphyPDCY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773085965; x=1773690765;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=q1eh9aL0bB6AlON4iZ60d9w0xToODj0otb5stdvFLHM=;
- b=pcHRXCQwTf1YqmwNkmzIm53LdI7M8AHrZQtMp5CayCLyrP6oUuExgTv6e4f5WicIGM
- yWFWQOnCX8uIA7zXbj0/DMMkklyZaIzm0dyEnKYdwxwJFQL1Tz5C9X/Zjj9m1zO5pIdG
- h3XHZLsM+6OxrcP0NY4IsNmG2Zkf/4GZJ8LQmHppqBtuwvjTp5qjbmFGxCxEIGSJf/HY
- IWIt1qH3HaqeHQezrB0A3mcEjqhmY/8kPHwEHXl1T70wHXUe12DKYuvbvJXz8Eb35ZhN
- kilyKjTsBE5bHf80wMzUHfFwbe6j6Yp+kIbW1Tzrc0z6qGNPH4E/61M341wp1U2Ikuyp
- /JEw==
-X-Gm-Message-State: AOJu0YwdS/mKLYq5AYQoM7tmsrMqxEIx6N46P5qGi9uX7aeV9W8/Kh69
- BC8t1modBodndpJUSX8DKfEYZJmKSaatbrztZ2fwAhNR9OKe6dDJtYZ5zxI4ZHYgpYxuapzGO9h
- tXX+m
-X-Gm-Gg: ATEYQzwP+jxLz8RbdJ24GeORtpq4q6lRE5zb9MU2KXmkrXafAYN23Dvh02Hl0j45jdA
- 7fuukai0IOavDOeUUBy305of/h5fwpuH7ObDz5P97eKv74b5tnQFdXHL6OLOfOTxEmNw/5uK4vb
- HM1VKMJ3a9o5qqHa83lEPNp7pvJT30Glr1M1YEN+Q+z/gc/XQPmAWPhXJ9Bayo6MjgM5LSmYET3
- Ejh17rUPc9TAE547wwkvSBvTicBKiIUwohjX9G4fsHxFypyCWhcyyv82oR/ghE8xpcTVyAtvNbQ
- Su7iD/FQZIdDAIhMh6FOhjjEtO34VdB+dCPzcaO7UR/7XnyeRp7cPu9qHIaa375r6ERh/s63SP7
- FtnCvqdvTDajGUl5hfW14TDevwLZiMfzBmdRgvJpuZr9Yrsu3D3dxQa3e0cusiAftAKp/iSGNlX
- Hu3gjkDg4Ok8dFe74L6cjU+/aD8Kl2Wlxis8WGHo1uW3bJ5PuJ6y6SBfAY5r51wtJRYgBrKbuyW
- 1TA3dYS5gztkEZfT5cyQjo+aX8A9dydNqKussHdBsSBs+GQULYIaK1h
-X-Received: by 2002:a05:6820:2214:b0:67b:baae:3333 with SMTP id
- 006d021491bc7-67bbaae4cb5mr891521eaf.47.1773085965442; 
- Mon, 09 Mar 2026 12:52:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67bb230e0f1sm2874552eaf.13.2026.03.09.12.52.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 12:52:44 -0700 (PDT)
-Date: Mon, 9 Mar 2026 13:52:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2026.04-rc4 released
-Message-ID: <20260309195242.GE1388590@bill-the-cat>
+ by phobos.denx.de (Postfix) with ESMTPS id 16A9983952
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 22:02:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1773090163;
+ bh=vSEw+7z6KRPjbiiUj1QdHYWitijQGexAotXdfmR5mxs=;
+ b=xHhn5LZJhB87GHFUqxqaFt1NnG33brgmx1J/PALy7KRvYj/VvBPrDy3+pnj4pN8I8QA5ijcAm
+ o7BTFNoDt80VDxOYPlZi8a60th68TonT9apxJ7+mrLygxRrBrKNilXcsEdKWWzPibd1l99tsw3Q
+ yk3fXNjZJLF1VR7uaQLyhomy2+jP336VW0GGJEVGWkf3l0auxOXvSsRwX20gaQxR4gVFcgHkNy0
+ DefH1lvupfTEOss0d45dL3kJCh7UcOobIkSZqHixcsSoeC6MIXJphv3k9tjAj9OoQvBN6NlnD8U
+ 7TsIXsrOPReTmI22ekyxEM3TPzv8uFpi229Ay0rALlZg==
+X-Forward-Email-ID: 69af356f76762a90c7fa41a9
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.6.49
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
+ u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk3568: Include all addressable DRAM in memory map
+Date: Mon,  9 Mar 2026 21:02:32 +0000
+Message-ID: <20260309210234.521070-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="M4LPtwOKQcsB6FR1"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,55 +69,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Rockchip RK356x supports up to 8 GiB DRAM, however U-Boot only includes
+the initial 32-bit 0-4 GiB addressable range in its memory map,
+something that matches gd->ram_top and current expected memory available
+for use in U-Boot.
 
---M4LPtwOKQcsB6FR1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The vendor DRAM init blobs add following ddr_mem rk atags [1]:
 
-Hey all,
+  4 GiB: [0x0, 0xf0000000) and [0x1f0000000, 0x200000000)
+  8 GiB: [0x0, 0x200000000)
 
-So it's release day and I have tagged and pushed things out. This is a
-reasonable delta from -rc3 I think. I believe right now there's no open
-regressions that I'm aware of. If I'm wrong, please speak up now so we
-can get them resolved.
+Add the remaining 64-bit 4-8 GiB addressable range, that already is
+reported to OS, to the U-Boot memory map to more correctly describe all
+available and addressable DRAM of RK356x. While at it also add the
+missing UL suffix to the PCIe address range for consistency.
 
-We're continuing with a community meeting following the release and the
-calendar link is
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DMHYzYz=
-Q1dWh2bnRjcm80czVmcDczYmhsNThfMjAyNjAxMjdUMTUwMDAwWiA4OWJlN2I4MTMxMzZiZWMwN=
-mE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUwNmMxYzdkYmNkMThkZjQxQGc&tmsrc=3D=
-89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.ca=
-lendar.google.com&scp=3DALL
-and once again this is the same time as the previous meeting. The
-meeting details itself are:
-https://meet.google.com/icv-nvmv-dbf
-February 24th, 2025. 9am (GMT -06:00)
+[1] https://gist.github.com/Kwiboo/6d983693c79365b43c330eb3191cbace
 
-To join by phone:
-https://tel.meet/icv-nvmv-dbf?pin=3D5493171900556
+Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+Changes in v2:
+- Update commit message
+- Collect a-b tag
+---
+ arch/arm/mach-rockchip/rk3568/rk3568.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-In terms of a rough changelog:
-- Platform updates for Samsung, STM32, TI K3
-- Subsystem updates for EFI Loader, UFS
+diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+index c2b96902d2dd..2b1eafee37c9 100644
+--- a/arch/arm/mach-rockchip/rk3568/rk3568.c
++++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+@@ -72,9 +72,15 @@ static struct mm_region rk3568_mem_map[] = {
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+-		.virt = 0x300000000,
+-		.phys = 0x300000000,
+-		.size = 0x0c0c00000,
++		.virt = 0x100000000UL,
++		.phys = 0x100000000UL,
++		.size = 0x100000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, {
++		.virt = 0x300000000UL,
++		.phys = 0x300000000UL,
++		.size = 0x0c0c00000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-- 
+2.53.0
 
-We have one more rc after this and then the final release will be 06
-April 2026.
-
-Thanks all!
-
---=20
-Tom
-
---M4LPtwOKQcsB6FR1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaa8lCgAKCRAr4qD1Cr/k
-CsFPAQDwjA8Diagpr0AxnvM6klzzDglmlmygu3KJ3HuaBllPOgEAsu9vzLYa7LbR
-y8eaQ846tQebN9zCfzyjsBHFj6zFywE=
-=bt/x
------END PGP SIGNATURE-----
-
---M4LPtwOKQcsB6FR1--
