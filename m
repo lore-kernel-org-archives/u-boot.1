@@ -4,48 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC263F417EA
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:02:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB5FF41808
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:10:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A63883BC7;
-	Mon,  9 Mar 2026 16:02:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A693E83F53;
+	Mon,  9 Mar 2026 16:10:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fhGg6UET";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D64483F14; Mon,  9 Mar 2026 16:02:16 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id CB86683A8C
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:02:12 +0100 (CET)
+ id 2FE4383F98; Mon,  9 Mar 2026 16:10:49 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6095A83F20
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:10:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E02601570;
- Mon,  9 Mar 2026 08:02:04 -0700 (PDT)
-Received: from debian (X72Y076X74-2.nice.arm.com [10.34.125.13])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3BE033F7BD;
- Mon,  9 Mar 2026 08:02:10 -0700 (PDT)
-Date: Mon, 9 Mar 2026 16:02:07 +0100
-From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/4] cmd: efidebug: add ecpt command
-Message-ID: <aa7g7zd0L4SyDHt-@debian>
-Mail-Followup-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260305161349.2317130-1-vincent.stehle@arm.com>
- <20260305161349.2317130-4-vincent.stehle@arm.com>
- <a0d7e83b-1721-41c6-a416-cc88af49bb22@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-404254ffe8aso4435217fac.0
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 08:10:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1773069045; x=1773673845; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QEGyNcZFaoWzYbjYPwj5C11I+8TBOjapJWXP4B7IKxM=;
+ b=fhGg6UETaFHx0oop8LluDMzUw21xyS8wFSQfPkPsLESTyGJgICG1vdzNB4m7NPT0o3
+ L/l23fpbxOwL/fhDXEC9PXg/gO83+Ptttjq+1Miii7O4+ogrQwis6BhL+JAzcd21yYt+
+ 6v9lrOqVfef/8gg41DEFTEpMyHpZEVcWjdCPo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773069045; x=1773673845;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=QEGyNcZFaoWzYbjYPwj5C11I+8TBOjapJWXP4B7IKxM=;
+ b=vmpr8zwYnEN/uvU0xTVvy+xo9E49Yef+y/Qo4bdJe4CEb7eiuDpJ3e4nt75mmml9jq
+ Po+sy6kYxbyYXAxh1DAdxX8tHopDkTFuWwkZZ6N2GgrbUs4Unti3vRFOtbW/XESSoqQG
+ +GpG+k+ua+KUjiCmod3W1cZejL97c0BOLUpHr5X1kYcfXvk7gBQmWg5TTCGj5U9sPhna
+ rK6xUAJuAbIJqkN36Fy+RjlIR9rFOgP8VhZWL8x3lL7GIyXlPaRg3VO29JMibqQJAeNT
+ R5z3uZ+zNQUnOBdzGQUllUcKKRvjTO8/MqPAawGorMbQ/rwe8/G1Kj3QlYkcSoIl+XEM
+ IXyQ==
+X-Gm-Message-State: AOJu0YzD3bt9vU0OIgKRRp2ataifcAnTVHB1uRWFqG8rMDeuJWr1E1u+
+ 467TSLvsoQcGo4D/z1z67gq52gxyNkVVHxk9sEKWllOGGD0qTwUfFhtvgP2Yrbnr1SwNryQYnCn
+ V8BlRLy4=
+X-Gm-Gg: ATEYQzxCL7dqGuUCgQUu0RgkUS1K1vZqWztMpW/3tdqNsmgz7HQwWzV+9VrhBHOmyDT
+ PtH3Xl4m/PSAmPTZb+yqElXKOLjQFGzpvAHmaZq05NwThw6wYiy/Qg4dJF6lxeNSD/gf41NbcXd
+ jmtYoEXpsd1wbQodTWV+Gd3/NSYv7GhkXeT12uj9POBAUtSHT5/XL+JZAMKNIQ1gZ7mDxPUDMNL
+ vCUN2kHuaMuNHav7suOTI6DWt/fHsLnqlglWD5A0GvduGlsmIlpb/PdbwHcE/LIK+7zEfp6jCH/
+ bbzaZGI5tbfFi1xTUNS/2kXIwuaroMAcpj3SvLCP4IdWgJSyZzF2i0H4p+Yd+fFoHcF1PYJRsr1
+ v/O6AY7VSLQzOvvypkNu80ClaTo1CjUJBa4Rc1RVpurXMToxFFYP3ZH6b9SZKzE54xpPcQ4botT
+ xj5uWphJpJ16YxSgJO/SOUuYGYWCB2ulpJZjJ5ZsVrogkCApIo0pkj1lXubvAx07+yY2MjQtLnz
+ wPDCXU2XgLu1EJOGtPUa3+xQprNM8sN8GHxi7FmbFeZet4tyiRwKZ4=
+X-Received: by 2002:a05:6870:210c:b0:417:28be:32a7 with SMTP id
+ 586e51a60fabf-41728be436cmr2665186fac.4.1773069044899; 
+ Mon, 09 Mar 2026 08:10:44 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-416e65b1cacsm9376128fac.8.2026.03.09.08.10.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Mar 2026 08:10:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, 
+ =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <zajec5@gmail.com>
+Cc: =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>
+In-Reply-To: <20260221100011.29049-1-zajec5@gmail.com>
+References: <20260221100011.29049-1-zajec5@gmail.com>
+Subject: Re: [PATCH 0/6] fw_env: cleanup flash_write_buf()
+Message-Id: <177306904416.2117441.5373411047335015619.b4-ty@konsulko.com>
+Date: Mon, 09 Mar 2026 09:10:44 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <a0d7e83b-1721-41c6-a416-cc88af49bb22@gmx.de>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,143 +98,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 09, 2026 at 01:23:53PM +0100, Heinrich Schuchardt wrote:
+On Sat, 21 Feb 2026 11:00:05 +0100, Rafał Miłecki wrote:
 
-Hi Heinrich,
-
-Thanks for your review, I will send a v2 adding your first suggestion; more
-comments below.
-
-Best regards,
-Vincent.
-
-> On 3/5/26 17:13, Vincent Stehlé wrote:
-> > Add an "efidebug ecpt" command, to print the conformance profiles in the
-> > ECPT:
-> > 
-> >    => efidebug ecpt
-> >    cce33c35-74ac-4087-bce7-8b29b02eeb27  EFI EBBR 2.1 Conformance Profile
-> > 
-> > Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> >   cmd/efidebug.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 49 insertions(+)
-> > 
-> > diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-> > index 109496d9e95..672214a54b7 100644
-> > --- a/cmd/efidebug.c
-> > +++ b/cmd/efidebug.c
-> > @@ -533,6 +533,47 @@ static int do_efi_show_defaults(struct cmd_tbl *cmdtp, int flag,
-> >   	return CMD_RET_SUCCESS;
-> >   }
-> > +#if CONFIG_IS_ENABLED(EFI_ECPT)
-> > +/**
-> > + * do_efi_show_ecpt() - show UEFI conformance profiles in ECPT
-> > + *
-> > + * @cmdtp:	Command table
-> > + * @flag:	Command flag
-> > + * @argc:	Number of arguments
-> > + * @argv:	Argument array
-> > + * Return:	CMD_RET_SUCCESS on success,
-> > + *		CMD_RET_USAGE or CMD_RET_FAILURE on failure
-> > + *
-> > + * Implement efidebug "ecpt" sub-command.
-> > + * Show all the UEFI Conformance Profiles listed in the EFI Conformance Profiles
-> > + * Table (ECPT).
-> > + */
-> > +static int do_efi_show_ecpt(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +			    char *const argv[])
-> > +{
-> > +	const struct efi_conformance_profiles_table *ecpt;
-> > +	u16 n;
-> > +
-> > +	if (argc != 1)
-> > +		return CMD_RET_USAGE;
-> > +
-> > +	ecpt = efi_get_configuration_table(&efi_ecpt_guid);
-> > +	if (!ecpt) {
-> > +		log_info("ECPT: table not present\n");
+> From: Rafał Miłecki <rafal@milecki.pl>
 > 
-> This looks like an error situation. Should this be:
+> I found flash_write_buf() somehow more difficult to follow than needed.
+> Some code turned out to be inconsistent and some not really needed.
 > 
-> 	log_err("ECPT table missing\n");
-
-Ok, I will change this as you suggest and send a v2, returning CMD_RET_FAILURE,
-then.
-
-Note that I did hesitate and finally opted to replicate what
-do_efi_capsule_esrt() was doing, but I think reporting an error as you suggest
-makes more sense as we know that we should have an ECPT when CONFIG_EFI_ECPT=y.
-
+> There is a set of 6 patches that should be small enough to make them easy
+> to review. I was wondering if I should squash patches 5 and 6 but ended up
+> with sending two smaller diffs.
 > 
-> > +		return CMD_RET_SUCCESS;
-> > +	}
-> > +
-> > +	for (n = 0; n < ecpt->number_of_profiles; n++) {
-> > +		const efi_guid_t *guid = &ecpt->conformance_profiles[n];
-> > +
-> > +		printf("%pUl  %s\n", guid->b,
-> > +		       uuid_guid_get_str(guid->b) ?: "(unknown)");
-> 
-> Isn't the following enough:
-> 
-> 	printf("%pUs\n");
-> 
-> %pUs:   GUID text representation if known or fallback to %pUl
+> [...]
 
-For this printing change I am not so sure; this is inspired from
-efi_show_tables()'s behaviour and the intention is to have the following
-outputs, depending on whether we know the GUID or not:
+Applied to u-boot/next, thanks!
 
-     cce33c35-74ac-4087-bce7-8b29b02eeb27  EFI EBBR 2.1 Conformance Profile
-  or cce33c35-74ac-4087-bce7-8b29b02eeb27  (unknown)
+[1/6] fw_env: use "erasesize" variable in writing loop
+      commit: 1197954d5896f431716a61b4242c98c336753948
+[2/6] fw_env: allocate buffer of proper size in flash_write_buf()
+      commit: d80d88cb87d7f291c7abc9168d69f30f994b852f
+[3/6] fw_env: add ROUND_UP() helper
+      commit: 2f28f4116a173891f5c88e1ae3de374241bb1121
+[4/6] fw_env: unify calculation of "blockstart" in flash_write_buf()
+      commit: 1d175b2108d7e0aa74a182ac1ebde58a4f129371
+[5/6] fw_env: move "erasesize" calculation up in a code
+      commit: ffd8024efcb9868b654b319b29949347e6fe92ef
+[6/6] fw_env: drop unneeded variables from flash_write_buf()
+      commit: 667fa1a1cd52abe8f96ce903d58322b7b126d9ea
+-- 
+Tom
 
-With the change you suggest, we would have:
 
-     EFI EBBR 2.1 Conformance Profile
-  or cce33c35-74ac-4087-bce7-8b29b02eeb27
-
-I think I prefer the original solution, as it more in line with `efidebug
-tables' and it always shows the GUID in numerical form, but let me know if you
-insist, in which case I will send a v3 with this change as well.
-
-> 
-> Best regards
-> 
-> Heinrich
-> 
-> > +	}
-> > +
-> > +	return CMD_RET_SUCCESS;
-> > +}
-> > +#endif /* CONFIG_IS_ENABLED(EFI_ECPT) */
-> > +
-> >   static const char * const efi_mem_type_string[] = {
-> >   	[EFI_RESERVED_MEMORY_TYPE] = "RESERVED",
-> >   	[EFI_LOADER_CODE] = "LOADER CODE",
-> > @@ -1586,6 +1627,10 @@ static struct cmd_tbl cmd_efidebug_sub[] = {
-> >   			 "", ""),
-> >   	U_BOOT_CMD_MKENT(defaults, CONFIG_SYS_MAXARGS, 1, do_efi_show_defaults,
-> >   			 "", ""),
-> > +#if CONFIG_IS_ENABLED(EFI_ECPT)
-> > +	U_BOOT_CMD_MKENT(ecpt, CONFIG_SYS_MAXARGS, 1, do_efi_show_ecpt,
-> > +			 "", ""),
-> > +#endif
-> >   	U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_show_images,
-> >   			 "", ""),
-> >   	U_BOOT_CMD_MKENT(memmap, CONFIG_SYS_MAXARGS, 1, do_efi_show_memmap,
-> > @@ -1680,6 +1725,10 @@ U_BOOT_LONGHELP(efidebug,
-> >   	"  - show UEFI handles\n"
-> >   	"efidebug defaults\n"
-> >   	"  - show default EFI filename and PXE architecture\n"
-> > +#if CONFIG_IS_ENABLED(EFI_ECPT)
-> > +	"efidebug ecpt\n"
-> > +	"  - show conformance profiles in the ECPT\n"
-> > +#endif
-> >   	"efidebug images\n"
-> >   	"  - show loaded images\n"
-> >   	"efidebug memmap\n"
-> 
