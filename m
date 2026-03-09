@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC59EA852F
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 01:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7143BEA854D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 02:33:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25C658063E;
-	Mon,  9 Mar 2026 02:13:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7902B8063E;
+	Mon,  9 Mar 2026 03:33:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W6Iz4qM8";
+	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="LgUFo6Nh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE98E807C0; Mon,  9 Mar 2026 02:13:20 +0100 (CET)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id D0010807C0; Mon,  9 Mar 2026 03:33:18 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B106B80517
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 02:13:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43A6480517
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 03:33:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-82976220e97so2507521b3a.3
- for <u-boot@lists.denx.de>; Sun, 08 Mar 2026 18:13:18 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=0x0f.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-3598cab697eso4731581a91.1
+ for <u-boot@lists.denx.de>; Sun, 08 Mar 2026 19:33:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773018797; x=1773623597; darn=lists.denx.de;
+ d=0x0f.com; s=google; t=1773023593; x=1773628393; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/nxzwx4okgtdohLyQJzNTczOKIob77tfoZmvLoyVaEg=;
- b=W6Iz4qM8SnUZc1CweouR2t3IYuQBPQxPL9rsaRy+4uYVTFgH9OGSEJh9JVrP2MdsF2
- JUzkRf8LujdD+5VK3rxzO36a8BceggVgKfR8umRFyq99CNRHqG1ztnQGHc2fLwyFk4/x
- AIeJ9bGJlewMYraSL+h8yUS1pTXCQ6pBxKpcjOUpluOGp8h8/vJzootFH/4RGe3gx+Gk
- w/lskxPMijGmi81EYOEJ4/swHLXMj3ezAO9Wg+raKpufSsV7CYIP17dRsfcoDtywW1AQ
- DmdQCy+6elsJnBVMgSjba+EH8OdR/riS5qTpi3PtxPI7MkFXEv4eEbnqh+sc5PalVBUO
- PKQw==
+ bh=Tr0GZ6OYcnyElUR8KXyH//zJbM8C3Lpxzg5eES+9eh0=;
+ b=LgUFo6NhOw/bwXZopg+olQlrCydPLA+FwdpTtUGJEQZ5PuvfTM9VZ8LSJ0dVbs6rrp
+ ClFR6Kt5sHPcYYabMyQ3ykl+r4qO5nZ6pj606Yh0K0qwFBx4zHyiH9nBDObmxaVvtGsS
+ wvqYrweFhJB0QGEXyox+e8DS/r/F6cqn1EmVM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773018797; x=1773623597;
+ d=1e100.net; s=20230601; t=1773023593; x=1773628393;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/nxzwx4okgtdohLyQJzNTczOKIob77tfoZmvLoyVaEg=;
- b=jH+i4jpDKTmbooInaCn2IFTkTeAntpIrlCQTyU38lebXSkGBmWe/2ye7sAozbmmwqo
- 1IGMgKZ92jj2Ngpskif8fLtUFzfdVM/O42ofb6WV581GufKvPyBvsPcn5pYKYD0wjOBk
- eEXGWqZdrnS0YS+14kN9G6kYWxgXywByKZdtMCpZA73dfrrc0rICsSLzo17tkuMPAjLb
- h7BJEVHdm7GMdtxuGmMnF1jOtRj/MbjY06NqPJuQpQzOTiCzjga8TFNu266SNoRNy6aj
- J4+SXzbzaCblaY2yhgknI6j/JnHpFRQND9XKJuz9JTqAxekVsvstvUHOJEbEELmHCGkn
- TjJw==
-X-Gm-Message-State: AOJu0Yz+T7tycmhcPZemwjVqAg+WQaWlPLyHZ7b3BJtfSf+7N5/P8Gt6
- Uy8m9CknUR7DlnX9l5q5sz0a9keJWepubglhvK9ID8HS3MR8aNEQbuPS/JvMxg==
-X-Gm-Gg: ATEYQzw1RjNInrjs2rlOa/YukqTFpKgA6ie8gl2mergeEmyv3GmspKD+gaA9qU1G3jR
- XFjrGTp39wFlLlBkLgiVQlOxAFsbMNu1G23U8TrwIOq/Z5FAwTBBbkFVY9zJuyfG28l5q/VM8+H
- eXmCvAR6AiED8eqX61hwVdmqbuOU+wesAowZ+cJIvaFXqjQ0hNYHwHmrvFUk3Lto8Cod2Z3n8Jx
- OkR3AWMulBImNCcedwMCsUGQNwpQOBYLKMcSU9mQ0CHv7Go02v5IsVvGgjXofIlyVfJfc8MVC0r
- K99h1oAN3QGBHgDbBP2u+MxAj4Rjfqk82/G7BnqGKqOzhegzc0yx58z61Hkpf/ISA0JU7iqKooW
- ofw52SfWwQml15a/GT2ctp7II37hai2O+F3WguWD5PDLMjq8KU7f6sEF8BgElmEo0Gr39cnmt0D
- 4jmvf0VzK6zv8dFW21S0bz4SBm7MPZJBY07jdNrPoV5LOnaY9rMmm35h0f9PGgQ3pmMbNoEXfJx
- mnmxEJa0xw/D+3O0cg=
-X-Received: by 2002:a05:6a00:2d89:b0:81f:3c34:fa83 with SMTP id
- d2e1a72fcca58-829a2fa6b84mr7775231b3a.57.1773018797063; 
- Sun, 08 Mar 2026 18:13:17 -0700 (PDT)
-Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-829a4866763sm8312064b3a.38.2026.03.08.18.13.14
+ bh=Tr0GZ6OYcnyElUR8KXyH//zJbM8C3Lpxzg5eES+9eh0=;
+ b=QnrOiuOnmt/ud99eQgiwkZSfvr19pyT7m1tAqUGxyztTfvqcuvVk6CJl4pN+ukr2Yc
+ rc8erPpr5jScidN8kSrl39uTyUrchhcydlj8i8dQO4zabCD2eyZgsQBssGOnLJPbUSTq
+ 4oGVMawfL677NYgvFZTCf8NzerKS0PhCyXYrFOtDovn52WdSsBvQbhqQ2gFqSffr1SvB
+ 4/hK3LGKHtC+u4LC6rfwpIDdSiVdhlPWBz+sx5tvLmY+hTkFZpaQwlf83GIC3b7yBdoR
+ 1vIjKsLWT4DquVCGnAabC7WOqsFIJbOtQCv4q5TSOAIb1qsncYvVUTb+H7d2C9H4cFvY
+ IGLg==
+X-Gm-Message-State: AOJu0Yybj2m50RU/krcsOsJUxp4+bUbJFMTQoTKsG3bOBw7QsLlOl+gG
+ BhIwo6TrFUdb3aiv8ekxeZMTzXt+pusAA2i+QKWI5j8bdZwIV0hg8tchI6ZVxgW3+nE=
+X-Gm-Gg: ATEYQzxwV1Oyz6miL2v8xx23yeTTBWZ7RqqjM2sntBt6UyJsPyRZ7vDXcE4BWDlBdUG
+ B+TxxQ3l43hw5VmhOE/R9jHVTbK+siJ+2kb5KSmYTtHNnvmQxd7LnR6+uJdxuXcYbxlU4rNoLT9
+ gTdl46kZ/HJCxIYnvh/wy+k/cRNBAzpsMkxHMfHL0GWUJhjdKvvXJ3/9KamOteEbSyHQzXRcVfj
+ EKP/aG9SbS62rwre2O6Q6VNcp8/iB/VH5HvtGtRxdazGqwFlbdanHSHRXNX0ISs7GUW/t7kymHO
+ M5LbpV802jYQIQML7cLBdNJYIPgC5ER9U57ExQrNRiHVyy8j7xpHgOpWd/2eFBhKFv1tH3DKvvA
+ 8MQ4wTXJq9Is/qfts0eO7JcSVnbVgnZMLx3O1CmNCiQSzXbuFb/6x/6uU5bC7tsphnnogxT0xsT
+ fSKbwQDn6WXmQd25pqt9o4VtLgQ3a3GMPdcyUg1qDM1XnBUiEXkHNAZ7H0Tf1gJErVCiUOE7sSc
+ fPR
+X-Received: by 2002:a17:90b:1dcb:b0:359:85b0:4023 with SMTP id
+ 98e67ed59e1d1-359be394911mr7475029a91.16.1773023593339; 
+ Sun, 08 Mar 2026 19:33:13 -0700 (PDT)
+Received: from shiro (p1766150-ipxg00e01sizuokaden.shizuoka.ocn.ne.jp.
+ [153.167.218.150]) by smtp.googlemail.com with ESMTPSA id
+ 98e67ed59e1d1-359bbbaf51bsm4637689a91.1.2026.03.08.19.33.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Mar 2026 18:13:16 -0700 (PDT)
-From: tkuw584924@gmail.com
-X-Google-Original-From: Takahiro.Kuwano@infineon.com
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
- miquel.raynal@bootlin.com, mwalle@kernel.org, pratyush@kernel.org,
- marek.vasut+renesas@mailbox.org, Bacem.Daassi@infineon.com,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH] MAINTAINERS: update SPI NOR reviewer
-Date: Mon,  9 Mar 2026 10:12:51 +0900
-Message-ID: <20260309011251.11462-1-Takahiro.Kuwano@infineon.com>
-X-Mailer: git-send-email 2.43.0
+ Sun, 08 Mar 2026 19:33:13 -0700 (PDT)
+From: Daniel Palmer <daniel@0x0f.com>
+To: visitorckw@gmail.com
+Cc: u-boot@lists.denx.de,
+	Daniel Palmer <daniel@0x0f.com>
+Subject: [PATCH] serial: goldfish: Add DEBUG_UART support
+Date: Mon,  9 Mar 2026 11:32:34 +0900
+Message-ID: <20260309023234.640209-1-daniel@0x0f.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,29 +92,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Add debug support for the goldfish tty so it can be used for
+early debugging. This will be really useful when adding support
+for relocation etc.
 
-Tudor Ambarus will step down as SPI NOR reviewer.
-I would like to take this role.
-
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Signed-off-by: Daniel Palmer <daniel@0x0f.com>
 ---
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ doc/board/emulation/qemu-m68k.rst | 10 ++++++++++
+ drivers/serial/Kconfig            |  8 ++++++++
+ drivers/serial/serial_goldfish.c  | 18 ++++++++++++++++++
+ 3 files changed, 36 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 920da147e6c..d2040fee252 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1754,7 +1754,7 @@ F:	drivers/mtd/nand/spi/
+diff --git a/doc/board/emulation/qemu-m68k.rst b/doc/board/emulation/qemu-m68k.rst
+index 6c4de54cf6a8..2f2e6bd6444a 100644
+--- a/doc/board/emulation/qemu-m68k.rst
++++ b/doc/board/emulation/qemu-m68k.rst
+@@ -31,6 +31,16 @@ The minimal QEMU command line to get U-Boot up and running is:
+ Note that the `-nographic` option is used to redirect the console to stdio,
+ which connects to the emulated Goldfish TTY device.
  
- SPI-NOR
- M:	Vignesh R <vigneshr@ti.com>
--R:	Tudor Ambarus <tudor.ambarus@linaro.org>
-+R:	Takahiro Kuwano <takahiro.kuwano@infineon.com>
- S:	Maintained
- F:	drivers/mtd/spi/
- F:	include/spi_flash.h
++Debugging U-Boot
++----------------
++
++If you need early debugging output enable `CONFIG_DEBUG_UART_GOLDFISH`.
++The base address for the UART can be found by activating the QEMU monitor,
++running `info qtree`, and then looking for the goldfish tty device and
++taking the mmio address.
++
++Baud rate doesn't matter.
++
+ Hardware Support
+ ----------------
+ The following QEMU virt peripherals are supported in U-Boot:
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index b84cb9ec781d..f6a696e6c94c 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -510,6 +510,14 @@ config DEBUG_UART_XTENSA_SEMIHOSTING
+ 	  start up driver model. The driver will be available until the real
+ 	  driver model serial is running.
+ 
++config DEBUG_UART_GOLDFISH
++	bool "Goldfish TTY"
++	help
++	  Select this to enable the debug UART using the Goldfish TTY driver.
++	  This provides basic serial output from the console without needing to
++	  start up driver model. The driver will be available until the real
++	  driver model serial is running.
++
+ endchoice
+ 
+ config DEBUG_UART_BASE
+diff --git a/drivers/serial/serial_goldfish.c b/drivers/serial/serial_goldfish.c
+index 4ac2cfb62315..58c494918786 100644
+--- a/drivers/serial/serial_goldfish.c
++++ b/drivers/serial/serial_goldfish.c
+@@ -115,3 +115,21 @@ U_BOOT_DRIVER(serial_goldfish) = {
+ 	.priv_auto = sizeof(struct goldfish_tty_priv),
+ 	.flags	= DM_FLAG_PRE_RELOC,
+ };
++
++#ifdef CONFIG_DEBUG_UART_GOLDFISH
++
++#include <debug_uart.h>
++
++static inline void _debug_uart_init(void)
++{
++}
++
++static inline void _debug_uart_putc(int ch)
++{
++	void *base = (void *)CONFIG_DEBUG_UART_BASE;
++
++	__raw_writel(ch, base + GOLDFISH_TTY_PUT_CHAR);
++}
++
++DEBUG_UART_FUNCS
++#endif
 -- 
-2.43.0
+2.51.0
 
