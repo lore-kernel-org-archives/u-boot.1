@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D545FEA854A
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 03:08:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C20E6EA8542
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 03:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 585B18063E;
-	Mon,  9 Mar 2026 04:08:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52A728063E;
+	Mon,  9 Mar 2026 04:10:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Sa7ZLSKF";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Sa2kVHCB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07785839DF; Mon,  9 Mar 2026 04:08:51 +0100 (CET)
-Received: from mail-m49216.qiye.163.com (mail-m49216.qiye.163.com
- [45.254.49.216])
+ id A528A83A8C; Mon,  9 Mar 2026 04:10:48 +0100 (CET)
+Received: from mail-m49242.qiye.163.com (mail-m49242.qiye.163.com
+ [45.254.49.242])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B488080517
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 04:08:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 012A680517
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 04:10:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.60.65] (unknown [110.83.51.2])
- by smtp.qiye.163.com (Hmail) with ESMTP id 363091051;
- Mon, 9 Mar 2026 11:08:45 +0800 (GMT+08:00)
-Message-ID: <37b24dcd-f75b-4c74-a199-1a7d9a1dacd9@rock-chips.com>
-Date: Mon, 9 Mar 2026 11:08:45 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 36309128c;
+ Mon, 9 Mar 2026 11:10:43 +0800 (GMT+08:00)
+Message-ID: <e47c0f92-ebd9-4ec0-a420-6d3396ac161e@rock-chips.com>
+Date: Mon, 9 Mar 2026 11:10:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/12] rockchip: board: qnap-tsx33: add support for
- Qnap TS233 devices
-To: Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org,
- philipp.tomsich@vrull.eu
-Cc: trini@konsulko.com, u-boot@lists.denx.de
-References: <20260114082822.4007128-1-heiko@sntech.de>
- <20260114082822.4007128-13-heiko@sntech.de>
+Subject: Re: [PATCH] rockchip: Add support for Radxa E52C
+To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
+ jonas@kwiboo.se, heiko@sntech.de, christopher.obbard@linaro.org,
+ cnsztl@gmail.com, xuhui.lin@rock-chips.com
+References: <20260110011505.36915-1-naoki@radxa.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20260114082822.4007128-13-heiko@sntech.de>
+In-Reply-To: <20260110011505.36915-1-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9cd0918cda03afkunm0b6ba77e162d84e
+X-HM-Tid: 0a9cd093584503afkunm86a91966162e04f
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGUJDVh9DGUNITRlJTx5DGlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSktVQ0hVTkpVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGEgeVh5JHx0eTE5PQ01JTlYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSktVQ0hVTkpVSVlXWRYaDxIVHRRZQVlPS0hVSktISkpCTFVKS0tVSk
  JLS1kG
 DKIM-Signature: a=rsa-sha256;
- b=Sa7ZLSKF7xFMUwu6wxI0+98c3qLzdLGSvvxFFCgMIkFEDGn8OJAl8hV1zGtoegDczF/480KS7+qZ2SyrPB9moGVjozQN0KBOywKb5MAkD6ujvX1qqvLfgqz3LIl/fJWqsDdVmHTg34g9Fs9WaclXJgKSG5EP9e9hQrcxfFv9GN0=;
+ b=Sa2kVHCB+7Jd7JVioyaq3QGA3S4kLGkANVz5SBQbjhg3HjNjDkQXnzrD14UDA9sfegLefmIKHA26KTHv+GkOGBpAxDyZ4T7xA2Vsf3RaUSojFFrqofdFztRAKxfXnN4HOzqsWE9vldV4Lp4tAiw/EOn9yW3r2qYwYMQSGb7pqvw=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=8KFtVTCq9Ruic+EopWYoKOYtX7UeHT1X72VgMnaD8Jg=;
+ bh=uvinRqWuQIYQbEaQOL62Hws30Q38pyKo1uANG8vogVY=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,31 +71,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi Naoki,
 
-On 2026/1/14 16:28, Heiko Stuebner wrote:
-> The TS233 shares the same basic peripheral setup for
-> SoC, DDR, EMMC, 3 USB-ports, 1G network interface, SoC-SATA ports,
-> serial and maskrom access.
+On 2026/1/10 09:15, FUKAUMI Naoki wrote:
+> The Radxa E52C is a compact network computer developed by Radxa, based
+> on the Rockchip RK3582 SoC. [1]
 >
-> It could just share the same U-Boot binary with the TS433, and the type-
-> selection would take care of loading the right DTB for the operating
-> system. But right now we can't select the correct DTB for inside U-Boot
-> itself.
+> Specification:
+> - Dual Cortex-A76 and Quad Cortex-A55 cores
+> - 5TOPS NPU
+> - Up to 8GB LPDDR4x RAM
+> - Up to 64GB eMMC
+> - microSD card slot
+> - USB 3.0 Type-A OTG port
+> - USB Type-C debug port (USB-UART)
+> - USB Type-C power port (5V)
+> - 2x Gigabit Ethernet ports
+> - Maskrom and User buttons
+> - Aluminum alloy case
 >
-> So for the time being, add separate defconfig and documentation for it.
+> [1] https://dl.radxa.com/e/e52c/radxa_e52c_product_brief.pdf
 >
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 > ---
->   arch/arm/dts/rk3568-qnap-ts233-u-boot.dtsi |  6 ++
->   board/qnap/tsx33_rk356x/MAINTAINERS        |  2 +
->   board/qnap/tsx33_rk356x/board.c            |  4 +-
->   configs/qnap-ts233-rk3568_defconfig        | 85 ++++++++++++++++++++++
->   doc/board/qnap/ts233.rst                   | 37 ++++++++++
+> This patch depends on
+>   https://patchwork.ozlabs.org/project/uboot/patch/20260107230747.3552391-2-jonas@kwiboo.se/
+> ---
+>   arch/arm/dts/rk3582-radxa-e52c-u-boot.dtsi | 24 +++++++
+>   configs/radxa-e52c-rk3582_defconfig        | 77 ++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst            |  1 +
 
-checking consistency... 
-/builds/u-boot/custodians/u-boot-rockchip/doc/board/qnap/ts233.rst: 
-WARNING: document isn't included in any toctree
+WARNING: no maintainers for 'radxa-e52c-rk3582'
+
+Please fix this warning by CI system.
 
 
 Thanks,
