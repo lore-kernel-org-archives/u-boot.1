@@ -4,65 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D998F417F1
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 14:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC263F417EA
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 15:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BF2B83F14;
-	Mon,  9 Mar 2026 15:55:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0A63883BC7;
+	Mon,  9 Mar 2026 16:02:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yI6im1QQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0F8183F6E; Mon,  9 Mar 2026 15:55:00 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DE8C83A8C
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 15:54:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1773068097;
- bh=TxxXxhOGK9XkVx5kR3WAA68INJzp+bhrdrYfbdEiEeg=;
- b=yI6im1QQ7hQquYkCXs+4kGwZHQfMJOfAOO+nJFpiAzEFdib+nTJt8khkiNLkujRdR3q3cJytp
- OvdHISss/n93ByDdF90xK3sZbYluelOFufQAGQc6Bm2uxmcZ+rQwtybdgpxLlglW1IjfY/bfKcg
- c1pylumonHX/SINVMloAfKMtZlgRz9pGgJImfYeA0R7jlat4jCP1BDHwrQWB6OUSvH/X2MlTXPC
- htuzjsm9n2BnOuc1iUcyfQA7Plv7PXKe3CDE0UkuTH0NehL+aWV/7IpMSNeflgrt7BfWu83P4BD
- +ICX7jwuPivOPiubmwzcOLgepOpwAduPpeDdXL5+Le/Q==
-X-Forward-Email-ID: 69aedf3b160ae4b062452571
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.6.48
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <71e54f48-2827-4b16-9f16-cbfe97b6ec0d@kwiboo.se>
-Date: Mon, 9 Mar 2026 15:54:47 +0100
+ id 7D64483F14; Mon,  9 Mar 2026 16:02:16 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id CB86683A8C
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 16:02:12 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E02601570;
+ Mon,  9 Mar 2026 08:02:04 -0700 (PDT)
+Received: from debian (X72Y076X74-2.nice.arm.com [10.34.125.13])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3BE033F7BD;
+ Mon,  9 Mar 2026 08:02:10 -0700 (PDT)
+Date: Mon, 9 Mar 2026 16:02:07 +0100
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/4] cmd: efidebug: add ecpt command
+Message-ID: <aa7g7zd0L4SyDHt-@debian>
+Mail-Followup-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260305161349.2317130-1-vincent.stehle@arm.com>
+ <20260305161349.2317130-4-vincent.stehle@arm.com>
+ <a0d7e83b-1721-41c6-a416-cc88af49bb22@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/12] arch: arm: rockchip: Add initial support for
- RK3506
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>,
- Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de
-References: <20260131233843.3419737-1-jonas@kwiboo.se>
- <20260131233843.3419737-13-jonas@kwiboo.se>
- <9c1373b7-d577-4568-802c-95bf24974b94@rock-chips.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <9c1373b7-d577-4568-802c-95bf24974b94@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <a0d7e83b-1721-41c6-a416-cc88af49bb22@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,32 +62,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+On Mon, Mar 09, 2026 at 01:23:53PM +0100, Heinrich Schuchardt wrote:
 
-On 3/9/2026 3:40 PM, Kever Yang wrote:
+Hi Heinrich,
+
+Thanks for your review, I will send a v2 adding your first suggestion; more
+comments below.
+
+Best regards,
+Vincent.
+
+> On 3/5/26 17:13, Vincent Stehlé wrote:
+> > Add an "efidebug ecpt" command, to print the conformance profiles in the
+> > ECPT:
+> > 
+> >    => efidebug ecpt
+> >    cce33c35-74ac-4087-bce7-8b29b02eeb27  EFI EBBR 2.1 Conformance Profile
+> > 
+> > Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> >   cmd/efidebug.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
+> >   1 file changed, 49 insertions(+)
+> > 
+> > diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> > index 109496d9e95..672214a54b7 100644
+> > --- a/cmd/efidebug.c
+> > +++ b/cmd/efidebug.c
+> > @@ -533,6 +533,47 @@ static int do_efi_show_defaults(struct cmd_tbl *cmdtp, int flag,
+> >   	return CMD_RET_SUCCESS;
+> >   }
+> > +#if CONFIG_IS_ENABLED(EFI_ECPT)
+> > +/**
+> > + * do_efi_show_ecpt() - show UEFI conformance profiles in ECPT
+> > + *
+> > + * @cmdtp:	Command table
+> > + * @flag:	Command flag
+> > + * @argc:	Number of arguments
+> > + * @argv:	Argument array
+> > + * Return:	CMD_RET_SUCCESS on success,
+> > + *		CMD_RET_USAGE or CMD_RET_FAILURE on failure
+> > + *
+> > + * Implement efidebug "ecpt" sub-command.
+> > + * Show all the UEFI Conformance Profiles listed in the EFI Conformance Profiles
+> > + * Table (ECPT).
+> > + */
+> > +static int do_efi_show_ecpt(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +			    char *const argv[])
+> > +{
+> > +	const struct efi_conformance_profiles_table *ecpt;
+> > +	u16 n;
+> > +
+> > +	if (argc != 1)
+> > +		return CMD_RET_USAGE;
+> > +
+> > +	ecpt = efi_get_configuration_table(&efi_ecpt_guid);
+> > +	if (!ecpt) {
+> > +		log_info("ECPT: table not present\n");
 > 
-> On 2026/2/1 07:38, Jonas Karlman wrote:
->> Rockchip RK3506 is a ARM-based SoC with tri-core Cortex-A7.
->>
->> Add initial arch support for the RK3506 SoC.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org> # drivers/usb/gadget
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> This looks like an error situation. Should this be:
+> 
+> 	log_err("ECPT table missing\n");
 
-Thanks, I have made some minor changes to this series in my local tree,
-I will refresh and send a v3 of this series later today.
+Ok, I will change this as you suggest and send a v2, returning CMD_RET_FAILURE,
+then.
 
-Regards,
-Jonas
+Note that I did hesitate and finally opted to replicate what
+do_efi_capsule_esrt() was doing, but I think reporting an error as you suggest
+makes more sense as we know that we should have an ECPT when CONFIG_EFI_ECPT=y.
 
-> Thanks,
-> - Kever
->> ---
->> Changes in v2:
->> - Enable SPL_ARMV7_SET_CORTEX_SMPEN
->> - Drop read_brom_bootsource_id() now that default impl support 0x81
->> - Fix mac1 and otg1 access to ddr memory
->> - Collect a-b tag
+> 
+> > +		return CMD_RET_SUCCESS;
+> > +	}
+> > +
+> > +	for (n = 0; n < ecpt->number_of_profiles; n++) {
+> > +		const efi_guid_t *guid = &ecpt->conformance_profiles[n];
+> > +
+> > +		printf("%pUl  %s\n", guid->b,
+> > +		       uuid_guid_get_str(guid->b) ?: "(unknown)");
+> 
+> Isn't the following enough:
+> 
+> 	printf("%pUs\n");
+> 
+> %pUs:   GUID text representation if known or fallback to %pUl
 
-[snip]
+For this printing change I am not so sure; this is inspired from
+efi_show_tables()'s behaviour and the intention is to have the following
+outputs, depending on whether we know the GUID or not:
+
+     cce33c35-74ac-4087-bce7-8b29b02eeb27  EFI EBBR 2.1 Conformance Profile
+  or cce33c35-74ac-4087-bce7-8b29b02eeb27  (unknown)
+
+With the change you suggest, we would have:
+
+     EFI EBBR 2.1 Conformance Profile
+  or cce33c35-74ac-4087-bce7-8b29b02eeb27
+
+I think I prefer the original solution, as it more in line with `efidebug
+tables' and it always shows the GUID in numerical form, but let me know if you
+insist, in which case I will send a v3 with this change as well.
+
+> 
+> Best regards
+> 
+> Heinrich
+> 
+> > +	}
+> > +
+> > +	return CMD_RET_SUCCESS;
+> > +}
+> > +#endif /* CONFIG_IS_ENABLED(EFI_ECPT) */
+> > +
+> >   static const char * const efi_mem_type_string[] = {
+> >   	[EFI_RESERVED_MEMORY_TYPE] = "RESERVED",
+> >   	[EFI_LOADER_CODE] = "LOADER CODE",
+> > @@ -1586,6 +1627,10 @@ static struct cmd_tbl cmd_efidebug_sub[] = {
+> >   			 "", ""),
+> >   	U_BOOT_CMD_MKENT(defaults, CONFIG_SYS_MAXARGS, 1, do_efi_show_defaults,
+> >   			 "", ""),
+> > +#if CONFIG_IS_ENABLED(EFI_ECPT)
+> > +	U_BOOT_CMD_MKENT(ecpt, CONFIG_SYS_MAXARGS, 1, do_efi_show_ecpt,
+> > +			 "", ""),
+> > +#endif
+> >   	U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_show_images,
+> >   			 "", ""),
+> >   	U_BOOT_CMD_MKENT(memmap, CONFIG_SYS_MAXARGS, 1, do_efi_show_memmap,
+> > @@ -1680,6 +1725,10 @@ U_BOOT_LONGHELP(efidebug,
+> >   	"  - show UEFI handles\n"
+> >   	"efidebug defaults\n"
+> >   	"  - show default EFI filename and PXE architecture\n"
+> > +#if CONFIG_IS_ENABLED(EFI_ECPT)
+> > +	"efidebug ecpt\n"
+> > +	"  - show conformance profiles in the ECPT\n"
+> > +#endif
+> >   	"efidebug images\n"
+> >   	"  - show loaded images\n"
+> >   	"efidebug memmap\n"
+> 
