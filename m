@@ -4,88 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14C6FCA19E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 23:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B13FCC9A5
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 23:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23B2383BC8;
-	Tue, 10 Mar 2026 00:16:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D405F839DF;
+	Tue, 10 Mar 2026 00:49:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="deuSV7lZ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ezHRNNgq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4391683BC8; Tue, 10 Mar 2026 00:16:07 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7D64B83BC8; Tue, 10 Mar 2026 00:49:19 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5AED83981
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 00:16:00 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-40974bf7781so5239805fac.0
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 16:16:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773098159; x=1773702959; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xginW3BEDZ98qeB0VS45XicLu0LWaHM+dnnXtbueooE=;
- b=deuSV7lZbInP/nq2OC1td9hgDHmtM2NZyWblhxHn9MzmUpvfBAvJ2FSzh5m1BNJ2Ny
- eSz/DlZ8hpfxHcViiUca9R1XZU4NCVAalE49ZXhZO8bXZUQec7XKpiN8U9QAnmATKV0x
- ywMfOdOidcbdqziLT+oF9RODzBQZ+9JFspW1c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773098159; x=1773702959;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xginW3BEDZ98qeB0VS45XicLu0LWaHM+dnnXtbueooE=;
- b=WC83Ulg87Z3lKCm0jULMJ4qMYaDrqzjldO9bbHuUWBOpTzpUKGsVS4Hm8cEyUwtHnh
- XwV5GYppcdYI/6El11lAtZkSEcHS4bBzIn2ceRD5ucEWbLZf52dvajq1jqNxWKeKXEMC
- SPY+pY01SWA05+Z1qcFpuGq62MunH4+ygVwjYLGLf2xekJqjcH6FjFs2rOYqUXdIpZ4p
- CgtVp7Z6Xza67WsTixWCNSc3W4/QuI5dQKAR/9PAlg3DWbwnXhiXfnBRD85Kfmr76DK0
- kROzDKlAKhz/s+o1wuMmbC9khEjkUr+5i81kSpzLNzyR+2KQS9CWlnh8hWWXLXkFsi3j
- SyjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVVdEpBMe+ESqftjLWIYjJ6Gc7844fJWnVadyY5MXTWQJ7+ZP8jQcWTUnMUWan9jeH8E9ymnY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2/x3pFNrtptAKd0ztpxUcGk55Rv5LrXSIvsYWzCIL7YKlWbNt
- Xqm3WtvpxOoIs40fA89GRKeBYO0k3/JnxN+JwED47db0aaRk+CpNn6+WsyB6+cY2mqE=
-X-Gm-Gg: ATEYQzx64yxqjXvbrhsm1eNxVRufEkuplnLeZPj5eYvyzqj9EPMSpUtjRhKUXdoxP6H
- DXuB9l2MTgefFK6nEjfjX5EeMQwQ013hNlBB+q8GgKoZm/uQOfgWJnccI7m0grDNXGKTft0gFhk
- GjpZ+jvngmgmjc1TtfDH9nN6bQUmsiucfo49xYFtRiDOrI6priXL7Fw/eMlYt2wv0vJiEd+Lwee
- IhDfWR7h5Xczmu0uySoAsQldLs5ExHyxwUSsgzQlnUxakP3uznRqcveqR9GZy8bUaqwPM38ySde
- qBNr2BgNBhiQxCWFfzuhjVb583DHysyaT4OKhsAit84XkF534rIyIQU8JkvkcwOsZD85UssZVXE
- cqQrG/WPRCR0hIZyeye/ulGTcA9MaytbLuFWzVfhgXeZJqzQLMbLYa+2LKZvBY2oZ4n7axi8Q+U
- 7km4hIW2jkWBGESsfN9jgh10QPdhnZVxXIqwV0ntFz4jfo8M9XLmAn2oNOWBF0Njczirif2/hRQ
- 5qBf5fpcZP03jnoJv9WVBFac3e7qFdSQQv2fjJCqm37kg==
-X-Received: by 2002:a05:6870:a547:b0:3ff:46ad:271 with SMTP id
- 586e51a60fabf-41756aac408mr803373fac.23.1773098159222; 
- Mon, 09 Mar 2026 16:15:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41756e13565sm979667fac.18.2026.03.09.16.15.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 16:15:58 -0700 (PDT)
-Date: Mon, 9 Mar 2026 17:15:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Moteen Shah <m-shah@ti.com>
-Cc: "Kumar, Udit" <u-kumar1@ti.com>, u-boot@lists.denx.de,
- m-chawdhry@ti.com, n-francis@ti.com, vigneshr@ti.com, gehariprasath@ti.com
-Subject: Re: [PATCH] configs: j722s_evm_a53_defconfig: Allow configurability
- of MMCSD speeds
-Message-ID: <20260309231556.GA897647@bill-the-cat>
-References: <20260220072515.143720-1-m-shah@ti.com>
- <08cfa2f8-8fd5-4e82-91f1-7e73d80b8406@ti.com>
- <aaf3f58d-05f9-4b4c-913d-18fe2935279f@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 11B7683981
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 00:49:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1773100156;
+ bh=MN8cyK24mvLkqh9Eh8hbnvYXLYFRMDCap63nqYQh7Wo=;
+ b=ezHRNNgq7JYxEoI3r5PjmnrxdRow0jwrdh+IZcU+X8Ilrx3e7FCnPGVvdb9sm+c1NTHgwmDtQ
+ 1+PmFG38jC+Ij7mkrAEcoVVg9OA7Xwu+iKaVPfgZKaoeZRPggphKqJjBcF0cN8ksU+e6ESVLwRR
+ ec9XjhXdVESFO7HMwALrfGtX8c0zwtk6CYCVJ6fkuDV+wJPKUrxgsboQ2jBdehSeb7W8OReQzXh
+ f+Qond9XTXc2mkZtae8v8QqQMnJIy6OJm0d5iBTCD+0bHDOxjb9s5iOixWreXy9tX20lfg3W4l4
+ 09q9M9GhI/V+piaLKtQehT+vxK0C8EuQmh9HtBIiyN+A==
+X-Forward-Email-ID: 69af5c78dfcb1badc6a63b35
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.73
+X-Forward-Email-Version: 2.6.49
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <5817be80-5f5e-4cde-a6d5-006f2d711ef1@kwiboo.se>
+Date: Tue, 10 Mar 2026 00:49:08 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IAnUdzU8Rc+IFX9h"
-Content-Disposition: inline
-In-Reply-To: <aaf3f58d-05f9-4b4c-913d-18fe2935279f@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] board: rockchip: Add FriendlyElec NanoPi R76S
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Tianling Shen <cnsztl@gmail.com>, u-boot@lists.denx.de
+References: <20260108143551.4017839-1-jonas@kwiboo.se>
+ <20260108143551.4017839-3-jonas@kwiboo.se>
+ <d4e17b2d-ab26-400a-b49a-e054f54067d5@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <d4e17b2d-ab26-400a-b49a-e054f54067d5@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,64 +76,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---IAnUdzU8Rc+IFX9h
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 1/14/2026 5:52 PM, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 1/8/26 3:35 PM, Jonas Karlman wrote:
+>> The NanoPi R76S (as "R76S") is an open-sourced mini IoT gateway
+>> device with two 2.5G, designed and developed by FriendlyElec.
+>>
+>> Features tested on a NanoPi R76S 2411:
+>> - SD-card boot
+>> - eMMC boot
+>> - LEDs and button
+>> - PCIe/Ethernet
+>> - USB host
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   arch/arm/dts/rk3576-nanopi-r76s-u-boot.dtsi |  3 ++
+>>   arch/arm/mach-rockchip/rk3576/MAINTAINERS   |  6 +++
+>>   configs/nanopi-r76s-rk3576_defconfig        | 60 +++++++++++++++++++++
+>>   doc/board/rockchip/rockchip.rst             |  1 +
+>>   4 files changed, 70 insertions(+)
+>>   create mode 100644 arch/arm/dts/rk3576-nanopi-r76s-u-boot.dtsi
+>>   create mode 100644 configs/nanopi-r76s-rk3576_defconfig
+>>
+>> diff --git a/arch/arm/dts/rk3576-nanopi-r76s-u-boot.dtsi b/arch/arm/dts/rk3576-nanopi-r76s-u-boot.dtsi
+>> new file mode 100644
+>> index 000000000000..632fabb6af56
+>> --- /dev/null
+>> +++ b/arch/arm/dts/rk3576-nanopi-r76s-u-boot.dtsi
+>> @@ -0,0 +1,3 @@
+>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>> +
+>> +#include "rk3576-u-boot.dtsi"
+> 
+> I don't think that should be necessary?
 
-On Fri, Feb 20, 2026 at 03:17:37PM +0530, Moteen Shah wrote:
->=20
-> On 20/02/26 14:05, Kumar, Udit wrote:
-> >=20
-> > On 2/20/2026 12:55 PM, Moteen Shah wrote:
-> > > Add config to allow UHS support, in turn allowing to select
-> > > UHS speed modes for the SD card
-> > >=20
-> > > Signed-off-by: Moteen Shah <m-shah@ti.com>
-> > > ---
-> > > Test logs:
-> > > https://gist.github.com/Jamm02/e8b8b8c95cb62a7145d73f7ef50b2d8e
-> > >=20
-> > > =A0 configs/j722s_evm_a53_defconfig | 1 +
-> > > =A0 1 file changed, 1 insertion(+)
-> > >=20
-> > > diff --git a/configs/j722s_evm_a53_defconfig
-> > > b/configs/j722s_evm_a53_defconfig
-> > > index e84670c75ed..24ee293c803 100644
-> > > --- a/configs/j722s_evm_a53_defconfig
-> > > +++ b/configs/j722s_evm_a53_defconfig
-> > > @@ -107,6 +107,7 @@ CONFIG_MMC_SDHCI=3Dy
-> > > =A0 CONFIG_MMC_SDHCI_ADMA=3Dy
-> > > =A0 CONFIG_SPL_MMC_SDHCI_ADMA=3Dy
-> > > =A0 CONFIG_MMC_SDHCI_AM654=3Dy
-> > > +CONFIG_MMC_UHS_SUPPORT=3Dy
-> >=20
-> >=20
-> > you may need at A72/SPL stage as well,
->=20
-> Other J7 boards already have this config enabled in the a72 stage.
-> >=20
-> > and do you think , R5/SPL will need this too ?
->=20
-> Any of the K3 devices does not enables this in R5 SPL, though we do have
-> HS400 enabled in the R5 stage.
-> Adding the config should result in a little performance gain I think.
+You are correct, I have removed this file in v2.
 
-Is this a function of board design, or a SoC-level feature?
+> U-Boot should fallback to rj3576-u-boot.dtsi if there's no 
+> rk3576-nanopi-r76s-u-boot.dtsi, because SYS_SOC is rk3576 in 
+> arch/arm/mach-rockchip/rk3576/Kconfig and the wildcard list in 
+> u_boot_dtsi_options in scripts/Makefile.lib.
+> 
+> More comments below but they are definitely not blocker for merging this.
+> 
+>> diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+>> index 393edd3984ce..79cf9e97f70b 100644
+>> --- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+>> +++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+>> @@ -10,6 +10,12 @@ S:	Maintained
+>>   F:	arch/arm/dts/rk3576-nanopi-m5*
+>>   F:	configs/nanopi-m5-rk3576_defconfig
+>>   
+>> +NANOPI-R76S-RK3576
+>> +M:	Jonas Karlman <jonas@kwiboo.se>
+>> +S:	Maintained
+>> +F:	arch/arm/dts/rk3576-nanopi-r76s*
+>> +F:	configs/nanopi-r76s-rk3576_defconfig
+>> +
+>>   OMNI3576-RK3576
+>>   M:	Jonas Karlman <jonas@kwiboo.se>
+>>   S:	Maintained
+>> diff --git a/configs/nanopi-r76s-rk3576_defconfig b/configs/nanopi-r76s-rk3576_defconfig
+>> new file mode 100644
+>> index 000000000000..af149dc4ba56
+>> --- /dev/null
+>> +++ b/configs/nanopi-r76s-rk3576_defconfig
+>> @@ -0,0 +1,60 @@
+>> +CONFIG_ARM=y
+>> +CONFIG_SKIP_LOWLEVEL_INIT=y
+>> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+>> +CONFIG_COUNTER_FREQUENCY=24000000
+>> +CONFIG_ARCH_ROCKCHIP=y
+>> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-nanopi-r76s"
+>> +CONFIG_ROCKCHIP_RK3576=y
+>> +CONFIG_SYS_LOAD_ADDR=0x40c00800
+> 
+> Should we think about adding a default value for various Rockchip SoCs 
+> in root Kconfig for SYS_LOAD_ADDR?
 
---=20
-Tom
+Possible, I do not even know if this is a fully safe default for
+SYS_LOAD_ADDR or what will really use this addr, but it matches what is
+used by many other Rockchip boards.
 
---IAnUdzU8Rc+IFX9h
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+>> +CONFIG_DEBUG_UART_BASE=0x2AD40000
+>> +CONFIG_DEBUG_UART_CLOCK=24000000
+> 
+> Same here. I'm assuming there's a reference design most people are 
+> basing their HW on, so having a default DEBUG_UART_BASE common for the 
+> SoC makes sense (and we could even then have a comment specifying which 
+> UART controller that is). As for the clock speed, I'm wondering if we 
+> ever had something different than that. And also wondering if it's 
+> related (should be in sync?) with &uart0/clock-frequency?
 
------BEGIN PGP SIGNATURE-----
+Agree, there are some defaults that we could and probably should set on
+SoC level. And yes, there are multiple possible duplicated 24 MHz ref
+clocks in use for UART, e.g.: DEBUG_UART_CLOCK, &uart0/clock-frequency
+and CFG_SYS_NS16550_CLK. To my knowledge all Rockchip SoCs use a 24 MHz
+ref clock.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaa9UqAAKCRAr4qD1Cr/k
-CgirAQDvlGgG5WFRCB3NbCDwXYAwiO5Oy3gtHFBQWaCPfR8bXQD/XYDT4M5yGsVY
-Vix4uQYfIbi/cxedkJoj1v/IHK+mNQY=
-=bamM
------END PGP SIGNATURE-----
+> 
+>> +CONFIG_PCI=y
+>> +CONFIG_DEBUG_UART=y
+>> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-nanopi-r76s.dtb"
+>> +# CONFIG_DISPLAY_CPUINFO is not set
+> 
+> Why not :)?
 
---IAnUdzU8Rc+IFX9h--
+It requires asm/arch-rockchip/cru.h to have a soc specific #ifdef to
+make it work to print out and set a reset reason. Something I rather see
+being reworked to use sysresed uclass or similar than enable for "new"
+SoCs.
+
+> 
+>> +CONFIG_SPL_MAX_SIZE=0x40000
+>> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>> +CONFIG_CMD_MEMINFO=y
+>> +CONFIG_CMD_MEMINFO_MAP=y
+>> +CONFIG_CMD_ADC=y
+>> +CONFIG_CMD_GPIO=y
+>> +CONFIG_CMD_GPT=y
+>> +CONFIG_CMD_I2C=y
+>> +CONFIG_CMD_MISC=y
+>> +CONFIG_CMD_MMC=y
+>> +CONFIG_CMD_PCI=y
+>> +CONFIG_CMD_USB=y
+>> +# CONFIG_CMD_SETEXPR is not set
+>> +CONFIG_CMD_RNG=y
+>> +CONFIG_CMD_REGULATOR=y
+>> +# CONFIG_SPL_DOS_PARTITION is not set
+>> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>> +CONFIG_BUTTON=y
+>> +CONFIG_BUTTON_GPIO=y
+>> +CONFIG_ROCKCHIP_GPIO=y
+>> +CONFIG_SYS_I2C_ROCKCHIP=y
+>> +CONFIG_LED=y
+>> +CONFIG_LED_GPIO=y
+>> +CONFIG_SUPPORT_EMMC_RPMB=y
+>> +CONFIG_MMC_DW=y
+>> +CONFIG_MMC_DW_ROCKCHIP=y
+>> +CONFIG_MMC_SDHCI=y
+>> +CONFIG_MMC_SDHCI_SDMA=y
+>> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+>> +CONFIG_RTL8169=y
+>> +CONFIG_PCIE_DW_ROCKCHIP=y
+>> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+>> +CONFIG_PHY_ROCKCHIP_USBDP=y
+>> +CONFIG_DM_PMIC=y
+>> +CONFIG_PMIC_RK8XX=y
+>> +CONFIG_REGULATOR_RK8XX=y
+>> +CONFIG_BAUDRATE=1500000
+>> +CONFIG_DEBUG_UART_SHIFT=2
+>> +CONFIG_SYS_NS16550_MEM32=y
+> 
+> The two above also are always the same on Rockchip no?
+
+Yes, to my knowledge most reg access on RK is 32-bit based and should
+use readl/writel instead of readb/writeb.
+
+> 
+> By default, the expected baudrate is probably 1500000 on Rockchip, 
+> wondering if we shouldn't make that the default either?
+
+Agree, there are only a few SoCs/boards that 
+
+> 
+>> +CONFIG_SYSRESET_PSCI=y
+>> +CONFIG_USB=y
+>> +CONFIG_USB_XHCI_HCD=y
+>> +CONFIG_USB_DWC3=y
+>> +CONFIG_USB_DWC3_GENERIC=y
+>> +CONFIG_ERRNO_STR=y
+> 
+> I'm wondering whether we should think about setting WERROR on by default 
+> for new boards? What do you think?
+
+Sounds like a good idea but no other board in-tree seem to enable it.
+My local build script always injected -Werror using CFLAGS, but maybe
+better to enable CONFIG_WERROR.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
