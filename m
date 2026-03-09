@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D14FEFCA192
-	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 21:29:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B049FCA192
+	for <u-boot@archiver.kernel.org>; Mon,  9 Mar 2026 21:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D5AB83FA3;
-	Mon,  9 Mar 2026 22:29:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4875D83FC0;
+	Mon,  9 Mar 2026 22:29:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PQ7iPxjY";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="yHr0sFFO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AD7983F93; Mon,  9 Mar 2026 22:29:22 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 41DA883FA3; Mon,  9 Mar 2026 22:29:23 +0100 (CET)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA5B283F6E
- for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 22:29:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4EDA83A8C
+ for <u-boot@lists.denx.de>; Mon,  9 Mar 2026 22:29:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-46701f2077cso1429156b6e.0
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 14:29:19 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-41708f6c3feso1381935fac.3
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 14:29:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773091758; x=1773696558;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773091759; x=1773696559;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=QZ9YZm4dk81k1qLZagKtTjVfj1OWBCoaD1jVOn9POeU=;
- b=PQ7iPxjYwdeNqWSzLhipHPTmxI7watyfWNtioxBMWLEoNLTKzOT2LJkSkZ0YvGdPe0
- f3nmlSgcBPGAlX6Epj3bIMhfX2EeKoZoa63RrNg4tJ+9h0m7X7XrJJaKWTNXcV4YA+hf
- rk5C8bvCLPyMX4kGCkyX05V5khY2X37/9kjqF+nX5VwWwryZ44lvg3EBbkwsFv3GOMRT
- t+AP8IPnqCH/A7N5SxxulHiI41zWekRHSjYBFyyPyfOsJtr8YQEwpZrS0Id2uZ7lCAJ6
- IVGaZuBZCqh+PfR+0awKI61615tjdgfpsWWWN21WYmOKUXwgp+LFbUK3WkFJqPfn5+jU
- awEw==
+ :reply-to; bh=Dm5B+OoEm4wvnZuQcxNZ1ZjT5DMr55FX76jlnlM0ltM=;
+ b=yHr0sFFOl/+1nMhZt+aADr703SYQc2YFbHwzyA3+g8icd1m1OmxirmG05BeDrd+0fQ
+ uKffivPYBk9I4v6XjWoGgrvdf0aYdemLF3OxWyHejHNB1qMcdofuV+Jw4JQGjjNMvdPY
+ BA+ABkOFfqrloQZYHUQ1WQCSmJaJ9WZfb83LMUvHyRl5hKbm/Y6wTfeqzX8A5QXpWtNI
+ NPKmJY8BrcdRUo3jFA77/hrBVTcqlk5fnmxzrGEf1i++mxpzF3lctkpvD/q0ihp5OdQ/
+ s26H8/YBZst70QUESmVjXI+Vyx4tQeKHFfDW+o50ZyuVBlOhbY/YoPbba/Em6XKwZXyt
+ FNSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773091758; x=1773696558;
+ d=1e100.net; s=20230601; t=1773091759; x=1773696559;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=QZ9YZm4dk81k1qLZagKtTjVfj1OWBCoaD1jVOn9POeU=;
- b=O9a26r7Wqyt2j89wRbIH7stEpbJwsKeva+M16uTf8491hKodvBZYVNShWgbSOExrCE
- llFHDE7NX8sBTixp3NLMpbwhQJXhyyQ0c43Hmud5XXBpRZAxubx0F/+MkiIdNoHq328Q
- 30vHpEIakK9VbU0z3u5+MZardUDP6NJOPOdhWC675vpVF1tR04b1OVZd5V7XIskMoIcv
- 0DYC7yjJyFRtgcQGEz9A3R/YM2l/maKE5/TjT4yyyKoWenqZ7WKYgY3r1LByxuXiVL9a
- xvPZxwRsCTqQK/fonS119a9sPDzENS52ER5apLhhm3G/sbJnNcDQqRTZE740HPwCmYMD
- gONA==
+ bh=Dm5B+OoEm4wvnZuQcxNZ1ZjT5DMr55FX76jlnlM0ltM=;
+ b=Sc4dIV/hnQyzctBOvlG/oxUf8hfDfQ6AmqBHSba1BMjXZWXp3IcCU8cyhKBt1w9bMQ
+ 1JU5hrNeXi4Gz2/klAw0/IFPByVREajvaJ7+bIkH9BvP7ECdlhO0d3YEjl9EyTy09OKo
+ 1p6wom3Bu4Td76+rDOwjtIrcCOrjTfkfE4If359Rkx5oxS/4PBbCbfgFgYmBoJAynvCd
+ cGjSRHHd2vVMmqcDliVxNrAhevBbLGPxoLK5Fn6EfrTXohiEwEg7OtIanH3Abd524AWn
+ JXN0LXXDpiLD/1oads1O9kAYalcpBFwCjWxnZhPzkZNfMdXNBKneeGLNl7bj/oAkTgpF
+ E3og==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2AvetrPEbJTJz4zhMg0vQzY2kKRKd1d3VAB29JqqJra/75vfP46+QWCejHfqSjDYCVNEzUdI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4z5Wz1EQE+R0yBypHhl90gPZLofNubntBpPud9FZE8//UpR5e
- jtIlwLHOxqjw9nNdjugddjfuhJV5vo0lFifSKuDKRS3YSUkdqrDmQpFUQvaCTcEb7FgmI+d8o48
- O2xAH
-X-Gm-Gg: ATEYQzxnp1NfWCjFIb0/Sz7DKolxz5NA1r7bOIwEdHZmkay8w9bpUooFMrskGhG4Bew
- wTi2CozmjsPQt4OqzqWJKYBe+ilA+/o/83mJqgTxW9hw0fAApm7rUEoVvwwQ7767aSPMe7MyPwq
- 7J4DQQ+YSVG+fADtgl+ajx7F0TJlQW/PJvviCleMy2t04FiFp/Ouz82Po64kUYksqFO3o+2hGsj
- /O7Hz43PP4X8xCXVFW4xnxv3bbO3Z5qUREWW51ep4LTc7yizVftpMq9ouRO02wCxbW2HNUfXBrx
- oPhGpIkwYa8gtA57FB3KjPaAK0ksI0JgC32iSdYI8VoWTmJk7ZYdDXxVIoyVqe41/gFCb+RJLO/
- VAbwZ8KTbz5r3TeUnXOeiWEvcqMgnyA+KDzI4H6Exfk+N+rC+SD9/R511qvsop+ikUABiA6wweY
- 97946bRQpXFBsQd+F4tj9CaeSdwA==
-X-Received: by 2002:a05:6870:e185:b0:417:3b22:6ba3 with SMTP id
- 586e51a60fabf-417569805dcmr679908fac.14.1773091758358; 
- Mon, 09 Mar 2026 14:29:18 -0700 (PDT)
+ AJvYcCW8S3UOz37TnCsu4iUzMS/OGreaKT4ZjznV3/bAGUA1RBnN9Sw0SIw+E9kZ7tkkCbjOEqFu4fY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3G65IaA0prQyOsS2iW3P7t5J3oAFaEgLHF4apB7Uvh0qKoMgv
+ WCUG1eUkJU7edCJjtbQsGVoBb4FyUT/3JtS/zHyUSa19UmgTxqMvuVHUjc6QeSqKYZE=
+X-Gm-Gg: ATEYQzyA0IWIQ/Ki9+XTmcgIXbSEFGHEgffMztk2i/11s3L/Tuf+8UZo5jSDDGulIxN
+ AJgkSlMKJ5d0qv82mMf8ANHCSqo9vmkXc/maN47Qo1bID7T/LuuuEp3ciK1VzkOydCxjTqQSZpe
+ Q+elGgvNrRNHt5JXG6WH1OUFk+13P2dAFvKPbZzta6QKubXPBjfD3L4YLPiypoZjR+YEkeZdM5T
+ kZw5WITSKG7zAx9J+fiwz6IzbaiY58Xw23bfhJnZ/5eh3mvrzGRQicczektmZUFIfD8PV9oCoG0
+ gFQ8ebZgsffAFYLQqaQ4CzUxhj1vM2d+2h7HYBG2T3N70yytzDCI9OAt/NDS6igalY3M4e9ADEt
+ lNgkz1b8nE/Xw/nd7dNV2A96okLde/yeRs4odipdLNTyQjUlCgwfVax6fewclJl+eCM261/Dz+7
+ Vv0dWhnQmZA0SOt+L3nBFzgvMynA==
+X-Received: by 2002:a05:6871:7815:b0:409:7e70:299f with SMTP id
+ 586e51a60fabf-416e3e92452mr7293589fac.9.1773091759466; 
+ Mon, 09 Mar 2026 14:29:19 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:77:c35f:9c1b:c75f])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41756b47f0asm826221fac.8.2026.03.09.14.29.17
+ 586e51a60fabf-41756b47f0asm826221fac.8.2026.03.09.14.29.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 14:29:17 -0700 (PDT)
+ Mon, 09 Mar 2026 14:29:18 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 09 Mar 2026 16:27:37 -0500
-Subject: [PATCH v2 02/13] clk: mediatek: mt7981: convert to struct mtk_parent
+Date: Mon, 09 Mar 2026 16:27:38 -0500
+Subject: [PATCH v2 03/13] clk: mediatek: mt7987: convert to struct mtk_parent
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260309-clk-mtk-unify-mux-parents-v2-2-b084ea74b99d@baylibre.com>
+Message-Id: <20260309-clk-mtk-unify-mux-parents-v2-3-b084ea74b99d@baylibre.com>
 References: <20260309-clk-mtk-unify-mux-parents-v2-0-b084ea74b99d@baylibre.com>
 In-Reply-To: <20260309-clk-mtk-unify-mux-parents-v2-0-b084ea74b99d@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +90,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10479;
- i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=puz+6PLzPVxj8iI22uyQVakEoGluoFlcW1R4y8TyVpE=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBprztbYdoXI6uPFep8Odm9+h5o9a1f2drBtCUea
- YDMdXtI9o6JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaa87WxYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AU6YIAIrEtyIE5miL6So/FRWlGa5fySLNzUnAna9qSp0
- MnuqGl8Bk/w+fvi4qPnOflQl6OD0UPxZd0KGuxglgu3dwt8mDgmRvqPPvcieD42EFcbhKdMKQgh
- RnJ7uzEQqeiswEWzFStRDeszQ/4877Ag8JfogOeIP+gDR5ZuMmaLKGWNxW7cIVwes9BQNBobb6l
- 6VKTHmRVCU3wR3l9v/9vugO6y/F7CL05meBdpqePkTye7naOXH94n8hApxXEmRgw0LSunfXXhTO
- F2jwvdBMEo0YdyjVHC2S0ImeFUS6M56OoDlhUHs5Qx9MhWN4RPCjiKbC1JpSaj+F4ISEcD0q0pY
- FxqA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4557; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=eTvO262mzupBVbqqrvlIq7a0+T6S+caqJRFCXYJc2UY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBprzthx5qOfiS6/KEWaHEztY/tGpzmovzkf5Lt6
+ o2JLLEVOIeJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCaa87YRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ALXcH/28U3EiBVxWBRwntdCbCLxF8Yiut5hCRx953oRt
+ 0EPQypj0kvUKXxrdlRVERs6Ovj9//MWkp5fKMEdnqLGikod9W8nqpM6AjeN9anLFDzQ5Ea999O4
+ WQj5DHEdqtek1hIi2qFMgQI+G6b/XhbslUyksW+rrpbNDMeUekHu5y12uenx6rSSnSxYk9sP5Rc
+ VR223VUQXlgl6qOsxt+1q55KdhKiuzcPhn+vCQzYocBXhNt6cj/wW6B2E83xio5qAS3YZLwBw7B
+ DOusKehv5dLx+cRjlwsdB5FJVDiM9d381p4UEGsjgEJeyKBEuUOtwLZttE8UzY+xMejwbNxZKQT
+ ak0E=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -126,283 +125,122 @@ type for mux parent arrays.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7981.c | 226 +++++++++++++++++++++++++++-----------
- 1 file changed, 162 insertions(+), 64 deletions(-)
+ drivers/clk/mediatek/clk-mt7987.c | 71 ++++++++++++++++++++-------------------
+ 1 file changed, 36 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt7981.c b/drivers/clk/mediatek/clk-mt7981.c
-index 42c3741ce62..cdd9b9e4092 100644
---- a/drivers/clk/mediatek/clk-mt7981.c
-+++ b/drivers/clk/mediatek/clk-mt7981.c
-@@ -139,97 +139,194 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
+diff --git a/drivers/clk/mediatek/clk-mt7987.c b/drivers/clk/mediatek/clk-mt7987.c
+index e7b81a512de..5ae76a2c47a 100644
+--- a/drivers/clk/mediatek/clk-mt7987.c
++++ b/drivers/clk/mediatek/clk-mt7987.c
+@@ -480,63 +480,63 @@ U_BOOT_DRIVER(mtk_clk_topckgen) = {
+ /* INFRASYS MUX PARENTS */
+ 
+ /* CLK_INFRA_MUX_UART0_SEL (infra_mux_uart0_sel) in infracfg */
+-static const int infra_mux_uart0_parents[] = {
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_UART_SEL
++static const struct mtk_parent infra_mux_uart0_parents[] = {
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_UART_SEL),
  };
  
- /* TOPCKGEN MUX PARENTS */
--static const int nfi1x_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_MM_D4,
--				     CLK_TOP_NET1_D8_D2,  CLK_TOP_CB_NET2_D6,
--				     CLK_TOP_CB_M_D4,     CLK_TOP_CB_MM_D8,
--				     CLK_TOP_NET1_D8_D4,  CLK_TOP_CB_M_D8 };
-+static const struct mtk_parent nfi1x_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_MM_D4),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D2),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D6),
-+	TOP_PARENT(CLK_TOP_CB_M_D4),
-+	TOP_PARENT(CLK_TOP_CB_MM_D8),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D4),
-+	TOP_PARENT(CLK_TOP_CB_M_D8),
-+};
- 
--static const int spinfi_parents[] = { CLK_TOP_CKSQ_40M_D2, CLK_TOP_CB_CKSQ_40M,
--				      CLK_TOP_NET1_D5_D4,  CLK_TOP_CB_M_D4,
--				      CLK_TOP_CB_MM_D8,    CLK_TOP_NET1_D8_D4,
--				      CLK_TOP_MM_D6_D2,    CLK_TOP_CB_M_D8 };
-+static const struct mtk_parent spinfi_parents[] = {
-+	TOP_PARENT(CLK_TOP_CKSQ_40M_D2),
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D4),
-+	TOP_PARENT(CLK_TOP_CB_M_D4),
-+	TOP_PARENT(CLK_TOP_CB_MM_D8),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D4),
-+	TOP_PARENT(CLK_TOP_MM_D6_D2),
-+	TOP_PARENT(CLK_TOP_CB_M_D8),
-+};
- 
--static const int spi_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_M_D2,
--				   CLK_TOP_CB_MM_D4,    CLK_TOP_NET1_D8_D2,
--				   CLK_TOP_CB_NET2_D6,  CLK_TOP_NET1_D5_D4,
--				   CLK_TOP_CB_M_D4,     CLK_TOP_NET1_D8_D4 };
-+static const struct mtk_parent spi_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_M_D2),
-+	TOP_PARENT(CLK_TOP_CB_MM_D4),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D2),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D6),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D4),
-+	TOP_PARENT(CLK_TOP_CB_M_D4),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D4),
-+};
- 
--static const int uart_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_M_D8,
--				    CLK_TOP_M_D8_D2 };
-+static const struct mtk_parent uart_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_M_D8),
-+	TOP_PARENT(CLK_TOP_M_D8_D2),
-+};
- 
--static const int pwm_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D8_D2,
--				   CLK_TOP_NET1_D5_D4,  CLK_TOP_CB_M_D4,
--				   CLK_TOP_M_D8_D2,     CLK_TOP_CB_RTC_32K };
-+static const struct mtk_parent pwm_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D2),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D4),
-+	TOP_PARENT(CLK_TOP_CB_M_D4),
-+	TOP_PARENT(CLK_TOP_M_D8_D2),
-+	TOP_PARENT(CLK_TOP_CB_RTC_32K),
-+};
- 
--static const int i2c_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D5_D4,
--				   CLK_TOP_CB_M_D4, CLK_TOP_NET1_D8_D4 };
-+static const struct mtk_parent i2c_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D4),
-+	TOP_PARENT(CLK_TOP_CB_M_D4),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D4),
-+};
- 
--static const int pextp_tl_ck_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					   CLK_TOP_NET1_D5_D4, CLK_TOP_CB_M_D4,
--					   CLK_TOP_CB_RTC_32K };
-+static const struct mtk_parent pextp_tl_ck_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D4),
-+	TOP_PARENT(CLK_TOP_CB_M_D4),
-+	TOP_PARENT(CLK_TOP_CB_RTC_32K),
-+};
- 
--static const int emmc_208m_parents[] = {
--	CLK_TOP_CB_CKSQ_40M,   CLK_TOP_CB_M_D2,  CLK_TOP_CB_NET2_D4,
--	CLK_TOP_CB_APLL2_196M, CLK_TOP_CB_MM_D4, CLK_TOP_NET1_D8_D2,
--	CLK_TOP_CB_MM_D6
-+static const struct mtk_parent emmc_208m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_M_D2),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D4),
-+	TOP_PARENT(CLK_TOP_CB_APLL2_196M),
-+	TOP_PARENT(CLK_TOP_CB_MM_D4),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D2),
-+	TOP_PARENT(CLK_TOP_CB_MM_D6),
+ /* CLK_INFRA_MUX_UART1_SEL (infra_mux_uart1_sel) in infracfg */
+-static const int infra_mux_uart1_parents[] = {
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_UART_SEL
++static const struct mtk_parent infra_mux_uart1_parents[] = {
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_UART_SEL),
  };
  
--static const int emmc_400m_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_NET2_D2,
--					 CLK_TOP_CB_MM_D2, CLK_TOP_CB_NET2_D2 };
-+static const struct mtk_parent emmc_400m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D2),
-+	TOP_PARENT(CLK_TOP_CB_MM_D2),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D2),
-+};
+ /* CLK_INFRA_MUX_UART2_SEL (infra_mux_uart2_sel) in infracfg */
+-static const int infra_mux_uart2_parents[] = {
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_UART_SEL
++static const struct mtk_parent infra_mux_uart2_parents[] = {
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_UART_SEL),
+ };
  
--static const int csw_f26m_parents[] = { CLK_TOP_CKSQ_40M_D2, CLK_TOP_M_D8_D2 };
-+static const struct mtk_parent csw_f26m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CKSQ_40M_D2),
-+	TOP_PARENT(CLK_TOP_M_D8_D2),
-+};
+ /* CLK_INFRA_MUX_SPI0_SEL (infra_mux_spi0_sel) in infracfg */
+-static const int infra_mux_spi0_parents[] = {
+-	CLK_TOP_I2C_SEL,
+-	CLK_TOP_SPI_SEL
++static const struct mtk_parent infra_mux_spi0_parents[] = {
++	TOP_PARENT(CLK_TOP_I2C_SEL),
++	TOP_PARENT(CLK_TOP_SPI_SEL),
+ };
  
--static const int dramc_md32_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_M_D2,
--					  CLK_TOP_CB_WEDMCU_208M };
-+static const struct mtk_parent dramc_md32_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_M_D2),
-+	TOP_PARENT(CLK_TOP_CB_WEDMCU_208M),
-+};
+ /* CLK_INFRA_MUX_SPI1_SEL (infra_mux_spi1_sel) in infracfg */
+-static const int infra_mux_spi1_parents[] = {
+-	CLK_TOP_I2C_SEL,
+-	CLK_TOP_SPIM_MST_SEL
++static const struct mtk_parent infra_mux_spi1_parents[] = {
++	TOP_PARENT(CLK_TOP_I2C_SEL),
++	TOP_PARENT(CLK_TOP_SPIM_MST_SEL),
+ };
  
--static const int sysaxi_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D8_D2 };
-+static const struct mtk_parent sysaxi_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D2),
-+};
+ /* CLK_INFRA_MUX_SPI2_BCK_SEL (infra_mux_spi2_bck_sel) in infracfg */
+-static const int infra_mux_spi2_bck_parents[] = {
+-	CLK_TOP_I2C_SEL,
+-	CLK_TOP_SPI_SEL
++static const struct mtk_parent infra_mux_spi2_bck_parents[] = {
++	TOP_PARENT(CLK_TOP_I2C_SEL),
++	TOP_PARENT(CLK_TOP_SPI_SEL),
+ };
  
--static const int sysapb_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_M_D3_D2 };
-+static const struct mtk_parent sysapb_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_M_D3_D2),
-+};
+ /* CLK_INFRA_PWM_BCK_SEL (infra_pwm_bck_sel) in infracfg */
+-static const int infra_pwm_bck_parents[] = {
+-	CLK_TOP_CB_RTC_32P7K,
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_SYSAXI_SEL,
+-	CLK_TOP_PWM_SEL
++static const struct mtk_parent infra_pwm_bck_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_RTC_32P7K),
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_SYSAXI_SEL),
++	TOP_PARENT(CLK_TOP_PWM_SEL),
+ };
  
--static const int arm_db_main_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					   CLK_TOP_CB_NET2_D6 };
-+static const struct mtk_parent arm_db_main_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D6),
-+};
+ /* CLK_INFRA_PCIE_GFMUX_TL_O_P0_SEL (infra_pcie_gfmux_tl_ck_o_p0_sel) in infracfg */
+-static const int infra_pcie_gfmux_tl_ck_o_p0_parents[] = {
+-	CLK_TOP_CB_RTC_32P7K,
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_PEXTP_TL_SEL
++static const struct mtk_parent infra_pcie_gfmux_tl_ck_o_p0_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_RTC_32P7K),
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_PEXTP_TL_SEL),
+ };
  
--static const int ap2cnn_host_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					   CLK_TOP_NET1_D8_D4 };
-+static const struct mtk_parent ap2cnn_host_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D8_D4),
-+};
+ /* CLK_INFRA_PCIE_GFMUX_TL_O_P1_SEL (infra_pcie_gfmux_tl_ck_o_p1_sel) in infracfg */
+-static const int infra_pcie_gfmux_tl_ck_o_p1_parents[] = {
+-	CLK_TOP_CB_RTC_32P7K,
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_INFRA_F26M_SEL,
+-	CLK_TOP_PEXTP_TL_P1_SEL
++static const struct mtk_parent infra_pcie_gfmux_tl_ck_o_p1_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_RTC_32P7K),
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_INFRA_F26M_SEL),
++	TOP_PARENT(CLK_TOP_PEXTP_TL_P1_SEL),
+ };
  
--static const int netsys_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_MM_D2 };
-+static const struct mtk_parent netsys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_MM_D2),
-+};
- 
--static const int netsys_500m_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					   CLK_TOP_CB_NET1_D5 };
-+static const struct mtk_parent netsys_500m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_NET1_D5),
-+};
- 
--static const int netsys_mcu_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_MM_720M,
--					  CLK_TOP_CB_NET1_D4, CLK_TOP_CB_NET1_D5,
--					  CLK_TOP_CB_M_416M };
-+static const struct mtk_parent netsys_mcu_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_MM_720M),
-+	TOP_PARENT(CLK_TOP_CB_NET1_D4),
-+	TOP_PARENT(CLK_TOP_CB_NET1_D5),
-+	TOP_PARENT(CLK_TOP_CB_M_416M),
-+};
- 
--static const int netsys_2x_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					 CLK_TOP_CB_NET2_800M,
--					 CLK_TOP_CB_MM_720M };
-+static const struct mtk_parent netsys_2x_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_NET2_800M),
-+	TOP_PARENT(CLK_TOP_CB_MM_720M),
-+};
- 
--static const int sgm_325m_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					CLK_TOP_CB_SGM_325M };
-+static const struct mtk_parent sgm_325m_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_SGM_325M),
-+};
- 
--static const int sgm_reg_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_NET2_D4 };
-+static const struct mtk_parent sgm_reg_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_NET2_D4),
-+};
- 
--static const int eip97b_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_NET1_D5,
--				      CLK_TOP_CB_M_416M, CLK_TOP_CB_MM_D2,
--				      CLK_TOP_NET1_D5_D2 };
-+static const struct mtk_parent eip97b_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_NET1_D5),
-+	TOP_PARENT(CLK_TOP_CB_M_416M),
-+	TOP_PARENT(CLK_TOP_CB_MM_D2),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D2),
-+};
- 
--static const int aud_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_APLL2_196M };
-+static const struct mtk_parent aud_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_APLL2_196M),
-+};
- 
--static const int a1sys_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_APLL2_D4 };
-+static const struct mtk_parent a1sys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_APLL2_D4),
-+};
- 
--static const int aud_l_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_APLL2_196M,
--				     CLK_TOP_M_D8_D2 };
-+static const struct mtk_parent aud_l_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_APLL2_196M),
-+	TOP_PARENT(CLK_TOP_M_D8_D2),
-+};
- 
--static const int a_tuner_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_APLL2_D4,
--				       CLK_TOP_M_D8_D2 };
-+static const struct mtk_parent a_tuner_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_APLL2_D4),
-+	TOP_PARENT(CLK_TOP_M_D8_D2),
-+};
- 
--static const int u2u3_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_M_D8_D2 };
-+static const struct mtk_parent u2u3_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_M_D8_D2),
-+};
- 
--static const int u2u3_sys_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D5_D4 };
-+static const struct mtk_parent u2u3_sys_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_NET1_D5_D4),
-+};
- 
--static const int usb_frmcnt_parents[] = { CLK_TOP_CB_CKSQ_40M,
--					  CLK_TOP_CB_MM_D3_D5 };
-+static const struct mtk_parent usb_frmcnt_parents[] = {
-+	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
-+	TOP_PARENT(CLK_TOP_CB_MM_D3_D5),
-+};
- 
- #define TOP_MUX(_id, _name, _parents, _mux_ofs, _mux_set_ofs, _mux_clr_ofs,    \
- 		_shift, _width, _gate, _upd_ofs, _upd)                         \
-@@ -238,9 +335,10 @@ static const int usb_frmcnt_parents[] = { CLK_TOP_CB_CKSQ_40M,
- 		.mux_clr_reg = _mux_clr_ofs, .upd_reg = _upd_ofs,              \
- 		.upd_shift = _upd, .mux_shift = _shift,                        \
- 		.mux_mask = BIT(_width) - 1, .gate_reg = _mux_ofs,             \
--		.gate_shift = _gate, .parent = _parents,                       \
-+		.gate_shift = _gate,					       \
-+		.parent_flags = _parents,				       \
- 		.num_parents = ARRAY_SIZE(_parents),                           \
--		.flags = CLK_MUX_SETCLR_UPD,                                   \
+ #define INFRA_MUX(_id, _name, _parents, _reg, _shift, _width)                  \
+@@ -545,8 +545,9 @@ static const int infra_pcie_gfmux_tl_ck_o_p1_parents[] = {
+ 		.mux_clr_reg = (_reg) + 0x4, .mux_set_reg = (_reg) + 0x0,      \
+ 		.mux_shift = (_shift), .mux_mask = BIT(_width) - 1,            \
+ 		.gate_shift = -1, .upd_shift = -1,                             \
+-		.parent = (_parents), .num_parents = ARRAY_SIZE(_parents),     \
+-		.flags = CLK_MUX_SETCLR_UPD | CLK_PARENT_TOPCKGEN,             \
++		.parent_flags = (_parents),				       \
++		.num_parents = ARRAY_SIZE(_parents),			       \
 +		.flags = CLK_MUX_SETCLR_UPD | CLK_PARENT_MIXED,		       \
  	}
  
- /* TOPCKGEN MUX_GATE */
+ /* INFRA MUX */
 
 -- 
 2.43.0
