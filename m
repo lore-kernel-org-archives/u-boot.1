@@ -4,115 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BABBFD2D73
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 12:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC5AFD2D79
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 13:12:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABE9883F2A;
-	Tue, 10 Mar 2026 13:59:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8545283F2A;
+	Tue, 10 Mar 2026 14:12:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="fTDaf/YU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="od/xV4kW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F35BF83FDC; Tue, 10 Mar 2026 13:59:25 +0100 (CET)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id A05A083FA7; Tue, 10 Mar 2026 11:06:28 +0100 (CET)
+Received: from BL2PR02CU003.outbound.protection.outlook.com
+ (mail-eastusazlp17011000f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c100::f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CB6283981
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 13:59:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 113EC83981
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 11:06:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Pranav.VinayTilak@amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-kaur@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xe5Xf/zGxi76avsbCwLhBxV6L1oneBiOIHjSi6rGdGjkWxP8fOVClK++hpfLB4WII5uqPGccJkE0WtfQR3zlI4gcc7CMZeDTV2cJqc/GYvpt0RHxMgnjLt7bdNuOoB1tavGE6bXdry7pLfiT9Iiallj/chU2aACOQLymRoBu4pZd+OUVjdgz1CqTGq0ndVaH8Yu59OVWSwS+Zvqx6ORHb/mvJUYoP3RbFv1ZnOjJ9IpMIKUrR4HMIPJeasNm7c7k6dcI5L18qWWMrPAqpnBZrK6oJEIyjtnhehy8qnv7rwOP8o1OXq5bdlOpTsZmXbCKt9RfnUbyWJ8YESnGRrLuJA==
+ b=LKEp9axQeU++JzL3W/zuI8t+N0zXjTZAs0l/BIoB+TWHqvC0yE25iCQbX8EUtk1dnrcuEs8Qb2K25tJug3clWDNm9+w/jRO1kKWU6PUlmbaJW9jsyE6vXyc0F3EbyhPDmVBJDktrMsvHS0SHf/D2pigGiJ6onJ6I+AMql8VpIs/cNp7kZWSFL1icwJnbZNmbgSD1YgfFDJXUEBu2Ff/FAZyhSIaM+3bWX0wUdcy0GOqKF1ntymlPOYcren7z7RlrjryK37/L1B5AWhaObKmP/ZIkaz3fPbOUTkZZhX78DP5mqf9x7znEcEnw2KbrhEnSDmHjMQZook4z42sYqw7Njg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p+kpKq+uJDaq4MRQqZTdV+DU+5ZT1HmtiI5AFRhPl9g=;
- b=pkzsqz5ZrQWlr6NOMI9rpv8PvtuJVwC0eZhoA2GgXxLZF9WaOy8BgDudRPu9OQ4tBrH+QIxQGMJ7MZnP/+rcvkrT2/86Et75KQS/IJ5fAxtBTKLqEA9Zwn8WBhix+yF8Pu9FWQzRgAWhaROjJWtjHxEYy9o+cVNt8YyC5mAkwfZ0MzYh1J4CdcYUAWodOU1jbDKk5hkemJEw0VvBMlLi7Iuf/P/OTE62QaAOSJ0zoc2WnQvuP+iuTdO6bgnsQwWoCBCw0P6zCoscW3UHyFRmU3JbbX/wc0XCupoziptdquAYlEfcBRB6UyOJOnocfcUAVvm4/daKDZ3CymmBDFavCA==
+ bh=/tjQoMIHn1sbZxj+YjttcpPFs9am1dgtkn8m2jfnvUk=;
+ b=TXbkxTD9YwyFZtpM72ADOPy5cnY4N3Y93d2FUi3RFEp3VwwwI7nn13KtCX+BlbqF5SpGGvuLigfCnv0vtmkhIWYw6yOnAyMPLIKpJW7fcb7AyakCPLx9YgjXvHoy6mGGClQggylg4vutkgzWsKoDA1SI4oXQSrxZtl7qcdB5Fi1/DWKwOUVrM2OD/dJFp1DzbjSzUb/VEZxMqQj5sW4omahnC4An8KLdhcAz7fOMXKoc7YPxWwESHxkNR7sVjRmRKYNhMBdZsbfp0DfgIC2zgMKSVufuP0HezQuO93+4w1tiiJltMV0FZqFX64A95JMUhO6d7q/wsD7E0l1orFTwZg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p+kpKq+uJDaq4MRQqZTdV+DU+5ZT1HmtiI5AFRhPl9g=;
- b=fTDaf/YUX9DCDMwVoc/fyYILDavTYAZiSIX6pIqdrGH16upudlP+3ZSWc68QKah0x/9OAtuwE1S1qUlMIJ2JVoQIGypKEzWlHV4LHzQsqjvuNHuWSap5g9hAXLP97Yet4hunx0A9STBQwkF4NeIl/BLuI7Nkzq+TVV+0xhO7JrA=
-Received: from CH2PR04CA0020.namprd04.prod.outlook.com (2603:10b6:610:52::30)
- by LV9PR12MB9830.namprd12.prod.outlook.com (2603:10b6:408:2ec::14)
+ bh=/tjQoMIHn1sbZxj+YjttcpPFs9am1dgtkn8m2jfnvUk=;
+ b=od/xV4kWoxo/mTxCy/XTPgdp3u5bWYciWTb7r9rjDoVgYkeRmDzxV3iFBxqjGhvoqnJ4twE0iNyZbk/ffroVtcKR5cqTQlrRGgp4r2scRTo2HVpxZiGlUDRcgq4qr2dzsyR9ft+OPl77Xdont+agFzvvgYZEFHjdyJtS5Z5dwUQ=
+Received: from BL0PR02CA0006.namprd02.prod.outlook.com (2603:10b6:207:3c::19)
+ by SJ0PR10MB5599.namprd10.prod.outlook.com (2603:10b6:a03:3dd::10)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Tue, 10 Mar
- 2026 12:59:20 +0000
-Received: from CH2PEPF0000009E.namprd02.prod.outlook.com
- (2603:10b6:610:52:cafe::23) by CH2PR04CA0020.outlook.office365.com
- (2603:10b6:610:52::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.25 via Frontend Transport; Tue,
- 10 Mar 2026 12:59:03 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH2PEPF0000009E.mail.protection.outlook.com (10.167.244.27) with Microsoft
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Tue, 10 Mar
+ 2026 10:06:23 +0000
+Received: from BL02EPF0002992B.namprd02.prod.outlook.com (2603:10b6:207:3c::4)
+ by BL0PR02CA0006.outlook.office365.com (2603:10b6:207:3c::19) with
+ Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.26
+ via Frontend Transport; Tue, 10 Mar 2026 10:06:23 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BL02EPF0002992B.mail.protection.outlook.com (10.167.249.56) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Tue, 10 Mar 2026 12:59:19 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Tue, 10 Mar
- 2026 07:59:19 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 10 Mar
- 2026 07:59:17 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 10 Mar 2026 07:59:15 -0500
-From: Pranav Tilak <pranav.vinaytilak@amd.com>
-To: <u-boot@lists.denx.de>, <michal.simek@amd.com>
-CC: <git@amd.com>, <jonas@kwiboo.se>, <padmarao.begari@amd.com>, Pranav Tilak
- <pranav.vinaytilak@amd.com>, Jerome Forissier <jerome.forissier@arm.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] net: lwip: scale buffer pool size with TFTP block size
-Date: Tue, 10 Mar 2026 18:28:25 +0530
-Message-ID: <20260310125846.413956-1-pranav.vinaytilak@amd.com>
+ 15.20.9678.18 via Frontend Transport; Tue, 10 Mar 2026 10:06:22 +0000
+Received: from DFLE204.ent.ti.com (10.64.6.62) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 10 Mar
+ 2026 05:06:20 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 10 Mar
+ 2026 05:06:20 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 10 Mar 2026 05:06:20 -0500
+Received: from akashdeep-HP-Z2-Tower-G5-Workstation.dhcp.ti.com
+ (akashdeep-hp-z2-tower-g5-workstation.dhcp.ti.com [10.24.68.91])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62AA6Hr02355078;
+ Tue, 10 Mar 2026 05:06:17 -0500
+From: Akashdeep Kaur <a-kaur@ti.com>
+To: <trini@konsulko.com>, <vigneshr@ti.com>, <praneeth@ti.com>, <nm@ti.com>,
+ <msp@baylibre.com>
+CC: <u-boot@lists.denx.de>, <vishalm@ti.com>, <sebin.francis@ti.com>,
+ <d-gole@ti.com>, <k-willis@ti.com>
+Subject: [PATCH v2 0/4] IO+DDR low power mode bugfixes for AM62P and AM62A
+Date: Tue, 10 Mar 2026 15:36:10 +0530
+Message-ID: <20260310100614.951573-1-a-kaur@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset="yes"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: pranav.vinaytilak@amd.com does not
- designate permitted sender hosts)
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF0000009E:EE_|LV9PR12MB9830:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9fe156bc-9d7c-4123-39de-08de7ea4d81b
+X-MS-TrafficTypeDiagnostic: BL02EPF0002992B:EE_|SJ0PR10MB5599:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9daeae9-13ba-43a7-887e-08de7e8cae8e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: pe7ohVxP9QSs0xIqhNr4bm01RWcJoGjbpN3EWatbF8MHGFUnNkvRNDiDJXCzpLvhbdCAVG+PrWgQURJefjmzPoa8M45JNVSv8LJ3O1+QaFM8SH7PZyS9P5jdmMIw8WB9+UVXmkFPKXL3t8YtqYS3j/QMyf07oihmbf+OvqSWqaf4YEupt/zlbU8Enqvevq9fOSJQx9mFbrSOe5O4cYIpnC8+fHNK7hhhlXBHoGFA6loZ819id/dRs9m5TtCTlWpFeO8Hch16OFys3ednRzBCbVGTE7JEaJx6H4D+vP7BaJYxJLGsgoHg4cJ7hNQ/qrvdEfm8Em4hpvMKSLxg6EhZYwZfjMIZIyna++SXDjh+1OF5SytHqYMWLVVR2lIzqbAJTqilJ48BrGf17kk4Z5i7AHIoyL+vHFumC2o9tr5yd+ZEayzkX5CbcG/ppKBhK/9aNjoTz00SyhO4ruwCoEQgrlJY5XGxojccdDa2dD8JWgr6DomhWQ8qtyTpIDPNcRv/jXRtY9DVKycg90eAc96hDjyreDGpWygA09Th4RVDiv9WSAxjqIyplIdIxmpU4inbKebUNNqreqWgeaJcrc8iqUHWeiRtJuVHtE2VMswCHPiyJMfLUSQyZtTETQi0b6OVy7pXkugib350rVH9WFm6F6G4F7c4MqcglypCze3JS5TT+osWWVi/SexiGWg1hYdvgPsIRPKDfhhpf8PvgUEh1n0v7e6sOFay/P0yJynkvZUWEVblX3i6CfSshHm/PdXtblYK5UALtzgatjQyUXUCHw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700016)(1800799024)(376014)(82310400026); DIR:OUT;
+ ARA:13230040|376014|36860700016|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: IsJkJm/X2kcyTAWkLo8XjjarGAM3faHOC50phSpLl9JTtDXDU20fhpmRmeONnqWKQSnzP405dXfOT8DQlKzMfl6fmsBxw7uz8UMGE+r9o491p14tP/gFjpwcXU8UUC08EZy/tQxCOGLYgzPaFguz/uTaah6Unlk8rlhv0CTNJ14NIbDf4mTZqkcUzRF+vUDJnzjCLIPVH71hY3baakomLMKxkemj7udzn4aZBRBx58WhIBreiLXqXM43Bf3uZZty8ZOJC1K3fr5cHJnNDYFLDBS0d4iPkGWqIJXvRrqHWtmS9ZoMNAAn2YfcnLNuWrtWQJazemmyXjHUuBa0esBahRbxejx+lcTJy4IV0UGBxBdTpJf/QFDZlUh7WZi6sbPr4sqA/QPx6VCoVwj1yupITRF3ViD9awTXltX2zsRZ/U+kahfg+EOnd43YCMoHaEkn2KhYSvkgp8AA9QmkTJxoaWcLNLkv7I6Bdw3/At2NQTzNvUVauSacHQeXVLxP1myQDpir/zYjdT9yuylSIlPsjyXU8060rmW4Uy6pgOJoOSVHUzb6UDOKXPcPf8gWgOjoa9abGeeLM0Iuli2PFbgKdlA9TYgn9Gp8aFMzFXb1rg7i8ZqPJRVytgCZ9fyea4wm1FVlmyWMC+BCqMv1xhJEs2fcv6QGKU4QKKwpcK08jTW2CLcdXiaRSDqFWZowT51Ve03h+g03D06tNjogOqg8hA3TFK97UKjmzeiNMb3ggy42mQEBlkxpPyVRTi5+HNPUHGF+lbPT+QvKb+HFvMRPYw==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: fyVP0rgLfCDI5C8HRXuUBO6nXzcryXeRiBGe/Ftnp2oprQ2WDNrUn9q3itdrcpNHhr+++mfHIV38OdEBarlN9wLYWSLq2EYH7F4Rv+V1LEo9sGHcFXT9OCE8LUAMiHKQgti8aA7gFz1ByCwNqS1HZjHTPYeaLkAku5VLOCW4rpgfH/xIYV+qRw97Zd14r8TJMbGz+hZZZ+VlqAmEZ4xxNhEfuGYGYAcf3CX57GIsnzHoy/nOAdr36odh+XStNdd3HuxvaOGJj3L3WIS4LSdNISc+c+VpY7JQ/OL3OQeqbDx+KF8lSksqmKHj/XmCc/yFcQSJNhrSwWHgMrxJt+4bHO20XD/xob2NelOrsoPVWIGs6ZdqndowmdI/rm5inDQ+czRrzjmHg8pLgc+pp/IaclBLHZun4oYZXcyVfOoSIv0woxqGR27dCLWHH7yA5/Oc
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 12:59:19.7986 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9fe156bc-9d7c-4123-39de-08de7ea4d81b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000009E.namprd02.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: 4ZzPxHJzAWZWdA4cgm7uWPNnUwCOFGxoz3IKJ+NluBko2zWgMRYrXY7S42gdyzBCJ7hqCqQWlOyHBdnsZ2fBQSQHv30/gXaQr/mz7k8PTySEIC+wp3ZP+iy9M/OjaNfDj1ssC16XZdHWgQrPSf7vLtwNTa+SfN0qpgATCzWIImet6y/p9MzYQUHt6vSREfrRnqhfnFymDYHxg7fAc/VQ7IYLLvkFUiMMnMtfkpDr6vHeY7IKjFh7MD4gVyt7h1mHqaQzAnV4JcY6EvghRFIZb4NJej3QvgRaZhGzhx07/XJLxVmEukbuW5IkbKMfqA+kQsg2ZxsdbfReeoCG+vhCbNnfEJNjralzGsiEz7Tqcil2I3kOFE0FO6Ax0QkWbTCyb0v1tFG7kTjvdmpWXCGJ0gdwnuWcdbHIs1YepHDZCxuJuFRw/PcsmY2j+SkDDfxf
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 10:06:22.1087 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9daeae9-13ba-43a7-887e-08de7e8cae8e
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0002992B.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV9PR12MB9830
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR10MB5599
+X-Mailman-Approved-At: Tue, 10 Mar 2026 14:12:02 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,55 +132,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TFTP transfers fail when tftpblocksize is set to 8192 or larger due to
-insufficient buffer resources for IP fragment reassembly.
+This series provides bugfixes for IO+DDR low power mode on AM62P and AM62A
+SoCs by adding DDR errata workaround and 32kHz clock restoration.
 
-Calculate PBUF_POOL_SIZE and IP_REASS_MAX_PBUFS dynamically based on
-CONFIG_TFTP_BLOCKSIZE using IP fragmentation boundaries (1480 usable
-bytes per fragment at 1500 MTU). The pool size includes headroom for
-TX, ARP, and protocol overhead, while ensuring PBUF_POOL_SIZE remains
-greater than IP_REASS_MAX_PBUFS as required by lwIP.
+Background:
+-----------
+During IO + DDR low power mode, the system enters into low power with DDR 
+in self-refresh. For proper resume operation, two critical aspects must be
+handled:
 
-Signed-off-by: Pranav Tilak <pranav.vinaytilak@amd.com>
+1. DDR Retention Latch: AM62AX and AM62PX are affected by errata i2487
+   where DDR retention mode transition may fail, leading to data 
+   corruption. A workaround sequence must clear the retention latch on 
+   every boot.
+
+2. 32kHz Clock Source: The SoC requires an accurate 32kHz clock for
+   timing-critical subsystems. Without restoring the 32kHz LFOSC early
+   during resume, the system falls back to the 32K RC oscillator (±20%
+   accuracy), which is insufficient for components like RTC that rely on
+   accurate timekeeping.
+
+Changes:
+--------
+Patch 1: Add DDR errata i2487 workaround sequence that clears the data
+         retention latch on every boot and abort scenarios. This ensures
+         successful IO+DDR LPM resume for AM62AX and AM62PX.
+
+Patches 2-4: Enable 32kHz LFOSC during LPM resume for AM62P and AM62A SoCs.
+         Add function declaration to common LPM header and call it during
+         resume path for both SoCs. Conditionally enabled via
+         CONFIG_TI_K3_BOARD_LFOSC for boards with external crystal
+         oscillators.
+
+Testing:
+--------
+Tested IO + DDR low power mode on AM62PX-SK
+
+Dependencies:
+-------------
+This series depends on the IO+DDR base support series v9 by
+Markus Schneider-Pargmann:
+https://lore.kernel.org/u-boot/20260105-topic-am62-ioddr-v2025-04-rc1-v9-0-7e33f2c77dbf@baylibre.com/
+
+Base commit: v2026.01-rc4 (0e0a198a68be)
+
+Changes in v2:
+--------------
+- Combined DDR errata workaround and 32kHz LFOSC patches into single series
+- Rebased on v2026.01-rc4 with IO+DDR v9 series applied
+- Link to v1: https://lore.kernel.org/u-boot/20251211093232.3706673-1-a-kaur@ti.com/
+
+Signed-off-by: Akashdeep Kaur <a-kaur@ti.com>
+
 ---
- lib/lwip/u-boot/lwipopts.h | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
-index e8a2c9d7a0a..4a1f8086673 100644
---- a/lib/lwip/u-boot/lwipopts.h
-+++ b/lib/lwip/u-boot/lwipopts.h
-@@ -65,7 +65,21 @@
- #define MEM_ALIGNMENT                   8
- 
- #define MEMP_NUM_TCP_SEG                16
-+
-+/* IP fragmentation parameters for TFTP reassembly */
-+#define IP_FRAG_MTU_USABLE              1480
-+#define PBUF_POOL_HEADROOM              6
-+#define PBUF_POOL_RESERVE               4
-+#define TFTP_BLOCKSIZE_THRESHOLD        4096
-+
-+#if defined(CONFIG_TFTP_BLOCKSIZE) && (CONFIG_TFTP_BLOCKSIZE > TFTP_BLOCKSIZE_THRESHOLD)
-+#define PBUF_POOL_SIZE			(((CONFIG_TFTP_BLOCKSIZE + (IP_FRAG_MTU_USABLE - 1)) / \
-+					  IP_FRAG_MTU_USABLE) + PBUF_POOL_HEADROOM)
-+#define IP_REASS_MAX_PBUFS		(PBUF_POOL_SIZE - PBUF_POOL_RESERVE)
-+#else
- #define PBUF_POOL_SIZE                  8
-+#define IP_REASS_MAX_PBUFS              4
-+#endif
- 
- #define LWIP_ARP                        1
- #define ARP_TABLE_SIZE                  4
-@@ -76,7 +90,7 @@
- #define IP_REASSEMBLY                   1
- #define IP_FRAG                         1
- #define IP_REASS_MAXAGE                 3
--#define IP_REASS_MAX_PBUFS              4
-+
- #define IP_FRAG_USES_STATIC_BUF         0
- 
- #define IP_DEFAULT_TTL                  255
+Akashdeep Kaur (4):
+  ram: ti: k3-ddrss: Add workaround sequence for errata i2487
+  mach-k3: am62xx-lpm: Add 32kHz LFOSC enable function declaration
+  mach-k3: am62px: Enable 32kHz LFOSC during LPM resume
+  mach-k3: am62ax: Enable 32kHz LFOSC during LPM resume
+
+ arch/arm/mach-k3/am62ax/am62a7_init.c |  3 +
+ arch/arm/mach-k3/am62px/am62p5_init.c |  3 +
+ arch/arm/mach-k3/am62xx-lpm-common.h  |  1 +
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.c   | 80 +++++++++++++++++++++++++++
+ drivers/ram/k3-ddrss/k3-ddrss-lpm.h   |  1 +
+ drivers/ram/k3-ddrss/k3-ddrss.c       |  5 ++
+ 6 files changed, 93 insertions(+)
+
 -- 
 2.34.1
 
