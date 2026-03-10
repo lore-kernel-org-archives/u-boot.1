@@ -4,83 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D4CFD2D9A
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:01:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6EF5EB1054
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D57E84057;
-	Tue, 10 Mar 2026 15:01:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 505C98400F;
+	Tue, 10 Mar 2026 15:13:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="VT31HA9B";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="TsdlxKE7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E9F884057; Tue, 10 Mar 2026 15:01:39 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B7A184013; Tue, 10 Mar 2026 15:13:13 +0100 (CET)
+Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBC7683FDE
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:01:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF17883FE9
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:13:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-3598cab697eso6016686a91.1
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 07:01:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1773151295; x=1773756095; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pStcdp/c48u+uWS79A5Bot7Ja3xLon/4/iZUhujIsDY=;
- b=VT31HA9BwO1LhtQuxKhxM/d+DDfabP9GH9FS30n3dHdEo0juvtnxXjCaeYKDt9B1hz
- sOe6JUP9BhQF82yluiffMOX6EmBI3f5JA7Gh+I4Mql5/41Scnb+7bQ2xl3MpnfhPMQD3
- Wf/rI2pNlshlGUpZc3gztlyDqOjORbsdA33Qg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773151295; x=1773756095;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=pStcdp/c48u+uWS79A5Bot7Ja3xLon/4/iZUhujIsDY=;
- b=TccJ+tvFQIGJzx9V7udA1tMmkNpRLpiQvwig8nEkvr3X1C42pHxTEtC+usht92G0OC
- vyHXhtHl24YjsjUPKEHmn31+R/0cnjI6gyybKjMlNGvWR0RZoRUCBhWndMoLh5KjKbDn
- xBfNI4l7/yRsijYYYE3zOYACRyhZtaAwKdpKanbBJjZ27wz/CXvZedsgfTIBrR4WfrH8
- /O4oIopOz1McIC29A+WvRHqT9l+2+z60b1BLf4kOCbRZGAf+Eu8OT2GLEg8AvnMdRNBk
- 1RLSJPU3AzIdeIRm9UpcNKrGFUkgpuM4gQtpjsFQehHVYSgktl1O9yDU4ORIBfs8oSx1
- 3vTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU4qiYlSMsS/iKNZC99MrpqYwHwDzc3a9ANnqCgsIASGqOIPEGoVuW4ZyJ9NAcHYWKAxRce7Io=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxrikf1XZNejeLCY1pwkx/Ah+O1mNozBU2lrJZhHa20ykwv47Ka
- /hhS41+3fuY58HLT25vXGy7yT/T2BejFMmjXlF/4umu9FGOgFacdAo04+V4O2zhIfqI=
-X-Gm-Gg: ATEYQzyf4Y2FSM7m40Uew7HyElOqyiGCIMsq/MOVIQaAV+vZwjeos3OrWRX3Yqtb5EV
- KTcY0APexw58Ruuiy8pwcd4LMFZAFTeXG25O9kCOKrEtC1z8nFzc02JJsti27ofmGp1HIh/m4U+
- Tvob+86CIfRR4nzuCrypcuMX26rYQhwtba/K5Z7VBdHGy/yPjlvj+soXdKe5Z9w7pNyR/FfDdlu
- 5A0vL1SsYDJA5bIwIPTtikI0nBvvaRG5cheDjQzopg1GpfHosoRMt5aXGGCj0CURoBrGy4iv2Xu
- pT9EE8OFu1i5b+5TyxGbYW3O6OtZCS3wKWW6saLQ2Uub2W92no5GLtm2d3dnMEw9c00JWJBnicD
- SxV8MC+I9Vzy+6kyWwdBXXGD4ebiwkJcVZqGg2C9xIH1fYhTjGS/DVZl6qPCr75rbw1LP9v6IAO
- r7HIJu4APxcsl6nouQiGIS9Ic6lOSWsvdU2YXJLi7bxaFapFlN7L2wk6w7CgBzNnJrn5rbTc+La
- hWWmYKkKIO7
-X-Received: by 2002:a17:90b:3e50:b0:356:7025:56c7 with SMTP id
- 98e67ed59e1d1-359f012c6c8mr2703914a91.5.1773151290048; 
- Tue, 10 Mar 2026 07:01:30 -0700 (PDT)
-Received: from kinako.work.home.arpa
- (p1766150-ipxg00e01sizuokaden.shizuoka.ocn.ne.jp. [153.167.218.150])
- by smtp.googlemail.com with ESMTPSA id
- 98e67ed59e1d1-359bc9bd61fsm7863531a91.3.2026.03.10.07.01.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 07:01:28 -0700 (PDT)
-From: Daniel Palmer <daniel@thingy.jp>
-To: visitorckw@gmail.com,
-	angelo@kernel-space.org,
-	bmeng.cn@gmail.com
-Cc: laurent@vivier.eu, u-boot@lists.denx.de, Daniel Palmer <daniel@thingy.jp>
-Subject: [RFC PATCH 3/3] board: qemu: m68k: Create virtio mmio instances
-Date: Tue, 10 Mar 2026 22:59:40 +0900
-Message-ID: <20260310135940.1756141-4-daniel@thingy.jp>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20260310135940.1756141-1-daniel@thingy.jp>
-References: <20260310135940.1756141-1-daniel@thingy.jp>
+ dmarc=pass (p=quarantine dis=none) header.from=free.fr
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
+Received: from localhost.localdomain (unknown [213.36.7.12])
+ (Authenticated sender: vjardin@free.fr)
+ by smtp5-g21.free.fr (Postfix) with ESMTPSA id A2E7C60136;
+ Tue, 10 Mar 2026 15:13:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
+ s=smtp-20201208; t=1773151990;
+ bh=zdpCaiwXGIRIh0q6l7PwNRvzyHHQzXYun9ePfJjHj84=;
+ h=From:To:Cc:Subject:Date:From;
+ b=TsdlxKE7TVQ7Ye0sGh4JnOk0O77lWYX8IAl6qSWpElTKGPCZxvYw4UI0nU1MdxG7M
+ YDLJX1halfPiX8JOy9cZeLbRnR8FJ81O3syxML5iaGu3gaJ9QCJ4p8Am8e1PGvltWT
+ TXGRJ6EqrJMQwDqrqJLKdfC+/vGgp6fnMZ5H3YqrqlnK94vuBs2rYmOMFXeXE1yo/a
+ bw6HPT+PWAUJWwJyRDwE2gODRbkNPv1FO8FAxIcp+MN9BN8ml0em2grXLRp7lNtnMy
+ fsoaOQUj5P5QHXbMvAS8GnQqeSG93t+Mf08hAqo5drCIziM/dFdoaJuZeRoG2CFHtQ
+ MZlqadkfqf1XA==
+From: Vincent Jardin <vjardin@free.fr>
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ vjardin@free.fr
+Subject: [PATCH v1 0/5] Add support for Freebox Nodebox 10G (Armada 8040)
+Date: Tue, 10 Mar 2026 15:12:47 +0100
+Message-ID: <cover.1773151972.git.vjardin@free.fr>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,122 +65,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So that you can use virtio network, block etc create the virtio mmio
-instances. There are 128 of these even if they are not all used, a
-single mmio base value is passed via bootinfo.
+This series adds board support for the Freebox Nodebox 10G, a network
+appliance based on the Marvell Armada 8040 SoC (AP806 + dual CP110).
 
-Signed-off-by: Daniel Palmer <daniel@thingy.jp>
----
- arch/m68k/Kconfig                     | 14 ++++----
- board/emulation/qemu-m68k/qemu-m68k.c | 46 +++++++++++++++++++++++++++
- 2 files changed, 54 insertions(+), 6 deletions(-)
+The series is structured as follows:
 
-diff --git a/arch/m68k/Kconfig b/arch/m68k/Kconfig
-index 6ce8f577e3a1..20a112880c87 100644
---- a/arch/m68k/Kconfig
-+++ b/arch/m68k/Kconfig
-@@ -195,12 +195,14 @@ config TARGET_STMARK2
-         select M54418
- 
- config TARGET_QEMU_M68K
--    bool "Support QEMU m68k virt"
--    select M68040
--    imply CMD_DM
--    help
--      This target supports the QEMU m68k virtual machine (-M virt).
--      It simulates a Motorola 68040 CPU with Goldfish peripherals.
-+	bool "Support QEMU m68k virt"
-+	select M68040
-+	select BOARD_EARLY_INIT_R
-+	select VIRTIO_MMIO
-+	imply CMD_DM
-+	help
-+	  This target supports the QEMU m68k virtual machine (-M virt).
-+	  It simulates a Motorola 68040 CPU with Goldfish peripherals.
- 
- endchoice
- 
-diff --git a/board/emulation/qemu-m68k/qemu-m68k.c b/board/emulation/qemu-m68k/qemu-m68k.c
-index d3527aee1128..2517ecf1bb8c 100644
---- a/board/emulation/qemu-m68k/qemu-m68k.c
-+++ b/board/emulation/qemu-m68k/qemu-m68k.c
-@@ -14,9 +14,14 @@
- #include <asm/bootinfo.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/lists.h>
- #include <dm/platdata.h>
-+#include <dm/root.h>
- #include <linux/errno.h>
- #include <linux/sizes.h>
-+#include <virtio_mmio.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -25,6 +30,37 @@ static struct goldfish_rtc_plat rtc_plat;
- static struct goldfish_timer_plat timer_plat;
- static struct qemu_virt_ctrl_plat reset_plat;
- 
-+#define VIRTIO_MMIO_NUM	128
-+#define VIRTIO_MMIO_SZ	0x200
-+
-+static struct virtio_mmio_plat virtio_mmio_plat[VIRTIO_MMIO_NUM] = { 0 };
-+static char virtio_mmio_names[VIRTIO_MMIO_NUM][11] = { 0 };
-+static phys_addr_t virtio_mmio_base = 0;
-+
-+static inline int create_virtio_mmios(void)
-+{
-+	struct driver *drv;
-+	int i, ret;
-+
-+	if (!virtio_mmio_base)
-+		return -ENODEV;
-+
-+	drv = lists_driver_lookup_name("virtio-mmio");
-+	if (!drv)
-+		return -ENOENT;
-+
-+	for (i = 0; i < VIRTIO_MMIO_NUM; i++) {
-+		virtio_mmio_plat[i].base = virtio_mmio_base + (VIRTIO_MMIO_SZ * i);
-+		sprintf(virtio_mmio_names[i], "virtio-%d", i);
-+
-+		ret = device_bind(dm_root(), drv, virtio_mmio_names[i], &virtio_mmio_plat[i], ofnode_null(), NULL);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
- /*
-  * Theoretical limit derivation:
-  * Max Bootinfo Size (Standard Page) = 4096 bytes
-@@ -65,6 +101,9 @@ static void parse_bootinfo(void)
- 		case BI_VIRT_CTRL_BASE:
- 			reset_plat.reg = base;
- 			break;
-+		case BI_VIRT_VIRTIO_BASE:
-+			virtio_mmio_base = base;
-+			break;
- 		case BI_MEMCHUNK:
- 			gd->ram_size = record->data[1];
- 			break;
-@@ -80,6 +119,13 @@ int board_early_init_f(void)
- 	return 0;
- }
- 
-+int board_early_init_r(void)
-+{
-+	create_virtio_mmios();
-+
-+	return 0;
-+}
-+
- int checkboard(void)
- {
- 	puts("Board: QEMU m68k virt\n");
+Patch 1 adds CPU and clock information display for Armada 8K platforms
+by reading the AP806 Sample-At-Reset register. This is ported from
+Marvell's vendor U-Boot 2015.01.
+
+Patch 2 adds the board directory, device tree, defconfig, and board
+initialization (management PHY reset via GPIO).
+
+Patch 3 adds a U-Boot dtsi overlay for conditional OP-TEE support.
+
+Patch 4 adds the "emmcboot" command to load and boot firmware stored
+in the board-specific image format (mvebu_image_tag) at fixed eMMC
+offsets. Each image bundles a kernel and device tree under a CRC32-
+validated tag header. Two image banks are supported with automatic
+fallback based on a bit-field reboot counter.
+
+Patch 5 adds the "fbxserial" command to read factory-programmed device
+serial numbers and MAC addresses from a dedicated eMMC region. The
+board file hooks EVT_SETTINGS_R to set MAC addresses before network
+drivers probe.
+
+Note: the emmcboot and fbxserial commands are hardware-specific and
+require the actual board for testing, so no sandbox tests are included.
+
+Based on v2026.04-rc4.
+
+Vincent Jardin (5):
+  arm: mach-mvebu: armada8k: add CPU and clock info display
+  board: freebox: add Nodebox 10G board support
+  arm: dts: armada-8040-nbx: add U-Boot dtsi for conditional OP-TEE
+  cmd: mvebu: add emmcboot for Nodebox image format
+  cmd: mvebu: add device serial and MAC address initialization
+
+ arch/arm/dts/Makefile                    |   1 +
+ arch/arm/dts/armada-8040-nbx-u-boot.dtsi |  15 +
+ arch/arm/dts/armada-8040-nbx.dts         | 259 +++++++++++++++++
+ arch/arm/mach-mvebu/Kconfig              |   9 +
+ arch/arm/mach-mvebu/armada8k/Makefile    |   2 +-
+ arch/arm/mach-mvebu/armada8k/cpu.c       |  10 +
+ arch/arm/mach-mvebu/armada8k/soc_info.c  | 192 +++++++++++++
+ arch/arm/mach-mvebu/armada8k/soc_info.h  |  14 +
+ board/freebox/nbx10g/Kconfig             |  12 +
+ board/freebox/nbx10g/MAINTAINERS         |  13 +
+ board/freebox/nbx10g/Makefile            |   3 +
+ board/freebox/nbx10g/board.c             |  79 ++++++
+ cmd/mvebu/Kconfig                        |  80 ++++++
+ cmd/mvebu/Makefile                       |   2 +
+ cmd/mvebu/mvebu_emmcboot.c               | 340 +++++++++++++++++++++++
+ cmd/mvebu/nbx_fbxserial.c                | 289 +++++++++++++++++++
+ configs/mvebu_nbx_88f8040_defconfig      |  76 +++++
+ include/configs/nbx10g.h                 |  29 ++
+ include/mvebu_imagetag.h                 |  82 ++++++
+ include/mvebu_nrboot.h                   |  51 ++++
+ include/nbx_fbxserial.h                  | 134 +++++++++
+ 21 files changed, 1691 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/armada-8040-nbx-u-boot.dtsi
+ create mode 100644 arch/arm/dts/armada-8040-nbx.dts
+ create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.c
+ create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.h
+ create mode 100644 board/freebox/nbx10g/Kconfig
+ create mode 100644 board/freebox/nbx10g/MAINTAINERS
+ create mode 100644 board/freebox/nbx10g/Makefile
+ create mode 100644 board/freebox/nbx10g/board.c
+ create mode 100644 cmd/mvebu/mvebu_emmcboot.c
+ create mode 100644 cmd/mvebu/nbx_fbxserial.c
+ create mode 100644 configs/mvebu_nbx_88f8040_defconfig
+ create mode 100644 include/configs/nbx10g.h
+ create mode 100644 include/mvebu_imagetag.h
+ create mode 100644 include/mvebu_nrboot.h
+ create mode 100644 include/nbx_fbxserial.h
+
 -- 
-2.51.0
+2.43.0
 
