@@ -4,85 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E01FD4F08
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 17:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428C2FD4F16
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 19:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA960840CB;
-	Tue, 10 Mar 2026 18:51:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E8F52840DF;
+	Tue, 10 Mar 2026 20:11:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lP6nTQHT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VKvNBr3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB7AF840EE; Tue, 10 Mar 2026 18:51:17 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 44E4084113; Tue, 10 Mar 2026 20:11:01 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DCFF8409A
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 18:51:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C72D840CB
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 20:10:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d73ccee442so3029254a34.1
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 10:51:15 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d7473bed74so2619776a34.0
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 12:10:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773165074; x=1773769874; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VU4nLi56XHNM+8cnNeZ7YSStkRHlkmUwyP4ztG1Hzi4=;
- b=lP6nTQHTIJ6CMGsUHIufq7Lyj+KLYzaUK+K0HrkezSBD/TZk1hfkHqN+2RMcmNnxR6
- egF40XtlfBoMxQVW/SuIRfrkU7GYuQRCePzkp5/orFMwzj6/+HS963gqT1uaDsT+brnj
- KcGZGQ/Zv5QD4BU/cfTzGjmfw3R6CmfJBSprQ=
+ d=konsulko.com; s=google; t=1773169858; x=1773774658; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=orTLFQ8BlmKfAtvB3wOBeMA4zvaJS/zImBsMJkdKzOo=;
+ b=VKvNBr3zTWBtBgHUvIdpNKkofALl+CLln5BB6zkRKOHGF3xnL8i8X2Ug4fh/iknSY6
+ 1qDb9QVfvWf+pLlQ43gYwvxqnmgcVaOE5lqJZxCJNv6q6UMCPfnIy8KHsB0WomuwNxHE
+ TCnQLp0Viu8/CMjjs1MYnyHES9HmDlI87PWjw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773165074; x=1773769874;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VU4nLi56XHNM+8cnNeZ7YSStkRHlkmUwyP4ztG1Hzi4=;
- b=blzS3IgSHmujBfCmR/0bYM33mdyyvQQxpBJcEzPWwBLDd9udufZoOiVWN5dXrY+awb
- X2z3R/cdos+HMCUzlUEoO3uZMh8td94Sv3f0vAA6KLzS4/V+bZaCHtR3gxCWwb1pz+3O
- dgpToK0W/aUyjE0RedJ/M475Kv8KCTX1hXFuI5cIa9uPm3e8eHFPIZCrRIjYfmP+YnNV
- uEC62ExYs6+xx0lYd6zxtbSXtL+/agqsHs+gzNi3y+GZZTH+tIrsYRXyLi9TuIyFmYer
- uBJbVpMj/EUOTdV3sjwzW2bmhMCNEg2MgTheLMbqiE7t0ENgNGdOwhzOt3R+5a0r2iLI
- a+Kg==
+ d=1e100.net; s=20230601; t=1773169858; x=1773774658;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=orTLFQ8BlmKfAtvB3wOBeMA4zvaJS/zImBsMJkdKzOo=;
+ b=b47tikbd0DN5RLlkeELP5jvCsDLmGidJTvLTqSnpzx26j603q9Rtiw2KxEjhgC2z65
+ +YzS6ll0Nj4ZGd4yX32py/JgBZbj651OPS/2NzIs4icjADPHbruYA/MyS/MENZIl18Cd
+ cG5mkKAk3NkmeSqEn+gT90cjo08qunD0b6Oq0umC3RjsP9qkVZ5JJNqlomQleet8E1Ew
+ T+B+vn+rPuy7Ox0Snuwi8vaN1erJpWA0DsqCywvojRgiicTsPn5QpJ0YE4Jg1F9CFRCv
+ SaS9dClKjKvEgKtfVOwteIEVwTFunpybfAaXzRbwXo5chUXQY5qIYyjDQa0DY1+k8mjK
+ E2sA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2BFR+nuYsNkG6hNbEQvfiPdBMLwzhCBlusvhOi2gxNcfHn6/9Ylid4i+o835IyfYaY2lfjzg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwR93NfPoHI+PB0CohzR6loL365k1wRsbZSIklAPRj1fqxiEMI+
- mkbx0ah9yQnWX/jcEMPZ6zIyBx8dsPnegnha1aE75HkPs79KFCpA7fT1eMYy/+s6ACA=
-X-Gm-Gg: ATEYQzyF1Y6GIOhj5sqMPL7CXsWmPJlLnaSTSAD73/Az7FGnZu2skywqc3LJkimuW4M
- KlzDOfrOBQjUJPpsylsBx2Bz9RTyEF0TpdQZj0QZxZpw7gr2o7RX1Lv997PCJSUj2Qhoi1P0ThR
- 4szP/ulE2rz+24UQ/qjq/LV4zVvVc54pW4se1Mn3ahpTTAtySelXRKhdIsGZ1MzvYpf8xZH53OS
- sVMuQvKjQ1Mg90bl1WUzTXzyL8g6myg+IKB0oUvJT8okY8LXJDO1fUEBRTwY5YWYgD3TjtO4/sY
- 2UXB8ZL+gIVmTghyv6YCyEoij38QrqF01cy007t06470Oy7E1roh32npk/OGSwujlHlrC1h5ygW
- zMXtFTz7RQe0IJc0DA8u8Hg4sGpMwSXZBQVQPl0Vscv5NVN/5tqrR2YwNEGt3UgJpYYrLtlsIud
- GqpcjSDARMUXzwdXIv9WCSw04dCCjXJU1zv3jbZ36CpQ4iTz1q7W8zx+9sxGOUtVVQfXF9IKrx0
- ONY1MiEfXVwKNmbVrg+UI/cmbSkiMaNh8Bc9NHKEi9LDA==
-X-Received: by 2002:a05:6830:620f:b0:7d1:9217:94e with SMTP id
- 46e09a7af769-7d72702d716mr10293453a34.26.1773165074097; 
- Tue, 10 Mar 2026 10:51:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
- [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d75039b811sm3766764a34.16.2026.03.10.10.51.12
+ AJvYcCXTmvBlnksjEdaPHaWhVPcyFTrQmOFfeABLokaSUwJkRkNHtfW1aakIGy0qdL06k1dJE7uWb+M=@lists.denx.de
+X-Gm-Message-State: AOJu0YyH/FBTZSuelt1RLXB0VJqHK4zU1Qu9FYC1ZY1zkiMtAUV03DiP
+ W8NWEGQpoRNhUUncDhY6ZpKJWFQEMjcTlTImCp20X3C/iPyVs9PVcJnRAAEfVr8POH9VUyAgiLv
+ Cv4csCwE=
+X-Gm-Gg: ATEYQzy9V/APXRPI2oL34IhVcab5PPSu2MMvFNiFGRSLCMW9jRpZs17psjpmWfrKDBy
+ Yt3QoQ1eQY8jQ4xFXgPlVPZmBfzH0IS/rXbkXFMpJV+p05FSjPDhsf1JxIZRwr4brNYEoPVBI7g
+ gDToZ/ihJTZHWrfzq12med5oCXbm4b3luNM51ST0iht6X0TYpziagFKvQEeG6gDB96Jfwe+KkoS
+ onrWnkl9jwHfvw78eUQauOetjFYGuguDX/xwXa/RicpnafX90yahPUDq4jA4oMiO1oNy03X92St
+ /IwW/rhqvkQ7MarQRnoNEOLvlUXUcBaHc8ChPwPoN52Ut8/7FzKCwTdxHKNOFlAA8ByE6WfXPAL
+ nK7hFbJn3ZMJjRvTgNlwY8F4rMFZvo4bwKxkkMsjPJHmHyQo0PFfxb1r6FP/cgnTnEB7hiNqxpQ
+ qETVrWrQWXGjkI2AAm4skuclXwyTNurpJTwRCpYelLZRGjA1aiKoUg1njx3ykYVUplFD4fWapOr
+ HtldNIwVCkjApnhhRABVRTA58OtNO0xNjDxUsNg0MY3
+X-Received: by 2002:a05:6830:6688:b0:7d7:5d69:819f with SMTP id
+ 46e09a7af769-7d76a61b58cmr24808a34.13.1773169857766; 
+ Tue, 10 Mar 2026 12:10:57 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d745cac199sm5626620a34.9.2026.03.10.12.10.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 10:51:13 -0700 (PDT)
-Date: Tue, 10 Mar 2026 11:51:11 -0600
+ Tue, 10 Mar 2026 12:10:57 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: vigneshr@ti.com, bb@ti.com, u-kumar1@ti.com, n-francis@ti.com,
- u-boot@lists.denx.de, srk@ti.com
-Subject: Re: [PATCH 0/2] Update AM62AX and J722S CPSW PKTDMA Resource Sharing
-Message-ID: <20260310175111.GL1388590@bill-the-cat>
-References: <20260224120557.1476390-1-s-vadapalli@ti.com>
+To: casey.connolly@linaro.org, neil.armstrong@linaro.org, 
+ sumit.garg@kernel.org, ilias.apalodimas@linaro.org, 
+ aswin.murugan@oss.qualcomm.com, christopher.obbard@linaro.org, 
+ marek.vasut+renesas@mailbox.org, me@samcday.com, 
+ gabriel.dalimonte@gmail.com, u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: balaji.selvanathan@oss.qualcomm.com, 
+ Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <20260224035000.1617869-1-varadarajan.narayanan@oss.qualcomm.com>
+References: <20260224035000.1617869-1-varadarajan.narayanan@oss.qualcomm.com>
+Subject: Re: [PATCH v6 1/2] fs: fat: Handle 'FAT sector size mismatch'
+Message-Id: <177316985656.4188500.7620852698022807750.b4-ty@konsulko.com>
+Date: Tue, 10 Mar 2026 13:10:56 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uZZJmkjuWH/XGVfx"
-Content-Disposition: inline
-In-Reply-To: <20260224120557.1476390-1-s-vadapalli@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,51 +105,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 24 Feb 2026 09:19:58 +0530, Varadarajan Narayanan wrote:
 
---uZZJmkjuWH/XGVfx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> The disk_read() and disk_write() functions of the FAT driver use the
+> blk_dread() and blk_dwrite() respectively. The blk_* APIs read and write
+> to the devices in terms of the device block size. However, the FAT
+> driver reads in terms of the device block size (from fat_set_blk_dev and
+> read_bootsectandvi) and sector size in the rest of the places.
+> 
+> This causes buffer overflows or partial reads when the FAT sector size
+> is not equal to device block size. Fix this by using blk_dread in
+> fat_set_blk_dev and read_bootsectandvi instead of disk_read. And update
+> disk_read/disk_write to handle FAT sector size and block size mismatch.
+> 
+> [...]
 
-On Tue, Feb 24, 2026 at 05:34:46PM +0530, Siddharth Vadapalli wrote:
+Applied to u-boot/next, thanks!
 
-> Hello,
->=20
-> This series updates the resource sharing for CPSW PKTDMA resources
-> of the AM62AX and J722S SoCs while maintaining backward compatibility.
->=20
-> Series is based on commit
-> 4f70106beaf Prepare v2026.04-rc3
-> of the master branch of U-Boot.
->=20
-> The updated resource sharing changes made by this series have been valida=
-ted
-> with Linux running on the A53 cores of both AM62AX and J722S SoCs verifyi=
-ng
-> Ethernet functionality.
-> Test Logs:
-> 1. AM62A7-SK:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/ecc69e5d9cd3f09ca767bc2=
-108ce1d0d
-> 2. J722S-EVM:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/d5b3509d548be194fbafb41=
-480a6c15e
-
-Please rebase this to current -next, or if critical for v2026.04 please
-confirm that. Thanks.
-
---=20
+[1/2] fs: fat: Handle 'FAT sector size mismatch'
+      commit: 5e7b1384902d67f4c9c405e72ae92b172e9f1974
+[2/2] configs: qcom: Enable FS_FAT_HANDLE_SECTOR_SIZE_MISMATCH
+      commit: 1a935da84d16716d0974be2d8802017379035a01
+-- 
 Tom
 
---uZZJmkjuWH/XGVfx
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabBaCAAKCRAr4qD1Cr/k
-Cp3qAQC1wZItB72o9LulaIDRhfD0UbO6Z09das/3I7ujDkg99AD8CftsspfF7sgv
-NNR2KJsbX+lLltBuffu0IO/G/FMLOgc=
-=BPJ1
------END PGP SIGNATURE-----
-
---uZZJmkjuWH/XGVfx--
