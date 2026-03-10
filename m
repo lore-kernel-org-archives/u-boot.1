@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4714FEB1056
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9A7EB1057
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:14:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF4D9840A9;
-	Tue, 10 Mar 2026 15:13:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1CB8D84027;
+	Tue, 10 Mar 2026 15:13:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Ul4gRK+1";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="thfHeZ8y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D64F18409A; Tue, 10 Mar 2026 15:13:41 +0100 (CET)
+ id 85FF98409B; Tue, 10 Mar 2026 15:13:48 +0100 (CET)
 Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [IPv6:2a01:e0c:1:1599::14])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 143D683FE9
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:13:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE2383FE9
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [213.36.7.12])
  (Authenticated sender: vjardin@free.fr)
- by smtp5-g21.free.fr (Postfix) with ESMTPSA id DE10060136;
- Tue, 10 Mar 2026 15:13:31 +0100 (CET)
+ by smtp5-g21.free.fr (Postfix) with ESMTPSA id 08ADE5FFB7;
+ Tue, 10 Mar 2026 15:13:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1773152018;
- bh=3EAWHP+4QokW0RzAnBSjstiwQEXB/89w6/6Knjv1Qiw=;
+ s=smtp-20201208; t=1773152025;
+ bh=f3gm3zMekTFFJLzEnnJPhBYWoZh1xPX7JnFQCs74JqY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Ul4gRK+1fXe29FlEUFbGfqhxC7dxlfPNFlan1UmB2ku7QvdUrjOfLoTBtAyA1L3k+
- kemJByk6ptIAyMaVRhFwoM3iB6Q/SuUIQ29pRH4YYcRV24BRGu+cLl+3KhDhBfBK7I
- NXHAiqjmFXuNP+ooqVHkLmR5ctmBQggJjf2MXW/3QWQLd9XVWGw9pxdfEpKvxyWujK
- ik4s0TklKfxjoFs2KuvLT21wTRHhporHsvC3YZue+4+jLvCzFcXlQPtiEGA0wRKnTx
- WsFhl7lKJk7UzHVKDiwb1wolr27ZwpgdKtDTXn8Nze9/OPVvMXgRKQlMQeuVB+r1Xz
- hba4xrTiKDAtA==
+ b=thfHeZ8yPfhbhLDagO/X5bkz0k3hhHYJKrmIym3psYoFaWpcM3SFR31MyAM3r0NnF
+ gQQ4m5m4c3lbi1tEF7cyy8dt3aqA3ZKTkcNy3GtGvVrVYDiK3kBV0Q4ry1bVn+r1cJ
+ NJSEyNz9avI9Q4NnNyw28DjGloyTmK8SnNyg8C+YlOdYYhU0BRjkS/uUi3P723RgEE
+ LK9dW5ifNoZWC2XFac6EFbkbMAJueEcih9v3ra4M0gtlBTapJ5xFa9hdV+FDsqQMmv
+ V4oCq+XfMIPZ6qSIBUlY/jAIgKLQBhKB6Stcer6L2+BVxQZ2vsgXwMFdV4jR++2G4Z
+ wktULgwN5a7pA==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  vjardin@free.fr
-Subject: [PATCH v1 4/5] cmd: mvebu: add emmcboot for Nodebox image format
-Date: Tue, 10 Mar 2026 15:12:51 +0100
-Message-ID: <5e77a02d26f8abf694eeb70dc5904c00dfca7df8.1773151972.git.vjardin@free.fr>
+Subject: [PATCH v1 5/5] cmd: mvebu: add device serial and MAC address
+ initialization
+Date: Tue, 10 Mar 2026 15:12:52 +0100
+Message-ID: <6bde7b2f2ad9eba4148be8d9422068ccd8ba294e.1773151972.git.vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1773151972.git.vjardin@free.fr>
 References: <cover.1773151972.git.vjardin@free.fr>
@@ -67,117 +68,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Nodebox 10G stores firmware in a board-specific format
-(mvebu_image_tag) at fixed offsets in eMMC. Each image bundles a
-kernel and device tree under a CRC32-validated tag header.
+Read device identification data from a dedicated eMMC region. This
+provides:
 
-Include a board-specific rollback support based on a reboot counter
-in order to track consecutive boot failures and then to boot from
-the fallback image.
+- Unique device serial number for identification and tracking
+- Factory-programmed MAC address for network interfaces
+- Bundle information for device variant identification
+
+The serial structure includes CRC32 validation to detect corruption.
+On read failure or invalid data, sensible defaults are used to ensure
+the system remains bootable.
+
+The fbxserial command provides two subcommands:
+- fbxserial show: Display serial info (default)
+- fbxserial init: Initialize ethaddr from serial info
+
+Each network interface gets a unique MAC address by incrementing the
+base address stored in the serial structure.
+
+The board file hooks EVT_SETTINGS_R to automatically set MAC addresses
+before network drivers probe, ensuring addresses are available without
+manual intervention.
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
- cmd/mvebu/Kconfig                   |  53 +++++
+ board/freebox/nbx10g/board.c        |  16 ++
+ cmd/mvebu/Kconfig                   |  27 +++
  cmd/mvebu/Makefile                  |   1 +
- cmd/mvebu/mvebu_emmcboot.c          | 340 ++++++++++++++++++++++++++++
- configs/mvebu_nbx_88f8040_defconfig |   1 +
- include/mvebu_imagetag.h            |  82 +++++++
- include/mvebu_nrboot.h              |  51 +++++
- 6 files changed, 528 insertions(+)
- create mode 100644 cmd/mvebu/mvebu_emmcboot.c
- create mode 100644 include/mvebu_imagetag.h
- create mode 100644 include/mvebu_nrboot.h
+ cmd/mvebu/nbx_fbxserial.c           | 289 ++++++++++++++++++++++++++++
+ configs/mvebu_nbx_88f8040_defconfig |   2 +
+ include/nbx_fbxserial.h             | 134 +++++++++++++
+ 6 files changed, 469 insertions(+)
+ create mode 100644 cmd/mvebu/nbx_fbxserial.c
+ create mode 100644 include/nbx_fbxserial.h
 
+diff --git a/board/freebox/nbx10g/board.c b/board/freebox/nbx10g/board.c
+index 7080e386c38..2cdf5f68be5 100644
+--- a/board/freebox/nbx10g/board.c
++++ b/board/freebox/nbx10g/board.c
+@@ -8,6 +8,7 @@
+ 
+ #include <config.h>
+ #include <dm.h>
++#include <event.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+@@ -15,6 +16,7 @@
+ #include <asm/arch/cpu.h>
+ #include <asm/arch/soc.h>
+ #include <linux/delay.h>
++#include <nbx_fbxserial.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -61,3 +63,17 @@ int board_late_init(void)
+ 
+ 	return 0;
+ }
++
++/*
++ * Set MAC addresses from eMMC serial info before network driver probes.
++ * EVT_SETTINGS_R is triggered after MMC is available but before
++ * initr_net().
++ */
++static int nbx_fbx_settings_r(void)
++{
++	nbx_fbx_init_ethaddr(0, CONFIG_NBX_MMC_PART_SERIAL_OFFSET);
++
++	return 0;
++}
++
++EVENT_SPY_SIMPLE(EVT_SETTINGS_R, nbx_fbx_settings_r);
 diff --git a/cmd/mvebu/Kconfig b/cmd/mvebu/Kconfig
-index e83a9829491..ea03f581280 100644
+index ea03f581280..764e2e7de94 100644
 --- a/cmd/mvebu/Kconfig
 +++ b/cmd/mvebu/Kconfig
-@@ -79,4 +79,57 @@ config CMD_MVEBU_COMPHY_RX_TRAINING
- 	help
- 	  Perform COMPHY RX training sequence
+@@ -132,4 +132,31 @@ config MVEBU_MMC_PART_BANK1_SIZE
  
-+config CMD_NBX_EMMCBOOT
-+	bool "Nodebox emmcboot command"
+ endif
+ 
++config CMD_NBX_FBXSERIAL
++	bool "NBX fbxserial command"
 +	depends on ARMADA_8K && MMC_SDHCI_XENON
 +	help
-+	  Enable the emmcboot command for Nodebox 10G boards. The command
-+	  loads and boots firmware stored in the board-specific image format
-+	  (mvebu_image_tag) at fixed eMMC offsets. Each image bundles a
-+	  kernel and device tree under a CRC32-validated tag header.
++	  Enable the NBX fbxserial command to read and display device
++	  serial information from eMMC. This includes:
++	  - Device serial number (type, version, manufacturer, date, number)
++	  - MAC address (used to set ethaddr environment variables)
++	  - Bundle information (if present)
 +
-+	  Two image banks are supported (Bank0 stable, Bank1 newer) with
-+	  automatic fallback based on a reboot tracking counter (nrboot).
++	  The serial info is stored at a fixed offset in the eMMC user area.
 +
-+	  Requires image_addr and fdt_addr environment variables to be set.
++	  Subcommands:
++	  - fbxserial show: display serial info (default)
++	  - fbxserial init: initialize ethaddr from serial info
 +
-+if CMD_NBX_EMMCBOOT
++if CMD_NBX_FBXSERIAL
 +
-+config MVEBU_MMC_PART_NRBOOT_OFFSET
-+	hex "NRBoot counter offset in eMMC"
-+	default 0x802000
++config NBX_MMC_PART_SERIAL_OFFSET
++	hex "Serial info offset in eMMC"
++	default 0x800000
 +	help
-+	  Byte offset in eMMC where the reboot tracking counter is stored.
-+	  Default: 0x802000 (8MB + 8KB)
-+
-+config MVEBU_MMC_PART_BANK0_OFFSET
-+	hex "Bank0 image offset in eMMC"
-+	default 0x804000
-+	help
-+	  Byte offset in eMMC where the stable (Bank0) boot image starts.
-+	  Default: 0x804000 (8MB + 16KB)
-+
-+config MVEBU_MMC_PART_BANK0_SIZE
-+	hex "Bank0 image maximum size"
-+	default 0x10000000
-+	help
-+	  Maximum size of the Bank0 boot image.
-+	  Default: 0x10000000 (256MB)
-+
-+config MVEBU_MMC_PART_BANK1_OFFSET
-+	hex "Bank1 image offset in eMMC"
-+	default 0x10804000
-+	help
-+	  Byte offset in eMMC where the newer (Bank1) boot image starts.
-+	  Default: 0x10804000 (264MB + 16KB)
-+
-+config MVEBU_MMC_PART_BANK1_SIZE
-+	hex "Bank1 image maximum size"
-+	default 0x10000000
-+	help
-+	  Maximum size of the Bank1 boot image.
-+	  Default: 0x10000000 (256MB)
++	  Byte offset in eMMC where the serial info structure is stored.
++	  Default: 0x800000 (8MB)
 +
 +endif
 +
  endmenu
 diff --git a/cmd/mvebu/Makefile b/cmd/mvebu/Makefile
-index ca96ad01d91..c096f507e26 100644
+index c096f507e26..b1dbd283c63 100644
 --- a/cmd/mvebu/Makefile
 +++ b/cmd/mvebu/Makefile
-@@ -6,3 +6,4 @@
- 
+@@ -7,3 +7,4 @@
  obj-$(CONFIG_CMD_MVEBU_BUBT) += bubt.o
  obj-$(CONFIG_CMD_MVEBU_COMPHY_RX_TRAINING) += comphy_rx_training.o
-+obj-$(CONFIG_CMD_NBX_EMMCBOOT) += mvebu_emmcboot.o
-diff --git a/cmd/mvebu/mvebu_emmcboot.c b/cmd/mvebu/mvebu_emmcboot.c
+ obj-$(CONFIG_CMD_NBX_EMMCBOOT) += mvebu_emmcboot.o
++obj-$(CONFIG_CMD_NBX_FBXSERIAL) += nbx_fbxserial.o
+diff --git a/cmd/mvebu/nbx_fbxserial.c b/cmd/mvebu/nbx_fbxserial.c
 new file mode 100644
-index 00000000000..3d85f82670a
+index 00000000000..baad5c56c10
 --- /dev/null
-+++ b/cmd/mvebu/mvebu_emmcboot.c
-@@ -0,0 +1,340 @@
++++ b/cmd/mvebu/nbx_fbxserial.c
+@@ -0,0 +1,289 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * MVEBU eMMC boot command for Nodebox 10G boot image format
++ * NBX Freebox Serial Info Support
 + *
 + * Copyright (C) 2026 Free Mobile, Freebox
 + *
-+ * The Nodebox 10G stores firmware images in a board-specific format
-+ * (mvebu_image_tag) at fixed offsets in eMMC. Each image bundles a
-+ * kernel, device tree, and optional rootfs under a CRC32-validated
-+ * tag header.
++ * Reads device serial number and MAC address from eMMC.
++ * The serial info is stored at a fixed offset in the eMMC user area.
 + *
-+ * Two image banks are laid out in eMMC (Bank0 stable, Bank1 newer).
-+ * A reboot counter (nrboot) selects which bank to try first.
++ * Serial format: TTTT-VV-M-(YY)WW-NN-NNNNN / FLAGS
++ * Where:
++ *   TTTT  = Device type (e.g., 9018)
++ *   VV    = Board version
++ *   M     = Manufacturer code (ASCII)
++ *   YY    = Year (BCD)
++ *   WW    = Week (1-53)
++ *   NNNNN = Serial number
++ *   FLAGS = Feature flags
 + */
 +
 +#include <command.h>
@@ -185,483 +216,430 @@ index 00000000000..3d85f82670a
 +#include <mmc.h>
 +#include <malloc.h>
 +#include <memalign.h>
++#include <string.h>
 +#include <vsprintf.h>
 +#include <u-boot/crc.h>
-+#include <u-boot/schedule.h>
 +#include <asm/byteorder.h>
-+#include <linux/bitops.h>
-+#include <mvebu_imagetag.h>
-+#include <mvebu_nrboot.h>
++#include <linux/ctype.h>
++#include <nbx_fbxserial.h>
 +
-+/* Image Tag Functions */
++/* Default serial info (Freebox OUI, type 9018) */
++static const struct nbx_fbx_serial nbx_fbxserial_default = {
++	.crc32		= 0,
++	.magic		= NBX_FBXSERIAL_MAGIC,
++	.struct_version	= NBX_FBXSERIAL_VERSION,
++	.len		= sizeof(struct nbx_fbx_serial),
++	.type		= 9018,
++	.version	= 0,
++	.manufacturer	= '_',
++	.year		= 0,
++	.week		= 0,
++	.number		= 0,
++	.flags		= 0,
++	.mac_addr_base	= { 0x00, 0x07, 0xCB, 0x00, 0x00, 0xFD },
++	.mac_count	= 1,
++	.random_data	= { 0 },
++	.last_modified	= 0,
++	.extinfo_count	= 0,
++};
 +
-+static int mvebu_imagetag_check(struct mvebu_image_tag *tag,
-+				unsigned long maxsize, const char *name)
++void nbx_fbxserial_set_default(struct nbx_fbx_serial *serial)
 +{
-+	if (be32_to_cpu(tag->magic) != MVEBU_IMAGE_TAG_MAGIC) {
-+		if (name)
-+			printf("%s: invalid TAG magic: %.8x\n", name,
-+			       be32_to_cpu(tag->magic));
-+		return -1;
-+	}
-+
-+	if (be32_to_cpu(tag->version) != MVEBU_IMAGE_TAG_VERSION) {
-+		if (name)
-+			printf("%s: invalid TAG version: %.8x\n", name,
-+			       be32_to_cpu(tag->version));
-+		return -1;
-+	}
-+
-+	if (be32_to_cpu(tag->total_size) < sizeof(*tag)) {
-+		if (name)
-+			printf("%s: tag size is too small!\n", name);
-+		return -1;
-+	}
-+
-+	if (be32_to_cpu(tag->total_size) > maxsize) {
-+		if (name)
-+			printf("%s: tag size is too big!\n", name);
-+		return -1;
-+	}
-+
-+	if (be32_to_cpu(tag->device_tree_offset) < sizeof(*tag) ||
-+	    be32_to_cpu(tag->device_tree_offset) +
-+	    be32_to_cpu(tag->device_tree_size) > maxsize) {
-+		if (name)
-+			printf("%s: bogus device tree offset/size!\n", name);
-+		return -1;
-+	}
-+
-+	if (be32_to_cpu(tag->kernel_offset) < sizeof(*tag) ||
-+	    be32_to_cpu(tag->kernel_offset) +
-+	    be32_to_cpu(tag->kernel_size) > maxsize) {
-+		if (name)
-+			printf("%s: bogus kernel offset/size!\n", name);
-+		return -1;
-+	}
-+
-+	if (be32_to_cpu(tag->rootfs_offset) < sizeof(*tag) ||
-+	    be32_to_cpu(tag->rootfs_offset) +
-+	    be32_to_cpu(tag->rootfs_size) > maxsize) {
-+		if (name)
-+			printf("%s: bogus rootfs offset/size!\n", name);
-+		return -1;
-+	}
-+
-+	if (name) {
-+		/*
-+		 * Ensure null-termination within the 32-byte fields
-+		 * before printing to avoid displaying garbage.
-+		 */
-+		tag->image_name[sizeof(tag->image_name) - 1] = '\0';
-+		tag->build_date[sizeof(tag->build_date) - 1] = '\0';
-+		tag->build_user[sizeof(tag->build_user) - 1] = '\0';
-+
-+		printf("%s: Found valid tag: %s / %s / %s\n", name,
-+		       tag->image_name, tag->build_date, tag->build_user);
-+	}
-+
-+	return 0;
++	memcpy(serial, &nbx_fbxserial_default, sizeof(*serial));
 +}
 +
-+static int mvebu_imagetag_crc(struct mvebu_image_tag *tag, const char *name)
++/*
++ * Validate serial info structure
++ */
++static int nbx_fbx_check_serial(struct nbx_fbx_serial *fs)
 +{
-+	u32 crc = ~0;
++	unsigned int sum, len;
 +
-+	crc = crc32(crc, ((unsigned char *)tag) + 4,
-+		    be32_to_cpu(tag->total_size) - 4);
++	/* Check magic first */
++	if (be32_to_cpu(fs->magic) != NBX_FBXSERIAL_MAGIC) {
++		printf("Invalid magic for serial info (%08x != %08x)!\n",
++		       be32_to_cpu(fs->magic), NBX_FBXSERIAL_MAGIC);
++		return -1;
++	}
 +
-+	if (be32_to_cpu(tag->crc) != crc) {
-+		if (name)
-+			printf("%s: invalid tag CRC!\n", name);
++	/* Check struct version */
++	if (be32_to_cpu(fs->struct_version) > NBX_FBXSERIAL_VERSION) {
++		printf("Version too big for fbxserial info (0x%08x)!\n",
++		       be32_to_cpu(fs->struct_version));
++		return -1;
++	}
++
++	/* Check for silly len */
++	len = be32_to_cpu(fs->len);
++	if (len > NBX_FBXSERIAL_MAX_SIZE) {
++		printf("Silly len for serial info (%d)\n", len);
++		return -1;
++	}
++
++	/* Validate CRC (crc32_no_comp: no one's complement) */
++	sum = crc32_no_comp(0, (void *)fs + 4, len - 4);
++	if (be32_to_cpu(fs->crc32) != sum) {
++		printf("Invalid checksum for serial info (%08x != %08x)\n",
++		       sum, be32_to_cpu(fs->crc32));
 +		return -1;
 +	}
 +
 +	return 0;
 +}
 +
-+/* NRBoot (Reboot Tracking) Functions */
-+
-+int mvebu_check_nrboot(struct mmc *mmc, unsigned long offset)
++int nbx_fbx_read_serial(int dev_num, unsigned long offset,
++			struct nbx_fbx_serial *fs)
 +{
-+	struct blk_desc *bd = mmc_get_blk_desc(mmc);
-+	struct mvebu_nrboot *nr;
-+	uint blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
-+	uint blk_cnt = ALIGN(sizeof(*nr), bd->blksz) / bd->blksz;
-+	uint n;
-+
-+	ALLOC_CACHE_ALIGN_BUFFER(char, buf, blk_cnt * bd->blksz);
-+	nr = (void *)buf;
-+
-+	n = blk_dread(bd, blk_start, blk_cnt, buf);
-+	if (n != blk_cnt)
-+		return 0;
-+
-+	printf(" - nr.nrboot = %04x\n", nr->nrboot);
-+	printf(" - nr.nrsuccess = %04x\n", nr->nrsuccess);
-+
-+	/* Sanity check: values must be valid bit-field counters */
-+	if (generic_hweight16(~nr->nrboot + 1) <= 1 &&
-+	    generic_hweight16(~nr->nrsuccess + 1) <= 1) {
-+		int boot, success;
-+
-+		boot = 16 - generic_hweight16(nr->nrboot);
-+		success = 16 - generic_hweight16(nr->nrsuccess);
-+
-+		printf(" - Nrboot: %d / Nrsuccess: %d\n", boot, success);
-+
-+		if (boot == 16 || boot < success ||
-+		    boot - success >= MVEBU_MAX_FAILURE) {
-+			printf(" - Nrboot exceeded\n");
-+			return 0;
-+		}
-+
-+		/* Increment boot attempt counter */
-+		boot++;
-+		nr->nrboot = ~((1 << boot) - 1);
-+
-+		printf(" - Setting Nrboot to %d\n", boot);
-+
-+		n = blk_dwrite(bd, blk_start, blk_cnt, buf);
-+		if (n != blk_cnt)
-+			return 0;
-+
-+		return 1;
-+	}
-+
-+	printf(" - Invalid NR values\n");
-+
-+	return 0;
-+}
-+
-+/* emmcboot Command */
-+
-+static int mvebu_load_image(struct blk_desc *bd, unsigned long offset,
-+			    unsigned long maxsize, ulong tag_addr,
-+			    const char *bank)
-+{
-+	struct mvebu_image_tag *tag;
-+	uint blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
-+	uint blk_cnt;
-+	uint n;
-+
-+	ALLOC_CACHE_ALIGN_BUFFER(char, tag_buf,
-+				 ALIGN(sizeof(*tag), bd->blksz));
-+	tag = (void *)tag_buf;
-+
-+	/* Load and validate tag header */
-+	blk_cnt = ALIGN(sizeof(*tag), bd->blksz) / bd->blksz;
-+	n = blk_dread(bd, blk_start, blk_cnt, tag_buf);
-+	if (n != blk_cnt) {
-+		printf("%s: failed to read tag header\n", bank);
-+		return -1;
-+	}
-+
-+	if (mvebu_imagetag_check(tag, maxsize, bank) != 0)
-+		return -1;
-+
-+	if (tag->rootfs_size != 0) {
-+		printf("%s: rootfs in tag not supported\n", bank);
-+		return -1;
-+	}
-+
-+	/* Load full image to tag_addr */
-+	blk_cnt = ALIGN(mvebu_imagetag_total_size(tag), bd->blksz) / bd->blksz;
-+	n = blk_dread(bd, blk_start, blk_cnt, (void *)tag_addr);
-+	if (n != blk_cnt) {
-+		printf("%s: failed to read full image\n", bank);
-+		return -1;
-+	}
-+
-+	if (mvebu_imagetag_crc((void *)tag_addr, bank) != 0)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+static void mvebu_relocate_and_boot(ulong image_addr, ulong fdt_addr,
-+				    const char *bank)
-+{
-+	struct mvebu_image_tag *tag = (void *)image_addr;
-+	char bootargs[256];
-+	char cmd[128];
-+	char *console_env;
-+
-+	/* Copy DTB and kernel to their final addresses */
-+	memcpy((void *)fdt_addr,
-+	       ((void *)image_addr) + mvebu_imagetag_device_tree_offset(tag),
-+	       mvebu_imagetag_device_tree_size(tag));
-+	memmove((void *)image_addr,
-+		((void *)image_addr) + mvebu_imagetag_kernel_offset(tag),
-+		mvebu_imagetag_kernel_size(tag));
-+
-+	schedule();
-+
-+	/* Set bootargs */
-+	console_env = env_get("console");
-+	if (console_env)
-+		snprintf(bootargs, sizeof(bootargs),
-+			 "console=%s bank=%s", console_env, bank);
-+	else
-+		snprintf(bootargs, sizeof(bootargs), "bank=%s", bank);
-+
-+	env_set("bootargs", bootargs);
-+
-+	printf("## Booting kernel from %s...\n", bank);
-+	printf("   Image addr: 0x%lx\n", image_addr);
-+	printf("   FDT addr:   0x%lx\n", fdt_addr);
-+
-+	snprintf(cmd, sizeof(cmd), "booti 0x%lx - 0x%lx",
-+		 image_addr, fdt_addr);
-+	run_command(cmd, 0);
-+}
-+
-+static void mvebu_try_emmcboot(struct mmc *mmc, unsigned long offset,
-+			       unsigned long maxsize, const char *bank)
-+{
-+	struct blk_desc *bd = mmc_get_blk_desc(mmc);
-+	ulong image_addr;
-+	ulong fdt_addr;
-+
-+	schedule();
-+
-+	printf("## Trying %s boot...\n", bank);
-+
-+	/* Get load addresses from environment */
-+	image_addr = env_get_ulong("image_addr", 16, 0);
-+	if (!image_addr) {
-+		puts("emmcboot needs image_addr\n");
-+		return;
-+	}
-+
-+	fdt_addr = env_get_ulong("fdt_addr", 16, 0);
-+	if (!fdt_addr) {
-+		puts("emmcboot needs fdt_addr\n");
-+		return;
-+	}
-+
-+	if (mvebu_load_image(bd, offset, maxsize, image_addr, bank) != 0)
-+		return;
-+
-+	schedule();
-+
-+	mvebu_relocate_and_boot(image_addr, fdt_addr, bank);
-+
-+	printf("## %s boot failed\n", bank);
-+}
-+
-+static int do_emmcboot(struct cmd_tbl *cmdtp, int flag, int argc,
-+		       char *const argv[])
-+{
-+	int dev;
 +	struct mmc *mmc;
++	struct blk_desc *bd;
++	uint blk_start, blk_cnt;
++	uint n;
 +
-+	dev = 0;
-+	if (argc >= 2)
-+		dev = dectoul(argv[1], NULL);
-+
-+	mmc = find_mmc_device(dev);
++	ALLOC_CACHE_ALIGN_BUFFER(char, buf, ALIGN(sizeof(*fs), 512));
++	mmc = find_mmc_device(dev_num);
 +	if (!mmc) {
-+		printf("No MMC device %d found\n", dev);
-+		return CMD_RET_FAILURE;
++		printf("No MMC device %d found\n", dev_num);
++		nbx_fbxserial_set_default(fs);
++		return -1;
 +	}
 +
 +	if (mmc_init(mmc)) {
 +		puts("MMC init failed\n");
-+		return CMD_RET_FAILURE;
++		nbx_fbxserial_set_default(fs);
++		return -1;
 +	}
 +
 +	/* Switch to partition 0 (user data area) */
-+	if (blk_select_hwpart_devnum(UCLASS_MMC, dev, 0)) {
++	if (blk_select_hwpart_devnum(UCLASS_MMC, dev_num, 0)) {
 +		puts("MMC partition switch failed\n");
-+		return CMD_RET_FAILURE;
++		nbx_fbxserial_set_default(fs);
++		return -1;
 +	}
 +
-+	if (mvebu_check_nrboot(mmc, CONFIG_MVEBU_MMC_PART_NRBOOT_OFFSET)) {
-+		/* System is healthy: try newer bank first */
-+		mvebu_try_emmcboot(mmc, CONFIG_MVEBU_MMC_PART_BANK1_OFFSET,
-+				   CONFIG_MVEBU_MMC_PART_BANK1_SIZE, "bank1");
-+		mvebu_try_emmcboot(mmc, CONFIG_MVEBU_MMC_PART_BANK0_OFFSET,
-+				   CONFIG_MVEBU_MMC_PART_BANK0_SIZE, "bank0");
-+	} else {
-+		/* System is degraded: use stable bank first */
-+		mvebu_try_emmcboot(mmc, CONFIG_MVEBU_MMC_PART_BANK0_OFFSET,
-+				   CONFIG_MVEBU_MMC_PART_BANK0_SIZE, "bank0");
-+		mvebu_try_emmcboot(mmc, CONFIG_MVEBU_MMC_PART_BANK1_OFFSET,
-+				   CONFIG_MVEBU_MMC_PART_BANK1_SIZE, "bank1");
++	bd = mmc_get_blk_desc(mmc);
++	if (!bd) {
++		puts("Failed to get MMC block descriptor\n");
++		nbx_fbxserial_set_default(fs);
++		return -1;
 +	}
 +
-+	puts("emmcboot: all boot attempts failed\n");
++	blk_start = ALIGN(offset, bd->blksz) / bd->blksz;
++	blk_cnt = ALIGN(sizeof(*fs), bd->blksz) / bd->blksz;
 +
-+	return CMD_RET_FAILURE;
++	n = blk_dread(bd, blk_start, blk_cnt, buf);
++	if (n != blk_cnt) {
++		printf("Failed to read serial info from MMC\n");
++		nbx_fbxserial_set_default(fs);
++		return -1;
++	}
++
++	memcpy(fs, buf, sizeof(*fs));
++
++	if (nbx_fbx_check_serial(fs) != 0) {
++		nbx_fbxserial_set_default(fs);
++		return -1;
++	}
++
++	return 0;
++}
++
++void nbx_fbx_dump_serial(struct nbx_fbx_serial *fs)
++{
++	int i;
++
++	printf("Serial: %04u-%02u-%c-(%02u)%02u-%02u-%05u / %08x\n",
++	       be16_to_cpu(fs->type),
++	       fs->version,
++	       isprint(fs->manufacturer) ? fs->manufacturer : '?',
++	       be16_to_cpu(fs->year) / 100,
++	       be16_to_cpu(fs->year) % 100,
++	       fs->week,
++	       be32_to_cpu(fs->number),
++	       be32_to_cpu(fs->flags));
++
++	printf("Mac:    %02X:%02X:%02X:%02X:%02X:%02X\n",
++	       fs->mac_addr_base[0],
++	       fs->mac_addr_base[1],
++	       fs->mac_addr_base[2],
++	       fs->mac_addr_base[3],
++	       fs->mac_addr_base[4],
++	       fs->mac_addr_base[5]);
++
++	/* Show bundle info */
++	for (i = 0; i < be32_to_cpu(fs->extinfo_count); i++) {
++		struct nbx_serial_extinfo *p;
++
++		if (i >= NBX_EXTINFO_MAX_COUNT)
++			break;
++
++		p = &fs->extinfos[i];
++		if (be32_to_cpu(p->type) == NBX_EXTINFO_TYPE_EXTDEV &&
++		    be32_to_cpu(p->u.extdev.type) == NBX_EXTDEV_TYPE_BUNDLE) {
++			/* Ensure null termination */
++			p->u.extdev.serial[sizeof(p->u.extdev.serial) - 1] = 0;
++			printf("Bundle: %s\n", p->u.extdev.serial);
++		}
++	}
++
++	printf("\n");
++}
++
++int nbx_fbx_init_ethaddr(int dev_num, unsigned long offset)
++{
++	struct nbx_fbx_serial fs;
++	char mac[32];
++	int ret;
++
++	ret = nbx_fbx_read_serial(dev_num, offset, &fs);
++
++	nbx_fbx_dump_serial(&fs);
++
++	/* Even on error, fs has default values set */
++	snprintf(mac, sizeof(mac), "%02x:%02x:%02x:%02x:%02x:%02x",
++		 fs.mac_addr_base[0], fs.mac_addr_base[1],
++		 fs.mac_addr_base[2], fs.mac_addr_base[3],
++		 fs.mac_addr_base[4], fs.mac_addr_base[5]);
++
++	env_set("ethaddr", mac);
++	env_set("eth1addr", mac);
++	env_set("eth2addr", mac);
++
++	return ret;
++}
++
++/*
++ * fbxserial show - display serial info from eMMC
++ */
++static int do_fbxserial_show(struct cmd_tbl *cmdtp, int flag, int argc,
++			     char *const argv[])
++{
++	struct nbx_fbx_serial fs;
++	int dev = 0;
++	unsigned long offset = CONFIG_NBX_MMC_PART_SERIAL_OFFSET;
++
++	if (argc >= 1)
++		dev = dectoul(argv[0], NULL);
++
++	if (argc >= 2)
++		offset = hextoul(argv[1], NULL);
++
++	if (nbx_fbx_read_serial(dev, offset, &fs) != 0)
++		printf("Warning: Using default serial info\n");
++
++	nbx_fbx_dump_serial(&fs);
++
++	return CMD_RET_SUCCESS;
++}
++
++/*
++ * fbxserial init - initialize ethaddr from serial info
++ */
++static int do_fbxserial_init(struct cmd_tbl *cmdtp, int flag, int argc,
++			     char *const argv[])
++{
++	int dev = 0;
++	unsigned long offset = CONFIG_NBX_MMC_PART_SERIAL_OFFSET;
++
++	if (argc >= 1)
++		dev = dectoul(argv[0], NULL);
++
++	if (argc >= 2)
++		offset = hextoul(argv[1], NULL);
++
++	return nbx_fbx_init_ethaddr(dev, offset);
++}
++
++static struct cmd_tbl cmd_fbxserial_sub[] = {
++	U_BOOT_CMD_MKENT(show, 3, 0, do_fbxserial_show, "", ""),
++	U_BOOT_CMD_MKENT(init, 3, 0, do_fbxserial_init, "", ""),
++};
++
++static int do_fbxserial(struct cmd_tbl *cmdtp, int flag, int argc,
++			char *const argv[])
++{
++	struct cmd_tbl *cp;
++
++	/* Default to 'show' if no subcommand */
++	if (argc < 2)
++		return do_fbxserial_show(cmdtp, flag, 0, NULL);
++
++	cp = find_cmd_tbl(argv[1], cmd_fbxserial_sub,
++			  ARRAY_SIZE(cmd_fbxserial_sub));
++
++	if (!cp)
++		return CMD_RET_USAGE;
++
++	return cp->cmd(cmdtp, flag, argc - 2, argv + 2);
 +}
 +
 +U_BOOT_CMD(
-+	emmcboot, 2, 0, do_emmcboot,
-+	"boot from Nodebox eMMC image banks",
-+	"[dev]\n"
-+	"    - Load and boot a Nodebox image from eMMC device <dev> (default 0)\n"
-+	"    - Requires image_addr and fdt_addr environment variables\n"
-+	"    - Two banks: Bank0 (stable) and Bank1 (newer)\n"
-+	"    - Bank order selected by reboot tracking counter (nrboot)"
++	fbxserial, 5, 0, do_fbxserial,
++	"NBX serial info and MAC address initialization",
++	"show [dev] [offset] - display serial info from eMMC\n"
++	"fbxserial init [dev] [offset] - initialize ethaddr from serial info\n"
++	"    dev    - MMC device number (default 0)\n"
++	"    offset - offset in eMMC in hex (default from Kconfig)"
 +);
 diff --git a/configs/mvebu_nbx_88f8040_defconfig b/configs/mvebu_nbx_88f8040_defconfig
-index 975c53e9a92..2fd58e4ad64 100644
+index 2fd58e4ad64..c295094536e 100644
 --- a/configs/mvebu_nbx_88f8040_defconfig
 +++ b/configs/mvebu_nbx_88f8040_defconfig
-@@ -40,6 +40,7 @@ CONFIG_CMD_PING=y
- CONFIG_CMD_CACHE=y
+@@ -21,6 +21,7 @@ CONFIG_PREBOOT="echo (CRC warning is normal: no env saved yet)"
+ CONFIG_SYS_PBSIZE=1048
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_DISPLAY_CPUINFO=y
++CONFIG_LAST_STAGE_INIT=y
+ CONFIG_SYS_PROMPT="nodebox10G>> "
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_CMD_BOOTZ=y
+@@ -41,6 +42,7 @@ CONFIG_CMD_CACHE=y
  CONFIG_CMD_TIME=y
  CONFIG_CMD_TIMER=y
-+CONFIG_CMD_NBX_EMMCBOOT=y
+ CONFIG_CMD_NBX_EMMCBOOT=y
++CONFIG_CMD_NBX_FBXSERIAL=y
  CONFIG_CMD_EXT2=y
  CONFIG_CMD_EXT4=y
  CONFIG_CMD_EXT4_WRITE=y
-diff --git a/include/mvebu_imagetag.h b/include/mvebu_imagetag.h
+diff --git a/include/nbx_fbxserial.h b/include/nbx_fbxserial.h
 new file mode 100644
-index 00000000000..d513038aaf6
+index 00000000000..7628e658f5e
 --- /dev/null
-+++ b/include/mvebu_imagetag.h
-@@ -0,0 +1,82 @@
++++ b/include/nbx_fbxserial.h
+@@ -0,0 +1,134 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Nodebox 10G boot image tag format
++ * NBX Freebox Serial Info Support
 + *
 + * Copyright (C) 2026 Free Mobile, Freebox
 + *
-+ * Defines the on-eMMC image layout used by Nodebox 10G boards.
-+ * Each image carries a CRC32-validated tag header that describes
-+ * the kernel, device tree, and rootfs components.
++ * Reads device serial number and MAC address from eMMC.
++ * Used to identify the board and set network MAC addresses.
 + */
 +
-+#ifndef __MVEBU_IMAGETAG_H
-+#define __MVEBU_IMAGETAG_H
++#ifndef NBX_FBXSERIAL_H
++#define NBX_FBXSERIAL_H
 +
 +#include <linux/types.h>
 +
-+#define MVEBU_IMAGE_TAG_MAGIC	0x8d7c90bc
-+#define MVEBU_IMAGE_TAG_VERSION	1
-+
-+/**
-+ * struct mvebu_image_tag - Nodebox boot image tag stored in eMMC
-+ *
-+ * All multi-byte fields are stored in big-endian format.
-+ */
-+struct mvebu_image_tag {
-+	u32 crc;			/* CRC32-LE checksum (from offset 4) */
-+	u32 magic;			/* Magic: 0x8d7c90bc */
-+	u32 version;			/* Version: 1 */
-+	u32 total_size;			/* Total image size including tag */
-+	u32 flags;			/* Feature flags (reserved) */
-+
-+	u32 device_tree_offset;		/* Offset from tag start to DTB */
-+	u32 device_tree_size;		/* DTB size in bytes */
-+
-+	u32 kernel_offset;		/* Offset from tag start to kernel */
-+	u32 kernel_size;		/* Kernel size in bytes */
-+
-+	u32 rootfs_offset;		/* Offset from tag start to rootfs */
-+	u32 rootfs_size;		/* Rootfs size (must be 0) */
-+
-+	char image_name[32];		/* Image name (null-terminated) */
-+	char build_user[32];		/* Build user info */
-+	char build_date[32];		/* Build date info */
-+};
-+
-+/* Accessor functions for big-endian fields */
-+static inline u32 mvebu_imagetag_device_tree_offset(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->device_tree_offset);
-+}
-+
-+static inline u32 mvebu_imagetag_device_tree_size(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->device_tree_size);
-+}
-+
-+static inline u32 mvebu_imagetag_kernel_offset(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->kernel_offset);
-+}
-+
-+static inline u32 mvebu_imagetag_kernel_size(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->kernel_size);
-+}
-+
-+static inline u32 mvebu_imagetag_rootfs_offset(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->rootfs_offset);
-+}
-+
-+static inline u32 mvebu_imagetag_rootfs_size(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->rootfs_size);
-+}
-+
-+static inline u32 mvebu_imagetag_total_size(struct mvebu_image_tag *tag)
-+{
-+	return be32_to_cpu(tag->total_size);
-+}
-+
-+#endif /* __MVEBU_IMAGETAG_H */
-diff --git a/include/mvebu_nrboot.h b/include/mvebu_nrboot.h
-new file mode 100644
-index 00000000000..11d59d7680f
---- /dev/null
-+++ b/include/mvebu_nrboot.h
-@@ -0,0 +1,51 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Nodebox 10G reboot tracking counter (NRBoot)
-+ *
-+ * Copyright (C) 2026 Free Mobile, Freebox
-+ *
-+ * Part of the Nodebox eMMC image format: a small bit-field counter
-+ * stored between the serial info and the image banks that tracks
-+ * consecutive boot failures to select the right bank.
++ * Extended info structure - variable data depending on type
 + */
++#define NBX_EXTINFO_SIZE		128
++#define NBX_EXTINFO_MAX_COUNT		16
 +
-+#ifndef __MVEBU_NRBOOT_H
-+#define __MVEBU_NRBOOT_H
++/* Extended info types */
++#define NBX_EXTINFO_TYPE_EXTDEV		1
 +
-+#include <linux/types.h>
-+#include <mmc.h>
++/* Extended device types */
++#define NBX_EXTDEV_TYPE_BUNDLE		1
++#define NBX_EXTDEV_TYPE_MAX		2
 +
-+#define MVEBU_MAX_FAILURE	4
++struct nbx_serial_extinfo {
++	u32 type;
++
++	union {
++		/* extdev */
++		struct {
++			u32 type;
++			u32 model;
++			char serial[64];
++		} extdev;
++
++		/* raw access */
++		unsigned char data[NBX_EXTINFO_SIZE];
++	} u;
++} __packed;
++
++/*
++ * Master serial structure
++ */
++#define NBX_FBXSERIAL_VERSION		1
++#define NBX_FBXSERIAL_MAGIC		0x2d9521ab
++
++#define NBX_MAC_ADDR_SIZE		6
++#define NBX_RANDOM_DATA_SIZE		32
++
++/* Maximum size for CRC validation */
++#define NBX_FBXSERIAL_MAX_SIZE		8192
++
++struct nbx_fbx_serial {
++	u32 crc32;
++	u32 magic;
++	u32 struct_version;
++	u32 len;
++
++	/* Board serial */
++	u16 type;
++	u8 version;
++	u8 manufacturer;
++	u16 year;
++	u8 week;
++	u32 number;
++	u32 flags;
++
++	/* MAC address base */
++	u8 mac_addr_base[NBX_MAC_ADDR_SIZE];
++
++	/* MAC address count */
++	u8 mac_count;
++
++	/* Random data used to derive keys */
++	u8 random_data[NBX_RANDOM_DATA_SIZE];
++
++	/* Last update of data (seconds since epoch) */
++	u32 last_modified;
++
++	/* Count of following extinfo tags */
++	u32 extinfo_count;
++
++	/* Beginning of extended info */
++	struct nbx_serial_extinfo extinfos[NBX_EXTINFO_MAX_COUNT];
++} __packed;
 +
 +/**
-+ * struct mvebu_nrboot - Reboot tracking counter stored in eMMC
-+ * @nrboot: Bit-field counter of boot attempts (0-bits = attempt count)
-+ * @nrsuccess: Bit-field counter of successful boots
++ * nbx_fbxserial_set_default() - Initialize serial structure with defaults
++ * @serial: Pointer to serial structure to initialize
++ *
++ * Sets the serial structure to default values (Freebox OUI, type 9018).
++ * Used as fallback when serial info cannot be read from eMMC.
 + */
-+struct mvebu_nrboot {
-+	u16 nrboot;
-+	u16 nrsuccess;
-+};
++void nbx_fbxserial_set_default(struct nbx_fbx_serial *serial);
 +
 +/**
-+ * mvebu_check_nrboot() - Check and update reboot tracking counter
-+ * @mmc: MMC device
-+ * @offset: Byte offset in MMC where nrboot data is stored
++ * nbx_fbx_read_serial() - Read serial info from eMMC
++ * @dev_num: MMC device number
++ * @offset: Byte offset in eMMC where serial info is stored
++ * @fs: Pointer to serial structure to fill
 + *
-+ * Reads the reboot tracking counter, checks if the maximum number of
-+ * failed boots (4) has been exceeded, and updates the counter for the
-+ * current boot attempt.
++ * Reads and validates the serial info from eMMC. On failure,
++ * the structure is filled with default values.
 + *
-+ * The counter uses a bit-field encoding for wear leveling:
-+ * - nrboot: Running count of boot attempts (counted as cleared bits)
-+ * - nrsuccess: Count of successful boots (counted as cleared bits)
-+ *
-+ * If boot - success >= MAX_FAILURE (4), the system is considered
-+ * degraded and should use the fallback boot bank.
-+ *
-+ * Return: 1 if system is healthy (try newer bank first),
-+ *         0 if system is degraded (use stable bank first)
++ * Return: 0 on success, negative on error (defaults still set)
 + */
-+int mvebu_check_nrboot(struct mmc *mmc, unsigned long offset);
++int nbx_fbx_read_serial(int dev_num, unsigned long offset,
++			struct nbx_fbx_serial *fs);
 +
-+#endif /* __MVEBU_NRBOOT_H */
++/**
++ * nbx_fbx_dump_serial() - Print serial info to console
++ * @fs: Pointer to serial structure to display
++ *
++ * Prints the serial number, MAC address, and bundle info (if present).
++ */
++void nbx_fbx_dump_serial(struct nbx_fbx_serial *fs);
++
++/**
++ * nbx_fbx_init_ethaddr() - Initialize Ethernet addresses from serial info
++ * @dev_num: MMC device number
++ * @offset: Byte offset in eMMC where serial info is stored
++ *
++ * Reads serial info and sets ethaddr, eth1addr, eth2addr environment
++ * variables from the base MAC address in the serial structure.
++ *
++ * Return: 0 on success, negative on error
++ */
++int nbx_fbx_init_ethaddr(int dev_num, unsigned long offset);
++
++#endif /* NBX_FBXSERIAL_H */
 -- 
 2.43.0
 
