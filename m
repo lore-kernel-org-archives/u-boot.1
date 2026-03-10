@@ -4,141 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8DFEB1070
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:31:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD3FDEB1060
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD01C83FED;
-	Tue, 10 Mar 2026 16:31:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B8E88405F;
+	Tue, 10 Mar 2026 16:34:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jcvn9rda";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="d5z8V4ne";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25DE383FE9; Tue, 10 Mar 2026 15:21:06 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id C7A078409A; Tue, 10 Mar 2026 16:34:17 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DC2983F53
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:21:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 524FC83FBC
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:34:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-89a00e8dc04so90333606d6.0
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 07:21:01 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773152460; cv=none;
- d=google.com; s=arc-20240605;
- b=XaImtv7qEXhzQw8ERwEt7cGnsreSVPsI1wMqkRnKzKQF1HjlaHKINl3RvInylbRGZx
- LwiFy9P/jbyZiHlWXrhSCkgQU/NkTIDkvbKEkLCpsM4lA2ysJOsOWQqGvsRze3cObqWB
- vdeahas5sCIC9zk+tu4PoZbzzcmKzo+SeUJyKwLam4O7eSG/xuvytBSViYYYDgXMc1te
- LjDopVGwAfKu39tTA+mCj/yu1zf857k6o1TxPfYwHjVRGIy3ewbqjLsqQgUjLrbxHkaU
- dVKp8qKCRsvSx+k62yzSh34iA/aDkaoBCyOyX7/MrG/tAkBdESiR5f+9rMjEgOd7RIx4
- zkqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Cx7QwcZHaMpUUbmCcvrDUSSQSZ4iJrO07FpCq95+LEk=;
- fh=mSmNMztr/GSWdBlG+v/te0stRsD/if1NVNY3WS9jYac=;
- b=cYW0tf5ahZq+i4cBnLAR/WhAMHxpMde2LnA8O964JTYArAgmVWkvDAykvI3iotV67Q
- a/5z9HQYrBbWnvsFlUNfKUTRn6mPaCYNeDsBhpMFjyjs7QQh/S+ThEeB9kfA3XBm0b+t
- KUJWhTKrmR3ecorMSOC1V4hssTanFPRC6TW3WFl75AgQjJd2S7XXKVSgKp3PBM/gpIKE
- 7ki0puqtY4rU4hdNycFAJ/XJgenQKxFUVWIExTggSmah7BAZbA3ssD7H37NXs3R+kLOS
- 9HbCXqWOYZX+sY7wwQFkiFfCHobNN0IZXM+rsYmRRv2C7pdaBNb+I3iBDQ/mzsCGg49w
- AE9Q==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-46701f2077cso9188b6e.0
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 08:34:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773152460; x=1773757260; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Cx7QwcZHaMpUUbmCcvrDUSSQSZ4iJrO07FpCq95+LEk=;
- b=Jcvn9rda80Me94wPs6aV1yp6XTbCEAqtmdgXpj1zvE1fm8sYps/2oRwH0ddwtfLJNw
- 9bHdfpz5kwUBvHTBuf96jQPnIbZJIdIvABECv8NLyFOaZo8Ixvs/5SvPjQrlcPoQ4Hwg
- 4brbuH4kwXmmWRHRo/3yUAD9SsZBrS4WNhN9qCifHrobrcHW/wdrfZrlNQJMFGJ/9gwp
- 1SQ/X82MoGezPMIdQjSHUsw2JErQmly9VxC/zv3DmSUViwJh4JXwK9/CsfNSvERzI2rX
- I/Dm3anzSbvFZOz3ATEroLHMjoVJhysSz/xxs/YAu0Oibk4Hg3p2WEBLjfoKDcOQ1pce
- WrvQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773156854; x=1773761654;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0zCS5vKfBWgr7bmlhO8zH587grxscgNznciHBuIgdKM=;
+ b=d5z8V4ne5giwfZIu1pIvwVdRarkX1ro0sntdAOIyAgojLtSa0ipweJohGzj9vDlBGR
+ Tp3Rgx/iftks5ecm1Pa50QcPDKtB4tEpB0BVxknPlAQZK7jpZY6+BlcrJ2Q0YW6NLt/Y
+ M+6XgfOlHdnfMQTOxWEJfj1ZbLWdLC8nOqaV9EGUCvdvuwaqpDMPHkl7/M+MhvizNPFS
+ sqwaLsety8TD0iTURoxiVrIEZOcuI3dbJI3HzC3g0Tzx3Kdye3YW0wulEBK8fuJvQnBe
+ FjhFPP0zeEYuejVNQR4gc4/GHI6wfXkoY7cjiayOaTQx9qWb7FZzHEhU4/ca913/XTdZ
+ i56A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773152460; x=1773757260;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Cx7QwcZHaMpUUbmCcvrDUSSQSZ4iJrO07FpCq95+LEk=;
- b=huXakO3f84tJTLJ++WaTNQtcIiV4mg8aAp8Rtw10D8Ud0p0wZwt+UkSCeavDUlrdaT
- oTA2cuWTvZmT6pNXhRkR0lJ6jw0bvYuwbVJlDpWXpy7edfA2M0QlE6ldeiLMaFEus8cm
- GKvaAyFxxsDTITFrbCimQfPawfBSFIhElIlbsT9oL+w4Gx7BgMwLGw68xZEENBPNyIxX
- hUU+w17VKxtdKaPrKmQwziDKJCWc/+9g9kTEuTTv6j28St5yaNl6duQBhh7Hk/FWLajg
- KuF+i6mK8OxAunZo/9ek3WyoYMIy/rmaNodROS2PE1QacnPDRF/zNiUlFzBYzPuQijo7
- lnOA==
-X-Gm-Message-State: AOJu0YyQESp7jkLX05AbazLVVSgUwyxjop4oxf1o8fO7qiqgLv9MoKza
- xHbqrLCQxWgrEwPAMC3VMIKE/xIKfJeppSbWZdh1hEVuQMA2BcIeQR0rSBbHTTyy1ms0rFJXVXV
- ESKpEEg/b4f0Khn89q92LCNWL0k6XNn0=
-X-Gm-Gg: ATEYQzyYErHijHx703tJT90+4LbJx9nexN1oVAaRFxLkJhf3uD6Dw/iva2XCNZubwVW
- elJgqWmq1KroEsBHw3S0WnAs3eZRNb8HA+DOcv7bYZxncU7w/b4uH52misGEF6ALwdIU8f+EF9s
- Wxxl4+6WA+0TUnpMerkESNXHr7iaAwOyxKC4OG90lPVz7t97IXcYJ2MOdj26uOGgRWbG6tBBHv1
- mxCAOp5aoSU7Z91L3l0fSjS9axoWq4VGZY1Jh9XJ3zLrBy7J/WSzCmQeOqGinhEc3I+fopAnkPD
- m/lcnT4=
-X-Received: by 2002:a05:622a:1998:b0:509:1dc8:e9e7 with SMTP id
- d75a77b69052e-5091dc8f00amr71262521cf.51.1773152459975; Tue, 10 Mar 2026
- 07:20:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1773156854; x=1773761654;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0zCS5vKfBWgr7bmlhO8zH587grxscgNznciHBuIgdKM=;
+ b=Ne84gkpxbXEDrMmPKUIySjpXWROPupugCexS3IlwV5iiU62zWSIKWnW6P0w8J1dv4I
+ LyLWsqpUvgjyR7z6Ulk/VxUd++TBiUm+XBu+8vnmjODAgQMKN2y1Hb2XIfmGStH+nUFp
+ bd0YuGVY826otd1VOLmGZfLe327Xjkjej5a9uiHVwLGuv2Jd1wXwTneUXCB+/Y8MxOLN
+ FKry3luYWG7ONmNsEj+1QKDaDPkii+8KUO3rNqe7fBndFbgPWpzfkrQUmtCJW0IE5MqL
+ 8IphzdQ4s04D38eoNDi4jirnyG9aRW/QLnRyvmuxZY4pVTUihH4WZa3PSE0/wuNwyM3G
+ gZfA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvezIN2zZ9NC7PIdqQjFdzELFh6kK754JUi6JkIuxF172TIgQho7nPrP8F/UTmoZsxqdIvBjA=@lists.denx.de
+X-Gm-Message-State: AOJu0YywpDtNcpeH+XsQadsaiwRfuj8z5O2BcjFN6T8kuFKTjSwEyYYf
+ 4gJhvyzwMiZ/nC7rsIZF3S0C8E4dmlh/ePeeu4aCKm+geQagCRGp9ZhiIBSZcarHWO4=
+X-Gm-Gg: ATEYQzw2smawzlCwSzpP0Q+bUzrtSSTInVaS8dhBd2AI//s369Z9+FpH/UfSl7eSeks
+ zNpCHuoQbNWp6c9ies5GN/TKUqT0pWncGjs5kRgD/KEknm4QvgI/C5K+QeRi/O8MLNQJnmFVicP
+ B53GXkLwN4II2aBi2xUzKhNk16PXmcRnCEu2/XfGHjKph/9nZs6Sqrkrbhw6dT2i3vwUEk5NYS0
+ Uo6Ldj5kW78X04HbSXzIun9GVL3BshnsU3Re8k2cyohtr210qwESnlMv4HaU/K/oCy6TufEFWof
+ RwznLrm3gDjaqBhSa8F5P/zwrdIzjstFA/ckz0/LQoKk143m42ye8mfZ6oA4EnCE78JwghiRlmL
+ SFo0sLcpwo2E2b16euzmKsQo29MNxWizIxAaVxxXdcHxWX6nkadDVu8/MpMBb/C+iuCd88oRpXI
+ 7TqZl6PB5wELgV5wCuUBKZLXsacXWG
+X-Received: by 2002:a05:6808:179e:b0:467:10f0:737c with SMTP id
+ 5614622812f47-4671bda2d3dmr2216467b6e.3.1773156853976; 
+ Tue, 10 Mar 2026 08:34:13 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:78e2:51e2:14b8:2e10])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-466ecbcec59sm6320968b6e.7.2026.03.10.08.34.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 08:34:13 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 00/16] clk: mediatek: remove CLK_XTAL/CLK_PARENT_XTAL
+Date: Tue, 10 Mar 2026 10:32:13 -0500
+Message-Id: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
 MIME-Version: 1.0
-References: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
- <CABjd4Yz6J_uQG5WknghbhEWcxzL1G4BirLG37QMT1-OTdjzWRg@mail.gmail.com>
- <a7a6e9e9-065b-460c-91d9-316ddfc4eb79@linaro.org>
-In-Reply-To: <a7a6e9e9-065b-460c-91d9-316ddfc4eb79@linaro.org>
-From: Alexey Charkov <alchark@gmail.com>
-Date: Tue, 10 Mar 2026 18:20:48 +0400
-X-Gm-Features: AaiRm50IDtOlmXf78w84bD7xX8JxnG7_0biBa1n2dLey0dyYzUSH6stmrQhrnlI
-Message-ID: <CABjd4Yzth2zJ_xk8cPidNCnNc81=wAWq7EN=U=R6xxXQuLXP0A@mail.gmail.com>
-Subject: Re: [PATCH v5 0/4] Enable full UFS boot on Rockchip RK3576
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, Shawn Lin <shawn.lin@rock-chips.com>, 
- Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Simon Glass <sjg@chromium.org>, Yao Zi <me@ziyao.cc>, 
- Stefan Roese <stefan.roese@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Heiko Schocher <hs@nabladev.com>,
- Anshul Dalal <anshuld@ti.com>, Andre Przywara <andre.przywara@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Andrew Davis <afd@ti.com>, 
- Hrushikesh Salunke <h-salunke@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Dinesh Maniyam <dinesh.maniyam@altera.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/5XR0W6DIBQG4FcxXO9sgKjYLMveY+kF6KEjFXWgx
+ qbpuw+186oX3R0/CR+HnysJ6C0GckiuxONkg+3aGNhLQqpv1Z4QbB0z4ZTnNKUpVM0Z3HCGXnl
+ shxhRtWMPpqyNEVUuaZ6SeLj3aOy8wl/HLXv8GaM/bJvEYQhq9Q/J+84vtBskk2Wku+ocYBJAA
+ VFmRtY1N7T+1OrSWO3xtercx3LZIyrbJ41zbKQEr+LtMHFgQCvkOuOMF0X2nJjvokfXTbhGfel
+ VCDAPqgHTqNOCU9A8S7UoDSs0fw4vd3xsrbmAG+d7xeFOUilQFUKX5ZMNbGUurEzzDGrf9eBUD
+ xOLz2eFkaxKi4yX9L8T3stcQZwHr2CIq7/vitVCjigKkSop8gflahVieZ1zdjgknbcn2761ESL
+ H2+0XmVFr9ZECAAA=
+X-Change-ID: 20260303-clk-mtk-parent-cleanup-f9dff4c68063
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- Tuyen Dang <tuyen.dang.xa@renesas.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Johan Jonker <jbx6244@gmail.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, 
- Dhruva Gole <d-gole@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Elaine Zhang <zhangqing@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 10 Mar 2026 16:31:45 +0100
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5628; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=iW8Ipfn5x5jbvtVZpg6Fyz3M0m/O8vGf8f3NX8c5wuQ=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpsDmFbXo71YvK5XQF/Oet0gIb21vBEJoEApDHi
+ KeQ+wIY6zKJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabA5hRYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ALpIH/2oWTaNhCwAjPS3mK5Gm6e6k9ChcrR0BO9riq/i
+ fKDoK6QGRnW5zY1LMpo1VpZtu3PwvDjULhb3gBuwBgWiN5hwwziUK2XSvL9CeR4qbzXt9UvPrR7
+ OXDNrKoE3ZzXLLavoWM/e0B8XcOVJHqZgLy5uswq76sg+Nr1qSnMJyTvGGsuN9JN9q9Vc+jwWfo
+ gWT/LX8hfnXNDXvC/Vq5jTXMWssyhOMSaIdNZwtUVC3W9kJZJ6eLnxj6OTD9hqehcKFNYPOSNyF
+ vNbvO4aRWstKMVLIMkaNKT9pHB6qIJpml/8W45fT1RFrqWD0tucBvsGNDy4RXT0SNC555GvsqcJ
+ pwN8=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,180 +125,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 10, 2026 at 5:04=E2=80=AFPM Neil Armstrong
-<neil.armstrong@linaro.org> wrote:
->
-> Hi,
->
-> On 3/10/26 09:44, Alexey Charkov wrote:
-> > On Tue, Jan 20, 2026 at 10:09=E2=80=AFPM Alexey Charkov <alchark@gmail.=
-com> wrote:
-> >>
-> >> Rockchip RK3576 can load its bootloader from UFS among other options,
-> >> so this series adds the necessary bits and pieces to enable an end-to-=
-end
-> >> boot from UFS (boot ROM -> SPL -> U-boot proper -> kernel).
-> >>
-> >> To achieve the above, this series goes through the following:
-> >>   - Patch 1 introduces arch-independent code to enable SPL images to u=
-se
-> >>     UFS devices, including build system tweaks and a function to locat=
-e
-> >>     a U-boot image at a fixed UFS offset and LUN (SCSI device number)
-> >>   - Patch 2 adds an option to build the Rockchip reset driver for SPL
-> >>   - Patch 3 adds device-reset functionality to the Rockchip UFS glue c=
-ode,
-> >>     which is required for (at least some) UFS modules to respond to
-> >>     controller commands upon initial enumeration
-> >>   - Patch 4 ties it all together for Rockchip RK3576
-> >>
-> >> This has been tested on a FriendlyElec NanoPi M5 board with a Biwin
-> >> BWU3AKC46C256G UFS module. Note that booting directly from UFS masks t=
-he
-> >> issue which patch 3 aims to address, because the boot ROM initializes =
-the
-> >> UFS module before handing over to U-boot. If, however, one boots SPL f=
-rom
-> >> FSPI1 with the same driver code, the module fails to respond unless pa=
-tch
-> >> 3 is applied.
-> >>
-> >> This depends on Jonas' recent series [3] enabling DMA writes to PMU SR=
-AM,
-> >> without which the UFS controller will fail to load ATF and end up in a=
-n
-> >> unrecoverable error state requiring a hard reset.
-> >>
-> >> Note that in my experience none of the RK3576 boards actually boot cur=
-rent
-> >> mainline U-boot versions without a single-word SRAM write before jumpi=
-ng
-> >> to DDR initialization, as done in Kwiboo's commit at [1]. Therefore, t=
-o
-> >> test this series I additionally applied commits 6b152999908b..d43031c4=
-045e
-> >> from Kwiboo's rk3576 branch [2] (including 6b152999908b), so any teste=
-rs
-> >> might want to:
-> >>
-> >> git cherry-pick 6b152999908b^..d43031c4045e
-> >>
-> >> from there before or after applying this series
-> >>
-> >> [1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commit/=
-d43031c4045ef8aaf29c467b910207e721dabce0
-> >> [2] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits=
-/rk3576?ref_type=3Dheads
-> >> [3] https://lore.kernel.org/all/20260108133234.4001390-1-jonas@kwiboo.=
-se/
-> >>
-> >> Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> >> ---
-> >> Changes in v5:
-> >> - Reverse X-mas tree in spl_ufs:spl_ufs_load_image (thanks Quentin)
-> >> - Explicit "depends on UFS" from CONFIG_SPL_UFS_SUPPORT (thanks Quenti=
-n).
-> >>    This also pulls in SCSI to avoid compilation errors.
-> >> - Split out the patch enabling the Rockchip reset driver for SPL build=
-s
-> >>    (thanks Quentin)
-> >> - Reworded the error message when requesting the UFS reset GPIO fails
-> >>    (thanks Quentin)
-> >> - Added a note in the commit message about reset-gpios being required =
-by
-> >>    the DT binding (thanks Quentin)
-> >> - Dropped the redundant check of GPIO validity in the reset function
-> >>    (thanks Quentin)
-> >> - Added a note about GPIO4_D0 being the only GPIO usable for UFS reset
-> >>    on RK3576 (thanks Shawn)
-> >> - Dropped "imply" symbols from the arch Kconfig, now that both GPIO
-> >>    and RESET drivers are explicitly depended on from the UFS driver
-> >>    (thanks Quentinq)
-> >> - Link to v4: https://lore.kernel.org/r/20260108-rk3576-ufs-v4-0-e8e67=
-649f3f8@gmail.com
-> >>
-> >> Changes in v4:
-> >> - Added a dependency in b4 metadata on Jonas' new series enabling DMA
-> >>    writes to PMU SRAM (thanks Jonas)
-> >> - Dropped the bounce buffer quirk altogether, as it now works as-is
-> >> - Link to v3: https://lore.kernel.org/r/20260106-rk3576-ufs-v3-0-bfe25=
-9fd6d17@gmail.com
-> >>
-> >> Changes in v3:
-> >> - Added a UFSHC quirk to use the SCSI bounce buffer for addresses outs=
-ide
-> >>    SDRAM, and enabled it on Rockchip (thanks Neil and Tom)
-> >> - Dropped the open-coded bounce buffer from spl_ufs.c, now unneeded
-> >> - Link to v2: https://lore.kernel.org/r/20260105-rk3576-ufs-v2-0-caba9=
-79a0d6b@gmail.com
-> >>
-> >> Changes in v2:
-> >> - Rename the SPL UFS read helper function more self-descriptively (tha=
-nks Neil)
-> >> - Add an option to configure the UFS LUN used to look for the U-boot i=
-mage
-> >>    in raw offset mode - or rather the SCSI device number, which most o=
-f the
-> >>    time coincides with the UFS LUN as long as the UFS device is the on=
-ly
-> >>    SCSI block device the SPL sees (thanks Neil)
-> >> - Add an option to use a bounce buffer in RAM while loading U-boot fro=
-m UFS,
-> >>    which helps avoid changes to common spl_fit.c code which in v1 achi=
-eved a
-> >>    similar result at a performance cost to unrelated platforms (thanks=
- Jonas)
-> >> - Link to v1: https://lore.kernel.org/r/20251210-rk3576-ufs-v1-0-a3f9e=
-76eb66e@gmail.com
-> >>
-> >> ---
-> >> Alexey Charkov (4):
-> >>        spl: Make UFS available for SPL builds
-> >>        reset: rockchip: make device resets available in SPL
-> >>        ufs: rockchip: Add device reset support
-> >>        rockchip: spl: Add support for booting from UFS
-> >>
-> >>   MAINTAINERS                                  |  1 +
-> >>   arch/arm/dts/rk3576-u-boot.dtsi              | 16 ++++++++-
-> >>   arch/arm/include/asm/arch-rockchip/bootrom.h |  1 +
-> >>   arch/arm/include/asm/spl.h                   |  1 +
-> >>   arch/arm/mach-rockchip/rk3576/rk3576.c       |  1 +
-> >>   arch/arm/mach-rockchip/spl-boot-order.c      | 14 ++++++++
-> >>   common/spl/Kconfig                           | 30 +++++++++++++++++
-> >>   common/spl/Makefile                          |  1 +
-> >>   common/spl/spl_ufs.c                         | 49 ++++++++++++++++++=
-++++++++++
-> >>   drivers/Makefile                             |  1 +
-> >>   drivers/reset/Kconfig                        |  9 +++++
-> >>   drivers/reset/Makefile                       |  2 +-
-> >>   drivers/scsi/Makefile                        |  3 ++
-> >>   drivers/ufs/Kconfig                          |  4 +++
-> >>   drivers/ufs/ufs-rockchip.c                   | 22 +++++++++++++
-> >>   drivers/ufs/ufs-rockchip.h                   |  1 +
-> >>   lib/Makefile                                 |  1 +
-> >>   17 files changed, 155 insertions(+), 2 deletions(-)
-> >> ---
-> >> base-commit: 6cdd7597a2fbfc1572c1b0af23d3daf1cefa2de7
-> >> change-id: 20251210-rk3576-ufs-ac3bf4e87156
-> >> prerequisite-message-id: 20260108133234.4001390-1-jonas@kwiboo.se
-> >> prerequisite-patch-id: 3748e3880ac841dc25628911608140ebb4d4382f
-> >> prerequisite-patch-id: 671586e63ec9021b624d6cdc3b75aef53ed84972
-> >
-> > Hi Neil, Kever,
-> >
-> > Now that Kever has applied the patch from Jonas [1] which lets this
-> > one work without bounce buffers on Rockchip RK3576, would you mind
-> > giving this series another look?
->
-> Applied patches 1 & 3 and passing it to CI, but seems without #2 UFS will=
- probably
-> probe error so who is supposed to pick #2 ?
+Since many MediaTek SoCs have more than one fixed-rate external clock,
+CLK_XTAL/CLK_PARENT_XTAL is not sufficient to represent them, being
+limited to a single clock. We have since introduced CLK_PARENT_EXT that
+allows an arbitrary number of external clocks to be represented.
 
-#2 and #4 are both Rockchip specific, so maybe Kever could take them?
+This series removes the remaining references to CLK_XTAL and
+CLK_PARENT_XTAL in the MediaTek clock drivers, replacing them with
+CLK_PARENT_EXT.
 
-#3 should still work in U-boot proper without #2, and to get UFS in
-SPL all four patches are required, so the ordering of #2 vs #3
-shouldn't matter much.
+There was also a special field (xtal2_rate) for the PLL parent clock.
+In most cases, this was the same as the main xtal clock, leading to
+duplication. This is also converted to use CLK_PARENT_EXT to avoid the
+duplication.
 
-Thanks a lot,
-Alexey
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+David Lechner (16):
+      clk: mediatek: replace xtal2_rate with struct mtk_parent
+      clk: mediatek: mt7622: convert CLK_XTAL to CLK_PAD_CLK25M
+      clk: mediatek: mt7623: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt7629: convert CLK_XTAL to CLK_PAD_CLK40M
+      clk: mediatek: mt7981: convert CLK_XTAL to CLK_PAD_CLK40M
+      clk: mediatek: mt7986: convert CLK_XTAL to CLK_PAD_CLK40M
+      clk: mediatek: mt7987: convert CLK_XTAL to CLK_PAD_CLK40M
+      clk: mediatek: mt7988: convert CLK_XTAL to CLK_PAD_CLK40M
+      clk: mediatek: mt8183: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt8188: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt8195: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt8365: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt8512: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt8516: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: mt8518: convert CLK_XTAL to CLK_PAD_CLK26M
+      clk: mediatek: remove CLK_PARENT_XTAL
+
+ drivers/clk/mediatek/clk-mt7622.c | 121 +++++++++++++++++--------------
+ drivers/clk/mediatek/clk-mt7623.c | 147 +++++++++++++++++++++-----------------
+ drivers/clk/mediatek/clk-mt7629.c | 108 +++++++++++++++-------------
+ drivers/clk/mediatek/clk-mt7981.c |  17 ++++-
+ drivers/clk/mediatek/clk-mt7986.c |  17 ++++-
+ drivers/clk/mediatek/clk-mt7987.c |  46 +++++++-----
+ drivers/clk/mediatek/clk-mt7988.c |  62 +++++++++-------
+ drivers/clk/mediatek/clk-mt8183.c |  15 +++-
+ drivers/clk/mediatek/clk-mt8188.c |  11 +--
+ drivers/clk/mediatek/clk-mt8189.c |   4 +-
+ drivers/clk/mediatek/clk-mt8195.c |   7 +-
+ drivers/clk/mediatek/clk-mt8365.c |  13 ++--
+ drivers/clk/mediatek/clk-mt8512.c |  21 ++++--
+ drivers/clk/mediatek/clk-mt8516.c |  21 ++++--
+ drivers/clk/mediatek/clk-mt8518.c |  29 +++++---
+ drivers/clk/mediatek/clk-mtk.c    |  44 +++++++-----
+ drivers/clk/mediatek/clk-mtk.h    |  11 ++-
+ 17 files changed, 400 insertions(+), 294 deletions(-)
+---
+base-commit: 1e240f7206fccde4ec73ea432ab8360d321c5fe5
+change-id: 20260303-clk-mtk-parent-cleanup-f9dff4c68063
+prerequisite-message-id: <20260303-mtk-mt8189-clocks-v4-0-ee85f8dd2f0d@baylibre.com>
+prerequisite-patch-id: 81f2dd4fd7c1632736c08180d6b9f6aef5fe1e7f
+prerequisite-patch-id: 60f0509a5f36c2828316fa3e27dfd8f4d218eb27
+prerequisite-patch-id: 237c548edf19f9cf734b1ac3b9252a4f06d8cf29
+prerequisite-patch-id: 22de64f70e8d1ba5e17f8b31f461118b35e54f30
+prerequisite-patch-id: 3d5661f9e55292a30f57617848a7b10e67844402
+prerequisite-patch-id: ccbc73b2bc1dc41beb295604088d63773cea15ef
+prerequisite-patch-id: aa76b6b028374f20551955eafe56a1e0c1daa75d
+prerequisite-message-id: <20260305-clk-mtk-fix-mt8188-rates-v2-1-0ce2b5212775@baylibre.com>
+prerequisite-patch-id: 88e5a61d8ad8543f0fdf11f35bb6dba637d49550
+prerequisite-message-id: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
+prerequisite-patch-id: 15ac11765ddddcf378e0e227a9fb5876636aa8e6
+prerequisite-patch-id: 90b4781a99ea5eb40eb6c943dee86dd8a9fabe06
+prerequisite-patch-id: 150153a03fa40f8f9d790526512f7341a7d95eba
+prerequisite-patch-id: bdc28e831956d0a487c62e11d1442a51b9548c25
+prerequisite-patch-id: 08b3b97b5870fa4c5eb435f5b19762481a94c058
+prerequisite-patch-id: 291f87bf8033440b0c79a03055cec7e1317216e2
+prerequisite-patch-id: d3ff487de22ca508a65613bebf8cbe0e61005a31
+prerequisite-patch-id: f0e2edcbe17f6bea4bd4e6ceea49cbf73b7568d7
+prerequisite-patch-id: 0700411359ab89ebd24c4c3d17a5864e41289547
+prerequisite-message-id: <20260309-clk-mtk-unify-mux-parents-v2-0-b084ea74b99d@baylibre.com>
+prerequisite-patch-id: 8789067dee5193eac9889bdb35cbe53fd8ba3db7
+prerequisite-patch-id: edb2b9a5644e0deb0b846cb6365957e8cdd9e9d8
+prerequisite-patch-id: 14723a8815ed459c3995ba2682344f8c6813da74
+prerequisite-patch-id: 5c528aa9c92e9d79fe406bca97192624f0267db9
+prerequisite-patch-id: c5a12abe7b61f253d13966fc6b257995f085c7b0
+prerequisite-patch-id: b4f5a8dafda57305a07cfc3783d7154558f515a6
+prerequisite-patch-id: 9a33fdfe476f6dc0e9e314755073d308c6a61a1e
+prerequisite-patch-id: 2daeb61c75b459c5c790266c329439a0fec5f50c
+prerequisite-patch-id: 29f06542d7c519b8995bcebd04b800508cf32d1d
+prerequisite-patch-id: 2d8a751c3012596e64b93e5361c7a50c8ac0a303
+prerequisite-patch-id: 85f6c9b692293d482d04bb3661fb51dfb5533ef0
+prerequisite-patch-id: 688b2021a1585ae037c15081cf43e62d95e7c286
+prerequisite-patch-id: 10f08bad47e8a2e6953c59540264dfa9ba433c1f
+prerequisite-message-id: <20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com>
+prerequisite-patch-id: 625ea8b616208d1c8a412ae514d8e94a3c13a6ff
+prerequisite-message-id: <20260309-clk-mtk-mt8188-drop-extra-top-clocks-v1-0-6ee4743a8465@baylibre.com>
+prerequisite-patch-id: 63670888fcc3abb762a182a7354216e2700a201a
+prerequisite-patch-id: d8e4fd450697687889673ea835578739387d612a
+
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
+
