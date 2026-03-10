@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7010FFD4F04
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 16:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3DE3FD4F05
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 16:26:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F5584137;
-	Tue, 10 Mar 2026 17:26:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7076B8412C;
+	Tue, 10 Mar 2026 17:26:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TPXwPGNA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PD4znBBL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B24C9840EE; Tue, 10 Mar 2026 17:26:20 +0100 (CET)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 0307084154; Tue, 10 Mar 2026 17:26:23 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 893C18412C
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:26:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA06840EE
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:26:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4671cbce32bso397356b6e.3
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:26:17 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7d73dd9cb9bso1782646a34.1
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:26:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773159976; x=1773764776; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DJZ5s3YHeccnE4hyOnkmg0Klw8TSi168DsnxXu8jap8=;
- b=TPXwPGNAI8FCL7DUCzT8yd5nWsYi8zHcDZ+SrpP6n0CaLvmeOwAH7xW+jUGLHgCzmb
- 1BJ4f57qXJjnVSTbYKYWXnxUVAt7RFAVUzBKSevVj+USMguqcj9e6heRkZNkCxothYav
- nnOwhzWqABvnC9CLooOfjhqesy9xms00pEq3c=
+ d=konsulko.com; s=google; t=1773159979; x=1773764779; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=M3T8JriPGP6qC6NhLcUwiIxkkLO9bw0olV5MRiA3jIg=;
+ b=PD4znBBL1KUIFsXFnagQWK4JsgFeFlGBRBvloAkQXnCSGKxC08fQhOKG6ebVMMsEud
+ VKz7UKFJj3MT2LtRSXPb7vP8GHbuPDrZlU5FUzGPhcmIO0n2jN1tEtT9dKKlK0VqvWq/
+ b9ixDIo/Tfd2SlOcIhJFbvjGDYrjLfhXGQUEc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773159976; x=1773764776;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DJZ5s3YHeccnE4hyOnkmg0Klw8TSi168DsnxXu8jap8=;
- b=rr0L4sd9phUxz1YCZPm3p5DzF05Q1cUIYtzZmiATWpT4I5frTupgvQ2QElP+K62eJx
- nT+WsJvcb/T2ZmZ8QBKtS1v/X5d/ooFo78CAv+MuHLdJmQ99nioItwCC5HfopsNSSICk
- PYX1Aw98wSV+d4zPBnFvUOxp1ceiNd9Vl9kqIS3p6y16spT+NWZLN/v2ybygiRsLTCAN
- aTKR52zDsMvBFlcVCHCtxsyB3RpjtkFJhlNM3L8h/8rdxDkw3zSzvCodfPqTje99pUGe
- E4lfQu2e3CLfi0WywSBwiZFByKcta8xd5wIK/IsoE52bcdoNchfFU+WrF71ZoAKDzCVy
- Nmfg==
-X-Gm-Message-State: AOJu0Yxm/l85BmZMQyVQZjmBidSI4f1rEqawFpwPLFnj+k+xWqzBsQoy
- 87zdPXaZ6Znk4h8lgKcTv5N0OaoIJ3UhTgNs2ShGQMKOS3OX3RKBo9lqdyb5nRa93pcpSsTbfVZ
- 8tYSFNW4=
-X-Gm-Gg: ATEYQzw/1U3CY1PB6R5QWsydQoZndojT/HNmzJ43bmQbD/J8tDYfwPJPh9at0ZhmDj6
- IO+mkHbbmSCmeuuhkvwueZ1nYZIrTrW0DG2aDRqO90260/B+WVlvpUwmSgR7t8j7LK+rO0/wM1t
- xrIjqruX+4ZgR2IunD70oPSMqnMYtnWpm1eJD6fdTGh1218zhaQX9yyli+xQgwxQDmQKG7V675f
- w/Q09WEQPqG/5lW8FcciCEk/+SqT9HF4tbEQsA0198qpIcYLaBTo8M/f3hTrr+y0Qb9EDorIf6X
- h/OLxa2dkfImkG7i1LcDJF/mzJLN2JnVCA7bKOl5kF5vKQ1SA0UJd0icf3I/eYKBiLp0X/mcMjW
- lAltG55FOHpD4AbBrSrRN5w3gAIcz8O6I7FmSNcA8aEyNpGR85qUqgz5LMTfAqFu4nlhzeyzzN2
- B2KpICtbsTcUsV1IXSII1btFteRnnwUmdqRob+lDlRaY6qPLrANdUwEtWcy0g08Y/1MwisrVX+I
- i5FhUk6hieQXgSR5Jy1HC+1j7oy4XQDhQTxOfx/ITB4y9Py
-X-Received: by 2002:a05:6808:1186:b0:45a:78b:65e1 with SMTP id
- 5614622812f47-466dcc0bd12mr7614940b6e.48.1773159976219; 
- Tue, 10 Mar 2026 09:26:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1773159979; x=1773764779;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=M3T8JriPGP6qC6NhLcUwiIxkkLO9bw0olV5MRiA3jIg=;
+ b=a3kYjSGeLvG1o7Zs9A7uREEmzpGp4AyMKWtdKqTuCYGmWYDxOva/8b2met7yrxN6p6
+ 553A8qBkr12nYPEAvihM4TuBlN+RKqCBHYe/irUf0aGZVu4U1ochWrGzLx3IP1Ls3ptd
+ ZMKs6l/gjTJlAcxsPU9RydOJvcPDEW7GKbvrWcXgz9YKDLhYzathFMygIn1+FO/EpA7S
+ h2MqFdWjrK4F8u/DsNAIkv/1t1v6HiwKuMrlrjJWXalEcUBnJtDNyeFxx9Vmj8Io4VNa
+ ET5ApFNWK0UWF1vJdNb0y8RKShXNjAZ1HtRBhcEcG4+CDuXJIcX8xXInuD/BxK8SWM6j
+ SlrA==
+X-Gm-Message-State: AOJu0Ywmx3WSbm6cx9uLPwpFyENVUobJQ+LWbL5SxDhielmqPIzWvO2h
+ RKwvnG6nqRtiVPapG2Q+OSL3LFg134c3myB/1vEXioR9EdSSN06+p8UGWoTDvMDdoltFnOOOtws
+ qgSSEA0E=
+X-Gm-Gg: ATEYQzyTn/tEiTtIaDUtLklb3hSeBA8Nup+7N/L/gkYOUwzmgAuGfNHI+L1oFpo0X9z
+ WhokSvFcA48L5p0nmOrgvCvFZfNjjqFIgFBSol7dd7Wa/USjvPxiFC2QafBUuAjL+8Y2P2sR8oV
+ u6IZmojE2gLKhzeAQOTjID5qayTiGXC7oKgKoKtzlNZFzYh43PkShOR5n64Sb+oCyaUCC+9QLBq
+ Pq4sskdlmzYTg6BSK+sZPTYlYeIuhTIAEYZGcIdTiPOCNB3D1RcAO3Ow8wKnBVmadxq3bXlUepE
+ HKx7/IhxzwKZ3fPcHKlPtKrSWoCfI2iIn35cQFF6xq7kwUhenSlHdxH1bm+dQi+06ECR3DAPJlZ
+ IQmB7+n0XqU1v/yU7IJoaCfGyoAKTx0yDJHTAeLU6eKCLhQoE5+3ZbQsFoTNdr+i+o4/yB9lNNI
+ TmdAsrzFXsmcMo4GRI4i/Qq5fCLCufi9KQECLWxvdddtsRGG6NAbW21Xy/lrH94G5UiN118IrX6
+ Vqf7xxrJI3StLA94jvh2DJI45Ew7HsM00Ab4CPEbwoFe0Is
+X-Received: by 2002:a05:6830:6ac3:b0:7c7:8113:6f6e with SMTP id
+ 46e09a7af769-7d726f59c34mr10399589a34.27.1773159979472; 
+ Tue, 10 Mar 2026 09:26:19 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467124b3292sm3501318b6e.14.2026.03.10.09.26.15
+ 46e09a7af769-7d7449b9e57sm5312667a34.22.2026.03.10.09.26.18
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 09:26:15 -0700 (PDT)
+ Tue, 10 Mar 2026 09:26:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@arm.com>
-Subject: [PATCH] net: Move network PHY under NETDEVICES
-Date: Tue, 10 Mar 2026 10:26:14 -0600
-Message-ID: <20260310162614.1163871-1-trini@konsulko.com>
+Subject: [PATCH] FIT: Image pre-load signature support must select not depends
+ on FIT_SIGNATURE
+Date: Tue, 10 Mar 2026 10:26:18 -0600
+Message-ID: <20260310162618.1163914-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,40 +94,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A number of network PHY drivers have Kconfig dependencies on various
-network drivers under NETDEVICES. This is in addition to logical
-dependencies of network PHYs needing network drivers. Resolve the
-Kconfig problems by moving the network PHY lines to be after the network
-devices, within the overall NETDEVICES guard.
+The options to enable pre-load signature support (full U-Boot or in SPL)
+must depend on FIT_SIGNATURE being enabled, and not select it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Jerome Forissier <jerome.forissier@arm.com>
----
- drivers/net/Kconfig | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ boot/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index d3ef050d1a13..42c232abc001 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -1,7 +1,3 @@
--source "drivers/net/phy/Kconfig"
--source "drivers/net/pfe_eth/Kconfig"
--source "drivers/net/fsl-mc/Kconfig"
--
- config ETH
- 	def_bool y
- 
-@@ -1098,4 +1094,8 @@ config MDIO_MUX_MESON_GXL
- 	  This driver is used for the MDIO mux found on the Amlogic GXL & compatible
- 	  SoCs.
- 
-+source "drivers/net/phy/Kconfig"
-+source "drivers/net/pfe_eth/Kconfig"
-+source "drivers/net/fsl-mc/Kconfig"
-+
- endif # NETDEVICES
+diff --git a/boot/Kconfig b/boot/Kconfig
+index e5db165424a7..42d39ff02f5f 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -1810,7 +1810,7 @@ config SPL_IMAGE_PRE_LOAD
+ config IMAGE_PRE_LOAD_SIG
+ 	bool "Image pre-load signature support"
+ 	depends on IMAGE_PRE_LOAD
+-	select FIT_SIGNATURE
++	depends on FIT_SIGNATURE
+ 	select RSA
+ 	select RSA_VERIFY_WITH_PKEY
+ 	help
+@@ -1827,7 +1827,7 @@ config IMAGE_PRE_LOAD_SIG
+ config SPL_IMAGE_PRE_LOAD_SIG
+ 	bool "Image pre-load signature support within SPL"
+ 	depends on SPL_IMAGE_PRE_LOAD && IMAGE_PRE_LOAD_SIG
+-	select SPL_FIT_SIGNATURE
++	depends on SPL_FIT_SIGNATURE
+ 	select SPL_RSA
+ 	select SPL_RSA_VERIFY_WITH_PKEY
+ 	help
 -- 
 2.43.0
 
