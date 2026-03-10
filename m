@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED6FAEB1060
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:12:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7050EEB1060
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 695E483FED;
+	by phobos.denx.de (Postfix) with ESMTP id A508784073;
 	Tue, 10 Mar 2026 16:12:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="BG+PZT6D";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HZ0uu/iG";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="xCQoAscU";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C3GyGKrv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAE5B8405F; Tue, 10 Mar 2026 16:12:12 +0100 (CET)
-Received: from mail-ej1-x64a.google.com (mail-ej1-x64a.google.com
- [IPv6:2a00:1450:4864:20::64a])
+ id E3EC083F53; Tue, 10 Mar 2026 16:12:12 +0100 (CET)
+Received: from mail-ed1-x549.google.com (mail-ed1-x549.google.com
+ [IPv6:2a00:1450:4864:20::549])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A0EA83F53
+ by phobos.denx.de (Postfix) with ESMTPS id 4605484027
  for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x64a.google.com with SMTP id
- a640c23a62f3a-b96d8d60303so235796766b.1
+Received: by mail-ed1-x549.google.com with SMTP id
+ 4fb4d7f45d1cf-660a2f72cccso7603386a12.0
  for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 08:12:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1773155529; x=1773760329; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1773155530; x=1773760330; darn=lists.denx.de;
  h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zuidmBGJw2U55KqohoSoe5kPv7mzLluxAAJWW1s+aQ0=;
- b=BG+PZT6D1CHu/s3d6NLBY/6MJTcjgUy1GD2oM9xvdCpAiG512aImBY/IZhUAx5R96i
- 6jVVvqZAvGSCjEX74mozhqKTIJIsPgOAzpxxiJCB7g6CNUoVz88ANwlkNMMyjVHV7gBE
- zhVuK+qxg2tbr+T7FQ1DwXCDcikMHrVL6mavSWFG2HtuJLCyZNXIwY4Fvc6b9ALcqHbr
- jtrsKTrt/8imW2yOcQGdIl4HH4KIBu51ewjAwk9F9gmQE4JW5vt95P/1dc89p3H/qCWv
- 8HPK+pxxo4BFX06FIpn/hToej2om49x7vlcYa5ffxZLVHVMtqTR8Jp0/Bq9JYxgjYcjD
- CXqA==
+ bh=Lqy8fEEQB7cWto38pI23qlGpz3WEkho3uNkvtYh5ngk=;
+ b=xCQoAscUq156vN0UaTm8lJ2zXOcBzxuqG1bViwN6bc+1TXd4/WU7gRWgkB6QmvnL2H
+ +gZ7KwKorwlhzRzigtY8v+pptAcQ2bzq8XJY2ZhVK4tcq+QyWnspyW0rVAnM6nA9dJY+
+ DZfUFGGORX5djzbkCSokshdpjQelqQk1bStTg/gCaR4AKBFhR9IMhYj/JVNy1GPVaa2f
+ OV+jOuKcTpvLhE5oygXpOTxEbvsU1CJgCxCOqUbWTirLbGCn2Ig6pdvnO2QxW+xfCfes
+ ZA3Psn22eSHQbxtwyB3FwFDipxxPP2ahIZgW3G7OEFR3pt3E/TO6pldVSLqBLWZ5B5AE
+ cCJw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773155529; x=1773760329; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773155530; x=1773760330; darn=lists.denx.de;
  h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zuidmBGJw2U55KqohoSoe5kPv7mzLluxAAJWW1s+aQ0=;
- b=HZ0uu/iGQ5AbWmvZp0HruVSp5J39drQMzkhHQo/1ehi3M6qpZ1AHOj/Tp8WfiICN5q
- X0PGyuApG7OEJxzcX1xcgoFdT+ttOY/ylvdb9JKUin2yOLuY1jMZCWS58DQijUvJ6F9o
- WcugFrPiJBYlfzUouEk2onm7E5mITC4g7oX5o=
+ bh=Lqy8fEEQB7cWto38pI23qlGpz3WEkho3uNkvtYh5ngk=;
+ b=C3GyGKrvR0GHbOb19qdHP+xO8ulpbauzMUnaUz/RFX7Am0gt6FixlUmZ3PS7iDYzPC
+ p5F/rynF1jrowlgdNA1KnEwfGyFWqBnsnA935bH71BCpStkgqm41rJgxRF77Ui6RBNWe
+ zY0QoqSaZbbVi8KEqdVhm+/2l8spwsBlDCB00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773155529; x=1773760329;
+ d=1e100.net; s=20230601; t=1773155530; x=1773760330;
  h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zuidmBGJw2U55KqohoSoe5kPv7mzLluxAAJWW1s+aQ0=;
- b=frgGMP+duFcwyZuC1vjHnlHJ/cV49btkAq1ShmlWupdalLlCEp/1kgFvzfO7jsZfHc
- b3oQ7yl5R/+/ckxdLk6gpY6LhA5RddZ7te9ui5t758vJpVaUlprAxnMhFbTCToNkgd23
- 6NCenC/GyKC+tEYjI5tVpRukqqvcs54yXAyesBfAWlE7HGdxWBEElH7F/lrOl5BxXHzq
- HmFd00V0RE679hAQt5LmrS3Y7fikLmUyU0mhjMRgJFfN/TewYj5gzyfK5TPakbVKHR3o
- XJEC0tprmmw6nVZ2nTSotuinj9d0m86+TYdK8/BGCmZm62EEnVn/HNvvUT5KGhl1EI0q
- Zq+w==
-X-Gm-Message-State: AOJu0YyKmZmGpcWZzxoWPYVs0oMELJoCz6DpWzyxhESr/KAaZl+bFbrq
- ss+qH3NvaA450rqmH2bVEOJNYjR4HDUCWckpDXh3Jg7JPE0E5eteTMr7EO6yk1K6oM92PlETQl5
- r038P/NLUpfkPmwzeyfCtcsxnz/6ekBZaV00aYa6zHwlysF8sjS5c
+ bh=Lqy8fEEQB7cWto38pI23qlGpz3WEkho3uNkvtYh5ngk=;
+ b=R0JYa9QdUsxrOkO8J6+gDKYxiojhqFUlWPmij+BqS3/IXtc4d8FhyYQ8I6WbdqR5qD
+ ZDIu9qn0BKYnyEBA1R2w640V8h/VkiMYnZDrNyHNgtiEXrQlMdr6p4zCLxtHShxXltGi
+ KepIwKP4vzChGlIqs+Wt3UExdjhRNuVBhJvjUHu+AEkEI45pfmz4aLnUItBP2ewEb0/e
+ gZyS98J19aPr9moQNX6sW67qZgzIApDN4lV8ytFk5+XjRbiaGcgLeM/7mSeZyrK+ykTC
+ 6i2IUCyIbNY2/d8JTYwcL/0VSq3e8+2e/qIa+pvjN/0sISMYVre+M7Zlnic/qIi8vg37
+ Qi3Q==
+X-Gm-Message-State: AOJu0YxGDiN8gyH4nrdkJNPsppYTO/YD5YsbPRrkmz3u0nANbqJO+N9E
+ 8m1a6KjMr1gWWQoZDkISOFa4eI8uxyg+3tJLAftXwSmsXSC+b3Wrr9zGldI3Ogpo+r/RuEJxgHt
+ ioBDLkjgwoaK0ku+9jlvpkcZ4d86krirz59OQvyh7g0ENP9vxnDdX
 MIME-Version: 1.0
-X-Received: by 2002:a17:907:3c96:b0:b93:6b15:72f6 with SMTP id
- a640c23a62f3a-b942e01b83emr990884066b.40.1773155529474; Tue, 10 Mar 2026
+X-Received: by 2002:a05:6402:2787:b0:662:e31e:a49 with SMTP id
+ 4fb4d7f45d1cf-662e31e0efamr1181866a12.21.1773155529641; Tue, 10 Mar 2026
  08:12:09 -0700 (PDT)
 Auto-Submitted: auto-generated
-Message-ID: <calendar-e636ecc0-5bb4-4530-90ab-8db63da878f9@google.com>
+Message-ID: <calendar-7263320f-b043-4885-9f3b-cbc64eddf40f@google.com>
 Date: Tue, 10 Mar 2026 15:12:09 +0000
-Subject: Synced invitation: U-Boot community meeting @ Every 2 weeks from 8am
- to 9am on Tuesday from Tue 10 Feb to Mon 9 Mar (MST)
- (u-boot@lists.denx.de)
+Subject: Synced invitation: U-Boot community meeting @ Every 2 weeks from 9am
+ to 10am on Tuesday (MDT) (u-boot@lists.denx.de)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Content-Type: multipart/mixed; boundary="0000000000007754f9064cacf171"
+Content-Type: multipart/mixed; boundary="00000000000079e2f7064cacf172"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,16 +93,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000007754f9064cacf171
-Content-Type: multipart/alternative; boundary="0000000000007754f8064cacf16f"
+--00000000000079e2f7064cacf172
+Content-Type: multipart/alternative; boundary="00000000000079e2f6064cacf170"
 
---0000000000007754f8064cacf16f
+--00000000000079e2f6064cacf170
 Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
 
 This email keeps the event up to date in your calendar.
 
 U-Boot community meeting
-Every 2 weeks from 8am to 9am on Tuesday from Tuesday 10 Feb to Monday 9 Mar
+Every 2 weeks from 9am to 10am on Tuesday
 Mountain Time - Denver
 
 Join with Google Meet
@@ -140,7 +139,7 @@ their own invitation status, or modify your RSVP.
 
 Learn more https://support.google.com/calendar/answer/37135#forwarding
 
---0000000000007754f8064cacf16f
+--00000000000079e2f6064cacf170
 Content-Type: text/calendar; charset="UTF-8"; method=REQUEST
 Content-Transfer-Encoding: 7bit
 
@@ -160,17 +159,17 @@ DTSTART:19700101T000000
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-DTSTART;TZID=America/Bahia_Banderas:20260210T090000
-DTEND;TZID=America/Bahia_Banderas:20260210T100000
-RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20260310T055959Z;INTERVAL=2;BYDAY=TU
+DTSTART;TZID=America/Bahia_Banderas:20260310T090000
+DTEND;TZID=America/Bahia_Banderas:20260310T100000
+RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=TU
 DTSTAMP:20260310T151209Z
 ORGANIZER;CN=U-Boot:mailto:89be7b813136bec06a83de4da59745f0abd11c1b836061ae
  06c1c7dbcd18df41@group.calendar.google.com
-UID:0v3c45uhvntcro4s5fp73bhl58_R20260210T150000@google.com
+UID:0v3c45uhvntcro4s5fp73bhl58_R20260310T150000@google.com
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
  TRUE;CN=pbiel7@gmail.com;X-NUM-GUESTS=0:mailto:pbiel7@gmail.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
- TRUE;CN=Simon Glass;X-NUM-GUESTS=0:mailto:sjg@chromium.org
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=DELETED;RSVP=TRUE;
+ CN=Simon Glass;X-NUM-GUESTS=0:mailto:sjg@chromium.org
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
  TRUE;CN=malysagreg@gmail.com;X-NUM-GUESTS=0:mailto:malysagreg@gmail.com
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
@@ -178,7 +177,7 @@ ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
 ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
  TRUE;CN=u-boot@lists.denx.de;X-NUM-GUESTS=0:mailto:u-boot@lists.denx.de
 X-GOOGLE-CONFERENCE:https://meet.google.com/icv-nvmv-dbf
-X-MICROSOFT-CDO-OWNERAPPTID:-1386129860
+X-MICROSOFT-CDO-OWNERAPPTID:-992614451
 CLASS:PUBLIC
 CREATED:20250114T162827Z
 DESCRIPTION:U-Boot community meeting\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~
@@ -197,9 +196,9 @@ TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR
 
---0000000000007754f8064cacf16f--
+--00000000000079e2f6064cacf170--
 
---0000000000007754f9064cacf171
+--00000000000079e2f7064cacf172
 Content-Type: application/ics; name="invite.ics"
 Content-Disposition: attachment; filename="invite.ics"
 Content-Transfer-Encoding: base64
@@ -210,39 +209,38 @@ VA0KQkVHSU46VlRJTUVaT05FDQpUWklEOkFtZXJpY2EvQmFoaWFfQmFuZGVyYXMNClgtTElDLUxP
 Q0FUSU9OOkFtZXJpY2EvQmFoaWFfQmFuZGVyYXMNCkJFR0lOOlNUQU5EQVJEDQpUWk9GRlNFVEZS
 T006LTA2MDANClRaT0ZGU0VUVE86LTA2MDANClRaTkFNRTpDU1QNCkRUU1RBUlQ6MTk3MDAxMDFU
 MDAwMDAwDQpFTkQ6U1RBTkRBUkQNCkVORDpWVElNRVpPTkUNCkJFR0lOOlZFVkVOVA0KRFRTVEFS
-VDtUWklEPUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNjAyMTBUMDkwMDAwDQpEVEVORDtUWklE
-PUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNjAyMTBUMTAwMDAwDQpSUlVMRTpGUkVRPVdFRUtM
-WTtXS1NUPVNVO1VOVElMPTIwMjYwMzEwVDA1NTk1OVo7SU5URVJWQUw9MjtCWURBWT1UVQ0KRFRT
-VEFNUDoyMDI2MDMxMFQxNTEyMDlaDQpPUkdBTklaRVI7Q049VS1Cb290Om1haWx0bzo4OWJlN2I4
-MTMxMzZiZWMwNmE4M2RlNGRhNTk3NDVmMGFiZDExYzFiODM2MDYxYWUNCiAwNmMxYzdkYmNkMThk
-ZjQxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20NClVJRDowdjNjNDV1aHZudGNybzRzNWZwNzNi
-aGw1OF9SMjAyNjAyMTBUMTUwMDAwQGdvb2dsZS5jb20NCkFUVEVOREVFO0NVVFlQRT1JTkRJVklE
-VUFMO1JPTEU9UkVRLVBBUlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPQ0KIFRS
-VUU7Q049cGJpZWw3QGdtYWlsLmNvbTtYLU5VTS1HVUVTVFM9MDptYWlsdG86cGJpZWw3QGdtYWls
-LmNvbQ0KQVRURU5ERUU7Q1VUWVBFPUlORElWSURVQUw7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFS
-VFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9DQogVFJVRTtDTj1TaW1vbiBHbGFzcztYLU5VTS1HVUVT
-VFM9MDptYWlsdG86c2pnQGNocm9taXVtLm9yZw0KQVRURU5ERUU7Q1VUWVBFPUlORElWSURVQUw7
-Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9DQogVFJVRTtD
-Tj1tYWx5c2FncmVnQGdtYWlsLmNvbTtYLU5VTS1HVUVTVFM9MDptYWlsdG86bWFseXNhZ3JlZ0Bn
-bWFpbC5jb20NCkFUVEVOREVFO0NVVFlQRT1JTkRJVklEVUFMO1JPTEU9UkVRLVBBUlRJQ0lQQU5U
-O1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPQ0KIFRSVUU7Q049a29yZy5zdW1pdEBnbWFpbC5j
-b207WC1OVU0tR1VFU1RTPTA6bWFpbHRvOmtvcmcuc3VtaXRAZ21haWwuY29tDQpBVFRFTkRFRTtD
-VVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1BQ1RJ
-T047UlNWUD0NCiBUUlVFO0NOPXUtYm9vdEBsaXN0cy5kZW54LmRlO1gtTlVNLUdVRVNUUz0wOm1h
-aWx0bzp1LWJvb3RAbGlzdHMuZGVueC5kZQ0KWC1HT09HTEUtQ09ORkVSRU5DRTpodHRwczovL21l
-ZXQuZ29vZ2xlLmNvbS9pY3YtbnZtdi1kYmYNClgtTUlDUk9TT0ZULUNETy1PV05FUkFQUFRJRDot
-MTM4NjEyOTg2MA0KQ0xBU1M6UFVCTElDDQpDUkVBVEVEOjIwMjUwMTE0VDE2MjgyN1oNCkRFU0NS
-SVBUSU9OOlUtQm9vdCBjb21tdW5pdHkgbWVldGluZ1xuXG4tOjp+On46On46fjp+On46fjp+On46
-fjp+On46fjp+On46fg0KIDp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46
-fjp+Ojp+On46Oi1cbkpvaW4gd2l0aCBHb29nbGUgTWVldA0KIDogaHR0cHM6Ly9tZWV0Lmdvb2ds
-ZS5jb20vaWN2LW52bXYtZGJmXG5PciBkaWFsOiAoVVMpICsxIDQ3NS0yOTktODM2MiBQSU46IA0K
-IDQzOTA1MjA0OSNcbk1vcmUgcGhvbmUgbnVtYmVyczogaHR0cHM6Ly90ZWwubWVldC9pY3YtbnZt
-di1kYmY/cGluPTU0OTMxNzE5MA0KIDA1NTYmaHM9N1xuXG5MZWFybiBtb3JlIGFib3V0IE1lZXQg
-YXQ6IGh0dHBzOi8vc3VwcG9ydC5nb29nbGUuY29tL2EvdXNlcnMvYQ0KIG5zd2VyLzkyODI3MjBc
-blxuUGxlYXNlIGRvIG5vdCBlZGl0IHRoaXMgc2VjdGlvbi5cbi06On46fjo6fjp+On46fjp+On46
-fjp+Og0KIH46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46
-fjp+On46On46fjo6LQ0KTEFTVC1NT0RJRklFRDoyMDI2MDMxMFQxNTEyMDRaDQpMT0NBVElPTjpo
-dHRwczovL21lZXQuZ29vZ2xlLmNvbS9pY3YtbnZtdi1kYmYNClNFUVVFTkNFOjUNClNUQVRVUzpD
-T05GSVJNRUQNClNVTU1BUlk6VS1Cb290IGNvbW11bml0eSBtZWV0aW5nDQpUUkFOU1A6T1BBUVVF
-DQpFTkQ6VkVWRU5UDQpFTkQ6VkNBTEVOREFSDQo=
---0000000000007754f9064cacf171--
+VDtUWklEPUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNjAzMTBUMDkwMDAwDQpEVEVORDtUWklE
+PUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNjAzMTBUMTAwMDAwDQpSUlVMRTpGUkVRPVdFRUtM
+WTtXS1NUPVNVO0lOVEVSVkFMPTI7QllEQVk9VFUNCkRUU1RBTVA6MjAyNjAzMTBUMTUxMjA5Wg0K
+T1JHQU5JWkVSO0NOPVUtQm9vdDptYWlsdG86ODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1
+ZjBhYmQxMWMxYjgzNjA2MWFlDQogMDZjMWM3ZGJjZDE4ZGY0MUBncm91cC5jYWxlbmRhci5nb29n
+bGUuY29tDQpVSUQ6MHYzYzQ1dWh2bnRjcm80czVmcDczYmhsNThfUjIwMjYwMzEwVDE1MDAwMEBn
+b29nbGUuY29tDQpBVFRFTkRFRTtDVVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFO
+VDtQQVJUU1RBVD1ORUVEUy1BQ1RJT047UlNWUD0NCiBUUlVFO0NOPXBiaWVsN0BnbWFpbC5jb207
+WC1OVU0tR1VFU1RTPTA6bWFpbHRvOnBiaWVsN0BnbWFpbC5jb20NCkFUVEVOREVFO0NVVFlQRT1J
+TkRJVklEVUFMO1JPTEU9UkVRLVBBUlRJQ0lQQU5UO1BBUlRTVEFUPURFTEVURUQ7UlNWUD1UUlVF
+Ow0KIENOPVNpbW9uIEdsYXNzO1gtTlVNLUdVRVNUUz0wOm1haWx0bzpzamdAY2hyb21pdW0ub3Jn
+DQpBVFRFTkRFRTtDVVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RB
+VD1ORUVEUy1BQ1RJT047UlNWUD0NCiBUUlVFO0NOPW1hbHlzYWdyZWdAZ21haWwuY29tO1gtTlVN
+LUdVRVNUUz0wOm1haWx0bzptYWx5c2FncmVnQGdtYWlsLmNvbQ0KQVRURU5ERUU7Q1VUWVBFPUlO
+RElWSURVQUw7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9
+DQogVFJVRTtDTj1rb3JnLnN1bWl0QGdtYWlsLmNvbTtYLU5VTS1HVUVTVFM9MDptYWlsdG86a29y
+Zy5zdW1pdEBnbWFpbC5jb20NCkFUVEVOREVFO0NVVFlQRT1JTkRJVklEVUFMO1JPTEU9UkVRLVBB
+UlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPQ0KIFRSVUU7Q049dS1ib290QGxp
+c3RzLmRlbnguZGU7WC1OVU0tR1VFU1RTPTA6bWFpbHRvOnUtYm9vdEBsaXN0cy5kZW54LmRlDQpY
+LUdPT0dMRS1DT05GRVJFTkNFOmh0dHBzOi8vbWVldC5nb29nbGUuY29tL2ljdi1udm12LWRiZg0K
+WC1NSUNST1NPRlQtQ0RPLU9XTkVSQVBQVElEOi05OTI2MTQ0NTENCkNMQVNTOlBVQkxJQw0KQ1JF
+QVRFRDoyMDI1MDExNFQxNjI4MjdaDQpERVNDUklQVElPTjpVLUJvb3QgY29tbXVuaXR5IG1lZXRp
+bmdcblxuLTo6fjp+Ojp+On46fjp+On46fjp+On46fjp+On46fjp+On4NCiA6fjp+On46fjp+On46
+fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjo6fjp+OjotXG5Kb2luIHdpdGggR29vZ2xl
+IE1lZXQNCiA6IGh0dHBzOi8vbWVldC5nb29nbGUuY29tL2ljdi1udm12LWRiZlxuT3IgZGlhbDog
+KFVTKSArMSA0NzUtMjk5LTgzNjIgUElOOiANCiA0MzkwNTIwNDkjXG5Nb3JlIHBob25lIG51bWJl
+cnM6IGh0dHBzOi8vdGVsLm1lZXQvaWN2LW52bXYtZGJmP3Bpbj01NDkzMTcxOTANCiAwNTU2Jmhz
+PTdcblxuTGVhcm4gbW9yZSBhYm91dCBNZWV0IGF0OiBodHRwczovL3N1cHBvcnQuZ29vZ2xlLmNv
+bS9hL3VzZXJzL2ENCiBuc3dlci85MjgyNzIwXG5cblBsZWFzZSBkbyBub3QgZWRpdCB0aGlzIHNl
+Y3Rpb24uXG4tOjp+On46On46fjp+On46fjp+On46fjoNCiB+On46fjp+On46fjp+On46fjp+On46
+fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+Ojp+On46Oi0NCkxBU1QtTU9ESUZJRUQ6
+MjAyNjAzMTBUMTUxMjA0Wg0KTE9DQVRJT046aHR0cHM6Ly9tZWV0Lmdvb2dsZS5jb20vaWN2LW52
+bXYtZGJmDQpTRVFVRU5DRTo1DQpTVEFUVVM6Q09ORklSTUVEDQpTVU1NQVJZOlUtQm9vdCBjb21t
+dW5pdHkgbWVldGluZw0KVFJBTlNQOk9QQVFVRQ0KRU5EOlZFVkVOVA0KRU5EOlZDQUxFTkRBUg0K
+--00000000000079e2f7064cacf172--
