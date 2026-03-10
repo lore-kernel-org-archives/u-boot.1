@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1436EB1070
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D7ADEB1060
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:35:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 637EA8412C;
+	by phobos.denx.de (Postfix) with ESMTP id 9BCAE84142;
 	Tue, 10 Mar 2026 16:34:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OGN7mF5s";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="H7sAu9+3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01DD84129; Tue, 10 Mar 2026 16:34:29 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 00CE684109; Tue, 10 Mar 2026 16:34:30 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85F048410D
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:34:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1411840D7
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:34:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-46701f2077cso9332b6e.0
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 08:34:25 -0700 (PDT)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-466ec4c6846so892456b6e.3
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 08:34:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773156864; x=1773761664;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773156866; x=1773761666;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qXxALbHXUS49Qogiopj7tf11wjlTUTWoBCTXLDLLfbI=;
- b=OGN7mF5s77qWNNyPWezt1RpTgq5sL1+LRjYMPfvpkH622UNNYOjJ7ouB1OV2O1id+k
- Hml8yfJ1RodC0b2qnLa6j3HP2DIt61GmRcBnmolAp3Ny68/a9o8Ano9zNaSll6QDwz3n
- XdNEJy3uVGY6fR2uHVx6MbhWU7dAvXtvsLHduhEgesMPh7L8cQrVESVhhuTZiQRa3d2I
- VNrTt+elgMAHYWssBe/207JDJiDPU0IJu7UewbM7vNbtEUaIfk+7H1pTdizcLk/lyUI2
- 1qd5JNjkzb3QTx8KFMu4nThk0YnWAjLE3as8dJcJ496OIhRQ58CiTd3ykCaiYaEnl/uI
- OIVQ==
+ :reply-to; bh=hqOf46rfoFLTwZ0apeSCrT+CPIrEU8Zv8jzPU6ueL3U=;
+ b=H7sAu9+3wUbIYLFFyEWZNPZPTh3IVP7+th78EZjnpr+R7/aSTqCbfhLNYLI3c2UfdX
+ UMkdDeNCs8dun3BEbukFshm5yXqDigGTgQxfqQAqiLZLBwr3X6KJ1TZ1A5NLPsH63H49
+ ZekYQ58om3vRAWl7V52pMYpn164MWpVOg66vKAbp/ZUvLwYL93+dqbg7pRNxUtRiFNcB
+ iaI4zrdjK+F+IVid1LjZByj9NtuAw3QWMkNpBLxZuiC5hbYZFH91p5npfTQwNr81b0R+
+ VCmE1wsaZ6xqd10GyRAiWeLJRnkfEwFu8LxlYXquND505g+4IPp7FC923wEuxH1tGFMo
+ 62Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773156864; x=1773761664;
+ d=1e100.net; s=20230601; t=1773156866; x=1773761666;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=qXxALbHXUS49Qogiopj7tf11wjlTUTWoBCTXLDLLfbI=;
- b=U1ZrIbkFvMjTibPOnaUOADP2HuqNFyjmgoAB2KuBTRS2Q+RTjSrDX8LqryXBsMPte2
- 85ior0+ifpr7AjxCZfVjuSNEVG4ugHZSumdP58ynrR9VmxS3Mvu8Q2kzAdKLhsZwsP2Z
- ia5AX45jecGybmJaNQ+T/Ac+rob8lV9UlAH1ncCcTcvSyUkpDEMeL3PgkUI7UWZo6c8N
- 4FTfLPfMU3DOMWC8GzVjA//+HIzHNcI6K89Z2UcvR9WMBjGQ3JH535VgW67b5ECOfLvn
- SW7gco0Ix3YqHQvdPsJqplsh9CjfWz3eZ7rOd5LhBsLecie+pGcuZLr3NJJDfFos4SdC
- A9pQ==
+ bh=hqOf46rfoFLTwZ0apeSCrT+CPIrEU8Zv8jzPU6ueL3U=;
+ b=kzYVM5Ove2UEhLeBIkQ+YjPZt4f2nKyhGqZ901qOU1fY0LN+HZ1E4OrxHnioFKylif
+ SUHIM2/B1N4TByBC0d2Gwh5qW6hLW5UNIN2NbkqCBhRNvFwYv5klCgZodawqaXzLlpCu
+ PBSkauLCB+4k6v+eOZ9VLrI0kslMZfW/pB04glU7JItLFNfCeDEG+Etp2h81EsSCwrwO
+ 6qzNPlOMaXVeeoGZgxGozmTd7Nemr2TqrF1zgdD3np5497jEMRDqu8NbtSB0rmViayZ3
+ Ot9arZF9qusHzoDByUjD+2QdgMnBc/LZDW4oAbKLlL1B2CX9GaiT2TIIhJqpHMRLVSTv
+ RNSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWzOky+N9aodG3rxBxfin8L78s05FewvCCKPcCPQnPKAtAKYZTjblc5rsNGqLkVxu/S52+j4Ww=@lists.denx.de
-X-Gm-Message-State: AOJu0YzuJc9y5kfYlpQsj7Kkb9sHikwc8USuwvFU00ta52gu+yja8mKm
- GMcHJOZJ1QqTWRJmb9+wsBivU4ZV5cEdROK6UZU/FAN++hTny+2ZHn5eYSwuXhcfiUU=
-X-Gm-Gg: ATEYQzxaLXesVhrb8OM1NEsqvHLTLjrvrEPGfhit7uGSdL1Ne1gf2Be4O6gWo3Ne1QY
- VN3K06Y0rUW9pozM1PFm9R/8nXJ9bvjYU0+ZOkW+43Hzyxn9qEoAYWNtAoV7LaCs6IOJA0mmjea
- Cs3Y6dqxaBua9Di1uCOzhwSjkr1hjRfcmSA7irXWIzDVEDdmqOUqJzwzV78CTotcIVfz24O/UEP
- 0mRrefXLR7AHalsNGKIiW6z8pp7T/iqkRzLVGrbZbo9Epanj8zggeBabwxytKbTyDJV4Uk9cV87
- xAlgAdDxTup6HAB6wYN9NDria9Rnz+sbM5ZgdyJaQzFgREF+IHyRjDoLaNKdW3TjqjMPGma0XKp
- gRGg3shkJGrXYCoKDtzqpmB0TQegjl7QEfKWZpdJcazIA6IuczB6UDd8ec8D7Ie+8BNbI5gGP5E
- wnuqrBm9qMQgz/RCCD+SHaeEtJ+YsH
-X-Received: by 2002:a05:6808:1990:b0:45c:85fa:5a3e with SMTP id
- 5614622812f47-4671bfb6b05mr2147431b6e.25.1773156864027; 
- Tue, 10 Mar 2026 08:34:24 -0700 (PDT)
+ AJvYcCWIWc6Q44n/f7Ra58w8Y/uKdPQQ6I5OpHx/dW6/EFVKvConx5TjjbKk5LXrYFBP//nPN7RsLNw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGxo9kndcw9Airm1uKZuMgB5vwOXpjryiObRcF+8hFbdivg39Z
+ GwWOK+3J08zWZqWTfh4DChnjoJP2lSBbZCNkWaX6b/fobXo1WAw4bvpRIiYeDDCsVoY=
+X-Gm-Gg: ATEYQzx2QtY0uKEDXlXEqFUimOVHlv1NRt5QNCPMnb6YbNa0HPxGYnP6hZypFbDuhSu
+ yEy+9FeLw+COonZnU1DBDdJhgQ3fbSiA0qwkZecRkWn+rqQf3Z1F/cdrF2A3WKUh8KY84uiaWfM
+ Bz9VH/TrNZf3kz6NSQw0/L/OKCMJuw37u7SevBeZT5ld/8MUekm/Wnsru0pXR4vtNk7770h2S9p
+ XwgcjSQMiWigtk4cNk+p1LOSMbqZCYx+SQTEzLdRdI+xfFkEHQrX7HztpXu5imRULjOTlSlVkU8
+ Of34jVoV1CmIo/fWLavYCmSutwujz/wMRQIR2VqO3v5JxIl0+nltEnyF4JvRhrdQYhJQjtxI6/i
+ hvwpwEyAdKT61x/WAhhJlRcDqeNCwnpHoRGIPrpVO9PS82Ir1ceYlHYHE0hoWa71XSIgt7J23VS
+ TOgCedp25bQs88cJlPEzvSNCdXQrXP
+X-Received: by 2002:a05:6808:6b89:b0:44d:bdeb:f577 with SMTP id
+ 5614622812f47-466dcb27da0mr8051767b6e.31.1773156866510; 
+ Tue, 10 Mar 2026 08:34:26 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:78e2:51e2:14b8:2e10])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-466ecbcec59sm6320968b6e.7.2026.03.10.08.34.23
+ 5614622812f47-466ecbcec59sm6320968b6e.7.2026.03.10.08.34.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 08:34:23 -0700 (PDT)
+ Tue, 10 Mar 2026 08:34:26 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 10 Mar 2026 10:32:21 -0500
-Subject: [PATCH 08/16] clk: mediatek: mt7988: convert CLK_XTAL to
- CLK_PAD_CLK40M
+Date: Tue, 10 Mar 2026 10:32:24 -0500
+Subject: [PATCH 11/16] clk: mediatek: mt8195: convert CLK_XTAL to
+ CLK_PAD_CLK26M
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260310-clk-mtk-parent-cleanup-v1-8-66175ca8f637@baylibre.com>
+Message-Id: <20260310-clk-mtk-parent-cleanup-v1-11-66175ca8f637@baylibre.com>
 References: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
 In-Reply-To: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +91,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6219; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1755; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=nFpynf7pfTll+E1JSn/3X6dVzIuel0Kz/QGsBzwCHzs=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpsDm4fTh+gDCCN4v51fTEDEN06v4N1RCjvy7Nc
- CDU6O8pU8uJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabA5uBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A+JgH/1cVLHFn5DpoW922UfFdKNKbGoiJ3jcnFBw+wAw
- gZg1FASHlHF3qufc4F2Sx/MYRUgp2YwDM0OQpGwjCs4P6BG682PRnErZ5UXci2Nmn35ayZD7aih
- dXOz+LiboeQ6Qz0v7K2VeMceySLyo9PV52fFGUTW5a1TZMf451rPdfY8GXtFbxzWOhHNHgTQcLZ
- D48l+BgTT1FYnvJynfvB8jXsmIfyjBj0En0LrvBDBcrDmfFAAuoJvDHQ0zyzk47XpAHYjtsjR2B
- cz408O8yTv1rmxwwIPqtWVZ2YaTm4pZG0zL2IcJsTypgDP7Gn28bNQ1QtHJ62yafNBgdtP5KSLO
- Vziw=
+ bh=MRfYl5nEYTBb1hVnre/MSgtK0bQzv8+wr+jT68cDRoY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpsDnMvNaotaABeu/orIND4jkVlEc45gpbP0Uvo
+ CxC31ae/XqJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabA5zBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A6eIH/j9hhi7pqISYYcmP12iFsuf9LGp7WbpjVbOWKRs
+ Ct+TlXO2KmOE2cMnDfIy2oBGIEFYrgLLWsVUC4zsSodFgX1X1wjhBdy5+DNWRDllXzXMeA9oTfm
+ T/Jd8O3RyhehWr6FWmBkMZVoDPf8vayXudUDXFx/Rl+uxssCfLs36xkBtt+fwCspM8574e9/IkA
+ jMQgNjEqFPocyYjkSYppjdDG8XFpcCzBSXp1ZlWsGDJ4DlHKQ4/O3dJ/fzaakF1CwIaJYva0pzD
+ 3IjCjlZNY05zXTm2jM3fA5eiG8RFsbs46p2lA0bRNE4iDhvA5uhnt2pbn5CiLcBCOWNIhHP6l5W
+ Y40I=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -120,145 +120,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace all uses of CLK_XTAL with CLK_PAD_CLK40M.
+Replace all uses of CLK_XTAL with CLK_PAD_CLK26M.
 
-This will eventually let us remove CLK_PARENT_XTAL completely.
+This avoids declaring the same parent clock two different ways and will
+eventually let us remove CLK_PARENT_XTAL completely.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7988.c | 62 ++++++++++++++++++++++-----------------
- 1 file changed, 35 insertions(+), 27 deletions(-)
+ drivers/clk/mediatek/clk-mt8195.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt7988.c b/drivers/clk/mediatek/clk-mt7988.c
-index f951a6fc58d..4e19f285da0 100644
---- a/drivers/clk/mediatek/clk-mt7988.c
-+++ b/drivers/clk/mediatek/clk-mt7988.c
-@@ -21,11 +21,19 @@
- #define MT7988_ETHDMA_RST_CTRL_OFS	0x34
- #define MT7988_ETHWARP_RST_CTRL_OFS	0x8
+diff --git a/drivers/clk/mediatek/clk-mt8195.c b/drivers/clk/mediatek/clk-mt8195.c
+index 28b2e2f12ac..37cceb5f32b 100644
+--- a/drivers/clk/mediatek/clk-mt8195.c
++++ b/drivers/clk/mediatek/clk-mt8195.c
+@@ -96,7 +96,6 @@ static const struct mtk_pll_data apmixed_plls[] = {
+ };
  
-+enum {
-+	CLK_PAD_CLK40M,
-+};
-+
-+static const ulong ext_clock_rates[] = {
-+	[CLK_PAD_CLK40M] = 40 * MHZ,
-+};
-+
- #define FIXED_CLK0(_id, _rate)                                                 \
+ static const struct mtk_clk_tree mt8195_apmixedsys_clk_tree = {
+-	.xtal_rate = 26 * MHZ,
+ 	.pll_parent = EXT_PARENT(CLK_PAD_CLK26M),
+ 	.ext_clk_rates = ext_clock_rates,
+ 	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+@@ -105,7 +104,7 @@ static const struct mtk_clk_tree mt8195_apmixedsys_clk_tree = {
+ };
+ 
+ #define FIXED_CLK0(_id, _rate)	\
 -	FIXED_CLK(_id, CLK_XTAL, CLK_PARENT_XTAL, _rate)
-+	FIXED_CLK(_id, CLK_PAD_CLK40M, CLK_PARENT_EXT, _rate)
++	FIXED_CLK(_id, CLK_PAD_CLK26M, CLK_PARENT_EXT, _rate)
  
--#define XTAL_FACTOR(_id, _name, _parent, _mult, _div)                          \
--	FACTOR(_id, _parent, _mult, _div, CLK_PARENT_XTAL)
-+#define EXT_FACTOR(_id, _name, _parent, _mult, _div)                          \
-+	FACTOR(_id, _parent, _mult, _div, CLK_PARENT_EXT)
- 
- #define PLL_FACTOR(_id, _name, _parent, _mult, _div)                           \
- 	FACTOR(_id, _parent, _mult, _div, CLK_PARENT_APMIXED)
-@@ -629,8 +637,8 @@ static const struct mtk_gate_regs infra_3_cg_regs = {
- 	GATE_INFRA3(_id, _name, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_INFRASYS)
- #define GATE_INFRA3_TOP(_id, _name, _parent, _shift) \
- 	GATE_INFRA3(_id, _name, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_TOPCKGEN)
--#define GATE_INFRA3_XTAL(_id, _name, _parent, _shift) \
--	GATE_INFRA3(_id, _name, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_XTAL)
-+#define GATE_INFRA3_EXT(_id, _name, _parent, _shift) \
-+	GATE_INFRA3(_id, _name, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_EXT)
- 
- /* INFRA GATE */
- static const struct mtk_gate infracfg_mtk_gates[] = {
-@@ -751,21 +759,18 @@ static const struct mtk_gate infracfg_mtk_gates[] = {
- 	GATE_INFRA3_TOP(CLK_INFRA_USB_SYS, "infra_usb_sys", CLK_TOP_USB_SYS_SEL, 4),
- 	GATE_INFRA3_TOP(CLK_INFRA_USB_SYS_CK_P1, "infra_usb_sys_ck_p1",
- 			CLK_TOP_USB_SYS_P1_SEL, 5),
--	GATE_INFRA3_XTAL(CLK_INFRA_USB_REF, "infra_usb_ref", CLK_XTAL, 6),
--	GATE_INFRA3_XTAL(CLK_INFRA_USB_CK_P1, "infra_usb_ck_p1", CLK_XTAL,
--			 7),
-+	GATE_INFRA3_EXT(CLK_INFRA_USB_REF, "infra_usb_ref", CLK_PAD_CLK40M, 6),
-+	GATE_INFRA3_EXT(CLK_INFRA_USB_CK_P1, "infra_usb_ck_p1", CLK_PAD_CLK40M, 7),
- 	GATE_INFRA3_TOP(CLK_INFRA_USB_FRMCNT, "infra_usb_frmcnt",
- 			CLK_TOP_USB_FRMCNT_SEL, 8),
- 	GATE_INFRA3_TOP(CLK_INFRA_USB_FRMCNT_CK_P1, "infra_usb_frmcnt_ck_p1",
- 			CLK_TOP_USB_FRMCNT_P1_SEL, 9),
--	GATE_INFRA3_XTAL(CLK_INFRA_USB_PIPE, "infra_usb_pipe", CLK_XTAL,
--			 10),
--	GATE_INFRA3_XTAL(CLK_INFRA_USB_PIPE_CK_P1, "infra_usb_pipe_ck_p1",
--			 CLK_XTAL, 11),
--	GATE_INFRA3_XTAL(CLK_INFRA_USB_UTMI, "infra_usb_utmi", CLK_XTAL,
--			 12),
--	GATE_INFRA3_XTAL(CLK_INFRA_USB_UTMI_CK_P1, "infra_usb_utmi_ck_p1",
--			 CLK_XTAL, 13),
-+	GATE_INFRA3_EXT(CLK_INFRA_USB_PIPE, "infra_usb_pipe", CLK_PAD_CLK40M, 10),
-+	GATE_INFRA3_EXT(CLK_INFRA_USB_PIPE_CK_P1, "infra_usb_pipe_ck_p1",
-+			CLK_PAD_CLK40M, 11),
-+	GATE_INFRA3_EXT(CLK_INFRA_USB_UTMI, "infra_usb_utmi", CLK_PAD_CLK40M, 12),
-+	GATE_INFRA3_EXT(CLK_INFRA_USB_UTMI_CK_P1, "infra_usb_utmi_ck_p1",
-+			CLK_PAD_CLK40M, 13),
- 	GATE_INFRA3_TOP(CLK_INFRA_USB_XHCI, "infra_usb_xhci", CLK_TOP_USB_XHCI_SEL,
- 			14),
- 	GATE_INFRA3_TOP(CLK_INFRA_USB_XHCI_CK_P1, "infra_usb_xhci_ck_p1",
-@@ -778,14 +783,14 @@ static const struct mtk_gate infracfg_mtk_gates[] = {
- 			  CLK_INFRA_PCIE_GFMUX_TL_O_P2_SEL, 22),
- 	GATE_INFRA3_INFRA(CLK_INFRA_PCIE_GFMUX_TL_P3, "infra_pcie_gfmux_tl_ck_p3",
- 			  CLK_INFRA_PCIE_GFMUX_TL_O_P3_SEL, 23),
--	GATE_INFRA3_XTAL(CLK_INFRA_PCIE_PIPE_P0, "infra_pcie_pipe_ck_p0",
--			 CLK_XTAL, 24),
--	GATE_INFRA3_XTAL(CLK_INFRA_PCIE_PIPE_P1, "infra_pcie_pipe_ck_p1",
--			 CLK_XTAL, 25),
--	GATE_INFRA3_XTAL(CLK_INFRA_PCIE_PIPE_P2, "infra_pcie_pipe_ck_p2",
--			 CLK_XTAL, 26),
--	GATE_INFRA3_XTAL(CLK_INFRA_PCIE_PIPE_P3, "infra_pcie_pipe_ck_p3",
--			 CLK_XTAL, 27),
-+	GATE_INFRA3_EXT(CLK_INFRA_PCIE_PIPE_P0, "infra_pcie_pipe_ck_p0",
-+			CLK_PAD_CLK40M, 24),
-+	GATE_INFRA3_EXT(CLK_INFRA_PCIE_PIPE_P1, "infra_pcie_pipe_ck_p1",
-+			CLK_PAD_CLK40M, 25),
-+	GATE_INFRA3_EXT(CLK_INFRA_PCIE_PIPE_P2, "infra_pcie_pipe_ck_p2",
-+			CLK_PAD_CLK40M, 26),
-+	GATE_INFRA3_EXT(CLK_INFRA_PCIE_PIPE_P3, "infra_pcie_pipe_ck_p3",
-+			CLK_PAD_CLK40M, 27),
- 	GATE_INFRA3_TOP(CLK_INFRA_133M_PCIE_CK_P0, "infra_133m_pcie_ck_p0",
- 			CLK_TOP_SYSAXI_SEL, 28),
- 	GATE_INFRA3_TOP(CLK_INFRA_133M_PCIE_CK_P1, "infra_133m_pcie_ck_p1",
-@@ -797,14 +802,17 @@ static const struct mtk_gate infracfg_mtk_gates[] = {
+ static const struct mtk_fixed_clk top_fixed_clks[] = {
+ 	FIXED_CLK0(CLK_TOP_IN_DGI, 165000000),
+@@ -1409,7 +1408,6 @@ static const int mt8195_id_top_offs_map[] = {
  };
  
- static const struct mtk_clk_tree mt7988_fixed_pll_clk_tree = {
-+	.ext_clk_rates = ext_clock_rates,
-+	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
- 	.fdivs_offs = ARRAY_SIZE(apmixedsys_mtk_plls),
- 	.fclks = apmixedsys_mtk_plls,
- 	.num_fclks = ARRAY_SIZE(apmixedsys_mtk_plls),
- 	.flags = CLK_PARENT_APMIXED,
--	.xtal_rate = 40 * MHZ,
+ static const struct mtk_clk_tree mt8195_topckgen_clk_tree = {
+-	.xtal_rate = 26 * MHZ,
+ 	.ext_clk_rates = ext_clock_rates,
+ 	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
+ 	.id_offs_map = mt8195_id_top_offs_map,
+@@ -1597,7 +1595,6 @@ static const struct mtk_gate infra_ao_clks[] = {
  };
  
- static const struct mtk_clk_tree mt7988_topckgen_clk_tree = {
-+	.ext_clk_rates = ext_clock_rates,
-+	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
- 	.fdivs_offs = CLK_TOP_XTAL_D2,
- 	.muxes_offs = CLK_TOP_NETSYS_SEL,
- 	.fclks = topckgen_mtk_fixed_clks,
-@@ -814,17 +822,17 @@ static const struct mtk_clk_tree mt7988_topckgen_clk_tree = {
- 	.num_fdivs = ARRAY_SIZE(topckgen_mtk_fixed_factors),
- 	.num_muxes = ARRAY_SIZE(topckgen_mtk_muxes),
- 	.flags = CLK_PARENT_TOPCKGEN,
--	.xtal_rate = 40 * MHZ,
+ static const struct mtk_clk_tree mt8195_infracfg_ao_clk_tree = {
+-	.xtal_rate = 26 * MHZ,
+ 	.ext_clk_rates = ext_clock_rates,
+ 	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
  };
- 
- static const struct mtk_clk_tree mt7988_infracfg_clk_tree = {
-+	.ext_clk_rates = ext_clock_rates,
-+	.num_ext_clks = ARRAY_SIZE(ext_clock_rates),
- 	.muxes_offs = CLK_INFRA_MUX_UART0_SEL,
- 	.gates_offs = CLK_INFRA_PCIE_PERI_26M_CK_P0,
- 	.muxes = infracfg_mtk_mux,
- 	.gates = infracfg_mtk_gates,
- 	.num_muxes = ARRAY_SIZE(infracfg_mtk_mux),
- 	.num_gates = ARRAY_SIZE(infracfg_mtk_gates),
--	.xtal_rate = 40 * MHZ,
- };
- 
- static const struct udevice_id mt7988_fixed_pll_compat[] = {
 
 -- 
 2.43.0
