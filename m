@@ -4,48 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 867CDEB1076
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:58:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42262EB1076
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:59:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9D4F8409A;
-	Tue, 10 Mar 2026 16:58:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DA5A840EE;
+	Tue, 10 Mar 2026 16:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="GCpK0Nwy";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="V5MdoGg+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 947D8840DF; Tue, 10 Mar 2026 16:58:55 +0100 (CET)
-Received: from mta-64-227.siemens.flowmailer.net
- (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ id EF25C840EE; Tue, 10 Mar 2026 16:58:56 +0100 (CET)
+Received: from mta-65-227.siemens.flowmailer.net
+ (mta-65-227.siemens.flowmailer.net [185.136.65.227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CC6C84090
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC1B2840AE
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:58:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id
- 202603101558537718c0392800020717 for <u-boot@lists.denx.de>;
- Tue, 10 Mar 2026 16:58:53 +0100
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
+ 2026031015585498e015c9300002073d for <u-boot@lists.denx.de>;
+ Tue, 10 Mar 2026 16:58:54 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=9pDs4ZRGm9i0D8OIgK+DavHrWiG5FoItQi05ZJvhM+Y=;
- b=GCpK0NwyCkwNx6eV9PsEKWAqEhdYg4UBw7sdt8x/vIkFq5B7nmTf47LNq45wYW1eD/EMwF
- aIU7+rOM9SSxyz4Mg/YFc1kpoNXzPuQ/XgAeD1tNxepTfxZQkva6TEK+sMJsj/AtDFQbM3+7
- qqskBFqrSr9ZHrAUf2mqFlZft/EJQaB2WjKX44+JucVAy6foDV5kHzmPtPefaGyuBhFAHq3d
- bS1bbHRKWEmnLz+/tndH7/lTbUoHRDXn4F0a+lqy7kM9m5zIYtipKghSlwU39PvlXyhYqSoE
- AgOlNQpbwa0QOMi0/+0Q0HmqenNGRBFSHw+pl6ufTM+UwvCryOPsUMRQ==;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=Zgo5m5FJefpZRhsLoYaHzGyYdGN2Ziz9CmEwifSuFcM=;
+ b=V5MdoGg+I05qybVBTNDOGFRQEdzUNPwRt0iQlnbcN8Fw9Zle13IMKxpKMjjh/ldMw6B/0O
+ lCJfrY9kSml+eijaKRt3WtsXihWjvvF90voLz2+Lq2vVEAtrZJTfHrxxqeQNQ7UqtbUTluEZ
+ Uo47q+qkbaa8HjdrDGEhdMS2ZznjVPTe1Ba8AmGHwKCFVhX0QbQdOwMKpCy6t8gSFR3roOtS
+ LKCHXmuIP6GxZ8SLMogaGPW9kbGIyZy2zoDrjcA5gl08b2nN/IrITIiRav1lHiYNmcA9Qgc3
+ XKB9TifRNIV6GiPjALZyAfKWeE8kPHkljNQMNu0xe/NQ/GaM97CUGw+w==;
 From: Ludwig Nussel <ludwig.nussel@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
  Daniel Golle <daniel@makrotopia.org>,
  Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] Add back debug output of hashed nodes
-Date: Tue, 10 Mar 2026 16:58:26 +0100
-Message-ID: <20260310155841.126525-1-ludwig.nussel@siemens.com>
+Subject: [PATCH 2/2] Remove confusing NULL from error message
+Date: Tue, 10 Mar 2026 16:58:27 +0100
+Message-ID: <20260310155841.126525-2-ludwig.nussel@siemens.com>
+In-Reply-To: <20260310155841.126525-1-ludwig.nussel@siemens.com>
+References: <20260310155841.126525-1-ludwig.nussel@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -66,32 +68,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 2092322b31cc ("boot: Add fit_config_get_hash_list() to build
-signed node list") removed printing the list of hashed nodes during
-verification. Add it back to have a chance to compare the list when
-debugging.
+If no signature could be verified and the loop terminates, the iterator
+'noffset' has no meaningful value so name yields NULL.
 
 Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
 ---
 
- boot/image-fit-sig.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ boot/image-fit-sig.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index f426ead13c0..e7a768b9add 100644
+index e7a768b9add..433df20281f 100644
 --- a/boot/image-fit-sig.c
 +++ b/boot/image-fit-sig.c
-@@ -476,6 +476,10 @@ static int fit_config_check_sig(const void *fit, int noffset, int conf_noffset,
- 		return -1;
- 	}
+@@ -593,9 +593,8 @@ static int fit_config_verify_key(const void *fit, int conf_noffset,
+ 		return 0;
  
-+	debug("Hash nodes (%d):\n", count);
-+	for (int i = 0; i < count; ++i)
-+		debug("   '%s'\n", node_inc[i]);
-+
- 	/*
- 	 * Each node can generate one region for each sub-node. Allow for
- 	 * 7 sub-nodes (hash-1, signature-1, etc.) and some extra.
+ error:
+-	printf(" error!\n%s for '%s' hash node in '%s' config node\n",
+-	       err_msg, fit_get_name(fit, noffset, NULL),
+-	       fit_get_name(fit, conf_noffset, NULL));
++	printf(" error!\n%s for '%s' config node\n",
++	       err_msg, fit_get_name(fit, conf_noffset, NULL));
+ 	return -EPERM;
+ }
+ 
 -- 
 2.43.0
 
