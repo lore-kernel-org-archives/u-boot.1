@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5819FD2D9E
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9286CEB1058
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B9978400F;
-	Tue, 10 Mar 2026 15:16:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86FA283FDE;
+	Tue, 10 Mar 2026 15:22:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OVdTIsBS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QOFZEdgz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9964E8401F; Tue, 10 Mar 2026 15:16:47 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id 9B5EF83FE9; Tue, 10 Mar 2026 15:22:38 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D43783FE9
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:16:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55E8983F53
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-4672076355aso530959b6e.2
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 07:16:45 -0700 (PDT)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-467161c4ba7so994907b6e.0
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 07:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773152204; x=1773757004; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IaMWFSt9apyFSFml1uOKpM7H66woIxCNNmQYYfXcRVY=;
- b=OVdTIsBSp4HmkSe3PIa6G+rHq/4w3KsSI1Tiwqo9+yGXNMdKcdunM0nzyu4wql63O7
- ZZKVJNTDOluHi09XnWM4xAPN1+7b7YNPj157E7v5s1do/nVKjy7bPxyWhiGYZ+JgKfeH
- fNdJ/zWg31tRumtga5wNtyzDNmrFXV8sjeC0k=
+ d=konsulko.com; s=google; t=1773152555; x=1773757355; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dp8CnHwi93FpuhnuSjlwJAutB48bAg7/i2pNXAnQxfk=;
+ b=QOFZEdgz8gMbZ6RwvL3DfuJBo/G6AS91SZvW61NCxTsZtk4roLYp+I8CEfvrDoy2e0
+ fKQA5ukDcNBnl5GNxn6wpcWluJLafNr6sndMWBmt3/4qcfT6Ab7EKiTu97SY1WxblFaN
+ lufD2YVERicUbppLDkw6lvBGG0zM53VF9IUB0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773152204; x=1773757004;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=IaMWFSt9apyFSFml1uOKpM7H66woIxCNNmQYYfXcRVY=;
- b=N9JPjl+VSx9OQXtblc+MsP9qhFHXkuGj1vBt3TGM2z6s3bi/d5T9pqRNjXWoTs57mv
- zqFY5qCkHbO5rZLP/s5YTwuasuSR9gRQf8NDQpFL8sVtnd4kDEAgdHuLamHy1swrlmPT
- y5/EuukSwScb6KS6EkTNp1MspwCslEGQ50349PVxO1YYPYWxzGWoNG+r6LD1I6XxU3CC
- qNfPm8iv9h5BKBu+lSSG/NOISzbt9+X6qZzlGdvvQ17k7HfXyIRsmey+J2R7GgxN3bI6
- P/lksYWmHyKYbo8mjygXWEDhfsbPAYg7mOWzxFmQXwjbKs0AQQlrhnIyNxZADf5u+ZJR
- 4UMw==
-X-Gm-Message-State: AOJu0YzxDMytmML3g+U4ru2SOvp9Pk7kBFQ3xV1yYBE8ogOjd54CkBg0
- OYo4bxOnpOh0cWy34GWwaT3JfEMk+N88XxR+WspwKAeBmNIuaf3eMuv4uZjm/0hG3cbZTadYDg4
- SSEeyh9w=
-X-Gm-Gg: ATEYQzwbdE8DxZrp+gVdd0l32Sp8TFJySDuRVVkFPeGZNz6n91w54pykYU6xmHv2Pjw
- hC9hJP5KAQGX/CC4g/mithZN1Qjd6K2W+5OphHUfhqhQ+RjFH9Lpe0D5QbaoT9jLenp2X1dVG+q
- ISQDmLETvZRgzIsbrXkq2Gk5M+DMSFWX2eSK6usQWEhxgWq1qBqcbP7aOG4olU0owRcKkxxknaf
- cpoFkGkegU0RONQGS5my6gAU5mJm8LElL8amMqr9BJwfD/WHqstoLvUyuV/XOIrbgQSBJWilw1g
- CKQPb+iMaMQyWvy3lQe9C/lyWXWyHty2Jx7adOJ/oUNASolZXcPl2BtxRn829kK/5PfwoA6asih
- 9EcBDl2srTXzBwqtkpOVkrzzG5sypMrpL9OxfoBT8pKQFyKgKRvIBKs7bPVrxOITHUpXYuy4m83
- i4Wf1VkOUTxDd5j7FrNQZbN3pZ5+EpvwKoUXa0/GLtdjvrK0eNbteF8zef6ULz4nUyfBJGTEi/F
- 6rMZXi7PrIjhPcoSLolkGN3YrpHF6qd1WCWMrsR74EOfv8b
-X-Received: by 2002:a05:6808:6713:b0:462:dbf2:514f with SMTP id
- 5614622812f47-466dca56ff3mr9056269b6e.23.1773152203968; 
- Tue, 10 Mar 2026 07:16:43 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-191-8-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1773152555; x=1773757355;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dp8CnHwi93FpuhnuSjlwJAutB48bAg7/i2pNXAnQxfk=;
+ b=bceF+yeqZg8rpJUiM0X6TSJFBxxyOe0lCTqgDxIR6u+tWwpFW6y1htT8fp6iMnvJ7J
+ Hl24TUmLckz61TqL+vg2bRIJ3p73aI0shDVtQ+FLXWDFIciRIshM3OSwx8y+O2vwfAzS
+ frwHlttLT04SaO2lwNCAtkh/Ngip8DF1/nMhBfd9KL3EjSZ8yLFz+FBry1PW4Pe0zSZV
+ PZnzfegna1uAlGOgDheHrqQMTbZlRzfsiuW+u6VCIRI9s190yPgwvmkwsXNFCFxgZMCv
+ imOwDQIEycdoYZzSjwYcofc2DmKEUyLg8+HiRWhANCW25I/+EXdG484fCAgmty0CfFp1
+ B+eQ==
+X-Gm-Message-State: AOJu0YxdXpBGRh5O9aEAQ0hUOqqXgUChJyi1f1LYZlFyVwItFbWcGdoP
+ lcMy6F0KGIPSoUPUUKrGEJdqMhSWFkxtB9N6/YSN+09mzfzBsfBlhOK41UsCRLX7Bbo=
+X-Gm-Gg: ATEYQzxyaOCpb2gPXmuMa1nyDfDENtQ6jrzLXYHOcDUtce9jErY9wYe0H7mPR5Rxeiq
+ l8WeSNSGQzSOcesFo/4rw2NXzfx3z5Foxlg+L5JjP16ToCRgy+SPjxjsJbHwxvaOXXd7Y20ZAMH
+ tK74Ge8zwrZJOWA2JwRAKJ4R6KGHIM84LN6/XVOxYRu8AthYEmUf5DtqqFeh7mphjGQun9THft5
+ jiPfPETfMNf+KIhQR7S9ZxvnkvDY0mvJiqMlkWlTVoT+5JWfT2vF8prOrEGzSVeF27tOlNMwOs7
+ 6KTDAgAY5LxWoyDuGkrecVMJKdRUrL1n0iNv6CL1jV2bxJm8jpDTCea6i9ka2P1mi0uax5m4cx6
+ Lzz1ocVDvSPjAJ7C4AKvRi8/KyGngoc6oH/PVQiwl5zhi1xUMerbaKebyLoAodfefp7MIWpkXSB
+ PrPjtTEGl506C+QHRynzjYkfZ4843D2Pf3iT7hYYq13Juf4SVXio5lM5zqTWcPAQwyQEmqrOUli
+ p6sLw02dJYmASa5IEL9yR97EHZhrQ8WtpgB4VahyTQpLw==
+X-Received: by 2002:a05:6808:1807:b0:45f:1840:11f2 with SMTP id
+ 5614622812f47-4671bf57dfemr1942799b6e.22.1773152554929; 
+ Tue, 10 Mar 2026 07:22:34 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-235.totalplay.net.
  [187.191.8.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46718c843e6sm2430562b6e.12.2026.03.10.07.16.42
+ 46e09a7af769-7d754386b7fsm2811683a34.2.2026.03.10.07.22.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 07:16:43 -0700 (PDT)
+ Tue, 10 Mar 2026 07:22:34 -0700 (PDT)
+Date: Tue, 10 Mar 2026 08:22:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Christian=20P=C3=B6tzsch?= <christian.poetzsch@kernkonzept.com>, 
- Adam Lackorzynski <adam@l4re.org>
-Subject: [PATCH v2] virtio: Fix virtio initialization sequence
-Date: Tue, 10 Mar 2026 08:16:42 -0600
-Message-ID: <20260310141642.1122025-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <aZR0WCHAC6KaJfH1@kernkonzept.com>
-References: <aZR0WCHAC6KaJfH1@kernkonzept.com>
+To: Andrew Davis <afd@ti.com>, Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, Suhaas Joshi <s-joshi@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Dhruva Gole <d-gole@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Daniel Schultz <d.schultz@phytec.de>,
+ =?iso-8859-1?Q?Jo=E3o_Paulo_Gon=E7alves?= <joao.goncalves@toradex.com>
+Subject: Re: [PATCH next] arm: mach-k3: use Kconfig options for ATF/OPTEE size
+Message-ID: <20260310142232.GH1388590@bill-the-cat>
+References: <20260310-tfa_tee_addr_kconfig_refactor-v1-1-d24abbca82ee@ti.com>
+ <a881f055-4fc1-43fe-bc35-7ab1bc47d29b@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VA1D4Y1iVDgqKOB+"
+Content-Disposition: inline
+In-Reply-To: <a881f055-4fc1-43fe-bc35-7ab1bc47d29b@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,53 +101,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Christian Pötzsch <christian.poetzsch@kernkonzept.com>
 
-The virtio spec clearly states in "3.1.1 Driver Requirements: Device
-Initialization" the sequence a client has to follow after device reset.
-Because u-boot resets here again, it also needs to set the "acknowledge"
-bit again even if this was done in virtio_uclass_child_post_bind already
-once before.
+--VA1D4Y1iVDgqKOB+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Christian Pötzsch <christian.poetzsch@kernkonzept.com>
-Signed-off-by: Adam Lackorzynski <adam@l4re.org>
-[trini: Add VIRTIO_CONFIG_S_ACKNOWLEDGE flag check to the test]
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Update the test to expect VIRTIO_CONFIG_S_ACKNOWLEDGE being set as
-  well.
----
- drivers/virtio/virtio-uclass.c | 3 +++
- test/dm/virtio_device.c        | 1 +
- 2 files changed, 4 insertions(+)
+On Tue, Mar 10, 2026 at 08:49:52AM -0500, Andrew Davis wrote:
+> On 3/10/26 4:06 AM, Anshul Dalal wrote:
+> > The reserved memory sizes for ATF and OPTEE were hard-coded for K3
+> > devices, this patch replaces them with a Kconfig option allowing for
+> > easier modifications.
+> >=20
+> > Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> > ---
+> >   arch/arm/dts/k3-binman.dtsi   |  4 ++--
+> >   arch/arm/mach-k3/Kconfig      | 15 +++++++++++++++
+> >   arch/arm/mach-k3/common_fdt.c |  5 +++--
+> >   3 files changed, 20 insertions(+), 4 deletions(-)
+> >=20
+> > diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+> > index 0fd93f9536a..ad127663d03 100644
+> > --- a/arch/arm/dts/k3-binman.dtsi
+> > +++ b/arch/arm/dts/k3-binman.dtsi
+> > @@ -477,7 +477,7 @@
+> >   						FWPERM_SECURE_PRIV_RWCD |
+> >   						FWPERM_SECURE_USER_RWCD)>;
+> >   		start_address =3D <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
+> > -		end_address =3D <0x0 (CONFIG_K3_ATF_LOAD_ADDR + 0x1ffff)>;
+> > +		end_address =3D <0x0 (CONFIG_K3_ATF_LOAD_ADDR + CONFIG_K3_ATF_RESERV=
+ED_SIZE - 1)>;
+> >   	};
+> >   	firewall_armv8_optee_fg: template-8 {
+> >   		control =3D <(FWCTRL_EN | FWCTRL_LOCK |
+> > @@ -486,7 +486,7 @@
+> >   						FWPERM_SECURE_PRIV_RWCD |
+> >   						FWPERM_SECURE_USER_RWCD)>;
+> >   		start_address =3D <0x0 CONFIG_K3_OPTEE_LOAD_ADDR>;
+> > -		end_address =3D <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + 0x17fffff)>;
+> > +		end_address =3D <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + CONFIG_K3_OPTEE_RE=
+SERVED_SIZE - 1)>;
+> >   	};
+> >   	ti_falcon_template: template-9 {
+> > diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> > index 1b8c0b1eb96..ba1130a7996 100644
+> > --- a/arch/arm/mach-k3/Kconfig
+> > +++ b/arch/arm/mach-k3/Kconfig
+> > @@ -130,6 +130,14 @@ config K3_ATF_LOAD_ADDR
+> >   	  The load address for the ATF image. This value is used to build the
+> >   	  FIT image header that places ATF in memory where it will run.
+> > +config K3_ATF_RESERVED_SIZE
+> > +	hex "Reserved DDR size for ATF"
+> > +	default 0x80000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 ||=
+ SOC_K3_J722S)
+> > +	default 0x20000
+> > +	help
+> > +	  The runtime DDR size reserved for ATF. This value is used to fixup =
+the
+> > +	  kernel device-tree's reserved-memory node for ATF.
+>=20
+> This does more than just fixing up the DT. It also sets the size of the f=
+irewall
+> in the boot certificate, which is much more important. If this is set sma=
+ller
+> than the real size of ATF then some of it might remain un-firewalled.
+>=20
+> Same below for OPTEE. Otherwise, LGTM,
+>=20
+> Acked-by: Andrew Davis <afd@ti.com>
 
-diff --git a/drivers/virtio/virtio-uclass.c b/drivers/virtio/virtio-uclass.c
-index ac563991b90f..c36e9e9b3a77 100644
---- a/drivers/virtio/virtio-uclass.c
-+++ b/drivers/virtio/virtio-uclass.c
-@@ -292,6 +292,9 @@ static int virtio_uclass_child_pre_probe(struct udevice *vdev)
- 	if (ret)
- 		goto err;
- 
-+	/* After a reset we always need to start the init sequence again */
-+	virtio_add_status(vdev, VIRTIO_CONFIG_S_ACKNOWLEDGE);
-+
- 	/* We have a driver! */
- 	virtio_add_status(vdev, VIRTIO_CONFIG_S_DRIVER);
- 
-diff --git a/test/dm/virtio_device.c b/test/dm/virtio_device.c
-index 53414e4d3a47..c2cd0630d973 100644
---- a/test/dm/virtio_device.c
-+++ b/test/dm/virtio_device.c
-@@ -40,6 +40,7 @@ static int dm_test_virtio_base(struct unit_test_state *uts)
- 	ut_assertok(virtio_get_status(dev, &status));
- 	ut_asserteq(VIRTIO_CONFIG_S_DRIVER |
- 		    VIRTIO_CONFIG_S_DRIVER_OK |
-+		    VIRTIO_CONFIG_S_ACKNOWLEDGE |
- 		    VIRTIO_CONFIG_S_FEATURES_OK, status);
- 
- 	return 0;
--- 
-2.43.0
+To be clear, I'll expect a v2 that at least updates the help text and
+also updates anything relevant under doc/board/ as well. Thanks!
 
+--=20
+Tom
+
+--VA1D4Y1iVDgqKOB+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabApJAAKCRAr4qD1Cr/k
+Cg40AP9zyerMiTzUiUhaXijSiKQSX4y0RgnmUT1I1emHtVPbDgD/dUdXarMO2Fyy
+8FD6coLtee70Jua/5kuk1sbTdBM4sw8=
+=qMir
+-----END PGP SIGNATURE-----
+
+--VA1D4Y1iVDgqKOB+--
