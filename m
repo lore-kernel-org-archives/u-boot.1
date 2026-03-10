@@ -4,78 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BFEFEB106C
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:12:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50B27EB1067
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:15:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16F6A840B5;
-	Tue, 10 Mar 2026 16:12:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CBE2E83FBC;
+	Tue, 10 Mar 2026 16:15:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="BFYkbsY4";
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cHW16Ncc";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="bDXBvgqM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B34F840D7; Tue, 10 Mar 2026 16:12:30 +0100 (CET)
-Received: from mail-ej1-x649.google.com (mail-ej1-x649.google.com
- [IPv6:2a00:1450:4864:20::649])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B3D5684027; Tue, 10 Mar 2026 16:15:51 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 172F9840B5
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:12:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9259083F53
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:15:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x649.google.com with SMTP id
- a640c23a62f3a-b94336067ebso315735566b.3
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 08:12:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1773155545; x=1773760345; darn=lists.denx.de;
- h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TklWqQ88Nf7zqkDPG5uhbzJOomjANyosTHUJuzylPlI=;
- b=BFYkbsY4+QViRIIVt7Qq/10C5yddVJpjm+wqEbgwPuJ7AhLvgmJfsnsSHS8Nx7OOtw
- I1QSGUweMhY/Yx8zNP9d+F2Atm7d7bxwu43NKfOEiEAijh+YkAXz9s/9gG9M6qzM+tG1
- KuI2EjuBQxLg7/8u7erwUehqZhPTC671Tf0pFwNYRZ1cwVMgOlNzJhz1JlMFX0rsPZgv
- BlFaFZq7ECSzGm1vlfwzPfxRFDABz3bz3jkuvho3mhkasXIl91kt66e1831bYUNv1MZn
- ZqAbXNeslbz57HwVn7ygdEvVpI65xS76ckGhNRkNovVwUAP203hZxU1gunIveVRj75Bk
- iatQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773155545; x=1773760345; darn=lists.denx.de;
- h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TklWqQ88Nf7zqkDPG5uhbzJOomjANyosTHUJuzylPlI=;
- b=cHW16NccoaOgtRfPMldpJy92SaJXwDovC0BgJqII5dmkpTC9o0QQ1sVaURi8zeX6nS
- 3OMJx/Yf+6u8A2UCMRtR6BXfvy6/kOQq36zhvtZ3qq3lbkB49YEKoPDeZaUI3P4ztC30
- WZXKPmafZlBw4oeJUULyfz5no1XBuduprw8M4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773155545; x=1773760345;
- h=to:from:subject:date:message-id:auto-submitted:sender:reply-to
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TklWqQ88Nf7zqkDPG5uhbzJOomjANyosTHUJuzylPlI=;
- b=uciWiqXLK//ycNSAaBhZD2XCQo/TuhFvIhwBPqkSscGYHkZ5HbWqS0rFBWW9g/UbPp
- kJaT0HUgjrmviRcgYy5h51NOQrWti3GB5yF+76WMl+rq6vtoRbd0Qph8dPQGwOflP1tE
- zH08xsx5YgW8XR6q8EagtyENx3V3Qup95CyosguaC1qhXhcQA7fOeTLiDvqRzX374mRt
- Qau63XHYFbFEFQiGfuaFA2ebnRRXCfl5l3cxkA8S0xCOOndZlxCON00dHllTaIzzl3JM
- PFqn6QNOXiQrRtcANJMznuMF/wqA6VBxPJe69DgESPDs2nLPczNE6SLPborPxP3cHDCC
- DQjQ==
-X-Gm-Message-State: AOJu0YzAF3rMW5iNfX1bbbVzr4H93cAoIQgdoNtkSA7Mu+4Lq3KFWBof
- xDWRDsPz0DAajeveTNn7s9npKp9M7xu1ZOAcX8mCx6M+Q1d7XQV0qSijsSmCiDsCy/n78aVaRTv
- tJMmYyaYS7OAuq4hGDZirYJM7L2ZqpCtnO/BxvUQlZctpI/OMR7T7
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yz6/hcQm4g2Ho3iAigL6WhbyBqYg0A9qVIa/sE6KwOuQyANxBvwgF6vjfj0HOvaE28+x5k68kiUIysbq3fkwqTAN/TIlwltv7ynpRQPOUYEy/H0TmbJ0S2SCOJ/XO0RKkPJ2rrvNkCpjJ7anOP+Y4obWO1blSIIUHycoiQJ7fjlj7pEPfVI9pK9CM3HaPJOBytoqgrX/fmEvkgjJeNcoEjxga1BOwSVJIspSOhW3WeVYIeNhtLEjqPhKg0FyWloqdGrGProC9dCV8k1S1O9qV+h26M2J1WQPwCw3Rk2aIDGTZAs7HuYO5XsN96f3dnXrfb5TYKt3WR5gzwDFWB9MuA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Hu4/r4MPNeastRbhVYqjSkZmhWyqbdBt4QEXKVDuhGw=;
+ b=mB+0bsklCZ3nRzqz2u/f/HKdJozJer9MdnyX0ZDHl3XfEAAhmGF0aeoxz06VdE1qm4ptxtvlD71yLHne3h9L6MKilUGBvOKK4yvo54cof+Q/XOl1PvsK/xdQs/YJYaMFLRNqiS0wIrbyPFQAvPKlBwgyljACavhnHtaOuLA/Ij5+Wkyv56+PHTpAfLRKZxTVmEANFX8Xf6Y8g5fjes4Qf1SOJpjut2BkduqL0YmYdrhd1YEadxV7Ls0lZPYF+5n3q04TCMmRBXT0nvCFZ618zNkvurOrKOrqxnqNmfcKnWXVU4T7apRweeuC8lq4iaBImC2L/lid3kWvNJ+i9h/t0g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Hu4/r4MPNeastRbhVYqjSkZmhWyqbdBt4QEXKVDuhGw=;
+ b=bDXBvgqMHhTmVUvwNqXrJG4n9lBBxU7Q0Zonrq8T4E+/nva2l9sZEb0mp40GVSI5LzSnwkznts/dMCrinnoS8hCA+3bfaXrlTCMFT1s6SzQLir0t3aSylB+tHoV5QEp8140VdNFewSJtW3vBHCBBOfN7bcXq36PIaj46ygcFdsIsE93HFZ99Q2RH+LuO2u75Hv1OU4z6qEtmtC/fzEBeqHlVzHOWnBNvz0lmzAeBwetZxze/P6dXsJwse/8qRjmqmssO5fOv0l1R8ipFWAI8BondtYzYp7hoPifQ0GMKCcxDVBW5CbAEa+qC0ajXLjgaW85U6vXLbzucMV0iXxjVBA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
+ by DB9PR04MB8108.eurprd04.prod.outlook.com (2603:10a6:10:25e::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Tue, 10 Mar
+ 2026 15:15:47 +0000
+Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
+ ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9678.024; Tue, 10 Mar 2026
+ 15:15:47 +0000
+Date: Tue, 10 Mar 2026 17:27:45 +0200
+From: Simona Toaca <simona.toaca@oss.nxp.com>
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
+ alice.guo@nxp.com, 
+ ye.li@nxp.com, simona.toaca@nxp.com, viorel.suman@nxp.com, marex@nabladev.com, 
+ ravi@prevas.dk, fedor.ross@ifm.com, sebastien.szymanski@armadeus.com, 
+ joao.goncalves@toradex.com, ji.luo@nxp.com, semen.protsenko@linaro.org,
+ sjg@chromium.org, 
+ tharvey@gateworks.com, ping.bai@nxp.com, qijian.guo@nxp.com
+Subject: Re: [PATCH 4/5] board: nxp: imx9{4,5}_evk: Add qb save option in SPL
+Message-ID: <llrc46dn7akdpro5bim3egfuuktyvwbrmb4odenspiz7tnwdme@3hc5leohkgzr>
+References: <cover.1773137310.git.simona.toaca@nxp.com>
+ <bd23b79dc06f39a9f19ee3da956de450aad03aaf.1773137310.git.simona.toaca@nxp.com>
+ <34d4475a-8353-47c9-86fe-36e67ceecb69@gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <34d4475a-8353-47c9-86fe-36e67ceecb69@gmail.com>
+X-ClientProxiedBy: AM9P192CA0028.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:20b:21d::33) To VI0PR04MB11917.eurprd04.prod.outlook.com
+ (2603:10a6:800:306::9)
 MIME-Version: 1.0
-X-Received: by 2002:a17:907:6d24:b0:b97:27a2:51b with SMTP id
- a640c23a62f3a-b9727a20548mr2026366b.55.1773155545500; Tue, 10 Mar 2026
- 08:12:25 -0700 (PDT)
-Auto-Submitted: auto-generated
-Message-ID: <calendar-49881dc8-9a1c-4532-82e2-dc88f157cc19@google.com>
-Date: Tue, 10 Mar 2026 15:12:25 +0000
-Subject: Synced invitation: U-Boot community meeting @ Tue 24 Feb 2026 8am -
- 9am (MST) (u-boot@lists.denx.de)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Content-Type: multipart/mixed; boundary="0000000000006be147064cacf236"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|DB9PR04MB8108:EE_
+X-MS-Office365-Filtering-Correlation-Id: 66351db2-bc5c-4234-f839-08de7eb7e7d3
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|7416014|1800799024|376014|19092799006|18002099003|22082099003|56012099003;
+X-Microsoft-Antispam-Message-Info: COMFYQ92eN1UvXTBC8WKfaD7h72kdIYP/MyLaA/y1hknUlpyDqCfh06RbFBlRiBoa+XBnIgil5PW1O7kbILhh5MXnX0EZ00W/jAeeX7ZY7jBDJ8B/tKEqBKEZ5q76FUoMEohLrvHgpOyOxGHWCXj/xUmX+9dJbjiKROPgaSdciRbrAOB7Zfdtbf1U06BAXqiYcLKE8NHY76wCpAkEzeX/iD7DPLATzitusfJeP2VHo0ciVVPQWoUNtcORSLDiCq/4EWxNOP+Y2h29w82qnzam2XmBXUhH6vTSVYuZfqVcpMjMQ9ogUMrv+eJe7OreumaA7ln0tEYF5Wb4qKfjIuNPUpe+8RoY5RHSpietl1kLC+3bNgu1HChW0IlYkKPNh/rtcaf+XksEsRhdu8ZQNFRRk4fvTJWUu7g+AIuHqcHjnut4g0I4vvpnOmrynt17g5s8Q4zE54ZhArCc8jKOVO3OyHgZiEmJAKKmP8ZVh8k+V/akEUpORGwqeyTl0DMLKeM3NMa0V5NNs1Qx3ypeCoFoU2B2d7KroWko/Kh5HpQp/E0LunJDbP5NWQYsZMYwQAznxPtnk9SS900JCoTOBUJ7qWzpfAXqDA6oRkKsfbE44Ngth0vQYZGjuCdBj1Ui4WyoapltKvlwjiap3xYR6tvurEt1tYbDufAj/wg6U7hmO7mUqzGB0SOgH8iSanETKBNj5m71fowp+tv3NZxnGkScbNlWTAPinb22sMGuLasigA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(7416014)(1800799024)(376014)(19092799006)(18002099003)(22082099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5M7KeR5EE1evLVWFMtW9GtbvG9D6MjFWt9B8lbdDByKo7rm/3y/byVywJeIc?=
+ =?us-ascii?Q?TT/xQ3QVheNJkAm+Cbbfynt+xbDfy3GYRlPXjxo5cZwahQU8y5hDi9zFz1b7?=
+ =?us-ascii?Q?Zlhe2KKsHkCT4Tm7f48lDzGZa3COmtgxS0p00c/yfqJ55Tbh37NOTY3IbuN4?=
+ =?us-ascii?Q?Ujxvn9StANyUIIfiwv5L7HUXARedRFp/FU9yOuRvcSd/53rV4rRtUI/WiClG?=
+ =?us-ascii?Q?nUB+yC21ByHHFxgCL6ojL9Lm+f+mOa0B8ZmYNViOu46BWAvbO8oSP33S1bT7?=
+ =?us-ascii?Q?2SsFhBfdjPD4onHH4qHnJGwL7op5DbWXTCU4XJyQvmJU//xrPGDSCCAVaYnX?=
+ =?us-ascii?Q?VuQtG0KCSAgwhNwaNZ73dpiwhTOhNdKd2Z+oWjnJBopYgYozurmw5ogpMGxY?=
+ =?us-ascii?Q?UYp74l3U0VO9x294oAX80Joe3hT6KQg79rNDZ7ZIWVHG36JW/xkjzHFR14Wg?=
+ =?us-ascii?Q?LtuvK25xVB1uHreYHWAYe503k4gifs0HZrJyLiUCI6IJVzkXOvJbiP4TahI0?=
+ =?us-ascii?Q?Ofp0vUk/NNHFEO/esti2TdbnEoz2LZLEIrhlfAuY3MwmkgF5Pa+PmcjQeDJm?=
+ =?us-ascii?Q?bEyzOMeziAmxp7ZMUdxrH0uxS5V+ZQz+9wfsTqetdHciAmXVxhJEv/7StVuv?=
+ =?us-ascii?Q?v9sYHOCnhcviB7GQ3FLwc1yQg/DUZJemDd+5Bkr9xJrk5VAZieD5VXV96+Fl?=
+ =?us-ascii?Q?wwrAb1dI8dIUUxZSbwGCQn/0fKRyu+d65O75zryQPZHH6MmrUYll9g9a8hjr?=
+ =?us-ascii?Q?Y1/IVlhf2e+aq3Ihot5gUFqxLW15z5dpzwVW/M9nkShqsUsrWxL143MlaP1o?=
+ =?us-ascii?Q?XFYK2kkelwSvnBMZW4+d+caWs7E9e0I94Eky/jmNKYUdbOPlfxgAaUvISXcN?=
+ =?us-ascii?Q?GMJ67XscaFG0viLgbDqWKyxO5w+lhrux41bWxjVHKIWUOvz7KYZBWRc+zbQ2?=
+ =?us-ascii?Q?agNFpz+m4SdE53jAkyKculnZHSf/bWidj4FlBo9uGmFMALYeM7YMU1/Nli9b?=
+ =?us-ascii?Q?hxf5jQK/KJGjy9BX5Y6nwBK0NgcKbVq8JYcx/ClMPaLkdNacz0l+WYNhA2m/?=
+ =?us-ascii?Q?7VKclKclq+FPtJcLf+SuWxYsm4Iu1QklKMRJxIDw5I+0JZQb34kpnnOlOZ5X?=
+ =?us-ascii?Q?HZd9krSJ+YWodeBHN4DkayhK8KzbKgfhoVXyH9ZMq1xUa/yly3qOu3/6dsnE?=
+ =?us-ascii?Q?OpELNZd1IC7pn5sz0SQQObO8umXHpr5tcJbAi6vhiodiLOOF+lazMSBB0mO1?=
+ =?us-ascii?Q?UuB3NX1qgpeoXQp3kBYDhuc7kB6nd2dfWNLYyL+BdzXP0pmrA5pH/DoPZON/?=
+ =?us-ascii?Q?NB+skq8wemAUtG6z/QzDAUgTvODcKsQGWs8S0KSPFBY/mZQI89D67GDvpX1C?=
+ =?us-ascii?Q?UksiYIYgvM5+saYoTFCNd1wWKmD1xcCFkT8xCCpfVZ87EWb6KGFsU9mUeTKT?=
+ =?us-ascii?Q?VoEqfBOVWBMzJ274qVMR0fs0+OdbaWSNYRoKJD2t0EeWbxJjvLVPfpAE/fQp?=
+ =?us-ascii?Q?ZlYnyjbizOY43bSNztBDg9L0ZxbAUsVWf5zehKFYDUhA2wkwFkNOmJR/fWE9?=
+ =?us-ascii?Q?eWDuzcpXGdCW4OF0WDiyQThxR0eEpBRqFBrksbBtXqJ8mu3LQfJxXv3lxEbt?=
+ =?us-ascii?Q?LZBKmV3Wiu6l/RKtgcGtuUFeemcVYNQbKgP0I4Ijdo3clQRRNUHP/KXtoby0?=
+ =?us-ascii?Q?nSySaRTSMgIquBTeY35TLYBuvc5p7oreqACRAUjaCfPVhQicgDNAOibmHKHs?=
+ =?us-ascii?Q?mYltgMdzMw=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66351db2-bc5c-4234-f839-08de7eb7e7d3
+X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 15:15:46.9058 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kdwpP4Bqkh7TwmuDH31BeAsATCRtX2ew8UTCOD6dJWspOYljQdXMzWno6/oUeJM3L6nD71npNt+jfn5g88sZtw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8108
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,147 +143,169 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Simon Glass <sjg@chromium.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000006be147064cacf236
-Content-Type: multipart/alternative; boundary="0000000000006be146064cacf234"
+Hi Emanuele,
 
---0000000000006be146064cacf234
-Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
-Content-Transfer-Encoding: base64
+On Tue, Mar 10, 2026 at 04:04:19PM +0100, Emanuele Ghidoli wrote:
+> 
+> 
+> On 3/10/26 12:54, Simona Toaca (OSS) wrote:
+> > From: Simona Toaca <simona.toaca@nxp.com>
+> > 
+> > Call qb save automatically in the board-specific
+> > spl_board_init(), if SPL_QB option is enabled. This
+> > makes sure qb_save is called before any image loading
+> > is done by the SPL.
+> > 
+> > Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+> > ---
+> >  arch/arm/include/asm/mach-imx/qb.h | 2 ++
+> >  arch/arm/mach-imx/Kconfig          | 7 +++++++
+> >  arch/arm/mach-imx/imx9/Makefile    | 4 +++-
+> >  arch/arm/mach-imx/imx9/qb.c        | 9 +++++++++
+> >  board/nxp/imx94_evk/spl.c          | 6 +++++-
+> >  board/nxp/imx95_evk/spl.c          | 6 +++++-
+> >  6 files changed, 31 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/arch/arm/include/asm/mach-imx/qb.h b/arch/arm/include/asm/mach-imx/qb.h
+> > index 5efe68f0a60..4f923d79e7a 100644
+> > --- a/arch/arm/include/asm/mach-imx/qb.h
+> > +++ b/arch/arm/include/asm/mach-imx/qb.h
+> > @@ -10,4 +10,6 @@
+> >  
+> >  bool qb_check(void);
+> >  int  qb(int qb_dev, int qb_bootdev, bool save);
+> > +void spl_qb_save(void);
+> > +
+> >  #endif
+> > diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+> > index 17aad696648..069b25c6241 100644
+> > --- a/arch/arm/mach-imx/Kconfig
+> > +++ b/arch/arm/mach-imx/Kconfig
+> > @@ -71,6 +71,13 @@ config CSF_SIZE
+> >  	  Define the maximum size for Command Sequence File (CSF) binary
+> >  	  this information is used to define the image boot data.
+> >  
+> > +config SPL_IMX_QB
+> > +	bool "Run qb save during SPL"
+> > +	default n
+> > +	depends on SPL && IMX_SNPS_DDR_PHY_QB_GEN && (IMX95 || IMX94)
+> > +	help
+> > +	  Run qb save on bootdev automatically during SPL.
+> > +
+> >  config CMD_IMX_QB
+> >  	bool "Support the 'qb' command"
+> >  	default y
+> > diff --git a/arch/arm/mach-imx/imx9/Makefile b/arch/arm/mach-imx/imx9/Makefile
+> > index 7dee144e0f4..3207013812a 100644
+> > --- a/arch/arm/mach-imx/imx9/Makefile
+> > +++ b/arch/arm/mach-imx/imx9/Makefile
+> > @@ -15,7 +15,9 @@ obj-y += imx_bootaux.o
+> >  endif
+> >  
+> >  ifeq ($(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN),y)
+> > -ifneq ($(CONFIG_XPL_BUILD),y)
+> > +ifeq ($(CONFIG_XPL_BUILD),y)
+> > +obj-$(CONFIG_SPL_IMX_QB) += qb.o
+> > +else
+> >  obj-$(CONFIG_CMD_IMX_QB) += qb.o
+> >  endif
+> >  endif
+> > diff --git a/arch/arm/mach-imx/imx9/qb.c b/arch/arm/mach-imx/imx9/qb.c
+> > index fc01d8e22e9..79573741d39 100644
+> > --- a/arch/arm/mach-imx/imx9/qb.c
+> > +++ b/arch/arm/mach-imx/imx9/qb.c
+> > @@ -428,3 +428,12 @@ int qb(int qb_dev, int qb_bootdev, bool save)
+> >  
+> >  	return 0;
+> >  }
+> > +
+> > +void spl_qb_save(void)
+> > +{
+> > +	int dev = spl_boot_device();
+> > +
+> > +	/** Save QB data on current boot device */
+> > +	if (qb(dev, dev, true))
+> > +		printf("QB save failed\n");
+> > +}
+> > diff --git a/board/nxp/imx94_evk/spl.c b/board/nxp/imx94_evk/spl.c
+> > index cc5b7f9ef0f..1d25795eb17 100644
+> > --- a/board/nxp/imx94_evk/spl.c
+> > +++ b/board/nxp/imx94_evk/spl.c
+> > @@ -1,6 +1,6 @@
+> >  // SPDX-License-Identifier: GPL-2.0+
+> >  /*
+> > - * Copyright 2025 NXP
+> > + * Copyright 2025-2026 NXP
+> >   */
+> >  
+> >  #include <hang.h>
+> > @@ -14,6 +14,7 @@
+> >  #include <asm/arch/sys_proto.h>
+> >  #include <asm/mach-imx/boot_mode.h>
+> >  #include <asm/mach-imx/ele_api.h>
+> > +#include <asm/mach-imx/qb.h>
+> >  
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >  
+> > @@ -44,6 +45,9 @@ void spl_board_init(void)
+> >  	ret = ele_start_rng();
+> >  	if (ret)
+> >  		printf("Fail to start RNG: %d\n", ret);
+> > +
+> > +	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
+> > +		spl_qb_save();
+> Does it write to MMC/NOR/SD at every boot? Is that necessary if a quick boot
+> was performed and the data has not changed?
+> >  }
+No, the qb() method calls qb_check, which returns true only if OEI
+saved valid data to volatile memory (meaning it has run Training flow).
+So, if Quickboot flow is run, the data in volatile memory is not valid,
+qb_check fails -> qb returns and does not write anything to the NVM.
 
-VGhpcyBlbWFpbCBrZWVwcyB0aGUgZXZlbnQgdXAgdG8gZGF0ZSBpbiB5b3VyIGNhbGVuZGFyLg0K
-DQpVLUJvb3QgY29tbXVuaXR5IG1lZXRpbmcNClR1ZXNkYXkgMjQgRmViIDIwMjYg4ouFIDhhbSDi
-gJMgOWFtDQpNb3VudGFpbiBUaW1lIC0gRGVudmVyDQoNCkpvaW4gd2l0aCBHb29nbGUgTWVldA0K
-aHR0cHM6Ly9tZWV0Lmdvb2dsZS5jb20vaWN2LW52bXYtZGJmP2hzPTIyNA0KDQoNCgkNCkpvaW4g
-YnkgcGhvbmUNCihVUykgKzEgNDc1LTI5OS04MzYyDQpQSU46IDQzOTA1MjA0OQ0KDQpNb3JlIHBo
-b25lIG51bWJlcnMNCmh0dHBzOi8vdGVsLm1lZXQvaWN2LW52bXYtZGJmP3Bpbj01NDkzMTcxOTAw
-NTU2JmhzPTANCg0KDQpBdHRhY2htZW50cw0KTm90ZXMgYnkgR2VtaW5pICANCmh0dHBzOi8vZG9j
-cy5nb29nbGUuY29tL2RvY3VtZW50L2QvMWg4TXNSWDhmTDVoLUEtTEdHR3ltLVJhMTdpZXYyMm0x
-eGZwQUZ6RklVMXcvZWRpdD91c3A9bWVldF90bmZtX2NhbGVuZGFyDQoNClUtQm9vdCBjb21tdW5p
-dHkgbWVldGluZw0KDQpHdWVzdHMNCnBiaWVsN0BnbWFpbC5jb20NClNpbW9uIEdsYXNzDQptYWx5
-c2FncmVnQGdtYWlsLmNvbQ0Ka29yZy5zdW1pdEBnbWFpbC5jb20NCnUtYm9vdEBsaXN0cy5kZW54
-LmRlDQoNCg0Kfn4vL35+DQpJbnZpdGF0aW9uIGZyb20gR29vZ2xlIENhbGVuZGFyOiBodHRwczov
-L2NhbGVuZGFyLmdvb2dsZS5jb20vY2FsZW5kYXIvDQoNCllvdSBhcmUgcmVjZWl2aW5nIHRoaXMg
-ZW1haWwgYmVjYXVzZSB5b3UgYXJlIGFuIGF0dGVuZGVlIG9uIHRoZSBldmVudC4NCg0KRm9yd2Fy
-ZGluZyB0aGlzIGludml0YXRpb24gY291bGQgYWxsb3cgYW55IHJlY2lwaWVudCB0byBzZW5kIGEg
-cmVzcG9uc2UgdG8gIA0KdGhlIG9yZ2FuaXplciwgYmUgYWRkZWQgdG8gdGhlIGd1ZXN0IGxpc3Qs
-IGludml0ZSBvdGhlcnMgcmVnYXJkbGVzcyBvZiAgDQp0aGVpciBvd24gaW52aXRhdGlvbiBzdGF0
-dXMsIG9yIG1vZGlmeSB5b3VyIFJTVlAuDQoNCkxlYXJuIG1vcmUgaHR0cHM6Ly9zdXBwb3J0Lmdv
-b2dsZS5jb20vY2FsZW5kYXIvYW5zd2VyLzM3MTM1I2ZvcndhcmRpbmcNCg==
---0000000000006be146064cacf234
-Content-Type: text/calendar; charset="UTF-8"; method=REQUEST
-Content-Transfer-Encoding: 7bit
+Also, another thing to keep in mind is that after a successfull
+qb save, the data in volatile memory is invalidated -> qb check will
+fail as well even if OEI doesn't run (so on a warm reboot).
 
-BEGIN:VCALENDAR
-PRODID:-//Google Inc//Google Calendar 70.9054//EN
-VERSION:2.0
-CALSCALE:GREGORIAN
-METHOD:REQUEST
-BEGIN:VTIMEZONE
-TZID:America/Bahia_Banderas
-X-LIC-LOCATION:America/Bahia_Banderas
-BEGIN:STANDARD
-TZOFFSETFROM:-0600
-TZOFFSETTO:-0600
-TZNAME:CST
-DTSTART:19700101T000000
-END:STANDARD
-END:VTIMEZONE
-BEGIN:VEVENT
-DTSTART;TZID=America/Bahia_Banderas:20260224T090000
-DTEND;TZID=America/Bahia_Banderas:20260224T100000
-DTSTAMP:20260310T151225Z
-ORGANIZER;CN=U-Boot:mailto:89be7b813136bec06a83de4da59745f0abd11c1b836061ae
- 06c1c7dbcd18df41@group.calendar.google.com
-UID:0v3c45uhvntcro4s5fp73bhl58_R20260210T150000@google.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
- TRUE;CN=pbiel7@gmail.com;X-NUM-GUESTS=0:mailto:pbiel7@gmail.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
- TRUE;CN=Simon Glass;X-NUM-GUESTS=0:mailto:sjg@chromium.org
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
- TRUE;CN=malysagreg@gmail.com;X-NUM-GUESTS=0:mailto:malysagreg@gmail.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
- TRUE;CN=korg.sumit@gmail.com;X-NUM-GUESTS=0:mailto:korg.sumit@gmail.com
-ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
- TRUE;CN=u-boot@lists.denx.de;X-NUM-GUESTS=0:mailto:u-boot@lists.denx.de
-X-GOOGLE-CONFERENCE:https://meet.google.com/icv-nvmv-dbf
-X-MICROSOFT-CDO-OWNERAPPTID:-832031873
-RECURRENCE-ID;TZID=America/Bahia_Banderas:20260224T090000
-CLASS:PUBLIC
-CREATED:20250114T162827Z
-DESCRIPTION:U-Boot community meeting\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~
- :~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet
- : https://meet.google.com/icv-nvmv-dbf\nOr dial: (US) +1 475-299-8362 PIN: 
- 439052049#\nMore phone numbers: https://tel.meet/icv-nvmv-dbf?pin=549317190
- 0556&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/a
- nswer/9282720\n\nPlease do not edit this section.\n-::~:~::~:~:~:~:~:~:~:~:
- ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
-LAST-MODIFIED:20260310T151204Z
-LOCATION:https://meet.google.com/icv-nvmv-dbf
-SEQUENCE:5
-STATUS:CONFIRMED
-SUMMARY:U-Boot community meeting
-TRANSP:OPAQUE
-ATTACH;FILENAME=Notes by Gemini;FMTTYPE=application/vnd.google-apps.documen
- t:https://docs.google.com/document/d/1h8MsRX8fL5h-A-LGGGym-Ra17iev22m1xfpAF
- zFIU1w/edit?usp=meet_tnfm_calendar
-END:VEVENT
-END:VCALENDAR
-
---0000000000006be146064cacf234--
-
---0000000000006be147064cacf236
-Content-Type: application/ics; name="invite.ics"
-Content-Disposition: attachment; filename="invite.ics"
-Content-Transfer-Encoding: base64
-
-QkVHSU46VkNBTEVOREFSDQpQUk9ESUQ6LS8vR29vZ2xlIEluYy8vR29vZ2xlIENhbGVuZGFyIDcw
-LjkwNTQvL0VODQpWRVJTSU9OOjIuMA0KQ0FMU0NBTEU6R1JFR09SSUFODQpNRVRIT0Q6UkVRVUVT
-VA0KQkVHSU46VlRJTUVaT05FDQpUWklEOkFtZXJpY2EvQmFoaWFfQmFuZGVyYXMNClgtTElDLUxP
-Q0FUSU9OOkFtZXJpY2EvQmFoaWFfQmFuZGVyYXMNCkJFR0lOOlNUQU5EQVJEDQpUWk9GRlNFVEZS
-T006LTA2MDANClRaT0ZGU0VUVE86LTA2MDANClRaTkFNRTpDU1QNCkRUU1RBUlQ6MTk3MDAxMDFU
-MDAwMDAwDQpFTkQ6U1RBTkRBUkQNCkVORDpWVElNRVpPTkUNCkJFR0lOOlZFVkVOVA0KRFRTVEFS
-VDtUWklEPUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNjAyMjRUMDkwMDAwDQpEVEVORDtUWklE
-PUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNjAyMjRUMTAwMDAwDQpEVFNUQU1QOjIwMjYwMzEw
-VDE1MTIyNVoNCk9SR0FOSVpFUjtDTj1VLUJvb3Q6bWFpbHRvOjg5YmU3YjgxMzEzNmJlYzA2YTgz
-ZGU0ZGE1OTc0NWYwYWJkMTFjMWI4MzYwNjFhZQ0KIDA2YzFjN2RiY2QxOGRmNDFAZ3JvdXAuY2Fs
-ZW5kYXIuZ29vZ2xlLmNvbQ0KVUlEOjB2M2M0NXVodm50Y3JvNHM1ZnA3M2JobDU4X1IyMDI2MDIx
-MFQxNTAwMDBAZ29vZ2xlLmNvbQ0KQVRURU5ERUU7Q1VUWVBFPUlORElWSURVQUw7Uk9MRT1SRVEt
-UEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9DQogVFJVRTtDTj1wYmllbDdA
-Z21haWwuY29tO1gtTlVNLUdVRVNUUz0wOm1haWx0bzpwYmllbDdAZ21haWwuY29tDQpBVFRFTkRF
-RTtDVVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1B
-Q1RJT047UlNWUD0NCiBUUlVFO0NOPVNpbW9uIEdsYXNzO1gtTlVNLUdVRVNUUz0wOm1haWx0bzpz
-amdAY2hyb21pdW0ub3JnDQpBVFRFTkRFRTtDVVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJU
-SUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1BQ1RJT047UlNWUD0NCiBUUlVFO0NOPW1hbHlzYWdyZWdA
-Z21haWwuY29tO1gtTlVNLUdVRVNUUz0wOm1haWx0bzptYWx5c2FncmVnQGdtYWlsLmNvbQ0KQVRU
-RU5ERUU7Q1VUWVBFPUlORElWSURVQUw7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVF
-RFMtQUNUSU9OO1JTVlA9DQogVFJVRTtDTj1rb3JnLnN1bWl0QGdtYWlsLmNvbTtYLU5VTS1HVUVT
-VFM9MDptYWlsdG86a29yZy5zdW1pdEBnbWFpbC5jb20NCkFUVEVOREVFO0NVVFlQRT1JTkRJVklE
-VUFMO1JPTEU9UkVRLVBBUlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPQ0KIFRS
-VUU7Q049dS1ib290QGxpc3RzLmRlbnguZGU7WC1OVU0tR1VFU1RTPTA6bWFpbHRvOnUtYm9vdEBs
-aXN0cy5kZW54LmRlDQpYLUdPT0dMRS1DT05GRVJFTkNFOmh0dHBzOi8vbWVldC5nb29nbGUuY29t
-L2ljdi1udm12LWRiZg0KWC1NSUNST1NPRlQtQ0RPLU9XTkVSQVBQVElEOi04MzIwMzE4NzMNClJF
-Q1VSUkVOQ0UtSUQ7VFpJRD1BbWVyaWNhL0JhaGlhX0JhbmRlcmFzOjIwMjYwMjI0VDA5MDAwMA0K
-Q0xBU1M6UFVCTElDDQpDUkVBVEVEOjIwMjUwMTE0VDE2MjgyN1oNCkRFU0NSSVBUSU9OOlUtQm9v
-dCBjb21tdW5pdHkgbWVldGluZ1xuXG4tOjp+On46On46fjp+On46fjp+On46fjp+On46fjp+On46
-fg0KIDp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+Ojp+On46Oi1c
-bkpvaW4gd2l0aCBHb29nbGUgTWVldA0KIDogaHR0cHM6Ly9tZWV0Lmdvb2dsZS5jb20vaWN2LW52
-bXYtZGJmXG5PciBkaWFsOiAoVVMpICsxIDQ3NS0yOTktODM2MiBQSU46IA0KIDQzOTA1MjA0OSNc
-bk1vcmUgcGhvbmUgbnVtYmVyczogaHR0cHM6Ly90ZWwubWVldC9pY3YtbnZtdi1kYmY/cGluPTU0
-OTMxNzE5MA0KIDA1NTYmaHM9N1xuXG5MZWFybiBtb3JlIGFib3V0IE1lZXQgYXQ6IGh0dHBzOi8v
-c3VwcG9ydC5nb29nbGUuY29tL2EvdXNlcnMvYQ0KIG5zd2VyLzkyODI3MjBcblxuUGxlYXNlIGRv
-IG5vdCBlZGl0IHRoaXMgc2VjdGlvbi5cbi06On46fjo6fjp+On46fjp+On46fjp+Og0KIH46fjp+
-On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46On46fjo6
-LQ0KTEFTVC1NT0RJRklFRDoyMDI2MDMxMFQxNTEyMDRaDQpMT0NBVElPTjpodHRwczovL21lZXQu
-Z29vZ2xlLmNvbS9pY3YtbnZtdi1kYmYNClNFUVVFTkNFOjUNClNUQVRVUzpDT05GSVJNRUQNClNV
-TU1BUlk6VS1Cb290IGNvbW11bml0eSBtZWV0aW5nDQpUUkFOU1A6T1BBUVVFDQpBVFRBQ0g7RklM
-RU5BTUU9Tm90ZXMgYnkgR2VtaW5pO0ZNVFRZUEU9YXBwbGljYXRpb24vdm5kLmdvb2dsZS1hcHBz
-LmRvY3VtZW4NCiB0Omh0dHBzOi8vZG9jcy5nb29nbGUuY29tL2RvY3VtZW50L2QvMWg4TXNSWDhm
-TDVoLUEtTEdHR3ltLVJhMTdpZXYyMm0xeGZwQUYNCiB6RklVMXcvZWRpdD91c3A9bWVldF90bmZt
-X2NhbGVuZGFyDQpFTkQ6VkVWRU5UDQpFTkQ6VkNBTEVOREFSDQo=
---0000000000006be147064cacf236--
+> >  
+> >  /* SCMI support by default */
+> > diff --git a/board/nxp/imx95_evk/spl.c b/board/nxp/imx95_evk/spl.c
+> > index 761a1a4a0f6..35e4458f2b7 100644
+> > --- a/board/nxp/imx95_evk/spl.c
+> > +++ b/board/nxp/imx95_evk/spl.c
+> > @@ -1,6 +1,6 @@
+> >  // SPDX-License-Identifier: GPL-2.0+
+> >  /*
+> > - * Copyright 2025 NXP
+> > + * Copyright 2025-2026 NXP
+> >   */
+> >  
+> >  #include <hang.h>
+> > @@ -13,6 +13,7 @@
+> >  #include <asm/arch/sys_proto.h>
+> >  #include <asm/mach-imx/boot_mode.h>
+> >  #include <asm/mach-imx/ele_api.h>
+> > +#include <asm/mach-imx/qb.h>
+> >  
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >  
+> > @@ -41,6 +42,9 @@ void spl_board_init(void)
+> >  	ret = ele_start_rng();
+> >  	if (ret)
+> >  		printf("Fail to start RNG: %d\n", ret);
+> > +
+> > +	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
+> > +		spl_qb_save();
+> >  }
+> >  
+> >  void board_init_f(ulong dummy)
+> 
+> Kind regards,
+> Emanuele
+>
+Best regards,
+Simona
