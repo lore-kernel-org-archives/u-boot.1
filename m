@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF78CFD4F34
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 20:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7244BEB1076
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 20:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65C4A84154;
+	by phobos.denx.de (Postfix) with ESMTP id A14C984166;
 	Tue, 10 Mar 2026 21:45:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HxWjPp38";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R5VE0Wkh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5C70840DF; Tue, 10 Mar 2026 21:45:31 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 92E92840F1; Tue, 10 Mar 2026 21:45:32 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68B8583FBC
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 21:45:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C61683F8A
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 21:45:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-466ebbf7ff7so1098367b6e.1
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 13:45:29 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-46704177543so1503871b6e.2
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 13:45:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773175528; x=1773780328; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773175529; x=1773780329; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xj7tjufFLyDnPSuGaj3OVuFE3jrf5L5Wc1p193dtyj4=;
- b=HxWjPp38CJURqKdoAL7zjIC2tP9Iwf3PBcwZA6Ioiy4QO4d8NazFZWxPaH8bQuo9ho
- DCq6J7/AYFBdUDIOriu/WvN/9BYJrPtEVu1Rcwt09MjhM/iV1AX3Oyl14sC7QRAyR+OK
- g1kfaIhAPbNWuglXF8r4UWiN9gnMMMaLrV+uU=
+ bh=XTPtY0AnR1FQs4phQ1DTEHJ+okoKani/HXAVwGSoNHI=;
+ b=R5VE0Wkh3XtOo8Pgrhz0H7xwZ75wAgJ8uh92yENE40bwWIdC1pg//VZB8S9mmIcuh3
+ fhAu3PfNVblJ/nMITrC7WoFTXpdXNJZnVydIOS22G7iRoeEZSo5DXOWIhy4t/QM+K1/G
+ FC8O9UvZDYmp4CwXae7E5bhFCzFBTbc1AcTaY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773175528; x=1773780328;
+ d=1e100.net; s=20230601; t=1773175529; x=1773780329;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Xj7tjufFLyDnPSuGaj3OVuFE3jrf5L5Wc1p193dtyj4=;
- b=chF7KV6yTxxplc3QE2+zpOKhjvd2yumPVFcXOM0PWBsJhfYxhsQeUHitxN89qpQIZr
- 3PuTiLVxXQUNxibGuHUiSRRKCtY5klN5qtJMuIE9NAnOD1qsTVbj2vfH0HFJCC0+Bvju
- +jLmKy+sqeNFfvVFiSIh2gUWRmGab17xDuO7a+t8nlFyg8QVz7T0N9lKynTRcCB0x5rY
- VzVLQhR+DODm71YaL3gLJZrWd5fNOxVl5GfJaSBfPqbPoeKvPYFKZYSewI51czOJx/k/
- sxi4xNrN0y//L2a6F/d6cTalvs/oR/WfEnjFUZwXzTK6nsYL4UWdkWX3RH5iacK30Kh3
- WFUw==
+ bh=XTPtY0AnR1FQs4phQ1DTEHJ+okoKani/HXAVwGSoNHI=;
+ b=oCvc4OZbEwyhWIeVS7EZ2OGJ1vX2GdknBw9MnsFXkW31Ro/GSEDKiyx70J3EVt/Zwy
+ CJAF5s219cp7a7PScE1UzYrdJco+VpDPxK4eCL853AO4+adYvIT2pJdbqL+tnl8wDn1p
+ h+ZSoaPRNGCSYFi6de5oouEOzr5kbx4oRxKF0uAjtSquQ6D8MbMtGNT5jTuzSWmKvUXI
+ 8EjpI/MPoymFl2MeaVvcl2F5f7T4zCGLwlreQkGSG2grz0KASU79RfsA8jGoenIXOtAp
+ MkQG+VShMyIRaX11lREapdaj/4eJXKetj6paJ3+UqLJzSUrHmMQt/xbmjtLkESG0Kloy
+ k00Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU50qfgP3Ct7k4Ozo1rypBmSQEzwjZF9ep8RGwK4g8838p5/1Q0scHr8pPrUlulltQ0KRVHhto=@lists.denx.de
-X-Gm-Message-State: AOJu0YwTQvsI7+C9YZo6pgJH1cMQLsRmXwJG6JaMiGNT32a4jyzWtDih
- LVyLk0nQCZbaWgbivRs0ROm2j9hsxn6qbb+dJDDjiCNwlMC9gn2DNdjFF+6xEptG3AQ=
-X-Gm-Gg: ATEYQzwsgCWF2DH7G8YJMS0SkQDatmnP6tKZ4bLX6s6unysx/eHZfZJenZO3ftAU6yO
- xTo0EDKfy8INVyxE49sEFYZGB6PX1+yKeIW5FhaDwCUPuhm835LDlizAnpXBqCzq58H8urV4s+q
- y6cbMsJ6wsFF+jYELGXAV73ybu8vYKf3NypyiV+QIVBkKPkDrOxGcbLqylgDL5C8yxcBOqYLvmH
- 94MmSAVc/Il9u0V8NM7SSU8S0lIVSNFcilNcV+j1UbCzJ9sVV8hxG2vlRt3P4GW195tycsat8TR
- mEre6o+LvMXT4KAySGE6+DQ35dpz2VLVVOCdHkgtvBBvw6589tiIQhDrLtBOvtLlZ35Evab0soL
- uGFjKXA8N01qibGGQBL1ePXabZSy+wU+o8KVk9i9JgIEF7z90U1VYQK6WUn5VHHITS746IQe8PZ
- 4sZIjrF8WcXh29wldJvCTD0WvHUkGvaZVAPM2HVIkPbJaTVL1B+BhCRWBFnnVPKruoDJIE1ImWV
- Xr+n9WQLSdFK1W/yyG9lTYV+MUep4KUAqpF+u5RS4jc
-X-Received: by 2002:a05:6808:181b:b0:465:d58:e942 with SMTP id
- 5614622812f47-46733422f12mr50897b6e.9.1773175527963; 
- Tue, 10 Mar 2026 13:45:27 -0700 (PDT)
+ AJvYcCUHuUQAmyVTLOQrUz7VjFumz4zVPJRtuLe33/Y8ipNleBmSV8qvCg7nP+sglVWk1AnQXJMP10k=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDiOGvZt+mox0GZ1HjR9ZTwOE3eorJCVIPPN/fSgXLMLMS1AHv
+ MZ3TzmiQVbydaEe6AihtpnasjL+pmww0PI80iNbkaf5esd75EaVnvfNMR4LxyXkHGqI=
+X-Gm-Gg: ATEYQzx/vMz9WnzooB8iVwOxyVZM9bM+g7GRVOvutlYdHXs6ymmnIZeqGDAFdD2gTfp
+ 3n0pr41iUj2Ew5WpgYVL/IlraQJGYWEPNDZBbmb+w2BqMatMPuNMafWT2JA9CJLywr6wKMu3HdB
+ IY+A71kLy0hXUcMCbV8jtvenLUf4bmD3a4PdYZ1YRXwo/C/6KEq1c+G5b3gfHP0dzcdijpRQzfS
+ B8kydyrWXkGMoGlBzoVvKlCQff4owuzhIbuoXEKm246btKsmEY3WcYu3SLs7XYpt9n6arE0qvg/
+ nbMrKHDJr4cumbPWubslKJ6lmQPJN8awsn94X9FSTCALkEwKopW0u2IyTOTaA54UfhS2aX5VQvQ
+ U3YdFBJahLpIWMKnbtcIrOE4oYSRv7tZEHOmTa28woLqhks2EmuRproVLxkfWqqNIcw/N4eif7+
+ xyGbDNuSyHCcw1hlq4xutdRozBNNc3KKRuIRc2iluz0a4gvNrt+uh1w0p+Jv/LfaspwkUe5eONC
+ Kzi2V2fwyzlWejdyiYSdPR3mcPjOaoRz6o/1zCR2OfQ
+X-Received: by 2002:a05:6808:f8b:b0:45e:a1e2:2808 with SMTP id
+ 5614622812f47-4673345a40fmr60165b6e.27.1773175529176; 
+ Tue, 10 Mar 2026 13:45:29 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-466dfac3acfsm8256086b6e.16.2026.03.10.13.45.27
+ 5614622812f47-466dfac3acfsm8256086b6e.16.2026.03.10.13.45.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 13:45:27 -0700 (PDT)
+ Tue, 10 Mar 2026 13:45:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Michael Trimarchi <michael@amarulasolutions.com>, u-boot@lists.denx.de
-In-Reply-To: <20260225072009.50434-1-heinrich.schuchardt@canonical.com>
-References: <20260225072009.50434-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] dma: ti: don't use non-existent
- CONFIG_TI_K3_NAVSS_PSILCFG
-Message-Id: <177317552699.23044.9817975695240940382.b4-ty@konsulko.com>
-Date: Tue, 10 Mar 2026 14:45:26 -0600
+To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
+ Kory Maincent <kory.maincent@bootlin.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Anshul Dalal <anshuld@ti.com>, 
+ George Chan <gchan9527@gmail.com>, u-boot@lists.denx.de
+In-Reply-To: <20260225073711.51688-1-heinrich.schuchardt@canonical.com>
+References: <20260225073711.51688-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] boot: don't select non-existent CONFIG_VPL_CRYPTO
+Message-Id: <177317552814.23044.14232299909019612201.b4-ty@konsulko.com>
+Date: Tue, 10 Mar 2026 14:45:28 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,17 +103,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Feb 2026 08:20:09 +0100, Heinrich Schuchardt wrote:
+On Wed, 25 Feb 2026 08:37:11 +0100, Heinrich Schuchardt wrote:
 
-> Symbol CONFIG_TI_K3_NAVSS_PSILCFG does not exist.
+> Symbol CONFIG_VPL_CRYPTO does not exist.
 > Don't select it.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] dma: ti: don't use non-existent CONFIG_TI_K3_NAVSS_PSILCFG
-      commit: 65b776e6d230639d35bcb152d8f8ec2311e5c54b
+[1/1] boot: don't select non-existent CONFIG_VPL_CRYPTO
+      commit: ff1b59c9bd49141efd45d50ddba291820a6ae975
 -- 
 Tom
 
