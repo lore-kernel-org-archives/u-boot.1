@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBD08FCC9DE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 08:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B80BFCC9DB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 08:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70CBF83F75;
-	Tue, 10 Mar 2026 09:29:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C095483981;
+	Tue, 10 Mar 2026 09:32:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="aZ4qgFjB";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="azFT6AXV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 928FD83F93; Tue, 10 Mar 2026 09:28:58 +0100 (CET)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 2B56783F75; Tue, 10 Mar 2026 09:32:09 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E830983952
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:28:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E97FA83952
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:32:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vladimir.oltean@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V+bnh0W/jO7TD8lYzFbrqdI9hZdZo4JG92uF8dirwpkTz+HopUFv6qrpt8ujsr8jIqYJAzxdwDkV94MVZ2+F2c9febfpw/QEnGruVyIWSeX7ZDXMF/TOrWLLvk8FcE589J70XkcqPj6dsLVUMjTy3a/L5KRPR9QpSR/+Vyi6ozmGQs3wobL4MMrQgevYxmRGLnsV+dnDH48dVOeEzFPEU6VP/cYk+jOZ1/CGw4rD8kL6HDviPdvq/V6LK7ieui17YM2w1jO06v5Dk4JtNuWj86a0PBJJ3aB29vPFrB7dwwzXJ85kcKfyzoLR6mXTsxwdppWRwa1lwuqQ4TigqCHarg==
+ b=TOHkMkCiy62Ah2k1v472TWXSikflLcZ+LLJSZpXNPgqDWqHadsKncz0n9pBD+ZXFDUGUTWmlkiV59Kz+n7VDZG1tp1hZk8CDJUGRkGKql3xE6Gulf21CYbST4U66c48dEP5hwXxM6aaUv3r0pyfrYS6ChU0xyKb1VYqZPhKQ4a2J2czgOrjALH+ftG5+H1vtWNk12W4hk5uvPSKQm3t6v6deBm8ST1kfqMaEYkpNabwEiz55Dee60svZbChEQyPyYRSzG7XJJsMX0MQ71uAwq4bikFoDJPve7FeY5XCDQyHpEA4aQ7nk+YV7uM5uJSnUCk5nCsUuoUPVYL1JmgTXPg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UujWDtMPSWkW/eaTtcU3sc0sbipAYWP2Qd1eqIXZWtg=;
- b=VWc2P3ymTZAOGRQbpDdyq5+COCZH/DiUgquWcj42KChAr8CgK0pWgwaqm5hLwbhqzwfsKYWo1uve83xdajwP6rOnaE05i90pRva+E58IMTNnmyd4tUrm9UOBStTYH7SIJ5lrZcpCWI/1mfky86a3w2vPq6psV99RqB2vFQG9OEG1iZlXUYqN56A8r3MEHRXfGIHft58Yy1rVd0os6NiWOj8wAASjYi851KgqWMKyVEb6nwnXuODtqcTmQPHXNp/JRsLueLDDuqJS1E1PaOqGlbVhXm0EtOUczYLh1imq0whotNhsthrjPSFE6E1kVMatc2BgNmSbTyIbys5eBJITxQ==
+ bh=24VdoDBi24UHnZ37AwOvIknb13BolDq397g0c0TfSV8=;
+ b=B9kJfd+x66UD9EUTe84kUUWDp8/ZmfDGwDs1CnNNfYSx6Uv/43O4JLmiSFDz5FLUXk6z4kiSd4VN35DWBF59UpPGbwWK5bPj4G+4fddhPUjqcNyvIOFgPbESDrnLzIGavvNkShGi9TPNUxZWUCVrXcsVoUr2PRvy79SX58lRNGZ4cBFVznYF82l8HBAEAXrpqOh39ldBXBPYh1D+beNosLnHJNdldndAMhAvMGfpCCcx8gimo0+aRn8MZ+aREtqTR2S6wmdEfhhDjKPQs/LURzWYpzERMgsyXNn7POqFCdyGXE/wgRauX+1xTl05vdf/aGfwC1zGLuPepM7qqk8CPg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UujWDtMPSWkW/eaTtcU3sc0sbipAYWP2Qd1eqIXZWtg=;
- b=aZ4qgFjBDqA86eEaz9yaiaE+GZRju3xAfB7SENRZcDBWYjREDNbCZxH/JtnZOBhrqdgNGw0g79S6EArxREtOZO+M07sDnpmlzj5lEmT1rFjHAFLa06nAN6EuAQPFmvAcgYleHCBTJrfCxR2Tlr6DKMGuQTU1vktoCvoCDV7Ub9xWO9x2XoSU9VI1ZRGOcXXQsK9wVhYmelT2wXBjUcHnXVFrwJbTZRTmwKiC8LNaGKKB1s2F9WdN+zVLDOEVpPJ9YYy8zF1squpE5Xs5LG5DT7qY3sl0iIxyV1OixXY4f937sG99BZJhrhHK8DHz26Y6p/41G4k9P6Xb6bnvCL9pYQ==
+ bh=24VdoDBi24UHnZ37AwOvIknb13BolDq397g0c0TfSV8=;
+ b=azFT6AXVvRR4vJ5b+9FvVnK/9qN8kCydtDYsrEagpkZIHwKeQs0Py/OeTixYBuHtPJIjAAIOrB+mzFWuGPIYhP7MMqGK48UlxWVkLuO9uXd3eWW76hHSgEpspxxG7gG1Jp2441idoJ2qXIFmwgS18GquzcedPGGtaVyT0p0TIF0IcX80gXjPjIE8OwYe0WHmVbf1Zar0x/jnQzjNDH8f+QWlPA6W6Ic9D+RCqjFlZhf37eIXDJwPy/jCvdd68oPrmh9k9z3j5XvaMIOJFBfOgRmKJFseAefm05fSvHTSrS8HAHiiI5aRLTWCc0friPDctErMNGpU0nzQPn1Dl8ILPA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AM9PR04MB8585.eurprd04.prod.outlook.com (2603:10a6:20b:438::13)
- by DU2PR04MB8728.eurprd04.prod.outlook.com (2603:10a6:10:2df::11)
+ by VI0PR04MB12135.eurprd04.prod.outlook.com (2603:10a6:800:324::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Tue, 10 Mar
- 2026 08:28:51 +0000
+ 2026 08:32:04 +0000
 Received: from AM9PR04MB8585.eurprd04.prod.outlook.com
  ([fe80::f010:fca8:7ef:62f4]) by AM9PR04MB8585.eurprd04.prod.outlook.com
  ([fe80::f010:fca8:7ef:62f4%4]) with mapi id 15.20.9678.023; Tue, 10 Mar 2026
- 08:28:51 +0000
-Date: Tue, 10 Mar 2026 10:28:47 +0200
+ 08:32:04 +0000
+Date: Tue, 10 Mar 2026 10:32:00 +0200
 From: Vladimir Oltean <vladimir.oltean@nxp.com>
 To: "Lucien.Jheng" <lucienzx159@gmail.com>
 Cc: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
@@ -61,75 +61,71 @@ Cc: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
  ansuelsmth@gmail.com, mkorpershoek@kernel.org,
  skylake.huang@mediatek.com, tommy.shih@airoha.com,
  lucien.jheng@airoha.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] net: phy: air_en8811h: use standard
- rx-polarity/tx-polarity properties
-Message-ID: <20260310082847.sbo7aoqsohij62p3@skbuf>
+Subject: Re: [PATCH v2 1/2] phy: add common PHY properties support
+Message-ID: <20260310083200.cbcedg4gj5jlgqso@skbuf>
 References: <20260308140614.50489-1-lucienzx159@gmail.com>
- <20260308140614.50489-1-lucienzx159@gmail.com>
- <20260308140614.50489-3-lucienzx159@gmail.com>
- <20260308140614.50489-3-lucienzx159@gmail.com>
+ <20260308140614.50489-2-lucienzx159@gmail.com>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260308140614.50489-3-lucienzx159@gmail.com>
- <20260308140614.50489-3-lucienzx159@gmail.com>
-X-ClientProxiedBy: VI1P189CA0002.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:802:2a::15) To AM9PR04MB8585.eurprd04.prod.outlook.com
+In-Reply-To: <20260308140614.50489-2-lucienzx159@gmail.com>
+X-ClientProxiedBy: WA2P291CA0028.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1f::23) To AM9PR04MB8585.eurprd04.prod.outlook.com
  (2603:10a6:20b:438::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8585:EE_|DU2PR04MB8728:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4feb77ef-75f3-47c7-ebee-08de7e7f0ee3
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8585:EE_|VI0PR04MB12135:EE_
+X-MS-Office365-Filtering-Correlation-Id: bd25d2e3-31f2-4252-c9eb-08de7e7f81e7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|1800799024|366016|10070799003|7416014|376014; 
-X-Microsoft-Antispam-Message-Info: CaYfaDOTvjIqaV43HaHLajoHBLxZP9dMuQxOB6PdpAvEb/dV4pmPYXWssMnnAuaguG0Eoz+ROIaeg1VsPuBKOZuOEXcJM8lR/D5USvWX/879RJc9gF5EMwNYjlwOw7E3WsyxCvNDWq5c7ZwylKOTK+2u0xj+u8uB2uGZ8qyd1p5x1GkFTTMMu6JU7GErUHokBAePXCIHqcq6uQ75Xj4yr2jNH7m0vRhjqV9YHFsjAh5NaeJO7QOVvhwXe3FB2zPvMq9kDWWTqR5q8zuUWXQ8/UGoBA3ZGZmKkRUTOXpbMVrn5tE+pBnV8hmxUvF7ixWOdR+MlCwGVnWLA7tOlHsc9DSIiHfLkx66EDOek+vo5Xa7ZxDqGlDce2T0EYx4Ih+5IqvCcZI8zKJxTQZl1v1qIJHX+7o3DzyLbaNoD1iWjd7IL3iZF1ngENLAIrIUAEwG6qzVM6x08PHDHuLNtrceCKwCELKJmQoxw1kXviUFE8Ij9qHYF324/AKrHNWxpM9MIwvgLus0+8bf4c3m1QImW/YUTg4/dzOxp1emwnZR+ciWAHugb14b6YiVF7c3oSKmDR9R/YovbKCjKKRcgzXQTI7M2X+ibudKy2xFj8imjhXdlzuzQTuOKh0R7Jxe/SmWugNoEMiyXrrZfbTXfKoLSPum82ymd9dKhEyK2Jo8n/qiw/L6z0yn07WsT4gZ1f4psxN07hWk9YYtiKDRAKroj1kUSf1u+0l4KYYwGwvCmH4=
+ ARA:13230040|19092799006|7416014|376014|366016|10070799003|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: gadMIWTXd3sNQUa1UFxCMy9DGGtztp5mKr99KiFeMo2TuD8+a3AGxWF0fMyqKs09xmNnWiGfFiUM+LkQiViN1zZLIUksHLs+URHMrdH94RrO71KjWqBJ+fzWJV+6yzJCm0MZWKuvS+XoU1yn/hGK/uAdDNkV8u7C65KirMzfyVReXPTBANhk0GvIbgPUEGxZNWjqgY2Isn8OyVoH5sy0XZTCyWBWsQx+gk3xHxxM1X41EXl6U69xefCGmgh6SmWm/gdMH3aBABvzhHSTNg6EeK+Z9vo3PSMvvnk5n+G/fONNY2C8lhPxZG4dv4EhnSD2Wgb73t7pb0KxF3SroblggAFxLZ06i6i288bY2zFY2CfU0nwhloGhSjrSnVPdppLzqxRt/7hHKarHZ6+m7bXUwpxrWjKaoyvfQjw/EJ1FfKRz8kJMRUbjPMjQ/GLTttRL0KmY49FX8DWGlDum49MrVrPKA+R5IZ9RbtWL7Z+j0A90CsCvozSiOmMxG6NYuVVb96I02R4ZQgoihVb9unxPfmY9BacNPJs8zBvppsH26t/ARQcEUndFc5AVY3XhG+uy/VX9GHwl6cYRnpXpNbSODywYSmhRPVTNtbTkrxRLnzcnMCA+LumjlCts9fccWpzaD1GLq0TlQt8AcgAlzY3NyLnJRrXkL8xXggNSoriiqq/x+/Of8+C45tQFc+qOU0PJ
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB8585.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(1800799024)(366016)(10070799003)(7416014)(376014);
+ SFS:(13230040)(19092799006)(7416014)(376014)(366016)(10070799003)(1800799024)(7053199007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?PAKlvc0ZUp5FMUxH3ca90GYFzqEKfTd+SeTDj+LlvXvV5vRD4Aa+SeRICBVs?=
- =?us-ascii?Q?AGgs5woj9oiM/v62e8+RRpI+mwxXkmp/P2MhI8J8v1RHeL4SNaYKi9nTmeP/?=
- =?us-ascii?Q?g3f7abvRleNP8Ihdygq3jRgCN/0vob6zyFSdifPouQULKHiC5Aw8tOHbz9qf?=
- =?us-ascii?Q?6Bz1dv8UiWT3gU0cbH+wOXdTaxQ88n9JDGZuEdf4m3CdfN7cUUiCFHMtLCzr?=
- =?us-ascii?Q?mzPH7jnneoivYVriENCh3dXXD0jisrWQpTXAf4facW/Rz5uyuuTYKPoCTvco?=
- =?us-ascii?Q?A0bcEIPCmqnoxz3+lRpnMvZfAV2XInlMSjNQm75eDEeETO4/eYzAPuX8b47D?=
- =?us-ascii?Q?ilig0GMwcD6gFXUAGYdzh9WI3VWcsr7nYvIqhIEEUkckXgL3+lZ7BbGSkW47?=
- =?us-ascii?Q?AroVlSmM5JSn7DKZ6iKowPo6Z0anqjixruQd5C7+FINErePqDXjzhcmWl8ih?=
- =?us-ascii?Q?2/PVnVPLvjquj9SE3pBybZDYOIGJxOrylhUZJ4Ph4IsBpRwOCIrsLGZgocun?=
- =?us-ascii?Q?oqXZi1wV+Jn2ifeisc2xCoNDutj+8x6BfgSqu5ifCBnnmoNOrh9FQxCcdN4J?=
- =?us-ascii?Q?grGHh+lrmovD5p4klFUjQRDXZbcRRl9kJ5jZY86IMBldAe3dNS1QWZEK8RMf?=
- =?us-ascii?Q?wt1BSlrXXb8yWyDJxiUmHFEYAJFZKJ71l9DhJGfl5CX5fn7LuX41xkguW3Hv?=
- =?us-ascii?Q?wcEQV65I7kdzhZPsG2EK519wV7G9Hn1h38QVIZQk4cUaeeFOqzw1qVbQ2Klj?=
- =?us-ascii?Q?uWv0FXbUO4HGYDA6bd9p680n6MO/uD/9SsTXlYBqq0zrQMKgQx/0ztb9jYRD?=
- =?us-ascii?Q?bEc2PStHi5ug1IeIOQgWXvz3PfW5Qa/eYVd9I1hK+BSABDdyXZrkBgPMZnVu?=
- =?us-ascii?Q?RbwbRKfY9OvKoa0sjrfehQZg64u0cTUekeHJhF6qK/aBU6/uWmy898TtnPUu?=
- =?us-ascii?Q?Vt4KLlJOR7VKuPGkUtutYCLeVo/Fg++U2hUr2xMlwLkDp/G1NOhL6L9jIo7K?=
- =?us-ascii?Q?BAqGFWjoA/k1cc/ZK9q0Fee+r/gYyr7ZHYyQrImqkzE/KZoHQnDS+ka21u4d?=
- =?us-ascii?Q?mADpomnrA5o65pwbZNoErlyjJ+4PuB8+PlAtiMdxSR8xlgCO2bKDXOCccJo3?=
- =?us-ascii?Q?Ct8iU3pWg3NcAH5Yof7pN83b8a4cBhba8xdhPRQHYlyJwkO9WVLniQj3W+PE?=
- =?us-ascii?Q?d4jZYp2pko3sGUe0/TN0wJI48vnzJojDirf6HA86Erj768zPkqMFiuuwH+zZ?=
- =?us-ascii?Q?XiUct7VEgDXLyqqArqSEhyzwBxNbh3RmxHMB1rG7VGOqiY3a8PMS55byCUcK?=
- =?us-ascii?Q?z7vB3NEUfxk+QwBY5DmkO0BOVCyhrttyE1n91vDp+ql/btXXg3emQgf2Epza?=
- =?us-ascii?Q?yAcdA6q1I6xiMXE379zV8WKyLOtAaw2kdRkJOOAULrXSCnPUxQ4BU0W5XKYF?=
- =?us-ascii?Q?TNjMhnkV/2cl5ARdd2fPv37a9BrrTu0MLWDmtE4SXT2u1GrcTWHiQHTazUD9?=
- =?us-ascii?Q?ktL7Ou6GaB14BWcCl/ENXMnKEaA0AwB7MVuazxjkcZXJhU+ubGBoaIxhRM2G?=
- =?us-ascii?Q?PlWrnb+nSBr481trK6kNwfgI31b/TNoNwZ2jDvkY5txwGoQ3mrj3d/WgpMTd?=
- =?us-ascii?Q?LpLGpxSr8WU+ogFMrD5IzNWdrFVlIlse5VQQ0OJgtPs2UVA/l/gc/yAkPoWW?=
- =?us-ascii?Q?p5k3OcZuM1vIXg2aibFPMkF5ldhlQK58lQMjoSTmbWCDWVDHLBFy8+AxBeiW?=
- =?us-ascii?Q?RER/WMXR42vkx4+RIXh/jpzXzkMpYlCVvMWcZdqCrQSFHQ9+TXFb8mWxF8mJ?=
-X-MS-Exchange-AntiSpam-MessageData-1: Zh0iSnwG+iQAY33VUOXEoBbhuzU4Bb0uC6A=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Az9/cC4qKUfrV1ombVaU12nJ6GhwetT6btDqNEv/ebI+FjQafW62h6Q/bV4w?=
+ =?us-ascii?Q?ZspWlFK2QZ2NJVnGD7Iq/TZXBMoBjoHnyrLfMfw1IFeBTMXTaHmNp5u9idDH?=
+ =?us-ascii?Q?Ozz2RcdzizPmNBs8nS5cOd5ioozG0bN73/mcMgddo4uETzTqweFnJ3lzPceL?=
+ =?us-ascii?Q?thBJ0zlDDtBMQIz8mp/xc8H7ufQuclQk7F+5TD22hgKedzrwVlU5BkitWjy1?=
+ =?us-ascii?Q?9NXXw1ukXEtsVubrVhHsluse123PUa6dl8nHHlTTHBF9Nam2Tfcj4CvXt4la?=
+ =?us-ascii?Q?mcQ2H0206OmPfyUUi0CTXTJVZubvHEKl5qfL3whAMfA0M+RdfCWQyO429UEY?=
+ =?us-ascii?Q?gvqW1PRBcwnNAn6W693h8LoCrPZXX5mDDu730Zv3zuqVGgSY6fZ96wXvi1b3?=
+ =?us-ascii?Q?T/BsN5w35LHc2WFgiWcPQu5wZ8UM0PZKW7M2ElpqZcwqQlC5BeYlXpyHYbgE?=
+ =?us-ascii?Q?DNKG1P0aaA6t3KYCZy5MhBuht20wJyYmNwpp0W36gxkCs/b5TvpEf1FpweT/?=
+ =?us-ascii?Q?fRoZNjkM8K+oiEjgg4vtw9j/aes6fw+q2hsFjuPGqkONRw58ToAxmu2pE3fw?=
+ =?us-ascii?Q?ojZEdMNHE0loNKRX0Tm/shOhuF2RWGa8zZzXjJ96knnHrLoKtJUKXJMq3SZq?=
+ =?us-ascii?Q?5RtW6G16EO11GhLOcpINDiWaiH6Pg/Nd/tHQTwr42G5cleb0VAou0AsiY73m?=
+ =?us-ascii?Q?VxDxvFH+Q4iSKnLTWqoGTaSMxcbIg9i2QvoVzs8J15Gq9CO5Sbw0hSKpugMJ?=
+ =?us-ascii?Q?l5o834iHjfEpLq813Wd6E1xu7E7X6ogC80E0ZF6dHJX1EZiexYNiA1FZuBYw?=
+ =?us-ascii?Q?gXX0spsk0bPY4vgLlWU0FhcVQqfLYf/J6kN/iDvGt67pMWCZaixqioepRQUS?=
+ =?us-ascii?Q?Qls0PuHtzbNCCzWQEwo1mH6+CvyaZl+pI+U2aru5JpN2YR2X1nH9Q0XkA03X?=
+ =?us-ascii?Q?TXe99e3VdhrXGOd/MEIrzAr8HtjkDyExsokFh4yk8NNzD5It/rG9sl/4qw54?=
+ =?us-ascii?Q?RAMKrCZ9pHbvIq3RvkuI91hO06AV/qb4+hUFytyUVjQwhRHCGd237yMdwv7z?=
+ =?us-ascii?Q?MsYeWj2H+hCi/WIUXFLOQSvaTlO06z9d0Y1EB8ZAzWmCdMrrR1NMqndpfYya?=
+ =?us-ascii?Q?D+naC1tV1vDvcWjgT/0F+z0D64UqkguVdDp/WH5dT6Gu06oPGNzll7MfLKr8?=
+ =?us-ascii?Q?ZWr21Nw1//DDT2Bf06e1GfOiV5cUzsZU1FFHpgjSQpGZ6rS8xGfH7nQIL3s5?=
+ =?us-ascii?Q?3xX8rGhFt6bYnIREpoHru4/XtZTrU7gFubgtF/nczFAFFhGw1SsCf1Dygg0y?=
+ =?us-ascii?Q?9a6xacPIMHbxIW9JT6kRYZnCmCF+Wiz7ffJr356TYubS/N/N69qwx/rIZmbb?=
+ =?us-ascii?Q?D5ex0ac973Mz0sz2QKpGfk+aH1Mq50VgVIaj1K4McK8DWnjdvsBsQmH4tT5u?=
+ =?us-ascii?Q?6or/8/Ama+9yj7p1FfNFDdZfBs5EH1ih5Vq4GYu/WgCs+QGkihTyqn/78DMR?=
+ =?us-ascii?Q?Kb/+dkw7avIBUYB4U1PW9MauYj8xHf2yQpEezdLNfyAKt9+oAQODYGMfoTo7?=
+ =?us-ascii?Q?caUulphfeqRVEYBkpAIlcpRF6tauH7iNVmWrNer57nsTJxkFy0958fxFiAPJ?=
+ =?us-ascii?Q?/MIjXUrOAyGZgJ8pg4En0in+cUB2Dp3zKAaLLEIWNj1z4fxMljmwevc9Afay?=
+ =?us-ascii?Q?D8Z2z3Yl7O6ysc0/wuticXTgO7IzSV/Ogo9tdsXiUBjmBYJyEFzZtYoJNpf1?=
+ =?us-ascii?Q?rmFaPqic72FD2h48pO/ih+nwXkR/ToJH+Uaz07Han29ut6ui3ZpF5lBQ/+hp?=
+X-MS-Exchange-AntiSpam-MessageData-1: 9HGGF1nDt/lJwpwheXLR7TP8Sy+U7te//WU=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4feb77ef-75f3-47c7-ebee-08de7e7f0ee3
+X-MS-Exchange-CrossTenant-Network-Message-Id: bd25d2e3-31f2-4252-c9eb-08de7e7f81e7
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8585.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 08:28:51.4600 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 08:32:04.1854 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Zi0uzdv/oPcit4Q6XisJDVbU3Qv4C3zsht3pCFNcivjo6mXuIa0Ikvno/zk6hVbYh1pxjU8XMKsD0imVX0UcEg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8728
+X-MS-Exchange-CrossTenant-UserPrincipalName: f0b4MXpEiadSkGXwEa4ZrRZgyxyoFbGQIOauHc9XTfJBSfchTdYqXNRlkdZbmnFDV3NDKV/RkS0561tn6Fkh4w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB12135
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,140 +142,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 08, 2026 at 10:06:14PM +0800, Lucien.Jheng wrote:
-> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-> index 1a628ede82b..0ec11ba5231 100644
-> --- a/drivers/net/phy/airoha/air_en8811.c
-> +++ b/drivers/net/phy/airoha/air_en8811.c
-> @@ -23,6 +23,7 @@
->  #include <linux/compat.h>
->  #include <dm/device_compat.h>
->  #include <u-boot/crc.h>
-> +#include <linux/phy/phy-common-props.h>
+On Sun, Mar 08, 2026 at 10:06:13PM +0800, Lucien.Jheng wrote:
+> Add a new PHY_COMMON_PROPS library that provides helper functions for
+> PHY drivers to read standardized polarity properties from the device
+> tree node:
 > 
->  #define EN8811H_PHY_ID		0x03a2a411
+>   - phy_get_rx_polarity() / phy_get_tx_polarity()
+>   - phy_get_manual_rx_polarity() / phy_get_manual_tx_polarity()
 > 
-> @@ -660,11 +661,82 @@ static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
->  	return 0;
->  }
+> The dt-bindings/phy/phy.h header with PHY_POL_NORMAL, PHY_POL_INVERT,
+> and PHY_POL_AUTO constants is provided via dts/upstream/include, which
+> is already in the build include path.
 > 
-> -static int en8811h_config(struct phy_device *phydev)
-> +static int en8811h_config_polarity(struct phy_device *phydev)
->  {
-> -	struct en8811h_priv *priv = phydev->priv;
->  	ofnode node = phy_get_ofnode(phydev);
-> +	unsigned int rx_pol, tx_pol;
->  	u32 pbus_value = 0;
-> +	int ret;
-> +	bool use_legacy = false;
-> +
-> +	if (!ofnode_valid(node))
-> +		return 0;
-> +
-> +	/* Try standard rx-polarity property first */
-> +	ret = phy_get_manual_rx_polarity(node,
-> +					 phy_interface_strings[phydev->interface],
-> +					 &rx_pol);
-> +	if (ret == 0) {
-> +		dev_info(phydev->dev, "EN8811H: RX polarity = %s\n",
-> +			 rx_pol == PHY_POL_INVERT ? "inverted" : "normal");
-> +		if (rx_pol == PHY_POL_INVERT)
-> +			pbus_value |= EN8811H_POLARITY_RX_REVERSE;
-> +		else
-> +			pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
-> +	} else if (ret == -ENOENT) {
-> +		/* Fall back to legacy airoha,pnswap-rx property */
-> +		use_legacy = true;
-> +		dev_info(phydev->dev, "EN8811H: Legacy RX polarity\n");
-> +
-> +		if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-> +			pbus_value |= EN8811H_POLARITY_RX_REVERSE;
-> +		else
-> +			pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
-> +	} else {
-> +		dev_err(phydev->dev, "EN8811H: Error reading rx-polarity: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Try standard tx-polarity property first */
-> +	ret = phy_get_manual_tx_polarity(node,
-> +					 phy_interface_strings[phydev->interface],
-> +					 &tx_pol);
-> +	if (ret == 0) {
-> +		dev_info(phydev->dev, "EN8811H: TX polarity = %s\n",
-> +			 tx_pol == PHY_POL_INVERT ? "inverted" : "normal");
-> +		if (tx_pol == PHY_POL_INVERT)
-> +			pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
-> +		else
-> +			pbus_value |= EN8811H_POLARITY_TX_NORMAL;
-> +	} else if (ret == -ENOENT) {
-> +		/* Fall back to legacy airoha,pnswap-tx property */
-> +		if (!use_legacy)
-> +			dev_err(phydev->dev, "EN8811H: Mixing standard and legacy polarity properties\n");
+> Ported from Merge tag 'phy-for-7.0':
+>   git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy
+> 
+> Link: https://git.kernel.org/linus/e7556b59ba65179612bce3fa56bb53d1b4fb20db
+> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> ---
+>  drivers/phy/Kconfig                  |   8 +
+>  drivers/phy/Makefile                 |   1 +
+>  drivers/phy/phy-common-props.c       | 286 +++++++++++++++++++++++++++
+>  include/linux/phy/phy-common-props.h |  70 +++++++
+>  4 files changed, 365 insertions(+)
+>  create mode 100644 drivers/phy/phy-common-props.c
+>  create mode 100644 include/linux/phy/phy-common-props.h
 
-Mixing should be perfectly legal. Otherwise there's no way of converting
-an old scheme to the new one without breaking backwards compatibility.
+Thanks for doing this. Do you think you can also port the KUnit tests to
+U-Boot's own "ut" test framework? Should be testable with the sandbox.
 
-The way in which this is done in Linux is by reading the legacy
-properties first (with a fallback on PHY_POL_NORMAL if absent) and then
-using them as "default" argument for phy_get_(rx|tx)_polarity(). The
-phy_get_manual_(rx|tx)_polarity() are intended for the use case where
-you have no legacy property to support.
-
-I believe doing the same way here would simplify your logic quite a bit.
-No need to look at the specific "ret" value, and no need to duplicate
-the pbus_value modification.
-
-> +
-> +		dev_info(phydev->dev, "EN8811H: Legacy TX polarity\n");
-> +
-> +		if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-> +			pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
-> +		else
-> +			pbus_value |= EN8811H_POLARITY_TX_NORMAL;
-> +	} else {
-> +		dev_err(phydev->dev, "EN8811H: Error reading tx-polarity: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* Apply polarity configuration to hardware */
-> +	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-> +				      EN8811H_POLARITY_RX_REVERSE |
-> +				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +
-> +static int en8811h_config(struct phy_device *phydev)
-> +{
-> +	struct en8811h_priv *priv = phydev->priv;
->  	int ret = 0;
-> 
->  	/* If restart happened in .probe(), no need to restart now */
-> @@ -695,19 +767,8 @@ static int en8811h_config(struct phy_device *phydev)
->  	if (ret < 0)
->  		return ret;
-> 
-> -	/* Serdes polarity */
-> -	pbus_value = 0;
-> -	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-> -		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
-> -	else
-> -		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
-> -	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-> -		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
-> -	else
-> -		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
-> -	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-> -				      EN8811H_POLARITY_RX_REVERSE |
-> -				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
-> +	/* Configure Serdes polarity from device tree */
-> +	ret = en8811h_config_polarity(phydev);
->  	if (ret < 0)
->  		return ret;
-> 
-> --
-> 2.34.1
->
+export KBUILD_OUTPUT=output-sandbox
+make sandbox_defconfig NO_SDL=1
+make -j 8 NO_SDL=1
+$KBUILD_OUTPUT/u-boot -d $KBUILD_OUTPUT/arch/sandbox/dts/test.dtb
+ut phy # or phy_common_props for the new code
