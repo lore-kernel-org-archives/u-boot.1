@@ -4,54 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F71FCC9D6
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 07:51:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BFAFCC9D6
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 08:28:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 001D283981;
-	Tue, 10 Mar 2026 08:51:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id C2FEA83981;
+	Tue, 10 Mar 2026 09:28:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="kvHBRZ8Z";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="dUYcoDAp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B2E883BC8; Tue, 10 Mar 2026 08:51:37 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id DC63283CF3; Tue, 10 Mar 2026 09:28:16 +0100 (CET)
+Received: from mail.kernel-space.org (unknown
+ [IPv6:2a03:4000:b:d08:14a9:1bff:fedc:75ad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2DC983952
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 08:51:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A66E083952
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:28:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch [83.173.201.248])
- by mail11.truemail.it (Postfix) with ESMTPA id D2CA92147B;
- Tue, 10 Mar 2026 08:51:33 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1773129094;
- bh=EFFBJMMbB8TRe+03jcmCol2PxOY8yU4KUf+PDzv5KSc=; h=From:To:Subject;
- b=kvHBRZ8Zf6ckhOBxH75bpWqPe0hBVVQHWLzpXUXhbz5wKXPNz2NYSgBRRZBv0J8he
- ZmiNWNQ3pnX6o4zIZqoqV9qf+b+Re+NuIOYEbBJ9dcZic+3xxcU5ilVASM+e9aTbs9
- WVHVejcGwja6/PB2Q/Hr7YSzrR8oN8jyg1zFbDUmOnI9Co5Y884OlmHFdw7yFyvgoY
- IIJsWUuD8KehK0jY8k3TmKD7iChF6NCiloOTInnzSq29562IPcfTNQeQDBrTdcn7h+
- uLdmbnu2PlvsftsPUaAkZ4Kk70XVGFwrjrAyEC0Bnpxrd6ZX36diuGYoFmu3ImaZH4
- 4fF2AeYtTX3PQ==
-Date: Tue, 10 Mar 2026 08:51:29 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 0/2] DDR configuration refactor and 16GB dual-rank
- support
-Message-ID: <20260310075129.GA16485@francesco-nb>
-References: <20260309155342.145432-1-ghidoliemanuele@gmail.com>
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1773131293;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=w4Cz4zfh3NmMDp7rrcuFBhr0GL5u1QJ8w+6K23eS6Vg=;
+ b=dUYcoDApkwWggKo2V5TiZtN7qCijBeNDAt4IrXUYEGxbLC5cAUc8aWTeSteKQQ4O9yKzfs
+ imKXYrzy8Deb33fdvJdaQSD6DNpoe/K/cn88/63nMY0RVp9mQU8zuHgKqcQnocdbDbtay9
+ p8epS7tsor/ITt0wGKlFqIJ7WyAjFFM=
+Received: from [IPV6:2a07:7e81:7daa:0:62cf:84ff:feee:627] (<unknown>
+ [2a07:7e81:7daa:0:62cf:84ff:feee:627])
+ by oreshnik (OpenSMTPD) with ESMTPSA id 26ce71fc
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Tue, 10 Mar 2026 08:28:13 +0000 (UTC)
+Message-ID: <ff44df05-654a-43e8-9ae8-9e3823930ecb@kernel-space.org>
+Date: Tue, 10 Mar 2026 09:31:47 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260309155342.145432-1-ghidoliemanuele@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] m68k: m680x0: Initialise the debug uart
+To: Kuan-Wei Chiu <visitorckw@gmail.com>, Daniel Palmer <daniel@0x0f.com>
+Cc: u-boot@lists.denx.de
+References: <20260309105110.672832-1-daniel@0x0f.com>
+ <20260309105110.672832-2-daniel@0x0f.com> <aa-zE7bNzY8wguoi@google.com>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <aa-zE7bNzY8wguoi@google.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,13 +71,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 09, 2026 at 04:53:06PM +0100, Emanuele Ghidoli wrote:
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> 
-> This series refactors the DDR configuration handling for the
-> Toradex Aquila AM69 board and adds support for a 16GB dual-rank
-> memory configuration, while changing the HW_CFG pins value to
-> DDR configurations mapping.
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 
-Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+On 3/10/26 06:58, Kuan-Wei Chiu wrote:
+> +Cc Angelo since this touches arch/m68k/
+> 
+> On Mon, Mar 09, 2026 at 07:51:09PM +0900, Daniel Palmer wrote:
+>> Once the stack is ready we can init the debug uart to help
+>> with debugging so do that.
+>>
+>> Signed-off-by: Daniel Palmer <daniel@0x0f.com>
+>> ---
+>>  arch/m68k/cpu/m680x0/start.S | 5 +++++
+>>  1 file changed, 5 insertions(+)
+>>
+>> diff --git a/arch/m68k/cpu/m680x0/start.S b/arch/m68k/cpu/m680x0/start.S
+>> index 0802ca1fca2c..fdfcd66f7785 100644
+>> --- a/arch/m68k/cpu/m680x0/start.S
+>> +++ b/arch/m68k/cpu/m680x0/start.S
+>> @@ -42,6 +42,11 @@ ENTRY(_start)
+>>  	/* Setup initial stack pointer */
+>>  	move.l	#CFG_SYS_INIT_SP_ADDR, %sp
+>>  
+>> +	/* Setup the debug uart if enabled */
+>> +#ifdef CONFIG_DEBUG_UART
+>> +	bsr.l	debug_uart_init
+>> +#endif
+>> +
+>>  	/*
+>>  	 * Allocate Global Data (GD)
+>>  	 * board_init_f_alloc_reserve(top) returns the new top of stack in %d0
+>> -- 
+>> 2.51.0
+>>
+
+-- Angelo
 
