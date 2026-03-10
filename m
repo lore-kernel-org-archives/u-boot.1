@@ -4,108 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D866FD4F04
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 16:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E8EFD4F04
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 16:14:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE89684118;
-	Tue, 10 Mar 2026 17:12:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E1EA84118;
+	Tue, 10 Mar 2026 17:14:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J2fIXsul";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ggmpaJZ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61FB984120; Tue, 10 Mar 2026 17:12:42 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 3F2AA84127; Tue, 10 Mar 2026 17:14:32 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D93C84101
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:12:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4C0384101
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:14:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-38a2f92fab4so62633861fa.2
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:12:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773159160; cv=none;
- d=google.com; s=arc-20240605;
- b=E2HbAqME6dSOpsw6cuN9DELvkv+3hjXNmf4xwUNIQ1vK0R4MZ9+HoI4R+OoRlZwmTv
- BU1zGwDtXvOf3xxccpIESyU4WlZMssupS/JseZLsgAiCox+AgBuswg4Or8aSJ5LWLmPS
- 62IPt02DY+nBVuVnRUqxFn6wKxU1A9TqL3ulSbCu3BP7GdHCAfy/L1CakrfkX4ukKcac
- qyaCjr8deYK8Zn7LihHHkx/sBPEcAoWrzNlNNk7Qb6U6U8QcV4B589Zv9Y5hNZz9Qsq1
- XazWwvPC/c4cPs4ZtpZjyG8WlJipgtSLpZFK7r0FXNoDztLKwxNcmfyXuT8eqxXCKJzq
- YwyQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=HkLunpzi2enZUZJG7c5KLq5BCos+HIdY6nOMMkJywFY=;
- fh=KqGinA8bjcfKc9LIU0Ugz8KXwcUZZ4fsDK2RA7g3dEI=;
- b=GTYPg5AJwNSYjimdDsKhIeGTFtO0sMFdwZaUfjlj3KGCwzxd5qmDL5PPvKqDEt6rGI
- Y3FjaX0nNhKCK4zDwd3tkUgmPGOiN3ctGyH2EyruTnvlbhtVzpYS24uBT3FQJQYEeQeX
- sHfZ5OYUOaQfVq60b33ZxxORN+OOqxL62asuS2GEGu94LDdfjeOMeN8kJ6yi9gHToi8X
- g7CwreWMK9KczuTtuVcLQVsPjFQ3Ia5Gfvd8xLfcm3UncgOHMzfVuDzJYV95wm/4iBXn
- MWf2YrjNTyR7POtSpLSUbrmhwZUI6QZZxHYlcHMhWzcQfAUoVRsEo2mEDT0w84KS8I7U
- RPyw==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-466f1c3c627so2133381b6e.1
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:14:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773159160; x=1773763960; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773159268; x=1773764068;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HkLunpzi2enZUZJG7c5KLq5BCos+HIdY6nOMMkJywFY=;
- b=J2fIXsul77bj93JYfcASlrB0mSbdZYyd/GKgkMEx0+b09eXj6EDzS2tegrtWbhx5co
- Xota2UE7Akbu+j6JyquNHVbfredJxS/QrPQFHjQC0Ig1XDmVIsYSvaW792IwXdgvod59
- RpOYZCV/2pWv/aSpVlfFtTSLbJYs3bcFma1oLxWpOCD16IZTPmEJWCXo+dAMmArBORhn
- 1mm+lRmihvlPqGc/3vzaC4H1XYn+SfeRPrgCCxX/3P8iNaZRGVWSMMN5MnvtcQZL9KJB
- cOj+HdNrIiWHLlEPr5WHvzH9IpOhv8oiFzyxOUTPRcUXrZMBV/+RhuAfq+1NQR3o6aQ0
- CcWw==
+ bh=QCgjf5yIMfX4naiKWkFL3nNH4O0heiK8BTbdM8TyD24=;
+ b=ggmpaJZ9griM/hFV340l+PQAeQCpTfTPX6Hbzx07/qfyh316qLdJ4YgzaU7C4j0uuU
+ QRqS3O6CHkX1EnKjozr9W30oN2kkPzw/Aj7h+nG7YWeLzM9HQXGphI4iX4cG9Hcf73HP
+ nTtZFB3O+nwtAR6SskqJOQLnRKGLVjgfUWOQO1EzmKNVVnDW5t6apFIYSMq8Dm2Ud1mj
+ VVcv7T29/nZPL+5bqCx8ZwFgydn4xh8QA7mfGrQ/Z0qCOO6hGi1tmoROT+mnPMupJ2t7
+ 9X2BAiAmLmOA1QHr2PwHHrQg+PFghk4pNKGXnLY0k0snlSRFAt8TtqLptZ5/8FXONGMN
+ /0Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773159160; x=1773763960;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1773159268; x=1773764068;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=HkLunpzi2enZUZJG7c5KLq5BCos+HIdY6nOMMkJywFY=;
- b=Ke033yfr8v0Org56Zgu9D2IjozYGXPZV/zg1xtLJfrCDhxcSNzfEsLr8Bu49xJ16NP
- Igt2h+lZVdwwAG2v4mLkEfZWDY9Wt+q1paFNVP8b9umHHrLE7oton++uxvzjFWdOFAkS
- WRolaATOfk7ics3GfHK8Y6jD+dw5szQpTYpXpn0I7DnDIzlR3oEraT17oKDrCyTqYDy6
- bZF2l61QA4vkp9wa7e+RIRKzLYmQXrymv+DTJRW6Lc3tDKbcYeblqHcr7y1QpguU05Co
- Bzvi/QrhNnccwOXc0C82caajBluccLw4mwqFreNgtBqemC+oeDuIq5G2aTe20Tm2KLMe
- QvIA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXu1un+6JKX/zdX4MSQBOk4qzJ7o9YqVOFNI8ilQE/TQUtfLaiI0jeWGjfe4g8WC06n3sbQeJ0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7QFFlZhrlSCWZR9iHA0B14HUUKjDXVY69P3m72iRWlaMizsNX
- oyrPxzn4fqNayx52BCaoN/eK9nFLvk/Yg8y1HCeakIl4Iwvx4t4Y9hkDx6nYlOW71bI+OQlwicy
- BVFUzQbjvy27kOcBzCzJTjfgdahtuK30=
-X-Gm-Gg: ATEYQzxRQY51FYC2LVnIRqbp6GrMnhdmND3zXi90TBb2uaI1IuMDxIPshTMUl0RGaYJ
- 964VN3UeaUlk8m1Rxz/4GYDTS9yNO+D1ZaUl0nF78a3x7v65186hWXdR4lJykWD1wJkg/tcezrU
- nfDDbfKzHme2ykLDswSw/FqVHi8969N2+AjceXe0Hzx1gfetzFzPPE75U5XnhOYjQUJRn2qn+wb
- BxqxNi6fSl21ChAhaX07ZeV+9vrydyuQnS/t2BC0WXZPzegdVCefncpTdx64FxERC48zUkbrQ4t
- N8sceSFnA0j4ApRp71LUCwazOJAXxW96t8Q9e8fJt6uq3Fp1ALyhfnkqJluk7yIaLjgSPis=
-X-Received: by 2002:a05:651c:210d:b0:38a:4de2:85f1 with SMTP id
- 38308e7fff4ca-38a4de286a5mr35340501fa.32.1773159159422; Tue, 10 Mar 2026
- 09:12:39 -0700 (PDT)
+ bh=QCgjf5yIMfX4naiKWkFL3nNH4O0heiK8BTbdM8TyD24=;
+ b=vyhEcY7XNAUlm2Y1Ajq/+4cMGo02GtKBrQn+KxvCSAIOT0jhpgaXRYrdStD1gz1qWj
+ gW/evrnxW80lL6BZC005gemhZrsyXv4PkvUzMVRYQLhIaQxr/Jt4lyBySasvYj2lK4Kv
+ 9raWoQFoCg7zv86HXsHhBY+3CFWVtoF6Ph+Wisz1meD61Og3SdxgbopW5mMa3yKXpFlL
+ QDm+6bMJIvpYU5Rn0nCfnCi8L/Wr118vAbgkuS+vAQR3IJ/pQy1LRI/8VfaMCJUyknAf
+ NhA6lByXyhm9NUSqptS5GZmeQqXKT6NoPkCWWqjkXgASt6Tu8md+NIbjqIbd1Ve+GEXd
+ V6aQ==
+X-Gm-Message-State: AOJu0Yz436Tlmk9cMcYOq0deiTk9k+QDYakd6uOSCmyeCZ/4MnYK4ZC7
+ dow/2Ubcu9e/G9KvsEAksM5ieDe464HuuY+lWRKuLpC8dh/dODuHyQZmCjFnNVzEOmc=
+X-Gm-Gg: ATEYQzxWv7B5Zy9WkyJpe86N3YHCH4wa6lh4KP99oxbXjsM7v6ustR0h5BIC/Lw6s4v
+ SzBkC4XC0XSPStZXXvfFlpZBCf8HzTfJqudgOR13k+NFc3jZ645LX/zDzH+xoFqI9iTU4s+oAE3
+ 8L2ZVccdFWIoI5JHwtaiv4PSoimwkG7qGYTT2MUMl3jBjfgjwOgFWakf1RkRZ8Z6h/GeVIqdzej
+ Fr5SosYK6QU+gqYKnLoyMRnkgpf7NYm+dDI1pfR3YlkEVhvBNeYqdlaDbl+PT5LrlUJFVQt4b01
+ y2B2wwnwHrDg/76ihXjqZiYykkqnG3mgJnIATnRRrzciGFyPmrYaVNfPqntZHScahH6DtJTXLhw
+ eU8j9Tid0YIR93QE8buYcn4+KMTsamE1C3AEE3noSEmFh+KttvDGPlbTGeCz51zvKUpSqyCudwd
+ EYkCVC8PwQat/R6e8ufv+YHuDiM0A+8/4unr26ZEw=
+X-Received: by 2002:a05:6808:4fdf:b0:467:17f3:68bb with SMTP id
+ 5614622812f47-46717f395fdmr2929350b6e.59.1773159267877; 
+ Tue, 10 Mar 2026 09:14:27 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:78e2:51e2:14b8:2e10])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-466dfb14177sm7769967b6e.19.2026.03.10.09.14.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 09:14:25 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+To: u-boot@lists.denx.de, Julien Stephan <jstephan@baylibre.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Peng Fan <peng.fan@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+In-Reply-To: <20260219-add-mt8395-evk-v2-0-18b190d91cb6@baylibre.com>
+References: <20260219-add-mt8395-evk-v2-0-18b190d91cb6@baylibre.com>
+Subject: Re: [PATCH v2 0/2] Add MediaTek MT8395_EVK board
+Message-Id: <177315921511.375938.18388259732497713315.b4-ty@baylibre.com>
+Date: Tue, 10 Mar 2026 11:13:35 -0500
 MIME-Version: 1.0
-References: <cover.1773137310.git.simona.toaca@nxp.com>
- <bd23b79dc06f39a9f19ee3da956de450aad03aaf.1773137310.git.simona.toaca@nxp.com>
-In-Reply-To: <bd23b79dc06f39a9f19ee3da956de450aad03aaf.1773137310.git.simona.toaca@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 10 Mar 2026 13:12:28 -0300
-X-Gm-Features: AaiRm53ZMDf4qU9O8wS8JGXHC2ARr7-TMLzhK5BgVLOUPCwzczwc26Dq9WP-mes
-Message-ID: <CAOMZO5BRMVV=NW8Si2fEK0P5BmWHiPJb9zWqT+v7hES7U5Xu8A@mail.gmail.com>
-Subject: Re: [PATCH 4/5] board: nxp: imx9{4,5}_evk: Add qb save option in SPL
-To: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, peng.fan@nxp.com, alice.guo@nxp.com,
- ye.li@nxp.com, 
- simona.toaca@nxp.com, viorel.suman@nxp.com, marex@nabladev.com, 
- ravi@prevas.dk, fedor.ross@ifm.com, sebastien.szymanski@armadeus.com, 
- joao.goncalves@toradex.com, ji.luo@nxp.com, semen.protsenko@linaro.org, 
- sjg@chromium.org, tharvey@gateworks.com, ping.bai@nxp.com, qijian.guo@nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=518; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=0Jsn/cePnLyogiByzakbbMFWPcmEgOTl+kVZMYlkfl4=; 
+ b=owGbwMvMwMV46IwC43/G/gOMp9WSGDI3OIdJfJE7sTCTmVvdLSCTMbtZqfu9EfdH9XV3ubQEA
+ zoXaCZ2MnqxMDByMZiIKbK8kbg5L4mv+dqcGxkzYAaxMoFMEZNJyUlNzshLLXJISqzMyUwqStVL
+ zs9l4OIUgCmMncf+v3qxzO3GcwLRt9uXFDpfarLW6s94xLhkbsxTV9/TC1dvP/XBcdfX3teHst4
+ XndJjD47MVXh3+kWvc9rhCTre01+2WL1R3mLU5NVo4C7FwHjyz4e/jZuO35d/s7vit3LtpN2Sni
+ YSMze13BOK3i0udFUv+/h94y9eXvylC9ZvDv2oXNJ+KqF1W5OB2ayQVrFlty+5V7aF+1lpFURrZ
+ HUb93lJ/NukHiu+STCo2rxKyS/gn30Z6xu2uTs78x2+i2gKHfG9bXyyPPmQYlj4rgUpDJ3qURdu
+ fXi20zTMsZvJXKv6tOyJ1xaNnxR+r9Nr26M3danpn3CLoEdWQXxPT63cpbv/lszy5sAtzsfr3VQ B
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,66 +118,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 10, 2026 at 8:44=E2=80=AFAM Simona Toaca (OSS)
-<simona.toaca@oss.nxp.com> wrote:
->
-> From: Simona Toaca <simona.toaca@nxp.com>
->
-> Call qb save automatically in the board-specific
-> spl_board_init(), if SPL_QB option is enabled. This
-> makes sure qb_save is called before any image loading
-> is done by the SPL.
+On Thu, 19 Feb 2026 11:03:36 +0100, Julien Stephan wrote:
+> Add MediaTek MT8395_EVK board
+> 
+> Hello,
+> 
+> This series add basic support for MT8395_EVK board. It is based on
+> MT8195 SoC.
+> 
+> [...]
 
-Why do we need this? What does "QB" mean?
+Applied to mediatek-for-next, thanks!
 
-Please improve the commit message by providing more context and an
-explanation of what you want to achieve.
+[1/2] arm: mediatek: MT8195 fix mem_map
+      commit: 40a4889220acb5f26ca2704c6f66f149234ee3b4
+[2/2] board: mediatek: add MT8395 EVK board support
+      commit: b2a1db57ebed72f93b614acfd41b3cf56a504ee5
 
-> Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
-> ---
->  arch/arm/include/asm/mach-imx/qb.h | 2 ++
->  arch/arm/mach-imx/Kconfig          | 7 +++++++
->  arch/arm/mach-imx/imx9/Makefile    | 4 +++-
->  arch/arm/mach-imx/imx9/qb.c        | 9 +++++++++
->  board/nxp/imx94_evk/spl.c          | 6 +++++-
->  board/nxp/imx95_evk/spl.c          | 6 +++++-
->  6 files changed, 31 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/include/asm/mach-imx/qb.h b/arch/arm/include/asm/ma=
-ch-imx/qb.h
-> index 5efe68f0a60..4f923d79e7a 100644
-> --- a/arch/arm/include/asm/mach-imx/qb.h
-> +++ b/arch/arm/include/asm/mach-imx/qb.h
-> @@ -10,4 +10,6 @@
->
->  bool qb_check(void);
->  int  qb(int qb_dev, int qb_bootdev, bool save);
-> +void spl_qb_save(void);
-> +
->  #endif
-> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-> index 17aad696648..069b25c6241 100644
-> --- a/arch/arm/mach-imx/Kconfig
-> +++ b/arch/arm/mach-imx/Kconfig
-> @@ -71,6 +71,13 @@ config CSF_SIZE
->           Define the maximum size for Command Sequence File (CSF) binary
->           this information is used to define the image boot data.
->
-> +config SPL_IMX_QB
-> +       bool "Run qb save during SPL"
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
-What does "qb save" mean? Please explain here and in the commit message.
-
-How does a user know if "qb save" should run in SPL or not?
-
-> +       default n
-
-No need to pass "default n". Drop it.
-
-> +void spl_qb_save(void)
-> +{
-> +       int dev =3D spl_boot_device();
-> +
-> +       /** Save QB data on current boot device */
-
-Please use a single /* instead of /**
