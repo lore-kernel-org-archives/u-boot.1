@@ -4,77 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E51FD88C3
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 22:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59724FD88C5
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 23:01:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D68283FBC;
-	Tue, 10 Mar 2026 23:06:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
+	by phobos.denx.de (Postfix) with ESMTP id 855D783FA4;
+	Wed, 11 Mar 2026 00:01:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="T1p+23Tg";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wFkIf8QN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3705083FC1; Tue, 10 Mar 2026 23:06:36 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DCAD783FA6; Wed, 11 Mar 2026 00:01:22 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9817E83FA4
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 23:06:32 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=thingy.jp
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-358d80f60ccso7383090a91.3
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:06:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thingy.jp; s=google; t=1773180390; x=1773785190; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=r+T5GP83B2f/2lg++VGjyykxbfKzCSL83pbgwvMwDnE=;
- b=T1p+23TgB7AtxOy4Sn9jo7Pqis6x2SfD+P2o9eGLkPbdgkiyvjFA6AR//it1sSbMx4
- 5yI7QHJ4r8PszCu4eFcrkeC1XnZvC0dw8BbULCje/Cujsot8jZ9m7u7X+WrZvcAklOBy
- O7zeDht7JGKUU4wtkPGGVBW6N5vvv/4d6/pOM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773180390; x=1773785190;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r+T5GP83B2f/2lg++VGjyykxbfKzCSL83pbgwvMwDnE=;
- b=iVPfO2vruTtkz0kIlBaGtkUAggIIepen7rpifL3UOEQn+C1Wy04Ww/TOLpeS9JcRjV
- kRzZvwuwCgTwvtWfxNlUM09RAfYR9DRAVVbfpInYiFhGHY18eoA752/wlFLwkSYPTo4o
- 9IQJPxno4VB1nAS5FdfMhLt6b6dhT0ck7HsvNZPd58tMW7gQHKyRl2KoXEJhvmxJa0/N
- DNC5aati3yvhawY46vtr3az0Tm90Er1DnkUbWFfBQefsDenkJm2vyCDRdXRQn5cv+5RQ
- VMX+5ato+Zd1tZmzHIonX4Gqb/24IvjoF/NACmd/zNg1EabdDr3yRaGFLWZImDlRtn90
- 7QqA==
-X-Gm-Message-State: AOJu0YzAdn2imok6cYZndIDDnQ63MNDlaY9k2KzisQf6yFN17qzux49Y
- pElOOF+OCbAkj6qw8XVCVrU3TtFwltGL2RmiKC+XCHg7nf/YCL+THwOe7W/K5TZvWA1Vh72WLXn
- oWl60
-X-Gm-Gg: ATEYQzwocruEf1w7a+4t/BkLHHVjzgbCHdb5B0coFrC4Kgt2D4ig4gPIkBMqHZXvCsj
- 9dLFwTw5Ek/TpgMFUnPb51BoH+MnsdB01xpwUf9CK256ZAhoLBkCkQnsAUWjBWHw0RZsxVNceP9
- k9sCK7oey255njn6L/UwDM/jVELMbsTs34bZhQ0NdLJff3+cFLC+5+Fe0tWy9bf00f0CADJjpUr
- 5q1JfYmfxKpPyEqRwXtiiYZlffdmDmPWoL4FuzzQ759gt7YkfL2GVKhPI6H29lDQqpqEKW7qrET
- dTGLpy8TwoaazuNwU7tEYWQuKC5OV78W0LM//l2U3NYQk3r3PJUWfvO32rkO2hbxm19s0GGgsEE
- IWPMdrm7ks7Q92MHruWOXJjJbNCeLGF2EDiwQFZaTZv536vdssEoaeg0Ph1CEox1qsD93VJEFQf
- zrKWzIH5jjnvrkag==
-X-Received: by 2002:a17:90b:2fcf:b0:356:7b41:d348 with SMTP id
- 98e67ed59e1d1-35a012df63bmr326495a91.20.1773180390467; 
- Tue, 10 Mar 2026 15:06:30 -0700 (PDT)
-Received: from kinako ([2400:2200:2da:3879:3cf2:df32:3c60:892e])
- by smtp.googlemail.com with ESMTPSA id
- 98e67ed59e1d1-35a02fc845asm68040a91.11.2026.03.10.15.06.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 15:06:30 -0700 (PDT)
-From: Daniel Palmer <daniel@thingy.jp>
-To: u-boot@lists.denx.de
-Cc: Daniel Palmer <daniel@thingy.jp>
-Subject: [PATCH] fs: fat: Refactor dirty flag handling
-Date: Wed, 11 Mar 2026 07:06:18 +0900
-Message-ID: <20260310220619.1762455-1-daniel@thingy.jp>
-X-Mailer: git-send-email 2.51.0
+ by phobos.denx.de (Postfix) with ESMTPS id 4FEFE83F93
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 00:01:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=fc7c=BL=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1773183678;
+ bh=9OYM7uPKaXBeBB94VXSINRru15XCYkcdCkDQSotoJ1o=;
+ b=wFkIf8QNYHSpBq6BM0NPihCiEQfQQr7nALq5SRoq3nrS1FXQ6WFMqdIR4GmeJpda8rr617oMW
+ E3aETCwjQIVjrxzN4M5726v6vNNO8p6IyzU5u25ZuAXgRXy4B4CfKOvpIOw7CQ4Zml4dkdC2pnB
+ YAHNVmvbttC1v1Xfem7WzNLn/EEiMwMY6yrnSKrZaT9wIjcp2F7/Po1JmXORUaz0gf7T48TCUPY
+ r/mz6oXb2XwOJs/MjvHDA00qHZYk7/8nYjkOQRkWh8dtdu4SzuhXa8rb8XeIujYjoZvsFh8yzbq
+ UGYesSHzyPliPbpmE+MxVrEXbnPmFZAgfWfxoMIC1jQA==
+X-Forward-Email-ID: 69b0a2b93cc84e2a49a2de65
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.6.49
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <8fe7e877-c1d7-4b84-9638-c60dc995a7a7@kwiboo.se>
+Date: Wed, 11 Mar 2026 00:01:10 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 2/4] reset: rockchip: make device resets available in
+ SPL
+To: Alexey Charkov <alchark@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Shawn Lin <shawn.lin@rock-chips.com>, u-boot@lists.denx.de
+References: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
+ <20260120-rk3576-ufs-v5-2-0edb61b301b7@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260120-rk3576-ufs-v5-2-0edb61b301b7@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,113 +76,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor the dirty flag handling a little bit so an inline
-function is called instead of directly stuffing a value into
-the variable.
+Hi Alexey,
 
-This allows variable that holds the flag to be completely removed
-if its not used i.e. CONFIG_FAT_WIRTE=n
+On 1/20/2026 7:09 PM, Alexey Charkov wrote:
+> Enable the Rockchip reset controller driver in SPL to allow resetting
+> attached devices like UFS during early boot.
+> 
+> Signed-off-by: Alexey Charkov <alchark@gmail.com>
+> ---
+>  drivers/reset/Kconfig  | 9 +++++++++
+>  drivers/reset/Makefile | 2 +-
+>  2 files changed, 10 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+> index 74c267dfc4e5..d35f3904e404 100644
+> --- a/drivers/reset/Kconfig
+> +++ b/drivers/reset/Kconfig
+> @@ -99,6 +99,15 @@ config RESET_ROCKCHIP
+>  	  though is that some reset signals, like I2C or MISC reset multiple
+>  	  devices.
+>  
+> +config SPL_RESET_ROCKCHIP
+> +	bool "SPL reset controller driver for Rockchip SoCs"
+> +	depends on SPL_DM_RESET && ARCH_ROCKCHIP && CLK
 
-Signed-off-by: Daniel Palmer <daniel@thingy.jp>
----
- fs/fat/fat.c       |  2 +-
- fs/fat/fat_write.c |  9 ++++-----
- include/fat.h      | 26 ++++++++++++++++++++++++++
- 3 files changed, 31 insertions(+), 6 deletions(-)
+This should probably depend on SPL_CLK not CLK.
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 9ce5df59f9ba..1f05533a3781 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -690,7 +690,7 @@ static int get_fs_info(fsdata *mydata)
- 	}
- 
- 	mydata->fatbufnum = -1;
--	mydata->fat_dirty = 0;
-+	fat_mark_clean(mydata);
- 	mydata->fatbuf = malloc_cache_aligned(FATBUFSIZE);
- 	if (mydata->fatbuf == NULL) {
- 		debug("Error: allocating memory\n");
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index 0b924541187c..e1b5b32bfcbf 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -223,9 +223,9 @@ static int flush_dirty_fat_buffer(fsdata *mydata)
- 	__u32 startblock = mydata->fatbufnum * FATBUFBLOCKS;
- 
- 	debug("debug: evicting %d, dirty: %d\n", mydata->fatbufnum,
--	      (int)mydata->fat_dirty);
-+	      (int)fat_is_dirty(mydata));
- 
--	if ((!mydata->fat_dirty) || (mydata->fatbufnum == -1))
-+	if (!fat_is_dirty(mydata) || (mydata->fatbufnum == -1))
- 		return 0;
- 
- 	/* Cap length if fatlength is not a multiple of FATBUFBLOCKS */
-@@ -248,7 +248,7 @@ static int flush_dirty_fat_buffer(fsdata *mydata)
- 			return -1;
- 		}
- 	}
--	mydata->fat_dirty = 0;
-+	fat_mark_clean(mydata);
- 
- 	return 0;
- }
-@@ -484,8 +484,7 @@ static int set_fatent_value(fsdata *mydata, __u32 entry, __u32 entry_value)
- 		mydata->fatbufnum = bufnum;
- 	}
- 
--	/* Mark as dirty */
--	mydata->fat_dirty = 1;
-+	fat_mark_dirty(mydata);
- 
- 	/* Set the actual entry */
- 	switch (mydata->fatsize) {
-diff --git a/include/fat.h b/include/fat.h
-index bdf430f70675..40da0370a444 100644
---- a/include/fat.h
-+++ b/include/fat.h
-@@ -165,7 +165,9 @@ typedef struct {
- 	int	fatsize;	/* Size of FAT in bits */
- 	__u32	fatlength;	/* Length of FAT in sectors */
- 	__u16	fat_sect;	/* Starting sector of the FAT */
-+#ifdef CONFIG_FAT_WRITE
- 	__u8	fat_dirty;      /* Set if fatbuf has been modified */
-+#endif
- 	__u32	rootdir_sect;	/* Start sector of root directory */
- 	__u16	sect_size;	/* Size of sectors in bytes */
- 	__u16	clust_size;	/* Size of clusters in sectors */
-@@ -190,6 +192,30 @@ static inline u32 sect_to_clust(fsdata *fsdata, int sect)
- 	return (sect - fsdata->data_begin) / fsdata->clust_size;
- }
- 
-+static inline void fat_mark_clean(fsdata *fsdata)
-+{
-+#ifdef CONFIG_FAT_WRITE
-+	fsdata->fat_dirty = 0;
-+#endif
-+}
-+
-+static inline void fat_mark_dirty(fsdata *fsdata)
-+{
-+#ifdef CONFIG_FAT_WRITE
-+	fsdata->fat_dirty = 1;
-+#endif
-+}
-+
-+static inline bool fat_is_dirty(fsdata *fsdata)
-+{
-+#ifdef CONFIG_FAT_WRITE
-+	if (fsdata->fat_dirty)
-+		return true;
-+#endif
-+
-+	return false;
-+}
-+
- int file_fat_detectfs(void);
- int fat_exists(const char *filename);
- int fat_size(const char *filename, loff_t *size);
--- 
-2.51.0
+> +	default y
+> +	help
+> +	  Support for the reset controller on Rockchip SoCs in SPL. Select this
+> +	  if you observe any reset-related warnings or errors when booting SPL,
+> +	  such as when using UFS storage
+> +
+>  config RESET_HSDK
+>  	bool "Synopsys HSDK Reset Driver"
+>  	depends on DM_RESET && TARGET_HSDK
+> diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+> index ee5b009d1341..dc7d3b610e6e 100644
+> --- a/drivers/reset/Makefile
+> +++ b/drivers/reset/Makefile
+> @@ -16,7 +16,7 @@ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
+>  obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
+>  obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
+>  obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
+> -obj-$(CONFIG_RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
+> +obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) += reset-rockchip.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
+
+Please rebase on next, this line now include rst-rk3506.o.
+
+With both fixed this is:
+
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+
+Regards,
+Jonas
+
+>  obj-$(CONFIG_RESET_MESON) += reset-meson.o
+>  obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
+>  obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
+> 
 
