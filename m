@@ -4,54 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42262EB1076
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 15:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD36BFD4F03
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 16:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DA5A840EE;
-	Tue, 10 Mar 2026 16:58:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B2288409A;
+	Tue, 10 Mar 2026 17:08:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=ludwig.nussel@siemens.com header.b="V5MdoGg+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bg9eopEQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF25C840EE; Tue, 10 Mar 2026 16:58:56 +0100 (CET)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AF132840EE; Tue, 10 Mar 2026 17:08:04 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC1B2840AE
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 16:58:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38A3A8409A
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:08:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ludwig.nussel@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 2026031015585498e015c9300002073d for <u-boot@lists.denx.de>;
- Tue, 10 Mar 2026 16:58:54 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=ludwig.nussel@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=Zgo5m5FJefpZRhsLoYaHzGyYdGN2Ziz9CmEwifSuFcM=;
- b=V5MdoGg+I05qybVBTNDOGFRQEdzUNPwRt0iQlnbcN8Fw9Zle13IMKxpKMjjh/ldMw6B/0O
- lCJfrY9kSml+eijaKRt3WtsXihWjvvF90voLz2+Lq2vVEAtrZJTfHrxxqeQNQ7UqtbUTluEZ
- Uo47q+qkbaa8HjdrDGEhdMS2ZznjVPTe1Ba8AmGHwKCFVhX0QbQdOwMKpCy6t8gSFR3roOtS
- LKCHXmuIP6GxZ8SLMogaGPW9kbGIyZy2zoDrjcA5gl08b2nN/IrITIiRav1lHiYNmcA9Qgc3
- XKB9TifRNIV6GiPjALZyAfKWeE8kPHkljNQMNu0xe/NQ/GaM97CUGw+w==;
-From: Ludwig Nussel <ludwig.nussel@siemens.com>
-To: u-boot@lists.denx.de
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>,
- Daniel Golle <daniel@makrotopia.org>,
- Simon Glass <simon.glass@canonical.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] Remove confusing NULL from error message
-Date: Tue, 10 Mar 2026 16:58:27 +0100
-Message-ID: <20260310155841.126525-2-ludwig.nussel@siemens.com>
-In-Reply-To: <20260310155841.126525-1-ludwig.nussel@siemens.com>
-References: <20260310155841.126525-1-ludwig.nussel@siemens.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-662f2fa7e67so5012573eaf.1
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:08:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1773158881; x=1773763681; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SadQljlJLuDWBwsrI7z/LHgP9OSuha0EerxVU9MRkBY=;
+ b=bg9eopEQ9OZKzyhRVXVIl5vcMx8bBkEmX14IBTmqaI2GLqlecjtx7MwobKFq/it83E
+ lZY3q7cGxvRUuDUhUTRCUM0p78xCFa0bbmBPF9/cXzf6MR7FTCjivYVRlZW6l+x7N70e
+ o8e47wkGL9yg8kFWNxA0yEP8i6vXKmr1l6qjU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773158881; x=1773763681;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=SadQljlJLuDWBwsrI7z/LHgP9OSuha0EerxVU9MRkBY=;
+ b=YUdNv/epct73AMPWBI7jdFqCsrrtFHxVAUs3yoPRb6pdJKVmiNeCqDVBdO6c99L4TL
+ b4aW1afOOAZOGPY9yUrUkvQdvZh2wZmPC/YmYkCwyflXwdDCHPHg5CwB4lHj+V89QA5I
+ hFb3PLq8lWgQ9yW+bLojhH/AUVIh5rEOPfZzEJLFamwpVUbWNJlJqE3PoEQJdTkgRjgp
+ BN6DxacK336T774RBwfEDf9TOWWH6IdpNxAjDwt2CBMBBxpyBZbQ9yAKGm/qmPL1xDj4
+ 5R7sJCJEpk+joAF79GNCxgAEr0802Yf7ZwOL0PiAFkgwSy8vilvaGElBw76yj4+x6vq3
+ Vuyg==
+X-Gm-Message-State: AOJu0YxdUMzp0wRJdsp+4O39X+w7def0zK+EvVx1UkrwSuY5V1Ttd6SK
+ rHg+U77g7xWSZ6K9j0uxnYy8l2ItfE6q/TVfeox+yMZ60RF1SLg4ldxkBP06x49uvg8=
+X-Gm-Gg: ATEYQzwTvWU8SlzqaUFzITJBLsoAI4s6ioPLe4zBuoyP9DRmtwB3ziiYkjUMhSX3DXi
+ nw/7sx3PieKrYsG3gZ1PFkc9tloId480eNREFHDly0SksJutJWyihrAtvSQ4wUo+JVfGo40tPJG
+ sChqfmCX6mgr//kJjg1NJsIqOWeP7dids3tKYF07KzXjDzmbUr+26ozqcYjF/mOwbcnVAsQ2VsR
+ lPPAEraznth2IH5EGy6b4LRJZQmktxuO4XeaYd+OAq5Xtg7h6D53jaOZ08Nw2Tn4GoBSVDE2rq7
+ uPGJAe51aAgogkBbQ8qPCaGAyl00i8Wbkb9cD73eWSpJ2GitKuxHvoKf7VPiFZB8DX1Xg0uU/BA
+ mtbXgBSF40dGBzOHIZo3WokK+C5+gbd3WxpUwPj0Kcl6Mx12jP4gDHs5i+mg1DQtcw8BqbfZ29v
+ yNx9SwKltU34SVcDma4lfOU6Wb/SRyFQXkMYTVbzvIaanAnQrXFxkNKwbSreaHfP6ydzc0E7SZq
+ Td0pZQBthgJFxJayqiSYHNickXnzZFTGFjAXWrvlYsX
+X-Received: by 2002:a05:6820:818a:b0:672:e67a:96cf with SMTP id
+ 006d021491bc7-67b9bc81ea2mr9738044eaf.16.1773158880648; 
+ Tue, 10 Mar 2026 09:08:00 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41756b47f0asm3501313fac.8.2026.03.10.09.07.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 09:08:00 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: francesco.dolcini@toradex.com, ggiordano@phytec.com, anshuld@ti.com, 
+ m-chawdhry@ti.com, bb@ti.com, Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+In-Reply-To: <20260219102721.102254-1-w.egorov@phytec.de>
+References: <20260219102721.102254-1-w.egorov@phytec.de>
+Subject: Re: [PATCH] arch: arm: dts: k3-r5: Drop a53_0 clock overrides in
+ board files
+Message-Id: <177315887979.1153104.5198388483610482163.b4-ty@konsulko.com>
+Date: Tue, 10 Mar 2026 10:07:59 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-1328817:519-21489:flowmailer
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,33 +98,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If no signature could be verified and the loop terminates, the iterator
-'noffset' has no meaningful value so name yields NULL.
+On Thu, 19 Feb 2026 11:27:20 +0100, Wadim Egorov wrote:
 
-Signed-off-by: Ludwig Nussel <ludwig.nussel@siemens.com>
----
+> The a53_0 clock properties are already set correctly in their
+> common k3-<soc>-r5.dtsi includes. Stop overriding them in
+> the r5 board device trees.
+> 
+> Fixes the following error message:
+>   Failed to set clock rates for '/a53@0': -61
+> 
+> [...]
 
- boot/image-fit-sig.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+Applied to u-boot/next, thanks!
 
-diff --git a/boot/image-fit-sig.c b/boot/image-fit-sig.c
-index e7a768b9add..433df20281f 100644
---- a/boot/image-fit-sig.c
-+++ b/boot/image-fit-sig.c
-@@ -593,9 +593,8 @@ static int fit_config_verify_key(const void *fit, int conf_noffset,
- 		return 0;
- 
- error:
--	printf(" error!\n%s for '%s' hash node in '%s' config node\n",
--	       err_msg, fit_get_name(fit, noffset, NULL),
--	       fit_get_name(fit, conf_noffset, NULL));
-+	printf(" error!\n%s for '%s' config node\n",
-+	       err_msg, fit_get_name(fit, conf_noffset, NULL));
- 	return -EPERM;
- }
- 
+[1/1] arch: arm: dts: k3-r5: Drop a53_0 clock overrides in board files
+      commit: 045fb42827cd8a24cc1024550421f867d1a954c7
 -- 
-2.43.0
+Tom
 
-base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
-branch: patch-signatures
+
