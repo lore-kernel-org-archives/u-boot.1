@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FF3FCC9A5
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:52:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCAA0FCC9A5
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:54:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 843B9839DF;
-	Tue, 10 Mar 2026 01:52:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 09B6783F86;
+	Tue, 10 Mar 2026 01:54:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="RRiV7qkf";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="xe6EhQTv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13E8883F2A; Tue, 10 Mar 2026 01:52:55 +0100 (CET)
-Received: from mail-m32101.qiye.163.com (mail-m32101.qiye.163.com
- [220.197.32.101])
+ id 95DA0839DF; Tue, 10 Mar 2026 01:54:47 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5885D83981
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:52:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.60.65] (unknown [110.83.51.2])
- by smtp.qiye.163.com (Hmail) with ESMTP id 36527d285;
- Tue, 10 Mar 2026 08:52:49 +0800 (GMT+08:00)
-Message-ID: <57db9124-f8c0-42c5-ae4c-2b0a19813b28@rock-chips.com>
-Date: Tue, 10 Mar 2026 08:52:49 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3568: Include all addressable DRAM in memory
- map
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ by phobos.denx.de (Postfix) with ESMTPS id 5AF3C839DF
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:54:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1773104083;
+ bh=QNZWwkNeodBT8hSU9L17UnAs+dmQhmzR0cJGXhachgE=;
+ b=xe6EhQTvHpABu725/I16SHY8/vIXYQhdF2D0We6m0fcSJ8b3bZzsa2KrE70WrKjsgnBJiK6Nu
+ 9Mlxkzqvvipjmv4CcWxI3kjR7WRqeq7PMH3nIp39Uj2YvD64wTOnpDY5H4IEUuiW3V6pBp+Ff+G
+ /pNoh0WFQug527tBBxABV8UHVsl/hW7s2gsD38Tu7y1j5x4xNh5LXfeTObVxo5B2BIlmmSfb9ws
+ 89oeEw8K3VPDpJiyKr9WWBo3uKjMb/Bz42BHeK9qt4QQQ1bpfIOhjvHda8HNmkPjuIG31n0oNlV
+ yVNIkSf+MTvT5/HjAWKxwS0B9lJkJxOyPoJKECK5VBcQ==
+X-Forward-Email-ID: 69af6bcd73a8189bec32772d
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 2.6.49
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20260309210234.521070-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20260309210234.521070-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a9cd53b74c003afkunm10d7bd85170ef42
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSRlMVh9MQkodSkIeThhPHVYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSktVQ0hVTkpVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
- JLS1kG
-DKIM-Signature: a=rsa-sha256;
- b=RRiV7qkfOJnFo61hnROcsQCkS6fkiY0YmUFcod7oqrWihuyTp1z8rondLYxKpTR2nd2Zk0oGhUNtYpIqqKyOhguCLN9s/bEY6ZJrXv4oFmXEWbVJdi0Nx2PybxWUv0hquPv/f59O6Ms2o/F9mMeWJKHLTLHq9ZYCPY5DTRJusGY=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=xTAl69rcUbtOVJ45TVr/HgZflKzZsC7xXdNvGYmUUG8=;
- h=date:mime-version:subject:message-id:from;
+Cc: Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 00/12] rockchip: Add initial support for RK3506
+Date: Tue, 10 Mar 2026 00:52:55 +0000
+Message-ID: <20260310005326.606079-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.53.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,59 +69,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series add initial support for the Rockchip RK3506 SoC.
 
-On 2026/3/10 05:02, Jonas Karlman wrote:
-> Rockchip RK356x supports up to 8 GiB DRAM, however U-Boot only includes
-> the initial 32-bit 0-4 GiB addressable range in its memory map,
-> something that matches gd->ram_top and current expected memory available
-> for use in U-Boot.
->
-> The vendor DRAM init blobs add following ddr_mem rk atags [1]:
->
->    4 GiB: [0x0, 0xf0000000) and [0x1f0000000, 0x200000000)
->    8 GiB: [0x0, 0x200000000)
->
-> Add the remaining 64-bit 4-8 GiB addressable range, that already is
-> reported to OS, to the U-Boot memory map to more correctly describe all
-> available and addressable DRAM of RK356x. While at it also add the
-> missing UL suffix to the PCIe address range for consistency.
->
-> [1] https://gist.github.com/Kwiboo/6d983693c79365b43c330eb3191cbace
->
-> Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Clk and pinctrl drivers have been imported from vendor U-Boot with
+some adjustments and fixes.
 
-Thanks,
-- Kever
-> ---
-> Changes in v2:
-> - Update commit message
-> - Collect a-b tag
-> ---
->   arch/arm/mach-rockchip/rk3568/rk3568.c | 12 +++++++++---
->   1 file changed, 9 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> index c2b96902d2dd..2b1eafee37c9 100644
-> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> @@ -72,9 +72,15 @@ static struct mm_region rk3568_mem_map[] = {
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
->   	}, {
-> -		.virt = 0x300000000,
-> -		.phys = 0x300000000,
-> -		.size = 0x0c0c00000,
-> +		.virt = 0x100000000UL,
-> +		.phys = 0x100000000UL,
-> +		.size = 0x100000000UL,
-> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +			 PTE_BLOCK_INNER_SHARE
-> +	}, {
-> +		.virt = 0x300000000UL,
-> +		.phys = 0x300000000UL,
-> +		.size = 0x0c0c00000UL,
->   		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->   			 PTE_BLOCK_NON_SHARE |
->   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+Upstream DT is currently not existing for RK3506, so this series does
+not add support for any new boards, it only add initial arch support.
+
+Please see my U-Boot rk3506 branch at [1] for a few more commits that
+add DTs and defconfig for e.g. Luckfox Lyra variants and ArmSoM Forge1.
+
+With this series, board DTs and defconfigs it should be possible to boot
+into U-Boot proper (without OP-TEE) and still have support for MMC,
+Ethernet, OTP, RNG, LEDs, buttons and USB gadget/host.
+
+Changes in v3:
+- Add parentheses to mod checks to be consistent in clk driver
+- Remove and add blank lines in pinctrl driver
+- Remove unneeded rockchip_get_clk()
+- Remove unneeded syscon_rk3506.c
+- Add BOOTSOURCE_SPINOR mapping
+- Update emmc/sdmmc comment
+- Collect r-b tags
+
+Changes in v2:
+- Use common handling of USB bootsource_id 0x81
+- Re-sort the spl_infos list alphanumerically
+- Drop use of struct rk3506_cru and of_to_plat() ops
+- Define LOG_CATEGORY and use log_debug() in clk driver
+- Extract rk3506_clk_init_xpl() from clk bind() ops
+- Enable SPL_ARMV7_SET_CORTEX_SMPEN
+- Fix mac1 and otg1 access to ddr memory
+- Collect a-b and t-b tags (where applicable)
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3506
+
+Finley Xiao (2):
+  dt-bindings: clock: rockchip: Add RK3506 clock and reset unit
+  clk: rockchip: Add support for RK3506
+
+Jonas Karlman (8):
+  rockchip: spl: Add common handling of USB bootsource_id 0x81
+  rockchip: mkimage: Re-sort the spl_infos list alphanumerically
+  ram: rockchip: Add basic support for RK3506
+  pinctrl: rockchip: Use syscon_regmap_lookup_by_phandle()
+  rockchip: otp: Add support for RK3506
+  phy: rockchip-inno-usb2: Add support for RK3506
+  net: dwc_eth_qos_rockchip: Add support for RK3506
+  arch: arm: rockchip: Add initial support for RK3506
+
+Xuhui Lin (1):
+  rockchip: mkimage: Add support for RK3506
+
+Ye Zhang (1):
+  pinctrl: rockchip: Add support for RK3506
+
+ arch/arm/include/asm/arch-rk3506/boot0.h      |    9 +
+ arch/arm/include/asm/arch-rk3506/gpio.h       |    9 +
+ arch/arm/include/asm/arch-rockchip/clock.h    |   10 +
+ .../include/asm/arch-rockchip/cru_rk3506.h    |  181 +++
+ arch/arm/mach-rockchip/Kconfig                |   44 +
+ arch/arm/mach-rockchip/Makefile               |    1 +
+ arch/arm/mach-rockchip/rk3506/Kconfig         |   15 +
+ arch/arm/mach-rockchip/rk3506/Makefile        |    4 +
+ arch/arm/mach-rockchip/rk3506/clk_rk3506.c    |    9 +
+ arch/arm/mach-rockchip/rk3506/rk3506.c        |  126 ++
+ arch/arm/mach-rockchip/rk3528/rk3528.c        |   15 -
+ arch/arm/mach-rockchip/spl.c                  |   12 +-
+ drivers/clk/rockchip/Makefile                 |    1 +
+ drivers/clk/rockchip/clk_rk3506.c             | 1166 +++++++++++++++++
+ drivers/misc/rockchip-otp.c                   |    4 +
+ drivers/net/dwc_eth_qos.c                     |    4 +
+ drivers/net/dwc_eth_qos_rockchip.c            |   86 ++
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c |   20 +
+ drivers/pinctrl/rockchip/Makefile             |    1 +
+ drivers/pinctrl/rockchip/pinctrl-rk3506.c     |  462 +++++++
+ .../pinctrl/rockchip/pinctrl-rockchip-core.c  |   46 +-
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h   |    1 +
+ drivers/ram/rockchip/Makefile                 |    1 +
+ drivers/ram/rockchip/sdram_rk3506.c           |   33 +
+ drivers/reset/Makefile                        |    2 +-
+ drivers/reset/rst-rk3506.c                    |  222 ++++
+ drivers/usb/gadget/Kconfig                    |    1 +
+ .../Bindings/clock/rockchip,rk3506-cru.yaml   |   55 +
+ .../dt-bindings/clock/rockchip,rk3506-cru.h   |  285 ++++
+ .../dt-bindings/reset/rockchip,rk3506-cru.h   |  211 +++
+ include/configs/rk3506_common.h               |   38 +
+ tools/rkcommon.c                              |    5 +-
+ 32 files changed, 3034 insertions(+), 45 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-rk3506/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3506/gpio.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+ create mode 100644 arch/arm/mach-rockchip/rk3506/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3506/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3506/clk_rk3506.c
+ create mode 100644 arch/arm/mach-rockchip/rk3506/rk3506.c
+ create mode 100644 drivers/clk/rockchip/clk_rk3506.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3506.c
+ create mode 100644 drivers/ram/rockchip/sdram_rk3506.c
+ create mode 100644 drivers/reset/rst-rk3506.c
+ create mode 100644 dts/upstream/Bindings/clock/rockchip,rk3506-cru.yaml
+ create mode 100644 dts/upstream/include/dt-bindings/clock/rockchip,rk3506-cru.h
+ create mode 100644 dts/upstream/include/dt-bindings/reset/rockchip,rk3506-cru.h
+ create mode 100644 include/configs/rk3506_common.h
+
+-- 
+2.53.0
+
