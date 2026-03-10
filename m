@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0502FD4F3F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 20:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CA0EFD4F3F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 20:46:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4013384179;
-	Tue, 10 Mar 2026 21:45:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7B191840DF;
+	Tue, 10 Mar 2026 21:45:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ODFzfKDJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uOfacw+t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0930F83FA6; Tue, 10 Mar 2026 21:45:35 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id A7CAB84113; Tue, 10 Mar 2026 21:45:36 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC0538414B
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 21:45:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D9768412A
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 21:45:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-4671cbce465so867060b6e.3
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 13:45:32 -0700 (PDT)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-46702742c99so1559893b6e.3
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 13:45:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773175531; x=1773780331; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773175533; x=1773780333; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4tYq9jBCmOhidPL7kC/9VLxFTlbuHLcyO6rV/Sqp2QU=;
- b=ODFzfKDJ9EbzBZzAuO+4Nrk5lOgC5IeWI3KApBcIWs5eeOcRDCzWD2huK6dEfpoKJA
- otk4PFB5IkWyDF+JZxCSNo+drv0zoEMmcKP4SjTQXQHgMQZ6L6RN+njRcQeMkjhm2sDx
- ttHkWhdrod8XJV3zi/gxSsEIAflL6FV2HL1rA=
+ bh=Mq9QYc0yJFYscN1om/MHafeTnn0DATFJq8l2BmWUXWI=;
+ b=uOfacw+tvc7slO4s/43H3YmSjZqqE+mewWObHeUosllURqoAG8ILJiOHdt59y+3+BI
+ XXXMDFL0Og/Uo51Zjl9jGSWQLPPeuNDHKBIEatJMy4QIiLbk2kh0fvnCIOA9EkYxYwIt
+ +SdPCDnX84I7Muikh+ZCq9WzisvSnjAhneH3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773175531; x=1773780331;
+ d=1e100.net; s=20230601; t=1773175533; x=1773780333;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=4tYq9jBCmOhidPL7kC/9VLxFTlbuHLcyO6rV/Sqp2QU=;
- b=Puj8N8sYh6zjE1j+Oylk5AM/p5Ry7B8QEo4q7Qm7Q4TyN93hlStN4ZCXwiav8EgB0u
- GYXbcptNnzpQCdJI9WlaRp2tEbEUbT9u3eXep0pQxhySTL5U6n8mKY6NDSH2USMUDMhS
- 6s2XK/1sxkMRJqbjk3+PeP+WER0X+WTtb4Rt7FZQLqGvrY1WhyiEJxy7XQhG6wA3swjK
- NJZxIZd/heyoVeVrzmdGGG0gfYUVUqaWjao+dPQFjFkcXSpnO1MDSjJICrHJiSaBNRA/
- 0zZSD1YcNHtKaR8p5BKpie0CKSRtFX3qxGR/6DN1slSsfl/pn4wEzn/P2TAjMRJgKHB5
- brVg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5wdphqLFR0w75tZa3hmyrTOq5HikkEHrXB1/wyspJp0/jhYYBRfwBQPvNh4S5iSPr+Ob/Qgw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2/dcGN0FYdKuP05+sUcqFY4k2QH1VebeVtY1VlsK/NM2AKvPw
- 4wrcYHW1VDT80IQDy4sAc/vi//RY9f4Q3TVzBFPRosgdUL4mGf4uMDMVW7VFpaSTiMg=
-X-Gm-Gg: ATEYQzy/pzDfNtuytWEAGBBbwLfAPCy1PEM1BDzwMD0Rk5/0lmRNd2pg2GbBdwZNunE
- rQV9JU6B7LXzuDmkfFgXgQso0D31HuqowizSPJjtGWumNHAo0f9eT7ip8HE8GxEuw2KeB9JAAfB
- ok2KQZm3VdNRVI1GtaPCAoyEqQxbDvcrYk9HGn0pDreVe0ZdehRrsSZ+zmhTM+LwCFBUUwqtS1i
- NeWg7m+xEsyBvPMRsizCQB7Ym5E4b9XXncSqynHX7l767VW3nRZ4VybLhdrZB7YDqqAr1pnqRHD
- CGafQ6f36JKZjg+zaT6MJoI3IcKWwCO8afAwKlr492p2iYhE9qyz2dI8RkHSwJ0LtDFAHKXCtUU
- niY8o1z9Mn0AeyLqepIbIVUpf1cWybCukviO1A76KZXOIUcqY0C+0QYJujePu+yUYC6JtWWU5Ju
- mljfKp3wJ4Akn7/KRJEzlm+/PCG9Tc9D90RavgTvA67gOe77Hb0JdpjEzLsktlrHVUds6+GFsHN
- 71QoZGsYz9vkFHWCCVUdL66MlJOcAuITy90fILu51Be
-X-Received: by 2002:a05:6808:3442:b0:462:a915:31aa with SMTP id
- 5614622812f47-4673367e819mr26311b6e.63.1773175531654; 
- Tue, 10 Mar 2026 13:45:31 -0700 (PDT)
+ bh=Mq9QYc0yJFYscN1om/MHafeTnn0DATFJq8l2BmWUXWI=;
+ b=v3VQnbj5H9V4wF5X+rWwXwDbdxZboIQ21NL5PHxzXeiXBt7CRKeUUSqAOndzIu1puy
+ w5q11Fm2AUKkkEyCpaSNdX0heQKVvAzzgDI9+Dyb3GcnewKgyZw6Y706OZZZt85LadIQ
+ ZVzy+T/awoaTg9A0vnWKv1Yvbipm/aak3b2nx0mMQy89Nq9B+nLOx1DmC/veWxvdVflw
+ i+5Lh83CD8/C8/2ZPfTGsEEaWzhbtVY+Nl1XMGcb9MHTrdyxCvFl7Nn0KIP5mlFgWW+f
+ qtGwwMe7MQbDuGDLDbRB0wHlaMT750J1xXLnIlFcgBIo1jyu0lIVfjIq+0jn4Bjgvx/4
+ W23w==
+X-Gm-Message-State: AOJu0YxJy8xbN6G5Apzdz84OeesxT2585fh7rWzpgStywbnC0HeOKc2y
+ w83FpZ+xCW61W81T937e4J2X8AGZoV5dfp7S+V6xojvDtG1sN0rKqddECfyZfjVGEJx/qiwxTkq
+ NP9eDNJ8=
+X-Gm-Gg: ATEYQzx86fMeTctaQxhlrna229/sBb3S1oYcZRNQFbc3hNTa7Z9pBoU3Cufk3ZpuB+9
+ KEyOQU5V2uqkdAFQvIErV3T3eSLHv8gj4C+2X6zpsr34xUkcGwkOgZI/7ktokVOvjN3M8uk7BJb
+ km3t3TO8xC95jM5jCHoTU2IDIgxg/I4aziQTpa+0h24zpAdAFXc9jPfp7okcXy3ajG4gwpv/72f
+ b+cbALnyM/VLdgqStK1DTUe8xb1K96YIBGb5WskaBYmNFoXfSl8nqk5cLMeLpxnpWGXsKIeCw1t
+ xZ41kfbxGa3Qt7RXJ/GlunRBCZYI0wQTReIWccNuToKyCLBEMpQDWRIRuGmkiC1/56d7ldjVImi
+ clEo1Z3ljiHKuSyjiKdqTMoLEuA/2kOhDIq04W3jrArFY2OaAP6lKX8IIASSa9XReNbKG/g2uew
+ nyYL7cLjJsHqIkXshrOAUULnRrqEyh5TJo9PanGXtIz2G+eL3ygCJ68TzvfYclUoDIxRxDGec4S
+ zhXngYh7unqNPa8pZ+LoMhGzjEZvebsNVRQQVjd3+Le
+X-Received: by 2002:a05:6808:2225:b0:45e:f91f:9730 with SMTP id
+ 5614622812f47-467335cd9damr37178b6e.51.1773175533011; 
+ Tue, 10 Mar 2026 13:45:33 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-191-8-235.totalplay.net. [187.191.8.235])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-466dfac3acfsm8256086b6e.16.2026.03.10.13.45.30
+ 5614622812f47-466dfac3acfsm8256086b6e.16.2026.03.10.13.45.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 13:45:31 -0700 (PDT)
+ Tue, 10 Mar 2026 13:45:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, u-boot@lists.denx.de
-In-Reply-To: <20260225130312.60122-1-heinrich.schuchardt@canonical.com>
-References: <20260225130312.60122-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] disk: fix DOS_PARTITION dependencies
-Message-Id: <177317553086.23044.4952366622657338842.b4-ty@konsulko.com>
-Date: Tue, 10 Mar 2026 14:45:30 -0600
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20260225131051.60535-1-heinrich.schuchardt@canonical.com>
+References: <20260225131051.60535-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] scripts: add checkkconfigsymbols.py
+Message-Id: <177317553177.23044.13934087148494771194.b4-ty@konsulko.com>
+Date: Tue, 10 Mar 2026 14:45:31 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,17 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Feb 2026 14:03:12 +0100, Heinrich Schuchardt wrote:
+On Wed, 25 Feb 2026 14:10:51 +0100, Heinrich Schuchardt wrote:
 
-> * The symbol for the x86 architecture is CONFIG_X86 and not CONFIG_x86.
-> * Correct the description. The partition type is called MBR.
+> Add checkkconfigsymbols.py from Linux 7.0-rc1 (unchanged since v6.2).
+> This tool allows to identify the usage of symbols that are not defined
+> in Kconfig.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] disk: fix DOS_PARTITION dependencies
-      commit: 04e96eb693cdb26204143629c56d45a353390a75
+[1/1] scripts: add checkkconfigsymbols.py
+      commit: 5578bcebd7bd2408aa873a69c75a712d04d198e0
 -- 
 Tom
 
