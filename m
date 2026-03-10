@@ -4,107 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4AFEB1076
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 21:23:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07E51FD88C3
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 22:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCB3584090;
-	Tue, 10 Mar 2026 22:23:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D68283FBC;
+	Tue, 10 Mar 2026 23:06:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="TqybGocw";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="T1p+23Tg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AAAB8409A; Tue, 10 Mar 2026 22:22:59 +0100 (CET)
-Received: from mail-dy1-x1333.google.com (mail-dy1-x1333.google.com
- [IPv6:2607:f8b0:4864:20::1333])
+ id 3705083FC1; Tue, 10 Mar 2026 23:06:36 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E516D84082
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 22:22:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9817E83FA4
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 23:06:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-dy1-x1333.google.com with SMTP id
- 5a478bee46e88-2be19f05d7dso229918eec.1
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 14:22:56 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773177775; cv=none;
- d=google.com; s=arc-20240605;
- b=Z2XSl66T8C8/t2BFrq8IATQHhSg9HjDj5nN5jvCXVnfLm5qZM9d9fk3ilYFngNSln3
- ri1OTj3LrDp6tqb2KRGm18OhOwup+ucLBFXR4qa0EBM9I2MHxaA/OYcroKoeY+xNe5RP
- 6iPP4VeaLgVZ8MgiblKEkZieXED7SQTYHpsKYxj3vfhQAHHW6jZ6iT67pRX7o7cU3HuM
- W2Dv2VYRjAf2SPqVCMZQ3GOAEwpIfDqHF8y7UcrsDKu74wBfz2mbL/7J0BMORvs4PsnN
- KlFaLzUQRNO4LhQtJCHGkFTDtPELYmdmHSQqzLaxzd2LYB4dBC4a3tOfF2DWRI5/VfKH
- FO0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=HhPyHhxYmfbey//ncJBNMA7VsC+Wd7FwqkKc4u/DdxI=;
- fh=SyDito5tKWqg8FYhyxmqZd8pgFOKwHAikQJ7nA3tb3c=;
- b=Fw8SEH27hbFs46as+FENDlatnpDulOoiAmqtjgFw2H6H4m8V9ueuBEYyvk9u7N4YSg
- nVDzoA/m1fPssoOFgv5L/xBQXEb4skv6I1QPaeGkQFTwW+Ju0K3pFtNLGZYwxYNs+LNi
- S1oP+xw3HaTftvyj8Bp27r2tqIsc/WyIpaZvDkAgL4d3w98T+UZuw6yqEFOv6CLdZkk7
- FqghDbZe4sJHsUwaktKcHTjmRrWXIbgsm5cFbx/ilwAz1S2Bbo1Z4VZi1QlrwMQRp1s6
- 0hKPiFwr0ECnjNsRje1YfD3cYqXb8/bFp3xr+EskTXkPmXWmIZB3CiSUBQbXYpZT8+Rl
- 0nnA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-358d80f60ccso7383090a91.3
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:06:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1773177775; x=1773782575;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HhPyHhxYmfbey//ncJBNMA7VsC+Wd7FwqkKc4u/DdxI=;
- b=TqybGocwdCFO+eMPm3GJ02bh5S4XZ6W8+ZDl9jvZFPvpQmLQg22JbsUyqe6IVo9D+4
- zm2jNMXz7UQyBAkATdCXfikyW6Wqu+cXh4ru/xe551pIfP4m0dpFxhPY5u9RYVAj0kOU
- Ot5mewSHaGZfdjlLZ9edydvbTC52W6aI1q5rE=
+ d=thingy.jp; s=google; t=1773180390; x=1773785190; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=r+T5GP83B2f/2lg++VGjyykxbfKzCSL83pbgwvMwDnE=;
+ b=T1p+23TgB7AtxOy4Sn9jo7Pqis6x2SfD+P2o9eGLkPbdgkiyvjFA6AR//it1sSbMx4
+ 5yI7QHJ4r8PszCu4eFcrkeC1XnZvC0dw8BbULCje/Cujsot8jZ9m7u7X+WrZvcAklOBy
+ O7zeDht7JGKUU4wtkPGGVBW6N5vvv/4d6/pOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773177775; x=1773782575;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HhPyHhxYmfbey//ncJBNMA7VsC+Wd7FwqkKc4u/DdxI=;
- b=hyy6Eku5T7HrLUJNtNIhrWSclmjUpVDHv7qCYuyhMCIRyRisePbqiQV7OQNWhnaID0
- qI7hmcHm/6vPoFIED3kM5Z6CDMVYpbFrfHE1jof1BIYENPjgkmQ7SnqgnHvbW17kZ28P
- CWAKV3J9sjCa7sTMTi0l56BBsTXTw+mHv2x2x2jmqlw6AUFdZrSojtkn9HZ48UjHFg4x
- jDOqvJFBWuSNThTn+U9ErNcglMEZ/FQ1ecVkP5i1m4FENNZEnXvYcGI4iBV+0W7UPsHT
- 4AUlobUhsSZdXfX0dsya8ezBU3+ifrWReJQNYqYCuQmeyOUcg8V4Hx82WDfaF+XJBynY
- lBPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWPmi63gtVnUL8Jp1RVJdlMG1Is1G/IjetsmLWCm65nKBTGPgq+6a6WhZ9cJHEFpsa/zY095mw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzAVBGj9igz6t9mlOBpBhynZxD+Nm2Ho4V9fyzX6Nfwc2xFvLkr
- Jae0Psy/IZ3d4NhWdZjcgYLW7xBDkqOpw23q8ozsFRprHPx7Y2G+8CYRFO9aSxxVQlnQrrKT344
- rccdpKHjeRjLzNP2KBSrCnn6kW+S/EIfh5sSJIh68Ug==
-X-Gm-Gg: ATEYQzxpe2YIPHbS2ikpPESogSD2M6U3Nv6l73VHL1d9jwdcmAiQmvC3AIpjL99SCGV
- 4x6DEo4PeLhyR4r/d46xhCMAJ3PnzhC0uhHyH6pjWbeLVB+7ejGA623rmu2IZDctIbg7v79UXkN
- HonCI1m6GPODQxxeygWokLPKf1qUlCk6EFf1WOrSZn1oMpYqk4AT2eUX2jkw8DPgs7orWFWmRlZ
- ab23BBvBADWxkeTVz1cAtalUGC6WSlk6QFMym4M0m7AWxrBb32wRPfKoRTHCMPIr5f5ouOAgN7j
- NLCodVRzZ/SeOb/qrQoUXFZHvKiQz2wMRsoW1Q==
-X-Received: by 2002:a05:7300:e607:b0:2be:e4b:60d2 with SMTP id
- 5a478bee46e88-2be8a20f82emr109515eec.4.1773177775101; Tue, 10 Mar 2026
- 14:22:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1773180390; x=1773785190;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r+T5GP83B2f/2lg++VGjyykxbfKzCSL83pbgwvMwDnE=;
+ b=iVPfO2vruTtkz0kIlBaGtkUAggIIepen7rpifL3UOEQn+C1Wy04Ww/TOLpeS9JcRjV
+ kRzZvwuwCgTwvtWfxNlUM09RAfYR9DRAVVbfpInYiFhGHY18eoA752/wlFLwkSYPTo4o
+ 9IQJPxno4VB1nAS5FdfMhLt6b6dhT0ck7HsvNZPd58tMW7gQHKyRl2KoXEJhvmxJa0/N
+ DNC5aati3yvhawY46vtr3az0Tm90Er1DnkUbWFfBQefsDenkJm2vyCDRdXRQn5cv+5RQ
+ VMX+5ato+Zd1tZmzHIonX4Gqb/24IvjoF/NACmd/zNg1EabdDr3yRaGFLWZImDlRtn90
+ 7QqA==
+X-Gm-Message-State: AOJu0YzAdn2imok6cYZndIDDnQ63MNDlaY9k2KzisQf6yFN17qzux49Y
+ pElOOF+OCbAkj6qw8XVCVrU3TtFwltGL2RmiKC+XCHg7nf/YCL+THwOe7W/K5TZvWA1Vh72WLXn
+ oWl60
+X-Gm-Gg: ATEYQzwocruEf1w7a+4t/BkLHHVjzgbCHdb5B0coFrC4Kgt2D4ig4gPIkBMqHZXvCsj
+ 9dLFwTw5Ek/TpgMFUnPb51BoH+MnsdB01xpwUf9CK256ZAhoLBkCkQnsAUWjBWHw0RZsxVNceP9
+ k9sCK7oey255njn6L/UwDM/jVELMbsTs34bZhQ0NdLJff3+cFLC+5+Fe0tWy9bf00f0CADJjpUr
+ 5q1JfYmfxKpPyEqRwXtiiYZlffdmDmPWoL4FuzzQ759gt7YkfL2GVKhPI6H29lDQqpqEKW7qrET
+ dTGLpy8TwoaazuNwU7tEYWQuKC5OV78W0LM//l2U3NYQk3r3PJUWfvO32rkO2hbxm19s0GGgsEE
+ IWPMdrm7ks7Q92MHruWOXJjJbNCeLGF2EDiwQFZaTZv536vdssEoaeg0Ph1CEox1qsD93VJEFQf
+ zrKWzIH5jjnvrkag==
+X-Received: by 2002:a17:90b:2fcf:b0:356:7b41:d348 with SMTP id
+ 98e67ed59e1d1-35a012df63bmr326495a91.20.1773180390467; 
+ Tue, 10 Mar 2026 15:06:30 -0700 (PDT)
+Received: from kinako ([2400:2200:2da:3879:3cf2:df32:3c60:892e])
+ by smtp.googlemail.com with ESMTPSA id
+ 98e67ed59e1d1-35a02fc845asm68040a91.11.2026.03.10.15.06.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 15:06:30 -0700 (PDT)
+From: Daniel Palmer <daniel@thingy.jp>
+To: u-boot@lists.denx.de
+Cc: Daniel Palmer <daniel@thingy.jp>
+Subject: [PATCH] fs: fat: Refactor dirty flag handling
+Date: Wed, 11 Mar 2026 07:06:18 +0900
+Message-ID: <20260310220619.1762455-1-daniel@thingy.jp>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20260309152251.70837-1-richard.genoud@bootlin.com>
- <20260309152251.70837-2-richard.genoud@bootlin.com>
-In-Reply-To: <20260309152251.70837-2-richard.genoud@bootlin.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 10 Mar 2026 22:22:42 +0100
-X-Gm-Features: AaiRm50IufYgHaIBDcK89Tp_-YFFnd56dl96Pi_QqyU4p-JGf0hYpGz_B1f4hcs
-Message-ID: <CAOf5uwmSd_0=-eq2fb2vWbZ7W+wo9_oOqp5BtppAutM=C6tk6A@mail.gmail.com>
-Subject: Re: [PATCH 1/4] mtd: rawnand: sunxi: Replace hard coded value by a
- define
-To: Richard Genoud <richard.genoud@bootlin.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- James Hilliard <james.hilliard1@gmail.com>, 
- Boris Brezillon <bbrezillon@kernel.org>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,332 +91,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Refactor the dirty flag handling a little bit so an inline
+function is called instead of directly stuffing a value into
+the variable.
 
-On Mon, Mar 9, 2026 at 4:23=E2=80=AFPM Richard Genoud
-<richard.genoud@bootlin.com> wrote:
->
-> The user data length (4) used all over the code hard coded.
-> And sometimes, it's not that trivial to know that it's the user data
-> length and not something else.
-> Moreover, for the H6/H616 this value is no more fixed by hardware, but
-> could be modified.
->
-> Using a define here makes the code more readable.
->
-> Suggested-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
-> ---
->  drivers/mtd/nand/raw/sunxi_nand.c     | 58 +++++++++++++--------------
->  drivers/mtd/nand/raw/sunxi_nand.h     |  3 ++
->  drivers/mtd/nand/raw/sunxi_nand_spl.c |  7 +++-
->  3 files changed, 38 insertions(+), 30 deletions(-)
->
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sun=
-xi_nand.c
-> index ef27a4b7a36a..91f7da2c5ce5 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.c
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-> @@ -772,7 +772,7 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_inf=
-o *mtd,
->                 return ret;
->
->         sunxi_nfc_reset_user_data_len(nfc);
-> -       sunxi_nfc_set_user_data_len(nfc, 4, 0);
-> +       sunxi_nfc_set_user_data_len(nfc, USER_DATA_SZ, 0);
->
->         sunxi_nfc_randomizer_enable(mtd);
->         writel(NFC_DATA_TRANS | NFC_DATA_SWAP_METHOD | NFC_ECC_OP,
-> @@ -783,7 +783,7 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_inf=
-o *mtd,
->         if (ret)
->                 return ret;
->
-> -       *cur_off =3D oob_off + ecc->bytes + 4;
-> +       *cur_off =3D oob_off + ecc->bytes + USER_DATA_SZ;
->
->         pattern_found =3D readl(nfc->regs + nfc->caps->reg_pat_found);
->         pattern_found =3D field_get(NFC_ECC_PAT_FOUND_MSK(nfc), pattern_f=
-ound);
-> @@ -794,7 +794,7 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_inf=
-o *mtd,
->                         pattern =3D 0x0;
->
->                 memset(data, pattern, ecc->size);
-> -               memset(oob, pattern, ecc->bytes + 4);
-> +               memset(oob, pattern, ecc->bytes + USER_DATA_SZ);
->
->                 return 1;
->         }
-> @@ -804,7 +804,7 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_inf=
-o *mtd,
->         memcpy_fromio(data, nfc->regs + NFC_RAM0_BASE, ecc->size);
->
->         nand->cmdfunc(mtd, NAND_CMD_RNDOUT, oob_off, -1);
-> -       sunxi_nfc_randomizer_read_buf(mtd, oob, ecc->bytes + 4, true, pag=
-e);
-> +       sunxi_nfc_randomizer_read_buf(mtd, oob, ecc->bytes + USER_DATA_SZ=
-, true, page);
->
->         status =3D readl(nfc->regs + NFC_REG_ECC_ST);
->         if (status & NFC_ECC_ERR(0)) {
-> @@ -816,17 +816,17 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_i=
-nfo *mtd,
->                         nand->cmdfunc(mtd, NAND_CMD_RNDOUT, data_off, -1)=
-;
->                         nand->read_buf(mtd, data, ecc->size);
->                         nand->cmdfunc(mtd, NAND_CMD_RNDOUT, oob_off, -1);
-> -                       nand->read_buf(mtd, oob, ecc->bytes + 4);
-> +                       nand->read_buf(mtd, oob, ecc->bytes + USER_DATA_S=
-Z);
->                 }
->
->                 ret =3D nand_check_erased_ecc_chunk(data, ecc->size,
-> -                                                 oob, ecc->bytes + 4,
-> +                                                 oob, ecc->bytes + USER_=
-DATA_SZ,
->                                                   NULL, 0, ecc->strength)=
-;
->                 if (ret >=3D 0)
->                         raw_mode =3D 1;
->         } else {
->                 /*
-> -                * The engine protects 4 bytes of OOB data per chunk.
-> +                * The engine protects USER_DATA_SZ bytes of OOB data per=
- chunk.
->                  * Retrieve the corrected OOB bytes.
->                  */
->                 sunxi_nfc_user_data_to_buf(readl(nfc->regs +
-> @@ -854,7 +854,7 @@ static void sunxi_nfc_hw_ecc_read_extra_oob(struct mt=
-d_info *mtd,
->  {
->         struct nand_chip *nand =3D mtd_to_nand(mtd);
->         struct nand_ecc_ctrl *ecc =3D &nand->ecc;
-> -       int offset =3D ((ecc->bytes + 4) * ecc->steps);
-> +       int offset =3D ((ecc->bytes + USER_DATA_SZ) * ecc->steps);
->         int len =3D mtd->oobsize - offset;
->
->         if (len <=3D 0)
-> @@ -896,9 +896,9 @@ static int sunxi_nfc_hw_ecc_write_chunk(struct mtd_in=
-fo *mtd,
->
->         /* Fill OOB data in */
->         if ((nand->options & NAND_NEED_SCRAMBLING) && bbm) {
-> -               u8 user_data[4];
-> +               u8 user_data[USER_DATA_SZ];
->
-> -               memcpy(user_data, oob, 4);
-> +               memcpy(user_data, oob, USER_DATA_SZ);
->                 sunxi_nfc_randomize_bbm(mtd, page, user_data);
->                 writel(sunxi_nfc_buf_to_user_data(user_data),
->                        nfc->regs + NFC_REG_USER_DATA(nfc, 0));
-> @@ -915,7 +915,7 @@ static int sunxi_nfc_hw_ecc_write_chunk(struct mtd_in=
-fo *mtd,
->                 return ret;
->
->         sunxi_nfc_reset_user_data_len(nfc);
-> -       sunxi_nfc_set_user_data_len(nfc, 4, 0);
-> +       sunxi_nfc_set_user_data_len(nfc, USER_DATA_SZ, 0);
->
->         sunxi_nfc_randomizer_enable(mtd);
->         writel(NFC_DATA_TRANS | NFC_DATA_SWAP_METHOD |
-> @@ -927,7 +927,7 @@ static int sunxi_nfc_hw_ecc_write_chunk(struct mtd_in=
-fo *mtd,
->         if (ret)
->                 return ret;
->
-> -       *cur_off =3D oob_off + ecc->bytes + 4;
-> +       *cur_off =3D oob_off + ecc->bytes + USER_DATA_SZ;
->
->         return 0;
->  }
-> @@ -938,7 +938,7 @@ static void sunxi_nfc_hw_ecc_write_extra_oob(struct m=
-td_info *mtd,
->  {
->         struct nand_chip *nand =3D mtd_to_nand(mtd);
->         struct nand_ecc_ctrl *ecc =3D &nand->ecc;
-> -       int offset =3D ((ecc->bytes + 4) * ecc->steps);
-> +       int offset =3D ((ecc->bytes + USER_DATA_SZ) * ecc->steps);
->         int len =3D mtd->oobsize - offset;
->
->         if (len <=3D 0)
-> @@ -966,7 +966,7 @@ static int sunxi_nfc_hw_ecc_read_page(struct mtd_info=
- *mtd,
->
->         for (i =3D 0; i < ecc->steps; i++) {
->                 int data_off =3D i * ecc->size;
-> -               int oob_off =3D i * (ecc->bytes + 4);
-> +               int oob_off =3D i * (ecc->bytes + USER_DATA_SZ);
->                 u8 *data =3D buf + data_off;
->                 u8 *oob =3D chip->oob_poi + oob_off;
->
-> @@ -1004,7 +1004,7 @@ static int sunxi_nfc_hw_ecc_read_subpage(struct mtd=
-_info *mtd,
->         for (i =3D data_offs / ecc->size;
->              i < DIV_ROUND_UP(data_offs + readlen, ecc->size); i++) {
->                 int data_off =3D i * ecc->size;
-> -               int oob_off =3D i * (ecc->bytes + 4);
-> +               int oob_off =3D i * (ecc->bytes + USER_DATA_SZ);
->                 u8 *data =3D bufpoi + data_off;
->                 u8 *oob =3D chip->oob_poi + oob_off;
->
-> @@ -1032,7 +1032,7 @@ static int sunxi_nfc_hw_ecc_write_page(struct mtd_i=
-nfo *mtd,
->
->         for (i =3D 0; i < ecc->steps; i++) {
->                 int data_off =3D i * ecc->size;
-> -               int oob_off =3D i * (ecc->bytes + 4);
-> +               int oob_off =3D i * (ecc->bytes + USER_DATA_SZ);
->                 const u8 *data =3D buf + data_off;
->                 const u8 *oob =3D chip->oob_poi + oob_off;
->
-> @@ -1066,7 +1066,7 @@ static int sunxi_nfc_hw_ecc_write_subpage(struct mt=
-d_info *mtd,
->         for (i =3D data_offs / ecc->size;
->              i < DIV_ROUND_UP(data_offs + data_len, ecc->size); i++) {
->                 int data_off =3D i * ecc->size;
-> -               int oob_off =3D i * (ecc->bytes + 4);
-> +               int oob_off =3D i * (ecc->bytes + USER_DATA_SZ);
->                 const u8 *data =3D buf + data_off;
->                 const u8 *oob =3D chip->oob_poi + oob_off;
->
-> @@ -1095,10 +1095,10 @@ static int sunxi_nfc_hw_syndrome_ecc_read_page(st=
-ruct mtd_info *mtd,
->         sunxi_nfc_hw_ecc_enable(mtd);
->
->         for (i =3D 0; i < ecc->steps; i++) {
-> -               int data_off =3D i * (ecc->size + ecc->bytes + 4);
-> +               int data_off =3D i * (ecc->size + ecc->bytes + USER_DATA_=
-SZ);
->                 int oob_off =3D data_off + ecc->size;
->                 u8 *data =3D buf + (i * ecc->size);
-> -               u8 *oob =3D chip->oob_poi + (i * (ecc->bytes + 4));
-> +               u8 *oob =3D chip->oob_poi + (i * (ecc->bytes + USER_DATA_=
-SZ));
->
->                 ret =3D sunxi_nfc_hw_ecc_read_chunk(mtd, data, data_off, =
-oob,
->                                                   oob_off, &cur_off,
-> @@ -1129,10 +1129,10 @@ static int sunxi_nfc_hw_syndrome_ecc_write_page(s=
-truct mtd_info *mtd,
->         sunxi_nfc_hw_ecc_enable(mtd);
->
->         for (i =3D 0; i < ecc->steps; i++) {
-> -               int data_off =3D i * (ecc->size + ecc->bytes + 4);
-> +               int data_off =3D i * (ecc->size + ecc->bytes + USER_DATA_=
-SZ);
->                 int oob_off =3D data_off + ecc->size;
->                 const u8 *data =3D buf + (i * ecc->size);
-> -               const u8 *oob =3D chip->oob_poi + (i * (ecc->bytes + 4));
-> +               const u8 *oob =3D chip->oob_poi + (i * (ecc->bytes + USER=
-_DATA_SZ));
->
->                 ret =3D sunxi_nfc_hw_ecc_write_chunk(mtd, data, data_off,
->                                                    oob, oob_off, &cur_off=
-,
-> @@ -1390,7 +1390,7 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struc=
-t mtd_info *mtd,
->         layout =3D &data->layout;
->         nsectors =3D mtd->writesize / ecc->size;
->
-> -       if (mtd->oobsize < ((ecc->bytes + 4) * nsectors)) {
-> +       if (mtd->oobsize < ((ecc->bytes + USER_DATA_SZ) * nsectors)) {
->                 ret =3D -EINVAL;
->                 goto err;
->         }
-> @@ -1440,14 +1440,14 @@ static int sunxi_nand_hw_ecc_ctrl_init(struct mtd=
-_info *mtd,
->                                 layout->oobfree[i - 1].offset +
->                                 layout->oobfree[i - 1].length +
->                                 ecc->bytes;
-> -                       layout->oobfree[i].length =3D 4;
-> +                       layout->oobfree[i].length =3D USER_DATA_SZ;
->                 } else {
->                         /*
->                          * The first 2 bytes are used for BB markers, hen=
-ce we
-> -                        * only have 2 bytes available in the first user =
-data
-> -                        * section.
-> +                        * only have USER_DATA_SZ - 2 bytes available in =
-the
-> +                        * first user data section.
->                          */
-> -                       layout->oobfree[i].length =3D 2;
-> +                       layout->oobfree[i].length =3D USER_DATA_SZ - 2;
->                         layout->oobfree[i].offset =3D 2;
->                 }
->
-> @@ -1457,13 +1457,13 @@ static int sunxi_nand_hw_ecc_ctrl_init(struct mtd=
-_info *mtd,
->                                         layout->oobfree[i].length + j;
->         }
->
-> -       if (mtd->oobsize > (ecc->bytes + 4) * nsectors) {
-> +       if (mtd->oobsize > (ecc->bytes + USER_DATA_SZ) * nsectors) {
->                 layout->oobfree[nsectors].offset =3D
->                                 layout->oobfree[nsectors - 1].offset +
->                                 layout->oobfree[nsectors - 1].length +
->                                 ecc->bytes;
->                 layout->oobfree[nsectors].length =3D mtd->oobsize -
-> -                               ((ecc->bytes + 4) * nsectors);
-> +                               ((ecc->bytes + USER_DATA_SZ) * nsectors);
->         }
->
->         return 0;
-> @@ -1481,7 +1481,7 @@ static int sunxi_nand_hw_syndrome_ecc_ctrl_init(str=
-uct mtd_info *mtd,
->         if (ret)
->                 return ret;
->
-> -       ecc->prepad =3D 4;
-> +       ecc->prepad =3D USER_DATA_SZ;
->         ecc->read_page =3D sunxi_nfc_hw_syndrome_ecc_read_page;
->         ecc->write_page =3D sunxi_nfc_hw_syndrome_ecc_write_page;
->
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sun=
-xi_nand.h
-> index 6ee3ea14ee17..d7a8b3dd40c3 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.h
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-> @@ -181,6 +181,9 @@
->
->  #define NFC_MAX_CS             7
->
-> +/* On A10, the user data length register is 4 bytes */
-> +#define USER_DATA_SZ 4
-> +
->  /*
->   * NAND Controller capabilities structure: stores NAND controller capabi=
-lities
->   * for distinction between compatible strings.
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw=
-/sunxi_nand_spl.c
-> index 67f7d22ed2c8..3a5271b49c36 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
-> +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-> @@ -269,6 +269,11 @@ static void sunxi_nfc_set_user_data_len(const struct=
- nfc_config *nfc,
->         writel_nfc(val, NFC_REG_USER_DATA_LEN(nfc, step));
->  }
->
-> +/*
-> + * Values in this table are obtained by doing:
-> + * DIV_ROUND_UP(info->ecc_strength * 14, 8) + USER_DATA_SZ
-> + * So it's the number of bytes needed for ECC + user data for one step.
-> + */
->  #if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
->  static const int ecc_bytes[] =3D {
->         32, 46, 54, 60, 74, 82, 88, 96, 102, 110, 116, 124, 130, 138, 144
-> @@ -338,7 +343,7 @@ static int nand_read_page(const struct nfc_config *co=
-nf, u32 offs,
->                 nand_change_column(oob_off);
->
->                 sunxi_nfc_reset_user_data_len(conf);
-> -               sunxi_nfc_set_user_data_len(conf, 4, 0);
-> +               sunxi_nfc_set_user_data_len(conf, USER_DATA_SZ, 0);
->
->                 nand_exec_cmd(NFC_DATA_TRANS | NFC_ECC_OP);
->                 /* Get the ECC status */
+This allows variable that holds the flag to be completely removed
+if its not used i.e. CONFIG_FAT_WIRTE=n
 
-Reviwed-By: Michael Trimarchi <michael@amarulasolutions.com>
+Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+---
+ fs/fat/fat.c       |  2 +-
+ fs/fat/fat_write.c |  9 ++++-----
+ include/fat.h      | 26 ++++++++++++++++++++++++++
+ 3 files changed, 31 insertions(+), 6 deletions(-)
+
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index 9ce5df59f9ba..1f05533a3781 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -690,7 +690,7 @@ static int get_fs_info(fsdata *mydata)
+ 	}
+ 
+ 	mydata->fatbufnum = -1;
+-	mydata->fat_dirty = 0;
++	fat_mark_clean(mydata);
+ 	mydata->fatbuf = malloc_cache_aligned(FATBUFSIZE);
+ 	if (mydata->fatbuf == NULL) {
+ 		debug("Error: allocating memory\n");
+diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
+index 0b924541187c..e1b5b32bfcbf 100644
+--- a/fs/fat/fat_write.c
++++ b/fs/fat/fat_write.c
+@@ -223,9 +223,9 @@ static int flush_dirty_fat_buffer(fsdata *mydata)
+ 	__u32 startblock = mydata->fatbufnum * FATBUFBLOCKS;
+ 
+ 	debug("debug: evicting %d, dirty: %d\n", mydata->fatbufnum,
+-	      (int)mydata->fat_dirty);
++	      (int)fat_is_dirty(mydata));
+ 
+-	if ((!mydata->fat_dirty) || (mydata->fatbufnum == -1))
++	if (!fat_is_dirty(mydata) || (mydata->fatbufnum == -1))
+ 		return 0;
+ 
+ 	/* Cap length if fatlength is not a multiple of FATBUFBLOCKS */
+@@ -248,7 +248,7 @@ static int flush_dirty_fat_buffer(fsdata *mydata)
+ 			return -1;
+ 		}
+ 	}
+-	mydata->fat_dirty = 0;
++	fat_mark_clean(mydata);
+ 
+ 	return 0;
+ }
+@@ -484,8 +484,7 @@ static int set_fatent_value(fsdata *mydata, __u32 entry, __u32 entry_value)
+ 		mydata->fatbufnum = bufnum;
+ 	}
+ 
+-	/* Mark as dirty */
+-	mydata->fat_dirty = 1;
++	fat_mark_dirty(mydata);
+ 
+ 	/* Set the actual entry */
+ 	switch (mydata->fatsize) {
+diff --git a/include/fat.h b/include/fat.h
+index bdf430f70675..40da0370a444 100644
+--- a/include/fat.h
++++ b/include/fat.h
+@@ -165,7 +165,9 @@ typedef struct {
+ 	int	fatsize;	/* Size of FAT in bits */
+ 	__u32	fatlength;	/* Length of FAT in sectors */
+ 	__u16	fat_sect;	/* Starting sector of the FAT */
++#ifdef CONFIG_FAT_WRITE
+ 	__u8	fat_dirty;      /* Set if fatbuf has been modified */
++#endif
+ 	__u32	rootdir_sect;	/* Start sector of root directory */
+ 	__u16	sect_size;	/* Size of sectors in bytes */
+ 	__u16	clust_size;	/* Size of clusters in sectors */
+@@ -190,6 +192,30 @@ static inline u32 sect_to_clust(fsdata *fsdata, int sect)
+ 	return (sect - fsdata->data_begin) / fsdata->clust_size;
+ }
+ 
++static inline void fat_mark_clean(fsdata *fsdata)
++{
++#ifdef CONFIG_FAT_WRITE
++	fsdata->fat_dirty = 0;
++#endif
++}
++
++static inline void fat_mark_dirty(fsdata *fsdata)
++{
++#ifdef CONFIG_FAT_WRITE
++	fsdata->fat_dirty = 1;
++#endif
++}
++
++static inline bool fat_is_dirty(fsdata *fsdata)
++{
++#ifdef CONFIG_FAT_WRITE
++	if (fsdata->fat_dirty)
++		return true;
++#endif
++
++	return false;
++}
++
+ int file_fat_detectfs(void);
+ int fat_exists(const char *filename);
+ int fat_size(const char *filename, loff_t *size);
+-- 
+2.51.0
+
