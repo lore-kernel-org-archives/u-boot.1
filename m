@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56623FCC9DB
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 08:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC1B0FCC9DB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 08:36:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7D5683F6D;
-	Tue, 10 Mar 2026 09:36:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1305083F9B;
+	Tue, 10 Mar 2026 09:36:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RGKr3l7G";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q6A+Ujcy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 576F5839DF; Tue, 10 Mar 2026 06:58:53 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 20ABE839DF; Tue, 10 Mar 2026 07:08:00 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C9F883952
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 06:58:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1DC683952
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 07:07:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=visitorckw@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2ae82df847bso25121025ad.2
- for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 22:58:51 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-354a18c48b5so11314019a91.1
+ for <u-boot@lists.denx.de>; Mon, 09 Mar 2026 23:07:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773122329; x=1773727129; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1773122876; x=1773727676; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mmJVCULRcGXTptwj3/adQjG/XHnW/6RVpQs0quSGz0I=;
- b=RGKr3l7G9RdDEEKewnN0VDfsP/CVD0ujvonS7XT5jbKmIyBpwKzqUthOOYqLoBDBhB
- yJlco7Ye6Z9n4XyWHpwhuoypR6A0WqeUVJNTVsHXyHurkyJme7qHw9ze2r4ns3SidLa8
- 3qVNlJg3LeABEIiybL/ALSsnVyfbcqELJx14qe0NLxXs/mmKpBcICBI9LJm+M1x2uOYY
- 0uAP9p6uA4P6Rj2VUGdjlq1HtLbGZlVPN0u37Rfd3m15euMZKayWuZ82B2lEt6QItFlg
- g9jp3nxti/vIQ4A+IqKS0RiGkZmAfqe2DwrkNnQ3gGMTimYytGN1H6uPnAMupmje56/U
- tfrA==
+ bh=KYgLntiLiPRNUFobVL0qHTFFWccyJL+WpZWs936/9sU=;
+ b=Q6A+Ujcyp/AuH9NLKvYLLeHPAkt4HXj2BF6fx3mglzPZpFHe7wO+FF8qtQzrfN2Bd4
+ ZkzThiEM786okVkwLx3GoJ1APOMCMznIU8pPO17O9Q+q3T/ucGTv59tYfi2MHemRkdHb
+ kkRhafOBO60jEMNHeLEs2OT/qzBN1b3rj1fOmfHcWRIIhTTJ/b3qNSav8ryDljMyYi4J
+ NPsg0+AJRbIKW3S6l5uFTvT2gAcx7yMQZBkb6aWvQ2dvyt+cJs1T8DRvn0WmacBQD/UO
+ m3cAQa3IFr5W1gpaPZM/rTD4TUOv+jmE7YaxO1EMTN1fhfHzYetEJ15lDK+H4nvw1mut
+ JPRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773122329; x=1773727129;
+ d=1e100.net; s=20230601; t=1773122876; x=1773727676;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mmJVCULRcGXTptwj3/adQjG/XHnW/6RVpQs0quSGz0I=;
- b=dibP9v70scKBCztT1vtWr2wEZF/MODG172Wz7Ru+rt6Ic1lMQn9CsAQMDsQ1gCqufk
- 4D5UHkgMJ406r/sieaF+Pzsgzw4xvdPW2G0BaYAFDBv6CPX35UST/g3WSPI1PPyHlCfG
- 4p4qAOcxMa+lmchd9QedNS5jOVbkOasu5xr9JoyUAbb4UaOKrR61rK4N8gRPK5EyFgFZ
- hLeOPv0ZxO4N5cDEtRztJtp3xIjLfT0MpyLMlcBcbyKfQrSIyfDxPixQr+OAEH60QTej
- F+dNl4+jVhN8/bWJx2FRUBMbM2xaCXEH/zXafsy9lX+i8hoW+ajqLKSbU5T9xjnvme4+
- 1XFQ==
-X-Gm-Message-State: AOJu0YzDtERgik3pfZrms8TABWreZi2HJ1E7wO+NzbHiIw7qWtsTLFMT
- xCEhg0gWWCjehtrCsl1c9cXo6KyuWATOiJWwS3AFHDga5l8+0gASF/rT
-X-Gm-Gg: ATEYQzwWPw24erOG9uYbhAbOXXIHrL5fopU4sPDVmauOHLi5aKRK2Ia2ZD8+7ZhKvRh
- I9RnAW8Vm7xlSrxJte0FFL8iWB1pxkZCt0NUeJIcjXV/nnAVZZrZYgOMlxwONLVAekzAAXhNV2g
- pXkKQP4dCgZtv1ajXzuCjCOEAC/euWQaU++fkS9v//SErDuWKWfS81YQyr34V/i2EXV0ddirLF5
- ityQDbknUYuKQ3jJ/ERSmmQ6qQbyiBXImDaiI0oXE39Q/cWI8vWyF1UgZsbS1e+jHTv1WKN+wZe
- cDQEfVcATGKeWghcslP6XyHZSiq73uFnID+/J+y4ytld79vKXLnO4l77f20G3hWyAu1qgsNxuRQ
- McOTDiz5GZp4ugLDOKlUpormvBc1DYn7xDBBg+1h+xeUJ1GyqkEc31d9LTmENpfzTdSp9WyxTnO
- lExypel2405g/qN+rQ5u662mgAUrpM4ZBij2YDQfsH
-X-Received: by 2002:a17:903:234a:b0:2ae:5a28:cbac with SMTP id
- d9443c01a7336-2ae824f46f7mr123358045ad.32.1773122329432; 
- Mon, 09 Mar 2026 22:58:49 -0700 (PDT)
+ bh=KYgLntiLiPRNUFobVL0qHTFFWccyJL+WpZWs936/9sU=;
+ b=g4FwqffSxYNnvnieIF9wRl2+wVjoqEZrsW8WV42bEE/ko1NnlkwqDJZDpW/3OSxeVS
+ oR4aq34Kcv7wQYKW6VRXbqJFadI6/ll8psdlgmODGfwgYTLQdWei0lt9vFvo9IRMBMDv
+ 3z+VWM1isveBMErfz9k32xMBhTZjUjjHnCsJd0GSA6bFMwb+wfYZjTkhsQxbwX5SZlTH
+ OEj0XPhQ95au3X+aAeAaJZN4FtXVwZGwWFR3a0HsqMVCiKaTIMa9sSVYLEjiwwxJeCkR
+ FLscNypkfJG6RgQOI2CB192fMhMCKMJY4pRVAJ2tx6cp3sEA5BpULidm4zvoQ5HU9vOo
+ fkYg==
+X-Gm-Message-State: AOJu0YxyGUjn6OAwyGFfaUIm8Mo+7HYp/UYDbOXqupeTxhphd7BKncWU
+ l1w6SZFH/9YcQR1OWf/PQzmcZIm6KVH05Q7tyokGh9wDj39qb4xA1P3X
+X-Gm-Gg: ATEYQzzTukyEzC+7CSekRdBCvF0YNM16/6FVwwWgGTZGpgcq9j8eaCOgF+XhA9lZYTW
+ iFORPX2YBxA21OP0fTXwynuctfs5FZPWSeXt8OHuWvWV5HGw5QlOCZo+cX3f04E6C5cSIZSH+AB
+ XsSyQgXk+K7kYJLQaLDeXUNHjqK089tmjYm55FcFBu22sC/dXAMup30m4a53yeCeeS/s1ifh0N/
+ IqCv/8ASgozNDQGBdoAC5tpXslfkW6hCXjvhsXoqs6DMDG2ct+s6IMnUmlKh3jKZxx2x7FUqzTn
+ WJXtCq8HfMzRmuSugPTUTfx1Qnb6dhIgEDtOPCcX1MI5qJwvf8gr21u92oe+MfQSDHYNEhgP0gn
+ ufbczusvfyCWZAS0/80Ys4JKE+Ty5MhtT65yOB6zNzCo+oKSm5jm/OJKhehFGI0I0EWhY2Mk4Ka
+ NEKr0Bg+X2OgAF1wzU3ghSKEpg4qnjvA==
+X-Received: by 2002:a17:90b:2884:b0:354:a57c:65ec with SMTP id
+ 98e67ed59e1d1-359be3075femr11632485a91.20.1773122876276; 
+ Mon, 09 Mar 2026 23:07:56 -0700 (PDT)
 Received: from google.com ([2401:fa00:95:201:16a4:8f0d:6d1:8d9d])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ae83e58592sm187652545ad.14.2026.03.09.22.58.48
+ 98e67ed59e1d1-359bcbc6fe9sm4973433a91.12.2026.03.09.23.07.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 22:58:49 -0700 (PDT)
-Date: Tue, 10 Mar 2026 13:58:43 +0800
+ Mon, 09 Mar 2026 23:07:55 -0700 (PDT)
+Date: Tue, 10 Mar 2026 14:07:53 +0800
 From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: Daniel Palmer <daniel@0x0f.com>
-Cc: u-boot@lists.denx.de, Angelo Dureghello <angelo@kernel-space.org>
-Subject: Re: [PATCH v2 2/3] m68k: m680x0: Initialise the debug uart
-Message-ID: <aa-zE7bNzY8wguoi@google.com>
+To: Daniel Palmer <daniel@0x0f.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] serial: goldfish: Add debug uart support
+Message-ID: <aa-1OYXTCbsYImgr@google.com>
 References: <20260309105110.672832-1-daniel@0x0f.com>
- <20260309105110.672832-2-daniel@0x0f.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260309105110.672832-2-daniel@0x0f.com>
+In-Reply-To: <20260309105110.672832-1-daniel@0x0f.com>
 X-Mailman-Approved-At: Tue, 10 Mar 2026 09:36:34 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,33 +97,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Cc Angelo since this touches arch/m68k/
-
-On Mon, Mar 09, 2026 at 07:51:09PM +0900, Daniel Palmer wrote:
-> Once the stack is ready we can init the debug uart to help
-> with debugging so do that.
+On Mon, Mar 09, 2026 at 07:51:08PM +0900, Daniel Palmer wrote:
+> Add debug support for the goldfish tty so it can be used for
+> early debugging. This will be really useful when adding support
+> for relocation to the m68k qemu virt machine.
 > 
 > Signed-off-by: Daniel Palmer <daniel@0x0f.com>
 > ---
->  arch/m68k/cpu/m680x0/start.S | 5 +++++
->  1 file changed, 5 insertions(+)
-> 
-> diff --git a/arch/m68k/cpu/m680x0/start.S b/arch/m68k/cpu/m680x0/start.S
-> index 0802ca1fca2c..fdfcd66f7785 100644
-> --- a/arch/m68k/cpu/m680x0/start.S
-> +++ b/arch/m68k/cpu/m680x0/start.S
-> @@ -42,6 +42,11 @@ ENTRY(_start)
->  	/* Setup initial stack pointer */
->  	move.l	#CFG_SYS_INIT_SP_ADDR, %sp
->  
-> +	/* Setup the debug uart if enabled */
-> +#ifdef CONFIG_DEBUG_UART
-> +	bsr.l	debug_uart_init
-> +#endif
-> +
->  	/*
->  	 * Allocate Global Data (GD)
->  	 * board_init_f_alloc_reserve(top) returns the new top of stack in %d0
-> -- 
-> 2.51.0
-> 
+>  drivers/serial/Kconfig           |  8 ++++++++
+>  drivers/serial/serial_goldfish.c | 18 ++++++++++++++++++
+>  2 files changed, 26 insertions(+)
+
+For the series:
+
+Reviewed-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+Tested-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+
+Hi Tom,
+Would you take this patchset directly, or would you prefer a pull
+request?
+
+Regards,
+Kuan-Wei
