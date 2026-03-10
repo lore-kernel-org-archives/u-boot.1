@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6614CEB1056
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2081EB1056
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 14:13:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9241684034;
-	Tue, 10 Mar 2026 15:13:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 381ED8407E;
+	Tue, 10 Mar 2026 15:13:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="Kz0vj3np";
+	dkim=pass (2048-bit key; unprotected) header.d=free.fr header.i=@free.fr header.b="tLxYtJVY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECCEA8403D; Tue, 10 Mar 2026 15:13:19 +0100 (CET)
-Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [IPv6:2a01:e0c:1:1599::14])
+ id 4287884065; Tue, 10 Mar 2026 15:13:27 +0100 (CET)
+Received: from smtp5-g21.free.fr (smtp5-g21.free.fr [212.27.42.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1B8A84027
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:13:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0C7C84057
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 15:13:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=free.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vjardin@free.fr
 Received: from localhost.localdomain (unknown [213.36.7.12])
  (Authenticated sender: vjardin@free.fr)
- by smtp5-g21.free.fr (Postfix) with ESMTPSA id A13B15FFA3;
- Tue, 10 Mar 2026 15:13:10 +0100 (CET)
+ by smtp5-g21.free.fr (Postfix) with ESMTPSA id B68A85FFB1;
+ Tue, 10 Mar 2026 15:13:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=free.fr;
- s=smtp-20201208; t=1773151997;
- bh=4psSDLUuNkb2ML7ueqBA7Z6cOaVu/maMz/GIkUbxdsU=;
+ s=smtp-20201208; t=1773152004;
+ bh=Qqi+mefRUM1GpSOIOYfOBRH9S0fLmhAqk1xQ4rjq99A=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Kz0vj3npw3J5LO4yTDA3MwSOICYb78bLgWgd87T9NurBv8o5HCxXnZi2rzB8XSpyQ
- 0tsCyUcRlCjZZV3folabJqGimbAR7v1BGl8DqkItg0YRPJqOKGqOUsp6usiR9j07ZM
- r35P+LlFupm0QEPMc3MlGA0dntBWKx8j3Wauy4FEKIl3dzKR09lE5EbK2p6SxPkQLa
- 7G1ZcQGhz+h7Bd+WxevnFdA0BYpUwF3bJgHZ6pdSkJsZS7giukJeOi6vkGlaFB3KgY
- 77vycWN0iFzuQ9Qi6/xQh1gjTD+weOKhqutrGI7kvrO1aGB8eEc7HE5+ivn01XNoZ2
- r3uJFvo4sPjkw==
+ b=tLxYtJVYMRxQm5FrR5rrZfjXgJKtZ8wevQVT+eoGsGrqxLa9MMsM6KjbEK5x173C/
+ NuQVmMTrBAn11X/TH8tcf+KXzbLaHSFZ4Rn80L4sGaDsG1kExexylk1uENRpyRqOd2
+ x9cAK+Q9UYRtFDANHqp3uLtXj2GQZmV6MvXpKAScjfJZInH9Q2PcpVk3yQEdT/BHeC
+ fVo3aMCn3QDg/HFzIp2HNsGCvDxU/qWngLQKWRMh9djadW4HCHvFBQIJyOkHb7l8eX
+ qU7ijRwIXe5/qqgvrqxQ+Hvrk9w2i8dO6DsCFa/ckD73nPYEd4ecm1pHQ0ll1g/WVB
+ P0IT+uz23HAVA==
 From: Vincent Jardin <vjardin@free.fr>
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <stefan.roese@mailbox.org>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  vjardin@free.fr
-Subject: [PATCH v1 1/5] arm: mach-mvebu: armada8k: add CPU and clock info
- display
-Date: Tue, 10 Mar 2026 15:12:48 +0100
-Message-ID: <d4e9220a405991b401071241ae82d8fded18bd1a.1773151972.git.vjardin@free.fr>
+Subject: [PATCH v1 2/5] board: freebox: add Nodebox 10G board support
+Date: Tue, 10 Mar 2026 15:12:49 +0100
+Message-ID: <b5c6df1729a7bbb7619242b926ef5695d6f6fc48.1773151972.git.vjardin@free.fr>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1773151972.git.vjardin@free.fr>
 References: <cover.1773151972.git.vjardin@free.fr>
@@ -68,278 +67,573 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add CPU information display for Armada 8040 platforms.
+Add board support for the Freebox Nodebox 10G based on the Marvell
+Armada 8040 SoC. This board features:
 
-The soc_info.c reads the AP806 Sample-At-Reset (SAR) register to
-determine the PLL clock configuration and converts it to actual
-CPU, DDR, and Fabric frequencies using the PLL frequency table.
-It also reports LLC (Last Level Cache) status.
+- Quad-core ARMv8 AP806 with dual CP110 companions
+- eMMC storage via Xenon SDHCI controller
+- 1G SGMII and 10G SFI Ethernet on CP0 and CP1
+- I2C buses for peripheral access
+- NS16550 UART console at 115200 baud
 
-Based on soc_info.c from Marvell's U-Boot 2015.01 vendor tree.
+The implementation includes:
+- Device tree for the Nodebox 10G hardware
+- Dedicated board directory (board/freebox/nbx10g/)
+- Board-specific Kconfig and defconfig
+- Management PHY reset via GPIO in board_late_init()
 
 Signed-off-by: Vincent Jardin <vjardin@free.fr>
 ---
- arch/arm/mach-mvebu/armada8k/Makefile   |   2 +-
- arch/arm/mach-mvebu/armada8k/cpu.c      |  10 ++
- arch/arm/mach-mvebu/armada8k/soc_info.c | 192 ++++++++++++++++++++++++
- arch/arm/mach-mvebu/armada8k/soc_info.h |  14 ++
- 4 files changed, 217 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.c
- create mode 100644 arch/arm/mach-mvebu/armada8k/soc_info.h
+ arch/arm/dts/Makefile               |   1 +
+ arch/arm/dts/armada-8040-nbx.dts    | 259 ++++++++++++++++++++++++++++
+ arch/arm/mach-mvebu/Kconfig         |   9 +
+ board/freebox/nbx10g/Kconfig        |  12 ++
+ board/freebox/nbx10g/MAINTAINERS    |  13 ++
+ board/freebox/nbx10g/Makefile       |   3 +
+ board/freebox/nbx10g/board.c        |  63 +++++++
+ configs/mvebu_nbx_88f8040_defconfig |  73 ++++++++
+ include/configs/nbx10g.h            |  29 ++++
+ 9 files changed, 462 insertions(+)
+ create mode 100644 arch/arm/dts/armada-8040-nbx.dts
+ create mode 100644 board/freebox/nbx10g/Kconfig
+ create mode 100644 board/freebox/nbx10g/MAINTAINERS
+ create mode 100644 board/freebox/nbx10g/Makefile
+ create mode 100644 board/freebox/nbx10g/board.c
+ create mode 100644 configs/mvebu_nbx_88f8040_defconfig
+ create mode 100644 include/configs/nbx10g.h
 
-diff --git a/arch/arm/mach-mvebu/armada8k/Makefile b/arch/arm/mach-mvebu/armada8k/Makefile
-index 0a4756717a3..723239d9894 100644
---- a/arch/arm/mach-mvebu/armada8k/Makefile
-+++ b/arch/arm/mach-mvebu/armada8k/Makefile
-@@ -2,4 +2,4 @@
- #
- # Copyright (C) 2016 Stefan Roese <sr@denx.de>
- 
--obj-y = cpu.o cache_llc.o dram.o
-+obj-y = cpu.o cache_llc.o dram.o soc_info.o
-diff --git a/arch/arm/mach-mvebu/armada8k/cpu.c b/arch/arm/mach-mvebu/armada8k/cpu.c
-index 3eb93c82387..22767f143c2 100644
---- a/arch/arm/mach-mvebu/armada8k/cpu.c
-+++ b/arch/arm/mach-mvebu/armada8k/cpu.c
-@@ -15,6 +15,8 @@
- #include <asm/armv8/mmu.h>
- #include <mach/fw_info.h>
- 
-+#include "soc_info.h"
-+
- /* Armada 7k/8k */
- #define MVEBU_RFU_BASE			(MVEBU_REGISTER(0x6f0000))
- #define RFU_GLOBAL_SW_RST		(MVEBU_RFU_BASE + 0x84)
-@@ -111,3 +113,11 @@ int mmc_get_env_dev(void)
- 
- 	return CONFIG_ENV_MMC_DEVICE_INDEX;
- }
-+
-+int print_cpuinfo(void)
-+{
-+	soc_print_clock_info();
-+	soc_print_soc_info();
-+
-+	return 0;
-+}
-diff --git a/arch/arm/mach-mvebu/armada8k/soc_info.c b/arch/arm/mach-mvebu/armada8k/soc_info.c
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 82ad3035308..1638d19e44d 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -180,6 +180,7 @@ dtb-$(CONFIG_ARCH_MVEBU) +=			\
+ 	armada-8040-clearfog-gt-8k.dtb		\
+ 	armada-8040-db.dtb			\
+ 	armada-8040-mcbin.dtb			\
++	armada-8040-nbx.dtb			\
+ 	armada-8040-puzzle-m801.dtb		\
+ 	cn9130-db-A.dtb				\
+ 	cn9130-db-B.dtb				\
+diff --git a/arch/arm/dts/armada-8040-nbx.dts b/arch/arm/dts/armada-8040-nbx.dts
 new file mode 100644
-index 00000000000..a5c3b17cb7d
+index 00000000000..bfa8927c5e5
 --- /dev/null
-+++ b/arch/arm/mach-mvebu/armada8k/soc_info.c
-@@ -0,0 +1,192 @@
++++ b/arch/arm/dts/armada-8040-nbx.dts
+@@ -0,0 +1,259 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (C) 2015 Marvell International Ltd.
++ * Device Tree file for NBX board (Freebox Nodebox10G)
++ * Based on Marvell Armada 8040 SoC
 + *
-+ * Marvell Armada 8K SoC info: SAR, Clock frequencies, LLC status
-+ * Ported from Marvell U-Boot 2015.01 to mainline U-Boot.
++ * Copyright (C) 2024 Freebox SA
++ */
++
++#include "armada-8040.dtsi"
++
++/ {
++	model = "NBX Armada 8040";
++	compatible = "nbx,armada8040", "marvell,armada8040";
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	aliases {
++		i2c0 = &cp0_i2c0;
++		i2c1 = &cp0_i2c1;
++		gpio0 = &ap_gpio0;
++		gpio1 = &cp0_gpio0;
++		gpio2 = &cp0_gpio1;
++	};
++
++	memory@00000000 {
++		device_type = "memory";
++		reg = <0x0 0x0 0x0 0x80000000>;  /* 2GB */
++	};
++};
++
++/* AP806 UART - active */
++&uart0 {
++	status = "okay";
++};
++
++/* AP806 pinctrl */
++&ap_pinctl {
++	/*
++	 * MPP Bus:
++	 * eMMC  [0-10]
++	 * UART0 [11,19]
++	 */
++		  /* 0 1 2 3 4 5 6 7 8 9 */
++	pin-func = < 1 1 1 1 1 1 1 1 1 1
++		     1 3 0 0 0 0 0 0 0 3 >;
++};
++
++/* AP806 on-board eMMC */
++&ap_sdhci0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&ap_emmc_pins>;
++	bus-width = <8>;
++	non-removable;
++	status = "okay";
++};
++
++/* CP0 pinctrl */
++&cp0_pinctl {
++	/*
++	 * MPP Bus:
++	 * [0-31]  = 0xff: Keep default CP0_shared_pins
++	 * [32,34] GE_MDIO/MDC
++	 * [35-36] I2C1
++	 * [37-38] I2C0
++	 * [57-58] MSS I2C
++	 */
++		/*   0    1    2    3    4    5    6    7    8    9 */
++	pin-func = < 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
++		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
++		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
++		     0xff 0xff 7    0    7    2    2    2    2    0
++		     0    0    0    0    0    0    0    0    0    0
++		     0    0    0    0    0    0    0    2    2    0
++		     0    0    0 >;
++
++	cp0_smi_pins: cp0-smi-pins {
++		marvell,pins = <32 34>;
++		marvell,function = <7>;
++	};
++};
++
++/* CP0 I2C0 */
++&cp0_i2c0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_i2c0_pins>;
++	status = "okay";
++	clock-frequency = <100000>;
++};
++
++/* CP0 I2C1 */
++&cp0_i2c1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_i2c1_pins>;
++	status = "okay";
++	clock-frequency = <100000>;
++};
++
++/* CP0 MSS I2C0 - Management SubSystem I2C (pins 57-58, func 2) */
++&cp0_mss_i2c0 {
++	status = "okay";
++};
++
++/* CP0 MDIO for PHY */
++&cp0_mdio {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp0_smi_pins>;
++
++	nbx_phy0: ethernet-phy@0 {
++		reg = <0>;
++	};
++};
++
++/* CP0 ComPhy - SerDes configuration */
++&cp0_comphy {
++	/*
++	 * CP0 Serdes Configuration:
++	 * Lane 0-3: Unconnected
++	 * Lane 4:   SFI (10G Ethernet)
++	 * Lane 5:   SGMII2 (1G Ethernet)
++	 */
++	phy0 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++	phy1 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++	phy2 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++	phy3 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++	phy4 {
++		phy-type = <COMPHY_TYPE_SFI0>;
++		phy-speed = <COMPHY_SPEED_10_3125G>;
++	};
++	phy5 {
++		phy-type = <COMPHY_TYPE_SGMII2>;
++		phy-speed = <COMPHY_SPEED_1_25G>;
++	};
++};
++
++/* CP0 Ethernet - only eth2 (MAC3) is active via SGMII */
++&cp0_ethernet {
++	status = "okay";
++};
++
++&cp0_eth2 {
++	status = "okay";
++	phy = <&nbx_phy0>;
++	phy-mode = "sgmii";
++};
++
++/* CP0 UTMI PHY for USB */
++&cp0_utmi {
++	status = "okay";
++};
++
++&cp0_utmi0 {
++	status = "okay";
++};
++
++&cp0_utmi1 {
++	status = "okay";
++};
++
++/* CP0 USB3 Host controllers */
++&cp0_usb3_0 {
++	status = "okay";
++};
++
++&cp0_usb3_1 {
++	status = "okay";
++};
++
++/* CP1 pinctrl */
++&cp1_pinctl {
++	/*
++	 * MPP Bus:
++	 * [0-26]  = Unconfigured
++	 * [27-28] GE_MDIO/MDC
++	 * [29-30] MSS I2C
++	 * [31]    = Unconfigured
++	 * [32-62] = 0xff: Keep default CP1_shared_pins
++	 */
++		/*   0    1    2    3    4    5    6    7    8    9 */
++	pin-func = < 0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0
++		     0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x0
++		     0x0  0x0  0x0  0x0  0x0  0x0  0x0  0x8  0x8  0x8
++		     0x8  0x0  0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
++		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
++		     0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
++		     0xff 0xff 0xff>;
++
++	cp1_mss_i2c_pins: cp1-mss-i2c-pins {
++		marvell,pins = <29 30>;
++		marvell,function = <8>;
++	};
++};
++
++/* CP1 MSS I2C0 - Management SubSystem I2C (pins 29-30, func 8) */
++&cp1_mss_i2c0 {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&cp1_mss_i2c_pins>;
++};
++
++/* CP1 ComPhy - SerDes configuration */
++&cp1_comphy {
++	/*
++	 * CP1 Serdes Configuration:
++	 * Lane 0:   PCIe x1
++	 * Lane 1:   USB3 Host
++	 * Lane 2-3: Unconnected
++	 * Lane 4:   SFI (10G Ethernet)
++	 * Lane 5:   Unconnected
++	 */
++	phy0 {
++		phy-type = <COMPHY_TYPE_PEX0>;
++	};
++	phy1 {
++		phy-type = <COMPHY_TYPE_USB3_HOST0>;
++	};
++	phy2 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++	phy3 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++	phy4 {
++		phy-type = <COMPHY_TYPE_SFI0>;
++		phy-speed = <COMPHY_SPEED_10_3125G>;
++	};
++	phy5 {
++		phy-type = <COMPHY_TYPE_UNCONNECTED>;
++	};
++};
++
++/* CP1 PCIe x1 on lane 0 */
++&cp1_pcie0 {
++	status = "okay";
++};
++
++/* CP1 USB3 Host on lane 1 */
++&cp1_usb3_0 {
++	status = "okay";
++};
++
++/* CP1 UTMI PHY for USB */
++&cp1_utmi {
++	status = "okay";
++};
++
++&cp1_utmi0 {
++	status = "okay";
++};
+diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+index b76510ab452..66e5f1788d6 100644
+--- a/arch/arm/mach-mvebu/Kconfig
++++ b/arch/arm/mach-mvebu/Kconfig
+@@ -166,6 +166,14 @@ config TARGET_MVEBU_ARMADA_8K
+ 	select BOARD_LATE_INIT
+ 	imply SCSI
+ 
++config TARGET_NBX10G
++	bool "Support Freebox Nodebox 10G"
++	select ARMADA_8K
++	select BOARD_LATE_INIT
++	help
++	  Enable support for the Freebox Nodebox 10G board based on the
++	  Marvell Armada 8040 SoC with dual CP110 companion chips.
++
+ config TARGET_MVEBU_ALLEYCAT5
+ 	bool "Support AlleyCat 5 platforms"
+ 	select ALLEYCAT_5
+@@ -508,5 +516,6 @@ config ARMADA_32BIT_SYSCON_SYSRESET
+ 
+ source "board/solidrun/clearfog/Kconfig"
+ source "board/kobol/helios4/Kconfig"
++source "board/freebox/nbx10g/Kconfig"
+ 
+ endif
+diff --git a/board/freebox/nbx10g/Kconfig b/board/freebox/nbx10g/Kconfig
+new file mode 100644
+index 00000000000..18a169761b7
+--- /dev/null
++++ b/board/freebox/nbx10g/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_NBX10G
++
++config SYS_BOARD
++	default "nbx10g"
++
++config SYS_VENDOR
++	default "freebox"
++
++config SYS_CONFIG_NAME
++	default "nbx10g"
++
++endif
+diff --git a/board/freebox/nbx10g/MAINTAINERS b/board/freebox/nbx10g/MAINTAINERS
+new file mode 100644
+index 00000000000..4753a9a13bb
+--- /dev/null
++++ b/board/freebox/nbx10g/MAINTAINERS
+@@ -0,0 +1,13 @@
++NBX10G BOARD
++M:	Vincent Jardin <vjardin@free.fr>
++S:	Maintained
++F:	board/freebox/nbx10g/
++F:	configs/mvebu_nbx_88f8040_defconfig
++F:	arch/arm/dts/armada-8040-nbx.dts
++F:	arch/arm/dts/armada-8040-nbx-u-boot.dtsi
++F:	include/configs/nbx10g.h
++F:	cmd/mvebu/mvebu_emmcboot.c
++F:	cmd/mvebu/nbx_fbxserial.c
++F:	include/mvebu_imagetag.h
++F:	include/mvebu_nrboot.h
++F:	include/nbx_fbxserial.h
+diff --git a/board/freebox/nbx10g/Makefile b/board/freebox/nbx10g/Makefile
+new file mode 100644
+index 00000000000..bf83bdf63ee
+--- /dev/null
++++ b/board/freebox/nbx10g/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-y	:= board.o
+diff --git a/board/freebox/nbx10g/board.c b/board/freebox/nbx10g/board.c
+new file mode 100644
+index 00000000000..7080e386c38
+--- /dev/null
++++ b/board/freebox/nbx10g/board.c
+@@ -0,0 +1,63 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2017-2018 Freebox SA
++ * Copyright (C) 2026 Free Mobile, Vincent Jardin <vjardin@free.fr>
++ *
++ * Freebox Nodebox 10G board support
 + */
 +
 +#include <config.h>
-+#include <linux/types.h>
-+#include <linux/kernel.h>
-+#include <vsprintf.h>
++#include <dm.h>
++#include <init.h>
++#include <asm/global_data.h>
++#include <asm/gpio.h>
 +#include <asm/io.h>
++#include <asm/arch/cpu.h>
 +#include <asm/arch/soc.h>
++#include <linux/delay.h>
 +
-+/* Clock frequency unit */
-+#define MHz			1000000
++DECLARE_GLOBAL_DATA_PTR;
 +
-+/* AP806 SAR (Sample-At-Reset) register */
-+#define AP806_SAR_REG_BASE		(SOC_REGS_PHY_BASE + 0x6F4400)
-+#define SAR_CLOCK_FREQ_MODE_OFFSET	0
-+#define SAR_CLOCK_FREQ_MODE_MASK	(0x1f << SAR_CLOCK_FREQ_MODE_OFFSET)
++/* Management PHY reset GPIO */
++#define NBX_PHY_RESET_GPIO	83
 +
-+/* LLC (Last Level Cache) registers */
-+#define LLC_BASE			(SOC_REGS_PHY_BASE + 0x8000)
-+#define LLC_CTRL			0x100
-+#define LLC_CTRL_EN			0x1
-+#define LLC_EXCLUSIVE_EN		0x100
++/* Nodebox 10G ASCII art logo */
++static const char * const nbx_logo =
++	"  _   _           _      _                 __  ___   _____\n"
++	" | \\ | |         | |    | |               /_ |/ _ \\ / ____|\n"
++	" |  \\| | ___   __| | ___| |__   _____  __  | | | | | |  __\n"
++	" | . ` |/ _ \\ / _` |/ _ \\ '_ \\ / _ \\ \\/ /  | | | | | | |_ |\n"
++	" | |\\  | (_) | (_| |  __/ |_) | (_) >  <   | | |_| | |__| |\n"
++	" |_| \\_|\\___/ \\__,_|\\___|_.__/ \\___/_/\\_\\  |_|\\___/ \\_____|\n";
 +
-+/* MSS clock is fixed at 200MHz on AP806 */
-+#define AP806_MSS_CLOCK			(200 * MHz)
-+
-+/* Clock ID indices in PLL frequency table */
-+#define CPU_CLOCK_ID	0
-+#define DDR_CLOCK_ID	1
-+#define RING_CLOCK_ID	2
-+
-+/* Clocking options (SAR field values) */
-+enum clocking_options {
-+	CPU_2000_DDR_1200_RCLK_1200 = 0x0,
-+	CPU_2000_DDR_1050_RCLK_1050 = 0x1,
-+	CPU_1600_DDR_800_RCLK_800 = 0x4,
-+	CPU_1800_DDR_1200_RCLK_1200 = 0x6,
-+	CPU_1800_DDR_1050_RCLK_1050 = 0x7,
-+	CPU_1600_DDR_900_RCLK_900 = 0x0b,
-+	CPU_1600_DDR_1050_RCLK_1050 = 0x0d,
-+	CPU_1600_DDR_900_RCLK_900_2 = 0x0e,
-+	CPU_1000_DDR_650_RCLK_650 = 0x13,
-+	CPU_1300_DDR_800_RCLK_800 = 0x14,
-+	CPU_1300_DDR_650_RCLK_650 = 0x17,
-+	CPU_1200_DDR_800_RCLK_800 = 0x19,
-+	CPU_1400_DDR_800_RCLK_800 = 0x1a,
-+	CPU_600_DDR_800_RCLK_800 = 0x1b,
-+	CPU_800_DDR_800_RCLK_800 = 0x1c,
-+	CPU_1000_DDR_800_RCLK_800 = 0x1d,
-+};
-+
-+/*
-+ * PLL frequency table: maps SAR clock mode to actual frequencies.
-+ * Format: { CPU_freq, DDR_freq, RING_freq, SAR_value }
-+ */
-+static const u32 pll_freq_tbl[16][4] = {
-+	/* CPU */	/* DDR */	/* Ring */
-+	{2000 * MHz,	1200 * MHz,	1200 * MHz,	CPU_2000_DDR_1200_RCLK_1200},
-+	{2000 * MHz,	1050 * MHz,	1050 * MHz,	CPU_2000_DDR_1050_RCLK_1050},
-+	{1800 * MHz,	1200 * MHz,	1200 * MHz,	CPU_1800_DDR_1200_RCLK_1200},
-+	{1800 * MHz,	1050 * MHz,	1050 * MHz,	CPU_1800_DDR_1050_RCLK_1050},
-+	{1600 * MHz,	1050 * MHz,	1050 * MHz,	CPU_1600_DDR_1050_RCLK_1050},
-+	{1600 * MHz,	900 * MHz,	900 * MHz,	CPU_1600_DDR_900_RCLK_900_2},
-+	{1300 * MHz,	800 * MHz,	800 * MHz,	CPU_1300_DDR_800_RCLK_800},
-+	{1300 * MHz,	650 * MHz,	650 * MHz,	CPU_1300_DDR_650_RCLK_650},
-+	{1600 * MHz,	800 * MHz,	800 * MHz,	CPU_1600_DDR_800_RCLK_800},
-+	{1600 * MHz,	900 * MHz,	900 * MHz,	CPU_1600_DDR_900_RCLK_900},
-+	{1000 * MHz,	650 * MHz,	650 * MHz,	CPU_1000_DDR_650_RCLK_650},
-+	{1200 * MHz,	800 * MHz,	800 * MHz,	CPU_1200_DDR_800_RCLK_800},
-+	{1400 * MHz,	800 * MHz,	800 * MHz,	CPU_1400_DDR_800_RCLK_800},
-+	{600 * MHz,	800 * MHz,	800 * MHz,	CPU_600_DDR_800_RCLK_800},
-+	{800 * MHz,	800 * MHz,	800 * MHz,	CPU_800_DDR_800_RCLK_800},
-+	{1000 * MHz,	800 * MHz,	800 * MHz,	CPU_1000_DDR_800_RCLK_800}
-+};
-+
-+/*
-+ * Get the clock frequency mode index from SAR register.
-+ * Returns index into pll_freq_tbl, or -1 if not found.
-+ */
-+static int sar_get_clock_freq_mode(void)
++int checkboard(void)
 +{
-+	u32 i;
-+	u32 clock_freq;
++	printf("%s\n", nbx_logo);
++	return 0;
++}
 +
-+	clock_freq = (readl(AP806_SAR_REG_BASE) & SAR_CLOCK_FREQ_MODE_MASK)
-+			>> SAR_CLOCK_FREQ_MODE_OFFSET;
++int board_init(void)
++{
++	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
++	return 0;
++}
 +
-+	for (i = 0; i < ARRAY_SIZE(pll_freq_tbl); i++) {
-+		if (pll_freq_tbl[i][3] == clock_freq)
-+			return i;
++int board_late_init(void)
++{
++	int ret;
++
++	/* Reset the management PHY */
++	ret = gpio_request(NBX_PHY_RESET_GPIO, "phy-reset");
++	if (ret) {
++		printf("Failed to request PHY reset GPIO: %d\n", ret);
++		return 0;
 +	}
 +
-+	pr_err("SAR: unsupported clock freq mode %d\n", clock_freq);
-+	return -1;
++	gpio_direction_output(NBX_PHY_RESET_GPIO, 0);
++	mdelay(100);
++	gpio_set_value(NBX_PHY_RESET_GPIO, 1);
++	mdelay(100);
++	gpio_free(NBX_PHY_RESET_GPIO);
++
++	return 0;
 +}
-+
-+/*
-+ * Get CPU clock frequency in Hz.
-+ */
-+static u32 soc_cpu_clk_get(void)
-+{
-+	int mode = sar_get_clock_freq_mode();
-+
-+	if (mode < 0)
-+		return 0;
-+	return pll_freq_tbl[mode][CPU_CLOCK_ID];
-+}
-+
-+/*
-+ * Get DDR clock frequency in Hz.
-+ */
-+static u32 soc_ddr_clk_get(void)
-+{
-+	int mode = sar_get_clock_freq_mode();
-+
-+	if (mode < 0)
-+		return 0;
-+	return pll_freq_tbl[mode][DDR_CLOCK_ID];
-+}
-+
-+/*
-+ * Get Ring (Fabric) clock frequency in Hz.
-+ */
-+static u32 soc_ring_clk_get(void)
-+{
-+	int mode = sar_get_clock_freq_mode();
-+
-+	if (mode < 0)
-+		return 0;
-+	return pll_freq_tbl[mode][RING_CLOCK_ID];
-+}
-+
-+/*
-+ * Get MSS clock frequency in Hz.
-+ */
-+static u32 soc_mss_clk_get(void)
-+{
-+	return AP806_MSS_CLOCK;
-+}
-+
-+/*
-+ * Get LLC status and mode.
-+ * Returns 1 if LLC is enabled, 0 otherwise.
-+ * If excl_mode is not NULL, sets it to 1 if exclusive mode is enabled.
-+ */
-+static int llc_mode_get(int *excl_mode)
-+{
-+	u32 val;
-+	int ret = 0, excl = 0;
-+
-+	val = readl(LLC_BASE + LLC_CTRL);
-+	if (val & LLC_CTRL_EN) {
-+		ret = 1;
-+		if (val & LLC_EXCLUSIVE_EN)
-+			excl = 1;
-+	}
-+	if (excl_mode)
-+		*excl_mode = excl;
-+
-+	return ret;
-+}
-+
-+/*
-+ * Print SoC clock information.
-+ */
-+void soc_print_clock_info(void)
-+{
-+	printf("Clock:  CPU     %-4d [MHz]\n", soc_cpu_clk_get() / MHz);
-+	printf("\tDDR     %-4d [MHz]\n", soc_ddr_clk_get() / MHz);
-+	printf("\tFABRIC  %-4d [MHz]\n", soc_ring_clk_get() / MHz);
-+	printf("\tMSS     %-4d [MHz]\n", soc_mss_clk_get() / MHz);
-+}
-+
-+/*
-+ * Print SoC-specific information: DDR width and LLC status.
-+ */
-+void soc_print_soc_info(void)
-+{
-+	int llc_en, llc_excl_mode;
-+
-+	printf("\tDDR 64 Bit width\n");
-+
-+	llc_en = llc_mode_get(&llc_excl_mode);
-+	printf("\tLLC %s%s\n", llc_en ? "Enabled" : "Disabled",
-+	       llc_excl_mode ? " (Exclusive Mode)" : "");
-+}
-diff --git a/arch/arm/mach-mvebu/armada8k/soc_info.h b/arch/arm/mach-mvebu/armada8k/soc_info.h
+diff --git a/configs/mvebu_nbx_88f8040_defconfig b/configs/mvebu_nbx_88f8040_defconfig
 new file mode 100644
-index 00000000000..41afe7a2508
+index 00000000000..975c53e9a92
 --- /dev/null
-+++ b/arch/arm/mach-mvebu/armada8k/soc_info.h
-@@ -0,0 +1,14 @@
++++ b/configs/mvebu_nbx_88f8040_defconfig
+@@ -0,0 +1,73 @@
++CONFIG_ARM=y
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_ARCH_MVEBU=y
++CONFIG_TEXT_BASE=0x00000000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
++CONFIG_TARGET_NBX10G=y
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0x180000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="armada-8040-nbx"
++CONFIG_FIT=y
++CONFIG_SYS_BOOTM_LEN=0x1000000
++CONFIG_SYS_LOAD_ADDR=0x800000
++CONFIG_PCI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++# CONFIG_EFI_LOADER is not set
++CONFIG_USE_PREBOOT=y
++CONFIG_PREBOOT="echo (CRC warning is normal: no env saved yet)"
++CONFIG_SYS_PBSIZE=1048
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_SYS_PROMPT="nodebox10G>> "
++CONFIG_SYS_MAXARGS=32
++CONFIG_CMD_BOOTZ=y
++# CONFIG_BOOTM_VXWORKS is not set
++# CONFIG_CMD_ELF is not set
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MISC=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++# CONFIG_CMD_SF is not set
++CONFIG_CMD_USB=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_EXT2=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_EFI_PARTITION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_RELOC_GD_ENV_ADDR=y
++CONFIG_ARP_TIMEOUT=200
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_I2C_MUX=y
++CONFIG_MISC=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_XENON=y
++# CONFIG_SPI_FLASH is not set
++CONFIG_PHY_MARVELL=y
++CONFIG_PHY_GIGE=y
++CONFIG_MVPP2=y
++CONFIG_PCIE_DW_MVEBU=y
++CONFIG_PHY=y
++CONFIG_MVEBU_COMPHY_SUPPORT=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_ARMADA_8K=y
++CONFIG_SYS_NS16550=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_STORAGE=y
+diff --git a/include/configs/nbx10g.h b/include/configs/nbx10g.h
+new file mode 100644
+index 00000000000..bd083b7e7d8
+--- /dev/null
++++ b/include/configs/nbx10g.h
+@@ -0,0 +1,29 @@
 +/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Copyright (C) 2015 Marvell International Ltd.
++ * Copyright (C) 2017-2018 Freebox SA
++ * Copyright (C) 2026 Free Mobile, Vincent Jardin <vjardin@free.fr>
 + *
-+ * Marvell Armada 8K SoC info functions
++ * Configuration for Freebox Nodebox 10G
 + */
 +
-+#ifndef _ARMADA8K_SOC_INFO_H_
-+#define _ARMADA8K_SOC_INFO_H_
++#ifndef _CONFIG_NBX10G_H
++#define _CONFIG_NBX10G_H
 +
-+void soc_print_clock_info(void);
-+void soc_print_soc_info(void);
++#include "mvebu_armada-8k.h"
 +
-+#endif /* _ARMADA8K_SOC_INFO_H_ */
++/* Override environment settings for NBX */
++#undef CFG_EXTRA_ENV_SETTINGS
++#define CFG_EXTRA_ENV_SETTINGS \
++	"hostname=nodebox10G\0" \
++	"ethrotate=no\0" \
++	"image_addr=0x7000000\0" \
++	"image_name=Image.nodebox10G\0" \
++	"fdt_addr=0x6f00000\0" \
++	"fdt_name=nodebox10G.dtb\0" \
++	"console=ttyS0,115200\0" \
++	"tftpboot=setenv bootargs console=${console} bank=tftp; " \
++		"dhcp ${image_addr} ${image_name}; " \
++		"tftp ${fdt_addr} ${fdt_name}; " \
++		"booti ${image_addr} - ${fdt_addr}\0"
++
++#endif /* _CONFIG_NBX10G_H */
 -- 
 2.43.0
 
