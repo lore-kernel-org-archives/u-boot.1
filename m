@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B04BFCC9A5
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:54:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7723CFCC9A2
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:55:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57B1883F82;
-	Tue, 10 Mar 2026 01:54:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BDD8A83F75;
+	Tue, 10 Mar 2026 01:54:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="aqC7CJHH";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="bBp7CjZ1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EF0883F98; Tue, 10 Mar 2026 01:54:50 +0100 (CET)
+ id DB3BC83FA6; Tue, 10 Mar 2026 01:54:55 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 947C683F82
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:54:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5726283FA3
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1773104085; bh=i8lS2eYNUV6NbFhLjK/9jPuAVnzJXikGtaSZAQWwlik=;
- b=aqC7CJHHgfAYljCWjUriTKXfckAM/4aycytR8ReIjyrZoZidS2VgGT8+KW2cVazh1hsLKkZuV
- X0AoGI6yR6f5eabdFqdq02+Y5AE0MjdktmKlMWKjiI07hn7zP4+jKwskdbfG9VqQXmL5o/p7Rqy
- w8H7MxIgT7MJ3BHAYNOiJDEN2cIWE0gZbrIQuOpaxi+pYorrVL9UztBTBf1amJeFa/2Dp+l4hpV
- F/1Hi595eD7taBxHKXKRVbrZmsjD3UuQmeKK1yt3KkCCcQz0LuTRBXQHvBhefxCQolxiXxxf4Ez
- IwZMbLhMN7NUbxHMXCH/4hzRXd/RtGXO6O5bY+j+Z9wg==
-X-Forward-Email-ID: 69af6bd173a8189bec327749
+ t=1773104090; bh=Wd4ZWMgHk0hPVqFmyqbR9KwLopIeHjGaZEVNZoopS1s=;
+ b=bBp7CjZ17OD8UjPPLcLqmbXvx+A6FE3j9Ya7VMWVWvrKXq+FYdnjyLdu7B4aN93CFccqdCPMu
+ MOuq2I1fGYvqUKQDcGpKjf9MCuU8hjW9d4+F5wmC7Wpfe860q6p7rbNZmOtZ2EdD23MlvowMw/T
+ ymoiPpQ0Mkl2br+GoGUCoikyEhsF9vyiPXP2YmOiTnGE+8GVJDDJV4oqGl0qjtWdztHB+W6xSYu
+ h6A/Of93UbKXjBfMirqto0a9bYy/Z/T0LGFdSW25LQMs6fXQpW54nxQS0Tcwz33jou+O8ef5RM8
+ ia5Pxm7pfCoi6j0kgMZyy5+nIeBNZSxk6rohvlYySXqg==
+X-Forward-Email-ID: 69af6bd573a8189bec327764
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 2.6.49
@@ -47,10 +47,10 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 01/12] rockchip: spl: Add common handling of USB
- bootsource_id 0x81
-Date: Tue, 10 Mar 2026 00:52:56 +0000
-Message-ID: <20260310005326.606079-2-jonas@kwiboo.se>
+Subject: [PATCH v3 02/12] rockchip: mkimage: Re-sort the spl_infos list
+ alphanumerically
+Date: Tue, 10 Mar 2026 00:52:57 +0000
+Message-ID: <20260310005326.606079-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260310005326.606079-1-jonas@kwiboo.se>
 References: <20260310005326.606079-1-jonas@kwiboo.se>
@@ -72,12 +72,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Multiple newer Rockchip SoCs report 0x81 instead of 0xa when booting
-from USB, i.e. on RK3576, RK3528, RK3506 and RV1106.
+The first RK35xx SoC was initially appended to the end of the otherwise
+alphanumerically sorted spl_infos list, possible because it was using a
+new header structure.
 
-Move the bootsource_id 0x81 handling currently only used for RK3528 to
-the common read_brom_bootsource_id() to reduce the need to override this
-function when support for newer SoCs is introduced.
+Re-sort the spl_infos list to keep it alphanumerically ordered based
+on imagename.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -85,59 +85,28 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 v3: Collect r-b tag
 v2: New patch
 ---
- arch/arm/mach-rockchip/rk3528/rk3528.c | 15 ---------------
- arch/arm/mach-rockchip/spl.c           | 12 +++++++++++-
- 2 files changed, 11 insertions(+), 16 deletions(-)
+ tools/rkcommon.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3528/rk3528.c b/arch/arm/mach-rockchip/rk3528/rk3528.c
-index 57ead0006f1f..f9bfc445b857 100644
---- a/arch/arm/mach-rockchip/rk3528/rk3528.c
-+++ b/arch/arm/mach-rockchip/rk3528/rk3528.c
-@@ -49,21 +49,6 @@ void board_debug_uart_init(void)
- {
- }
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index e7e78ef7e5b7..dbc1c177843a 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -148,12 +148,12 @@ static struct spl_info spl_infos[] = {
+ 	{ "rk3328", "RK32", 0x8000 - 0x800, false, RK_HEADER_V1 },
+ 	{ "rk3368", "RK33", 0x8000 - 0x1000, false, RK_HEADER_V1 },
+ 	{ "rk3399", "RK33", 0x30000 - 0x2000, false, RK_HEADER_V1 },
+-	{ "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
+-	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+ 	{ "rk3528", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3588", "RK35", 0x100000 - 0x1000, false, RK_HEADER_V2 },
++	{ "rv1108", "RK11", 0x1800, false, RK_HEADER_V1 },
++	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+ };
  
--u32 read_brom_bootsource_id(void)
--{
--	u32 bootsource_id = readl(BROM_BOOTSOURCE_ID_ADDR);
--
--	/* Re-map the raw value read from reg to an existing BROM_BOOTSOURCE
--	 * enum value to avoid having to create a larger boot_devices table.
--	 */
--	if (bootsource_id == 0x81)
--		return BROM_BOOTSOURCE_USB;
--	else if (bootsource_id > BROM_LAST_BOOTSOURCE)
--		log_debug("Unknown bootsource %x\n", bootsource_id);
--
--	return bootsource_id;
--}
--
- int arch_cpu_init(void)
- {
- 	u32 val;
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index a9155dceedb4..e989c148079a 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -35,7 +35,17 @@ __weak const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 
- __weak u32 read_brom_bootsource_id(void)
- {
--	return readl(BROM_BOOTSOURCE_ID_ADDR);
-+	u32 bootsource_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-+
-+	/* Re-map the raw value read from reg to an existing BROM_BOOTSOURCE
-+	 * enum value to avoid having to create a larger boot_devices table.
-+	 */
-+	if (bootsource_id == 0x81)
-+		return BROM_BOOTSOURCE_USB;
-+	else if (bootsource_id > BROM_LAST_BOOTSOURCE)
-+		log_debug("Unknown bootsource %x\n", bootsource_id);
-+
-+	return bootsource_id;
- }
- 
- const char *board_spl_was_booted_from(void)
+ /**
 -- 
 2.53.0
 
