@@ -4,60 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFAE9FCC9A6
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:06:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4961FCC9A2
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6650683981;
-	Tue, 10 Mar 2026 01:06:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id D959A839DF;
+	Tue, 10 Mar 2026 01:48:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dM9TkPSC";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OVULts7R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 778D783BC8; Tue, 10 Mar 2026 01:06:31 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 338DA83BC8; Tue, 10 Mar 2026 01:48:41 +0100 (CET)
+Received: from mail-m1973195.qiye.163.com (mail-m1973195.qiye.163.com
+ [220.197.31.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3605483F82
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:06:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2964=BK=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1773101186; bh=ZCdq04oElZ+zz5Q2aKwGy09MGbiBjqXdGPbvPPEH9PE=;
- b=dM9TkPSCmnhPpFHV9jBLhxYpd/txBUZZp5N7dXgF1dfL0ocCUpdtbxJItw7Bmz+6a46vEpCJr
- 9NpyAMKagtsN4GJc58iNXt4eU/1wEigAgrfQoxMiP2sTHOZFuiQyCE/AjP6k+8bpYW/6xF0JnYO
- B1Hf3C4XoiLRZ5wb//V+CybQTgpax2Hu8owFc8kL6swvxocNHPRYT/QGCjKKvFrLWCoiKGUx6NR
- tEojf4hwvv0CDqMLNqYobyRJagl7oU7ygBw5Mcx1xHJGMomsZMiMz6vlL4wsfOyZPd64QGUXEsD
- 4HuvvZwkS/B9/izSx2ldYIIZ41CQVSOqYU6XHcD7cErA==
-X-Forward-Email-ID: 69af607c746be01f0a4eb901
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 2.6.49
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>
-Cc: Tianling Shen <cnsztl@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 1/2] arm64: dts: rockchip: Add devicetree for the
- FriendlyElec NanoPi R76S
-Date: Tue, 10 Mar 2026 00:06:04 +0000
-Message-ID: <20260310000610.592998-2-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260310000610.592998-1-jonas@kwiboo.se>
-References: <20260310000610.592998-1-jonas@kwiboo.se>
+ by phobos.denx.de (Postfix) with ESMTPS id 3F54183981
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:48:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from localhost.localdomain (unknown [110.83.51.2])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 36525eaa0;
+ Tue, 10 Mar 2026 08:48:32 +0800 (GMT+08:00)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20260309
+Date: Tue, 10 Mar 2026 08:48:32 +0800
+Message-Id: <20260310004832.158893-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9cd53789b403afkunm3909be18170e0e7
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaGUseVkpDSE8aH0seTE9IH1YVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSktVQ0hVTkpVSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0tVSk
+ JLS1kG
+DKIM-Signature: a=rsa-sha256;
+ b=OVULts7RfVvjTD2/Cs/XSqpvmV60b7S7PdQscnFU6NFKxMRz4ReF+N+Gdp4RbgKf61efSkMsHG1BtJiuZD/vJzqL7B5vEsD7hUAL+vkKUnWGQdDvUYY3gFhdeRSjXQUH0dwso18PYVQqJByndM4Uu3tRFc8EaFoU5ILF+yD4I9g=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=G6lCrnu10HA2xeB8fiyuxKCYI6ruII12dQ+c1YfXm54=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,904 +65,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Tianling Shen <cnsztl@gmail.com>
+Hi Tom,
 
-The NanoPi R76S (as "R76S") is an open-sourced mini IoT gateway
-device with two 2.5G, designed and developed by FriendlyElec.
+Please pull the updates for rockchip platform:
+- New SoC support: RK3506, RK3582;
+- New Board support: RK3528 FriendlyElec NanoPi Zero2;
+- Other fixes
 
-Specification:
-- Rockchip RK3576
-- 2/4GB LPDDR4X RAM
-- 2x 2500Base-T (PCIe, rtl8125b)
-- 3x LEDs (Power, LAN, WAN)
-- 32GB eMMC
-- MicroSD Slot
-- MDMI 1.4/2.0 OUT
-- M.2 E-Key SDIO slot
-- USB 3.0 Port
-- USB Type-C 5V Power
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/29452
 
-Signed-off-by: Tianling Shen <cnsztl@gmail.com>
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+Thanks,
+- Kever
 
-[ upstream commit: 7fee88882704a5ed7657f467ecb44e39b20f42aa ]
+The following changes since commit b26cc03b7cecaabdb306c2f68eebde764161a545:
 
-(cherry picked from commit e30e000e62268ab43c96f2e6f9dd62b29b81a48c)
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
----
-v2: Collect r-b tag
----
- .../src/arm64/rockchip/rk3576-nanopi-r76s.dts | 860 ++++++++++++++++++
- 1 file changed, 860 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3576-nanopi-r76s.dts
+  Merge patch series "MAINTAINERS: Update ADI ADSP platform maintainers" (2026-03-04 14:25:30 -0600)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-r76s.dts b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-r76s.dts
-new file mode 100644
-index 000000000000..31fbefaeceab
---- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-r76s.dts
-@@ -0,0 +1,860 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (c) 2025 FriendlyElec Computer Tech. Co., Ltd.
-+ * (http://www.friendlyelec.com)
-+ *
-+ * Copyright (c) 2025 Tianling Shen <cnsztl@gmail.com>
-+ */
-+
-+/dts-v1/;
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pinctrl/rockchip.h>
-+#include <dt-bindings/soc/rockchip,vop2.h>
-+
-+#include "rk3576.dtsi"
-+
-+/ {
-+	model = "FriendlyElec NanoPi R76S";
-+	compatible = "friendlyarm,nanopi-r76s", "rockchip,rk3576";
-+
-+	aliases {
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
-+		mmc2 = &sdio;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:1500000n8";
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&user_but_pin>;
-+
-+		button-reset {
-+			label = "reset";
-+			gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_LOW>;
-+			debounce-interval = <50>;
-+			linux,code = <KEY_RESTART>;
-+			wakeup-source;
-+		};
-+	};
-+
-+	gpio-leds {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&led1_h>, <&led_sys_h>, <&led2_h>;
-+
-+		led-0 {
-+			color = <LED_COLOR_ID_GREEN>;
-+			function = LED_FUNCTION_LAN;
-+			gpios = <&gpio2 RK_PB0 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		led-1 {
-+			color = <LED_COLOR_ID_RED>;
-+			function = LED_FUNCTION_POWER;
-+			gpios = <&gpio2 RK_PB3 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "heartbeat";
-+		};
-+
-+		led-2 {
-+			color = <LED_COLOR_ID_GREEN>;
-+			function = LED_FUNCTION_WAN;
-+			gpios = <&gpio4 RK_PC5 GPIO_ACTIVE_HIGH>;
-+		};
-+	};
-+
-+	hdmi-con {
-+		compatible = "hdmi-connector";
-+		hdmi-pwr-supply = <&vcc5v_hdmi_tx>;
-+		type = "a";
-+
-+		port {
-+			hdmi_con_in: endpoint {
-+				remote-endpoint = <&hdmi_out_con>;
-+			};
-+		};
-+	};
-+
-+	sdio_pwrseq: sdio-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		clocks = <&hym8563>;
-+		clock-names = "ext_clock";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_reg_on_h>;
-+		post-power-on-delay-ms = <200>;
-+		reset-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	vcc3v3_rtc_s5: regulator-vcc3v3-rtc-s5 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-name = "vcc3v3_rtc_s5";
-+		vin-supply = <&vcc5v0_sys_s5>;
-+	};
-+
-+	vcc5v_dcin: regulator-vcc5v-dcin {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-name = "vcc5v_dcin";
-+	};
-+
-+	vcc5v_hdmi_tx: regulator-vcc5v-hdmi-tx {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio4 RK_PC6 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&hdmi_tx_on_h>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-name = "vcc5v_hdmi_tx";
-+		vin-supply = <&vcc5v0_sys_s5>;
-+	};
-+
-+	vcc5v0_device_s0: regulator-vcc5v0-device-s0 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_device_s0";
-+		vin-supply = <&vcc5v_dcin>;
-+	};
-+
-+	vcc5v0_sys_s5: regulator-vcc5v0-sys-s5 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_sys_s5";
-+		vin-supply = <&vcc5v_dcin>;
-+	};
-+
-+	vcc5v0_usb_otg0: regulator-vcc5v0-usb-otg0 {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		gpios = <&gpio0 RK_PD1 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&usb_otg0_pwren_h>;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-name = "vcc5v0_usb_otg0";
-+		vin-supply = <&vcc5v0_sys_s5>;
-+	};
-+
-+	vcc_1v1_nldo_s3: regulator-vcc-1v1-nldo-s3 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1100000>;
-+		regulator-max-microvolt = <1100000>;
-+		regulator-name = "vcc_1v1_nldo_s3";
-+		vin-supply = <&vcc5v0_sys_s5>;
-+	};
-+
-+	vcc_1v8_s0: regulator-vcc-1v8-s0 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-name = "vcc_1v8_s0";
-+		vin-supply = <&vcc_1v8_s3>;
-+	};
-+
-+	vcc_2v0_pldo_s3: regulator-vcc-2v0-pldo-s3 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <2000000>;
-+		regulator-max-microvolt = <2000000>;
-+		regulator-name = "vcc_2v0_pldo_s3";
-+		vin-supply = <&vcc5v0_sys_s5>;
-+	};
-+
-+	vcc_3v3_s0: regulator-vcc-3v3-s0 {
-+		compatible = "regulator-fixed";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-name = "vcc_3v3_s0";
-+		vin-supply = <&vcc_3v3_s3>;
-+	};
-+};
-+
-+&combphy0_ps {
-+	status = "okay";
-+};
-+
-+&combphy1_psu {
-+	status = "okay";
-+};
-+
-+&cpu_b0 {
-+	cpu-supply = <&vdd_cpu_big_s0>;
-+};
-+
-+&cpu_b1 {
-+	cpu-supply = <&vdd_cpu_big_s0>;
-+};
-+
-+&cpu_b2 {
-+	cpu-supply = <&vdd_cpu_big_s0>;
-+};
-+
-+&cpu_b3 {
-+	cpu-supply = <&vdd_cpu_big_s0>;
-+};
-+
-+&cpu_l0 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l1 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l2 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&cpu_l3 {
-+	cpu-supply = <&vdd_cpu_lit_s0>;
-+};
-+
-+&gpu {
-+	mali-supply = <&vdd_gpu_s0>;
-+	status = "okay";
-+};
-+
-+&hdmi {
-+	status = "okay";
-+};
-+
-+&hdmi_in {
-+	hdmi_in_vp0: endpoint {
-+		remote-endpoint = <&vp0_out_hdmi>;
-+	};
-+};
-+
-+&hdmi_out {
-+	hdmi_out_con: endpoint {
-+		remote-endpoint = <&hdmi_con_in>;
-+	};
-+};
-+
-+&hdmi_sound {
-+	status = "okay";
-+};
-+
-+&hdptxphy {
-+	status = "okay";
-+};
-+
-+&i2c1 {
-+	status = "okay";
-+
-+	pmic@23 {
-+		compatible = "rockchip,rk806";
-+		reg = <0x23>;
-+		#gpio-cells = <2>;
-+		gpio-controller;
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <6 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
-+			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
-+		system-power-controller;
-+
-+		vcc1-supply = <&vcc5v0_sys_s5>;
-+		vcc2-supply = <&vcc5v0_sys_s5>;
-+		vcc3-supply = <&vcc5v0_sys_s5>;
-+		vcc4-supply = <&vcc5v0_sys_s5>;
-+		vcc5-supply = <&vcc5v0_sys_s5>;
-+		vcc6-supply = <&vcc5v0_sys_s5>;
-+		vcc7-supply = <&vcc5v0_sys_s5>;
-+		vcc8-supply = <&vcc5v0_sys_s5>;
-+		vcc9-supply = <&vcc5v0_sys_s5>;
-+		vcc10-supply = <&vcc5v0_sys_s5>;
-+		vcc11-supply = <&vcc_2v0_pldo_s3>;
-+		vcc12-supply = <&vcc5v0_sys_s5>;
-+		vcc13-supply = <&vcc_1v1_nldo_s3>;
-+		vcc14-supply = <&vcc_1v1_nldo_s3>;
-+		vcca-supply = <&vcc5v0_sys_s5>;
-+
-+		rk806_dvs1_null: dvs1-null-pins {
-+			pins = "gpio_pwrctrl1";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs1_pwrdn: dvs1-pwrdn-pins {
-+			pins = "gpio_pwrctrl1";
-+			function = "pin_fun2";
-+		};
-+
-+		rk806_dvs1_rst: dvs1-rst-pins {
-+			pins = "gpio_pwrctrl1";
-+			function = "pin_fun3";
-+		};
-+
-+		rk806_dvs1_slp: dvs1-slp-pins {
-+			pins = "gpio_pwrctrl1";
-+			function = "pin_fun1";
-+		};
-+
-+		rk806_dvs2_dvs: dvs2-dvs-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun4";
-+		};
-+
-+		rk806_dvs2_gpio: dvs2-gpio-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun5";
-+		};
-+
-+		rk806_dvs2_null: dvs2-null-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs2_pwrdn: dvs2-pwrdn-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun2";
-+		};
-+
-+		rk806_dvs2_rst: dvs2-rst-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun3";
-+		};
-+
-+		rk806_dvs2_slp: dvs2-slp-pins {
-+			pins = "gpio_pwrctrl2";
-+			function = "pin_fun1";
-+		};
-+
-+		rk806_dvs3_dvs: dvs3-dvs-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun4";
-+		};
-+
-+		rk806_dvs3_gpio: dvs3-gpio-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun5";
-+		};
-+
-+		rk806_dvs3_null: dvs3-null-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun0";
-+		};
-+
-+		rk806_dvs3_pwrdn: dvs3-pwrdn-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun2";
-+		};
-+
-+		rk806_dvs3_rst: dvs3-rst-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun3";
-+		};
-+
-+		rk806_dvs3_slp: dvs3-slp-pins {
-+			pins = "gpio_pwrctrl3";
-+			function = "pin_fun1";
-+		};
-+
-+		regulators {
-+			vdd_cpu_big_s0: dcdc-reg1 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-enable-ramp-delay = <400>;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-name = "vdd_cpu_big_s0";
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_npu_s0: dcdc-reg2 {
-+				regulator-boot-on;
-+				regulator-enable-ramp-delay = <400>;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-name = "vdd_npu_s0";
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_cpu_lit_s0: dcdc-reg3 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <950000>;
-+				regulator-name = "vdd_cpu_lit_s0";
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <750000>;
-+				};
-+			};
-+
-+			vcc_3v3_s3: dcdc-reg4 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc_3v3_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <3300000>;
-+				};
-+			};
-+
-+			vdd_gpu_s0: dcdc-reg5 {
-+				regulator-boot-on;
-+				regulator-enable-ramp-delay = <400>;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <900000>;
-+				regulator-name = "vdd_gpu_s0";
-+				regulator-ramp-delay = <12500>;
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+					regulator-suspend-microvolt = <850000>;
-+				};
-+			};
-+
-+			vddq_ddr_s0: dcdc-reg6 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-name = "vddq_ddr_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdd_logic_s0: dcdc-reg7 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <800000>;
-+				regulator-name = "vdd_logic_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcc_1v8_s3: dcdc-reg8 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcc_1v8_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vdd2_ddr_s3: dcdc-reg9 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-name = "vdd2_ddr_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+				};
-+			};
-+
-+			vdd_ddr_s0: dcdc-reg10 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <550000>;
-+				regulator-max-microvolt = <1200000>;
-+				regulator-name = "vdd_ddr_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcca_1v8_s0: pldo-reg1 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcca_1v8_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcca1v8_pldo2_s0: pldo-reg2 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcca1v8_pldo2_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda_1v2_s0: pldo-reg3 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1200000>;
-+				regulator-max-microvolt = <1200000>;
-+				regulator-name = "vdda_1v2_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcca_3v3_s0: pldo-reg4 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcca_3v3_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vccio_sd_s0: pldo-reg5 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vccio_sd_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vcca1v8_pldo6_s3: pldo-reg6 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcca1v8_pldo6_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <1800000>;
-+				};
-+			};
-+
-+			vdd_0v75_s3: nldo-reg1 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-name = "vdd_0v75_s3";
-+
-+				regulator-state-mem {
-+					regulator-on-in-suspend;
-+					regulator-suspend-microvolt = <750000>;
-+				};
-+			};
-+
-+			vdda_ddr_pll_s0: nldo-reg2 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <850000>;
-+				regulator-max-microvolt = <850000>;
-+				regulator-name = "vdda_ddr_pll_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda0v75_hdmi_s0: nldo-reg3 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <837500>;
-+				regulator-max-microvolt = <837500>;
-+				regulator-name = "vdda0v75_hdmi_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda_0v85_s0: nldo-reg4 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <850000>;
-+				regulator-max-microvolt = <850000>;
-+				regulator-name = "vdda_0v85_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+
-+			vdda_0v75_s0: nldo-reg5 {
-+				regulator-always-on;
-+				regulator-boot-on;
-+				regulator-min-microvolt = <750000>;
-+				regulator-max-microvolt = <750000>;
-+				regulator-name = "vdda_0v75_s0";
-+
-+				regulator-state-mem {
-+					regulator-off-in-suspend;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&i2c2 {
-+	status = "okay";
-+
-+	hym8563: rtc@51 {
-+		compatible = "haoyu,hym8563";
-+		reg = <0x51>;
-+		#clock-cells = <0>;
-+		clock-output-names = "hym8563";
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PA5 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&rtc_int_l>;
-+		wakeup-source;
-+	};
-+};
-+
-+&pcie0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie0_perstn>;
-+	reset-gpios = <&gpio2 RK_PB4 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc_3v3_s3>;
-+	status = "okay";
-+};
-+
-+&pcie1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pcie1_perstn>;
-+	reset-gpios = <&gpio0 RK_PC7 GPIO_ACTIVE_HIGH>;
-+	vpcie3v3-supply = <&vcc_3v3_s3>;
-+	status = "okay";
-+};
-+
-+&pinctrl {
-+	bt {
-+		bt_reg_on_h: bt-reg-on-h {
-+			rockchip,pins = <3 RK_PC7 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+
-+		bt_wake_host_h: bt-wake-host-h {
-+			rockchip,pins = <0 RK_PB1 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+
-+		host_wake_bt_h: host-wake-bt-h {
-+			rockchip,pins = <3 RK_PD0 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	gpio-keys {
-+		user_but_pin: user-but-pin {
-+			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	gpio-leds {
-+		led_sys_h: led-sys-h {
-+			rockchip,pins = <2 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		led1_h: led1-h {
-+			rockchip,pins = <2 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		led2_h: led2-h {
-+			rockchip,pins = <4 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	hdmi {
-+		hdmi_tx_on_h: hdmi-tx-on-h {
-+			rockchip,pins = <4 RK_PC6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	hym8563 {
-+		rtc_int_l: rtc-int-l {
-+			rockchip,pins = <0 RK_PA5 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	pcie {
-+		pcie0_perstn: pcie0-perstn {
-+			rockchip,pins = <2 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+
-+		pcie1_perstn: pcie1-perstn {
-+			rockchip,pins = <0 RK_PC7 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
-+	usb {
-+		usb_otg0_pwren_h: usb-otg0-pwren-h {
-+			rockchip,pins = <0 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	wifi {
-+		wifi_wake_host_h: wifi-wake-host-h {
-+			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+
-+		wifi_reg_on_h: wifi-reg-on-h {
-+			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&sai6 {
-+	status = "okay";
-+};
-+
-+&sdmmc {
-+	bus-width = <4>;
-+	cap-mmc-highspeed;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	no-mmc;
-+	no-sdio;
-+	sd-uhs-sdr104;
-+	vmmc-supply = <&vcc_3v3_s3>;
-+	vqmmc-supply = <&vccio_sd_s0>;
-+	status = "okay";
-+};
-+
-+&sdio {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	cap-sdio-irq;
-+	disable-wp;
-+	keep-power-in-suspend;
-+	mmc-pwrseq = <&sdio_pwrseq>;
-+	no-mmc;
-+	no-sd;
-+	non-removable;
-+	sd-uhs-sdr104;
-+	vmmc-supply = <&vcc_3v3_s3>;
-+	vqmmc-supply = <&vcc_1v8_s3>;
-+	wakeup-source;
-+	status = "okay";
-+
-+	rtl8822cs: wifi@1 {
-+		reg = <1>;
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_HIGH>;
-+		interrupt-names = "host-wake";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_wake_host_h>;
-+	};
-+};
-+
-+&sdhci {
-+	bus-width = <8>;
-+	cap-mmc-highspeed;
-+	full-pwr-cycle-in-suspend;
-+	mmc-hs400-1_8v;
-+	mmc-hs400-enhanced-strobe;
-+	no-sdio;
-+	no-sd;
-+	non-removable;
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&vcca_1v8_s0>;
-+	status = "okay";
-+};
-+
-+&u2phy0 {
-+	status = "okay";
-+};
-+
-+&u2phy0_otg {
-+	phy-supply = <&vcc5v0_usb_otg0>;
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	status = "okay";
-+};
-+
-+&uart5 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart5m0_xfer &uart5m0_ctsn &uart5m0_rtsn>;
-+	uart-has-rtscts;
-+	status = "okay";
-+
-+	bluetooth {
-+		compatible = "realtek,rtl8822cs-bt";
-+		enable-gpios = <&gpio3 RK_PC7 GPIO_ACTIVE_HIGH>;
-+		device-wake-gpios = <&gpio3 RK_PD0 GPIO_ACTIVE_HIGH>;
-+		host-wake-gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&bt_wake_host_h &host_wake_bt_h &bt_reg_on_h>;
-+	};
-+};
-+
-+&usbdp_phy {
-+	status = "okay";
-+};
-+
-+&usb_drd0_dwc3 {
-+	dr_mode = "host";
-+	extcon = <&u2phy0>;
-+	status = "okay";
-+};
-+
-+&vop {
-+	status = "okay";
-+};
-+
-+&vop_mmu {
-+	status = "okay";
-+};
-+
-+&vp0 {
-+	vp0_out_hdmi: endpoint@ROCKCHIP_VOP2_EP_HDMI0 {
-+		reg = <ROCKCHIP_VOP2_EP_HDMI0>;
-+		remote-endpoint = <&hdmi_in_vp0>;
-+	};
-+};
--- 
-2.53.0
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20260309
+
+for you to fetch changes up to 17b6f20cfefd65987d6976c7356673787fd0ba32:
+
+  arm: rockchip: don't use non-existent CONFIG_TPL_TINY_FRAMEWORK (2026-03-09 22:52:22 +0800)
+
+----------------------------------------------------------------
+Finley Xiao (2):
+      dt-bindings: clock: rockchip: Add RK3506 clock and reset unit
+      clk: rockchip: Add support for RK3506
+
+Heinrich Schuchardt (1):
+      arm: rockchip: don't use non-existent CONFIG_TPL_TINY_FRAMEWORK
+
+Johan Jonker (6):
+      ARM: dts: rockchip: Remove mshc aliases from RK3288
+      ARM: dts: rockchip: Add spi_flash label to rk3288-veyron
+      ARM: dts: rockchip: move edp assigned-clocks to edp node on rk3288
+      rockchip: Switch rk3288-veyron boards to upstream devicetree
+      rockchip: Switch remaining rk3288 boards to upstream devicetree
+      rockchip: imply OF_UPSTREAM for rk3288 boards
+
+Jonas Karlman (17):
+      rockchip: sdram: Add fallback that fixup DRAM gaps on RK3588
+      phy: rockchip: naneng-combphy: Enable U3 port for USB3OTG on RK3568
+      rockchip: Add initial RK3582 support
+      rockchip: rk3588-generic: Enable support for RK3582
+      rockchip: rk3588s-rock-5c: Add support for ROCK 5C Lite variant
+      rockchip: rk3576: Allow pmu sram access for non-secure masters
+      rockchip: rk3576: Use DMA when loading FIT images
+      board: rockchip: Add FriendlyElec NanoPi Zero2
+      rockchip: spl: Add common handling of USB bootsource_id 0x81
+      rockchip: mkimage: Re-sort the spl_infos list alphanumerically
+      ram: rockchip: Add basic support for RK3506
+      pinctrl: rockchip: Use syscon_regmap_lookup_by_phandle()
+      rockchip: otp: Add support for RK3506
+      phy: rockchip-inno-usb2: Add support for RK3506
+      net: dwc_eth_qos_rockchip: Add support for RK3506
+      arch: arm: rockchip: Add initial support for RK3506
+      rockchip: Reduce size of ramboot usb472 payload
+
+Quentin Schulz (2):
+      rockchip: tiger-rk3588: disable HS400
+      rockchip: rk3588: include all addressable DRAM in memory map
+
+Xuhui Lin (1):
+      rockchip: mkimage: Add support for RK3506
+
+Ye Zhang (1):
+      pinctrl: rockchip: Add support for RK3506
+
+ arch/arm/dts/Makefile                              |   11 -
+ arch/arm/dts/cros-ec-sbs.dtsi                      |   52 -
+ ...vb-u-boot.dtsi => rk3288-evb-rk808-u-boot.dtsi} |    0
+ arch/arm/dts/rk3288-evb.dts                        |   20 -
+ arch/arm/dts/rk3288-evb.dtsi                       |  476 --------
+ arch/arm/dts/rk3288-popmetal.dts                   |   20 -
+ arch/arm/dts/rk3288-popmetal.dtsi                  |  547 ---------
+ arch/arm/dts/rk3288-rock-pi-n8.dts                 |   17 -
+ arch/arm/dts/rk3288-rock2-som.dtsi                 |  278 -----
+ arch/arm/dts/rk3288-rock2-square.dts               |  181 ---
+ arch/arm/dts/rk3288-veyron-chromebook.dtsi         |  205 ----
+ arch/arm/dts/rk3288-veyron-jerry.dts               |  208 ----
+ arch/arm/dts/rk3288-veyron-mickey.dts              |  266 -----
+ arch/arm/dts/rk3288-veyron-minnie.dts              |  302 -----
+ arch/arm/dts/rk3288-veyron-speedy.dts              |  143 ---
+ arch/arm/dts/rk3288-veyron.dtsi                    |  795 -------------
+ arch/arm/dts/rk3288-vmarc-som.dtsi                 |  361 ------
+ arch/arm/dts/rk3288-vyasa.dts                      |  473 --------
+ arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi       |   11 +
+ arch/arm/dts/rk3576-u-boot.dtsi                    |    4 -
+ arch/arm/dts/rk3588-generic.dts                    |    4 +-
+ arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi    |  137 ---
+ arch/arm/dts/rockchip-u-boot.dtsi                  |    6 +-
+ arch/arm/include/asm/arch-rk3506/boot0.h           |    9 +
+ arch/arm/include/asm/arch-rk3506/gpio.h            |    9 +
+ arch/arm/include/asm/arch-rockchip/clock.h         |   10 +
+ arch/arm/include/asm/arch-rockchip/cru_rk3506.h    |  181 +++
+ arch/arm/mach-rockchip/Kconfig                     |   46 +-
+ arch/arm/mach-rockchip/Makefile                    |    1 +
+ arch/arm/mach-rockchip/rk3506/Kconfig              |   15 +
+ arch/arm/mach-rockchip/rk3506/Makefile             |    5 +
+ arch/arm/mach-rockchip/rk3506/clk_rk3506.c         |   16 +
+ arch/arm/mach-rockchip/rk3506/rk3506.c             |  125 +++
+ arch/arm/mach-rockchip/rk3506/syscon_rk3506.c      |   19 +
+ arch/arm/mach-rockchip/rk3528/MAINTAINERS          |    6 +
+ arch/arm/mach-rockchip/rk3528/rk3528.c             |   15 -
+ arch/arm/mach-rockchip/rk3576/rk3576.c             |    6 +
+ arch/arm/mach-rockchip/rk3588/Kconfig              |    9 +-
+ arch/arm/mach-rockchip/rk3588/rk3588.c             |  260 +++++
+ arch/arm/mach-rockchip/sdram.c                     |    7 +-
+ arch/arm/mach-rockchip/spl.c                       |   63 +-
+ board/amarula/vyasa-rk3288/MAINTAINERS             |    1 -
+ board/chipspark/popmetal_rk3288/MAINTAINERS        |    1 -
+ board/google/veyron/MAINTAINERS                    |   10 +-
+ board/rockchip/evb_rk3288/MAINTAINERS              |    6 +-
+ configs/chromebit_mickey_defconfig                 |    4 +-
+ configs/chromebook_jerry_defconfig                 |    4 +-
+ configs/chromebook_minnie_defconfig                |    4 +-
+ configs/chromebook_speedy_defconfig                |    4 +-
+ ...rk3288_defconfig => evb-rk3288-rk808_defconfig} |    4 +-
+ configs/firefly-rk3288_defconfig                   |    1 -
+ configs/generic-rk3588_defconfig                   |    1 +
+ configs/miqi-rk3288_defconfig                      |    1 -
+ configs/nanopi-zero2-rk3528_defconfig              |   64 ++
+ configs/phycore-rk3288_defconfig                   |    3 +-
+ configs/popmetal-rk3288_defconfig                  |    4 +-
+ configs/rock-5c-rk3588s_defconfig                  |    1 +
+ configs/rock-pi-n8-rk3288_defconfig                |    2 +-
+ configs/rock2_defconfig                            |    4 +-
+ configs/tiger-rk3588_defconfig                     |    4 -
+ configs/tinker-rk3288_defconfig                    |    1 -
+ configs/tinker-s-rk3288_defconfig                  |    1 -
+ configs/vyasa-rk3288_defconfig                     |    4 +-
+ doc/board/rockchip/rockchip.rst                    |   13 +-
+ drivers/clk/rockchip/Makefile                      |    1 +
+ drivers/clk/rockchip/clk_rk3506.c                  | 1166 ++++++++++++++++++++
+ drivers/misc/rockchip-otp.c                        |    4 +
+ drivers/net/dwc_eth_qos.c                          |    4 +
+ drivers/net/dwc_eth_qos_rockchip.c                 |   86 ++
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c      |   20 +
+ drivers/phy/rockchip/phy-rockchip-naneng-combphy.c |    8 +
+ drivers/pinctrl/rockchip/Makefile                  |    1 +
+ drivers/pinctrl/rockchip/pinctrl-rk3506.c          |  462 ++++++++
+ drivers/pinctrl/rockchip/pinctrl-rockchip-core.c   |   46 +-
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h        |    1 +
+ drivers/ram/rockchip/Makefile                      |    1 +
+ drivers/ram/rockchip/sdram_rk3506.c                |   33 +
+ drivers/reset/Makefile                             |    2 +-
+ drivers/reset/rst-rk3506.c                         |  222 ++++
+ drivers/usb/gadget/Kconfig                         |    1 +
+ .../Bindings/clock/rockchip,rk3506-cru.yaml        |   55 +
+ .../dt-bindings/clock/rockchip,rk3506-cru.h        |  285 +++++
+ .../dt-bindings/reset/rockchip,rk3506-cru.h        |  211 ++++
+ dts/upstream/src/arm/rockchip/rk3288-veyron.dtsi   |    2 +-
+ dts/upstream/src/arm/rockchip/rk3288.dtsi          |    9 +-
+ include/configs/rk3506_common.h                    |   38 +
+ tools/rkcommon.c                                   |    5 +-
+ 87 files changed, 3518 insertions(+), 4606 deletions(-)
+ delete mode 100644 arch/arm/dts/cros-ec-sbs.dtsi
+ rename arch/arm/dts/{rk3288-evb-u-boot.dtsi => rk3288-evb-rk808-u-boot.dtsi} (100%)
+ delete mode 100644 arch/arm/dts/rk3288-evb.dts
+ delete mode 100644 arch/arm/dts/rk3288-evb.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-popmetal.dts
+ delete mode 100644 arch/arm/dts/rk3288-popmetal.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-rock-pi-n8.dts
+ delete mode 100644 arch/arm/dts/rk3288-rock2-som.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-rock2-square.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-chromebook.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-veyron-jerry.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-mickey.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-minnie.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron-speedy.dts
+ delete mode 100644 arch/arm/dts/rk3288-veyron.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-vmarc-som.dtsi
+ delete mode 100644 arch/arm/dts/rk3288-vyasa.dts
+ create mode 100644 arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi
+ create mode 100644 arch/arm/include/asm/arch-rk3506/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3506/gpio.h
+ create mode 100644 arch/arm/include/asm/arch-rockchip/cru_rk3506.h
+ create mode 100644 arch/arm/mach-rockchip/rk3506/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3506/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3506/clk_rk3506.c
+ create mode 100644 arch/arm/mach-rockchip/rk3506/rk3506.c
+ create mode 100644 arch/arm/mach-rockchip/rk3506/syscon_rk3506.c
+ rename configs/{evb-rk3288_defconfig => evb-rk3288-rk808_defconfig} (95%)
+ create mode 100644 configs/nanopi-zero2-rk3528_defconfig
+ create mode 100644 drivers/clk/rockchip/clk_rk3506.c
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3506.c
+ create mode 100644 drivers/ram/rockchip/sdram_rk3506.c
+ create mode 100644 drivers/reset/rst-rk3506.c
+ create mode 100644 dts/upstream/Bindings/clock/rockchip,rk3506-cru.yaml
+ create mode 100644 dts/upstream/include/dt-bindings/clock/rockchip,rk3506-cru.h
+ create mode 100644 dts/upstream/include/dt-bindings/reset/rockchip,rk3506-cru.h
+ create mode 100644 include/configs/rk3506_common.h
