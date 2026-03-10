@@ -4,99 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 767E9FD4F07
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 16:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8AD0FD4F08
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 17:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC661840EE;
-	Tue, 10 Mar 2026 17:54:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A959840EE;
+	Tue, 10 Mar 2026 18:17:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b5VSGatJ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D49984137; Tue, 10 Mar 2026 17:28:32 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F9D7840EE
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:28:29 +0100 (CET)
+ id 67C3A8412A; Tue, 10 Mar 2026 18:17:02 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 366EB840D8
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 18:16:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-3598df39444so6164994a91.2
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 09:28:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773160108; x=1773764908; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Y1O/1v0n9j2mB7LDQk1Jpoqq/fHE7oSJ3HGGW4yrqbk=;
- b=b5VSGatJkGz5J6LOy9ypssSgyMsw3oQNFROpNdgXxRrMsw+7qGN6ag6AnF5x4cckhN
- tJs9g5YJNrOc1Lz8pjrJZb++cgzGIE+1nIvk6zvwK8CFoNkfD11c+3fODTKcVRotAx/t
- jv18nQIbMkVgTYKDV2Ix51rGAg6bpcQxPu/l0N/5eTu5YLDWaYFXukxQ7tjL4vHp0LXw
- JJEnqMz0a4/GjlMQ7h92rUu/N6Ixig44Ars+rKIeLZ3l7G1ysr+JZRJXBzFcvFrPtxl6
- 5o3HB4T++2bbr8rjw+IVK8eZOoJ34EgXt8hS6v15tIi+Ehl+hiYAOg2mto/t6itD1C3E
- ssLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773160108; x=1773764908;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y1O/1v0n9j2mB7LDQk1Jpoqq/fHE7oSJ3HGGW4yrqbk=;
- b=Mik0NmV07Ka3lCZJ0tu3PMHIOYoqV1qKr3xjuEG4ILD2A0gaz3kAiaFdoxKF0+ltlG
- zRWaubfrfGsUsxhQoCW9LcbIEjwnyTFAuE3aUi6gJByNqb5yewnrGlkaE29G5wDhbkAh
- l5/uathiyhaENMYIzYJP81LGQBiqkiNo0ph7TX1C/gWGppfvdjeM7iUmwMvjklRhjVFx
- wir2YIw11utMNat1PqyNWGyiS3HBTSamGPn/62nGKPdNucn7MSHJUErR6iQ1aswLTVSC
- 99z5JGBpuQhQ2Q0NzLT+VKL0yFmjBUuytYYWJLH41Awsd+1M4INKe4zA7dtiEgRJdqcQ
- 076Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXkRfuhEB8vhNb6sytg63XHZHK0uQARUWhokZYWanbmuhB8e+EdhEyQ0qhgoEtwxFkwEJDbOys=@lists.denx.de
-X-Gm-Message-State: AOJu0YzE8A83e5e+UbmLM4+8UNmrrkRJdA19jALET/cFUbS1HxgZKh48
- TQu9DBUAqpAhTx3oyt6azUUvspJvDPz3sF4zFjWqsYSb7Ozc4LYTdXim
-X-Gm-Gg: ATEYQzxCearg/8DZ6rhqnbhpbu/MAam2GYjqPlRHmzB5OsjXXRw+AqRvNwfHQNDwvo+
- VXdCflq7qOX99NMnrnp/dhHc6831a351a+DqwcIz0xJQxFoIyav6EWDWqJ0PIJYlbnNwtqxGAAc
- L450n8OTd3+zkQZs673nKq7S37AU33xKeFMyJIDldcYYJDevPGSf17+jbbo7ea9E/d50ULROunA
- MgNbq3hwnGsgxFUIa5uuqx9scTiQaR/IaNHWYpEYW6pDpr3EvXpxiBs+tBjxbXNckwgkrqppdh7
- gEUUxgH5PX7ulorZKyM1t+iy2qAKRMSpKTU8ebLzTkZoTc0G6qR0GkJhglkXphSamH7Ge0z+wUp
- 1OjBoxLw0IOaipgo3MBq7jBaGlOUNim0ZD/7YM/3lIb5Q8iakBvr10ciijK7Sh63y4TSN51KOec
- AlLVkHge8dl8Hhg0FtBtXjBEtED8HKbOALytWt1hvoqRP5kl7TmHJAZ+f3NofDdOLdyYPdCfOYs
- OrfZ2aHYS4=
-X-Received: by 2002:a17:903:2c50:b0:295:560a:e499 with SMTP id
- d9443c01a7336-2ae82367c52mr150454825ad.5.1773160107999; 
- Tue, 10 Mar 2026 09:28:27 -0700 (PDT)
-Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ae83eaef2asm158109335ad.39.2026.03.10.09.28.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Mar 2026 09:28:27 -0700 (PDT)
-Message-ID: <fccd3418-05c8-43cf-83b7-3a2500b449f6@gmail.com>
-Date: Wed, 11 Mar 2026 00:28:24 +0800
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4808914BF;
+ Tue, 10 Mar 2026 10:16:52 -0700 (PDT)
+Received: from debian (X72Y076X74-2.nice.arm.com [10.34.128.252])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B48C83F694;
+ Tue, 10 Mar 2026 10:16:57 -0700 (PDT)
+Date: Tue, 10 Mar 2026 18:16:54 +0100
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/5] efi_selftest: fix buffer overflow
+Message-ID: <abBSBsF7Pb6gCSGL@debian>
+Mail-Followup-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20260219184400.257008-1-vincent.stehle@arm.com>
+ <20260219184400.257008-2-vincent.stehle@arm.com>
+ <db9de791-60fe-4308-b2d3-66ad6eb07684@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] net: phy: air_en8811h: use standard
- rx-polarity/tx-polarity properties
-To: Vladimir Oltean <vladimir.oltean@nxp.com>
-Cc: trini@konsulko.com, jerome.forissier@arm.com, sumit.garg@kernel.org,
- marek.vasut+renesas@mailbox.org, ericwouds@gmail.com, kabel@kernel.org,
- frank-w@public-files.de, daniel@makrotopia.org, ansuelsmth@gmail.com,
- mkorpershoek@kernel.org, skylake.huang@mediatek.com, tommy.shih@airoha.com,
- lucien.jheng@airoha.com, u-boot@lists.denx.de
-References: <20260308140614.50489-1-lucienzx159@gmail.com>
- <20260308140614.50489-1-lucienzx159@gmail.com>
- <20260308140614.50489-3-lucienzx159@gmail.com>
- <20260308140614.50489-3-lucienzx159@gmail.com>
- <20260310082847.sbo7aoqsohij62p3@skbuf>
-Content-Language: en-US
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-In-Reply-To: <20260310082847.sbo7aoqsohij62p3@skbuf>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 10 Mar 2026 17:54:39 +0100
+In-Reply-To: <db9de791-60fe-4308-b2d3-66ad6eb07684@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,147 +62,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Feb 24, 2026 at 04:45:48PM +0100, Heinrich Schuchardt wrote:
 
-Vladimir Oltean 於 2026/3/10 下午 04:28 寫道:
-> On Sun, Mar 08, 2026 at 10:06:14PM +0800, Lucien.Jheng wrote:
->> diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
->> index 1a628ede82b..0ec11ba5231 100644
->> --- a/drivers/net/phy/airoha/air_en8811.c
->> +++ b/drivers/net/phy/airoha/air_en8811.c
->> @@ -23,6 +23,7 @@
->>   #include <linux/compat.h>
->>   #include <dm/device_compat.h>
->>   #include <u-boot/crc.h>
->> +#include <linux/phy/phy-common-props.h>
->>
->>   #define EN8811H_PHY_ID		0x03a2a411
->>
->> @@ -660,11 +661,82 @@ static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
->>   	return 0;
->>   }
->>
->> -static int en8811h_config(struct phy_device *phydev)
->> +static int en8811h_config_polarity(struct phy_device *phydev)
->>   {
->> -	struct en8811h_priv *priv = phydev->priv;
->>   	ofnode node = phy_get_ofnode(phydev);
->> +	unsigned int rx_pol, tx_pol;
->>   	u32 pbus_value = 0;
->> +	int ret;
->> +	bool use_legacy = false;
->> +
->> +	if (!ofnode_valid(node))
->> +		return 0;
->> +
->> +	/* Try standard rx-polarity property first */
->> +	ret = phy_get_manual_rx_polarity(node,
->> +					 phy_interface_strings[phydev->interface],
->> +					 &rx_pol);
->> +	if (ret == 0) {
->> +		dev_info(phydev->dev, "EN8811H: RX polarity = %s\n",
->> +			 rx_pol == PHY_POL_INVERT ? "inverted" : "normal");
->> +		if (rx_pol == PHY_POL_INVERT)
->> +			pbus_value |= EN8811H_POLARITY_RX_REVERSE;
->> +		else
->> +			pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
->> +	} else if (ret == -ENOENT) {
->> +		/* Fall back to legacy airoha,pnswap-rx property */
->> +		use_legacy = true;
->> +		dev_info(phydev->dev, "EN8811H: Legacy RX polarity\n");
->> +
->> +		if (ofnode_read_bool(node, "airoha,pnswap-rx"))
->> +			pbus_value |= EN8811H_POLARITY_RX_REVERSE;
->> +		else
->> +			pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
->> +	} else {
->> +		dev_err(phydev->dev, "EN8811H: Error reading rx-polarity: %d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	/* Try standard tx-polarity property first */
->> +	ret = phy_get_manual_tx_polarity(node,
->> +					 phy_interface_strings[phydev->interface],
->> +					 &tx_pol);
->> +	if (ret == 0) {
->> +		dev_info(phydev->dev, "EN8811H: TX polarity = %s\n",
->> +			 tx_pol == PHY_POL_INVERT ? "inverted" : "normal");
->> +		if (tx_pol == PHY_POL_INVERT)
->> +			pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
->> +		else
->> +			pbus_value |= EN8811H_POLARITY_TX_NORMAL;
->> +	} else if (ret == -ENOENT) {
->> +		/* Fall back to legacy airoha,pnswap-tx property */
->> +		if (!use_legacy)
->> +			dev_err(phydev->dev, "EN8811H: Mixing standard and legacy polarity properties\n");
-> Mixing should be perfectly legal. Otherwise there's no way of converting
-> an old scheme to the new one without breaking backwards compatibility.
->
-> The way in which this is done in Linux is by reading the legacy
-> properties first (with a fallback on PHY_POL_NORMAL if absent) and then
-> using them as "default" argument for phy_get_(rx|tx)_polarity(). The
-> phy_get_manual_(rx|tx)_polarity() are intended for the use case where
-> you have no legacy property to support.
->
-> I believe doing the same way here would simplify your logic quite a bit.
-> No need to look at the specific "ret" value, and no need to duplicate
-> the pbus_value modification.
+Hi Heinrich,
 
-Thank you for your comment.
+Thanks for your review and sorry for the late reply.
+My answers below.
 
-I think I misinterpreted the code section.
+Best regards,
+Vincent.
 
-I will re-examine the Linux implementation and refine my code accordingly.
+> On 2/19/26 19:43, Vincent Stehlé wrote:
+> > The test of the UEFI LocateHandleBuffer() function clears a returned buffer
+> > at some point to reuse it, but there is an error in the size computation,
+> > which leads to a buffer overflow; fix it.
+> > 
+> > Fixes: 927ca890b09f ("efi_selftest: test protocol management")
+> > Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > ---
+> >   lib/efi_selftest/efi_selftest_manageprotocols.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/lib/efi_selftest/efi_selftest_manageprotocols.c b/lib/efi_selftest/efi_selftest_manageprotocols.c
+> > index 097b2ae3545..ccffa59095d 100644
+> > --- a/lib/efi_selftest/efi_selftest_manageprotocols.c
+> > +++ b/lib/efi_selftest/efi_selftest_manageprotocols.c
+> > @@ -241,7 +241,7 @@ static int execute(void)
+> >   		return EFI_ST_FAILURE;
+> >   	}
+> >   	/* Clear the buffer, we are reusing it it the next step. */
+> > -	boottime->set_mem(buffer, sizeof(efi_handle_t) * buffer_size, 0);
+> > +	boottime->set_mem(buffer, sizeof(efi_handle_t) * count, 0);
+> >   	/*
+> >   	 * Test LocateHandle with ByProtocol
+> 
+> Hello Vincent,
+> 
+> Thank you for reviewing the code and pointing to an issue.
+> 
+> The fix looks incomplete to me:
 
->> +
->> +		dev_info(phydev->dev, "EN8811H: Legacy TX polarity\n");
->> +
->> +		if (ofnode_read_bool(node, "airoha,pnswap-tx"))
->> +			pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
->> +		else
->> +			pbus_value |= EN8811H_POLARITY_TX_NORMAL;
->> +	} else {
->> +		dev_err(phydev->dev, "EN8811H: Error reading tx-polarity: %d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	/* Apply polarity configuration to hardware */
->> +	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
->> +				      EN8811H_POLARITY_RX_REVERSE |
->> +				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
->> +	if (ret < 0)
->> +		return ret;
->> +
->> +	return 0;
->> +}
->> +
->> +static int en8811h_config(struct phy_device *phydev)
->> +{
->> +	struct en8811h_priv *priv = phydev->priv;
->>   	int ret = 0;
->>
->>   	/* If restart happened in .probe(), no need to restart now */
->> @@ -695,19 +767,8 @@ static int en8811h_config(struct phy_device *phydev)
->>   	if (ret < 0)
->>   		return ret;
->>
->> -	/* Serdes polarity */
->> -	pbus_value = 0;
->> -	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
->> -		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
->> -	else
->> -		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
->> -	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
->> -		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
->> -	else
->> -		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
->> -	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
->> -				      EN8811H_POLARITY_RX_REVERSE |
->> -				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
->> +	/* Configure Serdes polarity from device tree */
->> +	ret = en8811h_config_polarity(phydev);
->>   	if (ret < 0)
->>   		return ret;
->>
->> --
->> 2.34.1
->>
+You are right: I broke down all the fixes into multiple steps, which explains
+why the first patch ("fix buffer overflow") is not the full story.
+
+I thought this would ease reviewing but now I wonder if that was maybe a bad
+idea. Let me know if I should send a v2 with the series as a single patch if
+that helps.
+
+> 
+> In line 167 we allocate a buffer with LocateHandleBuffer(). Assigning
+> buffer_size in line 173 does not make any sense, as we free the buffer in
+> line 185.
+
+This is removed in patch 4 ("fix buffer size and count computations").
+
+> 
+> In line 223 we allocate another buffer with LocateHandleBuffer().
+> Assigning the value of buffer_size value to count before the invocation
+> doesn't make much sense.
+
+This is removed in patch 3 ("remove unnecessary initializations").
+
+> 
+> You fix in line 244 looks correct.
+> 
+> Line 249 sets count to an arbitrary value that is not related to the size of
+> the buffer.
+
+This part is reworked in patch 4 to use buffer_size instead.
+
+> 
+> Line 260 sets variable buffer_size and buffer_size is again used in line 306
+> to set count to an unused value.
+
+This is removed in patch 3.
+
+> 
+> We should completely remove variable buffer_size from the function.
+
+The patch series takes a different approach: keep both count and buffer_size
+variables, and make sure to use those variables to contain quantities
+corresponding to their respective names.
+
+> 
+> Best regards
+> 
+> Heinrich
