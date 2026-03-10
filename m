@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B999FFCC9A5
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:56:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 282C5FCC9A2
+	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 00:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FE4484035;
-	Tue, 10 Mar 2026 01:55:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 23BE883FE1;
+	Tue, 10 Mar 2026 01:55:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="JQFj2AWm";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PDO9LvwZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BFB083F75; Tue, 10 Mar 2026 01:55:30 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 88B1C8404D; Tue, 10 Mar 2026 01:55:36 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 225FA8400F
- for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:55:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7783B8402F
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 01:55:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1773104124; bh=HeUYj+TJsx9Dkg7gwbnaQKdAsVnR15ShqVrGJahxstk=;
- b=JQFj2AWm8jEjjwKwp+EWMlxrLew83m6zykKVC6WZOkLcn5OPP6hfCxCpiFhbuGOQC5nRlPnUR
- eAtZbEV0AW1b7s+a0PNVsIdOE39kpUK1KBwBZNAiIskhqnelIvL9SEzy/w0/HYSGZC7BzC3xDaG
- 9Qq6pWKmOW+NX3jRWJCcudXXL8J2KhslXNP4+P65shOWgYWeppTRFv4/BdEBqkxKzNotYkrfb6N
- eQp05lvWQM945ZHJGkuEtwNh0tzcG/pT9w2BrYMeKq4Kw2JUkA4PoMUK358+cdr+nsx4JvKhP8k
- Yg/Nj6nkuqtb+IREjJo76t0U2x8IQmRRBe356ryfNfZg==
-X-Forward-Email-ID: 69af6bfc73a8189bec327857
+ t=1773104130; bh=hiJt3fsuGFtvpKsv8b5OqfKkw5V1NGwuCTJBYDCXJE4=;
+ b=PDO9LvwZCOrbdUmyGjvzTb3bl+c8gxcGmHyqfiC9d540xcHewkyh3a5xZwT4rCBENjOEH2Caf
+ pjhdqvDhow8iucE8ze6tOK4Zte1k/NgYvRASO4BS6zmThZ5hBt9TPuJvp7XPXlJ8IRI1zdqibYD
+ RYurXZqpmcDMA0LOBpDP+vv0AVFe1LdiOhlgUpEkgRyRRxt4+tMSQF7HRL4VzfCuGGMUZjebBjR
+ LyPC+Aee6drEZ2NonjeFf1GIQyErQFACJuOkRJe9nzqMRycB8Y/0DC7MHgyvXL1dcPbhfNJuaLt
+ SmPhlbImV1LWWUAdbqIEmOXeXqtjmvSORdOkUbSU8ohA==
+X-Forward-Email-ID: 69af6c0173a8189bec327872
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 121.127.44.66
 X-Forward-Email-Version: 2.6.49
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -45,12 +45,13 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@arm.com>
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>
 Cc: Aaron Griffith <aargri@gmail.com>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 11/12] net: dwc_eth_qos_rockchip: Add support for RK3506
-Date: Tue, 10 Mar 2026 00:53:06 +0000
-Message-ID: <20260310005326.606079-12-jonas@kwiboo.se>
+Subject: [PATCH v3 12/12] arch: arm: rockchip: Add initial support for RK3506
+Date: Tue, 10 Mar 2026 00:53:07 +0000
+Message-ID: <20260310005326.606079-13-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260310005326.606079-1-jonas@kwiboo.se>
 References: <20260310005326.606079-1-jonas@kwiboo.se>
@@ -72,140 +73,383 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rockchip RK3506 has two Ethernet controllers based on Synopsys DWC
-Ethernet QoS IP.
+Rockchip RK3506 is a ARM-based SoC with tri-core Cortex-A7.
 
-Add initial support for the RK3506 GMAC variant.
+Add initial arch support for the RK3506 SoC.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org> # drivers/usb/gadget
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v3: Collect r-b tag
-v2: No change
+Changes in v3:
+- Remove unneeded rockchip_get_clk()
+- Remove unneeded syscon_rk3506.c
+- Add BOOTSOURCE_SPINOR mapping
+- Update emmc/sdmmc comment
+- Collect r-b tag
+Changes in v2:
+- Enable SPL_ARMV7_SET_CORTEX_SMPEN
+- Drop read_brom_bootsource_id() now that default impl support 0x81
+- Fix mac1 and otg1 access to ddr memory
+- Collect a-b tag
 ---
- drivers/net/dwc_eth_qos.c          |  4 ++
- drivers/net/dwc_eth_qos_rockchip.c | 86 ++++++++++++++++++++++++++++++
- 2 files changed, 90 insertions(+)
+ arch/arm/include/asm/arch-rk3506/boot0.h   |   9 ++
+ arch/arm/include/asm/arch-rk3506/gpio.h    |   9 ++
+ arch/arm/mach-rockchip/Kconfig             |  44 +++++++
+ arch/arm/mach-rockchip/Makefile            |   1 +
+ arch/arm/mach-rockchip/rk3506/Kconfig      |  15 +++
+ arch/arm/mach-rockchip/rk3506/Makefile     |   4 +
+ arch/arm/mach-rockchip/rk3506/clk_rk3506.c |   9 ++
+ arch/arm/mach-rockchip/rk3506/rk3506.c     | 126 +++++++++++++++++++++
+ drivers/usb/gadget/Kconfig                 |   1 +
+ include/configs/rk3506_common.h            |  38 +++++++
+ 10 files changed, 256 insertions(+)
+ create mode 100644 arch/arm/include/asm/arch-rk3506/boot0.h
+ create mode 100644 arch/arm/include/asm/arch-rk3506/gpio.h
+ create mode 100644 arch/arm/mach-rockchip/rk3506/Kconfig
+ create mode 100644 arch/arm/mach-rockchip/rk3506/Makefile
+ create mode 100644 arch/arm/mach-rockchip/rk3506/clk_rk3506.c
+ create mode 100644 arch/arm/mach-rockchip/rk3506/rk3506.c
+ create mode 100644 include/configs/rk3506_common.h
 
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 8a396d0b29ea..0f31d6468456 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -1620,6 +1620,10 @@ static const struct udevice_id eqos_ids[] = {
- 	},
- #endif
- #if IS_ENABLED(CONFIG_DWC_ETH_QOS_ROCKCHIP)
-+	{
-+		.compatible = "rockchip,rk3506-gmac",
-+		.data = (ulong)&eqos_rockchip_config
-+	},
- 	{
- 		.compatible = "rockchip,rk3528-gmac",
- 		.data = (ulong)&eqos_rockchip_config
-diff --git a/drivers/net/dwc_eth_qos_rockchip.c b/drivers/net/dwc_eth_qos_rockchip.c
-index d646d3ebac87..4ccefda0ef5e 100644
---- a/drivers/net/dwc_eth_qos_rockchip.c
-+++ b/drivers/net/dwc_eth_qos_rockchip.c
-@@ -50,6 +50,80 @@ struct rockchip_platform_data {
- 	(((tx) ? soc##_GMAC_TXCLK_DLY_ENABLE : soc##_GMAC_TXCLK_DLY_DISABLE) | \
- 	 ((rx) ? soc##_GMAC_RXCLK_DLY_ENABLE : soc##_GMAC_RXCLK_DLY_DISABLE))
+diff --git a/arch/arm/include/asm/arch-rk3506/boot0.h b/arch/arm/include/asm/arch-rk3506/boot0.h
+new file mode 100644
+index 000000000000..8ae46f25a87a
+--- /dev/null
++++ b/arch/arm/include/asm/arch-rk3506/boot0.h
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* Copyright Contributors to the U-Boot project. */
++
++#ifndef __ASM_ARCH_BOOT0_H__
++#define __ASM_ARCH_BOOT0_H__
++
++#include <asm/arch-rockchip/boot0.h>
++
++#endif
+diff --git a/arch/arm/include/asm/arch-rk3506/gpio.h b/arch/arm/include/asm/arch-rk3506/gpio.h
+new file mode 100644
+index 000000000000..5516e649b80b
+--- /dev/null
++++ b/arch/arm/include/asm/arch-rk3506/gpio.h
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* Copyright Contributors to the U-Boot project. */
++
++#ifndef __ASM_ARCH_GPIO_H__
++#define __ASM_ARCH_GPIO_H__
++
++#include <asm/arch-rockchip/gpio.h>
++
++#endif
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 92bb4aa62f11..dcaf15a3161e 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -317,6 +317,49 @@ config ROCKCHIP_RK3399
+ 	  and video codec support. Peripherals include Gigabit Ethernet,
+ 	  USB2 host and OTG, SDIO, I2S, UARTs, SPI, I2C and PWMs.
  
-+#define RK3506_GRF_SOC_CON8		0x0020
-+#define RK3506_GRF_SOC_CON11		0x002c
++config ROCKCHIP_RK3506
++	bool "Support Rockchip RK3506"
++	select CPU_V7A
++	select SUPPORT_SPL
++	select SPL
++	select CLK
++	select PINCTRL
++	select RAM
++	select REGMAP
++	select SYSCON
++	select BOARD_LATE_INIT
++	select DM_REGULATOR_FIXED
++	select DM_RESET
++	imply BOOTSTD_FULL
++	imply DM_RNG
++	imply ENV_RELOC_GD_ENV_ADDR
++	imply FIT
++	imply LEGACY_IMAGE_FORMAT
++	imply MISC
++	imply MISC_INIT_R
++	imply OF_LIBFDT_OVERLAY
++	imply OF_LIVE
++	imply RNG_ROCKCHIP
++	imply ROCKCHIP_COMMON_BOARD
++	imply ROCKCHIP_COMMON_STACK_ADDR
++	imply ROCKCHIP_EXTERNAL_TPL
++	imply ROCKCHIP_OTP
++	imply SPL_ARMV7_SET_CORTEX_SMPEN
++	imply SPL_CLK
++	imply SPL_DM_SEQ_ALIAS
++	imply SPL_FIT_SIGNATURE
++	imply SPL_LOAD_FIT
++	imply SPL_OF_CONTROL
++	imply SPL_PINCTRL
++	imply SPL_RAM
++	imply SPL_REGMAP
++	imply SPL_SERIAL
++	imply SPL_SYSCON
++	imply SYS_ARCH_TIMER
++	imply SYSRESET
++	help
++	  The Rockchip RK3506 is a ARM-based SoC with a tri-core Cortex-A7.
 +
-+#define RK3506_GMAC_RMII_MODE		GRF_BIT(1)
+ config ROCKCHIP_RK3528
+ 	bool "Support Rockchip RK3528"
+ 	select ARM64
+@@ -745,6 +788,7 @@ source "arch/arm/mach-rockchip/rk3308/Kconfig"
+ source "arch/arm/mach-rockchip/rk3328/Kconfig"
+ source "arch/arm/mach-rockchip/rk3368/Kconfig"
+ source "arch/arm/mach-rockchip/rk3399/Kconfig"
++source "arch/arm/mach-rockchip/rk3506/Kconfig"
+ source "arch/arm/mach-rockchip/rk3528/Kconfig"
+ source "arch/arm/mach-rockchip/rk3568/Kconfig"
+ source "arch/arm/mach-rockchip/rk3576/Kconfig"
+diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
+index 06fb527b21a0..d3bc0689f893 100644
+--- a/arch/arm/mach-rockchip/Makefile
++++ b/arch/arm/mach-rockchip/Makefile
+@@ -42,6 +42,7 @@ obj-$(CONFIG_ROCKCHIP_RK3308) += rk3308/
+ obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328/
+ obj-$(CONFIG_ROCKCHIP_RK3368) += rk3368/
+ obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399/
++obj-$(CONFIG_ROCKCHIP_RK3506) += rk3506/
+ obj-$(CONFIG_ROCKCHIP_RK3528) += rk3528/
+ obj-$(CONFIG_ROCKCHIP_RK3568) += rk3568/
+ obj-$(CONFIG_ROCKCHIP_RK3576) += rk3576/
+diff --git a/arch/arm/mach-rockchip/rk3506/Kconfig b/arch/arm/mach-rockchip/rk3506/Kconfig
+new file mode 100644
+index 000000000000..92f187458c66
+--- /dev/null
++++ b/arch/arm/mach-rockchip/rk3506/Kconfig
+@@ -0,0 +1,15 @@
++if ROCKCHIP_RK3506
 +
-+#define RK3506_GMAC_CLK_RMII_DIV2	GRF_BIT(3)
-+#define RK3506_GMAC_CLK_RMII_DIV20	GRF_CLR_BIT(3)
++config ROCKCHIP_BOOT_MODE_REG
++	default 0xff910200
 +
-+#define RK3506_GMAC_CLK_SELECT_CRU	GRF_CLR_BIT(5)
-+#define RK3506_GMAC_CLK_SELECT_IO	GRF_BIT(5)
++config ROCKCHIP_STIMER_BASE
++	default 0xff980000
 +
-+#define RK3506_GMAC_CLK_RMII_GATE	GRF_BIT(2)
-+#define RK3506_GMAC_CLK_RMII_NOGATE	GRF_CLR_BIT(2)
++config SYS_SOC
++	default "rk3506"
 +
-+static int rk3506_set_to_rgmii(struct udevice *dev,
-+			       int tx_delay, int rx_delay)
++config SYS_CONFIG_NAME
++	default "rk3506_common"
++
++endif
+diff --git a/arch/arm/mach-rockchip/rk3506/Makefile b/arch/arm/mach-rockchip/rk3506/Makefile
+new file mode 100644
+index 000000000000..63a6c2c2d18d
+--- /dev/null
++++ b/arch/arm/mach-rockchip/rk3506/Makefile
+@@ -0,0 +1,4 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++obj-y += rk3506.o
++obj-y += clk_rk3506.o
+diff --git a/arch/arm/mach-rockchip/rk3506/clk_rk3506.c b/arch/arm/mach-rockchip/rk3506/clk_rk3506.c
+new file mode 100644
+index 000000000000..38b9cbc16da2
+--- /dev/null
++++ b/arch/arm/mach-rockchip/rk3506/clk_rk3506.c
+@@ -0,0 +1,9 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++// Copyright Contributors to the U-Boot project.
++
++#include <asm/arch-rockchip/cru_rk3506.h>
++
++void *rockchip_get_cru(void)
 +{
-+	return -EINVAL;
++	return (void *)RK3506_CRU_BASE;
++}
+diff --git a/arch/arm/mach-rockchip/rk3506/rk3506.c b/arch/arm/mach-rockchip/rk3506/rk3506.c
+new file mode 100644
+index 000000000000..d98f9a11252b
+--- /dev/null
++++ b/arch/arm/mach-rockchip/rk3506/rk3506.c
+@@ -0,0 +1,126 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++// Copyright Contributors to the U-Boot project.
++
++#define LOG_CATEGORY LOGC_ARCH
++
++#include <dm.h>
++#include <misc.h>
++#include <asm/arch-rockchip/bootrom.h>
++#include <asm/arch-rockchip/hardware.h>
++
++#define SGRF_BASE			0xff210000
++
++#define FIREWALL_DDR_BASE		0xff5f0000
++#define FW_DDR_MST1_REG			0x24
++#define FW_DDR_MST2_REG			0x28
++#define FW_DDR_MST3_REG			0x2c
++
++const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
++	[BROM_BOOTSOURCE_EMMC] = "/soc/mmc@ff480000",
++	[BROM_BOOTSOURCE_SPINOR] = "/soc/spi@ff488000/flash@0",
++	[BROM_BOOTSOURCE_SD] = "/soc/mmc@ff480000",
++};
++
++void board_debug_uart_init(void)
++{
 +}
 +
-+static int rk3506_set_to_rmii(struct udevice *dev)
++int arch_cpu_init(void)
 +{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
++	u32 val;
++
++	if (!IS_ENABLED(CONFIG_SPL_BUILD))
++		return 0;
++
++	/* Select non-secure OTPC */
++	rk_clrreg(SGRF_BASE + 0x100, BIT(1));
++
++	/* Set the emmc/sdmmc to access ddr memory */
++	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
++	writel(val & 0xffff00ff, FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
++
++	/* Set the fspi to access ddr memory */
++	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
++	writel(val & 0xff00ffff, FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
++
++	/* Set the mac0 to access ddr memory */
++	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
++	writel(val & 0xf0ffffff, FIREWALL_DDR_BASE + FW_DDR_MST1_REG);
++
++	/* Set the mac1 to access ddr memory */
++	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST2_REG);
++	writel(val & 0xfffffff0, FIREWALL_DDR_BASE + FW_DDR_MST2_REG);
++
++	/* Set the otg1 to access ddr memory */
++	val = readl(FIREWALL_DDR_BASE + FW_DDR_MST3_REG);
++	writel(val & 0xfff0ffff, FIREWALL_DDR_BASE + FW_DDR_MST3_REG);
++
++	return 0;
++}
++
++#define HP_TIMER_BASE			CONFIG_ROCKCHIP_STIMER_BASE
++#define HP_CTRL_REG			0x04
++#define TIMER_EN			BIT(0)
++#define HP_LOAD_COUNT0_REG		0x14
++#define HP_LOAD_COUNT1_REG		0x18
++
++void rockchip_stimer_init(void)
++{
 +	u32 reg;
 +
-+	reg = data->id == 1 ? RK3506_GRF_SOC_CON11 :
-+			      RK3506_GRF_SOC_CON8;
-+	regmap_write(data->grf, reg, RK3506_GMAC_RMII_MODE);
++	if (!IS_ENABLED(CONFIG_XPL_BUILD))
++		return;
 +
-+	return 0;
++	reg = readl(HP_TIMER_BASE + HP_CTRL_REG);
++	if (reg & TIMER_EN)
++		return;
++
++	asm volatile("mcr p15, 0, %0, c14, c0, 0" : : "r" (CONFIG_COUNTER_FREQUENCY));
++	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT0_REG);
++	writel(0xffffffff, HP_TIMER_BASE + HP_LOAD_COUNT1_REG);
++	writel((TIMER_EN << 16) | TIMER_EN, HP_TIMER_BASE + HP_CTRL_REG);
 +}
 +
-+static int rk3506_set_gmac_speed(struct udevice *dev)
-+{
-+	struct eqos_priv *eqos = dev_get_priv(dev);
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
-+	u32 val, reg;
++#define RK3506_OTP_CPU_CODE_OFFSET		0x02
++#define RK3506_OTP_SPECIFICATION_OFFSET		0x08
 +
-+	switch (eqos->phy->speed) {
-+	case SPEED_10:
-+		val = RK3506_GMAC_CLK_RMII_DIV20;
-+		break;
-+	case SPEED_100:
-+		val = RK3506_GMAC_CLK_RMII_DIV2;
-+		break;
-+	default:
-+		return -EINVAL;
++int checkboard(void)
++{
++	u8 cpu_code[2], specification;
++	struct udevice *dev;
++	char suffix[2];
++	int ret;
++
++	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
++		return 0;
++
++	ret = uclass_get_device_by_driver(UCLASS_MISC,
++					  DM_DRIVER_GET(rockchip_otp), &dev);
++	if (ret) {
++		log_debug("Could not find otp device, ret=%d\n", ret);
++		return 0;
 +	}
 +
-+	reg = data->id == 1 ? RK3506_GRF_SOC_CON11 :
-+			      RK3506_GRF_SOC_CON8;
-+	regmap_write(data->grf, reg, val);
++	/* cpu-code: SoC model, e.g. 0x35 0x06 */
++	ret = misc_read(dev, RK3506_OTP_CPU_CODE_OFFSET, cpu_code, 2);
++	if (ret < 0) {
++		log_debug("Could not read cpu-code, ret=%d\n", ret);
++		return 0;
++	}
++
++	/* specification: SoC variant, e.g. 0xA for RK3506J */
++	ret = misc_read(dev, RK3506_OTP_SPECIFICATION_OFFSET, &specification, 1);
++	if (ret < 0) {
++		log_debug("Could not read specification, ret=%d\n", ret);
++		return 0;
++	}
++	specification &= 0x1f;
++
++	/* for RK3506J i.e. '@' + 0xA = 'J' */
++	suffix[0] = specification > 1 ? '@' + specification : '\0';
++	suffix[1] = '\0';
++
++	printf("SoC:   RK%02x%02x%s\n", cpu_code[0], cpu_code[1], suffix);
 +
 +	return 0;
 +}
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index ebb306852a65..baa2eb61ea33 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -89,6 +89,7 @@ config USB_GADGET_PRODUCT_NUM
+ 	default 0x350b if ROCKCHIP_RK3588
+ 	default 0x350c if ROCKCHIP_RK3528
+ 	default 0x350e if ROCKCHIP_RK3576
++	default 0x350f if ROCKCHIP_RK3506
+ 	default 0x4ee0 if ARCH_SNAPDRAGON
+ 	default 0x0
+ 	help
+diff --git a/include/configs/rk3506_common.h b/include/configs/rk3506_common.h
+new file mode 100644
+index 000000000000..5e4ef67289f0
+--- /dev/null
++++ b/include/configs/rk3506_common.h
+@@ -0,0 +1,38 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* Copyright Contributors to the U-Boot project. */
 +
-+static void rk3506_set_clock_selection(struct udevice *dev, bool enable)
-+{
-+	struct eth_pdata *pdata = dev_get_plat(dev);
-+	struct rockchip_platform_data *data = pdata->priv_pdata;
-+	u32 val, reg;
++#ifndef __CONFIG_RK3506_COMMON_H
++#define __CONFIG_RK3506_COMMON_H
 +
-+	val = data->clock_input ? RK3506_GMAC_CLK_SELECT_IO :
-+				  RK3506_GMAC_CLK_SELECT_CRU;
-+	val |= enable ? RK3506_GMAC_CLK_RMII_NOGATE :
-+			RK3506_GMAC_CLK_RMII_GATE;
++#define CFG_CPUID_OFFSET		0xa
 +
-+	reg = data->id == 1 ? RK3506_GRF_SOC_CON11 :
-+			      RK3506_GRF_SOC_CON8;
-+	regmap_write(data->grf, reg, val);
-+}
++#include "rockchip-common.h"
 +
- #define RK3528_VO_GRF_GMAC_CON		0x0018
- #define RK3528_VPU_GRF_GMAC_CON5	0x0018
- #define RK3528_VPU_GRF_GMAC_CON6	0x001c
-@@ -534,6 +608,18 @@ static void rk3588_set_clock_selection(struct udevice *dev, bool enable)
- }
- 
- static const struct rk_gmac_ops rk_gmac_ops[] = {
-+	{
-+		.compatible = "rockchip,rk3506-gmac",
-+		.set_to_rgmii = rk3506_set_to_rgmii,
-+		.set_to_rmii = rk3506_set_to_rmii,
-+		.set_gmac_speed = rk3506_set_gmac_speed,
-+		.set_clock_selection = rk3506_set_clock_selection,
-+		.regs = {
-+			0xff4c8000, /* gmac0 */
-+			0xff4d0000, /* gmac1 */
-+			0x0, /* sentinel */
-+		},
-+	},
- 	{
- 		.compatible = "rockchip,rk3528-gmac",
- 		.set_to_rgmii = rk3528_set_to_rgmii,
++#define CFG_IRAM_BASE			0xfff80000
++
++#define CFG_SYS_SDRAM_BASE		0
++#define SDRAM_MAX_SIZE			0xc0000000
++
++#ifndef ROCKCHIP_DEVICE_SETTINGS
++#define ROCKCHIP_DEVICE_SETTINGS
++#endif
++
++#define ENV_MEM_LAYOUT_SETTINGS			\
++	"scriptaddr=0x00500000\0"		\
++	"script_offset_f=0xffe000\0"		\
++	"script_size_f=0x2000\0"		\
++	"pxefile_addr_r=0x00600000\0"		\
++	"kernel_addr_r=0x02080000\0"		\
++	"kernel_comp_addr_r=0x08000000\0"	\
++	"fdt_addr_r=0x01e00000\0"		\
++	"fdtoverlay_addr_r=0x01f00000\0"	\
++	"ramdisk_addr_r=0x06000000\0"		\
++	"kernel_comp_size=0x2000000\0"
++
++#define CFG_EXTRA_ENV_SETTINGS			\
++	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
++	ENV_MEM_LAYOUT_SETTINGS			\
++	ROCKCHIP_DEVICE_SETTINGS		\
++	"boot_targets=" BOOT_TARGETS "\0"
++
++#endif /* __CONFIG_RK3506_COMMON_H */
 -- 
 2.53.0
 
