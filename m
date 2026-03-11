@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79369FD0651
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:23:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665FB1125839
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DB608407E;
+	by phobos.denx.de (Postfix) with ESMTP id 81D05840BE;
 	Wed, 11 Mar 2026 15:23:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="jw6LBUIJ";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="uUsH6Tu0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8EDA8404A; Wed, 11 Mar 2026 14:31:23 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 00BFF8404A; Wed, 11 Mar 2026 14:31:28 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7435184013
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 14:31:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7209084013
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 14:31:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-439b9cf8cb5so9857531f8f.0
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:31:21 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-439c4bde55cso5715062f8f.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:31:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1773235881; x=1773840681; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1773235885; x=1773840685; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=w7Bru08F3dX/wGCL6infh8paIvHaqovZAsFcld08CZ4=;
- b=jw6LBUIJ76/YowyZ96G9rZO0PpxTCy0PgEUHVohLjy5qxdvT2rT5lFmG17U7hktP5w
- 0WBkd9LHO+XJJu4Ue9EqPk5AXWcfPBK32HU4Vd/85yQNKcTmRS21orLD6UhcTjWdK9uw
- XsL/1fcdehpZetbx/a/eU+c2gXxiWja/bWXJBpclEcenFJtsQfWHY5UUQ1MBrokDLTUc
- 9aGs1LV+ZUq1L64bH8oCT+qPphROv5k36nVLBO6xZHo0PNffETUHboy1a5lPsMfg+lOu
- XAVSicFZRMh6Xe+UulfhafzMoXu8IhSFUdyQTnQdoDC9suhReyXV1TKYe6NnJH37ZUxG
- o6mg==
+ :reply-to; bh=pAVouB8aZczz3XrpjzGf0Nk0Tsv4eyGvDHqgswmXV8A=;
+ b=uUsH6Tu0hk8Es6QWNDJgtxBw+nns9HTtah70Y2PbPfo108J0u73xjNB9xsUtd87zlR
+ rgVVuVY7YTbuQw/OFsSkd/ifmZF2Rm/uP4ZYbfjJLGe4q/HsEbzJFiM+YNtZNdHQS/hO
+ oKHlm1YqPvM5sbu8Zz+wQhYpc6+/w5k+EEcDpxFcyaGBs8f4Z7qUks02vx1FGxxjYrrA
+ SfARWbAoOcqgmb7HClEWrDTR2zIzpV0f9X0TWN/6Ic0nAjSfmvGL15beouMRdvRDHvO9
+ mixH1P0GOepp8YJgNs+SGxA/+2peVtVUbP8QgyTCE8k2xk3K5LD9cfkO4GKHMms+jJqH
+ RNng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773235881; x=1773840681;
+ d=1e100.net; s=20230601; t=1773235885; x=1773840685;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=w7Bru08F3dX/wGCL6infh8paIvHaqovZAsFcld08CZ4=;
- b=nDnVqU51ypkXdMqlczln62jrqzhFaU0IJHvYWbdLe/hPtRprnEMTgGwusItHIWrHiF
- 7JDbVR/Q5NQrnHHRm7ZgbkOwKX272B73RixjNla0dV1LsbCtp4BVa5wQ8nsR7a04vjIW
- yBim7lMVrdpBw+K9cR0ZCksMLqAQ1H+r82aT6RCUOewu4VFDRT50kDdM5u26y6qy87Hz
- WtELkHtCwXCUPoyozp2wu0MxEb78373q/F54cb/dbUKLXmvj63DUpN+LwIRsDecyaeHR
- yF7BWA+4tbqlUZqDON03rt+nuKf09SGLTF18r5Lm8ClnHosuXV+o9fvapwy7cBQKwJTR
- qUqw==
-X-Gm-Message-State: AOJu0YzFTgN9rHdiY+pqTToUBnNAOGum9BlIfgGOW8FUUBgg8ot55rVy
- OH1mxD0xasD810p05GH+7dXhbIif+ChNdUDAffEzrkSeORytxXEtScKot2fOOCGnwcs=
-X-Gm-Gg: ATEYQzwb075bjVRmz29cJ5vcEWbBFb/RgiNaGQfU7IRSC+hWorbGi1bb7Qi3gcNbSIN
- Mj8qQk/0iEkoplhYo/tNsWs5V/ya7VhnUaM3V1VU+weysxEOlv7eluRc4651v8XiWkolF67qyDj
- Q0OWXKo0u2FjAzWRPZbn2SIjeGTwgWNocfSnlAfo1vanrZ/YLHhd4/yATGVUooo262NzJHhUPOf
- 8l+vlqaoFgbUftxBBzvGnNaoxn2YHT9w8k0agKxIxX8MN5vD8dGEZO6PZTAte2M3Tb0D64y2Qco
- uoTHXklwfOXPymxG+QoYqqheOHqkOugGTptkQ4KiEtcxnGGzlMTMds1lG7Egiv6o7FV8qUP9Hxa
- Y20UsvaVjjCG2iSBvCSVjo8TBtLJ6HNP3ExXKI2zBVe/I3+gcZFzKlpArZawCd93wCk7+92dFno
- WrIf8LHQGnOeNJkr8ff4gDZJ1ZDmkBBkFELWh8eoVWHzD6f/siDA6H/fAEpTUAvqV+dePR+hD15
- wqj2A==
-X-Received: by 2002:a05:6000:250a:b0:439:b791:f91b with SMTP id
- ffacd0b85a97d-439f81bf3b0mr5245585f8f.13.1773235880720; 
- Wed, 11 Mar 2026 06:31:20 -0700 (PDT)
+ bh=pAVouB8aZczz3XrpjzGf0Nk0Tsv4eyGvDHqgswmXV8A=;
+ b=nLZrkthtm26WyfKGxPKDmSmtoV9rqU87TkeCMQYlnKdpxeSZeQU0+HxfhKYvFD4clD
+ ph9/AHjrLmx59ciipFyJ6wadrHz5nGtkz+p0YLCH/GgZihi076cLpQkikxXBX2vk3dSU
+ NaGZhf74120mhdeymfGanL7w/oggPyugoTo8rv9FAX6ER7eZ9s549ZN6xd5sAOvy3vut
+ pokpQzRDV6Fb/nXsy/Njwwr3FKYMZns2U/q1Iz82YDw1oz+pQ2lgQuqNFB0+BrzyfqM4
+ BK6PLkG8ZHGOF92xFEEVdpAZHkTUSQwC95AehrjEBN/7yYGqNxJi0dK62V20OUEHYsAW
+ XsqQ==
+X-Gm-Message-State: AOJu0YzvFJqN1mfEhkgBbSbW+HRrR3WoFZUr6HeaTDOWr38HrnVh4i1+
+ byc/gbcGikhJacOx2F2ZKTe7dbZHlIVECo7i09saAf9S6U3dSO5Zo8xA4yOJuG0DNQc=
+X-Gm-Gg: ATEYQzzOMCwpTrvHclJrHjRcImEh/H+i9wRPp1b0OUCvGzHqClG89rsWKRpHVd9LY8S
+ GLe4M10UUORZqnJ0Bd0GLfBy1kaccpgAkmExzs1yGkNi5zlQCGAioSEPpNqE+fR3SrcRsXJdj/T
+ AUNRdStjeTGeqADrIc7JkRBIAuby1DWEpg05Zf7P3W0nIhLXxpwgN9ayCaSxRT+3reBQJzXP8D0
+ t8+Of7s5ybZMoY7rhiQEZv8cmJt7hvnOeOgNAOr4sCdPh8khAB6dvxmuJDzMEnZAcbjnG+3fyEM
+ Q2mnoS1wrIMqVuDYMip9INDwp0q3lyw/d9tz7iGDpK6ipxus5cc+vEBZhQ5ON8C8Z1NfhMcTPkp
+ FC3gzIRk2kWcGubYHFs8fbgGl9YDh7vv34f0sNcXylTTIXM/YuMd6FfrcijpcoBajTRqpjfWGSf
+ kCmU+9smgKsjbr4g1WX6Z7F9+LgTOjwQrBax7U6hkHw1hGRe1iH8aLW7QKHQ7mBE0actsbgOJQo
+ 1pVow==
+X-Received: by 2002:a05:6000:1788:b0:439:c799:dbf2 with SMTP id
+ ffacd0b85a97d-439f81f3d9dmr5337139f8f.9.1773235884791; 
+ Wed, 11 Mar 2026 06:31:24 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
  [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439f81a9e25sm5903038f8f.15.2026.03.11.06.31.17
+ ffacd0b85a97d-439f81a9e25sm5903038f8f.15.2026.03.11.06.31.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 06:31:20 -0700 (PDT)
+ Wed, 11 Mar 2026 06:31:24 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 11 Mar 2026 17:30:56 +0400
-Subject: [PATCH v6 1/6] arm64: dts: rockchip: Explicitly request UFS reset
- pin on RK3576
+Date: Wed, 11 Mar 2026 17:30:57 +0400
+Subject: [PATCH v6 2/6] arm64: dts: rockchip: enable UFS controller on
+ FriendlyElec NanoPi M5
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260311-rk3576-ufs-v6-1-c7c353739242@flipper.net>
+Message-Id: <20260311-rk3576-ufs-v6-2-c7c353739242@flipper.net>
 References: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
 In-Reply-To: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
 To: u-boot@lists.denx.de
@@ -98,12 +98,12 @@ Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
  Dhruva Gole <d-gole@ti.com>, Anshul Dalal <anshuld@ti.com>, 
  Alexey Charkov <alchark@flipper.net>, Alexey Charkov <alchark@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3654; i=alchark@flipper.net;
- h=from:subject:message-id; bh=Z9/5OuIo1D9EuPgTcjS1dQssZlNEiaiJi8T2SAU4IVQ=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRuzFsgYdho9mi21OeKQxca4uSqzzsZypa8nS/3TD128
- 6Qfqc3TOyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- Q0MdYx0jBi5OAZjqU4cY/vD2XqyoVVzjvzW+081L4Ynr9Dzfys/VHvuT92cUd4rUODAyHHmyyT7
- USlXwf5ur/To105KHTrriEgVbN/OalWVcmFXLCgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1995; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=Qkkxr0v7FLv8rA/lVvtmaq0Vb+2sCZ1KYFGOtd25kxI=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRuzFvQdenU04sZwSI7mhadcrZ8xKn7sr3uSZhlSp2IE
+ OdehTuVHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
+ oaGOsY4RAxenAEz1bVZGhtUzH0s3s8+5uO9TZe8kpbXyk10jZ818IDBbZH7A1fpnhxMZGXrfdB4
+ 9P+eM/fdDxVO5rvk89H8f83KyYN6PDrMD1eZFnEwA
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Wed, 11 Mar 2026 15:23:27 +0100
@@ -125,95 +125,66 @@ X-Virus-Status: Clean
 
 From: Alexey Charkov <alchark@gmail.com>
 
-Rockchip RK3576 UFS controller uses a dedicated pin to reset the connected
-UFS device, which can operate either in a hardware controlled mode or as a
-GPIO pin.
+The NanoPi M5 board supports pluggable UFS modules using the UFSHC
+inside its Rockchip RK3576 SoC.
 
-Power-on default is GPIO mode, but the boot ROM reconfigures it to a
-hardware controlled mode if it uses UFS to load the next boot stage.
+Enable the respective devicetree node and add its supply regulators.
 
-Given that existing bindings (and rk3576.dtsi) expect a GPIO-controlled
-device reset, request the required pin config explicitly.
-
-The pin is requested with pull-down enabled, which is in line with the
-SoC power-on default and helps ensure that the attached UFS chip stays
-in reset until the driver takes over the control of the respective
-GPIO line.
-
-This doesn't appear to affect Linux, but it does affect U-boot:
-
-Before:
-=> md.l 0x2604b398
-2604b398: 00000011 00000000 00000000 00000000  ................
-< ... snip ... >
-=> ufs init
-ufshcd-rockchip ufshc@2a2d0000: [RX, TX]: gear=[3, 3], lane[2, 2], pwr[FASTAUTO_MODE, FASTAUTO_MODE], rate = 2
-=> md.l 0x2604b398
-2604b398: 00000011 00000000 00000000 00000000  ................
-
-After:
-=> md.l 0x2604b398
-2604b398: 00000011 00000000 00000000 00000000  ................
-< ... snip ...>
-=> ufs init
-ufshcd-rockchip ufshc@2a2d0000: [RX, TX]: gear=[3, 3], lane[2, 2], pwr[FASTAUTO_MODE, FASTAUTO_MODE], rate = 2
-=> md.l 0x2604b398
-2604b398: 00000010 00000000 00000000 00000000  ................
-
-(0x2604b398 is the respective pin mux register, with its BIT0 driving the
-mode of UFS_RST: unset = GPIO, set = hardware controlled UFS_RST)
-
-This helps ensure that GPIO-driven device reset actually fires when the
-system requests it, not when whatever black box magic inside the UFSHC
-decides to reset the flash chip.
-
-Fixes: c75e5e010fef ("scsi: arm64: dts: rockchip: Add UFS support for RK3576 SoC")
-Reported-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Link: https://wiki.friendlyelec.com/wiki/images/9/97/NanoPi_M5_LP5_2411_SCH.pdf
 Signed-off-by: Alexey Charkov <alchark@gmail.com>
-Link: https://patch.msgid.link/20260121-ufs-rst-v3-1-35839bcb4ca7@gmail.com
+Link: https://patch.msgid.link/20251230-nanopi-m5-ufs-v3-1-ed188ae34fdb@gmail.com
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: 79a3286e61829fc43abdd6e3beb31b24930c7af6 ]
+[ upstream commit: cd50298ffc5f98872ddf0ac05c51a014003a34b7 ]
 
-(cherry picked from commit 438f1fe833e0d2f004e12579899dd322994c23d7)
+(cherry picked from commit d9f2b91a7b6cc955e272c31a4bcb03a1c564efad)
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- dts/upstream/src/arm64/rockchip/rk3576-pinctrl.dtsi | 7 +++++++
- dts/upstream/src/arm64/rockchip/rk3576.dtsi         | 2 +-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ .../src/arm64/rockchip/rk3576-nanopi-m5.dts        | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3576-pinctrl.dtsi b/dts/upstream/src/arm64/rockchip/rk3576-pinctrl.dtsi
-index 0b0851a7e4ea..98c9f8013158 100644
---- a/dts/upstream/src/arm64/rockchip/rk3576-pinctrl.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/rk3576-pinctrl.dtsi
-@@ -5228,6 +5228,13 @@
- 				/* ufs_rstn */
- 				<4 RK_PD0 1 &pcfg_pull_none>;
- 		};
-+
-+		/omit-if-no-ref/
-+		ufs_rstgpio: ufs-rstgpio {
-+			rockchip,pins =
-+				/* ufs_rstn */
-+				<4 RK_PD0 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
+diff --git a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
+index bb2cc2814b83..5c6e6c7a213a 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
++++ b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
+@@ -110,6 +110,22 @@
+ 		regulator-name = "vcc12v_dcin";
  	};
  
- 	ufs_testdata0 {
-diff --git a/dts/upstream/src/arm64/rockchip/rk3576.dtsi b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
-index c72343e7a045..70e67d4dccb8 100644
---- a/dts/upstream/src/arm64/rockchip/rk3576.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
-@@ -1826,7 +1826,7 @@
- 			assigned-clock-parents = <&cru CLK_REF_MPHY_26M>;
- 			interrupts = <GIC_SPI 361 IRQ_TYPE_LEVEL_HIGH>;
- 			power-domains = <&power RK3576_PD_USB>;
--			pinctrl-0 = <&ufs_refclk>;
-+			pinctrl-0 = <&ufs_refclk &ufs_rstgpio>;
- 			pinctrl-names = "default";
- 			resets = <&cru SRST_A_UFS_BIU>, <&cru SRST_A_UFS_SYS>,
- 				 <&cru SRST_A_UFS>, <&cru SRST_P_UFS_GRF>;
++	vcc1v2_ufs_vccq: regulator-vcc1v2-ufs-vccq {
++		compatible = "regulator-fixed";
++		regulator-min-microvolt = <1200000>;
++		regulator-max-microvolt = <1200000>;
++		regulator-name = "vcc1v2_ufs_vccq";
++		vin-supply = <&vcc5v0_sys_s5>;
++	};
++
++	vcc1v8_ufs_vccq2: regulator-vcc1v8-ufs-vccq2 {
++		compatible = "regulator-fixed";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		regulator-name = "vcc1v8_ufs_vccq2";
++		vin-supply = <&vcc_1v8_s3>;
++	};
++
+ 	vcc3v3_m2_keym: regulator-vcc3v3-m2-keym {
+ 		compatible = "regulator-fixed";
+ 		enable-active-high;
+@@ -910,6 +926,14 @@
+ 	status = "okay";
+ };
+ 
++&ufshc {
++	vcc-supply = <&vcc_3v3_s3>;
++	vccq-supply = <&vcc1v2_ufs_vccq>;
++	vccq2-supply = <&vcc1v8_ufs_vccq2>;
++	vdd-hba-supply = <&vdda_1v2_s0>;
++	status = "okay";
++};
++
+ &usbdp_phy {
+ 	status = "okay";
+ };
 
 -- 
 2.52.0
