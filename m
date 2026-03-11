@@ -4,131 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99717FED2C6
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 03:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C422FFED2C7
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 04:08:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E20783FBC;
-	Thu, 12 Mar 2026 04:43:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 32FBF83F75;
+	Thu, 12 Mar 2026 05:08:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X+zcnjfd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GPf38SCl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34ED183FEC; Thu, 12 Mar 2026 04:43:37 +0100 (CET)
-Received: from CO1PR03CU002.outbound.protection.outlook.com
- (mail-westus2azlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c005::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CD9BD83FED; Wed, 11 Mar 2026 20:39:36 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9538583F75
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 04:43:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D9FE83FDB
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 20:39:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CnhgTzDH9wP14jbaNTQuEzL7GmPgG3eBVfzghvhU0sziUzMbZh1bmw0bZE/5KNQMFui5sN5ceCFKquWwetwTB9gNbZ8hOBZpvhVmPMvjUJ1Uvdk/OVG47jWKuKVDn9fceCVa2bVCV3GFTONQmXnhzxN257HIB3UDDm0PSyinBtxxN6GKC9O8pVNfHji2QqweXIwfySVuH3ZibPAFGKtOMqu0zAngrjjONT3bJTCsEbuVwe3fA2KNOxVAMxlNJb5XIRLyzCeaAkv6BQHHdk6k0v7CASrrY6BKaA2VSyyDTOVdPKrh1ds1j7xdacFTS5JTFLYgKKCui+tiv1QIc+CoMQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fwvfKQx6LWizuxwZYY4PpgMHSzc8NtGYxy7w7Ut3pzU=;
- b=bM+MqME8TNptn1z7h8kVTYDbGj4NFNL3apLdYhetCsz0nuT8D5toKxnguyAXuKplIdElsdmbodq6yvIU0xcwpe6doiDzG798Eayh7Cp6C3Ez7EyKdQPHeQ7mzj4bTa+wMQvq8KNKgqcdgVPP3hIDoh8uMAZE7JHNmMWXeExs5EJM4PFxOstThukF29ciSGEVBSOWdbWaGUvHTURaWFEuVT2Re09b0GeiMRCHcMUYk8o2MZMcgWgUC7F0yeJfIQikMh6df96YGl8GTMKY/u8Z+tzkNFZf6FFh7OSDSsaEkz53FBMI4xAByrrymLvO2AJIGe/dHaWyGnthRIL1S15N8g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.21.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
- dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fwvfKQx6LWizuxwZYY4PpgMHSzc8NtGYxy7w7Ut3pzU=;
- b=X+zcnjfdYl9HjNYj46nJCEAQyA2QwBS92ieMELIbVRffQ0oRgoZtzTFDADysRFDVqbK0cijoXOTFDI/wdYnHuRvvoaYPzP5oeYFG7k+M/AbC/avEz4qwpeveMWtAdkpWy0CwcF6Vc4/f5aR9ONNMcUjJrkI7G5HE4a18cUAok7A=
-Received: from SJ0PR05CA0199.namprd05.prod.outlook.com (2603:10b6:a03:330::24)
- by CYXPR10MB7952.namprd10.prod.outlook.com (2603:10b6:930:d6::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
- 2026 03:43:30 +0000
-Received: from SJ5PEPF000001C9.namprd05.prod.outlook.com
- (2603:10b6:a03:330:cafe::ac) by SJ0PR05CA0199.outlook.office365.com
- (2603:10b6:a03:330::24) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.23 via Frontend Transport; Thu,
- 12 Mar 2026 03:43:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
-Received: from flwvzet201.ext.ti.com (198.47.21.195) by
- SJ5PEPF000001C9.mail.protection.outlook.com (10.167.242.37) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 03:43:28 +0000
-Received: from DFLE211.ent.ti.com (10.64.6.69) by flwvzet201.ext.ti.com
- (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 11 Mar
- 2026 22:43:28 -0500
-Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 11 Mar
- 2026 22:43:27 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
- (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 11 Mar 2026 22:43:27 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62C3hQw02081563;
- Wed, 11 Mar 2026 22:43:27 -0500
-From: Anshul Dalal <anshuld@ti.com>
-Date: Thu, 12 Mar 2026 09:13:24 +0530
-Subject: [PATCH next v3] arm: mach-k3: use Kconfig options for ATF/OPTEE size
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dan.carpenter@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4852b81c73aso1864675e9.3
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 12:39:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1773257974; x=1773862774; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lZkxqUuUbJ4Vbj2riO1raVFqanxfpUss3tcQOFPsGhg=;
+ b=GPf38SClVQM9jO3UwNpwKmm8qDrbt9rDFE4o4MMAfipFQ9ohxh08X144XUa+h+Mi87
+ g0QVtfUDWqGfkh6eWALSpEmESHDtcstZ9o55p+XH3U1q2VfF+QqktuMiY+mZ/15qPk6E
+ F2rKO0hhOmmiWV6juzYwo34XzDMehAqqtKbvU05LKoZpjqVV0XhZ8S8/Y9qSo+F2JIDj
+ GYZkSjqYBLIZkZ3wygd5+KTsckFSjoPmNG+H2xhmFFoF8i2puKRzod7BGYld/gSXHQtj
+ dGiMdgp4HSdq6VT3BV94d/4QJEkR9ODT9eaJGApjYLiZuE9KtLGGfwHIo7fheWI9Yq/j
+ 94oA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773257974; x=1773862774;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lZkxqUuUbJ4Vbj2riO1raVFqanxfpUss3tcQOFPsGhg=;
+ b=Vh2vKFEze6f5V3qIR7cLjPzOkuYEni1Lt38pk1MpJxMyu+21sUOS4BgCAzlZT+CKXr
+ 5GUmgIJWrh9m25tjQ+VSSXN15oVnWKwtTcKfciqoYmeeVgu9sMGaPJqYDk2Z+wW98z4e
+ CzHYkDvLJrNAM2YSq84SzY5hgx34/MwRXrR3K9apsTSkVGj8V37O6m1v15rTkJSHWHSB
+ aKXnStmwls7o/+hHJYRWRJw1eodtyJvYo1QONNUt6WbWDFLA5z9NPGcADxFD6m+n1+vX
+ EI10r7bsj1mhtaXQDKMpfWiqdXlzcaBYE+k7+zWYy0nPTHlGrDBvnBdjPmQAWez4Vt76
+ Y18Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyFH7Jgw0FmKcGVZnMFjULVoxr9HLjbp3fNdKtmiwaRpT1Ra869FI5YUoBtX4XEco/Ms+SjM0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxfbYfzSB4fEK1X88zxXH/bHDhja1u1SAyKOBCy05BpgVKVXoel
+ uufJV5hPGQjSac3ifO5bQvnk1VI24EvE6VSxkLJL5rK8ajYysRWXel/KA6vRMgjxXMs=
+X-Gm-Gg: ATEYQzyjWjMGpsjsX94CzGVmqajpokof3Ztc9XGTxuFJ4i1s9vtiprAETRV/OOddalY
+ x1ePHNtENBVnQzC3qUuARnaCRwU7a+T2HCtITEjme7FtatnCFyBss1QSZquPPzhYMoRYhcVKx/N
+ CK/WDwigFuEB9QCR6VXSPPB0vo3NrPvtausqQ9OGR17/1FrMetyfrNZJ/AqY7d/jpVVXEm8TG4M
+ Z2BWlqdNB2g21TbRgor55iM0bdA1bar2KZb8YplmKwX0EnOBPFz3eZ9D5tfokYYeQZbX94FJscJ
+ yvA39HV2RxS7mNzXdSvBmIns+C34s7Bt27vwAze5VatEJxcoBnMACb0Z//jB94QGZ4hgjqEwCaX
+ 99hzqrYxkzxto7TdlGbRW7Z/lCrEsHswj7f0kV4F5hOj5V4YOUKyoXJ9UVorDOYFNYiF+Gjcnq0
+ ID46rwJJVrmUXnDIKvtHeEYyuTAnyk
+X-Received: by 2002:a05:600c:4e56:b0:485:4136:99a8 with SMTP id
+ 5b1f17b1804b1-4854b0fafb9mr59007345e9.22.1773257973713; 
+ Wed, 11 Mar 2026 12:39:33 -0700 (PDT)
+Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4854b0d4a37sm24019345e9.20.2026.03.11.12.39.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Mar 2026 12:39:33 -0700 (PDT)
+Date: Wed, 11 Mar 2026 22:39:30 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: Peng Fan <peng.fan@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>
+Cc: Alice Guo <alice.guo@nxp.com>, Anis Chali <chalianis1@gmail.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Eoin Dickson <eoin.dickson@microchip.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Ian Roberts <ian.roberts@timesys.com>, Jacky Bai <ping.bai@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
+ Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Yao Zi <me@ziyao.cc>,
+ Yegor Yefremov <yegorslists@googlemail.com>, Ye Li <ye.li@nxp.com>,
+ Andy Shevchenko <andriy.shevchenko@intel.com>,
+ Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+ arm-scmi@vger.kernel.org, linux-gpio@vger.kernel.org,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v2 0/4] u-boot: add SCMI GPIO/Pinctrl support
+Message-ID: <cover.1773256350.git.dan.carpenter@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260312-tfa_tee_addr_kconfig_refactor-v3-1-86c92718e048@ti.com>
-X-B4-Tracking: v=1; b=H4sIAFs2smkC/43Nyw7CIBAF0F8xrMXwaKh15X8YQ3gMLTEWA4TUN
- P13kY3udHnn3pxZUYLoIaHTbkURik8+zDXw/Q6ZSc0jYG9rRowwQTglODslM4BU1kZ5M2F2fpQ
- RnDI5RMy06/uhG6wjDlXjURu/NP+CZlgyutbr5FMdP9vTQlv3p18optiyTmlt1JEBnLM/mHBvb
- GHfFP1FsTclhNZWc6H4h9q27QUv4tL3GAEAAA==
-X-Change-ID: 20260310-tfa_tee_addr_kconfig_refactor-2bf77949df0f
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Suhaas Joshi <s-joshi@ti.com>, "Neha Malcom
- Francis" <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Bryan Brattlof
- <bb@ti.com>, Dhruva Gole <d-gole@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Daniel Schultz <d.schultz@phytec.de>,
- =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
- Anshul Dalal <anshuld@ti.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773287006; l=4121;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=/EetNntxK2KZABft39KUdtnjdR4Tz0RnJRq5eAN3jVo=;
- b=oYW/sRtMf24abiZ3mTREP3Zo/kPzaoJuPbCrGzD7MzPhhpPvhnVW31Bar0t0tGutsAX1ovCd9
- 8YKUlCTDy61DsNBYXaNcxzOeWfxKHbL6XzTehz5+BecT9dSZ6vL+DDt
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C9:EE_|CYXPR10MB7952:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8217b213-63f7-44d7-fa3f-08de7fe98623
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: OWkSW8C+uLMUg85V0JXOXPhsvAagDhwKU535VjnzbJPI6jdl9h7k8TJ3VaJoL8x5BzIdA0F139Sxj/G9MRSm472S8iPWgW2Sb5sUDj0/UjiH1P/3R/NSAWI91sjztT2h4OIA61m1S4NYxc9ewriyDCMzvvohN9GGvfhXXmtnpO8t/S0yXQlDhQmXhkZ+IdPHbq82JwGKBmZE0u6z24mwsqmjIEYESw8vLdszVw7aqVhcpz+m1Gybu6xyD7lApxVZBp+7qKUIaxQe+YobbY2Kg5bqLIB8e+rxfS7anwwhHERYZu6Tcjx6hwhaW5ohcH2PUa4ygxGJ8d7E/xLAc0ed7mnWRHekbW+zJE/d+XNSaxZKGuvE3j0Y6niGOGEyMLikrtM3nE2Q5g2ymKJM5L4x6wuL+QSbY7NS+M01NT/PVdbB87MaOArNqSUkC3Y3usJ3U3gUsL1duOIPU5hBfWEszyYFrKwJcnukZ4gZYElHDiR3epbhof/d7hZpP3bDYnnZArZ8qG0s96+h9iSkYERu0tXROP/F8Cm1b3sZiZovRMQnzzgh78MzcfErLRyAAxBu9NdoVBLF4AdqD2L5BBJlSKW1Kl77mRsKx4JFiN7rMhP+CipM10+DnD4hidlLndhiJEX/wI3c+BkaDbzYvGOcxAWMecnJoZEXMtgLy7YbsQMkpL+C+tvF6KrAeQS43cXw5y5ZVkfvrotBfgXjr0IEVMz69mz/JJSeGLoR0NeFiitciS3udTmu/d+7HyDwVq3zm2ib/xULkL4qOeRReB+18rd/54/oICL1fZhF9+QTV6c=
-X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 7QeheTU4EWf88803MsHwl+M6o95xI9cxw2uuY9j1iIPDL/zF2lePgYeOMLdE1YEyg+oJUMwDlr5oBYOvHDuujDm4KfDuduAiTevIe2BXmPvbae0xgo3wD+CufipcYAsqo2f/BpVUX9MuYgCFugvYhX7bnGVf2Aq9hqcYS57/NibbJNp7f7g49lKwhUMMR/B0ZNC2jLzr9paj2HfXs3FqVsBd91OpscMQZ8Eaw+grzE3ZpmnEBbvljBZpaTLqfOkXfZV23+3D8WlQxAbLes9bj0tyioarge9YhUzn85dwSIC4RUbArLwm9fPgluNrPugWH1N+DqscGI6O3KTf4bWGbzvJ6OQWdznfIScJqF2rX8Wpaw7eoN/s88+Sno3lT+atTcHcLqDnIyWgiJpm9MtkJT8iktaDprdbvXVZ07Fd8qW/W2MX1w28Msw17Gsfqd27
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 03:43:28.6512 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8217b213-63f7-44d7-fa3f-08de7fe98623
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
- Helo=[flwvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001C9.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR10MB7952
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Mailman-Approved-At: Thu, 12 Mar 2026 05:08:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,113 +122,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The reserved memory sizes for ATF and OPTEE were hard-coded for K3
-devices, this patch replaces them with a Kconfig option allowing for
-easier modifications.
+There is an existing SCMI pinctrl driver in drivers/pinctrl/nxp/ which
+lets you configure the initial state of the pins via device tree.  This
+patchset is a more generic version which provides GPIO as well.
 
-Acked-by: Andrew Davis <afd@ti.com>
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
-Changes in v3:
-- Pick R-by tag from Manorit
-- Change help and prompt text to use the generic 'memory' instead of DDR
-- Link to v2: https://lore.kernel.org/r/20260311-tfa_tee_addr_kconfig_refactor-v2-1-d66bbdb36a3e@ti.com
+I wrote two small cleanup patches to the NXP driver, one which renamed
+an enum and another which made some white space changes.
 
-Changes in v2:
-- Update help text to mention firewall configuration
-- Pick R/Ack-by tags
-- Link to v1: https://lore.kernel.org/r/20260310-tfa_tee_addr_kconfig_refactor-v1-1-d24abbca82ee@ti.com
----
- arch/arm/dts/k3-binman.dtsi   |  4 ++--
- arch/arm/mach-k3/Kconfig      | 17 +++++++++++++++++
- arch/arm/mach-k3/common_fdt.c |  5 +++--
- 3 files changed, 22 insertions(+), 4 deletions(-)
+The next patch adds an pinctrl driver which lets you configure the
+initial state for the pins.  But the main thing is that we need one
+driver to handle the SCMI pinctrl protocol so the pinctrl driver does
+this.
 
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 0fd93f9536a..ad127663d03 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -477,7 +477,7 @@
- 						FWPERM_SECURE_PRIV_RWCD |
- 						FWPERM_SECURE_USER_RWCD)>;
- 		start_address = <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
--		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + 0x1ffff)>;
-+		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + CONFIG_K3_ATF_RESERVED_SIZE - 1)>;
- 	};
- 	firewall_armv8_optee_fg: template-8 {
- 		control = <(FWCTRL_EN | FWCTRL_LOCK |
-@@ -486,7 +486,7 @@
- 						FWPERM_SECURE_PRIV_RWCD |
- 						FWPERM_SECURE_USER_RWCD)>;
- 		start_address = <0x0 CONFIG_K3_OPTEE_LOAD_ADDR>;
--		end_address = <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + 0x17fffff)>;
-+		end_address = <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + CONFIG_K3_OPTEE_RESERVED_SIZE - 1)>;
- 	};
- 
- 	ti_falcon_template: template-9 {
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 1b8c0b1eb96..a32ed3a9683 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -130,6 +130,15 @@ config K3_ATF_LOAD_ADDR
- 	  The load address for the ATF image. This value is used to build the
- 	  FIT image header that places ATF in memory where it will run.
- 
-+config K3_ATF_RESERVED_SIZE
-+	hex "Reserved memory size for ATF"
-+	default 0x80000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
-+	default 0x20000
-+	help
-+	  The runtime memory size reserved for ATF. This value is used to fixup the
-+	  kernel device-tree's reserved-memory node for ATF and configure the
-+	  firewall.
-+
- config K3_OPTEE_LOAD_ADDR
- 	hex "Load address of OPTEE image"
- 	default 0x9e800000
-@@ -137,6 +146,14 @@ config K3_OPTEE_LOAD_ADDR
- 	  The load address for the OPTEE image. This value defaults to 0x9e800000
- 	  if not provided in the board defconfig file.
- 
-+config K3_OPTEE_RESERVED_SIZE
-+	hex "Reserved memory size for OPTEE"
-+	default 0x1800000
-+	help
-+	  The runtime memory size reserved for OPTEE. This value is used to fixup
-+	  the kernel device-tree's reserved-memory node for OPTEE and configure the
-+	  firewall.
-+
- config K3_DM_FW
- 	bool "Separate DM firmware image"
- 	depends on CPU_V7R && !SOC_K3_AM642 && !SOC_K3_AM654 && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
-diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
-index cb0fb8274a5..39cb00c3f43 100644
---- a/arch/arm/mach-k3/common_fdt.c
-+++ b/arch/arm/mach-k3/common_fdt.c
-@@ -173,12 +173,13 @@ int fdt_fixup_reserved(void *blob)
- 	int ret;
- 
- 	ret = fdt_fixup_reserved_memory(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
--					0x80000);
-+					CONFIG_K3_ATF_RESERVED_SIZE);
- 	if (ret)
- 		return ret;
- 
- 	return fdt_fixup_reserved_memory(blob, "optee",
--					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
-+					 CONFIG_K3_OPTEE_LOAD_ADDR,
-+					 CONFIG_K3_OPTEE_RESERVED_SIZE);
- }
- 
- static int fdt_fixup_critical_trips(void *blob, int zoneoffset, int maxc)
+The last patch adds GPIO support over SCMI.
 
----
-base-commit: 8bc2a5196c1c0bb5dbdaca073323da0015a0de37
-change-id: 20260310-tfa_tee_addr_kconfig_refactor-2bf77949df0f
+I tested this code using the SCP SCMI server on OP-TEE over Qemu.  I
+created a custom mock pinctrl device in SCP.
 
-Best regards,
+Changes since v1:
+Address Peng Fang's review comments.
+Use the standard gpio-ranges to describe the pins instead of
+inventing a custom format.
+
+Dan Carpenter (4):
+  scmi: pinctrl: add pinctrl message IDs
+  scmi: update comments for scmi_pinctrl_config_set_in()
+  scmi: pinctrl: add pinctrl driver for SCMI
+  gpio: scmi: Add gpio_scmi driver
+
+ drivers/firmware/scmi/Makefile            |   1 +
+ drivers/firmware/scmi/pinctrl.c           | 365 +++++++++++++++++++++
+ drivers/firmware/scmi/scmi_agent-uclass.c |   4 +-
+ drivers/gpio/Kconfig                      |   6 +
+ drivers/gpio/Makefile                     |   1 +
+ drivers/gpio/gpio_scmi.c                  | 248 ++++++++++++++
+ drivers/pinctrl/Kconfig                   |   9 +
+ drivers/pinctrl/Makefile                  |   1 +
+ drivers/pinctrl/nxp/pinctrl-imx-scmi.c    |   2 +-
+ drivers/pinctrl/pinctrl-scmi.c            | 365 +++++++++++++++++++++
+ include/scmi_agent-uclass.h               |   2 +-
+ include/scmi_protocols.h                  | 379 +++++++++++++++++++++-
+ 12 files changed, 1371 insertions(+), 12 deletions(-)
+ create mode 100644 drivers/firmware/scmi/pinctrl.c
+ create mode 100644 drivers/gpio/gpio_scmi.c
+ create mode 100644 drivers/pinctrl/pinctrl-scmi.c
+
 -- 
-Anshul Dalal <anshuld@ti.com>
+2.51.0
 
