@@ -4,99 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B6A1125854
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 17:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E57051125856
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 17:32:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 438FF83FB6;
-	Wed, 11 Mar 2026 18:30:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 74A0184035;
+	Wed, 11 Mar 2026 18:32:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="aUQnfrKJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SKXnoHrE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8B8084013; Wed, 11 Mar 2026 18:30:41 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 08DB884057; Wed, 11 Mar 2026 18:32:19 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B25DF83BC8
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 18:30:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 552323F5A1
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 17:30:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1773250239;
- bh=R9bNTLgPA0zLEPR181AfzEuquRJUd2GIO2/EZ1U0cSE=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=aUQnfrKJQmPXznkXYfq105uVWkvNPSNWmLgW6yaWmrjllyzNh5WB+am5DcnyFgUVI
- Qs5Qy/+RWh1ddIqY1Wr5jbSsaMX94T2MUrwzgBhlNcfZXmfhtP2L6CXbOgAC5QLU3e
- h7zJb93dfHY9SEfB1c/iaVXfC7GGFSrlEUFAlynKeoTHjM6qAuYKpq9aQOe4czfR1v
- Ce5S4i4v0vofmYbW6Q9GOrrld25sEZxJhVVMJ5hB3fgKnvAi5S3JCqZ6UzlCpstVIs
- bxnIKzKi4K0q0RVJUAkrel+GiXIV4nX7vEqYz//ecb2jsHxKo7+8JCJMqXkGg5jc9l
- wQ36/1Z1iyLBMSZ0hW/2Y9CC7Ws0ZfZNI+RNgNwxhOcO/4VvqKhs2PheWeCP/sLOOl
- WgRG20JBFICDEdLFsXxs4lL2NeDvepAAOVVCsNKHwXFEhARDcRIs7SVWiGV4AePSC3
- GxGPqshmmZR5C/SQWjBKlMGL6P3dRB7XrJmSfz/t1db0g746Foo36eJaE92xrfYjRP
- jqNiXGhV6VKWcAnB8/HKMitmjzAMa+EEfHnQRxI4wMo1SQ4ySSI/H65Kjy3uXhVCLm
- /HrOBvExGtcQXQOIK5n/1/0sAgvWjNjuK8CKLDsxg6tHYHm8Lk2nw2w0Mp9L7AYBaJ
- +GeLaMU5TrncdN3u4opLDh1A=
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4853b0af42aso1477565e9.0
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 10:30:39 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id DD1D183FB6
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 18:32:16 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d743ba241aso106106a34.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 10:32:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1773250335; x=1773855135; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/tmCZfCQ12S+zbwV4RHyJdkVvZKyhIOkcnJOkJugMOs=;
+ b=SKXnoHrEpGSvOE6Sp1v8W9succHbHZEayLfpAqrQU1UgdiyM1HDeJsCOi6Oud9M57q
+ loQQzhvJ8tuvtUUCt2VCZuhQFMImAdzg78GS7ny71Q6RGcZpJJxWIjxeKTJ+mifRpw3d
+ H3fo0FcDg7niLilZec99n4K0G2dzSPqmUAfxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773250239; x=1773855039;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R9bNTLgPA0zLEPR181AfzEuquRJUd2GIO2/EZ1U0cSE=;
- b=nSztchuxe3TPSIaLoBYAefHsufVe8MFSzcBNj95qbRMKQNMc6jwL5yizQcgie/LvaH
- MVSMeDaBfqt2a5WFnsqmtk105C/m/oEEUIVN7smkIRPM/XAIbPdDmMdo48fsG+9dNvp8
- rR50B+vd35/CwS0/E1VYZgEgaBCW4MvLIikFKdLCh1eLt3yYgByZGFyOkV0Ke5U3yCIv
- mSpCzM26xpM1iiOrI8sABjI6CBmNsxOWem1X4f1LWIwBp9aNZ7VpFdXIf0STWgnF1cHY
- ScvkOuTWJLv/zRGIyjM44HB5Auc5wxCF9jfXOojy88ls/C5gsIuRc1k3qIhQ5Jk6RQgd
- nRIA==
+ d=1e100.net; s=20230601; t=1773250335; x=1773855135;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/tmCZfCQ12S+zbwV4RHyJdkVvZKyhIOkcnJOkJugMOs=;
+ b=JKgHRAdqZ6cvhvSXN4Mne4k9lla+LYHo0myFKVjOjf/0TOSc/q5XjApbYdk0olMgli
+ Y/KS25r4+J61O2s4lXDInHWi5v2Uwkocc3uv7RjhiD5Ony9qz19EiphOH1vLqW6m5gc0
+ OZpQZ9AulrAwFAcKhQ5ULPb0hNRQa3P9wwqXZUMOGrpHPT9iInoVr90dYqTVj0RxSDfs
+ gSCk0FVYSDx8FH3CtZudC4xbdSwWNKqhT4r+nH/lu+qz/kwkxcQD/+flmHd9LghqCD7H
+ wVoGawSlRK5sjYE765FqdCfpcjmZZVlD25Z7wSy61ZrDtmrxH/zimn0Ek7QYqBrtA55h
+ YSfQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeKUfafoUnOyp1b1IfITjP+kDjtaA3dgruhd9ApExm1kuTXiZUM8srGmQGuQAt+2sXWGthnlM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzt/4n+nQF5FVPK5RaYgJaRGPyhS1B3OV7oaAs+14QVJLLMyyXL
- JFovJYXylQ2X3uM3GrHSczUSET2sm8Rg72NLc1ctN0QPRgrG88NrRHbsIGvUaOeV+qfCMGYCG2a
- sa0iH2zssWfQwOUuVTjljty3BTI/ALKSWPqNNqimmFDp43ZWFaf/4yD0+MSd17oaSVwSZYG8=
-X-Gm-Gg: ATEYQzw4b+xonuEvRA/ZOLMzty08SHMPFeJ4VbaLaGLiQ9SeeYayW0rvDWwtolNtlCu
- GRPY8ID9m/6I1ZTLjJhHaPErXIbQHucJveXJLlm1btoyErufyvQ4URMUALS6uS4Z1fhvTMgDpQk
- 2U4TFL13LRCnizySpexrwl5bkxTbbNb6Yk3d65NYhAPRMP9PyTA42Qs4okTbv73oHlhlLIFcl9j
- NN6qbIryKzDgT0dn3kUjt9aG4tFvn5k/qE8HWiGJmbS3X0XBrtJ3u1mswauj+pPIQDUSty0NarS
- iPVkFfuNFC7dNriz3S3bxH5fuoUd4qJpaemYdU6fSJav9KUCC6Y/ftjyBvuvN6BTcdHy0LzFpQ9
- CeZ4Wp6fH65ncuM+Lv041TWVbDojjFU5Neci9cr43wKhBJKUT/c0cvvSHtuqcKx1FiZqqrxTbH2
- b7HYmcKe1LiUcqIQ8SGFMgbzsI6u2i0pFf+rl1mEYxyUXx
-X-Received: by 2002:a5d:5f93:0:b0:439:d7db:c526 with SMTP id
- ffacd0b85a97d-439f8206d61mr6444454f8f.29.1773250238932; 
- Wed, 11 Mar 2026 10:30:38 -0700 (PDT)
-X-Received: by 2002:a5d:5f93:0:b0:439:d7db:c526 with SMTP id
- ffacd0b85a97d-439f8206d61mr6444388f8f.29.1773250238495; 
- Wed, 11 Mar 2026 10:30:38 -0700 (PDT)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439fe1b287dsm797246f8f.17.2026.03.11.10.30.37
+ AJvYcCW3ujqeEYcPSNHlm/OF8cmQtEoaAKegbOoeqD5qnfEKJ+KNtpVZCiunHhxwZ87min5oihHm47U=@lists.denx.de
+X-Gm-Message-State: AOJu0YxmD2OWS0eVy25o+IbyobrBGhuBG2aQMv4twqP3KoWfE9NM5sEb
+ DoiUXTyeyn3i4WpQmFoU+yGU4uzuTiTgZp3INZDV+lum09asPbJ6XBoP6mQoxXKOzAo=
+X-Gm-Gg: ATEYQzw/MQf2D8TQt1MTWYubnvkw/hEKyJ0qBx/NzIWxawPyqK7IbIm9PWyL0paepyA
+ pEJi8NoXL8fILanjwAfaZW8uwEjfsS6DNcm5bWiXSqhYBGlPts0UJ+YexZN5TC14Dp5YC/HqzSd
+ /4m3/Bn/oYhjOKp7sdQuUqfQj4Y9++93xA3rajHFp+yBgrs/otCZ/l+YXpq7gWCbrqViCQrczWf
+ pr7hW11XAjAgUTxWRsI7ygLPYoItmH+qto75tDq9pZq2spRjY969PvlNhErC/6QGzadL6sxcEU7
+ yobO4WzLsJkSpzZeU6JGHHS9mbZjeYg1e7Ft1mhnQwAWg25KJRqBCIPUrnEJ1TVvaxmXpX/3bVI
+ syaJV6UbcRmeX1PBqBeLWO6ZVrz1ROTd9DcLICUCpLFRs1qM9d81gDOPE6FixRYdPpc1XeMC9ub
+ oxtgrSXCQGDrFcgWrzrPHeLZPB52jQFoBusl2VN3sBY8Xv8r5tuIP4LMLBB+j9jmZqssqyjLMif
+ snxpfG7CAGh
+X-Received: by 2002:a05:6820:2291:b0:67b:a4c9:9b6 with SMTP id
+ 006d021491bc7-67bc89d4de9mr2005515eaf.41.1773250335510; 
+ Wed, 11 Mar 2026 10:32:15 -0700 (PDT)
+Received: from bill-the-cat ([2806:370:5618:2cb:9d3c:e48b:fc5f:66ae])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-67bc9354e59sm1726284eaf.16.2026.03.11.10.32.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 10:30:37 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Michal Simek <michal.simek@amd.com>, Shantur Rathore <i@shantur.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: avoid buffer overrun in efi_var_restore()
-Date: Wed, 11 Mar 2026 18:30:33 +0100
-Message-ID: <20260311173033.10002-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.53.0
+ Wed, 11 Mar 2026 10:32:14 -0700 (PDT)
+Date: Wed, 11 Mar 2026 11:32:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: David Lechner <dlechner@baylibre.com>
+Cc: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Macpaul Lin =?utf-8?B?KOael+aZuuaWjCk=?= <Macpaul.Lin@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] MAINTAINERS: add new MediaTek custodians
+Message-ID: <20260311173210.GA378499@bill-the-cat>
+References: <20260311-mtk-custodians-v1-1-000f9025b54c@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uPNv0Edt+bMaMpke"
+Content-Disposition: inline
+In-Reply-To: <20260311-mtk-custodians-v1-1-000f9025b54c@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,30 +103,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The value of buf->length comes from outside U-Boot and may be incorrect.
-We must avoid to overrun our internal buffer for excessive values.
 
-If buf->length is shorter than the variable file header, the variable
-file is invalid.
+--uPNv0Edt+bMaMpke
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/efi_var_common.c | 2 ++
- 1 file changed, 2 insertions(+)
+On Wed, Mar 11, 2026 at 09:52:49AM -0500, David Lechner wrote:
 
-diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-index 5ea1688dca3..c89a4fce4ff 100644
---- a/lib/efi_loader/efi_var_common.c
-+++ b/lib/efi_loader/efi_var_common.c
-@@ -497,6 +497,8 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
- 	efi_status_t ret;
- 
- 	if (buf->reserved || buf->magic != EFI_VAR_FILE_MAGIC ||
-+	    buf->length > EFI_VAR_BUF_SIZE ||
-+	    buf->length < sizeof(struct efi_var_file) ||
- 	    buf->crc32 != crc32(0, (u8 *)buf->var,
- 				buf->length - sizeof(struct efi_var_file))) {
- 		log_err("Invalid EFI variables file\n");
--- 
-2.53.0
+> Add new MediaTek custodians and the new MediaTek custodian's git
+> repository to the MAINTAINERS file.
+>=20
+> Julien and I have volunteered to act as custodians for MediaTek since
+> we have been actively working on upstreaming MediaTek support for some
+> some time now.
+>=20
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--uPNv0Edt+bMaMpke
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabGnFgAKCRAr4qD1Cr/k
+CuUHAP9/mlA9rm2Rjzs+ALhvLHPuS4s9IC02r+5g1Jjqtv79aAEAnOwtbCl8bBpe
+cLpTHKsSl66V00D/BSbbfGSXbZ5bRgc=
+=weOh
+-----END PGP SIGNATURE-----
+
+--uPNv0Edt+bMaMpke--
