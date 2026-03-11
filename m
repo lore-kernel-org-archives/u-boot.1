@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 665FB1125839
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:23:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA41FD0651
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:23:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81D05840BE;
+	by phobos.denx.de (Postfix) with ESMTP id C3796840DE;
 	Wed, 11 Mar 2026 15:23:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="uUsH6Tu0";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="swo+6tAH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00BFF8404A; Wed, 11 Mar 2026 14:31:28 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 385A08404A; Wed, 11 Mar 2026 14:31:31 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7209084013
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 14:31:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34FA884013
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 14:31:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-439c4bde55cso5715062f8f.1
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:31:25 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-439b9cf8cb5so9857662f8f.0
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:31:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1773235885; x=1773840685; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1773235889; x=1773840689; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pAVouB8aZczz3XrpjzGf0Nk0Tsv4eyGvDHqgswmXV8A=;
- b=uUsH6Tu0hk8Es6QWNDJgtxBw+nns9HTtah70Y2PbPfo108J0u73xjNB9xsUtd87zlR
- rgVVuVY7YTbuQw/OFsSkd/ifmZF2Rm/uP4ZYbfjJLGe4q/HsEbzJFiM+YNtZNdHQS/hO
- oKHlm1YqPvM5sbu8Zz+wQhYpc6+/w5k+EEcDpxFcyaGBs8f4Z7qUks02vx1FGxxjYrrA
- SfARWbAoOcqgmb7HClEWrDTR2zIzpV0f9X0TWN/6Ic0nAjSfmvGL15beouMRdvRDHvO9
- mixH1P0GOepp8YJgNs+SGxA/+2peVtVUbP8QgyTCE8k2xk3K5LD9cfkO4GKHMms+jJqH
- RNng==
+ :reply-to; bh=rMch0JQB7yrW+6bDQFRQ9sVrY6C+3KX44Z7iiBWmdDI=;
+ b=swo+6tAHR1SBs8P8N/YWJ48I4p0hAqtzKKk46tJj9WKUS8m2BJRFUTonDUC0WYJk5z
+ 9/29mJMPb8JGLWuFQpbgbCmdNfYX/DtoJNq+vc56MMMmCJSMaBuIf4VqoRJpFXVwFyU3
+ 99YBoAOUk6kjoH6djFgZOtvhiqeENRpWKY3kAcKlunraEZnM+uQl5kmPbCeN0uDHb8om
+ oKd7peKJosg3buWq5NUeUe34L0fTUVappxplT5hvePCN6cn6ADTpaWy+D77Z5m9l0WQi
+ oAt4nKC5fXtNgnC01s2V1/eWrGaqd0bILI3KwQJi4/AZvJDN5VjAlJAlw6IfsOT4Xci1
+ iQ8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773235885; x=1773840685;
+ d=1e100.net; s=20230601; t=1773235889; x=1773840689;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=pAVouB8aZczz3XrpjzGf0Nk0Tsv4eyGvDHqgswmXV8A=;
- b=nLZrkthtm26WyfKGxPKDmSmtoV9rqU87TkeCMQYlnKdpxeSZeQU0+HxfhKYvFD4clD
- ph9/AHjrLmx59ciipFyJ6wadrHz5nGtkz+p0YLCH/GgZihi076cLpQkikxXBX2vk3dSU
- NaGZhf74120mhdeymfGanL7w/oggPyugoTo8rv9FAX6ER7eZ9s549ZN6xd5sAOvy3vut
- pokpQzRDV6Fb/nXsy/Njwwr3FKYMZns2U/q1Iz82YDw1oz+pQ2lgQuqNFB0+BrzyfqM4
- BK6PLkG8ZHGOF92xFEEVdpAZHkTUSQwC95AehrjEBN/7yYGqNxJi0dK62V20OUEHYsAW
- XsqQ==
-X-Gm-Message-State: AOJu0YzvFJqN1mfEhkgBbSbW+HRrR3WoFZUr6HeaTDOWr38HrnVh4i1+
- byc/gbcGikhJacOx2F2ZKTe7dbZHlIVECo7i09saAf9S6U3dSO5Zo8xA4yOJuG0DNQc=
-X-Gm-Gg: ATEYQzzOMCwpTrvHclJrHjRcImEh/H+i9wRPp1b0OUCvGzHqClG89rsWKRpHVd9LY8S
- GLe4M10UUORZqnJ0Bd0GLfBy1kaccpgAkmExzs1yGkNi5zlQCGAioSEPpNqE+fR3SrcRsXJdj/T
- AUNRdStjeTGeqADrIc7JkRBIAuby1DWEpg05Zf7P3W0nIhLXxpwgN9ayCaSxRT+3reBQJzXP8D0
- t8+Of7s5ybZMoY7rhiQEZv8cmJt7hvnOeOgNAOr4sCdPh8khAB6dvxmuJDzMEnZAcbjnG+3fyEM
- Q2mnoS1wrIMqVuDYMip9INDwp0q3lyw/d9tz7iGDpK6ipxus5cc+vEBZhQ5ON8C8Z1NfhMcTPkp
- FC3gzIRk2kWcGubYHFs8fbgGl9YDh7vv34f0sNcXylTTIXM/YuMd6FfrcijpcoBajTRqpjfWGSf
- kCmU+9smgKsjbr4g1WX6Z7F9+LgTOjwQrBax7U6hkHw1hGRe1iH8aLW7QKHQ7mBE0actsbgOJQo
- 1pVow==
-X-Received: by 2002:a05:6000:1788:b0:439:c799:dbf2 with SMTP id
- ffacd0b85a97d-439f81f3d9dmr5337139f8f.9.1773235884791; 
- Wed, 11 Mar 2026 06:31:24 -0700 (PDT)
+ bh=rMch0JQB7yrW+6bDQFRQ9sVrY6C+3KX44Z7iiBWmdDI=;
+ b=OIETN7mshp4w5hGIfC+lwKe/+SQUXK5YpiLQD34EsWGg+ut/ZwahMsrbHkNab4o51T
+ JKCDqEpO7enozCyUvgDKknycxZRPVuP4Gh6OeewfiIh0OCvNWsTMxz2N/2kebg9TH2Wl
+ dOi2xZh1VjidJeYxEuKdk/VrOXElCWq/Bp3Z7yPK64g4uNB5oPgA1sDCC48rxafss+Ej
+ S2kvN7BZJbTg9EREMlLuPY4ZtBHjtMRfZzOtgit+t0/59pDa8VFD7WvLAIS8OuTOfv+y
+ mfO8pehdFvvYNUMM0CmIBXMkwsXNtpuuNfIGSSWZI4InEJ6mEnvQJQAI3LvjEMPgk9Ao
+ pfHw==
+X-Gm-Message-State: AOJu0YxWxkEtDcBtNVGUNz6Xi3M2qZLa0Aq3BvA+46wFaOBjZyJE8cqd
+ 5cSXk4V7W4+kBh/6Tqtjoh6IAwc4E8NeCbTxy7XFcWLpl2n49FdF+TdOtL559nMzx7A=
+X-Gm-Gg: ATEYQzxb+ERVKDPiOiqwF5ZZ15XPZoPIhpECVtv4uafCSjjyhisog7EQIPuMSHyOJZf
+ IjS+66A14I/Sg22J1OxZKP/CbkI5PhSYHLVnusqj173S0q7pENi1lwWb2CC7fyE0wqVvUFaAbeg
+ DBBz4Wg/l5d2VlL8YvqqH98xuwLhdgUmOTq9iHVTsaNwXB9I6cX4yc7u0Rpzb5JW7YdjiShKP/o
+ R+RJCRHLhmeMCDkgOv5yvLBM2ak3Kh1/9Y9r5R8atrdtw2WSzmviHpjZEdZjV+hLG02CFDsrppb
+ GOnxiWiSpOoRJf0NzTR6tkTFfDXo5xZAft1mzrOsJyIEZq6iC30hdVl6hp9a7ZQLG1ypy7H35jv
+ pgWou9bAjBoF6BIhUyP3QVaOEapTnCTwF6RGCVLMb04PVUTPvri9ykMh1NvHzKsVqp6vWd1avVL
+ OgxomcNSjutFqaZ/OQmNE+AdyF+k0YUSlghHJLIPxO8Iox75q9EoMCuj7QCLFNZgRRuHEx9Y6hF
+ aqKzg==
+X-Received: by 2002:a05:6000:26c6:b0:439:b666:6c9a with SMTP id
+ ffacd0b85a97d-439f8225337mr4975289f8f.54.1773235888570; 
+ Wed, 11 Mar 2026 06:31:28 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
  [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439f81a9e25sm5903038f8f.15.2026.03.11.06.31.21
+ ffacd0b85a97d-439f81a9e25sm5903038f8f.15.2026.03.11.06.31.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 06:31:24 -0700 (PDT)
+ Wed, 11 Mar 2026 06:31:28 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 11 Mar 2026 17:30:57 +0400
-Subject: [PATCH v6 2/6] arm64: dts: rockchip: enable UFS controller on
- FriendlyElec NanoPi M5
+Date: Wed, 11 Mar 2026 17:30:58 +0400
+Subject: [PATCH v6 3/6] reset: rockchip: make device resets available in
+ SPL
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260311-rk3576-ufs-v6-2-c7c353739242@flipper.net>
+Message-Id: <20260311-rk3576-ufs-v6-3-c7c353739242@flipper.net>
 References: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
 In-Reply-To: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
 To: u-boot@lists.denx.de
@@ -96,14 +96,14 @@ Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
  Elaine Zhang <zhangqing@rock-chips.com>, 
  Joseph Chen <chenjh@rock-chips.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
  Dhruva Gole <d-gole@ti.com>, Anshul Dalal <anshuld@ti.com>, 
- Alexey Charkov <alchark@flipper.net>, Alexey Charkov <alchark@gmail.com>
+ Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1995; i=alchark@flipper.net;
- h=from:subject:message-id; bh=Qkkxr0v7FLv8rA/lVvtmaq0Vb+2sCZ1KYFGOtd25kxI=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRuzFvQdenU04sZwSI7mhadcrZ8xKn7sr3uSZhlSp2IE
- OdehTuVHRNZGMS4GCzFFFnmfltiO9WIb9YuD4+vMHNYmUCGSIs0MAABCwNfbmJeqZGOkZ6ptqGe
- oaGOsY4RAxenAEz1bVZGhtUzH0s3s8+5uO9TZe8kpbXyk10jZ818IDBbZH7A1fpnhxMZGXrfdB4
- 9P+eM/fdDxVO5rvk89H8f83KyYN6PDrMD1eZFnEwA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1836; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=62mEHz13BHj+E1ghaYV7HpfcOZmPJ6XnFPWjuHvkcrE=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRuzFtw+FmhCwtDf40eX5W+5NPPqpWO9w8GhTAZxXxW1
+ nXXDc7tmMjCIMbFYCmmyDL32xLbqUZ8s3Z5eHyFmcPKBDJEWqSBAQhYGPhyE/NKjXSM9Ey1DfUM
+ DXWMdYwYuDgFYKqrtjAyPA3Jc2SxKp/QOfOn7YkQ2dvH/CRmPu9t/m7a/j50G0MtEyPDvP0730h
+ xFDU/iPvtbOJ8jHVhXrLY90Uxp6u5p757VrOGCQA=
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Wed, 11 Mar 2026 15:23:27 +0100
@@ -123,68 +123,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexey Charkov <alchark@gmail.com>
+Enable the Rockchip reset controller driver in SPL to allow resetting
+attached devices like UFS during early boot.
 
-The NanoPi M5 board supports pluggable UFS modules using the UFSHC
-inside its Rockchip RK3576 SoC.
-
-Enable the respective devicetree node and add its supply regulators.
-
-Link: https://wiki.friendlyelec.com/wiki/images/9/97/NanoPi_M5_LP5_2411_SCH.pdf
-Signed-off-by: Alexey Charkov <alchark@gmail.com>
-Link: https://patch.msgid.link/20251230-nanopi-m5-ufs-v3-1-ed188ae34fdb@gmail.com
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: cd50298ffc5f98872ddf0ac05c51a014003a34b7 ]
-
-(cherry picked from commit d9f2b91a7b6cc955e272c31a4bcb03a1c564efad)
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- .../src/arm64/rockchip/rk3576-nanopi-m5.dts        | 24 ++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/reset/Kconfig  | 9 +++++++++
+ drivers/reset/Makefile | 2 +-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
-index bb2cc2814b83..5c6e6c7a213a 100644
---- a/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3576-nanopi-m5.dts
-@@ -110,6 +110,22 @@
- 		regulator-name = "vcc12v_dcin";
- 	};
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 2fd91d6299cc..c8d2669d5e69 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -100,6 +100,15 @@ config RESET_ROCKCHIP
+ 	  though is that some reset signals, like I2C or MISC reset multiple
+ 	  devices.
  
-+	vcc1v2_ufs_vccq: regulator-vcc1v2-ufs-vccq {
-+		compatible = "regulator-fixed";
-+		regulator-min-microvolt = <1200000>;
-+		regulator-max-microvolt = <1200000>;
-+		regulator-name = "vcc1v2_ufs_vccq";
-+		vin-supply = <&vcc5v0_sys_s5>;
-+	};
++config SPL_RESET_ROCKCHIP
++	bool "SPL reset controller driver for Rockchip SoCs"
++	depends on SPL_DM_RESET && ARCH_ROCKCHIP && SPL_CLK
++	default y
++	help
++	  Support for the reset controller on Rockchip SoCs in SPL. Select this
++	  if you observe any reset-related warnings or errors when booting SPL,
++	  such as when using UFS storage
 +
-+	vcc1v8_ufs_vccq2: regulator-vcc1v8-ufs-vccq2 {
-+		compatible = "regulator-fixed";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-name = "vcc1v8_ufs_vccq2";
-+		vin-supply = <&vcc_1v8_s3>;
-+	};
-+
- 	vcc3v3_m2_keym: regulator-vcc3v3-m2-keym {
- 		compatible = "regulator-fixed";
- 		enable-active-high;
-@@ -910,6 +926,14 @@
- 	status = "okay";
- };
- 
-+&ufshc {
-+	vcc-supply = <&vcc_3v3_s3>;
-+	vccq-supply = <&vcc1v2_ufs_vccq>;
-+	vccq2-supply = <&vcc1v8_ufs_vccq2>;
-+	vdd-hba-supply = <&vdda_1v2_s0>;
-+	status = "okay";
-+};
-+
- &usbdp_phy {
- 	status = "okay";
- };
+ config RESET_HSDK
+ 	bool "Synopsys HSDK Reset Driver"
+ 	depends on DM_RESET && TARGET_HSDK
+diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+index 088545c64733..9f4202c1bb65 100644
+--- a/drivers/reset/Makefile
++++ b/drivers/reset/Makefile
+@@ -16,7 +16,7 @@ obj-$(CONFIG_RESET_BCM6345) += reset-bcm6345.o
+ obj-$(CONFIG_RESET_UNIPHIER) += reset-uniphier.o
+ obj-$(CONFIG_RESET_AST2500) += reset-ast2500.o
+ obj-$(CONFIG_RESET_AST2600) += reset-ast2600.o
+-obj-$(CONFIG_RESET_ROCKCHIP) += reset-rockchip.o rst-rk3506.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
++obj-$(CONFIG_$(PHASE_)RESET_ROCKCHIP) += reset-rockchip.o rst-rk3506.o rst-rk3528.o rst-rk3576.o rst-rk3588.o
+ obj-$(CONFIG_RESET_MESON) += reset-meson.o
+ obj-$(CONFIG_RESET_SOCFPGA) += reset-socfpga.o
+ obj-$(CONFIG_RESET_MEDIATEK) += reset-mediatek.o
 
 -- 
 2.52.0
