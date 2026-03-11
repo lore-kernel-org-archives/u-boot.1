@@ -4,61 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C343D104950F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 09:14:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC28D104950E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 09:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DF5683FB6;
-	Wed, 11 Mar 2026 10:14:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 273A083FB6;
+	Wed, 11 Mar 2026 10:30:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=thingy.jp
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="dIxz6r6g";
+	dkim=pass (1024-bit key; unprotected) header.d=thingy.jp header.i=@thingy.jp header.b="QjuS7aZW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53C5A83FC0; Wed, 11 Mar 2026 10:14:30 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 858A483FD3; Wed, 11 Mar 2026 10:30:58 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23ED783F93
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 10:14:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9AFC83F93
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 10:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-38-171-16.ip71.fastwebnet.it [93.38.171.16])
- by mail11.truemail.it (Postfix) with ESMTPA id F22181FCF5;
- Wed, 11 Mar 2026 10:14:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1773220467;
- bh=cYWyM80SYAl7gSOSs2LFi/sJ1yMfPfUX7aQfkag/3Jk=; h=From:To:Subject;
- b=dIxz6r6gKvtS6MTn8XwWvYJ2aarNChhb3STgO3Sd3aOyPiMYjVc0br7R7x3sKpBFo
- 3Yv95yOldKs8iqL3xJ1TZc3p7XBOcVCpFjgvJBXBsM+Se0xYVXsCI1RbAwZeWzmZy0
- QH1GcHf80AMxPMxarBpqkMinQw1nzlLWymzMuyxOzMm3SL81MTPVR56UicIuA21Xzf
- is8/ytL+xecmF80a7ePOxd+JlGpQ1rkcp6d62iaBy2Q2l0ND/55TJNK+h1QrvUVBRG
- j0NnnsZdrusrStxOtR7bMEzHOTrDTVY/VzdpZY7M2hkw9bnXjuDSewuME4I4FQTGAn
- ZfsWJJPjquTbA==
-Date: Wed, 11 Mar 2026 10:14:19 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>,
- Simona Toaca <simona.toaca@oss.nxp.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com,
- peng.fan@nxp.com, alice.guo@nxp.com, ye.li@nxp.com,
- simona.toaca@nxp.com, viorel.suman@nxp.com, marex@nabladev.com,
- ravi@prevas.dk, fedor.ross@ifm.com,
- sebastien.szymanski@armadeus.com, joao.goncalves@toradex.com,
- ji.luo@nxp.com, semen.protsenko@linaro.org, sjg@chromium.org,
- tharvey@gateworks.com, ping.bai@nxp.com, qijian.guo@nxp.com
-Subject: Re: [PATCH 4/5] board: nxp: imx9{4,5}_evk: Add qb save option in SPL
-Message-ID: <20260311091419.GA6525@francesco-nb>
-References: <cover.1773137310.git.simona.toaca@nxp.com>
- <bd23b79dc06f39a9f19ee3da956de450aad03aaf.1773137310.git.simona.toaca@nxp.com>
- <34d4475a-8353-47c9-86fe-36e67ceecb69@gmail.com>
- <llrc46dn7akdpro5bim3egfuuktyvwbrmb4odenspiz7tnwdme@3hc5leohkgzr>
+ dmarc=none (p=none dis=none) header.from=thingy.jp
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-82418b0178cso7402791b3a.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 02:30:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thingy.jp; s=google; t=1773221453; x=1773826253; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=feYkVQ220cIGyzUQl8EVdIIYBWOJWA4o13iyQRDZR3g=;
+ b=QjuS7aZWMhRCdLglG+uzTmCDnbK+jPTpCjfsY6JaPK5QKdJUNsLGp/Z95v2rSuHjw2
+ inIKWXP6LUIx+MgyBPRYaWpA/QLk4BBnjQCcPOFljOQu6dxv7uosMnHjDf7aZt04f68O
+ bOky6SCK/nliOJiq39MjxZ1D3GDUOa+zO8w+I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773221453; x=1773826253;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=feYkVQ220cIGyzUQl8EVdIIYBWOJWA4o13iyQRDZR3g=;
+ b=nEuMoCj7MepGHSk7USj9BjBTNlc01fJf2tuUsG7a6fDNDr7r8GUnZNzCzOhQr96Kr8
+ KcWDDyJnQ8R8h9DYPODKSh7hhw1oHuztFuANpCwIZm+sZf591xIikjKrdRZo2DZEbqil
+ diAqPU0DlmvpM9veF0XGjVpyyLZBSbeQrVFyHYK6h1eqvV1VFuOwbAiTyjHSoIMu0l5v
+ u2IGrpmr92TQhA0AmJ0FyLRTvv9VRyl0du+YeBB6dBJ7juJV5crdPP0xpm33zWGV0zV7
+ OJVyx/VbjPLJdZuteULYb8kxSiCRxz2knqf+ER/mMY5Ic6k1wBw4RrTuyEauWi2bGeg8
+ TDUA==
+X-Gm-Message-State: AOJu0YxcD8PVHkNSgt+KEkLK+UkQcJRqaB98M4vVaURUEJNqpcjMnaYL
+ vjhbd82vYsL5l5ufV/q+3mCVBjO6Pj3w+bNClgfz7P9JhB02ln4Zvb4u5XEJMsWVcOk7aJuvLRt
+ 03XjF
+X-Gm-Gg: ATEYQzx9w5AKGLxIaJtHDctvCCKyZC9vbkFanXh+NHcgN2TWkObUtx63i01c/rhWWta
+ UdgeGqfY+xjWEL1Lb5392cD8YXO/wevTwVpSAZw5U26Q5H+lp0lV4aSIBXTc63tO9Bv18qsei9m
+ H3SyOBE661F7tTKR+BwOsfjiCTVnde2Imb6yuYom5+Di/MLl7JW+FiViNnUJkmOtFIvAxDMs25p
+ dX1i8RaMz60Up0f/ToIigU/0DeFll0FY+eTOVV7ZBXgW8QEr96mqIA2WSuvawAsJTKRmH/dGJIZ
+ zBOPPUtV9oMA9q4DQAjkSKkqKLM29/xYb9X30EgQfr90AeZ0du0FyMkmPtC6xG5XpZhbmG+6qD0
+ cZUml0b+vsMgZgfquqbZ8DdkpcgkAvuugOc7zJo1Qo7DV+WNb+ewSNqXFwNgyWyAlIHp7lI98DN
+ 6ichO5LSOf8vzS
+X-Received: by 2002:a05:6a00:3d4e:b0:829:a8a8:307e with SMTP id
+ d2e1a72fcca58-829f71c4b63mr2116532b3a.65.1773221453110; 
+ Wed, 11 Mar 2026 02:30:53 -0700 (PDT)
+Received: from kinako ([2400:2200:413:a1d:f125:1dc2:b046:d067])
+ by smtp.googlemail.com with ESMTPSA id
+ d2e1a72fcca58-829f703a47bsm1640694b3a.60.2026.03.11.02.30.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Mar 2026 02:30:52 -0700 (PDT)
+From: Daniel Palmer <daniel@thingy.jp>
+To: visitorckw@gmail.com,
+	angelo@kernel-space.org
+Cc: u-boot@lists.denx.de,
+	Daniel Palmer <daniel@thingy.jp>
+Subject: [PATCH] m68k: Add LTO support
+Date: Wed, 11 Mar 2026 18:30:48 +0900
+Message-ID: <20260311093048.1773382-1-daniel@thingy.jp>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <llrc46dn7akdpro5bim3egfuuktyvwbrmb4odenspiz7tnwdme@3hc5leohkgzr>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,45 +93,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 10, 2026 at 05:27:45PM +0200, Simona Toaca wrote:
-> On Tue, Mar 10, 2026 at 04:04:19PM +0100, Emanuele Ghidoli wrote:
-> > On 3/10/26 12:54, Simona Toaca (OSS) wrote:
-> > > From: Simona Toaca <simona.toaca@nxp.com>
-> > > 
-> > > Call qb save automatically in the board-specific
-> > > spl_board_init(), if SPL_QB option is enabled. This
-> > > makes sure qb_save is called before any image loading
-> > > is done by the SPL.
-> > > 
-> > > Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
+Most m68k retro/homebrew machines will have limited flash/RAM
+so having LTO working would be nice.
 
-...
+Not many changes are need really. Most of this is copy/paste
+from the ARM32 version.
 
-> > > diff --git a/board/nxp/imx94_evk/spl.c b/board/nxp/imx94_evk/spl.c
-> > > index cc5b7f9ef0f..1d25795eb17 100644
-> > > --- a/board/nxp/imx94_evk/spl.c
-> > > +++ b/board/nxp/imx94_evk/spl.c
-> > > @@ -44,6 +45,9 @@ void spl_board_init(void)
-> > >  	ret = ele_start_rng();
-> > >  	if (ret)
-> > >  		printf("Fail to start RNG: %d\n", ret);
-> > > +
-> > > +	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
-> > > +		spl_qb_save();
-> > Does it write to MMC/NOR/SD at every boot? Is that necessary if a quick boot
-> > was performed and the data has not changed?
-> > >  }
-> No, the qb() method calls qb_check, which returns true only if OEI
-> saved valid data to volatile memory (meaning it has run Training flow).
-> So, if Quickboot flow is run, the data in volatile memory is not valid,
-> qb_check fails -> qb returns and does not write anything to the NVM.
-> 
-> Also, another thing to keep in mind is that after a successfull
-> qb save, the data in volatile memory is invalidated -> qb check will
-> fail as well even if OEI doesn't run (so on a warm reboot).
+The major change is that the direct register usage of d7 for gd
+needs to be hidden so that when LTO passes over everything it
+doesn't see multiple instances of d7.
 
-Do you think that this is something that should be generally enabled on
-any i.MX95 boards? Emanuele?
+Signed-off-by: Daniel Palmer <daniel@thingy.jp>
+---
 
-Francesco
+This is another patch from my vault that I have been using
+on various classic m68k machines for ages. I haven't tested
+it with coldfire though.
+
+ arch/Kconfig                        |  1 +
+ arch/m68k/config.mk                 | 11 +++++++++--
+ arch/m68k/cpu/m680x0/cpu.c          |  2 +-
+ arch/m68k/include/asm/global_data.h | 19 +++++++++++++++++++
+ arch/m68k/lib/ashldi3.c             |  1 +
+ arch/m68k/lib/lshrdi3.c             |  1 +
+ arch/m68k/lib/muldi3.c              |  1 +
+ common/board_r.c                    |  4 ++--
+ common/init/board_init.c            |  2 +-
+ 9 files changed, 36 insertions(+), 6 deletions(-)
+
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 4af0da2485fb..488de442f557 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -112,6 +112,7 @@ config ARM
+ 
+ config M68K
+ 	bool "M68000 architecture"
++	select ARCH_SUPPORTS_LTO
+ 	select HAVE_PRIVATE_LIBGCC
+ 	select USE_PRIVATE_LIBGCC
+ 	select SYS_BOOT_GET_CMDLINE
+diff --git a/arch/m68k/config.mk b/arch/m68k/config.mk
+index 458953f97122..1be46adda966 100644
+--- a/arch/m68k/config.mk
++++ b/arch/m68k/config.mk
+@@ -8,9 +8,16 @@ ifneq ($(CONFIG_M680x0),y)
+ PLATFORM_CPPFLAGS += -fPIC
+ endif
+ KBUILD_LDFLAGS    += -n -pie
+-PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
+ PLATFORM_RELFLAGS += -ffixed-d7
+ ifneq ($(CONFIG_M680x0),y)
+ PLATFORM_RELFLAGS += -msep-data
+ endif
+-LDFLAGS_FINAL     += --gc-sections -pie
++LDFLAGS_FINAL     += -pie
++
++ifneq ($(LTO_ENABLE)$(CONFIG_USE_PRIVATE_LIBGCC),yy)
++LDFLAGS_FINAL     += --gc-sections
++endif
++
++ifneq ($(LTO_ENABLE),y)
++PLATFORM_RELFLAGS += -ffunction-sections -fdata-sections
++endif
+diff --git a/arch/m68k/cpu/m680x0/cpu.c b/arch/m68k/cpu/m680x0/cpu.c
+index f60b932c7dd4..3f87076b8c3d 100644
+--- a/arch/m68k/cpu/m680x0/cpu.c
++++ b/arch/m68k/cpu/m680x0/cpu.c
+@@ -24,7 +24,7 @@ void m68k_virt_init_reserve(ulong base)
+ 	for (i = 0; i < sizeof(*gd_ptr); i++)
+ 		p[i] = 0;
+ 
+-	gd = gd_ptr;
++	arch_setup_gd(gd);
+ 
+ 	gd->malloc_base = base + sizeof(*gd_ptr);
+ }
+diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
+index aea2ccabe083..9150ed4ab466 100644
+--- a/arch/m68k/include/asm/global_data.h
++++ b/arch/m68k/include/asm/global_data.h
+@@ -32,6 +32,25 @@ struct arch_global_data {
+ 
+ #include <asm-generic/global_data.h>
+ 
++#if defined(LTO_ENABLE)
++/* If LTO is enabled we have to hide d7 to avoid multiple symbol declarations */
++#define DECLARE_GLOBAL_DATA_PTR
++#define gd	get_gd()
++
++static inline gd_t *get_gd(void)
++{
++	gd_t *gd_ptr;
++
++	__asm__ volatile("move.l %%d7, %0\n" : "=r" (gd_ptr));
++
++	return gd_ptr;
++}
++#else
+ #define DECLARE_GLOBAL_DATA_PTR     register gd_t *gd asm ("d7")
++#endif
++static inline void arch_setup_gd(gd_t *new_gd)
++{
++	__asm__ volatile("move.l %0, %%d7\n" : : "r" (new_gd));
++}
+ 
+ #endif /* __ASM_GBL_DATA_H */
+diff --git a/arch/m68k/lib/ashldi3.c b/arch/m68k/lib/ashldi3.c
+index 9a4bc676bf4c..82bd9113ecbf 100644
+--- a/arch/m68k/lib/ashldi3.c
++++ b/arch/m68k/lib/ashldi3.c
+@@ -21,6 +21,7 @@ typedef union
+   DItype ll;
+ } DIunion;
+ 
++DItype __ashldi3 (DItype u, word_type b) __attribute__((used));
+ DItype __ashldi3 (DItype u, word_type b)
+ {
+ 	DIunion w;
+diff --git a/arch/m68k/lib/lshrdi3.c b/arch/m68k/lib/lshrdi3.c
+index e639e676a269..691d503d7313 100644
+--- a/arch/m68k/lib/lshrdi3.c
++++ b/arch/m68k/lib/lshrdi3.c
+@@ -21,6 +21,7 @@ typedef union
+   DItype ll;
+ } DIunion;
+ 
++DItype __lshrdi3 (DItype u, word_type b) __attribute__((used));
+ DItype __lshrdi3 (DItype u, word_type b)
+ {
+ 	DIunion w;
+diff --git a/arch/m68k/lib/muldi3.c b/arch/m68k/lib/muldi3.c
+index c42ca1d753e5..53d674701531 100644
+--- a/arch/m68k/lib/muldi3.c
++++ b/arch/m68k/lib/muldi3.c
+@@ -54,6 +54,7 @@ typedef union
+ 	DItype ll;
+ } DIunion;
+ 
++DItype __muldi3 (DItype u, DItype v) __attribute__((used));
+ DItype __muldi3 (DItype u, DItype v)
+ {
+ 	DIunion w;
+diff --git a/common/board_r.c b/common/board_r.c
+index 76f9fc090fbe..58eb69005468 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -800,12 +800,12 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
+ 	 * TODO(sjg@chromium.org): Consider doing this for all archs, or
+ 	 * dropping the new_gd parameter.
+ 	 */
+-	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
++	if ((CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP)) || CONFIG_IS_ENABLED(M68K))
+ 		arch_setup_gd(new_gd);
+ 
+ #if defined(CONFIG_RISCV)
+ 	set_gd(new_gd);
+-#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
++#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64) && !defined(CONFIG_M68K)
+ 	gd = new_gd;
+ #endif
+ 	gd->flags &= ~GD_FLG_LOG_READY;
+diff --git a/common/init/board_init.c b/common/init/board_init.c
+index 2a6f39f51adb..c56b33e7be7c 100644
+--- a/common/init/board_init.c
++++ b/common/init/board_init.c
+@@ -17,7 +17,7 @@ DECLARE_GLOBAL_DATA_PTR;
+  * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
+  * as macro and cannot be assigned.
+  */
+-#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
++#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV) && !defined(CONFIG_M68K)
+ __weak void arch_setup_gd(struct global_data *gd_ptr)
+ {
+ 	gd = gd_ptr;
+-- 
+2.51.0
 
