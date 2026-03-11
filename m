@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3319C106289F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17CC5106289F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:17:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C76384101;
+	by phobos.denx.de (Postfix) with ESMTP id B349084118;
 	Wed, 11 Mar 2026 14:16:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="hDr20VZx";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="T1oQteM6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABD6383FEC; Wed, 11 Mar 2026 09:41:47 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+ id 49D5183F6D; Wed, 11 Mar 2026 09:41:53 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 157A583F93
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:41:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E85A83FDE
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:41:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=qq
- xDOtIHsK7xk39/dzNebHN5fiHyYAwl5uDDYDdACRo=; b=hDr20VZxNesL+/zGLu
- 75vaENCQkb8FX7UYhoiX1IbZIYiIlD0zOv7uCYfUuYuWSheRA5V//NlkVp3o8wqv
- EQBFCARC/JxxYq26Q0rukWr6EivwtpygQPrcsdoFT/29UcIg1az45cxdQVoM6eq1
- rHZfcJZ1mhPzmuVyjiCCrODsw=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=+R
+ RctQiDz10VO7hYlJBBD3FZic+A0WGqjtUyOAGP5Sw=; b=T1oQteM6ojbZjK4J4r
+ +t12gBLeRlv/TVG7g1ITnF3MpFAGGrKGbRNyNoFp3tQq8o6jZLbW1H82zpQjCr8Z
+ CId4exkyNxIHQ9e0nO55Sj2njQ0jlUcVI6Ru6I7nNFz5DSP/BjbhkJjVtZva5/FO
+ RiYq1HbKKmnNXfVCQgxiOVHoo=
 Received: from server-e.. (unknown [])
  by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id
- _____wAHLsa5KrFpe9OOAQ--.40770S9; 
- Wed, 11 Mar 2026 16:41:35 +0800 (CST)
+ _____wAHLsa5KrFpe9OOAQ--.40770S5; 
+ Wed, 11 Mar 2026 16:41:32 +0800 (CST)
 From: sgdfkk@163.com
 To: duhuanpeng@139.com,
 	u-boot@lists.denx.de
 Cc: chenhuacai@loongson.cn, jiaxun.yang@flygoat.com,
  Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v6 7/7] mips: loongson: ls1c300 dts and bindings
-Date: Wed, 11 Mar 2026 16:41:29 +0800
-Message-ID: <20260311084129.12809-8-sgdfkk@163.com>
+Subject: [PATCH v6 3/7] mips: loongson: lowlevel debug serial
+Date: Wed, 11 Mar 2026 16:41:25 +0800
+Message-ID: <20260311084129.12809-4-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260311084129.12809-1-sgdfkk@163.com>
 References: <20260311084129.12809-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wAHLsa5KrFpe9OOAQ--.40770S9
-X-Coremail-Antispam: 1Uf129KBjvJXoW3AF1UZr17urW7Cr45Gr15Arb_yoWxCFyUpw
- 1qkFZYqr4IvF129wnY9Fy8JF1fJFW0kFy7J3Zrtry8Cw13KFWjyF1fKaySqFyfXr40v3yx
- XFZrX34jvFsFvw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jov38UUUUU=
+X-CM-TRANSID: _____wAHLsa5KrFpe9OOAQ--.40770S5
+X-Coremail-Antispam: 1Uf129KBjvJXoWxtw1UZrWrCw1fJr4kGFy3urg_yoW7XFy7pF
+ 1xAan5KF4DXw47KasYy3WkGrnxtrs5Jry7JFnrXF1ru3Z7t3Z5CF42kFn0vrW3JFZ5GrWF
+ 9ayavrW2gas7Zw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j9HUgUUUUU=
 X-Originating-IP: [240e:3b0:4805:1b6:5ef3:fcff:feed:1d83]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC5x+A12mxKr+52wAA3A
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCwByA12mxKrzZNwAA3r
 X-Mailman-Approved-At: Wed, 11 Mar 2026 14:15:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,282 +73,223 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
-- ls1c300 dtsi
-- ls1c300-eval board dts
-- clk binding header
-- reset binding header
+set pin to uart alternate function and enable uart for lowlevel debug,
+also future pinctrl driver can base on this code.
 
 Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- arch/mips/dts/loongson32-ls1c300b.dtsi    | 151 ++++++++++++++++++++++
- arch/mips/dts/ls1c300-eval.dts            |  30 +++++
- include/dt-bindings/clock/ls1c300-clk.h   |  18 +++
- include/dt-bindings/reset/ls1c300-reset.h |  36 ++++++
- 4 files changed, 235 insertions(+)
- create mode 100644 arch/mips/dts/loongson32-ls1c300b.dtsi
- create mode 100644 arch/mips/dts/ls1c300-eval.dts
- create mode 100644 include/dt-bindings/clock/ls1c300-clk.h
- create mode 100644 include/dt-bindings/reset/ls1c300-reset.h
+ arch/mips/mach-loongson/include/mach/serial.h |  16 +++
+ arch/mips/mach-loongson/ls1c300/gpio.c        |  66 +++++++++++
+ arch/mips/mach-loongson/ls1c300/serial.c      | 104 ++++++++++++++++++
+ 3 files changed, 186 insertions(+)
+ create mode 100644 arch/mips/mach-loongson/include/mach/serial.h
+ create mode 100644 arch/mips/mach-loongson/ls1c300/gpio.c
+ create mode 100644 arch/mips/mach-loongson/ls1c300/serial.c
 
-diff --git a/arch/mips/dts/loongson32-ls1c300b.dtsi b/arch/mips/dts/loongson32-ls1c300b.dtsi
+diff --git a/arch/mips/mach-loongson/include/mach/serial.h b/arch/mips/mach-loongson/include/mach/serial.h
 new file mode 100644
-index 00000000000..26b0c707459
+index 00000000000..7afe5788cb7
 --- /dev/null
-+++ b/arch/mips/dts/loongson32-ls1c300b.dtsi
-@@ -0,0 +1,151 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#include <dt-bindings/clock/ls1c300-clk.h>
-+#include <dt-bindings/reset/ls1c300-reset.h>
++++ b/arch/mips/mach-loongson/include/mach/serial.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2020 MediaTek Inc.
++ *
++ * Author:  Gao Weijie <weijie.gao@mediatek.com>
++ *
++ * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
++ */
 +
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+	compatible = "loongson,ls1c300-soc";
++#ifndef __LSMIPS_SERIAL_H_
++#define __LSMIPS_SERIAL_H_
 +
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		cpu@0 {
-+			device_type = "cpu";
-+			reg = <0>;
-+			compatible = "loongson,gs232", "mips,mips4Kc";
-+			clocks = <&acc CLK_CPU_THROT>;
-+		};
-+	};
++void loongson_spl_serial_init(void);
++int gpio_set_alternate(int gpio, int func);
 +
-+	clocks {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		bootph-all;
-+
-+
-+		xtal: oscillator {
-+			compatible = "fixed-clock";
-+			clock-frequency = <24000000>;
-+			#clock-cells = <0>;
-+		};
-+	};
-+
-+	soc {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "simple-bus";
-+		ranges;
-+
-+		acc: clock-controller@1fe78030 {
-+			compatible = "loongson,ls1c300-clk";
-+			clocks = <&xtal>;
-+			#clock-cells = <1>;
-+			reg = <0x1fe78030 0x8>, <0x1fe7c010 0x4>;
-+			bootph-all;
-+		};
-+
-+		uart0: serial@1fe40000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe40000 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart1: serial@1fe44000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe44000 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart2: serial@1fe48000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe48000 0x100>;
-+			resets = <&shut_ctrl UART2_SHUT>;
-+			reset-names = "uart2";
-+			status = "disabled";
-+		};
-+
-+		uart3: serial@1fe4c000 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c000 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart4:  serial@1fe4c400 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c400 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart5:  serial@1fe4c500 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c500 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart6:  serial@1fe4c600 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c600 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart7:  serial@1fe4c700 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c700 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart8:  serial@1fe4c800 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c800 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart9:  serial@1fe4c900 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4c900 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart10: serial@1fe4ca00 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4ca00 0x100>;
-+			status = "disabled";
-+		};
-+
-+		uart11: serial@1fe4cb00 {
-+			compatible = "loongson,ls1c300-uart", "ns16550a";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe4cb00 0x100>;
-+			status = "disabled";
-+		};
-+
-+		wdt: watchdog@1fe5c060 {
-+			compatible = "loongson,ls1c300-wdt";
-+			clocks = <&acc CLK_APB>;
-+			reg = <0x1fe5c060 0x10>;
-+		};
-+
-+		reset-controller {
-+			compatible = "wdt-reboot";
-+			wdt = <&wdt>;
-+		};
-+
-+		shut_ctrl: reset-controller@1fd00420 {
-+			compatible = "loongson,shut_ctrl";
-+			reg = <0x1fd00420 0x4>;
-+			#reset-cells = <1>;
-+		};
-+	};
-+};
-diff --git a/arch/mips/dts/ls1c300-eval.dts b/arch/mips/dts/ls1c300-eval.dts
++#endif /* __LSMIPS_SERIAL_H_ */
+diff --git a/arch/mips/mach-loongson/ls1c300/gpio.c b/arch/mips/mach-loongson/ls1c300/gpio.c
 new file mode 100644
-index 00000000000..cc3c267a5bf
+index 00000000000..7f160408382
 --- /dev/null
-+++ b/arch/mips/dts/ls1c300-eval.dts
-@@ -0,0 +1,30 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/arch/mips/mach-loongson/ls1c300/gpio.c
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2022 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+/dts-v1/;
++#include <linux/errno.h>
++#include <asm/bitops.h>
 +
-+#include "loongson32-ls1c300b.dtsi"
++#define CBUS_FIRST0	0xbfd011c0
++#define CBUS_SECOND0	0xbfd011d0
++#define CBUS_THIRD0	0xbfd011e0
++#define CBUS_FOURTHT0	0xbfd011f0
++#define CBUS_FIFTHT0	0xbfd01200
 +
-+/ {
-+	compatible = "lsmips,ls1c300-soc";
-+	model = "ls1c300-eval";
++#define CBUS_FIRST1	0xbfd011c4
++#define CBUS_SECOND1	0xbfd011d4
++#define CBUS_THIRD1	0xbfd011e4
++#define CBUS_FOURTHT1	0xbfd011f4
++#define CBUS_FIFTHT1	0xbfd01204
 +
-+	aliases {
-+		serial0 = &uart2;
-+	};
++#define CBUS_FIRST2	0xbfd011c8
++#define CBUS_SECOND2	0xbfd011d8
++#define CBUS_THIRD2	0xbfd011e8
++#define CBUS_FOURTHT2	0xbfd011f8
++#define CBUS_FIFTHT2	0xbfd01208
 +
-+	memory@80000000 {
-+		device_type = "memory";
-+		reg = <0x80000000 0x4000000>;
-+	};
++#define CBUS_FIRST3	0xbfd011cc
++#define CBUS_SECOND3	0xbfd011dc
++#define CBUS_THIRD3	0xbfd011ec
++#define CBUS_FOURTHT3	0xbfd011fc
++#define CBUS_FIFTHT3	0xbfd0120c
 +
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+};
-+
-+&uart2 {
-+	status = "okay";
-+};
-diff --git a/include/dt-bindings/clock/ls1c300-clk.h b/include/dt-bindings/clock/ls1c300-clk.h
-new file mode 100644
-index 00000000000..ac3937adfb6
---- /dev/null
-+++ b/include/dt-bindings/clock/ls1c300-clk.h
-@@ -0,0 +1,18 @@
-+/* SPDX-License-Identifier: GPL-2.0-only OR MIT */
 +/*
-+ * Copyright (C) 2022-2026 Du Huanpeng <u74147@gmail.com>
++ * pinmux for debug uart and spl only, for others, please
++ * use a pinctrl driver and device-tree for pin muxing.
++ *
++ * @gpio: gpio number
++ * @func: alternate function 1 to 5, 0 for GPIO.
 + */
 +
-+#ifndef __DT_BINDINGS_LS1C300_CLK_H__
-+#define __DT_BINDINGS_LS1C300_CLK_H__
++int gpio_set_alternate(int gpio, int func)
++{
++	volatile void __iomem *addr;
++	int i;
 +
-+#define CLK_XTAL	0
-+#define CLK_PLL		1
-+#define CLK_CPU		2
-+#define CLK_APB		3
-+#define CLK_CAMERA	4
-+#define CLK_PIX		5
-+#define CLK_AXIMUX	6
-+#define CLK_CPU_THROT	7
++	if (gpio < 0 || gpio > 104)
++		return -ENODEV;
++	if (func < 0 || func > 5)
++		return -EINVAL;
 +
-+#endif /* __DT_BINDINGS_LS1C300_CLK_H__ */
-diff --git a/include/dt-bindings/reset/ls1c300-reset.h b/include/dt-bindings/reset/ls1c300-reset.h
++	if (func) {
++		i = func - 1;
++		addr = (void *)CBUS_FIRST0 + i * 16;
++		set_bit(gpio, addr);
++	} else {
++		/* GPIO, clear CBUS 1 ~ 5 */
++		i = 5;
++	}
++
++	while (i--) {
++		addr = (void *)CBUS_FIRST0 + 16 * i;
++		clear_bit(gpio, addr);
++	}
++
++	return 0;
++}
+diff --git a/arch/mips/mach-loongson/ls1c300/serial.c b/arch/mips/mach-loongson/ls1c300/serial.c
 new file mode 100644
-index 00000000000..0aea03cc181
+index 00000000000..a7697574dad
 --- /dev/null
-+++ b/include/dt-bindings/reset/ls1c300-reset.h
-@@ -0,0 +1,36 @@
-+/* SPDX-License-Identifier: GPL-2.0-only OR MIT */
++++ b/arch/mips/mach-loongson/ls1c300/serial.c
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Copyright (C) 2022-2026 Du Huanpeng <u74147@gmail.com>
++ * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+#ifndef _DT_BINDINGS_LS1C300_RESET_H_
-+#define _DT_BINDINGS_LS1C300_RESET_H_
++#include <mach/serial.h>
++#include <linux/kernel.h>
 +
-+#define ADC_SHUT        25
-+#define SDIO_SHUT       24
-+#define DMA2_SHUT       23
-+#define DMA1_SHUT       22
-+#define DMA0_SHUT       21
-+#define SPI1_SHUT       20
-+#define SPI0_SHUT       19
-+#define I2C2_SHUT       18
-+#define I2C1_SHUT       17
-+#define I2C0_SHUT       16
-+#define AC97_SHUT       15
-+#define I2S_SHUT        14
-+#define UART3_SHUT      13
-+#define UART2_SHUT      12
-+#define UART1_SHUT      11
-+#define UART0_SHUT      10
-+#define CAN1_SHUT       9
-+#define CAN0_SHUT       8
-+#define ECC_SHUT        7
-+#define MAC_SHUT        6
-+#define USBHOST_SHUT    5
-+#define USBOTG_SHUT     4
-+#define SDRAM_SHUT      3
-+#define SRAM_SHUT       2
-+#define CAM_SHUT        1
-+#define LCD_SHUT        0
++struct uart_pin_config {
++	char port;
++	char afunc;
++	char rx;
++	char tx;
++};
 +
-+#endif  /* _DT_BINDINGS_LS1C300_RESET_H_*/
++struct uart_pin_config con[] = {
++#if CONFIG_CONS_INDEX == 0
++	{ 0, 2, 74, 75 },
++	{ 0, 3, 23, 24 },
++	{ 0, 3, 99, 100 },
++
++#elif CONFIG_CONS_INDEX == 1
++	{ 1, 1, 17, 18 },
++	{ 1, 1, 101, 102 },
++	{ 1, 2, 40, 41 },
++	{ 1, 4, 2, 3 },
++
++#elif CONFIG_CONS_INDEX == 2
++	{ 2, 2, 36, 37 },
++	{ 2, 2, 42, 43 },
++	{ 2, 3, 27, 28 },
++	{ 2, 3, 103, 104 },
++	{ 2, 4, 4, 5 },
++
++#elif CONFIG_CONS_INDEX == 3
++	{ 3, 2, 17, 18 },
++	{ 3, 2, 33, 34 },
++	{ 3, 2, 44, 45 },
++	{ 3, 4, 0, 1 },
++
++#elif CONFIG_CONS_INDEX == 4
++	{ 4, 5, 23, 24 },
++	{ 4, 5, 58, 59 },
++	{ 4, 5, 80, 79 },
++
++#elif CONFIG_CONS_INDEX == 5
++	{ 5, 5, 25, 26 },
++	{ 5, 5, 60, 61 },
++	{ 5, 5, 81, 78 },
++
++#elif CONFIG_CONS_INDEX == 6
++	{ 6, 5, 27, 46 },
++	{ 6, 5, 62, 63 },
++
++#elif CONFIG_CONS_INDEX == 7
++	{ 7, 5, 57, 56 },
++	{ 7, 5, 64, 65 },
++	{ 7, 5, 87, 88 },
++
++#elif CONFIG_CONS_INDEX == 8
++	{ 8, 5, 55, 54 },
++	{ 8, 5, 66, 67 },
++	{ 8, 5, 89, 90 },
++
++#elif CONFIG_CONS_INDEX == 9
++	{ 9, 5, 53, 52 },
++	{ 9, 5, 68, 69 },
++	{ 9, 5, 85, 86 },
++
++#elif CONFIG_CONS_INDEX == 10
++	{ 10, 5, 51, 50 },
++	{ 10, 5, 70, 71 },
++	{ 10, 5, 84, 82 },
++
++#elif CONFIG_CONS_INDEX == 11
++	{ 11, 5, 49, 48 },
++	{ 11, 5, 72, 73 },
++#endif /* CONFIG_CONS_INDEX */
++};
++
++#define UART2_RX	36
++#define UART2_TX	37
++#define AFUNC		2
++
++void loongson_spl_serial_init(void)
++{
++#if defined(CONFIG_SPL_SERIAL)
++	int pin_rx, pin_tx;
++	int afunc;
++
++	if (CONFIG_CONS_PIN < ARRAY_SIZE(con)) {
++		pin_rx = con[CONFIG_CONS_PIN].rx;
++		pin_tx = con[CONFIG_CONS_PIN].tx;
++		afunc = con[CONFIG_CONS_PIN].afunc;
++	} else {
++		pin_rx = UART2_RX;
++		pin_tx = UART2_TX;
++		afunc = AFUNC;
++	}
++
++	gpio_set_alternate(pin_rx, afunc);
++	gpio_set_alternate(pin_tx, afunc);
++#endif /* CONFIG_SPL_SERIAL */
++}
 -- 
 2.43.0
 
