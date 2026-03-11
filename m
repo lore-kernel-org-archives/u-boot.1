@@ -4,108 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 721E2112583A
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BEDD112583E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 15:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D30F7840DE;
-	Wed, 11 Mar 2026 15:53:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 128B9840EE;
+	Wed, 11 Mar 2026 16:08:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UgmD39qg";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SnUJ9snf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A0E784127; Wed, 11 Mar 2026 15:53:03 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D9C0784109; Wed, 11 Mar 2026 16:08:19 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CE6D840BE
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 15:53:00 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-45f053b7b90so9111289b6e.0
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 07:53:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773240779; x=1773845579;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xsAtPAJO9inDC/emOeUk+0PXNvPqXnVlUH6MM/GbXQM=;
- b=UgmD39qgaj/B3kL9ao4Wbz4uEeSuIO94mcyXcQ1UahJJWeM0sBpaM3Fa+sYLOUj86I
- aTkbKlRwWZUEBpqnR8FtmjqqrbQI/fKWLl4zUBElEROwPRY2LWc96JeGHh+oPytixBdQ
- 6t990go8hgQrDviiILl4QMxOZnT9Yp87pKhiUUULM/oUCQhErVvFzFh96OB44e8gQcmb
- 2QFd1FKsWF9ca8vhnzCWuoHHvbyMLGl5FB1eWYVuRv3zjEQ2g4Wyu6eA8n4bJwh2Gpt0
- h7YcR/WY53oMoc5sONNZByxrH0Np1WEdWtmi9OlAsjOntF93ZRiB0s7hZEEmqOZQvHvs
- ZOnQ==
+ by phobos.denx.de (Postfix) with ESMTPS id 3F2CF840DE
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 16:08:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C612C3F801
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 15:08:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1773241696;
+ bh=zj8/3bQrJSu5Oki/SjDg4SlYLb/Tn8eJVz6xbKphWps=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=SnUJ9snfpvyHHtqROY868stFjQtV6dXpEpSnIEv8UgwVsku+EKKTwd9Ycpe+1XDXg
+ vl0bhJhS/f9leYqMH34yv5Rc4PlcSYpeOK7PZL7VFFHuHzdiktErICj23pPs/GU2KM
+ Z6yMmMOfVholObcrG1EewU3hvpDVHMjZyXbR/ecTnOKWzFEr2c0AjskXHpSlEpkWSZ
+ u1ovF0TX2VRsFQUb8xSMSRX88aZ8j2EFWxy1yUzPx29IJK9U0DJk/OptRouNo28SQh
+ TxSVXqv57tiZmAzq6kmvq0pb/1IszvwBV+Xi0h6XH2ZwOAofi4CsP+0YU8S206I5I9
+ GxfC3pyvAjGVp92zA7/+5fJ7O/TdELcHB2BWHAIgfT99hCT5b3XHDqodLuhXjRLO+I
+ ulsr/lyFg36fSzMgU2Vd6bdcTFQrtIBLlqEUH1Pjkq/dSedCVnjX6vft6EZc6Ey7LR
+ cg19BY4Kl4BPFSZ/Vj21yMRaEQ6QjVZiUHtSH3AXGTzfsKk7c+UvQrStf76/meUv+q
+ 3Ltq7TbPg7JZY+S0MQM6RnKcWy1XuaCBH2BbbPblgULMJPxBz32vGQSUzU7ivTO49g
+ gKboJcRASL1TBEjlxk/G8UfXojSwYYxR/JL4o7KF9BjBIwP7nwjyq9tiovOCXA+l8g
+ jkxGkmQw3WifXc2Ws1gvYEvE=
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-439da07c5bfso4584797f8f.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 08:08:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773240779; x=1773845579;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xsAtPAJO9inDC/emOeUk+0PXNvPqXnVlUH6MM/GbXQM=;
- b=Fn8UEx/H7uvdViogypGt5qGUh0zOFcprugXEF9UNE0qm+xnqtqEfe9VVH5kXJGAPct
- 0GNNX4iDK42zbhUv9MPSKAt3grbOTt3vTUhk6ar+P7yzfTYvkYYELdleqo7crLD1xHWg
- AZVE3dCO1+EV8S3o1zRr347SSrSblIQT52eUV68B20tXuQyyw3dztexjtVeL6U2PUypP
- EgLz7rLtyN7v5+galoVGWJKfBRyihUl0slPdqbe86Y9OpCy7ijEVaQkJTqkNnjFnFlj4
- fU75kWRGFnp3ywKnytxYXaephnPWRwwQJIP98SPF11f0WJvoCVipeg2rUoRccCa5AacX
- 0XRw==
+ d=1e100.net; s=20230601; t=1773241696; x=1773846496;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zj8/3bQrJSu5Oki/SjDg4SlYLb/Tn8eJVz6xbKphWps=;
+ b=pqMWUFNGmnPZ2MdPFjpKxAmlqJoRWJrT03QYwF56Ae0QzaRbqDqH4uNFCvjwr9NOG0
+ 8VVfIUYCHOeVdDibBRi59KCe4u8Ueb7Gb3UbGoshziorstx1y5ueq1H/Kjmu+orePbgR
+ D1Z434INOf8eKVKMGbZbB8/NavrNmdVBpZodEwOB3cQbdhYxR5eLQKn4ispLid/cBCW2
+ 5Y+SsD8pul6qBHKsdWYOYDIQA4MOQ/CffrUl66CqR38Dt6Y3+xC5cr82Fy9CR+g0Kub0
+ ZE/MmO/LKZv5/9POoqUsr7bdXQ8Ahjru5W3eDvYmYf8R8m+z/avbrJnSDa1w1mBHM1PQ
+ Ya8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuhH1vxOsz4RTqQI1yL2TYTFlrIyhSwvYkVdTHlQWPPAIq1qETozpae23gSFIrSpNvrA0l+CY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+lSvUQaJpp2ITI+6z2JRCWdTWUbvY7sfoKG8C+m2x7jwq4cFe
- rY84VuvdJjazBappadmDDz+UWm9G/iimjAcbH89nf0Mqf+zdnxQztKH7pRQoz1mC5Hs=
-X-Gm-Gg: ATEYQzxXXzPw8yMDKrYd3+pjOPxPz1D6hwle9P87crBhQR5HdfSwi/145cRB2FwAr6c
- H26gnyQxHs4H+Tu8CQZvhYuunNqPe6Y1LfnsN4JMNgerOYCPINnc8+fBVjdBM7sDauMqlvlIFvJ
- 3P81+fVnOXat+bKwQ/ujgGTKwGerZougNlRCIaSRmh0B18OSLTOAwdRUsStDk+DLdolYG09//hL
- 3McKmRKdSa7ODCOptK72nCg0WHmi15+DHELtCRk6gDl4iJktWQPLjJrZ7O/hCtQHAW0sj9tU/1h
- VVHQx2JbLtYROi+2NzJWJlgeVUKLFxmztQ+lvpupQJjdNbsZ/9AfRBJYGN01+XYDdfXp8R7EOji
- ORVyVerHdPDk2tumPCHqeLIYL4fM4ecgkV7/D3iMst7UGmEj5zk2WrXVmJrdZ+GK0w5xDpoj6fg
- 2EL5R05QcbWe2OyenkQh4jN2eVdbEu
-X-Received: by 2002:a05:6808:3a10:b0:460:f435:2a71 with SMTP id
- 5614622812f47-46733601f03mr1488209b6e.46.1773240778926; 
- Wed, 11 Mar 2026 07:52:58 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:82ac:f3fe:2e5f:ec03])
+ AJvYcCWyQYVOBNiIqdjRU74YjSIVYPxdqLf5rNgzglO8zMLJERKYpdCfPMUwJ4oOGnJvLljstfMd8gg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKvAXq1BH/dzYV3of+pQYDWhQcrToYCb250Q1LEekcAvl/UOku
+ oQxO6r8aFlTtef32CNUPrRxWALz2ll3MYitlE/uXz4JQ4nOhk5UvF23qaYrIksSlrrGIsZ74+HB
+ 3dnEKP+iBeX+/E+uvt4XTkFzEtjHSRHUYmjSt2KM6pJrpwSX2tbV/ZONSD5xno/ttG+xNjD0=
+X-Gm-Gg: ATEYQzyLymyP/fnw26VylXxQef4mtqK9d38YFNju9V0o2kuHbVJ1YPtblpxWI8Mlzfb
+ hmH/nyY0XNBvMEYabf0SfKZIxpRiJBLtD61O/Hk2FBcZAcggHOhQxzEUQphWY21DiuM1VZEf96Z
+ eZmDJWe1pdNmzGA9d72d5es0T1YkQdLsoW8Q34NpT5YWXKulQXSYis+Ox6Fqf+if8Z5kX9e2dTN
+ gOKrsGJFYTrrUtiKzSLtUdZszfmGpX4o0o6x8PC+v0iko1+1INXEHPN/bRhM26w94KHiag1F0ZW
+ cQuzgvu19wWMct3BqLofLGLUjKKjwJ+uPnopK/l1JlTGyIs8Hl8vxbZOHb8vqV+uuongTMcDCvw
+ VrAuipAYjF7FymF3Dj6nqnNRo5kxkhe9q1Ki5GA/XTFPm37ITkeobSLfj+Ok9pFJwEgDnWZ2Y/X
+ Vg5wiXghR8XGMZLEAQN8vchQBIaOclC49yYQ==
+X-Received: by 2002:a5d:5d85:0:b0:439:b715:6f49 with SMTP id
+ ffacd0b85a97d-439f8415ffdmr5513530f8f.59.1773241696186; 
+ Wed, 11 Mar 2026 08:08:16 -0700 (PDT)
+X-Received: by 2002:a5d:5d85:0:b0:439:b715:6f49 with SMTP id
+ ffacd0b85a97d-439f8415ffdmr5513458f8f.59.1773241695612; 
+ Wed, 11 Mar 2026 08:08:15 -0700 (PDT)
+Received: from [192.168.103.130]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4673415c264sm1361835b6e.5.2026.03.11.07.52.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 07:52:58 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-Date: Wed, 11 Mar 2026 09:52:49 -0500
-Subject: [PATCH] MAINTAINERS: add new MediaTek custodians
+ ffacd0b85a97d-439f818e9eesm8995159f8f.3.2026.03.11.08.08.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Mar 2026 08:08:14 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <82aa8024-e80f-4db8-b0be-c8558c953c1b@gmx.de>
+Date: Wed, 11 Mar 2026 16:08:13 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9] efi_vars: Implement SPI Flash store
+To: Michal Simek <michal.simek@amd.com>
+Cc: Shantur Rathore <i@shantur.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, git@amd.com,
+ u-boot@lists.denx.de
+References: <f49e4ac8da5bae9252c79031f1661f386d17895f.1771247847.git.michal.simek@amd.com>
+Content-Language: en-US
+In-Reply-To: <f49e4ac8da5bae9252c79031f1661f386d17895f.1771247847.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260311-mtk-custodians-v1-1-000f9025b54c@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM0QpAMBTG8VfRubYyRHkVuZjt4JDRziYl7264/
- H31/S9gdIQMTXKBw4OYNhsh0wT0pOyIgkw05FleZYWUYvWL0IH9ZkhZFpWMe1kro2sD8bQ7HOj
- 8gm33m0M/o/ZvBe77AV+WG01yAAAA
-X-Change-ID: 20260311-mtk-custodians-6126047adc7d
-To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- =?utf-8?q?Macpaul_Lin_=28=E6=9E=97=E6=99=BA=E6=96=8C=29?=
- <Macpaul.Lin@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- David Lechner <dlechner@baylibre.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1583; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=GMJeq1tXrVR8hhNLJFA/WXIo0Jxk1Qgu40Pwprhinko=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpsYHCTGOh1uM1MusEcJAT4mkMGrDtLzMiccxkQ
- ch6dSLUekqJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabGBwhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A+9QH/ieYoEP6YcSPwia+1auC2p1K0YdZTfbDBvC9Nah
- xYpsjX6uUKqPC+sMOi/GeDZM+flxc8unnZpudHnqoB9UILkDyjrjS+nUOqhZvNFvty7XodNmuA4
- 2NYp/iNGVaJ9pwQ95FKk9ZMUxrKo7gKAw/Q+OnF9uVziPm8S/OY4o5CJt/oJ8SmIEt3JoR+OlQc
- QOdNkxIxTkL2AXd08U5150Z9ZRdlbJPE1vcouYiZjT1kYN0DDj15keyZ9canYQqnWexdKlrESnS
- r2hv4J5ITqnQi1xABaKhwi7uhKmZklf9bDLHzQMXL1jSXjXzxZXpV7b3GS9ILzdEW/GLy8khSJQ
- PcgY=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,50 +126,286 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add new MediaTek custodians and the new MediaTek custodian's git
-repository to the MAINTAINERS file.
+On 2/16/26 14:17, Michal Simek wrote:
+> From: Shantur Rathore <i@shantur.com>
+> 
+> Currently U-Boot uses ESP as storage for EFI variables.
+> Devices with SPI Flash are used for storing environment with this
+> commit we allow EFI variables to be stored on SPI Flash.
+> 
+> Signed-off-by: Shantur Rathore <i@shantur.com>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905D3-CC
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> 
+> ---
+> 
+> Changes in v9:
+> - Remove EFI_RT_VOLATILE_STORE enabling
+> - Cleanup commit message
+> 
+> Changes in v8:
+> - Add missing EFI_VARIABLE_SF_STORE dependency to EFI_VARIABLE_SF_DEVICE_INDEX
+> 
+> Changes in v7:
+> - sed -i 's/efi_var_from/efi_var_from_storage/g'
+> 
+> Changes in v6:
+> - sed -i 's/efi_var_read/efi_var_from/g'
+> - sed -i 's/efi_var_write/efi_var_to_storage/g'
+> 
+> Changes in v4:
+> - Extend Kconfig description
+> - Extend commit message and describe efivar missing part
+> - use unify methods for reading/writing variable
+> 
+> Changes in v3:
+> - Fixed compiler warnings.
+> 
+> Changes in v2:
+> - Refactored efi_var_file to move common parts out as requested
+> - Changed ifdefs to use CONFIG_IS_DEFINED
+> - Fixed typos
+> 
+>   lib/efi_loader/Kconfig      | 33 +++++++++++++
+>   lib/efi_loader/Makefile     |  1 +
+>   lib/efi_loader/efi_var_sf.c | 92 +++++++++++++++++++++++++++++++++++++
+>   3 files changed, 126 insertions(+)
+>   create mode 100644 lib/efi_loader/efi_var_sf.c
+> 
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 579eed658801..315dd4f3e794 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -124,6 +124,24 @@ config EFI_VARIABLE_FILE_STORE
+>   	  Select this option if you want non-volatile UEFI variables to be
+>   	  stored as file /ubootefi.var on the EFI system partition.
+>   
+> +config EFI_VARIABLE_SF_STORE
+> +	bool "Store non-volatile UEFI variables in SPI Flash"
+> +	depends on SPI_FLASH
+> +	help
+> +	  Select this option if you want non-volatile UEFI variables to be
+> +	  stored in SPI Flash.
+> +
+> +	  Define CONFIG_EFI_VARIABLE_SF_OFFSET as offset in SPI Flash to use as
+> +	  the storage for variables. CONFIG_EFI_VAR_BUF_SIZE defines the space
+> +	  needed.
+> +
+> +	  Note that SPI Flash devices have a limited number of program/erase
+> +	  cycles. Frequent updates to UEFI variables may cause excessive wear
+> +	  and can permanently damage the flash device, particularly on SPI NAND
+> +	  or low-end SPI NOR parts without wear leveling. This option should be
+> +	  used with care on such systems, and is not recommended for platforms
+> +	  where UEFI variables are updated frequently.
+> +
+>   config EFI_MM_COMM_TEE
+>   	bool "UEFI variables storage service via the trusted world"
+>   	depends on OPTEE
+> @@ -194,6 +212,21 @@ config FFA_SHARED_MM_BUF_ADDR
+>   	  the MM SP in secure world.
+>   	  It is assumed that the MM SP knows the address of the shared MM communication buffer.
+>   
+> +config EFI_VARIABLE_SF_OFFSET
+> +	hex "EFI variables in SPI flash offset"
+> +	depends on EFI_VARIABLE_SF_STORE
+> +	help
+> +	  Offset from the start of the SPI Flash where EFI variables will be stored.
+> +	  This should be aligned to the sector size of SPI Flash.
+> +
+> +config EFI_VARIABLE_SF_DEVICE_INDEX
+> +	int "Device Index for target SPI Flash"
+> +	depends on EFI_VARIABLE_SF_STORE
+> +	default 0
+> +	help
+> +	  The index of SPI Flash device used for storing EFI variables. This would be
+> +	  needed if there are more than 1 SPI Flash devices available to use.
+> +
+>   config EFI_VARIABLES_PRESEED
+>   	bool "Initial values for UEFI variables"
+>   	depends on !COMPILE_TEST
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index ca1775eb03be..d73ad43951b1 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -54,6 +54,7 @@ obj-y += efi_variable_tee.o
+>   else
+>   obj-y += efi_variable.o
+>   obj-$(CONFIG_EFI_VARIABLE_FILE_STORE) += efi_var_file.o
+> +obj-$(CONFIG_EFI_VARIABLE_SF_STORE) += efi_var_sf.o
+>   obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
+>   endif
+>   obj-y += efi_watchdog.o
+> diff --git a/lib/efi_loader/efi_var_sf.c b/lib/efi_loader/efi_var_sf.c
+> new file mode 100644
+> index 000000000000..61d68f7c5c94
+> --- /dev/null
+> +++ b/lib/efi_loader/efi_var_sf.c
+> @@ -0,0 +1,92 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * SPI Flash interface for UEFI variables
+> + *
+> + * Copyright (c) 2023, Shantur Rathore
+> + * Copyright (C) 2026, Advanced Micro Devices, Inc.
+> + */
+> +
+> +#define LOG_CATEGORY LOGC_EFI
+> +
+> +#include <efi_loader.h>
+> +#include <efi_variable.h>
+> +#include <spi_flash.h>
+> +#include <dm.h>
+> +
+> +efi_status_t efi_var_to_storage(void)
+> +{
+> +	efi_status_t ret;
+> +	struct efi_var_file *buf;
+> +	loff_t len;
+> +	struct udevice *sfdev;
+> +
+> +	ret = efi_var_collect(&buf, &len, EFI_VARIABLE_NON_VOLATILE);
+> +	if (len > EFI_VAR_BUF_SIZE) {
+> +		log_err("EFI var buffer length more than target SPI Flash size");
+> +		ret = EFI_OUT_OF_RESOURCES;
+> +		goto error;
+> +	}
+> +
+> +	log_debug("%s - Got buffer to write buf->len : %d\n", __func__, buf->length);
 
-Julien and I have volunteered to act as custodians for MediaTek since
-we have been actively working on upstreaming MediaTek support for some
-some time now.
+Hello Michal,
 
-Signed-off-by: David Lechner <dlechner@baylibre.com>
----
- MAINTAINERS | 6 ++++++
- 1 file changed, 6 insertions(+)
+Thank you for driving this.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d2508d90c33..ade549fc47a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -414,7 +414,10 @@ M:	Ryder Lee <ryder.lee@mediatek.com>
- M:	Weijie Gao <weijie.gao@mediatek.com>
- M:	Chunfeng Yun <chunfeng.yun@mediatek.com>
- M:	Igor Belwon <igor.belwon@mentallysanemainliners.org>
-+M:	David Lechner <dlechner@baylibre.com>
-+M:	Julien Stephan <jstephan@baylibre.com>
- R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-+T:	git https://source.denx.de/u-boot/custodians/u-boot-mediatek.git
- S:	Maintained
- F:	arch/arm/dts/mt*
- F:	arch/arm/mach-mediatek/
-@@ -1390,7 +1393,10 @@ F:	drivers/net/phy/ca_phy.c
- 
- MIPS MEDIATEK
- M:	Weijie Gao <weijie.gao@mediatek.com>
-+M:	David Lechner <dlechner@baylibre.com>
-+M:	Julien Stephan <jstephan@baylibre.com>
- R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-+T:	git https://source.denx.de/u-boot/custodians/u-boot-mediatek.git
- S:	Maintained
- F:	arch/mips/mach-mtmips/
- F:	arch/mips/dts/mt7620.dtsi
+The log system is configurable to print file, line, function name if 
+wanted. We should not duplicate this here. Please, remove __func__ 
+throughout the patch.
 
----
-base-commit: 3d252b7beb1328cd6de012d2fa92afabe87806b5
-change-id: 20260311-mtk-custodians-6126047adc7d
+> +
+> +	if (ret != EFI_SUCCESS)
+> +		goto error;
+> +
+> +	ret = uclass_get_device(UCLASS_SPI_FLASH, CONFIG_EFI_VARIABLE_SF_DEVICE_INDEX, &sfdev);
+> +	if (ret)
 
-Best regards,
---  
-David Lechner <dlechner@baylibre.com>
+This is not an EFI return code. EFI_DEVICE_ERROR should be used.
 
+> +		goto error;
+> +
+> +	ret = spi_flash_erase_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, EFI_VAR_BUF_SIZE);
+> +	log_debug("%s - Erased SPI Flash offset %x\n", __func__, CONFIG_EFI_VARIABLE_SF_OFFSET);
+
+A debug output if erasing failed would be more interesting.
+
+> +	if (ret)
+
+This is not an EFI return code. EFI_DEVICE_ERROR should be used.
+
+> +		goto error;
+> +
+> +	ret = spi_flash_write_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, len, buf);
+> +	log_debug("%s - Wrote buffer to SPI Flash : %ld\n", __func__, ret);
+
+The uclass_get_device() return code should be saved in an int variable 
+to avoid confusion.
+
+> +
+> +	if (ret)
+
+This is not an EFI return code. EFI_DEVICE_ERROR should be used.
+
+> +		goto error;
+> +
+> +	ret = EFI_SUCCESS;
+> +error:
+> +	if (ret)
+> +		log_err("Failed to persist EFI variables in SF\n");
+> +	free(buf);
+> +	return ret;
+> +}
+> +
+> +efi_status_t efi_var_from_storage(void)
+> +{
+> +	struct efi_var_file *buf;
+> +	efi_status_t ret;
+> +	struct udevice *sfdev;
+> +
+> +	buf = calloc(1, EFI_VAR_BUF_SIZE);
+> +	if (!buf) {
+> +		log_err("%s - Unable to allocate buffer\n", __func__);
+
+This function may be called from an EFI GUI application. We should not 
+output any strings to the console from API functions. It is task of the 
+caller to take appropriate actions. E.g. show a pop-up if a failure 
+occurs. log_debug() is ok.
+
+> +		return EFI_OUT_OF_RESOURCES;
+> +	}
+> +
+> +	ret = uclass_get_device(UCLASS_SPI_FLASH, 0, &sfdev);
+
+efi_var_restore() returns a signed int and not an unsigned efi_status_t. 
+Please, define a separate variable.
+
+> +	if (ret)
+
+Please, return EFI_DEVICE_ERROR.
+
+> +		goto error;
+> +
+> +	ret = spi_flash_read_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET,
+> +				EFI_VAR_BUF_SIZE, buf);
+> +
+> +	log_debug("%s - read buffer buf->length: %x\n", __func__, buf->length);
+
+If spi_flash_read_dm() failed, you will just print some random value for 
+buf->length. Please, print the return value instead.
+
+> +
+> +	if (ret || buf->length < sizeof(struct efi_var_file)) {
+> +		log_err("%s - buffer read from SPI Flash isn't valid\n", __func__);
+
+If spi_flash_read_dm() fails we should return EFI_DEVICE_ERROR.
+
+> +		goto error;
+
+After erasing the SPI flash buf->length will be zero here. This should 
+not stop us from setting EFI variables.
+
+It is the task of efi_var_restore to check the validity of the buffer. 
+So the length check here should be removed.
+
+The missing check in efi_var_restore() is
+
+buf->length <= EFI_VAR_BUF_SIZE
+
+to avoid a buffer overrun when calculating the CRC32.
+
+> +	}
+> +
+> +	ret = efi_var_restore(buf, false);
+> +	if (ret != EFI_SUCCESS)
+> +		log_err("%s - Unable to restore EFI variables from buffer\n", __func__);
+> +
+> +	ret = EFI_SUCCESS;
+> +error:
+> +	free(buf);
+> +	return ret;
+
+We should not return a non-EFI return code here if uclass_get_device() 
+or spi_flash_read_dm() failed.
+
+> +}
+
+I configured starfive_visionfive2_defconfig with
+
+CONFIG_EFI_VARIABLE_SF_STORE=y
+CONFIG_EFI_VARIABLE_SF_OFFSET=0xc0000
+CONFIG_EFI_VARIABLE_SF_DEVICE_INDEX=0
+CONFIG_EFI_VAR_BUF_SIZE=131072
+
+and it works.
+
+Best regards
+
+Heinrich
