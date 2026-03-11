@@ -4,57 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC811125807
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A96F1125808
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:25:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A74B8410B;
-	Wed, 11 Mar 2026 14:16:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 17D8384013;
+	Wed, 11 Mar 2026 14:25:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="mG+vds3F";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="KZ9ZsLX+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5E4E83FED; Wed, 11 Mar 2026 09:41:46 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+ id 01D7B84020; Wed, 11 Mar 2026 14:25:36 +0100 (CET)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7CF083FB6
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:41:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EB6D84010
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 14:25:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=bR
- gf4tHx2QPaRnplCllVjIny7siKEOzymzrQuqq67/E=; b=mG+vds3F9z2uyBG5UG
- rXv19BtCvFV/M8lrFME//6Up4LPZvsq0qoHN2OjZ6VJP55huG9lx9o62vAcYTQwQ
- qF4VmqoSG+OFyIsBQT27KwMrVu5fymxK5j1HHqITQ2MOsQzKlJNZqDX3yV8fEq6w
- XHRK0EZVwfLdiXU5OhyMaDSHA=
-Received: from server-e.. (unknown [])
- by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id
- _____wAHLsa5KrFpe9OOAQ--.40770S4; 
- Wed, 11 Mar 2026 16:41:31 +0800 (CST)
-From: sgdfkk@163.com
-To: duhuanpeng@139.com,
-	u-boot@lists.denx.de
-Cc: chenhuacai@loongson.cn, jiaxun.yang@flygoat.com,
- Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v6 2/7] mips: loongson: lowlevel initialize
-Date: Wed, 11 Mar 2026 16:41:24 +0800
-Message-ID: <20260311084129.12809-3-sgdfkk@163.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260311084129.12809-1-sgdfkk@163.com>
-References: <20260311084129.12809-1-sgdfkk@163.com>
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nL/iozwpw/kBvddDrC5DZaUJ8NNsD4pqNDx9TpTRPaKJXDERuXErfH5wsHmI2o7zPRXnjztxUlWwEVYttgupOLdOOut3rX6k8uLY/2cyIMUSe/eYG5FBvchNCBVd7Kkx46rXRoeAxjmiyUGSvGG1IW6docuAWo7/WsuhNX5MASYO6bZstPRwzBm8wKfr8vFjWv75MoF48V9ZHQTZT8YKnNOVdRRuZhyjfRR53Eovxn70XbmaCa2ICf7nZ53FArZDB/wGMzqa16unKC/s/oxsYdqYwZtiaxeyo8RbdlWaEdrA4oqGof1+GSwkTw+PF8ltvF1KaYGqPzObTYP8AsRUSA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aFtKCgTw7uMt86tAANKIG5EKzdizm4O0+sj2GbOH0DU=;
+ b=V39sgcwYzWbt3zBrdWmhCKCfKGhqoCN5hi+JMhLgo/LekSespEZ7FGcORuFWruhXwp7Zt6DCFyUwO2sJfZ8X52CsXaD6tuif3TuZdgYx/YDglGo9mehUoP+zvVnL0rpMHHZjmNVKD4hZA6lVp0U19BpbJhNom9zbuoU7NajkFPUoIc5PN+0lE+T6i9rASbcL822lw+f80GvBO3iffckYvbLwZuiltT1SkRQmKGDmPMDrDojB3HrsLKaV2w/OPw7BsysI5CkbJ2fbPyG8cL4zJdfAygqNLvpi0V7geEHBQdSR9DlT5XqnESiaA83XCEAdfY/hpOdLja5t5IU2HreQ0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aFtKCgTw7uMt86tAANKIG5EKzdizm4O0+sj2GbOH0DU=;
+ b=KZ9ZsLX+S4yGgqpXb1IMI/+IOE+aIY8HzTsVj0IaBJLiOBoolfOTWMVLfenCf7yOShKa7ZK/7X0Z3Kumfl7FFlJj7qCok0a2Zx071gFsKihmfA22hzdhj7wa4TpWik7zoHuVNEHbXbZKRyLQcuOwmqxY0IbmFFHO7Uy3f4Cnzjs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by PA1PR10MB8872.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:453::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.12; Wed, 11 Mar
+ 2026 13:25:31 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9700.010; Wed, 11 Mar 2026
+ 13:25:31 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: <u-boot@lists.denx.de>,  Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/3] cmd: test: allow using [ as alias for test
+In-Reply-To: <abd3d7c1-b56e-4639-85d8-3083f9d0842b@cherry.de> (Quentin
+ Schulz's message of "Wed, 11 Mar 2026 14:08:33 +0100")
+References: <20260311120910.3934114-1-ravi@prevas.dk>
+ <20260311120910.3934114-2-ravi@prevas.dk>
+ <abd3d7c1-b56e-4639-85d8-3083f9d0842b@cherry.de>
+Date: Wed, 11 Mar 2026 14:25:28 +0100
+Message-ID: <873426qz07.fsf@prevas.dk>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+Content-Type: text/plain
+X-ClientProxiedBy: GV2PEPF000239F9.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:158:400::2ba) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wAHLsa5KrFpe9OOAQ--.40770S4
-X-Coremail-Antispam: 1Uf129KBjvJXoW3GrWrCw1rXrW8Gw1xZw45GFg_yoWxCr4Dpr
- 1jkay5tw18Ga17Wwn3KF1rKr13JFnYgryYyrnrXr48uF4xJw1xGFWqgw43tr9xXFsYyayr
- JrykXa1j939rZw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jshLnUUUUU=
-X-Originating-IP: [240e:3b0:4805:1b6:5ef3:fcff:feed:1d83]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCwBt-1mmxKrvZKgAA3I
-X-Mailman-Approved-At: Wed, 11 Mar 2026 14:15:12 +0100
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PA1PR10MB8872:EE_
+X-MS-Office365-Filtering-Correlation-Id: 351eec81-7e4f-4950-a1fe-08de7f71aa9e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|52116014|366016|38350700014|56012099003|18002099003|22082099003|7053199007;
+X-Microsoft-Antispam-Message-Info: YEM1aO61e7pmkpfzsXaNn9GPyKXhSn4mAQharKCPqKUZ1LpMuMab0jep7bHFDuFnU7uwFfEI7XbfIjvmB49P8tg1mlYY3X/sMPBsHHWUh30BatGeqABewl7FwjJogjM8K/0tmGvV5gvZsUhhvcPdYXbKYCWkHKMiiKYfNi804UMh9+t+WpaHQjbaqgCUH9bkDUZvox95ah9QCn3774WOKwR59Tdwojw6ZWef5uDQStFTqKifd4jtQIspNWJQ2v4a9AtlzI6Q4MCdu13qJ4J8hZMDmFKEWZqMK6qeK/qlT656Oyfc9809UOgY08o2s2QyXlmfASI5M+tZwCwFDyBa7U1NAYsqdYFXq31esCDD+uZFNzPsXI59gejUJ2yhvlfhr9HvPQca1/UskoPacwC4YsLmLFOq/UfkUIB24aBj1X3Bpasjf9hmIUy9gg/COZLXx0pf3H3opYw0oXgV8C2rfBVWiABfpsby1QMXk5qAjAE7gYoOTNEJhL2CI9g5NbehUMzbWQiD8iP/VXOIQFmuadH1299tqnyBUrvNWWYMFL6ScDDAmwWYF43JJ4vjIXsL+lKWnnVreykxQXcWtwONWtTL3sQgEzldn0bPmSjZcAyHGVZFjkP30KR7FgkfIgq5BZG08uOlqId00K34/8lxV15yUe/4f73jhDtrJB1THoG5Ad05Yd0uxXlNVGTwvJpBXu32IB1F2A3DQBFAW4UWFwcLVYJ7Ee38A1LMy2IE/WORjaufSUzn6MC5q3nlOSsM
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(52116014)(366016)(38350700014)(56012099003)(18002099003)(22082099003)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?vcz5YI/4o/bqypl1xc6eoHusV7VSB6krm/JZUSAJZfRHW2PC+P2Q9gjJdzgf?=
+ =?us-ascii?Q?5orZUC527/pP0lqgHcoFOmAAn3Hf5doFTPEkueL5g6cO7nICBh6ZfQi8C70R?=
+ =?us-ascii?Q?C66DiOgq0fb/hn5VuAnHX01WIhIeMypBCsipghyru5RLvAdtGdvYKMxQUJA8?=
+ =?us-ascii?Q?P8HdEHEt+bNz0xiWq/EsXNTYBAHU2q2YSM0szjyIATPotsvE0eGbXsQ9eG9o?=
+ =?us-ascii?Q?qvftrHsdm1EbduAXtsLZyJWhkGoMMrYGeBJxxXxJf7HvDKbBaoHH3Zy3/ZZP?=
+ =?us-ascii?Q?bvqUv2mldsirj2fL/pdHWJaGOnZp9LvqLq24FjWw5MI2virX+W+IAf3iUO7W?=
+ =?us-ascii?Q?ZYpclFcMEnKtEp4i5YHC9WYufUy5othce6BjdY8BiOfGZch3sOt4m9+4pQQQ?=
+ =?us-ascii?Q?T7zrsPJ4KKrlGb0Y5eYmCATjPmPRe0dGHoRqtQe2emiVcahC2bFfjyh3PmMw?=
+ =?us-ascii?Q?0C30AZT8S/x87nKU+CVPWcA0YUnSp3heORJpTUHviq6h+pIjpl6zoLzTTm7M?=
+ =?us-ascii?Q?w0Ewtg1l//MAbw+fG4KGwUpSNnUaQHi3QE452xz0kG3XFQEK1nnEQpJ0WA+2?=
+ =?us-ascii?Q?gOGtFd+iZceRq5Lxbl7dLyCoOiZ7R1oOxe4LQi41+FhbV41x6wdddPVWEg9R?=
+ =?us-ascii?Q?2LOy9p7POugP3aHQPJ1jUhp8Ma4ln+ytOObl5ueZ4Lr9vMuH4mKZ/QC9x+a5?=
+ =?us-ascii?Q?zGODw1zvbdCfiEoKDXEJKo8Lvca94VdYPVYbLykVOWJTu/5G4+bVaTBqDFGx?=
+ =?us-ascii?Q?DVfiO77pRI1t7GXvxt+D8ULApNy/C3Vbpwds1d/VApQ09t8a7NUxZU8QuiIE?=
+ =?us-ascii?Q?evYzj9s4L0Se28F1geGdYPHI4/HWvOL/oHlv8jMvkKQOs0qd8gGb//Rbk2fh?=
+ =?us-ascii?Q?9BLD+1x5oj09L3T2EaSZKDb1Ur/wH5KGqPW3dewa+yNw8mFRlcLOuBqgDu4L?=
+ =?us-ascii?Q?HP3ek/GYU0RG2ZoStAazf8ktdBeoZZiVntIYJsQYKjM+tAWe4x+bWbUHnfyT?=
+ =?us-ascii?Q?qgfzPQxgjcY6K78EIRvo9w/Nc+Ixenc68YBoTrWnRKnRUKcaHcNA7ykCkHIX?=
+ =?us-ascii?Q?/VGsTaEKr3vCJte14DUZDUxGIBtD/wja/u5EPugHWr6KAmu/PI+rOg9GXBGZ?=
+ =?us-ascii?Q?NUNZuHzE9Xr1aTa/r7cExS1QYMT1bUQttK/SKj5arX69PeD6Uk+V+KoXBGYT?=
+ =?us-ascii?Q?P200i6m7wtakIUMpHAs9SNfnboRL6JL268+1Qzcq74RSLB54Ds9BWtzOPrZf?=
+ =?us-ascii?Q?2/XJuckkrzSoYeOQyY6hdk5S6e6wT2HgTAIbqbEs6ZQAExQJcRsaXV4jaxtH?=
+ =?us-ascii?Q?9aUVRao2TUgUmp7lpIPlU7R0/LdPLp9qJzCkRYm93vjp4jwMAKAyukwWTQpV?=
+ =?us-ascii?Q?muWssY90fXRS9k2EoFN9TchmLSPEyaGPlxFDRBL2QPt5q80B1DRqcSU5M6f4?=
+ =?us-ascii?Q?jhndXB/PmMCkCQ9KZHzybWmb9lseRn6zoZINTZA/mzIzlwcmvFlrdaRRpfnQ?=
+ =?us-ascii?Q?ul8hSE/C++lg/d1uxfbKWcxv1Wtp1dtuPvWuh8y4ZVatJxu7hOI2U5lDw7D+?=
+ =?us-ascii?Q?fa2DbQjQLSphNwCIA7xqt0ZyHA1EKGVTaIfadN8iB9lSEnZi7IQwxk/kiIXZ?=
+ =?us-ascii?Q?XK/8AyB/QrZP/b+AJGmvxvlAbxMngeBk0AiOChrh75g6b8RN3LbqHG1mkhpT?=
+ =?us-ascii?Q?3KCfXb5f0Tid8jc6sZzPHIcQrSgC6Yix0MgVuyzjdRQbw17DGXGFKNuUnDdd?=
+ =?us-ascii?Q?wMoRxa3n1Vud1904evkkiKr6qVFJJf0=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 351eec81-7e4f-4950-a1fe-08de7f71aa9e
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2026 13:25:31.0076 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: g2GSmhK1pvH/aHigl6PTDG6hL6NqWrbc2qNPrfbrBDxDiC+BeKmgi8gstyrggFibBDrFtbunwjq18HznASoPCwWLVSXwy3Svu1129IshcCo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB8872
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,261 +138,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Du Huanpeng <u74147@gmail.com>
+On Wed, Mar 11 2026, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 
-- pll
-- spi controller
-- sdram
+> Hi Rasmus,
+>
+> On 3/11/26 1:09 PM, Rasmus Villemoes wrote:
+>> I often find myself writing something like
+>>    if [ "$somevar" = 123 ] ; then ...
+>> only to realize that that syntax doesn't work in U-Boot shell, and
+>> must be spelled
+>>    if test "$somevar" = 123 ; then
+>> It only takes a few lines of code to support this POSIX-standardized
+>> alias for test, and helps developers focus on their actual problems
+>> instead of dealing with such unexpected quirks of the shell.
+>> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+>> ---
+>>   cmd/test.c | 19 +++++++++++++++++++
+>
+> Please don't forget to update the docs. It still states "Unlike in
+> ordinary shells, it cannot be spelled [.",
+> c.f. https://docs.u-boot.org/en/latest/usage/cmd/test.html#description. The
+> synopsis should also have a few examples using the new syntax.
 
-Signed-off-by: Du Huanpeng <u74147@gmail.com>
----
- .../mach-loongson/ls1c300/lowlevel_init.S     | 134 ++++++++++++++++++
- arch/mips/mach-loongson/ls1c300/sdram.S       |  95 +++++++++++++
- 2 files changed, 229 insertions(+)
- create mode 100644 arch/mips/mach-loongson/ls1c300/lowlevel_init.S
- create mode 100644 arch/mips/mach-loongson/ls1c300/sdram.S
+Ah, yes, thanks. Rather amazing that I could complete forget having
+written that only 10 months ago...
 
-diff --git a/arch/mips/mach-loongson/ls1c300/lowlevel_init.S b/arch/mips/mach-loongson/ls1c300/lowlevel_init.S
-new file mode 100644
-index 00000000000..8d9ba97130c
---- /dev/null
-+++ b/arch/mips/mach-loongson/ls1c300/lowlevel_init.S
-@@ -0,0 +1,134 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020 MediaTek Inc.
-+ *
-+ * Author:  Gao Weijie <weijie.gao@mediatek.com>
-+ *
-+ * Copyright (C) 2020-2023 Du Huanpeng <u74147@gmail.com>
-+ */
-+
-+#include <config.h>
-+#include <asm-offsets.h>
-+#include <asm/cacheops.h>
-+#include <asm/regdef.h>
-+#include <asm/mipsregs.h>
-+#include <asm/addrspace.h>
-+#include <asm/asm.h>
-+#include <linux/sizes.h>
-+
-+/* PLL control register */
-+#define NAND_BASE	0xbfe70000
-+#define START_FREQ	0x8030
-+#define CLK_DIV_PARAM	0x8034
-+#define CPU_THROT	0xc010
-+
-+/* START_FREQ */
-+#define PLL_VALID	31
-+#define Reserved_24	24
-+#define FRAC_N		16
-+#define M_PLL		8
-+#define Reserved_4	4
-+#define RST_TIME	2
-+#define SDRAM_DIV	0
-+ #define SDRAM_DIV2	0
-+ #define SDRAM_DIV4	1
-+ #define SDRAM_DIV3	2
-+
-+/* CLK_DIV_PARAM */
-+#define PIX_DIV		24
-+#define CAM_DIV		16
-+#define CPU_DIV		8
-+#define PIX_DIV_VALID	5
-+#define PIX_SEL		4
-+#define CAM_DIV_VALID	3
-+#define CAM_SEL		2
-+#define CPU_DIV_VALID	1
-+#define CPU_SEL		0
-+
-+/* Document:
-+ * Freq_PLL = XIN *(M_PLL + FRAC_N)/4
-+ */
-+#define XIN			24000000
-+#define PLL_VALID_1		(1<<PLL_VALID)
-+#define PREP_M_PLL(Freq_PLL)	(((Freq_PLL * 4) / XIN) << M_PLL)
-+#define PREP_SDRAM_DIV(div)	(div<<SDRAM_DIV)
-+#define PREP_CPU_DIV(div1)	((0x80|div1)<<CPU_DIV | (div1&&div1)<<CPU_DIV_VALID)
-+#define PREP_PIX_DIV(div2)	(div2<<PIX_DIV)
-+#define PREP_CAM_DIV(div3)	(div3<<CAM_DIV)
-+
-+/* PLL @264MHz, CPU @132MHz, SDRAM @66MHz */
-+#define CFG_START_FREQ		(PLL_VALID_1 | PREP_M_PLL(264000000) | SDRAM_DIV2)
-+#define CFG_CLK_DIV_PARAM	(PREP_CPU_DIV(2) | PREP_PIX_DIV(0x24) | PREP_CAM_DIV(0x24))
-+#define CFG_CPU_THROT		15
-+
-+/* SPI0 control register */
-+#define SPI0_BASE		0xbfe80000
-+#define SPCR			0
-+#define SPSR			1
-+#define TxFIFO			2
-+#define RxFIFO			2
-+#define SPER			3
-+#define SFC_PARAM		4
-+    #define CLK_DIV		4
-+    #define DUAL_IO		3
-+    #define FAST_READ		2
-+    #define BURST_EN		1
-+    #define MEMORY_EN		0
-+#define SFC_SOFTCS		5
-+#define SFC_TIMING		6
-+    #define T_FAST		2
-+    #define T_CSH		0
-+
-+	.set noreorder
-+LEAF(ls1c300_pll_init)
-+#if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
-+	li	t0, NAND_BASE
-+	li	t1, CFG_START_FREQ
-+	li	t2, CFG_CLK_DIV_PARAM
-+	li	t3, CFG_CPU_THROT
-+
-+	sw	t3, CPU_THROT (t0)
-+	sw	t2, CLK_DIV_PARAM (t0)
-+	sw	t1, START_FREQ (t0)
-+
-+	ori	t2, 1<<CPU_SEL
-+	sw	t2, CLK_DIV_PARAM (t0)
-+#endif
-+	jr	ra
-+	 nop
-+END(ls1c300_pll_init)
-+
-+LEAF(ls1c300_spi_init)
-+#if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
-+	li	t0, SPI0_BASE
-+	li	t1, (1<<MEMORY_EN) | (1<<BURST_EN) | (1<<FAST_READ) | (1<<DUAL_IO)
-+	sb	t1, SFC_PARAM (t0)
-+	li	t2, (1<<T_FAST) | (1<<T_CSH)
-+	sb	t2, SFC_TIMING (t0)
-+#endif
-+	jr	ra
-+	  nop
-+END(ls1c300_spi_init)
-+
-+NESTED(lowlevel_init, 0, ra)
-+	/* Save ra and do real lowlevel initialization */
-+	move	s0, ra
-+	/* Setup PLL @264MHz */
-+	PTR_LA	t9, ls1c300_pll_init
-+	jalr	t9
-+	  nop
-+
-+	/* Setup SPI Dual IO@33MHz */
-+	PTR_LA	t9, ls1c300_spi_init
-+	jalr	t9
-+	  nop
-+
-+	/* Setup external SDRAM @66MHz */
-+	PTR_LA	t9, ls1c300_sdram_init
-+	jalr	t9
-+	  nop
-+
-+	move	ra, s0
-+	jr	ra
-+	 nop
-+END(lowlevel_init)
-diff --git a/arch/mips/mach-loongson/ls1c300/sdram.S b/arch/mips/mach-loongson/ls1c300/sdram.S
-new file mode 100644
-index 00000000000..0dadd41adea
---- /dev/null
-+++ b/arch/mips/mach-loongson/ls1c300/sdram.S
-@@ -0,0 +1,95 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Copyright (C) 2020-2023 Du Huanpeng <u74147@gmail.com>
-+ */
-+
-+#include <config.h>
-+#include <asm-offsets.h>
-+#include <asm/cacheops.h>
-+#include <asm/regdef.h>
-+#include <asm/mipsregs.h>
-+#include <asm/addrspace.h>
-+#include <asm/asm.h>
-+#include <linux/sizes.h>
-+
-+/* sdram control 64 bit register */
-+#define SD_CONFIG	0xbfd00000
-+#define SD_CONFIGHI	0x414
-+#define SD_CONFIGLO	0x410
-+
-+#define VALID		41
-+#define HANG_UP		40
-+#define DEF_SEL		39
-+#define TWR		37
-+#define TREF		25
-+#define TRAS		21
-+#define TRFC		17
-+#define TRP		14
-+#define TCL		11
-+#define TRCD		8
-+
-+#define SD_BIT		6
-+  #define SD_8BIT       (0<<SD_BIT)
-+  #define SD_16BIT      (1<<SD_BIT)
-+  #define SD_32BIT      (2<<SD_BIT)
-+#define SD_CSIZE	3
-+  #define SD_CSIZE_512	(0<<SD_CSIZE)
-+  #define SD_CSIZE_1K	(1<<SD_CSIZE)
-+  #define SD_CSIZE_2K	(2<<SD_CSIZE)
-+  #define SD_CSIZE_4K	(3<<SD_CSIZE)
-+  #define SD_CSIZE_256	(7<<SD_CSIZE)
-+#define SD_RSIZE	0
-+  #define SD_RSIZE_2K	(0<<SD_RSIZE)
-+  #define SD_RSIZE_4K	(1<<SD_RSIZE)
-+  #define SD_RSIZE_8K	(2<<SD_RSIZE)
-+  #define SD_RSIZE_16K	(3<<SD_RSIZE)
-+
-+#define SD_CFG_1(tWR, tREF, tRAS, tRFC, tRP, tCL, tRCD) \
-+	((tWR<<TWR)|(tREF<<TREF)|(tRAS<<TRAS)|(tRFC<<TRFC)|(tRP<<TRP)|(tCL<<TCL)|(tRCD<<TRCD))
-+#define CFG_SD_0(b, c, r) \
-+	((b<<SD_BIT)|(c<<SD_CSIZE)|(r<<SD_RSIZE))
-+/*
-+ * recommended values by ls1c300 user manual,
-+ * tweak to fit your board.
-+ */
-+#define SD_CONFIG_133MHz	SD_CFG_1(2, 0x818, 6, 8, 3, 3, 3)
-+#define SD_CONFIG_100MHz	SD_CFG_1(2, 0x620, 5, 6, 2, 3, 2)
-+#define SD_CONFIG_75MHz		SD_CFG_1(1, 0x494, 4, 5, 2, 2, 2)
-+#define SD_CONFIG_33MHz		SD_CFG_1(1, 0x204, 2, 2, 1, 2, 1)
-+
-+#define SD_CONFIG_66MHz		SD_CFG_1(1, 0x401, 4, 4, 2, 2, 2)
-+
-+#define SD_CONFIG64	(SD_CONFIG_66MHz | SD_16BIT | SD_CSIZE_1K | SD_RSIZE_8K)
-+#define CFG_SDCONFIGHI	(SD_CONFIG64 /(1<<32))
-+#define CFG_SDCONFIGLO	(SD_CONFIG64 %(1<<32))
-+
-+	.set noreorder
-+/*
-+ * Loongson ls1c300 SoC do not have onchip sram for initial stack,
-+ * initialize the external sdram on reset as early as possiable.
-+ */
-+LEAF(ls1c300_sdram_init)
-+#if !CONFIG_IS_ENABLED(SKIP_LOWLEVEL_INIT)
-+	li	t0, SD_CONFIG
-+	li	t1, CFG_SDCONFIGLO
-+	li	t2, CFG_SDCONFIGHI
-+
-+/* store twice as the hardware manual required. */
-+	sw	t1, SD_CONFIGLO (t0)
-+	sw	t2, SD_CONFIGHI (t0)
-+	sync
-+
-+	sw	t1, SD_CONFIGLO (t0)
-+	sw	t2, SD_CONFIGHI (t0)
-+	sync
-+
-+	ori	t2, 1<<(VALID-32)
-+	sw	t1, SD_CONFIGLO (t0)
-+	sw	t2, SD_CONFIGHI (t0)
-+	sync
-+#endif
-+	jr	ra
-+	 nop
-+END(ls1c300_sdram_init)
-+
-+
--- 
-2.43.0
+Will update.
 
+> Another question is if you have thought about/tested multi-expressions?
+>
+> e.g.
+>
+> [ aaa = aaa -a bbb = bbb ]
+>
+> and possibly also
+>
+> [ ! aaa = aaa ]
+>
+
+Yes, I did think about those, and I can certainly copy-paste a few more
+test cases and spell them using [], but as the implementation is so
+simple (check last argv, decrement argc) I couldn't really imagine those
+being any different than the simple cases.
+
+> I think adding tests for those would be nice too?
+
+Sure, will do.
+
+Rasmus
