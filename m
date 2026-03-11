@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0ACC1125858
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 17:55:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4231125811
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 18:05:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 214DB84035;
-	Wed, 11 Mar 2026 18:55:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33EA784035;
+	Wed, 11 Mar 2026 19:05:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eN0SkVx8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fa02tFfP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A64C68407E; Wed, 11 Mar 2026 18:55:35 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 6C179840DF; Wed, 11 Mar 2026 19:05:54 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9892984013
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 18:55:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33BF384013
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 19:05:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4853e1ce427so1249325e9.3
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 10:55:33 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4838c15e3cbso1161575e9.3
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 11:05:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773251733; x=1773856533; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
+ d=gmail.com; s=20230601; t=1773252351; x=1773857151; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kgpQO27A9AfasM80RIvIrO78CH4sbuy/tVuwdoEw1ew=;
- b=eN0SkVx8uh6SZphsTdMQa5D6fX/oM6Rb9iO4exhLjW2vsSia0PHo3y2XeO26CBjT0z
- bxDXDK+/LJKzI3T57GsEZQfYqVO+3/gu3LOKdQLMMbgZzQb4grmeOsOtK2mne398g7iE
- /5k8UmZXUCVK0EZnEIQQmdObmJ2dLckfjX7J7hQeNe7AHgQGuMV0QBfvjJFFWdhWWtZ7
- NGRwVBJXtYs292oRuOMQTVDf5Szzy/HVHgQbw9D49/QPOzdz2bGK+ip4AfHoMKcMWz8V
- 8BMlTo7rhOiAieW0zz7wxzE78tQ5d4bRhjIsvpNT6fcNLQtzm2QfTevSlC3xEmullert
- OnIQ==
+ bh=m6IbQm7IVmYrQcO+DDcMCAnogH5IyhTLbFZusFgPpnc=;
+ b=fa02tFfPQoz7fzHCvV310ygbxsvlTEHF0/MggsoXcxHfCZmbJH/o8KtzZpTu5ll/Y+
+ Njqms9fTKrTHGqnjXrBEmdM37tC8IxYBqszQYan7tcKNvwTdRg0pJksH7UYYg2Ent8gz
+ dYMqwgFtoJ1G2W98flOeV5O/VZjp89WwkuG3NgAoZfPLJkT7q3xlBCvd+N5+X7fYiF4C
+ sHaAn5/TkjQdnWsBY/DrWQrhnoKkEoBjPv5kkdLop9QFM11AjQGT+7RJWnJ9MrfN0skl
+ 80bKoRgQ1z02TNDMNkRpoETIc1yOvTwDA0gF3OrXW+6DFMXBGTTqXh3APp3Zz5L5UwxA
+ SExg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773251733; x=1773856533;
- h=content-transfer-encoding:in-reply-to:from:content-language
+ d=1e100.net; s=20230601; t=1773252351; x=1773857151;
+ h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kgpQO27A9AfasM80RIvIrO78CH4sbuy/tVuwdoEw1ew=;
- b=RimTa8OKFwxSLgpKXTi0gvvTkNkCXi2QpkrxtUqQ6FUg4tIl6HMMR+DW7KjnqwMWYA
- S+AcgZReTdPR3MI91o8L+FZ89V0BESmNoxfnPM9uh1GZbU/wwyq1gOMv9QcYsTXii3KE
- MFEqciaCS7Zu0f91OrQhl2w1z/okIPi9csjsn1HPqFrV2vG4rhCCM2blGInSotasQDBy
- WjLFvTwH/XHBnBhXQRjJGY5cdo0TWOBzwbwUCJEdL7PYRt+8cq5rsah8j5lgX3mNWwqz
- hXro7eRTra4ItPn/Qx14eGpyV5WrRygFaxGOyGWbPj2CMb86j1I5M8DxXn7tzdKLfroi
- q54w==
+ bh=m6IbQm7IVmYrQcO+DDcMCAnogH5IyhTLbFZusFgPpnc=;
+ b=L/DcddZvfTmcaq2OPF0iMBRQO5pEkbR82pP6My2HNTFYPCYjAkHYrIkshAPkFI7yH4
+ LFLOsKQGXSc93xwYv4OH5R8F5lU440qG12AqB69dQ9/ME+fpGCCutdk5UjRfa+iFOOIp
+ 0BQTkRy11sgBWrfGDgcKQYNp5MU7frobmhcHOSO8pn5RVF+t0PxGirpSoz3n4SNoT9Dg
+ zpzwLtzdS/1oFBydtxyQV3be+OiDyjxUnU4QgZEcN0mwrPAw75WsJNZ0A5O09afyyaVD
+ Eb6z6hb6h2hyPiO99mDZ5VPqER0GIReE55Tw6/Qv3cqD9ujwW6lD7tst2WqHAiVA9o9O
+ X16A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUM4Py4K/olgbFCJbiQhB4OVq5oS6XRVYu+yta3PMZ4FvF85ONDTvwwrNTTn2x0lRrf8SaBE3E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzqym4PvPRsmmXKh7gH918SmylpaCkjg6g5WTtEdBrCITKqnhIb
- Ys3FS8uGmkYaL0e6u5nxQMIvott5wr6Lgmu/mQATIZs7WkOKV9bmXH1t
-X-Gm-Gg: ATEYQzy9QXVUApAmiqB1lAjesAiZmqcXGX6fxswYXN+6no7JdjR8OZxhraBadZDFHKx
- T+HRK9F/5yFIoskQECaHJE0faCofHjdTPJplJPH6MkJ6kiTnLVkw9ZWxJuDRhOf8KlatxxNMfz9
- bQqvlt5YafMly697tYi7Kp33DpcSWci9kWNCsCf+ucuQx+UTmQ2zSgiptD/32QnXm9Woa3D2mBU
- 9J3lpwCTgGIrdaKWdkaJPixUfS7cF9mEHSi/yFp++rSC56Dn6CIOwdICG/rXfaZnTmDRsSyq2Y0
- Yn8M6/BcwhCYL71m2X+4Wgq2sOsvt2gdxamK1wQBkCN8Jzu6j6KvxnPtotoTKBi+SWzA3hNRARz
- usYHW7QTYkIqP3x+EdmNVhrUhyZsFDo20iaK6bkPc0m1dhb3nkeoqbQ6nN5SJgYAQYfbiSyZ7Of
- zwi2M5J2Rf+SqDNAuESy/q5jXyb0omb10nncrSJG6xyueQWPv6XkiYqqQRInO4zbRW5Bb2hpFYL
- Wk=
-X-Received: by 2002:a05:600c:444e:b0:477:b734:8c53 with SMTP id
- 5b1f17b1804b1-4854b0c0cdamr60724345e9.12.1773251732752; 
- Wed, 11 Mar 2026 10:55:32 -0700 (PDT)
+ AJvYcCVv8BI1fst751mxiBAxya/1t5NTd6Rbh9JuHmSA0gZAyIU52cADI6YjK3606Z0YIrJef/cwBc8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDvK4bsXiDNA0UGchPPV0FhRXeL5N5hSJfzQbflwqAWILj2SaV
+ f0IFwJy66jwUK19VdY2TF2FlgzrwJDF3Bcr9ior2VK2dOwJb3ubRMpTy
+X-Gm-Gg: ATEYQzw7vsTwfEqO85Qcysq1+0JsBvCQ30fe+/pbk6nBDZfq5CpBf4NABONmmhV3oN8
+ ZqXHZbc+7Y5xLwO8wfzRylYxRPWFbuZcITSU456F1jTHRLZkPCHaqlNSWBHHpriHgcxsC3m9Bvt
+ +6WL67J/CjLIHuNXmOugmhouF9wy2KuTrG4yL4Ru46gz2saCJoLcgB2Fi2mEYBR+ET32OGvY9KG
+ PNXq8R4CoC4P0HQ2J8VyofXVAK3YYRE+So2kIU50HBM5m4OCzvpmtUvkm/EatAdu9QYWWAheFPQ
+ ANUzoovAKbLhyjcYVdInxJXyJ3PGboxzNh0zR2UexZcOWwF7gJbQqXKTYGN0OrjhNI5ZCAbJ+xC
+ y5iMhkFW/U5/uIkgIi8YEpvqAOhAwBL6tc3K/JeGkE3OpchEFnlOwrglAnjC3Z6KiZ12RydRh8H
+ MGSv6g2fQ83QoWyppZtdJJ3Aeu+adP8qH1L2Ru8ATL2TvAUr2cToxX4YWzPU4FEyUTcGlGwaC4h
+ Kw=
+X-Received: by 2002:a05:600c:3b18:b0:485:3fe6:2209 with SMTP id
+ 5b1f17b1804b1-4854b0bdf5dmr61291465e9.11.1773252351477; 
+ Wed, 11 Mar 2026 11:05:51 -0700 (PDT)
 Received: from ?IPV6:2001:9e8:9a:de10:fba3:eefe:bd9c:fc8c?
  ([2001:9e8:9a:de10:fba3:eefe:bd9c:fc8c])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48541ab9f9esm174080395e9.4.2026.03.11.10.55.31
+ ffacd0b85a97d-439fe2273e8sm1045385f8f.33.2026.03.11.11.05.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Mar 2026 10:55:32 -0700 (PDT)
-Message-ID: <8b49a3f1-f7c7-47d1-ab94-bd2c48737c81@gmail.com>
-Date: Wed, 11 Mar 2026 18:55:31 +0100
+ Wed, 11 Mar 2026 11:05:50 -0700 (PDT)
+Message-ID: <5450d168-6878-43ab-bc03-c832ba02618e@gmail.com>
+Date: Wed, 11 Mar 2026 19:05:50 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 5/7] mips: loongson: add clk driver
+Subject: Re: [PATCH v6 1/7] mips: loongson: minimal initial SoC support
 To: sgdfkk@163.com, duhuanpeng@139.com, u-boot@lists.denx.de
 Cc: chenhuacai@loongson.cn, jiaxun.yang@flygoat.com,
  Du Huanpeng <u74147@gmail.com>
-References: <20260311052046.11265-1-sgdfkk@163.com>
- <20260311052046.11265-6-sgdfkk@163.com>
-Content-Language: en-US
+References: <20260311084129.12809-1-sgdfkk@163.com>
+ <20260311084129.12809-2-sgdfkk@163.com>
 From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-In-Reply-To: <20260311052046.11265-6-sgdfkk@163.com>
+Content-Language: en-US
+In-Reply-To: <20260311084129.12809-2-sgdfkk@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,236 +108,60 @@ X-Virus-Status: Clean
 
 
 
-On 3/11/26 06:20, sgdfkk@163.com wrote:
+On 3/11/26 09:41, sgdfkk@163.com wrote:
 > From: Du Huanpeng <u74147@gmail.com>
 > 
-> clk driver loongson mips for embedded SoC ls1c300
+> Loongson 1C is a cost-effective SOC chip for industrial control and
+> the Internet of Things. The Loongson 1C includes a floating-point
+> processing unit, supports multiple types of memory, and supports
+> high-capacity MLC NAND Flash. Loongson 1C provides developers with a
+> wealth of peripheral interfaces and on-chip modules, including Camera
+> controller, USB OTG and USB HOST interfaces, AC97/I2S controller, LCD
+> controller, SPI interface, UART interface, etc., providing sufficient
+> computing power and multi-application connectivity.
+> 
+> Some highlights of this SoC are:
+> - Single core LS232, MIPS32 instruction set compatible, main frequency
+> 300MHZ
+> - 16KB data cache and 16KB instruction cache
+> - 64 bit float unit, hardware division
+> - 8/16 bit SDRAM controller, 45 ~ 133MHz
+> - 8/16 bit SRAM, NAND
+> - I2S/AC97, LCD, MAC, USB, OTG, SPI, I2C, PWM, CAN, SDIO, ADC
+> - 12 UARTs
+> 
+> Links:
+> https://www.loongson.cn/
+> 
+> introduce base support for the ls1c300 SoC.
+> - debug UART2
+> - serial console
+> - clock
+> - watchdog
+> - sysreset
+> - uart
 > 
 > Signed-off-by: Du Huanpeng <u74147@gmail.com>
 > ---
->   drivers/clk/Makefile               |   1 +
->   drivers/clk/loongson/Makefile      |   3 +
->   drivers/clk/loongson/clk-ls1c300.c | 179 +++++++++++++++++++++++++++++
->   3 files changed, 183 insertions(+)
->   create mode 100644 drivers/clk/loongson/Makefile
->   create mode 100644 drivers/clk/loongson/clk-ls1c300.c
+>   MAINTAINERS                              |  9 ++++
+>   arch/mips/Kconfig                        | 11 ++++
+>   arch/mips/Makefile                       |  1 +
+>   arch/mips/mach-loongson/Kconfig          | 69 ++++++++++++++++++++++++
+>   arch/mips/mach-loongson/Makefile         |  6 +++
+>   arch/mips/mach-loongson/cpu.c            | 19 +++++++
+>   arch/mips/mach-loongson/ls1c300/Makefile |  7 +++
+>   arch/mips/mach-loongson/ls1c300/init.c   | 61 +++++++++++++++++++++
+>   arch/mips/mach-loongson/spl.c            | 46 ++++++++++++++++
+>   9 files changed, 229 insertions(+)
+>   create mode 100644 arch/mips/mach-loongson/Kconfig
+>   create mode 100644 arch/mips/mach-loongson/Makefile
+>   create mode 100644 arch/mips/mach-loongson/cpu.c
+>   create mode 100644 arch/mips/mach-loongson/ls1c300/Makefile
+>   create mode 100644 arch/mips/mach-loongson/ls1c300/init.c
+>   create mode 100644 arch/mips/mach-loongson/spl.c
 > 
-> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-> index 5f0c0d8a5c2..e19bb17276e 100644
-> --- a/drivers/clk/Makefile
-> +++ b/drivers/clk/Makefile
-> @@ -23,6 +23,7 @@ obj-y += ti/
->   obj-$(CONFIG_CLK_THEAD) += thead/
->   obj-$(CONFIG_$(PHASE_)CLK_INTEL) += intel/
->   obj-$(CONFIG_ARCH_ASPEED) += aspeed/
-> +obj-$(CONFIG_ARCH_LSMIPS) += loongson/
->   obj-$(CONFIG_ARCH_MEDIATEK) += mediatek/
->   obj-$(CONFIG_ARCH_MESON) += meson/
->   obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
-> diff --git a/drivers/clk/loongson/Makefile b/drivers/clk/loongson/Makefile
-> new file mode 100644
-> index 00000000000..0a47269cd30
-> --- /dev/null
-> +++ b/drivers/clk/loongson/Makefile
-> @@ -0,0 +1,3 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +
-> +obj-$(CONFIG_SOC_LS1C300) += clk-ls1c300.o
-> diff --git a/drivers/clk/loongson/clk-ls1c300.c b/drivers/clk/loongson/clk-ls1c300.c
-> new file mode 100644
-> index 00000000000..acca92cd657
-> --- /dev/null
-> +++ b/drivers/clk/loongson/clk-ls1c300.c
-> @@ -0,0 +1,179 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * reference:
-> + *   drivers/clk/microchip/mpfs_clk.c
-> + *   drivers/clk/clk_octeon.c
-> + *
-> + * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
-> + */
-> +
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <dt-bindings/clock/ls1c300-clk.h>
-> +#include <linux/bitops.h>
-> +#include <linux/bitfield.h>
-> +#include <linux/io.h>
-> +#include <linux/clk-provider.h>
-> +
-> +/* PLL/SDRAM Frequency Configuration Register */
-> +#define START_FREQ	0
-> +#define CLK_DIV_PARAM	4
-> +
-> +/* START_FREQ */
-> +#define	PLL_VALID	BIT(31)
-> +#define	RESERVED0	GENMASK(30, 24)
-> +#define	FRAC_N		GENMASK(23, 16)
-> +#define	M_PLL		GENMASK(15, 8)
-> +#define	RESERVED1	GENMASK(7, 4)
-> +#define	RST_TIME	GENMASK(3, 2)
-> +#define	SDRAM_DIV	GENMASK(1, 0)
-> +/* CLK_DIV_PARAM */
-> +#define	PIX_DIV		GENMASK(31, 24)
-> +#define	CAM_DIV		GENMASK(23, 16)
-> +#define	CPU_DIV		GENMASK(15, 8)
-> +#define	RESERVED2	GENMASK(7, 6)
-> +#define	PIX_DIV_VALID	BIT(5)
-> +#define	PIX_SEL		BIT(4)
-> +#define	CAM_DIV_VALID	BIT(3)
-> +#define	CAM_SEL		BIT(2)
-> +#define	CPU_DIV_VALID	BIT(1)
-> +#define	CPU_SEL		BIT(0)
-> +/* CPU_THROT */
-> +#define	CPU_THROT	GENMASK(3, 0)
-> +
-> +static const struct clk_div_table sdram_div_table[] = {
-> +	{.val = 0, .div = 2},
-> +	{.val = 1, .div = 4},
-> +	{.val = 2, .div = 3},
-> +	{.val = 3, .div = 3},
-> +};
-> +
-> +ulong ls1c300_pll_get_rate(struct clk *clk)
-> +{
-> +	unsigned int mult;
-> +	long long parent_rate;
-> +	void *base;
-> +	unsigned int val;
-> +
-> +	parent_rate = clk_get_parent_rate(clk);
-> +	base = (void *)clk->data;
-> +
-> +	val = readl(base + START_FREQ);
-> +	mult = FIELD_GET(FRAC_N, val) + FIELD_GET(M_PLL, val);
-> +	return (mult * parent_rate) / 4;
-> +}
-> +
-> +static ulong ls1c300_clk_get_rate(struct clk *clk)
-> +{
-> +	struct clk *cl;
-> +	ulong rate;
-> +	int err;
-> +
-> +	err = clk_get_by_id(clk->id, &cl);
-> +	if (err)
-> +		return err;
-> +
-> +	rate = clk_get_rate(cl);
-> +	return rate;
-> +}
-> +
-> +static int ls1c300_clk_probe(struct udevice *dev)
-> +{
-> +	void __iomem *base;
-> +	void __iomem *cpu_throt;
-> +	void __iomem *addr;
-> +
-> +	struct clk *cl, clk;
-> +	const char *parent_name;
-> +	int flags;
-> +	int ret;
-> +
-> +	base = (void *)dev_remap_addr_index(dev, 0);
-> +	cpu_throt  = (void *)dev_remap_addr_index(dev, 1);
 
-no casting required, return value is already "void __iomem *"
-
-> +
-> +	ret = clk_get_by_index(dev, 0, &clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = clk_get_rate(&clk);
-> +
-> +	parent_name = clk.dev->name;
-> +
-> +	cl = kzalloc(sizeof(*cl), GFP_KERNEL);
-> +	cl->data = (unsigned long)base;
-
-why not create a "struct ls1c300_clk_priv" which embeds stuff like "void 
-__iomem *base" and just use "struct ls1c300_clk_priv *priv = 
-dev_get_priv(dev);" to get a type-safe pointer to the auto-allocated 
-memory? The platform driver itself should not fiddle with "struct clk" 
-and just register "struct clk_ops".
-
-> +	ret = clk_register(cl, "clk_ls1c300_pll", "pll", parent_name);
-> +	clk_dm(CLK_PLL, cl);
-> +
-> +	addr = base + CLK_DIV_PARAM;
-> +	flags = CLK_DIVIDER_ONE_BASED | CLK_DIVIDER_ALLOW_ZERO;
-> +	cl = clk_register_divider(NULL, "cpu_div", "pll", 0, addr,  8, 7, flags);
-> +	clk_dm(CLK_CPU, cl);
-> +	cl = clk_register_divider(NULL, "cam_div", "pll", 0, addr, 16, 7, flags);
-> +	clk_dm(CLK_CAMERA, cl);
-> +	cl = clk_register_divider(NULL, "pix_div", "pll", 0, addr, 24, 7, flags);
-> +	clk_dm(CLK_PIX, cl);
-> +
-> +	cl = kzalloc(sizeof(*cl), GFP_KERNEL);
-> +	cl->data = (unsigned long)cpu_throt;
-> +	ret = clk_register(cl, "clk_cpu_throt", "cpu_throt_factor", "cpu_div");
-> +	clk_dm(CLK_CPU_THROT, cl);
-> +
-> +	addr = base + START_FREQ;
-> +	cl = clk_register_divider(NULL, "sdram_div", "cpu_div", 0, addr, 0, 2, 0);
-> +	to_clk_divider(cl)->table = sdram_div_table;
-> +	clk_dm(CLK_APB, cl);
-> +
-> +	return 0;
-> +}
-> +
-> +static ulong cpu_throt_get_rate(struct clk *clk)
-> +{
-> +	void __iomem *cpu_throt;
-> +	long long parent_rate;
-> +	ulong ret;
-> +
-> +	parent_rate = clk_get_parent_rate(clk);
-> +	cpu_throt = (void *)clk->data;
-> +
-> +	ret = readl(cpu_throt) + 1;
-> +	ret = parent_rate * ret / 16;
-> +	return ret;
-> +}
-> +
-> +static const struct udevice_id ls1c300_clk_ids[] = {
-> +	{ .compatible = "loongson,ls1c300-clk" },
-> +	{ }
-> +};
-> +
-> +static const struct clk_ops clk_cpu_throt_ops = {
-> +	.get_rate = cpu_throt_get_rate,
-> +};
-> +
-> +static const struct clk_ops clk_ls1c300_pll_ops = {
-> +	.get_rate = ls1c300_pll_get_rate,
-> +};
-> +
-> +static const struct clk_ops ls1c300_clk_ops = {
-> +	.get_rate = ls1c300_clk_get_rate,
-> +};
-> +
-> +U_BOOT_DRIVER(clk_ls1c300_cpu_throt) = {
-> +	.name	= "clk_cpu_throt",
-> +	.id	= UCLASS_CLK,
-> +	.ops	= &clk_cpu_throt_ops,
-> +};
-> +
-> +U_BOOT_DRIVER(clk_ls1c300_pll) = {
-> +	.name	= "clk_ls1c300_pll",
-> +	.id	= UCLASS_CLK,
-> +	.ops	= &clk_ls1c300_pll_ops,
-> +};
-> +
-> +U_BOOT_DRIVER(ls1c300_clk) = {
-> +	.name = "clk_ls1c300",
-> +	.id = UCLASS_CLK,
-> +	.of_match = ls1c300_clk_ids,
-> +	.probe = ls1c300_clk_probe,
-> +	.priv_auto = sizeof(struct clk),
-> +	.ops = &ls1c300_clk_ops,
-> +};
+Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
 
 -- 
 - Daniel
