@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90558106289F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA861125807
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 892BC840BE;
-	Wed, 11 Mar 2026 14:16:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BB542840DE;
+	Wed, 11 Mar 2026 14:16:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="X3H/1cKj";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="OUmvJZRb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 863BE83F6D; Wed, 11 Mar 2026 06:21:06 +0100 (CET)
+ id DCEF383F6D; Wed, 11 Mar 2026 09:41:44 +0100 (CET)
 Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87AE983FB6
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:21:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9893D83F93
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:41:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=t+
- k2DFfv+zqNHcqhn36s/mMzCmY9o5cRWygkj12oTYg=; b=X3H/1cKjaCVXCWrdm1
- 49BYLX0KnZw7C6LZibe4Zfevvjf8lGEn1Q80cNINYNA7RuIufy4SjdVsEObB9G1w
- TnCuO3iPJ+sGrJOJ17WXp/1rZJEhFzlVfQhw4BxCW9bRVxhDyQ+MH4eDInDXZO0T
- Rfmk0oQ5L86VqBBJ31IAK1zfg=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=jd
+ PrqiOU0OTOq18JjyiYT7EaDZwERqJuebFFvDcGjZ0=; b=OUmvJZRbvo+wORWYx/
+ pYjHAXOMYlj6ClUOY3u2ZIFT2EFUrC8eOn3Gc6RUOoSkd10JEcSO1rxm40h1UAvc
+ 5cIsyzsrBxqwSM1xXfYpYcz/nRZwG2t62QtYrLKcS/PSQpagYkpVi+PS2ICDfdPK
+ nPJNCYlpdkpD0+24SWmnZqr/4=
 Received: from server-e.. (unknown [])
- by gzga-smtp-mtada-g0-3 (Coremail) with SMTP id
- _____wCn7zWu+7BpNZ9SAQ--.53920S7; 
- Wed, 11 Mar 2026 13:20:51 +0800 (CST)
+ by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id
+ _____wAHLsa5KrFpe9OOAQ--.40770S6; 
+ Wed, 11 Mar 2026 16:41:32 +0800 (CST)
 From: sgdfkk@163.com
 To: duhuanpeng@139.com,
 	u-boot@lists.denx.de
 Cc: chenhuacai@loongson.cn, jiaxun.yang@flygoat.com,
  Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v6 5/7] mips: loongson: add clk driver
-Date: Wed, 11 Mar 2026 13:20:44 +0800
-Message-ID: <20260311052046.11265-6-sgdfkk@163.com>
+Subject: [PATCH v6 4/7] mips: loongson: ls1c300 board support
+Date: Wed, 11 Mar 2026 16:41:26 +0800
+Message-ID: <20260311084129.12809-5-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260311052046.11265-1-sgdfkk@163.com>
-References: <20260311052046.11265-1-sgdfkk@163.com>
+In-Reply-To: <20260311084129.12809-1-sgdfkk@163.com>
+References: <20260311084129.12809-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wCn7zWu+7BpNZ9SAQ--.53920S7
-X-Coremail-Antispam: 1Uf129KBjvJXoWxKF4DJry7WrWftw1DWrWUXFb_yoW7tw1xpa
- nYkFWrtr4Yq3y7G3WfJFyUJFySvF1FkFyUZrZFga4S9FnxAF1jqFs2ga43tF45CF97X3yY
- q3WqgrWxCFZFvaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j0oGQUUUUU=
+X-CM-TRANSID: _____wAHLsa5KrFpe9OOAQ--.40770S6
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JFW8Xr47Xr1xXF15uryDKFg_yoW7tr43pr
+ n2kF4rGr48tw47GrZ3uFyDWFn0yw4kuFWUuFnFqr1rAr97Aa18CFnIya13try3XrWkJrW8
+ ZF93WF4akFWDXw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jFzuAUUUUU=
 X-Originating-IP: [240e:3b0:4805:1b6:5ef3:fcff:feed:1d83]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCwBOxCWmw+7P9swAA30
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCvx2A12mxKr3pdAAA3n
 X-Mailman-Approved-At: Wed, 11 Mar 2026 14:15:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,223 +73,194 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
-clk driver loongson mips for embedded SoC ls1c300
+- 64MiB SDRAM K9F1G08
+- 4MiB spi flash
+- ethernet DM9161CEP
+- UART2 console
 
+Links:
+https://dfgh.top/loongson
 Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- drivers/clk/Makefile               |   1 +
- drivers/clk/loongson/Makefile      |   3 +
- drivers/clk/loongson/clk-ls1c300.c | 179 +++++++++++++++++++++++++++++
- 3 files changed, 183 insertions(+)
- create mode 100644 drivers/clk/loongson/Makefile
- create mode 100644 drivers/clk/loongson/clk-ls1c300.c
+ board/loongson/ls1c300-eval/Kconfig     | 12 ++++++
+ board/loongson/ls1c300-eval/MAINTAINERS |  7 ++++
+ board/loongson/ls1c300-eval/Makefile    |  3 ++
+ board/loongson/ls1c300-eval/board.c     | 19 +++++++++
+ configs/ls1c300_defconfig               | 52 +++++++++++++++++++++++++
+ include/configs/ls1c300.h               | 36 +++++++++++++++++
+ 6 files changed, 129 insertions(+)
+ create mode 100644 board/loongson/ls1c300-eval/Kconfig
+ create mode 100644 board/loongson/ls1c300-eval/MAINTAINERS
+ create mode 100644 board/loongson/ls1c300-eval/Makefile
+ create mode 100644 board/loongson/ls1c300-eval/board.c
+ create mode 100644 configs/ls1c300_defconfig
+ create mode 100644 include/configs/ls1c300.h
 
-diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-index 5f0c0d8a5c2..e19bb17276e 100644
---- a/drivers/clk/Makefile
-+++ b/drivers/clk/Makefile
-@@ -23,6 +23,7 @@ obj-y += ti/
- obj-$(CONFIG_CLK_THEAD) += thead/
- obj-$(CONFIG_$(PHASE_)CLK_INTEL) += intel/
- obj-$(CONFIG_ARCH_ASPEED) += aspeed/
-+obj-$(CONFIG_ARCH_LSMIPS) += loongson/
- obj-$(CONFIG_ARCH_MEDIATEK) += mediatek/
- obj-$(CONFIG_ARCH_MESON) += meson/
- obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
-diff --git a/drivers/clk/loongson/Makefile b/drivers/clk/loongson/Makefile
+diff --git a/board/loongson/ls1c300-eval/Kconfig b/board/loongson/ls1c300-eval/Kconfig
 new file mode 100644
-index 00000000000..0a47269cd30
+index 00000000000..e427570a836
 --- /dev/null
-+++ b/drivers/clk/loongson/Makefile
++++ b/board/loongson/ls1c300-eval/Kconfig
+@@ -0,0 +1,12 @@
++if BOARD_LS1C300
++
++config SYS_BOARD
++	default "ls1c300-eval"
++
++config SYS_VENDOR
++	default "loongson"
++
++config SYS_CONFIG_NAME
++	default "ls1c300"
++
++endif
+diff --git a/board/loongson/ls1c300-eval/MAINTAINERS b/board/loongson/ls1c300-eval/MAINTAINERS
+new file mode 100644
+index 00000000000..d3498b18e2b
+--- /dev/null
++++ b/board/loongson/ls1c300-eval/MAINTAINERS
+@@ -0,0 +1,7 @@
++LS1C300_EVAL BOARD
++M:	Du Huanpeng <u74147@gmail.com>
++S:	Maintained
++F:	board/loongson/ls1c300-eval/
++F:	include/configs/ls1c300.h
++F:	configs/ls1c300_defconfig
++F:	arch/mips/dts/ls1c300-eval.dts
+diff --git a/board/loongson/ls1c300-eval/Makefile b/board/loongson/ls1c300-eval/Makefile
+new file mode 100644
+index 00000000000..db129c5abae
+--- /dev/null
++++ b/board/loongson/ls1c300-eval/Makefile
 @@ -0,0 +1,3 @@
 +# SPDX-License-Identifier: GPL-2.0
 +
-+obj-$(CONFIG_SOC_LS1C300) += clk-ls1c300.o
-diff --git a/drivers/clk/loongson/clk-ls1c300.c b/drivers/clk/loongson/clk-ls1c300.c
++obj-y += board.o
+diff --git a/board/loongson/ls1c300-eval/board.c b/board/loongson/ls1c300-eval/board.c
 new file mode 100644
-index 00000000000..acca92cd657
+index 00000000000..0eb5df1dc7b
 --- /dev/null
-+++ b/drivers/clk/loongson/clk-ls1c300.c
-@@ -0,0 +1,179 @@
++++ b/board/loongson/ls1c300-eval/board.c
+@@ -0,0 +1,19 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * reference:
-+ *   drivers/clk/microchip/mpfs_clk.c
-+ *   drivers/clk/clk_octeon.c
-+ *
 + * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <dt-bindings/clock/ls1c300-clk.h>
-+#include <linux/bitops.h>
-+#include <linux/bitfield.h>
-+#include <linux/io.h>
-+#include <linux/clk-provider.h>
++#include <mach/serial.h>
 +
-+/* PLL/SDRAM Frequency Configuration Register */
-+#define START_FREQ	0
-+#define CLK_DIV_PARAM	4
++#if defined(CONFIG_DEBUG_UART_BOARD_INIT)
 +
-+/* START_FREQ */
-+#define	PLL_VALID	BIT(31)
-+#define	RESERVED0	GENMASK(30, 24)
-+#define	FRAC_N		GENMASK(23, 16)
-+#define	M_PLL		GENMASK(15, 8)
-+#define	RESERVED1	GENMASK(7, 4)
-+#define	RST_TIME	GENMASK(3, 2)
-+#define	SDRAM_DIV	GENMASK(1, 0)
-+/* CLK_DIV_PARAM */
-+#define	PIX_DIV		GENMASK(31, 24)
-+#define	CAM_DIV		GENMASK(23, 16)
-+#define	CPU_DIV		GENMASK(15, 8)
-+#define	RESERVED2	GENMASK(7, 6)
-+#define	PIX_DIV_VALID	BIT(5)
-+#define	PIX_SEL		BIT(4)
-+#define	CAM_DIV_VALID	BIT(3)
-+#define	CAM_SEL		BIT(2)
-+#define	CPU_DIV_VALID	BIT(1)
-+#define	CPU_SEL		BIT(0)
-+/* CPU_THROT */
-+#define	CPU_THROT	GENMASK(3, 0)
++#define UART2_RX	36
++#define UART2_TX	37
++#define AFUNC		2
 +
-+static const struct clk_div_table sdram_div_table[] = {
-+	{.val = 0, .div = 2},
-+	{.val = 1, .div = 4},
-+	{.val = 2, .div = 3},
-+	{.val = 3, .div = 3},
-+};
-+
-+ulong ls1c300_pll_get_rate(struct clk *clk)
++void board_debug_uart_init(void)
 +{
-+	unsigned int mult;
-+	long long parent_rate;
-+	void *base;
-+	unsigned int val;
-+
-+	parent_rate = clk_get_parent_rate(clk);
-+	base = (void *)clk->data;
-+
-+	val = readl(base + START_FREQ);
-+	mult = FIELD_GET(FRAC_N, val) + FIELD_GET(M_PLL, val);
-+	return (mult * parent_rate) / 4;
++	gpio_set_alternate(UART2_TX, AFUNC);
++	gpio_set_alternate(UART2_RX, AFUNC);
 +}
++#endif
+diff --git a/configs/ls1c300_defconfig b/configs/ls1c300_defconfig
+new file mode 100644
+index 00000000000..22d6f18cac4
+--- /dev/null
++++ b/configs/ls1c300_defconfig
+@@ -0,0 +1,52 @@
++CONFIG_MIPS=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_TEXT_BASE=0x80200000
++CONFIG_SYS_MALLOC_F_LEN=0x40000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_ENV_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="ls1c300-eval"
++CONFIG_DM_RESET=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_TEXT_BASE=0xbfc00000
++CONFIG_SPL_BSS_START_ADDR=0x80010000
++CONFIG_SPL_BSS_MAX_SIZE=0x10000
++CONFIG_SYS_LOAD_ADDR=0x80010000
++CONFIG_WATCHDOG_TIMEOUT_MSECS=3000
++CONFIG_SPL_SIZE_LIMIT=0x100000
++CONFIG_SPL=y
++CONFIG_ARCH_LSMIPS=y
++CONFIG_SPL_PAYLOAD="u-boot.img"
++CONFIG_ROM_EXCEPTION_VECTORS=y
++CONFIG_RESTORE_EXCEPTION_VECTOR_BASE=y
++CONFIG_MIPS_BOOT_FDT=y
++CONFIG_FIT=y
++# CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
++CONFIG_LOGLEVEL=9
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x10000
++CONFIG_SPL_PAD_TO=0
++CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_NOR_SUPPORT=y
++# CONFIG_CMD_ELF is not set
++# CONFIG_CMD_XIMG is not set
++# CONFIG_CMD_CRC32 is not set
++CONFIG_CMD_CLK=y
++# CONFIG_CMD_LOADS is not set
++CONFIG_OF_EMBED=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK_CCF=y
++# CONFIG_INPUT is not set
++# CONFIG_POWER is not set
++CONFIG_CONS_INDEX=2
++CONFIG_SPL_SYS_NS16550_SERIAL=y
++CONFIG_SYS_NS16550_REG_SIZE=-1
++CONFIG_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_SYSRESET_WATCHDOG_AUTO=y
++CONFIG_WDT_LOONGSON=y
++# CONFIG_GZIP is not set
+diff --git a/include/configs/ls1c300.h b/include/configs/ls1c300.h
+new file mode 100644
+index 00000000000..8d834333ea8
+--- /dev/null
++++ b/include/configs/ls1c300.h
+@@ -0,0 +1,36 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2020 MediaTek Inc.
++ *
++ * Author: Gao Weijie <weijie.gao@mediatek.com>
++ * based on: include/configs/mt7628.h
++ * Copyright (C) 2022-2026 Du Huanpeng <u74147@gmail.com>
++ */
 +
-+static ulong ls1c300_clk_get_rate(struct clk *clk)
-+{
-+	struct clk *cl;
-+	ulong rate;
-+	int err;
++#ifndef __CONFIG_LS1C300_H__
++#define __CONFIG_LS1C300_H__
 +
-+	err = clk_get_by_id(clk->id, &cl);
-+	if (err)
-+		return err;
++#define CFG_SYS_SDRAM_BASE		0x80200000
++#define CFG_SYS_INIT_SP_OFFSET		0x2000
 +
-+	rate = clk_get_rate(cl);
-+	return rate;
-+}
++/* SPL */
++#if defined(CONFIG_SPL_BUILD)
 +
-+static int ls1c300_clk_probe(struct udevice *dev)
-+{
-+	void __iomem *base;
-+	void __iomem *cpu_throt;
-+	void __iomem *addr;
++/* Serial SPL */
++#define CFG_SYS_NS16550_CLK		66000000
++#define CFG_SYS_NS16550_COM1		0xbfe44000
++#define CFG_SYS_NS16550_COM2		0xbfe48000
++#define CFG_SYS_NS16550_COM3		0xbfe4c000
++#define CFG_SYS_NS16550_COM4		0xbfe4c400
++#define CFG_SYS_NS16550_COM5		0xbfe4c500
++#define CFG_SYS_NS16550_COM6		0xbfe4c600
 +
-+	struct clk *cl, clk;
-+	const char *parent_name;
-+	int flags;
-+	int ret;
++#define CFG_MALLOC_F_ADDR		0x80100000	/* FIXME: find a proper place */
++#define CFG_SYS_UBOOT_BASE		0xbd000000
 +
-+	base = (void *)dev_remap_addr_index(dev, 0);
-+	cpu_throt  = (void *)dev_remap_addr_index(dev, 1);
++#endif
 +
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return ret;
++/* Serial common */
++#define CFG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600 }
 +
-+	ret = clk_get_rate(&clk);
-+
-+	parent_name = clk.dev->name;
-+
-+	cl = kzalloc(sizeof(*cl), GFP_KERNEL);
-+	cl->data = (unsigned long)base;
-+	ret = clk_register(cl, "clk_ls1c300_pll", "pll", parent_name);
-+	clk_dm(CLK_PLL, cl);
-+
-+	addr = base + CLK_DIV_PARAM;
-+	flags = CLK_DIVIDER_ONE_BASED | CLK_DIVIDER_ALLOW_ZERO;
-+	cl = clk_register_divider(NULL, "cpu_div", "pll", 0, addr,  8, 7, flags);
-+	clk_dm(CLK_CPU, cl);
-+	cl = clk_register_divider(NULL, "cam_div", "pll", 0, addr, 16, 7, flags);
-+	clk_dm(CLK_CAMERA, cl);
-+	cl = clk_register_divider(NULL, "pix_div", "pll", 0, addr, 24, 7, flags);
-+	clk_dm(CLK_PIX, cl);
-+
-+	cl = kzalloc(sizeof(*cl), GFP_KERNEL);
-+	cl->data = (unsigned long)cpu_throt;
-+	ret = clk_register(cl, "clk_cpu_throt", "cpu_throt_factor", "cpu_div");
-+	clk_dm(CLK_CPU_THROT, cl);
-+
-+	addr = base + START_FREQ;
-+	cl = clk_register_divider(NULL, "sdram_div", "cpu_div", 0, addr, 0, 2, 0);
-+	to_clk_divider(cl)->table = sdram_div_table;
-+	clk_dm(CLK_APB, cl);
-+
-+	return 0;
-+}
-+
-+static ulong cpu_throt_get_rate(struct clk *clk)
-+{
-+	void __iomem *cpu_throt;
-+	long long parent_rate;
-+	ulong ret;
-+
-+	parent_rate = clk_get_parent_rate(clk);
-+	cpu_throt = (void *)clk->data;
-+
-+	ret = readl(cpu_throt) + 1;
-+	ret = parent_rate * ret / 16;
-+	return ret;
-+}
-+
-+static const struct udevice_id ls1c300_clk_ids[] = {
-+	{ .compatible = "loongson,ls1c300-clk" },
-+	{ }
-+};
-+
-+static const struct clk_ops clk_cpu_throt_ops = {
-+	.get_rate = cpu_throt_get_rate,
-+};
-+
-+static const struct clk_ops clk_ls1c300_pll_ops = {
-+	.get_rate = ls1c300_pll_get_rate,
-+};
-+
-+static const struct clk_ops ls1c300_clk_ops = {
-+	.get_rate = ls1c300_clk_get_rate,
-+};
-+
-+U_BOOT_DRIVER(clk_ls1c300_cpu_throt) = {
-+	.name	= "clk_cpu_throt",
-+	.id	= UCLASS_CLK,
-+	.ops	= &clk_cpu_throt_ops,
-+};
-+
-+U_BOOT_DRIVER(clk_ls1c300_pll) = {
-+	.name	= "clk_ls1c300_pll",
-+	.id	= UCLASS_CLK,
-+	.ops	= &clk_ls1c300_pll_ops,
-+};
-+
-+U_BOOT_DRIVER(ls1c300_clk) = {
-+	.name = "clk_ls1c300",
-+	.id = UCLASS_CLK,
-+	.of_match = ls1c300_clk_ids,
-+	.probe = ls1c300_clk_probe,
-+	.priv_auto = sizeof(struct clk),
-+	.ops = &ls1c300_clk_ops,
-+};
++#endif /* __CONFIG_LS1C300_H__ */
 -- 
 2.43.0
 
