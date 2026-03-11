@@ -4,105 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF7C112584E
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 16:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6FD112584E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 16:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 814CB8407E;
-	Wed, 11 Mar 2026 17:01:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 15D038407E;
+	Wed, 11 Mar 2026 17:15:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LA5iAgqx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x9zIdI0z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74684840A9; Wed, 11 Mar 2026 17:01:28 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 110D7840A6; Wed, 11 Mar 2026 17:15:23 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 370C08404A
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 17:01:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C9C38404A
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 17:15:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-40974bf7781so946320fac.0
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:01:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-798617c0ad5so84530577b3.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:15:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773245719; cv=none;
+ d=google.com; s=arc-20240605;
+ b=Gv7ZllRn65W4fXL07rUHrQZ8Yz/4rAG3RsO5V3XqNGnWPV2/BB9beeoxIKb3ukhc+H
+ nSViCzcZZY23D8EUAGIHOStPR6l9DFNAQhQ/oATUmxtWwTiqfEwdPG6haIcutc/6x/Jk
+ Dae0wQYhbW8Qi6dQrO+yEGuXeXQ3SNiVWFNFRVOCC6dQVpfyIioUYnXNZOCqrud2r8fs
+ pQTj2BuN2I2UIkdR2yR3/7dUCvdXOfJxE2taPSRe39WlSffGEvd3tOiJKGRyRJgnNrHk
+ HPq4s1p8iRWfq2S3vnS7mLNppGTlH6ERvwIa8b3gLEk0/pFgQikN7FsiNec3K4L7PXRV
+ VFeQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Rgma7lg82dbTA+llWlXk75nlwshu27uU16U3ca2fIRc=;
+ fh=qVPXZENsT8HTjc1yhpZmugGERdHloY1MZQ2O3ZL3iu8=;
+ b=M9o4myL0IIuy3/yFz5v+SIoVzK6TxzmtxX1EO7xWXZHfShxxwAuYIeSrAfMycjbs2k
+ tftoCi4C1UmCXzefDD20Cmsnw4JdQCESQL1LlX25n5DxwascaBo+lhFyt6dYjaERpqhF
+ 66OrVsnMeU3cBnVJukLlkBWiRim4DI8xycMXx4kJr+czVrDOPzAUm84WYQsWPKs8wdGl
+ 52JSEf0a5B9JXR4VTPbslp5GUd6I1F9f/Hclm2iAAu0RRx6f7MDpwXySgvS8ciZv4oTV
+ E8cUOec2PiWzvg4cuk8b5b8yS+t1Lwh13XPNVNluWv/7Gowj/NuhzPAPQynmVZVLuyfo
+ 1Eng==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773244885; x=1773849685;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1773245719; x=1773850519; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/0PIsMM4FNkEYd0ksYURIHtPKlHmL+1b80CP7uoOPRo=;
- b=LA5iAgqxKgx8IaEfCNJ+ivZSgdit8U3AellYjwd80o2nV4hLfRGuc2vCiy66ofQzf7
- dGr2Hnyzc2AWkzgBqm3aLmW8i4lKgebekg6bLGtaqmtkdzFkxpiQGRgIvYC7PwTTk3JG
- kXo5mi0ns8StcdlbAT83D+z0+crymkP+oee56zeBRirSdHlw47Hv4GnnZzask8ZtbnZU
- vYB3+4Ob+ug2QifvXYOJzChzhN5Q+4VK8MH1QfRBjjOAGiMlMeu+dO54WIFUP65kYMVJ
- BW7xN8NFsU9S9jgakHPfeXkWmdwN0M3jfRw3GT+WvZh0yJ+OzQJYXeV8+OC0bJ3KNC4j
- +l4g==
+ bh=Rgma7lg82dbTA+llWlXk75nlwshu27uU16U3ca2fIRc=;
+ b=x9zIdI0zlUCPve+8UxNVbCVgG1HbOglkQOIK6Ctcul1LntnoSyCquWxtjkMI9cuGRP
+ u/DqW9Zdvq+7+gdXFyjVgxeVKp5y7/+qhjYuwjsB5+wEPqBR2qC19yxNqznjrQO6/mrD
+ 1CJtvm5mNRtTDC31iog/vt2r6a6CD/0fDps25uPtlrAewGJdCYpg/55JoLGdkQqOvmM6
+ rTJUSzPiC6OL6ABs4qoZZP8l0ComE0kneimOBZOvnKRJ7lWbPSiTWezr9PCvGCTI1zEA
+ oFC88ZVA4hu/WWw9oEMvVZj4yNi1YNJWaVnn8UVrlU3sftp59k/yRN58DISeErregCVr
+ W8Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773244885; x=1773849685;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ d=1e100.net; s=20230601; t=1773245719; x=1773850519;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/0PIsMM4FNkEYd0ksYURIHtPKlHmL+1b80CP7uoOPRo=;
- b=XXZP/GXaMAFGPacA6cnadjjPdAh3Py3eC5k+KUM8NhqUSpbdxaODugUXe9JlwBgjAl
- joCRr3XW+Gl4ijgvL416nuvPTkaSXFnpWjJlKCPGGEWTXeX4NSwpi8BFYPGA/tid/g7L
- dyLwRDiLsgeOpKZIaec/7ebLTrqqxJZT06i0hBpafLbwlBKZhhNJxabnPaJ5b+it0UYE
- KmGGRb/r8zC4ijCo3MZETM0NycHyDwKUNd4ZvLHWRiO+fldpTl13Spo44inqAQ0kQC7Z
- T6h0vuyG6apqhCZFteKf58Jqc7pMqiUoFFSZS52EVZaBp8oywOz7A+hQ0InHlcTdI0I3
- Gr+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtmq2s/X8aaePjWOFLT8KbH35D3g8ercb1OhfhD/L5C5ryrq4Q2BjlnxI8Uvj/5rvRd65o5kM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3w+0GwlrPxeorzP0InMnF4ct+3pkt69kEWpbiu22aM+0bLmyt
- GQ/XvuDnG3+hWxJA/+vfo++OXQkotk+iXsUhYuNCtSsTfoFtD0I+w2k6i52yc/tfnNU=
-X-Gm-Gg: ATEYQzzvZO5/bLjkKOjAinl7h+XpvhLXb/HlbET6l/tKAMyk2oHhmOFrxriJUN80lUl
- ZqGJmblKybCXgKtLk/8so5hjLtyzVKsqUCT0StsPvWcOTFo76JNDRdB6yP3TIwQhZf1RvOUWvp+
- zNoCbAh31ESUf5Oiowr7GsVU4xqlL0ASXm3IP+hU22jVvH5xoSskY1IqfhV3eVWZ1NNsORk0zku
- hoMgZOPJ4F4pQxmKXG7KUCZ5AHrU4L8tQEBXII10HdWtULU1BZ/+a6HSZxvBlLUtSW65eatjsm6
- a7UNXy0IafHMbHDwpp+axuFeP9RWwCOLscm3Jv9FF2q80VsGMLIqTitstKa31MHa0sjVeFJYB7j
- rD3rYtc2ezQzzlITriUtxGcNl9Sc2g0HqaiJTU4pAdLEQkr+ezUFk3AkdQpP8IQKl1W4Wx5IPqL
- EFuNpwO35AYGTX1F1d6AR0qziJelbY
-X-Received: by 2002:a05:6871:9e13:b0:417:37c1:c990 with SMTP id
- 586e51a60fabf-41798a94522mr89441fac.0.1773244884503; 
- Wed, 11 Mar 2026 09:01:24 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:82ac:f3fe:2e5f:ec03])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e2a17f1sm2646487fac.8.2026.03.11.09.01.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 09:01:23 -0700 (PDT)
-From: David Lechner <dlechner@baylibre.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
- Bo-Chen Chen <rex-bc.chen@mediatek.com>
-In-Reply-To: <20260209-mtk-pinctl-mt8189-v1-0-a7a3069eda6c@baylibre.com>
-References: <20260209-mtk-pinctl-mt8189-v1-0-a7a3069eda6c@baylibre.com>
-Subject: Re: [PATCH 0/3] pinctrl: mediatek: support for mt8189
-Message-Id: <177324483178.1879070.15806367491101457751.b4-ty@baylibre.com>
-Date: Wed, 11 Mar 2026 11:00:31 -0500
+ bh=Rgma7lg82dbTA+llWlXk75nlwshu27uU16U3ca2fIRc=;
+ b=RhHHmQFPnDnUnB4puh14Z/1m2PpuduZ/rgxfwWVUOD0y8RcO2NmmhtXMVW6gVXGetn
+ NHe5rWoCkZEVyyGzYDxiZxSsHNWxWetBPoyc8yYA78JD+rPBDlH7v9VCYoiv6TabyAJL
+ 5iOqKTw7lCUMJ8xw2UacNEfSwAD5oQwK0ICpay5EJQbiA89LK2JME5Z35t83JiB7Fg9B
+ 4h8++qkwCVy6YD9UZNFutnoZwhSA82vasKZ8TH0TMsv6oiRSLzRX46bm/Cx3Njb5zPmN
+ wp57h/R3MtLPiHwI8uF7gzvntShwBGuxziBnyY26s7H3GyWjG8wBj1lrz52OmXjJruuy
+ 9e+A==
+X-Gm-Message-State: AOJu0Yzjlr1ulvg00vQrOwkc0x7jFCD/jW37c2wHyreerJZ5dPFHd3ie
+ zT+NOlJ2yP8FnOqGcLkK21DAI6fa515rg7/Xc6pndge8TvwgKYs0b3Aj9v8PjuPuoT0qRx4CThW
+ Sa4n5q0JMKP382pzG7jCpY0OnJOiS0plMdlgYnA3KQA==
+X-Gm-Gg: ATEYQzydk/7SCA4xa2rMX1InjZ6omCPQ7pgEn+qjHwk+g8xFHby+tXeAO01JwBgH02C
+ tecHhfYaCQm2ogY3ap9jeijuLHV1WwD4Z6B1PjxU+gRPlik0SGZfEtc7iTKHVbSn/uLnI1CmuG7
+ wt4OjiDKY65J2MClu/L7I9sIlS2M1AjyDcPC7/cb1kcfXL7soyAXz2CJebMXXBQVIKC6PQRHW5s
+ Hr7nNDIq0AdoRqDTTNS7X+W8ho13RitR56DsU5UeFoE6UsrOPsFcQ66LuOyKS4dnH89AYvci8EV
+ 17IuJ1ncs4JqKIeNYtFaWxS07W1dQdNX2Zk1VFp7RRkHRgYaItj6Fcj1mm3scCquxZnR2GEHZ5N
+ 461CFiAZ2rdBaG/de/s07/BYCo0bSFTK6pQfVqScXK/6xwVsk7NHrgJ4XgPs8rRL3P7+pdumCcW
+ GQQ+VJawJo0a0buk8yAmbxxIT/o3SOWSh1SDN+m372MRG5OjjK95nM/drdNuJ5Cd3xPJQVOQ02z
+ pEr24A1ZqbCuNTUMlUBKZNeQ9uTNFnKbtkBISip7Enu1Xr8AfOfum0VCBf33P7lP13Ngo/FwR9l
+ HNJb+vHxQrxalo4GvB30GkTIu3IZFgYOVOEKNN8LQQ==
+X-Received: by 2002:a05:690c:7409:b0:798:50ee:5b02 with SMTP id
+ 00721157ae682-79917f851ffmr28605127b3.42.1773245719056; Wed, 11 Mar 2026
+ 09:15:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=849; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=BiTnVDYc+L+fxNOELOLlVcy2dMbwbyRNxfFQq7VU9H4=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpsZHMGpl1Yg6e4vQ2eZItmHuujttP6tnGEqRmn
- 5mlh+C4muCJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabGRzBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ARa8H/inX6EJiqiLrOX/9HiDFWrp3CnWOT1m+nL+sMT5
- epXOvYiamZCFCAGW/y9yqbsfLOm/sRcnbiUu/Jc0dkfEgzoRbZUs3DhQXFvRjklpOYltKeOyxUy
- Ji6kqSehseGy9OwZPcA7CgH6oGsepUF6VLCcAlS1AwgFshEXuTKwxr+IMlU6lT/b527c6hvcrYW
- BjJS7ERd+tDv9NqXHVGdh62oY9WhDeQMJq2wyGDGRCM9mdatMcImOxlSad0RgZPGhXA6KUiCSw6
- XBbN71M8svyYTEEH+C9gTgxmFDkU745vs5nfYjm7EUXXhLCtSceUwI+y/uca4TgF/nDBwgAXXw0
- TLYI=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+References: <20260305161349.2317130-1-vincent.stehle@arm.com>
+ <20260309163638.2340548-1-vincent.stehle@arm.com>
+In-Reply-To: <20260309163638.2340548-1-vincent.stehle@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Mar 2026 18:14:42 +0200
+X-Gm-Features: AaiRm518NBYiDPdCx8PMuflFxwnfcUYXhHAEQa-aXZtePeEV4EGtSTTeIrG37g4
+Message-ID: <CAC_iWjLaUyZ1bitkfEvyb565eTABU1BLH4gQ8KG21btMqGgBtg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] lib: uuid: add EBBR 2.1 conformance profile GUID
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,26 +119,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 09 Feb 2026 17:34:16 -0600, David Lechner wrote:
-> pinctrl: mediatek: support for mt8189
-> 
-> This series adds initial pinctrl support for the MediaTek mt8189 SoC.
-> This one has more register maps that any existing one, so there are a
-> couple of preparatory patches to handle that. Then adding support is
-> just a matter of adding all of the pin definition tables.
-> 
-> [...]
+On Mon, 9 Mar 2026 at 18:36, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> w=
+rote:
+>
+> Add support for printing the EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID as hum=
+an
+> readable text.
+>
+> This is compiled in only when CONFIG_CMD_EFIDEBUG and CONFIG_EFI_EPCT are
+> set.
+>
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
 
-Applied to mediatek-for-next, thanks!
-
-[1/3] pinctl: mediatek: add bounds check on number of base addresses
-      commit: d5ca34d6386a645f721308c2e096cf5307e7837e
-[2/3] pinctl: mediatek: increase max number of base addresses
-      commit: ebc502533367d4f64823d3c8e96173bc6e90e584
-[3/3] pinctrl: mediatek: add support for mt8189
-      commit: 43172a596604757bf229bea575c1da304b51e989
-
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> Changes in v2:
+> - Gate with CONFIG_EFI_ECPT (suggested by Heinrich)
+>
+>  lib/uuid.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index 0a166320e07..3a666d0430d 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -254,6 +254,12 @@ static const struct {
+>                 NULL, "EFI Conformance Profiles Table",
+>                 EFI_CONFORMANCE_PROFILES_TABLE_GUID,
+>         },
+> +#if CONFIG_IS_ENABLED(EFI_ECPT)
+> +       {
+> +               NULL, "EFI EBBR 2.1 Conformance Profile",
+> +               EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
+> +       },
+> +#endif
+>  #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
+>         {
+>                 NULL, "RISC-V Boot",
+> --
+> 2.53.0
+>
