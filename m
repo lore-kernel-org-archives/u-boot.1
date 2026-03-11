@@ -4,100 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6FD112584E
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 16:15:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 324101125847
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 16:21:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15D038407E;
-	Wed, 11 Mar 2026 17:15:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B18128407E;
+	Wed, 11 Mar 2026 17:21:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x9zIdI0z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qhDikwoj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 110D7840A6; Wed, 11 Mar 2026 17:15:23 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 78D28840CC; Wed, 11 Mar 2026 17:21:28 +0100 (CET)
+Received: from mail-yx1-xb133.google.com (mail-yx1-xb133.google.com
+ [IPv6:2607:f8b0:4864:20::b133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C9C38404A
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 17:15:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 29EC38404A
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 17:21:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-798617c0ad5so84530577b3.1
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:15:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773245719; cv=none;
+Received: by mail-yx1-xb133.google.com with SMTP id
+ 956f58d0204a3-64ad79dfb6eso73777d50.0
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:21:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773246085; cv=none;
  d=google.com; s=arc-20240605;
- b=Gv7ZllRn65W4fXL07rUHrQZ8Yz/4rAG3RsO5V3XqNGnWPV2/BB9beeoxIKb3ukhc+H
- nSViCzcZZY23D8EUAGIHOStPR6l9DFNAQhQ/oATUmxtWwTiqfEwdPG6haIcutc/6x/Jk
- Dae0wQYhbW8Qi6dQrO+yEGuXeXQ3SNiVWFNFRVOCC6dQVpfyIioUYnXNZOCqrud2r8fs
- pQTj2BuN2I2UIkdR2yR3/7dUCvdXOfJxE2taPSRe39WlSffGEvd3tOiJKGRyRJgnNrHk
- HPq4s1p8iRWfq2S3vnS7mLNppGTlH6ERvwIa8b3gLEk0/pFgQikN7FsiNec3K4L7PXRV
- VFeQ==
+ b=JY7P3Nxfejh2e1If7WGSBUaF9h+C/H1P6N5I/EZSmrI7ZvjaRn6PGgZ9/0yalbJ1zT
+ c3+yphMXwBB9XUJwX/VtAfcehrJBx+GGM5cQ4yYoHXGk9WO4okW7xIfflwH/GiDCggws
+ ks/A8D/DlROV/SaeWC8AoZsgT3RHxA8D4X9+f51lmkazXoGFO2yGefsIvyFaM5KIqsxt
+ 3VuFG6SjptIRqrR9OgMDsuR1ofcxNfb4TOFzoCw9BPjodwQLOcL+FfRtAaruYOc6mHjh
+ 0scH/KUsycu7jXhczmd+0FVVurVLjbJMjGU5+WzJ1TvfK0dbT/mr8Lxt77WXOsFQlDAY
+ Sxjw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=Rgma7lg82dbTA+llWlXk75nlwshu27uU16U3ca2fIRc=;
+ bh=b/wiXzqyKgZNjj3Kh6/hYfQY1emwMAN9mbR+7FhHE7Q=;
  fh=qVPXZENsT8HTjc1yhpZmugGERdHloY1MZQ2O3ZL3iu8=;
- b=M9o4myL0IIuy3/yFz5v+SIoVzK6TxzmtxX1EO7xWXZHfShxxwAuYIeSrAfMycjbs2k
- tftoCi4C1UmCXzefDD20Cmsnw4JdQCESQL1LlX25n5DxwascaBo+lhFyt6dYjaERpqhF
- 66OrVsnMeU3cBnVJukLlkBWiRim4DI8xycMXx4kJr+czVrDOPzAUm84WYQsWPKs8wdGl
- 52JSEf0a5B9JXR4VTPbslp5GUd6I1F9f/Hclm2iAAu0RRx6f7MDpwXySgvS8ciZv4oTV
- E8cUOec2PiWzvg4cuk8b5b8yS+t1Lwh13XPNVNluWv/7Gowj/NuhzPAPQynmVZVLuyfo
- 1Eng==; darn=lists.denx.de
+ b=Z6Efp8cgHsbw3Zz95SF0VogTAGKQtpUWJ+laZz1sCyKz90Oy0lzObT4pNQx8ww2bS9
+ vA9SLoz6kbv+QmCfF0dBsYeOCwDp+X4T8p67LeHRqtoOOVMGxVmP6RO5eb5fHqfcx9Oc
+ imZjsqYLIKgXDTviZzFn1AMtp6IEXRGBoFr5xVGAqReEWlp1flT+IR0T0oE0gYe1VOjI
+ lMnt+K02NJIpadXg8z4atuCp5vU/nU/OmQLorupoXXwHjJNjia4VI9B23ghcBZ+0DVqV
+ N4rriCZVROkuuSBvhYKNVZSYFoIzdo9o2fELk9iF+oiJ3z0tu1WBODDGu7DODc/B9s1y
+ g32w==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773245719; x=1773850519; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773246085; x=1773850885; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Rgma7lg82dbTA+llWlXk75nlwshu27uU16U3ca2fIRc=;
- b=x9zIdI0zlUCPve+8UxNVbCVgG1HbOglkQOIK6Ctcul1LntnoSyCquWxtjkMI9cuGRP
- u/DqW9Zdvq+7+gdXFyjVgxeVKp5y7/+qhjYuwjsB5+wEPqBR2qC19yxNqznjrQO6/mrD
- 1CJtvm5mNRtTDC31iog/vt2r6a6CD/0fDps25uPtlrAewGJdCYpg/55JoLGdkQqOvmM6
- rTJUSzPiC6OL6ABs4qoZZP8l0ComE0kneimOBZOvnKRJ7lWbPSiTWezr9PCvGCTI1zEA
- oFC88ZVA4hu/WWw9oEMvVZj4yNi1YNJWaVnn8UVrlU3sftp59k/yRN58DISeErregCVr
- W8Yw==
+ bh=b/wiXzqyKgZNjj3Kh6/hYfQY1emwMAN9mbR+7FhHE7Q=;
+ b=qhDikwojQyVGFcdDSkhDWBi+gHp225jrozGu2MIxMUN5XsVy0pyTJeH6ehMDqxbxfb
+ Vs3jE/xJpz6j2h7jS4AXYhmAqloO845ABnGSyKN6Qk+Uc1z3R51K8j4RET4q4T5bWzfl
+ YuM/YyeSiHg8eF/IPLb6y7FJmkKPho1EMNOVNrxq9GZH5riWyjlEe+FE38vGxzTkILXB
+ 813EIPqAzNHNRhN9+5fMnT7i6VhvNyFOjY/jdcFO7NiI80r5+WBHVNUjJ8OCyX1dHqOo
+ LRDH8NiiBwh2z0lxMNFALnQHDx4kUF3o0sGv21UEQ6XOiEaXzlQWyTLCOXrMG7G/FDbt
+ rWRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773245719; x=1773850519;
+ d=1e100.net; s=20230601; t=1773246085; x=1773850885;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=Rgma7lg82dbTA+llWlXk75nlwshu27uU16U3ca2fIRc=;
- b=RhHHmQFPnDnUnB4puh14Z/1m2PpuduZ/rgxfwWVUOD0y8RcO2NmmhtXMVW6gVXGetn
- NHe5rWoCkZEVyyGzYDxiZxSsHNWxWetBPoyc8yYA78JD+rPBDlH7v9VCYoiv6TabyAJL
- 5iOqKTw7lCUMJ8xw2UacNEfSwAD5oQwK0ICpay5EJQbiA89LK2JME5Z35t83JiB7Fg9B
- 4h8++qkwCVy6YD9UZNFutnoZwhSA82vasKZ8TH0TMsv6oiRSLzRX46bm/Cx3Njb5zPmN
- wp57h/R3MtLPiHwI8uF7gzvntShwBGuxziBnyY26s7H3GyWjG8wBj1lrz52OmXjJruuy
- 9e+A==
-X-Gm-Message-State: AOJu0Yzjlr1ulvg00vQrOwkc0x7jFCD/jW37c2wHyreerJZ5dPFHd3ie
- zT+NOlJ2yP8FnOqGcLkK21DAI6fa515rg7/Xc6pndge8TvwgKYs0b3Aj9v8PjuPuoT0qRx4CThW
- Sa4n5q0JMKP382pzG7jCpY0OnJOiS0plMdlgYnA3KQA==
-X-Gm-Gg: ATEYQzydk/7SCA4xa2rMX1InjZ6omCPQ7pgEn+qjHwk+g8xFHby+tXeAO01JwBgH02C
- tecHhfYaCQm2ogY3ap9jeijuLHV1WwD4Z6B1PjxU+gRPlik0SGZfEtc7iTKHVbSn/uLnI1CmuG7
- wt4OjiDKY65J2MClu/L7I9sIlS2M1AjyDcPC7/cb1kcfXL7soyAXz2CJebMXXBQVIKC6PQRHW5s
- Hr7nNDIq0AdoRqDTTNS7X+W8ho13RitR56DsU5UeFoE6UsrOPsFcQ66LuOyKS4dnH89AYvci8EV
- 17IuJ1ncs4JqKIeNYtFaWxS07W1dQdNX2Zk1VFp7RRkHRgYaItj6Fcj1mm3scCquxZnR2GEHZ5N
- 461CFiAZ2rdBaG/de/s07/BYCo0bSFTK6pQfVqScXK/6xwVsk7NHrgJ4XgPs8rRL3P7+pdumCcW
- GQQ+VJawJo0a0buk8yAmbxxIT/o3SOWSh1SDN+m372MRG5OjjK95nM/drdNuJ5Cd3xPJQVOQ02z
- pEr24A1ZqbCuNTUMlUBKZNeQ9uTNFnKbtkBISip7Enu1Xr8AfOfum0VCBf33P7lP13Ngo/FwR9l
- HNJb+vHxQrxalo4GvB30GkTIu3IZFgYOVOEKNN8LQQ==
-X-Received: by 2002:a05:690c:7409:b0:798:50ee:5b02 with SMTP id
- 00721157ae682-79917f851ffmr28605127b3.42.1773245719056; Wed, 11 Mar 2026
- 09:15:19 -0700 (PDT)
+ bh=b/wiXzqyKgZNjj3Kh6/hYfQY1emwMAN9mbR+7FhHE7Q=;
+ b=uvC/8ZLlW/Qi+eM+41a4/o4LCiMKEJBGPYq1sRqW0IbwkOyuxn4u7znML9DZTzXwOe
+ xh3153gJnIDp3GdEnuEljnToFsYrGbcNPzbDxY4N3ng/FKebFKVDoSZrpbYlHShKQqB4
+ oLioxGaWSWYomXq/IZdl+HWiWIBnPpIt7vmT1H8sBwsmrz9hp+ee+0nvqqAjOgRa7I1x
+ tWZ7zQPssMNUcilQczcZsx5dp9MEiulgqL7I2isJRZBIXIYgIHxYnSg531/6DpXIif4v
+ cVKBh53O1qN+lYyMRGZbXBp2OF0Wt4QTuIoFNtP6Mdj4gRRSD5maKt8/Mb//IjyGEnQx
+ nefQ==
+X-Gm-Message-State: AOJu0YyfdC0sKi6beiRvMHpVjv/73X0Wp3rSebiJPuAPIlXqlRcDToBU
+ exqSx+gaAm0Exfe2j2+aAUE05IjvU2yRCng0PL9q/8gqbkEmewD+wiek0tS/Q4g1W28lFJuPcnl
+ cfvNykiWxbOsYAgT8/GvJnMwp91UyGDqNVm3F3rSbAA==
+X-Gm-Gg: ATEYQzx5PnmrVQFYFPxYIHKU9gT4ZpbXslh6Wlw2dzdnmxAKwjzVL9DgfbSPF2AocfF
+ yBWoV2cpU9THgk6dhBBZ+sW5P62W3gSDNX74duGfebNBwrfHqXY/w2VA5O80ZGy1aeD1WKbGnIu
+ AymANULFVIM+qUodClCXRfzKKCSQ27xnt/UBRMvq+yr6RxAJ3z6yASG+hve7tIIyskDMMPyGdWR
+ 7R+tjBpG8tWTePqhQWz7+rK+oRp4WMHY4eRGmc0D15qH3g80gAENkqrobb9K3Rcz6v3l0/UiN9e
+ qFn1rKUHstKm9zpY69ORDA5Ng9d3U5zPu5gwf3jBDiZJNL8pDIoNyAWV5JgRd+JNroKfB7M/eCP
+ 7BGgj+If2C/RyA+owhF4wHokKOBKkJc3WraCpfy/Cuva4zULfCaaPkZCRNQbwIRGxIFTPCgg84w
+ oR3cWFpca46xAfwKZvCQosHIO1UFPci8CodTAP7+X/wBrX4tp4xpniasRDGxsbGJt0uCV/zRFJY
+ /05mx+l08lQLdaIXUaHO9ph0zznpOfjp0e5bQu7iVIz7fPW1DjxAzy1XHh3TAdcvzZvHyDNIjvI
+ 1gRtxwhm020E8yd8yz+I7p96gEkMVPT4DpaAhJsKRw==
+X-Received: by 2002:a05:690e:158a:20b0:64a:e0fc:1a70 with SMTP id
+ 956f58d0204a3-64d657d7e99mr2314155d50.63.1773246084605; Wed, 11 Mar 2026
+ 09:21:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260305161349.2317130-1-vincent.stehle@arm.com>
- <20260309163638.2340548-1-vincent.stehle@arm.com>
-In-Reply-To: <20260309163638.2340548-1-vincent.stehle@arm.com>
+ <20260309163638.2340548-3-vincent.stehle@arm.com>
+In-Reply-To: <20260309163638.2340548-3-vincent.stehle@arm.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 11 Mar 2026 18:14:42 +0200
-X-Gm-Features: AaiRm518NBYiDPdCx8PMuflFxwnfcUYXhHAEQa-aXZtePeEV4EGtSTTeIrG37g4
-Message-ID: <CAC_iWjLaUyZ1bitkfEvyb565eTABU1BLH4gQ8KG21btMqGgBtg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] lib: uuid: add EBBR 2.1 conformance profile GUID
+Date: Wed, 11 Mar 2026 18:20:48 +0200
+X-Gm-Features: AaiRm5038bcseOxVNVYFVBLXJjBboTEFIRHVj19VqQqtr5_KZj1mMmk9i-agqlc
+Message-ID: <CAC_iWjJ9epMEBfxi3rzgqSNQeiu87cxh8Tw4BbM52WAiyuWLQg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] cmd: efidebug: add ecpt command
 To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Tom Rini <trini@konsulko.com>
@@ -122,43 +122,109 @@ X-Virus-Status: Clean
 On Mon, 9 Mar 2026 at 18:36, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> w=
 rote:
 >
-> Add support for printing the EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID as hum=
-an
-> readable text.
+> Add an "efidebug ecpt" command, to print the conformance profiles in the
+> ECPT:
 >
-> This is compiled in only when CONFIG_CMD_EFIDEBUG and CONFIG_EFI_EPCT are
-> set.
+>   =3D> efidebug ecpt
+>   cce33c35-74ac-4087-bce7-8b29b02eeb27  EFI EBBR 2.1 Conformance Profile
 >
 > Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > ---
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >
 > Changes in v2:
-> - Gate with CONFIG_EFI_ECPT (suggested by Heinrich)
+> - Change log level to error and adapt the printed message (suggested by
+>   Heinrich)
+> - Also in that case, return an error code
 >
->  lib/uuid.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  cmd/efidebug.c | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 49 insertions(+)
 >
-> diff --git a/lib/uuid.c b/lib/uuid.c
-> index 0a166320e07..3a666d0430d 100644
-> --- a/lib/uuid.c
-> +++ b/lib/uuid.c
-> @@ -254,6 +254,12 @@ static const struct {
->                 NULL, "EFI Conformance Profiles Table",
->                 EFI_CONFORMANCE_PROFILES_TABLE_GUID,
->         },
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> index 109496d9e95..7b733119c82 100644
+> --- a/cmd/efidebug.c
+> +++ b/cmd/efidebug.c
+> @@ -533,6 +533,47 @@ static int do_efi_show_defaults(struct cmd_tbl *cmdt=
+p, int flag,
+>         return CMD_RET_SUCCESS;
+>  }
+>
 > +#if CONFIG_IS_ENABLED(EFI_ECPT)
-> +       {
-> +               NULL, "EFI EBBR 2.1 Conformance Profile",
-> +               EFI_CONFORMANCE_PROFILE_EBBR_2_1_GUID,
-> +       },
+> +/**
+> + * do_efi_show_ecpt() - show UEFI conformance profiles in ECPT
+> + *
+> + * @cmdtp:     Command table
+> + * @flag:      Command flag
+> + * @argc:      Number of arguments
+> + * @argv:      Argument array
+> + * Return:     CMD_RET_SUCCESS on success,
+> + *             CMD_RET_USAGE or CMD_RET_FAILURE on failure
+> + *
+> + * Implement efidebug "ecpt" sub-command.
+> + * Show all the UEFI Conformance Profiles listed in the EFI Conformance =
+Profiles
+> + * Table (ECPT).
+> + */
+> +static int do_efi_show_ecpt(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                           char *const argv[])
+> +{
+> +       const struct efi_conformance_profiles_table *ecpt;
+> +       u16 n;
+> +
+> +       if (argc !=3D 1)
+> +               return CMD_RET_USAGE;
+> +
+> +       ecpt =3D efi_get_configuration_table(&efi_ecpt_guid);
+> +       if (!ecpt) {
+> +               log_err("ECPT table missing\n");
+> +               return CMD_RET_FAILURE;
+> +       }
+> +
+> +       for (n =3D 0; n < ecpt->number_of_profiles; n++) {
+> +               const efi_guid_t *guid =3D &ecpt->conformance_profiles[n]=
+;
+> +
+> +               printf("%pUl  %s\n", guid->b,
+> +                      uuid_guid_get_str(guid->b) ?: "(unknown)");
+> +       }
+> +
+> +       return CMD_RET_SUCCESS;
+> +}
+> +#endif /* CONFIG_IS_ENABLED(EFI_ECPT) */
+> +
+>  static const char * const efi_mem_type_string[] =3D {
+>         [EFI_RESERVED_MEMORY_TYPE] =3D "RESERVED",
+>         [EFI_LOADER_CODE] =3D "LOADER CODE",
+> @@ -1586,6 +1627,10 @@ static struct cmd_tbl cmd_efidebug_sub[] =3D {
+>                          "", ""),
+>         U_BOOT_CMD_MKENT(defaults, CONFIG_SYS_MAXARGS, 1, do_efi_show_def=
+aults,
+>                          "", ""),
+> +#if CONFIG_IS_ENABLED(EFI_ECPT)
+> +       U_BOOT_CMD_MKENT(ecpt, CONFIG_SYS_MAXARGS, 1, do_efi_show_ecpt,
+> +                        "", ""),
 > +#endif
->  #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
->         {
->                 NULL, "RISC-V Boot",
+>         U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_show_image=
+s,
+>                          "", ""),
+>         U_BOOT_CMD_MKENT(memmap, CONFIG_SYS_MAXARGS, 1, do_efi_show_memma=
+p,
+> @@ -1680,6 +1725,10 @@ U_BOOT_LONGHELP(efidebug,
+>         "  - show UEFI handles\n"
+>         "efidebug defaults\n"
+>         "  - show default EFI filename and PXE architecture\n"
+> +#if CONFIG_IS_ENABLED(EFI_ECPT)
+> +       "efidebug ecpt\n"
+> +       "  - show conformance profiles in the ECPT\n"
+> +#endif
+>         "efidebug images\n"
+>         "  - show loaded images\n"
+>         "efidebug memmap\n"
 > --
 > 2.53.0
 >
