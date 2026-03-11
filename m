@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69805106289F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19399106289F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 799C58404D;
-	Wed, 11 Mar 2026 14:16:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02FAE84065;
+	Wed, 11 Mar 2026 14:16:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="fDCOo7j4";
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="jeia7W/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0797A83FB6; Wed, 11 Mar 2026 09:41:47 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+ id 2610F83F6D; Wed, 11 Mar 2026 09:41:47 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B65B83FEC
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:41:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C6C483FC0
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 09:41:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sgdfkk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=xI
- WpXOdK9gn/p+VZDiY3i5CJVXd5YyrSaoSvShe9KaM=; b=fDCOo7j4zyHSaCfGFy
- TEgLUQPgKX/SFPqlKt4AcJLmGoETZYxBLjByVYQMtlqcCObmujzlG5SZi7tNqApE
- loHC3G7fHwSuNIMODxIz3KS9Ah7tG6SFjcvrZnZVhlrMX0ttKDZw2mm3BcyMR+lU
- uRCXaO9rMZnU46rxAWjADPKeA=
+ s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Yn
+ ZcYOfQSeP7u1K4jyKJzHRlYri5X03aasDAzKM+1cI=; b=jeia7W/TDM93ZSU2Vu
+ KYpzd8cUF+KwH1lxnjUN6Pr4eDHfG32klh7IYwZstNrdnq4W1tT8xa7j2losA8ew
+ sRuNiXS2qCCd3t2+tNVZEpQ8tE64inAAaSCM49uLQ3JyVMzccBGeeBBMRWRM51mJ
+ rlzEsVFQFZGUuUoxtjwpsOWKQ=
 Received: from server-e.. (unknown [])
  by gzga-smtp-mtada-g1-3 (Coremail) with SMTP id
- _____wAHLsa5KrFpe9OOAQ--.40770S8; 
- Wed, 11 Mar 2026 16:41:34 +0800 (CST)
+ _____wAHLsa5KrFpe9OOAQ--.40770S3; 
+ Wed, 11 Mar 2026 16:41:30 +0800 (CST)
 From: sgdfkk@163.com
 To: duhuanpeng@139.com,
 	u-boot@lists.denx.de
 Cc: chenhuacai@loongson.cn, jiaxun.yang@flygoat.com,
  Du Huanpeng <u74147@gmail.com>
-Subject: [PATCH v6 6/7] mips: loongson: add watchdog driver
-Date: Wed, 11 Mar 2026 16:41:28 +0800
-Message-ID: <20260311084129.12809-7-sgdfkk@163.com>
+Subject: [PATCH v6 1/7] mips: loongson: minimal initial SoC support
+Date: Wed, 11 Mar 2026 16:41:23 +0800
+Message-ID: <20260311084129.12809-2-sgdfkk@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260311084129.12809-1-sgdfkk@163.com>
 References: <20260311084129.12809-1-sgdfkk@163.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wAHLsa5KrFpe9OOAQ--.40770S8
-X-Coremail-Antispam: 1Uf129KBjvJXoWxZw17AFWkKr1DtrW7Wr1kGrg_yoWrtw4fpF
- 4Sy34FgrW7tr47WrZ3JayDXFs8C3yY9Fy3tFyxGw1rurnxAFn8X395KFy2qa97Zry3JrW5
- Zay8KFy8Ga15CrDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j0oGQUUUUU=
+X-CM-TRANSID: _____wAHLsa5KrFpe9OOAQ--.40770S3
+X-Coremail-Antispam: 1Uf129KBjvJXoWxKryDCw1fZFWrur43XF47urg_yoWDGrW5pa
+ n0ka1rGrs7Zr47Jr93A34UWrs3Aan5GFW2vF43tFyUAa97Z3WDXFs3tFnxtrW7JFWDJayr
+ WryrWFW7KF4qvw7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07j1OJOUUUUU=
 X-Originating-IP: [240e:3b0:4805:1b6:5ef3:fcff:feed:1d83]
-X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbC5x6A12mxKr65wQAA3a
+X-CM-SenderInfo: xvjgwyrn6rljoofrz/xtbCvxt-1mmxKrvpSAAA3l
 X-Mailman-Approved-At: Wed, 11 Mar 2026 14:15:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,180 +73,360 @@ X-Virus-Status: Clean
 
 From: Du Huanpeng <u74147@gmail.com>
 
-supports watchdog in loongson mips embedded SoCs
+Loongson 1C is a cost-effective SOC chip for industrial control and
+the Internet of Things. The Loongson 1C includes a floating-point
+processing unit, supports multiple types of memory, and supports
+high-capacity MLC NAND Flash. Loongson 1C provides developers with a
+wealth of peripheral interfaces and on-chip modules, including Camera
+controller, USB OTG and USB HOST interfaces, AC97/I2S controller, LCD
+controller, SPI interface, UART interface, etc., providing sufficient
+computing power and multi-application connectivity.
+
+Some highlights of this SoC are:
+- Single core LS232, MIPS32 instruction set compatible, main frequency
+300MHZ
+- 16KB data cache and 16KB instruction cache
+- 64 bit float unit, hardware division
+- 8/16 bit SDRAM controller, 45 ~ 133MHz
+- 8/16 bit SRAM, NAND
+- I2S/AC97, LCD, MAC, USB, OTG, SPI, I2C, PWM, CAN, SDIO, ADC
+- 12 UARTs
+
+Links:
+https://www.loongson.cn/
+
+introduce base support for the ls1c300 SoC.
+- debug UART2
+- serial console
+- clock
+- watchdog
+- sysreset
+- uart
 
 Signed-off-by: Du Huanpeng <u74147@gmail.com>
 ---
- drivers/watchdog/Kconfig        |   8 ++
- drivers/watchdog/Makefile       |   1 +
- drivers/watchdog/loongson_wdt.c | 127 ++++++++++++++++++++++++++++++++
- 3 files changed, 136 insertions(+)
- create mode 100644 drivers/watchdog/loongson_wdt.c
+ MAINTAINERS                              |  9 ++++
+ arch/mips/Kconfig                        | 11 ++++
+ arch/mips/Makefile                       |  1 +
+ arch/mips/mach-loongson/Kconfig          | 69 ++++++++++++++++++++++++
+ arch/mips/mach-loongson/Makefile         |  6 +++
+ arch/mips/mach-loongson/cpu.c            | 19 +++++++
+ arch/mips/mach-loongson/ls1c300/Makefile |  7 +++
+ arch/mips/mach-loongson/ls1c300/init.c   | 61 +++++++++++++++++++++
+ arch/mips/mach-loongson/spl.c            | 46 ++++++++++++++++
+ 9 files changed, 229 insertions(+)
+ create mode 100644 arch/mips/mach-loongson/Kconfig
+ create mode 100644 arch/mips/mach-loongson/Makefile
+ create mode 100644 arch/mips/mach-loongson/cpu.c
+ create mode 100644 arch/mips/mach-loongson/ls1c300/Makefile
+ create mode 100644 arch/mips/mach-loongson/ls1c300/init.c
+ create mode 100644 arch/mips/mach-loongson/spl.c
 
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 35ae7d106b1..63bf0e04c80 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -213,6 +213,14 @@ config SPL_WDT_GPIO
- 	help
- 	  Support for external watchdog fed by toggling a gpio in SPL.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d2040fee252..d1e6e4bc0da 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1385,6 +1385,15 @@ F:	drivers/net/cortina_ni.c
+ F:	drivers/net/cortina_ni.h
+ F:	drivers/net/phy/ca_phy.c
  
-+config WDT_LOONGSON
-+	bool "Loongson MIPS watchdog timer support"
-+	depends on WDT
-+	help
-+	  Select this to enable watchdog timer for Loongson SoCs.
-+	  The watchdog timer is stopped when initialized.
-+	  It performs full SoC reset.
++MIPS LOONGSON LS1C300
++M:	Du Huanpeng <u74147@gmail.com>
++S:	Maintained
++F:	arch/mips/dts/loongson32-ls1c300b.dtsi
++F:	arch/mips/mach-loongson/
++F:	drivers/clk/loongson/
++F:	drivers/watchdog/loongson_wdt.c
++F:	include/dt-bindings/clock/ls1c300-clk.h
 +
- config WDT_MAX6370
- 	bool "MAX6370 watchdog timer support"
- 	depends on WDT
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 02e2674f8af..e9ffb417050 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -33,6 +33,7 @@ obj-$(CONFIG_WDT_DA9063) += da9063-wdt.o
- obj-$(CONFIG_WDT_DAVINCI) += davinci_wdt.o
- obj-$(CONFIG_WDT_FTWDT010) += ftwdt010_wdt.o
- obj-$(CONFIG_$(SPL_TPL_)WDT_GPIO) += gpio_wdt.o
-+obj-$(CONFIG_WDT_LOONGSON) += loongson_wdt.o
- obj-$(CONFIG_WDT_MAX6370) += max6370_wdt.o
- obj-$(CONFIG_WDT_MCF) += mcf_wdt.o
- obj-$(CONFIG_WDT_MESON_GXBB) += meson_gxbb_wdt.o
-diff --git a/drivers/watchdog/loongson_wdt.c b/drivers/watchdog/loongson_wdt.c
+ MIPS MEDIATEK
+ M:	Weijie Gao <weijie.gao@mediatek.com>
+ R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+index 36612756294..0e3fc9ceeb5 100644
+--- a/arch/mips/Kconfig
++++ b/arch/mips/Kconfig
+@@ -88,6 +88,16 @@ config ARCH_MTMIPS
+ 	select SUPPORT_LITTLE_ENDIAN
+ 	select SUPPORT_SPL
+ 
++config ARCH_LSMIPS
++	bool "Support Loongson MIPS platforms"
++	select DM
++	select DM_SERIAL
++	select OF_CONTROL
++	select SUPPORTS_CPU_MIPS32_R1
++	select SUPPORTS_CPU_MIPS32_R2
++	select SUPPORTS_LITTLE_ENDIAN
++	select SUPPORT_SPL
++
+ config ARCH_JZ47XX
+ 	bool "Support Ingenic JZ47xx"
+ 	select SUPPORT_SPL
+@@ -202,6 +212,7 @@ source "arch/mips/mach-bmips/Kconfig"
+ source "arch/mips/mach-jz47xx/Kconfig"
+ source "arch/mips/mach-pic32/Kconfig"
+ source "arch/mips/mach-mtmips/Kconfig"
++source "arch/mips/mach-loongson/Kconfig"
+ source "arch/mips/mach-octeon/Kconfig"
+ 
+ if MIPS
+diff --git a/arch/mips/Makefile b/arch/mips/Makefile
+index 453c7885075..72b800c755b 100644
+--- a/arch/mips/Makefile
++++ b/arch/mips/Makefile
+@@ -19,6 +19,7 @@ machine-$(CONFIG_ARCH_BMIPS) += bmips
+ machine-$(CONFIG_ARCH_JZ47XX) += jz47xx
+ machine-$(CONFIG_MACH_PIC32) += pic32
+ machine-$(CONFIG_ARCH_MTMIPS) += mtmips
++machine-$(CONFIG_ARCH_LSMIPS) += loongson
+ machine-$(CONFIG_ARCH_MSCC) += mscc
+ machine-${CONFIG_ARCH_OCTEON} += octeon
+ 
+diff --git a/arch/mips/mach-loongson/Kconfig b/arch/mips/mach-loongson/Kconfig
 new file mode 100644
-index 00000000000..4d34d70296e
+index 00000000000..57d22927270
 --- /dev/null
-+++ b/drivers/watchdog/loongson_wdt.c
-@@ -0,0 +1,127 @@
++++ b/arch/mips/mach-loongson/Kconfig
+@@ -0,0 +1,69 @@
++menu "Loongson MIPS platforms"
++	depends on ARCH_LSMIPS
++
++config SYS_MALLOC_F_LEN
++	default 0x1000
++
++config SYS_SOC
++	default "ls1c300" if SOC_LS1C300
++
++config SYS_DCACHE_SIZE
++	default 16384
++
++config SYS_DCACHE_LINE_SIZE
++	default 32
++
++config SYS_ICACHE_SIZE
++	default 16384
++
++config SYS_ICACHE_LINE_SIZE
++	default 32
++
++config SPL_PAYLOAD
++	default "u-boot-lzma.img" if SPL_LZMA
++
++config BUILD_TARGET
++	default "u-boot-with-spl.bin" if SPL
++	default "u-boot.bin" if !SPL
++
++choice
++	prompt "Loongson MIPS SoC select"
++
++config SOC_LS1C300
++	bool "LS1C300"
++	select CLK_CCF
++	select SPL_SEPARATE_BSS if SPL
++	select SPL_INIT_STACK_WITHOUT_MALLOC_F if SPL
++	select SPL_LOADER_SUPPORT if SPL
++	select SPL_OF_CONTROL if SPL_DM
++	select SPL_SIMPLE_BUS if SPL_DM
++	select SPL_DM_SERIAL if SPL_DM
++	select SPL_CLK if SPL_DM && SPL_SERIAL
++	select SPL_SYSRESET if SPL_DM
++	select SPL_OF_LIBFDT if SPL_OF_CONTROL
++	help
++	  This supports Loongson LS1C300
++
++endchoice
++
++choice
++	prompt "Board select"
++
++config BOARD_LS1C300
++	bool "Loongson LS1C300 Eval"
++	depends on SOC_LS1C300
++	help
++	  ls1c300-eval board has a LS1C300 SoC with 64MiB of SDRAM
++	  and 512KiB of flash (SPI NOR) and additional NAND storage.
++
++endchoice
++
++config CONS_PIN
++	int "pin group used in uart"
++	default 0
++	help
++	  Select pin group connected to UART for your board.
++
++source "board/loongson/ls1c300-eval/Kconfig"
++
++endmenu
+diff --git a/arch/mips/mach-loongson/Makefile b/arch/mips/mach-loongson/Makefile
+new file mode 100644
+index 00000000000..654143a5f70
+--- /dev/null
++++ b/arch/mips/mach-loongson/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++
++obj-y += cpu.o
++obj-$(CONFIG_SPL_BUILD) += spl.o
++
++obj-$(CONFIG_SOC_LS1C300) += ls1c300/
+diff --git a/arch/mips/mach-loongson/cpu.c b/arch/mips/mach-loongson/cpu.c
+new file mode 100644
+index 00000000000..249fdcbdc5f
+--- /dev/null
++++ b/arch/mips/mach-loongson/cpu.c
+@@ -0,0 +1,19 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2018 Stefan Roese <sr@denx.de>
++ * Copyright (C) 2022-2026 Du Huanpeng <u74147@gmail.com>
++ */
++
++#include <init.h>
++#include <malloc.h>
++#include <linux/bitops.h>
++#include <linux/io.h>
++#include <linux/sizes.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int dram_init(void)
++{
++	gd->ram_size = get_ram_size((void *)KSEG1, SZ_256M) - CONFIG_TEXT_BASE % SZ_256M;
++	return 0;
++}
+diff --git a/arch/mips/mach-loongson/ls1c300/Makefile b/arch/mips/mach-loongson/ls1c300/Makefile
+new file mode 100644
+index 00000000000..17b9d6fb9ca
+--- /dev/null
++++ b/arch/mips/mach-loongson/ls1c300/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0
++
++obj-y += lowlevel_init.o
++obj-y += sdram.o
++obj-y += init.o
++obj-y += gpio.o
++obj-$(CONFIG_SPL_BUILD) += serial.o
+diff --git a/arch/mips/mach-loongson/ls1c300/init.c b/arch/mips/mach-loongson/ls1c300/init.c
+new file mode 100644
+index 00000000000..aea0a863e3e
+--- /dev/null
++++ b/arch/mips/mach-loongson/ls1c300/init.c
+@@ -0,0 +1,61 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Watchdog driver for MediaTek SoCs
++ * Copyright (C) 2020 MediaTek Inc.
 + *
-+ * Copyright (C) 2018 MediaTek Inc.
-+ * Author: Ryder Lee <ryder.lee@mediatek.com>
++ * Author:  Gao Weijie <weijie.gao@mediatek.com>
 + *
-+ * based on: drivers/watchdog/mtk_wdt.c
++ * based on: arch/mips/mach-mtmips/mt7628/init.c
 + * Copyright (C) 2020-2026 Du Huanpeng <u74147@gmail.com>
 + */
 +
-+#include <dm.h>
-+#include <hang.h>
-+#include <wdt.h>
-+#include <asm/io.h>
 +#include <clk.h>
-+#include <dm/device_compat.h>
-+#include <linux/time.h>
++#include <dm.h>
++#include <dm/uclass.h>
++#include <dt-bindings/clock/ls1c300-clk.h>
++#include <linux/io.h>
++#include <linux/sizes.h>
 +
-+struct loongson_wdt_priv {
-+	void __iomem *base;
-+#define WDT_EN		0
-+#define WDT_TIMER	4
-+#define WDT_SET		8
-+	ulong clock;
-+	unsigned long timeout;
-+};
++DECLARE_GLOBAL_DATA_PTR;
 +
-+static int loongson_wdt_reset(struct udevice *dev)
++int print_cpuinfo(void)
 +{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
++	struct udevice *udev;
++	struct clk clk;
++	int ret;
++	ulong xtal;
++	char buf[SZ_32];
 +
-+	writel(priv->timeout, priv->base + WDT_TIMER);
-+	writel(1, priv->base + WDT_SET);
++	printf("CPU: Loongson ls1c300b\n");
 +
-+	return 0;
-+}
-+
-+static int loongson_wdt_stop(struct udevice *dev)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(0, priv->base + WDT_EN);
-+	return 0;
-+}
-+
-+static int loongson_wdt_expire_now(struct udevice *dev, ulong flags)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(1, priv->base + WDT_EN);
-+	writel(1, priv->base + WDT_TIMER);
-+	writel(1, priv->base + WDT_SET);
-+
-+	hang();
-+	return 0;
-+}
-+
-+static int loongson_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+	unsigned int timeout;
-+
-+	timeout = U32_MAX / (priv->clock / MSEC_PER_SEC);
-+
-+	if (timeout < timeout_ms)
-+		timeout = U32_MAX;
-+	else
-+		timeout = timeout_ms * (priv->clock / MSEC_PER_SEC);
-+
-+	debug("WDT: reload  = %08x\n", timeout);
-+
-+	writel(1, priv->base + WDT_EN);
-+	writel(timeout, priv->base + WDT_TIMER);
-+	writel(1, priv->base + WDT_SET);
-+
-+	priv->timeout = timeout;
-+
-+	return 0;
-+}
-+
-+static int loongson_wdt_probe(struct udevice *dev)
-+{
-+	struct loongson_wdt_priv *priv = dev_get_priv(dev);
-+	struct clk cl;
-+	ulong clock;
-+
-+	priv->base = dev_remap_addr(dev);
-+	if (!priv->base)
-+		return -ENOENT;
-+
-+	if (clk_get_by_index(dev, 0, &cl) == 0)
-+		clock = clk_get_rate(&cl);
-+
-+	debug("WDT: clock = %ld\n", clock);
-+
-+	if (IS_ERR_VALUE(clock)) {
-+		dev_err(dev, "failed to get rate\n");
-+		return clock;
++	ret = uclass_get_device_by_driver(UCLASS_CLK, DM_DRIVER_GET(ls1c300_clk), &udev);
++	if (ret) {
++		printf("error: clock driver not found.\n");
++		return 0;
 +	}
 +
-+	priv->clock = clock;
-+	writel(0, priv->base + WDT_EN);
++	clk.dev = udev;
++
++	ret = clk_request(udev, &clk);
++	if (ret < 0)
++		return ret;
++
++	clk.id = CLK_XTAL;
++	xtal = clk_get_rate(&clk);
++
++	clk.id = CLK_CPU_THROT;
++	gd->cpu_clk = clk_get_rate(&clk);
++
++	clk.id = CLK_APB;
++	gd->mem_clk = clk_get_rate(&clk);
++
++	printf("Clock: CPU: %sMHz, ", strmhz(buf, gd->cpu_clk));
++	printf("SDRAM: %sMHz, ", strmhz(buf, gd->mem_clk));
++	printf("XTAL: %sMHz\n", strmhz(buf, xtal));
++
 +	return 0;
 +}
 +
-+static const struct wdt_ops loongson_wdt_ops = {
-+	.start = loongson_wdt_start,
-+	.reset = loongson_wdt_reset,
-+	.stop = loongson_wdt_stop,
-+	.expire_now = loongson_wdt_expire_now,
-+};
++ulong notrace get_tbclk(void)
++{
++	return gd->cpu_clk / 2;
++}
+diff --git a/arch/mips/mach-loongson/spl.c b/arch/mips/mach-loongson/spl.c
+new file mode 100644
+index 00000000000..40454d2cbc9
+--- /dev/null
++++ b/arch/mips/mach-loongson/spl.c
+@@ -0,0 +1,46 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2020 MediaTek Inc. All Rights Reserved.
++ *
++ * Author: Gao Weijie <weijie.gao@mediatek.com>
++ *
++ * Copyright (C) 2022-2026 Du Huanpeng <u74147@gmail.com>
++ */
 +
-+static const struct udevice_id loongson_wdt_ids[] = {
-+	{ .compatible = "loongson,ls1c300-wdt"},
-+	{}
-+};
++#include <init.h>
++#include <spl.h>
++#include <asm/sections.h>
++#include <linux/libfdt.h>
++#include <linux/sizes.h>
++#include <mach/serial.h>
 +
-+U_BOOT_DRIVER(loongson_wdt) = {
-+	.name = "loongson_wdt",
-+	.id = UCLASS_WDT,
-+	.of_match = loongson_wdt_ids,
-+	.priv_auto = sizeof(struct loongson_wdt_priv),
-+	.probe = loongson_wdt_probe,
-+	.ops = &loongson_wdt_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++void __noreturn board_init_f(ulong dummy)
++{
++	spl_init();
++
++#ifdef CONFIG_SPL_SERIAL
++	/*
++	 * loongson_spl_serial_init() is useful if debug uart is enabled,
++	 * or DM based serial is not enabled.
++	 */
++	loongson_spl_serial_init();
++	preloader_console_init();
++#endif
++
++	board_init_r(NULL, 0);
++}
++
++void board_boot_order(u32 *spl_boot_list)
++{
++	spl_boot_list[0] = BOOT_DEVICE_NOR;
++}
++
++unsigned long spl_nor_get_uboot_base(void)
++{
++	void *uboot_base = __image_copy_end;
++
++	if (fdt_magic(uboot_base) == FDT_MAGIC)
++		return (unsigned long)uboot_base + fdt_totalsize(uboot_base);
++
++	return (unsigned long)uboot_base;
++}
 -- 
 2.43.0
 
