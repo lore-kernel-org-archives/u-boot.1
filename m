@@ -4,130 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBE61125803
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:14:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C43E106289F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 13:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 923878404D;
-	Wed, 11 Mar 2026 14:14:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id EF89C84065;
+	Wed, 11 Mar 2026 14:14:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="nbAS69hI";
+	dkim=pass (2048-bit key; unprotected) header.d=riscstar-com.20230601.gappssmtp.com header.i=@riscstar-com.20230601.gappssmtp.com header.b="SEfVnxG6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C9F583FAF; Wed, 11 Mar 2026 06:04:18 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6C9B083F9A; Wed, 11 Mar 2026 08:39:01 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25CED83F93
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:04:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C246A83F6D
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 08:38:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=fail (p=none dis=none) header.from=riscstar.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=i4ZJENBq/oXpa6wGayj+gpn8dXviOhpoJxDNhN2psDnZTIFfdYYRAo2Wto0WHoNwgUGQc+YE8m1l5L4HzxWnEWnmWWBDkqv+NewxaYx2xOD8w2T4nAGcuFTmSOQ8MmS9/ctCrDOczguhdduFSQgIzw+2p4Mi/SJCfPtc0XdhBqVdgsYFQoUY2j3o7qbEfuz9DzrFvABdM2xbBHrSi+BUCM93BLf8FicEMCAcg4xkfAQKXO7T5209TaY4C0PZBAKxUD4bXoz9ResKl9g+x1riGhhZB4mXoKlqDCc6TsggATfnWH3UxfBeQE7LgDMzQA+dNJTbh5DF5Mrvz2gnjpzj2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ktqIIK5ai25xJ1T263BCnWXoXqjXoNNzFf92IRUI2mg=;
- b=CpahsaQsIuygx41/EnbhEnOPeREFIA5zOxB8hkgLBN8aEs9buf/LHJmMgh/ogtJSYMPB6Dww3Xn0Dqf7IPmcaeISq9liV4RSULmLv+nmHQNUUv7ggIG+6oZaGgnXY45J+k12S7pngSaJG1KQFjV+CjmVxKC0Qs+M6ohpjagSWNKKfilBvEhrY1+Z+x+Qgkb3w8+ur8RQTroJMpXAIMUePNrEu2zEn6ng4KwNXpFQ/BcN+FOEs3SLf/SEDL55LwQRHTQeD49E2Lf5CPHp2OfQSBBX5I48KXmQCCatfA198pCJy/vRPalAGKwtFnPLlUrYiBnsEixJIHfC01tSmwL8pQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ktqIIK5ai25xJ1T263BCnWXoXqjXoNNzFf92IRUI2mg=;
- b=nbAS69hIeL1Ncn3NlhMjSe3IO5yd3UnIk60pQIqZigDrw5Lw3p1Ejfhj57v+W4XNu0yWVo1Q9EFrzFiAT1MHPzoRfjWktyng9gIlYqCaiLzIbW/ofwn5FlgZxGrCBbkAMuQHPQ1rV3aWKBlYOakDU2piGADEBf4SYRQR/UXhkhUGS1jQg09O29NNafsKylnNAx6ZhTsGVnAyh5NToInH42TjniJ32QPt2ZzV62PnJ8ASvcYFSaht3U8oD3n3duHyRniCO7gIK35YxK5xYxlINvV7IFC1us3FH1EOowl9mAyqId6zzs/q9E7f8fB+ohoeToCUV6Iq9OqbsD/FyDHTfA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com (2603:10b6:510:157::18)
- by BN9PR03MB6073.namprd03.prod.outlook.com (2603:10b6:408:136::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.11; Wed, 11 Mar
- 2026 05:04:14 +0000
-Received: from PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a]) by PH7PR03MB6942.namprd03.prod.outlook.com
- ([fe80::8f8a:2a94:f5a8:ea1a%3]) with mapi id 15.20.9678.024; Wed, 11 Mar 2026
- 05:04:14 +0000
-From: dinesh.maniyam@altera.com
+ spf=pass smtp.mailfrom=guodong@riscstar.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-439b73f4ab4so10300912f8f.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 00:38:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=riscstar-com.20230601.gappssmtp.com; s=20230601; t=1773214738; x=1773819538;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lA+IwzWisqD9I9OjeOIKt7ZwfxOtaMhsLp6BWXsp4Yc=;
+ b=SEfVnxG6sxckUGksqLDYfCu+IulERlWbN+VDgF9FfFruY+5DYDnFMbKaP7PuADm5H0
+ M1iGSmTofCWMeYkIim9aOLVV2hHorNVUNZxV7yjx7mqoicoUxfeV2NDHPAM+2fo2c3Bd
+ KDw0QYYa93F8AIcpQGdbx72G6vqySRtwDssK20K6Y7zJpZn1ON2MZx0rfw62QbmzjN7g
+ hLqmJrTAz94dzV3UdG2Zy0SMvl6C9RS4nX7FxFv2Xe8yB4DuQkbZv/CakPKk5moj4kSm
+ /G1jGJZ1rkESEq1Y0PZiFcsKKmot4FXx1zq6v9Jwg5IhKPMyrSuhmhnH2Z2EAxldjKXT
+ paHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773214738; x=1773819538;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=lA+IwzWisqD9I9OjeOIKt7ZwfxOtaMhsLp6BWXsp4Yc=;
+ b=f4gKx5sPqiAse9AQGzQFRoJTykhgm6cHThEnwoLVDErTQRLvOPcypU9IlJyMW8pJ4i
+ abjIJzka7EAdEA+ZSEhnftHz0TDgnWyX+6lb22nXJuGf6YtYqdAHGkImNvchwxsjhKYn
+ g5EbJM355dfgb24YM+mlPIiv+MEZ4kppbO/NcN3+GdDZHcQ1FLoqfvD7nQ7MyimKKHrn
+ JXIuxU0x5cA2Ei/u5CPoh+Ft11LJQfqXQ/ybWkQcqLFVk+d/2O8JMh8HEB+srs0GHrEs
+ NO/mJVDR1lCXKxeJhIoqW3VEYIUjSIAAXuH/1eMgKG/ZHGsbgYOJdUSL1CkvG93KjXZk
+ a5ug==
+X-Gm-Message-State: AOJu0YxFN1UJfKitixP684fTAf4jnwTWeuTXgBcIAgRMp+aO7+OfPZrG
+ N5pgMSrWXAhSX83lbRPHowBwy2TYPLR2StLp3380iiEP84Pt8SIS2OfUeJul3ar9TfgAOug8yf+
+ J7G9D+XFWBR+v
+X-Gm-Gg: ATEYQzxAJ2TmHaFWgTbwQuABIRr/gNlgj/tRFPwsfvYHdGV7B4yn4EtA2QfwZRpR+S5
+ ACbZt3gcjsxgi6rRW7eizuIq3KuAq9ssS2S2JBMTzht+ZAKnDFc2sNIX2ocT1NEQY4VSpuV7TLM
+ GENkcV5OFQ+0yvZPh4U1WmembMtwEnqz/TJW3vRy3QSZrN1W+F0jR5Ajj++n9QuXJ7J/ycFYClr
+ 59h1TF0Z40YG9LSTyrLus86ZuUl/o900mUMSh2eVWpddHiMuEGsCBPU2Sk4X+MZBM34edZlrCn8
+ ZQVCr8T0HHrF6xXEoQMRO8Y5yj5g5QNe0aWOI33frBeTcwQDJvt/nzDZlbHtykWjhiO0VRegl2p
+ tyzP6WZ7oslRjRMeTKYob1DoemG4oSj+ilHK+p4aMVxd55CqMbMDE5DMtDeovY+oXrdbWkAIip/
+ TDiAZmgnIguqSeskKwQ8JaWjtoOAjdxiBq1qcOw6VaMMJH8TS144lIkKHoJg==
+X-Received: by 2002:a5d:588e:0:b0:439:5c75:dc08 with SMTP id
+ ffacd0b85a97d-439f81bc54dmr2962455f8f.10.1773214737815; 
+ Wed, 11 Mar 2026 00:38:57 -0700 (PDT)
+Received: from localhost.localdomain ([2a0b:89c0::cc:103a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-439f8104515sm4214094f8f.0.2026.03.11.00.38.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Mar 2026 00:38:57 -0700 (PDT)
+From: Guodong Xu <guodong@riscstar.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Simon Glass <sjg@chromium.org>, Tien Fong <tien.fong.chee@altera.com>,
- Kok Kiang <kok.kiang.hea@altera.com>, Dinesh <dinesh.maniyam@altera.com>,
- Boon Khai <boon.khai.ng@altera.com>,
- Alif <alif.zakuan.yuslaimi@altera.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH] arm: socfpga: Add fitImage for SPL programs periph RBF only
-Date: Wed, 11 Mar 2026 13:03:19 +0800
-Message-ID: <20260311050319.24941-1-dinesh.maniyam@altera.com>
-X-Mailer: git-send-email 2.43.7
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BY5PR03CA0028.namprd03.prod.outlook.com
- (2603:10b6:a03:1e0::38) To PH7PR03MB6942.namprd03.prod.outlook.com
- (2603:10b6:510:157::18)
+Cc: trini@konsulko.com, heinrich.schuchardt@canonical.com, rick@andestech.com,
+ ycliang@andestech.com, raymond.mao@riscstar.com, u-boot-spacemit@groups.io,
+ Guodong Xu <guodong@riscstar.com>
+Subject: [PATCH] doc: spacemit: add K1 SPL build and test guide
+Date: Wed, 11 Mar 2026 15:37:41 +0800
+Message-ID: <20260311073741.80616-1-guodong@riscstar.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260210151459.2348758-1-raymondmaoca@gmail.com>
+References: <20260210151459.2348758-1-raymondmaoca@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR03MB6942:EE_|BN9PR03MB6073:EE_
-X-MS-Office365-Filtering-Correlation-Id: b8848063-5e7d-4223-0e1a-08de7f2ba38a
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|1800799024|18002099003|56012099003; 
-X-Microsoft-Antispam-Message-Info: uT5Mz8LlfHnDVblXk3gHfAmM+fnchk4/CpqQ+B8AEbRyVfP6RP3+E+VHOvzaxPGfD+IgMab3jxwblAa+hWLjfysnUMr1q+655tipjs6V1QMJTYrX07LFF4ai1Q6ZoZE+gUARZFKyEWomuEGNpmy7W4AOgWpOgRrP7NFrUmHAoWldcB7onLgvcG8WO7HqNXG7cG1JY0px3/c1c4k2pK4v9pgX3fOEAORCESq0ke0T8qAhJPgLaGCk2GCdxuhnlj3cT+hZuqKC0M9Med86roLME/RwyFGeDGTUSqA6r+/HQY59EL2fNm9GG4fF4JBYBQ6lENUO4fS5KlOTRvS49kEdCwF5GwV9LjAaxFfdXTazQ3zza3ozHX0GlzYWVEBQtR+HP61yqglGpDaW2TVTvp6owfSbZyi3Bo0UbHJrY4jwbc+fsRyimqDTXqcazcSuzhhX+lNGpKJDF77TF9Yx+9ZNRHl2XC+l8JQdJwazEdhHHMkpPVx4Y3cVk9suT5BazB6bOodEvxt7thNTYNHXyuPvZKA1U1CXck0RQkpc16mq7c09LWR35ImEKLPaGY9btZ+fupZwjevsMrKVBNPNHwPlZ8DyVeUJsA8myWTLN3PR648jTFy/VtZi0WM24w3zmNNnt1WkG9AbXyUCKHlfFVka2Kz4evHTEwIuwL9LCtU5e0FsCBkMBYK1pW8PhxHvc882
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH7PR03MB6942.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(18002099003)(56012099003); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ckLV45Yb5ZdyrQ7IonQF0Q3g+hwDjSAKlMscYOCfQvrl0jllMuR0GF8j80Vi?=
- =?us-ascii?Q?c/ciOB0Su+/aJbbXeeV83j+nnuSGYpGqThZjTD6oI+29QpsJTcj5dSRVhzID?=
- =?us-ascii?Q?cijjcr8CUVYMS5Nqq5+7mPqLbQiCCVs9XJ9a4AxCF1eL1OpxYrxwwfdZ5eHu?=
- =?us-ascii?Q?4BmSYLIXO9GsTxrVvHaUNSSen7/7H1EF5cRyke2duanIxN2o7mghVVC821vs?=
- =?us-ascii?Q?8EQY8YYdO1ppxbp5Z1IUMhZ1ngQLzlq9OzKXYCW8Ao3yDsUDhHZntg82KfSf?=
- =?us-ascii?Q?2fyTEesFvdQnUTHZ1BQzcRUO7JmaxnApiIPN5iRURZ06YTNbezf8SK5LQqzX?=
- =?us-ascii?Q?MN0b5H4vRlCBtFto3LERB4B5berg14FKouspTcyRuJN63E4v9i48OYfTAwEK?=
- =?us-ascii?Q?/+z0Dd/iubj6xptjuQgEtvuMh0OrKmVi9zbOl24DAOi1BG54BFFvM7z8oBNX?=
- =?us-ascii?Q?uzPBlcc4c659hYo9eV+WMFgS5Y+fcx39kOIiFb7O2nM7G3bbZ6M3guOTwheq?=
- =?us-ascii?Q?/Z/BtQXCBD/xmw1edbw68o+cmF5NWIImNyb7PXo6KObR3Kgj+aumsXwdkPjd?=
- =?us-ascii?Q?9LHIwjkKdTURMSVUjxzQ+FpiRs95lKN+vtZ8SNLhRNSgTCNRPARHJUIaK4nM?=
- =?us-ascii?Q?5gtlREAkuaTHHvueXmHUfycNmU9pWFeW5h3YZC0x/liyZM6XJnom8Jqp9bBe?=
- =?us-ascii?Q?+NBzLN9p28UUOe9sdHiP0uLonbROTOGGSdH7JN0McaqzdMRtIDSTIXVZMSwH?=
- =?us-ascii?Q?GM8RBx5VnC6J40ruNMTkBlUvJQOtYT9RPi/jo0vQ/GRLFa03W2NLlHhCTAhg?=
- =?us-ascii?Q?AHbuZEaQchv7PTZPxtSQS6/Gu6O9FvphTqyxKoA07vCDodxdf7ybvu2vlP4q?=
- =?us-ascii?Q?lN3UsjRrvq+XAAWtDqAy68dQ2TgWJWJaPk6vudW6OHjlTbBEpsvms9BznXyV?=
- =?us-ascii?Q?wsNa/e6Qi0wLBKRYCxYudxzNQHKqHJFBBFPsiCl1H/kThNlwmfNAxSe0jqTz?=
- =?us-ascii?Q?FWgFSjfKWk0kesmMD04rgmjFvmG2E+j9vo82oz1AJ4sxgrAQUDPluRzkH5G9?=
- =?us-ascii?Q?wWQUu6+LgebJzLq69CsaEqS5u1kvl3E87P4aLSybE2Z9ro49hS06aNVOYmxU?=
- =?us-ascii?Q?tkUC02oDJqAxA/JJaQ4P3nHa6WPwvk73IwA2zCmQuqX4kU0ja75gGqYJ8bTG?=
- =?us-ascii?Q?GSRdYgROp7LO4jhbg3lIWNa5T8jp14d1s9hcyFg0d4snwHoAe4uvdrsIE8c9?=
- =?us-ascii?Q?uY7D001byIyksb6x1WWjTzoFm5thSDDYjTvTSjxoj2x+g9fUeFBJ4FPsRFU6?=
- =?us-ascii?Q?aALiralpmLAPaZd2Z+sm6RQaN8DaDDJhEIASALrl+DPOaFY5PHRjTakoNHXl?=
- =?us-ascii?Q?9Gv0VOt/sbSqaKksUpjLHQNxlEgfNDPrvIpJMkDDihCHIJ7DMfj4uT+QhqE1?=
- =?us-ascii?Q?twNNBt0oJsPImToCBf/F/r2mNKLk8huttWpe+wni+LNQVaHuh+qQT75WUD3V?=
- =?us-ascii?Q?CLzfH3B+PA/aoOn/XUKqq+tBu5J4LFjGeRnJv0b0hcswSkWSikRjFhy0mSQC?=
- =?us-ascii?Q?Fnqv5NDfinafwovIt5WPwqknCgATc75Fc4hT1fag8lfT/WmbUMl6ne99Eim8?=
- =?us-ascii?Q?jGgo0ZJ2nerZfgj4XzKcEW+5ocjN2+9l/2+pTPaDXgWD9IXkTZpFPe0pkahI?=
- =?us-ascii?Q?OycNTyjePWCinSdGtUbmCR+zh8GnIygU8AnTwj6/9IKVGKhKcDKigR9+tcog?=
- =?us-ascii?Q?7uYYYB9zCAzSm8LPU6C7nD277oQAIdw=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8848063-5e7d-4223-0e1a-08de7f2ba38a
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR03MB6942.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2026 05:04:14.0430 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1jG4eVOACdwBLXa44jRnEtoaDyu9lFquxPmcBblA1F/vEAKYU5rWb8bLWpspRx7UtEDrlXZpIpePCoydWa5FUoAxTxiP0AE320ZaYBx2ucc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR03MB6073
-X-Mailman-Approved-At: Wed, 11 Mar 2026 14:14:28 +0100
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 11 Mar 2026 14:14:46 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,93 +102,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@altera.com>
+The K1 SPL patchset requires DDR firmware integration and FSBL signing
+steps that are not covered by existing documentation. Add a SoC-level
+guide so reviewers and developers can build and test on hardware.
 
-This is fitImage for programming peripheral RBF only in SPL, so that user
-has option to program core RBF in U-Boot proper. The advantage of
-programming core RBF in U-Boot proper especially for SDMMC boot the
-performance can be increased up to around 90%, because program core RBF
-in SPL hitting penalty on alignment issue in common FAT driver.
-
-Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@altera.com>
+Signed-off-by: Guodong Xu <guodong@riscstar.com>
 ---
- .../fit_spl_fpga_periph_only.its              | 38 +++++++++++++++++++
- configs/socfpga_arria10_defconfig             |  2 +-
- include/configs/socfpga_common.h              |  2 +
- 3 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 board/altera/arria10-socdk/fit_spl_fpga_periph_only.its
+Following up on the discussion at yesterday's community meeting, this
+patch adds build and test instructions for the K1 SPL patchset [1].
 
-diff --git a/board/altera/arria10-socdk/fit_spl_fpga_periph_only.its b/board/altera/arria10-socdk/fit_spl_fpga_periph_only.its
-new file mode 100644
-index 00000000000..06ba0328477
---- /dev/null
-+++ b/board/altera/arria10-socdk/fit_spl_fpga_periph_only.its
-@@ -0,0 +1,38 @@
-+// SPDX-License-Identifier: GPL-2.0
-+ /*
-+ * Copyright (C) 2020 Intel Corporation <www.intel.com>
-+ *
-+ */
-+
-+/dts-v1/;
-+
-+/ {
-+	description = "FIT image with FPGA bistream";
-+	#address-cells = <1>;
-+
-+	images {
-+		fpga-periph-1 {
-+			description = "FPGA peripheral bitstream";
-+			data = /incbin/("../../../ghrd_10as066n2.periph.rbf");
-+			type = "fpga";
-+			arch = "arm";
-+			compression = "none";
-+		};
-+
-+		fpga-core-1 {
-+			description = "FPGA core bitstream";
-+			data = /incbin/("../../../ghrd_10as066n2.core.rbf");
-+			type = "fpga";
-+			arch = "arm";
-+			compression = "none";
-+		};
-+	};
-+
-+	configurations {
-+		default = "config-1";
-+		config-1 {
-+			description = "Boot with FPGA early IO release config";
-+			fpga = "fpga-periph-1";
-+		};
-+	};
-+};
-diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
-index b32f40ae408..1648e4bda4b 100644
---- a/configs/socfpga_arria10_defconfig
-+++ b/configs/socfpga_arria10_defconfig
-@@ -20,7 +20,7 @@ CONFIG_SPL_FIT=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200"
--# CONFIG_USE_BOOTCOMMAND is not set
-+CONFIG_BOOTCOMMAND="run fatscript;run prog_core;bridge enable;run distro_bootcmd"
- CONFIG_DEFAULT_FDT_FILE="socfpga_arria10_socdk_sdmmc.dtb"
- CONFIG_SYS_CONSOLE_IS_IN_ENV=y
- CONFIG_SYS_CONSOLE_OVERWRITE_ROUTINE=y
-diff --git a/include/configs/socfpga_common.h b/include/configs/socfpga_common.h
-index 2acfdc7df4a..2c01bf9d9fa 100644
---- a/include/configs/socfpga_common.h
-+++ b/include/configs/socfpga_common.h
-@@ -154,6 +154,8 @@
- 	"pxefile_addr_r=0x02200000\0" \
- 	"ramdisk_addr_r=0x02300000\0" \
- 	"socfpga_legacy_reset_compat=1\0" \
-+	"prog_core=if load mmc 0:1 ${loadaddr} fit_spl_fpga.itb;" \
-+		"then fpga loadmk 0 ${loadaddr}:fpga-core-1; fi\0" \
- 	BOOTENV
+This is placed as a SoC-level guide since the SPL build and flashing
+procedure is shared across all K1 boards. The existing bananapi-f3.rst
+will be updated to reference this in a future patch as more of the boot
+chain is upstreamed.
+
+Link: https://lore.kernel.org/u-boot/20260210151459.2348758-1-raymondmaoca@gmail.com/ [1]
+
+ doc/board/spacemit/index.rst  |   1 +
+ doc/board/spacemit/k1-spl.rst | 214 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 215 insertions(+)
+ create mode 100644 doc/board/spacemit/k1-spl.rst
+
+diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
+index e7d3d94e459..a5e35ee12ab 100644
+--- a/doc/board/spacemit/index.rst
++++ b/doc/board/spacemit/index.rst
+@@ -6,4 +6,5 @@ SpacemiT
+    :maxdepth: 1
  
- #endif
+    bananapi-f3
++   k1-spl
+ 
+diff --git a/doc/board/spacemit/k1-spl.rst b/doc/board/spacemit/k1-spl.rst
+new file mode 100644
+index 00000000000..3e22f6dec70
+--- /dev/null
++++ b/doc/board/spacemit/k1-spl.rst
+@@ -0,0 +1,214 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++SpacemiT K1 SPL Build and Test Guide
++=====================================
++
++This guide explains how to build and test U-Boot SPL on SpacemiT K1 based
++boards. It covers building SPL with DDR initialization, generating the signed
++FSBL image, and deploying via USB fastboot.
++
++Tested boards: Banana Pi BPI-F3, MusePi Pro.
++
++Prerequisites
++~~~~~~~~~~~~~
++
++- A SpacemiT K1 board with USB Type-C and UART access
++- USB-to-UART adapter (3.3V TTL)
++- ``minicom`` or equivalent serial terminal, configured at 115200 8N1
++- ``fastboot`` tool on the host
++
++Hardware Setup
++~~~~~~~~~~~~~~
++
++**1. UART Connection**
++
++Connect a 3.3V USB-to-UART cable to the **J25** header on the BPI-F3.
++Remove all other cables first, then attach UART::
++
++    BPI-F3 top view
++    +--------------------------------------------------+
++    |                                                  |
++    |   J15: USB-C [====]     [FDL] [PWR] [RST]       |
++    |                                                  |
++    |                                                  |
++    |                              J25 (UART header)   |
++    |                              [TXD] [RXD] [GND]  |
++    +--------------------------------------------------+
++
++After UART is connected, attach the USB Type-C cable to J15 to power on.
++
++**2. Serial Console**
++
++.. code-block:: console
++
++   $ minicom -D /dev/ttyUSB0
++
++Default baudrate: 115200.
++
++Building U-Boot SPL
++~~~~~~~~~~~~~~~~~~~~
++
++**1. Obtain the DDR training firmware**
++
++The DDR training firmware is a proprietary binary provided by SpacemiT. It is
++not included in U-Boot and must be downloaded separately from:
++
++https://github.com/spacemit-com/spacemit-firmware/tree/master/k1/v0.2
++
++Download ``ddr_fw.bin`` from that directory.
++
++This binary is integrated into the SPL image at build time via the binman
++framework. When the SPL image is loaded to SRAM (e.g., via USB fastboot),
++the SPL executes the DDR firmware from SRAM to perform DDR initialization.
++
++**2. Build SPL**
++
++.. code-block:: console
++
++   $ export CROSS_COMPILE=riscv64-linux-gnu-
++   $ export ARCH=riscv
++   $ export DDR_FW_FILE=$(pwd)/ddr_fw.bin
++   $ make spacemit_k1_defconfig
++   $ make
++
++Output: ``u-boot-spl-ddr.bin`` in the build directory. This image contains the
++SPL code and the DDR firmware blob packaged together via binman.
++
++.. note::
++
++   If ``DDR_FW_FILE`` is not set, the build completes with an empty
++   placeholder. The resulting SPL will boot but cannot initialize DDR.
++
++**3. Generate signed FSBL image**
++
++The K1 BootROM requires a signed first-stage bootloader (FSBL). The signing
++tool (``tools/build_binary_file.py``) is in SpacemiT's vendor U-Boot repository:
++
++.. code-block:: console
++
++   $ git clone https://gitee.com/bianbu-linux/uboot-2022.10
++
++The script uses ``fsbl_ddr.json`` which may not exist by default. If
++``fsbl_ddr.json`` does not exist in ``uboot-2022.10/spl_bin/configs/``,
++create it by copying ``fsbl.json`` and replacing the reference to
++``u-boot-spl.bin`` with ``u-boot-spl-ddr.bin``:
++
++.. code-block:: console
++
++   $ cd uboot-2022.10/spl_bin/configs
++   $ cp fsbl.json fsbl_ddr.json
++   $ sed -i 's/u-boot-spl\.bin/u-boot-spl-ddr.bin/g' fsbl_ddr.json
++
++Create the ``fsbl.sh`` script below in the ``uboot-2022.10`` directory.
++Update the path variables to match your local setup:
++
++.. code-block:: bash
++
++   #!/bin/sh
++   MAINLINE_UBOOT_IMG_PATH="{your path}/u-boot"
++   MAINLINE_SPL_IMG_PATH="{your path}/u-boot/spl"
++   FSBL_PATH="{your path}/uboot-2022.10/spl_bin"
++   KEY_TOOL_PATH="{your path}/uboot-2022.10/tools"
++   CONFIG_PATH="{your path}/uboot-2022.10/spl_bin/configs"
++
++   echo "Clean binaries in ${FSBL_PATH}"
++   rm -f ${FSBL_PATH}/u-boot-spl-ddr.bin
++   rm -f ${FSBL_PATH}/u-boot-spl.bin
++
++   if [ ! -d ${MAINLINE_SPL_IMG_PATH} ]; then
++           MAINLINE_UBOOT_IMG_PATH="{your path}/build"
++           MAINLINE_SPL_IMG_PATH="{your path}/build/spl"
++   fi
++
++   cp ${MAINLINE_UBOOT_IMG_PATH}/u-boot-spl-ddr.bin ${FSBL_PATH}/
++   python3 ${KEY_TOOL_PATH}/build_binary_file.py \
++       -c ${CONFIG_PATH}/fsbl_ddr.json \
++       -o ${FSBL_PATH}/FSBL.bin
++
++Then run:
++
++.. code-block:: console
++
++   $ chmod +x fsbl.sh
++   $ ./fsbl.sh
++
++Output: ``FSBL.bin`` in the ``spl_bin`` directory, ready for deployment.
++
++Deploying via USB Fastboot
++~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++To enter BootROM fastboot mode:
++
++1. Disconnect USB Type-C cable from J15 (power off)
++2. **Press and hold** the FDL button (see board layout above)
++3. Reconnect USB Type-C cable while holding the FDL button
++4. Release the FDL button
++
++The serial console should show a BootROM prompt indicating it is ready to
++accept an image via USB.
++
++On the host:
++
++.. code-block:: console
++
++   $ sudo fastboot stage FSBL.bin
++   $ sudo fastboot continue
++
++Expected Output
++~~~~~~~~~~~~~~~~
++
++After successful SPL boot with DDR initialization, the serial console displays
++messages confirming:
++
++- I2C and PMIC initialization
++- DDR training firmware loaded and executed
++- DDR initialization complete
++
++Sample DDR training success log::
++
++    Read Training.....
++    each RX Vref corresponding min margin = 9 10 10 11 11 12 11 11 11 10 10 9 8 4 4 0
++     optimize Rx Vref adjust=5 ,corresponding best margin=12
++    Again!!! training optimize Fine Rx vref step = 5
++    Write Training.....
++    each TX Vref corresponding min margin = 9 9 9 10 9 10 10 10 10 10 10 10 10 10 10 10
++     optimize Tx Vref adjust=24 ,corresponding best margin=10
++    Again!!! training optimize Fine Tx vref step = 24
++    Training status[0xFFFFFFFC0058000]=0x00000000
++    DDR DQ rx margin:
++    0xc083feb0: 0d 0d 0d 0c 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0d 0c
++    0xc083fec0: 0d 0d 0d 0d 0c 0d 0c 0d 0c 0c 0c 0d 0d 0d 0d 0d
++    DDR DQ tx margin:
++    0xc083fed0: 0b 0b 0b 0a 0b 0b 0b 0b 0a 0b 0a 0b 0b 0b 0b 0a
++    0xc083fee0: 0c 0b 0b 0a 0b 0b 0b 0b 0a 0a 0a 0b 0a 0b 0a 0a
++    change to 2400MTPS
++    !!!!!ADDR[0xffffffffd4282bb4]=0x00033b40 !!!!
++    frequency change done!!!!
++    ADDR[0xffffffffd4282bb4]=0x00033b40 !!!!
++    150000 KHZ: 1; 150000 KHZ: 1; 200000 KHZ: 1; 266000 KHZ: 1; 300000 KHZ: 1; 400000 KHZ: 1; 600000 KHZ: 2; 666000 KHZ: 3;
++    Change DDR data rate to 2400MT/s
++    ddr_early_init: ret:2400
++
++Key success indicators:
++
++- ``Read Training`` / ``Write Training`` - DDR read/write training completed
++- ``Training status[...]=0x00000000`` - training completed with no errors
++- ``change to 2400MTPS`` and ``frequency change done`` - DDR frequency switch succeeded
++- ``Change DDR data rate to 2400MT/s`` - DDR running at target speed
++- ``ddr_early_init: ret:2400`` - DDR init function returned successfully
++
++.. note::
++
++   After DDR init succeeds, SPL proceeds to load U-Boot proper. If U-Boot
++   proper is not yet available (as in SPL-only testing), you will see
++   ``SPL: failed to boot from all boot devices`` - this is expected and
++   confirms that SPL with DDR init is working correctly.
++
++If SPL hangs before printing DDR messages, verify that ``DDR_FW_FILE`` was set
++during build and that ``ddr_fw.bin`` is not empty.
++
++References
++~~~~~~~~~~~
++
++- `DDR firmware repository <https://github.com/spacemit-com/spacemit-firmware>`_
++- `SpacemiT vendor U-Boot (signing tool) <https://gitee.com/bianbu-linux/uboot-2022.10>`_
 -- 
-2.43.7
+2.43.0
 
