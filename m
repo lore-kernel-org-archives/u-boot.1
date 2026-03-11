@@ -4,107 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDEBEFD0651
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480CB1125839
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 14:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 924D884132;
+	by phobos.denx.de (Postfix) with ESMTP id D55C38414E;
 	Wed, 11 Mar 2026 15:23:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="mWe1oLkt";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="Mm5nAidV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 109E184013; Wed, 11 Mar 2026 14:31:43 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 4FCB284065; Wed, 11 Mar 2026 15:20:48 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D6A484013
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 14:31:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42AA184010
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 15:20:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=flipper.net
+ header.from=fairphone.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-439c6fc2910so5777388f8f.0
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 06:31:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-661cfb9f3aaso8117991a12.2
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 07:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1773235900; x=1773840700; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Q+XhumOtefTxpMhfaBd1SgLoi8BcgToQqmVei1LfLWY=;
- b=mWe1oLktSBP6y60urLEbtZreMVtVxTGkbGRndXImI+N4f5syea1GP1foCmLE6rbLBA
- oV65R8QYq89BZZaCUDMCjwPq3AWQ1ezQuIWdMrY1sR6ZRZGDhmV93F9rZv8udAhxrH2a
- 32qXwFhqUmNvLnwXfoIP4Yx9tQ8dSSuaVdGQyOHDQGWzcMzgxKFEdrA8+g//TqA3HV8b
- G4I4iauyjmKfp2cklg3eT4BQ8jdh0jKhlTv7Y4gcQ0eSvPug5ibaYEX7u05NG0yZtlde
- r9mR9Wc9sVNXBFbe+LDqwtSmPu8aD44ltYNJ39uiRY0T6aqbHFp0KtbeMyxYV51BnNjl
- FaLw==
+ d=fairphone.com; s=fair; t=1773238846; x=1773843646; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OPmrouOuvjEZYscxnkUp68Ju3BQaUZ1OnQ+kMSQdBGI=;
+ b=Mm5nAidViefw4GhdOR6tLLCfxvQmHJIhYV33VMvGKUYr51TxxHVlQFMbiaX/B2jPjL
+ I1VsLLQ8KgIqr+nc1K1CFDDql5v17UX/0GKDY72mhbdbpASzCq4UrcopHFwPEnA6S/S1
+ gxghkiNp8fLcT5jXMGShPk57GZ9GYQ8cnesK/SHud3SMb9ZlsYszgW9ELT9PwB/bbu1S
+ 9IdDlAd+iYhC8GWIfMsQsD4WJIgDJibtkx/2GdzYDG4Hp1pytI7jL3iRf6RAQ34Pt4Hq
+ Lb0eBEis4UvBgRvOEsLCDWiGZDgoCp+4BkHzMnRm/jIIIp3PsUl5PYj1J1n/rQ0XxFfB
+ PpwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773235900; x=1773840700;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Q+XhumOtefTxpMhfaBd1SgLoi8BcgToQqmVei1LfLWY=;
- b=a1ydtOCLlcoZ25gwijc2pAkRZQ8i/5kf3bwQpCiLeFC4aOby3SAWO1JnyFc2Zeam1M
- hKpC/4Ix15BJK/Rwy13A15YSMfdnbp8loYRymBI8/G4zCyR1cacCJ1Xi0tzOg7rw53SH
- Kh6RdsZwWFnmkIj+T9Yf9qH9ROTHNvBzNE6eQnDV+RibpHNoA9GCLuKKBXdUQXDAhxr5
- l0x2r91am3r4a+o1Mc7uUin2rPRble+zcqJoRjX84ExuJvXQBRYMmPtZ4zHZirs1G/zF
- pTXnJMyRkPdcyWA+0KOR2zRh6cUO24QL3YJYSybhBAhlHay/FKP5ePYo/OKIrdhTtLp8
- q7zA==
-X-Gm-Message-State: AOJu0Yz7Sc6+3eTYgNL36WiKShGqh49Vnt2iuI3V2ixCzEClDf6AdocX
- wtLHItBlNLHDsHeA2MrmBnFScyGwHqJEbMLLZFqQqW57eAWTKbDd0PSgsd5TIMIK8rc=
-X-Gm-Gg: ATEYQzw0pOMeyeEOOcOt0CIK/r11c2+ocaV7LNU/jz5XNXOJrDHIwJQV9p83MIhVRiQ
- eV2zWxg5LnlQpluy1ZLOHnxxQnyfxQ7da6F7i2YJ302y5Nb4oEnpXNbGm2DBFWo/EyZ9YBuJ0zx
- oac5kl8VoKvAV2rtJnx14onoy61JvKQmAy2t9vriDXgox8LcPyDNwKYL+AcI5TQLI5hTBW3E3ct
- AuAEhYcEy78mZH+AzEaOMSSAmBAH8GurnU7ZzyS7PeRVi+DpQMT1DFl65jbOiQNi6GBt5CBjQcd
- BUAGDeAJIId4X+78eZHI8AcLvxqld5FJHw6pFiUtDNStuhFtG4uq9NQ2v3cpwHB4/PsiFYHk7aK
- gfPTl1eOVhFyKXsPN3mK+P+myWbisn343ebhGz9EFpu4gyzmJYsiSovVMIldog4g9q/RNby9Rcc
- w9sTDgHi7XtPOt9Pt8W6puj7YhTUvkxrq1gO6A1Z/6WtzjMpNBZag2dBBvp5aAKW/j1Ps/4GBmR
- 2xVzg==
-X-Received: by 2002:a05:6000:2301:b0:439:be67:a02f with SMTP id
- ffacd0b85a97d-439f842c0a0mr4905087f8f.37.1773235900349; 
- Wed, 11 Mar 2026 06:31:40 -0700 (PDT)
-Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
- [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439f81a9e25sm5903038f8f.15.2026.03.11.06.31.36
+ d=1e100.net; s=20230601; t=1773238846; x=1773843646;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OPmrouOuvjEZYscxnkUp68Ju3BQaUZ1OnQ+kMSQdBGI=;
+ b=Tsabb4xoXtCPiLLUE4wV9DVb24FJI8tZe/Q8qCXQxc+o6TEtj9HlfHXAV10fq++Sjq
+ caYpjg0Y5uidMtA1mM/fuHpxD6MQ/JKmdmGqR+Mjz2BrE6N1AbnaS8YKZoQ0h1rmVMrH
+ NB2l0afe9Wti1QMZdepDZf3Mh34BEjQBE7ClOocda0RJqIQ1abe3lr+CCIk9tnU6kngL
+ nsI6aGkwBnbMxLk3jzuOngstSnezsTRj1jduX4/X/KbR544lGSaoDBL4GLPT/s8A10B2
+ LAOm0KxzZ49asrqn1UDuAKPTwXxpYDbSt8nV8dtRaUtfYOTnOKiMB3lB0QoX3iC+N/Sc
+ 9RoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVi4WIBhFTpCUr8cIDn7QCte5UUIw4G5LeByakmk7RHnAVcxUCBry4HIzRkv3AbTI0CzXIuH8k=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTF0RQFuZnxpm0k6BPQQmcZy4xDYBwb9RV+I1AOW0d67ZI83Sv
+ 1pTRuXao61thU5xTH/WXZCy1kCKaposPdHUqC8WP4+V7U+YYKjnWloWlQynkuXqG5mU=
+X-Gm-Gg: ATEYQzwa21F2KdJtdq51WuJetHezOaZ9zJRTWMvqSvidCOoglz6U3HBvk0VR1uE2at0
+ d7vOT+IsVGTr6Qg/LQI1SyJHkL3JKyb3F8gVadLdmYyt9BJ4AW6S3cneHc7x0WG5UCpJFV64754
+ 94StB1oUTri0FX4qTC9PFL2SNIUzRmXQDL3q5TEOxvbVW/4No+W+da7KLg2XkDe1mmwKXJE5Qts
+ oBNNWCvbwGGpLgADKXpPw8ZL8ZLfqGVWk21dJNWd0tCa1NbT0G5q218Mlp/MOURjOkiRx8vSO8Y
+ jZdpK3ql2l1cUVixHFq2cBpmPyRM/VXi0HuzR1Eq5N+8SL3JTUjLphKSoE+p0oqnI4vORXd5IT3
+ iGsTYoq1Z9GjgoeYkbseOHWyW6GaJmM5OJzdQFKzgkBCLlUEoemIjDx9EDk05Z2T+gnvNhU7p5Q
+ RUC7j/SNsy8e8dRcWPoUYNOPfJ/cpi8yzm0Hrb30kqN+qiN0O+QmTNBOsWLS/ZRVWGniMNfvKIa
+ tI+mg==
+X-Received: by 2002:a05:6402:358e:b0:662:811d:60fa with SMTP id
+ 4fb4d7f45d1cf-663187d8caemr1325931a12.0.1773238845583; 
+ Wed, 11 Mar 2026 07:20:45 -0700 (PDT)
+Received: from [172.16.240.100] (144-178-202-138.static.ef-service.nl.
+ [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6631503c903sm543467a12.20.2026.03.11.07.20.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 06:31:40 -0700 (PDT)
-From: Alexey Charkov <alchark@flipper.net>
-Date: Wed, 11 Mar 2026 17:31:01 +0400
-Subject: [PATCH v6 6/6] rockchip: rk3576-nanopi-m5: Enable UFS support
+ Wed, 11 Mar 2026 07:20:45 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH 0/7] Qualcomm Milos SoC bringup
+Date: Wed, 11 Mar 2026 15:20:40 +0100
+Message-Id: <20260311-milos-bringup-v1-0-eb905c467f10@fairphone.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260311-rk3576-ufs-v6-6-c7c353739242@flipper.net>
-References: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
-In-Reply-To: <20260311-rk3576-ufs-v6-0-c7c353739242@flipper.net>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Heiko Stuebner <heiko@sntech.de>, 
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMywqDMBCF4VcJs25KYkMrvkpxkctoB5rETlQE8
+ d2b1uV/4Hw7FGTCAp3YgXGlQjnV0BcB/mXTiJJCbWhUc1c3rWWkdy7SMaVxmSSG1qkhPGxrPNT
+ PxDjQ9vee/dmMn6Wy8zmCswWlzzHS3In1x16VkewN9MfxBeKOdsOPAAAA
+X-Change-ID: 20260311-milos-bringup-ed8b0fd7a84c
+To: Sumit Garg <sumit.garg@kernel.org>, u-boot@lists.denx.de, 
+ u-boot-qcom@groups.io
+Cc: Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Christian Marangi <ansuelsmth@gmail.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Finley Xiao <finley.xiao@rock-chips.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, 
- Joseph Chen <chenjh@rock-chips.com>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- Dhruva Gole <d-gole@ti.com>, Anshul Dalal <anshuld@ti.com>, 
- Alexey Charkov <alchark@flipper.net>
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, 
+ Danila Tikhonov <danila@jiaxyga.com>, 
+ David Wronek <david.wronek@mainlining.org>, 
+ Alexey Minnekhanov <alexeymin@postmarketos.org>, 
+ Lukasz Majewski <lukma@denx.de>, Aelin Reidel <aelin@mainlining.org>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>, 
+ Luca Weiss <luca.weiss@fairphone.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1813; i=alchark@flipper.net;
- h=from:subject:message-id; bh=MYI7C+v+Y8HLbevdhZgA5EMU7yIMGDbC5lBKKTl6hfk=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWRuzFugqM4Qufil6LnTa1Y5Xr0Vl3t2b+T28p+/8pbnP
- k/qKn6/pGMiC4MYF4OlmCLL3G9LbKca8c3a5eHxFWYOKxPIEGmRBgYgYGHgy03MKzXSMdIz1TbU
- MzTUMdYxYuDiFICpnrCOkWGKbElqcmHplSsCb0qjqmbLfInf5VFdueoGN/9vMe/laecZ/rvdOD+
- Tu9Jnzrld+n+sLrLpJvS/NRC589rErmlPm4blZh4A
-X-Developer-Key: i=alchark@flipper.net; a=openpgp;
- fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773238844; l=1815;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=nLeK2tey56qt7XccTPmSFpboWYD6Tr7NljbK7PBt1iQ=;
+ b=mlYdXkqrHq8TrcYUkLMYTSxEsfocoBH+ngTIbozSbQNU7+bTPJ8w0ny5BxHE0oXUYR95QFfJ5
+ DzhFC32aTh+AwrAVWQDWwM8U2Q6+nMvRIzE7d+tBG3XEDUdwt16/WtO
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 X-Mailman-Approved-At: Wed, 11 Mar 2026 15:23:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -122,64 +124,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NanoPi M5 supports UFS modules to be inserted into its eMMC/UFS slot,
-using the on-chip UFS controller inside the RK3576 SoC.
+Add pinctrl, clock drivers, UFS PHY configuration, PM7550 regulators and
+GPIOs to support the Milos SoC in U-Boot.
 
-Enable respective drivers in its default config to be able to load
-kernels from UFS.
+The milos.dtsi is part of Linux since v7.0-rc1. UFS is still on the
+mailing lists but parts are slowly getting picked up, so hopefully v7.1
+will see some parts already.
 
-Signed-off-by: Alexey Charkov <alchark@flipper.net>
+Working features, as tested on Fairphone (Gen. 6):
+* Earlycon
+* UART
+* Framebuffer (with additional patches, both dts and u-boot simplefb.c)
+* Power + Volume buttons
+* USB
+* UFS
+* SD card
+
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 ---
- configs/nanopi-m5-rk3576_defconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+Luca Weiss (7):
+      drivers: pinctrl: Add Qualcomm Milos TLMM driver
+      clk/qcom: Add Milos clock driver
+      phy: qcom: Add Milos to QMP UFS PHY driver
+      regulator: qcom-rpmh-regulator: add support for PM7550 regulators
+      gpio: qcom: Support GPIOs on PM7550 PMIC
+      qcom_defconfig: Enable Milos clock driver
+      board/qualcomm: add debug config fragment for Milos
 
-diff --git a/configs/nanopi-m5-rk3576_defconfig b/configs/nanopi-m5-rk3576_defconfig
-index 28427390a62b..558131bf81c5 100644
---- a/configs/nanopi-m5-rk3576_defconfig
-+++ b/configs/nanopi-m5-rk3576_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_SF_DEFAULT_SPEED=50000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-nanopi-m5"
-@@ -19,8 +20,10 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-nanopi-m5.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_SPL_MAX_SIZE=0x40000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_DM_RESET=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-+CONFIG_SPL_UFS_SUPPORT=y
- CONFIG_CMD_MEMINFO=y
- CONFIG_CMD_MEMINFO_MAP=y
- CONFIG_CMD_ADC=y
-@@ -30,6 +33,7 @@ CONFIG_CMD_I2C=y
- CONFIG_CMD_MISC=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_ROCKUSB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
-@@ -63,6 +67,7 @@ CONFIG_PHY_ROCKCHIP_USBDP=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-@@ -75,4 +80,6 @@ CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_UFS=y
-+CONFIG_UFS_ROCKCHIP=y
- CONFIG_ERRNO_STR=y
+ board/qualcomm/debug-milos.config             |   5 +
+ configs/qcom_defconfig                        |   1 +
+ drivers/clk/qcom/Kconfig                      |   8 +
+ drivers/clk/qcom/Makefile                     |   1 +
+ drivers/clk/qcom/clock-milos.c                | 224 ++++++++++++++++++++++++++
+ drivers/gpio/qcom_spmi_gpio.c                 |   1 +
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c           |  88 ++++++++++
+ drivers/pinctrl/qcom/Kconfig                  |   8 +
+ drivers/pinctrl/qcom/Makefile                 |   1 +
+ drivers/pinctrl/qcom/pinctrl-milos.c          | 104 ++++++++++++
+ drivers/power/regulator/qcom-rpmh-regulator.c |  33 ++++
+ 11 files changed, 474 insertions(+)
+---
+base-commit: 79126f765ff9fa390ced0c1f7a94b30c6c36f09a
+change-id: 20260311-milos-bringup-ed8b0fd7a84c
 
+Best regards,
 -- 
-2.52.0
+Luca Weiss <luca.weiss@fairphone.com>
 
