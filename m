@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 324691125811
-	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 18:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41CCA1125863
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 18:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85F5584013;
-	Wed, 11 Mar 2026 19:11:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF0F184166;
+	Wed, 11 Mar 2026 19:11:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CGtH+HpT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ir/2poU3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87CA684035; Wed, 11 Mar 2026 19:11:22 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 5830984175; Wed, 11 Mar 2026 19:11:51 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A679A83FEC
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 19:11:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 024D78416F
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 19:11:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-439a89b6fd0so158408f8f.2
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 11:11:20 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-439cd6b0aedso143559f8f.1
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 11:11:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773252680; x=1773857480; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1773252708; x=1773857508; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=vdOtFh0BZ6IXrv6xJ0pqbKih1eB2TeMoQrArhLNmysE=;
- b=CGtH+HpTg0kcA0r2d5t6Ya4qvmg8wXqNpP4ms64rquWIYsSW9rF5XlPX5f50cH8Q0i
- Qu5W/2Yc+vu6DsJyz4W2bh/So/o0WuO6l0LVebpWZqm4il4/0LmnLTFBBFAWQ0ts7XVW
- Ciu62j5+pdSexvGvbwlQ8q0jhp7HdODSJF96/g7Mt+YfXozO5qmFFeJzUmHRKjO8qGgw
- G8ZVgPAM5VpVIIE7GVW9UCAhQm41yAuGg1QSWkvLPYMnH4knNMljZ8gSNCPjosuCN2oW
- 5r04eM1El/jmmRZYuhXSFx6uP9FPAiMyh30H3NYlRWbNO3+HJ+2wzQmerAMcafDFL5Hz
- kqbQ==
+ bh=Vre8CLsqI4vWNUUfYCtvla/tvnlJy8aDbjOULJUcFfo=;
+ b=Ir/2poU3ZqPg53ll15KVe72ShuZJolNj3TejC15rS2WsE3TfxdYY/TiHUSIgovvksE
+ MFIvEHL/0QnNmKHWBq56JnCDjLEVI6offWqIzD622XawXC9LWc/4FEWrDpLVDQ1YH5+m
+ +TT1e7TQgsUFJBrquuHVqlfEYTgQ6jl26T9/IU08QmZdMWNlFZQ5vRXa1+p0OeQIQ17R
+ BXJrvrGdSJZStLE5Un955oI2dmTsHjLZJQIJ5uvkCxiAfcrRQZ8Z4+QEoT6wh86+7aQB
+ pSpMHPVxNnyrtKKX+3de9HU1A4gPaGZbAZ5F2M1QIVK8vyULmShc215HjOcK48h0Ltk3
+ qwBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773252680; x=1773857480;
+ d=1e100.net; s=20230601; t=1773252708; x=1773857508;
  h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vdOtFh0BZ6IXrv6xJ0pqbKih1eB2TeMoQrArhLNmysE=;
- b=I8rLZzvimy9fpDjdHqCiASx6F4wAOgNl+6WoPHgXXw3aP6UPeGY7SGREdh0io4DEoK
- gZMATESrGTTxIum2gAMXRNmyFTTlAvFgrB/hAENHI/7kRTemsgcP+K2nZPGzlpLhnIjP
- y0sseXNOT8BVtHPMOcmNRvch22eCqs8e4T0LYH91Q5OsXc9RbLRZpQHJrS/zR42oMeRk
- Y+3zLSKY2catJ6hl7LL/3ke1Sjv+HIbx3YNiYZz1NWsFsTu8ZmfUUQWJg39XxccqJb/5
- thODguAcvk0qWlu+NygLzRi6ZBRcnmWhzGLan7Egg6sKYKsDAJAwQf4JG7L6VsoWp8d1
- jhuw==
+ bh=Vre8CLsqI4vWNUUfYCtvla/tvnlJy8aDbjOULJUcFfo=;
+ b=aVQSRRb/wOgt76iqahyeVcEi96a3DFS4J9doOUheq2TNmfrOd3P4nFwgkf+Dm1r4Fy
+ MoGyYNgipaaUAbAcHFb0RyCt58Fy2971iV2UcCFKQdL7jy0z9M5BIv1PLeo63LfrnjyY
+ U8rsLOcg8VUTx0PxISmnUnSEqQjx/Xl2kkoUmb8unkbWRidM8425ZPDBv/zR8uqGyW8F
+ I212aVo3KdVdSJXUY3KQEOyv5eZS1yptzrFt7J7YXUv3a0IsQ6lCzHxnVge5E9f7nEvj
+ 27BZLcDC7QxCqALZ8eZg97zocqJQ+9eyM2PVrpiHDEMAhtW3u7kDndkVLbVagXk0B5mH
+ zyGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUoArMINnWI2ovOAaEi5VldhLWlkgTaCL+JhhxFrMNxYK664mcJg9POPNhnBXbTbbucXwS7ebk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8HVc60TRb7GyoDlndmGNqNQ8GVRYVQqRW/TD0bDp6yC+5blqJ
- MsHrSYL/Lf90Vkbib1gSgtfivH+bWb6K2fGyee9jkii4M0mPAIxgQbYr
-X-Gm-Gg: ATEYQzxuGjPOVr36K/ae94DxKFu9avabVIbQaVUfnXp18K99RVGqrgj8A7Li/k+i2Ji
- 7Rkno+71mXRP8kpNPgTv6cWo+U6YTYWhy4Hvy2BNN3UPuuVpkEgTeVqpb3G5/Rzs2Is0cF0K4Bw
- DkO6Nz21azlbAF2MN9MvJhTZjIwGg/E/yp1xTOHB4/zaEAtMhapjtTergK7fVM8Ek3S9auRUsw9
- cXaBRtz9Ouot3C6t1qXaZYHUxp3tfpLfaD1L9rXicx9W2RO8STC+MjMzbalgq1r8LvDh6iEhGNM
- lss7Ok0D15Vhhdx6wLALZLs8+SVotIcjI4DuV7bggl0rLHaVtg2JunwuDZHmeP7aULKDQLp66ux
- xLB8CPgPZDjTXmCz2xxOnCuaHx6IruFvtbJVO5NxXwfNOSrpbRiXIQ7MVTbDx+uWhMd1V/u8qgR
- FM4s0qXt7jvMP0gZDg7BjLhyuCfbNtCD2e+21csT0Nl/5clzNZkNYJlYJNhIjzmwQMK8nqHV/Q3
- YA=
-X-Received: by 2002:a05:6000:26c9:b0:439:be4e:6e58 with SMTP id
- ffacd0b85a97d-439f821fe85mr6834846f8f.47.1773252679663; 
- Wed, 11 Mar 2026 11:11:19 -0700 (PDT)
+ AJvYcCVdbS4q6jujrS5pPCbQ9c/McMM5Vk+kDGywwn5RfbGnZBp/pbRwyBpjkviN8DyM8qJNlGvNbpw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwECjF3cEELvqTkxzWkflT7QCWE5AE79yaa7aGGbqT7ZXTebdXL
+ 7mE2dHZgdNS6tdGb+gMZUCXJeXtq3zmW1p0TDlTUlWBq4yCJN5eG27fHIDawbg==
+X-Gm-Gg: ATEYQzztUbix2oTmDFrMCDwtCXOg5jBBAYiZytP0xOgJAT/pSH5BUCDXmB5Q+bx58hv
+ +r/JOG9wfWWo2oTp4BeaoXLc1H+T1y8qa2Ml1NKltYf+fSWjdNwpESETtzbBUj+vwGoD6egkxkK
+ yxzwW016YHNAYLWlGGuT66nCJSy62FrCL68e/KbAmtxxmXIw6uPuWFYJHdgtOet8dv7ZoKuGg+w
+ sx7gZGwooi+h6KLSEYt6m7Q86Zh84+q1tyfoYDHjJUho3/72bG+YDdgEzB5eOV+tnikQp0ABlqp
+ lew3/Z4EwGlTfrl2C+iEEYYg2wQ1ITxCjtxSfLi/UNPBWw3UzxM5xkjo6IZhwQobXlzvgbMmQQ6
+ FvrZtBXY90Vnw8IfEnMfuQyptBsurVxfmEddQYPSl96qXAEOLoI3A9+S0MU0WmlnUtouXTVhBHp
+ veNiOVEfReWLBbizyfb1zqji3SvcP2JK/ZU4Ykx+KYdEU1np3wiBTgaYIYgHnXoRVICqhTFVoxn
+ Ew=
+X-Received: by 2002:a05:6000:2505:b0:439:d7e1:fc51 with SMTP id
+ ffacd0b85a97d-439f8222f84mr7250873f8f.36.1773252708248; 
+ Wed, 11 Mar 2026 11:11:48 -0700 (PDT)
 Received: from ?IPV6:2001:9e8:9a:de10:fba3:eefe:bd9c:fc8c?
  ([2001:9e8:9a:de10:fba3:eefe:bd9c:fc8c])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439fe2187aasm954740f8f.30.2026.03.11.11.11.18
+ ffacd0b85a97d-439fe1a78cesm989583f8f.11.2026.03.11.11.11.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Mar 2026 11:11:19 -0700 (PDT)
-Message-ID: <b8787924-38ae-4bd2-9d18-ec8bfc93eb79@gmail.com>
-Date: Wed, 11 Mar 2026 19:11:18 +0100
+ Wed, 11 Mar 2026 11:11:47 -0700 (PDT)
+Message-ID: <361e8d81-510d-4e16-9aca-294a1dc0637f@gmail.com>
+Date: Wed, 11 Mar 2026 19:11:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 3/7] mips: loongson: lowlevel debug serial
+Subject: Re: [PATCH v6 4/7] mips: loongson: ls1c300 board support
 To: sgdfkk@163.com, duhuanpeng@139.com, u-boot@lists.denx.de
 Cc: chenhuacai@loongson.cn, jiaxun.yang@flygoat.com,
  Du Huanpeng <u74147@gmail.com>
 References: <20260311084129.12809-1-sgdfkk@163.com>
- <20260311084129.12809-4-sgdfkk@163.com>
+ <20260311084129.12809-5-sgdfkk@163.com>
 From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260311084129.12809-4-sgdfkk@163.com>
+In-Reply-To: <20260311084129.12809-5-sgdfkk@163.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,18 +111,28 @@ X-Virus-Status: Clean
 On 3/11/26 09:41, sgdfkk@163.com wrote:
 > From: Du Huanpeng <u74147@gmail.com>
 > 
-> set pin to uart alternate function and enable uart for lowlevel debug,
-> also future pinctrl driver can base on this code.
+> - 64MiB SDRAM K9F1G08
+> - 4MiB spi flash
+> - ethernet DM9161CEP
+> - UART2 console
 > 
+> Links:
+> https://dfgh.top/loongson
 > Signed-off-by: Du Huanpeng <u74147@gmail.com>
 > ---
->   arch/mips/mach-loongson/include/mach/serial.h |  16 +++
->   arch/mips/mach-loongson/ls1c300/gpio.c        |  66 +++++++++++
->   arch/mips/mach-loongson/ls1c300/serial.c      | 104 ++++++++++++++++++
->   3 files changed, 186 insertions(+)
->   create mode 100644 arch/mips/mach-loongson/include/mach/serial.h
->   create mode 100644 arch/mips/mach-loongson/ls1c300/gpio.c
->   create mode 100644 arch/mips/mach-loongson/ls1c300/serial.c
+>   board/loongson/ls1c300-eval/Kconfig     | 12 ++++++
+>   board/loongson/ls1c300-eval/MAINTAINERS |  7 ++++
+>   board/loongson/ls1c300-eval/Makefile    |  3 ++
+>   board/loongson/ls1c300-eval/board.c     | 19 +++++++++
+>   configs/ls1c300_defconfig               | 52 +++++++++++++++++++++++++
+>   include/configs/ls1c300.h               | 36 +++++++++++++++++
+>   6 files changed, 129 insertions(+)
+>   create mode 100644 board/loongson/ls1c300-eval/Kconfig
+>   create mode 100644 board/loongson/ls1c300-eval/MAINTAINERS
+>   create mode 100644 board/loongson/ls1c300-eval/Makefile
+>   create mode 100644 board/loongson/ls1c300-eval/board.c
+>   create mode 100644 configs/ls1c300_defconfig
+>   create mode 100644 include/configs/ls1c300.h
 > 
 
 Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
