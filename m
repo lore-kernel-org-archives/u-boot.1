@@ -4,61 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB7FFD88CC
-	for <u-boot@archiver.kernel.org>; Tue, 10 Mar 2026 23:18:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E7FFFD88D4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Mar 2026 00:17:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4235483FA6;
-	Wed, 11 Mar 2026 00:18:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 8AEC383FE1;
+	Wed, 11 Mar 2026 01:17:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="AaZZRIBt";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ocIe6rP9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 566CD83FA3; Wed, 11 Mar 2026 00:18:40 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A45F883FDE; Wed, 11 Mar 2026 01:17:46 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96BA583FA6
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 00:18:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=fc7c=BL=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1773184716;
- bh=TcCpaKgSuYuZzc4OXE1LJXIjQgRpARSLLNCTPPVqijM=;
- b=AaZZRIBtpd4rMhXjfHAaWNTNENireV/LGXIrqmhBwomAvJkfJIe12iFS0CoqK6L5CbW7km4kL
- KxCq66toJnIsUkdRROCJTdeVLLnMWYSaRZW3/Pepox3atqICteB1lWNXveS/1uzbHSQPxg0QOCP
- ay1TaVVbNjSOCoBOweYFjxAgqfMeUV4OWjJjwcqkeYk4tfhz7vpgIua+ttQHFZTT55H4w6+ropx
- qfUGve56NkHTKQXoLELIDFReq4smkwqKB173USnCCYP/hlKX3FtEdSkc68NvRvr/oxhDW4+6tVX
- L8clBVWKknNfoyiwM1z/4JZ8UIySp+qx5S5icM1TJO2w==
-X-Forward-Email-ID: 69b0a6c93cc84e2a49a2e584
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.6.49
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <b65b484c-8d1d-4efb-97e7-d6337e087a26@kwiboo.se>
-Date: Wed, 11 Mar 2026 00:18:31 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 0EBD383F9A
+ for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 01:17:44 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-464ba2bb3aeso322925b6e.1
+ for <u-boot@lists.denx.de>; Tue, 10 Mar 2026 17:17:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773188263; x=1773793063;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PGuxMhY1T1DlXy/L2Vbrzivqu+YLu97pG5VOzR7Nelw=;
+ b=ocIe6rP9K2zpVymgm8uqmw2l3IOBuHxR/A6qPb7RirnrfXfCg9YhLRBLIJ8O++w5UF
+ 5Asbm6NrfYuqgr7DXmi5F/Nke+jgIPp4sHGwSnDjohZO32QMvgdjE/WXZGDYlEyHa99t
+ xE5wvJYMe9bB1BEsdbpW8m4Fm1pr8dk9/ohQMjQZ6FNEwxwqIEqI9DlbICXa1ohsHkNA
+ 7y/OrC/khlhp0QQPjn4nahDeZEy6VDAXixIE33aaUtYS6gkYP2jlyx8DC3scCigI5aq+
+ MmmMkhkrQQkrkSE9xwmsj2OTBbEm0l7mZIJlwZJJcAFmys/Atn+OUyBR6cOUnmAP4Aig
+ iTvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773188263; x=1773793063;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PGuxMhY1T1DlXy/L2Vbrzivqu+YLu97pG5VOzR7Nelw=;
+ b=WEF6DjZuk8w1lQSohXpHT/tmNoplov5OzlqzEtvrJkx9LPOjSxe5L29TcvBiZDaIej
+ fmN6VoQ90l60FhP8NwPBwZMJovCQFrg3HwBL9FY15KuqG3mme1WrDI/mOCXgEtX/YLNM
+ 4OlwOGmA60n+VHfPc8YvaIQnu+HSmxUFUeDeqDt6g3y8vfQ8haJP8epWAxm0vz/RqV96
+ 3D2N6SemNtwM7q9bKt+WKajaATV8u9EijZxXaNJ0uH6Bvs83FGtHol9XEo+it6Uz7hgg
+ E3mTWQ7/gRPRNsSCtr7ESxAAwaUqmR2mH4cHp1yg6EkPnN9IIuXMbEgJD4CqFgEmtiuw
+ lliQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTbP8iQ7LfOwlKDdXVo1EpfC2VnVP5NntZz+piZCB5rYVzqBtjopBJIAgc6FjuVmthqvz0oiY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz/EsOYuLIcv18/vVPvpNuDG3Bb3uyL8mJz98MC3+ERfAPo49RH
+ 6Kl2LPBGqCMYb6IyC2FRxdcK+aqh2037S+jbYoxDm0+UKuuEyij8aVCNkHlFtYaja8w=
+X-Gm-Gg: ATEYQzx6qxVg93o2ZD3X3y+emKwCGdR/RL5S2R9H4BvCJazMmBS7uQ3cmsTqaLccDAa
+ tHnv8qDYN2EELBLjur19PibAuf/TBV0g9JdmwVsAdfnEhwC+OqtOMZB6OTmweDrZ1fTmEbAUvou
+ aMaHM7f+f7QXko46h9leFvYjqTpU1cNMW6lGGILYXNQ3NuiEfy6fv3lMcyhqv62Gi0OZC5ZYCnu
+ Lb0o/37cbXXnggUmqVxkQKIDxA8p5Qt+8Fh/Lfi5jJx2luBJv3dgOU4GZi1Wj52vjRI6xDC640O
+ eV300wdVrQLXvpqTpbe7rzew4SfNKtzoX16LZ6Mc+K26mUDB5RFFDUtZpb8UNyFy33PeWaY5i3S
+ op9S4RM9h2flR+Pf5dWRoe91mqXFTPqCw/m0CpSOeTWc7Rq78R3xgbqDsbAi+OgswrdEqfHBk0K
+ cJ37EbGLiamFKMH661dJa0dzHRhhtAqvqq+Q3KnUM=
+X-Received: by 2002:a05:6808:1454:b0:467:6b8:ddbb with SMTP id
+ 5614622812f47-4671bf57e27mr2928834b6e.17.1773188262643; 
+ Tue, 10 Mar 2026 17:17:42 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:82ac:f3fe:2e5f:ec03])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d76ae6a361sm466304a34.20.2026.03.10.17.17.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Mar 2026 17:17:42 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH v2 0/6] boards: mediatek: initial support for Genio 720 EVK
+Date: Tue, 10 Mar 2026 19:16:49 -0500
+Message-Id: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 4/4] rockchip: spl: Add support for booting from UFS
-To: Alexey Charkov <alchark@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Shawn Lin <shawn.lin@rock-chips.com>, u-boot@lists.denx.de
-References: <20260120-rk3576-ufs-v5-0-0edb61b301b7@gmail.com>
- <20260120-rk3576-ufs-v5-4-0edb61b301b7@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20260120-rk3576-ufs-v5-4-0edb61b301b7@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32Oyw6CMBBFf8V0bU1bEqSu/A/Doo9RJgLFaSESw
+ r9bMcadi7nJuYt7ZmERCCGy025hBBNGDH0Gtd8x15j+Bhx9ZqaEKkUO3qV7vqrQkmOPCU3L4zg
+ MgRKvnPP+WEotK8vywEBwxec2fqk/TPAYsyP9ygZjCjRvD0zy3X5d+p9rklxwqwpjtRdWW3e2Z
+ m7REhxc6Fi9rusLVxzTANwAAAA=
+X-Change-ID: 20260202-mtk-mt8391-initial-support-8ccdd761918b
+To: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>, 
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ Cathy Xu <ot_cathy.xu@mediatek.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2599; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=Phr5Fiu/qJeaZqNuenqp3PO2v3B9Bet7/U96rVFRWok=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpsLR3kgvPiinS0RkJGP6PYYkFRy2gh3GA7UkIO
+ DOSra5hQ7WJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabC0dxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/A7bUIAJHTOiVpQQr0Bw+HOEUZAw/qJ4dx+/RQMx0bW9/
+ FJRai5QXPsXgNYfRpeK/V+RHPc3qALGi/ZQFqzASHXvyKtoJxo+p8CkluBYVZok9QVSwd097OmI
+ KBCcGW6o+namD1RQ8/QChWVW5SecwoL436cIlG4GCrDWlx3hNMshanKYa9+ijRnkzqW1NFDazDe
+ SV+/+SEdyS6jufWZM7gavaQjnLj33lPbRsnrNhbSGpiaXE0Fk57FAGn5sev2tJUR9Ctn/DAiPD3
+ K1HJlaV8ETyaEMTUEL6D4G0zAKECyaMVNeozKpsFnU76i55JpbhgQLlcYUL2ehcr1LGAmees4W+
+ jRXI=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,160 +124,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+These patches along with the listed prerequisites are enough to get the
+MediaTek Genio 720 EVK board to boot into Linux from the eMMC (with a
+bit of extra config that isn't included here because it isn't generic.)
 
-On 1/20/2026 7:09 PM, Alexey Charkov wrote:
-> Add the required architecture-specific lookups to enable U-boot SPL to
-> load images from UFS storage devices on Rockchip RK3576, which has a
-> boot ROM capable of loading the SPL image from UFS.
-> 
-> Signed-off-by: Alexey Charkov <alchark@gmail.com>
-> ---
->  arch/arm/dts/rk3576-u-boot.dtsi              | 16 +++++++++++++++-
->  arch/arm/include/asm/arch-rockchip/bootrom.h |  1 +
->  arch/arm/mach-rockchip/rk3576/rk3576.c       |  1 +
->  arch/arm/mach-rockchip/spl-boot-order.c      | 14 ++++++++++++++
->  4 files changed, 31 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
-> index dc3771b556a3..e442e94f7132 100644
-> --- a/arch/arm/dts/rk3576-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3576-u-boot.dtsi
-> @@ -12,7 +12,7 @@
->  	};
->  
->  	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci, &ufshc;
->  	};
->  
->  	dmc {
-> @@ -81,6 +81,15 @@
->  	bootph-some-ram;
->  };
->  
-> +&gpio4 {
-> +	/* This is specifically for GPIO4_D0, which is the only 1.2V capable
-> +	 * pin on RK3576 available for use as the UFS device reset, thus
-> +	 * &gpio4 is required for booting from UFS on RK3576.
-> +	 */
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
+This is currently being upstreamed in Linux as well, so we just have
+some minimal devicetree files here to hold us over for a while until we
+can switch to the upstream ones.
 
-Please wrap this in a #ifdef CONFIG_SPL_UFS_SUPPORT or similar, we only
-need to include gpio4 in spl/u-boot-spl.dtb when SPL_UFS_SUPPORT is
-enabled.
+This depends on the pinctrl and all MediaTek clock patches from be
+currently under review.
 
-> +
->  &ioc_grf {
->  	bootph-all;
->  };
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+Changes in v2:
+- New clock driver patch to add required clocks for PMIC.
+- Added pinctrl nodes to both dts patches.
+- Added "mediatek,mt8189-vlpckgen" clock controller node.
+- Added "mt6359.dtsi" include and associated regulator changes.
+- New patch with macros to support the change above.
+- Fixed wrong CONFIG_PINCTRL_MT8391 in defconfig.
+- Added defconfig and dts for virtually identical Genio 520 EVK.
+- Enabled more config options for things that have already been merged.
+- Link to v1: https://lore.kernel.org/r/20260209-mtk-mt8391-initial-support-v1-0-b23ab9d0b9bc@baylibre.com
 
-Please add following UFS related pinconf node to SPL, it is referenced
-by ufs_rstgpio:
+---
+Cathy Xu (1):
+      arm: dts: mediatek: mt8189: Add pinmux macro header file
 
-&pcfg_pull_down {
-	bootph-pre-ram;
-	bootph-some-ram;
-};
+Chris-QJ Chen (4):
+      arm: mediatek: add support of MT8189 SoC family
+      arm: dts: mediatek: Add MediaTek MT8189 dtsi file
+      arm: dts: mediatek: Add MediaTek Genio 520/720 EVK DTS
+      board: mediatek: Add Genio 520/720 EVK defconfigs
 
-> @@ -176,6 +185,11 @@
->  	bootph-pre-ram;
->  };
->  
-> +&ufshc {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
+David Lechner (1):
+      clk: mediatek: mt8189: add some VLP clocks
 
-Please add following UFS related pinctrl nodes to SPL:
+ arch/arm/dts/Makefile                  |    2 +
+ arch/arm/dts/mt8189-pinfunc.h          | 1125 ++++++++++++++++++++++++++++++++
+ arch/arm/dts/mt8189.dtsi               |  301 +++++++++
+ arch/arm/dts/mt8371-genio-520-evk.dts  |   11 +
+ arch/arm/dts/mt8371-genio-common.dtsi  |  176 +++++
+ arch/arm/dts/mt8391-genio-720-evk.dts  |   11 +
+ arch/arm/mach-mediatek/Kconfig         |   11 +-
+ arch/arm/mach-mediatek/Makefile        |    1 +
+ arch/arm/mach-mediatek/mt8189/Makefile |    3 +
+ arch/arm/mach-mediatek/mt8189/init.c   |   58 ++
+ board/mediatek/MAINTAINERS             |    7 +
+ configs/mt8189.config                  |   34 +
+ configs/mt8371_genio_520_evk_defconfig |    4 +
+ configs/mt8391_genio_720_evk_defconfig |    4 +
+ drivers/clk/mediatek/clk-mt8189.c      |  289 ++++++++
+ 15 files changed, 2036 insertions(+), 1 deletion(-)
+---
+base-commit: f6914b17b16992f09e3ac3dc942d0a0de6e973cd
+change-id: 20260202-mtk-mt8391-initial-support-8ccdd761918b
 
-&ufs_refclk {
-	bootph-pre-ram;
-	bootph-some-ram;
-};
-
-&ufs_rstgpio {
-	bootph-pre-ram;
-	bootph-some-ram;
-};
-
-Above changes depends on the 438f1fe833e0 from devicetree-rebasing,
-please pick and include that in a v6.
-
-With above fixed this is:
-
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
-
-Also feel free to pick "rockchip: rk3576-rock-4d: Enable UFS support"
-from my rk3576 branch [1] in a v6. That branch also include FIXUPs
-with the changes I have requested and tested on a ROCK 4D.
-
-[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3576
-
-Regards,
-Jonas
-
-> +
->  &xin24m {
->  	bootph-all;
->  };
-> diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> index b15938c021d6..f9ecb6858f04 100644
-> --- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-> +++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> @@ -51,6 +51,7 @@ enum {
->  	BROM_BOOTSOURCE_SPINOR = 3,
->  	BROM_BOOTSOURCE_SPINAND = 4,
->  	BROM_BOOTSOURCE_SD = 5,
-> +	BROM_BOOTSOURCE_UFS = 7,
->  	BROM_BOOTSOURCE_I2C = 8,
->  	BROM_BOOTSOURCE_SPI = 9,
->  	BROM_BOOTSOURCE_USB = 10,
-> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
-> index a1e8a7572fa4..46cf60dc77c7 100644
-> --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
-> +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
-> @@ -46,6 +46,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->  	[BROM_BOOTSOURCE_FSPI0] = "/soc/spi@2a340000/flash@0",
->  	[BROM_BOOTSOURCE_FSPI1_M1] = "/soc/spi@2a300000/flash@0",
->  	[BROM_BOOTSOURCE_SD] = "/soc/mmc@2a310000",
-> +	[BROM_BOOTSOURCE_UFS] = "/soc/ufshc@2a2d0000",
->  };
->  
->  static struct mm_region rk3576_mem_map[] = {
-> diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-> index 6572dde29f65..d2dd5e10935f 100644
-> --- a/arch/arm/mach-rockchip/spl-boot-order.c
-> +++ b/arch/arm/mach-rockchip/spl-boot-order.c
-> @@ -76,6 +76,9 @@ static int spl_node_to_boot_device(int node)
->  	if (!uclass_find_device_by_of_offset(UCLASS_SPI_FLASH, node, &parent))
->  		return BOOT_DEVICE_SPI;
->  
-> +	if (!uclass_find_device_by_of_offset(UCLASS_UFS, node, &parent))
-> +		return BOOT_DEVICE_UFS;
-> +
->  	return -1;
->  }
->  
-> @@ -231,6 +234,17 @@ int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
->  		return -ENODEV;
->  	}
->  
-> +	if (boot_device == BOOT_DEVICE_UFS) {
-> +		ret = uclass_find_device(UCLASS_UFS, 0, &dev);
-> +		if (ret) {
-> +			debug("%s: could not find device for UFS: %d\n",
-> +			      __func__, ret);
-> +			return ret;
-> +		}
-> +
-> +		return ofnode_get_path(dev_ofnode(dev), buf, buflen);
-> +	}
-> +
->  #if CONFIG_IS_ENABLED(BLK)
->  	dev_num = (boot_device == BOOT_DEVICE_MMC1) ? 0 : 1;
->  
-> 
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
