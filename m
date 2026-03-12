@@ -4,99 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA37FED2DE
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 07:32:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAAFFED2E0
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 07:39:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21E5D83F8A;
-	Thu, 12 Mar 2026 08:32:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A49A83F8A;
+	Thu, 12 Mar 2026 08:39:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B4WFVoPA";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bLlc8tpx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D04F183F9A; Thu, 12 Mar 2026 08:32:34 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B2A868407E; Thu, 12 Mar 2026 08:39:28 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A94DD83F6D
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:32:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A00E83F6D
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:39:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-439b9cf8cb5so775684f8f.0
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 00:32:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773300751; x=1773905551; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QiXMM5jF1nGW1k5BoCG1A7OXeQgJqBMtsH8RcIzP0SE=;
- b=B4WFVoPAGH3k4Q3Awo8GOCfMujILEr1jEBiW+7Q8rxVrSRuiLUrjP2pWjHPUmjsmDJ
- BqX7jfT2PSTNxdBR6x4kKdz06B2CCFP8wubVoncACNKuXe0WcVNp4aLt4eE6SyoxP2UR
- rIQPWCilXLB38eNPBQe6ttma0lox6j+miU7pdC7/5TGD9cuoGbC+1WTTDCWDaJrjplfb
- fV+Euq+5Pw/vUxpe8selG6qI+yHivWLdSmfGIU3l8jTSjVLdh4Iv5Tp5KOAirmtqGFSm
- XwjrIPqDIz32agWK8jqe30TuW+woauteADb5lXkNU7LX9K+EEJOJWVl5UPu9Vikyw42Y
- +XLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773300751; x=1773905551;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QiXMM5jF1nGW1k5BoCG1A7OXeQgJqBMtsH8RcIzP0SE=;
- b=MgPv105SS23Qv5sqmhUK9trdqsfhloUKWS9URRFtfV0hUxyrapQ0yCFeW6NC+G92v5
- O1we6aNFRuU9BDyaU5BhRT0iq8SJZiFgXqbAGpKC6FasHRjtDlj73zNaBs3c6Cny05zS
- zj3druR4iJ6UOA1n8YSQD6UqsR5wJ4HtNnlxlG7dFG8h6mgaBVqIWLhbq8ELQYzCAi+l
- aiDmkwkonO0rxGLxnk/Sbj7WsGPBcFGLnH1RffRJvrcGXfkFHgRGP45a++rdyC3LXP2H
- sWGyFTb928VgW/BBfGkMs/Q3VXL0hkHSGredxYqkawCKMbJDtxfl/M9yROv1mslcEOFZ
- Z6lw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUXKNqqnNiv+KFqy/jI0yt+TSaTdgJzX1arz5z/lKV/oGt8uC1YZmsHM4h9jBLOhk21o6fcrs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPRe9AcA4MZb5d2rCB+t0ad/xKVI1UuX/RkhBlSqiEBdd1ZsFf
- jPWIYkUSRlBwqDdssmfynqFiYqIAM2sGvuzphTRED7RMfNmTHaK8CRcDAylUTH3+tHs=
-X-Gm-Gg: ATEYQzxh1oWSap0aXelpfRtbdMyVzBFhf1v9LD1yELdZeQmQeZ+2TXMRSsYgqJpclsT
- OekMECO/ZxHM2+ZWourY3m12nFLFT18iTOLR+wMipJY3Ux4kw75tkdkdBRerGxGYgHfqcTJQg3l
- LFLQ3F7nEmnELxBisFOuki8tdqyLQc1s4X7ONqJitXkDHrN/6zCTtOihnyxCPbWrHIocz0132YS
- 0aCUtV/PmFCM4guMo0UA4cupBuc04KjlcQnio93pgAJQ4w42IIgded5adnAFbx2b+xoY/5mZHp2
- j1bYa/hBPtghFKmVURO30jJ9xzzfMB7Le69pXUhlBnQo2G/MPCU8ksPEV5Kwyg1UpAyS9XYl17S
- 1cwNqlGfJ2dnYZAXu86Fikh48PAy5dJrELOw2zlvSW/v0BfV/nTbN3kHHg/WCN6AHMCpET1pFLT
- yuXTxApc9DzxTj0iw1e4bicEusG/Im
-X-Received: by 2002:a05:6000:230e:b0:439:cd10:aaf1 with SMTP id
- ffacd0b85a97d-439f8225346mr10304360f8f.53.1773300750991; 
- Thu, 12 Mar 2026 00:32:30 -0700 (PDT)
-Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-439fe22dd67sm6521914f8f.36.2026.03.12.00.32.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Mar 2026 00:32:30 -0700 (PDT)
-Date: Thu, 12 Mar 2026 10:32:26 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Philip Molloy <philip.molloy@analog.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 4AA3843E2D;
+ Thu, 12 Mar 2026 07:39:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A56FC116C6;
+ Thu, 12 Mar 2026 07:39:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1773301164;
+ bh=SIG2/StF5JOQR0ArEsRgq1rHawdQ8cHIh9uj41dsOLg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=bLlc8tpx8DMv3a60i6PR7zk2owUd9+eISxdzIC9evIybxujHs6vOBZXN4/gDz4MdT
+ rNt0teuwb7cffO7ftXmoiVCFjrn41g/Fsu+gGcY7jj/sDiZReAKpldkIbvz7RS+Qme
+ +qDRB8bJKi9UpVrXlOUtDcqrPZFjaACeo/xwqTPgVrawmKWpl5n6Fw6XBr1CO7jNkA
+ ql+Qg1Y06BaMS6LWyGSbLSSVEUadMn5Pqk00yNNbaBP0FQoxBdBol8n3H6ALARhx88
+ fv46Kbqi5ih2GQbICc0F61jeWs4lWZEJsO/K6Ma00cmn4x28QeqcDC1PJlL3RM9ky/
+ CJW9fcOQslHDg==
+Date: Thu, 12 Mar 2026 13:09:15 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: Luca Weiss <luca.weiss@fairphone.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Eoin Dickson <eoin.dickson@microchip.com>, u-boot@lists.denx.de,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>,
- arm-scmi@vger.kernel.org, Linus Walleij <linusw@kernel.org>
-Subject: Re: [PATCH 4/4] gpio: scmi: Add gpio_scmi driver
-Message-ID: <abJsCq0eqL_6NUFC@stanley.mountain>
-References: <cover.1771856828.git.dan.carpenter@linaro.org>
- <e3649db2cbde07a53c7139d72c2c597f9a6d8fbd.1771856828.git.dan.carpenter@linaro.org>
- <4fdab7f4-aa11-4abe-953e-6d9785945fbd@amd.com>
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Danila Tikhonov <danila@jiaxyga.com>,
+ David Wronek <david.wronek@mainlining.org>,
+ Alexey Minnekhanov <alexeymin@postmarketos.org>,
+ Lukasz Majewski <lukma@denx.de>, Aelin Reidel <aelin@mainlining.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Rui Miguel Silva <rui.silva@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>
+Subject: Re: [PATCH 1/7] drivers: pinctrl: Add Qualcomm Milos TLMM driver
+Message-ID: <abJto36jxEm1c8Tq@sumit-xelite>
+References: <20260311-milos-bringup-v1-0-eb905c467f10@fairphone.com>
+ <20260311-milos-bringup-v1-1-eb905c467f10@fairphone.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <4fdab7f4-aa11-4abe-953e-6d9785945fbd@amd.com>
+In-Reply-To: <20260311-milos-bringup-v1-1-eb905c467f10@fairphone.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,20 +81,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Feb 24, 2026 at 05:10:26PM +0100, Michal Simek wrote:
+On Wed, Mar 11, 2026 at 03:20:41PM +0100, Luca Weiss wrote:
+> Add support for TLMM pin controller block (Top Level Mode Multiplexer)
+> on Milos SoC, with support for special pins.
 > 
+> Correct pin configuration is required for working debug UART and eMMC/SD
+> cards.
 > 
-> Can you point me the dt binding document?
-> 
-> I am aware about this one and grep is not returning me anything from linux-next too
-> 
-> https://lore.kernel.org/all/20231002021602.260100-1-takahiro.akashi@linaro.org/
+> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+> ---
+>  drivers/pinctrl/qcom/Kconfig         |   8 +++
+>  drivers/pinctrl/qcom/Makefile        |   1 +
+>  drivers/pinctrl/qcom/pinctrl-milos.c | 104 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 113 insertions(+)
 > 
 
-Yeah...  I should have done the more standard thing with gpio-ranges.
-In v2, u-boot and linux use the same device tree format.  The difference
-is that in the pin control driver, u-boot handles pin muxing by sending
-raw commands.
+Looks good to me apart from minor comment below, FWIW:
 
-regards,
-dan carpenter
+Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+
+> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+> index 580308621b1..11e6763b5f3 100644
+> --- a/drivers/pinctrl/qcom/Kconfig
+> +++ b/drivers/pinctrl/qcom/Kconfig
+> @@ -54,6 +54,14 @@ config PINCTRL_QCOM_IPQ9574
+>  	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
+>  	  as well as the associated GPIO driver.
+>  
+> +config PINCTRL_QCOM_MILOS
+> +	bool "Qualcomm Milos Pinctrl"
+> +	default y if PINCTRL_QCOM_GENERIC
+> +	select PINCTRL_QCOM
+> +	help
+> +	  Say Y here to enable support for pinctrl on the Snapdragon Milos SoC,
+> +	  as well as the associated GPIO driver.
+> +
+>  config PINCTRL_QCOM_QCM2290
+>  	bool "Qualcomm QCM2290 Pinctrl"
+>  	default y if PINCTRL_QCOM_GENERIC
+> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+> index b5a111605ed..4096c1aa491 100644
+> --- a/drivers/pinctrl/qcom/Makefile
+> +++ b/drivers/pinctrl/qcom/Makefile
+> @@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+>  obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
+>  obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
+>  obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+> +obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
+>  obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+>  obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+>  obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
+> diff --git a/drivers/pinctrl/qcom/pinctrl-milos.c b/drivers/pinctrl/qcom/pinctrl-milos.c
+> new file mode 100644
+> index 00000000000..974c1a7d594
+> --- /dev/null
+> +++ b/drivers/pinctrl/qcom/pinctrl-milos.c
+> @@ -0,0 +1,104 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Qualcomm Milos pinctrl
+> + *
+> + * (C) Copyright 2024 Linaro Ltd.
+> + * (C) Copyright 2025 Luca Weiss <luca.weiss@fairphone.com>
+
+It's 2026 now, maybe you want to update copyright here?
+
+-Sumit
+
+> + *
+> + */
+> +
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+> +
+> +#define MAX_PIN_NAME_LEN 32
+> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> +
+> +static const struct pinctrl_function msm_pinctrl_functions[] = {
+> +	{"qup0_se5", 1},
+> +	{"sdc2_clk", 1},
+> +	{"sdc2_cmd", 1},
+> +	{"sdc2_data", 1},
+> +	{"gpio", 0},
+> +};
+> +
+> +#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
+> +	{					        \
+> +		.name = pg_name,			\
+> +		.ctl_reg = ctl,				\
+> +		.io_reg = 0,				\
+> +		.pull_bit = pull,			\
+> +		.drv_bit = drv,				\
+> +		.oe_bit = -1,				\
+> +		.in_bit = -1,				\
+> +		.out_bit = -1,				\
+> +	}
+> +
+> +#define UFS_RESET(pg_name, ctl, io)			\
+> +	{					        \
+> +		.name = pg_name,			\
+> +		.ctl_reg = ctl,				\
+> +		.io_reg = io,				\
+> +		.pull_bit = 3,				\
+> +		.drv_bit = 0,				\
+> +		.oe_bit = -1,				\
+> +		.in_bit = -1,				\
+> +		.out_bit = 0,				\
+> +	}
+> +
+> +static const struct msm_special_pin_data msm_special_pins_data[] = {
+> +	[0] = UFS_RESET("ufs_reset", 0xb4004, 0xb5000),
+> +	[1] = SDC_QDSD_PINGROUP("sdc2_clk", 0xab000, 0, 6),
+> +	[2] = SDC_QDSD_PINGROUP("sdc2_cmd", 0xab000, 12, 3),
+> +	[3] = SDC_QDSD_PINGROUP("sdc2_data", 0xab000, 9, 0),
+> +};
+> +
+> +static const char *milos_get_function_name(struct udevice *dev,
+> +					   unsigned int selector)
+> +{
+> +	return msm_pinctrl_functions[selector].name;
+> +}
+> +
+> +static const char *milos_get_pin_name(struct udevice *dev,
+> +				      unsigned int selector)
+> +{
+> +	if (selector >= 167 && selector <= 170)
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN,
+> +			 msm_special_pins_data[selector - 167].name);
+> +	else
+> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+> +
+> +	return pin_name;
+> +}
+> +
+> +static int milos_get_function_mux(__maybe_unused unsigned int pin,
+> +				  unsigned int selector)
+> +{
+> +	return msm_pinctrl_functions[selector].val;
+> +}
+> +
+> +static struct msm_pinctrl_data milos_data = {
+> +	.pin_data = {
+> +		.pin_count = 171,
+> +		.special_pins_start = 167,
+> +		.special_pins_data = msm_special_pins_data,
+> +	},
+> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+> +	.get_function_name = milos_get_function_name,
+> +	.get_function_mux = milos_get_function_mux,
+> +	.get_pin_name = milos_get_pin_name,
+> +};
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +	{ .compatible = "qcom,milos-tlmm", .data = (ulong)&milos_data },
+> +	{ /* Sentinel */ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_milos) = {
+> +	.name		= "pinctrl_milos",
+> +	.id		= UCLASS_NOP,
+> +	.of_match	= msm_pinctrl_ids,
+> +	.ops		= &msm_pinctrl_ops,
+> +	.bind		= msm_pinctrl_bind,
+> +};
+> +
+> 
+> -- 
+> 2.53.0
+> 
