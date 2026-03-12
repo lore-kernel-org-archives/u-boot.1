@@ -4,59 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79FC8FED2FC
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 09:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 161BFFED2FD
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 10:01:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 386F7841E3;
-	Thu, 12 Mar 2026 10:57:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 96AC884166;
+	Thu, 12 Mar 2026 11:01:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="mlJfQAV+";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="akL9RwK7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 533D283F53; Thu, 12 Mar 2026 10:57:43 +0100 (CET)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id DF642841CF; Thu, 12 Mar 2026 11:01:18 +0100 (CET)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03F868419E
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 10:57:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id E15CD83F2A
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 11:01:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Max.Merchel@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=9xIGymEvWXB4Anchps0PmwLYzn3JX3g37vpfuLXNaM0=; b=mlJfQAV+RgZaI4a6xGm6fivRv1
- 6ZuzCQymtmxO1xye3ex8sTOv0zW8BGjtFdodNqLwqTobI0Oe/yjaWhokwCqr6YmjSMKGEYHBPWgeB
- 7IrZUv0PsovKoQGxsyrMD0rwPZSfqQAZR/hjPxoju4pqyGhSetYW+oUS3VT9hIhs5uL12VTnUECJJ
- n+mPK5oWGQauiGehVeZRRpnzXLpoLw51DlFqTIxChY/RoRnS+z5EcY1f5fiJbBY/YIi7yB1cc/B59
- 64iPP5PD05FfITH5vULtD5z81mcDnlKAsOAcSFO4MZZgw1DyDMFJGELgGILO2QB3MDt7T8yNzwlS9
- Z75MaWlA==;
-Received: from sslproxy07.your-server.de ([78.47.199.104])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w0cnS-0007zY-1d; Thu, 12 Mar 2026 10:57:38 +0100
-Received: from localhost ([127.0.0.1])
- by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
- id 1w0cnS-000Fyo-0U; Thu, 12 Mar 2026 10:57:38 +0100
-From: Max Merchel <Max.Merchel@ew.tq-group.com>
-To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Paul Gerber <Paul.Gerber@ew.tq-group.com>, u-boot@lists.denx.de,
- u-boot@ew.tq-group.com, Max Merchel <Max.Merchel@ew.tq-group.com>
-Subject: [PATCH 09/13] board: tqma6: use common TQ baseboard
-Date: Thu, 12 Mar 2026 10:57:05 +0100
-Message-ID: <20260312095711.3219756-10-Max.Merchel@ew.tq-group.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
-References: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=w0URXVgGDJbtDsKOBW04Z1icgFs+Cx4a8znSalW5g2luF5KnxOtmnV3QTuM/SeiCwZHUFnf2mzrmOnkZFZxvcy6vlN/weB/4SOC0Ie3KZODcf+zpm/TBcjtw3zQKzrnQfOkZbwg9BlUPBVPDIUIdwp9e1M3LNHwljYykrBzG1ef0zdN5+VMPOR+xcJt3la/BXSHmkDuT5y6CpagHupBDl17PbatCUvYGrnNkijZY2d0ofkql9GrXMx9fvzvD6mTI2DxkGQdyz+UjnDqAz0qnBY9S+XM/gPBU9nzY+OwdCPBrCE4KOl5AtbZtQm3/9tjYsyXHAOupjZQ8a4yTJJWdgw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FNzzjA4ClPp5y5Q4NuUrnX+wbr8zKn626BRwELsPnRM=;
+ b=Y6VWIfArVrSyZLbgUDBnbe2IJk0YGOOktNplhxyXbCHhsPDpdrZzZ2K05G4+oA++1Oph+QJxxFUnvV4xp2mN53zaAU2VWOiRLKGPAplCRy7jppr48qsfExYokOWsX4ZqT0RV9mNrlqkEunXT2OVoisH3oaWVx6As9Loj+tyB7LfFiJ8GfZGFMKEEaMJ6uye5e7dhhQj6U0yat4gSwT3pIYzCV5D1rkw5efnNlq2cAZitCEJqPErW05UsHaLU2o6qqktGOgD5fFL0h6GpH7kDtWVRzI4Mu2sm3AYJv3jfE/GpRdxK/Poe6SVPbM+1anHnGVAyRcdpp8fVZmzcDTVmrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FNzzjA4ClPp5y5Q4NuUrnX+wbr8zKn626BRwELsPnRM=;
+ b=akL9RwK7RZs06H6VnV1JXooD5OBQRxfJxs7lsuG8NrK5R/Vx7BcPzlYTLj8KHceIA+KKKXeLSzJTfVuKflBn4/TUlnUMeZ8OfHExlbLP/VN+GEPhtpEZG323EvJl+27dy45LdCoF+GBpO5eo/pMPVhfuR0WjsUG3qSZjx6G1qac=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by GV2PR10MB6694.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:b6::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
+ 2026 10:01:14 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9700.013; Thu, 12 Mar 2026
+ 10:01:14 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH v2 2/4] doc: test: document [ ] spelling of test
+Date: Thu, 12 Mar 2026 11:01:04 +0100
+Message-ID: <20260312100106.702368-3-ravi@prevas.dk>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260312100106.702368-1-ravi@prevas.dk>
+References: <20260312100106.702368-1-ravi@prevas.dk>
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: CPAP307CA0006.DNKP307.PROD.OUTLOOK.COM
+ (2603:10a6:380:3::14) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|GV2PR10MB6694:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5db00dea-d73a-43a8-5b4f-08de801e4bbe
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: VkE9eTvnzk8AFp/u51hC0sBOu18siO7USwpAp4GaC/RetWGj3yaX894lQzuD0dqQBj7tAHgZyjslfqpHCkhXbCcqCj+OPWqPcZlyM9y3IYypmmSRKzRnt24Fk2m9gG4iJlIWfhPNJon9D5fCcuClvn0MulDdFEoWexH4qJ6xuQKsgNKb0pIM8N+BEH9/akiVq4DyE3eieEKbF7eCXpcD9MlNhviVDdluIUFhuCXKux/z1PgHndl8+kDIaSWy8IQf4LLDxU8/dTDFLObU5i+H6OewDRXTcQsQtDRuWPBxeen2R/t8n1JrmSHTJVy1x/ZVZN1F+wEbGyY/N6aNcXZe9ikJNSWvuQFtYAIiJUgMAwTdD3ZUX7dgs/8g7POytDe23ltW6c1MPr/H1j1dL4eSGWvbcqWn3KBeJrEP4C2i1q0aAP500xZ7ldd4+rxQiRmXJKzMMZKvWgW5KH35c/Knf4T9PCs3F0ZFIJsOhVX0ea+kZ5nCJQcUeWwrZIcCkie8c81gLXjBk2/Aoa4JTtKCaYH9GSyRyTyTtSQpONrTsS2Op3sYNifTZFutxE20w0HzPMZS6GBvngVoYAfVGw332F2oaUn/7u0AjiPWx6bf1UzRv6h13JKaCghA5NGBNGX9IRmRLzLKtCYAa30AeMbWMw7UuSOAp4m/mD0olp2TwxmNI0D5DWWxJamLoZviBvTs5CJn9xg9tbA6MajNfXG/PS1WvyAAS8oRNMKRVwn0uqx0/Vw8Pb1pdl141gY0zMafGSyx4VKvXxKSS832zBKagEy4YOebS77l5yAkZPFkKJs=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014)(22082099003)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?vgYkCjEvwSLDiohb39+2CzkI5dR4zw5OxnqYeB3j1TMJfNY4TnKAdPIHFjPl?=
+ =?us-ascii?Q?FfXZsP7Ewu9Im0mC0GOVDO5zlU6w/22otZHy3hblvIaUqLKcEa4rdhFbzitK?=
+ =?us-ascii?Q?qidzASBLXNp5fLWrFYZATsDZmNkJ6w0EynIsRitsPEgqPWl5UKtqCPn2oF6n?=
+ =?us-ascii?Q?m+R6unJpYLPYg04057Vb3/viRniQsOFbL1nGwSdvK5RLDZUUSE85h5f3lnDt?=
+ =?us-ascii?Q?6Zb34vVEplPRAZRuUlaty3FvYPKlpYe5cAs4wW8TePhZ7DLKJEJXMvSb/sKC?=
+ =?us-ascii?Q?ZQi8XUc2L6xVDpNNMd3FAzpJl2bqo+DVlMYOFzCdAR5MSYlHs8GGViXfI/sR?=
+ =?us-ascii?Q?09K9zB2FGkkOXjkKUGYnTrVr6ZtuPzpSRwEjYbIBnziQBEmPzzheFO1LpnFN?=
+ =?us-ascii?Q?bC9cfSZ8RcG6D4wkTS1Ks8n+KrSjMEtQROR+gk7gzDqjdORQMuvq0fp7OCzC?=
+ =?us-ascii?Q?wDwJ0xmPORnwoCvOMiwZPMHgjjDbx0pBLvs4y3F1mwgMV6tL6DUGjJEJLJa6?=
+ =?us-ascii?Q?R5FU5UFhI3IVCmblRDUJJfPwP/OjZxwpoW8I1m35mjhSwUg06SQ8CCKuH+4z?=
+ =?us-ascii?Q?s6euTNM921dFJYhHy1vWrL6G/GOMoay+hXJz9TNN9Bb8r6m4GPHuebKGeXyV?=
+ =?us-ascii?Q?01prwCEjazTlGodVRHP8wuOtMmKuFy+qBAVzFVnIsnCFxlXtu18GXp+Baqvv?=
+ =?us-ascii?Q?AhmfBLWIKOIQVDerZmJTNzhRv8w2shV7OD/5vFITpiHMyQ+Aou1jUoF+UO+S?=
+ =?us-ascii?Q?0V8TRv3XspuCRV3V0R+rNkyAizF81Vc7O3dhx4ZgU/XA3ZzMzUmpR5V5zTeC?=
+ =?us-ascii?Q?g0TOLmgvQxIJuvmPfT0rxPi7Z3f2AI8RXMnQE0HzQeQSurCEIq0CepHITaMT?=
+ =?us-ascii?Q?2pjOFYMs5fnHjzDbb1PluCKlEGy6isI6NEHrGSvBDGG3oKbqUzGdQxDvGAqy?=
+ =?us-ascii?Q?OrFcLZTYstGRBqf0MjYTianaaffhDUNfsFDKo6hINZmvoNVb3Q8kJzP2hJgf?=
+ =?us-ascii?Q?dgh6j9vYApUmHTcAi4YWEakSL4avVYCm/XkBWl5Fpa7XiXvPDdtpC4tygXkS?=
+ =?us-ascii?Q?LBvlMZlvndGWa7R6nCuZra6/8toq/vBtIy2cYe4ol1KCg1H5phMeL0RWQfSj?=
+ =?us-ascii?Q?zPoszRwUovFlJBCf9mWMua2q6hTlVfrJLjjBBfiW/J/21jn0cL+s90R3c5RY?=
+ =?us-ascii?Q?ZE2B2nSZO3Zc/otfzllLM98afKf4jlI7OyEMbSJ/5rrE81XEcNuvbmtJ1EE4?=
+ =?us-ascii?Q?ko2ZBA7Z9fP+xJiG5n8WvO3SmAL++s+kNr5gsAMHJnYFc9Sa6C/GBhdcKSpZ?=
+ =?us-ascii?Q?bOEkSlRqIhekzYDiWrqehTzfMY7UxMPWFYGXan1hX9t4AlYlPv2iwyvko7VT?=
+ =?us-ascii?Q?Tp8bdHLd6zHQAd4ejgJedm64VpCLSGcNqrUktOg6Lr7LrBCQ9T6bsTCqExrg?=
+ =?us-ascii?Q?p24bvoZwRWfrCJlnE9c9mQOtHcFHY73guAXLchsY2zEunD/70Zi/1dTCC3Qp?=
+ =?us-ascii?Q?xN+IVQcYxtStIqbEVVTQl/4vbvGdLB/wEUuOZuoAt1s38hXVdc7VzryH3p5u?=
+ =?us-ascii?Q?oHtn6bXEANCLxBDoFt7R7vPS4sO4DLLWcHfGqpG4+ZpJWlSCwXjlrh1y2eLW?=
+ =?us-ascii?Q?4aVU/jJ9IKkyZNvwm32WkXPPtKQUWBHVw1zLHvbQmnGJ1c66dUR/DhqkTuoX?=
+ =?us-ascii?Q?V8t81n1F9v9sP4VWcdY2Tf6T5qNOmWpbCiGbIPVLcnukM+CIGd0Ea7vpEFul?=
+ =?us-ascii?Q?1KZxhoBh4fGacwBW1XcIh9uUiyo+7IU=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5db00dea-d73a-43a8-5b4f-08de801e4bbe
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 10:01:14.2906 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W+GYcEdW33/2gi2AcRla3C0fYYSMILsnIAhzvUAbzsKrKGQu1C3ceRzMc4X2Ah4dNIac/J43ho9fi8DNJTJgkskOHSJsWPyOTOn99W6pv/w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6694
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,286 +137,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Paul Gerber <Paul.Gerber@ew.tq-group.com>
-
-update functions to match common baseboard header
-include TQ common Kconfig and
-select TQ_BB option for MBa6 and WRU4
-
-While at it, remove empty implementations that are now covered by
-board/tq/common.
-
-Signed-off-by: Paul Gerber <Paul.Gerber@ew.tq-group.com>
-Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
 ---
- board/tq/tqma6/Kconfig      |  4 ++++
- board/tq/tqma6/tqma6.c      | 17 +++++++++--------
- board/tq/tqma6/tqma6_bb.h   | 28 ----------------------------
- board/tq/tqma6/tqma6_mba6.c | 26 +++-----------------------
- board/tq/tqma6/tqma6_wru4.c | 29 +++++++----------------------
- 5 files changed, 23 insertions(+), 81 deletions(-)
- delete mode 100644 board/tq/tqma6/tqma6_bb.h
+ doc/usage/cmd/test.rst | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/board/tq/tqma6/Kconfig b/board/tq/tqma6/Kconfig
-index 9cb0c909aa9..1ef9f6732aa 100644
---- a/board/tq/tqma6/Kconfig
-+++ b/board/tq/tqma6/Kconfig
-@@ -72,6 +72,7 @@ choice
+diff --git a/doc/usage/cmd/test.rst b/doc/usage/cmd/test.rst
+index d1379117fca..037a9ee1774 100644
+--- a/doc/usage/cmd/test.rst
++++ b/doc/usage/cmd/test.rst
+@@ -20,11 +20,14 @@ Synopsis
+     test -e <interface> <dev[:part]> <path>
+     test <s> =~ <re>
  
- config MBA6
- 	bool "TQMa6 on MBa6 Starterkit"
-+	select TQ_COMMON_BB
- 	select USB
- 	select CMD_USB
- 	select USB_STORAGE
-@@ -92,6 +93,7 @@ config MBA6
- 
- config WRU4
- 	bool "OHB WRU-IV"
-+	select TQ_COMMON_BB
- 	help
- 	  Select the
- 	  OHB Systems AG WRU-IV baseboard.
-@@ -107,4 +109,6 @@ config IMX_CONFIG
- 	default "board/tq/tqma6/tqma6dl.cfg" if TQMA6DL
- 	default "board/tq/tqma6/tqma6s.cfg" if TQMA6S
- 
-+source "board/tq/common/Kconfig"
++    [ <test expression> ]
 +
- endif
-diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
-index 75d36240a1e..a3a0a11c42b 100644
---- a/board/tq/tqma6/tqma6.c
-+++ b/board/tq/tqma6/tqma6.c
-@@ -26,7 +26,7 @@
- #include <power/pfuze100_pmic.h>
- #include <power/pmic.h>
+ Description
+ -----------
  
--#include "tqma6_bb.h"
-+#include "../common/tq_bb.h"
+ The ``test`` command is similar to the ordinary shell built-in by the
+-same name. Unlike in ordinary shells, it cannot be spelled ``[``.
++same name. Like in ordinary shells, it can also be spelled ``[``,
++provided the test expression is followed by a separate ``]`` argument.
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -41,7 +41,7 @@ static const uint16_t tqma6_emmc_dsr = 0x0100;
- 
- int board_early_init_f(void)
- {
--	return tqma6_bb_board_early_init_f();
-+	return tq_bb_board_early_init_f();
- }
- 
- int board_init(void)
-@@ -49,7 +49,7 @@ int board_init(void)
- 	/* address of boot parameters */
- 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
- 
--	tqma6_bb_board_init();
-+	tq_bb_board_init();
- 
- 	return 0;
- }
-@@ -96,11 +96,12 @@ int board_late_init(void)
- {
- 	env_set("board_name", tqma6_get_boardname());
- 
--	tqma6_bb_board_late_init();
-+	tq_bb_board_late_init();
- 
- 	printf("Board: %s on a %s\n", tqma6_get_boardname(),
--	       tqma6_bb_get_boardname());
--	return 0;
-+	       tq_bb_get_boardname());
-+
-+	return tq_bb_checkboard();
- }
- 
- /*
-@@ -113,14 +114,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	char modelstr[MODELSTRLEN];
- 
- 	snprintf(modelstr, MODELSTRLEN, "TQ %s on %s", tqma6_get_boardname(),
--		 tqma6_bb_get_boardname());
-+		 tq_bb_get_boardname());
- 	do_fixup_by_path_string(blob, "/", "model", modelstr);
- 	fdt_fixup_memory(blob, (u64)PHYS_SDRAM, (u64)gd->ram_size);
- 	/* bring in eMMC dsr settings */
- 	do_fixup_by_path_u32(blob,
- 			     "/soc/aips-bus@02100000/usdhc@02198000",
- 			     "dsr", tqma6_emmc_dsr, 2);
--	tqma6_bb_ft_board_setup(blob, bd);
-+	tq_bb_ft_board_setup(blob, bd);
- 
- 	return 0;
- }
-diff --git a/board/tq/tqma6/tqma6_bb.h b/board/tq/tqma6/tqma6_bb.h
-deleted file mode 100644
-index e17e6ad3f57..00000000000
---- a/board/tq/tqma6/tqma6_bb.h
-+++ /dev/null
-@@ -1,28 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2013-2014 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-- * D-82229 Seefeld, Germany.
-- * Author: Markus Niebel
-- */
--
--#ifndef __TQMA6_BB__
--#define __TQMA6_BB__
--
--int tqma6_bb_board_mmc_getwp(struct mmc *mmc);
--int tqma6_bb_board_mmc_getcd(struct mmc *mmc);
--int tqma6_bb_board_mmc_init(struct bd_info *bis);
--
--int tqma6_bb_board_early_init_f(void);
--int tqma6_bb_board_init(void);
--int tqma6_bb_board_late_init(void);
--int tqma6_bb_checkboard(void);
--
--const char *tqma6_bb_get_boardname(void);
--/*
-- * Device Tree Support
-- */
--#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
--void tqma6_bb_ft_board_setup(void *blob, struct bd_info *bd);
--#endif /* defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT) */
--
--#endif
-diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
-index 46989102fec..d604d6d4f0a 100644
---- a/board/tq/tqma6/tqma6_mba6.c
-+++ b/board/tq/tqma6/tqma6_mba6.c
-@@ -31,7 +31,7 @@
- #include <mmc.h>
- #include <netdev.h>
- 
--#include "tqma6_bb.h"
-+#include "../common/tq_bb.h"
- 
- #if defined(CONFIG_TQMA6Q)
- 
-@@ -126,34 +126,14 @@ int board_phy_config(struct phy_device *phydev)
- 	return 0;
- }
- 
--int tqma6_bb_board_early_init_f(void)
--{
--	return 0;
--}
--
--int tqma6_bb_board_init(void)
-+int tq_bb_board_init(void)
- {
- 	mba6_setup_iomuxc_enet();
- 
- 	return 0;
- }
- 
--int tqma6_bb_board_late_init(void)
--{
--	return 0;
--}
--
--const char *tqma6_bb_get_boardname(void)
-+const char *tq_bb_get_boardname(void)
- {
- 	return "MBa6x";
- }
--
--/*
-- * Device Tree Support
-- */
--#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
--void tqma6_bb_ft_board_setup(void *blob, struct bd_info *bd)
--{
-- /* TBD */
--}
--#endif /* defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT) */
-diff --git a/board/tq/tqma6/tqma6_wru4.c b/board/tq/tqma6/tqma6_wru4.c
-index 7acefc7b064..a7dc8fca109 100644
---- a/board/tq/tqma6/tqma6_wru4.c
-+++ b/board/tq/tqma6/tqma6_wru4.c
-@@ -33,7 +33,7 @@
- #include <mmc.h>
- #include <netdev.h>
- 
--#include "tqma6_bb.h"
-+#include "../common/tq_bb.h"
- 
- /* UART */
- #define UART4_PAD_CTRL (			\
-@@ -95,7 +95,7 @@ static struct fsl_esdhc_cfg usdhc2_cfg = {
- 	.max_bus_width = 4,
- };
- 
--int tqma6_bb_board_mmc_getcd(struct mmc *mmc)
-+int tq_bb_board_mmc_getcd(struct mmc *mmc)
- {
- 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
- 	int ret = 0;
-@@ -106,7 +106,7 @@ int tqma6_bb_board_mmc_getcd(struct mmc *mmc)
- 	return ret;
- }
- 
--int tqma6_bb_board_mmc_getwp(struct mmc *mmc)
-+int tq_bb_board_mmc_getwp(struct mmc *mmc)
- {
- 	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
- 	int ret = 0;
-@@ -117,7 +117,7 @@ int tqma6_bb_board_mmc_getwp(struct mmc *mmc)
- 	return ret;
- }
- 
--int tqma6_bb_board_mmc_init(struct bd_info *bis)
-+int tq_bb_board_mmc_init(struct bd_info *bis)
- {
- 	int ret;
- 
-@@ -256,14 +256,14 @@ static void gpio_init(void)
- 		gpio_direction_output(GPIO_UART3_PWRON, 0);
- }
- 
--int tqma6_bb_board_early_init_f(void)
-+int tq_bb_board_early_init_f(void)
- {
- 	setup_iomuxc_uart4();
- 
- 	return 0;
- }
- 
--int tqma6_bb_board_init(void)
-+int tq_bb_board_init(void)
- {
- 	setup_iomuxc_enet();
- 
-@@ -279,12 +279,7 @@ int tqma6_bb_board_init(void)
- 	return 0;
- }
- 
--int tqma6_bb_board_late_init(void)
--{
--	return 0;
--}
--
--const char *tqma6_bb_get_boardname(void)
-+const char *tq_bb_get_boardname(void)
- {
- 	return "WRU-IV";
- }
-@@ -331,13 +326,3 @@ int board_ehci_power(int port, int on)
- 
- 	return 0;
- }
--
--/*
-- * Device Tree Support
-- */
--#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT)
--void tqma6_bb_ft_board_setup(void *blob, struct bd_info *bd)
--{
--	/* TBD */
--}
--#endif /* defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_LIBFDT) */
+ Strings
+ ~~~~~~~
 -- 
-2.43.0
+2.53.0
 
