@@ -4,146 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5EE5106ACD3
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 17:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C807106ACD4
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 17:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18802842CC;
-	Thu, 12 Mar 2026 18:15:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 93409842F2;
+	Thu, 12 Mar 2026 18:20:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="oG1Q76Rx";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UJNB9axa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14CD1842E0; Thu, 12 Mar 2026 18:15:05 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 6FB08842F4; Thu, 12 Mar 2026 18:20:22 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6EA784238
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 18:15:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58DC484238
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 18:20:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SWhn+q90iLpCTrrK3U00uiZxqy8sTIJvI+lv+AXIMQ03gR2WHIY1Mr1J67RBRqD2yhXzdbN/WebiruU+eq8TiuQb0jtiSLcOC79p0nv7VFaDv65Ttdu3wrm2sK/4WvDvrSvF1pNgAKY0kY3eFAgMLQr4cnFyrcQWUP85JsJFTWY1gI/j2HKRLQamZ1Nu6VrcKacbKcdA0duWxiJYis83tdIT4deynKgG445Q5KDqEnMjA6GsZFlwUM0yRD2PXDTHU2aafjM5niySpbrUuuaqXdxox0I8zxu8bljFrGvH7VPcFze5OA3gI9Fprbc7omwwJWmuEMzUjMuvPZ5kSCgUWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rOdubfPkOii2Uh0CMmvt3NzaZBuS8Au/Ldpf0sQJF5g=;
- b=eRUq/zIYHxqG58tg2PGE32RktAomzXEFe0FzodBXtz2CeyUCIs7+oftLsEVvAuL7yLHJlFrudi+bFJ2gMSXv3tCGPJscwQ2eeA1RiXXdgbRoFhdgOSP7+4BkV2r5tI8wEqMiQibSe9N18ikX48kCa52zHhIvd1qzO1m3cIQD0QkdPfb+OGs/beVBtiSWYm39gQOclNoZaefWSLd2A1xs9ka+aMJl0/VcnT/ftHbOt99QojPIY0/6beYCxd7BBxMOMagd/htOhAw69dvjjvqiqzLBOvwUdHvDlGD0zG3Ng2bwGPFb9oXTREfEZkKGJSleyDV4h9v3OzcVBRW3cXBGjA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rOdubfPkOii2Uh0CMmvt3NzaZBuS8Au/Ldpf0sQJF5g=;
- b=oG1Q76RxNiK/qIxxgMdYHXhqO4rJTOHFzLAhQ6L5AbQwbQqv5NmwpNUS8LT89LcsfhiHCksOUCk0May64ttjXSvzhIxfJ3LMOm1l9mY5un2pQA2yHjvUEn+/ZrhdNrhXfJKSBubhsgJPkP+bhqC4c6VHKUIjfEHSTsgBqtBOtFPHQZCFWSHoxHhOqzskJ9Jk9pnWP+HYyRtHO1FiOwp8aoe2HvFy2D1o4NPWenKsAbyFE8hV0lzjpCzyF6iMHoi5PbBAU5JLtygpN4tQEVHhLYIm4ehgB5iSdb28ZX9vSfQAxP1sSSZKcZoxsGbT21wPOVx++ib6hR7dUhESiOTnDQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20)
- by AM0PR08MB5395.eurprd08.prod.outlook.com (2603:10a6:208:188::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Thu, 12 Mar
- 2026 17:14:59 +0000
-Received: from DU2PR08MB10037.eurprd08.prod.outlook.com
- ([fe80::3c7:6d2e:8afe:e4dc]) by DU2PR08MB10037.eurprd08.prod.outlook.com
- ([fe80::3c7:6d2e:8afe:e4dc%4]) with mapi id 15.20.9700.010; Thu, 12 Mar 2026
- 17:14:58 +0000
-Message-ID: <ede89994-cd05-437d-8808-2fef4f5889ed@iopsys.eu>
-Date: Thu, 12 Mar 2026 20:14:55 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/16] net: pcs-airoha: unify code using SCU regmap
- helper
-To: Jerome Forissier <jerome.forissier@arm.com>, Tom Rini
- <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Ray Liu <ray.xy.liu@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Robert Marko <robert.marko@sartura.hr>, Yao Zi <me@ziyao.cc>,
- Greg Malysa <malysagreg@gmail.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, u-boot@lists.denx.de
-Cc: nd@arm.com
-References: <20260211182230.968921-1-mikhail.kshevetskiy@iopsys.eu>
- <20260211182230.968921-10-mikhail.kshevetskiy@iopsys.eu>
- <49412867-f5cc-4f80-bd41-3cf0f027479a@arm.com>
- <f2780969-05e4-41b6-abd1-1e09aea706dc@iopsys.eu>
- <08774e1a-b7fe-4f2f-8922-e6e766dc8c5d@arm.com>
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Content-Language: en-US, ru-RU
-In-Reply-To: <08774e1a-b7fe-4f2f-8922-e6e766dc8c5d@arm.com>
-Content-Type: text/plain; charset=UTF-8
-X-ClientProxiedBy: GV3P280CA0083.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:a::11) To DU2PR08MB10037.eurprd08.prod.outlook.com
- (2603:10a6:10:49a::20)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1773336013; x=1773940813; i=xypron.glpk@gmx.de;
+ bh=D/0pX4qOsJv5hWJ0cX5oFTOxEOvXGc+OFz8ucIPH2v0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=UJNB9axaHk+cp9h2m3BlIhuXsduRwSf3uLe2MjjwATP1CaUGhPyEGlXFrwzJruox
+ b9m1cD0zEGg+1L0FZbfCv5b7lzhGJ2yJRKM66qThbo+iaZmg13uV5LibW0YwT81MI
+ qXTVQrM8rD4yF8XHpIk4FyiHyQ2VR2SMhAnXbnMOcqxfo+sJ3hOg82C05elmBv984
+ HtKL1BAZ/AiZiCBPiaDzX0cU79cJxWxwwgSUlOUhHRxkm86ji3v82uRWKTkZghJbM
+ aOsLY+JQnz11kfWsJUHTWr6QTSSMqHpZbrFDqeLs/ok9nbysAb1x5jBxRs+TURZto
+ gfBg25bUdPk1HRp0gw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N3KTo-1vZY5P00OI-0103SM; Thu, 12
+ Mar 2026 18:20:13 +0100
+Message-ID: <ab89f37a-9782-49c8-b06d-ee1b2d870650@gmx.de>
+Date: Thu, 12 Mar 2026 18:20:08 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR08MB10037:EE_|AM0PR08MB5395:EE_
-X-MS-Office365-Filtering-Correlation-Id: 96031771-3314-4110-728d-08de805ae376
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|921020|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 7aDJiRkUe+FWc1CutphwAZrjiBS1p5gk23ViKP9LnCsH55Fc+z7+njx7a6KyZ8+U9yaSj4c7Q3G7ztwvyKvUWg2ojMRm7s6HCgB3C8cVUizFJkNNWvTUPU8k6Z9dH2NrB5S1QyETMcoyEVfGXxdscHiDi23gaTBx1Oh1mU8Z3LMFSljwBarrH/TJGqImok/EiMwJNACRyMmSYUWk/yQxrz2YDxiT7cLkhVw8EX6PQEORbJHxtLkFLHs5pSzjKylmAjg3BhQUVPHPt57w+6yQk6uk8UvtYY0uENgExRPH+BwKSeJcvSRup1JzGpATL5Rb4S698p4X3Yf7UOMHn257e1A+2T18CEgEPIpyh4aCZtJscqAcc0wJDWhgg47cGNVBhXTRz0m1Uqnz7p07+UmZl/eqZNUP67ubAI6wdF5EB7B0CGrDIajuOFQnUixZICcCi/aahXccYtbLmrc5sOHt5lZPx3eq059SBDRxsmBwr7hEWmuxTRbZwpUJfCdNZ3yToiTQnp0LhtjZCM1+tWiTVKMp0NzVJJ9gOw6ohhKFRRYftq2ljZs/8nCHhtiPDGs7QTPf0O9EKz/PJo6+SxXTKpGw3c9ASSZZeqO+gBDrh558qcGMrdcLWD9wos1P5wPqjyJXHWhJtleH3aNFU2BcQLzekfLpXFAbQWf983D1bbyEnaDulP/dGO83TZe5+wA4Kt28a89Nb0S4Wv9NSdQp5HULaEHYdMPjbh7qRCVnhtQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR08MB10037.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(921020)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S29JVFVhMEJGUUhPeXVBdDZZeEh2YlJTUS94QURodEtLdGlNVXoycHlHbld5?=
- =?utf-8?B?NDc0RFZnOGFTVkhWRTNrNWx4NG41c2dJeWZWcFdMZGlrTGE0dWwyaU43YTVu?=
- =?utf-8?B?MitOdmdiZEZRaFg0MXI5bC8za1phTlFlc2U1bi8zR3ROQVZJcm1NK3h3YkZ6?=
- =?utf-8?B?K2VLeVQ5bENja0pEem5EdkZURzVtb0R0UDc5dFpIVnpoYlYxS0R1ZCtxQVI1?=
- =?utf-8?B?Y1o4bmVoWk83N21IWkxTRW1QcHJiSUsrWDlIemN6UTk0dE5GZ29wU1lRM2tI?=
- =?utf-8?B?TDZQWW5FZHhkRjVieWxpOEFtUHcraDh5WWVaYlJDMW1FcXc5c1lMelZoUWxW?=
- =?utf-8?B?b2tFN3pSREw1YkpmbExqaC95OUhNUXdxUnhrWlg5NFo2OUgxdEUvSDVxSXpH?=
- =?utf-8?B?NVZQUkxSN3pIajQxQXRlSFIvUW1kK2pReEY1eDFsdC9nbW4yQXI3UWxoOWhi?=
- =?utf-8?B?YUNLczVHNWFjSGcvV3QwTVZVVlh4c3Nhc1RsUEdLNGtpRTRFbWJkTkhxQzdM?=
- =?utf-8?B?VWxiSkZzUmM2ZGVqWGF0aklZMG9ZcFp0dnNpUVZQT2Z1em1qbEpYallyRjJ0?=
- =?utf-8?B?a2FzUVpVdVJneUZna29ldDVvdzJuT0ZTaWozVkxVSjhrNFFTMnJaMVZzOWR1?=
- =?utf-8?B?N3Q3UWMzUitDbkpvdC8rZVc4a0F6NXlmUVAwa1NTZHV1ZmFucXhrMnNhQnhj?=
- =?utf-8?B?VnFMbFl6ZnplN2Vyd1p4RHllQUs1MFdEUUNZV0QvYkk4TGVPUW5XKzNxV0tL?=
- =?utf-8?B?SE5IaTJ1amJhLzRndjJ1QnUzeFJXSXgrUFNBdW5mb3NBaVRjTEMvVC9QK0Jz?=
- =?utf-8?B?ZnZCT0RWbWprcVQ5TFRPNmU0ejlqcHUwZkFmUks2NVowWEsxblBRQXpHTHIw?=
- =?utf-8?B?dlBSSDFTOVVSWkRacFJFcXNUT2JIVmRZMWpQL3VWb2k1b1RaM2RkcEFwQUVl?=
- =?utf-8?B?M3NKMld4a1lGWVp3dThSdy8zTlFsbzhOWVMzWTFPcXBiUFY0Y2tUbkU1UFM3?=
- =?utf-8?B?OWtoVUgzaTVrNXRBbWFmU01yZ2lpbUoxZ3BFSjVXc1pnclI1VXhnUVpWdEVZ?=
- =?utf-8?B?SkUyZkdwN08xbEFvbnFpdnJHSVQ3bHNLb2h5RTA2OHNWUFJ1ZmU4SWlKeDNy?=
- =?utf-8?B?ZHh4bTNtV2wvcFN4RHpONG0wdDVXVXRsa3lHYWVyS2QvQUFkZkJFeFVYeFpt?=
- =?utf-8?B?SjdLaUN5Zkp3Nmt6dWVjQnFsY0xVR2E3ajg4WVRyak1qOEhWMFZ4M0hwL2M0?=
- =?utf-8?B?cWozNTMvc2RIM2U1WnY3dUU2ZG9ybWVEUkJId2IzV3FBQW9nMG1JYWx6YjdY?=
- =?utf-8?B?YytGOWRrRlUybkRRTVdBRkpKLzNrT1VZREZ5bXkxZmY1U3B1SXhCYXZaSlZm?=
- =?utf-8?B?dnZwZEQwK3JHUVpRQm5jUGRpazdpUjNpd0N4YnBsWkhmWDNDT05Ka0xRNzZl?=
- =?utf-8?B?UXNVYlFPU21yRW55RFpnSDBzMDBhaE8wbU93Nm5lUDJxSGNBKzBIVmVPaDB2?=
- =?utf-8?B?cjYwNDQzN3ZxNGh6aE9JZm1iZnp3UENUUHRiV0tMeUVEemtNZE9iMkxWeVdI?=
- =?utf-8?B?OVY4b01zQU1OWmxOZ1FMQkZ3VnNGK3VudFhBeloxZiswaWZrRjZjdkpLNmll?=
- =?utf-8?B?WmFoSlZEajRZNTI2enlpSGFqdnRYcERLR3NodUphQ3JLak05NkgyVzF4ajM1?=
- =?utf-8?B?ejZtK2t3QmJOTXphYlQ5VzZFMmM3VkZodmJWb3A0N04vL3JLeFZMM1dDemNZ?=
- =?utf-8?B?ajNvcW5WZjYvcmxhT1VpT0I5dVZvVHlSa1FxR05mSFZpam5DZ2tXSjF2WFRK?=
- =?utf-8?B?VDhwQmpuN1JlamJZT0lBN0J5NUdyZkZRTStLNmF5cDRRUEZOdUJxNzNib01O?=
- =?utf-8?B?ZExxWmlUaW1WRWcxdHFleFFXenp1aDg2MXNUUkduZldCUm9IRDE5ZGlBNVdS?=
- =?utf-8?B?VVIxQnR1SG5UZk1EME9QNDY0VmZBNVNHZFRrWDVpQlByMXdnVmloaDZyZk10?=
- =?utf-8?B?Ym51QzRzUjFyb1RVRmovTmlMNHV0MktlcHVRTW9EWGZwMFRIclMramx6cFUr?=
- =?utf-8?B?SlBnZWtaeTQ2QUNHeTBOeDBNaUdwMGZZUjU1TXJldkY0K2VBMjd2WjFINmhz?=
- =?utf-8?B?c0JYaDMrZmMxUHZqMUhPRnpYbEp6V2E1Ri91Z2puazdKaDdVclovUUZGb3dY?=
- =?utf-8?B?Ky9RWHNZaWJEUFk1UDdieTgwTkJrYUlLL1pCejVNajM4Um5OYVBGYkg1WUdt?=
- =?utf-8?B?WDUrS0JiekptdmxvOXF3R2ZDRkxtRVVUUG50STRORDl0UjF2bXNUa2dNOCtG?=
- =?utf-8?B?R0hrZ3R3MmVGTmdRcDJnRExWREZ0QUltUkJYbUlWcDl5a3BTblU2SUJQUjlI?=
- =?utf-8?Q?1nc1b5t9plGpluTg=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96031771-3314-4110-728d-08de805ae376
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR08MB10037.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 17:14:58.6903 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +sR+JSt3xNFXFGYwJp/8eqbSEnbk7aCkbsYJQeVve1wqYgtVyY5BGJFxvamL3JGbCD/GZtup5Rho5vLDMxLAfyzwgu9B3Vp1qfIYr7Uw4lI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB5395
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: avoid superfluous variable store writes on
+ unchanged data
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Shantur Rathore <i@shantur.com>, Tom Rini <trini@konsulko.com>
+References: <00b03eb724de3e8b3e46ec630860e751bdc40011.1773322038.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <00b03eb724de3e8b3e46ec630860e751bdc40011.1773322038.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:2BiJZUWO+hU0g1x0dCkXQgpZxDUBIvRZp3xwDe+nVIeQy/PskpS
+ XXpQSIJxymO2KkAvhMC7NoduQIVry1f7Ll4MojSs2g10juPLnSeMdpRCpgVj2ypfz2a41J3
+ 1Z4muvmjGzeU3t0Zf8kIgvQza2ERKA3uJL86H0mrXt7FfwFzTxAH3m0VQZzxrKSAFHADA4O
+ QhzNJQTGmekkFP5dZF1kg==
+UI-OutboundReport: notjunk:1;M01:P0:HtMFWyy4Q5c=;sZezLHsojKGvrixw+aTfBHpLJRU
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,45 +154,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 3/12/26 14:27, Michal Simek wrote:
+> Every SetVariable() call triggers efi_var_mem_ins() followed by
+> efi_var_to_storage(), even when the variable value is not actually
+> changing. This is unfriendly to flash-backed stores that suffer
+> wear from unnecessary erase/write cycles.
+>=20
+> Add a change-detection path to efi_var_mem_ins(): when size2 =3D=3D 0
+> (i.e. not an append) and the caller passes a non-NULL changep flag,
+> look up the existing variable and compare attributes, length, time
+> and data byte-by-byte. If everything matches, set *changep =3D false
+> and return EFI_SUCCESS without touching the variable buffer.
+>=20
+> Both efi_set_variable_int() and efi_set_variable_runtime() now
+> check the flag and skip efi_var_mem_del() / efi_var_to_storage()
+> when nothing changed.
+>=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 
-On 3/12/26 20:05, Jerome Forissier wrote:
->
-> On 12/03/2026 17:11, Mikhail Kshevetskiy wrote:
->> Hi Jerome,
->>
->> This is quite significant patch. If it possible, could you delay pushing
->> of all the series a bit.
-> Oh I'm sorry if I misunderstood that change. As I said I have already sent
-> out the pull request. Well I suppose worst case the feature is not yet
-> working but the series without this patch is not breaking anything, right?
-> If so then I suggest we merge the series as it is (without this patch of
-> course) then apply one or more followup patches. Tom?
->
-> Thanks, 
-should not be an issue for an7581. In worst case it will just not work.
-I'll create a proper fix tomorrow or on weekend.
+Thank you Michal for the patch.
 
->
->> I'll look on this patch (and maybe update a little other) tomorrow and
->> sent an update.
->>
->> On 3/12/26 19:05, Jerome Forissier wrote:
->>> Hi Mikhail,
->>>
->>> On 11/02/2026 19:22, Mikhail Kshevetskiy wrote:
->>>> Use common code to get CHIP_SCU registers instead of driver one.
->>>>
->>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
->>>> ---
->>>>  drivers/net/airoha/pcs-airoha-common.c | 4 ++--
->>>>  1 file changed, 2 insertions(+), 2 deletions(-)
->>> FYI, I had to left this patch out of my pull request to Tom [1] due to
->>> a CI error [2]. The root cause is not obvious to me, and since it is
->>> just some code cleanup I decided to take all the other patches and defer
->>> that one.
->>>
->>> [1] https://lore.kernel.org/u-boot/91fa5175-5eb1-4991-9467-fc3fe4f52105@arm.com/T/#u
->>> [2] https://source.denx.de/u-boot/custodians/u-boot-net/-/jobs/1396757#L1193
->>>
->>>
->>> Thanks,
+I ran the VariableServices tests of the SCT with this patch on top of=20
+origin/next and saw no new failures. The following are failing anyway=20
+because our implementation of authorized variables is incomplete:
+
+* AuthVar_Conf
+* AuthVar_Func
+
+Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> ---
+>=20
+>   include/efi_variable.h          |  8 +++++++-
+>   lib/efi_loader/efi_var_common.c |  2 +-
+>   lib/efi_loader/efi_var_mem.c    | 29 ++++++++++++++++++++++++++++-
+>   lib/efi_loader/efi_variable.c   | 27 ++++++++++++++++++---------
+>   4 files changed, 54 insertions(+), 12 deletions(-)
+>=20
+> diff --git a/include/efi_variable.h b/include/efi_variable.h
+> index fc1184e5ca1a..c3229c717d89 100644
+> --- a/include/efi_variable.h
+> +++ b/include/efi_variable.h
+> @@ -216,6 +216,11 @@ void efi_var_mem_del(struct efi_var_entry *var);
+>    * The variable is appended without checking if a variable of the same=
+ name
+>    * already exists. The two data buffers are concatenated.
+>    *
+> + * When @changep is non-NULL and @size2 is 0, the function compares the=
+ new
+> + * value against an existing variable with the same name and vendor. If
+> + * attributes and data are identical the insertion is skipped and *@cha=
+ngep
+> + * is set to false, avoiding superfluous writes.
+> + *
+>    * @variable_name:	variable name
+>    * @vendor:		GUID
+>    * @attributes:		variable attributes
+> @@ -224,13 +229,14 @@ void efi_var_mem_del(struct efi_var_entry *var);
+>    * @size2:		size of the second data field
+>    * @data2:		second data buffer
+>    * @time:		time of authentication (as seconds since start of epoch)
+> + * @changep:		pointer to change flag (may be NULL)
+>    * Result:		status code
+>    */
+>   efi_status_t efi_var_mem_ins(const u16 *variable_name,
+>   			     const efi_guid_t *vendor, u32 attributes,
+>   			     const efi_uintn_t size1, const void *data1,
+>   			     const efi_uintn_t size2, const void *data2,
+> -			     const u64 time);
+> +			     const u64 time, bool *changep);
+>  =20
+>   /**
+>    * efi_var_mem_free() - determine free memory for variables
+> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_co=
+mmon.c
+> index c89a4fce4ff8..d63c2d1b1cd8 100644
+> --- a/lib/efi_loader/efi_var_common.c
+> +++ b/lib/efi_loader/efi_var_common.c
+> @@ -526,7 +526,7 @@ efi_status_t efi_var_restore(struct efi_var_file *bu=
+f, bool safe)
+>   			continue;
+>   		ret =3D efi_var_mem_ins(var->name, &var->guid, var->attr,
+>   				      var->length, data, 0, NULL,
+> -				      var->time);
+> +				      var->time, NULL);
+>   		if (ret !=3D EFI_SUCCESS)
+>   			log_err("Failed to set EFI variable %ls\n", var->name);
+>   	}
+> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+> index 31180df9e3a0..e364672db81a 100644
+> --- a/lib/efi_loader/efi_var_mem.c
+> +++ b/lib/efi_loader/efi_var_mem.c
+> @@ -159,12 +159,39 @@ efi_status_t __efi_runtime efi_var_mem_ins(
+>   				const efi_guid_t *vendor, u32 attributes,
+>   				const efi_uintn_t size1, const void *data1,
+>   				const efi_uintn_t size2, const void *data2,
+> -				const u64 time)
+> +				const u64 time, bool *changep)
+>   {
+>   	u16 *data;
+>   	struct efi_var_entry *var;
+>   	u32 var_name_len;
+>  =20
+> +	if (changep)
+> +		*changep =3D true;
+> +
+> +	/*
+> +	 * If this is not an append (size2 =3D=3D 0), check whether the variab=
+le
+> +	 * already exists with identical attributes and data. When nothing
+> +	 * changed we can skip the write and avoid superfluous erases.
+> +	 */
+> +	if (!size2 && changep) {
+> +		struct efi_var_entry *old;
+> +
+> +		old =3D efi_var_mem_find(vendor, variable_name, NULL);
+> +		if (old && old->attr =3D=3D attributes &&
+> +		    old->length =3D=3D size1 && old->time =3D=3D time) {
+> +			u16 *old_data;
+> +
+> +			for (old_data =3D old->name; *old_data; ++old_data)
+> +				;
+> +			++old_data;
+> +
+> +			if (!memcmp(old_data, data1, size1)) {
+> +				*changep =3D false;
+> +				return EFI_SUCCESS;
+> +			}
+> +		}
+> +	}
+> +
+>   	var =3D (struct efi_var_entry *)
+>   	      ((uintptr_t)efi_var_buf + efi_var_buf->length);
+>   	var_name_len =3D u16_strlen(variable_name) + 1;
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable=
+.c
+> index 8512bc20f11e..9923936c1b59 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -277,6 +277,7 @@ efi_status_t efi_set_variable_int(const u16 *variabl=
+e_name,
+>   	struct efi_var_entry *var;
+>   	efi_uintn_t ret;
+>   	bool append, delete;
+> +	bool changed =3D false;
+>   	u64 time =3D 0;
+>   	enum efi_auth_var_type var_type;
+>  =20
+> @@ -366,6 +367,7 @@ efi_status_t efi_set_variable_int(const u16 *variabl=
+e_name,
+>   	if (delete) {
+>   		/* EFI_NOT_FOUND has been handled before */
+>   		attributes =3D var->attr;
+> +		changed =3D true;
+>   		ret =3D EFI_SUCCESS;
+>   	} else if (append && var) {
+>   		/*
+> @@ -380,15 +382,19 @@ efi_status_t efi_set_variable_int(const u16 *varia=
+ble_name,
+>   		ret =3D efi_var_mem_ins(variable_name, vendor,
+>   				      attributes & ~EFI_VARIABLE_APPEND_WRITE,
+>   				      var->length, old_data, data_size, data,
+> -				      time);
+> +				      time, &changed);
+>   	} else {
+>   		ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
+> -				      data_size, data, 0, NULL, time);
+> +				      data_size, data, 0, NULL, time,
+> +				      &changed);
+>   	}
+>  =20
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+>  =20
+> +	if (!changed)
+> +		return EFI_SUCCESS;
+> +
+>   	efi_var_mem_del(var);
+>  =20
+>   	if (var_type =3D=3D EFI_AUTH_VAR_PK)
+> @@ -396,10 +402,7 @@ efi_status_t efi_set_variable_int(const u16 *variab=
+le_name,
+>   	else
+>   		ret =3D EFI_SUCCESS;
+>  =20
+> -	/*
+> -	 * Write non-volatile EFI variables
+> -	 * TODO: check if a value change has occured to avoid superfluous writ=
+es
+> -	 */
+> +	/* Write non-volatile EFI variables to storage */
+>   	if (attributes & EFI_VARIABLE_NON_VOLATILE) {
+>   		if (IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE))
+>   			return EFI_SUCCESS;
+> @@ -498,6 +501,7 @@ efi_set_variable_runtime(u16 *variable_name, const e=
+fi_guid_t *vendor,
+>   	struct efi_var_entry *var;
+>   	efi_uintn_t ret;
+>   	bool append, delete;
+> +	bool changed =3D false;
+>   	u64 time =3D 0;
+>  =20
+>   	if (!IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE))
+> @@ -549,6 +553,7 @@ efi_set_variable_runtime(u16 *variable_name, const e=
+fi_guid_t *vendor,
+>   	if (delete) {
+>   		/* EFI_NOT_FOUND has been handled before */
+>   		attributes =3D var->attr;
+> +		changed =3D true;
+>   		ret =3D EFI_SUCCESS;
+>   	} else if (append && var) {
+>   		u16 *old_data =3D (void *)((uintptr_t)var->name +
+> @@ -556,15 +561,19 @@ efi_set_variable_runtime(u16 *variable_name, const=
+ efi_guid_t *vendor,
+>  =20
+>   		ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
+>   				      var->length, old_data, data_size, data,
+> -				      time);
+> +				      time, &changed);
+>   	} else {
+>   		ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
+> -				      data_size, data, 0, NULL, time);
+> +				      data_size, data, 0, NULL, time,
+> +				      &changed);
+>   	}
+>  =20
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+> -	/* We are always inserting new variables, get rid of the old copy */
+> +
+> +	if (!changed)
+> +		return EFI_SUCCESS;
+> +
+>   	efi_var_mem_del(var);
+>  =20
+>   	return EFI_SUCCESS;
+
