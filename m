@@ -4,142 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF533FED2F6
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 09:21:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D03FED2F7
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 09:33:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14D0983F00;
-	Thu, 12 Mar 2026 10:21:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 9231883F00;
+	Thu, 12 Mar 2026 10:33:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="MQ1HXX+7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="frLXnIkW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C3DB840A2; Thu, 12 Mar 2026 10:21:32 +0100 (CET)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id 5663B83F53; Thu, 12 Mar 2026 10:33:19 +0100 (CET)
+Received: from DM1PR04CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BF1083CEA
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 10:21:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4B0183DA7
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 10:33:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZCnkEEIVyfxU4exY+vmGjHG7p86SZdnjnTIlS998Qid0qzQGOR9IgqlSIhOHtVQcotdV6+pGTN7DEbJxZEG+4ZpK3MaBowlCidembbOa1pJpVwJ7ooxWWrMQg9dvnHs1FZ+5uSbctKDIuWYPgPzFNk4+iYJrKrzoGKE4kkSWqiNAIWIul7TMIg5W0pRY4MQ0U2N5qID1xlmUDeThdZzqF+jVwoBwWnVw65EvAY1CQQK+0HmSOehQJrQ301duB0r1OTh5XtVm9ksba8fDP3sUvwRpMyCwFs5vPamqY1i+VQ5ODzltQFx/MDVEpC9aZdq/xtRmwLktKOFj1ZGxJtE/eg==
+ b=IKPefuK93O2abydv1kyFSFFnAFxjhZy8/0h4/bjnx1dB/lROx/XLlnqcxeQbwRsJ+NlEKeOs5RTVfacJSrO6DjMOh4nks7+cE4O7K2zhPFM4zyyoBZJHP9bjKaHJwj9us/ba7bgLhMfA6lNw9bAR7Q5YYJ6BkRiO+CEcDZRbKQqD5k4bGEu6Epx9DXajwlWDeZAr/ahx72F/2HAoPxoHqjMQOrd85MrMK7UuqHnZOIVIYPBUU5RMpEyssi8GCY+v+p/6f5/T0oDi7VjPcocKUPzYWffRwiDcHJhwM9QVIVvvwDNG8tweGCkkf+N/uV8DDWRbiyQNdiBIuWij2NjC5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K3hRyLas/Q+xXDmvc0rZbDO9N3RkScigw2wBCv50L54=;
- b=K9Y67RekHYrrwEmWhR+Brc7ck/en8T6Ul09V5eHCf56Cy1fGfn+jXiM6RvOIEoK40tTYmbQ97c4Ha514Xxq1y1psXiIsjxwGUZBt7w1kEQWcNAHGm3Pg+43aYAZMKo2mkNCx+dHO3QckJCBzZhpIbnFzhObk49oZTgPRndJGxzK0bIfxZUb+2VdfGe97/L743Q+kBnCReHdgeiw2CpyVVa3hcQ8gldR5aPa3jV32m71Iggh/4/e/Bh8x2aISyssVsfDtGa5WsOeVlRNGbE0zJLNmwEahto6uJPrFOivHw/YX3om+kF9pgOl0+SQen9lK7z1CNn+mRrFxJsSSwMOWSQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ bh=32y4TPVWzFOjS7qFdEXTWBGQNM3KvipU55z09mLIIAg=;
+ b=tvecNCBnXU8ejsy1K+XUaiNEtAxdl0l3DKIuUi7SkuH6yT1/iONGAuO8JDVg7vJwGcuxEp+9kBymwIXbd+G20iKER9AQnXgcziJ4CA95HbBOAMyc+pudeb1rhnAk5fAV3YZYcKsWkd90FcAIyj/eXiM32Wn56KFj4KPMBz8/8dZBSNxWIRUtLKxVq65olcmobslixVOxrIe04sgSae7gOULokGMM6+1wfagG3vFlZYWqJZtLe3Cn1PUt9OojDN/IYAZ2HPjjw6xrL7HdVSrN+q6x2ZxT1DxOzf39hJXpKd1k3ItgiJLDUBnCm3vRcggfbk6rbjjuQ4iTPt29eIiWfg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=phytec.de smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K3hRyLas/Q+xXDmvc0rZbDO9N3RkScigw2wBCv50L54=;
- b=MQ1HXX+7zVZCt605PlbDy61tA1LbcoExJFjwuxq/OPe+smH7zsYxqZDQXhVaC3mJZWNNfkVH9bIrrD7CIqsQeeDMaYUBtKmPDM+XzuGtJ36D/BTHvpaLOIoSQ8exmcSoVtHEff6e0ptqoDJm3vH3+59KgXFZ7C9ORkk9JHJD1r7Vmwg4GGnA3sDoa8cJ5Xih/Ly/Y/ADhG5zTkmp2tY0sGyL7Bj8Nw3lwlPx/pL9kpJiIcehlT0NrQXAAU4XaoJtA+A+fl8XcAWzpdGaEzizR2H75yyQIYNayZJY/qzzO+US5Xyh/dQIomY1VyLCcBhpEpVzhMcxLIZuzYCpKPhK5A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AS8PR04MB8402.eurprd04.prod.outlook.com (2603:10a6:20b:3f6::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.12; Thu, 12 Mar
- 2026 09:21:25 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::4972:7eaa:b9f6:7b5e%7]) with mapi id 15.20.9700.013; Thu, 12 Mar 2026
- 09:21:23 +0000
-Date: Thu, 12 Mar 2026 17:23:23 +0800
-From: Peng Fan <peng.fan@oss.nxp.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Marek Vasut <marex@denx.de>, Greg Malysa <malysagreg@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>, Yao Zi <me@ziyao.cc>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Anis Chali <chalianis1@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, Ye Li <ye.li@nxp.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, u-boot@lists.denx.de,
- Andy Shevchenko <andriy.shevchenko@intel.com>,
- Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- arm-scmi@vger.kernel.org, linux-gpio@vger.kernel.org,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v2 3/4] scmi: pinctrl: add pinctrl driver for SCMI
-Message-ID: <abKGCyZLNrl93RMj@shlinux89>
-References: <cover.1773256350.git.dan.carpenter@linaro.org>
- <1048331f5d3c8e0cdbe1542bcb65bbf942a4275b.1773256350.git.dan.carpenter@linaro.org>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1048331f5d3c8e0cdbe1542bcb65bbf942a4275b.1773256350.git.dan.carpenter@linaro.org>
-X-ClientProxiedBy: MA0PR01CA0045.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:81::20) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ bh=32y4TPVWzFOjS7qFdEXTWBGQNM3KvipU55z09mLIIAg=;
+ b=frLXnIkW1vIqRn4TLMkkIbp+ovYxBEB5B0Zzmatcz3DmWKN6q1kux9LuK9luwS/epiDHf1/SuSUJARJhxtXqvRlUV4S2ohprkkDN4dy4BgwaigKIQJeOkEehUhCjzVSCPztTRnPGBg/tgGIlpFFhdEJHG+jcYfnCjLjkye12LKU=
+Received: from CH0PR03CA0013.namprd03.prod.outlook.com (2603:10b6:610:b0::18)
+ by DS7PR10MB5133.namprd10.prod.outlook.com (2603:10b6:5:3a7::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
+ 2026 09:33:12 +0000
+Received: from CH3PEPF00000018.namprd21.prod.outlook.com
+ (2603:10b6:610:b0:cafe::de) by CH0PR03CA0013.outlook.office365.com
+ (2603:10b6:610:b0::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.29 via Frontend Transport; Thu,
+ 12 Mar 2026 09:33:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CH3PEPF00000018.mail.protection.outlook.com (10.167.244.123) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.1 via Frontend Transport; Thu, 12 Mar 2026 09:33:10 +0000
+Received: from DFLE215.ent.ti.com (10.64.6.73) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
+ 2026 04:33:05 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
+ 2026 04:33:04 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 12 Mar 2026 04:33:04 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62C9X3Kb2578561;
+ Thu, 12 Mar 2026 04:33:04 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Date: Thu, 12 Mar 2026 15:02:49 +0530
+Subject: [PATCH] doc: board: fix OPTEE args for TI SoCs
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260312-optee_args_fix-v1-1-55972621c005@ti.com>
+X-B4-Tracking: v=1; b=H4sIAECIsmkC/x2MQQqAIBAAvxJ7TlCTDn0lQjRX24uKRgTi35OOM
+ zDToGIhrLBNDQo+VCnFAWKe4LxMDMjIDQbJ5coXIVnKN6I2JVTt6WXWKGu4ktwrByPKBYf+h/v
+ R+weNMQkGYAAAAA==
+X-Change-ID: 20260312-optee_args_fix-ba4ba0420f4d
+To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
+CC: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, "Tom
+ Rini" <trini@konsulko.com>, Wadim Egorov <w.egorov@phytec.de>, "Francesco
+ Dolcini" <francesco.dolcini@toradex.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, Anshul Dalal <anshuld@ti.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773307983; l=3742;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=t6GXuNS24IMFfio9xJG9XBIRWPZKbjryWwQRy+0qcZE=;
+ b=2EGRoo0O6RzOm4HpoksneJDqFiXf5xL8C/pe3m7qdtbEEAkqfI+ztQBfYZ2jP0W2uyaPVilXC
+ rhbz35uUElxCP+lj/Oevgb03iokadld/vcIWzhNZ3E7LXGe7U4cPzLT
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB8402:EE_
-X-MS-Office365-Filtering-Correlation-Id: e8ae812e-abe9-43c4-4430-08de8018babe
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: CH3PEPF00000018:EE_|DS7PR10MB5133:EE_
+X-MS-Office365-Filtering-Correlation-Id: 673d9840-e0c2-4ea2-b793-08de801a607a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|1800799024|366016|52116014|7416014|376014|38350700014|18002099003|56012099003|22082099003|7053199007;
-X-Microsoft-Antispam-Message-Info: yb2gRvX3qRHdmoODsOC3/aa7JBuOfV838blY24LVAueX9wbKIuh5S86A0Gf1GTNFl2wAkJFaRQj5GU7Awjg7GuGc3c9xZkFWVfNR97X4vWP+yckyL927gqEAdfKDiLp9ED8+KRCL4Z+KtE5JOqrvtClecMSl4EGUfqO5T2Dtlntxo599J3WNfn1OUHuYivg9/YB7W0a+FdfoeYgXy+IwbVs5InAhFEa/fu1pbGnhnOSmRLSfFcQ0ZaosrIOM1DNVh8RsXVb+PGjZDXvnUj1vixtMDp13K1Yg3ZOgKTNw0PtQbf1X/bpdamL2L2J7/NSSw7RnaI/M61cC62+PQyy0r3LaHXpOhrkPZ2FUOmWKsoZrjNc807TWyLPcpHD2sMFJCnqealBcqFOS15WSkHEpWe2VRs889VntLVMTKHJtFxUkKMCjc5dz2kIsSZyNMoNT7eAn0dql7R6Do80d+2ybLqqe0ILDUu0PX6jKxnhEaws8vbVs6B1DDVobLMFQqNDPT4AdzRKZFPX4G/ZmlZXGiqJDPsZsJIIxdFk8sMgOEsIIqz69yaV1Ok3V2I5JK3FyK4L+78LwYIk4bp0EaXbDFnFfc4A1iSpVzTKj7IXZyI/ouLCzcGPHfIBZVSef97Xq6cWc/mtSDd3z2d6XZeMvPeLz6w04fqhb/2uEICl9Lhquu21/4+BYFpNstuRuhy4h2qOc1UixVi9zZGqA7l3eRg3VO2o0SVTUL9pG9eBa4PGkLOIvQJF13OTmff8pxhJJJQPdwFSg3QuRYHE1hQk/pmAb71MMpBXy0rkX1TxeOTI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(1800799024)(366016)(52116014)(7416014)(376014)(38350700014)(18002099003)(56012099003)(22082099003)(7053199007);
+ ARA:13230040|82310400026|1800799024|376014|36860700016|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: g1i9mdMn9wkRGnFtlBBcKcNJvQ1rAwAw1TXwDyjR2T+6wRCFFKRipmTFXRurmL/XzJLPgLGTjpFbISFJvgaF9d2eup2BBxcDGWtZ0UpcZqxcaxDo13vKq6KOkSWcM9/S+y2eUZZhndbs7jUpFG1MknhqslDAIhsWPHdmgXa/mcxdISl7XQXWZojiYisxop8Kq2+BjU49uyHFqpmZVssZruVwV8ucvYHwJBH1FF5V+G2uoqGdQ0+h41y3bJj9rztl/ex0KzWa9RJRfXTDLhbtdMAVQyNxY9MmQvuzwcJqhxuRGL9a6nrD+eW0GgM/Iv3hnEmknm7hbuvwhWEOnC/7Z1KmLY+8n2/k3FFReJVC2J/BD3f7rscg4Fsby5oyomRziQK17/a/S0qW5JYVy7QZmqjnXuYlNqgxqIy3NDyj16VkuNzjRQnNHhVquER34jEzXtw8ZA2FDFjuF2DEKfeOZQFlBZHEDepm0vTzvhUGX0BFSf4BT3ti8LjEqq9Px5JGl/0GrWozAHEYjM8x/Q/lgvnnmTnnTJGBRdCCDKXf4EN2gXb5RU+xpZv3nN8yZX6Wo2IvIpWqpGIhIB8nDm1/mtt+Tb3sB7YfRlsq2tZe6JQQbkrN0XHX8xcbtz9bYZ0AvAgcRL7x3upO1dhKNAqVk3uH1afzHk29/Tq7phtKgy9+VpWxr1Kk6EzYvdcoGaB3heZxE8tNaob8rUwWOqbRBr5uesKUAaPDJeQVQPs7lDM=
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(18002099003)(56012099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yzRm09XwHQr7SsXnDlS7pjZBsj7lKI23RloWBK3P6qwsk2vO1AXvWm4kYwoD?=
- =?us-ascii?Q?1X4O3Y22/FlsK3cyMJOIz0jOqmGH+/dQ8+thL57v7l6E4xLhK+YC7m+EW+Ea?=
- =?us-ascii?Q?hmOu8UChy9Kf3qowhRDlK8k4Jwu7mpGwcbB+9wuqWeVYeOYuqQeT05CUVlMe?=
- =?us-ascii?Q?2Y5sEEHqjhQh2dT68+N8hdZNZGW2yKt/v80/orSQ3zylU3/nxpVhUNgq5fh6?=
- =?us-ascii?Q?RE/VNdM0Vzw48RPw5hPBLiqBTimlgRkvUZfyCWVfQ/mOmzyLRDBPTXW8q0LG?=
- =?us-ascii?Q?tTOFLndlV9ewRbuFanQu+ABmN+rFFCtpYFDvDfsrdLtFQeyNs29kgfaB0HVa?=
- =?us-ascii?Q?IO9eLoHqhmvWQWVxYSpi2HGj4immIIAepjAL87ACycuBBRb8fOyWcBxUZxkQ?=
- =?us-ascii?Q?8ztKnPfHnoRszOAoZpSZZg49JtwxBuYBwR1YHr1C0IiCgIv6mkyYQyfalCX9?=
- =?us-ascii?Q?0n+pnSzb+TMWP+Dlkj2ILHwH0kok0j5IqPS7qpp1JGUiu2fsQ5ejbIGN0EHi?=
- =?us-ascii?Q?VsO+T8Nf1uUdKIzTWF8t0zLo74k7Rtswt1zaxFvQNrqPx5AI05XDgnptIfdf?=
- =?us-ascii?Q?Remhd6a3VV6LCv/wgLkaSaFBY7zL7d+Cxd3zCWniKcci0I2nPVslUsRNIYUm?=
- =?us-ascii?Q?mXlExzHxFsof1nRnv6p0udDHmeV0ONHQCncdwJA3xwwgkpLwiNGZzqRr4MdB?=
- =?us-ascii?Q?9otQIbkLwL9KB8t0Hjd4Qg0ZB/bZt2SItRW22+S6oA+4mMrwm4G6TCj80Ulz?=
- =?us-ascii?Q?nKWTh/A2lWOswA4cqVlOr9NAiFz4L51+WahUlCQE1KKkxRp2BJfSFMPLvW9/?=
- =?us-ascii?Q?WLLN7ax6dG1n/JVYIJUSMb/JTpGZCv1BsraMbuH+KKFhXyvD9hif70C8DBTL?=
- =?us-ascii?Q?uq7/i4kBAq+hxEhYtOwg/waQvWQf4GVr0H3NDrL3t06RnXFjnGIb5vTRYT6+?=
- =?us-ascii?Q?hUjd5Zg5iXfYIj+VFlhmyILBQa76Lqtj39zInkPuVCpiAKXUMmYmBHf5cm7R?=
- =?us-ascii?Q?OnylX7dSS7uzCoQgK88rl63vHJ4K6a6hfyxavlcaonsSIg1ungeq/gOPTEdl?=
- =?us-ascii?Q?NIK2afo7vvqEtGTW5Q2eMYJpyIyGGFSwTLHVVFiEcOLY35mxTbLzhBdgGdNs?=
- =?us-ascii?Q?LjzaEUoahs07Xysh2+d4b5TaQvMGQLLqHdB5s+MuwshcjOhygRiV4myarEuA?=
- =?us-ascii?Q?Pdab9fw09RamFZVAXUo8EXZD6zHsRf46I6vLTQV8fFnzH9TeJAho6jMqci/T?=
- =?us-ascii?Q?jUi2Qczqqznb6nR4e3n8005noXKUXSGQ7fCcSPW1BSglURJhwne8P1xBImPe?=
- =?us-ascii?Q?/yo6zXR3H3C7QTrCEAR6bhel65sm99jHstGH/Jf3YywsCubw/OwDu9T5mQ4u?=
- =?us-ascii?Q?C/B5qR1xIQCCDpK+VXKsWKLAnfV5G8FeG04dy8lzJUwAkRRuy/Fiff0yS7u4?=
- =?us-ascii?Q?ghsrm0P+/SH3NU03HCeJog5caCdKg9bUOfvO9F33cAwYOjo8hAaj1+46A2DO?=
- =?us-ascii?Q?moNG9H37VZFVQgLaeH6xt3QOTjDDL4EOlyVfjMelNtG91aH8xGDgDI8oyESo?=
- =?us-ascii?Q?L3Tm7hsPXOKQ2+GWRucVk4FKwMS/Jx6AUF8bfv0vYMGTMVcElW7Ule7DSy3f?=
- =?us-ascii?Q?Wvf57yO3paIVq4JRLCfq/VIR3SO5crR/A1UlLBOql/mF3WVrcLJNtOrYPN+2?=
- =?us-ascii?Q?EdmW+kvmAY+tXdUB89TyKRrAB6TpyTvbn8eDJsyAwZBF2cLKvu96vCjQEpuR?=
- =?us-ascii?Q?IP+Ln9SStA=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e8ae812e-abe9-43c4-4430-08de8018babe
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 09:21:23.6887 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ieTm4oWDVklE7rMCW/b4qzNItAeA1PB23uLuMuU3rVTQnc9XZRMl541Osl/l/thNoEd7ZQePgMQcgYKJ6I+JiQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8402
+X-MS-Exchange-AntiSpam-MessageData-0: sZJuKpC3kQmYt/dcJ8v9eT/2g8ziH8SfFO7yv8hc1bZTUxk3J1Fo5W5H6gzMTweIw4b/k2J28HtcFT3JtPnVufGH0QgQ9Tu9alfQ6RRvpc8s0nwj2jWFBQ1BScJtOz2kH1pVwJqYfuSRyNpVbfSzEcSaXPgaMKwLf7//UrKyVZFjl2havqvu0OUYYJskLC/vZvHe9/7C2iwGt2hvDK/nJvlzIFzLjQ3SZ5Av1+09dJbPMs/D093EMN0OSDcq3X0/6mkvUbx3E/4NfA8Cen+g1YGEduvq2Hrg4nqdjfhYxDVRKbSFRCguY5/D1rjsSjFydItrpli+PNTH9bDc2VejkOCaDejT5FU2SHmYD4y4QijoEEMXsU5VgJijepP+Xv9xlS8ggO80/JWQA+dEXRpn3XYwyT9T5uHI3aiT/pnPFAZppvfjwwhZMFUxOs91lZvg
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 09:33:10.8352 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 673d9840-e0c2-4ea2-b793-08de801a607a
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000018.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5133
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,34 +142,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 11, 2026 at 10:41:25PM +0300, Dan Carpenter wrote:
->This driver adds the base support of pinctrl over SCMI.  The driver
->does two main things.  First, it allows you to configure the initial
->pin states.  Secondly, it's used a base to build a GPIO driver on
->top of it.
->
->To configure the states then add a pinmux config to the scmi_pinctrl
->section:
->
->        scmi_pinctrl: protocol@19 {
->                reg = <0x19>;
->                pinmux1: pinmux_test {
->                        pinmux = <0 1 0xFFFFFFFF 18 1
->                                  0 2 0xFFFFFFFF 18 1
->                                  0 3 0xFFFFFFFF 18 1>;
->                        function = "f_gpio1";
->                        groups = "grp_1", "grp_3";
->                };
->        };
->
->Under linux the pinctrl subsystem will parse the function and group
->properties and use that to handle muxing.  However, under u-boot the
->pin muxing is done using the "pinmux" property, which feeds raw SCMI
->pinctrl PINCTRL_SETTINGS_CONFIGURE commands to the server.  The
->numbers are: selector, identifier, function_id, config_type, and
->config_value.  In the example above, it sets pins 1, 2, and 3 to 1.
->The linux-kernel ignores this pinmux property.
->
->Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+CFG_WITH_SOFTWARE_PRNG=y was added as an OPTEE argument to workaround
+some bugs related to TRNG which have been fixed now[1]. Therefore this
+patch drops the redundant argument from the documentation.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+[1]: https://github.com/OP-TEE/optee_os/commit/e313f4765fd0478bb66985827441411793433773
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ doc/board/beagle/am62x_beagleplay.rst | 3 ++-
+ doc/board/phytec/phycore-am62x.rst    | 3 ++-
+ doc/board/ti/am62px_sk.rst            | 4 +++-
+ doc/board/ti/am62x_sk.rst             | 4 ++--
+ doc/board/toradex/verdin-am62.rst     | 3 ++-
+ 5 files changed, 11 insertions(+), 6 deletions(-)
+
+diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
+index bc71aabaac3..64a05549caf 100644
+--- a/doc/board/beagle/am62x_beagleplay.rst
++++ b/doc/board/beagle/am62x_beagleplay.rst
+@@ -67,7 +67,8 @@ Set the variables corresponding to this platform:
+   # we dont use any extra TFA parameters
+   unset TFA_EXTRA_ARGS
+   export OPTEE_PLATFORM=k3-am62x
+-  export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++  # we dont use any extra OPTEE parameters
++  unset OPTEE_EXTRA_ARGS
+ 
+ .. include::  ../ti/am62x_sk.rst
+     :start-after: .. am62x_evm_rst_include_start_build_steps
+diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
+index 36315b49931..bd61d0c16cf 100644
+--- a/doc/board/phytec/phycore-am62x.rst
++++ b/doc/board/phytec/phycore-am62x.rst
+@@ -60,7 +60,8 @@ Set the variables corresponding to this platform:
+  $ # we don't use any extra TFA parameters
+  $ unset TFA_EXTRA_ARGS
+  $ export OPTEE_PLATFORM=k3-am62x
+- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++ $ # we dont use any extra OPTEE parameters
++ $ unset OPTEE_EXTRA_ARGS
+ 
+ .. include::  ../ti/am62x_sk.rst
+     :start-after: .. am62x_evm_rst_include_start_build_steps
+diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+index da70cd58095..2fd00e88285 100644
+--- a/doc/board/ti/am62px_sk.rst
++++ b/doc/board/ti/am62px_sk.rst
+@@ -99,7 +99,9 @@ Set the variables corresponding to this platform:
+    # we dont use any extra TFA parameters
+    unset TFA_EXTRA_ARGS
+    export OPTEE_PLATFORM=k3-am62x
+-   export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++   # we dont use any extra OPTEE parameters
++   unset OPTEE_EXTRA_ARGS
++
+ 
+ .. am62px_evm_rst_include_start_build_steps
+ 
+diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+index b50fff87506..2480733e2da 100644
+--- a/doc/board/ti/am62x_sk.rst
++++ b/doc/board/ti/am62x_sk.rst
+@@ -87,8 +87,8 @@ Set the variables corresponding to this platform:
+   export TFA_BOARD=lite
+   # we dont use any extra TFA parameters
+   unset TFA_EXTRA_ARGS
+-  export OPTEE_PLATFORM=k3-am62x
+-  export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++  # we dont use any extra OPTEE parameters
++  unset OPTEE_EXTRA_ARGS
+ 
+ .. am62x_evm_rst_include_start_build_steps
+ 
+diff --git a/doc/board/toradex/verdin-am62.rst b/doc/board/toradex/verdin-am62.rst
+index 93912adc896..aaca6fd1a73 100644
+--- a/doc/board/toradex/verdin-am62.rst
++++ b/doc/board/toradex/verdin-am62.rst
+@@ -59,7 +59,8 @@ Set the variables corresponding to this platform:
+  $ # we don't use any extra TFA parameters
+  $ unset TFA_EXTRA_ARGS
+  $ export OPTEE_PLATFORM=k3-am62x
+- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++ $ # we dont use any extra OPTEE parameters
++ $ unset OPTEE_EXTRA_ARGS
+ 
+ .. include::  ../ti/am62x_sk.rst
+     :start-after: .. am62x_evm_rst_include_start_build_steps
+
+---
+base-commit: 8bc2a5196c1c0bb5dbdaca073323da0015a0de37
+change-id: 20260312-optee_args_fix-ba4ba0420f4d
+
+Best regards,
+-- 
+Anshul Dalal <anshuld@ti.com>
+
