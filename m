@@ -4,63 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4597B106703F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 14:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FDD81067040
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 15:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1C6B8424E;
-	Thu, 12 Mar 2026 15:43:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id D597583F86;
+	Thu, 12 Mar 2026 16:02:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="YZLrolVr";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="n6AbNtsg";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hi4/l0E3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56DEF84253; Thu, 12 Mar 2026 15:43:53 +0100 (CET)
-Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ id 07B5D84255; Thu, 12 Mar 2026 16:02:10 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A3FC8423F
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 15:43:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id BA06A83DB6
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 16:02:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.merchel@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
- :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=CnTqU0Qxd244joEgrjgkqvPxop6S0F+0/E2+sd0T5QE=; b=YZLrolVrbS7LkuPyUmqyBa3E33
- HmnwPstkYm7llrSlEXnlgwprKF3JtBvORmcwjjGajc+xRzB7yHkSkKnP3sFpT9QCR5BmYsxLcpsgg
- lCrnzCKTJyA6/aE4bsu/Alg1qqagSUuN9WL3jRcsJ1KSr49iRYkfuPLCazPMzl+yg7q3YfK3XVb2p
- kAEiQafR3Vc43po0JO/IWXMQaIQp7Vj6YYgA45KDx59OUwzdnPZDRpi/4TNEYRgas5jv+mYuZTgso
- 4PNQ/mvkxrHxQRQGARfDc8bFE8PXlbq5WbsxCaqRHfk7xUfD5ON584OxTkCjzunhT0y96GndZ2Scj
- oFzVL9hA==;
-Received: from sslproxy03.your-server.de ([88.198.220.132])
- by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96.2) (envelope-from <max.merchel@ew.tq-group.com>)
- id 1w0hGQ-000IEA-0n; Thu, 12 Mar 2026 15:43:50 +0100
-Received: from localhost ([127.0.0.1])
- by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.96) (envelope-from <max.merchel@ew.tq-group.com>)
- id 1w0hGP-0009RB-34; Thu, 12 Mar 2026 15:43:49 +0100
-Message-ID: <10aa3299-2315-4ad7-b6e1-6e6635e9debc@ew.tq-group.com>
-Date: Thu, 12 Mar 2026 15:43:49 +0100
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4fWrSG2f5sz9sWm;
+ Thu, 12 Mar 2026 16:02:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773327726;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qn8nbAesTsWacDRSer4AHlabBb0Fatl+W5rJHRN634Y=;
+ b=n6AbNtsgK+MgUy3s4Kihu+zXKl68UB0kSZl1pEEvoE66noYUIwiPT5JZvTOBYxlctQ9LGs
+ MAA3wMLV+/Sc70soKLABYSX4XtsKVf9mj1L0VCF/rxQpmtx8Tbb2034FkWILUdnc3qtV5u
+ TZCG4d332+p4eBLk+Fo9C6M3qP08yX0iRqCnG83cKwUxGjpmUb3Ln1WvkfUvpTfzgKhqIw
+ yA9aTbE8C/0wwG4uQkVE3mN4Julw20x6GCay5jo2CCMwiwy7xPq2Ul6gGyQ2qD9Tz4G8f5
+ o2wvqCGTgzFnj033Tk8lE3FCvC0ddSdbuvWp1/JzMPuZ39BhTFtjCTwmKslbLA==
+Message-ID: <c57a8801-8282-4df3-a813-3ba7948cc054@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1773327724;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qn8nbAesTsWacDRSer4AHlabBb0Fatl+W5rJHRN634Y=;
+ b=Hi4/l0E3bqtqrMrswTDauiVniaiW0Y5jfrM8m/FEZiWK1XCsqnca2lHqB1LMyeT3ILBMvu
+ O+bXsJPTsQ+H9yb65JeIyiOTS0Lg/HmQurdwl6uWhq/gMS+xjPV8AoKqCfeEhGuLl51dKy
+ BBOtpMplC1iaeorwuY0IehpLFkxulu0CnRpiMSk0WeduMkIgUbiWuV+a5DzwNCtKVt5x/x
+ rnQyTjUg/jfez4LjD0KlBIr9cSn4Bx5uGspNapIyjyWK8PfNZTkSHNQiIxrvvQUfV5Nup1
+ SryCW3STwfJUMXSu1SCOIxI7W+IGfWx3iN/Y78otSM7wrwJS0aBPgBSF0hMFag==
+Date: Thu, 12 Mar 2026 16:01:59 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/13] board: tqma6: use runtime SoC detection in enet
- setup
-To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
- Paul Gerber <Paul.Gerber@ew.tq-group.com>
-References: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
- <20260312095711.3219756-13-Max.Merchel@ew.tq-group.com>
+Subject: Re: [PATCH] Revert "usb: cdns3: use VBUS Valid to determine role for
+ dr_mode OTG"
+To: Tom Rini <trini@konsulko.com>, Prasanth Babu Mantena <p-mantena@ti.com>,
+ Marek Vasut <marek.vasut+usb@mailbox.org>
+Cc: u-boot@lists.denx.de, n-francis@ti.com, u-kumar1@ti.com, vigneshr@ti.com, 
+ s-vadapalli@ti.com
+References: <20260312133247.2192335-1-p-mantena@ti.com>
+ <20260312135019.GA502704@bill-the-cat>
 Content-Language: en-US
-From: Max Merchel <max.merchel@ew.tq-group.com>
-In-Reply-To: <20260312095711.3219756-13-Max.Merchel@ew.tq-group.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20260312135019.GA502704@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 335aee29a9bfc43fdf8
+X-MBO-RS-META: juaqeanthemrymbxsof4ys585grkaswi
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,183 +91,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 12.03.26 um 10:57 schrieb Max Merchel:
-> Select the appropriate settings based on the CPU type during
-> Ethernet configuration.
->
-> Signed-off-by: Paul Gerber <Paul.Gerber@ew.tq-group.com>
-> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
-> ---
+On 3/12/26 2:50 PM, Tom Rini wrote:
+> On Thu, Mar 12, 2026 at 07:02:47PM +0530, Prasanth Babu Mantena wrote:
+> 
+>> While USB DFU boot works with this patch, but the non USB boot modes like
+>> SD Boot and flash boot fails for J784S4 EVM device.
+>>
+>> So, Reverting this patch.
+>>
+>> This reverts commit bfb530e06ca6c19f66c079601e568c761a001993.
+>>
+>> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+>> ---
+>>   drivers/usb/cdns3/core.c | 53 ----------------------------------------
+>>   drivers/usb/cdns3/drd.c  | 11 ---------
+>>   2 files changed, 64 deletions(-)
+>>
+>> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
+>> index 10bc4cabed4..4434dc15bec 100644
+>> --- a/drivers/usb/cdns3/core.c
+>> +++ b/drivers/usb/cdns3/core.c
+>> @@ -392,52 +392,6 @@ static const struct udevice_id cdns3_ids[] = {
+>>   	{ },
+>>   };
+>>   
+>> -/*
+>> - * The VBUS Valid Bit in the OTG Status register can be used to determine
+>> - * the role. When VBUS Valid is set, it indicates that a USB Host is supplying
+>> - * power, so the Controller should assume the PERIPHERAL role. If it isn't set,
+>> - * it indicates the absence of a USB Host, so the Controller should assume the
+>> - * HOST role. If the OTG Status register is inaccessible, return an error.
+>> - */
+>> -static int cdns3_get_otg_mode(struct udevice *parent, enum usb_dr_mode *mode)
+>> -{
+>> -	/* Create a temporary child device for using devfdt_remap_addr_name() */
+>> -	struct udevice child = {
+>> -		.parent = parent,
+>> -	};
+>> -	struct cdns3 cdns, *cdnsp;
+>> -	void __iomem *otg_regs;
+>> -
+>> -	dev_set_ofnode(&child, ofnode_first_subnode(dev_ofnode(parent)));
+>> -	otg_regs = devfdt_remap_addr_name(&child, "otg");
+>> -	if (!otg_regs) {
+>> -		dev_err(parent, "failed to get otg registers for child node\n");
+>> -		return -ENXIO;
+>> -	}
+>> -
+>> -	/*
+>> -	 * As mentioned in drivers/usb/cdns3/drd.c, there are two versions
+>> -	 * of the Controller. The following logic detects the version of the
+>> -	 * Controller and interprets the register layout accordingly.
+>> -	 */
+>> -	cdnsp = &cdns;
+>> -	cdnsp->otg_v0_regs = otg_regs;
+>> -	if (!readl(&cdnsp->otg_v0_regs->cmd)) {
+>> -		cdnsp->otg_regs = otg_regs;
+>> -	} else {
+>> -		cdnsp->otg_v1_regs = otg_regs;
+>> -		cdnsp->otg_regs = (void *)&cdnsp->otg_v1_regs->cmd;
+>> -	}
+>> -
+>> -	/* Use VBUS Valid to determine role */
+>> -	if (readl(&cdnsp->otg_regs->sts) & OTGSTS_VBUS_VALID)
+>> -		*mode = USB_DR_MODE_PERIPHERAL;
+>> -	else
+>> -		*mode = USB_DR_MODE_HOST;
+>> -
+>> -	return 0;
+>> -}
+>> -
+>>   int cdns3_bind(struct udevice *parent)
+>>   {
+>>   	enum usb_dr_mode dr_mode;
+>> @@ -459,13 +413,6 @@ int cdns3_bind(struct udevice *parent)
+>>   	if (dr_mode == USB_DR_MODE_UNKNOWN)
+>>   		dr_mode = usb_get_dr_mode(dev_ofnode(parent));
+>>   
+>> -	/* Use VBUS Valid to determine role */
+>> -	if (dr_mode == USB_DR_MODE_OTG) {
+>> -		ret = cdns3_get_otg_mode(parent, &dr_mode);
+>> -		if (ret < 0)
+>> -			return ret;
+>> -	}
+>> -
+>>   	switch (dr_mode) {
+>>   #if defined(CONFIG_SPL_USB_HOST) || \
+>>   	(!defined(CONFIG_XPL_BUILD) && defined(CONFIG_USB_HOST))
+>> diff --git a/drivers/usb/cdns3/drd.c b/drivers/usb/cdns3/drd.c
+>> index 0ca40a5cc8d..cbb13342343 100644
+>> --- a/drivers/usb/cdns3/drd.c
+>> +++ b/drivers/usb/cdns3/drd.c
+>> @@ -301,17 +301,6 @@ int cdns3_drd_init(struct cdns3 *cdns)
+>>   		cdns->dr_mode = USB_DR_MODE_PERIPHERAL;
+>>   	}
+>>   
+>> -	/*
+>> -	 * In the absence of STRAP configuration, use VBUS Valid to
+>> -	 * determine the appropriate role to be assigned to dr_mode.
+>> -	 */
+>> -	if (cdns->dr_mode == USB_DR_MODE_OTG) {
+>> -		if (cdns3_get_vbus(cdns))
+>> -			cdns->dr_mode = USB_DR_MODE_PERIPHERAL;
+>> -		else
+>> -			cdns->dr_mode = USB_DR_MODE_HOST;
+>> -	}
+>> -
+>>   	state = readl(&cdns->otg_regs->sts);
+>>   	if (OTGSTS_OTG_NRDY(state) != 0) {
+>>   		dev_err(cdns->dev, "Cadence USB3 OTG device not ready\n");
+> 
+> Adding in the USB custodian as this revert is intended for master and
+> v2026.04 I assume as the commit being reverted is also in master.
+> Thanks.
+This may be related to
 
-Drop this Patch.
+[PATCH] usb: cdns3: fix cdns3_bind() to avoid returning error and probe 
+parent
 
-The values ​​can be read from the device trees, and therefore the
-changes will be removed in the following series
+?
 
-Max
-
->   board/tq/tqma6/tqma6_mba6.c | 124 ++++++++++++++++++++----------------
->   1 file changed, 69 insertions(+), 55 deletions(-)
->
-> diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
-> index 32aeb1b07c8..f1b9dc8d372 100644
-> --- a/board/tq/tqma6/tqma6_mba6.c
-> +++ b/board/tq/tqma6/tqma6_mba6.c
-> @@ -33,21 +33,21 @@
->   
->   #include "../common/tq_bb.h"
->   
-> -#if defined(CONFIG_TQMA6Q)
-> +#define TQMA6Q_IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII	0x02e0790
-> +#define TQMA6Q_IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM		0x02e07ac
->   
-> -#define IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII	0x02e0790
-> -#define IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM	0x02e07ac
-> +#define TQMA6DL_IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII	0x02e0768
-> +#define TQMA6DL_IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM	0x02e0788
->   
-> -#elif defined(CONFIG_TQMA6S) || defined(CONFIG_TQMA6DL)
-> +#define TQMA6Q_MBA6X_KSZ9031_CTRL_SKEW	0x0032
-> +#define TQMA6Q_MBA6X_KSZ9031_CLK_SKEW	0x03ff
-> +#define TQMA6Q_MBA6X_KSZ9031_RX_SKEW	0x3333
-> +#define TQMA6Q_MBA6X_KSZ9031_TX_SKEW	0x2036
->   
-> -#define IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII	0x02e0768
-> -#define IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM	0x02e0788
-> -
-> -#else
-> -
-> -#error "need to select module"
-> -
-> -#endif
-> +#define TQMA6DL_MBA6X_KSZ9031_CTRL_SKEW	0x0030
-> +#define TQMA6DL_MBA6X_KSZ9031_CLK_SKEW	0x03ff
-> +#define TQMA6DL_MBA6X_KSZ9031_RX_SKEW	0x3333
-> +#define TQMA6DL_MBA6X_KSZ9031_TX_SKEW	0x2052
->   
->   /* disable on die termination for RGMII */
->   #define IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM_DISABLE	0x00000000
-> @@ -63,10 +63,17 @@ static void mba6_setup_iomuxc_enet(void)
->   	/* clear gpr1[ENET_CLK_SEL] for externel clock */
->   	clrbits_le32(&iomuxc_regs->gpr[1], IOMUXC_GPR1_ENET_CLK_SEL_MASK);
->   
-> -	__raw_writel(IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM_DISABLE,
-> -		     (void *)IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM);
-> -	__raw_writel(IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII_1P5V,
-> -		     (void *)IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII);
-> +	if (is_mx6sdl()) {
-> +		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM_DISABLE,
-> +			     (void *)TQMA6DL_IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM);
-> +		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII_1P5V,
-> +			     (void *)TQMA6DL_IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII);
-> +	} else if (is_mx6dq()) {
-> +		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM_DISABLE,
-> +			     (void *)TQMA6Q_IOMUX_SW_PAD_CTRL_GRP_RGMII_TERM);
-> +		__raw_writel(IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII_1P5V,
-> +			     (void *)TQMA6Q_IOMUX_SW_PAD_CTRL_GRP_DDR_TYPE_RGMII);
-> +	}
->   }
->   
->   int board_mmc_get_env_dev(int devno)
-> @@ -81,45 +88,52 @@ int board_mmc_get_env_dev(int devno)
->   
->   int board_phy_config(struct phy_device *phydev)
->   {
-> -/*
-> - * optimized pad skew values depends on CPU variant on the TQMa6x module:
-> - * CONFIG_TQMA6Q: i.MX6Q/D
-> - * CONFIG_TQMA6S: i.MX6S
-> - * CONFIG_TQMA6DL: i.MX6DL
-> - */
-> -#if defined(CONFIG_TQMA6Q)
-> -#define MBA6X_KSZ9031_CTRL_SKEW	0x0032
-> -#define MBA6X_KSZ9031_CLK_SKEW	0x03ff
-> -#define MBA6X_KSZ9031_RX_SKEW	0x3333
-> -#define MBA6X_KSZ9031_TX_SKEW	0x2036
-> -#elif defined(CONFIG_TQMA6S) || defined(CONFIG_TQMA6DL)
-> -#define MBA6X_KSZ9031_CTRL_SKEW	0x0030
-> -#define MBA6X_KSZ9031_CLK_SKEW	0x03ff
-> -#define MBA6X_KSZ9031_RX_SKEW	0x3333
-> -#define MBA6X_KSZ9031_TX_SKEW	0x2052
-> -#else
-> -#error
-> -#endif
-> -	/* min rx/tx ctrl delay */
-> -	ksz9031_phy_extended_write(phydev, 2,
-> -				   MII_KSZ9031_EXT_RGMII_CTRL_SIG_SKEW,
-> -				   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> -				   MBA6X_KSZ9031_CTRL_SKEW);
-> -	/* min rx delay */
-> -	ksz9031_phy_extended_write(phydev, 2,
-> -				   MII_KSZ9031_EXT_RGMII_RX_DATA_SKEW,
-> -				   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> -				   MBA6X_KSZ9031_RX_SKEW);
-> -	/* max tx delay */
-> -	ksz9031_phy_extended_write(phydev, 2,
-> -				   MII_KSZ9031_EXT_RGMII_TX_DATA_SKEW,
-> -				   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> -				   MBA6X_KSZ9031_TX_SKEW);
-> -	/* rx/tx clk skew */
-> -	ksz9031_phy_extended_write(phydev, 2,
-> -				   MII_KSZ9031_EXT_RGMII_CLOCK_SKEW,
-> -				   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> -				   MBA6X_KSZ9031_CLK_SKEW);
-> +	/*
-> +	 * optimized pad skew values depends on CPU variant on the TQMa6x module:
-> +	 */
-> +	if (is_mx6sdl()) {
-> +		/* min rx/tx ctrl delay */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_CTRL_SIG_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6DL_MBA6X_KSZ9031_CTRL_SKEW);
-> +		/* min rx delay */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_RX_DATA_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6DL_MBA6X_KSZ9031_RX_SKEW);
-> +		/* max tx delay */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_TX_DATA_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6DL_MBA6X_KSZ9031_TX_SKEW);
-> +		/* rx/tx clk skew */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_CLOCK_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6DL_MBA6X_KSZ9031_CLK_SKEW);
-> +	} else if (is_mx6dq()) {
-> +		/* min rx/tx ctrl delay */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_CTRL_SIG_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6Q_MBA6X_KSZ9031_CTRL_SKEW);
-> +		/* min rx delay */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_RX_DATA_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6Q_MBA6X_KSZ9031_RX_SKEW);
-> +		/* max tx delay */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_TX_DATA_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6Q_MBA6X_KSZ9031_TX_SKEW);
-> +		/* rx/tx clk skew */
-> +		ksz9031_phy_extended_write(phydev, 2,
-> +					   MII_KSZ9031_EXT_RGMII_CLOCK_SKEW,
-> +					   MII_KSZ9031_MOD_DATA_NO_POST_INC,
-> +					   TQMA6Q_MBA6X_KSZ9031_CLK_SKEW);
-> +	}
->   
->   	phydev->drv->config(phydev);
->   
-
--- 
-Best regards,
-Max
-
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
-
+Can you coordinate with Siddharth Vadapalli ?
