@@ -4,85 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D09F1067020
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 13:50:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E009B106703B
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 14:31:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD104841FF;
-	Thu, 12 Mar 2026 14:50:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 51A1C8423D;
+	Thu, 12 Mar 2026 15:31:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="onRw+si0";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="isx87fQ/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 512058421E; Thu, 12 Mar 2026 14:50:26 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4B4FE84284; Thu, 12 Mar 2026 15:31:36 +0100 (CET)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E5184150
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 14:50:24 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-463a0e14abfso675391b6e.2
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 06:50:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773323423; x=1773928223; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=R01lS+ujoEfm8N1x/lejb4KpMo4XHtf+ezSrHH56EEc=;
- b=onRw+si0TX0a3WL4twOHQ7dhP5665FQDtd/5pBQ98WQyw/78bvVufFrE/59cznqUiA
- si1AH40C8BYl+SZwiN9bwzf585aK2N2wzyc+e0QHhEZFdpNLvR44azVkqRxe3f4Pl6NT
- xunXs5M9LVltB47tiOsN+k0RnzrFTSu47HxrI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773323423; x=1773928223;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=R01lS+ujoEfm8N1x/lejb4KpMo4XHtf+ezSrHH56EEc=;
- b=ENLU8ecICBMDJOro4nqliGx9JwU1eXp4vQPdIgXGwMlBQ56szTFXpNZ+xgyAfHqM1n
- KrE+qY/hi/MWid4+/5P+nJf/ZXfnErvEPQqbgbnpWkEfY8NHIxuwGeILeGw/mtmWhLuf
- IhNkrXdB/r+ze7JVJXz6dXjClYIWcAyGVyncwuGbVWIzQL5M2kKVRva9oKXMzkDKSZQL
- I5nhQFuqrhuxwnU2HcbgeBUxiNUW4jDcyRs79s4Hno2UXJABxOtDp+GNfsmkIPCZ5+cW
- pduOvr/EzQ5Zd0lEOb8LVMLh6mRNN1mhUeXKsNn21k8lhKHe7oeGobikpRupW/9BscNw
- CSgA==
-X-Gm-Message-State: AOJu0YyrMbIW8l9QM17HiDWbNGfuiuY55jKOrU2V16BFK4vtiy4hpqxp
- GaBFPu6UQRGThuvVP+1Jlv32P9656WfN5SHo29XpTKDqryZj/gH9W/7qxaXQMzYNuMY=
-X-Gm-Gg: ATEYQzxXdGskxajCX5EhHsC/zl/3VqBCb8Nm9rOYKHqybicohT9SX0hJQkHgdQ16fR/
- Lwl4amSFrz8vhQx317F3PDdEb8VkAOsr6OQVFGsZOfuqqtq42V6qO3DSQxl3olLCAwmlmxyPqHn
- wyR66+24MhhuNj6wVoVDPI3LTyHXiwfEjYVrl3nGJJ1QP4ZFEnyLqL0+aCCR7nsAbUzXcp3onlg
- xmpMv9xS00lNiLekIMNynsiLmJXf9YCnhem3ieK5oXpXQBYHSTh7CLGdpUf0INwxiATwskeR1Sb
- Fvh2Lk8/VGH3djxQklVX6R4HrgwSriO/mmN/w/4SjTt+uzH+62U47Zez/67iohc+Lxzycivs/HH
- WwNHGZYIOrsLNfa3jtzhGVetNnjnM1U8PUvYHIPFUFTtS6Bh0oyQTez5DNKPCYB3PhZHcuym1r/
- EVTTi1aW3Xu1zG3JmI+VT+XFZu6BSux1dwc/ojCL4CpVy/Lybco1NAS6T53XMfazwjBcZH21hMq
- iVEB814vUVX4+G0Ivf2rni1qhhwyn09TTeLskgPWJsWVE16
-X-Received: by 2002:a05:6808:2447:b0:467:2683:f648 with SMTP id
- 5614622812f47-467333c5d58mr3369402b6e.9.1773323422588; 
- Thu, 12 Mar 2026 06:50:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46734123939sm2982483b6e.3.2026.03.12.06.50.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Mar 2026 06:50:21 -0700 (PDT)
-Date: Thu, 12 Mar 2026 07:50:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Prasanth Babu Mantena <p-mantena@ti.com>,
- Marek Vasut <marek.vasut+usb@mailbox.org>
-Cc: u-boot@lists.denx.de, n-francis@ti.com, u-kumar1@ti.com,
- vigneshr@ti.com, s-vadapalli@ti.com
-Subject: Re: [PATCH] Revert "usb: cdns3: use VBUS Valid to determine role for
- dr_mode OTG"
-Message-ID: <20260312135019.GA502704@bill-the-cat>
-References: <20260312133247.2192335-1-p-mantena@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id EBD7184150
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 15:31:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=Alexander.Feilke@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=1ws9pXvUJwm1REfELRA8i6tkYGS0bHn7VXqbisRYHUM=; b=isx87fQ/M9wKDP7bUJiep+dZcV
+ AxrRDsfY4UHernDwv0/W+a49Oo9J11n6HYyLKhLdLgg+LxTdwg/tHk9Ya+JsZeJMYkrL12dO8qUvu
+ EtMU9K59srMlJ4RBIRwjzPRI7IytuQQ/0qGhffkvKAnbnKUu/6tT1QlsVaEYaFUIx0wmC4inla3fH
+ NbrvYQxY2JRHyQ9WDx3yzOkFjXIBogZsFEDhVMSEPhuiqoDSNZGejpazHdb/kyTTgUsmLtjfrXt/H
+ 1Z6eFhOZfchSrg3ip0dt2ShSg0sP+Q6L/5PDkKmerRmun44S2YjG8lQUzGU/TqhOPWG5xc2BGs43Z
+ 0J6uvubQ==;
+Received: from sslproxy03.your-server.de ([88.198.220.132])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1w0h4U-000FL8-33; Thu, 12 Mar 2026 15:31:30 +0100
+Received: from localhost ([127.0.0.1])
+ by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
+ id 1w0h4U-0003V8-1h; Thu, 12 Mar 2026 15:31:30 +0100
+From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
+To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH 4/8] arch: arm: dts: tqma7x: add u-boot device tree fragments
+Date: Thu, 12 Mar 2026 15:31:14 +0100
+Message-Id: <20260312143118.1677859-5-Alexander.Feilke@ew.tq-group.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20260312143118.1677859-1-Alexander.Feilke@ew.tq-group.com>
+References: <20260312143118.1677859-1-Alexander.Feilke@ew.tq-group.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PwVUf6VjLmxoJJRO"
-Content-Disposition: inline
-In-Reply-To: <20260312133247.2192335-1-p-mantena@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,142 +75,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
---PwVUf6VjLmxoJJRO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+add u-boot specific device tree properties
 
-On Thu, Mar 12, 2026 at 07:02:47PM +0530, Prasanth Babu Mantena wrote:
+Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+---
+ arch/arm/dts/imx7d-mba7-u-boot.dtsi | 10 ++++++++++
+ arch/arm/dts/imx7s-mba7-u-boot.dtsi | 27 +++++++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 arch/arm/dts/imx7d-mba7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx7s-mba7-u-boot.dtsi
 
-> While USB DFU boot works with this patch, but the non USB boot modes like
-> SD Boot and flash boot fails for J784S4 EVM device.
->=20
-> So, Reverting this patch.
->=20
-> This reverts commit bfb530e06ca6c19f66c079601e568c761a001993.
->=20
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> ---
->  drivers/usb/cdns3/core.c | 53 ----------------------------------------
->  drivers/usb/cdns3/drd.c  | 11 ---------
->  2 files changed, 64 deletions(-)
->=20
-> diff --git a/drivers/usb/cdns3/core.c b/drivers/usb/cdns3/core.c
-> index 10bc4cabed4..4434dc15bec 100644
-> --- a/drivers/usb/cdns3/core.c
-> +++ b/drivers/usb/cdns3/core.c
-> @@ -392,52 +392,6 @@ static const struct udevice_id cdns3_ids[] =3D {
->  	{ },
->  };
-> =20
-> -/*
-> - * The VBUS Valid Bit in the OTG Status register can be used to determine
-> - * the role. When VBUS Valid is set, it indicates that a USB Host is sup=
-plying
-> - * power, so the Controller should assume the PERIPHERAL role. If it isn=
-'t set,
-> - * it indicates the absence of a USB Host, so the Controller should assu=
-me the
-> - * HOST role. If the OTG Status register is inaccessible, return an erro=
-r.
-> - */
-> -static int cdns3_get_otg_mode(struct udevice *parent, enum usb_dr_mode *=
-mode)
-> -{
-> -	/* Create a temporary child device for using devfdt_remap_addr_name() */
-> -	struct udevice child =3D {
-> -		.parent =3D parent,
-> -	};
-> -	struct cdns3 cdns, *cdnsp;
-> -	void __iomem *otg_regs;
-> -
-> -	dev_set_ofnode(&child, ofnode_first_subnode(dev_ofnode(parent)));
-> -	otg_regs =3D devfdt_remap_addr_name(&child, "otg");
-> -	if (!otg_regs) {
-> -		dev_err(parent, "failed to get otg registers for child node\n");
-> -		return -ENXIO;
-> -	}
-> -
-> -	/*
-> -	 * As mentioned in drivers/usb/cdns3/drd.c, there are two versions
-> -	 * of the Controller. The following logic detects the version of the
-> -	 * Controller and interprets the register layout accordingly.
-> -	 */
-> -	cdnsp =3D &cdns;
-> -	cdnsp->otg_v0_regs =3D otg_regs;
-> -	if (!readl(&cdnsp->otg_v0_regs->cmd)) {
-> -		cdnsp->otg_regs =3D otg_regs;
-> -	} else {
-> -		cdnsp->otg_v1_regs =3D otg_regs;
-> -		cdnsp->otg_regs =3D (void *)&cdnsp->otg_v1_regs->cmd;
-> -	}
-> -
-> -	/* Use VBUS Valid to determine role */
-> -	if (readl(&cdnsp->otg_regs->sts) & OTGSTS_VBUS_VALID)
-> -		*mode =3D USB_DR_MODE_PERIPHERAL;
-> -	else
-> -		*mode =3D USB_DR_MODE_HOST;
-> -
-> -	return 0;
-> -}
-> -
->  int cdns3_bind(struct udevice *parent)
->  {
->  	enum usb_dr_mode dr_mode;
-> @@ -459,13 +413,6 @@ int cdns3_bind(struct udevice *parent)
->  	if (dr_mode =3D=3D USB_DR_MODE_UNKNOWN)
->  		dr_mode =3D usb_get_dr_mode(dev_ofnode(parent));
-> =20
-> -	/* Use VBUS Valid to determine role */
-> -	if (dr_mode =3D=3D USB_DR_MODE_OTG) {
-> -		ret =3D cdns3_get_otg_mode(parent, &dr_mode);
-> -		if (ret < 0)
-> -			return ret;
-> -	}
-> -
->  	switch (dr_mode) {
->  #if defined(CONFIG_SPL_USB_HOST) || \
->  	(!defined(CONFIG_XPL_BUILD) && defined(CONFIG_USB_HOST))
-> diff --git a/drivers/usb/cdns3/drd.c b/drivers/usb/cdns3/drd.c
-> index 0ca40a5cc8d..cbb13342343 100644
-> --- a/drivers/usb/cdns3/drd.c
-> +++ b/drivers/usb/cdns3/drd.c
-> @@ -301,17 +301,6 @@ int cdns3_drd_init(struct cdns3 *cdns)
->  		cdns->dr_mode =3D USB_DR_MODE_PERIPHERAL;
->  	}
-> =20
-> -	/*
-> -	 * In the absence of STRAP configuration, use VBUS Valid to
-> -	 * determine the appropriate role to be assigned to dr_mode.
-> -	 */
-> -	if (cdns->dr_mode =3D=3D USB_DR_MODE_OTG) {
-> -		if (cdns3_get_vbus(cdns))
-> -			cdns->dr_mode =3D USB_DR_MODE_PERIPHERAL;
-> -		else
-> -			cdns->dr_mode =3D USB_DR_MODE_HOST;
-> -	}
-> -
->  	state =3D readl(&cdns->otg_regs->sts);
->  	if (OTGSTS_OTG_NRDY(state) !=3D 0) {
->  		dev_err(cdns->dev, "Cadence USB3 OTG device not ready\n");
+diff --git a/arch/arm/dts/imx7d-mba7-u-boot.dtsi b/arch/arm/dts/imx7d-mba7-u-boot.dtsi
+new file mode 100644
+index 00000000000..3ccc95a7ac6
+--- /dev/null
++++ b/arch/arm/dts/imx7d-mba7-u-boot.dtsi
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Device Tree Source for TQ-Systems TQMa7D board on MBa7x carrier board.
++ *
++ * Copyright (C) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany
++ * Author: Steffen Doster
++ */
++
++#include "imx7s-mba7-u-boot.dtsi"
+diff --git a/arch/arm/dts/imx7s-mba7-u-boot.dtsi b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
+new file mode 100644
+index 00000000000..2ed3f9c4769
+--- /dev/null
++++ b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
+@@ -0,0 +1,27 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Device Tree Source for TQ-Systems TQMa7S board on MBa7x carrier board.
++ *
++ * Copyright (C) 2025-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany
++ * Author: Steffen Doster
++ */
++
++#include "imx7s-u-boot.dtsi"
++
++/ {
++	config {
++		u-boot,mmc-env-offset = <0x100000>;
++		u-boot,mmc-env-offset-redundant = <0x110000>;
++	};
++
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++	};
++};
++
++&wdog1 {
++	u-boot,noautostart;
++	timeout-sec = <60>;
++};
+-- 
+2.34.1
 
-Adding in the USB custodian as this revert is intended for master and
-v2026.04 I assume as the commit being reverted is also in master.
-Thanks.
-
---=20
-Tom
-
---PwVUf6VjLmxoJJRO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabLEmAAKCRAr4qD1Cr/k
-CnRMAP9TZ/DWDM/o/SV5Er9x+WLh18YHJ47ADsfaau6vHIt6ewEAnsaDF8Tj5U1q
-nRZmrmwOf+yVf3BuF7Dyvpbu+MHhYwk=
-=cZyK
------END PGP SIGNATURE-----
-
---PwVUf6VjLmxoJJRO--
