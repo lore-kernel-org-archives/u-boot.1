@@ -4,138 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A05B103E300
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 02:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1435FFED2C4
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 03:31:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CEF384083;
-	Thu, 12 Mar 2026 03:17:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 1580283FBC;
+	Thu, 12 Mar 2026 04:31:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="cx8FokOg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uTH/t2TO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5542840B0; Thu, 12 Mar 2026 03:17:49 +0100 (CET)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
+ id 63A2183FED; Thu, 12 Mar 2026 04:31:31 +0100 (CET)
+Received: from SJ2PR03CU001.outbound.protection.outlook.com
+ (mail-westusazlp170120002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c001::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6986A8407E
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 03:17:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB598352B
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 04:31:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EIbW4lTaddtU76iZYjpP3qerB2VYdCj2zC6nrba5jhD3GenozWJEhjHLsqcnG+RncK+NjaVise5ZW49vHDBDbwi+5bnMhm5JPGQfjS+HkqZ3MAynhvyOUvaPuo+07iVYYd9KD0DIEvAsZGSjqsQd2qP/tgbHUgR/6EYrZjx3/hk6VtvbycCRdsnms20pkBpyMQtTiYWrUf3eDyHN9N4sMPm4HlmxkMoVjXjN1G72o67gMvrP111WY3JajyE2XDHyex13mErinK7CP642HPwhEkw/8CjP9QV6SYUwYLmf5GQgSYyvn4BJsCIqgqfJPiaVKuC43VjIrMGmo1OJV1AT0Q==
+ b=zLKklGBgz9/9n13EtKxi5v0ojW1xq7rS5iax6wA1bT5vIqvWb5G1esAZ29djfKPXApBesUEzRzAT+Oxw9S65fEpDFVjyHW4vKovF8K2vDF/WTvrDw62lQ6PglOqcuR6Xxl454YhHBfkNMVnUxg0reQsJhmuDKcYQJoqocBZEWfgLux8j5AOGMfhzyNww1vtV5JFnhHf07FSXLA9XPlgKIY7THAN1SRz5yu914daJ25n/UR3vEJdFdOGkU3P/Kt5dCY9sJJEkEew8NkjKTaVvjdC9h+9fc5yN0BQMJzZV9BqvKg/I8XzPSuzHf8j+KKDkLL3NFonKElK8EjMyFVHDzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=s7Zcx7zX/9MI1dg6ejegjQWng7BhUhzMExrs3BIlVrQ=;
- b=LcCN4mpozMQVB43rtDCEeXjS34YtYD0AN2g+6tAuIhHS6/DxwsVqrZgz1lXnnRiDrwZHUgdJ3EEzUp6AKS6CahrKBwPRdiqRg7XuL3QrJ+Isvv3Sygq+/C23oNEkTjgX+fWvnKCctOsbcXgSjgj04F8pWmUKjlAXXh4VUZHX/5fjl4tS6irpcBxXU7dncsSa6ZM7QjBGmqVAwOTyV+o+tQ+k818Ub+hMeJviSPwi/eF/Vg1L98BM+IZdUg2sWqZSX/W448XSTvqDjdvUcIXUC3JCwhy/omVbhzIkYVgHU9gMy+bE4MQ1tFPLJH+ZuPtXF4unC2hQwVOynPtnX8EKGQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ bh=dmoE8lTdUPB9+Ctka0MmkwwRbTqwoEWr+y8OoQJ5zz0=;
+ b=QbKICdXPOOjKTDPTpbDBBuv26eiWL7cmlUAwWzleV4Il6VdXmXuWq6686/vfiuTaIwxVNNCpqu+uyzXgJGzWBtDu9AXtiN/k5nJ0E0IVqmIW5Jq3maGXAZIIGuyUWzuwInpi85xvVgKY4tGhnvaGgBdPagRHqo6WlBZYRGuB9cP/Lqm0riqTVv+yKQQq6Xtai5o8cr7S5QldubYOl4TxfazeXhULu0Y4ALFFIObEUcF33VE1q3/ptYNHUi/VUHMrHCZI26B19vtw2s4/3REJl2OIOHjM9zZvAdDIIEOztWqNtCGQdX0EEoIW83fqyiWJrucphPkH3xnWzB5Qjrdg2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.23.195) smtp.rcpttodomain=toradex.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=s7Zcx7zX/9MI1dg6ejegjQWng7BhUhzMExrs3BIlVrQ=;
- b=cx8FokOgVeptqtVApZSBTTR3x8EFY8Hl1AyoA+4USJfwVaul5Dl+3c2e5AKWYngrnv8zDxCmpL1lsYq81vZ9evZKcuC1yZ8PlRSXvNpZSzmI2jWiKJUWKkF3yd779lZMWSk6UKomqNR+oid3dLLWPqYc8HSqOQz/g76K1cr/kGBzRBtGEdDGJNQI4bVrGNrlsQ1HJ0bSm9Ib9fyHFHQn+RLQ1OhL7apVn2lxl9nSGJQhdwEdDaVN9XVGl8l+Wb2+I1QPyIAQiywmPVQgdUz3FtHVRf5oZmXEmgLQTHrOfI8Scfm/XD/uvfF0CAO+C2dY8eEdPFEITRslfCQnjMGudA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from DU0PR04MB9636.eurprd04.prod.outlook.com (2603:10a6:10:320::21)
- by PA4PR04MB9246.eurprd04.prod.outlook.com (2603:10a6:102:2a1::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.25; Thu, 12 Mar
- 2026 02:17:45 +0000
-Received: from DU0PR04MB9636.eurprd04.prod.outlook.com
- ([fe80::8735:53a0:b36f:f559]) by DU0PR04MB9636.eurprd04.prod.outlook.com
- ([fe80::8735:53a0:b36f:f559%4]) with mapi id 15.20.9700.010; Thu, 12 Mar 2026
- 02:17:44 +0000
-From: alice.guo@oss.nxp.com
-Date: Thu, 12 Mar 2026 08:57:25 +0800
-Subject: [PATCH v4 4/4] imx943_evk: Enable XSPI1
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260312-xspi-v1-4-375b8c444dbf@nxp.com>
-References: <20260312-xspi-v1-0-375b8c444dbf@nxp.com>
-In-Reply-To: <20260312-xspi-v1-0-375b8c444dbf@nxp.com>
-To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>, 
- Jacky Bai <ping.bai@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Alice Guo <alice.guo@nxp.com>
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: SI2PR01CA0050.apcprd01.prod.exchangelabs.com
- (2603:1096:4:193::21) To DU0PR04MB9636.eurprd04.prod.outlook.com
- (2603:10a6:10:320::21)
+ bh=dmoE8lTdUPB9+Ctka0MmkwwRbTqwoEWr+y8OoQJ5zz0=;
+ b=uTH/t2TOurqTP7ZPIndtod8PT5kgB5ORLynUqUpXcd46qNXMETEBUAKDFGZMA+Z8jrA4FuXds8euWHNUDi3sD3vmbK5Z618oJACj4sFy4tBUhfXsj64/O5BsKbL8zPc/5XCMfLSrT/V29PjrI97m9agiJGXilz68wF3QJ1wvAdk=
+Received: from BY1P220CA0017.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:5c3::6)
+ by SN4PR10MB5654.namprd10.prod.outlook.com (2603:10b6:806:20d::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.13; Thu, 12 Mar
+ 2026 03:31:25 +0000
+Received: from MWH0EPF000C6188.namprd02.prod.outlook.com
+ (2603:10b6:a03:5c3:cafe::7e) by BY1P220CA0017.outlook.office365.com
+ (2603:10b6:a03:5c3::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.27 via Frontend Transport; Thu,
+ 12 Mar 2026 03:31:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
+Received: from lewvzet201.ext.ti.com (198.47.23.195) by
+ MWH0EPF000C6188.mail.protection.outlook.com (10.167.249.120) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 03:31:24 +0000
+Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet201.ext.ti.com
+ (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 11 Mar
+ 2026 22:31:15 -0500
+Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 11 Mar
+ 2026 22:31:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 11 Mar 2026 22:31:15 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62C3VESU1563027;
+ Wed, 11 Mar 2026 22:31:15 -0500
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 12 Mar 2026 09:01:14 +0530
+Message-ID: <DH0HIS3XKGZQ.34HE6IPZACBKW@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Suhaas Joshi <s-joshi@ti.com>, "Neha Malcom
+ Francis" <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Bryan Brattlof
+ <bb@ti.com>, Dhruva Gole <d-gole@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Daniel Schultz <d.schultz@phytec.de>,
+ =?utf-8?q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
+Subject: Re: [PATCH next v2] arm: mach-k3: use Kconfig options for ATF/OPTEE
+ size
+From: Anshul Dalal <anshuld@ti.com>
+To: "Chawdhry, Manorit" <m-chawdhry@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ <u-boot@lists.denx.de>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260311-tfa_tee_addr_kconfig_refactor-v2-1-d66bbdb36a3e@ti.com>
+ <186dd71f-e329-40d3-88d2-5a4dc811acb8@ti.com>
+In-Reply-To: <186dd71f-e329-40d3-88d2-5a4dc811acb8@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU0PR04MB9636:EE_|PA4PR04MB9246:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2f1f951-21b2-49c9-5f43-08de7fdd8be4
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: MWH0EPF000C6188:EE_|SN4PR10MB5654:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd315141-5f30-4d7f-8d55-08de7fe7d697
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|366016|376014|1800799024|52116014|38350700014|56012099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: ICYhA8GC6tCEDHVCBq0j7f/aI8zUFV3mDpvO3diFDxx1rPcS5F2r8BQJLj6y6HOgRvGUgoG7gFRZo7BYuCG7ZVMWvRCQSxIZXyAKNDbKBZ1OvuTiU0+4B3c1g43d8GQBF37reB8ipbQq+6+X9rW0MXgXtWAs4PU55IK3QWNs+iMtZwDEueWeGthnzRJ8Ngn5rXnM4v2XPqCAO93eOJ4kvQYJUwJdOtUIfeFIm83gqBnMxVS3HMTaoUnmsePhc3e4cXyyeJSWOZSCEIzt9o/TPzRwliQ6CKH1z0aR2uFv8HlmhmJvD4d/XKv48+NxS5Id55C4JcF6e31cJJuQz72+u2rhcpnbyqW04RtjZK8Fu28xnIpYXLZyK69TFOd6GYzzXpXycPsIf8dlz3UrAKi5eJjWy4mWN3PDqEzPiru95CAI2hTNySdt0DU59V1KMS1lC6onSO2o3qCwxQDIhueEwSgir7aR/Hopb3kaskqCbuv7FvPA2dL19q0vB5Z7pKIaVMZtF4Lebw/EWhg90dWZlhd1gUJxh4eRqZy+wKeQBTzb2XioOuhZODOwIHQfcGvyLBhcNbSns14bKj2IjhYUfmp4etSNpmSxakoooyvnU7fkOXwYr6aG562IJp6z+x4ioyEjgLayG3Kam6nyoEZ56WbmdYVLHv6e5DVWKgSskz1Hk1Ytqq84Fu4ERjqIujgr5DCfFqRexsJQ8EXc69gzRDxrJq9OUh7lr5m4Kaux4O7xcRjkLdLv5xuW2ODLRZXLzGDLysh3Z+pZqz7VrgwZOXxa6KW6YT1jKt/AeZNgbJI=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU0PR04MB9636.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(366016)(376014)(1800799024)(52116014)(38350700014)(56012099003)(22082099003)(18002099003);
+ ARA:13230040|376014|1800799024|36860700016|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: xu/6jQHOvN3z225142MkkWXWCsLHxRaU8F+FmgLlHfuZYa2Cmj3EV9zfQb2LorbnbsjhZDYGAgLMDKBEbFpp/iwEA1vmax949xZ6bpU6duI/bC1inbtYPz6BQuQ8JJVpgFBPvklFYifD9WTtEr8lZY5uO0W+KQrUMvHRgKfJF4NMfmXk3QNA69X2yAl5hw61uWkCUJPFfE1SwHh04J2DO1UZESY4gXu8TyN5sKHZEMrkYKVM5+5LwNjrAOS/n+s45ecl+y60epA9q+QU85Cwy/ZGaxVrW2zU+Xz4ERVwHn9fzQjBO+dl7WB6vBoRkpoU8fKcizXnPykGu4O93QZoUkISHnB6+nsGlSYA3neBOqs4x0z1RZ2Wji+FmimCjFAIQZlrZe8r7dO+hjqatNkxeBFXjpEWEYuAiOUMFM+Dx/ch49GuXTsVdEz5j0agSPFRSYPMqN+eoRUqFeD84vZDjvBqjoL8D3AWzdVXgGb7gSjqSKjI4FT1LcO0/94+vOfVeXPbR3m4EplvV9nAlXothkMFb+zV8qtjpV8l+GDIWqMwdILrTDS3uG5JQmxbtzOd1tmSk50rGZzaE7ThP+pb9XOw/hR7jOiS5t2ZoPiYj3084H241eIFEd6cT6oat8UtAyTB5F4zv/b1ACCYcSW7akO+3qHo5dE8HWpgBzklPsh2jSP5AZnW77ZpKDkRlqgvMnP/ZRQvGJJ+Y2JBI9LMkWX0hUytPtz5o7dYM4ZL2yDvcfaFONbBr5xGIn5RCVZdt45EN3yGmgwiiuo46quWfA==
+X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
+ CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(36860700016)(82310400026)(56012099003)(22082099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cUdjZ2V0U0Z2MHdXdkhwVTJIRE1zNGpjc0Y5U0JvRjJWSlZFYm14RHVDd1FE?=
- =?utf-8?B?Q1hyUWx4K21QcWxvVGpLZjl2b1dwek1Dc0MwR2V4S01DelBKUmQ1RlhLWE9p?=
- =?utf-8?B?V2hUQWdsNnVDeVNCRUUzaFJMc3I2RUM0TDI5L3U3eFRJaCsxTlRMQWh0ejB2?=
- =?utf-8?B?WVJMam0rNzlpYUhUb0dFQnhoZWdOZEwvU2dUZ2xzS1Z1ZjgzR0o0R2dvWGxz?=
- =?utf-8?B?UXhNT0NYZWlqbTAxaFpZUjdBcktuZHJnZ055VUtpZGxsaDg0Y2NaekJsSFMr?=
- =?utf-8?B?NkhEZlp2QVlkdDA5UlJHSGF1bGljdm5KMHJkNklWbkRtTmgrcDF5MFpSSEhM?=
- =?utf-8?B?NTVqL2NBRnQrSm5BUXZIVmxXdTZvTlVyR001aC95VEkzQXR1bWVtbFpDTklD?=
- =?utf-8?B?Q3ljUERDVkkrZVpnSUJudkVVc2JYSnp3MVVJYkUrajYvS3I4aXV3NkJ0ZTJV?=
- =?utf-8?B?aVBCSmF6TjhGcFdIalk4SUw2bkRsOU9HVDJ0VUdCb0t1akFGWVJKb2RYT3h3?=
- =?utf-8?B?NnZjdXJ6dW91RmhnM3JoRHlja3VDaVJOaWtyTTVFV3F3czhHb3BsSFZpaWNO?=
- =?utf-8?B?VXVjOXpKSVJxTTFHakFzdnBlcWVjcDVibjZRUGM0T25jcFFmbjFWSVVKOEhs?=
- =?utf-8?B?NEgxTWg4MDgvSDJuWUtXcXdYT1U3ckwxcERqYjBuVGpaSHNRMHRKSjdDSUwy?=
- =?utf-8?B?T01tTGNmdWh6UzJUQXh3ZnhFUk43TDllc1hFSmdVd2w0Y081V0YySW9ublEw?=
- =?utf-8?B?clAvTUF2S2tGZ1p4VXFQcGZtZlNmL2R2QXpNeGo3eWVzNG5GOTFEWUF2OVFm?=
- =?utf-8?B?K1JhMDlmNll6aXN3c3EvUXFTcjZ4ZkNLb2pxRUd2WS9Ua09tMGVzQ2RpNVU1?=
- =?utf-8?B?YTBsaEcwUW1XRk00MCtGUzN5Y0Zhb3J3b3U3OGhiMGN3TkMxb1I5UldrcllS?=
- =?utf-8?B?UU55YkdSODF3VXhTL1JpSzdSZVRiZDhEajZUWUJWeWhYQk9FZFVCcmtxUmxV?=
- =?utf-8?B?bUlnVDN4V1I2UzJUQmU0aTlNMHlEMUNBRm8wdHd5TlVpWVcxVmlKTnQ4V096?=
- =?utf-8?B?OUp2MUNsZTA4Y0p0WmZpWkZUY2YwYmdGL3hLWEZEOHZUeDl1eUMxQ3RFUEd4?=
- =?utf-8?B?UUpqb2txdWZpTUJmY0o1d3NUbG9KNVJwNGg5MTJ1a0NyQ1kxamF6RmpCSElP?=
- =?utf-8?B?RHJ3WDd4OWdOejQyQ2JJUUtpR3hHQnphK1R3QnhEYnN4MUZiZ2F0QnVoRExp?=
- =?utf-8?B?MVNMRmlRUUpjUUk5bEJtQWhldkV1UFdLQU5zcGh5U016UUh0RXhqS2NUems2?=
- =?utf-8?B?OXduSHZjYmVQUEQwZmIzem0vYm1PRlc3ZjcxbWc0VHUxWkZrbzdySGQxWW5L?=
- =?utf-8?B?T2NWaXk4K1pKMGFUR1ltdGkxdmlqOEZzS1Evakk3N3ZiZzFMVmdFMll1Y3hN?=
- =?utf-8?B?UC9GRjlkTDVmSUNMcXpNTHJOV0x1eEJJYTJVejBBMkNzTGFhcWJkMURTTzN5?=
- =?utf-8?B?d2s0bGs5cjFJQXR6RlA2aGV0OGw2NmF1Rmg1VDRIenhuU2FmYk5CbkI5Z09F?=
- =?utf-8?B?MDBPRGx0QVRUdjl4eW5ncXQ5SDlPVHVlRlMzTWRZczJZYy9HYlJvSzcrelp0?=
- =?utf-8?B?MndvYnZ4WDJrd2FHNG9xNklGemIvUHZ2ZGpKSDlwam1hSVp1VHMybFBXcEx5?=
- =?utf-8?B?aWl6dHk1VmJBVVhHOW1UWlBkZXVkZjV3VGJUUjJjQ2NEVVNzNGZTRFNJWWwv?=
- =?utf-8?B?cldyMHhsVVl3QlNtMjNUUUxvSVBlUlQxT29aZnAyTDkzWFR5VXNJb0VFUDhB?=
- =?utf-8?B?eEtmTE5kRzBsUlV1cWkzVi9aNUI5Q05YTnRDa2RLRTF1SVJpUjZKdFRSMGFP?=
- =?utf-8?B?dkNlUzNrWG1tcytieTFFUk9WdXpVbkt4TVloYWdtQk9Nd2hNdWVRTDJKcHhq?=
- =?utf-8?B?dnFVMXdUSmpGVTg2aEEwQ3VZdXBHeDRGS0dUeHVhL1IwLzdyVUVwMU5LSjdZ?=
- =?utf-8?B?U2Vnc1FCZVFnd29uYXY1L0R2KytOcCswQ0IwM0xTU1AwRWM2Y3NLNXRCYXI4?=
- =?utf-8?B?MmRqbUMxZG5CdDdDVFY1S0JYQ3hDM1lXL0tSdUt2VTBhaTdxRWxLRGpJa1Vm?=
- =?utf-8?B?UWM3UDIxQW5ZWDNVRVFXS0ZGVGFNeEhEYWhTSUlkSGRtWmVLSm1STWxXVWZa?=
- =?utf-8?B?c24xa3ltUXNqOEVsd1RleWxmTE1XVFNrQnMxWmR1a2xjdG9ZRGJBMlpiWkky?=
- =?utf-8?B?dEpQZnB3eEx2MW1JUGZtckpaUzBqV0Q3QjFZKy9jTzA5VHNwZkw2eW9hQXhx?=
- =?utf-8?B?RnB6K1c5Vlh2OUs0SmsvYnZGM2xpMncvdlc3MDhueG50VUdnY1RNdz09?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2f1f951-21b2-49c9-5f43-08de7fdd8be4
-X-MS-Exchange-CrossTenant-AuthSource: DU0PR04MB9636.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 02:17:44.6233 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xCoUaBlsJkbuuGVD2Uf6dJ9lXQidywUaIy0CvapMIgr0fdjm/G+rCnBW1VoZBNh0jB4wPCgxAbkKAePPBwAqBw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9246
+X-MS-Exchange-AntiSpam-MessageData-0: vU7moFEYYcu018f1FHxsf3Z6Zo5otQ+I6sJDu7WpFSJp3NrJo/O0e4CVDwwnIaEVUYU7BfENAE4trg+IawYTQXquoVfxiMe1vLXMVI2rz6qFa1HpvyDUVUs8B6SzMk4gMynAGO9zP+IZHNIdYWS01wMqI0XTTPzq6AwhYkapZAWUjmCcAcCrqTwJ9OHqltAOwEnEY55C4+/pN8X19E2Njs8uGtnTiZmzTcy2PS1AWh3a6Lfdv78iLjzfp4Y/Mggx94Cj1xeVSL3+f9Z9XskoGzUt+XRk2lDZ7QDTawK2r46b6KkHk8tEd7qxtOm90d/iEYViBCPlQ4x7Pn0zwgyYj96KypkWziDGj8tbC5vRSJkoM7RdSpKh+BYcNbfigaWmuY5Sw0Z9UDMMpX9h1EuMBCdhIZXX56WfPquwhuzC07VL9oi6bhAAjd+57yK3e6RH
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 03:31:24.6241 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd315141-5f30-4d7f-8d55-08de7fe7d697
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
+ Helo=[lewvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000C6188.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5654
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,124 +138,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+On Wed Mar 11, 2026 at 10:52 PM IST, Manorit Chawdhry wrote:
+> Hi Anshul,
+>
+> On 3/11/2026 5:42 PM, Anshul Dalal wrote:
+>> The reserved memory sizes for ATF and OPTEE were hard-coded for K3
+>> devices, this patch replaces them with a Kconfig option allowing for
+>> easier modifications.
+>>
+>> Acked-by: Andrew Davis <afd@ti.com>
+>> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> ---
+>> Changes in v2:
+>> - Update help text to mention firewall configuration
+>> - Pick R/Ack-by tags
+>> - Link to v1: https://lore.kernel.org/r/20260310-tfa_tee_addr_kconfig_re=
+factor-v1-1-d24abbca82ee@ti.com
+>> ---
+>>   arch/arm/dts/k3-binman.dtsi   |  4 ++--
+>>   arch/arm/mach-k3/Kconfig      | 17 +++++++++++++++++
+>>   arch/arm/mach-k3/common_fdt.c |  5 +++--
+>>   3 files changed, 22 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+>> index 0fd93f9536a..ad127663d03 100644
+>> --- a/arch/arm/dts/k3-binman.dtsi
+>> +++ b/arch/arm/dts/k3-binman.dtsi
+>> @@ -477,7 +477,7 @@
+>>   						FWPERM_SECURE_PRIV_RWCD |
+>>   						FWPERM_SECURE_USER_RWCD)>;
+>>   		start_address =3D <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
+>> -		end_address =3D <0x0 (CONFIG_K3_ATF_LOAD_ADDR + 0x1ffff)>;
+>> +		end_address =3D <0x0 (CONFIG_K3_ATF_LOAD_ADDR + CONFIG_K3_ATF_RESERVE=
+D_SIZE - 1)>;
+>>   	};
+>>   	firewall_armv8_optee_fg: template-8 {
+>>   		control =3D <(FWCTRL_EN | FWCTRL_LOCK |
+>> @@ -486,7 +486,7 @@
+>>   						FWPERM_SECURE_PRIV_RWCD |
+>>   						FWPERM_SECURE_USER_RWCD)>;
+>>   		start_address =3D <0x0 CONFIG_K3_OPTEE_LOAD_ADDR>;
+>> -		end_address =3D <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + 0x17fffff)>;
+>> +		end_address =3D <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + CONFIG_K3_OPTEE_RES=
+ERVED_SIZE - 1)>;
+>>   	};
+>>  =20
+>>   	ti_falcon_template: template-9 {
+>> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+>> index 1b8c0b1eb96..e7ef35ed2cd 100644
+>> --- a/arch/arm/mach-k3/Kconfig
+>> +++ b/arch/arm/mach-k3/Kconfig
+>> @@ -130,6 +130,15 @@ config K3_ATF_LOAD_ADDR
+>>   	  The load address for the ATF image. This value is used to build the
+>>   	  FIT image header that places ATF in memory where it will run.
+>>  =20
+>> +config K3_ATF_RESERVED_SIZE
+>> +	hex "Reserved DDR size for ATF"
+>
+> Not every device has ATF running through DDR, maybe keeping it generic=20
+> might be good like "memory size"
+>
 
-With this patch, XSPI1 are functional on the i.MX943 EVK board.
+Good catch, I'll incorporate it in the next revision.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- arch/arm/dts/imx943-evk-u-boot.dtsi | 34 ++++++++++++++++++++++++++++++++++
- arch/arm/dts/imx943-u-boot.dtsi     | 16 ++++++++++++++++
- configs/imx943_evk_defconfig        |  9 +++++++++
- 3 files changed, 59 insertions(+)
+Thanks for the review,
+Anshul
 
-diff --git a/arch/arm/dts/imx943-evk-u-boot.dtsi b/arch/arm/dts/imx943-evk-u-boot.dtsi
-index 528b3b02a3f..247a7ed6838 100644
---- a/arch/arm/dts/imx943-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx943-evk-u-boot.dtsi
-@@ -157,6 +157,24 @@
- 	status = "disabled";
- };
- 
-+&xspi1 {
-+	bootph-pre-ram;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_xspi1>;
-+	status = "okay";
-+
-+	mt35xu512aba: flash@0 {
-+		bootph-pre-ram;
-+		reg = <0>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "jedec,spi-nor";
-+		spi-max-frequency = <200000000>;
-+		spi-tx-bus-width = <8>;
-+		spi-rx-bus-width = <8>;
-+	};
-+};
-+
- &scmi_iomuxc {
- 	pinctrl_emdio: emdiogrp {
- 		fsl,pins = <
-@@ -205,6 +223,22 @@
- 			IMX94_PAD_GPIO_IO17__LPI2C3_SCL		0x40000b9e
- 		>;
- 	};
-+
-+	pinctrl_xspi1: xspi1grp {
-+		fsl,pins = <
-+			IMX94_PAD_XSPI1_SCLK__XSPI1_A_SCLK	0x3fe
-+			IMX94_PAD_XSPI1_SS0_B__XSPI1_A_SS0_B	0x3fe
-+			IMX94_PAD_XSPI1_DATA0__XSPI1_A_DATA0	0x3fe
-+			IMX94_PAD_XSPI1_DATA1__XSPI1_A_DATA1	0x3fe
-+			IMX94_PAD_XSPI1_DATA2__XSPI1_A_DATA2	0x3fe
-+			IMX94_PAD_XSPI1_DATA3__XSPI1_A_DATA3	0x3fe
-+			IMX94_PAD_XSPI1_DATA4__XSPI1_A_DATA4	0x3fe
-+			IMX94_PAD_XSPI1_DATA5__XSPI1_A_DATA5	0x3fe
-+			IMX94_PAD_XSPI1_DATA6__XSPI1_A_DATA6	0x3fe
-+			IMX94_PAD_XSPI1_DATA7__XSPI1_A_DATA7	0x3fe
-+			IMX94_PAD_XSPI1_DQS__XSPI1_A_DQS	0x3fe
-+		>;
-+	};
- };
- 
- &pinctrl_reg_usdhc2_vmmc {
-diff --git a/arch/arm/dts/imx943-u-boot.dtsi b/arch/arm/dts/imx943-u-boot.dtsi
-index 2b93ba9a38b..3457442a3b0 100644
---- a/arch/arm/dts/imx943-u-boot.dtsi
-+++ b/arch/arm/dts/imx943-u-boot.dtsi
-@@ -141,6 +141,22 @@
- 
- &aips3 {
- 	bootph-all;
-+
-+	xspi1: spi@42b90000 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		compatible = "nxp,imx94-xspi";
-+		reg = <0x42b90000 0x50000>, <0x28000000 0x08000000>;
-+		reg-names = "xspi_base", "xspi_mmap";
-+		interrupts = <GIC_SPI 390 IRQ_TYPE_LEVEL_HIGH>,       // EENV0
-+			     <GIC_SPI 391 IRQ_TYPE_LEVEL_HIGH>,	      // EENV1
-+			     <GIC_SPI 392 IRQ_TYPE_LEVEL_HIGH>,       // EENV2
-+			     <GIC_SPI 393 IRQ_TYPE_LEVEL_HIGH>,       // EENV3
-+			     <GIC_SPI 394 IRQ_TYPE_LEVEL_HIGH>;       // EENV4
-+		clocks = <&scmi_clk IMX94_CLK_XSPI1>;
-+		clock-names = "xspi";
-+		status = "disabled";
-+	};
- };
- 
- &clk_ext1 {
-diff --git a/configs/imx943_evk_defconfig b/configs/imx943_evk_defconfig
-index ef4f9a8fcbc..6acb49e47e2 100644
---- a/configs/imx943_evk_defconfig
-+++ b/configs/imx943_evk_defconfig
-@@ -107,6 +107,12 @@ CONFIG_I2C_MUX_PCA954x=y
- CONFIG_IMX_MU_MBOX=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_FSL_USDHC=y
-+CONFIG_MTD=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_MT35XU=y
- CONFIG_PHYLIB=y
- CONFIG_PHY_REALTEK=y
- CONFIG_DM_MDIO=y
-@@ -127,6 +133,9 @@ CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_RTC=y
- CONFIG_DM_SERIAL=y
- CONFIG_FSL_LPUART=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_NXP_XSPI=y
- CONFIG_USB=y
- CONFIG_SPL_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
-
--- 
-2.43.0
+>> +	default 0x80000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || =
+SOC_K3_J722S)
+>> +	default 0x20000
+>> +	help
+>> +	  The runtime DDR size reserved for ATF. This value is used to fixup t=
+he
+> Same here
+>> +	  kernel device-tree's reserved-memory node for ATF and configure the
+>> +	  firewall.
+>> +
+>>   config K3_OPTEE_LOAD_ADDR
+>>   	hex "Load address of OPTEE image"
+>>   	default 0x9e800000
+>> @@ -137,6 +146,14 @@ config K3_OPTEE_LOAD_ADDR
+>>   	  The load address for the OPTEE image. This value defaults to 0x9e80=
+0000
+>>   	  if not provided in the board defconfig file.
+>>  =20
+>> +config K3_OPTEE_RESERVED_SIZE
+>> +	hex "Reserved DDR size for OPTEE"
+>> +	default 0x1800000
+>> +	help
+>> +	  The runtime DDR size reserved for OPTEE. This value is used to fixup=
+ the
+>> +	  kernel device-tree's reserved-memory node for OPTEE and configure th=
+e
+>> +	  firewall.
+>> +
+>>   config K3_DM_FW
+>>   	bool "Separate DM firmware image"
+>>   	depends on CPU_V7R && !SOC_K3_AM642 && !SOC_K3_AM654 && !CLK_TI_SCI &=
+& !TI_SCI_POWER_DOMAIN
+>> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt=
+.c
+>> index cb0fb8274a5..39cb00c3f43 100644
+>> --- a/arch/arm/mach-k3/common_fdt.c
+>> +++ b/arch/arm/mach-k3/common_fdt.c
+>> @@ -173,12 +173,13 @@ int fdt_fixup_reserved(void *blob)
+>>   	int ret;
+>>  =20
+>>   	ret =3D fdt_fixup_reserved_memory(blob, "tfa", CONFIG_K3_ATF_LOAD_ADD=
+R,
+>> -					0x80000);
+>> +					CONFIG_K3_ATF_RESERVED_SIZE);
+>>   	if (ret)
+>>   		return ret;
+>>  =20
+>>   	return fdt_fixup_reserved_memory(blob, "optee",
+>> -					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
+>> +					 CONFIG_K3_OPTEE_LOAD_ADDR,
+>> +					 CONFIG_K3_OPTEE_RESERVED_SIZE);
+>>   }
+>>  =20
+>>   static int fdt_fixup_critical_trips(void *blob, int zoneoffset, int ma=
+xc)
+>>
+>> ---
+>> base-commit: 8bc2a5196c1c0bb5dbdaca073323da0015a0de37
+>> change-id: 20260310-tfa_tee_addr_kconfig_refactor-2bf77949df0f
+>>
+>> Best regards,
+>
+> With that addressed,
+>
+> Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+>
+> Regards,
+> Manorit
 
