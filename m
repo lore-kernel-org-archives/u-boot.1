@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81451067036
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 14:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A365106703B
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 14:32:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90DA684286;
+	by phobos.denx.de (Postfix) with ESMTP id D2E3E8429E;
 	Thu, 12 Mar 2026 15:31:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="joTMiiTQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ZaX1AJ7V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FDB984285; Thu, 12 Mar 2026 15:31:36 +0100 (CET)
+ id 13FA184253; Thu, 12 Mar 2026 15:31:36 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 283488424E
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 15:31:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DD0F84258
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 15:31:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,30 +30,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=Aj5Gkmzu8noJqO0oqvnN1l2KXzo+Qfnml+JGTqf65sk=; b=joTMiiTQUj4O30NvWn04gJJZUA
- hxS0jWNdd9g+jgw9fMjUHUhxcKrhp0BbEQdzoguoUl6ZjnLL/8oW9DJIgROGZDBtFxIfUNXTdZv0R
- W4hvuA7kFXs6WMnxQ7tW+ODEIAfGU6OVtZdxS8FxKsdDFr5tVRhtLMVrWFcrPC2TZVh5rbyMKM/eA
- rGusX12BxpJJczUAzzk7lPPt2kZy2amlVczDev1iTsCxUOphBJL1ZlOeItUicyXOMMen1/fIJrqsF
- pY63YzLv7xfAU/drwmUJh65yXccP0VCT+IJhpHG5b0hEMlnhdeERAWic8AQ8ewrAuVDkHFhzaHCV+
- gR+J9uOA==;
+ bh=oKBHjKgo871tXYOg2RSCmvd5kutHuj3QQSpGP4/ZcVI=; b=ZaX1AJ7VTdZJ7BmzW983+lL+3q
+ LD/pFunKjbu674UwpCgGOUxeb2ETAaeGc5+G3c4r0uxqyYcQ4/hIaKyH2J5whXID6WdSQeDItYIs2
+ FiRuYa2Ul0HhWkQwgq7We1qAvka/bEhGLHi+3nSRn2KhzAVNvjampTaXhcGI+C2Mn1qQaFTeT2UpJ
+ IEU7UqWDRPbw67FN5Oird3rZg8gJJExs5ATsswm+XxkT1H7dsEgLst4LslpS48PLLUQiJtzSlcPkq
+ n6mzlPkERvoxq3eXy2cHBVYsswO/PcNP9Iu9ZOlrxH00TUI4E7+eHy1O1YWzJSS0CvnhVclHZOC5O
+ h3tfM6tQ==;
 Received: from sslproxy03.your-server.de ([88.198.220.132])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w0h4V-000FLV-0p; Thu, 12 Mar 2026 15:31:31 +0100
+ id 1w0h4U-000FKv-2B; Thu, 12 Mar 2026 15:31:30 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w0h4U-0003V8-2o; Thu, 12 Mar 2026 15:31:30 +0100
+ id 1w0h4U-0003V8-0b; Thu, 12 Mar 2026 15:31:30 +0100
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
+Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
  Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH 5/8] arch: arm: dts: tqma7x: add boot phase properties
-Date: Thu, 12 Mar 2026 15:31:15 +0100
-Message-Id: <20260312143118.1677859-6-Alexander.Feilke@ew.tq-group.com>
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Steffen Doster <Steffen.Doster@tq-group.com>,
+ Max Merchel <Max.Merchel@ew.tq-group.com>,
+ Alexander Feilke <alexander.feilke@ew.tq-group.com>
+Subject: [PATCH 3/8] env: add env_set_runtime() helper
+Date: Thu, 12 Mar 2026 15:31:13 +0100
+Message-Id: <20260312143118.1677859-4-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260312143118.1677859-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260312143118.1677859-1-Alexander.Feilke@ew.tq-group.com>
@@ -75,88 +78,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
+From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
 
-This commit can be reverted once the upstream linux device trees are
-synchronized.
+env_set_runtime() is equivalent to env_set(), but does nothing when
+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is unset.
 
+Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+Signed-off-by: Steffen Doster <Steffen.Doster@tq-group.com>
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- arch/arm/dts/imx7s-mba7-u-boot.dtsi  | 23 ++++++++++++++++++++++-
- arch/arm/dts/imx7s-tqma7-u-boot.dtsi | 22 ++++++++++++++++++++++
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/imx7s-tqma7-u-boot.dtsi
+ include/env.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/arch/arm/dts/imx7s-mba7-u-boot.dtsi b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
-index 2ed3f9c4769..bb560f4d85b 100644
---- a/arch/arm/dts/imx7s-mba7-u-boot.dtsi
-+++ b/arch/arm/dts/imx7s-mba7-u-boot.dtsi
-@@ -7,7 +7,7 @@
-  * Author: Steffen Doster
+diff --git a/include/env.h b/include/env.h
+index 01c3eeae7e2..193aff8f23b 100644
+--- a/include/env.h
++++ b/include/env.h
+@@ -160,6 +160,25 @@ bool env_get_autostart(void);
   */
+ int env_set(const char *varname, const char *value);
  
--#include "imx7s-u-boot.dtsi"
-+#include "imx7s-tqma7-u-boot.dtsi"
- 
- / {
- 	config {
-@@ -21,7 +21,28 @@
- 	};
- };
- 
-+&gpio4 {
-+	/* Deassert BOOT_EN after boot to separate BOOT_CFG circuits from LCD signals */
-+	boot-en-hog {
-+		gpio-hog;
-+		gpios = <3 GPIO_ACTIVE_LOW>;
-+		output-low;
-+	};
-+};
-+
- &wdog1 {
- 	u-boot,noautostart;
- 	timeout-sec = <60>;
- };
-+
-+&iomuxc {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_uart6 {
-+	bootph-pre-ram;
-+};
-+
-+&uart6 {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/imx7s-tqma7-u-boot.dtsi b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
-new file mode 100644
-index 00000000000..2d1d614cd57
---- /dev/null
-+++ b/arch/arm/dts/imx7s-tqma7-u-boot.dtsi
-@@ -0,0 +1,22 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Device Tree Source for TQ-Systems TQMa7S module.
++/**
++ * env_set_runtime() - set an environment variable if
++ * CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is set.
 + *
-+ * Copyright (C) 2024-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
-+ * D-82229 Seefeld, Germany
-+ * Author: Steffen Doster
++ * This is equivalent to env_set(), but does nothing if
++ * CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is unset.
++ *
++ * @varname: Variable to adjust
++ * @value: Value to set for the variable, or NULL or "" to delete the variable
++ * @return 0 if OK or !CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG, 1 on error
 + */
++static inline int env_set_runtime(const char *varname, const char *value)
++{
++	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG))
++		return env_set(varname, value);
 +
-+#include "imx7s-u-boot.dtsi"
++	return 0;
++}
 +
-+&soc {
-+	bootph-pre-ram;
-+};
-+
-+&aips1 {
-+	bootph-pre-ram;
-+};
-+
-+&aips3 {
-+	bootph-pre-ram;
-+};
+ /**
+  * env_get_ulong() - Return an environment variable as an integer value
+  *
 -- 
 2.34.1
 
