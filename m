@@ -4,108 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C422FFED2C7
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 04:08:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 686F0FED2CC
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 05:00:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32FBF83F75;
-	Thu, 12 Mar 2026 05:08:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9854583F8A;
+	Thu, 12 Mar 2026 06:00:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GPf38SCl";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jDK6MIjx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD9BD83FED; Wed, 11 Mar 2026 20:39:36 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1CE9083F9A; Thu, 12 Mar 2026 06:00:55 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D9FE83FDB
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 20:39:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6BEB83F75
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 06:00:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dan.carpenter@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4852b81c73aso1864675e9.3
- for <u-boot@lists.denx.de>; Wed, 11 Mar 2026 12:39:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773257974; x=1773862774; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lZkxqUuUbJ4Vbj2riO1raVFqanxfpUss3tcQOFPsGhg=;
- b=GPf38SClVQM9jO3UwNpwKmm8qDrbt9rDFE4o4MMAfipFQ9ohxh08X144XUa+h+Mi87
- g0QVtfUDWqGfkh6eWALSpEmESHDtcstZ9o55p+XH3U1q2VfF+QqktuMiY+mZ/15qPk6E
- F2rKO0hhOmmiWV6juzYwo34XzDMehAqqtKbvU05LKoZpjqVV0XhZ8S8/Y9qSo+F2JIDj
- GYZkSjqYBLIZkZ3wygd5+KTsckFSjoPmNG+H2xhmFFoF8i2puKRzod7BGYld/gSXHQtj
- dGiMdgp4HSdq6VT3BV94d/4QJEkR9ODT9eaJGApjYLiZuE9KtLGGfwHIo7fheWI9Yq/j
- 94oA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773257974; x=1773862774;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lZkxqUuUbJ4Vbj2riO1raVFqanxfpUss3tcQOFPsGhg=;
- b=Vh2vKFEze6f5V3qIR7cLjPzOkuYEni1Lt38pk1MpJxMyu+21sUOS4BgCAzlZT+CKXr
- 5GUmgIJWrh9m25tjQ+VSSXN15oVnWKwtTcKfciqoYmeeVgu9sMGaPJqYDk2Z+wW98z4e
- CzHYkDvLJrNAM2YSq84SzY5hgx34/MwRXrR3K9apsTSkVGj8V37O6m1v15rTkJSHWHSB
- aKXnStmwls7o/+hHJYRWRJw1eodtyJvYo1QONNUt6WbWDFLA5z9NPGcADxFD6m+n1+vX
- EI10r7bsj1mhtaXQDKMpfWiqdXlzcaBYE+k7+zWYy0nPTHlGrDBvnBdjPmQAWez4Vt76
- Y18Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWyFH7Jgw0FmKcGVZnMFjULVoxr9HLjbp3fNdKtmiwaRpT1Ra869FI5YUoBtX4XEco/Ms+SjM0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfbYfzSB4fEK1X88zxXH/bHDhja1u1SAyKOBCy05BpgVKVXoel
- uufJV5hPGQjSac3ifO5bQvnk1VI24EvE6VSxkLJL5rK8ajYysRWXel/KA6vRMgjxXMs=
-X-Gm-Gg: ATEYQzyjWjMGpsjsX94CzGVmqajpokof3Ztc9XGTxuFJ4i1s9vtiprAETRV/OOddalY
- x1ePHNtENBVnQzC3qUuARnaCRwU7a+T2HCtITEjme7FtatnCFyBss1QSZquPPzhYMoRYhcVKx/N
- CK/WDwigFuEB9QCR6VXSPPB0vo3NrPvtausqQ9OGR17/1FrMetyfrNZJ/AqY7d/jpVVXEm8TG4M
- Z2BWlqdNB2g21TbRgor55iM0bdA1bar2KZb8YplmKwX0EnOBPFz3eZ9D5tfokYYeQZbX94FJscJ
- yvA39HV2RxS7mNzXdSvBmIns+C34s7Bt27vwAze5VatEJxcoBnMACb0Z//jB94QGZ4hgjqEwCaX
- 99hzqrYxkzxto7TdlGbRW7Z/lCrEsHswj7f0kV4F5hOj5V4YOUKyoXJ9UVorDOYFNYiF+Gjcnq0
- ID46rwJJVrmUXnDIKvtHeEYyuTAnyk
-X-Received: by 2002:a05:600c:4e56:b0:485:4136:99a8 with SMTP id
- 5b1f17b1804b1-4854b0fafb9mr59007345e9.22.1773257973713; 
- Wed, 11 Mar 2026 12:39:33 -0700 (PDT)
-Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4854b0d4a37sm24019345e9.20.2026.03.11.12.39.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 12:39:33 -0700 (PDT)
-Date: Wed, 11 Mar 2026 22:39:30 +0300
-From: Dan Carpenter <dan.carpenter@linaro.org>
-To: Peng Fan <peng.fan@nxp.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>
-Cc: Alice Guo <alice.guo@nxp.com>, Anis Chali <chalianis1@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Eoin Dickson <eoin.dickson@microchip.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Ian Roberts <ian.roberts@timesys.com>, Jacky Bai <ping.bai@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Philip Molloy <philip.molloy@analog.com>,
- Ranjani Vaidyanathan <Ranjani.Vaidyanathan@nxp.com>,
- Tanmay Kathpalia <tanmay.kathpalia@altera.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>, Yao Zi <me@ziyao.cc>,
- Yegor Yefremov <yegorslists@googlemail.com>, Ye Li <ye.li@nxp.com>,
- Andy Shevchenko <andriy.shevchenko@intel.com>,
- Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- arm-scmi@vger.kernel.org, linux-gpio@vger.kernel.org,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Khaled Ali Ahmed <Khaled.AliAhmed@arm.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v2 0/4] u-boot: add SCMI GPIO/Pinctrl support
-Message-ID: <cover.1773256350.git.dan.carpenter@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mCMc69A/RTXRFdmh4OPSF0UTQyMfmtW4O2hKklagbE3YJW2hsyaIsa9I1wmBF4JSiXcKVDEO+yE5uClmUPKzENHd3roWYoqhPQf0mwilnQ+cIazS2x7OeMqmryIcsmGOIAmhT7Vao1+xuZTGdVXw7FlYNCi4fmXCX3rUgI/6wdN7tWttZszcVch/BfxBpKgdbev9Bcej+0t55f+DwOvi1LEXRndkHND7NtLwnDgaVMSQ2l5i70IRfv3i2KTiwvRTPLAaGPiWE5UrOK/NPfy1qjPPSI3//6XCQam0lPazVCRdU8qugcAyQ5mdgX5wu32pWLR16xG2aRm+IYBYPpjUMA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=z7GrJPqxioU4Qk0AHwI9tP/Vnk9SxC5rWgEdafJV1D8=;
+ b=ZudvgGyu5SRDZMWWFYqTCDUGad2gj86+uhlj4mraV5qozArLk7mgk0mVRmmuTjlx5aVTUZ2glTxzEn5bZ5p7NN6NOC1bY5kDumhOmhtad6yxPmNbAS/ERi+IAsh5sn/biYxnp1eOHvVHI54SeDNH2kByVZl7Lun8G4+HGKSYI/8M2dTtFKKIGBoTQ9D0xJCybEmRBsWCf6xmiPge2+TSntcfHBMrs1TmmeG1QkrQM69FULP7BycYKA7UpYkB11Gg5kPatVoRI7b91vQdHweGMLuzWeD2xUc0qFSyzJ+gmEYhbm65bJyc02gGMb/faIxIvfBz8Nd044uWxRJ3ue0bxg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z7GrJPqxioU4Qk0AHwI9tP/Vnk9SxC5rWgEdafJV1D8=;
+ b=jDK6MIjxOWncQ7SWerEFTOKbaJaxFeSYNcftOgLhmCRa16KIBW/46qcvDXmzzBxZbUWE30ubeQ7tm+z1fYrsHMqB+5AyNwBJz28dRF0WVDJ8+hjSlYBc1lfthFctD669oEyoJW3Ncluh1zFxrR8xOKymG0CE2/rjGVSe5nyffns=
+Received: from BL1PR13CA0178.namprd13.prod.outlook.com (2603:10b6:208:2bd::33)
+ by CH3PR10MB7457.namprd10.prod.outlook.com (2603:10b6:610:159::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.14; Thu, 12 Mar
+ 2026 05:00:47 +0000
+Received: from BN3PEPF0000B077.namprd04.prod.outlook.com
+ (2603:10b6:208:2bd:cafe::5b) by BL1PR13CA0178.outlook.office365.com
+ (2603:10b6:208:2bd::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.8 via Frontend Transport; Thu,
+ 12 Mar 2026 05:00:47 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ BN3PEPF0000B077.mail.protection.outlook.com (10.167.243.122) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 05:00:46 +0000
+Received: from DFLE213.ent.ti.com (10.64.6.71) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
+ 2026 00:00:20 -0500
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
+ 2026 00:00:19 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 12 Mar 2026 00:00:19 -0500
+Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62C50II92178074;
+ Thu, 12 Mar 2026 00:00:19 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Date: Thu, 12 Mar 2026 10:30:12 +0530
+Subject: [PATCH] common: splash_source: fix cryptic error messages
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-X-Mailman-Approved-At: Thu, 12 Mar 2026 05:08:48 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20260312-fix_splash_error_message-v1-1-50fb62f972bc@ti.com>
+X-B4-Tracking: v=1; b=H4sIAFtIsmkC/x2MWwqAMAzAriL9VrATh3oVkTG004IvWhBBvLvFz
+ 0CSB5SESaHLHhC6WPnYDTDPYFziPlPBkzG40vmyQlckvoOea9QlkMghYSPVaJ5vYz0StohNAst
+ PIXP/dT+87wcaUzY9agAAAA==
+X-Change-ID: 20260312-fix_splash_error_message-69a5ce19118f
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1773291617; l=1519;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=ruSF1w4ShxmEwydf13ip3S/7ORYntbq+emZD2Kigz58=;
+ b=v7QXwa35gT99qQHtiv5k6e6rr/qkBXhL5ID2Kp02SiFOU01/RUmSNiRi7vl2WTgYPzk3w6A07
+ gP323Veym6aDHB08VU/sRrzX4nUDE1zjvX8FGyifM9zRK9dw+gfTcZI
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B077:EE_|CH3PR10MB7457:EE_
+X-MS-Office365-Filtering-Correlation-Id: 96dc1c70-fd09-4339-6435-08de7ff4524f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|36860700016|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: JuGmi1Q5N02r7H8sg/GDwznOVvbUUCvU8uLXOYnKcyRrR2dMDkE2v3vUEogEBiWPXxaAsPuquULzgMvdqLdVpLLE18Xa9xXb3mxdlDlz/+cSTNKqAv1gfSf94L240A5MjukXD+2N7s+QnQGD/Gt08/EgMO/Xb43qTXqnHQb0z7TXsHLAhMBZVdNhii8Imn0doEkcDrmmUEk7UCME+LWZQfKluCF/S1R7WhUk44b0MRaZPn02vCgfVLFxZfBggLHrhE+WjYPw1c5eDO7pBeDVj+zoLZ++fvdDkF4JCKobHAivA0RoBNC7wFVW+QGBSNcuKRPIEjszX7PXoCxkVyAs6hbvi8JQHuvH5az6hY+uiroLlqXNBwolIuvom7DIt7a7/8wMSM9ZoywScUilOzGW3oodci5vrjOw1+ctjsa/EmXH53HmBwkddAlUr2cWVAWYVkBbi34acK2tS1Ff/5F6Ks27zFricF1uhczjSOc0clYe7vavtxVooi5rsNjW4i3xjc8hqI02q64bJSUiwpf4bjOaX0sEETKup6/WikueA032R3QHpCy00/+m62U1UtdPx8GnUmCwh/ynF6paIC9Ig5pCiwOn5S9xeEXNkX2Pisw7tCFeXbWFcLJnhjZi5gDJHEol4slChjHuK7EgavOpfg7Z1g/1QrCSmSKVytlJIUFRQky9+uT0TVy5GAeICLf3aho+eFn06Qb/1aN63U3ES6Y79TtkrK4xm/KmIwT7BY9o169EnIP1etc2oqUBCLr7y1dRnoPUfLXGaUBmSsRK8Q==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700016)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 8YOyXMt3mrCelT5qMnkAHfOkFJrrjxXQky2CmDcP18y62e6ha5N4fn794MPCF2mRkCcvnNNq4g4XL1uOh9mw2k/MR1f7MxjuzqwcuTxh/UOVDlAVlcRgN7ETlbbKy8yfSArGspxI0rE1q7kc/XyY7hlabCqpzRwX46B4mdY6KaDUJlMT543hrNkM58IPP9XLFbhCtqTKwnicB7iG6KJg/smQr3Pb8Qn3dzGT/m07e2Mwm7j4NcwUSkiqxwcBuEwLGNhj17VwBkiYKNyPqt/sX3yYVlPWxgcrlDzysx6wc//9bbeU0LJBZJOfxkNuyrVJpc5f4Mr83094tmfRhqoLFuhcEQzTyEv8dYM+tX1uMU+M3q2v+df61hl41JWe/fMvAuFC7jgX5FKCcQkBDLfu/MZhIWBecr2039pJ6XAWK0kMCoboqEH8jBV6txAPni/V
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 05:00:46.1650 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96dc1c70-fd09-4339-6435-08de7ff4524f
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B077.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR10MB7457
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,51 +139,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is an existing SCMI pinctrl driver in drivers/pinctrl/nxp/ which
-lets you configure the initial state of the pins via device tree.  This
-patchset is a more generic version which provides GPIO as well.
+Some error messages emitted while loading the splash image are too
+cryptic and don't provide any insights into the failure being a splash
+related issue, such as 'Error (-2): cannot determine file size' etc.
 
-I wrote two small cleanup patches to the NXP driver, one which renamed
-an enum and another which made some white space changes.
+This patch fixes the error codes by adding the function name to the
+error print.
 
-The next patch adds an pinctrl driver which lets you configure the
-initial state for the pins.  But the main thing is that we need one
-driver to handle the SCMI pinctrl protocol so the pinctrl driver does
-this.
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ common/splash_source.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-The last patch adds GPIO support over SCMI.
+diff --git a/common/splash_source.c b/common/splash_source.c
+index 0710e302ba1..55fa3870505 100644
+--- a/common/splash_source.c
++++ b/common/splash_source.c
+@@ -159,12 +159,12 @@ static int splash_select_fs_dev(struct splash_location *location)
+ 			res = -ENODEV;
+ 		break;
+ 	default:
+-		printf("Error: unsupported location storage.\n");
++		printf("Error: %s: unsupported location storage.\n", __func__);
+ 		return -ENODEV;
+ 	}
+ 
+ 	if (res)
+-		printf("Error: could not access storage.\n");
++		printf("Error: %s: could not access storage.\n", __func__);
+ 
+ 	return res;
+ }
+@@ -284,7 +284,7 @@ static int splash_load_fs(struct splash_location *location, ulong bmp_load_addr)
+ 
+ 	res = fs_size(splash_file, &bmp_size);
+ 	if (res) {
+-		printf("Error (%d): cannot determine file size\n", res);
++		printf("Error: %s: cannot determine file size (%d)\n", __func__ res);
+ 		goto out;
+ 	}
+ 
 
-I tested this code using the SCP SCMI server on OP-TEE over Qemu.  I
-created a custom mock pinctrl device in SCP.
+---
+base-commit: 8bc2a5196c1c0bb5dbdaca073323da0015a0de37
+change-id: 20260312-fix_splash_error_message-69a5ce19118f
 
-Changes since v1:
-Address Peng Fang's review comments.
-Use the standard gpio-ranges to describe the pins instead of
-inventing a custom format.
-
-Dan Carpenter (4):
-  scmi: pinctrl: add pinctrl message IDs
-  scmi: update comments for scmi_pinctrl_config_set_in()
-  scmi: pinctrl: add pinctrl driver for SCMI
-  gpio: scmi: Add gpio_scmi driver
-
- drivers/firmware/scmi/Makefile            |   1 +
- drivers/firmware/scmi/pinctrl.c           | 365 +++++++++++++++++++++
- drivers/firmware/scmi/scmi_agent-uclass.c |   4 +-
- drivers/gpio/Kconfig                      |   6 +
- drivers/gpio/Makefile                     |   1 +
- drivers/gpio/gpio_scmi.c                  | 248 ++++++++++++++
- drivers/pinctrl/Kconfig                   |   9 +
- drivers/pinctrl/Makefile                  |   1 +
- drivers/pinctrl/nxp/pinctrl-imx-scmi.c    |   2 +-
- drivers/pinctrl/pinctrl-scmi.c            | 365 +++++++++++++++++++++
- include/scmi_agent-uclass.h               |   2 +-
- include/scmi_protocols.h                  | 379 +++++++++++++++++++++-
- 12 files changed, 1371 insertions(+), 12 deletions(-)
- create mode 100644 drivers/firmware/scmi/pinctrl.c
- create mode 100644 drivers/gpio/gpio_scmi.c
- create mode 100644 drivers/pinctrl/pinctrl-scmi.c
-
+Best regards,
 -- 
-2.51.0
+Anshul Dalal <anshuld@ti.com>
 
