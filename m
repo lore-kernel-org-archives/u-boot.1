@@ -4,132 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8708B105A592
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 12:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EEC1105A58D
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 12:08:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B36A841A2;
-	Thu, 12 Mar 2026 13:04:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 032A584167;
+	Thu, 12 Mar 2026 13:08:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LNxckNHo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xwh7YP84";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B58A4841B8; Thu, 12 Mar 2026 13:04:25 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A68BE8418C; Thu, 12 Mar 2026 13:08:27 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0E9A84121
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 13:04:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A360984121
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 13:08:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WnFeZspo65NOh+Th2BaPFgH69bpCZxIeZaEMKmgNvDuH99wgl1xQ//gLiFrOdr7Zve9W1/lT2Vww7fEWirYeewSp+OR8PlAHyubC8Epkuegpcc4CKsExYe9yAU68pH0UA+4b7m07C9CT/DhRVlg/vDvyK14h1nARf+YYxWY4B8xpWz/7q9LjRFm+uniUv+BNuf70Fjk4RfJTAwCzcIeESfPAUxrUEp9hb/y1BAdDb862qqGkjC31bNMsFhcu/G+Ouv0Svet7Zw8ux+dwhpktQGSGgK0TKiTPxeSTZELghpEVDf0VwpHBKcBt93pbPEguOP2gstL1dRaoCyPoWgfS4Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yGt7t/lBT0li02BAtD0uTr2OUzif3aMABN1dX2YPFvk=;
- b=Ill/duBsp28cDTiUk7el4crTQq7dwIXSKFfRSnetCUNOSkCjh5XnNcmp2Mm9MaK0aLrb+rWBcOCz8l3rWq8FJbBVp1U637Pk98hi32x9JrxCThy3bYagHXVNH/QA8o//TeMLv6mDHg0yOInvCTQJmhGuznem+yePKyDF2Xc0zu7/JvtmEOoy1hOFqNjtgPahV4Pr2KWxh5AYMFWn8Dpi+agfxEBO8KFhHjTYIcTxxtRV/eXRnPy6PBu0a3/qSpz/N1PjnRK8P+YU21mRNeLBtVGnf7GeHxHv5r27cpYILiOvBeOFAov7+nI5zypi7X1FVrX29m3bohlnss2AKZUuIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=phytec.de smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yGt7t/lBT0li02BAtD0uTr2OUzif3aMABN1dX2YPFvk=;
- b=LNxckNHovILegyKt/vvWXPj+zPNNVqhAvAnBgE9GHn4G07sYQTAeZ+PfNfpL8SIWSk7HPK3bb4g7lq29379qW6OMl8v38cG6CXby2qwn5/azJE4iLdgFfvkPRPs+Mnmsb5JfJfA4zwg3FGDJVlEo6Y0eX4mRiy0G86Dz9KGrZ2o=
-Received: from SA1PR02CA0008.namprd02.prod.outlook.com (2603:10b6:806:2cf::13)
- by LV3PR10MB8179.namprd10.prod.outlook.com (2603:10b6:408:28a::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
- 2026 12:04:20 +0000
-Received: from SA2PEPF00003F64.namprd04.prod.outlook.com
- (2603:10b6:806:2cf:cafe::85) by SA1PR02CA0008.outlook.office365.com
- (2603:10b6:806:2cf::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.27 via Frontend Transport; Thu,
- 12 Mar 2026 12:04:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- SA2PEPF00003F64.mail.protection.outlook.com (10.167.248.39) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 12:04:19 +0000
-Received: from DLEE201.ent.ti.com (157.170.170.76) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
- 2026 07:04:19 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
- 2026 07:04:19 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 12 Mar 2026 07:04:19 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62CC4HCX2778068;
- Thu, 12 Mar 2026 07:04:18 -0500
-From: Anshul Dalal <anshuld@ti.com>
-Date: Thu, 12 Mar 2026 17:34:17 +0530
-Subject: [PATCH] mach-k3: move k3_falcon_fdt_fixup out of r5/common.c
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b96d784828bso130958666b.3
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 05:08:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773317305; cv=none;
+ d=google.com; s=arc-20240605;
+ b=X7CbdzgQIHu4FJZ4/SIpmszkg9DbwznSmsdcLvPiQWyZgYRQpT0ZZv8Ds7fRnw8bC5
+ KSz6PdFl3+LYjKXDnklBiFjP9Eoo6mc/r5klXRnsi6zMq11HGufmLHRr8D7/ikHdCoNy
+ JAvKMuzXqIeSmbSF63D26pojf7nLEwXq4lrvY5ukQ+8l5exNiCdZdkdz3jgm/S3UI2JE
+ MSp1Tqe8fUZtLbU3N6KVa3J3TnbCE1zcQLAaZE6QC7di6UsaAE5CwmanK5ei81T1Ksmb
+ /DbWK2poJR+13IM5e45L+TduyuLgI//Qzsa6N34926OlbqF80Dw7BBoksJ38VHB6xrh9
+ 0i0w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=/1mSCtU1nRWxQYTwNb/vJP8hI0YexbN0AQ9I7tvveZ8=;
+ fh=lEnt6i2qrjwBbaSCkrdTcOSYGh/b1tw639piUMO096Y=;
+ b=LXBAiejv9Gnk2p9w/ks931m9QkkCdo3vv9D1eiJz+7cAUH/KKphRlFjpYnUdfenHr8
+ r3GDQazzdw/D4newnx4q4UoaZ6xvIOu78zm4YpmBM/YU0pgyuD3ZW9wCdKn22lVExhRh
+ xSSAxSId6DYtYxzgDA5ox1gu7z26SnJUGOY5ikYdi5SVffWWaSqXEHYG4t/t8/Qi7IoB
+ ytoUEP5SQv3ELiISEx7e1nv+p4TSo96H7tC26gNrRFzeGuU4vts3CdwSgMlgiSLbv1m3
+ szVicmLlj6iAai3wVF5Rp9Xf2yY3A5FPL+YwXroZbyvoan9ibsibMQHT3femrB3s4ZIM
+ fIMQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1773317305; x=1773922105; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/1mSCtU1nRWxQYTwNb/vJP8hI0YexbN0AQ9I7tvveZ8=;
+ b=Xwh7YP84vsJozGaegrqsrDJkpYOnUgooZPrx5svXnmEZduN9mN/+pK7N3eBzZgKIh5
+ Uu4PywFMq61RBq2sG6A3eg1hRbmWBPISOLVVmClPN5LWbeMHcoKAWpLZvPFeAPeWT0g4
+ 98NpNPjzv55nec8afLrEq1GW+w9DDwqR0DIIkRryuQhzCoVBBu2T4FYlXTwugdmWFcRP
+ aCPE6Xin7bVFirnM+bAwdz9bhphi/iiD/0+QpCbGnLCiPjjOrrnHFBpazRnT3hev+YcV
+ jVJJJBKJcan4VVs4O43ORHU7r60iy+kk9tQKp7t/2F8TaUGZZB43jR/6QbU90flKEz4T
+ KuTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773317305; x=1773922105;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=/1mSCtU1nRWxQYTwNb/vJP8hI0YexbN0AQ9I7tvveZ8=;
+ b=Xwdgao714qU3r5dbJgMxuqukDtrRR9MzMSx1pvYyxWglKuytXNL16UqCbWqGhHhOZF
+ oTp/xpCdPqEUxbxU2YHxvhIiCBXuzqHiVUmlfVv2rVQ54CbhX7UggxzyDVB4MSfIfIg/
+ qnzoFcCW7jw3XkA2Y+ncvbExAIUw+nQIbXjgdVM86ADW1zLjB3ocTUAU12WcRmur/Et9
+ VE6AZ+qC2m9Z+77qJzG6yL/cZl0VJHIwKwnpmPnYvBVZM0o9B0akazrU4qTRhnHhtXZU
+ 2NRwE2sJwLB/GTm4QRUhsZfvjhY5YOh1NILvHsDQ1ol88VGn5ND5rjVIDPWPUxCoynLq
+ ZtiA==
+X-Gm-Message-State: AOJu0YwnW0I6jpN4/31hk43D6KZkIGzVh4OJs/flk3JH/KULj/QBRf5n
+ 66T7vItjWE/VD7dgEAyviediNLO5HJt75F+h1jUsX4jXrkEp9/DwjD63OiVRnjZJID5c75mw+Nf
+ BYSMNI8dUgw92qvEH+uTSXNKTRfDdv2r4uAAW
+X-Gm-Gg: ATEYQzxCWas32qAcnPs56x7gN57xs9SEDqqS4/ud37QHvjqRIjIC7+x/FR12w6joz1O
+ /GDtipVCawUAHja6Jnd5Edf3ZbkGqpa2QKta9ohMcIUbhXrxX5FTKbBQF7sUsTs2KFPav0EJqwv
+ 5DWCYYA/Ty7VKbpwRgvREW1OJczK3Rnkw2F3+yYRERj1f22jzDbBWHtnb7POXYUyhOwbfBGA9v3
+ dZ2IAX3tep3SgppNeCwi90tfFfhGqjdlae4T4RPKtj85YAAeAIc4E8tRuEd4Ukl5tcmg00kpM3B
+ Gu13kdlqiO7Q5m29H64OdDGBOvrMST3A0QuZHjQdYE7xWE9AEwp2N7mCWOctsAIjzSvYU+Mzoue
+ AxQgw8EiqGyalM1Nldr4lRKHl64Pvwl17rgad7b7OB6FRhm5vAEt31CJQNGQ6nBuxq6cE38S9eu
+ YjrkOc02LZeX0=
+X-Received: by 2002:a17:907:701:b0:b94:2913:2d12 with SMTP id
+ a640c23a62f3a-b972e1fb8a1mr348370466b.17.1773317304606; Thu, 12 Mar 2026
+ 05:08:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20260312-move_falcon_fixups_to_common-v1-1-d7c61bb5a77e@ti.com>
-X-B4-Tracking: v=1; b=H4sIAMCrsmkC/x3MQQqAIBBA0avErBPUQqKrREjZVAPphFYE0d2Tl
- g8+/4GEkTBBWzwQ8aJEHDJUWYBbh7CgoCkbtNRGVkoLzxfaedgcBzvTfe7JHmwde89BVPVopFa
- qNrKBvNgj5ubfd/37fp5Fwn9uAAAA
-X-Change-ID: 20260312-move_falcon_fixups_to_common-34b602114608
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Dhruva Gole <d-gole@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Bryan Brattlof <bb@ti.com>, Vignesh R <vigneshr@ti.com>,
- Beleswar Padhi <b-padhi@ti.com>, Chintan Vankar <c-vankar@ti.com>, "Wadim
- Egorov" <w.egorov@phytec.de>, Moteen Shah <m-shah@ti.com>, Neha Malcom
- Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>, Nishanth Menon
- <nm@ti.com>, Anshul Dalal <anshuld@ti.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1773317057; l=6343;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=tHzhga/A8lhywS/jMf4lcn6bbssSF667dz2i6mmFGYM=;
- b=QFAuQRRCzkIUfoOri9beKdSxPntTLYRuH+WSmU2OuUjoBbnhKB/losKuww7iJk0ZdXwCW2SrG
- 6tmRpQN0MRgBOxoQWxQsrYE+VCtDXhPlFj0kWMJuyeU3s7WeI3VQ6YH
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00003F64:EE_|LV3PR10MB8179:EE_
-X-MS-Office365-Filtering-Correlation-Id: 41a80fe4-1c12-4661-465f-08de802f7df7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|36860700016|1800799024|18002099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 0lEM2NK6ngfEJuM75dP6ebGRHzlHcLKNiHrvnTAIr0akqLPql5t4oUJNLmu04v3mLHWOOOIQSSKXt0iprrGpzThlubGTLEpQdlSCWqgTLEF/jwGO3rgssi8CkFfCbrS6d7EsKPfo33J86xIGys0NXeA/FLh45Ls5djbZwAiROusNna3xwwSH5Yl1qAS7cn/8Acy8sUs+7nv2g1OLQmu8QP5wzKbgI342I5Vc8gZV9r4V+Ma6pfqA/pRIU9JokGx/g2xs9hL1F336jFpNM0NbvYP5tpLRAsF7pKWwHcW3VdH/BOCe4OHYkOXuxAYyEhVNqiF6Qaf7gy1M1BAP+CnwM/a+kBNKJhwpOV6GNPKHX80yG1we6QzcPhwDGDFq3I36dXKunRY3TiaCB1QWUzs+il+g77Ie5VvnGypZZszXMS0imUK7uKAY4jTD6rRuipKFH4PT4A/6klV8/PLzmiR8vagGzHm/n/ZQRRbGuV7FQ8JFDXL3i7EZa5TzUI/8IW9udMYWa749gSD44TdHt8qP4ZIPpGtc+UL5HhxuFt0DbhRqjZptCN+kD02cPVNVkg3eor3AriUfgWSTDUYL9dddWBKG4vpoSzD7rjRXNbBrJoCI8KjJTK1lruC35W+pIXMXMH6TMZgA27DcDQoOgdC0Vx7JuZWCjCvujjMx0CE1N5MljoLX3/1oyIMZOq32roj3nCngbmunoxRC8XSiNDdGVjAQ4z6Hx/7M+syUmVcR2uT6ea4SsHZnIjJufilE/Oph9pusGQ9H72pnD1bc58Couw==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(36860700016)(1800799024)(18002099003)(56012099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: jAP7/tc/lyZSsfT5WL4xxxkXAvrQ4ZRk8O0s5BzVWDuSrG22drSwbvMAaOSDF0uuC8xOslvZzjN0ehpKPC2NSDliQGyOXt8Nr+wmuz2sIAKkslyOJcS4jbrkLSBBMaioJGZodLUjLZWPIHKRA81EMzH8uGvY2x6gUvr8nMA8jyD1x8y1VHYXi9RHsuXEawbW8g11ewSJPn4kvrJuiyWh7qanXSl/NPuUg4pWdBpBvVIh6mcKn+Jg46oChh1J4ixybvCYKuhjT7m4VbKCkpZRo0QnI2XsZUnVo3yczKVV1YSAapjRUs/kf1BRFeZulRhow/X/x3a+hW2oWysquCu7yYe+1YNaNlXQmuYamZBsDiAGFf3QisNPp+pEUNy7xe0kk5b4lfYrYGYi8i/y08mQl2GlWMPqWYzpqSkKnBXdamQxMtuVVRg3KJAvDXB+nb0t
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 12:04:19.7662 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41a80fe4-1c12-4661-465f-08de802f7df7
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00003F64.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB8179
+References: <20260216184452.18732-1-filip.kokosinski@gmail.com>
+ <20260216184452.18732-2-filip.kokosinski@gmail.com>
+In-Reply-To: <20260216184452.18732-2-filip.kokosinski@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 12 Mar 2026 12:08:13 +0000
+X-Gm-Features: AaiRm50J_bNNm_Jzp4vkfAHTkwFhVtU8C0ao7BqEYIUtfrLPtumBkIbrRB5MnLQ
+Message-ID: <CALeDE9NaHE3cWNP993TiVUVb6DgeJ7nRNawtepc-E_4qcgnvGQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] board/raspberrypi: add multi-FDT support
+To: =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
+Cc: u-boot@lists.denx.de, mbrugger@suse.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,231 +116,303 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-k3_falcon_fdt_fixup is used to perform fdt fixups at runtime in falcon
-mode such as adding bootargs. Currently the function is only accessible
-to the R5 SPL but could be useful for A53 SPL based falcon mode setups
-as well.
+On Mon, 16 Feb 2026 at 18:45, Filip Kokosi=C5=84ski
+<filip.kokosinski@gmail.com> wrote:
+>
+> This patch adds support for multiple FDT files per board model. This is
+> done by adding the FDTFILES macro, which initializes two rpi_model
+> struct members: fdtfiles and fdtcount.
+>
+> The new-style revision codes designate LSB bits as board revision; this
+> value is used to choose between provided FDTs. The first element of the
+> fdtfiles list is used should no revision match.
+>
+> Signed-off-by: Filip Kokosi=C5=84ski <filip.kokosinski@gmail.com>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
 
-Therefore this patch moves the function from r5/common.c to common.c.
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/mach-k3/common.c    | 80 ++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-k3/common.h    |  5 ++-
- arch/arm/mach-k3/r5/common.c | 77 ------------------------------------------
- 3 files changed, 84 insertions(+), 78 deletions(-)
-
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 2f3df5519c5..b0a75988714 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -457,6 +457,83 @@ static __maybe_unused void k3_dma_remove(void)
- 		pr_warn("DMA Device not found (err=%d)\n", rc);
- }
- 
-+static int k3_falcon_fdt_add_bootargs(void *fdt)
-+{
-+	struct disk_partition info;
-+	struct blk_desc *dev_desc;
-+	char bootmedia[32];
-+	char bootpart[32];
-+	char str[256];
-+	int ret;
-+
-+	strlcpy(bootmedia, env_get("boot"), sizeof(bootmedia));
-+	strlcpy(bootpart, env_get("bootpart"), sizeof(bootpart));
-+	ret = blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, 0);
-+	if (ret < 0) {
-+		printf("%s: Failed to get part details for %s %s [%d]\n",
-+		       __func__, bootmedia, bootpart, ret);
-+		return ret;
-+	}
-+
-+	if (!CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
-+		printf("ERROR: Failed to find rootfs PARTUUID\n");
-+		printf("%s: CONFIG_SPL_PARTITION_UUIDS not enabled\n",
-+		       __func__);
-+		return -EOPNOTSUPP;
-+	}
-+
-+	snprintf(str, sizeof(str), "console=%s root=PARTUUID=%s rootwait",
-+		 env_get("console"), disk_partition_uuid(&info));
-+
-+	ret = fdt_find_and_setprop(fdt, "/chosen", "bootargs", str,
-+				   strlen(str) + 1, 1);
-+	if (ret) {
-+		printf("%s: Could not set bootargs: %s\n", __func__,
-+		       fdt_strerror(ret));
-+		return ret;
-+	}
-+
-+	debug("%s: Set bootargs to: %s\n", __func__, str);
-+	return 0;
-+}
-+
-+int k3_falcon_fdt_fixup(void *fdt)
-+{
-+	int ret;
-+
-+	if (!fdt)
-+		return -EINVAL;
-+
-+	fdt_set_totalsize(fdt, fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
-+
-+	if (fdt_path_offset(fdt, "/chosen/bootargs") < 0) {
-+		ret = k3_falcon_fdt_add_bootargs(fdt);
-+
-+		if (ret)
-+			return ret;
-+	}
-+
-+	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
-+		ret = ft_board_setup(fdt, gd->bd);
-+		if (ret) {
-+			printf("%s: Failed in board setup: %s\n", __func__,
-+			       fdt_strerror(ret));
-+			return ret;
-+		}
-+	}
-+
-+	if (IS_ENABLED(CONFIG_OF_SYSTEM_SETUP)) {
-+		ret = ft_system_setup(fdt, gd->bd);
-+		if (ret) {
-+			printf("%s: Failed in system setup: %s\n", __func__,
-+			       fdt_strerror(ret));
-+			return ret;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- void spl_perform_arch_fixups(struct spl_image_info *spl_image)
- {
- 	void *fdt = spl_image_fdt_addr(spl_image);
-@@ -465,6 +542,9 @@ void spl_perform_arch_fixups(struct spl_image_info *spl_image)
- 		return;
- 
- 	fdt_fixup_reserved(fdt);
-+
-+	if (IS_ENABLED(CONFIG_SPL_OS_BOOT))
-+		k3_falcon_fdt_fixup(fdt);
- }
- 
- void spl_board_prepare_for_boot(void)
-diff --git a/arch/arm/mach-k3/common.h b/arch/arm/mach-k3/common.h
-index e970076d08e..466ad22f895 100644
---- a/arch/arm/mach-k3/common.h
-+++ b/arch/arm/mach-k3/common.h
-@@ -61,10 +61,13 @@ void do_board_detect(void);
- void ti_secure_image_check_binary(void **p_image, size_t *p_size);
- int shutdown_mcu_r5_core1(void);
- 
--#if IS_ENABLED(CONFIG_SPL_OS_BOOT_SECURE) && !IS_ENABLED(CONFIG_ARM64)
-+#if IS_ENABLED(CONFIG_SPL_OS_BOOT_SECURE)
-+int k3_falcon_fdt_fixup(void *fdt);
-+#if !IS_ENABLED(CONFIG_ARM64)
- int k3_r5_falcon_bootmode(void);
- int k3_r5_falcon_prep(void);
- #endif
-+#endif
- 
- #if (IS_ENABLED(CONFIG_K3_QOS))
- void setup_qos(void);
-diff --git a/arch/arm/mach-k3/r5/common.c b/arch/arm/mach-k3/r5/common.c
-index 03638366046..484d96f9536 100644
---- a/arch/arm/mach-k3/r5/common.c
-+++ b/arch/arm/mach-k3/r5/common.c
-@@ -406,83 +406,6 @@ int k3_r5_falcon_bootmode(void)
- 		return BOOT_DEVICE_NOBOOT;
- }
- 
--static int k3_falcon_fdt_add_bootargs(void *fdt)
--{
--	struct disk_partition info;
--	struct blk_desc *dev_desc;
--	char bootmedia[32];
--	char bootpart[32];
--	char str[256];
--	int ret;
--
--	strlcpy(bootmedia, env_get("boot"), sizeof(bootmedia));
--	strlcpy(bootpart, env_get("bootpart"), sizeof(bootpart));
--	ret = blk_get_device_part_str(bootmedia, bootpart, &dev_desc, &info, 0);
--	if (ret < 0) {
--		printf("%s: Failed to get part details for %s %s [%d]\n",
--		       __func__, bootmedia, bootpart, ret);
--		return ret;
--	}
--
--	if (!CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
--		printf("ERROR: Failed to find rootfs PARTUUID\n");
--		printf("%s: CONFIG_SPL_PARTITION_UUIDS not enabled\n",
--		       __func__);
--		return -EOPNOTSUPP;
--	}
--
--	snprintf(str, sizeof(str), "console=%s root=PARTUUID=%s rootwait",
--		 env_get("console"), disk_partition_uuid(&info));
--
--	ret = fdt_find_and_setprop(fdt, "/chosen", "bootargs", str,
--				   strlen(str) + 1, 1);
--	if (ret) {
--		printf("%s: Could not set bootargs: %s\n", __func__,
--		       fdt_strerror(ret));
--		return ret;
--	}
--
--	debug("%s: Set bootargs to: %s\n", __func__, str);
--	return 0;
--}
--
--static int k3_falcon_fdt_fixup(void *fdt)
--{
--	int ret;
--
--	if (!fdt)
--		return -EINVAL;
--
--	fdt_set_totalsize(fdt, fdt_totalsize(fdt) + CONFIG_SYS_FDT_PAD);
--
--	if (fdt_path_offset(fdt, "/chosen/bootargs") < 0) {
--		ret = k3_falcon_fdt_add_bootargs(fdt);
--
--		if (ret)
--			return ret;
--	}
--
--	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP)) {
--		ret = ft_board_setup(fdt, gd->bd);
--		if (ret) {
--			printf("%s: Failed in board setup: %s\n", __func__,
--			       fdt_strerror(ret));
--			return ret;
--		}
--	}
--
--	if (IS_ENABLED(CONFIG_OF_SYSTEM_SETUP)) {
--		ret = ft_system_setup(fdt, gd->bd);
--		if (ret) {
--			printf("%s: Failed in system setup: %s\n", __func__,
--			       fdt_strerror(ret));
--			return ret;
--		}
--	}
--
--	return 0;
--}
--
- int k3_r5_falcon_prep(void)
- {
- 	struct spl_image_loader *loader, *drv;
-
----
-base-commit: 8bc2a5196c1c0bb5dbdaca073323da0015a0de37
-change-id: 20260312-move_falcon_fixups_to_common-34b602114608
-
-Best regards,
--- 
-Anshul Dalal <anshuld@ti.com>
-
+> ---
+>  board/raspberrypi/rpi/rpi.c | 93 +++++++++++++++++++++----------------
+>  1 file changed, 52 insertions(+), 41 deletions(-)
+>
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index f9b643555dd..1b404b448f3 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -94,120 +94,125 @@ struct efi_capsule_update_info update_info =3D {
+>   */
+>  struct rpi_model {
+>         const char *name;
+> -       const char *fdtfile;
+> +       const char * const *fdtfiles;
+> +       size_t fdtcount;
+>         bool has_onboard_eth;
+>  };
+>
+> +#define FDTFILES(...) \
+> +       (const char *[]){ __VA_ARGS__ }, \
+> +       sizeof((const char *[]){ __VA_ARGS__ }) / sizeof(const char *)
+> +
+>  static const struct rpi_model rpi_model_unknown =3D {
+>         "Unknown model",
+> -       DTB_DIR "bcm283x-rpi-other.dtb",
+> +       FDTFILES(DTB_DIR "bcm283x-rpi-other.dtb"),
+>         false,
+>  };
+>
+>  static const struct rpi_model rpi_models_new_scheme[] =3D {
+>         [0x0] =3D {
+>                 "Model A",
+> -               DTB_DIR "bcm2835-rpi-a.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+>                 false,
+>         },
+>         [0x1] =3D {
+>                 "Model B",
+> -               DTB_DIR "bcm2835-rpi-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
+>                 true,
+>         },
+>         [0x2] =3D {
+>                 "Model A+",
+> -               DTB_DIR "bcm2835-rpi-a-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
+>                 false,
+>         },
+>         [0x3] =3D {
+>                 "Model B+",
+> -               DTB_DIR "bcm2835-rpi-b-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
+>                 true,
+>         },
+>         [0x4] =3D {
+>                 "2 Model B",
+> -               DTB_DIR "bcm2836-rpi-2-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2836-rpi-2-b.dtb"),
+>                 true,
+>         },
+>         [0x6] =3D {
+>                 "Compute Module",
+> -               DTB_DIR "bcm2835-rpi-cm.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
+>                 false,
+>         },
+>         [0x8] =3D {
+>                 "3 Model B",
+> -               DTB_DIR "bcm2837-rpi-3-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2837-rpi-3-b.dtb"),
+>                 true,
+>         },
+>         [0x9] =3D {
+>                 "Zero",
+> -               DTB_DIR "bcm2835-rpi-zero.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-zero.dtb"),
+>                 false,
+>         },
+>         [0xA] =3D {
+>                 "Compute Module 3",
+> -               DTB_DIR "bcm2837-rpi-cm3.dtb",
+> +               FDTFILES(DTB_DIR "bcm2837-rpi-cm3.dtb"),
+>                 false,
+>         },
+>         [0xC] =3D {
+>                 "Zero W",
+> -               DTB_DIR "bcm2835-rpi-zero-w.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-zero-w.dtb"),
+>                 false,
+>         },
+>         [0xD] =3D {
+>                 "3 Model B+",
+> -               DTB_DIR "bcm2837-rpi-3-b-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2837-rpi-3-b-plus.dtb"),
+>                 true,
+>         },
+>         [0xE] =3D {
+>                 "3 Model A+",
+> -               DTB_DIR "bcm2837-rpi-3-a-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2837-rpi-3-a-plus.dtb"),
+>                 false,
+>         },
+>         [0x10] =3D {
+>                 "Compute Module 3+",
+> -               DTB_DIR "bcm2837-rpi-cm3.dtb",
+> +               FDTFILES(DTB_DIR "bcm2837-rpi-cm3.dtb"),
+>                 false,
+>         },
+>         [0x11] =3D {
+>                 "4 Model B",
+> -               DTB_DIR "bcm2711-rpi-4-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2711-rpi-4-b.dtb"),
+>                 true,
+>         },
+>         [0x12] =3D {
+>                 "Zero 2 W",
+> -               DTB_DIR "bcm2837-rpi-zero-2-w.dtb",
+> +               FDTFILES(DTB_DIR "bcm2837-rpi-zero-2-w.dtb"),
+>                 false,
+>         },
+>         [0x13] =3D {
+>                 "400",
+> -               DTB_DIR "bcm2711-rpi-400.dtb",
+> +               FDTFILES(DTB_DIR "bcm2711-rpi-400.dtb"),
+>                 true,
+>         },
+>         [0x14] =3D {
+>                 "Compute Module 4",
+> -               DTB_DIR "bcm2711-rpi-cm4.dtb",
+> +               FDTFILES(DTB_DIR "bcm2711-rpi-cm4.dtb"),
+>                 true,
+>         },
+>         [0x17] =3D {
+>                 "5 Model B",
+> -               DTB_DIR "bcm2712-rpi-5-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2712-rpi-5-b.dtb"),
+>                 true,
+>         },
+>         [0x18] =3D {
+>                 "Compute Module 5",
+> -               DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
+> +               FDTFILES(DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb"),
+>                 true,
+>         },
+>         [0x19] =3D {
+>                 "500",
+> -               DTB_DIR "bcm2712-rpi-500.dtb",
+> +               FDTFILES(DTB_DIR "bcm2712-rpi-500.dtb"),
+>                 true,
+>         },
+>         [0x1A] =3D {
+>                 "Compute Module 5 Lite",
+> -               DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
+> +               FDTFILES(DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb"),
+>                 true,
+>         },
+>  };
+> @@ -215,87 +220,87 @@ static const struct rpi_model rpi_models_new_scheme=
+[] =3D {
+>  static const struct rpi_model rpi_models_old_scheme[] =3D {
+>         [0x2] =3D {
+>                 "Model B",
+> -               DTB_DIR "bcm2835-rpi-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
+>                 true,
+>         },
+>         [0x3] =3D {
+>                 "Model B",
+> -               DTB_DIR "bcm2835-rpi-b.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
+>                 true,
+>         },
+>         [0x4] =3D {
+>                 "Model B rev2",
+> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+>                 true,
+>         },
+>         [0x5] =3D {
+>                 "Model B rev2",
+> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+>                 true,
+>         },
+>         [0x6] =3D {
+>                 "Model B rev2",
+> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+>                 true,
+>         },
+>         [0x7] =3D {
+>                 "Model A",
+> -               DTB_DIR "bcm2835-rpi-a.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+>                 false,
+>         },
+>         [0x8] =3D {
+>                 "Model A",
+> -               DTB_DIR "bcm2835-rpi-a.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+>                 false,
+>         },
+>         [0x9] =3D {
+>                 "Model A",
+> -               DTB_DIR "bcm2835-rpi-a.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
+>                 false,
+>         },
+>         [0xd] =3D {
+>                 "Model B rev2",
+> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+>                 true,
+>         },
+>         [0xe] =3D {
+>                 "Model B rev2",
+> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+>                 true,
+>         },
+>         [0xf] =3D {
+>                 "Model B rev2",
+> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
+>                 true,
+>         },
+>         [0x10] =3D {
+>                 "Model B+",
+> -               DTB_DIR "bcm2835-rpi-b-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
+>                 true,
+>         },
+>         [0x11] =3D {
+>                 "Compute Module",
+> -               DTB_DIR "bcm2835-rpi-cm.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
+>                 false,
+>         },
+>         [0x12] =3D {
+>                 "Model A+",
+> -               DTB_DIR "bcm2835-rpi-a-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
+>                 false,
+>         },
+>         [0x13] =3D {
+>                 "Model B+",
+> -               DTB_DIR "bcm2835-rpi-b-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
+>                 true,
+>         },
+>         [0x14] =3D {
+>                 "Compute Module",
+> -               DTB_DIR "bcm2835-rpi-cm.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
+>                 false,
+>         },
+>         [0x15] =3D {
+>                 "Model A+",
+> -               DTB_DIR "bcm2835-rpi-a-plus.dtb",
+> +               FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
+>                 false,
+>         },
+>  };
+> @@ -361,11 +366,17 @@ int dram_init_banksize(void)
+>  static void set_fdtfile(void)
+>  {
+>         const char *fdtfile;
+> +       int rev =3D revision & 0x0f;
+>
+>         if (env_get("fdtfile"))
+>                 return;
+>
+> -       fdtfile =3D model->fdtfile;
+> +       /* set the first entry as default */
+> +       fdtfile =3D model->fdtfiles[0];
+> +
+> +       if (rev < model->fdtcount)
+> +               fdtfile =3D model->fdtfiles[rev];
+> +
+>         env_set("fdtfile", fdtfile);
+>  }
+>
+> --
+> 2.51.2
+>
