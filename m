@@ -4,67 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAAFFED2E0
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 07:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDFCFED2DE
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 07:40:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A49A83F8A;
-	Thu, 12 Mar 2026 08:39:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A6EB183F8A;
+	Thu, 12 Mar 2026 08:40:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ziyao.cc
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bLlc8tpx";
+	dkim=pass (1024-bit key; unprotected) header.d=ziyao.cc header.i=me@ziyao.cc header.b="VgrZMk+x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2A868407E; Thu, 12 Mar 2026 08:39:28 +0100 (CET)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 25EF384099; Thu, 12 Mar 2026 08:40:40 +0100 (CET)
+Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
+ [136.143.188.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A00E83F6D
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:39:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E8A983F6D
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:40:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4AA3843E2D;
- Thu, 12 Mar 2026 07:39:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A56FC116C6;
- Thu, 12 Mar 2026 07:39:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773301164;
- bh=SIG2/StF5JOQR0ArEsRgq1rHawdQ8cHIh9uj41dsOLg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=bLlc8tpx8DMv3a60i6PR7zk2owUd9+eISxdzIC9evIybxujHs6vOBZXN4/gDz4MdT
- rNt0teuwb7cffO7ftXmoiVCFjrn41g/Fsu+gGcY7jj/sDiZReAKpldkIbvz7RS+Qme
- +qDRB8bJKi9UpVrXlOUtDcqrPZFjaACeo/xwqTPgVrawmKWpl5n6Fw6XBr1CO7jNkA
- ql+Qg1Y06BaMS6LWyGSbLSSVEUadMn5Pqk00yNNbaBP0FQoxBdBol8n3H6ALARhx88
- fv46Kbqi5ih2GQbICc0F61jeWs4lWZEJsO/K6Ma00cmn4x28QeqcDC1PJlL3RM9ky/
- CJW9fcOQslHDg==
-Date: Thu, 12 Mar 2026 13:09:15 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Danila Tikhonov <danila@jiaxyga.com>,
- David Wronek <david.wronek@mainlining.org>,
- Alexey Minnekhanov <alexeymin@postmarketos.org>,
- Lukasz Majewski <lukma@denx.de>, Aelin Reidel <aelin@mainlining.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Rui Miguel Silva <rui.silva@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>
-Subject: Re: [PATCH 1/7] drivers: pinctrl: Add Qualcomm Milos TLMM driver
-Message-ID: <abJto36jxEm1c8Tq@sumit-xelite>
-References: <20260311-milos-bringup-v1-0-eb905c467f10@fairphone.com>
- <20260311-milos-bringup-v1-1-eb905c467f10@fairphone.com>
+ header.from=ziyao.cc
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@ziyao.cc
+ARC-Seal: i=1; a=rsa-sha256; t=1773301232; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=XN0qyEm+mvUSqM3nmJdR2rnVPDp9ohJ1lTj5Ah3T24w7O7uQ4TNAcJgYbxvQoRLyidpKPzLf/BZapRNmI8azpeBs1lWdPq9PhlCilLR3ODt4N8jfSXxT5Mf9E3tBou9rDZY+vVIJxud5B/1t+dwusPNVHcbfqdt3vHTyfeQbM6I=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1773301232;
+ h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=EKZtW1kcAU43xPVarbKry8rS6UPUp71e1zjkSeYjZ2o=; 
+ b=JPbiNgfPUlB/jrGRGJGl4rckrNcydIBK3K9BfBukGwK552VFv6bo/OSoE0USllSUS47pvkPL7f19Pl9rHsOB3EQe/uMCc9ZdlNqSkR4HO+cNs1qi8JqoESrkcdd5g/rQk7TQNEbRC8PMJ6jQzpaYCjwUzo2c75LucShWmh/Qjms=
+ARC-Authentication-Results: i=1; mx.zohomail.com; dkim=pass  header.i=ziyao.cc;
+ spf=pass  smtp.mailfrom=me@ziyao.cc;
+ dmarc=pass header.from=<me@ziyao.cc>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1773301232; 
+ s=zmail; d=ziyao.cc; i=me@ziyao.cc;
+ h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:References:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+ bh=EKZtW1kcAU43xPVarbKry8rS6UPUp71e1zjkSeYjZ2o=;
+ b=VgrZMk+xcNSd2n4OKP3pc9Ym84vyf6aWzIf4nW0IvQ0HsPlvZflDz1f+4Uxrr1Gw
+ Sza0H6Rl/J2LyPHR30DO9BLvdEV/PMvY1irD7LYxe4uWWHVuo82wDvMjsmmGqkfMrxb
+ WwNDDUpB+VHBvUGbdxwTh5dOKC88XtVrYSKKw490=
+Received: by mx.zohomail.com with SMTPS id 1773301229074320.3486829100002;
+ Thu, 12 Mar 2026 00:40:29 -0700 (PDT)
+Date: Thu, 12 Mar 2026 07:40:22 +0000
+From: Yao Zi <me@ziyao.cc>
+To: Daniel Palmer <daniel@thingy.jp>, visitorckw@gmail.com,
+ angelo@kernel-space.org
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] m68k: Add LTO support
+Message-ID: <abJtug8itcufvkNk@pie>
+References: <20260311093048.1773382-1-daniel@thingy.jp>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260311-milos-bringup-v1-1-eb905c467f10@fairphone.com>
+In-Reply-To: <20260311093048.1773382-1-daniel@thingy.jp>
+X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,172 +74,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 11, 2026 at 03:20:41PM +0100, Luca Weiss wrote:
-> Add support for TLMM pin controller block (Top Level Mode Multiplexer)
-> on Milos SoC, with support for special pins.
+On Wed, Mar 11, 2026 at 06:30:48PM +0900, Daniel Palmer wrote:
+> Most m68k retro/homebrew machines will have limited flash/RAM
+> so having LTO working would be nice.
 > 
-> Correct pin configuration is required for working debug UART and eMMC/SD
-> cards.
+> Not many changes are need really. Most of this is copy/paste
+> from the ARM32 version.
 > 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+> The major change is that the direct register usage of d7 for gd
+> needs to be hidden so that when LTO passes over everything it
+> doesn't see multiple instances of d7.
+> 
+> Signed-off-by: Daniel Palmer <daniel@thingy.jp>
 > ---
->  drivers/pinctrl/qcom/Kconfig         |   8 +++
->  drivers/pinctrl/qcom/Makefile        |   1 +
->  drivers/pinctrl/qcom/pinctrl-milos.c | 104 +++++++++++++++++++++++++++++++++++
->  3 files changed, 113 insertions(+)
 > 
-
-Looks good to me apart from minor comment below, FWIW:
-
-Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
-
-> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> index 580308621b1..11e6763b5f3 100644
-> --- a/drivers/pinctrl/qcom/Kconfig
-> +++ b/drivers/pinctrl/qcom/Kconfig
-> @@ -54,6 +54,14 @@ config PINCTRL_QCOM_IPQ9574
->  	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
->  	  as well as the associated GPIO driver.
->  
-> +config PINCTRL_QCOM_MILOS
-> +	bool "Qualcomm Milos Pinctrl"
-> +	default y if PINCTRL_QCOM_GENERIC
-> +	select PINCTRL_QCOM
-> +	help
-> +	  Say Y here to enable support for pinctrl on the Snapdragon Milos SoC,
-> +	  as well as the associated GPIO driver.
-> +
->  config PINCTRL_QCOM_QCM2290
->  	bool "Qualcomm QCM2290 Pinctrl"
->  	default y if PINCTRL_QCOM_GENERIC
-> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-> index b5a111605ed..4096c1aa491 100644
-> --- a/drivers/pinctrl/qcom/Makefile
-> +++ b/drivers/pinctrl/qcom/Makefile
-> @@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
->  obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
->  obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
->  obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
-> +obj-$(CONFIG_PINCTRL_QCOM_MILOS) += pinctrl-milos.o
->  obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
->  obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
->  obj-$(CONFIG_PINCTRL_QCOM_QCS615) += pinctrl-qcs615.o
-> diff --git a/drivers/pinctrl/qcom/pinctrl-milos.c b/drivers/pinctrl/qcom/pinctrl-milos.c
-> new file mode 100644
-> index 00000000000..974c1a7d594
-> --- /dev/null
-> +++ b/drivers/pinctrl/qcom/pinctrl-milos.c
-> @@ -0,0 +1,104 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Qualcomm Milos pinctrl
-> + *
-> + * (C) Copyright 2024 Linaro Ltd.
-> + * (C) Copyright 2025 Luca Weiss <luca.weiss@fairphone.com>
-
-It's 2026 now, maybe you want to update copyright here?
-
--Sumit
-
-> + *
-> + */
-> +
-> +#include <dm.h>
-> +
-> +#include "pinctrl-qcom.h"
-> +
-> +#define MAX_PIN_NAME_LEN 32
-> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-> +
-> +static const struct pinctrl_function msm_pinctrl_functions[] = {
-> +	{"qup0_se5", 1},
-> +	{"sdc2_clk", 1},
-> +	{"sdc2_cmd", 1},
-> +	{"sdc2_data", 1},
-> +	{"gpio", 0},
-> +};
-> +
-> +#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-> +	{					        \
-> +		.name = pg_name,			\
-> +		.ctl_reg = ctl,				\
-> +		.io_reg = 0,				\
-> +		.pull_bit = pull,			\
-> +		.drv_bit = drv,				\
-> +		.oe_bit = -1,				\
-> +		.in_bit = -1,				\
-> +		.out_bit = -1,				\
-> +	}
-> +
-> +#define UFS_RESET(pg_name, ctl, io)			\
-> +	{					        \
-> +		.name = pg_name,			\
-> +		.ctl_reg = ctl,				\
-> +		.io_reg = io,				\
-> +		.pull_bit = 3,				\
-> +		.drv_bit = 0,				\
-> +		.oe_bit = -1,				\
-> +		.in_bit = -1,				\
-> +		.out_bit = 0,				\
-> +	}
-> +
-> +static const struct msm_special_pin_data msm_special_pins_data[] = {
-> +	[0] = UFS_RESET("ufs_reset", 0xb4004, 0xb5000),
-> +	[1] = SDC_QDSD_PINGROUP("sdc2_clk", 0xab000, 0, 6),
-> +	[2] = SDC_QDSD_PINGROUP("sdc2_cmd", 0xab000, 12, 3),
-> +	[3] = SDC_QDSD_PINGROUP("sdc2_data", 0xab000, 9, 0),
-> +};
-> +
-> +static const char *milos_get_function_name(struct udevice *dev,
-> +					   unsigned int selector)
-> +{
-> +	return msm_pinctrl_functions[selector].name;
-> +}
-> +
-> +static const char *milos_get_pin_name(struct udevice *dev,
-> +				      unsigned int selector)
-> +{
-> +	if (selector >= 167 && selector <= 170)
-> +		snprintf(pin_name, MAX_PIN_NAME_LEN,
-> +			 msm_special_pins_data[selector - 167].name);
-> +	else
-> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-> +
-> +	return pin_name;
-> +}
-> +
-> +static int milos_get_function_mux(__maybe_unused unsigned int pin,
-> +				  unsigned int selector)
-> +{
-> +	return msm_pinctrl_functions[selector].val;
-> +}
-> +
-> +static struct msm_pinctrl_data milos_data = {
-> +	.pin_data = {
-> +		.pin_count = 171,
-> +		.special_pins_start = 167,
-> +		.special_pins_data = msm_special_pins_data,
-> +	},
-> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-> +	.get_function_name = milos_get_function_name,
-> +	.get_function_mux = milos_get_function_mux,
-> +	.get_pin_name = milos_get_pin_name,
-> +};
-> +
-> +static const struct udevice_id msm_pinctrl_ids[] = {
-> +	{ .compatible = "qcom,milos-tlmm", .data = (ulong)&milos_data },
-> +	{ /* Sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(pinctrl_milos) = {
-> +	.name		= "pinctrl_milos",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= msm_pinctrl_ids,
-> +	.ops		= &msm_pinctrl_ops,
-> +	.bind		= msm_pinctrl_bind,
-> +};
-> +
+> This is another patch from my vault that I have been using
+> on various classic m68k machines for ages. I haven't tested
+> it with coldfire though.
 > 
+>  arch/Kconfig                        |  1 +
+>  arch/m68k/config.mk                 | 11 +++++++++--
+>  arch/m68k/cpu/m680x0/cpu.c          |  2 +-
+>  arch/m68k/include/asm/global_data.h | 19 +++++++++++++++++++
+>  arch/m68k/lib/ashldi3.c             |  1 +
+>  arch/m68k/lib/lshrdi3.c             |  1 +
+>  arch/m68k/lib/muldi3.c              |  1 +
+>  common/board_r.c                    |  4 ++--
+>  common/init/board_init.c            |  2 +-
+>  9 files changed, 36 insertions(+), 6 deletions(-)
+
+...
+
+> diff --git a/common/init/board_init.c b/common/init/board_init.c
+> index 2a6f39f51adb..c56b33e7be7c 100644
+> --- a/common/init/board_init.c
+> +++ b/common/init/board_init.c
+> @@ -17,7 +17,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>   * Unfortunately x86, ARM and RISC-V can't compile this code as gd is defined
+>   * as macro and cannot be assigned.
+
+This comment should probably be updated as well to reflect the code
+behavior :)
+
+>   */
+> -#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV)
+> +#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_RISCV) && !defined(CONFIG_M68K)
+>  __weak void arch_setup_gd(struct global_data *gd_ptr)
+>  {
+>  	gd = gd_ptr;
 > -- 
-> 2.53.0
+> 2.51.0
 > 
+
+Regards,
+Yao Zi
