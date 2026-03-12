@@ -4,102 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D46105A592
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 12:10:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E21105A594
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 12:34:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3322B841D5;
-	Thu, 12 Mar 2026 13:10:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FEBB8418C;
+	Thu, 12 Mar 2026 13:34:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lrAqV39y";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vqA8ZyWW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9772841DA; Thu, 12 Mar 2026 13:10:49 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 84E5D8419A; Thu, 12 Mar 2026 13:34:55 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazlp170120001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c10d::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9338B84121
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 13:10:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BF8C83F14
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 13:34:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-66325f30570so1676821a12.1
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 05:10:47 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773317447; cv=none;
- d=google.com; s=arc-20240605;
- b=eB5/6Y4w28JpACIGkHYNPWOdeIugcam9DYjpbNuD4eIRxmbuQI4lVOAPW5d92Cmeiy
- PtF8F+IMX3Gd8aYkpprHADbiycv5PG7EZvscetX9nrCjRWrnpIPcQ2mPlkGYR6aYuP/1
- S2iZFWef5uCeMCyve2cAGRnqnZUKQAPfQ6CXggt7kdm/sGqHvUOSuvml38M3Pm1ip9Dm
- 2qsohI9MJhyPAU4oSLjxI5gtbDftiqyscEJ1CYrZQOnpj93nQk9TQJTQ+vkleiMKqOmB
- h0kJboyGXtVbZSioff7p33ozVZo8q1IKUffY6WaIUjFVPxeYJRF7U+vdtWowYkf5EXf0
- j+HA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=lKNIgil9Z6PhvFxIXdncWrZ1IjXwiDAz9ne54hITXFw=;
- fh=lEnt6i2qrjwBbaSCkrdTcOSYGh/b1tw639piUMO096Y=;
- b=HzfMbRBE+/Hgq0O1pdqfqxjoL7R2Hgd91q02J2MzmXTDTkXBpZRTQIU2Vhuf/450xM
- P9lnsYb9EqhFYWHN13aUHx7UVslH3sLTAX0ftNk4JMqOqzg4vgnzZ4Xf1vlYYt5UZ2X9
- mWdhrY1VzJVR8ILbTgvqRNF7tPPQ4/G5sVHCSPskbFQssEu/FL8xJw+i0AeatohX3FCh
- 1QtfFE8N62GpNUWNHx18szc1XJkunW8lrRgOQVqf8AWsJd3YFgxrKrcgFCcdPbXeHJ7M
- 9EBoonZzddDrfZ6/82pQXB2gtNJsse9x8Jk0qO/aALyy88Gwqw9u1p47bawQwImZl6uv
- U+Ug==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773317447; x=1773922247; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lKNIgil9Z6PhvFxIXdncWrZ1IjXwiDAz9ne54hITXFw=;
- b=lrAqV39y+8641KolgyVlgid/N6xj8m8R2MWAFKfOSX9koEsRP5+x6Aoppuk1Jdzrlw
- YJWGFjqnX2Y9y4ic6RAWLc4yIVAxqS9NX9bESW806RDnKbo4LxWwK0lb0Fc4M04rkhPk
- GLycnTudaaa6RYkyiaNxMN7X1c3/3At1k8nExU5g6jTqPV/zHjvnFt3LF0yVEiVQV40h
- +NX9pvV2d8buCMPz8/NUSKIswg3ZKv6GMAur7FQVTLL3Hz5G2fg80P18eoun14oeGTBk
- t253oIlCXEpck6OHLq16oCx1RJm8dHLaiCYE+0olQJD2OBaPKGf9NnxyNDHSWuWIbCta
- lK1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773317447; x=1773922247;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=lKNIgil9Z6PhvFxIXdncWrZ1IjXwiDAz9ne54hITXFw=;
- b=MZfhpTi9hRJOkhybJdubxzOZh7MRSR34CbI5uXUUvH9ek3DerOHPu6gt/7l61vs2Bw
- XUI9MaW+93r5i8BvBx2hnh+0r3Q9Bvz7QMYzfxeB93k3kz7bXcT5VfQIvqKbDtRINmal
- bMd8E0XeS1zw25WaPClj1ul3up4WOpYNm5hLC9NyZP3ahZvvR6jsScIDOmYhGCy4O5aJ
- igGxOT4VqsBolcQTtJOC+hz/gsPqXrWpnyD+lM11AdkdWe/GKmsNnAtvGQ0Ze/6VejNI
- 88ncEKnbKnBTYXqjSxlXNFHmOKj2qNWvkvEoNbqcLEtg+5EgDncqZpic8n3eHQgkQQkz
- Kdhg==
-X-Gm-Message-State: AOJu0YxEY50JEKntDsw4lSh9ELgf8D74gzLACsoqVCgG8CPvo2TuX1RX
- aeG4tI2llqB28djZ45nQFZOQNkbFsHlByGDqGlVW69jxuBxaXlcfzOEYsOQvcKsI5pRZQ8BJZbk
- hVP5Qt1S/OZU0/JvLdA+F17nmctLiYvE=
-X-Gm-Gg: ATEYQzyMaCQBvDDcPWQv6yX4EgpcVaBv70YEI1mUYx2qmdG/EGnscZkBVuRSyhdG1DA
- wcmKbxbXmqPYKM/tnRan1wMllR9z3NXgk4mkbWLoaGozFxIZ9qbKzKqA5AZwYE7xeVNWEXZI7zJ
- 2mdaI4Yfw6TBYCDN3Otn/cQgohiYd3AGDbUC8QFkMno4gkRJrvCJdnN43HMTbp0/ZfxmXs6FdhY
- pkzyvX2zcNTcUPIKMokfH4GMKjzXjZElemFuY+Evoc+BKz3QQpUv1ylxhTkfOhyn4cfQwVGdVQq
- bi9w5d3+VMILAmk8OGEVzR+tArAX0kfPpgkkqnBq5E7V5UnAwDhJFXs7hm2XuQmgoat8JKthlE9
- wAsgICA8qfQxV9g4clJZJ7zneiNvMz3FIY+wACAlca/GA3WKsfW6KKSYkhsAbZVPmb1z45dfeEA
- K3
-X-Received: by 2002:a05:6402:21dc:b0:65f:71ec:2326 with SMTP id
- 4fb4d7f45d1cf-6634fecc0e2mr1654357a12.11.1773317446870; Thu, 12 Mar 2026
- 05:10:46 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qY1CbQT1iXbr9kNfoAXuT/QFVFpFAf9WIGjUKKokkxFgp/Bgak7vXZL1gBK3OzJ9X7aFkUVLHIvgn3W57kZCUxsFm61tulRoEF6xZfKfRU7fTnorQIugA2eJweecuc1l9g0C/5wCk9CkS3O5jeb7VY0zpkqmT6rKPJ15n+1JKVFvy3KOMAoNPz48qfUEl6gMSlJC9V9EN8m5DDUlCF2Gf/v+16i5SB7o0spumHdeak4z1/WOL7CXY7cAjCNdTOT6YuDY5odQ2vN6DL3zgKz/spgw2BBamTJb+Rw14rmQtxqIZ9A2zATJd43Lnf8F8E8D7/wjR9CrISsu1HHRPFs/eg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eNpv0CKew+kD5t4eFGhrIbKPwa1JrhxuAwb2xORoNQQ=;
+ b=L4UHg1u+gjfT0AtED1vT1WXjpliEVcprgAPBJP+fVn4mo2ZWcEvVKI0Q3EkP2NdBFMFLf2WSAL9q+4tAi+mBUfhXEwCqc5jBRj2rI3R1+WQkIs9VfSLTs6xEaL1moGSVRnILSTe0jxb+3EsFpaxjguvUI45m7M0mPrnEe3H0Nr/eSvxOSlhd8O/sjGBTqTk8o74mG2dhRaJA6/znTqXY1BNfs/tYQ1K4mg1tte+gHy1brL1WK54PEhokZ7NggHbb70VH1ae7SLed7umziRZWPnLT7Ax2A9zHnPw4b9Jzqj+RNBo+HqNORS08zUIe059nafh8eQsW2y4MbkxSwiE9WA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 198.47.21.194) smtp.rcpttodomain=toradex.com smtp.mailfrom=ti.com; dmarc=pass
+ (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eNpv0CKew+kD5t4eFGhrIbKPwa1JrhxuAwb2xORoNQQ=;
+ b=vqA8ZyWWnDgIlxZ4PFiNur9xl8vXpkNZ5khd4rD3dP6l4DRp4Sm6R9SSbDvskCaHAFu41zCaULFA4PaugFXSY+5TYmmk9bxDOtLsk4rMPj7M/jy6aBt1JjSeKjSlLjBRV+SS2UgCCv57tV9FU3CfgGHFdTbOcBdHdK4D5icXN7g=
+Received: from MW4P221CA0022.NAMP221.PROD.OUTLOOK.COM (2603:10b6:303:8b::27)
+ by DM4PR10MB5917.namprd10.prod.outlook.com (2603:10b6:8:b1::5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.15; Thu, 12 Mar 2026 12:34:49 +0000
+Received: from CO1PEPF000075F4.namprd03.prod.outlook.com
+ (2603:10b6:303:8b:cafe::c7) by MW4P221CA0022.outlook.office365.com
+ (2603:10b6:303:8b::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.26 via Frontend Transport; Thu,
+ 12 Mar 2026 12:34:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
+ smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
+ action=none header.from=ti.com;
+Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ CO1PEPF000075F4.mail.protection.outlook.com (10.167.249.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9678.18 via Frontend Transport; Thu, 12 Mar 2026 12:34:48 +0000
+Received: from DFLE205.ent.ti.com (10.64.6.63) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
+ 2026 07:34:16 -0500
+Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
+ 2026 07:34:15 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 12 Mar 2026 07:34:15 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62CCYFD02819121;
+ Thu, 12 Mar 2026 07:34:15 -0500
+Date: Thu, 12 Mar 2026 07:34:15 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Suhaas Joshi
+ <s-joshi@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew Davis
+ <afd@ti.com>, Dhruva Gole <d-gole@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Daniel Schultz <d.schultz@phytec.de>,
+ =?utf-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
+Subject: Re: [PATCH next] arm: mach-k3: use Kconfig options for ATF/OPTEE size
+Message-ID: <20260312123415.6ygihkwg6je53iar@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20260310-tfa_tee_addr_kconfig_refactor-v1-1-d24abbca82ee@ti.com>
 MIME-Version: 1.0
-References: <20260216184452.18732-1-filip.kokosinski@gmail.com>
- <CALeDE9MTfGaVt3p9h2oTt2KkJ8JDjauNT7oA4bnsHbP8C8aB7Q@mail.gmail.com>
-In-Reply-To: <CALeDE9MTfGaVt3p9h2oTt2KkJ8JDjauNT7oA4bnsHbP8C8aB7Q@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 12 Mar 2026 12:10:35 +0000
-X-Gm-Features: AaiRm52mO1LMU9HN0EyXX8fsIPiDNnUe32TRUV7vtoqFQqkFPUJzj3PuLjrcoPM
-Message-ID: <CALeDE9M1cYq8Rk_rVEtzTQdUQreaJ=o70z+iWaipsN9-LgwnfA@mail.gmail.com>
-Subject: Re: [PATCH 0/2] board/raspberry: add FDT for bcm2712d0
-To: =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
-Cc: u-boot@lists.denx.de, mbrugger@suse.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20260310-tfa_tee_addr_kconfig_refactor-v1-1-d24abbca82ee@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000075F4:EE_|DM4PR10MB5917:EE_
+X-MS-Office365-Filtering-Correlation-Id: a24778a2-8730-41a7-b80e-08de8033bffd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700016|376014|82310400026|56012099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info: M+Ox8WCNlXEWfNVRHzUkP65oneN2t/Iwcr/OT2O0MCIUdGR5HuqiSGTCBWtJjxyAvOxb1HuVNZO4sjXwN/CnVd14pm9P0HTrk44SULEdNOdrymmejMxGbU7r+NkE/fn/UHJn/qJj13wq/SfxG9EKEdfV2+gD2xP09t7fnPMs9L+/8B/wCuu24px++7dmj2d4frUH5bksrZo47qbB2Zf9iiThaJ5kagnHdu7fjiUPPQHmKmKyUO217NGJiOU8q1p75k4HkmbIlvOumGkGFRH0BlWT3fc+Sh58HFzrNrmCnUKwLAs7JyJtmslMGmeMewcy/JGDzP7/f1JHp8D6xzFisZzC5V6m2zQZIbQF4zuk+rPCLOgNr9lC/Haop0dDV8t2MlsZt7L30jELwFhxpkoOpxxNjozlj4lbRg+5sXkhGwgujKcMTisjHhrOQr/5dW/g6euD4CzdXyyIsVgrXaEhw7uRun+vew+1wlCQkMtF1BOEeKnmDJkEhsKCdc/yG0RG6Wdt1n6fd5Gef+a5gStlThTQKjv9PTawtO/zUgD0B8Wq019GF+Br1SXdUsfETSueZwqaa5nuC7+mIsVx+Yruw1T8xFJsLlHr5zKDFkV5GgC/JqzjCJpAdy9Bh/gOL4RBrzBFD9I2JWJy4P5cJWnRFTVkxyAxfpTmcFHNFAtLjEUzdP3mL+yxmKEbAjq8yxuVlD+1hv6DUJTwNux2krd2N67x+dqDro2JeVHQaliLAa2cxiq8ht5+8asrfnPk+O0T4t4WjNQNedft0jaEENidVQ==
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700016)(376014)(82310400026)(56012099003)(22082099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: qczse4q2s6CvBiilBrd+QSXvsH70wMKgsrvfzquQPk7qAw3zTvxwtGO0g8d/uBDuANRTHUKgEG7u0ytGpK4M87u+4Mer44lAnYJbx8pyjyigfC8FXl67unRiW0FgIwBe7YFXqiQRvNGuzGpn2gLZDgwUyp0QEuQqQW6Gdf0pc6LkmejaV5rmuaOMkXonjavwZxdXo8hREFaul4FPfHi7jH45flynp4uyoevblj9ZtJlb0rwzBmnWpWRuIlPrxM5tS81LwELzi1Qi/d7Zce1XrXuWyMqFKk/46JftGvZ6abduuPbz946ePNIB5fgatA9caXPs3wMlfQaL/yCRWf9cVMpkVbRA4e3OuFjhFAVVcJf6P0IuC1iaH0ldzKn2NArw7yZMaE9iehTnasuxFCG43r7CyC3lQL2wPFcCAKORhQuy3mcjMpz4QxXczdyoi/wC
+X-OriginatorOrg: ti.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 12:34:48.4561 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a24778a2-8730-41a7-b80e-08de8033bffd
+X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075F4.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR10MB5917
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,80 +133,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Feb 2026 at 11:12, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> Hey Filip,
->
-> > This series adds the FDT for the d0 stepping of the BCM2712 SoC. The v1=
-.1
-> > revision of the Raspberry Pi 5 board can't boot Linux properly without
-> > additional changes specific to the d0 stepping.
-> >
-> > The d0 specific changes can be seen here:
-> > https://github.com/raspberrypi/linux/blob/rpi-6.12.y/arch/arm64/boot/dt=
-s/broadcom/bcm2712d0-rpi-5-b.dts
-> >
-> > To do that, this series introduces support for multiple FDT entries for=
- a single
-> > device type (bits 4-11 from the new-style revision code).
->
-> I started to look at that last week to see what was needed so this is
-> good timing.
->
-> > The rpi_model struct is modified by:
-> > * changing fdtfile to fdtfiles (const char * const *)
-> > * adding fdtcount (size_t)
-> >
-> > Adding fdtcount is motivated by wanting to keep FDT selection O(1), and=
- avoid
-> > relying on NULL terminating fdtfiles array.
-> >
-> > A new FDTFILES macro is added to initialize fdtfile and fdtcount.
-> >
-> > In case only a single FDT is provided, or the board revision code doesn=
-'t match,
-> > the selected FDT defaults to the first entry in fdtfiles.
->
-> I tested this very briefly on my RPi5s and the good news is it
-> continues to boot.
->
-> The problem was I see no output from U-Boot on the serial console at
-> all, I get the early RPi FW output and then I get the Linux kernel.
+On March 10, 2026 thus sayeth Anshul Dalal:
+> The reserved memory sizes for ATF and OPTEE were hard-coded for K3
+> devices, this patch replaces them with a Kconfig option allowing for
+> easier modifications.
+> 
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  arch/arm/dts/k3-binman.dtsi   |  4 ++--
+>  arch/arm/mach-k3/Kconfig      | 15 +++++++++++++++
+>  arch/arm/mach-k3/common_fdt.c |  5 +++--
+>  3 files changed, 20 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+> index 0fd93f9536a..ad127663d03 100644
+> --- a/arch/arm/dts/k3-binman.dtsi
+> +++ b/arch/arm/dts/k3-binman.dtsi
+> @@ -477,7 +477,7 @@
+>  						FWPERM_SECURE_PRIV_RWCD |
+>  						FWPERM_SECURE_USER_RWCD)>;
+>  		start_address = <0x0 CONFIG_K3_ATF_LOAD_ADDR>;
+> -		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + 0x1ffff)>;
+> +		end_address = <0x0 (CONFIG_K3_ATF_LOAD_ADDR + CONFIG_K3_ATF_RESERVED_SIZE - 1)>;
+>  	};
+>  	firewall_armv8_optee_fg: template-8 {
+>  		control = <(FWCTRL_EN | FWCTRL_LOCK |
+> @@ -486,7 +486,7 @@
+>  						FWPERM_SECURE_PRIV_RWCD |
+>  						FWPERM_SECURE_USER_RWCD)>;
+>  		start_address = <0x0 CONFIG_K3_OPTEE_LOAD_ADDR>;
+> -		end_address = <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + 0x17fffff)>;
+> +		end_address = <0x0 (CONFIG_K3_OPTEE_LOAD_ADDR + CONFIG_K3_OPTEE_RESERVED_SIZE - 1)>;
+>  	};
+>  
+>  	ti_falcon_template: template-9 {
+> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+> index 1b8c0b1eb96..ba1130a7996 100644
+> --- a/arch/arm/mach-k3/Kconfig
+> +++ b/arch/arm/mach-k3/Kconfig
+> @@ -130,6 +130,14 @@ config K3_ATF_LOAD_ADDR
+>  	  The load address for the ATF image. This value is used to build the
+>  	  FIT image header that places ATF in memory where it will run.
+>  
+> +config K3_ATF_RESERVED_SIZE
+> +	hex "Reserved DDR size for ATF"
+> +	default 0x80000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
+> +	default 0x20000
+> +	help
+> +	  The runtime DDR size reserved for ATF. This value is used to fixup the
+> +	  kernel device-tree's reserved-memory node for ATF.
+> +
+>  config K3_OPTEE_LOAD_ADDR
+>  	hex "Load address of OPTEE image"
+>  	default 0x9e800000
+> @@ -137,6 +145,13 @@ config K3_OPTEE_LOAD_ADDR
+>  	  The load address for the OPTEE image. This value defaults to 0x9e800000
+>  	  if not provided in the board defconfig file.
+>  
+> +config K3_OPTEE_RESERVED_SIZE
+> +	hex "Reserved DDR size for OPTEE"
+> +	default 0x1800000
+> +	help
+> +	  The runtime DDR size reserved for OPTEE. This value is used to fixup the
 
-FYI This was an issue with downstream breaking the pl022 uart
-compatible in their DT :-/
+Only the devices which do not have enough on chip RAM (AM62*) will put 
+TFA and OP-TEE in DDR.
 
-> I think there may well be more details we need to deal with here,
-> there's at least some difference in the console serial port [1] and I
-> suspect we might need to deal with other pinmux nuances possibly
-> around the sdhci interfaces.
->
-> Can you also provide details of which revisions of rpi devices you
-> tested this on?
->
-> I have an 8gb v1.0, and I thought I had a v1.1 2Gb but looking closer
-> it looks like that's the old c1 SoC rev (I read their original
-> announcement for the 2Gb variant as they were all 1.1, it appears
-> not). I have ordered the new 1Gb variant so I have a revD I can test
-> against.
-
-I've now tested this on both a revC and revD.
-
-I suspect we'll need to tweak this further when the d0 DTs land
-upstream but it works with the downstream options.
-
-> Peter
->
-> [1] https://github.com/raspberrypi/linux/blob/rpi-6.12.y/arch/arm64/boot/=
-dts/broadcom/bcm2712d0-rpi-5-b.dts#L93
->
-> > Filip Kokosi=C5=84ski (2):
-> >   board/raspberrypi: add multi-FDT support
-> >   board/raspberrypi: add bcm2712d0-rpi-5-b for Raspberry Pi 5
-> >
-> >  board/raspberrypi/rpi/rpi.c | 96 +++++++++++++++++++++----------------
-> >  1 file changed, 55 insertions(+), 41 deletions(-)
-> >
-> > --
-> > 2.51.2
-> >
+~Bryan
