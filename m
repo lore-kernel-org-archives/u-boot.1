@@ -4,91 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E39A106705A
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 15:50:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9AE0106705A
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 16:00:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 480D984255;
-	Thu, 12 Mar 2026 16:50:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1630F84277;
+	Thu, 12 Mar 2026 17:00:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M7JAyMkb";
+	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="aY58SRtI";
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="aY58SRtI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9954184261; Thu, 12 Mar 2026 16:50:32 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 97BAD8427F; Thu, 12 Mar 2026 17:00:20 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EEE284238
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 16:50:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD77184068
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 17:00:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d748ca8708so786292a34.0
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:50:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773330629; x=1773935429; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/Wfm7CLDXrxtk4K+3B0u5qhBRd/mWKZXGzO92qMhnnk=;
- b=M7JAyMkbqJcmJ5XkTXGaR1RljqiAg2J7g5TwYe2HcaE/QBX2pr2/j5qXqcOIftTsxr
- y8o1nPbzSxs5xyaQWDjGhWxlMVoWOHhsrnTt7kVjXjZyH1GIvUGYznMrJwLRorR7FzP0
- +/2ADt2brrFQJ8wtYLodyazbr8WLbhzTg3X3s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773330629; x=1773935429;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/Wfm7CLDXrxtk4K+3B0u5qhBRd/mWKZXGzO92qMhnnk=;
- b=FJumk+MM7v7cjpN0doIjSegXEPZ9HhOQZ0ktpqCCHpzHmuoVTaoxSeD/px1+MMXAF9
- hws9mXYpc5SRvmauEE4fTMjnqO3+swKHrqapMg91Zi5jcl+PfQnT9I4X2bFGmG22ucJB
- 2cGUZhgj7KpIj1AG1mgSQ89xg2OgT+VsIvTyHgPpbQniBmvaX7LhVB2xVkH55DSpegY0
- r/DAEOrrdHjmCHrCCjcYwqsJWsaIf2q51egnIkuQ1CVWFv014M0V43FPKoRsCtr1kSDz
- 18uHhyvJUw0gLiAERP5wxQPtXxHYcOID1iJZlO2Ii8JVDUAB9KIB/O5g5dijDw97oQxq
- CO7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVxWHfvcqq/0tEz024VMBj0Vy2DiDe3He220y9l7/zVbQun/Do4HZGvBWEsmD+lJXUJatmge30=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywz+G2OvsxmeiQqBda5TQZSPVXok11PI+65BewfE0yjsh03VVeo
- 5cJ7qPVIesv+iMaHSWg4UwxekE5NHFb6ioHrdNBXco4AkY32AiPjFxiyg3KLgbGNuwnZkL45eat
- rYHuLBnw=
-X-Gm-Gg: ATEYQzxsxv6h6SHSH6T0y3RRZ42fpLv6yEbHeMEaFh9Wr4R5SeQgHSDAUm0ywUJTta7
- HqsrPpn6g97nP78SHXL32/w/4xHHyrFnrhqZCGOpD4jTbRHY4k2pdiPnU1a0edKe6MpeSKXTqs7
- cYcwltqmcuR1OF8ai2mVm0H112PK79jbg0gnWKIIrlRjbxhhig1/+ZqAxnaUvS4m9Oq5A8TfkGB
- 9X73lCI/bUCWjGDShbwA2Wtx4UhK2CHFpXoTwtO0HOAFYQex54ZugCYsbSkrXDCgcjXPUuT6A57
- cXoYZthJf6+KBXMi9UP2qhGTLSFjunVNHnee1QNqfPb2sZXbdHbRrr8fI4zcmLOs/PlqdYWeYn7
- 3n3wzSNAwVIsEzQEsn1F43Tz63PYVpqZVkfdurfFg8IpDDGmvM0bkRcg8NGwnTCO5rHowQ+dIiP
- qVH4vtxOvz7gknEFGBPGS9LSMY6NyZSJNZuTt9cXDrjdnrt8YPSN9JEZLO9u7k06tk41TWzzgVy
- XWQMhOTMHFlwHDMeHHouKKDTxPkG57ObhjLu5SkCbsTuilC
-X-Received: by 2002:a05:6830:3115:b0:7d7:5112:8d6b with SMTP id
- 46e09a7af769-7d76a6ceb95mr4337904a34.24.1773330628778; 
- Thu, 12 Mar 2026 08:50:28 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76aec661csm4619830a34.26.2026.03.12.08.50.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Mar 2026 08:50:28 -0700 (PDT)
-Date: Thu, 12 Mar 2026 09:50:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Moteen Shah <m-shah@ti.com>
-Cc: "Kumar, Udit" <u-kumar1@ti.com>, u-boot@lists.denx.de,
- m-chawdhry@ti.com, n-francis@ti.com, vigneshr@ti.com, gehariprasath@ti.com
-Subject: Re: [PATCH] configs: j722s_evm_a53_defconfig: Allow configurability
- of MMCSD speeds
-Message-ID: <20260312155025.GB502704@bill-the-cat>
-References: <20260220072515.143720-1-m-shah@ti.com>
- <08cfa2f8-8fd5-4e82-91f1-7e73d80b8406@ti.com>
- <aaf3f58d-05f9-4b4c-913d-18fe2935279f@ti.com>
- <20260309231556.GA897647@bill-the-cat>
- <73203527-fae5-4e0c-9b2f-e14b56af00b9@ti.com>
+ spf=pass smtp.mailfrom=Jerome.Forissier@arm.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=lyerXlTFKLWisGlusirJ9sZJv67oV6/P728gf3ibYiEIDyNqTZTtYoNeBnBH8nMiDfev0O80zx+Zkmw9nMAs2akPb67NdGtda1BYfMDHxQumz0OKQSF7DizhzRm5sylkyZ8emQSNWjn5qjlVVwp8Fx/jq963Ua8MGY6doasmV+74igB5748wDhPtBXfsc2s6vKqTyZM+DKf4qRkvcSkJswiBlajgbi7hKVSw7o0bl91nGhyVVnYSowpxSVKT0WAoON/X5ajPPMfq2gxDqXmKRs1Q7sKqfhgFecyE8a5fVGxlC88UE2hKndpdvMIZONNK6AMlx5aGCm6psVBxzRKIng==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bMHOsg+4oG9hwCgZMW2ALYxGSywXZAUBiX4sXpOhUrs=;
+ b=iSTtZkrk4Bdbm4YaETaBfBBF7n0ifrPXUbnlWfIKE5OTov6D2xdDW0Gw2I+BS6Bx4SIPQnNE2OVDKtZfg+faQXi1oeLa9ZBGg4NiG7q/wqIGKpro8lD2UyEKGlOrV+2STGgZ/RQHBiMdbGU8k1pEpxzD8oOKyStnSNT4UtOuXBvgb/kyQfFetzIjcjoIGJzFJCqg/MtzqgNzKNdY8023ARLDp/NcnFBLd80+vV6L+wJG8TD6ojMu5Tr0P+LalcitOzvxD9Cy3o2ST0lDKE9zfqR6ayOSOqkF2ZlEjGlzT+U40DONP0NeSS42ra4bQG9Ikb0O9RRNWJ+3pkTGhigrtQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 4.158.2.129) smtp.rcpttodomain=konsulko.com smtp.mailfrom=arm.com; dmarc=pass
+ (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
+ (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bMHOsg+4oG9hwCgZMW2ALYxGSywXZAUBiX4sXpOhUrs=;
+ b=aY58SRtIVZGkyiLx8ua6ncND36w8BYGOAS6dfEUqKSCP+ofasU1pf8v3hQQRkrxHVdUuBC6oGNMI97Ir+NkkQkRS9Z/DfE1ZX/lnLzX1F5ImB5FUX6M1asOS5ycbafqBs2X0Ke4PbhmsOl6zNyUXnFTAwC2gkRquONoVUJKGfs4=
+Received: from DUZPR01CA0344.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b8::9) by DBAPR08MB5639.eurprd08.prod.outlook.com
+ (2603:10a6:10:1a2::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
+ 2026 16:00:12 +0000
+Received: from DB1PEPF00050A00.eurprd03.prod.outlook.com
+ (2603:10a6:10:4b8:cafe::bc) by DUZPR01CA0344.outlook.office365.com
+ (2603:10a6:10:4b8::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.27 via Frontend Transport; Thu,
+ 12 Mar 2026 16:00:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=arm.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
+ client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
+Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
+ DB1PEPF00050A00.mail.protection.outlook.com (10.167.242.42) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.16
+ via Frontend Transport; Thu, 12 Mar 2026 16:00:12 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ivT9qRTCDCfO5R5mvU3Fg8T89UasfaMCoG1c2VwjRnaz5pQ6jGgb3S967J7fHYFIBukX/1g+viy78J2qfDxC5vlRnTn3LU5bJve+sOP7Vmdj6PQeuZOLFJws6ismnCkLFfIFh6tCwvomgDIt1vK+yRawStu7TydoRw+tBQn+ZL2y/5CmiI7risYp1rnnO3GQVqCMTfvs+egU+/AEafSaEFW3RMI12ZT+WeWLCZL7O3aQnwsdW7p+v4RkjVFDuU5b5oOMhnLAZeg7EjU7rah0kCKXi7FGIjHZ7bca8pdf5QGs22lzqkEPL3Quu0r+Zjy+nFGsUb+6DfvsThhXIQDpJQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bMHOsg+4oG9hwCgZMW2ALYxGSywXZAUBiX4sXpOhUrs=;
+ b=gJxRQM5hK3N83M8KzQPrDT6SQIm3OcL2+kUfLngS8CTvGd5DJc+7YtSQ8+ax59kSzh9aEc/GKBAtZ57yVhQnvuhlKExzS9UBJVo2tGsf8M69+pnpzrFRX4wu1KCYpBlb2HKj3lFGSvUaw6AlUeuduFsjq1p/Dx8wM1hHY+KitknpthCXyvyyW+2MyvaHSvGQiYh19/QZA+U/s22VMfyEoABrEH1J/7VvRUCyYB9EdqfXHGboUF+wLUvNaR2fI9/kgoO8tHlCDUJjpNqd2RWDUrKygJ4hX16C/A820MDji8LP6tJCOYjywVWz0S239F+W1MMDoJTpxjEypNN29P4JxA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bMHOsg+4oG9hwCgZMW2ALYxGSywXZAUBiX4sXpOhUrs=;
+ b=aY58SRtIVZGkyiLx8ua6ncND36w8BYGOAS6dfEUqKSCP+ofasU1pf8v3hQQRkrxHVdUuBC6oGNMI97Ir+NkkQkRS9Z/DfE1ZX/lnLzX1F5ImB5FUX6M1asOS5ycbafqBs2X0Ke4PbhmsOl6zNyUXnFTAwC2gkRquONoVUJKGfs4=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from GVXPR08MB11741.eurprd08.prod.outlook.com
+ (2603:10a6:150:312::22) by AM9PR08MB6179.eurprd08.prod.outlook.com
+ (2603:10a6:20b:2da::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
+ 2026 15:59:08 +0000
+Received: from GVXPR08MB11741.eurprd08.prod.outlook.com
+ ([fe80::d47d:7756:5c28:de2c]) by GVXPR08MB11741.eurprd08.prod.outlook.com
+ ([fe80::d47d:7756:5c28:de2c%3]) with mapi id 15.20.9700.010; Thu, 12 Mar 2026
+ 15:59:08 +0000
+Message-ID: <91fa5175-5eb1-4991-9467-fc3fe4f52105@arm.com>
+Date: Thu, 12 Mar 2026 16:59:07 +0100
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@arm.com>
+Subject: Please pull net-20260312
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, nd@arm.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0133.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c4::8) To GVXPR08MB11741.eurprd08.prod.outlook.com
+ (2603:10a6:150:312::22)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ORjwYakfzIousSGm"
-Content-Disposition: inline
-In-Reply-To: <73203527-fae5-4e0c-9b2f-e14b56af00b9@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-TrafficTypeDiagnostic: GVXPR08MB11741:EE_|AM9PR08MB6179:EE_|DB1PEPF00050A00:EE_|DBAPR08MB5639:EE_
+X-MS-Office365-Filtering-Correlation-Id: ed93d888-e203-43f9-f9f4-08de80507189
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+ ARA:13230040|366016|1800799024|376014|56012099003|18002099003; 
+X-Microsoft-Antispam-Message-Info-Original: Sz7/yWjZyUEAeNvxM+I0GCle9Lb//zbeF9LYGCZkQ8TCE3eCxuExPpisDd/d9KjQjUDzTGEBY9wmocK8PRKoydfw020Q7NS0ZET/fF9kmD7zjsugyjfs8br1DJILTjUqZKXggLWOHpw4VGaOGDkf2d+ufv6h7EqTOkWGtZqLwi6zcZyO4vlgYi/5Jr+65lVPIg1UUOhK3BF4g/bpLzdR2hFXEYOiIJgsmQ4jzzeoCfspisOA2b942J9/KaCs56ILBSP0IDfFXLshqq4aE9w6iMkM9e3kyIVzKOU8wcAt5Lga7j+058l1QvR3051BC2l0lm6/BgfD/PBqNhIn1mz3HBtbneEFQ9AvVMbmrRaiDBrMLsSj+XNdbG3FYyyYTNM9jrdhcJj3sbJL3Ch+Mcqb003NtZJBRzN6mjSQ2/f7tjeoPy7wuccqIj3Oe62MLHajb01IeXR9zbrC7ZijBGYXln5YO6ySB8L/0RGWCCgiu9hlWDqiumUc8Da3DG/UmbNhznmWTa9B8E4M3SZppz4p2MKPhocFp7lI396fxl2/6FSPKaDRmK0+WDSOlYuhtdJHyox4opi9mXm5Yg+Ozh6xshM3O1//iBGKIl5UAuvTvZ9tH02Q7pWvPH6WS47tjwIlxPgrSNnOQaP7bVm2VKRMVhuE55j9Zf953GvWiaRwbTARa+jhePI250XS4eEl/iVB
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:GVXPR08MB11741.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(56012099003)(18002099003); DIR:OUT;
+ SFP:1101; 
+X-Exchange-RoutingPolicyChecked: p3syLeOhAARr8lO4Mph5+xVEu/AC+IOz4eppbd+qkSVaBdsqAkjQeJ3h3KGr5NMym59kUqTUqsykSkqhLabBFj/T70sw6GDAjHb5I0b5TB4PPSaPtoNRrS7xy1hT+1/jOUtp1uRYUuNoFzIXqusk7q+oBUAhKaZn4nQsPmfpYdTZDbC5XlRIVKmxamqZeZM6E5hqcLnmHGGEyc/eryqnMBZ/azmwKTKH+3crcTmdj+9GXUND0ETLL4ROoBHmyHgjeyeOQ2EiINC7VL2Zn6KY6+iGP3jnP0JMHrvriPLXjIRQqXBNFjzp5Gvn3Z0e0+fIxFRPl0MLLRKTs3n09mz0ZQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6179
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB1PEPF00050A00.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 15494a93-f2a6-4c7e-815c-08de80504b4b
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|35042699022|36860700016|1800799024|14060799003|82310400026|13003099007|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: 9Q2A1f0Js/PeVzgj+cXBYzdOQA5X221AsyWxBPagyd7zmAan4pE03L71fx0KDkuwb6w0LHtMvqCpwXU4N5r+N/WbxVLOTOyeYKI5HaefkAwQknmTd1FoZSPjxuRT+iAACNXbBglW2lC9UIDNpphX/5UU+QOe6OnwPA8YO5/DHZjfo8xIQRdtCsIKMqA7SUw4acBR6BE3Ce3T47vsIil6kmw9CaaoLnfXN88eWM3rFYc23Guo2HJZIrsTvAohuDJiTUNz0rakSfDGbwJF6uWizP06KwExV4nLQdi/Jl8eA7CJakTfrkPd6/G07rY7fdsrUajhwRYHo+TF4KdSEdTFN0NFpfxSWtkbh1FUJpeKTaqpCF+71Z8Zh5TC1bJED+ZPLS30Fs/zI1AdMLSgZPRv5um6RnjyNPJ1kKcwD2L7BQleUNx2tOfR0XhdPWxiqqgqk4gHgYk/h5SuqtBU1aze1RZ/pqwCA/s3BKkS6yv7AQ/k7JlGqtq3U5KdwFPTqQb253Zky+ugokw0TwnBGruRIJcmdl+dsuTDRVXUIw01+ZcounugPvZvCcs6SbA7452Kc20iWqzfgMxkdnZcxgmKqCgHTAUAHTVn9XFJ96tAk0RzhDS8dJ4cguoLUyu8++ZY036kuNz87A8A7naQt5HyJGksORdiOMaaVLwKJaU+dZ87jY/8L2fV4TPBcIJJ7PqhqfCYXg7plM6ncGYXoE5UGVfLBXaD+Wv75k3h+bXfIRI=
+X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
+ PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(35042699022)(36860700016)(1800799024)(14060799003)(82310400026)(13003099007)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: VdiMwrIcXNz/gc5MHefzFSOWsUz57DV5ZJNpEJdw1A+vR3NQevF1Rak16PaHKl0VcetUU/BWz0hsRVuWbB4AXmmHDd0UqC9Bd4PHGSI3vmQ/wR7IqPQY1qJLI73Q22LoJwrrsq+s4Yy2P+xr2gNrO68jyrzq04YcVmz9fiaSCwmK3tL/RQH/SUqLP4haz7QtXiAWKa7Z0NrXBd2Pe0gdzLAOUiOkA3BmYvWVXt4Geg4wSp5GU/WLSdz7CO/cyqru2bUQH1VMTuKzmZULu0uL5AY2seElXgxqBX4fbZkPH87hK1X2QL7+Ez0WRaipdQDa+8PNwjMQyT0M5hr8nzFqSTQuR4GVSoG4ccd7FhO0dqIJR7mW79v1R2X0OHTZtp3RfLRy6N7SobXfUn+VSMoXSeg9l/F5NhpB7IaPaDCc7doUFnJWytRmPiNRYc6UJEqB
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 16:00:12.3205 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed93d888-e203-43f9-f9f4-08de80507189
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
+ Helo=[outbound-uk1.az.dlp.m.darktrace.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF00050A00.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR08MB5639
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,74 +160,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---ORjwYakfzIousSGm
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit ba7bf918dafcd093ad733b07ba490baeb20cf5da:
 
-On Thu, Mar 12, 2026 at 02:46:27PM +0530, Moteen Shah wrote:
-> Hey Tom and Udit,
->=20
-> On 10/03/26 04:45, Tom Rini wrote:
-> > On Fri, Feb 20, 2026 at 03:17:37PM +0530, Moteen Shah wrote:
-> > > On 20/02/26 14:05, Kumar, Udit wrote:
-> > > > On 2/20/2026 12:55 PM, Moteen Shah wrote:
-> > > > > Add config to allow UHS support, in turn allowing to select
-> > > > > UHS speed modes for the SD card
-> > > > >=20
-> > > > > Signed-off-by: Moteen Shah <m-shah@ti.com>
-> > > > > ---
-> > > > > Test logs:
-> > > > > https://gist.github.com/Jamm02/e8b8b8c95cb62a7145d73f7ef50b2d8e
-> > > > >=20
-> > > > >  =A0 configs/j722s_evm_a53_defconfig | 1 +
-> > > > >  =A0 1 file changed, 1 insertion(+)
-> > > > >=20
-> > > > > diff --git a/configs/j722s_evm_a53_defconfig
-> > > > > b/configs/j722s_evm_a53_defconfig
-> > > > > index e84670c75ed..24ee293c803 100644
-> > > > > --- a/configs/j722s_evm_a53_defconfig
-> > > > > +++ b/configs/j722s_evm_a53_defconfig
-> > > > > @@ -107,6 +107,7 @@ CONFIG_MMC_SDHCI=3Dy
-> > > > >  =A0 CONFIG_MMC_SDHCI_ADMA=3Dy
-> > > > >  =A0 CONFIG_SPL_MMC_SDHCI_ADMA=3Dy
-> > > > >  =A0 CONFIG_MMC_SDHCI_AM654=3Dy
-> > > > > +CONFIG_MMC_UHS_SUPPORT=3Dy
-> > > >=20
-> > > > you may need at A72/SPL stage as well,
-> > > Other J7 boards already have this config enabled in the a72 stage.
-> > > > and do you think , R5/SPL will need this too ?
-> > > Any of the K3 devices does not enables this in R5 SPL, though we do h=
-ave
-> > > HS400 enabled in the R5 stage.
-> > > Adding the config should result in a little performance gain I think.
-> > Is this a function of board design, or a SoC-level feature?
->=20
-> SOC level feature, thought it has dependency on the board to provide the
-> right voltage to the card.
->=20
-> @udit, I did some profiling with UHS enabled at the R5 stage on J784s4-EVM
-> but I see no performance gain there, likely due to the fact that the R5
-> stage takes up very minimal percentage of the boot time. This patch can go
-> in as it is.
+  Prepare v2026.04-rc4 (2026-03-09 13:52:04 -0600)
 
-I think we should imply this under ARCH_K3 then, so that boards which do
-not meet the design requirements can turn it off, as I am assuming most
-do.
+are available in the Git repository at:
 
---=20
-Tom
+  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20260312
 
---ORjwYakfzIousSGm
-Content-Type: application/pgp-signature; name="signature.asc"
+for you to fetch changes up to e2c621b2cfd9489b5cc1fec4dc45045dab901ff9:
 
------BEGIN PGP SIGNATURE-----
+  net: Move network PHY under NETDEVICES (2026-03-12 15:53:41 +0100)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabLgvgAKCRAr4qD1Cr/k
-ChCgAQDFlrKLRxyXbHh35cOFcHvdCbRrX+z9NIpnGagEnMgt+gD/fESfgoTbosth
-U42aokPFEb8Ey9VS9phUoyUqY3lTlQ4=
-=f6Nf
------END PGP SIGNATURE-----
+----------------------------------------------------------------
+Pull request net-20260312.
 
---ORjwYakfzIousSGm--
+net:
+- Move network PHY under NETDEVICES
+- s/DM_CLK/CLK/ in HIFEMAC_{ETH,MDIO}
+- Add support for Airoha AN8811HB PHY
+- airoha: PCS and MDIO support for Airoha AN7581 SoC
+
+net-lwip:
+- Fix issue when TFTP blocksize is >8192
+- Adjust PBUF_POOL_SIZE/IP_REASS_MAX_PBUFS for better performance and
+  resource usage.
+- Enable mii command for NET_LWIP
+
+----------------------------------------------------------------
+Christian Marangi (6):
+      net: mdio-mt7531-mmio: use common header priv struct
+      net: airoha: add initial support for multiple GDM port
+      net: airoha: add support for Airoha PCS driver
+      airoha: add PCS node for AN7581
+      configs: enable PCS for Airoha AN7581
+      net: airoha: fill in support for PCS/PHY in Airoha Ethernet driver
+
+Heinrich Schuchardt (2):
+      boot: availability of command mii for NET_LWIP
+      net: do not use non-existent CONFIG_DM_CLK
+
+Jonas Karlman (1):
+      net: lwip: Fix PBUF_POOL_BUFSIZE when PROT_TCP_LWIP is disabled
+
+Mikhail Kshevetskiy (9):
+      net: airoha: avoid out of boundary writing/access to gdm_port_str[] array
+      net: airoha: declare airoha_eth_port as U_BOOT_DRIVER()
+      net: airoha: do not call airoha_fe_init() from GDM port independent code
+      net: airoha: init switch before GDM port initialization
+      net: airoha: pcs: improve/fix building rules
+      net: airoha-pcs: an7581: sync with linux code a bit
+      airoha: add GDM1 sub-node into EN7523 ethernet controller node
+      net: airoha: makes PCS support optional
+      net: airoha: use mt7531 mdio for GDM1
+
+Pranav Tilak (1):
+      net: lwip: scale buffer pool size with TFTP block size
+
+Tom Rini (1):
+      net: Move network PHY under NETDEVICES
+
+Tommy Shih (1):
+      net: phy: air_en8811: add support for Airoha AN8811HB PHY
+
+ arch/arm/dts/an7581-u-boot.dtsi        |   71 +++++
+ arch/arm/dts/en7523-evb-u-boot.dtsi    |    4 +
+ arch/arm/dts/en7523-u-boot.dtsi        |   13 +
+ arch/arm/dts/en7581-evb-u-boot.dtsi    |   18 ++
+ boot/Kconfig                           |    2 +-
+ configs/an7581_evb_defconfig           |    2 +
+ drivers/net/Kconfig                    |   16 +-
+ drivers/net/Makefile                   |    1 +
+ drivers/net/airoha/Kconfig             |   12 +
+ drivers/net/airoha/Makefile            |    4 +
+ drivers/net/airoha/pcs-airoha-common.c |  827 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/net/airoha/pcs-airoha.h        | 1220 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/net/airoha/pcs-an7581.c        | 1375 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/net/airoha_eth.c               |  319 ++++++++++++++++++---
+ drivers/net/mdio-mt7531-mmio.c         |   24 +-
+ drivers/net/phy/airoha/Kconfig         |    2 +-
+ drivers/net/phy/airoha/air_en8811.c    |  687 +++++++++++++++++++++++++++++++++++++++++---
+ lib/lwip/u-boot/lwipopts.h             |   22 +-
+ 18 files changed, 4517 insertions(+), 102 deletions(-)
+ create mode 100644 drivers/net/airoha/Kconfig
+ create mode 100644 drivers/net/airoha/Makefile
+ create mode 100644 drivers/net/airoha/pcs-airoha-common.c
+ create mode 100644 drivers/net/airoha/pcs-airoha.h
+ create mode 100644 drivers/net/airoha/pcs-an7581.c
+
+CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/29493
+
+Thanks,
+-- 
+Jerome
