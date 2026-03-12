@@ -4,97 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EBF106703C
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 15:26:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E39A106705A
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 15:50:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7257B841E3;
-	Thu, 12 Mar 2026 16:26:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 480D984255;
+	Thu, 12 Mar 2026 16:50:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i7T5NDby";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M7JAyMkb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A9E184238; Thu, 12 Mar 2026 16:26:00 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 9954184261; Thu, 12 Mar 2026 16:50:32 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0220483CEA
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 16:25:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EEE284238
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 16:50:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-662abedbeb7so1842428a12.3
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:25:57 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773329157; cv=none;
- d=google.com; s=arc-20240605;
- b=V0WWEDQ4Ay6dBLewCc06y6wGtKUA8Z8y0iGsTEoDwSdDhtqLa6gKP/s9QW7l5HhiVj
- HsyjuXyO00waBy7Gz0ezo1fxpnwfjEgCV/fctAfyn7P/4CMDnfrrGRWsyhrj5tFMbc30
- dB9puC7e0DZhngrCk5+Zi7Dv0ZJQpLV1fI7oZfC6aXcoUzXLZAcyUsNjhjo2xcm5dRHU
- WxHOVsROvl0o3FguvO1zCTEzLws14mYGlxo5TqZX97sIF+VEGl5H+TIPw7/VCjd5o2Qq
- XXJv0HeDMtTlcQ4q3cIuU8pfuBxbmbnzF7DglAVbqPur8D07vAbL5+kWv2g2wYHcgGoF
- g2uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=to:subject:message-id:date:from:mime-version:dkim-signature;
- bh=CUbyf03gsz1RZOp49yxd7renhWAoSO8ofWkn4kWJcPw=;
- fh=D7AOROvy7Rgc9BQh1kvjt6k6KXiZakVVm/UKVpgBOGE=;
- b=R+L13/hxFHy6irCHJsg5A0b+17jaGk2/kBH1gWMkltYykVF9l5w050FSKExCDbkQ0Q
- teurn8ou/jc9hyObQhzfbTjmWolmhs6hKwyPxj9g659jrhHn0Mh+t6Almh/lCEZgCOFV
- hVtUCpyG/bWKX2qdBCutDUUx8kfWlEji4KjD3J6hq3uG+dB1jytAgrulFba5XWbduJa0
- eZNNhJYEIOxmxULmL21XFNGObozduzujV5uSNU04nYshaEIEZJ/DGX3Ys/cBIVAvi2ay
- hCLPAK50bkVohGN3Qz6UupVuZheO7ARygCNk2P/6NRSB92p61fySGB41XlkEpQM6xy4n
- 7lTA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7d748ca8708so786292a34.0
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:50:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773329157; x=1773933957; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=CUbyf03gsz1RZOp49yxd7renhWAoSO8ofWkn4kWJcPw=;
- b=i7T5NDbydYVx27yakyn2lvPnnVcE12XhWICOZFQ+eePcUndOFyqWdTQsdij8f5Ck9H
- 7vb0/ivGOp0+DBEDQ2m3Wy4b3x8jdU14K+eAUcGFMD9lNy9MFT1DYbV6NaK198izuTwD
- g8OzXV9eX1zqvhayVJWkSp0tE2QRTbUrgnEVnSjigjhmBuf4SREINF8WkK5lqhQ9+KLp
- 0/K2Zd29ymrG9Yna0lPos+tFBXmSFkN13hHRd99xjCQzZ6MfpqvYCw/rKvAFB4lL1e+s
- zjvt8qAqHJS/4MUK2cgHlPcaW1viqLqrFfTz2MJ9KGPyg0ZoyEx4336/g9x2+I8kvrCs
- xUBQ==
+ d=konsulko.com; s=google; t=1773330629; x=1773935429; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/Wfm7CLDXrxtk4K+3B0u5qhBRd/mWKZXGzO92qMhnnk=;
+ b=M7JAyMkbqJcmJ5XkTXGaR1RljqiAg2J7g5TwYe2HcaE/QBX2pr2/j5qXqcOIftTsxr
+ y8o1nPbzSxs5xyaQWDjGhWxlMVoWOHhsrnTt7kVjXjZyH1GIvUGYznMrJwLRorR7FzP0
+ +/2ADt2brrFQJ8wtYLodyazbr8WLbhzTg3X3s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773329157; x=1773933957;
- h=to:subject:message-id:date:from:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CUbyf03gsz1RZOp49yxd7renhWAoSO8ofWkn4kWJcPw=;
- b=Msadbwra/T93puVKu6DrA+Ur2Inob6VDLsuAnvpqQrmGIVRDnK6cPIYOGgjsIxg2x2
- oHgMFEYRCpSqY/QD/yaDUvkXHs3pWAk2HiYXs/b8QZhbBsY2FrUvO2Enm0FOZ9VW6kb5
- gzgn0Okh8qyKT8ub+TnNKU4ogRHwRbFkD0zmbruQO9ruVnlEyCmDFEqYX2Tx6gfA7sU7
- IiAEtx7BMxhFSxcoItrvEkv4vK6pVmqTQMXxhP4QG3+YEFiJZLXtDkLRJATxXzoocfGe
- 6BVH5/rqtOKQL1Pfl3YTHF1FURt91dzQkWoNqVkS9DUeTXy6ZPkbjPy1ZDH7zOe+jlBt
- ckPw==
+ d=1e100.net; s=20230601; t=1773330629; x=1773935429;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/Wfm7CLDXrxtk4K+3B0u5qhBRd/mWKZXGzO92qMhnnk=;
+ b=FJumk+MM7v7cjpN0doIjSegXEPZ9HhOQZ0ktpqCCHpzHmuoVTaoxSeD/px1+MMXAF9
+ hws9mXYpc5SRvmauEE4fTMjnqO3+swKHrqapMg91Zi5jcl+PfQnT9I4X2bFGmG22ucJB
+ 2cGUZhgj7KpIj1AG1mgSQ89xg2OgT+VsIvTyHgPpbQniBmvaX7LhVB2xVkH55DSpegY0
+ r/DAEOrrdHjmCHrCCjcYwqsJWsaIf2q51egnIkuQ1CVWFv014M0V43FPKoRsCtr1kSDz
+ 18uHhyvJUw0gLiAERP5wxQPtXxHYcOID1iJZlO2Ii8JVDUAB9KIB/O5g5dijDw97oQxq
+ CO7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWUD5ahIUcunJz31Ly1+S6Tdu5Qhu2T6WsRqfK7x/NJc9UqV37jPHAGRo0PljLK0/mtrlP8eYE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKt9jtrxzbPMxrTTPNzJ5foirqSWmgaNgHONBXZE85k306Txje
- 4B2n/Ahh6gYPWN0T9qokzJKx44XYOGIT9bqOxGJLSVjD0EPmnASsjxEc5il3xxvB33hiT9xoGpL
- 1Z5JMvKutMsLYt4lfPkTO8iIlBQ8t3oI=
-X-Gm-Gg: ATEYQzz9I8OJdeU9HWOpxQJ07a9ykZNYJtKy+EY0dOp12HGI/hVL0lFuM/sn7uNBEoT
- AHIR0skTEG8LvHxxXpd31T1oLDNkMncTkLqk1/Y8HuGOQDo/N0lmj09oWh6MlIE0TqkmDK1QyoV
- 2qaq9NMpNnlJm3bCa3rIeh/oyc6jhp4YGE+AvY/aXhZfqSQ7pA84+kxn7pN3thBu1UaxPyjvX7q
- zS2VJhz9UN78bx9o4rgHfCDpdnAdqdczpwThF+jbBHjnHrkrLrZJUXb1HxpMCCXuWuDr1e/MMgR
- zk2oS/gfGupAENqzNWmxIO3kqE4FFQd+dx9sSEz+z1tYT8s+wLbEhtkjjpbq6mgsyiV3y/t72WZ
- ka20tAWKF0ziSDmq+cKTVT2xhcbsGNQh0Y6GT8R58V3rb9CRoFIYAT6b/iVJfbim4fhBSu+hGHD
- sd
-X-Received: by 2002:a05:6402:4508:b0:661:cf1:9dd4 with SMTP id
- 4fb4d7f45d1cf-66319de7239mr2528059a12.14.1773329157109; Thu, 12 Mar 2026
- 08:25:57 -0700 (PDT)
+ AJvYcCVxWHfvcqq/0tEz024VMBj0Vy2DiDe3He220y9l7/zVbQun/Do4HZGvBWEsmD+lJXUJatmge30=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywz+G2OvsxmeiQqBda5TQZSPVXok11PI+65BewfE0yjsh03VVeo
+ 5cJ7qPVIesv+iMaHSWg4UwxekE5NHFb6ioHrdNBXco4AkY32AiPjFxiyg3KLgbGNuwnZkL45eat
+ rYHuLBnw=
+X-Gm-Gg: ATEYQzxsxv6h6SHSH6T0y3RRZ42fpLv6yEbHeMEaFh9Wr4R5SeQgHSDAUm0ywUJTta7
+ HqsrPpn6g97nP78SHXL32/w/4xHHyrFnrhqZCGOpD4jTbRHY4k2pdiPnU1a0edKe6MpeSKXTqs7
+ cYcwltqmcuR1OF8ai2mVm0H112PK79jbg0gnWKIIrlRjbxhhig1/+ZqAxnaUvS4m9Oq5A8TfkGB
+ 9X73lCI/bUCWjGDShbwA2Wtx4UhK2CHFpXoTwtO0HOAFYQex54ZugCYsbSkrXDCgcjXPUuT6A57
+ cXoYZthJf6+KBXMi9UP2qhGTLSFjunVNHnee1QNqfPb2sZXbdHbRrr8fI4zcmLOs/PlqdYWeYn7
+ 3n3wzSNAwVIsEzQEsn1F43Tz63PYVpqZVkfdurfFg8IpDDGmvM0bkRcg8NGwnTCO5rHowQ+dIiP
+ qVH4vtxOvz7gknEFGBPGS9LSMY6NyZSJNZuTt9cXDrjdnrt8YPSN9JEZLO9u7k06tk41TWzzgVy
+ XWQMhOTMHFlwHDMeHHouKKDTxPkG57ObhjLu5SkCbsTuilC
+X-Received: by 2002:a05:6830:3115:b0:7d7:5112:8d6b with SMTP id
+ 46e09a7af769-7d76a6ceb95mr4337904a34.24.1773330628778; 
+ Thu, 12 Mar 2026 08:50:28 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7d76aec661csm4619830a34.26.2026.03.12.08.50.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Mar 2026 08:50:28 -0700 (PDT)
+Date: Thu, 12 Mar 2026 09:50:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Moteen Shah <m-shah@ti.com>
+Cc: "Kumar, Udit" <u-kumar1@ti.com>, u-boot@lists.denx.de,
+ m-chawdhry@ti.com, n-francis@ti.com, vigneshr@ti.com, gehariprasath@ti.com
+Subject: Re: [PATCH] configs: j722s_evm_a53_defconfig: Allow configurability
+ of MMCSD speeds
+Message-ID: <20260312155025.GB502704@bill-the-cat>
+References: <20260220072515.143720-1-m-shah@ti.com>
+ <08cfa2f8-8fd5-4e82-91f1-7e73d80b8406@ti.com>
+ <aaf3f58d-05f9-4b4c-913d-18fe2935279f@ti.com>
+ <20260309231556.GA897647@bill-the-cat>
+ <73203527-fae5-4e0c-9b2f-e14b56af00b9@ti.com>
 MIME-Version: 1.0
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 12 Mar 2026 15:25:45 +0000
-X-Gm-Features: AaiRm52zEhMD4iDN3FXYxdT1DPq92pLJfDkSqOGfKggskt_mF7PIOelCm220_t0
-Message-ID: <CALeDE9MMW0L1xyWFW6Qdh+_XeVKrEK_1a2ju02E7=wy-YcCBtg@mail.gmail.com>
-Subject: Pull request: rpi-2026.04
-To: Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ORjwYakfzIousSGm"
+Content-Disposition: inline
+In-Reply-To: <73203527-fae5-4e0c-9b2f-e14b56af00b9@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,19 +105,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Please pull the updates for the Raspberry Pi.
+--ORjwYakfzIousSGm
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Updates for RPi for 2026.04-rc4:
+On Thu, Mar 12, 2026 at 02:46:27PM +0530, Moteen Shah wrote:
+> Hey Tom and Udit,
+>=20
+> On 10/03/26 04:45, Tom Rini wrote:
+> > On Fri, Feb 20, 2026 at 03:17:37PM +0530, Moteen Shah wrote:
+> > > On 20/02/26 14:05, Kumar, Udit wrote:
+> > > > On 2/20/2026 12:55 PM, Moteen Shah wrote:
+> > > > > Add config to allow UHS support, in turn allowing to select
+> > > > > UHS speed modes for the SD card
+> > > > >=20
+> > > > > Signed-off-by: Moteen Shah <m-shah@ti.com>
+> > > > > ---
+> > > > > Test logs:
+> > > > > https://gist.github.com/Jamm02/e8b8b8c95cb62a7145d73f7ef50b2d8e
+> > > > >=20
+> > > > >  =A0 configs/j722s_evm_a53_defconfig | 1 +
+> > > > >  =A0 1 file changed, 1 insertion(+)
+> > > > >=20
+> > > > > diff --git a/configs/j722s_evm_a53_defconfig
+> > > > > b/configs/j722s_evm_a53_defconfig
+> > > > > index e84670c75ed..24ee293c803 100644
+> > > > > --- a/configs/j722s_evm_a53_defconfig
+> > > > > +++ b/configs/j722s_evm_a53_defconfig
+> > > > > @@ -107,6 +107,7 @@ CONFIG_MMC_SDHCI=3Dy
+> > > > >  =A0 CONFIG_MMC_SDHCI_ADMA=3Dy
+> > > > >  =A0 CONFIG_SPL_MMC_SDHCI_ADMA=3Dy
+> > > > >  =A0 CONFIG_MMC_SDHCI_AM654=3Dy
+> > > > > +CONFIG_MMC_UHS_SUPPORT=3Dy
+> > > >=20
+> > > > you may need at A72/SPL stage as well,
+> > > Other J7 boards already have this config enabled in the a72 stage.
+> > > > and do you think , R5/SPL will need this too ?
+> > > Any of the K3 devices does not enables this in R5 SPL, though we do h=
+ave
+> > > HS400 enabled in the R5 stage.
+> > > Adding the config should result in a little performance gain I think.
+> > Is this a function of board design, or a SoC-level feature?
+>=20
+> SOC level feature, thought it has dependency on the board to provide the
+> right voltage to the card.
+>=20
+> @udit, I did some profiling with UHS enabled at the R5 stage on J784s4-EVM
+> but I see no performance gain there, likely due to the fact that the R5
+> stage takes up very minimal percentage of the boot time. This patch can go
+> in as it is.
 
-- board/raspberrypi: add bcm2712d0-rpi-5-b for Raspberry Pi 5
-- board/raspberrypi: add multi-FDT support
-- rpi: pass the Video Core logs DT parameter through
-- pinctrl: bcm283x: Fix GPIO pull state register values for BCM2711
+I think we should imply this under ARCH_K3 then, so that boards which do
+not meet the design requirements can turn it off, as I am assuming most
+do.
 
-The following changes since commit
-ba7bf918dafcd093ad733b07ba490baeb20cf5da
+--=20
+Tom
 
-https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
-tags/rpi-2026.04-rc4
+--ORjwYakfzIousSGm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabLgvgAKCRAr4qD1Cr/k
+ChCgAQDFlrKLRxyXbHh35cOFcHvdCbRrX+z9NIpnGagEnMgt+gD/fESfgoTbosth
+U42aokPFEb8Ey9VS9phUoyUqY3lTlQ4=
+=f6Nf
+-----END PGP SIGNATURE-----
+
+--ORjwYakfzIousSGm--
