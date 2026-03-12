@@ -4,54 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C98FED2F8
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 09:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C248FED2FA
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 09:57:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EAD383F14;
-	Thu, 12 Mar 2026 10:48:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id E63EA8418C;
+	Thu, 12 Mar 2026 10:57:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="OnOAmN93";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="TV/bpsf3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A9B884051; Thu, 12 Mar 2026 10:48:12 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ id D160384189; Thu, 12 Mar 2026 10:57:38 +0100 (CET)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ADA783F00
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 10:48:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D06DA83F14
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 10:57:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 8698B214D9;
- Thu, 12 Mar 2026 10:48:08 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1773308888;
- bh=34ebIKuxS1TlDX/SbjIwilKgPFBEQ+aPfytwqwY2Vx8=; h=From:To:Subject;
- b=OnOAmN93Rg4CHt0vIOHO7RWN9742jGVvQhAl9Mg1sESJL1hyjhFMtq8kvvqthxb9I
- 7eWvy1ODFsUf7DTETFduM82G5KM4WHbd0M4I47M1nwmzmFjbFHwvqpyEDMGusYPvt+
- 1U1jA7OtmzMh/5M+Dfs1xXwD4t0P9CorIaWwuUKJaO1aHKdy1bv7VzV+EFaInQNvmL
- 51JPAXOH1QNSeYVmAJ6ttlyzvCKknK/R1GtXswp2tHw0qqexZL2Vr/T8qfu89IgI1E
- 5TKkYLs5+i1X9uQL8HiuXsJi8Fg6KQbykqYP6RwZ0mT8k3ieH8ou394HZkQAemm+mr
- GaUKwVZ9p37iw==
-Date: Thu, 12 Mar 2026 10:48:04 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Tom Rini <trini@konsulko.com>, Wadim Egorov <w.egorov@phytec.de>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH] doc: board: fix OPTEE args for TI SoCs
-Message-ID: <20260312094804.GA29066@francesco-nb>
-References: <20260312-optee_args_fix-v1-1-55972621c005@ti.com>
+ spf=pass smtp.mailfrom=Max.Merchel@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
+ Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References;
+ bh=tLUVCLrjGpwsArUSiFtjWtCgIr+B5Dzc0Sz6nIz5n2Y=; b=TV/bpsf3bxTl+QmSj59+7p+U2u
+ TYe4L55wrskMh+iM08GRXVO+O9/diZTH0kPsmzG4WFo6AgoO2eDzyoH1pej0BG+yxAwapaIyh1IJ4
+ 6OXPWiFGz1F46JzdTfymAHvWxoDkLxPm96R4h/EQAi7T8NZgWRld12MQpiU18FjNDRsmZfKNtZ940
+ 5Bwh9rxEDwcWq/TRPEKZzWdt+PQHoA7GiwqovcJ0XMfjipGFVR2ZfuDrKWjprsp6VzMDj6Pcbsgcc
+ 8uELJKpF5TAq2xgXks08rFmP9BGiLAHzRpCTA8qPjyH14e51eHzVRpdFFzw1cAkHONUskOjLXmRRM
+ CkYVJQsg==;
+Received: from sslproxy07.your-server.de ([78.47.199.104])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1w0cnQ-0007xD-0D; Thu, 12 Mar 2026 10:57:36 +0100
+Received: from localhost ([127.0.0.1])
+ by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1w0cnP-000Fyo-2N; Thu, 12 Mar 2026 10:57:35 +0100
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Max Merchel <Max.Merchel@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Subject: [PATCH 00/13] TQMa6 with preparations for integrating additional TQ
+ boards
+Date: Thu, 12 Mar 2026 10:56:56 +0100
+Message-ID: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260312-optee_args_fix-v1-1-55972621c005@ti.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,14 +72,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 12, 2026 at 03:02:49PM +0530, Anshul Dalal wrote:
-> CFG_WITH_SOFTWARE_PRNG=y was added as an OPTEE argument to workaround
-> some bugs related to TRNG which have been fixed now[1]. Therefore this
-> patch drops the redundant argument from the documentation.
-> 
-> [1]: https://github.com/OP-TEE/optee_os/commit/e313f4765fd0478bb66985827441411793433773
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+This series introduces features for sharing across different TQ boards,
+simplifying maintenance by avoiding code duplication.
 
-Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com> # Toradex Verdin AM62
+These changes are implemented for the TQMa6.
+They will also be used by TQMa7 and TQMa6UL, whose mainlining is currently
+being prepared.
+
+These changes also serve as preparation for further work on the TQMa6
+(in following series).
+
+Markus Niebel (3):
+  MAINTAINERS: update entry for TQ-Systems
+  env: tq: add shareable environment settings
+  board/tq: Add common baseboard API
+
+Max Merchel (8):
+  tqma6: remove board MAINTAINERS
+  [cleanup]configs: tqma6.h: remove unused define for PHYS_SDRAM_SIZE
+  [cleanup]configs: tqma6.h: remove unused define for PFUZE100_I2C
+  board: tqma6: change to use shareable tq environment
+  configs: tqma6: change to include tqma6.h in baseboard headers
+  board/tq: Add common mmc API
+  board: tqma6: use common TQ mmc function
+  board: tqma6: use runtime SoC detection in enet setup
+
+Paul Gerber (2):
+  board: tqma6: use common TQ baseboard
+  board: tqma6: update eMMC DSR handling
+
+ MAINTAINERS                      |  15 +-
+ board/tq/common/Kconfig          |  13 ++
+ board/tq/common/Makefile         |   9 ++
+ board/tq/common/tq_bb.c          |  78 +++++++++
+ board/tq/common/tq_bb.h          |  39 +++++
+ board/tq/common/tq_sdmmc.c       |  46 ++++++
+ board/tq/tqma6/Kconfig           |   8 +-
+ board/tq/tqma6/MAINTAINERS       |   7 -
+ board/tq/tqma6/Makefile          |   1 +
+ board/tq/tqma6/tqma6.c           |  39 +++--
+ board/tq/tqma6/tqma6.env         |  47 ++++++
+ board/tq/tqma6/tqma6_bb.h        |  28 ----
+ board/tq/tqma6/tqma6_emmc.c      |  88 ++++++++++
+ board/tq/tqma6/tqma6_emmc.h      |  19 +++
+ board/tq/tqma6/tqma6_mba6.c      | 150 ++++++++---------
+ board/tq/tqma6/tqma6_wru4.c      |  29 +---
+ include/configs/tqma6.h          | 266 ++-----------------------------
+ include/configs/tqma6_mba6.h     |   3 +-
+ include/configs/tqma6_wru4.h     |   2 +
+ include/env/tq/mmc.env           |  82 ++++++++++
+ include/env/tq/nfs.env           |  51 ++++++
+ include/env/tq/spi.env           |  23 +++
+ include/env/tq/tq-imx-shared.env |  38 +++++
+ include/env/tq/ubi.env           |  47 ++++++
+ 24 files changed, 721 insertions(+), 407 deletions(-)
+ create mode 100644 board/tq/common/Kconfig
+ create mode 100644 board/tq/common/Makefile
+ create mode 100644 board/tq/common/tq_bb.c
+ create mode 100644 board/tq/common/tq_bb.h
+ create mode 100644 board/tq/common/tq_sdmmc.c
+ delete mode 100644 board/tq/tqma6/MAINTAINERS
+ create mode 100644 board/tq/tqma6/tqma6.env
+ delete mode 100644 board/tq/tqma6/tqma6_bb.h
+ create mode 100644 board/tq/tqma6/tqma6_emmc.c
+ create mode 100644 board/tq/tqma6/tqma6_emmc.h
+ create mode 100644 include/env/tq/mmc.env
+ create mode 100644 include/env/tq/nfs.env
+ create mode 100644 include/env/tq/spi.env
+ create mode 100644 include/env/tq/tq-imx-shared.env
+ create mode 100644 include/env/tq/ubi.env
+
+-- 
+2.43.0
 
