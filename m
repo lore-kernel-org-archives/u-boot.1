@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A365106703B
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 14:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02B961067036
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 14:32:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2E3E8429E;
-	Thu, 12 Mar 2026 15:31:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8000984262;
+	Thu, 12 Mar 2026 15:31:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ZaX1AJ7V";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ItlX9+nW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13FA184253; Thu, 12 Mar 2026 15:31:36 +0100 (CET)
+ id 266C68423D; Thu, 12 Mar 2026 15:31:38 +0100 (CET)
 Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD0F84258
+ by phobos.denx.de (Postfix) with ESMTPS id 59F2E84261
  for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 15:31:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=ew.tq-group.com
@@ -30,33 +30,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
- bh=oKBHjKgo871tXYOg2RSCmvd5kutHuj3QQSpGP4/ZcVI=; b=ZaX1AJ7VTdZJ7BmzW983+lL+3q
- LD/pFunKjbu674UwpCgGOUxeb2ETAaeGc5+G3c4r0uxqyYcQ4/hIaKyH2J5whXID6WdSQeDItYIs2
- FiRuYa2Ul0HhWkQwgq7We1qAvka/bEhGLHi+3nSRn2KhzAVNvjampTaXhcGI+C2Mn1qQaFTeT2UpJ
- IEU7UqWDRPbw67FN5Oird3rZg8gJJExs5ATsswm+XxkT1H7dsEgLst4LslpS48PLLUQiJtzSlcPkq
- n6mzlPkERvoxq3eXy2cHBVYsswO/PcNP9Iu9ZOlrxH00TUI4E7+eHy1O1YWzJSS0CvnhVclHZOC5O
- h3tfM6tQ==;
+ bh=B26nPfK6Qu06BzqPPfv9a+U6JyikkXkvvmgGl/SsCmg=; b=ItlX9+nWTn3zoDWXA3q4RDHQhM
+ B69VSfPVdj1E2LoLsX8dIoxOFdbL03p86EshmaeFgV7W5gWRm8NINQ4YDSj17yzFer4r95hpICOZs
+ yqiJln/LofhtRw9OB8Vkmai4abpD4UxLradnNWVAm6qAy9P6S2oQkgThDF06jNFW6dsVe8yF34I/p
+ 1AlIqPz+mGqHCRG4vwPluMZpVyC7Rrd383kf0HjzIIBFLL7ILtX/hqvJF9C6wmpHAaZ+ldkBHIIq/
+ UpIJ5JTsGTm1huKpyuQcgFzWY1TgWfDA45R9wrSBSqSLVnRNdx0TLyy7XRZ1FP4m9lpDKI4N7c4tU
+ 7eiOBSrQ==;
 Received: from sslproxy03.your-server.de ([88.198.220.132])
  by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w0h4U-000FKv-2B; Thu, 12 Mar 2026 15:31:30 +0100
+ id 1w0h4T-000FKj-2d; Thu, 12 Mar 2026 15:31:29 +0100
 Received: from localhost ([127.0.0.1])
  by sslproxy03.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <Alexander.Feilke@ew.tq-group.com>)
- id 1w0h4U-0003V8-0b; Thu, 12 Mar 2026 15:31:30 +0100
+ id 1w0h4T-0003V8-1F; Thu, 12 Mar 2026 15:31:29 +0100
 From: Alexander Feilke <Alexander.Feilke@ew.tq-group.com>
 To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
  u-boot@ew.tq-group.com
-Cc: Nora Schiffer <nora.schiffer@ew.tq-group.com>,
+Cc: Alexander Feilke <alexander.feilke@ew.tq-group.com>,
  Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>,
  Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Steffen Doster <Steffen.Doster@tq-group.com>,
- Max Merchel <Max.Merchel@ew.tq-group.com>,
- Alexander Feilke <alexander.feilke@ew.tq-group.com>
-Subject: [PATCH 3/8] env: add env_set_runtime() helper
-Date: Thu, 12 Mar 2026 15:31:13 +0100
-Message-Id: <20260312143118.1677859-4-Alexander.Feilke@ew.tq-group.com>
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH 1/8] Kconfig: update build-target for MX7 with SPL
+Date: Thu, 12 Mar 2026 15:31:11 +0100
+Message-Id: <20260312143118.1677859-2-Alexander.Feilke@ew.tq-group.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260312143118.1677859-1-Alexander.Feilke@ew.tq-group.com>
 References: <20260312143118.1677859-1-Alexander.Feilke@ew.tq-group.com>
@@ -78,49 +75,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nora Schiffer <nora.schiffer@ew.tq-group.com>
+From: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 
-env_set_runtime() is equivalent to env_set(), but does nothing when
-CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is unset.
+Prepare for MX7-based module with SPL support
 
-Signed-off-by: Nora Schiffer <nora.schiffer@ew.tq-group.com>
-Signed-off-by: Steffen Doster <Steffen.Doster@tq-group.com>
-Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 Signed-off-by: Alexander Feilke <alexander.feilke@ew.tq-group.com>
 ---
- include/env.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/env.h b/include/env.h
-index 01c3eeae7e2..193aff8f23b 100644
---- a/include/env.h
-+++ b/include/env.h
-@@ -160,6 +160,25 @@ bool env_get_autostart(void);
-  */
- int env_set(const char *varname, const char *value);
- 
-+/**
-+ * env_set_runtime() - set an environment variable if
-+ * CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is set.
-+ *
-+ * This is equivalent to env_set(), but does nothing if
-+ * CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG is unset.
-+ *
-+ * @varname: Variable to adjust
-+ * @value: Value to set for the variable, or NULL or "" to delete the variable
-+ * @return 0 if OK or !CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG, 1 on error
-+ */
-+static inline int env_set_runtime(const char *varname, const char *value)
-+{
-+	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG))
-+		return env_set(varname, value);
-+
-+	return 0;
-+}
-+
- /**
-  * env_get_ulong() - Return an environment variable as an integer value
-  *
+diff --git a/Kconfig b/Kconfig
+index a50b4c8c68a..0b745e9349a 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -522,7 +522,7 @@ config BUILD_TARGET
+ 	default "u-boot-elf.srec" if RCAR_64
+ 	default "u-boot-with-spl.bin" if ARCH_AT91 && SPL_NAND_SUPPORT
+ 	default "u-boot-with-spl.bin" if MPC85xx && !E500MC && !E5500 && !E6500 && SPL
+-	default "u-boot-with-spl.imx" if ARCH_MX6 && SPL
++	default "u-boot-with-spl.imx" if (ARCH_MX6 || ARCH_MX7) && SPL
+ 	default "u-boot-with-spl.kwb" if ARMADA_32BIT && SPL
+ 	default "u-boot-with-spl.sfp" if ARCH_SOCFPGA_ARRIA10
+ 	default "u-boot-with-spl.sfp" if ARCH_SOCFPGA_GEN5
 -- 
 2.34.1
 
