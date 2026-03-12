@@ -4,98 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EEC1105A58D
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 12:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3399105A58D
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 12:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 032A584167;
-	Thu, 12 Mar 2026 13:08:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43031841C2;
+	Thu, 12 Mar 2026 13:08:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xwh7YP84";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VsxnSg6v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A68BE8418C; Thu, 12 Mar 2026 13:08:27 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 88450841C8; Thu, 12 Mar 2026 13:08:42 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A360984121
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 13:08:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A910A84121
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 13:08:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b96d784828bso130958666b.3
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 05:08:25 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773317305; cv=none;
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-662abedbeb7so1402121a12.3
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 05:08:40 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773317320; cv=none;
  d=google.com; s=arc-20240605;
- b=X7CbdzgQIHu4FJZ4/SIpmszkg9DbwznSmsdcLvPiQWyZgYRQpT0ZZv8Ds7fRnw8bC5
- KSz6PdFl3+LYjKXDnklBiFjP9Eoo6mc/r5klXRnsi6zMq11HGufmLHRr8D7/ikHdCoNy
- JAvKMuzXqIeSmbSF63D26pojf7nLEwXq4lrvY5ukQ+8l5exNiCdZdkdz3jgm/S3UI2JE
- MSp1Tqe8fUZtLbU3N6KVa3J3TnbCE1zcQLAaZE6QC7di6UsaAE5CwmanK5ei81T1Ksmb
- /DbWK2poJR+13IM5e45L+TduyuLgI//Qzsa6N34926OlbqF80Dw7BBoksJ38VHB6xrh9
- 0i0w==
+ b=ldXa/rQn5Ue3aRxvi/zlbsKPcV/L16W7xeLU9HFN5TYoGh9IpRDwHnJ1l0R0/JuyPQ
+ FzSIr1Rg8VXBOPC5YSrYboSLHEZIcd/OkKx23QI1VKN1u1+uHhsY/qHzcNICAsRHiP5f
+ JInO2rijhLW0NCVDTn1YOm6U5UF5PDEWY+0vvUnEzMkbNO/GmPmSBO9tUzmQnlHCFCW1
+ ZTMor6umkMGhw7dHBmGsHh23Z9+jDg79qCM80xxHQtAEBnrmTE9TeHkgmKk5zfxs8rFT
+ /gAfBlbS+QkzyCp8RnIrVcLQF/VNfyt1YFMbSxqtgqWdP91N93pAWylyKpBtPoyW7UaJ
+ nYLQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=/1mSCtU1nRWxQYTwNb/vJP8hI0YexbN0AQ9I7tvveZ8=;
+ bh=WBHFtypCZ7rtDKqSwijE+5qMmkgsdId8N+fuKAWekEA=;
  fh=lEnt6i2qrjwBbaSCkrdTcOSYGh/b1tw639piUMO096Y=;
- b=LXBAiejv9Gnk2p9w/ks931m9QkkCdo3vv9D1eiJz+7cAUH/KKphRlFjpYnUdfenHr8
- r3GDQazzdw/D4newnx4q4UoaZ6xvIOu78zm4YpmBM/YU0pgyuD3ZW9wCdKn22lVExhRh
- xSSAxSId6DYtYxzgDA5ox1gu7z26SnJUGOY5ikYdi5SVffWWaSqXEHYG4t/t8/Qi7IoB
- ytoUEP5SQv3ELiISEx7e1nv+p4TSo96H7tC26gNrRFzeGuU4vts3CdwSgMlgiSLbv1m3
- szVicmLlj6iAai3wVF5Rp9Xf2yY3A5FPL+YwXroZbyvoan9ibsibMQHT3femrB3s4ZIM
- fIMQ==; darn=lists.denx.de
+ b=WWYnzguHfimW85BfD/64D7On8ReVCGxnayTuw6Kc3RoZETZwlA93eiWsTK0jDW2Gl3
+ puy7XIq9rvyQGhGxWjmmhJWOGj2Q1UNhDGywc/iw9vXz6eWogAyE36uCsAm71vl3CBD+
+ RtzTMoUvcOcpZ7SHb81dSV8FFVbfwSCyQ9mcQZ6tMZBZFkL3ZPpi/XiWhlJ2UuY1k1R8
+ /hyDM/lxOf2gGETKIN/XYMKLzk6BI+t+ZNlGPuTwmSyx5pvakSgjiAYxZTHFIrkhb1tx
+ 0ih5OkO9sVctpC3zKFNUiJ/ZAmmufq1t0j9FYDo+0cxHGU1sxoqimRcVR6rwq4xtLekJ
+ +zOg==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773317305; x=1773922105; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1773317320; x=1773922120; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/1mSCtU1nRWxQYTwNb/vJP8hI0YexbN0AQ9I7tvveZ8=;
- b=Xwh7YP84vsJozGaegrqsrDJkpYOnUgooZPrx5svXnmEZduN9mN/+pK7N3eBzZgKIh5
- Uu4PywFMq61RBq2sG6A3eg1hRbmWBPISOLVVmClPN5LWbeMHcoKAWpLZvPFeAPeWT0g4
- 98NpNPjzv55nec8afLrEq1GW+w9DDwqR0DIIkRryuQhzCoVBBu2T4FYlXTwugdmWFcRP
- aCPE6Xin7bVFirnM+bAwdz9bhphi/iiD/0+QpCbGnLCiPjjOrrnHFBpazRnT3hev+YcV
- jVJJJBKJcan4VVs4O43ORHU7r60iy+kk9tQKp7t/2F8TaUGZZB43jR/6QbU90flKEz4T
- KuTg==
+ bh=WBHFtypCZ7rtDKqSwijE+5qMmkgsdId8N+fuKAWekEA=;
+ b=VsxnSg6vmeojAD0048rijtpkwMzJ/FuD07owaJJ74XRObhn3i5uw/nYWgk2jfa67Ij
+ lzGN++RexQF07LFRo/Edt7w5hH0/R/2NKgQjgTYHXZ9oAZHB58W5Dt/ZMcjYUCl5Wcsi
+ APkUGFPXU0yNfKXC84xY+74NXBNQYCBumqOIKHIxNbPx2D88MWlBtZP62pr287UEHCUq
+ RHrIMpldQs34W3Og4wfa2kQopKCKGmvDJyYduAXxmiZLWAt4n5fEZnIWXcSjCGoidW89
+ sYHMrIGe34Qgi9bhdxsXux4gr9Aq4XWewW6tj4dzeEdlTad/0wgYsB4sCKJMI8mOq2yq
+ qbLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773317305; x=1773922105;
+ d=1e100.net; s=20230601; t=1773317320; x=1773922120;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=/1mSCtU1nRWxQYTwNb/vJP8hI0YexbN0AQ9I7tvveZ8=;
- b=Xwdgao714qU3r5dbJgMxuqukDtrRR9MzMSx1pvYyxWglKuytXNL16UqCbWqGhHhOZF
- oTp/xpCdPqEUxbxU2YHxvhIiCBXuzqHiVUmlfVv2rVQ54CbhX7UggxzyDVB4MSfIfIg/
- qnzoFcCW7jw3XkA2Y+ncvbExAIUw+nQIbXjgdVM86ADW1zLjB3ocTUAU12WcRmur/Et9
- VE6AZ+qC2m9Z+77qJzG6yL/cZl0VJHIwKwnpmPnYvBVZM0o9B0akazrU4qTRhnHhtXZU
- 2NRwE2sJwLB/GTm4QRUhsZfvjhY5YOh1NILvHsDQ1ol88VGn5ND5rjVIDPWPUxCoynLq
- ZtiA==
-X-Gm-Message-State: AOJu0YwnW0I6jpN4/31hk43D6KZkIGzVh4OJs/flk3JH/KULj/QBRf5n
- 66T7vItjWE/VD7dgEAyviediNLO5HJt75F+h1jUsX4jXrkEp9/DwjD63OiVRnjZJID5c75mw+Nf
- BYSMNI8dUgw92qvEH+uTSXNKTRfDdv2r4uAAW
-X-Gm-Gg: ATEYQzxCWas32qAcnPs56x7gN57xs9SEDqqS4/ud37QHvjqRIjIC7+x/FR12w6joz1O
- /GDtipVCawUAHja6Jnd5Edf3ZbkGqpa2QKta9ohMcIUbhXrxX5FTKbBQF7sUsTs2KFPav0EJqwv
- 5DWCYYA/Ty7VKbpwRgvREW1OJczK3Rnkw2F3+yYRERj1f22jzDbBWHtnb7POXYUyhOwbfBGA9v3
- dZ2IAX3tep3SgppNeCwi90tfFfhGqjdlae4T4RPKtj85YAAeAIc4E8tRuEd4Ukl5tcmg00kpM3B
- Gu13kdlqiO7Q5m29H64OdDGBOvrMST3A0QuZHjQdYE7xWE9AEwp2N7mCWOctsAIjzSvYU+Mzoue
- AxQgw8EiqGyalM1Nldr4lRKHl64Pvwl17rgad7b7OB6FRhm5vAEt31CJQNGQ6nBuxq6cE38S9eu
- YjrkOc02LZeX0=
-X-Received: by 2002:a17:907:701:b0:b94:2913:2d12 with SMTP id
- a640c23a62f3a-b972e1fb8a1mr348370466b.17.1773317304606; Thu, 12 Mar 2026
- 05:08:24 -0700 (PDT)
+ bh=WBHFtypCZ7rtDKqSwijE+5qMmkgsdId8N+fuKAWekEA=;
+ b=OZaABYEgn0x3a3fO4Vxwax7d43eD9zW0VSE/ImHFeU1K/KMLVMF40t9xFnnMOgkjuP
+ QT3G7czn1vfn/KVwO1e5/LMDU7sufiH4ROMKGcaMD0KvpQB0LuoYAMbP5/Ut+8bPb8s6
+ gkYFWuLPY0DQyw6UE1RHyWoqIwurN6xmzgsknK+SSImSB19TRue1It0V6Mp6JXahc5Hh
+ bDOd4bb5MkMKgdrHEf4TAmsNiJlnOVcv2KYMSq7Kq5mZct08BF3CMc9TqxHWuvVju5rC
+ mSvw5mHBoGu8onOtelaqT2Jigo9CB7Wj4a76QqFPnEDBrkkw2C7EFE2pZfOC3JQL383A
+ DKgA==
+X-Gm-Message-State: AOJu0YydeIla/cDDDUoB/+wzxA/PBU/jQzsOTRofId/kln7inxPfoScs
+ AoCl9bXflkocB2joQXzT7v8wWNbp16sDpt7ONZ+v6/kT6fWlyZiOXaF/aZbP3d2TUU9532mOXmg
+ tLzUy/0Zvx3S1i0cs1/0jfC0TwwmWby5xO/tK
+X-Gm-Gg: ATEYQzzd227v7yjmhBBhyrYvqble18gmx14NLQSAldCxLdTEuM4jhpu3tio5illev5R
+ G8MtZLzPrNaRdF0STKzSeS84m9cAB1Cg3Bv13QIY4AvkiXttPiMr4nKWQb8EeWZwGaeGW1j17lv
+ fgr2NueZvpo7pbYqtXPwkoVnYtoD4zHY83PYrI+40vXXxQVtVA0eof9QnJsIYZqIN8ktXEsc5KM
+ FVGEgSWDgF9r6aKgP9RIT5HTJUy8qF6vGPm9om0h4geHXVv41FLTlu4BniOCXOBHE9TESO9eGAy
+ vsd9KlcoANga1y4w3dVqP9Re0KMISLbEwi4u1cVx8UQYj7sRvWRs1w510mKs6Hm0UbxtSmOJOMu
+ 9PGzqzCptQ2YrOab/mO0Q0NO4Igt7/Q3xlbYruSQvVWB5HGwPUoDmVBhjU1NHutNGfBjRSQTL0Y
+ Z78hPcN/I4YTw=
+X-Received: by 2002:a05:6402:1468:b0:660:af39:2ced with SMTP id
+ 4fb4d7f45d1cf-663189c4f40mr3664359a12.0.1773317319787; Thu, 12 Mar 2026
+ 05:08:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260216184452.18732-1-filip.kokosinski@gmail.com>
- <20260216184452.18732-2-filip.kokosinski@gmail.com>
-In-Reply-To: <20260216184452.18732-2-filip.kokosinski@gmail.com>
+ <20260216184452.18732-3-filip.kokosinski@gmail.com>
+In-Reply-To: <20260216184452.18732-3-filip.kokosinski@gmail.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 12 Mar 2026 12:08:13 +0000
-X-Gm-Features: AaiRm50J_bNNm_Jzp4vkfAHTkwFhVtU8C0ao7BqEYIUtfrLPtumBkIbrRB5MnLQ
-Message-ID: <CALeDE9NaHE3cWNP993TiVUVb6DgeJ7nRNawtepc-E_4qcgnvGQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] board/raspberrypi: add multi-FDT support
+Date: Thu, 12 Mar 2026 12:08:28 +0000
+X-Gm-Features: AaiRm53fFgWaWGUdI6OPgdNV_xm7noYavvjuqs9AzAS8bqi2aJ0bpS4Bh85eqvU
+Message-ID: <CALeDE9NqefkSCyHs6XNmc=voFUOOR8Vs+9=tCzUPL+bL3uSQzQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] board/raspberrypi: add bcm2712d0-rpi-5-b for
+ Raspberry Pi 5
 To: =?UTF-8?Q?Filip_Kokosi=C5=84ski?= <filip.kokosinski@gmail.com>
 Cc: u-boot@lists.denx.de, mbrugger@suse.com
 Content-Type: text/plain; charset="UTF-8"
@@ -119,300 +120,35 @@ X-Virus-Status: Clean
 On Mon, 16 Feb 2026 at 18:45, Filip Kokosi=C5=84ski
 <filip.kokosinski@gmail.com> wrote:
 >
-> This patch adds support for multiple FDT files per board model. This is
-> done by adding the FDTFILES macro, which initializes two rpi_model
-> struct members: fdtfiles and fdtcount.
->
-> The new-style revision codes designate LSB bits as board revision; this
-> value is used to choose between provided FDTs. The first element of the
-> fdtfiles list is used should no revision match.
+> This commit adds an FDT entry for the d0 stepping of the BCM2712 SoC.
+> This entry is used by the v1.1 revision of the board
+> (revision & 0x0f =3D=3D 1).
 >
 > Signed-off-by: Filip Kokosi=C5=84ski <filip.kokosinski@gmail.com>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 Tested-by: Peter Robinson <pbrobinson@gmail.com>
 
 > ---
->  board/raspberrypi/rpi/rpi.c | 93 +++++++++++++++++++++----------------
->  1 file changed, 52 insertions(+), 41 deletions(-)
+>  board/raspberrypi/rpi/rpi.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
 > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index f9b643555dd..1b404b448f3 100644
+> index 1b404b448f3..3d61d08f3a4 100644
 > --- a/board/raspberrypi/rpi/rpi.c
 > +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -94,120 +94,125 @@ struct efi_capsule_update_info update_info =3D {
->   */
->  struct rpi_model {
->         const char *name;
-> -       const char *fdtfile;
-> +       const char * const *fdtfiles;
-> +       size_t fdtcount;
->         bool has_onboard_eth;
->  };
->
-> +#define FDTFILES(...) \
-> +       (const char *[]){ __VA_ARGS__ }, \
-> +       sizeof((const char *[]){ __VA_ARGS__ }) / sizeof(const char *)
-> +
->  static const struct rpi_model rpi_model_unknown =3D {
->         "Unknown model",
-> -       DTB_DIR "bcm283x-rpi-other.dtb",
-> +       FDTFILES(DTB_DIR "bcm283x-rpi-other.dtb"),
->         false,
->  };
->
->  static const struct rpi_model rpi_models_new_scheme[] =3D {
->         [0x0] =3D {
->                 "Model A",
-> -               DTB_DIR "bcm2835-rpi-a.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
->                 false,
->         },
->         [0x1] =3D {
->                 "Model B",
-> -               DTB_DIR "bcm2835-rpi-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
->                 true,
->         },
->         [0x2] =3D {
->                 "Model A+",
-> -               DTB_DIR "bcm2835-rpi-a-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
->                 false,
->         },
->         [0x3] =3D {
->                 "Model B+",
-> -               DTB_DIR "bcm2835-rpi-b-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
->                 true,
->         },
->         [0x4] =3D {
->                 "2 Model B",
-> -               DTB_DIR "bcm2836-rpi-2-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2836-rpi-2-b.dtb"),
->                 true,
->         },
->         [0x6] =3D {
->                 "Compute Module",
-> -               DTB_DIR "bcm2835-rpi-cm.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
->                 false,
->         },
->         [0x8] =3D {
->                 "3 Model B",
-> -               DTB_DIR "bcm2837-rpi-3-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2837-rpi-3-b.dtb"),
->                 true,
->         },
->         [0x9] =3D {
->                 "Zero",
-> -               DTB_DIR "bcm2835-rpi-zero.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-zero.dtb"),
->                 false,
->         },
->         [0xA] =3D {
->                 "Compute Module 3",
-> -               DTB_DIR "bcm2837-rpi-cm3.dtb",
-> +               FDTFILES(DTB_DIR "bcm2837-rpi-cm3.dtb"),
->                 false,
->         },
->         [0xC] =3D {
->                 "Zero W",
-> -               DTB_DIR "bcm2835-rpi-zero-w.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-zero-w.dtb"),
->                 false,
->         },
->         [0xD] =3D {
->                 "3 Model B+",
-> -               DTB_DIR "bcm2837-rpi-3-b-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2837-rpi-3-b-plus.dtb"),
->                 true,
->         },
->         [0xE] =3D {
->                 "3 Model A+",
-> -               DTB_DIR "bcm2837-rpi-3-a-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2837-rpi-3-a-plus.dtb"),
->                 false,
->         },
->         [0x10] =3D {
->                 "Compute Module 3+",
-> -               DTB_DIR "bcm2837-rpi-cm3.dtb",
-> +               FDTFILES(DTB_DIR "bcm2837-rpi-cm3.dtb"),
->                 false,
->         },
->         [0x11] =3D {
->                 "4 Model B",
-> -               DTB_DIR "bcm2711-rpi-4-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2711-rpi-4-b.dtb"),
->                 true,
->         },
->         [0x12] =3D {
->                 "Zero 2 W",
-> -               DTB_DIR "bcm2837-rpi-zero-2-w.dtb",
-> +               FDTFILES(DTB_DIR "bcm2837-rpi-zero-2-w.dtb"),
->                 false,
->         },
->         [0x13] =3D {
->                 "400",
-> -               DTB_DIR "bcm2711-rpi-400.dtb",
-> +               FDTFILES(DTB_DIR "bcm2711-rpi-400.dtb"),
->                 true,
->         },
->         [0x14] =3D {
->                 "Compute Module 4",
-> -               DTB_DIR "bcm2711-rpi-cm4.dtb",
-> +               FDTFILES(DTB_DIR "bcm2711-rpi-cm4.dtb"),
->                 true,
+> @@ -197,7 +197,10 @@ static const struct rpi_model rpi_models_new_scheme[=
+] =3D {
 >         },
 >         [0x17] =3D {
 >                 "5 Model B",
-> -               DTB_DIR "bcm2712-rpi-5-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2712-rpi-5-b.dtb"),
+> -               FDTFILES(DTB_DIR "bcm2712-rpi-5-b.dtb"),
+> +               FDTFILES(
+> +                       [0] =3D DTB_DIR "bcm2712-rpi-5-b.dtb",
+> +                       [1] =3D DTB_DIR "bcm2712d0-rpi-5-b.dtb"
+> +               ),
 >                 true,
 >         },
 >         [0x18] =3D {
->                 "Compute Module 5",
-> -               DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb",
-> +               FDTFILES(DTB_DIR "bcm2712-rpi-cm5-cm5io.dtb"),
->                 true,
->         },
->         [0x19] =3D {
->                 "500",
-> -               DTB_DIR "bcm2712-rpi-500.dtb",
-> +               FDTFILES(DTB_DIR "bcm2712-rpi-500.dtb"),
->                 true,
->         },
->         [0x1A] =3D {
->                 "Compute Module 5 Lite",
-> -               DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb",
-> +               FDTFILES(DTB_DIR "bcm2712-rpi-cm5l-cm5io.dtb"),
->                 true,
->         },
->  };
-> @@ -215,87 +220,87 @@ static const struct rpi_model rpi_models_new_scheme=
-[] =3D {
->  static const struct rpi_model rpi_models_old_scheme[] =3D {
->         [0x2] =3D {
->                 "Model B",
-> -               DTB_DIR "bcm2835-rpi-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
->                 true,
->         },
->         [0x3] =3D {
->                 "Model B",
-> -               DTB_DIR "bcm2835-rpi-b.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b.dtb"),
->                 true,
->         },
->         [0x4] =3D {
->                 "Model B rev2",
-> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
->                 true,
->         },
->         [0x5] =3D {
->                 "Model B rev2",
-> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
->                 true,
->         },
->         [0x6] =3D {
->                 "Model B rev2",
-> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
->                 true,
->         },
->         [0x7] =3D {
->                 "Model A",
-> -               DTB_DIR "bcm2835-rpi-a.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
->                 false,
->         },
->         [0x8] =3D {
->                 "Model A",
-> -               DTB_DIR "bcm2835-rpi-a.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
->                 false,
->         },
->         [0x9] =3D {
->                 "Model A",
-> -               DTB_DIR "bcm2835-rpi-a.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a.dtb"),
->                 false,
->         },
->         [0xd] =3D {
->                 "Model B rev2",
-> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
->                 true,
->         },
->         [0xe] =3D {
->                 "Model B rev2",
-> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
->                 true,
->         },
->         [0xf] =3D {
->                 "Model B rev2",
-> -               DTB_DIR "bcm2835-rpi-b-rev2.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-rev2.dtb"),
->                 true,
->         },
->         [0x10] =3D {
->                 "Model B+",
-> -               DTB_DIR "bcm2835-rpi-b-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
->                 true,
->         },
->         [0x11] =3D {
->                 "Compute Module",
-> -               DTB_DIR "bcm2835-rpi-cm.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
->                 false,
->         },
->         [0x12] =3D {
->                 "Model A+",
-> -               DTB_DIR "bcm2835-rpi-a-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
->                 false,
->         },
->         [0x13] =3D {
->                 "Model B+",
-> -               DTB_DIR "bcm2835-rpi-b-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-b-plus.dtb"),
->                 true,
->         },
->         [0x14] =3D {
->                 "Compute Module",
-> -               DTB_DIR "bcm2835-rpi-cm.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-cm.dtb"),
->                 false,
->         },
->         [0x15] =3D {
->                 "Model A+",
-> -               DTB_DIR "bcm2835-rpi-a-plus.dtb",
-> +               FDTFILES(DTB_DIR "bcm2835-rpi-a-plus.dtb"),
->                 false,
->         },
->  };
-> @@ -361,11 +366,17 @@ int dram_init_banksize(void)
->  static void set_fdtfile(void)
->  {
->         const char *fdtfile;
-> +       int rev =3D revision & 0x0f;
->
->         if (env_get("fdtfile"))
->                 return;
->
-> -       fdtfile =3D model->fdtfile;
-> +       /* set the first entry as default */
-> +       fdtfile =3D model->fdtfiles[0];
-> +
-> +       if (rev < model->fdtcount)
-> +               fdtfile =3D model->fdtfiles[rev];
-> +
->         env_set("fdtfile", fdtfile);
->  }
->
 > --
 > 2.51.2
 >
