@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA2A0FED2E1
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 07:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 652E3FED2DD
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 07:50:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A21D83F9A;
-	Thu, 12 Mar 2026 08:49:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E95A984119;
+	Thu, 12 Mar 2026 08:50:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="LkVyalQw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="scmtXMwy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 115D183F9A; Thu, 12 Mar 2026 08:49:31 +0100 (CET)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id B82B88410C; Thu, 12 Mar 2026 08:50:24 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2871D83F8A
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:49:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBDCA83F8A
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 08:50:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EF71A60054;
- Thu, 12 Mar 2026 07:49:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7631C4CEF7;
- Thu, 12 Mar 2026 07:49:21 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 5192243EBB;
+ Thu, 12 Mar 2026 07:50:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04443C4CEF7;
+ Thu, 12 Mar 2026 07:50:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773301767;
- bh=TYqtizPQvLw6sBHBu6CitoM/8185MTD0k9lVaP6FJcs=;
+ s=k20201202; t=1773301821;
+ bh=WTLc2XEFfEbpd0DhhNJra+0n0YJopANftWgx8GonSMA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LkVyalQwjJmXWXNx85XN9JeU7LyRDr+9OyZ9NPlkub4irkqdxMlZLNpsf/VK/Y0Aa
- 8Nr+I20Dono6Gsxuf0ECDbL/siCOGuPHcdVYqQj0XndKiyPOQtzjMstGf8OzPClpeH
- C2sHypJC8ImJeOpUYAo/S5cSyGVmDFUCkukDPtE8jv5Sbx4vfMGP+aujT/Nz1aoIkq
- NrLdOsEr9y9NddEe6xi4BjthI/NKd0ctoSTqZDyqAzoCLBlB1f3H02J50sKLgt/KKA
- eijz4GdItNqHjbVG3BefXqcO5edRlNpIDSH8qFG66P7+RZijCLX9U9fJ7RNZ8DYGHp
- WGOqoGlhhKxFw==
-Date: Thu, 12 Mar 2026 13:19:18 +0530
+ b=scmtXMwyuyt1Rv7baOsMiaWlBrBPYljH9ByvTkpFMaFWBVnR6xcqsirwZXjlxtyr3
+ yOhLIAJzP9eA3CEY7nNVsHLt2+NL5H7Axo4PE6F+9B13WhsXqfUSuY9jGZOEzn6le0
+ REtdiIXm/92WyMYSFKYEboJYaqDxMW1N9G5wAZypnz58VrSj88WFnAoWPQo/7rTpql
+ EU8JaSZOFHvqyp34IiJLrn/xBCRpMf0hgHm263OJnmnzS1tm48MuUY8pqoJQglf5LC
+ 9JQDQnS7TrMNFXDtp1zUu9n64VmBZLMhs0Vs0m6YJwK/bHdLRrKOM+CygooWduSTjH
+ yQkwRbwf/g0GA==
+Date: Thu, 12 Mar 2026 13:20:12 +0530
 From: Sumit Garg <sumit.garg@kernel.org>
 To: Luca Weiss <luca.weiss@fairphone.com>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
@@ -57,14 +56,14 @@ Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, Tom Rini <trini@konsulko.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
  Rui Miguel Silva <rui.silva@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Sam Day <me@samcday.com>
-Subject: Re: [PATCH 5/7] gpio: qcom: Support GPIOs on PM7550 PMIC
-Message-ID: <abJv_muULwwZ_78R@sumit-xelite>
+Subject: Re: [PATCH 6/7] qcom_defconfig: Enable Milos clock driver
+Message-ID: <abJwNFz1Ul1PTZXS@sumit-xelite>
 References: <20260311-milos-bringup-v1-0-eb905c467f10@fairphone.com>
- <20260311-milos-bringup-v1-5-eb905c467f10@fairphone.com>
+ <20260311-milos-bringup-v1-6-eb905c467f10@fairphone.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260311-milos-bringup-v1-5-eb905c467f10@fairphone.com>
+In-Reply-To: <20260311-milos-bringup-v1-6-eb905c467f10@fairphone.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,14 +80,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 11, 2026 at 03:20:45PM +0100, Luca Weiss wrote:
-> The GPIOs on PM7550 work fine using the qcom_spmi_gpio driver and
-> enables the use of the Volume Up button on the Fairphone (Gen. 6)
-> smartphone.
+On Wed, Mar 11, 2026 at 03:20:46PM +0100, Luca Weiss wrote:
+> Enable the driver so that Milos devices can boot with qcom_defconfig.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->  drivers/gpio/qcom_spmi_gpio.c | 1 +
+>  configs/qcom_defconfig | 1 +
 >  1 file changed, 1 insertion(+)
 
 Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
@@ -96,18 +93,18 @@ Reviewed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
 -Sumit
 
 > 
-> diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-> index 1a7c7c48dfc..77a69140213 100644
-> --- a/drivers/gpio/qcom_spmi_gpio.c
-> +++ b/drivers/gpio/qcom_spmi_gpio.c
-> @@ -747,6 +747,7 @@ static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
->  	{ .compatible = "qcom,pm6350-gpio" },
->  	{ .compatible = "qcom,pm660l-gpio" },
->  	{ .compatible = "qcom,pm7325-gpio" },
-> +	{ .compatible = "qcom,pm7550-gpio" },
->  	{ .compatible = "qcom,pm8550-gpio" },
->  	{ .compatible = "qcom,pm8550b-gpio" },
->  	{ .compatible = "qcom,pm8550ve-gpio" },
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index fe5880de1fd..44c1cef725c 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -56,6 +56,7 @@ CONFIG_CLK=y
+>  CONFIG_CLK_STUB=y
+>  CONFIG_CLK_QCOM_APQ8016=y
+>  CONFIG_CLK_QCOM_APQ8096=y
+> +CONFIG_CLK_QCOM_MILOS=y
+>  CONFIG_CLK_QCOM_QCM2290=y
+>  CONFIG_CLK_QCOM_QCS404=y
+>  CONFIG_CLK_QCOM_QCS615=y
 > 
 > -- 
 > 2.53.0
