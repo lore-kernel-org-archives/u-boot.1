@@ -4,122 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4849106ACCA
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 16:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1FE106ACC9
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 16:19:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15E86842CD;
-	Thu, 12 Mar 2026 17:15:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 27F1B842DB;
+	Thu, 12 Mar 2026 17:19:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="we0ErxbP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="GA9QSwkQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B92F842CE; Thu, 12 Mar 2026 17:15:00 +0100 (CET)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 40586842E0; Thu, 12 Mar 2026 17:19:27 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B859C842CC
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 17:14:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D83F842CC
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 17:19:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FGN9OHbo9AFs0mRNDnWTPsWfGydrEQ28IE2Q4aG7mnsRt7bBhgDF19ImZwbTJgtfP4+FYJ+2fExKA3o9zcB+CzmzEiqyNnMR2PA0Mhh9bM/K1ZpgRfkuOJ5QCzZsd+epg6idtoPk1qXDZbJeu3Qj0AsT9yL2YSBUwbu7h5Tx7lZ1Vr4u+medKO7tJQvbgcfctv18Y69GLxcQ+tKttpwGYfY9wrOla5r0kxKUi6flchEMV7mzbQWf1iIfy4D9uvFXsIMi71zAYbuNJA5yR5tJRBTnEgqL5oH3DOGBJiOY9+gId6pZJ9K8VHoySLTgIMU+GLSxhtjS2ISMW62Icm/0rg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QZCIGmECu3MzBC+8483Z/vuhlFRbbLN27LteKiBOvZg=;
- b=FjCW3wbyvHZjrPjICWLD6t0HrcNbA/UL64L+6bJ4suqQSuIkQpj0ijQU1536J2hXby5YCFG3O87jwTy7E22P3kYpC0N67xNYDusAP/qISnRHKnPamNuK8TElRQHYlzphXxjVoH7jLi2pQkxXOhlFqYGc3e3zxsUbdcSy6/m9tS3CeL5JGUYFXEIWotqnIClQtcK/r0l9i0IrPqaMe4w2rL/LUpFJLIkZ+a6z8tR/TDnu6TYhjy+iE8wavzkbeqXJcwmzRjRo/8fp2Jo2cNckkpc52eQHJ89QjnWIG4mcmAKazcAGkInZTnU1cfDL3WJvXyyYTabhz4+/23GEhSBuZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=toradex.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QZCIGmECu3MzBC+8483Z/vuhlFRbbLN27LteKiBOvZg=;
- b=we0ErxbP30FRcZvbTDWFEsJr2RRFrmrpRGuJX9I+93aJAmctg/ewnVcWcziAnSiSJR5h/MrQWKJ7tAfjHdO6R1U2DJ5vw8I1Z3r3kfXGT7AGOswh+54YSg0somtZCB/kHQ2Ry4zdpT+1IyZAwNQAK8ajtpAo1ZpbSDu4GD+KYHw=
-Received: from BL0PR02CA0122.namprd02.prod.outlook.com (2603:10b6:208:35::27)
- by PH0PR10MB4455.namprd10.prod.outlook.com (2603:10b6:510:36::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
- 2026 16:14:53 +0000
-Received: from BL6PEPF0001AB76.namprd02.prod.outlook.com
- (2603:10b6:208:35:cafe::5) by BL0PR02CA0122.outlook.office365.com
- (2603:10b6:208:35::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.27 via Frontend Transport; Thu,
- 12 Mar 2026 16:14:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BL6PEPF0001AB76.mail.protection.outlook.com (10.167.242.169) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9654.16 via Frontend Transport; Thu, 12 Mar 2026 16:14:51 +0000
-Received: from DLEE213.ent.ti.com (157.170.170.116) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
- 2026 11:14:50 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 12 Mar
- 2026 11:14:50 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 12 Mar 2026 11:14:50 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62CGEoWa2608750;
- Thu, 12 Mar 2026 11:14:50 -0500
-Date: Thu, 12 Mar 2026 11:14:50 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Suhaas Joshi
- <s-joshi@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew Davis
- <afd@ti.com>, Dhruva Gole <d-gole@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Daniel Schultz <d.schultz@phytec.de>,
- =?utf-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>
-Subject: Re: [PATCH next v3] arm: mach-k3: use Kconfig options for ATF/OPTEE
- size
-Message-ID: <20260312161450.25vb3gugnnr24bj6@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20260312-tfa_tee_addr_kconfig_refactor-v3-1-86c92718e048@ti.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-439cd6b09f8so1055188f8f.3
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 09:19:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773332364; x=1773937164;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fGXGbsKPYISg3Yo0JXsmxV5IgU1Y06bDIm0gXi8F2b0=;
+ b=GA9QSwkQsf/2vxaqNP0LqXVK+OWd5FZWlD1DNnSRHQhedTg5eNRiMJg8SQsnWPW3t+
+ ITb+PEnjJGfcJ2V6qw6DSUogtsYZLs+MUGwOKDn+woFgFQMGXviG59Qb7PmANRqxBKjN
+ isvrkd4bWdZ1u7nT7xmvGK3Mq5EyO8mbyHZuQInXWGq0wgKtWEOyhhtPJpvct2QN1+pu
+ GO2ZaYa75QNxrBn5OsLWNvv+IvUprSi2fASaJbN3yhAyGYJkxNgooLUR7YAUBruVowYG
+ UEw8gLoemrojzPXqC1Ao1hZTCy9muFcOOPwRWl77txztUiUbW1tKZobQlcKpxtlfg4Pe
+ Lg6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1773332364; x=1773937164;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fGXGbsKPYISg3Yo0JXsmxV5IgU1Y06bDIm0gXi8F2b0=;
+ b=qQtt6HieJPT1401O9Yc8Odah+jJZRlVobZw22apakpz3a6TrK6ruNoZnU5HYUhqBVz
+ djnWxiMhmnYY6h6bZUZPdBh/Q5wkNh2p1f/oCmd10rXOTkMhprTRpyXa/iE7f4n6C/ok
+ Avvmxt+9i6Q/6l911sBmHIGnGev7CIzKyNOhELKT+EZ6uOpv13hsogGqJey9GpuW/uB/
+ HGMXeeqBc17+BbFDd0UGOCyV71GWiwD4jK3kGM96i0O6BDDFW/H+AsIhnuBJRghJ/35V
+ VF4X71J6aBwW/apRXeydM/r0D/cDPiIsG5WmXHyWjCSkPyAw1btPEtE7RNorwFBJdHKW
+ +M9Q==
+X-Gm-Message-State: AOJu0YwbH60efFuxn3LXuBHJNo4C14WOuYecty1FDj07lSfroCHOQ0Tb
+ V700Uu4Mx8H3JUBowclon/1L5V+oOP8dc92D4T9elSdaCcyDBIhMVGy2uRf1YEgSyMg=
+X-Gm-Gg: ATEYQzzO6BYo9tnJoaYhpJ4QtBbLIKb10e+uXqxkrXSWLF/r+DFYrFKiyFBUDGdkPi+
+ 0Hgba3ckUlNr9KyDeKbWe+SG0bSyaqVdXqqDFc+OGOwFpf1PIa6cTNY43bVFF6t/qQNwsAVC8zF
+ OTfrEsw9cPRHByaOl4+BdF2IO3jWcVVbTw2Esq0bAZQTAy439uQJNe9Tz79qt+QdUgOqk+CWxG8
+ K43FH6IkUOpNyeCLkW66XEEWTF2tMQPOP54MmO61xEp6qj7xsmwf3bN3H5QVHyqIyMJj97l30QF
+ 1wGljtTnckt1bqGJLW4R7yH9K0mFvuYmcDpe7nyKu1JfOcZEm6J36yOh2Wmu7Fr+xpdIQHPB/eO
+ JZGbHFl1az0xGHCvTwk+dVnegAN4iU13a2217KBoXraDuBOLTAkw0e1fHse8n189a9P2HqwoqUs
+ hLSyM278rdLEjmcSaZwzfYZcpfdD4NGYfeMmAXgShhK2t+78KRLkHADOCCrTj3XxVjCgkdIS13O
+ /mEHhbpYXqs6nS1s/2CSlEx5z2+AslydAXZ6joOKcOJbXm9xCOHr9oeDXEpdgs1vvPgDMDxmdeG
+ h9qx+NE=
+X-Received: by 2002:a05:600c:37c6:b0:485:3fc6:c0f3 with SMTP id
+ 5b1f17b1804b1-4854ad723c2mr118976225e9.0.1773332364555; 
+ Thu, 12 Mar 2026 09:19:24 -0700 (PDT)
+Received: from [192.168.1.100]
+ (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
+ [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-439fe20b4dasm9569953f8f.18.2026.03.12.09.19.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Mar 2026 09:19:24 -0700 (PDT)
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Thu, 12 Mar 2026 17:19:26 +0100
+Subject: [PATCH] pinctrl: mediatek: Add missing bind callback for several SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20260312-tfa_tee_addr_kconfig_refactor-v3-1-86c92718e048@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB76:EE_|PH0PR10MB4455:EE_
-X-MS-Office365-Filtering-Correlation-Id: e8052b59-7624-4562-f829-08de80527d5c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700016|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: 1Ln7mC3WkveKVgdc4mCjAbNdpbj8nbtJFfsG+9ccWVHMX+6hAkown9GTkyF1AeY12WrzXAz+cCGS2JAD7drTItgaCAkpVDnCHby3EoZeJEOCvRVjHdxIYUjmFf4z3gG2eyfu6HaGeq6AAvohTeYZOgQLVUK29GF9iHcV/BYKLn4sE8KuAl7UFMij5jqxmz9o5qk+Pj/Pu2Ohy08I1bwqHhtevnmqbJcmdFzwW0l//cJcp/BYMOT/crYIN9H4jpL/8fI//43LaLHdTTykcjmYAKRWf/2/8L4C2/vQKiBsh8WCHxkGLMdwq4Fw1o7GBsdVyv/eQCEWTTWDPvHhndHq2+/hiTM9RHMrCozWFDYACnMxqv9iGL1JCvPNR05RfdI88wFuofX3zYMYwhvP4ohYQKLRkzfGkkSGxY0+9Sw4xGT50zekWwI5V6S0CnRAfPFOe6cyYuPGQxMlGuxnLLIUwGwW8TexP1ztrsWqxHrCw0WoJZkj7cE2Q1dytnffzgLH3bFnmZR5sJGWbmBhULuWp10KPb0BGQp0kIrFgCqB4whqf8FQBHqdERj6T9j+VXUS4r4KWI5tDKRODgEgr80+EorigW6m2XSBR96jw0iKT7R2k9n4vQKEiSZqNITkvp1EQjy8ynebuv1LL4bBg68xae1kvpD89dvO36AJoRgwSoqLxZ9IOCibdVUyxaUqPa58hZiVs1vRi/K0Iymh9+TzP+6/wMR0twyo9IwkZYoN/bzWBTYzobOo0tsKoygTkypgIzm1bQQ8I3KnPDcTmJ1W0Q==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700016)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: Fyl0nmgR+2Q73FvjRltnAbfD7orhTIynwrQrC+IZFwrjLJqUXAsht2kKm9sxHEoYNzY+cMKBkIPYho1aQac5Y6rFy9I/a2BEIlNSTUCLcnoUA+AgPjIQeWumfJf3UOJ1NFcoXwP+fBz76mBmsQJeROlop0ndKonMSt6Hf+6Me0mH6ZWF0iQFECFtJ881DYEtPU9UHf2LEgQgV5k3jGKZuD7UOrgdLMaKzTCojjLynW4qfCtm79MvuSmdPSaPCLMFNtX7MXuG4+rs2jhjG/235uH0qo7OZAJJgRmyV/fHjTmrXPcgtbTEoBcJvLiGofkGn/YtZbzeY513pS0R7TbsKIoRjf13D1pIzhAHh76mVQoT85dbWLVmtsQTtlk71Jb/v+4Wy4HvaFyRnuMpmxNq9W89njzqXXdOIOOIhdYHUA3OcBndMezoKMyFKkBpy7XF
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 16:14:51.0977 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e8052b59-7624-4562-f829-08de80527d5c
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB76.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR10MB4455
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260312-pinctrl-mtk-bind-gpio-v1-1-21b8968902ed@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MywqAIBBA0V+JWTeg9iD7lWjRY7KhMlGJIPr3p
+ OVZ3PtAIM8UoM0e8HRx4NMmyDyDaR2sIeQ5GZRQtSikQsd2in7HI244sp3ROD5RN1pLIt3IsoL
+ UOk8L3/+369/3A7oa5cBnAAAA
+X-Change-ID: 20260312-pinctrl-mtk-bind-gpio-98991ee98145
+To: u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ Tom Rini <trini@konsulko.com>, Chris-QJ Chen <chris-qj.chen@mediatek.com>, 
+ "Jill.Wu" <shu-yun.wu@mediatek.com>, Macpaul Lin <macpaul.lin@mediatek.com>, 
+ Vitor Sato Eschholz <vsatoes@baylibre.com>, 
+ Bo-Chen Chen <rex-bc.chen@mediatek.com>, 
+ David Lechner <dlechner@baylibre.com>, Julien Masson <jmasson@baylibre.com>, 
+ Julien Stephan <jstephan@baylibre.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,23 +113,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On March 12, 2026 thus sayeth Anshul Dalal:
-> The reserved memory sizes for ATF and OPTEE were hard-coded for K3
-> devices, this patch replaces them with a Kconfig option allowing for
-> easier modifications.
-> 
-> Acked-by: Andrew Davis <afd@ti.com>
-> Reviewed-by: Dhruva Gole <d-gole@ti.com>
-> Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
-> Changes in v3:
-> - Pick R-by tag from Manorit
-> - Change help and prompt text to use the generic 'memory' instead of DDR
-> - Link to v2: https://lore.kernel.org/r/20260311-tfa_tee_addr_kconfig_refactor-v2-1-d66bbdb36a3e@ti.com
+Commit f4df9f53b7a9 ("pinctrl: mediatek: Bind gpio while binding pinctrl")
+refactored pinctrl-mtk-common.c and the SoC-specific drivers to register
+the gpiochip during the bind phase instead of probe. As part of this
+change, each SoC driver must implement a bind callback.
 
-This is what I get for not sorting my mail newest first :/
+The drivers recently added for mt8188, mt8189, mt8195 and mt8365 do not
+define this callback, which prevents the gpiochip from being registered
+properly.
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
+Add the missing bind callback to these drivers.
 
-~Bryan
+Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+---
+ drivers/pinctrl/mediatek/pinctrl-mt8188.c | 1 +
+ drivers/pinctrl/mediatek/pinctrl-mt8189.c | 1 +
+ drivers/pinctrl/mediatek/pinctrl-mt8195.c | 1 +
+ drivers/pinctrl/mediatek/pinctrl-mt8365.c | 1 +
+ 4 files changed, 4 insertions(+)
+
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8188.c b/drivers/pinctrl/mediatek/pinctrl-mt8188.c
+index 386d4d4a922..256053f269f 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt8188.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8188.c
+@@ -1339,6 +1339,7 @@ U_BOOT_DRIVER(mt8188_pinctrl) = {
+ 	.id = UCLASS_PINCTRL,
+ 	.of_match = mt8188_pctrl_match,
+ 	.ops = &mtk_pinctrl_ops,
++	.bind = mtk_pinctrl_common_bind,
+ 	.probe = mtk_pinctrl_mt8188_probe,
+ 	.priv_auto = sizeof(struct mtk_pinctrl_priv),
+ };
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8189.c b/drivers/pinctrl/mediatek/pinctrl-mt8189.c
+index b798f3c019b..a64440d8bb3 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt8189.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8189.c
+@@ -1271,6 +1271,7 @@ U_BOOT_DRIVER(mt8189_pinctrl) = {
+ 	.id = UCLASS_PINCTRL,
+ 	.of_match = mt8189_pctrl_match,
+ 	.ops = &mtk_pinctrl_ops,
++	.bind = mtk_pinctrl_common_bind,
+ 	.probe = mtk_pinctrl_mt8189_probe,
+ 	.priv_auto = sizeof(struct mtk_pinctrl_priv),
+ };
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8195.c b/drivers/pinctrl/mediatek/pinctrl-mt8195.c
+index 031ad5f6a8a..db619766a99 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt8195.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8195.c
+@@ -1074,6 +1074,7 @@ U_BOOT_DRIVER(mt8195_pinctrl) = {
+ 	.id = UCLASS_PINCTRL,
+ 	.of_match = mt8195_pctrl_match,
+ 	.ops = &mtk_pinctrl_ops,
++	.bind = mtk_pinctrl_common_bind,
+ 	.probe = mtk_pinctrl_mt8195_probe,
+ 	.priv_auto = sizeof(struct mtk_pinctrl_priv),
+ };
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8365.c b/drivers/pinctrl/mediatek/pinctrl-mt8365.c
+index a6985e48858..0ce99b92a9f 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt8365.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8365.c
+@@ -596,6 +596,7 @@ U_BOOT_DRIVER(mt8365_pinctrl) = {
+ 	.id        = UCLASS_PINCTRL,
+ 	.of_match  = mt8365_pctrl_match,
+ 	.ops       = &mtk_pinctrl_ops,
++	.bind = mtk_pinctrl_common_bind,
+ 	.probe     = mtk_pinctrl_mt8365_probe,
+ 	.priv_auto = sizeof(struct mtk_pinctrl_priv),
+ };
+
+---
+base-commit: 4ea741b6128e3db998b5a111ffeeb45f158b7116
+change-id: 20260312-pinctrl-mtk-bind-gpio-98991ee98145
+
+Best regards,
+-- 
+Julien Stephan <jstephan@baylibre.com>
+
