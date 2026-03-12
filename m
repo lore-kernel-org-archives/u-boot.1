@@ -4,123 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 238CAFED2FE
-	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 10:01:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BFA6FED2FE
+	for <u-boot@archiver.kernel.org>; Thu, 12 Mar 2026 10:08:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1F278420C;
-	Thu, 12 Mar 2026 11:01:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 4F55784166;
+	Thu, 12 Mar 2026 11:08:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="H3JXBcI/";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="g1Hjx39G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F3E783F2A; Thu, 12 Mar 2026 11:01:27 +0100 (CET)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 491088416C; Thu, 12 Mar 2026 11:08:48 +0100 (CET)
+Received: from www537.your-server.de (www537.your-server.de [188.40.3.216])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74E3B8420C
- for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 11:01:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 46EF484150
+ for <u-boot@lists.denx.de>; Thu, 12 Mar 2026 11:08:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YtXi0VimFHuePMNTwN5p9xLyu4hZQDvd3GDGsB2rD+7Zs49rcwvm2qmMjPOxEgh8SKOYQJL8smfm7JiHBsqrWodLqjBfz9ThvLAnU5vl8V/wgzB6C/amSHw22KpnC/iJyWwnErj2TGszOXxHZtSCRj8VF7rAOaUZrmhJqTYOsio3pQZqRxDYH7PTS1EwfVHrP41kzp27xHz2IBhZ+soUvIdLVLrBIRDe8j/BGrjEZWCI3jruJRAMCFAYlyhgj5pIC+00iiMnAjluJvHmRpmKqSHaq90mzlWPUYSKmT2LUpXi/7AjY46V8kqZ4dl/ZPQprxCuCekOjw7yz7PxQyqFiQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7Pn4xDDqjzZgmidy30alrk9mcoXhODsgURKf8dlxTrc=;
- b=MKL8OyIOJHql02wbiDPdsOqdKsy5XCKGS/aXp7JS1g8Vw8IhV8mDggGXcNNS1cKtzJ2YK3PHw2HaDeewMUVwwPhegHNRovucxzRwXytuZi2wvEUmmP6vCfqSQ1biCtOrSAtg+5Tr5opXsdlvaE+yUwfZZIO+LVF/MaD6kYb912go8F2vSNxLGqDAzfZD9/cNV5zNHDSmC2LXlBcvFOpJX2EkFkChrjoaRWBCtMeHDZyfITJFEcOErWWABvGc7R46nsJI9Yml7X/Q/NLC/vt3tZU2pNPzaAjJ46zYDQW52X5yhFpzpDPjtjj19ZwjriTvXxdOpx1TnIZwtZ1fASqOxw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7Pn4xDDqjzZgmidy30alrk9mcoXhODsgURKf8dlxTrc=;
- b=H3JXBcI/7JS8QWKus3v8bsEyhv+s67MIQiRRYy3mnVtSm33U7sm2AVkXTBhWNx2BMczdD8U2WIKcKR6N8xaCVWc9ghVGRVJJnJSxXZsIG1qYrkTV9C5bP2DHMcKKZ8cfKqw1KIoZa6FKwZSZIX4w3Brr1cPQn8YR2PtBTxj0diA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by GV2PR10MB6694.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:b6::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Thu, 12 Mar
- 2026 10:01:22 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::ebc6:4e0d:5d6b:95d8%5]) with mapi id 15.20.9700.013; Thu, 12 Mar 2026
- 10:01:22 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH v2 4/4] cmd: test: fix handling of single-argument form of test
-Date: Thu, 12 Mar 2026 11:01:06 +0100
-Message-ID: <20260312100106.702368-5-ravi@prevas.dk>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260312100106.702368-1-ravi@prevas.dk>
-References: <20260312100106.702368-1-ravi@prevas.dk>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0067.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::34) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=Max.Merchel@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ew.tq-group.com; s=default2602; h=Content-Transfer-Encoding:MIME-Version:
+ References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID;
+ bh=DNuKQoTZTwwTTvov1JeCyxbeWWyVSrtrHK6liINwKCg=; b=g1Hjx39GF56Ktjat51IUmgXhUi
+ yutDAHIjl7aNN2N81Lhv/AEZDpWJRKKq1WYSUzdy7qQlmIkdRv9hsWCPajpSXpwFS8nB5PuKL5jeP
+ e8vhidBDpnazQUnvlarsCoGu9X4dK2FzPGwCNsTI5HgEbtO2e1DOgCfLf8+hbLAXTsr4rK3Q0u2ug
+ NaOYqYf1N3duhKlKzvl6uindVAt80jvK3Zo+fE12iszJpxMu30oza0YM/r0fXTwNVplfFdtsSkBxn
+ K9cZ/OdQofqz//L9BO2YtSdd6ZuU5BSl50FdJ/7ZlFDt/XfpEsGLZVHxJ8zv2jgUqOxHLaJyb7U/7
+ vAFfjcqw==;
+Received: from sslproxy07.your-server.de ([78.47.199.104])
+ by www537.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96.2) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1w0cyD-000A6P-1r; Thu, 12 Mar 2026 11:08:45 +0100
+Received: from localhost ([127.0.0.1])
+ by sslproxy07.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96) (envelope-from <Max.Merchel@ew.tq-group.com>)
+ id 1w0cnT-000Fyo-0i; Thu, 12 Mar 2026 10:57:39 +0100
+From: Max Merchel <Max.Merchel@ew.tq-group.com>
+To: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Paul Gerber <Paul.Gerber@ew.tq-group.com>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com, Max Merchel <Max.Merchel@ew.tq-group.com>
+Subject: [PATCH 13/13] board: tqma6: update eMMC DSR handling
+Date: Thu, 12 Mar 2026 10:57:09 +0100
+Message-ID: <20260312095711.3219756-14-Max.Merchel@ew.tq-group.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
+References: <20260312095711.3219756-1-Max.Merchel@ew.tq-group.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|GV2PR10MB6694:EE_
-X-MS-Office365-Filtering-Correlation-Id: f777a8df-6274-4669-5d93-08de801e5071
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|376014|366016|38350700014|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: /TP6s1Rwg1anYxbQ5U17X/qEo0P5bu1Uv/l4LMzwc+wJnjFhcCah5L4sbioeM81hAXL1yrI3x63IcAoVXqVofjhbBVncLmKoPIE/fxaejiKOk+AGIJbv4d6pbU3JaW4Ic/HXFMOsqY8379NF2s9uHMCZeKoLkjEFpvzr9lMC5aHSL+NZPDSmHmmyRBvvxqtOL0gGWIEHcTfgiapaPhAhbDgA9lWi7JkQVyCZSulhI0vLz2P/281MgOrc8Hw0VbnvjDidWgzoDKBKSv+83lB7TGbicfRjQ0MGBPiQzyQEfnw8PTLS/+R5VZIf2VZZUpM6EvjOTaxgq0XpVU5o2ZGOuteOdMS2CQU3VGhpllAm5dPfK/JjSH1UPCzsUQoWuNwOR2wOlITHHV1EXEd+sBl8r5BFrZcUYZSIpRDZyLYZSSxfNj4GgXOgFJyScMNSnXlPlEH/UZcDplfCqtgyI5Y6zPCXd30A1Cmecy8nd2FrkHGcCmOJIyr7njo+kWymYnvcNkAVClVb0j6aZ3wEURyvMCjwHPn85KMtPjcbWVhZI+A5vnhyq9Y3WEwMoTgEEfD7OxIL1YyCtGUGpvF99NTRt1ATSYNfS1wRGnUJXmjHpAIeAC8WEhymabaReWRV/PzUkomdtV+Gm6fx+GhJrGgJq2cTGAGh+x4g3EnjJsJhWWBDYGwu2wTaCBTUscdspCEmi2IxBq1k4mZK8vGrStehiQYg7FDCiZ5rRSub5iuve/McA2TR0lbnvYXlO3y0BnIxlPAYLu8tDvLCtr1nWkKIxjNPE1J0NMZygwwuSv5uh3s=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014)(22082099003)(56012099003)(18002099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?I1s9b0olBAcUJAjuhCtUsBxNOzaa1evV7AuQKUew7+KEuXhy/0QEOVCr79cC?=
- =?us-ascii?Q?/zEXidisq4ZnFhqsjRegYF6KVNj1dg1kc4xXNgn91gOTRyrhbcFV0lqiITql?=
- =?us-ascii?Q?M88ADYDpUO1yc4fcOsV5RasGp/P5CcHQApv0MczhndfKCDJEsMiqZrGBuRZC?=
- =?us-ascii?Q?L3pNqE7tY5Eu62hTa8kCAr4HTUpFnpeFYFGFFCSFvFv+d6QQn/peX8bx/Mgk?=
- =?us-ascii?Q?TAS9Kp9O5g/ArC66ReULnFthPhHS6ugUUxUMKQCwFnxV4MrQCvbyIJB9odZu?=
- =?us-ascii?Q?KdtzLTMe0HvaXegiQ6tMWMwtBo8yF0PbQpmAShsnFsqwva5SXshPyOjs1bje?=
- =?us-ascii?Q?siBW4pfCbPN0/7gv1TPQB8IqOt2f4paXBguorWFeK7Q1i/lkpi/np4pLCK5k?=
- =?us-ascii?Q?psi0wgbGakMC7SJKXW30LjZjxEpEAGEjv02CvA1zEPHmvY0z1tnHK5Ol9sAe?=
- =?us-ascii?Q?Jur1FWOVUgKl2aZAtcUXwV7aOC3214UxcRTdvb4IZxv9YiN5VTADuKBE2VUC?=
- =?us-ascii?Q?aSOZRQ70h+ok1Hzwl4EAbMfihxs+45oZ5M+/FugfD8n8ERAuu/i23YIveuWp?=
- =?us-ascii?Q?UVti6UGulZSFk8gJvCcrUMmHd0Qm7V2UQ9Qh4BcecK2MaAV4tZQTDxCxgmUc?=
- =?us-ascii?Q?xb4Epve0GNVbBnU0x6ibFGykAYT+VFGjBflubRLuM5TZ4cFd5RLyigqW68EI?=
- =?us-ascii?Q?LrZAGNJXNv6seY0e93b+Q+NCxJ47GJLiXS6+s980TFVz60Ho6T23ly1lzlxJ?=
- =?us-ascii?Q?wRPWCxRVxOr5PRqL1sgngXrU1/XzGONN61qvzetypSK0G0+g7tNE7k5nmPLw?=
- =?us-ascii?Q?+LJA4qnDtztCHQ5LYLwmge8cW2M6n/joXjN5Vz13Zl1PLBFUSA5IjYtwixU0?=
- =?us-ascii?Q?OdmWN8LFR6iTEdFBmI9CjHQnMVFTc9fe8Q8XMUnZ0NG+YivDm6QBQGbhnjWz?=
- =?us-ascii?Q?N/I+8JHzdnuqbCwVWrNeZYPdNaSgi5jwgBmX100sPEccBuvaxxyA0NkMfXew?=
- =?us-ascii?Q?8XL5VDolBSxmud2FV12CwCtKv9ahR/z+2+9ED1FkZQoaNF24WIPB1Z0IiNrQ?=
- =?us-ascii?Q?zoDRvFOj/9+htNR1EHca2hrCZzkqlsKjoJESnkVlNss34l6bPcbjAIOtfyXn?=
- =?us-ascii?Q?lalAwbFZ1CiD5UMM9zsoeR44zAQAMiXlSq5KrCLHftfr35CFV/3GqyG5eG8O?=
- =?us-ascii?Q?TOy4wBhApXlZ+IR6LfbxeJ4ism9uzJjlMdfeRIeVjfV3kVK41mgCjxO00OrW?=
- =?us-ascii?Q?7qVKrC2UhzVi5A0lrokoRLLjGqt7o3M2ded9/XVGHn/y1CjQzljfByU5CE/A?=
- =?us-ascii?Q?bA8rlqnvR87mnXC/ByRM54QF3GG8wEkI6yRXeg4oTxAyShm6cvQRwvk5XDM1?=
- =?us-ascii?Q?SMgz2R3862j8ubuAR2iZff3YhGuzo8xkM7jZF6WHES0z/eM6ENrxEpzpNYzI?=
- =?us-ascii?Q?ke0XiGFeSdd6a4J6gPcZiVhkMQv2Zu/gef8RQw9phzljgXgc7Fu/w2hcUC6w?=
- =?us-ascii?Q?Mtf4E4XK47cD9m380Ze89YOWB6SoHsLXFsnRABmYtADn0MQX9ZEgTnhNxStR?=
- =?us-ascii?Q?DWr4Zr6kpjm9OE5RldXUk62witAqIp35GroaTulw54zAeFIUjB6qPJQd+NZu?=
- =?us-ascii?Q?kFG+5L2/8scyGv2zY0ApIethCL1BC58XgA5oeouUjFED+XwY9PESku/zLDi+?=
- =?us-ascii?Q?j1Inu8Blawc4PLLqJd59HWOVAa7kDfT5kWj5JREMonUZTAwUtoV6r3DBxBFb?=
- =?us-ascii?Q?s+7h7Qm88P2ui3uhggVbNdIC02j69ek=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: f777a8df-6274-4669-5d93-08de801e5071
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Mar 2026 10:01:22.1875 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: djbEPEvWMUJI0DRVXAbQC1Rsaq7ql2WCXRySF1fdqQNp7LPglcOJvbUsnU+Lg+OznT3UaHrVjYKDgiXAgYLJ8ytWomvStGvO6MoeO7NCh78=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR10MB6694
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,97 +73,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-POSIX states that
+From: Paul Gerber <Paul.Gerber@ew.tq-group.com>
 
-  0 arguments:
-      Exit false (1).
-  1 argument:
-      Exit true (0) if $1 is not null; otherwise, exit false.
+New SoM revision use series termination for eMMC signals while older do
+not. To prevent signal overshot on older revisions, DSR must be set and
+limited. The eMMC type is used to differentiate between revisions.
+Keep a table with all types, that are known to require DSR.
 
-and at least bash and busybox sh behave that way.
-
-The current 'argc < 3' does the right thing for a non-existing or
-empty argv[1], but not for a non-empty argv[1]. Fix that and add
-corresponding test cases.
-
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+Signed-off-by: Paul Gerber <Paul.Gerber@ew.tq-group.com>
+Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
 ---
- cmd/test.c     | 11 +++++++++--
- test/hush/if.c | 30 ++++++++++++++++++++++++++++++
- 2 files changed, 39 insertions(+), 2 deletions(-)
+ board/tq/tqma6/Makefile     |  1 +
+ board/tq/tqma6/tqma6.c      | 24 +++++++---
+ board/tq/tqma6/tqma6_emmc.c | 88 +++++++++++++++++++++++++++++++++++++
+ board/tq/tqma6/tqma6_emmc.h | 19 ++++++++
+ 4 files changed, 125 insertions(+), 7 deletions(-)
+ create mode 100644 board/tq/tqma6/tqma6_emmc.c
+ create mode 100644 board/tq/tqma6/tqma6_emmc.h
 
-diff --git a/cmd/test.c b/cmd/test.c
-index f0645ef98f1..0d0f090386c 100644
---- a/cmd/test.c
-+++ b/cmd/test.c
-@@ -71,10 +71,17 @@ static int do_test(struct cmd_tbl *cmdtp, int flag, int argc,
- 		argc--;
- 	}
+diff --git a/board/tq/tqma6/Makefile b/board/tq/tqma6/Makefile
+index f1b39844ac6..ecebc28315d 100644
+--- a/board/tq/tqma6/Makefile
++++ b/board/tq/tqma6/Makefile
+@@ -6,6 +6,7 @@
+ #
  
--	/* args? */
--	if (argc < 3)
-+	/*
-+	 * Per POSIX, 'test' with 0 arguments should return 1, while
-+	 * 'test <arg>' should be equivalent to 'test -n <arg>',
-+	 * i.e. true if and only if <arg> is not empty.
-+	 */
-+	if (argc < 2)
- 		return 1;
+ obj-y  := tqma6.o
++obj-y  += tqma6_emmc.o
  
-+	if (argc == 2)
-+		return !strcmp(argv[1], "");
-+
- #ifdef DEBUG
- 	{
- 		debug("test(%d):", argc);
-diff --git a/test/hush/if.c b/test/hush/if.c
-index 5f75ea68b32..6129e2c530c 100644
---- a/test/hush/if.c
-+++ b/test/hush/if.c
-@@ -32,6 +32,15 @@ static int hush_test_if_base(struct unit_test_state *uts)
- 	sprintf(if_formatted, if_format, "false");
- 	ut_asserteq(1, run_command(if_formatted, 0));
+ obj-$(CONFIG_MBA6) += tqma6_mba6.o
+ obj-$(CONFIG_WRU4) += tqma6_wru4.o
+diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
+index a3a0a11c42b..005f08c4e5f 100644
+--- a/board/tq/tqma6/tqma6.c
++++ b/board/tq/tqma6/tqma6.c
+@@ -26,6 +26,7 @@
+ #include <power/pfuze100_pmic.h>
+ #include <power/pmic.h>
  
-+	sprintf(if_formatted, if_format, "test");
-+	ut_asserteq(1, run_command(if_formatted, 0));
-+
-+	sprintf(if_formatted, if_format, "test ''");
-+	ut_asserteq(1, run_command(if_formatted, 0));
-+
-+	sprintf(if_formatted, if_format, "test 'abc'");
-+	ut_assertok(run_command(if_formatted, 0));
-+
++#include "tqma6_emmc.h"
+ #include "../common/tq_bb.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -37,8 +38,6 @@ int dram_init(void)
  	return 0;
  }
- HUSH_TEST(hush_test_if_base, 0);
-@@ -355,6 +364,27 @@ static int hush_test_lbracket_alias(struct unit_test_state *uts)
- 	sprintf(if_formatted, if_format, "[ ! aaa != aaa -o ! bbb = bbb ]");
- 	ut_assertok(run_command(if_formatted, 0));
  
-+	sprintf(if_formatted, if_format, "[ ]");
-+	ut_asserteq(1, run_command(if_formatted, 0));
+-static const uint16_t tqma6_emmc_dsr = 0x0100;
+-
+ int board_early_init_f(void)
+ {
+ 	return tq_bb_board_early_init_f();
+@@ -46,9 +45,13 @@ int board_early_init_f(void)
+ 
+ int board_init(void)
+ {
++	struct mmc *mmc = find_mmc_device(0);
 +
-+	sprintf(if_formatted, if_format, "[");
-+	ut_asserteq(1, run_command(if_formatted, 0));
-+	ut_assert_nextline(missing_rbracket_error);
+ 	/* address of boot parameters */
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+ 
++	tqma6_mmc_detect_card_type(mmc);
 +
-+	sprintf(if_formatted, if_format, "[ '' ]");
-+	ut_asserteq(1, run_command(if_formatted, 0));
+ 	tq_bb_board_init();
+ 
+ 	return 0;
+@@ -111,17 +114,24 @@ int board_late_init(void)
+ #define MODELSTRLEN 32u
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
++	struct mmc *mmc = find_mmc_device(0);
+ 	char modelstr[MODELSTRLEN];
+ 
+ 	snprintf(modelstr, MODELSTRLEN, "TQ %s on %s", tqma6_get_boardname(),
+ 		 tq_bb_get_boardname());
+ 	do_fixup_by_path_string(blob, "/", "model", modelstr);
+ 	fdt_fixup_memory(blob, (u64)PHYS_SDRAM, (u64)gd->ram_size);
+-	/* bring in eMMC dsr settings */
+-	do_fixup_by_path_u32(blob,
+-			     "/soc/aips-bus@02100000/usdhc@02198000",
+-			     "dsr", tqma6_emmc_dsr, 2);
+-	tq_bb_ft_board_setup(blob, bd);
 +
-+	sprintf(if_formatted, if_format, "[ ''");
-+	ut_asserteq(1, run_command(if_formatted, 0));
-+	ut_assert_nextline(missing_rbracket_error);
-+
-+	sprintf(if_formatted, if_format, "[ 'abc' ]");
-+	ut_assertok(run_command(if_formatted, 0));
-+
-+	sprintf(if_formatted, if_format, "[ 'abc'");
-+	ut_asserteq(1, run_command(if_formatted, 0));
-+	ut_assert_nextline(missing_rbracket_error);
-+
++	/* bring in eMMC dsr settings if needed */
++	if (mmc && (!mmc_init(mmc))) {
++		if (tqma6_emmc_need_dsr(mmc) > 0) {
++			tqma6_ft_fixup_emmc_dsr(blob,
++						"/soc/bus@2100000/mmc@2198000",
++						TQMA6_EMMC_DSR);
++		}
++	} else {
++		puts("eMMC: not present?\n");
++	}
+ 
  	return 0;
  }
- HUSH_TEST(hush_test_lbracket_alias, UTF_CONSOLE);
+diff --git a/board/tq/tqma6/tqma6_emmc.c b/board/tq/tqma6/tqma6_emmc.c
+new file mode 100644
+index 00000000000..dd7c4d45c5c
+--- /dev/null
++++ b/board/tq/tqma6/tqma6_emmc.c
+@@ -0,0 +1,88 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (c) 2017-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Markus Niebel
++ */
++
++#include <fdt_support.h>
++#include <mmc.h>
++
++#include "tqma6_emmc.h"
++
++struct emmc_dsr_lookup {
++	uint mfgid;
++	char *pnm;
++	int dsr_needed;
++};
++
++static const struct emmc_dsr_lookup dsr_tbl[] = {
++	/* Micron, eMMC 4.41 */
++	{ 0xfe, "MMC02G", 1 },
++	{ 0xfe, "MMC04G", 1 },
++	{ 0xfe, "MMC08G", 1 },
++	/* Micron, eMMC 5.0 4 GB*/
++	{ 0x13, "Q1J54A", 1 },
++	{ 0x13, "Q2J54A", 1 },
++	/* Micron, eMMC 5.0 8 GB*/
++	{ 0x13, "Q2J55L", 0 },
++	/* Samsung, eMMC 5.0 */
++	{ 0x15, "8GSD3R", 0 },
++	{ 0x15, "AGSD3R", 0 },
++	{ 0x15, "BGSD3R", 0 },
++	{ 0x15, "CGSD3R", 0 },
++	/* SanDisk, iNAND 7250 5.1 */
++	{ 0x45, "DG4008", 0 },
++	{ 0x45, "DG4016", 0 },
++	{ 0x45, "DG4032", 0 },
++	{ 0x45, "DG4064", 0 },
++	/* Kingston */
++	{ 0x100, "?????", 0 },
++};
++
++int tqma6_emmc_need_dsr(const struct mmc *mmc)
++{
++	uint mfgid = mmc->cid[0] >> 24;
++	char name[7];
++	int ret = -1;
++	size_t i;
++
++	if (IS_SD(mmc))
++		return 0;
++
++	sprintf(name, "%c%c%c%c%c%c", mmc->cid[0] & 0xff, (mmc->cid[1] >> 24),
++		(mmc->cid[1] >> 16) & 0xff, (mmc->cid[1] >> 8) & 0xff,
++		mmc->cid[1] & 0xff, (mmc->cid[2] >> 24));
++
++	for (i = 0; i < ARRAY_SIZE(dsr_tbl) && (ret < 0); ++i) {
++		if (dsr_tbl[i].mfgid == mfgid &&
++		    (!strncmp(name, dsr_tbl[i].pnm, 6))) {
++			ret = dsr_tbl[i].dsr_needed;
++			debug("MFG: %x PNM: %s\n", mfgid, name);
++		}
++	}
++
++	if (ret < 0) {
++		printf("eMMC unknown: MFG: %x PNM: %s\n", mfgid, name);
++		/* request DSR, even if not known if supported to be safe */
++		ret = 1;
++	}
++
++	return ret;
++}
++
++void tqma6_ft_fixup_emmc_dsr(void *blob, const char *path, u32 value)
++{
++	do_fixup_by_path_u32(blob, path, "dsr", value, 1);
++}
++
++void tqma6_mmc_detect_card_type(struct mmc *mmc)
++{
++	struct mmc *emmc = find_mmc_device(0);
++
++	if (emmc != mmc)
++		return;
++
++	if (tqma6_emmc_need_dsr(mmc) > 0)
++		mmc_set_dsr(mmc, TQMA6_EMMC_DSR);
++}
+diff --git a/board/tq/tqma6/tqma6_emmc.h b/board/tq/tqma6/tqma6_emmc.h
+new file mode 100644
+index 00000000000..5ab6c3ac11d
+--- /dev/null
++++ b/board/tq/tqma6/tqma6_emmc.h
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (c) 2017-2026 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Markus Niebel
++ */
++
++#ifndef __TQMA6_EMMC_H__
++#define __TQMA6_EMMC_H__
++
++#define TQMA6_EMMC_DSR		0x0100
++
++struct mmc;
++
++int tqma6_emmc_need_dsr(const struct mmc *mmc);
++void tqma6_ft_fixup_emmc_dsr(void *blob, const char *path, u32 value);
++void tqma6_mmc_detect_card_type(struct mmc *mmc);
++
++#endif /* __TQMA6_EMMC_H__ */
 -- 
-2.53.0
+2.43.0
 
