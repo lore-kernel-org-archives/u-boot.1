@@ -4,88 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5FA105F7B6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A59C105F7A6
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:20:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B36A884370;
-	Fri, 13 Mar 2026 16:17:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B4A3384370;
+	Fri, 13 Mar 2026 16:20:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XFw0c6WQ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CpzEcyK0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAFB684370; Fri, 13 Mar 2026 16:17:18 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id C4DED84382; Fri, 13 Mar 2026 16:20:13 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1D528436C
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:17:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 436DA8436C
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:20:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7d74aa6bcdbso1716990a34.2
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:17:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b93698bb57aso446362566b.0
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:20:11 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773415211; cv=none;
+ d=google.com; s=arc-20240605;
+ b=jFabHbi13PdTFu1knkjyTdg8imyWoRX5QZGL8C+MAq09lbvX1QjNMXXEF8Nz3r27wt
+ wo9a3bME10rDFzUoxC55QleO/QXTXbc3GhGlS/f51t+fRnTdWJgi+PxUOZXJL0Y7zyww
+ qDK7xl+Zk49yZQa/XXSL4bbxMu4+uiawABBCUgjT0N1Js1eQoc5SESMGxQuQ3yEiWe59
+ 0SCv1gcHUmRWN2E4LrO6GioU9Y2ykq1abjlxUWJraZaNwSKj4b9pRalAxmLY3D72FYE5
+ HIECgd1yqbSn3SXB/gl8fOWSVVJGph/kjPWHNDIuOQnDOwUJrFvDFUOUPcF7wtbATm7T
+ n2oA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=b8YZZwDBtorbdHFz23v5j6vEb7bTSU5NzNZKcaW51Ng=;
+ fh=BkTneNBeMZ7ye7nZi3/XkuNqlEKKfJpSV3Uk6ZbGqLo=;
+ b=UEmBoGxSUdXTWm78vwHju54S3gHF7iw1nMAABx9pxc/NbJxjYBixXkreNLChR2vA9J
+ 5AhnW9seltQcIRybO6/Z1wo/AxNeKV1+H2FgywUW2RFB6tjzsgnzLFAntBJfTJXbJiET
+ pFMh/7hfWW+4bThDI0Z1HjW1VE9rf/2WAv9M0J/wXnirBaq+KarWGedeKbKoIkGQ5wMQ
+ /ukUq6+cHzPA+UdCp3EmQ+/v/1KBVAO+d17h5kOWoMhPjEIpfxWxJRHi5YCNjQX+8FLA
+ ocdWZTycIAUUZjkS8I6NX0Usld+3YaWU8fuPpZolVOnhEAHVVLW3DHdX7tyr/OoMzFVb
+ /Dig==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773415035; x=1774019835; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=F6Z1Tgz9086dkrBkQI8UYX28hS/9IpEDboZTf74ZKeE=;
- b=XFw0c6WQbOzDvoTHcxD5oYDVFTPCS6kmMQD0zzToYxWgmioIwpu6NVqOiIwCybdZjq
- MvqktxVB7Sr9nyr7ot3mYgxlfdkikWK1gdfiF+HhOq/aNrBZXyHjzOdAb8AlWO0cyrhK
- oIxB7dSfj3De1EANgdJBykj7u1F/wDXn+QZ60=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773415211; x=1774020011;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b8YZZwDBtorbdHFz23v5j6vEb7bTSU5NzNZKcaW51Ng=;
+ b=CpzEcyK09JRScpWeI+ZKS8O9pkjozWXtuNqiwhBl8S9YabW7s6iREJ5pKs+JtIZNaL
+ 5lO81YXqb9ImHw2Q95V+QvzsdPCJWb5P6RlV9539bAVCr+wkinR8OGo+o2mviOh67U8d
+ ScgO1PjgRrZwl4jd5jvImnSau76d4IKhyWyiIG0Cf6jF8dZAYWldTbOoMHSoDowCwdsK
+ hWSHL05aRFrexKbWwwUjYXlCKv9qawS3yS6Yu0q0QHA9ebKQi0mK4bYvvEPp+xa/PmKC
+ IEkA067UAXKsbe87GiFR1QMX4Xp97V3nlRIwJJTVecMokx0OfSbZekWAfyxz2QkXmrRV
+ WHvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773415035; x=1774019835;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=F6Z1Tgz9086dkrBkQI8UYX28hS/9IpEDboZTf74ZKeE=;
- b=rz6vPO59fy5mhNt3peMP/YxO6mHdxMM5PXN5NtoblSx/jjd4+ttX5u6899WKbzK7S6
- Y8Jue24Wj6mfnjv0Hcly138MTsVW9smvPFG2WlMYFbcKCPPo1Sq/IbwKL+KMqivA2zfs
- LG9x8rMUUGgB7u0V9DJ2pEtIie853b/K+9kxzMTuThtb3muuCPDD0AVOQI/CxuMxK7WH
- hpRG3mUvuXnn2xJHHTCS82w3pP/gaYwc40YBSjDr07aC9JX1Pnc0/oPvhxreCG07A4VL
- abz63uJt0F7iAF8zCWS1Lyls0z/wbDJ2nqGji8MxZcnQwX1K57Zxp3E3BeEskh62q4X1
- l7cg==
+ d=1e100.net; s=20251104; t=1773415211; x=1774020011;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=b8YZZwDBtorbdHFz23v5j6vEb7bTSU5NzNZKcaW51Ng=;
+ b=m//UngBDjV/QdLSKjBv5WVAlbtSup56GlNjsw8TZx712pJUziV4O0jDtYNb1OB68F/
+ 7KxDvPiHMwW4Io3pkkkUdw8SnCbUjzNLOdvmi9i3p5VjuwdY9wfvhH6XdDD24hpklnEl
+ AbjO6OQA9YmK/VktdDCxDymwMmMMQrqo8xoKfdckL4EizzsIysW7OcsuOAyZsoFar3UT
+ 8ALJM01zVvGaTBkKVvu39w1CWj4bFvhaEXXdmC7eHM1beoc60YcOqcqLJCgdIT6zXiAy
+ 1vnXS0c1xg4DbsdBUZFGIcIMi1mxAUEeZBTfZDFe/ky4YCpoAsn+OzS749HLS+vpKdML
+ exQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXo1/scG2QfqxK98+lujO9CIWLXageNSQNW8ZOeBThd2kKMzvoP2esykh+U0WoIztC94baElzo=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMwl+v4H0ifSb5cjZd2t8zb0CLa/pH+fU1fQMnMv1SE9tGm2Hd
- p8gw/MOy+wL9lETdb5cAYc+8Bi0/UBV89leZOw3cRxTkvhhAynx1Z9FMjcLaPt2Y+fg=
-X-Gm-Gg: ATEYQzwN2GTwgOvIjt84l/xwq1qf6MJdQFVX07uo9naAtL/U0RttaRJRXhP2JsGv473
- vs447RbzeJMucetGtxMwOAB4ZEP6hEOfwOZPoxasRZ3qoEXQYyWOvbfNnLs2zxjJSk3saNRC9LX
- 4dVDmI41q8mSNW5vYAV1vPtoKMzMPEMbqXKLoRm6HsK7bqkW+40trdq/i42l8/4VuUP0jnq/SBB
- 77Q+NVSwGpEZ7Li4xm1LdSW5k+4vmv+//fJWSx+qy8Xt4+aX9g9joM4PDa8K7Zs3yl0Lqj9R4YI
- nHMZtxSU7MkdPt6i+7Oop7NwSeMFBZFx8HYvvcLvWZYDe3ko7Ezr2bGguz91zYijM6odsBHP/2N
- ryCVuHprclVnnisVSevx+20R3SE5xr0PIA0gSF3kmJu/mXDK83plLFLdyJU0rDnoTVQ1wXnn6Et
- LgavkcDs3eF0OOZMXKyr7F0+SQ+0NBWVXpigZ6f2SdxoyH0xCoHpvK5kceVlXRJ0KalCRNl3Anh
- /HTHajFlYFVJUZ8CnvR6gQmHi8d7E+Klee3sJ5jJAWXBC3f
-X-Received: by 2002:a05:6830:7309:b0:7d1:90d6:403 with SMTP id
- 46e09a7af769-7d7824af451mr2370929a34.16.1773415034971; 
- Fri, 13 Mar 2026 08:17:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ac8e5b4sm6712707a34.12.2026.03.13.08.17.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 08:17:14 -0700 (PDT)
-Date: Fri, 13 Mar 2026 09:17:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Richard Genoud <richard.genoud@bootlin.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 7/7] MAINTAINERS: SQUASHFS: Add myself as co-maintainer
-Message-ID: <20260313151712.GG502704@bill-the-cat>
-References: <20260313104229.1555236-1-richard.genoud@bootlin.com>
- <20260313104229.1555236-8-richard.genoud@bootlin.com>
+ AJvYcCWZXYbEXR145gfbLBwGyIJ0bkKpRg04NGFdDDT+Y94O6NMaWYZRdhJ2x5ymOvLZmrz9MAutc04=@lists.denx.de
+X-Gm-Message-State: AOJu0YzuYvf28Ab3v0RPQhatABwCT/5Ok4XPMITZ7PxqUV/5b6qaLjT/
+ p21gb6O6YBPTLNPcVHiD9tqytl6KYx7R6hxt/rPuTE0iOxrqCMF/ngIdBGZG2My8qimPz7ZqFJK
+ 30BgjEKs3znxWKYxzXpGyMsE1zzKgBei+n8Mu048ohQ==
+X-Gm-Gg: ATEYQzwlaQ28lTXdvcxC18FeNsOCz31zrEcWgmc29iBVwE1e/cxHnfZBiiclP2Pcetv
+ NM5WXIJyxUrDRpyXstl7WGtlp6LAd4M7x6ak6+nuEeOvLNqoHN0YehQMoBjS9S3G+AE/loK81z5
+ gtoPKBZVlFKEtxnrpfYEnAf/Q3a6/eUoLp2tNOrBcONK9+59pWrwK78JTp3G8ATY+WKzocoE0od
+ /+2nORQrQWpNaqcgs+qwNaAFnTh4E74fUDYbiJOtUl23K/EXNLmz2pnmAyvi4TC6idc8aXDTaqV
+ wgHq9dtZ+I77Xac9q1v5PDdl/GlVt7pPddrVA3CN6j7vgm6g8+QRcRL5Fj4szP5Ixz89vO2JVP3
+ T5uWIuk25ktbP7I92SJ43e74xdQ==
+X-Received: by 2002:a17:907:1c9a:b0:b8f:c684:db37 with SMTP id
+ a640c23a62f3a-b97636960famr224699266b.9.1773415210654; Fri, 13 Mar 2026
+ 08:20:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0tzLJviAblm+wMrM"
-Content-Disposition: inline
-In-Reply-To: <20260313104229.1555236-8-richard.genoud@bootlin.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260313-clk-mtk-fix-priv-auto-size-v1-1-bc649e1b301a@baylibre.com>
+In-Reply-To: <20260313-clk-mtk-fix-priv-auto-size-v1-1-bc649e1b301a@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Fri, 13 Mar 2026 16:20:02 +0100
+X-Gm-Features: AaiRm529hCl6Mlno9EbYchRKIZF5d4IIhblx3NzhJM8HNNahxycrdeoBaJWmOmE
+Message-ID: <CAEHHSvaZgokusQ5bs1AYa0nwFQUyCj95Bk3LJBv_Xeynany6Bg@mail.gmail.com>
+Subject: Re: [PATCH] clk: mediatek: mt7623: fix pericfg priv_auto size
+To: David Lechner <dlechner@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,34 +121,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Le ven. 13 mars 2026 =C3=A0 15:46, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
+>
+> Change the pericfg priv_auto size to mtk_clk_priv. The driver is
+> registered using mtk_common_clk_infrasys_init() which expect that
+> struct.
+>
+> The old value of struct mtk_cg_priv was larger, so there was no issue
+> out of bounds access.
+>
+> Also replace tab with space to be consistent with the surrounding code.
+>
+> Reported-by: Julien Stephan <jstephan@baylibre.com>
+> Closes: https://lore.kernel.org/u-boot/CAEHHSvYMiCZ4jAXp6jEhg6AhZ5Dv3_Ak-=
+8H1mT7S2FPD3_X7dw@mail.gmail.com/
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+>  drivers/clk/mediatek/clk-mt7623.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk=
+-mt7623.c
+> index 071c4cf8a84..87720a93eff 100644
+> --- a/drivers/clk/mediatek/clk-mt7623.c
+> +++ b/drivers/clk/mediatek/clk-mt7623.c
+> @@ -1187,7 +1187,7 @@ U_BOOT_DRIVER(mtk_clk_pericfg) =3D {
+>         .id =3D UCLASS_CLK,
+>         .of_match =3D mt7623_pericfg_compat,
+>         .probe =3D mt7623_pericfg_probe,
+> -       .priv_auto      =3D sizeof(struct mtk_cg_priv),
+> +       .priv_auto =3D sizeof(struct mtk_clk_priv),
+>         .ops =3D &mtk_clk_infrasys_ops,
+>         .flags =3D DM_FLAG_PRE_RELOC,
+>  };
+>
+> ---
+> base-commit: 9f1059bc735ec2a8d78c1f3e4fcab1fa3f428317
+> change-id: 20260313-clk-mtk-fix-priv-auto-size-a2bddd467f41
+>
+> Best regards,
+> --
+> David Lechner <dlechner@baylibre.com>
+>
 
---0tzLJviAblm+wMrM
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you for the quick fix!
 
-On Fri, Mar 13, 2026 at 11:42:29AM +0100, Richard Genoud wrote:
-
-> I propose myself to maintain the squashfs files with Jo=E3o.
->=20
-> Also, reorder patterns in alphabetical order.
->=20
-> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---0tzLJviAblm+wMrM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabQqeAAKCRAr4qD1Cr/k
-ClV0AP9WRTPXexrsyBMotqHMKi694RwRotjPmafbQywOyfB3qQD+OLVsmrfPNBX7
-8bzqUJd4wERXojEykdt/sUXJ1a7meAQ=
-=XJN4
------END PGP SIGNATURE-----
-
---0tzLJviAblm+wMrM--
+Reviewed-by: Julien Stephan <jstephan@baylibre.com>
