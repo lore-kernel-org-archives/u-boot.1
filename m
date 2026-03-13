@@ -4,107 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B185103E305
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5805103E305
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A04F8436C;
-	Fri, 13 Mar 2026 16:32:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 32B50842F4;
+	Fri, 13 Mar 2026 16:45:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="orUnVq0E";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="cDwkIibc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A523184372; Fri, 13 Mar 2026 16:32:07 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6C49E843B6; Fri, 13 Mar 2026 16:45:50 +0100 (CET)
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (mail-northcentralusazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E23818423D
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:32:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34ACA8423D
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:45:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-66438f18ea1so765007a12.3
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:32:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773415924; cv=none;
- d=google.com; s=arc-20240605;
- b=S3RH1crvq535mMSglGBbrx51jwADHU4gjWDh8sPVCNn41vsjB/BrYYS3B4a7og9zjT
- pI+6j+lkvpJnVrRw6/Es/6GCWfRhRfdOjPl5WaAeNsCEiRuKneoR+vaIIEU4MSRtoOxo
- dM9Q9FA3wxnF09kZquWg2MY8gt9HBnadt/NmyAhWB8ohllRfQQwSQvx6V+49PD3NdLIp
- iCb+xDz/nT/RBPp+7jyt1/C0HzpO0vu2Wp4nfiuH/knrj08Rx1TE6n0uw33v49a1l6UB
- V86gQESXZ+71QWGk30ipfnYqhLi7ZWo942jEgkDuFU0GlZyEZwfxmr1xcqFDvESLuBF/
- BIug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=d/4oJ0IxYCMvo/OT3gLMPQZyU5Q7kJvWfJsEOiwaFfA=;
- fh=2oJ9eckyD2v7lGQn+InEve6L/sYDfr0krUzwVIwyv94=;
- b=PxGBOscbtM7QreXkwLq3pnmEWYs2yMiz2hrNbf18eVWvwEY3SXeHh+QbM8EOO5H26Z
- vGSWzJjHfCFaTLJj/lRv/msSSh4wjuPQxYKo0UnOdpfku+D9mLOn8tOxK/ytkILnrfRa
- rLONnnnEG4hUmzPsB8tDBYopQG3nE57cCt9zjDJqJeSipXrmTbiYlCppMUzqbJFR1fc5
- zhdQXx0jGZ0VEhrh9H3ix+LYb30yGuBvPy1tra9qR2hev9GrPZLLT5gDHMp5WjNo2lIp
- Y5q5RsXGRQOFkFWypGZA9lq6zd92L/FZbOJyBUNaEJBtzL+/F0ie8B8BAle+5E+ZwRxK
- 5Pbg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773415924; x=1774020724;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d/4oJ0IxYCMvo/OT3gLMPQZyU5Q7kJvWfJsEOiwaFfA=;
- b=orUnVq0Epp2RmkEcw8MMpF7M2YhlrIRfQGqkJ8EYVXkH5Hyb5e4JBva1RVXjDk0k1Q
- KabBfPNCcE+raTbWFq2UDWSwbHT7Dq2G8HSOftFZcYEef9P1/xyjrkWaY0UIL2nm6134
- Nyw/VpjM91zLjk8o2BFJxXLP8JYXc+Tdqfo9qMqp7Zf+iIYPLsfbp+fkG/kYF6w487LN
- D2DHOF9g7pN5Rh9PeDc0QkbZMXvd0ZgeGgLrQwTOsWkc4qTRJAEjdKn2BK06oGQVrV1v
- O6XDTgh379E77f/FtbwOiOzGjBLFn2GRhEa2Arwh6dKEPLdd2kzAFbp4GGNBh6EuPTEZ
- D1Hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773415924; x=1774020724;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=d/4oJ0IxYCMvo/OT3gLMPQZyU5Q7kJvWfJsEOiwaFfA=;
- b=KZBO3LCpEFh1kHEsZIPvn3g4fEtV++RgYoLP73Ex5RgTm1xzjdryKar4cKguUsZr9a
- ljy4fctesOfxsHNCm0y4UwPAJatKL7LvKV2fWnEfSzNkWVJWqRiFQH/ygpkFdHcegQzz
- ky8nrRMMWLI9uo6P1DBk3lIbHVlF84K94MxbBR6Z/ICP3rgl9h49R4KQR3Z5zkEOx93o
- x1jLLt+jYm0v0virRcnBjJRMSTCUnoKfnHV3Zr9OFUwGFNf5eHw4rI/iOsJG+7EDODym
- xrB5a8dQTceWsGGOyn+ioVDos2PpFlMeWp9vJEku8sWuWXvlpG9cZBbCgxavuvVkrvaN
- 795w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0pBcoyS86WyKrt5CNuYvW18u4Y33o19fuaDcHQ8bAesIMi0bLwdU7ILxStE8zGdiI+DEsy7Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6GUnCEnoR2wNDEN0v+f/4ZvF1doRO+aXf038l83ILBeaRkfbI
- 1dGVujqzF75CuvrcWVdsdRov86Y0g3d2IcDryxSLpLNiV9u+tTZwTUGAvwY5fL4OhK9nOMHAtxU
- LdOGw13dGP5ipFBTQ1ltJapLwtDS6p+F63pIt0rx69w==
-X-Gm-Gg: ATEYQzwhWyZVAZwCuDtZGbeMLc728MBTA1hHZAnQDr8wqj+fPoypXiPUbAap4/uVUb0
- IV8S8O8k2ALrQqbyRFFCiXrbbFMt9ZmGc9FL7d/7Um+EtXKcCv1cDxmC3pGkm9eyAFYqUq/GxMR
- gOqk6gUFkCbw5O8M9ZNT3vX1Q1UZNO3N4B6h0E8D1wHvWIjPRMZglTd1Qp8HaLEE4P0jcRL+yKS
- kKMOKJ16kk9qqVv5SnUhmS+qKG4pr/hz4PMdJ9D38Nd4YtoKOcmgdjqGz0uL8vTBo0+n73XTWNO
- vLm1BT2hA0Tbz+hviA3mV2C1TSnOOQJ+9cxBxbXCURTxtAHHunH9mG+ZqrJ3dzv+EflpRFye8iw
- qjhTIL0LA8WMwB1/LG75AD8jlYA==
-X-Received: by 2002:a17:906:358c:b0:b87:1741:a484 with SMTP id
- a640c23a62f3a-b9765375648mr161324866b.43.1773415923987; Fri, 13 Mar 2026
- 08:32:03 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=WMrHRyjmji01rfu0fsY5dFVU8Sd4riLrXTiyPSk8seXMU8YWKyT3JFEVx6PrnqXaLeeKJMOunkBrjsxEoTyNM5ghql+0YcUbyxHdvTxUsBSBHtaeB2IaqP6tDaOf+iZK674csarNDVYIhZMKPjFk3YMKqnwbbXuvpKAfaj+PX2e9vgHM0fsLrldzA9+G9FJVv/81kFkrKiTv0w96dUGnIdSNKoEvqAnVKWKpQK+rooqHQeSVh86DO1YMZ7oAYNUMaAmAsiS/76vt15pWYEgKfI5NrdDnn90raOcg60nsvO//jHzklsXDVTlzwqQWfX+qqXz9xSDwJH7FTYDAAUNzCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nE2MhdQyxeZLK2gMtDtM2HBmEqD+OXsGvr1Sx6njrSo=;
+ b=C/oOmj7V9qLoYpEAz1NUXfvubDn5HJFApwOSjjc53LCyGy45o7O59Y8Re/9qUKu6rMGg1r1fzta5FO9xSge3HralhaxIeKZZcVB2I9Oy8RzjqcaNeMRWK0ZI9XR6D1dllNtN0FiGu3Zx1Dxrf7EytgRY2NLs0AMcIDJ11H/tEiehHRFjMCO9XDdXMEgXMp59knNL1k2WYAYRRu8IPsQcCyCf2rtBNENTZPW/x+BSSkBNmMuT/PYCeYDAwdQBmB4832SIP/XY7WB1jeZqRD54nwTj2R/OnYgkQt3EeWEU5XqHA5FcUshxaez5v3WCg9lwjmZKFoEcccwmGY3vR43w1Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nE2MhdQyxeZLK2gMtDtM2HBmEqD+OXsGvr1Sx6njrSo=;
+ b=cDwkIibcpFTTPRu2WKzrzYOJogxwj57eozvYB3KSNvVmmdrfpuvCHiM3MFtSMtAjyiuJvVdgtC5QH/TN6HGY0wDkb1/bFy829PMdDvH6Icro2C8tOfkB9Pwj0i/WXrhAmMVjX3LX671k6pSjkB7JawGltq/eu44rXEAY1bhorZk=
+Received: from CH2PR14CA0028.namprd14.prod.outlook.com (2603:10b6:610:60::38)
+ by PH0PR12MB8775.namprd12.prod.outlook.com (2603:10b6:510:28e::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.4; Fri, 13 Mar
+ 2026 15:45:38 +0000
+Received: from CH2PEPF000000A0.namprd02.prod.outlook.com
+ (2603:10b6:610:60:cafe::54) by CH2PR14CA0028.outlook.office365.com
+ (2603:10b6:610:60::38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.16 via Frontend
+ Transport; Fri, 13 Mar 2026 15:45:37 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CH2PEPF000000A0.mail.protection.outlook.com (10.167.244.26) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 15:45:37 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Mar
+ 2026 10:45:37 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Mar
+ 2026 08:45:36 -0700
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Fri, 13 Mar 2026 10:45:35 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Shantur Rathore <i@shantur.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>, Wadim Egorov
+ <w.egorov@phytec.de>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v11] efi_vars: Implement SPI Flash store
+Date: Fri, 13 Mar 2026 16:45:27 +0100
+Message-ID: <8ee5fc7a49816d9e26f38999990aa1e4e354801f.1773416725.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com>
-In-Reply-To: <20260303-mtk-clk-8365-drop-map-v1-1-17f81c375290@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 13 Mar 2026 16:31:56 +0100
-X-Gm-Features: AaiRm53Wpo87iXe0Kp-Mdsasb41-j3t97wuT8ftNF1lHHgeGb8333b2OLKyAFMQ
-Message-ID: <CAEHHSvYJ6HgRX556BbGG+Lh+7mPLfJXSr7KPvsjW6gRbYtJvRA@mail.gmail.com>
-Subject: Re: [PATCH] clk: mediatek: mt8365: drop topckgen map
-To: David Lechner <dlechner@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7456; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=zCPH+Ry28+K1DlU4f0f/9c7tN5vrpIsUNmxeMpteEm4=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRuMZTgUc+9WuCnfNdXxDHhiueKOX2PmZec8w27dPjAY
+ 9P8dVUaHaUsDGIcDLJiiizTmXQc1ny7tlRseWQ+zBxWJpAhDFycAjARIQGGP9wlURyxzqyyE0JX
+ vPx5YK3Gjoms7vrN9exe+0W2FsQ9n8LI8OPs5DD9sPRmo552sSPX2ieuvxs4Z8XPrDiBqbrdYd/
+ i+QE=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH2PEPF000000A0:EE_|PH0PR12MB8775:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1647fc4d-a922-41c7-553d-08de81179277
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|376014|36860700016|1800799024|82310400026|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: 1J4veHXtqnkG9FAD/lI6lqu0mY6KMLJRTqkMbZ2lCxcddqZ9PgagZhbY5+DLL9/QfOcp14UhuISk9TIhILaw57y+AkmFG+tRnXhaOgOAxYd/41/DxQgvXAiSmno0JtlRO2F/PsLK/6ttlk5w3VYo5jQ3hunQef+I6o2ehuNqqkhUiO9lzrsydAj20outHBMwSDC4TZapFa6VSnoHXbaLNOqFzsBK8PJageXypouEk5XxL+6DgjmRlwCsn+Jo81nGJnxWtPnx/7b658kxJy2NuUwUKaK5iZDsouVmId3NbupWsLG1msV7JFoErWe2n+vABZ/VBUhTFbc0E29XLboG5UqVZtXZaeKajLCcwPcU2hh4N2aCMNrl2mYlp3B226jUVc2J8+LOarUcMc4eldQnSdQ4m99k4mBFZFcF8o0JEKyJ1qhRIka7kSzrGyfN553oMN0NyLjKU54OE+tqC56clT4rRixtKV3aVTuG3hMTO3xqKg2h5MV4L7KttSsqWE7tydO1ec9thIIIlxDxm34i0jMGBTFUNsSgiGrAnlg1krme5DxupG80vFvFkufrWosghU4uCMfajtTFmK0MqiXLMN3HLOicgGxVvAHa2UsNWazcbbsSG4/K1CVMGnsGa3brUBSeB3GHjLxeR44tfzZUaiL9jpWZxKGAFU55VnpcdbtLP1lH6kmVqfRMy+/0uYsVb9T2K1niB+Y8EKi+pOFit8OQSt/OmQqJxfsMcd30Um1Ff/nMtsRJoL+QdaELmVCuJNsVmgwLDydhHAtE0GJh10wBxjKAePrzKwIIdfh8Wk0=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(7416014)(376014)(36860700016)(1800799024)(82310400026)(56012099003)(18002099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: TIlgceY/yw2zOAkEYMcBmcAPkggHkTXBMX/8ARBtgyd/D4rH6UJaE9i6MsgZNRhbA+3iOvonHoONiA+nkifQ6hvEbaatN1cpwZ9PXQVYwnmS0LFsc35+Wd99Hl0klEv2DkFKfZ2hdDtOBZY9A+T4EULeoib9IKSAatQpfjt0wEryUjDKsPBmSHcl79gY3DKxbiuoq3SLx6OnGFNcIk+rPEEqTGjoXo4HqryPYaGeIcSKawvLlyweTPMgBcBbAjRm3mFWTL8e7dIBBQBbGLWL0BtRey9KUpnSwvQGB+PTkI+bfYFqZR4H08eTPCW+oIhWIjrbMmr+DsvUaQeHL9F0qPtAnM5NxKlbp0q1LV5b7pjKM9V1+qfSxF2QpYI4ITCcxwcVWbiNCHudL0PoPPcEb8Rg3mQbEJSWTiSNaKR1wiKe51mDInJTmDn7iwXuO3vx
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 15:45:37.4177 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1647fc4d-a922-41c7-553d-08de81179277
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF000000A0.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8775
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,708 +138,250 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le mar. 3 mars 2026 =C3=A0 23:18, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Drop the clock ID map for MT8365 TOPCKGEN clocks.
->
-> Previously, we didn't have the EXT clock feature, so we needed the map.
-> Now we can replace it with the new feature to avoid the map.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
-> This was tested by comparing the `clk dump` output from before and after
-> the changes on mt8365_evk for the expected changes.
->
-> This depends on:
-> * https://lore.kernel.org/u-boot/20260303-mtk-mt8189-clocks-v4-0-ee85f8dd=
-2f0d@baylibre.com/
-> * https://lore.kernel.org/u-boot/20260223-clk-mtk-remove-clk-bypass-xtal-=
-flag-v1-0-a7dc97bc2660@baylibre.com/
-> * https://lore.kernel.org/u-boot/20260302-clk-mtk-unify-mux-parents-v1-0-=
-32f45085f4d0@baylibre.com/
-> ---
->  drivers/clk/mediatek/clk-mt8365.c | 307 +++++++++++++-------------------=
-------
->  1 file changed, 103 insertions(+), 204 deletions(-)
->
-> diff --git a/drivers/clk/mediatek/clk-mt8365.c b/drivers/clk/mediatek/clk=
--mt8365.c
-> index c6803090f35..16531491a0f 100644
-> --- a/drivers/clk/mediatek/clk-mt8365.c
-> +++ b/drivers/clk/mediatek/clk-mt8365.c
-> @@ -13,9 +13,15 @@
->  #include <dt-bindings/clock/mediatek,mt8365-clk.h>
->  #include "clk-mtk.h"
->
-> -/* Missing topckgen clocks definition in dt-bindings */
-> -#define CLK_TOP_CLK26M         141
-> -#define CLK_TOP_CLK32K         142
-> +enum {
-> +       CLK_PAD_CLK32K,
-> +       CLK_PAD_CLK26M,
-> +};
-> +
-> +static const ulong ext_clk_rates[] =3D {
-> +       [CLK_PAD_CLK32K] =3D 32000,
-> +       [CLK_PAD_CLK26M] =3D 26000000,
-> +};
->
->  /* apmixedsys */
->  #define MT8365_PLL_FMAX                (3800UL * MHZ)
-> @@ -70,151 +76,14 @@ static const struct mtk_pll_data apmixed_plls[] =3D =
-{
->  static const struct mtk_clk_tree mt8365_apmixed_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
->         .xtal2_rate =3D 26 * MHZ,
-> +       .ext_clk_rates =3D ext_clk_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clk_rates),
->         .plls =3D apmixed_plls,
->         .num_plls =3D ARRAY_SIZE(apmixed_plls),
->  };
->
->  /* topckgen */
->
-> -/*
-> - * The devicetree bindings missed a few clocks and can't be changed, so =
-we need
-> - * to provide a mapping to fix the omissions.
-> - */
-> -static const int mt8365_topckgen_id_map[] =3D {
-> -       [0 ... CLK_TOP_NR_CLK - 1]      =3D -1,
-> -       /* FIXED */
-> -       /* Fixed 32K oscillator is not available in devicetree definition=
-s */
-> -       [CLK_TOP_CLK32K]                =3D 0,
-> -       [CLK_TOP_CLK_NULL]              =3D 1,
-> -       [CLK_TOP_I2S0_BCK]              =3D 2,
-> -       [CLK_TOP_DSI0_LNTC_DSICK]       =3D 3,
-> -       [CLK_TOP_VPLL_DPIX]             =3D 4,
-> -       [CLK_TOP_LVDSTX_CLKDIG_CTS]     =3D 5,
-> -       /* FACTOR */
-> -       [CLK_TOP_MFGPLL]                =3D 6,
-> -       [CLK_TOP_SYSPLL_D2]             =3D 7,
-> -       [CLK_TOP_SYSPLL1_D2]            =3D 8,
-> -       [CLK_TOP_SYSPLL1_D4]            =3D 9,
-> -       [CLK_TOP_SYSPLL1_D8]            =3D 10,
-> -       [CLK_TOP_SYSPLL1_D16]           =3D 11,
-> -       [CLK_TOP_SYSPLL_D3]             =3D 12,
-> -       [CLK_TOP_SYSPLL2_D2]            =3D 13,
-> -       [CLK_TOP_SYSPLL2_D4]            =3D 14,
-> -       [CLK_TOP_SYSPLL2_D8]            =3D 15,
-> -       [CLK_TOP_SYSPLL_D5]             =3D 16,
-> -       [CLK_TOP_SYSPLL3_D2]            =3D 17,
-> -       [CLK_TOP_SYSPLL3_D4]            =3D 18,
-> -       [CLK_TOP_SYSPLL_D7]             =3D 19,
-> -       [CLK_TOP_SYSPLL4_D2]            =3D 20,
-> -       [CLK_TOP_SYSPLL4_D4]            =3D 21,
-> -       /* Skipping CLK_TOP_UNIVPLL since isn't a real clock. */
-> -       [CLK_TOP_UNIVPLL_D2]            =3D 22,
-> -       [CLK_TOP_UNIVPLL1_D2]           =3D 23,
-> -       [CLK_TOP_UNIVPLL1_D4]           =3D 24,
-> -       [CLK_TOP_UNIVPLL_D3]            =3D 25,
-> -       [CLK_TOP_UNIVPLL2_D2]           =3D 26,
-> -       [CLK_TOP_UNIVPLL2_D4]           =3D 27,
-> -       [CLK_TOP_UNIVPLL2_D8]           =3D 28,
-> -       [CLK_TOP_UNIVPLL2_D32]          =3D 29,
-> -       [CLK_TOP_UNIVPLL_D5]            =3D 30,
-> -       [CLK_TOP_UNIVPLL3_D2]           =3D 31,
-> -       [CLK_TOP_UNIVPLL3_D4]           =3D 32,
-> -       [CLK_TOP_MMPLL]                 =3D 33,
-> -       [CLK_TOP_MMPLL_D2]              =3D 34,
-> -       [CLK_TOP_LVDSPLL_D2]            =3D 35,
-> -       [CLK_TOP_LVDSPLL_D4]            =3D 36,
-> -       [CLK_TOP_LVDSPLL_D8]            =3D 37,
-> -       [CLK_TOP_LVDSPLL_D16]           =3D 38,
-> -       [CLK_TOP_USB20_192M]            =3D 39,
-> -       [CLK_TOP_USB20_192M_D4]         =3D 40,
-> -       [CLK_TOP_USB20_192M_D8]         =3D 41,
-> -       [CLK_TOP_USB20_192M_D16]        =3D 42,
-> -       [CLK_TOP_USB20_192M_D32]        =3D 43,
-> -       [CLK_TOP_APLL1]                 =3D 44,
-> -       [CLK_TOP_APLL1_D2]              =3D 45,
-> -       [CLK_TOP_APLL1_D4]              =3D 46,
-> -       [CLK_TOP_APLL1_D8]              =3D 47,
-> -       [CLK_TOP_APLL2]                 =3D 48,
-> -       [CLK_TOP_APLL2_D2]              =3D 49,
-> -       [CLK_TOP_APLL2_D4]              =3D 50,
-> -       [CLK_TOP_APLL2_D8]              =3D 51,
-> -       /* Fixed 26M oscillator is not available in devicetree definition=
-s */
-> -       [CLK_TOP_CLK26M]                =3D 52,
-> -       [CLK_TOP_SYS_26M_D2]            =3D 53,
-> -       [CLK_TOP_MSDCPLL]               =3D 54,
-> -       [CLK_TOP_MSDCPLL_D2]            =3D 55,
-> -       [CLK_TOP_DSPPLL]                =3D 56,
-> -       [CLK_TOP_DSPPLL_D2]             =3D 57,
-> -       [CLK_TOP_DSPPLL_D4]             =3D 58,
-> -       [CLK_TOP_DSPPLL_D8]             =3D 59,
-> -       [CLK_TOP_APUPLL]                =3D 60,
-> -       [CLK_TOP_CLK26M_D52]            =3D 61,
-> -       /* MUX */
-> -       [CLK_TOP_AXI_SEL]               =3D 62,
-> -       [CLK_TOP_MEM_SEL]               =3D 63,
-> -       [CLK_TOP_MM_SEL]                =3D 64,
-> -       [CLK_TOP_SCP_SEL]               =3D 65,
-> -       [CLK_TOP_MFG_SEL]               =3D 66,
-> -       [CLK_TOP_ATB_SEL]               =3D 67,
-> -       [CLK_TOP_CAMTG_SEL]             =3D 68,
-> -       [CLK_TOP_CAMTG1_SEL]            =3D 69,
-> -       [CLK_TOP_UART_SEL]              =3D 70,
-> -       [CLK_TOP_SPI_SEL]               =3D 71,
-> -       [CLK_TOP_MSDC50_0_HC_SEL]       =3D 72,
-> -       [CLK_TOP_MSDC2_2_HC_SEL]        =3D 73,
-> -       [CLK_TOP_MSDC50_0_SEL]          =3D 74,
-> -       [CLK_TOP_MSDC50_2_SEL]          =3D 75,
-> -       [CLK_TOP_MSDC30_1_SEL]          =3D 76,
-> -       [CLK_TOP_AUDIO_SEL]             =3D 77,
-> -       [CLK_TOP_AUD_INTBUS_SEL]        =3D 78,
-> -       [CLK_TOP_AUD_1_SEL]             =3D 79,
-> -       [CLK_TOP_AUD_2_SEL]             =3D 80,
-> -       [CLK_TOP_AUD_ENGEN1_SEL]        =3D 81,
-> -       [CLK_TOP_AUD_ENGEN2_SEL]        =3D 82,
-> -       [CLK_TOP_AUD_SPDIF_SEL]         =3D 83,
-> -       [CLK_TOP_DISP_PWM_SEL]          =3D 84,
-> -       [CLK_TOP_DXCC_SEL]              =3D 85,
-> -       [CLK_TOP_SSUSB_SYS_SEL]         =3D 86,
-> -       [CLK_TOP_SSUSB_XHCI_SEL]        =3D 87,
-> -       [CLK_TOP_SPM_SEL]               =3D 88,
-> -       [CLK_TOP_I2C_SEL]               =3D 89,
-> -       [CLK_TOP_PWM_SEL]               =3D 90,
-> -       [CLK_TOP_SENIF_SEL]             =3D 91,
-> -       [CLK_TOP_AES_FDE_SEL]           =3D 92,
-> -       [CLK_TOP_CAMTM_SEL]             =3D 93,
-> -       [CLK_TOP_DPI0_SEL]              =3D 94,
-> -       [CLK_TOP_DPI1_SEL]              =3D 95,
-> -       [CLK_TOP_DSP_SEL]               =3D 96,
-> -       [CLK_TOP_NFI2X_SEL]             =3D 97,
-> -       [CLK_TOP_NFIECC_SEL]            =3D 98,
-> -       [CLK_TOP_ECC_SEL]               =3D 99,
-> -       [CLK_TOP_ETH_SEL]               =3D 100,
-> -       [CLK_TOP_GCPU_SEL]              =3D 101,
-> -       [CLK_TOP_GCPU_CPM_SEL]          =3D 102,
-> -       [CLK_TOP_APU_SEL]               =3D 103,
-> -       [CLK_TOP_APU_IF_SEL]            =3D 104,
-> -       /* GATE */
-> -       [CLK_TOP_AUD_I2S0_M]            =3D 105,
-> -       [CLK_TOP_AUD_I2S1_M]            =3D 106,
-> -       [CLK_TOP_AUD_I2S2_M]            =3D 107,
-> -       [CLK_TOP_AUD_I2S3_M]            =3D 108,
-> -       [CLK_TOP_AUD_TDMOUT_M]          =3D 109,
-> -       [CLK_TOP_AUD_TDMOUT_B]          =3D 110,
-> -       [CLK_TOP_AUD_TDMIN_M]           =3D 111,
-> -       [CLK_TOP_AUD_TDMIN_B]           =3D 112,
-> -       [CLK_TOP_AUD_SPDIF_M]           =3D 113,
-> -       [CLK_TOP_USB20_48M_EN]          =3D 114,
-> -       [CLK_TOP_UNIVPLL_48M_EN]        =3D 115,
-> -       [CLK_TOP_LVDSTX_CLKDIG_EN]      =3D 116,
-> -       [CLK_TOP_VPLL_DPIX_EN]          =3D 117,
-> -       [CLK_TOP_SSUSB_TOP_CK_EN]       =3D 118,
-> -       [CLK_TOP_SSUSB_PHY_CK_EN]       =3D 119,
-> -       [CLK_TOP_CONN_32K]              =3D 120,
-> -       [CLK_TOP_CONN_26M]              =3D 121,
-> -       [CLK_TOP_DSP_32K]               =3D 122,
-> -       [CLK_TOP_DSP_26M]               =3D 123,
-> -};
-> -
->  #define FIXED_CLK0(_id, _rate)                                         \
->         FIXED_CLK(_id, CLK_XTAL, CLK_PARENT_XTAL, _rate)
->
-> @@ -222,7 +91,6 @@ static const int mt8365_topckgen_id_map[] =3D {
->         FIXED_CLK(_id, CLK_TOP_CLK_NULL, CLK_PARENT_TOPCKGEN, _rate)
->
->  static const struct mtk_fixed_clk top_fixed_clks[] =3D {
-> -       FIXED_CLK0(CLK_TOP_CLK32K, 32000),
->         FIXED_CLK0(CLK_TOP_CLK_NULL, 0),
->         FIXED_CLK1(CLK_TOP_I2S0_BCK, 26000000),
->         FIXED_CLK0(CLK_TOP_DSI0_LNTC_DSICK, 75000000),
-> @@ -256,6 +124,7 @@ static const struct mtk_fixed_factor top_divs[] =3D {
->         PLL_FACTOR(CLK_TOP_SYSPLL_D7, "syspll_d7", CLK_APMIXED_MAINPLL, 1=
-, 7),
->         PLL_FACTOR(CLK_TOP_SYSPLL4_D2, "syspll4_d2", CLK_APMIXED_MAINPLL,=
- 1, 14),
->         PLL_FACTOR(CLK_TOP_SYSPLL4_D4, "syspll4_d4", CLK_APMIXED_MAINPLL,=
- 1, 28),
-> +       PLL_FACTOR(CLK_TOP_UNIVPLL, "univpll", CLK_APMIXED_UNIVPLL, 1, 1)=
-,
->         PLL_FACTOR(CLK_TOP_UNIVPLL_D2, "univpll_d2", CLK_APMIXED_UNIVPLL,=
- 1, 2),
->         PLL_FACTOR(CLK_TOP_UNIVPLL1_D2, "univpll1_d2", CLK_APMIXED_UNIVPL=
-L, 1, 4),
->         PLL_FACTOR(CLK_TOP_UNIVPLL1_D4, "univpll1_d4", CLK_APMIXED_UNIVPL=
-L, 1, 8),
-> @@ -286,7 +155,6 @@ static const struct mtk_fixed_factor top_divs[] =3D {
->         PLL_FACTOR1(CLK_TOP_APLL2_D2, "apll2_d2", CLK_TOP_APLL2, 1, 2),
->         PLL_FACTOR1(CLK_TOP_APLL2_D4, "apll2_d4", CLK_TOP_APLL2, 1, 4),
->         PLL_FACTOR1(CLK_TOP_APLL2_D8, "apll2_d8", CLK_TOP_APLL2, 1, 8),
-> -       PLL_FACTOR2(CLK_TOP_CLK26M, "clk26m_ck", CLK_XTAL, 1, 1),
->         PLL_FACTOR2(CLK_TOP_SYS_26M_D2, "sys_26m_d2", CLK_XTAL, 1, 2),
->         PLL_FACTOR(CLK_TOP_MSDCPLL, "msdcpll_ck", CLK_APMIXED_MSDCPLL, 1,=
- 1),
->         PLL_FACTOR(CLK_TOP_MSDCPLL_D2, "msdcpll_d2", CLK_APMIXED_MSDCPLL,=
- 1, 2),
-> @@ -299,21 +167,21 @@ static const struct mtk_fixed_factor top_divs[] =3D=
- {
->  };
->
->  static const struct mtk_parent axi_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL_D7),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL3_D2),
->  };
->
->  static const struct mtk_parent mem_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MMPLL),
->         TOP_PARENT(CLK_TOP_SYSPLL_D3),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
->  };
->
->  static const struct mtk_parent mm_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MMPLL),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL_D5),
-> @@ -324,7 +192,7 @@ static const struct mtk_parent mm_parents[] =3D {
->  };
->
->  static const struct mtk_parent scp_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL4_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-> @@ -334,20 +202,20 @@ static const struct mtk_parent scp_parents[] =3D {
->  };
->
->  static const struct mtk_parent mfg_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MFGPLL),
->         TOP_PARENT(CLK_TOP_SYSPLL_D3),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D3),
->  };
->
->  static const struct mtk_parent atb_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
->  };
->
->  static const struct mtk_parent camtg_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_USB20_192M_D8),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
->         TOP_PARENT(CLK_TOP_USB20_192M_D4),
-> @@ -357,26 +225,26 @@ static const struct mtk_parent camtg_parents[] =3D =
-{
->  };
->
->  static const struct mtk_parent uart_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
->  };
->
->  static const struct mtk_parent spi_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
->  };
->
->  static const struct mtk_parent msdc50_0_hc_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL1_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL2_D2),
->  };
->
->  static const struct mtk_parent msdc50_0_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MSDCPLL),
->         TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-> @@ -387,7 +255,7 @@ static const struct mtk_parent msdc50_0_parents[] =3D=
- {
->  };
->
->  static const struct mtk_parent msdc50_2_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MSDCPLL),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D3),
->         TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-> @@ -398,7 +266,7 @@ static const struct mtk_parent msdc50_2_parents[] =3D=
- {
->  };
->
->  static const struct mtk_parent msdc30_1_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MSDCPLL_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-> @@ -409,73 +277,73 @@ static const struct mtk_parent msdc30_1_parents[] =
-=3D {
->  };
->
->  static const struct mtk_parent audio_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL3_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL4_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D16),
->  };
->
->  static const struct mtk_parent aud_intbus_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL4_D2),
->  };
->
->  static const struct mtk_parent aud_1_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_APLL1),
->  };
->
->  static const struct mtk_parent aud_2_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_APLL2),
->  };
->
->  static const struct mtk_parent aud_engen1_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_APLL1_D2),
->         TOP_PARENT(CLK_TOP_APLL1_D4),
->         TOP_PARENT(CLK_TOP_APLL1_D8),
->  };
->
->  static const struct mtk_parent aud_engen2_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_APLL2_D2),
->         TOP_PARENT(CLK_TOP_APLL2_D4),
->         TOP_PARENT(CLK_TOP_APLL2_D8),
->  };
->
->  static const struct mtk_parent aud_spdif_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D2),
->  };
->
->  static const struct mtk_parent disp_pwm_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
->  };
->
->  static const struct mtk_parent dxcc_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D8),
->  };
->
->  static const struct mtk_parent ssusb_sys_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
->         TOP_PARENT(CLK_TOP_UNIVPLL3_D2),
->  };
->
->  static const struct mtk_parent spm_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D8),
->  };
->
->  static const struct mtk_parent i2c_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
->         TOP_PARENT(CLK_TOP_UNIVPLL3_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-> @@ -483,20 +351,20 @@ static const struct mtk_parent i2c_parents[] =3D {
->  };
->
->  static const struct mtk_parent pwm_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D8),
->  };
->
->  static const struct mtk_parent senif_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL1_D4),
->         TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->  };
->
->  static const struct mtk_parent aes_fde_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_MSDCPLL),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D3),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-> @@ -505,7 +373,7 @@ static const struct mtk_parent aes_fde_parents[] =3D =
-{
->  };
->
->  static const struct mtk_parent dpi0_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_LVDSPLL_D2),
->         TOP_PARENT(CLK_TOP_LVDSPLL_D4),
->         TOP_PARENT(CLK_TOP_LVDSPLL_D8),
-> @@ -513,7 +381,7 @@ static const struct mtk_parent dpi0_parents[] =3D {
->  };
->
->  static const struct mtk_parent dsp_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYS_26M_D2),
->         TOP_PARENT(CLK_TOP_DSPPLL),
->         TOP_PARENT(CLK_TOP_DSPPLL_D2),
-> @@ -522,7 +390,7 @@ static const struct mtk_parent dsp_parents[] =3D {
->  };
->
->  static const struct mtk_parent nfi2x_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL2_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL_D7),
->         TOP_PARENT(CLK_TOP_SYSPLL_D3),
-> @@ -533,7 +401,7 @@ static const struct mtk_parent nfi2x_parents[] =3D {
->  };
->
->  static const struct mtk_parent nfiecc_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_SYSPLL4_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL_D7),
-> @@ -544,7 +412,7 @@ static const struct mtk_parent nfiecc_parents[] =3D {
->  };
->
->  static const struct mtk_parent ecc_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D3),
-> @@ -552,7 +420,7 @@ static const struct mtk_parent ecc_parents[] =3D {
->  };
->
->  static const struct mtk_parent eth_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
->         TOP_PARENT(CLK_TOP_SYSPLL4_D4),
->         TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-> @@ -560,7 +428,7 @@ static const struct mtk_parent eth_parents[] =3D {
->  };
->
->  static const struct mtk_parent gcpu_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D3),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL_D3),
-> @@ -568,13 +436,13 @@ static const struct mtk_parent gcpu_parents[] =3D {
->  };
->
->  static const struct mtk_parent gcpu_cpm_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
->         TOP_PARENT(CLK_TOP_SYSPLL2_D2),
->  };
->
->  static const struct mtk_parent apu_parents[] =3D {
-> -       TOP_PARENT(CLK_TOP_CLK26M),
-> +       EXT_PARENT(CLK_PAD_CLK26M),
->         TOP_PARENT(CLK_TOP_UNIVPLL_D2),
->         TOP_PARENT(CLK_TOP_APUPLL),
->         TOP_PARENT(CLK_TOP_MMPLL),
-> @@ -684,6 +552,14 @@ static const struct mtk_gate_regs top2_cg_regs =3D {
->                 .flags =3D CLK_GATE_NO_SETCLR_INV | CLK_PARENT_TOPCKGEN, =
-\
->         }
->
-> +#define GATE_EXT(_id, _parent, _shift) {                              \
-> +               .id =3D _id,                                             =
-\
-> +               .parent =3D _parent,                                     =
-\
-> +               .regs =3D &top0_cg_regs,                                 =
-\
-> +               .shift =3D _shift,                                       =
-\
-> +               .flags =3D CLK_GATE_NO_SETCLR | CLK_PARENT_EXT,          =
-\
-> +       }
-> +
->  static const struct mtk_gate top_clk_gates[] =3D {
->         GATE_TOP2(CLK_TOP_AUD_I2S0_M, CLK_TOP_APLL12_CK_DIV0, 0),
->         GATE_TOP2(CLK_TOP_AUD_I2S1_M, CLK_TOP_APLL12_CK_DIV1, 1),
-> @@ -700,19 +576,19 @@ static const struct mtk_gate top_clk_gates[] =3D {
->         GATE_TOP1(CLK_TOP_VPLL_DPIX_EN, CLK_TOP_VPLL_DPIX, 21),
->         GATE_TOP1(CLK_TOP_SSUSB_TOP_CK_EN, CLK_TOP_CLK_NULL, 22),
->         GATE_TOP1(CLK_TOP_SSUSB_PHY_CK_EN, CLK_TOP_CLK_NULL, 23),
-> -       GATE_TOP0(CLK_TOP_CONN_32K, CLK_TOP_CLK32K, 10),
-> -       GATE_TOP0(CLK_TOP_CONN_26M, CLK_TOP_CLK26M, 11),
-> -       GATE_TOP0(CLK_TOP_DSP_32K, CLK_TOP_CLK32K, 16),
-> -       GATE_TOP0(CLK_TOP_DSP_26M, CLK_TOP_CLK26M, 17),
-> +       GATE_EXT(CLK_TOP_CONN_32K, CLK_PAD_CLK32K, 10),
-> +       GATE_EXT(CLK_TOP_CONN_26M, CLK_PAD_CLK26M, 11),
-> +       GATE_EXT(CLK_TOP_DSP_32K, CLK_PAD_CLK32K, 16),
-> +       GATE_EXT(CLK_TOP_DSP_26M, CLK_PAD_CLK26M, 17),
->  };
->
->  static const struct mtk_clk_tree mt8365_topckgen_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .id_offs_map =3D mt8365_topckgen_id_map,
-> -       .id_offs_map_size =3D ARRAY_SIZE(mt8365_topckgen_id_map),
-> -       .fdivs_offs =3D mt8365_topckgen_id_map[CLK_TOP_MFGPLL],
-> -       .muxes_offs =3D mt8365_topckgen_id_map[CLK_TOP_AXI_SEL],
-> -       .gates_offs =3D mt8365_topckgen_id_map[CLK_TOP_AUD_I2S0_M],
-> +       .ext_clk_rates =3D ext_clk_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clk_rates),
-> +       .fdivs_offs =3D CLK_TOP_MFGPLL,
-> +       .muxes_offs =3D CLK_TOP_AXI_SEL,
-> +       .gates_offs =3D CLK_TOP_AUD_I2S0_M,
->         .fclks =3D top_fixed_clks,
->         .fdivs =3D top_divs,
->         .muxes =3D top_muxes,
-> @@ -778,12 +654,33 @@ static const struct mtk_gate_regs ifr6_cg_regs =3D =
-{
->  #define GATE_IFR6(_id, _parent, _shift)                                \
->         GATE_IFRX(_id, _parent, _shift, &ifr6_cg_regs)
->
-> +#define GATE_IFRX_EXT(_id, _parent, _shift, _regs)             \
-> +       {                                                       \
-> +               .id =3D _id,                                      \
-> +               .parent =3D _parent,                              \
-> +               .regs =3D _regs,                                  \
-> +               .shift =3D _shift,                                \
-> +               .flags =3D CLK_GATE_SETCLR | CLK_PARENT_EXT,      \
-> +       }
-> +
-> +#define GATE_IFR2_EXT(_id, _parent, _shift)                    \
-> +       GATE_IFRX_EXT(_id, _parent, _shift, &ifr2_cg_regs)
-> +
-> +#define GATE_IFR3_EXT(_id, _parent, _shift)                    \
-> +       GATE_IFRX_EXT(_id, _parent, _shift, &ifr3_cg_regs)
-> +
-> +#define GATE_IFR4_EXT(_id, _parent, _shift)                    \
-> +       GATE_IFRX_EXT(_id, _parent, _shift, &ifr4_cg_regs)
-> +
-> +#define GATE_IFR5_EXT(_id, _parent, _shift)                    \
-> +       GATE_IFRX_EXT(_id, _parent, _shift, &ifr5_cg_regs)
-> +
->  static const struct mtk_gate ifr_clks[] =3D {
->         /* IFR2 */
-> -       GATE_IFR2(CLK_IFR_PMIC_TMR, CLK_TOP_CLK26M, 0),
-> -       GATE_IFR2(CLK_IFR_PMIC_AP, CLK_TOP_CLK26M, 1),
-> -       GATE_IFR2(CLK_IFR_PMIC_MD, CLK_TOP_CLK26M, 2),
-> -       GATE_IFR2(CLK_IFR_PMIC_CONN, CLK_TOP_CLK26M, 3),
-> +       GATE_IFR2_EXT(CLK_IFR_PMIC_TMR, CLK_PAD_CLK26M, 0),
-> +       GATE_IFR2_EXT(CLK_IFR_PMIC_AP, CLK_PAD_CLK26M, 1),
-> +       GATE_IFR2_EXT(CLK_IFR_PMIC_MD, CLK_PAD_CLK26M, 2),
-> +       GATE_IFR2_EXT(CLK_IFR_PMIC_CONN, CLK_PAD_CLK26M, 3),
->         GATE_IFR2(CLK_IFR_ICUSB, CLK_TOP_AXI_SEL, 8),
->         GATE_IFR2(CLK_IFR_GCE, CLK_TOP_AXI_SEL, 9),
->         GATE_IFR2(CLK_IFR_THERM, CLK_TOP_AXI_SEL, 10),
-> @@ -798,7 +695,7 @@ static const struct mtk_gate ifr_clks[] =3D {
->         GATE_IFR2(CLK_IFR_UART1, CLK_TOP_UART_SEL, 23),
->         GATE_IFR2(CLK_IFR_UART2, CLK_TOP_UART_SEL, 24),
->         GATE_IFR2(CLK_IFR_DSP_UART, CLK_TOP_UART_SEL, 26),
-> -       GATE_IFR2(CLK_IFR_GCE_26M, CLK_TOP_CLK26M, 27),
-> +       GATE_IFR2_EXT(CLK_IFR_GCE_26M, CLK_PAD_CLK26M, 27),
->         GATE_IFR2(CLK_IFR_CQ_DMA_FPC, CLK_TOP_AXI_SEL, 28),
->         GATE_IFR2(CLK_IFR_BTIF, CLK_TOP_AXI_SEL, 31),
->         /* IFR3 */
-> @@ -806,19 +703,19 @@ static const struct mtk_gate ifr_clks[] =3D {
->         GATE_IFR3(CLK_IFR_MSDC0_HCLK, CLK_TOP_AXI_SEL, 2),
->         GATE_IFR3(CLK_IFR_MSDC2_HCLK, CLK_TOP_AXI_SEL, 3),
->         GATE_IFR3(CLK_IFR_MSDC1_HCLK, CLK_TOP_AXI_SEL, 4),
-> -       GATE_IFR3(CLK_IFR_DVFSRC, CLK_TOP_CLK26M, 7),
-> +       GATE_IFR3_EXT(CLK_IFR_DVFSRC, CLK_PAD_CLK26M, 7),
->         GATE_IFR3(CLK_IFR_GCPU, CLK_TOP_AXI_SEL, 8),
->         GATE_IFR3(CLK_IFR_TRNG, CLK_TOP_AXI_SEL, 9),
-> -       GATE_IFR3(CLK_IFR_AUXADC, CLK_TOP_CLK26M, 10),
-> +       GATE_IFR3_EXT(CLK_IFR_AUXADC, CLK_PAD_CLK26M, 10),
->         GATE_IFR3(CLK_IFR_CPUM, CLK_TOP_AXI_SEL, 11),
-> -       GATE_IFR3(CLK_IFR_AUXADC_MD, CLK_TOP_CLK26M, 14),
-> +       GATE_IFR3_EXT(CLK_IFR_AUXADC_MD, CLK_PAD_CLK26M, 14),
->         GATE_IFR3(CLK_IFR_AP_DMA, CLK_TOP_AXI_SEL, 18),
->         GATE_IFR3(CLK_IFR_DEBUGSYS, CLK_TOP_AXI_SEL, 24),
->         GATE_IFR3(CLK_IFR_AUDIO, CLK_TOP_AXI_SEL, 25),
->         /* IFR4 */
->         GATE_IFR4(CLK_IFR_PWM_FBCLK6, CLK_TOP_PWM_SEL, 0),
->         GATE_IFR4(CLK_IFR_DISP_PWM, CLK_TOP_DISP_PWM_SEL, 2),
-> -       GATE_IFR4(CLK_IFR_AUD_26M_BK, CLK_TOP_CLK26M, 4),
-> +       GATE_IFR4_EXT(CLK_IFR_AUD_26M_BK, CLK_PAD_CLK26M, 4),
->         GATE_IFR4(CLK_IFR_CQ_DMA, CLK_TOP_AXI_SEL, 27),
->         /* IFR5 */
->         GATE_IFR5(CLK_IFR_MSDC0_SF, CLK_TOP_MSDC50_0_SEL, 0),
-> @@ -829,12 +726,12 @@ static const struct mtk_gate ifr_clks[] =3D {
->         GATE_IFR5(CLK_IFR_MSDC0_SRC, CLK_TOP_MSDC50_0_SEL, 9),
->         GATE_IFR5(CLK_IFR_MSDC1_SRC, CLK_TOP_MSDC30_1_SEL, 10),
->         GATE_IFR5(CLK_IFR_MSDC2_SRC, CLK_TOP_MSDC50_2_SEL, 11),
-> -       GATE_IFR5(CLK_IFR_PWRAP_TMR, CLK_TOP_CLK26M, 12),
-> -       GATE_IFR5(CLK_IFR_PWRAP_SPI, CLK_TOP_CLK26M, 13),
-> -       GATE_IFR5(CLK_IFR_PWRAP_SYS, CLK_TOP_CLK26M, 14),
-> +       GATE_IFR5_EXT(CLK_IFR_PWRAP_TMR, CLK_PAD_CLK26M, 12),
-> +       GATE_IFR5_EXT(CLK_IFR_PWRAP_SPI, CLK_PAD_CLK26M, 13),
-> +       GATE_IFR5_EXT(CLK_IFR_PWRAP_SYS, CLK_PAD_CLK26M, 14),
->         GATE_IFR5(CLK_IFR_MCU_PM_BK, CLK_TOP_AXI_SEL, 16),
-> -       GATE_IFR5(CLK_IFR_IRRX_26M, CLK_TOP_CLK26M, 22),
-> -       GATE_IFR5(CLK_IFR_IRRX_32K, CLK_TOP_CLK32K, 23),
-> +       GATE_IFR5_EXT(CLK_IFR_IRRX_26M, CLK_PAD_CLK26M, 22),
-> +       GATE_IFR5_EXT(CLK_IFR_IRRX_32K, CLK_PAD_CLK32K, 23),
->         GATE_IFR5(CLK_IFR_I2C0_AXI, CLK_TOP_I2C_SEL, 24),
->         GATE_IFR5(CLK_IFR_I2C1_AXI, CLK_TOP_I2C_SEL, 25),
->         GATE_IFR5(CLK_IFR_I2C2_AXI, CLK_TOP_I2C_SEL, 26),
-> @@ -859,6 +756,8 @@ static const struct mtk_gate ifr_clks[] =3D {
->
->  static const struct mtk_clk_tree mt8365_infracfg_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> +       .ext_clk_rates =3D ext_clk_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clk_rates),
->  };
->
->  static int mt8365_apmixedsys_probe(struct udevice *dev)
->
-> ---
-> base-commit: 5f01b24d93976de4d38656df24fcc4f56869753d
-> change-id: 20260302-mtk-clk-8365-drop-map-eef332876f99
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+From: Shantur Rathore <i@shantur.com>
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+Currently U-Boot uses ESP as storage for EFI variables.
+Devices with SPI Flash are used for storing environment with this
+commit we allow EFI variables to be stored on SPI Flash.
 
-Thanks
-Julien
+Signed-off-by: Shantur Rathore <i@shantur.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905D3-CC
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+
+Changes in v11:
+ - Use log_debug() in efi_var_to_storage() to avoid console output from EFI apps
+ - Use sector-aligned erase length to reduce SPI flash wear
+ - Remove redundant log messages already reported by log_ret()
+ - Add NULL check for dev_get_uclass_priv() result
+ - Use log_err() in efi_var_from_storage() which runs during init
+ - Remove unnecessary goto before error label
+
+Changes in v10:
+- Clean log messages
+- separate return variables
+- Fix return value
+- Move length check to efi_var_restore()
+
+Changes in v9:
+- Remove EFI_RT_VOLATILE_STORE enabling
+- Cleanup commit message
+
+Changes in v8:
+- Add missing EFI_VARIABLE_SF_STORE dependency to EFI_VARIABLE_SF_DEVICE_INDEX
+
+Changes in v7:
+- sed -i 's/efi_var_from/efi_var_from_storage/g'
+
+Changes in v6:
+- sed -i 's/efi_var_read/efi_var_from/g'
+- sed -i 's/efi_var_write/efi_var_to_storage/g'
+
+Changes in v4:
+- Extend Kconfig description
+- Extend commit message and describe efivar missing part
+- use unify methods for reading/writing variable
+
+Changes in v3:
+- Fixed compiler warnings.
+
+Changes in v2:
+- Refactored efi_var_file to move common parts out as requested
+- Changed ifdefs to use CONFIG_IS_DEFINED
+- Fixed typos
+
+The patch depends on https://lore.kernel.org/u-boot/20260311173033.10002-1-heinrich.schuchardt@canonical.com
+
+---
+ lib/efi_loader/Kconfig      |  33 +++++++++++
+ lib/efi_loader/Makefile     |   1 +
+ lib/efi_loader/efi_var_sf.c | 111 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 145 insertions(+)
+ create mode 100644 lib/efi_loader/efi_var_sf.c
+
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 579eed658801..315dd4f3e794 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -124,6 +124,24 @@ config EFI_VARIABLE_FILE_STORE
+ 	  Select this option if you want non-volatile UEFI variables to be
+ 	  stored as file /ubootefi.var on the EFI system partition.
+ 
++config EFI_VARIABLE_SF_STORE
++	bool "Store non-volatile UEFI variables in SPI Flash"
++	depends on SPI_FLASH
++	help
++	  Select this option if you want non-volatile UEFI variables to be
++	  stored in SPI Flash.
++
++	  Define CONFIG_EFI_VARIABLE_SF_OFFSET as offset in SPI Flash to use as
++	  the storage for variables. CONFIG_EFI_VAR_BUF_SIZE defines the space
++	  needed.
++
++	  Note that SPI Flash devices have a limited number of program/erase
++	  cycles. Frequent updates to UEFI variables may cause excessive wear
++	  and can permanently damage the flash device, particularly on SPI NAND
++	  or low-end SPI NOR parts without wear leveling. This option should be
++	  used with care on such systems, and is not recommended for platforms
++	  where UEFI variables are updated frequently.
++
+ config EFI_MM_COMM_TEE
+ 	bool "UEFI variables storage service via the trusted world"
+ 	depends on OPTEE
+@@ -194,6 +212,21 @@ config FFA_SHARED_MM_BUF_ADDR
+ 	  the MM SP in secure world.
+ 	  It is assumed that the MM SP knows the address of the shared MM communication buffer.
+ 
++config EFI_VARIABLE_SF_OFFSET
++	hex "EFI variables in SPI flash offset"
++	depends on EFI_VARIABLE_SF_STORE
++	help
++	  Offset from the start of the SPI Flash where EFI variables will be stored.
++	  This should be aligned to the sector size of SPI Flash.
++
++config EFI_VARIABLE_SF_DEVICE_INDEX
++	int "Device Index for target SPI Flash"
++	depends on EFI_VARIABLE_SF_STORE
++	default 0
++	help
++	  The index of SPI Flash device used for storing EFI variables. This would be
++	  needed if there are more than 1 SPI Flash devices available to use.
++
+ config EFI_VARIABLES_PRESEED
+ 	bool "Initial values for UEFI variables"
+ 	depends on !COMPILE_TEST
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index ca1775eb03be..d73ad43951b1 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -54,6 +54,7 @@ obj-y += efi_variable_tee.o
+ else
+ obj-y += efi_variable.o
+ obj-$(CONFIG_EFI_VARIABLE_FILE_STORE) += efi_var_file.o
++obj-$(CONFIG_EFI_VARIABLE_SF_STORE) += efi_var_sf.o
+ obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
+ endif
+ obj-y += efi_watchdog.o
+diff --git a/lib/efi_loader/efi_var_sf.c b/lib/efi_loader/efi_var_sf.c
+new file mode 100644
+index 000000000000..6eae8d464645
+--- /dev/null
++++ b/lib/efi_loader/efi_var_sf.c
+@@ -0,0 +1,111 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * SPI Flash interface for UEFI variables
++ *
++ * Copyright (c) 2023, Shantur Rathore
++ * Copyright (C) 2026, Advanced Micro Devices, Inc.
++ */
++
++#define LOG_CATEGORY LOGC_EFI
++
++#include <efi_loader.h>
++#include <efi_variable.h>
++#include <spi_flash.h>
++#include <dm.h>
++
++efi_status_t efi_var_to_storage(void)
++{
++	struct efi_var_file *buf;
++	struct spi_flash *flash;
++	struct udevice *sfdev;
++	efi_status_t ret;
++	size_t erase_len;
++	loff_t len;
++	int r;
++
++	ret = efi_var_collect(&buf, &len, EFI_VARIABLE_NON_VOLATILE);
++	if (ret != EFI_SUCCESS)
++		goto error;
++
++	if (len > EFI_VAR_BUF_SIZE) {
++		log_debug("EFI var buffer length more than target SPI Flash size\n");
++		ret = EFI_OUT_OF_RESOURCES;
++		goto error;
++	}
++
++	log_debug("Got buffer to write buf->len: %d\n", buf->length);
++
++	r = uclass_get_device(UCLASS_SPI_FLASH,
++			      CONFIG_EFI_VARIABLE_SF_DEVICE_INDEX, &sfdev);
++	if (r) {
++		ret = EFI_DEVICE_ERROR;
++		goto error;
++	}
++
++	flash = dev_get_uclass_priv(sfdev);
++	if (!flash) {
++		log_debug("Failed to get SPI Flash priv data\n");
++		ret = EFI_DEVICE_ERROR;
++		goto error;
++	}
++	erase_len = ALIGN(len, flash->sector_size);
++
++	r = spi_flash_erase_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET,
++			       erase_len);
++	if (r) {
++		log_debug("Failed to erase SPI Flash\n");
++		ret = EFI_DEVICE_ERROR;
++		goto error;
++	}
++
++	r = spi_flash_write_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, len, buf);
++	if (r) {
++		log_debug("Failed to write to SPI Flash: %d\n", r);
++		ret = EFI_DEVICE_ERROR;
++	}
++
++error:
++	free(buf);
++	return ret;
++}
++
++efi_status_t efi_var_from_storage(void)
++{
++	struct efi_var_file *buf;
++	struct udevice *sfdev;
++	efi_status_t ret;
++	int r;
++
++	buf = calloc(1, EFI_VAR_BUF_SIZE);
++	if (!buf) {
++		log_err("Unable to allocate buffer\n");
++		return EFI_OUT_OF_RESOURCES;
++	}
++
++	r = uclass_get_device(UCLASS_SPI_FLASH,
++			      CONFIG_EFI_VARIABLE_SF_DEVICE_INDEX, &sfdev);
++	if (r) {
++		log_err("Failed to get SPI Flash device: %d\n", r);
++		ret = EFI_DEVICE_ERROR;
++		goto error;
++	}
++
++	r = spi_flash_read_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET,
++			      EFI_VAR_BUF_SIZE, buf);
++	if (r) {
++		log_err("Failed to read from SPI Flash: %d\n", r);
++		ret = EFI_DEVICE_ERROR;
++		goto error;
++	}
++
++	if (efi_var_restore(buf, false) != EFI_SUCCESS) {
++		log_err("No valid EFI variables in SPI Flash\n");
++		ret = EFI_DEVICE_ERROR;
++		goto error;
++	}
++
++	ret = EFI_SUCCESS;
++error:
++	free(buf);
++	return ret;
++}
+-- 
+2.43.0
+
+base-commit: 6f83a27dbba6cc4e4c2683322c3ab5415173821e
+branch: debian-sent3
