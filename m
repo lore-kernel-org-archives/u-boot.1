@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D796105F7A6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 14:53:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 535BD105F7A6
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 14:57:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A51D0842FC;
-	Fri, 13 Mar 2026 15:53:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BB5F48430F;
+	Fri, 13 Mar 2026 15:57:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LfM0o7ik";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t6nzcUuQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2B6B842FC; Fri, 13 Mar 2026 15:53:17 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 05A4A84319; Fri, 13 Mar 2026 15:57:12 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3972084286
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 15:53:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F5D384307
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 15:57:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-404254ffe8aso1406074fac.0
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 07:53:15 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d743ba241aso1236049a34.1
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 07:57:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773413594; x=1774018394; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773413828; x=1774018628; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=x+FdTahsHcvBlSTjItQipgPUyHJsYaYb5txmmcgFc80=;
- b=LfM0o7iktaAogcI6TXuMhIgJfxy6BNv/3qY1mC6m2EIHpf+FHE8EPQwZ2GC5cwCIqQ
- e964xyDDZuC+B95MZrmBX/Z1lN/rtnx1zEEROerDzjlHSSptk6OO9gf3bq6b2slDss+C
- PPdRN67FVqBlDxSK/raofAPXqWcKW3vmXKtSU=
+ bh=qOk3Lo8OjUxCTI/li4NlRKgpOEsVd7CxR7fYZXSrg5w=;
+ b=t6nzcUuQF0W9USwF5vdNrz8pRS7qHmC0fle52APf6y8uDJbKp4zf6R4zntx9a0Kmqh
+ Urv106B9ZvZXRuto7cOwPJHqkM578lhftf+gbGx1Y+0NFG98NflILq5K1NKJ54jwbZ+U
+ 1CCw7eBej5EVxIKvf3d2lW4dd/1Kzq46aYXfA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773413594; x=1774018394;
+ d=1e100.net; s=20251104; t=1773413828; x=1774018628;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x+FdTahsHcvBlSTjItQipgPUyHJsYaYb5txmmcgFc80=;
- b=rEU0TlV6LO4VoEoewtybSj9t6zWSlNN6G0UjGFLtmFW12Mg30qjEjPJDUwUphPjw2c
- WuR6SFR9Oe7rsWfLLfxruQdi/kig1WCm8KwZ96KNv2qYiwcvlEoXWllyUvawsLoFl0Xr
- x8X56Y8j0OaWAzbl4j+chuOkKF8D8M3qPPtDhWUSr/t92JHt+Sn/omQ2gtzZMpo5EDwM
- VvRUjkd7B+siS6Lm5BAYgwXBxIaTYWkXcYWimTzq29BRPlyHb45mwOMAP35iMNW7zUr8
- NujwMQW4okk+WJxUWXvvJDrFy7a3nd3vqq+I4p+BORua/+DYAnAOVJ3FKnSnsjwL3L7D
- d85w==
+ bh=qOk3Lo8OjUxCTI/li4NlRKgpOEsVd7CxR7fYZXSrg5w=;
+ b=HCqHIdU13m+yTXyojbSL2JtcC7H+aSN8XBs/AjMtDKNfab6RQIoEvkAbsO4gav33qS
+ L1e3l1nc00ypk12GYfIaBIC8ktUTFaRZmFoIYcFmvtw2O9n9ynoOvpijo8GhnKo/FCoW
+ XekcpwptPMFjCoZ29xMbM58S6IG4kmv/ILe1V2CW66l/1hOOoCcNuurK464Vhy/45oIH
+ 02OgCLUXruErWzyvtiNcr8HxIArXFVp+z2RTyIIlCwCFYuqAl3GLC2ScDq4Q0kbR5gnY
+ 86r5OEdJ6mxmDMTpa2AxV3kK0ob94PNYls7Q6lc2KoaaQqKf+Jw1I5Y3s0oGlmlUeVbt
+ ljeQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVj9RrTPE1iclMK1oasJuQUBsOSsnk17BlFG8akBCcKpt7jnbdiXrjaeJETlWmWZX26kudYJ8I=@lists.denx.de
-X-Gm-Message-State: AOJu0YzaEi31iTYsEl2bUZdnEUTDZtQzdjCgLCK1rOoJSqOhSmBdMebX
- MI7teTGroUh0Nw+uSVZuTFwq/kgZe9fxA7K+XBrXhi0WtiyAuuMt6XMBdUyG3U9nV4vxE7Eewh4
- DEbwkw64=
-X-Gm-Gg: ATEYQzz8ddqGNdWx2t8ODZq6E1ntaoYptfk2yl39tDtqbpAyo6Sbrd5CIzInBGNWWlg
- 0WR3VomIkfv424GbLECXPc1jYRS7ImPmRY0/LgKmDQH+MokHdB4c2ELd/THEoRqcYKOmUX+D9te
- Su0ELx4SY+ze+y4GhhFkRA6e++74zTMJ4ODwREM7VyvSYxYdOKURMuc9Oaiaavy9ndKdFkxTQU2
- Np0vf7fHYnk81BmoQRAbe7qmoTVQ02fxTUJ5bbB3A9bDMY/97XzSHPfNJDUduWAUOZcNhbko/lL
- DpUNQP2Dlj7JWOXmKxMrRJ6SauBYINar6EUEmhCTxpy5A0yUnF+pBgaaiXDcdsI+/F5e7VGXNlM
- x5CVxEQF1ffAQvihKqwFoGcDBrr7436QcZx8GHdHN0tzmDx9j9N3+Jj2yyo9uqVYfd1wjMl0Fr7
- 9e3eh4e2AApwG6tf3HeHc3XX1zMrLONPUD3Qigfka2OSg7Z+YJS92yEfGS7NBMr0btAM1A1M1GJ
- 93qelKrIVm+5XGaEy1WJt6dHI50ncsRhNxr3/2XlitiDqpU
-X-Received: by 2002:a05:6871:b13:b0:404:1ec2:562c with SMTP id
- 586e51a60fabf-41798e065eemr4201192fac.6.1773413593856; 
- Fri, 13 Mar 2026 07:53:13 -0700 (PDT)
+ AJvYcCVm/VEMaCEMaWxGW1ziMfWCdyhKWfUBJRwLiKdfsMX6Pe6CvJBrcIuWOxhhiDOO5YdlFy50kK4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLRR3pV5efGgqo0o9p/3xeecLktNbCmHUhFv2sOnhrgY7pL6oU
+ iEQBUzrF89OJHnUFFUHF9sJNwXiBZduJ4E04iIOLTRpHgw23lOhYzTxPUAcFKEBCbqw=
+X-Gm-Gg: ATEYQzyBJcGcbde32AMbY1CUD9U/EL0pPRwymh5/me2zAKFEkb5BEedgkTHdJsDv/sv
+ RKieIjh5X5eWC/SIL5vgxb3X9PEnXSWS0d2kKM7Z+/ixlR8JTIn9J6azbEcIUqZBGQS5VrMgr4A
+ I8B9HWWGr24QEgPtwzGphaBZwsIsapZBz8pIfu7idetoORXwet61yphBNJZfJwb9Ldx5WMoYG3V
+ 536fsC/ZtLused4wVY5NN239/+zYnLwF16iLW6GMRUoWdTRXE/qja/zk2pVyrZ/VE/1LukYKLCf
+ D49wfVoCH+1aAtqddicKOuFRImTaoLo0nYYwVsI0143pcQj63JXT2VkSp0/UsBi/x66XT/HKknf
+ bak5yt/GdmgeZDZznpU2yrS4hb9aoiVD89bm4uLUd/yxrHZ/+GM3G1ORZWTIFfZprMaKdoiX2nD
+ v/OtRJwsKxOCc41ysv7To2lQv7ooCdpjdGXuy3PSN6Eh7XjCPn+rxtB94J2b7dCRpCYjsHk+pw7
+ 7TbRSE3S2xfzLdESsVcqKm6zIHfa+prHZCbFUzvsXN0xd+d
+X-Received: by 2002:a05:6830:4c07:b0:7d7:54d5:c6f8 with SMTP id
+ 46e09a7af769-7d78250c8cemr2384241a34.17.1773413828099; 
+ Fri, 13 Mar 2026 07:57:08 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e25f037sm8340391fac.5.2026.03.13.07.53.12
+ 46e09a7af769-7d76ac8975csm6407834a34.8.2026.03.13.07.57.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 07:53:13 -0700 (PDT)
-Date: Fri, 13 Mar 2026 08:53:11 -0600
+ Fri, 13 Mar 2026 07:57:07 -0700 (PDT)
+Date: Fri, 13 Mar 2026 08:57:05 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Max Merchel <max.merchel@ew.tq-group.com>
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
- u-boot@lists.denx.de, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH RFT] pci: imx: Properly support upstream Linux
- reset-gpios property
-Message-ID: <20260313145311.GD502704@bill-the-cat>
-References: <20260312192605.131132-1-krzysztof.kozlowski@oss.qualcomm.com>
- <9e8aa4e7-72ab-4b1a-b324-4c78b13b9741@ew.tq-group.com>
- <02b1e588-1feb-484e-9f3c-f6c9f0b8e00c@oss.qualcomm.com>
- <435e08f1-77fd-476a-96ad-8648ae971e81@ew.tq-group.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: bb@ti.com, reatmon@ti.com, u-boot@lists.denx.de, u-kumar1@ti.com,
+ gehariprasath@ti.com, s-k6@ti.com
+Subject: Re: [RESEND PATCH v2 0/2] k3_*: Add config fragments for inline ECC
+ and BIST
+Message-ID: <20260313145705.GE502704@bill-the-cat>
+References: <20260226122508.2269682-1-n-francis@ti.com>
+ <6a62fbd9-2a0f-4783-8529-1e42c6ec496d@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T/0i/r0MVQnzhAke"
+ protocol="application/pgp-signature"; boundary="jFW3qt9RcNYCF/VW"
 Content-Disposition: inline
-In-Reply-To: <435e08f1-77fd-476a-96ad-8648ae971e81@ew.tq-group.com>
+In-Reply-To: <6a62fbd9-2a0f-4783-8529-1e42c6ec496d@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,98 +102,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---T/0i/r0MVQnzhAke
-Content-Type: text/plain; charset=iso-8859-1
+--jFW3qt9RcNYCF/VW
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 13, 2026 at 09:28:23AM +0100, Max Merchel wrote:
+On Fri, Mar 13, 2026 at 02:08:19PM +0530, Neha Malcom Francis wrote:
+> Hi Tom
 >=20
-> On 3/13/26 09:14, Krzysztof Kozlowski wrote:
-> > On 13/03/2026 09:12, Max Merchel wrote:
-> > > On 3/12/26 20:26, Krzysztof Kozlowski wrote:
-> > > > The driver requests explicitly "reset-gpio" property, not the one w=
-ith
-> > > > "gpios" suffix but upstream Linux kernel deprecated it in 2021.
-> > > > Existing upstream Linux kernel DTS is being changed to "reset-gpios"
-> > > > property, thus update the driver to read that one too.
-> > > >=20
-> > > > Note that driver is probably broken already, because it parsed GPIO=
- in
-> > > > standard way respecting the flags and on top of that applied the
-> > > > "reset-gpio-active-high" flag, thus "reset-gpio ACTIVE_LOW" with the
-> > > > "reset-gpio-active-high" property would be double inverted.
-> > > >=20
-> > > > Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcom=
-m.com>
-> > > >=20
-> > > > ---
-> > > >=20
-> > > > 1. https://lore.kernel.org/linux-devicetree/20260312-dts-snps-reset=
--gpios-v2-12-0d5040eb4a1e@oss.qualcomm.com/
-> > > > 2. See Linux kernel commit 42694f9f6407 ("dt-bindings: PCI: add snp=
-s,dw-pcie.yaml")
-> > > > ---
-> > > >    drivers/pci/pcie_imx.c | 22 +++++++++++++++++++---
-> > > >    1 file changed, 19 insertions(+), 3 deletions(-)
-> > > >=20
-> > > > diff --git a/drivers/pci/pcie_imx.c b/drivers/pci/pcie_imx.c
-> > > > index 11c4ccbfc555..8d853ecf2c22 100644
-> > > > --- a/drivers/pci/pcie_imx.c
-> > > > +++ b/drivers/pci/pcie_imx.c
-> > > > @@ -728,15 +728,31 @@ static int imx_pcie_dm_write_config(struct ud=
-evice *dev, pci_dev_t bdf,
-> > > >    static int imx_pcie_dm_probe(struct udevice *dev)
-> > > >    {
-> > > >    	struct imx_pcie_priv *priv =3D dev_get_priv(dev);
-> > > > +	int ret;
-> > > >    #if CONFIG_IS_ENABLED(DM_REGULATOR)
-> > > >    	device_get_supply_regulator(dev, "vpcie-supply", &priv->vpcie);
-> > > >    #endif
-> > > >    	/* if PERST# valid from dt then assert it */
-> > > > -	gpio_request_by_name(dev, "reset-gpio", 0, &priv->reset_gpio,
-> > > > -			     GPIOD_IS_OUT);
-> > > > -	priv->reset_active_high =3D dev_read_bool(dev, "reset-gpio-active=
--high");
-> > > > +	ret =3D gpio_request_by_name(dev, "reset-gpio", 0, &priv->reset_g=
-pio,
-> > > > +				   GPIOD_IS_OUT);
-> > > > +	if (!ret) {
-> > > > +		/*
-> > > > +		 * Legacy property, invert assert logic based on
-> > > > +		 * reset-gpio-active-high. This won't work if flags are not
-> > > > +		 * matching the reset-gpio-active-high.
-> > > > +		 */
-> > > > +		priv->reset_active_high =3D dev_read_bool(dev, "reset-gpio-activ=
-e-high");
-> > > A warning should also be issued when using the deprecated "reset-gpio"
-> > > property.
-> > >=20
-> > >   =A0 =A0 =A0 =A0 =A0 =A0 dev_warn(dev, "reset-gpio property deprecat=
-ed, use
-> > > reset-gpios\n");
-> > >=20
-> > Why? What would end user seeing this in their serial console do? The
-> > deprecated property is not a mistake, it's just deprecated.
+> On 26/02/26 17:55, Neha Malcom Francis wrote:
+> > Typically we do not enable these configs by default but would still lik=
+e to
+> > have the option to start building them in our default build flow for
+> > testing. Also there is the added advantage of users being able to see w=
+hat
+> > is needed in case they choose to enable these features.
+> >=20
+> > Changes since v1:
+> > https://lore.kernel.org/u-boot/20260220091532.3584771-1-n-francis@ti.co=
+m/
+> > - move fragments to board/ti/common (Tom)
+> > - add doc patch (Tom)
+> >=20
+> > Neha Malcom Francis (2):
+> >   configs: k3_*: Add config fragments for enabling inline ECC and/or
+> >     BIST
+> >   doc: board: ti: Add support for config fragment builds
+> >=20
+> >  board/ti/common/k3_bist.config       |  1 +
+> >  board/ti/common/k3_inline_ecc.config |  1 +
+> >  doc/board/ti/k3.rst                  | 66 ++++++++++++++++++++++++++++
+> >  3 files changed, 68 insertions(+)
+> >  create mode 100644 board/ti/common/k3_bist.config
+> >  create mode 100644 board/ti/common/k3_inline_ecc.config
+> >=20
 >=20
-> You're right. It's not a message for the end user, but for the developers.
-> Therefore, it would be better to add a debug message.
+> Any rework or so needed on this or is it good to go?
 
-Developers should be enabling OF_UPSTREAM and so that won't have slipped
-through?
+I'll pick this up for next soon, thanks.
 
 --=20
 Tom
 
---T/0i/r0MVQnzhAke
+--jFW3qt9RcNYCF/VW
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabQk0wAKCRAr4qD1Cr/k
-CorAAP4nz2WOuPJgnWCX5AusDPvllVgJY75XA9JEAfhrFWP8DAEAngFAv7ceZOc2
-uMusBogoLEfFWZ3LEeKRMW2Wb5FnQgY=
-=yxLO
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabQlwAAKCRAr4qD1Cr/k
+Cjr8AQDl2zOy22BKIn4pI5MObDfsEryUdVsa0+MliE6ckHX65AD/bGXQ27CA9SCp
+cLJXCbMihcd48i3xz54LZEvpaSK7ig0=
+=76Yh
 -----END PGP SIGNATURE-----
 
---T/0i/r0MVQnzhAke--
+--jFW3qt9RcNYCF/VW--
