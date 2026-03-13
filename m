@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE874105F7A8
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 13:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CE6105F7A6
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 13:59:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2B2C842F4;
-	Fri, 13 Mar 2026 14:59:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37D1B84221;
+	Fri, 13 Mar 2026 14:59:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GqGStFFw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Odmsxpv8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEC828420D; Fri, 13 Mar 2026 14:59:21 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
+ id EAF0E84307; Fri, 13 Mar 2026 14:59:23 +0100 (CET)
+Received: from BN1PR04CU002.outbound.protection.outlook.com
+ (mail-eastus2azlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0E82842CD
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:59:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD75D84221
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:59:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o9PLBEpF40MdCoZbEXVv7lb6bOgGrVf8D6G8Q/+c7WOH7Wl9CiBSR4j/bYIyDhIw4sRTL9oUD9R43WBU82vRMOLbtR7XrSpcaf4b4RmCOzwGTlhsxSJFzk1HJ8D0DFzJM9egkvDdg9mgyZuOcmcdsffiL48Hw7m2Ddqx3RYhUBrr8eKCDsQdPLuKFv3By+ETgJOtrJMm/v8AJddzS4Tx11pjaP6SuB41NpJ+kTbQyPP5G7bZ6JA8heT/yU8EQqzDniP4A8bKe+zUdMBgIpbqOzKkyJFjASwsYLZeVP66iUwFwJXuj/ZemoPTWJ3MfI8FtxpUaESaxtwIgqhAWlIu+Q==
+ b=NY4xWy4/FbY9MBmWLPhPL0Dho3cjyxv2NA+c/Muxm1Umm+nsl/gb6FwbFWCFvGOrMqWjKYesd+1KaGCuI/aY1hO07ebhE8XEzpzBdYmPjhFFsxa26rFelONT1b8Jr1kSWKNn4Cn4LYEzCtXah8CY4vyzozr5LiQZwuYK+fU5ZDLgvvr9xIHD5hVCIckgsihSzLEkRjlMdfdZKmrALOdf889GJqFWKEJnRsrEfN5ID3ged0CSixDxOgG44noYUoRqrJIv4uDxKaQxCkAak9Y6RjKsutm8cde2qPMt3EyvG2ZW7FCujf4YS3fhgf6eQE0ovaW3rxe9yfhNt0loM9YiSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MsvLbQ7Jc5IVQi9SLB8GqmmNllITZTZjCppGhGvpaTs=;
- b=H/iNbXC983gXPP9r1EnCmLWKU8Yj8kLk0tpqmFVRPMkLu2ObeQKjKonltFPoiQujh40V4lK8uWzdJFZfjvvETVwe6k/G2Uv92JtZ/ZTc+ls4WcT1ej/AQSYUieWJcUrq3b4KIpYsmVW0Xslr+h/tCWGI7r/LWgnQY8hC+1/BVgsWm63hsINbwCevTRaZTQVoucWM50uxJCo9CYCitDXxKjtHfTtxgnE5xtGN+I4sb86nd01UQlEhzDbbZuWWECDqdnmAszVKEc8lhKIR2HNPWOHXuQumIh2p6HMZNl/EZRKtwixI9gGMUT+IaiLpmNPmOUrkUu/3LtaMfazyaqvIvg==
+ bh=ubK616dPDyGR8ncMw3o05UO0GPYlOV70aU/egECTOm4=;
+ b=arIHBtaSK7ZrZDWuQzUH3gJJZaJm8kWl7mwZaq06v62YmrM0DehEIOoC/FbW5qcRYfxdriq8lqdSJuLwDdc402qVnBWZRiDbuhWG3RLeVqy8BHAtMp3b3t0nZn5obQW8kLmK7xgs08Xty8UBDAcCOh0U02z2To1Rw/nRCjPaBn7dsEY5Du2NGVZPMfOb9DW8eAivrunVwba8iW2oGbTFSRtrh6m4R2/28f9+fBbcfJJP95wbgK4LP9k2kYbvbWM+hgIrWj1ZKdefZQRwN9YWL1Y+Zhkql19TSydkQHqcaPfkwlShapWkF2AV/9l2lsquLhOF6IX7Pq+61N0oyx91qQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MsvLbQ7Jc5IVQi9SLB8GqmmNllITZTZjCppGhGvpaTs=;
- b=GqGStFFwVmUliISijWFdPo7JqTkaaII5eck3ZruP8lIZMfi9bURE7H631chlqTGNxXy5jYMZpTOrUCraKH2Do+znnF/ibLpkatEisFM1RXbI70g/VgeKlE+BQ0KF00xi4WVfMYOv8af00wD+RRV29XRW4ksiDBMAmV5fkPSegbY=
-Received: from BY5PR03CA0004.namprd03.prod.outlook.com (2603:10b6:a03:1e0::14)
- by SA3PR10MB7042.namprd10.prod.outlook.com (2603:10b6:806:317::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.17; Fri, 13 Mar
- 2026 13:59:15 +0000
-Received: from SJ5PEPF000001ED.namprd05.prod.outlook.com
- (2603:10b6:a03:1e0:cafe::a8) by BY5PR03CA0004.outlook.office365.com
- (2603:10b6:a03:1e0::14) with Microsoft SMTP Server (version=TLS1_3,
+ bh=ubK616dPDyGR8ncMw3o05UO0GPYlOV70aU/egECTOm4=;
+ b=Odmsxpv8zeFjHF1wr0HyGzsfLmPhZCf+j7J/aXsDSCcGHILp2Z9/zpORP7Ls7oNmui/YCMY4Akoo1KlmzOgm4VjXgoFdka8S+jpt7xNjTC07y23twhnLAY2XhBMaoi8tJ0lWqaGPovSu8JSydR2iYNccHctVVwkiGC91oGINQpY=
+Received: from CH2PR14CA0032.namprd14.prod.outlook.com (2603:10b6:610:56::12)
+ by SJ5PPF87E558B7D.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::7b3) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.15; Fri, 13 Mar
+ 2026 13:59:17 +0000
+Received: from DS1PEPF0001708E.namprd03.prod.outlook.com
+ (2603:10b6:610:56:cafe::5e) by CH2PR14CA0032.outlook.office365.com
+ (2603:10b6:610:56::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.16 via Frontend Transport; Fri,
- 13 Mar 2026 13:59:13 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.195)
+ 13 Mar 2026 13:59:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.195; helo=lewvzet201.ext.ti.com; pr=C
-Received: from lewvzet201.ext.ti.com (198.47.23.195) by
- SJ5PEPF000001ED.mail.protection.outlook.com (10.167.242.201) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ DS1PEPF0001708E.mail.protection.outlook.com (10.167.17.134) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 13:59:14 +0000
-Received: from DLEE207.ent.ti.com (157.170.170.95) by lewvzet201.ext.ti.com
- (10.4.14.104) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 13:59:15 +0000
+Received: from DFLE210.ent.ti.com (10.64.6.68) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 13 Mar
- 2026 08:59:14 -0500
-Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 08:59:11 -0500
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 13 Mar
- 2026 08:59:13 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 08:59:11 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 13 Mar 2026 08:59:13 -0500
+ Transport; Fri, 13 Mar 2026 08:59:11 -0500
 Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
  [10.24.53.104])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62DDx6JY638000;
- Fri, 13 Mar 2026 08:59:12 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62DDx6JX638000;
+ Fri, 13 Mar 2026 08:59:09 -0500
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <n-francis@ti.com>
 CC: <u-kumar1@ti.com>, <vigneshr@ti.com>, <a-kumar2@ti.com>
-Subject: [RFC PATCH 02/19] configs: j784s4_evm_r5: Used main_r5 reserved
- memory in DDR for malloc heap
-Date: Fri, 13 Mar 2026 19:28:43 +0530
-Message-ID: <20260313135900.3430264-3-p-mantena@ti.com>
+Subject: [RFC PATCH 01/19] configs: j7200_evm_r5: Used main_r5 reserved memory
+ in DDR for malloc heap
+Date: Fri, 13 Mar 2026 19:28:42 +0530
+Message-ID: <20260313135900.3430264-2-p-mantena@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260313135900.3430264-1-p-mantena@ti.com>
 References: <20260313135900.3430264-1-p-mantena@ti.com>
@@ -93,30 +93,29 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001ED:EE_|SA3PR10MB7042:EE_
-X-MS-Office365-Filtering-Correlation-Id: aef7809f-b2fa-4bf0-d39b-08de8108b629
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001708E:EE_|SJ5PPF87E558B7D:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1dd2245c-edc4-49a2-de0a-08de8108b689
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700016|376014|82310400026|1800799024|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: 12DC2XbgSEyisFROWoJIPJdq8Pm+JR08kB3AwK9p24d/m2oV1I1OQJ9p7Skv3UjJ+RtRoLyR2VzBCMWoX2w9zewI8FjVAG7n2OObFhOSLLKmrkKxOsBMKvX6ePK8L+TwewfruMRwpyLFGKKzwCREBytWv+riEyOqvXuGl98cqINqMbpn4UzoWTVbXygsvbffe6m+1bMFtLzZ5+YYtBUAkBX9BN6rYR3dBYjFUNIXQIDtLdhsfkkuqvWjeIbibkjTpfo1LApafORhfgshoIdkn3hHbe2HGM88uC7QFZ/QbOwx1EGbLPD+HHM9T39rtzjJAYCv9rXWeb7qRdm6VvDoQYAA7gHmmpUpTIgPzUCm2ZgKtANtiRrNdghGYVIQsyWJ/2KMUmiWKOI+oheN3wut2s8w49ivqea0SHIerkZjKRK+m84z+VSQNTxqkk91yE0PI87koyHJVA9WhK5yJey5NSLLYNKGmpMey0eJiIXsYTqG9cZp0dCL0flIUsb14L+kiMVmQmt49ObCHMFVWfySwa29sbFMCH0Y6fIGdXJ0wy955Y3Lemnzyy7cfiNtstjkiqI6qJLGLqRUWPXcspb52CwwpiOApesI8lOGu232X5OrvJCctVaqWuUogw7YExSrHZKrrB8CPJaSMPrUa3FFNNE9lditXB3z+Jz99TuJtzed8hdO8diQyEqCe6RJZWIip1n/pl2Fg85CnngMbmckOds1CmudtrjR2aAAHyvDcB+7YZj9lpE6+zGm/1yozLY2/FL1FsjkYRGLoCMYaNfYfw==
-X-Forefront-Antispam-Report: CIP:198.47.23.195; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet201.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(36860700016)(376014)(82310400026)(1800799024)(18002099003)(22082099003)(56012099003);
+ ARA:13230040|36860700016|82310400026|1800799024|376014|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: A/UPvC0DemWBZ5CbNiKfivOj1cq3y6ZOaT3YOXK2YdcamkBl03RghFekMj+jr+SJFeuKVMA0+xwjtakHKp2LYeX4P8TbvmokRMz19yYYcimipxZPH3rPxc163gPUsrRshx3p554EtH4kG/K1nhK3/xE9wTCH/DjnLyYY3InLwjuu4Ck5pz6vw4xLZG/f7jGCDoV2EcFKwifHx01Yu/ZUl6+4NKbvyHSBxidK9521gr7ryZheqwlFu34x2VDsijxCRQCtVkUVW6KjsVUkIjH3LJkRZ6/TgO+ePaZLTwfLdVtabqI+WSt2HcqHHjjEfWfk5pVhi6ZCfEyzMCMcjieV9xCweKieag1KRat/7tfiDy5KlEEVmZTF6URJUdM3wVETWPoADNz9EtB4GP/IP3sPXXdCooYxCjIUpJVmigyzlNm9E0/uzTlTFn/SoEhSGnAjW0yqPlBWCIFdOZvygqPJDISMvnjz1kBbZCXJK3KOnPIcifHCe7DNMLXbSE2KEP5o6VXVVi8LLCGw5KJnpXABqNfz4T/GD67R6Hgtoon20gUeLdbe6dFmVqyJA9AcyiSl5RZ1zmrJB9PqnevxpaI7T1byF7neLjQauDj0QRZdklBwaj01sto4hJhY++HIklKbyH0hOfBlKFnCvfWSoAOclIdVyyCNbenxXVpMmhKuoPQ/d1VxAvBFQgLSefa6K854NITfZMhId/d6yLDEUu73k3zPEIWoZgoBR5hQGrLD4NHXrIkag9eZrAcJ/xdWHdbOp9z3Hp8MxeEzF8uYNTE6Hg==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(36860700016)(82310400026)(1800799024)(376014)(22082099003)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: bDEd2ja2lNBhAGmRrQ1uo8RA1zXb6AFx/Dqtat/EKX/ZkRA/SQJL0y/wHpPnBgnnugzo0KDvMoSgWCAT3dnVgra2XvaL8LZiFU72cqrzE3DmYzYvjCd+3PVRcX95ldUdrmA5S+cGM+yU7og1iFbJp01Fkxz5SlkZ7kOzMN7RZBNRxxAFxJuWhBmJf8/gB7vvTdC5wFosH4JZzQ2j0SoKTrNMM9HiPx5oeJS+NuOmrlpEzza0M/JVxh6co8vNhBsYKQEtr/9sR6G0ExToK9Z9U637kYbmqHho/jsEPdj6MAngZ2MhO993YkfOQi+BEC17Mu9Pus6WBnruQE8Xmsex6RV3cQiZAe0ZXoKkKF8t7WezInJMNRs8+/vyChUQZyaOnEcRxbW48BBBjfmMsVzBmlA2JHm1XEA2QoaDl/7wOn2FClbh4rhYw935nOQC4DuM
+X-MS-Exchange-AntiSpam-MessageData-0: LUc+6k4C9e7bcEbjy1z7wALD8z8LlGvz4PRrvo+9L7yQbHhFxeh4qht8lX8KVck1vCDbrRJauux5irNBEcNJoelFQsicapSlVEh+4fA/1MyzVpN//DVrEi+HQCJ28axOrEqmlu0dzwpsnLkj0CZVGjfrLrbneHHRzXA7DbM7px2wEENWR16eMlx77bN2yi/Fqtf45ILM9cEgbWZ9yR6omodDhONkCW4XwjEtZOJfn9DuW1WoQWj+RJoDlpR3PW7szqaAAE4DNYZL1gQ0hop8TsAWTlZV8RSnoHobplt4Vpkp6FwnaQZuZ08A3oKPuMlihM+Zh2/pENyTiZftbpLvNzrM6pux9pEoPc2Oa0QavySZm+SpoBe0KsJb6YjnUKfvYAAx7jm60OD9r0rfyFxyi2EahyRy0x8AY0U/5puthWtVI1m4LEGMXlaajNdr7Mca
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 13:59:14.7758 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: aef7809f-b2fa-4bf0-d39b-08de8108b629
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 13:59:15.4350 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1dd2245c-edc4-49a2-de0a-08de8108b689
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.195];
- Helo=[lewvzet201.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001ED.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001708E.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR10MB7042
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF87E558B7D
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,33 +132,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gregory CLEMENT <gregory.clement@bootlin.com>
+While resuming from suspend, DDR is in retention, which was in use by
+Linux. Memory used by linux can't be modified while resuming at spl stage.
 
-When resuming from suspend to ram, we load again the DM firmware.
-However, we have to be sure to not modify the memory used by
-Linux.
+So, move stack and heap allocations of R5 SPL to reserved memory location,
+which is not used by linux at resume. Use main_r5 reserved regions as we
+reload the firmwares on resume when linux comes back and r5 cores reload.
 
-Currently the SPL malloc region is in DDR was in place that could be used
-by Linux. Instead of it use a memory address that is located in a
-reserved location of main_r5ss core0 dma memory region.
-
-Linux will reload the firmwares and these reserved regions are invalid
-once the system goes to suspend.
-
-At resume we need power domain driver to enable R5 cores.
-So, enable powerdomain driver in R5.
-
-Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
-Co-developed-by: Prasanth Babu Mantena <p-mantena@ti.com>
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---
- configs/j784s4_evm_r5_defconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ configs/j7200_evm_r5_defconfig | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
-index 25ab6f17d17..dad25fd5d44 100644
---- a/configs/j784s4_evm_r5_defconfig
-+++ b/configs/j784s4_evm_r5_defconfig
+diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+index 893aaafaa9c..a37f5bffa13 100644
+--- a/configs/j7200_evm_r5_defconfig
++++ b/configs/j7200_evm_r5_defconfig
 @@ -19,7 +19,7 @@ CONFIG_DM_RESET=y
  CONFIG_SPL_MMC=y
  CONFIG_SPL_SERIAL=y
@@ -168,15 +156,17 @@ index 25ab6f17d17..dad25fd5d44 100644
 +CONFIG_SPL_STACK_R_ADDR=0xa3000000
  CONFIG_SPL_TEXT_BASE=0x41c00000
  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x41c76000
-@@ -124,6 +124,7 @@ CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_SINGLE=y
- CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_SCI_POWER_DOMAIN=y
- CONFIG_TI_POWER_DOMAIN=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_TPS65941=y
+ CONFIG_SPL_BSS_START_ADDR=0x41cf5bfc
+@@ -38,6 +38,9 @@ CONFIG_SPL_MAX_SIZE=0xc0000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xa3000000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
 -- 
 2.34.1
 
