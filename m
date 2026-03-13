@@ -4,109 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA26105F7A6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 14:49:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D796105F7A6
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 14:53:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C640E842FC;
-	Fri, 13 Mar 2026 15:49:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A51D0842FC;
+	Fri, 13 Mar 2026 15:53:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mFcotUGo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LfM0o7ik";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C2AC8432A; Fri, 13 Mar 2026 15:49:40 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id B2B6B842FC; Fri, 13 Mar 2026 15:53:17 +0100 (CET)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2CB68423C
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 15:49:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3972084286
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 15:53:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-b942a41c5fcso310410166b.0
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 07:49:37 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773413377; cv=none;
- d=google.com; s=arc-20240605;
- b=LUXHUl9leOaAJnPcM9eHxiHRUjiex0y6f0TSm4tWYk0+Wf6pSRX5aFxuUzd0W2GlCn
- nmSQEqku2XaOOWDn190D8dMzdPySOOOweOhlY4ZACc+EjXBkk8hQMEeJGv3C6q/lXnLF
- 2hzb8ZS1nUPAJlLrwgNDMoQFHPSHBiCdV8gMYfijz3LPyY60aCT6/9CkJ0NAO5KiUiuc
- sVaVEtze7QStVGQdiyQvUJosgNy3ewYPv3xD8zzlHmRwmXTfEdQZob/dcG8j9RXeCe/r
- nq/O7A/0SnDGNv18qwO0T1dkNT/4oFWz6rHtKbRdyZHvRd2Imc5g6C/6tuDcJCTdvMq4
- T+aQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=2PHxFmj6RIQIbtL5xuSbjK7u6DMDUXk5OIDhyBrxMVc=;
- fh=MHjHes+HI6yBoiCpLaiBkc/d0R+yhVJXlXc2ZXXf2sk=;
- b=cAhAwrwn0x6bLV6o3Bdz9LulvaM4cEXAfCB1iPfMvqluegQbqYveNzFjz0oExq6pcy
- Cg8yDpxMisDeqb91xJNWC33hNnnxA0UbhZqNgI+k9j1qCDcVoLDovq0Tu94LL6d3CP+L
- mMxnAR80P7pMxL0OgZW7zTt8llmmN6JGEOx48fCcny+6B+wl46AtQPUmF73tQUAfQXz5
- 5A4I4x5RSiLDumsi9JXHpyj+eh5U0dyM0Ccg6GrD3hevh8z+xSjsMP0d9NwxvVKFF6c3
- TJ+qYC81rw0pAs6kxwMN8ZsYdqdA0onFLX50PkHmi24wtwIoSB9DYSC7c7yt2KXEhC2T
- 7hvg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-404254ffe8aso1406074fac.0
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 07:53:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773413377; x=1774018177;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2PHxFmj6RIQIbtL5xuSbjK7u6DMDUXk5OIDhyBrxMVc=;
- b=mFcotUGoxfPR5LmkXdy3s0JRHQhwdUSYvMu/EOsHdntft1elAxuowETiUG0jsqtQET
- G7i6e+tRlh5yZ0liQYBoQHQt2DMn5zzwf5AtlmTxVWM232INZ60p0ElDWYvLpjO5+kDP
- LlaAyFBBz+iXJKGFB5nsNlbyV+r1vz0bFh4FnbVWQACZZ2QGsabLhpkFEJtbZ1TvwLgK
- 5lAJafWcJJk9zfrkYj/rXmzd9WZNqO2p8rRcqFgnHEfcIXuTJa8miWA5tNtAidTGP4Jp
- Cipn2TxaGopcfAlf0zMNY+Q5Mzewu1Ak7pluUVBq+Rkks92o6/S4sgHik3/8tcFdM7oq
- VjYw==
+ d=konsulko.com; s=google; t=1773413594; x=1774018394; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x+FdTahsHcvBlSTjItQipgPUyHJsYaYb5txmmcgFc80=;
+ b=LfM0o7iktaAogcI6TXuMhIgJfxy6BNv/3qY1mC6m2EIHpf+FHE8EPQwZ2GC5cwCIqQ
+ e964xyDDZuC+B95MZrmBX/Z1lN/rtnx1zEEROerDzjlHSSptk6OO9gf3bq6b2slDss+C
+ PPdRN67FVqBlDxSK/raofAPXqWcKW3vmXKtSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773413377; x=1774018177;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=2PHxFmj6RIQIbtL5xuSbjK7u6DMDUXk5OIDhyBrxMVc=;
- b=aWLHIEtodG2RvlEXHhaJYjv/jZcfITUm7Rju8slhFsWNYlF31JaRkVk1c1wvFLSAzD
- tjG92HosjaT8DpVIRfyBGAf4NP1XDKMR0IqMpC9/SJ4OffZ7Hsk8i9xyzOGF+qJDSdWx
- jQkTr0wSZY4IMdiSdHGKAoAtvzozerhXrhBBFckqYlrvYAl2Xt3NGMlboh87H/gt3Khx
- EgDiUSB+aUOAIxmz2+iOR3oQvrFgbBINgC+/YcH/Db+1eFEsxza8Q5fU33m7v3uUHtcl
- h8AMjklzG8jueX1ofjbHzAyvNRl3jotl2jDqd/bBiBu2666XB9WIRDMBvI10AidWxeGp
- J1ig==
+ d=1e100.net; s=20251104; t=1773413594; x=1774018394;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=x+FdTahsHcvBlSTjItQipgPUyHJsYaYb5txmmcgFc80=;
+ b=rEU0TlV6LO4VoEoewtybSj9t6zWSlNN6G0UjGFLtmFW12Mg30qjEjPJDUwUphPjw2c
+ WuR6SFR9Oe7rsWfLLfxruQdi/kig1WCm8KwZ96KNv2qYiwcvlEoXWllyUvawsLoFl0Xr
+ x8X56Y8j0OaWAzbl4j+chuOkKF8D8M3qPPtDhWUSr/t92JHt+Sn/omQ2gtzZMpo5EDwM
+ VvRUjkd7B+siS6Lm5BAYgwXBxIaTYWkXcYWimTzq29BRPlyHb45mwOMAP35iMNW7zUr8
+ NujwMQW4okk+WJxUWXvvJDrFy7a3nd3vqq+I4p+BORua/+DYAnAOVJ3FKnSnsjwL3L7D
+ d85w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQU0F60McB+bVr7vbg/RZZfJBWolusAmbS7rkiz9t/h47IxiwmdtvdIMLVxuuueSFa9bb+QNE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKF4CsjDJicWONtJ877dNS+loEYkxGnrA88wFDa/cXS9dj3Iov
- BphL0bzz3pV55R0LdRNxJ3moN4SD+/G4pEuAp34h+jSkRnc3B8sp28kcb4WiYDP1UC1OhAYmPHT
- E81FQvm2KWJ4ucoHAXPVgJD0XUZDdKudb/B50PCVLzQ==
-X-Gm-Gg: ATEYQzynmkxLhmxml9Sdljgsu8Doc3Bn1yNremPBrx7HGTR3r+zAabfxAlU52Ub5Hko
- +pHbI04YBQ3XSJ/Eis0wEOoBNSXYgRDwfmsXeEUN/7d1AhuwB7x59f4izCVzk6cQ078j6IZvSfs
- ofqhUiBh5uuQ7X8IkppB544JPHju4lvjCkgVRT4A9Gocx4IERTI4sw38YtFXNUqmpvaljlX3wqi
- /UkTILsAmi74F0/8dVp5D8DXsJAiFP2UjbPwTXeUchqEb60vF8SgRh0j//OsYqJcIkMrA2wJXfC
- FJROuXhR39zt7vUx1UtK72MEzggw3GrY4wT2PbCYAEngs4UOVl1f5LT/0usgoIZRdT/4bVDcdzV
- 5ozuurdmC/KQBY73bjxY3/jaElg==
-X-Received: by 2002:a17:906:cd04:b0:b96:ff4f:11ea with SMTP id
- a640c23a62f3a-b9765375653mr156893066b.41.1773413377109; Fri, 13 Mar 2026
- 07:49:37 -0700 (PDT)
+ AJvYcCVj9RrTPE1iclMK1oasJuQUBsOSsnk17BlFG8akBCcKpt7jnbdiXrjaeJETlWmWZX26kudYJ8I=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaEi31iTYsEl2bUZdnEUTDZtQzdjCgLCK1rOoJSqOhSmBdMebX
+ MI7teTGroUh0Nw+uSVZuTFwq/kgZe9fxA7K+XBrXhi0WtiyAuuMt6XMBdUyG3U9nV4vxE7Eewh4
+ DEbwkw64=
+X-Gm-Gg: ATEYQzz8ddqGNdWx2t8ODZq6E1ntaoYptfk2yl39tDtqbpAyo6Sbrd5CIzInBGNWWlg
+ 0WR3VomIkfv424GbLECXPc1jYRS7ImPmRY0/LgKmDQH+MokHdB4c2ELd/THEoRqcYKOmUX+D9te
+ Su0ELx4SY+ze+y4GhhFkRA6e++74zTMJ4ODwREM7VyvSYxYdOKURMuc9Oaiaavy9ndKdFkxTQU2
+ Np0vf7fHYnk81BmoQRAbe7qmoTVQ02fxTUJ5bbB3A9bDMY/97XzSHPfNJDUduWAUOZcNhbko/lL
+ DpUNQP2Dlj7JWOXmKxMrRJ6SauBYINar6EUEmhCTxpy5A0yUnF+pBgaaiXDcdsI+/F5e7VGXNlM
+ x5CVxEQF1ffAQvihKqwFoGcDBrr7436QcZx8GHdHN0tzmDx9j9N3+Jj2yyo9uqVYfd1wjMl0Fr7
+ 9e3eh4e2AApwG6tf3HeHc3XX1zMrLONPUD3Qigfka2OSg7Z+YJS92yEfGS7NBMr0btAM1A1M1GJ
+ 93qelKrIVm+5XGaEy1WJt6dHI50ncsRhNxr3/2XlitiDqpU
+X-Received: by 2002:a05:6871:b13:b0:404:1ec2:562c with SMTP id
+ 586e51a60fabf-41798e065eemr4201192fac.6.1773413593856; 
+ Fri, 13 Mar 2026 07:53:13 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4177e25f037sm8340391fac.5.2026.03.13.07.53.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Mar 2026 07:53:13 -0700 (PDT)
+Date: Fri, 13 Mar 2026 08:53:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Max Merchel <max.merchel@ew.tq-group.com>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ u-boot@lists.denx.de, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFT] pci: imx: Properly support upstream Linux
+ reset-gpios property
+Message-ID: <20260313145311.GD502704@bill-the-cat>
+References: <20260312192605.131132-1-krzysztof.kozlowski@oss.qualcomm.com>
+ <9e8aa4e7-72ab-4b1a-b324-4c78b13b9741@ew.tq-group.com>
+ <02b1e588-1feb-484e-9f3c-f6c9f0b8e00c@oss.qualcomm.com>
+ <435e08f1-77fd-476a-96ad-8648ae971e81@ew.tq-group.com>
 MIME-Version: 1.0
-References: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
- <20260310-clk-mtk-parent-cleanup-v1-1-66175ca8f637@baylibre.com>
-In-Reply-To: <20260310-clk-mtk-parent-cleanup-v1-1-66175ca8f637@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 13 Mar 2026 15:49:29 +0100
-X-Gm-Features: AaiRm50FbW6LakK6IeXpMs6E-J7fRNuG6Q9hcqKiiHKr-UE_5yLLkklfp4YX-Ko
-Message-ID: <CAEHHSvak-Ebscv7u7STNYOp05o33sUbGsB6bSbhyVrwFu13o+w@mail.gmail.com>
-Subject: Re: [PATCH 01/16] clk: mediatek: replace xtal2_rate with struct
- mtk_parent
-To: David Lechner <dlechner@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="T/0i/r0MVQnzhAke"
+Content-Disposition: inline
+In-Reply-To: <435e08f1-77fd-476a-96ad-8648ae971e81@ew.tq-group.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,455 +104,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le mar. 10 mars 2026 =C3=A0 16:34, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Replace the hard-coded xtal rate for PLL parents with struct mtk_parent.
->
-> This avoids declaring the same clock rate in multiple places and will
-> allow future drivers to use an arbitrary clock.
->
-> The variable is renamed to something that better indicate what the field
-> is actually used for.
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  drivers/clk/mediatek/clk-mt7622.c | 12 +++++++++++-
->  drivers/clk/mediatek/clk-mt7623.c | 12 +++++++++++-
->  drivers/clk/mediatek/clk-mt7629.c | 16 ++++++++++++++--
->  drivers/clk/mediatek/clk-mt8183.c | 12 +++++++++++-
->  drivers/clk/mediatek/clk-mt8188.c |  2 +-
->  drivers/clk/mediatek/clk-mt8189.c |  4 +---
->  drivers/clk/mediatek/clk-mt8195.c |  2 +-
->  drivers/clk/mediatek/clk-mt8365.c |  2 +-
->  drivers/clk/mediatek/clk-mt8512.c | 12 +++++++++++-
->  drivers/clk/mediatek/clk-mt8516.c | 12 +++++++++++-
->  drivers/clk/mediatek/clk-mt8518.c | 12 +++++++++++-
->  drivers/clk/mediatek/clk-mtk.c    | 33 +++++++++++++++++++++++++--------
->  drivers/clk/mediatek/clk-mtk.h    |  2 +-
->  13 files changed, 110 insertions(+), 23 deletions(-)
->
-> diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk=
--mt7622.c
-> index e9a3f8ef0ba..cb637981499 100644
-> --- a/drivers/clk/mediatek/clk-mt7622.c
-> +++ b/drivers/clk/mediatek/clk-mt7622.c
-> @@ -28,6 +28,14 @@
->  #define MCU_BUS_MSK                    GENMASK(10, 9)
->  #define MCU_BUS_SEL(x)                 ((x) << 9)
->
-> +enum {
-> +       CLK_PAD_CLK25M,
-> +};
-> +> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK25M] =3D 25 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  #define PLL(_id, _reg, _pwr_reg, _en_mask, _flags, _pcwbits, _pd_reg,  \
->             _pd_shift, _pcw_reg, _pcw_shift) {                          \
-> @@ -597,7 +605,9 @@ static const struct mtk_gate ssusb_cgs[] =3D {
->  };
->
->  static const struct mtk_clk_tree mt7622_apmixed_clk_tree =3D {
-> -       .xtal2_rate =3D 25 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK25M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .plls =3D apmixed_plls,
->         .gates_offs =3D CLK_APMIXED_MAIN_CORE_EN,
->         .gates =3D apmixed_cgs,
-> diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk=
--mt7623.c
-> index 9e1522d4615..1c34bfbf596 100644
-> --- a/drivers/clk/mediatek/clk-mt7623.c
-> +++ b/drivers/clk/mediatek/clk-mt7623.c
-> @@ -24,6 +24,14 @@
->  #define AXI_DIV_MSK                    GENMASK(4, 0)
->  #define AXI_DIV_SEL(x)                 (x)
->
-> +enum {
-> +       CLK_PAD_CLK26M,
-> +};
-> +
 
-Can we define these enum values in a common header?
-For example, CLK_PAD_CLK26M is defined in various different soc
-specific drivers.
-Also clk-mt8189.c uses defines instead of enum, so maybe we should
-stay consistent.
+--T/0i/r0MVQnzhAke
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK26M] =3D 26 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  static const int pll_id_offs_map[] =3D {
->         [0 ... CLK_APMIXED_NR - 1]              =3D -1,
-> @@ -994,7 +1002,9 @@ static const struct mtk_gate hif_cgs[] =3D {
->  };
->
->  static const struct mtk_clk_tree mt7623_apmixedsys_clk_tree =3D {
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .id_offs_map =3D pll_id_offs_map,
->         .id_offs_map_size =3D ARRAY_SIZE(pll_id_offs_map),
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt7629.c b/drivers/clk/mediatek/clk=
--mt7629.c
-> index 42670269d3e..beba7fc4abc 100644
-> --- a/drivers/clk/mediatek/clk-mt7629.c
-> +++ b/drivers/clk/mediatek/clk-mt7629.c
-> @@ -28,6 +28,14 @@
->  #define MCU_BUS_MSK                    GENMASK(10, 9)
->  #define MCU_BUS_SEL(x)                 ((x) << 9)
->
-> +enum {
-> +       CLK_PAD_CLK20M,
-> +};
-> +
-> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK20M] =3D 20 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  #define PLL(_id, _reg, _pwr_reg, _en_mask, _flags, _pcwbits, _pd_reg,  \
->             _pd_shift, _pcw_reg, _pcw_shift) {                          \
-> @@ -567,7 +575,9 @@ static const struct mtk_gate ssusb_cgs[] =3D {
->
->  static const struct mtk_clk_tree mt7629_clk_tree =3D {
->         .xtal_rate =3D 40 * MHZ,
-> -       .xtal2_rate =3D 20 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK20M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .fdivs_offs =3D CLK_TOP_TO_USB3_SYS,
->         .muxes_offs =3D CLK_TOP_AXI_SEL,
->         .plls =3D apmixed_plls,
-> @@ -582,7 +592,9 @@ static const struct mtk_clk_tree mt7629_clk_tree =3D =
-{
->
->  static const struct mtk_clk_tree mt7629_peri_clk_tree =3D {
->         .xtal_rate =3D 40 * MHZ,
-> -       .xtal2_rate =3D 20 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK20M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .fdivs_offs =3D CLK_TOP_TO_USB3_SYS,
->         .muxes_offs =3D CLK_TOP_AXI_SEL,
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8183.c b/drivers/clk/mediatek/clk=
--mt8183.c
-> index 54e31efd2ea..6158441fb95 100644
-> --- a/drivers/clk/mediatek/clk-mt8183.c
-> +++ b/drivers/clk/mediatek/clk-mt8183.c
-> @@ -17,6 +17,14 @@
->  #define MT8183_PLL_FMAX                (3800UL * MHZ)
->  #define MT8183_PLL_FMIN                (1500UL * MHZ)
->
-> +enum {
-> +       CLK_PAD_CLK26M,
-> +};
-> +
-> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK26M] =3D 26 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  #define PLL(_id, _reg, _pwr_reg, _en_mask, _flags, _rst_bar_mask, _pcwbi=
-ts, \
->             _pcwibits, _pd_reg, _pd_shift, _pcw_reg, _pcw_shift) {      \
-> @@ -598,7 +606,9 @@ static const struct mtk_composite top_muxes[] =3D {
->
->  static const struct mtk_clk_tree mt8183_clk_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .fdivs_offs =3D CLK_TOP_CLK13M,
->         .muxes_offs =3D CLK_TOP_MUX_AXI,
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk=
--mt8188.c
-> index e4297c92bd9..ca5fa8af86e 100644
-> --- a/drivers/clk/mediatek/clk-mt8188.c
-> +++ b/drivers/clk/mediatek/clk-mt8188.c
-> @@ -85,7 +85,7 @@ static const struct mtk_pll_data apmixed_plls[] =3D {
->
->  static const struct mtk_clk_tree mt8188_apmixedsys_clk_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
->         .ext_clk_rates =3D ext_clock_rates,
->         .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8189.c b/drivers/clk/mediatek/clk=
--mt8189.c
-> index bce54c9a45f..1f75d873516 100644
-> --- a/drivers/clk/mediatek/clk-mt8189.c
-> +++ b/drivers/clk/mediatek/clk-mt8189.c
-> @@ -1636,8 +1636,7 @@ static const struct mtk_gate mminfra_config_clks[] =
-=3D {
->  };
->
->  static const struct mtk_clk_tree mt8189_apmixedsys_clk_tree =3D {
-> -       .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
->         .ext_clk_rates =3D pad_clks,
->         .num_ext_clks =3D ARRAY_SIZE(pad_clks),
->         .plls =3D apmixed_plls,
-> @@ -1645,7 +1644,6 @@ static const struct mtk_clk_tree mt8189_apmixedsys_=
-clk_tree =3D {
->  };
->
->  static const struct mtk_clk_tree mt8189_topckgen_clk_tree =3D {
-> -       .xtal_rate =3D 26 * MHZ,
->         .ext_clk_rates =3D pad_clks,
->         .num_ext_clks =3D ARRAY_SIZE(pad_clks),
->         .fdivs_offs =3D CLK_TOP_MAINPLL_D3,
-> diff --git a/drivers/clk/mediatek/clk-mt8195.c b/drivers/clk/mediatek/clk=
--mt8195.c
-> index 76ece913187..28b2e2f12ac 100644
-> --- a/drivers/clk/mediatek/clk-mt8195.c
-> +++ b/drivers/clk/mediatek/clk-mt8195.c
-> @@ -97,7 +97,7 @@ static const struct mtk_pll_data apmixed_plls[] =3D {
->
->  static const struct mtk_clk_tree mt8195_apmixedsys_clk_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
->         .ext_clk_rates =3D ext_clock_rates,
->         .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8365.c b/drivers/clk/mediatek/clk=
--mt8365.c
-> index 16531491a0f..15df6422661 100644
-> --- a/drivers/clk/mediatek/clk-mt8365.c
-> +++ b/drivers/clk/mediatek/clk-mt8365.c
-> @@ -75,7 +75,7 @@ static const struct mtk_pll_data apmixed_plls[] =3D {
->
->  static const struct mtk_clk_tree mt8365_apmixed_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
->         .ext_clk_rates =3D ext_clk_rates,
->         .num_ext_clks =3D ARRAY_SIZE(ext_clk_rates),
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8512.c b/drivers/clk/mediatek/clk=
--mt8512.c
-> index de0d3eae7ee..f7d41f4cfdb 100644
-> --- a/drivers/clk/mediatek/clk-mt8512.c
-> +++ b/drivers/clk/mediatek/clk-mt8512.c
-> @@ -17,6 +17,14 @@
->  #define MT8512_PLL_FMIN                (1500UL * MHZ)
->  #define MT8512_CON0_RST_BAR    BIT(23)
->
-> +enum {
-> +       CLK_PAD_CLK26M,
-> +};
-> +
-> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK26M] =3D 26 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  #define PLL(_id, _reg, _pwr_reg, _en_mask, _flags, _pcwbits, _pd_reg,  \
->             _pd_shift, _pcw_reg, _pcw_shift, _pcw_chg_reg) {            \
-> @@ -786,7 +794,9 @@ static const struct mtk_gate infra_clks[] =3D {
->
->  static const struct mtk_clk_tree mt8512_clk_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .fdivs_offs =3D CLK_TOP_SYSPLL1_D2,
->         .muxes_offs =3D CLK_TOP_AXI_SEL,
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8516.c b/drivers/clk/mediatek/clk=
--mt8516.c
-> index 6b30ea9ce4a..74966051b1c 100644
-> --- a/drivers/clk/mediatek/clk-mt8516.c
-> +++ b/drivers/clk/mediatek/clk-mt8516.c
-> @@ -16,6 +16,14 @@
->  #define MT8516_PLL_FMAX                (1502UL * MHZ)
->  #define MT8516_CON0_RST_BAR    BIT(27)
->
-> +enum {
-> +       CLK_PAD_CLK26M,
-> +};
-> +
-> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK26M] =3D 26 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  #define PLL(_id, _reg, _pwr_reg, _en_mask, _flags, _pcwbits, _pd_reg,  \
->             _pd_shift, _pcw_reg, _pcw_shift) {                          \
-> @@ -738,7 +746,9 @@ static const struct mtk_gate top_clks[] =3D {
->
->  static const struct mtk_clk_tree mt8516_clk_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .fdivs_offs =3D CLK_TOP_DMPLL,
->         .muxes_offs =3D CLK_TOP_UART0_SEL,
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mt8518.c b/drivers/clk/mediatek/clk=
--mt8518.c
-> index 34fa5a127d5..85cbb35446b 100644
-> --- a/drivers/clk/mediatek/clk-mt8518.c
-> +++ b/drivers/clk/mediatek/clk-mt8518.c
-> @@ -16,6 +16,14 @@
->  #define MT8518_PLL_FMAX                (3000UL * MHZ)
->  #define MT8518_CON0_RST_BAR    BIT(27)
->
-> +enum {
-> +       CLK_PAD_CLK26M,
-> +};
-> +
-> +static const ulong ext_clock_rates[] =3D {
-> +       [CLK_PAD_CLK26M] =3D 26 * MHZ,
-> +};
-> +
->  /* apmixedsys */
->  #define PLL(_id, _reg, _pwr_reg, _en_mask, _flags, _pcwbits, _pd_reg,  \
->             _pd_shift, _pcw_reg, _pcw_shift) {                          \
-> @@ -1494,7 +1502,9 @@ static const struct mtk_gate top_clks[] =3D {
->
->  static const struct mtk_clk_tree mt8518_clk_tree =3D {
->         .xtal_rate =3D 26 * MHZ,
-> -       .xtal2_rate =3D 26 * MHZ,
-> +       .pll_parent =3D EXT_PARENT(CLK_PAD_CLK26M),
-> +       .ext_clk_rates =3D ext_clock_rates,
-> +       .num_ext_clks =3D ARRAY_SIZE(ext_clock_rates),
->         .fdivs_offs =3D CLK_TOP_DMPLL,
->         .muxes_offs =3D CLK_TOP_UART0_SEL,
->         .plls =3D apmixed_plls,
-> diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mt=
-k.c
-> index fa4a84bfceb..0b6eb0dbc04 100644
-> --- a/drivers/clk/mediatek/clk-mtk.c
-> +++ b/drivers/clk/mediatek/clk-mtk.c
-> @@ -499,16 +499,21 @@ static void mtk_pll_set_rate_regs(struct mtk_clk_pr=
-iv *priv, u32 id,
->   * @postdiv:   The post divider (output)
->   * @freq:      The desired target frequency
->   */
-> -static void mtk_pll_calc_values(struct mtk_clk_priv *priv, u32 id,
-> -                               u32 *pcw, u32 *postdiv, u32 freq)
-> +static int mtk_pll_calc_values(struct mtk_clk_priv *priv, struct clk *cl=
-k,
-> +                              u32 *pcw, u32 *postdiv, u32 freq)
->  {
->         const struct mtk_pll_data *pll;
-> -       unsigned long fmin;
-> +       const struct mtk_parent *parent =3D &priv->tree->pll_parent;
-> +       unsigned long xtal_rate, fmin;
->         u64 _pcw;
->         int ibits;
->         u32 val;
->
-> -       pll =3D &priv->tree->plls[id];
-> +       xtal_rate =3D mtk_find_parent_rate(priv, clk, parent->id, parent-=
->flags);
-> +       if (IS_ERR_VALUE(xtal_rate))
-> +               return xtal_rate;
-> +
-> +       pll =3D &priv->tree->plls[clk->id];
->         fmin =3D pll->fmin ? pll->fmin : 1000 * MHZ;
->
->         if (freq > pll->fmax)
-> @@ -523,9 +528,11 @@ static void mtk_pll_calc_values(struct mtk_clk_priv =
-*priv, u32 id,
->         /* _pcw =3D freq * postdiv / xtal_rate * 2^pcwfbits */
->         ibits =3D pll->pcwibits ? pll->pcwibits : INTEGER_BITS;
->         _pcw =3D ((u64)freq << val) << (pll->pcwbits - ibits);
-> -       do_div(_pcw, priv->tree->xtal2_rate);
-> +       do_div(_pcw, xtal_rate);
->
->         *pcw =3D (u32)_pcw;
-> +
-> +       return 0;
->  }
->
->  static ulong mtk_apmixedsys_set_rate(struct clk *clk, ulong rate)
-> @@ -533,11 +540,15 @@ static ulong mtk_apmixedsys_set_rate(struct clk *cl=
-k, ulong rate)
->         struct mtk_clk_priv *priv =3D dev_get_priv(clk->dev);
->         u32 pcw =3D 0;
->         u32 postdiv;
-> +       int ret;
->
->         if (!mtk_clk_id_is_pll(priv->tree, clk->id))
->                 return -EINVAL;
->
-> -       mtk_pll_calc_values(priv, clk->id, &pcw, &postdiv, rate);
-> +       ret =3D mtk_pll_calc_values(priv, clk, &pcw, &postdiv, rate);
-> +       if (ret)
-> +               return ret;
-> +
->         mtk_pll_set_rate_regs(priv, clk->id, pcw, postdiv);
->
->         return 0;
-> @@ -546,8 +557,10 @@ static ulong mtk_apmixedsys_set_rate(struct clk *clk=
-, ulong rate)
->  static ulong mtk_apmixedsys_get_rate(struct clk *clk)
->  {
->         struct mtk_clk_priv *priv =3D dev_get_priv(clk->dev);
-> +       const struct mtk_parent *parent;
->         const struct mtk_pll_data *pll;
->         const struct mtk_gate *gate;
-> +       unsigned long xtal_rate;
->         u32 postdiv;
->         u32 pcw;
->
-> @@ -557,6 +570,11 @@ static ulong mtk_apmixedsys_get_rate(struct clk *clk=
-)
->                 return mtk_find_parent_rate(priv, clk, gate->parent, gate=
-->flags);
->         }
->
-> +       parent =3D &priv->tree->pll_parent;
-> +       xtal_rate =3D mtk_find_parent_rate(priv, clk, parent->id, parent-=
->flags);
-> +       if (IS_ERR_VALUE(xtal_rate))
-> +               return xtal_rate;
-> +
->         pll =3D &priv->tree->plls[clk->id];
->
->         postdiv =3D (readl(priv->base + pll->pd_reg) >> pll->pd_shift) &
-> @@ -566,8 +584,7 @@ static ulong mtk_apmixedsys_get_rate(struct clk *clk)
->         pcw =3D readl(priv->base + pll->pcw_reg) >> pll->pcw_shift;
->         pcw &=3D GENMASK(pll->pcwbits - 1, 0);
->
-> -       return __mtk_pll_recalc_rate(pll, priv->tree->xtal2_rate,
-> -                                    pcw, postdiv);
-> +       return __mtk_pll_recalc_rate(pll, xtal_rate, pcw, postdiv);
->  }
->
->  static int mtk_apmixedsys_enable(struct clk *clk)
-> diff --git a/drivers/clk/mediatek/clk-mtk.h b/drivers/clk/mediatek/clk-mt=
-k.h
-> index 10a0723de47..682b4303585 100644
-> --- a/drivers/clk/mediatek/clk-mtk.h
-> +++ b/drivers/clk/mediatek/clk-mtk.h
-> @@ -234,7 +234,7 @@ struct mtk_gate {
->  /* struct mtk_clk_tree - clock tree */
->  struct mtk_clk_tree {
->         unsigned long xtal_rate;
-> -       unsigned long xtal2_rate;
-> +       const struct mtk_parent pll_parent;
->         /* External fixed clocks - excluded from mapping. */
->         const ulong *ext_clk_rates;
->         const int num_ext_clks;
->
-> --
-> 2.43.0
->
+On Fri, Mar 13, 2026 at 09:28:23AM +0100, Max Merchel wrote:
+>=20
+> On 3/13/26 09:14, Krzysztof Kozlowski wrote:
+> > On 13/03/2026 09:12, Max Merchel wrote:
+> > > On 3/12/26 20:26, Krzysztof Kozlowski wrote:
+> > > > The driver requests explicitly "reset-gpio" property, not the one w=
+ith
+> > > > "gpios" suffix but upstream Linux kernel deprecated it in 2021.
+> > > > Existing upstream Linux kernel DTS is being changed to "reset-gpios"
+> > > > property, thus update the driver to read that one too.
+> > > >=20
+> > > > Note that driver is probably broken already, because it parsed GPIO=
+ in
+> > > > standard way respecting the flags and on top of that applied the
+> > > > "reset-gpio-active-high" flag, thus "reset-gpio ACTIVE_LOW" with the
+> > > > "reset-gpio-active-high" property would be double inverted.
+> > > >=20
+> > > > Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcom=
+m.com>
+> > > >=20
+> > > > ---
+> > > >=20
+> > > > 1. https://lore.kernel.org/linux-devicetree/20260312-dts-snps-reset=
+-gpios-v2-12-0d5040eb4a1e@oss.qualcomm.com/
+> > > > 2. See Linux kernel commit 42694f9f6407 ("dt-bindings: PCI: add snp=
+s,dw-pcie.yaml")
+> > > > ---
+> > > >    drivers/pci/pcie_imx.c | 22 +++++++++++++++++++---
+> > > >    1 file changed, 19 insertions(+), 3 deletions(-)
+> > > >=20
+> > > > diff --git a/drivers/pci/pcie_imx.c b/drivers/pci/pcie_imx.c
+> > > > index 11c4ccbfc555..8d853ecf2c22 100644
+> > > > --- a/drivers/pci/pcie_imx.c
+> > > > +++ b/drivers/pci/pcie_imx.c
+> > > > @@ -728,15 +728,31 @@ static int imx_pcie_dm_write_config(struct ud=
+evice *dev, pci_dev_t bdf,
+> > > >    static int imx_pcie_dm_probe(struct udevice *dev)
+> > > >    {
+> > > >    	struct imx_pcie_priv *priv =3D dev_get_priv(dev);
+> > > > +	int ret;
+> > > >    #if CONFIG_IS_ENABLED(DM_REGULATOR)
+> > > >    	device_get_supply_regulator(dev, "vpcie-supply", &priv->vpcie);
+> > > >    #endif
+> > > >    	/* if PERST# valid from dt then assert it */
+> > > > -	gpio_request_by_name(dev, "reset-gpio", 0, &priv->reset_gpio,
+> > > > -			     GPIOD_IS_OUT);
+> > > > -	priv->reset_active_high =3D dev_read_bool(dev, "reset-gpio-active=
+-high");
+> > > > +	ret =3D gpio_request_by_name(dev, "reset-gpio", 0, &priv->reset_g=
+pio,
+> > > > +				   GPIOD_IS_OUT);
+> > > > +	if (!ret) {
+> > > > +		/*
+> > > > +		 * Legacy property, invert assert logic based on
+> > > > +		 * reset-gpio-active-high. This won't work if flags are not
+> > > > +		 * matching the reset-gpio-active-high.
+> > > > +		 */
+> > > > +		priv->reset_active_high =3D dev_read_bool(dev, "reset-gpio-activ=
+e-high");
+> > > A warning should also be issued when using the deprecated "reset-gpio"
+> > > property.
+> > >=20
+> > >   =A0 =A0 =A0 =A0 =A0 =A0 dev_warn(dev, "reset-gpio property deprecat=
+ed, use
+> > > reset-gpios\n");
+> > >=20
+> > Why? What would end user seeing this in their serial console do? The
+> > deprecated property is not a mistake, it's just deprecated.
+>=20
+> You're right. It's not a message for the end user, but for the developers.
+> Therefore, it would be better to add a debug message.
+
+Developers should be enabling OF_UPSTREAM and so that won't have slipped
+through?
+
+--=20
+Tom
+
+--T/0i/r0MVQnzhAke
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabQk0wAKCRAr4qD1Cr/k
+CorAAP4nz2WOuPJgnWCX5AusDPvllVgJY75XA9JEAfhrFWP8DAEAngFAv7ceZOc2
+uMusBogoLEfFWZ3LEeKRMW2Wb5FnQgY=
+=yxLO
+-----END PGP SIGNATURE-----
+
+--T/0i/r0MVQnzhAke--
