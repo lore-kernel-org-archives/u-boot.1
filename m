@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F60105F7B6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:16:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5FA105F7B6
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:17:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CE36839DF;
-	Fri, 13 Mar 2026 16:16:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B36A884370;
+	Fri, 13 Mar 2026 16:17:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eyX8ruJQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XFw0c6WQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 604F9839DF; Fri, 13 Mar 2026 16:16:05 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
+ id BAFB684370; Fri, 13 Mar 2026 16:17:18 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE9FD8341A
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:16:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1D528436C
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-46726528f1cso1623030b6e.0
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:16:00 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7d74aa6bcdbso1716990a34.2
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:17:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773414959; x=1774019759; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773415035; x=1774019835; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/xUvwfrX0rdPXeGtplU0ESaaFUtBXOymHW4+P7sqUAQ=;
- b=eyX8ruJQ0i7xDm9KuWmwxeKYsj+tVum0BMqlXmRYWmPJq/mYZaRIl+9lsLAJ6IancV
- N510WndvCuUBdIQhnb8sIs6RPKXLgcqg4Dzh9Vf5VnUO+HS1WlbfccYRrajyn4wul2J0
- 3u/w1gQqvuP/+oA7ZNN97xmvufLzxgwAY1bMI=
+ bh=F6Z1Tgz9086dkrBkQI8UYX28hS/9IpEDboZTf74ZKeE=;
+ b=XFw0c6WQbOzDvoTHcxD5oYDVFTPCS6kmMQD0zzToYxWgmioIwpu6NVqOiIwCybdZjq
+ MvqktxVB7Sr9nyr7ot3mYgxlfdkikWK1gdfiF+HhOq/aNrBZXyHjzOdAb8AlWO0cyrhK
+ oIxB7dSfj3De1EANgdJBykj7u1F/wDXn+QZ60=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773414959; x=1774019759;
+ d=1e100.net; s=20251104; t=1773415035; x=1774019835;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/xUvwfrX0rdPXeGtplU0ESaaFUtBXOymHW4+P7sqUAQ=;
- b=HoDAS4GbvbZ0h+YMVv9L0wDANTO/RaCUVa2tPjsG5K2VX6joOun5Jf+f1mpfJUHD+h
- pCBJKNwgmdbWXuw4cwtxYmHSC5cxHfZMGOIaldPTp33blCSSZqoGu6m8miQBv+m1xaj8
- CRcLUXAJvFP6eCuCJ7UG7KADpFNpIxZK5mpSOTGSgpf6HFeLBhbXYLqim7GvsKaFURd/
- KBchJK7aSyMK0YHydc/TmqALt4Rn1BzyOjBjF44I2R9JvhmKp8L3WVJsfsDMF6qw6Yyt
- 4gNIrqcHfggIhzBb3DYWGfFIAiaLSZeumGRB4OuCvt2H/vD/lbtNj6pwp2vg4YQA7lyY
- ZdJg==
+ bh=F6Z1Tgz9086dkrBkQI8UYX28hS/9IpEDboZTf74ZKeE=;
+ b=rz6vPO59fy5mhNt3peMP/YxO6mHdxMM5PXN5NtoblSx/jjd4+ttX5u6899WKbzK7S6
+ Y8Jue24Wj6mfnjv0Hcly138MTsVW9smvPFG2WlMYFbcKCPPo1Sq/IbwKL+KMqivA2zfs
+ LG9x8rMUUGgB7u0V9DJ2pEtIie853b/K+9kxzMTuThtb3muuCPDD0AVOQI/CxuMxK7WH
+ hpRG3mUvuXnn2xJHHTCS82w3pP/gaYwc40YBSjDr07aC9JX1Pnc0/oPvhxreCG07A4VL
+ abz63uJt0F7iAF8zCWS1Lyls0z/wbDJ2nqGji8MxZcnQwX1K57Zxp3E3BeEskh62q4X1
+ l7cg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9K8upZaf63Z7Ne92KbiKp2YWXDB9e3msA87vtueNNdvrxffkFwcyG55aDzRdUoab59bcrzsA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLzP7z62jTjIeNDxYZpyPfwVhAJZJ+/OG+1kNP9Bk+Li4dDDAM
- I/QG36l0tMYoMw2e5pphqZo7+RnRZTSENY8tpL2VSKfXKSe+hBKhER9egdAleXekhuI=
-X-Gm-Gg: ATEYQzzTBImRQMfz6J1y1BDtG5A5+Nq0wrQ7rvNA9Xz/i17rqbHmxJhLoSjjeMVGHsf
- qDTQf7rDZE7ZC7b1O/pwmv79Q4ODkWxPSjzesAWgYmm5wUf8Jx+KiBA/V+CNWJ54lu6OvghYidc
- NjuU9tg/3wCd41rwGobqqwNL8W6cA6RdqC0dg7pkWxpXXaKwbvy+KKUy/6eA2FY4/EMBpSiTTgR
- JsybSJPMVr0Z64CYJrzI3OwK15fDBpBU8LF3qTyBQSe7MQeojC+bS1rI4Lo/PgmeWQ6sBzzziTL
- 1ZwylciRYBedyMBYTv1szMhuckl+fwmrMBD3IvkR4wlHEfQi5yELhbKIwyCeAYFCwBq0Bhn/f14
- XAT7gS1+uZP+bQGjGAG8HPwrOYXSuSFpXmf7K3I4H2cDJWNYdDE2DI5Ws+NmqftFEaWBDns/ceL
- vPIYXkdPvTT28uU+CsEAFXatL7IhP7yNcb7r2t+noHbAiFfSj7DQmMnBZLtyWGOjzi3Pbq+N9me
- KxrQRqzIXU9DCDVqVlcuSlgsoUw2bjzAVhIDggoayuXyf/6
-X-Received: by 2002:a05:6808:1710:b0:45e:b5f9:8a1d with SMTP id
- 5614622812f47-467572ede9cmr1982249b6e.35.1773414959278; 
- Fri, 13 Mar 2026 08:15:59 -0700 (PDT)
+ AJvYcCXo1/scG2QfqxK98+lujO9CIWLXageNSQNW8ZOeBThd2kKMzvoP2esykh+U0WoIztC94baElzo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMwl+v4H0ifSb5cjZd2t8zb0CLa/pH+fU1fQMnMv1SE9tGm2Hd
+ p8gw/MOy+wL9lETdb5cAYc+8Bi0/UBV89leZOw3cRxTkvhhAynx1Z9FMjcLaPt2Y+fg=
+X-Gm-Gg: ATEYQzwN2GTwgOvIjt84l/xwq1qf6MJdQFVX07uo9naAtL/U0RttaRJRXhP2JsGv473
+ vs447RbzeJMucetGtxMwOAB4ZEP6hEOfwOZPoxasRZ3qoEXQYyWOvbfNnLs2zxjJSk3saNRC9LX
+ 4dVDmI41q8mSNW5vYAV1vPtoKMzMPEMbqXKLoRm6HsK7bqkW+40trdq/i42l8/4VuUP0jnq/SBB
+ 77Q+NVSwGpEZ7Li4xm1LdSW5k+4vmv+//fJWSx+qy8Xt4+aX9g9joM4PDa8K7Zs3yl0Lqj9R4YI
+ nHMZtxSU7MkdPt6i+7Oop7NwSeMFBZFx8HYvvcLvWZYDe3ko7Ezr2bGguz91zYijM6odsBHP/2N
+ ryCVuHprclVnnisVSevx+20R3SE5xr0PIA0gSF3kmJu/mXDK83plLFLdyJU0rDnoTVQ1wXnn6Et
+ LgavkcDs3eF0OOZMXKyr7F0+SQ+0NBWVXpigZ6f2SdxoyH0xCoHpvK5kceVlXRJ0KalCRNl3Anh
+ /HTHajFlYFVJUZ8CnvR6gQmHi8d7E+Klee3sJ5jJAWXBC3f
+X-Received: by 2002:a05:6830:7309:b0:7d1:90d6:403 with SMTP id
+ 46e09a7af769-7d7824af451mr2370929a34.16.1773415034971; 
+ Fri, 13 Mar 2026 08:17:14 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467342fb528sm4991755b6e.17.2026.03.13.08.15.57
+ 46e09a7af769-7d76ac8e5b4sm6712707a34.12.2026.03.13.08.17.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 08:15:58 -0700 (PDT)
-Date: Fri, 13 Mar 2026 09:15:56 -0600
+ Fri, 13 Mar 2026 08:17:14 -0700 (PDT)
+Date: Fri, 13 Mar 2026 09:17:12 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Richard Genoud <richard.genoud@bootlin.com>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Joao Marcos Costa <joaomarcos.costa@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/7] fs/squashfs: squashfs.h: include file should be self
- dependent
-Message-ID: <20260313151556.GF502704@bill-the-cat>
+Subject: Re: [PATCH 7/7] MAINTAINERS: SQUASHFS: Add myself as co-maintainer
+Message-ID: <20260313151712.GG502704@bill-the-cat>
 References: <20260313104229.1555236-1-richard.genoud@bootlin.com>
- <20260313104229.1555236-4-richard.genoud@bootlin.com>
+ <20260313104229.1555236-8-richard.genoud@bootlin.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="AjSZYgz2zN2M+WML"
+ protocol="application/pgp-signature"; boundary="0tzLJviAblm+wMrM"
 Content-Disposition: inline
-In-Reply-To: <20260313104229.1555236-4-richard.genoud@bootlin.com>
+In-Reply-To: <20260313104229.1555236-8-richard.genoud@bootlin.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,14 +103,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---AjSZYgz2zN2M+WML
-Content-Type: text/plain; charset=us-ascii
+--0tzLJviAblm+wMrM
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 13, 2026 at 11:42:25AM +0100, Richard Genoud wrote:
+On Fri, Mar 13, 2026 at 11:42:29AM +0100, Richard Genoud wrote:
 
-> Otherwise, we get a lot of errors when including this file.
+> I propose myself to maintain the squashfs files with Jo=E3o.
+>=20
+> Also, reorder patterns in alphabetical order.
 >=20
 > Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 
@@ -120,15 +121,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---AjSZYgz2zN2M+WML
+--0tzLJviAblm+wMrM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabQqKAAKCRAr4qD1Cr/k
-CnOyAPwLBB51mSuLKnpiaHurcmwvCKuK9MAZOU48j47Vx7jWcgD/bLfVH+q6/X95
-C5MrlqdAwrK3iMp4EFr/4esQa9KGmAY=
-=WDxn
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabQqeAAKCRAr4qD1Cr/k
+ClV0AP9WRTPXexrsyBMotqHMKi694RwRotjPmafbQywOyfB3qQD+OLVsmrfPNBX7
+8bzqUJd4wERXojEykdt/sUXJ1a7meAQ=
+=XJN4
 -----END PGP SIGNATURE-----
 
---AjSZYgz2zN2M+WML--
+--0tzLJviAblm+wMrM--
