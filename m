@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44807105F7B1
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 14:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAE73105F7AE
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 14:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C3AF84329;
-	Fri, 13 Mar 2026 14:59:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65ACC8432F;
+	Fri, 13 Mar 2026 14:59:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wweYnwQn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TDM6RFCr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D37A384337; Fri, 13 Mar 2026 14:59:38 +0100 (CET)
-Received: from PH7PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170100009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::9])
+ id CB2FD84347; Fri, 13 Mar 2026 14:59:40 +0100 (CET)
+Received: from DM5PR21CU001.outbound.protection.outlook.com
+ (mail-centralusazlp170110009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c111::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8776E8432A
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:59:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EDDEE84332
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:59:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FsxKlp/xNdQ3M3tbBGxANnD7hHMICS+YSmI8fXavItpC9rE90pxwWd4lRA5KDURxzerwJ7IneLGcFLwbKryFrHhqZppfnVpoAoX0kN6FlAhyHwQaCqDV/oHD+Fq8IBD9/KmwLkciU0Lnhi0P+D0lC48mX9AWA6+e3ADv9e+u3DTZFB02AinZ1xxQGGPLhfmHNmDbM3QXBgLIFBBW4FBu1d7PkMge/yVy7cq9H4mvqMP0gBTbB1+R4DoTFDgT7IrvTNaN4vwqeLJXCayLONOxHAHAevv8ZDXWoaY553DjLG1m1Ti2AGbfT9bNIO7NNAqQpd2wXESsTx+FrlTcxJTZ3g==
+ b=jnh2GPBp2A5f0bNxzhZ6GJ+B0wRbqJO1wjaHho4iAQguzfY/5YgQ3WKYbVlfIXA3ihw9AqcBE8uoixAtaJviVBbF+yHoWTJ9sqH734S/HKy+/t46bHcok7rmeoJ5Dyi6To0ZWcKkZCkRQG3FMzuSMzflJRI/C6/S4HICt9uhEJOi0TyRAumPphvY4wMBog3IAhpSlQdBDrTMTHyNJZKd1e9CBv6NBYOHfMCEIQUGK0Rj4XcTzpG8F3GUb2W59mOZ0b/h2c86VrpYfh1FCfK2T2ujnxPlrD7ZRNnDn2Y7EDSqQloVzWSogWJBS8zj/P+NR2QBi0rRNaDFUcs6tLYZ8A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tDR+ipj7XA2p5SJMLkNrISfzdf4uPgvwuIJuvpWZVIM=;
- b=Dr5kqZXzuEuxv1n8zV9j1kX11aRmh1cso7F0iMqupGyqPQWl89xiVHmcsNpUI1wvlahhiYGT4qeqn3/WYByGTRnLM/VSrflFJLNsQSt7CutTO+fS/hNBif61N2OtmaHxxTdas0416Q9rAnxOUstF7fT52yT3Yr2GNkfdC1gumgC5Pupu6g5MV7VOYfU0Qq1Z727jTTRM2VDD4lUuIiINO7+v2na9eqQgcdE4Wo4l1hGdweEFH3q2PwWbi3+5E7tAf2YAM5vD8SZlw8p7xJnACju4lTUPOrK6vlT3FNSOo8vF78k0opin1MwamJveGtwmndZMseBVpvn/2Y9Pq1PgkQ==
+ bh=wb3eB00Eu3ZgrnKfXSJ9cZ3kbfPl5anqExlPRaAG4Pw=;
+ b=G2Y+hkZotCyJwBKOcYTpAXjp4XfrMMxyvTMQaYJgaY5eO2Ev0/Z0KZDrZRnTOy7lLIjPJvx4+1iFXUcGSBiWAC9gxhGqumS7M8gxCOsHCwB4mGOHQs0hVBmcScEHVE6KRUKTQOf1gTrDrsQhfUnB9XyDKlYVNbOlV9ab4TSqbYLbZOW7zU26xOL+LrlYxOHyL+YS7xPfi5NDmfJXxnAeo1bapFlpnZ6VvhS4HyEjeFwdq27FkEK86vNf6tWriyTr3M8aYbrro2v0KxAlWHOZH27ItVCrb5CRFyI2mZoK2CNH7V4sWTp8kBHr1LSx6hhuLivZcHP3x584/NzLUWl1cg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
+ 198.47.21.195) smtp.rcpttodomain=konsulko.com smtp.mailfrom=ti.com;
  dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tDR+ipj7XA2p5SJMLkNrISfzdf4uPgvwuIJuvpWZVIM=;
- b=wweYnwQnvJFcolriUWF0IAzP+OtbTSMff55LFoBe4HHz//r76CmLVW4GvI2sm/8v6YGwddFasplIKV0e4Att2rMRPdl9H5f5puLFbntyRBOM4IlnjWYrrBH2MW6EI8QTst1ooiwnRz+I040lrQp4Ki3COTEA2kWgtORtPgHVfeQ=
-Received: from CH2PR20CA0007.namprd20.prod.outlook.com (2603:10b6:610:58::17)
- by PH7PR10MB5745.namprd10.prod.outlook.com (2603:10b6:510:125::7)
+ bh=wb3eB00Eu3ZgrnKfXSJ9cZ3kbfPl5anqExlPRaAG4Pw=;
+ b=TDM6RFCrUeyAdsajlmMSCvyV/MFJNmJvd0fHVBcoFK8akrEF+hDZUlP/ggtJuDz/TSWNlSZPsBvooy3gsN/LDktojvPRAGSYPNitGbvysSDtQ95OCASprc1v64tjDoG/A6pASX8cR7VvdMbN+0wdv1aNuSf3z8DZMKeLvJ8hkuE=
+Received: from PH7PR17CA0038.namprd17.prod.outlook.com (2603:10b6:510:323::17)
+ by MW4PR10MB6369.namprd10.prod.outlook.com (2603:10b6:303:1ec::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.12; Fri, 13 Mar
- 2026 13:59:32 +0000
-Received: from CH2PEPF00000140.namprd02.prod.outlook.com
- (2603:10b6:610:58:cafe::17) by CH2PR20CA0007.outlook.office365.com
- (2603:10b6:610:58::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.16; Fri, 13 Mar
+ 2026 13:59:34 +0000
+Received: from CY4PEPF0000EE3F.namprd03.prod.outlook.com
+ (2603:10b6:510:323:cafe::5c) by PH7PR17CA0038.outlook.office365.com
+ (2603:10b6:510:323::17) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.17 via Frontend Transport; Fri,
- 13 Mar 2026 13:59:30 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ 13 Mar 2026 13:59:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.195)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- CH2PEPF00000140.mail.protection.outlook.com (10.167.244.72) with Microsoft
+ 198.47.21.195 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.195; helo=flwvzet201.ext.ti.com; pr=C
+Received: from flwvzet201.ext.ti.com (198.47.21.195) by
+ CY4PEPF0000EE3F.mail.protection.outlook.com (10.167.242.17) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 13:59:30 +0000
-Received: from DLEE214.ent.ti.com (157.170.170.117) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 13:59:31 +0000
+Received: from DFLE206.ent.ti.com (10.64.6.64) by flwvzet201.ext.ti.com
+ (10.248.192.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 13 Mar
- 2026 08:59:28 -0500
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE214.ent.ti.com
- (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 08:59:30 -0500
+Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 13 Mar
- 2026 08:59:28 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 08:59:30 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 13 Mar 2026 08:59:28 -0500
+ Transport; Fri, 13 Mar 2026 08:59:30 -0500
 Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
  [10.24.53.104])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62DDx6Je638000;
- Fri, 13 Mar 2026 08:59:26 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62DDx6Jf638000;
+ Fri, 13 Mar 2026 08:59:28 -0500
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <n-francis@ti.com>
 CC: <u-kumar1@ti.com>, <vigneshr@ti.com>, <a-kumar2@ti.com>
-Subject: [RFC PATCH 08/19] board: ti: j721e: Add exit retention for k3-ddrss
- (J7200)
-Date: Fri, 13 Mar 2026 19:28:49 +0530
-Message-ID: <20260313135900.3430264-9-p-mantena@ti.com>
+Subject: [RFC PATCH 09/19] board: ti: j784s4: Add exit retention for k3-ddrss
+ (J784s4)
+Date: Fri, 13 Mar 2026 19:28:50 +0530
+Message-ID: <20260313135900.3430264-10-p-mantena@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260313135900.3430264-1-p-mantena@ti.com>
 References: <20260313135900.3430264-1-p-mantena@ti.com>
@@ -93,30 +93,29 @@ Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000140:EE_|PH7PR10MB5745:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5f996b3d-424e-4c00-3876-08de8108bf7b
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3F:EE_|MW4PR10MB6369:EE_
+X-MS-Office365-Filtering-Correlation-Id: 91502c3a-3128-4a0e-920c-08de8108c007
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700016|1800799024|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: ea80WKG4llLU+Xz5MQoE6Nclq6D8k+e8InnQGhWuwGnmVyur6X6phZMUDVQBU06t/Cw7IJ2FQgqE2T5Dhtja6qMafuXrJPl5VuIe26BmXAtaBRkzVnHO+9Qn9GY8Fehy9ogDP5RICCCNb41a1WztJD+HjWTYurmAB9ydRr9MXSg8xgQ+JsYK9BVVcSrfQCR2LxTYKQL5zBUO4JGS8PBlmlDTjHM6jdI3FuG2HinzRfh/kQtH0K5QuQgerjXdHnJLySR7h6RdprFTjkuWFASVhlpkI/xDtDmiQXKN3Mt83mfrKkU06xdcuo1nTtyfsyb9lyypYZlmbTXVJDRLtEbclwtp6vS2oh4/bZFF/+74dwPcfIqyh3EAL8D0yzjeKsQKY/tfaUrvhN6RdNIm41K43AQkdBmD0D73uQ3Po3RTNEUFJ+OlAx2Iu2LrQgMcAYz9KBKSJ9Ean5v9+ksA0AwaqeSkuCGfJAvHDmdYtIAVxoy/fkHK9h6id8zlNTnm9pe1XFsNSbme+m3Ti0Z8BKeojRCyGIAPaKDuXw/7yXzgncvCoPitrtsZmdKqCee6MKoB41I3aB8CSNicT8Ty3rrXoZ+QazUdcvfxam2a8lhR7CgnlIYJbSO2uNyVcGwPcscw/+z3rMol8N2yfiB0WBhOxjan5bdB1ChDGy69AsTCPFAG3HvtaySutQCatzMKR9Vgb4egpDgp0f7uRN+TU2kSrramVGI7FWEsXpPuqiBwRiuauMyp/sm7Q3kVkOb5BeIajeCYq+f8qL+3V6Ka4skGow==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700016)(1800799024)(22082099003)(56012099003)(18002099003);
+ ARA:13230040|1800799024|82310400026|376014|36860700016|18002099003|56012099003|22082099003;
+X-Microsoft-Antispam-Message-Info: OJq5Q5SWJMr/zN5kxIhgaXoTfTa0WZtjWvSUR712OyXtkJZk501clL92x2xObTt1CqFL7bd99SuAlbtehgjnMBHggYDE2/LyKYeQkT+mXEdNcC6QZOGies7y8stmV13fJ6AN1BYitZu5CGRcD/6kFyIWVMeo8jZ+u/CmXEaumG+YvY6r78wK93QpTj/JLnfgmCeeG98YSa3zO/kp/mYcHkqcBWtVe1I62hIvcXBPWf+Y36fEiWvyt24D9gv4224zzUce7BEvvY44w03HAn6XAJ8sSOxD2JlCLZNPPBLW4jDjAcsKMfNkdrt8bMgKhFRY8tG+D/Njx3EkawnioM4gX6wWYpUfaAqbRbDYcfDUmL2Ddi+nL1r4GQU6Ae9Phsk/uEdA0Ec3aitJWkOiXjfeCtLp+VR1kG6vGsnIgwOACOwW/SjD5G9tMHryCPsybw2cTFzdwnT9c4fcEXV0UaOXJLWg62GNF9Ff/Yy+M29c33Hcn+hL1P0+VMmilKTjWSi7ugnAWYUOoOMIdaUSLdxuwLEAgAKu/jXveW9AZvE+Bsx5IO4RQg1OOoAbi1rVtNYWfejS1GgONabGkDr3L6/JC9ZBoMKQFNsElp2tTFGKQGg3CSIatHe/RXi4Un/P1012r4IGO99V/7OyjvZ04jDyU4MUAFHvhcdYtN4rPRZDPUXN2HwCkZwYPU2Nrt5oznIdOjOAlBqi9vuDNJ3Nr3HCX+kqniqyNm8J4D5MsjixZ+O/jJtiy9cQVfhSM34lsvwsx2HUlpWROX/kK8e1hnDQtw==
+X-Forefront-Antispam-Report: CIP:198.47.21.195; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet201.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(82310400026)(376014)(36860700016)(18002099003)(56012099003)(22082099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 7lqOb7QcvXDu7vmiZ4xFstUBepylGlnxJAwKnMTIl6s2EAgKGRtdpy97IDrZksyQ8lL6J9ltvjBOrRdf9VG5nk1OexGI8BmZ4o3SgfW2zm9Y3v25emFggnsbKHVEMC/VMeIjj4hwpn22RLaOWDiWcUsjsv8YeM9mPfN4rL1hw7VDH6gVWwly611tOxOte8uRTJRBOyC//RcYMF247WMm/1FFgK9wbaKRUlGzDCYwPz5OL5320J2kraCrh24E4DGoBQlhb0DZ4FIfGAuj1A39pcAk5cK1v8dukYon/6hlsIM9iSmaAHrJg8bZ0XAuYfTaoA/rfYgMFu/EYryLrZ0AjHoz/gHnMXl288U/hkEcmtXQrECg3iDQJ67vYcW0jJUc/eKkKoQrbjRxCjThAyEBx9CWQJm+h0xWPuvIFhnSP/g+NPqntP+UdKNwD5rtFQoE
+X-MS-Exchange-AntiSpam-MessageData-0: gi7FFEaMDp480vI/TZF7lvtPvduTo9fczXFwgTP8vwXtAR6Tx3Up6jXUfmyClqFyJoegue7X+uuMuXSdajN1YGSPeyWK0CNQKIYMjHj7suDl0iqHn3gC5KKf51/1+le+ksb+HZUpazpJHRMrbg9UpSkEGn8G+MK5eYYQ5eOcDj7AO/SbZsFVPnU8g8OhUO5r5q3IXu/U5W7DjdUtnxzwU8NDbG0RPZp0JSFd4pIIhd/KyF/AUHQKRhnwoQ3yK9O50VKUISibLX57+7mPppKApjyOj+EDRPt10zsWPU0pvx7+zfFAaU/AHeGNwGWfD5mGAxXGGR3zwMQ+SCbU5UTtsIyHR7wjLdPbO2gep9/i7XJ8uUqNh8sdYmU+VE2AWfOzjBOWjV09LU6/76RcZ9lyLYycf1EQ8+WLQ0R7nfhnTBc06szokjYe+3QcQu4wLUkj
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 13:59:30.4513 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5f996b3d-424e-4c00-3876-08de8108bf7b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 13:59:31.3601 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91502c3a-3128-4a0e-920c-08de8108c007
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000140.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.195];
+ Helo=[flwvzet201.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3F.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR10MB5745
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR10MB6369
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,7 +132,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Thomas Richard <thomas.richard@bootlin.com>
+From: Richard Genoud <richard.genoud@bootlin.com>
 
 Add the board specific part of the exit retention sequence for k3-ddrss
 Following the DDR resume sequence,
@@ -142,97 +141,100 @@ Following the DDR resume sequence,
    - restore DDR max frequency
    - exit DDR from low power
 
-Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---
- arch/arm/mach-k3/j721e/j721e_init.c | 56 +++++++++++++++++++++++++++++
- 1 file changed, 56 insertions(+)
+ arch/arm/mach-k3/j784s4/j784s4_init.c | 53 +++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
 
-diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-index f325597a70b..220cb700ff7 100644
---- a/arch/arm/mach-k3/j721e/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e/j721e_init.c
-@@ -23,6 +23,8 @@
- 
- #include "../sysfw-loader.h"
- #include "../common.h"
+diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+index 161c68e474f..f039eb3f752 100644
+--- a/arch/arm/mach-k3/j784s4/j784s4_init.c
++++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+@@ -18,6 +18,8 @@
+ #include <mmc.h>
+ #include <remoteproc.h>
+ #include <k3_bist.h>
 +#include <power/pmic.h>
 +#include <mach/k3-ddr.h>
  
- /* NAVSS North Bridge (NB) registers */
- #define NAVSS0_NBSS_NB0_CFG_MMRS		0x03802000
-@@ -294,10 +296,50 @@ void do_dt_magic(void)
+ #include "../sysfw-loader.h"
+ #include "../common.h"
+@@ -264,15 +266,44 @@ void k3_spl_init(void)
+ 		k3_dm_print_ver();
  }
- #endif
  
++#define DDR_RET_VAL BIT(5)
 +#define GPIO_OUT_1 0x3D
-+#define DDR_RET_VAL BIT(1)
-+#define DDR_RET_CLK BIT(2)
 +#define PMIC_NSLEEP_REG 0x86
 +
 +static void k3_deassert_DDR_RET(void)
 +{
-+	struct udevice *pmica;
-+	struct udevice *pmicb;
++	struct udevice *pmic;
 +	int regval;
-+	int ret;
++	int err;
 +
-+	ret = uclass_get_device_by_name(UCLASS_PMIC,
-+					"pmic@48", &pmica);
-+	if (ret) {
-+		printf("Getting PMICA init failed: %d\n", ret);
++	err = uclass_get_device_by_name(UCLASS_PMIC,
++					"pmic@48", &pmic);
++	if (err) {
++		printf("Getting PMIC init failed: %d\n", err);
 +		return;
 +	}
 +
-+	ret = uclass_get_device_by_name(UCLASS_PMIC,
-+					"pmic@4c", &pmicb);
-+	if (ret) {
-+		printf("Getting PMICB init failed: %d\n", ret);
-+		return;
-+	}
 +	/* Set DDR_RET Signal Low on PMIC B */
-+	regval = pmic_reg_read(pmicb, GPIO_OUT_1) & ~DDR_RET_VAL;
++	regval = pmic_reg_read(pmic, GPIO_OUT_1) & ~DDR_RET_VAL;
 +
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval);
-+
-+	/* Now toggle the CLK of the latch for DDR ret */
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
-+
-+	pmic_reg_write(pmica, PMIC_NSLEEP_REG, 0x3);
++	pmic_reg_write(pmic, GPIO_OUT_1, regval);
++	pmic_reg_write(pmic, PMIC_NSLEEP_REG, 0x3);
 +}
 +
- void board_init_f(ulong dummy)
+ void k3_mem_init(void)
  {
- 	int ret;
- #if defined(CONFIG_K3_J721E_DDRSS) || defined(CONFIG_K3_LOAD_SYSFW)
-+	struct k3_ddrss_regs regs;
  	struct udevice *dev;
- #endif
+ 	int ret, ctrl = 0;
  
-@@ -414,6 +456,20 @@ void board_init_f(ulong dummy)
- 	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
- 	if (ret)
- 		panic("DRAM init failed: %d\n", ret);
+ 	if (IS_ENABLED(CONFIG_K3_J721E_DDRSS)) {
++		struct udevice *devs[J784S4_MAX_DDR_CONTROLLERS];
++		struct k3_ddrss_regs regs[J784S4_MAX_DDR_CONTROLLERS];
 +
-+	if (board_is_resuming()) {
-+		/*
-+		 * The DDR resume sequence is:
-+		 * - exit DDR from retention
-+		 * - de-assert the DDR_RET pin
-+		 * - restore DDR max frequency
-+		 * - exit DDR from low power
-+		 */
-+		k3_ddrss_lpddr4_exit_retention(dev, &regs);
-+		k3_deassert_DDR_RET();
-+		k3_ddrss_lpddr4_change_freq(dev);
-+		k3_ddrss_lpddr4_exit_low_power(dev, &regs);
-+	}
- #endif
- 	spl_enable_cache();
+ 		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+ 		if (ret)
+ 			panic("DRAM 0 init failed: %d\n", ret);
++
++		devs[0] = dev;
+ 		ctrl++;
+ 
+ 		while (ctrl < J784S4_MAX_DDR_CONTROLLERS) {
+@@ -282,8 +313,30 @@ void k3_mem_init(void)
+ 
+ 			if (ret)
+ 				panic("DRAM %d init failed: %d\n", ctrl, ret);
++			devs[ctrl] = dev;
+ 			ctrl++;
+ 		}
++
++		if (board_is_resuming()) {
++			/* exit DDRs from retention */
++			for (ctrl = 0; ctrl < J784S4_MAX_DDR_CONTROLLERS; ctrl++) {
++				k3_ddrss_lpddr4_exit_retention(devs[ctrl],
++							       &regs[ctrl]);
++			}
++
++			/* de-assert DDR_RET pin */
++			k3_deassert_DDR_RET();
++
++			/* restore DDR max frequency */
++			for (ctrl = 0; ctrl < J784S4_MAX_DDR_CONTROLLERS; ctrl++)
++				k3_ddrss_lpddr4_change_freq(devs[ctrl]);
++
++			/* exit DDR from low power */
++			for (ctrl = 0; ctrl < J784S4_MAX_DDR_CONTROLLERS; ctrl++) {
++				k3_ddrss_lpddr4_exit_low_power(devs[ctrl],
++							       &regs[ctrl]);
++			}
++		}
+ 		printf("Initialized %d DRAM controllers\n", ctrl);
+ 	}
  
 -- 
 2.34.1
