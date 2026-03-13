@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82E1107BCE2
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 21:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52724107BCE4
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 21:03:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FEF284324;
-	Fri, 13 Mar 2026 22:00:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B9DE68430A;
+	Fri, 13 Mar 2026 22:03:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J8TjZGjX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k+w4kob1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2B4C84382; Fri, 13 Mar 2026 22:00:18 +0100 (CET)
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
- [IPv6:2607:f8b0:4864:20::a36])
+ id 98D4484324; Fri, 13 Mar 2026 22:03:07 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC7AF84324
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 22:00:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17A9B842DF
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 22:03:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-56b6c3e0166so607704e0c.0
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:00:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7d75ed779bfso2752079a34.2
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773435615; x=1774040415; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y3F1Df++OARSWejb+JMakGLfa2p5XMTlr810JPbqr7g=;
- b=J8TjZGjXsgt3r+7d4bLrdVMSt04Fza4LawBCyJGGdNY2V022FQ8WjmuiwXOD2Ay5lk
- +o1UIGFzfr+FnI1OMsI9A8TCkuq9TtgOhPE1weiK3+NFOQEu1Z+xTo4JwdnOTpi1dMZ0
- R34+e5KhCvAXeAj5jFACzfhQGg9qj2iH1gKjxsF/hHDdm0topSYvdUkkkuC1vCPLKgMV
- JuSjUSWVifo/NaUvbnWHOjyJ7i26tFdq8/F+hcSves8rdvbKcZVrXQ7PJ+EWsWpvwO8c
- bmSzc8LP9L8GYXqlfMWzpHlpP6JxHK1U8hBqAik6UGHKPV4d35Gg+PnJuQlAP5xGr9PS
- Jxkw==
+ d=konsulko.com; s=google; t=1773435784; x=1774040584; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gwPTpfFkShPwnjJ7MI70avYcGEyE823I9Bu37lWJRS4=;
+ b=k+w4kob1E2G6avhTfuThbdVp9LcA+8PLlxL6nWkHta5dt129oIRIvoxyV2N72CWytw
+ PhCwwSFqABv2VhFL6WWEZSxASx82zYVUHvZPLdrDqn6sQ6w9sJWZpNbWrb4/YMy7+ARi
+ NG+RLlDTkuY36Mpf0jGM99FZ0nUpf2+nI8MsU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773435615; x=1774040415;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=y3F1Df++OARSWejb+JMakGLfa2p5XMTlr810JPbqr7g=;
- b=EOKGNexuZ7zlf7+9ipfdhRmDDNpIRQNOuEy4NLquEPvXsIxWfw6EyKYmgRPZqzeUor
- FgXI0Gv1DEz9VP8OBaq6qVE5mx5KWGieTMYHy5sG08jtB4hW7sfHjznKfex/k/4Dc+8A
- MQGZ8BeFATCOZOcF/Dk7JUaXPOTFN1p0vywgGAUz5otF9reft2pAIVdLl2ZkXl/amiYt
- WQJPKiLT1rHAS2GMuhM1KJQ8TZWrBS4jkoIeU1hIObY4E2nMPKLNUBVRWJ0GNKvtbEQa
- 2VsIR5n4uwrOXZpFwAN2/ZQBsWtFeDjC/rigS8FSO1gds0LRTUycO08zqXuLMJyXgvfs
- TOHQ==
+ d=1e100.net; s=20251104; t=1773435784; x=1774040584;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gwPTpfFkShPwnjJ7MI70avYcGEyE823I9Bu37lWJRS4=;
+ b=FNZnr8Ev0a9BhhQTtZRfgscgeuKOOD7oFT5YxUrErepGiFLp9EBgOl3VVHqq0+6ii4
+ AHwQJXki83QqbsaEgt8g9D0tuyGEF38/1zrkkdyBR97Zi5gaiVNYk9EiN17OJu3S5BBS
+ YgvkA3a3DXJGIK46E3w7FAGg1usNaOL6neUap5wv8ZgPnhu1fLlDK9ZpmfE6Q3ZTiKJQ
+ BSGHdJ3jX7bA0+lnytgCuSLM+dMY4w+mFFkGFW8AgPNXlWHIj/G6tTDFtWxZx/adJCJf
+ blWW8tl3mR9+ayQEP0aDA3Ij8FfIgZ3GtOWAlJiBmoo1M+wHKAEb+CBdSFWrYpQOlzyK
+ LQdQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPehDbuMc8fWCO2AReEag7VLNsd4o1JrzVrYrpVmqomX9duYwDsNjS8+h9RISqgUxUyti5ZNE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyrNtHtj9MZ9UXpeo7ZO4pGvUz7oGXzoyB9J3q+H+F5oT0a1SVL
- LmfUgpFZEQgWQ2GXKhD2hgwmGvutuV7AIUg2edEmBEeVRb0aZZAY4Tp+
-X-Gm-Gg: ATEYQzw+fFSNRCGlK5Fk5221sa0RdeSHl/E56U+FU7X1L+6GUUE1ynkzZz15FqFVJzD
- MDnqql6sh8gzyOIoaax6zZU9kF/iRImNLVV7tBTIhY3OBgiWpZZfLJG1azlSe0Dp6/oqRwzDNd2
- 2ScmCE9rVLk4Nk7liEFcpIH6Inox+AcCB0jI4EhaahDI8fdr7v1JS29g71SfAGCmk7E3U+6BtRT
- Hd5ftUQ9rPM5j6jdh5SfGMibBkBfkUZRFqPkjgTtzJdg7+79YDGq9gz0UY/2E1zbNunoPgf++yt
- L0q49f90gO6XiXUcWHFRqofUXEG9VxRXZKBdquhnX5pdkEWt7BS+fQDeb1nK/p500XTBRTfFrZb
- kuC1SGp2vl6FmM9n4q210WXRiGMB9XPo/ZDALUFW0HpsQpZAYguUGxP/Qgk3aezfE2ah7SckfeW
- A+2bUQNOyW/uSkJPc4/oi85XOmPPANyizSkGqEZhXx45mO7jDDzYnT+7JMnnXRvCL1fQ9XUA==
-X-Received: by 2002:a05:6122:458c:b0:559:6788:7b55 with SMTP id
- 71dfb90a1353d-56b614bd00cmr2244895e0c.3.1773435615556; 
- Fri, 13 Mar 2026 14:00:15 -0700 (PDT)
-Received: from fabio-Precision-3551..
- ([2804:1b3:a803:148f:efd2:3409:d560:acc5])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-56b4648dd38sm4466066e0c.14.2026.03.13.14.00.13
+ AJvYcCWHPLu/TIvTuGVnYE2RzfoZMPHLrIWZIId8dKgTqWqfaPpRa9EojFf2wjZKU1+GTXDWW4d4z+w=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIFTlpsFc6vl3o+6NPQ19Mx1dlrmvAYSjvJXt1vXM1V4wzDloh
+ Air7Vv92ye+S8NE3uu9tk9Mm01tZaH8Oe0MHTP1i4z40SpPVl3YLxgnyXb3uviPH714=
+X-Gm-Gg: ATEYQzyzGXszLBWJrOw4ZD7oj8PSs0X67XD2OFVRLhnjmkVx4PYYzud6Bdz+N0jW4GP
+ UCxVHKzu4MssTopYOh2aWgYhdSvtE7vO2qQZnabcW4uvpXbrmTn49Bta+PFgsGxqc9Qj+wqBrnX
+ cl7kIn4JPD1AbYjbU/be9f8O/RyYODbEOw4qlRd3ph9EzpfcjTfFjCkjsk9zA4Uy1qiuthUu/JO
+ jYnRVAeSMHtT2RD2vm72zDa8n4P8e8TV8zIBdH4jxu/PscBIyxxFjcb7ujeOAUB4TxA6wzg0vgX
+ sIuNSmnzfyauCosGjcA9X93ZSpVaPTbAgS6aP4+iSrGGr3tfT5EFg8P2zBdPS1v7TlhwWh/SkB+
+ lvgPngSb3nyCK6m0wbnZDH3x2aHU8c9n0NPxqpUd6xH/4Z/3lWIfXml2HQn0yULTSrvKQafMDL5
+ sh1u4WoFai3MiRY/gUdsrn3uT9/PTEnL9RV4nEIjXhLDluEjOVistcjU85RLXhniGkZRycJ1mH+
+ 85JVsow3ada/2SAqVGzfO7V9FXGnz0vvg/5Far15rWsGG+q
+X-Received: by 2002:a4a:ee84:0:b0:67b:a489:3b72 with SMTP id
+ 006d021491bc7-67bdaa76b8bmr2620436eaf.64.1773435783657; 
+ Fri, 13 Mar 2026 14:03:03 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4177e1fb90csm9693104fac.4.2026.03.13.14.03.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 14:00:15 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: peng.fan@nxp.com
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, marex@nabladev.com,
- trini@konsulko.com, Fabio Estevam <festevam@nabladev.com>
-Subject: [PATCH 2/2] doc: imx95_evk: Fix the binary name
-Date: Fri, 13 Mar 2026 18:00:05 -0300
-Message-ID: <20260313210005.781958-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260313210005.781958-1-festevam@gmail.com>
+ Fri, 13 Mar 2026 14:03:02 -0700 (PDT)
+Date: Fri, 13 Mar 2026 15:03:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: peng.fan@nxp.com, uboot-imx@nxp.com, u-boot@lists.denx.de,
+ marex@nabladev.com, Fabio Estevam <festevam@nabladev.com>
+Subject: Re: [PATCH 1/2] doc: imx95_evk: Update Arm GNU toolchain version to
+ 14.2
+Message-ID: <20260313210300.GH502704@bill-the-cat>
 References: <20260313210005.781958-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+4F8j9cAWaPoMhkf"
+Content-Disposition: inline
+In-Reply-To: <20260313210005.781958-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +100,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@nabladev.com>
 
-U-Boot produces flash.bin as the final boot image when building for
-the i.MX95 EVK, but the documentation refers to imx-boot-imx95.bin.
+--+4F8j9cAWaPoMhkf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Update the instructions to use flash.bin when copying the image to
-the SD card.
+On Fri, Mar 13, 2026 at 06:00:04PM -0300, Fabio Estevam wrote:
 
-Signed-off-by: Fabio Estevam <festevam@nabladev.com>
----
- doc/board/nxp/imx95_evk.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> From: Fabio Estevam <festevam@nabladev.com>
+>=20
+> The imx-oei and imx-sm build systems defaults to:
+>=20
+>   TC_VERSION ?=3D 14.2.rel1
+>=20
+> but the documentation still instructs users to download the 13.3 toolchai=
+n.
+> This causes the build to fail because the expected directory name does
+> not exist.
+>=20
+> Update the documentation to reference the 14.2 toolchain to match the bui=
+ld
+> system default.
+>=20
+> Signed-off-by: Fabio Estevam <festevam@nabladev.com>
+> ---
+>  doc/board/nxp/imx95_evk.rst | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/doc/board/nxp/imx95_evk.rst b/doc/board/nxp/imx95_evk.rst
+> index b8c3f4bed500..e87d7e27b618 100644
+> --- a/doc/board/nxp/imx95_evk.rst
+> +++ b/doc/board/nxp/imx95_evk.rst
+> @@ -60,8 +60,8 @@ branch: master
+>  .. code-block:: bash
+> =20
+>     $ sudo apt -y install make gcc g++-multilib srecord
+> -   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel=
+1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+> -   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+> +   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel=
+1/binrel/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+> +   $ tar xvf arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+>     $ export TOOLS=3D$PWD
+>     $ git clone -b master https://github.com/nxp-imx/imx-oei.git
+>     $ cd imx-oei
+> @@ -100,8 +100,8 @@ branch: master
+>  .. code-block:: bash
+> =20
+>     $ sudo apt -y install make gcc g++-multilib srecord
+> -   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel=
+1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+> -   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+> +   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel=
+1/binrel/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+> +   $ tar xvf arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+>     $ export TOOLS=3D$PWD
+>     $ git clone -b master https://github.com/nxp-imx/imx-sm.git
+>     $ cd imx-sm
 
-diff --git a/doc/board/nxp/imx95_evk.rst b/doc/board/nxp/imx95_evk.rst
-index e87d7e27b618..593981e6a651 100644
---- a/doc/board/nxp/imx95_evk.rst
-+++ b/doc/board/nxp/imx95_evk.rst
-@@ -152,7 +152,7 @@ i.MX95 B0 silicon version on 15x15 LPDDR4X EVK
-    $ make imx95_15x15_evk_defconfig
-    $ make
- 
--Copy imx-boot-imx95.bin to the MicroSD card:
-+Copy flash.bin to the MicroSD card:
- 
- .. code-block:: bash
- 
--- 
-2.43.0
+As this is no worse than before, OK. But we should really be globally
+consistent about toolchain wording and that CI runs with the kernel.org
+community toolchains.
 
+--=20
+Tom
+
+--+4F8j9cAWaPoMhkf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabR7gAAKCRAr4qD1Cr/k
+CllXAP98Rk7dTdm4aGprPgH+/Uk69uqfnGgQAY06k/7fTaWxrwEAl8TpsHBIpiU1
+bs67SYewpYTq/bkXmcF79gILuFG7KAk=
+=Q1BJ
+-----END PGP SIGNATURE-----
+
+--+4F8j9cAWaPoMhkf--
