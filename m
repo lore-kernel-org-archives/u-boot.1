@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42794107BCE8
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 21:56:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CE8107BCE8
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 21:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0697184348;
+	by phobos.denx.de (Postfix) with ESMTP id 49DD2843F3;
 	Fri, 13 Mar 2026 22:56:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="WgYhLzsG";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0WmzV2yW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D673B8423D; Fri, 13 Mar 2026 22:56:17 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id AC05B843F3; Fri, 13 Mar 2026 22:56:19 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96039843D0
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 22:56:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BA6C843D8
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 22:56:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d77b179b52so2124832a34.2
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:56:15 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7d74dbfe84cso1858643a34.1
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 14:56:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773438974; x=1774043774;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773438975; x=1774043775;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Pq2NvF2ZIpD0rpJOFr6o6taNBWaYY2Gs3R732ogu6qI=;
- b=WgYhLzsGDk3JwJp65v8RDCNdESDaokQ3Tqa0LYl/fsZUN+5Y0BOKkE/pdVyNaHj5m+
- mI74XoAMPIT0Bu/CX/86vU6DSfHu5vq6Vp/d+J3+2t8XOLMAV1TyRMGuC/4xDridBj3l
- IjQQRskqcBsnQpJCHwdpJVLcJfru3FcrK9DhKeJQFHX5UYQ5pcK/yv/JnSveOuytjoke
- wHxcJjeoykRvzjWoGYX81PjjiJ9nelCIAzLr9EqxawgRvs2znho7Jc31h5I8/1tIugN2
- /LDbAUweaPspnklfQFViMbzYD/nWtPTEhKxhDrC0JHZr33vgc7HxUJ+firtoEDPS1GHb
- bK0w==
+ :reply-to; bh=tzAMkF30uJGYuuosoGgxPIhplry6eeRoA59zIXm5inE=;
+ b=0WmzV2yWVZUjBughC1+f5Aiv6hJipHljK1w6giaRVW7uUgKXzHy4NBJfPo3CqsVAgS
+ drqulsY6pL/jJRVsDOb6HfyrFprGNFmQfPMBxXdFS5s9acpE7VtgAZt9SYuZsRa2ISMU
+ EkwACl51a+aIMB8phW1beU+JsMfR5OE/3AGI2XlPXIFcXzW3CQPRcOeKiosqQgDtlPSM
+ DU8rGdO8DnoY3UBP4xAehYqZdG+vFaXxUhzO2XN3PGYTF4+hZfsTbnF4ZAB2hd+TRNlD
+ skE57yeVMzIFvM73Xd9SvH2ZrZCQS5SKC0Q2Eb5+9LLWgE436lwWqQJTG9lDKAQmc62b
+ nisw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773438974; x=1774043774;
+ d=1e100.net; s=20251104; t=1773438975; x=1774043775;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Pq2NvF2ZIpD0rpJOFr6o6taNBWaYY2Gs3R732ogu6qI=;
- b=LhyLYMSjNKG1rH1erCOLHGPvBsickrDZ0C9Mj1Emh+zlj5dJI2w1m2e6hIjaE3zgLg
- 8GIohblZLhQCPp4bpK1MyiaEORFbaqAqgX8BKNhKEecX8mVGtMf+s0W1cDB4kRPIHSnP
- oIDYChNCBTNwg7/QLjpN8PovdM+M9u5RoAwmuf/imLAUxxU8BoOen7nvhB1sdmvfUYMk
- j8xVS+WAeSeZCmf1Tt1C7yf9zIfdWr8lr+x9uGtg9pI9GCdn/BcRqabrQ9NcQuagAS+d
- IPgeWy4Cy3b/lnaguShXziAc9gHxAxKTnImb6JR/9EoJgEWUWmXODh6lVpP0sKtlkEEf
- QLbw==
+ bh=tzAMkF30uJGYuuosoGgxPIhplry6eeRoA59zIXm5inE=;
+ b=n7kuVNe7PZmeacYS7yx/KuUQB844lqgL2qVr9RQh8Y1DBWojx4o19XQ5chlD9aZ6HN
+ X7EDrHEbNPSa1SMFBjXumBIHXvC2/L2L7luRPCppYu/AlborguvmcrEiSweS/cLvtrye
+ tcq30U5X7ulylUj4wTWXsQ2Qpt8/JEKVOCjL9vlvfP1QFPIeDojPFTzDuuSrQ9I0mEqI
+ x69zxfe/wZGvugNZRbnojqt/TPiHf0IZwY49OMbDOFq90L+UFqrD8fmVPPjDthTcChn3
+ YfyDKVDh/8jSiXADX17tsW915tRwOefgy2wg/TWaDeC+/lq97S0JjMkmR54JXd/b9Wvu
+ py+g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmEW7dEeAHQrDHSvoeH1YrS8TrrbL3qIdPjeLppTeYwIgpZPtQXVjl6oFfoRZdrZPSr+bXxB4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx131VgQDVTnR7m2vNrl27w1x/IEvPYpXn3Ir0QQSFKof21n3PC
- 5KgKehUG0+IAJFCEzQMzWRdIqHdkvLX5vkNxK/g904dg16ZK152YvB59T4+6BsjxUGY=
-X-Gm-Gg: ATEYQzxgfjEHhEc6WfXu0groIPWFTSwPIVp+fg3mL0oaoMeaAwgqA5LSeJhPqlkRDTI
- RYIJojzHxugLtrYC2VA3Mvigupjmv3pBT8z50EsZk3lgCGQCI3ZDBbAt3q8L27/rBggRCF032/f
- 3gW+ufiXEwVGWTymoHsSsPLTel9y3DFTQ4AcpoSgSHzT4e9MUpD2DfErzXPMvS8vdtGWCnhtrja
- 50HXc/fzdFWNhmPCeTQhgnrMPrPyM0kvVZ6uyOG1KKBO7q2K0sngrauW2z8G0NQaw7EyP8eLKle
- 5p158054M/sOrJ+PIQnRQQV26ZB5NZ6ZDUWPD+7OVa9bozI4qFnPrh1zh5sPSMKvusVbLhSjtXN
- Qi2K6zojhnHRCo+ummL8q1at+ajrnFk8QHlI/ZcYcpAu4nR/QGiWmXJHL5Y3aXxKvhKauAlY6UZ
- kLaWlGf5VjyN0zSakjh3wQxVzW
-X-Received: by 2002:a05:6830:3c86:b0:7d7:4dbd:6dc with SMTP id
- 46e09a7af769-7d78249af46mr3236085a34.8.1773438974276; 
- Fri, 13 Mar 2026 14:56:14 -0700 (PDT)
+ AJvYcCUcfz+GdAdV/6564uho3U91gw7lgckY2gPtBYBuhtDJEp41oXxXu3dOwow13Ezh8LUvFAKk6H4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzft+Jy0EvJQlXuWQOu4bxlk8fObXiy5fifj7nsTVEDUqBcfEU3
+ YBqVPIWMUW9f+EMLLQwemUnodUZTc8iGJXAp4xI46SWeQBOYyAJChUx4eCJB9TazwFk=
+X-Gm-Gg: ATEYQzy3hAU8X4ViA3qNO9TXBEvvLniOGB3InotSyPvJpn7fTfUWNTJ8uuf/IDdiqCD
+ SWkCZ5VUIQtR+KE4Tv5/7G8nBhxv/SWcidHaNx5ZV5UwJPlsliI/HXyz6wk3umUrrsS/PebBAvt
+ wTW9Y7BjCnpQvS3yA+naFQ5f7rnVFTWvqbbooE+Nq63rLSUQgMgrsNrOCyL0Izyo3uZULs2ByCq
+ aUZ1CZuDyg8dZzRlVWlkF6p2Sl5v/LF1oZWMufq8UWC6GGVz/ykPeCMFktsE9SNSTePU455ukrG
+ ZQE/xL7N7en9LMzCNYso1fwQSYxraaPNsrHk5LjlaC38BXl7NOLoSSqFqdCF5iEIdcay5BssnFC
+ BWH/dFKVJA9ApMgaO+no235ebbRfaFoy906Cl68esXfGFb/a8b9kdyOM9nlVNUqt/NvYtKj90ss
+ 6YaI8aZRl2QyRx4XFfHrkHiRnx
+X-Received: by 2002:a05:6830:6489:b0:7d7:551b:aeeb with SMTP id
+ 46e09a7af769-7d7823345a7mr3588202a34.0.1773438975107; 
+ Fri, 13 Mar 2026 14:56:15 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:bf:9982:ff59:466])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ac8e5b4sm7432196a34.12.2026.03.13.14.56.13
+ 46e09a7af769-7d76ac8e5b4sm7432196a34.12.2026.03.13.14.56.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 14:56:13 -0700 (PDT)
+ Fri, 13 Mar 2026 14:56:14 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Fri, 13 Mar 2026 16:55:35 -0500
-Subject: [PATCH 3/4] pinctrl: mediatek: print bias info along with pinmux
+Date: Fri, 13 Mar 2026 16:55:36 -0500
+Subject: [PATCH 4/4] pinctrl: mediatek: mtk8189: set get_pinconf functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260313-pinctrl-mtk-fix-mt8189-v1-3-607dd37fde37@baylibre.com>
+Message-Id: <20260313-pinctrl-mtk-fix-mt8189-v1-4-607dd37fde37@baylibre.com>
 References: <20260313-pinctrl-mtk-fix-mt8189-v1-0-607dd37fde37@baylibre.com>
 In-Reply-To: <20260313-pinctrl-mtk-fix-mt8189-v1-0-607dd37fde37@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -89,17 +89,17 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4940; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1350; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=8rnMhMqJdJpWxF0Ve4+wrsXdkh1hjpQvX3qdn7Jw4+U=; 
- b=owEBgwF8/pANAwAKAcLMIAH/AY/AAcsmYgBptIfs5jym9KmP7fXLcTPWUvtrVOSDlAvaXMR/D
- TIJmDU8w0KJAUkEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabSH7BYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AeBoH+LZUIa75Ry46uISFqkDVGY4xXm23A4bLiAcd0qq
- +rp5tGqtryEKflxbugvwNxkMADefITc/W4Yez0JjS26c7K1fBQlXRw1rcyfEAgZg2oMwVtT/RX4
- 1qynrayb4FvcW+9P1Anb2iHGuzryA7Y+TdjgbIuuT4xQMLkHGEYN0JUz0Giz6rTA0zM253jRJnR
- Hud3R6lT8avbhr02LMUfHdkYUxuYAAJ7jkZMEZYJKbO3lcByrCARj90Vp+d2RAyTqUht2AzU+Rh
- hxUKyX8bAlcSnbDfZHJ1yvMxssQkqsU/hmSDHQ9ihU5ShHm2okGvRK35d2Xer5WRn4qa4LDB6H8
- pew==
+ bh=ah4k47BhomGWmb5lBZKpH8D3L1bXMYn6gtr2KDhqzx0=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBptIfzGWrUFTYS2yR6N5Iwx/QueOEAXTZgKE30I
+ zC4ZGmYA9eJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabSH8xYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/ADHQIAJ+g8ImCUSQM/hkY5JjHMdBQFK47+yH2iuuFm/k
+ vZa6fQsww65dgTaGPi2LKWk+zdsoHP1hg78qCgZaiP6zpi0/LZOwpg3N9lFhMch1vAWMy1uv9gV
+ 47IDqhGdhn8+etLqLfi0QGGqmLJiuX/IKvzyytRWPStrnIhYyygMar4SIFEX8/ulZ77+4P6uBwo
+ KCapinaTxkI7qO0dhOgKjkugGEWAipQNS15CUrBex6f7SLYt5yuhoBVIrI7YqJ2+u0yvRMAlA73
+ Ohagt7MxAkvSH2wJN5ZFezAJbEmQCLz3QdhXJ/Q0x1U+Wn6h/qh0ce8KN5+d9wyVC951bSprlUy
+ blfU=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -118,166 +118,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add functionality to be able to print pin bias settings along with the
-pinmux setting.
-
-This can be useful to debug why pins might not be working correctly.
+Set the get_pinconf functions for the mt8189 pinctrl driver. This will
+append pinconf bias info to the output of the pinmux status command.
+This is useful for debugging pin configuration issues.
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 96 ++++++++++++++++++++++++++-
- drivers/pinctrl/mediatek/pinctrl-mtk-common.h |  4 ++
- 2 files changed, 98 insertions(+), 2 deletions(-)
+ drivers/pinctrl/mediatek/pinctrl-mt8189.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-index 1028b8a93f5..ef4acc946a8 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-@@ -237,9 +237,39 @@ static int mtk_get_pin_io_type(struct udevice *dev, int pin,
- 	io_type->bias_set = priv->soc->io_type[io_n].bias_set;
- 	io_type->drive_set = priv->soc->io_type[io_n].drive_set;
- 	io_type->input_enable = priv->soc->io_type[io_n].input_enable;
-+	io_type->get_pinconf = priv->soc->io_type[io_n].get_pinconf;
- 
- 	return 0;
- }
-+
-+static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size_t size)
-+{
-+	struct mtk_io_type_desc io_type;
-+	int err, pos = 0;
-+
-+	if (!mtk_get_pin_io_type(dev, pin, &io_type)) {
-+		pos += snprintf(buf + pos, size - pos, " (%s)", io_type.name);
-+		if (pos >= size)
-+			return pos;
-+
-+		if (io_type.get_pinconf) {
-+			err = io_type.get_pinconf(dev, pin, buf + pos, size - pos);
-+			if (err < 0)
-+				return err;
-+
-+			pos += err;
-+			if (pos >= size)
-+				return pos;
-+		}
-+	}
-+
-+	return pos;
-+}
-+#else
-+static int mtk_pinconf_get(struct udevice *dev, u32 pin, char *buf, size_t size)
-+{
-+	return 0;
-+}
- #endif
- 
- static int mtk_get_groups_count(struct udevice *dev)
-@@ -270,12 +300,22 @@ static int mtk_get_pins_count(struct udevice *dev)
- static int mtk_get_pin_muxing(struct udevice *dev, unsigned int selector,
- 			      char *buf, int size)
- {
--	int val, err;
-+	int val, err, pos;
-+
- 	err = mtk_hw_get_value(dev, selector, PINCTRL_PIN_REG_MODE, &val);
- 	if (err)
- 		return err;
- 
--	snprintf(buf, size, "Aux Func.%d", val);
-+	pos = snprintf(buf, size, "Aux Func.%d", val);
-+	if (pos >= size)
-+		return 0;
-+
-+	if (CONFIG_IS_ENABLED(PINCONF)) {
-+		err = mtk_pinconf_get(dev, selector, buf + pos, size - pos);
-+		if (err < 0)
-+			return err;
-+	}
-+
- 	return 0;
- }
- 
-@@ -670,6 +710,58 @@ static int mtk_pinconf_group_set(struct udevice *dev,
- 
- 	return 0;
- }
-+
-+int mtk_pinconf_get_pu_pd(struct udevice *dev, u32 pin, char *buf, size_t size)
-+{
-+	int err, pu, pd;
-+
-+	err = mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_PU, &pu);
-+	if (err)
-+		return err;
-+
-+	err = mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_PD, &pd);
-+	if (err)
-+		return err;
-+
-+	return snprintf(buf, size, " PU:%d PD:%d", pu, pd);
-+}
-+
-+int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, size_t size)
-+{
-+	int err, r0, r1, pupd;
-+
-+	err = mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_PUPD, &pupd);
-+	if (err)
-+		return err;
-+
-+	err = mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_R1, &r1);
-+	if (err)
-+		return err;
-+
-+	err = mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_R0, &r0);
-+	if (err)
-+		return err;
-+
-+	return snprintf(buf, size, " PUPD:%d R1:%d R0:%d", pupd, r1, r0);
-+}
-+
-+int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, size_t size)
-+{
-+	int pos, err, rsel;
-+
-+	pos = mtk_pinconf_get_pu_pd(dev, pin, buf, size);
-+	if (pos < 0)
-+		return pos;
-+
-+	if (pos >= size)
-+		return pos;
-+
-+	err = mtk_hw_get_value(dev, pin, PINCTRL_PIN_REG_RSEL, &rsel);
-+	if (err)
-+		return err;
-+
-+	return pos + snprintf(buf + pos, size - pos, " RSEL:%d", rsel);
-+}
- #endif
- 
- static int mtk_pinctrl_pinmux_property_set(struct udevice *dev, u32 pinmux_group)
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.h b/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
-index 1215fb7094b..bd17964090a 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.h
-@@ -204,6 +204,7 @@ struct mtk_io_type_desc {
- 			bool pullup, u32 val);
- 	int (*drive_set)(struct udevice *dev, u32 pin, u32 arg);
- 	int (*input_enable)(struct udevice *dev, u32 pin, u32 arg);
-+	int (*get_pinconf)(struct udevice *dev, u32 pin, char *buf, size_t size);
- #endif
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt8189.c b/drivers/pinctrl/mediatek/pinctrl-mt8189.c
+index 9bcabe03151..b01533ed80b 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt8189.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt8189.c
+@@ -1273,18 +1273,21 @@ static const struct mtk_io_type_desc mt8189_io_type_desc[] = {
+ 		.bias_set = mtk_pinconf_bias_set_pu_pd,
+ 		.drive_set = mtk_pinconf_drive_set_v1,
+ 		.input_enable = mtk_pinconf_input_enable_v1,
++		.get_pinconf = mtk_pinconf_get_pu_pd,
+ 	},
+ 	[IO_TYPE_GRP1] = {
+ 		.name = "MSDC",
+ 		.bias_set = mtk_pinconf_bias_set_pupd_r1_r0,
+ 		.drive_set = mtk_pinconf_drive_set_v1,
+ 		.input_enable = mtk_pinconf_input_enable_v1,
++		.get_pinconf = mtk_pinconf_get_pupd_r1_r0,
+ 	},
+ 	[IO_TYPE_GRP2] = {
+ 		.name = "I2C",
+ 		.bias_set = mtk_pinconf_bias_set_pu_pd_rsel,
+ 		.drive_set = mtk_pinconf_drive_set_v1,
+ 		.input_enable = mtk_pinconf_input_enable_v1,
++		.get_pinconf = mtk_pinconf_get_pu_pd_rsel,
+ 	},
  };
- 
-@@ -263,6 +264,9 @@ int mtk_pinconf_bias_set_v1(struct udevice *dev, u32 pin, bool disable,
- int mtk_pinconf_input_enable_v1(struct udevice *dev, u32 pin, u32 arg);
- int mtk_pinconf_drive_set_v0(struct udevice *dev, u32 pin, u32 arg);
- int mtk_pinconf_drive_set_v1(struct udevice *dev, u32 pin, u32 arg);
-+int mtk_pinconf_get_pu_pd(struct udevice *dev, u32 pin, char *buf, size_t size);
-+int mtk_pinconf_get_pupd_r1_r0(struct udevice *dev, u32 pin, char *buf, size_t size);
-+int mtk_pinconf_get_pu_pd_rsel(struct udevice *dev, u32 pin, char *buf, size_t size);
- 
- #endif
  
 
 -- 
