@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADF5E107BCE6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 20:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99039107BCE8
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 20:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D43084324;
-	Fri, 13 Mar 2026 21:55:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9E61C8435B;
+	Fri, 13 Mar 2026 21:55:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fkhKzNw7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="is1swAJr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A89E58430A; Fri, 13 Mar 2026 21:55:04 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 5F86483DA7; Fri, 13 Mar 2026 21:55:07 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27EA883DA7
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 21:55:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4276E83DA7
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 21:55:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7d74c1157a4so2656388a34.1
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 13:55:01 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7d743cd9e5bso1784269a34.2
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 13:55:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773435300; x=1774040100; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773435304; x=1774040104; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+tghMQaBbRD7XS5ibiEAB4OwDuCbq6ISvAISxQNQ3xs=;
- b=fkhKzNw7kKv2KoBJmt++O+ncBXR7cXdZ+ZVdsFuaqxUwQxcUnPOPnzOIW2egXW9bpi
- Lus9X73vjlyy15vejG5TWz+WrtiyOt5WXqBFO6s8fNwlerb2KSWfyGrzYPaHNv58ADj5
- qjQbcArZtHvQ3Es8N+CObKpdP+5nMk4u8eUuA=
+ bh=7hsD+enaHGV4MkdmQzv3OR3rGfVsUiUC3/w6r40xHJ4=;
+ b=is1swAJrXwQbtWZ+bH6pY2eJ+npbYgXZzj/PCuPxhbMhLVj2rm8WcLPg99mYY9t+h8
+ Buau25ED16pbwB99vw3L9twTyzXc/wMNriMFEbPGHfrTdkbzW7M+czyrc+TbIMFb30A0
+ 6++BXISozQpSRtdSeoCR15h5ZANkM53HNVnE0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773435300; x=1774040100;
+ d=1e100.net; s=20251104; t=1773435304; x=1774040104;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=+tghMQaBbRD7XS5ibiEAB4OwDuCbq6ISvAISxQNQ3xs=;
- b=PMHAFfNrQrD2EXhWK5JRz1SrmjFJKYrB2kNU9aUZxmNBXv7wx1B58hx5jfNePhuFAm
- iYGEDaI+L9Y6RymNIHGVZ+Dl+B7uVQt020pfxIW4oWWxlpP1FfIuWJ97YCc6nrn2vJK7
- jl8tnBTEBUpuCxDfAl+HR0ZNPaud/DVyidJ4k75vPD+wxSCvnZrLAlKV0MdWcco5Z+/v
- tHQSnOeG+4CwgN4NhdcGAG4kXm1oLN2XXHBkmcAoHDiYLVO3nn8/6rpR309aroYJuput
- STKgvXteBfEcRm48d5Wp3bzhnQdohldPL+oJi+Gz+iGYQAFDQHC8DqkAn8J4Zd5X5XXV
- E3Fw==
-X-Gm-Message-State: AOJu0YxTos8u/CQ1gnAHivH/B3cg1GD0Fhevidyj4aEAItqqaLaAFMaU
- zRC54/lkryaFb9QHwfPhVX0/GfRwaYX/tLHimqYXEjuB6QsNhRNXUKRYrcla0peVdhM=
-X-Gm-Gg: ATEYQzzG70NGilH0XY5qKdAAK4ursF0g8XyjUZUkDKfsTDZeENuR5iXZcTFIHdzemMH
- X3QoRUQTqBAaaYD7CTxKD1LEb/lo/xmL9Aotmv7znbUM3GhbzJ5mWWuq10e1Ji/RY7NsUA9t5RJ
- 1PXJUCeCue1B9ffjRcj9S0BPwlxB7tmrBXRLTdXTzHe2airMCpyWvRO7ak4Atn2unHlzz/0C+Kx
- 7um2F9PMNyn20Ttw4p/FhK1AroNAC6NniQtjBTXJ6UfRh5ek5U7lPptnvqiOIgLneKtYKCRpGjh
- TPwIjUZfFUV2hOYgFbKRI//qvVpL7EaMQWi5Z6V4u88L/ZKdPK7+gWWUWd7gRsSJhZMKi+BB+RL
- rMVpH9EIkjVVSFmIxNN6qfJtAXwxZUKTAJPhAvz8+qzMfcmFCyYVeZp+fytVsHCH/A05WpcXXrq
- +swyBflI8y3Z5HnWyc/Ko0NTSsXDdz733q/71XldF/2AAJwbp8Z1DOXa9P14gFdoAvWM75UKOaP
- SdKfb/9uVQxgM7CHX2XEn0lwFyPKw6B8VYj++aydKuaXns=
-X-Received: by 2002:a05:6830:82d2:b0:7d4:bb79:65cc with SMTP id
- 46e09a7af769-7d782526605mr3050700a34.20.1773435299791; 
- Fri, 13 Mar 2026 13:54:59 -0700 (PDT)
+ bh=7hsD+enaHGV4MkdmQzv3OR3rGfVsUiUC3/w6r40xHJ4=;
+ b=PY8su4+Vzg2fkeFg0mtaXkidE3xDsXVW3pyDHZUTyWtBdtEpbVekdcmeH79Hmd878m
+ ia5jvDLw2brH4N2d2OiVaQZKPvsJxpMzkygIUyLVMNbo3VmtVAhby5j0knVD02SQs615
+ 5fQ6W8RTNfjqUcSYdjc079ybCQ63EtNA5hu+djM0Re7JNWjjUGebwK0LOnaBcfdGX0nO
+ KQz68b+oDRZs/wVrOqrp0HJjeNcow4NHUFc1c9YSnGgyBD32vCUQpS8M90WDGQ/EGYGe
+ hM6iXBoAGPM8V2QEbD+hYoKecGZj2UlK0VRgR9awnWCWkaNDpV6CKLEzXPGvArdIWnPj
+ L1+g==
+X-Gm-Message-State: AOJu0Yx0gdsWbV48ITAeXs89kVh/cKB9v15fGl2Pt73BhHokS0TyUBlR
+ 015U3F4g8TcYIXQ/thcQBwdISH6cqbCX2dFRe6BPlst4kQ4HeFITdBa434pKHeSXlEk=
+X-Gm-Gg: ATEYQzyMQ2EVve1OzP/K8G+Uz66wcloWKVjpWdJXeF17mUNef1+fPUUNnKEIFF/Z4hE
+ Ttok1Yp+VRMFwEbkTRBWwD+Z03NSlFV/0ObbteAl4OaATCyfpgwy0sKUnkaQICnpGiLs7vQFK8b
+ ty2dIPoXvBrplJBwmNBRNjTY6Y7fRCkVLIynkpZ1DxvX+2f82tJ7IZZApQF2r86AIIPYoOpdapT
+ OH0L0vjRzeZx7QTTNvKW60bc3E7JRXQqboPZBPj9Ko7efX7kIHoB79COMtwXA/FYBvxx+QO5o40
+ M1WRjkcilZzQXeksBStiIJ1rEk+vQfqjutmQtzTz8+lDhcuOX6/ZXK7Jb6awePRHXOTGQkzbmA7
+ RlQIhGLo12m1Rzdtnbt6kHtZh1tWgoHqtEbtZT87E4o6yV7rU1aURONOFa9OA53hyCnbN3EW9JP
+ vDIFWCu1aSxHDtiplxqSNgZkVxpjEvq+c0bUMc8pCLoBzE0PzKTdaMBs4irKaLK3kOhMy/NxFvZ
+ oQ2dFY2btPMO4xSU/rKbyZe/7lMWxuKN0V7qhAIutGjNHQ=
+X-Received: by 2002:a05:6830:6516:b0:7d7:38e2:3700 with SMTP id
+ 46e09a7af769-7d7825e0ad7mr3062070a34.27.1773435303993; 
+ Fri, 13 Mar 2026 13:55:03 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ae3a18bsm6857942a34.18.2026.03.13.13.54.57
+ 46e09a7af769-7d76ae3a18bsm6857942a34.18.2026.03.13.13.54.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 13:54:58 -0700 (PDT)
+ Fri, 13 Mar 2026 13:55:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Holger Brunck <holger.brunck@hitachienergy.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@arm.com>
-In-Reply-To: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
-References: <20260127234856.1503030-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] lmb: Reinstate access to memory above ram_top
-Message-Id: <177343529761.1131472.9417054395876652663.b4-ty@konsulko.com>
-Date: Fri, 13 Mar 2026 14:54:57 -0600
+To: u-boot@lists.denx.de, Dimitrios Siganos <dimitris@siganos.org>
+Cc: anshuld@ti.com, festevam@gmail.com
+In-Reply-To: <20260217135620.2176407-1-dimitris@siganos.org>
+References: <20260217135620.2176407-1-dimitris@siganos.org>
+Subject: Re: [PATCH] spl: spi: fix loss of spl_load() error on soft reset
+Message-Id: <177343529990.1131472.2721361681092597672.b4-ty@konsulko.com>
+Date: Fri, 13 Mar 2026 14:54:59 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,21 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Jan 2026 00:48:40 +0100, Marek Vasut wrote:
+On Tue, 17 Feb 2026 13:56:20 +0000, Dimitrios Siganos wrote:
 
-> Revert commit eb052cbb896f ("lmb: add and reserve memory above ram_top")
-> and commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from
-> same bank"). These are based on incorrect premise of the first commit, that
-> "U-Boot does not use memory above ram_top". While U-Boot itself indeed does
-> not and should not use memory above ram_top, user can perfectly well use
-> that memory from the U-Boot shell, for example to load content in there.
+> When CONFIG_SPI_FLASH_SOFT_RESET is enabled, spi_nor_remove() is called
+> after spl_load() to switch the flash back to legacy SPI mode. However,
+> the return value of spi_nor_remove() unconditionally overwrites the
+> return value of spl_load(), discarding any load error.
+> 
+> Fix this by preserving the spl_load() error and only propagating the
+> spi_nor_remove() error as a fallback. Also log a message when
+> spi_nor_remove() fails, since in the case where spl_load() already
+> failed its error would otherwise be silently discarded.
 > 
 > [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] lmb: Reinstate access to memory above ram_top
-      commit: a3075db94d49f415658bf7e961e1eae90d9abc33
+[1/1] spl: spi: fix loss of spl_load() error on soft reset
+      commit: e7ad95aa3f1180823e07dd30c8c24494a07ca814
 -- 
 Tom
 
