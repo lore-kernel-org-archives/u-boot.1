@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E757107BCCC
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 16:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143B6107BCCD
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 16:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D76684376;
-	Fri, 13 Mar 2026 17:52:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 664B9843C3;
+	Fri, 13 Mar 2026 17:52:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BhVJXns4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E4TXyuO9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C7C6843C4; Fri, 13 Mar 2026 17:52:25 +0100 (CET)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id B246884372; Fri, 13 Mar 2026 17:52:25 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B759C84372
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 17:52:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CA7184379
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 17:52:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-67bd152d3d9so1380631eaf.3
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 09:52:22 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d743cd9e5bso1624904a34.2
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 09:52:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773420741; x=1774025541; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773420742; x=1774025542; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2l+ad1OnFJTzwKgVYoZkJsGgx335aThqjsIHti3VRkI=;
- b=BhVJXns4XtxCaldSXq43CmXUe6pqxOGEgjeFHywuYPfvAn85OS7JY0yV5iTxM+Cegp
- HrUdjWEi8PKf14Us+QmyVcVdXxDGF+PXjE5Zl5W2ibWLV6Y35eS943WpqhXaAwXvbdc0
- L3sPEe44e+sY+ogbbZOlSJU9SoRCFwV4PHoBs=
+ bh=PBc2HAwqz4KZPFwHfg6coWWKeIulO3/xFWIEvs36mGA=;
+ b=E4TXyuO9s3OcEiatDu4gExdqHGgYFuFX9hrKwX83XcKp+lNS4un9ApO1eWJzHEz8P9
+ EZMtub86r1FtD+BO4q4ebQ1knL6QYc3+FswUHo2kGzNSPJIYpZWUcWhkKVLMTxPOiciY
+ yHj8pyQgmYbHEIeuetoR2IS5q+hnMxxvByc8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773420741; x=1774025541;
+ d=1e100.net; s=20251104; t=1773420742; x=1774025542;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=2l+ad1OnFJTzwKgVYoZkJsGgx335aThqjsIHti3VRkI=;
- b=MQDKgPW2Ta6gsYRzPtpw8/aN0SGclRKWv+gFRxupqE1RDwBqI3OzxC/6ZexIaaG2mF
- aLdGr5BpCjl8c0rsVOVVCwivfWSudadC566TpdViNMK99RptqF/wBBBrOsNCV2zkmSLj
- z9wDueSaQpLPM0C3rsx2pCRF0J0EggmcvVubEmYRwf3dysCpunFlK5C7ohDZKn6NQg2q
- /WA8rb/uNiu8kUxgKhuTfL29ffPOg6ZnTn/5oN291syrXBMVYbny7AT8OnvDgg4hQa9G
- y+zxWyNYe01JSqpJ84mNecwsrLW//9HhQpPqSHYnW0oU6uWOGy2rIQvAWJWn8R5400av
- 0Iew==
-X-Gm-Message-State: AOJu0YzS7mP3XNHuKioE6+pXKOwc/bLbeP5p50fy8bsGx1143fk+FVqK
- JWhet6QO7ilt3Fj0SSpIuqnHWfHutcYdat04gWaBTuJMzel+SP6tk7/5jQfN77mnTrmxcDQnuE5
- moRyRZjs=
-X-Gm-Gg: ATEYQzwQoK/8F8SvfWE2WsX9rGqYPDBVoedEgBw0SWL9IsjrxWlMIFJh0023GXUDMBs
- NKfGxLSH33TCVn8/3nOFaGyCfDO78WGN7Ck+OjOU/BbrKJsDLGkh2fKLUOl9HDdn9Zt1JpAsqVN
- BPvGxpmPfRt8cUnFx8/1fZcxG+E/EKBggFWdqK0BS8hW+yVaRQcJ4pVDFi7GnlvCD9+PMYILsYs
- qkWdRayBYGzLsdGDm3yGDi5KWSMxMyfx+PtN8jeQ8niidcR02ZjOTLt12sTeqy/CtdgmzNrjYxU
- OFiHKHUNyFKMJ+GCLorq6N6J6kn5u/wDjncVBbD48/0X+May4DJbJIxWTxM6UhNGGFODMqC7PBK
- vALOyJJXpFkGNabwrcIrijJXTq8vG9TiakZbPcdNClbMJ7erJb+zgaeOzKt9OABWb46tIwtnEFk
- tgIZbtGvC58oy/bBVLDDB4VKhK5CqZhQ9NHi84IKzx2DB3jHw7k9AQUrpgSIX+nX1csZgQDvUvg
- lbMRqpa+j7QUUcP7ZgXmRRYtnQWwUaw5zoYPSU/7mBDGuBjvd0=
-X-Received: by 2002:a05:6820:4912:b0:67b:bed4:b150 with SMTP id
- 006d021491bc7-67bda9bdd13mr2037703eaf.30.1773420741312; 
- Fri, 13 Mar 2026 09:52:21 -0700 (PDT)
+ bh=PBc2HAwqz4KZPFwHfg6coWWKeIulO3/xFWIEvs36mGA=;
+ b=TwMMfszSDj81KRmOClzWHwyWseQhdUiA5/5ddBEjemd0Hh9BEclDVAD1mBEzmSDurZ
+ 9317kmeITQxt7x9NVAh8FNkvMcwhd0I9GU3EFPz0tu17qWNu08zYTNMJJNX54ThWpx2S
+ ahAJ169Lbqx1b08u2tghtx8JBZqWtsmXk2aRO+l8PL9Ts208ecshLUtzVd79WXZUl2HY
+ 7mcLoKwvvbsmRbX+g/Zn9t2cnDOPr8m7vArUeMWfMlPQR3+xW8K1/55Pp+IoOL5SegMO
+ 6ZPhUDhSo1UERrlIiAHMtDjct6sSa/QH8s9ybsLUKLPig+7Zy6zFZxnxLmARmV8gA47J
+ wyLQ==
+X-Gm-Message-State: AOJu0Yx4MbTGjc9xCoPzUQTqxrXMlfNFgNy1S/iojIGWF++Xph0gIOXL
+ bZjT/7Ghi+v+lvDuSKGk4JSpSN8h2GJVzxWkxpGamggYhDKhzU03N3lVxmjT4Nz44unZmeFZCn2
+ WoAkU
+X-Gm-Gg: ATEYQzxe0fpo06HncmXUzSAS8zM1Yc5rgvXZyI5ulWGVdNvyiUVRE9Gy56wwckKrGJQ
+ xDNP8vJCDshrf10vsSoKoycpDqj/Grc4jWcYVRqyB//bVEwrTgkBenEAsCz8fZDgEi/qnSUHvD+
+ gVS6mD2dUo3lLuK9a1m0t1i0qE3eeRsrvejtS5PAklB0rxy1U/b50yy4BclJXME3t7JQXr24dzf
+ dFsAdDvsM0F08Ly0fJ4wUyW30jgjFN0hyWLtMkLI2+9MMIYqz/PyoUfxKECnohxR2RxPSPvW3pZ
+ Rb9d9gVxdgWL2PDrf/qm0Bc3Ta6pJa5RApk5Vg1SpStg3WYqTpCRd3iyMXSxEOKTSrqrP1OxGcx
+ iahMkzZTwc2KaINKTd28Ji671BUl1Pf1eszuguYrl7EaiFpxa1TfgY9fYy/XqYzE5Kp6gFihinp
+ k2DaC5mFNFGUZwPvl0DBC0PBCSP7GWghHa6Wyh6iVI+D5iYFqa4tp/2XV1Vxum7bh8r79n86Yhb
+ GOsSwSQOZcYYPzz9BojlEdw7VTwUijFXF+r6LZz+3YpT1aeiS2UICZgfRPu7Q==
+X-Received: by 2002:a05:6820:6ac8:b0:67b:a1df:2079 with SMTP id
+ 006d021491bc7-67bda9e9cfbmr2328845eaf.31.1773420742244; 
+ Fri, 13 Mar 2026 09:52:22 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-67bdd612b6esm1241304eaf.10.2026.03.13.09.52.20
+ 006d021491bc7-67bdd612b6esm1241304eaf.10.2026.03.13.09.52.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 09:52:20 -0700 (PDT)
+ Fri, 13 Mar 2026 09:52:21 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de,
-	Jerome Forissier <jerome.forissier@arm.com>
-Cc: nd@arm.com
-Subject: Re: Please pull net-20260312
-Date: Fri, 13 Mar 2026 10:52:17 -0600
-Message-ID: <177342068506.1062380.2381146307946745970.b4-ty@konsulko.com>
+	Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Subject: Re: [GIT PULL] Please pull u-boot-ufs-20260313
+Date: Fri, 13 Mar 2026 10:52:18 -0600
+Message-ID: <177342068509.1062380.6133314696440109412.b4-ty@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <91fa5175-5eb1-4991-9467-fc3fe4f52105@arm.com>
-References: <91fa5175-5eb1-4991-9467-fc3fe4f52105@arm.com>
+In-Reply-To: <9808f640-2c8f-4da7-9276-95ab5448d701@linaro.org>
+References: <9808f640-2c8f-4da7-9276-95ab5448d701@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -98,15 +99,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Mar 2026 16:59:07 +0100, Jerome Forissier wrote:
+On Fri, 13 Mar 2026 12:11:23 +0100, Neil Armstrong wrote:
 
-> The following changes since commit ba7bf918dafcd093ad733b07ba490baeb20cf5da:
+> This is small set of UFS changes for next release, UFS SPL support + reset
+> support for Rockchip platforms, and a small callbacks ops cleanup for a future
+> mediatek UFS driver.
 > 
->   Prepare v2026.04-rc4 (2026-03-09 13:52:04 -0600)
+> Thanks,
+> Neil
 > 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20260312
+> The following changes since commit c0ca147ac6228949a6d6497531c9f2f4a0dc6c67:
 > 
 > [...]
 
