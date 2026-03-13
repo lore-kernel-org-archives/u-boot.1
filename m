@@ -4,106 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0E3105F793
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 10:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C993105F799
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 10:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B919584253;
-	Fri, 13 Mar 2026 11:48:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DB35184246;
+	Fri, 13 Mar 2026 11:56:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pm9RCRYW";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="crTyyQxS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFA9B84262; Fri, 13 Mar 2026 11:48:48 +0100 (CET)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
+ id C5E9484253; Fri, 13 Mar 2026 11:56:20 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D62D8423D
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 11:48:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77B8A84221
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 11:56:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-64c9c8f8783so2389439d50.1
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 03:48:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773398924; cv=none;
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-663a60768f2so612365a12.0
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 03:56:18 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773399378; cv=none;
  d=google.com; s=arc-20240605;
- b=Rz90lRFPQcqVxiOEFPcvK2NpsR5isSPHM81kRvBTf0EqvYUTYKtIs9s3e/1nBMuyRd
- j9LrUtwClYuYbeMdGfjlP/fiOBQxL43gMYEU/YXyu/GV5ur+cMH0BXqboxGt4eAzvy+M
- cp0lPBx4GScsY95Oa96F7s+4NMv/INN/+iD8wyeNVZ+nnulluzT9w+FVx3zBxmc0NeVp
- gL8nJ8KoQEJj1dmFWiWZfQRuenL6IHyGxp8vPCPIFBMTGEn1/uuY4nnZ90UeQdBjPjl7
- PW9Bp7xYD32UE1ZWqFhEqQu3c29qODDD14jgIO2rHZw885S6nxSNpP8DxmNRY8/gcS44
- Xpnw==
+ b=e/lUWaQ/aHwt+09lPjNSWpU/Nn8N2VyW+HBkdS4hkGXXPdqtQ5CQDAdcciCTZafYge
+ XWBsbIawcDz3yNeTdQJehl5HajBehffnc1CGQ9f3hRumMWdS+LE3uRud62tmZxfPkT7M
+ z84EjRuQWCiPxibJ4FDE2ae9EE78vqQJQb7/PDnDt5bZJWniGBhaElpuslGHRYTbMe6B
+ vA82ceTtNth2uBU+blRFyP3ei743Is2oSucrKNZJFJIS3Z7Gx1O5H3S0tUR116d1uyEv
+ ezjD4xMsjyA/ypcWiOf0Njqwph5lG5jEnMj/F6cfcobO/WNxWPUHJnFfyH8EVwc7CSvR
+ ic2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=8847Qtw0vUI7Xl3PI4H+4w+H0oPDLSGrdGB6+nNB1tA=;
- fh=wrhZen22MtbkREBrqvGymwuHbf+JYQB1yPUxtoA5vm8=;
- b=Rt7F0BYs0yyOhQPLUevDeb9sgPljSYqivy+We1VEThleYhsjKTNHp8tpbXijJpSJWa
- k2RXDctVu5S3aS9joiab7hXYyWKCBTRphPyKY1113rwF2oStG/pAEvYpf/6ilz8OoryY
- traXbL44oMvaPzlC3LJyD7WmH1KPvP70VJvI+aYNG/AHwg5RVQprrUVwWRnGJ5C3+Zty
- rbr4/4GaV2mun6UJj3pqOCajqKnvQLmB3j6ig7yCmTeMWqXG0SHCxYUK1MVb4Mh1Bz04
- eNJi+5yZpCoqqdlVtCam7LkV48XYewRvp8N7WqK+miAwGSqTZ5aD92DmnMyk6WjhE5qn
- 85cQ==; darn=lists.denx.de
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=8SEMFrw38pu2rqYRKlt3SnTHTYrBkGe3rIm9DUTe58E=;
+ fh=u132hPZI/lbeuwWUcpkPff/0gH8Hgmn5HMmgRjrSwVA=;
+ b=T0HgU7hotvmxVE03vYOUQJ4j0qyfYN13e8P1Nuw3sYVtaarcicWShstdZ+DhQ+czVT
+ aGaEb1w4udAOnQXQF87n5ge4pNN/ku2cup4mIsDsUcEqhQXsyoMuNOCbNHxy4sQnMNsB
+ gCiWrO5rDZ/5nnmzgib/hTcecYay5WAvtIuYkh0tm1jEFD2PA4W0UIPRofQgZoVrAvBu
+ OLQdF9rjRvrE5lk3xOYdYOfaUujOcXq7uN08hnQ3VH6tSbnx8OvtblStvuAPaFZaaT2f
+ enJkWZo5DCKLRoutpDOznwkKpULaJC0ZtT1SMphWiS3ACT0+J+M0hWDLy85EaTfETdCb
+ GP0g==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773398924; x=1774003724; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8847Qtw0vUI7Xl3PI4H+4w+H0oPDLSGrdGB6+nNB1tA=;
- b=pm9RCRYWFCvlrSboVMX1c1gR4LbVb8M/VPL3OksuS/zPEqxPd/lEurWpJCQkqnqUtN
- 2HiUs6CH6qSYNFOreKxrH/x55f7Q2W2Aa3ohX8S0U72Oiu+mpBkkyhyfpUvH5eVnDHb7
- P6l/Xk7YNIumyUdmVqVR+eDVHWztbkp4x77QdVgoUR7LW8V9+fUep2QAQrDLOj2sa7qb
- +CK+DC6G4I2Y4/MLAMlxXSR+VEHzOBOEW1cb+Wpg64Qn6qp23Ae4xIMFD7BK0QNtfoA1
- 5arM/WLETk9irt3LY7DrmOdEYbdZbPzJP9edo790o46aOo5DUEgcGDnzYy2mZIydFLOj
- PZ3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773398924; x=1774003724;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773399378; x=1774004178;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8847Qtw0vUI7Xl3PI4H+4w+H0oPDLSGrdGB6+nNB1tA=;
- b=bgEKp7XBLgPC3bqls36+Y7XICuOhwcc267uFCpxMzilqtvNu8q+UMP1IZ7wWw2DbAc
- gfEINLxSCVrslMD4Dt2F9EqEyEjKgTANv34YGN0Lm9mjIY5z9Ewg5XGovl9GcTNlGmTi
- +EdisvDJ0YZSI+CoRt8Na7dBaoXTjnCcRTkTTQ+WXkTcQOLJD+zVtmT0kwDg8qz3PnnV
- oPM/TSfGqXFcAbcKDmhOSsowJuby5qlNPHV9keRZnWkCsvgra/ezq9ceMVPY5hHC9Jnd
- LoYIkmAKZfX/A8UIYdpkl97uvPT9c+uMJxOlH/cJamA2/4uLJxbXbvB38L4Y9U9lnv5j
- TlWQ==
-X-Gm-Message-State: AOJu0YyUb6M8/BczjzbRv4+q8ie0rMF1KoPCIbRkMEH4fxQ26+Ax+k5f
- 08SLKmpGOMnc2/c68GXjIQzUt716Nqn1hUq8r8UvyS6MhdiNgK6F9adU49afikKaDvixvvpvbeK
- j485vq6gAC1zxa4K6GSYwGxakyCjUhDSaduEsyVy5Qw==
-X-Gm-Gg: ATEYQzyfXgVPlhtzh3XfxWLVIkfU2zUV9WS5t9RdBLrAHmZmwRyv962ex271Qq7WKYM
- p3EHupzUXpAdF++Ar1yOYu0Wnb9uMavXyuwa4dGloiXQg8i1O0hw/b4FUsF+/ejpUbZlSW+ZN2A
- x79SLk1ppNErI2NeZsp/3I9JoIRMrrelg2slDqp7QXKOUgNp7ToSmH/s7yD8MoJqUeHMxeTYCMk
- lBUM24biIamlTMMSKiUZSNW8ihxolv4aNpRIYM4SwFj2u6raDZ5kIO+jMNtRSnsg/IfIMrU7D3f
- VF++xd1H5b6jkdkFYLO2wBAYLPyxnvqxevDDkwP7i1X6j2l4vmV+T7XHFVZnil/SrgSCY8gHdXJ
- /yf/89cAwt72HMPyMpdrk9PTGfwu45diKnd8TKDvjE8MCZ1odNPkelkZfBhznD5Ym5zfEfXh45P
- R52TP5bVa13t2R1t0Q3NbcwwdgC8zwbElBfIuByaoVssYuTpDGWzwIiRSXl/G7KK45U1hU1Q8f1
- QT+Rn/AZ6OqEkVzBgBRQ5HjoVn6JloVBCT46/VbKtQG7O+FwMwcw7xQqruVXdBqgfe+JA8cOIjp
- ClDEv4C7yO4zcP8NAA7lnzsWp8sGVQ7/NDq1yfbFkG4u
-X-Received: by 2002:a05:690e:1485:b0:64a:effb:1331 with SMTP id
- 956f58d0204a3-64dc717833bmr5814622d50.34.1773398924347; Fri, 13 Mar 2026
- 03:48:44 -0700 (PDT)
+ bh=8SEMFrw38pu2rqYRKlt3SnTHTYrBkGe3rIm9DUTe58E=;
+ b=crTyyQxSIpVxZ0rh1cvgHuHPLrcUuRlFkpR/OSFhCUuGwnPkBE6cgcehZiIy4w2RRj
+ bpzVUsvDqZxhpYxdB7rOAYtQJcMpYx4aiyO1Sm/IA6x1sHyeITb/rx3BUJDNt/fs4xud
+ wc8mWO8qcDs90Vn5fagK+gfVACD5m1f1yoQ8NlTia5fA2PYfXwLB6MiiEhCIAK385/iy
+ coNrPl2UWBbFJgz3CW4TNoz1BZtDP6ARlkL6sQJ1M0qBabE3xfjtIwSNEtM8i7I5/UtB
+ 5JSWcFja2Ypht6STmwELyGG2wtCIZDQH6icGVpLs/b7wA6vwb9ImyfxS6fmS1CTFKDz/
+ mwAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773399378; x=1774004178;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=8SEMFrw38pu2rqYRKlt3SnTHTYrBkGe3rIm9DUTe58E=;
+ b=bYPBCtVM08RS3RAeLgoNutgvicxU3xQ+DOlsNV3hiNUaaAQEOgCbcj/oxOMq0XK3Rj
+ Ga6+vDB/STWSH4Ygz0f1s7FTx6Kg3WQWfc8GXPEv6bxss1p0WT+Bf/qySXljbKEtatxH
+ dWygAPh218/asKi5B9Dm6fr7HGuVPXFTR4DfjwjDtXxmbrVPuJMrWdSxLahEpCElSFWk
+ pw6Ap9nMh6h3beUKtuJ50F43LUym+b+aUFin0N6LLh0ZjifNOWu4G0G+YLktQ8zhxsMx
+ 8ZQJQG14bt4ComdpnxF7+kh/nDMkuSPzAPXC3zxU3vwb8c9oAq1gValF+x6pJFnBNTvJ
+ Z+zA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXeiE/X8LbAzyjjugmH35t/W+g2FM/th7xI6aqImLfSZqy0lQQ2aFzFyF479z+TX5yEE9ecklA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6eWHrL+SX+eqKLCBlQe6FX0zfmlnaije12XkdymEWCDnxBvcA
+ M4OHploil+fQo/dD1hP3vg+wTgdZmmakewzkjnSnKWuq9DLrZP83u2Lb5684Bv4pgDwLZnGgoDe
+ RRWVjM6v27jKBL0UolVHV+SjZPF7Bg+iuVAORB1spXA==
+X-Gm-Gg: ATEYQzyb7WUhRQR7AzGJSOz+WDYE/yWPnxdClWUX/cFd0udmDengZUoB0ToMHu+DNnq
+ zSq95XH2IZj3CmuDful5P0oR32B7nHG8RHnKsKcJxFI6FWrVFdJA4f5L6QpAKoOJA/Km1YM+KKF
+ 2hY4+tQwOKmr1uDv+0fwF0Q1FPQyh0d+TMEsBR6rWpEp5zKmppMN9ZXIx3RycG49/cAkKFEduvw
+ ruCbCy73iiLzO5Xp7yl798P8MtV4jN/ewoef0H0ESDaeliok0HTwSH67bdgjBsxJm+6E/GAVcX/
+ IEMDCxHhCpaGFWR3zmA6Y76DyTG4d4PxN4yXI2Y/k7ufEReydKjciycelHy8beHgr6NWqA0BmgU
+ IaIu7Nv2rGhYxamNl/NNVcxIzIg==
+X-Received: by 2002:a17:906:fe06:b0:b93:9407:ea5c with SMTP id
+ a640c23a62f3a-b976540ef14mr171218866b.57.1773399377770; Fri, 13 Mar 2026
+ 03:56:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <00b03eb724de3e8b3e46ec630860e751bdc40011.1773322038.git.michal.simek@amd.com>
- <CAC_iWjL2OUZCvqAvEtdGHUyihsz6dekYsBYiP90Fi3wqz_H8yA@mail.gmail.com>
- <805030c3-4474-4f05-aa71-78b6c69a5568@amd.com>
-In-Reply-To: <805030c3-4474-4f05-aa71-78b6c69a5568@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Mar 2026 12:48:08 +0200
-X-Gm-Features: AaiRm50Pd0yJxF3YKkVEup19UMKJtxjs4_0H_YQyHEf7_3zCXBEnFNQzasn8O-M
-Message-ID: <CAC_iWjKUjTe7Zg+guds249y3-hXSGEYSR1Byp4KMuv0BiVENfA@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: avoid superfluous variable store writes on
- unchanged data
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Shantur Rathore <i@shantur.com>,
- Tom Rini <trini@konsulko.com>
+References: <20260305-clk-mtk-fix-mt8188-rates-v2-1-0ce2b5212775@baylibre.com>
+In-Reply-To: <20260305-clk-mtk-fix-mt8188-rates-v2-1-0ce2b5212775@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Fri, 13 Mar 2026 11:56:10 +0100
+X-Gm-Features: AaiRm53ZOst9cCn0PcifA_Lav1uDCetJV4KNpC8GQvjd9CUi5z7E8YmaaL8s9zE
+Message-ID: <CAEHHSvawvk+UL+DY5gOa62brbaOnfGU4EnohAQM1gBSwC9VE8w@mail.gmail.com>
+Subject: Re: [PATCH v2] clk: mediatek: mt8188: fix CLK_TOP_CLK{13,26}M rates
+To: David Lechner <dlechner@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Julien Masson <jmasson@baylibre.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,44 +123,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Mar 2026 at 12:42, Michal Simek <michal.simek@amd.com> wrote:
+Le ven. 6 mars 2026 =C3=A0 01:45, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
 >
+> Change CLK_TOP_CLK13M rate from 130_000_000 to 13_000_000 and
+> CLK_TOP_CLK26M rate from 260_000_000 to 26_000_000. As the names
+> suggest, these clocks are 13/26 MHz, not 130/260 MHz.
 >
+> Fixes: 5e9bbbdab003 ("clk: mediatek: mt8188: add missing fixed clock")
+> Fixes: 11f3cc46322a ("clk: mediatek: add MT8188 clock driver")
+> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> ---
+> In v1 I said that this should go into master, but I found that there
+> were other fixes that went into next already instead of master. Applying
+> the v1 patch would cause a merge conflict because of this. So I've
+> changed the patch to apply to next to avoid merge conflict. This driver
+> and the board that depends on it isn't really usable in master anyway
+> so I think this should be OK to not fix it in master.
 >
-> On 3/13/26 11:28, Ilias Apalodimas wrote:
-> > Thanks Michal
-> >
-> >
-> > The code looks sane apart from the runtime part.
-> >
-> > [...]
-> >
-> >> +
-> >> +                       if (!memcmp(old_data, data1, size1)) {
-> >
-> > So this will probably blowup in Linux. We had similar issues with
-> > memcpy and added efi_memcpy_runtime()
+> And I found that next had the same bug on CLK13M, so I've updated the
+> patch to fix both.
+> ---
+> Changes in v2:
+> - Added fix for CLK_TOP_CLK13M as well.
+> - Link to v1: https://lore.kernel.org/r/20260304-clk-mtk-fix-mt8188-rates=
+-v1-1-c71fb26179b3@baylibre.com
+> ---
+>  drivers/clk/mediatek/clk-mt8188.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> ok. It means you want to just do comparison via loop right?
-
-yea. Don't think we have a fucntion for it already. You might as well
-add something like
-
-int __efi_runtime efi_runtime_memcmp(const void *s1, const void *s2, size_t n)
+> diff --git a/drivers/clk/mediatek/clk-mt8188.c b/drivers/clk/mediatek/clk=
+-mt8188.c
+> index b720eec8ba7..803330717c6 100644
+> --- a/drivers/clk/mediatek/clk-mt8188.c
+> +++ b/drivers/clk/mediatek/clk-mt8188.c
+> @@ -97,8 +97,8 @@ static const struct mtk_fixed_clk top_fixed_clks[] =3D =
 {
-         const u8 *pos1 = s1;
-         const u8 *pos2 = s2;
-
-          for (; n; --n) {
-                  if (*pos1 != *pos2)
-                          return *pos1 - *pos2;
-                  ++pos1;
-                  ++pos2;
-          }
-          return 0;
-  }
-
-Cheers
-/Ilias
+>         FIXED_CLK0(CLK_TOP_466M_FMEM, 533000000),
+>         FIXED_CLK0(CLK_TOP_PEXTP_PIPE, 250000000),
+>         FIXED_CLK0(CLK_TOP_DSI_PHY, 500000000),
+> -       FIXED_CLK0(CLK_TOP_CLK13M, 130000000),
+> -       FIXED_CLK0(CLK_TOP_CLK26M, 260000000),
+> +       FIXED_CLK0(CLK_TOP_CLK13M, 13000000),
+> +       FIXED_CLK0(CLK_TOP_CLK26M, 26000000),
+>         FIXED_CLK0(CLK_TOP_CLK32K, 32000),
+>  };
 >
-> M
+>
+> ---
+> base-commit: c0ca147ac6228949a6d6497531c9f2f4a0dc6c67
+> change-id: 20260304-clk-mtk-fix-mt8188-rates-9c733a841d56
+>
+> Best regards,
+> --
+> David Lechner <dlechner@baylibre.com>
+>
+
+Tested on genio-510-evk
+
+Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+Tested-by: Julien Stephan <jstephan@baylibre.com>
+
+Thanks
+Julien
