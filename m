@@ -4,112 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A96A0105F79A
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 11:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 680BC105F799
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 11:21:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F7B184246;
-	Fri, 13 Mar 2026 12:11:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F0ED83952;
+	Fri, 13 Mar 2026 12:21:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V34vamie";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vJ81GX61";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EA7084246; Fri, 13 Mar 2026 12:11:29 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D978E83642; Fri, 13 Mar 2026 12:21:06 +0100 (CET)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDCE784253
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 12:11:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32C6D84221
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 12:21:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-48334ee0aeaso18799625e9.1
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 04:11:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773400285; x=1774005085; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=cyxDn9TXVBSeG2pT3Tfn1KJC0tuwax+2OrU4x+mqp98=;
- b=V34vamielJlqMOXnJVmsTuW6RPcqRZ87z2pKQkDc15v8V+ScCutauz9zKNK4/08ii3
- ZoDzzzXv25PlAwOnH8ULIV4KpWXlLxMJ0KMfexbr5I95bcGvdPCdSYsB5WLKkK0poTpA
- bPY87O0olHezbWgoLYxVKp3dneOJYuwNUUPwPrzCwDODpK8CyPPJVIL+S7noaGIYD5gG
- 8uTl3yQuBkWG6Dvf6ZcLu5L2MQH4cm+cYI1UYsl/7oQ8YdJdIp1VWFplQNy9yqlosPSI
- WOTYM5CabLD0DAITp1/aAUoFpZJ2vhJ42mFqIGUL9AGaUHimQfnRaAtjJZdSHTtvdTCq
- i5Lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773400285; x=1774005085;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cyxDn9TXVBSeG2pT3Tfn1KJC0tuwax+2OrU4x+mqp98=;
- b=dOnYJwm602jYtoLCvjxvYEPRc/rxAw/6Lbwiwsqnn6ubhGYV3jpZJZUJb5hi92J1mG
- dXT2vb5tbm2dCYxbp36ApOL4LKPfdos68CuOZy9GSYWfHEzKXykk/AiASuIj97xn23+8
- kxCqaCe/RhfW1xdTKLb6k1/B/rMUi4n39iaYN8uV46XpKr3JTIkTTr92pl+ehvDmz8jR
- qJdFfxyfBOxbPn4wj1LVs6EphH1uSryhM9SPT3ZyKmhieclLqSqatDXx1YjIjQuLOgMM
- EiPp8eETDsF8EzJdtE2WWfDmZ6E0tJsXnEdp5TKjHfEbecInb/i3Zqusr/YPAg8FM0MF
- D3xw==
-X-Gm-Message-State: AOJu0YxLHGae6jqpzvQN/H5EDUwxSYyGaDrJ8jHEmTmEWtEcZMo6niWQ
- ilNN+cNOwZioYA/PUIcmLBsj5Iw0OJaNXcirfszrn6QDyGt8PyEIDH/e2551seF5xtg=
-X-Gm-Gg: ATEYQzxVQGpSfcEsAcscJxuh9qoS0m4rj9bSdrl9n+tjaRJ9Uz7siidMpAqx7yJUdxm
- WHbMdBduTDazio1l9b5A6awLFuV8R5wKzi3wxNhOVislnZKyqINuKPUYTShRtlOAr7R7weMaili
- 6BxTGSNjmWcXaN5P88LQD/CGPV4xwnfVXbJGZg5C2DVcHyFOezHeuFjdWm1Lp6jGy9wvpY9OEj+
- YKoA/HFsWeVYrZUC5F7MAJKmL+nlD53vEo08cAkHT6mI1TUp7GHLNBI3xokEoETZgYVdX/1XCZR
- viw2p+gvshjifEw8R/ffHOQDrE1OOoyxLI1CylVmQSricRPCi5Wd/E73pnZyc2ttAjOFJddHFO+
- oercV5/zlDH6ZeeZkcC7f6wF9mmQZ/n0w2TsRtYP8qBPUd3Ki/HHzkLHSDISW9X1yS5RXGRHQnw
- 9EozWrtR8QC+Na46UB4U+iUF/3/fGnPCjyE98TTyq3ai4kRxDmMC6Fb1QCW5/I5/jRKKElFdyKS
- 33z
-X-Received: by 2002:a05:600c:1e8b:b0:483:b505:9db7 with SMTP id
- 5b1f17b1804b1-4855672ada8mr41002435e9.32.1773400284913; 
- Fri, 13 Mar 2026 04:11:24 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:70d:5fd1:42d3:c84c?
- ([2a01:e0a:106d:1080:70d:5fd1:42d3:c84c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48557c6c69fsm18833245e9.26.2026.03.13.04.11.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Mar 2026 04:11:24 -0700 (PDT)
-Message-ID: <9808f640-2c8f-4da7-9276-95ab5448d701@linaro.org>
-Date: Fri, 13 Mar 2026 12:11:23 +0100
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=AemlPbsfBOrE4/gW9RUaWtaFBiqpJuXpu3xingcheKytyTvQzoK4RhjDdo7XVdOfjdykXcO6GojEYzDZfK6I2ljCqd+vriMWuQG8aBrM71tHAPYNLzW9NWuS2/CGvqqqKbWVLq7RemsYaJrUHn5krvAOznU1kA7+9yGGsUfVZW8krR27cSQzJOdQQz/zKFocH2ANOK9g8aej2yc7fqOTdenrsQpnjH5uSfjfaCixS5AG9qalA8bsAUC9I8H9fhvkJp5dxL7LXxZuFVpbMPvDUmufpIuzWhuf98FrvOwAd9vHtr/baLMITU+73eX7hJ82OY+vBCRIsOnlCDQQOoqKLQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ol16HFguwajFU646thUoyXWiux8KxtQIE0F/fQzLlr0=;
+ b=v8jCD3I4r287lJbHbKWDl64CS5xxylPtyJ+EyyIfrT3C2+vUc0t1XL4iMoSn8JCiMXM+5y9a6TqNIiw+5z9C4Zk7kEAhzT4Pb6l+lOrMMMF7Z/OJQEPOqLuxdbFCs2FZyItXR4oPzEuPYZBSzuWeHNgoQhcXl6todNxmkxbBWxxdksf54OHuulrEEN3lPMC/CZuJu5YPPR5cZi5wtyfCLLi4FFSiFiFIsFX+AMvSbnBAFx/65/lHAHgHYBVvjDCACmBMyjW/4vscq91ijo1329w+DS+xN3dtT2wD7ACaz8tVRYUIbzulSsloHFRGTuSrhSJvpaxFo9GQo8uyZLzoaw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ol16HFguwajFU646thUoyXWiux8KxtQIE0F/fQzLlr0=;
+ b=vJ81GX615AK4um6n1nbXj/HjnqOzafawxTisB8xn36CxsEgi2GC2tkjaH0VtTQMYFQzDsbWVaSzpL1iyAEw4C5OIXLKc5bPwtRz38GQv4GnCNkwVs5dw2POe6+ZUoANwe+TCa2zSzhsMGRSo/ZhBieeqvAErVbPjaBiYmMEnu+g=
+Received: from CH5PR02CA0022.namprd02.prod.outlook.com (2603:10b6:610:1ed::8)
+ by MN0PR12MB5980.namprd12.prod.outlook.com (2603:10b6:208:37f::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.4; Fri, 13 Mar
+ 2026 11:20:58 +0000
+Received: from CH1PEPF0000AD82.namprd04.prod.outlook.com
+ (2603:10b6:610:1ed:cafe::f6) by CH5PR02CA0022.outlook.office365.com
+ (2603:10b6:610:1ed::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.16 via Frontend Transport; Fri,
+ 13 Mar 2026 11:20:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH1PEPF0000AD82.mail.protection.outlook.com (10.167.244.91) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Fri, 13 Mar 2026 11:20:58 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 13 Mar
+ 2026 06:20:49 -0500
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Fri, 13 Mar 2026 06:20:48 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>, <xypron.glpk@gmx.de>,
+ <ilias.apalodimas@linaro.org>
+CC: Adriano Cordova <adrianox@gmail.com>, Shantur Rathore <i@shantur.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Ying-Chun Liu
+ (PaulLiu)" <paul.liu@linaro.org>
+Subject: [PATCH v2] efi_loader: avoid superfluous variable store writes on
+ unchanged data
+Date: Fri, 13 Mar 2026 12:20:37 +0100
+Message-ID: <095f258648b2e0283c671f6fbc95dd9f39f55a8e.1773400835.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-ufs-20260313
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9566; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=BJF6yPwv0UFu2uGxSTBCm58KbjyGOHbq4HE+hvU4/Hc=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRu/syWInskp2GNW+fqLEeZbNdzFxdrpj88uTv7n9xHr
+ 8ibKmuedpSyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEXoYzMtyS/6LBefJN+8Ve
+ hZ8+MvaHl2yy39WgfFJ5+tl/V0MzwlczMjxReCpSdmnjtIfdnctmPVD9cnRGjkP4gbxqLfGVnW3
+ LGbgA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD82:EE_|MN0PR12MB5980:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9af539ea-a78a-4a3e-b3e4-08de80f299c9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700016|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: GDibKpkr+/BJUjGDJW6y2Ytn93A6m1Xmdh5DnMwctX5KIN8Q/oX0qQzNKeO/DRSLJEop6slfpdaIew6n8tfXZJglibbmzgUeMKxsy9ghhvIU2cA+u4aE+aJjKmXxFAtF4hFSQwtbUNQW/ogh673ZejDlCGB0HXyKizKbPGCAjrgmM4ODNGjj8ohJ8MuCKr0OvwKwu2E2sV7iCh0hoEOfCIH1dcMCuNVQsQYErxNi4nPWPcR6sFyx4ewFpi04l50In0faoWzRzu6vBlnKy9vCKRY7DPQ3y9q/F8o4JDRLlAtY1taOc1q6a3nSwNZx0qtsSWrnEEYoPJEvZBqaTdzBI0izlNuoYbCjF99e3RL/q8ExNfcZI5WaER2JT/Xov+KBwvWLmwEeuZy5BpzbxFI0hSpCR/1WyPlfS43gTxoigGFFoyLxfUamymJzNFk6BBQk7YuVxc+FAkI3xBG4pM00L9jAJvk7kfjIugef+BvbiFi7IR26yeq4yf/nQnP5fPhTuhLn+yUHVxtsyZQmmW4y95a+JdUpUOdWoY8ePtyOP1FuQ2VkuKZqAqmF0psLGUxHqlO1ZOPQl/rIW76TDQdpDEWUlK4sPrgwutid//c4ux9whAYphwtBOC+T/CfeM2SHvdKXca0kBaYf2Xk23+NpWtI0oFqTT2TwGIzmuyJa2AlMBuYTWr6wtXo7MKLUEXPZFN4lfkICAa0MRToqtCI0rGBrWjgIKL0r/drwk9Av4KYEDqw16f7ZdpLVlF3V/QpOjhyVJv+36YoKqdI1f3hjMw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700016)(18002099003)(56012099003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: mxXeIIedHyVwIzKdCPRpJ2XVNp3ljpMYX0XdFk6Fow8xynvZiKXvxpi+fT8FFFWoLRB3WlM22qLZrUIF9NKs54JT80OUwUsx2LS16w69ZJvYwtOh687w1I1MgUz8Vz39rq64yDyK2PgFwLehOdZrLCgVeZ30MIp8YIny7IVrfWjLZY8s5k12DIjzO/GSlYPfHu4HkUoEM8izTqi6ZWXgVPE5xBUmQKepxqS8pGVcucKGRErPh9y/y4+eFw61dkxkHuI1uOhXvbxftR2BnbZAcgq/7Gdhca79bJB/xzrAO/AYwCMCT05HKDzuwQx/nGaTP2rluL/lQnIXZAQqxHdQ5Zh27nXntoMRGzlqL054J4lNBAtlVOjkj079IQ1XbXD2LW5+7fN4/EHvRG46y+Kjhcb59Bu3LcYmJkkEtOFa/4uhNWhyDxEWCTzZWsnaY9hk
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Mar 2026 11:20:58.3238 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9af539ea-a78a-4a3e-b3e4-08de80f299c9
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD82.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5980
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,60 +128,281 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Every SetVariable() call triggers efi_var_mem_ins() followed by
+efi_var_to_storage(), even when the variable value is not actually
+changing. This is unfriendly to flash-backed stores that suffer
+wear from unnecessary erase/write cycles.
 
-This is small set of UFS changes for next release, UFS SPL support + reset
-support for Rockchip platforms, and a small callbacks ops cleanup for a future
-mediatek UFS driver.
+Add a change-detection path to efi_var_mem_ins(): when size2 == 0
+(i.e. not an append) and the caller passes a non-NULL changep flag,
+look up the existing variable and compare attributes, length, time
+and data byte-by-byte. If everything matches, set *changep = false
+and return EFI_SUCCESS without touching the variable buffer.
 
-Thanks,
-Neil
+Both efi_set_variable_int() and efi_set_variable_runtime() now
+check the flag and skip efi_var_mem_del() / efi_var_to_storage()
+when nothing changed.
 
-The following changes since commit c0ca147ac6228949a6d6497531c9f2f4a0dc6c67:
+Introduce efi_memcmp_runtime() - a runtime-safe byte-by-byte memory
+comparison helper, following the same pattern as the existing
+efi_memcpy_runtime(). The standard memcmp() is not available after
+ExitBootServices() and calling it from Linux will crash.
 
-   Merge tag 'u-boot-imx-next-20260228' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx into next (2026-03-02 13:44:46 -0600)
+Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-are available in the Git repository at:
+Changes in v2:
+- Using efi_memcmp_runtime() Suggested-by Ilias
 
-   https://source.denx.de/u-boot/custodians/u-boot-ufs.git tags/u-boot-ufs-20260313
+ include/efi_loader.h            |  3 +++
+ include/efi_variable.h          |  8 +++++++-
+ lib/efi_loader/efi_runtime.c    | 24 ++++++++++++++++++++++++
+ lib/efi_loader/efi_var_common.c |  2 +-
+ lib/efi_loader/efi_var_mem.c    | 29 ++++++++++++++++++++++++++++-
+ lib/efi_loader/efi_variable.c   | 27 ++++++++++++++++++---------
+ 6 files changed, 81 insertions(+), 12 deletions(-)
 
-for you to fetch changes up to 67d8731d4aad25be00e27eeef3602c519619405e:
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 3e70ac070550..4ff83960c3cf 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -1144,6 +1144,9 @@ struct pkcs7_message *efi_parse_pkcs7_header(const void *buf,
+ /* runtime implementation of memcpy() */
+ void efi_memcpy_runtime(void *dest, const void *src, size_t n);
+ 
++/* runtime implementation of memcmp() */
++int efi_memcmp_runtime(const void *s1, const void *s2, size_t n);
++
+ /* commonly used helper functions */
+ u16 *efi_create_indexed_name(u16 *buffer, size_t buffer_size, const char *name,
+ 			     unsigned int index);
+diff --git a/include/efi_variable.h b/include/efi_variable.h
+index fc1184e5ca1a..c3229c717d89 100644
+--- a/include/efi_variable.h
++++ b/include/efi_variable.h
+@@ -216,6 +216,11 @@ void efi_var_mem_del(struct efi_var_entry *var);
+  * The variable is appended without checking if a variable of the same name
+  * already exists. The two data buffers are concatenated.
+  *
++ * When @changep is non-NULL and @size2 is 0, the function compares the new
++ * value against an existing variable with the same name and vendor. If
++ * attributes and data are identical the insertion is skipped and *@changep
++ * is set to false, avoiding superfluous writes.
++ *
+  * @variable_name:	variable name
+  * @vendor:		GUID
+  * @attributes:		variable attributes
+@@ -224,13 +229,14 @@ void efi_var_mem_del(struct efi_var_entry *var);
+  * @size2:		size of the second data field
+  * @data2:		second data buffer
+  * @time:		time of authentication (as seconds since start of epoch)
++ * @changep:		pointer to change flag (may be NULL)
+  * Result:		status code
+  */
+ efi_status_t efi_var_mem_ins(const u16 *variable_name,
+ 			     const efi_guid_t *vendor, u32 attributes,
+ 			     const efi_uintn_t size1, const void *data1,
+ 			     const efi_uintn_t size2, const void *data2,
+-			     const u64 time);
++			     const u64 time, bool *changep);
+ 
+ /**
+  * efi_var_mem_free() - determine free memory for variables
+diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+index 35eb6a777665..73d4097464c0 100644
+--- a/lib/efi_loader/efi_runtime.c
++++ b/lib/efi_loader/efi_runtime.c
+@@ -209,6 +209,30 @@ void __efi_runtime efi_memcpy_runtime(void *dest, const void *src, size_t n)
+ 		*d++ = *s++;
+ }
+ 
++/**
++ * efi_memcmp_runtime() - compare memory areas
++ *
++ * At runtime memcmp() is not available.
++ *
++ * @s1:		first memory area
++ * @s2:		second memory area
++ * @n:		number of bytes to compare
++ * Return:	0 if equal, negative if s1 < s2, positive if s1 > s2
++ */
++int __efi_runtime efi_memcmp_runtime(const void *s1, const void *s2, size_t n)
++{
++	const u8 *pos1 = s1;
++	const u8 *pos2 = s2;
++
++	for (; n; --n) {
++		if (*pos1 != *pos2)
++			return *pos1 - *pos2;
++		++pos1;
++		++pos2;
++	}
++	return 0;
++}
++
+ /**
+  * efi_update_table_header_crc32() - Update crc32 in table header
+  *
+diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+index c89a4fce4ff8..d63c2d1b1cd8 100644
+--- a/lib/efi_loader/efi_var_common.c
++++ b/lib/efi_loader/efi_var_common.c
+@@ -526,7 +526,7 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+ 			continue;
+ 		ret = efi_var_mem_ins(var->name, &var->guid, var->attr,
+ 				      var->length, data, 0, NULL,
+-				      var->time);
++				      var->time, NULL);
+ 		if (ret != EFI_SUCCESS)
+ 			log_err("Failed to set EFI variable %ls\n", var->name);
+ 	}
+diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+index 31180df9e3a0..8d5f99f48703 100644
+--- a/lib/efi_loader/efi_var_mem.c
++++ b/lib/efi_loader/efi_var_mem.c
+@@ -159,12 +159,39 @@ efi_status_t __efi_runtime efi_var_mem_ins(
+ 				const efi_guid_t *vendor, u32 attributes,
+ 				const efi_uintn_t size1, const void *data1,
+ 				const efi_uintn_t size2, const void *data2,
+-				const u64 time)
++				const u64 time, bool *changep)
+ {
+ 	u16 *data;
+ 	struct efi_var_entry *var;
+ 	u32 var_name_len;
+ 
++	if (changep)
++		*changep = true;
++
++	/*
++	 * If this is not an append (size2 == 0), check whether the variable
++	 * already exists with identical attributes and data. When nothing
++	 * changed we can skip the write and avoid superfluous erases.
++	 */
++	if (!size2 && changep) {
++		struct efi_var_entry *old;
++
++		old = efi_var_mem_find(vendor, variable_name, NULL);
++		if (old && old->attr == attributes &&
++		    old->length == size1 && old->time == time) {
++			u16 *old_data;
++
++			for (old_data = old->name; *old_data; ++old_data)
++				;
++			++old_data;
++
++			if (!efi_memcmp_runtime(old_data, data1, size1)) {
++				*changep = false;
++				return EFI_SUCCESS;
++			}
++		}
++	}
++
+ 	var = (struct efi_var_entry *)
+ 	      ((uintptr_t)efi_var_buf + efi_var_buf->length);
+ 	var_name_len = u16_strlen(variable_name) + 1;
+diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+index 8512bc20f11e..9923936c1b59 100644
+--- a/lib/efi_loader/efi_variable.c
++++ b/lib/efi_loader/efi_variable.c
+@@ -277,6 +277,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 	struct efi_var_entry *var;
+ 	efi_uintn_t ret;
+ 	bool append, delete;
++	bool changed = false;
+ 	u64 time = 0;
+ 	enum efi_auth_var_type var_type;
+ 
+@@ -366,6 +367,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 	if (delete) {
+ 		/* EFI_NOT_FOUND has been handled before */
+ 		attributes = var->attr;
++		changed = true;
+ 		ret = EFI_SUCCESS;
+ 	} else if (append && var) {
+ 		/*
+@@ -380,15 +382,19 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 		ret = efi_var_mem_ins(variable_name, vendor,
+ 				      attributes & ~EFI_VARIABLE_APPEND_WRITE,
+ 				      var->length, old_data, data_size, data,
+-				      time);
++				      time, &changed);
+ 	} else {
+ 		ret = efi_var_mem_ins(variable_name, vendor, attributes,
+-				      data_size, data, 0, NULL, time);
++				      data_size, data, 0, NULL, time,
++				      &changed);
+ 	}
+ 
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+ 
++	if (!changed)
++		return EFI_SUCCESS;
++
+ 	efi_var_mem_del(var);
+ 
+ 	if (var_type == EFI_AUTH_VAR_PK)
+@@ -396,10 +402,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 	else
+ 		ret = EFI_SUCCESS;
+ 
+-	/*
+-	 * Write non-volatile EFI variables
+-	 * TODO: check if a value change has occured to avoid superfluous writes
+-	 */
++	/* Write non-volatile EFI variables to storage */
+ 	if (attributes & EFI_VARIABLE_NON_VOLATILE) {
+ 		if (IS_ENABLED(CONFIG_EFI_VARIABLE_NO_STORE))
+ 			return EFI_SUCCESS;
+@@ -498,6 +501,7 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
+ 	struct efi_var_entry *var;
+ 	efi_uintn_t ret;
+ 	bool append, delete;
++	bool changed = false;
+ 	u64 time = 0;
+ 
+ 	if (!IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE))
+@@ -549,6 +553,7 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
+ 	if (delete) {
+ 		/* EFI_NOT_FOUND has been handled before */
+ 		attributes = var->attr;
++		changed = true;
+ 		ret = EFI_SUCCESS;
+ 	} else if (append && var) {
+ 		u16 *old_data = (void *)((uintptr_t)var->name +
+@@ -556,15 +561,19 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
+ 
+ 		ret = efi_var_mem_ins(variable_name, vendor, attributes,
+ 				      var->length, old_data, data_size, data,
+-				      time);
++				      time, &changed);
+ 	} else {
+ 		ret = efi_var_mem_ins(variable_name, vendor, attributes,
+-				      data_size, data, 0, NULL, time);
++				      data_size, data, 0, NULL, time,
++				      &changed);
+ 	}
+ 
+ 	if (ret != EFI_SUCCESS)
+ 		return ret;
+-	/* We are always inserting new variables, get rid of the old copy */
++
++	if (!changed)
++		return EFI_SUCCESS;
++
+ 	efi_var_mem_del(var);
+ 
+ 	return EFI_SUCCESS;
+-- 
+2.43.0
 
-   ufs: rockchip: Add device reset support (2026-03-12 09:30:44 +0100)
-
-----------------------------------------------------------------
-- ufs_hba_ops callbacks cleanup
-- Rockchip UFS reset support
-- UFS support in SPL
-
-----------------------------------------------------------------
-Alexey Charkov (2):
-       spl: Make UFS available for SPL builds
-       ufs: rockchip: Add device reset support
-
-Julien Stephan (3):
-       drivers: ufs: handle return values of ufs_hba_ops callbacks
-       drivers: ufs: add helper for phy_initialization callback
-       drivers: ufs: fix typo in struct ufs_dev_cmd kernel-doc
-
-  MAINTAINERS                |  1 +
-  arch/arm/include/asm/spl.h |  1 +
-  common/spl/Kconfig         | 30 ++++++++++++++++++++++++++++
-  common/spl/Makefile        |  1 +
-  common/spl/spl_ufs.c       | 49 ++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/Makefile           |  1 +
-  drivers/scsi/Makefile      |  3 +++
-  drivers/ufs/Kconfig        |  4 ++++
-  drivers/ufs/ufs-rockchip.c | 31 +++++++++++++++++++++++------
-  drivers/ufs/ufs-rockchip.h |  1 +
-  drivers/ufs/ufs-uclass.c   | 36 ++++++++++++++++++++++++----------
-  drivers/ufs/ufs.h          | 10 +++++++++-
-  lib/Makefile               |  1 +
-  13 files changed, 152 insertions(+), 17 deletions(-)
-  create mode 100644 common/spl/spl_ufs.c
+base-commit: 1e8eb1c27210e3beb5d3f4402a40d2e8886bcf9f
+branch: debian-sent3
