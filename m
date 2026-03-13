@@ -4,99 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D591105F7BA
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:21:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17960105F7B8
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 356DD84370;
-	Fri, 13 Mar 2026 16:20:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 898EC84370;
+	Fri, 13 Mar 2026 16:21:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="H4Jz46pR";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OmR8IiAh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 879048436C; Fri, 13 Mar 2026 16:20:57 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id C8569843A9; Fri, 13 Mar 2026 16:21:28 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 410828438A
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:20:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF53F8436C
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:21:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-466ebbf7ff7so856602b6e.1
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:20:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-660be63279bso4731570a12.1
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:21:26 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773415286; cv=none;
+ d=google.com; s=arc-20240605;
+ b=fEiTg/RnB3iNJMXo0YuOFwtT+DDWKaKBghBhtDju/iDJCFjB+LmARVRsSMNslleeZO
+ JaZqcuet8YhWOD16ztwCDkrG/luSSb4E9Qbk/IGPTtPwfchTUoVPwqZVwdPqmhoxaXg1
+ /giij2pEf8jkOQRepS244ExejXOTZbdSZIekIRdNC4Akm+FIksb4oqznkp0ITheTUxQm
+ uevDINrL1vlxSFz6Nn2QgExvI9aHVpN+56AHvLIp+0va7GSYAeFyFbxkJEIvceYB+UWP
+ Ulm8unZ+zD48hI/shf7hJldLbU/3Iytg/g0SM9wFlBxlKXWd/V0fN4HcbeI0bCN3MeFK
+ ariA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=pcFfTQBQKEnNwF0e3ij35kEiF0iEervKuYjQbw0ZGeI=;
+ fh=kL92CJkIUzZxHtQ+vZBVIxq5pltYXtiUqlhssUbETtM=;
+ b=aNsu5E7JXfFFUbMo+eoLkTc0Njk3f+cDdb/3yAwPoFXdVghnzxXP4/A+saoDDZNvVp
+ vs/bhGi6Ax9Jr71JpSNb52zPQfvLXkuweKx7sLZvJPI65Z1tMtaI/ChzngwXxRHQVpUR
+ i2mAXqF5D2XbW6qhFmqGABvHS+Idy6OfHOWAWjF1hzz2XN9Ltnzb8PS1TR1oZ6AMcPTw
+ 7ItqqYuUkAMBmnkcSWtySYIycl//sX00zcQ5j9x1twYWT3kuNLyB1HVUY4pcoKARQZK3
+ +fyeXyeeMp3X/seB7vlxsF46QMvsjDcJmJ/pCrKYU1fRKy9NZdp2hoV5zL6INZTPdhU7
+ tMng==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773415254; x=1774020054;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773415286; x=1774020086;
  darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lNi8ymfobvmg8CvyLkljL0GPXqtLonIN8AijeIhjp6A=;
- b=H4Jz46pRDZPXt9PjQqGQATtq2/XDCG8JDFelP++fVKqeAhOzg1TLGjAkkdEL7UlI/x
- 937aM5Y/Jcc0Na6VZdY1it79blAHJVSHe3wOU/kCm0xgqoQhBhnwbnRG7FOe1Liq2IPa
- K6it+AcKpR0TktZXiKG5SauWaH9g9Bdl/477h4knJc3xrTV7JjkkKx6birmlCiFRAjD8
- en7frbF9oa6RHaORKAqq0B6tIpG/F5oxmXyaS4rTlkdlUseOM6Wqg/CWXRY7GWiJKRYy
- 8UpZyhr1JxN73wznwHnTAM2YiFmGYi9n2Kx5gnfYvI6IT90HdgEAcYzIkEE7frYGogl9
- 5e5Q==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pcFfTQBQKEnNwF0e3ij35kEiF0iEervKuYjQbw0ZGeI=;
+ b=OmR8IiAh9MmWrkZCS97i5yc82Ija/b9dJftG+fvS743LHjgX6IdIrGy6TosKUhzE+T
+ MQpOppPLOrUJPD/3YFUJ+sB1F6AWbeJ4RA6hWevuulE8wt7G+pP4Y+GYlqAZzeRbM+1O
+ Y2rc/2URbSUg639PSTdeEggk/3HJzqQghAm/Y+gxL4kYW+VHTTxC5gmct+QuhMgdmzrg
+ tjddiS1sgZzSWJtpI8oa+BXGc+gLUYkrllHrjPbiY3YSvHgbTNDnaAaxROQ4j0BVhvp8
+ 7PYREvnkff0L0KP1zGJz0RxhbRRweX/Z8L9e3cNouraXKhVO0UEW1HVUhelv0iBKrHOn
+ erdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773415254; x=1774020054;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lNi8ymfobvmg8CvyLkljL0GPXqtLonIN8AijeIhjp6A=;
- b=TasOg5k2O4AWms7ErmzdLLSBKH6OS5S/fWcI1hsh6vxtt7O0G4DtGKD4siMXK9HBd7
- zx3zvQphmFthRs0R5VpMvM1aXAz9GCLw9YOGBHh0xWmcesYAGPnO16fpjIN91h0H8g+M
- lXRm118CwoN0OeKw12xDCZyhVVKVP+Oz8I81OmNHgVw1Cn8XE7rMct8uy3UVx0akIkiW
- FxgKRioySI8AE0iyYC+/XHvMFRqPqTexMUjBWi4+7KKqwh3qpJXJMuFDzRrmlMq7FraR
- k96tCkFfeSB+ZU9mnvJVa88fHHUPx6XGCzeFYCuT5gn/JZbuf1ykV02Oy2IiDuEiwN02
- U5Zg==
+ d=1e100.net; s=20251104; t=1773415286; x=1774020086;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=pcFfTQBQKEnNwF0e3ij35kEiF0iEervKuYjQbw0ZGeI=;
+ b=A5N/Rg+82o6So9ltfFPqX7aIEvO5+7+YrJOdYtNGCwh9K3VfaSss5S5O73NIkGZWAf
+ 47VXe7zMCOX0QSfsQaZUiLCb7SZw7xGBsWeUCkaDszSBl8bWrjrdodl1EfFumPWYqIRZ
+ j+chAdqFIJ2SVo8JnzUCTV1VDH5oiAjrJPxBNleh6fEf1nooaw4MssWDkRmCjNxMKgYT
+ X9ID4rjSfRsq1kTreqcKc9sPGXdL+NmRljP2hNH3vv62D3FyNDe8/es7lW1QAZRcKQTA
+ tzzXwbF0JINm3ibPtq0Lp0vcU4oKuYmeKOcPQ9TT1FSCL5Fk/smW39tA6eEFfh2gQizg
+ /o0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNcYSieJez0GCSj5Cjmw9q2DX5fnanQzihJN9umNqpIU8KyolfIJPC33eq1P0gZHf8f4RWYuk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwX2Kc/QC20zYWKzxdGL4NSU1QfBl9t4dVP3hdAuhbGKF5Y18vm
- y2KdQtbAsgZMYfM8CnpP/zr2FZdyLHPzaHNGCHoByXVLYBryrACXlnHIvss/ouyPA79aSbU9sY5
- teong
-X-Gm-Gg: ATEYQzwsG4YUEAcw6VY8wVtC2amNwEL1jmVyrpMRyWxhe7eDFQ0LAn2VOxDaRdV39fb
- fWLz+h95mr9aMoKzV9tT+1OqKtmyl51EYklJ8b+hw99qUX7E8V/04c5aU9PyCDYBjCrzcJQEiLR
- umADR9RdtjLSXVqqT+JTd6ZmfSmG8L1+bPlNFsI5HMcA/PGOCgg1QjPIm5isjn8geVw2uXXmd2o
- UPrerHeEF4vaDAw5tK2QsJkkHM9iJEzHeoEbaPQghY2ur4ctYKTmTzOl2fpxU5VnTKPfkeEE6NO
- V2idccgAoNknAZ8Z8yE6gGL8s/Uy0wA3sGXhfbhQaY5D+EUdukZAliSPo4Jod352lbTYyibs9Xn
- ms1hpz8tkNZooqHk6i0vzuhZY4lIklFOl5VFDH9cA7znNSwM17snnnop6IyqRWOZDEZaoKA6FOc
- 9QCBGsnA16dos05/4uvFWHJwQN+rqNedXqku5LOdllT3Lc4I5vYU3LDFr6A0zC/kpsKg==
-X-Received: by 2002:a05:6808:1203:b0:467:32c1:acf1 with SMTP id
- 5614622812f47-467572f2d47mr1673969b6e.39.1773415253944; 
- Fri, 13 Mar 2026 08:20:53 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:bf:9982:ff59:466?
- ([2600:8803:e7e4:500:bf:9982:ff59:466])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-417a2372b13sm4961368fac.10.2026.03.13.08.20.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Mar 2026 08:20:53 -0700 (PDT)
-Message-ID: <e90dde67-8881-4b0e-97a7-e0ec01c502dc@baylibre.com>
-Date: Fri, 13 Mar 2026 10:20:52 -0500
+ AJvYcCVd+H63MafMqCcvZgQM9/yAPcnXsY3A/9iCucdOaekDWOcogF9HVmmfFo11lH9GhZjjHwhHb/A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJrUQQS+nUOO2CrHnpUZkvrV67m+Ymtt3YQQ+dn3LePRmdpnUC
+ P11MaYwQN2zhlpl4zA6lKlDpoSbZT81ZIqlFSAy31uobqagHoYjsrkGTiegWSEOltCBwJECVzAx
+ crFk5mQlKVWFvhSyRGpFI3BfraVisdhbTMI8lbDqdtg==
+X-Gm-Gg: ATEYQzwDPGPGXgLm7+eyDAuYO42I1LtFIf6XMiZ4NCbc8uYfAdc7G0L0c6yLy0wk+9W
+ DVsZZht0ClYTZMsGVMM5XevEi6QlslpEqNp1fOVawe4Ao7ibU8tLx1USMXpvBPcWEqE0KzhjFWe
+ h1p87JJndbb8Ag4HH84S55NyXgIzrxg0CW/LRupfKwPdsSLreIK+dt5xNFrHZ6jPg3L/2zrtRz8
+ PIR2kHTUf0s0xKBftQOX7pyvK2AKpMcZbJ6GPduoAyCV64UIpjQwB7GgNZC3tGZrJ1NHaYAIqnj
+ fYT9nzVzLsBm8JV9/BXGZVNDomvOkX+nZwl7Sb8pxHZwagOzb101HN8bHJVMdEsslsLztO5keKt
+ 0hfRWrT14zb2enW8TyTtHBSXwzg==
+X-Received: by 2002:a17:906:fa14:b0:b93:5ef5:904f with SMTP id
+ a640c23a62f3a-b9763a2a5c1mr178017966b.26.1773415286324; Fri, 13 Mar 2026
+ 08:21:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/16] clk: mediatek: replace xtal2_rate with struct
- mtk_parent
-To: Julien Stephan <jstephan@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+References: <20260303-mtk-mt8189-clocks-v4-0-ee85f8dd2f0d@baylibre.com>
+ <20260303-mtk-mt8189-clocks-v4-1-ee85f8dd2f0d@baylibre.com>
+ <CAEHHSvYMiCZ4jAXp6jEhg6AhZ5Dv3_Ak-8H1mT7S2FPD3_X7dw@mail.gmail.com>
+ <ae3517d6-fb57-489c-8029-f536ef68fdba@baylibre.com>
+In-Reply-To: <ae3517d6-fb57-489c-8029-f536ef68fdba@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Fri, 13 Mar 2026 16:21:18 +0100
+X-Gm-Features: AaiRm53gmym19Db0jKr89GqWaHLUAi1CgV1QQOLNvjThVcAyb3fh4hlMAeYCKJU
+Message-ID: <CAEHHSva2gHP6MDF_FxMJ-EpOz6dLOGZXfSbCZfxnC7pzD-Jsdw@mail.gmail.com>
+Subject: Re: [PATCH v4 1/7] clk: mediatek: use correct struct type for
+ infrasys clocks
+To: David Lechner <dlechner@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
- <20260310-clk-mtk-parent-cleanup-v1-1-66175ca8f637@baylibre.com>
- <CAEHHSvak-Ebscv7u7STNYOp05o33sUbGsB6bSbhyVrwFu13o+w@mail.gmail.com>
-Content-Language: en-US
-From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <CAEHHSvak-Ebscv7u7STNYOp05o33sUbGsB6bSbhyVrwFu13o+w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,44 +125,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/13/26 9:49 AM, Julien Stephan wrote:
-> Le mar. 10 mars 2026 à 16:34, David Lechner <dlechner@baylibre.com> a écrit :
->>
->> Replace the hard-coded xtal rate for PLL parents with struct mtk_parent.
->>
->> This avoids declaring the same clock rate in multiple places and will
->> allow future drivers to use an arbitrary clock.
->>
->> The variable is renamed to something that better indicate what the field
->> is actually used for.
->>
+Le ven. 13 mars 2026 =C3=A0 15:26, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
+>
+> On 3/13/26 7:53 AM, Julien Stephan wrote:
+> > Le mar. 3 mars 2026 =C3=A0 20:55, David Lechner <dlechner@baylibre.com>=
+ a =C3=A9crit :
+> >>
+> >> Fix the private data type struct type in a couple of infrasys clock
+> >> functions.
+> >>
+> >> struct mtk_cg_priv is a superset of struct mtk_clk_priv and has the sa=
+me
+> >> layout at the beginning so there was no compile errors or runtime bugs=
+.
+> >> This could only be found by inspecting the code.
+> >>
+> >> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> >> ---
+> >>  drivers/clk/mediatek/clk-mtk.c | 4 ++--
+> >>  1 file changed, 2 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk=
+-mtk.c
+> >> index b4de38719e1..b3f05bf5a21 100644
+> >> --- a/drivers/clk/mediatek/clk-mtk.c
+> >> +++ b/drivers/clk/mediatek/clk-mtk.c
+> >> @@ -933,7 +933,7 @@ static const int mtk_infrasys_of_xlate(struct clk =
+*clk,
+> >>
+> >>  static int mtk_clk_infrasys_enable(struct clk *clk)
+> >>  {
+> >> -       struct mtk_cg_priv *priv =3D dev_get_priv(clk->dev);
+> >> +       struct mtk_clk_priv *priv =3D dev_get_priv(clk->dev);
+> >>         const struct mtk_gate *gate;
+> >>
+> >>         /* MUX handling */
+> >> @@ -946,7 +946,7 @@ static int mtk_clk_infrasys_enable(struct clk *clk=
+)
+> >>
+> >>  static int mtk_clk_infrasys_disable(struct clk *clk)
+> >>  {
+> >> -       struct mtk_cg_priv *priv =3D dev_get_priv(clk->dev);
+> >> +       struct mtk_clk_priv *priv =3D dev_get_priv(clk->dev);
+> >>         const struct mtk_gate *gate;
+> >>
+> >
+> > Hi David,
+> >
+> > I guess we should also update priv_auto definition of mtk_clk_pericfg
+> > in clk-mt7623.c ?
+>
+> Good catch. I think that is something for a separate path though.
+>
 
-...
+Since you already sent another patch for this fix, for the whole series
 
->> +enum {
->> +       CLK_PAD_CLK26M,
->> +};
->> +
-> 
-> Can we define these enum values in a common header?
-> For example, CLK_PAD_CLK26M is defined in various different soc
-> specific drivers.
+Reviewed-by: Julien Stephan <jstephan@baylibre.com>
 
-I would rather not, they depend on which external clocks are available
-on a specific MCU. So they will rarely be the same. As you will see
-in the later patches, more are added and they aren't always the same.
-And the values need to be sequential for the lookup array, so we can't
-have one enum that works for all SoCs.
 
-> Also clk-mt8189.c uses defines instead of enum, so maybe we should
-> stay consistent.
-
-Hmm... I did that one first before I established the pattern. The values
-are arbitrary, which is why I went with the enum here. I can clean that
-up when I apply the patches.
-
-> 
->> +static const ulong ext_clock_rates[] = {
->> +       [CLK_PAD_CLK26M] = 26 * MHZ,
->> +};
->> +
+> >
+> > Julien
+> >
+> >>         /* MUX handling */
+> >>
+> >> --
+> >> 2.43.0
+> >>
+>
