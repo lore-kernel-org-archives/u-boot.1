@@ -4,107 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A59C105F7A6
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D591105F7BA
+	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 15:21:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4A3384370;
-	Fri, 13 Mar 2026 16:20:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 356DD84370;
+	Fri, 13 Mar 2026 16:20:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="CpzEcyK0";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="H4Jz46pR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4DED84382; Fri, 13 Mar 2026 16:20:13 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 879048436C; Fri, 13 Mar 2026 16:20:57 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 436DA8436C
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:20:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 410828438A
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:20:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b93698bb57aso446362566b.0
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:20:11 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773415211; cv=none;
- d=google.com; s=arc-20240605;
- b=jFabHbi13PdTFu1knkjyTdg8imyWoRX5QZGL8C+MAq09lbvX1QjNMXXEF8Nz3r27wt
- wo9a3bME10rDFzUoxC55QleO/QXTXbc3GhGlS/f51t+fRnTdWJgi+PxUOZXJL0Y7zyww
- qDK7xl+Zk49yZQa/XXSL4bbxMu4+uiawABBCUgjT0N1Js1eQoc5SESMGxQuQ3yEiWe59
- 0SCv1gcHUmRWN2E4LrO6GioU9Y2ykq1abjlxUWJraZaNwSKj4b9pRalAxmLY3D72FYE5
- HIECgd1yqbSn3SXB/gl8fOWSVVJGph/kjPWHNDIuOQnDOwUJrFvDFUOUPcF7wtbATm7T
- n2oA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=b8YZZwDBtorbdHFz23v5j6vEb7bTSU5NzNZKcaW51Ng=;
- fh=BkTneNBeMZ7ye7nZi3/XkuNqlEKKfJpSV3Uk6ZbGqLo=;
- b=UEmBoGxSUdXTWm78vwHju54S3gHF7iw1nMAABx9pxc/NbJxjYBixXkreNLChR2vA9J
- 5AhnW9seltQcIRybO6/Z1wo/AxNeKV1+H2FgywUW2RFB6tjzsgnzLFAntBJfTJXbJiET
- pFMh/7hfWW+4bThDI0Z1HjW1VE9rf/2WAv9M0J/wXnirBaq+KarWGedeKbKoIkGQ5wMQ
- /ukUq6+cHzPA+UdCp3EmQ+/v/1KBVAO+d17h5kOWoMhPjEIpfxWxJRHi5YCNjQX+8FLA
- ocdWZTycIAUUZjkS8I6NX0Usld+3YaWU8fuPpZolVOnhEAHVVLW3DHdX7tyr/OoMzFVb
- /Dig==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-466ebbf7ff7so856602b6e.1
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 08:20:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773415211; x=1774020011;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773415254; x=1774020054;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b8YZZwDBtorbdHFz23v5j6vEb7bTSU5NzNZKcaW51Ng=;
- b=CpzEcyK09JRScpWeI+ZKS8O9pkjozWXtuNqiwhBl8S9YabW7s6iREJ5pKs+JtIZNaL
- 5lO81YXqb9ImHw2Q95V+QvzsdPCJWb5P6RlV9539bAVCr+wkinR8OGo+o2mviOh67U8d
- ScgO1PjgRrZwl4jd5jvImnSau76d4IKhyWyiIG0Cf6jF8dZAYWldTbOoMHSoDowCwdsK
- hWSHL05aRFrexKbWwwUjYXlCKv9qawS3yS6Yu0q0QHA9ebKQi0mK4bYvvEPp+xa/PmKC
- IEkA067UAXKsbe87GiFR1QMX4Xp97V3nlRIwJJTVecMokx0OfSbZekWAfyxz2QkXmrRV
- WHvw==
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lNi8ymfobvmg8CvyLkljL0GPXqtLonIN8AijeIhjp6A=;
+ b=H4Jz46pRDZPXt9PjQqGQATtq2/XDCG8JDFelP++fVKqeAhOzg1TLGjAkkdEL7UlI/x
+ 937aM5Y/Jcc0Na6VZdY1it79blAHJVSHe3wOU/kCm0xgqoQhBhnwbnRG7FOe1Liq2IPa
+ K6it+AcKpR0TktZXiKG5SauWaH9g9Bdl/477h4knJc3xrTV7JjkkKx6birmlCiFRAjD8
+ en7frbF9oa6RHaORKAqq0B6tIpG/F5oxmXyaS4rTlkdlUseOM6Wqg/CWXRY7GWiJKRYy
+ 8UpZyhr1JxN73wznwHnTAM2YiFmGYi9n2Kx5gnfYvI6IT90HdgEAcYzIkEE7frYGogl9
+ 5e5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773415211; x=1774020011;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=b8YZZwDBtorbdHFz23v5j6vEb7bTSU5NzNZKcaW51Ng=;
- b=m//UngBDjV/QdLSKjBv5WVAlbtSup56GlNjsw8TZx712pJUziV4O0jDtYNb1OB68F/
- 7KxDvPiHMwW4Io3pkkkUdw8SnCbUjzNLOdvmi9i3p5VjuwdY9wfvhH6XdDD24hpklnEl
- AbjO6OQA9YmK/VktdDCxDymwMmMMQrqo8xoKfdckL4EizzsIysW7OcsuOAyZsoFar3UT
- 8ALJM01zVvGaTBkKVvu39w1CWj4bFvhaEXXdmC7eHM1beoc60YcOqcqLJCgdIT6zXiAy
- 1vnXS0c1xg4DbsdBUZFGIcIMi1mxAUEeZBTfZDFe/ky4YCpoAsn+OzS749HLS+vpKdML
- exQw==
+ d=1e100.net; s=20251104; t=1773415254; x=1774020054;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lNi8ymfobvmg8CvyLkljL0GPXqtLonIN8AijeIhjp6A=;
+ b=TasOg5k2O4AWms7ErmzdLLSBKH6OS5S/fWcI1hsh6vxtt7O0G4DtGKD4siMXK9HBd7
+ zx3zvQphmFthRs0R5VpMvM1aXAz9GCLw9YOGBHh0xWmcesYAGPnO16fpjIN91h0H8g+M
+ lXRm118CwoN0OeKw12xDCZyhVVKVP+Oz8I81OmNHgVw1Cn8XE7rMct8uy3UVx0akIkiW
+ FxgKRioySI8AE0iyYC+/XHvMFRqPqTexMUjBWi4+7KKqwh3qpJXJMuFDzRrmlMq7FraR
+ k96tCkFfeSB+ZU9mnvJVa88fHHUPx6XGCzeFYCuT5gn/JZbuf1ykV02Oy2IiDuEiwN02
+ U5Zg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZXYbEXR145gfbLBwGyIJ0bkKpRg04NGFdDDT+Y94O6NMaWYZRdhJ2x5ymOvLZmrz9MAutc04=@lists.denx.de
-X-Gm-Message-State: AOJu0YzuYvf28Ab3v0RPQhatABwCT/5Ok4XPMITZ7PxqUV/5b6qaLjT/
- p21gb6O6YBPTLNPcVHiD9tqytl6KYx7R6hxt/rPuTE0iOxrqCMF/ngIdBGZG2My8qimPz7ZqFJK
- 30BgjEKs3znxWKYxzXpGyMsE1zzKgBei+n8Mu048ohQ==
-X-Gm-Gg: ATEYQzwlaQ28lTXdvcxC18FeNsOCz31zrEcWgmc29iBVwE1e/cxHnfZBiiclP2Pcetv
- NM5WXIJyxUrDRpyXstl7WGtlp6LAd4M7x6ak6+nuEeOvLNqoHN0YehQMoBjS9S3G+AE/loK81z5
- gtoPKBZVlFKEtxnrpfYEnAf/Q3a6/eUoLp2tNOrBcONK9+59pWrwK78JTp3G8ATY+WKzocoE0od
- /+2nORQrQWpNaqcgs+qwNaAFnTh4E74fUDYbiJOtUl23K/EXNLmz2pnmAyvi4TC6idc8aXDTaqV
- wgHq9dtZ+I77Xac9q1v5PDdl/GlVt7pPddrVA3CN6j7vgm6g8+QRcRL5Fj4szP5Ixz89vO2JVP3
- T5uWIuk25ktbP7I92SJ43e74xdQ==
-X-Received: by 2002:a17:907:1c9a:b0:b8f:c684:db37 with SMTP id
- a640c23a62f3a-b97636960famr224699266b.9.1773415210654; Fri, 13 Mar 2026
- 08:20:10 -0700 (PDT)
+ AJvYcCWNcYSieJez0GCSj5Cjmw9q2DX5fnanQzihJN9umNqpIU8KyolfIJPC33eq1P0gZHf8f4RWYuk=@lists.denx.de
+X-Gm-Message-State: AOJu0YwX2Kc/QC20zYWKzxdGL4NSU1QfBl9t4dVP3hdAuhbGKF5Y18vm
+ y2KdQtbAsgZMYfM8CnpP/zr2FZdyLHPzaHNGCHoByXVLYBryrACXlnHIvss/ouyPA79aSbU9sY5
+ teong
+X-Gm-Gg: ATEYQzwsG4YUEAcw6VY8wVtC2amNwEL1jmVyrpMRyWxhe7eDFQ0LAn2VOxDaRdV39fb
+ fWLz+h95mr9aMoKzV9tT+1OqKtmyl51EYklJ8b+hw99qUX7E8V/04c5aU9PyCDYBjCrzcJQEiLR
+ umADR9RdtjLSXVqqT+JTd6ZmfSmG8L1+bPlNFsI5HMcA/PGOCgg1QjPIm5isjn8geVw2uXXmd2o
+ UPrerHeEF4vaDAw5tK2QsJkkHM9iJEzHeoEbaPQghY2ur4ctYKTmTzOl2fpxU5VnTKPfkeEE6NO
+ V2idccgAoNknAZ8Z8yE6gGL8s/Uy0wA3sGXhfbhQaY5D+EUdukZAliSPo4Jod352lbTYyibs9Xn
+ ms1hpz8tkNZooqHk6i0vzuhZY4lIklFOl5VFDH9cA7znNSwM17snnnop6IyqRWOZDEZaoKA6FOc
+ 9QCBGsnA16dos05/4uvFWHJwQN+rqNedXqku5LOdllT3Lc4I5vYU3LDFr6A0zC/kpsKg==
+X-Received: by 2002:a05:6808:1203:b0:467:32c1:acf1 with SMTP id
+ 5614622812f47-467572f2d47mr1673969b6e.39.1773415253944; 
+ Fri, 13 Mar 2026 08:20:53 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:bf:9982:ff59:466?
+ ([2600:8803:e7e4:500:bf:9982:ff59:466])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-417a2372b13sm4961368fac.10.2026.03.13.08.20.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Mar 2026 08:20:53 -0700 (PDT)
+Message-ID: <e90dde67-8881-4b0e-97a7-e0ec01c502dc@baylibre.com>
+Date: Fri, 13 Mar 2026 10:20:52 -0500
 MIME-Version: 1.0
-References: <20260313-clk-mtk-fix-priv-auto-size-v1-1-bc649e1b301a@baylibre.com>
-In-Reply-To: <20260313-clk-mtk-fix-priv-auto-size-v1-1-bc649e1b301a@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Fri, 13 Mar 2026 16:20:02 +0100
-X-Gm-Features: AaiRm529hCl6Mlno9EbYchRKIZF5d4IIhblx3NzhJM8HNNahxycrdeoBaJWmOmE
-Message-ID: <CAEHHSvaZgokusQ5bs1AYa0nwFQUyCj95Bk3LJBv_Xeynany6Bg@mail.gmail.com>
-Subject: Re: [PATCH] clk: mediatek: mt7623: fix pericfg priv_auto size
-To: David Lechner <dlechner@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/16] clk: mediatek: replace xtal2_rate with struct
+ mtk_parent
+To: Julien Stephan <jstephan@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20260310-clk-mtk-parent-cleanup-v1-0-66175ca8f637@baylibre.com>
+ <20260310-clk-mtk-parent-cleanup-v1-1-66175ca8f637@baylibre.com>
+ <CAEHHSvak-Ebscv7u7STNYOp05o33sUbGsB6bSbhyVrwFu13o+w@mail.gmail.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <CAEHHSvak-Ebscv7u7STNYOp05o33sUbGsB6bSbhyVrwFu13o+w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,50 +113,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le ven. 13 mars 2026 =C3=A0 15:46, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> Change the pericfg priv_auto size to mtk_clk_priv. The driver is
-> registered using mtk_common_clk_infrasys_init() which expect that
-> struct.
->
-> The old value of struct mtk_cg_priv was larger, so there was no issue
-> out of bounds access.
->
-> Also replace tab with space to be consistent with the surrounding code.
->
-> Reported-by: Julien Stephan <jstephan@baylibre.com>
-> Closes: https://lore.kernel.org/u-boot/CAEHHSvYMiCZ4jAXp6jEhg6AhZ5Dv3_Ak-=
-8H1mT7S2FPD3_X7dw@mail.gmail.com/
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> ---
->  drivers/clk/mediatek/clk-mt7623.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk=
--mt7623.c
-> index 071c4cf8a84..87720a93eff 100644
-> --- a/drivers/clk/mediatek/clk-mt7623.c
-> +++ b/drivers/clk/mediatek/clk-mt7623.c
-> @@ -1187,7 +1187,7 @@ U_BOOT_DRIVER(mtk_clk_pericfg) =3D {
->         .id =3D UCLASS_CLK,
->         .of_match =3D mt7623_pericfg_compat,
->         .probe =3D mt7623_pericfg_probe,
-> -       .priv_auto      =3D sizeof(struct mtk_cg_priv),
-> +       .priv_auto =3D sizeof(struct mtk_clk_priv),
->         .ops =3D &mtk_clk_infrasys_ops,
->         .flags =3D DM_FLAG_PRE_RELOC,
->  };
->
-> ---
-> base-commit: 9f1059bc735ec2a8d78c1f3e4fcab1fa3f428317
-> change-id: 20260313-clk-mtk-fix-priv-auto-size-a2bddd467f41
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
+On 3/13/26 9:49 AM, Julien Stephan wrote:
+> Le mar. 10 mars 2026 à 16:34, David Lechner <dlechner@baylibre.com> a écrit :
+>>
+>> Replace the hard-coded xtal rate for PLL parents with struct mtk_parent.
+>>
+>> This avoids declaring the same clock rate in multiple places and will
+>> allow future drivers to use an arbitrary clock.
+>>
+>> The variable is renamed to something that better indicate what the field
+>> is actually used for.
+>>
 
-Thank you for the quick fix!
+...
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+>> +enum {
+>> +       CLK_PAD_CLK26M,
+>> +};
+>> +
+> 
+> Can we define these enum values in a common header?
+> For example, CLK_PAD_CLK26M is defined in various different soc
+> specific drivers.
+
+I would rather not, they depend on which external clocks are available
+on a specific MCU. So they will rarely be the same. As you will see
+in the later patches, more are added and they aren't always the same.
+And the values need to be sequential for the lookup array, so we can't
+have one enum that works for all SoCs.
+
+> Also clk-mt8189.c uses defines instead of enum, so maybe we should
+> stay consistent.
+
+Hmm... I did that one first before I established the pattern. The values
+are arbitrary, which is why I went with the enum here. I can clean that
+up when I apply the patches.
+
+> 
+>> +static const ulong ext_clock_rates[] = {
+>> +       [CLK_PAD_CLK26M] = 26 * MHZ,
+>> +};
+>> +
