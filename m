@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADDB1107BCEA
-	for <u-boot@archiver.kernel.org>; Fri, 13 Mar 2026 23:40:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D39BFD88ED
+	for <u-boot@archiver.kernel.org>; Sat, 14 Mar 2026 06:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE4F0843FB;
-	Sat, 14 Mar 2026 00:40:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 84D538420C;
+	Sat, 14 Mar 2026 07:03:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DqRhyX8q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b31Xebaa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 364B084324; Sat, 14 Mar 2026 00:39:58 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 9D5918420D; Sat, 14 Mar 2026 07:03:07 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79C5284376
- for <u-boot@lists.denx.de>; Sat, 14 Mar 2026 00:39:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73F84841D5
+ for <u-boot@lists.denx.de>; Sat, 14 Mar 2026 07:03:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7d7653db148so1976970a34.2
- for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 16:39:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7d750eeaec3so1050937a34.0
+ for <u-boot@lists.denx.de>; Fri, 13 Mar 2026 23:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773445194; x=1774049994; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G41uQ7ErlOvxyCJueM6Ah49FRrscruwUK3R7PFZJ7xY=;
- b=DqRhyX8qQX1kMpbFmTaA83ExvDwAS9IumD/yPyi5hxlDP9cL79vzUjJcTD5FC7Gxxj
- bYD6yefXgQK4WDiVFZX6oJwOdWN60AN+S13uEWBkrNysCBPMDOYpiM0Oj32DkKm7o1MH
- OwCKLleq6Uy8v8PSk3DQGYiKUItsKdlBqSk1g=
+ d=gmail.com; s=20230601; t=1773468184; x=1774072984; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dpe3CQffiAyL70COgT390AJ91jJAW2iamb1sMWOCkx8=;
+ b=b31XebaaI4cSxycOujClay8m1BFJeH54KsxPr//ND7Yf4f+oqZez0tHCvF+da1s81u
+ Gn8hp5oaDOG6uvAoHp6pjUwUXYGj69ZX4Q2a1oPcWc+SZHvNsWE3mykvbi18syDugAJ/
+ lBU5h8oyniNUBpgBvu6pCIHYDzMLdig98zHxg1voqW2oWeA1wn9vin0h62QMcRxUfmb4
+ 1P1+Y8Bh5nP+62z2aU2U5T/A56vhkXM0qpusyCdFGE41QfMXDaOKjTCm3xyPnVX2UTvB
+ aDx/806kkUhuynu6Wze4HumLv/YdGKilGvq2kg+fvdXhA57k89DISNSABYmTNI7erndJ
+ XClw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773445194; x=1774049994;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=G41uQ7ErlOvxyCJueM6Ah49FRrscruwUK3R7PFZJ7xY=;
- b=NfIYGu94UrT77H/vAu+lg/Hm8EW5hphpdFCcsIEVlkwPUdD2K02W8IHRbHcEVLfC3T
- Lwi969KflhTjgZH8C1XkfIrQoSM3uoCF3yNGJIBo0FZEc8ohI/8NqpMJjM4WBE9cXw/m
- /bhZheYcJfFb5dFKpmBf+Du3eweZdc0g4DW/9lGBSJ79WsXBlqASCzjEUBWqcqGrn4Sk
- VagnwHwaKtCm+6ZGf57Ypnx+btj2YgXLC4RhgN/QTE9Z2/BX3WF3jZssp1mp5RzefONc
- mqFlBFjtKdJX/s3PNDvlgeIpFG/rTvJRLuxP8pKS54TwB0CZ+qEYgYCGw9ycqVsBOh5e
- vxdg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWMO5RfzOF8QpXuYvQAQc/bWZ5Ivuk7wTY56nNxfzVw17tmVQy2cd+eSiwtZqAhKYP0yMAnk8Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YyECsXdLltiUDkO2xDwUZRSnmW7m+L473Sa4u3X964PENeBTtdf
- /E+eYzbEbKHURClnrl2k49usajr4heG8rAz8lz2vdzhXrPw1KMVJYauj9J/hRe14vkRh6jK253O
- eMdb9Ox4=
-X-Gm-Gg: ATEYQzydph1k2Z6q9yG8uzKdn5135k2xG/18tEhbS8EDlJeXsw5k4jHQqGX+4MABp2n
- kM35nTjyraGnnTRmvl+tB4OQS0pvNFKpIEiN7TpLddpHChEj52wU3szhe6htv4rkgy4s9uTX1fH
- CeSaA/pDpx5I8QXNZdi6t00iSvF2iF6usK8lC3WnpD+jIarJ6XvzrzKZOasgh2UrPKOrsZ53+XX
- X+InwLi4y8T4E5UA+iJWr/uEcQbbCpvtuwFQ/JrtPVkJhp5kLGDFed1JvaUWKFAhFzaInoExw7t
- FZ87sPmmfEn0Qdv7QWJRVUmJvZHqImSl+D8kAbF8N1bs8/Ds+n1opwd0xX2rb9pBSfkWj8DK+ga
- w2hZb0yGQyS4T9OAVWZiB+HGijxOMOciQdN8InI5uaRK5Qb7Zc0yst3VO16ep/J6vmJmI62XGPD
- rSx+mwUtzqK0XGUctLrDrFw7Kkd0bbxWJJLt2u+yocPz5u16i6HAnfWGXJjMyaXGUKiJBfgjZxE
- l07dbUYiBy4J9gadQYFTEmwLr25wxrsLId8twMSyxLJcNk=
-X-Received: by 2002:a05:6830:f96:b0:7b8:f2a2:46b8 with SMTP id
- 46e09a7af769-7d782511758mr3505928a34.17.1773445194260; 
- Fri, 13 Mar 2026 16:39:54 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76aec4c8bsm8096892a34.25.2026.03.13.16.39.52
+ d=1e100.net; s=20251104; t=1773468184; x=1774072984;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dpe3CQffiAyL70COgT390AJ91jJAW2iamb1sMWOCkx8=;
+ b=rzB4VFmbvah4DMD1X0mUiYNyM5GdqV+kMexFwLF1hFefbMkLNZiG6n05RjoI4pblQ4
+ ZWP1v57HbBWNx9CvD5QNiAXEO2vb4tR5Q4LxVWJ8uacnpiIvttxQiiTlCNzlGuG77hVu
+ oO6OCMm3IkUrkPb1pD5Z23qq4gEqC3/B9edhs+D3gIDmaY+0SOGZ6XWGc/VRJbVS3JDL
+ 6EUA/GWkCgjiXiG1P5MQwVtGTSYxF4IrKka61XRqCvP5RANlMgNv2Fbxx4NF4B97GsdX
+ +NwnbQtmAYWQYCwMgk+d7l9O+Fy2TabHKLpisMaeZ7G4VfJ7yGEUiqM3iTGC84zBdR2W
+ NYMQ==
+X-Gm-Message-State: AOJu0YwUfWvnhU/L/zsc0+jq0lBLQBeaur/jMN11ABwk6t14+GlbCX16
+ 9BGv1QL+m9K+19LyJdXM0orKExhozNzoKx5hoYlPA/0W2JIdRBkOTxMk8UdwTg==
+X-Gm-Gg: ATEYQzxIoKcCa10Q9lARJXEemfQLFmE0MqnMe5LHX8qRZ6AEiGL8in+f9hvblAaMgd/
+ o4GvD6cSBs1yihLjMkZWInm9Z++3C4oaenM0tJ+c2X8kDPQGoTrNZgPpggmTn7GiKgadSVJoBDw
+ ViTxF3X1XPxMFE8h8UhjP77JQmbVS9ZMk5hbl7+C1LawzCe5VsfkyA3Usm10uKT+4lCqODZol6y
+ jsC9YSbrEdTwTfTSV/9FWjjfkvAnNKznySxClP3yOipsclGS78Qb8pkR8vt4cqmcytUOAA9xzXh
+ Fu6adapybnrtH36py0b2I318yM5LQQNUf6J25LktNve4kvhAF9xdIgJHnEKLyC0Qlf9JfLfHFBY
+ yQugJgNoGTJnGKdM7lFqK4FKE4MQCn7xq3HdVhpFnYyTcn4sIpq0ThHyXcSW2CYRhNu5QjsqdFz
+ 1r3cQ8u1LjZVIFjL0b+2TyjhH/42OxRmnhwurdP0Db7msJqIZd8QRVZLTJ2wILlbdaxRk5EPSdU
+ AqNrz85Br2y8I0QwbgSM4OzcaRSAekOhVlmvLzmXmVtk64nwGT3eoUTEdOr
+X-Received: by 2002:a05:6808:181b:b0:467:2dc5:f4cd with SMTP id
+ 5614622812f47-467570e9e73mr2837231b6e.27.1773468183777; 
+ Fri, 13 Mar 2026 23:03:03 -0700 (PDT)
+Received: from james-x399.localdomain (71-33-158-51.hlrn.qwest.net.
+ [71.33.158.51]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-46734160cebsm6051301b6e.7.2026.03.13.23.03.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Mar 2026 16:39:53 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-In-Reply-To: <20260309210234.521070-1-jonas@kwiboo.se>
-References: <20260309210234.521070-1-jonas@kwiboo.se>
-Subject: Re: [PATCH] rockchip: rk3568: Include all addressable DRAM in
- memory map
-Message-Id: <177344519289.1178192.5893817252414596602.b4-ty@konsulko.com>
-Date: Fri, 13 Mar 2026 17:39:52 -0600
+ Fri, 13 Mar 2026 23:03:03 -0700 (PDT)
+From: James Hilliard <james.hilliard1@gmail.com>
+To: u-boot@lists.denx.de
+Cc: James Hilliard <james.hilliard1@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Samuel Holland <samuel@sholland.org>,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ Liya Huang <1425075683@qq.com>, Cody Eksal <masterr3c0rd@epochal.quest>,
+ Icenowy Zheng <uwu@icenowy.me>, Mikhail Kalashnikov <iuncuim@gmail.com>
+Subject: [PATCH v2 1/2] dt-bindings: memory: allwinner: add sunxi DRAM type
+ constants
+Date: Sat, 14 Mar 2026 00:02:48 -0600
+Message-ID: <20260314060256.381642-1-james.hilliard1@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,22 +103,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 09 Mar 2026 21:02:32 +0000, Jonas Karlman wrote:
+Add constants for the Allwinner DRAM type values used by the H616 DRAM
+profile binding. This allows U-Boot DRAM profile nodes to describe
+allwinner,dram-type numerically instead of using string literals.
 
-> Rockchip RK356x supports up to 8 GiB DRAM, however U-Boot only includes
-> the initial 32-bit 0-4 GiB addressable range in its memory map,
-> something that matches gd->ram_top and current expected memory available
-> for use in U-Boot.
-> 
-> The vendor DRAM init blobs add following ddr_mem rk atags [1]:
-> 
-> [...]
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+---
+ include/dt-bindings/memory/sunxi-dram.h | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 include/dt-bindings/memory/sunxi-dram.h
 
-Applied to u-boot/next, thanks!
-
-[1/1] rockchip: rk3568: Include all addressable DRAM in memory map
-      commit: fab3b667b4128fae2d94752bb03088f84dafcf89
+diff --git a/include/dt-bindings/memory/sunxi-dram.h b/include/dt-bindings/memory/sunxi-dram.h
+new file mode 100644
+index 00000000000..c0a3201123a
+--- /dev/null
++++ b/include/dt-bindings/memory/sunxi-dram.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
++
++#ifndef _DT_BINDINGS_MEMORY_SUNXI_DRAM_H
++#define _DT_BINDINGS_MEMORY_SUNXI_DRAM_H
++
++#define SUNXI_DRAM_TYPE_DDR3		3
++#define SUNXI_DRAM_TYPE_DDR4		4
++#define SUNXI_DRAM_TYPE_LPDDR3		7
++#define SUNXI_DRAM_TYPE_LPDDR4		8
++
++#endif
 -- 
-Tom
-
+2.43.0
 
