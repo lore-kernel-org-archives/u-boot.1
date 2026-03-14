@@ -4,145 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE1F8105F79E
-	for <u-boot@archiver.kernel.org>; Sat, 14 Mar 2026 09:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB31106FD81
+	for <u-boot@archiver.kernel.org>; Sat, 14 Mar 2026 09:28:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23FA5842DF;
-	Sat, 14 Mar 2026 10:19:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 258B4842DF;
+	Sat, 14 Mar 2026 10:28:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="irDBZVmr";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="lNQNA/N1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E07A384332; Sat, 14 Mar 2026 10:19:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 801AC84332; Sat, 14 Mar 2026 10:28:00 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0B5E842CD
- for <u-boot@lists.denx.de>; Sat, 14 Mar 2026 10:19:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ACCC842CD
+ for <u-boot@lists.denx.de>; Sat, 14 Mar 2026 10:27:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1773479954; x=1774084754; i=xypron.glpk@gmx.de;
- bh=5r2XcWRUb9CSC9BjNY+OkLCnfKHE0Qb1IMeLGa64suI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=irDBZVmr/ydPhKT7FpnwBvNMYUyOQ9Hvst6l+Oo5g98OJInXYtTG61EPQ+QXj8uD
- 4fHWAjLw6N15GDu5cs8hBz/p4p8xFNw1kb//VyIzgrO+AMUNXwXwjdzJxKOLSMc9B
- dG8hiLD/0jPv/rfmKAjrACAS5LIF/per5YpNoIChuyaLSpizJ825M7Sec+bfz6XqQ
- tHfb5EQQ+I0WQroB8wLIkp+lwLLfNw1DsYtdmPaCnlzkOvP3FsGQZ/GSyqrcj8dyo
- GgnwuYe+16X+haHZaUrB7uIDjvY5fDiwAONA1/+Zn6puE46hSpmEGz8/eBLxLkyhH
- nx52WNt9WLQn3t2FTQ==
+ s=s31663417; t=1773480476; x=1774085276; i=xypron.glpk@gmx.de;
+ bh=ADR4XFwhSy3+07zswJXKYLwo2S0+7yTCQMDWoXIRkh8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=lNQNA/N1kUHjwCpRl6hdCfdei4K2X0BAwIPZgUVIdbKgVTIWNbsHNIk9dctvSWm2
+ ObmpOCU0uP7vUwrPh44Jedw0XUsJfzkWoQi8qNHMqz0WXfhOHppJShrkPWRGoalPJ
+ HoPR50Gc5xv0cs/gufmSxcn/UdSNbPDVaavwTIx5rkGNKs3/bkCjZM7ERtKt5ZfWE
+ /G7At6v0HVYh1U4ZLmGA72JhBRsqFU0CCpWvTOsjuMERYjAT45AC1h0GLFZw8fn+A
+ dq7HsDHSMATmhyndfPMcXspZbzAcSvbuJteRTM3l50XGMJWqqn9dCUKpCajMo/6vl
+ Vs3YP6c9F7Een1iYTQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from client.hidden.invalid by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MI5QF-1vnJ3t22gJ-00AKvC; Sat, 14
- Mar 2026 10:19:14 +0100
-Message-ID: <9334dd3b-3bf9-43f3-b711-235246f3c901@gmx.de>
-Date: Sat, 14 Mar 2026 10:19:08 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4zAy-1va1NI1rGu-015iOc; Sat, 14
+ Mar 2026 10:27:56 +0100
+Message-ID: <6a7870e8-bd72-4a6c-a513-0ed819db67b4@gmx.de>
+Date: Sat, 14 Mar 2026 10:27:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v11] efi_vars: Implement SPI Flash store
-To: Michal Simek <michal.simek@amd.com>
-Cc: Shantur Rathore <i@shantur.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@arm.com>, Tom Rini <trini@konsulko.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, git@amd.com,
- u-boot@lists.denx.de
-References: <8ee5fc7a49816d9e26f38999990aa1e4e354801f.1773416725.git.michal.simek@amd.com>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Shantur Rathore <i@shantur.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <8ee5fc7a49816d9e26f38999990aa1e4e354801f.1773416725.git.michal.simek@amd.com>
+Subject: [NEXT] Pull request efi-2026-03-14
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:5WFNd3JwIVkT+2ojCnVgOg8I9usWNflJHKbWF3ffCISMpZdyEyF
- Uwtm7fh77owkLaiiDnS6HDvWhc17/cL5lUT0W6e+A0ZhHFLKitLYAKSQWfaUt2K5luE8GDe
- vIBCUnPMn8dFbYgvYOFzbfNethhx7reUNtjZQlOIj16E/K7uStsqMOdhbxTL6I4qVA68FKc
- wLWccar54aBItcbR4F3Og==
-UI-OutboundReport: notjunk:1;M01:P0:TC0RGRDa5pk=;EDv5U81O7uWBFRX+PzqhgnxP8cF
- 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
- ffPnlORcsQt
+X-Provags-ID: V03:K1:D0rLN3ZmQv1Zx1bMP4CA3SCC0f9/PVkoRWYKAiQy/WnwcP5BeOT
+ xJUE2lmOAnehyRMmwcsSgVK2K2HswnFrsuvupwel3Vprfb6Pb8Op6ejSflzOWlyokfnbEvV
+ bJPQvoT0g6O5OiMeTldOM9kmqLzHUNAwaTpT7dbcg8Nwo4/UygR1FED6Sw60C+il0niWSqo
+ ZZzY1c/u8fqdC0CaJ2FZA==
+UI-OutboundReport: notjunk:1;M01:P0:3MR8nULm/Vs=;pT4+Tg9Sk+K5YQ9oPdifTaT9tBS
+ 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
+ c/BOXwzG9QsRDwrae4mL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,45 +151,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/13/26 16:45, Michal Simek wrote:
-> From: Shantur Rathore <i@shantur.com>
->=20
-> Currently U-Boot uses ESP as storage for EFI variables.
-> Devices with SPI Flash are used for storing environment with this
-> commit we allow EFI variables to be stored on SPI Flash.
->=20
-> Signed-off-by: Shantur Rathore <i@shantur.com>
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905D3-CC
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Dear Tom,
 
-Tested on StarFive VisionFive 2.
+The following changes since commit fab3b667b4128fae2d94752bb03088f84dafcf8=
+9:
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+   rockchip: rk3568: Include all addressable DRAM in memory map=20
+(2026-03-13 16:17:15 -0600)
 
+are available in the Git repository at:
 
-The next logical step will be to define a value like RTStorageVolatile=20
-and allow to select CONFIG_EFI_RT_VOLATILE_STORE.
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
+tags/efi-2026-03-14
 
-One way to define the location would be a SPI flash partition defined in=
-=20
-the device-tree. An EFI variable could provide the compatible property=20
-of the partition that efivar should write to.
+for you to fetch changes up to 8f83a4596677fe6a3f3b587b76d460644205a922:
 
-     partitions {
-         compatible =3D "fixed-partitions";
-         #address-cells =3D <1>;
-         #size-cells =3D <1>;
+   cmd/exception: missing include string.h (2026-03-14 08:36:53 +0100)
 
-         partition@c0000 {
-             compatible =3D "uboot-efivar";
-             reg =3D <0xc0000 0x20000>;
-         };
-     };
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/29512
 
-cf. Linux
-Documentation/devicetree/bindings/mtd/partitions/partition.yaml
+=2D---------------------------------------------------------------
+Pull request efi-2026-03-14
 
-Best regards
+UEFI:
 
-Heinrich
+* Require at least 128 KiB of stack space to use EFI sub-system.
+* Avoid buffer overrun in efi_var_restore().
+* Avoid superfluous variable store writes on unchanged data
+* Implement SPI Flash store for EFI variables.
+* Add an efidebug ecpt sub-command to display the ECPT table
+   and a unit test for the command.
+
+Others:
+
+* Add missing include string.h to make exception command build again.
+* lib: uuid: add EBBR 2.1 conformance profile GUID
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (3):
+       efi_loader: require at least 128 KiB of stack space
+       efi_loader: avoid buffer overrun in efi_var_restore()
+       cmd/exception: missing include string.h
+
+Michal Simek (1):
+       efi_loader: avoid superfluous variable store writes on unchanged da=
+ta
+
+Shantur Rathore (1):
+       efi_vars: Implement SPI Flash store
+
+Vincent Stehl=C3=A9 (4):
+       lib: uuid: add EBBR 2.1 conformance profile GUID
+       efi_loader: export efi_ecpt_guid
+       cmd: efidebug: add ecpt command
+       test/py: add ECPT tests
+
+  Kconfig                          |   8 +--
+  cmd/efidebug.c                   |  49 +++++++++++++++++
+  include/efi_loader.h             |   7 +++
+  include/efi_variable.h           |   8 ++-
+  include/exception.h              |   1 +
+  lib/efi_loader/Kconfig           |  35 ++++++++++++
+  lib/efi_loader/Makefile          |   1 +
+  lib/efi_loader/efi_conformance.c |   2 +-
+  lib/efi_loader/efi_runtime.c     |  24 +++++++++
+  lib/efi_loader/efi_var_common.c  |   4 +-
+  lib/efi_loader/efi_var_mem.c     |  29 +++++++++-
+  lib/efi_loader/efi_var_sf.c      | 111=20
++++++++++++++++++++++++++++++++++++++++
+  lib/efi_loader/efi_variable.c    |  27 ++++++----
+  lib/uuid.c                       |   6 +++
+  test/py/tests/test_efi_ecpt.py   |  42 +++++++++++++++
+  15 files changed, 338 insertions(+), 16 deletions(-)
+  create mode 100644 lib/efi_loader/efi_var_sf.c
+  create mode 100644 test/py/tests/test_efi_ecpt.py
