@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B48F30283
-	for <u-boot@archiver.kernel.org>; Sun, 15 Mar 2026 23:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A4FF30283
+	for <u-boot@archiver.kernel.org>; Sun, 15 Mar 2026 23:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9EE58444B;
-	Mon, 16 Mar 2026 00:51:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 99D9884462;
+	Mon, 16 Mar 2026 00:52:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="cwj6i6Ie";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LLuWGUb3";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bqEqfmN+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Z/fCQEw3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42B848445A; Mon, 16 Mar 2026 00:51:56 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id CE6BA84461; Mon, 16 Mar 2026 00:52:27 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AF9384440
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 00:51:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 563628446D
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 00:52:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,47 +32,48 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4fYw4B1DTZz9tQm;
- Mon, 16 Mar 2026 00:51:54 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4fYw4m1HPsz9tc2;
+ Mon, 16 Mar 2026 00:52:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773618714;
+ s=mail20150812; t=1773618744;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=RIUvFR8YZl9m64hai0iK4kZqX8dN742W56i7CX3xCDo=;
- b=cwj6i6IeNZ0b7CAGSIO2W3rYYzEN5BiHk1mZv7ivEhZcr/Hd3kbjOeo6eKNE/VPLDS4jdu
- s3ZiThBv777pqCKBbkdgsMpyYOYyPMDe/3D0n0sHrEUpuAF+JVMgfu/0MBhYBmdBjOxMqB
- Dq6J5Bq4epoPu7BAw1FjmkFvwCffnkXMoZgGlNjuoJyRLtUpIjICn17s2AbYzymdw87wzL
- F6EjferPkVvU5gOrzzy7NUhxZFIgeX8omscFVH/D/2+WZMH0N4IkVH9N30O5v/It5mWgYn
- CbOBjeOIQPgb/8PIyZNxlEBHXZtr4b9bn6GrdaEq4RyqwoRt3DdunJ0HNm30QQ==
+ bh=eYz2cJdpG1Yne/Id/Kcib+a014SZIAx3UleE2MYmafs=;
+ b=bqEqfmN+WprrlNrMlRngsGAk0WBvNX96L1+h5PwWuw2okTbsrGNyXrPrQ2gs/H0f3iDkxq
+ DN3e7UT3Uk8q8BicrTA4zRQNOOJCon7hDz5w/n866iR4qO0IXyV7q249ZmPoGKeQR+oZG/
+ kp+EdxzlUgJEl2xGkWExMIjZ8L2Yg+J93MDsV648rFS3kVjCrWH5Yyuor1P/o0SoWfBPHB
+ 5zonnxmKUNYTdtPb67EjPgO7X6dZGWPzEaq4ZHOJSgRkjxRcsFMC/sYs5Y1TM/2Y3484/4
+ fXk1jNja8dGRvMFVcTt6vu0dBtKMkhN7EBhCZDyOqph5izhztImNW20sDhpoAg==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=LLuWGUb3;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="Z/fCQEw3";
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
  designates 2001:67c:2050:b231:465::102 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773618713;
+ s=mail20150812; t=1773618743;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=RIUvFR8YZl9m64hai0iK4kZqX8dN742W56i7CX3xCDo=;
- b=LLuWGUb3ERRTVkXxPLgv6xvBg84aqfxJUoffy42/I3sm3G9WwEKZPYz6iPz63+/8T1Q80l
- SkufJ/QtywUEpNJPQZy+7ZQ7M2dlEGaLzsze2QQNzZfGIskzhXxVF7seSlyNEcO3lw0xxf
- Z55oKBaDFtrmmW+DW1zxKfTjS5G/hwDt6KOfx+8vvWhE2rzE/FrFpIolS9lzz4S52U846d
- CJc2/UilfxB27ShvUz6AYrxcusBUEosJ8plr6yU/c/IAEEwCSeE6pOSZJeT+CaV6Isg065
- f6/+PP+KihAG3uWMfuePCdoKg1SfvLu7V8yeb6EbTFfn3V0m9evYEN7uOw7gVw==
+ bh=eYz2cJdpG1Yne/Id/Kcib+a014SZIAx3UleE2MYmafs=;
+ b=Z/fCQEw3oFIcE+75RYDKOrTkIdvQV+VdfKurAbCDDwRU6mWmVS2DMnj2TkS/mZg+wJq87U
+ NLxADc1bQjtPLM5iQOBf1kZBvcY4YuY7Gh9CYZfpRtDg7JPm+B1IHfHRzkndfPQGJ9jXRl
+ aDQte55n9YVwPd1ooDp2t2687k+4b0FfsP2tmtbGZzKNq6XBIDXE5XiCdAUZ0sJZGYqnFY
+ E1pLT/jV4ckjcKptcOAa3K5Y4Wg9Jp/1kz8e5pHtygaQn6DcJuq6HjFWh/HkAKsvaBmEx8
+ kllP94cS1/AVREvO/6pobtkbyZszgdh4vgP2A890tacuCcpLpYoLtw18uS/j0g==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm: renesas: Enable modern HUSH parser on all R-Car systems
-Date: Mon, 16 Mar 2026 00:51:35 +0100
-Message-ID: <20260315235150.304538-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] arm64: dts: renesas: Disable SCIF1 in Renesas R-Car X5H
+ R8A78000 SoC DT
+Date: Mon, 16 Mar 2026 00:51:59 +0100
+Message-ID: <20260315235220.304562-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 1457e92fb5d2ce685c5
-X-MBO-RS-META: cb7uowk9o1mrhjk3mcst1jar651u5xdn
-X-Rspamd-Queue-Id: 4fYw4B1DTZz9tQm
+X-MBO-RS-META: so1465ggx1x84zkw37s1gi7okzhbmx7q
+X-MBO-RS-ID: 1998849fa5f514cdbeb
+X-Rspamd-Queue-Id: 4fYw4m1HPsz9tc2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,9 +90,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable modern HUSH parser on all Renesas R-Car systems. This replaces
-the old HUSH parser and includes matching updates to the command line
-parser. No functional change expected.
+Disable incorrectly enabled SCIF1 in Renesas R-Car X5H R8A78000 SoC DT.
+The SCIF1 should be enabled on board DT level in case it is needed, but
+should be disabled in SoC DT by default. This had no adverse effect on
+the currently upstream platforms, because those managed to probe only
+the HSCIF0 device and SCIF1 was ignored.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -98,22 +102,22 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- configs/renesas_rcar.config | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/dts/r8a78000.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/renesas_rcar.config b/configs/renesas_rcar.config
-index b3107d79b0e..1835eb1357f 100644
---- a/configs/renesas_rcar.config
-+++ b/configs/renesas_rcar.config
-@@ -21,6 +21,8 @@ CONFIG_DM_SPI_FLASH=y
- CONFIG_ENV_VARS_UBOOT_CONFIG=y
- CONFIG_FIT=y
- CONFIG_HUSH_PARSER=y
-+# CONFIG_HUSH_OLD_PARSER is not set
-+CONFIG_HUSH_MODERN_PARSER=y
- CONFIG_MTD=y
- CONFIG_OF_CONTROL=y
- CONFIG_PROT_TCP_SACK=y
+diff --git a/arch/arm/dts/r8a78000.dtsi b/arch/arm/dts/r8a78000.dtsi
+index 0d0c24503e2..89c2881fa94 100644
+--- a/arch/arm/dts/r8a78000.dtsi
++++ b/arch/arm/dts/r8a78000.dtsi
+@@ -763,7 +763,7 @@
+ 			interrupts = <GIC_SPI 4075 IRQ_TYPE_LEVEL_HIGH>;
+ 			clocks = <&dummy_clk_sgasyncd16>, <&dummy_clk_sgasyncd16>, <&scif_clk>;
+ 			clock-names = "fck", "brg_int", "scif_clk";
+-			status = "okay";
++			status = "disabled";
+ 		};
+ 
+ 		scif3: serial@c0708000 {
 -- 
 2.51.0
 
