@@ -4,50 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CC2F53D7E
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAE0F53D81
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DECEB84137;
-	Mon, 16 Mar 2026 19:10:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id E028184144;
+	Mon, 16 Mar 2026 19:24:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="BPjYdoxG";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="yTtZnCNQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18AC384178; Mon, 16 Mar 2026 19:10:51 +0100 (CET)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [72.51.58.38])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7FD3A84105; Mon, 16 Mar 2026 17:42:09 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C008C83FF9
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 19:10:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id 8F81084088
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 17:42:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=flipper.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=fTk/Cs/4PffL8yvbhes/PD+oHnJyyW6g4jvsScwK42c=;
- b=BPjYdoxGcFRBtgpUd/tcCViLb5/hWXWFnXhpVhhOCxzWglHQ9cWxs+WRdCL6xVxucz/lWs2lq+DwCqAOzKkEnw0VNBr0pUPl2VlY+tsJ/PzX0yVs1xGEc2Io4rbQssHlFvPb+wcY03UXeV36ADTkjmKEURb3tbg4K1ExVjm3mIdLuuNMs3NgbHioABLZdZcPgId/XaMEt5yU9fxtxBCPQssgfVbCwwZx/NBIoA3TTxH4whhAe4k3PlKO40
- i+XzsXmPolhHTY9Lp3gHrwZsiiZj78sbyPo48WcNJsYcDtloMc9SMmCvoVxpqVg70FqMBbbCaB1Peq65DkdLUbnRBPtg==
-Received: from TkB (188-24-192-137.rdsnet.ro [188.24.192.137])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Mon, 16 Mar 2026 18:10:39 +0000
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: u-boot@lists.denx.de
-Cc: Quentin Schulz <quentin.schulz@cherry.de>,
- Marius Dinu <m95d+git@psihoexpert.ro>
-Subject: [PATCH v2] usb: dwc2_udc_otg_phy: fix compilation on non-Exynos
- patforms
-Date: Mon, 16 Mar 2026 20:15:51 +0200
-Message-ID: <20260316181551.2109-1-m95d+git@psihoexpert.ro>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <55f2f0aa-669f-4825-9673-419504e89780@cherry.de>
-References: <55f2f0aa-669f-4825-9673-419504e89780@cherry.de>
+ spf=pass smtp.mailfrom=alchark@flipper.net
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-485445e80bdso42508505e9.0
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:42:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=flipper.net; s=google; t=1773679327; x=1774284127; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=i+DmVgQoyzj6fn5CSyGFNueCxPGLUBBy+IvUThTMHQ0=;
+ b=yTtZnCNQ/ddSjhZWKB0VGzeovULClNPuHUaLczHviUmCGt0ZdN6PtsIDhUX2AA2fqz
+ zkfjF5kQbISpjFHJTjGcwEcHJZJ8nMz201u2F2akeiHaXUizAe5InMF1ap5RQzMbyQjx
+ +9RdvyJUHKlKR3XzTjwML76iIQ/lawG3HTMuR5mBYHqmvjAqp1I3rztaFWsMsp3uNiJ4
+ L0d+q3kqSvzOHa5GJ8oYhjgqvyBijk/ADF6MPOPdqei6sOZu6/52ZNfcLP02ClUKnOCD
+ lF6azMsHy7iJSt+crdLXNFYA0HBGbjn8nc+J9x3zBZE2y3by9f3YwblIWUx2oTUN/PUM
+ fqTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773679327; x=1774284127;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i+DmVgQoyzj6fn5CSyGFNueCxPGLUBBy+IvUThTMHQ0=;
+ b=GBEBFHHc5LsYlUedODT4K79ZNnGJm3HI1ZvP9ZAmJMT50Wd+NGzQj91xwKFljLNu3a
+ maYYikMgA3D13IZliJ1tI2fEiPUv9dcBHiGfVKuSEfwngK8aPjs7bvqbQDmxX2YB/RHT
+ WG1F12d5XS7ygeS8jAooapG81DBhdQUYFp4vBHZzwyOWx6PlAZP3pjo1LVLIgGWtNfnn
+ Qc6eOptcdNUdEmaUvYUWqUUIyMTeW7Tjkio5LJtSm/9TApCigWeNtgWZn49CwLuUHSoI
+ BfHJfA6tpmBml9WO43ACfaQjDlLC24c7/Ue2gjR5Jj5nq1XJTBi1WujYxed3qgXO7gqv
+ AIeQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVl5mHfo5ku+MyIsF3Tv0wu4wKrAF8Rb0iRHQFqVUfqTkKS3B1ijP0yLPnhbGl8p2+3CS2VDfs=@lists.denx.de
+X-Gm-Message-State: AOJu0YydmXfS1TEri/UiYiKnpCSRYBXZH4HU5s948332AudxtpcGBnHy
+ QK/MmJ2AODhha40U5aqFkiJ3heEyUqbp9n1427CAWbj80cryZkJY6/uzDjoIbM8Ic+k=
+X-Gm-Gg: ATEYQzyr/mmglVkPZH9YTpQ+fVzXlUJeAcWt6whOpjfwwnSyDgZZHs+y4JubYodTun3
+ +XDEND3ukxLwRfFndXhKbHKj3qU1s8W/jiRXj4OldOfdiz3ppfG2yz7ukWwP+4X9dmrQuRs/xWS
+ Mvi3xwDPWQ6KcwdjYQtiL8Ejp2c1jvxrAyHrdzENBzoXDN5fkI4UNRLfVdv12KFTacS4boDCb6+
+ XgUMXrB+Jz9Nuc6Kg607gxf9Q+0yCIVDIl/r0IhNzBZCXT9t+6xo4KANCsUD+F82MfGx9HOkdgr
+ xe2mNtIYDjNTBUTBEWked1YJI+DKuMwUb35USeRwf+AYX4AqUTUt2LIeLQzNnS+nc5Qxznasikj
+ qECyf3jxMB4w5P72oMqPmTXLDnCsccuvKeUM0M4r9oWSEFp8OJIAJgsFW0DTgdB7Q58mFCHUV6L
+ litRwpGKXSbSLNub2E1bMZmXISi1M+uHLuzKmGXaRoM1QfVLJ2ohZeKMyUnJAAQhnJz2ToxzlPZ
+ G831w==
+X-Received: by 2002:a05:600c:8b29:b0:47a:7fd0:9eea with SMTP id
+ 5b1f17b1804b1-485566e314cmr235062765e9.3.1773679326946; 
+ Mon, 16 Mar 2026 09:42:06 -0700 (PDT)
+Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
+ [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4856ea98070sm3865885e9.6.2026.03.16.09.42.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Mar 2026 09:42:06 -0700 (PDT)
+From: Alexey Charkov <alchark@flipper.net>
+Date: Mon, 16 Mar 2026 20:41:50 +0400
+Subject: [PATCH] scsi: Fix oversized data length in scsi_inquiry()
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260316-scsi-inquiry-len-v1-1-a8176ee6620d@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAM0yuGkC/x3MSQqAMAxA0atI1gZahzpcRVxIjRqQqg2KUry7x
+ eVb/B9AyDMJtEkATxcLby5CpwnYZXAzIY/RkKnMqFwbFCuM7I6T/YMrOWwarWxRlWWtc4jZ7mn
+ i+192/ft+XqsOw2IAAAA=
+X-Change-ID: 20260316-scsi-inquiry-len-9910c4755813
+To: Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, 
+ u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Alexey Charkov <alchark@flipper.net>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1293; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=3m8tR5aS49zr8BFzadDLOVOQr2CU6D2K3F1zAu6e1Rg=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTuMLpTpDntb/G510qiFdGttSFTTh2pWCy0U+PYM5luR
+ albdVJXOyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
+ Q0MdYx0jBi5OAZjq4ukM/zO3B3xwMd6rHp05KWGS0B0F1jsMLnOlNv7ROxr9p7V2ej7D/4wH9hW
+ fspSE/2Xe3yd0xjxnS0q7Z9fJAHdPz2cawiHvWAA=
+X-Developer-Key: i=alchark@flipper.net; a=openpgp;
+ fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
+X-Mailman-Approved-At: Mon, 16 Mar 2026 19:24:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,32 +118,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-s5p_cpu_id used in drivers/usb/gadget/dwc2_udc_otg_phy.c is undefined on
-platforms other than Exynos.
+scsi_detect_dev() sets the inquiry data length to 512, but
+scsi_setup_inquiry() only sets the command up with a 255 byte length.
 
-Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
+This causes some SCSI devices such as the Foresee FEUDNN064G-C2G07 UFS
+chip to fail to respond to the inquiry command, preventing its detection.
+
+Set the data length to the size of the scsi_inquiry_resp structure, which
+is the maximum amount of data that scsi_setup_inquiry() will request.
+
+Fixes: 570712f4bcc4 ("scsi: Extract device detection algorithm")
+Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- drivers/usb/gadget/dwc2_udc_otg_phy.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/scsi/scsi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg_phy.c b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-index e0ac5d142b0..c56ff1125bd 100644
---- a/drivers/usb/gadget/dwc2_udc_otg_phy.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg_phy.c
-@@ -56,10 +56,12 @@ void otg_phy_init(struct dwc2_udc *dev)
- 	else /* C110 GONI */
- 		clrbits_le32(&phy->phypwr, OTG_DISABLE_0 | ANALOG_PWRDOWN | FORCE_SUSPEND_0);
- 
-+#if defined(CONFIG_ARCH_EXYNOS) || defined(CONFIG_ARCH_S5PC1XX)
- 	if (s5p_cpu_id == 0x4412)
- 		clrsetbits_le32(&phy->phyclk, EXYNOS4X12_ID_PULLUP0 | EXYNOS4X12_COMMON_ON_N0,
- 				EXYNOS4X12_CLK_SEL_24MHZ); /* PLL 24Mhz */
- 	else
-+#endif
- 		clrsetbits_le32(&phy->phyclk, ID_PULLUP0 | COMMON_ON_N0,
- 				CLK_SEL_24MHZ); /* PLL 24Mhz */
- 
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index 8fe6b38a8c74..6a3a91b1d32b 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -513,7 +513,7 @@ static int scsi_detect_dev(struct udevice *dev, int target, int lun,
+ 	pccb->target = target;
+ 	pccb->lun = lun;
+ 	pccb->pdata = tempbuff;
+-	pccb->datalen = 512;
++	pccb->datalen = sizeof(struct scsi_inquiry_resp);
+ 	pccb->dma_dir = DMA_FROM_DEVICE;
+ 	scsi_setup_inquiry(pccb);
+ 	if (scsi_exec(dev, pccb)) {
+
+---
+base-commit: 841856ed9675b26ec517fdd00b5cc0aef8db508e
+change-id: 20260316-scsi-inquiry-len-9910c4755813
+
+Best regards,
 -- 
-2.52.0
-
+Alexey Charkov <alchark@flipper.net>
 
