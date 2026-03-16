@@ -4,53 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3731F013CA
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 08:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A311F013E6
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 09:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43E1C83FAF;
-	Mon, 16 Mar 2026 09:35:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id DDB9583A1B;
+	Mon, 16 Mar 2026 10:21:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="olYuH+lQ";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9A0A83FB6; Mon, 16 Mar 2026 09:35:18 +0100 (CET)
-Received: from Atcsqr.andestech.com (unknown [60.248.187.195])
+ id 4634A83F8A; Mon, 16 Mar 2026 10:21:18 +0100 (CET)
+Received: from mx1.wiredblade.com (mx1.wiredblade.com [72.51.58.38])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C5FB83F53
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:35:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2358C83015
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 10:21:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTP id 62G8YwYY075495;
- Mon, 16 Mar 2026 16:34:58 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Mar
- 2026 16:34:58 +0800
-Date: Mon, 16 Mar 2026 16:34:55 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: E Shattow <e@freeshell.de>
-CC: Minda Chen <minda.chen@starfivetech.com>, Hal Feng
- <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] doc: board: starfive: jh7110 common update OPENSBI build
- env reference
-Message-ID: <abfApgyy_SI35XOA@swlinux02>
-References: <20260305214922.97337-1-e@freeshell.de>
+ spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
+dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
+ c=relaxed/relaxed; q=dns/txt;
+ h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
+ bh=EUMAn9HA1y3GUyfs+LD9aW/3xQ0s7OaqbuYllx26TK8=;
+ b=olYuH+lQPUS+qDZQooO4UG3MGWMGuf1BwXgAYrXItKPwGIl6gsaNEd1m5biN8uv2kzzFDZHCK+4xmsQhB+VdzBjomaimrM4Gyp8mhRyQ4PZNCAi0z1G2E0eVKRITWPicBPLbP+gwAJwbW6aAB7mUq8JFJ5ZPSog6cfUO96WB6SSYX3CyRmiP8/tBO2KbCQD8S4yR3fSP4jQgye1Ot2foBYuGbwHhB7V42EyaYbipegRos6ftD8WHGzfkZy
+ gDclqpmUeOOGXmLN2N6npB7b+2JKNvE0gfWtJl70wl9MKU8QUmuJWjn6DfqDcHB+ujpchiliW8fQ00nVCBp/P45L4/TA==
+Received: from TkB (188-24-192-137.rdsnet.ro [188.24.192.137])
+ by mx1.wiredblade.com with ESMTPSA
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
+ ; Mon, 16 Mar 2026 09:21:08 +0000
+From: Marius Dinu <m95d+git@psihoexpert.ro>
+To: u-boot@lists.denx.de
+Cc: Marius Dinu <m95d+git@psihoexpert.ro>
+Subject: [PATCH] USB: dwc2: allow usb start even if usbphy is not found
+Date: Mon, 16 Mar 2026 11:26:39 +0200
+Message-ID: <20260316092639.2377-1-m95d+git@psihoexpert.ro>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20260305214922.97337-1-e@freeshell.de>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 62G8YwYY075495
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,21 +60,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 05, 2026 at 01:49:14PM -0800, E Shattow wrote:
-> Describe build with OpenSBI fw_dynamic.bin path as OPENSBI=<path> on the
-> same line instead of as an export. Also remedy a typo which had the wrong
-> directory path before the filename.
-> 
-> Fixes: 8304f3226700 ("doc: board: starfive: update jh7110 common description")
-> Signed-off-by: E Shattow <e@freeshell.de>
-> ---
-> 
-> This patch depends on https://lore.kernel.org/u-boot/24982c23-3ee6-4e33-8608-5af6dd612297@freeshell.de
-> 
-> -E
-> 
-> ---
->  doc/board/starfive/jh7110_common.rst | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+RK3288 uses rockchip_usb2_phy, but that driver doesn't register iself
+as a usbphy driver and "usb start" fails with this error:
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+  drivers/usb/host/dwc2.c:1254- dwc2_setup_phy() dwc2_usb usb@ff580000:
+  Failed to get USB PHY: -19.
+
+Until a proper fix is made for rockchip_usb2_phy, this patch allows
+usb start to continue even if usbphy is not found.
+
+Tested on Asus TinkerBoard.
+
+Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
+---
+ drivers/usb/host/dwc2.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+index 16f21fa9083..74d71f23d88 100644
+--- a/drivers/usb/host/dwc2.c
++++ b/drivers/usb/host/dwc2.c
+@@ -1329,7 +1329,7 @@ static int dwc2_usb_probe(struct udevice *dev)
+ 
+ 	ret = dwc2_setup_phy(dev);
+ 	if (ret)
+-		return ret;
++		dev_dbg(dev, "Failed to setup PHY: %d. Continuing anyway...\n", ret);
+ 
+ 	return dwc2_init_common(dev, priv);
+ }
+@@ -1345,8 +1345,7 @@ static int dwc2_usb_remove(struct udevice *dev)
+ 
+ 	ret = dwc2_shutdown_phy(dev);
+ 	if (ret) {
+-		dev_dbg(dev, "Failed to shutdown USB PHY: %d.\n", ret);
+-		return ret;
++		dev_dbg(dev, "Failed to shutdown USB PHY: %d. Continuing anyway...\n", ret);
+ 	}
+ 
+ 	dwc2_uninit_common(priv->regs);
+-- 
+2.52.0
+
+
