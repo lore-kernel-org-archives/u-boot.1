@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5F71F013FA
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 21:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D82F013FA
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 21:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81A45841CF;
+	by phobos.denx.de (Postfix) with ESMTP id BE1448423C;
 	Mon, 16 Mar 2026 22:55:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PkG7qNmS";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="k9cqW3xK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C318884221; Mon, 16 Mar 2026 22:55:51 +0100 (CET)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 70FEA8422D; Mon, 16 Mar 2026 22:55:52 +0100 (CET)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C03D84201
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 22:55:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4788D8414E
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 22:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-41708e43f61so1726071fac.1
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 14:55:49 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-40f1ffba6a0so3003804fac.0
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 14:55:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773698148; x=1774302948;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773698149; x=1774302949;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CfYZNCtV9OQ4ecTRu7DE+nTZi5RBhyep6GrSkNvYwFU=;
- b=PkG7qNmSLn3a6+Keq/FxjZd+e8KiPUfw9DeXpKTGkMdAEFCPeTk060fJHQmpM5BHYy
- ZGqX0K0bmisOUm9fk5z2tJxL8ziu5ViEkuZyBHj/D1em1Nv4qXeEgd3B35x88mr/ZEVa
- VPsUFNhPb7SIoc1q61JiCMRN66oge921+2CmGQ1IDJ3qGz4/qCIoB9k55VHCwAjVS1Ee
- y/sRc0TARjZheJ2Gp1DNmVkDnWZQaEm2od5fVsT62B2kgqG/OaNCpLgFPFpeD1V1CBPq
- z74/CMIm2QuHhapqwuAETE2Tn04pqKlzCJDLYtrYm7ycF25PtXTHeUHIQ+j704OqOjmT
- F6VQ==
+ :reply-to; bh=jiDPpvqRfGQbwA7xH/eLjfFPTUqjKarTJ5M0ShRh+g4=;
+ b=k9cqW3xKNaSZeQzmKVopPguH3DHFz6T2dJrQTAK0tO3lZcfcxJxAv29XAHguzkTpo9
+ +3bmrnU++X56lZ9uzQq79smO0jvI91D575ZKW1OgKc2ZQf8TY6ouCDzNaF/wFbrKVAqa
+ mwj8uSDAcs9NjCsUYE3VkHsD5gfg3BURmiAEey4m3xvaUWaMBPKXAAzgU1r2Z7tGls07
+ r3dDi8a9jAqHXn5x6iJeQvr1wShNXGYio204SackOZ1xnFmr5ace2Ak9pntr3ggExW5u
+ a1GD2g2cEbXRxsLeHB1KxcjXnQ/0Z0t6WpYj0uskjp4BlVjxiHfC/Wh2oNM0atHGrQu9
+ m3oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773698148; x=1774302948;
+ d=1e100.net; s=20251104; t=1773698149; x=1774302949;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=CfYZNCtV9OQ4ecTRu7DE+nTZi5RBhyep6GrSkNvYwFU=;
- b=DLENR5BRgwfvGg6zf0t2rUzWAI1nAt4KKGDVT9k/6/wB3aFSiI2bwqWflqFuI6gOpK
- N+Ocf8iXyFTEgztnDw3zA30jwIykf8G/OBwlEsgvcFCMiFihuL9eugmKE1KUnrEwi8KM
- vK7QGXtqwvdfLk7S1AfRM5U1ckEQGEBus91qtTFVwcA1fqXN3jZtRQug/FqefTQ+1aAC
- EPDZ78SkhPSp1H4vJJK1hsJMdrCso6qKBLLb88N8dOUQf9VXcIg03geRRSOLNqX6rPfI
- jxFdgpDjL3Sk7LdDdIH+cIHy4xlMlrFjF5fMtbAo0UM+TBgX3piifHBqvlXQod48vtvD
- YQUA==
+ bh=jiDPpvqRfGQbwA7xH/eLjfFPTUqjKarTJ5M0ShRh+g4=;
+ b=RgQxnm9wke2T68MXkfnmecNI7RdcU5tAO/PrOOFnSSnX3Ja9sZduKtKh7BfjCkfZ2I
+ L1kQiNOvQeJc5e4aZQqDVgDNrqbnqit57/5Ltn7pGSnlKcc5v//JqelYxm4LC3+dfU+v
+ no3KtAzzg/gdTnuaKO6QGzcQ15Dn7A7pLS4osb4B/siL4HCRHUbiiZaUijkZxxn2N0W6
+ 0wbwvJpZNlQDbVbbPNyBkyb7M6nyZ+kmNDiuKusQJ6zlX2HTm+/5kWe3wv+rbmgWYDTX
+ twbJCwaOM2W5c+O23J12ZxiKFPUMwHUEgbJcXtuN4IMjrAl5D20+zgX/yMnOKnYudyw3
+ MNxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMor1sdgp8ZScrLl2PBIn5ahqw522qkNsudIVOxJNjJ90OrDKXI7KIq5GmbgGN5ZzAMAD2wio=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+UgYQAcIvUl9tw4onh5AMUKpJQKNVle98KaAjPHqduZPa4dHJ
- KENB8sbwkkhBmi1GZIBp/pmxrpEQUDDOvZ9npPUoR2g/VpAhfi+rvO3AMhw8g4PtZJo=
-X-Gm-Gg: ATEYQzxxiIXwu+thi4qmmkAemClRhOJGVfPyaRiZ+4lYn1bmbx5kc8NLT3A28+4BgGV
- YAPpazpa18L50Tv2r5FTyxqeF4mwK8J7kcuX9Op/tCq5VG7P6tV+oGNzFVu91UU8XIe81/xBoEy
- Ue0ZQFz8vanq/tlTY99j6OjPBlxE5jneAzN7wjh+dQtWommrSaDOi5Ku8PyQwS+JkTaEyc2EQ+I
- p+56Y6Dc7Y0T3WIk8eooPwwaAYhdfWoS4T/CKmufzZ5rjg/xPgklO12cwH1kjr8Xc7ndvQxIRCD
- MBdMAElesHaG6lEiQHsc/J3WvdYUZfDzouEK5+o/HlwcfjT4Jiw7NQ5RYO7mR5QpY28hAj6MHP7
- wNEDliP7Wm8mQvpp/xHSOXU/V8X1cElT1qKUPxUKj3upDJNEmMIoMsmVgqOkUzDU4FmsvxQy64j
- Pms5fxpjAmEistPG6Lc4pflL73pSs=
-X-Received: by 2002:a05:6870:2391:b0:417:837:6360 with SMTP id
- 586e51a60fabf-417b938fc20mr7894811fac.29.1773698147924; 
- Mon, 16 Mar 2026 14:55:47 -0700 (PDT)
+ AJvYcCWGYxpDfuU4LY0bL5tqzqyjJ+5MPHoOhdKcNjMdorv9cOrQeZ5oNP4zGYYESpr2HhfL2MPZcao=@lists.denx.de
+X-Gm-Message-State: AOJu0YxaIgVRPkMy7suph0Lu9p4pey+1Az1lxEsuKMkI4mn9S6pLw+qy
+ WYxmKHPNtBsmvBMJIxWD++TlrcGlC/vXo8lWA9wpNualOjpS65gnpsA+oUKElOHSsEQ=
+X-Gm-Gg: ATEYQzwvM0rVx5ID93yn6Iaw+i95aN90QISV5wpLpBiWDzi5O04w9Ao7K/N8L05VQhv
+ t3FBjqpi25xzJ6uq614syVrhcTDV7BRMsBSlL8rMJ4/8fmG59gKaMnaBk5LIbRk18WUdSExbozh
+ H1P5IlQc3zQUvvBQVVnGJfkqPGXcAnns2gZv90ws8eZEV7lCQmCHbyQb9gqULhEs2GrJs2FOWeL
+ UKN/f8e0r6IM9Zpc0S1Drd4AT6OU4UTsmecRFwBqLF1Pev33bCccAk1o+5Zryi1W/Rx578hknDG
+ mb1nghN2CR7BykZIK0o8lhg1ZpoUJWPHCtCOpSzka9Fsjg+FtfSLua5LX6V1Kkc7A5O84tmR5iQ
+ u8lfmR8XvLx6ykssoTHT0tISckgn/ziZFOJuJ+8mFP5K0DAn72DoI7EjyFdJF78GnJ1xiX48rkR
+ Tt4Kx1azpLOeAFcGg+aveH2h0CnO4=
+X-Received: by 2002:a05:6870:ad0c:b0:3fa:aa1:5b1c with SMTP id
+ 586e51a60fabf-417b9399102mr9754769fac.30.1773698148914; 
+ Mon, 16 Mar 2026 14:55:48 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:6995:28aa:eeda:102])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41791432d87sm17978547fac.1.2026.03.16.14.55.47
+ 586e51a60fabf-41791432d87sm17978547fac.1.2026.03.16.14.55.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 14:55:47 -0700 (PDT)
+ Mon, 16 Mar 2026 14:55:48 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Mon, 16 Mar 2026 16:55:15 -0500
-Subject: [PATCH 2/3] arm: dts: add U-Boot overrides for Genio 520 and 720
- SD card
+Date: Mon, 16 Mar 2026 16:55:16 -0500
+Subject: [PATCH 3/3] configs: mt8189: enable GPIO support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260316-mtk-ext-mmc-boot-v1-2-1aae51a44705@baylibre.com>
+Message-Id: <20260316-mtk-ext-mmc-boot-v1-3-1aae51a44705@baylibre.com>
 References: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
 In-Reply-To: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
 To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
@@ -90,17 +89,17 @@ To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2869; i=dlechner@baylibre.com; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=869; i=dlechner@baylibre.com; 
  h=from:subject:message-id;
- bh=YZbzblvE8Zo6ibCs6KVL99La42BVPuN+DE8H/QNnKog=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpuHxUhTrgOoPqQ87g8QbAIGUhO8n+QDaANL55m
- n8xRZ3mQWuJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabh8VBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ayo0IAJjrw0T6huNKl1k+NXqYvxXkc/lR613ygEB5rmK
- b/vb75bK0gFt3/wpGjDmM1ag3sZPrBs00H8PtzDE7t0dpJFu/5g2KdVZbZ2f4t1sdlILZ29Vzrr
- xMMcWlTRWAXPrUJDXDXkCxvtpeITUq4z4au0qgw/dZAtBnuQv62mxVzaGTN9lM80KDmOoQNaPqk
- mTTqvPp2zN+w8jdUdY4N4JkBtFUsIY6kBBcxujnz250Xyya9+JUyPHy96zYYirfu9suRNSSTb7N
- T/NKQFLE9eMVzBT/7DYfExAOhj6XV/Ak4cOkP+GJ6IrvnLcuS4CpEFiT+FVNJAFJUFaS9/YOags
- yNYk=
+ bh=SM+Zfs3KwXnTf8HYY3IsVjIHrgQuQlWM27/gjjL/deU=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpuHxbYnHUkVG/mpGk9QCKbbuxJ1ogKNOIU4GfX
+ 9fX6LbzfG2JAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabh8WxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/Ayq8H+wbpPsJIvYEZ7xYkQ6+3981Nud0Db0wLxQskoCp
+ DcZQowlxRH5e09V/H78j8oaKefJo4kWS0ZLVL53sKIsL72oieKiQkPb+S5i7jVeOP8sKjWzJ3y2
+ kdinoaQrXOUxhJgXnvZyFR8EoqZJDe99ry7wiSsvp5EsDAwNsAOtM9blGeHdVIG4wQR96GqQuYP
+ WHxgULmS+4ENOTVoCniIHPB288H+3vOg3vkfQkM0dzlPdEIQavPofNvxj8uiPnQySRbCUrEGA+A
+ qj58E2EqNqAnTH22Bw5Dnvfmrx5hshgaG+3+vGrC/hPfZYfS4o8VznQ0I5DwxB8fOxtklkA2kHX
+ +m8E=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -119,86 +118,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add U-Boot-specific device tree overrides for the Genio 520 and 720 EVK
-boards. These are needed to enable SD card support in U-Boot due to
-current driver limitations. It is expected that these files will remain
-after eventually converting these to CONFIG_OF_UPSTREAM, so we use
-separate .u-boot.dtsi files for this.
+Enable GPIO support for mt8189-based boards. This is needed for U-Boot
+to be able to use the SD card slot on the board (for the CD pin).
 
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi |  3 +++
- arch/arm/dts/mt8371-genio-common-u-boot.dtsi  | 28 +++++++++++++++++++++++++++
- arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi |  3 +++
- board/mediatek/MAINTAINERS                    |  3 +++
- 4 files changed, 37 insertions(+)
+ configs/mt8189.config | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi b/arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
-new file mode 100644
-index 00000000000..a69e2db5a04
---- /dev/null
-+++ b/arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR MIT)
-+
-+#include "mt8371-genio-common-u-boot.dtsi"
-diff --git a/arch/arm/dts/mt8371-genio-common-u-boot.dtsi b/arch/arm/dts/mt8371-genio-common-u-boot.dtsi
-new file mode 100644
-index 00000000000..b7a0c0a82a7
---- /dev/null
-+++ b/arch/arm/dts/mt8371-genio-common-u-boot.dtsi
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR MIT)
-+/*
-+ * Copyright (C) 2026 MediaTek Inc.
-+ */
-+
-+&mmc1 {
-+	/* U-Boot driver doesn't support UHS yet. */
-+	/delete-property/ sd-uhs-sdr50;
-+	/delete-property/ sd-uhs-sdr104;
-+	mmc-no-1-8-v;
-+};
-+
-+/*
-+ * Needed to trigger U-Boot auto-set-voltage. Default voltages for these
-+ * supplies at boot are incorrect and U-Boot MMC drivers don't set them.
-+ */
-+
-+&mt6359_vpa_buck_reg {
-+	regulator-min-microvolt = <3000000>;
-+	regulator-max-microvolt = <3000000>;
-+	regulator-always-on;
-+};
-+
-+&mt6359_vsim1_ldo_reg {
-+	regulator-min-microvolt = <3000000>;
-+	regulator-max-microvolt = <3000000>;
-+	regulator-always-on;
-+};
-diff --git a/arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi b/arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
-new file mode 100644
-index 00000000000..a69e2db5a04
---- /dev/null
-+++ b/arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR MIT)
-+
-+#include "mt8371-genio-common-u-boot.dtsi"
-diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-index 4f371592059..49041c8899b 100644
---- a/board/mediatek/MAINTAINERS
-+++ b/board/mediatek/MAINTAINERS
-@@ -1,6 +1,9 @@
- MT8189/MT8371/MT8391 EVK
- M:	Macpaul Lin <macpaul.lin@mediatek.com>
- S:	Maintained
-+F:	arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi
-+F:	arch/arm/dts/mt8371-genio-common-u-boot.dtsi
-+F:	arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi
- F:	configs/mt8189.config
- F:	configs/mt8371_genio_520_evk_defconfig
- F:	configs/mt8391_genio_720_evk_defconfig
+diff --git a/configs/mt8189.config b/configs/mt8189.config
+index 966d05d1a03..0c158cd9430 100644
+--- a/configs/mt8189.config
++++ b/configs/mt8189.config
+@@ -5,6 +5,7 @@ CONFIG_ARCH_MEDIATEK=y
+ CONFIG_TEXT_BASE=0x4c000000
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_GPIO=y
+ CONFIG_TARGET_MT8189=y
+ CONFIG_MTK_MEM_MAP_DDR_SIZE=0x200000000
+ CONFIG_SYS_LOAD_ADDR=0x4c000000
+@@ -12,6 +13,7 @@ CONFIG_FIT=y
+ CONFIG_BOOTSTD_FULL=y
+ # CONFIG_BOARD_INIT is not set
+ CONFIG_CMD_CLK=y
++CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PMIC=y
 
 -- 
 2.43.0
