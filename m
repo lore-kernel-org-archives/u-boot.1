@@ -4,101 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAE0F53D81
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CDEBF53D85
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:24:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E028184144;
-	Mon, 16 Mar 2026 19:24:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 384E58416C;
+	Mon, 16 Mar 2026 19:24:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=flipper.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="yTtZnCNQ";
+	dkim=pass (2048-bit key; unprotected) header.d=flipper.net header.i=@flipper.net header.b="OfeSwfSP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FD3A84105; Mon, 16 Mar 2026 17:42:09 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 5137784118; Mon, 16 Mar 2026 17:50:55 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F81084088
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 17:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63E1384109
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 17:50:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=flipper.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alchark@flipper.net
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-485445e80bdso42508505e9.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:42:07 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-48334ee0aeaso42374335e9.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:50:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=flipper.net; s=google; t=1773679327; x=1774284127; darn=lists.denx.de;
+ d=flipper.net; s=google; t=1773679853; x=1774284653; darn=lists.denx.de;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=i+DmVgQoyzj6fn5CSyGFNueCxPGLUBBy+IvUThTMHQ0=;
- b=yTtZnCNQ/ddSjhZWKB0VGzeovULClNPuHUaLczHviUmCGt0ZdN6PtsIDhUX2AA2fqz
- zkfjF5kQbISpjFHJTjGcwEcHJZJ8nMz201u2F2akeiHaXUizAe5InMF1ap5RQzMbyQjx
- +9RdvyJUHKlKR3XzTjwML76iIQ/lawG3HTMuR5mBYHqmvjAqp1I3rztaFWsMsp3uNiJ4
- L0d+q3kqSvzOHa5GJ8oYhjgqvyBijk/ADF6MPOPdqei6sOZu6/52ZNfcLP02ClUKnOCD
- lF6azMsHy7iJSt+crdLXNFYA0HBGbjn8nc+J9x3zBZE2y3by9f3YwblIWUx2oTUN/PUM
- fqTg==
+ bh=M1MWTKuVAsQAHQGdPhGFVNpeuqfiR6w1gPMRXx8f6mE=;
+ b=OfeSwfSPsAk71UPhzsEc4/cJU32Pn7GN7XkxgEPaFK9c4CJyEyhDK2aKo5K0uM6D1E
+ K6+HmT3oX09xdRTzqVIVB0snse1xRaWRwjxa/hXiePaABp3ZtP6voSrJ4ohwzU63p9T7
+ mx9XhwoDBqgEMOS/B6e+YBPkJcEtv1TQ6O6bqfZohpqFEAJTEIXHNOqaWckZVW2O4h2i
+ 7TKBCli6K5LkoKv4a9HCoaQRuBzUyLVtXonDJOjNfSAcxO+A1wAEzUTkgx3FOOL4YRFM
+ Sm3US3YQZ3f2u4LUeuwmiZaDM5sK5Q6fQDDv0K8D5j3hfAB3RH/iTfq8CMHihH4Q763C
+ hprA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773679327; x=1774284127;
+ d=1e100.net; s=20251104; t=1773679853; x=1774284653;
  h=cc:to:message-id:content-transfer-encoding:mime-version:subject
  :date:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i+DmVgQoyzj6fn5CSyGFNueCxPGLUBBy+IvUThTMHQ0=;
- b=GBEBFHHc5LsYlUedODT4K79ZNnGJm3HI1ZvP9ZAmJMT50Wd+NGzQj91xwKFljLNu3a
- maYYikMgA3D13IZliJ1tI2fEiPUv9dcBHiGfVKuSEfwngK8aPjs7bvqbQDmxX2YB/RHT
- WG1F12d5XS7ygeS8jAooapG81DBhdQUYFp4vBHZzwyOWx6PlAZP3pjo1LVLIgGWtNfnn
- Qc6eOptcdNUdEmaUvYUWqUUIyMTeW7Tjkio5LJtSm/9TApCigWeNtgWZn49CwLuUHSoI
- BfHJfA6tpmBml9WO43ACfaQjDlLC24c7/Ue2gjR5Jj5nq1XJTBi1WujYxed3qgXO7gqv
- AIeQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVl5mHfo5ku+MyIsF3Tv0wu4wKrAF8Rb0iRHQFqVUfqTkKS3B1ijP0yLPnhbGl8p2+3CS2VDfs=@lists.denx.de
-X-Gm-Message-State: AOJu0YydmXfS1TEri/UiYiKnpCSRYBXZH4HU5s948332AudxtpcGBnHy
- QK/MmJ2AODhha40U5aqFkiJ3heEyUqbp9n1427CAWbj80cryZkJY6/uzDjoIbM8Ic+k=
-X-Gm-Gg: ATEYQzyr/mmglVkPZH9YTpQ+fVzXlUJeAcWt6whOpjfwwnSyDgZZHs+y4JubYodTun3
- +XDEND3ukxLwRfFndXhKbHKj3qU1s8W/jiRXj4OldOfdiz3ppfG2yz7ukWwP+4X9dmrQuRs/xWS
- Mvi3xwDPWQ6KcwdjYQtiL8Ejp2c1jvxrAyHrdzENBzoXDN5fkI4UNRLfVdv12KFTacS4boDCb6+
- XgUMXrB+Jz9Nuc6Kg607gxf9Q+0yCIVDIl/r0IhNzBZCXT9t+6xo4KANCsUD+F82MfGx9HOkdgr
- xe2mNtIYDjNTBUTBEWked1YJI+DKuMwUb35USeRwf+AYX4AqUTUt2LIeLQzNnS+nc5Qxznasikj
- qECyf3jxMB4w5P72oMqPmTXLDnCsccuvKeUM0M4r9oWSEFp8OJIAJgsFW0DTgdB7Q58mFCHUV6L
- litRwpGKXSbSLNub2E1bMZmXISi1M+uHLuzKmGXaRoM1QfVLJ2ohZeKMyUnJAAQhnJz2ToxzlPZ
- G831w==
-X-Received: by 2002:a05:600c:8b29:b0:47a:7fd0:9eea with SMTP id
- 5b1f17b1804b1-485566e314cmr235062765e9.3.1773679326946; 
- Mon, 16 Mar 2026 09:42:06 -0700 (PDT)
+ bh=M1MWTKuVAsQAHQGdPhGFVNpeuqfiR6w1gPMRXx8f6mE=;
+ b=UYQtH78Njw50XaT6qT/xbjMFJKd7+09EAvnpge4i+SnaNGVRwj95q1g3xQLQNSTu+Y
+ 2eis6s9n+8yP/m6c5y1x3s71p66+Q3oK4NOPqntyRAKt3yzJNj0NhAvgZwKfKpF21ogN
+ nN1q5XiVY+D4+lCHXRTr8amU1NbUSXPcIWr7Gaz0RYWTPetqu43lGWSg6Eds3bJmd44z
+ lZ37dMqQ8K0ciyRFET9ocu8HIT6oKwLQZX9rxANKZqbxN5vKxQSXDXZ5JSWthGKmH35X
+ D9PHvsZ4kRJYNxvEwIeUHLB58uOR6rGyA1nLY8a9Jwcsw92zBCtvmmLjxH6b7EeD7Q3T
+ 4p8g==
+X-Gm-Message-State: AOJu0YySjl24K42ojwjPac9dKbX4K9/VB8kB4lUlHsSounp0WTnSPYTB
+ H9P42Ki7R5CH6tsnK4Zj/ZMVOweWYVl5gmVtazcr8eGrbZnP14qcjUvxklb5gywzcXA=
+X-Gm-Gg: ATEYQzyWkgrVWX6Hx6Fqw5SUO5vGFTZisaFwDft1g7/cHOTB5H+beQwGLYp1ooyBKcK
+ SGR+vOFcPx98GTLQ18OlMqznJDggOSgkSyed9nO5oY6uqOcTAoJHuYcUCuB7ogpY3IobkvDKV2i
+ YCYhfyqFWs5JdGTNCyKp1VzHjOGtjy7monBYlqClKD9bRB4bZTbvdXV1DOIWd6mAYl4iBWyHWXz
+ K/jxFhGjfYKqKFhtglllbOl1Rns4VYl3C4tXSdxlE8S4eNveDz3YurJrIK20A9m8Zm0U8mNMX0T
+ VgNm1pvmrStUmGhYV00ubUqAS4aWtLArpyF2KMYya5WSKdYFPcN/7afTce44PeXt23RyMlIo7OI
+ 08T9QpqmPNwhb1nHP/dg9a6TvYqGei+YKnPjxlusrUHwfa+X9kCrh7PHACjC3FwH83KjUPL3QvV
+ 8FV8JZzDdSWod7QMxSQkvpQnu0lwKttob2IsDrpn1w3/w9mbigiMlhkWBvQjVXTOKjc8ZMOuOYQ
+ N5O9A==
+X-Received: by 2002:a05:600c:1f8e:b0:485:3f58:da1 with SMTP id
+ 5b1f17b1804b1-485566e936amr259403675e9.9.1773679852562; 
+ Mon, 16 Mar 2026 09:50:52 -0700 (PDT)
 Received: from alchark-surface.localdomain (bba-86-98-192-109.alshamil.net.ae.
  [86.98.192.109]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4856ea98070sm3865885e9.6.2026.03.16.09.42.04
+ 5b1f17b1804b1-4856eaa39cesm7359485e9.10.2026.03.16.09.50.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 09:42:06 -0700 (PDT)
+ Mon, 16 Mar 2026 09:50:52 -0700 (PDT)
 From: Alexey Charkov <alchark@flipper.net>
-Date: Mon, 16 Mar 2026 20:41:50 +0400
-Subject: [PATCH] scsi: Fix oversized data length in scsi_inquiry()
+Date: Mon, 16 Mar 2026 20:50:45 +0400
+Subject: [PATCH] ufs: rockchip: Make use of controller resets
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260316-scsi-inquiry-len-v1-1-a8176ee6620d@flipper.net>
-X-B4-Tracking: v=1; b=H4sIAM0yuGkC/x3MSQqAMAxA0atI1gZahzpcRVxIjRqQqg2KUry7x
- eVb/B9AyDMJtEkATxcLby5CpwnYZXAzIY/RkKnMqFwbFCuM7I6T/YMrOWwarWxRlWWtc4jZ7mn
- i+192/ft+XqsOw2IAAAA=
-X-Change-ID: 20260316-scsi-inquiry-len-9910c4755813
-To: Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+Message-Id: <20260316-rockchip-ufs-reset-v1-1-808eb017459a@flipper.net>
+X-B4-Tracking: v=1; b=H4sIAOQ0uGkC/x3MMQqAMAxA0atIZgPWahGvIg5SUxsElURFkN7d4
+ viG/19QEiaFvnhB6GblfcswZQE+TttCyHM21FXtKmscyu5XH/nAKygKKZ1om9aHzlCYrIEcHkK
+ Bn386jCl9VD2pB2QAAAA=
+X-Change-ID: 20260316-rockchip-ufs-reset-345cf81efa31
+To: u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Shawn Lin <shawn.lin@rock-chips.com>, 
+ Julien Stephan <jstephan@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Alexey Charkov <alchark@flipper.net>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1293; i=alchark@flipper.net;
- h=from:subject:message-id; bh=3m8tR5aS49zr8BFzadDLOVOQr2CU6D2K3F1zAu6e1Rg=;
- b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTuMLpTpDntb/G510qiFdGttSFTTh2pWCy0U+PYM5luR
- albdVJXOyayMIhxMViKKbLM/bbEdqoR36xdHh5fYeawMoEMkRZpYAACFga+3MS8UiMdIz1TbUM9
- Q0MdYx0jBi5OAZjq4ukM/zO3B3xwMd6rHp05KWGS0B0F1jsMLnOlNv7ROxr9p7V2ej7D/4wH9hW
- fspSE/2Xe3yd0xjxnS0q7Z9fJAHdPz2cawiHvWAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1660; i=alchark@flipper.net;
+ h=from:subject:message-id; bh=GdilNiiHQtJw73mzv+S6rngIJhVzdGmdf/+KUyWtyts=;
+ b=owGbwMvMwCW2adGNfoHIK0sZT6slMWTuMHl1OtzI7EGvybJFume75zhavHgz++MWBz7HF/unr
+ X2t45Iv0DGRhUGMi8FSTJFl7rcltlON+Gbt8vD4CjOHlQlkiLRIAwMQsDDw5SbmlRrpGOmZahvq
+ GRrqGOsYMXBxCsBUW61hZJjE+ldrW2riobOpYcpl13N4xP2F+0T+59efu7tTObONKZGRoech940
+ W0w75shdSvdySG4+/Vjy92OVZvcgcR7Z1HnEmHAA=
 X-Developer-Key: i=alchark@flipper.net; a=openpgp;
  fpr=9DF6A43D95320E9ABA4848F5B2A2D88F1059D4A5
 X-Mailman-Approved-At: Mon, 16 Mar 2026 19:24:05 +0100
@@ -118,38 +117,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-scsi_detect_dev() sets the inquiry data length to 512, but
-scsi_setup_inquiry() only sets the command up with a 255 byte length.
+Assert Rockchip UFS controller resets during initialization and HCE
+enable, as it is done by the Linux driver.
 
-This causes some SCSI devices such as the Foresee FEUDNN064G-C2G07 UFS
-chip to fail to respond to the inquiry command, preventing its detection.
+This is required to make some UFS chips, such as Foresee FEUDNN064G-C2G0,
+work properly.
 
-Set the data length to the size of the scsi_inquiry_resp structure, which
-is the maximum amount of data that scsi_setup_inquiry() will request.
+Note that the resets were already requested in the probe function, just
+not used.
 
-Fixes: 570712f4bcc4 ("scsi: Extract device detection algorithm")
 Signed-off-by: Alexey Charkov <alchark@flipper.net>
 ---
- drivers/scsi/scsi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/ufs/ufs-rockchip.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 8fe6b38a8c74..6a3a91b1d32b 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -513,7 +513,7 @@ static int scsi_detect_dev(struct udevice *dev, int target, int lun,
- 	pccb->target = target;
- 	pccb->lun = lun;
- 	pccb->pdata = tempbuff;
--	pccb->datalen = 512;
-+	pccb->datalen = sizeof(struct scsi_inquiry_resp);
- 	pccb->dma_dir = DMA_FROM_DEVICE;
- 	scsi_setup_inquiry(pccb);
- 	if (scsi_exec(dev, pccb)) {
+diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
+index a13236c7f761..dc4b9b5c86da 100644
+--- a/drivers/ufs/ufs-rockchip.c
++++ b/drivers/ufs/ufs-rockchip.c
+@@ -19,13 +19,22 @@
+ #include "unipro.h"
+ #include "ufs-rockchip.h"
+ 
++static void ufs_rockchip_controller_reset(struct ufs_rockchip_host *host)
++{
++	reset_assert_bulk(&host->rsts);
++	udelay(1);
++	reset_deassert_bulk(&host->rsts);
++}
++
+ static int ufs_rockchip_hce_enable_notify(struct ufs_hba *hba,
+ 					  enum ufs_notify_change_status status)
+ {
+ 	int err = 0;
+ 
+-	if (status != POST_CHANGE)
++	if (status != POST_CHANGE) {
++		ufs_rockchip_controller_reset(dev_get_priv(hba->dev));
+ 		return 0;
++	}
+ 
+ 	ufshcd_dme_reset(hba);
+ 	ufshcd_dme_enable(hba);
+@@ -150,6 +159,8 @@ static int ufs_rockchip_common_init(struct ufs_hba *hba)
+ 		return err;
+ 	}
+ 
++	ufs_rockchip_controller_reset(host);
++
+ 	err = gpio_request_by_name(dev, "reset-gpios", 0, &host->device_reset,
+ 				   GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
+ 	if (err) {
 
 ---
 base-commit: 841856ed9675b26ec517fdd00b5cc0aef8db508e
-change-id: 20260316-scsi-inquiry-len-9910c4755813
+change-id: 20260316-rockchip-ufs-reset-345cf81efa31
 
 Best regards,
 -- 
