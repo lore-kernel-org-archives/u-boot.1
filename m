@@ -4,59 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9962F53D9B
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 21:43:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8C9F53D6C
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 21:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4447C841F2;
-	Mon, 16 Mar 2026 22:43:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0A5A084222;
+	Mon, 16 Mar 2026 22:55:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Lv7WlGRN";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rbMkLVhz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46D4B841FF; Mon, 16 Mar 2026 22:43:40 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D15908421C; Mon, 16 Mar 2026 22:55:49 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83637841DA
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 22:43:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bc56=BR=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1773697416;
- bh=avp7j69Th/ILXB2Ekp0v2GhjVli4F2TFnJ84QbMhIjw=;
- b=Lv7WlGRNhNl3m9qR1cV9TZ39Ld0j12iuBLUuhkjFEwv/sg+RaXib2tTbMi+LYLxvG+3BPSWYu
- DrB2Otcirk3W+nykXnDnfl4o3fqLutKcz8TMGnc2i0z56KTm9eOUmzdYONI8KYKaknq7ICR/3ZO
- i9M5VLIri1V6RI8EzrN4wZOV4Vn4rs560rVEFnckgS2tQ9Mp/3Ng6GezGLFeztjr2Mnc1KoUH2f
- p4QOReUBEEa0vZHVKNDWByNFPP5kLu+rN2RcacX+OeG/j1iY0EClHEhRkVBpLc4f2gBWH02hd9i
- gQuY2hOXjdPxWCGK/fxkjrzxudOizhiahOcmsz9rGxuA==
-X-Forward-Email-ID: 69b87985c47cbeebf997b96b
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.66
-X-Forward-Email-Version: 2.6.50
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <822b68b9-e0a8-401f-a0b2-f4c66d1084d0@kwiboo.se>
-Date: Mon, 16 Mar 2026 22:41:08 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id A37F28414E
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 22:55:47 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-46703fb602fso1773331b6e.0
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 14:55:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773698146; x=1774302946;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0pmKEPHzkhi0tYcTSmxYbo9xpb+VtbGgtQS5dWJ1YQ0=;
+ b=rbMkLVhzaCZ9sfnhYacJS76wZ0ZwadaY2X2SCBpn3QNh3VlKsao5aF/GeNI/RBrObj
+ FtmyFmgv8Ccp1d6C/0dkqBu35H2nqcvx5XLhGiAu/a9BsHm4U7BZbZz4pZ/fmVYCB8Ak
+ zPx6mo+0Tps4D9FLjUyRNlgp5LjLWJsSyutm1Sg6UMnVWTsWB2+g51TLRLuLhdm/Q27P
+ xE4rTu24wGqgxG9FWecJAomfmVBQrfnjnnwKAAmP8cI2Svk5sTIn4BNnV+Kc+GOsObdu
+ 6g3aKywrjQJH+6NrWaiJQT2I0BN7YuKbsjs/qP1dmFd0K17YTOARTqdRT+ZeGOdSKiCI
+ U+Vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773698146; x=1774302946;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0pmKEPHzkhi0tYcTSmxYbo9xpb+VtbGgtQS5dWJ1YQ0=;
+ b=JXuX7dRIiZ5T7cA4Omx2z+aScuSd8FSCJTAzXoL9DPgOLZDb7x1gPwTOS/wFbdE6x9
+ lljnZ/9WGmdJNG6/3O4ckVtaIONDFJr8kTfftySYu6/QVl8lbo3Wz26SmPmLEG3flapg
+ EJAkFj/LrEOtjdy5J4fAKEOUSci7oQd+0tR4zXboFz6banIIFfqkI3Udi4wf+HMDcKay
+ ZorI9kUXljvEOlv6+BH/ek5WKpyoCYZFYBJaeFASbYvDo8d6dWTKRAo+r8mrrPtOvvs6
+ nImMafxFaS7oR+8q2YaRySWRwiVMmW07/1ymv4F3/QQVLTFiwytx5U7pYgQ+bjMXfkhL
+ kTNA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+8JizrC+c2VdTkRQQ0umnsxwx8jG9LLTgF2D5P91ej4J1v1tnrl828sX/jD9b0ybxhyg424o=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzid4lPA/+BPszeVcNfN1zptDgNByWJFowTMTYvuLadt8d8WxHH
+ wB7trkqAwg99TH8C+MeShCbV969FIu6nHHZqbNHjviA2h3UM4Gv7TdGfcbmkwMj68zo=
+X-Gm-Gg: ATEYQzzqsdbOsGFl9nyElA4OobyLzbhKG8c0RBtUihPs1KSIV5G+gaGjNDJmthDclMM
+ Ka1sFi3W85aQG3zPTaKXSWrk0cSLuSxA0E+9IZx5NmZqJnYmlqHhrYVkda9rPaP6xCOGZlWunXb
+ Bq/gtzQ5bBSwARQZdQvy7HjTsYeomKymsXRQEvDKUiQ82Ms+ZEuxIRpDuKYMNgktDXuDBf2zh6I
+ s1nB0WcGNwRO3FprDkRBhh1ai9x2SOj2sWoFfEU29wJfakeajJ9HclGZVuf3VquzCnmkh9hPALd
+ iu9G671e+dNTmGySnEvO+OitBNeSLqe0A/azEIDBdMg7nIqufFNoVDoL5DuTtSpcrXBgLMgEK2J
+ 5OUi5fiKpj0fLIjAeW36n8NDRV4LcTlyNK5Qw9Wc+uiaybxW7/Z4kxEwk81qn+8UrwpjTmjTLXE
+ qgZgzBjZIF3HQZ8jLP7ccpVYn6qwM=
+X-Received: by 2002:a05:6808:6509:b0:44f:ec23:2375 with SMTP id
+ 5614622812f47-46757050ad7mr7817104b6e.3.1773698146305; 
+ Mon, 16 Mar 2026 14:55:46 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:6995:28aa:eeda:102])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41791432d87sm17978547fac.1.2026.03.16.14.55.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Mar 2026 14:55:45 -0700 (PDT)
+From: David Lechner <dlechner@baylibre.com>
+Subject: [PATCH 0/3] boards: mediatek: add Genio 520/720 SD card support
+Date: Mon, 16 Mar 2026 16:55:13 -0500
+Message-Id: <20260316-mtk-ext-mmc-boot-v1-0-1aae51a44705@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] USB: dwc2: allow usb start even if usbphy is not found
-To: Marius Dinu <m95d+git@psihoexpert.ro>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20260316092639.2377-1-m95d+git@psihoexpert.ro>
- <942c0020-e43d-4d86-b8c0-ccc8f7ed2b2c@kwiboo.se> <abgd9BByMlS6khBT@GRAPHRT>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <abgd9BByMlS6khBT@GRAPHRT>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2O227CMBBEfyXyc7ckjnJpVFX8B+Jh7Sx0S2wHe
+ 4NAiH+vCTweaWbO3FWiyJTUUNxVpAsnDj5D9VEo+4v+SMBjZqVL3ZZ1pcHJCegq4JwFE4IAYtt
+ h1/V1g6PKtTnSga/r5G7/4rSYP7Ly3HknIp2X7JJXTDlKCVfXUHy/VeWqctLXXxWwZ2GcIC3zH
+ KLARUMJ1Wj7Vo9N39R6a/A2sYn0aYP7eVoMJoIMjmUoQuQj+43Pz9X+8fgHjE3ZZPcAAAA=
+X-Change-ID: 20260312-mtk-ext-mmc-boot-aa67a77835ad
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
+ David Lechner <dlechner@baylibre.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1478; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=pNKcnqKqGCOiARz2ax7ka0YAchMsX/VsRREZJp4ell0=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpuHxHnnOKE58oXDfNe7BGXLLZwEUraA9u2Ohlr
+ xZcA2nZf6iJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabh8RxYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AiiMIAId1NFWEykqT5ERH1v6y+4cl3UAAF/E+w9hkl/I
+ /UKWxfshPNhYJLhY+DCzwzJV0zGEMXJpvFvQjp0LYzOeuP51Hru5GE+T6TCjRf37d7G5UeSBe+2
+ G5mBVktEhEPMrp0LiCTy4E7QFeIANuCx2y3M4afuYnVPtclZECWEeBBZ7dlJnp1swYJLKAmRCLe
+ tfuuiBDWH7Z7YgtIstTwewtufaLavKeVS37XCMBPvubvXCOGc3FVDPiTNZFOI6/yUBbRUNEYqgw
+ NbXVaB5jM/p5fRHQTlkYSvKBxPDR5fIdduiUFn3CxoTGl+HwkyWbrVbn+z7w4o64CqOVTixJhAT
+ vPxw=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,319 +121,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marius,
+Add required devicetree and defconfig changes to get SD card support
+working out of the box on Genio 520/720 EVKs.
 
-On 3/16/2026 4:12 PM, Marius Dinu wrote:
-> On Mon, 2026-03-16 11.04.13 ++0100, Jonas Karlman wrote:
->> Hi Marius,
->>
->> On 3/16/2026 10:26 AM, Marius Dinu wrote:
->>> RK3288 uses rockchip_usb2_phy, but that driver doesn't register iself
->>> as a usbphy driver and "usb start" fails with this error:
->>>
->>>   drivers/usb/host/dwc2.c:1254- dwc2_setup_phy() dwc2_usb usb@ff580000:
->>>   Failed to get USB PHY: -19.
->>>
->>> Until a proper fix is made for rockchip_usb2_phy, this patch allows
->>> usb start to continue even if usbphy is not found.
->>>
->>> Tested on Asus TinkerBoard.
->>
->> I am not seeing this issue on my TinkerBoard, what U-Boot version are
->> you testing and have you made any config changes compared to
->> tinker-rk3288_defconfig?
-> 
-> I'm using the github master branch pulled today + lots and lots of changes
-> in config. I didn't make a diff, but I expect it to be very very far from
-> tinker-rk3288_defconfig.
-> 
->>
->>   => usb start
->>   starting USB...
->>   USB DWC2
->>   USB DWC2
->>   Bus usb@ff540000: 2 USB Device(s) found
->>   Bus usb@ff580000: 1 USB Device(s) found
->>          scanning usb for storage devices... 0 Storage Device(s) found
->>
->>   => dm tree -e usb
->>    Class     Seq    Probed  Driver                Name
->>   -----------------------------------------------------------
->>    usb           0  [ + ]   dwc2_usb              usb@ff540000
->>    usb_hub       0  [ + ]   usb_hub               `-- usb_hub
->>    usb_hub       1  [ + ]   usb_hub                   `-- usb_hub
->>    usb           1  [ + ]   dwc2_usb              usb@ff580000
->>    usb_hub       2  [ + ]   usb_hub               `-- usb_hub
->>
->> Have something changed recently that broke this?
-> 
-> Yes! but not exactly recently...
-> It broke since commit e17a4bf198510693967644c331ab621fc41ea8b5.
-> Here's a log on my system without my proposed fix. This is a log that I
-> saved while I was investigating the failed USB, about a year ago, I think.
-> But I checked and it still fails with today's git master, I just don't have
-> the time to enable all the debug options again. It's still ret -19 error.
+Signed-off-by: David Lechner <dlechner@baylibre.com>
+---
+David Lechner (3):
+      arm: dts: mt8371: add SD card nodes
+      arm: dts: add U-Boot overrides for Genio 520 and 720 SD card
+      configs: mt8189: enable GPIO support
 
-I did a new runtime test on a Tinker Board R2.0 using master with
-tinker-rk3288_defconfig and I am not able to reproduce any issue. Maybe
-your config changes introduce a condition that causes an issue? Please
-share your savedefconfig.
+ arch/arm/dts/mt8189.dtsi                      | 12 +++++
+ arch/arm/dts/mt8371-genio-520-evk-u-boot.dtsi |  3 ++
+ arch/arm/dts/mt8371-genio-common-u-boot.dtsi  | 28 +++++++++++
+ arch/arm/dts/mt8371-genio-common.dtsi         | 67 +++++++++++++++++++++++++++
+ arch/arm/dts/mt8391-genio-720-evk-u-boot.dtsi |  3 ++
+ board/mediatek/MAINTAINERS                    |  3 ++
+ configs/mt8189.config                         |  2 +
+ 7 files changed, 118 insertions(+)
+---
+base-commit: a27980786cfb3c430aa1c05da8e79180c584d221
+change-id: 20260312-mtk-ext-mmc-boot-aa67a77835ad
+prerequisite-message-id: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
+prerequisite-patch-id: 0a3f0badfacd3b6aac95fd6eecdb52a06f6b2862
+prerequisite-patch-id: f5bc405061da27bf21302c1e91d1f7764d4c52c2
+prerequisite-patch-id: 127eaeb5c641928088383c6fa468ef0a15d88306
+prerequisite-patch-id: 8bc3f4284773a4e83ffc94e9e4aad43956073ab6
+prerequisite-patch-id: ee4692f65c9b54d9b599b13bd965581318a3f372
+prerequisite-patch-id: 02919217d9a44bc91036b6e8a2c0dc4f54a0fb3c
 
-> 
->   => usb start
->   starting USB...
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: assigned-clock-rates: <not found>
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #clock-cells: 0x1 (1)
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #clock-cells: 0x1 (1)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for clock-controller@ff760000
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for clock-controller@ff760000
->   drivers/core/uclass.c:406-uclass_find_device_by_ofnode()       - checking oscillator
->   drivers/core/uclass.c:406-uclass_find_device_by_ofnode()       - checking clock-controller@ff760000
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for clock-controller@ff760000: clock-controller@ff760000 (ret=0)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for clock-controller@ff760000: clock-controller@ff760000 (ret=0)
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: vbus-supply: of_read_u32_index: vbus-supply: (not found)
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #phy-cells: 0x0 (0)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for usb-phy@334
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for usb-phy@334
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for usb-phy@334: (none) (ret=-19)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for usb-phy@334: (none) (ret=-19)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for usbphy
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for usbphy
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for usbphy: (none) (ret=-19)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for usbphy: (none) (ret=-19)
->   Bus usb@ff500000: Port not available.
-> and it repeats for usb@ff540000 and usb@ff580000.
-> 
-> There is no usbphy or usb-phy detected/bound in log when u-boot walks the
-> devicetree nodes, but the device tree has "usbphy" node
-> compatible="rockchip,rk3288-usb-phy" with 3 sub-nodes: usb-phy@320,
-> usb-phy@334, usb-phy@348.
-> Driver with that compatible string: rockchip_usb2_phy.c.
-> CONFIG_ROCKCHIP_USB2_PHY is enabled, but "dm compat" lists only these:
-> 
->   rockchip_usb2phy      rockchip,rk3308-usb2phy
->                         rockchip,rk3328-usb2phy
->                         rockchip,rk3399-usb2phy
->                         rockchip,rk3528-usb2phy
->                         rockchip,rk3568-usb2phy
->                         rockchip,rk3576-usb2phy
->                         rockchip,rk3588-usb2phy
-> 
-> Those compat strings come from phy-rockchip-inno-usb2.c. (I also had that
-> enabled while debugging.) There are no compat strings from
-> rockchip_usb2_phy.c.
-> 
-> It's because phy-rockchip-inno-usb2.c has this:
-> 
->   U_BOOT_DRIVER(rockchip_usb2phy){
->     .name = rockchip_usb2phy"
-> 
-> while rockchip_usb2_phy.c does not. So the usb driver finds no compatible
-> phy driver loaded and fails. Before the commit, it would load anyway.
-> 
-> I didn't use any AI in this investigation!
-> 
-> Here is a log with my patch:
->   => usb start
->   starting USB...
->   drivers/core/ofnode.c:525-    ofnode_read_bool() ofnode_read_bool: disable-over-current: false
->   drivers/core/ofnode.c:525-    ofnode_read_bool() ofnode_read_bool: hnp-srp-disable: false
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: assigned-clock-rates: <not found>
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #clock-cells: 0x1 (1)
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #clock-cells: 0x1 (1)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for clock-controller@ff760000
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for clock-controller@ff760000
->   drivers/core/uclass.c:406-uclass_find_device_by_ofnode()       - checking oscillator
->   drivers/core/uclass.c:406-uclass_find_device_by_ofnode()       - checking clock-controller@ff760000
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for clock-controller@ff760000: clock-controller@ff760000 (ret=0)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for clock-controller@ff760000: clock-controller@ff760000 (ret=0)
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #phy-cells: 0x0 (0)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for usb-phy@348
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for usb-phy@348
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for usb-phy@348: (none) (ret=-19)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for usb-phy@348: (none) (ret=-19)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for usbphy
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for usbphy
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for usbphy: (none) (ret=-19)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for usbphy: (none) (ret=-19)
->   drivers/usb/host/dwc2.c:1254-      dwc2_setup_phy() dwc2_usb usb@ff540000: Failed to get USB PHY: -19.
->   drivers/usb/host/dwc2.c:1332-      dwc2_usb_probe() dwc2_usb usb@ff540000: Failed to setup PHY: -19. Continuing anyway...
->   drivers/usb/host/dwc2.c:1061-          dwc2_reset() dwc2_usb usb@ff540000: Can't get reset: -2
->   drivers/usb/host/dwc2.c:1095-    dwc2_init_common() dwc2_usb usb@ff540000: Core Release: 3.10a
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: dr_mode: host
->   drivers/usb/common/dwc2_core.c:67-  dwc2_flush_tx_fifo() Flush Tx FIFO 16
->   drivers/usb/common/dwc2_core.c:102-  dwc2_flush_rx_fifo() Flush Rx FIFO
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: vbus-supply: of_read_u32_index: vbus-supply: (not found)
->   USB DWC2
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: companion: of_read_u32_index: companion: (not found)
->   drivers/core/ofnode.c:525-    ofnode_read_bool() ofnode_read_bool: disable-over-current: false
->   drivers/core/ofnode.c:525-    ofnode_read_bool() ofnode_read_bool: hnp-srp-disable: false
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: assigned-clock-rates: <not found>
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #clock-cells: 0x1 (1)
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #clock-cells: 0x1 (1)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for clock-controller@ff760000
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for clock-controller@ff760000
->   drivers/core/uclass.c:406-uclass_find_device_by_ofnode()       - checking oscillator
->   drivers/core/uclass.c:406-uclass_find_device_by_ofnode()       - checking clock-controller@ff760000
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for clock-controller@ff760000: clock-controller@ff760000 (ret=0)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for clock-controller@ff760000: clock-controller@ff760000 (ret=0)
->   drivers/core/of_access.c:556-   of_read_u32_index() of_read_u32_index: #phy-cells: 0x0 (0)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for usb-phy@320
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for usb-phy@320
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for usb-phy@320: (none) (ret=-19)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for usb-phy@320: (none) (ret=-19)
->   drivers/core/uclass.c:546-uclass_get_device_by_ofnode() Looking for usbphy
->   drivers/core/uclass.c:397-uclass_find_device_by_ofnode() Looking for usbphy
->   drivers/core/uclass.c:416-uclass_find_device_by_ofnode()    - result for usbphy: (none) (ret=-19)
->   drivers/core/uclass.c:549-uclass_get_device_by_ofnode()    - result for usbphy: (none) (ret=-19)
->   drivers/usb/host/dwc2.c:1254-      dwc2_setup_phy() dwc2_usb usb@ff580000: Failed to get USB PHY: -19.
->   drivers/usb/host/dwc2.c:1332-      dwc2_usb_probe() dwc2_usb usb@ff580000: Failed to setup PHY: -19. Continuing anyway...
->   drivers/usb/host/dwc2.c:1061-          dwc2_reset() dwc2_usb usb@ff580000: Can't get reset: -2
->   drivers/usb/host/dwc2.c:1095-    dwc2_init_common() dwc2_usb usb@ff580000: Core Release: 3.10a
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: dr_mode: otg
->   drivers/usb/common/dwc2_core.c:67-  dwc2_flush_tx_fifo() Flush Tx FIFO 16
->   drivers/usb/common/dwc2_core.c:102-  dwc2_flush_rx_fifo() Flush Rx FIFO
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
->   drivers/usb/host/dwc2.c:230-dwc_otg_core_host_init() dwc2_usb usb@ff580000: dwc_otg_core_host_init: Timeout!
-> CONFIG_USB_GADGET is not enabled in my config.
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: vbus-supply: of_read_u32_index: vbus-supply: (not found)
->   USB DWC2
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: companion: of_read_u32_index: companion: (not found)
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: usb,device-class: of_read_u32_index: usb,device-class: (not found)
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: usb,interface-class: of_read_u32_index: usb,interface-class: (not found)
->   drivers/core/device.c:185-  device_bind_common() Bound device usb_hub to usb@ff540000
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: assigned-clock-rates: <not found>
->   drivers/core/device.c:185-  device_bind_common() Bound device usb_hub to usb_hub
->   drivers/core/device.c:185-  device_bind_common() Bound device usb_mass_storage to usb_hub
->   drivers/core/device.c:185-  device_bind_common() Bound device usb_mass_storage.lun0 to usb_mass_storage
-> long delay here
->   drivers/core/device.c:185-  device_bind_common() Bound device usb_mass_storage.lun0.bootdev to usb_mass_storage
-> even longer delay here
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: usb,device-class: of_read_u32_index: usb,device-class: (not found)
->   drivers/core/ofnode.c:417-ofnode_read_u32_index() ofnode_read_u32_index: usb,interface-class: of_read_u32_index: usb,interface-class: (not found)
->   drivers/core/device.c:185-  device_bind_common() Bound device usb_hub to usb@ff580000
->   drivers/core/ofnode.c:540-    ofnode_read_prop() ofnode_read_prop: assigned-clock-rates: <not found>
->   Bus usb@ff540000: 3 USB Device(s) found
->   Bus usb@ff580000: 1 USB Device(s) found
->          scanning usb for storage devices... 1 Storage Device(s) found
-> 
-> Takes 30s to complete, but it works!
-> IIRC, that how much it took before the commit that broke it.
-
-I have re-run some tests with different Kconfig options related to
-GADGET and DWC2 and are not able to reproduce your issue.
-
-As mentioned above, please share your config changes compared to tinker
-defconfig, maybe you have some Kconfig option enabled that make DWC2
-work differently?
-
-
-  U-Boot SPL 2026.04-rc4-00007-g010855c5005e (Mar 16 2026 - 21:33:53 +0000)
-  Trying to boot from RAM
-  ## Checking hash(es) for config conf-1 ... OK
-  ## Checking hash(es) for Image firmware-1 ... crc32+ OK
-  ## Checking hash(es) for Image fdt-1 ... crc32+ OK
-  spl_perform_arch_fixups: could not map BootROM boot device to ofpath
-  
-  
-  U-Boot 2026.04-rc4-00007-g010855c5005e (Mar 16 2026 - 21:33:53 +0000)
-  
-  SoC: Rockchip rk3288
-  Reset cause: POR
-  Model: Rockchip RK3288 Asus Tinker Board
-  DRAM:  2 GiB
-  PMIC:  RK808
-  Core:  221 devices, 27 uclasses, devicetree: separate
-  MMC:   mmc@ff0c0000: 1, mmc@ff0d0000: 2
-  Loading Environment from MMC... Card did not respond to voltage select! : -110
-  *** Warning - No block device, using default environment
-  
-  In:    serial,usbkbd
-  Out:   serial,vidconsole
-  Err:   serial,vidconsole
-  Net:   eth0: ethernet@ff290000
-  
-  Hit any key to stop autoboot: 0
-  => usb start
-  starting USB...
-  USB DWC2
-  USB DWC2
-  Bus usb@ff540000: 2 USB Device(s) found
-  Bus usb@ff580000: 1 USB Device(s) found
-         scanning usb for storage devices... 0 Storage Device(s) found
-  => usb tree
-  USB device tree:
-    1  Hub (480 Mb/s, 0mA)
-    |   U-Boot Root Hub
-    |
-    +-2  Hub (480 Mb/s, 100mA)
-          USB2.0 Hub
-  
-    1  Hub (480 Mb/s, 0mA)
-        U-Boot Root Hub
-  
-  => dm tree -e usb
-   Class     Seq    Probed  Driver                Name
-  -----------------------------------------------------------
-   usb           0  [ + ]   dwc2_usb              usb@ff540000
-   usb_hub       0  [ + ]   usb_hub               `-- usb_hub
-   usb_hub       1  [ + ]   usb_hub                   `-- usb_hub
-   usb           1  [ + ]   dwc2_usb              usb@ff580000
-   usb_hub       2  [ + ]   usb_hub               `-- usb_hub
-   pinconfig   130  [   ]   pinconfig             usb
-   pinconfig   131  [   ]   pinconfig             |-- host-vbus-drv
-   pinconfig   132  [   ]   pinconfig             `-- pwr-3g
-  =>
-
-Regards,
-Jonas
-
-> 
-> Marius
-> 
-> PS: There is a duplicate of this email sent from the wrong address. Sorry.
-> 
->>
->> Anyway if something needs fixing it is probably rockchip_usb2_phy.
->>
->> Regards,
->> Jonas
->>
->>>
->>> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
->>> ---
->>>  drivers/usb/host/dwc2.c | 5 ++---
->>>  1 file changed, 2 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
->>> index 16f21fa9083..74d71f23d88 100644
->>> --- a/drivers/usb/host/dwc2.c
->>> +++ b/drivers/usb/host/dwc2.c
->>> @@ -1329,7 +1329,7 @@ static int dwc2_usb_probe(struct udevice *dev)
->>>  
->>>  	ret = dwc2_setup_phy(dev);
->>>  	if (ret)
->>> -		return ret;
->>> +		dev_dbg(dev, "Failed to setup PHY: %d. Continuing anyway...\n", ret);
->>>  
->>>  	return dwc2_init_common(dev, priv);
->>>  }
->>> @@ -1345,8 +1345,7 @@ static int dwc2_usb_remove(struct udevice *dev)
->>>  
->>>  	ret = dwc2_shutdown_phy(dev);
->>>  	if (ret) {
->>> -		dev_dbg(dev, "Failed to shutdown USB PHY: %d.\n", ret);
->>> -		return ret;
->>> +		dev_dbg(dev, "Failed to shutdown USB PHY: %d. Continuing anyway...\n", ret);
->>>  	}
->>>  
->>>  	dwc2_uninit_common(priv->regs);
->>
-> 
+Best regards,
+--  
+David Lechner <dlechner@baylibre.com>
 
