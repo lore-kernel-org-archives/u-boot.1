@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D6AFF53D85
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E88B2F53D81
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B726C8418C;
-	Mon, 16 Mar 2026 19:24:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 068528419C;
+	Mon, 16 Mar 2026 19:24:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=wolfssl-com.20230601.gappssmtp.com header.i=@wolfssl-com.20230601.gappssmtp.com header.b="z+vSPvgB";
+	dkim=pass (2048-bit key; unprotected) header.d=wolfssl-com.20230601.gappssmtp.com header.i=@wolfssl-com.20230601.gappssmtp.com header.b="KRPlzYeC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B890384181; Mon, 16 Mar 2026 19:15:20 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 0853A8418A; Mon, 16 Mar 2026 19:15:26 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46E1684179
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 19:15:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70BE784180
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 19:15:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=wolfssl.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=david@wolfssl.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-46726528f1cso3327294b6e.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 11:15:18 -0700 (PDT)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-40438e0cba6so3079257fac.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 11:15:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=wolfssl-com.20230601.gappssmtp.com; s=20230601; t=1773684916; x=1774289716;
+ d=wolfssl-com.20230601.gappssmtp.com; s=20230601; t=1773684922; x=1774289722;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5SwxsDM+GhSOJdvlm1NHN2FwPlkbuVo0aP/vWR4CNUk=;
- b=z+vSPvgBXklKQvHdCGqUH5C7DuWHDdUX+q3LiUxW5HCxiwHtZV4JBDHYLT2m/GHaYW
- jHIdd773QaW4NoxhL4lkYoT1UeSqDqltPpUz7EvEgr0WmbUb6J8GvzRxKZjn4XCa+nYR
- 33MSIuxyoiZyY5OUcmW9QM34WTOxpahf/amOfIHv/nVYoVpg8cs8j3fpJA9odw6bdsc8
- UvAqj9xp6zXPjE9rtvjP5UpHuFiqFPfwC8RhozkpclaQlahv4V2oOtS8+7MgB8RFHYhJ
- CTmtBHCRHMvSbGRH9lLwZkKJkzb4l7by5/C08somHytske4UYsxkzagW4kFSB20QAalK
- 887w==
+ bh=Esu6ERmzbygtJcyO4fiGkRDsuHWu6bKS1fEOHWmufZQ=;
+ b=KRPlzYeCmunOxeBuYjkapN7g6jJEgogdcNjibZiK5Deotjm7EBte2qwWF1k2kV/4m3
+ gdMYO+OGEH//o+G/P7aKtQcRTcEp1C9AiCaMtih3BQsnITy+Z+btj0dniUva76pwZkjC
+ +d3EsJm81mzucvLN9uuT+3dzxc2e1zbTfP2sTHf8G//IqcFpnC9w/4b7x+21OSiCq+OL
+ UOmOHurJhfNrUwFyXhIoRmEsjDeRh+KaZCaleev8/+LuPGWqI/asitmhORm6XMqB9+UP
+ nG1d/ZSDah8lOmU5oltZNckAOweSKX5H49ruLOkxrPWsT7wW9Uq0xpGW0jiKSL3uMprc
+ AfjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773684916; x=1774289716;
+ d=1e100.net; s=20251104; t=1773684922; x=1774289722;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=5SwxsDM+GhSOJdvlm1NHN2FwPlkbuVo0aP/vWR4CNUk=;
- b=ZxlMJWHxztpbl2oBbhCUxDAUTUde2jRj6Sqquse5QdH0pvpJi0+eJaPrHj0GzTudlF
- EKzUANMK4HI2qwyqDtHvDqWXPO+H5taq0SSTTjADt9cYjng8kCRAgBZxa9ARdy1eTDju
- /jVLJZp5MDkFqk9wMwcedr+6tHVkoqJVO5XR7FHJa8nSNEccBg+P4vLoMDD4mRbWL2IH
- uganzwpLuZrZ2+hkLatWZfdr1ouyMFIROL/mYzUrRVRpHaqlu8SMnDpfbeB9qS8lVSRZ
- EUNob6cV/1SV32PaaJunSJt1zhLPQ4hAOo+6ywcUHWAJ1QN7/6dS6xlu9Fg6WUeS9yZi
- SYyA==
-X-Gm-Message-State: AOJu0Yz3/ou9QtJzwLeuleM5D+DwVHxNmHTzjn01YmRrTiLJo6Wkhqtu
- 5UDCo3E/ALv+OP8cZiGzROTSjGqB0tiBvhxI2paNukvlilp624rXwnvWK/EuU/yuMKUWrEXRXX8
- w6dP+L08=
-X-Gm-Gg: ATEYQzwNks3yvhiKMbsC6xD9+EfR/UzCjgrh3WBNLuh2APQSDiouvyluezTcgXsPI2/
- 5OSxcG7zpqMIPFz2f4YGJL8ZObcfutkqkDueHcd8gB7Xm8Rsx4wLjeCpQRBEZHQUUefqJQ5STLJ
- qDKL/xBgGW48ugWzEL0a7FFeYRB4H+3f/xJ+qTGCM2TWoWsUKrDOdpB6ON2RLxohywJy0LEWWv4
- HEYRnyQjO+PL+6K9Suv2xHB6pRTl1EhMVqjBKbDo2OLgviHwXiXjmpSLHbHSa1XeWv7HiG9Wly8
- 370GTGHTdmLtCKwGYIzikTN+COFXAdDRO5p+4udK4UI6R8I1OUKNclwYD4YNdYF/DRuZUYCM299
- 8dKrWewzbB9tCWRixJzpoAaCNu/amkrQvp5eucjlXOJ0pJqdorAhxGcc6EyO9gl3UxGYJbzUYgn
- 39ztu/ArzRRoLZ0p9ppAU6Pg==
-X-Received: by 2002:a05:6808:2385:b0:44f:6a19:433e with SMTP id
- 5614622812f47-467570952aamr8397367b6e.15.1773684916447; 
- Mon, 16 Mar 2026 11:15:16 -0700 (PDT)
+ bh=Esu6ERmzbygtJcyO4fiGkRDsuHWu6bKS1fEOHWmufZQ=;
+ b=NaWHAfwvebEkp0GoAkUGMMhX6CKCpFurEzWZqF5zKzotOp8pdXgO2+X/1B9ljzx4xR
+ iSeX3/+efUbOXoySmbeVT7LHomRLjP+FWTCG8bMYIKCtHaINR5SKL/66RW4rRX3I3e4y
+ Ic2JF2gM8G99B1TO2t8dHlOY/7aqYVGduZJpaW/fnHSpKIfklLpJWMunVhh3LxP1d8KA
+ jqLUm10qbAE/NCxmYJaetfnvQnuq/xcryHR2/GIhhn9vskO/kLluR1NVCUBEVIhre7+T
+ ag3Cn+SsPLsDy0yy/w9+2s6E0XxbkIrhcUTkuXhsguu/qoWEUbjXcyvi4S7nXki0MIl2
+ FkBg==
+X-Gm-Message-State: AOJu0Yy8B8ANaqwEiuJfprEig2+v/5pLqM5IW11+BoaVf9LwFHZgypKj
+ C2ogZF2QKOYHb5QWiWagTQf4HQgQSbA1Lpoyls/pf/94LCBOZEPvk4RheUvbY0NdeUtRUCRZGlp
+ YTXWs0gs=
+X-Gm-Gg: ATEYQzytr4ZJzD67vvsTvPuLt8jyM9xNAB/jcgiCFAh5LPmPsGRTFaSHFUAdhdM1F4x
+ St8Y67PjE0dIuzevDnQJI4L36OS94EBkQTxNrCmRoLVDQ1XAwnB5XhPLDnbn0/i2aqcnPK8Rh8r
+ 7qoNmKZWPDZTeGAMENjFnaXFXAMs8W0h8zucnUxdSDiKNGZRrjtOTrp8hEQU2dnvmjip458dxxY
+ T0lt7869z8orCznOo3YSbaQlxy65Xhgttkvp+9OmFIurybSeVbfArGsqE0ztR2INGcjwc7Mf4xl
+ +rNF7TONXfZuzIn/p/m15kpMV3ULtz4atJPij1fQKwahURyHY8qQHNDTSg2Ua0QaUD9i7EqeV0s
+ 9Wk5FBRhqPo0xMS0DjulzI4kfDlBCvR0DSSn1OmCJkIIq04ba55jNq35PCZtNncFWx8Q0l+4S6+
+ jiUDJ4+QdIvy8aYNR15crPyQ==
+X-Received: by 2002:a05:6870:3b8e:b0:417:22c9:a311 with SMTP id
+ 586e51a60fabf-417b902ecbcmr8568439fac.6.1773684921498; 
+ Mon, 16 Mar 2026 11:15:21 -0700 (PDT)
 Received: from localhost ([2605:59c0:2082:bc08:ab40:208e:38fb:2546])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467342c0382sm10403881b6e.10.2026.03.16.11.15.15
+ 586e51a60fabf-4177e1fb6efsm18378343fac.3.2026.03.16.11.15.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 11:15:15 -0700 (PDT)
+ Mon, 16 Mar 2026 11:15:20 -0700 (PDT)
 From: David Garske <david@wolfssl.com>
 To: u-boot@lists.denx.de
 Cc: Aidan <aidan@wolfssl.com>
-Subject: [[PATCH v2] tpm: Add wolfTPM library support for TPM 2.0 01/12] tpm:
- export tpm_show_device, tpm_set_device, and get_tpm
-Date: Mon, 16 Mar 2026 11:14:30 -0700
-Message-ID: <20260316181447.2986278-2-david@wolfssl.com>
+Subject: [[PATCH v2] tpm: Add wolfTPM library support for TPM 2.0 02/12]
+ include: add byteorder macro guards and SHA384 hash wrapper
+Date: Mon, 16 Mar 2026 11:14:31 -0700
+Message-ID: <20260316181447.2986278-3-david@wolfssl.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260316181447.2986278-1-david@wolfssl.com>
 References: <20260316181447.2986278-1-david@wolfssl.com>
@@ -103,73 +103,108 @@ X-Virus-Status: Clean
 
 From: Aidan <aidan@wolfssl.com>
 
-Remove static scope from tpm_show_device(), tpm_set_device(), and
-get_tpm() in cmd/tpm-common.c so they can be called from other
-translation units. Add corresponding declarations to
-include/tpm-common.h.
+Add #ifndef guards around cpu_to_beXX / beXX_to_cpu macro definitions
+in include/linux/byteorder/generic.h. wolfTPM, wolfCrypt, and U-Boot
+all define these macros; the guards prevent redefinition warnings when
+wolfTPM headers are included alongside U-Boot headers.
 
-wolfTPM's command backend needs these functions for device enumeration
-and selection when operating through U-Boot's driver model.
+Add #include <linux/types.h> to include/hash.h so that basic types
+(u8, u32, etc.) are available to all includers.
+
+Add a wc_Sha384Hash() wrapper declaration in include/hash.h, gated
+by WOLFTPM2_NO_WOLFCRYPT. When wolfTPM is built without wolfCrypt,
+this wrapper provides SHA-384 hashing via U-Boot's hash subsystem,
+which is needed for Infineon TPM firmware update manifest validation.
 
 Signed-off-by: Aidan Garske <aidan@wolfssl.com>
 ---
- cmd/tpm-common.c     |  4 ++--
- include/tpm-common.h | 22 ++++++++++++++++++++++
- 2 files changed, 24 insertions(+), 2 deletions(-)
+ include/hash.h                    | 18 ++++++++++++++++++
+ include/linux/byteorder/generic.h | 31 +++++++++++++++++++++++++------
+ 2 files changed, 43 insertions(+), 6 deletions(-)
 
-diff --git a/cmd/tpm-common.c b/cmd/tpm-common.c
-index 1cd57f901b6..30e99e10758 100644
---- a/cmd/tpm-common.c
-+++ b/cmd/tpm-common.c
-@@ -234,7 +234,7 @@ int type_string_write_vars(const char *type_str, u8 *data,
- 	return 0;
- }
+diff --git a/include/hash.h b/include/hash.h
+index 8b3f79ec473..26043c43a9c 100644
+--- a/include/hash.h
++++ b/include/hash.h
+@@ -6,6 +6,8 @@
+ #ifndef _HASH_H
+ #define _HASH_H
  
--static int tpm_show_device(void)
-+int tpm_show_device(void)
- {
- 	struct udevice *dev;
- 	char buf[80];
-@@ -253,7 +253,7 @@ static int tpm_show_device(void)
- 	return 0;
- }
++#include <linux/types.h>
++
+ #ifdef USE_HOSTCC
+ #include <linux/kconfig.h>
+ #endif
+@@ -163,4 +165,20 @@ int hash_progressive_lookup_algo(const char *algo_name,
+  */
+ int hash_parse_string(const char *algo_name, const char *str, uint8_t *result);
  
--static int tpm_set_device(unsigned long num)
-+int tpm_set_device(unsigned long num)
- {
- 	struct udevice *dev;
- 	unsigned long n = 0;
-diff --git a/include/tpm-common.h b/include/tpm-common.h
-index bfb84a931d1..1ea4463fbbe 100644
---- a/include/tpm-common.h
-+++ b/include/tpm-common.h
-@@ -337,4 +337,26 @@ enum tpm_version tpm_get_version(struct udevice *dev);
- /* Iterate on all TPM devices */
- #define for_each_tpm_device(dev) uclass_foreach_dev_probe(UCLASS_TPM, (dev))
++#ifdef WOLFTPM2_NO_WOLFCRYPT
++/**
++ * wc_Sha384Hash() - Calculate SHA384 hash
++ * @data:	Data to hash
++ * @len:	Length of data
++ * @hash:	Output buffer for hash
++ *
++ * This is a wrapper function to provide wolfCrypt-compatible SHA384 hashing
++ * when wolfCrypt is not available.
++ *
++ * Return: 0 on success, -1 on error
++ */
++int wc_Sha384Hash(const unsigned char *data, unsigned int len,
++		  unsigned char *hash);
++#endif /* WOLFTPM2_NO_WOLFCRYPT */
++
+ #endif
+diff --git a/include/linux/byteorder/generic.h b/include/linux/byteorder/generic.h
+index bee0ff60336..def601eed2b 100644
+--- a/include/linux/byteorder/generic.h
++++ b/include/linux/byteorder/generic.h
+@@ -89,12 +89,6 @@
+ #define le32_to_cpu __le32_to_cpu
+ #define cpu_to_le16 __cpu_to_le16
+ #define le16_to_cpu __le16_to_cpu
+-#define cpu_to_be64 __cpu_to_be64
+-#define be64_to_cpu __be64_to_cpu
+-#define cpu_to_be32 __cpu_to_be32
+-#define be32_to_cpu __be32_to_cpu
+-#define cpu_to_be16 __cpu_to_be16
+-#define be16_to_cpu __be16_to_cpu
+ #define cpu_to_le64p __cpu_to_le64p
+ #define le64_to_cpup __le64_to_cpup
+ #define cpu_to_le32p __cpu_to_le32p
+@@ -120,6 +114,31 @@
+ #define cpu_to_be16s __cpu_to_be16s
+ #define be16_to_cpus __be16_to_cpus
  
-+/**
-+ * tpm_show_device() - Show all TPM devices
-+ *
-+ * Return: 0 on success, -ve on failure
++/*
++ * Check if byte-order functions are already defined by the system:
++ * wolfTPM, wolfCrypt, and U-boot all define these functions, so
++ * we need to check if they are already defined before defining
++ * them again.
 + */
-+int tpm_show_device(void);
++#ifndef cpu_to_be16
++#define cpu_to_be16 __cpu_to_be16
++#endif
++#ifndef cpu_to_be32
++#define cpu_to_be32 __cpu_to_be32
++#endif
++#ifndef cpu_to_be64
++#define cpu_to_be64 __cpu_to_be64
++#endif
++#ifndef be16_to_cpu
++#define be16_to_cpu __be16_to_cpu
++#endif
++#ifndef be32_to_cpu
++#define be32_to_cpu __be32_to_cpu
++#endif
++#ifndef be64_to_cpu
++#define be64_to_cpu __be64_to_cpu
++#endif
 +
-+/**
-+ * tpm_set_device() - Set the TPM device to use
-+ *
-+ * @num: The number of the TPM device to use
-+ * Return: 0 on success, -ve on failure
-+ */
-+int tpm_set_device(unsigned long num);
-+
-+/**
-+ * get_tpm() - Get the TPM device
-+ *
-+ * Return: 0 on success, -ve on failure
-+ */
-+int get_tpm(struct udevice **devp);
-+
- #endif /* __TPM_COMMON_H */
+ /*
+  * They have to be macros in order to do the constant folding
+  * correctly - if the argument passed into a inline function
 -- 
 2.43.0
 
