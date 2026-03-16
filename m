@@ -4,57 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 913DCEFCBD4
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 08:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F8CF013CA
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 08:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D12F83F86;
-	Mon, 16 Mar 2026 09:26:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
+	by phobos.denx.de (Postfix) with ESMTP id 5017F83FA3;
+	Mon, 16 Mar 2026 09:27:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="DJLuH17P";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94DE683F8A; Mon, 16 Mar 2026 09:26:42 +0100 (CET)
-Received: from mail-10627.protonmail.ch (mail-10627.protonmail.ch
- [79.135.106.27])
+ id 2448683FA6; Mon, 16 Mar 2026 09:27:21 +0100 (CET)
+Received: from Atcsqr.andestech.com (exmail.andestech.com [60.248.187.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AD6083F14
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:26:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=philipmolloy.com
+ by phobos.denx.de (Postfix) with ESMTPS id 707E783F9B
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:27:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philip@philipmolloy.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail; t=1773649598; x=1773908798;
- bh=kGaYVga24QKo29jXiT0L2Is8woswWwnH5N27TqRadkA=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=DJLuH17PGOXfSQdpS3QftcLb4JFUuz5E8sqvjOJGdsCy3WiERkLZthg7cNjhBdqzC
- 7uPT+LEhBdR6oFDev8zecppzmrjT8Sqm2CeWv0ZBQe2KnvrGIkiJ1dSgqW1NxIR6wo
- GiV1uuflbiZZPb8nsEMLLCCW1Emy2cxL8eK0/QKE76Fs5/zntDJNFmxOs17JIw9h/Y
- BuUaT+373HORmRok0bwNGtCXUz0WEOZqRBN25AMQC4qNTIe2XkN9iXoE0SAn33Rydy
- Fv6jpH5EaGU58NV1iYl3vsjBixCkwoyXbXqhN+6+/gl+fW8LCuHDjTAqrRVZd98tNC
- hPpejbp+l5S7g==
-Date: Mon, 16 Mar 2026 08:26:33 +0000
-To: Peng Fan <peng.fan@oss.nxp.com>
-From: Philip Molloy <philip@philipmolloy.com>
-Cc: u-boot@lists.denx.de, linux@analog.com, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Philip Molloy <philip.molloy@analog.com>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 0/4] Minor i.MX DDR init clean-up
-Message-ID: <Y6hN4uV7tikRwtjm1nX1cDbhhVC3352WFGnHMYBU7An9v9t_1qGkuXK4TtvmbAXLcN5xKP0e36z0Km8ig9FYXRAnxgEjVjiEdL2Ue7Mi9RU=@philipmolloy.com>
-In-Reply-To: <aa5ZdyTtUwe5NReJ@shlinux89>
-References: <20260306085824.886254-1-philip@philipmolloy.com>
- <aa5ZdyTtUwe5NReJ@shlinux89>
-Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 31e04ebba890f80cafb5c03aa07549e6a668326e
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTP id 62G8Qvm7072270;
+ Mon, 16 Mar 2026 16:26:57 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Mar
+ 2026 16:26:57 +0800
+Date: Mon, 16 Mar 2026 16:26:54 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: E Shattow <e@freeshell.de>
+CC: Minda Chen <minda.chen@starfivetech.com>, Hal Feng
+ <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH] doc: board: starfive: jh7110 common give build output
+ dir by env not arg
+Message-ID: <abe-w8xbFOZMBXdu@swlinux02>
+References: <20260305205649.61100-1-e@freeshell.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20260305205649.61100-1-e@freeshell.de>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 62G8Qvm7072270
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,39 +67,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+On Thu, Mar 05, 2026 at 12:56:40PM -0800, E Shattow wrote:
+> Describe build with output directory as O=<dir> environment variable
+> and not unrelated -O <output sync> command line argument.
+> 
+> Fixes: 8304f3226700 ("doc: board: starfive: update jh7110 common description")
+> Signed-off-by: E Shattow <e@freeshell.de>
+> ---
+>  doc/board/starfive/jh7110_common.rst | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 
-Thanks so much for the quick reply!
-
-On Monday, March 9th, 2026 at 6:22 AM, Peng Fan <peng.fan@oss.nxp.com> wrot=
-e:
-> Hi Philip,
->=20
-> Thanks for your patches!
->=20
-> On Fri, Mar 06, 2026 at 08:58:27AM +0000, Philip Molloy wrote:
-> >This series makes minor clean-up changes to the i.MX DDR init code.
-> >
-> >Unfortunately, I don't have access to any NXP hardware. I ran into LTO
-> >issues with my Fedora toolchain building imx8mm_evk_defconfig. And
->=20
-> Would you please share the error logs?
-
-Digging a bit deeper now I came across the following Fedora issue:
-
-https://bugzilla.redhat.com/show_bug.cgi?id=3D2357465
-
-> >binman issues because of missing binary blobs with some imx9*
-> >defconfigs. But compilation was successful.
->=20
-> Right, the ddr binaries are out of tree.
->=20
-> >To support an upcoming ADI SoC that also uses LPDDR4 and Synpsys IP I
-> >would like to leverage the i.MX implementation. Therefore this clean-up
-> >can also serve as a kind of pre-RFC. I would love to know if the
-> >maintainers are open to transitioning to a more generic implementation.
->=20
-> If most code could be reused by ADI SoC, that is good to have a generic
-> implementation to avoid code duplication.
-=20
-Great to hear! Hopefully I can submit something before the end of April.
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
