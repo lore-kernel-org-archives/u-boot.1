@@ -4,108 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2071FF46442
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 09:59:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7754F46441
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 10:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8359C84006;
-	Mon, 16 Mar 2026 10:59:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F6AD8401A;
+	Mon, 16 Mar 2026 11:04:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vWXZoetJ";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="YhoTYQkX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A4C28400F; Mon, 16 Mar 2026 10:59:55 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A4A6E8401F; Mon, 16 Mar 2026 11:04:23 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E08F83FFF
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 10:59:53 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b9382e59c0eso722064266b.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 02:59:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773655192; cv=none;
- d=google.com; s=arc-20240605;
- b=LUH/kiuFjaWT3RqxmuMQ7wXigZyplnKqwZ2S5Yd4fzQHCdCIfaQKVjBsE2KNZN4SSI
- jhm127eTXNcYf0mkKNUOxVlAlhZB41WfS5VJ79aJYANyMT95JBWO/g74YV0sWgeqdLJG
- 5kqwaYouEmvybxLHP2tE4uThlJ5AOOb55vdRQTClwjFfDFp79BvmxzvV+DBgMU2BoqQN
- ZfLX1IEjm0jrymFjxFxsGoz6FE/QiBmAi0rehgAOOBsdQk1r50+zEArAtm71jnsCkM5y
- Pvn2owYqc5b20K7eIjLYk7zBcHCUcQlCfuNyLf06TMLwIvQ8blS8hLt1/iJqwAEz/HNq
- rbNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=EKYu1oHhMaD4No0LaPm2XQF3iz5GYRvqyXBLpdJaxl4=;
- fh=G/rdBhGV8pEss0Q+FX2itn+LnclDUbSrEVEuheKhx5k=;
- b=MacY99XFASf78NOJlblTYC/cAbEr9s/KY+r11wLGg3cdjQ3eyi2jyRUMOAlGB6m4z+
- EVRILIeO2gME0DL5DA2a6XTdpNWEW9GyRSWG9TBCoYjjNJKsSlLThSHqlac+aZsDvkxO
- 0Jm4ub3PRCwDR+WRoP3PrJQuLglcJ8tY9/hBtFl9gLi5lEraZut/YlhK4F7gid9Ux5lt
- +tErjSZcezF2OLB1BGE/tKrHyMBTI8qu5RRSAJfuW22OkXVLP8ZqI6WhjNZ23zc1rgbt
- RI7ImBikwLSj9pQGMpNRvCQ2dzSCv22OoUAJhEnSd/lGa+O3N0C7fK6kmddOEo+RebHj
- c+qg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773655192; x=1774259992;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EKYu1oHhMaD4No0LaPm2XQF3iz5GYRvqyXBLpdJaxl4=;
- b=vWXZoetJ0oq4dvW6NG8eUFvTBLXB8v4jFvC5n4mq3ksv8kHYlywEQ76rSyDVn/Q2v0
- SRw5MuAq+2q4yUH3QWCg/5XwpBsfrgCUpJLCKnOYlY03AIK3UjHS2ohDMzLYCiKZD94F
- Ndiu0T6B4N5cm1Y18mjDHNQ3aerBsiE4SqV0+p7lrPLfg0NmXq+rKt69qIUb05m8osYn
- FLgUu/ZT+j2Ws500x9sJWfeuflFi7JwMOHCg3OpxFQaw4oiV4bSkFOKWDqYWFhvn+puZ
- LVF9g8SBrnJyGFmv+X/MM+X7VsfU1JuhFU9AGQm9oidIjWtuw+7drUAjKZKXeHnVt1S6
- Mxkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773655192; x=1774259992;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=EKYu1oHhMaD4No0LaPm2XQF3iz5GYRvqyXBLpdJaxl4=;
- b=d1VNLyZvnAzI/Xk/1cr9tzu6Y8/9pqEyDXD/0EUe8ds2P1edFq9P9BgaKoUIeowGe+
- P3dwAEBiligUgoW82cX3tvQ35R47Cq2aIuCYg8zW5X6jJcHU4oXK0RcVLEkdVV4c+80k
- bgkKhefwyFV3q76VuJaxazf6UdXlYjYzAg0zEY1zsT9c1ZbTfRxoFHs0GARFicDZwaWm
- rcYkhgKlhIRHdHm7LHnxKtR6bED+Lr07FBJLo7MKmVluaU+t3rRoAuTtG0SnvmyMVRu4
- PwxJJIQMxhiri59sgTb1Ej5W4dxBiCFtJAi1dXB55PmDPO36QRWtFDCvhRBb71GY2kvA
- EtUA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWG4eYEHPE02WcTlk9B8FqUj1lGpLxuV9Yv/U+iMGHwsw4v/PeQu/fQEWvMMJhJhScapvjYmQg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzlP2YII5C5yrdWcxy3TAhY3f7uPlfk7m37mIP5uJFFfhSY8Ekt
- 1tvY2zIqO+OkdIB01+aK9+nsv9s+tQkFu8WnPmZXfzcH+r/auABmjRqn+Jx/YnNew1rxwbZSEIs
- f9k2Y/6DXkI1Sw74946ibNdUiBrfvdMEnTOwb48xUJA==
-X-Gm-Gg: ATEYQzwZ99ipqjV16ftpG4jtTI7lFlEGdxldmCYbTuB6sgE2kZpzWUt5KeaSmGRI+EP
- TwOyKnuoHsFb6OPQbCPoLvc0pPw3hrT8wKhaBCukYcW4Cl/E5o8SMlBgir3D84T+udRyWWaImCV
- fMlk31EnIDaBX/Mdn0ryIWPYFbdcrkvgCamfCBGx1GUlCQDAh5eLlwEwToD4LIO4WhpphqGO6X0
- zy//yGTA3R17Jg2xhybEGTGlpGkhxHlnLgKGBculTdqbKqu5nyVO9pRCdLDx8jyZiQrXElzg5+F
- AC3YUC4NxoN5lJd2tWu8Go+smckIh28QfSfZHBCV48u4ztmUEk+zyajMAq3Rm0AMJwZe8DsoSvn
- Y8Dl34jKmh3PO+XGQ/q62YITAA9dsxIz7ABvt
-X-Received: by 2002:a17:906:f5aa:b0:b97:a68c:878f with SMTP id
- a640c23a62f3a-b97a68c8ce6mr277238966b.44.1773655192480; Mon, 16 Mar 2026
- 02:59:52 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 36AFE84010
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 11:04:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=dbc6=BQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
+ References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1773655460;
+ bh=Sp+I+O82MzTKZzarZr2aryXlj/1BPRY/+CtbUnpc8Cw=;
+ b=YhoTYQkXqn5fafx1fQz59i0mL7r8uCR1+nBnZZnrrHf+L/AdT6SoHz6as4aUgmCXvA0QUclM5
+ AZWQhgx3L9W4UgWCILJeunpYhi87BfLG/Go69yuPKpfwmYm6xETg7FZFEscSX/E5E6Az8tMRRzk
+ 2MPVpeztAmbEl49OvGJ6q4vwqDTFA/UsFbnLu+gebYjk2Va/2mWSQxBFdlu7+Ab3xrQXCpil+p0
+ UkvC4A1z5aCPqEakVlAIzYcL58x9ZtXe946M474lHofTSpf0leQuj+jhfVAJodPbZN6FxU/JsRX
+ VyNx1CDy/PSsf18PVuvJ8bDPQbdU+Fl/NST8/z1f1s4A==
+X-Forward-Email-ID: 69b7d5a02326cf9cee486a98
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.66
+X-Forward-Email-Version: 2.6.50
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <942c0020-e43d-4d86-b8c0-ccc8f7ed2b2c@kwiboo.se>
+Date: Mon, 16 Mar 2026 11:04:13 +0100
 MIME-Version: 1.0
-References: <20260309-clk-mtk-unify-mux-parents-v2-0-b084ea74b99d@baylibre.com>
-In-Reply-To: <20260309-clk-mtk-unify-mux-parents-v2-0-b084ea74b99d@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 16 Mar 2026 10:59:45 +0100
-X-Gm-Features: AaiRm53gigkmPbGwFKb5Qfmknr-lqtM-KWaLOS27NotwEjaOHqIuZFZryCwG2gc
-Message-ID: <CAEHHSvZ5=-wm7J0e5RHsw3zx9KSQJEHZXa+ypuVuhQXWiNjoFA@mail.gmail.com>
-Subject: Re: [PATCH v2 00/13] clk: mediatek: unify mux clocks
-To: David Lechner <dlechner@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, Macpaul Lin <macpaul.lin@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] USB: dwc2: allow usb start even if usbphy is not found
+To: Marius Dinu <m95d+git@psihoexpert.ro>
+References: <20260316092639.2377-1-m95d+git@psihoexpert.ro>
+Content-Language: en-US
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20260316092639.2377-1-m95d+git@psihoexpert.ro>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,101 +72,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le lun. 9 mars 2026 =C3=A0 22:29, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> The MediaTek clock driver currently have two ways to indicate the parent
-> tree that contains the parent clock. This adds to code complexity and
-> makes it more difficult to know the "right thing" to do in new drivers.
->
-> The plan here is to convert all mux clocks to use the more robust option
-> of using struct mtk_parent to specify parent clocks. Then we can remove
-> dead and duplicate code and macros.
->
-> The conversion to the static const struct mtk_parent arrays was done
-> by script to minimize the chance of error (and save time).
->
-> Signed-off-by: David Lechner <dlechner@baylibre.com>
+Hi Marius,
+
+On 3/16/2026 10:26 AM, Marius Dinu wrote:
+> RK3288 uses rockchip_usb2_phy, but that driver doesn't register iself
+> as a usbphy driver and "usb start" fails with this error:
+> 
+>   drivers/usb/host/dwc2.c:1254- dwc2_setup_phy() dwc2_usb usb@ff580000:
+>   Failed to get USB PHY: -19.
+> 
+> Until a proper fix is made for rockchip_usb2_phy, this patch allows
+> usb start to continue even if usbphy is not found.
+> 
+> Tested on Asus TinkerBoard.
+
+I am not seeing this issue on my TinkerBoard, what U-Boot version are
+you testing and have you made any config changes compared to
+tinker-rk3288_defconfig?
+
+  => usb start
+  starting USB...
+  USB DWC2
+  USB DWC2
+  Bus usb@ff540000: 2 USB Device(s) found
+  Bus usb@ff580000: 1 USB Device(s) found
+         scanning usb for storage devices... 0 Storage Device(s) found
+
+  => dm tree -e usb
+   Class     Seq    Probed  Driver                Name
+  -----------------------------------------------------------
+   usb           0  [ + ]   dwc2_usb              usb@ff540000
+   usb_hub       0  [ + ]   usb_hub               `-- usb_hub
+   usb_hub       1  [ + ]   usb_hub                   `-- usb_hub
+   usb           1  [ + ]   dwc2_usb              usb@ff580000
+   usb_hub       2  [ + ]   usb_hub               `-- usb_hub
+
+Have something changed recently that broke this?
+
+Anyway if something needs fixing it is probably rockchip_usb2_phy.
+
+Regards,
+Jonas
+
+> 
+> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
 > ---
-> Changes in v2:
-> - Rebased on updated dependencies.
-> - Link to v1: https://lore.kernel.org/r/20260302-clk-mtk-unify-mux-parent=
-s-v1-0-32f45085f4d0@baylibre.com
->
-> ---
-> David Lechner (13):
->       clk: mediatek: mt7622: convert to struct mtk_parent
+>  drivers/usb/host/dwc2.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+> index 16f21fa9083..74d71f23d88 100644
+> --- a/drivers/usb/host/dwc2.c
+> +++ b/drivers/usb/host/dwc2.c
+> @@ -1329,7 +1329,7 @@ static int dwc2_usb_probe(struct udevice *dev)
+>  
+>  	ret = dwc2_setup_phy(dev);
+>  	if (ret)
+> -		return ret;
+> +		dev_dbg(dev, "Failed to setup PHY: %d. Continuing anyway...\n", ret);
+>  
+>  	return dwc2_init_common(dev, priv);
+>  }
+> @@ -1345,8 +1345,7 @@ static int dwc2_usb_remove(struct udevice *dev)
+>  
+>  	ret = dwc2_shutdown_phy(dev);
+>  	if (ret) {
+> -		dev_dbg(dev, "Failed to shutdown USB PHY: %d.\n", ret);
+> -		return ret;
+> +		dev_dbg(dev, "Failed to shutdown USB PHY: %d. Continuing anyway...\n", ret);
+>  	}
+>  
+>  	dwc2_uninit_common(priv->regs);
 
-Hello David,
-
-Is there a reason to have 2 different series to convert to struct mtk_paren=
-t?
-You are already doing this kind of cleanup in [1]. Can we merge into
-one single series? Specifically we end up doing this cleanup into two
-commits for mt7622..
-
-[1]: https://patchwork.ozlabs.org/project/uboot/cover/20260306-clk-mtk-remo=
-ve-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com/
-
-Thanks
-Julien
->       clk: mediatek: mt7981: convert to struct mtk_parent
->       clk: mediatek: mt7987: convert to struct mtk_parent
->       clk: mediatek: mt7988: convert to struct mtk_parent
->       clk: mediatek: mt8183: convert to struct mtk_parent
->       clk: mediatek: mt8188: convert to struct mtk_parent
->       clk: mediatek: mt8195: convert to struct mtk_parent
->       clk: mediatek: mt8365: convert to struct mtk_parent
->       clk: mediatek: mt8512: convert to struct mtk_parent
->       clk: mediatek: mt8516: convert to struct mtk_parent
->       clk: mediatek: mt8518: convert to struct mtk_parent
->       clk: mediatek: remove CLK_PARENT_MIXED flag
->       clk: mediatek: refactor duplicate *_mux_get_rate()
->
->  drivers/clk/mediatek/clk-mt7622.c |   88 +-
->  drivers/clk/mediatek/clk-mt7623.c |  147 ++-
->  drivers/clk/mediatek/clk-mt7629.c |   71 +-
->  drivers/clk/mediatek/clk-mt7981.c |  231 ++--
->  drivers/clk/mediatek/clk-mt7986.c |   10 +-
->  drivers/clk/mediatek/clk-mt7987.c |   75 +-
->  drivers/clk/mediatek/clk-mt7988.c |   79 +-
->  drivers/clk/mediatek/clk-mt8183.c |  584 +++++------
->  drivers/clk/mediatek/clk-mt8188.c | 1522 +++++++++++++--------------
->  drivers/clk/mediatek/clk-mt8189.c |   12 +-
->  drivers/clk/mediatek/clk-mt8195.c | 1349 ++++++++++++------------
->  drivers/clk/mediatek/clk-mt8365.c |  450 ++++----
->  drivers/clk/mediatek/clk-mt8512.c |  620 +++++------
->  drivers/clk/mediatek/clk-mt8516.c |  704 ++++++-------
->  drivers/clk/mediatek/clk-mt8518.c | 2088 ++++++++++++++++++-------------=
-------
->  drivers/clk/mediatek/clk-mtk.c    |  104 +-
->  drivers/clk/mediatek/clk-mtk.h    |   62 +-
->  17 files changed, 4106 insertions(+), 4090 deletions(-)
-> ---
-> base-commit: 36add050eea439f0b2a15e4ea0d3a8e21216f159
-> change-id: 20260302-clk-mtk-unify-mux-parents-1bf35aeabf00
-> prerequisite-message-id: <20260303-mtk-mt8189-clocks-v4-0-ee85f8dd2f0d@ba=
-ylibre.com>
-> prerequisite-patch-id: 81f2dd4fd7c1632736c08180d6b9f6aef5fe1e7f
-> prerequisite-patch-id: 60f0509a5f36c2828316fa3e27dfd8f4d218eb27
-> prerequisite-patch-id: 237c548edf19f9cf734b1ac3b9252a4f06d8cf29
-> prerequisite-patch-id: 22de64f70e8d1ba5e17f8b31f461118b35e54f30
-> prerequisite-patch-id: 3d5661f9e55292a30f57617848a7b10e67844402
-> prerequisite-patch-id: ccbc73b2bc1dc41beb295604088d63773cea15ef
-> prerequisite-patch-id: aa76b6b028374f20551955eafe56a1e0c1daa75d
-> prerequisite-message-id: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2=
--0-b253b49f17b2@baylibre.com>
-> prerequisite-patch-id: 15ac11765ddddcf378e0e227a9fb5876636aa8e6
-> prerequisite-patch-id: 90b4781a99ea5eb40eb6c943dee86dd8a9fabe06
-> prerequisite-patch-id: 150153a03fa40f8f9d790526512f7341a7d95eba
-> prerequisite-patch-id: bdc28e831956d0a487c62e11d1442a51b9548c25
-> prerequisite-patch-id: 08b3b97b5870fa4c5eb435f5b19762481a94c058
-> prerequisite-patch-id: 291f87bf8033440b0c79a03055cec7e1317216e2
-> prerequisite-patch-id: d3ff487de22ca508a65613bebf8cbe0e61005a31
-> prerequisite-patch-id: f0e2edcbe17f6bea4bd4e6ceea49cbf73b7568d7
-> prerequisite-patch-id: 0700411359ab89ebd24c4c3d17a5864e41289547
->
-> Best regards,
-> --
-> David Lechner <dlechner@baylibre.com>
->
