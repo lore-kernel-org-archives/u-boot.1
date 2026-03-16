@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FB34EFCBD4
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 08:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B6DDF013C5
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 08:05:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E0CB83F6D;
-	Mon, 16 Mar 2026 09:05:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02DBE83F9A;
+	Mon, 16 Mar 2026 09:05:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="CuJ/Y8MX";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="uRdsY0vw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0527C83A1B; Mon, 16 Mar 2026 09:05:06 +0100 (CET)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id 04BB083DA6; Mon, 16 Mar 2026 09:05:06 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1CE083A1B
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:05:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39FA783DA6
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 09:05:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=W5sWMIJP/1DWzH0SH0vBsf0+u+lGG4hFLHmUgweRuCWZfS+dD//SgIqCiTjtmZuueIaHuQMe2OD4MP9ogv26ixh69cVm5Ms+l1Bv+H0uQH6BtHU6B3mlQKl/DyvPVB/RykXHsafY22HWkJ+W5uqM94YxPFD4LEzy1eyp1d49dDLkmj/JiA/QJrgcvuAycckqcXZE8eAM2QT0rJOf+fE0LIB/j3onfFivmnCpxkBIPBv0Kb0kw2N2KNRugqdj3WmVfoGca8JrmBUmfX3J7jFyKbYlhePrzkjMWde+zS5hGZvW7jJu8IWdwTA68bsBVE5cTrlt1nvo11fun9wuv8ffbQ==
+ b=npuMea9KvaO/fi+Qq/6EHwllkNWBdnR/jRFM9grPWbJb3o2XlQsJe37/37ToTIFtTQBCUeRYnRDk3yr0OGnSihW7U6mV2PGcj0SKtiL4Lzxn1Z9lOlbYMgzA53ieIcmyTUOKssGrvNVlNslFY+284GiR5vImhXikmZZzXf8lqX8xnuoQ3J8gOA/mwGili47dlKFsNzNz5vMvzX9MZzcXX3d3SwyTd9Wr/XPgvpWE/pa+5HOxYGrld7+DXIiFnAHltbAIGLF3Lxr3w62hW7mfOKwgOl4DOQ36JPM8muPwzNfgASkYCHeMZAm8EHjU5W1yWEq7mUvhGrE8wSk5T+qkgA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wTQfvcEqO10zgSV7jKoBuD+GU5Wds755Wm535P1QUlY=;
- b=XpbR+Ox3G6zEXjFIaQp3fcYOiZL87xZkc/W0ZO9hdPUVcZ8jEVWPuL4VWUBzQwEHW5o9VEs35jxl+EST2hnVC9cpzhJtCHCnf4nW4HEAiRhDkgE04a/Ci4s9b+RDaBN0GH5cnNp094mO+EhTQc6FqsqhKPPhirdnXEVzKBRMUqlewtLZxa1DY8eNQoA060ZlHE6h6IDHHrugJlV/8Zab3ny035LPOKtVB2IGh7kTBABhoqgyKIPEIq6woOlijvRlOlbuZ1ri6eWz76KWXWbm/i1LaCASzfQHSO483kr33RWb2OPDaS49qgeA5gdimNsIHd2qAK4fgzoWv5+XOBPr6Q==
+ bh=DZXK6XS2jE7uc0Xb/kneLBZl1l/GXDkpqFi0vCm0dCI=;
+ b=qkX8nbrALEEvEhR2ytSqQqhA9/Oi++Tc9doQ1psH3jWmPcjndVGj5h1a7xZk1QABpfaCnyKt6/zpXK6jub88hngsMHnvxtCeunRf212o3r6BKwBj+E5ZrUbwBOxwJb2p/bzVWVTDogEkTwqp+2nbecsfwUt9as7xDdB/G7xgSd/qNC5B/Vlvid0tgAUO+ETgacTZwGwhCws/4d/ZI0DQSyMEesfiNtgt9H+DhGglEY7BZq4DkKFXrk+occrYcPlr+n0WNwZh28fM7R+isnhayJjgm8RlKiJt/G+cWBz7HQsCBeVnCyXQZ6jCsm0Ga5EcfO8gDNuXQGJKpQ62uacHkw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wTQfvcEqO10zgSV7jKoBuD+GU5Wds755Wm535P1QUlY=;
- b=CuJ/Y8MXuoDVykuOTOjMOBj3CCCCK02vVPIywTbWl5aV6chvRVlAU+0WqRIC9DG9WWk5ZC5tgAxP5ddOgl5iJ56w0AOrRl5JXw+L2dFRU0gqMT7qyaV/Q7WsWlwFrR+H+0EbCnVyByCll/+AOiLOD3E1E95KkKhARCZtovQfrC3nehAnhTK8H6lBbVrnJhtWXL258ALMg7KCxac2H7nHSClHj2evCeQwU1f72jwZL8XuZELNtMZn02MWj77471dKU9E7a0bAchOqb72NJu3FzVBrBiJ5dXIvkdcm8DOnRIxXC0/loG4wVzDVKZIpYTg2AVNXvmOqf5JGtu4Lk4+ptQ==
+ bh=DZXK6XS2jE7uc0Xb/kneLBZl1l/GXDkpqFi0vCm0dCI=;
+ b=uRdsY0vwKjS8jaY2Y48iEC6/ruILy0fw+hZ4mHQwXHu17L7Mp0A6Ay+aXuM+NgAwvlE7QvpRDUcukjYhoOiBLscjDxAvzfT2XfPzfk/aQqWI570QY7H89+NvxI7usBRrqRb7mPoBqB/8XtXRRIe89onpUl7AZBBjDVWLdFg4+mYVETCyDjhMAlhOTFizU6dgh0P+O+yxfLERWKGCOPwmRgBScFcL9uyYZzLgL7MEk4n+olRr67a0apBXj0GCamVUeXGX6OAowg1jg+Ms0NuQn2z1DfZ+/VEcTtbhbIxIYLFrzGxk0US+ZZeF69fO6WH+JQmNjUlUPwY41W4nn7OQKA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from GV4PR04MB11901.eurprd04.prod.outlook.com
  (2603:10a6:150:2eb::21) by GV1PR04MB10128.eurprd04.prod.outlook.com
  (2603:10a6:150:1af::15) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.22; Mon, 16 Mar
- 2026 08:04:30 +0000
+ 2026 08:04:32 +0000
 Received: from GV4PR04MB11901.eurprd04.prod.outlook.com
  ([fe80::601d:ca21:9592:9a12]) by GV4PR04MB11901.eurprd04.prod.outlook.com
  ([fe80::601d:ca21:9592:9a12%4]) with mapi id 15.20.9700.022; Mon, 16 Mar 2026
- 08:04:58 +0000
+ 08:05:00 +0000
 From: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>
 To: uboot-imx@nxp.com,
 	u-boot@lists.denx.de
@@ -62,9 +62,9 @@ Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
  sebastien.szymanski@armadeus.com, ravi@prevas.dk,
  joao.goncalves@toradex.com, ji.luo@nxp.com, tharvey@gateworks.com,
  qijian.guo@nxp.com
-Subject: [PATCH v2 4/5] board: nxp: imx9{4,5}_evk: Add qb save option in SPL
-Date: Mon, 16 Mar 2026 10:15:55 +0200
-Message-ID: <8f6be77bacc6a9abeaf4e9cf6c6f5e01890bc31a.1773648510.git.simona.toaca@nxp.com>
+Subject: [PATCH v2 5/5] doc: board: nxp: Add Quickboot documentation
+Date: Mon, 16 Mar 2026 10:15:56 +0200
+Message-ID: <be6b07edb38e4e0dc86e65f8bac7b6b3b0e29d01.1773648510.git.simona.toaca@nxp.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1773648510.git.simona.toaca@nxp.com>
 References: <cover.1773648510.git.simona.toaca@nxp.com>
@@ -77,58 +77,58 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV4PR04MB11901:EE_|GV1PR04MB10128:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8bd75094-56cd-4ca6-a340-08de8332b784
+X-MS-Office365-Filtering-Correlation-Id: d872d0eb-8c85-474b-2d6d-08de8332b8c2
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|19092799006|376014|366016|22082099003|56012099003|18002099003;
-X-Microsoft-Antispam-Message-Info: Jm+th2jn/rziE3GVjvBVKHAgTAuxWAtpPUr8b65k89W9XWIFz/dXBGpbhn7MuWjBUXAMQsVHI0ZbkH8iBxo45Smb4xs4hJWINM+a1kLj6YXmVTDK21B9EffEp5gWDJdLlLLKY2bbZ+Col9pINeCvZTSojs+TDDTfreQVfO0DZMAoesvMPReWUpeTWmrtYxO5ZB6b+OIArl+j9Me/Z5JMQOyjTz049A2/zND3VnJOmyxGsNygqEMMcNY5DPEhXdxh8y+tCuBelV+SDGWzKHAR0W7V60Xgk8IcZLuvbCwL/3XeWXRFDuvsKKdLh00SijU3ZSFpLhqKY2UTDlQ9KCsyvQfVRTMLghbfs7iBcRju5RtCh7JiTF2GGvehE4z4aUVTAUGSkMYOh4D/mzqAclcRW91T/Z+H+G+uTRuJ++s0Z/BDc3fY2jY6T52+RaF+DTcmIbKfboqveiiV/CpGt7u2whBVCPIe3P7SP0DIfjsX995rXKVLUciKumoRNdYsF6kd9sePguQfSYULR4QfTDEj/cReXL/pc1zwXIk9JgZvHPvH7bRQaVM96LKitsxKKq8M8NJmoWBcNFdR+C7FqWBLKI3qJOoJCQq7F7mmtsl6U07FZ/s3fLB1IWvLzIPOPPC17BiPjp1+F6Uh/Hu/RpH1xO54/1MD5cpdk6bkFrOdi9RdPeIFv1LwMri1F5/cLZfcx6e1dXKQhalryKbWHu4UCHvmS0pLHvBg5o9gnmpVIew=
+X-Microsoft-Antispam-Message-Info: Cg1i4ybqC9ldPatlYdiwsfY41AjcDXIT3kDNWytN8Iz/zy0JpbDssPiwqdLI8Rlxd5tU7sT4Jq6eHNHn6XtqsuQ6VBWJIUoY4o6vJ8PpnaCyqf1/A17REqVU4fzGkG3yPh/y/ou33znnwG4zUO4VfQ3/xZF1PoTkNbkzLM/k+QtaoynlurC5b4IO12RezBl/0iYRc9NeiTG4hF00GTJGJ/iLEWQcqcSVn7SMyLE3KhjoA6u1j9hHNvHQD4KF0YuqatWfUbxPAXEADda+O6ptrGs+QHNJdE2Xr6P6LMpg5E3LGOXR8DJsctcJPgNx2EJHY+O2RTLioT+N5UsdUoWQpyBPK8pj/EskyysZM0J+5mOc9v15uC125+k8JXWgt9bxBm0JFyQVNfiGEVCsU3qS/v4FBfxdJB8Z32tsRlBsPgWy/Y4kCJ1PXhf9du5tq39sGkeyvh3Liy3/bZkVnkzbha8tGdiEE2/CI63vONftL5gEXSsU6RBWBcYTXWEJnPpWbM0kgipcTWipOZ7lrfyOHhoVZdFALYo5tXCJsCOpdfummwksakJLinv+mFojfq9emneP3nPAWW0P/eUkFgtrfOUwN1tN8m4iQkW5Wnh0XrPEkW6+B1Iyn40EMWcbWrhcDxQwNfLvMfD4+LY7lpCqHAs2nE4xBpn2IoX7AdILFMhFZ1wpLrH3PkFNh5COzbS/Ykk+6RVGg87vH/neNRHnn6PLTHzbLtoe8UD6Z/MqiHk=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV4PR04MB11901.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(19092799006)(376014)(366016)(22082099003)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?jkrSZsRGxqXvE1sqli7bhBrvxQUueyHj9uCDV58MK1MwuQIMtqqT4v+8scL2?=
- =?us-ascii?Q?K5+BMYGxOra9C47FC3HQ1AYE7b577eoQkV+XvzTt6LjwMfVa7i00CN2kOlPk?=
- =?us-ascii?Q?LzXQ7AQOP2/9HXXXLzRHeMpix5LHsxIqMZhSQkbxTFD1oWgIaT771nL4rr7u?=
- =?us-ascii?Q?iD2ZCQ4jI2wPM2Gt+w66mPxRBt9gKVM5snzPaOxgiVLX4xH+yKyM/3yKkc/w?=
- =?us-ascii?Q?7sDbFRfMmlWGJG+R3cpH1fJmoLj0yoFplmp6o5Dgn6Rrr8LSPji9hKo3L1Fc?=
- =?us-ascii?Q?VHBtn1l8d3/ZxcfUCJQ2u9SQdE4y8GE/HP7L/YGRL7jRfSwtsILJvUTB4FW0?=
- =?us-ascii?Q?RS/QwFI/vPhpAxfIX6Y1IPetL9nJ01BZPLnllrsC4eDPuXw/hVoipHBJqHO+?=
- =?us-ascii?Q?dv7JU7bhhI3bmznpdgH1+zMyYj0/FeZd2GCMSFeySn5/T0Bx14gvydSXgW6f?=
- =?us-ascii?Q?fsng+rFrLp93KEWa2YFLsOzbTlb8D/2cDYbl5oEBzfRjvsuBS/vE+VN6NiEm?=
- =?us-ascii?Q?dMToROjbjvUofmWhJyZ5Oe1T0Em+pcyNVCojsETTPw1+KkcrwU/KwMVTtEpn?=
- =?us-ascii?Q?S3kiEj4ZbZesoPC6My8ybXpFu2kAsAgrWKVvqMUirJ/j1cKLjl+5TWkCtno8?=
- =?us-ascii?Q?KkG75LXS1kICrcrFtqAaWWvHJOd4G4531+PstJ980/b3fyMYRzc45dwcNrss?=
- =?us-ascii?Q?FZJzOEQI0wCfO+Sn/3NZzrt2vCXaRwWzxIzmDE+ymb9OpfQsGmEfILLu+EKG?=
- =?us-ascii?Q?YiXFtxBJ6L5Vq7UoLHKYbiD0MfzzpvjocmK39H/3/C7V4twtL41zBKFtwvbW?=
- =?us-ascii?Q?iIODf2ZFitsqBwQYTvxsvOGxXJUBzfUTbnZz3HZTYfKPaaAkthcidjx/VWNB?=
- =?us-ascii?Q?ONgPhJWo7U5hJvXBP8hHGetCSb+F6g6laQCmZ4IU5nt7w4HoiVRNIzbBa4l8?=
- =?us-ascii?Q?hI+Tb/kwKjzMROFLlI8PPLpjLS9Kc42fYlsgNcRXm6jO4y3bivmEncQ0QkWQ?=
- =?us-ascii?Q?AJmAKvjaVkHDW7Wva5Zs+Iqmb7yxewFWBjXVbNxbJ2lKIiqBcwDeivcDpDGw?=
- =?us-ascii?Q?BK0hiuAO31SzvaWA9A3A+lw6aZe5WZ/L5VV37OFJXUed2dLJX+7NaJL0O3Ce?=
- =?us-ascii?Q?xbuJbG8UaVDai+bFt/Sl4SnJ65UISZP/FvEaLNzvud9IfY7QQz9BdjKegetq?=
- =?us-ascii?Q?UszGDQzWG3BA955HPO6BXE/aGnsYTs0dTDHI/i2s40/6zjdqhQCEMM9l/iMJ?=
- =?us-ascii?Q?aiYPA6gnbXjdFCmtITpMXx6/ycGQ7rJvCJexGHA24Z9GwSpMs2gO8uoDErYB?=
- =?us-ascii?Q?n5SAoAihvWpMkahPDMSn47CltyqdcrXQAtItZQHY12zHFx4fzUQNFuI/vaWy?=
- =?us-ascii?Q?9aSRtamHkMb5gRFlHLZMBoQqu9rBDJfL0JD2iK3ivyby5bIletAKGC/d66I0?=
- =?us-ascii?Q?u/kEQ2GviJKTPdbwixpnHXqazh8gQkgTRRGjpEZJPL2ayH3U9/GCrvwtGWas?=
- =?us-ascii?Q?fwoq9iCJ1bkiqOyBJE7wDU4g2/eTY9NQ6VCyixUe+VDeFI/P1KAa/x+jYW19?=
- =?us-ascii?Q?ByTVpahKR5lxqwATou69iHAHGwCG7zg/5KePOWA06n7fno95gwpvbw8GBsjf?=
- =?us-ascii?Q?pELVhXfjOkFwKKe6/hlDECy49PEVpYckCc4BQeqw9eY8w1zVrY/MEPVtMBY6?=
- =?us-ascii?Q?WmS9TcrdMWW0qfs2EwLWiScRRXpu/jXhGRbEq+dgsEEplRCJlGbIn25S7SIM?=
- =?us-ascii?Q?IMxvaf+7CQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1A2riiOpplVu4n00jP9d6Nj1QVUr8HCCjCUPqZdVVyFxADFGhrxFqV9g2hF0?=
+ =?us-ascii?Q?NkLcOF+0fuD2ehJc8vXFy7okYoMOKvqXotnYQYoyGRrJgtoLITXgLreFrabQ?=
+ =?us-ascii?Q?0/X+w922JNF3dQ2jW8GKdq2ZJ9x2PYxCJqyFvzjzmQvW9rhpD3UYZVQ6ThA+?=
+ =?us-ascii?Q?TEvhXjSDqfjDWNFf8U1BASyLO0zqowEON3gvC/q95yVrKCBOsYZ73G9N1wqz?=
+ =?us-ascii?Q?yS02/8QzyG6nBsawowlkBmbEj2dmuyHWfCcdJZgE1SurStyEXhyO5autUKmT?=
+ =?us-ascii?Q?lMF/7+dzSMUofs0nG5rSVsbzeV5206IP2r1EKOowJsnpA1DCzxxI7r8MiASU?=
+ =?us-ascii?Q?ldDCyC2FEmBCzwh/th2Pgc+4CWX41fNXMKtvk+8XhCLKNW1KxeWQreA3F4si?=
+ =?us-ascii?Q?0K6+q8FgdqXkDGZrjASpIXvB6QottIa/sybW64ksRxzU1wWzsqcVv5jHlUMx?=
+ =?us-ascii?Q?T0FQv08UBiFpbGtQ5Z+EN3Qw9gnzBsZJ424VzCaKqA1tuRNFz77TolRTcylA?=
+ =?us-ascii?Q?9d32daY+IAmfu9cG11Nzkz+vooFcCuhYK93kOfZlSBYPGZXkNe5Kkg/6WswS?=
+ =?us-ascii?Q?ZIbsYOv9tJvNFceMnVguJqwP42IEyaeVe1CFbewSpwihiIwH4lgdSEa9hmBD?=
+ =?us-ascii?Q?fEvkQFSV/YYZ+NqRzDHpqFJh9dHY3CNrL4bY+ybLSq5pYe5MeJEr0VmTHZsw?=
+ =?us-ascii?Q?+H4D2+XdtxO6PJmZauRYs9DQDD01PNvCQZfRjy7CsWj0e60s5HqiZKS8CUpE?=
+ =?us-ascii?Q?JfnFz6EDPItUK010SrrcAbO0Gv60cHsXyYsYEH1GFfnQjChQ6BvgviNIe8kt?=
+ =?us-ascii?Q?bCzK/dbIHt2xvuiJ6a64mcL1krXoSmYc8NuwicLA1TnnC5MXfD4Lk9HrHSIW?=
+ =?us-ascii?Q?xFn9cAD1s8LBkP1VRIYQFxoKVVS09qabpuVFgpqNvZCQ/7noXqEDIoALXSLR?=
+ =?us-ascii?Q?rdGijVYrupk7ez1HEUWgFmLX90rbiDBhE81J8slGD1VxwzhxdMLBesFadUCW?=
+ =?us-ascii?Q?Stc8AFTjpA0xvkhmdjXWuIldwBGojF9BpxyLAOaFTTDBlBj5sk1IK12GnX/A?=
+ =?us-ascii?Q?hxN+MwMX/yVYV/LQZaqnVewTUQ58V1spWVc0ikTaRjeP+kkQGPHYXxX5NXrL?=
+ =?us-ascii?Q?NbfCAwM82iT+vOmPoT5Uoiz4X8ODXUNXNwipIQXu727fHak0QDysV8dS2Bkz?=
+ =?us-ascii?Q?Je94FRwF+/U6QcGDF/f4huYQD4Yjuwzim3mbMOj25qdC1JmTmE2MvZAWqWr/?=
+ =?us-ascii?Q?BzCTecMavop60AjEDYJIfzDOwPgJmvnEEnmn8ef1fWa2B7/QRVSf8unpI9+J?=
+ =?us-ascii?Q?pDlUwVhx8mW7kOJSbJG9+C4NrABcou8B0jUu8WfNYBxbAqZosK/MgjcM10Rg?=
+ =?us-ascii?Q?y6Moix5IOaNG9Bayd8kmkMjS4fPqVLdXPfXnOMg+4nrGbDdQdJkZjgDTVSo6?=
+ =?us-ascii?Q?cu9lohESD5tk9TXmR85vA2QPc2qvv0HOF+kHL34CRNWRlaEoyugrswMXMI2k?=
+ =?us-ascii?Q?kX1JoAOwjbk2JpRnfcUiYChkRVQsUppBj/YM3XCzbxV7Xh791rBcZ0dnpiND?=
+ =?us-ascii?Q?GfxIiqIAwjSfBrRQlRyDq6a9KDadONJLEg5l6urSaOCJBsgQy4ZKaEGUJQqh?=
+ =?us-ascii?Q?CTniAilcYYutnztQznw8DqBgLKDE2HKvqep6mRwZm+cb18nhKI7rocxiE8St?=
+ =?us-ascii?Q?tytvZ9sWB+pjqc/w1Qflzk9xrMnaBCGKpyQTh0e4VKnR0t3Bk5z+aLKLXid/?=
+ =?us-ascii?Q?ihDSITstUA=3D=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8bd75094-56cd-4ca6-a340-08de8332b784
+X-MS-Exchange-CrossTenant-Network-Message-Id: d872d0eb-8c85-474b-2d6d-08de8332b8c2
 X-MS-Exchange-CrossTenant-AuthSource: GV4PR04MB11901.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Mar 2026 08:04:58.6007 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Mar 2026 08:05:00.6600 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GMetaEWd3fFPpALXRXQImMYXPVSyqkq8X3Y0DYr82uc8Txa1KhlIsDKD8AToQBvgeKvaPXCreayIDWKg8HfZHw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: VzZW2DWvZXyYnui1PCeHZbFbDOQ6gOxHSzMsyCTP5/sLNz1AdQ6i6MZFp8wBKorGkI1uN6gibLSvzqEW4w8BwA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10128
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -148,150 +148,81 @@ X-Virus-Status: Clean
 
 From: Simona Toaca <simona.toaca@nxp.com>
 
-Call qb save automatically in the board-specific
-spl_board_init(), if SPL_IMX_QB option is enabled.
-This makes sure qb_save is called before any image
-loading is done by the SPL. This option is also
-suitable for the case where U-Boot proper is
-missing (Falcon mode).
-
-qb save refers to saving DDR training data to NVM,
-so that OEI runs Quickboot flow on next reboot,
-skipping full training and achieveing a lower boot
-time.
+Add instructions on how to use U-Boot to save
+DDR training data to NVM and explain the saving
+process.
 
 Signed-off-by: Simona Toaca <simona.toaca@nxp.com>
 ---
- arch/arm/include/asm/mach-imx/qb.h | 2 ++
- arch/arm/mach-imx/Kconfig          | 8 ++++++++
- arch/arm/mach-imx/imx9/Makefile    | 4 +++-
- arch/arm/mach-imx/imx9/qb.c        | 9 +++++++++
- board/nxp/imx94_evk/spl.c          | 6 +++++-
- board/nxp/imx95_evk/spl.c          | 6 +++++-
- 6 files changed, 32 insertions(+), 3 deletions(-)
+ doc/board/nxp/index.rst |  1 +
+ doc/board/nxp/qb.rst    | 49 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 50 insertions(+)
+ create mode 100644 doc/board/nxp/qb.rst
 
-diff --git a/arch/arm/include/asm/mach-imx/qb.h b/arch/arm/include/asm/mach-imx/qb.h
-index 5efe68f0a60..4f923d79e7a 100644
---- a/arch/arm/include/asm/mach-imx/qb.h
-+++ b/arch/arm/include/asm/mach-imx/qb.h
-@@ -10,4 +10,6 @@
- 
- bool qb_check(void);
- int  qb(int qb_dev, int qb_bootdev, bool save);
-+void spl_qb_save(void);
+diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
+index 01d3468a47d..7e3e5e29880 100644
+--- a/doc/board/nxp/index.rst
++++ b/doc/board/nxp/index.rst
+@@ -29,3 +29,4 @@ NXP Semiconductors
+    mx6ullevk
+    rproc
+    psb
++   qb
+diff --git a/doc/board/nxp/qb.rst b/doc/board/nxp/qb.rst
+new file mode 100644
+index 00000000000..5a1e913ea11
+--- /dev/null
++++ b/doc/board/nxp/qb.rst
+@@ -0,0 +1,49 @@
++.. SPDX-License-Identifier: GPL-2.0+
++   Copyright 2026 NXP
 +
- #endif
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index b199a0419fe..614829d1587 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -71,6 +71,14 @@ config CSF_SIZE
- 	  Define the maximum size for Command Sequence File (CSF) binary
- 	  this information is used to define the image boot data.
- 
-+config SPL_IMX_QB
-+	bool "Run qb save during SPL"
-+	depends on SPL && IMX_SNPS_DDR_PHY_QB_GEN && (IMX95 || IMX94)
-+	help
-+	  Automatically save DDR training data (Quickboot data)
-+	  to current boot device when needed (when OEI runs Training
-+	  flow and saves qb data to volatile memory).
++DDR QuickBoot flow
++------------------
 +
- config CMD_IMX_QB
- 	bool "Support the 'qb' command"
- 	default y
-diff --git a/arch/arm/mach-imx/imx9/Makefile b/arch/arm/mach-imx/imx9/Makefile
-index 7dee144e0f4..3207013812a 100644
---- a/arch/arm/mach-imx/imx9/Makefile
-+++ b/arch/arm/mach-imx/imx9/Makefile
-@@ -15,7 +15,9 @@ obj-y += imx_bootaux.o
- endif
- 
- ifeq ($(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN),y)
--ifneq ($(CONFIG_XPL_BUILD),y)
-+ifeq ($(CONFIG_XPL_BUILD),y)
-+obj-$(CONFIG_SPL_IMX_QB) += qb.o
-+else
- obj-$(CONFIG_CMD_IMX_QB) += qb.o
- endif
- endif
-diff --git a/arch/arm/mach-imx/imx9/qb.c b/arch/arm/mach-imx/imx9/qb.c
-index 9987c57b16a..e00d2fd7512 100644
---- a/arch/arm/mach-imx/imx9/qb.c
-+++ b/arch/arm/mach-imx/imx9/qb.c
-@@ -428,3 +428,12 @@ int qb(int qb_dev, int qb_bootdev, bool save)
- 
- 	return 0;
- }
++Some NXP boards (which use OEI - iMX943, iMX95, etc.) support saving DDR
++training data (collected by OEI during Training flow) from volatile
++to non-volatile memory, which is then available to OEI at next cold reboot.
++OEI uses the saved data to run Quickboot flow and avoid training the DDR again.
++This significantly reduces the boot time.
 +
-+void spl_qb_save(void)
-+{
-+	int dev = spl_boot_device();
++U-Boot provides no authentication for qb data, only its integrity
++is verified via the CRC32. The authentication is done in OEI. With
++the exception of iMX95 A0/A1, which use CRC32 as well for verifying
++the data, the rest of the boards use ELE to verify the MAC stored
++in the ddrphy_qb_state structure.
 +
-+	/* Save QB data on current boot device */
-+	if (qb(dev, dev, true))
-+		printf("QB save failed\n");
-+}
-diff --git a/board/nxp/imx94_evk/spl.c b/board/nxp/imx94_evk/spl.c
-index cc5b7f9ef0f..1d25795eb17 100644
---- a/board/nxp/imx94_evk/spl.c
-+++ b/board/nxp/imx94_evk/spl.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright 2025 NXP
-+ * Copyright 2025-2026 NXP
-  */
- 
- #include <hang.h>
-@@ -14,6 +14,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/mach-imx/boot_mode.h>
- #include <asm/mach-imx/ele_api.h>
-+#include <asm/mach-imx/qb.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -44,6 +45,9 @@ void spl_board_init(void)
- 	ret = ele_start_rng();
- 	if (ret)
- 		printf("Fail to start RNG: %d\n", ret);
++If the quickboot data in memory is not valid (CRC32 check fails),
++U-Boot does not save it to NVM. So, if OEI runs Quickboot flow -> no
++data is written to volatile memory -> invalid data -> no saving happens
++(qb save fails during qb check).
 +
-+	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
-+		spl_qb_save();
- }
- 
- /* SCMI support by default */
-diff --git a/board/nxp/imx95_evk/spl.c b/board/nxp/imx95_evk/spl.c
-index 761a1a4a0f6..35e4458f2b7 100644
---- a/board/nxp/imx95_evk/spl.c
-+++ b/board/nxp/imx95_evk/spl.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Copyright 2025 NXP
-+ * Copyright 2025-2026 NXP
-  */
- 
- #include <hang.h>
-@@ -13,6 +13,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/mach-imx/boot_mode.h>
- #include <asm/mach-imx/ele_api.h>
-+#include <asm/mach-imx/qb.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -41,6 +42,9 @@ void spl_board_init(void)
- 	ret = ele_start_rng();
- 	if (ret)
- 		printf("Fail to start RNG: %d\n", ret);
++After successful saving, U-Boot clears the data in volatile memory so
++that qb check fails at next reboot and the NVM isn't accessed again.
 +
-+	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
-+		spl_qb_save();
- }
- 
- void board_init_f(ulong dummy)
++There are 2 ways to save this data (both can be enabled):
++
++1. automatically, in SPL (by enabling CONFIG_SPL_IMX_QB)
++
++- this will save the data on the current boot device (e.g. SD)
++- other configs specific to the boot device need to be enabled (CONFIG_SPL_MMC_WRITE for saving to eMMC/SD)
++- use for: automating qb save / saving qb data if using Falcon mode (skipping U-Boot proper)
++
++2. using qb command in U-Boot console (by enabling CONFIG_CMD_IMX_QB)
++
++- supports saving on the current boot device, or on another, specified device.
++- if flashing via uuu, the command can be added in an uuu script (boot device needs to be specified)
++- use for: saving the qb data during flashing / controlling the NVM to save to
++
++::
++
++        # To save/erase on current boot device
++        => qb save/erase
++
++        # To save/erase on other boot device
++        => qb save/erase mmc 0 # eMMC
++        => qb save/erase mmc 1 # SD
++        => qb save/erase spi   # NOR SPI
 -- 
 2.43.0
 
