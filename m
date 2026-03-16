@@ -4,62 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B8BF46436
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 09:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8EEF4643B
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 09:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4967F83FC6;
-	Mon, 16 Mar 2026 10:38:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D82583FDE;
+	Mon, 16 Mar 2026 10:39:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ZdGpxiyI";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ai14Rjs+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B3AE83FDB; Mon, 16 Mar 2026 10:38:07 +0100 (CET)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id D21B283FEC; Mon, 16 Mar 2026 10:39:45 +0100 (CET)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4462983F8A
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 10:38:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF7D383FDC
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 10:39:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joaomarcos.costa@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id C1FEB4E4261E;
- Mon, 16 Mar 2026 09:38:04 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 915065FC4A;
- Mon, 16 Mar 2026 09:38:04 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2416B10368AC0; Mon, 16 Mar 2026 10:38:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1773653884; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=PMR1PIcRo3h8NyX1IKA/XAAX5/XlXM5Tr7q9A2GaLno=;
- b=ZdGpxiyId2ONx/s/nBqfzuxt1ukazRHARIEoDeNAkGj5K4GazgXo6IL+m2ibXz1lNmQfFK
- n8kDTnBQm0Joaw6fRMYoTXGdRZS0vRTB/RCtUnIRkh2Oh6CmC62StDZw/WE5cEhtaRvcX8
- FFxxSBFkwg+9nz5GPrCEq6cr4E+CuVtnHSKPWdTfv5mxX9mJq7SXkQzjhesdO35N32Fz3H
- TBxSzEm2PAAAOuXZzl4B8uuRT8FFYVU6KcRfrK2KCHiq4nAOmCm1/kENvjFYKfhLlXQPDh
- 6euTOBNH1TJn8OYvmg5S/aJNnIGlz1cmWQO4kMpACx7UlDuaYF/EGbhIiieM/A==
-Message-ID: <bd918c30-9101-4d4a-a256-5315f468d7d2@bootlin.com>
-Date: Mon, 16 Mar 2026 10:38:00 +0100
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2C5B04084D;
+ Mon, 16 Mar 2026 09:39:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3AFDC2BCAF;
+ Mon, 16 Mar 2026 09:39:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1773653980;
+ bh=eBFeZoZD7eGyvRZCs4LJLEXEOQhO2qe/+G18VpJ6k+A=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=ai14Rjs+MCvnsALojXpkbD742BA2XiDwHwQIJjFXpjfJuB6gfP1sJfCvuqfP3Oe/A
+ 2ZdVKR+3B/f33MXMFsqp+LKekoUPWzkv8197aqHfc8OH3sE8BAWJDiCdFdHNlQtEGh
+ 7cjY6fYVJUTgWUp6h+4amsj4YcVlzJi0Qt7H4s8b0rmp78NmwVqZvXGxFt5HUL9iJ9
+ +E7t8vh/fI6927DAog+eE7ValLlt65vzEIiRj6Z0cBE6FA6PAzh8O4pgMWUR6evIhX
+ vJHUzsrCK2x3+PbEfDhkyGWXMoH5LCRxTwbjCv2Vldiyc7EAn5RVWU0MYg0Fgztkrm
+ pE6nXaLP+lMzw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20260310162621.1163932-1-trini@konsulko.com>
+References: <20260310162621.1163932-1-trini@konsulko.com>
+Subject: Re: [PATCH] dfu: Make the DFU_WRITE_ALT symbol available outside
+ of DFU
+Message-Id: <177365397761.1042202.2813832200651004957.b4-ty@kernel.org>
+Date: Mon, 16 Mar 2026 10:39:37 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] Introduce SQUASHFS support in SPL
-To: Richard Genoud <richard.genoud@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
-References: <20260313104229.1555236-1-richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-From: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Organization: Bootlin
-In-Reply-To: <20260313104229.1555236-1-richard.genoud@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,46 +71,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello, folks
+Hi,
 
-Thanks for the series, Richard!
+On Tue, 10 Mar 2026 10:26:21 -0600, Tom Rini wrote:
+> The DFU_WRITE_ALT symbol is used both directly and indirectly (via
+> UPDATE_COMMON) for EFI capsule updates (FIT or raw), but does not depend
+> on DFU itself. Move this symbol outside of "if DFU" to remove a Kconfig
+> dependency problem.
+> 
+> 
 
-On 3/13/26 11:42, Richard Genoud wrote:
-> SquashFS has support in U-Boot, but not in SPL.
-> 
-> This series adds the possibility for the SPL to load files from SquashFS
-> partitions.
-> This is useful, for instance, when there's a SquashFS rootfs containing
-> U-Boot binary.
-> 
-> NB: falcon mode is not supported yet.
-> 
-> Richard Genoud (7):
->    fs/squashfs: fix sqfs_decompressor.c build in SPL
->    fs/squashfs: sqfs_decompressor: simplify code
->    fs/squashfs: squashfs.h: include file should be self dependent
->    spl: add squashfs support
->    spl: mmc: support squashfs
->    MAINTAINERS: SQUASHFS: update João Marcos Costa email
->    MAINTAINERS: SQUASHFS: Add myself as co-maintainer
-> 
->   MAINTAINERS                     |  6 ++-
->   common/spl/Makefile             |  1 +
->   common/spl/spl_mmc.c            | 19 +++++---
->   common/spl/spl_squashfs.c       | 78 +++++++++++++++++++++++++++++++++
->   fs/squashfs/sqfs.c              | 12 +++--
->   fs/squashfs/sqfs_decompressor.c | 71 ++++++++++--------------------
->   include/part.h                  |  1 +
->   include/spl.h                   |  6 +++
->   include/squashfs.h              |  5 ++-
->   9 files changed, 135 insertions(+), 64 deletions(-)
->   create mode 100644 common/spl/spl_squashfs.c
-> 
-> 
-> base-commit: ba7bf918dafcd093ad733b07ba490baeb20cf5da
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-Reviewed-by: João Marcos Costa <joaomarcos.costa@bootlin.com>
+[1/1] dfu: Make the DFU_WRITE_ALT symbol available outside of DFU
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4b77b07811c2fb48b4a65ae14c387540ae6b8998
 
--- 
-Best regards,
-João Marcos Costa
+--
+Mattijs
