@@ -4,87 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C455F506D9
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 14:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC7AF53D65
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 15:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA81884099;
-	Mon, 16 Mar 2026 15:50:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CCFE38409B;
+	Mon, 16 Mar 2026 16:01:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BiIqaDi3";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sO9rdXyF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61B2B8409A; Mon, 16 Mar 2026 15:50:34 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 9BABB840A2; Mon, 16 Mar 2026 16:01:55 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3398784090
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 15:50:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 632F78409A
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 16:01:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-4671cbce626so2102555b6e.1
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 07:50:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=jstephan@baylibre.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-b9789425fc5so310877366b.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 08:01:53 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773673313; cv=none;
+ d=google.com; s=arc-20240605;
+ b=eeUPLeGwXd1oVXGPMby/xYRDBEuQ6PphZrooTtYkMRDH6pnnPzRRSKe0/32b+pM7CF
+ lKkI5+kjzeeHhEdHds5QsECoSNZAvsbUPVEQsUqaikeeDgougC5p3XR7Fq6nu1Jz8WaI
+ mBciKaNFEPIpky2dXGzIJbc7Cp12WI5r49o+umvSEL60kao1NPaR+bPsWTHAB4nvbI5O
+ Fdq/ValiuI6H8oTxP3LMY5Lo7fboLwB4t5JthvyQ54RCxMJpRU0ez9E4y5MOMfigtwUl
+ ZXRSUqVW+Omt/9ANSd0/VUpdVvWlsnKIgElIG+GkvV3cWWcW/U+B1eriXYxWxYZ/Bti4
+ unZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=1iy7DweJhxM0TPX7zZXDuIeWhCEutSvwYBueQrPFsTg=;
+ fh=9s1rxRGUwAVr+p9cFek0M1Jxe63lhdbGfXzUewJk5jU=;
+ b=CwOfGxJUlHF9u5st50Fj/vADZOIrXUpcwmiNQbVizJF6b2RT6okw8o/tlINps8hFyQ
+ xyrPJ9yI3PldausDfx3gr2ZdjGfVuY4lvqkLv79btxIBq7Nmz47Ve8ZQCoXV3jTsF09I
+ JuDEKnEGJLtTx+FEhj7T+j3z/XJc5iPd8lOv3L0DYlbeq6r4Jg2B/Lu5PuubTXhrvK8H
+ cuu3yYgfAa5qCVki763mwZorN7WiGXe7irLhtJxTqRMYMn1qE0XLvW/5duDv5sb9g8FV
+ uF9TP3Cm90WxLDJ5XDogNPyvT57yAup6nj5ZMbK+7AT0JySWqNmD3YYZqRNwOb9tY9ts
+ 2mAg==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773672631; x=1774277431; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=irqskA4wuZ4JVrLJ+uKJdzaOmQKW5MHSInWn4NK+Kqw=;
- b=BiIqaDi3oo/hxjwRnRMWbOueP4NhTAMvIrVd+zUZTAirbgTYl6DuhdPGPsgcKzFoPY
- VOZ6iZ8vbvzyoPSK8YAvNgsuzkgyN8O00Qtd1G5KDqy6Ossr9uob+N0RoG5ALqZ8gAz5
- TivTlvZvrkvMe5ucp+jMBSREhqDfTaqmJqO0k=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773673313; x=1774278113;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1iy7DweJhxM0TPX7zZXDuIeWhCEutSvwYBueQrPFsTg=;
+ b=sO9rdXyFYGxnjW5cW06t6LMOI0kCVsZtz1meiq5NMAVw3WFfIX5PH+mUlkrFycHV2U
+ ejTWVWx6ozcc4y4sSQzYWJmzPepD4xt7mZstqNfyKEfoqWt3yiyPH7JXAVPagpGzKpKU
+ Y8+7hYHL871j4gpllAAJilTnr3xvxdJKsSGJkqp1NEEcIeouFXu1JtYxc1HGnhDGYxuu
+ MCXyvzNeAr8/WjfVFGlceFQm1z4ixBZPoS0Hc8hrUTq7pjO9lXdsJjx9O+2nFm2ov8tb
+ HA3j78xxiczmLLENdorQd7DveGPvzDaJq+zPW8ONNlgjkAFJQyABJu/5TovbdrRMcaSl
+ RQTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773672631; x=1774277431;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=irqskA4wuZ4JVrLJ+uKJdzaOmQKW5MHSInWn4NK+Kqw=;
- b=eIWjzjknLtn1CfOL3kGi9NYCZQxzMwFKdveG7XFwnimbnzDmjnI2yLxkN6D1Huqest
- WLMVhuLAF4QkXAP2+PIngG1HwMSJGuFaX66n5pm3VIIoNLL444SJXUCexNLJ+8vXayej
- B8LAwpeBLRI+YpzMk/+I1Nw5pEXEOv34uQ2DXpaATgmu/VgH1xeSI++ohaPYUAmILoxd
- WunyoFjSdEZ/ZyAS1UbehEMhe94UUWuoZBQ3yuB1hM9sK/zsdF9ZDGP/OCwJKyYciP1P
- gZB3GzYWaAUZoLvlJzm4I9sZig8GkUwu+ive3VlC1csHsA78FA8RkcEaFD1Dgkv1nAKP
- 82cA==
-X-Gm-Message-State: AOJu0YyvPGMv8XdecattPfDsRfIWPwTR5ygjkvAyWV6fQYdkoLbrjXHD
- yQ2tpRbG/8krmDiiA/B/AKDZ3DGvYSsoRaSadwgghFnCXKXCP9+/93eLllYcjqJ2gwk=
-X-Gm-Gg: ATEYQzzHKE0M8Va9uCIpept4kla6IiIQ3+XPBxs7dgXpWo4p0ocEctck083hrquiz92
- mq8Zu2eVENEoiNwj+rpNJ8e9ImFCzuAwwLTpQXuBSgQfSnrK6azRuRl7Nr5w9pIyw4DcrmODtED
- S98BYC7aG/PXmz+VLBy9RWmsWQDF5b5sEb+yZCuN1m2sjwco3k299J8Z4AcaGKQr93/rbZyA/wA
- dOiFX6ROnjvHGi6XoCKtg5zcwsW4HBaivB546UE+G23MOKIwe3hCuilSO7ytXy7sXDZaRrEuT/W
- HA/SrQYr82zAB7pCOLtK4Z0QAl59lYdZxLmTr44Lsqe/Tc9MszHGeFfztp7ICt90Yzdteg7ie58
- nH2zCr7VOGMKFnhG9kkaccn/2Ip57ZCYx2kJGtmgqJCkYKaIQ3YSUAgOGdUSP9nL/ApbXjX7h1A
- 9xn21cLOWItAg7TVJBCyEl+Hvz9tO4cKohj1jwqgtPy9xO+1ucfuv3FqH7jvfgS6bzIIMOMo6LP
- CcNSFD0U6t5O4vlfwFM7KLtwUbjx5OEzOf5E+9AdtFx7tBbN8KLZgJZds0=
-X-Received: by 2002:a05:6808:1b24:b0:450:d471:dce5 with SMTP id
- 5614622812f47-4675701babbmr7255277b6e.6.1773672630544; 
- Mon, 16 Mar 2026 07:50:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
- [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ac3230fsm12437541a34.4.2026.03.16.07.50.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 07:50:29 -0700 (PDT)
-Date: Mon, 16 Mar 2026 08:50:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@arm.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH] arm: relocate: Introduce data-only relocation mode
-Message-ID: <20260316145027.GK502704@bill-the-cat>
-References: <20260315235510.304677-1-marek.vasut+renesas@mailbox.org>
+ d=1e100.net; s=20251104; t=1773673313; x=1774278113;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=1iy7DweJhxM0TPX7zZXDuIeWhCEutSvwYBueQrPFsTg=;
+ b=GoYrNl7jriO9eDFRoNa/zDV6N36pXaPoCHr9+LZCvrpqNaCRWFys+pwsrtwGXgvVEE
+ 3YUvTqy4moz5BEZlJ8OimzNEbzT7nLx7ZqEUCxza2CE/1itx0r6g3QrrSOaQPKVncPlm
+ wQk0p6vh6oA3S+xMXK3f5Y0GTU5oANW4Ld78eeDiz3RxZyH0ZEO070LgKnhLzOHeGP6U
+ x9LyXahPRY74hugUxUbUiyrjeDy2+xL2N9R8lvgtX27Gj011XuSxCE/iFxC3etSwqVe3
+ uWA9V7eLteNJ1x2QaY4/4zejg6SPIT4MgN3p+hokq9ZHpirAb+9fGD0WMT+3AOZBfwMG
+ WbTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXHpwWmGA4bmBKFtDEGUn0vQcn8KSuMCVv6hv+9ohHXOGpnbtTHvBnqdc9KIOfvflKDgLGr74A=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpI2JCGrcj35JgESJ7Y3AY0hNI0eSPcKxfBJ2dxSAKnVwgMdZT
+ d4SEMJ1C2KL8solHLpscsc2PmjSXFyhZ7p5DskXulc5MbKKToELKy+vZ9y3jMcrOqwgsLkndQPJ
+ kp5Lx+EUmkREkSgesXIyhPhi94dlSewDk8x8I37gmsA==
+X-Gm-Gg: ATEYQzx9RM9VjjXIm1etisc5CuAg4RsvO1PhyMOBsB6zbaLS0v3TYGfxbciwp9TMRHa
+ MAJE9MbV7zEOILBoKEnVi9PZxlS7Oj/s+iGejq240m3049U/WRlTgWSrWPrgJ2javm/yAj+E7YS
+ SznxEGyoayn9Zm08UxTyouFqwSfN/bc4AkpRiqTl6dnYyBuphnKNOlf2EOrb3U75XP4M8a8mG1t
+ Iwbc0GF90Jq8bCdgJ+F0XfdrsuggOIwOu6xEMh+DJAeN3Nf5218O0btnkigj1Zk1eGGx/M2MpTy
+ pBUrdnT09T6cxdM67E5t+NIJUDaVHRBsCg2ZYJ1Jmiuzw/oacZYqSKi+Gi5bI5ngzwI0jmhtVhs
+ 69xNWBil0eYIk1YdZETl1S6nInASEVX7tfPM8
+X-Received: by 2002:a17:907:806:b0:b93:cbc9:85d6 with SMTP id
+ a640c23a62f3a-b97636d82bemr843902366b.11.1773673312383; Mon, 16 Mar 2026
+ 08:01:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1H8NtsMkloteDnY/"
-Content-Disposition: inline
-In-Reply-To: <20260315235510.304677-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
+ <20260310-mtk-mt8391-initial-support-v2-6-1dc862d58532@baylibre.com>
+ <CAEHHSvbduE9Naebb8hk3xu+0ZEwRuO8yuh_1GUM9QFOP=BA2vQ@mail.gmail.com>
+ <38e5929d-4d95-45db-be93-28232a9de954@baylibre.com>
+In-Reply-To: <38e5929d-4d95-45db-be93-28232a9de954@baylibre.com>
+From: Julien Stephan <jstephan@baylibre.com>
+Date: Mon, 16 Mar 2026 16:01:45 +0100
+X-Gm-Features: AaiRm53v1XadbVIQYe4QoEQvvpPMkWafYj_HEjVThHjuN8Gs-hebH7rLkXdTwac
+Message-ID: <CAEHHSvY-NRQcLKHizS0S-++5CgXrvKdxjH4QUrsWP_LbW+AC-Q@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] board: mediatek: Add Genio 520/720 EVK defconfigs
+To: David Lechner <dlechner@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>,
+ u-boot@lists.denx.de, Chris-QJ Chen <chris-qj.chen@mediatek.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,77 +125,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Le lun. 16 mars 2026 =C3=A0 15:34, David Lechner <dlechner@baylibre.com> a =
+=C3=A9crit :
+>
+> On 3/16/26 7:38 AM, Julien Stephan wrote:
+> > Le mer. 11 mars 2026 =C3=A0 01:17, David Lechner <dlechner@baylibre.com=
+> a =C3=A9crit :
+> >>
+> >> From: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+> >>
+> >> Add basic defconfigs for Genio 520 and 720 EVKs.
+> >>
+> >> Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+> >> Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
+> >> Signed-off-by: David Lechner <dlechner@baylibre.com>
+> >> ---
+> >>  board/mediatek/MAINTAINERS             |  7 +++++++
+> >>  configs/mt8189.config                  | 34 +++++++++++++++++++++++++=
++++++++++
+> >>  configs/mt8371_genio_520_evk_defconfig |  4 ++++
+> >>  configs/mt8391_genio_720_evk_defconfig |  4 ++++
+> >>  4 files changed, 49 insertions(+)
+> >>
+> >> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+> >> index 446a9e8e53c..4f371592059 100644
+> >> --- a/board/mediatek/MAINTAINERS
+> >> +++ b/board/mediatek/MAINTAINERS
+> >> @@ -1,3 +1,10 @@
+> >> +MT8189/MT8371/MT8391 EVK
+> >
+> > Hi David,
+> > I would not put MT8189 here since there is no MT8189 EVK
+> >
+> >> +M:     Macpaul Lin <macpaul.lin@mediatek.com>
+> >> +S:     Maintained
+> >> +F:     configs/mt8189.config
+> >> +F:     configs/mt8371_genio_520_evk_defconfig
+> >> +F:     configs/mt8391_genio_720_evk_defconfig
+> >
+> > Any reason to have genio_520/genio720 in the defconfig name?
+>
+> The upstream devicetree name will have "genio-720" in the name, so
+> find it strange to call the defconfig something that doesn't match
+> the devicetree.
+>
+> If there is a (not Genio) MT8391 EVK I would expect it to have a
+> different devicetree and therefore a different defconfig.
+>
+> > All other boards we are currently upstreaming don't specify it in
+> > their defconfig name:
+> > mt8365_evk_defconfig/mt8370_evk_defconfig/mt8390_evk_defconfig ...
+> >
 
---1H8NtsMkloteDnY/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Mar 16, 2026 at 12:54:05AM +0100, Marek Vasut wrote:
-
-> Introduce new mode of relocation which relocates only data, not code.
-> This is mainly meant to relocate data to read-write portion of the RAM,
-> while the code remains in read-only portion of the RAM from which it is
-> allowed to execute. This split configuration is present on various secure
-> cores.
->=20
-> The result of the relocation is U-Boot running at its original address,
-> data relocated to the end of DRAM, but with added read-write area offset.
-> The U-Boot binary area is not reserved from the end of the DRAM in this
-> relocation mode, because U-Boot itself is not relocated.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-[snip]
-> diff --git a/Kconfig b/Kconfig
-> index ce25ea24a60..575ee3b574f 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -474,6 +474,23 @@ config SKIP_RELOCATE
->  	  Skips relocation of U-Boot allowing for systems that have extremely
->  	  limited RAM to run U-Boot.
-> =20
-> +config SKIP_RELOCATE_CODE
-> +	bool "Skips relocation of U-Boot code to end of RAM"
-> +	help
-> +	  Skips relocation of U-Boot code to the end of RAM, but still does
-> +	  relocate data to the end of RAM. This is mainly meant to relocate
-> +	  data to read-write portion of the RAM, while the code remains in
-> +	  read-only portion of the RAM from which it is allowed to execute.
-> +	  This split configuration is present on various secure cores.
-
-Is this really configurable, or is this determined by the SoC? This
-feels like something a board should be select'ing rather than
-configuring and I do worry about boards abusing this in the same of some
-possibly dubious speed-up rather than the intented and valid use case.
-
-[snip]
-> diff --git a/arch/arm/lib/relocate.S b/arch/arm/lib/relocate.S
-> index 6ee58f4edfe..b6a648708f4 100644
-> --- a/arch/arm/lib/relocate.S
-> +++ b/arch/arm/lib/relocate.S
-> @@ -79,6 +79,15 @@ ENDPROC(relocate_vectors)
->  ENTRY(relocate_code)
->  relocate_base:
->  	adr	r3, relocate_base
-> +
-> +#ifdef CONFIG_SKIP_RELOCATE_CODE
-> +	mov r4,	#CONFIG_SKIP_RELOCATE_CODE_DATA_OFFSET
-
-Spacing. But if there's no other comments and propmting the user is
-correct, I can fix when applying.
-
---=20
-Tom
-
---1H8NtsMkloteDnY/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabgYrAAKCRAr4qD1Cr/k
-CueGAQCwbYXyipbPcIq9GFXrX/eiAOXi6A9QDroCxMVV1qulmwD/b6aMVMt9zOOw
-ieS97I47/1O+u49K40oM91ZVRauy0Aw=
-=qfg2
------END PGP SIGNATURE-----
-
---1H8NtsMkloteDnY/--
+I get your point.. From my understanding, mt8371_evk IS genio_520, so
+IMHO there will be no non genio MT8371_EVK.
+But, I understand that it makes sense to have the name of the
+defconfig matching the name of the device tree.. In that case should
+we rename all other defconfigs for mt board?
+(8365, 8370,8390,8395..)
