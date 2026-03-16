@@ -4,46 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78422FD874A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 11:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82EFCFD874A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 11:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC5C484228;
-	Tue, 17 Mar 2026 12:56:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 080618423E;
+	Tue, 17 Mar 2026 12:56:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="KHMgD8nZ";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="RNK4PsOL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29E5B84068; Tue, 17 Mar 2026 06:07:10 +0100 (CET)
+ id A329D84056; Tue, 17 Mar 2026 06:07:10 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 508AB84056
+ by phobos.denx.de (Postfix) with ESMTPS id A32568401A
  for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 06:07:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marex@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 45F7010D7A0; Tue, 17 Mar 2026 06:07:06 +0100 (CET)
+ with ESMTPSA id 7007410D7AE; Tue, 17 Mar 2026 06:07:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1773724027;
+ s=dkim; t=1773724028;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=gqcaSJLniXUcSFfH4rBRbFlzEBgjX0wyBd3JN4qBsmA=;
- b=KHMgD8nZFKcPjGSFxgr/Vf++NsVn1+dYF+zV85OEXH2SvGbuYgm766iYdh6CE6QHZNrTvF
- NQk0gEikqIlrvdQovVMdc0SkuDP8Z0RtQ285vBrPtYHwXqoOzbH84KTzKMlHFfLBbi/Q+3
- D9QIc7QZaz8TUpdcioerHn2mxE9jbc/2xsSEpEinhN5leRGRemQWSKhr3Kxhvf8YaHEct+
- Qk0O28Lmq+BNY09GNpFlpSm8Q2xO1M0I/Wfn0Vjy1HMYuh3QLXXzMnaZY9XFKrZsSMPu4I
- WBcHmv/Do3P6mjxloggLdySUvnclglhRKE0mdCcgJypbfjMz6LR8ZW1sqOVqKA==
-Message-ID: <ee133e83-8d13-4771-a306-f5f5c2a62b08@nabladev.com>
-Date: Mon, 16 Mar 2026 13:22:55 +0100
+ bh=eAlHmXoVszqrFVjsf5VS/rcMXsF1MAkgfBH72KB2ETA=;
+ b=RNK4PsOLP7dhyB+S49opXHP9S/6AFCyCYKHmUPZiQanGJd0+ay2pQEF5Y9BkTPZh5OTFFD
+ ZZ2dv00+6SRXgRBSIxCk/xtmDlZxTRXIWH8te8Zld7a2Az61niWTodRvAE4thr1qbZzu05
+ /dgxpQaZeJzBSBa6qJgXy5iUoLdXZNdZaSZOjceLdx4Htm94WlY1tH/korHQGtqWU0o5so
+ mhxmQY3oExCKiu/NrZldS/Rpdvg5WYpkfxT5h1ZxAOegEL4RVhhkYj7t7BWh61YOfwm9aa
+ l0xrSKe2Gffzk1SOT23hv0XRJtjYBRR4j2nMKWsAa5T7FOkuyLAKUg6BLfS3mA==
+Message-ID: <d3b42af1-65a8-401f-9dda-1f79cb0dde9a@nabladev.com>
+Date: Mon, 16 Mar 2026 13:32:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] board: nxp: imx9{4,5}_evk: Add qb save option in
- SPL
+Subject: Re: [PATCH v2 5/5] doc: board: nxp: Add Quickboot documentation
 To: "Simona Toaca (OSS)" <simona.toaca@oss.nxp.com>, uboot-imx@nxp.com,
  u-boot@lists.denx.de
 Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com,
@@ -52,10 +51,10 @@ Cc: Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com,
  ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com,
  tharvey@gateworks.com, qijian.guo@nxp.com
 References: <cover.1773648510.git.simona.toaca@nxp.com>
- <8f6be77bacc6a9abeaf4e9cf6c6f5e01890bc31a.1773648510.git.simona.toaca@nxp.com>
+ <be6b07edb38e4e0dc86e65f8bac7b6b3b0e29d01.1773648510.git.simona.toaca@nxp.com>
 Content-Language: en-US
 From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <8f6be77bacc6a9abeaf4e9cf6c6f5e01890bc31a.1773648510.git.simona.toaca@nxp.com>
+In-Reply-To: <be6b07edb38e4e0dc86e65f8bac7b6b3b0e29d01.1773648510.git.simona.toaca@nxp.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -78,88 +77,36 @@ X-Virus-Status: Clean
 
 On 3/16/26 9:15 AM, Simona Toaca (OSS) wrote:
 
-[...]
-
-> +++ b/arch/arm/mach-imx/imx9/qb.c
-> @@ -428,3 +428,12 @@ int qb(int qb_dev, int qb_bootdev, bool save)
->   
->   	return 0;
->   }
+> +After successful saving, U-Boot clears the data in volatile memory so
+> +that qb check fails at next reboot and the NVM isn't accessed again.
 > +
-> +void spl_qb_save(void)
-> +{
-> +	int dev = spl_boot_device();
+> +There are 2 ways to save this data (both can be enabled):
+
+Replace () with , .
+
+> +1. automatically, in SPL (by enabling CONFIG_SPL_IMX_QB)
 > +
-> +	/* Save QB data on current boot device */
-> +	if (qb(dev, dev, true))
-> +		printf("QB save failed\n");
-> +}
-
-Should be in 1/5 ?
-
-> diff --git a/board/nxp/imx94_evk/spl.c b/board/nxp/imx94_evk/spl.c
-> index cc5b7f9ef0f..1d25795eb17 100644
-> --- a/board/nxp/imx94_evk/spl.c
-> +++ b/board/nxp/imx94_evk/spl.c
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
-> - * Copyright 2025 NXP
-> + * Copyright 2025-2026 NXP
->    */
->   
->   #include <hang.h>
-> @@ -14,6 +14,7 @@
->   #include <asm/arch/sys_proto.h>
->   #include <asm/mach-imx/boot_mode.h>
->   #include <asm/mach-imx/ele_api.h>
-> +#include <asm/mach-imx/qb.h>
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> @@ -44,6 +45,9 @@ void spl_board_init(void)
->   	ret = ele_start_rng();
->   	if (ret)
->   		printf("Fail to start RNG: %d\n", ret);
-
-Use CONFIG_IS_ENABLED() if this is meant to be enabled in different 
-U-Boot stages.
-
-> +	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
-> +		spl_qb_save();
->   }
->   
->   /* SCMI support by default */
-> diff --git a/board/nxp/imx95_evk/spl.c b/board/nxp/imx95_evk/spl.c
-> index 761a1a4a0f6..35e4458f2b7 100644
-> --- a/board/nxp/imx95_evk/spl.c
-> +++ b/board/nxp/imx95_evk/spl.c
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
-> - * Copyright 2025 NXP
-> + * Copyright 2025-2026 NXP
->    */
->   
->   #include <hang.h>
-> @@ -13,6 +13,7 @@
->   #include <asm/arch/sys_proto.h>
->   #include <asm/mach-imx/boot_mode.h>
->   #include <asm/mach-imx/ele_api.h>
-> +#include <asm/mach-imx/qb.h>
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> @@ -41,6 +42,9 @@ void spl_board_init(void)
->   	ret = ele_start_rng();
->   	if (ret)
->   		printf("Fail to start RNG: %d\n", ret);
+> +- this will save the data on the current boot device (e.g. SD)
+> +- other configs specific to the boot device need to be enabled (CONFIG_SPL_MMC_WRITE for saving to eMMC/SD)
+> +- use for: automating qb save / saving qb data if using Falcon mode (skipping U-Boot proper)
 > +
-> +	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
+> +2. using qb command in U-Boot console (by enabling CONFIG_CMD_IMX_QB)
+> +
+> +- supports saving on the current boot device, or on another, specified device.
+> +- if flashing via uuu, the command can be added in an uuu script (boot device needs to be specified)
+> +- use for: saving the qb data during flashing / controlling the NVM to save to
+> +
+> +::
+> +
+> +        # To save/erase on current boot device
+> +        => qb save/erase
+> +
+> +        # To save/erase on other boot device
+> +        => qb save/erase mmc 0 # eMMC
+> +        => qb save/erase mmc 1 # SD
+> +        => qb save/erase spi   # NOR SPI
 
-CONFIG_IS_ENABLED() ?
+Can QB data be saved to arbitrary SPI NOR ?
 
-> +		spl_qb_save();
->   }
->   
->   void board_init_f(ulong dummy)
+Looking at this, why can this QB not use the same interface to select 
+arbitrary block storage device/partition/... that e.g. FS_GENERIC does use ?
