@@ -4,94 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA4C0F30299
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 02:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E18F30299
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 02:44:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8E568405E;
-	Mon, 16 Mar 2026 03:44:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 31B69840C1;
+	Mon, 16 Mar 2026 03:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WWPx1Ss1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eT6QnfqG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91C1084067; Mon, 16 Mar 2026 03:44:14 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 347ED840A6; Mon, 16 Mar 2026 03:44:19 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D4318405B
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 03:44:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57320840A6
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 03:44:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-b9773abf811so376963766b.0
- for <u-boot@lists.denx.de>; Sun, 15 Mar 2026 19:44:08 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773629048; cv=none;
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b97b333673eso86339166b.2
+ for <u-boot@lists.denx.de>; Sun, 15 Mar 2026 19:44:17 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773629057; cv=none;
  d=google.com; s=arc-20240605;
- b=lxom9kG9u8HQLcZul4fRJmaRYbjWwDcyWr3S85GE3Fb9P18lUSaGu2J65k7RmD/xYl
- r3EhcASSldoqgDuBZobPZ91ZrrkYtEVin+nf6NymRfi7zbrWdQtpHEfT28geobDitDpd
- /BWHQ61506oHTAW18z7ry10D+KL15JjGyXUFbeOHEWfALWRugVccZO3c8Zv2oHps1YgK
- +64bNs+wA5Dtr1Q0xvINmvCV3++RW+lcxG6G3oWgYSc1/uUMrchqxqA9CFqluUpIqJkG
- ShiSONHMg39Kugg5kXzdD9pxJmPf7sSvTI0ka8vBtOTERqBqz6BDd29WFVkoPflaD0Fo
- MrYw==
+ b=kcL/783Ws7Qzxl3iz0sBEBhen9MFT7C92q8Mnc13xpIvODWz+8aUXGEdk/YKiDqQLT
+ +2t5WnY1l4E7jwWllxTzW+bNSN5pAZ4HuO2AmkxdIa8SXeXXjQt5BiItNDAGM/SVgLQt
+ FmfzbNXVpLLZOKbCohm8yAxCpM1Y7XMCjrn/re/u7w/8l559021Z1EkoKCAXKAeibAvh
+ sgOPzf0F8mmamLBngG/YOM/nXTno7Z1tO4e70XHxtMk2yaRElxH7MhYnS+YvHC3dl+dn
+ G70KYBLJqw3IFSBdonaHZeNLuBMTuMlglOAwSqQlakg31AU8lIML9Z3kTZxWZu1nh49d
+ MCWA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:dkim-signature;
- bh=Hg/P2Fa7PlUmFJoMnlskqX90bQufP+XPGuKEK3E01PE=;
- fh=77GWSjT2mlmLf3PtBjW8TPqEIXbpJQfI8TB2+BGo2u8=;
- b=Jo8O09Xl5+21o4gOxImgzCvnUT/5nIfz6wkx3IHtw7/tXrcEpq3m27nBka2gYhf5Kn
- UOBfKuq5nneYL/TKnCnGy7XZIBv8/2yRLL6/QbOvH81kB6+LqYblebvvc6dVEFWWevLn
- K2CcgjX1/NCI3ewWwWFp5VssXndZ7X5WE/mUsa8xGEW0x3EABYo2Abiro/jR57VeSEa2
- Qlz7X9FoUnlOcXnuRjq+wNxKuftChY2K4UKOojFrgmLvZNxo685wHfsV49uxWmfpoXYk
- L8ikvS9Rd+10UxrGnf958eMfmE15IHV6jGCIWOvpYihgeC1ljXhKpaIRjh/QVakm2+YS
- uSQQ==; darn=lists.denx.de
+ bh=/Vkjf+RNSSYrUO8rsfoYo1sA2Y+yKoJT/oX5OiuzqHw=;
+ fh=TsG3XnFtjD4o6judHyhOSrz3zHo3gKH3ewqjVF0l/cY=;
+ b=gyAVIknPcg4DT6sU1hoqMeVkwVbS/Yedr1DNxHWnmqCJ32EYZxIDhK2j1CUkSWaCNY
+ p4swghrfX5HllMycVhTlXq+cjb9sI85HCvVPD/SukKBTJJXU9vu2/YhvEWUq2b6qPDKJ
+ 9HjD96SJ/mvc8hsc6i16u8SQbjogzqYf/VEJv+OZ9S1iCNtuu5xC3bPx8YQPEmaDUDAR
+ 0KY1nvWWhZeZWBzbecoQa34lw04zgPUyfYjaZO1Zo3TckJBe2EmPxDKHyYakY+B47G+h
+ /edvFpgY/qlQmAvoZzbFt37CpdGAKRpHyfcDXX7aYCuTgwHf2uwBvAqIi/ioCkiUfnhb
+ zzbw==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1773629048; x=1774233848; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1773629057; x=1774233857; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Hg/P2Fa7PlUmFJoMnlskqX90bQufP+XPGuKEK3E01PE=;
- b=WWPx1Ss1uRqwWH4U91kBL7SAFm6ZNGpNEAdnyww52qzoENJ81N7Rankmh7FdzXniMP
- IW0ho5N795rQZ2FMlurlUbFez9MgxMMUH5HzFC8A5XvUFJGr6/X/NX0bf8x933val/Fo
- MoXRPcY4jpgBKD5ZH/sYaL+sZAqE2dL1Q9wh8=
+ bh=/Vkjf+RNSSYrUO8rsfoYo1sA2Y+yKoJT/oX5OiuzqHw=;
+ b=eT6QnfqGmVEGWaq06vUKrqStQO/9ejFcajdS6QvkGWvUYx70IjPfDvi3cmmpOYYxxr
+ iNmdHBkq79t8hKG5UmYtHLf+iO032GthSkWrBsWPP0fZp3yS71ENJE3dGL0VE3ToNnum
+ PBcfEsztYztllg8G4PBaZ18HdKAdWBC/Jj0R4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773629048; x=1774233848;
+ d=1e100.net; s=20251104; t=1773629057; x=1774233857;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hg/P2Fa7PlUmFJoMnlskqX90bQufP+XPGuKEK3E01PE=;
- b=iVtxbTRLeTf+nngN9Cxu/xQXeUKhbRnGksm8fpSETHrfTANKd64jnNPwxInFL+G6dW
- /PFtmccYEyUEy3deWgyVp4m84VWXqXyxj/L3Lj3EZBxkTcSEeq41p+8oYoRj9pjq36ea
- kTUCw92aOy1zYnqkujQxvVcuGXciXpAa7fo/xzdoOf+JsPeBfoZ/LjeK/EfrhJS5+x8D
- b71nXR6XzWy/TTTlvfdzIuJ07oNzTd4j+y4IfoQKJvRw7OH0bv4BChBuBgDzfnUyY++x
- Ou3Jc+W1FbDQV8Rtw4p5gkYrRO97LtRxN/N2EdlM7HEjc0EfjstPbGOr/VnJNfEmp0IH
- AfCg==
-X-Gm-Message-State: AOJu0Ywho3YFFALPf/fKDwrXcJjBrnRdRS2n9SC/CzyAA5/F607Jjy4s
- 0EcaIEX7jDv+VQLf90ZgPgMvRhdQMy9hGGh9kmwGqxKBysy6r7E9F/IAqRYHPZfwINwCthPgnBo
- 1x5L4eE/vzlpjSYXsCf+NhWiI+cvNWvqytXDT5Xjdlm7hp/cwcsk=
-X-Gm-Gg: ATEYQzzJdaDcRbJol6FQ5aCXQ7EFCJxnF6I9NOpURZpImj273EOkWoEGyPLe+S86W7N
- rRrtT6BEXNIaoTOW8UpgPc+c60Epp0gSLYNRG40Ysyv2qgaL5kUrcJ7gWUEboiXTPBsD6FAXcaR
- HbyHm93qRL0n2Yw+64iHGISqp2cTEPNpu2jxkIA0wNC6HxgcRf4p6ttULGhLzcqEel6Un8NAjw7
- t4Pingoqa76o+SRbaUhuGRWbFpojASBAFIdwhbGGeuqBiOJMSSvwz3/9XDJVZNeW2xsSmnGGOpl
- Io0v8TJ04lhI5e6G
-X-Received: by 2002:a17:907:3d9f:b0:b97:be43:dfcd with SMTP id
- a640c23a62f3a-b97be43f53fmr70817866b.7.1773629047741; Sun, 15 Mar 2026
- 19:44:07 -0700 (PDT)
+ bh=/Vkjf+RNSSYrUO8rsfoYo1sA2Y+yKoJT/oX5OiuzqHw=;
+ b=D7jjVFDsYLXauAIbgHS3uQMpQCnTGjOSb9njCRBDCsQ0IDv7QT/aPQWgd9kRaQCSiI
+ 0dGukXR5KoFSXUPTEm8jHN0l/FwfUH6UgLlB+0WwHZcd1xmMZEEApbyqXMhBPP0zufDE
+ 4wT86LsXXkLGcvcM2vQl8jb5BH6B//fixFBLK2QQbt/f4XWHdM+mOlHxfRQ3UsL6xaSe
+ Um/wSuc7lhBJzSx5ZAoC9jlHRMiicNFo+kMfqGrqhRBQcAZB4p6+GHdOsRkSx2cWMFxt
+ QSMsgo0oB8PtumIAZO/b3ErI58/yLdElGOZNLpVW+22udozRWUZj62u0ULSAMwnOeQ9U
+ hELg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrDJU492RJV+DTbRml8HjO81xRvEkx5MfyW4+WvjotWlHRCORAbLHisBuj04sxAPSPKovnePQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOS0qC6JPHXewS6+hObWQdoRImzaLFTNd5FcE70x37kKlk5Rzh
+ K1Xq9qqwsTSOPCJfxdasHBafyiMKiQZhtyhfSDqwqAS3iiLbpxTawzzwZIc+CM981r7T3b2Nu7F
+ 6iRppXgazRUkRGfzf4OKK1FI2S3I1YDrLIYrFdc+5
+X-Gm-Gg: ATEYQzwsYjAGV/j8vA1G6OBww8f0503anExNza6cFBk2vxiCbSmVDnWXLUldT8Vty8i
+ SeJCC3GHsd3LVAkksL+rNvUHdBkj//juTo0a7uKGBV8zTYA5VS1xiulW03rUU5e6qF1F3TgaaIj
+ vlCCyw+OpnyqDis1V7PvmCfuMBjk2qjwz84bXIB+3is7SGWEbVNsSd0Gzm+og0noyXtUxM78LuN
+ Logri/vynAI6VqBaAqvMWdkMTnqgNSa1u+DQ5Vj5OCw38p2LrPzYOP1jVo3DXhhkSCWIlhn0nIx
+ tkYmHTEapDu5h3i+
+X-Received: by 2002:a17:907:97d0:b0:b97:a5a2:cec8 with SMTP id
+ a640c23a62f3a-b97a5a2d12dmr198295766b.11.1773629056826; Sun, 15 Mar 2026
+ 19:44:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260311120910.3934114-1-ravi@prevas.dk>
- <20260311120910.3934114-4-ravi@prevas.dk>
-In-Reply-To: <20260311120910.3934114-4-ravi@prevas.dk>
+References: <20260306190542.22920-1-ansuelsmth@gmail.com>
+ <20260306190542.22920-2-ansuelsmth@gmail.com>
+In-Reply-To: <20260306190542.22920-2-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 15 Mar 2026 20:43:54 -0600
-X-Gm-Features: AaiRm53NQgDb4bi_YWeHawY8jGkPEDJYFJRaf0-Id6hs4TQkNpuQXbi2jJsJaRI
-Message-ID: <CAFLszTijkvOc+OsCv0bY_7VVgBDzp+ZQx3vvBt31fC-KW6Re8g@mail.gmail.com>
-Subject: Re: [PATCH 3/3] cmd: test: fix handling of single-argument form of
- test
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Sun, 15 Mar 2026 20:43:59 -0600
+X-Gm-Features: AaiRm50D-xhLHqzzeR89kUJIMpfcuaiSt5zZEiX5QcrWSQ-I0Ebhac1MAaYmSjM
+Message-ID: <CAFLszThpMOBm2vP7n9douwNX7PbTTx_od7ayEH5s=QZOLBhDEA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] misc: fs_loader: fix ubifs not unmounted on
+ dev_get_priv error
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Peng Fan <peng.fan@nxp.com>, Casey Connolly <casey.connolly@linaro.org>, 
+ Paul Kocialkowski <paulk@sys-base.io>, Chen-Yu Tsai <wens@kernel.org>, 
+ Justin Klaassen <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>, 
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,107 +121,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
-
-On Wed, 11 Mar 2026 at 06:09, Rasmus Villemoes <ravi@prevas.dk> wrote:
+On Fri, 6 Mar 2026 at 12:05, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> POSIX states that
+> When dev_get_priv errors out, the ubifs is not umounted (if used).
 >
->   0 arguments:
->       Exit false (1).
->   1 argument:
->       Exit true (0) if $1 is not null; otherwise, exit false.
+> Correctly handle this handle condition and while at it also return -EINVAL
+> instead of -ENOMEM as a better error since no memory is allocated but is
+> actually an invalid scenario for fw_get_filesystem_firmware().
 >
-> and at least bash and busybox sh behave that way.
->
-> The current 'argc < 3' does the right thing for a non-existing or
-> empty argv[1], but not for a non-empty argv[1]. Fix that and add
-> corresponding test cases.
->
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
->  cmd/test.c     | 11 +++++++++--
->  test/hush/if.c | 30 ++++++++++++++++++++++++++++++
->  2 files changed, 39 insertions(+), 2 deletions(-)
->
-> diff --git a/cmd/test.c b/cmd/test.c
-> index f0645ef98f1..0d0f090386c 100644
-> --- a/cmd/test.c
-> +++ b/cmd/test.c
-> @@ -71,10 +71,17 @@ static int do_test(struct cmd_tbl *cmdtp, int flag, int argc,
->                 argc--;
->         }
->
-> -       /* args? */
-> -       if (argc < 3)
-> +       /*
-> +        * Per POSIX, 'test' with 0 arguments should return 1, while
-> +        * 'test <arg>' should be equivalent to 'test -n <arg>',
-> +        * i.e. true if and only if <arg> is not empty.
-> +        */
-> +       if (argc < 2)
->                 return 1;
->
-> +       if (argc == 2)
-> +               return !strcmp(argv[1], "");
-> +
->  #ifdef DEBUG
->         {
->                 debug("test(%d):", argc);
-> diff --git a/test/hush/if.c b/test/hush/if.c
-> index 148e9a53e90..e82a95aaf27 100644
-> --- a/test/hush/if.c
-> +++ b/test/hush/if.c
-> @@ -32,6 +32,15 @@ static int hush_test_if_base(struct unit_test_state *uts)
->         sprintf(if_formatted, if_format, "false");
->         ut_asserteq(1, run_command(if_formatted, 0));
-
-Can you use run_commandf() here?
-
->
-> +       sprintf(if_formatted, if_format, "test");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +
-> +       sprintf(if_formatted, if_format, "test ''");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +
-> +       sprintf(if_formatted, if_format, "test 'abc'");
-> +       ut_assertok(run_command(if_formatted, 0));
-> +
->         return 0;
->  }
->  HUSH_TEST(hush_test_if_base, 0);
-> @@ -343,6 +352,27 @@ static int hush_test_lbracket_alias(struct unit_test_state *uts)
->         ut_asserteq(1, run_command(if_formatted, 0));
->         ut_assert_nextline(missing_rbracket_error);
->
-> +       sprintf(if_formatted, if_format, "[ ]");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +
-> +       sprintf(if_formatted, if_format, "[");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +       ut_assert_nextline(missing_rbracket_error);
-> +
-> +       sprintf(if_formatted, if_format, "[ '' ]");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +
-> +       sprintf(if_formatted, if_format, "[ ''");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +       ut_assert_nextline(missing_rbracket_error);
-> +
-> +       sprintf(if_formatted, if_format, "[ 'abc' ]");
-> +       ut_assertok(run_command(if_formatted, 0));
-> +
-> +       sprintf(if_formatted, if_format, "[ 'abc'");
-> +       ut_asserteq(1, run_command(if_formatted, 0));
-> +       ut_assert_nextline(missing_rbracket_error);
-> +
->         return 0;
->  }
->  HUSH_TEST(hush_test_lbracket_alias, UTF_CONSOLE);
-> --
-> 2.53.0
+>  drivers/misc/fs_loader.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
