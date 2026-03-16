@@ -4,79 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3398F53D81
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A8CCF53D7E
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 18:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D3CB84142;
+	by phobos.denx.de (Postfix) with ESMTP id 6B67284159;
 	Mon, 16 Mar 2026 19:07:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HKnvAPNw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wup22kg4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 738E284144; Mon, 16 Mar 2026 19:07:40 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id D680B8412F; Mon, 16 Mar 2026 19:07:41 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F10C8412A
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 19:07:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B596384127
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 19:07:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7d1872504cbso4898139a34.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 11:07:37 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7d73e0e0a36so2141769a34.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 11:07:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773684456; x=1774289256; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773684458; x=1774289258; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fd3EdIC3iwli9UXrZYJUN70UjxfhKZpXk9qfJ3KNnO0=;
- b=HKnvAPNw2U/ZJDC6DPnXf+4RJMNcJjKg5+d+tYhJscQ7SIIpKybYTYerJz7yHx27pB
- 7abT54BcTGDTdx+p8nQjlGLaInJ72g43vaQFUe2O5js1XLzoytB5cLMY/B8bpcKxRd/U
- ITCwRxVktJxyP6WGGORm83llv7VJHYkNtFM2o=
+ bh=XHJAokT6IXF1Z6fMwezaj0wNpXxdAg3NwM/Ji/rEwJw=;
+ b=Wup22kg4+CKaLd8D04kjKQCmUOtYAEZHk8f5lqT0+PjAF5ka0v4YodtMSoHOJblM/A
+ Jv7rwzZXiYWeO0aT6DCwZ0LrgeAtDuihQXmbPn+W/P8r+WrQ0VOoNphDiKhsWeBt2mD+
+ yYBx3lcKoUBMdVa3FkB9dFEc4pMax6Grk+0+Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773684456; x=1774289256;
+ d=1e100.net; s=20251104; t=1773684458; x=1774289258;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=fd3EdIC3iwli9UXrZYJUN70UjxfhKZpXk9qfJ3KNnO0=;
- b=cjs86/CEydWFuozNzRZuJquQFnGIBYe3Iu3/M24UCprANw9Bjrxd50Qnr30PflT82l
- 2tQYGDDqBggfPLZSJyFOHalOcbB7oec2IKt0q3xByVDli5N49y9f1v+Ej4IdSZGxoAem
- IXQSk7StOBeAoo0K3+eaf+DlCGLl+Ai05xQ/wmM1/HLAza7s3zV4F5Xo3JExd88Q4eH8
- h4MlS14OKw4FZB+7XG4UFxKzv49kOM87Qxhs1IJTYBf08wKIvSOVpGEFNl+5tDE4WXMD
- sI/wB31CPkKffWoGhtn1t+Cq9pLjVuiHTXNymbhl6h6LNfHrenkrkaKKWvK1FFHMJpfn
- nncA==
-X-Gm-Message-State: AOJu0YxXwZIdNeu5bGwC/xAv3YPbysaolaD5gkXqJnnmKSVpGfU6/GgW
- RL80/P4B0Q4XU1wDKw4wApNI1nCJ7M1V8bU2dNY50ZvQwKk7HWjWghzL/rxMGRUQzy4=
-X-Gm-Gg: ATEYQzwSA/27QjZAntrmy/dlvgbdvrdf3qBZaBmbGSnNfvShp1VWiFvMvN3BOkC2ppg
- RDQnTXdzNmrWMKFP9K5A/Wdd3WYT2fvR1hQdXOWEZ4rD41LwskpUuZJ6Evi3ctTTbScwF6K+Stj
- JTudv/rbjrhZ1Vmpwm7WyA/InvVGn5xKC9q0j0mPkNCs1l69vQtF1NFeXaIsYRE4SvqpzyKZDf6
- rs/ayT3C7e2Wb3x0WdtyLoTeJ0pyw1Z/silFjeOODBY4uv+bHQbRd4UB6Erbk1yiZhCqzpZdHvT
- 8VB2nAZJQi5xnz9tQmuNE7t3ROoX5sH1D12B4rzl7XfEs4HJRDm6SqLjTs+HBbJG+sofw88f4d9
- TpErrCVOvef9RmeCl0QrqqW6WxTTWtCWgjx+7lsHbSSTyJjqoSjVgzaDhMT6SGtM+chhFANa8EQ
- Sc8Lyy805WwE27T8yEF4345zIqFfFLuK/dPf/XVi/JbDhc1rOctOkl8hBtXaD8Iq8/LZiPLOwOL
- 6CnBh7Cy3inwFVQQKRSRSdZ5agEkAFRzsC0M41Z1VaYmGY=
-X-Received: by 2002:a05:6830:67cb:b0:7d1:9066:26b7 with SMTP id
- 46e09a7af769-7d7bb7425e8mr390749a34.6.1773684456508; 
- Mon, 16 Mar 2026 11:07:36 -0700 (PDT)
+ bh=XHJAokT6IXF1Z6fMwezaj0wNpXxdAg3NwM/Ji/rEwJw=;
+ b=KBscnHHUIRXZ+/8ocmH3bgcXCn03A5EDjepO9pdAcEFGsgon7BmDsw+5cEg8KO73iN
+ OHQqrShtIYugdZvspmMTZca71QrkvfB2pIy6r4LUDLgApx4OgtnNPBqPrknu0DrhgDsc
+ PKosH82rxiEGPFV68kQDLIHIFWg1pn53sDBTTsOot8gG/EZS+nKHeuLg5XsVekAcrMC7
+ Jfy3KCZ5yWtrI0B9a5DvQyMROLBVkMIk8JPguKFylti9dxL389i0Nc2H+ZDkXCdftR7M
+ bE8LVGrJKdQUTncRU9VuFk7cfzXJg2jNVoGLg4PgIXWeRWNIAulybhNkpxnUL0jhy3A0
+ mzsQ==
+X-Gm-Message-State: AOJu0Yyeru9SgALm3olGPfXCndbV5gCAKhTA2AmKHALxf75oorTJ4qdK
+ Hm5U3Aw/6gqS+g1XINjFPfhn9taRctYgDzNY8K1F4EMdMBrkRt5unbeEKxaCI4Ur6zE=
+X-Gm-Gg: ATEYQzyPQLAHiy+vAQClnTtc8/mZn8sRnIk62Xl5zoKlDcBHqSZBwiYEv85Zz4vkN+U
+ j3cqYmh+GaRDdRsTX0b8OvtM80/Sbb2nugoNEwMgicFLs+Aw6wlSGtgdmj3mk2sVCx8OluTd/HB
+ HO5noVXmG6csbtCWXGkZj+9/Oh7GejO6njLEAI4Y0p/cC2e2HOdB1gndzw5mswwOWoQsPpYnzAy
+ uDjyn8AqQaxd+7P1jg0xtZJVsMAPNNyn1gCC53bM3FgryYGO1z/asUvT0WEPzJUmk4qMHYGE6oo
+ OwJrIoVHOE+3ahy7R5dJA1qkKHgqis2ZMWOfbWBgb6HsKxc0h5WkUU66tNmWt33TknLmlcQpdBu
+ SBLZMCf0n1UiKuTo+aOndsPvFC37eIYGc+IpNQa1mAXLGEA4aMPI3uxBQQ+e623beBPaWCcTglP
+ wtIgUYzAz0KCw5duq89g+LlyLN6wQiAaMdU7TmortibmWhi6Y0inqSS6SuatzDYPinwxn88b4qx
+ B2XelTXNzES6WRDQ+6R/fnnK2e8mjsMkLpvG3Ef33yYutw=
+X-Received: by 2002:a05:6830:6a9a:b0:7d7:b770:1682 with SMTP id
+ 46e09a7af769-7d7b77016damr1044471a34.19.1773684458313; 
+ Mon, 16 Mar 2026 11:07:38 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ac32913sm13255393a34.5.2026.03.16.11.07.35
+ 46e09a7af769-7d76ac32913sm13255393a34.5.2026.03.16.11.07.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 11:07:36 -0700 (PDT)
+ Mon, 16 Mar 2026 11:07:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Andrew Davis <afd@ti.com>, Udit Kumar <u-kumar1@ti.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>
-In-Reply-To: <20260226-board-cfg-update-v1-1-9d434890f537@ti.com>
-References: <20260226-board-cfg-update-v1-1-9d434890f537@ti.com>
-Subject: Re: [PATCH] board: ti: j7*: Update rm-cfg and tifs-rm-cfg
-Message-Id: <177368445571.2276702.12182695068715736412.b4-ty@konsulko.com>
-Date: Mon, 16 Mar 2026 12:07:35 -0600
+To: u-boot@lists.denx.de, Amjad Ouled-Ameur <aouledameur@baylibre.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Ryder Lee <Ryder.Lee@mediatek.com>, Sam Shih <sam.shih@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Macpaul Lin <macpaul.lin@mediatek.com>
+Cc: Bear Wang <bear.wang@mediatek.com>, Pablo Sun <pablo.sun@mediatek.com>, 
+ Ramax Lo <ramax.lo@mediatek.com>, Macpaul Lin <macpaul@gmail.com>, 
+ MediaTek Chromebook Upstream
+ <Project_Global_Chrome_Upstream_Group@mediatek.com>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ "ht . lin" <ht.lin@mediatek.com>
+In-Reply-To: <20260305102324.2797478-1-macpaul.lin@mediatek.com>
+References: <20260305102324.2797478-1-macpaul.lin@mediatek.com>
+Subject: Re: [PATCH v2] scsi: Adjust SCSI inquiry command data length
+Message-Id: <177368445668.2276702.8683429061507538750.b4-ty@konsulko.com>
+Date: Mon, 16 Mar 2026 12:07:36 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,17 +111,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 26 Feb 2026 17:07:57 +0530, Manorit Chawdhry wrote:
+On Thu, 05 Mar 2026 18:23:24 +0800, Macpaul Lin wrote:
 
-> Repurpose the allocated resources with version V11.02.07 of
-> k3-resource-partition.
+> Per the SCSI SPC-4 specification, the standard inquiry data length
+> should not be less than 36 bytes. The current implementation uses 512
+> bytes, which causes detection failures on some UFS devices (e.g.,
+> Longsys) that do not expect a transfer length exceeding the standard
+> inquiry size.
 > 
+> Align the default standard inquiry length with the Linux kernel's
+> implementation (see drivers/scsi/scsi_scan.c), which uses 36 bytes as
+> the default. Devices requiring vendor-specific inquiry lengths should
+> be handled through quirk settings in the future.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] board: ti: j7*: Update rm-cfg and tifs-rm-cfg
-      commit: c4fcf9b806aefd6ab18edca59994c5a106d5e9ff
+[1/1] scsi: Adjust SCSI inquiry command data length
+      commit: 041364141b7daef8318a4b8495cac8570002773f
 -- 
 Tom
 
