@@ -4,111 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC7AF53D65
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 15:01:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85A80F53D67
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 15:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCFE38409B;
-	Mon, 16 Mar 2026 16:01:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 18BB5840B0;
+	Mon, 16 Mar 2026 16:02:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sO9rdXyF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RKYMBQF0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BABB840A2; Mon, 16 Mar 2026 16:01:55 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id A2A20840AA; Mon, 16 Mar 2026 16:02:07 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 632F78409A
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 16:01:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B700840B1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 16:02:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b9789425fc5so310877366b.1
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 08:01:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773673313; cv=none;
- d=google.com; s=arc-20240605;
- b=eeUPLeGwXd1oVXGPMby/xYRDBEuQ6PphZrooTtYkMRDH6pnnPzRRSKe0/32b+pM7CF
- lKkI5+kjzeeHhEdHds5QsECoSNZAvsbUPVEQsUqaikeeDgougC5p3XR7Fq6nu1Jz8WaI
- mBciKaNFEPIpky2dXGzIJbc7Cp12WI5r49o+umvSEL60kao1NPaR+bPsWTHAB4nvbI5O
- Fdq/ValiuI6H8oTxP3LMY5Lo7fboLwB4t5JthvyQ54RCxMJpRU0ez9E4y5MOMfigtwUl
- ZXRSUqVW+Omt/9ANSd0/VUpdVvWlsnKIgElIG+GkvV3cWWcW/U+B1eriXYxWxYZ/Bti4
- unZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=1iy7DweJhxM0TPX7zZXDuIeWhCEutSvwYBueQrPFsTg=;
- fh=9s1rxRGUwAVr+p9cFek0M1Jxe63lhdbGfXzUewJk5jU=;
- b=CwOfGxJUlHF9u5st50Fj/vADZOIrXUpcwmiNQbVizJF6b2RT6okw8o/tlINps8hFyQ
- xyrPJ9yI3PldausDfx3gr2ZdjGfVuY4lvqkLv79btxIBq7Nmz47Ve8ZQCoXV3jTsF09I
- JuDEKnEGJLtTx+FEhj7T+j3z/XJc5iPd8lOv3L0DYlbeq6r4Jg2B/Lu5PuubTXhrvK8H
- cuu3yYgfAa5qCVki763mwZorN7WiGXe7irLhtJxTqRMYMn1qE0XLvW/5duDv5sb9g8FV
- uF9TP3Cm90WxLDJ5XDogNPyvT57yAup6nj5ZMbK+7AT0JySWqNmD3YYZqRNwOb9tY9ts
- 2mAg==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-4094b31a037so3020143fac.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 08:02:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773673313; x=1774278113;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1iy7DweJhxM0TPX7zZXDuIeWhCEutSvwYBueQrPFsTg=;
- b=sO9rdXyFYGxnjW5cW06t6LMOI0kCVsZtz1meiq5NMAVw3WFfIX5PH+mUlkrFycHV2U
- ejTWVWx6ozcc4y4sSQzYWJmzPepD4xt7mZstqNfyKEfoqWt3yiyPH7JXAVPagpGzKpKU
- Y8+7hYHL871j4gpllAAJilTnr3xvxdJKsSGJkqp1NEEcIeouFXu1JtYxc1HGnhDGYxuu
- MCXyvzNeAr8/WjfVFGlceFQm1z4ixBZPoS0Hc8hrUTq7pjO9lXdsJjx9O+2nFm2ov8tb
- HA3j78xxiczmLLENdorQd7DveGPvzDaJq+zPW8ONNlgjkAFJQyABJu/5TovbdrRMcaSl
- RQTA==
+ d=konsulko.com; s=google; t=1773673324; x=1774278124; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TnOQet+9o2SBLd8MXRygBDl8qEgyQ7Eso3KhJ3kJxPw=;
+ b=RKYMBQF0nP5FvwpalwLtNWzqDt5OZodZ7Z8It0uRXSzfoCVCMFtYw88XlL4HAq6+qQ
+ TN4oOMymxsiLDwasabCOxM2CS+pL9fa3YG4db0cXQ3qiE1Zvf0HhTcob7fBbjWI1ga38
+ 6UtoT59LJqlQLzsPFBS1yEOomxP3Tf4as3tWA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773673313; x=1774278113;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=1iy7DweJhxM0TPX7zZXDuIeWhCEutSvwYBueQrPFsTg=;
- b=GoYrNl7jriO9eDFRoNa/zDV6N36pXaPoCHr9+LZCvrpqNaCRWFys+pwsrtwGXgvVEE
- 3YUvTqy4moz5BEZlJ8OimzNEbzT7nLx7ZqEUCxza2CE/1itx0r6g3QrrSOaQPKVncPlm
- wQk0p6vh6oA3S+xMXK3f5Y0GTU5oANW4Ld78eeDiz3RxZyH0ZEO070LgKnhLzOHeGP6U
- x9LyXahPRY74hugUxUbUiyrjeDy2+xL2N9R8lvgtX27Gj011XuSxCE/iFxC3etSwqVe3
- uWA9V7eLteNJ1x2QaY4/4zejg6SPIT4MgN3p+hokq9ZHpirAb+9fGD0WMT+3AOZBfwMG
- WbTw==
+ d=1e100.net; s=20251104; t=1773673324; x=1774278124;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TnOQet+9o2SBLd8MXRygBDl8qEgyQ7Eso3KhJ3kJxPw=;
+ b=GEsM9T6bHdiYVxbK+cAh8oZX5o53KVgb+kDbrXJOi+4R22nNtDcV2oxaIwQUbckJIT
+ vAGZSn1y8RO43brLmFUWMkH5VY43/XWuHyfw24CTg6XPmQeFfUWa7LNEHwR17G8sXwHy
+ yzt4Pk9eLj4C9aF83ftFi6WqA7muEp5cu0J/pgpPdRIMIx3Bj/u3M/SiMi8wBx+FqFIO
+ kGxWy6vzfr3WWqtNjpl0Q0bivqmnVbEfeRK3AeO5uTZEPc2pzczOHK5Z64nbm9C5A9tG
+ ULtI5WJPKjv8szaxGtqASg5bU7sDOFIGD/6XyJQkoVfjD6i98znddqejW8EJBY2c0lcb
+ xWmw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXHpwWmGA4bmBKFtDEGUn0vQcn8KSuMCVv6hv+9ohHXOGpnbtTHvBnqdc9KIOfvflKDgLGr74A=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpI2JCGrcj35JgESJ7Y3AY0hNI0eSPcKxfBJ2dxSAKnVwgMdZT
- d4SEMJ1C2KL8solHLpscsc2PmjSXFyhZ7p5DskXulc5MbKKToELKy+vZ9y3jMcrOqwgsLkndQPJ
- kp5Lx+EUmkREkSgesXIyhPhi94dlSewDk8x8I37gmsA==
-X-Gm-Gg: ATEYQzx9RM9VjjXIm1etisc5CuAg4RsvO1PhyMOBsB6zbaLS0v3TYGfxbciwp9TMRHa
- MAJE9MbV7zEOILBoKEnVi9PZxlS7Oj/s+iGejq240m3049U/WRlTgWSrWPrgJ2javm/yAj+E7YS
- SznxEGyoayn9Zm08UxTyouFqwSfN/bc4AkpRiqTl6dnYyBuphnKNOlf2EOrb3U75XP4M8a8mG1t
- Iwbc0GF90Jq8bCdgJ+F0XfdrsuggOIwOu6xEMh+DJAeN3Nf5218O0btnkigj1Zk1eGGx/M2MpTy
- pBUrdnT09T6cxdM67E5t+NIJUDaVHRBsCg2ZYJ1Jmiuzw/oacZYqSKi+Gi5bI5ngzwI0jmhtVhs
- 69xNWBil0eYIk1YdZETl1S6nInASEVX7tfPM8
-X-Received: by 2002:a17:907:806:b0:b93:cbc9:85d6 with SMTP id
- a640c23a62f3a-b97636d82bemr843902366b.11.1773673312383; Mon, 16 Mar 2026
- 08:01:52 -0700 (PDT)
+ AJvYcCUZ4Xu82wDWI4yj2uHkEP+iyGuQq1LNuHAQ00lULRe7VrapHueXgWFW4rRFYq3PGD4bN0CoUDE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw+6G6fzoKfCPFd0OuRhP7nidZT+OkDfMSAPv9QHF1W5G2Wh2ar
+ 0IyfJRjG/GK7taLp7TIpuOLgFVYup57kjPxaRkAMSzWbeL0AoKvbxOvCRskDNQjVpt0=
+X-Gm-Gg: ATEYQzzgqORTWd5gFxtp3t75EUceZMFajR08WSuJrwb3kq/oZTNH71o4BmQopOiZOzO
+ pmX4rNx/6MzApOkaqRcrfPZ8LtozZMMPUEk/p0ORMqFo8/7grUp7e3uJ1RHoVT8OPXs68XPbMFR
+ Ll1XaH6gSPLc5coUv00pQlxkowffwT2+0hTWBKkG5LXKAUn+VqXe3jkN+alPVibqZpEkirXPeSX
+ n98dAn7eW6eJHq0P1IEff5RIUK8S+Nu9jeQiSCqeGcYJ7Iimc3YPlQppL1k0y8eF94yPel/EN1x
+ rMKsAb0nWHPsrHRRARBt839nZuLKdbuLHldrRxHlAUIiVzfWa9Jh/k8FuPGWEZPoASg0d9uB5oI
+ cPzxEqlAgMJYoJYqmp3KMATy7v4g9nIBvo0U21xIcITMo6ww+ewm+shAofHp9ttVet3DA0YXWsH
+ fdfhi5ngFbX+SvsY3iaDBA74wokmHwm4Joi1pziF6j0ZU/tXJi1Dgi2p3ovi74FuefXt85ilUyZ
+ FJo48WZxBIuiWpy09sgJ2hZ+0uiSufAm809ZVcjNUmUGUAs
+X-Received: by 2002:a05:6871:e708:b0:40e:95b9:40f3 with SMTP id
+ 586e51a60fabf-417b946c48fmr8537580fac.39.1773673322288; 
+ Mon, 16 Mar 2026 08:02:02 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4177e25f037sm16357792fac.5.2026.03.16.08.02.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Mar 2026 08:02:01 -0700 (PDT)
+Date: Mon, 16 Mar 2026 09:01:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
+ git@amd.com, Casey Connolly <casey.connolly@linaro.org>
+Subject: Re: [PATCH] efi_loader: Allow disabling ANSI console queries via env
+ variable
+Message-ID: <20260316150158.GL502704@bill-the-cat>
+References: <e5387628c1d64caf7bcabb5d99d2987bd5bff617.1773150603.git.michal.simek@amd.com>
+ <CAC_iWjJLfVJb5zy_Jb=-h0d0U7-ui4yz8ihb9=g9f1nKVDRA-A@mail.gmail.com>
+ <CALeDE9NrGF22D=3pA_JDFxmxZ8EiDbmbng9zd0Jr-k+JPx1dPw@mail.gmail.com>
+ <d0f0d10b-6d44-427d-9e55-103d5fd0e107@amd.com>
+ <CAFLszTgdogHiTDpuwCiu3k1yA=x2-z3GxeMgj69qbpJK-s18Wg@mail.gmail.com>
+ <65bb681d-b66e-42e0-b848-fa132e6255d3@amd.com>
 MIME-Version: 1.0
-References: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
- <20260310-mtk-mt8391-initial-support-v2-6-1dc862d58532@baylibre.com>
- <CAEHHSvbduE9Naebb8hk3xu+0ZEwRuO8yuh_1GUM9QFOP=BA2vQ@mail.gmail.com>
- <38e5929d-4d95-45db-be93-28232a9de954@baylibre.com>
-In-Reply-To: <38e5929d-4d95-45db-be93-28232a9de954@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 16 Mar 2026 16:01:45 +0100
-X-Gm-Features: AaiRm53v1XadbVIQYe4QoEQvvpPMkWafYj_HEjVThHjuN8Gs-hebH7rLkXdTwac
-Message-ID: <CAEHHSvY-NRQcLKHizS0S-++5CgXrvKdxjH4QUrsWP_LbW+AC-Q@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] board: mediatek: Add Genio 520/720 EVK defconfigs
-To: David Lechner <dlechner@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>,
- u-boot@lists.denx.de, Chris-QJ Chen <chris-qj.chen@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wq3njiaihYr0VJ80"
+Content-Disposition: inline
+In-Reply-To: <65bb681d-b66e-42e0-b848-fa132e6255d3@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,61 +107,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le lun. 16 mars 2026 =C3=A0 15:34, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> On 3/16/26 7:38 AM, Julien Stephan wrote:
-> > Le mer. 11 mars 2026 =C3=A0 01:17, David Lechner <dlechner@baylibre.com=
-> a =C3=A9crit :
-> >>
-> >> From: Chris-QJ Chen <chris-qj.chen@mediatek.com>
-> >>
-> >> Add basic defconfigs for Genio 520 and 720 EVKs.
-> >>
-> >> Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
-> >> Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
-> >> Signed-off-by: David Lechner <dlechner@baylibre.com>
-> >> ---
-> >>  board/mediatek/MAINTAINERS             |  7 +++++++
-> >>  configs/mt8189.config                  | 34 +++++++++++++++++++++++++=
-+++++++++
-> >>  configs/mt8371_genio_520_evk_defconfig |  4 ++++
-> >>  configs/mt8391_genio_720_evk_defconfig |  4 ++++
-> >>  4 files changed, 49 insertions(+)
-> >>
-> >> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-> >> index 446a9e8e53c..4f371592059 100644
-> >> --- a/board/mediatek/MAINTAINERS
-> >> +++ b/board/mediatek/MAINTAINERS
-> >> @@ -1,3 +1,10 @@
-> >> +MT8189/MT8371/MT8391 EVK
-> >
-> > Hi David,
-> > I would not put MT8189 here since there is no MT8189 EVK
-> >
-> >> +M:     Macpaul Lin <macpaul.lin@mediatek.com>
-> >> +S:     Maintained
-> >> +F:     configs/mt8189.config
-> >> +F:     configs/mt8371_genio_520_evk_defconfig
-> >> +F:     configs/mt8391_genio_720_evk_defconfig
-> >
-> > Any reason to have genio_520/genio720 in the defconfig name?
->
-> The upstream devicetree name will have "genio-720" in the name, so
-> find it strange to call the defconfig something that doesn't match
-> the devicetree.
->
-> If there is a (not Genio) MT8391 EVK I would expect it to have a
-> different devicetree and therefore a different defconfig.
->
-> > All other boards we are currently upstreaming don't specify it in
-> > their defconfig name:
-> > mt8365_evk_defconfig/mt8370_evk_defconfig/mt8390_evk_defconfig ...
-> >
 
-I get your point.. From my understanding, mt8371_evk IS genio_520, so
-IMHO there will be no non genio MT8371_EVK.
-But, I understand that it makes sense to have the name of the
-defconfig matching the name of the device tree.. In that case should
-we rename all other defconfigs for mt board?
-(8365, 8370,8390,8395..)
+--wq3njiaihYr0VJ80
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Mar 16, 2026 at 08:45:12AM +0100, Michal Simek wrote:
+> Hi Heinrich and Ilias,
+>=20
+> On 3/16/26 03:43, Simon Glass wrote:
+> > Hi,
+> >=20
+> > On Fri, 13 Mar 2026 at 09:50, Michal Simek <michal.simek@amd.com> wrote:
+> > >=20
+> > >=20
+> > >=20
+> > > On 3/13/26 16:47, Peter Robinson wrote:
+> > > > On Fri, 13 Mar 2026 at 12:55, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >=20
+> > > > > Hi Michal
+> > > > >=20
+> > > > > On Tue, 10 Mar 2026 at 15:50, Michal Simek <michal.simek@amd.com>=
+ wrote:
+> > > > > >=20
+> > > > > > Commit 4cb724364030 ("efi_loader: Disable ANSI output for tests=
+")
+> > > > > > introduced efi_console_set_ansi() to suppress ANSI escape seque=
+nces
+> > > > > > during unit tests. Extend this mechanism to be runtime-configur=
+able via
+> > > > > > the 'no_ansi' U-Boot environment variable.
+> > > > > >=20
+> > > > > > When 'no_ansi' is set to 'yes', efi_console_set_ansi(false) is =
+called
+> > > > > > at the start of efi_setup_console_size(). This prevents
+> > > > > > query_console_serial() from sending ANSI escape sequences to the
+> > > > > > terminal, using default 25x80 dimensions instead. This is usefu=
+l for
+> > > > > > platforms where the serial console cannot handle ANSI queries.
+> > > > >=20
+> > > > > I am fine with the patch, but the no_ansi is a bit misleading rea=
+ding the code.
+> > > > > It really means don't use ANSI queries to detect the console.  So
+> > > > > before creating an ABI to the cmd line should we really call it
+> > > > > "no_ansi" or perhaps "no_detect" and in the future clean up the
+> > > > > variable names as well?
+> > > >=20
+> > > > I wonder whether this should be a Kconfig option too, a maker of a
+> > > > device likely knows when this is an issue on their device and
+> > > > explicitly enabling it via a config as opposed to an environment
+> > > > variable would likely be useful when there's a menu enabled and the
+> > > > shell possibly disabled?
+> > >=20
+> > > There are a lot of Kconfig options and variable which can aligned it.
+> > > It means we can create Kconfig option for it but likely we should als=
+o have
+> > > variable way as common way in uboot.
+> > >=20
+> >=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >=20
+> > It might also be worth reconsidering this old patch:
+> >=20
+> > https://patchwork.ozlabs.org/project/uboot/patch/20231121113557.800353-=
+5-sjg@chromium.org/
+> > https://patchwork.ozlabs.org/project/uboot/patch/20240815202424.766778-=
+11-sjg@chromium.org/
+> > https://patchwork.ozlabs.org/project/uboot/patch/20240902011825.746421-=
+11-sjg@chromium.org/
+>=20
+> We have met with this problem on real HW last year and based on it we
+> created this internal patch.
+> https://github.com/Xilinx/u-boot-xlnx/commit/29b1330570543056188e5c065f1e=
+a1be064b3a4b
+>=20
+> And we also send it out
+> https://lore.kernel.org/all/SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR1=
+2MB6685.namprd12.prod.outlook.com/
+>=20
+> That's why I would like to get clear guidance which way you want to go and
+> how things should be changed. If you are fine with having variable/Kconfig
+> symbol to disable it, then I am happy to create a patch for it.
+>=20
+> From my perspective this is unwanted feature and I would like to fix it
+> clearly to make sure that I don't need to handle that origin one line
+> incorrect fix in our u-boot tree.
+
+So re-reading your thread from about this time last year, it seems to me
+there was agreement that yes, a broader re-organization would be good
+but is a time consuming task that it seems isn't urgent enough for
+anyone else to pick up,
+
+It was also never addressed as to why this fails in the first place, as
+it should not.
+
+And we are generally resistant to making it easy to make our EFI
+implementation spec-non-compliant.
+
+I'll defer to whatever Heinrich and Ilias agree on but there's good
+reasons we haven't "just" picked up one of the previously suggested
+patches.
+
+--=20
+Tom
+
+--wq3njiaihYr0VJ80
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCabgbYwAKCRAr4qD1Cr/k
+CpFyAP4hy2rF8STBWug6LeHMn3+vzWGt8uqr2Zk/W/gbDIoCBAD/Wf10TqbmpBQ8
+ru+U01CjEu7+novPaP15QVWOCaRQ5wI=
+=WvmN
+-----END PGP SIGNATURE-----
+
+--wq3njiaihYr0VJ80--
