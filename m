@@ -4,48 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9172FF53D90
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 20:02:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3972F013FA
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 21:26:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 857398419E;
-	Mon, 16 Mar 2026 21:02:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id 4486C841CD;
+	Mon, 16 Mar 2026 22:26:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="t/B5gTQR";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PDdidq/P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF15B8419E; Mon, 16 Mar 2026 21:02:34 +0100 (CET)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [72.51.58.38])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6423E841CF; Mon, 16 Mar 2026 22:26:53 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FCFF8419E
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 21:02:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id EBB5A83FC0
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 22:26:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References;
- bh=cZb9tl31YkoA+vTrMmywm6IosBaw8JHfbS8bYXOgBaw=;
- b=t/B5gTQR8QGfdPWT7st6loB3xiDGBPoxiWZ8qP16q/Fz0PRdC/UdUdlh6auUQTJy4PW54hYiPcNT65HT19/NoreLZitXMzs8jIKFa+/wtYhC+v8c401qlyV+g/qt7qS5U+5jRXCZoomyjl0grDvKO2lQ+vfqno/oHAsigQe/b6I9xci1bfKYYrsdkdIoBvQOH0wp6i9JFdHjjH4tVAhP32LLnXwF0QWZKlq0hahMTS/3BhcxtmYGyjVMt2
- Q4MTu08vEXlE6to2p6TK3ClWBPK0jvFRDGSkuImy4h+rscCPV3ytBcg2vMunBV5rnvTz2M9HkOs02jS+hybLJhhY2ntg==
-Received: from TkB (188-24-192-137.rdsnet.ro [188.24.192.137])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Mon, 16 Mar 2026 20:02:24 +0000
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: u-boot@lists.denx.de
-Cc: Marius Dinu <m95d+git@psihoexpert.ro>
-Subject: [PATCH resend 1/1] Timers: prevent conflict between ARM Generic Timer
- and Timer drivers
-Date: Mon, 16 Mar 2026 22:03:54 +0200
-Message-ID: <20260316200751.3024-2-m95d+git@psihoexpert.ro>
-X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20260316200751.3024-1-m95d+git@psihoexpert.ro>
-References: <20260316200751.3024-1-m95d+git@psihoexpert.ro>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-41706b23543so68510fac.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 14:26:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773696409; x=1774301209;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uI8BRlCsMcZERNNmSEqETXFmUTrpuW4/yG8WQ7GfKh8=;
+ b=PDdidq/Ppa71DSoc6hOB696FTxydQZqrKC2dAHNa4AXDth1pIrSgnYWaUx//AEBbuf
+ c4eK+0IVYTf/Ii9CFqjGfCMBNlf4c5FLpyym5unhiRaUxQ9DLc86am6e5mrxy3f4SQZ8
+ iLW/hWL49ii55XGeXBIKR7Q//N7S++HKJC9s5nYw4YdqO+SzdN1ow+YKCO9uGlJTtVVx
+ KndRssGZje7AI91QPGmjHzIbYOaqGncC2OOqCIgWB8njc32UxHlu2fH/S5M31ixNqwkq
+ XJKOm7kUS/8KGYadvL02jqa00DtjKjbL6UCHq4lJeVClM4c1RqblCVhv66V3csZ1koHz
+ FJTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773696409; x=1774301209;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uI8BRlCsMcZERNNmSEqETXFmUTrpuW4/yG8WQ7GfKh8=;
+ b=gk0JVdnLs6tbAA0v1w7g2ucsrmEvJM34LgF9TDzA5EWHNSLsiZIXm5QiQRrAPTll3X
+ lonE52PPfy2oFZI7DGgPFNadffdp6hFEDvR+N+Fdkz72Ofsrq0vN5iNMq9qHXHoDfiwt
+ NevdGcng7/MIamFEsgWXQPGACpiQ9xm1og7hRZwe7B0+Lw4OTb1ShIikRh29qibpM0VQ
+ dVlEFlNpoiizj2tBjyYNUxAuimCDnR3j27GwI30Ku/I8CgvkNfFRf2Emi4m1mAheOeLC
+ HjVSEJV9qxOkWDpcvHme7G7hrqBrbPPmCbi04Ad9wPIjK0MnJaNu+8GUxlVPLCj5bI1M
+ Vkkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbDICmyh3uUg0Z+5gIeE2e7Mk571+roUd8QN8DjIzFRDYaGSWm5XwoGx5jsnwXycejnvVbSZs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZOYJMU5TxmyVeoIfz26S/R/oKWtR3rTsf5KO789FkoVB5MzJt
+ hBmLkn4MMXowQKXzyg+carLWZATf2fM3VmIYsLTp62ybgXcwCXrEk8IB9Ibwk+nwWzA=
+X-Gm-Gg: ATEYQzy+kzS9WOXpioozvHMBmSyg67IaU9LD/k9FKtm8b/SiGNbgr62/LcPqI+Mzwgb
+ QD2WC+Fe4TUP/v+NSbAmLEfintBhzrxR1Gts5mbIlfnPCQufPCDczy42e4xr1ROvzXy59jZM3tA
+ 2RwEUAH0o18645YoiGTj/R5GIQR2CyqaTudB7lrc3kDWjQY48nBcD8W4gZ0LHIzkt2qGmTojINY
+ TN4jGavQ4DnvMJGi2mS/BS4cdUXWRiFC7eFELWt45BuYF2cHgfmHpTZOekLe/ssRSpyHTAY5ICT
+ ioqPdFveDhzNJl6g+OgX0U2in++FNeH9V8gV0oNYwUPns/CYfxOz2wUtEbaV98dj3+TwDuL8KcE
+ nFZ+Li0ryzck5rr6rXZnIMpJgLq36LLABlYfHiBgkJ+IEuQbqhOXwu+QYxnnuYF3dFEHWtAGwwb
+ /TTjS92z2f/wPeCe+qwcVTjnGI7U1lD+Rx6Q6OCIo6oudkY+8Rgx1u27uvu8dg46i83XEIfSQVB
+ A==
+X-Received: by 2002:a05:6870:249b:b0:3e8:9b72:5cda with SMTP id
+ 586e51a60fabf-41bb032816dmr612089fac.11.1773696409580; 
+ Mon, 16 Mar 2026 14:26:49 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:e504:a034:1152:a664?
+ ([2600:8803:e7e4:500:e504:a034:1152:a664])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-4177e6e82cdsm17949744fac.18.2026.03.16.14.26.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Mar 2026 14:26:49 -0700 (PDT)
+Message-ID: <43bd1d9b-7381-42dd-939e-a37ec2740033@baylibre.com>
+Date: Mon, 16 Mar 2026 16:26:48 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/6] board: mediatek: Add Genio 520/720 EVK defconfigs
+To: Julien Stephan <jstephan@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Macpaul Lin <macpaul.lin@mediatek.com>, Lukasz Majewski <lukma@denx.de>,
+ u-boot@lists.denx.de, Chris-QJ Chen <chris-qj.chen@mediatek.com>
+References: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
+ <20260310-mtk-mt8391-initial-support-v2-6-1dc862d58532@baylibre.com>
+ <CAEHHSvbduE9Naebb8hk3xu+0ZEwRuO8yuh_1GUM9QFOP=BA2vQ@mail.gmail.com>
+ <38e5929d-4d95-45db-be93-28232a9de954@baylibre.com>
+ <CAEHHSvY-NRQcLKHizS0S-++5CgXrvKdxjH4QUrsWP_LbW+AC-Q@mail.gmail.com>
+Content-Language: en-US
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <CAEHHSvY-NRQcLKHizS0S-++5CgXrvKdxjH4QUrsWP_LbW+AC-Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -63,55 +115,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Can't enable both CONFIG_SYS_ARCH_TIMER and CONFIG_TIMER_*.
-This error occurs:
-  ld: lib/time.o: in function `get_tbclk':
-  /usr/src/u-boot/lib/time.c:72: multiple definition of `get_tbclk'; arch/arm/cpu/armv7/arch_timer.o:/usr/src/u-boot/arch/arm/cpu/armv7/arch_timer.c:63: first defined here
-  ld: lib/time.o: in function `get_ticks':
-  /usr/src/u-boot/lib/time.c:87: multiple definition of `get_ticks'; arch/arm/cpu/armv7/arch_timer.o:/usr/src/u-boot/arch/arm/cpu/armv7/arch_timer.c:44: first defined here
+On 3/16/26 10:01 AM, Julien Stephan wrote:
+> Le lun. 16 mars 2026 à 15:34, David Lechner <dlechner@baylibre.com> a écrit :
+>>
+>> On 3/16/26 7:38 AM, Julien Stephan wrote:
+>>> Le mer. 11 mars 2026 à 01:17, David Lechner <dlechner@baylibre.com> a écrit :
+>>>>
+>>>> From: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+>>>>
+>>>> Add basic defconfigs for Genio 520 and 720 EVKs.
+>>>>
+>>>> Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
+>>>> Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
+>>>> Signed-off-by: David Lechner <dlechner@baylibre.com>
+>>>> ---
+>>>>  board/mediatek/MAINTAINERS             |  7 +++++++
+>>>>  configs/mt8189.config                  | 34 ++++++++++++++++++++++++++++++++++
+>>>>  configs/mt8371_genio_520_evk_defconfig |  4 ++++
+>>>>  configs/mt8391_genio_720_evk_defconfig |  4 ++++
+>>>>  4 files changed, 49 insertions(+)
+>>>>
+>>>> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
+>>>> index 446a9e8e53c..4f371592059 100644
+>>>> --- a/board/mediatek/MAINTAINERS
+>>>> +++ b/board/mediatek/MAINTAINERS
+>>>> @@ -1,3 +1,10 @@
+>>>> +MT8189/MT8371/MT8391 EVK
+>>>
+>>> Hi David,
+>>> I would not put MT8189 here since there is no MT8189 EVK
+>>>
+>>>> +M:     Macpaul Lin <macpaul.lin@mediatek.com>
+>>>> +S:     Maintained
+>>>> +F:     configs/mt8189.config
+>>>> +F:     configs/mt8371_genio_520_evk_defconfig
+>>>> +F:     configs/mt8391_genio_720_evk_defconfig
+>>>
+>>> Any reason to have genio_520/genio720 in the defconfig name?
+>>
+>> The upstream devicetree name will have "genio-720" in the name, so
+>> find it strange to call the defconfig something that doesn't match
+>> the devicetree.
+>>
+>> If there is a (not Genio) MT8391 EVK I would expect it to have a
+>> different devicetree and therefore a different defconfig.
+>>
+>>> All other boards we are currently upstreaming don't specify it in
+>>> their defconfig name:
+>>> mt8365_evk_defconfig/mt8370_evk_defconfig/mt8390_evk_defconfig ...
+>>>
+> 
+> I get your point.. From my understanding, mt8371_evk IS genio_520, so
+> IMHO there will be no non genio MT8371_EVK.
+> But, I understand that it makes sense to have the name of the
+> defconfig matching the name of the device tree.. In that case should
+> we rename all other defconfigs for mt board?
+> (8365, 8370,8390,8395..)
 
-This commit makes timer drivers only available when ARM Generic Timer is not selected.
-If it's selected, shows a message explaining why timers aren't visible.
-The message should avoid the confusion that an empty Timers menu may cause.
+The upstream devicetree name for 8365 is mt8365-evk.dts (or MT8365 EVK
+!= Genio 350 EVK and I don't know about it?)
 
-Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
----
- arch/arm/Kconfig      | 2 ++
- drivers/timer/Kconfig | 5 +++++
- 2 files changed, 7 insertions(+)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 3db5474a05b..534a649d521 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -453,6 +453,8 @@ config SYS_ARCH_TIMER
- 	  It is mandatory for ARMv8 implementation and widely available
- 	  on ARMv7 systems.
- 
-+	  Note: Timer drivers (CONFIG_TIMER) are unavailable when this timer is selected.
-+
- config ARM_SMCCC
- 	bool "Support for ARM SMC Calling Convention (SMCCC)"
- 	depends on CPU_V7A || ARM64
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index f9511503b02..3be8bfe9e42 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -1,8 +1,13 @@
- menu "Timer Support"
- 
-+comment "Timer drivers are unavailable when ARM Generic Timer (CONFIG_SYS_ARCH_TIMER) is selected."
-+	depends on DM
-+	depends on SYS_ARCH_TIMER
-+
- config TIMER
- 	bool "Enable driver model for timer drivers"
- 	depends on DM
-+	depends on !SYS_ARCH_TIMER
- 	help
- 	  Enable driver model for timer access. It uses the same API as
- 	  lib/time.c, but now implemented by the uclass. The first timer
--- 
-2.52.0
-
-
+For the others though, yes, I think it would be good to be consistent
+with the naming. And we could also use a #include in 8370 and 8390
+to reduce the duplication like I did for 8371 and 8391.
