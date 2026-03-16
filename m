@@ -4,100 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA759F506C3
-	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 12:38:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E36F506C3
+	for <u-boot@archiver.kernel.org>; Mon, 16 Mar 2026 12:39:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FBF184056;
-	Mon, 16 Mar 2026 13:38:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BF3584067;
+	Mon, 16 Mar 2026 13:39:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dfXyLCtc";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="n0rxWnkC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 301E88405A; Mon, 16 Mar 2026 13:38:46 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 9BAA484068; Mon, 16 Mar 2026 13:39:39 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C51F184051
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 13:38:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FCC484065
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 13:39:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b96d784828bso680788266b.3
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 05:38:43 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773664723; cv=none;
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b9795ca4e6dso321846166b.2
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 05:39:37 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773664777; cv=none;
  d=google.com; s=arc-20240605;
- b=lp42dfTSjwctbqvtBHpTXZeDucAH7CwaePCCLLIXkPVHb4rjFPQZkELM0Ay8baNM6U
- fRJGCEMdyXgYvrTn20GJoEAtDwx1umh89QxJqv0FLW2xai/yvZ43ebDpKciO8rDBC2ME
- iTjMTo+e1A1mlEMM/ISS3c7NVFoEtOJQRUpTn/zDVNtLOYPlFVFvUqn85o8OaScig1Gj
- TFVthVCZ9gxD6qaOzxZE2adwUKw0U/GebrziE9VFB7/c0Pa77FG61OtnzOz/vVdDc6zs
- 9QZvKBLjVx2KyuO+//lcu51KrJHoA//7tACexLhHmZNuAPfimIgpc9umFkK3dQyRB/Sq
- jQtQ==
+ b=Gx1r9B0C3XasnddchxywrdqHYddVswhSNYzgz2r8SS1oKerYWvatgkU/2MtwC2ZdiP
+ FG8Pt+vMZTHtTsM31I4wTZ0DkGf2wEbd5lbFFmXrPuUBzbPKjxYcjGK/3BOQV4k0ziCh
+ 17KAN4bK1ovdWFciHwv70RWg8uwZuZOLnuzb0xYmHF/wp1bhKq1fbkCLe4BSBQL/ee4S
+ y/QCWHsEdEBeIrSxbT+wCDoEHiLoc9eL8ZG+YS3E4vm7dxB7XS2pdRERf7dN1yfApoyf
+ QhZ7quYDFqPo5lgU/0zlpspDPRhEiDugtm5+gqWyzJQBGv+3T0taY3TqUm66gWOC7/uu
+ BbhA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
  s=arc-20240605; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:dkim-signature;
- bh=eCKcTZ026PJyiAXsahZiaWS47mZXsrq2e/QCcD1itxs=;
- fh=A/2oasO5fn6trInxltfCIpj1ltXSOvL5UPYs13Zb4CM=;
- b=El9CBLegATdSY8P770hriuqJkPHMVjRUHhMRXunhFvCtCsYFGLdYxMxDpLZA9L1aec
- 0Tq/FQGblyYsZjxip44xHIhaoQ0Bpb/qH6GPiF91vebJhWI2/+DfiCBMtCQde24xBwBO
- huN1iiUs0rgpOJ8qBYwvvRUO4d3w2ovU1FYgZfvhHF3UzKV2cvJCKEv6aOOph/Wf22Hz
- 0dsMrztr7cUyBRhfQAAT9X3Jx1zoBHaatTuQgq/JlnB2hqEpLKw3LJT6uTjhI5sa7t+h
- hhI1zImrmlgosP9rqsXSupd2AW/nJntBCV6RHlmZxEN1zJI5GDzdConBZgQEHrgDwUlE
- 1Bpg==; darn=lists.denx.de
+ bh=d1fb09hoGJae7EEVLseR/Ky5hi9PJI8onlMaI2I5i9Y=;
+ fh=r26+E2rMkeWHGcMqIOt8V4ha9b7bhNXBAIcGPdmepcw=;
+ b=eoJcWyyzUTXwUly3hpfuUm8HvBMsGn/kIGZOdBkL7PTedDl015yJJbRpaicAtU48gh
+ kkZfY5K7ADqHZTcYCmmN0j8QX+VGf1ecU+v4Y/K7tyhsVkiEedfIL/TZ7ms0UFYDO+oI
+ NKDHMVqAIFl0gFQTO26a5biGAzcPj8Q9D3nrhmNYf2pSKCGljLW01e8mK7W2yosmNb6i
+ 3XmQyYPyX6zxIzTTuVw00pvX/wLVK6Ha12ti7pOmobxdPrOgoibyTsaF2dz/Uo3UZe5p
+ xBjE/5ogWU7sa+/ScBikfTXLEDcEaQwLR1UNiTgrzdiAIchNtkq8RZBISrFeF9hNeDqs
+ 4dBQ==; darn=lists.denx.de
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773664723; x=1774269523;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773664777; x=1774269577;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eCKcTZ026PJyiAXsahZiaWS47mZXsrq2e/QCcD1itxs=;
- b=dfXyLCtcikvGXfn2hnL4+2NCs9+97x4cT0KQiS5ixTQ4MkYWWSjKZzUCihlF6/Ye/2
- eOK21GfcbZGGGBiDWcTSJAkHND24Yrap2qaNlV6MJeuIWsWeGTfqCRuEuMnuCxOXwRcN
- k0euYC0KG9ExzA26LcXnK9xbyu0WCC5M8HJWyXjspMbSzokXJfe6/jNcSjEGm/b0IFaw
- aNqqHB0FI8/qDfiCCN4OBBz5KFDenjqJS4xxG9TesXeh9NS/hDn9oghFCJ8Gj8DeacNk
- XVHU9VmzqQpWy/nkRlISNgZj1p8QQiHUFLB3hAFwCYvuoI3yLSH3chkWwBMmKQLDGWGU
- Vb9g==
+ bh=d1fb09hoGJae7EEVLseR/Ky5hi9PJI8onlMaI2I5i9Y=;
+ b=n0rxWnkCYlI/xXjjuF474/RlFPhWXF1xqBSUf798lbRv2Dx6Fuz2Cuwb8KEAMEYwB8
+ wg2cSMFpWaoM0xNh+nlALojGjZGMJJ/vGHw+ZCjc97xhR3TL6zNvxfRqFWLnTwJGqI5E
+ SETLVyLUMaW2PXN83w3hyXV42EPKGroaus3HDsfyX2Zr29UxwARKzmjIFIbp6bCIyoc4
+ l8BFl+8NDIu0ZXbji+1c1IdHo6QB4X1J1ue0uQnrhwnVQIU3+XzT71aWp6wXwkeFRfL/
+ vMTi/NoNacl9lyXMa7RacYo48/QGF9MywQ5ppMDINTvgwo23fpnDg2QXHtyBQ9KEU8YX
+ vOgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773664723; x=1774269523;
+ d=1e100.net; s=20251104; t=1773664777; x=1774269577;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=eCKcTZ026PJyiAXsahZiaWS47mZXsrq2e/QCcD1itxs=;
- b=EFl/eqUndWZQEKpR3I+9TlLwSFlxI92Oi/J1PsgTcK0jKsbAiyyQXFVjsYmMMOtOfN
- +mu2CSEoKaF+4yPWJnbMoyJsZ1hVWP3793QFteTMvJmKLft7SM4KsTFI5stKSFSi7FrH
- PQ0oPlJi7HTee82/zk/bbNbq7fnzjVjUiwnXF/1TVOr4RiZuiXHYT7QnqZiE+AxWPwe3
- 3WEXVRe17q6+YvR0xI+DebLeiXxjd0Wiht3+Mwr9Ogly7+LgmZQewQpYkWhT0ce8khgp
- yu2SDaWY8EQjveYbLP4SlXY6VH+ZdaD1bH5dOOoh/+MbwLn7UTsqO1x+8bA64q2nT0gR
- BWFQ==
+ bh=d1fb09hoGJae7EEVLseR/Ky5hi9PJI8onlMaI2I5i9Y=;
+ b=Lk8FfGA3lfUeb+eXLTv2Lv/q6xV/SDEDysawDUhlQcGQje2Lxd0NDspSUoQfND5ITa
+ v/rX6Z3a4Ag04TUhOCpTRgETlGvOh0MOuh5zufhuaV9yiHRs5yycUMQhaSdXpIuDQjpQ
+ 1Y+3jFLyaRr1+wNpuoAyWTY9/Q/6erox8BKeP3E2J5rbLot813X77mnfkbalg46vsyBD
+ buwaskCyi8IAxL7wvCcfugGpyIOePtStU9dIxHDDCr6jOwqkDKlriH+Ml7m4DXQMONos
+ GEmiKvohTtr4xw3BIZ4Vau4//3+LPxZGRae3iqagdwsOcKSIUxB/3AZPvtW3jMFnOpxI
+ if1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYVH0vNqvhbWsOsiXM1BBXNZ6fDm9BjL6DkDdJP5AwSIGqd+wNJvcXVvvJ9oJDiFIJDAUwdeM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwD4D7fpXKgsXHEoFu0j0d9IcNFW2jMiVNgkeeZ6faczt3+uxCT
- +enrC2fuzpNaoAMMbX+7Bc6pywmaE6evu6mcb6fFfw2HtFk6TSdwuAq+L1KYL4mizZCepOWl69T
- Eap4xUrxIAstfPv9Qgxy6qCKe01+Gtas8rtrjjFmmaQ==
-X-Gm-Gg: ATEYQzxGvO5p1KsAFK+RHK7XSoId66OZtJAPLOgD/cUi1kWs34rATBQG4+I3FrOyjf3
- RWi/e77bkv/MpAFtWYLY3hEZcitC1pIz3YeNPywysDPd+ky5k2r4vJ/2skEABpHe+J/e68phUiX
- 2WZSsvbKw1rhePyuMUV57B+g45HaFhTSy6gJUuQ/HnpyiOcf9VgjF92TUPuIQ1YJlG9Ot5bQBDR
- IQLeJhJvw0DqFt1pZN92QKNdT8sHlIepWvL5ufahiVDjWTBjoxHD6e17IezcLv3aepia84HU/Sf
- obaRXYP0uZaVbVcyhuAut3VgAyps4Z2gmWRm/JXKfxrnmBibjQGr6PKC9TI3oojKXsQoeosQQtP
- 9RfzT8ACxHFdhfZ4JHDuzwQI4pqw89+f6a2BD
-X-Received: by 2002:a17:907:d38c:b0:b90:8016:cfe4 with SMTP id
- a640c23a62f3a-b976500f9c8mr665485966b.10.1773664723128; Mon, 16 Mar 2026
- 05:38:43 -0700 (PDT)
+ AJvYcCXi9FH42DeTYk1LZIsNDvoZVfoSre8qYf03zlhYIRyQ2aBz0eABCCiMFAxh1UG94YBRtJHmfv0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTJjE8W7LqvqBx5bKYx01ei+BUZCIeThrBSNX+yvoBQLqwFlDe
+ iBYXWaOifNZzSGVMhjhcKhYn+W1+zCl4119LnLK4tK3gVhJTLr8tqzCDafNt+sFtO/yoz6UdgFs
+ mJqaZ4HFkbptxWOZ8frUGSyEeJ0wzWO5ZQ9uwfdcRdg==
+X-Gm-Gg: ATEYQzxu5+yFoUt1N7MFi4e91eTY3US7EegU06TpRJOpritT6dZAi829JPix8Aiqcub
+ DPpe2ERKjYlF+jkXU52DXpPrVyQ0aJJnmFnWqvBPLRZoSe9YXpMx61yOouBrviaN+OrLamU+Xuq
+ J9gtv++wfH2GSirjXp4M3vKsc/mwZIcE3t/zfOaAFGm3V+QIAWj4wh8uIfUlFl9/FmeD7kpT6ey
+ oxALgIROGAI3QTYAd01do/KKyk6vK+eiBUGTY8KQmRkyfnwXS450cvF185qrPBH/2gD9CtLmNCA
+ mf3D2Wtvsya3eihtMOSitQXNwUufCkWdEu/6jD+G9niQmE+7IQ7NiG0ARQXbjGhp1TRVp15hAXq
+ V+Dbez2HqgPW2N9F1QJggXA6Miwi0O7dWTifo
+X-Received: by 2002:a17:907:689d:b0:b97:6147:def1 with SMTP id
+ a640c23a62f3a-b9765104ccdmr550874666b.33.1773664776871; Mon, 16 Mar 2026
+ 05:39:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20260310-mtk-mt8391-initial-support-v2-0-1dc862d58532@baylibre.com>
- <20260310-mtk-mt8391-initial-support-v2-6-1dc862d58532@baylibre.com>
-In-Reply-To: <20260310-mtk-mt8391-initial-support-v2-6-1dc862d58532@baylibre.com>
+ <20260310-mtk-mt8391-initial-support-v2-5-1dc862d58532@baylibre.com>
+In-Reply-To: <20260310-mtk-mt8391-initial-support-v2-5-1dc862d58532@baylibre.com>
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Mon, 16 Mar 2026 13:38:35 +0100
-X-Gm-Features: AaiRm50uL7oaA6RMpdZaiNiMtz3rmQ6ysshobNxIUUJ7g1XCSCxjjtOKAA95_ao
-Message-ID: <CAEHHSvbduE9Naebb8hk3xu+0ZEwRuO8yuh_1GUM9QFOP=BA2vQ@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] board: mediatek: Add Genio 520/720 EVK defconfigs
+Date: Mon, 16 Mar 2026 13:39:28 +0100
+X-Gm-Features: AaiRm53vs8YwEEa6aVwYBh4BxSxwRTLj12_e_VIAw5Yuik0OQdbv149PDVqsrjU
+Message-ID: <CAEHHSvYmZ=0LKgF9XvLu59KdzRpZUhS9Fv=YAXbcZkexa1U2hA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] arm: dts: mediatek: Add MediaTek Genio 520/720 EVK
+ DTS
 To: David Lechner <dlechner@baylibre.com>
 Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>, 
  Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
@@ -128,106 +129,259 @@ Le mer. 11 mars 2026 =C3=A0 01:17, David Lechner <dlechner@baylibre.com> a =
 >
 > From: Chris-QJ Chen <chris-qj.chen@mediatek.com>
 >
-> Add basic defconfigs for Genio 520 and 720 EVKs.
+> Add a basic .dts file for MediaTek Genio 520/720 EVKs. This will suffice
+> until an upstream devicetree is available from Linux.
+>
+> These boards a virtually identical (other than some camera capabilities)
+
+nit: These boards are [...]
+
+> so share mostly the same devicetree.
 >
 > Signed-off-by: Chris-QJ Chen <chris-qj.chen@mediatek.com>
-> Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
 > Signed-off-by: David Lechner <dlechner@baylibre.com>
 > ---
->  board/mediatek/MAINTAINERS             |  7 +++++++
->  configs/mt8189.config                  | 34 ++++++++++++++++++++++++++++=
+>  arch/arm/dts/Makefile                 |   2 +
+>  arch/arm/dts/mt8371-genio-520-evk.dts |  11 +++
+>  arch/arm/dts/mt8371-genio-common.dtsi | 176 ++++++++++++++++++++++++++++=
 ++++++
->  configs/mt8371_genio_520_evk_defconfig |  4 ++++
->  configs/mt8391_genio_720_evk_defconfig |  4 ++++
->  4 files changed, 49 insertions(+)
+>  arch/arm/dts/mt8391-genio-720-evk.dts |  11 +++
+>  4 files changed, 200 insertions(+)
 >
-> diff --git a/board/mediatek/MAINTAINERS b/board/mediatek/MAINTAINERS
-> index 446a9e8e53c..4f371592059 100644
-> --- a/board/mediatek/MAINTAINERS
-> +++ b/board/mediatek/MAINTAINERS
-> @@ -1,3 +1,10 @@
-> +MT8189/MT8371/MT8391 EVK
-
-Hi David,
-I would not put MT8189 here since there is no MT8189 EVK
-
-> +M:     Macpaul Lin <macpaul.lin@mediatek.com>
-> +S:     Maintained
-> +F:     configs/mt8189.config
-> +F:     configs/mt8371_genio_520_evk_defconfig
-> +F:     configs/mt8391_genio_720_evk_defconfig
-
-Any reason to have genio_520/genio720 in the defconfig name?
-All other boards we are currently upstreaming don't specify it in
-their defconfig name:
-mt8365_evk_defconfig/mt8370_evk_defconfig/mt8390_evk_defconfig ...
-
-> +
->  MT8365 EVK
->  M:     Julien Masson <jmasson@baylibre.com>
->  S:     Maintained
-> diff --git a/configs/mt8189.config b/configs/mt8189.config
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 264b13b6f5d..bd0f0fd7018 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1135,6 +1135,8 @@ dtb-$(CONFIG_ARCH_MEDIATEK) +=3D \
+>         mt7988-rfb.dtb \
+>         mt7988-sd-rfb.dtb \
+>         mt8183-pumpkin.dtb \
+> +       mt8371-genio-520-evk.dtb \
+> +       mt8391-genio-720-evk.dtb \
+>         mt8512-bm1-emmc.dtb \
+>         mt8516-pumpkin.dtb \
+>         mt8518-ap1-emmc.dtb
+> diff --git a/arch/arm/dts/mt8371-genio-520-evk.dts b/arch/arm/dts/mt8371-=
+genio-520-evk.dts
 > new file mode 100644
-> index 00000000000..966d05d1a03
+> index 00000000000..1ed325eb587
 > --- /dev/null
-> +++ b/configs/mt8189.config
-> @@ -0,0 +1,34 @@
-> +CONFIG_ARM=3Dy
-> +CONFIG_COUNTER_FREQUENCY=3D13000000
-> +CONFIG_POSITION_INDEPENDENT=3Dy
-> +CONFIG_ARCH_MEDIATEK=3Dy
-> +CONFIG_TEXT_BASE=3D0x4c000000
-> +CONFIG_NR_DRAM_BANKS=3D1
-> +CONFIG_OF_LIBFDT_OVERLAY=3Dy
-> +CONFIG_TARGET_MT8189=3Dy
-> +CONFIG_MTK_MEM_MAP_DDR_SIZE=3D0x200000000
-> +CONFIG_SYS_LOAD_ADDR=3D0x4c000000
-> +CONFIG_FIT=3Dy
-> +CONFIG_BOOTSTD_FULL=3Dy
-> +# CONFIG_BOARD_INIT is not set
-> +CONFIG_CMD_CLK=3Dy
-> +CONFIG_CMD_GPT=3Dy
-> +CONFIG_CMD_MMC=3Dy
-> +CONFIG_CMD_PMIC=3Dy
-> +CONFIG_CMD_REGULATOR=3Dy
-> +CONFIG_CLK=3Dy
-> +# CONFIG_MMC_QUIRKS is not set
-> +CONFIG_MMC_HS200_SUPPORT=3Dy
-> +CONFIG_MMC_MTK=3Dy
-> +CONFIG_PINCTRL=3Dy
-> +CONFIG_PINCONF=3Dy
-> +CONFIG_PINCTRL_MT8189=3Dy
-> +CONFIG_DM_PMIC=3Dy
-> +CONFIG_DM_PMIC_MTK_PWRAP=3Dy
-> +CONFIG_DM_REGULATOR=3Dy
-> +CONFIG_DM_REGULATOR_MT6359=3Dy
-> +CONFIG_BAUDRATE=3D921600
-> +CONFIG_DM_SERIAL=3Dy
-> +CONFIG_MTK_SERIAL=3Dy
-> +CONFIG_WDT=3Dy
-> +CONFIG_WDT_MTK=3Dy
-> diff --git a/configs/mt8371_genio_520_evk_defconfig b/configs/mt8371_geni=
-o_520_evk_defconfig
-> new file mode 100644
-> index 00000000000..9a5e68e48ee
-> --- /dev/null
-> +++ b/configs/mt8371_genio_520_evk_defconfig
-> @@ -0,0 +1,4 @@
-> +#include <configs/mt8189.config>
+> +++ b/arch/arm/dts/mt8371-genio-520-evk.dts
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 > +
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"mt8371-genio-520-evk"
-> +CONFIG_DEFAULT_FDT_FILE=3D"mt8371-genio-520-evk"
-> diff --git a/configs/mt8391_genio_720_evk_defconfig b/configs/mt8391_geni=
-o_720_evk_defconfig
-> new file mode 100644
-> index 00000000000..3fcd08be50a
-> --- /dev/null
-> +++ b/configs/mt8391_genio_720_evk_defconfig
-> @@ -0,0 +1,4 @@
-> +#include <configs/mt8189.config>
+> +/dts-v1/;
 > +
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"mt8391-genio-720-evk"
-> +CONFIG_DEFAULT_FDT_FILE=3D"mt8391-genio-720-evk"
+> +#include "mt8189.dtsi"
+> +#include "mt8371-genio-common.dtsi"
+> +
+> +/ {
+> +       model =3D "MediaTek Genio-520 EVK";
+> +       compatible =3D "mediatek,mt8371-evk", "mediatek,mt8371", "mediate=
+k,mt8189";
+> +};
+> diff --git a/arch/arm/dts/mt8371-genio-common.dtsi b/arch/arm/dts/mt8371-=
+genio-common.dtsi
+> new file mode 100644
+> index 00000000000..c6aa22b7d10
+> --- /dev/null
+> +++ b/arch/arm/dts/mt8371-genio-common.dtsi
+> @@ -0,0 +1,176 @@
+> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> +/*
+> + * Copyright (C) 2026 MediaTek Inc.
+> + * Author: Macpaul Lin <macpaul.lin@mediatek.com>
+> + */
+> +
+> +#include "mt8189.dtsi"
+> +#include "mt8189-pinfunc.h"
+> +#include "mt6359.dtsi"
+> +
+> +/ {
+> +       aliases {
+> +               serial0 =3D &uart0;
+> +       };
+> +
+> +       chosen {
+> +               stdout-path =3D "serial0:921600n8";
+> +       };
+> +
+> +       firmware {
+> +               optee {
+> +                       compatible =3D "linaro,optee-tz";
+> +                       method =3D "smc";
+> +               };
+> +
+> +               psci {
+> +                       compatible =3D "arm,psci-1.0";
+> +                       method =3D "smc";
+> +               };
+> +       };
+> +
+> +       memory@40000000 {
+> +               /* 8GB */
+> +               device_type =3D "memory";
+> +               reg =3D <0 0x40000000 0x2 0x00000000>;
+> +       };
+> +
+> +       reserved-memory {
+> +               #address-cells =3D <2>;
+> +               #size-cells =3D <2>;
+> +               ranges;
+> +
+> +               /* 2 MiB reserved for ARM Trusted Firmware (BL31) */
+> +               bl31_secmon_reserved: secmon@54600000 {
+> +                       no-map;
+> +                       reg =3D <0 0x54600000 0x0 0x200000>;
+> +               };
+> +
+> +               /* 12 MiB reserved for OP-TEE (BL32)
+> +                * +-----------------------+ 0x43e0_0000
+> +                * |      SHMEM 2MiB       |
+> +                * +-----------------------+ 0x43c0_0000
+> +                * |        | TA_RAM  8MiB |
+> +                * + TZDRAM +--------------+ 0x4340_0000
+> +                * |        | TEE_RAM 2MiB |
+> +                * +-----------------------+ 0x4320_0000
+> +                */
+> +               optee_reserved: optee@43200000 {
+> +                       no-map;
+> +                       reg =3D <0 0x43200000 0 0x00c00000>;
+> +               };
+> +
+> +               dsi_reserved: dsi@60000000 {
+> +                       reg =3D <0 0x60000000 0 0x02000000>;
+> +                       no-map;
+> +               };
+> +       };
+> +};
+> +
+> +&watchdog {
+> +       status =3D "okay";
+> +};
+> +
+> +&uart0 {
+> +       pinctrl-0 =3D <&uart0_pins>;
+> +       pinctrl-names =3D "default";
+> +       status =3D "okay";
+> +};
+> +
+> +&mmc0 {
+> +       bus-width =3D <8>;
+> +       max-frequency =3D <200000000>;
+> +       cap-mmc-highspeed;
+> +       mmc-hs200-1_8v;
+> +       mmc-hs400-1_8v;
+> +       hs400-ds-delay =3D <0x1481b>;
+> +       cap-mmc-hw-reset;
+> +       vmmc-supply =3D <&mt6359_vemc_1_ldo_reg>;
+> +       vqmmc-supply =3D <&mt6359_vufs_ldo_reg>;
+> +       non-removable;
+> +       pinctrl-names =3D "default", "state_uhs";
+> +       pinctrl-0 =3D <&mmc0_default_pins>;
+> +       pinctrl-1 =3D <&mmc0_uhs_pins>;
+> +       status =3D "okay";
+> +};
+> +
+> +&mt6359_vufs_ldo_reg {
+> +       regulator-always-on;
+> +};
+> +
+> +&pio {
+> +       mmc0_default_pins: mmc0-default-pins {
+> +               pins-clk {
+> +                       pinmux =3D <PINMUX_GPIO162__FUNC_MSDC0_CLK>;
+> +                       drive-strength =3D <6>;
+> +                       bias-pull-down =3D <MTK_PUPD_SET_R1R0_10>;
+> +               };
+> +
+> +               pins-cmd-dat {
+> +                       pinmux =3D <PINMUX_GPIO166__FUNC_MSDC0_DAT0>,
+> +                                <PINMUX_GPIO165__FUNC_MSDC0_DAT1>,
+> +                                <PINMUX_GPIO164__FUNC_MSDC0_DAT2>,
+> +                                <PINMUX_GPIO163__FUNC_MSDC0_DAT3>,
+> +                                <PINMUX_GPIO159__FUNC_MSDC0_DAT4>,
+> +                                <PINMUX_GPIO158__FUNC_MSDC0_DAT5>,
+> +                                <PINMUX_GPIO157__FUNC_MSDC0_DAT6>,
+> +                                <PINMUX_GPIO156__FUNC_MSDC0_DAT7>,
+> +                                <PINMUX_GPIO161__FUNC_MSDC0_CMD>;
+> +                       input-enable;
+> +                       drive-strength =3D <6>;
+> +                       bias-pull-up =3D <MTK_PUPD_SET_R1R0_01>;
+> +               };
+> +
+> +               pins-rst {
+> +                       pinmux =3D <PINMUX_GPIO160__FUNC_MSDC0_RSTB>;
+> +                       drive-strength =3D <6>;
+> +                       bias-pull-up =3D <MTK_PUPD_SET_R1R0_00>;
+> +               };
+> +       };
+> +
+> +       mmc0_uhs_pins: mmc0-uhs-pins {
+> +               pins-clk {
+> +                       pinmux =3D <PINMUX_GPIO162__FUNC_MSDC0_CLK>;
+> +                       drive-strength =3D <8>;
+> +                       bias-pull-down =3D <MTK_PUPD_SET_R1R0_10>;
+> +               };
+> +
+> +               pins-cmd-dat {
+> +                       pinmux =3D <PINMUX_GPIO166__FUNC_MSDC0_DAT0>,
+> +                                <PINMUX_GPIO165__FUNC_MSDC0_DAT1>,
+> +                                <PINMUX_GPIO164__FUNC_MSDC0_DAT2>,
+> +                                <PINMUX_GPIO163__FUNC_MSDC0_DAT3>,
+> +                                <PINMUX_GPIO159__FUNC_MSDC0_DAT4>,
+> +                                <PINMUX_GPIO158__FUNC_MSDC0_DAT5>,
+> +                                <PINMUX_GPIO157__FUNC_MSDC0_DAT6>,
+> +                                <PINMUX_GPIO156__FUNC_MSDC0_DAT7>,
+> +                                <PINMUX_GPIO161__FUNC_MSDC0_CMD>;
+> +                       input-enable;
+> +                       drive-strength =3D <8>;
+> +                       bias-pull-up =3D <MTK_PUPD_SET_R1R0_01>;
+> +               };
+> +
+> +               pins-ds {
+> +                       pinmux =3D <PINMUX_GPIO167__FUNC_MSDC0_DSL>;
+> +                       drive-strength =3D <8>;
+> +                       bias-pull-down =3D <MTK_PUPD_SET_R1R0_10>;
+> +               };
+> +
+> +               pins-rst {
+> +                       pinmux =3D <PINMUX_GPIO160__FUNC_MSDC0_RSTB>;
+> +                       bias-pull-up =3D <MTK_PUPD_SET_R1R0_00>;
+> +               };
+> +       };
+> +
+> +       uart0_pins: uart0-pins {
+> +               pins {
+> +                       pinmux =3D <PINMUX_GPIO31__FUNC_UTXD0>,
+> +                                <PINMUX_GPIO32__FUNC_URXD0>;
+> +                       bias-pull-up;
+> +               };
+> +       };
+> +};
+> +
+> +&pmic {
+> +       interrupts-extended =3D <&pio 194 IRQ_TYPE_LEVEL_HIGH>;
+> +};
+> diff --git a/arch/arm/dts/mt8391-genio-720-evk.dts b/arch/arm/dts/mt8391-=
+genio-720-evk.dts
+> new file mode 100644
+> index 00000000000..c8e57433ce6
+> --- /dev/null
+> +++ b/arch/arm/dts/mt8391-genio-720-evk.dts
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> +
+> +/dts-v1/;
+> +
+> +#include "mt8189.dtsi"
+> +#include "mt8371-genio-common.dtsi"
+> +
+> +/ {
+> +       model =3D "MediaTek Genio-720 EVK";
+> +       compatible =3D "mediatek,mt8391-evk", "mediatek,mt8391", "mediate=
+k,mt8189";
+> +};
 >
 > --
 > 2.43.0
