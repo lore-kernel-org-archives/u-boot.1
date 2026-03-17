@@ -4,109 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2D4FD877F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 109F0FD877F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:50:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A0458413A;
-	Tue, 17 Mar 2026 15:29:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 12FCB8435B;
+	Tue, 17 Mar 2026 15:50:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="tAG5ycVf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OCXYGFRU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08E7F84368; Tue, 17 Mar 2026 15:29:52 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 759F78435C; Tue, 17 Mar 2026 15:50:01 +0100 (CET)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BAC983FED
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:29:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E4EF84353
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:49:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-b93698bb57aso143024766b.0
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:29:50 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1773757789; cv=none;
- d=google.com; s=arc-20240605;
- b=Mti3AV/II/SILkwROTz6aUw5L7QYMkt9SjAhKFYcpmvnVre6k0uGoX5fn934btIQwA
- FgaXhZ/EtDqJEjfqiNy25s91Nu6tMGndwON8APVpylt0rntCkHT6qMBT+6xnYgJlTZLR
- ajHIHW8oeUepS4BTw56KBnw/7WVy8pdnssFj0eEBFzTe2RhF+sz/IG3GEMh5nFFTpwak
- KJ4qy93F382VdNVmXSQdFxacq2nvJC4DXGizveZRF+lB35EncYJ9PfF3KJZNy9bZ6ytW
- PErHHPXLeU19UsZBI30plDrwNXBJVS00SGFb/5CSIdNAKs+QYebT8lBbNvQXNIrNuV7C
- MLhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=nQnrW0D/1PcL7mA50P1rMaVC3xLcnYzRGKdjTNMw7VA=;
- fh=Mi6f2utaRLQ8F8RltETw1S24CoUeUsHG04MLrr7EW64=;
- b=O1W6i13X1IJgKphYklGCwuDCPAFSi9xYKrppiN2U8MzYKd/umGwPRtPQl35iFl/an6
- S99m2BF+a3X/IX9qQfSyPq+Os17PEB3l3K4cXVr6KPBQaNiLbUy7EbWvszZUqwyNwIXM
- D2umoGHivhSgDQ1J9dwmGP5v96UmkizbetIOK8dn9tvJgjxjPs9V2XvoqDW+NQcMXY/u
- K0W2606e3KdYk98RqI3+p0uffR8/TrcTifTckuqimO93dI8/asgRM5mkrTCvxmaiOX0R
- ELZHj9dxPNkURpnHCk3piYZYU2I1ZLlD/1VkhFXY0nBdTlA/gM8Wds6sVruBjz31qRYt
- 6uwA==; darn=lists.denx.de
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-40ee9b945d5so3733161fac.0
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:49:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757789; x=1774362589;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nQnrW0D/1PcL7mA50P1rMaVC3xLcnYzRGKdjTNMw7VA=;
- b=tAG5ycVf4acyt7P2mwIOcKfOnND/r3KkmKl5Mm6dcsfwgFEGTiIqr0ClxyrA1EM/jU
- LvjQ11+2eR/Fqiagklb9jD0tGgemb7BONuqAPDJh7xuLbNO5xZWeNf+BULrslIq6MkA+
- CzEF3hExloJEueM7u7TGc88z/oRx/y3BwTOr+mA8CO0r26JBEStCSeDL7Lltf9FvsU21
- rIzeOF+vfWaygevJXrz3trk54EQ4QEP8WeAo+eVRts97bU068idAC1Ge30DJx0LX09Ku
- NywTF+v+qB2Lge68ga9Tw481yJ4MkAN+YIvk/njQvA76UIedTSd7YR5WemyZrK2L+rjs
- knFQ==
+ d=konsulko.com; s=google; t=1773758998; x=1774363798; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NMteZNCPCznOLBdeKOZHT5zYUySWZ/ftZDuqND6ZhyY=;
+ b=OCXYGFRU3JY0JMmkaFniqWrYBry//VnP0DxT+I19Yqi8J79C4eCUJulhx0nnS4y25n
+ C8YJcLE4Bhyy8COf4QTnYcoCqW0LxJtSR0qFu7oT+smTDNrSCBdVAAqif/T+tuc8twyo
+ TYGQPvfSoDi+jv5oBSz2WY8VsOFq4c0UEiJGA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773757789; x=1774362589;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=nQnrW0D/1PcL7mA50P1rMaVC3xLcnYzRGKdjTNMw7VA=;
- b=ZS0r6bWrgo0EWKWLuSLfiFlDldTdbqKmpALN+EcBzhNGkMHmE5K3guQ6Bv252EUnkk
- Y7WGxhsJaDIwLYdTQYHqH0rmAHHT7SCDmSlhNKfN4uSoCkQijPYiKGg9ZtS4pDeLu/Sa
- YOm1kh7aXJVpjjC/yVRZRDAY5hM+nUrQ6aqeCD1lJyltYpbNSz0I3AnIR0+CBjI1237J
- cFT3NdjF0KCdRKpAjmetJS5yL52PlOlr4RkohLHkbTtSI9VlzkNlKYqVSrz190yhND2G
- WJPuAGL/+MPCPpzm0TebSud26ScD7rygNkLGHEhIOmyT3EyXb8z4UFCstc4gFjtqzZ3O
- mOUw==
-X-Gm-Message-State: AOJu0YxXSKoOqmtwlf5SJBs1/2I+dVUWshR6ojRFJgEamxxqWCuZKeDN
- Y/mazWJ6Loy8/P8XeHBvrxTcV6gX+HjKb11HXgOyWu64UgavmZMpCfc+74DBoCNCUum+KsrS9pt
- ASBvrJiRWbTVSNHa6DAbY82HFZBkY0nTnCGHktHqr/A==
-X-Gm-Gg: ATEYQzwjxsa5gibnxTufA5Kc6Jc40JmgASeZqPuwNCf6C7UasUsGrr1t0H4WyD4on6l
- rGaeAhuiATgDxaQbxDNJmuWfEeBTIKITRe4+Ux+iO6L6oxUYNbcUJn8We+gyE87CWY3b/55gGdd
- fejesf8eIKURavf2zqaXs24NRTjPHNIOargOAxtikjYPyBMeOrdJOtfbUUB8j3dq7cb3NxI/HhE
- i5XHJVJ4D908RyDkTkhvLO+OOabEagYTRBlUlNw0W/wM4HdkBA53ZlWeUv0DMLF4DGa2TQMWQi/
- PYvl4DQYYlXUOyWe7W8z6nXDV0nAq+oeOcSQ4Obo3E0meG8X2tN/O3/dTNFJ/HL3abW3GcybV/A
- ig3EizH7TPdbQVAe+zJCEBxdpWw==
-X-Received: by 2002:a17:906:c14f:b0:b88:51cb:fd65 with SMTP id
- a640c23a62f3a-b97d6c12718mr238815166b.3.1773757789268; Tue, 17 Mar 2026
- 07:29:49 -0700 (PDT)
+ d=1e100.net; s=20251104; t=1773758998; x=1774363798;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NMteZNCPCznOLBdeKOZHT5zYUySWZ/ftZDuqND6ZhyY=;
+ b=iIbZ9A7UC6Ed62DdP94xGN1ZjKkny6K1u8Lphf8y6xKa+TLFWZa+6yIXJV7czBTdXU
+ M+IwB/BKvlG9J0Byz/5n8WtT5l/HYDnNSZoYOrN6RmWFUGNWudXXQfuJ2RbRzUb7XWo+
+ uX3JjR/2wsET54k3xAYICWCCV+1O5rSjY32CEUr/knQS7DurVZZ9SxOi+bMrw7cavMeH
+ N9gVTslzlqj4BHnVDzjhMiGVnOk0lVtEcRFOKFMKhsoU9SFD9tvkQqYLjTZ6SkusKAEN
+ 8QRS4jKsAOgFS7YyiRWycsHlaC4JxN/Cx9BSK6FV8Zu53kIeR+U0NFYISlHLYsrSaE1T
+ v1wg==
+X-Gm-Message-State: AOJu0YxXKrUt+Q/zfqQ5AF+PU6O6eTiR+FELYtE9cFsF14xDJnRZBnO/
+ RvV10T2G78GVKnEQQnqJT5Xgxtqjl/9qAjzH/STqfDV9nZTqnzgh6HzEBgwW9y0ii8g=
+X-Gm-Gg: ATEYQzymHvjDt8QZbnPjptMgqr8J44ZBRnCvE5nb3wsTVlnpvi9A9iMKZeqTVXyVt0C
+ nKo7/S5jpBNpKqf5b4ErMlhxtqZ3R2+TeKePk9rwAFU9DV7hB8XJTQWeB8KO0G7Sgsy0Du9PrZ7
+ 28YEyP1EsNaDubMEJt0U/UQy9A2AAYpDxRc//kSLonBMBj9SjV54zBFS/cItDozjOz9tTRih8n8
+ 3GAtfySEQvl52gv4E7xbx+IF21iaF0HztQOgZuYa8aTY8Z2Q5XmhxbSOzDxlP3KDO30EwhvJg6Y
+ fX10O+jBsqMgyG3Ch/eRYC2WHzzc3lhBRsyylcNn2qeD+BLkv3FsQelyku9SN1mcLofM1rZGnFs
+ 9K+FA5sIJRuYqITfmW9eqdMo96L2tfIAVhsSuC6scfHFhLPXCGetGnNp8vxUwPCbdmLBMdeGjgA
+ k49/COWAaZkuyApBluEsGKbZJCXV7nXZPshMBGDTilJ+HFZSuAxwrlMoGtlWWpLjBDC9hyPEnnC
+ PTNFwwMNEzBJeKa4HNnf4biVpihy+GLuFgqBW3THtQ3WxMK
+X-Received: by 2002:a05:6870:5492:b0:417:3b1e:ca84 with SMTP id
+ 586e51a60fabf-417b94506bamr10590552fac.49.1773758997762; 
+ Tue, 17 Mar 2026 07:49:57 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
+ [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-417a2372b13sm16307352fac.10.2026.03.17.07.49.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Mar 2026 07:49:57 -0700 (PDT)
+Date: Tue, 17 Mar 2026 08:49:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] microblaze: Rework TARGET_MICROBLAZE_GENERIC
+ implementation
+Message-ID: <20260317144955.GC502704@bill-the-cat>
+References: <20260317012412.4162279-1-trini@konsulko.com>
+ <92a3aa0d-4d2f-4845-9ac2-6bcb976bced8@amd.com>
 MIME-Version: 1.0
-References: <20260317-mt8188-mt8195-disable-mmc-disable-dma-v1-1-220da4144920@baylibre.com>
- <67054ce9-c839-45f4-b73f-ec46899379e1@baylibre.com>
-In-Reply-To: <67054ce9-c839-45f4-b73f-ec46899379e1@baylibre.com>
-From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 17 Mar 2026 15:29:44 +0100
-X-Gm-Features: AaiRm50ekfZs4NNRlXb7bQHoBOKvYVYhUbKZH-uFwqpn5Rk1fTqzaLQcpcALgBw
-Message-ID: <CAEHHSvYkXkf=p9d=xCxG7OagxC_34Wtj0yEGmQ6RwuaQaOnnsw@mail.gmail.com>
-Subject: Re: [PATCH] drivers: mmc: mtk-sd: disable dma for MT8188 and MT8195
-To: David Lechner <dlechner@baylibre.com>
-Cc: u-boot@lists.denx.de, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
- Macpaul Lin <macpaul.lin@mediatek.com>, "ht.lin" <ht.lin@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ltjiStJ7luSyfSBp"
+Content-Disposition: inline
+In-Reply-To: <92a3aa0d-4d2f-4845-9ac2-6bcb976bced8@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,93 +98,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le mar. 17 mars 2026 =C3=A0 15:21, David Lechner <dlechner@baylibre.com> a =
-=C3=A9crit :
->
-> On 3/17/26 8:31 AM, Julien Stephan wrote:
-> > MT8188 and MT8195 SoC should be fully compatible with MT8183, but
-> > currently dma is not working on these SoC. For now, disable dma.
-> > Investigation needed.
-> >
-> > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> > ---
-> >  drivers/mmc/mtk-sd.c | 26 ++++++++++++++++++++++++++
-> >  1 file changed, 26 insertions(+)
-> >
-> > diff --git a/drivers/mmc/mtk-sd.c b/drivers/mmc/mtk-sd.c
-> > index 7a4bdee7496..8f93e51599f 100644
-> > --- a/drivers/mmc/mtk-sd.c
-> > +++ b/drivers/mmc/mtk-sd.c
-> > @@ -1989,6 +1989,30 @@ static const struct msdc_compatible mt8189_compa=
-t =3D {
-> >       .enhance_rx =3D true,
-> >  };
-> >
-> > +/* MT8188 and MT8195 should be fully compatible with MT8183
-> > + * but currently dma is not working on these SoC.
-> > + * For now, disable dma. Investigation needed.
-> > + */
-> > +static const struct msdc_compatible mt8188_compat =3D {
-> > +     .clk_div_bits =3D 12,
-> > +     .pad_tune0 =3D true,
-> > +     .async_fifo =3D true,
-> > +     .data_tune =3D true,
-> > +     .busy_check =3D true,
-> > +     .stop_clk_fix =3D true,
-> > +     .enhance_rx =3D true,
-> > +};
-> > +
-> > +static const struct msdc_compatible mt8195_compat =3D {
-> > +     .clk_div_bits =3D 12,
-> > +     .pad_tune0 =3D true,
-> > +     .async_fifo =3D true,
-> > +     .data_tune =3D true,
-> > +     .busy_check =3D true,
-> > +     .stop_clk_fix =3D true,
-> > +     .enhance_rx =3D true,
-> > +};
->
-> These are identical to mt8189_compat, so we could reuse that instead of
-> duplicating it two more times. MT8189 is in the same situation that it
-> should work, but needs investigation.
->
-> And actually mt8189_compat is also duplicate of mt7986_compat, so I proba=
-bly
-> shouldn't have added that one and just reused mt7986_compat.
->
-> Another approach could be to revert the change that enabled DMA in mt8183=
-_compat
-> and add a new .compatible =3D "mediatek,mt8365-mmc" that has DMA enabled =
-since
-> that is the only board that has been tested where DMA is actually working=
-.
 
-Fair enough, let me do that
->
-> > +
-> >  static const struct udevice_id msdc_ids[] =3D {
-> >       { .compatible =3D "mediatek,mt7620-mmc", .data =3D (ulong)&mt7620=
-_compat },
-> >       { .compatible =3D "mediatek,mt7621-mmc", .data =3D (ulong)&mt7621=
-_compat },
-> > @@ -2001,6 +2025,8 @@ static const struct udevice_id msdc_ids[] =3D {
-> >       { .compatible =3D "mediatek,mt8516-mmc", .data =3D (ulong)&mt8516=
-_compat },
-> >       { .compatible =3D "mediatek,mt8183-mmc", .data =3D (ulong)&mt8183=
-_compat },
-> >       { .compatible =3D "mediatek,mt8189-mmc", .data =3D (ulong)&mt8189=
-_compat },
-> > +     { .compatible =3D "mediatek,mt8188-mmc", .data =3D (ulong)&mt8188=
-_compat },
-> > +     { .compatible =3D "mediatek,mt8195-mmc", .data =3D (ulong)&mt8195=
-_compat },
-> >       {}
-> >  };
-> >
-> >
+--ltjiStJ7luSyfSBp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Mar 17, 2026 at 01:06:15PM +0100, Michal Simek wrote:
+>=20
+>=20
+> On 3/17/26 02:24, Tom Rini wrote:
+> > As exposed by "make randconfig", some symbols such as
+> > XILINX_MICROBLAZE0_PVR can be set without TARGET_MICROBLAZE_GENERIC but
+> > have a transitive dependency on it. The easiest path of resolution here
+> > is that since there is only one valid microblaze "board", rework that
+> > symbol to be non-optional.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
 > > ---
-> > base-commit: d31f96cac1e25153779c44f1fe014978f9b06032
-> > change-id: 20260317-mt8188-mt8195-disable-mmc-disable-dma-b64499a6a47a
-> >
-> > Best regards,
->
+> > Cc: Michal Simek <michal.simek@amd.com>
+> > ---
+> >   arch/microblaze/Kconfig | 10 +++-------
+> >   1 file changed, 3 insertions(+), 7 deletions(-)
+> >=20
+> > diff --git a/arch/microblaze/Kconfig b/arch/microblaze/Kconfig
+> > index 4261e5009fdc..16c55ddfd95c 100644
+> > --- a/arch/microblaze/Kconfig
+> > +++ b/arch/microblaze/Kconfig
+> > @@ -7,12 +7,8 @@ config SYS_ARCH
+> >   config STATIC_RELA
+> >   	def_bool y
+> > -choice
+> > -	prompt "Target select"
+> > -	optional
+> > -
+> >   config TARGET_MICROBLAZE_GENERIC
+> > -	bool "Support microblaze-generic"
+> > +	def_bool y
+> >   	select BOARD_LATE_INIT
+> >   	select DM
+> >   	select DM_SERIAL
+> > @@ -26,8 +22,8 @@ config TARGET_MICROBLAZE_GENERIC
+> >   	select MTD
+> >   	select SPI
+> >   	imply CMD_DM
+> > -
+> > -endchoice
+> > +	help
+> > +	  Support microblaze-generic
+> >   source "board/xilinx/Kconfig"
+> >   source "board/xilinx/microblaze-generic/Kconfig"
+>=20
+> Applied.
+
+Please drop this for now, I need to do a v2 and I've found another
+randconfig that gives me:
+WARNING: unmet direct dependencies detected for XILINX_MICROBLAZE0_PVR
+  Depends on [n]: MICROBLAZE [=3Dy] && TARGET_MICROBLAZE_GENERIC [=3Dn]
+  Selected by [y]:
+  - CPU_MICROBLAZE [=3Dy] && CPU [=3Dy] && MICROBLAZE [=3Dy]
+
+with this applied.
+
+--=20
+Tom
+
+--ltjiStJ7luSyfSBp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablqDwAKCRAr4qD1Cr/k
+Cg4FAQCWmpPFxs/NQqUNIyDIGVd97ccB4012OINiemZTU81TYwEA3ua9dxv/yfzj
+F1en1x64fVf/2wZr5vZC7ZUGmUJK3AI=
+=XrSn
+-----END PGP SIGNATURE-----
+
+--ltjiStJ7luSyfSBp--
