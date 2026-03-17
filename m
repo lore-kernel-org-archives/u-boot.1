@@ -4,105 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45544FF6E8A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3EC0FF6E93
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A54A68412F;
-	Tue, 17 Mar 2026 23:15:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28740840CF;
+	Tue, 17 Mar 2026 23:39:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="V729UwrS";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zvTXRN1x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 118A98413A; Tue, 17 Mar 2026 23:15:28 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 60FA18414B; Tue, 17 Mar 2026 23:39:49 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF3E684113
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 23:15:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1329D83E36
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 23:39:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-40946982a78so2449268fac.2
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:15:25 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7d744d9acbeso2409925a34.1
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773785724; x=1774390524;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773787186; x=1774391986;
  darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OOqTgglO9k53cJ5g4FYzLWfizwn2THCBMtTCr+3VoVI=;
- b=V729UwrSLq5lpFU3SuiUM1O+X3ZAvep3v0QBpADC6Iu3uWiXeBDZJupZNLSyYT/lp6
- /9uGH3rGhrp4T6I/jtY200OvR6/G+GtHztjXAgNmILcAeLW/fZKeD8qiEpaunopBRYoG
- HUhGXwWNbu7v3Mh9tcyCpaQPi9+AeEJuo7HyxgOKpNqFZL3BN6k7vMrMFfjL3bw22I4u
- cD2yLYgYeA9fIOx2X4mFLrxuQvnpIj/XGIxkpW5Kht1llmXRSVUPX0cALjWqyXnmPHbi
- WGePQ4RwkHh2VXewZM6y5VunKq3cxKlPyeFbklwRNR4iCYjlIbU261/90C5jXxSPu+sg
- /aCA==
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FFzrCMC+9fUxZT8ITl0u4HsmglHzRwRSWJCHLF32Rms=;
+ b=zvTXRN1xooiBrA9KB6FUwrcocB0jf9nNtUOWvFumWSD7EaaaIcdVPZQyBQ8f2R9LEB
+ nLTt3uut79QU5rYKDuffCHmnxVJsN2Q57rDyCfB0MMBGdg5Uf1Xbg/OnJfFEotQVh1m2
+ nJcVTFbqe1UjmRfd9YBi6FgPv56rITeQmjMu/l5969Oq3HpoElDz46/yAeTKaa1geIdD
+ u6z2f26L1o0aONhy8eI4VtjUQqY397KFxzaqzrfr6sKe5TjO4703h6OD04Mt/5fNTAv9
+ HQqk6YnbDRUxoNnK+Nmi1MreA/lts+UMbCp749W38lQZDsJsF4WS6fumK4LiZBD/fxNe
+ cGvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773785724; x=1774390524;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OOqTgglO9k53cJ5g4FYzLWfizwn2THCBMtTCr+3VoVI=;
- b=o3T3wOaVbeuo6jHFYcBuWI2PD2+Vl703S7fVjlkeFfpNUJ8LQA1yS4PVUQIkvNSnsL
- jemmb22xmGUyYFYiiSTsJKXK5JBjZN83r7PFkrpJoLptl6oad/fmMlX3E236ooXuAUEi
- oS+ni3UKC7Byqxblv1XpVimtbH0OuI8gU6DpZbVQJHnx6wqQhWEGetpjQerFvrUGTmRQ
- 5Lbacqz56kwINadaNQ5TJiWy9BWl9RnsDb8mFrBjMPaoze9DUUz9WNr7dM/6wfBq9JMN
- eu3Z6bgdl8NlgWQGS5rA05NER4yxm7BlmJdvmLVniEL1WH74z8OMBDp1wg/18e+EuuMT
- I0HQ==
+ d=1e100.net; s=20251104; t=1773787186; x=1774391986;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=FFzrCMC+9fUxZT8ITl0u4HsmglHzRwRSWJCHLF32Rms=;
+ b=ULJe7WcShCJR+hwXNM3V1ohJEghuJHo97u4zzahUUiaiHkh63c7VxFPFuq9LuKpPAh
+ lvFGY93qZ1PzSwd0WhUPJ5G0CMiXscpr9tLjbx+jq7+n67J9f9ZJ95FDZXMbLxMCMJMj
+ SufgwkNczLjFoOzLUIiiWOpAcb+ud/5hxr71w40TBhYpYTgj7dts3LfwAVW05Q168RZY
+ MFBu0D+/zPCnYH1euURP3CaGWpbo7ri/bVxlIfUuz99ad1J8/hdxT5Mb1K20QfJU/f0T
+ I8mohgwlYn5WX9vjbLh8iBqsiqffyBT11n5rHL6yML3tvBSWKWHOQgDYmiMK/PD0Mm23
+ 8KMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXIMx3eg0/DjWIFVUvPAV+RKBc248p/Uo1fcoXEZlpotNodNMo3ygdu0phhEKjUJdShtGfYsY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxOoRA6Fire8KuC1MOeea6bPewpbrsLBCj3huE5z8QlIophYKCa
- po37vjTw1CT3liM/SsxeUn8uyXmcuBeN2EYDxq2n7UKk4vwZPsaFt5AXbv6678xcOnY=
-X-Gm-Gg: ATEYQzx0dpADeJCKybL06KX+P9SeobxPK18BOUDw2Ug+CPGgV3a2ODcrpPZYpeZX+lN
- /BBkEZKJFa18CIrsjRNXQwXQrhlC+qn53TBsphPQ+NH6fAdIWxgyFobL5gMWsofj0iQ8WCJ7OOp
- FpIQnlYuNWO2m+ofMYvak9z0nbVqPCCVrysRJhdFBaVIchVbqkcfE5VAdAFY/xoolhskGDZh9xP
- 0qa7rSFGhG10QhzIoTtsG4J1l8Z06VOWbx0lGs3pPwJtyBbBRd9tuVHAXKn77iwACdKcRw0UqrN
- iLyXDC5RGfHFz2qXT5cHK9QTKnCnkfPISmN5Ccc1REufsYPcsjdmOpMriWeZEYK1960HR7IF3qj
- zloNCKaey8ruS23Gkjbj4FEqfmM3b2bRT0OO0Vl6ELpIVBuTubMvKYZw3Qv/yAMHyW2HaO0Hyst
- pzsXe8poHLZDkh/hguNJDAurmmG/AkJ/Dc/ZWrDXwncfaQUSZVgKsXm0lPkKXrcCAmv/KNjVj/m
- 3pITfo=
-X-Received: by 2002:a05:6870:a79b:b0:417:3cc0:8dc9 with SMTP id
- 586e51a60fabf-41bd3fcf713mr646822fac.24.1773785724428; 
- Tue, 17 Mar 2026 15:15:24 -0700 (PDT)
-Received: from ?IPV6:2600:8803:e7e4:500:2fe3:965c:6248:c9?
- ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
+ AJvYcCX+t1T0ph6HsovGvb/6p0oQlHx8dqCRfhaH6rZrWYzwetDKjUdn9wI0VIW/aQMEYYQSAD3WWcc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxAUCFZg3LPBxQxAuhIZmCXfhHuR1P8nEd7SGY9j7OJBpgDU+W8
+ Pz9XNhuOgaJeQMkJ7JcocIRDY0qUmj5SgeRlxT3sfQHsCtz9YFWKOwWVIqkcD1YUP9I=
+X-Gm-Gg: ATEYQzzhSo0QkVuGRk9tWiLgEHIBAl971KH6d+sTz1WNgouHXOyaLtcJTj9tS+1oPF5
+ 8N1uIyq4H1R2etUDd0vPCkN/VxRT1Sz6+ErlE/iaqVEkaeQ5kQpsWify0vXL9qUjZVeZudzhkvS
+ NT7ve17bwvkbzxvGXUW/d0vAERNfHm45+P923XiG4bMPyjCL1h+an9st3kNlRo9A5pehPBBG4Br
+ eJ8hcVvv6AqOsd4msQVggqnJLcdQczfD/5c6uQjlSVlJjgR3naDjY7A74Tf2ueEfpEX1VprsYTi
+ FDQNXnv+5nivczwh/MF++si1Dksgj8oG44u9hlrWYegs/CbJ3Gsc0d4GUC0HLUhFFIOU2z9tP1u
+ 98eTtWSGw56jbz2hWL4j8hd5Ss4xm+PtXy8GLlBIKyFV9ZF1BHFS+sNRphs9k7WwdafIplkrH10
+ 2EHFWJVBLzRGc7K8IO5xZlbsHWWA27eUf8alfl
+X-Received: by 2002:a05:6830:6f83:b0:7d7:5405:193d with SMTP id
+ 46e09a7af769-7d7ca6e76d6mr879309a34.24.1773787185707; 
+ Tue, 17 Mar 2026 15:39:45 -0700 (PDT)
+Received: from [127.0.1.1] ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-41bd2828aa7sm990543fac.1.2026.03.17.15.15.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 15:15:23 -0700 (PDT)
-Message-ID: <b1a12617-ec95-4730-a994-3354c5747d78@baylibre.com>
-Date: Tue, 17 Mar 2026 17:15:22 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/11] drivers: ufs: ufs-mediatek: implement clocking
-To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Igor Belwon <igor.belwon@mentallysanemainliners.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
- Julien Masson <jmasson@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Chris-QJ Chen <chris-qj.chen@mediatek.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-9-7d731ec438ae@baylibre.com>
-Content-Language: en-US
+ 46e09a7af769-7d7c97ef88fsm912544a34.0.2026.03.17.15.39.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Mar 2026 15:39:44 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-In-Reply-To: <20260317-mt8195-add-ufs-support-v1-9-7d731ec438ae@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
+To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
+Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
+References: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
+Subject: Re: (subset) [PATCH v2 0/9] clk: mediatek: clean up flags
+Message-Id: <177378708602.670517.13688265575638221774.b4-ty@b4>
+Date: Tue, 17 Mar 2026 17:38:06 -0500
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1080; i=dlechner@baylibre.com; 
+ h=from:subject:message-id;
+ bh=NwLVEE0UMu3UFizt+l4a9Dw5lwe7UduJN3cBjF/TrXY=; 
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpudgotFhbcIEs2HYEzrj7FFTzR0LPIrLShRw8Y
+ g6z0YP+i/CJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabnYKBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AzpMH/ROEP+k5LxQevkfFjXhzYCBGBhBkUqgBwUTVqac
+ b+/nXKa45YYpuZ/O11tlT0KKQ+5ryfDdEzLNCqLzkQH7u/P6BliibtGdEIDjKPjTKFuYbxmM+Wk
+ MTHyizh9kg4DGPlb7IEhiJro2xOMF/Bg3r+PVlzyQQ5LtSHniCuHJ+yeTHxIH/iIdVgImv5Us4m
+ lG3229Uwo8xcjL0rk1j3EKSLTDS8OPI0DECIvt+ameLgHhffjtnEiP+klzjvZv7ile/RO1DlqVX
+ 98+T1YoqxLZelT50UkWIe1gN32fLDp6Mupe8jpZrjP03YN8LEJ19aHGbcqlIrQmxmZGfSTB5OnZ
+ woDE=
+X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
+ fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,60 +119,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/26 9:24 AM, Julien Stephan wrote:
-> Implement clocking.
+On Fri, 06 Mar 2026 16:05:47 -0600, David Lechner wrote:
+> clk: mediatek: clean up flags
 > 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->  drivers/ufs/ufs-mediatek.c | 18 +++++++++++++++++-
->  1 file changed, 17 insertions(+), 1 deletion(-)
+> The main point of this series it to get rid of the CLK_BYPASS_XTAL flag.
+> It was a bit of a hack to allow mux clock parent arrays to contain both
+> CLK_XTAL and CLK_TOP_* clocks. It's usage doesn't work in all cases and
+> is easy to get wrong.
 > 
-> diff --git a/drivers/ufs/ufs-mediatek.c b/drivers/ufs/ufs-mediatek.c
-> index 5d882904c84..31916f72c86 100644
-> --- a/drivers/ufs/ufs-mediatek.c
-> +++ b/drivers/ufs/ufs-mediatek.c
-> @@ -177,6 +177,18 @@ static int ufs_mtk_link_startup_notify(struct ufs_hba *hba,
->  	return ret;
->  }
->  
-> +static int ufs_mtk_get_clk(struct ufs_hba *hba)
-> +{
-> +	struct ufs_mtk_host *host = dev_get_priv(hba->dev);
-> +	int err;
-> +
-> +	err = clk_get_bulk(hba->dev, &host->clks);
-> +	if (err)
-> +		return err;
-> +
-> +	return 0;
-> +}
+> [...]
 
-Why a wrapper function to call a single function?
+Applied to mediatek-for-next, thanks!
 
-> +
->  static int ufs_mtk_bind_mphy(struct ufs_hba *hba)
->  {
->  	struct ufs_mtk_host *host = dev_get_priv(hba->dev);
-> @@ -317,7 +329,11 @@ static int ufs_mtk_init(struct ufs_hba *hba)
->  
->  	ufs_mtk_init_reset(hba);
->  
-> -	// TODO: Clocking
-> +	err = ufs_mtk_get_clk(hba);
+The rest will get combined with "clk: mediatek: unify mux clocks" series.
 
-	err = clk_get_bulk(hba->dev, &priv->clks);
+[1/9] clk: mediatek: rename HAVE_RST_BAR
+      commit: f922929828bc54cc015a4a5d0b2a28dfdf476f27
+[2/9] clk: mediatek: rename CLK_DOMAIN_SCPSYS
+      commit: e40978fff3d337e8d1535545455a7387d0e6dd02
+[3/9] clk: mediatek: add MUX_GATE_MIXED macros
+      commit: 4e184ff5a0e3d6c569e5a5f5a1ad8e3c495ddff9
+[4/9] clk: mediatek: move common PARENT macros to header
+      commit: 7595833599e9f73e58403bc55f475d62537ba068
+[8/9] clk: mediatek: set CLK_PARENT_XTAL on fixed factor clocks
+      commit: 142c805d470cd02470146d6d70aa9c522d4da16c
 
-Couldn't we just do this instead?
-
-Or do we need clk_enable_bulk() too and that is missing from the
-helper function?
-
-> +	if (err) {
-> +		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
-> +		return err;
-> +	}
->  
->  	err = generic_phy_power_on(&priv->mphy);
->  	if (err) {
-> 
+Best regards,
+-- 
+David Lechner <dlechner@baylibre.com>
 
