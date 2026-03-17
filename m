@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D16FB5EA0
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D404FB5EA0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:25:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C4D8405A;
-	Tue, 17 Mar 2026 02:24:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2715384214;
+	Tue, 17 Mar 2026 02:24:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="poR3xkoh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N3J3nt+z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F31DF84209; Tue, 17 Mar 2026 02:24:32 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 7C617840CF; Tue, 17 Mar 2026 02:24:35 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38E768405A
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B920984129
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d74a59262fso4518587a34.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:29 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-4672076355aso3578265b6e.2
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710668; x=1774315468; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773710669; x=1774315469; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=NYcr3nrrvR8Njy4rgBCR0AK8FiYT6d8NOxhkBFeS7YA=;
- b=poR3xkohNE3Hy7ZMnkdrzMPl0/esEVn68DBPbIx/EWtLSYoCodk/NYxLdgeYDigte1
- b2jIETuzMCTL9+A1Eggzn7wNQa1N7WHdg4lRER5soPaIMeOp1TVOnFMMuiaIDncb4hyc
- UHo7Bac41APA5urGJ3BM4CK5Jx5oszc3ZKdBg=
+ bh=+/M7rR+8k5Fw9jCDYQmA614tCve+0+gRLTJ4EGoTW/g=;
+ b=N3J3nt+zjCdFpIYCPKsjACIm1OGjpoI8cbuaDIzba4ryoMRnbRj9DitTjKMO+cEZjA
+ HDKvl72xRaA+dUR/EZ8ZHcpYlymL4tDnUzHI+K8kzc3KaRPmnVPTXUlZzkc86hH/aG2t
+ Q/hyz2fbafBa6F1lUhZegbD/RA1NGukD/XQGc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710668; x=1774315468;
+ d=1e100.net; s=20251104; t=1773710669; x=1774315469;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NYcr3nrrvR8Njy4rgBCR0AK8FiYT6d8NOxhkBFeS7YA=;
- b=oyEHIQbL3cEJqdH8dejeLIPFpCWfMuPaGrIqTBbVMHvS7rgIrKaxA7kZ08JWOVwNty
- 4oyfqYKWnq0ANoqmgI5O0OHti3Oiz518n+Gl3D8kxUMRxtdpII5Nd9Q0+3QKAUAfGAl6
- SRHnMQGZASz95F8g3Mj3WztiZLciM8ltYiB2X6iN9X7F+dFdbrp60e2YAYhR0mVN05V3
- qCGtGm23zk8aMCsA73wlFUIKuBWlH96ShJA9ri/c2Kkxmpf33VZm5C+1Jm/5Hpjb7Voa
- RjupLD7ZmdSJ0ilU5BZxWh42acCX2HGrD8Dgq/NYsKplUi09OAhIzgFaBuPnf1qdugSk
- GYmg==
-X-Gm-Message-State: AOJu0YwwI22unUgz6Oo4pPTSVHGXNgZ1kKQ4tYzfADTbsPueqCi9T0xA
- +HjOrkhvRHeXEf5LaPivxgv0KKwy7vdKF1Hr7dvve85F7JXHuVSV+gnK1vDUdpqlZc5Ieuh2YU1
- YPfkU/mM=
-X-Gm-Gg: ATEYQzyOZcjJYoybXGFrM0Z0u8nO/ntTXOkoDdk0/mCvt/HqHzKJVrxzH14dWWW8ZKH
- kfpjn7SEISGOpElTyg9AY10GP+Xyg0xUeVnV12ynkjSB2WAWTJaOXlOrWodoBG5l7fsRtAYnfoZ
- t6liPagEHJfjQg6CxOlqfFbByTVB0hBbnT7a3L3B2Xa3UK7lrVquo1nCe8ThvPa7Kb5FGbbLm8N
- /zdT0wXNLl2i/eUnmnpVvma/jfxIXm3KaYko9kWnsJyJwJhFG46VAbwEEfn4U19l041a3IVSxoj
- EPUeUYTYN0OvBa+VlvBX23nWHCYxkEDllELphBiwxcGSW4wApCV2kKE/HVa69yG7WAf8Q+irN3X
- ZguxbSeNimypGwVLoMkMFXjlQJN1wjQHZuOAwAUpjE63iGONAPXCWB0que2GtHvrlmdXCEenQ0f
- vxuPvBq88RZGuN8iucuVd2Y+EAQ5btSaL2KcPWQ25QoW7Z1N5mPP/4OOfiL4/YJ9+kR65TJzYQI
- tuGLGL/FFaaI54VwvPdydpzxobpF2MFOkcLrvFdkg/ftAkFuFk=
-X-Received: by 2002:a05:6830:6adc:b0:7cf:da97:57d6 with SMTP id
- 46e09a7af769-7d78246a5fdmr9585307a34.6.1773710667913; 
- Mon, 16 Mar 2026 18:24:27 -0700 (PDT)
+ bh=+/M7rR+8k5Fw9jCDYQmA614tCve+0+gRLTJ4EGoTW/g=;
+ b=fqF2amiRyuGB8mmnNnxUN+a/SpctOo0G5i1PkLSNpJepWV2OSXGcNKGN/FhU8iPlSz
+ ib3WFjYp08fmyPHSGgYNJ0Q5PJfagfnwjo3EBn6btPHgh7k00GZoszuqoUXxgtg84Cuy
+ kfH6HoN4V+3PedDonjoD4hNw9lKEslTrlzpJDOpsBC1eFbjShdiKWS5jHRU8ywRzkPgh
+ ekwh3Ydv8Eki70WHqVdnirjCQcPiJEZn13ytOklvpQh1UH9Qa1yrFccdv0ci/wrUDT0P
+ INt7omSqu0h6NBuedz7OjpqShW3Eo/ipTwVWGFO2oYnMUUzoRSqzWZki+SE8APc3DfND
+ jBfQ==
+X-Gm-Message-State: AOJu0Yw1rRtQhuJN1Dah0j6m97PFOIFcNs/bzt4KLM8LmTcGG+1c/Ea9
+ GOKsq+pbi1eGOPzAydp7bi8sZKWIaz2jTs8BOwlx/YYtkfVLaV0NCWaKRxsRN3BzTPxaEZwQjL9
+ yRjnOijE=
+X-Gm-Gg: ATEYQzxqbY8yv5QLy6zw91LFv/LiIb1XYU5cwXYfUXSeGeJ48rcWANeZOnnfe52iDWd
+ WdsSlb5GHkuq6RwbqTeu3WOOlP3aMWsJ3c1J7Y7LvXuXdPUeFdHFkNzxJnUuwbJrRNDht1ZeTv3
+ 0w6PhoXZGBURNB9ePjsDOER3WBxhZW/isRfnzge1jP0WN7FIcOk1VhQ/ncM3NDkMQMGBFshHuto
+ Y5+v35wQsxsFJ2fsIEk+dFcHhjxfxQE/kRINpOcFtBgriUlhUAoiTZaybABwWLWi8zAmT2Pc8t0
+ DNsg6cEN46F5E1AwPJSypcdj7LKDEKhAFmGjBdX8P0WjdFlT+tL0U0v0yBwX04UiuxwywN8K06c
+ qGYp3BXDZr2SUU2vtQ0D7S9DIHrXdRywk+NqsNFZxNFeCJVa1M9YPQm4q/okN4HobYm7rqqUrk/
+ cJL0rUXJg0y7sHZn1O67yiFgUOpvgWNA8gXQelkEQ+mVOBaOj99Zkst5hpgh0dZIAmXz+4hFmbw
+ DinTgJfCo8AUvUenNsNpB/YO1S7wEpw7gvOdPZ5TMNn/R1tmPc=
+X-Received: by 2002:a05:6808:1802:b0:463:faa3:8dda with SMTP id
+ 5614622812f47-46757095ef6mr8830676b6e.13.1773710669438; 
+ Mon, 16 Mar 2026 18:24:29 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ae3a18bsm13066752a34.18.2026.03.16.18.24.27
+ 586e51a60fabf-4177e5e8185sm18070219fac.12.2026.03.16.18.24.28
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:27 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] sandbox: Add missing select's to the architecture symbol
-Date: Mon, 16 Mar 2026 19:24:26 -0600
-Message-ID: <20260317012426.4162458-1-trini@konsulko.com>
+Subject: [PATCH] boot: Update tests around network symbols in
+ BOOT_DEFAULTS_CMDS
+Date: Mon, 16 Mar 2026 19:24:28 -0600
+Message-ID: <20260317012428.4162476-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,34 +95,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 As exposed by "make randconfig", we have an issues around a number of
-symbols that we select without making sure to also select their
-prerequisite symbols. Add these missing symbols.
+symbols in BOOT_DEFAULTS_CMDS. Due to the nature of how we currently
+handle other networking related command options, we need to be testing
+for "!NO_NET" (which is the symbol for no networking stack) or "NET ||
+NET_LWIP" rather than CMD_NET alone. For consistency and clarity here
+use "CMD_NET && !NO_NET" here.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ boot/Kconfig | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 62148f00cd36..7e563ba8b218 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -203,12 +203,15 @@ config SANDBOX
- 	select DM_SPI
- 	select DM_SPI_FLASH
- 	select GZIP_COMPRESSED
-+	select I2C
- 	select LZO
- 	select MMC
- 	select MTD
- 	select OF_BOARD_SETUP
-+	select OF_CONTROL
- 	select PCI_ENDPOINT
- 	select SPI
-+	select SERIAL
- 	select SUPPORT_OF_CONTROL
- 	select SUPPORT_BIG_ENDIAN
- 	select SUPPORT_LITTLE_ENDIAN
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 7849928fc37d..afbd0e735163 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -431,12 +431,12 @@ config BOOT_DEFAULTS_CMDS
+ 	select CMD_FAT
+ 	select CMD_FS_GENERIC
+ 	select CMD_PART if PARTITIONS
+-	select CMD_DHCP if CMD_NET
+-	select CMD_PING if CMD_NET
+-	select CMD_PXE if CMD_NET
++	select CMD_DHCP if CMD_NET && !NO_NET
++	select CMD_PING if CMD_NET && !NO_NET
++	select CMD_PXE if CMD_NET && !NO_NET
+ 	select CMD_BOOTI if ARM64
+ 	select CMD_BOOTZ if ARM && !ARM64
+-	imply CMD_MII if NET || NET_LWIP
++	imply CMD_MII if CMD_NET && !NO_NET
+ 
+ config BOOT_DEFAULTS
+ 	bool  # Common defaults for standard boot and distroboot
 -- 
 2.43.0
 
