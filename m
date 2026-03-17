@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0915FFD877D
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED02FD877D
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:25:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1C1684383;
-	Tue, 17 Mar 2026 15:24:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A739E84399;
+	Tue, 17 Mar 2026 15:24:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="BcYHtbEf";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="V6ogz+xh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CE0484379; Tue, 17 Mar 2026 15:24:24 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 24A6384394; Tue, 17 Mar 2026 15:24:27 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FD4384332
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:24:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 36E8E8437E
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:24:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-48540d21f7dso66703905e9.0
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:24:21 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4853c1ca73aso49152105e9.2
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:24:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757460; x=1774362260;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757462; x=1774362262;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5QwyqVLT1zO2aQkUU9a7pf/+/eJErXwCWvZSJ9LrhHw=;
- b=BcYHtbEfGMLxGzZVlTUT4Vj69Expsj3v5S69Z4t7UijVPh6m8yTiMxfnYEtbdX7yPn
- Lnd+jl8kwOI0xNZb9VIXUtl+Z2CWERlYI5k460q6uQpU20/mfOO4BHjHI7ZHxWP3vwu+
- u/pSkFTeOTZlI+6mUHxDXUxQK3gdjjB6tLJvTSYRsQEY4QyNQe2LZLNJeRm5ypnIVU4+
- +7p+rJmdoBwTWWkcZImH+c3t8elwy3tj+xtHxd9iKbJ6lIUDW1fH/0kRXU+m2t7tK7uc
- /eNP9BmTOU2RkKYV+6MKQhtriM9BDUd/8mZh06jW4rdkhURh19ytW+UNIL+Drljv4Y5G
- UD3w==
+ :reply-to; bh=9Frt2WCjaAbchvRO6lnpP1qkx5cZrOMngcPe09VhIec=;
+ b=V6ogz+xhWbCCOkQ44RE+7bUS7Ae4PVjLtOqBDWWbBuCyCg6cSvQgRrcHzl/EkR2aPZ
+ D8BStn2QdGKGrsmqeVFBViPY2KsCtKWSCXKYqP9whzjAj7tVNaahT7jEvWbd8GOKhlWd
+ ilPdB9ZiK9JHWksylq8hqEQUMI5JffZcLBYu87pdmgu2CMbUj7Rwb97vVyTk30zk+ykU
+ VZCp3EMe8Pz4FKUIdbYbuMOGfAL+DpWqo6E+5EL1q9oYbexwHQSFviAg5J9sczWYNqMj
+ YZvBaAT0KEcb2X5D8XtvD8hSC1bATd7BWcKcXSQ07Bc3ZPAHCqeXJCO2udOD0VyxYWYV
+ khVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773757460; x=1774362260;
+ d=1e100.net; s=20251104; t=1773757462; x=1774362262;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=5QwyqVLT1zO2aQkUU9a7pf/+/eJErXwCWvZSJ9LrhHw=;
- b=S1W3OEjyFjwMdAVWuXwdLXktmUEZ6OkhEWcLrLT23xqNpC5iJd4EaxqsIdzmD1+875
- YZqgcwp6+E2AAbrMpU1h5l//utDINvWi1VvHIkUSix5FgHs0YqPYTeOw/09Ef9NhF8Y9
- qNKkS8VU0jNB+gZ0U5UX4FGKGf5t6MATERJPUCiBy/oHVFEpia+KZpLKaP7kOYnBpxSF
- ocTIxcCtjn7TTtVETVHlyx5i7UzJStOxM9ekkwOILg/ZgiKpmzdq6Tf6nHtmb210IASV
- OUB2pV4MefI6w3PEXUbwPxBIEog/msVT0MmsjzcjxxFliHbepsX2KOrCU/IKQI5fnIby
- NM8Q==
-X-Gm-Message-State: AOJu0YzaGU9TVs7OoPIyi+96yXqp6bW5X59y4r6/07/L1Jgjrq5SABpo
- 51x04NlQDVsE1C7SdOTDiN7n9WUfVZ/NFnMzcZRtrWIuIe3AVUeC3eDQzOdNhy8P3M0=
-X-Gm-Gg: ATEYQzwg2gnKhqw/mD71XmR42gJwsvVoU4DjeIXu5Jjpill+iXDaUXvrBB1uuNvkOd8
- k43hbMKXW1nXNiFYNdkvcQQ63P4g4ngXMVmyUAW9YnoNaYEK4AG7GFdK8wr8Tcd3z4DKsT40p4O
- fzOu1CXwjybm9sCJjQJMUjdCU8FoSzEgvV6ma49frWjyOMAXpRXO9XV0jCCerSB5La2s+Vzc/lj
- 1Mwx8+funobXYN3zQVYv+rsTb22GNK1FEWr4Ek6HahKt40c4bQIuoaG4G8OHzJYQsrOi5fwMUXf
- uyVWpaOZO0a/WNwmBV/QUdUdh0mPYUWLqxC7is+wT2H5tpqcYkzGrMTH2yH5y2sJTSj00m0tRZZ
- 5YSOhO4OaFBk7cZjJKEZHR9JCkdrv5DxOn8BflPTRqj4WcyfwXOhcDokNjF6gYqOMrRRaDj+8yM
- H20byKHeX4eCQmeT/TUKWgm8/SczYn9P252rB6kkjnher0Fnf+hWm4jdEyqwTiHGYEaF+BLK0/l
- UFCUgfCyhY8p173dKl8QAfb9FwrPMdpIMXqzBA1sI/f8oyVq64kM3EJqJ+gf5cPK4FkayLGx9a4
- GXaIBFs=
-X-Received: by 2002:a05:600c:a09:b0:485:3f72:324d with SMTP id
- 5b1f17b1804b1-485566ddac0mr303205345e9.14.1773757460537; 
- Tue, 17 Mar 2026 07:24:20 -0700 (PDT)
+ bh=9Frt2WCjaAbchvRO6lnpP1qkx5cZrOMngcPe09VhIec=;
+ b=MngLqg1gjPHDV7Nr6RmS4rjvctXVTX7rMXVifdQhXJJuNQX/U+bVh8a6uoJnFogwsT
+ zX9jxsMISVVddLCFud6fGdd6VLDN/q0YEYrk2yXvQ45sQH+WdiXQIaC/kUn7EWAiqjzI
+ zIIO40CVsKRBFvh6tmpEjNxgWXJM5JLfDGL6mzRhm3OY7h4RkLUexYadvkevpYUUPmTy
+ qHGDN/tO51W0wu+XARVu885zjMwEtMPcFMbmEN/pWdfJO4xih3cgh3OLNCNx8u6fO4IG
+ Stp+U7DnBMRu5OvQe8LVnWSOZS1JuWmw04OSoaq7rYmCKrR4qczLUKr77LbedAnOI7Ge
+ I+uA==
+X-Gm-Message-State: AOJu0Yz4ztpSuCNekRisWHiulJCVTEbSMIfjUHE+myVmQs8lG5/HKmZr
+ j16+vuswexu1JAM9uRDwXziPsFibPfWsdUeXXqGwyHAsUoZVXUhP1wAXf1E/zoFXltI=
+X-Gm-Gg: ATEYQzydzmVpFhHvN86WN+xcYvst77Tbxu/roPW7O8F40fkdUxaqOH9dbScE+Rs/LX1
+ C9o+E1vjp7lNmI1wI5eiBy9Oqia6d3tooqleH4tbMSByek6WbOjATL/tekmJm+L1ALrio9mdtw4
+ tAgCe+X3XGIEh+wXRC4F+7NIH8w1ZMv2DdA3N+v3ajSHPIu8fNZmA7zN8rpzETh0Rbhgn8EIPgj
+ hhW5NoDsill+q0jPhjAdeLmvYV6QJMttDojk3YNII3sHDx7hw8W5dhsZs+somCy86ZJkZvj9e4Q
+ 1zScybDhfah8giANFXeabJu5xkIumpZMU9Nk9mp6poNH6z4uL3jrure373ZZpQvcri249O/awrt
+ uOUB3rD0oRztn2tDHycjDe0zv8/pgdAd4DF6sGY87334L1nrvS4hj+eaDD+vZ12D6Z4+Y/O8nUB
+ 3NHYf+CCfM20tX2zGFViAs1rt+iMEU7WZaZ5btWPIDaVvyusF0dzEosvD4Pw76wEgPhumxn37N3
+ xwEHZCypUZ+fwjwaHVJNhqnkswPmEHjJMTmWaEyLFix35Pmb03910yB3tmDhEysRdnv7qyWBa8y
+ YtuAUWk=
+X-Received: by 2002:a05:600c:1d0e:b0:47e:e076:c7a5 with SMTP id
+ 5b1f17b1804b1-485566ea474mr313421675e9.11.1773757462415; 
+ Tue, 17 Mar 2026 07:24:22 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
  [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48556400f76sm125425675e9.1.2026.03.17.07.24.19
+ 5b1f17b1804b1-48556400f76sm125425675e9.1.2026.03.17.07.24.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 07:24:20 -0700 (PDT)
+ Tue, 17 Mar 2026 07:24:21 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 17 Mar 2026 15:24:22 +0100
-Subject: [PATCH 04/11] drivers: phy: phy-mtk-ufs: use tab to indent defines
+Date: Tue, 17 Mar 2026 15:24:23 +0100
+Subject: [PATCH 05/11] drivers: phy: phy-mtk-ufs: use clk_bulk functions
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260317-mt8195-add-ufs-support-v1-4-7d731ec438ae@baylibre.com>
+Message-Id: <20260317-mt8195-add-ufs-support-v1-5-7d731ec438ae@baylibre.com>
 References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
 In-Reply-To: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
 To: u-boot@lists.denx.de
@@ -117,62 +117,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use tabs instead of spaces to indent defines
+simply the driver by using clk_bulk functions
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/phy/phy-mtk-ufs.c | 38 ++++++++++++++++++--------------------
- 1 file changed, 18 insertions(+), 20 deletions(-)
+ drivers/phy/phy-mtk-ufs.c | 34 ++++++++--------------------------
+ 1 file changed, 8 insertions(+), 26 deletions(-)
 
 diff --git a/drivers/phy/phy-mtk-ufs.c b/drivers/phy/phy-mtk-ufs.c
-index 14a90cf2064..321151172d9 100644
+index 321151172d9..c7a671ebfad 100644
 --- a/drivers/phy/phy-mtk-ufs.c
 +++ b/drivers/phy/phy-mtk-ufs.c
-@@ -17,26 +17,24 @@
- #include <mapmem.h>
- 
- /* mphy register and offsets */
--#define MP_GLB_DIG_8C               0x008C
--#define FRC_PLL_ISO_EN              BIT(8)
--#define PLL_ISO_EN                  BIT(9)
--#define FRC_FRC_PWR_ON              BIT(10)
--#define PLL_PWR_ON                  BIT(11)
--
--#define MP_LN_DIG_RX_9C             0xA09C
--#define FSM_DIFZ_FRC                BIT(18)
--
--#define MP_LN_DIG_RX_AC             0xA0AC
--#define FRC_RX_SQ_EN                BIT(0)
--#define RX_SQ_EN                    BIT(1)
--
--#define MP_LN_RX_44                 0xB044
--#define FRC_CDR_PWR_ON              BIT(17)
--#define CDR_PWR_ON                  BIT(18)
--#define FRC_CDR_ISO_EN              BIT(19)
--#define CDR_ISO_EN                  BIT(20)
--
--#define UFSPHY_CLKS_CNT    2
-+#define MP_GLB_DIG_8C		0x008C
-+#define FRC_PLL_ISO_EN		BIT(8)
-+#define PLL_ISO_EN		BIT(9)
-+#define FRC_FRC_PWR_ON		BIT(10)
-+#define PLL_PWR_ON		BIT(11)
-+
-+#define MP_LN_DIG_RX_9C		0xA09C
-+#define FSM_DIFZ_FRC		BIT(18)
-+
-+#define MP_LN_DIG_RX_AC		0xA0AC
-+#define FRC_RX_SQ_EN		BIT(0)
-+#define RX_SQ_EN		BIT(1)
-+
-+#define MP_LN_RX_44		0xB044
-+#define FRC_CDR_PWR_ON		BIT(17)
-+#define CDR_PWR_ON		BIT(18)
-+#define FRC_CDR_ISO_EN		BIT(19)
-+#define CDR_ISO_EN		BIT(20)
- 
- struct mtk_ufs_phy {
+@@ -40,8 +40,7 @@ struct mtk_ufs_phy {
  	struct udevice *dev;
+ 	void __iomem *mmio;
+ 
+-	struct clk *unipro_clk;
+-	struct clk *mp_clk;
++	struct clk_bulk clk_bulk;
+ };
+ 
+ static void ufs_mtk_phy_set_active(struct mtk_ufs_phy *phy)
+@@ -78,16 +77,9 @@ static int mtk_phy_power_on(struct phy *phy)
+ 	struct mtk_ufs_phy *ufs_phy = dev_get_priv(phy->dev);
+ 	int ret;
+ 
+-	ret = clk_enable(ufs_phy->mp_clk);
+-	if (ret < 0) {
+-		dev_err(phy->dev, "failed to enable mp_clk\n");
+-		return ret;
+-	}
+-
+-	ret = clk_enable(ufs_phy->unipro_clk);
+-	if (ret < 0) {
+-		dev_err(phy->dev, "failed to enable unipro_clk %d\n", ret);
+-		clk_disable(ufs_phy->unipro_clk);
++	ret = clk_enable_bulk(&ufs_phy->clk_bulk);
++	if (ret) {
++		dev_err(phy->dev, "failed to enable clocks (ret=%d)\n", ret);
+ 		return ret;
+ 	}
+ 
+@@ -148,21 +140,11 @@ static int mtk_ufs_phy_probe(struct udevice *dev)
+ 	phy->dev = dev;
+ 	phy->mmio = map_sysmem(addr, 0);
+ 
+-	phy->mp_clk = devm_clk_get(dev, "mp");
+-	if (IS_ERR(phy->mp_clk)) {
+-		ret = PTR_ERR(phy->mp_clk);
+-		dev_err(dev, "Failed to get mp clock (ret=%d)\n", ret);
+-		return ret;
+-	}
++	ret = clk_get_bulk(dev, &phy->clk_bulk);
++	if (ret)
++		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+ 
+-	phy->unipro_clk = devm_clk_get(dev, "unipro");
+-	if (IS_ERR(phy->unipro_clk)) {
+-		ret = PTR_ERR(phy->unipro_clk);
+-		dev_err(dev, "Failed to get unipro clock (ret=%d)\n", ret);
+-		return ret;
+-	}
+-
+-	return 0;
++	return ret;
+ }
+ 
+ static const struct udevice_id mtk_ufs_phy_id_table[] = {
 
 -- 
 2.52.0
