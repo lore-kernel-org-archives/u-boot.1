@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A44DFF6E97
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 23:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAC7FF6E9B
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 23:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F1D9842A7;
-	Wed, 18 Mar 2026 00:26:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CEBB9842EF;
+	Wed, 18 Mar 2026 00:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PPfe44rk";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="C7Xa97zI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2160F84242; Wed, 18 Mar 2026 00:26:34 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 084C9842A7; Wed, 18 Mar 2026 00:26:36 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4778B841E2
- for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 00:26:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F21684213
+ for <u-boot@lists.denx.de>; Wed, 18 Mar 2026 00:26:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-40946982a78so2469343fac.2
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 16:26:31 -0700 (PDT)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-4673790ab85so4142372b6e.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 16:26:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773789990; x=1774394790;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773789991; x=1774394791;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=IN0PhoZhTlCPCifg1Jgz84xLMH9ol0gYhVrp+woo/3U=;
- b=PPfe44rkCHOyfAxWo5R+WRXx7g72ji5FTrWpm6IknCR+l1BaJJklt1+HQtiKNYsQ4B
- Z3YtQbjrmKtuR7WMleqHzOSlvcxIAkrkmfsv5bf94dQzd7jNYRjXQZ75mQGNdQvrKgu8
- A6KpxgEoHJcrJyvFyFcghshNUey0az2DXm1loK8BPn8SZkfzA7m/ogGbn1bdsq6O68VQ
- 0lBsGhMsjR3SRdIUqts1fayEyoNaVA0O086rjgCM24eb1Y4+fvTNZtSLz9EXs2aTPsxT
- E0A53nkpOXuj4rtU0O40Z6KJAealro+Bwd/tmiXja+6VmkSjQC1eyW0x/gM7DzdazNVB
- qjhQ==
+ :reply-to; bh=FEuPINwc3mpwZzgv8XYgvwQ8/AFCvOwcjvGog3ItFWM=;
+ b=C7Xa97zIpBx82GnzyfbuQbpBd/89uGFgowMeHiht58/KEJHpU5IzUoIV5v0lPNUFP7
+ tgc+/1T//mFETU2ypw+DerMVY1HcxUVeThfvtl7tS8e/xEt5laUgw2qX9Z05tB7xxcYK
+ oPViYeZd0rr/PO3Vov+bMiQdLtaCZMiDVT+FnUCWeNodQdsSe52GAZEPKcfH8mwZCrEW
+ 6R9F8jcz+eDLknHRj8O2c48/goRBOHjRPPAr3RZFSxrSSkMX8TJhMVocuwIkXBvutXKQ
+ zlLkwxsyak2dSaQiY4y3qEfJkydvSHla4QKhkma+O16/RJAIh+APggRCL+MN07jXpp23
+ FUDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773789990; x=1774394790;
+ d=1e100.net; s=20251104; t=1773789991; x=1774394791;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=IN0PhoZhTlCPCifg1Jgz84xLMH9ol0gYhVrp+woo/3U=;
- b=WhPm9/UojRyYmXuqh66vFbR7W4NNeIIvyFDhfpiduNe7QrYKART0T4NnjAIhZJWbTC
- 5K/Brgp1prTXwItu+2uilHNkU0ivD73VVHCxYPuOf07RQnIaA1NofrCJfK+MQPwhBabh
- n3kl00HC/osPwe5otqQA5V7HFSplTLtp+6eepqlnaI0UWEpHN7xyhIHE3b8Zn7x/0DU0
- aHBny+NLYwrATv1e3MKZqV2T841nNcA03+PO3zzZUCntXblYaw3awLBycf7a1uwqd1Y1
- dp93FisrGmOkkmX4j7MOE2zEPw3OeVP6NduOvdOJrwFTY1ZER3xTgsVUSgUnQKjsyFWi
- ppiw==
+ bh=FEuPINwc3mpwZzgv8XYgvwQ8/AFCvOwcjvGog3ItFWM=;
+ b=pkEcbioGQAV1NmvJGJXa5ORuUSOWwtpQ2ZyeEc2z6mLNjKUmSLnTECyRdd+FbPGEhz
+ j7MlqOc4dDYjPo/pLUruZ/VnZL/WiBmq1KNxcCYYgvE9ncPo8mc5FEn0zD1QzajRO5Zv
+ wacOXbl5LAolpAD/3CPB2dGPNOT4IF3JoCCMIMnVJdFYE2cKoWNJ4kqzeKl1akwEmCJs
+ s6kS+em4PwjUqajEXur0quanT+3zeSegraouTYVAnlSLdMcX+YK6t2pE721a0FStd9MN
+ Ny6kBKlGNKoCEPEcvazxPl4LR4ey6lLwJ6c12pYlQtNNTu9vC9P/UfuhTRgtx4redbx2
+ m7Hg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVhWQwUfi9an+kd7IcB+rBZfW79PXa0U54yJQsMlwdxHc4IJtMG7tDddQD/vo0joZ6JQS+sK6M=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRKmG9kynbZr8dXSWS6Fhpe7XSyyaE0w10SfJMcTuGU6Y9O8DU
- Ded0xop82Mo+oAvwkTaTerCKETSx8wx6vCVU/O4yJPoAunq/+8Byhx7SoWw5mQ72/q0=
-X-Gm-Gg: ATEYQzy78Xyw+rfj/xuxqmuQH/cltA4PhelT0ldMgXc+BhfWawKCU8qsOYD9TWsdNAp
- 7fu+uVHChNQ/uF4iDCPV3Omg61KTPWfs03PxhTNy44hQy+Ghb7nA9RyYO0RlFZHEyTNIMJlq76t
- upZ/iGYOSjsai0H081B0xg//6XThdk0tGFafl0x99BkTsOJDx1g+m5F2FaknoTfe2MVV5jIj5pd
- SVC6jZi/sSrW9ZIGgef1QhbmIWTuZQ8pI6Rye/4Cc8spFcRHb8juTwnBKH69Y8F7pclJ1hi99kG
- JW0SyNhDkQlobttJK0m75eYW+Gqi1hWAVmow793YXCv0Xe+ru2ak4GiugV5wWD81C9tcKzkqbpN
- zUeywQX0IJdSCQDFU5UXLNo8EdkMyYTcbMpkVV4CUXukMBVvGGpm1MSzFDdijLWY3HIn1Mxxa1O
- Fmq0shv/JE1WE05yHSCmxBMuKCng==
-X-Received: by 2002:a05:6870:16d2:b0:417:533b:7999 with SMTP id
- 586e51a60fabf-41bd3cf6cc9mr955244fac.1.1773789989853; 
- Tue, 17 Mar 2026 16:26:29 -0700 (PDT)
+ AJvYcCUU99zSh+FqMnNb7oG4U6YXTSx2VUgA3wsTrgAcz3YbPP7uLB1EKo+6FQQCeYY84P9zl51Y4Uk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzKOv0qk8b6T4mg7NRV+UnWmeqX8KvTq2V3lL+oIMn8h3MKmDV1
+ 8IrTifYocEo7iuN13/fg1uRv/CaynYVXqi9O05nJpVCyDvTGf66D56ia97aaypEYuuE=
+X-Gm-Gg: ATEYQzzAN90mTePxTe9HkxX4TGzxAanSl5fV6gbP2Yjt6u+1YQfROur/R1Fn3aOQddg
+ jM5gHmNTaeJx8irWTt8ftowBEAXnKXIaBK7NdbQy7N3iYylxL7zWvygIwdXnHWaNTLAPz8xSKfx
+ CV22ME1g+qF+yhP4spZYmnEjjL0avwRG1uJ0FYU4Nn7EyUSt/vXrdsAGlwtAeJNTHF7KcWhYmI2
+ KbYU5zavsquvOYJ5o/QcU3GdNA09vWpvnN77FZTEJumZLdpfN5QL5W0Y01wJ/HjcCGKl8JzlmvY
+ p5xd0OD7KVIYWQh2JNjiE1B430U9pHhrSJnj3ePLK4r+7H7jnl4z8eg2M1W7EYlB1ZlqNsT2FZI
+ 0dTyLppKuQoB9jt30bdGN1NTDM/seT7wV+snpG/52blVjgskiQKNGpPmNr109zBuXBRwGoUQknZ
+ wkMIUVLdq0Vf5V0uLC/ncZJdC29Q==
+X-Received: by 2002:a05:6808:4f67:b0:467:2dc5:f4a9 with SMTP id
+ 5614622812f47-467ba25b96bmr911161b6e.28.1773789990676; 
+ Tue, 17 Mar 2026 16:26:30 -0700 (PDT)
 Received: from [127.0.1.1] ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
  by smtp.gmail.com with ESMTPSA id
  586e51a60fabf-41bd2828aa7sm1148309fac.1.2026.03.17.16.26.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 16:26:29 -0700 (PDT)
+ Tue, 17 Mar 2026 16:26:30 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-Date: Tue, 17 Mar 2026 18:23:16 -0500
-Subject: [PATCH v3 03/16] clk: mediatek: mt7629: convert to struct mtk_parent
+Date: Tue, 17 Mar 2026 18:23:17 -0500
+Subject: [PATCH v3 04/16] clk: mediatek: mt7981: convert to struct mtk_parent
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260317-clk-mtk-unify-mux-parents-v3-3-a4760f5b0a80@baylibre.com>
+Message-Id: <20260317-clk-mtk-unify-mux-parents-v3-4-a4760f5b0a80@baylibre.com>
 References: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
 In-Reply-To: <20260317-clk-mtk-unify-mux-parents-v3-0-a4760f5b0a80@baylibre.com>
 To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
@@ -91,17 +91,17 @@ To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
 Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de, 
  David Lechner <dlechner@baylibre.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=15549;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10479;
  i=dlechner@baylibre.com; h=from:subject:message-id;
- bh=qU0iXkUq8Ny1GdAhP61OtVuQ6gWlsm/KoqqyfWAvPr4=;
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpueKq7TJv36W8kjRTI9EmRQC7gbze3pfY+zT/0
- QpafjxWnfeJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabniqhYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AZMMH/07fEO8zg3XhAnEz4Xp2IMYmHyE5RKMbiyGuxwV
- qeVekP5kToTUezP3eacMEc7txcYq6D8SZP3tU/tk0Ceedj03vvgF+3ygcIqV1HvdBJi7NISrCa6
- kX4ABFlg7zNDWys7xe2wJPkM3We9DI0bDMvxY9yH76imU03hUxhNMjOkXVcHZjAc5vNbh0HeDQh
- sAOtJ4deJAlvRObQL1K8647Eof2KKqnwZGedE1Kfip8EdhgazAB9E3GWTj0vyELCPdk+JtLx9Ve
- 6bHjDAiv8OPxcy12XIWzIkN5WWMWQbdtsuUwz5a7QbnK0IRr8kV+792PXULF/WH197JsF3zuORW
- S+i4=
+ bh=/AP5DnUQHUuNgRMVkAQmjZtVy1nvMoONYN/LGjIFZNo=;
+ b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpueLIQAFtKFAmL6SISJTKDpEWGBRJGwSbiKVzU
+ UfeOUPOCliJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabniyBYcZGxlY2huZXJA
+ YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AEL4IAIIpfzcSeqEbJ97EOPr+U90EF/vvfGMCF017o7b
+ SxMft+0RRSk2+2OJ4zccDlWDJNltlD+xGiDpOSwBLoOpJPjNgdNoc0UtaI+0slL28arriMQ43xp
+ RD7+oSYKC/HOYtZi4yJHpmX9wHQ0gGQk5x0YJx7haGiYQ4DFOAitpEkJVoem/0v+R0h+x4h9zCd
+ yMsd0y2So6AsuHgNXqnGHJNE8yL46W+FxFJE1CkuJ0o1/Cl1IXrmOiIlSihGOle+DbNX05hTRH9
+ R9Be40kQr4KpWc59BcTqQu71igPiANt5+UM/yJGBWudjWgVhNU5NI5ldxHrjOpUkcJ2ObRMO0H2
+ +iu8=
 X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
  fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
 X-BeenThere: u-boot@lists.denx.de
@@ -124,508 +124,285 @@ Convert all parent clock arrays to use struct mtk_parent. This will
 allow us to simplify core code later by having only one possible data
 type for mux parent arrays.
 
-Reviewed-by: Julien Stephan <jstephan@baylibre.com>
 Signed-off-by: David Lechner <dlechner@baylibre.com>
 ---
- drivers/clk/mediatek/clk-mt7629.c | 440 +++++++++++++++++++-------------------
- 1 file changed, 220 insertions(+), 220 deletions(-)
+ drivers/clk/mediatek/clk-mt7981.c | 226 +++++++++++++++++++++++++++-----------
+ 1 file changed, 162 insertions(+), 64 deletions(-)
 
-diff --git a/drivers/clk/mediatek/clk-mt7629.c b/drivers/clk/mediatek/clk-mt7629.c
-index 1d697539ce2..c675104d573 100644
---- a/drivers/clk/mediatek/clk-mt7629.c
-+++ b/drivers/clk/mediatek/clk-mt7629.c
-@@ -152,271 +152,271 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
- 	FACTOR1(CLK_TOP_PCIE0_MAC_EN, CLK_TOP_UNIVPLL1_D4, 1, 1),
+diff --git a/drivers/clk/mediatek/clk-mt7981.c b/drivers/clk/mediatek/clk-mt7981.c
+index 40e8429521a..0c770a0bd93 100644
+--- a/drivers/clk/mediatek/clk-mt7981.c
++++ b/drivers/clk/mediatek/clk-mt7981.c
+@@ -139,97 +139,194 @@ static const struct mtk_fixed_factor top_fixed_divs[] = {
  };
  
--static const int axi_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_SYSPLL_D5,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_UNIVPLL_D7,
--	CLK_TOP_DMPLL
--};
--
--static const int mem_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_DMPLL
--};
--
--static const int ddrphycfg_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D8
--};
--
--static const int eth_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_SGMIIPLL_D2,
--	CLK_TOP_UNIVPLL_D7,
--	CLK_TOP_DMPLL
--};
--
--static const int pwm_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D4
--};
--
--static const int sgmii_ref_1_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SGMIIPLL_D2
--};
--
--static const int nfi_infra_parents[] = {
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D8,
--	CLK_TOP_UNIVPLL3_D4,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_TOP_UNIVPLL1_D8,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_UNIVPLL3_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_SYSPLL_D7
--};
--
--static const int flash_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL_D80_D4,
--	CLK_TOP_SYSPLL2_D8,
--	CLK_TOP_SYSPLL3_D4,
--	CLK_TOP_UNIVPLL3_D4,
--	CLK_TOP_UNIVPLL1_D8,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_UNIVPLL2_D4
--};
--
--static const int uart_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D8
--};
--
--static const int spi0_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL3_D2,
--	CLK_XTAL,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_UNIVPLL1_D8,
--	CLK_XTAL
--};
--
--static const int spi1_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL3_D2,
--	CLK_XTAL,
--	CLK_TOP_SYSPLL4_D4,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_UNIVPLL1_D8,
--	CLK_XTAL
--};
--
--static const int msdc30_0_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D16,
--	CLK_TOP_UNIV48M
--};
--
--static const int msdc30_1_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D16,
--	CLK_TOP_UNIV48M,
--	CLK_TOP_SYSPLL2_D4,
--	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_SYSPLL_D7,
--	CLK_TOP_SYSPLL2_D2,
--	CLK_TOP_UNIVPLL2_D2
-+static const struct mtk_parent axi_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
-+	TOP_PARENT(CLK_TOP_DMPLL),
+ /* TOPCKGEN MUX PARENTS */
+-static const int nfi1x_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_MM_D4,
+-				     CLK_TOP_NET1_D8_D2,  CLK_TOP_CB_NET2_D6,
+-				     CLK_TOP_CB_M_D4,     CLK_TOP_CB_MM_D8,
+-				     CLK_TOP_NET1_D8_D4,  CLK_TOP_CB_M_D8 };
++static const struct mtk_parent nfi1x_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_MM_D4),
++	TOP_PARENT(CLK_TOP_NET1_D8_D2),
++	TOP_PARENT(CLK_TOP_CB_NET2_D6),
++	TOP_PARENT(CLK_TOP_CB_M_D4),
++	TOP_PARENT(CLK_TOP_CB_MM_D8),
++	TOP_PARENT(CLK_TOP_NET1_D8_D4),
++	TOP_PARENT(CLK_TOP_CB_M_D8),
 +};
-+
-+static const struct mtk_parent mem_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_DMPLL),
+ 
+-static const int spinfi_parents[] = { CLK_TOP_CKSQ_40M_D2, CLK_TOP_CB_CKSQ_40M,
+-				      CLK_TOP_NET1_D5_D4,  CLK_TOP_CB_M_D4,
+-				      CLK_TOP_CB_MM_D8,    CLK_TOP_NET1_D8_D4,
+-				      CLK_TOP_MM_D6_D2,    CLK_TOP_CB_M_D8 };
++static const struct mtk_parent spinfi_parents[] = {
++	TOP_PARENT(CLK_TOP_CKSQ_40M_D2),
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D5_D4),
++	TOP_PARENT(CLK_TOP_CB_M_D4),
++	TOP_PARENT(CLK_TOP_CB_MM_D8),
++	TOP_PARENT(CLK_TOP_NET1_D8_D4),
++	TOP_PARENT(CLK_TOP_MM_D6_D2),
++	TOP_PARENT(CLK_TOP_CB_M_D8),
 +};
-+
-+static const struct mtk_parent ddrphycfg_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
+ 
+-static const int spi_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_M_D2,
+-				   CLK_TOP_CB_MM_D4,    CLK_TOP_NET1_D8_D2,
+-				   CLK_TOP_CB_NET2_D6,  CLK_TOP_NET1_D5_D4,
+-				   CLK_TOP_CB_M_D4,     CLK_TOP_NET1_D8_D4 };
++static const struct mtk_parent spi_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_M_D2),
++	TOP_PARENT(CLK_TOP_CB_MM_D4),
++	TOP_PARENT(CLK_TOP_NET1_D8_D2),
++	TOP_PARENT(CLK_TOP_CB_NET2_D6),
++	TOP_PARENT(CLK_TOP_NET1_D5_D4),
++	TOP_PARENT(CLK_TOP_CB_M_D4),
++	TOP_PARENT(CLK_TOP_NET1_D8_D4),
 +};
-+
-+static const struct mtk_parent eth_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_SGMIIPLL_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
-+	TOP_PARENT(CLK_TOP_DMPLL),
-+};
-+
-+static const struct mtk_parent pwm_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+};
-+
-+static const struct mtk_parent sgmii_ref_1_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SGMIIPLL_D2),
-+};
-+
-+static const struct mtk_parent nfi_infra_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D7),
-+};
-+
-+static const struct mtk_parent flash_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D80_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+};
-+
+ 
+-static const int uart_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_M_D8,
+-				    CLK_TOP_M_D8_D2 };
 +static const struct mtk_parent uart_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D8),
-+};
-+
-+static const struct mtk_parent spi0_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent spi1_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D2),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D8),
-+	XTAL_PARENT(CLK_XTAL),
-+};
-+
-+static const struct mtk_parent msdc30_0_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D16),
-+	TOP_PARENT(CLK_TOP_UNIV48M),
-+};
-+
-+static const struct mtk_parent msdc30_1_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D16),
-+	TOP_PARENT(CLK_TOP_UNIV48M),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D7),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
- };
- 
--static const int ap2wbmcu_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_UNIV48M,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_SYSPLL_D7,
--	CLK_TOP_SYSPLL2_D2,
--	CLK_TOP_UNIVPLL2_D2
-+static const struct mtk_parent ap2wbmcu_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIV48M),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D7),
-+	TOP_PARENT(CLK_TOP_SYSPLL2_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
- };
- 
--static const int audio_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL3_D4,
--	CLK_TOP_SYSPLL4_D4,
--	CLK_TOP_SYSPLL1_D16
-+static const struct mtk_parent audio_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D16),
- };
- 
--static const int aud_intbus_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_SYSPLL4_D2,
--	CLK_TOP_DMPLL_D4
--};
-+static const struct mtk_parent aud_intbus_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D2),
-+	TOP_PARENT(CLK_TOP_DMPLL_D4),
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_M_D8),
++	TOP_PARENT(CLK_TOP_M_D8_D2),
 +};
  
--static const int pmicspi_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_TOP_SYSPLL3_D4,
--	CLK_TOP_SYSPLL1_D16,
--	CLK_TOP_UNIVPLL3_D4,
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D4,
--	CLK_TOP_DMPLL_D8
-+static const struct mtk_parent pmicspi_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	TOP_PARENT(CLK_TOP_SYSPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D16),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
-+	TOP_PARENT(CLK_TOP_DMPLL_D8),
+-static const int pwm_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D8_D2,
+-				   CLK_TOP_NET1_D5_D4,  CLK_TOP_CB_M_D4,
+-				   CLK_TOP_M_D8_D2,     CLK_TOP_CB_RTC_32K };
++static const struct mtk_parent pwm_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D8_D2),
++	TOP_PARENT(CLK_TOP_NET1_D5_D4),
++	TOP_PARENT(CLK_TOP_CB_M_D4),
++	TOP_PARENT(CLK_TOP_M_D8_D2),
++	TOP_PARENT(CLK_TOP_CB_RTC_32K),
++};
+ 
+-static const int i2c_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D5_D4,
+-				   CLK_TOP_CB_M_D4, CLK_TOP_NET1_D8_D4 };
++static const struct mtk_parent i2c_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D5_D4),
++	TOP_PARENT(CLK_TOP_CB_M_D4),
++	TOP_PARENT(CLK_TOP_NET1_D8_D4),
++};
+ 
+-static const int pextp_tl_ck_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					   CLK_TOP_NET1_D5_D4, CLK_TOP_CB_M_D4,
+-					   CLK_TOP_CB_RTC_32K };
++static const struct mtk_parent pextp_tl_ck_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D5_D4),
++	TOP_PARENT(CLK_TOP_CB_M_D4),
++	TOP_PARENT(CLK_TOP_CB_RTC_32K),
++};
+ 
+-static const int emmc_208m_parents[] = {
+-	CLK_TOP_CB_CKSQ_40M,   CLK_TOP_CB_M_D2,  CLK_TOP_CB_NET2_D4,
+-	CLK_TOP_CB_APLL2_196M, CLK_TOP_CB_MM_D4, CLK_TOP_NET1_D8_D2,
+-	CLK_TOP_CB_MM_D6
++static const struct mtk_parent emmc_208m_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_M_D2),
++	TOP_PARENT(CLK_TOP_CB_NET2_D4),
++	TOP_PARENT(CLK_TOP_CB_APLL2_196M),
++	TOP_PARENT(CLK_TOP_CB_MM_D4),
++	TOP_PARENT(CLK_TOP_NET1_D8_D2),
++	TOP_PARENT(CLK_TOP_CB_MM_D6),
  };
  
--static const int scp_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D8,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_UNIVPLL2_D4
-+static const struct mtk_parent scp_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
- };
+-static const int emmc_400m_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_NET2_D2,
+-					 CLK_TOP_CB_MM_D2, CLK_TOP_CB_NET2_D2 };
++static const struct mtk_parent emmc_400m_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_NET2_D2),
++	TOP_PARENT(CLK_TOP_CB_MM_D2),
++	TOP_PARENT(CLK_TOP_CB_NET2_D2),
++};
  
--static const int atb_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_SYSPLL_D5
-+static const struct mtk_parent atb_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
- };
+-static const int csw_f26m_parents[] = { CLK_TOP_CKSQ_40M_D2, CLK_TOP_M_D8_D2 };
++static const struct mtk_parent csw_f26m_parents[] = {
++	TOP_PARENT(CLK_TOP_CKSQ_40M_D2),
++	TOP_PARENT(CLK_TOP_M_D8_D2),
++};
  
--static const int hif_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_SYSPLL1_D4,
--	CLK_TOP_UNIVPLL_D5,
--	-1,
--	CLK_TOP_UNIVPLL_D7
-+static const struct mtk_parent hif_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D4),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	VOID_PARENT,
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D7),
- };
+-static const int dramc_md32_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_M_D2,
+-					  CLK_TOP_CB_WEDMCU_208M };
++static const struct mtk_parent dramc_md32_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_M_D2),
++	TOP_PARENT(CLK_TOP_CB_WEDMCU_208M),
++};
  
--static const int sata_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL2_D4
-+static const struct mtk_parent sata_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D4),
- };
+-static const int sysaxi_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D8_D2 };
++static const struct mtk_parent sysaxi_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D8_D2),
++};
  
--static const int usb20_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL3_D4,
--	CLK_TOP_SYSPLL1_D8
-+static const struct mtk_parent usb20_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL3_D4),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D8),
- };
+-static const int sysapb_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_M_D3_D2 };
++static const struct mtk_parent sysapb_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_M_D3_D2),
++};
  
--static const int aud1_parents[] = {
--	CLK_XTAL
-+static const struct mtk_parent aud1_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
- };
+-static const int arm_db_main_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					   CLK_TOP_CB_NET2_D6 };
++static const struct mtk_parent arm_db_main_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_NET2_D6),
++};
  
--static const int irrx_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_SYSPLL4_D16
-+static const struct mtk_parent irrx_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_SYSPLL4_D16),
- };
+-static const int ap2cnn_host_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					   CLK_TOP_NET1_D8_D4 };
++static const struct mtk_parent ap2cnn_host_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D8_D4),
++};
  
--static const int crypto_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_UNIVPLL_D3,
--	CLK_TOP_UNIVPLL1_D2,
--	CLK_TOP_SYSPLL1_D2,
--	CLK_TOP_UNIVPLL_D5,
--	CLK_TOP_SYSPLL_D5,
--	CLK_TOP_UNIVPLL2_D2,
--	CLK_TOP_SYSPLL_D2
-+static const struct mtk_parent crypto_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D3),
-+	TOP_PARENT(CLK_TOP_UNIVPLL1_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL1_D2),
-+	TOP_PARENT(CLK_TOP_UNIVPLL_D5),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D5),
-+	TOP_PARENT(CLK_TOP_UNIVPLL2_D2),
-+	TOP_PARENT(CLK_TOP_SYSPLL_D2),
- };
+-static const int netsys_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_MM_D2 };
++static const struct mtk_parent netsys_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_MM_D2),
++};
  
--static const int gpt10m_parents[] = {
--	CLK_XTAL,
--	CLK_TOP_CLKXTAL_D4
-+static const struct mtk_parent gpt10m_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_CLKXTAL_D4),
- };
+-static const int netsys_500m_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					   CLK_TOP_CB_NET1_D5 };
++static const struct mtk_parent netsys_500m_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_NET1_D5),
++};
  
- static const struct mtk_composite top_muxes[] = {
- 	/* CLK_CFG_0 */
--	MUX_GATE(CLK_TOP_AXI_SEL, axi_parents, 0x40, 0, 3, 7),
--	MUX_GATE(CLK_TOP_MEM_SEL, mem_parents, 0x40, 8, 1, 15),
--	MUX_GATE(CLK_TOP_DDRPHYCFG_SEL, ddrphycfg_parents, 0x40, 16, 1, 23),
--	MUX_GATE(CLK_TOP_ETH_SEL, eth_parents, 0x40, 24, 3, 31),
-+	MUX_GATE_MIXED(CLK_TOP_AXI_SEL, axi_parents, 0x40, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_MEM_SEL, mem_parents, 0x40, 8, 1, 15),
-+	MUX_GATE_MIXED(CLK_TOP_DDRPHYCFG_SEL, ddrphycfg_parents, 0x40, 16, 1, 23),
-+	MUX_GATE_MIXED(CLK_TOP_ETH_SEL, eth_parents, 0x40, 24, 3, 31),
+-static const int netsys_mcu_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_MM_720M,
+-					  CLK_TOP_CB_NET1_D4, CLK_TOP_CB_NET1_D5,
+-					  CLK_TOP_CB_M_416M };
++static const struct mtk_parent netsys_mcu_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_MM_720M),
++	TOP_PARENT(CLK_TOP_CB_NET1_D4),
++	TOP_PARENT(CLK_TOP_CB_NET1_D5),
++	TOP_PARENT(CLK_TOP_CB_M_416M),
++};
  
- 	/* CLK_CFG_1 */
--	MUX_GATE(CLK_TOP_PWM_SEL, pwm_parents, 0x50, 0, 2, 7),
--	MUX_GATE(CLK_TOP_F10M_REF_SEL, irrx_parents, 0x50, 8, 1, 15),
--	MUX_GATE(CLK_TOP_NFI_INFRA_SEL, nfi_infra_parents, 0x50, 16, 4, 23),
--	MUX_GATE(CLK_TOP_FLASH_SEL, flash_parents, 0x50, 24, 3, 31),
-+	MUX_GATE_MIXED(CLK_TOP_PWM_SEL, pwm_parents, 0x50, 0, 2, 7),
-+	MUX_GATE_MIXED(CLK_TOP_F10M_REF_SEL, irrx_parents, 0x50, 8, 1, 15),
-+	MUX_GATE_MIXED(CLK_TOP_NFI_INFRA_SEL, nfi_infra_parents, 0x50, 16, 4, 23),
-+	MUX_GATE_MIXED(CLK_TOP_FLASH_SEL, flash_parents, 0x50, 24, 3, 31),
+-static const int netsys_2x_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					 CLK_TOP_CB_NET2_800M,
+-					 CLK_TOP_CB_MM_720M };
++static const struct mtk_parent netsys_2x_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_NET2_800M),
++	TOP_PARENT(CLK_TOP_CB_MM_720M),
++};
  
- 	/* CLK_CFG_2 */
--	MUX_GATE(CLK_TOP_UART_SEL, uart_parents, 0x60, 0, 1, 7),
--	MUX_GATE(CLK_TOP_SPI0_SEL, spi0_parents, 0x60, 8, 3, 15),
--	MUX_GATE(CLK_TOP_SPI1_SEL, spi1_parents, 0x60, 16, 3, 23),
--	MUX_GATE(CLK_TOP_MSDC50_0_SEL, uart_parents, 0x60, 24, 3, 31),
-+	MUX_GATE_MIXED(CLK_TOP_UART_SEL, uart_parents, 0x60, 0, 1, 7),
-+	MUX_GATE_MIXED(CLK_TOP_SPI0_SEL, spi0_parents, 0x60, 8, 3, 15),
-+	MUX_GATE_MIXED(CLK_TOP_SPI1_SEL, spi1_parents, 0x60, 16, 3, 23),
-+	MUX_GATE_MIXED(CLK_TOP_MSDC50_0_SEL, uart_parents, 0x60, 24, 3, 31),
+-static const int sgm_325m_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					CLK_TOP_CB_SGM_325M };
++static const struct mtk_parent sgm_325m_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_SGM_325M),
++};
  
- 	/* CLK_CFG_3 */
--	MUX_GATE(CLK_TOP_MSDC30_0_SEL, msdc30_0_parents, 0x70, 0, 3, 7),
--	MUX_GATE(CLK_TOP_MSDC30_1_SEL, msdc30_1_parents, 0x70, 8, 3, 15),
--	MUX_GATE(CLK_TOP_AP2WBMCU_SEL, ap2wbmcu_parents, 0x70, 16, 3, 23),
--	MUX_GATE(CLK_TOP_AP2WBHIF_SEL, ap2wbmcu_parents, 0x70, 24, 3, 31),
-+	MUX_GATE_MIXED(CLK_TOP_MSDC30_0_SEL, msdc30_0_parents, 0x70, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_MSDC30_1_SEL, msdc30_1_parents, 0x70, 8, 3, 15),
-+	MUX_GATE_MIXED(CLK_TOP_AP2WBMCU_SEL, ap2wbmcu_parents, 0x70, 16, 3, 23),
-+	MUX_GATE_MIXED(CLK_TOP_AP2WBHIF_SEL, ap2wbmcu_parents, 0x70, 24, 3, 31),
+-static const int sgm_reg_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_NET2_D4 };
++static const struct mtk_parent sgm_reg_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_NET2_D4),
++};
  
- 	/* CLK_CFG_4 */
--	MUX_GATE(CLK_TOP_AUDIO_SEL, audio_parents, 0x80, 0, 2, 7),
--	MUX_GATE(CLK_TOP_AUD_INTBUS_SEL, aud_intbus_parents, 0x80, 8, 2, 15),
--	MUX_GATE(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x80, 16, 3, 23),
--	MUX_GATE(CLK_TOP_SCP_SEL, scp_parents, 0x80, 24, 2, 31),
-+	MUX_GATE_MIXED(CLK_TOP_AUDIO_SEL, audio_parents, 0x80, 0, 2, 7),
-+	MUX_GATE_MIXED(CLK_TOP_AUD_INTBUS_SEL, aud_intbus_parents, 0x80, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_PMICSPI_SEL, pmicspi_parents, 0x80, 16, 3, 23),
-+	MUX_GATE_MIXED(CLK_TOP_SCP_SEL, scp_parents, 0x80, 24, 2, 31),
+-static const int eip97b_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_NET1_D5,
+-				      CLK_TOP_CB_M_416M, CLK_TOP_CB_MM_D2,
+-				      CLK_TOP_NET1_D5_D2 };
++static const struct mtk_parent eip97b_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_NET1_D5),
++	TOP_PARENT(CLK_TOP_CB_M_416M),
++	TOP_PARENT(CLK_TOP_CB_MM_D2),
++	TOP_PARENT(CLK_TOP_NET1_D5_D2),
++};
  
- 	/* CLK_CFG_5 */
--	MUX_GATE(CLK_TOP_ATB_SEL, atb_parents, 0x90, 0, 2, 7),
--	MUX_GATE_FLAGS(CLK_TOP_HIF_SEL, hif_parents, 0x90, 8, 3, 15,
--		       CLK_MUX_DOMAIN_SCPSYS),
--	MUX_GATE(CLK_TOP_SATA_SEL, sata_parents, 0x90, 16, 1, 23),
--	MUX_GATE(CLK_TOP_U2_SEL, usb20_parents, 0x90, 24, 2, 31),
-+	MUX_GATE_MIXED(CLK_TOP_ATB_SEL, atb_parents, 0x90, 0, 2, 7),
-+	MUX_GATE_MIXED_FLAGS(CLK_TOP_HIF_SEL, hif_parents, 0x90, 8, 3, 15,
-+			     CLK_MUX_DOMAIN_SCPSYS),
-+	MUX_GATE_MIXED(CLK_TOP_SATA_SEL, sata_parents, 0x90, 16, 1, 23),
-+	MUX_GATE_MIXED(CLK_TOP_U2_SEL, usb20_parents, 0x90, 24, 2, 31),
+-static const int aud_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_APLL2_196M };
++static const struct mtk_parent aud_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_APLL2_196M),
++};
  
- 	/* CLK_CFG_6 */
--	MUX_GATE(CLK_TOP_AUD1_SEL, aud1_parents, 0xA0, 0, 1, 7),
--	MUX_GATE(CLK_TOP_AUD2_SEL, aud1_parents, 0xA0, 8, 1, 15),
--	MUX_GATE(CLK_TOP_IRRX_SEL, irrx_parents, 0xA0, 16, 1, 23),
--	MUX_GATE(CLK_TOP_IRTX_SEL, irrx_parents, 0xA0, 24, 1, 31),
-+	MUX_GATE_MIXED(CLK_TOP_AUD1_SEL, aud1_parents, 0xA0, 0, 1, 7),
-+	MUX_GATE_MIXED(CLK_TOP_AUD2_SEL, aud1_parents, 0xA0, 8, 1, 15),
-+	MUX_GATE_MIXED(CLK_TOP_IRRX_SEL, irrx_parents, 0xA0, 16, 1, 23),
-+	MUX_GATE_MIXED(CLK_TOP_IRTX_SEL, irrx_parents, 0xA0, 24, 1, 31),
+-static const int a1sys_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_APLL2_D4 };
++static const struct mtk_parent a1sys_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_APLL2_D4),
++};
  
- 	/* CLK_CFG_7 */
--	MUX_GATE(CLK_TOP_SATA_MCU_SEL, scp_parents, 0xB0, 0, 2, 7),
--	MUX_GATE(CLK_TOP_PCIE0_MCU_SEL, scp_parents, 0xB0, 8, 2, 15),
--	MUX_GATE(CLK_TOP_PCIE1_MCU_SEL, scp_parents, 0xB0, 16, 2, 23),
--	MUX_GATE(CLK_TOP_SSUSB_MCU_SEL, scp_parents, 0xB0, 24, 2, 31),
-+	MUX_GATE_MIXED(CLK_TOP_SATA_MCU_SEL, scp_parents, 0xB0, 0, 2, 7),
-+	MUX_GATE_MIXED(CLK_TOP_PCIE0_MCU_SEL, scp_parents, 0xB0, 8, 2, 15),
-+	MUX_GATE_MIXED(CLK_TOP_PCIE1_MCU_SEL, scp_parents, 0xB0, 16, 2, 23),
-+	MUX_GATE_MIXED(CLK_TOP_SSUSB_MCU_SEL, scp_parents, 0xB0, 24, 2, 31),
+-static const int aud_l_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_CB_APLL2_196M,
+-				     CLK_TOP_M_D8_D2 };
++static const struct mtk_parent aud_l_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_APLL2_196M),
++	TOP_PARENT(CLK_TOP_M_D8_D2),
++};
  
- 	/* CLK_CFG_8 */
--	MUX_GATE(CLK_TOP_CRYPTO_SEL, crypto_parents, 0xC0, 0, 3, 7),
--	MUX_GATE(CLK_TOP_SGMII_REF_1_SEL, sgmii_ref_1_parents, 0xC0, 8, 1, 15),
--	MUX_GATE(CLK_TOP_10M_SEL, gpt10m_parents, 0xC0, 16, 1, 23),
-+	MUX_GATE_MIXED(CLK_TOP_CRYPTO_SEL, crypto_parents, 0xC0, 0, 3, 7),
-+	MUX_GATE_MIXED(CLK_TOP_SGMII_REF_1_SEL, sgmii_ref_1_parents, 0xC0, 8, 1, 15),
-+	MUX_GATE_MIXED(CLK_TOP_10M_SEL, gpt10m_parents, 0xC0, 16, 1, 23),
- };
+-static const int a_tuner_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_APLL2_D4,
+-				       CLK_TOP_M_D8_D2 };
++static const struct mtk_parent a_tuner_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_APLL2_D4),
++	TOP_PARENT(CLK_TOP_M_D8_D2),
++};
  
- /* infracfg */
+-static const int u2u3_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_M_D8_D2 };
++static const struct mtk_parent u2u3_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_M_D8_D2),
++};
+ 
+-static const int u2u3_sys_parents[] = { CLK_TOP_CB_CKSQ_40M, CLK_TOP_NET1_D5_D4 };
++static const struct mtk_parent u2u3_sys_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_NET1_D5_D4),
++};
+ 
+-static const int usb_frmcnt_parents[] = { CLK_TOP_CB_CKSQ_40M,
+-					  CLK_TOP_CB_MM_D3_D5 };
++static const struct mtk_parent usb_frmcnt_parents[] = {
++	TOP_PARENT(CLK_TOP_CB_CKSQ_40M),
++	TOP_PARENT(CLK_TOP_CB_MM_D3_D5),
++};
+ 
+ #define TOP_MUX(_id, _name, _parents, _mux_ofs, _mux_set_ofs, _mux_clr_ofs,    \
+ 		_shift, _width, _gate, _upd_ofs, _upd)                         \
+@@ -238,9 +335,10 @@ static const int usb_frmcnt_parents[] = { CLK_TOP_CB_CKSQ_40M,
+ 		.mux_clr_reg = _mux_clr_ofs, .upd_reg = _upd_ofs,              \
+ 		.upd_shift = _upd, .mux_shift = _shift,                        \
+ 		.mux_mask = BIT(_width) - 1, .gate_reg = _mux_ofs,             \
+-		.gate_shift = _gate, .parent = _parents,                       \
++		.gate_shift = _gate,					       \
++		.parent_flags = _parents,				       \
+ 		.num_parents = ARRAY_SIZE(_parents),                           \
+-		.flags = CLK_MUX_SETCLR_UPD,                                   \
++		.flags = CLK_MUX_SETCLR_UPD | CLK_PARENT_MIXED,		       \
+ 	}
+ 
+ /* TOPCKGEN MUX_GATE */
 
 -- 
 2.43.0
