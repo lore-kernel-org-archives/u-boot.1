@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29344FD8769
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 13:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDEDFD876E
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 13:40:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 995EF84308;
-	Tue, 17 Mar 2026 14:38:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F5CB84308;
+	Tue, 17 Mar 2026 14:40:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AI8olKeu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IW4KW4uu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96AB88430A; Tue, 17 Mar 2026 14:38:50 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 5A08C84310; Tue, 17 Mar 2026 14:40:15 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5852284307
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 14:38:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BC25842FD
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 14:40:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-40f0e14b9f9so3892890fac.1
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 06:38:48 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-46702742c7dso1105476b6e.1
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 06:40:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773754727; x=1774359527; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773754812; x=1774359612; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+tnu8V5w8kMnCAvEVXPPxe7sPTI9FjKfYjv2Q+HQraU=;
- b=AI8olKeuByndb4FSyA5YWqMZv1Vw0zTAfqISwrrzmSBHKPm+tT2xdKtdW0hR7INDfn
- 8eFq6pH3PBWd465gQOa++McRaO83ONWnPIEI6DG4JzNT+CSKRqbD6PZ1SCtu9S4T/EF3
- AWtbdYIxhD8m7Zh2JnBE2lkirn9xYS5dZKXXI=
+ bh=cFEBVuGPUl3GGWLDYyozr4IiddSjdb8EVjj+j3g90Dc=;
+ b=IW4KW4uuXqWKNfaUPBqw7u2RVa4l+29DnoqYYxOga6EBeGN5Lg9MrdknBGDMYoPUkh
+ ZCgACgBhG26kD2oWI+lM5jJePbje6SCFMGT/lYPHeHMugToOFdm52bAzNkTg4I27VpFB
+ xQr4/ombcRcCcUpCSrFuzt8l9kIMcfQZZOnco=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773754727; x=1774359527;
+ d=1e100.net; s=20251104; t=1773754812; x=1774359612;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+tnu8V5w8kMnCAvEVXPPxe7sPTI9FjKfYjv2Q+HQraU=;
- b=ireNZYEqMg7bgFk0nwqGzfgxNC/0+fydEuTecIKNHXHERcA6UpAIpAbSqUxb3a9LvD
- 2e5FvTu7TTkPhsl2oQVZ65GSpd6t9HoOg+5bB0tcqxq4Is01KnM7jVt3E3SnzCrOWexi
- LFAIDhz/RpiKb8a8MMJXvfeZ1h1fTvv4I1ysSuoNtFxOKkE4a5pB6UW3zCL9SP6Y0oo9
- 5kFUEO1wCCBdgUBRVh3EwJ4M9mV6Rg2DhVXaAetHB4f1G6GtGZJtkb4ONncQGi37O35x
- 2FVdG2vUrKegpjCEWdQVI6TtnRfTQWZov7uQrlSEBqK9KBaDPh5VOopHtyEsiGWoTZDw
- nyqw==
-X-Gm-Message-State: AOJu0Yx6YDPn+wJeTw+gQAypuMESmIlQLNNcbJafsNhcztB0bQcbACKc
- fVs32SrJV6Nk0dDGaeKQLuXdwwm0KeMw7UjMVTkQ+4cK7BX78Qxbco4/Kl5zGV1sUBc=
-X-Gm-Gg: ATEYQzzd79H8qMIy9ntWVZFUh0FkE8iqx50idWxq2Qyi2SrsU5L7jrrNJE1sM5V5S25
- vAqObWMH0DC3jCWJBVmFiGZ06gsdK2UQEgqBd3zgWvFH/0E62EIZh/v4FMxgZ9u/Oq5bPT6ig6/
- n4I4/g+fZKqsGox5DleQDTE5KmcOC2xYFtTLvZprfU26PtFZnhuv4UJTiQLflJDP8BIKJP/n0S3
- zYZ3393H6KMc0Hq6xfVY/y2ML9pOvQ2PFGp3z38OVAZMRqOY4xegRYsf5YNuvRXkolBKeTkOrOt
- NAUUu9EYRANyYELjyGE9TyyIwYMIV0UfphKFSGVEJvN9+eHa7Jt3mio9Aj5A3QUpDbjI2snkS5n
- 7j9QR4cTdAVybIrdttR6O0Sh8aF68rPhrTuz4mob+0xiX1c8SoH31zEKq8VeIoNvxKHKbAmFLJE
- N8el5MOSSQfRI98NKJzgMzL/QB8/rZ2ImZzMAIOPMdM0ANdkeuXe9G37XZebFKHJ5RhbAHR/+Bi
- X27NFRA5iREwr36utmBCzNMu8gKfiwddoTxvdnGZX6dscrP
-X-Received: by 2002:a05:6871:2e91:b0:417:298d:a23b with SMTP id
- 586e51a60fabf-417b93e2c54mr10703950fac.43.1773754726788; 
- Tue, 17 Mar 2026 06:38:46 -0700 (PDT)
+ bh=cFEBVuGPUl3GGWLDYyozr4IiddSjdb8EVjj+j3g90Dc=;
+ b=eZw6y7L/3Id5GMwxxM7qoOETdqU12gYk+9lGSjBmnXpnqPhU/ub9znpWuRoraANc4f
+ SfvgIjOpC8/DxuSd05W/jldLtszW2xi4BsRynD0OF6yuUUP5ESzFxwyGw1M6BJKqfww0
+ TVkaumGIR/4jaQhYFkO4uIw208hZv9bGJade122DhBxXn1MfohlgqWOVBlrG/taB/nql
+ owJy5cVkQpg7KrNQ6+u5f7E6BTloypPy2vcr29gjF50ACNdg5BqaibfKY/Euivw2sj8E
+ xDhrWpQhj7PyT/v7rxtot9A6qNNi3t/XwVVxjA38rHnB/3LaBKpVlHaSPSqqniQ/Unz5
+ V45w==
+X-Gm-Message-State: AOJu0YxoNhlkXrqcipw9jTqdqldgXgkrVaROrnIAo0w/NrjRJ398EAN7
+ 5dJTj4AYM1fHT2/wFdM9X2qlOY1xFiAJaV0bQPqU13x10FyzFpSNyTGZMTrwcec8avA=
+X-Gm-Gg: ATEYQzwVx9T7fKUwTHuZ5qwv/X8KWWLT30oTepaLWMdsmffeW+uq3rsgZKK3lBGJAiN
+ X5CJYU12EUfnliCu6o/8Vdlf7hqd2td17QvZY16aaVQ5X1yyWp693kKX1tPi08j/LDvQfQnW6i0
+ T1ac4gf0GVrg1hTT9ry/bRnOIy0yQlAtd6BQ82xgmwMrWpnoBXoAXTbfZ3s/+9NvOwonm9V3CgR
+ 72FKvrL7RrNgNgAChwTXklMaFU17delCojeYv1uRcDNKOAT2Yl+afNOAvIR5RjYBM59WFNvCY8d
+ yhbuR4ibh0/Lr9k6DMrgXqg1b2VCrqmiL2rdK7SSptFLXfuM1BLO+oU2Mey5Rb8KLyTI+VYNmNJ
+ 5oMaa0+e/gwzpKnpwTAgAyZCpRo+fhICbB8B1s6REX2mD8j4NOuhITt1t6CKcv7T072B7ll8tiG
+ u5oe+kGQNg9yblhRsEDeoMBW4QW5hGzSrrT2LLyONaAPiazo5HBbydd+VtvWxHj4iN94xcqvqTD
+ K2g+OEwarwy/WDcQGCQvQR2BAs5B5TgSVIPKQC8+25nE3Ou
+X-Received: by 2002:a05:6808:5281:b0:467:36f:1832 with SMTP id
+ 5614622812f47-467574290b5mr9500659b6e.44.1773754811575; 
+ Tue, 17 Mar 2026 06:40:11 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-4177e268f37sm18515081fac.6.2026.03.17.06.38.45
+ 5614622812f47-4674de9eee9sm8826873b6e.13.2026.03.17.06.40.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 06:38:46 -0700 (PDT)
-Date: Tue, 17 Mar 2026 07:38:43 -0600
+ Tue, 17 Mar 2026 06:40:10 -0700 (PDT)
+Date: Tue, 17 Mar 2026 07:40:08 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Fabio Estevam <festevam@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com
-Subject: Re: [PATCH] optee: Correct dependencies for BOOTM_OPTEE
-Message-ID: <20260317133843.GP502704@bill-the-cat>
-References: <20260317012452.4162719-1-trini@konsulko.com>
- <533317d3-76f5-4e6f-a8f1-d879fc642de2@mailbox.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] reset: Correct dependencies for RESET_RZG2L_USBPHY_CTRL
+Message-ID: <20260317134008.GQ502704@bill-the-cat>
+References: <20260317012443.4162600-1-trini@konsulko.com>
+ <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uRoVI/z++nf7Af6z"
+ protocol="application/pgp-signature"; boundary="f/lhjrdYplonJ4vX"
 Content-Disposition: inline
-In-Reply-To: <533317d3-76f5-4e6f-a8f1-d879fc642de2@mailbox.org>
+In-Reply-To: <ed88ec35-7d53-48df-a65b-7da1298e265b@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,72 +98,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---uRoVI/z++nf7Af6z
+--f/lhjrdYplonJ4vX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 17, 2026 at 03:32:16AM +0100, Marek Vasut wrote:
+On Tue, Mar 17, 2026 at 03:33:57AM +0100, Marek Vasut wrote:
 > On 3/17/26 2:24 AM, Tom Rini wrote:
 > > As exposed by "make randconfig", we have an issue with the dependencies
-> > for BOOTM_OPTEE. This symbol needs to select BOOTM_LINUX and in turn
-> > that is only valid for CMD_BOOTM or CMD_BOOTZ. Add this dependency.
+> > for RESET_RZG2L_USBPHY_CTRL. As REGULATOR_RZG2L_USBPHY depends on
+> > DM_REGULATOR this symbol must also depend on it as well.
 > >=20
 > > Signed-off-by: Tom Rini <trini@konsulko.com>
 > > ---
-> > I am looking for feedback on this, so I've added the board maintainers
-> > for the platforms which enable this option. It looks like this is only
-> > valid on 32bit ARM platforms, to start with and not 64bit, is that
-> > correct? That's why I excluded CMD_BOOTI from the list. I suspect that
-> > this should really depend on CMD_BOOT{M,Z} and BOOTM_LINUX, and not
-> > select it. If someone can confirm, I can do that instead, or someone can
-> > just do the replacement patch for this. Thanks!
-> >=20
-> > Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
-> > Cc: Fabio Estevam <festevam@gmail.com>
-> > Cc: Marek Vasut <marek.vasut@mailbox.org>
-> > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> > Cc: u-boot@dh-electronics.com
+> > Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > > ---
-> >   lib/optee/Kconfig | 1 +
-> >   1 file changed, 1 insertion(+)
+> >   drivers/reset/Kconfig | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
 > >=20
-> > diff --git a/lib/optee/Kconfig b/lib/optee/Kconfig
-> > index 34b9d8afe675..9251faf73cd7 100644
-> > --- a/lib/optee/Kconfig
-> > +++ b/lib/optee/Kconfig
-> > @@ -40,6 +40,7 @@ config OPTEE_TZDRAM_SIZE
-> >   config BOOTM_OPTEE
-> >   	bool "Support OPTEE bootm command"
-> > +	depends on CMD_BOOTM || CMD_BOOTZ
-> ARM32 SPL arch/arm/lib/spl.c has this piece of code, which does not depend
-> on "bootm" command. This is used by falcon boot to jump into optee-os , w=
-ith
-> the optee-os return address being Linux kernel entry point. So I don't th=
-ink
-> depending on CMD_BOOT{M,Z,I} is enough ?
+> > diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+> > index 66911199c8ba..3f0ec50510c0 100644
+> > --- a/drivers/reset/Kconfig
+> > +++ b/drivers/reset/Kconfig
+> > @@ -239,7 +239,7 @@ config RESET_AT91
+> >   config RESET_RZG2L_USBPHY_CTRL
+> >   	bool "Enable support for Renesas RZ/G2L USB 2.0 PHY control"
+> > -	depends on DM_RESET
+> > +	depends on DM_RESET && DM_REGULATOR
+> >   	select REGULATOR_RZG2L_USBPHY
+> But this already selects REGULATOR_RZG2L_USBPHY , which according to
+> drivers/power/regulator/Kconfig contains:
 >=20
-> 77 #if defined(CONFIG_BOOTM_OPTEE) && defined(CONFIG_ARM) &&
-> !defined(CONFIG_ARM64)
-> 78         if (spl_image->optee_addr)
-> 79                 boot_jump_linux_via_optee((void
-> *)(spl_image->entry_point),
+> 508 config REGULATOR_RZG2L_USBPHY
+> 509         bool "Enable driver for RZ/G2L USB PHY VBUS supply"
+> 510         depends on DM_REGULATOR
+>=20
+> which does depend on DM_REGULATOR transitively ?
 
-Ah right, I forgot about xPL_LIB_BOOTM. But, is this 32bit only?
+That's why Kconfig complains about the unmet dependency. "randconfig"
+does some fun and apparently valid things.
 
 --=20
 Tom
 
---uRoVI/z++nf7Af6z
+--f/lhjrdYplonJ4vX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablZYAAKCRAr4qD1Cr/k
-CrtSAQCJNGwbMKssabkxLSXm78Qbg+/+dkTiyJccje0WnM1BQAD/VWrCWmZgOHyY
-tKTFtKpmS3vN/fv9a/ip8O8248dWPwo=
-=E7O/
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCablZuAAKCRAr4qD1Cr/k
+CrlRAP9Cwom88R/ToL6GIhqyA2SJEbRZzHWx6b6ZeTnySFnFCgEAic15lmIltI7Q
+HZT0/rbvUd2/3u2AeWwS/cDQ2VgkOwU=
+=9aJJ
 -----END PGP SIGNATURE-----
 
---uRoVI/z++nf7Af6z--
+--f/lhjrdYplonJ4vX--
