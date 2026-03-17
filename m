@@ -4,105 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3EC0FF6E93
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:39:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99760FF6E9A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28740840CF;
-	Tue, 17 Mar 2026 23:39:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7CF98410A;
+	Tue, 17 Mar 2026 23:57:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zvTXRN1x";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="zA7zaiho";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60FA18414B; Tue, 17 Mar 2026 23:39:49 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id A8C238414B; Tue, 17 Mar 2026 23:57:19 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1329D83E36
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 23:39:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15DDE8409B
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 23:57:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dlechner@baylibre.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7d744d9acbeso2409925a34.1
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:39:46 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-67bd4e63606so2200977eaf.1
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:57:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773787186; x=1774391986;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773788236; x=1774393036;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FFzrCMC+9fUxZT8ITl0u4HsmglHzRwRSWJCHLF32Rms=;
- b=zvTXRN1xooiBrA9KB6FUwrcocB0jf9nNtUOWvFumWSD7EaaaIcdVPZQyBQ8f2R9LEB
- nLTt3uut79QU5rYKDuffCHmnxVJsN2Q57rDyCfB0MMBGdg5Uf1Xbg/OnJfFEotQVh1m2
- nJcVTFbqe1UjmRfd9YBi6FgPv56rITeQmjMu/l5969Oq3HpoElDz46/yAeTKaa1geIdD
- u6z2f26L1o0aONhy8eI4VtjUQqY397KFxzaqzrfr6sKe5TjO4703h6OD04Mt/5fNTAv9
- HQqk6YnbDRUxoNnK+Nmi1MreA/lts+UMbCp749W38lQZDsJsF4WS6fumK4LiZBD/fxNe
- cGvg==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fkeSW/82kNPZCB5lT0mgGCDKY3mDUlYVT5wSdqrngik=;
+ b=zA7zaihoFA1chP5NrHmmguCXAtGrkgwMhY7aaqWqsdKeHlsJiGpzslpQOX3tdEOLGv
+ VJJhDnP7yo8ttGG+TPvjAzw5u6YqRqGExcY882sZ6BinJ7vHxENBoNAcfTJCjDN4pa5o
+ rHcs/N1KHtB1Exxe1ERvegf+6qeikpagRsxOwn+41dMb8XQGQbMYYyzZ3AI5GZumhXmR
+ Jqt7jWQkkMEzgmR6D8as+LEwoGxztTIv1fuCa4D/HzsuQW2DJsC5+XCYJT9QIjyh014G
+ HZa8zaL74tRkoW2nhvpXgWmYc5FgvqhmvQ1zNykl0kpcoPtqd1NRaXrEtpgopV7qMR0I
+ ibMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773787186; x=1774391986;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=FFzrCMC+9fUxZT8ITl0u4HsmglHzRwRSWJCHLF32Rms=;
- b=ULJe7WcShCJR+hwXNM3V1ohJEghuJHo97u4zzahUUiaiHkh63c7VxFPFuq9LuKpPAh
- lvFGY93qZ1PzSwd0WhUPJ5G0CMiXscpr9tLjbx+jq7+n67J9f9ZJ95FDZXMbLxMCMJMj
- SufgwkNczLjFoOzLUIiiWOpAcb+ud/5hxr71w40TBhYpYTgj7dts3LfwAVW05Q168RZY
- MFBu0D+/zPCnYH1euURP3CaGWpbo7ri/bVxlIfUuz99ad1J8/hdxT5Mb1K20QfJU/f0T
- I8mohgwlYn5WX9vjbLh8iBqsiqffyBT11n5rHL6yML3tvBSWKWHOQgDYmiMK/PD0Mm23
- 8KMQ==
+ d=1e100.net; s=20251104; t=1773788236; x=1774393036;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fkeSW/82kNPZCB5lT0mgGCDKY3mDUlYVT5wSdqrngik=;
+ b=TwWYSc9EmQrwv9mKpV/RWjGD3jIW/UY0PZ+NXPcOTlCINzyeuQVAa7Kq2vNJ0f9jrG
+ N3V9fJzruETavnQSCNTn42adsZO+uETQZneQWHqUXaUIO5H0x3Q7zNxPO7itoyySKzXa
+ s/R1YKtdKgc3BYCbXcbG5HR2ZVxndIzVrenCCKDbk4HVnGGPSUysSTo1k9NfR1HwzTM/
+ OEJK5O6n/pyt0S25hchSpe+0uiQLfE9mnhEKz9tkTtVjbwrl/aACDp+lr8JRYtaM6wn4
+ aO2U+5P2C8Bi57ULv4Du0c/1m2bhfMoUCuAl7yPb36XniKNey0rtQIPLClNrv3yzIqEC
+ La9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX+t1T0ph6HsovGvb/6p0oQlHx8dqCRfhaH6rZrWYzwetDKjUdn9wI0VIW/aQMEYYQSAD3WWcc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAUCFZg3LPBxQxAuhIZmCXfhHuR1P8nEd7SGY9j7OJBpgDU+W8
- Pz9XNhuOgaJeQMkJ7JcocIRDY0qUmj5SgeRlxT3sfQHsCtz9YFWKOwWVIqkcD1YUP9I=
-X-Gm-Gg: ATEYQzzhSo0QkVuGRk9tWiLgEHIBAl971KH6d+sTz1WNgouHXOyaLtcJTj9tS+1oPF5
- 8N1uIyq4H1R2etUDd0vPCkN/VxRT1Sz6+ErlE/iaqVEkaeQ5kQpsWify0vXL9qUjZVeZudzhkvS
- NT7ve17bwvkbzxvGXUW/d0vAERNfHm45+P923XiG4bMPyjCL1h+an9st3kNlRo9A5pehPBBG4Br
- eJ8hcVvv6AqOsd4msQVggqnJLcdQczfD/5c6uQjlSVlJjgR3naDjY7A74Tf2ueEfpEX1VprsYTi
- FDQNXnv+5nivczwh/MF++si1Dksgj8oG44u9hlrWYegs/CbJ3Gsc0d4GUC0HLUhFFIOU2z9tP1u
- 98eTtWSGw56jbz2hWL4j8hd5Ss4xm+PtXy8GLlBIKyFV9ZF1BHFS+sNRphs9k7WwdafIplkrH10
- 2EHFWJVBLzRGc7K8IO5xZlbsHWWA27eUf8alfl
-X-Received: by 2002:a05:6830:6f83:b0:7d7:5405:193d with SMTP id
- 46e09a7af769-7d7ca6e76d6mr879309a34.24.1773787185707; 
- Tue, 17 Mar 2026 15:39:45 -0700 (PDT)
-Received: from [127.0.1.1] ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
+ AJvYcCXPXpGU70Y/gTqVC98XRLV/RQyCBnDPJeWlojMNnDIcVw644+YEnjgov2hZgJ6w2uFlAQWi/fo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzYl9TUAe50bl5BViw/n09K3mG0Vq25xBopgckJ/S7r+qNuoAwY
+ 6ZhMpqlAbGetbBzcKmo32mDsMnaPpu2t2tbqOBQ0GhF5O77k+TQYauxRv7tkKyQPjmg=
+X-Gm-Gg: ATEYQzz3NAXrfrwGk9+Ys5heuD3je+SrQWbtQMsAHuzL2kUlZ16eyRS7+PgW/hvqaAG
+ EabXkCbjq6ReRpF5LcSVez62reOaVFcbkbfr3XORCSgtSuYcqNnIbf4ANELU8k0URmRBujRebZY
+ NjF+zO/98bT+TPp2b2whLXuExswa/muqcAJrBHNSgUy0OnXY7+Pxewew7IhixhbOSiXaZ6D4SnR
+ 8eqjCPObSVjpLgZMKLz10YmNUdYFaGDzCrxzDDsqqhna0M7AzLOY2L6/BsYT/PZyg9r5C/qeoog
+ 0z6w9h5kg6+F7fU3jBSwKAK+/ZV/mtHnY9BXn7jA2Tq+dL5HBUrvzMIGZbD/qAXNSSubNqElpf+
+ UXqCu/UejzsftezfYDF713IihjWNMc+ZLMpq2E4sD9TjpeoxAjGq+MGzZtpWpefNp4QVyBeg2Pj
+ mqIT6Z+K8hXYlQ5JtnfIKR/6o=
+X-Received: by 2002:a05:6820:1746:b0:67b:be3c:f8b6 with SMTP id
+ 006d021491bc7-67c0db2a165mr809766eaf.49.1773788235672; 
+ Tue, 17 Mar 2026 15:57:15 -0700 (PDT)
+Received: from freyr.lan ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d7c97ef88fsm912544a34.0.2026.03.17.15.39.43
+ 586e51a60fabf-41bd2cbcdb4sm1000846fac.13.2026.03.17.15.57.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 15:39:44 -0700 (PDT)
+ Tue, 17 Mar 2026 15:57:14 -0700 (PDT)
 From: David Lechner <dlechner@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Tom Rini <trini@konsulko.com>, David Lechner <dlechner@baylibre.com>
-Cc: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
-References: <20260306-clk-mtk-remove-clk-bypass-xtal-flag-v2-0-b253b49f17b2@baylibre.com>
-Subject: Re: (subset) [PATCH v2 0/9] clk: mediatek: clean up flags
-Message-Id: <177378708602.670517.13688265575638221774.b4-ty@b4>
-Date: Tue, 17 Mar 2026 17:38:06 -0500
+To: Tom Rini <trini@konsulko.com>
+Cc: David Lechner <dlechner@baylibre.com>, u-boot@lists.denx.de,
+ Julien Stephan <jstephan@baylibre.com>
+Subject: [GIT PULL] Please pull mediatek-for-next-2026-03-17 into next
+Date: Tue, 17 Mar 2026 17:56:06 -0500
+Message-ID: <20260317225650.900269-1-dlechner@baylibre.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1080; i=dlechner@baylibre.com; 
- h=from:subject:message-id;
- bh=NwLVEE0UMu3UFizt+l4a9Dw5lwe7UduJN3cBjF/TrXY=; 
- b=owEBhAF7/pANAwAKAcLMIAH/AY/AAcsmYgBpudgotFhbcIEs2HYEzrj7FFTzR0LPIrLShRw8Y
- g6z0YP+i/CJAUoEAAEKADQWIQTsGNmeYg6D1pzYaJjCzCAB/wGPwAUCabnYKBYcZGxlY2huZXJA
- YmF5bGlicmUuY29tAAoJEMLMIAH/AY/AzpMH/ROEP+k5LxQevkfFjXhzYCBGBhBkUqgBwUTVqac
- b+/nXKa45YYpuZ/O11tlT0KKQ+5ryfDdEzLNCqLzkQH7u/P6BliibtGdEIDjKPjTKFuYbxmM+Wk
- MTHyizh9kg4DGPlb7IEhiJro2xOMF/Bg3r+PVlzyQQ5LtSHniCuHJ+yeTHxIH/iIdVgImv5Us4m
- lG3229Uwo8xcjL0rk1j3EKSLTDS8OPI0DECIvt+ameLgHhffjtnEiP+klzjvZv7ile/RO1DlqVX
- 98+T1YoqxLZelT50UkWIe1gN32fLDp6Mupe8jpZrjP03YN8LEJ19aHGbcqlIrQmxmZGfSTB5OnZ
- woDE=
-X-Developer-Key: i=dlechner@baylibre.com; a=openpgp;
- fpr=8A73D82A6A1F509907F373881F8AF88C82F77C03
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,32 +98,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 06 Mar 2026 16:05:47 -0600, David Lechner wrote:
-> clk: mediatek: clean up flags
-> 
-> The main point of this series it to get rid of the CLK_BYPASS_XTAL flag.
-> It was a bit of a hack to allow mux clock parent arrays to contain both
-> CLK_XTAL and CLK_TOP_* clocks. It's usage doesn't work in all cases and
-> is easy to get wrong.
-> 
-> [...]
+The following changes since commit a27980786cfb3c430aa1c05da8e79180c584d221:
 
-Applied to mediatek-for-next, thanks!
+  kbuild: strip sub_make_done from test-script environment (2026-03-16 10:41:40 -0600)
 
-The rest will get combined with "clk: mediatek: unify mux clocks" series.
+are available in the Git repository at:
 
-[1/9] clk: mediatek: rename HAVE_RST_BAR
-      commit: f922929828bc54cc015a4a5d0b2a28dfdf476f27
-[2/9] clk: mediatek: rename CLK_DOMAIN_SCPSYS
-      commit: e40978fff3d337e8d1535545455a7387d0e6dd02
-[3/9] clk: mediatek: add MUX_GATE_MIXED macros
-      commit: 4e184ff5a0e3d6c569e5a5f5a1ad8e3c495ddff9
-[4/9] clk: mediatek: move common PARENT macros to header
-      commit: 7595833599e9f73e58403bc55f475d62537ba068
-[8/9] clk: mediatek: set CLK_PARENT_XTAL on fixed factor clocks
-      commit: 142c805d470cd02470146d6d70aa9c522d4da16c
+  https://source.denx.de/u-boot/custodians/u-boot-mediatek.git tags/mediatek-for-next-2026-03-17
 
-Best regards,
--- 
-David Lechner <dlechner@baylibre.com>
+for you to fetch changes up to 142c805d470cd02470146d6d70aa9c522d4da16c:
 
+  clk: mediatek: set CLK_PARENT_XTAL on fixed factor clocks (2026-03-17 17:28:43 -0500)
+
+----------------------------------------------------------------
+* A fix for mt8188 clock oscillator rates.
+* New driver for mt8189 clocks.
+* The rest is a first wave of a larger effort to refactor and clean up the
+  mediatek clocks to replace various hacks that built up over time with
+  something that is easier to understand and maintain.
+
+----------------------------------------------------------------
+Chris Chen (1):
+      clk: mediatek: add clock driver for MT8189
+
+David Lechner (11):
+      clk: mediatek: mt8188: fix CLK_TOP_CLK{13,26}M rates
+      clk: mediatek: use correct struct type for infrasys clocks
+      clk: mediatek: refactor parent rate lookup functions
+      clk: mediatek: add mtk_clk_id_is_* helper functions
+      clk: mediatek: add CLK_PARENT_EXT
+      clk: mediatek: add MUX_MIXED_CLR_SET_UPD_FLAGS() macro
+      clk: mediatek: rename HAVE_RST_BAR
+      clk: mediatek: rename CLK_DOMAIN_SCPSYS
+      clk: mediatek: add MUX_GATE_MIXED macros
+      clk: mediatek: move common PARENT macros to header
+      clk: mediatek: set CLK_PARENT_XTAL on fixed factor clocks
+
+Irving-CH Lin (1):
+      dt-bindings: clock: Add MediaTek MT8189 clock
+
+ drivers/clk/mediatek/Makefile                   |    1 +
+ drivers/clk/mediatek/clk-mt7622.c               |   10 +-
+ drivers/clk/mediatek/clk-mt7623.c               |   15 +-
+ drivers/clk/mediatek/clk-mt7629.c               |    8 +-
+ drivers/clk/mediatek/clk-mt7981.c               |    3 -
+ drivers/clk/mediatek/clk-mt7986.c               |    5 -
+ drivers/clk/mediatek/clk-mt7987.c               |    2 -
+ drivers/clk/mediatek/clk-mt7988.c               |    2 -
+ drivers/clk/mediatek/clk-mt8183.c               |   12 +-
+ drivers/clk/mediatek/clk-mt8188.c               |   10 +-
+ drivers/clk/mediatek/clk-mt8189.c               | 1746 +++++++++++++++++++++++
+ drivers/clk/mediatek/clk-mt8195.c               |    6 +-
+ drivers/clk/mediatek/clk-mt8365.c               |    4 +-
+ drivers/clk/mediatek/clk-mt8512.c               |    6 +-
+ drivers/clk/mediatek/clk-mt8516.c               |    6 +-
+ drivers/clk/mediatek/clk-mt8518.c               |    6 +-
+ drivers/clk/mediatek/clk-mtk.c                  |  279 ++--
+ drivers/clk/mediatek/clk-mtk.h                  |   54 +-
+ include/dt-bindings/clock/mediatek,mt8189-clk.h |  580 ++++++++
+ 19 files changed, 2554 insertions(+), 201 deletions(-)
+ create mode 100644 drivers/clk/mediatek/clk-mt8189.c
+ create mode 100644 include/dt-bindings/clock/mediatek,mt8189-clk.h
