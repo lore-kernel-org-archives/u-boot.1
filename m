@@ -4,65 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BC1FED9F6
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 17:24:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 368FCFED9F6
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 17:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A691D84201;
-	Tue, 17 Mar 2026 18:24:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3F8C84222;
+	Tue, 17 Mar 2026 18:25:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vK1w5j8W";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lWbtCslc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D97DA8421D; Tue, 17 Mar 2026 18:24:07 +0100 (CET)
+ id 1F57684312; Tue, 17 Mar 2026 18:25:29 +0100 (CET)
 Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67F5B84137
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 18:24:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5097F842A4
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 18:25:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4fZzMj5D48z9tgJ;
- Tue, 17 Mar 2026 18:24:01 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4fZzPL0j5Lz9thx;
+ Tue, 17 Mar 2026 18:25:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1773768242;
+ s=mail20150812; t=1773768326;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YeP9GJugtFRNg21eot+WAjERADM1XP4AfY4d2g2Hluw=;
- b=vK1w5j8WjkfJYDvxDpZhtpucj55T00VquYW3WyAVnqGF2PYf97dfQg5FK0mqs69fTbJdTS
- 8nn1ruVhvzopzwf7z0uYK6yHK10Eic7qR/0dmU2Uz/DfFipf71+R+oWtXvWch2/Fur1pYb
- xlWZOZTkethkwygJ2JSW4SzgODM37vkqxtqxGMMj1nOIfyzeckBzw6E+bdZvbffBWK9a8h
- Fzfjv47Sr+wIyOYr7N6ktxMmiRmMubxBKuT0rN1gPscrbWOBQY78izQn4N2w32bCO68Gy5
- tCItx23anhGjDDYnDtRlN2rqSmmaBLIq5XDjtS7cmP8NtJkAS6wkOXslLmizSA==
-Message-ID: <5f3fa5ce-24fa-4f43-b2c3-4382c36d8fbb@mailbox.org>
-Date: Tue, 17 Mar 2026 18:23:58 +0100
+ bh=FGGteJ+j1xNfN0cjUQjS7jd0/cmjJSD2/wGJd/5mcE0=;
+ b=lWbtCslcxoKw3mozxz/Ae1asztGW2HSSGyZgLvBmzDTGU2wjZRiBmbzaq0AE7i/q4EcwVG
+ NiL5DFOGd95XHvRZfEYxlJkxTYBO8eR/W8Uz5aEi4CNwtlfrPe/v9a6qAJwynWNY+HvIgx
+ 0DntjO9AdW0Fk3thnX6rn0VlrY4qes1I+TCEAQkf9eu6Xz6sD4o1a+Vib6/2F1WBHTplsY
+ z+PpEFbKPvZTZ4lxWhfoCNlg793lWS1mFHeJGGx1FoEygmEbKz7mmYZ3GYahEK8vIUWXmG
+ pSAt+gon/fDXyYp/caMZ9hunlweBC65Cq8B9G4Sv107jSHjrBqWBx2gguwX6TQ==
+Message-ID: <eb757648-a2cd-4cb0-a266-c622830a58f2@mailbox.org>
+Date: Tue, 17 Mar 2026 14:57:01 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: relocate: Introduce data-only relocation mode
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Heiko Schocher <hs@nabladev.com>, Jerome Forissier
- <jerome.forissier@arm.com>, Jesse Taube <mr.bossman075@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Udit Kumar <u-kumar1@ti.com>, ilias.apalodimas@linaro.org
-References: <20260315235510.304677-1-marek.vasut+renesas@mailbox.org>
- <6AD955F3-6535-41DC-9F1F-B8FD663E7BEC@gmx.de>
+Subject: Re: [PATCH] doc: overlay-fdt-boot: .dtbos do not need load addresses
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20260317131336.673240-1-ravi@prevas.dk>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <6AD955F3-6535-41DC-9F1F-B8FD663E7BEC@gmx.de>
+In-Reply-To: <20260317131336.673240-1-ravi@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: i1mmap9s75cpjtwqytzhuzuxutw7tju6
-X-MBO-RS-ID: e5d4ba22577994480ea
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 57aca9419286e7f25b9
+X-MBO-RS-META: o16futyunywt59e33goo1izy1pshkjpg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,15 +73,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/26 8:46 AM, Heinrich Schuchardt wrote:
-> Am 16. März 2026 00:54:05 MEZ schrieb Marek Vasut <marek.vasut+renesas@mailbox.org>:
->> Introduce new mode of relocation which relocates only data, not code.
->> This is mainly meant to relocate data to read-write portion of the RAM,
->> while the code remains in read-only portion of the RAM from which it is
->> allowed to execute. This split configuration is present on various secure
->> cores.
+On 3/17/26 2:13 PM, Rasmus Villemoes wrote:
+> The requirement that .dtbos have load addresses in the FIT image
+> vanished five years ago with
 > 
-> Ilias has been working on supporting RX and RW memory areas via the MMU. Isn't this compatible with code relocation?
-This is different. First of all, the core has no MMU, it has MPU. But 
-the separation of instructions and data is implemented on the bus level, 
-it is outside of the MPU.
+>    4c531d9f58b ("fit: Load DTO into temporary buffer and ignore load address")
+> 
+> Fix the documentation accordingly.
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+
+Thank you !
