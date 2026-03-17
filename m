@@ -4,133 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1EE7FD875A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 12:29:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB6DFD875C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 12:29:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E914D84277;
-	Tue, 17 Mar 2026 13:29:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id EED238426C;
+	Tue, 17 Mar 2026 13:29:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="eSXR2pNv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W02FTqRr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 568278426E; Tue, 17 Mar 2026 13:28:59 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED6B084286; Tue, 17 Mar 2026 13:29:02 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B9B78425F
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:28:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22FF28425F
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 13:29:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=simona.toaca@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=U/jR5oOD0Mtn7CVOQ3mP4mQl+3DWJ9eO03IXmVIalsWzb5YmgPqR0gpavk+4/pQcBZh96pZG7fEW4HzsbjZq7nQB8UlMZDfFcE3gPeRhmhJquZfwVN+M8ksJPlBysf1fw4N4W0noORt8xg4nv3yl6KkXsgB+IKNNm6g1997v44XkIVcB5e1TwbH6yollnCQuJ8vLpfOAXqBbkTDEGtIUyHDD3L62tu+oA62vMhbN83Uoc2PujEXQHVcZp0dP1rU5HGhNIK2NmlQEuYTnCqpvYXwbfTZlVUiEPsr0HJx4oDc0z7HrzZXJJsT7OjKamslLAVBS4pbBqsMglA+QQUSH0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1ZwStfPmMddRLxi880hDpeiIGo6tlvxrr050L7GRdb8=;
- b=CBcAJjYa2PgfGls+IpY94gzvLIHVY3X83jzHCUPpp0VhWcbLjPFGo8Sqf6KRYtpvjSl654pRYVYowU+CrSMKJ+GpYpxCGUP1mQo+4IuBn1UWZ2BiWAGcMPLIZhVxRVREGBACTK7W884JqrG3qqewjtAULrJ/WLBiUd6igsBQEnxInUvk6yMABSNZL+NtSxskatkvZQ2fsoi2lHVJBHJJ8wp0X8HDsUSeFQT3qz1LeQ8mAd1C1ldRMbzbSX5XTKjO0S762feBgc5YyfiKXYcM03EJ1WBm0PRsSY5TmyUFCp5qAJnhYhRaE4uI/cTuJC7hh91TY7wlFUqwnX5+wLscHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1ZwStfPmMddRLxi880hDpeiIGo6tlvxrr050L7GRdb8=;
- b=eSXR2pNv2XhTju5YzGvr/5noKBoeDQenAuDqt75xe6RgSbU3v6BBaIcbx/hLSYqs9qsMCNBfVOLg7SpZEG000wNbsHQi7O6YrZ5tIeobKpEF1xIWy/8L3Pdc3sXP5xOMJRea4YsQu+PUezyLmJOOBZKh+Dz2ECBoSj+J+MyhxbOxjAnGd0jUD9enWnqDVxi/CyRQm/zondKtVZ9ZzAFv6ZrGB5BWwK6lUTJ7pm5veWJRIAdUMQkYuYr7Dp+Qb3W4Tdz7MCWpt5XX7/VhFpB0zksZ2ZDMoljZDxb+8Oxsexw3bDvvPqr/JnVADn0U0fgnCcrZCvqZmEYXMGztScxD7g==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from VI0PR04MB11917.eurprd04.prod.outlook.com (2603:10a6:800:306::9)
- by GVXPR04MB9801.eurprd04.prod.outlook.com (2603:10a6:150:115::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.27; Tue, 17 Mar
- 2026 12:28:46 +0000
-Received: from VI0PR04MB11917.eurprd04.prod.outlook.com
- ([fe80::a506:3460:d2bc:26e7]) by VI0PR04MB11917.eurprd04.prod.outlook.com
- ([fe80::a506:3460:d2bc:26e7%4]) with mapi id 15.20.9700.024; Tue, 17 Mar 2026
- 12:28:29 +0000
-Date: Tue, 17 Mar 2026 14:40:46 +0200
-From: Simona Toaca <simona.toaca@oss.nxp.com>
-To: Marek Vasut <marex@nabladev.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, 
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
- alice.guo@nxp.com, 
- simona.toaca@nxp.com, ye.li@nxp.com, viorel.suman@nxp.com, ping.bai@nxp.com, 
- sebastien.szymanski@armadeus.com, ravi@prevas.dk, joao.goncalves@toradex.com,
- ji.luo@nxp.com, tharvey@gateworks.com, qijian.guo@nxp.com
-Subject: Re: [PATCH v2 4/5] board: nxp: imx9{4,5}_evk: Add qb save option in
- SPL
-Message-ID: <bgv2qs2kotqahuoduagn2pxwvegthjmoy4gnjbzreukwkmo65g@dbvocyanygg3>
-References: <cover.1773648510.git.simona.toaca@nxp.com>
- <8f6be77bacc6a9abeaf4e9cf6c6f5e01890bc31a.1773648510.git.simona.toaca@nxp.com>
- <ee133e83-8d13-4771-a306-f5f5c2a62b08@nabladev.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ee133e83-8d13-4771-a306-f5f5c2a62b08@nabladev.com>
-X-ClientProxiedBy: FR4P281CA0113.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:bb::7) To VI0PR04MB11917.eurprd04.prod.outlook.com
- (2603:10a6:800:306::9)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-667952fd262so46003a12.2
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 05:29:00 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773750539; cv=none;
+ d=google.com; s=arc-20240605;
+ b=it5FRcV3ac6+JA5Ga+ZDJurhRR5Y9qom3vT28FmOPOKUHzxL3cS6AFBaF/SxMCZ9Qs
+ Px/sZRYc6Zra2XUjO9VvLjD/JJBbT0oQQ51jou7WZpNmSNygBiT9xYLZ8Lb9XoV7L47h
+ wh8JhAhsOoGel3+x0mRUs6UKJEUoryfQqV+065wNLWuKvhI5oJvekC7QzTDRwpc7E9fg
+ jWXdgXhMJ+gAs1YYrtoivL0tXoF7FjfAok+gEO2TRTU+qhFGd0+qQ5HG4X7dZe7alArX
+ 2nko7u6k8XlWK6M5YmLI9IY/ZRSwetjpHSgBT/FBw9PzWPKc9rugoBhrZ0KpEk+OXPm9
+ me0Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=b4sfjXJcKGe+/+P4XfN7RaHEPhjf9oS/MxVoEIvcEnk=;
+ fh=fhia8wkl5xGUmglYw1Css8upJsuw2Nw8UF3lTjP1QAY=;
+ b=Rl0ojlX91zR9ebcAXeYlk4MtE3uBKw/lKwuPDyiT3tTdAHkk+cV3mO6PLOWmC5fhef
+ peh612/lUdJMhP3zSLiMc8323mMCMtx68GoOsZCAIGjuav/c4jFl6pL3hmSINVSTIgiR
+ WprGbRj17Rd41xymTrWmulyK7apm/XWxyS8vNfb/IR11LYCsrD96mPn/u/M4BMYtc4zY
+ q1c/E6gyH1lyibUcL0YuQZe35OgmpM4wqerVrTooRAVxTOr0gEQ03IglGjWXUF6/Gxwp
+ 5xBw9oKgflefvOc8jH9vcNVKm62outchptiNQw3XRz13x3Lz74S8uZIAcjBs5ZL0HOPr
+ ZL8A==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1773750539; x=1774355339; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=b4sfjXJcKGe+/+P4XfN7RaHEPhjf9oS/MxVoEIvcEnk=;
+ b=W02FTqRrklFewj8AykAcCEt0RpSjhEV9IFxbo+pCuhh0zPbr61+aFwYJBG3odhHbje
+ qgA4I2bvJ5COI1us7M88ZSO/zdbjBG0CEBJOyHTD085RIgyqSzyYaKsNB7zRewxwbVd1
+ qoqpfxDNJtaJXgG8XXWGcm/0vkHNTJkPZP4HI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773750539; x=1774355339;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b4sfjXJcKGe+/+P4XfN7RaHEPhjf9oS/MxVoEIvcEnk=;
+ b=RjrUN7xeWPf7GQMX0KOeqL2FNLUX0kbVijQL2IVROp+YZuyNUDucesWG6pOYbMU1e3
+ 8aY5KcETatcKy0Bwl/8jLc13X/67UMrq5fg7vlctJUfuscVngtbg1gZvG5qMDd97yATA
+ IGCT5RYFPUVJ+HUWXox2NH0JHLCNCFliOB6Hl8Dzl5GLlzc6nty0cU3NNo7yfN4FXovM
+ vWrzIz0v0HpFTn1SL6lARIA69Od+59qZsB8yPXvYEHX2h2nP88tLszFVHPYZNUYFhZM7
+ LqgCZ8KzHwgI2RVmMa/rVFlrajSK/pqFvW+YGCBRneTMKdEqM0pOoQ66YXVg2DEyXXlf
+ SYmA==
+X-Gm-Message-State: AOJu0YyvIkAIwA+FzSEq+Q/hJxlPk5bmeMp4dxRDSmLMoEXcBT/eE8J8
+ 4WH4mUNSebSpm8vkLOkT99Es1Q2FuqkX+pjgCn/7VSQ4SyOCN9l6aIBvN2RmZ17dC+i/y/m+j8n
+ x6WGGxDfed+pkHQJa+x+/+jW9BstDO7VFzbHfMIZX
+X-Gm-Gg: ATEYQzywaQOa/vSNIlQ3BA1Wl7C+OsQULqSKUV5LHGSxHQnNOqOhVwFGgFymtisoQPJ
+ G+87Pj+orQcwr+1ZMQUx7doyn7qf87bkPmPryVNR4O8ty/pOU+FFJSXAO/J1qTftSqf9vRQPIv0
+ E18jtgmMJcBWqrXamTEozy3sXHJ3R0HYRjIcd4ZIt1nifkdp3Fh5rmtW+d7PdxFJc+8WPyxgxyh
+ nNobrID0MOzuSrblPIo+/ck24hbP5cncdBZkGS/hVlDeXm6OH6txIGTE5TYuqp2wwRlIdSmMlyl
+ w3/CSw==
+X-Received: by 2002:a17:907:1b21:b0:b8f:a5c8:f75 with SMTP id
+ a640c23a62f3a-b97653bbab0mr1013012166b.52.1773750539376; Tue, 17 Mar 2026
+ 05:28:59 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI0PR04MB11917:EE_|GVXPR04MB9801:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3a2743f2-00ab-4b05-e9e2-08de8420b208
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|19092799006|56012099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info: zZnprnKG2YkpUDUtv122E6L3NQ7TaerTV+yesdtq+LD2LwnFr1eRUCMWg8nM4a2OQjkrKM8Zxumwt8fvyuJrRwJc88vdoGaeDFW/z+ViEkhn28dKO8rHOxsdf9zCuizDtGNelNugXG9gNm7uOYl4xB2eo8PpEsibUni5i/BxVNRxORnsJDtaW9tgLGaeyFzVtZSCRzSVcxQHhI4gTFQlKL7dZ5hyRYTQMCTxDRfbTho0r+htDGkv4gtR5lzbzkVWdPlHFf9kvct3XgrwYqAADAiZquLn5F2G4OarRQ38o/ku1yovyc3R+raowpy+S5/VInIVA9wsSy/GbK195tLcQFE6Emazv35oIQEy6X03LyxV49Ro31c+zKwEEJJgfpHqxTfmvuGBGYV6p9fqJASAAyeUWWgLpux9HKKvtMfV3pbCaA6DJUg0q1eOBN/ZC9BI0r3k5CRBJLI5E+YYg8cj5GblAxoOieUhAb69Bw3miZnZpM68C6o8po5kM8TCcE8O36YMsKRAlXEzDdid0TX9zRqAqmuRJl45hBcy/RPDcnYxjZyuPaCBUDXlBqRicqqhHJ8ZWHh1On+1UpW50wBzZOTKoHrDOqUAbJC9XsrYhsiV+baekOSHZLvSLDiXL40BKvwXD8pMP7mzgZqkqP7gIAho4Skp10vFZpO7iOMPGdGAPW/NIoChm7BX6v2uteof3ajQqeYKYyNjTq2MiX+dPF0YXqGwmQlBlzoqo/09C6s=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:VI0PR04MB11917.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(19092799006)(56012099003)(18002099003)(22082099003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?l+PDJ/gfy+C+FI2TNAxRFQ6dBNOck6x3TAX2LKly/DHKeyIgJ51IxjV9u7VC?=
- =?us-ascii?Q?82RhM4mG8stz8+RuHbPO32ynO8dRBKG9ImAy7Lo11giEdkhO4f/iS+lY8Blw?=
- =?us-ascii?Q?UQ+aeD6nT+ARz19xFWgEr0tyTPAss4FhoL9fhS+M0hZaE2/QfwkPLR8VhlyZ?=
- =?us-ascii?Q?hhJdE0qe0GNhcqCOo6SWdeQ0RuYMJqU7trVqEcU8F1Kz9JvQz3JgEHxk+p/q?=
- =?us-ascii?Q?c0nocdy9u5qVO3KPyvPqoSGZs0d98f5v0hlvt9Go981rPiNHtod3JskZRhUg?=
- =?us-ascii?Q?CiS+DC98fS4FBk0CpxApQbjqmvStuY+GbXriY1/ExakpLy4zzabofp1zAXCN?=
- =?us-ascii?Q?edBT7TBA9x7JwfZua3BS3GfClXe+vhaQ+1yl80yhTie3mxsrLY0v4dDZUtLL?=
- =?us-ascii?Q?IYZ2G0k2hGW4vj7+oM+fc+SNdK9mVrQvzKEqffAvqNll5Ikmmky5iZFDc4iN?=
- =?us-ascii?Q?hpV0JB0m6RZUS14iAHBQgi1gzhj0muapKrvragp+gYquICQj+zliqnfZKf/7?=
- =?us-ascii?Q?KTyP3wc895qXv6J2Ql2xkTHyjtU0SuM8WkXhctpOSLJtVNy0RJCT32Dp2RkZ?=
- =?us-ascii?Q?IWgKKHS3nltN9x6mmvXVM/HVHQ55tRftzVcrvsJi6Emf/4Yoqz/NIZRjyLSX?=
- =?us-ascii?Q?3NVe0MUaiX+jnBbntISm51eR8lGavyn2+dxmeFTDVFzT8AJgf6lA8CuKgwap?=
- =?us-ascii?Q?M0lwZr3HGfNeUO0xJrSzVmWBaVu3Ja3RttZ0z9N5FSiWw7ShVKRqgBff3lQD?=
- =?us-ascii?Q?QYzZGIhJpgDx4AJ3RNe7j8MzrfH+tDwSz8ABqae5BM6fV+xaSuJbgaKpJsYu?=
- =?us-ascii?Q?+hZppi7anuRATfrgYKKaNPa9n+VUa2nv4UMt9iQ1ajBofOPUZ3P8G5Jw4J/S?=
- =?us-ascii?Q?d9ruZNTpKtY6Om+kxhkf3FztmmS0u+JCJQM8PsLquiGcrk1FOaRvuExQ6EJz?=
- =?us-ascii?Q?HqhnKBPBiw0nXsoe2IQW76dKxPd8ixsq/y3y+lEtn+syDHbiA8SCeAZ3XRUu?=
- =?us-ascii?Q?DbsKpDVLchXTrFprObput4TeaXqX6kY1OSItWtRKAvDZHa6l0Nk6P4wMOycH?=
- =?us-ascii?Q?lHdruZM8uZQGe4rZPfgiyzSMkToPulQTfEewFUbPAOxeLAjS6WmfBZ72+cou?=
- =?us-ascii?Q?LQ8KpGOzlTUC2PoTI/iq4cSRPiMGep+fAmWGhTjsk0yYaXXXqjyA4WfUVoyf?=
- =?us-ascii?Q?deC5ntwzPGZoBXMJ7p9pewr3q3fYOg8tvju6tsMu9wrx0tnwhGRTqSrcdqQH?=
- =?us-ascii?Q?lB9nroqr12tzGEyBJr+PbsMRP8t6nVWGEZ84d4x50QAMw9h29hmETezWn/dT?=
- =?us-ascii?Q?N9/lvdPab+B0QPe/DJIleI0oK46YzYdc542H5mZRTzGgnOvm9HmH+IsUNwai?=
- =?us-ascii?Q?aK2QTzkrO+0i9hlN3TDN5CxfUB5M3bYnNhKFMN42l8xEe/ZkYKw66dtO16uj?=
- =?us-ascii?Q?7rdU+96csqPYdKHoPKdAbVsufteIyu1d7R1xJDFg/Q9ZRViWXEAoif4akLwv?=
- =?us-ascii?Q?7+HfUt/vWDLCOpaIn7eBj/3td0HsXPd/c69qHd/0KjlJgrl3fIhxoKHXxnZ3?=
- =?us-ascii?Q?4uM67I09UDBuaNbtaR1KFzCXjkaI3IuD+kIWJnL+QvB6X6wvtA6Zj+AWmCxJ?=
- =?us-ascii?Q?EbiJL5pQtNp+cg29qz/zpuYWpNCdRGfVpKo+cFoi7KLmCr+Ky7n3pxjcFGRA?=
- =?us-ascii?Q?9tfMpMqyVy80oVwm0lk4QtJoNKVOm++tBOm0VGK9viuzlV6LEV/54EjYRUji?=
- =?us-ascii?Q?9SgR9Z3XJg=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3a2743f2-00ab-4b05-e9e2-08de8420b208
-X-MS-Exchange-CrossTenant-AuthSource: VI0PR04MB11917.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 12:28:29.5458 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LnkKXUb50+VcqLNP9y1qKxbD6pHtnKUZT3rp8Dcjz7U/czoUehrHSdogNpK/nWOnze3m46KTOyOlJqTG6f0sUQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB9801
+References: <20260213192838.157084-1-marex@nabladev.com>
+ <CAFLszTjHZ+a17+bZh17DMOJGny6VaWCe4EftpYRE1Bq+RAty4Q@mail.gmail.com>
+ <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
+In-Reply-To: <c3d59858-9855-47fd-aa5a-0b861c4e44e8@nabladev.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 17 Mar 2026 06:28:47 -0600
+X-Gm-Features: AaiRm53b_CYSWkCqHFqk-jkfofgHf3HS4kZ5dG-v0xdqrzv3nNbtyeBeoyGHCfM
+Message-ID: <CAFLszTgNA1xmMNH=qtaKurDZdFW3dscMwwKyQ7iU-7EMMDOAuQ@mail.gmail.com>
+Subject: Re: [PATCH v2] binman: add CST backend selection for i.MX8M signing
+To: Marek Vasut <marex@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,62 +110,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 16, 2026 at 01:22:55PM +0100, Marek Vasut wrote:
-> On 3/16/26 9:15 AM, Simona Toaca (OSS) wrote:
-> 
-> [...]
-> 
-> > +++ b/arch/arm/mach-imx/imx9/qb.c
-> > @@ -428,3 +428,12 @@ int qb(int qb_dev, int qb_bootdev, bool save)
-> >   	return 0;
-> >   }
-> > +
-> > +void spl_qb_save(void)
-> > +{
-> > +	int dev = spl_boot_device();
-> > +
-> > +	/* Save QB data on current boot device */
-> > +	if (qb(dev, dev, true))
-> > +		printf("QB save failed\n");
-> > +}
-> 
-> Should be in 1/5 ?
++Heinrich Schuchardt
+
+Hi Marek,
+
+On Fri, 13 Feb 2026 at 19:51, Marek Vasut <marex@nabladev.com> wrote:
 >
+> On 2/13/26 9:20 PM, Simon Glass wrote:
+>
+> Hello Simon,
+>
+> >> diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> >> index 1bea091344d..a3ebd397d82 100644
+> >> --- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> >> +++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+> >> @@ -167,17 +167,25 @@ The nxp-imx8mcst etype is configurable using either DT properties or environment
+> >>   variables. The following DT properties and environment variables are supported.
+> >>   Note that environment variables override DT properties.
+> >>
+> >> -+--------------------+-----------+------------------------------------------------------------------+
+> >> -| DT property        | Variable  | Description                                                      |
+> >> -+====================+===========+==================================================================+
+> >> -| nxp,loader-address |           | SPL base address                                                 |
+> >> -+--------------------+-----------+------------------------------------------------------------------+
+> >> -| nxp,srk-table      | SRK_TABLE | full path to SRK_1_2_3_4_table.bin                               |
+> >> -+--------------------+-----------+------------------------------------------------------------------+
+> >> -| nxp,csf-crt        | CSF_KEY   | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+> >> -+--------------------+-----------+------------------------------------------------------------------+
+> >> -| nxp,img-crt        | IMG_KEY   | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+> >> -+--------------------+-----------+------------------------------------------------------------------+
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| DT property        | Variable    | Description                                                      |
+> >> ++====================+=============+==================================================================+
+> >> +| nxp,loader-address |             | SPL base address                                                 |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,srk-table      | SRK_TABLE   | full path to SRK_1_2_3_4_table.bin                               |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,csf-crt        | CSF_KEY     | full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,img-crt        | IMG_KEY     | full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,fast-auth      |             | enable fast authentication method                                |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,srk-crt        | SRK_KEY     | full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem    |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,unlock         |             | unlock CAAM in SPL                                               |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >> +| nxp,cst-backend    | CST_BACKEND | CST tool backend, default is 'ssl', or selectable 'pkcs11'       |
+> >> ++--------------------+-------------+------------------------------------------------------------------+
+> >
+> > Perhaps point to an example?
 
-I thought it would make sense that all the SPL-related changes should be in
-a separate patch.
+Sorry I missed this earlier.
 
-> > diff --git a/board/nxp/imx94_evk/spl.c b/board/nxp/imx94_evk/spl.c
-> > index cc5b7f9ef0f..1d25795eb17 100644
-> > --- a/board/nxp/imx94_evk/spl.c
-> > +++ b/board/nxp/imx94_evk/spl.c
-> > @@ -1,6 +1,6 @@
-> >   // SPDX-License-Identifier: GPL-2.0+
-> >   /*
-> > - * Copyright 2025 NXP
-> > + * Copyright 2025-2026 NXP
-> >    */
-> >   #include <hang.h>
-> > @@ -14,6 +14,7 @@
-> >   #include <asm/arch/sys_proto.h>
-> >   #include <asm/mach-imx/boot_mode.h>
-> >   #include <asm/mach-imx/ele_api.h>
-> > +#include <asm/mach-imx/qb.h>
-> >   DECLARE_GLOBAL_DATA_PTR;
-> > @@ -44,6 +45,9 @@ void spl_board_init(void)
-> >   	ret = ele_start_rng();
-> >   	if (ret)
-> >   		printf("Fail to start RNG: %d\n", ret);
-> 
-> Use CONFIG_IS_ENABLED() if this is meant to be enabled in different U-Boot
-> stages.
-> 
+>
+> Example of what ? Two lines below, there is an example of using those
+> env vars, see the entire file.
 
-As far as I know, spl.o is only compiled if the U-Boot stage is SPL, so
-there can't be any other stage for this file.
+Yes I see it, but it doesn't have CST_BACKEND right?
 
-> > +	if (IS_ENABLED(CONFIG_SPL_IMX_QB))
-> > +		spl_qb_save();
+>
+> >>   Environment variables can be set as follows to point the build process
+> >>   to external key material:
+> >> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+> >> index 8922d6cd070..29bc778d0e5 100644
+> >> --- a/tools/binman/entries.rst
+> >> +++ b/tools/binman/entries.rst
+> >> @@ -1664,6 +1664,13 @@ Entry: nxp-imx8mcst: NXP i.MX8M CST .cfg file generator and cst invoker
+> >>
+> >>   Properties / Entry arguments:
+> >>       - nxp,loader-address - loader address (SPL text base)
+> >> +    - nxp,srk-table - full path to SRK_1_2_3_4_table.bin
+> >> +    - nxp,csf-crt - full path to the CSF Key CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+> >> +    - nxp,img-crt - full path to the IMG Key IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+> >> +    - nxp,fast-auth - enable fast authentication method
+> >> +    - nxp,srk-crt - full path to the SRK Key SRK1_sha256_4096_65537_v3_ca_crt.pem
+> >> +    - nxp,unlock - unlock CAAM in SPL
+> >> +    - nxp,cst-backend - CST tool backend, default is 'ssl', or selectable 'pkcs11'
+> >>
+> >
+> > The way it works is you add this as a comment in nxp_imx8mcst.py and
+> > then run 'binman entry-docs' to generate entries.rst - see here:
+> >
+> > https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-documentation
+> Why is there this entries.rst then ? Should the entries be removed from
+> here and moved into the py file or what is this inconsistency ?
 
-[ ... ]
+The entries.rst file is there so that the documentation can be build,
+containing it. It might be possible to update 'make htmldocs' to run
+binman to update the generated docs.
 
+Heinrich, what do you think about that?
+
+Anyway, if you update the comments in the code, then you can run
+binman as above to regenerate the documentation.
+
+Regards,
+Simon
