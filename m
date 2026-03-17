@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B33FD708D
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E54FD708D
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:54:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F4F48437E;
-	Tue, 17 Mar 2026 15:54:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D724C8439F;
+	Tue, 17 Mar 2026 15:54:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V5ycglaS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XczG+LXE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B13FB8437E; Tue, 17 Mar 2026 15:54:14 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id CF4778435B; Tue, 17 Mar 2026 15:54:31 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70B0484372
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:54:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A1E28439F
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:54:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-43b44c0bcdbso2075322f8f.1
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:54:12 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-48539d21b76so42358515e9.1
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:54:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773759252; x=1774364052; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773759269; x=1774364069; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=d/Obwa66iX/nVC+KJOT9ZJ69icweINEqmuK/SyyG0rs=;
- b=V5ycglaSIP95xdbrV2XqjurZdBnshWw8akQWDW7Gv7qsk8qB1z061zcgHYskXLGv2a
- NdfdPuqfHPUY+5jygCFyzGgHJi5J/ZthEO/eNAeZ4dazimwtbrkBC56PEhNRIoevy3hr
- avFvPV/QSPHPsmTktTJ8E9ULXqqBE3jBKoo8mv6AmNrmDhrQe1SBM5WT3C8K0dJm/YOB
- ZvfYfDtNm4zLPK4iNDmOjhcKreWMxEqGsgaQ5qsn7CW68WvERiratRN/Pzd1hmMkvaKs
- 4BdpITvH/eic38kaj8i/OXzPz4zHIrBgFR3LmifQWz/mqdEfNotAtjEzkJ3VUdAI2Ccx
- S5+A==
+ :reply-to; bh=CS1mxqTUBWgjjm57FucqS44MzM+Ne4hiaNrx0BmA4uw=;
+ b=XczG+LXE0Db2Ai+mrygrkC4dJRXMnc536X4lxMlF7hMQwyGRwjZgxvQVqRB6ELEE4u
+ hU3R8bQGO5zeyzzINtJRWqLmauTBx+thQyZBq8n6+KLOzBiYmhl5EbwhkwXoPm3NMopg
+ uLQS3SIDWUXuh7SwZdYzdxVZfHH5NPNroHfd/kqTtQjcSpRJg2T2IeKC1kMDz5I5EmqC
+ ptxF5Ougsq4ITSbKKkmFhViHQqObMW7f30US6T3eFYX9fRzCz/dN7EnE+Et10MiapDlR
+ wSG/aOBrJg5wMF/UKxWVpvimxYGr3tTHP2MKcWomfutWxHbmNa3KrrwQwoOIxYTeSE6M
+ Qw/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773759252; x=1774364052;
+ d=1e100.net; s=20251104; t=1773759269; x=1774364069;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d/Obwa66iX/nVC+KJOT9ZJ69icweINEqmuK/SyyG0rs=;
- b=NWt7T5+7gRcuWbJlchVcpIaqsxH3TlLOrlQnKyveirlJb4IjsU+8fhru3x9bxjZzcx
- sGJ5iiRKGDLzidLzhWXYo/AdMMXxO5EOTwLhsm8dZCtRTMF7SSr6RtqHGIUWlq0r7eib
- b4y8oDOG35FJRethvAlBUEQMup1bXfqTkPjYCyT39TUXr0Q+83+WFMrEQdkr1lFueg/A
- DrHXWr/KuCUkqQCUDBz9dLQprEovJxai9v+zPSbtXizYpXv9ygdiDSf5FisG6oE1ojst
- 6YEPrKKr7o+XvLGSeR+b56uES4r8Xs1ATZ5VXKjj1mLqxOfrJ0YriVe5Xq7E3XXkh6nD
- LFXA==
+ bh=CS1mxqTUBWgjjm57FucqS44MzM+Ne4hiaNrx0BmA4uw=;
+ b=Eb+FhZOzwna8J4v4+YlSLqzmo0eCu6MNUfWwUixizVIPXCuaF5ajJCXedC7aBnplKL
+ 20vROhKipg2KBzB1djpkyduwFzqux3S5zkU9U5knY5jKfnd6Wb2FicYHTTFgsByL4VJ0
+ SAdwKCS4ldqu5mkudDqr7hZHB0SCsfU9zcpMZnYtDH/FXjfjwdNHOKP4GVbEYHqm3BYQ
+ +dHZ2v2W52he82fEOJoFvZxgNJfQYOKVzn6s3o2s7MGBa9M1v/bZDVyxBFlJaPt5Xiq4
+ WOWj9Q0CDrWQJTMsr5DylC5IV81Qzzp3YwnZxEJPqIK6EOuHhlSHL7fCWsZtKq0uIwYB
+ RLxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU2pNC7iXJp2dxZqc5YzOGw1HRK05o1m+mUb1MaENDchnzlgjp290vqZhuBnfmx/j+aIDM43TI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzhDRnDYabMrXZ5ZtJJAZ59XFFAutf0u6IWGm3XGlyWjaHehgCS
- j1/cLKw0iZu3LPWCaLlTWfrvSGij0GK9c+RocGFtsJ6sOowzSJqe9VQlTjf8Oj780fo=
-X-Gm-Gg: ATEYQzwauo5ZjewFDDL2XmbdqlSB1INOSrK0zQ6u4PbvwqwVtdKa2iwp5Q2agkvukkE
- cAP6SjwvvAFH1QnkdUJ5VyJeeg198EUdk299ZRD1oYucA5KKPJ6rN4vCB0RBEEpmmXPZw5CSJfj
- F3OE1yxsn7GU9o070qTcbaqtad4MBgbB6v1crE2Waqg6n/Wo3uAzeMbGtXwUin85UwUdMQeFhex
- XZqNUvavmU7RmRQNuYgu952iFpd+aU6Ob2W9i4pse7abjJlQL4xf6dDAC3uBFN7bUcV3jv9OqN3
- cqqB6bNyc6GGQkyvuwMLYJXGEPQVJCcZ/yFl40MMO3JqR03A594AMWzK4qSFjHE9/MZC2kyGbB+
- A+vlDsVxqP0wVTTXV7GAwikBgI98Wb3iKgWP0YAnH0EVmpKRf8j/wf1sFE1ypwNdJLgJYAH7nSo
- AAWIKv41jTUCVUktOpSyzyJXiagFWDQOqy5cgcaJA5py+gqLSSF/0oojkOkuJ6/rKWBepYvNzcZ
- HhUbA8=
-X-Received: by 2002:a05:6000:2283:b0:439:bd70:6114 with SMTP id
- ffacd0b85a97d-43a04db4e31mr31670758f8f.38.1773759251640; 
- Tue, 17 Mar 2026 07:54:11 -0700 (PDT)
+ AJvYcCWaaQMIS/nVqFd1Jlj6oUrAJL3Htd0A+9aHfd4ax5Xl2L1YW6BViQsVbnBXae1Bmi5Opj/b3p8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkOYU2BO7sSINYkdrjVMULu+Nc8mQQ9ZFW/iYRUMnOvIWCk8RS
+ I1K8mptxMHVAVp1832YKw5Fsd5VfSqQngTrfk1RCyenXwXD6CfreWsOS4p62m5DMYtU=
+X-Gm-Gg: ATEYQzzQui6wHlZTW1ORDp7algAMQO74hAUfcP42+vGcDtkuwlA371XQ2vp1y85P08l
+ YhcR3T8QrS6rA0JDeubukf0WpNtv2fo/OVACZ28mmrbQVI/3x1+z7wVO/zq9bpcWerE5aBF394Q
+ QBx3ku1UeNWf1yZqT5PZjdBixpvmobhbouXB+nVFjxV5EOx2eeED+AhTSHcJydI46Jagv1ifMG/
+ q9IvN0Di9R+F9bP40/UOEob72cEbc0NpoAiusstEkYyEgikFUILvYmwDZ8zJtfSbev/vlxkGks7
+ gL+pVoSQI7rP158K3waeoliSgHFGE59Rb3jsQo8pLUdDERVeZGvj02MxX/kfcvAtE+8t2nvXkmc
+ LN7Kzy5NHP6n81XyAYTZpprVfzetkHdsRYtYAu3ECNVKKlYbrdh4d8blW1RS5OiQQ1QgD6PAdji
+ fPMxfspuWB/M/tjfWXsgEv1/dZNa+f3mPP3RWoNHx6HxMzbyJ0hhseLRajxTimiS6Ddzf+YVP2j
+ 7MLS30=
+X-Received: by 2002:a05:600c:3b14:b0:485:410c:119b with SMTP id
+ 5b1f17b1804b1-485566d6f93mr308298795e9.13.1773759268700; 
+ Tue, 17 Mar 2026 07:54:28 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:c778:639f:c042:aa01?
  ([2a01:e0a:106d:1080:c778:639f:c042:aa01])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b51852aa8sm48400f8f.15.2026.03.17.07.54.10
+ 5b1f17b1804b1-4856eab15f4sm74810385e9.14.2026.03.17.07.54.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 07:54:11 -0700 (PDT)
-Message-ID: <83f0c95e-40bb-4542-8954-37dd990c4479@linaro.org>
-Date: Tue, 17 Mar 2026 15:54:10 +0100
+ Tue, 17 Mar 2026 07:54:28 -0700 (PDT)
+Message-ID: <9d9dccc9-9cd9-4520-b279-7a1d8e9b86f4@linaro.org>
+Date: Tue, 17 Mar 2026 15:54:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 04/11] drivers: phy: phy-mtk-ufs: use tab to indent defines
+Subject: Re: [PATCH 05/11] drivers: phy: phy-mtk-ufs: use clk_bulk functions
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -96,7 +96,7 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Chris-QJ Chen <chris-qj.chen@mediatek.com>,
  Sam Protsenko <semen.protsenko@linaro.org>
 References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-4-7d731ec438ae@baylibre.com>
+ <20260317-mt8195-add-ufs-support-v1-5-7d731ec438ae@baylibre.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -123,7 +123,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260317-mt8195-add-ufs-support-v1-4-7d731ec438ae@baylibre.com>
+In-Reply-To: <20260317-mt8195-add-ufs-support-v1-5-7d731ec438ae@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -144,62 +144,73 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/17/26 15:24, Julien Stephan wrote:
-> Use tabs instead of spaces to indent defines
+> simply the driver by using clk_bulk functions
 > 
 > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
->   drivers/phy/phy-mtk-ufs.c | 38 ++++++++++++++++++--------------------
->   1 file changed, 18 insertions(+), 20 deletions(-)
+>   drivers/phy/phy-mtk-ufs.c | 34 ++++++++--------------------------
+>   1 file changed, 8 insertions(+), 26 deletions(-)
 > 
 > diff --git a/drivers/phy/phy-mtk-ufs.c b/drivers/phy/phy-mtk-ufs.c
-> index 14a90cf2064..321151172d9 100644
+> index 321151172d9..c7a671ebfad 100644
 > --- a/drivers/phy/phy-mtk-ufs.c
 > +++ b/drivers/phy/phy-mtk-ufs.c
-> @@ -17,26 +17,24 @@
->   #include <mapmem.h>
->   
->   /* mphy register and offsets */
-> -#define MP_GLB_DIG_8C               0x008C
-> -#define FRC_PLL_ISO_EN              BIT(8)
-> -#define PLL_ISO_EN                  BIT(9)
-> -#define FRC_FRC_PWR_ON              BIT(10)
-> -#define PLL_PWR_ON                  BIT(11)
-> -
-> -#define MP_LN_DIG_RX_9C             0xA09C
-> -#define FSM_DIFZ_FRC                BIT(18)
-> -
-> -#define MP_LN_DIG_RX_AC             0xA0AC
-> -#define FRC_RX_SQ_EN                BIT(0)
-> -#define RX_SQ_EN                    BIT(1)
-> -
-> -#define MP_LN_RX_44                 0xB044
-> -#define FRC_CDR_PWR_ON              BIT(17)
-> -#define CDR_PWR_ON                  BIT(18)
-> -#define FRC_CDR_ISO_EN              BIT(19)
-> -#define CDR_ISO_EN                  BIT(20)
-> -
-> -#define UFSPHY_CLKS_CNT    2
-> +#define MP_GLB_DIG_8C		0x008C
-> +#define FRC_PLL_ISO_EN		BIT(8)
-> +#define PLL_ISO_EN		BIT(9)
-> +#define FRC_FRC_PWR_ON		BIT(10)
-> +#define PLL_PWR_ON		BIT(11)
-> +
-> +#define MP_LN_DIG_RX_9C		0xA09C
-> +#define FSM_DIFZ_FRC		BIT(18)
-> +
-> +#define MP_LN_DIG_RX_AC		0xA0AC
-> +#define FRC_RX_SQ_EN		BIT(0)
-> +#define RX_SQ_EN		BIT(1)
-> +
-> +#define MP_LN_RX_44		0xB044
-> +#define FRC_CDR_PWR_ON		BIT(17)
-> +#define CDR_PWR_ON		BIT(18)
-> +#define FRC_CDR_ISO_EN		BIT(19)
-> +#define CDR_ISO_EN		BIT(20)
->   
->   struct mtk_ufs_phy {
+> @@ -40,8 +40,7 @@ struct mtk_ufs_phy {
 >   	struct udevice *dev;
+>   	void __iomem *mmio;
+>   
+> -	struct clk *unipro_clk;
+> -	struct clk *mp_clk;
+> +	struct clk_bulk clk_bulk;
+>   };
+>   
+>   static void ufs_mtk_phy_set_active(struct mtk_ufs_phy *phy)
+> @@ -78,16 +77,9 @@ static int mtk_phy_power_on(struct phy *phy)
+>   	struct mtk_ufs_phy *ufs_phy = dev_get_priv(phy->dev);
+>   	int ret;
+>   
+> -	ret = clk_enable(ufs_phy->mp_clk);
+> -	if (ret < 0) {
+> -		dev_err(phy->dev, "failed to enable mp_clk\n");
+> -		return ret;
+> -	}
+> -
+> -	ret = clk_enable(ufs_phy->unipro_clk);
+> -	if (ret < 0) {
+> -		dev_err(phy->dev, "failed to enable unipro_clk %d\n", ret);
+> -		clk_disable(ufs_phy->unipro_clk);
+> +	ret = clk_enable_bulk(&ufs_phy->clk_bulk);
+> +	if (ret) {
+> +		dev_err(phy->dev, "failed to enable clocks (ret=%d)\n", ret);
+>   		return ret;
+>   	}
+>   
+> @@ -148,21 +140,11 @@ static int mtk_ufs_phy_probe(struct udevice *dev)
+>   	phy->dev = dev;
+>   	phy->mmio = map_sysmem(addr, 0);
+>   
+> -	phy->mp_clk = devm_clk_get(dev, "mp");
+> -	if (IS_ERR(phy->mp_clk)) {
+> -		ret = PTR_ERR(phy->mp_clk);
+> -		dev_err(dev, "Failed to get mp clock (ret=%d)\n", ret);
+> -		return ret;
+> -	}
+> +	ret = clk_get_bulk(dev, &phy->clk_bulk);
+> +	if (ret)
+> +		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+>   
+> -	phy->unipro_clk = devm_clk_get(dev, "unipro");
+> -	if (IS_ERR(phy->unipro_clk)) {
+> -		ret = PTR_ERR(phy->unipro_clk);
+> -		dev_err(dev, "Failed to get unipro clock (ret=%d)\n", ret);
+> -		return ret;
+> -	}
+> -
+> -	return 0;
+> +	return ret;
+>   }
+>   
+>   static const struct udevice_id mtk_ufs_phy_id_table[] = {
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
