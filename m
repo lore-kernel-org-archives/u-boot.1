@@ -4,63 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3254BFF6E8B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45544FF6E8A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 22:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1738A841E2;
-	Tue, 17 Mar 2026 23:04:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id A54A68412F;
+	Tue, 17 Mar 2026 23:15:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="fV01Rtd4";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="V729UwrS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFC2F84242; Tue, 17 Mar 2026 18:25:30 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 118A98413A; Tue, 17 Mar 2026 23:15:28 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96006842EF
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 18:25:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id CF3E684113
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 23:15:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marex@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7408610DDA4; Tue, 17 Mar 2026 18:25:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1773768328;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=pqcqmWrUQEyIeDVt0KiW+UGp+By7xbs8GFJ4Z+KEA8E=;
- b=fV01Rtd4PsuTN4ntbi+TPQqfXbfn/i4Yu3+YfWMWNi+9O7hHWNbzQitcAXmMtofJmNLBlc
- 4DWSCbm+MtWEK032tTi1vzJld0yC+BMRdIVRxX+QHreNNsaWWkPME2UQ46qIe8NKwm6H1h
- n34ZwS6X/utYdwZMyBYK/ttnwObMN4VIWB5cj1bHuAhBBlHjTYm89FZdz6pFdjn3Yx6328
- d8hwImsBz7Fd6DnFsN1LdG9HjhZnSlfbk7gQ5NJBnKnJaxsUxcwIWNDpddHiNiPJHotsvV
- T/jps3xY7R9QXtm+pXDmxmWvjmRaE7lJ6i86pAdqo33CPcZlkcTUjmk9vxjOig==
-Message-ID: <195fc5c9-6f0c-46e0-b18e-7d390bd7c4a3@nabladev.com>
-Date: Tue, 17 Mar 2026 18:13:28 +0100
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dlechner@baylibre.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-40946982a78so2449268fac.2
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:15:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773785724; x=1774390524;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OOqTgglO9k53cJ5g4FYzLWfizwn2THCBMtTCr+3VoVI=;
+ b=V729UwrSLq5lpFU3SuiUM1O+X3ZAvep3v0QBpADC6Iu3uWiXeBDZJupZNLSyYT/lp6
+ /9uGH3rGhrp4T6I/jtY200OvR6/G+GtHztjXAgNmILcAeLW/fZKeD8qiEpaunopBRYoG
+ HUhGXwWNbu7v3Mh9tcyCpaQPi9+AeEJuo7HyxgOKpNqFZL3BN6k7vMrMFfjL3bw22I4u
+ cD2yLYgYeA9fIOx2X4mFLrxuQvnpIj/XGIxkpW5Kht1llmXRSVUPX0cALjWqyXnmPHbi
+ WGePQ4RwkHh2VXewZM6y5VunKq3cxKlPyeFbklwRNR4iCYjlIbU261/90C5jXxSPu+sg
+ /aCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773785724; x=1774390524;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OOqTgglO9k53cJ5g4FYzLWfizwn2THCBMtTCr+3VoVI=;
+ b=o3T3wOaVbeuo6jHFYcBuWI2PD2+Vl703S7fVjlkeFfpNUJ8LQA1yS4PVUQIkvNSnsL
+ jemmb22xmGUyYFYiiSTsJKXK5JBjZN83r7PFkrpJoLptl6oad/fmMlX3E236ooXuAUEi
+ oS+ni3UKC7Byqxblv1XpVimtbH0OuI8gU6DpZbVQJHnx6wqQhWEGetpjQerFvrUGTmRQ
+ 5Lbacqz56kwINadaNQ5TJiWy9BWl9RnsDb8mFrBjMPaoze9DUUz9WNr7dM/6wfBq9JMN
+ eu3Z6bgdl8NlgWQGS5rA05NER4yxm7BlmJdvmLVniEL1WH74z8OMBDp1wg/18e+EuuMT
+ I0HQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXIMx3eg0/DjWIFVUvPAV+RKBc248p/Uo1fcoXEZlpotNodNMo3ygdu0phhEKjUJdShtGfYsY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOoRA6Fire8KuC1MOeea6bPewpbrsLBCj3huE5z8QlIophYKCa
+ po37vjTw1CT3liM/SsxeUn8uyXmcuBeN2EYDxq2n7UKk4vwZPsaFt5AXbv6678xcOnY=
+X-Gm-Gg: ATEYQzx0dpADeJCKybL06KX+P9SeobxPK18BOUDw2Ug+CPGgV3a2ODcrpPZYpeZX+lN
+ /BBkEZKJFa18CIrsjRNXQwXQrhlC+qn53TBsphPQ+NH6fAdIWxgyFobL5gMWsofj0iQ8WCJ7OOp
+ FpIQnlYuNWO2m+ofMYvak9z0nbVqPCCVrysRJhdFBaVIchVbqkcfE5VAdAFY/xoolhskGDZh9xP
+ 0qa7rSFGhG10QhzIoTtsG4J1l8Z06VOWbx0lGs3pPwJtyBbBRd9tuVHAXKn77iwACdKcRw0UqrN
+ iLyXDC5RGfHFz2qXT5cHK9QTKnCnkfPISmN5Ccc1REufsYPcsjdmOpMriWeZEYK1960HR7IF3qj
+ zloNCKaey8ruS23Gkjbj4FEqfmM3b2bRT0OO0Vl6ELpIVBuTubMvKYZw3Qv/yAMHyW2HaO0Hyst
+ pzsXe8poHLZDkh/hguNJDAurmmG/AkJ/Dc/ZWrDXwncfaQUSZVgKsXm0lPkKXrcCAmv/KNjVj/m
+ 3pITfo=
+X-Received: by 2002:a05:6870:a79b:b0:417:3cc0:8dc9 with SMTP id
+ 586e51a60fabf-41bd3fcf713mr646822fac.24.1773785724428; 
+ Tue, 17 Mar 2026 15:15:24 -0700 (PDT)
+Received: from ?IPV6:2600:8803:e7e4:500:2fe3:965c:6248:c9?
+ ([2600:8803:e7e4:500:2fe3:965c:6248:c9])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-41bd2828aa7sm990543fac.1.2026.03.17.15.15.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Mar 2026 15:15:23 -0700 (PDT)
+Message-ID: <b1a12617-ec95-4730-a994-3354c5747d78@baylibre.com>
+Date: Tue, 17 Mar 2026 17:15:22 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/5] arm: mach-imx: Add command to expose QB
- functionality
-To: Simona Toaca <simona.toaca@oss.nxp.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de,
- Stefano Babic <sbabic@nabladev.com>, festevam@gmail.com, peng.fan@nxp.com,
- alice.guo@nxp.com, simona.toaca@nxp.com, ye.li@nxp.com,
- viorel.suman@nxp.com, ping.bai@nxp.com, sebastien.szymanski@armadeus.com,
- ravi@prevas.dk, joao.goncalves@toradex.com, ji.luo@nxp.com,
- tharvey@gateworks.com, qijian.guo@nxp.com
-References: <cover.1773648510.git.simona.toaca@nxp.com>
- <2c33ee004dd272b8427b3d1962ade06cbb220149.1773648510.git.simona.toaca@nxp.com>
- <1e3b41bf-b6fe-4307-b6d1-dbc3ce0615e0@nabladev.com>
- <e4vlh2qtw64fa4kdwdzyt6v7fmtzg3bsgihni7bksfv3bs5ivu@5ucadvhzs6he>
+Subject: Re: [PATCH 09/11] drivers: ufs: ufs-mediatek: implement clocking
+To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Igor Belwon <igor.belwon@mentallysanemainliners.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Macpaul Lin <macpaul.lin@mediatek.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Chris-QJ Chen <chris-qj.chen@mediatek.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
+ <20260317-mt8195-add-ufs-support-v1-9-7d731ec438ae@baylibre.com>
 Content-Language: en-US
-From: Marek Vasut <marex@nabladev.com>
-In-Reply-To: <e4vlh2qtw64fa4kdwdzyt6v7fmtzg3bsgihni7bksfv3bs5ivu@5ucadvhzs6he>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: David Lechner <dlechner@baylibre.com>
+In-Reply-To: <20260317-mt8195-add-ufs-support-v1-9-7d731ec438ae@baylibre.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Tue, 17 Mar 2026 23:04:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,44 +119,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/17/26 4:28 PM, Simona Toaca wrote:
-
-[...]
-
->>> +	if (!cp) {
->>> +		printf("%s cp is null\n", __func__);
->>
->> What does this error output even mean ? The user will be confused, please
->> reword it.
->>
+On 3/17/26 9:24 AM, Julien Stephan wrote:
+> Implement clocking.
 > 
-> Looking at this, these error messages might be redundant, as U-Boot displays
-> the command usage anyway if CMD_RET_USAGE is returned. The repeatable error is
-> also redundant because the command is declared repeatable.
+> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>  drivers/ufs/ufs-mediatek.c | 18 +++++++++++++++++-
+>  1 file changed, 17 insertions(+), 1 deletion(-)
 > 
-> I have a suggestion: I could use the U-Boot API for commands from
-> include/command.h (U_BOOT_CMD_WITH_SUBCMDS), which declares and registers
-> do_<cmdname> with the default method body (which is almost the same as this
-> version). This would imply no actual error messages, just printing the usage,
-> and a cleaner code.
+> diff --git a/drivers/ufs/ufs-mediatek.c b/drivers/ufs/ufs-mediatek.c
+> index 5d882904c84..31916f72c86 100644
+> --- a/drivers/ufs/ufs-mediatek.c
+> +++ b/drivers/ufs/ufs-mediatek.c
+> @@ -177,6 +177,18 @@ static int ufs_mtk_link_startup_notify(struct ufs_hba *hba,
+>  	return ret;
+>  }
+>  
+> +static int ufs_mtk_get_clk(struct ufs_hba *hba)
+> +{
+> +	struct ufs_mtk_host *host = dev_get_priv(hba->dev);
+> +	int err;
+> +
+> +	err = clk_get_bulk(hba->dev, &host->clks);
+> +	if (err)
+> +		return err;
+> +
+> +	return 0;
+> +}
 
-Aren't the error messages helpful to the user to determine what went 
-wrong during the command execution ?
+Why a wrapper function to call a single function?
 
-[...]
+> +
+>  static int ufs_mtk_bind_mphy(struct ufs_hba *hba)
+>  {
+>  	struct ufs_mtk_host *host = dev_get_priv(hba->dev);
+> @@ -317,7 +329,11 @@ static int ufs_mtk_init(struct ufs_hba *hba)
+>  
+>  	ufs_mtk_init_reset(hba);
+>  
+> -	// TODO: Clocking
+> +	err = ufs_mtk_get_clk(hba);
 
->>> +++ b/arch/arm/mach-imx/imx9/Makefile
->>> @@ -15,5 +15,7 @@ obj-y += imx_bootaux.o
->>>    endif
->>>    ifeq ($(CONFIG_IMX_SNPS_DDR_PHY_QB_GEN),y)
->>> -obj-y += qb.o
->>> +ifneq ($(CONFIG_XPL_BUILD),y)
->>> +obj-$(CONFIG_CMD_IMX_QB) += qb.o
->>> +endif
->>
->> This shoudld be part of 1/5 , should it not ?
+	err = clk_get_bulk(hba->dev, &priv->clks);
+
+Couldn't we just do this instead?
+
+Or do we need clk_enable_bulk() too and that is missing from the
+helper function?
+
+> +	if (err) {
+> +		dev_err(hba->dev, "failed to initialize clocks, err:%d\n", err);
+> +		return err;
+> +	}
+>  
+>  	err = generic_phy_power_on(&priv->mphy);
+>  	if (err) {
 > 
-> And squash commits 1 and 2, as this is cmd_qb related?
 
-No, only add the qb.o Makefile entry in 1/5 , since qb.c is added in 1/5 
-too.
