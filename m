@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB966FB5E8B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC68FFB5EA0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62E36842EB;
-	Tue, 17 Mar 2026 02:24:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A115842F2;
+	Tue, 17 Mar 2026 02:24:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QPDY1l4N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UBUDj0ff";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 747FE84285; Tue, 17 Mar 2026 02:24:53 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id A3C98842F4; Tue, 17 Mar 2026 02:24:55 +0100 (CET)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5A45842CE
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41868842C7
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-4671cbce2feso2179266b6e.3
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:50 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-662efd1bdd4so184266eaf.0
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710689; x=1774315489; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773710692; x=1774315492; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5L5++JCcTm3JW5FvBpRQRejQcoWLWABrxwirRxWmgBY=;
- b=QPDY1l4Npge5qfdOhlVn0X4Mr/oijhEtHjLWXrlKA2NbZvdcYPRad7sSADMYawl8mo
- bqD/yoqUU8D4NJq+1KtGdOqpoj3cux+Uh3lnDoIErbqDFt1Gl0CXkd6GsAFjnBkbDMIa
- 3x4q6yyV2p7VPI1jPGqhnMb6o5R0EenY/QlSs=
+ bh=rYLwOJCqUWxoEpWiud0ZX1O7q+CuWA5oaX11R6PNrXE=;
+ b=UBUDj0ffZUsT6l5RaEtX920c0OzxTZPRgCPvR553muxi83tsMJaPTFT6uJw1kgZwDZ
+ K+owsHiLaYFS6u8kjm+33yqQDKDweuSYmaEEODoTOAQAXGwKWvgIq2TWqndpDDepV1st
+ EtYDJyPw4+ycPdWsvKRRL5vNqXCGYnUQuLgtM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710689; x=1774315489;
+ d=1e100.net; s=20251104; t=1773710692; x=1774315492;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5L5++JCcTm3JW5FvBpRQRejQcoWLWABrxwirRxWmgBY=;
- b=Rb2tALfA++3jJUDhpKfZBPDwByEe7PMFAo2cKEe1QObgAK5GjtL3OiA82kSt8oP1po
- BCHdrLYrM6O1HBzBZcsOK+4dWKwmPmnIPxfc1ISYuexoVY1zD88z4wYaweXInHI3wf8W
- 1ijnhEYEUM422tSGE7S4NZeVbJHm+TWMGA9y7PLB1dMnLK/CrPl8T7/JKq7YLfqa/N3A
- gVw0OivD2yvbmBiuY/4FbzWEbieqqgcuUeeE4jhVFPWI50XHLIoyoIc8Au/OULR5WVy3
- 7HntsTaP4tvF8NfxzNuRWG9pwwx7xlnJOsDVI9Gb7t6NgjYjVCKpM5Dd7TiMR8e/fmmJ
- zuPA==
-X-Gm-Message-State: AOJu0YwTCT4cOpGjH7EJcDRO6lakWAtQ8rQQRMgBuuqb4405Lkfx31VU
- 9J0CgVizSLTxWZkoqQP9Dwwmsle/Q1cjeK2Tgj5+aUxaB4elsYpw2h+orG+zqDg4FNL/6BGIhj6
- Q1gR3KoU=
-X-Gm-Gg: ATEYQzxnJZnrf8Ka0DiNu5QdO/5LwkgSysHj1TA0/kah3FDaHhu/PaShm19yk5IdsNO
- bGfJe5FCKxewlmh4AWHyCeLsTFHWD2UjT6QmcofErs1EnJDI0KZbQfgv6KAKXfHp2n90CJQEY8O
- 9DGVRcId7vZldCdnwvlL1oCzWChb8NKcnE6+0N30E4KcK26ANNmSy5AA1rmlV7pjtQ5fq+az3eW
- +MahWWXI957sKlVPBZ55cVA/LoDHf4/1NI5LVtoYZ84k4UCPUS0TAKEgeYxYKbavY2ogPFh5XOg
- P7ZgvSRBtSMS70TMNLPfBjKCMJV7jECcYY0/mNPM+nuBuZkyCw821SgZH3fBv2BqMFix73Qb8Fg
- XU7DQZPHoi2O5x0hjWE3sqCnSPO0L8X8W4lEjCVaeZ1MoqgHIqzEGNYeUlJHVFSSTi9chSoRmcy
- BsHhz0Id+A7Z16SLzUu1nWGwC69ISwKThDIUf2S7UKmZ7YWhs+i7BdLJxana5ySdg4Iaf+5S6Pv
- I/MBeU7vXX6UaPou0ERjtgVJ5zgYpTO8MxY/OiDA4q8+akMh+4=
-X-Received: by 2002:a05:6808:6509:b0:45e:a1e2:2808 with SMTP id
- 5614622812f47-467570fdedemr8463527b6e.27.1773710689649; 
- Mon, 16 Mar 2026 18:24:49 -0700 (PDT)
+ bh=rYLwOJCqUWxoEpWiud0ZX1O7q+CuWA5oaX11R6PNrXE=;
+ b=mFvo75lVQs2YR7hZm1+hXm2PycVFRgBJKgvrXSVIagzGwjUuutDdgJUYaCJ82OMO0G
+ JNCWd67b9thQ0U8Pc2TokwIf3MAo36PIk3B/53uKjNp7DcXds9c9wuk4CCH4H622XL69
+ Mb126xcVAP6IhTI18FLCENatbB50YoZ/mDMNDKixUD7vX8/Gz9wwCOPZdjVNZtbwnrKq
+ 05U/en5TsmX3CZSuHpAPCWql/RY9Av7qUI6nKfHlJ9A4V3h67XZmQ3INVNlNcj2faFLU
+ a7Hcuoo0WfneUnRDqq0bavAYV4axBF5qX5NxTqA8y+K8cjYn8+p6qnpx9cf++hZsOXFL
+ t4tQ==
+X-Gm-Message-State: AOJu0YypVHG4cCYsY4uE1CNe3Tah/geAo3xzGXaI3lI1Aj0sxf7agJ4C
+ QnCaIP2Ow1n9bPl/bPJmN1cp7BH2mi64VQi2NHTfGUv5p7nz5SRxzZFIFSlx+A2mJpQbXOtKxhL
+ SBbahMOI=
+X-Gm-Gg: ATEYQzwfSdNJKVkkzrGghQ9tLNhtKrrPxuLXAd9W/QhnLJ/FDxr3gdV3vr2d3JosEAZ
+ o9D0+Hwv2HCTUHbapdc0Kmwrqc6EdZ1UKj5qla7hc7i3dll5WvnyYCTK+Qw8eldy/AjPFUIsRzW
+ AQJa3BqlAxP4gPuXczTsYXpJgDBAwRZq3VU3VSqjxEFaycz40gFw6eUuFgs56LHxxgngCXJBdps
+ uTWg8aWPZUUjb01m18NtgYj1F0EAxRvGIc9ReAqcIwCFXkwT4N3fMY3Z12BB8VBjXi/pZsClgr1
+ DCHw9aQKDItZBCbyk7gUIi5rcFlbunX6BWDIJ6lBsKsIKt3PvUE7ojLGgDp+BBFlqweXE/xKl7K
+ GvW4wURYbtMfqAAiozcmgh4NinA/TD2TzCnHByKkhCOvB78cTg+y5zXh3R6ooukVPW8R/DNi+dt
+ ZU+G54p7hgYcavfwP+kir8EZGRQnEcOtnTG+w6veI0Q0XZuM6gwFyp+rBix1qxfKghPMprPceaS
+ dEMiC4dCYF0mRhq94VOL5cT3dquMWGThcNYrYCu15ZJd7/Ij+U=
+X-Received: by 2002:a05:6820:1889:b0:67b:df8a:6d86 with SMTP id
+ 006d021491bc7-67c04992757mr894047eaf.23.1773710691803; 
+ Mon, 16 Mar 2026 18:24:51 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-46734160cebsm10440627b6e.7.2026.03.16.18.24.48
+ 006d021491bc7-67bc9118bc7sm11181202eaf.6.2026.03.16.18.24.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:49 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stefan Roese <stefan.roese@mailbox.org>
-Subject: [PATCH] watchdog: Correct dependencies for WDT_MAX6370
-Date: Mon, 16 Mar 2026 19:24:48 -0600
-Message-ID: <20260317012448.4162644-1-trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
+Date: Mon, 16 Mar 2026 19:24:49 -0600
+Message-ID: <20260317012449.4162666-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,28 +95,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 As exposed by "make randconfig", we have an issue with the dependencies
-for WDT_MAX6370. It needs to select both GPIO and DM_GPIO not just
-DM_GPIO.
+for EFI_HTTP_BOOT. As this is implemeneted by running commands (as seen
+by what it selects) it must depend on CMDLINE as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stefan Roese <stefan.roese@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- drivers/watchdog/Kconfig | 1 +
+ lib/efi_loader/Kconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index 35ae7d106b1a..0047846a44af 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -216,6 +216,7 @@ config SPL_WDT_GPIO
- config WDT_MAX6370
- 	bool "MAX6370 watchdog timer support"
- 	depends on WDT
-+	select GPIO
- 	select DM_GPIO
- 	help
- 	  Select this to enable max6370 watchdog timer.
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index b5f81e0ff530..a9b2f813e1d5 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -600,6 +600,7 @@ config EFI_BOOTMGR
+ config EFI_HTTP_BOOT
+ 	bool "EFI HTTP Boot support"
+ 	depends on NET || NET_LWIP
++	depends on CMDLINE
+ 	select CMD_NET
+ 	select CMD_DHCP
+ 	select CMD_DNS
 -- 
 2.43.0
 
