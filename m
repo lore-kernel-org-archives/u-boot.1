@@ -4,121 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B5F3F506CF
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 06:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 400E4F33800
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 06:18:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1B94839DF;
-	Tue, 17 Mar 2026 07:12:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B67AC83DB6;
+	Tue, 17 Mar 2026 07:18:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CJqSCraU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tR+s7Gmw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9215C83BC8; Tue, 17 Mar 2026 07:12:29 +0100 (CET)
-Received: from BL2PR02CU003.outbound.protection.outlook.com
- (mail-eastusazlp17011000f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c100::f])
+ id E9E5883F6D; Tue, 17 Mar 2026 07:18:51 +0100 (CET)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3D6383952
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:12:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA2BB839DF
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:18:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f4tEtowCMOQph6jPefaiIDs5ObKnh4T7t0uM1AceXuCG80BedwM0aPPUtnZMc7NVrrCj77a3o4+BlGJh3zpNfvDusMfhU+PUzIniSVuXE9L/SGx7WOOm+/E0cmzcuKUCCqt6lWwTWX4b9v8NZg0GkMbtkkLVQ7EijWKHNHrlsEjRM//2ShKtbVrwJJqEX944nf2bteMrirPEFLFM0GXoI+dQVdAjFQ4Bs47OZ4O/JCPO1zrczDjyTC4C6iv4AH+OLXuFi2tENxEMk5WVP6idpibxgcnpojTbNAt8wg69qPQ9M39Q5YKcxNpwdGInf64VstmtsYwcEIjNDz8dT+Ld0Q==
+ b=p0Bxe2tFbmUJVa8ISapAoy6PFbHVCQd0G+afmUKRDAkl/mN2enc9Nt0jQCJ2hGsgAW0+LSNPJx9svOzHuOZDuRE4K/gT/+DUXHZvGapHD9i5Nu+SzLHqE0K5QnxJ2jbb4MHzVCdMnRV7GZqL8uRBdqVwVrO9ZCkrg5u5uRgbLCvEnY99kv2wuNcjw3yGazV2q039o73xT1vqlTaPx7CHQwoNNrQCaVlNhrIYcBwXe05KjzYecCaWQuOrBIcmVWzdZXTyN2UHNRlXlhQc9D37XQ5m1BLAmcl92FU717jm2FEAVsIPC3ZmQqeAWY2t6XKJbxjPQHYrJz8F9ufHAD3tSQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=crOLjffB4qxKnwaZuMFn6k8ozgfXCvChzRYTIvHKtvU=;
- b=j7iRFrOEItMNGY4clJTBFgF6N5w3SZvmC87xZZHSjtQ/EZsINdsHI709PijL9AGdmzWkGZhv4lkIMqUDroLBy5pSJAyO8v2+sehbTI48eQi8gZ0ZCwJmvsm1DW+BUtCSzdBUQ6H5y2WM2fdO4A7zhdPdxB4RnR37toD1zYQdUE3schP3uJtnNIGzwFCcssYKZZH94592oApCzFZlrDhqhLffoXaCT5Z1C5mQycaR5FD76c2981xbAAfb7T4SKpKJCqeXv033bFS9Cud2IX0EzrcIzFT07ysGgHO+jeSn0CmKQarvtsAzwVnBxHcwxyXDMEipYDMuIkbdgrfVlJleoA==
+ bh=j2lzvqG5Yo0jLLr8sEwLwdaG7Tmeq2iYRgi5nlJ6E1g=;
+ b=ycTyrU4igmKO2mNfskM++jVih6DLvrg3I3H66f4DCAso3bVTxdMjpQa3k6HxlT8eEBKmwSma54zxJZxNkSc4+TAX4SRpfmoeuyDSl2g63tXwXS1VD1lnh84YaLoMp6Yd+wjfdVl9Rqa4of4yoRHE1c4sNKVR20Gdi3K7UtOr5kLGFSenAsJOokkmc88SrVfdzH13vS6RUHKmceN3NjVey8P657SAx32UVW+vLz8wOkJCQk/1KzCZ/VLwMoQFlIaG1vCENqglDe060Ko6sLJshBGJ0RojyGDYK9OFCFXntmR3bwgmEsRlMluUHFrSZJBkeO2SxiFi4QDEV8h3Wvvc3g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=st-md-mailman.stormreply.com
- smtp.mailfrom=ti.com; dmarc=pass (p=quarantine sp=none pct=100) action=none
- header.from=ti.com; dkim=none (message not signed); arc=none (0)
+ 198.47.21.194) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=ti.com;
+ dmarc=pass (p=quarantine sp=none pct=100) action=none header.from=ti.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=crOLjffB4qxKnwaZuMFn6k8ozgfXCvChzRYTIvHKtvU=;
- b=CJqSCraUHCJM8bB7EJZDZZr2/yYYpxURP+gWv33p+n9BneF0sL6+9X5TgirorkNQnMculQuYBWkE4qrBQrZCvKMTxxvGE1T9BVMnF6e1cTSR711MX2mH6EAd7HiXI6QSGHFIO42w1K7t3kEOcPHy5skgBZANhGshk0NxWyMNJpo=
-Received: from MN0PR02CA0008.namprd02.prod.outlook.com (2603:10b6:208:530::10)
- by PH8PR10MB6621.namprd10.prod.outlook.com (2603:10b6:510:223::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.22; Tue, 17 Mar
- 2026 06:12:23 +0000
-Received: from BL02EPF00029929.namprd02.prod.outlook.com
- (2603:10b6:208:530:cafe::8f) by MN0PR02CA0008.outlook.office365.com
- (2603:10b6:208:530::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.27 via Frontend Transport; Tue,
- 17 Mar 2026 06:12:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
+ bh=j2lzvqG5Yo0jLLr8sEwLwdaG7Tmeq2iYRgi5nlJ6E1g=;
+ b=tR+s7GmwbIVkvsmEY8h1vcYIKhoNpgfPYKb6C2POC4Ag7gsFkOAEmUyc7ivDKUFDuOKr86IKoFcdU9cxxs8LlXcUXwA3uBWaFghwNePaO3aCQoOjfPfD4Unn1FaC0XZjayj3AgnvfDJCa4rwjfCh5tXLHfv7wB1jOL9mNd3Mlvk=
+Received: from BY3PR03CA0003.namprd03.prod.outlook.com (2603:10b6:a03:39a::8)
+ by SJ5PPFE654FA166.namprd10.prod.outlook.com
+ (2603:10b6:a0f:fc02::7da) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9700.24; Tue, 17 Mar
+ 2026 06:18:47 +0000
+Received: from SJ1PEPF00001CEA.namprd03.prod.outlook.com
+ (2603:10b6:a03:39a:cafe::33) by BY3PR03CA0003.outlook.office365.com
+ (2603:10b6:a03:39a::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.24 via Frontend Transport; Tue,
+ 17 Mar 2026 06:18:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.21.194)
  smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none; dmarc=pass
  action=none header.from=ti.com;
 Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BL02EPF00029929.mail.protection.outlook.com (10.167.249.54) with Microsoft
+ 198.47.21.194 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.47.21.194; helo=flwvzet200.ext.ti.com; pr=C
+Received: from flwvzet200.ext.ti.com (198.47.21.194) by
+ SJ1PEPF00001CEA.mail.protection.outlook.com (10.167.242.26) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 06:12:20 +0000
-Received: from DLEE210.ent.ti.com (157.170.170.112) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 06:18:45 +0000
+Received: from DFLE208.ent.ti.com (10.64.6.66) by flwvzet200.ext.ti.com
+ (10.248.192.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
- 2026 01:12:18 -0500
-Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 01:18:42 -0500
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 17 Mar
- 2026 01:12:18 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
- (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
+ 2026 01:18:42 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 17 Mar 2026 01:12:18 -0500
-Received: from localhost (ada0543016.dhcp.ti.com [172.24.233.9])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62H6CHSd2160377;
- Tue, 17 Mar 2026 01:12:17 -0500
+ Transport; Tue, 17 Mar 2026 01:18:42 -0500
+Received: from [172.24.25.125] (ltpw0g6znt.dhcp.ti.com [172.24.25.125])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 62H6Ib5e2168508;
+ Tue, 17 Mar 2026 01:18:37 -0500
+Message-ID: <17bd4570-823f-43a5-b2c2-c566dc0260b9@ti.com>
+Date: Tue, 17 Mar 2026 11:48:36 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/5] misc: fw_loader: implement generic
+ get_fw_loader_from_node()
+To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Peng Fan <peng.fan@nxp.com>, Casey Connolly <casey.connolly@linaro.org>,
+ "Paul Kocialkowski" <paulk@sys-base.io>, Chen-Yu Tsai <wens@kernel.org>,
+ "Justin Klaassen" <justin@tidylabs.net>, Harsha Vardhan V M <h-vm@ti.com>,
+ "Jamie Gibbons" <jamie.gibbons@microchip.com>, Leo Yu-Chi Liang
+ <ycliang@andestech.com>, Weijie Gao <weijie.gao@mediatek.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Lucien.Jheng <lucienzx159@gmail.com>,
+ "Alif Zakuan Yuslaimi" <alif.zakuan.yuslaimi@altera.com>, Sky Huang
+ <SkyLake.Huang@mediatek.com>, <u-boot@lists.denx.de>
+References: <20260306190542.22920-1-ansuelsmth@gmail.com>
+ <20260306190542.22920-4-ansuelsmth@gmail.com>
+Content-Language: en-US
+From: "Francis, Neha" <n-francis@ti.com>
+In-Reply-To: <20260306190542.22920-4-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 17 Mar 2026 11:42:16 +0530
-Message-ID: <DH4U2T40NVJG.1HP8TFEIGDROK@ti.com>
-CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Michal Simek
- <michal.simek@amd.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, "Patrice
- Chotard" <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, Simon Glass
- <sjg@chromium.org>, <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [PATCH] scmi: Rework SCMI_FIRMWARE implementation
-From: Anshul Dalal <anshuld@ti.com>
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260317012414.4162304-1-trini@konsulko.com>
-In-Reply-To: <20260317012414.4162304-1-trini@konsulko.com>
+Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00029929:EE_|PH8PR10MB6621:EE_
-X-MS-Office365-Filtering-Correlation-Id: 08e5de6a-6e13-4af0-d213-08de83ec2601
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CEA:EE_|SJ5PPFE654FA166:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5079f56c-559b-465c-e58a-08de83ed0bbc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|7416014|376014|82310400026|36860700016|7053199007|18002099003|22082099003|56012099003;
-X-Microsoft-Antispam-Message-Info: gXz4mlq2g5yPTW80Uf4T0hEAAw8IheS15Io3CTL5vmhvVbk/+pYaPmn4Yezag08GrK+Dxa17pEKjThROU0cHUKY6gZ2FMAlSmOc3GS4eEzyKRjBWyjKJsHhIJGpfAjw4LgszE8SWUAgUJKp7tkJHGuMw95gurS9Nao77BcD93WP+SsaXCjiamVU8LfCBiUkcabNTJ9x6ISb1bYtXU7ebXjT327a8WTZM9AyEyQLOWP2Y8DQrmB4zKU6wP4fb0Fz9OSVr6V1AkWOHb96Hl/aRP7HNeSYZN2oe3KanO5Junhgexwlwyr0XeULcFnu90umpRaaOvWGihPh14H4EaMsUJ0EZU/Wb/dNKkqLmS1e3oi+wqQSmNiN1JLeJfK5Nv1dKlfelpr0dmu4KUpabWlCOMbt51hqnXtdOKam3mOVF4IY7N4lUKnlaZVMaq5+MmgDzZw6+Z38ucIO3XkCTNZryB5sRv20ccsCLWaQNCp9S/1BqSnyuTHJkgAa/8WLDcQsOKUqT+Lf5dxISDLTiBCOjERSmtcDKNDRk3SQjE7kjH5/jskISil1tze1StcLu4pFh8ygX7kXdYHq4Spu2Gc1fU2odOjivJLKmEm8pr1oUm/Cnhc9FNcN63RkwytpqvLRp8setHAttpkLFO58Z6AzywwJAr+lvqeNu6gX8EeRMa9x5idz9FrLBxHEADqFADXvFq9y5pMIlkYooBaxvVMxAmDMVvk1MsHeIVGw0pUxD/kHJjRo2wxXkPBo7/lwM2fOJR3f5Ikpq7qJ2Azqee7jAnA==
-X-Forefront-Antispam-Report: CIP:198.47.23.194; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:lewvzet200.ext.ti.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(82310400026)(36860700016)(7053199007)(18002099003)(22082099003)(56012099003);
+ ARA:13230040|1800799024|7416014|36860700016|376014|82310400026|921020|22082099003|56012099003|18002099003;
+X-Microsoft-Antispam-Message-Info: qj97AwdpZQccTWd385LvSKk3E5ZSMl6u6hbzbt2K5hMHqeVTY+V6I9UaKkAWFLU1VdvR9nsSA8HRneZ0nju9zZb5kbQujv2I6WWQ+FAhUL7dNfT4YuXTb8h2MgPyk70SyN77WzJAKR4v+y920OCBKtmSdm3o1MHPqsq2IwBenw+IKeVpjTjTI0oEzmd2jeLpCY865fMExTeDAAx2HAt31IY1x1/mireGjZ9SgYnRXuMe27GpCiFdZI+6kk6O0wtenZdp6FkZGu/EshyCf5PxNjJKk0IdlVyy0iC0QVH3GzvTTxnX2IQZf6pX+3aD1wl8fIOWM4VyTlpw9OMfyyN0ONN3DoKeN7E9cd3ROOQqqTbCmfioUezCE2aFYJa8CKdbs1L7GMYz33Rwn9UM+Fia6plRxjzEuGjA1QeyoGyWGV9K0Mali+uZSTUjoG7Zutctbss/w1/e90e28fINyfxvaaRSuwMSUalspc1jmR1jXbvtigWlHA12BxZKzurPbatFMbySoIq9y5IUV0T4PWmjaKg7WoT00RuHYpdQitwC3n8jma2ErbYF2W0k1ppUKjWp9WEIzSpf87EXNGiUdmYbUvE3Xu3Sn9IUXAa2khgB5IKj1WuQ57+mrRg2f/cf90MRGAiEr+tGEaWGVvKTq1YWtymyxIlbTEPymMHWsVCLpGdpsecwrQbAS/72j7AEzxzSAGhES1m5PoDRfjpS+dC9bcdjZNV0HIpZ9EXCUIdD+Tsk/A5TqMWfobJTzPaYdTiPUA29EN0c1LJJW3+PP//bSBmgDWSMk9jQfbWGNcYJ3cUF1YBCFU4sJ85mvzZKSBW9
+X-Forefront-Antispam-Report: CIP:198.47.21.194; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:flwvzet200.ext.ti.com; PTR:ErrorRetry; CAT:NONE;
+ SFS:(13230040)(1800799024)(7416014)(36860700016)(376014)(82310400026)(921020)(22082099003)(56012099003)(18002099003);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: vQeb86NUWl13sAlAYRT5tQSB6oRjY6/8jyvIyfaOt4pOoR4Uq4T1vX+miikiLysNYD6JolrpVsEgAdmgLFunuQfqE3PqDvS3LI4vLnnyp70S/0BEvtFeTRhGQ8btgEkaerR9ZKtyMARkmmBc0eDRF83WMhLq30eC15RQkoaxouQ3Z5OIe0o3zvboqZDEpXxpCzVqDY2U9b+Peaz8FEyPFFN9eoaYJJ4ZH/9A8oiwQKSowcYeffF9m6nTJwL3Pe2BOYCDr6XHkh4s7NUFcQYpch8zfa7wHGIvCaUucwNUIBbPqTD2SfJPi5WcYt6+yhz1muAlDc0ivnW6gG4NYaMIOEn0s96ajp/rDL0pxQQKLWWTSQG81/jN1bBVMSCvsw9l3JwxoQjJjZDENtr+mclk2x50gSOU/20tXoR4YsGgRJqXGOOHBJgnVagPlrjzH42k
+X-MS-Exchange-AntiSpam-MessageData-0: 0EmNrq+8bfpX6KTvX5MOc9jw9I9sfTV5uGHcjCt8Bo33LS6nwJ8HZIR9aBjwhysVMjPfXnj8wkhVJBslbGr3H1XCLoYHcUP2UJRMEf0ApyeysLfJsXLdRDsEzAyN3KLw/rtYa7z6oQVo+xHjDncvJDMg1tZSFygiAjQc9T0CV+QTTHpjKPP62JO3rUX3pCA4TPjfT/SFaFnBpeJ3QxlRW2U+GIgqpSi9Zg0AyFeSxIBnVn0btFi4k8wZvvs2q0vdfvv92x1XObKejgygdSR+iky7l2RZ1PJ8jrjBOWGpfpuEGJJaCi7sQcV/cCKrCqccmQnZAkxcV/DzRAbIDbkNGzBmIwHyYMjuIWffkqtOFA+OJ3D28S1DuSAa58/bo9G49SsmRLatncxw26W5ome1zyBIW88wHV5n9Yc5i1A2cHIMej7wBNVGoZ+e5WsGvrJD
 X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 06:12:20.5265 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08e5de6a-6e13-4af0-d213-08de83ec2601
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 06:18:45.9275 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5079f56c-559b-465c-e58a-08de83ed0bbc
 X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.23.194];
- Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF00029929.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7; Ip=[198.47.21.194];
+ Helo=[flwvzet200.ext.ti.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CEA.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR10MB6621
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPFE654FA166
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,191 +141,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Mar 17, 2026 at 6:54 AM IST, Tom Rini wrote:
-> As exposed by "make randconfig", how we have SCMI_FIRMWARE today is
-> incomplete, and in one case, used incorrectly. First, SCMI_FIRMWARE has
-> a build-time dependency on OF_CONTROL being enabled, so add that.
-> Second, RESET_SCMI depends on SCMI_FIRMWARE being enabled, it should not
-> select that symbol. In turn, a number of platforms need to now enable
-> SCMI_FIRMWARE explicitly and not rely on RESET_SCMI to enable it for
-> them.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-
-Acked-by: Anshul Dalal <anshuld@ti.com>
-
+On 3/7/2026 12:35 AM, Christian Marangi wrote:
+> Implement a generic function to get a FW loader dev from a node.
+> 
+> There is currently only get_fs_loader() but that is limited to chosen
+> node and is limited only to FS loader.
+> 
+> Introduce get_fw_loader_from_node() that will parse the
+> "firmware-loader" from a specified node and will loop over all the
+> available FW loader until one is found (as it will be probed by the
+> dedicated compatible)
+> 
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  configs/amd_versal2_virt_defconfig  | 1 +
->  configs/r8a78000_ironhide_defconfig | 1 +
->  configs/sandbox_defconfig           | 1 +
->  configs/stm32mp13_defconfig         | 1 +
->  configs/stm32mp15-odyssey_defconfig | 1 +
->  configs/stm32mp15_defconfig         | 1 +
->  configs/stm32mp15_trusted_defconfig | 1 +
->  configs/stm32mp21_defconfig         | 1 +
->  configs/stm32mp23_defconfig         | 1 +
->  configs/stm32mp25_defconfig         | 1 +
->  drivers/firmware/scmi/Kconfig       | 1 +
->  drivers/reset/Kconfig               | 2 +-
->  12 files changed, 12 insertions(+), 1 deletion(-)
->
-> diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_vir=
-t_defconfig
-> index 94dce5c191c4..8cc210946539 100644
-> --- a/configs/amd_versal2_virt_defconfig
-> +++ b/configs/amd_versal2_virt_defconfig
-> @@ -80,6 +80,7 @@ CONFIG_CLK_SCMI=3Dy
->  CONFIG_CLK_VERSAL=3Dy
->  CONFIG_DFU_RAM=3Dy
->  CONFIG_ARM_FFA_TRANSPORT=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_FPGA_XILINX=3Dy
->  CONFIG_FPGA_VERSALPL=3Dy
->  CONFIG_DM_I2C=3Dy
-> diff --git a/configs/r8a78000_ironhide_defconfig b/configs/r8a78000_ironh=
-ide_defconfig
-> index 180704e75af8..64e2c278a7e0 100644
-> --- a/configs/r8a78000_ironhide_defconfig
-> +++ b/configs/r8a78000_ironhide_defconfig
-> @@ -29,6 +29,7 @@ CONFIG_FIRMWARE=3Dy
->  CONFIG_NR_DRAM_BANKS=3D16
->  CONFIG_POWER_DOMAIN=3Dy
->  CONFIG_RCAR_MFIS_MBOX=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_RESET_SCMI=3Dy
->  CONFIG_SCMI_AGENT_MAILBOX=3Dy
->  CONFIG_SCMI_FIRMWARE=3Dy
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 36bf37827e91..b681b91c3f99 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -209,6 +209,7 @@ CONFIG_SANDBOX_DMA=3Dy
->  CONFIG_FASTBOOT_FLASH=3Dy
->  CONFIG_FASTBOOT_FLASH_MMC_DEV=3D0
->  CONFIG_ARM_FFA_TRANSPORT=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_FPGA_ALTERA=3Dy
->  CONFIG_FPGA_STRATIX_II=3Dy
->  CONFIG_FPGA_STRATIX_V=3Dy
-> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-> index 6bd139441122..620a6da2efe3 100644
-> --- a/configs/stm32mp13_defconfig
-> +++ b/configs/stm32mp13_defconfig
-> @@ -70,6 +70,7 @@ CONFIG_FASTBOOT_FLASH=3Dy
->  CONFIG_FASTBOOT_FLASH_MMC_DEV=3D0
->  CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_I2C=3Dy
->  CONFIG_SYS_I2C_STM32F7=3Dy
-> diff --git a/configs/stm32mp15-odyssey_defconfig b/configs/stm32mp15-odys=
-sey_defconfig
-> index 868ba1915f71..5d1c01c99fb3 100644
-> --- a/configs/stm32mp15-odyssey_defconfig
-> +++ b/configs/stm32mp15-odyssey_defconfig
-> @@ -86,6 +86,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=3Dy
->  CONFIG_FASTBOOT_MMC_USER_NAME=3D"mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=3Dy
->  CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_HWSPINLOCK=3Dy
->  CONFIG_HWSPINLOCK_STM32=3Dy
-> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-> index af2efc7bceb0..c26602b63b6f 100644
-> --- a/configs/stm32mp15_defconfig
-> +++ b/configs/stm32mp15_defconfig
-> @@ -88,6 +88,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=3Dy
->  CONFIG_FASTBOOT_MMC_USER_NAME=3D"mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=3Dy
->  CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_HWSPINLOCK=3Dy
->  CONFIG_HWSPINLOCK_STM32=3Dy
-> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trus=
-ted_defconfig
-> index 226d83357843..d7501612a797 100644
-> --- a/configs/stm32mp15_trusted_defconfig
-> +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -89,6 +89,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=3Dy
->  CONFIG_FASTBOOT_MMC_USER_NAME=3D"mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=3Dy
->  CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_HWSPINLOCK=3Dy
->  CONFIG_HWSPINLOCK_STM32=3Dy
-> diff --git a/configs/stm32mp21_defconfig b/configs/stm32mp21_defconfig
-> index 8ad31292579c..6a74a435f8d5 100644
-> --- a/configs/stm32mp21_defconfig
-> +++ b/configs/stm32mp21_defconfig
-> @@ -51,6 +51,7 @@ CONFIG_NO_NET=3Dy
->  CONFIG_SYS_64BIT_LBA=3Dy
->  CONFIG_BUTTON=3Dy
->  CONFIG_BUTTON_GPIO=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_I2C=3Dy
->  CONFIG_SYS_I2C_STM32F7=3Dy
-> diff --git a/configs/stm32mp23_defconfig b/configs/stm32mp23_defconfig
-> index 49f47becba64..ed6fdd9662ef 100644
-> --- a/configs/stm32mp23_defconfig
-> +++ b/configs/stm32mp23_defconfig
-> @@ -51,6 +51,7 @@ CONFIG_NO_NET=3Dy
->  CONFIG_SYS_64BIT_LBA=3Dy
->  CONFIG_BUTTON=3Dy
->  CONFIG_BUTTON_GPIO=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_I2C=3Dy
->  CONFIG_SYS_I2C_STM32F7=3Dy
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index 99b22a68fda6..42335aafeaf3 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -58,6 +58,7 @@ CONFIG_NO_NET=3Dy
->  CONFIG_SYS_64BIT_LBA=3Dy
->  CONFIG_BUTTON=3Dy
->  CONFIG_BUTTON_GPIO=3Dy
-> +CONFIG_SCMI_FIRMWARE=3Dy
->  CONFIG_GPIO_HOG=3Dy
->  CONFIG_DM_I2C=3Dy
->  CONFIG_SYS_I2C_STM32F7=3Dy
-> diff --git a/drivers/firmware/scmi/Kconfig b/drivers/firmware/scmi/Kconfi=
-g
-> index 33e089c460ba..cd912ebe4096 100644
-> --- a/drivers/firmware/scmi/Kconfig
-> +++ b/drivers/firmware/scmi/Kconfig
-> @@ -3,6 +3,7 @@ config SCMI_FIRMWARE
->  	select FIRMWARE
->  	select OF_TRANSLATE
->  	depends on SANDBOX || DM_MAILBOX || ARM_SMCCC || OPTEE
-> +	depends on OF_CONTROL
->  	help
->  	  System Control and Management Interface (SCMI) is a communication
->  	  protocol that defines standard interfaces for power, performance
-> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> index 2fd91d6299cc..66911199c8ba 100644
-> --- a/drivers/reset/Kconfig
-> +++ b/drivers/reset/Kconfig
-> @@ -208,7 +208,7 @@ config RESET_RASPBERRYPI
-> =20
->  config RESET_SCMI
->  	bool "Enable SCMI reset domain driver"
-> -	select SCMI_FIRMWARE
-> +	depends on SCMI_FIRMWARE
->  	help
->  	  Enable this option if you want to support reset controller
->  	  devices exposed by a SCMI agent based on SCMI reset domain
+>  drivers/misc/fw_loader/fw_loader.c | 40 ++++++++++++++++++++++++++++++
+>  include/fw_loader.h                | 15 +++++++++++
+>  2 files changed, 55 insertions(+)
+> 
+> diff --git a/drivers/misc/fw_loader/fw_loader.c b/drivers/misc/fw_loader/fw_loader.c
+> index 6459ba23a15b..e477a631fae3 100644
+> --- a/drivers/misc/fw_loader/fw_loader.c
+> +++ b/drivers/misc/fw_loader/fw_loader.c
+> @@ -8,6 +8,7 @@
+>  #include <blk.h>
+>  #include <linux/types.h>
+>  #include <dm/device.h>
+> +#include <dm/uclass.h>
+>  #include <fw_loader.h>
+>  
+>  #include "internal.h"
+> @@ -67,6 +68,45 @@ int generic_fw_loader_probe(struct udevice *dev)
+>  	return 0;
+>  }
+>  
+> +static int fw_loaders[] = {
+> +#if CONFIG_IS_ENABLED(FS_LOADER)
+> +	UCLASS_FS_FIRMWARE_LOADER,
+> +#endif
+> +};
+> +
+> +/**
+> + * get_fw_loader_from_node - Get FW loader dev from @node.
+> + *
+> + * @node: ofnode where "firmware-loader" phandle is stored.
+> + * @dev: pointer where to store the FW loader dev.
+> + *
+> + * Loop over all the supported FW loader and find a matching
+> + * one.
+> + *
+> + * Return: Negative value if fail, 0 for successful.
+> + */
+> +int get_fw_loader_from_node(ofnode node, struct udevice **dev)
+> +{
+> +	int i, ret;
+> +
+> +	node = ofnode_parse_phandle(node, "firmware-loader", 0);
+> +	if (!ofnode_valid(node))
+> +		return -ENODEV;
+> +
+> +	/*
+> +	 * Loop over all the available FW loaders and stop when
+> +	 * found one.
+> +	 */
+> +	for (i = 0; i < ARRAY_SIZE(fw_loaders); i++) {
+> +		ret = uclass_get_device_by_ofnode(fw_loaders[i],
+> +						  node, dev);
+> +		if (!ret)
+> +			return 0;
+> +	}
+> +
+> +	return -ENODEV;
+> +}
+> +
+>  /**
+>   * _request_firmware_prepare - Prepare firmware struct.
+>   *
+> diff --git a/include/fw_loader.h b/include/fw_loader.h
+> index 56f5e3be6195..7053c7bc6f05 100644
+> --- a/include/fw_loader.h
+> +++ b/include/fw_loader.h
+> @@ -6,8 +6,23 @@
+>  #ifndef _FW_LOADER_H_
+>  #define _FW_LOADER_H_
+>  
+> +#include <dm/ofnode_decl.h>
+> +
+>  struct udevice;
+>  
+> +/**
+> + * get_fw_loader_from_node - Get FW loader dev from @node.
+> + *
+> + * @node: ofnode where "firmware-loader" phandle is stored.
+> + * @dev: pointer where to store the FW loader dev.
+> + *
+> + * Loop over all the supported FW loader and find a matching
+> + * one.
+> + *
+> + * Return: Negative value if fail, 0 for successful.
+> + */
+> +int get_fw_loader_from_node(ofnode node, struct udevice **dev);
+> +
+>  /**
+>   * request_firmware_into_buf - Load firmware into a previously allocated buffer.
+>   * @dev: An instance of a driver.
+
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+
+-- 
+Thanking You
+Neha Malcom Francis
 
