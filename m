@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4E62FD7091
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5876FED9E1
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A7AF843D1;
-	Tue, 17 Mar 2026 15:55:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8030D8437E;
+	Tue, 17 Mar 2026 15:55:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cYngSDbf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mXaLtuvY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 947C1843E0; Tue, 17 Mar 2026 15:55:18 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 15B128437E; Tue, 17 Mar 2026 15:55:53 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 983F9843B7
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:55:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B55B8436C
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:55:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-48558d6ef83so41457285e9.3
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:55:16 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4852fdb36a8so68470385e9.2
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:55:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773759316; x=1774364116; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773759350; x=1774364150; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=IpnZl3UdfXiHjtTW/98tESO2LVfBuE/SBgPrHVdhbYo=;
- b=cYngSDbf7oXoLEvBDYCQq9L+qtrMD5X5bPmwbhtpnAjZC+Jao7mSTPtd+3bZhC765T
- pJGzWgdLtpn+gKkQ1SGkupwIFtXB8F3AjWC2lutf8JVA7EVwQEJuMrRNlOLtjuHlZbUn
- P69/0h1i5+Eb4zjBk6FLdg+JAfC2fpH5CnYG0EI8taZe7HHd9Nux+hSSJv/C5swiDePk
- NR+duVlzbMN9Pglva9CiERIly6KCrUjIa4iIS810nfZoNStgXDmLYL7DFcgdoRmQnVrL
- 5UoPulnnVPUY3KfvsQP5ON19HxaVAFiQj1E9lNFpmQ6EgVJCxGknpc+67X7o/A7V/EsQ
- z1qw==
+ :reply-to; bh=jcVsJbw8HLn0D7ygpVLgl6LlRnzfbGpKgvpSDbAadxA=;
+ b=mXaLtuvYNtM8rCnmpqZuMooS+SewCfA2mC5Jptcft2KYuCfiAA/2XhYoCQt7Y2AT4s
+ pjy9jj0evVFppsq6Z56medwkFwjG7oqYUHpNope/N7MMz9wIS/Yh6pD5rjw/s2rSYadZ
+ JKtx2iJISAtIMc/8nxarpWwnWgfkeAAC1ZPrsc1me9QB6MYXdPSsHGCRSb3IHDmicx3E
+ TDM6xku5WbIWw7AySTzQbonMWVq5FrgkF+NXPSR7iVlOsJtMRZreN+5rZqhY16vQbFDu
+ tXdsnv2bT23im8e4JtMRvoZ9ZEe7QbNqvZesZo6vLlpblFGDM0wu0VElv4ZZeTzA8IdK
+ pong==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773759316; x=1774364116;
+ d=1e100.net; s=20251104; t=1773759350; x=1774364150;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IpnZl3UdfXiHjtTW/98tESO2LVfBuE/SBgPrHVdhbYo=;
- b=Ho30qJ29N3y6oN5feZJpOzkohZOHNfChs2vbZCgKPqJJ4bA3wb2Tsb3XM8TQDtqi9b
- sTaOiAx1GV6FGK+iRYTx+n3QQwE6n99DjLVVXjGBVh8AV5xxu2jfByqmJRIbGU9UkZe+
- pKrqsj0S1M24fXfSBOBB8LKU2vjZaeDQ2IfQZKFfl7nm5aTZd6EmjmjJRQwJz1JKmOHB
- 8I3GHD87d0RVJKtMh79B9UowWQI4ENuOuCQQZ4OjT2CxMUkBgaqUgWNlIwMdQvdEi3j6
- wQLT+zu1Q/Xu2l/zfLX3Vx8f+EEfycJEXcpJk0F7hRZqgUq5e0AEW55aGKNOtUX+gTmu
- if6A==
+ bh=jcVsJbw8HLn0D7ygpVLgl6LlRnzfbGpKgvpSDbAadxA=;
+ b=ERQ0It9QhJ2tXdp7PDZqVPonLwx2ZK8Jt3SZV3bZC421h5WRFxDwvppGEuACxoMr7+
+ 9zFndmElzE29A4ng5BAh+3/zf2nqZmXgT8Rt4EmAORAX/vuZlNgBgqfbuwfdhY/RGGZx
+ NTNsvGYpoJ0dWjicv+EmE9Nn3XNw/p6ybCwXj/uJj52k8km4an+dDyVw60mU11mVQXdV
+ +NWhheh4jfX0ziHpCa5iLht8IUqG/+ALt83VtCfO4EKhw6C/+a1NnS6zZ2k7zGXr8CAE
+ xRX0iEOX96Vry3z7rYarTZU27vBetWFu+HjAj9bI/WWxK7b6OkLiN6ztRKRlqD+UlB9D
+ VP7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOxSPe+++ztfEEj3hJBdUAjJr3ndG4J5iq/b95EgowVKvTCsmjBkWSnTeMR6brTGzGwuNvPkY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyhDY66EaHCqeQOt80ilZ5jdSZzYhxZPaKl9ltsQPjm6f6Jygn5
- s9g6QO3Vpx2ziwWQC+LHM3giWGv52kFZ396kNHYyIaomdR51VkVoiHrndsXaxst6ic4=
-X-Gm-Gg: ATEYQzw9Mx7abUCTr8prUzKHb/uPTt+QEhsQHx7wbBiUGETVpE+LXIOVt15YK3N+sWd
- ZYpUZI38wblY65yMLmFdr0pnSdJjCviwumXkx9mTOq3bSuCpdkDuVLG0g/R5mwhw6yObBU2prFK
- 89hcfuEB0WR/5ErJd9dteAj0F84+H2NnyTtjoFhRrsaGoQktbGzj8tckvig9OClwbu1tyIsw5Di
- sGRGtbxs9JrF/UflYWUDMr7Xoy5DYVHqvBStXw+F0IudWZonmgv8P4hRpQMDMSV3kvFZ6HSgMuk
- MKcy2kqpwHivAvsVENqnm19/dKEVvYqUFpeCa5q3rywcu+oPcvEpMOcj0nGKElsmIaODs4NPNIa
- xjuypndapMWu+djnpLGzhAX+VVNty5hw0dOPzXHtZinuBG0d4a2Y+gCh/gBiGJBvglyP12vqf0W
- 1yuDv5pfatHIbP/lwE8vk6w5ZBuj4QCy9Dm9hMg1PQaz92DItvBj4ao3c37DI3JpWJ+AYi/wux8
- fYU86w=
-X-Received: by 2002:a05:600c:6812:b0:485:4394:b0e with SMTP id
- 5b1f17b1804b1-485566d2ce4mr282594085e9.12.1773759315904; 
- Tue, 17 Mar 2026 07:55:15 -0700 (PDT)
+ AJvYcCV1NPqoiwh8j131AUuFI6QmC/HxK5fQdAJjn671BEG5P2ztogUg0AdYQE7rOC90SgxOnGSQlfM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWZpKb7Sz6+sQnWrH9f3cyh9/44Rxsmd8qqju93V6+vP0Xn7ib
+ qMaTMNepczbCfTsK6jji07guVZb01M4fXlS2aa9I59pn38dIpfYnB0Y7eEYmqBIr0ys=
+X-Gm-Gg: ATEYQzwiHZsBTEaMur7BzbpKYKwz6mD2namQehXRDIMWrs88WJ6chSW7kCMkz5ghXXx
+ HnO0fgzdrnR+6m/5kRSHb8hJIKzjwvyuZ2GqI6pFe43KdJ8JJy1eWYTrffc0xYa133Bui4/yR25
+ aUfRzEKgP+34a4ismYDiy6Ml9nk9Hu9ZmzzKySPzWZZ0DFHcCxwdKIjFwCzKr9a5xN3H4ZeANr8
+ XcO8RO3qHhEe9R8RgY2+Jkp9U7GEE10YuDGMnkpCExPSGeRYjkJtvQoARyo7X846T/EnTyF2Vil
+ XpSxsZVquDFFPRelHeJ1tO6JRp/jarXdXVwlg6T4nTZXUYN52FFddzXIHHA+pvx6GF86bzZ/WX3
+ FlIbUdc+n05Ni2HnJKUkl5uiKGqpHN/w8mpqqJrQAhCqlJP+Zp2GALWfnml/kO6rIRXq8YDJtZG
+ aJl3rMhHRZLMW/I/znCvMK9roFIRgkJXODS6mgK68PD97z3XcqiRTbh91CfTu5TTcFBXDXYoSzu
+ 2sg5TDD+V2XgxsYbQ==
+X-Received: by 2002:a05:600c:a46:b0:485:3b50:fe54 with SMTP id
+ 5b1f17b1804b1-485566d6ff2mr299184785e9.11.1773759350401; 
+ Tue, 17 Mar 2026 07:55:50 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:c778:639f:c042:aa01?
  ([2a01:e0a:106d:1080:c778:639f:c042:aa01])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-485563953dbsm225793495e9.0.2026.03.17.07.55.15
+ 5b1f17b1804b1-48557c6700fsm114947585e9.22.2026.03.17.07.55.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 07:55:15 -0700 (PDT)
-Message-ID: <9c3e6302-1312-44a4-8eb1-9e1f39b2091f@linaro.org>
-Date: Tue, 17 Mar 2026 15:55:14 +0100
+ Tue, 17 Mar 2026 07:55:50 -0700 (PDT)
+Message-ID: <12285daa-b242-4fe5-983e-8d451c4e9e2a@linaro.org>
+Date: Tue, 17 Mar 2026 15:55:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 07/11] drivers: phy: phy-mtk-ufs: do not alloc priv with
- priv_auto
+Subject: Re: [PATCH 08/11] drivers: ufs: ufs-mediatek: fix phy handling
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -97,7 +96,7 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Chris-QJ Chen <chris-qj.chen@mediatek.com>,
  Sam Protsenko <semen.protsenko@linaro.org>
 References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-7-7d731ec438ae@baylibre.com>
+ <20260317-mt8195-add-ufs-support-v1-8-7d731ec438ae@baylibre.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -124,7 +123,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260317-mt8195-add-ufs-support-v1-7-7d731ec438ae@baylibre.com>
+In-Reply-To: <20260317-mt8195-add-ufs-support-v1-8-7d731ec438ae@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -145,29 +144,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/17/26 15:24, Julien Stephan wrote:
-> When priv_auto is specified, we should not manually alloc memory for
-> priv data.
+> Currently mphy is declared as a pointer inside ufs_mtk_host struct, but
+> it is never initialized.
+> 
+> Fix this by using a struct phy directly in ufs_mtk_host struct instead
+> of a struct phy*. Update all call to mphy accordingly.
 > 
 > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
->   drivers/phy/phy-mtk-ufs.c | 4 ----
->   1 file changed, 4 deletions(-)
+>   drivers/ufs/ufs-mediatek.c | 18 +++++++-----------
+>   drivers/ufs/ufs-mediatek.h |  2 +-
+>   2 files changed, 8 insertions(+), 12 deletions(-)
 > 
-> diff --git a/drivers/phy/phy-mtk-ufs.c b/drivers/phy/phy-mtk-ufs.c
-> index 0522e1ab683..c4c214dcde0 100644
-> --- a/drivers/phy/phy-mtk-ufs.c
-> +++ b/drivers/phy/phy-mtk-ufs.c
-> @@ -139,10 +139,6 @@ static int mtk_ufs_phy_probe(struct udevice *dev)
->   	fdt_addr_t addr;
->   	int ret;
+> diff --git a/drivers/ufs/ufs-mediatek.c b/drivers/ufs/ufs-mediatek.c
+> index e860d765eea..5d882904c84 100644
+> --- a/drivers/ufs/ufs-mediatek.c
+> +++ b/drivers/ufs/ufs-mediatek.c
+> @@ -182,19 +182,15 @@ static int ufs_mtk_bind_mphy(struct ufs_hba *hba)
+>   	struct ufs_mtk_host *host = dev_get_priv(hba->dev);
+>   	int err = 0;
 >   
-> -	phy = devm_kzalloc(dev, sizeof(*phy), GFP_KERNEL);
-> -	if (!phy)
-> -		return -ENOMEM;
+> -	err = generic_phy_get_by_index(hba->dev, 0, host->mphy);
+> +	err = generic_phy_get_by_index(hba->dev, 0, &host->mphy);
+>   
+> -	if (IS_ERR(host->mphy)) {
+> -		err = PTR_ERR(host->mphy);
+> -		if (err != -ENODEV) {
+> -			dev_info(hba->dev, "%s: Could NOT get a valid PHY %d\n", __func__,
+> -				 err);
+> -		}
+> +	if (err) {
+> +		if (err == -ENOENT)
+> +			return 0; /* no PHY, nothing to do */
+> +		dev_err(hba->dev, "Failed to get PHY: %d.\n", err);
+> +		return err;
+>   	}
+>   
+> -	if (err)
+> -		host->mphy = NULL;
 > -
->   	addr = dev_read_addr(dev);
->   	if (addr == FDT_ADDR_T_NONE)
->   		return -ENOMEM;
+>   	return err;
+>   }
+>   
+> @@ -323,7 +319,7 @@ static int ufs_mtk_init(struct ufs_hba *hba)
+>   
+>   	// TODO: Clocking
+>   
+> -	err = generic_phy_power_on(priv->mphy);
+> +	err = generic_phy_power_on(&priv->mphy);
+>   	if (err) {
+>   		dev_err(hba->dev, "%s: phy init failed, err = %d\n",
+>   			__func__, err);
+> diff --git a/drivers/ufs/ufs-mediatek.h b/drivers/ufs/ufs-mediatek.h
+> index 11a83d34c5b..0ffd0483eff 100644
+> --- a/drivers/ufs/ufs-mediatek.h
+> +++ b/drivers/ufs/ufs-mediatek.h
+> @@ -154,7 +154,7 @@ struct ufs_mtk_mcq_intr_info {
+>   };
+>   
+>   struct ufs_mtk_host {
+> -	struct phy *mphy;
+> +	struct phy mphy;
+>   	struct reset_ctl *unipro_reset;
+>   	struct reset_ctl *crypto_reset;
+>   	struct reset_ctl *hci_reset;
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
