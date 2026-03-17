@@ -4,139 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03EC4F3380D
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 07:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50673F3380C
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 07:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81BB7840CC;
-	Tue, 17 Mar 2026 08:42:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D437684105;
+	Tue, 17 Mar 2026 08:43:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Pu92FK2S";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q25IXKtQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13F75840CC; Tue, 17 Mar 2026 08:42:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 920A2840CC; Tue, 17 Mar 2026 08:43:59 +0100 (CET)
+Received: from mail-yx1-xb12b.google.com (mail-yx1-xb12b.google.com
+ [IPv6:2607:f8b0:4864:20::b12b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13351840B5
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 08:42:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E587840CC
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 08:43:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1773733360; x=1774338160; i=xypron.glpk@gmx.de;
- bh=6wxok6xJ2ffvgRnPNkHPEcl9QKzoG/sCuScELPter8M=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Pu92FK2SsWHFaRqQxk7iTJxK89fsE+k7y4329Y19FAaauqYjbFAK3tgHUWRRvmFM
- J6DGVL8/dsnPu9J4gixKmUTHnpCdDkqTXaqkn3mkjkdF4ozBLyXsqcGkJovnfkaF6
- BYGqemondBumcf/uLIR3UkHoK/+gP+Pr8Z84WCCbTg7Gc6oAVKBWNbp9cWC8D9/JS
- rJKgssXSJTjfHZ/NGLcDOezMTDCpBNs+GB5avotZwQhaQ5OVrWeWuLDYX+gnBp0Iz
- jcnsdHitMHBR8C2ax79mlmo3xKYqIikkPx623qptx1RW0TNMuTkKFsZNLE3O2wsUp
- iIJw6m7DTe13NeFSqg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from client.hidden.invalid by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPog5-1wFxqN2PjP-00Vr87; Tue, 17
- Mar 2026 08:42:40 +0100
-Date: Tue, 17 Mar 2026 08:42:39 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-CC: u-boot@lists.denx.de
-Subject: Re: [PATCH] EFI Loader: Correct dependencies for EFI_HTTP_BOOT
-User-Agent: Thunderbird for Android
-In-Reply-To: <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
-References: <20260317012449.4162666-1-trini@konsulko.com>
- <CAC_iWj+WHh14nTdYu2BUTqvSwrtHiJBJVncArPwrBqWb6kXnTA@mail.gmail.com>
-Message-ID: <9F36DE37-16FF-4519-9F66-A4A79F618794@gmx.de>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb12b.google.com with SMTP id
+ 956f58d0204a3-64c9cabfe5dso665952d50.0
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 00:43:56 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1773733435; cv=none;
+ d=google.com; s=arc-20240605;
+ b=hq5Qnv/8proVhYzAzb/1CB7e5WLuGGq1iC1u31Nd300gm9CXglDf2ZQwTdNWPeb5G/
+ l2k/FkGOK+ATGLlALeFDzMVOjz98MmYeBRym9MKcwo03D+KxcMe9cse4F40AiqlKLbE8
+ hXSTYA0IV4UywKYYcTHN4nLTM1sG5lmRN0cR7RiOiJHT7Qb/+E4Jwts91uELkayKT+V1
+ HjdGecXPPTmjT47590bJPgJCV0mkwsk3Nff2HtUZ5x6uO5znw1p6smHfZNwDujwSAiLJ
+ XgalDZ880YQ4BBj34IvZfS0pHe295yXucw2YsaJNTaNONxFAfUuzhE8h0HGzvQAcYFBG
+ KFqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:dkim-signature;
+ bh=sm/Ay57S+6hNiGJYLc4S4frsaa0jdUIYxyg21h4/Dvw=;
+ fh=3hA+Clqkd60dDRtGqETRQmOiemDWgBXsxhM1WdK/pGo=;
+ b=MzeQJiqkkLGZqrjmBI8TLd3fb9+K2H/t8yNklvg/Pos7MDD1tNrPpPw0WduUyXFX/R
+ CGu7UbXiN8kPtr9osooNk/woJSJ1Q4bYTfs0d7z4lHYN5wbGsP8faA9X78rHXhBhNxHI
+ +BaQqpelXjVukLLiLxZ9Plf/c754VZdVTTe8HXKHlclQh5DJIUsxH4T8+S5OR44Xyl1r
+ naN2QXZ2QJ+hYvk93tnbrXVf5PAdqeygYUX+XZ+ljrDfAG1dXlXFiV9JasUb09MjKl/x
+ cSLlWSd1NUnySpSViz8UAKYkwViJwEojE+0oXaCohGCUmlfJHDeyrrYViE8M6ZgiWJoR
+ AwpQ==; darn=lists.denx.de
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1773733435; x=1774338235; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sm/Ay57S+6hNiGJYLc4S4frsaa0jdUIYxyg21h4/Dvw=;
+ b=q25IXKtQJb2eUWYH919b5fuPnDJT9BJTerW3+c8vEEg7DoofnQJ639rqdSx/pnFXxG
+ Kenrd1ZhXJe9cJzaxRkIbdSeSLUDppGH7W6iVFbUdwEQFiaQHvgkCVk/HwVHQLJDm3Ux
+ vMVC/UQkFdG+VVsG4Uaswmd9gykQZpVoNeFQ0W3gYm162DuqUbApJ3QZu2t8I3TGNcJJ
+ +HFrb81KZLlTGHNHAg4WBYCxjPk5CW+jG4vt3IoCZ7nIYK7aInJKd9LBWTy89+Wn9Xvx
+ ATCTrtDg7HHsTCtyGyDelhU0EPAzSS8CcKMFaouLOPPP8OOWrqIouzNyOfDFKYrFz4Kj
+ 3W0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1773733435; x=1774338235;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sm/Ay57S+6hNiGJYLc4S4frsaa0jdUIYxyg21h4/Dvw=;
+ b=bN5hObMtsMtc70CxV7EdOee7pmCnMR7p0WFmhhU/34igJXPWRJroWGif031kZagC6+
+ 4x79HNLl2+zZt5By/kXbGgc/1rCBFfZW169cRXTNg7CtJXlZ0blgFW4LaEihwy7/ImZq
+ BD07d0nzpgudePFGnWAH36xDRQZLXzncxUfQNBF16sSEX8Y2dKbDwv6RnGCYZVMyPmfu
+ +Oetg4ZvhFokPqWjSLo+XhPV6NB/1qqfM1emQJ8frwBXL3Sb7Gv5MmyxdGS8D7sgxN/o
+ 7W1UfhjFGJ6OGkEpYkOZQyWQuYHIC6iLB/AQjuuyXSm+0rJGG+BdcmdE+eztkCEspdvX
+ rG6Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW+UZIxCorblw0aUntXAPlPRJDxz61ZMbudOpQx0KQfqjH+rM4/RA/XcDgoL6qO/jvDyOz9WoA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywi++C+Ue+BqdlhjqcGGvMu4wOlrV9TVy95UwmDN4vbhCk3HySc
+ iQERrXc+b+/4Z3ulO7VUVN8byV99gImiU6PBrVxbnXsUEWf0EBNvU5UTWjluaGD9arV4Nx90eq4
+ GezCVLP2eQOnU6ElXX+RluiXPVmfuWbW8ikhm65htRQ==
+X-Gm-Gg: ATEYQzxOspc0MX7HN5q0hma+upxBPPs5FivCxWo+oj03/lL2bUPEVK5gshg7Bl6lrPA
+ YkHdzCwZurtdhepE+s2jmMRM+NFCRG3wqDQ/75zmscgmuy3+QIea9MGiSB/0mdfSCBd3p9s2XB6
+ nzZJ5R7ZadD8SBCooA7zZUtzsarci6yYGJ3W6gcvnNDSbunYCVFBGmczMuhNYV0Neds8fdluNvL
+ hoMdBCJwsVNjtG7l0jSC5J9C5Ix88wQfXTocuxPoX2SzdXd37FnlahHWZCO7gVf2K2BT2OLhYMD
+ lKwK/ztM74U7W6Alfv02sal5LP+pYvVjHu5waD130kZ/DO9hBzgLH+I3UBwsD756TG8VpvEgTaX
+ EfQT3KtPwU9MPBojcsogHqBeAQBvN/jI7YNrJSefBUAnfGsPzNkmUKVyaJxI+NdQHhjVDy6tuQR
+ inmLBsTIb8GsslFyf/eH3/L2v1xD30vTAKZrQ9bKu0Ta6mf5et1KXDB3Xel9z37EpE1SD0a7vee
+ JZcNCSdF6pJ6EAeAa4URTEcDGA+FRBXg4ifTYx836BAhsphVEXZerp8T3SA7+zg4V9R9RsiqhG/
+ 5+NpdOds5ez51QSDaoyUM8l2aflpkzJQYOR0fMiLXMaS
+X-Received: by 2002:a05:690e:1d0:b0:64c:a815:513e with SMTP id
+ 956f58d0204a3-64e889f439dmr1352414d50.3.1773733434898; Tue, 17 Mar 2026
+ 00:43:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Fu5MEjvjSGlY/RuWcplM9nq0efOn/ZWw/8ULzVh9dpK3acINiFg
- qxbYSvcu4VXT02CpCF6rrxI+Kh9QsoUYf/cvL4mhGn/EUNr8QRZEmQw5a36rwl0TN1VUXMK
- bggwFzMSPcaWRx/MBuyenGGeRTgOGq4wdmAdP4N4eAvxQbqUcMqdPF8aFIVFl3112oMazRD
- 7W59nImdkmTGLQFZ3xWAA==
-UI-OutboundReport: notjunk:1;M01:P0:Py/lOGiPjXQ=;rxUjKFosjCX6l/zzcILFRt9+VJs
- Duef4ZnDNXrYvS5H7r4Zb5tki5cARpedoSB7tto/qLmiaJyUh7e+/iz39CP4nsRvog8hI+F3z
- Vrjs9qw/izWOxTTMTLCn1h+7acVGqfdWQFLidX5YJTwWQwlmOd3cvdPiDs6DGXssbg7xaPDY3
- 68IQno2IyGcYU5Iqjix+DiIUQ88jJSbRRVYr+CKDT8/x2wbrP0ehM9ql7iAsgz6TcJ++aFRh2
- mfIdjb0Fx7VNRKAJJDNAi+eUAFkPJZMar2Qnl5RQI8vu8SsVHY3/XvBO0syMiuh/NnX/70Nr5
- 01LBlfg3O0wRHxoDqCfjN7WNXMT/POvYk53o5r7l7P45+qRsMMVZrcdfYZZOdgNC5HOkcg97W
- Ado04YqtrCNLsNieKYX3X3XfInOVIwDtogENovzg18fJnR+ZwWyF8ishJJ1Px+M7O6zdjwtAs
- cQVU7RwyFU/T2SEMT0XaP+vn5MMSjA7yWaG/bnECbL0O3uQR3CaNsxVrSWqTWBWPkZes2xKSV
- wm/7j1rwcfUyIVoXfPEywiJDfAk7aIz1lHldMHGN2qb7EkcnXJ3ApKIpJA3oLm9HZ3fUyBbQJ
- QO3K73bzABzSdGjDTt0hAq5me2UKq3P8hKVp5HHSR7aMzDOk1J5qooOFnMscqbj08EO0LxpxO
- 2GhxUqGGQMXjmWRFhzONwdmnBj8xQd24D59X+oMnu4/NEe54rMaaAqn0Thl3WmgaFgrO/zmpN
- FztW9VKkWcCI3MQPvTKtMJ/jkMbPO2iVskqDIu+AG/BIZDCxX6vSSs5E7VEVyR+fPcgc4vexj
- p36vzue+mNg4t+rqClzu7GmKNwSE596fA6Wjkn2QCW4tiHpLjHHmB2H3e3HCJKBiEFMVrV9/j
- aooSGPg1uv+TyUpMSdlZM5LG8SzJoeLtXdZQwdWsogA5UIGEaZFlg9hd3IEG9EMoSkfHjL6D2
- oKm/G4eoOoXp+OL3duEbR1vhMLsiw5coQAWuaXn6sHK2SQb0KVhfv3Mpwn3IxO+fuqikfyL/e
- jE1Qi1+n6G27sHEEtc0E276Esq7yH31gDXqxSb4eyEyTnz4N/HKumjEQZES8mi2y+n2tdRYDr
- UcMfKHRS8a+iiBV0DPKdmoqWUjbKqSNSIZxT78DmES4GWIAXxUnmwHnPE+LPKxMLryS32YvLS
- 8gC498E95SM4ISjtgPMnPqj9aHEwo5kcAPC8a9YiwdSetsCTAQuAas7/yROyQZblEBHWTKzpA
- 0v8wIH2YMFb30MgKJ2I3NXTwUUvSx+2JCQHeJI9GGvkEzgrDeVPoEseGH/byRfwb20BC6o/8n
- isR3Dd79BM4T9PxTXgVL4fH9LMks7i/9GH6etpKMJuF+V0/23RWAah8evcHMhZVucUdz2PJFK
- 9ZHUc+sb8AAhD01i2MdUKgar/fTmxMbbyZ56tDcTBjKiM6VqqYikA2e14/q9++TtfdnO23B0l
- mZ+3TXejDGVGQzWQxE5j0tt1Ig93incdbgngi/ystxW4LtW/L6m7zL7kMDbtfpuZN1YAb4mlE
- u2dBINE33WW5r2BQDzEM81TqxKG/G/n7WqFT378NpWjPIAH9fc1tshlbncxTbEEV9Wu3GY7z9
- 9mTfV0mxX3rE5R0RyQLGwG/n2hRKHwBRNAvwTiPGa3HWfPH2SQmriFcrmGs0IEv7zyFo7hUDC
- QdhsUzctlFFfMVv4LGTuohlnbiosRVZg2qcdlLhA++weJBTak8hOUhXYBqkZMMKjjm+sw4FQt
- UKpY6TusLQLo++/nY7Y6vsE7l1CLSmoixGsV8nlHrV+cP5QzD0QOiWJxmJKomsfaj6uc6fiKC
- nd1FBaKZCqG6VWLkT/5ahTnW+9jKaZqChU58sTfdZ2kXp+kjkwoAFUSC238YwYRzcbeE/qRb1
- fb1lK4GN3GxsV/cZyFfPahsHztpsdvFDm+cL93QtFMrfL/37vTZ4AArc51Kaas/YBI6pDzwf8
- muVGpwrQb31d4x3DEAgTpNo1duwEremFg+Q7EVRr3kbM/WAmzbnNvhF6ExVpVkSnp7cIFNQiJ
- IrlufTg5RSUfUpeyJxty7nhx4FepjLWwfnxfc2pP4ebOSPp57WNTzd4o910MyXYWOPtR/qXN6
- 3h0bXmgC8FXdFLl/LJxIrpSLraJa6fyERM+BZgqdU3qIRv7K/sj7+Pb0rcRYGPHml8EcdEhfM
- 5TZypXB65cGhvg937zWildQBOherceaKSfgx9H55L9qMkwKuBCHLr8JzXPqdJYWcc+96BscPQ
- LR3WxAfuLzYVcnWdMRUJ+EGtAKXu4YwiXveX+MCENcDKkAsLYGqfvT+CjwRV3Nje7JAHHSPO3
- YQdK3eqB3GdMCjzn5hNCfJ0AI39kk2+gn6Cr1BWUEIIhaxxcE2bBnzAOkLn6qkdkeM8fmoDFZ
- kDc+DpC3+pbzrAfm29ZcJmFNqJt0+vpCiiGL+lmhxQEUx7OYbEMQgMvXYEDB40NOP9zAWk4Nv
- wCKIDNOrdJCbut5xDDcPpzHhPajyYn9CuD3imovuL/HDYvUk0eNSmEU6euHQmfI0jzdqD0YNG
- 5BJd8L8jNEnUvw9vCEU7Al8HNlXSCNanElDsI9XCJBYgCJbeuUOtOhGDZfzDle45xsDVJ92Bt
- 0jgozoCi7TfOGDaspQbjr94gqz0jId3BHsynmgDi5bFCR2CTOT0LEL11KaqGoUet9G/hrK9W5
- CguQVRJ2xPOJNLtmovpCPPDsk7+QM1XQ7sV1aGp6BDkBeeZrT1yzfO7Cx/IVKffGoVGCFzKpW
- F1OuOqwP/SaSQxN6uje3BE1aoTYV23WcqKv7jDsAFq4O4btvqlUA05uvqwcHxVE+3+d6asdej
- QZ9r8OWg3f/jkjlkdM79QdW6UQD2l1A48zYlFXKAdkgxhdHEH1ONeRgOXhHG0WELphR6FiPGa
- XhpO8mygn8Y2LXLVf3QKCJkLiY03DC1kIbMO8ARbltj9VUp6SsN1VQ/oXs7De72QGZsCjtJ7I
- 7IHMendTh8lvrJgiElCNZ0+0jssKe5YGCKo4OvgbiSnP0/MmVz69P9L95ywug1zkzu2e0iWSc
- 3kuLWqEcIZYP3m68rcaw64A12rDFb7wX+lkZJr5Ui6PODbCPFxiQp3gLRc7njdT9HqpDMRlyh
- yNGEJhQiyQr4iQ/hDXtKSRTCkozsZJ7/GE41m2MbR0eusc9qvJ4n9Ao+2vOkayDegEWzvwNUY
- MkC/JCy2l/jforybqX7hsmej9fNauMKOPqt+z5PtfjA0TCqNhLrvHW2h4wyXO16QzVKyGLMWb
- UQc302aPY/kx7Ky2hKH4daHVVMfy+/ZGTxYdnnIJlc6Dp0bKsmSilf0Gl2Jeiv5KDBTvWimgc
- 34tiOuTshbsRjU8VLJyZac2aXOQc9UxDCn3EITqdtzfPNn/7Eqlc35uQk7PEGMFDsbUu9+DCH
- XLC2iiICHXCOr4iIA1ccE+Dg3LfqJfSSLtKw7qb8m85Ir0r4wyi6Oq2gV1mDfq10unDjWUSrr
- g6qGA4BnsrX8XXyTVQ6FnrcCgYqYWuJ1AWH8wNR0S+bDXtByOmzySrlaCc4GRQMuSPSXNaeq8
- lXfKHJCIbaZWitTXiycaXJlrvW8eZ07ADukVvmk5gWHe/DpjJ2YJiAPSBkXVj/94yNotPC87g
- ZQcfG/oRzB3HP5nWEUbr0qPbVD+Vdz9TIPhX6AFyGt0qshl7ivIR9e2+Jb7C9QOToPPTAQPvt
- dIv9Cbwd/HVsMXfLjAanPZhaLyDiIqWukXkqw/pgw1GpuFW9FWGn6T07IfitpA/RWigk9x5Ml
- Mqv6c9foO2FOM3QVoPPSfOQnBSwUD+HGY1dnrDmr7YZZ2S00p3NkiolU0a93YOjkSdvc5qMu8
- eqw+b/TPinx1NSsxhWRb1XNjf8zs9RIlXqMTgA1pHiSwMCgtIKwN9CGxIjiQ5lY1gcBAmGN3z
- G6vy6n9pDGznJVZVOfG1/iNSpCr18OSXI9/VDRu4B1uZnNE8vKk4tWnLoG2X3MYLV5QtEtkky
- Th479l6GdTYmdw+npTD8Mc3YivOS+Oz68NunqPuzQEYugOxCd1ZTSfYkQuVBP70X7KHdOw/xD
- vuLYTNA2ZVOElDwu5+Y+yIYpk8fbLJY+6nwuowjKL/fv5r07+ZYN/HbAb7ms7dU8/m+QyLv87
- NUii9J4Yr9PGG9BEPDPlBVCJahDzGuIbJytupVBhnx6sZ0XUd48mV0O9u+bgHDPz70GmxC90S
- FraK0gd1V2cCKyH0Tg918du7KqZ/A1JtxQbeI0wf9NSNbEd/4IiJYg134i2JAr2bJO2kFbEX0
- G2CU87olxPgX4msfght7gqNeoEV+9V0RbC4fD2BgyqQYDlw8bOxmYge6FVmprsp5JAyPBXwxA
- 10gwMYKRaSrNRX2ZNj3gzb4KjqnNHUVN3K30JpkzSNV+pkfr0RWei7PBt82ybpMoL/bJre1bL
- thQDMZqdIWPBN3MoDcS6Xn/7JrPNV+KBX4dGg0C+1MpAcbMrRvHe1Ukqw5/7ISvJshN21/T4O
- 1o274jWVgf3F+vI0X1X0oUAjaR5LmcHGqk5qze6Xu9/Mji32ManKzh9x+ZGHd2zjoLTQ5XuVc
- U5pREAVJvUQVja3IX9UcyjIBoWHTr3b/jvj9gav34dP63iZ+tXaer/XWChzHkSPtFt7ll1QbO
- FDoGTQyspIS6sUmt25JyRl4ZKEoMfwzMCRYpmniR08l4Oa3zwcADwGVkBf6wGMvkG+szLBPiL
- t+L5NF+EXsONGhAbQm5PcMrRnA8Bd9jZjt5thOa3a+17oGcR/lZDj/RPReEQOM5BMOHFZ/n/L
- 7tUUKO0PRp+PJb2mWWGRuO9N1xOMK9yHROCaZtZKnDBARml5cqseNKXXtuNCuqbxJgF9kx79Y
- 3hmaGO6881fv2nWRLC1x4V1ZAbAo8/PJSNbCCXlMSaQERzcmVnQr4qPATqCmihWpO7RfP5zsk
- rpUMI4HY1X/pQBm4Q7wGmY0oJP0I9uS57gHiZfbm4SeOL3dZfqw8QIk0pTHzTbh3Or+D+/UQV
- V7pjUch8DbJ0JHjokuQtwIIuV3gLDjWbwc2SWBNodRWjrjfP0MLrikcenzeSARmLWONRotVkx
- yE0+XeB7vLXv+aJIvrJRyw5kHearDcd1Ds8CnvUmWcpvpGc11yIfo3IL7hGKcKb0ogB+aHYaN
- srSQssYQODrqs7wu7vWVLceeeIYOjvHYsrdPoeSDh8Ym8YA4Ff4QdGftS9qgLqS2F51x/pbGI
- C0WT3ESFtMhQi+6uvqGGptEogA9xu4jafNmrjABVVz0dVABp5EkNwUc2FFex/z3LMMyIGqXLM
- GUmsww7zVc4dPaWV03bF2m+x8toD28Vp71Xml5IoVjpssK+t4Xsz8vdtxOqSxap9R+1HfJFwL
- kfH1PQjy17c
+References: <e5387628c1d64caf7bcabb5d99d2987bd5bff617.1773150603.git.michal.simek@amd.com>
+ <CAC_iWjJLfVJb5zy_Jb=-h0d0U7-ui4yz8ihb9=g9f1nKVDRA-A@mail.gmail.com>
+ <CALeDE9NrGF22D=3pA_JDFxmxZ8EiDbmbng9zd0Jr-k+JPx1dPw@mail.gmail.com>
+ <d0f0d10b-6d44-427d-9e55-103d5fd0e107@amd.com>
+ <CAFLszTgdogHiTDpuwCiu3k1yA=x2-z3GxeMgj69qbpJK-s18Wg@mail.gmail.com>
+ <65bb681d-b66e-42e0-b848-fa132e6255d3@amd.com>
+In-Reply-To: <65bb681d-b66e-42e0-b848-fa132e6255d3@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 17 Mar 2026 09:43:18 +0200
+X-Gm-Features: AaiRm52ZPxpr8TDSGJKAFxzoG11BciOtWgQ3-qdJc2wIMTZfrqxa61ZghB8XdiY
+Message-ID: <CAC_iWj+c0xSeGXdB7gCXcZneF+nbORPV3i_i6S_FeUvw=PFK0w@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Allow disabling ANSI console queries via env
+ variable
+To: Michal Simek <michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, git@amd.com, 
+ Casey Connolly <casey.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,59 +125,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 17=2E M=C3=A4rz 2026 08:03:47 MEZ schrieb Ilias Apalodimas <ilias=2Eapal=
-odimas@linaro=2Eorg>:
->Hi Tom,
+Hi Michal
+
+On Mon, 16 Mar 2026 at 09:45, Michal Simek <michal.simek@amd.com> wrote:
 >
->On Tue, 17 Mar 2026 at 03:24, Tom Rini <trini@konsulko=2Ecom> wrote:
->>
->> As exposed by "make randconfig", we have an issue with the dependencies
->> for EFI_HTTP_BOOT=2E As this is implemeneted by running commands (as se=
-en
->> by what it selects) it must depend on CMDLINE as well=2E
->>
->> Signed-off-by: Tom Rini <trini@konsulko=2Ecom>
+> Hi Heinrich and Ilias,
 >
->In theory, you can configure UEFI with a set of prebuilt boot options=2E
->If one of them is http(s) the device will boot even if CMDLINE is not
->selected=2E I am not against this patch, but we will remove the
->possibility to build a firmware without cmdline that just boots to
->whatever is was preconfigured
+> On 3/16/26 03:43, Simon Glass wrote:
+> > Hi,
+> >
+> > On Fri, 13 Mar 2026 at 09:50, Michal Simek <michal.simek@amd.com> wrote:
+> >>
+> >>
+> >>
+> >> On 3/13/26 16:47, Peter Robinson wrote:
+> >>> On Fri, 13 Mar 2026 at 12:55, Ilias Apalodimas
+> >>> <ilias.apalodimas@linaro.org> wrote:
+> >>>>
+> >>>> Hi Michal
+> >>>>
+> >>>> On Tue, 10 Mar 2026 at 15:50, Michal Simek <michal.simek@amd.com> wrote:
+> >>>>>
+> >>>>> Commit 4cb724364030 ("efi_loader: Disable ANSI output for tests")
+> >>>>> introduced efi_console_set_ansi() to suppress ANSI escape sequences
+> >>>>> during unit tests. Extend this mechanism to be runtime-configurable via
+> >>>>> the 'no_ansi' U-Boot environment variable.
+> >>>>>
+> >>>>> When 'no_ansi' is set to 'yes', efi_console_set_ansi(false) is called
+> >>>>> at the start of efi_setup_console_size(). This prevents
+> >>>>> query_console_serial() from sending ANSI escape sequences to the
+> >>>>> terminal, using default 25x80 dimensions instead. This is useful for
+> >>>>> platforms where the serial console cannot handle ANSI queries.
+> >>>>
+> >>>> I am fine with the patch, but the no_ansi is a bit misleading reading the code.
+> >>>> It really means don't use ANSI queries to detect the console.  So
+> >>>> before creating an ABI to the cmd line should we really call it
+> >>>> "no_ansi" or perhaps "no_detect" and in the future clean up the
+> >>>> variable names as well?
+> >>>
+> >>> I wonder whether this should be a Kconfig option too, a maker of a
+> >>> device likely knows when this is an issue on their device and
+> >>> explicitly enabling it via a config as opposed to an environment
+> >>> variable would likely be useful when there's a menu enabled and the
+> >>> shell possibly disabled?
+> >>
+> >> There are a lot of Kconfig options and variable which can aligned it.
+> >> It means we can create Kconfig option for it but likely we should also have
+> >> variable way as common way in uboot.
+> >>
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > It might also be worth reconsidering this old patch:
+> >
+> > https://patchwork.ozlabs.org/project/uboot/patch/20231121113557.800353-5-sjg@chromium.org/
+> > https://patchwork.ozlabs.org/project/uboot/patch/20240815202424.766778-11-sjg@chromium.org/
+> > https://patchwork.ozlabs.org/project/uboot/patch/20240902011825.746421-11-sjg@chromium.org/
 >
->Cheers
->/Ilias
->> ---
->> Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->> Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
->> ---
->>  lib/efi_loader/Kconfig | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
->> index b5f81e0ff530=2E=2Ea9b2f813e1d5 100644
->> --- a/lib/efi_loader/Kconfig
->> +++ b/lib/efi_loader/Kconfig
->> @@ -600,6 +600,7 @@ config EFI_BOOTMGR
->>  config EFI_HTTP_BOOT
->>         bool "EFI HTTP Boot support"
->>         depends on NET || NET_LWIP
->> +       depends on CMDLINE
->>         select CMD_NET
->>         select CMD_DHCP
->>         select CMD_DNS
+> We have met with this problem on real HW last year and based on it we created
+> this internal patch.
+> https://github.com/Xilinx/u-boot-xlnx/commit/29b1330570543056188e5c065f1ea1be064b3a4b
+>
+> And we also send it out
+> https://lore.kernel.org/all/SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR12MB6685.namprd12.prod.outlook.com/
+>
+> That's why I would like to get clear guidance which way you want to go and how
+> things should be changed. If you are fine with having variable/Kconfig symbol to
+> disable it, then I am happy to create a patch for it.
 
-Having to select commands here to get network is what needs to change=2E T=
-he network commands and EFI_HTTP_BOOT both should depend on configuration s=
-ymbols for the protocol implementations=2E
+Ok thinking about it again I think Peter has a point. Having a runtime
+option would make sense if the feature would work at some point. Is
+there a case that you would want to enable ANSI sequences? Otherwise
+we can just turn this into a Kconfig.
 
-@Tom: Do we have a target release when to finish the move to the LWIP stac=
-k?
-
-Best regards
-
-Heinrich
-
->> --
->> 2=2E43=2E0
->>
-
+>
+>  From my perspective this is unwanted feature and I would like to fix it clearly
+> to make sure that I don't need to handle that origin one line incorrect fix in
+> our u-boot tree.
+>
+> Thanks,
+> Michal
+>
