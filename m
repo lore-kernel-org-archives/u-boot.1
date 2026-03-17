@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04FE4FD877D
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:24:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E3FFD877D
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:24:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6052E84368;
-	Tue, 17 Mar 2026 15:24:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D01384390;
+	Tue, 17 Mar 2026 15:24:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="MJsKtgfT";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lx8RAZ2w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8019184378; Tue, 17 Mar 2026 15:24:20 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id B3D1684378; Tue, 17 Mar 2026 15:24:21 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88DFD84332
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:24:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C55AC84355
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jstephan@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-48539cbb7b1so34762015e9.3
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:24:18 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4856cd3f1ffso17035725e9.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:24:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757458; x=1774362258;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1773757459; x=1774362259;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jDcltm//NAUbVQ4pku5rPZK3W9KO65JsvixgX3LjewY=;
- b=MJsKtgfThlKUBJ4sE3wKjhG1khZKsYwjD4KL/LFiAkZ07Wtye/ggdQnT7NRugiULyY
- Z+3dE1RpYUbKE72IR/rBu9/C9AWvazq764FEsPV+pe4zVCCPl+wp20Uit5Ae06HrjZ0s
- oJc3NfM/l+p+RdTZ7A/GlQtug+JLvWK3PgRfuqOjKKGLtBRIvyyJOrhIh4/YO5euvYx6
- mItsYIgXPnPqJ0nWbqlgGKum9oQIwXRFEHd/pHS5EJUQ5oqhUKQn8DOL+l0ghkGYlvq7
- NU4VDxPEGGqBrs0RC72vlhvJL6fJBEpvQ6nI2AHif6PwaqClzYGJ+PE2rK/Z04bvM7Vq
- eSNw==
+ :reply-to; bh=oDEIn4jDOtSE0h56UoXZt3Mbos2jhFBy6ZX9qXYYhEI=;
+ b=lx8RAZ2wx0YckSkfWE9XAy53HZ9PHW0rJy7c1nNQadfR4fM+Z8ZNq6zWo/ka34elCL
+ /Cv57B+xVaaVI4c+Jch4xPAg8I8DEF0HCx+FL5KncBgTimIxH22uKUAGuYgZzMZjney4
+ Yf5IkYk/2Wmfbm1s/LjCH0ClvaNifvCWvX3Zdv5HYg7GeJ6w1VYhQvUbmnVD1g0K3aq2
+ VJX++PNo9mJadIBvDk9ch6BEXmAJ/taWYVMZ6jWp/MzFKdueBsviOwsgBFjgW1nHHUxq
+ SB+kVSvdJH+ZESv2uMTtY4N4g51wrFFQK8yqUe3KyIPbee3FqjBYuqhbG7FKfsej7YKS
+ PXXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773757458; x=1774362258;
+ d=1e100.net; s=20251104; t=1773757459; x=1774362259;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
  :cc:subject:date:message-id:reply-to;
- bh=jDcltm//NAUbVQ4pku5rPZK3W9KO65JsvixgX3LjewY=;
- b=JP0VSwQdN49rba9sij1NHXc/QoJUJmLnK7KUpRzGihkHnYzuvGpoiff587ZEQQS+jg
- zxgIj4GNk97ALgluE1ek4YaxugdD2D9Ezd1XVIrPviRiTBNRBqJRnKALARQ6jGEir6pU
- LMklUQiPjLzutNp0DQvUF3g2sSfd5TeoUz+mEox6hIfjKqe4MrEicPfW+qA5kB12X7Na
- 8bAofr8POVM8IZCjGuV6DvBfTGLCBJxUkxdg59pm2RF6XYQt6q6CeS8oF6YMS5TUP/21
- 88WS7qMKbo+U0btm4ihL2MiPgOawulFALxBnnunLLEbjAp511JbZS/UplLJvTTBvHkXD
- 8EZg==
-X-Gm-Message-State: AOJu0YzKjkAEqHHeB6W08XNr/ukH64F2bwfUaRbXbpyoXe8qg57I1uIs
- /vAge8PjFKl5N9j+NyZgtQsmkWTaBigV/4K8tieKYTafchTSJe6EBdguFl6R9CE9j0s=
-X-Gm-Gg: ATEYQzwFJPLM3S3sk+Tdle/6p7BI8odvHtdg0ioWfpE/msA21YUFy9vJpYrmjOLrbmt
- iWRybTtm1O/VkPmmjye4ERRC2v7shsm9nR5sAUTgL0RCXyp8NRMYTSQF2GuW7vxilGe3rX1TFXP
- 4PEYpVp9r2rU7HkU5Ul5eW6igANY00tGjJmJNi0ePApjdeA0OHHrueTJwxGJtxAhrG/+6yo8HD7
- vZYAuPgf4kZh538MJ5fdsDbZadpclBgsWmlaLSCWKZjvXSrOwqgVSP4eOT9k99kfauhNX+oUlQK
- kDvlo1p1dOiBQmip3+y94LMMz/ORx2g4Esg0guOple7nq5burAl0gEYjkS7SDGeBnk+r38CE0WB
- gu2tbsysPG2XjTgaa0+6AXXTENOn8g27uVkIp4lwDcfz6vZ7P+g77id7Bgi8cL2VKUorYTNraNr
- RvePStynKoOVo+xHMiX0KyrWheT/qtoq/SOiaPoMnExCXtq7A81ADod/9+FDJxvFkth4NK1SOLn
- sqOFvnzNbEIijQ3X3t7BAhJ3wmRGcFpRVeOKvxJOEic+OBNJMRqY3PHfkK7LOpRuCQ2tB02HThR
- SV31RUo=
-X-Received: by 2002:a05:600c:4592:b0:483:7980:4687 with SMTP id
- 5b1f17b1804b1-48556714c04mr303671235e9.17.1773757457915; 
- Tue, 17 Mar 2026 07:24:17 -0700 (PDT)
+ bh=oDEIn4jDOtSE0h56UoXZt3Mbos2jhFBy6ZX9qXYYhEI=;
+ b=LDCL7jTRC4wMfGuJDeSZz4727Sk1Bqv28xW3DIbTpH4xqavi8ZMHLBHkFd+6W/rgJv
+ yqgyS7kShj+/KEmZ2AcRasJJm+Z+JdBaidApaSoQJ5K8DSOpj2cqumrTE5lNDwtS8zJ9
+ 5KmgMA9kCep4jLq6T7pHAHaTo7HcFNrfLDQJxYI9zmYnR6zXAYypEnqG56P4On9+azBi
+ HqiQfPSRWsxNWMmI95MzocwlMs+bkWWslGnDz/hEb8FCAtBjZhY2vo4tdkLSZTeTZv37
+ JsaDiy6LLwDssze4VJYKf4NhLtKr/8Fo/LcBO7tHzcjGTM3n1A5EsxoFQPXw00A/TtOV
+ Al8g==
+X-Gm-Message-State: AOJu0YyxskKJg47h0TBycU7mlP6LC0l5zb7u3JeVGcHgtazg5Bg6smuX
+ tB2COGIb6bTGRaudyHlpRjP6PKhdo2RbonrC9tIgbZvXjJFVukqIquxJi4w6PjQpiLs=
+X-Gm-Gg: ATEYQzzxCSXzOP1I+83yUHgI1TpkjWlgGtWEe6WQL5sFqrmlTbm1IU8i68PfeMdIR11
+ 03K1g4boK4V6WZdH085ekpZN2crNITE8RbztMxHqYQInG2gtWgvbh6OzXuRXEYnZw9o4VKfgWJL
+ g9/gDO5G6krNIMQ2xWhMPPC8Im8gLRXLrkeiLgpEZDL1MWUNP61hLw7wdYkun49L5vO8EiG4X9g
+ aOOfueAW5bnAX0O8eJP0B7N1NrE9enKyrhHQzQFAz6cJFnYzJc8SbOyiKwhtSE47iJYPvLMSHJh
+ 04a6sEK6PRGfX3U86LlOnuiDrCaWqzhcuMi9QzjD+gDacUugMMt2heuMxh7LHRblR2gZTh5w55m
+ oosJry/ok2EnrsZi/OLy6ElL5Bnk0jrgQGxEXcv6lY4pDHcerQ6UR8tfObi3rNG40LAi4KcAY72
+ Qq0gofgYLGxCUtuP+vtBoNVvv0Qsbr/WfPnpnBr0aMMi6pvXfhQZ7iwWvQ1ELVaIHAOteu+puOh
+ y5M2z0L5AWvKM/o7Da/C+2F32wPZjs5Zej7IqE7auskNfhhvuNv3eADN1ByHubQmZ8tfyJsewaX
+ Zr6JPUE=
+X-Received: by 2002:a05:600d:8495:10b0:485:3e00:9451 with SMTP id
+ 5b1f17b1804b1-485566fac49mr217293485e9.17.1773757459134; 
+ Tue, 17 Mar 2026 07:24:19 -0700 (PDT)
 Received: from [192.168.1.100]
  (2a02-842a-d52e-6101-b535-6f9c-731f-0b89.rev.sfr.net.
  [2a02:842a:d52e:6101:b535:6f9c:731f:b89])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-48556400f76sm125425675e9.1.2026.03.17.07.24.16
+ 5b1f17b1804b1-48556400f76sm125425675e9.1.2026.03.17.07.24.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Mar 2026 07:24:17 -0700 (PDT)
+ Tue, 17 Mar 2026 07:24:18 -0700 (PDT)
 From: Julien Stephan <jstephan@baylibre.com>
-Date: Tue, 17 Mar 2026 15:24:20 +0100
-Subject: [PATCH 02/11] power: pmic: mtk-pwrap: use tabs for alignment
+Date: Tue, 17 Mar 2026 15:24:21 +0100
+Subject: [PATCH 03/11] drivers: phy: phy-mtk-ufs: cleanup headers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260317-mt8195-add-ufs-support-v1-2-7d731ec438ae@baylibre.com>
+Message-Id: <20260317-mt8195-add-ufs-support-v1-3-7d731ec438ae@baylibre.com>
 References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
 In-Reply-To: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
 To: u-boot@lists.denx.de
@@ -117,53 +117,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix mt8188_regs definition to use tabs instead of spaces for
-alignment to be consistent with other definitions.
+Remove unneeded headers and sort them alphabetically
 
 Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 ---
- drivers/power/pmic/mtk-pwrap.c | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+ drivers/phy/phy-mtk-ufs.c | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/power/pmic/mtk-pwrap.c b/drivers/power/pmic/mtk-pwrap.c
-index 8ff6458a5f2..446b78fb0ee 100644
---- a/drivers/power/pmic/mtk-pwrap.c
-+++ b/drivers/power/pmic/mtk-pwrap.c
-@@ -249,20 +249,20 @@ enum pwrap_regs {
- };
+diff --git a/drivers/phy/phy-mtk-ufs.c b/drivers/phy/phy-mtk-ufs.c
+index 1eda3df858d..14a90cf2064 100644
+--- a/drivers/phy/phy-mtk-ufs.c
++++ b/drivers/phy/phy-mtk-ufs.c
+@@ -6,23 +6,15 @@
+  * Copyright (c) 2025, Igor Belwon <igor.belwon@mentallysanemainliners.org>
+  */
  
- static int mt8188_regs[] = {
--	[PWRAP_INIT_DONE2] =            0x0,
--	[PWRAP_STAUPD_CTRL] =           0x4C,
--	[PWRAP_TIMER_EN] =              0x3E4,
--	[PWRAP_INT_EN] =                0x420,
--	[PWRAP_INT_FLG] =               0x428,
--	[PWRAP_INT_CLR] =               0x42C,
--	[PWRAP_INT1_EN] =               0x450,
--	[PWRAP_INT1_FLG] =              0x458,
--	[PWRAP_INT1_CLR] =              0x45C,
--	[PWRAP_WACS2_CMD] =             0x880,
--	[PWRAP_SWINF_2_WDATA_31_0] =    0x884,
--	[PWRAP_SWINF_2_RDATA_31_0] =    0x894,
--	[PWRAP_WACS2_VLDCLR] =          0x8A4,
--	[PWRAP_WACS2_RDATA] =           0x8A8,
-+	[PWRAP_INIT_DONE2] =		0x0,
-+	[PWRAP_STAUPD_CTRL] =		0x4C,
-+	[PWRAP_TIMER_EN] =		0x3E4,
-+	[PWRAP_INT_EN] =		0x420,
-+	[PWRAP_INT_FLG] =		0x428,
-+	[PWRAP_INT_CLR] =		0x42C,
-+	[PWRAP_INT1_EN] =		0x450,
-+	[PWRAP_INT1_FLG] =		0x458,
-+	[PWRAP_INT1_CLR] =		0x45C,
-+	[PWRAP_WACS2_CMD] =		0x880,
-+	[PWRAP_SWINF_2_WDATA_31_0] =	0x884,
-+	[PWRAP_SWINF_2_RDATA_31_0] =	0x894,
-+	[PWRAP_WACS2_VLDCLR] =		0x8A4,
-+	[PWRAP_WACS2_RDATA] =		0x8A8,
- };
+-#include "dm/ofnode.h"
+-#include "dm/read.h"
+-#include <clk.h>
+-#include <dm.h>
+-#include <generic-phy.h>
+-#include <malloc.h>
+-#include <mapmem.h>
+-#include <regmap.h>
+-#include <syscon.h>
+ #include <asm/io.h>
++#include <clk.h>
++#include <dm/device.h>
+ #include <dm/device_compat.h>
+-#include <dm/devres.h>
+-#include <linux/bitfield.h>
++#include <dm/read.h>
++#include <generic-phy.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+-
+-#include <dt-bindings/phy/phy.h>
++#include <mapmem.h>
  
- static int mt8189_regs[] = {
+ /* mphy register and offsets */
+ #define MP_GLB_DIG_8C               0x008C
 
 -- 
 2.52.0
