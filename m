@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8263FB5E8B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:26:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D079CFB5EA0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:26:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D3798413A;
+	by phobos.denx.de (Postfix) with ESMTP id 9A4F584261;
 	Tue, 17 Mar 2026 02:24:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M58NVGUi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p8YP2zh3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1370E84246; Tue, 17 Mar 2026 02:24:40 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id D5FFC84246; Tue, 17 Mar 2026 02:24:41 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79A9D84129
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6302784227
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7d55b97f358so3718279a34.3
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:36 -0700 (PDT)
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-46726528f1cso3561757b6e.0
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710675; x=1774315475; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773710677; x=1774315477; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LUGIPG/SpyBcUJbyL7b9/qUv1TQxpTbpzEsbKNoGt/M=;
- b=M58NVGUiQHK8kf2yazr4UoXcp5cvy1a1og1EWap7xk+m50oi4BnWoFQ3pRlGDr7Jjh
- kZbMx7cBxGVLpjlyBrNgXv06r3gD19hJ1q0GXVF2JBW1Ac0owdrF73kgifivMOGrD521
- gu+wvBBOoDoBjZDQgLEtXhxT3UslEze3qKLA8=
+ bh=dkmEo95UvdNBfE4JfIYR8wKkHFnIYP83niYKSi023R8=;
+ b=p8YP2zh3ol66vXg6b2/bIIcmDMyzMM6jsa8L1mnA8vemDzklvu0fEp8MoA8GT2b7iL
+ yXKjNugutyE+mPjADBJNr7mkwRCuFuPnnKY8N6qSnkHlpHphRJpOth54l6FIogsgr/O4
+ z6xzCcfl3gsdNclmzsKQe+tPWel1uB8hFmDrg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710675; x=1774315475;
+ d=1e100.net; s=20251104; t=1773710677; x=1774315477;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LUGIPG/SpyBcUJbyL7b9/qUv1TQxpTbpzEsbKNoGt/M=;
- b=ro7UhdvhjqzCrX+CknSEodyli0zi9zYtIwGJ+ZRle5BaKuuXmzv1L06aqftbps16Nh
- 6+qNApFuMWII2u478weYI4qztSCh2WUDsnSAnIqcdH7K/O7BGiA7KgLct1PKUfQhlEqE
- QB5dqaw2yE9U9Bj0ofb0XG0AFm+0qLBhJYievHWQ/4QBcX1kimVZn/z9V8PkxTDft29m
- Fl/5n36twveIQr/fhS0AaYBFvQfDx5V43hSHFgunIlQZwXqXj7b6KLCD/0v6FmBER4f1
- +G7WnfqEa9Rh5l5XJu4wU73JA2qLEntRqIJFeTPJHbGMdt7kSsefNeVaLRTvi7S+XrKX
- rlMw==
-X-Gm-Message-State: AOJu0YwNmkLYeuEZL6dwo/OgLgcRLLJYMBU5xFa9wvzd0163PNaj5Gzi
- IhgZxh6ngvSjRzw+aWp1h1a+AoSFJR1hXu9Tg4aVh60wmAajvepaPu1agBi06AFQn9W/KFd8NXy
- l5XlDRl0=
-X-Gm-Gg: ATEYQzyQbBVVKr/LPwsisY9Z8w9UPKiiIwq2wDuQWGvpJHSFYsoUTw1b521Oxl7E/+3
- fXgmIAXIfo7kP8otJOkVg7MW09oCiRCpoKb+Xxxdi/mSNPisi6CYrdggSFzKaYkmzu51kw+IbKa
- OZQQ84+pFe6q4QLeFaGASbKX+sWQ/bfa9Y+DQ9jV0TYnsSgd/qJhG3OY6+PqOuz8ulUkZ5SRlpE
- zVT30/P3qkx/bWD9XeuNVe7gScP5UJ8uCR/KgcGbfVqP/ri7CejmGJ1hb26zD6hiF4EUClrbtCy
- huE0OH4afGKexkw2BcJoqMVW2SSMvoSL42HK5OBhtdgjEmxoEO0tPmQhYrfLPYQE1k8sp8c/KI6
- Nxce5tdyzhh1sI/pP6I9aEqBGwjAjuycCrED1f4Kxc+s2k/rrDbnDmXEvR8rW1RfsqoNq+TkydE
- 8FDs76az6u3Ohb6fyj14ZmX+KN8UAmH/2/J75hJyMHIlb/pQ9D4lE0a8HX3YR6tbYZibBxg8t/z
- vzqLXYM4QCMErhVnLuG3GldAP7FGqCgp/UC09CgMgANmbev1Oo=
-X-Received: by 2002:a05:6830:67ee:b0:7d7:58b0:7687 with SMTP id
- 46e09a7af769-7d782435dbemr11504898a34.7.1773710675029; 
- Mon, 16 Mar 2026 18:24:35 -0700 (PDT)
+ bh=dkmEo95UvdNBfE4JfIYR8wKkHFnIYP83niYKSi023R8=;
+ b=NKVLIH9w4ovHzEStgZ66p0F1kGStsivodKQqUEvRx/YiLoKB356zqhUYc/VDJcvcPe
+ FkVY/Bsjog8XeKwYSDtd/1O8ic93B5UUuFfEs+tIcqokIGXb0fzyV4Acw78J5+DdgCCp
+ uq4YMFpj1a1rExCEenQrkiZ7uBN5uRyUkw1ZAlQmH2PEff46HvABCiAF6kb/i5Z2kyM5
+ iC3hF++qejpqHkBxEw3K+M/5yVS5e3z6XxbTZaJGhQfBZB6SbL3V7Mfs4zXLiUhJ1klh
+ 27CByj19U/WO+qPfdtVNmWy4hkScR/gBL8iC43NVAupN8iFl1WYCvqKiekzhqX+oPRmJ
+ YcGQ==
+X-Gm-Message-State: AOJu0YxkoCaWT1q/s99MRdV0xGDHXREb1V2JUXn0WOoCArmCAAhXSdJ9
+ pSivi7DnF2FUp4mtHBqQ5HcTQMMGJndZWp9qyJWkTWD2xXjVQb4awYx89Z7K1mRbysV4TRKTl4H
+ UEIRiOB4=
+X-Gm-Gg: ATEYQzxP5+5Hnqj15pGu+0YsSIcqlHAQbuNFY5omhh42ZsTRrLkmD8kFCZQLZMVt+Fj
+ I45tA+wAF+J/HWKIfGbahvKAHJhMwkRnOCIo9ygYbdUF56FlP9tDx7fbHNy6PdS6pmBn5b7cTXN
+ ItPWXUH5UoW2MP2QuIKe8poSLtQa7L4oC+NrwlTqhg6XXxCYpRFSMq0YH1JUwMj0WH0UXeTa6YC
+ zhuGp67c3pnihOrz8NFJx8Conz2NSj0a39FQ9atOVay2GFk+Y2KCwVV4JkvZoqodaBAiNAKRuNe
+ IG/KmdNNzCzleZWrT6gJ4GtrEukuFaB3KHaNvzuyHhYLUliBzCdZvkpxJNkJVebNz9w6zOUfu+i
+ fEFgQOGfKgOeHyeGyxXwBWRHvIr6SmFt1ssZ5+2tNi/nHW6YsyVoV+mSAhfhULCLJt6ZHudyi1F
+ GTCyRojXBUn4v4qQOQKqZ1jKpo1Z07DQve+7TxKwNB+CDYo8GTWswEB42+5IMQNTYHnVZnIjfns
+ FjknpVJlGD/auzevLLxXfj6yxeFWrQpUYqVqywaiAsA3Pps1l4=
+X-Received: by 2002:a05:6808:140a:b0:467:22fe:eb10 with SMTP id
+ 5614622812f47-467572eb815mr9035546b6e.34.1773710677127; 
+ Mon, 16 Mar 2026 18:24:37 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d76ac328b9sm13081342a34.1.2026.03.16.18.24.34
+ 5614622812f47-467342c084asm10220242b6e.12.2026.03.16.18.24.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:34 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:36 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut+usb@mailbox.org>
-Subject: [PATCH] usb: gadget: Move USB_GADGET_DUALSPEED to be slightly more
- visible
-Date: Mon, 16 Mar 2026 19:24:33 -0600
-Message-ID: <20260317012433.4162524-1-trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: [PATCH] dfu: Correct dependencies for DFU_TFTP
+Date: Mon, 16 Mar 2026 19:24:35 -0600
+Message-ID: <20260317012435.4162538-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,44 +93,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As exposed by "make randconfig", we have an issue around
-USB_GADGET_DUALSPEED. It is possible to select this symbol (via
-SPL_USB_CDNS3_GADGET for example) and so have an unmet dependency. As
-this is a hidden symbol, move it up within the menu.
+As exposed by "make randconfig", we have an issue with the dependencies
+for DFU_TFTP. This really depends on the legacy networking stack being
+enabled, not just lwIP not being enabled (as it will fail in the NO_NET
+case).
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
 ---
- drivers/usb/gadget/Kconfig | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ drivers/dfu/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index baa2eb61ea33..a36be818a68c 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -44,6 +44,10 @@ config SPL_USB_GADGET
- 	  Enable USB Gadget API which allows to enable USB device functions
- 	  in SPL.
- 
-+# Selected by UDC drivers that support high-speed operation.
-+config USB_GADGET_DUALSPEED
-+	bool
-+
- if USB_GADGET
- 
- config USB_GADGET_MANUFACTURER
-@@ -179,10 +183,6 @@ config SDP_LOADADDR
- 	hex "Default load address at SDP_WRITE and SDP_JUMP"
- 	default 0x0
- 
--# Selected by UDC drivers that support high-speed operation.
--config USB_GADGET_DUALSPEED
--	bool
--
- config USB_GADGET_DOWNLOAD
- 	bool "Enable USB download gadget"
+diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+index 962bda40ad2d..1d5d8caa7daa 100644
+--- a/drivers/dfu/Kconfig
++++ b/drivers/dfu/Kconfig
+@@ -20,7 +20,7 @@ if DFU
+ config DFU_TFTP
+ 	bool "DFU via TFTP"
+ 	depends on NETDEVICES
+-	depends on !NET_LWIP
++	depends on NET # Legacy stack only
+ 	select UPDATE_COMMON
+ 	select DFU_OVER_TFTP
  	help
 -- 
 2.43.0
