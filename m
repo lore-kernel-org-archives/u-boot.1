@@ -4,52 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 726B8F3381B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 09:20:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E5EF33834
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 10:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1C6F84120;
-	Tue, 17 Mar 2026 10:20:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
+	by phobos.denx.de (Postfix) with ESMTP id 6F7E4841C8;
+	Tue, 17 Mar 2026 11:07:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="sVkbxpWf";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="vbNLQoVc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A30AF8414B; Tue, 17 Mar 2026 10:20:54 +0100 (CET)
-Received: from mx1.wiredblade.com (mx1.wiredblade.com [72.51.58.37])
+ id A3E8E841D6; Tue, 17 Mar 2026 11:07:15 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 799F083DA7
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 10:20:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=psihoexpert.ro
+ by phobos.denx.de (Postfix) with ESMTPS id 96BD4841B8
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 11:07:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
-dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
- bh=TR+zoTCofV9+0y/7aG5f2LTbQaUo/UEBZPGuZDfK5Nk=;
- b=sVkbxpWfxWT1ySynuBBW9iCqGQ6u//g61mT3tqN4zqYyb44gAnmZJr0a9ZXn26oDtW1J/IcZcBKUEkn+7/Uycq/IW0HGyZgxWLfMQNf9M4OXuxtHtL7tPdh4QeuEVONHRZdphEdhKDmlc07tlf5eVOmoM4yh3hmmh2UeLa3q/x4pl7cUKYBeIJzNMBMU5b8xi8j3gQFOkZd4+f3dSYprdQYdlcKCuMSGdIXupA12dtsC492qv21IV4jg47
- 4Nfh/XhUJVGPKeBTFiHcWkoNpS99EJqQgxWTmNcgvxV7FBwnhRu6FID0ToT3+HADzDTnF4/vUC8w4Ejicn1Y6PmWyFGQ==
-Received: from GRAPHRT (188-24-192-137.rdsnet.ro [188.24.192.137])
- by mx1.wiredblade.com with ESMTPSA
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
- ; Tue, 17 Mar 2026 09:20:41 +0000
-Date: Tue, 17 Mar 2026 11:20:45 +0200
-From: Marius Dinu <m95d+git@psihoexpert.ro>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Marius Dinu <m95d+git@psihoexpert.ro>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] USB: dwc2: allow usb start even if usbphy is not found
-Message-ID: <abkc7YaVNYXGR+jd@GRAPHRT>
-References: <20260316092639.2377-1-m95d+git@psihoexpert.ro>
- <942c0020-e43d-4d86-b8c0-ccc8f7ed2b2c@kwiboo.se>
- <abgd9BByMlS6khBT@GRAPHRT>
- <822b68b9-e0a8-401f-a0b2-f4c66d1084d0@kwiboo.se>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eEpDnT8Veod7whYiRuxiAqdYt3kOkC46RINAgif5/hwiYsI49slLZ/zyPEQZRdJEcpRxTHVQLYhFiDtZ96QcxCRL9rNP6VDve6s4yJWYFGO0z0fgdouO6wMA4eJwZ5jUeQuNJjTcQr+7d6dREmLKNuT/e6ZRfcmaxz8GYD5cqa/mpuTEWvZbORamYGU9i2DEp+3QEWvOlBqjik/vbchu5vyxl9w9nIUEQc6GXcRrgJkWnj/TwcB2l6WNWP7sKFlS0nwMc7hKWac9FZLwI2UBtUbk5pcLsDDLMND5wSGcZqc5089ZbpgoIrRrO8qkjcbELy0BH8oyaPybwo1yVU4YYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WNWDDZMLCyQ6szZ1XdxKhn/bkjnFOO7Sm+dmrpQQbcE=;
+ b=TbioSxnQLqDDnX+5n+YFYNSQIrxHTfFiUaRZjj3yp4RcTUXJ1hgV2NloWQX8N8+dK9jHkXlFuuq9Ipuk+yERuav4HYUlfbJfjItetKpzlslFNOA0lHbUS+BVmcVRjvmkyjXZCyMxEPqYvTV/XASBGY4s6+BkYhsqDqP5Za3DlatjwIXzGBj/M4VQH1vKZNbcFq7PFwxt3ApLp+WFVKhTArHfSvLwojyA8aZ79SJzbgBcJS4wJfZEfZVht4KT+0PnM3Jg6N265UVAop0oi0gEg3NPYZ+C1k/htEwBBTo2kpcsF7YRTGP3un8gvks5/jSSlWdK2prQtVsTdVOAgcAMUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=gmail.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WNWDDZMLCyQ6szZ1XdxKhn/bkjnFOO7Sm+dmrpQQbcE=;
+ b=vbNLQoVc0yHE7K7h1va5br/dPI4ln6EzqZB9UyaZC2YSmhZTEvlJAq1RkpZJL5i38Mg0PIrtK1qEvh86j3NUiBr4RvwXTktv6WMbGb55josweOzIADNF+oAKasWo/tR1O94MVgjlJUyKxkpm0mgWtVQGWUrV6kMfWct7+7dqivO7MtJf1NSq3qwtIGuzxVNhhGUK1bstR2kfBgneLX60yWJBIFAWcUuLWPVo3a33hAlV8H1ubK8mVhLDGe6PfueDKp3Q/Rt8R7+7dYozpnM0KmyCY2HOWrsLz4ddO7isvHys31299fKiV0RD98H245zGmpDLQZTLIIwOiW5WYCa6kw==
+Received: from DU6P191CA0020.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:540::27)
+ by PR3P195MB0699.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:26::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9723.13; Tue, 17 Mar
+ 2026 10:07:10 +0000
+Received: from DU6PEPF00009527.eurprd02.prod.outlook.com
+ (2603:10a6:10:540:cafe::48) by DU6P191CA0020.outlook.office365.com
+ (2603:10a6:10:540::27) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.25 via Frontend Transport; Tue,
+ 17 Mar 2026 10:07:05 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ DU6PEPF00009527.mail.protection.outlook.com (10.167.8.8) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.17 via Frontend Transport; Tue, 17 Mar 2026 10:07:10 +0000
+Received: from phytec.de (172.25.0.51) by Postix.phytec.de (172.25.0.11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.35; Tue, 17 Mar
+ 2026 11:07:10 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <m.othacehe@gmail.com>, <c.stoidner@phytec.de>, <trini@konsulko.com>,
+ <primoz.fiser@norik.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
+Subject: [PATCH 1/2] configs: phycore_am62x_a53_defconfig: Enable
+ CMD_USB_MASS_STORAGE
+Date: Tue, 17 Mar 2026 11:07:02 +0100
+Message-ID: <20260317100703.1933040-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <822b68b9-e0a8-401f-a0b2-f4c66d1084d0@kwiboo.se>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.51]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU6PEPF00009527:EE_|PR3P195MB0699:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8257aca0-3d8a-4d44-1c58-08de840cf450
+X-LD-Processed: e609157c-80e2-446d-9be3-9c99c2399d29,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|1800799024|36860700016|18002099003|56012099003;
+X-Microsoft-Antispam-Message-Info: PXbumamR1l6K0OltD0ECGMyfYghF+KGkzqQEd7xVYfM7YYCkI6a1Q3gl3LgdM6eOO90bAJfgn9LfRJWq69yGEl3F8ZoLlb6mmUIPJD1evp8oHPz+t+H9djlGyWCdwcqGNcyMHcVeU9SHZWOHMc8xkrSZ9V1jaErDBT9ip058mNntx7wy5WOeu6Jgi0DJgVPcja7oegoGE/Dingd+Izdvy5DZCx2ttUfQWcMv3W8yEqaPTNV2BVR3zjFOn1+tYCNU/rCr0SWWEumMcar7re1oQ4G21Jr14kmJ864dQgT/Ca6QS2nQESHSDYwX6/fghoySx2oolO1T+RmJvURTDP0JgYQeU1W9HAdstS7DyXvzVokVjprtlAaBYR6GPdosYuL8jOVYeZVgMN+0i50ojNzrRJ0LEMiaM6slinEoPoIfFqVZ3g+h41qE21vHiaKnrMMa68sT66AWAnGTxLLvO6BQK7qf9JspaguHHkcCI2/fabY+7mspABxtx7ARRUeU0BJP2uEGKj/3XIyN3P0nAYPDcL9XNRLTCrJmBMut1a0PTI9w8TylZweb2eGK2YnwBbhno8qFb7SK5P+auhez8/NuBKml7lW4urNvPBR7HDANG8KTkqQfDbdbE+aJze3nWxs/Ac3W2pHR+cZe12Xv4sHFiMwJ4Y1FgoiyouYuDUhO9BP87skem96XhuQYomgHC3xZjAwOEu/UwPgA5A5gK8++7z9/FEIlSnLOO2n9AUlfE2sKzdGmJDG5CVwIBYACx230HzSJqyNgdath29Dm8i7udQ==
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700016)(18002099003)(56012099003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: QIg1OTYjP4r+OpR5xBqnnG5l2faOBbfLgz/bcA/x72k7NwuQ84jqrVZKeXaJIcrf6l7+D2h7pd8ZxoLUc161mH7IjHq0O4waflpTo92sC5U+gj6oOgub0HwWDjKMlH1LL3uEemyPq/bn2O/so14fPKR03iJzsBs/ZBel8yQ+mFHLD+luUq4/KsPVJtTTjtV2Xw0QEh+w7swiVOcf6PnES55CZx8LjXrApLUKpaTML8waUuDd77DZQ1BrVs/7eY5jDi/E7i2NMCZqX/w5X4QLPJ74sYkscaFYLuhmPqa5m9fX4xLr+5gPivLS8l2YwRPI8GELQHHq+FV+FdvWzmH7FBRmGlzF2CNhMgvabsx+u52Nj/dkbAOqcHukhvB/OB3XeOyo052DkX1jNVngBmrobLH4WP4ic1deORNAAYsvGuBu7q0HIHpxFwnoLzeRvTSq
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2026 10:07:10.5867 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8257aca0-3d8a-4d44-1c58-08de840cf450
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009527.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB0699
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,188 +123,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2026-03-16 22.41.08 ++0100, Jonas Karlman wrote:
-> Hi Marius,
-> 
-> On 3/16/2026 4:12 PM, Marius Dinu wrote:
-> > On Mon, 2026-03-16 11.04.13 ++0100, Jonas Karlman wrote:
-> >> Hi Marius,
-> >>
-> >> On 3/16/2026 10:26 AM, Marius Dinu wrote:
-> >>> RK3288 uses rockchip_usb2_phy, but that driver doesn't register iself
-> >>> as a usbphy driver and "usb start" fails with this error:
-> >>>
-> >>>   drivers/usb/host/dwc2.c:1254- dwc2_setup_phy() dwc2_usb usb@ff580000:
-> >>>   Failed to get USB PHY: -19.
-> >>>
-> >>> Until a proper fix is made for rockchip_usb2_phy, this patch allows
-> >>> usb start to continue even if usbphy is not found.
-> >>>
-> >>> Tested on Asus TinkerBoard.
-> >>
-> >> I am not seeing this issue on my TinkerBoard, what U-Boot version are
-> >> you testing and have you made any config changes compared to
-> >> tinker-rk3288_defconfig?
-> > 
-> > I'm using the github master branch pulled today + lots and lots of changes
-> > in config. I didn't make a diff, but I expect it to be very very far from
-> > tinker-rk3288_defconfig.
-> > 
-> >>
-> >>   => usb start
-> >>   starting USB...
-> >>   USB DWC2
-> >>   USB DWC2
-> >>   Bus usb@ff540000: 2 USB Device(s) found
-> >>   Bus usb@ff580000: 1 USB Device(s) found
-> >>          scanning usb for storage devices... 0 Storage Device(s) found
-> >>
-> >>   => dm tree -e usb
-> >>    Class     Seq    Probed  Driver                Name
-> >>   -----------------------------------------------------------
-> >>    usb           0  [ + ]   dwc2_usb              usb@ff540000
-> >>    usb_hub       0  [ + ]   usb_hub               `-- usb_hub
-> >>    usb_hub       1  [ + ]   usb_hub                   `-- usb_hub
-> >>    usb           1  [ + ]   dwc2_usb              usb@ff580000
-> >>    usb_hub       2  [ + ]   usb_hub               `-- usb_hub
-> >>
-> >> Have something changed recently that broke this?
-> > 
-> > Yes! but not exactly recently...
-> > It broke since commit e17a4bf198510693967644c331ab621fc41ea8b5.
-> > Here's a log on my system without my proposed fix. This is a log that I
-> > saved while I was investigating the failed USB, about a year ago, I think.
-> > But I checked and it still fails with today's git master, I just don't have
-> > the time to enable all the debug options again. It's still ret -19 error.
-> 
-> I did a new runtime test on a Tinker Board R2.0 using master with
-> tinker-rk3288_defconfig and I am not able to reproduce any issue. Maybe
-> your config changes introduce a condition that causes an issue? Please
-> share your savedefconfig.
-> 
->
->
-> I have re-run some tests with different Kconfig options related to
-> GADGET and DWC2 and are not able to reproduce your issue.
-> 
-> As mentioned above, please share your config changes compared to tinker
-> defconfig, maybe you have some Kconfig option enabled that make DWC2
-> work differently?
-> 
-> 
->   U-Boot SPL 2026.04-rc4-00007-g010855c5005e (Mar 16 2026 - 21:33:53 +0000)
->   Trying to boot from RAM
->   ## Checking hash(es) for config conf-1 ... OK
->   ## Checking hash(es) for Image firmware-1 ... crc32+ OK
->   ## Checking hash(es) for Image fdt-1 ... crc32+ OK
->   spl_perform_arch_fixups: could not map BootROM boot device to ofpath
->   
->   
->   U-Boot 2026.04-rc4-00007-g010855c5005e (Mar 16 2026 - 21:33:53 +0000)
->   
->   SoC: Rockchip rk3288
->   Reset cause: POR
->   Model: Rockchip RK3288 Asus Tinker Board
->   DRAM:  2 GiB
->   PMIC:  RK808
->   Core:  221 devices, 27 uclasses, devicetree: separate
->   MMC:   mmc@ff0c0000: 1, mmc@ff0d0000: 2
->   Loading Environment from MMC... Card did not respond to voltage select! : -110
->   *** Warning - No block device, using default environment
->   
->   In:    serial,usbkbd
->   Out:   serial,vidconsole
->   Err:   serial,vidconsole
->   Net:   eth0: ethernet@ff290000
->   
->   Hit any key to stop autoboot: 0
->   => usb start
->   starting USB...
->   USB DWC2
->   USB DWC2
->   Bus usb@ff540000: 2 USB Device(s) found
->   Bus usb@ff580000: 1 USB Device(s) found
->          scanning usb for storage devices... 0 Storage Device(s) found
->   => usb tree
->   USB device tree:
->     1  Hub (480 Mb/s, 0mA)
->     |   U-Boot Root Hub
->     |
->     +-2  Hub (480 Mb/s, 100mA)
->           USB2.0 Hub
->   
->     1  Hub (480 Mb/s, 0mA)
->         U-Boot Root Hub
->   
->   => dm tree -e usb
->    Class     Seq    Probed  Driver                Name
->   -----------------------------------------------------------
->    usb           0  [ + ]   dwc2_usb              usb@ff540000
->    usb_hub       0  [ + ]   usb_hub               `-- usb_hub
->    usb_hub       1  [ + ]   usb_hub                   `-- usb_hub
->    usb           1  [ + ]   dwc2_usb              usb@ff580000
->    usb_hub       2  [ + ]   usb_hub               `-- usb_hub
->    pinconfig   130  [   ]   pinconfig             usb
->    pinconfig   131  [   ]   pinconfig             |-- host-vbus-drv
->    pinconfig   132  [   ]   pinconfig             `-- pwr-3g
->   =>
-> 
-> Regards,
-> Jonas
+This allows us to expose MMC devices to the host for easy
+flashing via USB.
 
-I tested the tinkerboard defconfig. It does work. As far as I can tell, it
-doesn't try to load the phy driver at all. The only significant difference
-is that I didn't enable OTG/gadget in my config - it's just the usb-host
-driver.
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ configs/phycore_am62x_a53_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-So the bug is still there, it's just that the OTG driver doesn't search for
-a phy driver.
-
-Marius
-
-
-> 
-> > 
-> > Marius
-> > 
-> > PS: There is a duplicate of this email sent from the wrong address. Sorry.
-> > 
-> >>
-> >> Anyway if something needs fixing it is probably rockchip_usb2_phy.
-> >>
-> >> Regards,
-> >> Jonas
-> >>
-> >>>
-> >>> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> >>> ---
-> >>>  drivers/usb/host/dwc2.c | 5 ++---
-> >>>  1 file changed, 2 insertions(+), 3 deletions(-)
-> >>>
-> >>> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-> >>> index 16f21fa9083..74d71f23d88 100644
-> >>> --- a/drivers/usb/host/dwc2.c
-> >>> +++ b/drivers/usb/host/dwc2.c
-> >>> @@ -1329,7 +1329,7 @@ static int dwc2_usb_probe(struct udevice *dev)
-> >>>  
-> >>>  	ret = dwc2_setup_phy(dev);
-> >>>  	if (ret)
-> >>> -		return ret;
-> >>> +		dev_dbg(dev, "Failed to setup PHY: %d. Continuing anyway...\n", ret);
-> >>>  
-> >>>  	return dwc2_init_common(dev, priv);
-> >>>  }
-> >>> @@ -1345,8 +1345,7 @@ static int dwc2_usb_remove(struct udevice *dev)
-> >>>  
-> >>>  	ret = dwc2_shutdown_phy(dev);
-> >>>  	if (ret) {
-> >>> -		dev_dbg(dev, "Failed to shutdown USB PHY: %d.\n", ret);
-> >>> -		return ret;
-> >>> +		dev_dbg(dev, "Failed to shutdown USB PHY: %d. Continuing anyway...\n", ret);
-> >>>  	}
-> >>>  
-> >>>  	dwc2_uninit_common(priv->regs);
-> >>
-> > 
-> 
+diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
+index afed0bfafc6..5ea352a6370 100644
+--- a/configs/phycore_am62x_a53_defconfig
++++ b/configs/phycore_am62x_a53_defconfig
+@@ -76,6 +76,7 @@ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_MTD=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_WDT=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EFIDEBUG=y
+-- 
+2.48.1
 
