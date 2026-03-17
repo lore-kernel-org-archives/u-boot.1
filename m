@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2F4FD708D
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4E62FD7091
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 14:55:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7453E8437E;
-	Tue, 17 Mar 2026 15:55:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A7AF843D1;
+	Tue, 17 Mar 2026 15:55:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xCAttwXK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cYngSDbf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 909328439F; Tue, 17 Mar 2026 15:55:03 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 947C1843E0; Tue, 17 Mar 2026 15:55:18 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6146884372
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:55:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 983F9843B7
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 15:55:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-43b4fd681c2so454023f8f.3
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:55:00 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-48558d6ef83so41457285e9.3
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 07:55:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1773759300; x=1774364100; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1773759316; x=1774364116; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=6AA/Nb/0NytBajp5jCH6X84dj4l+Oriisp4KRB8CviI=;
- b=xCAttwXKSxlhS9woh4938CtG5d+ACkCeIefYnj5KTjTnLaQ5NPX51d+MlEX9aCWP/M
- LKFq7m1rvJJtejzog/jdxVOSvdw6B+9TJImxzpVa4PZmNnTxHIdua7k2aD9qIClxI/Zm
- /NVL4W9DB7x8twVVkYTXx4uf4akpxN8p8bD0Za3CjcEyroW+iuhugTpdL1lznLNdbe8H
- UE9aTAaiHtc+51RYQvGebLivfAFxfCjiWfRrt+ylxejgZOffTpydHRt5I5PtKGs1hlj3
- mCRA9EpLrynKtfL3ANvlbGCkpNblsGVEMnTl0lqt4fuxy58LuIjVf5MVBAN7FV/w6AtU
- bUQA==
+ :reply-to; bh=IpnZl3UdfXiHjtTW/98tESO2LVfBuE/SBgPrHVdhbYo=;
+ b=cYngSDbf7oXoLEvBDYCQq9L+qtrMD5X5bPmwbhtpnAjZC+Jao7mSTPtd+3bZhC765T
+ pJGzWgdLtpn+gKkQ1SGkupwIFtXB8F3AjWC2lutf8JVA7EVwQEJuMrRNlOLtjuHlZbUn
+ P69/0h1i5+Eb4zjBk6FLdg+JAfC2fpH5CnYG0EI8taZe7HHd9Nux+hSSJv/C5swiDePk
+ NR+duVlzbMN9Pglva9CiERIly6KCrUjIa4iIS810nfZoNStgXDmLYL7DFcgdoRmQnVrL
+ 5UoPulnnVPUY3KfvsQP5ON19HxaVAFiQj1E9lNFpmQ6EgVJCxGknpc+67X7o/A7V/EsQ
+ z1qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773759300; x=1774364100;
+ d=1e100.net; s=20251104; t=1773759316; x=1774364116;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6AA/Nb/0NytBajp5jCH6X84dj4l+Oriisp4KRB8CviI=;
- b=avZdOqhiJBt6htBVedooKrT5eqXDVMsa4zJMLlC1MPZbnfZdsMhvz3rYCGLORb2c6Q
- w/JncSIWKbHgtNkEzYGIvtcTsvM+M/vkGabmjFOAUzdGEekrsFv1KmgLkBaN/ClI6ehi
- iNjm+dWQ15hdn0hFlXc6yuLagMX5jyv74yxg0e2woL0vwxxBJCxUH6pekqrI/NdGQTVE
- iJsLIcbZy+aluXP3tXXSFFAKTw9/Du4JEj8SUxI/brBXXybiHCWMr/H3bXekvJdHl/7/
- c67U3RGAJcCCh1tUNOXLpDwIQ6CuRsVa9ElmBBI2+3UlPjpDNxbAJXCrWmx14cvgjtXO
- OpyA==
+ bh=IpnZl3UdfXiHjtTW/98tESO2LVfBuE/SBgPrHVdhbYo=;
+ b=Ho30qJ29N3y6oN5feZJpOzkohZOHNfChs2vbZCgKPqJJ4bA3wb2Tsb3XM8TQDtqi9b
+ sTaOiAx1GV6FGK+iRYTx+n3QQwE6n99DjLVVXjGBVh8AV5xxu2jfByqmJRIbGU9UkZe+
+ pKrqsj0S1M24fXfSBOBB8LKU2vjZaeDQ2IfQZKFfl7nm5aTZd6EmjmjJRQwJz1JKmOHB
+ 8I3GHD87d0RVJKtMh79B9UowWQI4ENuOuCQQZ4OjT2CxMUkBgaqUgWNlIwMdQvdEi3j6
+ wQLT+zu1Q/Xu2l/zfLX3Vx8f+EEfycJEXcpJk0F7hRZqgUq5e0AEW55aGKNOtUX+gTmu
+ if6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1A6a6oIZrE2j713UQlN4fUEszNhs1UDpJoW4KS/2yaOJB62Q43+8oSAOI0HRv9c602XyzaWc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp8raLUfjlYtGzCD32kPyvLzUQ+ksQNX7DQ9t+Ype1v4wNMwhB
- 74GsLCXk+XifxtPLI92uRZTJVkoItJg/KCAvH2WacvohvAsVDZabRLnYzE1fZ5okhQI=
-X-Gm-Gg: ATEYQzyjKdJH96HBM509bSbLmPIk8w7qyUEiMtIWRG6TmPGeiBOjZgCbij1mo1xj+q4
- hmQXNRTIH61SgXzloEKIkoAsiixbZEt+saavBJKRT5f1I0lftMoVK1zNwtSPWhmLVgM5f/31x0G
- f/iuD4Ed45jqnagwKkDNaCr/pXibsjbaOgRM4ee76oF4tICaanBg4Hoy5vouJrRUVVICKhzgnGS
- 9EFgDxexXs1cl/4EOFCAjlTQ8jnXc3wGtNgVtiQtKpsOTP0pbqIvimq/61VpOyhRzh6EtupdkYg
- pJGPpOgUKNnCe7v2knkwTiuGjPkK/3P9qg1NGUSQ+A0i1BRMiQQE11lDYrs0jyNNpkH4xqjKfsD
- aGjk56EBE4WsWe2r8Is3x29O4wRRA+SnS74tMKsV/DmlZ1RQx+yHBpyd6bNe3GHCzN71pHsViSB
- HC69J0Ev+B9P/iXvxcKwVvJ6lIZQDg4usJHUBNGT6PHSG2CCi5vYg1/B4o811qjJchgLujUdNni
- jdw2mMN1Y2a2sVQ7g==
-X-Received: by 2002:a05:6000:2404:b0:439:ab3d:1c2e with SMTP id
- ffacd0b85a97d-43a04d7b3c1mr31014668f8f.10.1773759299657; 
- Tue, 17 Mar 2026 07:54:59 -0700 (PDT)
+ AJvYcCXOxSPe+++ztfEEj3hJBdUAjJr3ndG4J5iq/b95EgowVKvTCsmjBkWSnTeMR6brTGzGwuNvPkY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhDY66EaHCqeQOt80ilZ5jdSZzYhxZPaKl9ltsQPjm6f6Jygn5
+ s9g6QO3Vpx2ziwWQC+LHM3giWGv52kFZ396kNHYyIaomdR51VkVoiHrndsXaxst6ic4=
+X-Gm-Gg: ATEYQzw9Mx7abUCTr8prUzKHb/uPTt+QEhsQHx7wbBiUGETVpE+LXIOVt15YK3N+sWd
+ ZYpUZI38wblY65yMLmFdr0pnSdJjCviwumXkx9mTOq3bSuCpdkDuVLG0g/R5mwhw6yObBU2prFK
+ 89hcfuEB0WR/5ErJd9dteAj0F84+H2NnyTtjoFhRrsaGoQktbGzj8tckvig9OClwbu1tyIsw5Di
+ sGRGtbxs9JrF/UflYWUDMr7Xoy5DYVHqvBStXw+F0IudWZonmgv8P4hRpQMDMSV3kvFZ6HSgMuk
+ MKcy2kqpwHivAvsVENqnm19/dKEVvYqUFpeCa5q3rywcu+oPcvEpMOcj0nGKElsmIaODs4NPNIa
+ xjuypndapMWu+djnpLGzhAX+VVNty5hw0dOPzXHtZinuBG0d4a2Y+gCh/gBiGJBvglyP12vqf0W
+ 1yuDv5pfatHIbP/lwE8vk6w5ZBuj4QCy9Dm9hMg1PQaz92DItvBj4ao3c37DI3JpWJ+AYi/wux8
+ fYU86w=
+X-Received: by 2002:a05:600c:6812:b0:485:4394:b0e with SMTP id
+ 5b1f17b1804b1-485566d2ce4mr282594085e9.12.1773759315904; 
+ Tue, 17 Mar 2026 07:55:15 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:106d:1080:c778:639f:c042:aa01?
  ([2a01:e0a:106d:1080:c778:639f:c042:aa01])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-43b518922absm15332f8f.18.2026.03.17.07.54.58
+ 5b1f17b1804b1-485563953dbsm225793495e9.0.2026.03.17.07.55.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Mar 2026 07:54:59 -0700 (PDT)
-Message-ID: <6259622c-8f04-47bf-8042-d4543c01f78c@linaro.org>
-Date: Tue, 17 Mar 2026 15:54:58 +0100
+ Tue, 17 Mar 2026 07:55:15 -0700 (PDT)
+Message-ID: <9c3e6302-1312-44a4-8eb1-9e1f39b2091f@linaro.org>
+Date: Tue, 17 Mar 2026 15:55:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 06/11] drivers: phy: phy-mtk-ufs: disable clk in power_off
+Subject: Re: [PATCH 07/11] drivers: phy: phy-mtk-ufs: do not alloc priv with
+ priv_auto
 To: Julien Stephan <jstephan@baylibre.com>, u-boot@lists.denx.de
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -96,7 +97,7 @@ Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Chris-QJ Chen <chris-qj.chen@mediatek.com>,
  Sam Protsenko <semen.protsenko@linaro.org>
 References: <20260317-mt8195-add-ufs-support-v1-0-7d731ec438ae@baylibre.com>
- <20260317-mt8195-add-ufs-support-v1-6-7d731ec438ae@baylibre.com>
+ <20260317-mt8195-add-ufs-support-v1-7-7d731ec438ae@baylibre.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -123,7 +124,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20260317-mt8195-add-ufs-support-v1-6-7d731ec438ae@baylibre.com>
+In-Reply-To: <20260317-mt8195-add-ufs-support-v1-7-7d731ec438ae@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -144,79 +145,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/17/26 15:24, Julien Stephan wrote:
-> Disable clocks in power_off(). Also define ufs_mtk_phy_set_inactive()
-> helper function to keep consistency with power_on() and
-> ufs_mtk_phy_set_active().
+> When priv_auto is specified, we should not manually alloc memory for
+> priv data.
 > 
 > Signed-off-by: Julien Stephan <jstephan@baylibre.com>
 > ---
->   drivers/phy/phy-mtk-ufs.c | 40 +++++++++++++++++++++++++---------------
->   1 file changed, 25 insertions(+), 15 deletions(-)
+>   drivers/phy/phy-mtk-ufs.c | 4 ----
+>   1 file changed, 4 deletions(-)
 > 
 > diff --git a/drivers/phy/phy-mtk-ufs.c b/drivers/phy/phy-mtk-ufs.c
-> index c7a671ebfad..0522e1ab683 100644
+> index 0522e1ab683..c4c214dcde0 100644
 > --- a/drivers/phy/phy-mtk-ufs.c
 > +++ b/drivers/phy/phy-mtk-ufs.c
-> @@ -88,34 +88,44 @@ static int mtk_phy_power_on(struct phy *phy)
->   	return 0;
->   }
+> @@ -139,10 +139,6 @@ static int mtk_ufs_phy_probe(struct udevice *dev)
+>   	fdt_addr_t addr;
+>   	int ret;
 >   
-> -static int mtk_phy_power_off(struct phy *phy)
-> +static void ufs_mtk_phy_set_inactive(struct mtk_ufs_phy *phy)
->   {
-> -	struct mtk_ufs_phy *ufs_phy = dev_get_priv(phy->dev);
+> -	phy = devm_kzalloc(dev, sizeof(*phy), GFP_KERNEL);
+> -	if (!phy)
+> -		return -ENOMEM;
 > -
->   	/* Set PHY to Deep Hibernate mode */
-> -	setbits_le32(ufs_phy->mmio + MP_LN_DIG_RX_9C, FSM_DIFZ_FRC);
-> +	setbits_le32(phy->mmio + MP_LN_DIG_RX_9C, FSM_DIFZ_FRC);
->   
->   	/* force DA_MP_RX0_SQ_EN */
-> -	setbits_le32(ufs_phy->mmio + MP_LN_DIG_RX_AC, FRC_RX_SQ_EN);
-> -	clrbits_le32(ufs_phy->mmio + MP_LN_DIG_RX_AC, RX_SQ_EN);
-> +	setbits_le32(phy->mmio + MP_LN_DIG_RX_AC, FRC_RX_SQ_EN);
-> +	clrbits_le32(phy->mmio + MP_LN_DIG_RX_AC, RX_SQ_EN);
->   
->   	/* force DA_MP_CDR_ISO_EN */
-> -	setbits_le32(ufs_phy->mmio + MP_LN_RX_44, FRC_CDR_ISO_EN);
-> -	setbits_le32(ufs_phy->mmio + MP_LN_RX_44, CDR_ISO_EN);
-> +	setbits_le32(phy->mmio + MP_LN_RX_44, FRC_CDR_ISO_EN);
-> +	setbits_le32(phy->mmio + MP_LN_RX_44, CDR_ISO_EN);
->   
->   	/* force DA_MP_CDR_PWR_ON */
-> -	setbits_le32(ufs_phy->mmio + MP_LN_RX_44, FRC_CDR_PWR_ON);
-> -	clrbits_le32(ufs_phy->mmio + MP_LN_RX_44, CDR_PWR_ON);
-> +	setbits_le32(phy->mmio + MP_LN_RX_44, FRC_CDR_PWR_ON);
-> +	clrbits_le32(phy->mmio + MP_LN_RX_44, CDR_PWR_ON);
->   
->   	/* force DA_MP_PLL_ISO_EN */
-> -	setbits_le32(ufs_phy->mmio + MP_GLB_DIG_8C, FRC_PLL_ISO_EN);
-> -	setbits_le32(ufs_phy->mmio + MP_GLB_DIG_8C, PLL_ISO_EN);
-> +	setbits_le32(phy->mmio + MP_GLB_DIG_8C, FRC_PLL_ISO_EN);
-> +	setbits_le32(phy->mmio + MP_GLB_DIG_8C, PLL_ISO_EN);
->   
->   	/* force DA_MP_PLL_PWR_ON */
-> -	setbits_le32(ufs_phy->mmio + MP_GLB_DIG_8C, FRC_FRC_PWR_ON);
-> -	clrbits_le32(ufs_phy->mmio + MP_GLB_DIG_8C, PLL_PWR_ON);
-> +	setbits_le32(phy->mmio + MP_GLB_DIG_8C, FRC_FRC_PWR_ON);
-> +	clrbits_le32(phy->mmio + MP_GLB_DIG_8C, PLL_PWR_ON);
-> +}
->   
-> -	return 0;
-> +static int mtk_phy_power_off(struct phy *phy)
-> +{
-> +	struct mtk_ufs_phy *ufs_phy = dev_get_priv(phy->dev);
-> +	int ret;
-> +
-> +	ufs_mtk_phy_set_inactive(ufs_phy);
-> +
-> +	ret = clk_disable_bulk(&ufs_phy->clk_bulk);
-> +	if (ret)
-> +		dev_err(phy->dev, "failed to disable clocks (ret=%d)\n", ret);
-> +
-> +	return ret;
->   }
->   
->   static const struct phy_ops mtk_ufs_phy_ops = {
+>   	addr = dev_read_addr(dev);
+>   	if (addr == FDT_ADDR_T_NONE)
+>   		return -ENOMEM;
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
