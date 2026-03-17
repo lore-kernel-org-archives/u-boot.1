@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D079CFB5EA0
-	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:26:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00CDFB5EA0
+	for <u-boot@archiver.kernel.org>; Tue, 17 Mar 2026 01:26:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A4F584261;
+	by phobos.denx.de (Postfix) with ESMTP id D43B684277;
 	Tue, 17 Mar 2026 02:24:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p8YP2zh3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SR4gy7cO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5FFC84246; Tue, 17 Mar 2026 02:24:41 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 9E0C48425F; Tue, 17 Mar 2026 02:24:42 +0100 (CET)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6302784227
- for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89F6684129
+ for <u-boot@lists.denx.de>; Tue, 17 Mar 2026 02:24:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-46726528f1cso3561757b6e.0
- for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:38 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-67bac077116so2708472eaf.1
+ for <u-boot@lists.denx.de>; Mon, 16 Mar 2026 18:24:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1773710677; x=1774315477; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1773710679; x=1774315479; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dkmEo95UvdNBfE4JfIYR8wKkHFnIYP83niYKSi023R8=;
- b=p8YP2zh3ol66vXg6b2/bIIcmDMyzMM6jsa8L1mnA8vemDzklvu0fEp8MoA8GT2b7iL
- yXKjNugutyE+mPjADBJNr7mkwRCuFuPnnKY8N6qSnkHlpHphRJpOth54l6FIogsgr/O4
- z6xzCcfl3gsdNclmzsKQe+tPWel1uB8hFmDrg=
+ bh=+w0r5kYSvfX8G0xPqP2ymHKtdssFmtU1w79fA1kFmb8=;
+ b=SR4gy7cO5zs128+0XIOA5/Bt7N7VyPDRA8HEqzBGoMNUz/S8Nz6zZw8OCGh6OSO1xt
+ okTEpRFytjTN0mCP5/os9sh1F6TkZFMljxJel8HQTTWuDspcdUet/G3xNzcybWDxhWYV
+ IqTdVaXuwMBIthIIxovB0fBC5P8rPFnMGL4zM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1773710677; x=1774315477;
+ d=1e100.net; s=20251104; t=1773710679; x=1774315479;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dkmEo95UvdNBfE4JfIYR8wKkHFnIYP83niYKSi023R8=;
- b=NKVLIH9w4ovHzEStgZ66p0F1kGStsivodKQqUEvRx/YiLoKB356zqhUYc/VDJcvcPe
- FkVY/Bsjog8XeKwYSDtd/1O8ic93B5UUuFfEs+tIcqokIGXb0fzyV4Acw78J5+DdgCCp
- uq4YMFpj1a1rExCEenQrkiZ7uBN5uRyUkw1ZAlQmH2PEff46HvABCiAF6kb/i5Z2kyM5
- iC3hF++qejpqHkBxEw3K+M/5yVS5e3z6XxbTZaJGhQfBZB6SbL3V7Mfs4zXLiUhJ1klh
- 27CByj19U/WO+qPfdtVNmWy4hkScR/gBL8iC43NVAupN8iFl1WYCvqKiekzhqX+oPRmJ
- YcGQ==
-X-Gm-Message-State: AOJu0YxkoCaWT1q/s99MRdV0xGDHXREb1V2JUXn0WOoCArmCAAhXSdJ9
- pSivi7DnF2FUp4mtHBqQ5HcTQMMGJndZWp9qyJWkTWD2xXjVQb4awYx89Z7K1mRbysV4TRKTl4H
- UEIRiOB4=
-X-Gm-Gg: ATEYQzxP5+5Hnqj15pGu+0YsSIcqlHAQbuNFY5omhh42ZsTRrLkmD8kFCZQLZMVt+Fj
- I45tA+wAF+J/HWKIfGbahvKAHJhMwkRnOCIo9ygYbdUF56FlP9tDx7fbHNy6PdS6pmBn5b7cTXN
- ItPWXUH5UoW2MP2QuIKe8poSLtQa7L4oC+NrwlTqhg6XXxCYpRFSMq0YH1JUwMj0WH0UXeTa6YC
- zhuGp67c3pnihOrz8NFJx8Conz2NSj0a39FQ9atOVay2GFk+Y2KCwVV4JkvZoqodaBAiNAKRuNe
- IG/KmdNNzCzleZWrT6gJ4GtrEukuFaB3KHaNvzuyHhYLUliBzCdZvkpxJNkJVebNz9w6zOUfu+i
- fEFgQOGfKgOeHyeGyxXwBWRHvIr6SmFt1ssZ5+2tNi/nHW6YsyVoV+mSAhfhULCLJt6ZHudyi1F
- GTCyRojXBUn4v4qQOQKqZ1jKpo1Z07DQve+7TxKwNB+CDYo8GTWswEB42+5IMQNTYHnVZnIjfns
- FjknpVJlGD/auzevLLxXfj6yxeFWrQpUYqVqywaiAsA3Pps1l4=
-X-Received: by 2002:a05:6808:140a:b0:467:22fe:eb10 with SMTP id
- 5614622812f47-467572eb815mr9035546b6e.34.1773710677127; 
- Mon, 16 Mar 2026 18:24:37 -0700 (PDT)
+ bh=+w0r5kYSvfX8G0xPqP2ymHKtdssFmtU1w79fA1kFmb8=;
+ b=BuD9Eobv5BkP/rVg7WPtbYbQkgpsbI4eYZBeVFlOj1IUcg3YRNbhY9aj9pM/67gZAh
+ J7jpKn7VgFYzq3lDL/ei+wzKUS4OQ+BBGdHRZZ0CTOHjehoeUInya4/IwgvoToYNnoFD
+ bdRARCDACb+ck3y6qwfsjXs3N847fpXS4+H0RWd4aZ+NRxrYG/+npGDJQm+t4uVfuEcm
+ 8iVsZpDvkQY/Iew2BAFJXG43Xa3YJuhheyaPULEGbPV/EnLMAjAE4171fSVjiHd4XwTU
+ D6swsS5UaUPxfWDiB3I0wH69dHeWmvb1ImHYsdQ2Uy6LmhsTaCMJo+d+3n7+rpTLjDzg
+ z71g==
+X-Gm-Message-State: AOJu0YzoYAX8g+GUlF534HjDlWozZhq3pphm/KsFFFBzR1y8lZjY1mhn
+ Ce0ZPjPHVvdiFxq7BJR/E/FAp1qDUcISN8VFifvoQ5De2MzD+SrF2+SOwmfBV0+l+0YjE2KJm65
+ X7H02TXo=
+X-Gm-Gg: ATEYQzwRf9L7nWHoBw+R1j7/CPq6X1F6+H575f0TJECy/cd+dXeKgBhsMJLVSWw9MIa
+ 9JLobYR7FsiW7SyQx1cXehrMsz/TfE5Vwc2ulSqit/QcG4eJcSRAf/8Eit2NGI1eE1UqK0oezjp
+ nJpvAOF8YWqJjMqc/b8xBrQVf8/QhbUtnQ6pULIOPI/242AIqog2ROVZvHAJawvD4ji2mHgI1MZ
+ 2Dp6lMu3TsnCps2cmDL4uBPzTpH8GUMHqzUmP4O6IHEHpF737PHvjOulonSLfWYK70RyxiYZsIx
+ SnzPhJmAz8aFgJkhS5+PiSlRju8AuXM0LQLhMATvC1JuC+c7I1S320c75MZa5UbfLVfW0iRVvWw
+ LMsS1FbTA5+4H6D1DPUoI+0pYsZv5nya1y+D/laM4HS6nOX69CTG63s5hmUqBav7j2fxEGftSGe
+ ybM4wMaImlx7jVInxsrZR1altjss8Oalvs6op01DzoiKQb9C4MQqqyKkQGs+OmLgv4MFATStEIT
+ nNkmJ6CdBygQGtpR6GbOlbyxlrnnkJ/ukar1FdTyKCfW9bYTG8=
+X-Received: by 2002:a05:6820:169e:b0:67b:cf34:e38f with SMTP id
+ 006d021491bc7-67bdaa79c75mr10276377eaf.54.1773710679265; 
+ Mon, 16 Mar 2026 18:24:39 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-235.totalplay.net.
  [189.203.97.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-467342c084asm10220242b6e.12.2026.03.16.18.24.36
+ 006d021491bc7-67bc9332686sm10978789eaf.13.2026.03.16.18.24.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Mar 2026 18:24:36 -0700 (PDT)
+ Mon, 16 Mar 2026 18:24:38 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH] dfu: Correct dependencies for DFU_TFTP
-Date: Mon, 16 Mar 2026 19:24:35 -0600
-Message-ID: <20260317012435.4162538-1-trini@konsulko.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH] input: Correct dependencies for BUTTON_KEYBOARD
+Date: Mon, 16 Mar 2026 19:24:37 -0600
+Message-ID: <20260317012437.4162554-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,30 +94,31 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 As exposed by "make randconfig", we have an issue with the dependencies
-for DFU_TFTP. This really depends on the legacy networking stack being
-enabled, not just lwIP not being enabled (as it will fail in the NO_NET
-case).
+for BUTTON_KEYBOARD. This needs to also depend on DM_GPIO, and then
+select BUTTON as well as BUTTON_GPIO, in order to meet all its
+requirements.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/dfu/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/input/Kconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-index 962bda40ad2d..1d5d8caa7daa 100644
---- a/drivers/dfu/Kconfig
-+++ b/drivers/dfu/Kconfig
-@@ -20,7 +20,7 @@ if DFU
- config DFU_TFTP
- 	bool "DFU via TFTP"
- 	depends on NETDEVICES
--	depends on !NET_LWIP
-+	depends on NET # Legacy stack only
- 	select UPDATE_COMMON
- 	select DFU_OVER_TFTP
+diff --git a/drivers/input/Kconfig b/drivers/input/Kconfig
+index 47ce0ea690fd..5bf122c55051 100644
+--- a/drivers/input/Kconfig
++++ b/drivers/input/Kconfig
+@@ -48,7 +48,8 @@ config APPLE_SPI_KEYB
+ 
+ config BUTTON_KEYBOARD
+ 	bool "Buttons as keyboard"
+-	depends on DM_KEYBOARD
++	depends on DM_KEYBOARD && DM_GPIO
++	select BUTTON
+ 	select BUTTON_GPIO
  	help
+ 	  Enable support for mapping buttons to keycode events. Use linux,code button driver
 -- 
 2.43.0
 
